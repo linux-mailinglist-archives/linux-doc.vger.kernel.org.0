@@ -1,99 +1,145 @@
-Return-Path: <linux-doc+bounces-73092-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73072-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D3FDD3B306
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 18:02:19 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CDABBD3B35D
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 18:09:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D42B93048D7F
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:57:55 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7985C30401B3
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:36:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 529F02ED87C;
-	Mon, 19 Jan 2026 16:57:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A9633A7DFE;
+	Mon, 19 Jan 2026 16:29:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ROxnCHVY"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="s0+VO6sV"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00B512FE593;
-	Mon, 19 Jan 2026 16:57:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02AFF32C31D;
+	Mon, 19 Jan 2026 16:29:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768841862; cv=none; b=drk8OLHOCGj/dfSODZMCN7CpyEDvLnjVbB29CNpdE2vMntfJdFBf7fB8gSPt16M94V3/n+GUDXYlH3NOc9HuwacolH0n+j3tgvk8Mw9COFcfFAwQStHodk+9u8tuuF8PJwqA/iWnp9Bcjh5JtQvy0kWVDirg1ZuuubdGeYilJe4=
+	t=1768840169; cv=none; b=XcbBnfG+Rk2zVmDIb4EHORi9Mt9wi9A7uKcqVkrcaHoJpgwv9fCxs8sTNlnhWQe2D4Y5rtWVnvMuqLMVnYJvfGni8lK/rWch1FTTACqAtBdvdsL1O4+HcPaIalqBmiXIHzn5tqDJxdJeoD4taCgt23pbPoCNjNKnDIZrS3TLjaI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768841862; c=relaxed/simple;
-	bh=YW8Q9Lrp/bZQRu5rYELHUc9owzCj1x411m/oRmGY61A=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=a5S3LjSeguLSwCi8jBxo9cvBeo0YKhxmpOluPF6B4jo0O6aObabJ6o0Tcr7YvuOe2ag3VAdvZ98GFuIimUfPf0Go2LkSfO1ubRJnB7rfUm45DFkpVqWrAUt6MqZpvGKailyjMwXrGYXdUrFlM/8hETAQfOK7VJ5HkD9L0+qsttE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ROxnCHVY; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FF98C116C6;
-	Mon, 19 Jan 2026 16:57:38 +0000 (UTC)
+	s=arc-20240116; t=1768840169; c=relaxed/simple;
+	bh=G8L9z3jgn4ZzCiBzdCY6syeE/KUQa76p5EoRG21yt4c=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Bmc+l0aKbacQTpmErHJCLY0CdUCoERilNhzW1hqoBKnuXHZTONRRitt8Le8pkPbSqkvmLIWw1/VCUOWFxiD7CKxVrYvTrrHfvwZe0T0uASoZZT72fmzIqtygS2AxR4xOqKdbp8FLZbNXwbNrFkQgm4hEfxCNf8OCT7ugCnvlx2s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=s0+VO6sV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0DA3C19424;
+	Mon, 19 Jan 2026 16:29:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768841861;
-	bh=YW8Q9Lrp/bZQRu5rYELHUc9owzCj1x411m/oRmGY61A=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=ROxnCHVYM82zYZN+jSegSYEzsqVDfjVYwXb3yhsN3Z1ZlaUF5gukdxz9XNEvFF/5t
-	 mtrRIJVcR/okwxcWj+TbqhpTVzdQYh5BGz9VsSKZFN4ta0MzQIbHcU8S1Bu/mRWg+p
-	 1g3ZbULO9jvF+SBlE4G0pJmfv84EU9n3j/TamvLgQvZBC5nkTz3wDiDXei/jxErWmh
-	 d5GlLI9OjptF8FXjUzykeCU9hjns/DKjat7mHwQvDrrgUoWcvayl1q007/A2V8b1mA
-	 8I5/KxrFJtRHJWgKIQr5NZWfsY8BZVQDOAk3fpPZmmspIDbKVBWXUOoH+4Dp+QjBTJ
-	 Y6eZMsr498kLA==
-Date: Mon, 19 Jan 2026 08:57:37 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: Pavel Begunkov <asml.silence@gmail.com>
-Cc: netdev@vger.kernel.org, "David S . Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jonathan
- Corbet <corbet@lwn.net>, Michael Chan <michael.chan@broadcom.com>, Pavan
- Chebbi <pavan.chebbi@broadcom.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann
- <daniel@iogearbox.net>, Jesper Dangaard Brouer <hawk@kernel.org>, John
- Fastabend <john.fastabend@gmail.com>, Joshua Washington
- <joshwash@google.com>, Harshitha Ramamurthy <hramamurthy@google.com>, Saeed
- Mahameed <saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>, Mark Bloch
- <mbloch@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Alexander Duyck
- <alexanderduyck@fb.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Shuah Khan <shuah@kernel.org>, Willem de Bruijn <willemb@google.com>, Ankit
- Garg <nktgrg@google.com>, Tim Hostetler <thostet@google.com>, Alok Tiwari
- <alok.a.tiwari@oracle.com>, Ziwei Xiao <ziweixiao@google.com>, John Fraker
- <jfraker@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, Mohsin
- Bashir <mohsin.bashr@gmail.com>, Joe Damato <joe@dama.to>, Mina Almasry
- <almasrymina@google.com>, Dimitri Daskalakis
- <dimitri.daskalakis1@gmail.com>, Stanislav Fomichev <sdf@fomichev.me>,
- Kuniyuki Iwashima <kuniyu@google.com>, Samiullah Khawaja
- <skhawaja@google.com>, Alexander Lobakin <aleksander.lobakin@intel.com>,
- David Wei <dw@davidwei.uk>, Yue Haibing <yuehaibing@huawei.com>, Haiyue
- Wang <haiyuewa@163.com>, Jens Axboe <axboe@kernel.dk>, Simon Horman
- <horms@kernel.org>, Vishwanath Seshagiri <vishs@fb.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- bpf@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-kselftest@vger.kernel.org, dtatulea@nvidia.com, kernel-team@meta.com,
- io-uring@vger.kernel.org
-Subject: Re: [PATCH net-next v9 0/9] Add support for providers with large rx
- buffer
-Message-ID: <20260119085737.2161f9e6@kernel.org>
-In-Reply-To: <7ab5309d-8654-4fa8-9a1e-24b948bccba2@gmail.com>
-References: <cover.1768493907.git.asml.silence@gmail.com>
-	<7ab5309d-8654-4fa8-9a1e-24b948bccba2@gmail.com>
+	s=k20201202; t=1768840168;
+	bh=G8L9z3jgn4ZzCiBzdCY6syeE/KUQa76p5EoRG21yt4c=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+	b=s0+VO6sV96AAayqW4HXC57FxZusoD4Mr5w8orM2wKOHjCe4I1o88b2JDzVMiBf77Y
+	 pDDjACRlbOlveBnJiQcXYVA5qpw+/sU2t9cL+ik+kbcwUdNnDmXocOzTjFulfYcHI2
+	 x2A4unujL8OvOlpmgw2+OIu0I9FPLARZ6mdAINLrqA7eln2pZpKV59z8M/E+gT0xkw
+	 xUrOTL9ynJB2DvZABkuZtdOF4x5IHc14IzGdRINZFy5mpXXM/x3ukRBMnStp2InutK
+	 CQpw9K34gzMddctLV8apZ7g9I5NucGaI5vYJYjUgfl4BotibidZnZ3y8HmNY931YWC
+	 N6Dy2SFiZXtTQ==
+From: Jeff Layton <jlayton@kernel.org>
+Date: Mon, 19 Jan 2026 11:26:35 -0500
+Subject: [PATCH v2 18/31] orangefs: add EXPORT_OP_STABLE_HANDLES flag to
+ export operations
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260119-exportfs-nfsd-v2-18-d93368f903bd@kernel.org>
+References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
+In-Reply-To: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
+To: Christian Brauner <brauner@kernel.org>, 
+ Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, 
+ Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, 
+ Tom Talpey <tom@talpey.com>, Amir Goldstein <amir73il@gmail.com>, 
+ Hugh Dickins <hughd@google.com>, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, Theodore Ts'o <tytso@mit.edu>, 
+ Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, 
+ Gao Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>, 
+ Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>, 
+ Sandeep Dhavale <dhavale@google.com>, Hongbo Li <lihongbo22@huawei.com>, 
+ Chunhai Guo <guochunhai@vivo.com>, Carlos Maiolino <cem@kernel.org>, 
+ Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, 
+ Viacheslav Dubeyko <slava@dubeyko.com>, Chris Mason <clm@fb.com>, 
+ David Sterba <dsterba@suse.com>, Luis de Bethencourt <luisbg@kernel.org>, 
+ Salah Triki <salah.triki@gmail.com>, 
+ Phillip Lougher <phillip@squashfs.org.uk>, Steve French <sfrench@samba.org>, 
+ Paulo Alcantara <pc@manguebit.org>, 
+ Ronnie Sahlberg <ronniesahlberg@gmail.com>, 
+ Shyam Prasad N <sprasad@microsoft.com>, 
+ Bharath SM <bharathsm@microsoft.com>, Miklos Szeredi <miklos@szeredi.hu>, 
+ Mike Marshall <hubcap@omnibond.com>, 
+ Martin Brandenburg <martin@omnibond.com>, Mark Fasheh <mark@fasheh.com>, 
+ Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, 
+ Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, 
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, 
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, 
+ Dave Kleikamp <shaggy@kernel.org>, David Woodhouse <dwmw2@infradead.org>, 
+ Richard Weinberger <richard@nod.at>, Jan Kara <jack@suse.cz>, 
+ Andreas Gruenbacher <agruenba@redhat.com>, 
+ OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
+ Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc: David Laight <david.laight.linux@gmail.com>, 
+ Dave Chinner <david@fromorbit.com>, Christoph Hellwig <hch@infradead.org>, 
+ linux-nfs@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
+ linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org, 
+ linux-xfs@vger.kernel.org, ceph-devel@vger.kernel.org, 
+ linux-btrfs@vger.kernel.org, linux-cifs@vger.kernel.org, 
+ samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org, 
+ devel@lists.orangefs.org, ocfs2-devel@lists.linux.dev, 
+ ntfs3@lists.linux.dev, linux-nilfs@vger.kernel.org, 
+ jfs-discussion@lists.sourceforge.net, linux-mtd@lists.infradead.org, 
+ gfs2@lists.linux.dev, linux-f2fs-devel@lists.sourceforge.net, 
+ linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=801; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=G8L9z3jgn4ZzCiBzdCY6syeE/KUQa76p5EoRG21yt4c=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltdXD5/4/NEvshZqyvt1InnFNA2XQmYrmnTp
+ pyWIY7yRpGJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bXQAKCRAADmhBGVaC
+ FcL5EACKAKVsfzFMfTk2Rxl44MOn7Jxmx0HGw2TNaLjhEixH9/SJUnhSyAZxEqPlwKij9mWLRg9
+ egLOfPv4xhcGi23lAB865UgUt64WvqFfyfMMdYy71SNI1xeODPqIf3wifOxvwDu9L+U/jmLnQio
+ G5WhwpXxYDtE/CTJQQIlFIhjbwxjo1/FLRxETOlt3wlERGLD+guFUoBS51K0YtAjvLB0UHSsQjx
+ JLr1J0KKtVdeSSPF5aie8eA7UzNRko1ECjRTHdljrDg+uyV1//gbZ9Is2UZmJyRBbzlfi5/sIGE
+ gwjA4Ud0gOkvn9MVFLyc5IXIvO+GkhZJ5oa++NC1hmG1o+rzBleXhb7KyYc6GBC23tJM3YQicN5
+ zzau2UUB0ypQ4uefiOj+ilvYE9bQcyjR9dNPSxO3f52aJOYpLd61ADVfJ2hOSylDBWcJrY/qtoh
+ xJ4rCxXYQvqZE4cKULYWIt98FrwfMhaLc0pBN0bWK6V8yL6Epj61iw00IWkT8zRPIVrjGCqdHpV
+ KoylaD3lxPgCuGO/e0wwO2wU/h2UFpO1o66DZgVouEhyp8OSQtNZIdkFKLVmACRR+k5YCVSDKdT
+ I/cC1UslVadh57kMMm+xS1iAZvb9WWuJ2bMgDRybN1wR9LY39O0TPBVl4/YilWCVBRz26kgARRz
+ jQUOMwDTLocp+rA==
+X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
+ fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 
-On Mon, 19 Jan 2026 13:54:37 +0000 Pavel Begunkov wrote:
-> On 1/15/26 17:11, Pavel Begunkov wrote:
-> > Note: it's net/ only bits and doesn't include changes, which shoulf be
-> > merged separately and are posted separately. The full branch for
-> > convenience is at [1], and the patch is here:  
-> 
-> Looks like patchwork says the patches don't apply, but the branch
-> still merges well. Alternatively, I can rebase on top of net-next
-> and likely delay the final io_uring commit to one release after.
+Add the EXPORT_OP_STABLE_HANDLES flag to orangefs export operations to
+indicate that this filesystem can be exported via NFS.
 
-Yes, David refactored the test in the meantime :/
-I'll pull the branch.
+Signed-off-by: Jeff Layton <jlayton@kernel.org>
+---
+ fs/orangefs/super.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/fs/orangefs/super.c b/fs/orangefs/super.c
+index b46100a4f5293576549300ae9050430c3f07969b..140f27f750939cf5538eb68501dd60012bd2daec 100644
+--- a/fs/orangefs/super.c
++++ b/fs/orangefs/super.c
+@@ -377,6 +377,7 @@ static int orangefs_encode_fh(struct inode *inode,
+ static const struct export_operations orangefs_export_ops = {
+ 	.encode_fh = orangefs_encode_fh,
+ 	.fh_to_dentry = orangefs_fh_to_dentry,
++	.flags = EXPORT_OP_STABLE_HANDLES,
+ };
+ 
+ static int orangefs_unmount(int id, __s32 fs_id, const char *devname)
+
+-- 
+2.52.0
+
 
