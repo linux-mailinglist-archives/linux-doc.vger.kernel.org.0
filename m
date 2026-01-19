@@ -1,145 +1,139 @@
-Return-Path: <linux-doc+bounces-73083-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73095-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C00FD3B3A2
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 18:14:55 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EBD5D3B54C
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 19:14:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 101CF3119E4B
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:42:09 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2B0DC3013995
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 18:14:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7626D38A9C2;
-	Mon, 19 Jan 2026 16:30:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E51B32D7FB;
+	Mon, 19 Jan 2026 18:14:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kzFgWc06"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HwNnzwDk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AE1E389E14;
-	Mon, 19 Jan 2026 16:30:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2F7C32FA12
+	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 18:14:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768840248; cv=none; b=KTd9xd0HsdFGzfw3oXFFNaMoK/hv64gzUJ5cnXbRKP6t4OtrQtjUlxkBMymom64Wu+83q3yDecYAyvAsl+YpT5RF6cpdsCXPVAQaT9/eJjkoFkkN2wOUAWb+PK57WCWqXXuOVl1bw31omKw57mrP1IqZpXR8Cs+ESDQzLKeuk3E=
+	t=1768846456; cv=none; b=SqjZiqMclE2DTnCBBt/vn2ilOneiKT4ODX/izOgcp1H/YO0eaVF5oD8s2u96b99TQlKc68VxQhQUn3L59ikxL8mW9l5cOb+gCSmoLTJbRgE7yyj4hvLZUW4Eg7IadoyXx/6MOG4HDr3ZOU5Z8GmMWQBVNUK1hWS8qD89h0DZtCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768840248; c=relaxed/simple;
-	bh=htvmJ8h5f0pVu8ImvWNw/JEkkap4HdmaXUH9XULOP2k=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=D7Ag+vLAWWQv71NrXlqcuMFNLLf13oAutWNGn5bj6D0A73xacQc5inlyrhAwLFbmXS57q5Ou3L23TFBK+MlJ9tFu3+RYhcdg2/qhbIAN5/CZYJuJ/Yh421mDzuNQh4gGcT7nAFLjCGXZ3KdvxIYWJhh56iACaut1LeOi4q7nzi4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kzFgWc06; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 578B6C116C6;
-	Mon, 19 Jan 2026 16:30:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768840248;
-	bh=htvmJ8h5f0pVu8ImvWNw/JEkkap4HdmaXUH9XULOP2k=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=kzFgWc06aZFuLVxuUIaJbuzx1Q6DRqgjKSqHMG+3rx0WNtTnTeHoViYVYtsdlbnl3
-	 lqrIDTwTxIDk6Wv7YDKzD4dGNaMQiGo21SK1N9WTrUnWHqeN1AwccSLrFYhdJKpX08
-	 ycTFaGLIqIyp+7Skq1JJqCGRfXe78rqioX1Z8udYIhDTSyBzicw+7Sa93XN89py+wv
-	 /X/U3zk+Ly9IpVN15GnuxYN6Jp73g9gDPVq1nFKVgNeYYcrr/bLecAeSadlP3TRH1h
-	 98jce/UvFQXzJKk/dBpgJh8cajRnepjcNRKEZtyncNjOfqqNcDV/9L3tiYjSoQZLKY
-	 O8avH5/3cPZJQ==
-From: Jeff Layton <jlayton@kernel.org>
-Date: Mon, 19 Jan 2026 11:26:46 -0500
-Subject: [PATCH v2 29/31] f2fs: add EXPORT_OP_STABLE_HANDLES flag to export
- operations
+	s=arc-20240116; t=1768846456; c=relaxed/simple;
+	bh=bj95vgAZVPhJ5iLFRK0Wh3k7CRZDgw7L+i/67I9oJrI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=fBBU+pEQigSmK7GdQIvj3DSnsXFoomge7+Uz+wA+QZziO3DbXS9mZ5wSYFdy7ZbP/l95ln2d02lCk2FjmP1fEqKHOV//aVlpj/3aqT7Wrfds1i3270NBrTYpBfjzFqQFggROLvIg0SagosxIzCZBR7Yjr4pmvsSoc1Kbh/FLJ88=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HwNnzwDk; arc=none smtp.client-ip=209.85.128.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-47ee598d00fso3221585e9.3
+        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 10:14:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768846453; x=1769451253; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=vSQyY/sbw+WW+mdZ495+fmp7dM6Z9X4lGB7EkpPTED8=;
+        b=HwNnzwDkIj3hPklIWuYFVVJyk2Vp7mhydZREI63mpM4e4r9c0NFfxILelhO6FqBEpK
+         EMfqowKx/BjmmLrjLpYo3HaDO2WgUQtL+s30BjHZHP2TfXBZQ1eogimycmTb3tdIWsUn
+         Sc69Jlryb7VyohSgjZjltdnUAmo7bVhc0qfoqwhhff8O/jtEVTm0QEfi49tVumpDFkUj
+         RyYO784LB/L9CO9+XWFjhOXHhOi+WzsicYKuDXqmQ/sdugpmhkKjsXA00sVOwffkh+Zr
+         uFJQY58JfvuQtqTqWXxs3ZQeycVJ0E1K4kq73r4XOQMASveza1sr1VFWjczWA590mJHU
+         avmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768846453; x=1769451253;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vSQyY/sbw+WW+mdZ495+fmp7dM6Z9X4lGB7EkpPTED8=;
+        b=BiBmGai4YTjXbbsTJudH38Zvz0AbdKPxOKacmz44AKXEX7GuxT8adt3+DHmodc3I4u
+         yXLKqTYCcguoHdjmeRiEW33z8SMgZv9QDcdl3uXH2nIkhqNjgdi/t6kOaFNiCOd0pGV2
+         o0UOwII1bCvUPoOyu0hA2eLK7LRUk5md7KtSFq5d3s4of5vrr7B2qrma57MXBvKENzgw
+         O5QhoGl5KoZ/ovrrtwENbraom6uGu5OsOmXceuaRJTiTKALEXWTv9gDZxChnk47Oj7d0
+         DJWngd7uVOI0sJQYzI+OB983cXb7cM8nk5+VbQiiZBq+Ca90WRUcFR2mTQ02l8Ljl9GC
+         ejmw==
+X-Forwarded-Encrypted: i=1; AJvYcCVkz3cU0Ahz+fdhFjvChCwQhGTa9AqUmOzb/YCHumdGL9VEpqt8x5A2fdU+Y9wjYI+ZrnaqxZh60Xc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw+sZEFjnmZKm0jabMT3yaA2TttlaMPkLddFJ0G2XlqZjKTAAOg
+	GLcOpOe3PAFS+2Z1rVNw+sLBJQnA2hdfgPjxZPdgQDWFO6Hy3MgXbKhgDLcmyw==
+X-Gm-Gg: AY/fxX6BiCBXDm/aXQpGaDbhKUzA/KwxQvGnr1DBEvUi8zYrOK89N5ELWWjeMu/Xw4F
+	VoPOa5jNGbTsNuGo+Nk0YNxQ6E3JdvF57Mkji9KiqEBuLgXXXJQJZf0bja3N4hBfZxEqgF7sMI7
+	8F6GPkptqNhQZQkzUWW78dYJpJ2JpU2Ok0PHNDuf61Z7+Lb4z7npu8vy4lsvFRCIilihScd/Lxr
+	eYZSe3aLZOi8G6SoLB+py9XB2s8YGyBP22JRg07+47IKlAuZEQA1ofVIzBtjoFcnbhj7wE9CWom
+	sg7V9/XdUv2BoGYWilikJl9vkLPhXVS+RETVZ/ii7SLzBJlk0fNZQyo3tVJvYkWGtPOXD+Gqxtg
+	mPyE2lNuONhFg4c8SYUA5/nMZlDMr6dFJTKtHIFv4IiBrFOkx7KogbsnbuZLBdhWuTycUaEtjAN
+	fbGx6x90soywx64Qo5uaCywSyY52vv
+X-Received: by 2002:a05:6512:340e:b0:59d:c490:3ab9 with SMTP id 2adb3069b0e04-59dc4903b42mr330960e87.0.1768840488602;
+        Mon, 19 Jan 2026 08:34:48 -0800 (PST)
+Received: from [10.214.35.248] ([80.93.240.68])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-59baf3a6ff6sm3432421e87.102.2026.01.19.08.34.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 19 Jan 2026 08:34:47 -0800 (PST)
+Message-ID: <e273571e-ab8f-46d6-a44e-c1d0d06d3cbf@gmail.com>
+Date: Mon, 19 Jan 2026 17:33:35 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260119-exportfs-nfsd-v2-29-d93368f903bd@kernel.org>
-References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
-In-Reply-To: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
-To: Christian Brauner <brauner@kernel.org>, 
- Alexander Viro <viro@zeniv.linux.org.uk>, 
- Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, 
- Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, 
- Tom Talpey <tom@talpey.com>, Amir Goldstein <amir73il@gmail.com>, 
- Hugh Dickins <hughd@google.com>, 
- Baolin Wang <baolin.wang@linux.alibaba.com>, 
- Andrew Morton <akpm@linux-foundation.org>, Theodore Ts'o <tytso@mit.edu>, 
- Andreas Dilger <adilger.kernel@dilger.ca>, Jan Kara <jack@suse.com>, 
- Gao Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>, 
- Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>, 
- Sandeep Dhavale <dhavale@google.com>, Hongbo Li <lihongbo22@huawei.com>, 
- Chunhai Guo <guochunhai@vivo.com>, Carlos Maiolino <cem@kernel.org>, 
- Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, 
- Viacheslav Dubeyko <slava@dubeyko.com>, Chris Mason <clm@fb.com>, 
- David Sterba <dsterba@suse.com>, Luis de Bethencourt <luisbg@kernel.org>, 
- Salah Triki <salah.triki@gmail.com>, 
- Phillip Lougher <phillip@squashfs.org.uk>, Steve French <sfrench@samba.org>, 
- Paulo Alcantara <pc@manguebit.org>, 
- Ronnie Sahlberg <ronniesahlberg@gmail.com>, 
- Shyam Prasad N <sprasad@microsoft.com>, 
- Bharath SM <bharathsm@microsoft.com>, Miklos Szeredi <miklos@szeredi.hu>, 
- Mike Marshall <hubcap@omnibond.com>, 
- Martin Brandenburg <martin@omnibond.com>, Mark Fasheh <mark@fasheh.com>, 
- Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, 
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, 
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, 
- Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, 
- Dave Kleikamp <shaggy@kernel.org>, David Woodhouse <dwmw2@infradead.org>, 
- Richard Weinberger <richard@nod.at>, Jan Kara <jack@suse.cz>, 
- Andreas Gruenbacher <agruenba@redhat.com>, 
- OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
- Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: David Laight <david.laight.linux@gmail.com>, 
- Dave Chinner <david@fromorbit.com>, Christoph Hellwig <hch@infradead.org>, 
- linux-nfs@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
- linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org, 
- linux-xfs@vger.kernel.org, ceph-devel@vger.kernel.org, 
- linux-btrfs@vger.kernel.org, linux-cifs@vger.kernel.org, 
- samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org, 
- devel@lists.orangefs.org, ocfs2-devel@lists.linux.dev, 
- ntfs3@lists.linux.dev, linux-nilfs@vger.kernel.org, 
- jfs-discussion@lists.sourceforge.net, linux-mtd@lists.infradead.org, 
- gfs2@lists.linux.dev, linux-f2fs-devel@lists.sourceforge.net, 
- linux-doc@vger.kernel.org, Jeff Layton <jlayton@kernel.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=728; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=htvmJ8h5f0pVu8ImvWNw/JEkkap4HdmaXUH9XULOP2k=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpbltgtBAQfQ5kS+MExK3FeETc+0guPdOqIeqKN
- mx8EKEmLxaJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaW5bYAAKCRAADmhBGVaC
- FeM9D/9txHa6W+i5xp+BRxUlC+XVX0On794rY5aGRkCAYEj9G8FgVMxYOjtDjcbiMsVdxqZ3WaU
- 8QHVYA+iGrifPnLe1QX5jrXsBmrJOvPE8aiYvQEJ7Kn84fkr501BGqfPYbivwHHqSTW4rWD7Lkv
- CXuWb1ylgYgiLxDtB6YOyjO+VM2ELqQMvKtnKAX8jvpCLPMTNo4h9Egmvceuy+jmkFCZ5S1/RzI
- h8G4P4yUVcSRQCgJBt016ZJS3dhf5ZqlmgJCLYo1Cda1nZN/4jCJwUSpVU0ndR0+wkkzxqwgZX1
- FKc4yHuYOxRorNJe24Lf3LMrClmYnfwuKEtIWQV2PBbjQUnBu28z2anYNz3decQi4GuG8viuV8a
- gOAJXMC3qfw1dABMQg+Hiyw3inAbSxviSpXAdbzB3ZpdheY+I38kS8ZGknXqhYJDMGcKBwLR0G2
- e5NM2E22TFKSYCnu0C2ApdVfQT03Xyd0gWln+3M1Nhh5tE7pk3DmbfhO5r1IhB2eUmAUTbJriOf
- cuIqSl01a9VaIzNVTTXtFLeLIgvWHCIXtobkyWBHyRb4tELIU29i1q5x1NmGttPKaZizPWjN5XU
- y7yhWnW8gdZvuhuuRR3TZCCPT88HqdkSSsjxjE7hzPD7kZmL2+zhn+pRrGWIF682VKp+NBgQsbT
- Hzi+D+FGfINt2mw==
-X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
- fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 00/14] kasan: x86: arm64: KASAN tag-based mode for x86
+To: Maciej Wieczor-Retman <m.wieczorretman@pm.me>, corbet@lwn.net,
+ morbo@google.com, rppt@kernel.org, lorenzo.stoakes@oracle.com,
+ ubizjak@gmail.com, mingo@redhat.com, vincenzo.frascino@arm.com,
+ maciej.wieczor-retman@intel.com, maz@kernel.org, catalin.marinas@arm.com,
+ yeoreum.yun@arm.com, will@kernel.org, jackmanb@google.com,
+ samuel.holland@sifive.com, glider@google.com, osandov@fb.com,
+ nsc@kernel.org, luto@kernel.org, jpoimboe@kernel.org,
+ akpm@linux-foundation.org, Liam.Howlett@oracle.com, kees@kernel.org,
+ jan.kiszka@siemens.com, thomas.lendacky@amd.com, jeremy.linton@arm.com,
+ dvyukov@google.com, axelrasmussen@google.com, leitao@debian.org,
+ bigeasy@linutronix.de, peterz@infradead.org, mark.rutland@arm.com,
+ urezki@gmail.com, brgerst@gmail.com, hpa@zytor.com, mhocko@suse.com,
+ andreyknvl@gmail.com, weixugc@google.com, kbingham@kernel.org,
+ vbabka@suse.cz, nathan@kernel.org, trintaeoitogc@gmail.com,
+ samitolvanen@google.com, tglx@kernel.org, thuth@redhat.com,
+ surenb@google.com, anshuman.khandual@arm.com, smostafa@google.com,
+ yuanchu@google.com, ada.coupriediaz@arm.com, dave.hansen@linux.intel.com,
+ kas@kernel.org, nick.desaulniers+lkml@gmail.com, david@kernel.org,
+ bp@alien8.de, ardb@kernel.org, justinstitt@google.com
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ kasan-dev@googlegroups.com, llvm@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, x86@kernel.org
+References: <cover.1768233085.git.m.wieczorretman@pm.me>
+Content-Language: en-US
+From: Andrey Ryabinin <ryabinin.a.a@gmail.com>
+In-Reply-To: <cover.1768233085.git.m.wieczorretman@pm.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Add the EXPORT_OP_STABLE_HANDLES flag to f2fs export operations to indicate
-that this filesystem can be exported via NFS.
 
-Signed-off-by: Jeff Layton <jlayton@kernel.org>
----
- fs/f2fs/super.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index c4c225e09dc4701f009dec4338f2eaba1820ea7d..260c26771c431bbb36e99be8daff6cde40662751 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -3750,6 +3750,7 @@ static const struct export_operations f2fs_export_ops = {
- 	.fh_to_dentry = f2fs_fh_to_dentry,
- 	.fh_to_parent = f2fs_fh_to_parent,
- 	.get_parent = f2fs_get_parent,
-+	.flags = EXPORT_OP_STABLE_HANDLES,
- };
- 
- loff_t max_file_blocks(struct inode *inode)
+On 1/12/26 6:26 PM, Maciej Wieczor-Retman wrote:
 
--- 
-2.52.0
+> ======= Compilation
+> Clang was used to compile the series (make LLVM=1) since gcc doesn't
+> seem to have support for KASAN tag-based compiler instrumentation on
+> x86.
+> 
 
+
+It appears that GCC nominally supports this, but in practice it does not work.
+Here is a minimal reproducer: https://godbolt.org/z/s85e11T5r
+
+As far as I understand, calling a function through a tagged pointer is not
+supported by the hardware, so GCC attempts to clear the tag before the call.
+This behavior seems to be inherited from the userspace implementation of HWASan (-fsanitize=hwaddress).
+
+I have filed a GCC bug report: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=123696
+
+For the kernel, we probably do not want this masking at all, as effectively 99.9–100%
+of function pointer calls are expected to be untagged anyway.
+
+Clang does not appear to do this, not even for userspace.
 
