@@ -1,153 +1,169 @@
-Return-Path: <linux-doc+bounces-72990-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72992-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE59DD3A6FD
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 12:36:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4013ED3A7E1
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 13:06:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 55039305CAA9
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 11:35:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5CC2C3007FF4
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 12:05:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86B1C313526;
-	Mon, 19 Jan 2026 11:35:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 244413596EB;
+	Mon, 19 Jan 2026 12:05:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="LQaeYGBw";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="pjqVA5JI"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qVqG8f98"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2C1C313E0C
-	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 11:35:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0915314A62;
+	Mon, 19 Jan 2026 12:05:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768822520; cv=none; b=AemaaR8s25fmh3t/lVmIzSj1n1o78lJ6guk0S76GRqjvYET8PB6i6yQcQkSl4WBGjBziyF/w5kBxAtjy3mXVpdtgdybwhjSKpl7Rj/uOsdmW+9y0tuBQ1e0a5C6nF2chxS0QZ0Ws8+DIWVnqmPb1h48nGkUqYnGBbhGWPEclTnE=
+	t=1768824317; cv=none; b=h9sbVghiISGRf2QTFDrlKQ41Lpnk+IGoGV/exAISDS7NcHL4x6Imvcm6XFa1Aq4n77QKjIIdEsS+aoIAevF9dakRnE8PGHymbaTWFSP29gSwdQrE3nOlII+cXLZ4uL/w0+CWw/nuzDRqpO++8k6PIe2nAfyuVYC8R1N477fY4Ww=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768822520; c=relaxed/simple;
-	bh=wcMNmsz8MIooQoKQs33DRCmEYgTeBEbRNqSTQQHd1c4=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=D9x4vC/7s58IzjZjjPnHEWd3brKA3xyVjet7S5aE80LgZ0i1fdEcwTs0olNThkmc8T2/a6yJ6TmY0s6/FyfdYSMfVWdkv0rxi4WLAKqDanWHPsYlyDhYwoVVAI0HtGnVjIRCCkEU9d7bwkTQAS9qRlpT8GV+biBRpsbQpGEOGZM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=LQaeYGBw; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=pjqVA5JI; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1768822515;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=wcMNmsz8MIooQoKQs33DRCmEYgTeBEbRNqSTQQHd1c4=;
-	b=LQaeYGBwr0Qg1jg93Ur7MbwQz9+POgYfcFqpZLt+hCO1yyGyvqc9kDVJ7iRvorluIWEDfb
-	S/k2i1bz4qOAB7wmRf7AO/diHTclJDGQwHyuC5k+j4Xia7sTxrmORGn+d8E/ltv/RX5diY
-	4rwnOrDoN6Bf9o7azohFLj5ZlagV+KA=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-584-CUhufE-NPQK2Amx5ZmzsYA-1; Mon, 19 Jan 2026 06:35:14 -0500
-X-MC-Unique: CUhufE-NPQK2Amx5ZmzsYA-1
-X-Mimecast-MFC-AGG-ID: CUhufE-NPQK2Amx5ZmzsYA_1768822513
-Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-430fcfe4494so4383748f8f.2
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 03:35:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1768822513; x=1769427313; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=wcMNmsz8MIooQoKQs33DRCmEYgTeBEbRNqSTQQHd1c4=;
-        b=pjqVA5JI0N41e0TaGjasxwxOCds0litU3m3wWiMHjUlDA6suc9DZY+k2hKUeTzSeva
-         Tla7hGvQ6ulPZn23idiDZrQSbH4gHuZf+dLbyXN6RNlMxWMga3Uyq/J2712LuiScjNkL
-         h7Zdk56w117u3HloHVxeuOA4wwk1uD9dTNgEAlv3oZGJd8lN4Eh5/BkUsExXAfaVpx6b
-         CWM2UCk4Vmyn9EIXrZztyPrVVtFFpPy6u4sMiDb3it046tPqkgipx8q3g38PBn3pyyJG
-         Jm+IyTahVn1tlQ7aNPA3VhlQsyt3ikcX3ucQkOUVJWsVtGjjMsSuAac+hUNruxpb3tyX
-         UkLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768822513; x=1769427313;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wcMNmsz8MIooQoKQs33DRCmEYgTeBEbRNqSTQQHd1c4=;
-        b=MvqNlSF/KQ7QtF6EnY/Q+kapFxYRu/TVUgcL4jILBZXscsDE1DQyCLl0UJfvCOSbmU
-         UcSHeyhm+kU2V1ofT92lz7ktx1G4zem4n/JovOQddgaMgcXePr6m4F4jqyFy6NTjtpoJ
-         ofe25xmoNeoeOPsLTw/qX5s+OC+dQqaL4ubVLDR+WWBko6YSqDSxHhVQ6/+5zNgW/5kW
-         QMQd2HUWqX+3K8iYSMem5Gaqh891S/RiXqmarW9qcm358enjZFbTlPjoQ43Sfm0KtgSd
-         2nGZSt5F5GE2061YrT2EvG1ApjLPPPNTXHwK0lWfaGDsk770dcyXDZnr3Ss7mPtbFnV0
-         Q9VA==
-X-Forwarded-Encrypted: i=1; AJvYcCW91SvhznjIOKTNLrAvm4tfKegw/SsD/aT2xzppAGdG6i/PPMa+13AL6YTnKRapQTaGnt/0vDrnybs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxaztixWK39PuYf4qLIPtmfHLLPMIPEEXwdOqsthTqiErkCk9fh
-	SttGH5j52fP4txOlcjFxKVWIVY7VjUQt1UTeN9EC8C4ZrBHsxrRt1j/nPl1ckzENSYDEg2xW/ji
-	k/sX9RvjUiAO0edRb2+Nh1msZjofPkTJy3IdWBsiIdM+C20HSebF0V0Jc8jY3Cw==
-X-Gm-Gg: AZuq6aLBOOpvO2M/eP1HSPd4Hl7aDkuO72m05iClIbxW24QetBlSRJpBnLXTlZpkC81
-	vaxq57rGRWL/3l3HH49mP489dETEe9lA1qOPYK9+08ee/b3r3TNiMSreoRQmQIwYTzYr/S3vJn+
-	mSN7dnteHcHntXRrJtKu0yAHXXD1VidgsPSTmg9FQc5G4TdKXsOZX3ypS4jQVxHbCwTbA9xxe1B
-	2BDG0e/8NoXnzM6COTzcmB9AUTWoBBHaSBM+S00ewbios4rX+Y39xk05VP9/IDfdCBUB6u0JGCt
-	4xc7MKr4kAJEeJnZF8dLc0kwMlgNFxUlGy/wa6cwL4ZAXcuqX9dZ/WjFhBXK4q0o1aP66aMlkgY
-	djOniV36bgHqQXKYnPr8DNYicwYbvrYZZSOwl753vDzo3wQiJBjuYazK4yOspy23fglrhATm2H2
-	8YjLzv+gae
-X-Received: by 2002:a05:6000:2f8a:b0:431:701:4a2a with SMTP id ffacd0b85a97d-4356a089804mr11261072f8f.59.1768822513303;
-        Mon, 19 Jan 2026 03:35:13 -0800 (PST)
-X-Received: by 2002:a05:6000:2f8a:b0:431:701:4a2a with SMTP id ffacd0b85a97d-4356a089804mr11261032f8f.59.1768822512887;
-        Mon, 19 Jan 2026 03:35:12 -0800 (PST)
-Received: from gmonaco-thinkpadt14gen3.rmtit.csb (185-132-178-103.hosted-by-worldstream.net. [185.132.178.103])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4356997eb0bsm22352413f8f.34.2026.01.19.03.35.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 03:35:12 -0800 (PST)
-Message-ID: <5df16facba05b84857ad09cee12df0c19a551285.camel@redhat.com>
-Subject: Re: [PATCH v4 14/15] rv: Add deadline monitors
-From: Gabriele Monaco <gmonaco@redhat.com>
-To: Juri Lelli <juri.lelli@redhat.com>
-Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>, Nam
- Cao	 <namcao@linutronix.de>, Juri Lelli <jlelli@redhat.com>, Jonathan
- Corbet	 <corbet@lwn.net>, Masami Hiramatsu <mhiramat@kernel.org>, 
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Peter
- Zijlstra	 <peterz@infradead.org>, Tomas Glozar <tglozar@redhat.com>, Clark
- Williams	 <williams@redhat.com>, John Kacur <jkacur@redhat.com>
-Date: Mon, 19 Jan 2026 12:35:10 +0100
-In-Reply-To: <aW4PvcDxBJnDLJFq@jlelli-thinkpadt14gen4.remote.csb>
-References: <20260116123911.130300-1-gmonaco@redhat.com>
-	 <20260116123911.130300-15-gmonaco@redhat.com>
-	 <aW4PvcDxBJnDLJFq@jlelli-thinkpadt14gen4.remote.csb>
-Autocrypt: addr=gmonaco@redhat.com; prefer-encrypt=mutual;
- keydata=mDMEZuK5YxYJKwYBBAHaRw8BAQdAmJ3dM9Sz6/Hodu33Qrf8QH2bNeNbOikqYtxWFLVm0
- 1a0JEdhYnJpZWxlIE1vbmFjbyA8Z21vbmFjb0BrZXJuZWwub3JnPoiZBBMWCgBBFiEEysoR+AuB3R
- Zwp6j270psSVh4TfIFAmjKX2MCGwMFCQWjmoAFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgk
- Q70psSVh4TfIQuAD+JulczTN6l7oJjyroySU55Fbjdvo52xiYYlMjPG7dCTsBAMFI7dSL5zg98I+8
- cXY1J7kyNsY6/dcipqBM4RMaxXsOtCRHYWJyaWVsZSBNb25hY28gPGdtb25hY29AcmVkaGF0LmNvb
- T6InAQTFgoARAIbAwUJBaOagAULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIXgBYhBMrKEfgLgd0WcK
- eo9u9KbElYeE3yBQJoymCyAhkBAAoJEO9KbElYeE3yjX4BAJ/ETNnlHn8OjZPT77xGmal9kbT1bC1
- 7DfrYVISWV2Y1AP9HdAMhWNAvtCtN2S1beYjNybuK6IzWYcFfeOV+OBWRDQ==
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.2 (3.58.2-1.fc43) 
+	s=arc-20240116; t=1768824317; c=relaxed/simple;
+	bh=x7rEGJPHMBLIdc7lqY3U1p+7lSYSCw4JvQMi+nq6oLE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:
+	 Content-Type; b=ehb8de66PkPYX6+bOgUpDyCsV/qxJjy8uNN0TU23RFHgG9YNP/0qd0Tb6wgxoF2Tpaj/f06ywppxy4ifOp8xGM58mijYSrJkOGzy6ShwUJHePae2Fb1XrEV+Ba8LzCK1EN0mK8YUm8VGnjjW62Y4i69lnBlU/QCESOXVuVyIYYg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qVqG8f98; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0CF2C116C6;
+	Mon, 19 Jan 2026 12:05:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768824316;
+	bh=x7rEGJPHMBLIdc7lqY3U1p+7lSYSCw4JvQMi+nq6oLE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=qVqG8f98lfbmGT3DNofvd2SQdF704uDRKOCwOh95+ORICe/NG7/2feus3rQ7OpUId
+	 c0fpsdLI/LI1Q0AF+cbzzud9MRoy87MgnxRpQfNl/bWE4ZIz02bIuE1fhgIykWyD5N
+	 tC50meQIUnSccXvfjvjQTnnMgjfsU5hIlw316ftdnbB81MPwf0YPO7eCDVsNUo8vKJ
+	 CqGW+qIV0IWbHs8v2ShvQZTwAsSovcxJmOl8Uny3gJOUYaX7A+0iJTswVDPTs4gM6n
+	 CmD62/Moa5KInX+fVjrxq5yLIOEqlc0pX0y0MCCd+eGSehX6rucZL+wkpJiBtvn3jZ
+	 bQSgQdv553N3w==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vho0Q-00000001Zj7-350e;
+	Mon, 19 Jan 2026 13:05:14 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Alex Shi <alexs@kernel.org>,
+	Carlos Bilbao <carlos.bilbao@kernel.org>,
+	David Airlie <airlied@gmail.com>,
+	Federico Vaga <federico.vaga@vaga.pv.it>,
+	Hu Haowen <2023002089@link.tyut.edu.cn>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nsc@kernel.org>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Yanteng Si <si.yanteng@linux.dev>,
+	dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	linux-doc@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	workflows@vger.kernel.org,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Avadhut Naik <avadhut.naik@amd.com>,
+	Chenguang Zhao <zhaochenguang@kylinos.cn>,
+	David Disseldorp <ddiss@suse.de>,
+	Dongliang Mu <dzm91@hust.edu.cn>,
+	Gang Yan <yangang@kylinos.cn>,
+	Kees Cook <kees@kernel.org>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Tamir Duberstein <tamird@gmail.com>,
+	Vincent Mailhol <mailhol@kernel.org>,
+	WangYuli <wanyl5933@chinaunicom.cn>
+Subject: [PATCH 0/9] docs: Fix kernel-doc -Werror and moves it to tools/docs
+Date: Mon, 19 Jan 2026 13:04:55 +0100
+Message-ID: <cover.1768823489.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-On Mon, 2026-01-19 at 12:04 +0100, Juri Lelli wrote:
-> Why use pi_of() in above cases?
->=20
-> For the first, in case the macro is called while the task is actually
-> boosted, we then might continue to use that even after such task gets
-> deboosted?
+Hi Jon,
 
-Mmh, yeah thinking about it again it doesn't make much sense considering we=
- are
-not tracking when a task is deboosted, unless that always corresponds to a
-replenish. Thought that doesn't seem the case..
+After a restful weekend and revisiting both yours and my series,
+I'm opting to send a patch series merging both into one:
 
-> For the second, current PI implementation (even if admittedly not ideal)
-> uses donor's static dl_runtime to replenish boosted task runtime, but
-> then accounting is performed again the task dynamic runtime, not the
-> donor's (this all will hopefully change soon with proxy exec..)?
+- The first 4 patches are from my series (no changes since v5):
+    https://lore.kernel.org/linux-doc/cover.1768642102.git.mchehab+huawei@kernel.org/T/#m81211c0ff38bbaa82b8b0b6606f242ccc0c2a9ac
 
-At this point I should probably just ignore the pi_of() right?
-I'm assuming the original (non-boosted) parameters are more conservative an=
-yway
-so it shouldn't be a problem for the model.
+- It follows by the 2 patches from your renaming series:
+    https://lore.kernel.org/linux-doc/20260119111745.4694546b@foz.lan/T/#m51099c31a99dccccdb4d17cbaadc818e9e4df8c4
 
-Thanks,
-Gabriele
+  with the fix I proposed for kernel-doc to find its libraries
+
+I added 3 patches afterwards:
+
+  - patch 5: move possible return values from docstring to helper message;
+  - patch 6: improve MsgFormatter description;
+  - patch 7: moves kerneldoc_bin from conf.py to the sphinx/kerneldoc.py
+    (this is now just a debugging message - no need to pick it from env)
+
+IMO, this series is ready to be merged.
+
+NOTE:
+    I didn't rename kernel-doc to kernel_doc.py nor added any symlinks.
+    If we want some day to use sphinx autoparse extension, we can do it
+    later. I guess we can also revisit it during -rc period, if needed.
+
+Regards,
+Mauro
+
+Jonathan Corbet (2):
+  docs: kdoc: remove support for an external kernel-doc from sphinx
+  docs: kdoc: move kernel-doc to tools/docs
+
+Mauro Carvalho Chehab (7):
+  docs: kdoc: fix logic to handle unissued warnings
+  docs: kdoc: avoid error_count overflows
+  docs: kdoc: ensure that comments are using our coding style
+  docs: kdoc: some fixes to kernel-doc comments
+  docs: kdoc: move the return values to the helper message
+  docs: kdoc: improve description of MsgFormatter
+  docs: conf.py: get rid of the now unused kerneldoc_bin env var
+
+ Documentation/conf.py                         |  4 -
+ Documentation/doc-guide/kernel-doc.rst        |  8 +-
+ Documentation/kbuild/kbuild.rst               |  2 +-
+ Documentation/process/coding-style.rst        |  2 +-
+ Documentation/sphinx/kerneldoc.py             | 60 +++----------
+ .../it_IT/doc-guide/kernel-doc.rst            |  8 +-
+ .../sp_SP/process/coding-style.rst            |  2 +-
+ .../zh_CN/doc-guide/kernel-doc.rst            | 10 +--
+ .../translations/zh_CN/kbuild/kbuild.rst      |  2 +-
+ .../zh_CN/process/coding-style.rst            |  2 +-
+ .../zh_TW/process/coding-style.rst            |  2 +-
+ MAINTAINERS                                   |  2 -
+ Makefile                                      |  2 +-
+ drivers/gpu/drm/i915/Makefile                 |  2 +-
+ scripts/kernel-doc                            |  1 -
+ tools/docs/find-unused-docs.sh                |  2 +-
+ .../kernel-doc.py => tools/docs/kernel-doc    | 89 ++++++++++++-------
+ tools/docs/sphinx-build-wrapper               |  2 +-
+ tools/lib/python/kdoc/kdoc_parser.py          | 35 ++++++--
+ 19 files changed, 120 insertions(+), 117 deletions(-)
+ delete mode 120000 scripts/kernel-doc
+ rename scripts/kernel-doc.py => tools/docs/kernel-doc (88%)
+
+-- 
+2.52.0
 
 
