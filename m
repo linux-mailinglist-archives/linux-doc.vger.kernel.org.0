@@ -1,58 +1,57 @@
-Return-Path: <linux-doc+bounces-73038-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73030-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61762D3B07B
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:23:57 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A063CD3B078
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:23:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id DA99B3008DDE
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:40 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7F611300D937
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF5563043A2;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EA6D2E888A;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oUBhz+mE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d69NExac"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98D9C2ED141;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A3E829B228;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=t5XDzEyc2WVf9YSUl8xEzq1BNbJFq5Rlx4vW5aP98QniAR+rC4+eePG+QfN3CYy7gK6kBNng67GRNAlbqL4bNkF1NBtwpLme0cjiwRbMculrOE22uLS+t8xezIa7dPmXXdkSzep/v6oiPIToB6xK8yd6Ti3Yq8D+FixvIetUvvw=
+	t=1768839814; cv=none; b=QkX9/LQnZosxYtCvlB6tHFCGz53tDNM12jtrrwrCm81sM1c0wfi0q0zfjHYrKniZ22+LNtIBoUak5Xt78oG9igDcQkZFd+0+WVBawjeVrecp/oe9JrDlZUnUc/nKCUL1vRPDnknx5ijbjkyVPz4u09GkaU+AqvOfdjcj6NiCb88=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=AT9QRc72PaX75+hy9TLUQhCbT/HxXyi982eiR6wBTwU=;
+	bh=i1tcZCaxJM2MU0fiO/S47vsflPzYkddGYteNjd18qHw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Za4/qOREt7AwAKgLw3tWXp0aPIBbUJwcVqPo4ZPfUmpjXaybnzaIwLDREc5I3wrvGUIbNADwog20g5rjM2fAJThJ3D+Wm/mR7IyYl/c0X9YhlUEJid110bqZN0dCxzarLBMi2aeLIko3bq2yux8GP9pvWzgAzOuBUN+xl16lGiM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oUBhz+mE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E28BC2BCB2;
+	 MIME-Version:Content-Type; b=d4bJ3AzBXlTI6sNfLK9SMrkWHEtPUb/MY0cfGHwblS+8LBL71rLeyB2whfBKYm954zhPExg26hu88haCkz4BZd+Ah+dzmIuNcyuEaQXXse5lzO+/vIS+pUf0Yw+iz32He1gzhHsUmqIxNCM1qzrcA/0M3chxjpMUaplAKgaT96Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d69NExac; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D492C19425;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=AT9QRc72PaX75+hy9TLUQhCbT/HxXyi982eiR6wBTwU=;
+	bh=i1tcZCaxJM2MU0fiO/S47vsflPzYkddGYteNjd18qHw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oUBhz+mE+VQypBJfENSOxgKBKsis1kBEXhuXOWOm1g2q+6qtbAEIHCfG3lDhax88Q
-	 EEPBWHPGaDGnwfIwUo4nmHMsvSfhudNf8I2vAsQI2sE0y1gKu9zSaoAEAGW63T5QLf
-	 z9rhp2MKN6mbEqJaC4kog4RU78rhTIv0Q3VUB5tgtrzora5uBIaJcHpj+5BL7W0Tc/
-	 ayFSRfj0FbXXYNLStbV6D86M2CEfowTPQs/goRkjlLsblkwgSWRZcNLgDPvNIg6Fv/
-	 UE8HTAyEO+N81bgFWp0RjOC8nHf+10ZaS2uGgC4329+5c/FYeu1thz5vcAQMXU7B1V
-	 G+/PPDODEJGhQ==
+	b=d69NExacPxZ0Dv/g9MXpuB8KNYqUbDaN/faj7Wuh3UBiYZkvNsq3rwp7dtMGL8zKj
+	 3R5e9F5pdNcLGxxJPFW1EHdKeC+YrRgnT2YynPkBqGLZ60oQ0ovfIgDBJb8NrDMCGk
+	 chmcPegiSt77KiLWRrxabNZBYpQgLDPS20oRUgW9lxgs4dR0x2qrztFUJn/eNELEb3
+	 Ez1I+u2AEKONFm6NYLPPKcebHU+q2ckAuv4FGuK9FFXKnxMWgzuenX3E9mMe1y0AIp
+	 eJeca9oMxCExCqN1VAPsJuO9d9RuUBlLbq2qzipQWlng4LSXaoELeUGP4o9W6G7f6x
+	 1jIYmGjTD1TXA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j24-1ZqU;
+	id 1vhs2O-00000001j28-1gfC;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 11/25] docs: kdoc_re: Improve docstrings and comments
-Date: Mon, 19 Jan 2026 17:23:14 +0100
-Message-ID: <14a12a43144d52345bfd405d0401d246f0885acf.1768838938.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH 12/25] docs: kdoc: parse_data_structs: Improve docstrings and comments
+Date: Mon, 19 Jan 2026 17:23:15 +0100
+Message-ID: <76ead85b4c13a8038180a792e270c3691d26cd25.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -71,91 +70,182 @@ documentation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_re.py | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+ tools/lib/python/kdoc/parse_data_structs.py | 62 +++++++++++++--------
+ 1 file changed, 39 insertions(+), 23 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
-index 2dfa1bf83d64..2816bd9f90f8 100644
---- a/tools/lib/python/kdoc/kdoc_re.py
-+++ b/tools/lib/python/kdoc/kdoc_re.py
-@@ -51,6 +51,9 @@ class KernRe:
-         """
-         return self.regex.pattern
+diff --git a/tools/lib/python/kdoc/parse_data_structs.py b/tools/lib/python/kdoc/parse_data_structs.py
+index 25361996cd20..9941cd19032e 100755
+--- a/tools/lib/python/kdoc/parse_data_structs.py
++++ b/tools/lib/python/kdoc/parse_data_structs.py
+@@ -9,12 +9,12 @@ Parse a source file or header, creating ReStructured Text cross references.
+ It accepts an optional file to change the default symbol reference or to
+ suppress symbols from the output.
  
-+    def __repr__(self):
-+        return f're.compile("{self.regex.pattern}")'
+-It is capable of identifying defines, functions, structs, typedefs,
+-enums and enum symbols and create cross-references for all of them.
++It is capable of identifying ``define``, function, ``struct``, ``typedef``,
++``enum`` and ``enum`` symbols and create cross-references for all of them.
+ It is also capable of distinguish #define used for specifying a Linux
+ ioctl.
+ 
+-The optional rules file contains a set of rules like:
++The optional rules file contains a set of rules like::
+ 
+     ignore ioctl VIDIOC_ENUM_FMT
+     replace ioctl VIDIOC_DQBUF vidioc_qbuf
+@@ -34,8 +34,8 @@ class ParseDataStructs:
+     It is meant to allow having a more comprehensive documentation, where
+     uAPI headers will create cross-reference links to the code.
+ 
+-    It is capable of identifying defines, functions, structs, typedefs,
+-    enums and enum symbols and create cross-references for all of them.
++    It is capable of identifying ``define``, function, ``struct``, ``typedef``,
++    ``enum`` and ``enum`` symbols and create cross-references for all of them.
+     It is also capable of distinguish #define used for specifying a Linux
+     ioctl.
+ 
+@@ -43,13 +43,13 @@ class ParseDataStructs:
+     allows parsing an exception file. Such file contains a set of rules
+     using the syntax below:
+ 
+-    1. Ignore rules:
++    1. Ignore rules::
+ 
+         ignore <type> <symbol>`
+ 
+     Removes the symbol from reference generation.
+ 
+-    2. Replace rules:
++    2. Replace rules::
+ 
+         replace <type> <old_symbol> <new_reference>
+ 
+@@ -58,22 +58,22 @@ class ParseDataStructs:
+         - A simple symbol name;
+         - A full Sphinx reference.
+ 
+-    3. Namespace rules
++    3. Namespace rules::
+ 
+         namespace <namespace>
+ 
+        Sets C namespace to be used during cross-reference generation. Can
+        be overridden by replace rules.
+ 
+-    On ignore and replace rules, <type> can be:
+-        - ioctl: for defines that end with _IO*, e.g. ioctl definitions
+-        - define: for other defines
+-        - symbol: for symbols defined within enums;
+-        - typedef: for typedefs;
+-        - enum: for the name of a non-anonymous enum;
+-        - struct: for structs.
++    On ignore and replace rules, ``<type>`` can be:
++        - ``ioctl``: for defines that end with ``_IO*``, e.g. ioctl definitions
++        - ``define``: for other defines
++        - ``symbol``: for symbols defined within enums;
++        - ``typedef``: for typedefs;
++        - ``enum``: for the name of a non-anonymous enum;
++        - ``struct``: for structs.
+ 
+-    Examples:
++    Examples::
+ 
+         ignore define __LINUX_MEDIA_H
+         ignore ioctl VIDIOC_ENUM_FMT
+@@ -83,13 +83,15 @@ class ParseDataStructs:
+         namespace MC
+     """
+ 
+-    # Parser regexes with multiple ways to capture enums and structs
++    #: Parser regex with multiple ways to capture enums.
+     RE_ENUMS = [
+         re.compile(r"^\s*enum\s+([\w_]+)\s*\{"),
+         re.compile(r"^\s*enum\s+([\w_]+)\s*$"),
+         re.compile(r"^\s*typedef\s*enum\s+([\w_]+)\s*\{"),
+         re.compile(r"^\s*typedef\s*enum\s+([\w_]+)\s*$"),
+     ]
 +
-     def __add__(self, other):
-         """
-         Allows adding two regular expressions into one.
-@@ -61,7 +64,7 @@ class KernRe:
++    #: Parser regex with multiple ways to capture structs.
+     RE_STRUCTS = [
+         re.compile(r"^\s*struct\s+([_\w][\w\d_]+)\s*\{"),
+         re.compile(r"^\s*struct\s+([_\w][\w\d_]+)$"),
+@@ -97,11 +99,13 @@ class ParseDataStructs:
+         re.compile(r"^\s*typedef\s*struct\s+([_\w][\w\d_]+)$"),
+     ]
  
-     def match(self, string):
-         """
--        Handles a re.match storing its results
-+        Handles a re.match storing its results.
-         """
- 
-         self.last_match = self.regex.match(string)
-@@ -69,7 +72,7 @@ class KernRe:
- 
-     def search(self, string):
-         """
--        Handles a re.search storing its results
-+        Handles a re.search storing its results.
-         """
- 
-         self.last_match = self.regex.search(string)
-@@ -77,28 +80,28 @@ class KernRe:
- 
-     def findall(self, string):
-         """
--        Alias to re.findall
-+        Alias to re.findall.
-         """
- 
-         return self.regex.findall(string)
- 
-     def split(self, string):
-         """
--        Alias to re.split
-+        Alias to re.split.
-         """
- 
-         return self.regex.split(string)
- 
-     def sub(self, sub, string, count=0):
-         """
--        Alias to re.sub
-+        Alias to re.sub.
-         """
- 
-         return self.regex.sub(sub, string, count=count)
- 
-     def group(self, num):
-         """
--        Returns the group results of the last match
-+        Returns the group results of the last match.
-         """
- 
-         return self.last_match.group(num)
-@@ -110,7 +113,7 @@ class NestedMatch:
-     even harder on Python with its normal re module, as there are several
-     advanced regular expressions that are missing.
- 
--    This is the case of this pattern:
-+    This is the case of this pattern::
- 
-             '\\bSTRUCT_GROUP(\\(((?:(?>[^)(]+)|(?1))*)\\))[^;]*;'
- 
-@@ -121,6 +124,7 @@ class NestedMatch:
-     replace nested expressions.
- 
-     The original approach was suggested by:
+-    # FIXME: the original code was written a long time before Sphinx C
++    # NOTE: the original code was written a long time before Sphinx C
+     # domain to have multiple namespaces. To avoid to much turn at the
+     # existing hyperlinks, the code kept using "c:type" instead of the
+     # right types. To change that, we need to change the types not only
+     # here, but also at the uAPI media documentation.
 +
-         https://stackoverflow.com/questions/5454322/python-how-to-match-nested-parentheses-with-regex
++    #: Dictionary containing C type identifiers to be transformed.
+     DEF_SYMBOL_TYPES = {
+         "ioctl": {
+             "prefix": "\\ ",
+@@ -158,6 +162,10 @@ class ParseDataStructs:
+             self.symbols[symbol_type] = {}
  
-     Although I re-implemented it to make it more generic and match 3 types
+     def read_exceptions(self, fname: str):
++        """
++        Read an optional exceptions file, used to override defaults.
++        """
++
+         if not fname:
+             return
+ 
+@@ -242,9 +250,9 @@ class ParseDataStructs:
+     def store_type(self, ln, symbol_type: str, symbol: str,
+                    ref_name: str = None, replace_underscores: bool = True):
+         """
+-        Stores a new symbol at self.symbols under symbol_type.
++        Store a new symbol at self.symbols under symbol_type.
+ 
+-        By default, underscores are replaced by "-"
++        By default, underscores are replaced by ``-``.
+         """
+         defs = self.DEF_SYMBOL_TYPES[symbol_type]
+ 
+@@ -276,12 +284,16 @@ class ParseDataStructs:
+         self.symbols[symbol_type][symbol] = (f"{prefix}{ref_link}{suffix}", ln)
+ 
+     def store_line(self, line):
+-        """Stores a line at self.data, properly indented"""
++        """
++        Store a line at self.data, properly indented.
++        """
+         line = "    " + line.expandtabs()
+         self.data += line.rstrip(" ")
+ 
+     def parse_file(self, file_in: str, exceptions: str = None):
+-        """Reads a C source file and get identifiers"""
++        """
++        Read a C source file and get identifiers.
++        """
+         self.data = ""
+         is_enum = False
+         is_comment = False
+@@ -433,7 +445,7 @@ class ParseDataStructs:
+ 
+     def gen_toc(self):
+         """
+-        Create a list of symbols to be part of a TOC contents table
++        Create a list of symbols to be part of a TOC contents table.
+         """
+         text = []
+ 
+@@ -464,6 +476,10 @@ class ParseDataStructs:
+         return "\n".join(text)
+ 
+     def write_output(self, file_in: str, file_out: str, toc: bool):
++        """
++        Write a ReST output file.
++        """
++
+         title = os.path.basename(file_in)
+ 
+         if toc:
 -- 
 2.52.0
 
