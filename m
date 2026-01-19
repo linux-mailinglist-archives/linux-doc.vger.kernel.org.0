@@ -1,60 +1,57 @@
-Return-Path: <linux-doc+bounces-73028-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73034-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7918FD3B08B
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:24:44 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E56ED3B091
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:25:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E6BFE303BC06
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 391FC3041F6A
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DEF02E7F17;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF82F309F13;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RKYLUVTp"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U2gjrXwL"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A32329AAEA;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98A6E2EB85E;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=PQiDn8KH3UV3YspXTnz+RJ/lVUhmlzwnyW1NtfddAP8kBJ3xkd4WsKHx//839BQ/1z0Afw0TRDBnAkKfi3RIFfu9qmfni7ma9gRALHQEKiY/AWeaKp6jLNu0zRKnZN+Z5Zkm/yycdEHLSjB8Y8+woKJ5zrbm2UQ9NSIvX+P17P8=
+	t=1768839814; cv=none; b=oZar4wOy/zBxljMxJzoBIeXIzmm1Ev2PTHBeaHCc1Y5dumEForLgCghNZAm10aQgczcrLFOlS5RzLQVKZ8WavM72RhjK6q5/mHUHZZrCrr69JJhz93VxXL+cqW9kqiIjK+K2H2uOxqYIcfzTczqmq4iFf3mKGmDihT7oICvTI0c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=F1iY5tojuZW+LSnzsdjV0WpgMur3Wq5H16GM35OkDAw=;
+	bh=V/BLZs4Nlt58GEgPnSOwtNktnB67g/V/fdysHWNMdM0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XrsHeTjliwZjTVjAD/aij2CFH5UDZPO5rG58OgisBdw0B1WonjJfPYI9VISO/G3nMTLtLsRY3FwX88q7ia1kBwz3plFvdt25786gJfJO5fTt8LBz+krsF+GgrT+3URiY64d5AQDUOmSfjGxMIU7LU9WqzotMX4uNR7lHFQH7wKI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RKYLUVTp; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2008AC2BC86;
+	 MIME-Version:Content-Type; b=NMY2O/QqoJUijH2o6u0076UGFgwnho9mFgt+XONGh4jnmblhmQoHAMqmDTCEqQweuOc/DLSBapf82wlh0+Q62dXm34lsYckKpEumYGa7zBi/Ta21WKAyMjKTIbctrI/PJPkaSlXnnf5crYP+K13Qfs6zkvlO0C8xl+pwbbxjfWY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U2gjrXwL; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28CCDC2BC9E;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=F1iY5tojuZW+LSnzsdjV0WpgMur3Wq5H16GM35OkDAw=;
+	bh=V/BLZs4Nlt58GEgPnSOwtNktnB67g/V/fdysHWNMdM0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=RKYLUVTpsDNrjnX6F8SLT7Cj9fyQQcqw/2LyzDlBedMwVf4N7dsQLBUGUenFGaoO2
-	 H9CleZU7ccLfFoznE4yCQIylN3HMWYucKkf6E2GlAKDr17jYp5NYulkIAFgu5Q5lAk
-	 4Q1J8T2yc+Nqw6R/VWrkuUJs9K9nl+M5Kohw5MSdexQBAQBMslCQE1XQuAF4IyQN4Q
-	 wWD+cQw5Tgm8LSvJzGcUQ5twdLKed8a5h7KsZOSqxfPxU4DaT7dQi2ThmnDz5Wq2gM
-	 NbAf5jJACFGQjJmTxoJvcH8JQxRQBdqfA5CXj9ByoJ1/t96LZdhlngPGzywNlvUEgr
-	 SsbVv0bf13djg==
+	b=U2gjrXwL1OlFQWyjT+UgU+lYWTdcwwRnJSHkiDHLdmw6bXAZXU4IUvMr0on4LBQsx
+	 gmSji4zZuwDKJPBc20MHmzOnEI2NCKqyXhAbwTKuh03AbtWrecncHwLrWZvshjF+Pp
+	 aoKZlTSLZlBgFVEawqikk06RxXoblqe1h7uS/qtl47N3i5BP8QjPTrTcO5gqk/Ehr6
+	 yONByuxhWpSpSbSHiUlVNt6VWdXx6T2UyRGHBo+os1q1J30F8kjfvBdiXCswJAwzCn
+	 rkh3DlrtYFPrFX9fz02QerjF0lHMJZyQdnHb6aTEexYGMbvCEpMLaa6DXgpQpRuhb4
+	 +pOv7xBTTDTaA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j1g-0uiw;
+	id 1vhs2O-00000001j1k-11Yz;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	=?UTF-8?q?N=C3=ADcolas=20F=2E=20R=2E=20A=2E=20Prado?= <nfraprado@collabora.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Petr Vorel <pvorel@suse.cz>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 05/25] docs: custom.css: add CSS for python
-Date: Mon, 19 Jan 2026 17:23:08 +0100
-Message-ID: <b5a3dfd551b887a2885b85b4c9433e757c77628a.1768838938.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH 06/25] docs: kdoc: latex_fonts: Improve docstrings and comments
+Date: Mon, 19 Jan 2026 17:23:09 +0100
+Message-ID: <6e0eb2e245eae9b4f39cf231dee32df00b9e8b7b.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -68,34 +65,178 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-As we'll start adding python to documentation, add some CSS
-templates to better display python code.
+In preparation to document kernel-doc module, improve its
+documentation.
+
+Among the changes, it had to place the xml template inside
+a code block, as otherwise doc build would break.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx-static/custom.css | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ tools/lib/python/kdoc/latex_fonts.py | 95 ++++++++++++++++------------
+ 1 file changed, 56 insertions(+), 39 deletions(-)
 
-diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
-index 6757b5a59f23..db24f4344e6c 100644
---- a/Documentation/sphinx-static/custom.css
-+++ b/Documentation/sphinx-static/custom.css
-@@ -43,6 +43,15 @@ dl.function dt { margin-left: 10em; text-indent: -10em; }
- dt.sig-object { font-size: larger; }
- div.kernelindent { margin-left: 2em; margin-right: 4em; }
+diff --git a/tools/lib/python/kdoc/latex_fonts.py b/tools/lib/python/kdoc/latex_fonts.py
+index 29317f8006ea..1d04cbda169f 100755
+--- a/tools/lib/python/kdoc/latex_fonts.py
++++ b/tools/lib/python/kdoc/latex_fonts.py
+@@ -5,12 +5,13 @@
+ # Ported to Python by (c) Mauro Carvalho Chehab, 2025
  
-+/*
-+ * Parameters for the display of function prototypes and such included
-+ * from Python source files.
-+ */
-+dl.py { margin-top: 2em; background-color: #ecf0f3; }
-+dl.py.class { margin-left: 2em; text-indent: -2em; padding-left: 2em; }
-+dl.py.method, dl.py.attribute { margin-left: 2em; text-indent: -2em; }
-+dl.py li, pre { text-indent: 0em; padding-left: 0 !important; }
+ """
+-Detect problematic Noto CJK variable fonts.
++Detect problematic Noto CJK variable fonts
++==========================================
+ 
+-For "make pdfdocs", reports of build errors of translations.pdf started
+-arriving early 2024 [1, 2].  It turned out that Fedora and openSUSE
+-tumbleweed have started deploying variable-font [3] format of "Noto CJK"
+-fonts [4, 5].  For PDF, a LaTeX package named xeCJK is used for CJK
++For ``make pdfdocs``, reports of build errors of translations.pdf started
++arriving early 2024 [1]_ [2]_.  It turned out that Fedora and openSUSE
++tumbleweed have started deploying variable-font [3]_ format of "Noto CJK"
++fonts [4]_ [5]_.  For PDF, a LaTeX package named xeCJK is used for CJK
+ (Chinese, Japanese, Korean) pages.  xeCJK requires XeLaTeX/XeTeX, which
+ does not (and likely never will) understand variable fonts for historical
+ reasons.
+@@ -25,68 +26,77 @@ This script is invoked from the error path of "make pdfdocs" and emits
+ suggestions if variable-font files of "Noto CJK" fonts are in the list of
+ fonts accessible from XeTeX.
+ 
+-References:
+-[1]: https://lore.kernel.org/r/8734tqsrt7.fsf@meer.lwn.net/
+-[2]: https://lore.kernel.org/r/1708585803.600323099@f111.i.mail.ru/
+-[3]: https://en.wikipedia.org/wiki/Variable_font
+-[4]: https://fedoraproject.org/wiki/Changes/Noto_CJK_Variable_Fonts
+-[5]: https://build.opensuse.org/request/show/1157217
++.. [1] https://lore.kernel.org/r/8734tqsrt7.fsf@meer.lwn.net/
++.. [2] https://lore.kernel.org/r/1708585803.600323099@f111.i.mail.ru/
++.. [3] https://en.wikipedia.org/wiki/Variable_font
++.. [4] https://fedoraproject.org/wiki/Changes/Noto_CJK_Variable_Fonts
++.. [5] https://build.opensuse.org/request/show/1157217
+ 
+-#===========================================================================
+ Workarounds for building translations.pdf
+-#===========================================================================
++-----------------------------------------
+ 
+ * Denylist "variable font" Noto CJK fonts.
 +
- /*
-  * Tweaks for our local TOC
-  */
+   - Create $HOME/deny-vf/fontconfig/fonts.conf from template below, with
+     tweaks if necessary.  Remove leading "".
++
+   - Path of fontconfig/fonts.conf can be overridden by setting an env
+     variable FONTS_CONF_DENY_VF.
+ 
+-    * Template:
+------------------------------------------------------------------
+-<?xml version="1.0"?>
+-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+-<fontconfig>
+-<!--
+-  Ignore variable-font glob (not to break xetex)
+--->
+-    <selectfont>
+-        <rejectfont>
+-            <!--
+-                for Fedora
+-            -->
+-            <glob>/usr/share/fonts/google-noto-*-cjk-vf-fonts</glob>
+-            <!--
+-                for openSUSE tumbleweed
+-            -->
+-            <glob>/usr/share/fonts/truetype/Noto*CJK*-VF.otf</glob>
+-        </rejectfont>
+-    </selectfont>
+-</fontconfig>
+------------------------------------------------------------------
++    * Template::
++
++        <?xml version="1.0"?>
++        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
++        <fontconfig>
++        <!--
++        Ignore variable-font glob (not to break xetex)
++        -->
++            <selectfont>
++                <rejectfont>
++                    <!--
++                        for Fedora
++                    -->
++                    <glob>/usr/share/fonts/google-noto-*-cjk-vf-fonts</glob>
++                    <!--
++                        for openSUSE tumbleweed
++                    -->
++                    <glob>/usr/share/fonts/truetype/Noto*CJK*-VF.otf</glob>
++                </rejectfont>
++            </selectfont>
++        </fontconfig>
+ 
+     The denylisting is activated for "make pdfdocs".
+ 
+ * For skipping CJK pages in PDF
++
+   - Uninstall texlive-xecjk.
+     Denylisting is not needed in this case.
+ 
+ * For printing CJK pages in PDF
++
+   - Need non-variable "Noto CJK" fonts.
++
+     * Fedora
++
+       - google-noto-sans-cjk-fonts
+       - google-noto-serif-cjk-fonts
++
+     * openSUSE tumbleweed
++
+       - Non-variable "Noto CJK" fonts are not available as distro packages
+         as of April, 2024.  Fetch a set of font files from upstream Noto
+         CJK Font released at:
++
+           https://github.com/notofonts/noto-cjk/tree/main/Sans#super-otc
++
+         and at:
++
+           https://github.com/notofonts/noto-cjk/tree/main/Serif#super-otc
+-        , then uncompress and deploy them.
++
++        then uncompress and deploy them.
+       - Remember to update fontconfig cache by running fc-cache.
+ 
+-!!! Caution !!!
++.. caution::
+     Uninstalling "variable font" packages can be dangerous.
+     They might be depended upon by other packages important for your work.
+     Denylisting should be less invasive, as it is effective only while
+@@ -115,10 +125,15 @@ class LatexFontChecker:
+         self.re_cjk = re.compile(r"([^:]+):\s*Noto\s+(Sans|Sans Mono|Serif) CJK")
+ 
+     def description(self):
++        """
++        Returns module description.
++        """
+         return __doc__
+ 
+     def get_noto_cjk_vf_fonts(self):
+-        """Get Noto CJK fonts"""
++        """
++        Get Noto CJK fonts.
++        """
+ 
+         cjk_fonts = set()
+         cmd = ["fc-list", ":", "file", "family", "variable"]
+@@ -143,7 +158,9 @@ class LatexFontChecker:
+         return sorted(cjk_fonts)
+ 
+     def check(self):
+-        """Check for problems with CJK fonts"""
++        """
++        Check for problems with CJK fonts.
++        """
+ 
+         fonts = textwrap.indent("\n".join(self.get_noto_cjk_vf_fonts()), "    ")
+         if not fonts:
 -- 
 2.52.0
 
