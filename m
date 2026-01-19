@@ -1,57 +1,58 @@
-Return-Path: <linux-doc+bounces-73039-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73041-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C2E6D3B08F
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:24:59 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAAF1D3B077
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:23:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5CEEC302DB37
+	by sto.lore.kernel.org (Postfix) with ESMTP id D62FC300E640
 	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF299303C87;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF5E2306D3D;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jsbXdPfY"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FL/Rov7J"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9882B2EB5CD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B1812EDD41;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=CLIv5aCHR8u+KguoYtgbt6416y+ed75BubFOEoPdZ62Abk0jIVtf234yz16IDJxIXz655aCODn2y20hjTlImm/G/Khyt7mMKGWAYYRj5q/CPEuoJr6rSCWH7b+zBXExn39uEJ6mwE8DHl+pTSDQAkeLnL4Ioa4HKSaVMLvjSFsU=
+	t=1768839814; cv=none; b=bJieUhxnoOXye6TqkIaYiJvgSRdSkEVyxgST57jppBL74Zb3M9pc+xUpPNaa8LHnmZOnANOTxrX4wEAFalIlIGWsGxSInr/QoOPJztS4tb5bBT/J5R62TTlYlJl2pqianFycHIez7PCDNr9fTHUNOxfJZzZaWqyq41A5gfYwd+I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=EJEpOIpo13K5wVlZXAiPofrL9GMVio3Ohn/l0ADAKD4=;
+	bh=qeD2CxushaNmzGduOrZz2GnZPSRsopACODszEDevkew=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=nzC7qydKDtuQ1cxTLx9GRf9uy+zoHRzfmaeVXA01WtlEdG4vxLZK2vkDcdECY2KMjnCjGU4EgvL5ihGqvMF2NHc66OGw8nyFBoxNX2NCsUjv+c2+naPbFchRMLAllQtYavWc53b8ZlwWEZMl3a8UJBva/QJgKILQt/+dKPZu1sc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jsbXdPfY; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3817CC2BCB8;
+	 MIME-Version:Content-Type; b=O7btT67s9xnnZpcYn+lKWPZTy53iQ0o0myaxJXqjz+dptpnL3HNSHMY9qD5eFGYL7h7piUqDFXO20NPrQ+gUJckvU/Ez5P7aB3y+oY3RsoBt2FN/jO7hoqcekZuftufQTKpMyvrZu3h8Cmgd0ZVBSKSWcjlQs3Hv/23R/G9cLS4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FL/Rov7J; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38339C4AF09;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=EJEpOIpo13K5wVlZXAiPofrL9GMVio3Ohn/l0ADAKD4=;
+	bh=qeD2CxushaNmzGduOrZz2GnZPSRsopACODszEDevkew=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jsbXdPfYVr7vvn9jt2ds1gbu7fFMcCtomVVJgVVhS/VNljROInlkd/XbYJ29K1eVP
-	 UX5X0P+L5zUp0LIbfWTfppMyfsKJ7oI/MMciaGEFsOryeMX6FDC/N9NbsuNhjCqjsd
-	 UKtyYxx+kBdJCefx+LpWBszmpzX5vQiHQopS5GAJoEE4BPT6X952Hjee0z0BfGiXJl
-	 7aWM/H5EkOqze5LGOVaKWfAPwrgkYCJqJjmYf12Fe8uv2mOuTGg0xtrYThCjGrQI/D
-	 Rn9Nf1KFf5b1KdJtjadxFoZikumGMUKM9khHdZAEFm7Z7sGeGBE9KwdmxhHCOOoTX/
-	 VAAf/1T+BnwyQ==
+	b=FL/Rov7JMy4A6ix7Oo1u1qLeWW9LdMvhLtX9cUNWTS5iREN8O/g1WX/Tf/WUJp+tk
+	 ppcSAG6fy+XztkJs32f6sufN505nDNUdzteVk509VBUxaXdfm//nHuJj5xsaZ6nFgP
+	 WnwVZ171qetVVWiMH587n/9AZ+vQx2HCBuTCvJGXK563Osykik8Db4nl7Yb7T9Osky
+	 1OcuyqK0I/5otobStGX1Qhuzmn5mPTiU69DiqK70/02gArVDpfB98tnoRHP8QjsQ1Y
+	 qVTKHhocZTY1xHkTxDc8fYn8axwz1nLDiGlJyzskF5bFXpZ/jZnJ0ui0FssGg2c5oK
+	 Jlxb5plJZrP4g==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j2C-1nVz;
+	id 1vhs2O-00000001j2G-1uOR;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 13/25] docs: kdoc: enrich_formatter: Improve docstrings and comments
-Date: Mon, 19 Jan 2026 17:23:16 +0100
-Message-ID: <55ec8b896fe00529d326859cd094230fb5a2cd30.1768838938.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH 14/25] docs: kdoc: python_version: Improve docstrings and comments
+Date: Mon, 19 Jan 2026 17:23:17 +0100
+Message-ID: <2153afaeb496e1bb8d3cc318fff26c3f99d99486.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -70,62 +71,59 @@ documentation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/enrich_formatter.py | 20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
+ tools/lib/python/kdoc/python_version.py | 20 ++++++++++++++++----
+ 1 file changed, 16 insertions(+), 4 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/enrich_formatter.py b/tools/lib/python/kdoc/enrich_formatter.py
-index bb171567a4ca..d1be4e5e1962 100644
---- a/tools/lib/python/kdoc/enrich_formatter.py
-+++ b/tools/lib/python/kdoc/enrich_formatter.py
-@@ -26,12 +26,16 @@ class EnrichFormatter(argparse.HelpFormatter):
-     and how they're used at the __doc__ description.
+diff --git a/tools/lib/python/kdoc/python_version.py b/tools/lib/python/kdoc/python_version.py
+index e83088013db2..4ddb7ead5f56 100644
+--- a/tools/lib/python/kdoc/python_version.py
++++ b/tools/lib/python/kdoc/python_version.py
+@@ -33,21 +33,31 @@ class PythonVersion:
      """
-     def __init__(self, *args, **kwargs):
--        """Initialize class and check if is TTY"""
-+        """
-+        Initialize class and check if is TTY.
-+        """
-         super().__init__(*args, **kwargs)
-         self._tty = sys.stdout.isatty()
  
-     def enrich_text(self, text):
--        """Handle ReST markups (currently, only ``foo``)"""
-+        r"""
-+        Handle ReST markups (currently, only \`\`text\`\` markups).
+     def __init__(self, version):
+-        """Ïnitialize self.version tuple from a version string"""
 +        """
-         if self._tty and text:
-             # Replace ``text`` with ANSI SGR (bold)
-             return re.sub(r'\`\`(.+?)\`\`',
-@@ -39,12 +43,16 @@ class EnrichFormatter(argparse.HelpFormatter):
-         return text
++        Ïnitialize self.version tuple from a version string.
++        """
+         self.version = self.parse_version(version)
  
-     def _fill_text(self, text, width, indent):
--        """Enrich descriptions with markups on it"""
+     @staticmethod
+     def parse_version(version):
+-        """Convert a major.minor.patch version into a tuple"""
 +        """
-+        Enrich descriptions with markups on it.
++        Convert a major.minor.patch version into a tuple.
 +        """
-         enriched = self.enrich_text(text)
-         return "\n".join(indent + line for line in enriched.splitlines())
+         return tuple(int(x) for x in version.split("."))
  
-     def _format_usage(self, usage, actions, groups, prefix):
--        """Enrich positional arguments at usage: line"""
+     @staticmethod
+     def ver_str(version):
+-        """Returns a version tuple as major.minor.patch"""
 +        """
-+        Enrich positional arguments at usage: line.
++        Returns a version tuple as major.minor.patch.
 +        """
+         return ".".join([str(x) for x in version])
  
-         prog = self._prog
-         parts = []
-@@ -63,7 +71,9 @@ class EnrichFormatter(argparse.HelpFormatter):
-         return usage_text
- 
-     def _format_action_invocation(self, action):
--        """Enrich argument names"""
+     @staticmethod
+     def cmd_print(cmd, max_len=80):
 +        """
-+        Enrich argument names.
++        Outputs a command line, repecting maximum width.
 +        """
-         if not action.option_strings:
-             return self.enrich_text(f"``{action.dest.upper()}``")
++
+         cmd_line = []
  
+         for w in cmd:
+@@ -66,7 +76,9 @@ class PythonVersion:
+         return "\n  ".join(cmd_line)
+ 
+     def __str__(self):
+-        """Returns a version tuple as major.minor.patch from self.version"""
++        """
++        Return a version tuple as major.minor.patch from self.version.
++        """
+         return self.ver_str(self.version)
+ 
+     @staticmethod
 -- 
 2.52.0
 
