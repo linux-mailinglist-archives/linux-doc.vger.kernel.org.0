@@ -1,57 +1,58 @@
-Return-Path: <linux-doc+bounces-73049-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73051-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96818D3B07E
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:24:00 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id B355DD3B099
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:25:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id EC78E300FD51
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:47 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1B0903046108
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35B60311C3D;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A8153126DE;
 	Mon, 19 Jan 2026 16:23:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hle9N8Af"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fFZjjNyN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDB592FE593;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C61762FFFA4;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=Ohl177sDMwCsE57ZmX1E54LTHJEaUDsDth+QMuYyAPOy5vvGj48O3ERrBhKEo4z/rEMTSO96XVg+QQFFIGui/7UpME0OXObP7+aYEMMGX8YteOnDW8nbiAcZgi09eJUjRGWH08jaX/bYsW2FZUZ7kZjnNmEagV4KJOTCSCLSJqA=
+	t=1768839814; cv=none; b=tbl9ulyraYUCHMIYTopPJz3/QwX2+A2mrXYfWYQrQDCnXP7uIyf5/cq+PWbK+xvmVMu/SLjtPt8X6+rKAfuV9q6I4VZ992KJOn6ym2M1k3LOXDuQYUTGiropDhnwL2zvcIuJ4ZSMS2tG5OTGohc2e2p+H4cskUh3G+PPAbicAZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=AVd8fmGIAF4zYlsPWk9dKYgZxAbzv6350/TY3F2WP6Y=;
+	bh=nryACzQkYVGoIPhbMWi4hHgCP/eXYlXs/XEX5Hcvvo4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=jTRlKsmOI+Ea3VdJr3UC+NfLSty7lFGcZR29qYomx7VNdiHIp5JoqyHs7jTGeJ34xXR9YdyEn/xfLRhTm5HmHLepTLwCIrEazqGNP+3yjKwLPfX7/7/QYc4b6ZGXJ+WgGd3bu+2j87aEeH8x4qwa98qMcpHA0ErSKZsAwB5NMjc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hle9N8Af; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A836C32786;
+	 MIME-Version:Content-Type; b=trHIeywqcsjxx0UBK7rK1QJgpueI3bH81Cfe9IOEacUXhEIRiQGHM2273aDBRt02SKnir45JRvYyvOZhZeOh6dEj1vnqJFJWtlOzqwAPoZiaJ9ksE1UwtinBhRyjK9o7K/q6BbHSqcM3+LDnhzmmT49Ez5PG1Css1AgMK/woklw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fFZjjNyN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6240FC4AF16;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=AVd8fmGIAF4zYlsPWk9dKYgZxAbzv6350/TY3F2WP6Y=;
+	bh=nryACzQkYVGoIPhbMWi4hHgCP/eXYlXs/XEX5Hcvvo4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Hle9N8Afd4V6xcMwvLV+zZK3thQALTyt7JP1o9URfKXdPq6Mau9maQPTph7KlTq1f
-	 BIRkGLcy2kmCxcFoha6OfN9yINqS5cX4c1pUNgRCKdxhdWUyew4tB+q7BTkKpEne0g
-	 /I/yke6dyV3/BaRy463vISHGnBq6WMxNEN1LebBDqY95JJm/tVmzzADjwZ7OKqJj+m
-	 3lDwfZ3yxZ1HPfsDalMbtN2QAWuW/OKKlf8a5QC6A8bCjKbwcysT7fP56D4v5BsY4i
-	 Z5crzK3+pjkyQPrjXIljd7DDG1ZeASYcF7Yt4bRVzqp++6iV+9tjc5LCwjLgGR4khL
-	 x7FE03VZRPN9A==
+	b=fFZjjNyNXxM2ofU6YCKansPfY7PQM2PhwxMQ3GK5sWkCZh1jXyyY4DpkOc2hHMyL2
+	 U2p5oHYNV0qq2CbM3khoSMqhMlchIa+Mau6jLPFvPWGPOEYIs9dOAVDrtlU+hUZXXE
+	 ZC3hddCKwXC0xOg3PCtwNNZEqH2WOq2GOCGixu1fsoLx10h4C+EfYOZ4DK3Y5S9pU8
+	 ZzJa8nHHVuOPDkJZtAggxJwcc5zbvR2P9mDwbnxX12XV6E7uzAp03afsq0a1G5Pewr
+	 DPo64rgVq00GvhsFcr/VyxVg1pd5xakU+2PnujcpZvgHrm8cwYOs4d5QOSU/YIYpKA
+	 UMQxd7ylErfbg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j2k-2g67;
+	id 1vhs2O-00000001j2o-2muI;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 21/25] docs: kabi: helpers: add documentation for each "enum" value
-Date: Mon, 19 Jan 2026 17:23:24 +0100
-Message-ID: <3b118b157e52d757bf82fd74f03b0f4bd9e8b8f1.1768838938.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 22/25] docs: add jobserver module documentation
+Date: Mon, 19 Jan 2026 17:23:25 +0100
+Message-ID: <688215d6a41d78bd5e37854472a5fc802d58c77a.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -65,67 +66,42 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Ensure that kABI module documentation will describe each
-debug bit.
+Place jobserver module documentation at Linux Kernel docs.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/abi/helpers.py | 40 ++++++++++++++++-----------------
- 1 file changed, 20 insertions(+), 20 deletions(-)
+ Documentation/tools/jobserver.rst | 10 ++++++++++
+ Documentation/tools/python.rst    |  1 +
+ 2 files changed, 11 insertions(+)
+ create mode 100644 Documentation/tools/jobserver.rst
 
-diff --git a/tools/lib/python/abi/helpers.py b/tools/lib/python/abi/helpers.py
-index b8c8dfb1272e..2a378d780d3c 100644
---- a/tools/lib/python/abi/helpers.py
-+++ b/tools/lib/python/abi/helpers.py
-@@ -13,28 +13,28 @@ ABI_DIR = "Documentation/ABI/"
- class AbiDebug:
-     """Debug levels"""
+diff --git a/Documentation/tools/jobserver.rst b/Documentation/tools/jobserver.rst
+new file mode 100644
+index 000000000000..31eaf25a8481
+--- /dev/null
++++ b/Documentation/tools/jobserver.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=================
++Job server module
++=================
++
++.. automodule:: lib.python.jobserver
++   :members:
++   :show-inheritance:
++   :undoc-members:
+diff --git a/Documentation/tools/python.rst b/Documentation/tools/python.rst
+index 978298fba6d3..b196d718e176 100644
+--- a/Documentation/tools/python.rst
++++ b/Documentation/tools/python.rst
+@@ -7,5 +7,6 @@ Python libraries
+ .. toctree::
+    :maxdepth: 4
  
--    WHAT_PARSING = 1
--    WHAT_OPEN = 2
--    DUMP_ABI_STRUCTS = 4
--    UNDEFINED = 8
--    REGEX = 16
--    SUBGROUP_MAP = 32
--    SUBGROUP_DICT = 64
--    SUBGROUP_SIZE = 128
--    GRAPH = 256
--
-+    WHAT_PARSING = 1        #: Enable debug parsing logic.
-+    WHAT_OPEN = 2           #: Enable debug messages on file open.
-+    DUMP_ABI_STRUCTS = 4    #: Enable debug for ABI parse data.
-+    UNDEFINED = 8           #: Enable extra undefined symbol data.
-+    REGEX = 16              #: Enable debug for what to regex conversion.
-+    SUBGROUP_MAP = 32       #: Enable debug for symbol regex subgroups
-+    SUBGROUP_DICT = 64      #: Enable debug for sysfs graph tree variable.
-+    SUBGROUP_SIZE = 128     #: Enable debug of search groups.
-+    GRAPH = 256             #: Display ref tree graph for undefined symbols.
- 
-+#: Helper messages for each debug variable
- DEBUG_HELP = """
--1  - enable debug parsing logic
--2  - enable debug messages on file open
--4  - enable debug for ABI parse data
--8  - enable extra debug information to identify troubles
--     with ABI symbols found at the local machine that
--     weren't found on ABI documentation (used only for
--     undefined subcommand)
--16 - enable debug for what to regex conversion
--32 - enable debug for symbol regex subgroups
--64 - enable debug for sysfs graph tree variable
-+1   - enable debug parsing logic
-+2   - enable debug messages on file open
-+4   - enable debug for ABI parse data
-+8   - enable extra debug information to identify troubles
-+      with ABI symbols found at the local machine that
-+      weren't found on ABI documentation (used only for
-+      undefined subcommand)
-+16  - enable debug for what to regex conversion
-+32  - enable debug for symbol regex subgroups
-+64  - enable debug for sysfs graph tree variable
- 128 - enable debug of search groups
- 256 - enable displaying refrence tree graphs for undefined symbols.
- """
++   jobserver
+    kdoc
+    kabi
 -- 
 2.52.0
 
