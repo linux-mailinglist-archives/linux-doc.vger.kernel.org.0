@@ -1,154 +1,184 @@
-Return-Path: <linux-doc+bounces-73021-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73023-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A05AD3AE71
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:10:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E49ED3AEB2
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:16:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 03812301F3C4
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:09:44 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id EDD5E301277F
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:15:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0268137F74E;
-	Mon, 19 Jan 2026 15:09:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C9BE3815E5;
+	Mon, 19 Jan 2026 15:15:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="N383uUms"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gxI4WxL2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6507338736B
-	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 15:09:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.42
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768835379; cv=pass; b=kuESlPXf6nW4rT0u7DfFL8FSM3PBDcV5AAIlFnFzkhAK4oe/YuyFZB+FwaJtiy8d27u/savsnrRdnKXQwJ4sMbJAK9agN2jhkBgOewqR5ovBY2htWi3Ui25og2Al2Pb5V1vHfudsVuMY+pfCdjkdqw5d3u3GZ2qy8vNHGqusy14=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768835379; c=relaxed/simple;
-	bh=9UYprNeVIjPbdEC/Vthez+8t5RhTWtuHYzI22TL9Cf8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Lf4sJQgK3OAmbESnFj1xKC6YvofJydbkheHZatOiqkj24rOWCCyit+H48etDq7NXAcnRJd6lkNTTUrlC65lDnoy8PTxFD9mPi5rQ0WhCUGXhuukJ6lFvJF54cYgTBPsWDj/cm/YtbHWD6oNEB7QJe/IEBltlnWLynzobxz4l7GM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=N383uUms; arc=pass smtp.client-ip=209.85.208.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-64b66d427e9so10671a12.1
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 07:09:38 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768835377; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Fn60ZEE1IG4BNMSbtFzAcJ1llMVTgdP6ClMCV8gIa9wTsMFNCZa8O9yf+Jp5wcAZW5
-         yRphQpPxw9sxqxxPhGneBnUETOUE235V6Iwy+LjoZkIinzck7IfE35ocTaDQLcb4uR/M
-         qgZ55dTan71zxMxaaM52eqdOSJY/IuPr66aScO9jlIXxKeLP8peevaHHqW9xE72hFI6W
-         rSENvPINkjk0luzX1UP8MMnbZFuLe/eO6TjH0A1m4jYqqNLuNf3xtqVsFX3jVs9vNWyK
-         ROeV2xrWaFU1LezhwH29wY70IwS0gNePlGkw2srJVEtCy4pZWtdMZJHp3lgk2iId4q25
-         +jMw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=9UYprNeVIjPbdEC/Vthez+8t5RhTWtuHYzI22TL9Cf8=;
-        fh=VnNT5T//g1OtsVEi5/Q3IQm3OqoagZxd6+JgxtUsMWE=;
-        b=MUsSSHpnI9sa4TdzXHgzSLuTH8Bqtb+9jxy5sjNToBzoONgeeKg/6WSreVUFXbvLUg
-         jmY1Fb6AnglhletbUfXAqBZ68+qfjN1sC6BIPol8BxmDF3lf8e5iK4nYJbcXO+f2hYWO
-         pTrBez1zXa9V/5l5/C3gAlszMfurzGVYNaKqrD8UYdGLJh2A4c43ej6atrUzUaXV3Kt3
-         mqHS6+NBEC/c/6xXwODkMXRMpwNhAK6tpBEZ/idMb/B3kzGHRZ/TcWF2G7VDxvaGmeHH
-         o6TAy5QPounbEnADMCucCI+vVhIn+uZwmm0DlNIhcAnD9roZXdj+6cpfF+Gtt17SL+zR
-         cwyw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1768835377; x=1769440177; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9UYprNeVIjPbdEC/Vthez+8t5RhTWtuHYzI22TL9Cf8=;
-        b=N383uUmsmg/sM8rglIIfFQ346kZawDBdoG9h581GWYVci7tYGVzRaUclkjMtZxkp8l
-         oL0EYfh5tVyzAKooh2KAJf9u8d2N5rI0A1ddBxMzN5//WOMg/JBzgMEIBwUjtS02twrT
-         ew9UsThZl+PKQzjZZXiRb8rn28+Fwx25QZyw0T+T++eLaQUjbYpLGITed2tJiZl+tSkv
-         IZt/51Sz4YRwFk7goVJSgX1zi32PrOeYhyWUZE/PKSfqxhHl9racuyuizVGA3kgM9qgY
-         sCiuWZVh2WrNroIODJsj+qE6ap429QZDFj4NlPuL+FCeESPA2iGDgjXtmzqXa+yZgbDM
-         Jxew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768835377; x=1769440177;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=9UYprNeVIjPbdEC/Vthez+8t5RhTWtuHYzI22TL9Cf8=;
-        b=sgeZFORzrJh+6vgRaMp2iHpcZ0AqPUDk1WUQgnTn+Ujn9lrf/E4EGkYk4i0KqPcBx5
-         xvLwMfb2gcf9VkUWx2yirOMu4alZjXkYsPDoMu4XvkWPPRfRDQLey6z/jFQXGLNJ6JHc
-         ID2fjsyZs70zBdbdBeVqVnwQgZq9JIp4NUZda3Hvai4swpo/1+8C+oKA1fSgtTWqUk0B
-         LPjQPyfdQP+QY90HhSoCARTrOvBEb9aCx87682+ac82yIbmLgiTfX7hKCaWw16ZevzFO
-         KHmkf9eUl4e4iVri20sKiHMaxIxSrSEz/YK5G6HWAHi/OoR/cmaoqjkj7WkUI0ZZby5T
-         48iQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW1afRSeWrRGaMgqevDBU6xoQl3pe0xpTb5PedWD+gD+qRTroKTklZpk9vdO8hHsKRc+zOASwG42nA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwGZ1sFQSF8Ym/s5xMqJjyrrLu/mxvdhhyhUsuziLbflL92envx
-	CNm4ghxEw8H6NypeXoTrB7ksSWysziS2OXaIGpA8RNV6gYwDIsQOsE9Wpuag5VHl/DhQqxNvWgc
-	ezF6q/8oqiJ+C9zTNc26pylvig+0wBVbU3PxkKkC6BAKS3X31jOS2p41kink=
-X-Gm-Gg: AZuq6aI9+bZe+qfnu71QQWyXNu28Z2I9jOdM1RaNHzJudvxpwHx14pCRtZJ5dgOiFav
-	GRXfd7K0Dm8IK0Pvfw9Xjw53AgvYtMG8DI8PxdO7rbBF5XjXWkQLF/bFOT+OhjLJbj4mgi0AFV3
-	OjYnT/OUf1iHfMo5gvmFj/5iXvftBUi5pCC87+72AroQtNfg4HvqGuGZ0zNEkjiUtUPjsGfahY8
-	QG9puz6jpt63+NrCvg4OPVpljdRRC6UI60tGUBhIJ3ikC9hWvtxmHFP0dwMDBn6E2pGEsrxOmE1
-	PuoU8w==
-X-Received: by 2002:a05:6402:518e:b0:655:c10d:70c1 with SMTP id
- 4fb4d7f45d1cf-6560b278fa6mr65248a12.8.1768835376417; Mon, 19 Jan 2026
- 07:09:36 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 291AD37E2E4
+	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 15:15:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768835731; cv=none; b=mQxSuDCgxUR80dNqnx7G0tfBnRvMhv/FB+9j7v2raeHu22aecIRMI7fhcwEgZAN1Xft9FtmHLyzZo9NHC+1Bpxzuvp3nFmhISQaJw4Vq5MenWEyGMaupdsYjt0zyvDCEcX3yBNMBJydHI5hAD1W8HASKxZ505DktlCEyHTNUVbs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768835731; c=relaxed/simple;
+	bh=ERVCOL+UrRNglZlm0SAA4pm43qoW2KUHl1G7b7RQrY8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=RQCQI4v5fMzwnqETrQfTgby3al+kMApnbt9xaqLkINiEY7dphBbaAJP4DrRzdDUlmsrPRqMT/Na20RI4NoQZNr84bUYwpKxKhrFkqcYgHOggRSDuzq/7zJPRFG1ByOq0j+bgv/vYwDoL1T5oxJCihctyqjbnqYqEUI0/yrWpTJc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gxI4WxL2; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69928C19425;
+	Mon, 19 Jan 2026 15:15:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768835731;
+	bh=ERVCOL+UrRNglZlm0SAA4pm43qoW2KUHl1G7b7RQrY8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=gxI4WxL2KeCTrT1loBHKBH3ovIoJwmhprmU+FOkz/6UyJBRwPCNr91rYtPs6PacDe
+	 evX53ZMWitptOXs+a3Ou7dX4Xl7PmJINTpXNimVuMmPELldGgGgKwE2orlnX9vEBbA
+	 S9zf8vJdjTnTTiLxvnFe2ubuKaYj64JwQjSin/DwAW3DE/lzdxLVrNDK3MlujZxjT+
+	 auNDVo7pJ+mHRuSAIW33BPcxSTaUZq4xYlOFTkSYXUX7H4tbKhvuq5FRWoiNUs2Ic3
+	 6jFzSqIiw323NAlGa63b3YOUyaHnNdp0Pp40lygpqNqT+dC/94X03xDChegrMtacb8
+	 sg4uCUhJ1nfMg==
+Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
+	by mailfauth.phl.internal (Postfix) with ESMTP id 8CFD9F4006A;
+	Mon, 19 Jan 2026 10:15:29 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-01.internal (MEProxy); Mon, 19 Jan 2026 10:15:29 -0500
+X-ME-Sender: <xms:kUpuadZdQgQcT-hJnAcxqwQrRPWBaTZjjZ6sEmDykyxNPXKPPr6BAg>
+    <xme:kUpuafxWF6RhjiGh0ZhMwjKoYzkIaY-9rVryNen3QkT2jWGMQRb_RBHCNXgjUUTYI
+    iQQZKt-MbbhJpCw8FR-vV9DofZVC5ydYQG004hiA9NA71GB8v17i4s>
+X-ME-Received: <xmr:kUpuaZV3F7vtVH6jOmDpG767nABDfS7nrvyfbyLEdZfOSa3-0kzC6GGfpsd8vg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddufeejkeelucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepmfhirhihlhcu
+    ufhhuhhtshgvmhgruhcuoehkrghssehkvghrnhgvlhdrohhrgheqnecuggftrfgrthhtvg
+    hrnhepueeijeeiffekheeffffftdekleefleehhfefhfduheejhedvffeluedvudefgfek
+    necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirh
+    hilhhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheeh
+    qddvkeeggeegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrd
+    hnrghmvgdpnhgspghrtghpthhtohepfeekpdhmohguvgepshhmthhpohhuthdprhgtphht
+    thhopehmuhgthhhunhdrshhonhhgsehlihhnuhigrdguvghvpdhrtghpthhtohepuggrvh
+    hiugeskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprghkphhmsehlihhnuhigqdhfohhu
+    nhgurghtihhonhdrohhrghdprhgtphhtthhopeifihhllhihsehinhhfrhgruggvrggurd
+    horhhgpdhrtghpthhtohepuhhsrghmrggrrhhifheigedvsehgmhgrihhlrdgtohhmpdhr
+    tghpthhtohepfhhvughlsehgohhoghhlvgdrtghomhdprhgtphhtthhopehoshgrlhhvrg
+    guohhrsehsuhhsvgdruggvpdhrtghpthhtoheprhhpphhtsehkvghrnhgvlhdrohhrghdp
+    rhgtphhtthhopehvsggrsghkrgesshhushgvrdgtii
+X-ME-Proxy: <xmx:kUpuaTYQNaUhzdNBpaYFc1P_rbbk59geGHZ0hl22WoKGrCcyyaqVmg>
+    <xmx:kUpuaUNWmc-LybbWiCZGW4vtfkyMTsoMNExVXE3u9jJhf_W7ocF73Q>
+    <xmx:kUpuaXsW82VIWNabQV2XLV1pbDgDsJmzYu-Uw5RdcERSSnjuO55nWw>
+    <xmx:kUpuaa3eOPoICmiQDysPOIx1LxU0w755ZSyaZuzAFyTuFHVwwgHMug>
+    <xmx:kUpuaVWYJsNLs_16nkft-ftjAmGrP2kreJwGpoYPpku3zr3CnEXalXSB>
+Feedback-ID: i10464835:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 19 Jan 2026 10:15:27 -0500 (EST)
+Date: Mon, 19 Jan 2026 15:15:22 +0000
+From: Kiryl Shutsemau <kas@kernel.org>
+To: Muchun Song <muchun.song@linux.dev>
+Cc: "David Hildenbrand (Red Hat)" <david@kernel.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, Matthew Wilcox <willy@infradead.org>, 
+	Usama Arif <usamaarif642@gmail.com>, Frank van der Linden <fvdl@google.com>, 
+	Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>, 
+	Vlastimil Babka <vbabka@suse.cz>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
+	Zi Yan <ziy@nvidia.com>, Baoquan He <bhe@redhat.com>, Michal Hocko <mhocko@suse.com>, 
+	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>, kernel-team@meta.com, 
+	linux-mm@kvack.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCHv3 10/15] mm/hugetlb: Remove fake head pages
+Message-ID: <aW5JqibNe4CVBa07@thinkstation>
+References: <20260115144604.822702-1-kas@kernel.org>
+ <20260115144604.822702-11-kas@kernel.org>
+ <30ae1623-63f9-4729-9c19-9b0a9a0ae9f1@kernel.org>
+ <aWkhbWR-3fWjeTaE@thinkstation>
+ <53980726-C7F0-4648-99E9-89E10645F2E7@linux.dev>
+ <aWpTopypeRTOIVGR@thinkstation>
+ <0F1C93F3-9A1A-4929-9157-589CF8C0588D@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260119142246.3821052-1-smostafa@google.com> <bca59694-6b09-4839-8577-c8ac4420eb56@kernel.org>
-In-Reply-To: <bca59694-6b09-4839-8577-c8ac4420eb56@kernel.org>
-From: Mostafa Saleh <smostafa@google.com>
-Date: Mon, 19 Jan 2026 15:09:21 +0000
-X-Gm-Features: AZwV_QjVeUiz0Q-zd8xi5T7pPmQe5X_A7eWLr5iRgluDvbc3fWR971kZpw8m3kA
-Message-ID: <CAFgf54paL1O22-crK-RufOzwYBqQ-CU4BD6=h30WOOfdA2__Vg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] iommu: debug-pagealloc: Remove pfn_valid() usage
-To: "David Hildenbrand (Red Hat)" <david@kernel.org>
-Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, corbet@lwn.net, joro@8bytes.org, will@kernel.org, 
-	robin.murphy@arm.com, akpm@linux-foundation.org, vbabka@suse.cz, 
-	surenb@google.com, mhocko@suse.com, jackmanb@google.com, hannes@cmpxchg.org, 
-	ziy@nvidia.com, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, 
-	rppt@kernel.org, xiaqinxin@huawei.com, baolu.lu@linux.intel.com, 
-	rdunlap@infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0F1C93F3-9A1A-4929-9157-589CF8C0588D@linux.dev>
 
-On Mon, Jan 19, 2026 at 2:27=E2=80=AFPM David Hildenbrand (Red Hat)
-<david@kernel.org> wrote:
->
-> On 1/19/26 15:22, Mostafa Saleh wrote:
-> > This is a small fix for the new config IOMMU_DEBUG_PAGEALLOC based
-> > on the discussion:
-> > https://lore.kernel.org/linux-iommu/CAFgf54pBAUm3ao-UJksiuGKtvv4wzRyFq_=
-uKwLe0H1ettO4DLQ@mail.gmail.com/
-> >
-> > Where it was concluded that pfn_valid() is not enough to validate
-> > physical addresses before access to page_ext.
-> >
-> > The first patch introduces a new function in page_ext that takes a
-> > physical address as an argument, and the second patch uses it instead
-> > of calling pfn_valid() and phys_to_page()
-> >
-> > Benchmarks with the new implementation can be found in:
-> > https://lore.kernel.org/linux-iommu/20260114164322.787125-1-smostafa@go=
-ogle.com/
-> >
-> > This series applies to iommu/core tree.
->
-> This is part of v7 [1], right? Can't we just apply v7 instead or are the
-> commit IDs already stable?
->
+On Sat, Jan 17, 2026 at 10:38:48AM +0800, Muchun Song wrote:
+> 
+> 
+> > On Jan 16, 2026, at 23:52, Kiryl Shutsemau <kas@kernel.org> wrote:
+> > 
+> > On Fri, Jan 16, 2026 at 10:38:02AM +0800, Muchun Song wrote:
+> >> 
+> >> 
+> >>> On Jan 16, 2026, at 01:23, Kiryl Shutsemau <kas@kernel.org> wrote:
+> >>> 
+> >>> On Thu, Jan 15, 2026 at 05:49:43PM +0100, David Hildenbrand (Red Hat) wrote:
+> >>>> On 1/15/26 15:45, Kiryl Shutsemau wrote:
+> >>>>> HugeTLB Vmemmap Optimization (HVO) reduces memory usage by freeing most
+> >>>>> vmemmap pages for huge pages and remapping the freed range to a single
+> >>>>> page containing the struct page metadata.
+> >>>>> 
+> >>>>> With the new mask-based compound_info encoding (for power-of-2 struct
+> >>>>> page sizes), all tail pages of the same order are now identical
+> >>>>> regardless of which compound page they belong to. This means the tail
+> >>>>> pages can be truly shared without fake heads.
+> >>>>> 
+> >>>>> Allocate a single page of initialized tail struct pages per NUMA node
+> >>>>> per order in the vmemmap_tails[] array in pglist_data. All huge pages
+> >>>>> of that order on the node share this tail page, mapped read-only into
+> >>>>> their vmemmap. The head page remains unique per huge page.
+> >>>>> 
+> >>>>> This eliminates fake heads while maintaining the same memory savings,
+> >>>>> and simplifies compound_head() by removing fake head detection.
+> >>>>> 
+> >>>>> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
+> >>>>> ---
+> >>>>> include/linux/mmzone.h | 16 ++++++++++++++-
+> >>>>> mm/hugetlb_vmemmap.c   | 44 ++++++++++++++++++++++++++++++++++++++++--
+> >>>>> mm/sparse-vmemmap.c    | 44 ++++++++++++++++++++++++++++++++++--------
+> >>>>> 3 files changed, 93 insertions(+), 11 deletions(-)
+> >>>>> 
+> >>>>> diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
+> >>>>> index 322ed4c42cfc..2ee3eb610291 100644
+> >>>>> --- a/include/linux/mmzone.h
+> >>>>> +++ b/include/linux/mmzone.h
+> >>>>> @@ -82,7 +82,11 @@
+> >>>>>  * currently expect (see CONFIG_HAVE_GIGANTIC_FOLIOS): with hugetlb, we expect
+> >>>>>  * no folios larger than 16 GiB on 64bit and 1 GiB on 32bit.
+> >>>>>  */
+> >>>>> -#define MAX_FOLIO_ORDER get_order(IS_ENABLED(CONFIG_64BIT) ? SZ_16G : SZ_1G)
+> >>>>> +#ifdef CONFIG_64BIT
+> >>>>> +#define MAX_FOLIO_ORDER (34 - PAGE_SHIFT)
+> >>>>> +#else
+> >>>>> +#define MAX_FOLIO_ORDER (30 - PAGE_SHIFT)
+> >>>>> +#endif
+> >>>> 
+> >>>> Where do these magic values stem from, and how do they related to the
+> >>>> comment above that clearly spells out 16G vs. 1G ?
+> >>> 
+> >>> This doesn't change the resulting value: 1UL << 34 is 16GiB, 1UL << 30
+> >>> is 1G. Subtract PAGE_SHIFT to get the order.
+> >>> 
+> >>> The change allows the value to be used to define NR_VMEMMAP_TAILS which
+> >>> is used specify size of vmemmap_tails array.
+> >> 
+> >> How about allocate ->vmemmap_tails array dynamically? If sizeof of struct
+> >> page is not power of two, then we could optimize away this array. Besides,
+> >> the original MAX_FOLIO_ORDER could work as well.
+> > 
+> > This is tricky.
+> > 
+> > We need vmemmap_tails array to be around early, in
+> > hugetlb_vmemmap_init_early(). By the time, we don't have slab
+> > functional yet.
+> 
+> I mean zero-size array at the end of pg_data_t, no slab is needed.
 
-It should be stable according to Will:
-https://lore.kernel.org/linux-iommu/20260114164322.787125-1-smostafa@google=
-.com/T/#m59d0b455e3f2160cb6f9980a0ae65bc481c53898
+For !NUMA, the struct is in BSS. See contig_page_data.
 
-Thanks,
-Mostafa
+Dynamic array won't fly there.
 
-> [1] https://lkml.kernel.org/r/20260114164322.787125-1-smostafa@google.com
->
-> --
-> Cheers
->
-> David
+-- 
+  Kiryl Shutsemau / Kirill A. Shutemov
 
