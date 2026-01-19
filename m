@@ -1,58 +1,57 @@
-Return-Path: <linux-doc+bounces-73045-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73044-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30EF5D3B094
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:25:15 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2277BD3B07C
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:23:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BF837304420E
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:46 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 55BEE300DB02
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3012D3112C2;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 30A1D3115A2;
 	Mon, 19 Jan 2026 16:23:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V6ZJzBFx"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ROCZdxLq"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBCA02FB093;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC8372FD7D5;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=VMPSrL/2VQxv8kKNrFTWBFujC9f/noBImtCn94Zrb9NF9JQ/gj725od3lBHXapSFscG14oeiNJqbGHAAi5h7jzz8BfNFKqtQhndona4QmH3JkNNLi7tSIj7Trf6hmDIAWzuN4seNRWkZkMV1TL8AGhPmr2VmYhHoUl0WmreTxfs=
+	t=1768839814; cv=none; b=FzLet2oon4YZGMioZPiy2fKItDFOQaUdJ7fBlsqshlDQcjNvtdSGl1wx4lTwNtMzfYHEXIUzPELrPsPCGVSxjbRRgCyfjJwPp6owKEeBtAXTMb7gQRGgiWU0fwIKMfE51gbkGjKVA3TdXl3ckCa07Ki3/jfTo51sOE0OrMXqss0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=exx7FqZl941FZsZhtYfKeTVwWdKc6AHLhML71ImEVTk=;
+	bh=tfVDmQ1gX9VG9PNgXAXt4hYgxcfeRlZft7aVQXVoK88=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=oNXJBk1G54pyiWFxEaKhY3ghT768kfKo294Iebrnv3gydxZSILPEDbMULaeX2cJCLJNDXq87pBzgoJDLuapeVVsxhCRETTkBMjWzrmlNJpX5GAjxb3DQrQV0klLlUZajzhVkJxZ5Lo/NV6BUbQ0MW/37026Zl8Hnjn5YhQ6Eqh4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V6ZJzBFx; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E1AFC2BCC4;
+	 MIME-Version:Content-Type; b=utUPy3G+YVmzGNmv5bzJHp/u36w+tjWGT2fZ47rkfDokVT0lWLCLNJNP+Lvs+sYtQSgzGzG886zf/3coEuUbPf7lvN7rH5laL3q4ZlSHZyvaz/ngdTOpiknLzWx4/+VIyDv703SlBS5gQVPSg1ILPY6MDXQxbNpnTYijXl8Ry9E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ROCZdxLq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F8DEC2BCC9;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=exx7FqZl941FZsZhtYfKeTVwWdKc6AHLhML71ImEVTk=;
+	bh=tfVDmQ1gX9VG9PNgXAXt4hYgxcfeRlZft7aVQXVoK88=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=V6ZJzBFxN+RV5gpEo1KC0DrHBaeS3mKpanr3wyS2b6VLloW36+fqEpzRzk7kTqQ6d
-	 AvQr80+9Ry85SmPRWe4HSdg3YkWpE/+qS0Z+ZMVOmDEvrRb7FtRgGj1U80o6dVjk/p
-	 ZkvaWfwkny2qvHLnXEp3dnyTzdUkVEu3BvI96rrEJ12DBocJjnETnxN759nINlOGoZ
-	 SyiTGWFVG+eOXDNiQXpOk3f0/LCUWo0lQdRLaJs6cas/ilD14XlOy3zUtkneJAV5yS
-	 AfbNUb60b66nmJXA+gzGzcM0yfiv2zZcnfoEO1gzHjU4JTvBPaoMU/u/Aso+2BYqAg
-	 Y6Ekf//U8ca/g==
+	b=ROCZdxLqd7TRMtN7NYdj0WL6tefWkBjzaduO1JD5v+6xy09BEGq+2erKGUgkWf+6G
+	 GUWPMTZ084Ng5YNv/wczwYTIFI3PHnyrBLX13lkKa0oB6Kvgxiv+nVNigBTrqEZnr5
+	 u1WSFfu4pjPlch76mtdNIHMRcU7XmnGkjbFaz1cu/X76iJUfKLyXCeCquU4wyRMzJj
+	 0p4k953VSA3dn5CH9qen/paM306PQf0Xw+KBoFqzQybrk4ZpaVHkmGwy1KQ2W0DKOZ
+	 nBb4VPttT0KvswKlGOPzwHyLm0S9XVC9B8yQ32Cm+SfFVW5d9WZxTxxPt6qWf4TPrV
+	 1UgTG2pGyN7Xw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j2O-286m;
+	id 1vhs2O-00000001j2S-2ErO;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 16/25] docs: add kabi modules documentation
-Date: Mon, 19 Jan 2026 17:23:19 +0100
-Message-ID: <ddc02f11d64fdfc0d8d3e3e0967e041b5172da6c.1768838938.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH 17/25] docs: python: abi_parser: do some improvements at documentation
+Date: Mon, 19 Jan 2026 17:23:20 +0100
+Message-ID: <c5756d7fd70697890130b41b2856c59144d01844.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -66,116 +65,155 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Place kernel abi modules documentation at Linux Kernel docs.
+Add documentation for two consts and ensure that all sentenses
+will end with a dot.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/tools/kabi.rst         | 13 +++++++++++++
- Documentation/tools/kabi_helpers.rst | 11 +++++++++++
- Documentation/tools/kabi_parser.rst  | 10 ++++++++++
- Documentation/tools/kabi_regex.rst   | 10 ++++++++++
- Documentation/tools/kabi_symbols.rst | 10 ++++++++++
- Documentation/tools/python.rst       |  1 +
- 6 files changed, 55 insertions(+)
- create mode 100644 Documentation/tools/kabi.rst
- create mode 100644 Documentation/tools/kabi_helpers.rst
- create mode 100644 Documentation/tools/kabi_parser.rst
- create mode 100644 Documentation/tools/kabi_regex.rst
- create mode 100644 Documentation/tools/kabi_symbols.rst
+ tools/lib/python/abi/abi_parser.py | 33 ++++++++++++++++--------------
+ 1 file changed, 18 insertions(+), 15 deletions(-)
 
-diff --git a/Documentation/tools/kabi.rst b/Documentation/tools/kabi.rst
-new file mode 100644
-index 000000000000..92812a20fcf7
---- /dev/null
-+++ b/Documentation/tools/kabi.rst
-@@ -0,0 +1,13 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=====================================
-+Kernel ABI documentation tool modules
-+=====================================
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   kabi_parser
-+   kabi_regex
-+   kabi_symbols
-+   kabi_helpers
-diff --git a/Documentation/tools/kabi_helpers.rst b/Documentation/tools/kabi_helpers.rst
-new file mode 100644
-index 000000000000..5c6ec6081500
---- /dev/null
-+++ b/Documentation/tools/kabi_helpers.rst
-@@ -0,0 +1,11 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=================
-+Ancillary classes
-+=================
-+
-+.. automodule:: lib.python.abi.helpers
-+   :members:
-+   :member-order: bysource
-+   :show-inheritance:
-+   :undoc-members:
-diff --git a/Documentation/tools/kabi_parser.rst b/Documentation/tools/kabi_parser.rst
-new file mode 100644
-index 000000000000..95826da21b3d
---- /dev/null
-+++ b/Documentation/tools/kabi_parser.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=====================================
-+Kernel ABI documentation parser class
-+=====================================
-+
-+.. automodule:: lib.python.abi.abi_parser
-+   :members:
-+   :show-inheritance:
-+   :undoc-members:
-diff --git a/Documentation/tools/kabi_regex.rst b/Documentation/tools/kabi_regex.rst
-new file mode 100644
-index 000000000000..bfc3a0d91c47
---- /dev/null
-+++ b/Documentation/tools/kabi_regex.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============================
-+ABI regex search symbol class
-+=============================
-+
-+.. automodule:: lib.python.abi.abi_regex
-+   :members:
-+   :show-inheritance:
-+   :undoc-members:
-diff --git a/Documentation/tools/kabi_symbols.rst b/Documentation/tools/kabi_symbols.rst
-new file mode 100644
-index 000000000000..c75a9380f89f
---- /dev/null
-+++ b/Documentation/tools/kabi_symbols.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=========================================
-+System ABI documentation validation class
-+=========================================
-+
-+.. automodule:: lib.python.abi.system_symbols
-+   :members:
-+   :show-inheritance:
-+   :undoc-members:
-diff --git a/Documentation/tools/python.rst b/Documentation/tools/python.rst
-index e826787ce9dd..978298fba6d3 100644
---- a/Documentation/tools/python.rst
-+++ b/Documentation/tools/python.rst
-@@ -8,3 +8,4 @@ Python libraries
-    :maxdepth: 4
+diff --git a/tools/lib/python/abi/abi_parser.py b/tools/lib/python/abi/abi_parser.py
+index 9b8db70067ef..d7bb20ef3acc 100644
+--- a/tools/lib/python/abi/abi_parser.py
++++ b/tools/lib/python/abi/abi_parser.py
+@@ -21,14 +21,17 @@ from abi.helpers import AbiDebug, ABI_DIR
  
-    kdoc
-+   kabi
+ 
+ class AbiParser:
+-    """Main class to parse ABI files"""
++    """Main class to parse ABI files."""
+ 
++    #: Valid tags at Documentation/ABI.
+     TAGS = r"(what|where|date|kernelversion|contact|description|users)"
++
++    #: ABI elements that will auto-generate cross-references.
+     XREF = r"(?:^|\s|\()(\/(?:sys|config|proc|dev|kvd)\/[^,.:;\)\s]+)(?:[,.:;\)\s]|\Z)"
+ 
+     def __init__(self, directory, logger=None,
+                  enable_lineno=False, show_warnings=True, debug=0):
+-        """Stores arguments for the class and initialize class vars"""
++        """Stores arguments for the class and initialize class vars."""
+ 
+         self.directory = directory
+         self.enable_lineno = enable_lineno
+@@ -65,7 +68,7 @@ class AbiParser:
+         self.re_xref_node = re.compile(self.XREF)
+ 
+     def warn(self, fdata, msg, extra=None):
+-        """Displays a parse error if warning is enabled"""
++        """Displays a parse error if warning is enabled."""
+ 
+         if not self.show_warnings:
+             return
+@@ -77,7 +80,7 @@ class AbiParser:
+         self.log.warning(msg)
+ 
+     def add_symbol(self, what, fname, ln=None, xref=None):
+-        """Create a reference table describing where each 'what' is located"""
++        """Create a reference table describing where each 'what' is located."""
+ 
+         if what not in self.what_symbols:
+             self.what_symbols[what] = {"file": {}}
+@@ -92,7 +95,7 @@ class AbiParser:
+             self.what_symbols[what]["xref"] = xref
+ 
+     def _parse_line(self, fdata, line):
+-        """Parse a single line of an ABI file"""
++        """Parse a single line of an ABI file."""
+ 
+         new_what = False
+         new_tag = False
+@@ -264,7 +267,7 @@ class AbiParser:
+             self.warn(fdata, "Unexpected content", line)
+ 
+     def parse_readme(self, nametag, fname):
+-        """Parse ABI README file"""
++        """Parse ABI README file."""
+ 
+         nametag["what"] = ["Introduction"]
+         nametag["path"] = "README"
+@@ -282,7 +285,7 @@ class AbiParser:
+                 nametag["description"] += line
+ 
+     def parse_file(self, fname, path, basename):
+-        """Parse a single file"""
++        """Parse a single file."""
+ 
+         ref = f"abi_file_{path}_{basename}"
+         ref = self.re_unprintable.sub("_", ref).strip("_")
+@@ -348,7 +351,7 @@ class AbiParser:
+                     self.add_symbol(what=w, fname=fname, xref=fdata.key)
+ 
+     def _parse_abi(self, root=None):
+-        """Internal function to parse documentation ABI recursively"""
++        """Internal function to parse documentation ABI recursively."""
+ 
+         if not root:
+             root = self.directory
+@@ -377,7 +380,7 @@ class AbiParser:
+                 self.parse_file(name, path, basename)
+ 
+     def parse_abi(self, root=None):
+-        """Parse documentation ABI"""
++        """Parse documentation ABI."""
+ 
+         self._parse_abi(root)
+ 
+@@ -385,7 +388,7 @@ class AbiParser:
+             self.log.debug(pformat(self.data))
+ 
+     def desc_txt(self, desc):
+-        """Print description as found inside ABI files"""
++        """Print description as found inside ABI files."""
+ 
+         desc = desc.strip(" \t\n")
+ 
+@@ -393,7 +396,7 @@ class AbiParser:
+ 
+     def xref(self, fname):
+         """
+-        Converts a Documentation/ABI + basename into a ReST cross-reference
++        Converts a Documentation/ABI + basename into a ReST cross-reference.
+         """
+ 
+         xref = self.file_refs.get(fname)
+@@ -403,7 +406,7 @@ class AbiParser:
+             return xref
+ 
+     def desc_rst(self, desc):
+-        """Enrich ReST output by creating cross-references"""
++        """Enrich ReST output by creating cross-references."""
+ 
+         # Remove title markups from the description
+         # Having titles inside ABI files will only work if extra
+@@ -459,7 +462,7 @@ class AbiParser:
+ 
+     def doc(self, output_in_txt=False, show_symbols=True, show_file=True,
+             filter_path=None):
+-        """Print ABI at stdout"""
++        """Print ABI at stdout."""
+ 
+         part = None
+         for key, v in sorted(self.data.items(),
+@@ -549,7 +552,7 @@ class AbiParser:
+             yield (msg, file_ref[0][0], ln)
+ 
+     def check_issues(self):
+-        """Warn about duplicated ABI entries"""
++        """Warn about duplicated ABI entries."""
+ 
+         for what, v in self.what_symbols.items():
+             files = v.get("file")
+@@ -575,7 +578,7 @@ class AbiParser:
+             self.log.warning("%s is defined %d times: %s", what, len(f), "; ".join(f))
+ 
+     def search_symbols(self, expr):
+-        """ Searches for ABI symbols """
++        """ Searches for ABI symbols."""
+ 
+         regex = re.compile(expr, re.I)
+ 
 -- 
 2.52.0
 
