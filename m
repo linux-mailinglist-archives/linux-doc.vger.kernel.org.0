@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-73293-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73294-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kNMJM9W8b2kOMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73293-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:35:17 +0100
+	id CMP0K+jOb2mgMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-73294-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 19:52:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 306C548A82
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:35:17 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E81849D14
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 19:52:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 24C20981D14
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:25:30 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A320598C20A
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:26:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1268B44E053;
-	Tue, 20 Jan 2026 16:11:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F30AF4611F2;
+	Tue, 20 Jan 2026 16:11:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="C3W5RTc9"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q/u7R5+h"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D71FF441042;
-	Tue, 20 Jan 2026 16:11:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C38774611C6;
+	Tue, 20 Jan 2026 16:11:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768925497; cv=none; b=tKoZ83eR7IkV7VmAy6CmgBnVfBrgdo7D4bx4b0M0bkD52R2uzJ6nZ5Sh+Cda9KgJa3OwonAwRz+/THVy2OWsYnNUPiH2J1AhzWHklmMmIBS7Luw1rhlGXicTK0iRYFcqSnNmWHMfa2ArZsnOZg1dMz7A9duFyIXI5YQqrJ8xQ9g=
+	t=1768925503; cv=none; b=rqTvebrT3asfK+lAf3+Eb6IYHKOV5LbB/rgM3de37gcmF26Rq+ZXY0GQxlFM8W8ha6krx11yINbOF1NfSdXWaF60hXt3MjExxi90Xo2cfIwdxk9UkO1UXO1iXC2HLRQECAxNyI45Ux7JcJBl8C31ps+yMAORr6EL6+XQyVtbSQM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768925497; c=relaxed/simple;
-	bh=HXBV3Lx/h+H7VdEBJ3BfmE6klv68lSG5XkCtGO3hs6E=;
+	s=arc-20240116; t=1768925503; c=relaxed/simple;
+	bh=dtUUx6lrNtFdy5/+TdTkG7ihJmXBG5s769rXUFmDzMI=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=QUOeHn95v9rJpkcXdNKp5ZncF1laaJLU/Y3NuLoG2BrByuvqRPV39FeuJmoOX6vFkaaOzrOiyVxlEnUB3uJwg6NPhG94kfbc4VoFBzy5NibJLByw/BDtFectvTenFiQ6W4mSyEThH4Im4JI4YNTSrzHxMlhtdCC1+XGpuhhQhO8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C3W5RTc9; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BCD9C16AAE;
-	Tue, 20 Jan 2026 16:11:33 +0000 (UTC)
+	 MIME-Version:Content-Type; b=ity3BPwRNulrLXtYeH1VAR33KLekeQSjNOZw/94qBlmpyx9M7GAu0Edz3TWpocfeQxSroNgc6xc/JjTFW9AFoIWPstVeiF2byQTp++vOpiPVze2VR8t3zG/XmJ1RNvo1kqB52JYzEbHOLWYRw8r88f1WlDstX4w4Iqb+BqvrkvE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q/u7R5+h; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 917DFC19422;
+	Tue, 20 Jan 2026 16:11:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768925496;
-	bh=HXBV3Lx/h+H7VdEBJ3BfmE6klv68lSG5XkCtGO3hs6E=;
+	s=k20201202; t=1768925503;
+	bh=dtUUx6lrNtFdy5/+TdTkG7ihJmXBG5s769rXUFmDzMI=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=C3W5RTc9BDp+2tl/P41YC7OFToe0242b3ObhNOj343jvSEcE5i4Df7WCOiz5L/WvB
-	 Q5OuquBfIbmIBbdcd5cdB7+krmmqYmEn6PWMmzCVNdU9utkubtF8CRqvRuTwh0kyjT
-	 hWAJuPDx7Bdw0IjE3BK3nL4tQSWDMqtLYh5mXliRDdBlNx1RLJC0urKSnzbxqRrHIo
-	 Bugnab4PPc/2R9Dagphp5Z12HSzhryBKONAIMUKMQaT+k7obwDdkYJlp0w5poHL0Jt
-	 IPdkOu7SA5VgMqf/T2FFcbbCs4tVXT3j5wh/foK8HiEasB1YrhwdDgJCApBPF1MQSf
-	 lOLiNN/awpH+Q==
+	b=Q/u7R5+hPtnkQdHXwUr7rplCFmrjMp4ucJKF8+aAi3t7ObI8CWsk0ZSfwI2io9TZ7
+	 G6EbSPqS4sXfMKzDNh5GSXbSGpIISgDcUrJMWmzja95XaHObaUlILHsr5XgCSsWKhb
+	 7qMkL67ioXva9EhwO+PnYksEku/pLjVj6CZksFLRUP6imyuZdoOPyeEYoHWjwIlGFs
+	 6EKRGNbnVm8vBdW8bhIjp1UxjN8BPlOcjvYuxAQVZkxWQutGufu2KT0fxNRtiJ+IV6
+	 9UO1GfSxJPVLxKQPtc7UVb6Yd36nARBmjMoT6v5md7iNsxE6VUbOI+AGqpaPQJEkQU
+	 eFZHFcX9c7H0w==
 From: Lee Jones <lee@kernel.org>
 To: lee@kernel.org, Nam Tran <trannamatk@gmail.com>
 Cc: pavel@kernel.org, gregkh@linuxfoundation.org, rdunlap@infradead.org, 
@@ -53,11 +53,11 @@ Cc: pavel@kernel.org, gregkh@linuxfoundation.org, rdunlap@infradead.org,
  conor+dt@kernel.org, corbet@lwn.net, linux-leds@vger.kernel.org, 
  linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
  linux-doc@vger.kernel.org
-In-Reply-To: <20260111135519.28112-1-trannamatk@gmail.com>
-References: <20260111135519.28112-1-trannamatk@gmail.com>
-Subject: Re: [PATCH v21 0/3] leds: add new LED driver for TI LP5812
-Message-Id: <176892549321.2317951.5782623090623899229.b4-ty@kernel.org>
-Date: Tue, 20 Jan 2026 16:11:33 +0000
+In-Reply-To: <20260115161013.40706-1-trannamatk@gmail.com>
+References: <20260115161013.40706-1-trannamatk@gmail.com>
+Subject: Re: [PATCH v22 0/2] leds: add new LED driver for TI LP5812
+Message-Id: <176892550028.2317951.10477367628623153628.b4-ty@kernel.org>
+Date: Tue, 20 Jan 2026 16:11:40 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -75,7 +75,7 @@ X-Spamd-Result: default: False [-0.46 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73293-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73294-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_TO(0.00)[kernel.org,gmail.com];
@@ -94,13 +94,13 @@ X-Spamd-Result: default: False [-0.46 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
+	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: 306C548A82
+X-Rspamd-Queue-Id: 1E81849D14
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, 11 Jan 2026 20:55:16 +0700, Nam Tran wrote:
+On Thu, 15 Jan 2026 23:10:11 +0700, Nam Tran wrote:
 > This patch series adds initial support for the TI LP5812,
 > a 4x3 matrix RGB LED driver with autonomous engine control.
 > This version provides a minimal, clean implementation focused
@@ -112,11 +112,9 @@ On Sun, 11 Jan 2026 20:55:16 +0700, Nam Tran wrote:
 
 Applied, thanks!
 
-[1/3] dt-bindings: leds: add TI/National Semiconductor LP5812 LED Driver
-      commit: 014efef297240de5933b121f59f04800f732a09a
-[2/3] leds: add basic support for TI/National Semiconductor LP5812 LED Driver
-      (no commit info)
-[3/3] docs: leds: Document TI LP5812 LED driver
+[1/2] leds: add basic support for TI/National Semiconductor LP5812 LED Driver
+      commit: 4301afd6b3cbd428082b55ec7a6a840b3c8ec749
+[2/2] docs: leds: Document TI LP5812 LED driver
       commit: 974d724e58fd2eee0fe46299901deae6fa9ebad1
 
 --
