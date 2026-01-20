@@ -1,246 +1,157 @@
-Return-Path: <linux-doc+bounces-73309-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73310-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SH+XHijeb2n8RwAAu9opvQ
-	(envelope-from <linux-doc+bounces-73309-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 20:57:28 +0100
+	id 4N52H5Dcb2n8RwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73310-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 20:50:40 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39D0C4AE2D
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 20:57:28 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFF404AC22
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 20:50:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id E01F08A9E46
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:35:34 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 3A40A80D7AF
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:36:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99F0B44104B;
-	Tue, 20 Jan 2026 18:35:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34CCF44E039;
+	Tue, 20 Jan 2026 18:36:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TXaAldEp"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nWDbIb8C"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70026426699;
-	Tue, 20 Jan 2026 18:35:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08D4B43E9EE;
+	Tue, 20 Jan 2026 18:36:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768934133; cv=none; b=FM7PIe5Ll5g9UyMY35BZd9T62cdXiE87taufP9zhnSwgCaPxpQObtJA5DZO+XLGNlLfDQE4CwvgZJFheRTpmjgEGLLAX6/FAZCZAx/QRaQHEJkYy74hz/V6c8yFZv1UUJnImnJTosN0Sn2GzBddjJcXLdSSUkb3prllv6N1fl/o=
+	t=1768934197; cv=none; b=uoAJp19qmzvsRzs7ZHf14BoBq6c7a0HDG8K94k8Jw3D/z1W6GJ4m478nJPDFdKI+LvqmraUYaOucuBlaEZ7mOQrcDVaZuJ5Zysg2mesWH7xggS328nLi0PXCI/N2rHdl3U0eBF6B3x6wvz4hGKtTsYfTGj7Qhs1PlM+ROHLF/pE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768934133; c=relaxed/simple;
-	bh=5UuViMOKhctbPjtTzY+cSAg4SjcGuC20Kuka59xeaLM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=imD/F64DcIG0mLAvsGadK9VUrh7H8f4CGrQZ7sj2KlH3JxVVvQW15EW1PBnG7knd5aRs1AVaXuuAkE5qtZBd+bPnBh4zqOpal0NFLWFDr2nb52PZ4o9wRAaGr7Mp06MAYQ72MM3fiqD28AlHJHkfV8M7dJtUek+JFpryZRmrV14=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TXaAldEp; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23C45C19421;
-	Tue, 20 Jan 2026 18:35:28 +0000 (UTC)
+	s=arc-20240116; t=1768934197; c=relaxed/simple;
+	bh=QYKth/XopUUmN2w5/xA9zHlbSfdy2ir24LbewWEwvOU=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=XMZSIF8vP00xj4caL+DVHiu9WOIre0BPGgTzxPUD7GGN78fxKvfx6a8omu/rYN/Jd23gJjb0GysovKEEh2sYFaHd5rqnJnNATXGWnGl9RnmFTefMjbYGpGgcoCesxBMs0ixSAfjTm9AIuoGCWIwPdY5fT4Pm0kx67fUEEFHIpbA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nWDbIb8C; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA94CC19422;
+	Tue, 20 Jan 2026 18:36:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768934132;
-	bh=5UuViMOKhctbPjtTzY+cSAg4SjcGuC20Kuka59xeaLM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=TXaAldEp6bxXie0YRh1TMKfNcAPUEx+KFCDkPBtoCwDUSKc93CWcWhlEKk1WlmRYW
-	 6hw2SnPfGVkECqWVl1OcTViy+DIMqB732m365bSaSIJVALxo2duCYdBLS5C2NKP1Wd
-	 FFCBY4FU8Sx7YXbcFyU+dH+xbIEQD4l+h2q5bwp9QLdUvkUM5wds+QWAgdjuPaKnve
-	 XGFu+o10G1KWf6+kc/fo1PNZzNDpeQ3BOeNI4vs82YxE5utw0WJ3St3LYB53M8gUZk
-	 jDqVrvWWiTV0UstjDqvHgrnleljxubi8Z3sQ/OkovclSYNLvR+sBjq3m3GZPGBnFD/
-	 P0r7tp1Yfrlng==
-Date: Tue, 20 Jan 2026 20:35:25 +0200
-From: Mike Rapoport <rppt@kernel.org>
-To: Pratyush Yadav <pratyush@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
-	Alexander Graf <graf@amazon.com>, Jason Miu <jasonmiu@google.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>,
-	kexec@lists.infradead.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org
+	s=k20201202; t=1768934196;
+	bh=QYKth/XopUUmN2w5/xA9zHlbSfdy2ir24LbewWEwvOU=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=nWDbIb8C4Pdc9S6Dmuhx0sP4s0TJLIBQyQ/AcWbVHuZ0hRe0PoKYtU9Hxw7X8LLHA
+	 aGURL8szqEnjBpSMEtjFVGh8C/URSKLfq0rrzoK8uC9cmJppJqsnolI/JyuUHEPJr8
+	 9reBvNxeN1DY9U2ZV2noPOjkpnUU3Bqg1QxrwnPWOSnMq58zo1iMYa7l2HieqrX0oA
+	 8ApTo/v7yNwJwAlbNpibuU1nZvgD952gLoAG/3qwjwIPsbPb7UPar6tliXWZ4G/KW6
+	 LfGny8wlbK+Hk9h47zxldaGYXNLdGVZCr+l+U1QnflucJkAB4DfAjL3btK3jNCFHlr
+	 C+4tPohqzOZ5A==
+From: Pratyush Yadav <pratyush@kernel.org>
+To: Mike Rapoport <rppt@kernel.org>
+Cc: Pratyush Yadav <pratyush@kernel.org>,  Andrew Morton
+ <akpm@linux-foundation.org>,  Alexander Graf <graf@amazon.com>,  Jason Miu
+ <jasonmiu@google.com>,  Jonathan Corbet <corbet@lwn.net>,  Pasha Tatashin
+ <pasha.tatashin@soleen.com>,  kexec@lists.infradead.org,
+  linux-doc@vger.kernel.org,  linux-kernel@vger.kernel.org,
+  linux-mm@kvack.org
 Subject: Re: [PATCH 3/6] kho: docs: combine concepts and FDT documentation
-Message-ID: <aW_K7QZj8HYzA00t@kernel.org>
+In-Reply-To: <aW_K7QZj8HYzA00t@kernel.org> (Mike Rapoport's message of "Tue,
+	20 Jan 2026 20:35:25 +0200")
 References: <20260105165839.285270-1-rppt@kernel.org>
- <20260105165839.285270-4-rppt@kernel.org>
- <2vxz7btce06f.fsf@kernel.org>
+	<20260105165839.285270-4-rppt@kernel.org> <2vxz7btce06f.fsf@kernel.org>
+	<aW_K7QZj8HYzA00t@kernel.org>
+Date: Tue, 20 Jan 2026 18:36:33 +0000
+Message-ID: <2vxzikcwcery.fsf@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2vxz7btce06f.fsf@kernel.org>
-X-Spamd-Result: default: False [-1.96 / 15.00];
+Content-Type: text/plain
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73310-lists,linux-doc=lfdr.de];
+	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
+	PRECEDENCE_BULK(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73309-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	TO_DN_SOME(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	FROM_NEQ_ENVFROM(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: 39D0C4AE2D
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
+X-Rspamd-Queue-Id: EFF404AC22
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Jan 20, 2026 at 04:08:56PM +0000, Pratyush Yadav wrote:
-> On Mon, Jan 05 2026, Mike Rapoport wrote:
-> 
-> > From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
-> >
-> > Currently index.rst in KHO documentation looks empty and sad as it only
-> > contains links to "Kexec Handover Concepts" and "KHO FDT" chapters.
-> >
-> > Inline contents of these chapters into index.rst to provide a single
-> > coherent chapter describing KHO.
-> >
-> > While on it, drop parts of the KHO FDT description that will be superseded
-> > by addition of KHO ABI documentation.
-> >
-> > Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-> [...]
-> > diff --git a/Documentation/core-api/kho/index.rst b/Documentation/core-api/kho/index.rst
-> > index 0c63b0c5c143..03cd9afbdb2e 100644
-> > --- a/Documentation/core-api/kho/index.rst
-> > +++ b/Documentation/core-api/kho/index.rst
-> > @@ -4,10 +4,73 @@
-> >  Kexec Handover Subsystem
-> >  ========================
-> >  
-> > -.. toctree::
-> > -   :maxdepth: 1
-> > +Overview
-> > +========
-> 
-> I ran a test build and Sphinx complains about:
-> 
->     Documentation/admin-guide/mm/kho.rst:10: WARNING: undefined label: 'kho-concepts' [ref.ref]
->     Documentation/admin-guide/mm/kho.rst:31: WARNING: undefined label: 'kho-finalization-phase' [ref.ref]
-> 
-> I suppose you should add these labels here.
+On Tue, Jan 20 2026, Mike Rapoport wrote:
 
-It's already in Andrew's tree:
-https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git/commit/?h=mm-nonmm-unstable&id=bc1a060da2a76161ba65f1badc551de15056e398
- 
-> Otherwise LGTM.
-> 
-> >  
-> > -   concepts
-> > -   fdt
-> > +Kexec HandOver (KHO) is a mechanism that allows Linux to preserve memory
-> > +regions, which could contain serialized system states, across kexec.
-> >  
-> > -.. only::  subproject and html
-> > +KHO uses :ref:`flattened device tree (FDT) <kho_fdt>` to pass information about
-> > +the preserved state from pre-exec kernel to post-kexec kernel and :ref:`scratch
-> > +memory regions <kho_scratch>` to ensure integrity of the preserved memory.
-> > +
-> > +.. _kho_fdt:
-> > +
-> > +KHO FDT
-> > +=======
-> > +Every KHO kexec carries a KHO specific flattened device tree (FDT) blob that
-> > +describes the preserved state. The FDT includes properties describing preserved
-> > +memory regions and nodes that hold subsystem specific state.
-> > +
-> > +The preserved memory regions contain either serialized subsystem states, or
-> > +in-memory data that shall not be touched across kexec. After KHO, subsystems
-> > +can retrieve and restore the preserved state from KHO FDT.
-> > +
-> > +Subsystems participating in KHO can define their own format for state
-> > +serialization and preservation.
-> > +
-> > +.. _kho_scratch:
-> > +
-> > +Scratch Regions
-> > +===============
-> > +
-> > +To boot into kexec, we need to have a physically contiguous memory range that
-> > +contains no handed over memory. Kexec then places the target kernel and initrd
-> > +into that region. The new kernel exclusively uses this region for memory
-> > +allocations before during boot up to the initialization of the page allocator.
-> > +
-> > +We guarantee that we always have such regions through the scratch regions: On
-> > +first boot KHO allocates several physically contiguous memory regions. Since
-> > +after kexec these regions will be used by early memory allocations, there is a
-> > +scratch region per NUMA node plus a scratch region to satisfy allocations
-> > +requests that do not require particular NUMA node assignment.
-> > +By default, size of the scratch region is calculated based on amount of memory
-> > +allocated during boot. The ``kho_scratch`` kernel command line option may be
-> > +used to explicitly define size of the scratch regions.
-> > +The scratch regions are declared as CMA when page allocator is initialized so
-> > +that their memory can be used during system lifetime. CMA gives us the
-> > +guarantee that no handover pages land in that region, because handover pages
-> > +must be at a static physical memory location and CMA enforces that only
-> > +movable pages can be located inside.
-> > +
-> > +After KHO kexec, we ignore the ``kho_scratch`` kernel command line option and
-> > +instead reuse the exact same region that was originally allocated. This allows
-> > +us to recursively execute any amount of KHO kexecs. Because we used this region
-> > +for boot memory allocations and as target memory for kexec blobs, some parts
-> > +of that memory region may be reserved. These reservations are irrelevant for
-> > +the next KHO, because kexec can overwrite even the original kernel.
-> > +
-> > +KHO finalization phase
-> > +======================
-> > +
-> > +To enable user space based kexec file loader, the kernel needs to be able to
-> > +provide the FDT that describes the current kernel's state before
-> > +performing the actual kexec. The process of generating that FDT is
-> > +called serialization. When the FDT is generated, some properties
-> > +of the system may become immutable because they are already written down
-> > +in the FDT. That state is called the KHO finalization phase.
-> > +
-> > +See Also
-> > +========
-> > +
-> > +- :doc:`/admin-guide/mm/kho`
-> > diff --git a/Documentation/core-api/liveupdate.rst b/Documentation/core-api/liveupdate.rst
-> > index 7960eb15a81f..e2aba13494cf 100644
-> > --- a/Documentation/core-api/liveupdate.rst
-> > +++ b/Documentation/core-api/liveupdate.rst
-> > @@ -58,4 +58,4 @@ See Also
-> >  ========
-> >  
-> >  - :doc:`Live Update uAPI </userspace-api/liveupdate>`
-> > -- :doc:`/core-api/kho/concepts`
-> >
-> > +- :doc:`/core-api/kho/index`
-> >
-> > diff --git a/Documentation/mm/memfd_preservation.rst b/Documentation/mm/memfd_preservation.rst
-> > index 66e0fb6d5ef0..a8a5b476afd3 100644
-> > --- a/Documentation/mm/memfd_preservation.rst
-> > +++ b/Documentation/mm/memfd_preservation.rst
-> > @@ -20,4 +20,4 @@ See Also
-> >  ========
-> >  
-> >  - :doc:`/core-api/liveupdate`
-> > -- :doc:`/core-api/kho/concepts`
-> >
-> > +- :doc:`/core-api/kho/index`
-> 
-> -- 
-> Regards,
-> Pratyush Yadav
+> On Tue, Jan 20, 2026 at 04:08:56PM +0000, Pratyush Yadav wrote:
+>> On Mon, Jan 05 2026, Mike Rapoport wrote:
+>> 
+>> > From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
+>> >
+>> > Currently index.rst in KHO documentation looks empty and sad as it only
+>> > contains links to "Kexec Handover Concepts" and "KHO FDT" chapters.
+>> >
+>> > Inline contents of these chapters into index.rst to provide a single
+>> > coherent chapter describing KHO.
+>> >
+>> > While on it, drop parts of the KHO FDT description that will be superseded
+>> > by addition of KHO ABI documentation.
+>> >
+>> > Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+>> [...]
+>> > diff --git a/Documentation/core-api/kho/index.rst b/Documentation/core-api/kho/index.rst
+>> > index 0c63b0c5c143..03cd9afbdb2e 100644
+>> > --- a/Documentation/core-api/kho/index.rst
+>> > +++ b/Documentation/core-api/kho/index.rst
+>> > @@ -4,10 +4,73 @@
+>> >  Kexec Handover Subsystem
+>> >  ========================
+>> >  
+>> > -.. toctree::
+>> > -   :maxdepth: 1
+>> > +Overview
+>> > +========
+>> 
+>> I ran a test build and Sphinx complains about:
+>> 
+>>     Documentation/admin-guide/mm/kho.rst:10: WARNING: undefined label: 'kho-concepts' [ref.ref]
+>>     Documentation/admin-guide/mm/kho.rst:31: WARNING: undefined label: 'kho-finalization-phase' [ref.ref]
+>> 
+>> I suppose you should add these labels here.
+>
+> It's already in Andrew's tree:
+> https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git/commit/?h=mm-nonmm-unstable&id=bc1a060da2a76161ba65f1badc551de15056e398
+
+Okay, nice. Then with that,
+
+Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
+
+>  
+>> Otherwise LGTM.
+>> 
+[...]
 
 -- 
-Sincerely yours,
-Mike.
+Regards,
+Pratyush Yadav
 
