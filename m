@@ -1,134 +1,193 @@
-Return-Path: <linux-doc+bounces-73170-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73164-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0096D3BE88
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 05:47:31 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BD0DD3BDAB
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 03:51:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 2260D357F2E
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 04:47:31 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A706C4E0E9E
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 02:50:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6379D33C1B4;
-	Tue, 20 Jan 2026 04:47:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29E5319D8BC;
+	Tue, 20 Jan 2026 02:50:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EFFLR4B2"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="tQOwTb9/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-176.mta1.migadu.com (out-176.mta1.migadu.com [95.215.58.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC14A332EC8
-	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 04:47:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D38E319F135
+	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 02:50:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768884446; cv=none; b=HCvPDMPB9erlMnQTw6yTt+BAaKC+A6DFjgAeC+B+CPMU5Yvt3tAyDLpNDOu0dbFTr0mmXjLmkf8lyw08pSCZHmyAALINhbascqZR2sa4zkv3BxYcgBN73vhdUzJGCeugpmFf6risZCLyn8TZn04IuT6SZ4wnR5U/dX0a7N3qgM0=
+	t=1768877452; cv=none; b=oTI8GGHL/+eOxsuvTC+xcUpYPCkviAGF0JuQhrOreY44XE1ayiS0x/TJch8liI4/rryIfEPdu4DJxMCo6iZUKqFt7BLTeDJGX5Pk69RBzb5V7xpsU0YrvA+uFsYQm28ieFQEu4Rp0fpnOOPdJr1LmLz61pd5z5EdznG7znyDGWQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768884446; c=relaxed/simple;
-	bh=n5A0OXSyk7lo7f3jHURyz0bX/5X3lYhpTO7Z9MO/Uec=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=OUDdQOANKN9M1XH479XdaXrMGv+555YnXbyShcaD15F7jaUGhhMiuzKQ/2vu4p4arrd2QRCCx2mjB+TDEiGtB6t6tQNo9/BzssMMZLwRNZrCLdLmiPkJPLlimZK5+7k6AJWAhMF+pAkn2+DnFM7lVC51BXKleYWTwjGdMj5qYnU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EFFLR4B2; arc=none smtp.client-ip=209.85.161.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-661106487f9so4993393eaf.3
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 20:47:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768884443; x=1769489243; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=i2Ldiltg0ilm3GITC1FlZ3jygue5ViLbnCHXlSmV/Sg=;
-        b=EFFLR4B2LEQ1h3TOilRRfEsNDy6prAiJFBaBHNO8lylbNd9ppeD7DUZ8NQhpJaCijh
-         AW5hkAIpKR4VrEvDwBusD+1jLkTWtm8GbBNmQtbitsRpi8ylBnMCL3IRG/4BAi5bjeaI
-         HH8SNdyh+0lmOLtxc+CnXoWePN6k7jV8CRspWe4aNkewgexFGQ/pRr7yb8QQCQrbQJ2F
-         +NrKy/OtsScs91dkHemZ5BMR1dHuKXcfrLr0aMjAD0FwwLnDERHwsviDesSMEbqwbmQv
-         3HpnYzKnVpasBS+C7RbrIyybhLpGtS71qxqLBG/qhuWm/ZJeXMBx8nKb5mTXArpcURYV
-         LIWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768884443; x=1769489243;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=i2Ldiltg0ilm3GITC1FlZ3jygue5ViLbnCHXlSmV/Sg=;
-        b=FppAE9OSj/A4nkIN5GmQ/oWry6jcpr2g8O3WdZUusfYh4WaPKR3GBYUgAlQnBWXfh4
-         H+Ce2EyUGMPKWaoRf8m2b4Y44sywf1E9jqsJ51CT8P6MTqSelAcolps/OlC8Z2EmsNI3
-         F0Ue/oqdX9QdmrfoEUlSn9bJ4lVSrHwCSlbL0QJ5d2KdW3etfHsxqaS5NI2cFDUDrkf3
-         AgGzf4d9bqU44VMD6R1v784LjsThsoau+F/mHIDwrnCKFbvi+juDLKS7mLNneusroh2g
-         Y9R7E4cBvcZWSDB9GrBL4fG72MUM9SaPfbuA6yc03obSFjA4zD7KPZpvvhWlrRBc7hbC
-         dOGQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUaw0+FI62iSxDO6ac3HiKPEl/BuLQpUJidzGz5AZwm6+Y/xczqBeaMYfxeJs6uPguk7A7GTYNDJiI=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz9FRsimpBzvx0LGktKCrdnJp6OtAn7Qsb4cMJs2zbPH1T4XD2M
-	T3sA9WGv+sxFguhTLUl9MUhK/YoLFx4CKU28S0B76ngX6VCzgrglHYW9wYWdtjBm
-X-Gm-Gg: AY/fxX7JdaNuZJ5/8O1AqJ2i5hlRXHDLMt9IcQHI8Wb5j8xhZ5e/yGKa+e8A0LjQMvc
-	Ff8Ktr63zmuZgSA+F6TQioIRBrdCMxe4c9Io7ubDBERGGb0uK4+OqvkBHQY1aVAUCuG0A2rv0C8
-	5yloG7FaVbGRL7CAcwubNMuIMrFzq1ZHNQXDDKu5uwxTiKgC9/anDzyOwyN0jWRdHb5WEnYzIv6
-	MYXKJlwhxBBEssnS8KqboMrn6UBKUB0HXKkO2KyPFwiKri3BmymGtN+xXCZ8jTIbCAheVGcphE8
-	IJ+RWBoCWzP0rfTcfqyUOBbTFpIhGboa7ZanOJRe61Rsu+zxwh0YrdqIYFyTcyKzfrVqQWVNBmO
-	KMfLXlcTuxv/1BXpvelqb5dYhFAkRMh/kVMaMRwx6aFLZgkoa/kLiStyhV5WwxhGOhvjlmKRmT5
-	fqb3y+uf/GXA==
-X-Received: by 2002:a05:7022:925:b0:119:e569:fba6 with SMTP id a92af1059eb24-1244a7195b4mr14136099c88.21.1768877353611;
-        Mon, 19 Jan 2026 18:49:13 -0800 (PST)
-Received: from localhost ([2001:19f0:ac00:4eb8:5400:5ff:fe30:7df3])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1244ac585a9sm16856206c88.2.2026.01.19.18.49.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 18:49:13 -0800 (PST)
-From: Inochi Amaoto <inochiama@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Paul Walmsley <pjw@kernel.org>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Conor Dooley <conor@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Chen Wang <unicorn_wang@outlook.com>,
-	Yixun Lan <dlan@gentoo.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Guodong Xu <guodong@riscstar.com>
-Cc: Inochi Amaoto <inochiama@gmail.com>,
-	Junhui Liu <junhui.liu@pigmoral.tech>,
-	linux-doc@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	sophgo@lists.linux.dev,
-	spacemit@lists.linux.dev
-Subject: Re: (subset) [PATCH v2 0/4] riscv: dts: Add "b" ISA extension to existing devicetrees
-Date: Tue, 20 Jan 2026 10:48:55 +0800
-Message-ID: <176887176536.427065.4468747981087466363.b4-ty@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260115-adding-b-dtsi-v2-0-254dd61cf947@riscstar.com>
-References: <20260115-adding-b-dtsi-v2-0-254dd61cf947@riscstar.com>
+	s=arc-20240116; t=1768877452; c=relaxed/simple;
+	bh=Mebmj9B6gzVsk0nMrHB+h3Y+buG8F2knF0O3EpGD5QU=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=hpgKEt8/3MS6N58vxZSeu3me3lzBABpGNn0SeseAeVRFS5+vDC2NSEHnStRPGicNP1++uAa4c31VWPfJlNzrPNmLak2mW8KD3VmaYZrvj2zjk8vIMQCgpMUGoSpwy/1P8Zb3+EvKHNbPWxvCJX+O2q/MXdmeqvWyzGD5FnaBOag=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=tQOwTb9/; arc=none smtp.client-ip=95.215.58.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Content-Type: text/plain;
+	charset=us-ascii
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1768877447;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=aXiYX4KamXJdrCUq7b0aguR0/Zq+QSB8PNxFvwlaWr4=;
+	b=tQOwTb9/2aXdO3zPJRLpLp5A18+l5o5AmBPtdS5XKQLRREj8EYCvEXqUhem24ohyoA55N3
+	HU/RZBDkmA1EhaUgt3z4J+gkypkiwczEcv/Z4g4p9+pfzqkwzG1bqkcYArpGotFIhZ2lNt
+	Fa/In/t5d/GjD0GoM4ZGVCdzCgN93UY=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
+Subject: Re: [PATCHv3 10/15] mm/hugetlb: Remove fake head pages
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Muchun Song <muchun.song@linux.dev>
+In-Reply-To: <aW5JqibNe4CVBa07@thinkstation>
+Date: Tue, 20 Jan 2026 10:50:03 +0800
+Cc: "David Hildenbrand (Red Hat)" <david@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Matthew Wilcox <willy@infradead.org>,
+ Usama Arif <usamaarif642@gmail.com>,
+ Frank van der Linden <fvdl@google.com>,
+ Oscar Salvador <osalvador@suse.de>,
+ Mike Rapoport <rppt@kernel.org>,
+ Vlastimil Babka <vbabka@suse.cz>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Zi Yan <ziy@nvidia.com>,
+ Baoquan He <bhe@redhat.com>,
+ Michal Hocko <mhocko@suse.com>,
+ Johannes Weiner <hannes@cmpxchg.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ kernel-team@meta.com,
+ linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <9C029C3B-E140-4FC2-A680-8580AC753B69@linux.dev>
+References: <20260115144604.822702-1-kas@kernel.org>
+ <20260115144604.822702-11-kas@kernel.org>
+ <30ae1623-63f9-4729-9c19-9b0a9a0ae9f1@kernel.org>
+ <aWkhbWR-3fWjeTaE@thinkstation>
+ <53980726-C7F0-4648-99E9-89E10645F2E7@linux.dev>
+ <aWpTopypeRTOIVGR@thinkstation>
+ <0F1C93F3-9A1A-4929-9157-589CF8C0588D@linux.dev>
+ <aW5JqibNe4CVBa07@thinkstation>
+To: Kiryl Shutsemau <kas@kernel.org>
+X-Migadu-Flow: FLOW_OUT
 
-On Thu, 15 Jan 2026 07:18:56 +0800, Guodong Xu wrote:
-> The RISC-V "b" (Bit-manipulation) extension was ratified in April 2024,
-> much later than its component extensions zba/zbb/zbs (June 2021). Recent
-> updates to the device tree bindings [2] enforce that when all three
-> component extensions are present, "b" must also be specified. Related
-> discussion can also be found in [1].
-> 
-> Patch 1 clarifies the ISA spec version for canonical ordering in uabi.rst.
-> It is a trivial update, but can help readers reference the correct
-> document version. Acked-by Paul Walmsley in v1.
-> 
-> [...]
 
-Applied to dt/riscv, thanks!
 
-[3/4] riscv: dts: sophgo: sg2044: Add "b" ISA extension
-      https://github.com/sophgo/linux/commit/f16ae81b80ca4e721f4c4ed1f28390115f7721eb
+> On Jan 19, 2026, at 23:15, Kiryl Shutsemau <kas@kernel.org> wrote:
+>=20
+> On Sat, Jan 17, 2026 at 10:38:48AM +0800, Muchun Song wrote:
+>>=20
+>>=20
+>>> On Jan 16, 2026, at 23:52, Kiryl Shutsemau <kas@kernel.org> wrote:
+>>>=20
+>>> On Fri, Jan 16, 2026 at 10:38:02AM +0800, Muchun Song wrote:
+>>>>=20
+>>>>=20
+>>>>> On Jan 16, 2026, at 01:23, Kiryl Shutsemau <kas@kernel.org> wrote:
+>>>>>=20
+>>>>> On Thu, Jan 15, 2026 at 05:49:43PM +0100, David Hildenbrand (Red =
+Hat) wrote:
+>>>>>> On 1/15/26 15:45, Kiryl Shutsemau wrote:
+>>>>>>> HugeTLB Vmemmap Optimization (HVO) reduces memory usage by =
+freeing most
+>>>>>>> vmemmap pages for huge pages and remapping the freed range to a =
+single
+>>>>>>> page containing the struct page metadata.
+>>>>>>>=20
+>>>>>>> With the new mask-based compound_info encoding (for power-of-2 =
+struct
+>>>>>>> page sizes), all tail pages of the same order are now identical
+>>>>>>> regardless of which compound page they belong to. This means the =
+tail
+>>>>>>> pages can be truly shared without fake heads.
+>>>>>>>=20
+>>>>>>> Allocate a single page of initialized tail struct pages per NUMA =
+node
+>>>>>>> per order in the vmemmap_tails[] array in pglist_data. All huge =
+pages
+>>>>>>> of that order on the node share this tail page, mapped read-only =
+into
+>>>>>>> their vmemmap. The head page remains unique per huge page.
+>>>>>>>=20
+>>>>>>> This eliminates fake heads while maintaining the same memory =
+savings,
+>>>>>>> and simplifies compound_head() by removing fake head detection.
+>>>>>>>=20
+>>>>>>> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
+>>>>>>> ---
+>>>>>>> include/linux/mmzone.h | 16 ++++++++++++++-
+>>>>>>> mm/hugetlb_vmemmap.c   | 44 =
+++++++++++++++++++++++++++++++++++++++++--
+>>>>>>> mm/sparse-vmemmap.c    | 44 =
+++++++++++++++++++++++++++++++++++--------
+>>>>>>> 3 files changed, 93 insertions(+), 11 deletions(-)
+>>>>>>>=20
+>>>>>>> diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
+>>>>>>> index 322ed4c42cfc..2ee3eb610291 100644
+>>>>>>> --- a/include/linux/mmzone.h
+>>>>>>> +++ b/include/linux/mmzone.h
+>>>>>>> @@ -82,7 +82,11 @@
+>>>>>>> * currently expect (see CONFIG_HAVE_GIGANTIC_FOLIOS): with =
+hugetlb, we expect
+>>>>>>> * no folios larger than 16 GiB on 64bit and 1 GiB on 32bit.
+>>>>>>> */
+>>>>>>> -#define MAX_FOLIO_ORDER get_order(IS_ENABLED(CONFIG_64BIT) ? =
+SZ_16G : SZ_1G)
+>>>>>>> +#ifdef CONFIG_64BIT
+>>>>>>> +#define MAX_FOLIO_ORDER (34 - PAGE_SHIFT)
+>>>>>>> +#else
+>>>>>>> +#define MAX_FOLIO_ORDER (30 - PAGE_SHIFT)
+>>>>>>> +#endif
+>>>>>>=20
+>>>>>> Where do these magic values stem from, and how do they related to =
+the
+>>>>>> comment above that clearly spells out 16G vs. 1G ?
+>>>>>=20
+>>>>> This doesn't change the resulting value: 1UL << 34 is 16GiB, 1UL =
+<< 30
+>>>>> is 1G. Subtract PAGE_SHIFT to get the order.
+>>>>>=20
+>>>>> The change allows the value to be used to define NR_VMEMMAP_TAILS =
+which
+>>>>> is used specify size of vmemmap_tails array.
+>>>>=20
+>>>> How about allocate ->vmemmap_tails array dynamically? If sizeof of =
+struct
+>>>> page is not power of two, then we could optimize away this array. =
+Besides,
+>>>> the original MAX_FOLIO_ORDER could work as well.
+>>>=20
+>>> This is tricky.
+>>>=20
+>>> We need vmemmap_tails array to be around early, in
+>>> hugetlb_vmemmap_init_early(). By the time, we don't have slab
+>>> functional yet.
+>>=20
+>> I mean zero-size array at the end of pg_data_t, no slab is needed.
+>=20
+> For !NUMA, the struct is in BSS. See contig_page_data.
 
-Thanks,
-Inochi
+Right. I missed that.
+
+>=20
+> Dynamic array won't fly there.
+>=20
+> --=20
+>  Kiryl Shutsemau / Kirill A. Shutemov
+
 
 
