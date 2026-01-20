@@ -1,213 +1,144 @@
-Return-Path: <linux-doc+bounces-73195-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73197-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD2A8D3C2A8
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 09:55:43 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 39178D3C2C3
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 09:59:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 8ADBD4AA23B
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 08:40:35 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A766C68055F
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 08:49:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4FA73B8D43;
-	Tue, 20 Jan 2026 08:40:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4AAC3B8D4D;
+	Tue, 20 Jan 2026 08:49:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="lXbl/VQV";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="LDOUWFgZ";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="lXbl/VQV";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="LDOUWFgZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ucLZQAR+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69756234973
-	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 08:40:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 805233B8BD7
+	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 08:49:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768898411; cv=none; b=gY+m74CnTqO7zAX/ZR1YnFjnpCcmYX5hBXxFPo87CMMY1wV5eGWV3SsssJPzFBNjvSykooXUWn6kbLERKdAVJ6uX8Ia3LaJC0UlwVCMy2Poauglto3nvksVRJBt6WRRWMhMREHfc6OJhpOl3GXnIgkRcopS3mtOUsvLpVzqiK/E=
+	t=1768898961; cv=none; b=nYK4cH3R2mUddsg5d+BswSJwvxiDbBpFuk+DlNJJEFiJ05k7xDzhFVCsIgbBrPVQ5iXenGNgoDGTNMJ/0k1xd5N0ZlmJMzLZjVHvZvm2kjq1qETimAauNr2SJWwsBngXVwQk3uOFz9eMd4095HAqr/BrcGGjhjT2Pr7onxBiLc8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768898411; c=relaxed/simple;
-	bh=8BR8FshNwnTtZve8kPjGIanAYuvxkiLgYA0voF5sQxA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ob2wuBH9xFxZPdCTJn156N8JRcbpB4D7E7iTLjliyDk1jx8eFcqUFb1Mzg9u9C+/pWihfwMcupGM758tZLzF4Njr2ziPJ45TYFOCkOSsJLNHmOmudGw8BsM2sMjaIDHzIPsnwxb6iDEpqMHccZ3nYeAAN0GGnZTEVOvzVfsyNRQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=lXbl/VQV; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=LDOUWFgZ; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=lXbl/VQV; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=LDOUWFgZ; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id A132E337CA;
-	Tue, 20 Jan 2026 08:40:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768898407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=241NHzkrAsafry/49JFnJwfuSaj964PJNO6i4H5lhSI=;
-	b=lXbl/VQVuVPBPaq9av5smG5OFa/NhiwefeYAnKTxiTxM2QX9a0Jsbdpis0tVJFy+unWMtD
-	bNh/ywftBTm5m2O2e7f0QmCLthEIxPwfSwEbrsfum9UBevwRj24bv8DnE2XCtOBZOykvGt
-	AUYIB66up1nxz+RBb/9UrZZim7/aN7w=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768898407;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=241NHzkrAsafry/49JFnJwfuSaj964PJNO6i4H5lhSI=;
-	b=LDOUWFgZ9L1jfR2KXNRaliX4q7afY0RWN0QEnpzcnPdpU998Wx8+N3DLW81My4a1pFp2EE
-	dwI54JIvYwP/B5AA==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b="lXbl/VQV";
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=LDOUWFgZ
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768898407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=241NHzkrAsafry/49JFnJwfuSaj964PJNO6i4H5lhSI=;
-	b=lXbl/VQVuVPBPaq9av5smG5OFa/NhiwefeYAnKTxiTxM2QX9a0Jsbdpis0tVJFy+unWMtD
-	bNh/ywftBTm5m2O2e7f0QmCLthEIxPwfSwEbrsfum9UBevwRj24bv8DnE2XCtOBZOykvGt
-	AUYIB66up1nxz+RBb/9UrZZim7/aN7w=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768898407;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=241NHzkrAsafry/49JFnJwfuSaj964PJNO6i4H5lhSI=;
-	b=LDOUWFgZ9L1jfR2KXNRaliX4q7afY0RWN0QEnpzcnPdpU998Wx8+N3DLW81My4a1pFp2EE
-	dwI54JIvYwP/B5AA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 96D993EA63;
-	Tue, 20 Jan 2026 08:40:07 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id RJLPJGc/b2l6AwAAD6G6ig
-	(envelope-from <jack@suse.cz>); Tue, 20 Jan 2026 08:40:07 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
-	id 47975A09DA; Tue, 20 Jan 2026 09:40:07 +0100 (CET)
-Date: Tue, 20 Jan 2026 09:40:07 +0100
-From: Jan Kara <jack@suse.cz>
-To: Christoph Hellwig <hch@infradead.org>
-Cc: Jeff Layton <jlayton@kernel.org>, 
-	Christian Brauner <brauner@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Chuck Lever <chuck.lever@oracle.com>, NeilBrown <neil@brown.name>, 
-	Olga Kornievskaia <okorniev@redhat.com>, Dai Ngo <Dai.Ngo@oracle.com>, Tom Talpey <tom@talpey.com>, 
-	Amir Goldstein <amir73il@gmail.com>, Hugh Dickins <hughd@google.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Andrew Morton <akpm@linux-foundation.org>, 
-	Theodore Ts'o <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, 
-	Jan Kara <jack@suse.com>, Gao Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>, 
-	Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>, 
-	Sandeep Dhavale <dhavale@google.com>, Hongbo Li <lihongbo22@huawei.com>, 
-	Chunhai Guo <guochunhai@vivo.com>, Carlos Maiolino <cem@kernel.org>, 
-	Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>, 
-	Viacheslav Dubeyko <slava@dubeyko.com>, Chris Mason <clm@fb.com>, David Sterba <dsterba@suse.com>, 
-	Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, 
-	Phillip Lougher <phillip@squashfs.org.uk>, Steve French <sfrench@samba.org>, 
-	Paulo Alcantara <pc@manguebit.org>, Ronnie Sahlberg <ronniesahlberg@gmail.com>, 
-	Shyam Prasad N <sprasad@microsoft.com>, Bharath SM <bharathsm@microsoft.com>, 
-	Miklos Szeredi <miklos@szeredi.hu>, Mike Marshall <hubcap@omnibond.com>, 
-	Martin Brandenburg <martin@omnibond.com>, Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>, 
-	Joseph Qi <joseph.qi@linux.alibaba.com>, Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, 
-	Ryusuke Konishi <konishi.ryusuke@gmail.com>, Trond Myklebust <trondmy@kernel.org>, 
-	Anna Schumaker <anna@kernel.org>, Dave Kleikamp <shaggy@kernel.org>, 
-	David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Jan Kara <jack@suse.cz>, 
-	Andreas Gruenbacher <agruenba@redhat.com>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
-	Jaegeuk Kim <jaegeuk@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	David Laight <david.laight.linux@gmail.com>, Dave Chinner <david@fromorbit.com>, linux-nfs@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-ext4@vger.kernel.org, linux-erofs@lists.ozlabs.org, linux-xfs@vger.kernel.org, 
-	ceph-devel@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-cifs@vger.kernel.org, 
-	samba-technical@lists.samba.org, linux-unionfs@vger.kernel.org, devel@lists.orangefs.org, 
-	ocfs2-devel@lists.linux.dev, ntfs3@lists.linux.dev, linux-nilfs@vger.kernel.org, 
-	jfs-discussion@lists.sourceforge.net, linux-mtd@lists.infradead.org, gfs2@lists.linux.dev, 
-	linux-f2fs-devel@lists.sourceforge.net, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 02/31] exportfs: add new EXPORT_OP_STABLE_HANDLES flag
-Message-ID: <56fr33ju43h6zzp6jrzrkyfag6r3jz6wpnk45oe5byy6fqyvti@d43hgikfuk7t>
-References: <20260119-exportfs-nfsd-v2-0-d93368f903bd@kernel.org>
- <20260119-exportfs-nfsd-v2-2-d93368f903bd@kernel.org>
- <aW8ztQ-RbhxwzMk7@infradead.org>
+	s=arc-20240116; t=1768898961; c=relaxed/simple;
+	bh=LItWGG7vJFV8Z6lwaP47B6AzEaYXFT8Zo38po2X7m2A=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=QoqLA7UdEZ8nbLWXLlwScnYd6p2XUOXCmJJWA2JmOp65QfY0+2LBnNB32CLsAxjCi3p72+R66okLsC5AzYtYNMxOcM2xojIVhpJoEYQ7qjNTNzLPY2qK6kW8YVNolwVrZ1iGf1WPpy45sgOCeGqNgyl90iBHbUKc2rgLf4VEZGU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ucLZQAR+; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 349E3C2BCB0
+	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 08:49:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768898961;
+	bh=LItWGG7vJFV8Z6lwaP47B6AzEaYXFT8Zo38po2X7m2A=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=ucLZQAR+oVbyOm4uhSJ2XNi9bOTMVpjisCRVewgPNDrRkIQsNhD4RvUC7nnSWD7ip
+	 U0CYRZNMw6SqPYDd+kUZSvntYRShAHzA0BpCC2nOJvDcLTh5gaiayu13MGd2vVHdvd
+	 n4/I/38oKSIAWDTWR5o2YoT6GoLlx3pDaRbIgbCTTBsglAzH4cWIb9dENDLyB/iq7M
+	 tiwCHTWrovEAAGevA9lnJA05gxX266ISzCJVwQwmBjsctw0tdKaX68a2wkfg7TADtp
+	 a7eHhl9kjEdD8Q50M+PCNaW+Y9JyJma76Bw7CW/5d7FWh7M3Sh1MhgfrDq5MIOqolD
+	 y5UNHDN5zEJYQ==
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-383153e06d1so41966821fa.3
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 00:49:21 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUJeS8xZpLM3IEO0sr8rZbWrlIVeez7R4Y9VxWgkKR6hFEoz3HXw+s5wGNw01/9tultocHdhPn71n8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxC2sTMqzRXBFoNjfqLVeXEh5+YZ+ACBvTf9RBJKqt2NpqoumD6
+	zV41cVInBu16AKD4bQ8AVRZ9Hs2p3AjcCS+WJ4hg6zfnJDdIFBlVWUwNTe003rWNMH/X41+wisL
+	svCMM8NygNbW6Ao3bsRwSIKpUQARPwiXVby3vBafo/w==
+X-Received: by 2002:a05:6512:12c3:b0:59b:8259:5fcc with SMTP id
+ 2adb3069b0e04-59baeef0c8amr4645725e87.52.1768898959765; Tue, 20 Jan 2026
+ 00:49:19 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aW8ztQ-RbhxwzMk7@infradead.org>
-X-Spam-Score: -2.51
-X-Spamd-Result: default: False [-2.51 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	RCVD_COUNT_THREE(0.00)[3];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	MIME_TRACE(0.00)[0:+];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,zeniv.linux.org.uk,oracle.com,brown.name,redhat.com,talpey.com,gmail.com,google.com,linux.alibaba.com,linux-foundation.org,mit.edu,dilger.ca,suse.com,huawei.com,vivo.com,dubeyko.com,fb.com,squashfs.org.uk,samba.org,manguebit.org,microsoft.com,szeredi.hu,omnibond.com,fasheh.com,evilplan.org,paragon-software.com,infradead.org,nod.at,suse.cz,mail.parknet.co.jp,lwn.net,fromorbit.com,vger.kernel.org,kvack.org,lists.ozlabs.org,lists.samba.org,lists.orangefs.org,lists.linux.dev,lists.sourceforge.net,lists.infradead.org];
-	RCPT_COUNT_GT_50(0.00)[78];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[suse.cz:+];
-	R_RATELIMIT(0.00)[to_ip_from(RLn1fby4ztoa71w9ewejbxf7et)];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:email]
-X-Spam-Level: 
-X-Rspamd-Action: no action
-X-Rspamd-Queue-Id: A132E337CA
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Flag: NO
+References: <20260116081036.352286-1-tzungbi@kernel.org> <20260116081036.352286-5-tzungbi@kernel.org>
+ <CAMRc=Mc4UoXif=vwUQG1jYW8G3QziZwbdcfvZGquytdrd4SBpg@mail.gmail.com> <aW7yazJvgRu-WyZQ@google.com>
+In-Reply-To: <aW7yazJvgRu-WyZQ@google.com>
+From: Bartosz Golaszewski <brgl@kernel.org>
+Date: Tue, 20 Jan 2026 09:49:06 +0100
+X-Gmail-Original-Message-ID: <CAMRc=Mc65Oo9hHNXu3pxv-9PqgBnbWLyKYaPO5C9R5s07bkB2Q@mail.gmail.com>
+X-Gm-Features: AZwV_QjlXTj3OPUDAGm9xmA9ueX3pxZH12LDy0PJ8wJfK3l5w55VKf2MBS8AxUQ
+Message-ID: <CAMRc=Mc65Oo9hHNXu3pxv-9PqgBnbWLyKYaPO5C9R5s07bkB2Q@mail.gmail.com>
+Subject: Re: [PATCH 04/23] gpiolib: Fix resource leaks on errors in lineinfo_changed_notify()
+To: Tzung-Bi Shih <tzungbi@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev, 
+	linux-kselftest@vger.kernel.org, 
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+	Wolfram Sang <wsa+renesas@sang-engineering.com>, Simona Vetter <simona.vetter@ffwll.ch>, 
+	Dan Williams <dan.j.williams@intel.com>, Jason Gunthorpe <jgg@nvidia.com>, linux-gpio@vger.kernel.org, 
+	stable@vger.kernel.org, Benson Leung <bleung@chromium.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
+	Danilo Krummrich <dakr@kernel.org>, Linus Walleij <linusw@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon 19-01-26 23:50:13, Christoph Hellwig wrote:
-> On Mon, Jan 19, 2026 at 11:26:19AM -0500, Jeff Layton wrote:
-> > +  EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
-> > +    stable across the lifetime of a file. This is a hard requirement for export
-> > +    via nfsd. Any filesystem that is eligible to be exported via nfsd must
-> > +    indicate this guarantee by setting this flag. Most disk-based filesystems
-> > +    can do this naturally. Pseudofilesystems that are for local reporting and
-> > +    control (e.g. kernfs, pidfs, nsfs) usually can't support this.
-> 
-> Suggested rewording, taking some of the ideas from Dave Chinners earlier
-> comments into account:
-> 
->   EXPORT_OP_STABLE_HANDLES - This filesystem provides filehandles that are
->     stable across the lifetime of a file.  A file in this context is an
->     instantiated inode reachable by one or more file names, or still open after
->     the last name has been unlinked.  Reuses of the same on-disk inode structure
->     are considered new files and must provide different file handles from the
->     previous incarnation.  Most file systems designed to store user data
->     naturally provide this capability.  Pseudofilesystems that are for local
->     reporting and control (e.g. kernfs, pidfs, nsfs) usually can't support this.
-> 
->     This flags is a hard requirement for export via nfsd. Any filesystem that
->     is eligible to be exported via nfsd must indicate this guarantee by
->     setting this flag.
+On Tue, Jan 20, 2026 at 4:11=E2=80=AFAM Tzung-Bi Shih <tzungbi@kernel.org> =
+wrote:
+>
+> On Fri, Jan 16, 2026 at 01:26:01PM +0000, Bartosz Golaszewski wrote:
+> > On Fri, 16 Jan 2026 09:10:17 +0100, Tzung-Bi Shih <tzungbi@kernel.org> =
+said:
+> > > On error handling paths, lineinfo_changed_notify() doesn't free the
+> > > allocated resources which results leaks.  Fix it.
+> > >
+> > > Cc: stable@vger.kernel.org
+> > > Fixes: d4cd0902c156 ("gpio: cdev: make sure the cdev fd is still acti=
+ve before emitting events")
+> > > Signed-off-by: Tzung-Bi Shih <tzungbi@kernel.org>
+> > > ---
+> > >  drivers/gpio/gpiolib-cdev.c | 5 ++++-
+> > >  1 file changed, 4 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/drivers/gpio/gpiolib-cdev.c b/drivers/gpio/gpiolib-cdev.=
+c
+> > > index ba1eae15852d..6196aab5ed74 100644
+> > > --- a/drivers/gpio/gpiolib-cdev.c
+> > > +++ b/drivers/gpio/gpiolib-cdev.c
+> > > @@ -2549,7 +2549,7 @@ static int lineinfo_changed_notify(struct notif=
+ier_block *nb,
+> > >     ctx =3D kzalloc(sizeof(*ctx), GFP_ATOMIC);
+> > >     if (!ctx) {
+> > >             pr_err("Failed to allocate memory for line info notificat=
+ion\n");
+> > > -           return NOTIFY_DONE;
+> > > +           goto err_put_fp;
+> > >     }
+> > >
+> > >     ctx->chg.event_type =3D action;
+> > > @@ -2563,6 +2563,9 @@ static int lineinfo_changed_notify(struct notif=
+ier_block *nb,
+> > >     queue_work(ctx->gdev->line_state_wq, &ctx->work);
+> > >
+> > >     return NOTIFY_OK;
+> > > +err_put_fp:
+> > > +   fput(fp);
+> > > +   return NOTIFY_DONE;
+> > >  }
+> > >
+> > >  static int gpio_device_unregistered_notify(struct notifier_block *nb=
+,
+> > > --
+> > > 2.52.0.457.g6b5491de43-goog
+> > >
+> > >
+> >
+> > There's only one place where you need this fput(), please do it directl=
+y in
+> > the error path of kzalloc() and drop the label.
+>
+> Sure, just wanted to give a heads up: 17/23 might introduce the label bac=
+k.
+>
+> v2: https://lore.kernel.org/all/20260120030857.2144847-1-tzungbi@kernel.o=
+rg
 
-I like this. It certainly makes the requirement of stability clearer to me
-(with explanations before I couldn't quite see the difference between shmem
-and kernfs). I'd note that fat or shmem (which are both exportable)
-satisfy this only with reasonably high probability as they use
-get_random_u32() for initializing their i_generation but I guess it's as
-good as it gets for them.
+That's alright, we prefer a smaller patch for backporting.
 
-								Honza
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+Bart
 
