@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-73263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73267-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gFLdJ8BxcGktYAAAu9opvQ
-	(envelope-from <linux-doc+bounces-73263-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 07:27:12 +0100
+	id 2CKbAJZ8cGktYAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73267-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 08:13:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id A02F0520A1
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 07:27:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C5FA52A78
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 08:13:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 8A2727800F7
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 14:37:50 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 95476708F0F
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 14:39:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17BC5449EAB;
-	Tue, 20 Jan 2026 14:30:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A0E6D44D693;
+	Tue, 20 Jan 2026 14:30:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="ZB9WbBvU"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="jFYrdIlD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
+Received: from canpmsgout04.his.huawei.com (canpmsgout04.his.huawei.com [113.46.200.219])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C37CA44102F;
-	Tue, 20 Jan 2026 14:30:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.222
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1C3D44104B;
+	Tue, 20 Jan 2026 14:30:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.219
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768919408; cv=none; b=mJIeczB0WXy6QlCrOVGTJVLnpqdgUNKiIy/VUSsjFpealxpPYp8V8kA7LRwKiyQxcuNSSpmKUTR5G6aGnZ7wp3MSpLrJy0ojdqtlDC/nwHT9V8Jw3iF9ttNJjBfo9C+3wErCR9KMpzcNKGO3IdVu7F/6vIlLMKLg4X0OzPAdy3E=
+	t=1768919412; cv=none; b=NTzPNIdlhzRvFYmmmO+q6xOXl1l6OyQoKNXXlwIR+P0aY1596m8F5GRn3wERwCZdo59n9He109a7MKw5GaFwPhsWbGpf5vVQBrmaGWGE1QXLxbfe7cR/Pl5KMWUNA+jBKmC0r9WD7iUf/OL+Q/VctV+PECgJsYYuWJweS7LUWEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768919408; c=relaxed/simple;
-	bh=O1XFFyAoaxKuZ+CVZRzqRWtI1lDMsZQl8WUrynlEDFM=;
+	s=arc-20240116; t=1768919412; c=relaxed/simple;
+	bh=kCqO2ZJkcDyyuTwrrkKrfVhZlwsoYyDv6tsJCP9WnZ0=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XRzhEkBi11wqNy/eBIWEz5IOe4sTzg7P7L8pGuUkDiSaB8sdQESaqkIWF9MxI6+wir8F6CPSlVlnx+tY4jKIY/+xfy8oLBXsoM8QOStGnTBe0u+zKBxPVY/yglGFEwNnXS4fNrCuaAT0lurxTcE8OEilsUPUJOVaWT7GRrih/KE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=ZB9WbBvU; arc=none smtp.client-ip=113.46.200.222
+	 MIME-Version:Content-Type; b=WYhXsRRYB2p94050+ZlHDBI24qHvNYwYDKOUuVjmpNhQPrNNThcghQ6vUSet2d8jBM8ziCfKjlM1DzkbBANvlf6nmH+G5ddQ4SMZ8IY+a5Cf8U6nWF8Rn4mAqtTlIlQ5q0hGttp7JLNLGpbpgxdI2WIAtVRVFTqCOiGJHIcIri4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=jFYrdIlD; arc=none smtp.client-ip=113.46.200.219
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=bL4qp+lXFE2452QYi0P16NYT5Mi/5g2ecYZa0M3HDBY=;
-	b=ZB9WbBvU0zbRBB/enag3mhxp6gwAwDOX6TK4VVqY60OBXVzijK62V3ReAGITKZJddL8ihYVDf
-	36uX6834G1wIZA7lbY3S4JNkjbyt5/Tbt+SKw8+nZQhGJUkwcCDpECKb0B73X7zqfpfTUbw+1Iz
-	QTnSNHNY9GMsXkeJhS0Oj/I=
-Received: from mail.maildlp.com (unknown [172.19.163.127])
-	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4dwV4w1VpbzLlSN;
-	Tue, 20 Jan 2026 22:26:40 +0800 (CST)
+	bh=oTXEVLgDumVCBFxpbO8s07ckXDCKC5Us7m6vOmueETk=;
+	b=jFYrdIlD6scNu1lCaG+lOb4ovAPAm3AE9S1DxjPS7XzWJTmJ91siw+9jJyf+J11uZU12gG9yH
+	LrnTfdTLhSwbMToijlqDkRUVizKzS3vHaCZhmU4HQ65F+hNejkdJvNhi2AWqUghbMyFPrVX1hO0
+	jCqW7GUZ1Ef7kIbZk0dcWgE=
+Received: from mail.maildlp.com (unknown [172.19.162.223])
+	by canpmsgout04.his.huawei.com (SkyGuard) with ESMTPS id 4dwV4x21Srz1prMB;
+	Tue, 20 Jan 2026 22:26:41 +0800 (CST)
 Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id D53DC402AB;
-	Tue, 20 Jan 2026 22:30:02 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id 85C1840569;
+	Tue, 20 Jan 2026 22:30:06 +0800 (CST)
 Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
  kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Tue, 20 Jan 2026 22:30:01 +0800
+ 15.2.1544.36; Tue, 20 Jan 2026 22:30:05 +0800
 From: Fan Gong <gongfan1@huawei.com>
 To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
 	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
@@ -63,9 +63,9 @@ CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
 	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
 	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
 	<shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>
-Subject: [PATCH net-next v01 3/5] hinic3: Remove redundant defensive code
-Date: Tue, 20 Jan 2026 22:29:49 +0800
-Message-ID: <b7183f234d4d6bd432d8386fee2ed3e7eb56d064.1768915707.git.zhuyikai1@h-partners.com>
+Subject: [PATCH net-next v01 5/5] hinic3: RQ use RQ_CTXT_PREF_CI_HI instead of SQ_CTXT_PREF_CI_HI
+Date: Tue, 20 Jan 2026 22:29:51 +0800
+Message-ID: <bcc9edc740edefa8f192ce1ec8dae2e089f061db.1768915707.git.zhuyikai1@h-partners.com>
 X-Mailer: git-send-email 2.51.0.windows.1
 In-Reply-To: <cover.1768915707.git.zhuyikai1@h-partners.com>
 References: <cover.1768915707.git.zhuyikai1@h-partners.com>
@@ -89,7 +89,7 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73263-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73267-lists,linux-doc=lfdr.de];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
@@ -104,42 +104,44 @@ X-Spamd-Result: default: False [0.04 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
 	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,h-partners.com:email,h-partners.com:mid,huawei.com:email,huawei.com:dkim]
-X-Rspamd-Queue-Id: A02F0520A1
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,huawei.com:dkim,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,h-partners.com:email,h-partners.com:mid]
+X-Rspamd-Queue-Id: 9C5FA52A78
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-According to comment of patch 03, check codes that were merged and
-remove redundant defensive codes.
+Separate the CTX_PREF_CI_HI of rq and sq to improve readability.
 
 Co-developed-by: Zhu Yikai <zhuyikai1@h-partners.com>
 Signed-off-by: Zhu Yikai <zhuyikai1@h-partners.com>
 Signed-off-by: Fan Gong <gongfan1@huawei.com>
 ---
- drivers/net/ethernet/huawei/hinic3/hinic3_tx.c | 6 ------
- 1 file changed, 6 deletions(-)
+ drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_tx.c b/drivers/net/ethernet/huawei/hinic3/hinic3_tx.c
-index 4e361c9bd043..6d3dc930ca97 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_tx.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_tx.c
-@@ -44,16 +44,10 @@ static void hinic3_txq_stats_init(struct hinic3_txq *txq)
- int hinic3_alloc_txqs(struct net_device *netdev)
- {
- 	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
--	struct hinic3_hwdev *hwdev = nic_dev->hwdev;
- 	u16 q_id, num_txqs = nic_dev->max_qps;
- 	struct pci_dev *pdev = nic_dev->pdev;
- 	struct hinic3_txq *txq;
+diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
+index d86cd1ba4605..90887d2bb127 100644
+--- a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
++++ b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
+@@ -162,6 +162,9 @@ struct hinic3_clean_queue_ctxt {
+ #define SQ_CTXT_WQ_BLOCK_SET(val, member)  \
+ 	FIELD_PREP(SQ_CTXT_WQ_BLOCK_##member##_MASK, val)
  
--	if (!num_txqs) {
--		dev_err(hwdev->dev, "Cannot allocate zero size txqs\n");
--		return -EINVAL;
--	}
--
- 	nic_dev->txqs = kcalloc(num_txqs, sizeof(*nic_dev->txqs),  GFP_KERNEL);
- 	if (!nic_dev->txqs)
- 		return -ENOMEM;
++/* reuse SQ macro for RQ because the hardware format is identical */
++#define RQ_CTXT_PREF_CI_HI(val)            SQ_CTXT_PREF_CI_HI(val)
++
+ #define RQ_CTXT_PI_IDX_MASK                GENMASK(15, 0)
+ #define RQ_CTXT_CI_IDX_MASK                GENMASK(31, 16)
+ #define RQ_CTXT_CI_PI_SET(val, member)  \
+@@ -629,7 +632,8 @@ static void hinic3_rq_prepare_ctxt(struct hinic3_io_queue *rq,
+ 			    RQ_CTXT_PREF_SET(RQ_WQ_PREFETCH_THRESHOLD, CACHE_THRESHOLD));
+ 
+ 	rq_ctxt->pref_ci_owner =
+-		cpu_to_le32(RQ_CTXT_PREF_SET(SQ_CTXT_PREF_CI_HI(ci_start), CI_HI) |
++		cpu_to_le32(RQ_CTXT_PREF_SET(RQ_CTXT_PREF_CI_HI(ci_start),
++					     CI_HI) |
+ 			    RQ_CTXT_PREF_SET(1, OWNER));
+ 
+ 	rq_ctxt->pref_wq_pfn_hi_ci =
 -- 
 2.43.0
 
