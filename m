@@ -1,93 +1,92 @@
-Return-Path: <linux-doc+bounces-73173-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73196-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44B2ED3C009
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 08:10:29 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC817D3C2F1
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 10:06:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id CB9393E3C7E
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 06:57:37 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 79EFB60899B
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 08:46:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E85573803F2;
-	Tue, 20 Jan 2026 06:57:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="iAA5iIAx"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C38C63B8BB2;
+	Tue, 20 Jan 2026 08:46:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from h3cspam02-ex.h3c.com (smtp.h3c.com [221.12.31.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E44A30DEA6;
-	Tue, 20 Jan 2026 06:57:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6913333FE04;
+	Tue, 20 Jan 2026 08:45:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=221.12.31.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768892247; cv=none; b=MTkNENiouZtfkX5bLDl7q+YjPaw4qvaFaOaYfOeu5oV9hR9vXO5JTy0B2eZJDWBFkH3N6H7SOe4qxA85/7IQWXy/a3t1BB7QgqCJ9dR53NTy13Pk3fr2dj5X5dxvtaSWUdexHMQoHzCXPd83otVkRfth9Dl2eA+KoSDpwh9HFLM=
+	t=1768898763; cv=none; b=PtYrMsdzSMwgsrEU8JQi6M3405UKDkNFZBNyfSHN0XnxbjtNI6BkVfGOa9IFinsu9ojCclHRMnhvLdTyp8BuaR0czLweua1BkQjqibgdkZ4/r+BRWx0knqjsMtJNiZXdqLPziN9ghg8E3hL/jSb5DfygV9ku6V993WuZX6lDmMk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768892247; c=relaxed/simple;
-	bh=3Iut3vWBR4ORWGRTckLdfnkoVnRmJ3Ea3o7FsYVU4iE=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=meKuD6o7pjuH4sOGJyH1pDTx4BKzMDryn8T0RyJBw7C1Ic7+s2IZcugo9lqIuqEjjCby1to9F9TcqYaJNL8uwgWaio1EhFOsYMXLU4nEL5GukTIx/vknPsvGdTowqJ99LJ2rQuat58vDkgdlnkvnE/1cnAGtu/C9MtuLupx9Mrw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=iAA5iIAx; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from smtpclient.apple (c-24-130-165-117.hsd1.ca.comcast.net [24.130.165.117])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 60K6ueNx3503645
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Mon, 19 Jan 2026 22:56:40 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 60K6ueNx3503645
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025122301; t=1768892202;
-	bh=3Iut3vWBR4ORWGRTckLdfnkoVnRmJ3Ea3o7FsYVU4iE=;
-	h=Subject:From:In-Reply-To:Date:Cc:References:To:From;
-	b=iAA5iIAxtvT/7WYoWaMOSg5I7o+LVEwPByGsfL8bulkOSaAtMG2yi5nPFREBY029w
-	 4fftLudPh61VpCTWWO8Ru/+ibyb2pXYyd/DO8osaE5/wh5IMQ5urGINei2LspA0rh5
-	 jH7ROv3U6Fk1UYktKD/2OxbHScfC9gwEGtudWHM+yQ2VtCJvBp3ZFX7y11kc7pcqiS
-	 AZBMuTHoxwCZ7H6jaVhNRRFqACnuOfkqXrkGFTR83syxcnUd7nMj7jWiMA33Zx8jZK
-	 Kjz0AkzUU1giY63LIwcPYJ+R5hqpKhNdv27HFbtt8tLLwTBjgpLIvamObHNfRVdMI2
-	 D150vjmt8+wVQ==
-Content-Type: text/plain;
-	charset=utf-8
+	s=arc-20240116; t=1768898763; c=relaxed/simple;
+	bh=4cqaPbRRCcn6xGvj/IYrBX4g4UX2zALJj13n/6jHJyA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=a0xoAYqptjSe7LJp6SnA/Brr1F4clKALYkERDvlXjsyCfnnQelLVqVyPKKFAsyOBwlnBaQyWhgwp9Hn4NTs7OkZNz0gD+AaoSYxCqbwoKMLLwa1bCTKw1jj7NJblCa2VwipMSE31/LfZue9QcSvjHhoqSnsJnKRPzAmDBK+M9Jo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=h3c.com; spf=pass smtp.mailfrom=h3c.com; arc=none smtp.client-ip=221.12.31.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=h3c.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=h3c.com
+Received: from h3cspam02-ex.h3c.com (localhost [127.0.0.2] (may be forged))
+	by h3cspam02-ex.h3c.com with ESMTP id 60K7LVMA002512;
+	Tue, 20 Jan 2026 15:21:31 +0800 (+08)
+	(envelope-from ning.le@h3c.com)
+Received: from mail.maildlp.com ([172.25.15.154])
+	by h3cspam02-ex.h3c.com with ESMTP id 60K7LBNb001080;
+	Tue, 20 Jan 2026 15:21:11 +0800 (+08)
+	(envelope-from ning.le@h3c.com)
+Received: from DAG6EX08-BJD.srv.huawei-3com.com (unknown [10.153.34.10])
+	by mail.maildlp.com (Postfix) with ESMTP id 6A6382011864;
+	Tue, 20 Jan 2026 15:30:37 +0800 (CST)
+Received: from localhost.localdomain (10.114.186.44) by
+ DAG6EX08-BJD.srv.huawei-3com.com (10.153.34.10) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.1258.27; Tue, 20 Jan 2026 15:21:10 +0800
+From: ningle <ning.le@h3c.com>
+To: <corbet@lwn.net>
+CC: <linux-doc@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <ning.le@h3c.com>,
+        <zhang.chunA@h3c.com>
+Subject: Re: [PATCH] proc/stat: document uptime-based CPU utilization calculation
+Date: Tue, 20 Jan 2026 15:20:18 +0800
+Message-ID: <20260120072018.3139470-1-ning.le@h3c.com>
+X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20251226043409.1063711-1-ning.le@h3c.com>
+References: <20251226043409.1063711-1-ning.le@h3c.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
-Subject: Re: [PATCH v9 17/22] KVM: x86: Advertise support for FRED
-From: Xin Li <xin@zytor.com>
-In-Reply-To: <aRQ3ngRvif/0QRTC@intel.com>
-Date: Mon, 19 Jan 2026 22:56:29 -0800
-Cc: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, pbonzini@redhat.com, seanjc@google.com,
-        corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-        luto@kernel.org, peterz@infradead.org, andrew.cooper3@citrix.com,
-        hch@infradead.org, sohil.mehta@intel.com
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <71F2B269-4D29-4B23-9111-E43CDD09CF13@zytor.com>
-References: <20251026201911.505204-1-xin@zytor.com>
- <20251026201911.505204-18-xin@zytor.com> <aRQ3ngRvif/0QRTC@intel.com>
-To: Chao Gao <chao.gao@intel.com>
-X-Mailer: Apple Mail (2.3864.300.41.1.7)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BJSMTP02-EX.srv.huawei-3com.com (10.63.20.133) To
+ DAG6EX08-BJD.srv.huawei-3com.com (10.153.34.10)
+X-DNSRBL: 
+X-SPAM-SOURCE-CHECK: pass
+X-MAIL:h3cspam02-ex.h3c.com 60K7LVMA002512
 
+Hi,
 
+Gentle ping on this documentation patch.
 
-> On Nov 11, 2025, at 11:30=E2=80=AFPM, Chao Gao <chao.gao@intel.com> =
-wrote:
->=20
-> I'm not sure if AMD CPUs support FRED, but just in case, we can clear =
-FRED
-> i.e., kvm_cpu_cap_clear(X86_FEATURE_FRED) in svm_set_cpu_caps().
+The main motivation is to describe how userspace can compute more stable
+CPU utilization on systems that already enable NOHZ and virtual CPU
+accounting (CONFIG_VIRT_CPU_ACCOUNTING_*), where idle time in /proc/stat
+is already accurate.
 
-AMD will support FRED, with ISA level compatibility:
+In this context, improving observability is often easier by providing a
+better time reference for these existing counters (e.g. a timestamp
+field in /proc/stat), rather than enabling additional options like
+CONFIG_CONTEXT_TRACKING_USER_FORCE, which may be too heavy for many
+production environments.
 
-=
-https://www.amd.com/en/blogs/2025/amd-and-intel-celebrate-first-anniversar=
-y-of-x86-ecosys.html
+If this direction is acceptable, I can adjust the text or placement as
+you prefer.
 
-Thus we don=E2=80=99t need to clear the bit.
-
-
+Thanks,
+ning le
 
