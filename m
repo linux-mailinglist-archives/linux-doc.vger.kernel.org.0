@@ -1,161 +1,233 @@
-Return-Path: <linux-doc+bounces-73300-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73301-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wGf+BpK7b2kOMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73300-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:29:54 +0100
+	id GFF7OaXKb2mgMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-73301-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 19:34:13 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id C161B4893D
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:29:53 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82C0649883
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 19:34:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 609B656E33A
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:05:59 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 79A7162BA7E
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:55:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C87734D4EA;
-	Tue, 20 Jan 2026 17:05:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAE0B4418EE;
+	Tue, 20 Jan 2026 17:55:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=jagalactic.com header.i=@jagalactic.com header.b="DwwvT/Ca";
-	dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b="AqTheCf1"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eiBz+h/a"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from a11-174.smtp-out.amazonses.com (a11-174.smtp-out.amazonses.com [54.240.11.174])
-	(using TLSv1.2 with cipher AES128-SHA256 (128/128 bits))
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 607E129BDBC;
-	Tue, 20 Jan 2026 17:05:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.240.11.174
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768928741; cv=none; b=Jn4NUJ7TBWYKZlhXZQF7nQnYq4VfBbqLaEnb9X/VTwA/uLYXhnG4M0Q6eLOy3qbji0qAqbz3GJOwHb5yGocW/jbv4N6pQcLdiqCS0QRZVEXeio5Es13m9UuHMP23zaHFfAREHA5zBAzPqcWZIwsRuwzGXCc6oS5gEZZqlRLly5A=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768928741; c=relaxed/simple;
-	bh=IMQm6fDafW7KCFXpTWzI1T1mVxi+bppakZwCsXXVpN0=;
-	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:In-Reply-To:
-	 References:Message-ID; b=OsXDQP6BLekwRV0oR5Fg5AnHxKCOFvwoeYXCQNVEJ+9f7ETaQq78oakUEV++sf+qOARLpk39BOVmSle+JY0URjbrYR74GpxeEMg9KoJJQHpI/6NpJnhBdNSqapYiZhV5GN6WwspeyXZ7S/McBQhQBS31A+sF/OnF94RvqazhRIU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=jagalactic.com; spf=pass smtp.mailfrom=amazonses.com; dkim=pass (1024-bit key) header.d=jagalactic.com header.i=@jagalactic.com header.b=DwwvT/Ca; dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b=AqTheCf1; arc=none smtp.client-ip=54.240.11.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=jagalactic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazonses.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=o25mqk5iffcfzgc3wo2zjhkohcyjzsoq; d=jagalactic.com; t=1768928738;
-	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Message-Id;
-	bh=IMQm6fDafW7KCFXpTWzI1T1mVxi+bppakZwCsXXVpN0=;
-	b=DwwvT/CaYNuc7K7TdH9FsPGRrWinrPHVAaeiwpLarvY8rjJrXr+ktepNJwcLjbWj
-	IdkKiVyhCez9NFtH0D2ikhBZyXbWVIP3/gAPGU9buF1+swiDqwIcmHt8KkYw4+eFDwC
-	1ujydogbkB0WSDT3oQjVEjMjDi4Gd4OF1fFTCfbU=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw; d=amazonses.com; t=1768928738;
-	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Message-Id:Feedback-ID;
-	bh=IMQm6fDafW7KCFXpTWzI1T1mVxi+bppakZwCsXXVpN0=;
-	b=AqTheCf1cAVTYTfY0RSVgNQe5o6AA+AjkFT1z86y2GS+SR2RRuERd/nEBVVSo4+O
-	OTsbT6vFhj27Plbnoy7GR2cQxWQCMpovP0V/+BQF+IjVytSwOnsviUSlGUAn+90kLue
-	nibBJFQFeEZ2R5WXFZrJJFKR6IFSmZW8nrpNYMR4=
-Subject: Re: [PATCH V4 0/2] ndctl: Add daxctl support for the new "famfs"
- mode of devdax
-From: =?UTF-8?Q?John_Groves?= <john@jagalactic.com>
-To: =?UTF-8?Q?Alireza_Sanaee?= <alireza.sanaee@huawei.com>
-Cc: =?UTF-8?Q?John_Groves?= <John@groves.net>, 
-	=?UTF-8?Q?Miklos_Szeredi?= <miklos@szeredi.hu>, 
-	=?UTF-8?Q?Dan_Williams?= <dan.j.williams@intel.com>, 
-	=?UTF-8?Q?Bernd_Schubert?= <bschubert@ddn.com>, 
-	=?UTF-8?Q?Alison_Schofiel?= =?UTF-8?Q?d?= <alison.schofield@intel.com>, 
-	=?UTF-8?Q?John_Groves?= <jgroves@micron.com>, 
-	=?UTF-8?Q?John_Groves?= <jgroves@fastmail.com>, 
-	=?UTF-8?Q?Jonathan_Corbet?= <corbet@lwn.net>, 
-	=?UTF-8?Q?Vishal_Verma?= <vishal.l.verma@intel.com>, 
-	=?UTF-8?Q?Dave_Jiang?= <dave.jiang@intel.com>, 
-	=?UTF-8?Q?Matthew_Wilcox?= <willy@infradead.org>, 
-	=?UTF-8?Q?Jan_Kara?= <jack@suse.cz>, 
-	=?UTF-8?Q?Alexander_Viro?= <viro@zeniv.linux.org.uk>, 
-	=?UTF-8?Q?David_Hildenbrand?= <david@kernel.org>, 
-	=?UTF-8?Q?Christian_Bra?= =?UTF-8?Q?uner?= <brauner@kernel.org>, 
-	=?UTF-8?Q?Darrick_J_=2E_Wong?= <djwong@kernel.org>, 
-	=?UTF-8?Q?Randy_Dunlap?= <rdunlap@infradead.org>, 
-	=?UTF-8?Q?Jeff_Layton?= <jlayton@kernel.org>, 
-	=?UTF-8?Q?Amir_Goldstein?= <amir73il@gmail.com>, 
-	=?UTF-8?Q?Jonathan_Cameron?= <Jonathan.Cameron@huawei.com>, 
-	=?UTF-8?Q?Stefan_Hajnoczi?= <shajnocz@redhat.com>, 
-	=?UTF-8?Q?Joanne_Koong?= <joannelkoong@gmail.com>, 
-	=?UTF-8?Q?Josef_Bacik?= <josef@toxicpanda.com>, 
-	=?UTF-8?Q?Bagas_Sanjaya?= <bagasdotme@gmail.com>, 
-	=?UTF-8?Q?James_Morse?= <james.morse@arm.com>, 
-	=?UTF-8?Q?Fuad_Tabba?= <tabba@google.com>, 
-	=?UTF-8?Q?Sean_Christopherson?= <seanjc@google.com>, 
-	=?UTF-8?Q?Shivank_Garg?= <shivankg@amd.com>, 
-	=?UTF-8?Q?Ackerley_Tng?= <ackerleytng@google.com>, 
-	=?UTF-8?Q?Gregory_Pric?= =?UTF-8?Q?e?= <gourry@gourry.net>, 
-	=?UTF-8?Q?Aravind_Ramesh?= <arramesh@micron.com>, 
-	=?UTF-8?Q?Ajay_Joshi?= <ajayjoshi@micron.com>, 
-	=?UTF-8?Q?venkataravis=40micron=2Ecom?= <venkataravis@micron.com>, 
-	=?UTF-8?Q?linux-doc=40vger=2Ekernel=2Eorg?= <linux-doc@vger.kernel.org>, 
-	=?UTF-8?Q?linux-kernel=40vger=2Ekernel=2Eorg?= <linux-kernel@vger.kernel.org>, 
-	=?UTF-8?Q?nvdimm=40lists=2Elinux=2Edev?= <nvdimm@lists.linux.dev>, 
-	=?UTF-8?Q?linux-cxl=40vger=2Ekernel=2Eorg?= <linux-cxl@vger.kernel.org>, 
-	=?UTF-8?Q?linux-fsdevel=40vger=2Ekernel=2Eorg?= <linux-fsdevel@vger.kernel.org>
-Date: Tue, 20 Jan 2026 17:05:38 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3DBF4418D8
+	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 17:55:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.221.54
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768931703; cv=pass; b=JmxQIBooH6C+SjLOcy1SoqtFXIsMGSMjINrgkG0SeZImth3cW+BMMDfZE2hNqoRDJfC9xM0MubNFfuyx/aN6s5vnkNt6MwRYHXpWNmZI4uJYYlbxAQ0I1sVVkYbu6RJM/MRMfaF3nsyITSXnJQ0FaL2mm2c2W5DWp9g+PNbeMYs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768931703; c=relaxed/simple;
+	bh=oHcdxkzTnAC7Ywax8Vckvgjp4LUCRYz+0yKN85C0sUM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=f5sPpqA6ixLj5xu7J9PDjm4y4HpnElRZqiyup2zDS8MEct+hCNYhyJeIDXAgwCjXTZ4UOcDalQsawYb7bntduhN5QDZw4EMjPo9EG8vgfDu1f8VUEiLyGfymMNWbGOiowTTYM18bm3GiJFdRDwrnq55N6emR9EuFuEy1BP7VoOU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eiBz+h/a; arc=pass smtp.client-ip=209.85.221.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-42fb0fc5aa9so3252093f8f.1
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 09:55:00 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768931699; cv=none;
+        d=google.com; s=arc-20240605;
+        b=irDQXiM/9CJZhD1hENt3b0wlR5n+AcDIDTxuuI0VrebbAzSU9yq8ullYl2T5IiY4wo
+         EXlvH9jO2dNykl3S+VQGsYMrynrG0eAvBB+R/LKKbsYtpjQ+OPojGcPLeFq3ZLJgK9CP
+         VX3P39N89HnpXGflCDkujDjts2nRg4xaWvboONZ5kT5K5lw8VV+jJxjEzlslaXwQM023
+         6D/rW8XV8shrcHPy5f/ca/enWsqgPVTi9P91/5tW6TRxhKSHqMCKvO9dKYm5aEwsXYsS
+         HY5nU83Dna5y3WpXkUHlMGDC3/k1DnVJoZkvn8u8h/MHIFiGPhx6/4AKUhMJ8jDgSEZQ
+         7xAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=CSI8A4TsHJKLPFzycUoWUfFc682TNPoMjAF0fDDKMCo=;
+        fh=inTtaD8V3rYIzVTKCbPn7lRU0qqkyE5HNQp3b7Aoxsk=;
+        b=cD7f7a0Vlt/MUHzdNA0oixbPPYn3ALfkBMu2y6tDz2eAex2EPOhxE434jgE2LEIUU1
+         u7NkYFzDyCGOCZYHHgZ4pSGKxAU4LDXqcdXjFEfmqdv9dAWvLjpwVzqW386XEWJ8XHOW
+         i8PJL6SRECgscK2xmSZ5/uKAIuGs/Qehctn8vO9gVS8vTAXg8WnJDWl8kXUXqJDl8F7b
+         mj8co7vcD4j0zYYXRYwml97Ag6F/5oyKqOWkQcYjftK6bt2hJ68rfmeGjA4YMIElTH7N
+         dvr19fzhUW8bRLb8cox4t7ySNRcXLnPxMaHFgDqJXbtCOSRsotXNFad0fuLz+rGYcAFu
+         ZnhA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768931699; x=1769536499; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CSI8A4TsHJKLPFzycUoWUfFc682TNPoMjAF0fDDKMCo=;
+        b=eiBz+h/adRD4Em4CAOvIQdl2nHB4yFq4jv6rWxqr+54/c615zVMIiuTc63wA/yStk8
+         Thj1tW2UovqgGXY+4vRzqgt/WlLKkZkWFNyVbyY6mIwSZnJQn775YBVaVB2rEZP8e+Mm
+         l5NRmYE0vYnn0IICHD8bF2ZAOuvFEPa77P0VFf/Q+0z0bNnM9I3j8d3ujQoODmrrZbaj
+         0NkzBYOFYLaf9LxWVoeCAjRoGkA93ixdK14uJNVnVMirdyEzHQ1PwK+yJRIywjLpqiZY
+         bYclbjgffVlQSwXWwCOJvms6AaOegnuH/NMUTWwF0z/8zOqKKQ8w02HKufypU1y/5VPv
+         W/Pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768931699; x=1769536499;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=CSI8A4TsHJKLPFzycUoWUfFc682TNPoMjAF0fDDKMCo=;
+        b=VBpI0a/5CwdagMdTr2lYzzUVfsPzkR/WrAxl6SedeAFY6Q786UleBM1KDchY0ns2a7
+         bl40+OhMpH3vMsgPLeM2BziPdTnuBhgexA8wVS+EDqhBTLft5rLYgXUtije02HuVq5lj
+         rdmPZMpbz8g93imrcAEOormY8r6Q7RZXPDgL5UkdMgnh+8uYauSX2e/1+t+RB/VrnqHW
+         ZMU5uAvWSKxZs3J+rswAuee0MuWs5gvsduzEQTNQxC4Oc90aD6x/pfW+4YFhZBXsb4ew
+         nZ6JEu4KC1VZ9P2NMtHkWTMxzfX7vvCXEmmfnUM5FZQTIS9g7SVRq7SVeeyPRgODQR+G
+         CkcA==
+X-Forwarded-Encrypted: i=1; AJvYcCXrCUfYm8hUyCiYccahw3X8IGECVYFj8MCXbrfFOioYugxNvDBVyWLcVUkwt47ZZ8gCeMFEe6ICamY=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy4QathelBhN0xIjfZhF+6rLQCzDHmsGQ0UTsdzWR/uLJrZwbux
+	12kKzQDd1+J3G94ArNlOjHVRh1yqCAgrxt2/E4fKBP2V/BIatwjCDZSq1FLae6rz+j4HG50EdQo
+	7DqpnD0VcOHm3A5m9D2BUJmnKHPC/Tog=
+X-Gm-Gg: AZuq6aJhaZk/742qZwKgZnLGIQ+OBht3VXFPIJ1qD/09juvr6DRvi5asXVK0g02CJOI
+	NQOHgKD99LuGvgPOO5q4IDWSiaaR2dhktHzIc8hdMpHGjzee0ZtUF4tQrjQNKirdTS2c1HqfA8s
+	HonbVCMZnoEgBFyNkbRBa5sgky3U/lIQ46lDiSDyOtZLg56G36+Ine0DQL1dwNYCVeBI18k88hY
+	1oDZ/8OJDC+ZzMW8qwMgzhWYq2mpinXmuPPHotaFSfg2dyyW/TKhn3/UDkryXhUA97RJ8DSBfsB
+	m/6nfFs+awAU4r5hzl4G9FgJJ89BzQ==
+X-Received: by 2002:a05:6000:310d:b0:430:f58d:40e5 with SMTP id
+ ffacd0b85a97d-4356a051bbamr17722513f8f.30.1768931698830; Tue, 20 Jan 2026
+ 09:54:58 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
+References: <cover.1768845098.git.m.wieczorretman@pm.me>
+In-Reply-To: <cover.1768845098.git.m.wieczorretman@pm.me>
+From: Andrey Konovalov <andreyknvl@gmail.com>
+Date: Tue, 20 Jan 2026 18:54:48 +0100
+X-Gm-Features: AZwV_QjKpw6bSXc49tC7Ft6D0ET5YLTkUvlrSRTXNNU3JrK5sgQbId38njXfil8
+Message-ID: <CA+fCnZf+U3RhmMeGxQ-UypJw2yGd8RJ0gFKrCXsC1eQ5YO-eXw@mail.gmail.com>
+Subject: Re: [PATCH v9 00/13] kasan: x86: arm64: KASAN tag-based mode for x86
+To: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
+Cc: chleroy@kernel.org, surenb@google.com, justinstitt@google.com, 
+	nsc@kernel.org, jan.kiszka@siemens.com, trintaeoitogc@gmail.com, 
+	dave.hansen@linux.intel.com, ryabinin.a.a@gmail.com, kees@kernel.org, 
+	maciej.wieczor-retman@intel.com, urezki@gmail.com, will@kernel.org, 
+	nick.desaulniers+lkml@gmail.com, brgerst@gmail.com, ubizjak@gmail.com, 
+	rppt@kernel.org, samitolvanen@google.com, thuth@redhat.com, mhocko@suse.com, 
+	nathan@kernel.org, osandov@fb.com, thomas.lendacky@amd.com, 
+	yeoreum.yun@arm.com, akpm@linux-foundation.org, catalin.marinas@arm.com, 
+	morbo@google.com, jackmanb@google.com, mingo@redhat.com, jpoimboe@kernel.org, 
+	vbabka@suse.cz, corbet@lwn.net, lorenzo.stoakes@oracle.com, 
+	vincenzo.frascino@arm.com, luto@kernel.org, glider@google.com, 
+	weixugc@google.com, axelrasmussen@google.com, samuel.holland@sifive.com, 
+	kbingham@kernel.org, jeremy.linton@arm.com, kas@kernel.org, tglx@kernel.org, 
+	ardb@kernel.org, peterz@infradead.org, hpa@zytor.com, dvyukov@google.com, 
+	yuanchu@google.com, leitao@debian.org, david@kernel.org, 
+	anshuman.khandual@arm.com, bp@alien8.de, Liam.Howlett@oracle.com, 
+	kasan-dev@googlegroups.com, linux-kbuild@vger.kernel.org, x86@kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, llvm@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20260120170135.00003523.alireza.sanaee@huawei.com>
-References: 
- <0100019bd33a16b4-6da11a99-d883-4cfc-b561-97973253bc4a-000000@email.amazonses.com> 
- <20260118223548.92823-1-john@jagalactic.com> 
- <0100019bd34040d9-0b6e9e4c-ecd4-464d-ab9d-88a251215442-000000@email.amazonses.com> 
- <20260120170135.00003523.alireza.sanaee@huawei.com> 
- <aW-1cgruSVTsgV_7@groves.net>
-X-Mailer: Amazon WorkMail
-Thread-Index: AQHciMnhcFkpAz6WTSKstYDfyF/cJQAAPD1qAFklqVYAWUcuiQ==
-Thread-Topic: [PATCH V4 0/2] ndctl: Add daxctl support for the new "famfs"
- mode of devdax
-X-Wm-Sent-Timestamp: 1768928735
-Message-ID: <0100019bdc5e7afc-e41beaa8-85aa-4572-9512-5a44440993e5-000000@email.amazonses.com>
-Feedback-ID: ::1.us-east-1.LF00NED762KFuBsfzrtoqw+Brn/qlF9OYdxWukAhsl8=:AmazonSES
-X-SES-Outgoing: 2026.01.20-54.240.11.174
-X-Spamd-Result: default: False [0.95 / 15.00];
-	TO_EXCESS_QP(1.20)[];
-	CC_EXCESS_QP(1.20)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-0.46 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[jagalactic.com:s=o25mqk5iffcfzgc3wo2zjhkohcyjzsoq,amazonses.com:s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73300-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[39];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[groves.net,szeredi.hu,intel.com,ddn.com,micron.com,fastmail.com,lwn.net,infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,gmail.com,huawei.com,redhat.com,toxicpanda.com,arm.com,google.com,amd.com,gourry.net,vger.kernel.org,lists.linux.dev];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[jagalactic.com,quarantine];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	FROM_NEQ_ENVFROM(0.00)[john@jagalactic.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[jagalactic.com:+,amazonses.com:+];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_EXCESS_QP(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[email.amazonses.com:mid,jagalactic.com:email,jagalactic.com:dkim,amazonses.com:dkim,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: C161B4893D
+	FREEMAIL_CC(0.00)[kernel.org,google.com,siemens.com,gmail.com,linux.intel.com,intel.com,redhat.com,suse.com,fb.com,amd.com,arm.com,linux-foundation.org,suse.cz,lwn.net,oracle.com,sifive.com,infradead.org,zytor.com,debian.org,alien8.de,googlegroups.com,vger.kernel.org,lists.linux.dev,lists.infradead.org,kvack.org];
+	TAGGED_FROM(0.00)[bounces-73301-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andreyknvl@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[61];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
+X-Rspamd-Queue-Id: 82C0649883
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 26/01/20 05:01PM, Alireza Sanaee wrote:=0D=0A> On Sun, 18 Jan 2026 22:=
-36:02 +0000=0D=0A> John Groves <john@jagalactic.com> wrote:=0D=0A>=20=0D=0A=
-> Hi John,=0D=0A>=20=0D=0A> What's the base commit for this set=3F I seem=
- not be able to apply on ndctl master. Maybe I am missing something.=0D=0A=
-=0D=0AThis series is based on the v83 tag, which is sha 4f7a1c6.=0D=0A=0D=
-=0AJohn=0D=0A=0D=0A
+On Tue, Jan 20, 2026 at 3:40=E2=80=AFPM Maciej Wieczor-Retman
+<m.wieczorretman@pm.me> wrote:
+>
+> Maciej Wieczor-Retman (11):
+>   kasan: Fix inline mode for x86 tag-based mode
+>   x86/kasan: Add arch specific kasan functions
+>   x86/mm: Reset tag for virtual to physical address conversions
+>   mm/execmem: Untag addresses in EXECMEM_ROX related pointer arithmetic
+>   x86/mm: Use physical address comparisons in fill_p*d/pte
+>   x86/kasan: Initialize KASAN raw shadow memory
+>   x86/mm: Reset tags in a canonical address helper call
+>   x86/mm: Initialize LAM_SUP
+>   x86: Increase minimal SLAB alignment for KASAN
+>   x86/kasan: Use a logical bit shift for kasan_mem_to_shadow
+>   x86/kasan: Make software tag-based kasan available
+>
+> Samuel Holland (2):
+>   kasan: sw_tags: Use arithmetic shift for shadow computation
+>   kasan: arm64: x86: Make special tags arch specific
+>
+>  Documentation/arch/arm64/kasan-offsets.sh |  8 ++-
+>  Documentation/arch/x86/x86_64/mm.rst      | 10 ++-
+
+Still missing Documentation/dev-tools/kasan.rst updates. Feel free to
+send as a separate patch to avoid resending the whole series.
+
+
+
+>  MAINTAINERS                               |  4 +-
+>  arch/arm64/Kconfig                        | 10 +--
+>  arch/arm64/include/asm/kasan-tags.h       | 14 ++++
+>  arch/arm64/include/asm/kasan.h            |  7 +-
+>  arch/arm64/include/asm/memory.h           | 14 +++-
+>  arch/arm64/include/asm/uaccess.h          |  1 +
+>  arch/arm64/mm/Makefile                    |  2 +
+>  arch/arm64/mm/kasan_init.c                |  7 +-
+>  arch/arm64/mm/kasan_sw_tags.c             | 35 ++++++++++
+>  arch/x86/Kconfig                          |  4 ++
+>  arch/x86/boot/compressed/misc.h           |  1 +
+>  arch/x86/include/asm/cache.h              |  4 ++
+>  arch/x86/include/asm/kasan-tags.h         |  9 +++
+>  arch/x86/include/asm/kasan.h              | 79 ++++++++++++++++++++++-
+>  arch/x86/include/asm/page.h               |  8 +++
+>  arch/x86/include/asm/page_64.h            |  1 +
+>  arch/x86/kernel/head_64.S                 |  3 +
+>  arch/x86/mm/init.c                        |  3 +
+>  arch/x86/mm/init_64.c                     | 11 ++--
+>  arch/x86/mm/kasan_init_64.c               | 24 ++++++-
+>  arch/x86/mm/maccess.c                     |  2 +-
+>  arch/x86/mm/physaddr.c                    |  2 +
+>  include/linux/kasan-tags.h                | 21 ++++--
+>  include/linux/kasan.h                     | 13 ++--
+>  include/linux/mm.h                        |  6 +-
+>  include/linux/mmzone.h                    |  2 +-
+>  include/linux/page-flags-layout.h         |  9 +--
+>  lib/Kconfig.kasan                         |  3 +-
+>  mm/execmem.c                              |  9 ++-
+>  mm/kasan/kasan.h                          |  7 ++
+>  mm/kasan/report.c                         | 15 ++++-
+>  mm/vmalloc.c                              |  7 +-
+>  scripts/Makefile.kasan                    |  3 +
+>  scripts/gdb/linux/kasan.py                |  5 +-
+>  scripts/gdb/linux/mm.py                   |  5 +-
+>  37 files changed, 312 insertions(+), 56 deletions(-)
+>  create mode 100644 arch/arm64/include/asm/kasan-tags.h
+>  create mode 100644 arch/arm64/mm/kasan_sw_tags.c
+>  create mode 100644 arch/x86/include/asm/kasan-tags.h
 
