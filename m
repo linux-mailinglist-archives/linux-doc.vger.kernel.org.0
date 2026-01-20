@@ -1,221 +1,199 @@
-Return-Path: <linux-doc+bounces-73222-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73225-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KFtbEk1acWnLGAAAu9opvQ
-	(envelope-from <linux-doc+bounces-73222-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 23:59:25 +0100
+	id OClsI6EUcGlyUwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73225-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 00:49:53 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1E195F2E7
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 23:59:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 324204E1C0
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 00:49:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id DF50642AAEA
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 10:46:38 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id EF6DA5C4620
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 10:54:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F107040F8E6;
-	Tue, 20 Jan 2026 10:43:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4BCD37F8BB;
+	Tue, 20 Jan 2026 10:54:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OzOTYWx2"
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="D1X1Ulhm";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="qYLcEHt7";
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="D1X1Ulhm";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="qYLcEHt7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEBD5407568
-	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 10:43:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DFDA3ED13E
+	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 10:54:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768905817; cv=none; b=HtD0om1DpSvyDwlGVnYOgsO4Kq84ajcm8pco7Fdp/W9bN7IWtZfqMwYUNF8CxMPWjixKzJbcrIIyuHs+mNbvbMOutfdqNdYcV+g+py8/y+ViocQa1CL/LbPNtgn4OySLTzoryQ/ZkjB8C8Gjs92UDkUmR6Eva1wLg3n2TROs9AM=
+	t=1768906482; cv=none; b=dMmgStYf3Ss3EJ3/CpR1XJBUcc2D4VTwFpjRCRtSuEIcvr53OyyC3F1BLxz2qBC7/5l71KstiXsl9m+/gvDeqyCU1JksK6mUWcjYiFd/9s+My/4IYsUHzNgDhLVq/+vgXHWvhlbvzDdAwX0EZknk3BHYGUUebxEzQPV5xOZnvqw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768905817; c=relaxed/simple;
-	bh=BcFm5nMU3ZMZm/UXJGhb66QTbTXnNlf2mLPBselcsR4=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=s7eIbABrVpC7TTm+wDi0t2/kZBp4ZiAsABwWNiISczkkFnij7Z4px00d3SkMEHPYtaTvyk8erCsmj2HNHiIHBmwqnhCaJ3Dq8we1gDVRlZC+4Um0j2isgW51LXP+QdgOcHc31+XPzkQMVk1tKre04KUb+7yCr7AJk9j27tyVI5c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OzOTYWx2; arc=none smtp.client-ip=209.85.222.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qk1-f181.google.com with SMTP id af79cd13be357-8c52e25e644so484776885a.0
-        for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 02:43:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768905815; x=1769510615; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:date:from:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=utpbPPKnGbhMn+9AUOaQsN6WKnEwWEnMON4aM/d3+hQ=;
-        b=OzOTYWx2ieiqzhtPVgV+Aq9aTjxIbbVrUjo7VaSxkAVDZDoldn+CPlDROS39jyegUb
-         kJ6tENdIVMkdaP72SYkTYeYKs26GQ3SLoD0StTZKBj/qT3soe7KqQzVcXbdBJZWY+nS/
-         1FTsJ2DovKDjf4j8Y1bfAUUlnth8hP64ncSD95yi9FAx45IMJ6TJBssXc29V/gqXrUYN
-         YkrDH2RjaQUC+gpOUex8jCBHGYVJSptRltLbDgU4jOt89z+vOZXmhmEYvuiSCm+Q46f+
-         LAUjMqWhI9C805CfhVo629K+cHm/d3zuUs9PC/Hjpwo4e2XkYjS1TLWNI69SH0NbSGPk
-         K//g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768905815; x=1769510615;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=utpbPPKnGbhMn+9AUOaQsN6WKnEwWEnMON4aM/d3+hQ=;
-        b=PObjDyRTDBSYH6f4sf9HnczJREirSmHS+XT3ePRm4dGYZvjp5kBKP5jiHBf79wER4k
-         dOiqEA5vj8YWnwwiIb3CW6JTDgqVB97uLD7zP75A7t1T5/lLik1Q5WZXdeY3XxrVDm5F
-         QxvwQ40IvqayYwmpG7xR3TogAEwMiPdAWp9yxBKfPBhuA0WTI9Zep022peRNc9HEhFeF
-         0qCuQpPSUpzLvYX9ppc1McL97P9mhCpiIi+WLx2cdpMyb8AmHZGnDrQbM2vtp43kKx1I
-         8Cgr0gw8ckRvuy9cs5HHtPNWR+Pr3qthDKx1mWSnU0phkaDu/8s0r6ME4PsEmkSI9atE
-         5erg==
-X-Forwarded-Encrypted: i=1; AJvYcCXhNo8li/gBw4SGBs8BiVuYLohJ57AxSXDb9Za4iwG4UW8hKBzdwgUaiYstsWewcc1NeQ/IcL9hoQg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwxVXEo2iR/ZRxx83Ym57q3z0dC8f9pOu6sTOT0gohbTZxDBUPZ
-	WktAfffaaKZTxrH/5in9RhMay+0J9h74BNG7bEZljB4Gp3dENzQY0NDS
-X-Gm-Gg: AY/fxX5bAzCahPZ96R3JjZ9/XDL+rCkkaoIb14HPBySowQF3s2FziCYEP/xEakgwd1e
-	ckgEnErNI6kDk2sdI3u9QWmv1f4Vn7O8f/U9qELA89xTafAomcxNvVmaCEKNd48yjlSF8oLHrAY
-	ZaHpS5tqU7EvdbpdG8jS+pA9m2MEWLO+yltEGY0OREAN6uLD6Pw4zxq04Xu1rqOxgIcFBFzEclM
-	crQpYC9Ath3km8viMTRU/bJnqEcJbjc+yIdv7WZ64MahbgqAp1hyNYmKnQeN9r9WUtiG85DSiX6
-	EacLz/V2VuDVuL993H/TE+ku11YcrHLCK+ueoQ9YPU6LgebzBtGSPMvzhjUB4/FUqXkK7CqFIeQ
-	yKQ+VrGLFjEaza+AnCD2w6CP34MgdQzaquQNxcn8pPT+HpbgYNp97ck5Crif5wtH4JeF4Lkp/wg
-	juuG60PenGlctkB5KoLhNzugFFBJh0vC9LuOap+4m/UZUJYiM4QlLoD4Csa1N77TqrabcHXqDR6
-	KfF
-X-Received: by 2002:a05:620a:700d:b0:8c5:391f:1dce with SMTP id af79cd13be357-8c6a68d97fbmr1946565085a.28.1768905814782;
-        Tue, 20 Jan 2026 02:43:34 -0800 (PST)
-Received: from RDEALENC-L01.ad.analog.com ([24.206.116.103])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c6a72642fdsm977531985a.46.2026.01.20.02.43.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Jan 2026 02:43:34 -0800 (PST)
-From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Tue, 20 Jan 2026 10:43:28 +0000
-To: Andy Shevchenko <andriy.shevchenko@intel.com>, 
-	Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-Cc: rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org, 
-	linux-iio@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	Andy Shevchenko <andy@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, 
-	Michael Hennerich <Michael.Hennerich@analog.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH v4 3/7] iio: frequency: adf41513: driver implementation
-Message-ID: <e5lcg5kkey3c6u2l4rlzzpolp7qkudhcofyzcx5s2tjbh2iwkg@js3fisv23zyj>
-References: <20260116-adf41513-iio-driver-v4-0-dbb7d6782217@analog.com>
- <20260116-adf41513-iio-driver-v4-3-dbb7d6782217@analog.com>
- <aW3dxuelYDM67pqZ@smile.fi.intel.com>
- <texwv5s2tvcy34bwr4iruj5xofmea663pwletmpqpuh66zulmv@m7qvjgqbhalv>
- <aW40ylvMwVhqNQMw@smile.fi.intel.com>
- <hgy3bcrqqsvt7pobhnzuvwzhb2taetpxltkaxpigmmlvmlirod@v6anhmrsvv2r>
- <aW5kk6K30Izckvg5@smile.fi.intel.com>
+	s=arc-20240116; t=1768906482; c=relaxed/simple;
+	bh=6CqzJWy6qkgkRmJBR/Gg5I+HjP2tUW6HLtnhsLw++9I=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BOhiFdahXFpqe7/AJL6XeASCfv9zcgE/WsZr96wEF/JoAP+Ys2Ce9OFFN6sgAQedDvyT3DBDll4dNuqEPNnRBbsE0EMRftBG1lj1AA7iiMx+OrtA/BcyooL3AhkT90wmNG4OdwymxU4c+CvrA2AbGQVBym8ZV1jedhAEOyqRS1c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=D1X1Ulhm; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=qYLcEHt7; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=D1X1Ulhm; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=qYLcEHt7; arc=none smtp.client-ip=195.135.223.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 8AA773370C;
+	Tue, 20 Jan 2026 10:48:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1768906097;
+	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+	 cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PXkBkQ2/zo65Gb3sPuUGKK21okcCRycSHc2xNMBYGlw=;
+	b=D1X1UlhmqxqnrT2dJw5LeSzNfjKFac38nhK/2MvIo0gqok1bK8xhODvPawKNY1JmpikLjb
+	t/FCJFz5Vk4rFqtNwprkZeQUov5GOcDf551mi1mVwhPKLIvT++8cTv8HjaSvse2Do/Q1Tj
+	fV6xpaAdJbvuBKH1u294KijuchsKeFo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1768906097;
+	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+	 cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PXkBkQ2/zo65Gb3sPuUGKK21okcCRycSHc2xNMBYGlw=;
+	b=qYLcEHt7UVIYm4+/PSBFN187fuVxakQEfB6PLKYsgIFw3NYrA/1vNfgzO1w6caK4+t/bYX
+	GsxzChSlIe66UuDw==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1768906097;
+	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+	 cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PXkBkQ2/zo65Gb3sPuUGKK21okcCRycSHc2xNMBYGlw=;
+	b=D1X1UlhmqxqnrT2dJw5LeSzNfjKFac38nhK/2MvIo0gqok1bK8xhODvPawKNY1JmpikLjb
+	t/FCJFz5Vk4rFqtNwprkZeQUov5GOcDf551mi1mVwhPKLIvT++8cTv8HjaSvse2Do/Q1Tj
+	fV6xpaAdJbvuBKH1u294KijuchsKeFo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1768906097;
+	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+	 cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PXkBkQ2/zo65Gb3sPuUGKK21okcCRycSHc2xNMBYGlw=;
+	b=qYLcEHt7UVIYm4+/PSBFN187fuVxakQEfB6PLKYsgIFw3NYrA/1vNfgzO1w6caK4+t/bYX
+	GsxzChSlIe66UuDw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id F13B53EA63;
+	Tue, 20 Jan 2026 10:48:16 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id RwfgNHBdb2mfAQAAD6G6ig
+	(envelope-from <pvorel@suse.cz>); Tue, 20 Jan 2026 10:48:16 +0000
+Date: Tue, 20 Jan 2026 11:48:14 +0100
+From: Petr Vorel <pvorel@suse.cz>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org, Alejandro Colomar <alx@kernel.org>,
+	man-pages@man7.org
+Subject: Re: [PATCH v3 0/3] Documentation: Link man pages to https://man7.org/
+Message-ID: <20260120104814.GA32438@pevik>
+Reply-To: Petr Vorel <pvorel@suse.cz>
+References: <20260113113612.315748-1-pvorel@suse.cz>
+ <87a4ydo1hf.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aW5kk6K30Izckvg5@smile.fi.intel.com>
-X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.04 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DATE_IN_PAST(1.00)[36];
+In-Reply-To: <87a4ydo1hf.fsf@trenco.lwn.net>
+X-Spam-Score: -3.50
+X-Spam-Level: 
+X-Spam-Flag: NO
+X-Spamd-Result: default: False [-0.96 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-73222-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_FROM(0.00)[bounces-73225-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[intel.com,gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo];
+	DMARC_NA(0.00)[suse.cz];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[suse.cz:+];
 	MISSING_XM_UA(0.00)[];
+	HAS_REPLYTO(0.00)[pvorel@suse.cz];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[pvorel@suse.cz,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_FIVE(0.00)[6];
 	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: F1E195F2E7
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	REPLYTO_EQ_FROM(0.00)[]
+X-Rspamd-Queue-Id: 324204E1C0
 X-Rspamd-Action: no action
+X-Rspamd-Server: lfdr
 
-On 26/01/19 07:07PM, Andy Shevchenko wrote:
-> On Mon, Jan 19, 2026 at 04:37:09PM +0000, Rodrigo Alencar wrote:
-> > On 26/01/19 03:42PM, Andy Shevchenko wrote:
-> > > On Mon, Jan 19, 2026 at 11:21:59AM +0000, Rodrigo Alencar wrote:
-> > > > On 26/01/19 09:31AM, Andy Shevchenko wrote:
-> > > > > On Fri, Jan 16, 2026 at 02:32:22PM +0000, Rodrigo Alencar via B4 Relay wrote:
+> Petr Vorel <pvorel@suse.cz> writes:
 
-...
+> > Changes v1->v2:
+> > * Remove `...` (italic) from non-existing man pages (Jonathan).
+> > * Squash fix for sp_SP to following commit (Jonathan).
+> > * Remove :manpage: also from fxyzzy(3) (non-existing man page).
+> > * Add CSS for man page.
 
-> > > > > > +static int adf41513_parse_uhz(const char *str, u64 *freq_uhz)
-> > > > > > +{
-> > > > > > +	u64 uhz = 0;
-> > > > > > +	int f_count = ADF41513_HZ_DECIMAL_PRECISION;
-> > > > > > +	bool frac_part = false;
-> > > > > > +
-> > > > > > +	if (str[0] == '+')
-> > > > > > +		str++;
-> > > > > > +
-> > > > > > +	while (*str && f_count > 0) {
-> > > > > > +		if ('0' <= *str && *str <= '9') {
-> > > > > > +			uhz = uhz * 10 + *str - '0';
-> > > > > > +			if (frac_part)
-> > > > > > +				f_count--;
-> > > > > > +		} else if (*str == '\n') {
-> > > > > > +			if (*(str + 1) == '\0')
-> > > > > > +				break;
-> > > > > > +			return -EINVAL;
-> > > > > 
-> > > > > > +		} else if (*str == '.' && !frac_part) {
-> > > > > 
-> > > > > This can be found by strchr() / strrchr() (depending on the expectations of
-> > > > > the input).
-> > > > > 
-> > > > > > +			frac_part = true;
-> > > > > > +		} else {
-> > > > > > +			return -EINVAL;
-> > > > > > +		}
-> > > > > > +		str++;
-> > > > > > +	}
-> > > > > 
-> > > > > With the above the rest becomes just a couple of simple_strtoull() calls with
-> > > > > a couple of int_pow(10) calls (and some validation on top).
-> > > > > 
-> > > > > > +	for (; f_count > 0; f_count--)
-> > > > > > +		uhz *= 10;
-> > > > > 
-> > > > > This is int_pow(10).
-> > > > > 
-> > > > > > +	*freq_uhz = uhz;
-> > > > > > +
-> > > > > > +	return 0;
-> > > > > > +}
-> > > > 
-> > > > The current implementation is kind of a stripped version of
-> > > > __iio_str_to_fixpoint(). Would you prefer something like this, then?:
-> > > 
-> > > Do they have most of the parts in common? If so, why can't we use
-> > > __iio_str_to_fixpoint() directly? Or why can't we slightly refactor
-> > > that to give us the results we need here?
-> > 
-> > __iio_str_to_fixpoint() only parses "int" chunks, adf41513_parse_uhz
-> > was modified to accomodate the u64 parsing removing unnecessary stuff.
-> 
-> But why? The fractional part most likely will be kept int (it's up to 10⁻⁹).
-> The integer can be bigger than 10⁹?
-> 
+> > Link to v2:
+> > https://lore.kernel.org/linux-doc/20260111233534.183272-1-pvorel@suse.cz/
 
-Correct, integer part of the frequency value goes up to 26.5 GHz
-(uint_max is approx 4.3 GHz). Also, with the dual modulus, the PLL can
-achieve micro Hz resolution.
+> > Link to v1:
+> > https://lore.kernel.org/linux-doc/20260109183012.114372-1-pvorel@suse.cz/
+
+> > Petr Vorel (3):
+> >   Documentation: Remove :manpage: from non-existing man pages
+> >   Documentation: Link man pages to https://man7.org/
+> >   Documentation: CSS: Improve man page font
+
+> >  Documentation/conf.py                            |  3 +++
+> >  Documentation/process/adding-syscalls.rst        | 16 ++++++++--------
+> >  Documentation/sphinx-static/custom.css           |  8 +++++++-
+> >  .../it_IT/process/adding-syscalls.rst            | 16 ++++++++--------
+> >  .../sp_SP/process/adding-syscalls.rst            | 16 ++++++++--------
+> >  5 files changed, 34 insertions(+), 25 deletions(-)
+
+> I have applied this set, thanks.
+
+Thanks!
+
+> Even nicer, of course, would be to have automarkup recognize man-page
+> references and add the links automatically so we wouldn't need the
+> :manpage: noise.  Something for another day, I guess...
+
+Ah, you don't like :manpage: in the rst sources. I try to look into it later.
+
+It looked to me safer than regexp, but hopefully any word following by \([1-8]\)
+should be a man page.
+
+Advantage would be that other man pages yet declared would be matched [1],
+although some [2] would require to remove code formatting (``...``).
 
 Kind regards,
+Petr
 
-Rodrigo Alencar
+[1] https://docs.kernel.org/admin-guide/LSM/Smack.html#file-system-interfaces
+[2] https://docs.kernel.org/bpf/prog_cgroup_sysctl.html#context
+
+> Thanks,
+
+> jon
 
