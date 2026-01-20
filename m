@@ -1,194 +1,210 @@
-Return-Path: <linux-doc+bounces-73223-lists+linux-doc=lfdr.de@vger.kernel.org>
-X-Original-To: lists+linux-doc@lfdr.de
+Return-Path: <linux-doc+bounces-73233-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
+Received: from mail.lfdr.de
+	by lfdr with LMTP
+	id UPuEIJSpb2kZEwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73233-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:13:08 +0100
+X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13AEBD3C667
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 11:58:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 470C4472DE
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:13:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 65D1A5E39BE
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 10:51:25 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D50F6669E55
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 12:18:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02F9633BBA7;
-	Tue, 20 Jan 2026 10:51:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2AE7140F8FC;
+	Tue, 20 Jan 2026 12:17:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="Ud5LeZdE";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="ppZhhzG4";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="Ud5LeZdE";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="ppZhhzG4"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="boq31eZl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B84F3B5304
-	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 10:51:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25CA73BC4DE
+	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 12:17:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.66
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768906280; cv=none; b=Lo7IThXAzZKSBy4D14R4z70xL6R5SeuFw88ACKQhdsT+pZRiErdWVgQWNOo6AhcolYkAq5CMpspunNDt6IuTql6IM5Sy4MLyK5A9bxaGA91Ou2QXxQ50C0UuQiJBdqzwQwreuYx4Bi9PYHvyScK0TC3MJLzBlaWXz/stHLYDc9Q=
+	t=1768911473; cv=none; b=EdGS5/z1D9y+RfolnlPHhdlCO6ZgsXZl/KNqOkLYduR8ZepOKMxtcGmyYQd0MlSfc2Jl7VrAy1i5Q4aIi33luARlE0vRfGBwZi2xoFkn2dxmzjuksLoPpQjsmgz/r0EnBS43MyT7wdwSEVqUCKwRJFnBZus6bJru3+fo91cp7hM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768906280; c=relaxed/simple;
-	bh=SCqqQcX4iNRq2beo/J8FVWJcdA2ii8h/ong8dbXvz+g=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jQ9hF5oVzC9toTTr4fIaNcY2r0ozulpHO0aX1rJjsCurjwW/SCH6wDEeYmcXZeH4K6sZe26GHZHcLpJ2oIX0B1iFMsssCFbB1nRJdXqMb9qL2unsxD3FpAwISUdwovnqccSWagflA6KNP+lQT/9uPVYOtkJNKxIxgXVdeuk7QS4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=Ud5LeZdE; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=ppZhhzG4; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=Ud5LeZdE; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=ppZhhzG4; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 058EB337DE;
-	Tue, 20 Jan 2026 10:51:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768906277;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jujmVwZrt71kGNemDEG4npNv9U09SmxpQyYr5zcZ0wM=;
-	b=Ud5LeZdE8uO89XWEigNsjcBBWeADA0Ipj8+ZxMq+Vfi/5Lw61gQcfvHCoaTY4gqevfj5XQ
-	gdMDhxntilaatcLL3U09CsqYSv+VaQZ5V4YxyV44RpG8wdUjR2Iu6K3bwfcMMQvHvtKW1n
-	1oN7mLkk338QV70rcfWPQbFt0MsurFw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768906277;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jujmVwZrt71kGNemDEG4npNv9U09SmxpQyYr5zcZ0wM=;
-	b=ppZhhzG4mw7fZr7XrygMWPHNFh8b98kXjF3KTYkA2AwclKvWIYW/1+YWtuFXz5M9RwGCQ/
-	DdoPOlBvz9+qu4Aw==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=Ud5LeZdE;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=ppZhhzG4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768906277;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jujmVwZrt71kGNemDEG4npNv9U09SmxpQyYr5zcZ0wM=;
-	b=Ud5LeZdE8uO89XWEigNsjcBBWeADA0Ipj8+ZxMq+Vfi/5Lw61gQcfvHCoaTY4gqevfj5XQ
-	gdMDhxntilaatcLL3U09CsqYSv+VaQZ5V4YxyV44RpG8wdUjR2Iu6K3bwfcMMQvHvtKW1n
-	1oN7mLkk338QV70rcfWPQbFt0MsurFw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768906277;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jujmVwZrt71kGNemDEG4npNv9U09SmxpQyYr5zcZ0wM=;
-	b=ppZhhzG4mw7fZr7XrygMWPHNFh8b98kXjF3KTYkA2AwclKvWIYW/1+YWtuFXz5M9RwGCQ/
-	DdoPOlBvz9+qu4Aw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7C56E3EA63;
-	Tue, 20 Jan 2026 10:51:16 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id DJ4IFSReb2mIBAAAD6G6ig
-	(envelope-from <pvorel@suse.cz>); Tue, 20 Jan 2026 10:51:16 +0000
-Date: Tue, 20 Jan 2026 11:51:13 +0100
-From: Petr Vorel <pvorel@suse.cz>
-To: Alejandro Colomar <alx@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-	man-pages@man7.org
-Subject: Re: [PATCH v3 0/3] Documentation: Link man pages to https://man7.org/
-Message-ID: <20260120105113.GB32438@pevik>
-Reply-To: Petr Vorel <pvorel@suse.cz>
-References: <20260113113612.315748-1-pvorel@suse.cz>
- <87a4ydo1hf.fsf@trenco.lwn.net>
- <aWqg5XwPRXlzq4FI@devuan>
+	s=arc-20240116; t=1768911473; c=relaxed/simple;
+	bh=iIuzik8f3PuL5IiD05JYvutWRTw3mpzpbRggsiY4kB4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QQRygGD/xxguULNEVmzTO0+si1ctyv31elVadX5HBSm5Cx1ixq11VApVBEfNjLVzkn7UVNoXgRllByJo9eVMTedx/MOB4popDG3fH844L5xqzu/r8Gk5XTeqd1iMorCTkLWEkqiSZmejggWCf9AxJgtHSZjseLQP0d53VOcwhzg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=boq31eZl; arc=none smtp.client-ip=209.85.221.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wr1-f66.google.com with SMTP id ffacd0b85a97d-43596062728so115826f8f.1
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 04:17:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1768911469; x=1769516269; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=iJRswF5rrqok4Sjk5jUvdiR7sS5VwezMU3Ml3c2KzVk=;
+        b=boq31eZl0sUGywf9IH6qctlquE+MboocMi5kXOESrth2/RLFNyNekK9Yz2p1Dm4t9q
+         pzPu50oo+ZQND3pYlw9dqv/dzBtad2jjkOxqOgH5zj9JdQbt4TzZMQ1CL+5Y93Ptb+la
+         e68NZCwT7H95F6HnUMCIbzjTX4lYBvMufaKkpt95DH3x2a+wlmkPFq6H58XsYpvNyLRD
+         0iudwmABr3Nnsdhy0fiTlKZQETK2XdxsXMpqi5nnrsk1w6Ug3pY8EG8Pk3MwB9OS2Aud
+         +3stOyreBUDzcd7CQMyvNzeCsvA6aeAxsLN5gZFf3huV2+gCBGtMMGAOJy97nuT6HP2Z
+         +toQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768911469; x=1769516269;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iJRswF5rrqok4Sjk5jUvdiR7sS5VwezMU3Ml3c2KzVk=;
+        b=h3t85gbrKS+hnbU+k9PYZ+6x6gPnDvfSMJ0lkz25g69ErQp+Mt1kT+lcmSqTkHu6fT
+         Ml1OYD0xzW5UQlEPFkDX54jOeih/GgDkFIk4CdCUmOrgu+eQVwtwXwCUGqaEU0uboA8Z
+         QqKoTHRpP9uK50Es6+4KlzC3gQkXxYckDRb8jqXuEfLCg+S2i6uLOak4ksPOZ60KWPNi
+         mR/hiVBEFRq5nAoZmlYfpf/VdgBjF77cuk3AIqOcJlOjr73YTDOLtj+XPO2CQxVfpQbc
+         a5BWTvpnizqLSfYFQS/qPgeqFqw2ttOoadABSC5WVqObWJfkB7TTBXO1G1C4AG0yKaS9
+         L1Aw==
+X-Forwarded-Encrypted: i=1; AJvYcCU7n6uLaadpPp1Bd+U4UsBYmAtGRpubKDur1d9KCOtUiS6nMuQFfxkjuI+0k6Sidisz6TtBRyTs0f0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz58pKkB5AdNd1KKMJNVUoVA1LRJtuTUnVGn49YCbc0QsLOF5bm
+	//9FSwBqKESg+yyNZlQiNdimkKaER4IaQ88qt3/PBGDgrnKA9d30n5aFGXSDxjXx0bQ=
+X-Gm-Gg: AZuq6aKavHAndfadsVIOgQBPxDc0EyMs297ULoD8sliZ4z9zUM1ImMNFBJqddicBpKp
+	keRWNr5z4rYImoQRv21sqN5OrHOF/bVL2A74ndBVNyq7E4kQ2IVyE33/PhcsLrpNVIA2YqQ12XJ
+	/Azx0wgosO4g3figFecNwJlRK6Xz200mPOiyIlX1c4SSQrT2oEWNvLopvZc7bmJt28MSXrM0qPx
+	sLpeVv25nApuEnASjL7Kr7eE5DstEBqhGCcSG8lZo8pVO++j1dxYtndoaTymxpTG7L9Q9maTAhg
+	vjbclZqFSP66KYTExHAU7DCDlZIF9VbiawvLNg2Wf4+b61HPoRwGnwniAcq4p/wdNnRYcP/v2HU
+	w0g4qpaAbPphaKsyr1Dv3FgeyrZXoWALv0AjaRtZH5tPKBL6M6lFg88pxl0h5X6xoXN2EMt3Ilb
+	Mpr3L0kP5Y6Gpu2V0wPr1xR+rju/JtGmO5Rr5+CdeE
+X-Received: by 2002:a05:6000:2387:b0:42f:b555:5275 with SMTP id ffacd0b85a97d-43569548aa2mr19948618f8f.10.1768911469374;
+        Tue, 20 Jan 2026 04:17:49 -0800 (PST)
+Received: from [10.0.1.22] (109-81-1-107.rct.o2.cz. [109.81.1.107])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4356997e6dasm29657069f8f.32.2026.01.20.04.17.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 20 Jan 2026 04:17:49 -0800 (PST)
+Message-ID: <4d379736-9b6a-4e40-ad67-53ee7498759c@suse.com>
+Date: Tue, 20 Jan 2026 13:17:48 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aWqg5XwPRXlzq4FI@devuan>
-X-Spamd-Result: default: False [-3.71 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_RHS_NOT_FQDN(0.50)[];
-	HAS_REPLYTO(0.30)[pvorel@suse.cz];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] Documentation/kbuild: Document gendwarfksyms build
+ dependencies
+To: linjh22s@gmail.com
+Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Miguel Ojeda <ojeda@kernel.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Sami Tolvanen <samitolvanen@google.com>,
+ Masahiro Yamada <masahiroy@kernel.org>, linux-modules@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260114-documents_gendwarfksyms-v2-0-297c98bd62c6@gmail.com>
+ <20260114-documents_gendwarfksyms-v2-1-297c98bd62c6@gmail.com>
+Content-Language: en-US
+From: Petr Pavlu <petr.pavlu@suse.com>
+In-Reply-To: <20260114-documents_gendwarfksyms-v2-1-297c98bd62c6@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.46 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
+	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
+	HAS_LIST_UNSUB(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,gmail.com,google.com,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[man7.org:url,suse.cz:replyto,suse.cz:dkim,suse.cz:email];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.cz:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-73233-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[suse.com,quarantine];
+	DKIM_TRACE(0.00)[suse.com:+];
 	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	REPLYTO_EQ_FROM(0.00)[]
-X-Spam-Flag: NO
-X-Spam-Score: -3.71
-X-Rspamd-Queue-Id: 058EB337DE
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,suse.com:email,suse.com:dkim,suse.com:mid]
+X-Rspamd-Queue-Id: 470C4472DE
 X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spam-Level: 
+X-Rspamd-Server: lfdr
 
-> Hi Jon,
+On 1/14/26 12:47 PM, Jihan LIN via B4 Relay wrote:
+> From: Jihan LIN <linjh22s@gmail.com>
+> 
+> Although dependencies for gendwarfksyms were recently added to the
+> packaging rules [1-2], the corresponding documentation was missing.
+> 
+> Document the required build dependencies for gendwarfksyms, and
+> include a few examples for installing these dependencies on some
+> distributions.
+> 
+> [1] commit 657f96cb7c06 ("kbuild: deb-pkg: Add libdw-dev:native to
+> Build-Depends-Arch")
+> [2] commit 5bd6bdd0f76e ("kbuild: rpm-pkg: Add (elfutils-devel or
+> libdw-devel) to BuildRequires")
+> Signed-off-by: Jihan LIN <linjh22s@gmail.com>
+> ---
+>  Documentation/kbuild/gendwarfksyms.rst | 23 +++++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+> 
+> diff --git a/Documentation/kbuild/gendwarfksyms.rst b/Documentation/kbuild/gendwarfksyms.rst
+> index ed366250a54eac3a72c2f529da94a9e803704ae4..0e153d13b052da6edcf65950739730c123cd49db 100644
+> --- a/Documentation/kbuild/gendwarfksyms.rst
+> +++ b/Documentation/kbuild/gendwarfksyms.rst
+> @@ -14,6 +14,29 @@ selected, **gendwarfksyms** is used instead to calculate symbol versions
+>  from the DWARF debugging information, which contains the necessary
+>  details about the final module ABI.
+>  
+> +Dependencies
+> +------------
+> +
+> +libelf, libdw and zlib are dependencies of gendwarfksyms.
+> +
+> +Here are a few examples for installing these dependencies:
+> +
+> +* Arch Linux and derivatives::
+> +
+> +	sudo pacman --needed -S zlib libelf
+> +
+> +* Debian, Ubuntu, and derivatives::
+> +
+> +	sudo apt install libelf-dev libdw-dev zlib1g-dev
+> +
+> +* Fedora and derivatives::
+> +
+> +	sudo dnf install elfutils-libelf-devel elfutils-devel zlib-devel
+> +
+> +* openSUSE and derivatives::
+> +
+> +	sudo zypper install libelf-devel libdw-devel zlib-devel
+> +
 
-> On Fri, Jan 16, 2026 at 11:29:16AM -0700, Jonathan Corbet wrote:
-> > Petr Vorel <pvorel@suse.cz> writes:
+Nit: I suggest slightly adjusting the text to something like:
 
-> > > Changes v1->v2:
-> > > * Remove `...` (italic) from non-existing man pages (Jonathan).
-> > > * Squash fix for sp_SP to following commit (Jonathan).
-> > > * Remove :manpage: also from fxyzzy(3) (non-existing man page).
-> > > * Add CSS for man page.
+"""
+Gendwarfksyms depends on the libelf, libdw, and zlib libraries.
 
-> > > Link to v2:
-> > > https://lore.kernel.org/linux-doc/20260111233534.183272-1-pvorel@suse.cz/
+Here are a few examples of how to install these dependencies:
+"""
 
-> > > Link to v1:
-> > > https://lore.kernel.org/linux-doc/20260109183012.114372-1-pvorel@suse.cz/
+.. and swap the items on the pacman line to 'libelf zlib' so the order
+is always libelf, libdw, zlib.
 
-> > > Petr Vorel (3):
-> > >   Documentation: Remove :manpage: from non-existing man pages
-> > >   Documentation: Link man pages to https://man7.org/
-> > >   Documentation: CSS: Improve man page font
+Looks ok to me nonetheless, the list is consistent with similar examples
+in Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst.
 
-> > >  Documentation/conf.py                            |  3 +++
-> > >  Documentation/process/adding-syscalls.rst        | 16 ++++++++--------
-> > >  Documentation/sphinx-static/custom.css           |  8 +++++++-
-> > >  .../it_IT/process/adding-syscalls.rst            | 16 ++++++++--------
-> > >  .../sp_SP/process/adding-syscalls.rst            | 16 ++++++++--------
-> > >  5 files changed, 34 insertions(+), 25 deletions(-)
+Reviewed-by: Petr Pavlu <petr.pavlu@suse.com>
 
-> > I have applied this set, thanks.
-
-> > Even nicer, of course, would be to have automarkup recognize man-page
-> > references and add the links automatically so we wouldn't need the
-> > :manpage: noise.  Something for another day, I guess...
-
-> We had some old scripts within the manual pages, which did something
-> similar, and they had false positives.  For example, 'exit(1)' is
-> ambiguous, since a script can't know if it refers to calling exit(3)
-> with value 1, or if it's a reference to the shell builtin.
-
-Ah, so there are false positives.
-
-Kind regards,
+-- 
+Thanks,
 Petr
-
-> I'd recommend being cautious about it.  :)
-
-
-> Have a lovely night!
-> Alex
 
