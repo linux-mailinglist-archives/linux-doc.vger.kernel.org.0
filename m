@@ -1,325 +1,260 @@
-Return-Path: <linux-doc+bounces-73271-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73274-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QNXxNMe/b2kOMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73271-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:47:51 +0100
+	id UNGeCFTCb2lsMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-73274-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:58:44 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E31348D26
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:47:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA9B848FA1
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:58:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 54ED63AC8D8
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 14:54:37 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 3EDC07A99A0
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 15:11:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 609C744BC8C;
-	Tue, 20 Jan 2026 14:42:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C13244E02D;
+	Tue, 20 Jan 2026 14:57:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="JlfL63bJ"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="fHkfSTnC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-106120.protonmail.ch (mail-106120.protonmail.ch [79.135.106.120])
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012039.outbound.protection.outlook.com [40.107.209.39])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DA7B451076
-	for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 14:42:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.120
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768920161; cv=none; b=LI1U8cJNysJRcuJEMw70jmGHED4acyF6ExeN4zBWV+LHtqGzsQ87CQqoY2nkMPvzV7e7LV3EUvGVm3inuYNDo9L9YFCKqKdKlvb/DU7oQfwZvn2MVu7ZOWFVrsoZAIMlOkKC7c8YfuL+YWGAgyyyoUdgY85SZAHQJ9m1oKq5iz4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768920161; c=relaxed/simple;
-	bh=qTJWzJow6hLb5CJst+7V7EPhIOGpFAkc4XUSggLsYlU=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=A2XWc8LW0GlEPr5DCObeTcBACT05sBUvZ6wHHdfTZIk74FP4KUFIWdTgplfrlGAVdmV9KJflfOBvta7BP3HOxUSimDsgCq2OGBE+SPPPZ31KCtckeCmcDDIPwqGyfOnpgi1Wwgo3bx0aWWTZOguRwLC8QXt6lnVUc9Vd3E4NBD4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=JlfL63bJ; arc=none smtp.client-ip=79.135.106.120
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1768920149; x=1769179349;
-	bh=bmUmrOlKhI6wNEzER1H0s0qiO0fQKgJ0/TqrNEAdJVI=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=JlfL63bJ0lgRqfzAt//rDNzAd0ZbCV+BGem1zygXhKXHsWSfbtowpUJGP9ScwEp8b
-	 Pt31kbwVyUpCj2B8wlMLwfBrl9cHhn4+iQOOdGdBsDRCF/DppblYOFm4FaZ9tJh5YL
-	 aE9qAoQ4LJ4R6KH0oBxn6xh0NLzNCmeTh++jSKh7b3W6wkZ9WpSWIvM9QMzc3mh2bf
-	 KFV081Qa5xgoQl8DYbu1HsBMd4PPMzVctvvDxj6FvstNBP0WyIeGj77Z5xaDhyKETt
-	 bKv8tLXmS0iaO0GF+cLUgurVHrlkFiNz659X9l4dIL+DQ14e2WxBm8O9bMYN/HHgjZ
-	 Ml6y5/vOS84vw==
-Date: Tue, 20 Jan 2026 14:42:25 +0000
-To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>, Andrey Ryabinin <ryabinin.a.a@gmail.com>, Alexander Potapenko <glider@google.com>, Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>, Vincenzo Frascino <vincenzo.frascino@arm.com>, Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Andrew Morton <akpm@linux-foundation.org>
-From: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
-Cc: m.wieczorretman@pm.me, Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, kasan-dev@googlegroups.com
-Subject: [PATCH v9 13/13] x86/kasan: Make software tag-based kasan available
-Message-ID: <4853c70ee54710d0d9500377f981e6ef790c1a67.1768845098.git.m.wieczorretman@pm.me>
-In-Reply-To: <cover.1768845098.git.m.wieczorretman@pm.me>
-References: <cover.1768845098.git.m.wieczorretman@pm.me>
-Feedback-ID: 164464600:user:proton
-X-Pm-Message-ID: 12c243cb5af5d544eac521e988f40f02d4f80de1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 415FC44DB91;
+	Tue, 20 Jan 2026 14:57:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.209.39
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768921045; cv=fail; b=gm3BCBjAPn8jNjk3oVUD6x62MB5vuIdvuW1Gv38IhRFMvEgucBMGquPSQv8QncmAz83PKWxZlNJsmkn86+sDvXwzTK/jP02G3yEoCS/gf7pwdWFfceNkMJpeA7m1eVEhb047Qs8AeWdoD4IPdVX+gH6slKWtZ/rcyjAbgeJcTCA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768921045; c=relaxed/simple;
+	bh=8YHy7bYx3m4iaMFIavzvNRj5w+gu0UODg/av+mgpaU8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=iDiSQDprVD72Zu+DcG8nwnNiDM6CIU+Jg3EnVXMl/cn2x6x+hycgmrQ/yRILAgusnt4lxXB7gyXRA2dXmcDN2Sn6ra6r+g0IeuQY6NyCJ+nTdAnKB43qeKbOl11/d3FWt5GphkJy74nr9UkDEsktTclp8y76D6g1rcwsHOZj/bk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=fHkfSTnC; arc=fail smtp.client-ip=40.107.209.39
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ht6uXiYnpaxlGLbuypLIHST39HTrpgfvdGAM73NpampLAjNMwjpxJwh4gzrCZAiPCK846q06y3r1bDcjf8V/A3ta44b12/b+oYKCY+hrQCLGqHCWvDuJVg6b7+eW72SKNRaU6swwF3LHg3joeFM8CTDZ1SZwDlXR8b+o308u6+c6FiXwRLQ56IXpnGcJd2pTs7nDHOvAflEwkHuxHteACeJazjEferXYvf6EskNyOcisdvvQINLUDYmLsIFEjDCaPTRrvpbbR4LZrT054CkZkzYnHPkp3bsE5G6xA6sOP4CV7pcdpNDFTOoxQWlW+KevqZIm6SO20ZdPf/unwlSHuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8sOlvaeJXxqviArKK3gX0tgedNWh4WrM8OsM/lUmhas=;
+ b=nrFbDj1W2biIJaDAPnRUIGN01FVlgjEq3Ry8yqYktH/aF7zWFc/axLQ/fBa/SK41guhsVV0GJMKRSdOJjP1LjPgg7LeOMENHZxznIDkZMCFwMgtcm4LXnVGiHu/5cjUSifdNk6lh/50yIMGUbKoITcy8VWkYzw9yFQGnf4KJ4OyW5mj8HiAQV548/yU2i48OSJ8akXGNegnqw8Y5X70/EuWGxhIK4DxB2/oKREdtAYo/BwAEzBdodl/yn1I3Ts6MekwgiMjfECEj8PgcfYykADKXboVhkDgF5GAsrqUw9Z0xB7zgmXZfKvFzhTQu9E/ua+XjcIK1a49WSZ3i0PZUbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8sOlvaeJXxqviArKK3gX0tgedNWh4WrM8OsM/lUmhas=;
+ b=fHkfSTnCyLL0PrTJUQHyEoxuWUnWLvICrwG3sA+qgn9ejS1oNuK6Amqg1x8p1iDQzN8NbQ4/ULNnkzmFNL0G8HS2OQtl8yUe7DQFnaOKEckQPn3ZGUHW0D1Ae1/71AesW7KFx2XihBUaU4RgYAQcKDC+arcLxO4Vw3FBrfjnxEu57Rb7rXEjJMAyFzhWhGNoXOotCqL0BCpVjzZfS0TrxxFxEBRjlJT5CY2Xlj01+3tyUohg3ooUAegHjtDpPUqtorwT9ZYQl62SaYu1L59/8p/oYER6LOhksANCyYeOmZ8Rv68B2KZ0S0TaP1xwiQT+mr/3C8H4T9yDOqhHyOJxpg==
+Received: from PH8PR15CA0016.namprd15.prod.outlook.com (2603:10b6:510:2d2::26)
+ by DS2PR12MB9565.namprd12.prod.outlook.com (2603:10b6:8:279::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.12; Tue, 20 Jan
+ 2026 14:57:14 +0000
+Received: from CY4PEPF0000E9DB.namprd05.prod.outlook.com
+ (2603:10b6:510:2d2:cafe::e0) by PH8PR15CA0016.outlook.office365.com
+ (2603:10b6:510:2d2::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.9 via Frontend Transport; Tue,
+ 20 Jan 2026 14:57:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ CY4PEPF0000E9DB.mail.protection.outlook.com (10.167.241.74) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9542.4 via Frontend Transport; Tue, 20 Jan 2026 14:57:13 +0000
+Received: from rnnvmail204.nvidia.com (10.129.68.6) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 20 Jan
+ 2026 06:56:38 -0800
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail204.nvidia.com
+ (10.129.68.6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 20 Jan
+ 2026 06:56:38 -0800
+Received: from sumitg-l4t.nvidia.com (10.127.8.14) by mail.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server id 15.2.2562.20 via Frontend
+ Transport; Tue, 20 Jan 2026 06:56:30 -0800
+From: Sumit Gupta <sumitg@nvidia.com>
+To: <rafael@kernel.org>, <viresh.kumar@linaro.org>, <pierre.gondois@arm.com>,
+	<zhenglifeng1@huawei.com>, <ionela.voinescu@arm.com>, <lenb@kernel.org>,
+	<robert.moore@intel.com>, <corbet@lwn.net>, <rdunlap@infradead.org>,
+	<ray.huang@amd.com>, <gautham.shenoy@amd.com>, <mario.limonciello@amd.com>,
+	<perry.yuan@amd.com>, <zhanjie9@hisilicon.com>, <linux-pm@vger.kernel.org>,
+	<linux-acpi@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<acpica-devel@lists.linux.dev>, <linux-kernel@vger.kernel.org>
+CC: <linux-tegra@vger.kernel.org>, <treding@nvidia.com>,
+	<jonathanh@nvidia.com>, <vsethi@nvidia.com>, <ksitaraman@nvidia.com>,
+	<sanjayc@nvidia.com>, <nhartman@nvidia.com>, <bbasu@nvidia.com>,
+	<sumitg@nvidia.com>
+Subject: [PATCH v6 0/9] Enhanced autonomous selection and improvements
+Date: Tue, 20 Jan 2026 20:26:14 +0530
+Message-ID: <20260120145623.2959636-1-sumitg@nvidia.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [0.54 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9DB:EE_|DS2PR12MB9565:EE_
+X-MS-Office365-Filtering-Correlation-Id: de0a6c15-e1be-4db9-b0df-08de58343238
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|7416014|376014|82310400026|1800799024|13003099007|921020;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?GDb47K65D68/waXdewffZlbCd1zbTAbluAa91lN3IHpY1nfKJNceZpHaOXeY?=
+ =?us-ascii?Q?YtgDcSfnupXNrLu95ynRvjBUU6E9i7olex3JdqN+H5uS8GvvYat8Qs//LFgB?=
+ =?us-ascii?Q?ETNuDSYLOe5ClMHRdM7U7kBizb2vQD2ABjRfcwQT5B/wxcH8J70GFVTVRUYC?=
+ =?us-ascii?Q?kQ8TNv/DrkkP51cBq4mp2aLCpthbFRi+pa8avdVwkXvG43jwQQnqFDgivm1P?=
+ =?us-ascii?Q?Gznqs1Bj68paQslY743iJC3jxWBFfHhmit6/peazAPC8P4QOWYXRKDSGM8hj?=
+ =?us-ascii?Q?E0PY6M/U9gnWoN50UGy9DyEKr3ceJ1QtFAc+wP5wNMN/m4ZgkPrgoOfPZDkl?=
+ =?us-ascii?Q?1RqUQjJAdctCLCLakwUWXNDwhytrJ0HDI7HrnYh+6I2lqauoHiKdMOCGcZEF?=
+ =?us-ascii?Q?fv+1LNBiaihP50jNkySjdDOYk997w4lo3r25uymTgrrLz0Z9r0wjaihdeq9K?=
+ =?us-ascii?Q?xtAQlVrA1qqvkr9r7+6GuvUJFiSG6nZoR72QzFgdqmJzpBTuc91HjSj6O/55?=
+ =?us-ascii?Q?0+n3T+pEUCIEtnqLazFPxl8BdBCJUmbOpTn0IDyT3BuaxTdAI/zKgbNdvSQy?=
+ =?us-ascii?Q?tjNcFVqLK4GLMhEAXopgP3KawbDEoxDwdZ9Y2GlXgM4+uzXRiFxMNDeU/Aok?=
+ =?us-ascii?Q?q/cZQYG4J5/Zvt98qw995HPreWSgExvTT7ZWOowIJgHRDULRS4Nz99lK1sWn?=
+ =?us-ascii?Q?hveI5WAXhPWF2G8bUv1UdIXWAQCqp9wFSN50nXrzB35YqoE3apc7hAAcYIXn?=
+ =?us-ascii?Q?2H7RznSmzMDv6HIWiWRsl3N7nnWvj8AZHg+0lKY6NCogcfKXJGb6jfYe0EZq?=
+ =?us-ascii?Q?pa4hYBtHBECGluZnD6Pmjhnq0efIy0QPHPgrPTHdbuiN6ZPaTlfoMDc2iuxK?=
+ =?us-ascii?Q?h9t4lRSMrnkQROlAbC9N5kvLm3fWzZrLjE/1AXzjtDKFuLBJnV/7vBvygiLc?=
+ =?us-ascii?Q?CywwMi6VOwlh1cGsM8ExZiGLfSCymMgD8++Iwq475hDC8JagE+bDQtRGUvHo?=
+ =?us-ascii?Q?2kGhEtD4Ye5nQSZOw03shc/yehtxFd1xUL0nm0afKjtAMYnI0/ucx0/67lpC?=
+ =?us-ascii?Q?/ewQnY0Xm6gsRUiTlJ0xzwXXMJ5g1OAS21189/c3GCBWd0uSDDqO7f3NO+Je?=
+ =?us-ascii?Q?SYHscPyb9ilmAvQdINL0PRSv0oR4yElW+fKV2cPy9GD4YXf3oyKeMrH1H5f/?=
+ =?us-ascii?Q?FP/Hd3IparSNGEMLh1Ezs6aCFiz1rgcDr6ybhkUkQ5TgIuRGIU+rxh3UEb7v?=
+ =?us-ascii?Q?y1epoVJPSA0Kbas0oMwOpzv+6F/aHvVK52eM8Z2G0Rfdb3fu95Ds/qSqWtOG?=
+ =?us-ascii?Q?7UtLEJATUcVH9rd0wx6Bn2nUFtMOWm94N/Q/+h8EH/VfVdbyEPhHk8Hs1qHJ?=
+ =?us-ascii?Q?Qs3w5UPVa5wHaX6yPbBKOuv3z98LSSfCAr8hIMG0hH+i/BUEKTnvWvmHLIfm?=
+ =?us-ascii?Q?o05b4cNQ+dFNb6d7CeXZw0mjbFSJxwYbdu020Wglb1qh2kxqNNO6ul7Phodm?=
+ =?us-ascii?Q?XmwV5TkslfCWKMRw0o/2cJgtuvORHpjI4qPoHHMT2bVSt9kWSYY41dWAEG/B?=
+ =?us-ascii?Q?j+6B7/HQDUssK5sSZEpceIY4EUm53X8MaXdwTd3syJK5cxzGgBIzAy8aSdAP?=
+ =?us-ascii?Q?EqQ8gD5zmSsYUl0nrwb9ILwqMXmY9KQeYrq6GyOYiX2gsl67Hf6OMckkmdYk?=
+ =?us-ascii?Q?HbKMELcKHNQR3/5glfPCIcFlqxc=3D?=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(36860700013)(7416014)(376014)(82310400026)(1800799024)(13003099007)(921020);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2026 14:57:13.5935
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: de0a6c15-e1be-4db9-b0df-08de58343238
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF0000E9DB.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9565
+X-Spamd-Result: default: False [1.54 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[pm.me:s=protonmail3];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73271-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,lwn.net,gmail.com,google.com,arm.com,infradead.org,linux-foundation.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[pm.me:+];
-	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73274-lists,linux-doc=lfdr.de];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[m.wieczorretman@pm.me,linux-doc@vger.kernel.org];
-	DMARC_POLICY_ALLOW(0.00)[pm.me,quarantine];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sumitg@nvidia.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	DMARC_POLICY_ALLOW(0.00)[nvidia.com,reject];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[pm.me:mid,pm.me:dkim,intel.com:email,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: 7E31348D26
+	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,nvidia.com:mid,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: DA9B848FA1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
+As discussed in [6], v5 is split into two parts. This is part 1
+(v5 patches 1-7) and can be applied independently. I will follow up
+separately with part 2 (v5 patches 8-11).
 
-Make CONFIG_KASAN_SW_TAGS available for x86 machines if they have
-ADDRESS_MASKING enabled (LAM) as that works similarly to Top-Byte Ignore
-(TBI) that allows the software tag-based mode on arm64 platform.
+This patch series adds sysfs interfaces for CPPC min_perf, max_perf,
+and perf_limited registers, along with supporting ACPI APIs and
+improvements for the cppc_cpufreq driver.
 
-The value for sw_tags KASAN_SHADOW_OFFSET was calculated by rearranging
-the formulas for KASAN_SHADOW_START and KASAN_SHADOW_END from
-arch/x86/include/asm/kasan.h - the only prerequisites being
-KASAN_SHADOW_SCALE_SHIFT of 4, and KASAN_SHADOW_END equal to the
-one from KASAN generic mode.
+CPPC autonomous mode (auto_sel) enables hardware-driven CPU performance
+scaling using Energy Performance Preference (EPP) hints. Currently,
+there's limited runtime control and visibility into CPPC performance
+registers.
 
-Set scale macro based on KASAN mode: in software tag-based mode 16 bytes
-of memory map to one shadow byte and 8 in generic mode.
+This series addresses these gaps by:
+1. Exposing min_perf/max_perf registers via sysfs (as frequency in kHz)
+   to allow fine-grained performance bounds control in autonomous mode.
+2. Exposing perf_limited register to detect and clear throttling events.
 
-Disable CONFIG_KASAN_INLINE and CONFIG_KASAN_STACK when
-CONFIG_KASAN_SW_TAGS is enabled on x86 until the appropriate compiler
-support is available.
+It also includes code improvements: generic sysfs helpers, struct
+cleanup, new APIs for reading performance controls, and extended
+epp_perf support.
 
-Lock software tag KASAN behind CC_IS_CLANG due to lack of proper support
-by gcc resulting in kernel booting issues.
+The patches are grouped as below:
+- Patch 1: Generic sysfs helpers (refactoring, independent).
+- Patch 2-4: Code improvements (can be applied independently).
+- Patch 5: Extend cppc_set_epp_perf for FFH/SystemMemory (independent).
+- Patch 6-7: APIs and sysfs for min/max_perf, perf_limited (independent).
+- Patch 8: ABI documentation (depends on patch 6-7).
+- Patch 9: Update cached perf_ctrls on sysfs write (depends on patch 6).
 
-Signed-off-by: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
 ---
-Changelog v9:
-- Lock HAVE_ARCH_KASAN_HAS_SW_TAGS behind CC_IS_CLANG due to lack of
-  support from gcc.
-- Remove pr_info() from KASAN initialization since it's now done by the
-  generic init helper.
-- Add paragraph to the mm.rst to explain the mutual exclusive nature of
-  the KASAN address ranges.
-- Use cpu_feature_enabled() instead of boot_cpu_has() in
-  kasan_init_64.c.
+v5[5] -> v6:
+- Split patchset as described above.
+- patch1: added CPPC_CPUFREQ_ATTR_RW_U64 macro for sysfs attributes.
+- patch3: new patch to rename EPP constants for clarity.
+- patch5: simplified else block in cppc_set_epp_perf().
+- patch6: fallback to caps values if registers are uninitialized.
+- patch7: use CPPC_CPUFREQ_ATTR_RW_U64 macro for perf_limited sysfs.
+- patch9: new patch to update cached perf_ctrls on sysfs write.
+- Renamed mutex to cppc_cpufreq_autonomous_lock.
 
-Changelog v7:
-- Add a paragraph to the patch message explaining how the various
-  addresses and the KASAN_SHADOW_OFFSET were calculated.
+Sumit Gupta (9):
+  cpufreq: CPPC: Add generic helpers for sysfs show/store
+  ACPI: CPPC: Clean up cppc_perf_caps and cppc_perf_ctrls structs
+  ACPI: CPPC: Rename EPP constants for clarity
+  ACPI: CPPC: Add cppc_get_perf() API to read performance controls
+  ACPI: CPPC: Extend cppc_set_epp_perf() for FFH/SystemMemory
+  ACPI: CPPC: add APIs and sysfs interface for min/max_perf
+  ACPI: CPPC: add APIs and sysfs interface for perf_limited
+  cpufreq: CPPC: Add sysfs for min/max_perf and perf_limited
+  cpufreq: CPPC: Update cached perf_ctrls on sysfs write
 
-Changelog v6:
-- Don't enable KASAN if LAM is not supported.
-- Move kasan_init_tags() to kasan_init_64.c to not clutter the setup.c
-  file.
-- Move the #ifdef for the KASAN scale shift here.
-- Move the gdb code to patch "Use arithmetic shift for shadow
-  computation".
-- Return "depends on KASAN" line to Kconfig.
-- Add the defer kasan config option so KASAN can be disabled on hardware
-  that doesn't have LAM.
+ .../ABI/testing/sysfs-devices-system-cpu      |  44 ++++
+ drivers/acpi/cppc_acpi.c                      | 206 +++++++++++++++-
+ drivers/cpufreq/cppc_cpufreq.c                | 224 ++++++++++++++++--
+ include/acpi/cppc_acpi.h                      |  46 +++-
+ 4 files changed, 491 insertions(+), 29 deletions(-)
 
-Changelog v4:
-- Add x86 specific kasan_mem_to_shadow().
-- Revert x86 to the older unsigned KASAN_SHADOW_OFFSET. Do the same to
-  KASAN_SHADOW_START/END.
-- Modify scripts/gdb/linux/kasan.py to keep x86 using unsigned offset.
-- Disable inline and stack support when software tags are enabled on
-  x86.
+[1] https://lore.kernel.org/lkml/20250211103737.447704-1-sumitg@nvidia.com/
+[2] https://lore.kernel.org/lkml/20250823200121.1320197-1-sumitg@nvidia.com/
+[3] https://lore.kernel.org/lkml/20251001150104.1275188-1-sumitg@nvidia.com/
+[4] https://lore.kernel.org/lkml/20251105113844.4086250-1-sumitg@nvidia.com/
+[5] https://lore.kernel.org/lkml/20251223121307.711773-1-sumitg@nvidia.com/
+[6] https://lore.kernel.org/lkml/66f58f43-631b-40a0-8d42-4e90cd24b757@arm.com/
 
-Changelog v3:
-- Remove runtime_const from previous patch and merge the rest here.
-- Move scale shift definition back to header file.
-- Add new kasan offset for software tag based mode.
-- Fix patch message typo 32 -> 16, and 16 -> 8.
-- Update lib/Kconfig.kasan with x86 now having software tag-based
-  support.
-
-Changelog v2:
-- Remove KASAN dense code.
-
- Documentation/arch/x86/x86_64/mm.rst | 10 ++++++++--
- arch/x86/Kconfig                     |  4 ++++
- arch/x86/boot/compressed/misc.h      |  1 +
- arch/x86/include/asm/kasan.h         |  5 +++++
- arch/x86/mm/kasan_init_64.c          |  5 +++++
- lib/Kconfig.kasan                    |  3 ++-
- 6 files changed, 25 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/arch/x86/x86_64/mm.rst b/Documentation/arch/x86/=
-x86_64/mm.rst
-index a6cf05d51bd8..7e2e4c5fa661 100644
---- a/Documentation/arch/x86/x86_64/mm.rst
-+++ b/Documentation/arch/x86/x86_64/mm.rst
-@@ -60,7 +60,8 @@ Complete virtual memory map with 4-level page tables
-    ffffe90000000000 |  -23    TB | ffffe9ffffffffff |    1 TB | ... unused=
- hole
-    ffffea0000000000 |  -22    TB | ffffeaffffffffff |    1 TB | virtual me=
-mory map (vmemmap_base)
-    ffffeb0000000000 |  -21    TB | ffffebffffffffff |    1 TB | ... unused=
- hole
--   ffffec0000000000 |  -20    TB | fffffbffffffffff |   16 TB | KASAN shad=
-ow memory
-+   ffffec0000000000 |  -20    TB | fffffbffffffffff |   16 TB | KASAN shad=
-ow memory (generic mode)
-+   fffff40000000000 |   -8    TB | fffffbffffffffff |    8 TB | KASAN shad=
-ow memory (software tag-based mode)
-   __________________|____________|__________________|_________|___________=
-_________________________________________________
-                                                               |
-                                                               | Identical =
-layout to the 56-bit one from here on:
-@@ -130,7 +131,8 @@ Complete virtual memory map with 5-level page tables
-    ffd2000000000000 |  -11.5  PB | ffd3ffffffffffff |  0.5 PB | ... unused=
- hole
-    ffd4000000000000 |  -11    PB | ffd5ffffffffffff |  0.5 PB | virtual me=
-mory map (vmemmap_base)
-    ffd6000000000000 |  -10.5  PB | ffdeffffffffffff | 2.25 PB | ... unused=
- hole
--   ffdf000000000000 |   -8.25 PB | fffffbffffffffff |   ~8 PB | KASAN shad=
-ow memory
-+   ffdf000000000000 |   -8.25 PB | fffffbffffffffff |   ~8 PB | KASAN shad=
-ow memory (generic mode)
-+   ffeffc0000000000 |   -6    PB | fffffbffffffffff |    4 PB | KASAN shad=
-ow memory (software tag-based mode)
-   __________________|____________|__________________|_________|___________=
-_________________________________________________
-                                                               |
-                                                               | Identical =
-layout to the 47-bit one from here on:
-@@ -176,5 +178,9 @@ Be very careful vs. KASLR when changing anything here. =
-The KASLR address
- range must not overlap with anything except the KASAN shadow area, which i=
-s
- correct as KASAN disables KASLR.
-=20
-+The 'KASAN shadow memory (generic mode)/(software tag-based mode)' ranges =
-are
-+mutually exclusive and depend on which KASAN setting is chosen:
-+CONFIG_KASAN_GENERIC or CONFIG_KASAN_SW_TAGS.
-+
- For both 4- and 5-level layouts, the KSTACK_ERASE_POISON value in the last=
- 2MB
- hole: ffffffffffff4111
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 80527299f859..877668cd5deb 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -67,6 +67,7 @@ config X86
- =09select ARCH_CLOCKSOURCE_INIT
- =09select ARCH_CONFIGURES_CPU_MITIGATIONS
- =09select ARCH_CORRECT_STACKTRACE_ON_KRETPROBE
-+=09select ARCH_DISABLE_KASAN_INLINE=09if X86_64 && KASAN_SW_TAGS
- =09select ARCH_ENABLE_HUGEPAGE_MIGRATION if X86_64 && HUGETLB_PAGE && MIGR=
-ATION
- =09select ARCH_ENABLE_MEMORY_HOTPLUG if X86_64
- =09select ARCH_ENABLE_MEMORY_HOTREMOVE if MEMORY_HOTPLUG
-@@ -196,6 +197,8 @@ config X86
- =09select HAVE_ARCH_JUMP_LABEL_RELATIVE
- =09select HAVE_ARCH_KASAN=09=09=09if X86_64
- =09select HAVE_ARCH_KASAN_VMALLOC=09=09if X86_64
-+=09select HAVE_ARCH_KASAN_SW_TAGS=09=09if ADDRESS_MASKING && CC_IS_CLANG
-+=09select ARCH_NEEDS_DEFER_KASAN=09=09if ADDRESS_MASKING
- =09select HAVE_ARCH_KFENCE
- =09select HAVE_ARCH_KMSAN=09=09=09if X86_64
- =09select HAVE_ARCH_KGDB
-@@ -410,6 +413,7 @@ config AUDIT_ARCH
- config KASAN_SHADOW_OFFSET
- =09hex
- =09depends on KASAN
-+=09default 0xeffffc0000000000 if KASAN_SW_TAGS
- =09default 0xdffffc0000000000
-=20
- config HAVE_INTEL_TXT
-diff --git a/arch/x86/boot/compressed/misc.h b/arch/x86/boot/compressed/mis=
-c.h
-index fd855e32c9b9..ba70036c2abd 100644
---- a/arch/x86/boot/compressed/misc.h
-+++ b/arch/x86/boot/compressed/misc.h
-@@ -13,6 +13,7 @@
- #undef CONFIG_PARAVIRT_SPINLOCKS
- #undef CONFIG_KASAN
- #undef CONFIG_KASAN_GENERIC
-+#undef CONFIG_KASAN_SW_TAGS
-=20
- #define __NO_FORTIFY
-=20
-diff --git a/arch/x86/include/asm/kasan.h b/arch/x86/include/asm/kasan.h
-index 90c18e30848f..53ab7de16517 100644
---- a/arch/x86/include/asm/kasan.h
-+++ b/arch/x86/include/asm/kasan.h
-@@ -6,7 +6,12 @@
- #include <linux/kasan-tags.h>
- #include <linux/types.h>
- #define KASAN_SHADOW_OFFSET _AC(CONFIG_KASAN_SHADOW_OFFSET, UL)
-+
-+#ifdef CONFIG_KASAN_SW_TAGS
-+#define KASAN_SHADOW_SCALE_SHIFT 4
-+#else
- #define KASAN_SHADOW_SCALE_SHIFT 3
-+#endif
-=20
- /*
-  * Compiler uses shadow offset assuming that addresses start
-diff --git a/arch/x86/mm/kasan_init_64.c b/arch/x86/mm/kasan_init_64.c
-index 7f5c11328ec1..8cbb8ec32061 100644
---- a/arch/x86/mm/kasan_init_64.c
-+++ b/arch/x86/mm/kasan_init_64.c
-@@ -465,4 +465,9 @@ void __init kasan_init(void)
-=20
- =09init_task.kasan_depth =3D 0;
- =09kasan_init_generic();
-+
-+=09if (cpu_feature_enabled(X86_FEATURE_LAM))
-+=09=09kasan_init_sw_tags();
-+=09else
-+=09=09pr_info("KernelAddressSanitizer not initialized (sw-tags): hardware =
-doesn't support LAM\n");
- }
-diff --git a/lib/Kconfig.kasan b/lib/Kconfig.kasan
-index a4bb610a7a6f..d13ea8da7bfd 100644
---- a/lib/Kconfig.kasan
-+++ b/lib/Kconfig.kasan
-@@ -112,7 +112,8 @@ config KASAN_SW_TAGS
-=20
- =09  Requires GCC 11+ or Clang.
-=20
--=09  Supported only on arm64 CPUs and relies on Top Byte Ignore.
-+=09  Supported on arm64 CPUs that support Top Byte Ignore and on x86 CPUs
-+=09  that support Linear Address Masking.
-=20
- =09  Consumes about 1/16th of available memory at kernel start and
- =09  add an overhead of ~20% for dynamic allocations.
---=20
-2.52.0
-
+-- 
+2.34.1
 
 
