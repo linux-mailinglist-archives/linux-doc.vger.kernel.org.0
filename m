@@ -1,125 +1,161 @@
-Return-Path: <linux-doc+bounces-73298-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73300-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wIprITPOb2mgMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73298-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 19:49:23 +0100
+	id wGf+BpK7b2kOMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-73300-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:29:54 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id E79B449C7B
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 19:49:22 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id C161B4893D
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 18:29:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 1038B94C7D2
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:43:46 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 609B656E33A
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:05:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4A1830FC01;
-	Tue, 20 Jan 2026 16:32:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C87734D4EA;
+	Tue, 20 Jan 2026 17:05:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="M15qmp5z"
+	dkim=pass (1024-bit key) header.d=jagalactic.com header.i=@jagalactic.com header.b="DwwvT/Ca";
+	dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b="AqTheCf1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from a11-174.smtp-out.amazonses.com (a11-174.smtp-out.amazonses.com [54.240.11.174])
+	(using TLSv1.2 with cipher AES128-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C38130F813;
-	Tue, 20 Jan 2026 16:32:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 607E129BDBC;
+	Tue, 20 Jan 2026 17:05:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.240.11.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768926756; cv=none; b=l8scWvHO1NiaAe52bZpT/AQKXf63tZk/67S39lZMSROrnUTVDXWI+HePywd29vxcK7ghPC7wC2RH2MvOyfjYcAGCWVLGrCRhZM5tE4sxEueNER1O6V/GdEhNOSNCzLtDmrNwGrZuVpNAmxZbMlTKC7D/OZDMF7143zKS3rFkkJo=
+	t=1768928741; cv=none; b=Jn4NUJ7TBWYKZlhXZQF7nQnYq4VfBbqLaEnb9X/VTwA/uLYXhnG4M0Q6eLOy3qbji0qAqbz3GJOwHb5yGocW/jbv4N6pQcLdiqCS0QRZVEXeio5Es13m9UuHMP23zaHFfAREHA5zBAzPqcWZIwsRuwzGXCc6oS5gEZZqlRLly5A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768926756; c=relaxed/simple;
-	bh=BkuoYdiOjEdaSxlt18GMMC+iBXjttPiaqaXPWhOTAOg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=tMEJqTNyoDnYSd0wkG4bNCPLggz2cYaYvkUPIJm3kPVRv+eGVRWOiWb06YN2OtQtYZSHJObdhbX1aWBYDx+e5qWha7QsfDDwdV0MINvndELeA7DxPMw1991igpoEK0kTQ8B2U5yv0xfR86qmnY99ZVFH1c0DqNJGUsmhBvtfZ0k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=M15qmp5z; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1EF72C16AAE;
-	Tue, 20 Jan 2026 16:32:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768926756;
-	bh=BkuoYdiOjEdaSxlt18GMMC+iBXjttPiaqaXPWhOTAOg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=M15qmp5zcgPGZax3J+ZpO3YDXmk7U0i6dtAhX2uoznBFQL6z5+MRRhW9PsqcRm1qP
-	 oL33nkA/ilfO744wGvuCqNvPRWbuskm3T9vocCqHZoMXP3wuH19kiHhQJ7AX9YYL5g
-	 ANehmWMB5hXgbPWRvRn3jXjgOHfvCWhlFiHmRerz+D52DzvXq6rgdViR5uplteyW3z
-	 Q1Nm/DQLL/ois8KKJ2sqoNfliwN0DFQMdwRV0+29Ok0CNq6xiSr73DLWWTl3wvxeku
-	 KrBOWFA4RZ3lBbyc2JG+BJ1aF2eB57Uyw2VkRpycAgiOSy2yDKJwTbW0bQFVriPBdu
-	 pvNuc20XRJrHQ==
-From: Pratyush Yadav <pratyush@kernel.org>
-To: Mike Rapoport <rppt@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>,  Alexander Graf
- <graf@amazon.com>,  Jason Miu <jasonmiu@google.com>,  Jonathan Corbet
- <corbet@lwn.net>,  Pasha Tatashin <pasha.tatashin@soleen.com>,  Pratyush
- Yadav <pratyush@kernel.org>,  kexec@lists.infradead.org,
-  linux-doc@vger.kernel.org,  linux-kernel@vger.kernel.org,
-  linux-mm@kvack.org
-Subject: Re: [PATCH 0/6] kho: ABI headers and Documentation updates
-In-Reply-To: <20260105165839.285270-1-rppt@kernel.org> (Mike Rapoport's
-	message of "Mon, 5 Jan 2026 18:58:33 +0200")
-References: <20260105165839.285270-1-rppt@kernel.org>
-Date: Tue, 20 Jan 2026 16:32:32 +0000
-Message-ID: <2vxzms28ckin.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1768928741; c=relaxed/simple;
+	bh=IMQm6fDafW7KCFXpTWzI1T1mVxi+bppakZwCsXXVpN0=;
+	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:In-Reply-To:
+	 References:Message-ID; b=OsXDQP6BLekwRV0oR5Fg5AnHxKCOFvwoeYXCQNVEJ+9f7ETaQq78oakUEV++sf+qOARLpk39BOVmSle+JY0URjbrYR74GpxeEMg9KoJJQHpI/6NpJnhBdNSqapYiZhV5GN6WwspeyXZ7S/McBQhQBS31A+sF/OnF94RvqazhRIU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=jagalactic.com; spf=pass smtp.mailfrom=amazonses.com; dkim=pass (1024-bit key) header.d=jagalactic.com header.i=@jagalactic.com header.b=DwwvT/Ca; dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b=AqTheCf1; arc=none smtp.client-ip=54.240.11.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=jagalactic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazonses.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=o25mqk5iffcfzgc3wo2zjhkohcyjzsoq; d=jagalactic.com; t=1768928738;
+	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Message-Id;
+	bh=IMQm6fDafW7KCFXpTWzI1T1mVxi+bppakZwCsXXVpN0=;
+	b=DwwvT/CaYNuc7K7TdH9FsPGRrWinrPHVAaeiwpLarvY8rjJrXr+ktepNJwcLjbWj
+	IdkKiVyhCez9NFtH0D2ikhBZyXbWVIP3/gAPGU9buF1+swiDqwIcmHt8KkYw4+eFDwC
+	1ujydogbkB0WSDT3oQjVEjMjDi4Gd4OF1fFTCfbU=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw; d=amazonses.com; t=1768928738;
+	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Message-Id:Feedback-ID;
+	bh=IMQm6fDafW7KCFXpTWzI1T1mVxi+bppakZwCsXXVpN0=;
+	b=AqTheCf1cAVTYTfY0RSVgNQe5o6AA+AjkFT1z86y2GS+SR2RRuERd/nEBVVSo4+O
+	OTsbT6vFhj27Plbnoy7GR2cQxWQCMpovP0V/+BQF+IjVytSwOnsviUSlGUAn+90kLue
+	nibBJFQFeEZ2R5WXFZrJJFKR6IFSmZW8nrpNYMR4=
+Subject: Re: [PATCH V4 0/2] ndctl: Add daxctl support for the new "famfs"
+ mode of devdax
+From: =?UTF-8?Q?John_Groves?= <john@jagalactic.com>
+To: =?UTF-8?Q?Alireza_Sanaee?= <alireza.sanaee@huawei.com>
+Cc: =?UTF-8?Q?John_Groves?= <John@groves.net>, 
+	=?UTF-8?Q?Miklos_Szeredi?= <miklos@szeredi.hu>, 
+	=?UTF-8?Q?Dan_Williams?= <dan.j.williams@intel.com>, 
+	=?UTF-8?Q?Bernd_Schubert?= <bschubert@ddn.com>, 
+	=?UTF-8?Q?Alison_Schofiel?= =?UTF-8?Q?d?= <alison.schofield@intel.com>, 
+	=?UTF-8?Q?John_Groves?= <jgroves@micron.com>, 
+	=?UTF-8?Q?John_Groves?= <jgroves@fastmail.com>, 
+	=?UTF-8?Q?Jonathan_Corbet?= <corbet@lwn.net>, 
+	=?UTF-8?Q?Vishal_Verma?= <vishal.l.verma@intel.com>, 
+	=?UTF-8?Q?Dave_Jiang?= <dave.jiang@intel.com>, 
+	=?UTF-8?Q?Matthew_Wilcox?= <willy@infradead.org>, 
+	=?UTF-8?Q?Jan_Kara?= <jack@suse.cz>, 
+	=?UTF-8?Q?Alexander_Viro?= <viro@zeniv.linux.org.uk>, 
+	=?UTF-8?Q?David_Hildenbrand?= <david@kernel.org>, 
+	=?UTF-8?Q?Christian_Bra?= =?UTF-8?Q?uner?= <brauner@kernel.org>, 
+	=?UTF-8?Q?Darrick_J_=2E_Wong?= <djwong@kernel.org>, 
+	=?UTF-8?Q?Randy_Dunlap?= <rdunlap@infradead.org>, 
+	=?UTF-8?Q?Jeff_Layton?= <jlayton@kernel.org>, 
+	=?UTF-8?Q?Amir_Goldstein?= <amir73il@gmail.com>, 
+	=?UTF-8?Q?Jonathan_Cameron?= <Jonathan.Cameron@huawei.com>, 
+	=?UTF-8?Q?Stefan_Hajnoczi?= <shajnocz@redhat.com>, 
+	=?UTF-8?Q?Joanne_Koong?= <joannelkoong@gmail.com>, 
+	=?UTF-8?Q?Josef_Bacik?= <josef@toxicpanda.com>, 
+	=?UTF-8?Q?Bagas_Sanjaya?= <bagasdotme@gmail.com>, 
+	=?UTF-8?Q?James_Morse?= <james.morse@arm.com>, 
+	=?UTF-8?Q?Fuad_Tabba?= <tabba@google.com>, 
+	=?UTF-8?Q?Sean_Christopherson?= <seanjc@google.com>, 
+	=?UTF-8?Q?Shivank_Garg?= <shivankg@amd.com>, 
+	=?UTF-8?Q?Ackerley_Tng?= <ackerleytng@google.com>, 
+	=?UTF-8?Q?Gregory_Pric?= =?UTF-8?Q?e?= <gourry@gourry.net>, 
+	=?UTF-8?Q?Aravind_Ramesh?= <arramesh@micron.com>, 
+	=?UTF-8?Q?Ajay_Joshi?= <ajayjoshi@micron.com>, 
+	=?UTF-8?Q?venkataravis=40micron=2Ecom?= <venkataravis@micron.com>, 
+	=?UTF-8?Q?linux-doc=40vger=2Ekernel=2Eorg?= <linux-doc@vger.kernel.org>, 
+	=?UTF-8?Q?linux-kernel=40vger=2Ekernel=2Eorg?= <linux-kernel@vger.kernel.org>, 
+	=?UTF-8?Q?nvdimm=40lists=2Elinux=2Edev?= <nvdimm@lists.linux.dev>, 
+	=?UTF-8?Q?linux-cxl=40vger=2Ekernel=2Eorg?= <linux-cxl@vger.kernel.org>, 
+	=?UTF-8?Q?linux-fsdevel=40vger=2Ekernel=2Eorg?= <linux-fsdevel@vger.kernel.org>
+Date: Tue, 20 Jan 2026 17:05:38 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain
-X-Spamd-Result: default: False [-1.46 / 15.00];
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260120170135.00003523.alireza.sanaee@huawei.com>
+References: 
+ <0100019bd33a16b4-6da11a99-d883-4cfc-b561-97973253bc4a-000000@email.amazonses.com> 
+ <20260118223548.92823-1-john@jagalactic.com> 
+ <0100019bd34040d9-0b6e9e4c-ecd4-464d-ab9d-88a251215442-000000@email.amazonses.com> 
+ <20260120170135.00003523.alireza.sanaee@huawei.com> 
+ <aW-1cgruSVTsgV_7@groves.net>
+X-Mailer: Amazon WorkMail
+Thread-Index: AQHciMnhcFkpAz6WTSKstYDfyF/cJQAAPD1qAFklqVYAWUcuiQ==
+Thread-Topic: [PATCH V4 0/2] ndctl: Add daxctl support for the new "famfs"
+ mode of devdax
+X-Wm-Sent-Timestamp: 1768928735
+Message-ID: <0100019bdc5e7afc-e41beaa8-85aa-4572-9512-5a44440993e5-000000@email.amazonses.com>
+Feedback-ID: ::1.us-east-1.LF00NED762KFuBsfzrtoqw+Brn/qlF9OYdxWukAhsl8=:AmazonSES
+X-SES-Outgoing: 2026.01.20-54.240.11.174
+X-Spamd-Result: default: False [0.95 / 15.00];
+	TO_EXCESS_QP(1.20)[];
+	CC_EXCESS_QP(1.20)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[jagalactic.com:s=o25mqk5iffcfzgc3wo2zjhkohcyjzsoq,amazonses.com:s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-73300-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73298-lists,linux-doc=lfdr.de];
-	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
-	PRECEDENCE_BULK(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_TWELVE(0.00)[39];
+	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[groves.net,szeredi.hu,intel.com,ddn.com,micron.com,fastmail.com,lwn.net,infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,gmail.com,huawei.com,redhat.com,toxicpanda.com,arm.com,google.com,amd.com,gourry.net,vger.kernel.org,lists.linux.dev];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[jagalactic.com,quarantine];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
-	FROM_NEQ_ENVFROM(0.00)[pratyush@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[john@jagalactic.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[jagalactic.com:+,amazonses.com:+];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_EXCESS_QP(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: E79B449C7B
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[email.amazonses.com:mid,jagalactic.com:email,jagalactic.com:dkim,amazonses.com:dkim,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo]
+X-Rspamd-Queue-Id: C161B4893D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Jan 05 2026, Mike Rapoport wrote:
-
-> From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
->
-> Hi,
->
-> LUO started adding KHO ABI headers to include/linux/kho/abi, but the
-> core parts of KHO and memblock are still using the old way for
-> descriptions on their ABIs.
->
-> Let's consolidate all things KHO in include/linux/kho/abi.
->
-> And while on that, make some documentation updates to have more coherent
-> KHO docs.
-
-Thanks for working on this! It is nice to have the ABI consolidated and
-cleaned.
-
-[...]
-
--- 
-Regards,
-Pratyush Yadav
+On 26/01/20 05:01PM, Alireza Sanaee wrote:=0D=0A> On Sun, 18 Jan 2026 22:=
+36:02 +0000=0D=0A> John Groves <john@jagalactic.com> wrote:=0D=0A>=20=0D=0A=
+> Hi John,=0D=0A>=20=0D=0A> What's the base commit for this set=3F I seem=
+ not be able to apply on ndctl master. Maybe I am missing something.=0D=0A=
+=0D=0AThis series is based on the v83 tag, which is sha 4f7a1c6.=0D=0A=0D=
+=0AJohn=0D=0A=0D=0A
 
