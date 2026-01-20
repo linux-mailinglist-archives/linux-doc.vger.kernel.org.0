@@ -1,200 +1,179 @@
-Return-Path: <linux-doc+bounces-73248-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73250-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wGl/KZ6lb2kfEgAAu9opvQ
-	(envelope-from <linux-doc+bounces-73248-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:56:14 +0100
+	id mPIcEiWib2l7DgAAu9opvQ
+	(envelope-from <linux-doc+bounces-73250-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:41:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 047DB46D99
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:56:13 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E8B446668
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:41:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id C2B7488CA11
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 13:42:23 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 1B6437401BF
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 13:58:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9BE743CEF7;
-	Tue, 20 Jan 2026 13:38:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gOVqSe/M"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 747D443636C;
+	Tue, 20 Jan 2026 13:57:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE46942EEB4;
-	Tue, 20 Jan 2026 13:38:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60B2242EECF;
+	Tue, 20 Jan 2026 13:57:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768916339; cv=none; b=jqs31Sp+YqYBGjq7orOJlHVuzP+BQGjUB+KaGoMUFjlJeaR/jkQwyhd+5Ka8TPJQntB1ljz/qMhtHyUbd7y/I8OiXylq0halShXWjl2mcFcSN3TgGs/KqbkJ/SVGfy0lfGhSTVOS5ZTJFcMIG7OoAt9Ss8ljz8yiNiy+ijmqvZ8=
+	t=1768917472; cv=none; b=kh2bifKUdhmREWtC28TDzo3aIAX8Do0MiAA5s1EkU8xdAavSc/0hSDY1Cs10KZRyDhl716LRDkPKms8Zy2IuFFhQ69QoG1WxW0jeyuioS2GjE7XExBssHLuypq1SmGDmaJK0W5FPQ4jEvf6OV1FjD25VipEZKpAfs9OrHlDGMB0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768916339; c=relaxed/simple;
-	bh=qC6gcyxP5iZxSOjmlhJmhYzV5a8Gk31qQnhXH+ickNs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ARBmGsSScuY5ikAtDqlCRIHD7BNEBdiszFEgrQYUryk64kdl7Eo64AZ7ImKuzqPw+aEVKvx5PD+f19PrWdJbieLPlUgIiTJQzXGCfAn6opR/7FYmQzga29tWb/sbXHrZYDmuobgZBgJ4byHICjNzJiNYSJaVaVQcYJKDpPIcQ/k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gOVqSe/M; arc=none smtp.client-ip=192.198.163.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768916338; x=1800452338;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=qC6gcyxP5iZxSOjmlhJmhYzV5a8Gk31qQnhXH+ickNs=;
-  b=gOVqSe/Mo3tIbDIow9k6uqsguup3MeyBv4AR3kfusQ/eo2zHnjUmLPNt
-   WTX3MJEKqP9zjjaCraSKFwYsFCKoPSK6gcnaCTbq+f7Eou4tY38QCHnGl
-   b1RbnCPDnILlTvaS8SBFdCrz683Yqa4nQ3rIHvKnjVJkSBBs7Bs3d5y6x
-   MCyuEtqKCUpUASaGoCobSjlGivuNM8fGMNrqXiNHXwgVEBrMADm457szM
-   /xVhWPg3tNY1PLKBxWMNl/PX8k/VUZPUVBRok0F1iafUpdTHPH5CMbarF
-   N1T6Hb2jlSKHNNhsdSNPjz7ZNZk4ehH56sbPxhpgfU3GhDOwxbQ0ONUw/
-   Q==;
-X-CSE-ConnectionGUID: jI0Y7zfVTJWfas6YrzhZEQ==
-X-CSE-MsgGUID: cN0u5ITsQRWNy61s7tQAUQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11676"; a="81495339"
-X-IronPort-AV: E=Sophos;i="6.21,240,1763452800"; 
-   d="scan'208";a="81495339"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2026 05:38:57 -0800
-X-CSE-ConnectionGUID: ox7eLJ2rTp224DpAWErhfQ==
-X-CSE-MsgGUID: CtISb7XES8CO3g4/6cKeFg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,240,1763452800"; 
-   d="scan'208";a="210273207"
-Received: from dhhellew-desk2.ger.corp.intel.com (HELO localhost) ([10.245.244.240])
-  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2026 05:38:52 -0800
-Date: Tue, 20 Jan 2026 15:38:50 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-Cc: Andy Shevchenko <andy.shevchenko@gmail.com>, rodrigo.alencar@analog.com,
-	linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH v4 3/7] iio: frequency: adf41513: driver implementation
-Message-ID: <aW-Fai68pk1tAeyY@smile.fi.intel.com>
-References: <20260116-adf41513-iio-driver-v4-0-dbb7d6782217@analog.com>
- <20260116-adf41513-iio-driver-v4-3-dbb7d6782217@analog.com>
- <aW3dxuelYDM67pqZ@smile.fi.intel.com>
- <texwv5s2tvcy34bwr4iruj5xofmea663pwletmpqpuh66zulmv@m7qvjgqbhalv>
- <aW40ylvMwVhqNQMw@smile.fi.intel.com>
- <hgy3bcrqqsvt7pobhnzuvwzhb2taetpxltkaxpigmmlvmlirod@v6anhmrsvv2r>
- <aW5kk6K30Izckvg5@smile.fi.intel.com>
- <e5lcg5kkey3c6u2l4rlzzpolp7qkudhcofyzcx5s2tjbh2iwkg@js3fisv23zyj>
- <CAHp75VepcSZo_E4_UxhKRfHrMFDd7huJg14m8=6zVo4ENKFXkA@mail.gmail.com>
- <vvdk3whhwua73g63eetnmn46t2cpbpkzzkx7m6wsbverp7gcvs@mi7cipis3i4t>
+	s=arc-20240116; t=1768917472; c=relaxed/simple;
+	bh=cCpdy+/A49B4NCr7Pt/CUB5D1XH6Ky191EJUEsDJTa0=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=Githd1gjBfpa5Wrls9uPJl0OIoGBchwu+sDQqq0cn9dXVxZkYPvHco5auo8FSDDI0bsEuklNFjqhfcw0DB8CXGBNxlBOb37gMRanNZ7SDy4FYwyn93RJTn4IbpJCOM5eI8HrOMraJJXPsdFTQ9u/gG8K11C4mWuTOWiA2kkgMQM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.19.163.198])
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4dwTR71Z3RzYQvHc;
+	Tue, 20 Jan 2026 21:57:23 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.128])
+	by mail.maildlp.com (Postfix) with ESMTP id 1A50A40574;
+	Tue, 20 Jan 2026 21:57:47 +0800 (CST)
+Received: from hulk-vt.huawei.com (unknown [10.67.174.121])
+	by APP4 (Coremail) with SMTP id gCh0CgCnCPnQiW9pwhTxEQ--.10691S4;
+	Tue, 20 Jan 2026 21:57:46 +0800 (CST)
+From: Chen Ridong <chenridong@huaweicloud.com>
+To: akpm@linux-foundation.org,
+	axelrasmussen@google.com,
+	yuanchu@google.com,
+	weixugc@google.com,
+	david@kernel.org,
+	lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com,
+	vbabka@suse.cz,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	hannes@cmpxchg.org,
+	roman.gushchin@linux.dev,
+	shakeel.butt@linux.dev,
+	muchun.song@linux.dev,
+	zhengqi.arch@bytedance.com
+Cc: linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	cgroups@vger.kernel.org,
+	lujialin4@huawei.com,
+	chenridong@huaweicloud.com,
+	ryncsn@gmail.com
+Subject: [RFC PATCH -next 2/7] mm/mglru: make calls to flush_reclaim_state() similar for MGLRU and non-MGLRU
+Date: Tue, 20 Jan 2026 13:42:51 +0000
+Message-Id: <20260120134256.2271710-3-chenridong@huaweicloud.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260120134256.2271710-1-chenridong@huaweicloud.com>
+References: <20260120134256.2271710-1-chenridong@huaweicloud.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <vvdk3whhwua73g63eetnmn46t2cpbpkzzkx7m6wsbverp7gcvs@mi7cipis3i4t>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
-X-Spamd-Result: default: False [-0.46 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-CM-TRANSID:gCh0CgCnCPnQiW9pwhTxEQ--.10691S4
+X-Coremail-Antispam: 1UD129KBjvJXoW7WrW8ArWkWr43Wr15uw43trb_yoW8WFWUpF
+	ZxGry8ta1rArnIgwnIvF48W3s0vw4UKry5Jrs093WfAasxJr1YkrZxCrW0krWrWryvqrW3
+	Wr12gw1UZ3yUA3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUmY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+	x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+	Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+	A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+	0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+	IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+	Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+	xKxwCY1x0262kKe7AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWU
+	JVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67
+	kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY
+	6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
+	IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIev
+	Ja73UjIFyTuYvjTRRCJPDUUUU
+X-CM-SenderInfo: hfkh02xlgr0w46kxt4xhlfz01xgou0bp/
+X-Spamd-Result: default: False [0.24 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	FREEMAIL_CC(0.00)[gmail.com,analog.com,vger.kernel.org,kernel.org,baylibre.com,metafoo.de,lwn.net];
-	FREEMAIL_TO(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-73248-lists,linux-doc=lfdr.de];
-	HAS_ORG_HEADER(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[intel.com,none];
-	DKIM_TRACE(0.00)[intel.com:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[smile.fi.intel.com:mid,intel.com:dkim,dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: 047DB46D99
+	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,huawei.com,huaweicloud.com,gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-73250-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[huaweicloud.com];
+	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
+	TAGGED_RCPT(0.00)[linux-doc];
+	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[chenridong@huaweicloud.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	PRECEDENCE_BULK(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	TO_DN_NONE(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,huawei.com:email,huaweicloud.com:mid]
+X-Rspamd-Queue-Id: 7E8B446668
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Jan 20, 2026 at 01:07:49PM +0000, Rodrigo Alencar wrote:
-> On 26/01/20 01:24PM, Andy Shevchenko wrote:
-> > On Tue, Jan 20, 2026 at 12:43 PM Rodrigo Alencar
-> > <455.rodrigo.alencar@gmail.com> wrote:
-> > > On 26/01/19 07:07PM, Andy Shevchenko wrote:
-> > > > On Mon, Jan 19, 2026 at 04:37:09PM +0000, Rodrigo Alencar wrote:
-> > > > > On 26/01/19 03:42PM, Andy Shevchenko wrote:
-> > > > > > On Mon, Jan 19, 2026 at 11:21:59AM +0000, Rodrigo Alencar wrote:
-> > > > > > > On 26/01/19 09:31AM, Andy Shevchenko wrote:
-> > > > > > > > On Fri, Jan 16, 2026 at 02:32:22PM +0000, Rodrigo Alencar via B4 Relay wrote:
+From: Chen Ridong <chenridong@huawei.com>
 
-...
+Currently, flush_reclaim_state is placed differently between
+shrink_node_memcgs and shrink_many. shrink_many (only used for gen-LRU)
+calls it after each lruvec is shrunk, while shrink_node_memcgs calls it
+only after all lruvecs have been shrunk.
 
-> > > > > > > The current implementation is kind of a stripped version of
-> > > > > > > __iio_str_to_fixpoint(). Would you prefer something like this, then?:
-> > > > > >
-> > > > > > Do they have most of the parts in common? If so, why can't we use
-> > > > > > __iio_str_to_fixpoint() directly? Or why can't we slightly refactor
-> > > > > > that to give us the results we need here?
-> > > > >
-> > > > > __iio_str_to_fixpoint() only parses "int" chunks, adf41513_parse_uhz
-> > > > > was modified to accomodate the u64 parsing removing unnecessary stuff.
-> > > >
-> > > > But why? The fractional part most likely will be kept int (it's up to 10⁻⁹).
-> > > > The integer can be bigger than 10⁹?
-> > >
-> > > Correct, integer part of the frequency value goes up to 26.5 GHz
-> > > (uint_max is approx 4.3 GHz). Also, with the dual modulus, the PLL can
-> > > achieve micro Hz resolution.
-> > 
-> > µHz is not a problem since it's up to nHz.
-> > So, the difference so far is the integer part that can be 64-bit.
-> > Again, can we factor out something to be used for this and for the
-> > __iio_str_to_fixpoint() cases?
-> 
-> I am not sure what you are suggesting,
+This patch moves flush_reclaim_state into shrink_node_memcgs and calls it
+after each lruvec. This unifies the behavior and is reasonable because:
 
-To make changes to reuse the code.
+1. flush_reclaim_state adds current->reclaim_state->reclaimed to
+   sc->nr_reclaimed.
+2. For non-MGLRU root reclaim, this can help stop the iteration earlier
+   when nr_to_reclaim is reached.
+3. For non-root reclaim, the effect is negligible since flush_reclaim_state
+   does nothing in that case.
 
-> but I am avoiding changes to iio core at this point.
+Signed-off-by: Chen Ridong <chenridong@huawei.com>
+---
+ mm/vmscan.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-Why?
-
-> If any other user needs similar behavior,
-> I'd say we would need to have __iio_str_to_fixpoint() implementation
-> modified, so to create a version of iio_str_to_fixpoint() that handles
-> long long variables. Possibly consuming simple_strtoull instead of
-> doing the manual parsing.
-
-That's the problem here. With Yet Another Cool Parser this all becomes
-unmaintainable very soon (basically as you said when new comer needs a third
-variant of it). This is not good. Instead better to create (amend, expand)
-existing test cases, split out a foundation API that parses 64-bit parts
-(maybe even for fractional as well, dunno) and evolve a needed (sub)API
-from it.
-
+diff --git a/mm/vmscan.c b/mm/vmscan.c
+index 3759cd52c336..5a156ff48520 100644
+--- a/mm/vmscan.c
++++ b/mm/vmscan.c
+@@ -6182,6 +6182,7 @@ static void shrink_node_memcgs(pg_data_t *pgdat, struct scan_control *sc)
+ 					   sc->nr_scanned - scanned,
+ 					   sc->nr_reclaimed - reclaimed);
+ 
++			flush_reclaim_state(sc);
+ 			/* If partial walks are allowed, bail once goal is reached */
+ 			if (partial && sc->nr_reclaimed >= sc->nr_to_reclaim) {
+ 				mem_cgroup_iter_break(target_memcg, memcg);
+@@ -6218,8 +6219,6 @@ static void shrink_node(pg_data_t *pgdat, struct scan_control *sc)
+ 
+ 	shrink_node_memcgs(pgdat, sc);
+ 
+-	flush_reclaim_state(sc);
+-
+ 	nr_node_reclaimed = sc->nr_reclaimed - nr_reclaimed;
+ 
+ 	/* Record the subtree's reclaim efficiency */
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.34.1
 
 
