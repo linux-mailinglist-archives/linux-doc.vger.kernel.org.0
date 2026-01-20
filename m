@@ -1,80 +1,72 @@
-Return-Path: <linux-doc+bounces-73250-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73261-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mPIcEiWib2l7DgAAu9opvQ
-	(envelope-from <linux-doc+bounces-73250-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:41:25 +0100
+	id 6KxRFJKpb2lUEwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73261-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:13:06 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E8B446668
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 16:41:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0033C472CE
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:13:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 1B6437401BF
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 13:58:49 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 4232D7696FB
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 14:34:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 747D443636C;
-	Tue, 20 Jan 2026 13:57:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BAEDE42DFFA;
+	Tue, 20 Jan 2026 14:27:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="FwJ3VUnw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
+Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60B2242EECF;
-	Tue, 20 Jan 2026 13:57:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 812CD3F0761;
+	Tue, 20 Jan 2026 14:27:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768917472; cv=none; b=kh2bifKUdhmREWtC28TDzo3aIAX8Do0MiAA5s1EkU8xdAavSc/0hSDY1Cs10KZRyDhl716LRDkPKms8Zy2IuFFhQ69QoG1WxW0jeyuioS2GjE7XExBssHLuypq1SmGDmaJK0W5FPQ4jEvf6OV1FjD25VipEZKpAfs9OrHlDGMB0=
+	t=1768919267; cv=none; b=JLmQaHaBwNQpyMxfn0iQFZXZGy1GwoZhBmEyjahINEdFIZXy10jKLjZtlIyWnbrJoi1n1BpWG8Lnem5gVRgTb6y5mc9x6j1fYhLtrqxz9rYnXzQvVtIhSy3EN+4zQV+585Sn3qzzpyYNI3U9eZVEsmwGeVpeFssVzWvcw3aVAcU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768917472; c=relaxed/simple;
-	bh=cCpdy+/A49B4NCr7Pt/CUB5D1XH6Ky191EJUEsDJTa0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=Githd1gjBfpa5Wrls9uPJl0OIoGBchwu+sDQqq0cn9dXVxZkYPvHco5auo8FSDDI0bsEuklNFjqhfcw0DB8CXGBNxlBOb37gMRanNZ7SDy4FYwyn93RJTn4IbpJCOM5eI8HrOMraJJXPsdFTQ9u/gG8K11C4mWuTOWiA2kkgMQM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.19.163.198])
-	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4dwTR71Z3RzYQvHc;
-	Tue, 20 Jan 2026 21:57:23 +0800 (CST)
-Received: from mail02.huawei.com (unknown [10.116.40.128])
-	by mail.maildlp.com (Postfix) with ESMTP id 1A50A40574;
-	Tue, 20 Jan 2026 21:57:47 +0800 (CST)
-Received: from hulk-vt.huawei.com (unknown [10.67.174.121])
-	by APP4 (Coremail) with SMTP id gCh0CgCnCPnQiW9pwhTxEQ--.10691S4;
-	Tue, 20 Jan 2026 21:57:46 +0800 (CST)
-From: Chen Ridong <chenridong@huaweicloud.com>
-To: akpm@linux-foundation.org,
-	axelrasmussen@google.com,
-	yuanchu@google.com,
-	weixugc@google.com,
-	david@kernel.org,
-	lorenzo.stoakes@oracle.com,
-	Liam.Howlett@oracle.com,
-	vbabka@suse.cz,
-	rppt@kernel.org,
-	surenb@google.com,
-	mhocko@suse.com,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	hannes@cmpxchg.org,
-	roman.gushchin@linux.dev,
-	shakeel.butt@linux.dev,
-	muchun.song@linux.dev,
-	zhengqi.arch@bytedance.com
-Cc: linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	cgroups@vger.kernel.org,
-	lujialin4@huawei.com,
-	chenridong@huaweicloud.com,
-	ryncsn@gmail.com
-Subject: [RFC PATCH -next 2/7] mm/mglru: make calls to flush_reclaim_state() similar for MGLRU and non-MGLRU
-Date: Tue, 20 Jan 2026 13:42:51 +0000
-Message-Id: <20260120134256.2271710-3-chenridong@huaweicloud.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260120134256.2271710-1-chenridong@huaweicloud.com>
-References: <20260120134256.2271710-1-chenridong@huaweicloud.com>
+	s=arc-20240116; t=1768919267; c=relaxed/simple;
+	bh=/kaZD482ztKQm6dva7sKhb5SOm2P7we2cLRb7wcmsYQ=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=XpoqYu0qJt1/zMZIav08sJPHZF4ip+tpblfc0Gy23ePhNwWiu2INT7Whba9NuwJVF2Gd/4eOOgweJs++pfHe/Dm5KXIUle4okI5CpbXeZT1zDoNQDUC7LmX3CiGFZ8weJziCB6Hi8vfLmsoLeV/Sas/0GD7QNgDSSl2xagxQgdM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=FwJ3VUnw; arc=none smtp.client-ip=113.46.200.217
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=/kaZD482ztKQm6dva7sKhb5SOm2P7we2cLRb7wcmsYQ=;
+	b=FwJ3VUnwAMSBF/yZRa72dz9865AHeS8YbWLSNbjkRhnZYTg8iIaG6QS473HgZ+2n+gfCVUBV5
+	meufbt+6dQVyyJUMWncC/nU6NpAL+ca/ncsaVIkwttNOpBefmKfcMwN2Y3ZFSmPyNqlpEZFkWqj
+	TLD0BreDj9P3+e/0G73RdT0=
+Received: from mail.maildlp.com (unknown [172.19.163.104])
+	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4dwV1X1SGNzcb0S;
+	Tue, 20 Jan 2026 22:23:44 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id F2F3A404AD;
+	Tue, 20 Jan 2026 22:27:39 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Tue, 20 Jan 2026 22:27:38 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: <gongfan1@huawei.com>
+CC: <andrew+netdev@lunn.ch>, <davem@davemloft.net>, <edumazet@google.com>,
+	<guoxin09@huawei.com>, <horms@kernel.org>, <kuba@kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<luosifu@huawei.com>, <luoyang82@h-partners.com>, <netdev@vger.kernel.org>,
+	<pabeni@redhat.com>, <shijing34@huawei.com>, <wulike1@huawei.com>,
+	<zhoushuai28@huawei.com>, <zhuyikai1@h-partners.com>
+Subject: Re: [PATCH net v01 0/5] net: hinic3: Fix netif_queue_set_napi input parameters and code styles
+Date: Tue, 20 Jan 2026 22:27:34 +0800
+Message-ID: <20260120142734.1000-1-gongfan1@huawei.com>
+X-Mailer: git-send-email 2.51.0.windows.1
+In-Reply-To: <cover.1768911232.git.zhuyikai1@h-partners.com>
+References: <cover.1768911232.git.zhuyikai1@h-partners.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -82,98 +74,43 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:gCh0CgCnCPnQiW9pwhTxEQ--.10691S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7WrW8ArWkWr43Wr15uw43trb_yoW8WFWUpF
-	ZxGry8ta1rArnIgwnIvF48W3s0vw4UKry5Jrs093WfAasxJr1YkrZxCrW0krWrWryvqrW3
-	Wr12gw1UZ3yUA3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUmY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
-	x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-	Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
-	A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
-	0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
-	IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
-	Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
-	xKxwCY1x0262kKe7AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWU
-	JVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67
-	kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY
-	6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
-	IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIev
-	Ja73UjIFyTuYvjTRRCJPDUUUU
-X-CM-SenderInfo: hfkh02xlgr0w46kxt4xhlfz01xgou0bp/
-X-Spamd-Result: default: False [0.24 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
+X-Spamd-Result: default: False [1.04 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,huawei.com,huaweicloud.com,gmail.com];
 	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[huawei.com,quarantine];
+	TAGGED_FROM(0.00)[bounces-73261-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-73250-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[huaweicloud.com];
+	DKIM_TRACE(0.00)[huawei.com:+];
 	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	TAGGED_RCPT(0.00)[linux-doc];
-	R_DKIM_NA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[chenridong@huaweicloud.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	PRECEDENCE_BULK(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
 	TO_DN_NONE(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,huawei.com:email,huaweicloud.com:mid]
-X-Rspamd-Queue-Id: 7E8B446668
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,huawei.com:mid,huawei.com:dkim]
+X-Rspamd-Queue-Id: 0033C472CE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Chen Ridong <chenridong@huawei.com>
+Sorry for choosing the wrong branch. We should send to net-next instead of net.
+We'll send a new patchset to net-next soon.
 
-Currently, flush_reclaim_state is placed differently between
-shrink_node_memcgs and shrink_many. shrink_many (only used for gen-LRU)
-calls it after each lruvec is shrunk, while shrink_node_memcgs calls it
-only after all lruvecs have been shrunk.
-
-This patch moves flush_reclaim_state into shrink_node_memcgs and calls it
-after each lruvec. This unifies the behavior and is reasonable because:
-
-1. flush_reclaim_state adds current->reclaim_state->reclaimed to
-   sc->nr_reclaimed.
-2. For non-MGLRU root reclaim, this can help stop the iteration earlier
-   when nr_to_reclaim is reached.
-3. For non-root reclaim, the effect is negligible since flush_reclaim_state
-   does nothing in that case.
-
-Signed-off-by: Chen Ridong <chenridong@huawei.com>
----
- mm/vmscan.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 3759cd52c336..5a156ff48520 100644
---- a/mm/vmscan.c
-+++ b/mm/vmscan.c
-@@ -6182,6 +6182,7 @@ static void shrink_node_memcgs(pg_data_t *pgdat, struct scan_control *sc)
- 					   sc->nr_scanned - scanned,
- 					   sc->nr_reclaimed - reclaimed);
- 
-+			flush_reclaim_state(sc);
- 			/* If partial walks are allowed, bail once goal is reached */
- 			if (partial && sc->nr_reclaimed >= sc->nr_to_reclaim) {
- 				mem_cgroup_iter_break(target_memcg, memcg);
-@@ -6218,8 +6219,6 @@ static void shrink_node(pg_data_t *pgdat, struct scan_control *sc)
- 
- 	shrink_node_memcgs(pgdat, sc);
- 
--	flush_reclaim_state(sc);
--
- 	nr_node_reclaimed = sc->nr_reclaimed - nr_reclaimed;
- 
- 	/* Record the subtree's reclaim efficiency */
--- 
-2.34.1
-
+Thanks,
+Fan gong
 
