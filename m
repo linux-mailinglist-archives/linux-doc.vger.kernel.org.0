@@ -1,130 +1,144 @@
-Return-Path: <linux-doc+bounces-73235-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73236-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8Bk4ImXkb2lhUQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73235-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 21:24:05 +0100
+	id GFvOHRxlcGkVXwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73236-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 06:33:16 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id B207F4B3E6
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 21:24:04 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86007518DE
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 06:33:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A7F2560B6A9
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 12:34:54 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 1EA936A03D4
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 12:40:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A7CA423A96;
-	Tue, 20 Jan 2026 12:33:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E06C42884D;
+	Tue, 20 Jan 2026 12:38:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=inria.fr header.i=@inria.fr header.b="bMAruVCF"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="g58fS7u9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail3-relais-sop.national.inria.fr (mail3-relais-sop.national.inria.fr [192.134.164.104])
+Received: from canpmsgout03.his.huawei.com (canpmsgout03.his.huawei.com [113.46.200.218])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CD1A3E9F8C;
-	Tue, 20 Jan 2026 12:33:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.134.164.104
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D727428846;
+	Tue, 20 Jan 2026 12:38:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.218
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768912403; cv=none; b=IqYLl3to3uQJPMUheNf8smvc+4m95bdDj2lae7jzM8YzEUoeT9DHr2fhbDhumRjON1IC1QwUjb9x0fhq031y1EdrPHLxqATWIi/gvHxv3xc3B2WZrr01PrH2VFqBZk6j2Q9yX4fYDTW+723gYZuWZ4Icyqndr9iOh6jc4dCpxWY=
+	t=1768912736; cv=none; b=WF1GYrBnYaOXARM8OvgwJtz4PCRLvo+fidOPfLZV0xEukCGzFMy1ZjuEe6wZIlFZiDjUtJZvWEe4jspe9H9fmNJCwdHTAsV2xrHWk7xNyfDX6tUONbQDe/Ve331tde5M/XPlJmyExfm2GNlSNvkAvuHRiyfUDBo5NOg37jNPfzg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768912403; c=relaxed/simple;
-	bh=vBeuKkhx08aIyCc74TwTeuXznJnOvHq1xarlmMfLtbg=;
-	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=dQImNDW0AjOJQAJicbAnueX2S3x1mdUzszf3I17XxLdTYcSg7Yh0XtUGg6XxA2gk88Pn9gf5l1Spem/uCL6YtvEshRB8UJJyqhwns+QLE41HSb8a3HXwipba7vKz5qDCf1xpcXCN5aqnGnwrhjhwL6QKWjoytqmtSCM+Nr79pBE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=inria.fr; spf=pass smtp.mailfrom=inria.fr; dkim=pass (1024-bit key) header.d=inria.fr header.i=@inria.fr header.b=bMAruVCF; arc=none smtp.client-ip=192.134.164.104
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=inria.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inria.fr
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=inria.fr; s=dc;
-  h=date:from:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=GSlYyMNPyo3nTygPcryodFS1sqXZdlseWzX9iuCJUy0=;
-  b=bMAruVCFNUKc6qCht4t2XhuloNnw6BwecFuJ1+qcDa9bEPOswyDQLusw
-   a3Q2JNAFEIRSNecBPUVPK0CYdVNXSKreNnu4RbSdybnNHAeFRE0K7rsKA
-   eIwL7U5+NCLQVUt0hQWdpJ+UKfhrGbtuEn52sR392SHgpJjCz+nE4esxz
-   Q=;
-X-CSE-ConnectionGUID: F+ym4SO7RgyYZhvhYKVWZA==
-X-CSE-MsgGUID: C4kPhhLYR06hOY4KseEzbA==
-Authentication-Results: mail3-relais-sop.national.inria.fr; dkim=none (message not signed) header.i=none; spf=SoftFail smtp.mailfrom=julia.lawall@inria.fr; dmarc=fail (p=none dis=none) d=inria.fr
-X-IronPort-AV: E=Sophos;i="6.21,240,1763420400"; 
-   d="scan'208";a="136504220"
-Received: from unknown (HELO hadrien) ([4.26.64.170])
-  by mail3-relais-sop.national.inria.fr with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2026 13:32:07 +0100
-Date: Tue, 20 Jan 2026 07:32:06 -0500 (EST)
-From: Julia Lawall <julia.lawall@inria.fr>
-To: Benjamin Philip <benjamin.philip495@gmail.com>
-cc: Julia Lawall <Julia.Lawall@inria.fr>, 
-    Nicolas Palix <nicolas.palix@imag.fr>, Jonathan Corbet <corbet@lwn.net>, 
-    cocci@inria.fr, workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
-    linux-kernel@vger.kernel.org
-Subject: Re: [cocci] [PATCH RESEND 0/3] scripts: coccicheck: document debug
- log handling
-In-Reply-To: <20260106190836.36630-1-benjamin.philip495@gmail.com>
-Message-ID: <699831d6-694b-5435-5afc-c86e5a815a61@inria.fr>
-References: <20260106190836.36630-1-benjamin.philip495@gmail.com>
+	s=arc-20240116; t=1768912736; c=relaxed/simple;
+	bh=GJJxBVl/ChCYeskZ/WAStFbDDjrKJv9+4Bm/AQd5EjY=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=b+vHfrKDPKUKC8mL2+LvxQViUoZMIW/cqo8PUW74Z6Q/ZC5NUk6v2OjYxOcxQ9W0VXE4KqLH9qufa0APgGuU5QHIKafqsxdYDl3E8P1Oba1gf41VnVr52pUEmqm+Pf0vR/CTmED/xQNFBKiiUs4sjG5+boIzFHsg3ssuc5CJmuU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=g58fS7u9; arc=none smtp.client-ip=113.46.200.218
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=Pc4QhX2FrFGoxvelexjtpvyVwVFTxxhfJ2JkUXZ+Vx0=;
+	b=g58fS7u9Rq5eHrE498axQ2lQ+B+fUBq2qUpg1ZeMdEhQ5NIfLZLI3222DsKSrb6HhVQUJx+SM
+	Fm6x+qjMPzPkPjrERPGmAsr1wZKg8HIAEJRE4CD2AqiZt1xVqymRsdoTRqZAtu6oAN/40Rcwhk8
+	P1hlTr+CLcBi6/EiVPchvHg=
+Received: from mail.maildlp.com (unknown [172.19.162.197])
+	by canpmsgout03.his.huawei.com (SkyGuard) with ESMTPS id 4dwRc96WPVzpSt7;
+	Tue, 20 Jan 2026 20:35:05 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 4783040571;
+	Tue, 20 Jan 2026 20:38:50 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Tue, 20 Jan 2026 20:38:49 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
+	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
+	<andrew+netdev@lunn.ch>
+CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
+	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
+	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
+	<shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>
+Subject: [PATCH net v01 0/5] net: hinic3: Fix netif_queue_set_napi input parameters and code styles
+Date: Tue, 20 Jan 2026 20:38:38 +0800
+Message-ID: <cover.1768911232.git.zhuyikai1@h-partners.com>
+X-Mailer: git-send-email 2.51.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-Spamd-Result: default: False [-0.46 / 15.00];
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
+X-Spamd-Result: default: False [0.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[inria.fr:s=dc];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73235-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	DMARC_POLICY_ALLOW(0.00)[inria.fr,none];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[inria.fr:+];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73236-lists,linux-doc=lfdr.de];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[julia.lawall@inria.fr,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	DMARC_POLICY_ALLOW(0.00)[huawei.com,quarantine];
+	DKIM_TRACE(0.00)[huawei.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo,inria.fr:mid,inria.fr:dkim]
-X-Rspamd-Queue-Id: B207F4B3E6
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,huawei.com:dkim]
+X-Rspamd-Queue-Id: 86007518DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+This patchset provides netif_queue_set_napi bug fix and serveral code styles
+fixes to :
+
+Fix netif_queue_set_napi queue_index parameter passing error.
+Remove empty lines between error handling.
+Remove redundant defensive code.
+Use array_size instead of multiplying.
+Sq use SQ_CTXT_PREF_CI_HI to improve readability.
+
+Thanks,
+Fan gong
+
+Fan Gong (5):
+  hinic3: Fix netif_queue_set_napi queue_index parameter passing error
+  hinic3: Fix code Style(remove empty lines between error handling)
+  hinic3: Remove redundant defensive code
+  hinic3: Use array_size instead of multiplying
+  hinic3: RQ use RQ_CTXT_PREF_CI_HI instead of SQ_CTXT_PREF_CI_HI
+
+ .../net/ethernet/huawei/hinic3/hinic3_cmdq.c  |  3 ---
+ .../net/ethernet/huawei/hinic3/hinic3_eqs.c   |  1 -
+ .../net/ethernet/huawei/hinic3/hinic3_irq.c   | 23 +++++++++++--------
+ .../net/ethernet/huawei/hinic3/hinic3_lld.c   |  5 ----
+ .../net/ethernet/huawei/hinic3/hinic3_main.c  |  4 ----
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.c  |  2 --
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.c   |  6 +++--
+ .../ethernet/huawei/hinic3/hinic3_nic_io.c    |  6 ++++-
+ .../net/ethernet/huawei/hinic3/hinic3_tx.c    |  7 ------
+ 9 files changed, 23 insertions(+), 34 deletions(-)
 
 
-On Wed, 7 Jan 2026, Benjamin Philip wrote:
+base-commit: 4515ec4ad58a37e70a9e1256c0b993958c9b7497
+-- 
+2.43.0
 
-> Currently coccicheck prints debug logs to stdout unless a debug file has been
-> set. This makes it hard to read coccinelle's suggested changes, especially for
-> someone new to coccicheck.
->
-> This patchset documents this behaviour in both the coccicheck script as well as
-> in the dev-tools documentation. Additionally, it simplifies some of the logic
-> for handling debug files.
->
-> Benjamin Philip (3):
->   scripts: coccicheck: simplify debug file handling
->   scripts: coccicheck: warn on unset debug file
->   Documentation: Coccinelle: document debug log handling
->
->  Documentation/dev-tools/coccinelle.rst | 21 ++++++++++++++++-----
->  scripts/coccicheck                     | 21 +++++++++++++--------
->  2 files changed, 29 insertions(+), 13 deletions(-)
-
-Thanks for the update.  I will try to get this in for the next release.
-
-julia
 
