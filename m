@@ -1,122 +1,134 @@
-Return-Path: <linux-doc+bounces-73352-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73353-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gGo6A24JcGlyUwAAu9opvQ
-	(envelope-from <linux-doc+bounces-73352-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 00:02:06 +0100
+	id AGWLKIEJcGlyUwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73353-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 00:02:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80F274D6C5
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 00:02:05 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 433844D6DB
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 00:02:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id C547962F130
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 22:00:17 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D566594D47F
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 22:43:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16FB33DA7FF;
-	Tue, 20 Jan 2026 21:59:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C27F3B9606;
+	Tue, 20 Jan 2026 22:43:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="HV7N/X1r"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d9MTK2tv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBB383D5236;
-	Tue, 20 Jan 2026 21:59:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 310F63B8D68;
+	Tue, 20 Jan 2026 22:43:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768946363; cv=none; b=Ml4Y6I83k3mytc3cyfjobWU0I6l8OypDQIkja3/RXimrVN8NcDrGb8aFYGEVzR7d+fqkkKIw0aSyWevMAlytD4mSa7fAsf7WHXM0IvY32ONJlDb1hpjqL4nJjyDpnc8+ckDkZsa4xJBb7LB1pCuxJio2yOX3YCGi3Hs4mhzUBsM=
+	t=1768949003; cv=none; b=IQCpR1AiQ98SfqT279z1wN3LHE4nZrQC6qzOiGoJOfyx/W1petkai8o4HEhIFWVXZbu3OsR6VHafG3VCd7KFkenL8vUp96KqN/8YDomSD4wkZjzNCYa6yA2dMPzQweINcnMH/5xa+yLQj1GOnu0sR7S2OXXD/tuKUh7jNT+T+u0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768946363; c=relaxed/simple;
-	bh=0GT9zf10B1EsD4TwcGcIPwc2duKDR6CXB3Kems9ySaw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Yw9opVSzqzHnQeeNK8BDoVChZsxtZN6+yvksmscOalC0p9OD+YyT4EpAXcneHhgOIgCQmWv1tkn5/9ydtMhh4hkPTfTTO9s1mcQtFZfl6y9gctkEssuGVjwO2xdP5PY15YlBY4qQYUYWImxctUjYPyX+crMc9KQs2MOA/WY5pO0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=HV7N/X1r; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 40ADD40C73
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1768946359; bh=5K748fbbX4Qo2K9hzHmiX6hpjQp+am1tF793srfU74c=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=HV7N/X1rQMpqUy+uWBCCrg+JznSGZesjUslMisYPjckRno+W9eW0Jotub+Mz21LbH
-	 XmzdLp6hRbP6HlZYDKfd7tz2Bd8uKv4qXchxLXGlSskIojV9zZVhxvQWhi2sr9MQde
-	 kwuUiCGGmHG+CK3iRekP2aeCj2PyetI4TChIAt74HNHMyETMxfh0mdCg8GJHbE13+5
-	 Rx4h/AZL9wtA3WNZL6UMWut4pyD570cmHKkE47CBMxBL//RzsnfNJobvyA9tATOYQC
-	 Oc1H0aeNMeNZMzIKo/IEjBZOy+kSDsi2p1jnhSxFcAQObTeS3WE2ZnByfBrfSeUpI4
-	 qhfcVLa4wny4Q==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 40ADD40C73;
-	Tue, 20 Jan 2026 21:59:19 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Yiwei Lin <s921975628@gmail.com>, linux-doc@vger.kernel.org,
- rdunlap@infradead.org
-Cc: hdegoede@redhat.com, srinivas.pandruvada@linux.intel.com,
- linux-kernel@vger.kernel.org, Yiwei Lin <s921975628@gmail.com>
-Subject: Re: [PATCH v2] scsi: docs: Add description for missing options of
- link_power_management_policy
-In-Reply-To: <20260115065341.10230-1-s921975628@gmail.com>
-References: <20260115065341.10230-1-s921975628@gmail.com>
-Date: Tue, 20 Jan 2026 14:59:18 -0700
-Message-ID: <871pjkhrnt.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1768949003; c=relaxed/simple;
+	bh=FQJ3EqIPk1L40PaEl5wsScXaThKGK3nfpIxpMrbVLJ8=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=vF3QopTHeWBeXeBOfPknWSCtugahDbOazeMbcB6P2uBStxVbmqjfelgS0TYkAwA1bWz11MhM1ewYtw3OmopS7Zb+lKrXRLzBy2n0xG/Xk+vhEycTJvCvaSDvImhu03M6mwcU73SqfOoy1tJEs5Aia5Ce/+LSqtKXiStzH/X3zC8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d9MTK2tv; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53103C16AAE;
+	Tue, 20 Jan 2026 22:43:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768949002;
+	bh=FQJ3EqIPk1L40PaEl5wsScXaThKGK3nfpIxpMrbVLJ8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=d9MTK2tv+LnVl1eArfbVtGbEOHUDsE8gU7mpAPlHoEtBJy1tylR2efUj73jDtn5ZB
+	 0CdJePdkup8z73mFeKgcGARv3q4nf5KBp/R+QgInmqM4pzIC9gzgbrE0fL4LdWtXTY
+	 fxQ0sCQ57pZjUzvg8tOvcjLOb3NQICk+L+eiZnfu7kNmAptClBJc9IOHqLjSTV4Hx3
+	 rJEfLxkUNcjTIJMajsbxc+JfoooDah75Tm83uTHbgvlEYOMS3R14J79aogZxQPG8po
+	 TODqUYTLKyv4QdlfSHgE1GwwE5ahRg9e/iUtVD7aob74DT4ZEMLCzfrxddFPA5IwfS
+	 +JurG7iY2xlmQ==
+Date: Tue, 20 Jan 2026 23:43:17 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Thomas =?UTF-8?B?V2Vpw59zY2h1aA==?= <linux@weissschuh.net>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/4] tools/docs: sphinx-build-wrapper: avoid spurious
+ rust docs generation
+Message-ID: <20260120234317.48887b52@foz.lan>
+In-Reply-To: <20260118-docs-spurious-rust-v1-0-998e14b9ed9e@weissschuh.net>
+References: <20260118-docs-spurious-rust-v1-0-998e14b9ed9e@weissschuh.net>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spamd-Result: default: False [-1.46 / 15.00];
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-1.96 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[redhat.com,linux.intel.com,vger.kernel.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-73352-lists,linux-doc=lfdr.de];
-	DMARC_POLICY_ALLOW(0.00)[lwn.net,none];
+	TAGGED_FROM(0.00)[bounces-73353-lists,linux-doc=lfdr.de,huawei];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org,infradead.org];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	URIBL_MULTI_FAIL(0.00)[ams.mirrors.kernel.org:server fail,weissschuh.net:server fail,foz.lan:server fail];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
+	RCPT_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo,lwn.net:dkim]
-X-Rspamd-Queue-Id: 80F274D6C5
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo]
+X-Rspamd-Queue-Id: 433844D6DB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Yiwei Lin <s921975628@gmail.com> writes:
+On Sun, 18 Jan 2026 00:26:20 +0100
+Thomas Wei=C3=9Fschuh <linux@weissschuh.net> wrote:
 
-> With the kernel update we have more different policy for SCSI
-> link power management. Add the corresponding description to
-> the file.
->
-> Signed-off-by: Yiwei Lin <s921975628@gmail.com>
+> Currently the rust docs are generated for each entry of SPHINXDIRS,
+> even those not mentioning the rust directory.
+>=20
+> Only generate the rust docs only once and only when requested.
+>=20
+> Signed-off-by: Thomas Wei=C3=9Fschuh <linux@weissschuh.net>
 > ---
->  .../scsi/link_power_management_policy.rst     | 23 ++++++++++++++-----
->  1 file changed, 17 insertions(+), 6 deletions(-)
+> Thomas Wei=C3=9Fschuh (4):
+>       tools/docs: sphinx-build-wrapper: generate rust docs only once
+>       tools/docs: sphinx-build-wrapper: make 'rustdoc' a local variable
+>       tools/docs: sphinx-build-wrapper: compute sphinxdirs_list earlier
+>       tools/docs: sphinx-build-wrapper: only generate rust docs when requ=
+ested
+>=20
+>  tools/docs/sphinx-build-wrapper | 80 +++++++++++++++++++++--------------=
+------
+>  1 file changed, 41 insertions(+), 39 deletions(-)
 
-Applied, thanks.
+Patches in this series look ok. Code reviewed and I also did some
+tests, and all LGTM.
 
-jon
+So, for this series:
+
+[mchehab: tested building with and without config RUST, doing
+ a full build and also passing --sphinxdirs rust peci and just
+ --sphinxdirs rust]
+
+Reviewed-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Tested-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+
+Thanks,
+Mauro
 
