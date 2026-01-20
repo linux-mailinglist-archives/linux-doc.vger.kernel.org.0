@@ -1,74 +1,74 @@
-Return-Path: <linux-doc+bounces-73259-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73265-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qIYrHhixb2nMKgAAu9opvQ
-	(envelope-from <linux-doc+bounces-73259-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:45:12 +0100
+	id sMPvMmGwb2nMKgAAu9opvQ
+	(envelope-from <linux-doc+bounces-73265-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:42:09 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFE9947DFD
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:45:11 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id CEE7C47CEF
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 17:42:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 3D98854D2F1
-	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 14:27:32 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 09FB1904FEF
+	for <lists+linux-doc@lfdr.de>; Tue, 20 Jan 2026 14:38:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 98AD442E00E;
-	Tue, 20 Jan 2026 14:22:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C86DE43CEC1;
+	Tue, 20 Jan 2026 14:30:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="Qj7xAxzI"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="iAaTSGfP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-113.freemail.mail.aliyun.com (out30-113.freemail.mail.aliyun.com [115.124.30.113])
+Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com [113.46.200.216])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32065500940;
-	Tue, 20 Jan 2026 14:22:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.113
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D2D8441046;
+	Tue, 20 Jan 2026 14:30:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.216
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768918947; cv=none; b=SVFS0Ka+PjO53QnV60HUDcQC6DBZY8CGrZ4Scy5topH5TwWVShKW5JTiIlXY5Er2X6nA9Z897TzluvWljOimuQKTBGcAcDPxGRv5uJY6kQi4TUqdK7JhCshaub2QSPNgu1fz1+M0xqCFRgatgMM6ygBzLe/W5mQZwOKR1PKyp4I=
+	t=1768919410; cv=none; b=VwdNJtCT8pNy/dHzf8EMitWDLgbxmbHIXdf7BEx4275aH2yVpHMjcNAtnsCSqIYN/jlklm96GATt8E7/XcUttf6k3eNfEx8BUNBmU8DIdjYiOBCWXg+GSlpFcQvpZQcEskKafHaoiTupTtIil+OU8BKfQGGUeXIdwFJVnlbjr3Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768918947; c=relaxed/simple;
-	bh=swLXCQOH+1mmpzdujIfEJlXid1sDiggMBxCN37vNuHg=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=CrAhPCxhQS0ECX+RAnnvH4wYF4ea/KnL+mVLCn7Of+ypLBs2SMX/biCcShAIer1bjIOYekPm/Ytrv5O5E31xVfYh9pp/rh7bs64F/CyCi37QKEabyhptRik8mHWgDK/ircDcaMnVnP1mfUSPD/Rs/sh4jNya44wehieqpyjvRW8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=Qj7xAxzI; arc=none smtp.client-ip=115.124.30.113
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1768918938; h=From:To:Subject:Date:Message-Id:MIME-Version;
-	bh=wD/viQYhsRUrgX+bgboJYmyufn5Ii5TsHLlk29tx4N4=;
-	b=Qj7xAxzIALcB5+uUzvDddG0O7KBgD2HaUVplzIRtHIo/4LUkXf0V6qUZED130gy2rpJyrne0a041Fca82DKvNGQ4YDB2w828ScoWZz+6gED0OwSEPPC3pia8K4TeQjYtXMiaAfV7lU0XOtbrAcSb9G3mc8KtVUmWvOXt7/04+qc=
-Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com fp:SMTPD_---0WxUjVe1_1768918934 cluster:ay36)
-          by smtp.aliyun-inc.com;
-          Tue, 20 Jan 2026 22:22:16 +0800
-From: fangyu.yu@linux.alibaba.com
-To: andrew.jones@oss.qualcomm.com
-Cc: ajones@ventanamicro.com,
-	alex@ghiti.fr,
-	anup@brainfault.org,
-	aou@eecs.berkeley.edu,
-	atish.patra@linux.dev,
-	corbet@lwn.net,
-	fangyu.yu@linux.alibaba.com,
-	guoren@kernel.org,
-	kvm-riscv@lists.infradead.org,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	palmer@dabbelt.com,
-	pbonzini@redhat.com,
-	pjw@kernel.org,
-	rkrcmar@ventanamicro.com
-Subject: Re: Re: [PATCH v2] RISC-V: KVM: add KVM_CAP_RISCV_SET_HGATP_MODE
-Date: Tue, 20 Jan 2026 22:22:10 +0800
-Message-Id: <20260120142210.9891-1-fangyu.yu@linux.alibaba.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <6txqxrkyqh4afmked4hdi6qekkqrb54ar3q5upz3ennnuaktsi@dtoarqt7e26t>
-References: <6txqxrkyqh4afmked4hdi6qekkqrb54ar3q5upz3ennnuaktsi@dtoarqt7e26t>
+	s=arc-20240116; t=1768919410; c=relaxed/simple;
+	bh=hkX+WwtAoehPviNL0MwOhdwoksltnEN33zDQSa4VjMs=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=UNboYWYmgYn/csIbuHfR4kfqYMHvf/cXTtWpgcamUsZhEPd3EZ3TdgU7BSd4u5fzedsDOZZJqFkI3GrbRdpancKyPl7ICu+DUsSgLIBgQs3nf36KqeyBlp8VlgjvcK8NWo59oLTgDvdYXXeJY8+mUO3LvPZMvRUljy9HC3ExICM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=iAaTSGfP; arc=none smtp.client-ip=113.46.200.216
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=XWbiB+vEHF8mL6SecFGQ5KLYzQQiNDTGcUV0CW+Plv0=;
+	b=iAaTSGfP74uFXbow0x4SodMOGg4ozANgci8HEWDA+IDoEE6X18QbEQ8QLB8rXvVkSZ5gT0a81
+	+TT6NmdCOYvvoR0YvgglgCy1TQxnuLQZE5tJZ4Tw5IzU25VxDkYHIhOr3xGoAwh4f5/dvD/vEOK
+	HvZgbCDIb0SNAE7MkHRchr8=
+Received: from mail.maildlp.com (unknown [172.19.163.104])
+	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4dwV4550fVz1T4Gv;
+	Tue, 20 Jan 2026 22:25:57 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 442214056E;
+	Tue, 20 Jan 2026 22:29:59 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Tue, 20 Jan 2026 22:29:58 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
+	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
+	<andrew+netdev@lunn.ch>
+CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
+	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
+	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
+	<shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>
+Subject: [PATCH net-next v01 1/5] hinic3: Fix netif_queue_set_napi queue_index parameter passing error
+Date: Tue, 20 Jan 2026 22:29:47 +0800
+Message-ID: <fc0a7fdf08789a52653e8ad05281a0a849e79206.1768915707.git.zhuyikai1@h-partners.com>
+X-Mailer: git-send-email 2.51.0.windows.1
+In-Reply-To: <cover.1768915707.git.zhuyikai1@h-partners.com>
+References: <cover.1768915707.git.zhuyikai1@h-partners.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -76,82 +76,114 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-7.46 / 15.00];
-	WHITELIST_DMARC(-7.00)[alibaba.com:D:+];
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
+X-Spamd-Result: default: False [0.04 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux.alibaba.com:s=default];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_POLICY_ALLOW(0.00)[linux.alibaba.com,none];
-	TAGGED_FROM(0.00)[bounces-73259-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[linux.alibaba.com:+];
-	FROM_NO_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fangyu.yu@linux.alibaba.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73265-lists,linux-doc=lfdr.de];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_NONE(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: BFE9947DFD
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	DMARC_POLICY_ALLOW(0.00)[huawei.com,quarantine];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo,huawei.com:email,huawei.com:dkim]
+X-Rspamd-Queue-Id: CEE7C47CEF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
->...
->> +	case KVM_CAP_RISCV_SET_HGATP_MODE:
->> +#ifdef CONFIG_64BIT
->> +		if (cap->args[0] < HGATP_MODE_SV39X4 ||
->> +			cap->args[0] > kvm_riscv_gstage_max_mode)
->> +			return -EINVAL;
->> +		if (kvm->arch.gstage_mode_initialized)
->> +			return 0;
->> +		kvm->arch.gstage_mode_initialized = true;
->> +		kvm->arch.kvm_riscv_gstage_mode = cap->args[0];
->> +		kvm->arch.kvm_riscv_gstage_pgd_levels = 3 +
->> +		    kvm->arch.kvm_riscv_gstage_mode - HGATP_MODE_SV39X4;
->> +		kvm_info("using SV%lluX4 G-stage page table format\n",
->> +			39 + (cap->args[0] - HGATP_MODE_SV39X4) * 9);
->
->I don't think we want this kvm_info line, particularly if it doesn't also
->include a VM ID in some form to allow readers to know which VM is using
->the selected format. Let's either drop it or change it to kvm_debug and
->include a VM ID.
+Incorrectly transmitted interrupt number instead of queue number
+when using netif_queue_set_napi. Besides, move this to appropriate
+code location.
+Remove redundant netif_stop_subqueue beacuase it is not part of the
+hinic3_send_one_skb process.
 
-Agreed, I will switch it to kvm_debug() and include a VM ID.
+Co-developed-by: Zhu Yikai <zhuyikai1@h-partners.com>
+Signed-off-by: Zhu Yikai <zhuyikai1@h-partners.com>
+Signed-off-by: Fan Gong <gongfan1@huawei.com>
+---
+ .../net/ethernet/huawei/hinic3/hinic3_irq.c   | 23 +++++++++++--------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
->
->Thanks,
->drew
->
->> +#endif
->> +		return 0;
->>  	default:
->>  		return -EINVAL;
->>  	}
->> diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
->> index dddb781b0507..00c02a880518 100644
->> --- a/include/uapi/linux/kvm.h
->> +++ b/include/uapi/linux/kvm.h
->> @@ -974,6 +974,7 @@ struct kvm_enable_cap {
->>  #define KVM_CAP_GUEST_MEMFD_FLAGS 244
->>  #define KVM_CAP_ARM_SEA_TO_USER 245
->>  #define KVM_CAP_S390_USER_OPEREXEC 246
->> +#define KVM_CAP_RISCV_SET_HGATP_MODE 247
->>  
->>  struct kvm_irq_routing_irqchip {
->>  	__u32 irqchip;
->> -- 
->> 2.50.1
->
->
+diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
+index 6950ee4d037b..ef3bc88e0a65 100644
+--- a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
++++ b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
+@@ -63,21 +63,12 @@ static void qp_add_napi(struct hinic3_irq_cfg *irq_cfg)
+ 	struct hinic3_nic_dev *nic_dev = netdev_priv(irq_cfg->netdev);
+ 
+ 	netif_napi_add(nic_dev->netdev, &irq_cfg->napi, hinic3_poll);
+-	netif_queue_set_napi(irq_cfg->netdev, irq_cfg->irq_id,
+-			     NETDEV_QUEUE_TYPE_RX, &irq_cfg->napi);
+-	netif_queue_set_napi(irq_cfg->netdev, irq_cfg->irq_id,
+-			     NETDEV_QUEUE_TYPE_TX, &irq_cfg->napi);
+ 	napi_enable(&irq_cfg->napi);
+ }
+ 
+ static void qp_del_napi(struct hinic3_irq_cfg *irq_cfg)
+ {
+ 	napi_disable(&irq_cfg->napi);
+-	netif_queue_set_napi(irq_cfg->netdev, irq_cfg->irq_id,
+-			     NETDEV_QUEUE_TYPE_RX, NULL);
+-	netif_queue_set_napi(irq_cfg->netdev, irq_cfg->irq_id,
+-			     NETDEV_QUEUE_TYPE_TX, NULL);
+-	netif_stop_subqueue(irq_cfg->netdev, irq_cfg->irq_id);
+ 	netif_napi_del(&irq_cfg->napi);
+ }
+ 
+@@ -240,6 +231,11 @@ int hinic3_qps_irq_init(struct net_device *netdev)
+ 		INIT_WORK(&irq_cfg->rxq->dim.work, hinic3_rx_dim_work);
+ 		irq_cfg->rxq->dim.mode = DIM_CQ_PERIOD_MODE_START_FROM_CQE;
+ 
++		netif_queue_set_napi(irq_cfg->netdev, q_id,
++				     NETDEV_QUEUE_TYPE_RX, &irq_cfg->napi);
++		netif_queue_set_napi(irq_cfg->netdev, q_id,
++				     NETDEV_QUEUE_TYPE_TX, &irq_cfg->napi);
++
+ 		hinic3_set_msix_auto_mask_state(nic_dev->hwdev,
+ 						irq_cfg->msix_entry_idx,
+ 						HINIC3_SET_MSIX_AUTO_MASK);
+@@ -254,6 +250,10 @@ int hinic3_qps_irq_init(struct net_device *netdev)
+ 		q_id--;
+ 		irq_cfg = &nic_dev->q_params.irq_cfg[q_id];
+ 		qp_del_napi(irq_cfg);
++		netif_queue_set_napi(irq_cfg->netdev, q_id,
++				     NETDEV_QUEUE_TYPE_RX, NULL);
++		netif_queue_set_napi(irq_cfg->netdev, q_id,
++				     NETDEV_QUEUE_TYPE_TX, NULL);
+ 
+ 		hinic3_set_msix_state(nic_dev->hwdev, irq_cfg->msix_entry_idx,
+ 				      HINIC3_MSIX_DISABLE);
+@@ -276,6 +276,11 @@ void hinic3_qps_irq_uninit(struct net_device *netdev)
+ 	for (q_id = 0; q_id < nic_dev->q_params.num_qps; q_id++) {
+ 		irq_cfg = &nic_dev->q_params.irq_cfg[q_id];
+ 		qp_del_napi(irq_cfg);
++		netif_queue_set_napi(irq_cfg->netdev, q_id,
++				     NETDEV_QUEUE_TYPE_RX, NULL);
++		netif_queue_set_napi(irq_cfg->netdev, q_id,
++				     NETDEV_QUEUE_TYPE_TX, NULL);
++
+ 		hinic3_set_msix_state(nic_dev->hwdev, irq_cfg->msix_entry_idx,
+ 				      HINIC3_MSIX_DISABLE);
+ 		hinic3_set_msix_auto_mask_state(nic_dev->hwdev,
+-- 
+2.43.0
+
 
