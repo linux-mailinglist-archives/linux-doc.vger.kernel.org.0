@@ -1,292 +1,131 @@
-Return-Path: <linux-doc+bounces-73578-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73581-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ODUcMARQcWkvCAAAu9opvQ
-	(envelope-from <linux-doc+bounces-73578-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 23:15:32 +0100
+	id aJwkNnhScWkKCQAAu9opvQ
+	(envelope-from <linux-doc+bounces-73581-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 23:26:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26DC85E9FE
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 23:15:32 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE4765EC4B
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 23:26:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 812D750943D
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 22:14:06 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 5717D880107
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 22:20:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1920444CF52;
-	Wed, 21 Jan 2026 22:12:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9219E3559D3;
+	Wed, 21 Jan 2026 22:20:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EHjsEK28"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="bRcPWOGZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com [91.218.175.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E897F4418EB
-	for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 22:12:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BF04421A0A
+	for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 22:20:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.188
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769033537; cv=none; b=sdMSuX1JmJQFS9F/iE71q5BG/k9/UDKoDEo7Z7ATvBPtHdQKGEO01NXFcNbTrpyCj47HEMAI6yGcKU1APcp78fXElNCvXQrVgINME4dZDgiQC5N0Z/Cq+A4gkRZ/Ke7KBI21MytymnvERagWsoZc0crcFuUcQD4AobYrW42ixV4=
+	t=1769034004; cv=none; b=kg4yAEUD8SYcK6uDz9Ayzm0EeXY3uKJVN+jwRpBLz6z3y5cvFHY3aufsi48EXx3chZIgGkP2gziOjQmpbQCFGh6e7NWp6ZaAOUWp6jLAUqtz4JhoTKKaai8L8pP+kj+Xb0lhu7kYpmDg9+5d7dp7dvI8KgyB9NVkfI1yAhvBtMo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769033537; c=relaxed/simple;
-	bh=JAQQN7P77tr97fU7vyuVMrvCiNP4sSFAq43cZhTlmi0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=nor4EffBwbDXW/zzyTWTnwHh1OumKkML5yBZ5atNL6LjFd5YP+pnzdjrG7Eh+FhDmP/ufNju2qDgqDi5NQhQmiCoigzrYO2uc3AhNpUHvo3oeO/JnLw1SDmPRm0AHHuueBzeVCGYAhADLBqQLNIZQDNZhsKbq/2Pc2egPsxnd9A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EHjsEK28; arc=none smtp.client-ip=74.125.224.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-6494a3d92f5so464449d50.2
-        for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 14:12:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769033530; x=1769638330; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2mpdsMRuLW1cRrssyJH9GNY+tfbuaJ3H6voxC/Fdtqg=;
-        b=EHjsEK28MO6BZ3JsqhVJmLDyEWLSWbkF9pNAa34jS5BeY9tLpZcpMEeX279xsvLjhw
-         e7e527ca9P3bStmp5w40AHBT5GTOyRY8eyHMQWDXr/GrKiqcnzI0/CtT7tf9PCIQW586
-         3XNnihqOCXsd+Z3PMFWnvh76nMQfVEm1tDdZdOIwCmJB9MCDfGXEpqYkAkp3edZbjArs
-         jBRej2Ac5y6gIheucYSdMpBIFToHvgAQkCfTZUeh4QaWCKG9nPKyyMFxbAgpnCEbfmXD
-         z7E1c8FIQEf2Hn1FyRU0ALXCaesSwSQ9Bakjm75EWXV9gA5hpjd1BB84YozeV5uc1oel
-         RBCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769033530; x=1769638330;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=2mpdsMRuLW1cRrssyJH9GNY+tfbuaJ3H6voxC/Fdtqg=;
-        b=mII0dgC9KUYT3CKQzcl5aOyNG67tKdGjMp4bT8NjPXWaY7Y8cIz9HSb+0ntzkZ4feb
-         yKIXEBSU/RT5bThzkh5RITMeU70qRYq3IORBmRGlFJ2TTop9m7nBLjALrhDSMnSbvhqD
-         ZGWDN5THtBvkUReP0oVA+ecBe+gDUST2eb8bwnT/9umvqgOopnyCJB3l6KTXG9mRNzFG
-         F3hOIQm0RJmcf7kx9OhxUyPsmOte76tAKoIBhtobf3xUokDaCMd16cpNm00QxmdHKLBl
-         PPI0eZohAd+qHmk6E5wkdPdVnUHvSMPq1VHUntm22eIANP6D60rKNH3xO4DHKixs7g2t
-         dbwg==
-X-Forwarded-Encrypted: i=1; AJvYcCX4+iswcr7YKVBoGTkCHHrZkhRDlqZOdS2WyEAoHOumA0+DieI+c+ovXtE7ZjcycM3DblliJ737dlg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxnLQZDqtj1SyU3cT857rTHZlQkgusGTR22a3VLORrm6PW3cShA
-	wfCRlfPJ0ZS1clRT4/7ai0Exc8P5auHqowomVt5JzyG8NfMaOBPhDqSQ
-X-Gm-Gg: AZuq6aJj9TBo5ougYMF/y6HWD/PtmCk3FeAFkYB9o4u6NDfb12JwuQY+LRkdRGGtzX1
-	0Gcc1tGR7lSL9M9RxUXmh9Jkf/fxDu4/65J/L94oEZgXoduJvoetl1+qMohYi6TTqDBZNSPXGQu
-	uumA6x/slWNEK33Dx7rE67b1BBMltShXgWDsSzHaT7HOda8oDPwORhCZ8pBsNVt9qnmpcgWCEAK
-	ZsuvDiQBew3xPcw8zHpcnZ+XQChqemujuekWF75iymI7UGJoWknmBDsuWrm/H4OM94EaMaA5nF0
-	YsG8tUebqpO23uDalwPUav2gtjSdOTwpZ19y6xI/jzcgUFMiJlmyk3aOQXZbjvSFTO2i2hM7n2w
-	oFalrvEhL82J5UU9b05nVpMGBngw4k/KXIdLpEonmXBfHbEU+pySqmjcLy+You0OCZ7mMfOIb0o
-	b6GwnGH63r
-X-Received: by 2002:a53:d013:0:b0:644:472d:db04 with SMTP id 956f58d0204a3-6493c84922emr5253487d50.55.1769033529707;
-        Wed, 21 Jan 2026 14:12:09 -0800 (PST)
-Received: from localhost ([2a03:2880:25ff:2::])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6494080138fsm2463523d50.20.2026.01.21.14.12.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Jan 2026 14:12:09 -0800 (PST)
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-Date: Wed, 21 Jan 2026 14:11:52 -0800
-Subject: [PATCH net-next v16 12/12] selftests/vsock: add tests for
- namespace deletion
+	s=arc-20240116; t=1769034004; c=relaxed/simple;
+	bh=yb3EVg95+PjCTvf2Xtv6yyaE4fFqLPPjH+MGY6BGmeQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=T+poOSyS7Hi8J43o1tu4Pgr2+bFp2zyaBLc3rtTi4IZSDa01uZ30pgWsMXLx7k1IqxkFiG7JjrvqMHcl7vTpLIBGVuT8oQCYkM9XqxBnVShUbfxERkOzPnO6vxjHKydU5mZmBWGHC4jnJKLMjfjrat5GIXYEOXIPQHjKUcb+xwE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=bRcPWOGZ; arc=none smtp.client-ip=91.218.175.188
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Date: Wed, 21 Jan 2026 14:19:44 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1769033989;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HoQi6KkVwO2LhgzMpx+nRVqZde/RMh0LYhGYMNHF+wI=;
+	b=bRcPWOGZvCAF46Vb6d+TQK7NJXXCA1nyBDuGiR30fw6T2n2RgwTpzNZsEoy7Sw8d7wFm6H
+	dFr++EqcJGqK4eMkbiF/b08+spW4WaOIL49mAPk8Xb9i4ovQiwLgdCvZbi5lkyrSgh6UW+
+	dV28mKXR+f8sdVTOAWqWhdjoPIBVXz8=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Shakeel Butt <shakeel.butt@linux.dev>
+To: Jiayuan Chen <jiayuan.chen@linux.dev>
+Cc: linux-mm@kvack.org, Tejun Heo <tj@kernel.org>, 
+	Johannes Weiner <hannes@cmpxchg.org>, Michal =?utf-8?Q?Koutn=C3=BD?= <mkoutny@suse.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>, 
+	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Michal Hocko <mhocko@suse.com>, Roman Gushchin <roman.gushchin@linux.dev>, 
+	Muchun Song <muchun.song@linux.dev>, Qi Zheng <zhengqi.arch@bytedance.com>, cgroups@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH 0/3] mm/lru_gen: add memory.lru_gen interface for
+ cgroup v2
+Message-ID: <aXFPhnOn4oGllq_Q@linux.dev>
+References: <20260121123955.84806-1-jiayuan.chen@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260121-vsock-vmtest-v16-12-2859a7512097@meta.com>
-References: <20260121-vsock-vmtest-v16-0-2859a7512097@meta.com>
-In-Reply-To: <20260121-vsock-vmtest-v16-0-2859a7512097@meta.com>
-To: Stefano Garzarella <sgarzare@redhat.com>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Simon Horman <horms@kernel.org>, Stefan Hajnoczi <stefanha@redhat.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
- =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, 
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
- "K. Y. Srinivasan" <kys@microsoft.com>, 
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
- Dexuan Cui <decui@microsoft.com>, Bryan Tan <bryan-bt.tan@broadcom.com>, 
- Vishnu Dasa <vishnu.dasa@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Shuah Khan <shuah@kernel.org>, Long Li <longli@microsoft.com>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux.dev, 
- netdev@vger.kernel.org, kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, berrange@redhat.com, 
- Sargun Dhillon <sargun@sargun.me>, linux-doc@vger.kernel.org, 
- Bobby Eshleman <bobbyeshleman@gmail.com>, 
- Bobby Eshleman <bobbyeshleman@meta.com>
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260121123955.84806-1-jiayuan.chen@linux.dev>
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.96 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.linux.dev,redhat.com,sargun.me,gmail.com,meta.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73578-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[32];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73581-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	DMARC_POLICY_ALLOW(0.00)[linux.dev,none];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bobbyeshleman@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[shakeel.butt@linux.dev,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 26DC85E9FE
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:helo,ams.mirrors.kernel.org:rdns,linux.dev:mid,linux.dev:dkim]
+X-Rspamd-Queue-Id: AE4765EC4B
 X-Rspamd-Action: no action
 
-From: Bobby Eshleman <bobbyeshleman@meta.com>
+On Wed, Jan 21, 2026 at 08:39:46PM +0800, Jiayuan Chen wrote:
+> This patchset adds a memory.lru_gen interface to cgroup v2, allowing users
+> to interact with MGLRU directly on a specific cgroup without needing to
+> know the internal memcg_id.
 
-Add tests that validate vsock sockets are resilient to deleting
-namespaces. The vsock sockets should still function normally.
+Unfortunetely we don't want to expose reclaim implementation specific
+interface to a cgroup. 
 
-The function check_ns_delete_doesnt_break_connection() is added to
-re-use the step-by-step logic of 1) setup connections, 2) delete ns,
-3) check that the connections are still ok.
+> 
+> Motivation
+> ==========
+> Currently, the only way to perform aging or eviction on a specific memcg
+> is through the debugfs interface (/sys/kernel/debug/lru_gen), which
+> requires the memcg_id. However, there's no straightforward way to get the
+> memcg_id for a given cgroup path. This makes it difficult for users to
+> leverage MGLRU's proactive reclaim capabilities on specific cgroups.
 
-Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
-Signed-off-by: Bobby Eshleman <bobbyeshleman@meta.com>
----
-Changes in v13:
-- remove tests that change the mode after socket creation (this is not
-  supported behavior now and the immutability property is tested in other
-  tests)
-- remove "change_mode" behavior of
-  check_ns_changes_dont_break_connection() and rename to
-  check_ns_delete_doesnt_break_connection() because we only need to test
-  namespace deletion (other tests confirm that the mode cannot change)
+From the next kernel version, this memcg_id will be inode number of the
+cgroup for this interface. So, a simple 'ls -id cgroup_path' would  be
+sufficient for your use-case.
 
-Changes in v11:
-- remove pipefile (Stefano)
+The relevant series [1] is in mm-tree at the moment and if you want, you
+can backport it to your kernels.
 
-Changes in v9:
-- more consistent shell style
-- clarify -u usage comment for pipefile
----
- tools/testing/selftests/vsock/vmtest.sh | 84 +++++++++++++++++++++++++++++++++
- 1 file changed, 84 insertions(+)
-
-diff --git a/tools/testing/selftests/vsock/vmtest.sh b/tools/testing/selftests/vsock/vmtest.sh
-index a9eaf37bc31b..dc8dbe74a6d0 100755
---- a/tools/testing/selftests/vsock/vmtest.sh
-+++ b/tools/testing/selftests/vsock/vmtest.sh
-@@ -68,6 +68,9 @@ readonly TEST_NAMES=(
- 	ns_same_local_loopback_ok
- 	ns_same_local_host_connect_to_local_vm_ok
- 	ns_same_local_vm_connect_to_local_host_ok
-+	ns_delete_vm_ok
-+	ns_delete_host_ok
-+	ns_delete_both_ok
- )
- readonly TEST_DESCS=(
- 	# vm_server_host_client
-@@ -135,6 +138,15 @@ readonly TEST_DESCS=(
- 
- 	# ns_same_local_vm_connect_to_local_host_ok
- 	"Run vsock_test client in VM in a local ns with server in same ns."
-+
-+	# ns_delete_vm_ok
-+	"Check that deleting the VM's namespace does not break the socket connection"
-+
-+	# ns_delete_host_ok
-+	"Check that deleting the host's namespace does not break the socket connection"
-+
-+	# ns_delete_both_ok
-+	"Check that deleting the VM and host's namespaces does not break the socket connection"
- )
- 
- readonly USE_SHARED_VM=(
-@@ -1287,6 +1299,78 @@ test_vm_loopback() {
- 	return "${KSFT_PASS}"
- }
- 
-+check_ns_delete_doesnt_break_connection() {
-+	local pipefile pidfile outfile
-+	local ns0="global0"
-+	local ns1="global1"
-+	local port=12345
-+	local pids=()
-+	local rc=0
-+
-+	init_namespaces
-+
-+	pidfile="$(create_pidfile)"
-+	if ! vm_start "${pidfile}" "${ns0}"; then
-+		return "${KSFT_FAIL}"
-+	fi
-+	vm_wait_for_ssh "${ns0}"
-+
-+	outfile=$(mktemp)
-+	vm_ssh "${ns0}" -- \
-+		socat VSOCK-LISTEN:"${port}",fork STDOUT > "${outfile}" 2>/dev/null &
-+	pids+=($!)
-+	vm_wait_for_listener "${ns0}" "${port}" "vsock"
-+
-+	# We use a pipe here so that we can echo into the pipe instead of using
-+	# socat and a unix socket file. We just need a name for the pipe (not a
-+	# regular file) so use -u.
-+	pipefile=$(mktemp -u /tmp/vmtest_pipe_XXXX)
-+	ip netns exec "${ns1}" \
-+		socat PIPE:"${pipefile}" VSOCK-CONNECT:"${VSOCK_CID}":"${port}" &
-+	pids+=($!)
-+
-+	timeout "${WAIT_PERIOD}" \
-+		bash -c 'while [[ ! -e '"${pipefile}"' ]]; do sleep 1; done; exit 0'
-+
-+	if [[ "$1" == "vm" ]]; then
-+		ip netns del "${ns0}"
-+	elif [[ "$1" == "host" ]]; then
-+		ip netns del "${ns1}"
-+	elif [[ "$1" == "both" ]]; then
-+		ip netns del "${ns0}"
-+		ip netns del "${ns1}"
-+	fi
-+
-+	echo "TEST" > "${pipefile}"
-+
-+	timeout "${WAIT_PERIOD}" \
-+		bash -c 'while [[ ! -s '"${outfile}"' ]]; do sleep 1; done; exit 0'
-+
-+	if grep -q "TEST" "${outfile}"; then
-+		rc="${KSFT_PASS}"
-+	else
-+		rc="${KSFT_FAIL}"
-+	fi
-+
-+	terminate_pidfiles "${pidfile}"
-+	terminate_pids "${pids[@]}"
-+	rm -f "${outfile}" "${pipefile}"
-+
-+	return "${rc}"
-+}
-+
-+test_ns_delete_vm_ok() {
-+	check_ns_delete_doesnt_break_connection "vm"
-+}
-+
-+test_ns_delete_host_ok() {
-+	check_ns_delete_doesnt_break_connection "host"
-+}
-+
-+test_ns_delete_both_ok() {
-+	check_ns_delete_doesnt_break_connection "both"
-+}
-+
- shared_vm_test() {
- 	local tname
- 
-
--- 
-2.47.3
-
+[1] https://lkml.kernel.org/r/20251225232116.294540-1-shakeel.butt@linux.dev
 
