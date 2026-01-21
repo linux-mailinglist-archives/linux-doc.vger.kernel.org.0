@@ -1,218 +1,172 @@
-Return-Path: <linux-doc+bounces-73485-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73462-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cHckIbb+cGmgbAAAu9opvQ
-	(envelope-from <linux-doc+bounces-73485-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 17:28:38 +0100
+	id UOLrE0X1cGmgbAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73462-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 16:48:21 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 485AB59E43
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 17:28:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E757E5971A
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 16:48:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id EA49A5CBAF2
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 15:07:08 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 4C629726939
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 14:55:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76A404C6EEC;
-	Wed, 21 Jan 2026 14:49:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBAA731E106;
+	Wed, 21 Jan 2026 14:46:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="A2BBkbWU"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="d28bk7Ss"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C19304CA29B;
-	Wed, 21 Jan 2026 14:49:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FA533E9F7E
+	for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 14:46:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.174
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769006950; cv=pass; b=SuuX7SaEhTyYa4Ej54vuTOExrp6C+ofPnb0CdaIUjdwk+wkLuiIiAFLZ8vz1dnwR6XQV7I4D9GdTHd7hefmRtpfIMA7WQitOdztfqO+azZRVHMnyKB2ytxDH/aotPuXDzzFe5KogoHpKJpAFSAgLbbX3HAhwqusoAMG55C9Q4J0=
+	t=1769006780; cv=pass; b=qiIwFVyXwSeACNmljHKo0rWDQPZ2qynEILla4B422R46FnXmLUhtZo3rBMwVcL/miRJv8hYmJzw7XiwG6tV4wZfMpo8ygXbmFL1nCIGgzUvJKUGY3ipqP0yfmOYTFjPa1NvSF0NvivoElsPMIlz/1B0+vp2Ls6/A36duftch6jQ=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769006950; c=relaxed/simple;
-	bh=3BsSm/0LBTwYQ15DEq1s5x1ZgOzqnAsygpOk8Vm/Ykc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=tz3iqbOmB9pvWr1uC3mu5zo1QAUJWp5jv8IASWIx2J1f/RxBAIkXOwNuXwkYyvBnf+3fs54fyd+NnfcAtSRfaFgY4753rJU0yQnao33BKPhX40l5R9DkmQOIZT+ajjzs9vQLyZIwI1YCrGFn/Lo1os+Usf0GEUnPZqWZb7IPGTA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=A2BBkbWU; arc=pass smtp.client-ip=136.143.188.112
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1769006908; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=OYt6qVbbrjZMXbBw+LEBTmxlwOop70fpQcLtGT2ImF/m1vmH1YqwVBnm7N3IQXqfZ447J1417F1BUJPXyLFiEDwm+DEZbrPhzz13d7C+HyyZBr6WdleiLa5FoT4nnrXVVzBt7dtTi1FIYSqK727+uD8+2a1i3ec0UBNvSRj0hiI=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1769006908; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=SfjcxeAT2W+o+UxrPmZJDMJEXHj1m3+fRUI5YUGISxM=; 
-	b=fKwO4uXpYVblW+x3Qm73LdEHISMYhsKZ/5m2uYX0ChLdz7nflEzgkOYEKyq0vvgSJTmJw4agBcpcTGF06KBJD2iHuXTf65iXm3//0b6H/c8mpCZYZQ5VHBBHTzPqYGlSyadFjHk9ebWmBTehdyHs5H+3yarP9XGaeEkNuAJ9qSA=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
-	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769006908;
-	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
-	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=SfjcxeAT2W+o+UxrPmZJDMJEXHj1m3+fRUI5YUGISxM=;
-	b=A2BBkbWU94kSg+W/NTPr2nPRsdenciU8Romy3fRAuqrGzFGl0PyQs2l3bga5HFWp
-	8Cnib475FVreEMxft2BH3wYxF5wk9SeX+HhZonamG3LaO75IR2d29aNoGUzhLRdfd7r
-	/tlg16CXQerxZy8oPq/vohKH41nvnQRWrULsZ9+g=
-Received: by mx.zohomail.com with SMTPS id 1769006906502667.9559694495291;
-	Wed, 21 Jan 2026 06:48:26 -0800 (PST)
-From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Wed, 21 Jan 2026 15:45:29 +0100
-Subject: [PATCH v7 22/22] drm/bridge: Document bridge chain format
- selection
+	s=arc-20240116; t=1769006780; c=relaxed/simple;
+	bh=8LkGGQMI+aFrxwwHHlu4NNetbr+QWG/yDGjZ/t1VPz0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=bYleuApRFfwB/iR/RlmpVvbp9GnXqsDl1jl15N0jh7WoulHl1GMDbta4vpQp3sXMPjdMIR8dxR0XIhmmdMWPGOS8Y8OiDUigXKmlTmhvYvi7bWOjIRUd6C+i/o0zSraYmW6N1c4hireCgkpUj5AlBvkuB7ewGw674zBbKYvqfVs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=d28bk7Ss; arc=pass smtp.client-ip=209.85.160.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-502a4e3e611so8263871cf.0
+        for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 06:46:18 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769006777; cv=none;
+        d=google.com; s=arc-20240605;
+        b=aZhVq9gLvHYkhePyKwjsXGjB8u8IfwQB4HlxzVvE/dUO0XexbLIMS8RgDi7nRgFTSy
+         9nJjcpGcf/iA0Z3XH9lrfkdXPcRmjEOBM1IGbVWqiCs5mElOzVW8PsXbAMNHY2g5a62s
+         HkMozUlVrRwNKLPp7vmboxGnFsDb9FKjqQXmPDvgv3U/k9R9NDeKUk081JKi1w3mggnd
+         TTFVVmrVCom2v4d8Zk9I44xM1GKmvWZBHU2nNXTeRSTahRpAqTdcfrzhGQYd6lpugjrF
+         KusyzDuvo0ay58fwHL6DVQCG8Z1PZX50QGUB4kcM8DoV77gSu2VR4mDlOOwQ1LIGf0ER
+         7hJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=8LkGGQMI+aFrxwwHHlu4NNetbr+QWG/yDGjZ/t1VPz0=;
+        fh=buBP7yLgzaNQuesRcRyOwvdn4SNNiSX78awsuGV20/A=;
+        b=SQs38Jsezut6qKQDcJkKnZ+gXTBh7Y+z13e0hhcf+KOXYAHSSHsSVlAfcmqfMkNHW5
+         3uMrNMyPxt8szkGUDc4/P8glpMDkih25vHAUFy6BwoVJycxBsFgpp2eOs0YvcRop3dhy
+         Uwd2Z7+O/ReoMnClnxbpAMgrVYZVTRSeIevCzWVgin9Vzi9hHhwFFGGZmr70aYr+dxb3
+         Ci2r4tLSOZmgldi/YfqUIbHrHqikykHz1daVIjL1hObXnEBFNiE3n6jYP4e9oonYd5dx
+         JY6ioc4+MhaZMwLRgylPdreq879aBFUVGaNMkvtnuvEeYMNh4xGHNqOIJ/Zx0MIgozNJ
+         ndig==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1769006777; x=1769611577; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8LkGGQMI+aFrxwwHHlu4NNetbr+QWG/yDGjZ/t1VPz0=;
+        b=d28bk7SslA/sFce7HOZK4TTDYBBQeo+OKAEYlM0vlhVpL65gsBLhCO6KPHMsWlw8Wk
+         mosONMTxIPvFSicjHS9iTtQM4OuXCGSSByMIwvfm/jqbC1xRIweRK0J9DZZDDVZc7KOi
+         EmcVdXOBxQD8DhtHknYdgtk9PMM+uk9lBU2xqL/xI0JVgR5ps/6oOTaoGf7VNMllYt+j
+         O1xWMrpwCI2RrozBPlabGr/c3iw/PgxYCxQCpooAepiS/GQ1d4WfMn6pbMfVgsRNLVTV
+         A4swtaueVj0Qi9NeCwr5GoGrM1LvcAoPI4J/2ZlREuJxFyXsDmEhmdKgH7eXfQE6oemV
+         sd7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769006777; x=1769611577;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=8LkGGQMI+aFrxwwHHlu4NNetbr+QWG/yDGjZ/t1VPz0=;
+        b=val6rA4eEgk/QNSTmU/gS6NcNu54N8EzcicpBo5L+2tTT9insLbM4r/AG8Ttv/C2KN
+         kFFEo5z2RKyA80o3Z2Qux3uXjxUriX+KyWs/Joz75jpQbi38cT0eehMYlIDbyJJP2gpI
+         dkPoRcLnkooLnbgM7gqsmEwST0ba/lYNBfJJhet2aX5fZGy9oiIYKJxHo4zpAbg2pcS4
+         3LuenP83YPzLSudwlHdhK1vXTK3Tr6+k6kFkUbtRaRSSsNGRW2wASH4DiN45ProcOf9s
+         aKMOYuduggGY0yavd8nmarNW3H5yzBsJsSZSOqHTJLXBipgtPQYnQ6F3YH9pnxwQxUNC
+         dIaA==
+X-Forwarded-Encrypted: i=1; AJvYcCV4yxAmJn8smmvSgaxI9wPelRwEOTxi/xY7RuJmgIwBhvfB31+LxbATvmqCwikLLJEaYfiSyJ5ksKM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YysyGdszwgq2Jk7BnSFgKXcojftY7ziw29RC+XIhc4Rkoud+1jO
+	eIncKnNGmKG8iTJaeZ6GDZB0WJrMcH0qBOOelUPBcNMBLtzlIEO/q8kszwalg2YFWr8D6tFqOY1
+	L4uUkcV0mQ2ky7nnLpboUntnxRvGKWJCD8VKhhAH6
+X-Gm-Gg: AZuq6aLDJ3owKR54HWisNTJZQYqIX4TsqVi8/vynCffmcLODrgYDqGSIE2AVUnhOsNO
+	1sD6dK6cI/K7Re0EEWQl70c/HlVYgNKABcVR03yGvS+W5Gh67Ri8bmzo7O2jFF7ODHRbvIUUtSi
+	5Hp/2v0uOcY4M5f2iWAnSqhvHHDw3mGkjaJVqDHPdZcMZWpvaEznMcsDykSlHV3NxW68vDyymYo
+	S3WK8YShUSVhUS56CsRNpUNihsDVo4wQEc40om0UyJMzzmjat4/04mvPRVLiLrhpU0Q4bE=
+X-Received: by 2002:a05:622a:19a0:b0:4f1:aa52:878 with SMTP id
+ d75a77b69052e-502a153b0d8mr241578331cf.9.1769006776632; Wed, 21 Jan 2026
+ 06:46:16 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260121-color-format-v7-22-ef790dae780c@collabora.com>
-References: <20260121-color-format-v7-0-ef790dae780c@collabora.com>
-In-Reply-To: <20260121-color-format-v7-0-ef790dae780c@collabora.com>
-To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
- Rodrigo Siqueira <siqueira@igalia.com>, 
- Alex Deucher <alexander.deucher@amd.com>, 
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Andrzej Hajda <andrzej.hajda@intel.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Sandy Huang <hjc@rock-chips.com>, 
- =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
- Andy Yan <andy.yan@rock-chips.com>, 
- Jani Nikula <jani.nikula@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>, 
- Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- linux-doc@vger.kernel.org, 
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-X-Mailer: b4 0.14.3
+References: <20260121143215.14717-1-chia-yu.chang@nokia-bell-labs.com> <20260121143215.14717-12-chia-yu.chang@nokia-bell-labs.com>
+In-Reply-To: <20260121143215.14717-12-chia-yu.chang@nokia-bell-labs.com>
+From: Eric Dumazet <edumazet@google.com>
+Date: Wed, 21 Jan 2026 15:46:05 +0100
+X-Gm-Features: AZwV_QhmibL0dUAXLsxhUO5inqdEXXTvbJ-_96RoQaEHVZjV79Y0et9q-_yyNck
+Message-ID: <CANn89iJ7O5+xjoHHy1RZzLMfTBke7nmh+YhHCJsdpyx=-ewbOw@mail.gmail.com>
+Subject: Re: [PATCH v10 net-next 11/15] tcp: accecn: fallback outgoing half
+ link to non-AccECN
+To: chia-yu.chang@nokia-bell-labs.com
+Cc: pabeni@redhat.com, parav@nvidia.com, linux-doc@vger.kernel.org, 
+	corbet@lwn.net, horms@kernel.org, dsahern@kernel.org, kuniyu@google.com, 
+	bpf@vger.kernel.org, netdev@vger.kernel.org, dave.taht@gmail.com, 
+	jhs@mojatatu.com, kuba@kernel.org, stephen@networkplumber.org, 
+	xiyou.wangcong@gmail.com, jiri@resnulli.us, davem@davemloft.net, 
+	andrew+netdev@lunn.ch, donald.hunter@gmail.com, ast@fiberby.net, 
+	liuhangbin@gmail.com, shuah@kernel.org, linux-kselftest@vger.kernel.org, 
+	ij@kernel.org, ncardwell@google.com, koen.de_schepper@nokia-bell-labs.com, 
+	g.white@cablelabs.com, ingemar.s.johansson@ericsson.com, 
+	mirja.kuehlewind@ericsson.com, cheshire@apple.com, rs.ietf@gmx.at, 
+	Jason_Livingood@comcast.com, vidhi_goel@apple.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Spamd-Result: default: False [-0.46 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[redhat.com,nvidia.com,vger.kernel.org,lwn.net,kernel.org,google.com,gmail.com,mojatatu.com,networkplumber.org,resnulli.us,davemloft.net,lunn.ch,fiberby.net,nokia-bell-labs.com,cablelabs.com,ericsson.com,apple.com,gmx.at,comcast.com];
+	TAGGED_FROM(0.00)[bounces-73462-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73485-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[37];
-	MIME_TRACE(0.00)[0:+];
+	DMARC_POLICY_ALLOW(0.00)[google.com,reject];
+	DKIM_TRACE(0.00)[google.com:+];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
+	RCPT_COUNT_TWELVE(0.00)[33];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
-	DMARC_POLICY_ALLOW(0.00)[collabora.com,none];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[edumazet@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,collabora.com:email,collabora.com:dkim,collabora.com:mid]
-X-Rspamd-Queue-Id: 485AB59E43
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,nokia-bell-labs.com:email,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: E757E5971A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The bridge chain format selection behaviour was, until now,
-undocumented. With the addition of the "color format" DRM property, it's
-not sufficiently complex enough that documentation is warranted,
-especially for driver authors trying to do the right thing.
+On Wed, Jan 21, 2026 at 3:32=E2=80=AFPM <chia-yu.chang@nokia-bell-labs.com>=
+ wrote:
+>
+> From: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
+>
+> According to Section 3.2.2.1 of AccECN spec (RFC9768), if the Server
+> is in AccECN mode and in SYN-RCVD state, and if it receives a value of
+> zero on a pure ACK with SYN=3D0 and no SACK blocks, for the rest of the
+> connection the Server MUST NOT set ECT on outgoing packets and MUST
+> NOT respond to AccECN feedback. Nonetheless, as a Data Receiver it
+> MUST NOT disable AccECN feedback.
+>
+> Signed-off-by: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
+> Acked-by: Paolo Abeni <pabeni@redhat.com>
 
-Add a high-level overview of how the process is supposed to work, and
-mention what the display driver is supposed to do if it wants to make
-use of this functionality.
-
-Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
----
- Documentation/gpu/drm-kms-helpers.rst |  6 ++++++
- drivers/gpu/drm/drm_bridge.c          | 39 +++++++++++++++++++++++++++++++++++
- 2 files changed, 45 insertions(+)
-
-diff --git a/Documentation/gpu/drm-kms-helpers.rst b/Documentation/gpu/drm-kms-helpers.rst
-index 781129f78b06..47c4f593cf9d 100644
---- a/Documentation/gpu/drm-kms-helpers.rst
-+++ b/Documentation/gpu/drm-kms-helpers.rst
-@@ -181,6 +181,12 @@ Bridge Operations
- .. kernel-doc:: drivers/gpu/drm/drm_bridge.c
-    :doc: bridge operations
- 
-+Bridge Chain Format Selection
-+-----------------------------
-+
-+.. kernel-doc:: drivers/gpu/drm/drm_bridge.c
-+   :doc: bridge chain format selection
-+
- Bridge Connector Helper
- -----------------------
- 
-diff --git a/drivers/gpu/drm/drm_bridge.c b/drivers/gpu/drm/drm_bridge.c
-index b0dfa03dbb81..a155b8aa4a3d 100644
---- a/drivers/gpu/drm/drm_bridge.c
-+++ b/drivers/gpu/drm/drm_bridge.c
-@@ -198,6 +198,45 @@
-  * driver.
-  */
- 
-+/**
-+ * DOC: bridge chain format selection
-+ *
-+ * A bridge chain, from display output processor to connector, may contain
-+ * bridges capable of converting between bus formats on their inputs, and
-+ * output formats on their outputs. For example, a bridge may be able to convert
-+ * from RGB to YCbCr 4:4:4, and pass through YCbCr 4:2:0 as-is, but not convert
-+ * from RGB to YCbCr 4:2:0. This means not all input formats map to all output
-+ * formats.
-+ *
-+ * Further adding to this, a desired output color format, as specified with the
-+ * "color format" DRM property, might not correspond to what the display driver
-+ * should set at its output 1:1. The bridge chain it feeds into may only be able
-+ * to reach the desired output format, if a conversion from a different starting
-+ * format is performed.
-+ *
-+ * To deal with this complexity, the recursive bridge chain bus format selection
-+ * logic starts with the last bridge in the chain, usually the connector, and
-+ * then recursively walks the chain of bridges backwards to the first bridge,
-+ * trying to find a path.
-+ *
-+ * For a display driver to work in such a scenario, it should read the first
-+ * bridge's bridge state to figure out which bus format the chain resolved to.
-+ * If the first bridge's input format resolved to %MEDIA_BUS_FMT_FIXED, then its
-+ * output format should be used.
-+ *
-+ * Special handling is done for HDMI as it relates to format selection. Instead
-+ * of directly using the "color format" DRM property for bridge chains that end
-+ * in HDMI bridges, the bridge chain format selection logic will trust the logic
-+ * that set the HDMI output format. For the common HDMI state helper
-+ * functionality, this means that %DRM_COLOR_FORMAT_AUTO will allow fallbacks to
-+ * YCBCr 4:2:0 if the bandwidth requirements would otherwise be too high but the
-+ * mode and connector allow it.
-+ *
-+ * For bridge chains that do not end in an HDMI bridge, %DRM_COLOR_FORMAT_AUTO
-+ * will be satisfied with the first output format on the last bridge for which
-+ * it can find a path back to the first bridge.
-+ */
-+
- /* Protect bridge_list and bridge_lingering_list */
- static DEFINE_MUTEX(bridge_lock);
- static LIST_HEAD(bridge_list);
-
--- 
-2.52.0
-
+Reviewed-by: Eric Dumazet <edumazet@google.com>
 
