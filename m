@@ -1,167 +1,138 @@
-Return-Path: <linux-doc+bounces-73374-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73375-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qO5OOEpTcGlvXQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73374-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 05:17:14 +0100
+	id 8DI4CRFVcGlvXQAAu9opvQ
+	(envelope-from <linux-doc+bounces-73375-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 05:24:49 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D2A450E95
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 05:17:14 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id BECE150FE3
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 05:24:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D9682464898
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 04:17:13 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 413673E7D7E
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 04:24:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6697C285C91;
-	Wed, 21 Jan 2026 04:17:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 886773793DE;
+	Wed, 21 Jan 2026 04:24:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NpiQrLkq"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="rvq/3rZK";
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="rvq/3rZK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4A3F2EC08C;
-	Wed, 21 Jan 2026 04:17:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44AAC35FF7A;
+	Wed, 21 Jan 2026 04:24:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.187
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768969025; cv=none; b=NyZalhmjnqP5UGauZVBQQVcp5ue1W/MgEbRuR+CPRlIV4HHF2QUIfENGTNcDBgOWcWowXdQBWPS4iFbJXdLF/th81xatjL0EiqJECPOrPg7samHje+XbkJneyO5ajlO5FnXETn2LjyPA1eQ8A6xkbEyQELyGnqks3G6llemq4KA=
+	t=1768969476; cv=none; b=OkiIoO3ypnaHdfT1Bo4+EkbZbBxNfqY+fm8Y4raVP/OpKuvwtBfPfCpzcCxCkiTGcRwhauD2xyBz+6mTR+aPt8Vt7WFZfG63i9JjKgNWVfeIGUwnWkKYABYwjW94GfRVNketcHLDoTblb6yIXdZlNSfwwK1rCG10dHd+kjRVYrw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768969025; c=relaxed/simple;
-	bh=Vl8thQo27leGKYP+VBuDV4QcUH1ab8Zm+QHojEY2LTw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mBeaneZzESZManiQIq9TmQLS+Bx3A9SHWp8c/Du3pgpCP62yNEvjH+/VaOEr4zCuSw/3fPVznjLKk6U35II62PPV32b5HREQZQvCWMQNzsSBx1WY7OqizUdMMJkPQKVV1xXIFk2uZ4iC0Ntkxo3QsqAUaGXyQsqlABZ0zVPo3ZY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NpiQrLkq; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41D85C116D0;
-	Wed, 21 Jan 2026 04:17:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768969024;
-	bh=Vl8thQo27leGKYP+VBuDV4QcUH1ab8Zm+QHojEY2LTw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=NpiQrLkqRJHXDW+JXPvNr7gw7F2ux/zr6uGSneIY4EGQMUd6kKBsNpUyo0GdLzTHa
-	 P3YoAYs5kvjZJBKnWgmGn3FDrCQht4uV/2mu8vzDQ1oHHykU74IppL1JNKa2ozpVXf
-	 QBcDFS2fUmnDwzo6jBkXQKlFG9DnaEhntgHGFpeAvYuG3v6CjWyZvtgJ9z2SdeT9RZ
-	 TCuf/5uvkSaOOPld0hpxFVF3gHFlLzakawq3BeQSGhNarXWheOGjEpDT6ykJkC5r1I
-	 xqIRP2NxIUkjwoY0bHPO/cYVhT+g8AmyWXp2GZuaKH4pEEgqp4TfeIVLjoKVyfsLYq
-	 OGL+vs/YFN28Q==
-Date: Wed, 21 Jan 2026 04:17:00 +0000
-From: Tzung-Bi Shih <tzungbi@kernel.org>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Benson Leung <bleung@chromium.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Linus Walleij <linusw@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <shuah@kernel.org>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
-	linux-kselftest@vger.kernel.org,
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-	Wolfram Sang <wsa+renesas@sang-engineering.com>,
-	Simona Vetter <simona.vetter@ffwll.ch>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Jason Gunthorpe <jgg@nvidia.com>, linux-gpio@vger.kernel.org
-Subject: Re: [PATCH 00/23] gpiolib: Adopt revocable mechanism for UAF
- prevention
-Message-ID: <aXBTPG9rUHMgbHYp@google.com>
-References: <20260116081036.352286-1-tzungbi@kernel.org>
- <CAMRc=MdOCvEb81k0whM9dGCE8Hp=tdxZTUuiFeiL3+WsEei9EQ@mail.gmail.com>
- <aWuFBqIfJpDL9g-J@tzungbi-laptop>
- <CAMRc=McrFa42mNWmZtD1HKKKZ+USUKpQAAME50wbfxPM7L72gA@mail.gmail.com>
+	s=arc-20240116; t=1768969476; c=relaxed/simple;
+	bh=RnkLMcRQKffZL+/hd4xzZ0wM8EJgCJE3g7C0hhf8e4Q=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=guGshyaQOmcVjgXCBTzOwXNR3P2janeYseoWiDf/6RKaDEojeDepMX22Iqhv5tEVSuUAWntHIll/PQDzDumPnVtM9SqXt/o/rBaaWejLEhDsOIkIF9XVsdTX6dz/gpuOwb/i+RFsc7Or6ZNbMcJDHkOkkKy+/wmpbMYb8pvMAf4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rvq/3rZK; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rvq/3rZK; arc=none smtp.client-ip=45.249.212.187
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=RnkLMcRQKffZL+/hd4xzZ0wM8EJgCJE3g7C0hhf8e4Q=;
+	b=rvq/3rZK5l+jjY0KzUWklnhmYZR6jR1cwKeVzEF5KzB7Zdbr4TXiGK5XmI2LKq2MpBQ5ll1DF
+	TLcNXo9BiJLOfZJAqSsVa6TokeaTurXwKQ1gGXpV0wCTw0NMISWt5nOHOo6N5FfEM1sJCwiERXS
+	Y+SSTMBySYsyr81XB6EcSxM=
+Received: from canpmsgout12.his.huawei.com (unknown [172.19.92.144])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTPS id 4dwrg45RSsz1BG2J;
+	Wed, 21 Jan 2026 12:24:00 +0800 (CST)
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=RnkLMcRQKffZL+/hd4xzZ0wM8EJgCJE3g7C0hhf8e4Q=;
+	b=rvq/3rZK5l+jjY0KzUWklnhmYZR6jR1cwKeVzEF5KzB7Zdbr4TXiGK5XmI2LKq2MpBQ5ll1DF
+	TLcNXo9BiJLOfZJAqSsVa6TokeaTurXwKQ1gGXpV0wCTw0NMISWt5nOHOo6N5FfEM1sJCwiERXS
+	Y+SSTMBySYsyr81XB6EcSxM=
+Received: from mail.maildlp.com (unknown [172.19.162.92])
+	by canpmsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4dwrZk38mKznTWL;
+	Wed, 21 Jan 2026 12:20:14 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 8A19740562;
+	Wed, 21 Jan 2026 12:24:12 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Wed, 21 Jan 2026 12:24:11 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: <kuba@kernel.org>
+CC: <andrew+netdev@lunn.ch>, <davem@davemloft.net>, <edumazet@google.com>,
+	<gongfan1@huawei.com>, <guoxin09@huawei.com>, <horms@kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<luosifu@huawei.com>, <luoyang82@h-partners.com>, <netdev@vger.kernel.org>,
+	<pabeni@redhat.com>, <shijing34@huawei.com>, <wulike1@huawei.com>,
+	<zhoushuai28@huawei.com>, <zhuyikai1@h-partners.com>
+Subject: Re: [PATCH net v01 0/5] net: hinic3: Fix netif_queue_set_napi input parameters and code styles
+Date: Wed, 21 Jan 2026 12:24:08 +0800
+Message-ID: <20260121042408.1120-1-gongfan1@huawei.com>
+X-Mailer: git-send-email 2.51.0.windows.1
+In-Reply-To: <20260120154759.5a2c04c5@kernel.org>
+References: <20260120154759.5a2c04c5@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAMRc=McrFa42mNWmZtD1HKKKZ+USUKpQAAME50wbfxPM7L72gA@mail.gmail.com>
-X-Spamd-Result: default: False [-0.46 / 15.00];
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
+X-Spamd-Result: default: False [1.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73374-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	DMARC_POLICY_ALLOW(0.00)[huawei.com,quarantine];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
+	TAGGED_FROM(0.00)[bounces-73375-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tzungbi@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,libgpiod.readthedocs.io:url]
-X-Rspamd-Queue-Id: 8D2A450E95
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:dkim,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo];
+	TO_DN_NONE(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: BECE150FE3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Jan 19, 2026 at 09:33:21AM +0100, Bartosz Golaszewski wrote:
-> On Sat, Jan 17, 2026 at 1:48 PM Tzung-Bi Shih <tzungbi@kernel.org> wrote:
-> >
-> > On Fri, Jan 16, 2026 at 11:35:00AM +0100, Bartosz Golaszewski wrote:
-> > > On Fri, Jan 16, 2026 at 9:11 AM Tzung-Bi Shih <tzungbi@kernel.org> wrote:
-> > > >
-> > > > This series transitions the UAF prevention logic within the GPIO core
-> > > > (gpiolib) to use the 'revocable' mechanism.
-> > > >
-> > > > The existing code aims to prevent UAF issues when the underlying GPIO
-> > > > chip is removed.  This series replaces that custom logic with the
-> > > > generic 'revocable' API, which is designed to handle such lifecycle
-> > > > dependencies.  There should be no change in behavior.
-> > > >
-> > > > This series depends on the 'revocable' API, introduced in [1].  Some
-> > > > build bots may report errors due to undefined symbols related to
-> > > > 'revocable' until the dependency is merged.
-> > > >
-> > >
-> > > Hi Tzung-Bi!
-> > >
-> > > Thank you for doing this and considering my suggestions from LPC. I
-> > > haven't looked at the code yet but I quickly tested the series with my
-> > > regular test-suites. The good news is: nothing is broken, every test
-> > > works fine. The bad news is: there seems to be a significant impact on
-> > > performance. With the user-space test-suite from libgpiod (for core C
-> > > library - gpiod-test) I'm seeing a consistent 40% impact on
-> > > performance. That's not really acceptable. :( I will try to bisect the
-> > > series later and see which part exactly breaks it.
-> > >
-> > > I can also help you with user-space testing with libgpiod, if you need
-> > > it? Some documentation is available here:
-> > > https://libgpiod.readthedocs.io/en/latest/testing.html
-> >
-> > How to get the performance data?
-> >
-> > I tried on libgpiod-2.2.2.tar.xz:
-> > - ./configure --enable-tools --enable-tests
-> > - make
-> > - ./tests/gpiod-test
-> >
-> > There is only TAP output.  Also I don't see the difference between:
-> > `./tests/gpiod-test` vs. `./tests/gpiod-test -m perf`.
-> 
-> Yeah, no, there's no dedicated performance measurement in GLib tests,
-> I just timed the test-suite and it runs 40% slower with this series.
+On 1/21/2026 7:47 AM, Jakub Kicinski wrote:
+> On Tue, 20 Jan 2026 20:38:38 +0800 Fan Gong wrote:
+>> This patchset provides netif_queue_set_napi bug fix and serveral code styles
+>> fixes to :
+>>
+>> Fix netif_queue_set_napi queue_index parameter passing error.
+>> Remove empty lines between error handling.
+>> Remove redundant defensive code.
+>> Use array_size instead of multiplying.
+>> Sq use SQ_CTXT_PREF_CI_HI to improve readability.
+>
+> no reposts within 24h please
+> https://www.kernel.org/doc/html/next/process/maintainer-netdev.html
 
-I think this is mostly introduced by a redundant synchronize_srcu() call in
-revocable_provider_alloc().  Proposed a fix in
-https://lore.kernel.org/all/20260121040204.2699886-1-tzungbi@kernel.org/.
-
-The replacement still brings a few overhead (e.g., for allocating some in
-the .open() file operations).  Especially the test approach can accumulate
-them.
+Sorry for reposting and incorrectly confusing net and net-next.
+We will send a new patchset tomorrow and add Fixed tag in patchs for fixes.
 
