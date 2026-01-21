@@ -1,204 +1,141 @@
-Return-Path: <linux-doc+bounces-73526-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73530-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4PZsIAQecWmodQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73526-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 19:42:12 +0100
+	id yBcZB2MrcWl1fAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73530-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 20:39:15 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F6125B6C4
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 19:42:12 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5792C5C59A
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 20:39:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 1EE1FAEC927
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 18:13:08 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 96D0AB6B7F3
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 18:36:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81D903624D3;
-	Wed, 21 Jan 2026 18:13:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B1F333B8D5B;
+	Wed, 21 Jan 2026 18:33:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=joelfernandes.org header.i=@joelfernandes.org header.b="ObCZof5k"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="XzQLThmW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from terminus.zytor.com (terminus.zytor.com [198.137.202.136])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CB7A35E53C
-	for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 18:13:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F05E934FF46;
+	Wed, 21 Jan 2026 18:33:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769019182; cv=none; b=hW0HQWgNRZg6pwtAqRBwe00CojS2O0qGi42Dr+3CJsjgwg9/0c91d5d7m1yxriS6Jd/RTVplE7Ai23APw/NCtZg/v5hnEl3il4ZUEipnsE7dhZLWSsjAHf5ouz0exovi2pfsyPMo3rbW1Aic3EnwUdj48gJApUs9EDNitce1ZQA=
+	t=1769020438; cv=none; b=U/ZlaUXmDo2ChuJKVp5A7A61NHq6eMNwE71Vy23l33N0/JoyjsReWtbV3uHCYAXjXxD/dPLdUbsIYEPhXjaeH2h+KvNwl/9s6JqsJTSIyh7rzNrrLmipnwVlNC5xEJzr1KDXZdUYjYKK3N2oB4JRqBQhTiU3uCa7VunFsst3aQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769019182; c=relaxed/simple;
-	bh=M7jVNUNY+4g0kBsxBJ4DNRNiLjvFbYlQeCao5nUzBIo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dMWTMbODSLvvBNpqMpJWrlCKCuu7ptp7AV0Nm2kLJevayRwVCnrqSAMzi6RVk5tASXskiZTrv70j0Gs8L55F5pE1nrpcs/43LQiJaP0LpPa15rKcJpQq7wcR6BvHSRbbxkSPHVhPDhkR3Urhh9DSHOza8UnhDMNnBEFjMj2+UUo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=joelfernandes.org; spf=pass smtp.mailfrom=joelfernandes.org; dkim=pass (1024-bit key) header.d=joelfernandes.org header.i=@joelfernandes.org header.b=ObCZof5k; arc=none smtp.client-ip=209.85.222.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=joelfernandes.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=joelfernandes.org
-Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-8c52e25e644so12748885a.0
-        for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 10:12:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google; t=1769019179; x=1769623979; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=odBgMeGleRPkwApB129VpN2tHRH7cELn9wuHglowA3c=;
-        b=ObCZof5kh3alQhOxDuE24+3Kbp34L7vyvatIDNE7sLNkq+Ca0Gx139mNo5S5RbALMo
-         3CVfAwRvYMK9BUp7PYgUyNxLSJquRmQ5BzFxBxYPtFP895nKP8ewCA6aGb6OyTlJxWTj
-         GsCov7FaaHlQAZpzBd4BpswRKBovqP7Bxm94g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769019179; x=1769623979;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=odBgMeGleRPkwApB129VpN2tHRH7cELn9wuHglowA3c=;
-        b=BLMLWqw67rvXszf65/O5IVpIlBwfsS2vnrXyWnTqdLnNHGbxGSqI42PsDRrg1rsfGv
-         B/V6HALaguTM/tGFMXNfdYxkAKsQNJtQItxay7eDIT/Ehn8JFK9IGA66svD/8/rLuhRi
-         6jvuaEiBx0+1N24QyI4LJlUXVvSSJMuxjLhEuFrfLgD/PTWW2jCrB/DcpcEqgtTiwGvc
-         VFtnEU3oCWYrZw0derNR6uMXwnKm0SLtTq83XPrS3FdsvegJ7mY8nJ277d9LanK9mx/p
-         bUO+v4/JBZnPgs+4nVueXoI51C29CT7cE+bV1BT7+XSBTZnvd8E6F+tdWnuk9PjDqG1v
-         4/3Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVug5vTVafjhGv6zWOvSrAACSCuoir94rYChJDHCezDJkfm80NfHoBCtH15x/tZQXelEnROYOjph6c=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxhsfTq5/dlmztrKR5uqQpdFGaQJk2BUm61WdX/5Z+VDJ7hot+t
-	/Mxr670k5BmLqym0E7FiUNny9wRYi9rHeXJm34xyY61Nk9utHs6hg6n+LiU4FUaGdfg=
-X-Gm-Gg: AZuq6aJoycUQWE+ryoykr9sXtHmhbIV41gcK5gk2DN9EHsQDRGvZoEdI3io6y60fN4s
-	uELbUAyLaSdwguVBWq1KZMl73ZHdnaZZFcq4kzjGEZROcB/rtOOdFSqoLNYyuhfR7RdHVLo7DGY
-	HDjLv4Ht/bONBhl9NVnNA4RsfZxwTz337Wp76cEzRzXg/MIQJ2MyVMeancy0XNIpwYqJfEEkCrh
-	QI3vTopb+YwUfJlPChMbY8qH2GchipTPPjIPhK4Swt1k6iRmL+Fs0WwOAi4yNgjU/XAXK8mi4kC
-	op6j0tfNFboxrCK/3RRTtvJDfljsxK3HdbdJmBghWYljhYKzaZZHk6MJ07C3y/9siP+lANZBZYS
-	AqS9jB2VoYy2iY4v98lMuXXztYLG2Ln0ufn1VCxqdDr3IpRlwdev8pIdu5SyiQVYo7SvkCn+6z7
-	k2fxBr/Wu0EIx7VVXGFx39k3zLtw==
-X-Received: by 2002:a05:620a:2d90:b0:8c6:a790:cd09 with SMTP id af79cd13be357-8c6a790cd9cmr1883910285a.40.1769019178697;
-        Wed, 21 Jan 2026 10:12:58 -0800 (PST)
-Received: from [192.168.0.99] ([71.219.3.177])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c6a71ab288sm1356284885a.6.2026.01.21.10.12.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 21 Jan 2026 10:12:58 -0800 (PST)
-Message-ID: <237f94cc-dde6-4d91-b942-4854e62eeebb@joelfernandes.org>
-Date: Wed, 21 Jan 2026 13:12:55 -0500
+	s=arc-20240116; t=1769020438; c=relaxed/simple;
+	bh=xkNYN7e0QmiNzmhzcBWIpm1m2P2e6DqjnhUwrcVxa+8=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=VUXKuNfhrm5LugE4OF+hF5GNHnOpLvmtZyqjYQxQw/HFw5icbTmBKt5ev2ZGj0AELn3VVFHkN+H6PLT+RjNnJg4ZcgMTEUe/KhriDNpnCNo6bvqXT119b+Ev11K8uRAxoK1fBwxAQfw0P/xQUfQWBQVXX68/r+JFaFzM1PGHvh4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=XzQLThmW; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from smtpclient.apple ([192.19.161.250])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 60LIEVWX2101891
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Wed, 21 Jan 2026 10:14:31 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 60LIEVWX2101891
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2025122301; t=1769019274;
+	bh=CNH/RQzTK8bkWoozF3TvyVay/h/F4umaV83zyChhLd8=;
+	h=Subject:From:In-Reply-To:Date:Cc:References:To:From;
+	b=XzQLThmWVwIspu95DeyZng8lVtSALOEuSvFkmsY1Fb+8wpg6XNCxn3523fJ8u5b0N
+	 RSuIcbTNfLRL4iIkYgR2iboRnwhxPz/oXYYKO1VqyWSmOoi/u6A/4rjlwPoD5MlK02
+	 vLEWXnsgMnfIMPnm8dKVJyyFrPRQ6j3lYBEI2UPqAm/EEa5dBVMgcbuZb58cJoTP+P
+	 4buZ3Q+bgc2yPD7rYFtjiY4g/uVOYmwvOdp21Dg9MYpEXUaGznSUogWhl6NJCKTQZg
+	 aIGJmZu1TD5t6DvgjyJ1EgXIvtYx4Q+JXCYq6yZF7SNBrWwbbVzQrmnZHYnJEonbTf
+	 k3swtR7jWVUCg==
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC v6 01/26] rust: clist: Add support to interface with C
- linked lists
-To: Zhi Wang <zhiw@nvidia.com>, Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jonathan Corbet <corbet@lwn.net>, Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>,
- Matthew Auld <matthew.auld@intel.com>,
- Matthew Brost <matthew.brost@intel.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Helge Deller <deller@gmx.de>, Danilo Krummrich <dakr@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Miguel Ojeda <ojeda@kernel.org>,
- Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
- Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>,
- John Hubbard <jhubbard@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
- Andy Ritger <aritger@nvidia.com>, Alexey Ivanov <alexeyi@nvidia.com>,
- Balbir Singh <balbirs@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
- Elle Rhumsaa <elle@weathered-steel.dev>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- Boqun Feng <boqun.feng@gmail.com>, "Paul E. McKenney" <paulmck@kernel.org>
-References: <20260120204303.3229303-1-joelagnelf@nvidia.com>
- <20260120204303.3229303-2-joelagnelf@nvidia.com>
- <20260121092730.3628d290.zhiw@nvidia.com>
-Content-Language: en-US
-From: Joel Fernandes <joel@joelfernandes.org>
-In-Reply-To: <20260121092730.3628d290.zhiw@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.04 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
+Subject: Re: [PATCH v9 07/22] KVM: VMX: Initialize VMCS FRED fields
+From: Xin Li <xin@zytor.com>
+In-Reply-To: <8731e234-22b8-4ccf-89ef-63feed09e9c5@linux.intel.com>
+Date: Wed, 21 Jan 2026 10:14:15 -0800
+Cc: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, pbonzini@redhat.com, seanjc@google.com,
+        corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        luto@kernel.org, peterz@infradead.org, andrew.cooper3@citrix.com,
+        chao.gao@intel.com, hch@infradead.org, sohil.mehta@intel.com
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <9F630202-905B-43D7-9DBF-6E4551BAF082@zytor.com>
+References: <20251026201911.505204-1-xin@zytor.com>
+ <20251026201911.505204-8-xin@zytor.com>
+ <8731e234-22b8-4ccf-89ef-63feed09e9c5@linux.intel.com>
+To: Binbin Wu <binbin.wu@linux.intel.com>
+X-Mailer: Apple Mail (2.3864.300.41.1.7)
+X-Spamd-Result: default: False [-1.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[joelfernandes.org:s=google];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[zytor.com:s=2025122301];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,google.com,garyguo.net,protonmail.com,umich.edu,nvidia.com,weathered-steel.dev,collabora.com,lists.freedesktop.org];
-	TAGGED_FROM(0.00)[bounces-73526-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73530-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[joelfernandes.org];
-	DKIM_TRACE(0.00)[joelfernandes.org:+];
+	FROM_HAS_DN(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[zytor.com,none];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[zytor.com:+];
+	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
 	TO_DN_SOME(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joel@joelfernandes.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[53];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xin@zytor.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[joelfernandes.org:mid,joelfernandes.org:dkim,dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: 0F6125B6C4
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo,intel.com:email,zytor.com:mid,zytor.com:dkim]
+X-Rspamd-Queue-Id: 5792C5C59A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 
 
-On 1/21/2026 2:27 AM, Zhi Wang wrote:
-> 
->> +/// Initialize a `list_head` object to point to itself.
->> +///
->> +/// # Safety
->> +///
->> +/// `list` must be a valid pointer to a `list_head` object.
->> +#[inline]
->> +pub unsafe fn init_list_head(list: *mut bindings::list_head) {
->> +    // SAFETY: Caller guarantees `list` is a valid pointer to a
->> `list_head`.
->> +    unsafe {
->> +        (*list).next = list;
->> +        (*list).prev = list;
->> +    }
->> +}
->> +
->
-> Might be better to have a C helper? since INIT_LIST_HEAD() has WRITE_ONCE()
-> for memory ordering. This one seems not equal to it.
+> On Jan 20, 2026, at 10:44=E2=80=AFPM, Binbin Wu =
+<binbin.wu@linux.intel.com> wrote:
+>=20
+>> +#ifdef CONFIG_X86_64
+>=20
+> Nit:
+>=20
+> Is this needed?
+>=20
+> FRED is initialized by X86_64_F(), if CONFIG_X86_64 is not enabled, =
+this
+> path is not reachable.
+> There should be no compilation issue without #ifdef CONFIG_X86_64 / =
+#endif.
+>=20
+> There are several similar patterns in this patch, using  #ifdef =
+CONFIG_X86_64 /=20
+> #endif or not seems not consistent. E.g. __vmx_vcpu_reset() and =
+init_vmcs()
+> doesn't check the config, but here does.
 
-WRITE_ONCE() is not really about CPU memory ordering though, it is about
-compiler optimizations. On the C side, I think it is needed in case of
-list_for_each_entry_rcu(), to avoid the case of invented stores or store fusing,
-but here we are not doing RCU-based iteration.
 
-Anyway, if we want to future proof that, I am Ok with adding the helper back
-(which I actually initially had but feedback from past review was to just inline
-it into rust).
+I tried removing all such #ifdef, and it turned out that I had to keep =
+this
+per the last round of build checks.
 
-But I am not sure if we have this issue for the Rust compiler, like we do for C.
-Rust does not allow raw pointers to be concurrently read/written using plain
-accesses, so should be already protected due to the borrow checker and compiler
-itself right?
-
-Adding some interested folks as well to CC for the topic of _ONCE, +Boqun +Paul.
-
---
-Joel Fernandes
+Anyway, I will do another build check on x86_32.
 
 
