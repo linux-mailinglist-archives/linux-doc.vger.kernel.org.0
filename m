@@ -1,138 +1,202 @@
-Return-Path: <linux-doc+bounces-73375-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73380-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8DI4CRFVcGlvXQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73375-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 05:24:49 +0100
+	id uH47LsN3cGktYAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73380-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 07:52:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id BECE150FE3
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 05:24:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61EF852649
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 07:52:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 413673E7D7E
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 04:24:42 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 1D2103A655A
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 06:48:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 886773793DE;
-	Wed, 21 Jan 2026 04:24:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2F9442B73A;
+	Wed, 21 Jan 2026 06:47:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="rvq/3rZK";
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="rvq/3rZK"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="I09yvdCG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44AAC35FF7A;
-	Wed, 21 Jan 2026 04:24:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.187
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09FBD4279FA
+	for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 06:47:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768969476; cv=none; b=OkiIoO3ypnaHdfT1Bo4+EkbZbBxNfqY+fm8Y4raVP/OpKuvwtBfPfCpzcCxCkiTGcRwhauD2xyBz+6mTR+aPt8Vt7WFZfG63i9JjKgNWVfeIGUwnWkKYABYwjW94GfRVNketcHLDoTblb6yIXdZlNSfwwK1rCG10dHd+kjRVYrw=
+	t=1768978034; cv=none; b=a9cIH+T8m1LI+Ito9f4r99BlGhK+36eelwGWROy8NDYRYLrp1DJpYJzDQNWHXgEDd9yz83+nL+hUWgy+CwxcXq5S3LD3qWV70kRYkAk4USoJc+7fJj3iYUsS9Wwnx2bjQQo5vnkHZ2EuzxBfsTMdSxVFGCWfZRLUrEyEnE33fJY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768969476; c=relaxed/simple;
-	bh=RnkLMcRQKffZL+/hd4xzZ0wM8EJgCJE3g7C0hhf8e4Q=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=guGshyaQOmcVjgXCBTzOwXNR3P2janeYseoWiDf/6RKaDEojeDepMX22Iqhv5tEVSuUAWntHIll/PQDzDumPnVtM9SqXt/o/rBaaWejLEhDsOIkIF9XVsdTX6dz/gpuOwb/i+RFsc7Or6ZNbMcJDHkOkkKy+/wmpbMYb8pvMAf4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rvq/3rZK; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rvq/3rZK; arc=none smtp.client-ip=45.249.212.187
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=RnkLMcRQKffZL+/hd4xzZ0wM8EJgCJE3g7C0hhf8e4Q=;
-	b=rvq/3rZK5l+jjY0KzUWklnhmYZR6jR1cwKeVzEF5KzB7Zdbr4TXiGK5XmI2LKq2MpBQ5ll1DF
-	TLcNXo9BiJLOfZJAqSsVa6TokeaTurXwKQ1gGXpV0wCTw0NMISWt5nOHOo6N5FfEM1sJCwiERXS
-	Y+SSTMBySYsyr81XB6EcSxM=
-Received: from canpmsgout12.his.huawei.com (unknown [172.19.92.144])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTPS id 4dwrg45RSsz1BG2J;
-	Wed, 21 Jan 2026 12:24:00 +0800 (CST)
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=RnkLMcRQKffZL+/hd4xzZ0wM8EJgCJE3g7C0hhf8e4Q=;
-	b=rvq/3rZK5l+jjY0KzUWklnhmYZR6jR1cwKeVzEF5KzB7Zdbr4TXiGK5XmI2LKq2MpBQ5ll1DF
-	TLcNXo9BiJLOfZJAqSsVa6TokeaTurXwKQ1gGXpV0wCTw0NMISWt5nOHOo6N5FfEM1sJCwiERXS
-	Y+SSTMBySYsyr81XB6EcSxM=
-Received: from mail.maildlp.com (unknown [172.19.162.92])
-	by canpmsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4dwrZk38mKznTWL;
-	Wed, 21 Jan 2026 12:20:14 +0800 (CST)
-Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id 8A19740562;
-	Wed, 21 Jan 2026 12:24:12 +0800 (CST)
-Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
- kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Wed, 21 Jan 2026 12:24:11 +0800
-From: Fan Gong <gongfan1@huawei.com>
-To: <kuba@kernel.org>
-CC: <andrew+netdev@lunn.ch>, <davem@davemloft.net>, <edumazet@google.com>,
-	<gongfan1@huawei.com>, <guoxin09@huawei.com>, <horms@kernel.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<luosifu@huawei.com>, <luoyang82@h-partners.com>, <netdev@vger.kernel.org>,
-	<pabeni@redhat.com>, <shijing34@huawei.com>, <wulike1@huawei.com>,
-	<zhoushuai28@huawei.com>, <zhuyikai1@h-partners.com>
-Subject: Re: [PATCH net v01 0/5] net: hinic3: Fix netif_queue_set_napi input parameters and code styles
-Date: Wed, 21 Jan 2026 12:24:08 +0800
-Message-ID: <20260121042408.1120-1-gongfan1@huawei.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <20260120154759.5a2c04c5@kernel.org>
-References: <20260120154759.5a2c04c5@kernel.org>
+	s=arc-20240116; t=1768978034; c=relaxed/simple;
+	bh=BjEonW32c5YOMq0hqq7Xvkwknsp7bLBK5sRV2QqHoDQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=D2QORB583RaAEtB5mOUejBnWOmK7OV7hLwDXE3nsPfhWK3Sd+x82016bLr79M4isQuf5g+i9opk0zCWmfLugJSB3HHviO1gnheXiM9/MVASTfz5lUUZVkbVnwraQWJwSdPjuwWg69oux+DrLrr8YpMzgoNCnuxBPpfdb+pBw4Og=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=I09yvdCG; arc=none smtp.client-ip=209.85.160.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-501c6665144so63252341cf.0
+        for <linux-doc@vger.kernel.org>; Tue, 20 Jan 2026 22:47:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768978032; x=1769582832; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=dr4ikofTW2/lOylz+wqvxKyTxo3lmrOIQRlztmAAggk=;
+        b=I09yvdCGcAt84e1thV111GI4F5y1Uu+LSjHHcywW9zV4tHt4U/ieciW/cjoyuefS+G
+         KmAFKLgdGXgJP0Q91QhLCS5XItA2lzWJMhDiytBPDqzXgnHyTObk5oAvGmluv9Vg/Kyg
+         bF0YqcGZkgIdKXSgX7XJ++lT8eurcUHhQRDSZl7i0MKb+3oE1+JrplOcrQSIHwqne1lq
+         y2jooqBXNh+g9LUX22i99fMFF98cjpi6Jpvar0xfM5rVPrmC2o18JcVibUxHbOJzHXCc
+         g+Ptd2AQnfyyVaM/I9gTRMwYG4TT95im4IBLFDPrP4/zsXtwl0cyaCO/e2vlOQHU63aV
+         C5Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768978032; x=1769582832;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=dr4ikofTW2/lOylz+wqvxKyTxo3lmrOIQRlztmAAggk=;
+        b=jxpQzMnYOLMGVi/rXhjnFsbVsrvMIYN11qIeXMl6LYkLrgCeDVaEwrlS84uBnOiz1/
+         7ei4MJMGc1douXGq9cLWpf0KUzZizL0B1fWo6M539jB77sCVKYJjt0B5WanTWQ6qhscY
+         FHFQ+u/laKWQkVu/0Y5lH+A56sRtfF9bD12ZE3OVfxD1VNAE1fAoNdgYa/yoxB63swtZ
+         WTSITLaz6TtukQ+mpU1cGsiok6igZ+1MHo3n0fxQa98wFT2rxvekN6Uzji66A506w/ve
+         ZH1tigCX4QZcgmBx8Q/dCu80JGVRzKt06SuXFlooaoe/7nvCWxpZix5VhqbXgGFbcuLv
+         Ro3g==
+X-Forwarded-Encrypted: i=1; AJvYcCV15QlpwauUF/sPG+UGAC1Ib7SV4+nyrJ8SX4JKHL/NKasoublITeicX/xZch+r2W0qS6WQtzZsQRA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyP8m58zIcpDrTpbK1CiHfzguzrM2cqB7158jTPTMFEiD7uyxh4
+	WCefVk/mk8oyGcav2wMBONSpFt1UjlsrKq+BLOQuaFP040RvKAnkQk0V3NxViA==
+X-Gm-Gg: AZuq6aKR9+I57UDhYSjVj/kYZRehmnBK45bVz6CvNNBywhcIKNrl6ZKVyIvUQUiegAg
+	HU3MQGbIFunrwMcjFOOOR64w+4DZUEs2Cdp2+E54/464siH0mVtsq7S9Sq3Q7Us7oqJHlZLT+Jq
+	WcXLTFV4/YMmY0gwobwHQ6uNkg7Qys3qDJiYnJTRiEYVyTxOJmfhQOrMLakJvsBg5jf8vG0XthD
+	HPJ+BrvcU0JfMpAUDun4ZAXWD3qZtj41xQL8BgefACatVr21gOxFr1d3HI+FdFyr7JouABwqlrC
+	6UC/bcfI9qVLFa6OiM60bFhjGS7bq7F+Dl36Te5V5TegkcTo22V6QOvpiecdh08jYbP0dvRrvfc
+	Zyxt/YSej1UmoGIoezEKD1hWD1d+6n3k8W5O0134aiTZN/1J3QHUmEWDYjmOpHizZbK8QyH6nmK
+	y4ZUVSZYAcrhJQ7pv+Th5AV0LVxvSHBSaER7w=
+X-Received: by 2002:a05:690c:ec4:b0:788:1086:8843 with SMTP id 00721157ae682-793c66b7cd1mr130884437b3.2.1768972588159;
+        Tue, 20 Jan 2026 21:16:28 -0800 (PST)
+Received: from devvm11784.nha0.facebook.com ([2a03:2880:25ff:74::])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-793c6888b83sm60922327b3.48.2026.01.20.21.16.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Jan 2026 21:16:27 -0800 (PST)
+Date: Tue, 20 Jan 2026 21:16:26 -0800
+From: Bobby Eshleman <bobbyeshleman@gmail.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: sgarzare@redhat.com, kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	mst@redhat.com, horms@kernel.org, bobbyeshleman@meta.com,
+	corbet@lwn.net, xuanzhuo@linux.alibaba.com, haiyangz@microsoft.com,
+	jasowang@redhat.com, linux-hyperv@vger.kernel.org,
+	pabeni@redhat.com, kys@microsoft.com, vishnu.dasa@broadcom.com,
+	longli@microsoft.com, linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, netdev@vger.kernel.org,
+	stefanha@redhat.com, berrange@redhat.com, decui@microsoft.com,
+	bryan-bt.tan@broadcom.com, eperezma@redhat.com, wei.liu@kernel.org,
+	davem@davemloft.net, shuah@kernel.org,
+	bcm-kernel-feedback-list@broadcom.com, edumazet@google.com,
+	virtualization@lists.linux.dev, sargun@sargun.me
+Subject: Re: [net-next,v15,06/12] selftests/vsock: prepare vm management
+ helpers for namespaces
+Message-ID: <aXBhKlAxxAkvr4/u@devvm11784.nha0.facebook.com>
+References: <20260116-vsock-vmtest-v15-6-bbfd1a668548@meta.com>
+ <20260121025420.1999992-2-kuba@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
- kwepemf100013.china.huawei.com (7.202.181.12)
-X-Spamd-Result: default: False [1.04 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260121025420.1999992-2-kuba@kernel.org>
+X-Spamd-Result: default: False [-1.96 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_POLICY_ALLOW(0.00)[huawei.com,quarantine];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-73375-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73380-lists,linux-doc=lfdr.de];
+	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[31];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:dkim,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo];
-	TO_DN_NONE(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: BECE150FE3
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bobbyeshleman@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,linux.dev:url,devvm11784.nha0.facebook.com:mid]
+X-Rspamd-Queue-Id: 61EF852649
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 1/21/2026 7:47 AM, Jakub Kicinski wrote:
-> On Tue, 20 Jan 2026 20:38:38 +0800 Fan Gong wrote:
->> This patchset provides netif_queue_set_napi bug fix and serveral code styles
->> fixes to :
->>
->> Fix netif_queue_set_napi queue_index parameter passing error.
->> Remove empty lines between error handling.
->> Remove redundant defensive code.
->> Use array_size instead of multiplying.
->> Sq use SQ_CTXT_PREF_CI_HI to improve readability.
->
-> no reposts within 24h please
-> https://www.kernel.org/doc/html/next/process/maintainer-netdev.html
+On Tue, Jan 20, 2026 at 06:54:21PM -0800, Jakub Kicinski wrote:
+> In case you need to respin..
+> 
+> This is an AI-generated review of your patch.
+> For local reproduction steps see https://netdev-ai.bots.linux.dev/ai-local.html
+> ---
+> selftests/vsock: prepare vm management helpers for namespaces
+> 
+> This commit adds namespace support to VM management helpers and wrapper
+> functions, requiring callers to explicitly pass "init_ns" for the init
+> namespace. The commit message states "No functional changes for existing
+> tests. All have been updated to pass 'init_ns' explicitly."
+> 
+> > diff --git a/tools/testing/selftests/vsock/vmtest.sh b/tools/testing/selftests/vsock/vmtest.sh
+> > index c2bdc293b94c..1d03acb62347 100755
+> > --- a/tools/testing/selftests/vsock/vmtest.sh
+> > +++ b/tools/testing/selftests/vsock/vmtest.sh
+> > @@ -135,7 +135,18 @@ del_namespaces() {
+> >  }
+> >
+> >  vm_ssh() {
+> > -	ssh -q -o UserKnownHostsFile=/dev/null -p ${SSH_HOST_PORT} localhost "$@"
+> > +	local ns_exec
+> > +
+> > +	if [[ "${1}" == init_ns ]]; then
+> > +		ns_exec=""
+> > +	else
+> > +		ns_exec="ip netns exec ${1}"
+> > +	fi
+> > +
+> > +	shift
+> > +
+> > +	${ns_exec} ssh -q -o UserKnownHostsFile=/dev/null -p "${SSH_HOST_PORT}" localhost "$@"
+> > +
+> >  	return $?
+> >  }
+> 
+> The vm_ssh() function now expects a namespace as its first argument, but
+> run_shared_vm_test() still calls vm_ssh without this parameter:
+> 
+>     vm_oops_cnt_before=$(vm_ssh -- dmesg | grep -c -i 'Oops')
+>     vm_warn_cnt_before=$(vm_ssh -- dmesg --level=warn | grep -c -i 'vsock')
+>     vm_oops_cnt_after=$(vm_ssh -- dmesg | grep -i 'Oops' | wc -l)
+>     vm_warn_cnt_after=$(vm_ssh -- dmesg --level=warn | grep -c -i 'vsock')
+> 
+> When called as "vm_ssh -- dmesg", the "--" is interpreted as the namespace
+> argument. Since "--" does not equal "init_ns", the function sets
+> ns_exec="ip netns exec --" which is invalid. The shift then consumes "--"
+> and the command becomes "ip netns exec -- ssh ... dmesg" which will fail.
+> 
+> Interestingly, the v9 version of this patch on lore correctly updated these
+> calls to pass "init_ns", but this change appears to have been lost between
+> v9 and v15. The fix for this regression is present later in the series in
+> commit 3ae984505e00 ("selftests/vsock: add vm_dmesg_{warn,oops}_count()
+> helpers").
+> 
+> [ ... ]
 
-Sorry for reposting and incorrectly confusing net and net-next.
-We will send a new patchset tomorrow and add Fixed tag in patchs for fixes.
+Got it, thank you.
+
+Best,
+Bobby
 
