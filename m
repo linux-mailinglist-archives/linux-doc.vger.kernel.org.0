@@ -1,337 +1,293 @@
-Return-Path: <linux-doc+bounces-73529-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73531-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KGNeNBA4cWnKfQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73529-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 21:33:20 +0100
+	id WFuWAaswcWmcfAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73531-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 21:01:47 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id A576A5D4E7
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 21:33:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACF445CBEF
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 21:01:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 3D9F374DC5A
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 18:25:45 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 2BE5A7CCF00
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 18:41:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 481653A7F4E;
-	Wed, 21 Jan 2026 18:24:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC00E40FD82;
+	Wed, 21 Jan 2026 18:35:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="f1mHXSwk"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="d+Il0Ocm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com [209.85.214.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from BL0PR03CU003.outbound.protection.outlook.com (mail-eastusazon11012031.outbound.protection.outlook.com [52.101.53.31])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F197A340295
-	for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 18:24:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.195
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769019880; cv=none; b=tcpafu4nKhjbuXYzd7n3h1WlB6OnfuFXtlkx7xn96DfF/3taGl2x7AqOVyg8GvyEXvq/nvzrtUFEfXlEYAb5B76oHaC7BDu7eP11tRH/8izmT735lQA0PpAD3+2IsOCoVBiSCCi2/jQzTly3jfDoTEEZZLRieFY0b8ysUqTdmHE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769019880; c=relaxed/simple;
-	bh=5foRD+XYdggu1Kg1ROkRGTuBP0YuzBsFR3l3Gq3NRDk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=TLuvE/ib9kSfol2iblb+j8xIrVB3Vcq2QtyjLpl+4oEmGKGLJ716TRc+3Lo+LU4bA4pUCRytSAs7wGk1fZCbw6xdzbdj4zdIrMfqI7a4wn+s8U2qPx2IF0kpXB6QB1gS92qkg/brIDz7wmxPLQvXe3yNv2UOvuswWn2C/3POshk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=f1mHXSwk; arc=none smtp.client-ip=209.85.214.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f195.google.com with SMTP id d9443c01a7336-2a7a23f5915so870865ad.2
-        for <linux-doc@vger.kernel.org>; Wed, 21 Jan 2026 10:24:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769019877; x=1769624677; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xVjRoasFG/sB0MpTfb46SvA5d7ZE0DXe29Yv2eIU8xo=;
-        b=f1mHXSwkUitqLqdPf29HX/mF+s8tuVfWqQq4xfvYqwAXuxmfTb5Z+eDQAjupFIh1AN
-         1ZfOXYt7R7ErqEikz31wav5AUkXZZFIqsDyVlM2lCiMwjm4hkWDEWNPf8i8Xz5tayFIe
-         n61ZghaamOwO5VYB/Oy+FZAnaVkekQE7doe9PoqtdVRKrSCtnc18V00kHYIp4ut0AYb3
-         ANMNQRfXiNtw8Ow6MlsYKC27T3+w1KElNdzWYxtHHy7m9aOSJJTYLitJsUSghP+PRJHl
-         A18WU+gShzEAKwK0puouyKSmGDT0g7vTZewWlgLK0NTBKTKCkpWEeMqPHSv0uXQvyFdZ
-         II1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769019877; x=1769624677;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=xVjRoasFG/sB0MpTfb46SvA5d7ZE0DXe29Yv2eIU8xo=;
-        b=j9TDwls+Yf9QEQjOciZtlrPL34APJabXKTgkZBZLA50YN6X/W+EXa+q3Us2liMoo0P
-         BOQdIeUdW5Aj+KxGKOtmUaNGG1epyGKe9oQlODwzzzCUBS7OneB8qmfsuZNLFMNChtBx
-         pcvasrHQW3zIqhdiUQjjp6sMZ7Bk7wgl9nWRoBv3H2aR5GBGNJ6V3LZrZOYBInOsizFm
-         NOfp554Wk97Jieki32ig8hlVy+vXHljt9idnxYHMsOSaRW1S2W+v8OOwAfwPz85OcdAS
-         9bBMeqKV4Re70kBQUfitQqAxttOgo7CShLlJeL8h+WznCL1Tf9eRSorPcBfQMnoxfw5j
-         XS8g==
-X-Forwarded-Encrypted: i=1; AJvYcCUVMEBVirvk66uWi77I0ygnLk8Tfr0MJrIycfTI/VyB9bEmCBKZk4fDbiC5MHQBA2jbYBDsxEi+C2U=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzFXM9icRRD4jxR375fHvWREcreONzDZAHZt7sY6EDS0B5vqIiF
-	6BAPwvCsH1yKTOylYcKuwPQuoBK344oiPe/xVjJ9JNP0Qwk1RWxAaN4p
-X-Gm-Gg: AZuq6aLwdUryK2ENZxOgXaGTUFTbvs9h2Su68Y2+nkZcS8gNK7EwCic9RQXTHyqdu7k
-	6iHqMLxhRu99JoHgQOuSPOat/fmasqDfPyKfhq5kRvp7jtEcI5XGoBaZzuuTAw9xKhdWF8jmDbg
-	W1bMK/SJcI8iUAHRC4Xo9BRVbnNarx0FJru41aYm5295bNjWTPYWOy4IfHp4OSVwHUmDLFpeEfe
-	TErid1EglEQ1b/yM//7lg92HQWU9Yf4IigqyrRn3DCGCrLegBjCH2Fe47ICoprpfDJHp3tiNjkB
-	zyl9k8a+Ubmv0JKtlX/YPpi4CR1hUxEA4mgfqB74A6ZW/A6H2+ZrSo82OaRC17NylR6fQPB24yb
-	qqaJcfBui9e0z7eZc5NeiUP8gxKBFXEJcJ2vEApJ1Ec9aKLf2oVO7gctAYFmMyiUnPXLoO++pLe
-	NbL1Rc7vYJC7jlJVfp
-X-Received: by 2002:a17:903:2f04:b0:295:20b8:e104 with SMTP id d9443c01a7336-2a7177e9c74mr156003005ad.58.1769019876742;
-        Wed, 21 Jan 2026 10:24:36 -0800 (PST)
-Received: from rakuram-MSI ([2405:201:d027:f80f:3dfc:481a:1cd0:e1a3])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7190aa340sm159511995ad.3.2026.01.21.10.24.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Jan 2026 10:24:36 -0800 (PST)
-From: Rakuram Eswaran <rakuram.e96@gmail.com>
-To: socketcan@hartkopp.net
-Cc: corbet@lwn.net,
-	linux-can@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	mailhol@kernel.org,
-	mkl@pengutronix.de,
-	netdev@vger.kernel.org,
-	rakuram.e96@gmail.com
-Subject: Re: [PATCH 2/2] docs: can: update SocketCAN documentation for CAN XL
-Date: Wed, 21 Jan 2026 23:54:25 +0530
-Message-ID: <20260121182429.16624-1-rakuram.e96@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: 6a99ce41-2200-49d7-9a6c-29e9311b46ab@hartkopp.net 
-References: <6a99ce41-2200-49d7-9a6c-29e9311b46ab@hartkopp.net>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE9963D3008;
+	Wed, 21 Jan 2026 18:35:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.53.31
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1769020519; cv=fail; b=eOgbQIEPEzbWt4jQrj8tFWd3ZWRRYXsHho8NjjgNwUZkvl/E5KMc6ad4aUY1Q8uEA2EVTV/TxUynNJJ9JIoXlkfhVNj1phNzwDnLLEzkh49N8Ob//Ocu6G6jkSV1+OtQq/gOddeJc5FUo1SzGltG33Gap4/M5INhyojbCel8znw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1769020519; c=relaxed/simple;
+	bh=ulFzBYC9SrnVomQtd08Zs4tCV9rMG09dL7uJH3CYTPg=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=aocfSTLRQOTqvjyJotnyDeRPdszLEgV+cJuU9DBJs8TQnXAmbXWZNlXeEnNWWDyH2cuHNtfMOC8nE2qnqGd3MSLrfqvLJ0cIrRlOKocV4CW2qAVRP4dTxb1bgiCsUHkcxe4wbKWiFMKKFqIR1+WwThuwUNXYeugqSAQj6bOcBNU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=d+Il0Ocm; arc=fail smtp.client-ip=52.101.53.31
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NPoseDd27hrsJxWXWXVDG8uJTjeAY6FsdS9eHBCwU3bo0qkWLF4m9cRBKHIzsLZVjujdfH1WRucwh0HkCxFzubIN/68K1/mAqQR0QgculCAptSvwxFy39l0hyxqaF5OVz49FHZ8gnJo4GRdeTDtb7qiH69texFNYQGQx3BHdXnFU5UqQnNZgA9x0lHQ55Mnc8ToXwSsEmCAbnz2hNGUbXb6uOOmvU80gNz/3J6xuDEHfLi4/nPud06I0blHnHXEJaNkxTN3fogONYzQy9fxrjs0X9CDlMxRDL9RciI44e6qiTtPxGu6KQA6pm/AjaN7xvlqqK1ywmYRGRgFtyBNFtQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U1LLixYnyy6MyF1z+KU6eZupHCFRavUEN7WI9J1l/+o=;
+ b=C/G2cXSFrkBV1mXabZSlRV4H97UMvOGgkcVKALp2+9kFVb5aoDrfojo4qZ4uqoMm5w9WQFIPywVyWYuebpBfXvg8l6AGsDeHwK7KSewpNfewzkWnvTmJXPiVltUC7vflb1oJHTwHSytmm+bL+OD8RZSiwwquDkaUGAPxCR6rO8bWeyzQpaV4PMSzYKRXeusEkt3Q++AELzWgwJOj1MpF6fc0kwGU3pEbHLOMrv/Sqo7GbnVPEM2x6xCaPGEKI/c+xqhkpIs7y1AaHH4OoJFNORCR8Qh7w1FvKb56Nd8lxYybzawf0N+Rpiz+JXGQN1DFvMfchFWkkgszPl/6FeLqxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=U1LLixYnyy6MyF1z+KU6eZupHCFRavUEN7WI9J1l/+o=;
+ b=d+Il0OcmfGLtn8yBo+TQNHllkzWMxzh0P5M9gyHGk77MtTc/c7yls2XjPX2yBZaVETt1DAIMMIzvdhIj6TtW7/Y8y5r74W5RrO90WXjHFA4kQqMEn3elVas0qO/cF2won7MSjoVQ3VH7wrJtqTY58x2EsV1SwCJVEwXQXB2FVQl2hRayJaVqHFDGPWYRv65NZPsiP583EwL0OhBG42VRBJ1b6e1/lXe2dBxgz0LfbTSu06li5/WSP3Ss7zq77CmqNM+Q6ekVYDk1rKZb6PhdKUov1f9MYlH6kZ7v1dxONZBczkr/WfS2iPVHP9b4kkhlATpy+MAEHpkeZHwetNd4FQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
+ MW4PR12MB6973.namprd12.prod.outlook.com (2603:10b6:303:20a::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.9; Wed, 21 Jan
+ 2026 18:35:11 +0000
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33%4]) with mapi id 15.20.9542.008; Wed, 21 Jan 2026
+ 18:35:09 +0000
+Message-ID: <925b7dd5-c941-4946-8148-ebd7e8eeca65@nvidia.com>
+Date: Wed, 21 Jan 2026 13:35:04 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v6 13/26] nova-core: mm: Add unified page table entry
+ wrapper enums
+To: Zhi Wang <zhiw@nvidia.com>
+Cc: linux-kernel@vger.kernel.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Simona Vetter <simona@ffwll.ch>,
+ Jonathan Corbet <corbet@lwn.net>, Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>,
+ Matthew Auld <matthew.auld@intel.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Helge Deller <deller@gmx.de>, Danilo Krummrich <dakr@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
+ Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>,
+ Alistair Popple <apopple@nvidia.com>, Alexandre Courbot
+ <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
+ Alexey Ivanov <alexeyi@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
+ Elle Rhumsaa <elle@weathered-steel.dev>,
+ Daniel Almeida <daniel.almeida@collabora.com>, joel@joelfernandes.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-fbdev@vger.kernel.org
+References: <20260120204303.3229303-1-joelagnelf@nvidia.com>
+ <20260120204303.3229303-14-joelagnelf@nvidia.com>
+ <20260121115436.45e174d3.zhiw@nvidia.com>
+Content-Language: en-US
+From: Joel Fernandes <joelagnelf@nvidia.com>
+In-Reply-To: <20260121115436.45e174d3.zhiw@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL1P222CA0001.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:208:2c7::6) To DS0PR12MB6486.namprd12.prod.outlook.com
+ (2603:10b6:8:c5::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.46 / 15.00];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|MW4PR12MB6973:EE_
+X-MS-Office365-Filtering-Correlation-Id: 52f835fd-45e8-4623-3815-08de591bce3f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?MnZSczY0clVFRG9IQXRBZ2hOK2hSSTM2YUVKRktjK1ljeis3MDZSU2Q0dXlu?=
+ =?utf-8?B?UGptbWtTQkcwQ0F4RzBQUHloaHduOGFvbHN1cEljeXB4NnZpeVUxVldTb2Iv?=
+ =?utf-8?B?cUhSRUpnMjVHQWhHdGNWNGp4OHh3OWJmbHBjQzRrL0NlT0h5elZtbmhTT3pv?=
+ =?utf-8?B?MnFCRU1iYzhxREhLWGF2Vms5cjhKR3RpWTl0S25MSXk4T0VaREhNWithMGZv?=
+ =?utf-8?B?UmpCVll5VWVVWUplb3d0Q0x6TDhSbjF3S1IvbG5walRpZ1lvY002MnB1RURT?=
+ =?utf-8?B?Yk5WKzA3bEg4TzFHeTlHRjZVK1BJdmhoc080dk9NRyt3ZEovTmVQU2o2MjJP?=
+ =?utf-8?B?TUExYk1SVkw2ZHRXNVNVcUpxUVJzakZCS3AySE1TUEtGMlEwSm5VN1FtSE1w?=
+ =?utf-8?B?ZWh2QzFsdVdEd3o3WnFtZ3A2Z0EwWW9POVdpRlp3emk0TjNhUkViSjRxWXlq?=
+ =?utf-8?B?b2J5RUdpL244dVlJWlRZdXhFZmFwL2xwekxtMmpGeXJGUnI3akFBeFR5anVh?=
+ =?utf-8?B?OTgwS1hLTzl5R0hyc2hpVUhidnlwWUdhNkVIN2RXdVBDVzdFU1ZrUkJ3SkpR?=
+ =?utf-8?B?b3RWWXdqNEp6ZDBuKzdNeEhaUnZ4UWJNeVc5V0YySFpDNkJZZzJ3aEJqNkpj?=
+ =?utf-8?B?VEJVWXFLTExYTGpGL0M4eFRFOEtHOVViZWk2dFh5Q2djWlpJMlVyYW1uZS9q?=
+ =?utf-8?B?MHVDdzZZc3ZidFROU1ZoNkxKOUZVS2p6bml0YTRaVFVWbGdxanNsdC9nZE9M?=
+ =?utf-8?B?ZkEvcEFLUCtOU1VidXFUcE90cmZvRUExVEF3eGY1dWtEZ3BNakorRVJ0cWt1?=
+ =?utf-8?B?blliM3M3YnRhUEQ2dGhaWkt3bUdpUUdqMEhLNFZLdzRwaVJUZjNzRldOcU9R?=
+ =?utf-8?B?dnNNS0xMbllSL1FyVkdXS0ZUZW5MWnY4QVJvMUc1M0Y1RTFINGpGZ3AvOHpC?=
+ =?utf-8?B?TldzOFczRGlPUHZRRkN0NmpXdXhrVnBSZXRWVkNqYVNxa1dKQ09KeXlyUlhL?=
+ =?utf-8?B?M2pESk9lcDBEcU1rODI5RnBkcG1CWW10TldpVVBNRDRjMnFJYXVoN0pLWnF6?=
+ =?utf-8?B?cWMzcC9IVFozMEgyRGM5RVBnOWd0RUxFbkhkbFUvNStIWW5FVEltSHh2SVIy?=
+ =?utf-8?B?UUgwRC9VTXJoZWtnQ3RYV013RFNpZ2pzVGZCUGJrU2x0L1cvYTgxd2gxUWl1?=
+ =?utf-8?B?MGdSTFlJZHFtQ0wyYUpCT3kxalM4MWNadE5wa2lnb2ZXa2VWYXFqSnYxbWNJ?=
+ =?utf-8?B?ekw2YmxJemxsdmhITi9IT1dOcVorLy9PaVFFMUNmb01DV3VRNlpFRGRFUllX?=
+ =?utf-8?B?YjkzR01zVXVSdEF3YlR2S1hNak4vNXFqYS9YQXMvZGZyTHFtZlJDSXhCL1Fn?=
+ =?utf-8?B?U0xDdXQxMTBnYzdqQjV5eE90a1pNZ1ljQmFrREcranNHMEplL1pIOEpUdnJk?=
+ =?utf-8?B?WUQvNlRkSGJib211TUhhTVA1TFFuWnd6ZncrV1d3MlFYcUNYbmJjRG4wOXNu?=
+ =?utf-8?B?UWU0OUdxRlBJTUR0NFczREZhZytFTVZhR3dEY09GRTlUWTQ3SDgvMEJPMUhI?=
+ =?utf-8?B?NWZJQnMwOVJNU1hQRC9lYVRDdTRJV1RpeEFOQXVxT0hqczh2OURMR3NQVFFn?=
+ =?utf-8?B?ekJwaDAyYnFlZmhIdUNIeU5LWHJ1L2tmSS9PS2N2K1BvQWNPb0Y2Wm1ZMGVU?=
+ =?utf-8?B?VC8rYVl2bXJOTkJDcnRYVS9zclZyelJnSEl0NnA3M1plRGVHT29hdzRLdk5D?=
+ =?utf-8?B?QTNqWlRvSkZnSysxY1lwd1lHdWQ3eVFld2VzdkE2bnhRYWJrRThoWWNFWm5E?=
+ =?utf-8?B?M0h6RmZYc2RJYTJwKytzdmVzVDRpR0Q2OE5vaXZWbUx0THNiODF0L3JKVExT?=
+ =?utf-8?B?ZXQwcmR4aTBkcGtybG5xN3JFYllNcElrdkV2Y2xjSGppeW4vQXRxNVJGaHc5?=
+ =?utf-8?B?SkwvUGJYQnl5L1pMTUdXQ0kxV2k5ZTFZdDhPL3NtTHVLSE42QkYvZ0Z6TzZW?=
+ =?utf-8?B?WWVENExONnpwNVVTbXIvL2hJYU5xZ2EvR2lGMWFrMUN3a283T3lidWd5VnBp?=
+ =?utf-8?B?bGcvWWw0V3hVWkJ1Y05ERkc2a0ZkZ2trMkZwRGQwdENVNTJvbTJLK3M2dGRt?=
+ =?utf-8?Q?Z8Kw=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?QUM3UmZUTzB6eTJhZkx3UC9yVmdOa1JKcUtjUTV0Z1Jac09uem9vK2ZEZ3pI?=
+ =?utf-8?B?Q2hxbXJLMnR3a2VMMnB0empqcDlGemczSVE3amxGcHZBOE1PVFR1c3NOYzd2?=
+ =?utf-8?B?Z3ZaN3pYRjlhZUEyRnFQSEx4MjNhZWp3SnhhMkRWWURJRmJlNDNBTUtHbmRl?=
+ =?utf-8?B?aVNWcU1ubWpjcFFTWkdXakJwbGhwMEVoZEkwSi81eFpqNEl0YldWV0hXdzQv?=
+ =?utf-8?B?N3B1Wm1rNU9zNEVRYlNpS2JNTUkwTHh1RkRKZkFTeC8xVWtiZVI2dllxeHBT?=
+ =?utf-8?B?SkdFazZhaTVrYjVVb0cvRmszZ2kzL2FoQi81cHdhNG9RWUF5VjZ5aXdyMEhZ?=
+ =?utf-8?B?cDZveXNKNWhnMis1d01PWTlORFEvMnF4MUhteFV6RGR1K2o4RDJnV0hEYXZH?=
+ =?utf-8?B?MVYvOTYraXdLSFdVSE1aVlM3aUwySm9OR0JvUGcxUU96NnJMUWZQNnpSa0FB?=
+ =?utf-8?B?dFVWZmhEYTBwQnlsQll1VVZNcHhuWjR2WmpJTHdLcU9yeExEVFMyZXNiUW9W?=
+ =?utf-8?B?RHU1MENuUUhUUGRqU2RKL1FvaWpMTTNtdkFHRVBPYWQzbnBVeE5yL1BBcDdW?=
+ =?utf-8?B?Zzg0MnMzNXcyRUh3NTFqRVdkaXA5UFNTODBCNlZuMnJNbUtld0F5VStpS050?=
+ =?utf-8?B?YWZZMUNkY1hwYU9xR0FDMlh3MXpMbkFLc2RUT0JoMU9zOVQ4MVZib1doTWg1?=
+ =?utf-8?B?UHJNMXRDQTVPaFdTSE5QSG9tSHJ2NlJRbkhJRWdNNjEyUUxWNjZESXc5Lzdx?=
+ =?utf-8?B?bHRjb0ZuSjFqQ3VWU1FQeHVqb1VScmtTSGw0ZzMxWUx6ZGdwYmtSV29KbzBk?=
+ =?utf-8?B?N3dsL094OGFxaUxobUJhWDF5dm1xK1grM1lwL0kzdDU2SDdhMW5TUThpU0Fo?=
+ =?utf-8?B?R3ErbFFZeFRlelZ5alQwYU1VNUV4ZzQvcG1henk2YUxURllKVlNXK3NaZ0pD?=
+ =?utf-8?B?b2k5STBWYVhGbWVocWNpRVNURlNQTjQ1cHB4cDNlVmVKSzd4eFhUMWNmR3VB?=
+ =?utf-8?B?Q3pybEtnSFJwdXR0Rlc1TWlFZy9yeE9yUmtGMkdTRGx3YW1OaGo2eWpsN0py?=
+ =?utf-8?B?VjdVbm1vbC9sMG9nckVjN2dsejl4MW1kblRVOXd4elVpYU1FQXhNWkZhNnUz?=
+ =?utf-8?B?VXpJTkY4VUVPeGFwYmNGa01FcGgzMXRKaVBWb0lLWTRrZG9WOHVZQzRWM2Ju?=
+ =?utf-8?B?b21ySnJxWWljWWhMS3pRV1BQNitTSEU3VTlpZTlzNVlYcUwvSTZUT2RValJi?=
+ =?utf-8?B?a3RCRXpvZitVZzNSYWhDeVRUOGZLTnlub2hKWWlaUmVBQkx4czEvN3dNaUhr?=
+ =?utf-8?B?Zm5MVE1QODJXenRGZW5QdU8xb2ZXdzRXRzFxaW1QZXRBaWRWOEhnbVVmRmxo?=
+ =?utf-8?B?emprWHF4UUxaVVd4b3Fsa3N0ZlZwTFFHcGFKYkRQdnZXTm5pQ2IxcXRuMjV1?=
+ =?utf-8?B?NjJ5R0lsR3hPcVhLMnkrUmY4WndENm1Zem5kaE9xelpJQnoyS1hsNmozVHF6?=
+ =?utf-8?B?bzExZGtJODRRWDh1am16Z29nZVJHQm42NnNONDFRYWtIM0N2cW1meTNJalgw?=
+ =?utf-8?B?VnArWENVb0ZNWm42Z1lRa3lIQVMxNE5vR3VmM2JKRm12bUh2cERvQmZweDlj?=
+ =?utf-8?B?QnY2a2M1M3N4dElwK0tBUHlaU2d3UmtMZUhKb29naG10WVYxL3YyZTB5VjVW?=
+ =?utf-8?B?YTRNY1hIYkRRNFdGZUtsdmdmTVRhVGpLNnFyMmZaUkZBNTc0TCtXU0JxaFEy?=
+ =?utf-8?B?ZHdVUE1xNVpOY0VDR1BiWU5YMnlIaVgyU0YzdmlieDMyaVdBNUpFVmpPTGRx?=
+ =?utf-8?B?aWtBdXVNd3hjUzZKbDVqVUZob1dkWHliajY4bks3Yk50dktNaG1PRWxSY3F4?=
+ =?utf-8?B?SEVTeWJyMkxFc2p1RXB6bkhVUzVmVzJjeHhIWFJHODQ0Q1VwcjVleVhYdXpl?=
+ =?utf-8?B?ZDhRZmpNNFR0VUdNUHZ5dTRhdE5RMGw2dDFncURoZ1VibFNETnlyL1VnUUVI?=
+ =?utf-8?B?TklmcGI5a2FGZXBnNWZLd1hZNXFvS3puUEFtVVZpTjZyVkVOMENGckNlQkg3?=
+ =?utf-8?B?UEdnRjF0RDMzWEFoeENoVTgzQmc5UkdneGNjZE1BQ0RiRUl4TG9yUHYrYmtk?=
+ =?utf-8?B?V0N0U3c3L3JKOFAwZ01USjgxdWpFb0E4bmhDbVBmSm9ONForN0tSYk5ZSTNW?=
+ =?utf-8?B?NXhpbjBwRFJXb3o1UlJoY0dRLzRmejFzMm55Rk5ja2NhTmI5Z1htZmhFNDZR?=
+ =?utf-8?B?bjJEOGN1MUlseDdFSWZ5enBMRXR3c3JFeFdmdnVLOWlPMHo3dGp6M3pBN3pE?=
+ =?utf-8?B?TTk0NU1SR04zcWFRQmE1NGh4YzVwQjhXN2ZzR21YYnBVU08xTnNmQT09?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52f835fd-45e8-4623-3815-08de591bce3f
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 18:35:09.4048
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qQAQkLQyQYd88YVfp31F9yb9+XC28lqxprIZ+SS4rX9/qP5GQBLdNDYQj2lUrlDtcSmSNAMiIO8lS6qBVGH8Dw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6973
+X-Spamd-Result: default: False [1.54 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	ARC_REJECT(1.00)[cv is fail on i=2];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_POLICY_ALLOW(0.00)[gmail.com,none];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FREEMAIL_CC(0.00)[lwn.net,vger.kernel.org,kernel.org,pengutronix.de,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73531-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73529-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,linux.intel.com,kernel.org,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,nvidia.com,weathered-steel.dev,collabora.com,joelfernandes.org,lists.freedesktop.org];
+	RCPT_COUNT_TWELVE(0.00)[44];
+	MIME_TRACE(0.00)[0:+];
+	DMARC_POLICY_ALLOW(0.00)[nvidia.com,reject];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rakurame96@gmail.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	TO_DN_NONE(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,hartkopp.net:email]
-X-Rspamd-Queue-Id: A576A5D4E7
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,nvidia.com:mid,ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,Nvidia.com:dkim]
+X-Rspamd-Queue-Id: ACF445CBEF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, 18 Jan 2026 at 23:53, Oliver Hartkopp <socketcan@hartkopp.net> wrote:
->
->
-> On 18.01.26 15:41, Rakuram Eswaran wrote:
-> > On Tue, 13 Jan 2026 at 21:45, Oliver Hartkopp <socketcan@hartkopp.net> wrote:
-> >>
->
-> >>>    The length of the two CAN(FD) frame structures define the maximum transfer
-> >>>    unit (MTU) of the CAN(FD) network interface and skbuff data length. Two
-> >>> -definitions are specified for CAN specific MTUs in include/linux/can.h:
-> >>> +definitions are specified for CAN specific MTUs in include/uapi/linux/can.h:
-> >>
-> >> No.
-> >>   From the user perspective he has to include include/linux/can.h
-> >>
-> >> Better "MTUs in the linux/can.h include file:"
-> >>
-> >
-> > Can I just incude linux/can.h or include/linux/can.h? As in the current
-> > document include/linux/can.h is used.
-> >
->
-> If you look into the code you need e.g.
->
-> #include <linux/can.h>
-> #include <linux/can/raw.h>
->
-> So I would name it the linux/can.h include file.
->
 
-Hi Oliver,
 
-Ah, now I understand what I did wrong in my interpretation. I replaced
-all instances of include/linux/can.h to linux/can.h include file.
+On 1/21/2026 4:54 AM, Zhi Wang wrote:
+> On Tue, 20 Jan 2026 15:42:50 -0500
+> Joel Fernandes <joelagnelf@nvidia.com> wrote:
+>> Add unified Pte, Pde, and DualPde wrapper enums that abstract over
+>> MMU v2 and v3 page table entry formats. These enums allow the page
+>> table walker and VMM to work with both MMU versions.
+>>
+> 
+> snip
+> 
+>> +impl DualPde {
+>> +    /// Create a [`DualPde`] from raw 128-bit value (two `u64`s) for
+>> the given MMU version.
+>> +    pub(crate) fn new(version: MmuVersion, big: u64, small: u64) ->
+>> Self {
+>> +        match version {
+>> +            MmuVersion::V2 => Self::V2(ver2::DualPde::new(big, small)),
+>> +            MmuVersion::V3 => Self::V3(ver3::DualPde::new(big, small)),
+>> +        }
+>> +    }
+>> +
+>> +    /// Create a [`DualPde`] with only the small page table pointer set.
+>> +    pub(crate) fn new_small(version: MmuVersion, table_pfn: Pfn) ->
+>> Self {
+>> +        match version {
+>> +            MmuVersion::V2 =>
+>> Self::V2(ver2::DualPde::new_small(table_pfn)),
+>> +            MmuVersion::V3 =>
+>> Self::V3(ver3::DualPde::new_small(table_pfn)),
+>> +        }
+>> +    }
+>> +
+>> +    /// Check if the small page table pointer is valid.
+>> +    pub(crate) fn has_small(&self) -> bool {
+>> +        match self {
+>> +            Self::V2(d) => d.has_small(),
+>> +            Self::V3(d) => d.has_small(),
+>> +        }
+>> +    }
+>> +
+> 
+> Should we also have a has_big here as well?
+Good catch, I will add that in, thanks.
 
-> >>
-> >> What about the PWM settings here?
-> >> When TMS is "on" the PWM values can be automatically calculated or set
-> >> manually. There's also no CAN XL TDC when TMS=on as the TDC is a
-> >> mixed-mode requirement for non-TMS transceivers.
-> >>
-> >
-> > Can I add the PWM settings under new heading (CAN XL PWM) or is it fine
-> > to keep the content under the same heading (CAN XL TDC)?
-> >
->
-> Yes. I would propose a new section
->
-> CAN XL TMS (Transceiver Mode Setting / PWM)
-> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->
-> The Transceiver Mode Setting (TMS) switches the RX/TX lines between the
-> CAN XL controller and the CAN XL transceiver into the "Fast Mode" by
-> enabling a PWM protocol.
->
-> In the Fast Mode a different sample point is used and the PWM ratio is
-> calculated automatically or can be set manually.
->
+--
+Joel Fernandes
 
-Ok, will add this section. In the below article, I saw a table named
-"CAN transceiver modes signaled". Can I add them here or above content
-is fine?
-
-https://www.can-cia.org/can-knowledge/can-xl
-
-> >> There's one big difference between CC/FD and XL frames when you
-> >> read/write it to CAN_RAW sockets:
-> >>
-> >> For CAN CC and CAN FD you write struct can(fd)_frame's with CAN_MTU
-> >> resp. CANFD_MTU lengths - no matter about the data length (cf->len).
-> >>
-> >> When you read/write CAN XL frames you are reading and writing the
-> >> CANXL_HDR_SIZE + the length of the data.
-> >>
-> >> So only in the case of writing 2048 byte data, you write 2060 bytes.
-> >>
-> >> The minimum size for read/write is CANXL_HDR_SIZE + CANXL_MIN_DLEN == 13
-> >>
-> >
-> > Good point! I will add this information along with an example. I will go
-> > through your code and decide what to add. Does the example code should
-> > focus only on CAN XL frames or also on CC/FD frames?
->
-
-Here, I added a updated content for PWM section and Application considerations
-for CAN XL section.
-
-CAN XL TMS (Transceiver Mode Setting / PWM)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The Transceiver Mode Setting (TMS) switches the RX/TX lines between the
-CAN XL controller and the CAN SIC XL transceiver into the "Fast Mode" by
-enabling a PWM protocol.
-
-In the Fast Mode, a different sample point is used and the PWM ratio is
-either calculated automatically or can be set manually.
-
-Application considerations for CAN XL
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For user space applications the following rules are important when
-handling CAN XL:
-
-- Use ``struct canxl_frame`` as basic data structure when CAN XL traffic
-  is expected.
-- Set CANXL_XLF in ``canxl_frame.flags`` for all valid CAN XL frames.
-- Ensure that undefined bits in ``canxl_frame.flags`` are kept at zero.
-- Respect the configured device MTU; do not send frames larger than
-  the MTU announced by the kernel.
-- For mixed-mode controllers, be prepared to handle Classical CAN,
-  CAN FD and CAN XL frames on the same interface and choose the frame
-  structure according to the socket/protocol semantics (e.g. dedicated
-  CAN XL APIs when available).
-- There's one big difference between CC/FD and XL frames when you
-  read/write it to CAN_RAW sockets:
-    - For CAN CC and CAN FD, struct can(fd)_frame's with CAN_MTU/CANFD_MTU
-      lengths.
-    - Read/write of CAN XL frames you are reading and writing the
-      CANXL_HDR_SIZE + the length of the data.
-    - The minimum size for read/write is CANXL_HDR_SIZE + CANXL_MIN_DLEN == 13.   
-
-> When the CAN_RAW socket enables the CAN XL support you have to deal with
-> all kind of CAN frames. IMO is makes sense to show an example that deals
-> with all three types of frames.
->
-> >> Here is an example that I've been implemented recently that shows a good
-> >> example how to handle CC/FD/XL frames, when they are all enabled on the
-> >> CAN_RAW socket:
-> >>
-> >> https://github.com/hartkopp/can-utils/commit/bf0cae218af9b1c1f5eabad7f3704b88ab642e00
-> >>
-> >> Feel free to pick the code for some example.
-> >>
-> >> But please do not reference the commit as it is in my private repo and
-> >> not yet integrated in the official can-utils repo.
-> >>
-
-I had gone through the code and picked the below code for example. I add the
-code here. Kindly let me know if I need to add anything extra. 
-
-/* CAN CC/FD/XL frame union */
-union cfu {
-	struct can_frame cc;
-	struct canfd_frame fd;
-	struct canxl_frame xl;
-};
-
-struct sockaddr_can addr;
-static union cfu cu;
-
-// open CAN_RAW socket
-s = socket(PF_CAN, SOCK_RAW, CAN_RAW);
-
-/* try to switch the socket into CAN FD mode */
-setsockopt(s, SOL_CAN_RAW, CAN_RAW_FD_FRAMES, &canfx_on, sizeof(canfx_on));
-setsockopt(s, SOL_CAN_RAW, CAN_RAW_XL_FRAMES, &canfx_on, sizeof(canfx_on));
-/* try to enable the CAN XL VCID pass through mode */
-setsockopt(s, SOL_CAN_RAW, CAN_RAW_XL_VCID_OPTS, &vcid_opts, sizeof(vcid_opts));
-
-addr.can_family = AF_CAN;
-
-// create the sockaddr binding
-if (bind(s, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-		perror("bind");
-		return 1;
-	}
-
-// The minimum size for read/write is CANXL_HDR_SIZE + CANXL_MIN_DLEN == 13 bytes 
-// (12 bytes of header + minimum 1 byte data)
-if (cu.xl.flags & CANXL_XLF) {
-    if (nbytes != (int)CANXL_HDR_SIZE + cu.xl.len) {
-        printf("nbytes = %d\n", nbytes);
-        fprintf(stderr, "read: no CAN XL frame\n");
-        return 1;
-    }
-    rx_id = cu.xl.prio & CANXL_PRIO_MASK; /* remove VCID value */
-    data = cu.xl.data;
-    framelen = cu.xl.len;
-} else {
-    /* mark dual-use struct canfd_frame */
-    if (nbytes == CAN_MTU)
-        cu.fd.flags = 0;
-    else if (nbytes == CANFD_MTU)
-        cu.fd.flags |= CANFD_FDF;
-    else {
-        fprintf(stderr, "read: incomplete CAN CC/FD frame\n");
-        return 1;
-    }
-    rx_id = cu.fd.can_id;
-    data = cu.fd.data;
-    framelen = cu.fd.len;
-}
-
->
-> Best regards,
-> Oliver
->
-
-Best Regards,
-Rakuram.
 
