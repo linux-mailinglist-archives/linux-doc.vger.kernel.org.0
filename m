@@ -1,65 +1,65 @@
-Return-Path: <linux-doc+bounces-73474-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73475-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cLe0I/bwcGk+awAAu9opvQ
-	(envelope-from <linux-doc+bounces-73474-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 16:29:58 +0100
+	id yCrJOc/3cGmgbAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73475-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 16:59:11 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2678D5931F
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 16:29:58 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id B14FE5994A
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 16:59:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 7F0A8AAB245
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 15:01:18 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D719A68C70F
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Jan 2026 15:02:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73C3D4BC021;
-	Wed, 21 Jan 2026 14:47:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F1F7481653;
+	Wed, 21 Jan 2026 14:47:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="UJqV1ZRM"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="GEWfMdEV"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9B5438734A;
-	Wed, 21 Jan 2026 14:47:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B32E4BCACC;
+	Wed, 21 Jan 2026 14:47:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769006869; cv=pass; b=TsK+eMxQIwT/jJRcpzENhG/7SQCxLOds+vmrRxpMfJceJ5tGFZDz38jp0UK1D0i33Misl0nB6eZCBB/xRwdtoLbPiGNf9ghd5yCJAyHlVKWpgcZ8ua5OsDMLcvuXRf3OVUQgLe35JnKqctm17BkRg1yB0CICg1ky/rJIusmOS8A=
+	t=1769006878; cv=pass; b=notR+0uLT8NI7cN7EzbCQmaWOsfie597pHip1stdRZQYK9AP0TI7ThRt1HaCqcPvto29eIePbtUdnP8o+MTx05SvNQlx7wDXMTXZTp2BF2DPVawYVjtm3B9sJg+j/uSsmD/924ttbGUHyL3b0y8A80sIvdXxdv1sM5Qd+GlWuCw=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769006869; c=relaxed/simple;
-	bh=JPVfYjUX3OD5GgTz7y9plNcl6a+kbU1TnF3jJ0NUBVI=;
+	s=arc-20240116; t=1769006878; c=relaxed/simple;
+	bh=dwiB4KxN1atZahOj6DgSdoTJqSArDtozDq87JdA04RU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=NfnahHgxQhL2AGHE7NDdxvDDFhySkAJEyeJi3w+SPSov6gOxia4OCDAf76Boif5LyDbJM6zd4DTMiqk3CRUrgFWg8vPrSZ54BOGPkmgLLdxuOd3Kj84+V/oO92TTGePFtNBji0MHo90cR/j+Q1poLdvo3Y9aNP3CvxDnHao/hDw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=UJqV1ZRM; arc=pass smtp.client-ip=136.143.188.112
+	 In-Reply-To:To:Cc; b=AB3nBGUKPoCh7woGEvrtjf79KioL/YGWHa4MqjgXGGptknFK4C9gJpGLSoc6GjO8S7n+VkQo3Qv04itxJU2ffmOzIDWouQ/x9VprdZxOSPMYpIM7dFHS7XeByYXbjKZ/wt1JbOOsNZn1+W6b3qmwVspuEGtS5h/qWwtfTPNw+us=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=GEWfMdEV; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1769006822; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1769006830; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=U2REihZ7sKSszvqSwbsoGg7q69gJnibnsL/ljgvK9+V1wfi3LggXqS1Pg7Jbp5x3dkz+7ONoB20G0YzczN2Ywvq3afSWQrXoRi3hEs8gT4k81HN5vCseF+6Gk6DeiPUeiwKMlkY4zKk4e6pTiF+NUuv+bjbBPeBlPPnSV0lKLf0=
+	b=AiTcUWXhEbLLpTdJAQ7EZXhonNSadnFVS6iCb4CQhb54nCKiIKg/4HYBLFPa0N+MCNbMvLmeCmgAeq/MGBavcSn9/DbHXl6rCBfzHeh6AorIJXTcYgJFBYRIhXZwrRPc9xq/2TcwK6YW6sbWe7I6IQIVOxWhwoiuKgXpy4TgrmU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1769006822; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=BVlWFy+uln/7HZGtNZyE3zWD720ugtjkEgr5dYIdu1M=; 
-	b=kXwK6HYf0c0Sl4ExLw9UG5pKiRn6rSj24wpxmhO2jCd3MZAsw0Mmo26vRZEqqkRCh80F0cg7H1QIsAPODlI391rasaYBUfgOnO1gW20rGK6xKZJu74uSG167ULULa2P4him12c5c8hZJdg1CJm7+ANI6lQSOkX6F1YTgPXmYS9s=
+	t=1769006830; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=fvHVPCg2cs6DtR2tisxMC9k+ePCvaV4nGam51l3RVf4=; 
+	b=E7I+jHjwud5BFOUY1rManCAO1gb9RqkIbr5ou8JV9yoTCtcIZPQNnhW581EUbyOAM7zOUlNLT2oOSP7XnXJ4dQn9A+BBSrWYensx0Vvny1vlwXl+leBRRsrTErun4KGn4928Rgtzo+WoHe9ksL30H9eUseL6oxV3u4tRge3s6LA=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769006822;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769006830;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=BVlWFy+uln/7HZGtNZyE3zWD720ugtjkEgr5dYIdu1M=;
-	b=UJqV1ZRM9WqPcu5j55avR067TC09jU1avDbfvqfsBr7WuT1/V85bmKS2Qy/jI7Va
-	u8cLLokXdqZs1gADC4PHuPNm7VdnuuY+AZTnxMH+SZmLcgDt0iGtrLUDhWT1WDai2f1
-	YLENRcrxYLxKlKQvciSJRb1Z2Yk3gM+5Np16c+mU=
-Received: by mx.zohomail.com with SMTPS id 1769006819738453.845019769259;
-	Wed, 21 Jan 2026 06:46:59 -0800 (PST)
+	bh=fvHVPCg2cs6DtR2tisxMC9k+ePCvaV4nGam51l3RVf4=;
+	b=GEWfMdEVa5GOcAVLhAOqBmORdISe8v+G524zkiM55tPPHjAYi4sreadvGEMf7CmM
+	WIkbIwq7lQmbuIGxKc6anuiQn24LMFfvGlykXYavtkshzZKP+3VgicyZ+RjxOjtV6EZ
+	A57+H6iAElpVKsNctjEc+HpHE6sEwgWSexI+lT9U=
+Received: by mx.zohomail.com with SMTPS id 176900682770059.27763468853357;
+	Wed, 21 Jan 2026 06:47:07 -0800 (PST)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Wed, 21 Jan 2026 15:45:18 +0100
-Subject: [PATCH v7 11/22] drm/rockchip: vop2: Add RK3576 to the RG swap
- special case
+Date: Wed, 21 Jan 2026 15:45:19 +0100
+Subject: [PATCH v7 12/22] drm/rockchip: vop2: Recognise 10/12-bit YUV422 as
+ YUV formats
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,7 +68,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260121-color-format-v7-11-ef790dae780c@collabora.com>
+Message-Id: <20260121-color-format-v7-12-ef790dae780c@collabora.com>
 References: <20260121-color-format-v7-0-ef790dae780c@collabora.com>
 In-Reply-To: <20260121-color-format-v7-0-ef790dae780c@collabora.com>
 To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
@@ -110,7 +110,7 @@ X-Spamd-Result: default: False [-0.46 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73474-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73475-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[37];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
@@ -121,40 +121,44 @@ X-Spamd-Result: default: False [-0.46 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
 	DMARC_POLICY_ALLOW(0.00)[collabora.com,none];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
+	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:dkim,collabora.com:mid,dfw.mirrors.kernel.org:rdns,dfw.mirrors.kernel.org:helo]
-X-Rspamd-Queue-Id: 2678D5931F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:rdns,ams.mirrors.kernel.org:helo,collabora.com:email,collabora.com:dkim,collabora.com:mid]
+X-Rspamd-Queue-Id: B14FE5994A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Much like RK3588, RK3576 requires an RG swap to be performed for YUV444
-8-bit and YUV444 10-bit bus formats.
+The Rockchip VOP2 video output driver has a "is_yuv_output" function,
+which returns true when a given bus format is a YUV format, and false
+otherwise.
 
-Add its version to the already existing check for RK3588, so that YUV444
-output is correct on this platform.
+This switch statement is lacking the bus format used for YUV422 10-bit,
+as well as the bus format used for YUV422 12-bit.
 
-Fixes: 944757a4cba6 ("drm/rockchip: vop2: Add support for rk3576")
+Add MEDIA_BUS_FMT_YUYV10_1X20 and MEDIA_BUS_FMT_YUYV12_1X24 to
+is_yuv_output's switch cases to resolve this.
+
+Fixes: 604be85547ce ("drm/rockchip: Add VOP2 driver")
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- drivers/gpu/drm/rockchip/rockchip_drm_vop2.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/rockchip/rockchip_drm_vop2.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_vop2.c b/drivers/gpu/drm/rockchip/rockchip_drm_vop2.c
-index 469c63dd97d5..f21efbca42e6 100644
+index f21efbca42e6..3dd7b7571487 100644
 --- a/drivers/gpu/drm/rockchip/rockchip_drm_vop2.c
 +++ b/drivers/gpu/drm/rockchip/rockchip_drm_vop2.c
-@@ -354,7 +354,8 @@ static bool vop2_output_uv_swap(u32 bus_format, u32 output_mode)
- 
- static bool vop2_output_rg_swap(struct vop2 *vop2, u32 bus_format)
- {
--	if (vop2->version == VOP_VERSION_RK3588) {
-+	if (vop2->version == VOP_VERSION_RK3588 ||
-+	    vop2->version == VOP_VERSION_RK3576) {
- 		if (bus_format == MEDIA_BUS_FMT_YUV8_1X24 ||
- 		    bus_format == MEDIA_BUS_FMT_YUV10_1X30)
- 			return true;
+@@ -369,6 +369,9 @@ static bool is_yuv_output(u32 bus_format)
+ 	switch (bus_format) {
+ 	case MEDIA_BUS_FMT_YUV8_1X24:
+ 	case MEDIA_BUS_FMT_YUV10_1X30:
++	case MEDIA_BUS_FMT_YUYV10_1X20:
++	case MEDIA_BUS_FMT_UYVY10_1X20:
++	case MEDIA_BUS_FMT_YUYV12_1X24:
+ 	case MEDIA_BUS_FMT_UYYVYY8_0_5X24:
+ 	case MEDIA_BUS_FMT_UYYVYY10_0_5X30:
+ 	case MEDIA_BUS_FMT_YUYV8_2X8:
 
 -- 
 2.52.0
