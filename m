@@ -1,264 +1,173 @@
-Return-Path: <linux-doc+bounces-73703-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73705-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mCuMMtxpcmnckQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73703-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:18:04 +0100
+	id 4I+SIGtmcmmrjwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73705-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:03:23 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D4E66C342
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:18:04 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2F0D6BE67
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:03:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 15A05301DEC2
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 18:00:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 076C130056CE
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 18:03:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59FEF36EA94;
-	Thu, 22 Jan 2026 18:00:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA7DF3624A3;
+	Thu, 22 Jan 2026 18:03:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QOaubKEC"
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="e+ioyvD5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B02563659E8;
-	Thu, 22 Jan 2026 17:59:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 403E036BCCC
+	for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 18:02:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.196
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769104797; cv=none; b=klJ0Xvk1bQg1RFP3GTfLcokliCc761kGbJf96iFIsxh2FUD1AxqgBatJfLDuvpkuASZLotfobR4zticz4n6vkEQBAA0ocE/7hfAd6UWi4hLvAsoJN9lx6tsH+NaotA2ZDs71B527jA7/qG4PrH+rD3OrLBsT0QxvviCoTmqojww=
+	t=1769104985; cv=none; b=qSe+vQ3FKPo2YWGbhiU0GXADESyCvo5r5JoD39tAVfD3XdOJKJoUH5lh7LtKrrPltToOoX6AXc0oDq4Kh+iUTqZ1A1fNEMMfKZI6QVqRFb8IeXbZZBXB7ZwEAYXWMLfqikDeFU7XdoT69cjFLSudIObahA2r0ZYhr9IKQG7HAlU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769104797; c=relaxed/simple;
-	bh=cT6/GvZiYYHD0xqjiEm6vn61jo1kWgmPBjWYhruQBGI=;
+	s=arc-20240116; t=1769104985; c=relaxed/simple;
+	bh=HnQGF+GQp2hqS7/UCHcdVaF6HDlO/rgXAhOIogT0hbY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hfsLee9OaGXjK2G2990GUhKfhJKRsZxKaqGrYeHFrGJmu8sc+SXJBO7S0T3e+EpLXGVXTzxqvWAhJpih+/iXcvAGQxuNqiyWl+H0ExGzXH12CN5DYUnM1VlQ5kgLkcRavcsbzvlc05fyq9V2/Jd3muMdYp9fLYeM0ygg5jZG0aY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QOaubKEC; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C8BEC116D0;
-	Thu, 22 Jan 2026 17:59:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769104797;
-	bh=cT6/GvZiYYHD0xqjiEm6vn61jo1kWgmPBjWYhruQBGI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=QOaubKECRFAbr8dMDWdAtSczfiJU/LAc1mZW+cNklcLHWxGeJWzmSYOWb2fWpaxkO
-	 35pdoGeVyOC1rLnSAHPn2y8KLAyvhr5tpCdYXe8qYzUs3jjm90XB8FuM8ISzZDbcpY
-	 P1KEbviQli9ImzEIBlPiIl10m0TypcEyluzdnydEgiJSmvMJqcR0Wcg7pSzuGkSeKs
-	 UpXN5Qxm2BGm1B2Rli3gDgeMKt6pXevlE4gv+G7ePgoH8SdfOx/Do6AzmIklruXIyC
-	 JP2B/p5LhcKcdVJZcNi4Z4kbZtPgHckwjK5VVfOlL5+lv1z6evYyWfvoUurRxLxl4T
-	 Og/AnL8fhxHqQ==
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 62201F40068;
-	Thu, 22 Jan 2026 12:59:55 -0500 (EST)
-Received: from phl-frontend-03 ([10.202.2.162])
-  by phl-compute-04.internal (MEProxy); Thu, 22 Jan 2026 12:59:55 -0500
-X-ME-Sender: <xms:m2VyaXcIYubd4xlywkDlA0x1DRJmN-3o8H88RhSw5HiP3A63Vw040Q>
-    <xme:m2VyafSKvVe4AJvHPGbEk49reSDK3dl6oGY3jjR89nJgu82dbeEz5LMhxb5gADhd7
-    _ou_kFcICztd3hseJgJZW6b-Qie0WJ1YpbcnCvTqmPsjBdZ1no-YTw>
-X-ME-Received: <xmr:m2Vyaamp5spSRu5V2FTwctZNDu4vs1Ejpafq-Dc9RP9Oue2kdKX-K6QwDAUeBg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddugeeikedvucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkfhggtggugfgjsehtkeertddttdejnecuhfhrohhmpefmihhrhihl
-    ucfuhhhuthhsvghmrghuuceokhgrsheskhgvrhhnvghlrdhorhhgqeenucggtffrrghtth
-    gvrhhnpeeigfdvtdekveejhfehtdduueeuieekjeekvdfggfdtkeegieevjedvgeetvdeh
-    gfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehkih
-    hrihhllhdomhgvshhmthhprghuthhhphgvrhhsohhnrghlihhthidqudeiudduiedvieeh
-    hedqvdekgeeggeejvdekqdhkrghspeepkhgvrhhnvghlrdhorhhgsehshhhuthgvmhhovh
-    drnhgrmhgvpdhnsggprhgtphhtthhopeefkedpmhhouggvpehsmhhtphhouhhtpdhrtghp
-    thhtohepmhhutghhuhhnrdhsohhngheslhhinhhugidruggvvhdprhgtphhtthhopegrkh
-    hpmheslhhinhhugidqfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepuggrvhhi
-    ugeskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepfihilhhlhiesihhnfhhrrgguvggrug
-    drohhrghdprhgtphhtthhopehushgrmhgrrghrihhfieegvdesghhmrghilhdrtghomhdp
-    rhgtphhtthhopehfvhgulhesghhoohhglhgvrdgtohhmpdhrtghpthhtohepohhsrghlvh
-    grughorhesshhushgvrdguvgdprhgtphhtthhopehrphhptheskhgvrhhnvghlrdhorhhg
-    pdhrtghpthhtohepvhgsrggskhgrsehsuhhsvgdrtgii
-X-ME-Proxy: <xmx:m2VyaTr-GJw4uzn9FXbpJzttI2akIIHUxKD2JGVF_Rb2_imDh0t4gg>
-    <xmx:m2VyaaaE6TLy7fzbO2l9h2xEYX5BN9WEA5bZS94-UrBhXb22t95EPw>
-    <xmx:m2VyafxoxH80fwXZ_jMLwgY6U5VtgM0BOxvPVPCvoZt6X37nkVNxOA>
-    <xmx:m2Vyafh1pwBQrYmk-huetlLk9RpDyqvw96VnmWj34_qEHT8aK0YAiA>
-    <xmx:m2VyaXJtVBN_FBu8tF19Fw6TpJn2JEwPvypG_uCJkw-TgmKzZgDos0yd>
-Feedback-ID: i10464835:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 22 Jan 2026 12:59:54 -0500 (EST)
-Date: Thu, 22 Jan 2026 17:59:48 +0000
-From: Kiryl Shutsemau <kas@kernel.org>
-To: Muchun Song <muchun.song@linux.dev>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, Matthew Wilcox <willy@infradead.org>, 
-	Usama Arif <usamaarif642@gmail.com>, Frank van der Linden <fvdl@google.com>, 
-	Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>, 
-	Vlastimil Babka <vbabka@suse.cz>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
-	Zi Yan <ziy@nvidia.com>, Baoquan He <bhe@redhat.com>, Michal Hocko <mhocko@suse.com>, 
-	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>, kernel-team@meta.com, 
-	linux-mm@kvack.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCHv4 07/14] mm/sparse: Check memmap alignment for
- compound_info_has_mask()
-Message-ID: <aXJHI8El7QHXQuwT@thinkstation>
-References: <aXIaHZ5kNFelmuJi@thinkstation>
- <554FD2AA-16B5-498B-9F79-296798194DF7@linux.dev>
+	 Content-Type:Content-Disposition:In-Reply-To; b=lBzzcFt9d73+dA7szqaBBoxMFyhxHVlkcHkU4y3Q6XMB65r2R/blASdZp7idoA0C7G9bBu/s7lLGoh1Hwf0uBnEyfuO30H2jDraRV8Eh+a/vBr31R4ezP1FD9uENl8RuDBYO5KDw13VziMtMEHMZaS0pqvuCTON4/4jza9TKb3c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=e+ioyvD5; arc=none smtp.client-ip=209.85.222.196
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
+Received: by mail-qk1-f196.google.com with SMTP id af79cd13be357-8c5320536bfso140093885a.1
+        for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 10:02:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gourry.net; s=google; t=1769104975; x=1769709775; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Lk0DadVMYIedGPbXp5WhX8kegjjbwpGdfj2a8a3noKw=;
+        b=e+ioyvD5mh1+7tOT8IK9uxQSA/8K/fj1ugC7ALfhyl7CGOvsAUAbCSe5UZvkCj8lGi
+         RlQo/vElbPcwjw2FdOf8BjXqyNxIHb57qwr0HxgBshZUBP2UfnuxvnIoJBsP9fdonccI
+         A/A49gVzdTm2KMyeMzJSfF0u8pa64FX77cLEM/4nGZIquoxR1baiO4ooaH1lL9ex2Q/4
+         LFXT2zGdLiA1W+GY6RWZeAE8+a6ATWNY9YlOzgJklNysQS3Ruc5uYRJxt4DPpSj5RfXd
+         Tf55THYRDTBlEbFxerHkY7BZJTOboTl3Tz+dV6X1jO05fvoYcF30kK9JBvQ1wZ/3v0L6
+         5FMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769104975; x=1769709775;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Lk0DadVMYIedGPbXp5WhX8kegjjbwpGdfj2a8a3noKw=;
+        b=Jp63cVm6J6NkHPo5j7Ia8ONr0FFsFicwkzq0TGwPyGvLBdFfu//aIudk/y8C08DzjT
+         MKFL3uBMk/tJDB/JmCtUWpUYj8wq5cUdhiYtWfHER9sOzCMy9ROJSQAvq5v+MqsZPRlv
+         8EXlfH3S/DkvpFLGOqC3WwkBsaa74oq9UbFC7oo4pyWuNswbOYT7UvNS83Lvm+RwH2c6
+         YcI6yF74j8nI3b85udkOjF7CUbOsCvYXujNJRJrDfxupFsIObL9SbG2zZWKDNkcjHq+4
+         lch/Fz3MtQBvF6dG3mF3Ig5bwBjFnjydAhHZFbVFcfm2hwMIQtE7rvhRcRRDTpHM5b0Q
+         zOqQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV6+eK/ilfOFw3BWIxNRagvk41ngCUBLN7LvH/shKKH1GpD1Pefx3SgsltkJhA9WxUxZZ8ooFQZJnM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzx1sipLdNbrx38dnbU3KtqbpuUf3CBimkMPmupv8Ps2u74eElc
+	pXanLj3dtCv+YFjOy24hARmuVte7NngkvJjK4RB3uU+IAaxG51rQ25kkYCPK2IPp8WM=
+X-Gm-Gg: AZuq6aJSRgL5Wx6IJ1TxrsIfweJoFj9pcxpwDpv2aEQncB1y0iqMxTi5lnQe1h4IJPT
+	eN7YmRRk/oxy68b/Yp5B9pQys6g1Yr6tL0Kd7n9BTCyXqaVGLTEPwRW5K+e0NZ0fL/Rr5zMuIQH
+	Ja73PspUgl0cQlnczLzg2xmecjva61XRClfmrSMoj11cNb/BOHXMZIEOvJayHzVPsoUseAMUdFR
+	BKNPlQWMKEmGWvKF2X/Cvyr6vnRkLsCIlX0sXtN75F/2s7VdQpaApjWeg2DEEvJkC75BRs5aeWm
+	dKArbQIsI0UYR/MeHAwHZWW5ntZJFbNZKwApf/hDJ1zS/LTbnJ0oOycWThYTh5FacAaujZsRUKT
+	WAlVrP/FUwMiUpd/UIn10TEV5RcaWf+6lYUOqtmrB153iO4u0vbew/ZXtuojhTX2waP8Na2puiv
+	C0Q0MuJH0i7e2VC/UEf0aOmRFmJ86x6hOKXDpQibdcaQ6bAUGbbsqWp65rKlynHY06asJYXQ==
+X-Received: by 2002:a05:620a:410a:b0:8b2:3371:e9d6 with SMTP id af79cd13be357-8c6e2e44d03mr38296485a.62.1769104974462;
+        Thu, 22 Jan 2026 10:02:54 -0800 (PST)
+Received: from gourry-fedora-PF4VCD3F (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c6a71c083esm1471036185a.17.2026.01.22.10.02.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Jan 2026 10:02:53 -0800 (PST)
+Date: Thu, 22 Jan 2026 13:02:52 -0500
+From: Gregory Price <gourry@gourry.net>
+To: Robert Richter <rrichter@amd.com>
+Cc: Alison Schofield <alison.schofield@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Ira Weiny <ira.weiny@intel.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Jonathan Cameron <jonathan.cameron@huawei.com>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Davidlohr Bueso <dave@stgolabs.net>,
+	Jonathan Corbet <corbet@lwn.net>, linux-cxl@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	"Fabio M. De Francesco" <fabio.m.de.francesco@linux.intel.com>,
+	Terry Bowman <terry.bowman@amd.com>,
+	Joshua Hahn <joshua.hahnjy@gmail.com>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 3/3] Documentation/driver-api/cxl: ACPI PRM Address
+ Translation Support and AMD Zen5 enablement
+Message-ID: <aXJmTNKoPhqSDl8J@gourry-fedora-PF4VCD3F>
+References: <20260122172432.369215-1-rrichter@amd.com>
+ <20260122172432.369215-3-rrichter@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <554FD2AA-16B5-498B-9F79-296798194DF7@linux.dev>
+In-Reply-To: <20260122172432.369215-3-rrichter@amd.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73703-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,infradead.org,gmail.com,google.com,suse.de,suse.cz,oracle.com,nvidia.com,redhat.com,suse.com,cmpxchg.org,lwn.net,meta.com,kvack.org,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux.dev:email];
+	TAGGED_FROM(0.00)[bounces-73705-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[gourry.net];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_CC(0.00)[intel.com,huawei.com,stgolabs.net,lwn.net,vger.kernel.org,linux.intel.com,amd.com,gmail.com];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kas@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gourry.net:+];
 	NEURAL_HAM(-0.00)[-0.983];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 2D4E66C342
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: E2F0D6BE67
 X-Rspamd-Action: no action
 
-On Thu, Jan 22, 2026 at 10:02:24PM +0800, Muchun Song wrote:
-> 
-> 
-> > On Jan 22, 2026, at 20:43, Kiryl Shutsemau <kas@kernel.org> wrote:
-> > 
-> > ﻿On Thu, Jan 22, 2026 at 07:42:47PM +0800, Muchun Song wrote:
-> >> 
-> >> 
-> >>>> On Jan 22, 2026, at 19:33, Muchun Song <muchun.song@linux.dev> wrote:
-> >>> 
-> >>> 
-> >>> 
-> >>>> On Jan 22, 2026, at 19:28, Kiryl Shutsemau <kas@kernel.org> wrote:
-> >>>> 
-> >>>> On Thu, Jan 22, 2026 at 11:10:26AM +0800, Muchun Song wrote:
-> >>>>> 
-> >>>>> 
-> >>>>>> On Jan 22, 2026, at 00:22, Kiryl Shutsemau <kas@kernel.org> wrote:
-> >>>>>> 
-> >>>>>> If page->compound_info encodes a mask, it is expected that memmap to be
-> >>>>>> naturally aligned to the maximum folio size.
-> >>>>>> 
-> >>>>>> Add a warning if it is not.
-> >>>>>> 
-> >>>>>> A warning is sufficient as MAX_FOLIO_ORDER is very rarely used, so the
-> >>>>>> kernel is still likely to be functional if this strict check fails.
-> >>>>>> 
-> >>>>>> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-> >>>>>> ---
-> >>>>>> include/linux/mmzone.h | 1 +
-> >>>>>> mm/sparse.c            | 5 +++++
-> >>>>>> 2 files changed, 6 insertions(+)
-> >>>>>> 
-> >>>>>> diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
-> >>>>>> index 390ce11b3765..7e4f69b9d760 100644
-> >>>>>> --- a/include/linux/mmzone.h
-> >>>>>> +++ b/include/linux/mmzone.h
-> >>>>>> @@ -91,6 +91,7 @@
-> >>>>>> #endif
-> >>>>>> 
-> >>>>>> #define MAX_FOLIO_NR_PAGES (1UL << MAX_FOLIO_ORDER)
-> >>>>>> +#define MAX_FOLIO_SIZE (PAGE_SIZE << MAX_FOLIO_ORDER)
-> >>>>>> 
-> >>>>>> enum migratetype {
-> >>>>>> MIGRATE_UNMOVABLE,
-> >>>>>> diff --git a/mm/sparse.c b/mm/sparse.c
-> >>>>>> index 17c50a6415c2..5f41a3edcc24 100644
-> >>>>>> --- a/mm/sparse.c
-> >>>>>> +++ b/mm/sparse.c
-> >>>>>> @@ -600,6 +600,11 @@ void __init sparse_init(void)
-> >>>>>> BUILD_BUG_ON(!is_power_of_2(sizeof(struct mem_section)));
-> >>>>>> memblocks_present();
-> >>>>>> 
-> >>>>>> +  if (compound_info_has_mask()) {
-> >>>>>> +  WARN_ON(!IS_ALIGNED((unsigned long)pfn_to_page(0),
-> >>>>>> +     MAX_FOLIO_SIZE / sizeof(struct page)));
-> >>>>> 
-> >>>>> I still have concerns about this. If certain architectures or configurations,
-> >>>>> especially when KASLR is enabled, do not meet the requirements during the
-> >>>>> boot stage, only specific folios larger than a certain size might end up with
-> >>>>> incorrect struct page entries as the system runs. How can we detect issues
-> >>>>> arising from either updating the struct page or making incorrect logical
-> >>>>> judgments based on information retrieved from the struct page?
-> >>>>> 
-> >>>>> After all, when we see this warning, we don't know when or if a problem will
-> >>>>> occur in the future. It's like a time bomb in the system, isn't it? Therefore,
-> >>>>> I would like to add a warning check to the memory allocation place, for
-> >>>>> example:
-> >>>>> 
-> >>>>> WARN_ON(!IS_ALIGNED((unsigned long)&folio->page, folio_size / sizeof(struct page)));
-> >>>> 
-> >>>> I don't think it is needed. Any compound page usage would trigger the
-> >>>> problem. It should happen pretty early.
-> >>> 
-> >>> Why would you think it would be discovered early? If the alignment of struct page
-> >>> can only meet the needs of 4M pages (i.e., the largest pages that buddy can
-> >>> allocate), how can you be sure that there will be a similar path using CMA
-> >>> early on if the system allocates through CMA in the future (after all, CMA
-> >>> is used much less than buddy)?
-> > 
-> > True.
-> > 
-> >> Suppose we are more aggressive. If the alignment requirement of struct page
-> >> cannot meet the needs of 2GB pages (which is an uncommon memory allocation
-> >> requirement), then users might not care about such a warning message after
-> >> the system boots. And if there is no allocation of pages greater than or
-> >> equal to 2GB for a period of time in the future, the system will have no
-> >> problems. But once some path allocates pages greater than or equal to 2GB,
-> >> the system will go into chaos. And by that time, the system log may no
-> >> longer have this warning message. Is that not the case?
-> > 
-> > It is.
-> > 
-> > I expect the warning to be reported early if we have configurations that
-> > do not satisfy the alignment requirement even in absence of the crash.
-> 
-> If you’re saying the issue was only caught during
-> testing, keep in mind that with KASLR enabled the
-> warning is triggered at run-time; you can’t assume it
-> will never appear in production.
+On Thu, Jan 22, 2026 at 06:24:29PM +0100, Robert Richter wrote:
+> +
+> +The following changes to the specification are needed:
+> +
+> +* Allow a CXL device to be in an HPA space other than the host's address space.
+> +
+> +* Allow the platform to use implementation-specific address translation when
+> +  crossing memory domains on the CXL.mem path between the host and the device.
+> +
+> +* Recommend that the platform provide a method for the OS to convert device
+> +  addresses to SPAs, such as a PRM handler or _DSM. Document _DSM as the
+> +  preferred method.
+> +
+> +* Specify that the kernel (Operating System) determines Endpoint SPA ranges and
+> +  interleaving configurations using platform-specific address translation
+> +  methods.
+> +
 
-Let's look at what architectures actually do with vmemmap.
+As-written for the state of things - this is fine. Just making a note given
+feedback on the translation patch set here:
+https://lore.kernel.org/linux-cxl/697186008aa26_1d6f10061@dwillia2-mobl4.notmuch/
 
-On 64-bit machines, we want vmemmap to be naturally aligned to
-accommodate 16GiB pages.
+If the spec is updated to include such translation tables as described
+in the discussion above, then this should probably be updated to say:
 
-Assuming 64 byte struct page, it requires 256 MiB alignment for 4K
-PAGE_SIZE, 64MiB for 16K PAGE_SIZE and 16MiB for 64K PAGE_SIZE.
+---
+     Platform shall provide the appropriate CEDT translation tables.
 
-Only 3 architectures support HVO (select ARCH_WANT_OPTIMIZE_HUGETLB_VMEMMAP):
-loongarch, riscv and x86. We should make the feature conditional to HVO
-to limit exposure.
+     If the translation mechanism can't be encoded into tables, then it's
+     on the platform to justify this and provide PRM or _DSM (etc etc.).
+---
 
-I am not sure why arm64 is not in the club.
-
-x86 aligns vmemmap to 1G - OK.
-
-loongarch aligns vmemmap to PMD_SIZE does not fit us with 4K and 16K
-PAGE_SIZE. It should be easily fixable. No KALSR.
-
-riscv aligns vmemmap to section size (128MiB) which is not enough.
-Again, easily fixable.
-
--- 
-  Kiryl Shutsemau / Kirill A. Shutemov
+~Gregory
 
