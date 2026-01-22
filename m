@@ -1,141 +1,169 @@
-Return-Path: <linux-doc+bounces-73711-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73713-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gDjiGYBscmnckQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73711-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:29:20 +0100
+	id ELHhKq5wcmlpkwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73713-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:47:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29FFC6C6EA
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:29:20 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE0F26CA61
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 19:47:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 38A9E300E5C7
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 18:29:16 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B68F3304B80A
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 18:30:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77AC137AA9B;
-	Thu, 22 Jan 2026 18:29:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 368543783C9;
+	Thu, 22 Jan 2026 18:30:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="OaoXckYO"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="ZfKnMPOW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA0B4346E70;
-	Thu, 22 Jan 2026 18:28:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769106554; cv=none; b=FFDUvMr5LfTSAWpk2N9zr9LeZkTUzB4AzS7TPElo8794PUgt2k4TxRvwMdr8dSMvUVAQ4KOHkHaSqBL7VdKn4mctWI9uX5UOj5vtGOOPCKstLWaZHXEb6NeTPA9AXZZZ9eaoSPOFcud7qOigDSDY0PehtYUrMUyYa7m4R8LStmQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769106554; c=relaxed/simple;
-	bh=ZUSvl05bK2wDQdhoH51krrPfZTVgqCoCo65mT6q4jZE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=q+yhaKKC05cQCUGAvhlTXKcNptKeJN7K7geUMgQpTARFPDpJepeAvxpNX1lm9yxUsH0EFr0A+/7u+e+NbVKJRhPoXiWaZDarAHjylDwkMXZf/C8B4QSv6dvtH1MZ8LWP+9njizVNzMXQ0m/V3WUmOn6urRaMSTE1GxjgRrfkZ2U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=OaoXckYO; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=yKKw+rB7Lag7BUDagtiVwP8Kf4vv0TdM2e/79p7B5aM=; b=OaoXckYOXZGQxb0fp32TyaquS4
-	2HtV5OLuV0YxYrs8XsaURNYyTjDRnzh8uCgg7aHb8mE0dYkeAlL4Jj83HFJQX85sgLUx+XfhVSUAx
-	jJnMyIMsPwpT+MCGN4XpytBGAnOm0g6JyeycusJMfV++vxBNmErBTChnDZuUY1oPkgNHcyocdlmyn
-	rgTPV5uV+BH9yDU1mK02560P2sCMRnNlnfNM2TX+fKBF8U+kcFsCltgMQPkCCN04ysem6e75DGUCN
-	DzDyU82A0xc1HPko8AWWZ+zWhpGk8zQiBQa3G2Ey3L9wweORr5vSV3nELoDevI3guc23RqXTYHjSP
-	QEhKQPSQ==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vizQM-00000007dPw-2F4G;
-	Thu, 22 Jan 2026 18:28:54 +0000
-Message-ID: <658caf3b-aeb6-49c7-9e5a-1eab175dd1b3@infradead.org>
-Date: Thu, 22 Jan 2026 10:28:54 -0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48A0F37BE8B
+	for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 18:30:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.52
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1769106623; cv=pass; b=p3LohKAiAUf/vImFja5O/nQBdS6S4RkgwcmhFnEkPyGM0FTDFwj/tjBTd+m2GjuZZSJfPUpcTJ6/gaFi7hnwO6WHC954PxIncgsEb6D7clc8k1x96b+sMoW8Wyu/ZKLHSkD5NNbs8qdjw1n6h/JnygYe1p7Z1xvIkXOD366RS+Q=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1769106623; c=relaxed/simple;
+	bh=XqfjFZjqZ+qKfuAcLr5Lq6LxiUZh0aC9ms0gfa0kYpM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=oP8S6ffATryEGPa7mMez4MH28YvTAhVpVlVp7tfmB5OvhuUzl/kcA2pHkIF9MZB398uqvn+eEQh71/2HWj9NiJmrr1DihkFWfWeFx1l1k5+NhJWmUspUjsGwvxCePrEadCd8sEYzP/C5Ne92mJsT+wlprxPIyqxR9kHtIb3Ukkg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=ZfKnMPOW; arc=pass smtp.client-ip=209.85.208.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-64b9dfc146fso2222326a12.0
+        for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 10:30:07 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769106605; cv=none;
+        d=google.com; s=arc-20240605;
+        b=WZgcmUQX90ZEuisoVN3pv86yK6bX9PK+U2VF+jnvtxsJ2WV0PqLn5KyfCdp927Sohz
+         wwkQVvgAbmSMqpc9gaKqAamL1okt4QSn2SwwZI1rae6cNahRVSlMwH43gkHsIp/pB08X
+         TSoFhLECm40NOCRvWbbpmMGnB7lo1r4bq3Cbhw0rZwkGVzzRx9ChHMh40MikOQgnF+w/
+         xCOOOet6FXh2O0UZwb/AyJRnEp+YtiU/6GvXEZ+fKMPs9kraXCHZQUsiAvjtq19MT62V
+         SGpSWDJXwv80UdvBUvbWu1q2EuRZ4pk4Rgypx8zyq10PbnNoPxA7QqEodTeGTySYuf3B
+         Eg5w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=XqfjFZjqZ+qKfuAcLr5Lq6LxiUZh0aC9ms0gfa0kYpM=;
+        fh=wN4krBQeWzH+gel5wevbjdvb9i6AL56TP73kzFkv6Ck=;
+        b=T2lDT7gq9dTfY5dJW/ALxjFGIJuGWXFKg5I5c2yehtfgKiImxdBRUOqaWV+0ic7dfo
+         X7cy1TSTyFVBiVpXE6KCRnvH2o2VcHO3w61EclTytKm0dLbmM8hGs4U/yotvjI45TkPz
+         uSaSrv3GDirG6FwU6D1/ld3ZS5fnAZKpe5V6WlOCpn+ZT29c0rU5qbkEe9rWnbueBMby
+         /if33+CaVNdnqsK7HnEFuepZBNbIxSpOitWHhWg+Po+lMWObKtA5P65+AL/QT0Mj1Uss
+         gj1pvImK5HUfG//sotNZusqTOmI1z7jBpVKvHgma15a8b4xMn4tmgwqNv+m4fcdO7xvC
+         y+4Q==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google; t=1769106605; x=1769711405; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XqfjFZjqZ+qKfuAcLr5Lq6LxiUZh0aC9ms0gfa0kYpM=;
+        b=ZfKnMPOWukORcMeAlevbvmV7dHD1khJHNqBAMuuZt7HZsdWlnIqbUaX/X2mXjgUIUb
+         /HyaV5EZwSHEf6pGyiefYpxmrlzEOis7rXskm4ARPWmcWIjcqoDp6+rNSlFzo7ki6tkA
+         y1T3DuD5Gog4PPI5XwP/9rC69SFpPgjZXWaoFgCR3ZixzPX8iZ2Ojxbf2D/TOZgzhEGF
+         OXztUoTC+kZRKyM8fHmSoli0wg8EnS3AjLTfzBIwXteXO0S3DM30WO91WeSBQfhOwDO+
+         BOFg7dtuBykPtrYzRrue+phXLvGcW5DkrfQHRDr7AK4TNR29KBBmX4HrSD+t4uNiPJ3N
+         ehPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769106605; x=1769711405;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=XqfjFZjqZ+qKfuAcLr5Lq6LxiUZh0aC9ms0gfa0kYpM=;
+        b=BLzja1sAPhAsXivYVVd3GwkoPmPUbIIQEJwQ4X/7vgUbjnLcuVXv/VzjaO017Flz4g
+         bNdr1TVSmYsroRc3OWKCzzmMXoAddFJAGFs74jNWmcNyAw46vxCgkFalxy+mqDNKCvwc
+         VM/ln3/IxoLwqBc1HWq2qqXhO79XQgcG5jjeRhmL5Rhc/HnGfYeenEFrmui8OTIA69E3
+         VVkEItUP1aGQ+kGkvlr+dK4qsIRnkcekpU5jp0SuLRFVbPEl8c3a4+zpcAirzMzbCriu
+         kZS96ITTXxPuY4s9vzZidhOC0hFndBduC18wcuSDiWXy3MyOFBXrUYywwRn5CGvhlQts
+         UMXg==
+X-Forwarded-Encrypted: i=1; AJvYcCXBlKRHyhCjgl6HmRCQzhQ82jfP/aYZGHuNR0vRjybjlJN9gepY/0WestJtHXGJ9wzPGtH5RQD9kzY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwwOzMzfRiRDwWriQpy38fIXYFdMyiUvlKL6SFlysUoIg3jYNJE
+	YTsYNNNlj7IgNic0A0SlVE1zpwoMGWcIrN1d7W+pW1Ikg0xeiCmNPjBEg8dEY93NZF3UbOH3weq
+	0MkhmYQ8dAay3EXIAupdg+3KX2ir8B1Fay9WQIoWp6w==
+X-Gm-Gg: AZuq6aJV1TmUaopslmj89oCbH54WxmiybJf/kuXdY49uG8lwoObijPWHOfbTU5ue4Dl
+	yF23E09BdZ64m5MGZaiSwtw10er7BMn5ToqeM/BPThvcj0a6xnnS/O6dLo59KtqaEU8uqlFcHsB
+	fN0z2EPb8Kl5lLRvDw0EBYyamI+PANn4nYn3gAF5NuxSobKcOq3Pjvcf7r/+WKTPcowZRDAs/Yv
+	/JWeNlRQfHyFu3hSrluGSl4h6f6SecPdRPXdQkd4q5gJcTes4dp06M/f2A1YFuNqwWjGCEX2i+H
+	+QH22w8i9PtOqNXgW0h7yUbhCA==
+X-Received: by 2002:a05:6402:13d4:b0:653:e391:6f2f with SMTP id
+ 4fb4d7f45d1cf-6584b1a37e9mr194745a12.9.1769106604981; Thu, 22 Jan 2026
+ 10:30:04 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: development-process: add notice on testing
-To: Dmitry Antipov <dmantipov@yandex.ru>,
- Andy Shevchenko <andriy.shevchenko@intel.com>,
- Jonathan Corbet <corbet@lwn.net>
-Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20260122111525.1112145-1-dmantipov@yandex.ru>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260122111525.1112145-1-dmantipov@yandex.ru>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260105165839.285270-1-rppt@kernel.org> <20260105165839.285270-5-rppt@kernel.org>
+In-Reply-To: <20260105165839.285270-5-rppt@kernel.org>
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+Date: Thu, 22 Jan 2026 13:29:27 -0500
+X-Gm-Features: AZwV_QgE9tT77JRQYCr53kQCb10BhXhbXggqjEIyG_WPw09DmKeAZcOWTin2V6Y
+Message-ID: <CA+CK2bCB+n5hK9SpMewWURU75a8sY3BJz=MEu_Zy1KwU4Kr5Tg@mail.gmail.com>
+Subject: Re: [PATCH 4/6] kho: Introduce KHO FDT ABI header
+To: Mike Rapoport <rppt@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>, Alexander Graf <graf@amazon.com>, 
+	Jason Miu <jasonmiu@google.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Pratyush Yadav <pratyush@kernel.org>, kexec@lists.infradead.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[yandex.ru,intel.com,lwn.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73711-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-73713-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[soleen.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.994];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:email,infradead.org:mid,infradead.org:dkim]
-X-Rspamd-Queue-Id: 29FFC6C6EA
+	RCPT_COUNT_SEVEN(0.00)[10];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,soleen.com:email,soleen.com:dkim]
+X-Rspamd-Queue-Id: AE0F26CA61
 X-Rspamd-Action: no action
 
-Hi,
+On Mon, Jan 5, 2026 at 11:58=E2=80=AFAM Mike Rapoport <rppt@kernel.org> wro=
+te:
+>
+> From: Jason Miu <jasonmiu@google.com>
+>
+> Introduce the `include/linux/kho/abi/kexec_handover.h` header file,
+> which defines the stable ABI for the KHO mechanism. This header specifies
+> how preserved data is passed between kernels using an FDT.
+>
+> The ABI contract includes the FDT structure, node properties, and the
+> "kho-v1" compatible string. By centralizing these definitions, this
+> header serves as the foundational agreement for inter-kernel
+> communication of preserved states, ensuring forward compatibility and
+> preventing misinterpretation of data across kexec transitions.
+>
+> Since the ABI definitions are now centralized in the header files, the
+> YAML files that previously described the FDT interfaces are
+> redundant. These redundant files have therefore been removed.
+>
+> Signed-off-by: Jason Miu <jasonmiu@google.com>
+> Co-developed-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+> Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 
-On 1/22/26 3:15 AM, Dmitry Antipov wrote:
-> Add testing notice to "Before creating patches" section.
-> 
-> Suggested-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-> Signed-off-by: Dmitry Antipov <dmantipov@yandex.ru>
-> ---
->  Documentation/process/5.Posting.rst | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/process/5.Posting.rst b/Documentation/process/5.Posting.rst
-> index 9999bcbdccc9..0271a4dc525e 100644
-> --- a/Documentation/process/5.Posting.rst
-> +++ b/Documentation/process/5.Posting.rst
-> @@ -40,7 +40,12 @@ sending patches to the development community.  These include:
->   - Test the code to the extent that you can.  Make use of the kernel's
->     debugging tools, ensure that the kernel will build with all reasonable
->     combinations of configuration options, use cross-compilers to build for
-> -   different architectures, etc.
-> +   different architectures, etc. Add tests, likely using an existing
-> +   testing frameworks like KUnit, and include them as a separate member
-
-              framework
-
-> +   of your series (see the next section on what about the series is).
-
-                     (see the next section for more about patch series).
-
-> +   Note that this may be mandatory when affecting some subsystems. For
-> +   example, library functions (resides under lib/) are extensively used
-> +   almost everywhere and expected to be tested appropriately.
->  
->   - Make sure your code is compliant with the kernel coding style
->     guidelines.
-
--- 
-~Randy
-
+Reviewed-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 
