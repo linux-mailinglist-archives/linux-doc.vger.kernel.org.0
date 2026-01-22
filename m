@@ -1,64 +1,64 @@
-Return-Path: <linux-doc+bounces-73601-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73602-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AL1SNhCLcWkLJAAAu9opvQ
-	(envelope-from <linux-doc+bounces-73601-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:27:28 +0100
+	id OPt6BmaLcWkLJAAAu9opvQ
+	(envelope-from <linux-doc+bounces-73602-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:28:54 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80C7D60E2A
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:27:28 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07F9960E65
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:28:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id E1622461247
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 02:23:35 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 47FD4461B23
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 02:25:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7B673033FA;
-	Thu, 22 Jan 2026 02:23:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DF07366562;
+	Thu, 22 Jan 2026 02:24:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="bNnN+GwT"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="xCcG8UHm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-182.mta1.migadu.com (out-182.mta1.migadu.com [95.215.58.182])
+Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com [95.215.58.183])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B5112DFA5B
-	for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 02:23:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FD373624DD
+	for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 02:24:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.183
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769048606; cv=none; b=G+npCWfveOlI1fn1an2oeTgG8h4Atcekg9iWn8Rl2q2IffzFekKIMQkR7BF86s2eryRpzCArCPghZsiuuNGOcbKc+uuxum0tDg/bBxhYvDSCED11T1ehihWbz/qyvnnvi/dd82DGUyWLAeXOBEMGbynFCjKnUWxoAy77JJKxA2A=
+	t=1769048693; cv=none; b=A3GQEiz7RBlOkCwq/RNuHnrN+FfG8WkaMJDP+meApig6+H+LENarohwPnK4m8AyeS2qjLRvl+i1qCXKnkK3RCWW3kMFrnQ02srkr50dEdsL/AmWB93uCUA2ZWHR/pLQ168qDcbxUKUW8YRPj3C1yp1Y3jRRKxepvHqnMoWMV6KU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769048606; c=relaxed/simple;
-	bh=xR7v9VuCRSMJi5oRkoNaxBn3EU8tODLYJSqTPmnYYDQ=;
+	s=arc-20240116; t=1769048693; c=relaxed/simple;
+	bh=VsIuKKggJWF7WT8L1/ScYKbSorXso+ny+zu5uGigef8=;
 	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=dqt2VWvkDP6sbCM5fztTjK6qVdiXB2nWjVpcH1xRwSf8DWyh9UaJLHcx1wMIzW4pzU/XAQhC65xHz836vJIKL8uUigx687fwZVP4BVIMmxhd8VUYSiW1n7NcxIV0J69dreJ+yLbpe/f1DUYfWBsABfVhednd95RK0TExTXvPQd0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=bNnN+GwT; arc=none smtp.client-ip=95.215.58.182
+	 Message-Id:References:To; b=h+y3QuOik2/WaqU6Dlt++nR4s/LSuOcOhkvZcYJ7tf5iuE4AyjEXLuHAvtWgrqync4e9bqQNMC8XT3TleDSVCbsHOFhjjOzJPjYjj+8zX4NpEirhqov4S/DemgfOgJ+9hBm/HPpk003G3+s/sUVTcKjObnxPzhluZ3MeH05F3U8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=xCcG8UHm; arc=none smtp.client-ip=95.215.58.183
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Content-Type: text/plain;
 	charset=us-ascii
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1769048593;
+	t=1769048688;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bmiF8TW43ZnSou9pgCsnR1V6kCn/RdefnmsG8Ds8z2o=;
-	b=bNnN+GwT+bN5BoNeArtLq1vGEBoMkCINtSJT2U6wT57wr0hFyp6KTmhsbVQ69A05kmZ0bY
-	lXw5fVrGTmsqyClAs8vdbKy/nWbbOuhGxLKtjORbt+pFfMIGbq6ddWUnWZi515oj0sxdA8
-	KaAJSttz0Ocbu3sPdlMuKQ7FWrDCIpo=
+	bh=uW9jsyRuBI9zl9ikyUs4U41azYd78tVzdBqcf0Jug7Y=;
+	b=xCcG8UHmJrreH24utr+ksk+03nK1IR3rghgvX0wnZ5j7C1W+gIWUPuffwItlVajJDID0kL
+	P8bbKIl+MFeDd35wQFpGGhAd4wEVjZ2wO+IjHwM0fsFygZq0ap0lV7bsq8geQQ+LVwKqQi
+	xPKh2uES3qOFtzIbDETqSMTzIZb+oMY=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
-Subject: Re: [PATCHv4 14/14] hugetlb: Update vmemmap_dedup.rst
+Subject: Re: [PATCHv4 01/14] mm: Move MAX_FOLIO_ORDER definition to mmzone.h
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20260121162253.2216580-15-kas@kernel.org>
-Date: Thu, 22 Jan 2026 10:22:08 +0800
+In-Reply-To: <20260121162253.2216580-2-kas@kernel.org>
+Date: Thu, 22 Jan 2026 10:24:02 +0800
 Cc: Andrew Morton <akpm@linux-foundation.org>,
  David Hildenbrand <david@kernel.org>,
  Matthew Wilcox <willy@infradead.org>,
@@ -78,9 +78,9 @@ Cc: Andrew Morton <akpm@linux-foundation.org>,
  linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org
 Content-Transfer-Encoding: 7bit
-Message-Id: <17A1336D-2D78-4F00-9164-D90BB7EBB707@linux.dev>
+Message-Id: <9664AA17-6F0A-4507-B2F3-4543ECE52FF1@linux.dev>
 References: <20260121162253.2216580-1-kas@kernel.org>
- <20260121162253.2216580-15-kas@kernel.org>
+ <20260121162253.2216580-2-kas@kernel.org>
 To: Kiryl Shutsemau <kas@kernel.org>
 X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Server: lfdr
@@ -92,7 +92,7 @@ X-Spamd-Result: default: False [-1.46 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73601-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73602-lists,linux-doc=lfdr.de];
 	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,infradead.org,gmail.com,google.com,suse.de,suse.cz,oracle.com,nvidia.com,redhat.com,suse.com,cmpxchg.org,lwn.net,meta.com,kvack.org,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[19];
@@ -108,25 +108,26 @@ X-Spamd-Result: default: False [-1.46 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[muchun.song@linux.dev,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,linux.dev:dkim,linux.dev:mid,ams.mirrors.kernel.org:helo,ams.mirrors.kernel.org:rdns]
-X-Rspamd-Queue-Id: 80C7D60E2A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:helo,ams.mirrors.kernel.org:rdns,linux.dev:email,linux.dev:dkim,linux.dev:mid]
+X-Rspamd-Queue-Id: 07F9960E65
 X-Rspamd-Action: no action
 
 
 
 > On Jan 22, 2026, at 00:22, Kiryl Shutsemau <kas@kernel.org> wrote:
 > 
-> Update the documentation regarding vmemmap optimization for hugetlb to
-> reflect the changes in how the kernel maps the tail pages.
+> Move MAX_FOLIO_ORDER definition from mm.h to mmzone.h.
 > 
-> Fake heads no longer exist. Remove their description.
+> This is preparation for adding the vmemmap_tails array to struct
+> pglist_data, which requires MAX_FOLIO_ORDER to be available in mmzone.h.
 > 
 > Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
+> Acked-by: David Hildenbrand (Red Hat) <david@kernel.org>
 
-Reviewed-by: Muchun Song <muchun.song@linux.dev>
+Acked-by: Muchun Song <muchun.song@linux.dev>
 
 
 
