@@ -1,210 +1,132 @@
-Return-Path: <linux-doc+bounces-73607-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73610-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gHGfLQ+WcWngJgAAu9opvQ
-	(envelope-from <linux-doc+bounces-73607-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 04:14:23 +0100
+	id YN0DLeqYcWngJgAAu9opvQ
+	(envelope-from <linux-doc+bounces-73610-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 04:26:34 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62EAA6139D
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 04:14:23 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DDD8614FB
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 04:26:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 8E6EA886DCB
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:13:17 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 874084C94FB
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:24:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B4E12DA771;
-	Thu, 22 Jan 2026 03:11:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3876E3A1E90;
+	Thu, 22 Jan 2026 03:24:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="UjCCfmCt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ry7ubtsH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com [91.218.175.174])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD4F03A7DF4
-	for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 03:11:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0910F2C026E;
+	Thu, 22 Jan 2026 03:24:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769051480; cv=none; b=O4sL14nvrvMc55ugSsg43DFPo9r9K6k/CTtmw1wGp506NBJmobc51/VfiEJqqxVQJ+vXZJEUYNbwlNz+IFLjfHh8WRFsOeXqgvaWpYrVulXwNwWJv7gEfel6/pxMR9yqLB1t8zb17iUGjzeRI3ZNMamW1v4OY8VIb4PYfckWCw0=
+	t=1769052253; cv=none; b=UUxKXMyBV+ZMrbAt/oX1/zJx5/MeysVtNBBGlegHWjLhcy9LMa6EHBRXG04WOgL3eGJPOFoEwtUM183HuXs97fLKOHmn/U2qffchoC6WGasqYfYRi5bbrsV9IZxFGFcI0Qd+sQ+2aJh8Tq8coY8+ZT3fqVVjlACKXfW8w29EGME=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769051480; c=relaxed/simple;
-	bh=ZQDnhhWuG4i8BpEog6Mk9tYJNSL01Pw6xxtVJ0xfuR8=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=hklDrk7hmILOGz6TJJDvWPA7ATDroPFcocWn67KFh7DA7TUI7yJui30BJFRXyOoo+PO+MeCEyz8nMFroIaWrqDLcdMoWbSFUaYmU6ylRbC5/NPt+v6isLrypPxKkaMLdyDzFbzLQ8ZP/fVPrZLin7fbiLjk4ZT+Y6aY6dpdlt9I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=UjCCfmCt; arc=none smtp.client-ip=91.218.175.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Content-Type: text/plain;
-	charset=us-ascii
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1769051465;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=xvA1wq0qreituDJh/hMPrxm5rJ40HKT6I2SwEUTel6w=;
-	b=UjCCfmCtXXXGGrvHicWu9/ktRUefIaFeWghRm+n3yZOagd0wHt22hJMOXGuVgKU6qMXd+3
-	2Koitgh292ACg/8cFqBNXbxbrz6i4oOm8eVGTfauPatCgZ+EoDa0GvPAuijwHr3f9fQZam
-	YEewmn01tWJrJotrZ7HlTldzd6KqBzI=
+	s=arc-20240116; t=1769052253; c=relaxed/simple;
+	bh=YeNy/fSNfoJeqTGvnCndeeZNov8D3p7cw007DSUK2XU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bVm5YsuLV3nQYTZcaPdcgd6SqYEP1Xly5QiB7qkvsbnmTkf0lYswSWQNANTtBUURWT6KDN4eCx8R7H7eLOMqkiiN4LupmwrNlYFB5lZeo94fSxxA+i/Uln86HCd7YsQMn19QUZqKRXzJYq3dfMP7UoNBdiylmN6NI7RvSlBtCoA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ry7ubtsH; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98D3DC116D0;
+	Thu, 22 Jan 2026 03:24:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1769052251;
+	bh=YeNy/fSNfoJeqTGvnCndeeZNov8D3p7cw007DSUK2XU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Ry7ubtsHCdW4j9mcERB5RK4vNGvrl0T62CuB17DJABIa51Y4fs7di5y1As8XSlb9D
+	 GrfMsvliE4M7i9lWFrhOM68vlV3XYX4PzdOotwU6c5BtQvv2eu6+0ufRIP8ODLd1T3
+	 msl7B+S26kgq6evWpLxkssYp7z784u/+ABeUhqxJpDcEcZbCvuu6/KMpxA8ArLZmy4
+	 mhIkze2fBZv9EsX12kx7arRDpZ5OVxPce7nUyKqO4MrcYkLX6r5o/+vqgQxEG38UXX
+	 FZScJuA8iVVaZOjvADhUZNg/YCcyG1x6Cb73pk3x6NqRIabgr+oZeA11459LdixNEV
+	 28FaiZjP2tPBw==
+Date: Thu, 22 Jan 2026 03:24:07 +0000
+From: Tzung-Bi Shih <tzungbi@kernel.org>
+To: Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>
+Cc: Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>,
+	Jean Delvare <jdelvare@suse.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Corbet <corbet@lwn.net>, Dustin Howett <dustin@howett.net>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Stephen Horvath <s.horvath@outlook.com.au>,
+	chrome-platform@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-hwmon@vger.kernel.org, Sung-Chi Li <lschyi@chromium.org>,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 2/4] hwmon: (cros_ec) Add support for fan target speed
+Message-ID: <aXGYV5VdeI-CRIWk@google.com>
+References: <20260118-cros_ec-hwmon-pwm-v2-0-77eb1709b031@weissschuh.net>
+ <20260118-cros_ec-hwmon-pwm-v2-2-77eb1709b031@weissschuh.net>
+ <aXCXipHCdryd64Le@google.com>
+ <04a8e024-0502-4033-8fb6-c3c8a84088fb@t-8ch.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
-Subject: Re: [PATCHv4 07/14] mm/sparse: Check memmap alignment for
- compound_info_has_mask()
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20260121162253.2216580-8-kas@kernel.org>
-Date: Thu, 22 Jan 2026 11:10:26 +0800
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>,
- Matthew Wilcox <willy@infradead.org>,
- Usama Arif <usamaarif642@gmail.com>,
- Frank van der Linden <fvdl@google.com>,
- Oscar Salvador <osalvador@suse.de>,
- Mike Rapoport <rppt@kernel.org>,
- Vlastimil Babka <vbabka@suse.cz>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Zi Yan <ziy@nvidia.com>,
- Baoquan He <bhe@redhat.com>,
- Michal Hocko <mhocko@suse.com>,
- Johannes Weiner <hannes@cmpxchg.org>,
- Jonathan Corbet <corbet@lwn.net>,
- kernel-team@meta.com,
- linux-mm@kvack.org,
- linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <71F051F2-5F3B-40A5-9347-BA2D93F2FF3F@linux.dev>
-References: <20260121162253.2216580-1-kas@kernel.org>
- <20260121162253.2216580-8-kas@kernel.org>
-To: Kiryl Shutsemau <kas@kernel.org>
-X-Migadu-Flow: FLOW_OUT
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <04a8e024-0502-4033-8fb6-c3c8a84088fb@t-8ch.de>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.46 / 15.00];
+X-Spamd-Result: default: False [-1.96 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73607-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,infradead.org,gmail.com,google.com,suse.de,suse.cz,oracle.com,nvidia.com,redhat.com,suse.com,cmpxchg.org,lwn.net,meta.com,kvack.org,vger.kernel.org];
+	FREEMAIL_CC(0.00)[chromium.org,suse.com,roeck-us.net,lwn.net,howett.net,amd.com,outlook.com.au,lists.linux.dev,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-73610-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
-	DMARC_POLICY_ALLOW(0.00)[linux.dev,none];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	R_SPF_SOFTFAIL(0.00)[~all:c];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[muchun.song@linux.dev,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[tzungbi@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
 	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:7979, ipnet:213.196.21.0/24, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,linux.dev:dkim,dfw.mirrors.kernel.org:helo,dfw.mirrors.kernel.org:rdns]
-X-Rspamd-Queue-Id: 62EAA6139D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:helo,ams.mirrors.kernel.org:rdns]
+X-Rspamd-Queue-Id: 6DDD8614FB
 X-Rspamd-Action: no action
 
+On Wed, Jan 21, 2026 at 09:55:38PM +0100, Thomas Weißschuh wrote:
+> On 2026-01-21 09:08:26+0000, Tzung-Bi Shih wrote:
+> > On Sun, Jan 18, 2026 at 10:45:56AM +0100, Thomas Weißschuh wrote:
+> > > @@ -259,8 +278,13 @@ static umode_t cros_ec_hwmon_is_visible(const void *data, enum hwmon_sensor_type
+> > >  					u32 attr, int channel)
+> > >  {
+> > >  	const struct cros_ec_hwmon_priv *priv = data;
+> > > +	u16 speed;
+> > >  
+> > >  	if (type == hwmon_fan) {
+> > > +		if (attr == hwmon_fan_target &&
+> > > +		    cros_ec_hwmon_read_fan_target(priv->cros_ec, &speed) == -EOPNOTSUPP)
+> > 
+> > [v2 4/4] patch uses is_cros_ec_cmd_available() for the purpose.  Can't it
+> > also use here?
+> 
+> That is somewhat intentional. The code in patch 4 is executed many
+> times, so caching the result is faster. The code here is only executed
+> once. Calling the accessor instead of using  is_cros_ec_cmd_available()
+> makes sure that we test for the correct command and version, without
+> needing another, long CROS_EC_HWMON_*_VERSION define.
 
-
-> On Jan 22, 2026, at 00:22, Kiryl Shutsemau <kas@kernel.org> wrote:
->=20
-> If page->compound_info encodes a mask, it is expected that memmap to =
-be
-> naturally aligned to the maximum folio size.
->=20
-> Add a warning if it is not.
->=20
-> A warning is sufficient as MAX_FOLIO_ORDER is very rarely used, so the
-> kernel is still likely to be functional if this strict check fails.
->=20
-> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-> ---
-> include/linux/mmzone.h | 1 +
-> mm/sparse.c            | 5 +++++
-> 2 files changed, 6 insertions(+)
->=20
-> diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
-> index 390ce11b3765..7e4f69b9d760 100644
-> --- a/include/linux/mmzone.h
-> +++ b/include/linux/mmzone.h
-> @@ -91,6 +91,7 @@
-> #endif
->=20
-> #define MAX_FOLIO_NR_PAGES (1UL << MAX_FOLIO_ORDER)
-> +#define MAX_FOLIO_SIZE (PAGE_SIZE << MAX_FOLIO_ORDER)
->=20
-> enum migratetype {
-> MIGRATE_UNMOVABLE,
-> diff --git a/mm/sparse.c b/mm/sparse.c
-> index 17c50a6415c2..5f41a3edcc24 100644
-> --- a/mm/sparse.c
-> +++ b/mm/sparse.c
-> @@ -600,6 +600,11 @@ void __init sparse_init(void)
-> 	BUILD_BUG_ON(!is_power_of_2(sizeof(struct mem_section)));
-> 	memblocks_present();
->=20
-> + 	if (compound_info_has_mask()) {
-> + 		WARN_ON(!IS_ALIGNED((unsigned long)pfn_to_page(0),
-> +    			MAX_FOLIO_SIZE / sizeof(struct page)));
-
-I still have concerns about this. If certain architectures or =
-configurations,
-especially when KASLR is enabled, do not meet the requirements during =
-the
-boot stage, only specific folios larger than a certain size might end up =
-with
-incorrect struct page entries as the system runs. How can we detect =
-issues
-arising from either updating the struct page or making incorrect logical
-judgments based on information retrieved from the struct page?
-
-After all, when we see this warning, we don't know when or if a problem =
-will
-occur in the future. It's like a time bomb in the system, isn't it? =
-Therefore,
-I would like to add a warning check to the memory allocation place, for
-example:=20
-
-  WARN_ON(!IS_ALIGNED((unsigned long)&folio->page, folio_size / =
-sizeof(struct page)));
-
-However, in order to minimize the impact on the buddy allocator, I =
-personally
-suggest changing `WARN_ON` to `BUG_ON` here, and changing the checked =
-size from
-`MAX_FOLIO_SIZE` to the maximum size that the buddy can allocate, in =
-order to
-ensure the buddy allocator works fine. This check requirement is much =
-weaker
-than `MAX_FOLIO_SIZE`, so I think `BUG_ON` should not be easily =
-triggered and
-therefore should not be a problem. For non-buddy allocator interfaces =
-(such
-as `folio_alloc_gigantic` or `cma_alloc_folio`, etc.), we need to check =
-whether
-their struct page address is aligned as required. If it is not aligned, =
-return
-failure and print relevant prompt information to remind the reason.
-
-> + 	}
-> +
-> 	pnum_begin =3D first_present_section_nr();
-> 	nid_begin =3D sparse_early_nid(__nr_to_section(pnum_begin));
->=20
-> --=20
-> 2.51.2
->=20
-
+I have no strong preference.  For the patch,
+Reviewed-by: Tzung-Bi Shih <tzungbi@kernel.org>
 
