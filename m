@@ -1,43 +1,43 @@
-Return-Path: <linux-doc+bounces-73600-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73609-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6CCHAWWJcWk1IAAAu9opvQ
-	(envelope-from <linux-doc+bounces-73600-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:20:21 +0100
+	id WIY2NgyXcWngJgAAu9opvQ
+	(envelope-from <linux-doc+bounces-73609-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 04:18:36 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDDC060D2D
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:20:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AB4861415
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 04:18:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 7F72182B0AB
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 02:18:08 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 32BA368245C
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 03:18:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C2B938A2B5;
-	Thu, 22 Jan 2026 02:18:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E7B93D1CAD;
+	Thu, 22 Jan 2026 03:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="UzUMLcCe"
+	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="j06J+bG9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973184.qiye.163.com (mail-m1973184.qiye.163.com [220.197.31.84])
+Received: from mail-m15590.qiye.163.com (mail-m15590.qiye.163.com [101.71.155.90])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2172239E7E;
-	Thu, 22 Jan 2026 02:17:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.84
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF0A33C1FD4;
+	Thu, 22 Jan 2026 03:18:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.90
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769048282; cv=none; b=ozYLLmW8IZgR+y9IPgX2XHmZLwKNosFVqPoE9xxsUk/xx2/o2vi+rTZSEZQXlryKwBM7eJ5s51eyelzSWgY5OrnerlA/SQxIGSUnq/6k2khOD2ip0NB7GVCoNadznXkvvU6U2tVmrrd1EiY0XiMoHgMX/owlI1YZvPURqlj+a2E=
+	t=1769051903; cv=none; b=Fu0VP8tkI2bzLH88KqGHi21M0mZ6vyQ1idjj7s0G9lLnDOL9EHFrl2AXAgSMoCjWQ2BAD6JR2xGBDeXYSP/3HppW3K9+scb+U+6cZdAvdJTTJJeyrJj7yRVg8QrAgaTQlV6Db4bppVvxVe8qfGmHJGdPlT/oO2znmHV/C3s6GQI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769048282; c=relaxed/simple;
-	bh=K7mpVEvFDPhR66u7epruXZEivBOPe+6yIoLoGwZ7A74=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=SpASmvhiLrL2Fo+gfXfe/FmCPsZqtcy4SZ/vr2UW2hVZJlxChjVQGOQ4EVCrR1DW+fFTS4qDEAN4mRE0T6NtB2t1zv24CwrEkX5HTpCGqRYKRMWBGPCAmTzhUox2Gga7t8QvEokPRGMB8XvGuiLml4AmS6wj528EXNxxE70GDLw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=UzUMLcCe; arc=none smtp.client-ip=220.197.31.84
+	s=arc-20240116; t=1769051903; c=relaxed/simple;
+	bh=pj5Gf7liDdqIKaP/BfzzjluqZt5UziHOPCEWulZVRZ8=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=M0eJ2CclVIG1ORd9Manz4JDJbLstPF+S6uqDTjZaVL5L/iOsJ6mM9VA6Un9ELEDeXriZMg66Ov5plWiueh+kHViUhXVH7gq++4aVT2R9yBZnwnyUrlLOWe03siCYFxoADwqsmGvZCPisE4n+pgrrNTulOjh2SYikxg/eUZt4jTs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=j06J+bG9; arc=none smtp.client-ip=101.71.155.90
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
 Received: from localhost.localdomain (unknown [58.22.7.114])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 3184fafb4;
-	Thu, 22 Jan 2026 10:02:28 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 3184fafd1;
+	Thu, 22 Jan 2026 10:02:32 +0800 (GMT+08:00)
 From: Shawn Lin <shawn.lin@rock-chips.com>
 To: Manivannan Sadhasivam <mani@kernel.org>,
 	Bjorn Helgaas <bhelgaas@google.com>
@@ -48,21 +48,21 @@ Cc: linux-rockchip@lists.infradead.org,
 	Steven Rostedt <rostedt@goodmis.org>,
 	Masami Hiramatsu <mhiramat@kernel.org>,
 	Shawn Lin <shawn.lin@rock-chips.com>
-Subject: [PATCH v4 1/3] PCI: trace: Add PCI controller LTSSM transition tracepoint
-Date: Thu, 22 Jan 2026 10:02:18 +0800
-Message-Id: <1769047340-113287-2-git-send-email-shawn.lin@rock-chips.com>
+Subject: [PATCH v4 2/3] Documentation: tracing: Add PCI controller event documentation
+Date: Thu, 22 Jan 2026 10:02:19 +0800
+Message-Id: <1769047340-113287-3-git-send-email-shawn.lin@rock-chips.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1769047340-113287-1-git-send-email-shawn.lin@rock-chips.com>
 References: <1769047340-113287-1-git-send-email-shawn.lin@rock-chips.com>
-X-HM-Tid: 0a9be37055f909cckunm8c44f6d054de9
+X-HM-Tid: 0a9be37065ba09cckunm8c44f6d054e35
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh1MSFZLH0lCGBgdS0xPGE5WFRQJFh
+	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkwYGVZNHUIYGB0aGBlMH0tWFRQJFh
 	oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
 	hVSktLVUpCS0tZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=UzUMLcCeXEQg8M2k3MAlIFoHRJ9IEqTguTIe2KKZmdQxghFCgvcpFm1dsh1tAXl35eMLgFTvKB+67wdbrum2mFKr7Ht/ohwkph1yaieZgvm0hN2uvsDTEPfpxorQWf8bz03fiq7ONwxBiUkcY9xfJaQTLpJAR4aa0tZVcKY/qJI=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
-	bh=kuecErM6mmX6yMkKPN9khMNwgG4xY73sZYSq61VEdC4=;
+	b=j06J+bG9m8u26Dh+mvv9HQIUZWD/watbt7COLqzsjr56ppyCf2KwQYO2Gl/k+QHFVM/1BQBbEOvE+biT0lu0vrdG4zS2VjhjhjJYOuES6tpXXMxh03WHxE4LvO8RgCQIfx1q37SNaGrMIawOU2wAD6dbExrSLlcCoZdv9D4Iz0g=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+	bh=1EORHdYl0hQQuji7whDcNAsRcycC/y/m3V41T1wuTxI=;
 	h=date:mime-version:subject:message-id:from;
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -79,155 +79,105 @@ X-Spamd-Result: default: False [-0.46 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73600-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73609-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[shawn.lin@rock-chips.com,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	DMARC_POLICY_ALLOW(0.00)[rock-chips.com,none];
 	DKIM_TRACE(0.00)[rock-chips.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	RCPT_COUNT_SEVEN(0.00)[9];
+	R_SPF_SOFTFAIL(0.00)[~all];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shawn.lin@rock-chips.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
 	ASN(0.00)[asn:7979, ipnet:2605:f480::/32, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rock-chips.com:email,rock-chips.com:dkim,rock-chips.com:mid,dfw.mirrors.kernel.org:helo,dfw.mirrors.kernel.org:rdns]
-X-Rspamd-Queue-Id: DDDC060D2D
+	FROM_HAS_DN(0.00)[]
+X-Rspamd-Queue-Id: 8AB4861415
 X-Rspamd-Action: no action
 
-Some platforms may provide LTSSM trace functionality, recording historical
-LTSSM state transition information. This is very useful for debugging, such
-as when certain devices cannot be recognized or link broken during test.
-Implement the pci controller tracepoint for recording LTSSM and rate.
+The available tracepoint, pcie_ltssm_state_transition, monitors the LTSSM state
+transition for debugging purpose. Add description about it.
 
 Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
 ---
 
-Changes in v4:
-- use TRACE_EVENT_FN to notify when to start and stop the tracepoint,
-  and export pci_ltssm_tp_enabled() for host drivers to use
-
+Changes in v4: None
 Changes in v3:
-- add TRACE_DEFINE_ENUM for all enums(Steven Rostedt)
+- Add toctree entry in Documentation/trace/index.rst(Bagas Sanjaya)
+- fix mismatch section underline length(Bagas Sanjaya)
+- Make example snippets in code block(Bagas Sanjaya)
+- warp context into 80 columns and fix the file name(Bjorn)
 
 Changes in v2: None
 
- drivers/pci/trace.c                   | 20 ++++++++++++
- include/linux/pci.h                   |  4 +++
- include/trace/events/pci_controller.h | 57 +++++++++++++++++++++++++++++++++++
- 3 files changed, 81 insertions(+)
- create mode 100644 include/trace/events/pci_controller.h
+ Documentation/trace/events-pci-controller.rst | 42 +++++++++++++++++++++++++++
+ Documentation/trace/index.rst                 |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 Documentation/trace/events-pci-controller.rst
 
-diff --git a/drivers/pci/trace.c b/drivers/pci/trace.c
-index cf11abc..d351a51 100644
---- a/drivers/pci/trace.c
-+++ b/drivers/pci/trace.c
-@@ -9,3 +9,23 @@
- 
- #define CREATE_TRACE_POINTS
- #include <trace/events/pci.h>
-+#include <trace/events/pci_controller.h>
-+
-+static atomic_t pcie_ltssm_tp_enabled = ATOMIC_INIT(0);
-+
-+bool pci_ltssm_tp_enabled(void)
-+{
-+	return atomic_read(&pcie_ltssm_tp_enabled) > 0;
-+}
-+EXPORT_SYMBOL(pci_ltssm_tp_enabled);
-+
-+int pci_ltssm_tp_reg(void)
-+{
-+	atomic_inc(&pcie_ltssm_tp_enabled);
-+	return 0;
-+}
-+
-+void pci_ltssm_tp_unreg(void)
-+{
-+	atomic_dec(&pcie_ltssm_tp_enabled);
-+}
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index e7cb527..ac25a3e 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -2770,6 +2770,10 @@ static inline struct eeh_dev *pci_dev_to_eeh_dev(struct pci_dev *pdev)
- }
- #endif
- 
-+#ifdef CONFIG_TRACING
-+bool pci_ltssm_tp_enabled(void);
-+#endif
-+
- void pci_add_dma_alias(struct pci_dev *dev, u8 devfn_from, unsigned nr_devfns);
- bool pci_devs_are_dma_aliases(struct pci_dev *dev1, struct pci_dev *dev2);
- int pci_for_each_dma_alias(struct pci_dev *pdev,
-diff --git a/include/trace/events/pci_controller.h b/include/trace/events/pci_controller.h
+diff --git a/Documentation/trace/events-pci-controller.rst b/Documentation/trace/events-pci-controller.rst
 new file mode 100644
-index 0000000..db4a960
+index 0000000..cb9f715
 --- /dev/null
-+++ b/include/trace/events/pci_controller.h
-@@ -0,0 +1,57 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#undef TRACE_SYSTEM
-+#define TRACE_SYSTEM pci_controller
++++ b/Documentation/trace/events-pci-controller.rst
+@@ -0,0 +1,42 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
-+#if !defined(_TRACE_HW_EVENT_PCI_CONTROLLER_H) || defined(TRACE_HEADER_MULTI_READ)
-+#define _TRACE_HW_EVENT_PCI_CONTROLLER_H
++======================================
++Subsystem Trace Points: PCI Controller
++======================================
 +
-+#include <uapi/linux/pci_regs.h>
-+#include <linux/tracepoint.h>
++Overview
++========
++The PCI controller tracing system provides tracepoints to monitor controller
++level information for debugging purpose. The events normally show up here:
 +
-+TRACE_DEFINE_ENUM(PCIE_SPEED_2_5GT);
-+TRACE_DEFINE_ENUM(PCIE_SPEED_5_0GT);
-+TRACE_DEFINE_ENUM(PCIE_SPEED_8_0GT);
-+TRACE_DEFINE_ENUM(PCIE_SPEED_16_0GT);
-+TRACE_DEFINE_ENUM(PCIE_SPEED_32_0GT);
-+TRACE_DEFINE_ENUM(PCIE_SPEED_64_0GT);
-+TRACE_DEFINE_ENUM(PCI_SPEED_UNKNOWN);
++	/sys/kernel/tracing/events/pci_controller
 +
-+extern int pci_ltssm_tp_reg(void);
-+extern void pci_ltssm_tp_unreg(void);
++Cf. include/trace/events/pci_controller.h for the events definitions.
 +
-+TRACE_EVENT_FN(pcie_ltssm_state_transition,
-+	TP_PROTO(const char *dev_name, const char *state, u32 rate),
-+	TP_ARGS(dev_name, state, rate),
++Available Tracepoints
++=====================
 +
-+	TP_STRUCT__entry(
-+		__string(dev_name, dev_name)
-+		__string(state, state)
-+		__field(u32, rate)
-+	),
++pcie_ltssm_state_transition
++---------------------------
 +
-+	TP_fast_assign(
-+		__assign_str(dev_name);
-+		__assign_str(state);
-+		__entry->rate = rate;
-+	),
++Monitors PCIe LTSSM state transition including state and rate information
++::
 +
-+	TP_printk("dev: %s state: %s rate: %s",
-+		__get_str(dev_name), __get_str(state),
-+		__print_symbolic(__entry->rate,
-+			{ PCIE_SPEED_2_5GT,  "2.5 GT/s" },
-+			{ PCIE_SPEED_5_0GT,  "5.0 GT/s" },
-+			{ PCIE_SPEED_8_0GT,  "8.0 GT/s" },
-+			{ PCIE_SPEED_16_0GT, "16.0 GT/s" },
-+			{ PCIE_SPEED_32_0GT, "32.0 GT/s" },
-+			{ PCIE_SPEED_64_0GT, "64.0 GT/s" },
-+			{ PCI_SPEED_UNKNOWN, "Unknown" }
-+		)
-+	),
++    pcie_ltssm_state_transition  "dev: %s state: %s rate: %s\n"
 +
-+	pci_ltssm_tp_reg, pci_ltssm_tp_unreg
-+);
++**Parameters**:
 +
-+#endif /* _TRACE_HW_EVENT_PCI_CONTROLLER_H */
++* ``dev`` - PCIe controller instance
++* ``state`` - PCIe LTSSM state
++* ``rate`` - PCIe date rate
 +
-+/* This part must be outside protection */
-+#include <trace/define_trace.h>
++**Example Usage**:
++
++.. code-block:: shell
++
++    # Enable the tracepoint
++    echo 1 > /sys/kernel/debug/tracing/events/pci_controller/pcie_ltssm_state_transition/enable
++
++    # Monitor events (the following output is generated when a device is linking)
++    cat /sys/kernel/debug/tracing/trace_pipe
++       kworker/0:0-9       [000] .....     5.600221: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_EQ2 rate: 8.0 GT/s
+diff --git a/Documentation/trace/index.rst b/Documentation/trace/index.rst
+index 0a40bfa..6101317 100644
+--- a/Documentation/trace/index.rst
++++ b/Documentation/trace/index.rst
+@@ -55,6 +55,7 @@ applications.
+    events-nmi
+    events-msr
+    events-pci
++   events-pci-controller
+    boottime-trace
+    histogram
+    histogram-design
 -- 
 2.7.4
 
