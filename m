@@ -1,169 +1,143 @@
-Return-Path: <linux-doc+bounces-73643-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73646-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QMh/NjD4cWmvZwAAu9opvQ
-	(envelope-from <linux-doc+bounces-73643-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 11:13:04 +0100
+	id 4ETAEF/9cWmvZwAAu9opvQ
+	(envelope-from <linux-doc+bounces-73646-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 11:35:11 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85E5C65127
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 11:13:04 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id D8CBB65505
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 11:35:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 0D80D668788
-	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 10:03:51 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 159E98810F0
+	for <lists+linux-doc@lfdr.de>; Thu, 22 Jan 2026 10:27:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0E2D337BA0;
-	Thu, 22 Jan 2026 10:03:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A14740FDAF;
+	Thu, 22 Jan 2026 10:24:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BpS+5mmu"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="GrjO1EE8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 971F63101C2;
-	Thu, 22 Jan 2026 10:03:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 520163D34A6;
+	Thu, 22 Jan 2026 10:24:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769076226; cv=none; b=LhljpbQ3DlV2vF/Snx5Nn8gwVEA742sQjzWVwebuP7UW526UeLIq7+7nUJWAufGGJertxnn8vpVdlgk82KLhe6uOkciM87XM2MyT2RvOCzYfARYbdseGJYQnCNJW4T7ImM6RsFpaETnU/CnYAB06EpEmMLz54vXEJCziq9yvlHg=
+	t=1769077444; cv=none; b=eMVTGK3M6SJEnmGnCe7c9D939soxbygIjEPfzB+lkVMJyyFXANF8O+46/mAJH+G+RDyZ+sSX1J823zF7bGY6a2vdj7u821bCtsx8d8zG9yZFxTTXK5m+EmaP3gxsFoSwR5IIr33Phm9bxIw2KN0VcxEPLBOX9Ih+T0irX6jQ0iw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769076226; c=relaxed/simple;
-	bh=yL/NrddG1CawfKhoy4ZH1/4SsxmbBqbip9rUrRWJ+qM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YkGooIUBghGYSXWwU3nz+gSCgxr1vDk1uObdLHUQF5r2zbBhqitgYg7YOk90q0qgWcwRUJHDQ88GoERoT389y6wGrF4EvrINnHXay54owbE0A7RrClaUrsOJ9sJxZSP/M/bjRUP63ixR/v2Lmhc/4Tll8AKiyo31DMrM+ojc3ZM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BpS+5mmu; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AFD1C116C6;
-	Thu, 22 Jan 2026 10:03:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769076226;
-	bh=yL/NrddG1CawfKhoy4ZH1/4SsxmbBqbip9rUrRWJ+qM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=BpS+5mmuQZCe173jMQU+eRlim0YQxsGfPb0rhy4QSByTDjeNk8vcjdoLnBsMQNvay
-	 14sD4Tx+hYBzYuiyNWBJN+FO/l/8r5YhCtGPPaEHbFbNv/qJIlE1d3HZGTdnPdhmg5
-	 j2I3/qxwfyTlw5rqZ5Zg2Ypq5sspCPJkG9zibheIhO0NyR4janbnDOFA89yShhAnmI
-	 7kj42mLTLdODw95p3T+NQnWiX46ZgsffM1lsx39s3oj7TGKSGNlHg5SujnnMZUFKJe
-	 mxtWDvaFp8RXaYicrJb/h09nkogt17BpUo6tISRX0nO2e9QjaZ7VlIVfXqE9SoNJQI
-	 opFU4u9VTB2vg==
-Date: Thu, 22 Jan 2026 12:03:35 +0200
-From: Mike Rapoport <rppt@kernel.org>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: david@redhat.com, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	tglx@linutronix.de, andersson@kernel.org, pmladek@suse.com,
-	rdunlap@infradead.org, corbet@lwn.net, mhocko@suse.com,
-	tudor.ambarus@linaro.org, mukesh.ojha@oss.qualcomm.com,
-	linux-arm-kernel@lists.infradead.org,
-	linux-hardening@vger.kernel.org, jonechou@google.com,
-	rostedt@goodmis.org, linux-doc@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-	linux-arch@vger.kernel.org, tony.luck@intel.com, kees@kernel.org
-Subject: Re: [PATCH 18/26] mm/memblock: Add MEMBLOCK_INSPECT flag
-Message-ID: <aXH190NDVl7JAl7A@kernel.org>
-References: <20251119154427.1033475-1-eugen.hristev@linaro.org>
- <20251119154427.1033475-19-eugen.hristev@linaro.org>
- <aVImIneFgOngYdSn@kernel.org>
- <4b8953ac-567b-4d68-9c25-72a69afdf1b3@linaro.org>
- <aVlsqdgXSBLIE9Xi@kernel.org>
- <ae85df64-b6b7-43d7-ba50-9c0525481299@linaro.org>
+	s=arc-20240116; t=1769077444; c=relaxed/simple;
+	bh=uTiTQ01g0GllJB8U43pVQU4kXZOWEcw7b3TRyEuxnPg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=E82URWHRPTuiy/DXjLXl+Opo97C02Q7Lso5AdH7YDTe4h6hYKcr+HewdBhHmdZuXWUi4kh/hZir+9LrQxTSqOk1D1RMGBpG3vGD8qEAAufV9sWFklRgZK8+gAM2PsceV1dG+leTumNTNxHn8HFPkiMyn9ZaakKvJO1wfY6gOOaQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=GrjO1EE8; arc=none smtp.client-ip=192.198.163.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1769077442; x=1800613442;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=uTiTQ01g0GllJB8U43pVQU4kXZOWEcw7b3TRyEuxnPg=;
+  b=GrjO1EE8zCA7AB27jP2c6n3rnC1lYLpVz/EgsGnEox44IvPBVdeJmymn
+   42ELfkH+ixewzSKuXfHrvK867fI574EUfRCxONz7C0JfLXJO+k8Oj+B5c
+   mTp6FXFNAPx/sKL+Xuf7jHUX7RNcKRDQ4yT2IFFUGEURpDnh0T3wggN3p
+   u24o8lqFt2gAAXCa6BIkax7kLjtTcVp2Ae2SOZ/2/UhQvQlxJaBMFA99a
+   ZBF+rkF/HmhVnkFx4OZZF+smeZfGbWyNTe5M5GfObVoi2NIXtlhWEJ+iY
+   +yDdCI5EE1GZ+UIegE3oAXLI2yAX51fdnkslKOxR1puqdGeVjSTZZMMQe
+   g==;
+X-CSE-ConnectionGUID: DsGGEN/ZR4mdQXNLAl8QOQ==
+X-CSE-MsgGUID: rrosdSLSQrq7VxHUaVURPg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11678"; a="95790490"
+X-IronPort-AV: E=Sophos;i="6.21,246,1763452800"; 
+   d="scan'208";a="95790490"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jan 2026 02:23:59 -0800
+X-CSE-ConnectionGUID: /tnuQFeSQb2tjbtePBW/Dw==
+X-CSE-MsgGUID: ncYWQdrBQ3eVtEiWBfpDkw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,246,1763452800"; 
+   d="scan'208";a="206958324"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by fmviesa008.fm.intel.com with ESMTP; 22 Jan 2026 02:23:56 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1003)
+	id B7E9295; Thu, 22 Jan 2026 11:23:55 +0100 (CET)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Jiri Slaby (SUSE)" <jirislaby@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-serial@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Tony Lindgren <tony@atomide.com>
+Subject: [PATCH v1 0/2] serial: 8250: Remove highly customised deprecated interface
+Date: Thu, 22 Jan 2026 11:19:46 +0100
+Message-ID: <20260122102349.2395423-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ae85df64-b6b7-43d7-ba50-9c0525481299@linaro.org>
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.96 / 15.00];
+X-Spamd-Result: default: False [-0.46 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
-	TAGGED_FROM(0.00)[bounces-73643-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[intel.com:+];
+	TAGGED_FROM(0.00)[bounces-73646-lists,linux-doc=lfdr.de];
+	DMARC_POLICY_ALLOW(0.00)[intel.com,none];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	R_SPF_SOFTFAIL(0.00)[~all:c];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rppt@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:7979, ipnet:142.0.200.0/24, country:US];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:7979, ipnet:2a01:60a::/32, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ams.mirrors.kernel.org:helo,ams.mirrors.kernel.org:rdns]
-X-Rspamd-Queue-Id: 85E5C65127
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	R_SPF_SOFTFAIL(0.00)[~all:c];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,dfw.mirrors.kernel.org:helo,dfw.mirrors.kernel.org:rdns,linux.intel.com:mid]
+X-Rspamd-Queue-Id: D8CBB65505
 X-Rspamd-Action: no action
 
-On Tue, Jan 20, 2026 at 05:13:43PM +0200, Eugen Hristev wrote:
-> 
-> 
-> On 1/3/26 21:23, Mike Rapoport wrote:
-> > On Sat, Jan 03, 2026 at 08:36:40AM +0200, Eugen Hristev wrote:
-> >>
-> >>
-> >> On 12/29/25 08:56, Mike Rapoport wrote:
-> >>> Hi Eugen,
-> >>>
-> >>> On Wed, Nov 19, 2025 at 05:44:19PM +0200, Eugen Hristev wrote:
-> >>>> This memblock flag indicates that a specific block is registered
-> >>>> into an inspection table.
-> >>>> The block can be marked for inspection using memblock_mark_inspect()
-> >>>> and cleared with memblock_clear_inspect()
-> >>>
-> >>> Can you explain why memblock should treat memory registered for inspection
-> >>> differently?
-> >>
-> >> It should not, at a first glance.
-> >>
-> >> The purpose of the flag is to let memblock be aware of it.
-> >> The flag is there to have a "memblock way" of registering the memory,
-> >> which inside memblock , it can translate to a meminspect way of
-> >> registering the memory. It's just an extra layer on top of meminspect.
-> >> With this, it would be avoided to call meminspect all over the places it
-> >> would be required, but rather use the memblock API.
-> > 
-> > memblock APIs are not available after boot on many architectures, most
-> > notable being x86.
-> > 
-> > But regardless, I can't say I understand why using memblock APIs for
-> > meminspect is better than using meminspect directly.
-> > I'd imagine that using meminspect register APIs would actually make it more
-> > consistent and it would be easier to identify what memory is registered
-> > with meminspect.
-> > 
-> > In the end, memblock_alloc*() returns dynamically allocated memory, just
-> > like kmalloc(), the difference is that memblock is active very early at
-> > boot and disappears after core MM initialization.
-> 
-> Hi Mike,
-> 
-> Thanks for sharing your opinion.
-> 
-> David, what do you think, does it make sense to have this flag or we can
-> ditch it and use meminspect directly ?
-> 
-> Also, for some memory blocks, they do not disappear ever, e.g. the
-> printk log buffer, it's allocated early and never freed, so it's
-> required to have some memblocks marked for inspection.
+The custom divisor interface not only old and deprecated, it's too much
+driver-dependent. For the user it's not easy to understand what to supply
+as a value (usually encoded) via that interface. On top of it, there is
+an existing BOTHER mechanism that allows to do the same and more without
+any tribal knowledge.
 
-The allocated memory does not disappear, the memblock metadata does.
+Remove highly customised deprecated interface to set baud rates.
 
-> Eugen
+Note, the "standard" custom_divisor that is used as a plain value
+for "quot" is still left and may be used by the respective drivers
+including but not limited to 8250.
+
+Andy Shevchenko (2):
+  serial: 8250_omap: Remove custom deprecated baud setting routine
+  serial: 8250_pci: Remove custom deprecated baud setting routine
+
+ Documentation/misc-devices/oxsemi-tornado.rst | 26 +-----
+ drivers/tty/serial/8250/8250_omap.c           | 16 ----
+ drivers/tty/serial/8250/8250_pci.c            | 85 ++++++++-----------
+ 3 files changed, 38 insertions(+), 89 deletions(-)
 
 -- 
-Sincerely yours,
-Mike.
+2.50.1
+
 
