@@ -1,163 +1,160 @@
-Return-Path: <linux-doc+bounces-73830-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73832-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2A5cEqWZc2nNxQAAu9opvQ
-	(envelope-from <linux-doc+bounces-73830-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 16:54:13 +0100
+	id +KXKDw6gc2lqxgAAu9opvQ
+	(envelope-from <linux-doc+bounces-73832-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 17:21:34 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1A8078053
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 16:54:12 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2F2F78673
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 17:21:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2B7CE3029A4B
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 15:54:04 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 60B91308FF85
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 16:15:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 534C831D735;
-	Fri, 23 Jan 2026 15:53:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FD2831281B;
+	Fri, 23 Jan 2026 16:14:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="t7vr+Fos"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="m8sS4H2I"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D6293101A2;
-	Fri, 23 Jan 2026 15:53:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 385E130EF9D
+	for <linux-doc@vger.kernel.org>; Fri, 23 Jan 2026 16:14:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769183639; cv=none; b=b9iiKBjcp/uSqS9mt5PLW1S9ajTdxc6p+EtlPciWl1/gTCFxzoL0Rph4GRxzPzWJ8yKLjdxbfsNlcZtxBaQqF3A64Xg+Bjw0Ly0VroG9R4X7Iu6D4P6uCgp1Dq+WyrKuPULc9iNnRSrose6Wqwkj8o3i6B1jc/yiqmDwGBIdzY4=
+	t=1769184885; cv=none; b=K7fSeYUQOdnZoor2sNAn+YYjgWkHAgjn9UfRTlNct1hfAfkThLG8sJHkeXfioqIj/gS5fxhoZLNNvn863wf+dDKweEUm0Ls0nCW7ItDGLu6qzMN0fPGRewfAVhfeaP3wMXS+ywlD1KtSnzVW5S4kojU25bPPtEiPJK6hpt2w5GA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769183639; c=relaxed/simple;
-	bh=kYnBn0hPZJrXUXTU31Ix0gevpfaNxn8AINHbROFMUOE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=FR+9DIkgW8iY7ic8D6lmbDH/a75c/VPNcSKo3wOJRn9fInfhOlzOPO/SWilT7vNfDTuVojm69WhynWITXTnLPYxbBP6d9zeb7vS0bjgA/eGj+EYl0TFKJMYvlqpe/dq8MtqdNguu8iqvNXX4o7MOqN2ONZfeu1AFEmSDCfN1lu4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=t7vr+Fos; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D54C3C19423;
-	Fri, 23 Jan 2026 15:53:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769183638;
-	bh=kYnBn0hPZJrXUXTU31Ix0gevpfaNxn8AINHbROFMUOE=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=t7vr+FosHSGaXpKKxi/Mi2wHHwSGguT/fFQzm376tC8YoAPs/pVJoT2nMfLF+++sZ
-	 nkFiwOtW1wO2mHmvNyCyn6PFCB6gctMFHQ1JvCtjgYK6q198G+HjVJl1eKXKPNHjBx
-	 HdQqFWoPKZzlLHPKPWPW42HQEoSfh6Sq9BvGEBagWt4BTWmCBRnWFZxDTIrBvcHWBl
-	 NJyFn4uOVNyI93C3/RSxijva8P8PR3srXOrQTOaGExp3KG5Abz+v/v6Ug5v2zbHKuf
-	 QklzMqa81bE0tQovHgF6qy/U2iAs18Uyycu4YWXXR6OcLzwmxRDIGJMYNRbrf5uhy8
-	 inC5xF0M1rI2A==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA09FD74EED;
-	Fri, 23 Jan 2026 15:53:58 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Fri, 23 Jan 2026 15:53:13 +0000
-Subject: [PATCH v5 8/8] Documentation: ABI: testing: add common ABI file
- for iio/frequency
+	s=arc-20240116; t=1769184885; c=relaxed/simple;
+	bh=04fVH+Ybh/xOhNmHGiUOXfPQ1KtKmvbSXs3LJi9XWQU=;
+	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=c7qEnYM/xWpX7kyb533dMDJfEAZ4pb2Ij7DKq552mmmb7bgi/gHcm16jdTor2xDWLt3XfMzUJqeYeIcD0Acy0qXvNdjXeT9Hmu1LR29v6RBrsYL+ihwkzP+lnahvZlGQyHCKlv/y3OxmgaPbqO2DF11EFUz1PHSwg9xwyLgkaD8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=m8sS4H2I; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47ee301a06aso27475195e9.0
+        for <linux-doc@vger.kernel.org>; Fri, 23 Jan 2026 08:14:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1769184882; x=1769789682; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8ZZlt0wXGEeAJMNmrtm9rEmgb+VoKNl+2Pu9hilzxa8=;
+        b=m8sS4H2IhkURVj7K4opc9WYKWxtHLGt7gxdtFfE2zOdBz9tEel7HgvKV18ekgN9cae
+         zNLM767VvznXCdDiQfDOZiJ9ckLShSHeFM6psdkyyBT6Ezp2ziiLCjp8vwD1d+fzH6ux
+         yMh2qd8et6Eyyk6L5b67JFD4ULBh5nu9bV2C8sI7FqO4Z3U2E2GikkGa1QAvQKxswpFN
+         KKuG2TnwAZZKxOtrqLVuUMXKAMAOtdc0CYcSe5n0zP0RH54telVzIZds/5p/Pw0o9Zp0
+         feRrctfNp3aR93/FLOUqAxLgcKshUgB7zsOhjn0vq+MPtvUPlWsGRtOkMbkB3fUMV9N1
+         +pLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769184882; x=1769789682;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8ZZlt0wXGEeAJMNmrtm9rEmgb+VoKNl+2Pu9hilzxa8=;
+        b=ZI0A9fAzHBiP7ACD/5C+4QrgGfhhSSFapw6efyGW+EPBFZZEfQMcKDIKMVygfWMLJs
+         OCgglWmImYmtiOIeqszaB97pKOhUYeR8XTr5T36gPTRrnLeR5A26/2je5Ml8MQiBtqZK
+         yiDJG/H9lL5JHd9OOAHMRVINNCCcgyf572QxHPoBIVw870TMs7rJSBegqTBZZL12tY2x
+         CdKz1MNvXbrpUHx8Y4qGRDI85vMIz6TjgE0xP7Xt6F+pR1znBCCcR+c3rOhm+E9xiiLE
+         eAxGM0fI/S4THkV+vvwz682pSH6djxs0UtO4Loe3mROISV/SU6HExSQSkAopPeS9Z7qQ
+         Q9jg==
+X-Forwarded-Encrypted: i=1; AJvYcCUwR/HH1V6UWdW2MZKXUKTEpvSMFOUm1yaeCBjGxUMACoCWBtbOKA5QzuTaWLMdx/uSrbiiSpb5KLM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyN44rvJL0fj/zO/BGbNdM9oE62NFKfcHSZrGYaHKFqdE7UtJtK
+	YWKF6pmbdFLgCdHlzYGaIGOTD5kQZSMOOetUbJqojELR0Jv5CxnwOtEC
+X-Gm-Gg: AZuq6aJDBaWOrsVej3JX18sRroBQcN0bNwj4iAcS+EpQg5kyr4Evt4d2qmECPhxC5BN
+	TaH7kHT6hcUc1kN6k0ophpNy0fmE3N23KYwN1V8WLreKcEVhAS0tlQXBGD1WIu2FdY+HKIlJGsa
+	qcTmTK+uOeHb3dtMcNg9OF0tXGsz0vEFVVnFy7QdF5YKbOPUxIpdKy3t/8/8kuQbXHA49RT6vO6
+	tjqX55H8ShhptvdS5uFfXxcHnmw2IrENYmjZtFM5tPuYAX1s3EFN4HkJsANnIN6MEgFM6q2iUK7
+	gmo3fjG9d2NsEOdnBOJk2Av9SYM+Qd99MiAPiWh3ds+Zyist23QS8P9pwuc5WyF8uTUpiTzcWOQ
+	dStPrYDXoXQKpXQZAF4vGWKz2corpyQ2+PzsmqXQJhWg57YiSSPcHCqRWmWTdKYY/IN7D0a+hXW
+	1TA9bw/jGi5LyyeLoc17DxVi5JG+7DIgO4ZVk0xzIrwzG+RhI6PD2rw/A+BAztTyKLUykvS8gAA
+	Ank
+X-Received: by 2002:a05:600c:8b6e:b0:480:462e:d640 with SMTP id 5b1f17b1804b1-4804c9cfef1mr59266115e9.36.1769184881426;
+        Fri, 23 Jan 2026 08:14:41 -0800 (PST)
+Received: from RDEALENC-L01.ad.analog.com ([24.206.116.131])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbe1fb8sm24330765e9.20.2026.01.23.08.14.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 Jan 2026 08:14:40 -0800 (PST)
+From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
+X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
+Date: Fri, 23 Jan 2026 16:14:33 +0000
+To: rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org, 
+	linux-iio@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+	David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Subject: Re: [PATCH v5 2/8] iio: core: add fixed point parsing with 64-bit
+ parts
+Message-ID: <3rtccxcqpxkwq54jjbl7l6rq3xm3ibsnlh5s7hiymo4okir7dg@ky43houswpjg>
+References: <20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com>
+ <20260123-adf41513-iio-driver-v5-2-2dce812a2dda@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260123-adf41513-iio-driver-v5-8-2dce812a2dda@analog.com>
-References: <20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com>
-In-Reply-To: <20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com>
-To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1769183636; l=1731;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=67mGOWaw3wet6Ddy/uiN+nSBqKV1DJFYXkAQQXBO/tY=;
- b=sY9hFkMvphekFdXeCxn6OC+rdNYYSYMjqKaoJPGl1x4jhVrFUJsz0W+oMP63vw6d6PqprB0o4
- VRiABngTpexAYGbjNOkFOC4fD1ydbzYxtZdrOAv7b/QQwqrvHKDkWSC
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260123-adf41513-iio-driver-v5-2-2dce812a2dda@analog.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73830-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73832-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,analog.com:email,analog.com:replyto,analog.com:url,analog.com:mid]
-X-Rspamd-Queue-Id: F1A8078053
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: B2F2F78673
 X-Rspamd-Action: no action
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On 26/01/23 03:53PM, Rodrigo Alencar via B4 Relay wrote:
+> From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+> 
+> Add iio_str_to_fixpoint64() function that leverages simple_strtoull()
+> to parse numbers from a string.
+> A helper function __iio_str_to_fixpoint64() replaces
+> __iio_str_to_fixpoint() implementation, extending its usage for
+> 64-bit fixed-point parsing.
+> 
+> Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Add ABI documentation file for PLL/DDS devices with frequency_resolution
-sysfs entry attribute used by ADF4350 and ADF41513.
+...
+> +static int __iio_str_to_fixpoint64(const char *str, u64 fract_mult,
+> +				   s64 *integer, s64 *fract, bool scale_db)
+> +{
+> +	u64 i = 0, f = 0;
+> +	char *end;
+> +	int digit_count, precision = ffs(fract_mult);
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/ABI/testing/sysfs-bus-iio-frequency | 11 +++++++++++
- MAINTAINERS                                       |  1 +
- 2 files changed, 12 insertions(+)
+I've just noted that I should have used ffs64() here. 
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-new file mode 100644
-index 000000000000..1ce8ae578fd6
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-@@ -0,0 +1,11 @@
-+What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
-+KernelVersion:	6.20
-+Contact:	linux-iio@vger.kernel.org
-+Description:
-+		Stores channel Y frequency resolution/channel spacing in Hz for PLL
-+		devices. The given value directly influences the operating mode when
-+		fractional-N synthesis is required, as it derives values for
-+		configurable modulus parameters used in the calculation of the output
-+		frequency. It is assumed that the algorithm that is used to compute
-+		the various dividers, is able to generate proper values for multiples
-+		of channel spacing.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b9cc8ddcd624..ed39a275b7f6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1623,6 +1623,7 @@ M:	Rodrigo Alencar <rodrigo.alencar@analog.com>
- L:	linux-iio@vger.kernel.org
- S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
-+F:	Documentation/ABI/testing/sysfs-bus-iio-frequency
- F:	Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
- F:	Documentation/iio/adf41513.rst
- F:	drivers/iio/frequency/adf41513.c
+kind regards,
 
--- 
-2.43.0
-
-
+Rodrigo Alencar
 
