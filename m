@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-73769-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73767-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SJhlN/f/cmmrrgAAu9opvQ
-	(envelope-from <linux-doc+bounces-73769-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 05:58:31 +0100
+	id oAwCH9j/cmmrrgAAu9opvQ
+	(envelope-from <linux-doc+bounces-73767-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 05:58:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81D6E7059C
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 05:58:31 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D1F570577
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 05:57:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 60C0C301A737
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 04:58:04 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B1A4A300874A
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Jan 2026 04:57:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B453B396B68;
-	Fri, 23 Jan 2026 04:58:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6E5B395DA4;
+	Fri, 23 Jan 2026 04:57:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="COIiW0g7"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="K11H9JBe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f196.google.com (mail-yw1-f196.google.com [209.85.128.196])
+Received: from mail-yw1-f195.google.com (mail-yw1-f195.google.com [209.85.128.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1049E38F95D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15E5139524F
 	for <linux-doc@vger.kernel.org>; Fri, 23 Jan 2026 04:57:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.196
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769144280; cv=none; b=qRwjGT0+BiLESzuG4VU8idhJwFw1Z8d0aGojTcuPN4fTH8WsGmRbPggFR++D8+VzgQV9kgSeuZG7BljM+/5ydLDthkviaWtlOmhWgycsO5UKP65cdH9CJoXNiJ+QtB8WkEazbbP/4ZBUIlTAIw89tQ0/ddMbaztSt/Rfy8s2zQE=
+	t=1769144277; cv=none; b=GTEnIEUFzGbwtQ+o3OrT0S/q8GXWU0VwHnkoa6EApOWpO1gOGWM47xXfAhIlgEtucZwnriN2k3u8PhO66nr7wTO5/uxScuyUPyD3uF7p7bN2b/K1ZYmAf9Er7nsQQuj63zmZ1Ibt4DVfpvJDpVDmfml0DVZzrlbnyKThBXHbhR0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769144280; c=relaxed/simple;
-	bh=+AOWSwl3iOQaWr6u6EF8dNnZr3QA8X8HEruWVBZRH4w=;
+	s=arc-20240116; t=1769144277; c=relaxed/simple;
+	bh=REwnbFI5Ih419YIeGbeMhAV79Y8hP0BScdx6C3Cv9Aw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=sneSL6GA9eAQNT8h5I1cPTS0wmjP6w2nbf31G4rPWj5Yx74sXoAfpsqEsi7NxlTNz/3fMsYpF2SxFEVKpV3pE2v9jIB/gFwyUaQuD0ypqAfrUXbSc4cAZVSnN1JlhvfbrsON60Cgj86/uo7e5/uKLVr69JIOYOPkBy1qBK57Z7o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=COIiW0g7; arc=none smtp.client-ip=209.85.128.196
+	 MIME-Version; b=d1QBMAnV2Jaw4pVl/ACYy9CpYvr5S1uBaQAv+CQTJwG/3p4Ca2NytCusCPuspXaO3S/ITY55w1gOMnzOrKgM0IBXfYLgnGM8Q64dginKDMUnKyAPE9UF/S8Ha9ZNX4hp/tu/iuHgw4ehZPKmrCNJQQrmv+xnMPtWYUWUCtLxn9M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=K11H9JBe; arc=none smtp.client-ip=209.85.128.195
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yw1-f196.google.com with SMTP id 00721157ae682-79430ef54c3so13882157b3.2
+Received: by mail-yw1-f195.google.com with SMTP id 00721157ae682-78fba1a1b1eso32223797b3.1
         for <linux-doc@vger.kernel.org>; Thu, 22 Jan 2026 20:57:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769144266; x=1769749066; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1769144267; x=1769749067; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1D+wUgUp3AIJjrSF87TlviSGACs4vs0t8FpLdk/Qkks=;
-        b=COIiW0g7pGS9dNwXAzI+Oq2ApeTYthU2XpwZvvQk8zQxm6hIgrdmjgh6mdL6EQ0bqR
-         No7LPCSxxlvUobxqfIxx5XLQh2LF9L29E9cqRiiNI7iQYHOvb56UUkYq6p7aKWAXrFCE
-         CMkCL813Ku8v0Lyn9AI92QW+FNNgiUb3b+KOAv2a5JTQKxSGNdBBdyZZvuG+EKWUk7EN
-         dTLOR1PtDOpLCbSUVjeltLWLdHjY1TK8Uvpay+pMwaTTViylDS8VCmw3TUcCwEDUGTTx
-         5iCe8yqSjEvlzP5qZ/ppdSAN7XvgmoC1gvawEGNwaCjhNfZrgjaknk22aFAB7vbRn+/U
-         MTmQ==
+        bh=W2Hj3YMXyp6jb16WaA5iRCtpYS8eji7c2VCvrHXWtMA=;
+        b=K11H9JBeVojbyntf6oi0fQt29BeZMje0EkD0VBnlE8yz+ZAwRXCdYrrXxbyi3itefJ
+         5BRrQKFuvK6dtXEzYaDw3fGvvh/4cgptfHiiLM/604rXywivNDHwDQLhaIH8V1Wqi/9t
+         eDg+qng07YeYfkerfVImV4KqNefkoQNa12/4zanX1jvTajKkS2En6GPMLlnbXkmNb7gl
+         WhRQf2meFqXK+Mw3q2LU7XxksjK4hQgpgu5UDIC1aI07ORxrwFBOlLnLRuqQ24JS2WZo
+         VsY5hQ7rpbiBaVFMu+kP1TTHyjN4bWtoE898VTeQI5sAE1yuO0ZmOjZttbBjwDknCPzW
+         Uk5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769144266; x=1769749066;
+        d=1e100.net; s=20230601; t=1769144267; x=1769749067;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=1D+wUgUp3AIJjrSF87TlviSGACs4vs0t8FpLdk/Qkks=;
-        b=pbirdsXnIy4VAaLz58/7s/CGPXhZ4MJhOjQ5wLZnhTwR1nHrVuBaDf8L8hQwEPwgIl
-         nnOISa03ta7VF6zCnneTfNJ7egeWIFwQhMel4IM2YbwNmwBHOup8QXJbIYVtNf76ib8x
-         uMXlzXU8lS4lYP/XHuyo6AEO+rO2CHGKwQ50aSlDFIv05GNVC1FU0AR9yf8MQnFnwAq4
-         GzlZPIGX+eyHcq2lb8uQRO5CC3HsXQRvdSlOBZsIpDDcqyX2YbuaPD5z3ad4L8tuviST
-         NoGIEXrIjqFDenwkemTUkjoBndcGvwBARRNB6wh44zAHkdgAfSQN1ASjfQWYr0hPCds5
-         n+fQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVTiFU8eV4ceWUTDKvFt9+ox4FARo5xIbs61W0zsBDJaIUytf8P97adDGbyTOwG/66cV9/umkppeMc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx5gjFoOwuGDZs5Iz86M8NaYbfJWUEpRNEcrCMdfE+x9cQe3apJ
-	YmslEoyqcRSjtdMDvZh74yPELVKd/XWbMxSqkLpq2eWSEEOa6ncv6cTYbgDokLc=
-X-Gm-Gg: AZuq6aI5NJl2/nN2D2+9k/wmlj0zFQPFAu+F+I8scPmmZSHVcBt2hIlw8B9YfCyKiaY
-	FQOFLaKDFtw95IoWvWSaZhBwnQNXQA8C/1SMHu1C2sM7Dz1X3dy7F6h4RLto2McLFVY8mInUN6q
-	yNhDLD6GMta2XIBbotMojIvpYKMMx57DGrNbl7eNcTJ7HgnhExLszkGXQRJh17Lt4J0Ywi8d2Z/
-	xRpW6wtM6Z8Z7D36mckH8pV+6S7yTCJrLN67mkO2n6CfYkM67TPF2VEB/ySnY3gxJJ3urSaHaF5
-	QaZnszupjriNrDY80TrmxY/vbA1qn6trwwrNaGiH5xlWSDcrIL7Qc2+EhVHe91LK+dBlNlpfUuH
-	si4UVnMyIm2iRT8u4T18zcXSb8tG0y6IzBNIihLK9GvEZl87r4ptjm4x4/L7dPuFRxsH9RukVij
-	NXzMMhYCi1uQtZFuRL9zEAnVy271xJ6ifdJb+hZDmNwgUbbTO5DXLmRdNbhJmi1Q==
-X-Received: by 2002:a05:690c:630a:b0:793:c850:9e05 with SMTP id 00721157ae682-79439900187mr15750197b3.28.1769144265778;
-        Thu, 22 Jan 2026 20:57:45 -0800 (PST)
+        bh=W2Hj3YMXyp6jb16WaA5iRCtpYS8eji7c2VCvrHXWtMA=;
+        b=wTnISMNTC+Jmp1ZlDEHhjBiH3DYPg1ZtE8C3/AsUwWgOYKjYOCiYzClFLNYMCqBIjN
+         TVSNuXD7dmQg3vwu4KBaRnDIylYx7VVShCWl/lmpbwv0vDfPdkSQGS6GL8A/EeiAq4IN
+         ztV/T1vr9XHrP1XB5Y9Qf5LxnsVeR8wBv9/DrzKRw0HWJ9vm+jl/UpjAHWVbyRb+Xz9W
+         UPOgUYGVMOiLEMmfZYkcWW20D0XsTrkBw6zuq7vDVPfaLhbtHRM+qysBkxkYvxq1C+pl
+         KwB+7A2qpg8bZ9aWx6zWnzC5ufHhod/fk3wcXx+n8MKXZd2UwHxlsFHZBYq3y65W6byW
+         iyig==
+X-Forwarded-Encrypted: i=1; AJvYcCVlmIcObcAtcLBsXSBniI8iDl8KgT29XVv0yVPIyQIvqO23LX5vzh/etz7IcjTFEq6XL0PpPtM2mhs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YztHo6qrbvIx6sEYhzjQ2lQrATn5fPj2ThGQ8LxCneT/6aXkVKx
+	9SvE2CpHyPjtNWN4zuyfIasaTuj1MWO6cn86zb8BjW3Efi5Pf5/JUbI=
+X-Gm-Gg: AZuq6aJiMAD23oC5c0TiQgKot77sumo7bF1QwyFj8ZK026pduQ3ujgcIjWcqIEpKIwT
+	jnjJ7wUTmaq6T3+jYjOTV1uAK4yKJRpyTCTLEZ2nAD+35A5eyZ5tDw9aIOc/r0KJB/rAgrXO1uD
+	GTUmecbxTExz2PkCG/QEdQLZ8eNCJ6iAk/Dad+4NZJ0DwlUDQeUveopkXW/Sizt16lQRpk6gf5s
+	P+lDEjeAKri7sXbHJ/DSiSz6el07lfs1ISbcA/WH1wywDY4ZXOBnxtBe+WJWoZL+dPxZQqSF1nj
+	uQ85I4Y8k2Ye/mr5ZLCRy23UGOeXPNN7Wm36LqdXC8R3SytKC1JV79QBd0ccgiQs3p1OHtsYtWe
+	bcdUUw1haTQ2DvmFZEmyxYCYQ6M3XJdSrqKICFcQWvO8t1m5CCjFxZYWd4Yh35AP4cBEBBU0KsO
+	vjpcWfwcDmilsAD99B/aSaPBtK5v2YndwOchzqAR+1AjWlSXs9hzBFtLPO4N4a+w==
+X-Received: by 2002:a05:690c:688f:b0:794:1f46:79eb with SMTP id 00721157ae682-7942a70b7dcmr45404977b3.5.1769144267450;
+        Thu, 22 Jan 2026 20:57:47 -0800 (PST)
 Received: from localhost (23-116-43-216.lightspeed.sntcca.sbcglobal.net. [23.116.43.216])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7943b2d060esm6104507b3.56.2026.01.22.20.57.45
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7943af14432sm6354717b3.8.2026.01.22.20.57.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Jan 2026 20:57:45 -0800 (PST)
+        Thu, 22 Jan 2026 20:57:47 -0800 (PST)
 From: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
 To: damon@lists.linux.dev,
 	linux-mm@kvack.org,
@@ -87,9 +87,9 @@ Cc: sj@kernel.org,
 	bijan311@gmail.com,
 	ajayjoshi@micron.com,
 	Ravi Jonnalagadda <ravis.opensrc@gmail.com>
-Subject: [RFC PATCH 3/5] mm/damon/core: add new ops-specific goal metric
-Date: Thu, 22 Jan 2026 20:57:26 -0800
-Message-ID: <20260123045733.6954-4-ravis.opensrc@gmail.com>
+Subject: [RFC PATCH 4/5] mm/damon/paddr: capacity clamp and directional early-exit for node_sys_bp
+Date: Thu, 22 Jan 2026 20:57:27 -0800
+Message-ID: <20260123045733.6954-5-ravis.opensrc@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260123045733.6954-1-ravis.opensrc@gmail.com>
 References: <20260123045733.6954-1-ravis.opensrc@gmail.com>
@@ -106,7 +106,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -116,10 +116,10 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73769-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73767-lists,linux-doc=lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
@@ -131,114 +131,78 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 81D6E7059C
+X-Rspamd-Queue-Id: 0D1F570577
 X-Rspamd-Action: no action
 
-Convert static functions in core.c to pass damon_ctx* and damos* down to
-`damos_set_quota_goal_current_value()`. This keeps all goal metrics (PSI,
-node_mem*, node_memcg*, and the new node_sys_bp) computed in one place,
-while core remains generic and ops-specific computation is delegated via
-ctx->ops.get_goal_metric().
-
-Only static functions in this file are touched; no external ABI changes.
+Clamp effective target to node capacity (bp) and skip in-migration if
+the node already meets/exceeds it. This avoids oscillation and
+unnecessary work in two-context DRAM/CXL setups when quota goals
+(e.g., node_sys_bp) are met.
 
 Signed-off-by: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
 ---
- mm/damon/core.c | 34 +++++++++++++++++++++++++++-------
- 1 file changed, 27 insertions(+), 7 deletions(-)
+ mm/damon/paddr.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/mm/damon/core.c b/mm/damon/core.c
-index 84f80a20f233..d898bfcbef72 100644
---- a/mm/damon/core.c
-+++ b/mm/damon/core.c
-@@ -2119,8 +2119,20 @@ static unsigned long damos_get_node_memcg_used_bp(
+diff --git a/mm/damon/paddr.c b/mm/damon/paddr.c
+index 30e4e5663dcb..64dbdd2196a5 100644
+--- a/mm/damon/paddr.c
++++ b/mm/damon/paddr.c
+@@ -300,10 +300,54 @@ static unsigned long damon_pa_deactivate_pages(struct damon_region *r,
+ 			sz_filter_passed);
  }
- #endif
  
-+static unsigned long
-+damos_get_goal_metric_from_ops(struct damon_ctx *ctx, struct damos *scheme,
-+				       const struct damos_quota_goal *goal)
++static unsigned long damon_pa_node_capacity_bp(int nid)
 +{
-+	if (!ctx || !goal)
++	struct pglist_data *pgdat;
++	unsigned long sys_total = damon_pa_totalram_bytes();
++	unsigned long node_pages, node_total;
++
++	if (nid < 0 || !sys_total)
 +		return 0;
-+	if (!ctx->ops.get_goal_metric)
++	pgdat = NODE_DATA(nid);
++	if (!pgdat)
 +		return 0;
-+	return ctx->ops.get_goal_metric(ctx, scheme, goal);
++	node_pages = pgdat->node_spanned_pages;
++	node_total = node_pages << PAGE_SHIFT;
++	return div64_u64((u64)node_total * 10000ULL, sys_total);
 +}
- 
--static void damos_set_quota_goal_current_value(struct damos_quota_goal *goal)
-+static void damos_set_quota_goal_current_value(struct damon_ctx *ctx,
-+				       struct damos *scheme,
-+				       struct damos_quota_goal *goal)
++
+ static unsigned long damon_pa_migrate(struct damon_region *r,
+ 		unsigned long addr_unit, struct damos *s,
+ 		unsigned long *sz_filter_passed)
  {
- 	u64 now_psi_total;
- 
-@@ -2141,19 +2153,25 @@ static void damos_set_quota_goal_current_value(struct damos_quota_goal *goal)
- 	case DAMOS_QUOTA_NODE_MEMCG_FREE_BP:
- 		goal->current_value = damos_get_node_memcg_used_bp(goal);
- 		break;
-+	case DAMOS_QUOTA_NODE_SYS_BP:
-+		goal->current_value = damos_get_goal_metric_from_ops(ctx,
-+							scheme, goal);
-+		break;
- 	default:
- 		break;
- 	}
- }
- 
- /* Return the highest score since it makes schemes least aggressive */
--static unsigned long damos_quota_score(struct damos_quota *quota)
-+static unsigned long damos_quota_score(struct damon_ctx *ctx,
-+				       struct damos *scheme,
-+				       struct damos_quota *quota)
- {
- 	struct damos_quota_goal *goal;
- 	unsigned long highest_score = 0;
- 
- 	damos_for_each_quota_goal(goal, quota) {
--		damos_set_quota_goal_current_value(goal);
-+		damos_set_quota_goal_current_value(ctx, scheme, goal);
- 		highest_score = max(highest_score,
- 				goal->current_value * 10000 /
- 				goal->target_value);
-@@ -2165,7 +2183,9 @@ static unsigned long damos_quota_score(struct damos_quota *quota)
- /*
-  * Called only if quota->ms, or quota->sz are set, or quota->goals is not empty
-  */
--static void damos_set_effective_quota(struct damos_quota *quota)
-+static void damos_set_effective_quota(struct damon_ctx *ctx,
-+				      struct damos *scheme,
-+				      struct damos_quota *quota)
- {
- 	unsigned long throughput;
- 	unsigned long esz = ULONG_MAX;
-@@ -2176,7 +2196,7 @@ static void damos_set_effective_quota(struct damos_quota *quota)
- 	}
- 
- 	if (!list_empty(&quota->goals)) {
--		unsigned long score = damos_quota_score(quota);
-+		unsigned long score = damos_quota_score(ctx, scheme, quota);
- 
- 		quota->esz_bp = damon_feed_loop_next_input(
- 				max(quota->esz_bp, 10000UL),
-@@ -2227,7 +2247,7 @@ static void damos_adjust_quota(struct damon_ctx *c, struct damos *s)
- 	/* First charge window */
- 	if (!quota->total_charged_sz && !quota->charged_from) {
- 		quota->charged_from = jiffies;
--		damos_set_effective_quota(quota);
-+		damos_set_effective_quota(c, s, quota);
- 	}
- 
- 	/* New charge window starts */
-@@ -2240,7 +2260,7 @@ static void damos_adjust_quota(struct damon_ctx *c, struct damos *s)
- 		quota->charged_sz = 0;
- 		if (trace_damos_esz_enabled())
- 			cached_esz = quota->esz;
--		damos_set_effective_quota(quota);
-+		damos_set_effective_quota(c, s, quota);
- 		if (trace_damos_esz_enabled() && quota->esz != cached_esz)
- 			damos_trace_esz(c, s, quota);
- 	}
++	/*
++	 * Capacity clamp + directional early-exit for node_sys_bp goals:
++	 * If we are migrating INTO g->nid and the current bp for that node is
++	 * already >= min(target_bp, capacity_bp), skip work this interval.
++	 */
++	{
++		struct damos_quota_goal *g;
++
++		list_for_each_entry(g, &s->quota.goals, list) {
++			unsigned long cap_bp, effective_target_bp;
++
++			if (g->metric != DAMOS_QUOTA_NODE_SYS_BP)
++				continue;
++			if (g->nid < 0)
++				continue;
++
++			cap_bp = damon_pa_node_capacity_bp(g->nid);
++			if (!cap_bp)
++				break;
++
++			effective_target_bp = min(g->target_value, cap_bp);
++			if (s->target_nid == g->nid &&
++			    g->current_value >= effective_target_bp)
++				return 0;
++			break;
++		}
++	}
++
+ 	phys_addr_t addr, applied;
+ 	LIST_HEAD(folio_list);
+ 	struct folio *folio;
 -- 
 2.43.0
 
