@@ -1,147 +1,171 @@
-Return-Path: <linux-doc+bounces-73888-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73891-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id rFYsGOv4dGmO/gAAu9opvQ
-	(envelope-from <linux-doc+bounces-73888-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 17:52:59 +0100
+	id YCnnDEf+dGk7/wAAu9opvQ
+	(envelope-from <linux-doc+bounces-73891-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 18:15:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id B58DF7E2BB
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 17:52:58 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C15297E428
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 18:15:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C6EA93003D16
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 16:52:57 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AC9D4300D17A
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 17:15:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F2A724677F;
-	Sat, 24 Jan 2026 16:52:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A771E246798;
+	Sat, 24 Jan 2026 17:15:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fgE3ztxA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xa52+rzP"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67E5A1C84A6;
-	Sat, 24 Jan 2026 16:52:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 811D8142E83;
+	Sat, 24 Jan 2026 17:15:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769273575; cv=none; b=j0BH8yQ4mFZWyMpIVD7ljk1ULyFCfc0cJ+jtbnhRkrqNzXa2odUhEW+fLUb06yiCWY2WbrtwV5b/3iYVvqkRb5/Gpy0jVHqjFQB5Hxcw8kNVoJ/qpwhVUuFMtiikI3mb5o8LmWWid2vX2uKwB+Q548JEnYjK5gAQpOhnVZBxeHg=
+	t=1769274947; cv=none; b=PwYd7IZUoD1FCjkidDmuKVmpqPqCa0I4MqnUcRF9dZIoaRwQYnYpLtF+MWNw188LdJWeHiQgrucWr+9gaNRAky3UBs5qLfdMMPP/c/yeUa9qBRF0EqWpTnw1lTkfGOdra99csf6Ick/ZiEc1fwCPxl1IrHsTyAFDckXN1spMZLA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769273575; c=relaxed/simple;
-	bh=UAaftdieJkGS+xJ6t7+TUsQJMTUF25i+qZb/ukNBuMc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fFBifLO1Hh4EVVZl93yxQj7x0pTXJ+urAAGVsItM1rdvGw8GWRqMHdhN+SzbHgOT2MGfxppTo7sj/jtWOPQMKaAg9G16q/Rrbx29Xw96+kt77f94C+uzgANbOF4MSG44t82EVWpUiDfLJCksu2Bs3R+IfDLt2DzXbwPBqg4IY6c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fgE3ztxA; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07318C116D0;
-	Sat, 24 Jan 2026 16:52:54 +0000 (UTC)
+	s=arc-20240116; t=1769274947; c=relaxed/simple;
+	bh=2XnanZCU6bBnqgyHSN8BenYR9dTGoy0/vjtV2NkWCHs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Y3sntITEcH/3ASHh4hZ7B+ggSFis3sOV30yVVDsC/xNQiuO6v4kheDqztyMJhHn6R7hNiS5a4dXSaoXoe9NTXZqSf8cors2dDokcgkjyOwUb9gXRlo6fZnNKrDFyqS+4H93abFspw02vdMbMasGc8ZxTmT3gIx/4lq0qdnokdfg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xa52+rzP; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 186B6C16AAE;
+	Sat, 24 Jan 2026 17:15:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769273575;
-	bh=UAaftdieJkGS+xJ6t7+TUsQJMTUF25i+qZb/ukNBuMc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=fgE3ztxAyzxW7ngBwhkXQgu+7qutb1B1eF9Zf3FwH/w/OZVCsZhxSbYwPphVBrGQH
-	 SPNrYEFwuCDA33X9vZO5cFaR1HaUOjoV0ebeZ1MI2VCoS2WFrmH87wIYTsuETIoIkZ
-	 GDSfYfxwIkTEF2u8tH4mmw4tUFrECW2F5jhV0kR8j19at/ULg6/nDpEe4O4XyOxzRZ
-	 aCyGwG6l8vRdFwSg9BbChjJCugPVAyWT/ni+i+i88+HBlAFW4uJUJ1rUtI1trd5OAL
-	 vrFOz/Ig8a9mmj3PBM9pdbEvvlt0GFDBxs0Z1F2sIJPmOeHg58aknreMCkf6s3Ombo
-	 6mNjSUtL9FnZQ==
+	s=k20201202; t=1769274947;
+	bh=2XnanZCU6bBnqgyHSN8BenYR9dTGoy0/vjtV2NkWCHs=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Xa52+rzPtNF9R8DMUi6CC4Nva/HLOOLJGgSoahaZ76WY13WOmTyJIGPHUG6nwtu5K
+	 kccWKtHlMUbXPzlFOvOOQLkdDjzmlH4J/KDcHwj0GMwR3NoxAihdQDjoS9Pp1vcgDx
+	 L2TPPokscvAW4BuqZq2F3SirnbtA/LuGIRSSOnek9IMViAbjoF/CWSsFhnA2Le9z0l
+	 /KL9SI9I6e4WijfTXH/bZBIUVYPjQU2gaWfwpaKtW/Moj6ptA6Co7nZPjaW3Yl7OWO
+	 jACBuHo5NnEgObIQcYPizF1i53YXimNGHGx6aIhFkRxMSi+EnSSUtvqTNmaqnQ8y03
+	 Oi9nDfa+bhmXg==
 Received: from johan by xi.lan with local (Exim 4.98.2)
 	(envelope-from <johan@kernel.org>)
-	id 1vjgsW-000000002mV-3Liz;
-	Sat, 24 Jan 2026 17:52:53 +0100
-Date: Sat, 24 Jan 2026 17:52:52 +0100
+	id 1vjhEf-000000003Hs-14rg;
+	Sat, 24 Jan 2026 18:15:45 +0100
 From: Johan Hovold <johan@kernel.org>
-To: Tzung-Bi Shih <tzungbi@kernel.org>
-Cc: Benson Leung <bleung@chromium.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: "Rafael J . Wysocki" <rafael@kernel.org>,
 	Danilo Krummrich <dakr@kernel.org>,
-	Bartosz Golaszewski <brgl@bgdev.pl>,
-	Linus Walleij <linusw@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <shuah@kernel.org>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
-	linux-kselftest@vger.kernel.org,
+	Tzung-Bi Shih <tzungbi@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <shuah@kernel.org>,
 	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
 	Wolfram Sang <wsa+renesas@sang-engineering.com>,
 	Simona Vetter <simona.vetter@ffwll.ch>,
 	Dan Williams <dan.j.williams@intel.com>,
-	Jason Gunthorpe <jgg@nvidia.com>, linux-gpio@vger.kernel.org
-Subject: Re: [PATCH 22/23] gpiolib: Leverage revocable for other independent
- lifecycle instances
-Message-ID: <aXT45B6vLf9R3Pbf@hovoldconsulting.com>
-References: <20260116081036.352286-1-tzungbi@kernel.org>
- <20260116081036.352286-23-tzungbi@kernel.org>
+	Jason Gunthorpe <jgg@nvidia.com>,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Johan Hovold <johan@kernel.org>
+Subject: [PATCH 0/3] Revert "revocable: Revocable resource management"
+Date: Sat, 24 Jan 2026 18:05:32 +0100
+Message-ID: <20260124170535.11756-1-johan@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260116081036.352286-23-tzungbi@kernel.org>
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73888-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73891-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[johan@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: B58DF7E2BB
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: C15297E428
 X-Rspamd-Action: no action
 
-On Fri, Jan 16, 2026 at 08:10:35AM +0000, Tzung-Bi Shih wrote:
-> There are independent lifecycle instances (e.g., other drivers) can save
-> a raw pointer to the struct gpio_device (e.g., via gpio_device_find())
-> or struct gpio_desc (e.g., via gpio_to_desc()).  In some operations,
-> they have to access the underlying struct gpio_chip.
-> 
-> Leverage revocable for them so that they don't need to handle the
-> synchronization by accessing the SRCU explicitly.
-> 
-> Signed-off-by: Tzung-Bi Shih <tzungbi@kernel.org>
+I was surprised to learn that the revocable functionality was merged last week
+given the community feedback on list and at LPC, but not least since there are
+no users of it, which we are supposed to require to be able to evaluate it
+properly.
 
->  static int gpiod_get_raw_value_commit(const struct gpio_desc *desc)
->  {
-> -	struct gpio_device *gdev;
->  	struct gpio_chip *gc;
->  	int value;
-> +	DEFINE_REVOCABLE(rev, desc->gdev->chip_rp);
+The chromeos ec driver issue which motivated this work turned out not to need
+it as was found during review. And the example gpiolib conversion was posted
+the very same morning that this was merged which hardly provides enough time
+for evaluation (even if Bartosz quickly reported a performance regression).
 
-DEFINE_REVOCABLE() is racy and can lead to use-after-free since nothing
-prevents chip_rp from being revoked and freed while the
-revocable_alloc() hidden in DEFINE_REVOCABLE() is running.
+Turns out there are correctness issues with both the gpiolib conversion and
+the revocable design itself that can lead to use-after-free and hung tasks (see
+[1] and patch 3/3).
 
->  
-> -	/* FIXME Unable to use gpio_chip_guard due to const desc. */
-> -	gdev = desc->gdev;
-> -
-> -	guard(srcu)(&gdev->srcu);
-> -
-> -	gc = srcu_dereference(gdev->chip, &gdev->srcu);
-> +	REVOCABLE_TRY_ACCESS_WITH(rev, gc);
->  	if (!gc)
->  		return -ENODEV;
+And as was pointed out repeatedly during review, and again at the day of the
+merge, this does not look like the right interface for the chardev unplug
+issue.
+
+Revert the revocable implementation until a redesign has been proposed and
+evaluated properly.
 
 Johan
+
+
+[1] https://lore.kernel.org/all/aXT45B6vLf9R3Pbf@hovoldconsulting.com/
+
+
+Johan Hovold (3):
+  Revert "selftests: revocable: Add kselftest cases"
+  Revert "revocable: Add Kunit test cases"
+  Revert "revocable: Revocable resource management"
+
+ .../driver-api/driver-model/index.rst         |   1 -
+ .../driver-api/driver-model/revocable.rst     | 152 -----------
+ MAINTAINERS                                   |   9 -
+ drivers/base/Kconfig                          |   8 -
+ drivers/base/Makefile                         |   5 +-
+ drivers/base/revocable.c                      | 241 ------------------
+ drivers/base/revocable_test.c                 | 142 -----------
+ include/linux/revocable.h                     |  69 -----
+ tools/testing/selftests/Makefile              |   1 -
+ .../selftests/drivers/base/revocable/Makefile |   7 -
+ .../drivers/base/revocable/revocable_test.c   | 136 ----------
+ .../drivers/base/revocable/test-revocable.sh  |  39 ---
+ .../base/revocable/test_modules/Makefile      |  10 -
+ .../revocable/test_modules/revocable_test.c   | 195 --------------
+ 14 files changed, 1 insertion(+), 1014 deletions(-)
+ delete mode 100644 Documentation/driver-api/driver-model/revocable.rst
+ delete mode 100644 drivers/base/revocable.c
+ delete mode 100644 drivers/base/revocable_test.c
+ delete mode 100644 include/linux/revocable.h
+ delete mode 100644 tools/testing/selftests/drivers/base/revocable/Makefile
+ delete mode 100644 tools/testing/selftests/drivers/base/revocable/revocable_test.c
+ delete mode 100755 tools/testing/selftests/drivers/base/revocable/test-revocable.sh
+ delete mode 100644 tools/testing/selftests/drivers/base/revocable/test_modules/Makefile
+ delete mode 100644 tools/testing/selftests/drivers/base/revocable/test_modules/revocable_test.c
+
+-- 
+2.52.0
+
 
