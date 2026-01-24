@@ -1,123 +1,174 @@
-Return-Path: <linux-doc+bounces-73896-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73897-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qFvKHZgQdWmAAQEAu9opvQ
-	(envelope-from <linux-doc+bounces-73896-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 19:34:00 +0100
+	id yGuNG9gSdWkAAgEAu9opvQ
+	(envelope-from <linux-doc+bounces-73897-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 19:43:36 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45AAB7E7AE
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 19:33:59 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F058B7E852
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 19:43:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B07553006D4E
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 18:33:56 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 5A23B300D6B7
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 18:42:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3629324886A;
-	Sat, 24 Jan 2026 18:33:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 596C422127E;
+	Sat, 24 Jan 2026 18:42:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="Y9ctNrw4"
+	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="dO0gZ4+l"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99B862080C1;
-	Sat, 24 Jan 2026 18:33:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90FD13EBF12;
+	Sat, 24 Jan 2026 18:42:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769279635; cv=none; b=TXQ662uYj6oogz2e0vqJBAv/q8XFNL8G0716OVA0E+6HZ0oAWJptjKeEE9LNCCDmX110XIN8x62iZ5+xjPLJSXeluw4lZecWaB1eyKWgcYB4hnAWolHOlkHPFfrd+rFaYjIhwVNpC4g167X3LzUocbeZWPblIfqy7tbGVAkvnv4=
+	t=1769280173; cv=none; b=We8atRlwxvFOvOpkz5YvaHnkjPX5kbWKf/ZMCI3BJLpAVlkhHPjDPJ24qU3HS1rPznSYUbrcWMQjtdV/HzHx8vHMx6T4QDgQDDlQ1l0Tj07OL6fwrDpBrUyU1lldJ0vZ107u5QCceIgLwOOhZxREIAUP3UoNSRsV1MG3shhloPM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769279635; c=relaxed/simple;
-	bh=t2nF+gD7H8+jpqbJmQmUbD70qwIMluN69XTjfEfv8rs=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=UDF0krHTBnftW5dOTzdpzPrA/n0/uVaWT/Jd3WtUE6WUhKEY/he98mUplOfkUCWydpkBEzK46Vc/dHKOkiaRJ+cRU8cfGxWhNZqZ46/GW2Dmdlgfgo71mjVl18O/DOVHRy8ervu7fq9xy4gwXwhAwW7uokfEH4sCqTv66GfjQu8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=Y9ctNrw4; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 60OIXceB1738906
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Sat, 24 Jan 2026 10:33:38 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 60OIXceB1738906
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026012301; t=1769279620;
-	bh=t2nF+gD7H8+jpqbJmQmUbD70qwIMluN69XTjfEfv8rs=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=Y9ctNrw4tvWP8Ety7V4AQYAXfm4w1Mkyen4ZK474eHLEp0jd6QtvWyw+SbTQj9Vwo
-	 IGv5IhLbOrcw5L29p6C/xuHTRFTJyXa7YvqocHcqKA7hu8tllkwrdJ122lqtbqbLJ2
-	 DKGmSaZRLeYeucSErHr8ZtrbbV+6XAscjub/wttd41bXeTcfghJNqjppMYhK0U6WAB
-	 pIpm1E/9qdIg9O5634eEJFVjM0nR5e19ojDZA3ra5NsRKGGfvEyj2q06blK6Ua/3nG
-	 mPhIJlXkMimFFPpQ7bXXRtJXb2GFOC0wUN1B1C5DqyCDMQGNPe6IPs/oyLbFlyu2BM
-	 xa2NJC4t0MLJA==
-Date: Sat, 24 Jan 2026 10:33:31 -0800
-From: "H. Peter Anvin" <hpa@zytor.com>
-To: Askar Safin <safinaskar@gmail.com>
-CC: brauner@kernel.org, corbet@lwn.net, jack@suse.cz, lennart@poettering.net,
-        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kernel@vger.kernel.org, systemd-devel@lists.freedesktop.org,
-        viro@zeniv.linux.org.uk
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_0/3=5D_Add_the_ability_to_moun?=
- =?US-ASCII?Q?t_filesystems_during_initramfs_expansion?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20260124174150.974899-1-safinaskar@gmail.com>
-References: <20260124003939.426931-1-hpa@zytor.com> <20260124174150.974899-1-safinaskar@gmail.com>
-Message-ID: <5A5B4BD6-36BA-4D93-8584-9D0239068515@zytor.com>
+	s=arc-20240116; t=1769280173; c=relaxed/simple;
+	bh=VvH5eA6BRfAJbzYiFIh5tJ53kLp3wfAyFAkRENkGXCA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=sRnl6V8z7iBCvrwuNyqG+o5Jg57Qp5Xpp0Rp0Q+YSxNojR/SaNXZ60gsOlLpCeChpfWVRWfDmf02RSyTxgrA5FYl87ZxPI+iUx1iRIpanuYcyDVdpBmlHg+wmVljQyyp3OdNDeM5SgrEHonlNkweEZQPXR/DE3GxV0f7Imoas/8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=dO0gZ4+l; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
+Received: from pendragon.ideasonboard.com (2001-14ba-703d-e500--ff4.rev.dnainternet.fi [IPv6:2001:14ba:703d:e500::ff4])
+	by perceval.ideasonboard.com (Postfix) with UTF8SMTPSA id A0FC0A98;
+	Sat, 24 Jan 2026 19:42:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1769280126;
+	bh=VvH5eA6BRfAJbzYiFIh5tJ53kLp3wfAyFAkRENkGXCA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=dO0gZ4+lXswtYuBzh6qLr4n0+hT0QSU5iUL6ChvprVLFsHqND57SPjkWrXNNvM38y
+	 g+qoxVNz3YtuRCPwV2N1xE59IhqsVee6+z8N5iajqAke76fUksGVe/gt6cD5OxcIu/
+	 6i3PWCJCzFlso71d7kl/IkAo881ezuU8GkJzq2Ko=
+Date: Sat, 24 Jan 2026 20:42:39 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Johan Hovold <johan@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Tzung-Bi Shih <tzungbi@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Linus Walleij <linusw@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <shuah@kernel.org>,
+	Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Simona Vetter <simona.vetter@ffwll.ch>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/3] Revert "revocable: Revocable resource management"
+Message-ID: <20260124184239.GO215800@killaraus>
+References: <20260124170535.11756-1-johan@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260124170535.11756-1-johan@kernel.org>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.96 / 15.00];
-	SUBJ_EXCESS_QP(1.20)[];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026012301];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-73896-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73897-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[zytor.com:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[zytor.com:email,zytor.com:dkim,zytor.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 45AAB7E7AE
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[ideasonboard.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,ideasonboard.com:email,ideasonboard.com:dkim]
+X-Rspamd-Queue-Id: F058B7E852
 X-Rspamd-Action: no action
 
-On January 24, 2026 9:41:50 AM PST, Askar Safin <safinaskar@gmail=2Ecom> wr=
-ote:
->"H=2E Peter Anvin" <hpa@zytor=2Ecom>:
->> At Plumber's 2024, Lennart Poettering of the systemd project requested
->> the ability to overmount the rootfs with a separate tmpfs before
->> initramfs expansion, so the populated tmpfs can be unmounted=2E
->
->This is already solved by [1] and [2]=2E They are in next=2E
->
->[1] https://lore=2Ekernel=2Eorg/all/20251229-work-empty-namespace-v1-0-bf=
-b24c7b061f@kernel=2Eorg/
->[2] https://lore=2Ekernel=2Eorg/all/20260112-work-immutable-rootfs-v2-0-8=
-8dd1c34a204@kernel=2Eorg/
->
+On Sat, Jan 24, 2026 at 06:05:32PM +0100, Johan Hovold wrote:
+> I was surprised to learn that the revocable functionality was merged last week
+> given the community feedback on list and at LPC, but not least since there are
+> no users of it, which we are supposed to require to be able to evaluate it
+> properly.
+> 
+> The chromeos ec driver issue which motivated this work turned out not to need
+> it as was found during review. And the example gpiolib conversion was posted
+> the very same morning that this was merged which hardly provides enough time
+> for evaluation (even if Bartosz quickly reported a performance regression).
+> 
+> Turns out there are correctness issues with both the gpiolib conversion and
+> the revocable design itself that can lead to use-after-free and hung tasks (see
+> [1] and patch 3/3).
+> 
+> And as was pointed out repeatedly during review, and again at the day of the
+> merge, this does not look like the right interface for the chardev unplug
+> issue.
+> 
+> Revert the revocable implementation until a redesign has been proposed and
+> evaluated properly.
 
-Well, all right then :)
+I have voiced some of the concerns listed above. This was merge way too
+quickly, without proper review and evaluation of the API as a solution
+for the problem at hand. I don't want to see this API spreading through
+drivers the same way devm_kzalloc() did without developers understanding
+the limitations, it's just another recipe for disaster. I trust that we
+have enough knowledge and wisdom in the community to implement correct
+solutions to the producer-consumer races.
+
+Acked-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+> [1] https://lore.kernel.org/all/aXT45B6vLf9R3Pbf@hovoldconsulting.com/
+> 
+> 
+> Johan Hovold (3):
+>   Revert "selftests: revocable: Add kselftest cases"
+>   Revert "revocable: Add Kunit test cases"
+>   Revert "revocable: Revocable resource management"
+> 
+>  .../driver-api/driver-model/index.rst         |   1 -
+>  .../driver-api/driver-model/revocable.rst     | 152 -----------
+>  MAINTAINERS                                   |   9 -
+>  drivers/base/Kconfig                          |   8 -
+>  drivers/base/Makefile                         |   5 +-
+>  drivers/base/revocable.c                      | 241 ------------------
+>  drivers/base/revocable_test.c                 | 142 -----------
+>  include/linux/revocable.h                     |  69 -----
+>  tools/testing/selftests/Makefile              |   1 -
+>  .../selftests/drivers/base/revocable/Makefile |   7 -
+>  .../drivers/base/revocable/revocable_test.c   | 136 ----------
+>  .../drivers/base/revocable/test-revocable.sh  |  39 ---
+>  .../base/revocable/test_modules/Makefile      |  10 -
+>  .../revocable/test_modules/revocable_test.c   | 195 --------------
+>  14 files changed, 1 insertion(+), 1014 deletions(-)
+>  delete mode 100644 Documentation/driver-api/driver-model/revocable.rst
+>  delete mode 100644 drivers/base/revocable.c
+>  delete mode 100644 drivers/base/revocable_test.c
+>  delete mode 100644 include/linux/revocable.h
+>  delete mode 100644 tools/testing/selftests/drivers/base/revocable/Makefile
+>  delete mode 100644 tools/testing/selftests/drivers/base/revocable/revocable_test.c
+>  delete mode 100755 tools/testing/selftests/drivers/base/revocable/test-revocable.sh
+>  delete mode 100644 tools/testing/selftests/drivers/base/revocable/test_modules/Makefile
+>  delete mode 100644 tools/testing/selftests/drivers/base/revocable/test_modules/revocable_test.c
+
+-- 
+Regards,
+
+Laurent Pinchart
 
