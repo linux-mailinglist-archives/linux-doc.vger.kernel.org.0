@@ -1,79 +1,79 @@
-Return-Path: <linux-doc+bounces-73869-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73870-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eNUJOokldGkd2gAAu9opvQ
-	(envelope-from <linux-doc+bounces-73869-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:51:05 +0100
+	id wAq8HmIldGkd2gAAu9opvQ
+	(envelope-from <linux-doc+bounces-73870-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:50:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EE027C129
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:51:05 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E65FF7C0E1
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:50:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 85ED33072DA1
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 01:49:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AE1BD30374B1
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 01:49:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C03DC22DFA4;
-	Sat, 24 Jan 2026 01:49:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA69A23958D;
+	Sat, 24 Jan 2026 01:49:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="moF0QcdZ"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DoysAizb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A4731CD1E4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08721225762
 	for <linux-doc@vger.kernel.org>; Sat, 24 Jan 2026 01:49:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.179
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769219362; cv=none; b=nH8eJQ8mJ8oS0x4mXlE0rS6QO7fYqqYpNP7gynSnLY/0bCf5zZbjwW7AhzoacDgDiGMxok5jjnIfzc2SLS6MiZsF/4NmeBB7vmSCenzjGsBhSRhnkWUXwXaIJvvg+qI2rQ7qsNsTDM1ezZvUE6u6HbEh52BUz3URy8bwhaJCFEw=
+	t=1769219363; cv=none; b=FEbHiV3EEl+J+vFuQwbEOwIHha5Vc+DyBmFYjbi6ImNS6gGCZnXPHd6oVqr/SPDzq+Fau1ap+ElHZ4LOtWw+3HfFUwmGpqZlFZuFR+1EUZt1a3JmD3+yP/kA8BWTZt2qJhrw9/TLP6hTbSZdBy07VH58CnJ9pPgGZ4WiI8FgPJk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769219362; c=relaxed/simple;
-	bh=yyHWHTZ3q3DotbU1mpLzfWDbwKx97IS2+wB4iEtV00w=;
+	s=arc-20240116; t=1769219363; c=relaxed/simple;
+	bh=YZAV2fCv+zHtZckQV8so+7ZE7tatCYtf4LTOqJNJgHk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=MlpiXldmEhMe3jeommWho0VMS/cmDJcGGDg5y8XlXxz2mIPln6ZOrC/BdFhlE5rXplwVI0By/ig0+bCGJU/QabZup9nLQzv2kCLSBHCiqGK56QwDQkZBoDz5aA1sc7HDhyiOdiGJG0v809ED/oRPWv0xVhBP4P3D71e9gAC9cDA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=moF0QcdZ; arc=none smtp.client-ip=74.125.82.179
+	 MIME-Version; b=IwmUmZKh1cL3xs8F3qKEX2O3j1E92IPKHmqqS38cvJaVqMGJCRNYqYY7ENVaHMiMIF9033Mg+6cm8jRuzLqblSWMnSdS8Q9oGSnT4OPnP6sqLtfyuRquYKTeQhgM3TYg4lMAE5fKC5Qg1QKDJAgYyCYyHwqtiVyHk6JEDadfSyw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DoysAizb; arc=none smtp.client-ip=74.125.82.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-2b1981ca515so3234841eec.1
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-2b4520f6b32so4540797eec.0
         for <linux-doc@vger.kernel.org>; Fri, 23 Jan 2026 17:49:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769219359; x=1769824159; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1769219360; x=1769824160; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LwReS+VyqVAE69wkUgUOvkftIiDVyESdfXyVkGzdV9k=;
-        b=moF0QcdZe++W5ptyLNjzpFOLk+uc6uV2JpNxY1fKjb5POXB7wnP9rF4PLr+lyylmqA
-         +yDzgpER8Gif2IhL/FtFs6b8aIBbSty2zhBaKKDXoh2MK9oYpTO5/tVSb2JpV1NVuvS2
-         kQ17rDspaHSTnGETXnBBp6cWaMjYv3U83656aBNZre4Y9HQ4fNWknkoJVAG+LYYqyY0K
-         7onJlFnRabP+4Rv7ogTs/asgZgHXsM5xqhpr5VUiTTxvzTbRgMF34Yq03kE9+aZQNg16
-         vDUMxouA48XitdzRXnEvt38vXxFTlEPYWp4id+aUe99quA0L6R8IIvChmAXHuyyVmibv
-         JAzg==
+        bh=hklQKX6M0DwYqoKUXsL3kGgABpcCY86KWl+klqFSMUQ=;
+        b=DoysAizbk+4hjS0zH5KJbhwD7mjOPu+FZTNxzuNrBsXBUiLLIvTCwYqfIb1AL3Opu9
+         WE9IJxlQOJ3+ciwtC8tcFc+4HWwT2zR0os5YZ0hpxB+NraKi8WI7ItTkuNVNpcWBbjGM
+         aqeHkJ4nHfg7MdoXLniTAqOHeyLalc7asylsNmHVxmnGyf0z4JdpWHfbcIfKwGi8nnFV
+         tFL4GJ0szJxM8jZZ5mmZ+fpKeAT7xIRZmGBaCVeu3Mgdb2Unis1GqyfFC4kBjc0BMGN0
+         lTudGPSkZcAkcp/Acz9wdkW9wxACRNkP2ASsjqaPQQbCDWXrDlenZIpM0NFolAsYTnRR
+         31fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769219359; x=1769824159;
+        d=1e100.net; s=20230601; t=1769219360; x=1769824160;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=LwReS+VyqVAE69wkUgUOvkftIiDVyESdfXyVkGzdV9k=;
-        b=sJff4l8iQcmSJcXv+sqvobc3O+HTACyQ47H6IJl2Yjw7+OMQt8NxqcrOkRmqc+MoGZ
-         WSdCiUl18tdGapE4Bh/poE1iqBGa9gxxzpAR5djP5t7T8VqY51M1rTb8zvze5GJPEKfr
-         aoSwi4x+N5PJlrodu6Ts5HSwPkXV216uhCJuDOGt+YOUNZnzztiCJtZPxyexssy2Qg3p
-         8uc1qT09f2X1UVt0dtt4EeqX5U5b2MahmvloSNbIE0ssS9APRU7MZN0D2nDVXvW/faHJ
-         YPkmZDCdRQP57cW1GlwW2Bqbh73dFLNNKIqhO0EgKpY4vJYU/dhgP31VI02A28K9Jubd
-         D9CQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW4cJL5eonGyxIP0yWre67vhg9QrMqucNrL7Gp2/QD2JKj+WaOLSwk3nwNbuYIylW2MYAtAfy6o0J0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyd1jbvEzsNbZjf9hkyeFH0epG4srI8j2tPgsH5/m4Qp6cprm9I
-	7z7jEVAodAqaViwvH3bsDGO0/Mk6AeZ6KM2dqwKfGfK/B67vm+JHIYW5
-X-Gm-Gg: AZuq6aKWCD9vnIKqx7xf7Ay5E9Oliln1v8joR8o/mklVxugjXQv4pEvE7TA+ZJjhqzn
-	ftw2KaiAWNCCFN1uvDPw4Sm/rNiTO9rKNXbEwexMiQTljBRmTlOtkk44GP0xMzBaiQrLSeTTRD/
-	S44CX6mrocnpMYpRd9RSa13sBXRctcDm4pzyr8QaG8MbC/EilmZ9VHvUWX7whPUolNM7EYyk5O+
-	NFN9tW57g/Bu2DOteax6KKguCvUZTZ9U6DKqJbO62S2BHSsCIsfzR1VIhSHk21pWh/0R5jqLVkI
-	qQNpLoQcvXCCP5sKNIV4/DMR1ADIKD8omx1SQZICHNGSsTnq9Cch8T2RnY7iWfUUOqfcJDFfo+N
-	MvMarN4zqwxcD4b7mIwgIgqBMBJf589M4n6zmaSRRRPJbJEpdyT39JxBRcx5helhY2810XhwgFm
-	CqnrhO3M+gGLRoPof515fbmKSe0wRETzIHmw4FTPcXis69USh82hsek+DlEG8msVg=
-X-Received: by 2002:a05:7300:ed0e:b0:2a4:3592:c60e with SMTP id 5a478bee46e88-2b739b961cfmr2913536eec.31.1769219359370;
-        Fri, 23 Jan 2026 17:49:19 -0800 (PST)
+        bh=hklQKX6M0DwYqoKUXsL3kGgABpcCY86KWl+klqFSMUQ=;
+        b=CYGdl4taIMgTeFr7C8GpGzDqMP5s3YHU6KhgmzdTqDU8iJTfKoUa2EUXpY/98MujdC
+         vG3AS3ivgCcudh8kV219lzODDb+iIYIjyJZdLtQzMPTN+sFmIPxNyI+v50K1j+Aq7D/x
+         +xFGWQ5r8sOK6OvQcnfgMWdEkAeFh9zUKjgOHy8Gl4Iah5KxsWFLotLogjBUpdnDtJrY
+         EBehyuxm7JgwJJ8jVfK5UlZRekjc+itv0fxx3kiauNQ8d7DG/qlL6Lk8x4uXqeBdouVr
+         7cD2rEG5OaMybw9pZm8LPKcF6YSCQ+IRsvg+anjKQ1wjCpA0g2LVYbX32eWMs4o9Erb3
+         maew==
+X-Forwarded-Encrypted: i=1; AJvYcCWwxXi9T3UE0Kr9uJOiFTV/obtYvgvNipmgvDcI/EaRH5ERpbHjdLnHVu7+AdFDB9qqGlHqn8Lq6lE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyVDd6ztNpCLcSoI3jPK3mJ2gIuXzS5B1Id645v4/g9Qnx5bIM2
+	uXH6/b2dJapi+qP6lHNF9MFDd5Kkv0fwhzZBE00V3gQ99fHDMCygfPxA
+X-Gm-Gg: AZuq6aJU5qmGkR+73R22P9zrdm3fyp/3mlW4abcQABo1rb8lOJaKVwsBxmDLqVVNuc8
+	OV6ya7MVnXtbSeO0FgIQKAvPefJKRse5tbQD99DZhxCEXWebUSVvoFqli34LYe3q2Qluy268r4I
+	UhepzjNeWdp5QTfKSxssWt2oGp3rlh+oS7x/o/0jGQZ8RDMi35GpmdETVfR78VMUvVeeNzSYyZE
+	oanp9i1q4H7BHvLcVRGFnvOFMlDjfKx987vxl1d9Uk9CFz7hBUd/+mSDmzzz0J+3NyC3Ul4lii0
+	0ZtMHp0aaHcB4uNrGW4dIazyXIj/Wmb+dPcNK0ECVWrX2T2YXCD76c82Hdfy9YIAfWf+gbNZ6u4
+	pmzVlZm2GmgaD8o1iiwIleJCGBzV1td73LzRSjg4Rpjou8tM6NxooMZfZXoQLtENfCT0Ces/Si4
+	33Uebl8RN98J2sP6vPv2VoIspuHzZB4eebMGLX3w4QTLgi/SG1+rwmD+6sSM3m7jA=
+X-Received: by 2002:a05:7300:2310:b0:2b7:1e86:35ee with SMTP id 5a478bee46e88-2b739b71179mr2222242eec.28.1769219360136;
+        Fri, 23 Jan 2026 17:49:20 -0800 (PST)
 Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b73aa22707sm5160014eec.29.2026.01.23.17.49.18
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b73aa22707sm5160014eec.29.2026.01.23.17.49.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 23 Jan 2026 17:49:19 -0800 (PST)
 From: "Derek J. Clark" <derekjohn.clark@gmail.com>
@@ -87,11 +87,10 @@ Cc: Mario Limonciello <mario.limonciello@amd.com>,
 	"Derek J . Clark" <derekjohn.clark@gmail.com>,
 	linux-input@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Richard Hughes <hughsient@gmail.com>
-Subject: [PATCH v3 09/16] HID: Include firmware version in the uevent
-Date: Sat, 24 Jan 2026 01:49:00 +0000
-Message-ID: <20260124014907.991265-10-derekjohn.clark@gmail.com>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 10/16] HID: hid-lenovo-go-s: Add Lenovo Legion Go S Series HID Driver
+Date: Sat, 24 Jan 2026 01:49:01 +0000
+Message-ID: <20260124014907.991265-11-derekjohn.clark@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260124014907.991265-1-derekjohn.clark@gmail.com>
 References: <20260124014907.991265-1-derekjohn.clark@gmail.com>
@@ -106,91 +105,420 @@ X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FREEMAIL_CC(0.00)[amd.com,lenovo.com,squebb.ca,valvesoftware.com,gmail.com,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73869-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73870-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[amd.com,lenovo.com,squebb.ca,valvesoftware.com,gmail.com,vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,amd.com:email]
-X-Rspamd-Queue-Id: 7EE027C129
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,squebb.ca:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: E65FF7C0E1
 X-Rspamd-Action: no action
 
-From: Mario Limonciello <mario.limonciello@amd.com>
+Adds initial framework for a new HID driver, hid-lenovo-go-s, along with
+a uevent to report the firmware version for the MCU.
 
-Userspace software fwupd probes some HID devices when the daemon starts
-up to determine the current firmware version in order to be able to offer
-updated firmware if the manufacturer has made it available.
+This driver primarily provides access to the configurable settings of the
+Lenovo Legion Go S controller. It will attach if the controller is in
+xinput or dinput mode. Non-configuration raw reports are forwarded to
+ensure the other endpoints continue to function as normal.
 
-In order to do this fwupd will detach the existing kernel driver if one
-is present, send a HID command and then reattach the kernel driver.
-
-This can be problematic if the user is using the HID device at the time
-that fwupd probes the hardware and can cause a few frames of input to be
-dropped.  In some cases HID drivers already have a command to look up the
-firmware version, and so if that is exported to userspace fwupd can discover
-it and avoid needing to detach the kernel driver until it's time to update
-the device.
-
-Introduce a new member in the struct hid_device for the version and export
-a new uevent variable HID_FIRMWARE_VERSION that will display the version
-that HID drivers obtained.
-
-Cc: Richard Hughes <hughsient@gmail.com>
+Co-developed-by: Mario Limonciello <mario.limonciello@amd.com>
 Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
 ---
- drivers/hid/hid-core.c | 5 +++++
- include/linux/hid.h    | 1 +
- 2 files changed, 6 insertions(+)
+V3:
+  - Include Mario's SOB tag
+---
+ MAINTAINERS                   |   1 +
+ drivers/hid/Kconfig           |  12 ++
+ drivers/hid/Makefile          |   1 +
+ drivers/hid/hid-ids.h         |   4 +
+ drivers/hid/hid-lenovo-go-s.c | 293 ++++++++++++++++++++++++++++++++++
+ 5 files changed, 311 insertions(+)
+ create mode 100644 drivers/hid/hid-lenovo-go-s.c
 
-diff --git a/drivers/hid/hid-core.c b/drivers/hid/hid-core.c
-index a5b3a8ca2fcb..524f2b9ed512 100644
---- a/drivers/hid/hid-core.c
-+++ b/drivers/hid/hid-core.c
-@@ -2887,6 +2887,11 @@ static int hid_uevent(const struct device *dev, struct kobj_uevent_env *env)
- 	if (add_uevent_var(env, "MODALIAS=hid:b%04Xg%04Xv%08Xp%08X",
- 			   hdev->bus, hdev->group, hdev->vendor, hdev->product))
- 		return -ENOMEM;
-+	if (hdev->firmware_version) {
-+		if (add_uevent_var(env, "HID_FIRMWARE_VERSION=0x%04llX",
-+				   hdev->firmware_version))
-+			return -ENOMEM;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c6396be68ff1..723598010189 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14140,6 +14140,7 @@ M:	Derek J. Clark <derekjohn.clark@gmail.com>
+ M:	Mark Pearson <mpearson-lenovo@squebb.ca>
+ L:	linux-input@vger.kernel.org
+ S:	Maintained
++F:	drivers/hid/hid-lenovo-go-s.c
+ F:	drivers/hid/hid-lenovo-go.c
+ F:	drivers/hid/hid-lenovo.c
+ 
+diff --git a/drivers/hid/Kconfig b/drivers/hid/Kconfig
+index 74ac6793b29a..2b1a9fa93758 100644
+--- a/drivers/hid/Kconfig
++++ b/drivers/hid/Kconfig
+@@ -633,6 +633,18 @@ config HID_LENOVO_GO
+ 	and Legion Go 2 Handheld Console Controllers. Say M here to compile this
+ 	driver as a module. The module will be called hid-lenovo-go.
+ 
++config HID_LENOVO_GO_S
++	tristate "HID Driver for Lenovo Legion Go S Controller"
++	depends on USB_HID
++	select LEDS_CLASS
++	select LEDS_CLASS_MULTICOLOR
++	help
++	Support for Lenovo Legion Go S Handheld Console Controller.
++
++	Say Y here to include configuration interface support for the Lenovo Legion Go
++	S. Say M here to compile this driver as a module. The module will be called
++	hid-lenovo-go-s.
++
+ config HID_LETSKETCH
+ 	tristate "Letsketch WP9620N tablets"
+ 	depends on USB_HID
+diff --git a/drivers/hid/Makefile b/drivers/hid/Makefile
+index 11435bce4e47..ef9169974bf0 100644
+--- a/drivers/hid/Makefile
++++ b/drivers/hid/Makefile
+@@ -77,6 +77,7 @@ obj-$(CONFIG_HID_KYSONA)	+= hid-kysona.o
+ obj-$(CONFIG_HID_LCPOWER)	+= hid-lcpower.o
+ obj-$(CONFIG_HID_LENOVO)	+= hid-lenovo.o
+ obj-$(CONFIG_HID_LENOVO_GO)	+= hid-lenovo-go.o
++obj-$(CONFIG_HID_LENOVO_GO_S)	+= hid-lenovo-go-s.o
+ obj-$(CONFIG_HID_LETSKETCH)	+= hid-letsketch.o
+ obj-$(CONFIG_HID_LOGITECH)	+= hid-logitech.o
+ obj-$(CONFIG_HID_LOGITECH)	+= hid-lg-g15.o
+diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
+index 309e15580a38..eee1091125ca 100644
+--- a/drivers/hid/hid-ids.h
++++ b/drivers/hid/hid-ids.h
+@@ -723,6 +723,10 @@
+ #define USB_DEVICE_ID_ITE8595		0x8595
+ #define USB_DEVICE_ID_ITE_MEDION_E1239T	0xce50
+ 
++#define USB_VENDOR_ID_QHE		0x1a86
++#define USB_DEVICE_ID_LENOVO_LEGION_GO_S_XINPUT 0xe310
++#define USB_DEVICE_ID_LENOVO_LEGION_GO_S_DINPUT 0xe311
++
+ #define USB_VENDOR_ID_JABRA		0x0b0e
+ #define USB_DEVICE_ID_JABRA_SPEAK_410	0x0412
+ #define USB_DEVICE_ID_JABRA_SPEAK_510	0x0420
+diff --git a/drivers/hid/hid-lenovo-go-s.c b/drivers/hid/hid-lenovo-go-s.c
+new file mode 100644
+index 000000000000..3e9041e746df
+--- /dev/null
++++ b/drivers/hid/hid-lenovo-go-s.c
+@@ -0,0 +1,293 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ *  HID driver for Lenovo Legion Go S devices.
++ *
++ *  Copyright (c) 2025 Derek J. Clark <derekjohn.clark@gmail.com>
++ */
++#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
++
++#include <linux/array_size.h>
++#include <linux/cleanup.h>
++#include <linux/completion.h>
++#include <linux/delay.h>
++#include <linux/dev_printk.h>
++#include <linux/device.h>
++#include <linux/hid.h>
++#include <linux/jiffies.h>
++#include <linux/mutex.h>
++#include <linux/printk.h>
++#include <linux/string.h>
++#include <linux/types.h>
++#include <linux/unaligned.h>
++#include <linux/usb.h>
++#include <linux/workqueue.h>
++#include <linux/workqueue_types.h>
++
++#include "hid-ids.h"
++
++#define GO_S_CFG_INTF_IN	0x84
++#define GO_S_PACKET_SIZE	64
++
++struct hid_gos_cfg {
++	unsigned char *buf;
++	struct delayed_work gos_cfg_setup;
++	struct completion send_cmd_complete;
++	struct hid_device *hdev;
++	struct mutex cfg_mutex; /*ensure single synchronous output report*/
++} drvdata;
++
++struct command_report {
++	u8 cmd;
++	u8 sub_cmd;
++	u8 data[63];
++} __packed;
++
++struct version_report {
++	u8 cmd;
++	u32 version;
++	u8 reserved[59];
++} __packed;
++
++enum mcu_command_index {
++	GET_VERSION = 0x01,
++	GET_MCU_ID,
++	GET_GAMEPAD_CFG,
++	SET_GAMEPAD_CFG,
++	GET_TP_PARAM,
++	SET_TP_PARAM,
++	GET_RGB_CFG = 0x0f,
++	SET_RGB_CFG,
++	GET_PL_TEST = 0xdf,
++};
++
++#define FEATURE_NONE 0x00
++
++static int hid_gos_version_event(u8 *data)
++{
++	struct version_report *ver_rep = (struct version_report *)data;
++
++	drvdata.hdev->firmware_version = get_unaligned_le32(&ver_rep->version);
++	return 0;
++}
++
++static u8 get_endpoint_address(struct hid_device *hdev)
++{
++	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
++	struct usb_host_endpoint *ep;
++
++	if (intf) {
++		ep = intf->cur_altsetting->endpoint;
++		if (ep)
++			return ep->desc.bEndpointAddress;
 +	}
- 
- 	return 0;
- }
-diff --git a/include/linux/hid.h b/include/linux/hid.h
-index a4ddb94e3ee5..8249da55c9ba 100644
---- a/include/linux/hid.h
-+++ b/include/linux/hid.h
-@@ -698,6 +698,7 @@ struct hid_device {
- 	char name[128];							/* Device name */
- 	char phys[64];							/* Device physical location */
- 	char uniq[64];							/* Device unique identifier (serial #) */
-+	u64 firmware_version;						/* Firmware version */
- 
- 	void *driver_data;
- 
++
++	return -ENODEV;
++}
++
++static int hid_gos_raw_event(struct hid_device *hdev, struct hid_report *report,
++			     u8 *data, int size)
++{
++	struct command_report *cmd_rep;
++	int ep, ret;
++
++	if (size != GO_S_PACKET_SIZE)
++		goto passthrough;
++
++	ep = get_endpoint_address(hdev);
++	if (ep != GO_S_CFG_INTF_IN)
++		goto passthrough;
++
++	cmd_rep = (struct command_report *)data;
++
++	switch (cmd_rep->cmd) {
++	case GET_VERSION:
++		ret = hid_gos_version_event(data);
++		break;
++	default:
++		ret = -EINVAL;
++		break;
++	}
++	dev_dbg(&hdev->dev, "Rx data as raw input report: [%*ph]\n",
++		GO_S_PACKET_SIZE, data);
++
++	complete(&drvdata.send_cmd_complete);
++	return ret;
++
++passthrough:
++	/* Forward other HID reports so they generate events */
++	hid_input_report(hdev, HID_INPUT_REPORT, data, size, 1);
++	return 0;
++}
++
++static int mcu_property_out(struct hid_device *hdev, u8 command, u8 index,
++			    u8 *data, size_t len)
++{
++	u8 header[] = { command, index };
++	size_t header_size = ARRAY_SIZE(header);
++	size_t total_size = header_size + len;
++	int timeout = 5;
++	int ret;
++
++	/* PL_TEST commands can take longer because they go out to another device */
++	if (command == GET_PL_TEST)
++		timeout = 200;
++
++	guard(mutex)(&drvdata.cfg_mutex);
++	memcpy(drvdata.buf, header, header_size);
++	memcpy(drvdata.buf + header_size, data, len);
++	memset(drvdata.buf + total_size, 0, GO_S_PACKET_SIZE - total_size);
++
++	dev_dbg(&hdev->dev, "Send data as raw output report: [%*ph]\n",
++		GO_S_PACKET_SIZE, drvdata.buf);
++
++	ret = hid_hw_output_report(hdev, drvdata.buf, GO_S_PACKET_SIZE);
++	if (ret < 0)
++		return ret;
++
++	ret = ret == GO_S_PACKET_SIZE ? 0 : -EINVAL;
++	if (ret)
++		return ret;
++
++	ret = wait_for_completion_interruptible_timeout(&drvdata.send_cmd_complete,
++							msecs_to_jiffies(timeout));
++
++	if (ret == 0) /* timeout occurred */
++		ret = -EBUSY;
++	if (ret > 0) /* timeout/interrupt didn't occur */
++		ret = 0;
++
++	reinit_completion(&drvdata.send_cmd_complete);
++	return ret;
++}
++
++static void cfg_setup(struct work_struct *work)
++{
++	int ret;
++
++	ret = mcu_property_out(drvdata.hdev, GET_VERSION, FEATURE_NONE, 0, 0);
++	if (ret) {
++		dev_err(&drvdata.hdev->dev,
++			"Failed to retrieve MCU Version: %i\n", ret);
++		return;
++	}
++}
++
++static int hid_gos_cfg_probe(struct hid_device *hdev,
++			     const struct hid_device_id *_id)
++{
++	unsigned char *buf;
++	int ret;
++
++	buf = devm_kzalloc(&hdev->dev, GO_S_PACKET_SIZE, GFP_KERNEL);
++	if (!buf)
++		return -ENOMEM;
++
++	hid_set_drvdata(hdev, &drvdata);
++	drvdata.buf = buf;
++	drvdata.hdev = hdev;
++	mutex_init(&drvdata.cfg_mutex);
++
++	init_completion(&drvdata.send_cmd_complete);
++
++	/* Executing calls prior to returning from probe will lock the MCU. Schedule
++	 * initial data call after probe has completed and MCU can accept calls.
++	 */
++	INIT_DELAYED_WORK(&drvdata.gos_cfg_setup, &cfg_setup);
++	ret = schedule_delayed_work(&drvdata.gos_cfg_setup,
++				    msecs_to_jiffies(2));
++	if (!ret) {
++		dev_err(&hdev->dev,
++			"Failed to schedule startup delayed work\n");
++		return -ENODEV;
++	}
++	return 0;
++}
++
++static void hid_gos_cfg_remove(struct hid_device *hdev)
++{
++	guard(mutex)(&drvdata.cfg_mutex);
++	cancel_delayed_work_sync(&drvdata.gos_cfg_setup);
++	hid_hw_close(hdev);
++	hid_hw_stop(hdev);
++	hid_set_drvdata(hdev, NULL);
++}
++
++static int hid_gos_probe(struct hid_device *hdev,
++			 const struct hid_device_id *id)
++{
++	int ret, ep;
++
++	hdev->quirks |= HID_QUIRK_INPUT_PER_APP | HID_QUIRK_MULTI_INPUT;
++
++	ret = hid_parse(hdev);
++	if (ret) {
++		hid_err(hdev, "Parse failed\n");
++		return ret;
++	}
++
++	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
++	if (ret) {
++		hid_err(hdev, "Failed to start HID device\n");
++		return ret;
++	}
++
++	ret = hid_hw_open(hdev);
++	if (ret) {
++		hid_err(hdev, "Failed to open HID device\n");
++		hid_hw_stop(hdev);
++		return ret;
++	}
++
++	ep = get_endpoint_address(hdev);
++	if (ep != GO_S_CFG_INTF_IN) {
++		dev_dbg(&hdev->dev,
++			"Started interface %x as generic HID device.\n", ep);
++		return 0;
++	}
++
++	ret = hid_gos_cfg_probe(hdev, id);
++	if (ret)
++		dev_err_probe(&hdev->dev, ret,
++			      "Failed to start configuration interface");
++
++	dev_dbg(&hdev->dev, "Started Legion Go S HID Device: %x\n", ep);
++	return ret;
++}
++
++static void hid_gos_remove(struct hid_device *hdev)
++{
++	int ep = get_endpoint_address(hdev);
++
++	switch (ep) {
++	case GO_S_CFG_INTF_IN:
++		hid_gos_cfg_remove(hdev);
++		break;
++	default:
++		hid_hw_close(hdev);
++		hid_hw_stop(hdev);
++
++		break;
++	}
++}
++
++static const struct hid_device_id hid_gos_devices[] = {
++	{ HID_USB_DEVICE(USB_VENDOR_ID_QHE,
++			 USB_DEVICE_ID_LENOVO_LEGION_GO_S_XINPUT) },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_QHE,
++			 USB_DEVICE_ID_LENOVO_LEGION_GO_S_DINPUT) },
++	{}
++};
++
++MODULE_DEVICE_TABLE(hid, hid_gos_devices);
++static struct hid_driver hid_lenovo_go_s = {
++	.name = "hid-lenovo-go-s",
++	.id_table = hid_gos_devices,
++	.probe = hid_gos_probe,
++	.remove = hid_gos_remove,
++	.raw_event = hid_gos_raw_event,
++};
++module_hid_driver(hid_lenovo_go_s);
++
++MODULE_AUTHOR("Derek J. Clark");
++MODULE_DESCRIPTION("HID Driver for Lenovo Legion Go S Series gamepad.");
++MODULE_LICENSE("GPL");
 -- 
 2.52.0
 
