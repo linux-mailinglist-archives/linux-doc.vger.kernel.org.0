@@ -1,79 +1,79 @@
-Return-Path: <linux-doc+bounces-73863-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73865-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8HtSFFAldGkl2gAAu9opvQ
-	(envelope-from <linux-doc+bounces-73863-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:50:08 +0100
+	id OGnMLVIldGkl2gAAu9opvQ
+	(envelope-from <linux-doc+bounces-73865-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:50:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9B107C095
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:50:07 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FC187C0A4
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 02:50:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D88923053BB6
-	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 01:49:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D799D3033893
+	for <lists+linux-doc@lfdr.de>; Sat, 24 Jan 2026 01:49:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3618821FF2E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55F8822129B;
 	Sat, 24 Jan 2026 01:49:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mZg/TZj4"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RL8bufQE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E0F42147FB
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27D4621771B
 	for <linux-doc@vger.kernel.org>; Sat, 24 Jan 2026 01:49:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769219358; cv=none; b=b8uytMpO2R7RBCk1IqvrhlnFWadYpo00BFGBReU2ZcIYhbxu4Fy5GNRlzi41vEd6NwcyWnFvurgQLz5DOHlu5cf/8UFiTK24gm6sj3ABEyiXW6atTSWqg6nF9xl3xD6gpL8lmaoPpwjBe8RU2udASPDwOxrqIuOBBDofp9cGJKE=
+	t=1769219359; cv=none; b=IVmD16JHaPVSDat/bKT0iCevJmGrP5VPu0+3Cf3DqhDeotY2kOmT0QcrQzJPG6Lv6+zf8uU7QmzYPz0emh1tIXCyOhAOYxOG2yJoJJlXN1/1no4aMYguo4oed+ZdwaBtul0IHbocmKHU23LRzU56F++MPagBJ0EGJ4CG+gAFPVs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769219358; c=relaxed/simple;
-	bh=yNRYzCUvw7h/24TV4k/FTIrRtyG1qVaH9Te99Pv3tzE=;
+	s=arc-20240116; t=1769219359; c=relaxed/simple;
+	bh=Nb3asoNUaPuKXIaITYKDr5TQ+47i7AoGAnc2tZshDts=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=V3XV3Lb40fZPaxddJ8rwiiYay+XHeWKkxvvqaDnKHJk3leDwACM3sOA5oa+vLqjHwyiF/5HzvkWwZUZ6eJPGGsTaqxqJyTt/xFv3sqR3fRELmxt+CRCCq9W5/q8X1PrkwFtZWD34uReGATTMvkgbfr0alWElDKdveq+d77a0zJA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mZg/TZj4; arc=none smtp.client-ip=74.125.82.182
+	 MIME-Version; b=VWn/VKI8OK2t3KB9CcRM/ML4Ahasj1vm7ljcw86qEJ0nWp9ru0BjtYOn4ASS1T2S2KQLPt/XflH0wsaNkIoRHURWOcstMsC8B2jouFhIGQRpQPmhIyWpdF0XY/zCCMnYmahS774Mvn60OROmQSn1CKmpCcAHTBLtLVac+LyQHQ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RL8bufQE; arc=none smtp.client-ip=74.125.82.181
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-2b0ea1edf11so4831208eec.0
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-2b71320f501so6177519eec.1
         for <linux-doc@vger.kernel.org>; Fri, 23 Jan 2026 17:49:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769219355; x=1769824155; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1769219356; x=1769824156; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=deL+GFbShaY/PU1BGtjyGIzsYhM8+/qKKNNQ78FbRiE=;
-        b=mZg/TZj4opmfwZHLRxtXtCZ/HiNpzFRspZmDRkbCLJGTmDnWEQjN6/CDyxU/1xXblm
-         WCYzuNxDMs2SfaMHC7oNg/qGchb621xq5AJT50wNHW4SPUe4gO8L/juq3YU/p26+h+84
-         ecGe+HZyIbazdleA3ksKdfG8GmgbBDd41GeQYENhUT3HwxrgzZsu7GAacf2JMjflDLnH
-         1O53BK/R96B7/OeBz+IE47R8pu2AnshhrJDQy+3zWfHsoF0paHtUJXUbth5yyrskLJvK
-         kRekwHThD+4T18zC1vLgQTtsMKBOG01/Z7Mz9vN5Icw1m5IyInhqWlrpER968vbzvEmS
-         gAVw==
+        bh=Y5leeh6zDjWLKpeuC/+j5CV0yQoA+GAmQ8ZEpaDqT6Y=;
+        b=RL8bufQEOBJIYapviFfUitMy/HZvkaNzQ08uZunaJDvqMLnJRf1nyh2iyaXa+xea7O
+         kZsB1Rty/vK67czZ+We1bGHpL3voMOiyqFfoYREg0m3MDH566Jx8PY2276YJdzQK+9VI
+         du/Iyoiu8l1+XG7aUvpFjh7LW0zxwR2TVO1aZSjBGjhX9V/mRpMz7yMfUtuNck0MwWzU
+         yQCHSb3hVnL2HQqOW+QMlggrTcTRmHlN+nqy3EuYP8P7RZOhCiKTAAnZlUR4vXORihQS
+         wmHS6pg3Qs3QNUH+kZ2QV9mCmNsuTjLeJ8ZYSoVZLaXaPRO72eRm++RSWHMV3h3MALuo
+         /lgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769219355; x=1769824155;
+        d=1e100.net; s=20230601; t=1769219356; x=1769824156;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=deL+GFbShaY/PU1BGtjyGIzsYhM8+/qKKNNQ78FbRiE=;
-        b=er5a84B+zGH7SLjuIt/+x/yLqucKNVrRf6MTboOHZKFezvT+hI+vsjydQLZbvYC7vh
-         TTBSyBeL/fkBp7/bcHt5+nyDvSz1muxVubBgqhr0Fvco97mZCckOCv5iPzmdGbbbQSa1
-         8Smc0U3gnKWo6l1fIRSr5ppyrMVorYI5uK5M8R+kbvZBbbGax08mibOzQndbnIIxJOcU
-         jQN/TSZhHcvqQehvPi2I8MD6meJCMDQBbI8oK+/h+erv8D0W5Pp/UqCrL7TtPPUJgTKd
-         DXYKkvbnChZWsAED7JQrOxCmMN0SoToOVV+t9PERQP+lXJlITY/7vqdPgOObAD9BBo8K
-         8dhQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVX/pdnT0mAM/wvKP/A41JsaE4nx2wpWIOTDEceBSiinDVtnMcQV8zTHUeH0NjhRB+75vMVc08DGJQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzhEJtUHW/0sknN52TOQAGuyRG7BnElE6N1V+9pSkwC+jSVHu7k
-	G94xjhcGSGtjkruTRFCzvAsNjmdF3WB3YefTqxMOpSJk5/2gOVwccvgW
-X-Gm-Gg: AZuq6aLvd2BH8TfnlAbg6KjUlKBrr2aeeWgThZj8w0aAXL0juhYCYZbxmS/JzGVgAay
-	otBvBsCNf5hYBu9KIP5NVtw/3PDY1kBKJdJAYyqEdpFteHEC38gQfgNeAiidf+6BqqU4Cy54Bzk
-	cSmx0y/q1m12YxljRsjUeJQJz6hrg3fFGfKmdGt5PyMcocdqY3rm8Lvo39cJVBTJkweBk2f/fwL
-	PuwUS62vD66iKmDSkLD6iY27AO013DCL+EfOOT7Nnfw3kzHpqjD4rQIVEFukyKaBrl9nPOJXVxU
-	R4IwoJNiWRaiwec7JbwOfgo5CH6Mjit1x4MJgLRWTJ6VVlSZZFq9kU8KkgW/nYcPVk6rXNzkmKs
-	AvzYJrAVQFb0aFxNi6QmxHV0A0wATJDN5/zTesq/FYJXnqxPDrSrl6TJsp1o7IrPvqBQqAiiDgG
-	1OO2g2jP2Nmiel/YFO0SwmQKAQZ7T66mEfS9AaGELwBfS91wkF7ZiOnR6qe8NOuhU=
-X-Received: by 2002:a05:7300:f10a:b0:2b7:359b:188f with SMTP id 5a478bee46e88-2b739b8d1e9mr3245418eec.25.1769219355351;
-        Fri, 23 Jan 2026 17:49:15 -0800 (PST)
+        bh=Y5leeh6zDjWLKpeuC/+j5CV0yQoA+GAmQ8ZEpaDqT6Y=;
+        b=dsRLPc9chy8+xxiePtuEtbvxdmrQhtqAiVE/iISbqE76yTOoBdJ/eabHHrKfLVN9oQ
+         LJg+REmt8hjb5zPz8qpgF8nddxSN6iesd3W2VbOIERxewA92X8s//Sz9cqZPkQ8VqRSy
+         2NfXMS+uWrw5lpCBXCNDuTycF0OKGDUqYb05/TcrDsrGjFKx6EEJC7t+Lh2feF5dOGjU
+         qHcKakyguxuvQRnUjEVe8HwAIRRuT1KMqhWlPeHyPIY0gDdKTgOemjWI60Y4fORZRPzq
+         4earngyiqLk+Oqyr7UkBcSuvXyNszPTXkdTIAQUMpap5lKBXw2g/ZSholLMmi4ilH2yW
+         OYng==
+X-Forwarded-Encrypted: i=1; AJvYcCV3842LZkO60hLnYHPx5i9HarVwUNNDRzHdhqpTW88GZIWbbDaLgwIVZPr+QYElfEOdGVWzEUHDhq8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwbDgk/VXtsXB+R4zFVWf9JaxUg4MALsq4iInbx5wt5a0jOVsGr
+	WIALQGWSDWnLqS4UeqBvgEkZP7PkFfxnx8DKyXeduuY181Ilqw4rd6Ik
+X-Gm-Gg: AZuq6aIn4iWLXg2Ac1Di6lZLKDlgspNw2CI2lyPnLz2dCbWc6pIPgI1lxyeP0apa4JH
+	/WuHnU4j82yW+YQC5w9EOOWA7mjGjb/M91yXbTCirgt2OTeUnkxSG5TUlSP8nZ8u3lPBnB72pz/
+	kleduJU68gI2gLIdF9BzMDZhvRChykU3CUic3BklW68ZFZFeE7kUTn2Y5XB9awlhP8rYiALjatH
+	52rTmb1XT5gNidZ2pCgLun6nw6seewBiax9aYbaBbzpBJlvYYmNSTmQLGKhyl7KVGs65YCJSMlu
+	iY0QPzWx/kgjDtuGN/XlpB54mT4pqDJbt6eZwpv7YE8ECq4ozyhdHRTRWZBIORHHV4glVWDKGE0
+	crpVTqAHrXSIa5MKe6RvzQXXfufBp0wzIT26IcbaQRTsLFAfytmeH66X7K0MbnOPkrZ/n+Weg+N
+	LW7CVNFdy5MvtUZkupw7EvxccrcxjHdwPQm3Nw8/55L73684aK3DJZqXmQrPoD/f0=
+X-Received: by 2002:a05:7301:1016:b0:2b7:2723:c227 with SMTP id 5a478bee46e88-2b739bab766mr3019643eec.31.1769219356181;
+        Fri, 23 Jan 2026 17:49:16 -0800 (PST)
 Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b73aa22707sm5160014eec.29.2026.01.23.17.49.14
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b73aa22707sm5160014eec.29.2026.01.23.17.49.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 23 Jan 2026 17:49:15 -0800 (PST)
 From: "Derek J. Clark" <derekjohn.clark@gmail.com>
@@ -88,9 +88,9 @@ Cc: Mario Limonciello <mario.limonciello@amd.com>,
 	linux-input@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 04/16] HID: hid-lenovo-go: Add Rumble and Haptic Settings
-Date: Sat, 24 Jan 2026 01:48:55 +0000
-Message-ID: <20260124014907.991265-5-derekjohn.clark@gmail.com>
+Subject: [PATCH v3 05/16] HID: hid-lenovo-go: Add FPS Mode DPI settings
+Date: Sat, 24 Jan 2026 01:48:56 +0000
+Message-ID: <20260124014907.991265-6-derekjohn.clark@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260124014907.991265-1-derekjohn.clark@gmail.com>
 References: <20260124014907.991265-1-derekjohn.clark@gmail.com>
@@ -107,14 +107,14 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73863-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-73865-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -130,443 +130,136 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E9B107C095
+X-Rspamd-Queue-Id: 5FC187C0A4
 X-Rspamd-Action: no action
 
-Adds attributes that control the handles rumble mode and intensity, as
-well as touchpad haptic feedback settings.
+Adds attribute that enables selection of the DPI of the optical sensor
+when the right handle toggle is set to FPS mode.
 
 Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
 ---
-V3:
- - Remove erroneous renaming of enabled -> enable for some left & right
-   handle attributes.
----
- drivers/hid/hid-lenovo-go.c | 312 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 312 insertions(+)
+ drivers/hid/hid-lenovo-go.c | 68 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
 
 diff --git a/drivers/hid/hid-lenovo-go.c b/drivers/hid/hid-lenovo-go.c
-index 681791f119d1..fe39a2b38f38 100644
+index fe39a2b38f38..5d454cd2cdae 100644
 --- a/drivers/hid/hid-lenovo-go.c
 +++ b/drivers/hid/hid-lenovo-go.c
-@@ -38,6 +38,8 @@ struct hid_go_cfg {
- 	struct mutex cfg_mutex; /*ensure single synchronous output report*/
- 	u8 fps_mode;
- 	u8 gp_left_auto_sleep_time;
-+	u8 gp_left_notify_en;
-+	u8 gp_left_rumble_mode;
- 	u32 gp_left_version_firmware;
- 	u8 gp_left_version_gen;
- 	u32 gp_left_version_hardware;
-@@ -45,11 +47,14 @@ struct hid_go_cfg {
- 	u32 gp_left_version_protocol;
- 	u8 gp_mode;
- 	u8 gp_right_auto_sleep_time;
-+	u8 gp_right_notify_en;
-+	u8 gp_right_rumble_mode;
- 	u32 gp_right_version_firmware;
- 	u8 gp_right_version_gen;
- 	u32 gp_right_version_hardware;
- 	u32 gp_right_version_product;
- 	u32 gp_right_version_protocol;
-+	u8 gp_rumble_intensity;
- 	u8 imu_left_bypass_en;
- 	u8 imu_left_sensor_en;
- 	u8 imu_right_bypass_en;
-@@ -61,6 +66,8 @@ struct hid_go_cfg {
+@@ -64,6 +64,7 @@ struct hid_go_cfg {
+ 	u32 mcu_version_hardware;
+ 	u32 mcu_version_product;
  	u32 mcu_version_protocol;
++	u32 mouse_dpi;
  	u8 rgb_en;
  	u8 tp_en;
-+	u8 tp_vibration_en;
-+	u8 tp_vibration_intensity;
- 	u32 tx_dongle_version_firmware;
- 	u8 tx_dongle_version_gen;
- 	u32 tx_dongle_version_hardware;
-@@ -167,6 +174,49 @@ static const char *const gamepad_mode_text[] = {
- 	[DINPUT] = "dinput",
+ 	u8 tp_vibration_en;
+@@ -217,6 +218,8 @@ static const char *const rumble_mode_text[] = {
+ 	[RUMBLE_MODE_RPG] = "rpg",
  };
  
-+enum motor_cfg_index {
-+	MOTOR_CFG_ALL = 0x01,
-+	MOTOR_INTENSITY,
-+	VIBRATION_NOTIFY_ENABLE,
-+	RUMBLE_MODE,
-+	TP_VIBRATION_ENABLE,
-+	TP_VIBRATION_INTENSITY,
-+};
-+
-+enum intensity_index {
-+	INTENSITY_UNKNOWN,
-+	INTENSITY_OFF,
-+	INTENSITY_LOW,
-+	INTENSITY_MEDIUM,
-+	INTENSITY_HIGH,
-+};
-+
-+static const char *const intensity_text[] = {
-+	[INTENSITY_UNKNOWN] = "unknown",
-+	[INTENSITY_OFF] = "off",
-+	[INTENSITY_LOW] = "low",
-+	[INTENSITY_MEDIUM] = "medium",
-+	[INTENSITY_HIGH] = "high",
-+};
-+
-+enum rumble_mode_index {
-+	RUMBLE_MODE_UNKNOWN,
-+	RUMBLE_MODE_FPS,
-+	RUMBLE_MODE_RACE,
-+	RUMBLE_MODE_AVERAGE,
-+	RUMBLE_MODE_SPG,
-+	RUMBLE_MODE_RPG,
-+};
-+
-+static const char *const rumble_mode_text[] = {
-+	[RUMBLE_MODE_UNKNOWN] = "unknown",
-+	[RUMBLE_MODE_FPS] = "fps",
-+	[RUMBLE_MODE_RACE] = "racing",
-+	[RUMBLE_MODE_AVERAGE] = "standard",
-+	[RUMBLE_MODE_SPG] = "spg",
-+	[RUMBLE_MODE_RPG] = "rpg",
-+};
++#define FPS_MODE_DPI           0x02
 +
  static int hid_go_version_event(struct command_report *cmd_rep)
  {
  	switch (cmd_rep->sub_cmd) {
-@@ -333,6 +383,47 @@ static int hid_go_feature_status_event(struct command_report *cmd_rep)
- 	}
+@@ -424,6 +427,16 @@ static int hid_go_motor_event(struct command_report *cmd_rep)
+ 	return -EINVAL;
  }
  
-+static int hid_go_motor_event(struct command_report *cmd_rep)
++static int hid_go_fps_dpi_event(struct command_report *cmd_rep)
 +{
-+	switch (cmd_rep->sub_cmd) {
-+	case MOTOR_CFG_ALL:
++	if (cmd_rep->sub_cmd != FPS_MODE_DPI)
 +		return -EINVAL;
-+	case MOTOR_INTENSITY:
-+		drvdata.gp_rumble_intensity = cmd_rep->data[0];
-+		return 0;
-+	case VIBRATION_NOTIFY_ENABLE:
-+		switch (cmd_rep->device_type) {
-+		case LEFT_CONTROLLER:
-+			drvdata.gp_left_notify_en = cmd_rep->data[0];
-+			return 0;
-+		case RIGHT_CONTROLLER:
-+			drvdata.gp_right_notify_en = cmd_rep->data[0];
-+			return 0;
-+		default:
-+			return -EINVAL;
-+		};
-+		break;
-+	case RUMBLE_MODE:
-+		switch (cmd_rep->device_type) {
-+		case LEFT_CONTROLLER:
-+			drvdata.gp_left_rumble_mode = cmd_rep->data[0];
-+			return 0;
-+		case RIGHT_CONTROLLER:
-+			drvdata.gp_right_rumble_mode = cmd_rep->data[0];
-+			return 0;
-+		default:
-+			return -EINVAL;
-+		};
-+	case TP_VIBRATION_ENABLE:
-+		drvdata.tp_vibration_en = cmd_rep->data[0];
-+		return 0;
-+	case TP_VIBRATION_INTENSITY:
-+		drvdata.tp_vibration_intensity = cmd_rep->data[0];
-+		return 0;
-+	}
-+	return -EINVAL;
++
++	drvdata.mouse_dpi = get_unaligned_le32(cmd_rep->data);
++
++	return 0;
 +}
 +
  static int hid_go_set_event_return(struct command_report *cmd_rep)
  {
  	if (cmd_rep->data[0] != 0)
-@@ -380,7 +471,11 @@ static int hid_go_raw_event(struct hid_device *hdev, struct hid_report *report,
- 		case GET_FEATURE_STATUS:
- 			ret = hid_go_feature_status_event(cmd_rep);
+@@ -474,8 +487,12 @@ static int hid_go_raw_event(struct hid_device *hdev, struct hid_report *report,
+ 		case GET_MOTOR_CFG:
+ 			ret = hid_go_motor_event(cmd_rep);
  			break;
-+		case GET_MOTOR_CFG:
-+			ret = hid_go_motor_event(cmd_rep);
++		case GET_DPI_CFG:
++			ret = hid_go_fps_dpi_event(cmd_rep);
 +			break;
  		case SET_FEATURE_STATUS:
-+		case SET_MOTOR_CFG:
+ 		case SET_MOTOR_CFG:
++		case SET_DPI_CFG:
  			ret = hid_go_set_event_return(cmd_rep);
  			break;
  		default:
-@@ -757,6 +852,168 @@ static ssize_t feature_status_options(struct device *dev,
+@@ -1014,6 +1031,52 @@ static ssize_t motor_config_options(struct device *dev,
  	return count;
  }
  
-+static ssize_t motor_config_store(struct device *dev,
++static ssize_t fps_mode_dpi_store(struct device *dev,
 +				  struct device_attribute *attr,
-+				  const char *buf, size_t count,
-+				  enum motor_cfg_index index,
-+				  enum dev_type device_type)
++				  const char *buf, size_t count)
++
 +{
-+	size_t size = 1;
-+	u8 val = 0;
++	size_t size = 4;
++	u32 value;
++	u8 val[4];
 +	int ret;
 +
-+	switch (index) {
-+	case MOTOR_CFG_ALL:
-+		return -EINVAL;
-+	case MOTOR_INTENSITY:
-+		ret = sysfs_match_string(intensity_text, buf);
-+		val = ret;
-+		break;
-+	case VIBRATION_NOTIFY_ENABLE:
-+		ret = sysfs_match_string(enabled_status_text, buf);
-+		val = ret;
-+		break;
-+	case RUMBLE_MODE:
-+		ret = sysfs_match_string(rumble_mode_text, buf);
-+		val = ret;
-+		break;
-+	case TP_VIBRATION_ENABLE:
-+		ret = sysfs_match_string(enabled_status_text, buf);
-+		val = ret;
-+		break;
-+	case TP_VIBRATION_INTENSITY:
-+		ret = sysfs_match_string(intensity_text, buf);
-+		val = ret;
-+		break;
-+	};
-+
-+	if (ret < 0)
-+		return ret;
-+
-+	if (!val)
-+		size = 0;
-+
-+	ret = mcu_property_out(drvdata.hdev, MCU_CONFIG_DATA, SET_MOTOR_CFG,
-+			       index, device_type, &val, size);
-+	if (ret < 0)
-+		return ret;
-+
-+	return count;
-+}
-+
-+static ssize_t motor_config_show(struct device *dev,
-+				 struct device_attribute *attr, char *buf,
-+				 enum motor_cfg_index index,
-+				 enum dev_type device_type)
-+{
-+	ssize_t count = 0;
-+	int ret;
-+	u8 i;
-+
-+	ret = mcu_property_out(drvdata.hdev, MCU_CONFIG_DATA, GET_MOTOR_CFG,
-+			       index, device_type, 0, 0);
++	ret = kstrtou32(buf, 10, &value);
 +	if (ret)
 +		return ret;
 +
-+	switch (index) {
-+	case MOTOR_CFG_ALL:
++	if (value != 500 && value != 800 && value != 1200 && value != 1800)
 +		return -EINVAL;
-+	case MOTOR_INTENSITY:
-+		i = drvdata.gp_rumble_intensity;
-+		if (i >= ARRAY_SIZE(intensity_text))
-+			return -EINVAL;
 +
-+		count = sysfs_emit(buf, "%s\n", intensity_text[i]);
-+		break;
-+	case VIBRATION_NOTIFY_ENABLE:
-+		switch (device_type) {
-+		case LEFT_CONTROLLER:
-+			i = drvdata.gp_left_notify_en;
-+			break;
-+		case RIGHT_CONTROLLER:
-+			i = drvdata.gp_right_notify_en;
-+			break;
-+		default:
-+			return -EINVAL;
-+		};
-+		if (i >= ARRAY_SIZE(enabled_status_text))
-+			return -EINVAL;
++	put_unaligned_le32(value, val);
 +
-+		count = sysfs_emit(buf, "%s\n", enabled_status_text[i]);
-+		break;
-+	case RUMBLE_MODE:
-+		switch (device_type) {
-+		case LEFT_CONTROLLER:
-+			i = drvdata.gp_left_rumble_mode;
-+			break;
-+		case RIGHT_CONTROLLER:
-+			i = drvdata.gp_right_rumble_mode;
-+			break;
-+		default:
-+			return -EINVAL;
-+		};
-+		if (i >= ARRAY_SIZE(rumble_mode_text))
-+			return -EINVAL;
-+
-+		count = sysfs_emit(buf, "%s\n", rumble_mode_text[i]);
-+		break;
-+	case TP_VIBRATION_ENABLE:
-+		i = drvdata.tp_vibration_en;
-+		if (i >= ARRAY_SIZE(enabled_status_text))
-+			return -EINVAL;
-+
-+		count = sysfs_emit(buf, "%s\n", enabled_status_text[i]);
-+		break;
-+	case TP_VIBRATION_INTENSITY:
-+		i = drvdata.tp_vibration_intensity;
-+		if (i >= ARRAY_SIZE(intensity_text))
-+			return -EINVAL;
-+
-+		count = sysfs_emit(buf, "%s\n", intensity_text[i]);
-+		break;
-+	};
++	ret = mcu_property_out(drvdata.hdev, MCU_CONFIG_DATA, SET_DPI_CFG,
++			       FPS_MODE_DPI, UNSPECIFIED, val, size);
++	if (ret < 0)
++		return ret;
 +
 +	return count;
 +}
 +
-+static ssize_t motor_config_options(struct device *dev,
-+				    struct device_attribute *attr, char *buf,
-+				    enum motor_cfg_index index)
++static ssize_t fps_mode_dpi_show(struct device *dev,
++				 struct device_attribute *attr, char *buf)
 +{
-+	ssize_t count = 0;
-+	unsigned int i;
++	int ret;
 +
-+	switch (index) {
-+	case MOTOR_CFG_ALL:
-+		break;
-+	case RUMBLE_MODE:
-+		for (i = 1; i < ARRAY_SIZE(rumble_mode_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       rumble_mode_text[i]);
-+		}
-+		break;
-+	case MOTOR_INTENSITY:
-+	case TP_VIBRATION_INTENSITY:
-+		for (i = 1; i < ARRAY_SIZE(intensity_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       intensity_text[i]);
-+		}
-+		break;
-+	case VIBRATION_NOTIFY_ENABLE:
-+	case TP_VIBRATION_ENABLE:
-+		for (i = 1; i < ARRAY_SIZE(enabled_status_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       enabled_status_text[i]);
-+		}
-+		break;
-+	};
++	ret = mcu_property_out(drvdata.hdev, MCU_CONFIG_DATA, GET_DPI_CFG,
++			       FPS_MODE_DPI, UNSPECIFIED, 0, 0);
++	if (ret < 0)
++		return ret;
 +
-+	if (count)
-+		buf[count - 1] = '\n';
++	return sysfs_emit(buf, "%u\n", drvdata.mouse_dpi);
++}
 +
-+	return count;
++static ssize_t fps_mode_dpi_index_show(struct device *dev,
++				       struct device_attribute *attr, char *buf)
++{
++	return sysfs_emit(buf, "500 800 1200 1800\n");
 +}
 +
  #define LEGO_DEVICE_ATTR_RW(_name, _attrname, _dtype, _rtype, _group)         \
  	static ssize_t _name##_store(struct device *dev,                      \
  				     struct device_attribute *attr,           \
-@@ -822,10 +1079,18 @@ static DEVICE_ATTR_RO_NAMED(gamepad_mode_index, "mode_index");
- struct go_cfg_attr reset_mcu = { FEATURE_RESET_GAMEPAD };
- LEGO_DEVICE_ATTR_WO(reset_mcu, "reset_mcu", USB_MCU, feature_status);
+@@ -1085,7 +1148,12 @@ LEGO_DEVICE_ATTR_RW(gamepad_rumble_intensity, "rumble_intensity", UNSPECIFIED,
+ static DEVICE_ATTR_RO_NAMED(gamepad_rumble_intensity_index,
+ 			    "rumble_intensity_index");
  
-+struct go_cfg_attr gamepad_rumble_intensity = { MOTOR_INTENSITY };
-+LEGO_DEVICE_ATTR_RW(gamepad_rumble_intensity, "rumble_intensity", UNSPECIFIED,
-+		    index, motor_config);
-+static DEVICE_ATTR_RO_NAMED(gamepad_rumble_intensity_index,
-+			    "rumble_intensity_index");
++static DEVICE_ATTR_RW(fps_mode_dpi);
++static DEVICE_ATTR_RO(fps_mode_dpi_index);
 +
  static struct attribute *mcu_attrs[] = {
++	&dev_attr_fps_mode_dpi.attr,
++	&dev_attr_fps_mode_dpi_index.attr,
  	&dev_attr_fps_switch_status.attr,
  	&dev_attr_gamepad_mode.attr,
  	&dev_attr_gamepad_mode_index.attr,
-+	&dev_attr_gamepad_rumble_intensity.attr,
-+	&dev_attr_gamepad_rumble_intensity_index.attr,
- 	&dev_attr_reset_mcu.attr,
- 	&dev_attr_version_firmware_mcu.attr,
- 	&dev_attr_version_gen_mcu.attr,
-@@ -908,6 +1173,17 @@ static DEVICE_ATTR_RO_NAMED(imu_enabled_left_index, "imu_enabled_index");
- struct go_cfg_attr reset_left = { FEATURE_RESET_GAMEPAD };
- LEGO_DEVICE_ATTR_WO(reset_left, "reset", LEFT_CONTROLLER, feature_status);
- 
-+struct go_cfg_attr rumble_mode_left = { RUMBLE_MODE };
-+LEGO_DEVICE_ATTR_RW(rumble_mode_left, "rumble_mode", LEFT_CONTROLLER, index,
-+		    motor_config);
-+static DEVICE_ATTR_RO_NAMED(rumble_mode_left_index, "rumble_mode_index");
-+
-+struct go_cfg_attr rumble_notification_left = { VIBRATION_NOTIFY_ENABLE };
-+LEGO_DEVICE_ATTR_RW(rumble_notification_left, "rumble_notification",
-+		    LEFT_CONTROLLER, index, motor_config);
-+static DEVICE_ATTR_RO_NAMED(rumble_notification_left_index,
-+			    "rumble_notification_index");
-+
- static struct attribute *left_gamepad_attrs[] = {
- 	&dev_attr_auto_sleep_time_left.attr,
- 	&dev_attr_auto_sleep_time_left_range.attr,
-@@ -916,6 +1192,10 @@ static struct attribute *left_gamepad_attrs[] = {
- 	&dev_attr_imu_enabled_left.attr,
- 	&dev_attr_imu_enabled_left_index.attr,
- 	&dev_attr_reset_left.attr,
-+	&dev_attr_rumble_mode_left.attr,
-+	&dev_attr_rumble_mode_left_index.attr,
-+	&dev_attr_rumble_notification_left.attr,
-+	&dev_attr_rumble_notification_left_index.attr,
- 	&dev_attr_version_hardware_left.attr,
- 	&dev_attr_version_firmware_left.attr,
- 	&dev_attr_version_gen_left.attr,
-@@ -964,6 +1244,17 @@ static DEVICE_ATTR_RO_NAMED(imu_enabled_right_index, "imu_enabled_index");
- struct go_cfg_attr reset_right = { FEATURE_RESET_GAMEPAD };
- LEGO_DEVICE_ATTR_WO(reset_right, "reset", LEFT_CONTROLLER, feature_status);
- 
-+struct go_cfg_attr rumble_mode_right = { RUMBLE_MODE };
-+LEGO_DEVICE_ATTR_RW(rumble_mode_right, "rumble_mode", RIGHT_CONTROLLER, index,
-+		    motor_config);
-+static DEVICE_ATTR_RO_NAMED(rumble_mode_right_index, "rumble_mode_index");
-+
-+struct go_cfg_attr rumble_notification_right = { VIBRATION_NOTIFY_ENABLE };
-+LEGO_DEVICE_ATTR_RW(rumble_notification_right, "rumble_notification",
-+		    RIGHT_CONTROLLER, index, motor_config);
-+static DEVICE_ATTR_RO_NAMED(rumble_notification_right_index,
-+			    "rumble_notification_index");
-+
- static struct attribute *right_gamepad_attrs[] = {
- 	&dev_attr_auto_sleep_time_right.attr,
- 	&dev_attr_auto_sleep_time_right_range.attr,
-@@ -972,6 +1263,10 @@ static struct attribute *right_gamepad_attrs[] = {
- 	&dev_attr_imu_enabled_right.attr,
- 	&dev_attr_imu_enabled_right_index.attr,
- 	&dev_attr_reset_right.attr,
-+	&dev_attr_rumble_mode_right.attr,
-+	&dev_attr_rumble_mode_right_index.attr,
-+	&dev_attr_rumble_notification_right.attr,
-+	&dev_attr_rumble_notification_right_index.attr,
- 	&dev_attr_version_hardware_right.attr,
- 	&dev_attr_version_firmware_right.attr,
- 	&dev_attr_version_gen_right.attr,
-@@ -991,9 +1286,26 @@ LEGO_DEVICE_ATTR_RW(touchpad_enabled, "enabled", UNSPECIFIED, index,
- 		    feature_status);
- static DEVICE_ATTR_RO_NAMED(touchpad_enabled_index, "enabled_index");
- 
-+struct go_cfg_attr touchpad_vibration_enabled = { TP_VIBRATION_ENABLE };
-+LEGO_DEVICE_ATTR_RW(touchpad_vibration_enabled, "vibration_enabled", UNSPECIFIED,
-+		    index, motor_config);
-+static DEVICE_ATTR_RO_NAMED(touchpad_vibration_enabled_index,
-+			    "vibration_enabled_index");
-+
-+struct go_cfg_attr touchpad_vibration_intensity = { TP_VIBRATION_INTENSITY };
-+LEGO_DEVICE_ATTR_RW(touchpad_vibration_intensity, "vibration_intensity",
-+		    UNSPECIFIED, index, motor_config);
-+static DEVICE_ATTR_RO_NAMED(touchpad_vibration_intensity_index,
-+			    "vibration_intensity_index");
-+
- static struct attribute *touchpad_attrs[] = {
- 	&dev_attr_touchpad_enabled.attr,
- 	&dev_attr_touchpad_enabled_index.attr,
-+	&dev_attr_touchpad_vibration_enabled.attr,
-+	&dev_attr_touchpad_vibration_enabled_index.attr,
-+	&dev_attr_touchpad_vibration_intensity.attr,
-+	&dev_attr_touchpad_vibration_intensity_index.attr,
-+	NULL,
- };
- 
- static const struct attribute_group touchpad_attr_group = {
 -- 
 2.52.0
 
