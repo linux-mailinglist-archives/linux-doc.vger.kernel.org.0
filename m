@@ -1,194 +1,117 @@
-Return-Path: <linux-doc+bounces-73936-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73938-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gCD3Kzg0dmkQNgEAu9opvQ
-	(envelope-from <linux-doc+bounces-73936-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 25 Jan 2026 16:18:16 +0100
+	id uBpMJ+g1dmmTNgEAu9opvQ
+	(envelope-from <linux-doc+bounces-73938-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 25 Jan 2026 16:25:28 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0556A8124B
-	for <lists+linux-doc@lfdr.de>; Sun, 25 Jan 2026 16:18:15 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 23301812DD
+	for <lists+linux-doc@lfdr.de>; Sun, 25 Jan 2026 16:25:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BA2E0300462D
-	for <lists+linux-doc@lfdr.de>; Sun, 25 Jan 2026 15:18:14 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 9F2A63001032
+	for <lists+linux-doc@lfdr.de>; Sun, 25 Jan 2026 15:25:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 460E61C5F1B;
-	Sun, 25 Jan 2026 15:18:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9F5831D74C;
+	Sun, 25 Jan 2026 15:25:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ess1/F5g"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="NNoIBjXl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B572819B5A3
-	for <linux-doc@vger.kernel.org>; Sun, 25 Jan 2026 15:18:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAFE1405F7;
+	Sun, 25 Jan 2026 15:25:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769354294; cv=none; b=pdt/yeQZw1Q/7dAF60qEZyrfialZRKMpBW/r44xvBK1fLnC6PFbtSKFyrCalz3IbU8DdCx5NJjLfF8Y43ZV2E+R/l03ZERZ35z951IAm8p9iNkiKlFeM0PY2V8CCvWnV8kCz7CI1WgFHtPuAnxLTPEveD1o73xz+NnnkPQaa4tI=
+	t=1769354724; cv=none; b=bGpl4dmvzVTn82arZCmE2afed+8QxSvamBWQIWgGKoCpISzKIJ0R9Ub8WzYR0doHfPmt2SlK99IFuLVa9ZOF7HH6HBmPVmM9+YP5ZJmB9278PIAecXu03JVlSze52YsJ+YRk+lIGGNuwBmDZbTIQzdYpOzyVv8PLYood5FaHLmE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769354294; c=relaxed/simple;
-	bh=tsKPD14Xnld2TlLg3C0MCV1YbheSSgvmtKUW85hq1ME=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=p/rLyKgUrNiNS/A+C/15V6207OcssLX2jG6Ocy06A0+mBACf4OPtaq7FDHN7AJ0pF1lcDOjy1YyMaSdwE4k+56WBW7UH3SLAuSMtSxIcFqIO7mJT0UKJfHIXkHgV8ozlzSgFRRYFi/wgB042Du033O/foYXXrT+46LzQo2xzp8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ess1/F5g; arc=none smtp.client-ip=209.85.210.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-81f39438187so1887190b3a.2
-        for <linux-doc@vger.kernel.org>; Sun, 25 Jan 2026 07:18:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769354292; x=1769959092; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ystvYH8HTUlfg1RKfKOpKMGtzGNJpi5EBFc6DI2UvsU=;
-        b=Ess1/F5gWgK7fpLY4HfEo/cGD/GNN0Gm+1Ml1YwM82CTBs74SaX+elPn/ZVdge4eVo
-         +P4DMqVnjapF7ts+TThSfQzrxjfmooAVnl4vBlrlOmfAXt2lcSgqYYu4+WOavn2lNaW1
-         p1Vo1G47ce8kUbLk4dd5lt/Bpc5VA5Qc4bFP/UCnjkrldeIM7Zti5XUi7LoM2tXEG455
-         PDan35lVsEKIJi5pr2kBNipH86ZHLbtPYppxdkE0mwVuooFmQ5PkmSz18zHdxrkg54Oh
-         S3svSx4dZkFBWzMnP7tFfa4wI3N8Ohrej4n9vQS8ZkeYYV7toqKQSyABdaRodeGU2NKK
-         T9MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769354292; x=1769959092;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ystvYH8HTUlfg1RKfKOpKMGtzGNJpi5EBFc6DI2UvsU=;
-        b=oIx9NXrkcz+uJAp+NOgPwN5QYsxTqgbDtIlxos9cYYrLT/RfhNObSj19vb+Jl215Mx
-         F1wYL8vuWHOLAia8+zub2xuZ4a8Wf8GD6EgFy1pQquNvrRq7mzmoABH/b9o/WhZBW7l8
-         ldXC5JYL/6LMUikdte7vlLM+d0SpPpc/9OEyFAwGRyC3V9PaIPMKUABqm2a1FLsS6Upp
-         jq8GilKr1/Yd3UkUOsO6z0DmgW8EMuYhNp1m7UnkdDUHeP+wzRY0fgw5lvg02izqLuby
-         n/4IhpuLhrIeLV3gVo0e2Qs9uUQg7f822S955sf5QrLjhNNtCelnuERRlPXojo4IRYY4
-         S1QQ==
-X-Gm-Message-State: AOJu0YzkTwV7K+o1oKh8SZl/AVNLMXZWSsgrgGQ7Lm8e52oW6fxh4vmO
-	7MquwHS2jsz+OYax3C/iDe0vTOk0AT3pZ691BC1xRLT7pkn2vAEqpV1l
-X-Gm-Gg: AZuq6aLrcEWDloCG4VPeuIA+qC2F7Tjv+7ya2+IftPTVmncs+5dOghVcKWVVJvmIjkD
-	e5sCi95IQ+/+J11dRL8GO49Xg7ol8qQZeG/3Khd8XmooGpxzxVDsbpPYyLLCnzryKHMS/hB9spU
-	9nPiEYSybfzaCmC6c3V2KmR5mveuX65m+LB/qEBaJZxzIwac3+lWEOJhvs4rgW2u7CElReJdA6d
-	nLX+B2///WWXFO3/VNDcDAlCjrNM7TqloNJ4ME9PnVo0m6hW5nuPCOe0fvAQktIh/tyJcMsQPaW
-	nojq4F8MjgwpA1x5HOi+NwA4Jid3DMTYzHd1i47umk6jWVhLrudFfxb+pcMGz5jh6yOfL26h8nt
-	ApQsVDuLybbbsKBS0gCpET95QnTaN/7xepHORqamQPM5ThIs5mPASaiZp9AWV17bF8Bb9XiHsp9
-	hH45+TWVwKU1HX4MUGyfa8/rFDXInxmBCOHDPy4PuMHfd0iW0vzMMMc6qF
-X-Received: by 2002:a05:6a00:90a4:b0:81f:4769:6fde with SMTP id d2e1a72fcca58-823411fa858mr1517225b3a.17.1769354291932;
-        Sun, 25 Jan 2026 07:18:11 -0800 (PST)
-Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp. [106.167.137.155])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-823186467basm7172977b3a.10.2026.01.25.07.18.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 25 Jan 2026 07:18:11 -0800 (PST)
-Message-ID: <37845423-ea1c-4dc7-8b4b-d85f49d7acef@gmail.com>
-Date: Mon, 26 Jan 2026 00:18:09 +0900
+	s=arc-20240116; t=1769354724; c=relaxed/simple;
+	bh=oGESXLq/bWmrmAWbNt3J1d76zlCuhmDQVcTK8W6oOFQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pCtkLJSYq67wbDOjxc00+OQ7o9gzOkTD7ZR+gbtdCaNfGf5mTEfh1M7a1LmnVvQZfPAfEYAJ7RdkW4xB4xPikXciPNtuPj1prAuS1nnqvJDPiol/BsWmLwnD8HsDU1yxRenaTmGFjeH8dicEhqWKtGTf/xPdN4uDy4DCasFEJeU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=NNoIBjXl; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D430BC4CEF1;
+	Sun, 25 Jan 2026 15:25:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1769354724;
+	bh=oGESXLq/bWmrmAWbNt3J1d76zlCuhmDQVcTK8W6oOFQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=NNoIBjXltpIGrMiN5VVwB1k23p8IsghD+IPcCnz8QNi2pujpVQI6Ffke5F73/HbQ/
+	 rThv3sHZJ2N2usoM2oCCiNf0pJ7NK8D98pDwcPT4HQVHiyi/BWKakSAInzXM5kO2FN
+	 yYNhkxGtS9kgKSoSIdv+JK5kxrBmcUd/PZGbm2fo=
+Date: Sun, 25 Jan 2026 16:25:21 +0100
+From: Greg KH <gregkh@linuxfoundation.org>
+To: john ashrith6 <johnashrith6@gmail.com>
+Cc: workflows@vger.kernel.org, corbet@lwn.net, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] docs: clarify CC list guidance wording
+Message-ID: <2026012527-operate-series-95f9@gregkh>
+References: <CABoKZAD+694qPMAjgvJKfHdNYbwygsjp5NmowVA5hv63Z8823w@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: ja_JP: translate 'Obtain a current source tree'
-To: Akiyoshi Kurita <weibu@redadmin.org>
-Cc: linux-doc@vger.kernel.org, corbet@lwn.net,
- Akira Yokosawa <akiyks@gmail.com>
-References: <20260125142609.3029741-1-weibu@redadmin.org>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <20260125142609.3029741-1-weibu@redadmin.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CABoKZAD+694qPMAjgvJKfHdNYbwygsjp5NmowVA5hv63Z8823w@mail.gmail.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [2.34 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
+	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73936-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-73938-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akiyks@gmail.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linuxfoundation.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,redadmin.org:email]
-X-Rspamd-Queue-Id: 0556A8124B
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:dkim]
+X-Rspamd-Queue-Id: 23301812DD
 X-Rspamd-Action: no action
 
-Hi,
-
-On Sun, 25 Jan 2026 23:26:09 +0900, Akiyoshi Kurita wrote:
-> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
-> ---
-
-Your summary phrase should tell where the change is made.
-
-Also, why am I not seeing any changelog?
-
->  .../ja_JP/process/submitting-patches.rst      | 37 +++++++++++++++++++
->  1 file changed, 37 insertions(+)
+On Sun, Jan 25, 2026 at 08:31:07PM +0530, john ashrith6 wrote:
+> Removed the extra Signed-off-by so that only my real name remains.
 > 
-> diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rst b/Documentation/translations/ja_JP/process/submitting-patches.rst
-> index 1ef10ee7cbf6..6aba1652e75f 100644
-> --- a/Documentation/translations/ja_JP/process/submitting-patches.rst
-> +++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
-> @@ -30,3 +30,40 @@ Documentation/admin-guide/reporting-issues.rst
->  この文書自体も長大ですが、詳細な手順書というわけではありません。
->  詳細については :ref:`Documentation/process/submit-checklist.rst <submitchecklist>`
->  を参照してください。
-> +
-> +この文書には、比較的簡潔な形式で多数の提案が含まれています。
-> +カーネル開発プロセスの仕組みに関する詳細は
-> +Documentation/process/development-process.rst を参照してください。
-> +また、コードを投稿する前に確認すべき項目の一覧として
-> +Documentation/process/submit-checklist.rst を読んでください。
-> +デバイスツリーバインディングのパッチについては、
-> +Documentation/devicetree/bindings/submitting-patches.rst を読んでください。
-> +
-> +この文書は、パッチ作成に ``git`` を使う前提で書かれています。
-> +もし ``git`` に不慣れであれば、使い方を学ぶことを強く勧めます。
-> +それにより、カーネル開発者として、また一般的にも、あなたの作業は
-> +ずっと楽になるでしょう。
-> +
-> +いくつかのサブシステムやメンテナツリーには、各々のワークフローや
-> +期待事項に関する追加情報があります。次を参照してください:
-> +:ref:`Documentation/process/maintainer-handbooks.rst <maintainer_handbooks_main>`.
-> +
-> +現在のソースツリーを入手する
-> +----------------------------
-> +
-> +もし手元に最新のカーネルソースのリポジトリがなければ、``git`` を使って取得して
-> +ください。まずは mainline のリポジトリから始めるのがよいでしょう。これは
-> +次のようにして取得できます::
-> +
-> +  git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-> +
-> +ただし、mainline のツリーを直接対象にして開発したくない場合もあることに注意
-> +してください。多くのサブシステムのメンテナはそれぞれ独自のツリーを運用しており、
-> +そのツリーに対して作成したパッチを見たいと考えています。該当サブシステムの
-> +ツリーは MAINTAINERS ファイル内の **T:** エントリを参照して見つけてください。
-> +そこに掲載されていない場合は、メンテナに問い合わせてください。
-> +
-> +.. _jp_describe_changes:
-> +
-> +変更内容を説明する
-> +------------------
+> Thanks for the review.
+> 
+> >From ed7f4bb8c6e46f76c1a02e91172402b7389ecb5d Mon Sep 17 00:00:00 2001
+> From: John Ashrith <johnashrith6@gmail.com>
+> Date: Sun, 25 Jan 2026 14:48:28 +0000
+> Subject: [PATCH] docs: clarify CC list guidance wording
+> 
+> Signed-off-by: John Ashrith <johnashrith6@gmail.com>
 
-Doesn't apply cleanly against current docs-next.
-Please rebase.
+Odd, this is showing up in a strange way.  Perhaps just use 'git
+send-email' to send the patch out?
 
-Or use the "--base" option in "git format-patch".
+Also, you need some changelog text, for obvious reasons you don't want
+us to take it without it.
 
-Thanks, Akira
+Also, the versioning of the patch goes below the --- line, as the
+documentation asks for.  Perhaps fix that up for v4?
+
+thanks,
+
+greg k-h
 
