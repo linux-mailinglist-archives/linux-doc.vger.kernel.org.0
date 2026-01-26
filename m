@@ -1,86 +1,86 @@
-Return-Path: <linux-doc+bounces-74017-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74019-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UER9B2+Hd2m9hgEAu9opvQ
-	(envelope-from <linux-doc+bounces-74017-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 16:25:35 +0100
+	id MIFpA9mJd2m9hgEAu9opvQ
+	(envelope-from <linux-doc+bounces-74019-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 16:35:53 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 880B68A1CD
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 16:25:34 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 689F98A349
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 16:35:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C6F843041BD8
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 15:20:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D77A5308FE87
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 15:30:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E369133E374;
-	Mon, 26 Jan 2026 15:20:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F61C625;
+	Mon, 26 Jan 2026 15:30:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RXVXipko"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cHhhfVIA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 358B913C918
-	for <linux-doc@vger.kernel.org>; Mon, 26 Jan 2026 15:20:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D900E22A4D8
+	for <linux-doc@vger.kernel.org>; Mon, 26 Jan 2026 15:30:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769440814; cv=none; b=lQk/Kl2AHccD1XdFulRrAOLiFBDwOnRPkZU7XEHb5USXB7YvAsK2rZJOBhNXRo8KCBXI6mU98UL3iJSu1SeevzYb+N9Pk79G3m9olTqZJLdrZZOopUoGReixkMwhgeEMT5/7dZDrEAW+69dGzhh+4Sf5HsY/Pb1GFeLWiGLwQV0=
+	t=1769441452; cv=none; b=n5Z8Gw73amaC3ipr7FuNORpjxHNtnQMKhhLXkIzxKXgi4NQOVJBYbjWHAKvtFnSLFP7I/KJ8BQ0JE2shPPw6DRVRzINNmeW2nSNtT3oBRpPA1xYg2pbNbolmp6rkYmsSUt+piTiDgDSdeVC2UoSs0BpQ0rw7v7zvkDoAR5WL+Yk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769440814; c=relaxed/simple;
-	bh=EMXDvoXJ5/2vBtxSLRj4Me8GlfV7fukQDcxRRL6oaOc=;
+	s=arc-20240116; t=1769441452; c=relaxed/simple;
+	bh=MvvziUr4xaQ+5ePGg8faDANvROblVFNwXkByQwc0oPo=;
 	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BLJAv2kX+7n3aor9IwwvD/mxqZN2KCUxaSxeSsk6JUanuU3lsAFhfSHI1nogCf0j4FMYhgw1OufEb4vKixEhZVe1AO62fg8zkB+HU4qsNdvGoc590HMFMMDZ8YDOWzVeLv2QTFYdrCSPlLLaXX/1vnAwtY2Wscp8jc5KX1XgMWA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RXVXipko; arc=none smtp.client-ip=209.85.221.42
+	 Content-Type:Content-Disposition:In-Reply-To; b=g3/TaufglVlS/CC7KxGop8lMuJttaKowYKQs5HDXMh94kaJOS6s39tlMjbGhjyPttc0JxX4JSFnZroZMdbcM4SDautO2AttqxZ3VVsg38ohDlHLwf7axlqloYxxariXk3G8QS7U5Jt1IpSgxQPlrODD1ljMobw2g6OWTBqOd3zA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cHhhfVIA; arc=none smtp.client-ip=209.85.218.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42fb0fc5aa9so2565216f8f.1
-        for <linux-doc@vger.kernel.org>; Mon, 26 Jan 2026 07:20:12 -0800 (PST)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b8715a4d9fdso574525366b.0
+        for <linux-doc@vger.kernel.org>; Mon, 26 Jan 2026 07:30:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769440811; x=1770045611; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1769441449; x=1770046249; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7P/+mX1PWBDAGM9xKdya4BErpz7ZLdNNb0retKVcXWk=;
-        b=RXVXipkoOiAeF85KDImKGHJKUZuW4Szk6OssvaL9AK4b7Cu8sCwXMDmlRwpKO/TWxe
-         J1kEpa4hZmjTrq1u3fzy4TPv33+yNnUv8gnv47ysNNyUcwPjkqtFU2eYnM+eldRsGiA+
-         jbUpAg9OJbeYk8BnN/pItKbFDlJg/uyZqko+jerHgZrW98ISxMwptlv48z7DHdj1O0xH
-         HyZo87OPydT8YQBlhQWlGVMO6z8qrHCgrPsY7rdtwVfcFgVnGASADDnt+7TvzutdhbJ3
-         LR44saZPnxG0WLd84WNsZAoWZHgNiKaS+YEcgWUOEnxl8XTnd+ppixeWgDIdz+R3EkA2
-         OYoQ==
+        bh=p/RN6DWG0RynJN5xF49LNlsi86bwuZ6LK/+l0lViTxg=;
+        b=cHhhfVIAs2L85kEWhAi45tuk/0f7amS6jwIn2Ui5HTjzT7l7NajhQq7KB413FD5wdC
+         HsCtf8eqiidsc+EdKDGyLnJEFR3iw9oSCg+4AkPNCdGgSTp1Lxv5Ikc6UoUMzZc+p8VY
+         wOMQaJvM4YSAesQdOPvG0tJRBuhwIDdUa2j59Z5NWUE3lFFEQlOjAXAOCmLGJf6YW34O
+         2PGCrFgkyl4K+JVVKg0SqFt0Xr7z9VccuSGToLotLBGSLKDviQnJnP24CAQY+q2kq8xg
+         L3sr1NW6PASbkHUq8takkStOCHJi4f/33xn9GSNPK5APpAYA5xeVJWCyMOa/WcpC27vM
+         WSdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769440811; x=1770045611;
+        d=1e100.net; s=20230601; t=1769441449; x=1770046249;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=7P/+mX1PWBDAGM9xKdya4BErpz7ZLdNNb0retKVcXWk=;
-        b=OtBykZ0hk9kra+4bvwJhU2qL9Y6pcUhPGJk1FhrZpCIv4wU0EiIQyIDQJpbHehGzVQ
-         bZMh2sxSTqE+7T1v3fIVzoHf+sCEZS5d3PBhHD4b+24HkCvHJw0qxJbwflxezrNNghBJ
-         24iXDFo26heWu6J9pOMunt9BAjEv0c+KSOuwki1Na9abAHDQ8y8ASctD7Pc8QD6O/Qrh
-         HRL1KiGGFrNlP7utauXlDbAjrd+J29s/fvLvsGKDBg7gHwYH3egmf3BPw6PgadAgl+gU
-         3zXoi9m2W3hehROK3umOKxnZqszczRZB1Ry2TV8K26aBPJno60PZZH9wrWqeFLDyTGbj
-         aLvw==
-X-Forwarded-Encrypted: i=1; AJvYcCWWPWcliM4qg7crEjB3NuPKutswZaiPCXiUZgE8ufHPOp2pxOXtWGyKXFpyI2I4B91P7ykOr0GSvKI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzGmVoVv5z5/alJ7q6CkXwGDQEQqWYWhpvrOhIn3ZGIRKSZQdvm
-	XBEq7OIDrjfVJh3vk18Sg5whBSObKNiggrDiBwqPLbZIt73ZQAIXwv0X
-X-Gm-Gg: AZuq6aKXlbzhnIE4s68u5V+pHcjUfjZrNfZ/+5lwD5wrTrvZuqbE+ObOjKJzkoVpjxe
-	a2T18JgF5D4UO8QPeBwCr17ATiTsyOfNcFCMf+kShLFeRM5A9Y2SVmfQdz38cNhEqOLgw6Qrv0v
-	PIRZqCaaSzekyBJzon4cdaGfsyfHxEJqewnezku9sanyqoWTpryunXqaykVznBQK1WCHfS5+aMT
-	hhBSAqBWRLizcOHpaI5GJ8JJcuC/AdalhGWBeq26LOJS6g0Kj/57fxkpzxEhKS1BXUOkoh2755n
-	43sftbgDfAc6SgihOECJhcM7FtKYy7QpkHOvG43/PPsU+2Lm5XhQmJZLYe+V+pxFsJTY8fxyvD3
-	v73z3kdNDRMv4Qy+LKvHn6NAVluwDqM9UgKI2qki7rBYNC9uCpsaFRvPC/H8QGWGi+TQMyAerC8
-	B0e08+nhsSNUJCuQYLfmPZOlR3rfxhXt3UN7zoPFXN5Cm1fWeOjYhV5GTjCw8XL3BvE4ID3i1DH
-	U8C
-X-Received: by 2002:a05:6000:2404:b0:435:8aa1:ff4d with SMTP id ffacd0b85a97d-435ca0ef8a3mr7243502f8f.22.1769440811285;
-        Mon, 26 Jan 2026 07:20:11 -0800 (PST)
+        bh=p/RN6DWG0RynJN5xF49LNlsi86bwuZ6LK/+l0lViTxg=;
+        b=KMuOlQCOBEcLpEFyLCbtqPWwt35PkBKQEVAY9B99Je9xmyeUmPTCgQowY6RKZp/Kfu
+         6evDjvboCDIvK0sZfi4sRtjoXnMNkXNncwJsKaBtolHlVqt/oBUGbGZ9wsf1DnqSNNfI
+         66ET0vDvQfTGvA3a60bD+/DM5SCDSWbb0s0vmogfbNZEpdrupSYzwh96qg2yvM7CVAbR
+         rm57GEMDI/3QIMZDDZjPZLvM0cJh1pshhWI1Uy7vnofk7Mgni/A3EVUzzPydMkZTGraE
+         jIFeCfBqlwCY+fst/RA6/pwtvkapxHwLVP1Sp+7pw7QOQfP/VM5niQZVp3UdxsedY3x3
+         pJUQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXkPKtv6ZfvKRzNJtpf8Trv/8UDP49/eLQU6bqSoofChR8/h21GK/ylsIqWGJQ4GWsR7C65700CO7k=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyd8hblNxtQVe4UMll2bAtHsTGiAfa5uZVH63g4q02Y7StzADXs
+	voibYuL/SxI+wl2Z51tiYFj003KCNnfIBjJAAs9WQQxf0keBPWfbMH7+
+X-Gm-Gg: AZuq6aI5Y9HoTMrl5q9BgZKFUYjrOV9+EMDxZk9Sa3iIZKNwSG1zAIcs2nCfmEtJrTa
+	7mgI+8TbIUxXAxcKmb1m2H8t+3GmRAb8vKRajIzVA2yB3te8tk5HiZzEj4PKGhBcbgAMzFBT2ds
+	l22i7yWRKtITglRI8ImLRaFA3AY1PMlln/SeCQYwwz8xg+3qkiD7ffoadCW+Jnsu9vxezbN7ODA
+	LIndQetQi8cnrJkNUkHQaSZz4/exoA5tyF/H7bwT+5Uhkno1AUUaBYUgOOzP6vpUyh4a3P5o7Ap
+	BqPr3OZbBHbUs1s+A5zVCTXaGJs8cM2v7aqeUHBbpekEWyCX7xTyeyLJyZlTLcc/lDuJ5HzAI8U
+	/mifdGCyFIlGgXAxl8OgfOK3eTWL29YEoqTEtn6F0atfQ+fyEE9LOsMsm4iCwEwTELa9rPkWfP7
+	300IvfcSsa8Li0qR+dqD3z2ntuV7rJTaGhGhGBTXTVBtG5KFO8QAv1rCxsWyDuzBHDyWTw/AVzy
+	Mnc
+X-Received: by 2002:a17:907:9618:b0:b87:1fe6:f223 with SMTP id a640c23a62f3a-b8d0a739f51mr338158666b.6.1769441448930;
+        Mon, 26 Jan 2026 07:30:48 -0800 (PST)
 Received: from RDEALENC-L01.ad.analog.com ([24.206.116.103])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435b1c24f15sm31673845f8f.18.2026.01.26.07.20.09
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b885b75dbe6sm642381766b.50.2026.01.26.07.30.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 07:20:10 -0800 (PST)
+        Mon, 26 Jan 2026 07:30:48 -0800 (PST)
 From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
 X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Mon, 26 Jan 2026 15:20:03 +0000
-To: Andy Shevchenko <andriy.shevchenko@intel.com>, 
-	Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
+Date: Mon, 26 Jan 2026 15:30:44 +0000
+To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>, 
+	Andy Shevchenko <andriy.shevchenko@intel.com>
 Cc: rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org, 
 	linux-iio@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
 	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
@@ -90,7 +90,7 @@ Cc: rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org,
 	Jonathan Corbet <corbet@lwn.net>
 Subject: Re: [PATCH v5 2/8] iio: core: add fixed point parsing with 64-bit
  parts
-Message-ID: <n2ms3esyxlegqibu4nluut3x4c4bkjxt5xrcd4gw35xxb2tipb@a2v73y25kroc>
+Message-ID: <shsikp7hinoxzj7pzxopvmvgpaak4dioekh4tyvns4kv6xp46f@z5vgnisqskco>
 References: <20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com>
  <20260123-adf41513-iio-driver-v5-2-2dce812a2dda@analog.com>
  <aXdUvRZ9NmP5Nh95@smile.fi.intel.com>
@@ -98,6 +98,7 @@ References: <20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com>
  <aXdtpkL5QUhhB_hh@smile.fi.intel.com>
  <ty6hptfh65k2rkqo6c6mg5z6vismuvyqsu3emvqarr2rbhpvcz@kn6tzjk5xi2o>
  <aXd_0uNVm8c_Fhwd@smile.fi.intel.com>
+ <n2ms3esyxlegqibu4nluut3x4c4bkjxt5xrcd4gw35xxb2tipb@a2v73y25kroc>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -106,21 +107,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <aXd_0uNVm8c_Fhwd@smile.fi.intel.com>
+In-Reply-To: <n2ms3esyxlegqibu4nluut3x4c4bkjxt5xrcd4gw35xxb2tipb@a2v73y25kroc>
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74017-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[intel.com,gmail.com];
+	TAGGED_FROM(0.00)[bounces-74019-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,intel.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
@@ -136,145 +137,98 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 880B68A1CD
+X-Rspamd-Queue-Id: 689F98A349
 X-Rspamd-Action: no action
 
-On 26/01/26 04:53PM, Andy Shevchenko wrote:
-> On Mon, Jan 26, 2026 at 02:26:20PM +0000, Rodrigo Alencar wrote:
-> > On 26/01/26 03:35PM, Andy Shevchenko wrote:
-> > > On Mon, Jan 26, 2026 at 12:42:53PM +0000, Rodrigo Alencar wrote:
-> > > > On 26/01/26 01:49PM, Andy Shevchenko wrote:
-> > > > > On Fri, Jan 23, 2026 at 03:53:07PM +0000, Rodrigo Alencar via B4 Relay wrote:
-> 
-> ...
-> 
-> > > > > > +static int __iio_str_to_fixpoint64(const char *str, u64 fract_mult,
-> > > > > > +				   s64 *integer, s64 *fract, bool scale_db)
-> > > > > > +{
-> > > > > > +	u64 i = 0, f = 0;
-> > > > > > +	char *end;
-> > > > > > +	int digit_count, precision = ffs(fract_mult);
-> > > > > > +	bool negative = false;
-> > > > > > +
-> > > > > > +	if (str[0] == '-') {
-> > > > > > +		negative = true;
-> > > > > > +		str++;
-> > > > > > +	} else if (str[0] == '+') {
-> > > > > > +		str++;
-> > > > > > +	}
-> > > > > > +
-> > > > > > +	i = simple_strtoull(str, &end, 10);
-> > > > > > +	digit_count = end - str;
-> > > > > > +	if (digit_count > 20)
-> > > > > > +		return -EINVAL;
+On 26/01/26 03:20PM, Rodrigo Alencar wrote:
+> On 26/01/26 04:53PM, Andy Shevchenko wrote:
+> > On Mon, Jan 26, 2026 at 02:26:20PM +0000, Rodrigo Alencar wrote:
+> > > On 26/01/26 03:35PM, Andy Shevchenko wrote:
+> > > > On Mon, Jan 26, 2026 at 12:42:53PM +0000, Rodrigo Alencar wrote:
+> > > > > On 26/01/26 01:49PM, Andy Shevchenko wrote:
+> > > > > > On Fri, Jan 23, 2026 at 03:53:07PM +0000, Rodrigo Alencar via B4 Relay wrote:
+> > 
+> > ...
+> > 
+> > > > > > > +static int __iio_str_to_fixpoint64(const char *str, u64 fract_mult,
+> > > > > > > +				   s64 *integer, s64 *fract, bool scale_db)
+> > > > > > > +{
+> > > > > > > +	u64 i = 0, f = 0;
+> > > > > > > +	char *end;
+> > > > > > > +	int digit_count, precision = ffs(fract_mult);
+> > > > > > > +	bool negative = false;
+> > > > > > > +
+> > > > > > > +	if (str[0] == '-') {
+> > > > > > > +		negative = true;
+> > > > > > > +		str++;
+> > > > > > > +	} else if (str[0] == '+') {
+> > > > > > > +		str++;
+> > > > > > > +	}
+> > > > > > > +
+> > > > > > > +	i = simple_strtoull(str, &end, 10);
+> > > > > > > +	digit_count = end - str;
+> > > > > > > +	if (digit_count > 20)
+> > > > > > > +		return -EINVAL;
+> > > > > > 
+> > > > > > Not really. If we are talking about decimal (only) cases we need to also count
+> > > > > > leading 0:s.
+> > > > > > 
+> > > > > > 0000000000000000000000000000000025 is still 25, no overflow.
+> > > > > > 
+> > > > > > That's why I recommend to have a helper, maybe for now locally here, like
+> > > > > > 
+> > > > > > int safe_strtoull(..., unsigned long long *res)
+> > > > > > {
+> > > > > > 	...
+> > > > > > }
 > > > > > 
-> > > > > Not really. If we are talking about decimal (only) cases we need to also count
-> > > > > leading 0:s.
-> > > > > 
-> > > > > 0000000000000000000000000000000025 is still 25, no overflow.
-> > > > > 
-> > > > > That's why I recommend to have a helper, maybe for now locally here, like
-> > > > > 
-> > > > > int safe_strtoull(..., unsigned long long *res)
-> > > > > {
-> > > > > 	...
-> > > > > }
+> > > > > Are you suggesting to not use simple_strtoull then?
 > > > > 
-> > > > Are you suggesting to not use simple_strtoull then?
+> > > > Nope, I suggest to do an additional step before checking for the range.
 > > > 
-> > > Nope, I suggest to do an additional step before checking for the range.
-> > 
-> > You mean, conditionally skip leading 0's when parsing the integer part?
-> > e.g.
-> > 
-> > /*function entry and arg check */
-> > while(*str == '\0')
-> > 	str++;
-> > /* then call simple_strtoull() */
-> 
-> Not skipping, but counting them.
-> 
-> > simple_strtoull() is not overflow-safe,
-> 
-> Yes, I know. That's why all these additional checks are required,
-> 
-> > as it does not use
-> > check_mul_overflow() or check_add_overflow(), only checking the
-> > amount of digits is not enough.
-> 
-> Why? Can you elaborate how checking amount of digits is different to
-> check_mul_overflow()?
-
-consider U64_MAX = 18_446_744_073_709_551_615 as the limit:
-- 19_000_000_000_000_000_000 contains the same amount of digits but overflows.
-- 18_446_744_073_710_000_000 contains the same amount of digits but overflows.
-
-to catch those cases, we need to check for the overflow, everytime we read a
-character and accumulate:
-
-u64 acc;
-
-while(isdigit(*str))
-	if (check_mul_overflow(acc, 10, &acc) ||
-	    check_add_overflow(acc, *str - '0', &acc))
-		return -EOVERFLOW;
-
-*res = acc;
-
-acc can get weird results if not checked. 
-
-> 
-> > Previous implementation of fixpoint parsing didn't care about that.
-> 
-> Do we have test cases for the current implementation?
-
-No, I am adding a kunit test in this patch.
-
-> > > > Understood, leading zeros can be ignored only when parsing the integer 
-> > > > part. Also, would be nice to have truncation of the fractional part
-> > > > while doing the parsing. How about:
-> > > > 
-> > > > static int iio_safe_strtoull(const char *str, const char **end,
-> > > > 			     size_t max_chars, u64 *res)
+> > > You mean, conditionally skip leading 0's when parsing the integer part?
+> > > e.g.
 > > > 
-> > > > - max_chars = 0: ignores leading 0's and process all digits
-> > > > - max_chars > 0: process only initial max_chars digits and ignores the rest
-> > > 
-> > > I'm not sure why we would need that. It should parse the whole line until the
-> > > first invalid character or overflow.
+> > > /*function entry and arg check */
+> > > while(*str == '\0')
+> > > 	str++;
+> > > /* then call simple_strtoull() */
 > > 
-> > "process all digits" and "ignores the rest" would be for digits only, so it
-> > would stop until the first invalid character is found. I suppose proper
-> > overflow check is implemented with check_mul_overflow() and check_add_overflow(),
+> > Not skipping, but counting them.
+> > 
+> > > simple_strtoull() is not overflow-safe,
+> > 
+> > Yes, I know. That's why all these additional checks are required,
+> > 
+> > > as it does not use
+> > > check_mul_overflow() or check_add_overflow(), only checking the
+> > > amount of digits is not enough.
+> > 
+> > Why? Can you elaborate how checking amount of digits is different to
+> > check_mul_overflow()?
 > 
-> I don't see the need. Amount of digits defines the order of the number (in
-> power-of-ten).
+> consider U64_MAX = 18_446_744_073_709_551_615 as the limit:
+> - 19_000_000_000_000_000_000 contains the same amount of digits but overflows.
+> - 18_446_744_073_710_000_000 contains the same amount of digits but overflows.
 > 
-> > while iterating over the characters and accumulating the value.
+> to catch those cases, we need to check for the overflow, everytime we read a
+> character and accumulate:
 > 
-> The problem that you can refer to is the corner case when the first
-> (most significant digit(s)) are already give an overflow while being
-> inside the allowed length. But it also can be checked.
+> u64 acc;
 > 
+> while(isdigit(*str))
+> 	if (check_mul_overflow(acc, 10, &acc) ||
+> 	    check_add_overflow(acc, *str - '0', &acc))
+> 		return -EOVERFLOW;
+> 
+> *res = acc;
+> 
+> acc can get weird results if not checked. 
 
-Yes. Not sure how to do that without checking every digit again.
-
-> 
-> The benefit of simple_strto*() over kstrto*() that they do not require
-> a temporary buffer and work over constant data (always).
-
-Agreed.
- 
-> If you see a way how to refactor lib/kstrtox.c and lib/vsprintf.c to have
-> an implementation there directly that may operate over constant buffers,
-> I will be glad to help with it. That would be good for existing cases,
-> such as Intel QAT driver, and any newcomers. I actually don't know why
-> the heck kstrto*() were made against non-constant buffers. Perhaps to
-> avoid this 'end' parameter...
-
-That would be out of the scope of this patch.
+Thinking about it again, that check could be done only in the last step
+(20th for u64)
 
 Kind regards,
 
