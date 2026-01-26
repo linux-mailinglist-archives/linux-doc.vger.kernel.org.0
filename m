@@ -1,146 +1,222 @@
-Return-Path: <linux-doc+bounces-73964-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73969-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iK11BCO+dmkYVgEAu9opvQ
-	(envelope-from <linux-doc+bounces-73964-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 02:06:43 +0100
+	id GOLvM7HCdmlFVwEAu9opvQ
+	(envelope-from <linux-doc+bounces-73969-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 02:26:09 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36A3683410
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 02:06:42 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C634834C8
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 02:26:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 76A8B3001068
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 01:06:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id EDAEA3004614
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 01:26:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C2CE16F288;
-	Mon, 26 Jan 2026 01:06:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2940B13635C;
+	Mon, 26 Jan 2026 01:26:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="jFYrdIlD"
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="mT9+RuJ+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout10.his.huawei.com (canpmsgout10.his.huawei.com [113.46.200.225])
+Received: from out30-113.freemail.mail.aliyun.com (out30-113.freemail.mail.aliyun.com [115.124.30.113])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3B98487BE;
-	Mon, 26 Jan 2026 01:06:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.225
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C65038DF9;
+	Mon, 26 Jan 2026 01:26:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.113
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769389598; cv=none; b=QMtDP+f/jIUiJax2NEX88jRaQGYeKcMssppjS62Za202avjmbW41ZLVE38dWI5bSZi1YNoKQyRaK6ue0mfSbGToyqyM7TM4N59k0FDyZ3AHosY5uUjX+NPznx2JDQyTQzy8k8yMW2ZKDzpvaCPsaWAp+7N+zuOfXexVCwz9j7xI=
+	t=1769390767; cv=none; b=TwXkZpg3cc0po5IIyLcWTDCo9eMFhuSxe82kuAwYOOGkdd9H3qw9eRSBbYA+WzJa2+V98OAChYEiusJupet+45/4Yt0+diiLbwOgy5fG0hLUt3c/X59q+nO6rTbNNzZJfH2dAVLB7WbN0ACIAVqWPSeLxx2J7Xj+aulsQBipN7Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769389598; c=relaxed/simple;
-	bh=kCqO2ZJkcDyyuTwrrkKrfVhZlwsoYyDv6tsJCP9WnZ0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pXWUPFIhQ7bQjzqkrmbsEa5ZpEgn37kcmA906J6ScEQAFcbikQEiA1qgvzoBSJoX9d+9N1+mPLzGDFCHMiOkM74/K0ipxhjCzs0tJYFUugGeQQayNKtnF0VOeOnJ5g6N+p/raMHUSD1tG2yjyDS2t6wL1qmzTuBC8lWdBKRMYGI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=jFYrdIlD; arc=none smtp.client-ip=113.46.200.225
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=oTXEVLgDumVCBFxpbO8s07ckXDCKC5Us7m6vOmueETk=;
-	b=jFYrdIlD6scNu1lCaG+lOb4ovAPAm3AE9S1DxjPS7XzWJTmJ91siw+9jJyf+J11uZU12gG9yH
-	LrnTfdTLhSwbMToijlqDkRUVizKzS3vHaCZhmU4HQ65F+hNejkdJvNhi2AWqUghbMyFPrVX1hO0
-	jCqW7GUZ1Ef7kIbZk0dcWgE=
-Received: from mail.maildlp.com (unknown [172.19.163.127])
-	by canpmsgout10.his.huawei.com (SkyGuard) with ESMTPS id 4dzqz04Wljz1K9CT;
-	Mon, 26 Jan 2026 09:03:08 +0800 (CST)
-Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id 28F9440570;
-	Mon, 26 Jan 2026 09:06:33 +0800 (CST)
-Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
- kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Mon, 26 Jan 2026 09:06:31 +0800
-From: Fan Gong <gongfan1@huawei.com>
-To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
-	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
-	<andrew+netdev@lunn.ch>
-CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
-	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
-	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
-	<shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>
-Subject: [PATCH net-next v02 4/4] hinic3: RQ use RQ_CTXT_PREF_CI_HI instead of SQ_CTXT_PREF_CI_HI
-Date: Mon, 26 Jan 2026 09:03:34 +0800
-Message-ID: <522daf5931c4554fcc67672a0bcfa714ca1dce93.1769142701.git.zhuyikai1@h-partners.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <cover.1769142701.git.zhuyikai1@h-partners.com>
-References: <cover.1769142701.git.zhuyikai1@h-partners.com>
+	s=arc-20240116; t=1769390767; c=relaxed/simple;
+	bh=Yb+JP07ijQn7cCb91p7u5ScNQqG1qvqytVfflQQb5SE=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=td8TYE9olcPBM+cEA+J2keS9aYJjmS6sh8EbHCV2CknslQVN+scI17xT8u6FyQOyfqJEPl4sspTbOcBA5NeZDAtCK1huYpvb/UN3X60kFliZrqmPvKPB7rbG/SwA6BevjfEH6dh1+xMmhRQOlJhrnuzWQOIikZa7+Px5d+gTMkI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=mT9+RuJ+; arc=none smtp.client-ip=115.124.30.113
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux.alibaba.com; s=default;
+	t=1769390756; h=From:To:Subject:Date:Message-Id:MIME-Version:Content-Type;
+	bh=gCARNgGUNLhCd1rBcVoXKGTchR8utjxKY5PDBVlWowc=;
+	b=mT9+RuJ+dE2lBCVbMGH1jgRMsyN8jLeg5/XdxzWjfqp6V3dy8SV6E9im1q9/XX5+pHqMJg3uTaD6m6Z6s46iC7zn28DoCJ1r5mqPj7Rti1gY9vjsX33+yNgX/UxBEp7ni++/jHb2dsbZrRafg6xHj0USifklf19p0we2CIJsY84=
+Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com fp:SMTPD_---0WxmmVCv_1769390752 cluster:ay36)
+          by smtp.aliyun-inc.com;
+          Mon, 26 Jan 2026 09:25:54 +0800
+From: fangyu.yu@linux.alibaba.com
+To: fangyu.yu@linux.alibaba.com
+Cc: ajones@ventanamicro.com,
+	alex@ghiti.fr,
+	andrew.jones@oss.qualcomm.com,
+	anup@brainfault.org,
+	aou@eecs.berkeley.edu,
+	atish.patra@linux.dev,
+	corbet@lwn.net,
+	guoren@kernel.org,
+	kvm-riscv@lists.infradead.org,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	palmer@dabbelt.com,
+	pbonzini@redhat.com,
+	pjw@kernel.org,
+	radim.krcmar@oss.qualcomm.com
+Subject: Re: [PATCH v3 2/2] RISC-V: KVM: add KVM_CAP_RISCV_SET_HGATP_MODE 
+Date: Mon, 26 Jan 2026 09:25:50 +0800
+Message-Id: <20260126012550.38206-1-fangyu.yu@linux.alibaba.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-146)
+In-Reply-To: <20260125150450.27068-3-fangyu.yu@linux.alibaba.com>
+References: <20260125150450.27068-3-fangyu.yu@linux.alibaba.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=y
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
- kwepemf100013.china.huawei.com (7.202.181.12)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-7.66 / 15.00];
+	WHITELIST_DMARC(-7.00)[alibaba.com:D:+];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	SUBJECT_ENDS_SPACES(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linux.alibaba.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[linux.alibaba.com:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73969-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-73964-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[fangyu.yu@linux.alibaba.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,huawei.com:email,huawei.com:dkim]
-X-Rspamd-Queue-Id: 36A3683410
+	DKIM_TRACE(0.00)[linux.alibaba.com:+];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NO_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,alibaba.com:email,linux.alibaba.com:mid,linux.alibaba.com:dkim]
+X-Rspamd-Queue-Id: 4C634834C8
 X-Rspamd-Action: no action
 
-Separate the CTX_PREF_CI_HI of rq and sq to improve readability.
+>From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+>
+>This capability allows userspace to explicitly select the HGATP mode
+>for the VM. The selected mode must be less than or equal to the max
+>HGATP mode supported by the hardware. This capability must be enabled
+>before creating any vCPUs, and can only be set once per VM.
+>
+>Signed-off-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+>---
+> Documentation/virt/kvm/api.rst | 18 ++++++++++++++++++
+> arch/riscv/kvm/vm.c            | 26 ++++++++++++++++++++++++--
+> include/uapi/linux/kvm.h       |  1 +
+> 3 files changed, 43 insertions(+), 2 deletions(-)
+>
+>diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+>index 01a3abef8abb..9d0794b174c7 100644
+>--- a/Documentation/virt/kvm/api.rst
+>+++ b/Documentation/virt/kvm/api.rst
+>@@ -8765,6 +8765,24 @@ helpful if user space wants to emulate instructions which are not
+> This capability can be enabled dynamically even if VCPUs were already
+> created and are running.
+> 
+>+7.47 KVM_CAP_RISCV_SET_HGATP_MODE
+>+---------------------------------
+>+
+>+:Architectures: riscv
+>+:Type: VM
+>+:Parameters: args[0] contains the requested HGATP mode
+>+:Returns:
+>+  - 0 on success.
+>+  - -EINVAL if args[0] is outside the range of HGATP modes supported by the
+>+    hardware.
+>+  - -EBUSY if vCPUs have already been created for the VM, if the VM has any
+>+    non-empty memslots, or if the capability has already been set for the VM.
+>+
+>+This capability allows userspace to explicitly select the HGATP mode for
+>+the VM. The selected mode must be less than or equal to the maximum HGATP
+>+mode supported by the hardware. This capability must be enabled before
+>+creating any vCPUs, and can only be set once per VM.
+>+
+Hi Andrew:
 
-Co-developed-by: Zhu Yikai <zhuyikai1@h-partners.com>
-Signed-off-by: Zhu Yikai <zhuyikai1@h-partners.com>
-Signed-off-by: Fan Gong <gongfan1@huawei.com>
----
- drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+In v3，no changes were made here, as KVM_CAP_RISCV_SET_HGATP_MODE might be
+appropriate, just like the no5lvl and no4lvl in the kernel.
+If you think it's needed, I'm happy to discuss this further.
 
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
-index d86cd1ba4605..90887d2bb127 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
-@@ -162,6 +162,9 @@ struct hinic3_clean_queue_ctxt {
- #define SQ_CTXT_WQ_BLOCK_SET(val, member)  \
- 	FIELD_PREP(SQ_CTXT_WQ_BLOCK_##member##_MASK, val)
- 
-+/* reuse SQ macro for RQ because the hardware format is identical */
-+#define RQ_CTXT_PREF_CI_HI(val)            SQ_CTXT_PREF_CI_HI(val)
-+
- #define RQ_CTXT_PI_IDX_MASK                GENMASK(15, 0)
- #define RQ_CTXT_CI_IDX_MASK                GENMASK(31, 16)
- #define RQ_CTXT_CI_PI_SET(val, member)  \
-@@ -629,7 +632,8 @@ static void hinic3_rq_prepare_ctxt(struct hinic3_io_queue *rq,
- 			    RQ_CTXT_PREF_SET(RQ_WQ_PREFETCH_THRESHOLD, CACHE_THRESHOLD));
- 
- 	rq_ctxt->pref_ci_owner =
--		cpu_to_le32(RQ_CTXT_PREF_SET(SQ_CTXT_PREF_CI_HI(ci_start), CI_HI) |
-+		cpu_to_le32(RQ_CTXT_PREF_SET(RQ_CTXT_PREF_CI_HI(ci_start),
-+					     CI_HI) |
- 			    RQ_CTXT_PREF_SET(1, OWNER));
- 
- 	rq_ctxt->pref_wq_pfn_hi_ci =
--- 
-2.43.0
-
+Thanks,
+Fangyu
+> 8. Other capabilities.
+> ======================
+> 
+>diff --git a/arch/riscv/kvm/vm.c b/arch/riscv/kvm/vm.c
+>index 4b2156df40fc..7bc9b193dcaa 100644
+>--- a/arch/riscv/kvm/vm.c
+>+++ b/arch/riscv/kvm/vm.c
+>@@ -202,6 +202,9 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
+> 	case KVM_CAP_VM_GPA_BITS:
+> 		r = kvm_riscv_gstage_gpa_bits(&kvm->arch);
+> 		break;
+>+	case KVM_CAP_RISCV_SET_HGATP_MODE:
+>+		r = IS_ENABLED(CONFIG_64BIT) ? 1 : 0;
+>+		break;
+> 	default:
+> 		r = 0;
+> 		break;
+>@@ -212,12 +215,31 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
+> 
+> int kvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
+> {
+>+	if (cap->flags)
+>+		return -EINVAL;
+>+
+> 	switch (cap->cap) {
+> 	case KVM_CAP_RISCV_MP_STATE_RESET:
+>-		if (cap->flags)
+>-			return -EINVAL;
+> 		kvm->arch.mp_state_reset = true;
+> 		return 0;
+>+	case KVM_CAP_RISCV_SET_HGATP_MODE:
+>+#ifdef CONFIG_64BIT
+>+		if (cap->args[0] < HGATP_MODE_SV39X4 ||
+>+		    cap->args[0] > kvm_riscv_gstage_mode(kvm_riscv_gstage_max_pgd_levels))
+>+			return -EINVAL;
+>+
+>+		if (kvm->arch.gstage_mode_user_initialized || kvm->created_vcpus ||
+>+		    !kvm_are_all_memslots_empty(kvm))
+>+			return -EBUSY;
+>+
+>+		kvm->arch.gstage_mode_user_initialized = true;
+>+		kvm->arch.kvm_riscv_gstage_pgd_levels =
+>+				3 + cap->args[0] - HGATP_MODE_SV39X4;
+>+		kvm_debug("VM (vmid:%lu) using SV%lluX4 G-stage page table format\n",
+>+			  kvm->arch.vmid.vmid,
+>+			  39 + (cap->args[0] - HGATP_MODE_SV39X4) * 9);
+>+#endif
+>+		return 0;
+> 	default:
+> 		return -EINVAL;
+> 	}
+>diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
+>index dddb781b0507..00c02a880518 100644
+>--- a/include/uapi/linux/kvm.h
+>+++ b/include/uapi/linux/kvm.h
+>@@ -974,6 +974,7 @@ struct kvm_enable_cap {
+> #define KVM_CAP_GUEST_MEMFD_FLAGS 244
+> #define KVM_CAP_ARM_SEA_TO_USER 245
+> #define KVM_CAP_S390_USER_OPEREXEC 246
+>+#define KVM_CAP_RISCV_SET_HGATP_MODE 247
+> 
+> struct kvm_irq_routing_irqchip {
+> 	__u32 irqchip;
+>-- 
+>2.50.1
 
