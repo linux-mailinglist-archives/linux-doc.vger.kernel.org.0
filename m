@@ -1,147 +1,224 @@
-Return-Path: <linux-doc+bounces-73978-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73980-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yNQODtvsdmmPYwEAu9opvQ
-	(envelope-from <linux-doc+bounces-73978-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 05:26:03 +0100
+	id gISIGKkgd2ntcQEAu9opvQ
+	(envelope-from <linux-doc+bounces-73980-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 09:07:05 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A213D83E08
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 05:26:02 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F02A8545A
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 09:07:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 90CCD3004F61
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 04:24:01 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 7213E3001FE9
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Jan 2026 08:07:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1085028BA95;
-	Mon, 26 Jan 2026 04:24:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40D2B2EBB8A;
+	Mon, 26 Jan 2026 08:07:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=localizethedocs.org header.i=hwhsu1231@localizethedocs.org header.b="j2vwPIN+"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="EBYu/kGG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-of-o52.zoho.com (sender4-of-o52.zoho.com [136.143.188.52])
+Received: from canpmsgout10.his.huawei.com (canpmsgout10.his.huawei.com [113.46.200.225])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FC6A304BB3
-	for <linux-doc@vger.kernel.org>; Mon, 26 Jan 2026 04:23:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.52
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769401440; cv=pass; b=n+jOjPq1UIM797GugueUBDmTfsOzBNZcVmRIYJsnPFq3k2IIdB7UXpdJIUyF99zKRLvioiQXa1icap+y+CaU7w5r71zKnOT7C6q3fqklV23J+Bn/ay6i6ujeufqrvAvBSGF832YN1FxCJpLhuc2qAjphkGrSRtHbwbITx7nkXxE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769401440; c=relaxed/simple;
-	bh=eXrb/4dlOsUzXI5mm1ZBd+ki8U7HV5k3hAFX5PdYHds=;
-	h=Date:From:To:Message-ID:In-Reply-To:Subject:MIME-Version:
-	 Content-Type; b=dxr0IKNjOOhGo1iT5AIVsCJZWeIh4w8z3AkSw8z6mVV1vRvX8JfVzBRXIfrnKlVQo6nXD4c+lYyJoTwNu559tGGlX6fqoy74jDcG8bDhEqT/kAG0GqXQqA+q30a2PIBnPKg8XXw156D7/Hr11VCE7bYXom5kbOBT9H9E3Qg/nfE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=localizethedocs.org; spf=pass smtp.mailfrom=localizethedocs.org; dkim=pass (1024-bit key) header.d=localizethedocs.org header.i=hwhsu1231@localizethedocs.org header.b=j2vwPIN+; arc=pass smtp.client-ip=136.143.188.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=localizethedocs.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=localizethedocs.org
-ARC-Seal: i=1; a=rsa-sha256; t=1769401437; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=XwvrjElLUpux83hW2j9sG1PdjDFVst8piNB3QuoDHLyLQXxhy5D7lgLa3KJkYo71vqKdfoY+qb6gKR0+vo/RGQvZQcnYQDZxRNlMfLWB1Vin2VYdAD7jqGyYuC4m/cm3r2ozvouM/t6KNqbLl1yS7ru0WpB67kUDZ35CWTOOKoc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1769401437; h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc; 
-	bh=eXrb/4dlOsUzXI5mm1ZBd+ki8U7HV5k3hAFX5PdYHds=; 
-	b=Rpkj9WE/HjQer1pM4cOf89Z+T911jYiN83lPPfIPZJES9nw9/mPzM7CgC7sLfEKHR+irLE649iw/Yf5hFYAD3G6k8yvZrHKsH66gABtGzo5eYI5RzvfhvMOj285f9ANv2HswX49RKsL8JeICLqoxYVXEkFkK7IvN1LtTz+O6/pg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=localizethedocs.org;
-	spf=pass  smtp.mailfrom=hwhsu1231@localizethedocs.org;
-	dmarc=pass header.from=<hwhsu1231@localizethedocs.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1769401437;
-	s=zmail; d=localizethedocs.org; i=hwhsu1231@localizethedocs.org;
-	h=Date:Date:From:From:To:To:Message-ID:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To:Cc;
-	bh=eXrb/4dlOsUzXI5mm1ZBd+ki8U7HV5k3hAFX5PdYHds=;
-	b=j2vwPIN+bYTBDqe7HcG8Y4A39668RVM5DTm5l2TOaxHQOYbmDUMfH/LM7TWiIlL9
-	xgEVkgU12GE1oMAoFedlsavBVy/uq+KVWlF51C2Js2ntRNyr5lla97Y7YnOZeejaRjG
-	KmuH1dFkD+P7CpfkQXEg+b6nPfyH7gRRbIOr/R5U=
-Received: from mail.zoho.com by mx.zohomail.com
-	with SMTP id 1769401436911588.5161727700752; Sun, 25 Jan 2026 20:23:56 -0800 (PST)
-Date: Mon, 26 Jan 2026 12:23:56 +0800
-From: Haowei Hsu <hwhsu1231@localizethedocs.org>
-To: "Linux Kernel Documentation" <linux-doc@vger.kernel.org>
-Message-ID: <19bf88b4ae1.1e3c4829279812.3907796406023498095@localizethedocs.org>
-In-Reply-To: 
-Subject: Localization of Linux Kernel Documentation
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80C702343BE;
+	Mon, 26 Jan 2026 08:06:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.225
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1769414820; cv=none; b=uwVyGhssvgEbJrZHrMri2pm9zVysPQwbOU45LG////IfveTxrYukjh2Lht2Abz+P8YP0sN7l1R5Iz5MOFhOi6CmdZV1LmUHFm6Em5RErYR97PFperm2FCETF7F7KrakTWlp+ZpnxCWDWa9RqCjF3ZB0P1vjEH62kxCnQ6GPo2bg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1769414820; c=relaxed/simple;
+	bh=KInPdW+CqToXWu1IQdYKg6tm+N4Nx5AIY4r2UQ8VSXQ=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=I72R0ks/U+1BwPfcnuVAjEzxDnfnbLH9d2C+rzGwc/fMeQFn2+K+OE0XVEKpCUcNTOHwCP5TmGBa8FcClobaw1l3VRhlyuGhUptCidTpDrXQrTXQkQ2E5/TRjgIn+uVLCz/jMWoHYMNCT0j0Zf3VsKBxC+m72fvqjwjCn3CW9jc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=EBYu/kGG; arc=none smtp.client-ip=113.46.200.225
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=sOghiDouoURDtvNsJpBPALG0yovDywlbWn7RSuW8imw=;
+	b=EBYu/kGG7IprOhDja66qjbVwFLKyc8+26zBLtrtFJfUnBFgKz7KsoaoVc5lVCR9QSjBZ4W8DW
+	M8+F8RYTc4WAhCSflsNlzM7K7jNzkjJNhLonZUf/9gdIvmsnGg0HUbmhctW9RKxJSyXHjZtx1yW
+	AbPpDlG1PFTpSfQNwAKa5+I=
+Received: from mail.maildlp.com (unknown [172.19.163.127])
+	by canpmsgout10.his.huawei.com (SkyGuard) with ESMTPS id 4f01J070xzz1K977;
+	Mon, 26 Jan 2026 16:03:28 +0800 (CST)
+Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
+	by mail.maildlp.com (Postfix) with ESMTPS id AC42A40363;
+	Mon, 26 Jan 2026 16:06:53 +0800 (CST)
+Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
+ (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 26 Jan
+ 2026 16:06:52 +0800
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+To: <corbet@lwn.net>, <pjw@kernel.org>, <palmer@dabbelt.com>,
+	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <akpm@linux-foundation.org>,
+	<bp@alien8.de>, <rdunlap@infradead.org>, <mingo@kernel.org>,
+	<pawan.kumar.gupta@linux.intel.com>, <feng.tang@linux.alibaba.com>,
+	<kees@kernel.org>, <elver@google.com>, <arnd@arndb.de>,
+	<lirongqing@baidu.com>, <fvdl@google.com>, <bhelgaas@google.com>,
+	<leitao@debian.org>, <songshuaishuai@tinylab.org>, <bjorn@rivosinc.com>,
+	<rppt@kernel.org>, <dave.hansen@linux.intel.com>, <kevin.brodsky@arm.com>,
+	<samuel.holland@sifive.com>, <vishal.moola@gmail.com>,
+	<junhui.liu@pigmoral.tech>, <cuiyunhui@bytedance.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-riscv@lists.infradead.org>
+CC: <ruanjinjie@huawei.com>
+Subject: [PATCH] riscv: kexec: Add support for crashkernel CMA reservation
+Date: Mon, 26 Jan 2026 16:07:38 +0800
+Message-ID: <20260126080738.696723-1-ruanjinjie@huawei.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ dggpemf500011.china.huawei.com (7.185.36.131)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.65 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	R_DKIM_ALLOW(-0.20)[localizethedocs.org:s=zmail];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[localizethedocs.org];
-	TO_DN_ALL(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_ONE(0.00)[1];
-	TAGGED_FROM(0.00)[bounces-73978-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-73980-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[lwn.net,kernel.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr,linux-foundation.org,alien8.de,infradead.org,linux.intel.com,linux.alibaba.com,google.com,arndb.de,baidu.com,debian.org,tinylab.org,rivosinc.com,arm.com,sifive.com,gmail.com,pigmoral.tech,bytedance.com,vger.kernel.org,lists.infradead.org];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[31];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hwhsu1231@localizethedocs.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[localizethedocs.org:+];
+	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,sphinx-doc.org:url]
-X-Rspamd-Queue-Id: A213D83E08
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,huawei.com:email,huawei.com:dkim,huawei.com:mid]
+X-Rspamd-Queue-Id: 7F02A8545A
 X-Rspamd-Action: no action
 
-Hello, Linux Kernel Documentation Team,
+Commit 35c18f2933c5 ("Add a new optional ",cma" suffix to the
+crashkernel= command line option") and commit ab475510e042 ("kdump:
+implement reserve_crashkernel_cma") added CMA support for kdump
+crashkernel reservation. This allows the kernel to dynamically allocate
+contiguous memory for crash dumping when needed, rather than permanently
+reserving a fixed region at boot time.
 
-I am the author of the Localize The Docs organization on GitHub. I would li=
-ke to introduce one of our localization projects closely related to the Lin=
-ux Kernel Documentation, =F0=9F=8E=89 linux-docs-l10n =F0=9F=8E=89:
+So extend crashkernel CMA reservation support to riscv. The following
+changes are made to enable CMA reservation:
 
-=F0=9F=9A=80 Preview: https://projects.localizethedocs.org/linux-docs-l10n
-=F0=9F=8C=90 Crowdin: https://localizethedocs.crowdin.com/linux-docs-l10n
-=F0=9F=90=99 GitHub: https://github.com/localizethedocs/linux-docs-l10n
+- Parse and obtain the CMA reservation size along with other crashkernel
+  parameters.
+- Call reserve_crashkernel_cma() to allocate the CMA region for kdump.
+- Include the CMA-reserved ranges for kdump kernel to use.
+- Exclude the CMA-reserved ranges from the crash kernel memory to
+  prevent them from being exported through /proc/vmcore.
 
-The goal of this project is to translate the Linux Kernel Documentation [1]=
- into multiple languages. Translations are contributed via the Crowdin plat=
-form, automatically synchronized with the GitHub repository, and can be pre=
-viewed on GitHub Pages.
+Update kernel-parameters.txt to document CMA support for crashkernel on
+riscv architecture.
 
-While the official Linux Kernel repository does maintain its own translated=
- documentation [2], the current approach involves maintaining translation c=
-opies directly within the document tree. This makes it challenging to keep =
-translated documents in sync with the original English content, resulting i=
-n significant maintenance overhead.
-
-To address this issue, the linux-docs-l10n project leverages the "Internati=
-onalization with Gettext [3]" feature of Sphinx, integrated with the infras=
-tructure provided by the Localize The Docs organization, to achieve automat=
-ed updates for .pot files. Furthermore, these generated .pot files are uplo=
-aded to the Crowdin [4] platform, making it easier for translators to parti=
-cipate.
-
-I believe this project can play a crucial role in maintaining translations =
-of the Linux Kernel Documentation. We welcome volunteers interested in cont=
-ributing translations to participate. If your target language is not yet av=
-ailable, please apply by submitting an issue [5] to request a new language:
-
-[1] https://docs.kernel.org/
-[2] https://docs.kernel.org/translations/index.html
-[3] https://www.sphinx-doc.org/en/master/usage/advanced/intl.html
-[4] https://crowdin.com/
-[5] https://github.com/localizethedocs/linux-docs-l10n/issues/new?template=
-=3Dlanguage_request.yml
-
+Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
-Haowei Hsu
+ Documentation/admin-guide/kernel-parameters.txt |  2 +-
+ arch/riscv/kernel/machine_kexec_file.c          | 17 +++++++++++++++--
+ arch/riscv/mm/init.c                            |  5 +++--
+ 3 files changed, 19 insertions(+), 5 deletions(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 1058f2a6d6a8..52414c254208 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -1119,7 +1119,7 @@ Kernel parameters
+ 			It will be ignored when crashkernel=X,high is not used
+ 			or memory reserved is below 4G.
+ 	crashkernel=size[KMG],cma
+-			[KNL, X86, ppc] Reserve additional crash kernel memory from
++			[KNL, X86, RISCV, ppc] Reserve additional crash kernel memory from
+ 			CMA. This reservation is usable by the first system's
+ 			userspace memory and kernel movable allocations (memory
+ 			balloon, zswap). Pages allocated from this memory range
+diff --git a/arch/riscv/kernel/machine_kexec_file.c b/arch/riscv/kernel/machine_kexec_file.c
+index dd9d92a96517..5c8f3cccbc83 100644
+--- a/arch/riscv/kernel/machine_kexec_file.c
++++ b/arch/riscv/kernel/machine_kexec_file.c
+@@ -59,9 +59,9 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
+ {
+ 	struct crash_mem *cmem;
+ 	unsigned int nr_ranges;
+-	int ret;
++	int ret, i;
+ 
+-	nr_ranges = 1; /* For exclusion of crashkernel region */
++	nr_ranges = 1 + crashk_cma_cnt; /* For exclusion of crashkernel region */
+ 	walk_system_ram_res(0, -1, &nr_ranges, get_nr_ram_ranges_callback);
+ 
+ 	cmem = kmalloc(struct_size(cmem, ranges, nr_ranges), GFP_KERNEL);
+@@ -74,11 +74,24 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
+ 	if (ret)
+ 		goto out;
+ 
++	for (i = 0; i < crashk_cma_cnt; i++) {
++		cmem->ranges[cmem->nr_ranges].start = crashk_cma_ranges[i].start;
++		cmem->ranges[cmem->nr_ranges].end = crashk_cma_ranges[i].end;
++		cmem->nr_ranges++;
++	}
++
+ 	/* Exclude crashkernel region */
+ 	ret = crash_exclude_mem_range(cmem, crashk_res.start, crashk_res.end);
+ 	if (!ret)
+ 		ret = crash_prepare_elf64_headers(cmem, true, addr, sz);
+ 
++	for (i = 0; i < crashk_cma_cnt; ++i) {
++		ret = crash_exclude_mem_range(cmem, crashk_cma_ranges[i].start,
++					      crashk_cma_ranges[i].end);
++		if (ret)
++			goto out;
++	}
++
+ out:
+ 	kfree(cmem);
+ 	return ret;
+diff --git a/arch/riscv/mm/init.c b/arch/riscv/mm/init.c
+index addb8a9305be..074d2d5f79ee 100644
+--- a/arch/riscv/mm/init.c
++++ b/arch/riscv/mm/init.c
+@@ -1404,7 +1404,7 @@ static inline void setup_vm_final(void)
+  */
+ static void __init arch_reserve_crashkernel(void)
+ {
+-	unsigned long long low_size = 0;
++	unsigned long long low_size = 0, cma_size = 0;
+ 	unsigned long long crash_base, crash_size;
+ 	bool high = false;
+ 	int ret;
+@@ -1414,11 +1414,12 @@ static void __init arch_reserve_crashkernel(void)
+ 
+ 	ret = parse_crashkernel(boot_command_line, memblock_phys_mem_size(),
+ 				&crash_size, &crash_base,
+-				&low_size, NULL, &high);
++				&low_size, &cma_size, &high);
+ 	if (ret)
+ 		return;
+ 
+ 	reserve_crashkernel_generic(crash_size, crash_base, low_size, high);
++	reserve_crashkernel_cma(cma_size);
+ }
+ 
+ void __init paging_init(void)
+-- 
+2.34.1
 
 
