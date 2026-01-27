@@ -1,155 +1,160 @@
-Return-Path: <linux-doc+bounces-74134-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74150-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EI8FH23neGmHtwEAu9opvQ
-	(envelope-from <linux-doc+bounces-74134-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 17:27:25 +0100
+	id qG03NQoOeWmHuwEAu9opvQ
+	(envelope-from <linux-doc+bounces-74150-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 20:12:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11D1297BFF
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 17:27:25 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DB4599B17
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 20:12:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B8DF13020024
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 16:27:20 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id DA0A630066B9
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 19:12:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96065361657;
-	Tue, 27 Jan 2026 16:27:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C5D8366839;
+	Tue, 27 Jan 2026 19:12:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tbPfsQ0j"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WCMr9i09"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 731CE36166C
-	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 16:27:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F3E1366826
+	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 19:12:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769531239; cv=none; b=Ks78Si18pvBI973C5SbphqRczS3ZM0DwoDsJ3Mx/beEfUM9iqJLmLWpY4y0JFKJesRliEKH2A69Ec9X/JAPI32G9csj8qLGxwNfOWEBuUIuv9oIfNbM3gL0AIjCZZK641dBaPmjkzacV6tepFVjRASSbNKwfoOmlOjhluyhW4Y4=
+	t=1769541126; cv=none; b=ur9wfRtYQgxQQum+GUd8yre6uoYicyqRh7zpeS0aiVGcAAmZ5ujzEu8m0Zi+9qAljS2N++/Vd5EcvQumbSeM5yBUzdLDYehhp0m6aWi/lQLt5itM5Z/hsEh+vTBFD6W9T0/xbjbdelrITjJ3ot7fFw5Ky+pVvI7zYb3NNSWzb+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769531239; c=relaxed/simple;
-	bh=BWXp9go9XfwSeW0YCc/iImV8Xt/lH6uEAIKNCqQ8bHk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=LagQtgjwImPZCo/mlDeIP+ODB3/Y6Nl9jvAKPCXUZ6sFgd358E+MmwEHhlunfgymxKisra5YP4KSp/Xi17FrZwOZsU58MI2OomQDextbqc0CaXlGdD0cCiC0bKgMtUzJ/3PpXbV9G1vlosDZT/sjnt/HXVvWHlbVzr40cjGwjhQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tbPfsQ0j; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E875C2BCAF
-	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 16:27:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769531239;
-	bh=BWXp9go9XfwSeW0YCc/iImV8Xt/lH6uEAIKNCqQ8bHk=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=tbPfsQ0jvKjqDadmAxnw4cxgLq2iOgtsopUYjRsZYeDlmgS0HemYTrxL4xcrC6hzP
-	 5aqJ4bB+ivCwlfZuEtb81LDNxCaKctH+A6DFxVczaUWDMJruOCASRthGTQh+XuUI6e
-	 eGg+3Bhm+ktRpQ3lm/49C6P5lbHHc5RMnwP6UKQU7crHz53hdL41VfO9Hz+TSJ7bBs
-	 cj6yEkM4H5hoJhVGUVaddK1243RiErhqPRkhNXY0Rwlf+LWVRabEjVzoyLYD7keyVR
-	 DvXgrx+BSUSPUV4v/OWBwL2GrzqjwoHbYrBr56s0uaCAj1Vg1OhBFzqQQLwmmePAHF
-	 mAnux6qepiv0Q==
-Received: by mail-oo1-f46.google.com with SMTP id 006d021491bc7-662f91bba0fso38740eaf.0
-        for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 08:27:19 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCV7TYdga2K/7M11HXHZnYBanHvbPdTIBNb7wc6MBldHob/B2Qmmem3zubQ4qSbMS79+7H3N99EFuq8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwIEcJhWUq9tbsWSDsFvSN3pOiD0fwV63G6+6pyz0GdLR3ezy7r
-	lEaZaqgdLc6bjZ5Rn1jmUf0Mu+57azy3o9Q0mXfh9KoWttQdEyEWqQKdk8vM6MSvNF3O/DtGkYm
-	lf+hqMZgrBjQ/8HU2RB4xGPnHyd2sE0U=
-X-Received: by 2002:a05:6820:440f:b0:659:9a49:8edc with SMTP id
- 006d021491bc7-662f205e135mr934882eaf.16.1769531238024; Tue, 27 Jan 2026
- 08:27:18 -0800 (PST)
+	s=arc-20240116; t=1769541126; c=relaxed/simple;
+	bh=XwkACK+iKw7oI/5o/Gv8sfELgLAgj1JR8qRdX4LMvYE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WFY4WPXR8udEBVUqAZCQ7y7kTi9UCWZPSt1ZX3J5bLUa2KV1ONC9BDwnJcxXF3JPhXSiUzZTVhPbobY733tEQlFZE9IyghzkI6JnFoIHQpWqh9578JXB4hYnFgmoS+khFNNVwwfU9DybgkUdusAjAwkvntS1jcBocfVhHGs4Ylo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WCMr9i09; arc=none smtp.client-ip=209.85.167.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-45c715116dbso3970888b6e.3
+        for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 11:12:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1769541119; x=1770145919; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3ZfqLGIvRpFE/gnKzE3sUmBILX80gzyy9OqTW4jmzZU=;
+        b=WCMr9i09ggZMRal/3mNs2uXPZHE6g/OHCNOXiuG/1jIjblcMJqQiyjgg2Uz4SWPBTp
+         PiUPPmCSDv7lXkmpollwjJD+dhUj1Q6KVxqqcRoQyjBgmtLw+XHbpsIBNsOCPzN0kOzI
+         purzzQK2NMIsKmuehL3gY/asV2h+BewhCfh253FZLSKYjPfeu46WAHwElK9dYfnk/7KB
+         QyU5KOfFqH5BUyrtBhuETMuT13NHXGt+hrjeBZJURSNDDxHsxIq1gKHl79Nd+6A1QA42
+         Nj2k+8CF5WaCgx5KOlJnMBw4S9rGzVU7pr0QMBVh0bpBZhNVLYsYKqDahTwEEmJwlgdk
+         ULFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769541119; x=1770145919;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=3ZfqLGIvRpFE/gnKzE3sUmBILX80gzyy9OqTW4jmzZU=;
+        b=TlXINZPywlYplly/RPQapHxgRmKSkSvftgIKFmE/Wr1Bku/Ih0BnAdtpaiQGbbkWhN
+         OGZaEyUKNXgCrUevxvUDU0jWl/iHBeMsP7wd64VbOXTPICacAtM39H83FfbJ9ZcDPzia
+         +kx8wf6acri+tLnUoc0mLHtWzTz5qIHNrp3ujVlu9f4kAIr1gqrF2fztU2l08h6p4/Lm
+         uktOrFzd/hY7jn+/UO9YZfM99VNipVdhPFH2W534rBMIP+bmi46XQpZwUZHgEt5MVfjy
+         pCkqTvkTUcSxUIYZiEIBNJ1fFOoechi/AX6mItjJ2zdi/lIGcfk3aawj3JBqSxlbigfI
+         Eyug==
+X-Forwarded-Encrypted: i=1; AJvYcCWr/zg52NV0TzsW/9TI7BVbg+s+TvcGweNaJGR3+32fSKMWxLWbyUiQPW0EJ5tUJtJKKuUANzGfeq4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzKYW4CW5XejPUSxj0wyk/nLhffcZLxcO3redR2oC8ZtXO8D0vE
+	exx/qRnDaBqUq83VJCqvsr1/m6SgU33xJBOtSNxOvSOCRllYiUSEbLco2DbibK2y
+X-Gm-Gg: AZuq6aJJ+FbbnIwSjRSNfH6ot8ws59nG1XAQjPH2z4JwJ7C2Cj7GnodcG3OQzjrkxAD
+	yrlPPtJxkWKPlWUCjSzcRa2ti+nu9HTKiYYT3Zg4yE+GxuegXY9lJ+CuXHOXNn2lMoVFpywVpUu
+	6cIVlaspUUlVgTkVAnHmnJhXOogy+i/ct5p7gC7BXhwQFvPsa0ay2nhIwc7boCHmE7pqxVhNtsI
+	M0HRO+/DKZZy/tnGoupn9CK2fHhhpPaqigvmsPerHNbduhUm8L7fchyoeCd4DQMdNpEE26l0PeH
+	9zxqMFyqvsX0VxZvZaOlaksfxxE/br2FatQ/1VKDqWxuuNjjU2shLh78/ttNZaUEGCkuGS2LHHP
+	2UK02metQ1lHGMX96JyhTZ8aLaI9RGlpj+4KT6SYv7oKPX0cEhE82euKBXJldb+XhP+Mo1ztV0T
+	w9ENSqpZgDCVsndAconipHlUbg
+X-Received: by 2002:a05:7300:2382:b0:2b0:4f34:eed6 with SMTP id 5a478bee46e88-2b78d9d75acmr1505750eec.26.1769533958980;
+        Tue, 27 Jan 2026 09:12:38 -0800 (PST)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b79c3aa364sm33692eec.11.2026.01.27.09.12.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Jan 2026 09:12:38 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Tue, 27 Jan 2026 09:12:37 -0800
+From: Guenter Roeck <linux@roeck-us.net>
+To: Almog Ben Shaul <almogbs@amazon.com>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	itamark@amazon.com, talel@amazon.com, farbere@amazon.com,
+	ayalstei@amazon.com, dwmw@amazon.com
+Subject: Re: [PATCH 1/2] dt-bindings: trivial-devices: Add jedec,pmic50x0
+Message-ID: <13b492a0-db2e-4e44-b145-cf99f1975fd8@roeck-us.net>
+References: <20260121151947.37719-1-almogbs@amazon.com>
+ <20260121151947.37719-2-almogbs@amazon.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260120145623.2959636-1-sumitg@nvidia.com> <20260120145623.2959636-3-sumitg@nvidia.com>
-In-Reply-To: <20260120145623.2959636-3-sumitg@nvidia.com>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Tue, 27 Jan 2026 17:27:07 +0100
-X-Gmail-Original-Message-ID: <CAJZ5v0i-fgbpfd-iHcNNtnFU79Whs+Maknx3ou4oNOADzAZmxg@mail.gmail.com>
-X-Gm-Features: AZwV_QjSIa14EzdtQMBjWmzIWxgVIX9AlsvjWJH35lHYiUt_r6wvkA4ONqxelYY
-Message-ID: <CAJZ5v0i-fgbpfd-iHcNNtnFU79Whs+Maknx3ou4oNOADzAZmxg@mail.gmail.com>
-Subject: Re: [PATCH v6 2/9] ACPI: CPPC: Clean up cppc_perf_caps and
- cppc_perf_ctrls structs
-To: Sumit Gupta <sumitg@nvidia.com>
-Cc: rafael@kernel.org, viresh.kumar@linaro.org, pierre.gondois@arm.com, 
-	zhenglifeng1@huawei.com, ionela.voinescu@arm.com, lenb@kernel.org, 
-	robert.moore@intel.com, corbet@lwn.net, rdunlap@infradead.org, 
-	ray.huang@amd.com, gautham.shenoy@amd.com, mario.limonciello@amd.com, 
-	perry.yuan@amd.com, zhanjie9@hisilicon.com, linux-pm@vger.kernel.org, 
-	linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org, 
-	acpica-devel@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com, 
-	vsethi@nvidia.com, ksitaraman@nvidia.com, sanjayc@nvidia.com, 
-	nhartman@nvidia.com, bbasu@nvidia.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260121151947.37719-2-almogbs@amazon.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-74134-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TAGGED_FROM(0.00)[bounces-74150-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[roeck-us.net];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:email]
-X-Rspamd-Queue-Id: 11D1297BFF
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,roeck-us.net:mid,jedec.org:url]
+X-Rspamd-Queue-Id: 7DB4599B17
 X-Rspamd-Action: no action
 
-On Tue, Jan 20, 2026 at 3:57=E2=80=AFPM Sumit Gupta <sumitg@nvidia.com> wro=
-te:
->
-> - Remove redundant energy_perf field from 'struct cppc_perf_caps' as
->   the same is available in 'struct cppc_perf_ctrls' which is used.
-> - Move the 'auto_sel' field from 'struct cppc_perf_caps' to
->   'struct cppc_perf_ctrls' as it represents a control register.
->
-> Reviewed-by: Pierre Gondois <pierre.gondois@arm.com>
-> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
+On Wed, Jan 21, 2026 at 03:19:46PM +0000, Almog Ben Shaul wrote:
+> Add devicetree binding for JEDEC PMIC50x0 compliant I2C DDR5 PMICs.
+> https://www.jedec.org/standards-documents/docs/jesd301-1a03
+> 
+> Signed-off-by: Almog Ben Shaul <almogbs@amazon.com>
 > ---
->  include/acpi/cppc_acpi.h | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/include/acpi/cppc_acpi.h b/include/acpi/cppc_acpi.h
-> index 4bcdcaf8bf2c..6573a759eb8d 100644
-> --- a/include/acpi/cppc_acpi.h
-> +++ b/include/acpi/cppc_acpi.h
-> @@ -119,8 +119,6 @@ struct cppc_perf_caps {
->         u32 lowest_nonlinear_perf;
->         u32 lowest_freq;
->         u32 nominal_freq;
-> -       u32 energy_perf;
-> -       bool auto_sel;
->  };
->
->  struct cppc_perf_ctrls {
-> @@ -128,6 +126,7 @@ struct cppc_perf_ctrls {
->         u32 min_perf;
->         u32 desired_perf;
->         u32 energy_perf;
-> +       bool auto_sel;
->  };
->
->  struct cppc_perf_fb_ctrs {
-> --
+>  Documentation/devicetree/bindings/trivial-devices.yaml | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/trivial-devices.yaml b/Documentation/devicetree/bindings/trivial-devices.yaml
+> index d0f7dbf15d6f..fb16bd91c76c 100644
+> --- a/Documentation/devicetree/bindings/trivial-devices.yaml
+> +++ b/Documentation/devicetree/bindings/trivial-devices.yaml
+> @@ -171,6 +171,8 @@ properties:
+>            - isil,isl76682
+>              # JEDEC JESD300 (SPD5118) Hub and Serial Presence Detect
+>            - jedec,spd5118
+> +            # JEDEC PMIC50X0 DDR5 Power Management ICs
+> +          - jedec,pmic50x0
 
-It looks like this patch and the next one can be applied independently
-of the other patches in the series.
+This should probably refer to the standard (JEDEC JESD301). Also, I am not
+sure if pmic50x0 is appropriate, since the standard refers to pmic5000 and
+pmic5010, but does not cover pmic50[2-9]0.
 
-Do you want me to do that?
+Guenter
+
+>              # Linear Technology LTC2488
+>            - lineartechnology,ltc2488
+>              # 5 Bit Programmable, Pulse-Width Modulator
 
