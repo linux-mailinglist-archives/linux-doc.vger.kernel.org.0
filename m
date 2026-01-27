@@ -1,1424 +1,718 @@
-Return-Path: <linux-doc+bounces-74153-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74145-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mG+rJLYleWnmvgEAu9opvQ
-	(envelope-from <linux-doc+bounces-74153-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 21:53:10 +0100
+	id uJAoB1kLeWnyugEAu9opvQ
+	(envelope-from <linux-doc+bounces-74145-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 20:00:41 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A22B29A7D2
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 21:53:09 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 919C99986C
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 20:00:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3D2E430125C0
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 20:53:08 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1942C30BF145
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 18:53:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F9E428489E;
-	Tue, 27 Jan 2026 20:53:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84C6E32B99C;
+	Tue, 27 Jan 2026 18:53:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EGuqadDW"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="P3ogJ6Cd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+Received: from mail-dl1-f67.google.com (mail-dl1-f67.google.com [74.125.82.67])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4086199949
-	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 20:53:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769547187; cv=none; b=ilv/HqoTUlrHivXeAzeleV/qsnGBo/3EmmVBtuSfa6M79hSb8brrhyez572To1R7joUhuRAVtBDHVHgbno46P60enlT0OrBuZZk+zPKsOib+UW1CFyI3aMv/s8VpaNIFQ9xOVqhr9aK5DBszsV3W64MVJNhG0gxS3jp7MJhxH2o=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769547187; c=relaxed/simple;
-	bh=7Oexpvje7lwUA6dXg867NaeVzGOnEnTcBdtFNJokjTQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RYwKj080bflbLE8jQuZnfhq1UfOY+kbQX6DIOLgoQ0vG5FRDkAy0TTCy5ueVaSkxKFZ5hZwvrzG+Ehcr4jPdDF8KaDHUvsBbGXm3o5nCJXfni6KRnjlbSl+HBRg5PMtMuZbDD0CQmlKwvhxnVJ2qRSQwBkqt4kIGCXo+lwm5zbI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EGuqadDW; arc=none smtp.client-ip=209.85.214.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E88D532B999
+	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 18:53:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.67
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1769539989; cv=pass; b=B6vjC3OWoFja/XubhY0hwThrRD9/DNKZuc4ku66OD5SNn2Av2I4OekaLMYdpLXeOCgf62IyXSdS85WScHExbv4lhId5iVlRePqZ5QWPMB3POG+OhIrcMkwSERkBbLYu7XXAJ9sVAuP8VDiZNhzs8r1KijPd4hMxHuHR1p606pok=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1769539989; c=relaxed/simple;
+	bh=II6AQ5O86X0B5Z2rRMtmz0KVbfBmoQ0kpyWUVS6llnE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=P+8PJmU+gWq8ctdt3FWZy+xonPv5BT07isHqBsRZW25UVdpYPjt3ouwkn2FiiccaF+U5GyAt1afqBcXenxfx4Rc5hxeXMGBRl17imZ8KyD6KTdmnUtTP5aq5eB202tGQ9lrZpwywecQ3m0X1iMrdEeuExBYBp1CVtF2gNOZB8mo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=P3ogJ6Cd; arc=pass smtp.client-ip=74.125.82.67
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-29f102b013fso55682035ad.2
-        for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 12:53:04 -0800 (PST)
+Received: by mail-dl1-f67.google.com with SMTP id a92af1059eb24-124566b6693so13329080c88.0
+        for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 10:53:06 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769539986; cv=none;
+        d=google.com; s=arc-20240605;
+        b=NzYsXPhvCgxoIO+V1ZXbLJx4zm9hSp8CFqzQjmlA2IfcsrW6XLvxIauyW6lVvdH8ea
+         EvgSQGX0qDT7bYM5qEO7hU6ayqou70JbajRL6u3oTYEkf9wQZZ27QRMjUtRCdlerCikk
+         Nvn5CjE3Ejc8dzAvvbRJrS2HLo1mSAr4Jo4QXyGxwgam2BVQ1Oyyu6t86KWUwbxmSIjF
+         Zuv4iF0o7ASKWYzXYiOYcnVN/06/JAq/2dHmwBkTkbIC1p5AHx2EU9oaJecV/5L3jm/X
+         ZloogG2S+1wXvFbRBifYL+V9AvubBJ1uNsfdNdzGCFMEhHaX0N8d/L+A/vVIfwb+j50f
+         YCcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=hrLY1d8MKKr/lNfj/RjogCGbPhK6ypIdEBSRs17/+is=;
+        fh=ODydcDYxphPIvVyvjGlm1I/k5QSc6CSJltIMXlLXMic=;
+        b=EK39fsdnBrF3LCuCQVyJxeVv1q9HR40DzBY2ZqgYbUaVK2trRbuhzD8CWE6DN22xu/
+         rYJd0c6xELJDNKy5xGol7cNPHbnPV5Hd0ZiAF0k3NQ6wJU7kMZH6Y226HDYtApImpPfI
+         YAlia9N2Sx7mDIKhqtA788jU1P1iOnWe+iOHfeObaXFj1pDOmVVzCGBBTY5tYK3FvmxG
+         myoke2mTaznKbBIyKu/FMhqc9S9fUu2Imx+WV8qpvYk4UR1OwvvJYzfW7JL4LZyyr0wM
+         c6c3eTO3QKh4nFrg0A7pANpXvpcpBCSsGoV87wKBOlpU55mxAPXeTfFxrNDiz6kPISyr
+         4jCw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769547184; x=1770151984; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=4Vj17Dvif59qDRuYtZXfkx3A5ggvCnYnA/Y4OjdT3fA=;
-        b=EGuqadDWEdrTdo/+XB9E/1cJN5etm5803LaWbHJRRnDK+7bnbuzN5YobDP5PYrEDcf
-         WO1C9xqoSq2ei7p1tfmknyHr0/tztpwXtgP3CahL3UKS7oNvslhr81x2hFlmLWCZVgRj
-         yNg1OYnIGcpBM0xKjoW6GGPxe3Ihi8Usx2eq4V6PaYaSkePQG7wlwO3Wi/4VbXDMCkrZ
-         D0K11i3EZYt1LwgGcClELOHG4K2JqP2dFiD4iQDd5Qqzfz2TZ7KEi5YqWZk3z0lDQ2e8
-         4ncRq98evBydA45vq+/LhWVP8Vvzm2XYyKX+hyxBhFIqmmvPiQpyOOcqs0vUWORZtZ6s
-         XM7A==
+        d=gmail.com; s=20230601; t=1769539986; x=1770144786; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hrLY1d8MKKr/lNfj/RjogCGbPhK6ypIdEBSRs17/+is=;
+        b=P3ogJ6CdPNxlcM7L/XYLIQmoMiH7B7j9/yxfScD/abQMngqoTMmo+FvpYEe3EmSoog
+         A/otyHzlGrg8KgR6gYrdHTNQL432cu8eNsq3mUmCYPRXuDkiI4xjiprXnSSaciMZX4z9
+         K69xRdrgEcK9QnhdDynOrl60wxe10ynztnS37q3Cy99ZiG2mgJZtBtASbIgcCPcKxGB9
+         exOoOqrwovaJOqCyZE4ndOdyKZHNVVIdtliL4CrN8NBcUk/RSaC4Yus/E1cVe8BS6LDZ
+         6CYMxblu/ztsJZOKTo6Mg1RTdZk1JoRvb18UTcFxV+v8YWa106GtQXAfjZEDl6W9f9UM
+         yIsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769547184; x=1770151984;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4Vj17Dvif59qDRuYtZXfkx3A5ggvCnYnA/Y4OjdT3fA=;
-        b=GihGlo/V7E9TqXFmGxRKWN583nJNgNfJdqwTZqMryxP6hgXs1zVMx4ZHD+0Yzubxn2
-         MlLrIMVjJotHCmhCweMFBU4GXUHX5FlWpCIvVXK3k2+/NSpgQuo0FbTIr+k9RqPtok08
-         6WQXWv0BJx5zXDm9ry/71uB7Pob1mdk9PpotuQZWoyp4RYBd1QE+aZpWxmIOgWUC82tw
-         peFOGuPsLLhpSPhNnT8OBO2jR2oV00nefJKjz5J0KFYXcIZmH99jArm9GawaHi2Qx+dh
-         SZCjcUwW46d0OJ7V8lkmQTj0KXkLcG/BaiydMdwi2IYWbcojHmZq4LfLznoIsFkoMf0N
-         sshg==
-X-Forwarded-Encrypted: i=1; AJvYcCVKeCvNoBjSauaIv3wwNUYNHtaOhgoCrOgY22A7sQlAadqgSd4l6W8qNPevkZ7DCXOkXIOtUEl/dPs=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyqqa0XzjZNwCIK64PMacoBAQxvuL2aX0NsxprOKysbjZd510Jx
-	D73lotGPPG05WH1UDOHM6KW37HFjZrhPwbWiee2Iu7m+dYk9KdMSOu4HOuFjtE8X
-X-Gm-Gg: AZuq6aJ1MlCKRZNAS6ZJZlICFgLI0O3aviDcCPECwvEWigWmVkQLib9/w8XcKdZpQYv
-	ROKnNYWuhKrF33ZkUl7WJWOkil3DXkd75Wdo1Tek2A36jduhx4RK61uwSUmUgl4FZB6ZorrsOiw
-	N0CQhRWc/2xtwjFEeQPAHXokEMyTf8owg6fng9oydjtTy3acV0CpOoM4mRHR/WTgBGdNjTl0Hsz
-	arxNmWZzGboDMnKnjTfcfwCQa6gF/1vleRLedmribEZLJMCMXKFW5/973fyWt9QM2ZZGyL0U/XD
-	YT8hYcIyMFxMoF/e4M9dVvx8fwskhJoDNgQ25dBcmxtkytm5tNxWCLlBxvM8tJ9CdlLZtXqO1KB
-	14VB1s4NM/29E4xsYnGkIT4Uc0AmIvyYOaR6olooJ8DWXZG6TeJLtKvo5A5N21V0ziHIBR067aX
-	Hau49Eh0YZc9wo66mHjNeeJ5i5tYpwXGU2IpsTTgfF4eembySJLNT+VxDd1YznWwPlVktr1Z4=
-X-Received: by 2002:a05:6a20:cfaf:b0:35d:d477:a7e6 with SMTP id adf61e73a8af0-38ec6248f44mr2391904637.13.1769539888144;
-        Tue, 27 Jan 2026 10:51:28 -0800 (PST)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c64276efb16sm147374a12.4.2026.01.27.10.51.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Jan 2026 10:51:27 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <491bd9ec-d6b7-4f1a-877b-67ffbc658ba8@roeck-us.net>
-Date: Tue, 27 Jan 2026 10:51:26 -0800
+        d=1e100.net; s=20230601; t=1769539986; x=1770144786;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=hrLY1d8MKKr/lNfj/RjogCGbPhK6ypIdEBSRs17/+is=;
+        b=VjuIsIYsuHfm0Nn757XzedxDWzukbMni4vT02Cqtspj79XP3PxFiSDL4vwIuJ4I7MZ
+         ZBtMigchSJMoohwN/t2BJj+jmVFyN6HKkLE3gXsgkQzQRBH4/La+FPoLMHN2wXo4tYdT
+         4amka2yrjJX7da2Haey/SDEyOaLaPNwPo4z1nHbmNBazk+XCaMh++aIj2bis73JRp8Wr
+         zxPwFzkB0Rt7EGRFd4O0DW2NuSFAZDol9vRu/h5Vrcn36CUqtYgNCRlrMSJuCp6qh0na
+         Wk5XhmSA6GQyvFPXgjW3fDM5o34gi/oTO6qM5drsMkNPnbmCqPfu4BFMa02Oo2CxW9ZZ
+         E1RQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVXxzFoXsaTPqgoJozDBG2bgy6VCrhv7X5d6vkpzekKmSnFVMSyQ4BIt/aEYp4NOCSRHGVk67k0SdM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwU66n8rYrPhXaH3XKQn6+iAhqzurwgwcO/jj81jlxv4W1OqF/e
+	U/hRXpmkDEf8ODyu/SkO2s+b92kKKKnQBe/6plQDzRYuylJOhsmu9uFK4hwusj3iw3C1Z0YIUqM
+	XWhTGRD05Fo7KTn5wGdQmwDeoGGFAdw==
+X-Gm-Gg: AZuq6aKZbQDLde5MHjMvYz23Uz3KR0FWI1q1sPpseGYGxUo6V26A4n81H28TaRB2Fzi
+	JNYI0RXnKai8RzC0ewqpbv98RcxIRB++SEjCJh7FdTE5aKew+ijLyNkIjDsEalt4lzZ44QmGEOI
+	F5O4roAuYvKGQkl3Nc2PMnTN506W5oiCScPc3i8anvEu8U0YaloTrqTWPZzROmS1yi0q4sOCLm6
+	gMi+QJMQD2yUXlz4iK+V15uSvz7ByS2IITnz1eXqN0Y6bNnRa/CWZ4wIXSUw8G/fIXiGJ8=
+X-Received: by 2002:a05:7022:3b86:b0:123:3bba:fc4c with SMTP id
+ a92af1059eb24-124a0114530mr1399404c88.38.1769539985752; Tue, 27 Jan 2026
+ 10:53:05 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] hwmon: add support for MCP998X
-To: victor.duicu@microchip.com, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, corbet@lwn.net
-Cc: marius.cristea@microchip.com, linux-hwmon@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260127151823.9728-1-victor.duicu@microchip.com>
- <20260127151823.9728-3-victor.duicu@microchip.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
- RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
- nyFiKxUehbNF3r9qlJgPqONwX5vJy4/GvDHdddSCxV41P/ejsZ8PykxyJs98UWhF54tGRWFl
- 7i1xvaDB9lN5WTLRKSO7wICuLiSz5WZHXMkyF4d+/O5ll7yz/o/JxK5vO/sduYDIlFTvBZDh
- gzaEtNf5tQjsjG4io8E0Yq0ViobLkS2RTNZT8ICq/Jmvl0SpbHRvYwa2DhNsK0YjHFQBB0FX
- IdhdUEzNefcNcYvqigJpdICoP2e4yJSyflHFO4dr0OrdnGLe1Zi/8Xo/2+M1dSSEt196rXaC
- kwu2KgIgmkRBb3cp2vIBBIIowU8W3qC1+w+RdMUrZxKGWJ3juwcgveJlzMpMZNyM1jobSXZ0
- VHGMNJ3MwXlrEFPXaYJgibcg6brM6wGfX/LBvc/haWw4yO24lT5eitm4UBdIy9pKkKmHHh7s
- jfZJkB5fWKVdoCv/omy6UyH6ykLOPFugl+hVL2Prf8xrXuZe1CMS7ID9Lc8FaL1ROIN/W8Vk
- BIsJMaWOhks//7d92Uf3EArDlDShwR2+D+AMon8NULuLBHiEUQARAQABzTJHdWVudGVyIFJv
- ZWNrIChMaW51eCBhY2NvdW50KSA8bGludXhAcm9lY2stdXMubmV0PsLBgQQTAQIAKwIbAwYL
- CQgHAwIGFQgCCQoLBBYCAwECHgECF4ACGQEFAmgrMyQFCSbODQkACgkQyx8mb86fmYGcWRAA
- oRwrk7V8fULqnGGpBIjp7pvR187Yzx+lhMGUHuM5H56TFEqeVwCMLWB2x1YRolYbY4MEFlQg
- VUFcfeW0OknSr1s6wtrtQm0gdkolM8OcCL9ptTHOg1mmXa4YpW8QJiL0AVtbpE9BroeWGl9v
- 2TGILPm9mVp+GmMQgkNeCS7Jonq5f5pDUGumAMguWzMFEg+Imt9wr2YA7aGen7KPSqJeQPpj
- onPKhu7O/KJKkuC50ylxizHzmGx+IUSmOZxN950pZUFvVZH9CwhAAl+NYUtcF5ry/uSYG2U7
- DCvpzqOryJRemKN63qt1bjF6cltsXwxjKOw6CvdjJYA3n6xCWLuJ6yk6CAy1Ukh545NhgBAs
- rGGVkl6TUBi0ixL3EF3RWLa9IMDcHN32r7OBhw6vbul8HqyTFZWY2ksTvlTl+qG3zV6AJuzT
- WdXmbcKN+TdhO5XlxVlbZoCm7ViBj1+PvIFQZCnLAhqSd/DJlhaq8fFXx1dCUPgQDcD+wo65
- qulV/NijfU8bzFfEPgYP/3LP+BSAyFs33y/mdP8kbMxSCjnLEhimQMrSSo/To1Gxp5C97fw5
- 3m1CaMILGKCmfI1B8iA8zd8ib7t1Rg0qCwcAnvsM36SkrID32GfFbv873bNskJCHAISK3Xkz
- qo7IYZmjk/IJGbsiGzxUhvicwkgKE9r7a1rOwU0ETofVZwEQALlLbQeBDTDbwQYrj0gbx3bq
- 7kpKABxN2MqeuqGr02DpS9883d/t7ontxasXoEz2GTioevvRmllJlPQERVxM8gQoNg22twF7
- pB/zsrIjxkE9heE4wYfN1AyzT+AxgYN6f8hVQ7Nrc9XgZZe+8IkuW/Nf64KzNJXnSH4u6nJM
- J2+Dt274YoFcXR1nG76Q259mKwzbCukKbd6piL+VsT/qBrLhZe9Ivbjq5WMdkQKnP7gYKCAi
- pNVJC4enWfivZsYupMd9qn7Uv/oCZDYoBTdMSBUblaLMwlcjnPpOYK5rfHvC4opxl+P/Vzyz
- 6WC2TLkPtKvYvXmdsI6rnEI4Uucg0Au/Ulg7aqqKhzGPIbVaL+U0Wk82nz6hz+WP2ggTrY1w
- ZlPlRt8WM9w6WfLf2j+PuGklj37m+KvaOEfLsF1v464dSpy1tQVHhhp8LFTxh/6RWkRIR2uF
- I4v3Xu/k5D0LhaZHpQ4C+xKsQxpTGuYh2tnRaRL14YMW1dlI3HfeB2gj7Yc8XdHh9vkpPyuT
- nY/ZsFbnvBtiw7GchKKri2gDhRb2QNNDyBnQn5mRFw7CyuFclAksOdV/sdpQnYlYcRQWOUGY
- HhQ5eqTRZjm9z+qQe/T0HQpmiPTqQcIaG/edgKVTUjITfA7AJMKLQHgp04Vylb+G6jocnQQX
- JqvvP09whbqrABEBAAHCwWUEGAECAA8CGwwFAmgrMyQFCSbODQkACgkQyx8mb86fmYHlgg/9
- H5JeDmB4jsreE9Bn621wZk7NMzxy9STxiVKSh8Mq4pb+IDu1RU2iLyetCY1TiJlcxnE362kj
- njrfAdqyPteHM+LU59NtEbGwrfcXdQoh4XdMuPA5ADetPLma3YiRa3VsVkLwpnR7ilgwQw6u
- dycEaOxQ7LUXCs0JaGVVP25Z2hMkHBwx6BlW6EZLNgzGI2rswSZ7SKcsBd1IRHVf0miwIFYy
- j/UEfAFNW+tbtKPNn3xZTLs3quQN7GdYLh+J0XxITpBZaFOpwEKV+VS36pSLnNl0T5wm0E/y
- scPJ0OVY7ly5Vm1nnoH4licaU5Y1nSkFR/j2douI5P7Cj687WuNMC6CcFd6j72kRfxklOqXw
- zvy+2NEcXyziiLXp84130yxAKXfluax9sZhhrhKT6VrD45S6N3HxJpXQ/RY/EX35neH2/F7B
- RgSloce2+zWfpELyS1qRkCUTt1tlGV2p+y2BPfXzrHn2vxvbhEn1QpQ6t+85FKN8YEhJEygJ
- F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
- FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20260127151823.9728-3-victor.duicu@microchip.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20260123045733.6954-1-ravis.opensrc@gmail.com> <20260124015045.78075-1-sj@kernel.org>
+In-Reply-To: <20260124015045.78075-1-sj@kernel.org>
+From: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
+Date: Tue, 27 Jan 2026 10:52:53 -0800
+X-Gm-Features: AZwV_QhLWpILFmBNmv_VUaKUIKDcnzxznZsbnQGx_3zRIdW1Tlcdm7ps20MNsQ8
+Message-ID: <CALa+Y17__d=ZsM1yX+MXx0ozVdsXnFqF4p0g+kATEitrWyZFfg@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/5] mm/damon: Add node_sys_bp quota goal metric for
+ PA-based migration control
+To: SeongJae Park <sj@kernel.org>
+Cc: damon@lists.linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, akpm@linux-foundation.org, corbet@lwn.net, 
+	bijan311@gmail.com, ajayjoshi@micron.com, Honggyu Kim <honggyu.kim@sk.com>, 
+	Yunjeong Mun <yunjeong.mun@sk.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74153-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[roeck-us.net];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_FROM(0.00)[bounces-74145-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[lists.linux.dev,kvack.org,vger.kernel.org,linux-foundation.org,lwn.net,gmail.com,micron.com,sk.com];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MISSING_XM_UA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,roeck-us.net:mid,microchip.com:url,microchip.com:email,mcp998x_chip_info.info:url]
-X-Rspamd-Queue-Id: A22B29A7D2
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ravisopensrc@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 919C99986C
 X-Rspamd-Action: no action
 
-On 1/27/26 07:18, victor.duicu@microchip.com wrote:
-> From: Victor Duicu <victor.duicu@microchip.com>
-> 
-> This is the driver for Microchip MCP998X/33 and MCP998XD/33D
-> Multichannel Automotive Temperature Monitor Family.
-> 
-> Signed-off-by: Victor Duicu <victor.duicu@microchip.com>
-> ---
->   Documentation/hwmon/index.rst   |    1 +
->   Documentation/hwmon/mcp9982.rst |  105 ++++
->   MAINTAINERS                     |    2 +
->   drivers/hwmon/Kconfig           |   11 +
->   drivers/hwmon/Makefile          |    1 +
->   drivers/hwmon/mcp9982.c         | 1022 +++++++++++++++++++++++++++++++
->   6 files changed, 1142 insertions(+)
->   create mode 100644 Documentation/hwmon/mcp9982.rst
->   create mode 100644 drivers/hwmon/mcp9982.c
-> 
-> diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-> index 85d7a686883e..b02709fc216e 100644
-> --- a/Documentation/hwmon/index.rst
-> +++ b/Documentation/hwmon/index.rst
-> @@ -173,6 +173,7 @@ Hardware Monitoring Kernel Drivers
->      mc33xs2410_hwmon
->      mc34vr500
->      mcp3021
-> +   mcp9982
->      menf21bmc
->      mlxreg-fan
->      mp2856
-> diff --git a/Documentation/hwmon/mcp9982.rst b/Documentation/hwmon/mcp9982.rst
-> new file mode 100644
-> index 000000000000..dee2947f9044
-> --- /dev/null
-> +++ b/Documentation/hwmon/mcp9982.rst
-> @@ -0,0 +1,105 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +Kernel driver MCP998X
-> +=====================
-> +
-> +Supported chips:
-> +
-> +  * Microchip Technology MCP998X/MCP9933 and MCP998XD/MCP9933D
-> +
-> +    Prefix: 'mcp9982'
-> +
-> +    Datasheet:
-> +    https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/MCP998X-Family-Data-Sheet-DS20006827.pdf
-> +
-> +Authors:
-> +
-> +   - Victor Duicu <victor.duicu@microchip.com>
-> +
-> +Description
-> +-----------
-> +
-> +This driver implements support for the MCP998X family containing: MCP9982,
-> +MCP9982D, MCP9983, MCP9983D, MCP9984, MCP9984D, MCP9985, MCP9985D,
-> +MCP9933 and MCP9933D.
-> +
-> +The MCP998X Family is a high accuracy 2-wire multichannel automotive
-> +temperature monitor.
-> +
-> +The chips in the family have different numbers of external channels,
-> +ranging from 1 (MCP9982) to 4 channels (MCP9985). Reading diodes in
-> +anti-parallel connection is supported by MCP9984/85/33 and
-> +MCP9984D/85D/33D. Dedicated hardware shutdown circuitry is present
-> +only in MCP998XD and MCP9933D.
-> +
-> +Temperatures are read in millidegrees Celsius, ranging from -64 to
-> +191.875 with 0.125 precision.
-> +
-> +Each channel has a minimum, maximum, and critical limit alongside associated alarms.
-> +The chips also implement a hysteresis mechanism which applies only to the maximum
-> +and critical limits. The relative difference between a limit and its hysteresis
-> +is the same for both and the value is kept in a single register.
-> +
-> +The chips measure temperatures with a variable conversion rate.
-> +Update_interval = Conversion/Second, so the available options are:
-> +- 16000 (ms) = 1 conv/16 sec
-> +- 8000 (ms) = 1 conv/8 sec
-> +- 4000 (ms) = 1 conv/4 sec
-> +- 2000 (ms) = 1 conv/2 sec
-> +- 1000 (ms) = 1 conv/sec
-> +- 500 (ms) = 2 conv/sec
-> +- 250 (ms) = 4 conv/sec
-> +- 125 (ms) = 8 conv/sec
-> +- 64 (ms) = 16 conv/sec
-> +- 32 (ms) = 32 conv/sec
-> +- 16 (ms) = 64 conv/sec
-> +
-> +Usage Notes
-> +-----------
-> +
-> +Parameters that can be configured in devicetree:
-> +- anti-parallel diode mode operation
-> +- resistance error correction on channels 1 and 2
-> +- resistance error correction on channels 3 and 4
-> +Chips 82/83 and 82D/83D do not support anti-parallel diode mode.
-> +For chips with "D" in the name resistance error correction must be on.
-> +Please see Documentation/devicetree/bindings/hwmon/microchip,mcp9982.yaml
-> +for details.
-> +
-> +There are two power states:
-> +- Active state: in which the chip is converting on all channels at the
-> +  programmed rate.
-> +- Standby state: in which the host must initiate a conversion cycle.
-> +Chips with "D" in the name work in Active state only and those without
-> +can work in either state.
-> +
-> +Chips with "D" in the name can't set update interval slower than 1 second.
-> +
-> +Among the hysteresis attributes, only the tempX_crit_hyst ones are writeable
-> +while the others are read only. Setting tempX_crit_hyst writes the difference
-> +between tempX_crit and tempX_crit_hyst in the hysteresis register. The new value
-> +applies automatically  to the other limits. At power up the device starts with
-> +the value 10 in the hysteresis register.
-> +
-> +Sysfs entries
-> +-------------
-> +
-> +The following attributes are supported. The limits and update_interval are
-> +read-write, while the rest are read only.
-> +
-> +======================= ==================================================
-> +temp[1-5]_label		User name for channel.
-> +temp[1-5]_input		Measured temperature for channel.
-> +
-> +temp[1-5]_crit		Critical temperature limit.
-> +temp[1-5]_crit_alarm	Critical temperature limit alarm.
-> +temp[1-5]_crit_hyst	Critical temperature limit hysteresis.
-> +
-> +temp[1-5]_max		High temperature limit.
-> +temp[1-5]_max_alarm	High temperature limit alarm.
-> +temp[1-5]_max_hyst	High temperature limit hysteresis.
-> +
-> +temp[1-5]_min		Low temperature limit.
-> +temp[1-5]_min_alarm	Low temperature limit alarm.
-> +
-> +update_interval		The interval at which the chip will update readings.
-> +======================= ==================================================
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f88d837cb586..c39ab12b6bc8 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -17154,6 +17154,8 @@ M:	Victor Duicu <victor.duicu@microchip.com>
->   L:	linux-hwmon@vger.kernel.org
->   S:	Supported
->   F:	Documentation/devicetree/bindings/hwmon/microchip,mcp9982.yaml
-> +F:	Documentation/hwmon/mcp9982.rst
-> +F:	drivers/hwmon/mcp9982.c
->   
->   MICROCHIP MMC/SD/SDIO MCI DRIVER
->   M:	Aubin Constans <aubin.constans@microchip.com>
-> diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-> index 157678b821fc..c758ab2d5fdf 100644
-> --- a/drivers/hwmon/Kconfig
-> +++ b/drivers/hwmon/Kconfig
-> @@ -1388,6 +1388,17 @@ config SENSORS_MCP3021
->   	  This driver can also be built as a module. If so, the module
->   	  will be called mcp3021.
->   
-> +config SENSORS_MCP9982
-> +       tristate "Microchip Technology MCP9982 driver"
-> +       depends on I2C
-> +       select REGMAP_I2C
-> +       help
-> +         Say yes here to include support for Microchip Technology's MCP998X/33
-> +         and MCP998XD/33D Multichannel Automotive Temperature Monitor Family.
-> +
-> +         This driver can also be built as a module. If so, the module
-> +         will be called mcp9982.
-> +
->   config SENSORS_MLXREG_FAN
->   	tristate "Mellanox FAN driver"
->   	depends on MELLANOX_PLATFORM
-> diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-> index eade8e3b1bde..cec33da29a68 100644
-> --- a/drivers/hwmon/Makefile
-> +++ b/drivers/hwmon/Makefile
-> @@ -170,6 +170,7 @@ obj-$(CONFIG_SENSORS_MC13783_ADC)+= mc13783-adc.o
->   obj-$(CONFIG_SENSORS_MC33XS2410) += mc33xs2410_hwmon.o
->   obj-$(CONFIG_SENSORS_MC34VR500)	+= mc34vr500.o
->   obj-$(CONFIG_SENSORS_MCP3021)	+= mcp3021.o
-> +obj-$(CONFIG_SENSORS_MCP9982)	+= mcp9982.o
->   obj-$(CONFIG_SENSORS_TC654)	+= tc654.o
->   obj-$(CONFIG_SENSORS_TPS23861)	+= tps23861.o
->   obj-$(CONFIG_SENSORS_MLXREG_FAN) += mlxreg-fan.o
-> diff --git a/drivers/hwmon/mcp9982.c b/drivers/hwmon/mcp9982.c
-> new file mode 100644
-> index 000000000000..55701655daa0
-> --- /dev/null
-> +++ b/drivers/hwmon/mcp9982.c
-> @@ -0,0 +1,1022 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * HWMON driver for MCP998X/33 and MCP998XD/33D Multichannel Automotive
-> + * Temperature Monitor Family
-> + *
-> + * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
-> + *
-> + * Author: Victor Duicu <victor.duicu@microchip.com>
-> + *
-> + * Datasheet can be found here:
-> + * https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/MCP998X-Family-Data-Sheet-DS20006827.pdf
-> + */
-> +
-> +#include <linux/array_size.h>
-> +#include <linux/bitfield.h>
-> +#include <linux/bitops.h>
-> +#include <linux/bits.h>
-> +#include <linux/byteorder/generic.h>
-> +#include <linux/delay.h>
-> +#include <linux/device/devres.h>
-> +#include <linux/device.h>
-> +#include <linux/dev_printk.h>
-> +#include <linux/err.h>
-> +#include <linux/hwmon.h>
-> +#include <linux/i2c.h>
-> +#include <linux/math.h>
-> +#include <linux/minmax.h>
-> +#include <linux/property.h>
-> +#include <linux/regmap.h>
-> +#include <linux/time64.h>
-> +#include <linux/util_macros.h>
-> +
-> +/* MCP9982 Registers */
-> +#define MCP9982_HIGH_BYTE_ADDR(index)		(2 * (index))
-> +#define MCP9982_ONE_SHOT_ADDR			0x0A
-> +#define MCP9982_INTERNAL_HIGH_LIMIT_ADDR	0x0B
-> +#define MCP9982_INTERNAL_LOW_LIMIT_ADDR		0x0C
-> +#define MCP9982_EXT_HIGH_LIMIT_ADDR(index)	(4 * ((index) - 1) + 0x0D)
-> +#define MCP9982_EXT_LOW_LIMIT_ADDR(index)	(4 * ((index) - 1) + 0x0F)
-> +#define MCP9982_THERM_LIMIT_ADDR(index)		((index) + 0x1D)
-> +#define MCP9982_CFG_ADDR			0x22
-> +#define MCP9982_CONV_ADDR			0x24
-> +#define MCP9982_HYS_ADDR			0x25
-> +#define MCP9982_CONSEC_ALRT_ADDR		0x26
-> +#define MCP9982_ALRT_CFG_ADDR			0x27
-> +#define MCP9982_RUNNING_AVG_ADDR		0x28
-> +#define MCP9982_HOTTEST_CFG_ADDR		0x29
-> +#define MCP9982_STATUS_ADDR			0x2A
-> +#define MCP9982_EXT_FAULT_STATUS_ADDR		0x2B
-> +#define MCP9982_HIGH_LIMIT_STATUS_ADDR		0x2C
-> +#define MCP9982_LOW_LIMIT_STATUS_ADDR		0x2D
-> +#define MCP9982_THERM_LIMIT_STATUS_ADDR		0x2E
-> +#define MCP9982_HOTTEST_HIGH_BYTE_ADDR		0x2F
-> +#define MCP9982_HOTTEST_LOW_BYTE_ADDR		0x30
-> +#define MCP9982_HOTTEST_STATUS_ADDR		0x31
-> +#define MCP9982_THERM_SHTDWN_CFG_ADDR		0x32
-> +#define MCP9982_HRDW_THERM_SHTDWN_LIMIT_ADDR	0x33
-> +#define MCP9982_EXT_BETA_CFG_ADDR(index)	((index) + 0x33)
-> +#define MCP9982_EXT_IDEAL_ADDR(index)		((index) + 0x35)
-> +
-> +/* MCP9982 Bits */
-> +#define MCP9982_CFG_MSKAL			BIT(7)
-> +#define MCP9982_CFG_RS				BIT(6)
-> +#define MCP9982_CFG_ATTHM			BIT(5)
-> +#define MCP9982_CFG_RECD12			BIT(4)
-> +#define MCP9982_CFG_RECD34			BIT(3)
-> +#define MCP9982_CFG_RANGE			BIT(2)
-> +#define MCP9982_CFG_DA_ENA			BIT(1)
-> +#define MCP9982_CFG_APDD			BIT(0)
-> +
-> +#define MCP9982_STATUS_BUSY			BIT(5)
-> +
-> +/* Constants and default values */
-> +#define MCP9982_MAX_NUM_CHANNELS		5
-> +#define MCP9982_BETA_AUTODETECT			16
-> +#define MCP9982_IDEALITY_DEFAULT		18
-> +#define MCP9982_OFFSET				64
-> +#define MCP9982_DEFAULT_CONSEC_ALRT_VAL		112
-> +#define MCP9982_DEFAULT_HYS_VAL			10
-> +#define MCP9982_DEFAULT_CONV_VAL		6
-> +#define MCP9982_WAKE_UP_TIME_US			125000
-> +#define MCP9982_WAKE_UP_TIME_MAX_US		130000
-> +#define MCP9982_TIMER_BUFFER_US			10000
-> +#define MCP9982_CONVERSION_TIME_MS		125
-> +#define MCP9982_HIGH_LIMIT_DEFAULT		21000
-> +#define MCP9982_LOW_LIMIT_DEFAULT		0
-> +
-> +static const struct hwmon_channel_info * const mcp9985_info[] = {
-> +	HWMON_CHANNEL_INFO(temp,
-> +			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_MIN |
-> +			   HWMON_T_MIN_ALARM | HWMON_T_MAX | HWMON_T_MAX_ALARM |
-> +			   HWMON_T_MAX_HYST | HWMON_T_CRIT | HWMON_T_CRIT_ALARM |
-> +			   HWMON_T_CRIT_HYST,
-> +			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_MIN |
-> +			   HWMON_T_MIN_ALARM | HWMON_T_MAX | HWMON_T_MAX_ALARM |
-> +			   HWMON_T_MAX_HYST | HWMON_T_CRIT | HWMON_T_CRIT_ALARM |
-> +			   HWMON_T_CRIT_HYST,
-> +			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_MIN |
-> +			   HWMON_T_MIN_ALARM | HWMON_T_MAX | HWMON_T_MAX_ALARM |
-> +			   HWMON_T_MAX_HYST | HWMON_T_CRIT | HWMON_T_CRIT_ALARM |
-> +			   HWMON_T_CRIT_HYST,
-> +			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_MIN |
-> +			   HWMON_T_MIN_ALARM | HWMON_T_MAX | HWMON_T_MAX_ALARM |
-> +			   HWMON_T_MAX_HYST | HWMON_T_CRIT | HWMON_T_CRIT_ALARM |
-> +			   HWMON_T_CRIT_HYST,
-> +			   HWMON_T_INPUT | HWMON_T_LABEL | HWMON_T_MIN |
-> +			   HWMON_T_MIN_ALARM | HWMON_T_MAX | HWMON_T_MAX_ALARM |
-> +			   HWMON_T_MAX_HYST | HWMON_T_CRIT | HWMON_T_CRIT_ALARM |
-> +			   HWMON_T_CRIT_HYST),
-> +	HWMON_CHANNEL_INFO(chip,
-> +			   HWMON_C_UPDATE_INTERVAL),
-> +	NULL
-> +};
-> +
-> +/**
-> + * struct mcp9982_features - features of a mcp9982 instance
-> + * @name:			chip's name
-> + * @phys_channels:		number of physical channels supported by the chip
-> + * @hw_thermal_shutdown:	presence of hardware thermal shutdown circuitry
-> + * @allow_apdd:			whether the chip supports enabling APDD
-> + */
-> +struct mcp9982_features {
-> +	const char	*name;
-> +	u8		phys_channels;
-> +	bool		hw_thermal_shutdown;
-> +	bool		allow_apdd;
-> +};
-> +
-> +static const struct mcp9982_features mcp9933_chip_config = {
-> +	.name = "mcp9933",
-> +	.phys_channels = 3,
-> +	.hw_thermal_shutdown = false,
-> +	.allow_apdd = true,
-> +};
-> +
-> +static const struct mcp9982_features mcp9933d_chip_config = {
-> +	.name = "mcp9933d",
-> +	.phys_channels = 3,
-> +	.hw_thermal_shutdown = true,
-> +	.allow_apdd = true,
-> +};
-> +
-> +static const struct mcp9982_features mcp9982_chip_config = {
-> +	.name = "mcp9982",
-> +	.phys_channels = 2,
-> +	.hw_thermal_shutdown = false,
-> +	.allow_apdd = false,
-> +};
-> +
-> +static const struct mcp9982_features mcp9982d_chip_config = {
-> +	.name = "mcp9982d",
-> +	.phys_channels = 2,
-> +	.hw_thermal_shutdown = true,
-> +	.allow_apdd = false,
-> +};
-> +
-> +static const struct mcp9982_features mcp9983_chip_config = {
-> +	.name = "mcp9983",
-> +	.phys_channels = 3,
-> +	.hw_thermal_shutdown = false,
-> +	.allow_apdd = false,
-> +};
-> +
-> +static const struct mcp9982_features mcp9983d_chip_config = {
-> +	.name = "mcp9983d",
-> +	.phys_channels = 3,
-> +	.hw_thermal_shutdown = true,
-> +	.allow_apdd = false,
-> +};
-> +
-> +static const struct mcp9982_features mcp9984_chip_config = {
-> +	.name = "mcp9984",
-> +	.phys_channels = 4,
-> +	.hw_thermal_shutdown = false,
-> +	.allow_apdd = true,
-> +};
-> +
-> +static const struct mcp9982_features mcp9984d_chip_config = {
-> +	.name = "mcp9984d",
-> +	.phys_channels = 4,
-> +	.hw_thermal_shutdown = true,
-> +	.allow_apdd = true,
-> +};
-> +
-> +static const struct mcp9982_features mcp9985_chip_config = {
-> +	.name = "mcp9985",
-> +	.phys_channels = 5,
-> +	.hw_thermal_shutdown = false,
-> +	.allow_apdd = true,
-> +};
-> +
-> +static const struct mcp9982_features mcp9985d_chip_config = {
-> +	.name = "mcp9985d",
-> +	.phys_channels = 5,
-> +	.hw_thermal_shutdown = true,
-> +	.allow_apdd = true,
-> +};
-> +
-> +static const unsigned int mcp9982_update_interval[11] = {
-> +	16000, 8000, 4000, 2000, 1000, 500, 250, 125, 64, 32, 16
-> +};
-> +
-> +/* MCP9982 regmap configuration */
-> +static const struct regmap_range mcp9982_regmap_wr_ranges[] = {
-> +	regmap_reg_range(MCP9982_ONE_SHOT_ADDR, MCP9982_CFG_ADDR),
-> +	regmap_reg_range(MCP9982_CONV_ADDR, MCP9982_HOTTEST_CFG_ADDR),
-> +	regmap_reg_range(MCP9982_THERM_SHTDWN_CFG_ADDR, MCP9982_THERM_SHTDWN_CFG_ADDR),
-> +	regmap_reg_range(MCP9982_EXT_BETA_CFG_ADDR(1), MCP9982_EXT_IDEAL_ADDR(4)),
-> +};
-> +
-> +static const struct regmap_access_table mcp9982_regmap_wr_table = {
-> +	.yes_ranges = mcp9982_regmap_wr_ranges,
-> +	.n_yes_ranges = ARRAY_SIZE(mcp9982_regmap_wr_ranges),
-> +};
-> +
-> +static const struct regmap_range mcp9982_regmap_rd_ranges[] = {
-> +	regmap_reg_range(MCP9982_HIGH_BYTE_ADDR(0), MCP9982_CFG_ADDR),
-> +	regmap_reg_range(MCP9982_CONV_ADDR, MCP9982_EXT_IDEAL_ADDR(4)),
-> +};
-> +
-> +static const struct regmap_access_table mcp9982_regmap_rd_table = {
-> +	.yes_ranges = mcp9982_regmap_rd_ranges,
-> +	.n_yes_ranges = ARRAY_SIZE(mcp9982_regmap_rd_ranges),
-> +};
-> +
-> +static bool mcp9982_is_volatile_reg(struct device *dev, unsigned int reg)
-> +{
-> +	switch (reg) {
-> +	case MCP9982_ONE_SHOT_ADDR:
-> +	case MCP9982_INTERNAL_HIGH_LIMIT_ADDR:
-> +	case MCP9982_INTERNAL_LOW_LIMIT_ADDR:
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(1):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(1) + 1:
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(2):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(2) + 1:
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(3):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(3) + 1:
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(4):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(4) + 1:
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(1):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(1) + 1:
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(2):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(2) + 1:
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(3):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(3) + 1:
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(4):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(4) + 1:
-> +	case MCP9982_THERM_LIMIT_ADDR(0):
-> +	case MCP9982_THERM_LIMIT_ADDR(1):
-> +	case MCP9982_THERM_LIMIT_ADDR(2):
-> +	case MCP9982_THERM_LIMIT_ADDR(3):
-> +	case MCP9982_THERM_LIMIT_ADDR(4):
-> +	case MCP9982_CFG_ADDR:
-> +	case MCP9982_CONV_ADDR:
-> +	case MCP9982_HYS_ADDR:
-> +	case MCP9982_CONSEC_ALRT_ADDR:
-> +	case MCP9982_ALRT_CFG_ADDR:
-> +	case MCP9982_RUNNING_AVG_ADDR:
-> +	case MCP9982_HOTTEST_CFG_ADDR:
-> +	case MCP9982_THERM_SHTDWN_CFG_ADDR:
-> +		return false;
-> +	default:
-> +		return true;
-> +	}
-> +}
-> +
-> +static const struct regmap_config mcp9982_regmap_config = {
-> +	.reg_bits = 8,
-> +	.val_bits = 8,
-> +	.rd_table = &mcp9982_regmap_rd_table,
-> +	.wr_table = &mcp9982_regmap_wr_table,
-> +	.volatile_reg = mcp9982_is_volatile_reg,
-> +	.max_register = MCP9982_EXT_IDEAL_ADDR(4),
-> +	.cache_type = REGCACHE_MAPLE,
-> +};
-> +
-> +/**
-> + * struct mcp9992_priv - information about chip parameters
-> + * @regmap:			device register map
-> + * @chip:			pointer to structure holding chip features
-> + * @labels:			labels of the channels
-> + * @interval_idx:		index representing the current update interval
-> + * @time_limit:			time when it is safe to read
-> + * @enabled_channel_mask:	mask containing which channels should be enabled
-> + * @num_channels:		number of active physical channels
-> + * @recd34_enable:		state of Resistance Error Correction(REC) on channels 3 and 4
-> + * @recd12_enable:		state of Resistance Error Correction(REC) on channels 1 and 2
-> + * @apdd_enable:		state of anti-parallel diode mode
-> + * @run_state:			chip is in Run state, otherwise is in Standby state
-> + * @wait_before_read:		whether we need to wait a delay before reading a new value
-> + */
-> +struct mcp9982_priv {
-> +	struct regmap *regmap;
-> +	const struct mcp9982_features *chip;
-> +	const char *labels[MCP9982_MAX_NUM_CHANNELS];
-> +	unsigned int interval_idx;
-> +	unsigned long time_limit;
-> +	unsigned long enabled_channel_mask;
-> +	u8 num_channels;
-> +	bool recd34_enable;
-> +	bool recd12_enable;
-> +	bool apdd_enable;
-> +	bool run_state;
-> +	bool wait_before_read;
-> +};
-> +
-> +static int mcp9982_read_limit(struct mcp9982_priv *priv, u8 address, long *val)
-> +{
-> +	unsigned int limit, reg_high, reg_low;
-> +	int ret;
-> +
-> +	switch (address) {
-> +	case MCP9982_INTERNAL_HIGH_LIMIT_ADDR:
-> +	case MCP9982_INTERNAL_LOW_LIMIT_ADDR:
-> +	case MCP9982_THERM_LIMIT_ADDR(0):
-> +	case MCP9982_THERM_LIMIT_ADDR(1):
-> +	case MCP9982_THERM_LIMIT_ADDR(2):
-> +	case MCP9982_THERM_LIMIT_ADDR(3):
-> +	case MCP9982_THERM_LIMIT_ADDR(4):
-> +		ret = regmap_read(priv->regmap, address, &limit);
-> +		if (ret)
-> +			return ret;
-> +
-> +		*val = limit & 0xFF;
-> +		*val = (*val - MCP9982_OFFSET) * 1000;
-> +
-> +		return 0;
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(1):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(2):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(3):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(4):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(1):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(2):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(3):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(4):
-> +		/*
-> +		 * The register address determines whether a single byte or
-> +		 * multiple byte (block) operation is run. For a single byte
-> +		 * operation, the MSB of the register address is set to "0".
-> +		 * For a multiple byte operation, it is set to "1". The addresses
-> +		 * quoted in the register map and throughout the data sheet assume
-> +		 * single byte operation. For multiple byte operations, the user
-> +		 * must set the MSB of each register address to "1".
-> +		 */
-> +		ret = regmap_read(priv->regmap, address, &reg_high);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = regmap_read(priv->regmap, address + 1, &reg_low);
-> +		if (ret)
-> +			return ret;
-> +
-Consider using regmap_bulk_read().
+On Fri, Jan 23, 2026 at 5:50=E2=80=AFPM SeongJae Park <sj@kernel.org> wrote=
+:
+>
+> Cc-ing SK hynix folks (Honggyu and Yunjeong) for quota auto-tuning behavi=
+or
+> confusion (not stop immediately after satisfying the goal) I discuss belo=
+w.
+>
+> Hello Ravi,
+>
 
-> +		reg_high = reg_high & 0xFF;
-> +		reg_low = reg_low & 0xFF;
+ Hi SJ,
 
-The masks seem pointless. Same pretty much everywhere. If not, provide explanation
-why they are needed ("I don't trust regmap" is not a reason).
+  Thank you for the detailed review and for Cc'ing SK hynix folks.
 
-> +		*val = ((reg_high << 8) + reg_low) >> 5;
-> +		*val = (*val - (MCP9982_OFFSET << 3)) * 125;
-> +
-> +		return 0;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static int mcp9982_read(struct device *dev, enum hwmon_sensor_types type, u32 attr, int channel,
-> +			long *val)
-> +{
-> +	struct mcp9982_priv *priv = dev_get_drvdata(dev);
-> +	unsigned int reg_status, reg_high, reg_low;
-> +	unsigned long sleep_time;
-> +	int ret, hyst;
-> +	u8 addr;
-> +
-> +	/*
-> +	 * When working in Run mode, after modifying a parameter (like update
-> +	 * interval) we have to wait a delay before reading the new values.
-> +	 * We can't determine when the conversion is done based on the BUSY bit.
-> +	 */
-> +	if (priv->run_state) {
-> +		if (priv->wait_before_read) {
-> +			sleep_time = jiffies_to_msecs(priv->time_limit - jiffies) * USEC_PER_MSEC;
-> +			if (!time_after(jiffies, priv->time_limit))
-> +				usleep_range(sleep_time, sleep_time + MCP9982_TIMER_BUFFER_US);
-> +
+>
+> Thank you for sharing this great RFC!
+>
+> I had a chance to be involved in a high level design of this series, off =
+the
+> mailing list.  I'm disclosing the fact for others' context, since a few o=
+f my
+> comments below are based on the previous off-list discussion.
+>
+> On Thu, 22 Jan 2026 20:57:23 -0800 Ravi Jonnalagadda <ravis.opensrc@gmail=
+.com> wrote:
+>
+> > This series introduces a new DAMON quota goal metric,
+>
+> As I discussed off the list, I believe the new goal can be useful.  Thank=
+ you
+> again for making this!
+>
+> > `node_sys_bp`, designed
+> > for controlling memory migration in heterogeneous memory systems (e.g.,
+> > DRAM=E2=86=94CXL tiering). These patches are provided as an initial RFC=
+ and have
+> > not been tested on actual hardware.
+>
+> I feel like the name is not very self explaining what it is, though.  I'm=
+ also
+> bit confused about what it does is what we discussed off list.  I'll add =
+more
+> details below, on more detailed explanation about the new goal.
+>
 
-According to the datasheet, the actual conversion time is always 25 ms per channel,
-and does not depend on the conversion interval.
+Will change the name to damos_target_mem_node_sys_bp in v2.
 
-Even if it the conversion time would depend on the conversion interval, forcing
-the driver to wait until the next conversion is complete seems excessive. Why wait
-and not just return the previous value like literally every other hardware
-monitoring driver ?
+> >
+> > Background and Motivation
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+> >
+> > A previous patch series [1] by Bijan Tabatabai and myself added weighte=
+d
+> > interleave support for DAMON migrate_{hot,cold} actions. That series
+> > implemented the feature for vaddr (virtual address) schemes because the
+> > weight-based approach requires VMA offset information to determine targ=
+et
+> > nodes:
+> >
+> >     target_node =3D (vma_offset % total_weight) =E2=86=92 node_from_wei=
+ghts
+> >
+> > For paddr (physical address) schemes, obtaining VMA offset requires cos=
+tly
+> > rmap (reverse mapping) walks. As noted in that series:
+> >
+> >     "However, finding out how a folio is mapped inside of a VMA require=
+s
+> >      a costly rmap walk when using a paddr scheme. As such, we have
+> >      decided that this functionality makes more sense as a vaddr scheme=
+."
+>
+> Indeed the rmap overhead was one main concern.  I'd like to also note tha=
+t,
+> however, another major concern from me was that the behavior sounds not e=
+asy to
+> intuitively understand.
+>
+> >
+> > This new series takes a different approach that enables PA-based migrat=
+ion
+> > WITHOUT requiring rmap walks, by using basis points (bp) target-state g=
+oals
+> > instead of weight-based action rates.
+> >
+> > The rmap Cost vs Oscillation Trade-off
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > For PA-based migration with weights, there are two possibilities:
+> >
+> >   1. Weight-based with rmap:
+> >      - Use rmap to find VMA offset for each physical page
+> >      - Apply weights based on VMA offset (same algorithm as VA)
+> >      - Works correctly: VMA offset provides stable identity
+> >      - Problem: rmap walks are expensive for every migration candidate
+> >
+> >   2. Weight-based without rmap:
+> >      - Attempt to apply weights using only physical address information
+> >      - No stable identity across migrations
+> >      - Results in page oscillation (see below)
+> >      - Not viable
+> >
+> > The Oscillation Problem (Weights Without rmap)
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > Weight-based migration relies on a stable identifier to determine which=
+ node
+> > a page "belongs to". For VA, this is the VMA offset - it remains consta=
+nt
+> > regardless of which physical node backs the page. For PA without rmap, =
+no
+> > such stable identifier exists.
+> >
+> > Consider a two-node system with weights {Node 0: 40, Node 1: 60}:
+> >
+> >   Initial state:
+> >     Hot pages on Node 0: PFN 0x1000, 0x1001, 0x1002, 0x1003, 0x1004
+> >     Node 1: empty
+> >
+> >   Iteration 1 - Weight-based selection (no rmap):
+> >     System tries to achieve 40/60 distribution
+> >     Selects pages at PFN 0x1002, 0x1003, 0x1004 (60%) for Node 1
+> >     After migration, these pages get NEW PFNs on Node 1:
+> >       PFN 0x1002 =E2=86=92 PFN 0x5000 (Node 1)
+> >       PFN 0x1003 =E2=86=92 PFN 0x5001 (Node 1)
+> >       PFN 0x1004 =E2=86=92 PFN 0x5002 (Node 1)
+> >
+> >   State after Iteration 1:
+> >     Node 0: PFN 0x1000, 0x1001 (40%)
+> >     Node 1: PFN 0x5000, 0x5001, 0x5002 (60%)
+> >
+> >   Iteration 2 - Weight-based selection runs again:
+> >     System sees pages at PFN 0x5000, 0x5001, 0x5002 on Node 1
+> >     These are "new" pages from the system's perspective
+> >     NO MEMORY that these were just migrated FROM Node 0
+> >     Weight-based logic may select some for migration back to Node 0
+> >
+> >   Iteration 3, 4, 5...:
+> >     Same pages continue bouncing between nodes
+> >     Each migration changes the PFN, erasing any "history"
+> >     System never converges to stable state
+> >
+> > The fundamental issue: weights define an ACTION RATE ("migrate X% of
+> > candidate pages to each node") rather than a TARGET STATE. Without stab=
+le
+> > page identity (which rmap provides via VMA offset), the system cannot
+> > determine which pages have already been "handled" and continues to
+> > reprocess the same logical pages indefinitely.
+> >
+> > With rmap, the VMA offset provides stable identity - a page at file off=
+set
+> > 0x1000 always hashes to the same target node regardless of its current =
+PFN.
+> > Without rmap, we have no such anchor, and weights become meaningless.
+> >
+> > Solution: bp-Based Target State Goals
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > Instead of specifying action rates, `node_sys_bp` specifies a TARGET ST=
+ATE:
+> >
+> >     "Node N should contain X basis points (X/10000) of system memory"
+>
+> I'm not sure if this is exactly what we discussed off list.  What I expec=
+ted
+> the goal would be based on our discussion is, what the first patch is say=
+ing.
+> To quote the part,
+>
+>     @@ -155,6 +155,7 @@ enum damos_action {
+>       * @DAMOS_QUOTA_NODE_MEM_FREE_BP:      MemFree ratio of a node.
+>       * @DAMOS_QUOTA_NODE_MEMCG_USED_BP:    MemUsed ratio of a node for a=
+ cgroup.
+>       * @DAMOS_QUOTA_NODE_MEMCG_FREE_BP:    MemFree ratio of a node for a=
+ cgroup.
+>     + * @DAMOS_QUOTA_NODE_SYS_BP:           Scheme-eligible bytes ratio o=
+f a node.
+>       * @NR_DAMOS_QUOTA_GOAL_METRICS:       Number of DAMOS quota goal me=
+trics.
+>
+> That is, my understanding of what we want to achive with the new goal is,
+> letting users to ask DAMON "migrate hot pages of node A to node B, aiming
+> X % of node B becomes hot, as a result of the migrations".
+>
 
-If all this complexity is indeed required (I don't see it in the datasheet),
-please provide a detailed explanation.
+Yes, this is the intent. Looking back at my implementation, I see the
+mismatch:
 
-> +			priv->wait_before_read = false;
-> +		}
-> +	} else {
-> +		ret = regmap_write(priv->regmap, MCP9982_ONE_SHOT_ADDR, 1);
-> +		if (ret)
-> +			return ret;
-> +
-> +		/*
-> +		 * In Standby state after writing in OneShot register wait for
-> +		 * the start of conversion and then poll the BUSY bit.
-> +		 */
-> +		sleep_time = mcp9982_update_interval[priv->interval_idx] * USEC_PER_MSEC;
-> +		usleep_range(MCP9982_WAKE_UP_TIME_US, MCP9982_WAKE_UP_TIME_MAX_US);
-> +
-> +		ret = regmap_read_poll_timeout(priv->regmap, MCP9982_STATUS_ADDR,
-> +					       reg_status, !(reg_status & MCP9982_STATUS_BUSY),
-> +					       sleep_time, sleep_time * 2);
+1. **Numerator**: Should count only scheme-eligible bytes.
 
-Same as above. The actual conversion time is constant. Why force the driver
-to wait up to 16 seconds ?
+2. **Denominator**: Should use node capacity, but I used total system
+   memory.
 
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	switch (type) {
-> +	case hwmon_temp:
-> +		switch (attr) {
-> +		case hwmon_temp_input:
-> +			/*
-> +			 * The chips support block reading only on the temperature and
-> +			 * status memory blocks. The driver uses only individual read commands.
-> +			 */
-> +			ret = regmap_read(priv->regmap, MCP9982_HIGH_BYTE_ADDR(channel), &reg_high);
-> +			if (ret)
-> +				return ret;
-> +
-> +			ret = regmap_read(priv->regmap, MCP9982_HIGH_BYTE_ADDR(channel) + 1,
-> +					  &reg_low);
-> +			if (ret)
-> +				return ret;
-> +
+> But your above description is not saying about the "scheme-eligibility". =
+ Also,
+> the goal metric is the ratio of the memory to the entire system memory, n=
+ot
+> just a given node.  My quick read of damon_pa_get_node_sys_bp() on the se=
+cond
+> patch of this series confirms the implementation is following your descri=
+ption,
+> not what I imagined.
+>
 
-Consider using regmap_bulk_read().
+You're right. The implementation diverged from what we discussed. I'll
+fix both the numerator and denominator in v2.
 
-> +			*val = ((reg_high << 8) + reg_low) >> 5;
-> +			*val = (*val - (MCP9982_OFFSET << 3)) * 125;
-> +
-> +			return 0;
-> +		case hwmon_temp_max:
-> +			if (channel)
-> +				addr = MCP9982_EXT_HIGH_LIMIT_ADDR(channel);
-> +			else
-> +				addr = MCP9982_INTERNAL_HIGH_LIMIT_ADDR;
-> +
-> +			return mcp9982_read_limit(priv, addr, val);
-> +		case hwmon_temp_max_alarm:
-> +			*val = regmap_test_bits(priv->regmap, MCP9982_HIGH_LIMIT_STATUS_ADDR,
-> +						BIT(channel));
-> +			if (*val < 0)
-> +				return *val;
-> +
-> +			return 0;
-> +		case hwmon_temp_max_hyst:
-> +			if (channel)
-> +				addr = MCP9982_EXT_HIGH_LIMIT_ADDR(channel);
-> +			else
-> +				addr = MCP9982_INTERNAL_HIGH_LIMIT_ADDR;
-> +			ret = mcp9982_read_limit(priv, addr, val);
-> +			if (ret)
-> +				return ret;
-> +
-> +			ret = regmap_read(priv->regmap, MCP9982_HYS_ADDR, &hyst);
-> +			if (ret)
-> +				return ret;
-> +
-> +			*val -= (hyst & 0xFF) * 1000;
+> Have you found something we missed during the off list discussion, and
+> therefore changed the definition of the goal to the current one?  If so, =
+could
+> you share the details?  Or, you might also wanted to implement what I exp=
+ected,
+> but something bothered your code and documentation?
+>
 
-What is the mask for ? The chip registers are 8 bit wide.
+While implementing, I was thinking about how the metric would behave
+in a
+system-wide context across multiple nodes and ended up using total
+system
+memory as the denominator, thinking it would simplify distribution
+calculations. However, as you pointed out, using node capacity as the
+denominator is the right approach. I'll fix this in v2.
 
-> +			*val = clamp_val(*val, -64000, 191875);
+> >
+> > The migration control loop:
+> >
+> >   1. Calculate current_bp: sum bytes per node across monitored regions
+> >   2. Compare: if current_bp >=3D target_bp, STOP (goal satisfied)
+> >   3. Otherwise: continue migrating toward target
+> >
+> >   Example with target: "Node 0 should have 4000 bp (40%)"
+>
+> Regardless of why my expectation was different from this one, the goal I =
+was
+> expecting might still be used for your descripted case.  That is, the sch=
+eme's
+> target access pattern could be "any access pattern", and the target metri=
+c
+> value could be adjusted based on the ratio between the node 0 memory and =
+the
+> total memory.  For example, let's suppose there is 100 GiB memory in tota=
+l, and
+> 80 GiB memory in node 0 (80% of total memory in node 0).  Then 40 % of to=
+tal
+> memory, which is the target of the above example, is 40 GiB, which is 50 =
+% of
+> node 0.  So, you could use the goal I expected, with 50 % as the target v=
+alue.
 
-Clamping on reads is highly unusual. Why is this needed ?
+Agreed.
 
-> +
-> +			return 0;
-> +		case hwmon_temp_min:
-> +			if (channel)
-> +				addr = MCP9982_EXT_LOW_LIMIT_ADDR(channel);
-> +			else
-> +				addr = MCP9982_INTERNAL_LOW_LIMIT_ADDR;
-> +
-> +			return mcp9982_read_limit(priv, addr, val);
-> +		case hwmon_temp_min_alarm:
-> +			*val = regmap_test_bits(priv->regmap, MCP9982_LOW_LIMIT_STATUS_ADDR,
-> +						BIT(channel));
-> +			if (*val < 0)
-> +				return *val;
-> +
-> +			return 0;
-> +		case hwmon_temp_crit:
-> +			return mcp9982_read_limit(priv, MCP9982_THERM_LIMIT_ADDR(channel), val);
-> +		case hwmon_temp_crit_alarm:
-> +			*val = regmap_test_bits(priv->regmap, MCP9982_THERM_LIMIT_STATUS_ADDR,
-> +						BIT(channel));
-> +			if (*val < 0)
-> +				return *val;
-> +
-> +			return 0;
-> +		case hwmon_temp_crit_hyst:
-> +			ret = mcp9982_read_limit(priv, MCP9982_THERM_LIMIT_ADDR(channel), val);
-> +			if (ret)
-> +				return ret;
-> +
-> +			ret = regmap_read(priv->regmap, MCP9982_HYS_ADDR, &hyst);
-> +			if (ret)
-> +				return ret;
-> +
-> +			*val -= (hyst & 0xFF) * 1000;
-> +			*val = clamp_val(*val, -64000, 191875);
-> +
-> +			return 0;
-> +		default:
-> +			return -EINVAL;
-> +		}
-> +	case hwmon_chip:
-> +		switch (attr) {
-> +		case hwmon_chip_update_interval:
-> +			*val = mcp9982_update_interval[priv->interval_idx];
-> +			return 0;
-> +		default:
-> +			return -EINVAL;
-> +		}
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static int mcp9982_read_label(struct device *dev, enum hwmon_sensor_types type, u32 attr,
-> +			      int channel, const char **str)
-> +{
-> +	struct mcp9982_priv *priv = dev_get_drvdata(dev);
-> +
-> +	switch (type) {
-> +	case hwmon_temp:
-> +		switch (attr) {
-> +		case hwmon_temp_label:
-> +			*str = priv->labels[channel];
-> +			return 0;
-> +		default:
-> +			return -EOPNOTSUPP;
-> +		}
-> +	default:
-> +		return -EOPNOTSUPP;
-> +	}
-> +}
-> +
-> +static int mcp9982_write_limit(struct mcp9982_priv *priv, u8 address, long val)
-> +{
-> +	int ret;
-> +
-> +	/* Range is always -64 to 191.875°C. */
-> +	val = clamp_val(val, -64000, 191875);
-> +	val = (val + MCP9982_OFFSET * 1000) << 5;
-> +	val = DIV_ROUND_CLOSEST(val, 125);
-> +
-> +	switch (address) {
-> +	case MCP9982_INTERNAL_HIGH_LIMIT_ADDR:
-> +	case MCP9982_INTERNAL_LOW_LIMIT_ADDR:
-> +	case MCP9982_THERM_LIMIT_ADDR(0):
-> +	case MCP9982_THERM_LIMIT_ADDR(1):
-> +	case MCP9982_THERM_LIMIT_ADDR(2):
-> +	case MCP9982_THERM_LIMIT_ADDR(3):
-> +	case MCP9982_THERM_LIMIT_ADDR(4):
-> +		val = val >> 8;
-> +		val = val & 0xFF;
-> +		ret = regmap_write(priv->regmap, address, val);
-> +		if (ret)
-> +			return ret;
-> +
-> +		return 0;
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(1):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(2):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(3):
-> +	case MCP9982_EXT_HIGH_LIMIT_ADDR(4):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(1):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(2):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(3):
-> +	case MCP9982_EXT_LOW_LIMIT_ADDR(4):
-> +		val = cpu_to_be16(val);
-> +		ret = regmap_bulk_write(priv->regmap, address, &val, 2);
-> +		if (ret)
-> +			return ret;
-> +
-> +		return 0;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static int mcp9982_write_hyst(struct mcp9982_priv *priv, int channel, long val)
-> +{
-> +	int hyst, ret;
-> +	int limit;
-> +
-> +	val = clamp_val(val, -64000, 191875);
-> +	val = (val + MCP9982_OFFSET * 1000) << 5;
-> +	val = DIV_ROUND_CLOSEST(val, 125);
-> +	val = val >> 8;
-> +
-> +	/* Therm register is 8 bits and so it keeps only the integer part of the temperature. */
-> +	ret = regmap_read(priv->regmap, MCP9982_THERM_LIMIT_ADDR(channel), &limit);
-> +	if (ret)
-> +		return ret;
-> +
-> +	hyst = clamp_val(limit - val, 0, 255);
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_HYS_ADDR, hyst);
-> +
-> +	return ret;
-> +}
-> +
-> +static int mcp9982_write(struct device *dev, enum hwmon_sensor_types type, u32 attr, int channel,
-> +			 long val)
-> +{
-> +	struct mcp9982_priv *priv = dev_get_drvdata(dev);
-> +	unsigned int previous_interval_idx, idx;
-> +	bool use_previous_interval = false;
-> +	unsigned long new_time_limit;
-> +	u8 addr;
-> +	int ret;
-> +
-> +	switch (type) {
-> +	case hwmon_chip:
-> +		switch (attr) {
-> +		case hwmon_chip_update_interval:
-> +			previous_interval_idx = priv->interval_idx;
-> +
-> +			/*
-> +			 * For MCP998XD and MCP9933D update interval
-> +			 * can't be slower than 1 second.
-> +			 */
-> +			if (priv->chip->hw_thermal_shutdown)
-> +				val = clamp(val, 0, 1000);
-> +
-> +			idx = find_closest_descending(val, mcp9982_update_interval,
-> +						      ARRAY_SIZE(mcp9982_update_interval));
-> +
-> +			ret = regmap_write(priv->regmap, MCP9982_CONV_ADDR, idx);
-> +			if (ret)
-> +				return ret;
-> +
-> +			priv->interval_idx = idx;
-> +
-> +			/*
-> +			 * When changing the interval time in Run mode, wait a delay based
-> +			 * on the previous value to ensure the new value becomes active.
-> +			 */
-> +			if (priv->run_state)
-> +				use_previous_interval = true;
-> +			else
-> +				return 0;
-> +			break;
-> +		default:
-> +			return -EINVAL;
-> +		}
-> +		break;
-> +	case hwmon_temp:
-> +		switch (attr) {
-> +		case hwmon_temp_max:
-> +			if (channel)
-> +				addr = MCP9982_EXT_HIGH_LIMIT_ADDR(channel);
-> +			else
-> +				addr = MCP9982_INTERNAL_HIGH_LIMIT_ADDR;
-> +
-> +			return ret = mcp9982_write_limit(priv, addr, val);
-> +		case hwmon_temp_min:
-> +			if (channel)
-> +				addr = MCP9982_EXT_LOW_LIMIT_ADDR(channel);
-> +			else
-> +				addr = MCP9982_INTERNAL_LOW_LIMIT_ADDR;
-> +
-> +			return mcp9982_write_limit(priv, addr, val);
-> +		case hwmon_temp_crit:
-> +			return mcp9982_write_limit(priv, MCP9982_THERM_LIMIT_ADDR(channel), val);
-> +		case hwmon_temp_crit_hyst:
-> +			return mcp9982_write_hyst(priv, channel, val);
-> +		default:
-> +			return -EINVAL;
-> +		}
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +
-> +	/*
-> +	 * Calculate the time point when it would be safe to read after
-> +	 * the current write operation in Run mode.
-> +	 * If, for example, we change update interval from a slower time
-> +	 * to a faster time, the change will become active after the
-> +	 * conversion with the slower time is finished. If we read before
-> +	 * the end of conversion, the value will be from the previous cycle.
-> +	 */
-> +	if (use_previous_interval) {
-> +		new_time_limit = msecs_to_jiffies(mcp9982_update_interval[previous_interval_idx]);
-> +		use_previous_interval = false;
-> +	} else {
-> +		new_time_limit = msecs_to_jiffies(mcp9982_update_interval[priv->interval_idx]);
-> +	}
-> +
-> +	new_time_limit += jiffies + msecs_to_jiffies(MCP9982_CONVERSION_TIME_MS);
-> +
-> +	if (time_after(new_time_limit, priv->time_limit)) {
-> +		priv->time_limit = new_time_limit;
-> +		priv->wait_before_read = true;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static umode_t mcp9982_is_visible(const void *_data, enum hwmon_sensor_types type, u32 attr,
-> +				  int channel)
-> +{
-> +	const struct mcp9982_priv *priv = _data;
-> +
-> +	if (!test_bit(channel, &priv->enabled_channel_mask))
-> +		return 0;
-> +
-> +	switch (type) {
-> +	case hwmon_temp:
-> +		switch (attr) {
-> +		case hwmon_temp_label:
-> +			if (priv->labels[channel])
-> +				return 0444;
-> +			else
-> +				return 0;
-> +		case hwmon_temp_input:
-> +		case hwmon_temp_min_alarm:
-> +		case hwmon_temp_max_alarm:
-> +		case hwmon_temp_max_hyst:
-> +		case hwmon_temp_crit_alarm:
-> +			return 0444;
-> +		case hwmon_temp_min:
-> +		case hwmon_temp_max:
-> +		case hwmon_temp_crit:
-> +		case hwmon_temp_crit_hyst:
-> +			return 0644;
-> +		default:
-> +			return 0;
-> +		}
-> +	case hwmon_chip:
-> +		switch (attr) {
-> +		case hwmon_chip_update_interval:
-> +			return 0644;
-> +		default:
-> +			return 0;
-> +		}
-> +	default:
-> +		return 0;
-> +	}
-> +}
-> +
-> +static const struct hwmon_ops mcp9982_hwmon_ops = {
-> +	.is_visible = mcp9982_is_visible,
-> +	.read = mcp9982_read,
-> +	.read_string = mcp9982_read_label,
-> +	.write = mcp9982_write,
-> +};
-> +
-> +static int mcp9982_init(struct device *dev, struct mcp9982_priv *priv)
-> +{
-> +	unsigned int i;
-> +	int ret;
-> +	u8 val;
-> +
-> +	/* Chips 82/83 and 82D/83D do not support anti-parallel diode mode. */
-> +	if (!priv->chip->allow_apdd && priv->apdd_enable == 1)
-> +		return dev_err_probe(dev, -EINVAL, "Incorrect setting of APDD.\n");
-> +
-> +	/* Chips with "D" work only in Run state. */
-> +	if (priv->chip->hw_thermal_shutdown && !priv->run_state)
-> +		return dev_err_probe(dev, -EINVAL, "Incorrect setting of Power State.\n");
-> +
-> +	/*
-> +	 * For chips with "D" in the name, resistance error correction must be on
-> +	 * so that hardware shutdown feature can't be overridden.
-> +	 */
-> +	if (priv->chip->hw_thermal_shutdown)
-> +		if (!priv->recd34_enable || !priv->recd12_enable)
-> +			return dev_err_probe(dev, -EINVAL, "Incorrect setting of RECD.\n");
-> +
-> +	/*
-> +	 * Set default values in registers.
-> +	 * APDD, RECD12 and RECD34 are active on 0.
-> +	 */
-> +	val = FIELD_PREP(MCP9982_CFG_MSKAL, 1) |
-> +	      FIELD_PREP(MCP9982_CFG_RS, !priv->run_state) |
-> +	      FIELD_PREP(MCP9982_CFG_ATTHM, 1) |
-> +	      FIELD_PREP(MCP9982_CFG_RECD12, !priv->recd12_enable) |
-> +	      FIELD_PREP(MCP9982_CFG_RECD34, !priv->recd34_enable) |
-> +	      FIELD_PREP(MCP9982_CFG_RANGE, 1) | FIELD_PREP(MCP9982_CFG_DA_ENA, 0) |
-> +	      FIELD_PREP(MCP9982_CFG_APDD, !priv->apdd_enable);
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_CFG_ADDR, val);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_CONV_ADDR, MCP9982_DEFAULT_CONV_VAL);
-> +	if (ret)
-> +		return ret;
-> +	priv->interval_idx = MCP9982_DEFAULT_CONV_VAL;
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_HYS_ADDR, MCP9982_DEFAULT_HYS_VAL);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_CONSEC_ALRT_ADDR, MCP9982_DEFAULT_CONSEC_ALRT_VAL);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_ALRT_CFG_ADDR, 0);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_RUNNING_AVG_ADDR, 0);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = regmap_write(priv->regmap, MCP9982_HOTTEST_CFG_ADDR, 0);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/*
-> +	 * Only external channels 1 and 2 support beta compensation.
-> +	 * Set beta auto-detection.
-> +	 */
-> +	for (i = 1; i < 3; i++)
-> +		if (test_bit(i, &priv->enabled_channel_mask)) {
-> +			ret = regmap_write(priv->regmap, MCP9982_EXT_BETA_CFG_ADDR(i),
-> +					   MCP9982_BETA_AUTODETECT);
-> +			if (ret)
-> +				return ret;
-> +		}
-> +
-> +	/* Set default values for internal channel limits. */
-> +	if (test_bit(0, &priv->enabled_channel_mask)) {
-> +		ret = mcp9982_write_limit(priv, MCP9982_INTERNAL_HIGH_LIMIT_ADDR,
-> +					  MCP9982_HIGH_LIMIT_DEFAULT);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = mcp9982_write_limit(priv, MCP9982_INTERNAL_LOW_LIMIT_ADDR,
-> +					  MCP9982_LOW_LIMIT_DEFAULT);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = mcp9982_write_limit(priv, MCP9982_THERM_LIMIT_ADDR(0),
-> +					  MCP9982_HIGH_LIMIT_DEFAULT);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	/* Set ideality factor and limits to default for external channels. */
-> +	for (i = 1; i < MCP9982_MAX_NUM_CHANNELS; i++)
-> +		if (test_bit(i, &priv->enabled_channel_mask)) {
-> +			ret = regmap_write(priv->regmap, MCP9982_EXT_IDEAL_ADDR(i),
-> +					   MCP9982_IDEALITY_DEFAULT);
-> +			if (ret)
-> +				return ret;
-> +
-> +			ret = mcp9982_write_limit(priv, MCP9982_EXT_HIGH_LIMIT_ADDR(i),
-> +						  MCP9982_HIGH_LIMIT_DEFAULT);
-> +			if (ret)
-> +				return ret;
-> +
-> +			ret = mcp9982_write_limit(priv, MCP9982_EXT_LOW_LIMIT_ADDR(i),
-> +						  MCP9982_LOW_LIMIT_DEFAULT);
-> +			if (ret)
-> +				return ret;
-> +
-> +			ret = mcp9982_write_limit(priv, MCP9982_THERM_LIMIT_ADDR(i),
-> +						  MCP9982_HIGH_LIMIT_DEFAULT);
-> +			if (ret)
-> +				return ret;
-> +		}
-> +
-> +	priv->wait_before_read = false;
-> +	priv->time_limit = jiffies;
-> +
-> +	return 0;
-> +}
-> +
-> +static int mcp9982_parse_fw_config(struct device *dev, int device_nr_channels)
-> +{
-> +	unsigned int reg_nr;
-> +	struct mcp9982_priv *priv = dev_get_drvdata(dev);
-> +	int ret;
-> +
-> +	/* Initialise internal channel( which is always present ). */
-> +	priv->labels[0] = "internal diode";
-> +	priv->enabled_channel_mask = 1;
-> +
-> +	/* Default values to work on systems without devicetree or firmware nodes. */
-> +	if (!dev_fwnode(dev)) {
-> +		priv->num_channels = device_nr_channels;
-> +		priv->enabled_channel_mask = BIT(priv->num_channels) - 1;
-> +		priv->apdd_enable = false;
-> +		priv->recd12_enable = true;
-> +		priv->recd34_enable = true;
-> +		priv->run_state = true;
-> +		return 0;
-> +	}
-> +
-> +	priv->apdd_enable =
-> +		device_property_read_bool(dev, "microchip,enable-anti-parallel");
-> +
-> +	priv->recd12_enable =
-> +		device_property_read_bool(dev, "microchip,parasitic-res-on-channel1-2");
-> +
-> +	priv->recd34_enable =
-> +		device_property_read_bool(dev, "microchip,parasitic-res-on-channel3-4");
-> +
-> +	priv->run_state =
-> +		device_property_read_bool(dev, "microchip,power-state");
-> +
-> +	priv->num_channels = device_get_child_node_count(dev) + 1;
-> +
-> +	if (priv->num_channels > device_nr_channels)
-> +		return dev_err_probe(dev, -EINVAL,
-> +				     "More channels than the chip supports.\n");
-> +
-> +	/* Read information about the external channels. */
-> +	device_for_each_child_node_scoped(dev, child) {
-> +		reg_nr = 0;
-> +		ret = fwnode_property_read_u32(child, "reg", &reg_nr);
-> +		if (ret || !reg_nr || reg_nr >= device_nr_channels)
-> +			return dev_err_probe(dev, -EINVAL,
-> +			  "Channel reg is incorrectly set.\n");
-> +
-> +		fwnode_property_read_string(child, "label", &priv->labels[reg_nr]);
-> +		set_bit(reg_nr, &priv->enabled_channel_mask);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int mcp9982_probe(struct i2c_client *client)
-> +{
-> +	struct hwmon_chip_info mcp998x_chip_info;
-> +	const struct mcp9982_features *chip;
-> +	struct device *dev = &client->dev;
-> +	struct mcp9982_priv *priv;
-> +	struct device *hwmon_dev;
-> +	int ret;
-> +
-> +	priv = devm_kzalloc(dev, sizeof(struct mcp9982_priv), GFP_KERNEL);
-> +	if (!priv)
-> +		return -ENOMEM;
-> +
-> +	priv->regmap = devm_regmap_init_i2c(client, &mcp9982_regmap_config);
-> +
-> +	if (IS_ERR(priv->regmap))
-> +		return dev_err_probe(dev, PTR_ERR(priv->regmap),
-> +				     "Cannot initialize register map.\n");
-> +
-> +	dev_set_drvdata(dev, priv);
-> +
-> +	chip = i2c_get_match_data(client);
-> +	if (!chip)
-> +		return -EINVAL;
-> +	priv->chip = chip;
-> +
-> +	ret = mcp9982_parse_fw_config(dev, chip->phys_channels);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = mcp9982_init(dev, priv);
-> +	if (ret)
-> +		return ret;
-> +
-> +	mcp998x_chip_info.ops = &mcp9982_hwmon_ops;
-> +	mcp998x_chip_info.info = mcp9985_info;
-> +
-> +	hwmon_dev = devm_hwmon_device_register_with_info(dev, chip->name, priv,
-> +							 &mcp998x_chip_info, NULL);
-> +
-> +	return PTR_ERR_OR_ZERO(hwmon_dev);
-> +}
-> +
-> +static const struct i2c_device_id mcp9982_id[] = {
-> +	{ .name = "mcp9933", .driver_data = (kernel_ulong_t)&mcp9933_chip_config },
-> +	{ .name = "mcp9933d", .driver_data = (kernel_ulong_t)&mcp9933d_chip_config },
-> +	{ .name = "mcp9982", .driver_data = (kernel_ulong_t)&mcp9982_chip_config },
-> +	{ .name = "mcp9982d", .driver_data = (kernel_ulong_t)&mcp9982d_chip_config },
-> +	{ .name = "mcp9983", .driver_data = (kernel_ulong_t)&mcp9983_chip_config },
-> +	{ .name = "mcp9983d", .driver_data = (kernel_ulong_t)&mcp9983d_chip_config },
-> +	{ .name = "mcp9984", .driver_data = (kernel_ulong_t)&mcp9984_chip_config },
-> +	{ .name = "mcp9984d", .driver_data = (kernel_ulong_t)&mcp9984d_chip_config },
-> +	{ .name = "mcp9985", .driver_data = (kernel_ulong_t)&mcp9985_chip_config },
-> +	{ .name = "mcp9985d", .driver_data = (kernel_ulong_t)&mcp9985d_chip_config },
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(i2c, mcp9982_id);
-> +
-> +static const struct of_device_id mcp9982_of_match[] = {
-> +	{
-> +		.compatible = "microchip,mcp9933",
-> +		.data = &mcp9933_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9933d",
-> +		.data = &mcp9933d_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9982",
-> +		.data = &mcp9982_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9982d",
-> +		.data = &mcp9982d_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9983",
-> +		.data = &mcp9983_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9983d",
-> +		.data = &mcp9983d_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9984",
-> +		.data = &mcp9984_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9984d",
-> +		.data = &mcp9984d_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9985",
-> +		.data = &mcp9985_chip_config,
-> +	}, {
-> +		.compatible = "microchip,mcp9985d",
-> +		.data = &mcp9985d_chip_config,
-> +	},
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(of, mcp9982_of_match);
-> +
-> +static struct i2c_driver mcp9982_driver = {
-> +	.driver	 = {
-> +		.name = "mcp9982",
-> +		.of_match_table = mcp9982_of_match,
-> +	},
-> +	.probe = mcp9982_probe,
-> +	.id_table = mcp9982_id,
-> +};
-> +module_i2c_driver(mcp9982_driver);
-> +
-> +MODULE_AUTHOR("Victor Duicu <victor.duicu@microchip.com>");
-> +MODULE_DESCRIPTION("MCP998X/33 and MCP998XD/33D Multichannel Automotive Temperature Monitor Driver");
-> +MODULE_LICENSE("GPL");
+> Imaginable usage of that would look like,
+>
+>     # --damos_quota_goal receives <metric name>, <target metric value>, a=
+nd
+>     # <node id of the goal>
+>     damo tune --damos_action migrate_hot --damos_quota_goal new_goal_metr=
+ic 50% 0
+>
+> I sure you know that you could s/migrate_hot/migrate_cold/ if you prefer
+> migrating cold pages first.
+>
+> So, the metric of my expected definition can still be useful for your new=
+ use
+> case.  I'd prefer my expected definition if there is no concern, since it=
+ seems
+> useful for more cases.
+>
+> >
+> >     Iteration 1:
+> >       current_bp =3D 10000 (100% on Node 0)
+>
 
+Got it.
+
+> How could 100% system memory can be on node 0?  Are you saying 100% of "h=
+ot"
+> memory?  This makes me suspect you _might_ actually wanted to implement w=
+hat I
+> was expecting and the first patch of this series is documenting
+> (Scheme-eligible bytes ratio of a node) but somehow something bothered yo=
+u to
+> drop the ball in a wrong place.
+>
+> >       target_bp  =3D 4000 (40%)
+> >       current > target =E2=86=92 migrate cold pages away from Node 0
+> >
+> >     After Iteration 1:
+> >       current_bp =3D 4000 (40% on Node 0)
+> >
+> >     Iteration 2:
+> >       current_bp =3D 4000
+> >       target_bp  =3D 4000
+> >       current >=3D target =E2=86=92 STOP, goal satisfied
+>
+
+Right, that example was misleading. With node capacity as denominator,
+"current_bp =3D 10000" would mean "100% of the node's capacity is
+scheme-eligible pages" which would be a valid state.
+
+> Please note that the goal-based quota auto-tuning works in proportional w=
+ay,
+> preferring small steps and "eventual" goal convergence.  As a result, mig=
+ration
+> will occur a few more times until it is completely stopped after the goal=
+ is
+> satisfied.  Unless there is another scheme that migrates pages into node =
+0, you
+> may end up having node 0 having a bit less than the 40% memory.
+>
+> >
+> >     No oscillation - migration stops when target state is reached.
+>
+> So, little bit of oscillation could still happen.  Hopefully that shouldn=
+'t be
+> significant, though.
+>
+
+Yes, As we discussed offline, for a two-context approach:
+
+      Context 0: monitors node 0, migrate_hot =E2=86=92 node 1
+        goal: damos_target_mem_node_sys_bp, nid=3D1, target=3D4000
+        "Stop when node 1 is 40% hot"
+
+      Context 1: monitors node 1, migrate_hot =E2=86=92 node 0
+        goal: damos_target_mem_node_sys_bp, nid=3D0, target=3D6000
+        "Stop when node 0 is 60% hot"
+
+Each context eventually stops when its target node reaches the desired
+threshold,
+and the reverse direction is handled by the other context. For my use
+case, eventual convergence with this setup could be acceptable.
+An immediate-stop feature could still be useful for the broader community.
+Will test and post results after the next iteration.
+
+> IIRC, SK hynix people also confused with the behavior when they experimen=
+ted
+> migrate_{hot,cold} action with NODE_MEM_USED_BP goal based quota auto-tun=
+ing,
+> but using only a single scheme that does migration in a single direction.
+> Because this is at least second time it made confusion, if you need, mayb=
+e I
+> can try to add a feature for making DAMOS immediately stops after the goa=
+l is
+> satisfied.  Let me know if such new feature can be useful for you.  Cc-in=
+g SK
+> hynix people (Honggyu and Yunjeong) so that they can correct me if my mem=
+ory is
+> broken, or answer if the new feature I described here can be useful for t=
+hem.
+>
+> >
+> > No page identity tracking needed because we measure the END STATE, not
+> > which specific pages were moved. The early-exit prevents oscillation by
+> > stopping when the goal is met.
+> >
+> > Why get_goal_metric() Ops Callback
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > The bp calculation requires iterating over monitored PA regions:
+> >
+> >     for (pfn =3D start_pfn; pfn < end_pfn; pfn++) {
+> >         if (page_to_nid(pfn_to_page(pfn)) =3D=3D nid)
+> >             node_bytes +=3D PAGE_SIZE;
+> >     }
+> >     bp =3D node_bytes * 10000 / system_total;
+> >
+> > This requires address-space knowledge that only the ops provider has.
+> > Existing goal metrics (PSI, node_mem_*, node_memcg_*) are computed in
+> > core using system-wide data that doesn't require iterating monitored
+> > regions.
+> >
+> > The new `get_goal_metric()` callback in `damon_operations` allows:
+> >
+> >   1. Core to remain generic - handles all common metrics
+>
+> I agree this is indeed making the design clean.  But, we already having s=
+uch
+> exception, like core.c code using 'damon_target_has_pid().  Having just o=
+ne
+> more exception seems ok to me, unless it makes code too ugly.
+>
+> >   2. Ops providers to implement metrics requiring region iteration
+> >   3. Clean separation - PA implements node_sys_bp, VA could add
+> >      different metrics in future
+>
+> I agree it could be useful for clean support of virtual address mode in f=
+uture.
+> But, I'd prefer making this as simple and small as possible for the suppo=
+rt we
+> will use at the moment.
+>
+> >   4. Optional implementation - ops return 0 if metric unsupported
+>
+> Again, letting core logic having a bit of ops layer information is not a =
+big
+> problem to my humble perspective.
+>
+> So, I'd more prefer not adding the Ops callback, unless you have some oth=
+er
+> concerns.
+>
+
+Agreed. I'll remove the get_goal_metric() ops callback in v2
+
+> >
+> > This design ensures node_sys_bp is only computed when using PA contexts
+> > where it makes sense, while keeping the core quota goal infrastructure
+> > unchanged for other metrics and ops providers.
+> >
+> > The callback pattern allows each ops provider to implement metrics
+> > specific to its address space model without burdening the core with
+> > ops-specific knowledge.
+> >
+> > Advantages of PA-Based Migration
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > PA-based migration with DAMON enables integration of multiple hotness
+> > sources for migration decisions:
+> >
+> >   1. DAMON's native access pattern monitoring
+> >   2. Fault-based information (similar to NUMA Balancing)
+> >   3. Future: Hardware monitoring units (e.g., CXL CHMU)
+> >   4. Future: Instruction-Based Sampling (AMD IBS, Intel PEBS)
+> >
+> > Unlike VA-based approaches tied to individual process address spaces, P=
+A
+> > monitoring can aggregate hotness information from multiple sources to m=
+ake
+> > system-wide migration decisions across the entire physical memory space=
+.
+>
+> Maybe you are saying about the damon_report_access() based DAMON extensio=
+n
+> project [1]?  Since it is not yet upstreamed, and the long term plan is t=
+o
+> support not only physical address but also virtual address space, I think=
+ this
+> section is better to be removed, unless the DAMON extension project is me=
+rged
+> before this patch series.  I expect this patch series will be merged much
+> earlier than the extension project.
+>
+
+Agreed. I'll remove the references to future hotness sources.
+
+> >
+> > Complementary to Existing vaddr Migration
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > This series complements rather than replaces the vaddr weighted interle=
+ave
+> > migration merged in 6.18:
+> >
+> >   vaddr migration (weight-based):
+> >     - Per-process control
+> >     - Fine-grained interleave patterns via VMA offset
+> >     - Deterministic placement based on weights
+> >
+> >   paddr migration (bp-based, this series):
+> >     - System-wide control
+> >     - Target-state goals for node capacity management
+> >     - No rmap overhead
+> >     - Aggregates multiple hotness sources
+>
+> As I mentioned above, the last item could be dropped until the extension
+> project [1] is upstreamed.
+>
+> >
+> > Capacity Clamping
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > The series also implements capacity clamping for `node_sys_bp` goals. I=
+n a
+> > system where Node 0 has 40% of total RAM, setting a target of 50% is
+> > impossible. The implementation clamps:
+> >
+> >     effective_target =3D min(user_target, node_capacity_bp)
+> >
+> > This prevents the quota auto-tuning from chasing impossible targets and
+> > avoids thrashing in two-context DRAM=E2=86=94CXL setups.
+> >
+> > Patches
+> > =3D=3D=3D=3D=3D=3D=3D
+> >
+> >   1/5: mm/damon/core: add DAMOS_QUOTA_NODE_SYS_BP metric
+> >        Adds the enum value and documentation.
+> >
+> >   2/5: mm/damon: add get_goal_metric() op and PA provider
+> >        Introduces the ops callback and PA implementation that iterates
+> >        monitored regions to calculate node_sys_bp without rmap.
+> >
+> >   3/5: mm/damon/core: add new ops-specific goal metric
+> >        Wires the new metric into core's quota goal evaluation, delegati=
+ng
+> >        to ops.get_goal_metric() for DAMOS_QUOTA_NODE_SYS_BP.
+> >
+> >   4/5: mm/damon/paddr: capacity clamp and directional early-exit
+> >        Adds capacity clamping and early-exit logic to prevent migration
+> >        when goal is already satisfied.
+> >
+> >   5/5: mm/damon/sysfs-schemes: accept "node_sys_bp" in goal's target_me=
+tric
+> >        Exposes the new metric to userspace via sysfs.
+> >
+> > Status
+> > =3D=3D=3D=3D=3D=3D
+> >
+> > This is an early RFC for design review. The patches:
+> >   - Compile successfully with no errors or warnings
+> >   - Have NOT been tested on actual hardware
+>
+> I understand you plan to run tests, and that would be useful, appreciate.=
+  Note
+> that I think having no test results is blocker for RFC patch series.  So,=
+ again
+> appreciate for sharing this RFC! :)
+>
+> >
+> > Feedback on the overall approach and design is appreciated.
+>
+> I hope my above comments helps the forward progress of this nice series.
+>
+
+They are very helpful. Thanks a lot.
+
+> >
+> > References
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > [1] mm/damon/vaddr: Allow interleaving in migrate_{hot,cold} actions (v=
+4)
+> >     https://lore.kernel.org/linux-mm/20250709005952.17776-1-bijan311@gm=
+ail.com/
+> >     Merged in Linux 6.18
+> >
+> >
+> > Ravi Jonnalagadda (5):
+> >   mm/damon/core: add DAMOS_QUOTA_NODE_SYS_BP metric
+> >   mm/damon: add get_goal_metric() op and PA provider
+> >   mm/damon/core: add new ops-specific goal metric
+> >   mm/damon/paddr: capacity clamp and directional early-exit for
+> >     node_sys_bp
+> >   mm/damon/sysfs-schemes: accept "node_sys_bp" in goal's target_metric
+> >
+> >  include/linux/damon.h    |   5 ++
+> >  mm/damon/core.c          |  34 ++++++++++---
+> >  mm/damon/paddr.c         | 102 +++++++++++++++++++++++++++++++++++++++
+> >  mm/damon/sysfs-schemes.c |   7 +++
+> >  4 files changed, 141 insertions(+), 7 deletions(-)
+> >
+> > --
+> > 2.43.0
+>
+> [1] https://lore.kernel.org/damon/20251208062943.68824-1-sj@kernel.org/
+>
+>
+> Thanks,
+> SJ
+
+Thanks,
+Ravi.
 
