@@ -1,275 +1,265 @@
-Return-Path: <linux-doc+bounces-74152-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74154-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2N3KLqsdeWkQvgEAu9opvQ
-	(envelope-from <linux-doc+bounces-74152-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 21:18:51 +0100
+	id oA7MILcreWkyvwEAu9opvQ
+	(envelope-from <linux-doc+bounces-74154-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 22:18:47 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2578A9A4E8
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 21:18:51 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 155739AA85
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 22:18:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C64ED302F249
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 20:17:48 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 56C6D3007892
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Jan 2026 21:18:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61B2936E465;
-	Tue, 27 Jan 2026 20:17:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B98E823C503;
+	Tue, 27 Jan 2026 21:18:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nw3yWgHy"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="j9WLKFWv";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Mfp1T3Yz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F12032F747
-	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 20:17:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769545068; cv=none; b=rd5pp2flxOOXuzSITOpg421pbpRv1CY/ZqO7qprEHP8egToWefXzn2ETAgGfQ9g5o0BcE+qInDNHZszSmwe2IhBHi9XM7rhmaoIaTpswZNjBQLaaenaYJGa+7KXL83WBLB5Lr+XD34m21G8bpqDhk8K+5uVDHJonqcgnZPJpvJc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769545068; c=relaxed/simple;
-	bh=a33Hqp1gxCbHs3ozHKcUQHsfvseir6CgyC/3r5RJM6I=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CFBAEAC7
+	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 21:18:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1769548722; cv=pass; b=FpfwGwqgIhIXn3p2QnPY9xXReovs/K1I5Z9QWeDbe3s8MgjxJdtl1EKfLv4NPdL0S5XjXbm8+Tq6r6mh7BMQuV9yf0GBHX/WQe0s7eEqjElystFS2mZwwQ0tQrVPYAnehz9QaUU+y7R0Z8Izro3ZZJot1KVUt8JwhXbLgWdGlTM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1769548722; c=relaxed/simple;
+	bh=X6XOwrub9nUu0HRNFFH0qG8lyMXXb4+SdCKDFq9wevo=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Dwdu1Ss8SowfYdPtayQ0+78y2SRH+x9iSdgCGCujMemOXWLbvyq8oX0f58aQ7lI//7TFBSAJ9n4/ZJAKqaNIm9mdE1IkZb8tKjL7m3LtQS+oRAjgsbPjVuPs/NcgZe7qcDhtv07/r9P66LlOri3DHjbjxPxg6/QSmLro6bql5T8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nw3yWgHy; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFE34C116C6
-	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 20:17:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769545067;
-	bh=a33Hqp1gxCbHs3ozHKcUQHsfvseir6CgyC/3r5RJM6I=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=nw3yWgHyzslUWO31fG8tyWF8HSNP6kfBov7h/YP4DTGsmiP7vXeEs3ZA6WLxnZ83V
-	 pl/A7AiHUb3PtenajNdiSKXRDutlqjqURqIDFme29dzXkuuGmxu7JN3uF1jktGbark
-	 7N4UVJAgHp+20lhrHWoq7Z+74IrYr8CIXNaLal58qYNTpO/jJAacTiQ01rfVtAAoQO
-	 /8CRrnfrYfkAA5vZO+9uB8wSzv1+BfBysA8MkGypor6MG7T/V9ZXcmOg0mPqKf2bun
-	 C6Dw4qu0adtBoCgWI5HAwIZ9y8JhBjgfcoDmkX7H42IKnLXtBzQ35eHogydEoddw8s
-	 FtA39LGOfHPLg==
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-662f9aeb782so132858eaf.3
-        for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 12:17:47 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCXIRJ/VMxe2M+MkyTVSIj88UDMCM/vmXFci04rjGf4Dc2WoaEGXAGrVgNonTl4oc+eeA5MAvEEoOoc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy0bfE3MmT/1VeDcIT0lO8fjHQlOits50WJcGDkv4K5CO0a+635
-	NjxLP825MZV9Yce4E2XiREOTNqRQE/IvwBnJzObEKKHQSB9GSHEckULklf9Nm1xIqlv63PXyh6v
-	dtx6E9iI4uSxFrJq7JamVgGAPrgn8ev4=
-X-Received: by 2002:a4a:cf16:0:b0:662:f6b4:8c4e with SMTP id
- 006d021491bc7-662f6b48e48mr773192eaf.80.1769545062036; Tue, 27 Jan 2026
- 12:17:42 -0800 (PST)
+	 To:Cc:Content-Type; b=ceScFn2OhOwtNrPzDo3x5d8Htd0JUpxkxRMux3HOaqWjGA0JlEL2+tkzR0ld4vD2NGrZxJSl797zwZIo9yYEyWouIMNVzmSBiOWPqez7jBGI/ASR1c0REsnYWpaUHR400/nbWBjuuw9GdDSjHnYut4Z50/5IpKnG5XW+X4WMnEU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=j9WLKFWv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Mfp1T3Yz; arc=pass smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60REZfaG1065900
+	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 21:18:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	X6XOwrub9nUu0HRNFFH0qG8lyMXXb4+SdCKDFq9wevo=; b=j9WLKFWvozf+8CGo
+	9+U20akPC6tPn2FKyBB4pUXi8XGRGIfXA0xT1tdVbbHFxhi9SQeAimmrngPl0W9K
+	cMs17T8IrYMsJ8Op+E8KSPEJ09PpL+NViYNVOxEPrwoX4JIx9kHIeBv0VctFTLNF
+	ws9pggWNOB7xPAeF800NQWlIRbHAvHsU3SsBHFkln1zb/LqUJNEiymqCeTn+Xnm/
+	0TGd2sk5IysmfT+HHecAOFPLkzY6k5aU01c/UN+vniidd52wq1iMq90hirCR7MXS
+	fFAkodhOIrCDFqO+keMW3JJzAbbV6EoZ7nov62h7STehPPkuVXij5gt+hOAeW/yY
+	cIBH2Q==
+Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com [74.125.224.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bxy8x1cry-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 21:18:40 +0000 (GMT)
+Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-6465127b47dso8236030d50.0
+        for <linux-doc@vger.kernel.org>; Tue, 27 Jan 2026 13:18:40 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769548719; cv=none;
+        d=google.com; s=arc-20240605;
+        b=HttgqbnShdEqzAG8dyFuRYviuoq2AGWJIkrzKYrJT6ly00/HLBMc+/bGrLdbglbqkg
+         MW6jiM2IrumHbAFoVr4WFvabFa9+nDxaRbZmsASJaFmPp9XH2fZBGnVP3UJ1DmvO8agF
+         HTpzJf1+hoWkvBd1N8WCxhtppoXufvWM3rglXx5/mK847pknekwWObET1aIMR/8iX0tO
+         JOmh+AuwfdUo92XF9+/PrNOAO1sUpg/+YrUGoyAEWjTfcSiBKr7SFkD0lrYsBnLX2fDr
+         TzKuSMYu37EY9Dt68xZSbsm0KDDI/8gJ1DesD7POg5gtYInerzVQs7dAtvKhdpo7/aO6
+         8mZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=X6XOwrub9nUu0HRNFFH0qG8lyMXXb4+SdCKDFq9wevo=;
+        fh=eBdttTinoBvpOpfMfJoMCDYopJ6boAMfT9To2MNDIrA=;
+        b=gWPfCOCmicPlzb69sa0xvacCoe4cmPWOaVklfBDu4PXAlmR3Xuv+sOlpSQgNPkroc3
+         4x9BZcrbbwVlCPRwvd5ctaiHCgXvezRM+27QFBDHTQLYVrA6R5+Tu93+U2luN41jpnn0
+         0nX03eXWCfZCv4HD+GvSGXwt/uXcTdKRRbX8JLhCathm507bZzRI2OQuKgVccw2pgdX5
+         1o3zxHMoBHkFVAtbZQ+C11I2kjAD8zQozqIwPgpQnymmPyXqb2rhRfnOpUGT2v83MqA3
+         2Z8iuHRj6B/iwktpZBRHap9rxIJFvbbxo8sJwpAId1MhwBPZO9c0L8udGbYSDk+iQm+T
+         4iZw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1769548719; x=1770153519; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=X6XOwrub9nUu0HRNFFH0qG8lyMXXb4+SdCKDFq9wevo=;
+        b=Mfp1T3YzTOQJogvremUaBNPzl15fAFxjeMRjEkYD7euB9hKPDcBBShFgw7S/EYqzyY
+         Vey/shT9BitUTW1ntYUcPBaieNnTifeBbeoh4c5jHEoNkD8OlBwqfJdKOPSLo/zgBfaI
+         d7G5Dml273u45klOvl8KbH68IwvM653U3innINCdTCARWC6HUCotAD3DyLlV9O4zEfd9
+         jT5bSlitSQYkH8czPzVO2V2j6juOXwoCwQdnK981wzT5dA3Y9Y6+5Kz+TC8ed1mF7wFw
+         /+34fzVODyV/AW142P2jMVNSl5bkdN8JZS7lrDEt/AqMJTni+1C1h8ACh+iGQa/japsN
+         zI3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769548719; x=1770153519;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=X6XOwrub9nUu0HRNFFH0qG8lyMXXb4+SdCKDFq9wevo=;
+        b=TVhBqTdJ3YhWs3fqAMqPEixBF0uxavtF6PxnU6fDZJqK2z59ZmjwURfY/VOYIxuqNF
+         XIRJmGMIYENTwmEGcplThsGfzRin2kcWqmoSVOVd9KnYyNANj6ReccXTcdpLYa6jbNPF
+         dR8nxFHKDPfh6FIzKIe2SiYoZJWLmIIxGo1Ftu9ZKDRjtipexNrOJ5m6fHljOtSYB7Vg
+         67V5dDaiGP4MicrTf04+5+9PklDaXaP8ddJtM7ARm2L3wVuxeeiJjhB5DG5ITUR4gZZw
+         64nVPtqhXMOV0D2obz4DkLjpJyVCYOnB8cvYJ7IrfJrtAVFADU6VIE3dJq6qE5Ngvplb
+         7UdA==
+X-Forwarded-Encrypted: i=1; AJvYcCXI8vmuk388L8ooJmKTypHCfD/28SUgJTLjIl75JEldXE6zlb6sG+Ik9xHQGLi1GcQQMI6OnNsrr5U=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzhbzM/5unWKfUb9LRKGfc/QSHej7WLd6o3wV7MIulFUZ2P6vYS
+	DEaZQ+eR6UD62Bf+FedlKrPLc9cDavwtaja2anbOuru1Umi1llkA0ux/hhwFLj1r9Z7tpKe64yi
+	151Fjx441Whl4DweCIWFqJYGbCjElHdTNGOyYAgIvrJE8Hs89hBpAElQt88CPgpFVM90johRgFE
+	diqFz0yKVTSjT0SLqhP8exOqBy4ikI/NKrOVl0woG7yF7hcA==
+X-Gm-Gg: AZuq6aI692cDUrFHtoWY9l+af0dWTpHMW9qvAPrpfFLn/bJi3ZNUdDHAiSs528sXRKk
+	G/s3IuI4oOQLCNZU7hsecISDOaKq4zpr9PJ3NX6avvxDgKEUvMQD3l6jeaRvkobh8Q4gJC5yXJT
+	9/OfhGETELo8sWW+UsdNOlzWiPZTtolBk84Rqv1GO5l8ijxltd9OtM8yO57mHD4SPsc5JgLmmgs
+	R3+Wlow65HBrmQQHof894Cs7Q==
+X-Received: by 2002:a05:690e:d07:b0:649:3d9:d0f5 with SMTP id 956f58d0204a3-6498fc79d90mr2026144d50.92.1769548719535;
+        Tue, 27 Jan 2026 13:18:39 -0800 (PST)
+X-Received: by 2002:a05:690e:d07:b0:649:3d9:d0f5 with SMTP id
+ 956f58d0204a3-6498fc79d90mr2026125d50.92.1769548719060; Tue, 27 Jan 2026
+ 13:18:39 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260120145623.2959636-1-sumitg@nvidia.com> <20260120145623.2959636-2-sumitg@nvidia.com>
- <CAJZ5v0ipgGt7tetY6p0CW0jyOh9TVeWxgXpFzveTa2CaGB8ZpA@mail.gmail.com> <6be02e54-dd4a-4d8f-b2ee-291da63b0bf2@nvidia.com>
-In-Reply-To: <6be02e54-dd4a-4d8f-b2ee-291da63b0bf2@nvidia.com>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Tue, 27 Jan 2026 21:17:31 +0100
-X-Gmail-Original-Message-ID: <CAJZ5v0j8Z3dUZUuUUZPiGthN7yg03yDpWARGJLE8U2fCeUK8Qw@mail.gmail.com>
-X-Gm-Features: AZwV_QhFFimFgohPagii-2LtTrRkBzebBcIWZn4w-qFlB50tTtELmDGXQrkWWSI
-Message-ID: <CAJZ5v0j8Z3dUZUuUUZPiGthN7yg03yDpWARGJLE8U2fCeUK8Qw@mail.gmail.com>
-Subject: Re: [PATCH v6 1/9] cpufreq: CPPC: Add generic helpers for sysfs show/store
-To: Sumit Gupta <sumitg@nvidia.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>, viresh.kumar@linaro.org, pierre.gondois@arm.com, 
-	zhenglifeng1@huawei.com, ionela.voinescu@arm.com, lenb@kernel.org, 
-	robert.moore@intel.com, corbet@lwn.net, rdunlap@infradead.org, 
-	ray.huang@amd.com, gautham.shenoy@amd.com, mario.limonciello@amd.com, 
-	perry.yuan@amd.com, zhanjie9@hisilicon.com, linux-pm@vger.kernel.org, 
-	linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org, 
-	acpica-devel@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com, 
-	vsethi@nvidia.com, ksitaraman@nvidia.com, sanjayc@nvidia.com, 
-	nhartman@nvidia.com, bbasu@nvidia.com
+References: <20260124170535.11756-1-johan@kernel.org> <DFX20SA67PF2.VONCFNDOZOZT@kernel.org>
+ <2026012554-chatty-policy-42a1@gregkh> <aXdxDBXdyqLFfKKI@hovoldconsulting.com>
+In-Reply-To: <aXdxDBXdyqLFfKKI@hovoldconsulting.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Date: Tue, 27 Jan 2026 22:18:27 +0100
+X-Gm-Features: AZwV_QgipHYTXMdZDzf8zcCrM_91sUwMX26tgMa5qYmuNwifu3ZD2q-T70g1AeE
+Message-ID: <CAESzEGiA2DSp79pkjxBA5X-DWmSAAgyAF7usKn253jkGpYJMew@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Revert "revocable: Revocable resource management"
+To: Johan Hovold <johan@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Danilo Krummrich <dakr@kernel.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Tzung-Bi Shih <tzungbi@kernel.org>, Linus Walleij <linusw@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+        Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+        Wolfram Sang <wsa+renesas@sang-engineering.com>,
+        Simona Vetter <simona.vetter@ffwll.ch>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Jason Gunthorpe <jgg@nvidia.com>, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <brgl@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: 9_4Q0PmfB-Ss_2HvecjHzRegLYSFwBAJ
+X-Authority-Analysis: v=2.4 cv=OcWVzxTY c=1 sm=1 tr=0 ts=69792bb0 cx=c_pps
+ a=ngMg22mHWrP7m7pwYf9JkA==:117 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8
+ a=SbBu0mo9G-6qvOvpHooA:9 a=QEXdDO2ut3YA:10 a=yHXA93iunegOHmWoMUFd:22
+X-Proofpoint-ORIG-GUID: 9_4Q0PmfB-Ss_2HvecjHzRegLYSFwBAJ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI3MDE3NCBTYWx0ZWRfXwRQfVlT36ShK
+ hOjcY0zkjPmotfZXHWSFv+5SKfX9cJ/U1XgSyYaTLS5oTYSidkGspIpA/6nX7G/cbr1uWdFHDj+
+ mAxbuufgM5uDCO5yVkMsaWxIsrV3yAMJvmb47272hiB2gI26Tv8ZezH24j2dEePc2U8aBuny9gp
+ 63jgXyinl/F9OgrDyOQVKauwo3WTBP8s2YAy/+mrmpdln9fhSTvp/0NPqJRYmQu3YcPjqZAZyKz
+ 7IYqD6s8DfbrcIWPPpGvMWz5wbUSgQQDjzXz2+4fp0YS40dD8g2f4hu6O3i6gt6LiIAq708Q7VJ
+ I/60ywSW6KYgYqNLhFg1DaGrNkwow8XK/cMPfH6r31DerPCEvXVyp7aYuX7bamP1T2T+Lmz+Pzm
+ WBnOpWtGdaIm4LjyliOWuVYmJhnQhRwmH8k506LkKpJ/D3ON7q8+6pSVtXBo3SoiKTZOdSxV20O
+ 9knNxNWYXgl/Kpi8pDg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-01-27_04,2026-01-27_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 clxscore=1015 phishscore=0
+ impostorscore=0 malwarescore=0 bulkscore=0 suspectscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601270174
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-74152-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-74154-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_TWELVE(0.00)[28];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[bartosz.golaszewski@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:email]
-X-Rspamd-Queue-Id: 2578A9A4E8
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:dkim,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 155739AA85
 X-Rspamd-Action: no action
 
-On Tue, Jan 27, 2026 at 8:01=E2=80=AFPM Sumit Gupta <sumitg@nvidia.com> wro=
+On Mon, Jan 26, 2026 at 2:50=E2=80=AFPM Johan Hovold <johan@kernel.org> wro=
 te:
 >
+> On Sun, Jan 25, 2026 at 01:47:14PM +0100, Greg Kroah-Hartman wrote:
+> > On Sat, Jan 24, 2026 at 08:08:28PM +0100, Danilo Krummrich wrote:
+> > > On Sat Jan 24, 2026 at 6:05 PM CET, Johan Hovold wrote:
+> > > > this does not look like the right interface for the chardev unplug =
+issue.
+> > >
+> > > I think it depends, we should do everything to prevent having the iss=
+ue in the
+> > > first place, e.g. ensure that we synchronize the unplug properly on d=
+evice
+> > > driver unbind.
+> > >
+> > > Sometimes, however, this isn't possible; this is where a revocable me=
+chanism can
+> > > come in handy to prevent UAF of device resources -- DRM is a good exa=
+mple for
+> > > this.
+> >
+> > This is not "possible" for almost all real devices so we need something
+> > like this for almost all classes of devices, DRM just shows the extreme=
+s
+> > involved, v4l2 is also another good example.
 >
-> On 27/01/26 21:54, Rafael J. Wysocki wrote:
-> > External email: Use caution opening links or attachments
-> >
-> >
-> > On Tue, Jan 20, 2026 at 3:57=E2=80=AFPM Sumit Gupta <sumitg@nvidia.com>=
- wrote:
-> >> Add generic helper functions for u64 sysfs attributes that follow the
-> >> common pattern of calling CPPC get/set APIs:
-> >> - cppc_cpufreq_sysfs_show_u64(): reads value and handles -EOPNOTSUPP
-> >> - cppc_cpufreq_sysfs_store_u64(): parses input and calls set function
-> >>
-> >> Add CPPC_CPUFREQ_ATTR_RW_U64() macro to generate show/store functions
-> >> using these helpers, reducing boilerplate for simple attributes.
-> >>
-> >> Convert auto_act_window and energy_performance_preference_val to use
-> >> the new macro.
-> >>
-> >> No functional changes.
-> >>
-> >> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
-> >> ---
-> >>   drivers/cpufreq/cppc_cpufreq.c | 69 ++++++++++++--------------------=
---
-> >>   1 file changed, 25 insertions(+), 44 deletions(-)
-> >>
-> >> diff --git a/drivers/cpufreq/cppc_cpufreq.c b/drivers/cpufreq/cppc_cpu=
-freq.c
-> >> index 36e8a75a37f1..c95dcd7719c3 100644
-> >> --- a/drivers/cpufreq/cppc_cpufreq.c
-> >> +++ b/drivers/cpufreq/cppc_cpufreq.c
-> >> @@ -863,73 +863,54 @@ static ssize_t store_auto_select(struct cpufreq_=
-policy *policy,
-> >>          return count;
-> >>   }
-> >>
-> >> -static ssize_t show_auto_act_window(struct cpufreq_policy *policy, ch=
-ar *buf)
-> >> +static ssize_t cppc_cpufreq_sysfs_show_u64(unsigned int cpu,
-> >> +                                          int (*get_func)(int, u64 *)=
-,
-> >> +                                          char *buf)
-> >>   {
-> >>          u64 val;
-> >> -       int ret;
-> >> -
-> >> -       ret =3D cppc_get_auto_act_window(policy->cpu, &val);
-> >> +       int ret =3D get_func((int)cpu, &val);
-> >>
-> >> -       /* show "<unsupported>" when this register is not supported by=
- cpc */
-> >>          if (ret =3D=3D -EOPNOTSUPP)
-> >>                  return sysfs_emit(buf, "<unsupported>\n");
-> >> -
-> >>          if (ret)
-> >>                  return ret;
-> >>
-> >>          return sysfs_emit(buf, "%llu\n", val);
-> >>   }
-> >>
-> >> -static ssize_t store_auto_act_window(struct cpufreq_policy *policy,
-> >> -                                    const char *buf, size_t count)
-> >> +static ssize_t cppc_cpufreq_sysfs_store_u64(unsigned int cpu,
-> >> +                                           int (*set_func)(int, u64),
-> >> +                                           const char *buf, size_t co=
-unt)
-> >>   {
-> >> -       u64 usec;
-> >> +       u64 val;
-> >>          int ret;
-> >>
-> >> -       ret =3D kstrtou64(buf, 0, &usec);
-> >> +       ret =3D kstrtou64(buf, 0, &val);
-> >>          if (ret)
-> >>                  return ret;
-> >>
-> >> -       ret =3D cppc_set_auto_act_window(policy->cpu, usec);
-> >> -       if (ret)
-> >> -               return ret;
-> >> +       ret =3D set_func((int)cpu, val);
-> >>
-> >> -       return count;
-> >> +       return ret ? ret : count;
-> >>   }
-> >>
-> >> -static ssize_t show_energy_performance_preference_val(struct cpufreq_=
-policy *policy, char *buf)
-> >> -{
-> >> -       u64 val;
-> >> -       int ret;
-> >> -
-> >> -       ret =3D cppc_get_epp_perf(policy->cpu, &val);
-> >> -
-> >> -       /* show "<unsupported>" when this register is not supported by=
- cpc */
-> >> -       if (ret =3D=3D -EOPNOTSUPP)
-> >> -               return sysfs_emit(buf, "<unsupported>\n");
-> >> -
-> >> -       if (ret)
-> >> -               return ret;
-> >> -
-> >> -       return sysfs_emit(buf, "%llu\n", val);
-> >> +#define CPPC_CPUFREQ_ATTR_RW_U64(_name, _get_func, _set_func)        =
-  \
-> >> +static ssize_t show_##_name(struct cpufreq_policy *policy, char *buf)=
-  \
-> >> +{                                                                    =
-  \
-> >> +       return cppc_cpufreq_sysfs_show_u64(policy->cpu, _get_func, buf=
-);\
-> >> +}                                                                    =
-  \
-> >> +static ssize_t store_##_name(struct cpufreq_policy *policy,          =
-  \
-> >> +                            const char *buf, size_t count)           =
-  \
-> >> +{                                                                    =
-  \
-> >> +       return cppc_cpufreq_sysfs_store_u64(policy->cpu, _set_func,   =
-  \
-> >> +                                           buf, count);              =
-  \
-> >>   }
-> >>
-> >> -static ssize_t store_energy_performance_preference_val(struct cpufreq=
-_policy *policy,
-> >> -                                                      const char *buf=
-, size_t count)
-> >> -{
-> >> -       u64 val;
-> >> -       int ret;
-> >> +CPPC_CPUFREQ_ATTR_RW_U64(auto_act_window, cppc_get_auto_act_window,
-> >> +                        cppc_set_auto_act_window)
-> >>
-> >> -       ret =3D kstrtou64(buf, 0, &val);
-> >> -       if (ret)
-> >> -               return ret;
-> >> -
-> >> -       ret =3D cppc_set_epp(policy->cpu, val);
-> >> -       if (ret)
-> >> -               return ret;
-> >> -
-> >> -       return count;
-> >> -}
-> >> +CPPC_CPUFREQ_ATTR_RW_U64(energy_performance_preference_val,
-> >> +                        cppc_get_epp_perf, cppc_set_epp)
-> >>
-> >>   cpufreq_freq_attr_ro(freqdomain_cpus);
-> >>   cpufreq_freq_attr_rw(auto_select);
-> >> --
-> > It looks like this patch could be applied independently of the other
-> > patches in the series.
-> >
-> > Do you want me to do so?
+> It's certainly possible to handle the chardev unplug issue without
+> revocable as several subsystems already do. All you need is a refcount,
+> a lock and a flag.
 >
-> Yes, this patch is independent and can be applied.
+> It may be possible to provide a generic solutions at the chardev level
+> or some kind of helper implementation (similar to revocable) for
+> subsystems to use directly.
+>
 
-Applied as 6.20 material, thanks!
+This echoes the heated exchange I recently had with Johan elsewhere so
+I would like to chime in and use the wider forum of driver core
+maintainers to settle an important question. It seems there are two
+camps in this discussion: one whose perception of the problem is
+limited to character devices being referenced from user-space at the
+time of the driver unbind (favoring fixing the issues at the vfs
+level) and another extending the problem to any driver unbinding where
+we cannot ensure a proper ordering of the teardown (for whatever
+reason: fw_devlink=3Doff, helper auxiliary devices acting as
+intermediates, or even user-space unbinding a driver manually with
+bus-level sysfs attributes) leaving consumers of resources exposed by
+providers that are gone with dangling references (focusing the
+solutions on the subsystem level).
+
+The question is: should we work towards making the kernel gracefully
+handle any such situation or is it acceptable that if we do
+"non-standard" things, we can trigger invalid memory accesses from
+user-space. I'm asking this because I've been sending patches to
+several subsystems addressing life-time issues at the subsystem level
+with SRCU and I've faced resistance from Johan at least twice - not
+based on the implementation details but on the philosophy itself of
+synchronizing all accesses from consumers to providers (SRCU,
+revocable or otherwise).
+
+I myself am in the latter camp. My thinking is: if we expose an
+interface, it should work correctly. In particular: it should not
+allow the user (even root!) to crash the kernel. In addition: there
+seems to be an agreement that rust in linux is good because of its
+memory safety features. The issues we're discussing would have never
+happened, had the code been written in rust so we should not just
+accept them as normal in C or tell the user to "just not do it".
+
+Bartosz
 
