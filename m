@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-74596-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74591-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ONygBDPSe2m0IgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74596-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:33:39 +0100
+	id ODyQGQDRe2m0IgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74591-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:28:32 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76284B4CCD
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:33:38 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 42CFCB4AC1
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:28:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C8855304A421
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:28:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id E80F2302C41E
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:27:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93CB436AB40;
-	Thu, 29 Jan 2026 21:26:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FFEA36683B;
+	Thu, 29 Jan 2026 21:26:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="oqTfR/f3"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="y1MvxdcS"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail-pl1-f201.google.com (mail-pl1-f201.google.com [209.85.214.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE706361657
-	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:26:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBC8535DD19
+	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:26:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769721973; cv=none; b=FvBG8q1tQotfV0ae3z7oV5wp0pVS4wKRe4WZA5uLnwl8fMES2PazjOrKeg7djQnKpmNGgXJBNi5p/hWndKyukK+VYeHWQGIRpXIls/7QvCyT90pIyxuyAOppCiKAXks/5LX6XpIJuOHrUKak6Ky+AnRFSAFTjJzHS6/MDlBn3K0=
+	t=1769721965; cv=none; b=iyNT/ARzqsFqU4QUnO5gaPoEpUfQLyOqvatcALe4NicCo8n4K669BgLg7TnzWgqCdMVjIZLX//bQamibkRrY5UA5BtR/3we+Jw5u0V6FhlFCl5s2qxOktvE3+mzZYTJsNi4x27i0lOFSsB7xMxhp3wrFVY1bR2fUOGKXRfN9LBk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769721973; c=relaxed/simple;
-	bh=Jis9QmSRTC6AxZZguKb1BxVkXKYzE5EgFNnbHekO2IA=;
+	s=arc-20240116; t=1769721965; c=relaxed/simple;
+	bh=Cb9Y8KWzYaZZbnWLogkDgrwZwr7o6CbuJ0QS3Pv10oU=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=PIwnpYWRqDi6NFNHVH+ONgu5Or1a6Nzsht+7unL2Rvof01nN7arpyGkIWWOjLdbd1eCqyY7vRhtdJ6uYaXtJh+n4b67T+2eMWTZTGN4+AV+6c1LD0Pb6/gRxxt6zADhvuE2d3pFX/6snP1yZ4ZsMbPBu3xJv7BjILHGo8l+f4d4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=oqTfR/f3; arc=none smtp.client-ip=209.85.214.201
+	 To:Cc:Content-Type; b=llVFpUvYgaBYCq2xj90j2g3Xoi5rFJg3f3XrdGc6MxD45eT2t4RYr3Comk20L3Is35/X5LDOKHzxA3nK/QD7e37vfQ07FElyHenv97sstXrEETUESIBHX/822tFbs2L93UMqE+2LXgBMaOj3f+SLmVw6MtG+U+oXpTk61wd7uZ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=y1MvxdcS; arc=none smtp.client-ip=209.85.214.201
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com
-Received: by mail-pl1-f201.google.com with SMTP id d9443c01a7336-2a0bae9acd4so10813805ad.3
-        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:26:01 -0800 (PST)
+Received: by mail-pl1-f201.google.com with SMTP id d9443c01a7336-2a377e15716so35010255ad.3
+        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:26:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1769721961; x=1770326761; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1769721962; x=1770326762; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=dy0UJfAzqC2Uv0TXXgbyaGP8I7SQ7WbjV2I2sUTFK/o=;
-        b=oqTfR/f3sqqiJ4FsX88tf5lJRqyrnV9wLcLhcRoljtXnLfCrOFKWavxNkiKmIH6Lf/
-         obTwP9dc1q9yI06Uco2+Eio3WlraRyysYY2O1uiNFNel7ZR8K2xJkeTcWT6n1paa9OUt
-         bwLmvpaxrIo4e7NtHZrSikfRWtxgW2mSE2an0DyCG61PBkn4A3SJsMaLPSAjagp70Ce1
-         NZys+z5B4PRKdU4v+k+MjDrJzXE/10hNDhraM2qxClOrwvsY76Ye99wMUCNaZSLLKDTk
-         Kz2D44wxl29hiOchwksRPp9xMSXXOvAS6xY4a/qelLonzm6D3VybaFCyDqQCUzD0p+xA
-         c9Dg==
+        bh=BqEhbyqURPyKNgE6Ne2XGuBboHLh1jY5l9yG8cIgxTg=;
+        b=y1MvxdcSHAA2tv1IsyzFmRw57KM/wXj1R1ZdYWaSIzlN1RSmx2DZC/lY7CimLxCBCS
+         0vK9SoPcz8XrCFytWn1qKRZdDSdeZ2t6R/Z91DQq/Tpgpc7vbc8pNHwoXbibrUy4JtUd
+         XRvw/ZkDVaWbdWDB8xoDlo+9pCWweFVIIAB9EwHkW1wCjh98cRA9acf88FsvMfg6F7V4
+         eOA4JZ1Xwkh9rCClweXAF4K4BDHCeLPr55MISxcyzWjgfkaiXXuW4QyrTxZChFoFlnTe
+         u8lC+qyEk85GD92i475reauTgqevO+KpL/a6ENkj51ChBaphwulFIdpnaq0r957wLCDr
+         8FGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769721961; x=1770326761;
+        d=1e100.net; s=20230601; t=1769721962; x=1770326762;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dy0UJfAzqC2Uv0TXXgbyaGP8I7SQ7WbjV2I2sUTFK/o=;
-        b=fhcdMxM+DVJbt7UAB+vul0Yt3oMNQlNS9Hdl94MHzqZ3IfcC3P1ty6336isHOYrlNF
-         v2Ozi07TL7O0euNYL0guRvMbdF9hzTI6c++AfuYgmw6LXcYJ5/PYINaDfSVjeYzCXa3V
-         gCSatS/AC50NY2CXZxIhhWaLxZn07oN7WNZHcBfh1RJx+bfrYMrxcD1UGlJuqr4Qgbei
-         FJn9pQkKN/jpAFmPGjnIjpix9BrlcFtBYYHCorh4dPsgE0URNhDobWDaZMSPLfUlEtE4
-         ybaomU9tKa08sXNo11YA4/7WfVOs+srL7bOccTmXLnulMjMLcfV3+TpQ1Yq81oHzOfLt
-         7oFw==
-X-Forwarded-Encrypted: i=1; AJvYcCXyUby4fKmVUGVK2fXnM2dKWYpWchYPPj4KLiEtbxM1mlT7/xMKPM5sFLizpTHJ6FWh91PClej8dhQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyjyerBVGN1dCpH9+F4ZWr1V9l7wCDIj6ML0uD7tXyr+iJNO2kb
-	6VR8rciywTBTzb2BBm+CdA2x+jP2I100mDnxtau3W+y/kbIMPLYWLGQ6atYk27FoOFw5HGxcwVZ
-	9c7dKczeWWVfP9A==
-X-Received: from plrp10.prod.google.com ([2002:a17:902:b08a:b0:2a0:8ca0:1e55])
+        bh=BqEhbyqURPyKNgE6Ne2XGuBboHLh1jY5l9yG8cIgxTg=;
+        b=JSO/Le5LC/0F5kPJbw+XvcFAB8vCMsC5C2NtqOoxVUJFA3M89SKHQOgQCISozhmg9b
+         A1rh9luOpfjPaif8P+wXgxF7ymJjpmn9bMv0Xf04SUHNBZ8nhaZQRnGL2S3qqKMro2XF
+         3IDeYH1U14ZmqVGNwuoE7RDY7eBznbQotfZROFA+o9gtQppvTqLjxCaaunAKsXzO6fyd
+         FPMVFo7jSD4+fvBPsF5t7rYljthn4fPIvtJg8EcXDQYXos8TfKWlgT62WGzk++CLpZON
+         VdmYNlC9mncQpIEvUBW/gH0LE7QWztTeT3J/UGWKgyYYjZuP/F0nd8KLN8XZ/mRw9qik
+         lecA==
+X-Forwarded-Encrypted: i=1; AJvYcCU99HGz2f9ZukAbhM3EQaKIUxw+E3OSIPTGUvwAEGOtvpvc5uG+lfaGbBxT8SAic3wyRilxaZ4UZzk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzDe4uOk7tCB+VaLlm63maqPnTLHQlkLF17v2xEd1IpnWP+ITja
+	/+NaLeCaWAKA4iVyHK7n90w5GaNlsNZJt7XVUCM/bIsRqh0n7glKEmwOrEsksqXbFhVXNdaQ01E
+	6wcDQCF/81e/cUg==
+X-Received: from plot3.prod.google.com ([2002:a17:902:8c83:b0:2a7:78b9:f962])
  (user=dmatlack job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:903:290d:b0:2a0:dabc:1388 with SMTP id d9443c01a7336-2a8d990adfcmr3786725ad.28.1769721960616;
- Thu, 29 Jan 2026 13:26:00 -0800 (PST)
-Date: Thu, 29 Jan 2026 21:25:01 +0000
+ 2002:a17:902:bd03:b0:2a7:a9b8:ebb0 with SMTP id d9443c01a7336-2a8d96a7ff3mr3875585ad.19.1769721962280;
+ Thu, 29 Jan 2026 13:26:02 -0800 (PST)
+Date: Thu, 29 Jan 2026 21:25:02 +0000
 In-Reply-To: <20260129212510.967611-1-dmatlack@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -76,8 +76,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260129212510.967611-1-dmatlack@google.com>
 X-Mailer: git-send-email 2.53.0.rc1.225.gd81095ad13-goog
-Message-ID: <20260129212510.967611-15-dmatlack@google.com>
-Subject: [PATCH v2 14/22] vfio: selftests: Build liveupdate library in VFIO selftests
+Message-ID: <20260129212510.967611-16-dmatlack@google.com>
+Subject: [PATCH v2 15/22] vfio: selftests: Add Makefile support for TEST_GEN_PROGS_EXTENDED
 From: David Matlack <dmatlack@google.com>
 To: Alex Williamson <alex@shazbot.org>
 Cc: Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, 
@@ -107,13 +107,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	MV_CASE(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74596-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-74591-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -126,55 +126,49 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[dmatlack@google.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[google.com:+];
 	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 76284B4CCD
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 42CFCB4AC1
 X-Rspamd-Action: no action
 
-From: Vipin Sharma <vipinsh@google.com>
+Add Makefile support for TEST_GEN_PROGS_EXTENDED targets. These tests
+are not run by default.
 
-Import and build liveupdate selftest library in VFIO selftests.
+TEST_GEN_PROGS_EXTENDED will be used for Live Update selftests in
+subsequent commits. These selftests must be run manually because they
+require the user/runner to perform additional actions, such as kexec,
+during the test.
 
-It allows to use liveupdate ioctls in VFIO selftests
-
-Signed-off-by: Vipin Sharma <vipinsh@google.com>
 Signed-off-by: David Matlack <dmatlack@google.com>
 ---
- tools/testing/selftests/vfio/Makefile | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ tools/testing/selftests/vfio/Makefile | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/tools/testing/selftests/vfio/Makefile b/tools/testing/selftests/vfio/Makefile
-index 3c796ca99a50..1e50998529fd 100644
+index 1e50998529fd..f9c040094d4a 100644
 --- a/tools/testing/selftests/vfio/Makefile
 +++ b/tools/testing/selftests/vfio/Makefile
-@@ -12,6 +12,7 @@ TEST_FILES += scripts/setup.sh
+@@ -23,12 +23,15 @@ LDFLAGS += -pthread
+ LIBS_O := $(LIBVFIO_O)
+ LIBS_O += $(LIBLIVEUPDATE_O)
  
- include ../lib.mk
- include lib/libvfio.mk
-+include ../liveupdate/lib/libliveupdate.mk
+-$(TEST_GEN_PROGS): %: %.o $(LIBS_O)
++$(TEST_GEN_PROGS) $(TEST_GEN_PROGS_EXTENDED): %: %.o $(LIBS_O)
+ 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH) $< $(LIBS_O) $(LDLIBS) -o $@
  
- CFLAGS += -I$(top_srcdir)/tools/include
- CFLAGS += -MD
-@@ -19,11 +20,15 @@ CFLAGS += $(EXTRA_CFLAGS)
- 
- LDFLAGS += -pthread
- 
--$(TEST_GEN_PROGS): %: %.o $(LIBVFIO_O)
--	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $< $(LIBVFIO_O) $(LDLIBS) -o $@
-+LIBS_O := $(LIBVFIO_O)
-+LIBS_O += $(LIBLIVEUPDATE_O)
+-TEST_GEN_PROGS_O = $(patsubst %, %.o, $(TEST_GEN_PROGS))
+-TEST_DEP_FILES := $(patsubst %.o, %.d, $(TEST_GEN_PROGS_O))
++TESTS_O := $(patsubst %, %.o, $(TEST_GEN_PROGS))
++TESTS_O += $(patsubst %, %.o, $(TEST_GEN_PROGS_EXTENDED))
 +
-+$(TEST_GEN_PROGS): %: %.o $(LIBS_O)
-+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH) $< $(LIBS_O) $(LDLIBS) -o $@
- 
- TEST_GEN_PROGS_O = $(patsubst %, %.o, $(TEST_GEN_PROGS))
--TEST_DEP_FILES = $(patsubst %.o, %.d, $(TEST_GEN_PROGS_O) $(LIBVFIO_O))
-+TEST_DEP_FILES := $(patsubst %.o, %.d, $(TEST_GEN_PROGS_O))
-+TEST_DEP_FILES += $(patsubst %.o, %.d, $(LIBS_O))
++TEST_DEP_FILES := $(patsubst %.o, %.d, $(TESTS_O))
+ TEST_DEP_FILES += $(patsubst %.o, %.d, $(LIBS_O))
  -include $(TEST_DEP_FILES)
  
- EXTRA_CLEAN += $(TEST_GEN_PROGS_O) $(TEST_DEP_FILES)
+-EXTRA_CLEAN += $(TEST_GEN_PROGS_O) $(TEST_DEP_FILES)
++EXTRA_CLEAN += $(TESTS_O)
++EXTRA_CLEAN += $(TEST_DEP_FILES)
 -- 
 2.53.0.rc1.225.gd81095ad13-goog
 
