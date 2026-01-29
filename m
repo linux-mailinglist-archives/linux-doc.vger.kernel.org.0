@@ -1,131 +1,123 @@
-Return-Path: <linux-doc+bounces-74537-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74538-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sB2+Izl2e2mMEgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74537-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 16:01:13 +0100
+	id wAmsOWp2e2mMEgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74538-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 16:02:02 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0AC3B1402
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 16:01:12 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FF8DB1427
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 16:02:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 18E84300441E
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 15:01:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 24FAA3008D00
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 15:01:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 10323238D52;
-	Thu, 29 Jan 2026 15:01:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90C271DE3B5;
+	Thu, 29 Jan 2026 15:01:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jePiA0gk"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hCkgdW77"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2B97238C36
-	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 15:01:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D6E514E2F2;
+	Thu, 29 Jan 2026 15:01:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769698869; cv=none; b=PZ8OE5clBA2qpGkkCJOX0Pkg0FXWqPSh4OWQNB0hR0tjECzMI7mxRXw3+iK/qWs2Nk5jiNsDlAfny3S25npVAZSv9Q/XE/dIUxOnqbKPmFZ77mniG3FPta6FDNWhXXgPE+W2zPGt8s6CaW4DE4h+2GdKFtZxiGMLOMfiJY6fESs=
+	t=1769698915; cv=none; b=P0DMYraQSmwiZw0KPpy/jRpD0XiJqDzFOtfo08oaKY7kZmJo/SJAXg3/5iAM+SF3xAFxdZwi88d+2p2eM1hE7JZ4pkqmxcYrLXL7NbZ1ATjUk5NbgIdrC0zRvN2vWxwdRvTnFM62i1cLJRZBEo0MrN9P+/+f/6kwW10iR8lc/rs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769698869; c=relaxed/simple;
-	bh=Lr0gRlWXmJSBfvv/mHBNT2m9wjy59gkDa6uMR53IbXk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=NBBqOZ1DF7clp4VwuYx43z+Fyg5FBrUmXTvY5wMEQ5072KKsX0QooLPGk4mPGUvDRF750m9gMWKGn37zwp+NK8LXcDyyIzIp+QeAnfpIPhzmthyr6sktCJSrXop+KGaIeh+C0dk1jzLJEE6HpIezqM9KqNuIz8WpQ0esSJ/pedk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jePiA0gk; arc=none smtp.client-ip=209.85.214.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2a871c8b171so6214955ad.3
-        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 07:01:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769698867; x=1770303667; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Lr0gRlWXmJSBfvv/mHBNT2m9wjy59gkDa6uMR53IbXk=;
-        b=jePiA0gkn/iMQk/CTZkqzBGVWcFQuVs7LyUETySO+V/Fzx0SPuT8nUtSAf0W5wi4nS
-         82y7SnEMQHhGM04g0mCBpNEm8uvsAiJYETeKLQtH8827X04VPpLr1jflATfSq29oQ6DT
-         j/h6oZhAJr+U0owjj7qS/mib1Dh/sG92d1OtDapt1wxPeMsILTp1stUEZLJUa6OOfcRr
-         iyb5r9cc/vKUTZDHbb3Mm3TtBn7/JoF8nnmGJjZBVsuJA/CNT8csGQGqnPBjKR1lB3bl
-         0bh5Je5lO9cTAolyGmZoUtvsnvDHXJv5uGtHC+GHXe/5RJXM8Fuzi05TmTAM1RfXGIQN
-         bxCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769698867; x=1770303667;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Lr0gRlWXmJSBfvv/mHBNT2m9wjy59gkDa6uMR53IbXk=;
-        b=ZonASzZ/EfWf9jV4yxrpAEdrqRkCmeHdjGWq7aB2p2xr8mbS703RS6XhdvJP1ofsh5
-         C9mv5iotFlhpRYVrcw7y4a2YlV3RqbGvwAIN0ll0YCAXDZivfXTQxVX6bfH+jevNUTeI
-         zaxINiFfBRgvr28ggkOHMsQp32IKRrYmwnQDsid9TTObLQRfk8G5giBnzVKjnBSqPoLV
-         24S5Ezc5vE9D23LKRT9RqB3TRcm1W9+WZ0M+edNOQb3+r/lmtJJ+Sx7rLRCPi3SwRF8W
-         npUJoXLxdv6vig6DVm3zl88yEtvV0iNyQtdXxQc4ptthqEVF/nuH/LK8I90QFbJmu65g
-         o0Bw==
-X-Forwarded-Encrypted: i=1; AJvYcCVk7Nes3tGIakjuN9KNYL8au7RYvQXLLz/2lO6MNU3x5fwGR7bJyQs+mWjEfhIQi+xocrqabzQkMX0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyB5e4/mot0CStrb9ZHkWiIB56CWyG6/i2Z6TCM/WfPKLsZI6I
-	PP3kwSmBX8ZGeyvHKODCh4k51X0hHdKkMvonfRbTN9t4492TpcpiD3D/9GxQaave7Ng=
-X-Gm-Gg: AZuq6aJGRmc/mngfnSL9Gknl7EGq+W0Q6QoYZYEWIm/oekl1UwmjS7E9M8bvRRc6lhs
-	XFd1JANExjJQSv0T+2AjQTE+u0e3F2SLN5FT24bYph2FUlTyYyDfk68z5tz8StwrEROgBKCArp4
-	R+HFW2J2UtpfLZFoZ08GGQ6L5ka6Ewf+9XLHHR2SHfpyB3k4qr5ptBt7wFPBzzryHTQlHGQfr0r
-	CeFbQqxOYk8kmBFyaXIPgGojwwB/aDk+/T18Wvx3IPa2ZlnV4uXjZ//xegq/+GAQ7pMhsfszoLh
-	YVngib33JaDA0j8ePk1kuN6CACKE8H7MUILFvD+MAesiJugBCPtFVDJCblpflDG3AVcSHv+7FoL
-	7E96kLQoZBBcsHk7UhKvnoH6AwR5eRWQBWfcDUtYb9gdHyXaVo818LIHppB0E0nvT9kgcaYjub3
-	jAO9cugUPQCiFg2pnupQ==
-X-Received: by 2002:a17:902:ce82:b0:2a8:7814:47ca with SMTP id d9443c01a7336-2a8781448a6mr83266595ad.0.1769698866897;
-        Thu, 29 Jan 2026 07:01:06 -0800 (PST)
-Received: from fedora ([2401:4900:88b9:4745:b6a7:8b73:65c5:8fa4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a88b4148d0sm52208905ad.27.2026.01.29.07.01.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jan 2026 07:01:06 -0800 (PST)
-From: harshdaniel66356@gmail.com
-To: gregkh@linuxfoundation.org
-Cc: devel@driverdev.osuosl.org,
-	harshdaniel66356@gmail.com,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: media: Add bindings for dim2 compatible strings.
-Date: Thu, 29 Jan 2026 20:30:54 +0530
-Message-ID: <20260129150054.41709-1-harshdaniel66356@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <2026012906-gristle-junkyard-0c96@gregkh>
-References: <2026012906-gristle-junkyard-0c96@gregkh>
+	s=arc-20240116; t=1769698915; c=relaxed/simple;
+	bh=PRJ6WbfIsCqwl3PRDJG2raCmc16x8QC0hsryes2DrSQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DTTjfjps0FcxMi1rurm3TNKvTMsrDPmdTbGOjOabQgUO2XFp6TXYrwT8MBIeujzWR7ZE9HehZCIrZA7B90B/M/aqyRSXNpTkMeNE83TTtRxLNkEzkEQ4lRL+nEEgyDeUNgXO1Q4CA4O4UO+E/T7nEOnp5zP/f3HAMNe9VmhuwfQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hCkgdW77; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5020C4CEF7;
+	Thu, 29 Jan 2026 15:01:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1769698915;
+	bh=PRJ6WbfIsCqwl3PRDJG2raCmc16x8QC0hsryes2DrSQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=hCkgdW77AzJl03Q3NZu0CslWlULIihabEZoLCDiFwjgGMGwAh1xz3aH75XT9H0wXe
+	 R7pjPPLgXa5v/yLxIzRBYqtJ3CaTuOnjp4q2f3tvVcWjk30AA8BTpXZPAqHIPnY5q/
+	 5TFYSFTHtYYM+H8a63vZJUt3eWDYu705k6AeuXoHAH7m1VQJO4ndlS0aG5O+21zYq+
+	 uN7KUNITsoFhXINDeE+KglgV/bSP4268Cjb7LV00rQjBNk1g5tYrlUUBoUFBQmH7Wv
+	 PwIzvBlLrLowhFLYFwpjp+CxrORi6MW3/7+UlpXuE5+/8Qq4fCo4NxjWFvdAt6NKuN
+	 zbgQZjpahz5QQ==
+Date: Thu, 29 Jan 2026 15:01:50 +0000
+From: Tzung-Bi Shih <tzungbi@kernel.org>
+To: Johan Hovold <johan@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Linus Walleij <linusw@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <shuah@kernel.org>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Simona Vetter <simona.vetter@ffwll.ch>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/3] Revert "revocable: Revocable resource management"
+Message-ID: <aXt2XqRnBjb25f81@google.com>
+References: <20260124170535.11756-1-johan@kernel.org>
+ <aXjgeNY-jf9rIw09@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aXjgeNY-jf9rIw09@google.com>
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[driverdev.osuosl.org,gmail.com,vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74537-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	FROM_NO_DN(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[harshdaniel66356@gmail.com,linux-doc@vger.kernel.org];
-	RCPT_COUNT_THREE(0.00)[4];
-	TO_DN_NONE(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-74538-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tzungbi@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: C0AC3B1402
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 4FF8DB1427
 X-Rspamd-Action: no action
 
-Sorry about that, this was my first time sending an email via git send-email.
+On Tue, Jan 27, 2026 at 03:57:44PM +0000, Tzung-Bi Shih wrote:
+> On Sat, Jan 24, 2026 at 06:05:32PM +0100, Johan Hovold wrote:
+> > Turns out there are correctness issues with both the gpiolib conversion and
+> > the revocable design itself that can lead to use-after-free and hung tasks (see
+> > [1] and patch 3/3).
+> [...]
+> > Revert the revocable implementation until a redesign has been proposed and
+> > evaluated properly.
+> 
+> I'll work on addressing the discovered issues and send follow-up fixes.  I
+> believe keeping the current series in linux-next would be beneficial, as it
+> allows for easier testing and wider evaluation by others, rather than
+> reverting at this stage.
+
+FWIW: https://lore.kernel.org/all/20260129143733.45618-2-tzungbi@kernel.org/
+and https://lore.kernel.org/all/20260129143733.45618-4-tzungbi@kernel.org/
+are the proposed fixes.
 
