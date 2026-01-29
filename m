@@ -1,80 +1,82 @@
-Return-Path: <linux-doc+bounces-74566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74568-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4GiDLorLe2lHIgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74566-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:05:14 +0100
+	id AGtaMB/Me2lHIgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74568-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:07:43 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C9CAB472C
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:05:14 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52B69B47EE
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:07:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 031AC302BDFE
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:04:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0F3DF3068597
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:04:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C4AB35C1A9;
-	Thu, 29 Jan 2026 21:04:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48DCA35CB70;
+	Thu, 29 Jan 2026 21:04:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="VKTj1/Ct"
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="qC+QQ2Bf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D9E035C1A0
-	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:04:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0569335C184
+	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:04:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769720693; cv=none; b=aGGyfZeueR9vNJ9Gn053O+hAqVWfBZSm2ySoaasiHtZUpVZvEsfP6DCrSGKOCZ2qtkMW5x8VEJVw3yYOn2zCgU2j7cFYKV9ayVzC/1/f64KASDvo2Q0yZgiJRA/VZmoLXQ7zVPYiZzJoc1HGOaFuGdXGs3Yp2z/25XxFpMS7o9k=
+	t=1769720697; cv=none; b=sJRQZoYybGGkIrcVw52OxCJN8PGf2DlyhNICNK+sOIihwB9SLC0SxnsIsLTl4RDh8BYLmiHOqBilVC86tilxVROxX5oP5XWHEB9lvIpKCcUKnabGzYf/oxboDSdY5XVG9BVZYqem/2q9vukEeGR64N9TsKuua6KhmBHNhyHD2Jc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769720693; c=relaxed/simple;
-	bh=akrBn4JPwvLBEstJQ9HeJN9q5u1vwp5xfi2e9tVFX44=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=FAGGLIAQfEwnWqNvT5/Qr9ugq6gg+9cqgyttDJHO/kWbCyJfnT/GwYJRTcoNDZINYtyH6SM5yywq/+MBLVej1YOaMCsq5t0EluWwwloZzIvjRTgqPgVoAZFgZnrE9CX4HJi15bwNQPnXT5TxT7kQZGXGbL8HKmvaCkdPC1spjYs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=VKTj1/Ct; arc=none smtp.client-ip=209.85.222.181
+	s=arc-20240116; t=1769720697; c=relaxed/simple;
+	bh=V3jcetw4D8mN0UQEcroE5IaVeGXsJTloPdOskFdLl70=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=BBGyi6gXGK64JLTwD8audd8xtzy9yogL5VFrkg7VIsGMLzloORLsWAzoDUDQH0f0aw+aRyMg92vvOFaqL58mqTkC2vXPMnk3ntr5S8wvHMKrbfkEjLAGOj5LyTj1y4+I8gAeeFWI5CW9+5+ZJrHtE6JlXDvraZFyAdunBPEoLAA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=qC+QQ2Bf; arc=none smtp.client-ip=209.85.222.195
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
-Received: by mail-qk1-f181.google.com with SMTP id af79cd13be357-8c70ab3b5fcso185870885a.2
-        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:04:49 -0800 (PST)
+Received: by mail-qk1-f195.google.com with SMTP id af79cd13be357-8c5349ba802so140085985a.1
+        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:04:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1769720688; x=1770325488; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=p7dwhjhUx8amshGTbVFKhqWt51EOp/YvCZDul2or7c8=;
-        b=VKTj1/CtthKjNpOH14Qy/AaDCYqFfxyeMsekxnh5rv/USxlWS1YmyR4tjvh3AgVh79
-         5bm9Ug8rSMbn1VpSDe66i939pqWE5T8Eeyjv4xye+AfRlq67BCP7onpfV7YzWrzr+S+H
-         w8OAFmEgyr0QgA/4IWRELcaKjn9k3Ceui0Zk88sOL73DA6nKp8k9+EbIHvn+713narDF
-         3J0dm+a/KXchagXdnES2uYVuNIKX9EstUMnaZk9DcgyjqaVHN+TBpumR1+YxGdbV5wuD
-         YAm9calgriXtTNFrKQlghJR3Upds3CKQLjwNYW+kt3vITS2Jf/HSP5oldfUSgAUVSaCt
-         hCaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769720688; x=1770325488;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gourry.net; s=google; t=1769720691; x=1770325491; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=p7dwhjhUx8amshGTbVFKhqWt51EOp/YvCZDul2or7c8=;
-        b=V4czIW20gH8l0kpHtnnJQGXgk2RklvN4pm31qJFmvZYqSug3YhDsF6+iz5TIR9o/Cg
-         48l8IdU6hyK+5oxFTaz6eSmvNEEm0p82bj8mO+t56KOvXRaDnO6H8QbIhsRRaZESL3Df
-         phuvqOYpMtYJ9bQ0vEFsrmGJtXbiiWkLBh9o4i7T8JeEoojHRYHB2uEugxNMi9O7ikZF
-         YFO8LFDMaruDH1VUD6sRzZZK7ay13GjjSa+/YiaF87x8TV3bjkEmCySSzq742WEYqaE5
-         gxA04RK4fWXVZDHBe7Gqj1+UEnnZRpEBvjiBq8P/W0ppur5whvQc1wOzaL9f4QFMAx9A
-         yVyg==
-X-Forwarded-Encrypted: i=1; AJvYcCWdIE+Zav7qbMEXGfeWWoq194mb/JUwtADTU7zxB8+CCH4+AmnaYo5z2b0r94UGdFJLTJmH7ac4Wdo=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yynp4N+AjPs1fNb0heEo5YZ4nU08C0dbuKVK80Ho2myiIAqSaaH
-	sQqkB6LbN/CFL8NMinqKAPTJJQh12xdKKczOkMQJe7tDH5c4q9q3HdzUth8WIBt0RD8=
-X-Gm-Gg: AZuq6aKeExlbGeCq3Y7xOR5yPX8Ivkg50548qgBkNpTyHeNIWNbbApTHRwhvekJ/36v
-	3hO+gpYdP9PzFOq2PXjQ+cFXcvXGmzFlG9lqLB6U00S0WQjQbm7mTn9Oxq7VrYHbYz8Uau0g0+q
-	hcDtzWPORkMHdGlUfznSqMKMCetq9OBD3UV2CL2pHoh+VUqGuENLiCwd/QGdlPf5+Y+TlQdydzo
-	mqqtg7vsCM2vFjrDk8cF3YCK586dis6VyZk451d7pcrxJkavsY74RBnr4l0qdhKWmmKZpXRAEpk
-	t6ypt8rfV/mOohExw+AKVm//IpGEkHxWYnhqrrUH5WZ54Nq7MneOD0WoEDH8HLpuZeGtjRgUvs4
-	1EYOw6YA3lE0Aei5wl3UVxB3L9QAaezCiZSAaHKAyVxoAfyloOtUiDx5rXSq2Ui9cmPuQFMeLg6
-	asLxTMgUeU8c0HANoTdBHDoAq95+JoipDL+WwraCf2X4Gkgkhkx5i5L+MX4ykfY4gfTMO7keC2S
-	idXNCXWSjTyYw==
-X-Received: by 2002:a05:620a:4801:b0:8c5:2d4c:4f0e with SMTP id af79cd13be357-8c9eb26aabbmr143736485a.25.1769720688060;
-        Thu, 29 Jan 2026 13:04:48 -0800 (PST)
+        bh=jFORCx/4rWXlwM5MWzZ4y2ZhtVTmicaaxzmL4W2ym48=;
+        b=qC+QQ2BfI5LPjX/qao3rzwQhsN2mA3Hl5tspU/p8ra1TKa08jShwmEd13jhZBGrJLT
+         dC9WoER48g/QzZ3u68huExwm8c/iX4Qq/q9AuqFSw0t+22UY+4bKmw/8vYVjL59dU0hq
+         sgMPKidtkVAzGkUvSQOMERNFdcHFdtglcIPWxebfBSvbHamvffoUJdJmm0CBarsOPh7u
+         VzuZwq5W502DJxVv33LFq2/tGFxwwI2FAe3JRIMwS5D1i9qk1vLoTdTJjOFaAbl1NFEx
+         z+a2EBi/qNQ1pO14qLwlKxAL9x+zGT7QEPcCUe3V3NxbVbx2OlchfR695JYBppJUGp0Z
+         vMfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769720691; x=1770325491;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=jFORCx/4rWXlwM5MWzZ4y2ZhtVTmicaaxzmL4W2ym48=;
+        b=PYSV3tXtCMRFIozfQPuCUaKycpt3rnNrhtyvxYzOv7b1sgi1Mzd6KTiHbElQJmExJ9
+         cytBcaRj5ETH3EG2gFtYma6ysOyPCaSeZChTNoulUskDFNTDRLMEGhkwLkP+IxNrcB4w
+         Bl5IeBGgLHZfQNCIRRioWEWF8wcKEzSChXE7At6i+m9sgoK3s3bqebAXnFVs0ZgHCq4z
+         T8YhgJLDuFApV3GfybudgWk6DB4W9pxjee84cpfC1WnZQqpKEur+6ToaQDArY2bJDCYq
+         MHb++ez2+d0HmXG8ZWjWyYRgfplINGqZp2TuW/8pxuPxAbyNTYFBonbjZnI/9JF1q/Yb
+         bMag==
+X-Forwarded-Encrypted: i=1; AJvYcCVByK5Lu1aqPifcDvi1NLaSZ2fJj3lw4TmEJy6koVNUn0Pym7MTyY2eg+if9fAV+FcX16Tydp0f3+Y=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz9JgSbC6m22t4sqRJoL+vSYy3jGNMm5koLX7B7NvWIqqnxyiTx
+	T+Tmyu9HG4r6Tio/d3FuorrRUL+TV3yzxOff0U9o7M7IqkmNWow6La8NpiZm1w17no0=
+X-Gm-Gg: AZuq6aJDFNwPTIN3LT7VRseCU6z4qxaFe6mxsuQZ1ybr2htMtSbyyQb/A9cxJxlDFWq
+	s3HnPjitAyfkYZtKqOoHMVu9bHvFFuHl9f4ugWDz6yVCBCkCa1xQ0t8pyFLFi9Ong6vCATkiFRH
+	vXg16rJfoAMptwIksMp1UsmeUk5e2WLGtiwD0PMNBY3AYqVNZ6HLV82jcJcdQh5LfN0IWdgW20d
+	npCc132qv0lnEYp5QrtlXxdUTcsh0T1m1gJIQ047dmSESjbRK3Q9ileVr/ziSO7ACI1fkXtQHMK
+	ALPTZA6kbzipBko6go/xqiGeus6qcbpmlpSbp9QTa7AWvxjwoOSE6mrknz5tOloVzESWH+8wJVY
+	9TCGI/SZCQWhT23JAwv8gso153C+7UTnVbP8Bg9LFc0ZD+R0wP2iGFePnwoAPAVbMrow3WN3Vme
+	vl3HdDLqEtaUiYt1pDmitjxwz+BDQ/xSZSGIqDxzEgB3MoV6aYt9vnLeIn8967q5AVRzVCRF8iQ
+	RA=
+X-Received: by 2002:a05:620a:298d:b0:8c5:391f:1db7 with SMTP id af79cd13be357-8c9eb3119c3mr144724885a.64.1769720690713;
+        Thu, 29 Jan 2026 13:04:50 -0800 (PST)
 Received: from gourry-fedora-PF4VCD3F.lan (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c71b859eaesm282041685a.46.2026.01.29.13.04.47
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c71b859eaesm282041685a.46.2026.01.29.13.04.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jan 2026 13:04:47 -0800 (PST)
+        Thu, 29 Jan 2026 13:04:50 -0800 (PST)
 From: Gregory Price <gourry@gourry.net>
 To: linux-mm@kvack.org
 Cc: linux-cxl@vger.kernel.org,
@@ -93,11 +95,16 @@ Cc: linux-cxl@vger.kernel.org,
 	willy@infradead.org,
 	jack@suse.cz,
 	terry.bowman@amd.com,
-	john@jagalactic.com
-Subject: [PATCH 0/9] cxl: explicit DAX driver selection and hotplug
-Date: Thu, 29 Jan 2026 16:04:33 -0500
-Message-ID: <20260129210442.3951412-1-gourry@gourry.net>
+	john@jagalactic.com,
+	Oscar Salvador <osalvador@suse.de>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	"David Hildenbrand (Red Hat)" <david@kernel.org>
+Subject: [PATCH 1/9] mm/memory_hotplug: pass online_type to online_memory_block() via arg
+Date: Thu, 29 Jan 2026 16:04:34 -0500
+Message-ID: <20260129210442.3951412-2-gourry@gourry.net>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260129210442.3951412-1-gourry@gourry.net>
+References: <20260129210442.3951412-1-gourry@gourry.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -110,112 +117,79 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gourry.net:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_NA(0.00)[gourry.net];
-	TAGGED_FROM(0.00)[bounces-74566-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_TLS_LAST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-74568-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[gourry.net:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,gourry.net:mid,gourry.net:dkim]
-X-Rspamd-Queue-Id: 7C9CAB472C
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-foundation.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,suse.de:email,gourry.net:email,gourry.net:dkim,gourry.net:mid]
+X-Rspamd-Queue-Id: 52B69B47EE
 X-Rspamd-Action: no action
 
-Currently, CXL regions that create DAX devices have no mechanism to
-control select the hotplug online policy for kmem regions at region
-creation time. Users must either rely on a build-time default or
-manually configure each memory block after hotplug occurs.
+Modify online_memory_block() to accept the online type through its arg
+parameter rather than calling mhp_get_default_online_type() internally.
+This prepares for allowing callers to specify explicit online types.
 
-Additionally, there is no explicit way to choose between device_dax
-and dax_kmem modes at region creation time - regions default to kmem.
+Update the caller in add_memory_resource() to pass the default online
+type via a local variable.
 
-This series addresses both issues by:
+No functional change.
 
-1. Plumbing an online_type parameter through the memory hotplug path,
-   from mm/memory_hotplug through the DAX layer, enabling drivers to
-   specify the desired policy (offline, online, online_movable).
+Cc: Oscar Salvador <osalvador@suse.de>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Acked-by: David Hildenbrand (Red Hat) <david@kernel.org>
+Signed-off-by: Gregory Price <gourry@gourry.net>
+---
+ mm/memory_hotplug.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-2. Adding infrastructure for explicit dax driver selection (kmem vs
-   device) when creating CXL DAX regions.
-
-3. Introducing new CXL region drivers that provide a two-stage binding
-   process with user-configurable policy between region creation and
-   memory hotplug.
-
-The new drivers are:
-- cxl_devdax_region: Creates dax_regions that bind to device_dax driver
-- cxl_sysram_region: Creates sysram_region devices with hotplug policy
-- cxl_dax_kmem_region: Probes sysram_regions to create kmem dax_regions
-
-The sysram_region device exposes an 'online_type' sysfs attribute
-allowing users to configure the memory online type before hotplug:
-
-    echo region0 > cxl_sysram_region/bind
-    echo online_movable > sysram_region0/online_type
-    echo sysram_region0 > cxl_dax_kmem_region/bind
-
-This enables explicit control over both the dax driver mode and the
-memory hotplug policy for CXL memory regions.
-
-In the future, with DCD regions, this will also provide a policy step
-which dictates how extents will be surfaces and managed (e.g. if the
-dc region is bound to the sysram driver, it will surface as system
-memory, while the devdax driver will surface extents as new devdax).
-
-Gregory Price (9):
-  mm/memory_hotplug: pass online_type to online_memory_block() via arg
-  mm/memory_hotplug: add __add_memory_driver_managed() with online_type
-    arg
-  dax: plumb online_type from dax_kmem creators to hotplug
-  drivers/cxl,dax: add dax driver mode selection for dax regions
-  cxl/core/region: move pmem region driver logic into pmem_region
-  cxl/core/region: move dax region device logic into dax_region.c
-  cxl/core: add cxl_devdax_region driver for explicit userland region
-    binding
-  cxl/core: Add dax_kmem_region and sysram_region drivers
-  Documentation/driver-api/cxl: add dax and sysram driver documentation
-
- Documentation/ABI/testing/sysfs-bus-cxl       |  21 ++
- .../driver-api/cxl/linux/cxl-driver.rst       |  43 +++
- .../driver-api/cxl/linux/dax-driver.rst       |  29 ++
- drivers/cxl/core/Makefile                     |   3 +
- drivers/cxl/core/core.h                       |  11 +
- drivers/cxl/core/dax_region.c                 | 179 ++++++++++
- drivers/cxl/core/pmem_region.c                | 191 +++++++++++
- drivers/cxl/core/port.c                       |   2 +
- drivers/cxl/core/region.c                     | 321 ++----------------
- drivers/cxl/core/sysram_region.c              | 180 ++++++++++
- drivers/cxl/cxl.h                             |  29 ++
- drivers/dax/bus.c                             |   3 +
- drivers/dax/bus.h                             |   7 +-
- drivers/dax/cxl.c                             |   7 +-
- drivers/dax/dax-private.h                     |   2 +
- drivers/dax/hmem/hmem.c                       |   2 +
- drivers/dax/kmem.c                            |  13 +-
- drivers/dax/pmem.c                            |   2 +
- include/linux/dax.h                           |   5 +
- include/linux/memory_hotplug.h                |   3 +
- mm/memory_hotplug.c                           |  95 ++++--
- 21 files changed, 826 insertions(+), 322 deletions(-)
- create mode 100644 drivers/cxl/core/dax_region.c
- create mode 100644 drivers/cxl/core/pmem_region.c
- create mode 100644 drivers/cxl/core/sysram_region.c
-
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index bc805029da51..87796b617d9e 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -1337,7 +1337,9 @@ static int check_hotplug_memory_range(u64 start, u64 size)
+ 
+ static int online_memory_block(struct memory_block *mem, void *arg)
+ {
+-	mem->online_type = mhp_get_default_online_type();
++	int *online_type = arg;
++
++	mem->online_type = *online_type;
+ 	return device_online(&mem->dev);
+ }
+ 
+@@ -1578,8 +1580,12 @@ int add_memory_resource(int nid, struct resource *res, mhp_t mhp_flags)
+ 		merge_system_ram_resource(res);
+ 
+ 	/* online pages if requested */
+-	if (mhp_get_default_online_type() != MMOP_OFFLINE)
+-		walk_memory_blocks(start, size, NULL, online_memory_block);
++	if (mhp_get_default_online_type() != MMOP_OFFLINE) {
++		int online_type = mhp_get_default_online_type();
++
++		walk_memory_blocks(start, size, &online_type,
++				   online_memory_block);
++	}
+ 
+ 	return ret;
+ error:
 -- 
 2.52.0
 
