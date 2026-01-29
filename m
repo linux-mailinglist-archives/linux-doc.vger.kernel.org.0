@@ -1,82 +1,82 @@
-Return-Path: <linux-doc+bounces-74570-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74572-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sGqeAL3Le2lHIgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74570-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:06:05 +0100
+	id QOQ/Mo3Le2lHIgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74572-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:05:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71D6AB4783
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:06:04 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5981B473A
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:05:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 23B0D3040020
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:05:10 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C4886300D75F
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:05:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48AA735CB85;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4D9735CBD2;
 	Thu, 29 Jan 2026 21:05:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="eSPcV3wN"
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="OUKin7me"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCECB35C18A
-	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:05:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90CE035BDC2
+	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:05:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769720707; cv=none; b=mTvLQEVCvh30msKonyFRn01p4qAt767h0BJoqDToCwsufkIGhtyG8goUsFuW3mIX52oW9xLlhP2ZigtFxxQblDH4C9yVoofFBCeAQNfsBG88JsOpdXU3lB/cHC04IgEdnVFiI6cvWqeWq/bey+bjL5TK8wGobjQHPbWItcqLINs=
+	t=1769720708; cv=none; b=TL0BeNpCZLdgHLHFPCPKOVIkzup1KrQBu3Okn5ZIu7bP8xW1kobwdWFxUF54gyIIRh2YLlukJ914e51+xdhvy2QTKweWmywGGVmTOkP5CRg4q5wRLvjzwncwGJFcv53aB4+LSucuG3aG9938KjGxY/wDmz2lC7dq9FUyIqgS0Xs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769720707; c=relaxed/simple;
-	bh=AXe5PQvLdK8hxmdbrwIXi4vOiSDdinSnNnxoyEcMa4k=;
+	s=arc-20240116; t=1769720708; c=relaxed/simple;
+	bh=iBrRdDjjJNCNPe98g9cITjVy6s0GzL4YINvlGeB4imc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=piw+bC4/NZp1sO3Cb/gJO4BExVT+4/nsAhvlMDRNk4dsZvU9wYl5RPcWZ3SDVMS0FVAHzNq6DIXxyfqMC2ueqEngVDOf37SJSNy1nyhgxpgMMJOjma0qgivxXUTV3gYsrDKiFR9fKsMMKymCyMEnwG/tXyVMIcZJKQ4KUs1gFns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=eSPcV3wN; arc=none smtp.client-ip=209.85.222.180
+	 MIME-Version; b=M7VqrR/XsqZIKdgimZLdftx3xYitRVv8Z0CMHJbyyVEWbj+dMEGWLoY5AZw3YW34GePC7nNNIaDHonVaFS93RRML/OuGcebY2Mv5lTccOSu5W3TEOpfR3leUGXqItR05XYMG1y9vchIbXNHd/u2Tau1Xum88zhd1/rzni2dtA+g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=OUKin7me; arc=none smtp.client-ip=209.85.219.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
-Received: by mail-qk1-f180.google.com with SMTP id af79cd13be357-8c6b16bd040so169026485a.1
-        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:05:02 -0800 (PST)
+Received: by mail-qv1-f42.google.com with SMTP id 6a1803df08f44-8946f12b1cfso16726246d6.0
+        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:05:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1769720702; x=1770325502; darn=vger.kernel.org;
+        d=gourry.net; s=google; t=1769720703; x=1770325503; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lrqa+fxuwjNl7Vx5HUEIUV4yNFrGE6eFCuap5wTqfpc=;
-        b=eSPcV3wNRUoB9dA726Xw13JkAkS5NGKczZi+Y7OtS489wl9YSTW7wlIIR7cX7J2nkv
-         u32fg+zEuw+dhFVc8pxyjkq5VE4WK9Wu8UhtPzrp9PTad7rspX8asj8dKIh3yPdKl9va
-         V6KyMiCNyoEoXChYxmmFd579IELX8k943oQZwEVy6D1iEF2uIKqDZO4rOOD4mNq0uex/
-         KoK/WkKQfGJ8a5MoSGpTlGMrpaLeizvkcty6Gu8CwK2e6bGkdn5F+2EOmQ796VdgH890
-         WG2burwbMMvnGxxib32Z7Os9UYBTpXG5Zv+HxxxqwBeK4fyf8amzLeQcrCKAgPEpisWm
-         W5Aw==
+        bh=mpgSTfoH6x9FkcQxT+wr5JUESeygPnLUnHeiLg7bHkA=;
+        b=OUKin7mehiPc0J+MFPXJDEJ07nav+vz8WRu15f/bWbDd3TZxl2kjWxtA92vxD9AM0/
+         VJcsTrSfMH/h7LrWf+2OR9vPUbqKILssoXvhD7g/dFAkvwI6Cos8ZgVC2Cg3ukwbeFF4
+         LfF2uiNj5t6eyj7Ija1WV720htkSJGf9MJM61Hd11m60So97L4Ocn48yaOV/MfCilFkM
+         EmLpxLLJfjgwBi6Ct/o3uVB4emRpCWf4MrgPB5tvZVbg+rV/wD1/mgM6eHGqd8kfzQ/b
+         mvWMQQ+2d8XeTNdsbpxHuOt/hBBaha2i1kZEDcUhlPEg4PkjoPBXFe1Xy+JJlrL8h0SP
+         8m9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769720702; x=1770325502;
+        d=1e100.net; s=20230601; t=1769720703; x=1770325503;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=lrqa+fxuwjNl7Vx5HUEIUV4yNFrGE6eFCuap5wTqfpc=;
-        b=OyfqzrgX0NoTYotf17cltP1Yvb7BMdwVZ0aLqROMAPM7nrI9dpXqMrO7sB9j/3C8q7
-         /Ggw0KOZ/keD6dkuKYZ9+0pQgyM6MKYMVOSi7KlOfz+HPaNOfYmpZ0ih8rNwWnaMA1en
-         hamFVvbodMgLdRg0L7zGi7jJ8aSDudYERD0jXPwEiQnpIlhOLGk8tW2cUL/b0GnwH7g2
-         nYBu0OvaKVbYWreWyqq8oT/FXA1DV+EaoaX4VRCykzNkrhzCQ7hR8T54BF1i/vkPk12L
-         j8eQ/ojIkKg+I4tnYl/yRRPT2rsApqsTnQ3FVrSRyudYGtRwwosckciFL/arQ2pQwr5J
-         VAoQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUTflcunbR0ef6md4C97BWAU2muq9anansjdExyvkkF/ajxf2yk32sAjTZLn+AsWVYbL7RuOzEzFiE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywz0PzbiZpoDsyKXTXhxiHSeYRumILtOFTTd12SNChFcmz73daJ
-	8Ux06cU9rUaVyauv5dI6ZIPhtsOntRQsqXO29NOvp2mFZXlPVE0bztvcYFBNX3ngPmU=
-X-Gm-Gg: AZuq6aLcUKmwldFvRIfnNIC1mq8UF/rwwPxx8Lc8g52V7j9nvC0zH+RXdcgy9z+0RkA
-	GhsC1cBeOO6ayfaDevlmZ1yjKOVxWVNjBfbUkDdNPlwdLWNUUlzZQvGuMD/oiL/fJ2FrgtV3zp5
-	SA3UskB6qAVEoc0ez0OFdnRrAcJ55DLe1GAe2npUD5jA3zb8Wi4pHV6ARIIi8Mbw+bzFAdjjOdr
-	eX1iFnh8bfUhrEzxyt1jOhf3yedwd4rXxQSQTya32gvxV8CrUuG50fh2/EOefYf+F8O/tBX2j2s
-	tZVecDeITT5uyv5JJELi1U3pCywKev+ohVLPz7wfqMKTkV2Mpx0gxpKsX1Dl4R5AUPcil1sVGgE
-	Lyn+CrrgaaILeL069YXbRpVLFCW2TEU0UthoQKl/W5iCZFDCBO39SBXBLeMCYeOpG45JfAb/Cmy
-	QKVXkepa2VDuon2IUMCVYZ4QhT5CUJpZ4wYfUuKF4b1NfQrFOCHYRGWWb4JFNl5YgT3IF8DHlja
-	6w=
-X-Received: by 2002:a05:620a:4591:b0:8c7:1af9:b868 with SMTP id af79cd13be357-8c9eb28d35cmr167526085a.36.1769720701558;
-        Thu, 29 Jan 2026 13:05:01 -0800 (PST)
+        bh=mpgSTfoH6x9FkcQxT+wr5JUESeygPnLUnHeiLg7bHkA=;
+        b=VZL2MVrjt7r68VOfVbjvUKoKiF2nJ/j4Fy+RuWJtruH9QfSL7ny3FjLFGKyTgRkseV
+         zJ/i0u6ebfHCQWl+lC0Wix3uAFrZfExVQP9t9fRH+pRE2w5a6x4UphAjl1i3ILDLviBx
+         wIATGEqbYZXQbqoZd7xdscvMUy5p6NYduoXaRPnRevLDdD1nCpjw+563HpIPYZ35NuCG
+         tMhbcYxH+zUF2ekuLFECDKrEEfWMegSffiLDHBdDMVE8AsS7UBxskc0tG2T+3IId0HOx
+         Uv9BH86RxPvhLZtzSxop2ymbc3PyOcJ9Qmd5Lka3kTRWIzA0M8Kf5PPLBlqpfsQMyx3P
+         kvxw==
+X-Forwarded-Encrypted: i=1; AJvYcCVNeHIKbenwRz7yHf1AacYxlvRnQbd3ly/KlS7zcNbMQpWe4SUBysJhe/Nhw7OYRsSy2l5vMKqEsXM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxJ+bpUNgNTXsqANXQy8wRRDAjnyV5AlXN0Zt9os7KmwyBg4AcF
+	KeP+ryjEhU8ZkCQ5PwahbrwpimHRpxIABVKVIK+5WpetuWT2D/FMG5R3M7ArS85Q8QE=
+X-Gm-Gg: AZuq6aLwebw0fpxVadl/bOxPYLLiwlZZ+rwWRbbrPS0wCXlmxh1KeiuUbEXORpBDSQ+
+	u///BxfipB0+Fv1m5KkbHnHFo9kkhXnBHTDi7+dB8fQkHwWISD8gusaJwEDKhuvPSJQYf7QCaNp
+	UHTlOoY6TF0Jzy82AdV8utm5z1cB4NylIjKi8hrgZi3FWMWOoWkhlL+dqHGlVm0L4qHNyBY0dHb
+	1XSCHEnehWnNzH2kQ39lmnGOgLiMm0FJyk9VwtRXO5/n6VhXA1u1f9YAqlBxnoKMZ0ggghDlRJ8
+	pRc1bZ/fcp4J5LsGHYrVaZVK6uLFmUjliXYIpcQyMjY9zn+LzqgU6d5xd7h42RG2SPQ84rstEKN
+	knwvUnPo02yLJ27JdDObY/ymhD354ts1FVKSk0rDumK7gFzx2fY9H1oYPt+39YVO0U9w/eLZQsJ
+	8DkPGvcSGjlWtYtBqYimOMp9qTjuFGGCJCJT0xrH7t/bYjtEpU+9RCHC7qIsIU96LLOr6Oege2y
+	6A=
+X-Received: by 2002:ad4:5aa2:0:b0:894:78e4:27cc with SMTP id 6a1803df08f44-894ea026eeemr11955076d6.38.1769720703415;
+        Thu, 29 Jan 2026 13:05:03 -0800 (PST)
 Received: from gourry-fedora-PF4VCD3F.lan (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c71b859eaesm282041685a.46.2026.01.29.13.05.00
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c71b859eaesm282041685a.46.2026.01.29.13.05.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jan 2026 13:05:01 -0800 (PST)
+        Thu, 29 Jan 2026 13:05:03 -0800 (PST)
 From: Gregory Price <gourry@gourry.net>
 To: linux-mm@kvack.org
 Cc: linux-cxl@vger.kernel.org,
@@ -96,9 +96,9 @@ Cc: linux-cxl@vger.kernel.org,
 	jack@suse.cz,
 	terry.bowman@amd.com,
 	john@jagalactic.com
-Subject: [PATCH 6/9] cxl/core/region: move dax region device logic into dax_region.c
-Date: Thu, 29 Jan 2026 16:04:39 -0500
-Message-ID: <20260129210442.3951412-7-gourry@gourry.net>
+Subject: [PATCH 7/9] cxl/core: add cxl_devdax_region driver for explicit userland region binding
+Date: Thu, 29 Jan 2026 16:04:40 -0500
+Message-ID: <20260129210442.3951412-8-gourry@gourry.net>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260129210442.3951412-1-gourry@gourry.net>
 References: <20260129210442.3951412-1-gourry@gourry.net>
@@ -114,7 +114,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -124,292 +124,135 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_NA(0.00)[gourry.net];
-	TAGGED_FROM(0.00)[bounces-74570-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-74572-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[18];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[gourry.net:email,gourry.net:dkim,gourry.net:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 71D6AB4783
+	DBL_BLOCKED_OPENRESOLVER(0.00)[gourry.net:email,gourry.net:dkim,gourry.net:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: B5981B473A
 X-Rspamd-Action: no action
 
-Move the CXL DAX region device infrastructure from region.c into a
-new dax_region.c file.
+Add a new cxl_devdax_region driver that probes CXL regions in device
+dax mode and creates dax_region devices. This allows explicit binding to
+the device_dax dax driver instead of the kmem driver.
 
-No functional changes.
+Exports to_cxl_region() to core.h so it can be used by the driver.
 
 Signed-off-by: Gregory Price <gourry@gourry.net>
 ---
- drivers/cxl/core/Makefile     |   1 +
- drivers/cxl/core/core.h       |   1 +
- drivers/cxl/core/dax_region.c | 113 ++++++++++++++++++++++++++++++++++
- drivers/cxl/core/region.c     | 102 ------------------------------
- 4 files changed, 115 insertions(+), 102 deletions(-)
- create mode 100644 drivers/cxl/core/dax_region.c
+ drivers/cxl/core/core.h       |  2 ++
+ drivers/cxl/core/dax_region.c | 16 ++++++++++++++++
+ drivers/cxl/core/region.c     | 21 +++++++++++++++++----
+ drivers/cxl/cxl.h             |  1 +
+ 4 files changed, 36 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/cxl/core/Makefile b/drivers/cxl/core/Makefile
-index 23269c81fd44..36f284d7c500 100644
---- a/drivers/cxl/core/Makefile
-+++ b/drivers/cxl/core/Makefile
-@@ -17,6 +17,7 @@ cxl_core-y += cdat.o
- cxl_core-y += ras.o
- cxl_core-$(CONFIG_TRACING) += trace.o
- cxl_core-$(CONFIG_CXL_REGION) += region.o
-+cxl_core-$(CONFIG_CXL_REGION) += dax_region.o
- cxl_core-$(CONFIG_CXL_REGION) += pmem_region.o
- cxl_core-$(CONFIG_CXL_MCE) += mce.o
- cxl_core-$(CONFIG_CXL_FEATURES) += features.o
 diff --git a/drivers/cxl/core/core.h b/drivers/cxl/core/core.h
-index 26991de12d76..217dd708a2a6 100644
+index 217dd708a2a6..ea4df8abc2ad 100644
 --- a/drivers/cxl/core/core.h
 +++ b/drivers/cxl/core/core.h
-@@ -43,6 +43,7 @@ int cxl_get_poison_by_endpoint(struct cxl_port *port);
- struct cxl_region *cxl_dpa_to_region(const struct cxl_memdev *cxlmd, u64 dpa);
- u64 cxl_dpa_to_hpa(struct cxl_region *cxlr, const struct cxl_memdev *cxlmd,
- 		   u64 dpa);
-+int devm_cxl_add_dax_region(struct cxl_region *cxlr, enum dax_driver_type);
+@@ -46,6 +46,8 @@ u64 cxl_dpa_to_hpa(struct cxl_region *cxlr, const struct cxl_memdev *cxlmd,
+ int devm_cxl_add_dax_region(struct cxl_region *cxlr, enum dax_driver_type);
  int devm_cxl_add_pmem_region(struct cxl_region *cxlr);
  
++extern struct cxl_driver cxl_devdax_region_driver;
++
  #else
+ static inline u64 cxl_dpa_to_hpa(struct cxl_region *cxlr,
+ 				 const struct cxl_memdev *cxlmd, u64 dpa)
 diff --git a/drivers/cxl/core/dax_region.c b/drivers/cxl/core/dax_region.c
-new file mode 100644
-index 000000000000..0602db5f7248
---- /dev/null
+index 0602db5f7248..391d51e5ec37 100644
+--- a/drivers/cxl/core/dax_region.c
 +++ b/drivers/cxl/core/dax_region.c
-@@ -0,0 +1,113 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright(c) 2022 Intel Corporation. All rights reserved.
-+ * Copyright(c) 2026 Meta Technologies Inc. All rights reserved.
-+ */
-+#include <linux/memory_hotplug.h>
-+#include <linux/device.h>
-+#include <linux/slab.h>
-+#include <cxlmem.h>
-+#include <cxl.h>
-+#include "core.h"
+@@ -111,3 +111,19 @@ int devm_cxl_add_dax_region(struct cxl_region *cxlr,
+ 	put_device(dev);
+ 	return rc;
+ }
 +
-+static void cxl_dax_region_release(struct device *dev)
++static int cxl_devdax_region_driver_probe(struct device *dev)
 +{
-+	struct cxl_dax_region *cxlr_dax = to_cxl_dax_region(dev);
++	struct cxl_region *cxlr = to_cxl_region(dev);
 +
-+	kfree(cxlr_dax);
++	if (cxlr->mode != CXL_PARTMODE_RAM)
++		return -ENODEV;
++
++	return devm_cxl_add_dax_region(cxlr, DAXDRV_DEVICE_TYPE);
 +}
 +
-+static const struct attribute_group *cxl_dax_region_attribute_groups[] = {
-+	&cxl_base_attribute_group,
-+	NULL,
++struct cxl_driver cxl_devdax_region_driver = {
++	.name = "cxl_devdax_region",
++	.probe = cxl_devdax_region_driver_probe,
++	.id = CXL_DEVICE_REGION,
 +};
-+
-+const struct device_type cxl_dax_region_type = {
-+	.name = "cxl_dax_region",
-+	.release = cxl_dax_region_release,
-+	.groups = cxl_dax_region_attribute_groups,
-+};
-+
-+static bool is_cxl_dax_region(struct device *dev)
-+{
-+	return dev->type == &cxl_dax_region_type;
-+}
-+
-+struct cxl_dax_region *to_cxl_dax_region(struct device *dev)
-+{
-+	if (dev_WARN_ONCE(dev, !is_cxl_dax_region(dev),
-+			  "not a cxl_dax_region device\n"))
-+		return NULL;
-+	return container_of(dev, struct cxl_dax_region, dev);
-+}
-+EXPORT_SYMBOL_NS_GPL(to_cxl_dax_region, "CXL");
-+
-+static struct lock_class_key cxl_dax_region_key;
-+
-+static struct cxl_dax_region *cxl_dax_region_alloc(struct cxl_region *cxlr)
-+{
-+	struct cxl_region_params *p = &cxlr->params;
-+	struct cxl_dax_region *cxlr_dax;
-+	struct device *dev;
-+
-+	guard(rwsem_read)(&cxl_rwsem.region);
-+	if (p->state != CXL_CONFIG_COMMIT)
-+		return ERR_PTR(-ENXIO);
-+
-+	cxlr_dax = kzalloc(sizeof(*cxlr_dax), GFP_KERNEL);
-+	if (!cxlr_dax)
-+		return ERR_PTR(-ENOMEM);
-+
-+	cxlr_dax->hpa_range.start = p->res->start;
-+	cxlr_dax->hpa_range.end = p->res->end;
-+
-+	dev = &cxlr_dax->dev;
-+	cxlr_dax->cxlr = cxlr;
-+	device_initialize(dev);
-+	lockdep_set_class(&dev->mutex, &cxl_dax_region_key);
-+	device_set_pm_not_required(dev);
-+	dev->parent = &cxlr->dev;
-+	dev->bus = &cxl_bus_type;
-+	dev->type = &cxl_dax_region_type;
-+
-+	return cxlr_dax;
-+}
-+
-+static void cxlr_dax_unregister(void *_cxlr_dax)
-+{
-+	struct cxl_dax_region *cxlr_dax = _cxlr_dax;
-+
-+	device_unregister(&cxlr_dax->dev);
-+}
-+
-+int devm_cxl_add_dax_region(struct cxl_region *cxlr,
-+			    enum dax_driver_type dax_driver)
-+{
-+	struct cxl_dax_region *cxlr_dax;
-+	struct device *dev;
-+	int rc;
-+
-+	cxlr_dax = cxl_dax_region_alloc(cxlr);
-+	if (IS_ERR(cxlr_dax))
-+		return PTR_ERR(cxlr_dax);
-+
-+	cxlr_dax->online_type = mhp_get_default_online_type();
-+	cxlr_dax->dax_driver = dax_driver;
-+	dev = &cxlr_dax->dev;
-+	rc = dev_set_name(dev, "dax_region%d", cxlr->id);
-+	if (rc)
-+		goto err;
-+
-+	rc = device_add(dev);
-+	if (rc)
-+		goto err;
-+
-+	dev_dbg(&cxlr->dev, "%s: register %s\n", dev_name(dev->parent),
-+		dev_name(dev));
-+
-+	return devm_add_action_or_reset(&cxlr->dev, cxlr_dax_unregister,
-+					cxlr_dax);
-+err:
-+	put_device(dev);
-+	return rc;
-+}
 diff --git a/drivers/cxl/core/region.c b/drivers/cxl/core/region.c
-index fc56f8f03805..61ec939c1462 100644
+index 61ec939c1462..6200ca1cc2dd 100644
 --- a/drivers/cxl/core/region.c
 +++ b/drivers/cxl/core/region.c
-@@ -3196,108 +3196,6 @@ static int region_offset_to_dpa_result(struct cxl_region *cxlr, u64 offset,
- 	return -ENXIO;
+@@ -39,8 +39,6 @@
+  */
+ static nodemask_t nodemask_region_seen = NODE_MASK_NONE;
+ 
+-static struct cxl_region *to_cxl_region(struct device *dev);
+-
+ #define __ACCESS_ATTR_RO(_level, _name) {				\
+ 	.attr	= { .name = __stringify(_name), .mode = 0444 },		\
+ 	.show	= _name##_access##_level##_show,			\
+@@ -2430,7 +2428,7 @@ bool is_cxl_region(struct device *dev)
+ }
+ EXPORT_SYMBOL_NS_GPL(is_cxl_region, "CXL");
+ 
+-static struct cxl_region *to_cxl_region(struct device *dev)
++struct cxl_region *to_cxl_region(struct device *dev)
+ {
+ 	if (dev_WARN_ONCE(dev, dev->type != &cxl_region_type,
+ 			  "not a cxl_region device\n"))
+@@ -3726,11 +3724,26 @@ static struct cxl_driver cxl_region_driver = {
+ 
+ int cxl_region_init(void)
+ {
+-	return cxl_driver_register(&cxl_region_driver);
++	int rc;
++
++	rc = cxl_driver_register(&cxl_region_driver);
++	if (rc)
++		return rc;
++
++	rc = cxl_driver_register(&cxl_devdax_region_driver);
++	if (rc)
++		goto err_dax;
++
++	return 0;
++
++err_dax:
++	cxl_driver_unregister(&cxl_region_driver);
++	return rc;
  }
  
--static void cxl_dax_region_release(struct device *dev)
--{
--	struct cxl_dax_region *cxlr_dax = to_cxl_dax_region(dev);
--
--	kfree(cxlr_dax);
--}
--
--static const struct attribute_group *cxl_dax_region_attribute_groups[] = {
--	&cxl_base_attribute_group,
--	NULL,
--};
--
--const struct device_type cxl_dax_region_type = {
--	.name = "cxl_dax_region",
--	.release = cxl_dax_region_release,
--	.groups = cxl_dax_region_attribute_groups,
--};
--
--static bool is_cxl_dax_region(struct device *dev)
--{
--	return dev->type == &cxl_dax_region_type;
--}
--
--struct cxl_dax_region *to_cxl_dax_region(struct device *dev)
--{
--	if (dev_WARN_ONCE(dev, !is_cxl_dax_region(dev),
--			  "not a cxl_dax_region device\n"))
--		return NULL;
--	return container_of(dev, struct cxl_dax_region, dev);
--}
--EXPORT_SYMBOL_NS_GPL(to_cxl_dax_region, "CXL");
--
--static struct lock_class_key cxl_dax_region_key;
--
--static struct cxl_dax_region *cxl_dax_region_alloc(struct cxl_region *cxlr)
--{
--	struct cxl_region_params *p = &cxlr->params;
--	struct cxl_dax_region *cxlr_dax;
--	struct device *dev;
--
--	guard(rwsem_read)(&cxl_rwsem.region);
--	if (p->state != CXL_CONFIG_COMMIT)
--		return ERR_PTR(-ENXIO);
--
--	cxlr_dax = kzalloc(sizeof(*cxlr_dax), GFP_KERNEL);
--	if (!cxlr_dax)
--		return ERR_PTR(-ENOMEM);
--
--	cxlr_dax->hpa_range.start = p->res->start;
--	cxlr_dax->hpa_range.end = p->res->end;
--
--	dev = &cxlr_dax->dev;
--	cxlr_dax->cxlr = cxlr;
--	device_initialize(dev);
--	lockdep_set_class(&dev->mutex, &cxl_dax_region_key);
--	device_set_pm_not_required(dev);
--	dev->parent = &cxlr->dev;
--	dev->bus = &cxl_bus_type;
--	dev->type = &cxl_dax_region_type;
--
--	return cxlr_dax;
--}
--
--static void cxlr_dax_unregister(void *_cxlr_dax)
--{
--	struct cxl_dax_region *cxlr_dax = _cxlr_dax;
--
--	device_unregister(&cxlr_dax->dev);
--}
--
--static int devm_cxl_add_dax_region(struct cxl_region *cxlr,
--				   enum dax_driver_type dax_driver)
--{
--	struct cxl_dax_region *cxlr_dax;
--	struct device *dev;
--	int rc;
--
--	cxlr_dax = cxl_dax_region_alloc(cxlr);
--	if (IS_ERR(cxlr_dax))
--		return PTR_ERR(cxlr_dax);
--
--	cxlr_dax->online_type = mhp_get_default_online_type();
--	cxlr_dax->dax_driver = dax_driver;
--	dev = &cxlr_dax->dev;
--	rc = dev_set_name(dev, "dax_region%d", cxlr->id);
--	if (rc)
--		goto err;
--
--	rc = device_add(dev);
--	if (rc)
--		goto err;
--
--	dev_dbg(&cxlr->dev, "%s: register %s\n", dev_name(dev->parent),
--		dev_name(dev));
--
--	return devm_add_action_or_reset(&cxlr->dev, cxlr_dax_unregister,
--					cxlr_dax);
--err:
--	put_device(dev);
--	return rc;
--}
--
- static int match_decoder_by_range(struct device *dev, const void *data)
+ void cxl_region_exit(void)
  {
- 	const struct range *r1, *r2 = data;
++	cxl_driver_unregister(&cxl_devdax_region_driver);
+ 	cxl_driver_unregister(&cxl_region_driver);
+ }
+ 
+diff --git a/drivers/cxl/cxl.h b/drivers/cxl/cxl.h
+index c06a239c0008..674d5f870c70 100644
+--- a/drivers/cxl/cxl.h
++++ b/drivers/cxl/cxl.h
+@@ -859,6 +859,7 @@ int cxl_dvsec_rr_decode(struct cxl_dev_state *cxlds,
+ 			struct cxl_endpoint_dvsec_info *info);
+ 
+ bool is_cxl_region(struct device *dev);
++struct cxl_region *to_cxl_region(struct device *dev);
+ 
+ extern const struct bus_type cxl_bus_type;
+ 
 -- 
 2.52.0
 
