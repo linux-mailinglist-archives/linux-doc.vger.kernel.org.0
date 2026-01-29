@@ -1,106 +1,92 @@
-Return-Path: <linux-doc+bounces-74574-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74576-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MFluJt/Le2lHIgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74574-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:06:39 +0100
+	id QCdSAIzOe2l4IgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74576-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:18:04 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B0A3B47A1
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:06:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 727C4B48B3
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 22:18:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5B9B6304D120
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:05:22 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AA8373014432
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Jan 2026 21:18:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 009E135DD19;
-	Thu, 29 Jan 2026 21:05:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4500432E723;
+	Thu, 29 Jan 2026 21:18:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="QmxxnYP9"
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="OzrkhGqF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com [209.85.222.196])
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 366D735CBA5
-	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:05:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.196
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6A9B2EE268
+	for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 21:17:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769720711; cv=none; b=UFuepePJE6CUhFrTIwuVGqu2b1QWxsHQ5oynajmrd+/iTRZhcDG9vjrvtN2Byiu0o9Jj74YjsxUApdRB3wzBlCGs0l1NyKqYMo+3JK41YLPHl1T2U7YYghq+nOfstqdDVuWCB4pFan+AHIRU/ZX2kkGtKfqKmJJjLmkZFK6YzZ0=
+	t=1769721480; cv=none; b=Yda65YKEV28PrjPiJ9+x/ihrOhaesAFiUD5YOHhYjyNqpEaJdIKdlNkM7yoZ2AivAO/QZV5DQd6W8mswt/WAc2Dx9a89/6h+P14as2bkdRLTQe/kfqOMiovjnSo+uK3UcO4LxgIPfDnlOZ0z+kjyxcMxdfuFvmOO6L5+XZoNXDI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769720711; c=relaxed/simple;
-	bh=Ysme87URA8h80dz3v+yZIs8qliOaAmjArpOmGNPSVUI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=QjPoUfdf9HWV5GhWEFpl4a+izrgui7aB2klv9A6TUSC2Jty1N8p6smCHWU+5/sDckc1QuRYsgz5cEejfnzl9Al3FJ2refJOKwKtMa7Y2LiTH1HUEzYUhUreTBTuRIK0mld4oU1yejAKWd4wa1NzQOj32nj0gwbiyM1DX2nwbpgQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=QmxxnYP9; arc=none smtp.client-ip=209.85.222.196
+	s=arc-20240116; t=1769721480; c=relaxed/simple;
+	bh=l9xIkbZKM30zA9x2QI+alFDGiuf8CP4pmINW3Kx7q0w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mNIWJx1IIht02bkrwPLfmThNae1gXhC/HKEjkRiHQDj7QE3z2hvwFH+koslZca3ty9APfABOmuz1x4YfQpCnawy/VVSvJl/6n0eQLPQPAse+Xt1iZx4HXWem6PySnj+o/hcl/cPqdPk7LRoBKD2dOQszVIxwPNWyI8ApnG58OTQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=OzrkhGqF; arc=none smtp.client-ip=209.85.219.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
-Received: by mail-qk1-f196.google.com with SMTP id af79cd13be357-8c6d76b9145so156421885a.2
-        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:05:09 -0800 (PST)
+Received: by mail-qv1-f42.google.com with SMTP id 6a1803df08f44-8946a794e4fso16776256d6.2
+        for <linux-doc@vger.kernel.org>; Thu, 29 Jan 2026 13:17:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1769720708; x=1770325508; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2izjfMr9wFUktZXLnWxTLQ+Uf13Bf1lvXAJZzNDICcs=;
-        b=QmxxnYP9qHqlX5teNx+fVssa6DDhCzWbcI8iRZ9qLS4T3A29ArWI7Yu3NRGNyq7euZ
-         lqS8/NeIgmYLUmi3GxySKkroid0G1b8vXKX8PuW+mBk+QAsPcXm470wilU6yfHMowbMQ
-         epubSFk+CkBbixUrXGBerZKw/U2NoQNczMzprZ3AAX5Vr4AAANFC+JxzGKEhZRtMnzyX
-         3uMSJN4OYc/7dS8I08Oi6iLXveO1yZywqcVZWP8h2zJVsLGxWo5p3Y+HyIN0+nXXxCG2
-         RIDF1t++cOFMIw+zzv37v6DELRkVluXfCMfnVsxP3zbA07W7t3eAL+1Sm5+JJXYZFojP
-         yztg==
+        d=gourry.net; s=google; t=1769721478; x=1770326278; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=l9xIkbZKM30zA9x2QI+alFDGiuf8CP4pmINW3Kx7q0w=;
+        b=OzrkhGqFaNFbcrvM7g0osWSQziuBpkIMijxxE5yuoXwUH64v1YQlRXRpS4eR2V0NB3
+         ETTgSrHxAniIfkIxxbqhavTtU8tj/CtKW7XGIyj7D5LLXC9z2jnd4bqwlLPSgCQpE28e
+         xU+6NkggMaN3OvjPjHZTJgUzqufnDxxVGbz5XHcOEGi42kC2RohF6tEdciVlPLrcQYDJ
+         qRjmqKDReOX6bFYn0vuCpxjbLuXYMh6t4FTZmLyCyDINc2awm++RFe0yLaIr14NifjVT
+         2Q5jS+FdjZTa5AJB7iuz4gE7DA/2hZhyMgmJbM4jEx7pwU/h0HbokNyOVZ1yKKZEo87w
+         Qu3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769720708; x=1770325508;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=2izjfMr9wFUktZXLnWxTLQ+Uf13Bf1lvXAJZzNDICcs=;
-        b=ZmeNnMmbHarPnJIaKOkjXR40vEOAQxqCSp3iyYthQM55D6uRrcNEAVmjL6bU+s1q/Q
-         L7lsM/7pTmFMv7AiYcfx+xLWz/2Tc/k1Y1cyhBBLkEdDXN/czl2pJcMML9krvXFPDJlO
-         Yv0Lk91cc1K89FxxcZQam4GqAnl+UQOujaLriYott/ncGlDxqqLDmilkBzDhw6J5SVcy
-         +O8uzZGyMdbeUawFAcBHoP+cpuCZ66+kJlnMXpERlPz+mpp5XxOEvKY41xdVmky4QcpX
-         vdz+Vpfhi1Z9poMYt5OEuICLslLyoRX07N+I3gdNMD1995N5RFa6PvVpsKEfI2KP0ov1
-         mQ3w==
-X-Forwarded-Encrypted: i=1; AJvYcCWXg8hyrnt7hFZ3tcIjBMwihrbGxMbPbSsM9umYxNYfILTOadC3u84OCwHnjtgpYMrPmcDWgKwR8uo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwhXke1xVRr/2+teWvWaTMxpik1MI2v7yX00jCArgusqgPxTGiz
-	kdxD2VX3FdfLNS4YtufSv3xB4tP8c5/uhhoOak8bsjYioZJGyxb6Pwjj1s0yd0+m7gA=
-X-Gm-Gg: AZuq6aJ73QDkF/Xrzp5Be6tEWWWGm8s1LU+a0CR8/89MdcLwTegenOVckOUxLCAe5aM
-	X5CowFmZIoIFsJQanrjoXFNb62BYzjbw1jDVXVhwCbQkKRrfvn+zELIV4fM22PyoA/Rgm9UjLf3
-	EL1C+4GyVC8AqLhD90/Mav4ASZaQ6iP4xdUByF1cBbr9hR3+IWuFPYj5dtYZyhqxzo2CgdaT8UM
-	M47M46TMyr0EgirFwf28Cre/dgIysXLNzLjzBz4pF16hqukVAVTbAGYrteyqSQwVEutVt6aevjl
-	RFDXSqmFboOzbIn9FohH0UCdad1U9bm/ahRF0Dmr+vnzq/YWUAHF0EVCqwLmj2yNd2se5PEeNkf
-	PicsBLytLiHEg8M70ua7lYdoFBMO49CXSaEdYUC7+o6yKEDUBoXVal9srAqWkoOimuiuFWSbjh5
-	lme2ef7xsHWWBQ1cv2sx0A4fFf6YY1FyazMtpf7iiWLS3HGuPI4X3+dfhM64ZBbTaHbRN4LTS+O
-	n6sqEQfijla1Q==
-X-Received: by 2002:a05:620a:2845:b0:8a4:e7f6:bf57 with SMTP id af79cd13be357-8c9eb258c5dmr134323385a.5.1769720708025;
-        Thu, 29 Jan 2026 13:05:08 -0800 (PST)
-Received: from gourry-fedora-PF4VCD3F.lan (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c71b859eaesm282041685a.46.2026.01.29.13.05.06
+        d=1e100.net; s=20230601; t=1769721478; x=1770326278;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=l9xIkbZKM30zA9x2QI+alFDGiuf8CP4pmINW3Kx7q0w=;
+        b=BrXhX2dBAKLD05ZSMXLrgal39o+I4356kDsVQF9iSKP5Gjcxo2AN5Trhy9Y9QiRNlP
+         Gu9r9unIa24GEPhcLA2f6365Ag4iBfhi2ZrsqyNY+va8/ztvIzl2eYdqhPc9721mVS9u
+         f/mp37ZrwMEnjEtbvCps4drXeJo8cIvVrGGngBenKmByRhYPLBrZJvdOjVHPw6PFx2jb
+         tQgZvJAPuXZ9p9CIdtMcwYSXxogaGW5F3bIdSUa4CAD8yWx1RH3aj9N0g5Ws2f6/+oYn
+         s8Pm0n6reLaX0IsfwhRcXtfe7Rcefv/cvEEy5a0xVe4DXmL3ebFLbXagfZcinbyJP/QY
+         ArqQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVtGU918PAcpXeWE/SstnfwlnCnN5ukCYVmfnL4ZMoPHRnCK9YkNGyJ0xnAxJzaxsdSMUfVLV7IkpM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz4fJgVmhwlM53YmSKQvokKIeBbV892Tdb6lX717IPVUrY+uIZw
+	8tJsUo7XSDldTigTO7aRo4+A9xj/ffyaMYkBIQOngWQud/qQ0wTxHkvyhvm1DJLnPtM=
+X-Gm-Gg: AZuq6aJLoDquvEwqak6y7T6ELFhLhY/E5lFkoWwZSKaLGKSo8YrqcWQiLx4QdJbs6vT
+	7+SfVlYSZYGpNR8/Q+mwmw6TBEp873dwNWAtaoRo7l95lqgAT0L9+FxELZUHx9b1oztZ9pBAM0l
+	dN8T3DyJg53k5R1q0bu51jwlo0MvWk/VaJDDuuRCROGCc9BYMjeLvl6pL7aC4agjH+iRE/HYA0i
+	m8TOx/mLjMJy/Z+i23osbWo6XJVumqgSuWLhZaec/7T74/Shw1CkPQ6WBjl8pPmk0bGyD7RNzaP
+	w9Rj+8gx6ewovqFvtvLGE7MlOTNlTiRc1h68rqNRfQcEkaIn+0SiJyOkZ9ErPXnuvsdh0rO0xpf
+	JKlCyIQpTG9AKzrZdq+NphfDIdTEaG5YiLAwcADsdyF3ZHq0b6YdDYVUqOYfaEJZ8fmyoFpSLzh
+	wbYkrpjL3xa+iUEL3TZbAZyhm2JHHphinkrSjBUQ+0Q6w+WSf6RNdheVEGfSBmQMPpFAhJyg==
+X-Received: by 2002:a05:6214:401d:b0:894:71c0:6fc with SMTP id 6a1803df08f44-894ea1170b8mr13110576d6.57.1769721477709;
+        Thu, 29 Jan 2026 13:17:57 -0800 (PST)
+Received: from gourry-fedora-PF4VCD3F (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-894d36a5ca2sm44936276d6.7.2026.01.29.13.17.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jan 2026 13:05:07 -0800 (PST)
+        Thu, 29 Jan 2026 13:17:57 -0800 (PST)
+Date: Thu, 29 Jan 2026 16:17:55 -0500
 From: Gregory Price <gourry@gourry.net>
 To: linux-mm@kvack.org
-Cc: linux-cxl@vger.kernel.org,
-	nvdimm@lists.linux.dev,
-	linux-fsdevel@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	kernel-team@meta.com,
-	dave@stgolabs.net,
-	jonathan.cameron@huawei.com,
-	dave.jiang@intel.com,
-	alison.schofield@intel.com,
-	vishal.l.verma@intel.com,
-	ira.weiny@intel.com,
-	dan.j.williams@intel.com,
-	willy@infradead.org,
-	jack@suse.cz,
-	terry.bowman@amd.com,
-	john@jagalactic.com
-Subject: [PATCH 9/9] Documentation/driver-api/cxl: add dax and sysram driver documentation
-Date: Thu, 29 Jan 2026 16:04:42 -0500
-Message-ID: <20260129210442.3951412-10-gourry@gourry.net>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260129210442.3951412-1-gourry@gourry.net>
+Cc: linux-cxl@vger.kernel.org, nvdimm@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, kernel-team@meta.com, dave@stgolabs.net,
+	jonathan.cameron@huawei.com, dave.jiang@intel.com,
+	alison.schofield@intel.com, vishal.l.verma@intel.com,
+	ira.weiny@intel.com, dan.j.williams@intel.com, willy@infradead.org,
+	jack@suse.cz, terry.bowman@amd.com, john@jagalactic.com
+Subject: Re: [PATCH 0/9] cxl: explicit DAX driver selection and hotplug
+Message-ID: <aXvOgw2rc8X7Cqxa@gourry-fedora-PF4VCD3F>
 References: <20260129210442.3951412-1-gourry@gourry.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -108,143 +94,44 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260129210442.3951412-1-gourry@gourry.net>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-74576-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[gourry.net:+];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_NA(0.00)[gourry.net];
-	TAGGED_FROM(0.00)[bounces-74574-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,gourry.net:email,gourry.net:dkim,gourry.net:mid]
-X-Rspamd-Queue-Id: 2B0A3B47A1
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,gourry.net:dkim]
+X-Rspamd-Queue-Id: 727C4B48B3
 X-Rspamd-Action: no action
 
-Explain the binding process for sysram and daxdev regions which are
-explicit about which dax driver to use during region creation.
 
-Jonathan Corbet <corbet@lwn.net> 
-Signed-off-by: Gregory Price <gourry@gourry.net>
----
- .../driver-api/cxl/linux/cxl-driver.rst       | 43 +++++++++++++++++++
- .../driver-api/cxl/linux/dax-driver.rst       | 29 +++++++++++++
- 2 files changed, 72 insertions(+)
+Annoyingly, my email client has been truncating my titles:
 
-diff --git a/Documentation/driver-api/cxl/linux/cxl-driver.rst b/Documentation/driver-api/cxl/linux/cxl-driver.rst
-index dd6dd17dc536..1f857345e896 100644
---- a/Documentation/driver-api/cxl/linux/cxl-driver.rst
-+++ b/Documentation/driver-api/cxl/linux/cxl-driver.rst
-@@ -445,6 +445,49 @@ for more details. ::
-     dax0.0      devtype  modalias   uevent
-     dax_region  driver   subsystem
- 
-+DAX regions are created when a CXL RAM region is bound to one of the
-+following drivers:
-+
-+* :code:`cxl_devdax_region` - Creates a dax_region for device_dax mode.
-+  The resulting DAX device provides direct userspace access via
-+  :code:`/dev/daxN.Y`.
-+
-+* :code:`cxl_dax_kmem_region` - Creates a dax_region for kmem mode via a
-+  sysram_region intermediate device.  See `Sysram Region`_ below.
-+
-+Sysram Region
-+~~~~~~~~~~~~~
-+A `Sysram Region` is an intermediate device between a CXL `Memory Region`
-+and a `DAX Region` for kmem mode.  It is created when a CXL RAM region is
-+bound to the :code:`cxl_sysram_region` driver.
-+
-+The sysram_region device provides an interposition point where users can
-+configure memory hotplug policy before the underlying dax_region is created
-+and memory is hotplugged to the system.
-+
-+The device hierarchy for kmem mode is::
-+
-+  regionX -> sysram_regionX -> dax_regionX -> daxX.Y
-+
-+The sysram_region exposes an :code:`online_type` attribute that controls
-+how memory will be onlined when the dax_kmem driver binds:
-+
-+* :code:`invalid` - Not configured (default). Blocks driver binding.
-+* :code:`offline` - Memory will not be onlined automatically.
-+* :code:`online` - Memory will be onlined in ZONE_NORMAL.
-+* :code:`online_movable` - Memory will be onlined in ZONE_MOVABLE.
-+
-+Example two-stage binding process::
-+
-+  # Bind region to sysram_region driver
-+  echo region0 > /sys/bus/cxl/drivers/cxl_sysram_region/bind
-+
-+  # Configure memory online type
-+  echo online_movable > /sys/bus/cxl/devices/sysram_region0/online_type
-+
-+  # Bind sysram_region to dax_kmem_region driver
-+  echo sysram_region0 > /sys/bus/cxl/drivers/cxl_dax_kmem_region/bind
-+
- Mailbox Interfaces
- ------------------
- A mailbox command interface for each device is exposed in ::
-diff --git a/Documentation/driver-api/cxl/linux/dax-driver.rst b/Documentation/driver-api/cxl/linux/dax-driver.rst
-index 10d953a2167b..2b8e21736292 100644
---- a/Documentation/driver-api/cxl/linux/dax-driver.rst
-+++ b/Documentation/driver-api/cxl/linux/dax-driver.rst
-@@ -17,6 +17,35 @@ The DAX subsystem exposes this ability through the `cxl_dax_region` driver.
- A `dax_region` provides the translation between a CXL `memory_region` and
- a `DAX Device`.
- 
-+CXL DAX Region Drivers
-+======================
-+CXL provides multiple drivers for creating DAX regions, each suited for
-+different use cases:
-+
-+cxl_devdax_region
-+-----------------
-+The :code:`cxl_devdax_region` driver creates a dax_region configured for
-+device_dax mode.  When a CXL RAM region is bound to this driver, the
-+resulting DAX device provides direct userspace access via :code:`/dev/daxN.Y`.
-+
-+Device hierarchy::
-+
-+  regionX -> dax_regionX -> daxX.Y
-+
-+This is the simplest path for applications that want to manage CXL memory
-+directly from userspace.
-+
-+cxl_dax_kmem_region
-+-------------------
-+For kmem mode, CXL provides a two-stage binding process that allows users
-+to configure memory hotplug policy before memory is added to the system.
-+
-+The :code:`cxl_dax_kmem_region` driver then binds a sysram_region
-+device and creates a dax_region configured for kmem mode.
-+
-+The :code:`online_type` policy will be passed from sysram_region to
-+the dax kmem driver for use when hotplugging the memory.
-+
- DAX Device
- ==========
- A `DAX Device` is a file-like interface exposed in :code:`/dev/daxN.Y`. A
--- 
-2.52.0
+cxl: explicit DAX driver selection and hotplug policy for CXL regions
 
+~Gregory
 
