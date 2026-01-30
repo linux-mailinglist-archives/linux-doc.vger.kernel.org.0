@@ -1,157 +1,238 @@
-Return-Path: <linux-doc+bounces-74629-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74632-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4Ff7FyQdfGmAKgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74629-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:53:24 +0100
+	id 0JFBGwEefGmAKgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74632-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:57:05 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8691B699D
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:53:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA77CB6A28
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:57:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5194D300D943
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 02:53:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 589C830057A1
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 02:56:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C90B2FD1CF;
-	Fri, 30 Jan 2026 02:53:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EvvRrFs3"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC8A2330D22;
+	Fri, 30 Jan 2026 02:56:20 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 600802F99AD;
-	Fri, 30 Jan 2026 02:53:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD8917E0E8;
+	Fri, 30 Jan 2026 02:56:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769741601; cv=none; b=gi8GeyL+gyt2DXnrIiznh1oGJJ0gLtjQHYizeeYJtV0VLQu8y29JD6gODdC2Md8WDzHZgHpEMW3aQYvtGDG8GkD5xdDJX/7FThGp+iG/bk+7U9eJW2kFKZ5V4Swzp6aG9FwQ5B3YpEkDaJYQd7xl7qf6bdx72MGi7whauAdnMP8=
+	t=1769741780; cv=none; b=A0Fs3tXFKTNcX9OrhrQFXIPwI1MN08+SCB25rAJfQQsjsupy/b5agpVM+dq+07WrgCiQk1GLmEpYEGKZpkGOredJ9UiKpy+ANA+lt/6ij5Nx0WmmLZ3cHEXdt03NAuzF61nGCOHOZc72GKcNo1dFmO8Pxgqtt1ebA6ucHh3L7RM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769741601; c=relaxed/simple;
-	bh=p5JasSD4IQZuvox2fyRIr9Gdi5bOXFkGxTunRvaq0dk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Z7FMG6O/V5U4OHbTFYwpEtt+L5eSOoWsIy4E16AfwvDP8ZNPkjRuuQCLjfAkNF5s/Ij+4eW4MsHgJ8cxIUuLV7PYTLnLgTCXPK+uzyzpjYsl2qH8ygSyCCqRSlmFxYSkY2yMjJx/Xh2uNCTYsqzO7/r7d4NB0Z12/KAfCcxMchQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EvvRrFs3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 779E7C4CEF7;
-	Fri, 30 Jan 2026 02:53:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769741601;
-	bh=p5JasSD4IQZuvox2fyRIr9Gdi5bOXFkGxTunRvaq0dk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=EvvRrFs3ulBjln6SQAeoTYBfblkJtE8Ft66bzBN5CpREKQTt16GqeXsiMiCUY31gP
-	 536GE0exuOME9T7riuuZsxLJIt2XroiRS4HgiYW+nocIEwmcx8lz48IiWL0YUFWt7k
-	 kaFc3uQmiJh7WO1olnSm2NikZA4Dnt6bDgDuGWarmGG6cO3/3RuLSqqiOMunq0brqj
-	 2eSx1iNSiX3Iz/ace80skveTmF0Dwsk1iyQ0lkNHQ/FlJLoeuzF+OSYjM0lDIuAVz/
-	 JrZoJ8zfjSsNMcv01wMs5Fd2daIjM9GzBOfvc/JmVsFEGXOXBHxN2wCs9aeMnB3Bd/
-	 WOG6eo1WZ7oiA==
-Message-ID: <feabcb08-bbc1-4d99-8529-7f3a7a442fcf@kernel.org>
-Date: Fri, 30 Jan 2026 11:53:17 +0900
+	s=arc-20240116; t=1769741780; c=relaxed/simple;
+	bh=1CoTAwVnAdJzTCMVTY8D3AXdGTsE+x1yRXkX5wJQ4/w=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QEKCwdeTJ1l+QjPtpCnsgybkGJmS51NQ50kFH6uAAWt4EOPNJ0SO5ZF5iRvdRLqKXzYfxPTy7paSL1dh3dvEfP0l29IWAzPCckRW6xy806LsK8c8d+5woYR/WCSLi0hnMtik50FCY9JcXK7TbwbJSXx9gZ/Bqip8PxQjH+Zqi2I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.40.57.136])
+	by gateway (Coremail) with SMTP id _____8CxacLGHXxpeCQOAA--.45972S3;
+	Fri, 30 Jan 2026 10:56:06 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.40.57.136])
+	by front1 (Coremail) with SMTP id qMiowJCxHOGzHXxpRvM5AA--.45456S2;
+	Fri, 30 Jan 2026 10:55:47 +0800 (CST)
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+To: chenhuacai@kernel.org,
+	kernel@xen0n.name,
+	corbet@lwn.net,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	tglx@linutronix.de,
+	jiaxun.yang@flygoat.com,
+	peterz@infradead.org,
+	wangliupu@loongson.cn,
+	lvjianmin@loongson.cn,
+	maobibo@loongson.cn,
+	siyanteng@cqsoftware.com.cn,
+	gaosong@loongson.cn,
+	yangtiezhu@loongson.cn
+Cc: loongarch@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>
+Subject: [PATCH v9 0/4] Loongarch irq-redirect support
+Date: Fri, 30 Jan 2026 10:55:39 +0800
+Message-ID: <20260130025545.2140543-1-zhangtianyang@loongson.cn>
+X-Mailer: git-send-email 2.41.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] PCI: endpoint: pci-epf-test: Allow overriding default
- BAR sizes
-To: Niklas Cassel <cassel@kernel.org>, Manivannan Sadhasivam
- <mani@kernel.org>, =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?=
- <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, Jonathan Corbet <corbet@lwn.net>
-Cc: Frank.Li@nxp.com, Koichiro Den <den@valinux.co.jp>,
- linux-pci@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20260129132324.2036310-2-cassel@kernel.org>
-Content-Language: en-US
-From: Damien Le Moal <dlemoal@kernel.org>
-Organization: Western Digital Research
-In-Reply-To: <20260129132324.2036310-2-cassel@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJCxHOGzHXxpRvM5AA--.45456S2
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBj93XoWxGF4UKr1DZry5Cr1UJF1rXwc_yoW7JFyfpF
+	W7uas8trsYkrWxG3Z7ua18uFy3uryfGrW3Xa1fCw1a93s8ur1q9F1xKF98XFy8Grs5K3W2
+	qr4qq3yUua4DAagCm3ZEXasCq-sJn29KB7ZKAUJUUUUD529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUmjb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+	xVW8Jr0_Cr1UM2kKe7AKxVWUAVWUtwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
+	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
+	tVWrXwAv7VC2z280aVAFwI0_Gr1j6F4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2
+	Ij64vIr41lF7xvrVCFI7AF6II2Y40_Zr0_Gr1UMxkF7I0En4kS14v26r1q6r43MxAIw28I
+	cxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I
+	0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8
+	ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26ryj6F1UMIIF0xvE2Ix0cI8IcV
+	CY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAF
+	wI0_Gr1j6F4UJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43
+	ZEXa7IU50iiDUUUUU==
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-74629-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	HAS_ORG_HEADER(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DMARC_NA(0.00)[loongson.cn];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dlemoal@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	TAGGED_FROM(0.00)[bounces-74632-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[valinux.co.jp:email,nxp.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A8691B699D
+	FROM_NEQ_ENVFROM(0.00)[zhangtianyang@loongson.cn,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[loongson.cn:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: CA77CB6A28
 X-Rspamd-Action: no action
 
-On 1/29/26 22:23, Niklas Cassel wrote:
-> Add bar{0,1,2,3,4,5}_size attributes in configfs, so that the user is not
-> restricted to run pci-epf-test with the hardcoded BAR size values defined
-> in pci-epf-test.c.
-> 
-> This code is shamelessly more or less copy pasted from pci-epf-vntb.c
-> 
-> Reviewed-by: Frank Li <Frank.Li@nxp.com>
-> Tested-by: Koichiro Den <den@valinux.co.jp>
-> Signed-off-by: Niklas Cassel <cassel@kernel.org>
+This series of patches introduces support for interrupt-redirect
+controllers, and this hardware feature will be supported on 3C6000
+for the first time
 
-Looks OK to me.
+change log:
+        v0->v1:
+        1.Rename the model names in the document.
+        2.Adjust the code format.
+        3.Remove architecture - specific prefixes.
+        4.Refactor the initialization logic, and IR driver no longer set 
+	  AVEC_ENABLE.
+        5.Enhance compatibility under certain configurations.
 
-Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
+        v1->v2:
+        1.Fixed an erroneous enabling issue.
 
-One nit below.
+        v2->v3
+        1.Replace smp_call with address mapping to access registers
+        2.Fix some code style issues
 
+        v3->v4
+        1.Provide reasonable comments on the modifications made to
+	  IRQ_SET_MASK_OK_DONE
+        2.Replace meaningless empty functions with parent_mask/unmask/ack
+        3.Added and indeed released resources
+        4.Added judgment for data structure initialization completion to 
+          avoid duplicate creation during cpuhotplug
+        5.Fixed the code style and some unnecessary troubles
 
-> +#define PCI_EPF_TEST_BAR_SIZE_W(_name, _id)				\
-> +static ssize_t pci_epf_test_##_name##_store(struct config_item *item,	\
-> +					    const char *page,		\
-> +					    size_t len)			\
-> +{									\
-> +	struct config_group *group = to_config_group(item);		\
-> +	struct pci_epf_test *epf_test =					\
-> +		container_of(group, struct pci_epf_test, group);	\
-> +	int val;							\
-> +	int ret;							\
+        v4->v5
+	1.when it is detected in avecintc_set_affinity that the current affinity
+	remains valid, the return value is modified to IRQ_SET_MASK_OK_DONE.
+	  After the introduction of redirect-domain, for each interrupt source, 
+	avecintc-domain only provides the CPU/interrupt vector, while redirect-domain 
+	provides other operations to synchronize interrupt affinity information 
+	among multiple cores. 	  The original intention is to notify the cascaded
+	redirect_set_affinity that multi-core synchronization is not required. 
+	  However, this introduces some compatibility issues, such as the new return
+	value causing msi_domain_set_affinity to no longer perform irq_chip_write_msi_msg.
+	  1) When redirect exist in the system, the msi msg_address and msg_data no 
+	longer changes after the allocation phase, so it does not actually require updating
+	the MSI message info.
+	  2) When only avecintc exists in the system, the irq_domain_activate_irq
+	interface will be responsible for the initial configuration of the MSI message,
+	which is unconditional. After that, if unnecessary, no modification to the MSI
+	message is alse correctly.
 
-You can use one line to declare both variables.
+	2.Restructured the macro definitions to make them appear more logical.
 
-> +									\
-> +	/*								\
-> +	 * BAR sizes can only be modified before binding to an EPC,	\
-> +	 * pci_epf_test_alloc_space() is called in .bind().		\
-> +	 */								\
-> +	if (epf_test->epf->epc)						\
-> +		return -EINVAL;						\
-> +									\
-> +	ret = kstrtouint(page, 0, &val);				\
-> +	if (ret)							\
-> +		return ret;						\
-> +									\
-> +	if (!is_power_of_2(val))					\
-> +		return -EINVAL;						\
-> +									\
-> +	epf_test->bar_size[_id] = val;					\
-> +									\
-> +	return len;							\
-> +}
+	3.Adjusted the layout of members struct redirect_queue\struct redirect_table and 
+	struct redirect_item, making redirect_item the primary interface for accessing
+	other members.
 
+	4.The method of accessing registers has been standardized to MMIO.
+
+	5.Initialize variables at declaration whenever possible.
+
+	6.Replaced the the "struct page" in redirect_table and redirect_queue with "struct folio".
+
+	7.Adjusted the initialization process so that all irq_desc configurations are completed
+	during driver initialization, no longer relying on specific CPUs being online.
+
+	8.Refactored portions of the code to make them more concise and logical.
+
+	v5->v6
+	Fix the warning messages reported by the test bot.
+
+	v6->v7:
+	1 Split patch:
+ 	 1) Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+	 2) LoongArch: Architectural preparation for Redirect irqchip
+	 3) irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
+	 4) irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep affinity
+	 5) irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+	2 Use sizeof() to replace fixed-size macro definitions.
+
+	3 Unify the data types of the parameters for redirect_write/read_reg*.
+
+	4 rename irde_invalid_entry_node to irde_invalid_entry and add comments 
+	  explaining the 'raddr'.
+
+	5 Fix the critical condition check bug in redirect_table_alloc.
+
+	6 Use clear_bit to replace bitmap_release_region
+
+	7 Delete some goto and handle the failure when it occurs.
+
+	8 Removed the check for the `CONFIG_ACPI` macro, as CONFIG_ACPI 
+          is selected by the arch/loongarch/Kconfig.
+
+	9 Fixed the incorrect error flow in redirect_acpi_init.
+
+	v7->v8:
+	1 Apologies for the chaotic email delivery due to some network issues earlier.
+
+	2 redirect_table_alloc now allocates nr_irqs consecutive redirect table entries to 
+	  support multiple MSI devices.
+
+	v8->v9:
+	1 Rebased and reorganized the patches on the latest irq/core branch.
+
+Tianyang Zhang (4):
+  Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+  irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
+  irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep
+    affinity
+  irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+ .../arch/loongarch/irq-chip-model.rst         |  38 ++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   |  37 ++
+ drivers/irqchip/Makefile                      |   2 +-
+ drivers/irqchip/irq-loongarch-avec.c          |  20 +-
+ drivers/irqchip/irq-loongarch-ir.c            | 534 ++++++++++++++++++
+ drivers/irqchip/irq-loongson.h                |  19 +
+ 6 files changed, 636 insertions(+), 14 deletions(-)
+ create mode 100644 drivers/irqchip/irq-loongarch-ir.c
 
 -- 
-Damien Le Moal
-Western Digital Research
+2.41.0
+
 
