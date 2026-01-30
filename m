@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-74670-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74671-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0Lo8M1CDfGmBNgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74670-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:09:20 +0100
+	id cGcmL9CCfGlwNgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74671-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:07:12 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66CEDB9351
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:09:20 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DF15B92AB
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:07:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BE0A3304B00D
+	by sin.lore.kernel.org (Postfix) with ESMTP id D4B6D3003BEC
 	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 10:07:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B7E435503A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9AE60355034;
 	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZWD/ala3"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b8x+RyGS"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52B68346784;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50B3234253C;
 	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769767617; cv=none; b=LTo6BQgyK89hPOg1Bw7uVW5hkrmVoHt8XQQ+pljyB/Ucd8YpShJs6rdNSTU3ziIfOOVGnYQ+fuO9m4ytIErFt4HfIxzBmXcNOWwwkWGdbLPlAY2K3wSDZgs08GTbZiU1vhKMDT6qNhc86wrI0keGCVq0c1sSE95HTTCVKVPs8Xk=
+	t=1769767617; cv=none; b=E1ozhZUMDRWPMHsWkTPcwWBFzj85MmPwRAHyViERIOILBKe5TZO+6648YOWzocSTRNPLBKJi7jHgirKs/IIpfe0o3FXfmiGfUHxXmyb5IsXnEy3B8yOto44j80RwVEa2iSJ6SB3SgD9zpUe8DVykAVFK7hERRNxpMH3aOI01/sI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1769767617; c=relaxed/simple;
-	bh=sUU2F4vITRgm2zjOvIuUgxfrAq1HXgFe+Ixvv1RUoCg=;
+	bh=6ds0yhKE9k86/52X3vD85emqF7zIN7sDMJh791kbeRw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=cs4fFt1dTixjwkDKtJ1CWhFTJOO6xkSSazpBGRZdK8H3bi4tESAB2vozyMBJmQT6ggxYT0CKBMpSZrYZpwcFr09hppFzoIhALhFQ0Pc6YTRf53Ww3+XZG9B1V1QOvhq5/FJ/QoFUHnBqHm8Pds0R2LjudTp+K9YTO42GTGEvcxs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZWD/ala3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 12CA0C2BC9E;
+	 In-Reply-To:To:Cc; b=K/r1D8xuqPmVZ2E6qDgLR+houjc9Vre7/eqfX7xPtOWGCBdgIxlZe8RRaD0pLPv9jp+pNmZCGl1BGQ+hpZnpYMKiDfp0uXXIgExgQEyuI2lilvoTVDfR9PhQ3j3q/AwhHGx0eLNZEWA8PeCox11bb0HjXUI2vCbv6MNUWwWN78Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b8x+RyGS; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2042BC2BCAF;
 	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1769767617;
-	bh=sUU2F4vITRgm2zjOvIuUgxfrAq1HXgFe+Ixvv1RUoCg=;
+	bh=6ds0yhKE9k86/52X3vD85emqF7zIN7sDMJh791kbeRw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=ZWD/ala3ffVpDl3fw27ecM6AErCwCBYV13Q3WuZWA/qKkgA3IL53NKCS3vcaLnIPf
-	 /jsGExhwGe+JNj3VId1ZbxlmtggYQrY+A1VCSskXoAPOYgiX1hrYON+sS/gkzAUfn9
-	 22+CB5yPM2sOcvIf4Qd5RWvlkLpV3i8KnsbNM+WGdySF6f12bEROHdMQfSzC8vn7AO
-	 1qyPK75r8+fxQsO965MyMOzGjuL7TCGXJOn34ZYeiTpwoVcNPQTfsi9p5gepDwewR3
-	 I5KuzKshAoS6aTHBcwp4K29AaO+w+VokU6/G7ftAbzogsgmHphH4tiTRK4oX7FIQvt
-	 4OEDz0Et9oTbA==
+	b=b8x+RyGSgcUKM1fK+2C7PrXIuW2ltH2oQ24JO171Yv+ZR2pqrdNJPFrfm5bJynhSk
+	 2Zps/jIXAQezxyeAzumYS17FTSVOORzO5o+pRVjKA+JdWV/KDqcj+89/uFiLxJ8BO/
+	 viUv0D8kvY6218XSJgg5Mrr79tn1o+d2vm9VkF13WIYDR1CAwvq/fHeJ214/gkpAKC
+	 XigoCUyd7/o3fbTxWBZnnWAJHY31uAFUgOPGzyhJwZqUw6Vvp1Vx7dyZpHAuWEwOFj
+	 FQxVvvKIQTfnJNdKKwRYUjt3IKixzk4/41iCv7cD9su76HelzqHmRvu1riR6gdK94u
+	 1t0t+7wh8PI2A==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08258D49C76;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17F3BD49C93;
 	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
 From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Fri, 30 Jan 2026 10:06:46 +0000
-Subject: [PATCH v6 5/8] iio: frequency: adf41513: handle LE synchronization
- feature
+Date: Fri, 30 Jan 2026 10:06:47 +0000
+Subject: [PATCH v6 6/8] iio: frequency: adf41513: features on frequency
+ change
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -58,8 +58,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260130-adf41513-iio-driver-v6-5-cf46239026bc@analog.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260130-adf41513-iio-driver-v6-6-cf46239026bc@analog.com>
 References: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
 In-Reply-To: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
 To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
@@ -72,11 +72,11 @@ Cc: Jonathan Cameron <jic23@kernel.org>,
  Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
  Rodrigo Alencar <rodrigo.alencar@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1769767615; l=2998;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1769767615; l=5626;
  i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=7PWCc+kWI/VpsoPPUmqky10EYHvCMPsgsZ1c3vbPiko=;
- b=yYxkpd3K/cWnvV/iU3CKeToY5WGaVLgHlEseQM0b4pYBV+Qnc075WEjzLpyPsPhNc9d3+o4A7
- vkCuqBl93qwBQPYIZafGB/Hj0Ri109UpegvS7/rmFNLPweBUrF9GrJ3
+ bh=8/o5jmQoBCz4yrI6BjNRKRla+S3iteglPQNMG1BxSkI=;
+ b=PDi4I0aQi3FM/OktyQ9hhvJsNRHWuzzyNDt95tDu/K0oiVS37J7NPXAPZscBJ6336+GGBGw5m
+ CVriSpEti2UBqtG7n4Ks1996a+S/riHV2HgKSkraCNG94ZVbBTjgsdh
 X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
  pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
 X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
@@ -89,12 +89,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74670-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
+	TAGGED_FROM(0.00)[bounces-74671-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[14];
@@ -108,105 +108,181 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:replyto,analog.com:email,analog.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 66CEDB9351
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,analog.com:replyto,analog.com:email,analog.com:mid]
+X-Rspamd-Queue-Id: 2DF15B92AB
 X-Rspamd-Action: no action
 
 From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-When LE sync is enabled, it is must be set after powering up and must be
-disabled when powering down. It is recommended when using the PLL as
-a frequency synthesizer, where reference signal will always be present
-while the device is being configured.
+Set Bleed current when PFD frequency changes (bleed enabled when in
+fractional mode). Set lock detector window size, handling bias and
+precision. Add phase resync support, setting clock dividers when
+PFD frequency changes.
 
 Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 ---
- drivers/iio/frequency/adf41513.c | 35 ++++++++++++++++++++++++++++++++---
- 1 file changed, 32 insertions(+), 3 deletions(-)
+ drivers/iio/frequency/adf41513.c | 100 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 100 insertions(+)
 
 diff --git a/drivers/iio/frequency/adf41513.c b/drivers/iio/frequency/adf41513.c
-index b2efd545c885..0741aeb5fa3d 100644
+index 0741aeb5fa3d..6e386bdecc8d 100644
 --- a/drivers/iio/frequency/adf41513.c
 +++ b/drivers/iio/frequency/adf41513.c
-@@ -221,6 +221,7 @@ struct adf41513_data {
- 	bool phase_detector_polarity;
+@@ -20,6 +20,7 @@
+ #include <linux/property.h>
+ #include <linux/regulator/consumer.h>
+ #include <linux/spi/spi.h>
++#include <linux/time64.h>
+ #include <linux/types.h>
+ #include <linux/units.h>
  
- 	bool logic_lvl_1v8_en;
-+	bool le_sync_en;
+@@ -212,6 +213,7 @@ struct adf41513_chip_info {
+ struct adf41513_data {
+ 	u64 power_up_frequency_hz;
+ 	u64 freq_resolution_uhz;
++	u32 phase_resync_period_ns;
+ 	u32 charge_pump_voltage_mv;
+ 	u32 lock_detect_count;
+ 
+@@ -276,6 +278,16 @@ struct adf41513_state {
+ 	__be32 buf __aligned(IIO_DMA_MINALIGN);
  };
  
- struct adf41513_pll_settings {
-@@ -639,13 +640,27 @@ static int adf41513_set_frequency(struct adf41513_state *st, u64 freq_uhz, u16 s
- static int adf41513_suspend(struct adf41513_state *st)
- {
- 	st->regs[ADF41513_REG6] |= FIELD_PREP(ADF41513_REG6_POWER_DOWN_MSK, 1);
-+	st->regs[ADF41513_REG12] &= ~ADF41513_REG12_LE_SELECT_MSK;
- 	return adf41513_sync_config(st, ADF41513_SYNC_DIFF);
- }
- 
- static int adf41513_resume(struct adf41513_state *st)
- {
-+	int ret;
++static const u16 adf41513_ld_window_x10_ns[] = {
++	9, 12, 16, 17, 21, 28, 29, 35,			/* 0 - 7 */
++	43, 47, 49, 52, 70, 79, 115,			/* 8 - 14 */
++};
 +
- 	st->regs[ADF41513_REG6] &= ~ADF41513_REG6_POWER_DOWN_MSK;
--	return adf41513_sync_config(st, ADF41513_SYNC_DIFF);
-+	ret = adf41513_sync_config(st, ADF41513_SYNC_DIFF);
-+	if (ret)
-+		return ret;
++static const u8 adf41513_ldp_bias[] = {
++	0xC, 0xD, 0xE, 0x8, 0x9, 0x4, 0xA, 0x5,		/* 0 - 7 */
++	0x0, 0x6, 0xB, 0x1, 0x2, 0x7, 0x3,		/* 8 - 14 */
++};
 +
-+	if (st->data.le_sync_en) {
-+		st->regs[ADF41513_REG12] |= ADF41513_REG12_LE_SELECT_MSK;
-+		ret = adf41513_sync_config(st, ADF41513_SYNC_DIFF);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return ret;
- }
- 
- static ssize_t adf41513_read_uhz(struct iio_dev *indio_dev,
-@@ -938,6 +953,8 @@ static int adf41513_parse_fw(struct adf41513_state *st)
- 				     "invalid lock detect count: %u\n", tmp);
- 	st->data.lock_detect_count = tmp;
- 
-+	/* load enable sync */
-+	st->data.le_sync_en = device_property_read_bool(dev, "adi,le-sync-enable");
- 	st->data.freq_resolution_uhz = MICROHZ_PER_HZ;
- 
+ static const char * const adf41513_power_supplies[] = {
+ 	"avdd1", "avdd2", "avdd3", "avdd4", "avdd5", "vp",
+ };
+@@ -583,9 +595,82 @@ static int adf41513_calc_pll_settings(struct adf41513_state *st,
  	return 0;
-@@ -945,6 +962,7 @@ static int adf41513_parse_fw(struct adf41513_state *st)
- 
- static int adf41513_setup(struct adf41513_state *st)
- {
-+	int ret;
- 	u32 tmp;
- 
- 	memset(st->regs_hw, 0xFF, sizeof(st->regs_hw));
-@@ -978,8 +996,19 @@ static int adf41513_setup(struct adf41513_state *st)
- 					      st->data.logic_lvl_1v8_en ? 0 : 1);
- 
- 	/* perform initialization sequence with power-up frequency */
--	return adf41513_set_frequency(st, st->data.power_up_frequency_hz * MICRO,
--				      ADF41513_SYNC_ALL);
-+	ret = adf41513_set_frequency(st, st->data.power_up_frequency_hz * MICRO,
-+				     ADF41513_SYNC_ALL);
-+	if (ret)
-+		return ret;
-+
-+	if (st->data.le_sync_en) {
-+		st->regs[ADF41513_REG12] |= ADF41513_REG12_LE_SELECT_MSK;
-+		ret = adf41513_sync_config(st, ADF41513_SYNC_DIFF);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
  }
  
- static void adf41513_power_down(void *data)
++static void adf41513_set_bleed_val(struct adf41513_state *st)
++{
++	u32 bleed_value, cp_index;
++
++	if (st->data.phase_detector_polarity)
++		bleed_value = 90;
++	else
++		bleed_value = 144;
++
++	cp_index = 1 + FIELD_GET(ADF41513_REG5_CP_CURRENT_MSK,
++				 st->regs[ADF41513_REG5]);
++	bleed_value = div64_u64(st->settings.pfd_frequency_uhz * cp_index * bleed_value,
++				1600ULL * MEGA * MICROHZ_PER_HZ);
++
++	FIELD_MODIFY(ADF41513_REG6_BLEED_CURRENT_MSK, &st->regs[ADF41513_REG6],
++		     bleed_value);
++}
++
++static void adf41513_set_ld_window(struct adf41513_state *st)
++{
++	/*
++	 * The ideal lock detector window size is halfway between the max
++	 * window, set by the phase comparison period t_PFD = (1 / f_PFD),
++	 * and the minimum is set by (I_BLEED/I_CP) × t_PFD
++	 */
++	u16 ld_window_10x_ns = div64_u64(10ULL * NSEC_PER_SEC * MICROHZ_PER_HZ,
++					 st->settings.pfd_frequency_uhz << 1);
++	u8 ld_idx, ldp, ld_bias;
++
++	if (st->settings.mode != ADF41513_MODE_INTEGER_N) {
++		/* account for bleed current (deduced from eq.6 and eq.7) */
++		if (st->data.phase_detector_polarity)
++			ld_window_10x_ns += 4;
++		else
++			ld_window_10x_ns += 6;
++	}
++
++	ld_idx = find_closest(ld_window_10x_ns, adf41513_ld_window_x10_ns,
++			      ARRAY_SIZE(adf41513_ld_window_x10_ns));
++	ldp = (adf41513_ldp_bias[ld_idx] >> 2) & 0x3;
++	ld_bias = adf41513_ldp_bias[ld_idx] & 0x3;
++
++	FIELD_MODIFY(ADF41513_REG6_LDP_MSK, &st->regs[ADF41513_REG6], ldp);
++	FIELD_MODIFY(ADF41513_REG9_LD_BIAS_MSK, &st->regs[ADF41513_REG9], ld_bias);
++}
++
++static void adf41513_set_phase_resync(struct adf41513_state *st)
++{
++	u32 total_div, clk1_div, clk2_div;
++
++	if (!st->data.phase_resync_period_ns)
++		return;
++
++	/* assuming both clock dividers hold similar values */
++	total_div = mul_u64_u64_div_u64(st->settings.pfd_frequency_uhz,
++					st->data.phase_resync_period_ns,
++					1ULL * MICROHZ_PER_HZ * NSEC_PER_SEC);
++	clk1_div = clamp(int_sqrt(total_div), 1,
++			 ADF41513_MAX_CLK_DIVIDER);
++	clk2_div = clamp(DIV_ROUND_CLOSEST(total_div, clk1_div), 1,
++			 ADF41513_MAX_CLK_DIVIDER);
++
++	FIELD_MODIFY(ADF41513_REG5_CLK1_DIV_MSK, &st->regs[ADF41513_REG5],
++		     clk1_div);
++	FIELD_MODIFY(ADF41513_REG7_CLK2_DIV_MSK, &st->regs[ADF41513_REG7],
++		     clk2_div);
++
++	/* enable phase resync */
++	st->regs[ADF41513_REG7] |= ADF41513_REG7_CLK_DIV_MODE_MSK;
++}
++
+ static int adf41513_set_frequency(struct adf41513_state *st, u64 freq_uhz, u16 sync_mask)
+ {
+ 	struct adf41513_pll_settings result;
++	bool pfd_change = false;
++	bool mode_change = false;
+ 	int ret;
+ 
+ 	ret = adf41513_calc_pll_settings(st, &result, freq_uhz);
+@@ -593,6 +678,8 @@ static int adf41513_set_frequency(struct adf41513_state *st, u64 freq_uhz, u16 s
+ 		return ret;
+ 
+ 	/* apply computed results to pll settings */
++	pfd_change = st->settings.pfd_frequency_uhz != result.pfd_frequency_uhz;
++	mode_change = st->settings.mode != result.mode;
+ 	st->settings = result;
+ 
+ 	dev_dbg(&st->spi->dev,
+@@ -634,6 +721,14 @@ static int adf41513_set_frequency(struct adf41513_state *st, u64 freq_uhz, u16 s
+ 		st->regs[ADF41513_REG6] |= ADF41513_REG6_BLEED_ENABLE_MSK;
+ 	}
+ 
++	if (pfd_change) {
++		adf41513_set_bleed_val(st);
++		adf41513_set_phase_resync(st);
++	}
++
++	if (pfd_change || mode_change)
++		adf41513_set_ld_window(st);
++
+ 	return adf41513_sync_config(st, sync_mask | ADF41513_SYNC_REG0);
+ }
+ 
+@@ -943,6 +1038,11 @@ static int adf41513_parse_fw(struct adf41513_state *st)
+ 	st->data.phase_detector_polarity =
+ 		device_property_read_bool(dev, "adi,phase-detector-polarity-positive-enable");
+ 
++	st->data.phase_resync_period_ns = 0;
++	ret = device_property_read_u32(dev, "adi,phase-resync-period-ns", &tmp);
++	if (!ret)
++		st->data.phase_resync_period_ns = tmp;
++
+ 	st->data.logic_lvl_1v8_en = device_property_read_bool(dev, "adi,logic-level-1v8-enable");
+ 
+ 	tmp = ADF41513_LD_COUNT_MIN;
 
 -- 
 2.43.0
