@@ -1,40 +1,41 @@
-Return-Path: <linux-doc+bounces-74632-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74630-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0JFBGwEefGmAKgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74632-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:57:05 +0100
+	id aOvsD8YdfGmAKgIAu9opvQ
+	(envelope-from <linux-doc+bounces-74630-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:56:06 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA77CB6A28
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:57:04 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FA5CB6A08
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 03:56:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 589C830057A1
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 02:56:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D27E6300DF6B
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 02:56:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC8A2330D22;
-	Fri, 30 Jan 2026 02:56:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A65DB332ED3;
+	Fri, 30 Jan 2026 02:56:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD8917E0E8;
-	Fri, 30 Jan 2026 02:56:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEF121E1024;
+	Fri, 30 Jan 2026 02:56:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769741780; cv=none; b=A0Fs3tXFKTNcX9OrhrQFXIPwI1MN08+SCB25rAJfQQsjsupy/b5agpVM+dq+07WrgCiQk1GLmEpYEGKZpkGOredJ9UiKpy+ANA+lt/6ij5Nx0WmmLZ3cHEXdt03NAuzF61nGCOHOZc72GKcNo1dFmO8Pxgqtt1ebA6ucHh3L7RM=
+	t=1769741763; cv=none; b=rW16hEne6CjBTdA6m+zBzauc2xyFa/Kl6wQu2hw3Bih3plQpBnSKm4qx42dMo7RRBUq7zQqecc87Dw48l/3OPWGu8hlKnEyigWsp3sLDQUD/N9LDmft1grwLCEWVafpcdXPthFwLbjxCkp6f11bYoexwNViFfoZNHGTk82HqHsg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769741780; c=relaxed/simple;
-	bh=1CoTAwVnAdJzTCMVTY8D3AXdGTsE+x1yRXkX5wJQ4/w=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QEKCwdeTJ1l+QjPtpCnsgybkGJmS51NQ50kFH6uAAWt4EOPNJ0SO5ZF5iRvdRLqKXzYfxPTy7paSL1dh3dvEfP0l29IWAzPCckRW6xy806LsK8c8d+5woYR/WCSLi0hnMtik50FCY9JcXK7TbwbJSXx9gZ/Bqip8PxQjH+Zqi2I=
+	s=arc-20240116; t=1769741763; c=relaxed/simple;
+	bh=JN4QEE6cA+wjvXfAgLTYEW/F5c17/Co8nCG7VE4Or+c=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=pPabUscL0uRK2OHW82aDLwDEnIlfMblrwsQX1ZhYxjz4z3RZkzM30a1y9jyRotzn/bVRYm31VCyKuLCKn8Bdw60abpSxl2g9jMEIkzQgOXEjiVvgCfBNmT53dr9m5hKUZ68SpR3qv362WKsSBe+vmoGg73ngCsc7pdKzwlfB018=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
 Received: from loongson.cn (unknown [10.40.57.136])
-	by gateway (Coremail) with SMTP id _____8CxacLGHXxpeCQOAA--.45972S3;
-	Fri, 30 Jan 2026 10:56:06 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8Axy8K+HXxpZSQOAA--.45890S3;
+	Fri, 30 Jan 2026 10:55:58 +0800 (CST)
 Received: from localhost.localdomain (unknown [10.40.57.136])
-	by front1 (Coremail) with SMTP id qMiowJCxHOGzHXxpRvM5AA--.45456S2;
-	Fri, 30 Jan 2026 10:55:47 +0800 (CST)
+	by front1 (Coremail) with SMTP id qMiowJCxHOGzHXxpRvM5AA--.45456S3;
+	Fri, 30 Jan 2026 10:55:48 +0800 (CST)
 From: Tianyang Zhang <zhangtianyang@loongson.cn>
 To: chenhuacai@kernel.org,
 	kernel@xen0n.name,
@@ -54,25 +55,28 @@ Cc: loongarch@lists.linux.dev,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Tianyang Zhang <zhangtianyang@loongson.cn>
-Subject: [PATCH v9 0/4] Loongarch irq-redirect support
-Date: Fri, 30 Jan 2026 10:55:39 +0800
-Message-ID: <20260130025545.2140543-1-zhangtianyang@loongson.cn>
+Subject: [PATCH v9 1/4] Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+Date: Fri, 30 Jan 2026 10:55:40 +0800
+Message-ID: <20260130025545.2140543-2-zhangtianyang@loongson.cn>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20260130025545.2140543-1-zhangtianyang@loongson.cn>
+References: <20260130025545.2140543-1-zhangtianyang@loongson.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJCxHOGzHXxpRvM5AA--.45456S2
+X-CM-TRANSID:qMiowJCxHOGzHXxpRvM5AA--.45456S3
 X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
-X-Coremail-Antispam: 1Uk129KBj93XoWxGF4UKr1DZry5Cr1UJF1rXwc_yoW7JFyfpF
-	W7uas8trsYkrWxG3Z7ua18uFy3uryfGrW3Xa1fCw1a93s8ur1q9F1xKF98XFy8Grs5K3W2
-	qr4qq3yUua4DAagCm3ZEXasCq-sJn29KB7ZKAUJUUUUD529EdanIXcx71UUUUU7KY7ZEXa
+X-Coremail-Antispam: 1Uk129KBj93XoWxAryfuw1rKw1kKFyUuw45Jwc_yoWrXr4fpr
+	Z3GryxXF18Jry5Xr17Jr4UXr13Gwn3Ja1DtF1xKry8Xr4kAr1ktr1UJrykJFy7G34rAr1U
+	XFWrJw4UJr1UJwcCm3ZEXasCq-sJn29KB7ZKAUJUUUUD529EdanIXcx71UUUUU7KY7ZEXa
 	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
 	0xBIdaVrnRJUUUmjb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r126r13M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
 	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
 	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
 	xVW8Jr0_Cr1UM2kKe7AKxVWUAVWUtwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
@@ -84,154 +88,143 @@ X-Coremail-Antispam: 1Uk129KBj93XoWxGF4UKr1DZry5Cr1UJF1rXwc_yoW7JFyfpF
 	ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26ryj6F1UMIIF0xvE2Ix0cI8IcV
 	CY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAF
 	wI0_Gr1j6F4UJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43
-	ZEXa7IU50iiDUUUUU==
+	ZEXa7IU5Ul1PUUUUU==
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.04 / 15.00];
+X-Spamd-Result: default: False [-0.46 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	DMARC_NA(0.00)[loongson.cn];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TAGGED_FROM(0.00)[bounces-74632-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	PRECEDENCE_BULK(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_NEQ_ENVFROM(0.00)[zhangtianyang@loongson.cn,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[loongson.cn:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: CA77CB6A28
+	RCPT_COUNT_TWELVE(0.00)[18];
+	TAGGED_RCPT(0.00)[linux-doc];
+	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zhangtianyang@loongson.cn,linux-doc@vger.kernel.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-74630-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[loongson.cn];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 5FA5CB6A08
 X-Rspamd-Action: no action
 
-This series of patches introduces support for interrupt-redirect
-controllers, and this hardware feature will be supported on 3C6000
-for the first time
+Introduce the redirect interrupt controllers.When the redirect interrupt
+controller is enabled, the routing target of MSI interrupts is no longer
+a specific CPU and vector number, but a specific redirect entry. The
+actual CPU and vector number used are described by the redirect entry.
 
-change log:
-        v0->v1:
-        1.Rename the model names in the document.
-        2.Adjust the code format.
-        3.Remove architecture - specific prefixes.
-        4.Refactor the initialization logic, and IR driver no longer set 
-	  AVEC_ENABLE.
-        5.Enhance compatibility under certain configurations.
+Signed-off-by: Tianyang Zhang <zhangtianyang@loongson.cn>
+---
+ .../arch/loongarch/irq-chip-model.rst         | 38 +++++++++++++++++++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   | 37 ++++++++++++++++++
+ 2 files changed, 75 insertions(+)
 
-        v1->v2:
-        1.Fixed an erroneous enabling issue.
-
-        v2->v3
-        1.Replace smp_call with address mapping to access registers
-        2.Fix some code style issues
-
-        v3->v4
-        1.Provide reasonable comments on the modifications made to
-	  IRQ_SET_MASK_OK_DONE
-        2.Replace meaningless empty functions with parent_mask/unmask/ack
-        3.Added and indeed released resources
-        4.Added judgment for data structure initialization completion to 
-          avoid duplicate creation during cpuhotplug
-        5.Fixed the code style and some unnecessary troubles
-
-        v4->v5
-	1.when it is detected in avecintc_set_affinity that the current affinity
-	remains valid, the return value is modified to IRQ_SET_MASK_OK_DONE.
-	  After the introduction of redirect-domain, for each interrupt source, 
-	avecintc-domain only provides the CPU/interrupt vector, while redirect-domain 
-	provides other operations to synchronize interrupt affinity information 
-	among multiple cores. 	  The original intention is to notify the cascaded
-	redirect_set_affinity that multi-core synchronization is not required. 
-	  However, this introduces some compatibility issues, such as the new return
-	value causing msi_domain_set_affinity to no longer perform irq_chip_write_msi_msg.
-	  1) When redirect exist in the system, the msi msg_address and msg_data no 
-	longer changes after the allocation phase, so it does not actually require updating
-	the MSI message info.
-	  2) When only avecintc exists in the system, the irq_domain_activate_irq
-	interface will be responsible for the initial configuration of the MSI message,
-	which is unconditional. After that, if unnecessary, no modification to the MSI
-	message is alse correctly.
-
-	2.Restructured the macro definitions to make them appear more logical.
-
-	3.Adjusted the layout of members struct redirect_queue\struct redirect_table and 
-	struct redirect_item, making redirect_item the primary interface for accessing
-	other members.
-
-	4.The method of accessing registers has been standardized to MMIO.
-
-	5.Initialize variables at declaration whenever possible.
-
-	6.Replaced the the "struct page" in redirect_table and redirect_queue with "struct folio".
-
-	7.Adjusted the initialization process so that all irq_desc configurations are completed
-	during driver initialization, no longer relying on specific CPUs being online.
-
-	8.Refactored portions of the code to make them more concise and logical.
-
-	v5->v6
-	Fix the warning messages reported by the test bot.
-
-	v6->v7:
-	1 Split patch:
- 	 1) Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
-	 2) LoongArch: Architectural preparation for Redirect irqchip
-	 3) irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
-	 4) irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep affinity
-	 5) irqchip/irq-loongarch-ir:Add Redirect irqchip support
-
-	2 Use sizeof() to replace fixed-size macro definitions.
-
-	3 Unify the data types of the parameters for redirect_write/read_reg*.
-
-	4 rename irde_invalid_entry_node to irde_invalid_entry and add comments 
-	  explaining the 'raddr'.
-
-	5 Fix the critical condition check bug in redirect_table_alloc.
-
-	6 Use clear_bit to replace bitmap_release_region
-
-	7 Delete some goto and handle the failure when it occurs.
-
-	8 Removed the check for the `CONFIG_ACPI` macro, as CONFIG_ACPI 
-          is selected by the arch/loongarch/Kconfig.
-
-	9 Fixed the incorrect error flow in redirect_acpi_init.
-
-	v7->v8:
-	1 Apologies for the chaotic email delivery due to some network issues earlier.
-
-	2 redirect_table_alloc now allocates nr_irqs consecutive redirect table entries to 
-	  support multiple MSI devices.
-
-	v8->v9:
-	1 Rebased and reorganized the patches on the latest irq/core branch.
-
-Tianyang Zhang (4):
-  Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
-  irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
-  irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep
-    affinity
-  irqchip/irq-loongarch-ir:Add Redirect irqchip support
-
- .../arch/loongarch/irq-chip-model.rst         |  38 ++
- .../zh_CN/arch/loongarch/irq-chip-model.rst   |  37 ++
- drivers/irqchip/Makefile                      |   2 +-
- drivers/irqchip/irq-loongarch-avec.c          |  20 +-
- drivers/irqchip/irq-loongarch-ir.c            | 534 ++++++++++++++++++
- drivers/irqchip/irq-loongson.h                |  19 +
- 6 files changed, 636 insertions(+), 14 deletions(-)
- create mode 100644 drivers/irqchip/irq-loongarch-ir.c
-
+diff --git a/Documentation/arch/loongarch/irq-chip-model.rst b/Documentation/arch/loongarch/irq-chip-model.rst
+index 8f5c3345109e..88474edcea48 100644
+--- a/Documentation/arch/loongarch/irq-chip-model.rst
++++ b/Documentation/arch/loongarch/irq-chip-model.rst
+@@ -181,6 +181,44 @@ go to PCH-PIC/PCH-LPC and gathered by EIOINTC, and then go to CPUINTC directly::
+              | Devices |
+              +---------+
+ 
++Advanced Extended IRQ model (with redirection)
++==============================================
++
++In this model, IPI (Inter-Processor Interrupt) and CPU Local Timer interrupt go
++to CPUINTC directly, CPU UARTS interrupts go to LIOINTC, PCH-MSI interrupts go
++to REDIRECT for remapping it to AVEC, and then go to CPUINTC directly, while all
++other devices interrupts go to PCH-PIC/PCH-LPC and gathered by EIOINTC, and then
++go to CPUINTC directly::
++
++ +-----+     +-----------------------+     +-------+
++ | IPI | --> |        CPUINTC        | <-- | Timer |
++ +-----+     +-----------------------+     +-------+
++              ^          ^          ^
++              |          |          |
++       +---------+ +----------+ +---------+     +-------+
++       | EIOINTC | | AVECINTC | | LIOINTC | <-- | UARTs |
++       +---------+ +----------+ +---------+     +-------+
++            ^            ^
++            |            |
++            |      +----------+
++            |      | REDIRECT |
++            |      +----------+
++            |            ^
++            |            |
++       +---------+  +---------+
++       | PCH-PIC |  | PCH-MSI |
++       +---------+  +---------+
++         ^     ^           ^
++         |     |           |
++ +---------+ +---------+ +---------+
++ | Devices | | PCH-LPC | | Devices |
++ +---------+ +---------+ +---------+
++                  ^
++                  |
++             +---------+
++             | Devices |
++             +---------+
++
+ ACPI-related definitions
+ ========================
+ 
+diff --git a/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst b/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
+index d4ff80de47b6..7e4e3e55c7ad 100644
+--- a/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
++++ b/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
+@@ -174,6 +174,43 @@ CPU串口（UARTs）中断发送到LIOINTC，PCH-MSI中断发送到AVECINTC，
+              | Devices |
+              +---------+
+ 
++高级扩展IRQ模型 (带重定向)
++==========================
++
++在这种模型里面，IPI（Inter-Processor Interrupt）和CPU本地时钟中断直接发送到CPUINTC，
++CPU串口（UARTs）中断发送到LIOINTC，PCH-MSI中断首先发送到REDIRECT模块,完成重定向后发
++送到AVECINTC，而后通过AVECINTC直接送达CPUINTC，而其他所有设备的中断则分别发送到所连
++接的PCH-PIC/PCH-LPC，然后由EIOINTC统一收集，再直接到达CPUINTC::
++
++ +-----+     +-----------------------+     +-------+
++ | IPI | --> |        CPUINTC        | <-- | Timer |
++ +-----+     +-----------------------+     +-------+
++              ^          ^          ^
++              |          |          |
++       +---------+ +----------+ +---------+     +-------+
++       | EIOINTC | | AVECINTC | | LIOINTC | <-- | UARTs |
++       +---------+ +----------+ +---------+     +-------+
++            ^            ^
++            |            |
++            |      +----------+
++            |      | REDIRECT |
++            |      +----------+
++            |            ^
++            |            |
++       +---------+  +---------+
++       | PCH-PIC |  | PCH-MSI |
++       +---------+  +---------+
++         ^     ^           ^
++         |     |           |
++ +---------+ +---------+ +---------+
++ | Devices | | PCH-LPC | | Devices |
++ +---------+ +---------+ +---------+
++                  ^
++                  |
++             +---------+
++             | Devices |
++             +---------+
++
+ ACPI相关的定义
+ ==============
+ 
 -- 
 2.41.0
 
