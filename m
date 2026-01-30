@@ -1,163 +1,261 @@
-Return-Path: <linux-doc+bounces-74669-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74672-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MKBxMdCCfGmBNgIAu9opvQ
-	(envelope-from <linux-doc+bounces-74669-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:07:12 +0100
+	id MBmRG/SRfGk4NwIAu9opvQ
+	(envelope-from <linux-doc+bounces-74672-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 12:11:48 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C1F4B92AA
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:07:11 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E3549B9E5C
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 12:11:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C3A63300861E
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 10:07:03 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 5387530364C4
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Jan 2026 11:06:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 998B0355028;
-	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1B41378D81;
+	Fri, 30 Jan 2026 11:06:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CgdHl2K+"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hIPqm4+U"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61C78350A02;
-	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769767617; cv=none; b=YnDsJw3vCWer95AeCMwq88zJFUBQbGcgHjdHLv6+18Rl/D4bOdif+QyQO3ZZHD1BTd3Ys9h1NkfD6j5O7l24yNaGA4uSZoDcLw2Dkko7aYn2io7YTRcAYsytwImml+s1UXHBT06aLEmJXg27Xt+WsAN2C97K8cxG+esbPId795g=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769767617; c=relaxed/simple;
-	bh=9p540ay1H47svX06lhpmRuFAR8//y1IqKzBTwHFPo1Y=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=FBhmDde7vkkBYxxg2ngb4z4GM7+99EV2Nf5dv4ZGAo899tG0XfrXhG55yOEJ6at7n/H1PRNzOTx7ueuGyzN4x5i9P0xKrufnFvXe0tOx8YiY9qAoW9hbwKabXm5pLIes4+Vk4QSBY6nY2e8I+QOkyUpD0xewTzgf+AM1GJxGT6Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CgdHl2K+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3FF68C2BCB0;
-	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1769767617;
-	bh=9p540ay1H47svX06lhpmRuFAR8//y1IqKzBTwHFPo1Y=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=CgdHl2K+NvWxWiBvEZ4mi2V8IB+9WDFtSZDb0oAeRQ/1LQ2FggbyYBxCnAkpEi0jC
-	 nLebdD9VeqOzSdJwDgOhdi+41rRadLFlXwlQiYDUkjstFyWBFtbx1XveuL47vqe7/p
-	 1LlMq/CnyHgRh1BmTY8Pt4Xgccx0DOiVVZiOrejrUwJJgzo3pNC7M+1KBYWcoY6cvQ
-	 MAkfJv+WJN8TVbE/1GjfjxMmHdj43DOLt4vu6yxSuuDUbtwBOK4an81XSuWaPG2RqT
-	 gm6DIam1LDm04QOVoQBIHe+lxcTuZgQalTlD3PlZvnqL4LAxNFMrKqDuFSjvsIFchs
-	 Qh6shSzGuyQfQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35FFDD49C76;
-	Fri, 30 Jan 2026 10:06:57 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Fri, 30 Jan 2026 10:06:49 +0000
-Subject: [PATCH v6 8/8] Documentation: ABI: testing: add common ABI file
- for iio/frequency
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D9AE378829
+	for <linux-doc@vger.kernel.org>; Fri, 30 Jan 2026 11:06:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.49
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1769771171; cv=pass; b=FQZGV5B/EfVd9uLZxToGTZ63zHlWwaJxCjBTmUUUjvyyqyjVuUUKjXvN8ML82u0p2n3cVJBD5KjNhSB3t8wU0MQvpU+XlNE0NVBIs9K9my2AniTq0TeIbp31LFHv4K+/n0JtB3Ig/N/HIOuIK6T7qV6i8wHF9OwATiNVIAEd6FY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1769771171; c=relaxed/simple;
+	bh=9/zpKffe7y3uB+Qn0SF95hcsB79LbAi7GedReWEKmVE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Lv+h18ZRrPsJojI0rtnjtZSQPAD4SZetLa7Z5WYaj7TI3nJUHT02DBm7TeV/C4v6sLaF9V0b7Nq8dHQ6FIR6KAkSWMyGCpE2Ay+VTYKYkKP2XZ5lPnRhU47BiqrFS2dVhQpcAWuAWM5En+hwzvjb7GpvtywadiGWev3GC2WeudY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hIPqm4+U; arc=pass smtp.client-ip=209.85.208.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-658ad86082dso3551348a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 30 Jan 2026 03:06:08 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769771167; cv=none;
+        d=google.com; s=arc-20240605;
+        b=gLODeMKIQx7MorxlJgC7EnotJ2uVfVPHjCQmFsMbevapR7FGevnP8G36ynb3XhESLz
+         IyGKnkktALf75bdyAcZo1SnsGwLC1oNFwQ+c6G0AxrTjtpg2e4UynJeouYChyAiY8FmL
+         3ETBSZhxVUqNcVTtaqfF0U0S7cFelSRhEatlhEP/l6GlFc7asMSTNHraVCaCIGVqofUH
+         TvQCzqBajIRMIf0wtiJ2VLWNW+w5IbyjlvoPNknWMplN6ZVS0x5Y//EUaBSc5zMbHWEd
+         2PtXUXaIkspvRYILjdDG5OxkRMwqL8TkKP06ilsz7yeJlk3M5zrluTUhqcdPda1al+9f
+         rOlw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=KJi4aV/ZmRDHm0hyQsYhdJh23rHtSjaZzhOLa52dkXo=;
+        fh=e/HKNwaK3xsS7E9MxZp/ALyfTbXY1eA3fzNIsHUI580=;
+        b=DA0Zf1pQwzt24b5dXJJNucqagYEBJWdit5J7llB9R5NJbB0bwCcgpEwK/RsRpeCx2Z
+         R30XSZxF85cCzEHygUsMe7n82EJAYGnC15xxCipT2m3w84Lkrxr6aLpO4pBcESfMXDK/
+         kP2W8vKISPMlvKrMk9A4vAh+dU27YVTpNKdyzmEsyVlHOnTF7OGnMvq9u16xWIS0mYB0
+         IQbB8R9zbSWvM6bjrAf0vRZQFIjOZDyXfOHXcaChc1Gg5ncrwQ6n56s0CxZqsjSVN4tt
+         I6QeCtT8LOfyM3EDu4+kSSrlSAg2+oG5rsBKIjvR9fkEWbC4ttjSfYYBxZx6WfALQnJf
+         ZbTQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1769771167; x=1770375967; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KJi4aV/ZmRDHm0hyQsYhdJh23rHtSjaZzhOLa52dkXo=;
+        b=hIPqm4+U7OpUx4koc8RxObDAUkvZy6VqulOYO9UF7VmAqvuywLjIBne/1s2y5L2HSl
+         3NOn4JBHg4TW8CgfTcWdRF4fTU7Dzgj3zjxxux8m0FaIw4XhxHpKTw88+Se3e16dF3pe
+         i3KvNaXRk8wHAZ04vVaKk6BjxrpDuTvVVPqzba6D3tXrZIGMA+oQZgSwYKNRmeKdiNPR
+         LRo23su5YjT6ie/CZEpITLV2onC0bu5b6UFf7AUTV7s1dtxI7/6H/ED9C+97NiFlJVak
+         TAEIah49ALrBIzvxVT5Yk6E17Sqp5tSb8rsC2bIlt94bwfu82BR8LzjfR8eOJPzeMpqO
+         HA8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769771167; x=1770375967;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=KJi4aV/ZmRDHm0hyQsYhdJh23rHtSjaZzhOLa52dkXo=;
+        b=mQ2ycIiky47khGSPooggsEcBa6IKitb/x42O+8iHmU+p4GO3xmpjvUgUcdZ73kdKuf
+         QeMahjt3cSyUw6eBcQTFHCfbg9wsSH/DlcK3kK3sHxJb0WTOMen/VVASFZITqfgAyWoY
+         lqctWwCEIp+2AIn9VM7wwFV9N0JS8Q6f3bM8tLX2JFT33b5WLoFka247AtlLIc7Yf7dD
+         UIKSTqAAkHXRd8CQCeQH5FiBC1mh5atbLqIPqz6AvSJpvvAdQ3SQzLIiV+DLj2vUTAd0
+         eOnYVWzL7BG4riZ2m8vC8q6ojaYW3Nkh3vF+FTCnFtkkRc1HRE0LIkbvsqrch2kXq3Xp
+         FD1w==
+X-Forwarded-Encrypted: i=1; AJvYcCUc3y7oDQv7u+uqI+cNA29Fb8TvVQwfXP29Y9MdYkH4skTt9M5xyJD769IQikrzgufbpsGoUIwJlCw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzMlif/TOJJ2s61WqEFlwhQbi1AzmuWmkVriF6uLV8Umo8qdFaq
+	xaK7/2vs8g4Qj+1ZEGP6d7lCh68GxY7WDCihr6m2DPADvW23sY0U+b+KkL+poqWRUHBAE6CnrzV
+	GdakCsnoDHw4/hYEtg3TYpLtpPGpI5q8=
+X-Gm-Gg: AZuq6aL9S/9Ou8DAL+aUtZrVS6ktbGlqWZwmfs/6c62ZrA/7/PhsikQe61ENo95O7jV
+	TChtfCwbglmlOqAAI4iRC3SseVXFWfQFFxVBuPA/rxflo5ZMq9nVdBpZmWoolRLe5oI5zvyzu1V
+	fH6hnsDT0x63l7jiNtAzcnPNJ9YdjmmemZkPxt9oZ+Y4slsfW+LuVxzntIBE3IkxvnNldDLLOPJ
+	vdU492dgHGOTP2HaY9colGdPLAlH/CUT/CTHXd6YXiEboyoepX93sSPrICc09egSpaBm9K1Ic6n
+	pNhUX0NnoW4SwneuRexZg/W78UMQeg==
+X-Received: by 2002:a05:6402:144f:b0:64b:588b:4375 with SMTP id
+ 4fb4d7f45d1cf-658de543897mr1599144a12.2.1769771166763; Fri, 30 Jan 2026
+ 03:06:06 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260130-adf41513-iio-driver-v6-8-cf46239026bc@analog.com>
-References: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
-In-Reply-To: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
-To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1769767615; l=1731;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=Oj2k9JgE/uUfO2+nYhc3ewqTCjVw0I0URGflu7fT+uM=;
- b=a84rk33IDvCU2RI1CyAHPceczS4wBg2aO6wVlKT6rKa0sOT/sPiFVFLJ1e5X3CH06Ga4+pNzI
- OQJb3x/LXQYDpqqpyzE40lc85DMZdCwMhIHA5eye78J70VjmHj1fsjE
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
+References: <20260130001418.18414-1-wufan@kernel.org>
+In-Reply-To: <20260130001418.18414-1-wufan@kernel.org>
+From: Amir Goldstein <amir73il@gmail.com>
+Date: Fri, 30 Jan 2026 12:05:55 +0100
+X-Gm-Features: AZwV_QgghBBStBrPYhn9xu--KNUWAryBYerGvsUjHEDtz6N4ByrCAVmC06166_U
+Message-ID: <CAOQ4uxhf6EQKcoN055xzmi-RW2GPxRzz_ExsQawGQBSmoX2WYg@mail.gmail.com>
+Subject: Re: [PATCH] ipe: document AT_EXECVE_CHECK TOCTOU issue on OverlayFS
+To: wufan@kernel.org
+Cc: linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, corbet@lwn.net, mic@digikod.net, 
+	miklos@szeredi.hu, linux-unionfs@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74669-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-74672-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,analog.com:email,analog.com:replyto,analog.com:url,analog.com:mid]
-X-Rspamd-Queue-Id: 0C1F4B92AA
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[amir73il@gmail.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: E3549B9E5C
 X-Rspamd-Action: no action
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On Fri, Jan 30, 2026 at 1:14=E2=80=AFAM <wufan@kernel.org> wrote:
+>
+> From: Fan Wu <wufan@kernel.org>
+>
+> Document a known TOCTOU (time-of-check to time-of-use) issue when using
+> AT_EXECVE_CHECK with read() on OverlayFS.
 
-Add ABI documentation file for PLL/DDS devices with frequency_resolution
-sysfs entry attribute used by ADF4350 and ADF41513.
+Hi Fan Wu,
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/ABI/testing/sysfs-bus-iio-frequency | 11 +++++++++++
- MAINTAINERS                                       |  1 +
- 2 files changed, 12 insertions(+)
+TBH, I don't like the way that this problem is being framed.
+IIUC, the problem is using IPE on a non-read-only fs.
+Is that correct?
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-new file mode 100644
-index 000000000000..1ce8ae578fd6
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-@@ -0,0 +1,11 @@
-+What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
-+KernelVersion:	6.20
-+Contact:	linux-iio@vger.kernel.org
-+Description:
-+		Stores channel Y frequency resolution/channel spacing in Hz for PLL
-+		devices. The given value directly influences the operating mode when
-+		fractional-N synthesis is required, as it derives values for
-+		configurable modulus parameters used in the calculation of the output
-+		frequency. It is assumed that the algorithm that is used to compute
-+		the various dividers, is able to generate proper values for multiples
-+		of channel spacing.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 0d9b7cf86aec..748eeb6f5bd2 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1639,6 +1639,7 @@ M:	Rodrigo Alencar <rodrigo.alencar@analog.com>
- L:	linux-iio@vger.kernel.org
- S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
-+F:	Documentation/ABI/testing/sysfs-bus-iio-frequency
- F:	Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
- F:	Documentation/iio/adf41513.rst
- F:	drivers/iio/frequency/adf41513.c
+That fact that IPE metadata is usually coupled with read-only fs
+is interesting for the understanding of the use case, but unless
+IPE feature mandates read-only fs, this is a generic problem.
 
--- 
-2.43.0
+OverlayFS is just one private case, which happens to be common
+in Android or containers? IDK, you did not mention this.
 
+Please describe the problem as a generic problem and give
+overlayfs as an example, preferable with references to the
+real world use cases.
 
+If I misunderstood, please explain why this problem is exclusive
+to overlayfs.
+
+Thanks,
+Amir.
+
+> The deny_write_access()
+> protection is only held during the syscall, allowing a copy-up operation
+> to be triggered afterward, causing subsequent read() calls to return
+> content from the unprotected upper layer.
+>
+> This is generally not a concern for typical IPE deployments since
+> dm-verity and fs-verity protected files are effectively read-only.
+> However, OverlayFS with a writable upper layer presents a special case.
+>
+> Document mitigation strategies including mounting overlay as read-only
+> and using mmap() instead of read(). Note that the mmap() mitigation
+> relies on current OverlayFS implementation details and should not be
+> considered a security guarantee.
+>
+> Signed-off-by: Fan Wu <wufan@kernel.org>
+> ---
+>  Documentation/admin-guide/LSM/ipe.rst | 32 +++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+>
+> diff --git a/Documentation/admin-guide/LSM/ipe.rst b/Documentation/admin-=
+guide/LSM/ipe.rst
+> index a756d8158531..b621a98fe5e2 100644
+> --- a/Documentation/admin-guide/LSM/ipe.rst
+> +++ b/Documentation/admin-guide/LSM/ipe.rst
+> @@ -110,6 +110,34 @@ intercepts during the execution process, this mechan=
+ism needs the interpreter
+>  to take the initiative, and existing interpreters won't be automatically
+>  supported unless the signal call is added.
+>
+> +.. WARNING::
+> +
+> +   There is a known TOCTOU (time-of-check to time-of-use) issue with
+> +   ``AT_EXECVE_CHECK`` when interpreters use ``read()`` to obtain script
+> +   contents after the check [#atacexecvecheck_toctou]_. The ``AT_EXECVE_=
+CHECK``
+> +   protection (via ``deny_write_access()``) is only held during the sysc=
+all.
+> +   After it returns, the file can be modified before the interpreter rea=
+ds it.
+> +
+> +   In typical IPE deployments, this is not a concern because files prote=
+cted
+> +   by dm-verity or fs-verity are effectively read-only and cannot be mod=
+ified.
+> +   However, OverlayFS presents a special case: when the lower layer is
+> +   dm-verity protected (read-only) but the upper layer is writable, an
+> +   attacker with write access can trigger a copy-up operation after the
+> +   ``AT_EXECVE_CHECK`` returns, causing subsequent ``read()`` calls to r=
+eturn
+> +   content from the unprotected upper layer instead of the verified lowe=
+r layer.
+> +
+> +   To mitigate this issue on OverlayFS:
+> +
+> +   -  Mount the overlay as read-only, or restrict write access to the up=
+per
+> +      layer.
+> +   -  Interpreters may use ``mmap()`` instead of ``read()`` to obtain sc=
+ript
+> +      contents. Currently, OverlayFS fixes the underlying real file refe=
+rence
+> +      at ``open()`` time for mmap operations, so mmap will continue to a=
+ccess
+> +      the original lower layer file even after a copy-up. However, this
+> +      behavior is an implementation detail of OverlayFS and is not guara=
+nteed
+> +      to remain stable across kernel versions. Do not rely on this as a
+> +      security guarantee.
+> +
+>  Threat Model
+>  ------------
+>
+> @@ -833,3 +861,7 @@ A:
+>                       kernel's fsverity support; IPE does not impose any
+>                       restrictions on the digest algorithm itself;
+>                       thus, this list may be out of date.
+> +
+> +.. [#atacexecvecheck_toctou] See the O_DENY_WRITE RFC discussion for det=
+ails on
+> +                             this TOCTOU issue:
+> +                             https://lore.kernel.org/all/20250822170800.=
+2116980-1-mic@digikod.net/
+> --
+> 2.52.0
+>
 
