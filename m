@@ -1,264 +1,354 @@
-Return-Path: <linux-doc+bounces-74732-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74749-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cxToKw4NfmlbVAIAu9opvQ
-	(envelope-from <linux-doc+bounces-74732-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 15:09:18 +0100
+	id qEcCMSwRfmkqVQIAu9opvQ
+	(envelope-from <linux-doc+bounces-74749-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 15:26:52 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46C7FC22B9
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 15:09:18 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C9DFC25CA
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 15:26:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 9F6723003351
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 14:09:16 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C8A243008514
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 14:25:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E43C29AAF7;
-	Sat, 31 Jan 2026 14:09:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE0C135BDC1;
+	Sat, 31 Jan 2026 14:25:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=aosc.io header.i=@aosc.io header.b="QvjPHoHw"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZtBiOkli"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay4.mymailcheap.com (relay4.mymailcheap.com [137.74.80.154])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 783821C5D5E;
-	Sat, 31 Jan 2026 14:09:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=137.74.80.154
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34C253587D7;
+	Sat, 31 Jan 2026 14:25:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769868553; cv=none; b=hpgxlYPIsYeSxkwBpHO7p5f0sD+H25vJfo9IdRUP04I60InLzCklaorIDfc0lcQMCl2p52gEyU1GWj/qG1AV4vzRP5hl1FTPaiIrTf6hwFX4rntoov61hrfzyjtstD0jMw4aGAsA6hhVVDGGrbeQvea3EZGLzJsLyGWlNwnSmXc=
+	t=1769869522; cv=none; b=JL70pAx2YwiiyBTmwDYBIBkTPx+e0QX0NEIkbwKYjJr/i+NiHsNDC4iTVlh0bRg4Yu6NIyA2HmZVVy3N9IZ4nff/3gKGZr0wFZdCb1dMNxRwHQdIRJkdw6W4QX3nF+2Wvv8mHraR1fslD3luC70CAatrwYVJp658f1wLjz9Zbkg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769868553; c=relaxed/simple;
-	bh=wKjWwAJDesOvn1+Zai9dJuWomkGTs+IRFJbxkSgLNQk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bgiol1ce17fb0Mh98E9A22cU2lnSTuG9kYhlr06DJAZWxsx7rrYFQrzHjl8k8FNGgZ0Wxii7jIVPKoiZ2Rzaf5Bxu2b3EvuARbC0U5NoE6urp/7Me4hVrxg+C3rWki+yJ+1xpxbCA4ArypP18wimfUyC/QcdXTyGQigBSoKEol8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=aosc.io; spf=pass smtp.mailfrom=aosc.io; dkim=pass (1024-bit key) header.d=aosc.io header.i=@aosc.io header.b=QvjPHoHw; arc=none smtp.client-ip=137.74.80.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=aosc.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aosc.io
-Received: from nf1.mymailcheap.com (nf1.mymailcheap.com [51.75.14.91])
-	by relay4.mymailcheap.com (Postfix) with ESMTPS id 78742202EF;
-	Sat, 31 Jan 2026 14:09:09 +0000 (UTC)
-Received: from mail20.mymailcheap.com (mail20.mymailcheap.com [51.83.111.147])
-	by nf1.mymailcheap.com (Postfix) with ESMTPSA id 25FD8400D5;
-	Sat, 31 Jan 2026 14:09:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=aosc.io; s=default;
-	t=1769868544; bh=wKjWwAJDesOvn1+Zai9dJuWomkGTs+IRFJbxkSgLNQk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=QvjPHoHwEgO8gx+Zhcn2hOoHbSeVsG7b6cx6tkxsFow0OTUhuRBe2Qqk0uxNof75i
-	 k9FX9PaXUMxSwqOQn53lizfLeNcjGoIl3/iRdmdAa3XNFWO8KwWD+nSXk4RcyMwOZg
-	 XxAy1jldNZixA8pMXBLcyoMBnsHghh+J3B32ottQ=
-Received: from [127.0.0.1] (unknown [117.151.13.225])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mail20.mymailcheap.com (Postfix) with ESMTPSA id 24E3740F79;
-	Sat, 31 Jan 2026 14:08:51 +0000 (UTC)
-Message-ID: <b89a22a3-be55-4c86-99e3-84759e362309@aosc.io>
-Date: Sat, 31 Jan 2026 22:08:47 +0800
+	s=arc-20240116; t=1769869522; c=relaxed/simple;
+	bh=GQxQSIJ9zVioMxXOuLm+2OSq66234rnFskvJugtkkiE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=FgPBz4EMAVuOvOk5GL/uqETPkA781GIPDKzDNwLDTSMbxX5ck6Ua2aDHQkeFTxcqwwgkpD07l7fbzfxTeoYaZrlQPaQqqqhkvAchkNlhtb6NWoShX8hp2kMn6G6lSLF6R6xLPxpC4RtCvtmYTq5WY0lz8caXrXTzkzg+GA4bRCA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZtBiOkli; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A0B3C2BCB3;
+	Sat, 31 Jan 2026 14:25:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1769869521;
+	bh=GQxQSIJ9zVioMxXOuLm+2OSq66234rnFskvJugtkkiE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ZtBiOkliM1tjI/dshe2DJ87tkxKsNQsJeXpHs8bUPcsxuZkIImeIyj/oImKn3dIO6
+	 mvbJcCvzjM6rbgMJQRIjNqswn7r+IAaTLy9XbeV7aPlMmSCrcNfKV2ZJgDjRFiUMkO
+	 UIwvNOGftYnoLX2HDlPe6voh1rOeSphwEnb9ZfOJ9eQ5fsQXQDLX7bIa9hfrZKKfYV
+	 i6UYuBr5d22/k2GtAkeHVuyRe6GBl7kUhlwSxsx+xepH9Mrhb0FiqqpI7noh8w/rM0
+	 404IwE5Rqy/HvRbsOdRS6fMU6mzT7fV7K02g8RG5RwwPwn/ENHUbra0rlOo6fRnD7l
+	 NloskcjdjEvNQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vmBuZ-0000000AVjl-1EAr;
+	Sat, 31 Jan 2026 15:25:19 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Alexander Lobakin <aleksander.lobakin@intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Kees Cook <kees@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	intel-wired-lan@lists.osuosl.org,
+	linux-doc@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v4 00/41] kernel-doc: make it parse new functions and structs
+Date: Sat, 31 Jan 2026 15:24:34 +0100
+Message-ID: <cover.1769867953.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 RESEND] KVM: Add KVM_GET_REG_LIST ioctl for LoongArch
-Content-Language: en-US-large, en-US
-To: Huacai Chen <chenhuacai@kernel.org>
-Cc: WANG Xuerui <kernel@xen0n.name>, Bibo Mao <maobibo@loongson.cn>,
- Kexy Biscuit <kexybiscuit@aosc.io>, Mingcong Bai <jeffbai@aosc.io>,
- Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
- Tianrui Zhao <zhaotianrui@loongson.cn>, Paul Walmsley <pjw@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
- Alexandre Ghiti <alex@ghiti.fr>, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- loongarch@lists.linux.dev, linux-riscv@lists.infradead.org
-References: <20260131060600.169748-1-liushuyu@aosc.io>
- <CAAhV-H7g4StjP5fnHVVEyR_xFx9=fg6S9UuHWnPpMV_k=ZVGGw@mail.gmail.com>
-From: liushuyu <liushuyu@aosc.io>
-In-Reply-To: <CAAhV-H7g4StjP5fnHVVEyR_xFx9=fg6S9UuHWnPpMV_k=ZVGGw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
-	R_DKIM_ALLOW(-0.20)[aosc.io:s=default];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-74732-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[aosc.io];
-	DKIM_TRACE(0.00)[aosc.io:+];
+	TAGGED_FROM(0.00)[bounces-74749-lists,linux-doc=lfdr.de,huawei];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	RCVD_COUNT_FIVE(0.00)[6];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[liushuyu@aosc.io,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 46C7FC22B9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 7C9DFC25CA
 X-Rspamd-Action: no action
 
-Hi Huacai,
+Hi Jon,
 
-> Hi, Zixing,
->
-> On Sat, Jan 31, 2026 at 2:07 PM Zixing Liu <liushuyu@aosc.io> wrote:
->> This ioctl can be used by the userspace applications to determine which
->> (special) registers are get/set-able in a meaningful way.
->>
->> This can be very useful for cross-platform VMMs so that they do not have
->> to hardcode register indices for each supported architectures.
->>
->> Signed-off-by: Zixing Liu <liushuyu@aosc.io>
->> ---
->>  Documentation/virt/kvm/api.rst |  2 +-
->>  arch/loongarch/kvm/vcpu.c      | 85 ++++++++++++++++++++++++++++++++++
->>  2 files changed, 86 insertions(+), 1 deletion(-)
->>
->> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
->> index 01a3abef8abb..f46dd8be282f 100644
->> --- a/Documentation/virt/kvm/api.rst
->> +++ b/Documentation/virt/kvm/api.rst
->> @@ -3603,7 +3603,7 @@ VCPU matching underlying host.
->>  ---------------------
->>
->>  :Capability: basic
->> -:Architectures: arm64, mips, riscv, x86 (if KVM_CAP_ONE_REG)
->> +:Architectures: arm64, loongarch, mips, riscv, x86 (if KVM_CAP_ONE_REG)
->>  :Type: vcpu ioctl
->>  :Parameters: struct kvm_reg_list (in/out)
->>  :Returns: 0 on success; -1 on error
->> diff --git a/arch/loongarch/kvm/vcpu.c b/arch/loongarch/kvm/vcpu.c
->> index 656b954c1134..ed11438f4544 100644
->> --- a/arch/loongarch/kvm/vcpu.c
->> +++ b/arch/loongarch/kvm/vcpu.c
->> @@ -1186,6 +1186,73 @@ static int kvm_loongarch_vcpu_set_attr(struct kvm_vcpu *vcpu,
->>         return ret;
->>  }
->>
->> +static int kvm_loongarch_walk_csrs(struct kvm_vcpu *vcpu, u64 __user *uindices)
->> +{
->> +       unsigned int i, count;
->> +
->> +       for (i = 0, count = 0; i < CSR_MAX_NUMS; i++) {
->> +               if (!(get_gcsr_flag(i) & (SW_GCSR | HW_GCSR)))
->> +                       continue;
->> +               const u64 reg = KVM_IOC_CSRID(i);
->> +               if (uindices && put_user(reg, uindices++))
->> +                       return -EFAULT;
->> +               count++;
->> +       }
->> +
->> +       return count;
->> +}
->> +
->> +static unsigned long kvm_loongarch_num_lbt_regs(void)
->> +{
->> +       /* +1 for the LBT_FTOP flag (inside arch.fpu) */
->> +       return sizeof(struct loongarch_lbt) / sizeof(unsigned long) + 1;
->> +}
-> This function has only one line, I think it is better to embed it into
-> the caller.
+Rebased the changes on the top of docs-mw, and merged
+the /4 patch series with fixes from me that ws pending
+and contained a conflicting patch with this series.
 
-This function was used twice in this patch. If the hardware gained more
-LBT registers that are not recorded in `struct loongarch_lbt` in the
-future, I am afraid changing manually inlined logic will be a bit
-error-prone.
+Oh well, it means that this one increased its size
+again...
 
-Maybe one compromise would be making this a `const` variable somewhere
-in this file instead of a function? What do you think?
+The initial goal were to address some new warnings
+at linux next due to some new macro annotations.
 
-> Huacai
+As the previous version, this one contains a new
+CFunction class, with is just an alias for "NestedMatch",
+meant to make easier to maintain transforms, which are
+now on a separate file:
 
-Thanks,
+    tools/lib/python/kdoc/xforms_lists.py
 
-Zixing
+With that, transform lists now use CFunction for macros
+with a function prototype, using KernRe only the
+remaining macros and part of the declarations we want to
+strip (like extern).
 
->> +
->> +static unsigned long kvm_loongarch_num_regs(struct kvm_vcpu *vcpu)
->> +{
->> +       /* +1 for the KVM_REG_LOONGARCH_COUNTER register */
->> +       unsigned long res =
->> +               kvm_loongarch_walk_csrs(vcpu, NULL) + KVM_MAX_CPUCFG_REGS + 1;
->> +
->> +       if (kvm_guest_has_lbt(&vcpu->arch))
->> +               res += kvm_loongarch_num_lbt_regs();
->> +
->> +       return res;
->> +}
->> +
->> +static int kvm_loongarch_copy_reg_indices(struct kvm_vcpu *vcpu,
->> +                                         u64 __user *uindices)
->> +{
->> +       u64 reg;
->> +       unsigned int i;
->> +
->> +       i = kvm_loongarch_walk_csrs(vcpu, uindices);
->> +       if (i < 0)
->> +               return i;
->> +       uindices += i;
->> +
->> +       for (i = 0; i < KVM_MAX_CPUCFG_REGS; i++) {
->> +               reg = KVM_IOC_CPUCFG(i);
->> +               if (put_user(reg, uindices++))
->> +                       return -EFAULT;
->> +       }
->> +
->> +       reg = KVM_REG_LOONGARCH_COUNTER;
->> +       if (put_user(reg, uindices++))
->> +               return -EFAULT;
->> +
->> +       if (!kvm_guest_has_lbt(&vcpu->arch))
->> +               return 0;
->> +
->> +       for (i = 1; i <= kvm_loongarch_num_lbt_regs(); i++) {
->> +               reg = (KVM_REG_LOONGARCH_LBT | KVM_REG_SIZE_U64 | i);
->> +               if (put_user(reg, uindices++))
->> +                       return -EFAULT;
->> +       }
->> +
->> +       return 0;
->> +}
->> +
->>  long kvm_arch_vcpu_ioctl(struct file *filp,
->>                          unsigned int ioctl, unsigned long arg)
->>  {
->> @@ -1251,6 +1318,24 @@ long kvm_arch_vcpu_ioctl(struct file *filp,
->>                 r = kvm_loongarch_vcpu_set_attr(vcpu, &attr);
->>                 break;
->>         }
->> +       case KVM_GET_REG_LIST: {
->> +               struct kvm_reg_list __user *user_list = argp;
->> +               struct kvm_reg_list reg_list;
->> +               unsigned n;
->> +
->> +               r = -EFAULT;
->> +               if (copy_from_user(&reg_list, user_list, sizeof(reg_list)))
->> +                       break;
->> +               n = reg_list.n;
->> +               reg_list.n = kvm_loongarch_num_regs(vcpu);
->> +               if (copy_to_user(user_list, &reg_list, sizeof(reg_list)))
->> +                       break;
->> +               r = -E2BIG;
->> +               if (n < reg_list.n)
->> +                       break;
->> +               r = kvm_loongarch_copy_reg_indices(vcpu, user_list->reg);
->> +               break;
->> +       }
->>         default:
->>                 r = -ENOIOCTLCMD;
->>                 break;
->> --
->> 2.52.0
->>
+So, for instance, the entire transform list for structs
+is now:
+
+    #: Transforms for structs and unions
+    struct_xforms = [
+        (CFunction("__attribute__"), ' '),
+        (CFunction('__aligned'), ' '),
+        (CFunction('__counted_by'), ' '),
+        (CFunction('__counted_by_(le|be)'), ' '),
+        (CFunction('__guarded_by'), ' '),
+        (CFunction('__pt_guarded_by'), ' '),
+
+        (KernRe(r'\s*__packed\s*', re.S), ' '),
+        (KernRe(r'\s*CRYPTO_MINALIGN_ATTR', re.S), ' '),
+        (KernRe(r'\s*__private', re.S), ' '),
+        (KernRe(r'\s*__rcu', re.S), ' '),
+        (KernRe(r'\s*____cacheline_aligned_in_smp', re.S), ' '),
+        (KernRe(r'\s*____cacheline_aligned', re.S), ' '),
+
+        (CFunction('__cacheline_group_(begin|end)'), ''),
+
+        (CFunction('struct_group'), r'\2'),
+        (CFunction('struct_group_attr'), r'\3'),
+        (CFunction('struct_group_tagged'), r'struct \1 \2; \3'),
+        (CFunction('__struct_group'), r'\4'),
+
+        (CFunction('__ETHTOOL_DECLARE_LINK_MODE_MASK'), r'DECLARE_BITMAP(\1, __ETHTOOL_LINK_MODE_MASK_NBITS)'),
+        (CFunction('DECLARE_PHY_INTERFACE_MASK',), r'DECLARE_BITMAP(\1, PHY_INTERFACE_MODE_MAX)'),
+        (CFunction('DECLARE_BITMAP'), r'unsigned long \1[BITS_TO_LONGS(\2)]'),
+
+        (CFunction('DECLARE_HASHTABLE'), r'unsigned long \1[1 << ((\2) - 1)]'),
+        (CFunction('DECLARE_KFIFO'), r'\2 *\1'),
+        (CFunction('DECLARE_KFIFO_PTR'), r'\2 *\1'),
+        (CFunction('(?:__)?DECLARE_FLEX_ARRAY'), r'\1 \2[]'),
+        (CFunction('DEFINE_DMA_UNMAP_ADDR'), r'dma_addr_t \1'),
+        (CFunction('DEFINE_DMA_UNMAP_LEN'), r'__u32 \1'),
+        (CFunction('VIRTIO_DECLARE_FEATURES'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
+    ]
+
+As KernRe, CFunction and NestedMatch have a ".sub" method, a
+single transforms table can have them all.
+
+Due to the complexity of NestedMatch, I opted to write
+unit tests to verify that the logic there is correct.
+
+On this version, the module was almost entirely re-written
+by hand, and the test suite has now 3 groups:
+
+- TestDifferentReplacements: basic tests using several
+  tests to try checkin border cases with NestedMatch.sub.
+  They all use a single macro name;
+- TestMultipleMacros: test different macros and conditions,
+  also trying to get border cases;
+- TestRealUsecases: as the name says, on this one I picked
+  real test cases. I used an example given by Randy on
+  some of them and placed a testset to try covering
+  struct_group macros, which are quite complex.
+
+Using it is as easy as running:
+
+	$ tools/unittests/kdoc_xforms.py
+
+And, if something goes wrong, -v will show the problem in unified diff[1]:
+
+    $ tools/unittests/kdoc_xforms.py -k test_functions_with_acquires_and_releases -v
+
+    test_functions_with_acquires_and_releases (kdoc_xforms.TestRealUsecases.test_functions_with_acquires_and_releases)
+    Test guarded_by on vars from lib/stackdepot.c. ... FAIL
+    
+    ======================================================================
+    FAIL: test_functions_with_acquires_and_releases (kdoc_xforms.TestRealUsecases.test_functions_with_acquires_and_releases)
+    Test guarded_by on vars from lib/stackdepot.c.
+    ----------------------------------------------------------------------
+    Traceback (most recent call last):
+      File "/new_devel/docs/tools/unittests/kdoc_xforms.py", line 649, in test_functions_with_acquires_and_releases
+        self.assertLogicallyEqual(result, expected)
+        ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+      File "/new_devel/docs/tools/unittests/kdoc_xforms.py", line 56, in assertLogicallyEqual
+        self.assertEqual(a, b)
+        ~~~~~~~~~~~~~~~~^^^^^^
+    AssertionError: 'bool[477 chars]\n\n acpi_cpu_flags acpi_os_acquire_lock(acpi_[90 chars]sed)' != 'bool[477 chars]\n\n /* THIS IS UNEXPECTED. TEST WILL FAIL HER[140 chars]sed)'
+      bool prepare_report_consumer(unsigned long *flags,
+       const struct access_info *ai,
+       struct other_info *other_info);
+      
+       int tcp_sigpool_start(unsigned int id, struct tcp_sigpool *c);
+      
+       bool undo_report_consumer(unsigned long *flags,
+       const struct access_info *ai,
+       struct other_info *other_info);
+      
+       void debugfs_enter_cancellation(struct file *file,
+       struct debugfs_cancellation *c);
+      
+       void debugfs_leave_cancellation(struct file *file,
+       struct debugfs_cancellation *c);
+      
+    +  /* THIS IS UNEXPECTED. TEST WILL FAIL HERE */
+    + 
+       acpi_cpu_flags acpi_os_acquire_lock(acpi_spinlock lockp);
+      
+       void acpi_os_release_lock(acpi_spinlock lockp,
+       acpi_cpu_flags not_used)
+    
+    
+    ----------------------------------------------------------------------
+    Ran 1 test in 0.001s
+    
+    FAILED (failures=1)
+
+[1] This error was caused when I applied this patch:
+
+    --- a/tools/unittests/kdoc_xforms.py
+    +++ b/tools/unittests/kdoc_xforms.py
+    @@ -637,6 +637,8 @@ class TestRealUsecases(TestCaseDiff):
+                 void debugfs_leave_cancellation(struct file *file,
+                                                 struct debugfs_cancellation *c);
+ 
+    +            /* THIS IS UNEXPECTED. TEST WILL FAIL HERE */
+    +
+                 acpi_cpu_flags acpi_os_acquire_lock(acpi_spinlock lockp);
+ 
+                 void acpi_os_release_lock(acpi_spinlock lockp,
+
+
+
+---
+v4:
+- minor cleanups at the description on the first 30 patches;
+- picked paches from this series:
+    https://lore.kernel.org/linux-doc/cover.1769500383.git.mchehab+huawei@kernel.org/
+- added patches to make easier for kernel-doc to be used on
+  other projects (QEMU currently uses it)
+- did some extra fixes at NestedMatch for some corner cases;
+- added patches to improve man pages output;
+- unittests were revamped.
+
+v3:
+- improved the unittest helper to allow adding in the future
+  a runner to create a test suite directly;
+- added unittest to tools/python library documentation;
+- improved comments at the new modules;
+- did several cleanups at the new logic;
+- added a fix for NestedMatch not remove ";" at the end,
+  mimicing the behavior of KernRe;
+- moved transforms to a separate module;
+- replaced all regexes to parse macros with the new CFunction
+  alias for NestedMatch.
+
+v2:
+- added 10 new patches adding support at NestedMatch
+  to properly group and replace arguments with \1, \2, ...
+
+Mauro Carvalho Chehab (39):
+  docs: kdoc_re: add support for groups()
+  docs: kdoc_re: don't go past the end of a line
+  docs: kdoc_parser: move var transformers to the beginning
+  docs: kdoc_parser: don't mangle with function defines
+  docs: kdoc_parser: add functions support for NestedMatch
+  docs: kdoc_parser: use NestedMatch to handle __attribute__ on
+    functions
+  docs: kdoc_parser: fix variable regexes to work with size_t
+  docs: kdoc_parser: fix the default_value logic for variables
+  docs: kdoc_parser: add some debug for variable parsing
+  docs: kdoc_parser: don't exclude defaults from prototype
+  docs: kdoc_parser: fix parser to support multi-word types
+  docs: kdoc_parser: add support for LIST_HEAD
+  docs: kdoc_re: properly handle strings and escape chars on it
+  docs: kdoc_re: better show KernRe() at documentation
+  docs: kdoc_re: don't recompile NestedMatch regex every time
+  docs: kdoc_re: Change NestedMath args replacement to \0
+  docs: kdoc_re: make NestedMatch use KernRe
+  docs: kdoc_re: add support on NestedMatch for argument replacement
+  docs: kdoc_parser: better handle struct_group macros
+  docs: kdoc_re: fix a parse bug on struct page_pool_params
+  docs: kdoc_re: add a helper class to declare C function matches
+  docs: kdoc_parser: use the new CFunction class
+  docs: kdoc_parser: minimize differences with struct_group_tagged
+  docs: kdoc_parser: move transform lists to a separate file
+  docs: kdoc_re: don't remove the trailing ";" with NestedMatch
+  docs: kdoc_re: prevent adding whitespaces on sub replacements
+  docs: xforms_lists.py: use CFuntion to handle all function macros
+  docs: kdoc_files: allows the caller to use a different xforms class
+  docs: kdoc_re: Fix NestedMatch.sub() which causes PDF builds to break
+  docs: sphinx-build-wrapper: allow -v override -q
+  tools: sphinx-build-wrapper: improve its help message
+  docs: kdoc_files: document KernelFiles() ABI
+  docs: kdoc_output: add optional args to ManOutput class
+  docs: sphinx-build-wrapper: better handle troff .TH markups
+  docs: kdoc_output: use a more standard order for .TH on man pages
+  docs: kdoc_output: describe the class init parameters
+  docs: kdoc_output: pick a better default for modulename
+  docs: python: add helpers to run unit tests
+  tools: unittests: add tests for kernel-doc NestedMatch and KernRe
+
+Randy Dunlap (2):
+  docs: kdoc_parser: ignore context analysis and lock attributes
+  docs: kdoc_parser: handle struct member macro
+    VIRTIO_DECLARE_FEATURES(name)
+
+ Documentation/tools/kdoc_parser.rst   |   8 +
+ Documentation/tools/python.rst        |   2 +
+ Documentation/tools/unittest.rst      |  24 +
+ tools/docs/kernel-doc                 |   1 -
+ tools/docs/sphinx-build-wrapper       |  50 +-
+ tools/lib/python/kdoc/kdoc_files.py   |  54 ++-
+ tools/lib/python/kdoc/kdoc_output.py  |  73 ++-
+ tools/lib/python/kdoc/kdoc_parser.py  | 182 ++-----
+ tools/lib/python/kdoc/kdoc_re.py      | 242 +++++++---
+ tools/lib/python/kdoc/xforms_lists.py | 108 +++++
+ tools/lib/python/unittest_helper.py   | 348 ++++++++++++++
+ tools/unittests/kdoc_xforms.py        | 654 ++++++++++++++++++++++++++
+ 12 files changed, 1515 insertions(+), 231 deletions(-)
+ create mode 100644 Documentation/tools/unittest.rst
+ create mode 100644 tools/lib/python/kdoc/xforms_lists.py
+ create mode 100755 tools/lib/python/unittest_helper.py
+ create mode 100755 tools/unittests/kdoc_xforms.py
+
+-- 
+2.52.0
+
 
