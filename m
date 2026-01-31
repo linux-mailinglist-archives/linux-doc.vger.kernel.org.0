@@ -1,65 +1,65 @@
-Return-Path: <linux-doc+bounces-74727-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74729-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kGpyGpQFfmmVUwIAu9opvQ
-	(envelope-from <linux-doc+bounces-74727-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 14:37:24 +0100
+	id QDw9N8IFfmmVUwIAu9opvQ
+	(envelope-from <linux-doc+bounces-74729-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 14:38:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14177C2004
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 14:37:24 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E0A7C2032
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 14:38:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 794EC300B131
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 13:37:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 91C6230238F6
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Jan 2026 13:37:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4928633A9E0;
-	Sat, 31 Jan 2026 13:37:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A0000342CBB;
+	Sat, 31 Jan 2026 13:37:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=valinux.co.jp header.i=@valinux.co.jp header.b="wpLo9iFp"
+	dkim=pass (1024-bit key) header.d=valinux.co.jp header.i=@valinux.co.jp header.b="dNx5lLHp"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from OS0P286CU011.outbound.protection.outlook.com (mail-japanwestazon11020130.outbound.protection.outlook.com [52.101.228.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 032CD199230;
-	Sat, 31 Jan 2026 13:37:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED194352C2A;
+	Sat, 31 Jan 2026 13:37:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.228.130
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769866627; cv=fail; b=AwHvuQ6at//aEgWQ3LVmKVmYMdnpiTIhI31nGNxAVa4JBtVyeeoqRfFf9wUCyFvQ7QEr3V8hOKg4zq5gxofwU6X3tWkovutsqmy+7nfmIaHodChGR6xx6vQzV/Bw/a0TGBLBUn/gLd99HKXAJDPFgzLkHujO4v7s7zKzBYxTP08=
+	t=1769866630; cv=fail; b=Xp5KgQL2MHgaTOt4HUq/vXJHBQE5BNoOyyaKbM6OYZmArs/hjjarEVOT220Ob8z5jirZyPfe27uGfoRl67Rer1E5J5AJrfGaZfJEn51fSkG8BRFHe3pIgjwbnqmfgG6g3HxJQOeXRX7E1JYM+LDQS1xqV3j0KzdR1W2Doa1Rna0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769866627; c=relaxed/simple;
-	bh=5FaUJtvQJZ5vZ7VEucjGszVNlqcEL3+eumSMSvKe9wM=;
+	s=arc-20240116; t=1769866630; c=relaxed/simple;
+	bh=v4EcHqBQerrJJRp9LZQJfWz/7u8fcoTA+g0oZWshLR8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=Q3HtGqjMACcbhqxmyDcLLwe/KU9J1cCUTvjHhPZ9dcV24rOEx0jIBKse0ojX0ABSSR9OIWeF2qclchJfWG3iCLdqCXtFSEhqBzTYLt6Siwl7IFcni+FGGAs2nPV+l+e6/QUCQWer+s/vpLxExcaJ4YHqk0jZNwEHyBmLF3Mi4Co=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valinux.co.jp; spf=pass smtp.mailfrom=valinux.co.jp; dkim=pass (1024-bit key) header.d=valinux.co.jp header.i=@valinux.co.jp header.b=wpLo9iFp; arc=fail smtp.client-ip=52.101.228.130
+	 Content-Type:MIME-Version; b=AHGEpPzFhvGgZBdYMm+Z91/ZAFDcIN067LNYA2F26dKV0/X9jt8MKOc71SBe9NhWKqZ+FuJ6JBnUKflcdykwzOiDCkyeGNxErdyrTcV4ie7Bdz1dYef6DhMq4il9p5f3oDvdcBJjd3TI0CxN4cJ4Scdq1bNtQK/i0eDM5SfkFaM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valinux.co.jp; spf=pass smtp.mailfrom=valinux.co.jp; dkim=pass (1024-bit key) header.d=valinux.co.jp header.i=@valinux.co.jp header.b=dNx5lLHp; arc=fail smtp.client-ip=52.101.228.130
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valinux.co.jp
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valinux.co.jp
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cmCAfl9TS6l3YegyMH9TeFqTwHOe4hXUxgaAw6rC1iDKPJPLMYqC4GwQO8WnDkFwnT1PyjXniaHGmicq3ridTC1X02aFLxzCeUHS9W35D/BvWUPwh22o6rm9zc4ss+UnVlIDEYx0aWsKkYnrUI9U2Gn9RWBw0whxnVZvFgXFc5KbwVNLcUAT7ut1aJJyJf9H8SQYhFVEfH+G70ePEDLEKEov8Z3EdM82mfbznPrfp9Z9Y33g+2i4KWXdw4US10XkQia/774gb2BgcAn40dxn1xkUUgjyyRCjaXlBS5gFrpa9vflc094gxPawvHBkc88gud4B6aZUpgOxRLn9CEKOGA==
+ b=MuMiwwtfMsGYyRas3uNFj2DFUfs7T8mnWgYChOMrqmSOB0uYFf/YV8zOLk90UgzecWdiUY065KDyoxhXrZQaoel+YP/gMxtSfU6wEZjFyU6oz68uOoIhW72QUbT/p2zGTLJnTB0ofuYYZyOT1i/fBJFI40txVQEvSLcDRbEoE/Ts9GmRJg2FF9dEBx7Z0UkSiROjvRtz9BY0DI3oeTOgRjv4WG7AtN8yFygLJCVgvmQW5l1I6ELGV8WcX+wNvv4bWRynf8BOWqk9GUCWNzwdWw6B+6VHy2Iqd+DDeOlsfI4BlR9iaBsFn323myONgiuUqy8iDspKk/WBamSyGVoKWw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=i0DJP6vTv0QYOKMrncI8q8Xbf3uzkb5sa1uQLq96KeY=;
- b=j/GCPTEJptfLjOQPmrLVb87B2kjbgZQZ4/fcuZ3HFmCyg6S2re8yADXyh/tVTH9mXJOiNnoB/ZKbUIZIiorjzhXYx1nN4wtDr34PCoZyiBEffTsv72bkNTBIBOEhq2K8drzeup7IhRVgzld4jyo8f372K8vfvhyABaXhpgLP1neqLG3OC8yxcWH4ECUSCM1a0g5E8ZHwrXuMiQz42AKLQydkeyEoOnBLY1H5+ocQbp2gCD+rMag46OAOYB3gkyAercfbbE17zIO6LiUhCJH1SYT2wQ0+UBrTV+AWGV4zCZ0O1QR95zl46ZeLIOtGk06h7nsJXs8w87uS65c/7z30oA==
+ bh=EUYyEqiVuTYL9H5N5UWfu7rg1sQhdovjZkqQSxBTm9k=;
+ b=hsGCjHl0mqok3r9m/ZT28GN3AlvFydKfzb6n6hxRpkz1P4bwmyvWimA135pPGZVwMe/IrKdZl/Ldp0CSHi25smMWSGqMuIMpfQO0kEvV+DGsfp2cbTj8DaZ3a9PGprLnadwSF7f6GpjGCGd1sgTYTLWsHSCPVh/or8P788vyETswllPx+RyemPmfIKMxw+MCewQJDQJHdm5l/gbY06cyZEIz+fxtivQICsnasm0roYhY7BavE/o/XnN4OtNZRYIHflwWRLhml1ecpfnD6zWYKpUK8YbC3ML57uPSgcXRq7PHOkDj1CoXO9dn6SsnfpkIdO9BGT3jRSVOs9eWnld58A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i0DJP6vTv0QYOKMrncI8q8Xbf3uzkb5sa1uQLq96KeY=;
- b=wpLo9iFpvUc5OvadTzfQnqC1hetkRSLz+T0wirQFSEqsaM29GehU4Tuc7AxYamEGMpEX+Dhv3/JOOUDmvNjNc5kyIWVRnERJzVoPlG0tdZbeInBeMXBVZlMoi+8FrjXZPbsz1Y09DUcTdGolnxFCe6iqZY7htLo3xoWEXZTnV4c=
+ bh=EUYyEqiVuTYL9H5N5UWfu7rg1sQhdovjZkqQSxBTm9k=;
+ b=dNx5lLHpUxllo2YR03YWsk+SY8hEBX2RDICPgzJrXCpyXNlOiNKJAsZvKenZHbsqpG1d/juhlokLrUE6KrElSuUd7hR/1IBPn4OPndiMqqY1ryhfIAh/oPrqSG0zn7zUKVGeV3UnblK1axvmZ91N9uB1Bmqf+ImgtCxEMNAVYFE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:38f::10)
  by TYYP286MB5003.JPNP286.PROD.OUTLOOK.COM (2603:1096:405:14b::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.13; Sat, 31 Jan
- 2026 13:37:02 +0000
+ 2026 13:37:03 +0000
 Received: from TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32]) by TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  ([fe80::2305:327c:28ec:9b32%5]) with mapi id 15.20.9542.010; Sat, 31 Jan 2026
- 13:37:02 +0000
+ 13:37:03 +0000
 From: Koichiro Den <den@valinux.co.jp>
 To: mani@kernel.org,
 	cassel@kernel.org,
@@ -74,16 +74,16 @@ To: mani@kernel.org,
 Cc: linux-pci@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/3] PCI: dwc: ep: Return after clearing BAR-match inbound mapping
-Date: Sat, 31 Jan 2026 22:36:53 +0900
-Message-ID: <20260131133655.218018-2-den@valinux.co.jp>
+Subject: [PATCH 2/3] PCI: endpoint: pci-epf-test: Use dedicated pci_epf_bar for subrange mapping
+Date: Sat, 31 Jan 2026 22:36:54 +0900
+Message-ID: <20260131133655.218018-3-den@valinux.co.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260131133655.218018-1-den@valinux.co.jp>
 References: <20260131133655.218018-1-den@valinux.co.jp>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0367.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:79::14) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: TYCP286CA0133.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:2b6::20) To TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:405:38f::10)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -93,84 +93,84 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY7P286MB7722:EE_|TYYP286MB5003:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4d250073-29ee-4b6d-bac1-08de60cdd13d
+X-MS-Office365-Filtering-Correlation-Id: be3dfebb-7a20-4c26-ea66-08de60cdd1ac
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|10070799003|366016|7416014|1800799024|376014|921020;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?rmLBWYzcopm+HQlzg7Mc/Nd4gN+f8NpUrINhKIVW5PBGApBPDl4+wTWKyKIj?=
- =?us-ascii?Q?oJbBvYiGeaajenM0wAx9U+OTmH8Bxgfz2wXYMB9xhBc/+Rg5blqHTaqQ5EDC?=
- =?us-ascii?Q?ZN/D6sePRepkkj7ju7G2yPDeih8PpctCpRUDI9dOnJSOHl28mz66+w4A0klB?=
- =?us-ascii?Q?/MVwqTK1OM48TsH1SkHPTbtkysjd4Ru/aOBmDVgBK316iJAwRLH8MiO93v2o?=
- =?us-ascii?Q?JVl7bGe3DuUKCh1KShUVxYCJRtLhsS3061H2hVynamZztXsJkyxbrq4AZXCl?=
- =?us-ascii?Q?seZNj9S9PArORQuhMyURZqI4a8hI0EcFaFvsnOyYij53qpG3n1PtHmMtxJfw?=
- =?us-ascii?Q?8hBPLEzUPEeDDRwo/lSEJh/pAmhrbH0YcHENGCCStrPGn+6vMETH6OqJ/qYj?=
- =?us-ascii?Q?uMHLaSqW3Xo8TKLKVrpdzxFl1iRZL6btDC4F9BoKgaypFAwiUW3CYGx6EKum?=
- =?us-ascii?Q?8NhTg+xdYG8YM7pvtJp01QRGD7Sbf9ogodRzUmWmwt/Qd5eK61R4RlQE6IE7?=
- =?us-ascii?Q?7w453Ed0CjqaaxH0DzoU9kP0A9aDer0s5lZVonEg17Z7rDpcbIWsD5CCEnLP?=
- =?us-ascii?Q?XLB+lgE1QSQiLeMHP2xoF3CEw/3R15LlOruad4NPB6kTFSb4009ZcvxNapbC?=
- =?us-ascii?Q?IlRxl+w61d+XMdqLEFf3JM50ylf3MrogYgsUzXhTOkuqEDhroT+iBxfpnQXZ?=
- =?us-ascii?Q?uZB3/tFCoX8zFRxxN/uWpU14XRX6i1RlEjEbvqffJqvVNcuAqzRhBuFvtIVD?=
- =?us-ascii?Q?YvFY3pQ+05WMDqco4PSXqmDc6ZSJJG9ozNizo1vcHc7KgCNPcU+ywOtMVQh3?=
- =?us-ascii?Q?aJ7rIlXFFV5kIjT3kwqxvis4hwW3VYErNJoEU2WjjYuFxuCXyw1HVNxK1dVe?=
- =?us-ascii?Q?kkLOOIV2Z3GN4XgN9xtmuDkE3XPTeesIAdihuqtAc+Wvc9DMts3krlcKLFfi?=
- =?us-ascii?Q?fAH6wzywszL7Bdx+3wHCL8zlU7qgPaW9CT6wOBVsFbYCBxXSXV52p5XcvY9N?=
- =?us-ascii?Q?a9FCBoU+KLa7pvAAlBrtdGZyru6kuoAWAmaiKolSjvkkng2wsy9wUDOXSzRp?=
- =?us-ascii?Q?VngnxvvR4L6X2hb9ujzmFxOZAvyi05xFO0vDOIrpgjeMgUYFO7/zK8ap6YkG?=
- =?us-ascii?Q?6HxbbJIYzGoc92vCavSMuExcnTVysEaBtYoiMBSGZ3THZlXpL7jouPUR6Ut+?=
- =?us-ascii?Q?Q4e4YjReXE2beLcKjqJzULu7n5UpFSiSCc9Qa5qkkHUPDQAc7RN5JpmCHeUk?=
- =?us-ascii?Q?8EeaTKr6R6+9slB4h3kA1kCggF4EmUWRC52LILQFh1WFU/VO3oteYyLJuOw3?=
- =?us-ascii?Q?jXi59ljmO0pLOM7kmFqU3h74cw+I3G0imTYiq/DOuUz6BzMVCWH9ETZFHiLH?=
- =?us-ascii?Q?VIFtlBVIJUnVCrg9t+9A9EsbwR1K0VhMak9YM5khroGzorRn0dTP6KlK8WQk?=
- =?us-ascii?Q?UkNfUcn+lvwUtRUUWkFW7oIhFw4rtJ1xxXl1NfQXHqfepuUUvkY52nzxLlKb?=
- =?us-ascii?Q?G1XuseOz+eJkwuwc6aPP8296Mms2Hu9dFIS81x9VSZJ1NCmKPzFlgktmxlR5?=
- =?us-ascii?Q?GKAoIffv5Jo29SZ+2Izj2eq3roSA6SAILLyNVGrtp5N6tgA/YTCD4TyvWCTW?=
- =?us-ascii?Q?BHCqygsWAcsaUIuzXHmqI0w=3D?=
+	=?us-ascii?Q?qn6ruFFGbkbOD7nIJezLHwZnfD6PrLRyZ0aifUuHfjk7dyaTP15mnrrOlJOo?=
+ =?us-ascii?Q?2bIuT3Lt5H9flthUtLs1guiwK5PVq5YZXOQklTvhrYMs6j/kDSL9TkrZQSw1?=
+ =?us-ascii?Q?hDFDM3Te1xW9rIV+ODEXI7bXhlwGgOgHnCEeNIsNLJY0181VO8JgQWhy/TJd?=
+ =?us-ascii?Q?EQSyMNSmYN1pRejqpCGCsvjam4oTUe6W6YvlPqfxDSuXWyO1GlauLFz4VR3V?=
+ =?us-ascii?Q?/2kOOZ+dBf3gBlv0R4Yp5S9DfMFwCCX4UWSMyW9TRq1PFfK50Y7oYh+OWctB?=
+ =?us-ascii?Q?NRnnEEFyCZelftw9d4J3EgTkki6Hl398b5FBLKuv7hrdCcEksen9LU5kbUzi?=
+ =?us-ascii?Q?Nn9S6xVMlRhyf42CBhg8D0ZFjGDoceWGDwokonIQA/yRUO4VPg4E+mkvqZww?=
+ =?us-ascii?Q?UAoQET3MjlYO85iC5IM3pdmcq//blOr1R32b3kt+X6ijzyjHNo46ZZLaNERd?=
+ =?us-ascii?Q?d+12FO18jmT5+oCXalM1zwAJeBNJ3Z0nv8yuM9jAE6tCGyS8ELxuwEYrNQS/?=
+ =?us-ascii?Q?IczFB+EG/eovS8mlVvxDD/AyCw0Y6l1txgmdAkdEp/ARmWK+g0UzvB7EEpds?=
+ =?us-ascii?Q?vPHsCgUQjN8fA2ihPJikJ9gA8NxXKVV4h2snfIX4WGzf8+I5aRGDQlivrNfP?=
+ =?us-ascii?Q?VMEp8pTnWhSJ0ylCFV/Vmj+5ZyyDYJV7H67F2HoJLxM+AyHVnvO7hv6MIyMw?=
+ =?us-ascii?Q?bt0L4aIqY62J18kIe6f+oEVZNhUw5oZFB4u4P7sVB35nRUUGYU7wD3xyG2Ms?=
+ =?us-ascii?Q?j1Ol4MSS9p9GYqoGrroSidGOiPbfl7k+OvH3+E7NAscVdE6PHTRgctveey+e?=
+ =?us-ascii?Q?0MpPDZIDlBPh5rP3vRMCiMMUhTNbef5E/Abjqdn7q9ygiCKZW44mcusooJNv?=
+ =?us-ascii?Q?ZNLu0G2UKyf9q/aZPK/xjywuvW7T8+/mCBOdq+Jiwbk6EP5U4G9tiwoJq8Am?=
+ =?us-ascii?Q?9saTF2w80jXWFeCCTPeBvRdHjjDgtrpH+8vyR/6GK+zcpeTa2JLtwmNR5ChB?=
+ =?us-ascii?Q?BxVBqAeDPf8nXmDKwnf0DvyboFyFEf/+D1cNU+A+RhzvK8maEkqmnpIP5C6e?=
+ =?us-ascii?Q?4c72ObZ/JfE+JvskWSGi38pDO5i83V+Izk4GirMlNWdB8mY+ym9c6idn1kcI?=
+ =?us-ascii?Q?pHZivWuAo/vXWa1Gz7it+UnZcRfloo8+JbxTUh7ObqgIMzkNoMEnQv5Hua8i?=
+ =?us-ascii?Q?4xuWkz5d+Y4jkZynuEpg2KorsMc7vfXQaMoMhrBj1RATnE1WUtytggX2pP24?=
+ =?us-ascii?Q?cD8tANiA2AmIevAoixumqpZGcBIbCnxGeQdXNf8fFXCSl2x1YLmpUxJO3cQE?=
+ =?us-ascii?Q?I1KNfGbomWyB0pSyh0EYiLImi/wuMJdzCgd0h83nm1SFIQApOq7R2hJcPORd?=
+ =?us-ascii?Q?kAZV8y4U5TN+B/1ypROPmMxi8Iggi4kgov2SomPBT+qvvrrWfziOqUc2FFK8?=
+ =?us-ascii?Q?jyvhRhJGXmRUsTi9j41pZiEnXJrT4ckhpIiVaQzszkEUhFeUYorGiMns3Dcu?=
+ =?us-ascii?Q?l+RZgNVXPOj49a27z4MEEwufuf+IwVBpdXm8p/MWsyUJf53fJA9fuOfu3A4S?=
+ =?us-ascii?Q?ASV32lCnKneeEBMm8P5Z94b1ldKVDRiNE0puFBXeKuwAvTp1WUYSa4rN4eDX?=
+ =?us-ascii?Q?Tg=3D=3D?=
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(366016)(7416014)(1800799024)(376014)(921020);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Izhn8MEh1/cMHzB9FWut7vtBdpAERWwJqNt4xVICHYbwdWKFdLRg5zQrDRW2?=
- =?us-ascii?Q?3WJXQWZF5fw0frNVKvUGHIifKl40YMfquZjnN4EbJWcPuGooDvmPOVmEUII2?=
- =?us-ascii?Q?AchoLELu5ExulwvD01Seb1mQvZ9UwkwJXpTZ8RCgWY+CUIBkaiFeZCDUwq6v?=
- =?us-ascii?Q?rwUj+GIgPxjG1YOMGnGixWk+R5NZ9vinCdtHoNP9bVvdz2n39JtMcfTr+Uh0?=
- =?us-ascii?Q?CQIgH5YJ5VBaz2wvdFux3bIfEKl6md0ao+iUbdGbl5BnyP1qhchYRXa5hSDm?=
- =?us-ascii?Q?rzT4NR9QV0ZBZlIK+Bpc5kSrdx5iHBCYc/Dzo2VN/z30p9hlF59x5mJgpXsF?=
- =?us-ascii?Q?oiEpqCnJ4FanAXPG4d2Q2pTqpJNU0tjpuwXDRMfSDCVG//xeftX17+FQN4aL?=
- =?us-ascii?Q?gmdIW0HdzBnvSW6gkD2TDXmnUehM+SD+rVMKfHlb9qo45zA6l/RpBTobV7UO?=
- =?us-ascii?Q?nSzUGCrZBsl2kpDGJeWmXoWaQ20uNFz0eEYBgW4tN68CRwWW1vRmwM4L9S29?=
- =?us-ascii?Q?X1f4ROyfCz1vMRyjLw+KyEPoLmqK7ERSutgII915E8pWbGZezIG8tCe6L7/Y?=
- =?us-ascii?Q?ST5Sx8qw9b41VxildGublkw2XSh08CWKubgiybCnpvGVq9FF/r2ojAaeO6kG?=
- =?us-ascii?Q?3zdglZ6+9re1VOS3TZ80aT8dsz8aywRswlaVulV1870bFF5KPu2gLHxWWJgW?=
- =?us-ascii?Q?3RZ+2lnFKeZhrKBKWYNTFHG8aIZj0/9hCMdBE/Io+hRtEBUCaN35IQMJNeab?=
- =?us-ascii?Q?//qGR1zFgUQK3Do18lSjZE5HeStRES47+YRE1O/0Lkhb9hAVRa/894GNXkDp?=
- =?us-ascii?Q?UO6Ph1jpTu98p6soxh6RIRKKyt3kxpZnAoVshIZZ4bgA690nr9hGLHWEhbs/?=
- =?us-ascii?Q?xQtILKZc7eZ/nHcNYu8wS9qJhBIbOB8VhqdUnpXWd8xjI037yj7+nAQhTivc?=
- =?us-ascii?Q?D1sav3JFuj4PtfxpprC3SaMn3NP5WosSJjz1RYgD3Ippe2ajBe5NL2DbjKCK?=
- =?us-ascii?Q?MI0pqiOyf8NvVvkdNuaZubbO3arR/k36hlQ/Qb9rG/8zZ7B+YbyT/Gkj1YQM?=
- =?us-ascii?Q?9L7IlXzitst9PcT1A5SREdtHvY1lFkLyM94SJqi/ixDwFE7JtrGjWBZCWZuA?=
- =?us-ascii?Q?wBoJt4gw1qo9EFq8E+aAH+rkpiy2Unmn3BI6LJJgDIDPKv/Xcnb0RWSoo+kv?=
- =?us-ascii?Q?utA2rrVltVOS7hypnN3PKxFkXzPbAviOm9X0i6prUxjGB1B9vPOTzRsQhYhH?=
- =?us-ascii?Q?zm3+Ap6kFTUjZy5QfAfUZTKjDx8Yyg6ihmLw95XdGvCe4Vq/8OLhGU3pyU0j?=
- =?us-ascii?Q?mKiHzTUcNqzs6YMhtgZMJ9EsYjklJHcaDBPsUBnzXu05TgRTlUKvQETMwVXR?=
- =?us-ascii?Q?WbvkyjHQ26OsItxKMMWT0eqNRLljl1jgVDK8tAwp9MqhCXH/ziuCgPOEK/CC?=
- =?us-ascii?Q?q1lQ/XQ9Zr58OeONgb3ucyUJpYuyJoDSz4sGfyowPN7ZiAGYaXMD5XbOUh9a?=
- =?us-ascii?Q?ozH8fsAoFKFac43CmwpDMd6+yVZbEvyiD3HLT2VtSA+zVVnXxhdVfLK04mta?=
- =?us-ascii?Q?FKJBoKsRV+ByxV4UjT1fTyIOgsHQqC6ZEy+PbXOKD+sjXYSTaKqW2DqYRTIw?=
- =?us-ascii?Q?QRXlhp+qoakRDMH2LHHN0I3lHsTn8vS56y/2k/wf/bhzoXywc4/XUOrvGXDa?=
- =?us-ascii?Q?pF8suoR79EbRSJD4CAvK88PAny9oqniWMxvg5EPyIlMB5TO2OtuxebbmOy+F?=
- =?us-ascii?Q?uebCv+edEZBlAWDXQLYbLYtZAvMdl7+dDsuoGQFFOWhQVIfj/8Uj?=
+	=?us-ascii?Q?jG/10GZuru1xXch6Ysba8yoLrdyuLyV/DwEPe9pSFmc8eACYCeQvKMwaN7FM?=
+ =?us-ascii?Q?0F9HzrnmPCG74AH8/7j7FGgqRY5uJK3VS1+aV6y0XPVDkPUvnqbi38Or1RdN?=
+ =?us-ascii?Q?IGY8AuKDkwM4V8KnXV64ZjaatGhPh4lx0bM36Ed0ENvIJXjYMIZbliINI3VN?=
+ =?us-ascii?Q?5mYxcEHzmeKckBMAmrAE5q9anvCV7uW0Z1csWhokd/ZJDI1JmNoB86QaNA1T?=
+ =?us-ascii?Q?V2PEQAYcUAe8QybD+5M875GfUuAi/esoSPgYASrJuSxu3Ixb3ZRCRpohHVvR?=
+ =?us-ascii?Q?j0ctvQjw7Py/M1NB6SBRzggzWlBr8Is2GeCS2BgntnpunZ5znVFV0milirLS?=
+ =?us-ascii?Q?CMY0XXONdcCcucSEoEK42/e7aQ1+fIdfTq47UTlClzodteabhPyZS+2hda39?=
+ =?us-ascii?Q?/MzuNYNEM/UmZTW0dchtpimtrobrge4zoCNgDpggF2Xa1/WcIy5t3E/IR41F?=
+ =?us-ascii?Q?5qLMkyRZV8S5JCQS8UOpYe73kvdKxX3hbSn92aVHz/ERyDLTgnCSkD4AG8RQ?=
+ =?us-ascii?Q?c8s4y7q3Q1KlE0WFMoNiReXcYhyWb4lIIt4ukEhgzhButFFYKIZMjuO3TDr1?=
+ =?us-ascii?Q?O5Ux2L0eFE2K+ShANnFGvstClNpQyp6O2iWKzRtHYoUEqNLaroiFzG9cKYo4?=
+ =?us-ascii?Q?c+vNlvbN1+fGFQmZ/qw985r335ahtpEBgluTzSBGjVW4wyob1dBmyW2PIQkX?=
+ =?us-ascii?Q?ZDWsB8Cu7ZYmekRqhA/9gW5Iq8kXwDRA6JEGSZx+1TMhuXs76d3nSjL6PS9X?=
+ =?us-ascii?Q?oOcfWlUO/Lptedr7u5bu/UtTWYlRW7clLN/OcdVmydPqUq2eoo5Wr5ufH9/U?=
+ =?us-ascii?Q?GhMJQtF/JeGdnfDufI6mTRFpi/Cz9+LyQd1/RjVMbxe9UDMIA+HNyUfzRAMN?=
+ =?us-ascii?Q?lbXccevYJQXdc5N3ZHWZenQXn61I0nrwX3Crg/liYXQ/+TSgaa7GcKppdSpS?=
+ =?us-ascii?Q?rzT/xy+xge+x+8CxNOGbUcC0fwIbmlWCDvdBOINnCT7dUzV/dywbeWu5uVG+?=
+ =?us-ascii?Q?AEzbE7jarOGjsBIwhFLzNd9CPq52cQKsJNFtONTd+Obv25cTFKbOXhHPibo2?=
+ =?us-ascii?Q?86EZpp/h88Yb+pnxxg/9yigt1i7ToJ2mS5OerrFh8e3uAJNuDW+1g9v1NLOO?=
+ =?us-ascii?Q?1Ji0IhQR/IVZqg7e9WyNwC0Yx/dQt9fT6ExiMXxuBgg68FswizWq2jTAZYL1?=
+ =?us-ascii?Q?zNM172mcH0kSxkYf2x2fZTxoQ7NuZwuGYlmNihAmvBdXYg8NdFyhNAQlehLW?=
+ =?us-ascii?Q?X+0vUjSFggvf5afE0N79yFabtazVs978B/R1JihshJVIwDOfSRAQzlF81tj3?=
+ =?us-ascii?Q?ctVHs2Y02iucQdBfW9LCJtQrQW843ArFMssnH7oHf6kKYnx0dpTh+0kI6pcu?=
+ =?us-ascii?Q?pqFMYZfqcklvjuOjos28m9R3IMZtdturv0Z+WfjwPhQ/aYaf2DG+rjInFSQe?=
+ =?us-ascii?Q?0kKrn3MJWCaebbkfVBegeij2amk/7T3uwCP7pjfVuufEA9vO44qrqwplkDYu?=
+ =?us-ascii?Q?S3R2+MtzQ+G0ky4rOn8rafETnLBvy4OyZHOoj3zwmZctT58hwy3sQIS8Y2Hb?=
+ =?us-ascii?Q?LsV0Z/wVvE88mIOT8JCcDl7x1uhyxCW4qU7Re7rkfac1NbKrn/L5R7W3iToB?=
+ =?us-ascii?Q?5uy/WqgaoU33UizE8M47HtcUD8IABac/BKg06K43bh/J08t/q+wVl8s33Z+O?=
+ =?us-ascii?Q?3I4kTbYDEOMbUUX5lRmBwO38jycnsAh5zzVIO3rBlwPJzxuUNK6S7Y3OQe+o?=
+ =?us-ascii?Q?cY93cAQ+mFQbsbfOy5ryqy64jTRv/k0h1igiv3YshnRmQ8RMBeqm?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d250073-29ee-4b6d-bac1-08de60cdd13d
+X-MS-Exchange-CrossTenant-Network-Message-Id: be3dfebb-7a20-4c26-ea66-08de60cdd1ac
 X-MS-Exchange-CrossTenant-AuthSource: TY7P286MB7722.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2026 13:37:02.8688
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jan 2026 13:37:03.5946
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sUSmwaGfQb8Bw8SNfHksFBAiGFYy0KuxQJrIBDk1bPb0qMK9QG3OmSM3WVC4MWz9Rzy+YY7wmLfbKdMH4KF1MQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: i3jxl7VYpZyn7w9h5in2uMe04CuT86OznXjRak89w91TBiJhhrP3TrL0Gzj8hdwznE5cs6M2qzbwP4seAU5uLg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB5003
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [1.34 / 15.00];
@@ -178,7 +178,7 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[valinux.co.jp,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[valinux.co.jp:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -186,10 +186,10 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74727-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-74729-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[kernel.org,google.com,lwn.net,gmail.com,nxp.com];
 	DKIM_TRACE(0.00)[valinux.co.jp:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCPT_COUNT_TWELVE(0.00)[13];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[den@valinux.co.jp,linux-doc@vger.kernel.org];
@@ -200,40 +200,129 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 14177C2004
+X-Rspamd-Queue-Id: 4E0A7C2032
 X-Rspamd-Action: no action
 
-dw_pcie_ep_clear_ib_maps() first checks whether the inbound mapping for
-a BAR is in BAR Match Mode (tracked via ep_func->bar_to_atu[bar]). Once
-found, the iATU region is disabled and the bookkeeping is cleared.
+The BAR subrange setup/clear paths in pci-epf-test used to update
+epf->bar[barno].submap in place and free/restore the submap around
+pci_epc_set_bar() calls.
 
-BAR Match Mode and Address Match Mode mappings are mutually exclusive
-for a given BAR, so there is nothing left for the Address Match Mode
-teardown path to do after the BAR Match Mode mapping has been removed.
+Some EPC drivers may keep a reference to the struct pci_epf_bar passed
+to pci_epc_set_bar(). Mutating or freeing the same bar descriptor after
+a successful set_bar() can therefore lead to unexpected behaviour.
 
-Return early after clearing the BAR Match Mode mapping to avoid running
-the Address Match Mode teardown path. This makes the helper's intention
-explicit and helps detect incorrect use of pci_epc_set_bar().
+Use a dedicated pci_epf_bar instance for the subrange mapping test and
+only free the allocated submap after restoring the BAR mapping back to
+the default epf->bar[barno] descriptor.
 
-Link: https://lore.kernel.org/all/aXtrW7viGZfMNZur@ryzen/
+Fixes: 6c5e6101423b ("PCI: endpoint: pci-epf-test: Add BAR subrange mapping test support")
 Suggested-by: Niklas Cassel <cassel@kernel.org>
 Signed-off-by: Koichiro Den <den@valinux.co.jp>
 ---
- drivers/pci/controller/dwc/pcie-designware-ep.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/pci/endpoint/functions/pci-epf-test.c | 32 ++++++-------------
+ 1 file changed, 10 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/pci/controller/dwc/pcie-designware-ep.c b/drivers/pci/controller/dwc/pcie-designware-ep.c
-index 7e7844ff0f7e..0ca05943a1e5 100644
---- a/drivers/pci/controller/dwc/pcie-designware-ep.c
-+++ b/drivers/pci/controller/dwc/pcie-designware-ep.c
-@@ -165,6 +165,7 @@ static void dw_pcie_ep_clear_ib_maps(struct dw_pcie_ep *ep, u8 func_no, enum pci
- 		dw_pcie_disable_atu(pci, PCIE_ATU_REGION_DIR_IB, atu_index);
- 		clear_bit(atu_index, ep->ib_window_map);
- 		ep_func->bar_to_atu[bar] = 0;
-+		return;
+diff --git a/drivers/pci/endpoint/functions/pci-epf-test.c b/drivers/pci/endpoint/functions/pci-epf-test.c
+index 6952ee418622..fd6452d1dcc7 100644
+--- a/drivers/pci/endpoint/functions/pci-epf-test.c
++++ b/drivers/pci/endpoint/functions/pci-epf-test.c
+@@ -86,6 +86,7 @@ struct pci_epf_test {
+ 	bool			dma_private;
+ 	const struct pci_epc_features *epc_features;
+ 	struct pci_epf_bar	db_bar;
++	struct pci_epf_bar	subrange_bar[PCI_STD_NUM_BARS];
+ 	size_t			bar_size[PCI_STD_NUM_BARS];
+ };
+ 
+@@ -827,11 +828,11 @@ static u8 pci_epf_test_subrange_sig_byte(enum pci_barno barno,
+ static void pci_epf_test_bar_subrange_setup(struct pci_epf_test *epf_test,
+ 					    struct pci_epf_test_reg *reg)
+ {
+-	struct pci_epf_bar_submap *submap, *old_submap;
++	struct pci_epf_bar_submap *submap;
+ 	struct pci_epf *epf = epf_test->epf;
+ 	struct pci_epc *epc = epf->epc;
+ 	struct pci_epf_bar *bar;
+-	unsigned int nsub = PCI_EPF_TEST_BAR_SUBRANGE_NSUB, old_nsub;
++	unsigned int nsub = PCI_EPF_TEST_BAR_SUBRANGE_NSUB;
+ 	/* reg->size carries BAR number for BAR_SUBRANGE_* commands. */
+ 	enum pci_barno barno = le32_to_cpu(reg->size);
+ 	u32 status = le32_to_cpu(reg->status);
+@@ -857,7 +858,8 @@ static void pci_epf_test_bar_subrange_setup(struct pci_epf_test *epf_test,
+ 		goto err;
  	}
  
- 	/* Tear down all Address Match Mode mappings, if any. */
+-	bar = &epf->bar[barno];
++	bar = &epf_test->subrange_bar[barno];
++	*bar = epf->bar[barno];
+ 	if (!bar->size || !bar->addr) {
+ 		dev_err(&epf->dev, "bar size/addr (%zu/%p) is invalid\n",
+ 			bar->size, bar->addr);
+@@ -883,21 +885,17 @@ static void pci_epf_test_bar_subrange_setup(struct pci_epf_test *epf_test,
+ 		submap[i].size = sub_size;
+ 	}
+ 
+-	old_submap = bar->submap;
+-	old_nsub = bar->num_submap;
+-
+ 	bar->submap = submap;
+ 	bar->num_submap = nsub;
+ 
+ 	ret = pci_epc_set_bar(epc, epf->func_no, epf->vfunc_no, bar);
+ 	if (ret) {
+ 		dev_err(&epf->dev, "pci_epc_set_bar() failed: %d\n", ret);
+-		bar->submap = old_submap;
+-		bar->num_submap = old_nsub;
++		bar->submap = NULL;
++		bar->num_submap = 0;
+ 		kfree(submap);
+ 		goto err;
+ 	}
+-	kfree(old_submap);
+ 
+ 	/*
+ 	 * Fill deterministic signatures into the physical regions that
+@@ -925,13 +923,11 @@ static void pci_epf_test_bar_subrange_clear(struct pci_epf_test *epf_test,
+ 					    struct pci_epf_test_reg *reg)
+ {
+ 	struct pci_epf *epf = epf_test->epf;
+-	struct pci_epf_bar_submap *submap;
+ 	struct pci_epc *epc = epf->epc;
+ 	/* reg->size carries BAR number for BAR_SUBRANGE_* commands. */
+ 	enum pci_barno barno = le32_to_cpu(reg->size);
+ 	u32 status = le32_to_cpu(reg->status);
+ 	struct pci_epf_bar *bar;
+-	unsigned int nsub;
+ 	int ret;
+ 
+ 	if (barno >= PCI_STD_NUM_BARS) {
+@@ -940,23 +936,15 @@ static void pci_epf_test_bar_subrange_clear(struct pci_epf_test *epf_test,
+ 	}
+ 
+ 	bar = &epf->bar[barno];
+-	submap = bar->submap;
+-	nsub = bar->num_submap;
+-
+-	if (!submap || !nsub)
+-		goto err;
+-
+-	bar->submap = NULL;
+-	bar->num_submap = 0;
+ 
+ 	ret = pci_epc_set_bar(epc, epf->func_no, epf->vfunc_no, bar);
+ 	if (ret) {
+-		bar->submap = submap;
+-		bar->num_submap = nsub;
+ 		dev_err(&epf->dev, "pci_epc_set_bar() failed: %d\n", ret);
+ 		goto err;
+ 	}
+-	kfree(submap);
++	kfree(epf_test->subrange_bar[barno].submap);
++	epf_test->subrange_bar[barno].submap = NULL;
++	epf_test->subrange_bar[barno].num_submap = 0;
+ 
+ 	status |= STATUS_BAR_SUBRANGE_CLEAR_SUCCESS;
+ 	reg->status = cpu_to_le32(status);
 -- 
 2.51.0
 
