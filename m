@@ -1,209 +1,202 @@
-Return-Path: <linux-doc+bounces-74920-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74922-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CGexFtrmgGleCAMAu9opvQ
-	(envelope-from <linux-doc+bounces-74920-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:03:06 +0100
+	id aGMVBiPrgGleCAMAu9opvQ
+	(envelope-from <linux-doc+bounces-74922-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:21:23 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74F6ECFE3A
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:03:05 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id A9864D0189
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:21:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 8C27A3006D40
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Feb 2026 18:02:19 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3C53A3032CC3
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Feb 2026 18:15:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECADE38BF64;
-	Mon,  2 Feb 2026 18:02:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 68E852DE71B;
+	Mon,  2 Feb 2026 18:15:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="Aj1JpC+x"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="PSJ2pVDb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com [209.85.222.177])
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BFF338B9B6
-	for <linux-doc@vger.kernel.org>; Mon,  2 Feb 2026 18:02:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.177
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770055335; cv=none; b=kc12lWmCfBxWI1fWhfGwAYgf8r3q5W/CjImdbj01iMwhctDENflvn835wAUTgOQBW50pYf4Mi/QnNESbXyGzF9iPPPH9/dCqHhxL6/4rQIDffYVpGt0BXY41slsxEOFb8yw3F8G1XQFQ0yHg5Eg+o26KmzF8TsRJccJ+C/c/Bac=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770055335; c=relaxed/simple;
-	bh=MbAgTX+hDTfHzpvyoNvAv/VH86Gp5D8IWac2rvKmaY0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YXTtgzx8czA7WHDyqrlx0GM0LaA52nJojQSVLRyDhI47mT/99CIIkp8jWmGimiaNZ5T1xAwkFTajxAhtHi3xFi1CYmZA28oJL45eZXzLIWA0qP3z6W5X13zHxkreZmcr8+wl909bdmrgINNlb/9urLwyfO6RDwuBO1WlAAbjl9k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=Aj1JpC+x; arc=none smtp.client-ip=209.85.222.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
-Received: by mail-qk1-f177.google.com with SMTP id af79cd13be357-8c711959442so1027385a.0
-        for <linux-doc@vger.kernel.org>; Mon, 02 Feb 2026 10:02:14 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB5842DC35A
+	for <linux-doc@vger.kernel.org>; Mon,  2 Feb 2026 18:15:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.180
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770056128; cv=pass; b=j7en1/vC3qtcBv2bGERD8Q6HldlKqXalMPy6lYxNQ9rfTiL3LNjGsRmRmQ0um4L6y+/kRXUtZKTdyYLynWoIzTVWHbaUDadSo6JXMBXzRtgtLuzdSa5LdNNLag8vaipjyUtZQGQ+D7svqNS6c2cgSQPg3r1UJJPhyrqHTbymFD0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770056128; c=relaxed/simple;
+	bh=hfLkISPUv1gvXr1CboqWBn1bs3Sd5IoZNOLzZg55skM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=iF3+Vcj9hY3LFdVkbqT7NpezdvuXAj73tke4Ebb5qL/3YekiQctX4+cJoZ5yWpqzrbFupi+5+yM6Y0cB4Qa1MnYffbUi487OBQ5S2WCMOpDgRZUO8+Ne/irZGx2WCaWqo38gfpfQqPkpphWIM+XEm+iZ8HvOyYRXz8EcJ7UhPVM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=PSJ2pVDb; arc=pass smtp.client-ip=209.85.208.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-383153e06d6so43313271fa.0
+        for <linux-doc@vger.kernel.org>; Mon, 02 Feb 2026 10:15:26 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770056125; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TmC2eVK8+DzCoZuu3Rizu1pRJo2VPv6ar7+KLSh8AW0jL15qRg5wd2v4zI2G3N8YaI
+         cwMQ/UecvRSRazndflC4S6D4nsj52QV9kPG4GYe30j2W4xv9sgDCczUxwTpOMSKfAir+
+         9Ji++YDiVLxr/TtC6SBqmqMx+2cSr+FC50YcpcnNzXxYf3/xci+mzviaHYl3RId0Mmd5
+         0wqm43rTP9VmqwI7bbht+rnHzSaQKIbRn9OS+3gUAJdQemNeBOcqrUoDuNyDbo0ezUZG
+         vPB4Qph8ew49R4+1VmUGk0m3gfzJBKaQfGuoaZiolQrj6UUIW6nbH6MxZ1MK7JYk5npy
+         p3Cw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=LIHmbN0vtM4SeA7+jGmffdOqzfQaVyhc47MhdLc1+1s=;
+        fh=kf2RxElrU0vpVBhQDXH/4cp7bw8DB6GgNuZjABZ3j2E=;
+        b=lU1uCuEUT0+MAnaMbQyBWsdCU4XwzjhmrL/ct/dlivTErIvFxy+milyuodcp+nWQOg
+         8NYKZu2FqOC6ES362iECwtBgv1MYprZPCWTCnn9RVhj+U09iiIddauyJyiQPx7oM9WqL
+         awgiylnzt+gRTgqUM3N5GGG5yspBTwbOMVca2sI2Gi+JScDoPGl7WrpUQ4//GhSl8ICo
+         fgJAut7mI0NN/5fH2J/BfpBZJ5fqH0OB4W/TSLfuZ/gJNnY/gJtGxsODRqK9LkvZZ5qa
+         vxeWCp3jFx3cDqICLsDwm1P62WflFPUdImMG9GGIpKTYnLfmd3zS2kw96YhcKfW4CEH9
+         x6vw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1770055333; x=1770660133; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=NMO26NJqLzUacsptvD643N0i+a1yKYqxDegqXwZutbI=;
-        b=Aj1JpC+xrABNzYNRpCdkZPyfq4fpyHofQgTKnTflpXvwKssxlbTrRAytGzhuPWUdNK
-         CfRYx9eV/CaKWasmMIYZOb3PbKKbRph2X5q9IzvXiW3Zp4VcIzjHLGh5BGVQq11KaLfK
-         HIfPvH1wqREF7DiOxjT+o1zGx22ZdlKX59n2D/PmifZQ5eB6tz2BfWcSischrqsnggfy
-         1F79UPbPyw6n/UOrq3Aqn8haN46JgwftdoHEVRWplbueekIRggnWnH6OMK1GDMW35go/
-         vTvErql0wX5l2Qey8bJa5VH/Q24DExcroGeIQO0uC294obNNfFCH8LyGWZIWtX+AXCgn
-         9mRw==
+        d=google.com; s=20230601; t=1770056125; x=1770660925; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LIHmbN0vtM4SeA7+jGmffdOqzfQaVyhc47MhdLc1+1s=;
+        b=PSJ2pVDbNQVnPXrXNjymko4FOE40C743kvBmJ86NLSh4GircZENoqWveK5OWNMFOO9
+         GpNsC5mwmhTxifUlf/daWGwYTrtNmBzSI9eXvPrODcez7DbDVIYiqvcyBy8amLYrrxVp
+         DLhTd6QbiVH1AZJlMuR6iTv3Niiaa2lm5P9p2E6o7tcArvBjQTQzHxA7WxzzMWq7visY
+         Ddj+8fe+ab5vxCLuvIu9gW3nb9y1abZAGX4BKFdWVZfyFeTp3yFB593U7yT/3WYrmVXT
+         hClbGiN6g1pDtf0H+z9QDhit5pfuUP7PHyl+0qS9jvPbM1Ti2diqJ0edF/uO0rC2wXpJ
+         ZfNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770055333; x=1770660133;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NMO26NJqLzUacsptvD643N0i+a1yKYqxDegqXwZutbI=;
-        b=CPw7G3Nh6Y2gyvNbvYsQ6+KVOmoi/ux6hfyUwJrhTYM5T49mNEIRe7opfoG4wbfcQ/
-         rexKMX4oDJXnC/rSFY2v2dgUqE5KtbuNRcwaRdurRNTz2pNdAnf03x8bLMBGaAb2G8JH
-         2Z9u+ixG+zYwCMl2HR0e8xMCxTHzlYVauRWzOwhuxIk3BmEjDr20X/Duct+u9BWoGaeJ
-         F7XKCc1DFWzb1pJbbDbMmj29VKwmC3j8urocrIx9cuGvsElKfB/4WIukXzoLBut9Y4YH
-         jZLjKA8MKoW2aeA1VDfU4S683BbX+uT9TiJNg2eKIpIBQyKprFdnUt8pb1GVzHfjzw1W
-         hTgw==
-X-Forwarded-Encrypted: i=1; AJvYcCW4i3rhGyMrXviaRS00vzkqpPgflWzui6Qz6LdAVniA20LITDdXik0vw98TPw/PkuetvYrhUhXYrr4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzoPVdgJ1ow/8NQjE6r3dNYGNc7kBp15lLjOQVQqutEREkK71i1
-	3LACKtOe95Iu3KLeYp99oZgnArhR57II3hcm+2uVqavi2EK40NcIaqeccBCBs4yMmGY=
-X-Gm-Gg: AZuq6aIkfCTM244Ja4ipqaco3ZQtC3h2R151St+IizPLD+pvhB+fUp6pc2PXqzir7xF
-	NB5LQRt0WS4dAiQZTRavu5IdgTWkMlwdUTUpS6LiCXc2sg1ZXq9txLzMBXDHUvIr38U3l4Ftc06
-	OaXQWQp/ugRqxe5E12D7XpqXeVukLMeA5SE+ryLRTqYn439ATUcYubwybWpiN0wNrARsPjnVEcV
-	ccmR5tTSMyMf15iVmp6XY/Imnz/k5etw/XbLXkYz3RF30vdGawFb2YppD5uONNJGsT0EwxmwRJP
-	b0uQPMv7wFOcJfAa5SZsvJqmExIiWlD4SA0mv6hrjhXwpEKjGtPd8jjgN3SGwyomAKPDLmJqJ5i
-	zb1DrVhvL6xa/S8oBMTrGrU2LKS7PHqYcZndxJMDOGu3+Jtm72LccY2wLTnFpCjR9pz1ip9KfoB
-	NJt/UFPmGs8akej1gHLmZGlZZZYvs8+QlNo7yUPUkWWZIPXvLthoRrU+Vu/P8Kb2HJ9GZGsg==
-X-Received: by 2002:ac8:5a54:0:b0:501:45d7:10cd with SMTP id d75a77b69052e-506092c7f24mr3163751cf.20.1770055332821;
-        Mon, 02 Feb 2026 10:02:12 -0800 (PST)
-Received: from gourry-fedora-PF4VCD3F (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-894d36c5430sm119862196d6.22.2026.02.02.10.02.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Feb 2026 10:02:12 -0800 (PST)
-Date: Mon, 2 Feb 2026 13:02:10 -0500
-From: Gregory Price <gourry@gourry.net>
-To: Jonathan Cameron <jonathan.cameron@huawei.com>
-Cc: linux-mm@kvack.org, linux-cxl@vger.kernel.org, nvdimm@lists.linux.dev,
-	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, kernel-team@meta.com, dave@stgolabs.net,
-	dave.jiang@intel.com, alison.schofield@intel.com,
-	vishal.l.verma@intel.com, ira.weiny@intel.com,
-	dan.j.williams@intel.com, willy@infradead.org, jack@suse.cz,
-	terry.bowman@amd.com, john@jagalactic.com,
-	David Hildenbrand <david@kernel.org>,
-	Oscar Salvador <osalvador@suse.de>,
-	Andrew Morton <akpm@linux-foundation.org>
-Subject: Re: [PATCH 2/9] mm/memory_hotplug: add __add_memory_driver_managed()
- with online_type arg
-Message-ID: <aYDmor_ruasxaZ-7@gourry-fedora-PF4VCD3F>
-References: <20260129210442.3951412-1-gourry@gourry.net>
- <20260129210442.3951412-3-gourry@gourry.net>
- <20260202172524.00000c6d@huawei.com>
+        d=1e100.net; s=20230601; t=1770056125; x=1770660925;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=LIHmbN0vtM4SeA7+jGmffdOqzfQaVyhc47MhdLc1+1s=;
+        b=LnwTgNfRQfkBBeCbADWTkTMA5Sz+V89i9BT8DpgyZzVLS+nxjxHIGz+m8LSIg5j7D1
+         9xOL/8PuJ5PeTmcQp/cavMW24HkH/YK12S+lEgaTyhUjPY8bAwA6pf4cqQ04/J9tolH2
+         K4et8Ux+FI3zT8FJo6WeYN+wKi7/c6NLPy5NIvj6qZeqrdQ7D1XL1Ze82iM94rQlIqGO
+         jhSywadUpsCUT0+9RweFDkbBUa/fJhbeeQqOvVvPUFpUXfaGwN6Mod3ca4w7vhYQTKNC
+         xb2pB9+JUL84MSt8S6bsOo9C4eCpky3TKCBSIU9Azik3B3Ri1NMZnYR7N2gcWbjkNtyb
+         z5Lg==
+X-Forwarded-Encrypted: i=1; AJvYcCXdKMKWDXvq9ClOIs0/H2s+Wf/DdilCT9crMIqNLN0Tj8udjcFqrGoaalqqoOIxMfhFcPG+Ri9KXcw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywp5OIwj8n5YdGXlRyRLC5Txeu5VtJ6qv7TfkQMWNP1m/P2Pl6+
+	zVJlUxg3mV48AMCCNeSp14gFLBxb6HTelWoVBr8vKLEMs1HOTqj3REfReDqe9Y08QhPq+Z8jKY9
+	/rulgeJ+C3og1gP5/I/d1I5FVn+yRBPjJe00rna7F
+X-Gm-Gg: AZuq6aK4jvK2/I3KWJcIrrOavtTOra9R/HRZhRAIaFj2DYMBLdqm+QUoAEHNgJxNaJ8
+	bIY2sv+HT/mmRf+RbYrSjEBrlU0xZ/xkmn9MHuVBdXqD8ykH+jYWY2gK5WRmIzvVBdJ1OxJC7mG
+	LNpUNQEIglNW0fz5cNz+Urn0q6JuoV9vTQ6ttfb5WV6SdBg6IPEkFF6hw0hL2hqjN1fDXcCp921
+	/Nk6uTAePF0MKYzqC/DVgC388JRlXCmqxF3jcUNrAyH0nM2wvtDNmrFkG7/eUAuh0EB9A==
+X-Received: by 2002:a2e:a54b:0:b0:383:1c18:ade6 with SMTP id
+ 38308e7fff4ca-3864662d728mr40696471fa.20.1770056124374; Mon, 02 Feb 2026
+ 10:15:24 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260202172524.00000c6d@huawei.com>
+References: <20260129212510.967611-1-dmatlack@google.com> <20260129212510.967611-3-dmatlack@google.com>
+ <44484594-5b5d-4237-993c-ac1e173ad62e@linux.dev>
+In-Reply-To: <44484594-5b5d-4237-993c-ac1e173ad62e@linux.dev>
+From: David Matlack <dmatlack@google.com>
+Date: Mon, 2 Feb 2026 10:14:56 -0800
+X-Gm-Features: AZwV_QhgTJZ7rnxODmCU1qhjsI1pWSHh1k-rPTozueyr5OUveeJ2FC59ISanCNo
+Message-ID: <CALzav=d1ZrHrWd-HhZJ8aY6aqxkBcLoet_5+-LL1mOakVTj6Ww@mail.gmail.com>
+Subject: Re: [PATCH v2 02/22] PCI: Add API to track PCI devices preserved
+ across Live Update
+To: Zhu Yanjun <yanjun.zhu@linux.dev>
+Cc: Alex Williamson <alex@shazbot.org>, Adithya Jayachandran <ajayachandra@nvidia.com>, 
+	Alexander Graf <graf@amazon.com>, Alex Mastro <amastro@fb.com>, Alistair Popple <apopple@nvidia.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Ankit Agrawal <ankita@nvidia.com>, 
+	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>, 
+	David Rientjes <rientjes@google.com>, Jacob Pan <jacob.pan@linux.microsoft.com>, 
+	Jason Gunthorpe <jgg@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>, Jonathan Corbet <corbet@lwn.net>, 
+	Josh Hilke <jrhilke@google.com>, Kevin Tian <kevin.tian@intel.com>, kexec@lists.infradead.org, 
+	kvm@vger.kernel.org, Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-pci@vger.kernel.org, Lukas Wunner <lukas@wunner.de>, 
+	=?UTF-8?Q?Micha=C5=82_Winiarski?= <michal.winiarski@intel.com>, 
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, 
+	Pasha Tatashin <pasha.tatashin@soleen.com>, Pranjal Shrivastava <praan@google.com>, 
+	Pratyush Yadav <pratyush@kernel.org>, Raghavendra Rao Ananta <rananta@google.com>, 
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, Saeed Mahameed <saeedm@nvidia.com>, 
+	Samiullah Khawaja <skhawaja@google.com>, Shuah Khan <skhan@linuxfoundation.org>, 
+	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+	Tomita Moeko <tomitamoeko@gmail.com>, Vipin Sharma <vipinsh@google.com>, 
+	Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>, Yi Liu <yi.l.liu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[gourry.net:s=google];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-74922-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[gourry.net];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74920-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	FREEMAIL_CC(0.00)[shazbot.org,nvidia.com,amazon.com,fb.com,linux-foundation.org,google.com,kernel.org,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,wunner.de,soleen.com,linuxfoundation.org,linux.intel.com,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[44];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gourry.net:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gourry@gourry.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[gourry.net:email,gourry.net:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 74F6ECFE3A
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dmatlack@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,linux.dev:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A9864D0189
 X-Rspamd-Action: no action
 
-On Mon, Feb 02, 2026 at 05:25:24PM +0000, Jonathan Cameron wrote:
-> On Thu, 29 Jan 2026 16:04:35 -0500
-> Gregory Price <gourry@gourry.net> wrote:
-> 
-> > Enable dax kmem driver to select how to online the memory rather than
-> > implicitly depending on the system default.  This will allow users of
-> > dax to plumb through a preferred auto-online policy for their region.
-> > 
-> > Refactor and new interface:
-> > Add __add_memory_driver_managed() which accepts an explicit online_type
-> > and export mhp_get_default_online_type() so callers can pass it when
-> > they want the default behavior.
-> 
-> Hi Gregory,
-> 
-> I think maybe I'd have left the export for the first user outside of
-> memory_hotplug.c. Not particularly important however.
-> 
-> Maybe talk about why a caller of __add_memory_driver_managed() might want
-> the default?  Feels like that's for the people who don't...
+On Sat, Jan 31, 2026 at 10:38=E2=80=AFPM Zhu Yanjun <yanjun.zhu@linux.dev> =
+wrote:
 >
-
-Less about why they want the default, more about maintaining backward
-compatibility.
-
-In the cxl driver, Ben pointed out something that made me realize we can
-change `region/bind()` to actually use the new `sysram/bind` path by
-just adding a one line `sysram_regionN->online_type = default()`
-
-I can add this detail to the changelog.
-
-> 
-> Other comments are mostly about using a named enum. I'm not sure
-> if there is some existing reason why that doesn't work?  -Errno pushed through
-> this variable or anything like that?
-> 
-
-I can add a cleanup-patch prior to use the enum, but i don't think this
-actually enables the compiler to do anything new at the moment?
-
-An enum just resolves to an int, and setting `enum thing val = -1` when
-the enum definition doesn't include -1 doesn't actually fire any errors
-(at least IIRC - maybe i'm just wrong). Same with
-
-   function(enum) -> function(-1) wouldn't fire a compilation error
-
-It might actually be worth adding `MMOP_NOT_CONFIGURED = -1` so that the
-cxl-sysram driver can set this explicitly rather than just setting -1
-as an implicit version of this - but then why would memory_hotplug.c
-ever want to expose a NOT_CONFIGURED option lol.
-
-So, yeah, the enum looks nicer, but not sure how much it buys us beyond
-that.
-
-> It's a little odd to add nice kernel-doc formatted documentation
-> when the non __ variant has free form docs.  Maybe tidy that up first
-> if we want to go kernel-doc in this file?  (I'm in favor, but no idea
-> on general feelings...)
+> =E5=9C=A8 2026/1/29 13:24, David Matlack =E5=86=99=E9=81=93:
+> > Add an API to enable the PCI subsystem to track all devices that are
+> > preserved across a Live Update, including both incoming devices (passed
+> > from the previous kernel) and outgoing devices (passed to the next
+> > kernel).
+> >
+> > Use PCI segment number and BDF to keep track of devices across Live
+> > Update. This means the kernel must keep both identifiers constant acros=
+s
+> > a Live Update for any preserved device. VFs are not supported for now,
+> > since that requires preserving SR-IOV state on the device to ensure the
+> > same number of VFs appear after kexec and with the same BDFs.
+> >
+> > Drivers that preserve devices across Live Update can now register their
+> > struct liveupdate_file_handler with the PCI subsystem so that the PCI
+> > subsystem can allocate and manage File-Lifecycle-Bound (FLB) global dat=
+a
+> > to track the list of incoming and outgoing preserved devices.
+> >
+> >    pci_liveupdate_register_fh(driver_fh)
+> >    pci_liveupdate_unregister_fh(driver_fh)
 >
-
-ack.  Can add some more cleanups early in the series.
-
-> > +	if (online_type < 0 || online_type > MMOP_ONLINE_MOVABLE)
-> 
-> This is where using an enum would help compiler know what is going on
-> and maybe warn if anyone writes something that isn't defined.
+> Can the above 2 functions support the virtual devices? For example,
+> bonding, veth, iSWAP and RXE.
 >
+> These virtual devices do not have BDF. As such, I am not sure if your
+> patches take these virtual devices in to account.
 
-I think you still have to sanity check this, but maybe the code looks
-cleaner, so will do. 
+No this patch series only supports PCI devices, since those are the
+only devices so far we've needed to support.
 
-~Gregory
+I am not familiar with any of the devices that you mentioned. If they
+are virtual then does that mean it's all just software? In that case I
+would be curious to know what problem is solved by preserving them in
+the kernel, vs. tearing them down and rebuilding them across a Live
+Udpate.
 
