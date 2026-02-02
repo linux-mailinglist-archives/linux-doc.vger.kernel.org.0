@@ -1,352 +1,267 @@
-Return-Path: <linux-doc+bounces-74921-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74923-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wJZFJxzrgGleCAMAu9opvQ
-	(envelope-from <linux-doc+bounces-74921-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:21:16 +0100
+	id CEkgLxbrgGleCAMAu9opvQ
+	(envelope-from <linux-doc+bounces-74923-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:21:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13933D017A
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:21:16 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EC8CD016B
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 19:21:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9BF66302E79B
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Feb 2026 18:15:10 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 54B3030405FD
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Feb 2026 18:20:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 471492D94A5;
-	Mon,  2 Feb 2026 18:15:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IcpvyglW"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CFA72EBDD9;
+	Mon,  2 Feb 2026 18:20:25 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24BC52BEC2C
-	for <linux-doc@vger.kernel.org>; Mon,  2 Feb 2026 18:15:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D75CF2E11AA;
+	Mon,  2 Feb 2026 18:20:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770056110; cv=none; b=RawzeThy11TfRjV5Dag/iT7KGeGUH2qb6EBCH8zNc9aE2lDjO3XMVpdM1dP3g7aAHuP/8gmA+SlYxNDKhRG0PDjPzeFORz+7ruwtlchMZTlNjrPFgRUi31vQ0KMg5uTATOHyk7gp8B+TfVqFqlBVIcc/rHjxNR5DQp4+ewbUesk=
+	t=1770056425; cv=none; b=Ooqrs88h/SY/6fng0BFR09BdgZa0/pZclnOn4LCs6JWgOYNt1/D1No9LpjftfpVdBeXpJwcZTlir1mKpJzc9vj16TrfFT9deOnlW/ZcQdCArsvaGD1zUmXWFUKAs1oQyaDqHFF9Dmp+l1tFuiRsID2k1PP3CxKLs4rj+bpi66Qg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770056110; c=relaxed/simple;
-	bh=uYU+UjGaHRwL3bTehmXjsmKVViIaqfL1AqdHtt2ux/g=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Xk1m2EmukW6WXpP5zx6VNRTtFYp0wwhVZ5TF8em9DVnFiW6lgTZjSfSQmJWdquBRO5UJHLoTmDiHg8h3zlyDiYEK0EE1lzSGFhJRnoDZShmkG/mBhe3fEbDUg6OxUSzpOwXSWNkl8lUhaxCcjMoPtfuNkE5Ul8sGM4osKlac1Q8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IcpvyglW; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CA95C116C6;
-	Mon,  2 Feb 2026 18:15:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770056110;
-	bh=uYU+UjGaHRwL3bTehmXjsmKVViIaqfL1AqdHtt2ux/g=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=IcpvyglWbRMg70AAfdhjvJggGwQ+vOKAHNgwrMCqVGdLzzFJDZTu5g3gf5U05Stjb
-	 5MtCzNPOtLBOx704NUiq+ox6Bv6QjaYsu8Y26fFoyBV5SQhf810EduaKtD0M7p48HQ
-	 yuxK+N9zX6TTReHHNQe5iKJkmVFYz6jq7WlBbDbiXhR+PE0/tPgqFKSIhSBpjYLEeA
-	 FZh7W9bzlkEKXOujVDPuaxfBVJPGEPNji5h12Cjj98o8JPACC5E+d5kYeqO5rjKaci
-	 04JoeDjTo75aGme8qFTMx6JLssDVwRz/p/H1xNKoVJ6+05G6DH2cGjGS5dvI4OU6/W
-	 1ylEvhp5YtmTg==
-Date: Mon, 2 Feb 2026 19:15:06 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH 0/3] Some kernel-doc fixes
-Message-ID: <20260202191506.0aaee18e@foz.lan>
-In-Reply-To: <87bji7rsf9.fsf@trenco.lwn.net>
-References: <cover.1769500383.git.mchehab+huawei@kernel.org>
-	<87bji7rsf9.fsf@trenco.lwn.net>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1770056425; c=relaxed/simple;
+	bh=9evVPU/6Hj3hlrvPS13EoLvahvYf5Gmr1Wxrz+0ErGo=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=lR7aOe1xY33gDwgqX3mxJp23H1+MxU6ZNqruzL8orgo6IIcHavIY3s+2VH2YZWKDkZWDAMcmrYADFY6RWmXK2GyK2j6pMCQz1EHm5NEv6uBuBQ2BJDeRu0ZiS/FtoPtNqlqoBjsTfWo2mFQvfgqTkV7laqP5m1nSWmWis5WY2ys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.224.150])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4f4Zdb2s8dzJ46BB;
+	Tue,  3 Feb 2026 02:19:31 +0800 (CST)
+Received: from dubpeml500005.china.huawei.com (unknown [7.214.145.207])
+	by mail.maildlp.com (Postfix) with ESMTPS id 80A7140565;
+	Tue,  3 Feb 2026 02:20:17 +0800 (CST)
+Received: from localhost (10.203.177.15) by dubpeml500005.china.huawei.com
+ (7.214.145.207) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Mon, 2 Feb
+ 2026 18:20:16 +0000
+Date: Mon, 2 Feb 2026 18:20:15 +0000
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: Gregory Price <gourry@gourry.net>
+CC: <linux-mm@kvack.org>, <linux-cxl@vger.kernel.org>,
+	<nvdimm@lists.linux.dev>, <linux-fsdevel@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<kernel-team@meta.com>, <dave@stgolabs.net>, <dave.jiang@intel.com>,
+	<alison.schofield@intel.com>, <vishal.l.verma@intel.com>,
+	<ira.weiny@intel.com>, <dan.j.williams@intel.com>, <willy@infradead.org>,
+	<jack@suse.cz>, <terry.bowman@amd.com>, <john@jagalactic.com>
+Subject: Re: [PATCH 8/9] cxl/core: Add dax_kmem_region and sysram_region
+ drivers
+Message-ID: <20260202182015.0000325b@huawei.com>
+In-Reply-To: <20260129210442.3951412-9-gourry@gourry.net>
+References: <20260129210442.3951412-1-gourry@gourry.net>
+	<20260129210442.3951412-9-gourry@gourry.net>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="US-ASCII"
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: lhrpeml500009.china.huawei.com (7.191.174.84) To
+ dubpeml500005.china.huawei.com (7.214.145.207)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[huawei.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_ALL(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWO(0.00)[2];
-	TAGGED_FROM(0.00)[bounces-74921-lists,linux-doc=lfdr.de,huawei];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	TAGGED_FROM(0.00)[bounces-74923-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:email]
-X-Rspamd-Queue-Id: 13933D017A
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jonathan.cameron@huawei.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,gourry.net:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 5EC8CD016B
 X-Rspamd-Action: no action
 
-Hi Jon,
+On Thu, 29 Jan 2026 16:04:41 -0500
+Gregory Price <gourry@gourry.net> wrote:
 
-On Mon, 02 Feb 2026 10:01:14 -0700
-Jonathan Corbet <corbet@lwn.net> wrote:
-
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+> In the current kmem driver binding process, the only way for users
+> to define hotplug policy is via a build-time option, or by not
+> onlining memory by default and setting each individual memory block
+> online after hotplug occurs.  We can solve this with a configuration
+> step between region-probe and dax-probe.
 > 
-> > Hi Jon,
-> >
-> > This small series contain 3 patches:
-> > - patch 1 fixes PDF docs build, as reported by Akira;
-> >   (I'm resending this one as-is from its v2)
-> > - patch 2 addresses a complain from Jani about not being able
-> >   of disabling "-q" flag when building docs with V=0;
-> > - patch 3 addresses an issue indirectly reported by Jani that
-> >   it the env vars that affects the wrapper aren't documented.
-> >
-> > With regards to patch 2, docs build honours V=0 by adding a
-> > "-q" flag.
-> >
-> > When V=1 is set, there are two effects in place:
-> >
-> > 1. sphix-build will be called without "-q";
-> > 2. Sphinx extensions will increase their verbosity levels.
-> >
-> > Sometimes, it is desired to just remove "-q" without increasing
-> > extensions verbosity. That's what patch 2 does.
-> >
-> > IMO, at least patch 1 should be merged during Kernel v6.21
-> > development cycle.
-> >
-> > Mauro Carvalho Chehab (3):
-> >   docs: kdoc: Fix pdfdocs build for tools
-> >   docs: sphinx-build-wrapper: allow -v override -q
-> >   tools: sphinx-build-wrapper: improve its help message
-> >
-> >  tools/docs/sphinx-build-wrapper  | 42 +++++++++++++++++++++++++++-----
-> >  tools/lib/python/kdoc/kdoc_re.py | 10 +++++---
-> >  2 files changed, 43 insertions(+), 9 deletions(-)  
+> Add the infrastructure for a two-stage driver binding for kmem-mode
+> dax regions. The cxl_dax_kmem_region driver probes cxl_sysram_region
+> devices and creates cxl_dax_region with dax_driver=kmem.
 > 
-> I've applied this set, thanks.
+> This creates an interposition step where users can configure policy.
+> 
+> Device hierarchy:
+>   region0 -> sysram_region0 -> dax_region0 -> dax0.0
+> 
+> The sysram_region device exposes a sysfs 'online_type' attribute
+> that allows users to configure the memory online type before the
+> underlying dax_region is created and memory is hotplugged.
+> 
+>   sysram_region0/online_type:
+>       invalid:        not configured, blocks probe
+>       offline:        memory will not be onlined automatically
+>       online:         memory will be onlined in ZONE_NORMAL
+>       online_movable: memory will be onlined in ZONE_MMOVABLE
 
-Thanks!
+ZONE_MOVABLE
 
--
+> 
+> The device initializes with online_type=invalid which prevents the
+> cxl_dax_kmem_region driver from binding until the user explicitly
+> configures a valid online_type.
+> 
+> This enables a two-step binding process:
+>   echo region0 > cxl_sysram_region/bind
+>   echo online_movable > sysram_region0/online_type
+>   echo sysram_region0 > cxl_dax_kmem_region/bind
+> 
+> Signed-off-by: Gregory Price <gourry@gourry.net>
+Trivial stuff. Will mull over this series as a whole...
+My first instinctive reaction is positive - I'm just wondering
+where additional drivers fit into this and whether it has the
+right degree of flexibility.
 
-Jon,
 
-I ended placing this series near the end of the /41 one mainly because
-the first patch conflicts there.
 
-The conflict is trivial, to solve though, if you opt to merge
-from it.
+> diff --git a/drivers/cxl/core/region.c b/drivers/cxl/core/region.c
+> index 6200ca1cc2dd..8bef91dc726c 100644
+> --- a/drivers/cxl/core/region.c
+> +++ b/drivers/cxl/core/region.c
+> @@ -3734,8 +3734,20 @@ int cxl_region_init(void)
+>  	if (rc)
+>  		goto err_dax;
+>  
+> +	rc = cxl_driver_register(&cxl_sysram_region_driver);
 
-IMO, it is worth merging this series before the merge window,
-as it will solve some troubles that will appear after Linus
-picks stuff from -next, related to some annotations Peter
-Zijlstra added on his tree, but it is up to you.
+This smells like a loop over an array of drivers is becoming sensible.
 
-Yeah, it is a lot more complex than I would expect for a late
--rc, so we could end just postpone it.
+> +	if (rc)
+> +		goto err_sysram;
+> +
+> +	rc = cxl_driver_register(&cxl_dax_kmem_region_driver);
+> +	if (rc)
+> +		goto err_dax_kmem;
+> +
+>  	return 0;
+>  
+> +err_dax_kmem:
+> +	cxl_driver_unregister(&cxl_sysram_region_driver);
+> +err_sysram:
+> +	cxl_driver_unregister(&cxl_devdax_region_driver);
+>  err_dax:
+>  	cxl_driver_unregister(&cxl_region_driver);
+>  	return rc;
+> @@ -3743,6 +3755,8 @@ int cxl_region_init(void)
+>  
+>  void cxl_region_exit(void)
+>  {
+> +	cxl_driver_unregister(&cxl_dax_kmem_region_driver);
+> +	cxl_driver_unregister(&cxl_sysram_region_driver);
+>  	cxl_driver_unregister(&cxl_devdax_region_driver);
+>  	cxl_driver_unregister(&cxl_region_driver);
+>  }
+> diff --git a/drivers/cxl/core/sysram_region.c b/drivers/cxl/core/sysram_region.c
+> new file mode 100644
+> index 000000000000..5665db238d0f
+> --- /dev/null
+> +++ b/drivers/cxl/core/sysram_region.c
+> @@ -0,0 +1,180 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/* Copyright(c) 2026 Meta Platforms, Inc. All rights reserved. */
+> +/*
+> + * CXL Sysram Region - Intermediate device for kmem hotplug configuration
+> + *
+> + * This provides an intermediate device between cxl_region and cxl_dax_region
+> + * that allows users to configure memory hotplug parameters (like online_type)
+> + * before the underlying dax_region is created and memory is hotplugged.
+> + */
+> +
+> +#include <linux/memory_hotplug.h>
+> +#include <linux/device.h>
+> +#include <linux/slab.h>
+> +#include <cxlmem.h>
+> +#include <cxl.h>
+> +#include "core.h"
 
----
+> +
+> +static DEVICE_ATTR_RW(online_type);
+> +
+> +static struct attribute *cxl_sysram_region_attrs[] = {
+> +	&dev_attr_online_type.attr,
+> +	NULL,
 
-As a heads up, I'm working on a separate set of patches that, if 
-things go well, we may end having a regression test for kernel-doc.
-When done, I'll be submitting in separate.
+As below.
 
-The idea is to have a YAML file with source code, KdocItem,
-man output and rst output, and a dynamic unit test to run
-them. I finished today to write a skeleton, but still requires
-polishing (*).
+> +};
+> +
+> +static const struct attribute_group cxl_sysram_region_attribute_group = {
+> +	.attrs = cxl_sysram_region_attrs,
+> +};
+> +
+> +static const struct attribute_group *cxl_sysram_region_attribute_groups[] = {
+> +	&cxl_base_attribute_group,
+> +	&cxl_sysram_region_attribute_group,
+> +	NULL,
 
-I'm thinking on modifying kernel-doc executable to be able
-to generate the content for such YAML file.
+Trivial, but don't want a comma on that NULL.
 
-If things go well, we could have something like:
+> +};
 
-	$ tools/docs/kernel-doc --gen-yaml all_kdoc_tests.yaml .
+> diff --git a/drivers/cxl/cxl.h b/drivers/cxl/cxl.h
+> index 674d5f870c70..1544c27e9c89 100644
+> --- a/drivers/cxl/cxl.h
+> +++ b/drivers/cxl/cxl.h
+> @@ -596,6 +596,25 @@ struct cxl_dax_region {
+>  	enum dax_driver_type dax_driver;
+>  };
+>  
+> +/**
+> + * struct cxl_sysram_region - CXL RAM region for system memory hotplug
+> + * @dev: device for this sysram_region
+> + * @cxlr: parent cxl_region
+> + * @hpa_range: Host physical address range for the region
+> + * @online_type: Memory online type (MMOP_* 0-3, or -1 if not configured)
 
-To place all tests there. As we modify kernel-doc, we can
-run the code I'm currently writing. It would identify the
-differences for both ReST and man and report.
-	
-(*) I started working on it today.
+Ah. An there's our reason for an int.   Can we just add a MMOP enum value
+for not configured yet and so let us use it as an enum?
+Or have a separate bool for that and ignore the online_type until it's set.
 
-The unittest generation part from YAML already works:
 
-	$ tools/unittests/test_kdoc_from_yaml.py 
-	Ran 3 tests in 0.004s
+> + *
+> + * Intermediate device that allows configuration of memory hotplug
+> + * parameters before the underlying dax_region is created. The device
+> + * starts with online_type=-1 which prevents the cxl_dax_kmem_region
+> + * driver from binding until the user explicitly sets online_type.
+> + */
+> +struct cxl_sysram_region {
+> +	struct device dev;
+> +	struct cxl_region *cxlr;
+> +	struct range hpa_range;
+> +	int online_type;
+> +};
 
-	FAILED (failures=1)
-	test_kdoc_from_yaml:
-	    KernelDocParser:
-	        test_gen_function3:  FAIL
-	    KernelManOutput:
-	        test_man_function3:  OK
-	    KernelRestOutput:
-	        test_rst_function3:  OK
 
-Those 3 classes were auto-populated from yaml. Right now,
-only KernelDocParser test exectution was implemented.
-
-Those three classes contain just the test functions (two are just
-stubs):
-
-	class KernelDocParser(KdocParser):
-	    def run_parser_test(self, source, kdoc_item, exports, fname):
-	        if isinstance(kdoc_item, dict):
-	            kdoc_item = [kdoc_item]
-
-        	if isinstance(exports, str):
-        	    exports=set([exports])
-        	elif isinstance(exports, list):
-        	    exports=set(exports)
-
-		# For now, it is using here a function I wrote on a non-dynamic unit test
-	        self.run_test(source, kdoc_item, exports=exports, fname=fname)
-
-	class KernelManOutput(unittest.TestCase):
-	    # TODO: for now, this is just a stub
-	    def run_out_test(self, kdoc_item, out_type, data):
-	        pass
-
-	class KernelRestOutput(unittest.TestCase):
-	    # TODO: for now, this is just a stub
-	    def run_out_test(self, kdoc_item, out_type, data):
-	        pass
-
-And It contains a separate class to add dynamic tests on those.
-
-The only issue I need to handle on its current implementation for
-KernelDocParser (with the simple YAML test) is to solve whitespace
-issues:
-
-	FAIL: test_gen_function3 (test_kdoc_from_yaml.KernelDocParser.test_gen_function3)
-	Lambda-like function to run tests with provided vars
-	----------------------------------------------------------------------
-	Traceback (most recent call last):
-	  File "/new_devel/docs/tools/unittests/test_kdoc_from_yaml.py", line 79, in test_method
-	    self.run_parser_test(source, kdoc_item, exports, fname)
-	    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	  File "/new_devel/docs/tools/unittests/test_kdoc_from_yaml.py", line 54, in run_parser_test
-	    self.run_test(source, kdoc_item, exports=exports, fname=fname)
-	    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	  File "/new_devel/docs/tools/unittests/test_kdoc_parser.py", line 84, in run_test
-	    self.assertEqual(d[key], value, msg=f"at {key}")
-	    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	AssertionError: {'Description': 'Does nothing\n\n', 'Return': '\nalways return 0.\n'} != {'Description': 'Does nothing\n', 'Return': 'always return 0.\n'}
-	- {'Description': 'Does nothing\n\n', 'Return': '\nalways return 0.\n'}
-	?                                --              --
-	
-	+ {'Description': 'Does nothing\n', 'Return': 'always return 0.\n'} : at sections
-
-I'll probably add a regex to replace all whitespaces/new lines by a
-single one.
-
-For man pages, I need to handle timestamps, but except for that and
-whitespace differences, both rst and man page functions should be
-straight forward: just call the output class passing the list of
-KdocItem objects.
-
-I guess tomorrow I may have this fixed and the test functions for
-rst and man implemented.
-
-Thanks,
-Mauro
-
----
-
-If you're curious enough, this is the test YAML file it is using to
-generate the 3 dynamic unit tests:
-
-tests:
-  - name: function3
-    fname: function3.c
-    description: Just a simple example
-
-    source: |
-      /**
-      * function3: Exported function
-      * @arg1: @arg1 does nothing
-      *
-      * Does nothing
-      *
-      * return:
-      *    always return 0.
-      */
-      int function3(char *arg1) { return 0; };
-      EXPORT_SYMBOL(function3);
-
-    exports: function3
-    expected:
-      - kdoc_item:
-          name: function3
-          type: function
-          declaration_start_line: 1
-
-          sections:
-            Description: |
-              Does nothing
-
-            Return: |
-              always return 0.
-
-          parameterdescs:
-            arg1: |
-              @arg1 does nothing
-          parameterlist:
-            - arg1
-          parameterdesc_start_lines:
-            arg1: 2
-          parametertypes:
-            arg1: char *arg1
-
-          other_stuff:
-            func_macro: false
-            functiontype: int
-            purpose: Exported function
-            typedef: false
-
-        rst: |
-          .. c:function:: int function3 (char *arg1)
-
-            Exported function
-
-          .. container:: kernelindent
-
-            **Parameters**
-
-            ``char *arg1``
-              **arg1** does nothing
-
-            **Description**
-
-            Does nothing
-
-            **Return**
-
-            always return 0.
-
-        man: |
-          .TH "function3" 9 "February 2026"  "" "Kernel API Manual"
-          .SH NAME
-          function3 \- Exported function
-          .SH SYNOPSIS
-          .B "int" function3
-          .BI "(char *arg1 "  ");"
-          .SH ARGUMENTS
-          .IP "arg1" 12
-          \fIarg1\fP does nothing
-          .SH "DESCRIPTION"
-          Does nothing
-          .SH "RETURN"
-          always return 0.
-          .SH "SEE ALSO"
-          .PP
-          Kernel file \fBtest.c\fR
 
