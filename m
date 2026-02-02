@@ -1,127 +1,167 @@
-Return-Path: <linux-doc+bounces-74858-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74859-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qFguAyN6gGne8gIAu9opvQ
-	(envelope-from <linux-doc+bounces-74858-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 11:19:15 +0100
+	id OAZ2CvKvgGn6AQMAu9opvQ
+	(envelope-from <linux-doc+bounces-74859-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 15:08:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 634EBCAC78
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 11:19:14 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 42D10CD263
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Feb 2026 15:08:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 34C5730D90B0
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Feb 2026 10:07:57 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 01A203005320
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Feb 2026 14:07:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F0AB3563EE;
-	Mon,  2 Feb 2026 10:07:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F69936AB52;
+	Mon,  2 Feb 2026 14:07:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="OAUofdx+";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="IuL2Stt0"
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="cg6Ojxy/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from out30-99.freemail.mail.aliyun.com (out30-99.freemail.mail.aliyun.com [115.124.30.99])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1D1D30C60B;
-	Mon,  2 Feb 2026 10:07:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A09236997C;
+	Mon,  2 Feb 2026 14:07:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.99
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770026866; cv=none; b=QL2fnhD/lspCB75eskUZqeHgH15iQFYcmXbp++bBKlem5ha2Ycnv3oh+SAA5lKlNGPnJX91J1qi3i0k9P4t5IXAVtqbUoO0L5DpOPQGfSHiZcFQ2OVnfqFPYsTyWHcXEGAFS/mTCvv3VucQ/sl0hvwbNsbfb2CD9xJFkCbR3Qpo=
+	t=1770041256; cv=none; b=E7sjgyOEDtzPnA3Q8HOJhC1WudmB4zf3nAPpA+JkJuViK6LGF3ZTqiILeBxudEU1n2EDuJDa/iTYFNwwzTvoERF9+za4NiiruImrNMLfjkLV07JrCk5PsS8FjRctmGgTCHpDjKSljQ1OaCP6M0uEaYcRzjtIx8UMcJ/zHQKmFN4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770026866; c=relaxed/simple;
-	bh=KqSta0t4KQI/YyMLBT1daHemlSj1RPunMVE+rVW0+ho=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=FONuNUJ9/CVfarVy+RGgvTR6vglHkZnJ+atqV2wujmbZrOvEWarxl8hE7l7Hqb14ADds4BuFlKkqAZImhJ1odtGrRsAl/zuBI5vxbGYOBtUM7sGUWTxp/ojfdN3kzulFpFFPw8393t3oMznBrw47c25+rMHSLnFsv2aSx10GuL0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=OAUofdx+; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=IuL2Stt0; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1770026863;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vgKo/2Y7XNk0bqY+u6jsG6nT1KZIz5J+eZsVkaeHKFs=;
-	b=OAUofdx+MLSj+Q5h6IdQ0jqKe42OEmwpvZGNthyHdhL/D//I6nyjhGbXmr3vmffYATpxgP
-	S5vxbZKDO2QgXhOUE4aSDIgT2aMftHf7zpQR1SXvKfoKYhBDFMzWf6HQMOf9FNDy8ui30L
-	CNz2iqIHKHc7Lv0uXEkN0HqqLauApE/W+7uoGpebhrBJ4a1EnSD25TqaNb7hp2OoTokjCk
-	EgtZb7kwYmlVtb1afgYFiK5m1VmV+lvgWamofMaIciGLXh6fEu856PWGundM8nFkuwNiEo
-	ji5D7sY9ZXxS8Cq58w25GZmR8CjZ72s0hzRnfNUqshB/56pZQQmUwAnUkey5ng==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1770026863;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vgKo/2Y7XNk0bqY+u6jsG6nT1KZIz5J+eZsVkaeHKFs=;
-	b=IuL2Stt0IgwdBLnfud47oOlWK57jsSq1Xwt8qJjn2CRVYrZ95EHWLdW1nOs28oTchWMTiA
-	NOKLvUz33cfekvBw==
-To: Tianyang Zhang <zhangtianyang@loongson.cn>, chenhuacai@kernel.org,
- kernel@xen0n.name, corbet@lwn.net, alexs@kernel.org, si.yanteng@linux.dev,
- jiaxun.yang@flygoat.com, maobibo@loongson.cn
-Cc: loongarch@lists.linux.dev, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Tianyang Zhang <zhangtianyang@loongson.cn>,
- Liupu Wang <wangliupu@loongson.cn>
-Subject: Re: [PATCH v10 4/4] irqchip/irq-loongarch-ir:Add Redirect irqchip
- support
-In-Reply-To: <20260202091041.2278271-5-zhangtianyang@loongson.cn>
-References: <20260202091041.2278271-1-zhangtianyang@loongson.cn>
- <20260202091041.2278271-5-zhangtianyang@loongson.cn>
-Date: Mon, 02 Feb 2026 11:07:42 +0100
-Message-ID: <87ms1rfogh.ffs@tglx>
+	s=arc-20240116; t=1770041256; c=relaxed/simple;
+	bh=fDw/Q6MfdsFkb17soopXpbynKsHQ7sbc5JpCA1qVJas=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=TW6sOIY+JoAjJ0SYEQbcBxDbJhzMj7PKZLAuBF7AKolaFJURXlgcYaxkBGkT+n6FOpu+vlmQGFi3OjcUCh3pEOz+7lVVedKHrkNnHh3CisJ9SH1rXggpCP9Ln4cKO2SVMWvJj5G97NOSj9ES5zDGRu8g9Vrxda/0UYqsy3BRfyk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=cg6Ojxy/; arc=none smtp.client-ip=115.124.30.99
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux.alibaba.com; s=default;
+	t=1770041249; h=From:To:Subject:Date:Message-Id:MIME-Version;
+	bh=VDIX3268l+YnDqz51gXsg22RmUvUWaRiFAyIjnTGOWE=;
+	b=cg6Ojxy/4B28n1hzMD0+Z3wGhYByOufXenGFWfkfRY1NXFanznYLeDLhPQvE+gq++CWk4osFbV/ahtzExCFEoJyCyw229O/gQuYbDyX4swju1XakbkSewW89MRGed7TMpFp7+NGaVe8Y71wNRVxukSWG3FU3J4kMn6K/ij7zRqg=
+Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com fp:SMTPD_---0WyO62Sp_1770041246 cluster:ay36)
+          by smtp.aliyun-inc.com;
+          Mon, 02 Feb 2026 22:07:27 +0800
+From: fangyu.yu@linux.alibaba.com
+To: pbonzini@redhat.com,
+	corbet@lwn.net,
+	anup@brainfault.org,
+	atish.patra@linux.dev,
+	pjw@kernel.org,
+	palmer@dabbelt.com,
+	aou@eecs.berkeley.edu,
+	alex@ghiti.fr
+Cc: guoren@kernel.org,
+	ajones@ventanamicro.com,
+	rkrcmar@ventanamicro.com,
+	radim.krcmar@oss.qualcomm.com,
+	andrew.jones@oss.qualcomm.com,
+	linux-doc@vger.kernel.org,
+	kvm@vger.kernel.org,
+	kvm-riscv@lists.infradead.org,
+	linux-riscv@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	Fangyu Yu <fangyu.yu@linux.alibaba.com>
+Subject: [PATCH v4 0/4] Support runtime configuration for per-VM's HGATP mode
+Date: Mon,  2 Feb 2026 22:07:12 +0800
+Message-Id: <20260202140716.34323-1-fangyu.yu@linux.alibaba.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.84 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-7.66 / 15.00];
+	WHITELIST_DMARC(-7.00)[alibaba.com:D:+];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
+	DMARC_POLICY_ALLOW(-0.50)[linux.alibaba.com,none];
+	R_DKIM_ALLOW(-0.20)[linux.alibaba.com:s=default];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-74859-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74858-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_NO_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tglx@linutronix.de,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linutronix.de:+];
+	FROM_NEQ_ENVFROM(0.00)[fangyu.yu@linux.alibaba.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.alibaba.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linutronix.de:dkim]
-X-Rspamd-Queue-Id: 634EBCAC78
+	DBL_BLOCKED_OPENRESOLVER(0.00)[alibaba.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.alibaba.com:mid,linux.alibaba.com:dkim]
+X-Rspamd-Queue-Id: 42D10CD263
 X-Rspamd-Action: no action
 
-On Mon, Feb 02 2026 at 17:10, Tianyang Zhang wrote:
-> +static inline void redirect_write_reg64(u32 node, u64 val, u32 reg)
-> +{
-> +	return writeq(val, REDIRECT_REG(reg, node));
+From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
 
-Again: What is this return for?
+Currently, RISC-V KVM hardcodes the G-stage page table format (HGATP mode)
+to the maximum mode detected at boot time (e.g., SV57x4 if supported). but
+often such a wide GPA is unnecessary, just as a host sometimes doesn't need
+sv57.
 
-> +static int redirect_table_init(struct irde_desc *irde)
-> +{
-> +	struct redirect_table *ird_table = &irde->ird_table;
-> +	unsigned long *bitmap;
-> +	struct folio *folio;
-> +	int node = irde->node;
+This patch introduces per-VM configurability of the G-stage mode via a new
+KVM capability: KVM_CAP_RISCV_SET_HGATP_MODE. User-space can now explicitly
+request a specific HGATP mode (SV39x4, SV48x4, or SV57x4 on 64-bit) during
+VM creation.
 
-It seems to be really hard to do a length based sort.
+---
+Changes in v4:
+    - Extend kvm_riscv_gstage_mode_detect() to probe all HGATP.MODE values
+      supported by the host and record them in a bitmask.
+    - Treat unexpected pgd_levels in kvm_riscv_gstage_mode() as an internal error
+      (e.g. WARN_ON_ONCE())(per Radim).
+    - Move kvm_riscv_gstage_gpa_bits() and kvm_riscv_gstage_gpa_size() to header
+      as static inline helpers(per Radim).
+    - Drop gstage_mode_user_initialized and Remove the kvm_debug() message from
+      KVM_CAP_RISCV_SET_HGATP_MODE(per Radim).
+    - Link to v3:
+      https://lore.kernel.org/linux-riscv/20260125150450.27068-1-fangyu.yu@linux.alibaba.com/
+---
+Changes in v3:
+    - Reworked the patch formatting (per Drew).
+    - Dropped kvm->arch.kvm_riscv_gstage_mode and derive HGATP.MODE from
+      kvm_riscv_gstage_pgd_levels via a helper, avoiding redundant per-VM state(per Drew).
+    - Removed kvm_riscv_gstage_max_mode and keep only kvm_riscv_gstage_max_pgd_levels
+      for host capability detection(per Drew).
+    - Other initialization and return value issues(per Drew).
+    - Enforce that KVM_CAP_RISCV_SET_HGATP_MODE can only be enabled before any vCPUs
+      are created by rejecting the ioctl once kvm->created_vcpus is non-zero(per Radim).
+    - Add a memslot safety check and reject the capability unless
+      kvm_are_all_memslots_empty(kvm) is true, ensuring the G-stage format is not
+      changed after any memslots have been installed(per Radim).
+    - Link to v2:
+      https://lore.kernel.org/linux-riscv/20260105143232.76715-1-fangyu.yu@linux.alibaba.com/
 
-Oh well...
+Fangyu Yu (4):
+  RISC-V: KVM: Support runtime configuration for per-VM's HGATP mode
+  RISC-V: KVM: Detect and expose supported HGATP G-stage modes
+  RISC-V: KVM: add KVM_CAP_RISCV_SET_HGATP_MODE
+  RISC-V: KVM: Define HGATP mode bits for KVM_CAP_RISCV_SET_HGATP_MODE
+
+ Documentation/virt/kvm/api.rst      | 27 ++++++++
+ arch/riscv/include/asm/kvm_gstage.h | 57 ++++++++++++++---
+ arch/riscv/include/asm/kvm_host.h   | 19 ++++++
+ arch/riscv/include/uapi/asm/kvm.h   |  3 +
+ arch/riscv/kvm/gstage.c             | 98 ++++++++++++++---------------
+ arch/riscv/kvm/main.c               | 12 ++--
+ arch/riscv/kvm/mmu.c                | 20 +++---
+ arch/riscv/kvm/vm.c                 | 22 ++++++-
+ arch/riscv/kvm/vmid.c               |  3 +-
+ include/uapi/linux/kvm.h            |  1 +
+ 10 files changed, 188 insertions(+), 74 deletions(-)
+
+-- 
+2.50.1
+
 
