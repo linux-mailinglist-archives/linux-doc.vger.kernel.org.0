@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-75148-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75149-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wPstAr9tgmlkUAMAu9opvQ
-	(envelope-from <linux-doc+bounces-75148-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:50:55 +0100
+	id oKVYAhBugmlkUAMAu9opvQ
+	(envelope-from <linux-doc+bounces-75149-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:52:16 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D53FDEF92
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:50:54 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 18235DEFC7
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:52:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 554C73098363
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:46:54 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 788F2301C650
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:47:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BD5E376479;
-	Tue,  3 Feb 2026 21:45:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 878C6376BE5;
+	Tue,  3 Feb 2026 21:45:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF9E4374722;
-	Tue,  3 Feb 2026 21:45:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE22637473F;
+	Tue,  3 Feb 2026 21:45:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770155141; cv=none; b=FUr6ihTdkRoUHm7zujC7LFSXEuZ+jsAl8W52KDM3GFAGs7oVjfbc+JXZAfWRPndJRRcClv0uT4aWeL53XZLd3MU5p09kLL7ZAifvnFf4MnVbDq6ap0xYP4yQ0mkGpbddl7iIXPxG44SyMZQs/xKNxU+Ntg1rEzElndSU3HEJjWY=
+	t=1770155147; cv=none; b=KWccdQgV6N1FVXsJoT4jS0t74rFL8MjzLTM2IC/lqIGUZv5Z2g6MvHcRsUG0SGvNh3tScjhxLvKdmt6jcj226HwbQ3lRGpcSn6/EynvtD8Fk7ENfjssYiqNpo1FRhcHesXEL5/Uga8b281ozMUNYqsQDs4xF2/mva0osCrBIAFg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770155141; c=relaxed/simple;
-	bh=uw9v17a8NezNyqIaMGFtUKmHZbn6Ezee6fVsS/T+Me8=;
+	s=arc-20240116; t=1770155147; c=relaxed/simple;
+	bh=P5enqSs+IEqLAwax/N9BOfSRgq8G4ObfMICqaDEKxTo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=LKyxaP9fSJgZQxutWM8erzN43NrgLuI0ACnUo6tYkCuyy+S63Zsw1kY7dfPkGRsnWYitnRL9GtX8fUXK99/+qZSiw9kGcfojFsfa266XL0CS6pMR4SG2EZTIuo4WqMXBemVFwIIOWlGDNTxZWdBa8CAlXWE4aGcf2Y3Aa0nnjWk=
+	 MIME-Version; b=lkcrYgls2ach3rLRs+N8dZs8AELl8jM2vvnNCvwg32rRHsvxHQruijU32t3OoSvwZTSCc66KbTL7xmvPuMQbnDTOYU6ZDrCzUm5l70ajG+AHQfNUvTnBj7LkuYbm8dGW/DZH7PIqCYpe6wAR3+ajuT2zUbGSHbE6KEQh1ULX5JI=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 20E2B339;
-	Tue,  3 Feb 2026 13:45:33 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 082A4497;
+	Tue,  3 Feb 2026 13:45:39 -0800 (PST)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id EF6063F778;
-	Tue,  3 Feb 2026 13:45:33 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D0B833F778;
+	Tue,  3 Feb 2026 13:45:39 -0800 (PST)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -73,9 +73,9 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v4 17/41] arm_mpam: resctrl: Add resctrl_arch_get_config()
-Date: Tue,  3 Feb 2026 21:43:18 +0000
-Message-ID: <20260203214342.584712-18-ben.horgan@arm.com>
+Subject: [PATCH v4 18/41] arm_mpam: resctrl: Implement helpers to update configuration
+Date: Tue,  3 Feb 2026 21:43:19 +0000
+Message-ID: <20260203214342.584712-19-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260203214342.584712-1-ben.horgan@arm.com>
 References: <20260203214342.584712-1-ben.horgan@arm.com>
@@ -91,7 +91,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -99,27 +99,38 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[36];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-75148-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75149-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.976];
+	NEURAL_HAM(-0.00)[-0.975];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,arm.com:mid,arm.com:email,huawei.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 9D53FDEF92
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,fujitsu.com:email,arm.com:mid,arm.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 18235DEFC7
 X-Rspamd-Action: no action
 
 From: James Morse <james.morse@arm.com>
 
-Implement resctrl_arch_get_config() by testing the live configuration for a
-CPOR bitmap. For any other configuration type return the default.
+resctrl has two helpers for updating the configuration.
+resctrl_arch_update_one() updates a single value, and is used by the
+software-controller to apply feedback to the bandwidth controls, it has to
+be called on one of the CPUs in the resctrl:domain.
+
+resctrl_arch_update_domains() copies multiple staged configurations, it can
+be called from anywhere.
+
+Both helpers should update any changes to the underlying hardware.
+
+Implement resctrl_arch_update_domains() to use
+resctrl_arch_update_one(). Neither need to be called on a specific CPU as
+the mpam driver will send IPIs as needed.
 
 Tested-by: Gavin Shan <gshan@redhat.com>
 Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
@@ -128,58 +139,93 @@ Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
- drivers/resctrl/mpam_resctrl.c | 43 ++++++++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
+Changes since rfc:
+list_for_each_entry -> list_for_each_entry_rcu
+return 0
+Restrict scope of local variables
+
+Changes since v2:
+whitespace fix
+---
+ drivers/resctrl/mpam_resctrl.c | 70 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
 
 diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
-index 7fc0b515cfa4..ecf00386edca 100644
+index ecf00386edca..48d047510089 100644
 --- a/drivers/resctrl/mpam_resctrl.c
 +++ b/drivers/resctrl/mpam_resctrl.c
-@@ -169,6 +169,49 @@ static int mpam_resctrl_pick_domain_id(int cpu, struct mpam_component *comp)
- 	return comp->comp_id;
+@@ -212,6 +212,76 @@ u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
+ 	}
  }
  
-+u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
-+			    u32 closid, enum resctrl_conf_type type)
++int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
++			    u32 closid, enum resctrl_conf_type t, u32 cfg_val)
 +{
 +	u32 partid;
-+	struct mpam_config *cfg;
++	struct mpam_config cfg;
 +	struct mpam_props *cprops;
 +	struct mpam_resctrl_res *res;
 +	struct mpam_resctrl_dom *dom;
-+	enum mpam_device_features configured_by;
 +
 +	lockdep_assert_cpus_held();
++	lockdep_assert_irqs_enabled();
 +
-+	if (!mpam_is_enabled())
-+		return resctrl_get_default_ctrl(r);
-+
++	/*
++	 * No need to check the CPU as mpam_apply_config() doesn't care, and
++	 * resctrl_arch_update_domains() relies on this.
++	 */
 +	res = container_of(r, struct mpam_resctrl_res, resctrl_res);
 +	dom = container_of(d, struct mpam_resctrl_dom, resctrl_ctrl_dom);
 +	cprops = &res->class->props;
 +
-+	partid = resctrl_get_config_index(closid, type);
-+	cfg = &dom->ctrl_comp->cfg[partid];
++	partid = resctrl_get_config_index(closid, t);
++	if (!r->alloc_capable || partid >= resctrl_arch_get_num_closid(r)) {
++		pr_debug("Not alloc capable or computed PARTID out of range\n");
++		return -EINVAL;
++	}
++
++	/*
++	 * Copy the current config to avoid clearing other resources when the
++	 * same component is exposed multiple times through resctrl.
++	 */
++	cfg = dom->ctrl_comp->cfg[partid];
 +
 +	switch (r->rid) {
 +	case RDT_RESOURCE_L2:
 +	case RDT_RESOURCE_L3:
-+		configured_by = mpam_feat_cpor_part;
++		cfg.cpbm = cfg_val;
++		mpam_set_feature(mpam_feat_cpor_part, &cfg);
 +		break;
 +	default:
-+		return resctrl_get_default_ctrl(r);
++		return -EINVAL;
 +	}
 +
-+	if (!r->alloc_capable || partid >= resctrl_arch_get_num_closid(r) ||
-+	    !mpam_has_feature(configured_by, cfg))
-+		return resctrl_get_default_ctrl(r);
++	return mpam_apply_config(dom->ctrl_comp, partid, &cfg);
++}
 +
-+	switch (configured_by) {
-+	case mpam_feat_cpor_part:
-+		return cfg->cpbm;
-+	default:
-+		return resctrl_get_default_ctrl(r);
++int resctrl_arch_update_domains(struct rdt_resource *r, u32 closid)
++{
++	int err;
++	struct rdt_ctrl_domain *d;
++
++	lockdep_assert_cpus_held();
++	lockdep_assert_irqs_enabled();
++
++	list_for_each_entry_rcu(d, &r->ctrl_domains, hdr.list) {
++		for (enum resctrl_conf_type t = 0; t < CDP_NUM_TYPES; t++) {
++			struct resctrl_staged_config *cfg = &d->staged_config[t];
++
++			if (!cfg->have_new_ctrl)
++				continue;
++
++			err = resctrl_arch_update_one(r, d, closid, t,
++						      cfg->new_ctrl);
++			if (err)
++				return err;
++		}
 +	}
++
++	return 0;
 +}
 +
  void resctrl_arch_reset_all_ctrls(struct rdt_resource *r)
