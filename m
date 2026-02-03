@@ -1,140 +1,248 @@
-Return-Path: <linux-doc+bounces-74989-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-74990-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aHolGzdtgWmwGAMAu9opvQ
-	(envelope-from <linux-doc+bounces-74989-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 04:36:23 +0100
+	id Q7qcCy5ugWkeGQMAu9opvQ
+	(envelope-from <linux-doc+bounces-74990-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 04:40:30 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CC61D42B2
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 04:36:23 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D60CD42F4
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 04:40:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 2D0B630039B7
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 03:36:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 361F0304AAE2
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 03:40:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A32CB32142F;
-	Tue,  3 Feb 2026 03:36:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E74530FC3C;
+	Tue,  3 Feb 2026 03:40:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="DhVo4INP"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A15Hcc+r"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com [91.218.175.177])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 348202F6170
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 03:36:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC0B3214A64;
+	Tue,  3 Feb 2026 03:40:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770089780; cv=none; b=NDTWuyhuPF9xdjvuELy6ctYxGGkAp8wl6zw+mPizFuB7VypcpfZMIOigp9rRLzZmySd6rbDHOtfXqPUejArBQ8CcgnVyfmnSwRxWwIwPCCqP+Vwp/n+8ddwu4nHcg1Bvc7OnCERB+1j3bJLUh4CYHIXrAWzPa34ozz+EvUfYrH4=
+	t=1770090026; cv=none; b=pSzJ59fWU5/xTttDYuN/1wI+w01VdLzqSgsNVKi0Uj6QbVHohhzUbas2yTQ9l//5fMiJIQgF7V0paLhhFXPDQZLwaRj7fbl/GFnIU4ZCwA8cAxz0UFXevBjdNT3ADbCRePdH6QWVvulTevLJ7SFoTVACeGTNvFuBqBHBqQcV1PY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770089780; c=relaxed/simple;
-	bh=hYz6UnZl98fvkQAs9RG2iuggv8a2xR1Tt8nipqzQHTs=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=Gscqgv+oqhVTqtOKrgEzJFpW/UPSK6hwldmX+02v0YorwwxAVRBtrpU8QIe3N7ASnBFLwaCpxbysRgVfFsq6uLbP0CTspW62Ks0Li5VbvAA37vE5x2tZfrDsKq3bO8ID8e/wJrj62fxN8+USI4sYa9TRlIiuMQLsfs+JBct6P1w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=DhVo4INP; arc=none smtp.client-ip=91.218.175.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Content-Type: text/plain;
-	charset=us-ascii
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1770089766;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=KJxP6n3p44LkH03IkDqQsgS+GpBo2zU5MsWmp0JlB5A=;
-	b=DhVo4INPC4Ons8xaBCpPzhhwL+sntJgmv9IgIoulLAZYf4pzz3ZpnHm6k400LdHZDLpymV
-	RE4bhGg4+b+2pq+2qsmy0OYtR5wulCSX8hs4mU+edMcJEJJyb/vV+yKryUukukDMjvejJ5
-	5aEU0wJ5Ls+w6TvtZLrP2w07z99oZXw=
+	s=arc-20240116; t=1770090026; c=relaxed/simple;
+	bh=eVjGccF/g6Fb0gixvi5Zf/nFMF5+9n8M9E2Vh1rOWRY=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=GOuCfw/AIXY+xcoxsQMxqO+8AqZrnYFABl6U34TLmN8xflAXszqq6Wh4tLc7PUxoSvKLZ8gCVY1dKFkPQIIggV5VNa/mOo1aea5g1BDYk2HCNTgauO/c65e9Mj8ejUiXDvfafGvB/b/HcaeTjlF496rvyuP7rkOsOPOt2MEh1RA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A15Hcc+r; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6106CC116D0;
+	Tue,  3 Feb 2026 03:40:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770090025;
+	bh=eVjGccF/g6Fb0gixvi5Zf/nFMF5+9n8M9E2Vh1rOWRY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=A15Hcc+rku6h1K4MXt1S1nDBp7k171XwgUUpJBNaeyrxjgjMq39cvYZgVv6DUBeQ+
+	 A/xeO+BPe156UKLeC7pR+J2sZDIvB9FQAwFDperq9e0nq4GBrDr67Oxz9KyFLDMrRW
+	 KQxYbPyiInnNSZnqKcpyr1tV4tDGFRXIl0ig44LmdoTz/eYHOPOfJCgAHXprnT1gVY
+	 4BpXAoT9Pi6TIwk6DAMti4Q0tUmxaRkhBTg/Qt9Q56mO5/oQHv28tgUwz+jE8Q4phd
+	 OsTU8EeY/QBnJRRvyvBYh9inUvqiP3L8SKYqs7aMbOxYBKag1H78020PySRtfaS0nK
+	 lKqpV3JWQtY6A==
+Date: Mon, 2 Feb 2026 19:40:23 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Tariq Toukan <tariqt@nvidia.com>
+Cc: Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko
+ <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed
+ <saeedm@nvidia.com>, "Leon Romanovsky" <leon@kernel.org>, Mark Bloch
+ <mbloch@nvidia.com>, <netdev@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+ <linux-rdma@vger.kernel.org>, Gal Pressman <gal@nvidia.com>, Moshe Shemesh
+ <moshe@nvidia.com>, Carolina Jubran <cjubran@nvidia.com>, Cosmin Ratiu
+ <cratiu@nvidia.com>, Jiri Pirko <jiri@nvidia.com>, Randy Dunlap
+ <rdunlap@infradead.org>, Simon Horman <horms@kernel.org>, Krzysztof
+ Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH net-next V7 01/14] documentation: networking: add shared
+ devlink documentation
+Message-ID: <20260202194023.412bb454@kernel.org>
+In-Reply-To: <20260128112544.1661250-2-tariqt@nvidia.com>
+References: <20260128112544.1661250-1-tariqt@nvidia.com>
+	<20260128112544.1661250-2-tariqt@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
-Subject: Re: [PATCHv6 09/17] mm/sparse: Check memmap alignment for
- compound_info_has_mask()
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20260202155634.650837-10-kas@kernel.org>
-Date: Tue, 3 Feb 2026 11:35:24 +0800
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@redhat.com>,
- Matthew Wilcox <willy@infradead.org>,
- Usama Arif <usamaarif642@gmail.com>,
- Frank van der Linden <fvdl@google.com>,
- Oscar Salvador <osalvador@suse.de>,
- Mike Rapoport <rppt@kernel.org>,
- Vlastimil Babka <vbabka@suse.cz>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Zi Yan <ziy@nvidia.com>,
- Baoquan He <bhe@redhat.com>,
- Michal Hocko <mhocko@suse.com>,
- Johannes Weiner <hannes@cmpxchg.org>,
- Jonathan Corbet <corbet@lwn.net>,
- Huacai Chen <chenhuacai@kernel.org>,
- WANG Xuerui <kernel@xen0n.name>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Albert Ou <aou@eecs.berkeley.edu>,
- Alexandre Ghiti <alex@ghiti.fr>,
- kernel-team@meta.com,
- linux-mm@kvack.org,
- linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org,
- loongarch@lists.linux.dev,
- linux-riscv@lists.infradead.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <C310A603-DB7F-4140-B045-7F1E3CC98C05@linux.dev>
-References: <20260202155634.650837-1-kas@kernel.org>
- <20260202155634.650837-10-kas@kernel.org>
-To: Kiryl Shutsemau <kas@kernel.org>
-X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-74990-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-74989-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,redhat.com,infradead.org,gmail.com,google.com,suse.de,kernel.org,suse.cz,oracle.com,nvidia.com,suse.com,cmpxchg.org,lwn.net,xen0n.name,dabbelt.com,sifive.com,eecs.berkeley.edu,ghiti.fr,meta.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.infradead.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	FREEMAIL_CC(0.00)[google.com,redhat.com,lunn.ch,davemloft.net,gmail.com,resnulli.us,lwn.net,nvidia.com,kernel.org,vger.kernel.org,infradead.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[muchun.song@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,linux.dev:email,linux.dev:dkim,linux.dev:mid,nvidia.com:email]
-X-Rspamd-Queue-Id: 0CC61D42B2
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:email]
+X-Rspamd-Queue-Id: 7D60CD42F4
 X-Rspamd-Action: no action
 
-
-
-> On Feb 2, 2026, at 23:56, Kiryl Shutsemau <kas@kernel.org> wrote:
+On Wed, 28 Jan 2026 13:25:31 +0200 Tariq Toukan wrote:
+> From: Jiri Pirko <jiri@nvidia.com>
 > 
-> If page->compound_info encodes a mask, it is expected that vmemmap to be
-> naturally aligned to the maximum folio size.
-> 
-> Add a VM_BUG_ON() to check the alignment.
-> 
-> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-> Acked-by: Zi Yan <ziy@nvidia.com>
+> Document shared devlink instances for multiple PFs on the same chip.
 
-Reviewed-by: Muchun Song <muchun.song@linux.dev>
+> diff --git a/Documentation/networking/devlink/devlink-shared.rst b/Documentation/networking/devlink/devlink-shared.rst
+> new file mode 100644
+> index 000000000000..74655dc671bc
+> --- /dev/null
+> +++ b/Documentation/networking/devlink/devlink-shared.rst
+> @@ -0,0 +1,95 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +============================
+> +Devlink Shared Instances
+> +============================
 
+Shouldn't the length of the ==== lines match the title length?
 
+> +Overview
+> +========
+> +
+> +Shared devlink instances allow multiple physical functions (PFs) on the same
+> +chip to share an additional devlink instance for chip-wide operations. This
+> +is implemented within individual drivers alongside the individual PF devlink
+> +instances, not replacing them.
+> +
+> +Multiple PFs may reside on the same physical chip, running a single firmware.
+> +Some of the resources and configurations may be shared among these PFs. The
+> +shared devlink instance provides an object to pin configuration knobs on.
+> +
+> +The shared devlink instance is backed by a faux device and provides a common
+> +interface for operations that affect the entire chip rather than individual PFs.
+> +A faux device is used as a backing device for the 'entire chip' since there's no
+> +additional real device instantiated by hardware besides the PF devices.
+
+There needs to be a note here clearly stating the the use of "shared
+devlink instace" is a hack for legacy drivers, and new drivers should
+have a single devlink instance for the entire device. The fact that
+single instance is always preferred, and *more correct* must be made
+very clear to the reader. Ideally the single instance multiple function
+implementation would leverage the infra added here for collecting the
+functions, however.
+
+> +Implementation
+> +==============
+> +
+> +Architecture
+> +------------
+> +
+> +The implementation uses:
+> +
+> +* **Faux device**: Virtual device backing the shared devlink instance
+
+"backing"? It isn't backing anything, its just another hack because we
+made the mistake of tying devlink instances to $bus/$device as an id.
+Now we need a fake device to have an identifier.
+
+> +* **Chip identification**: PFs are grouped by chip using a driver-specific identifier
+> +* **Shared instance management**: Global list of shared instances with reference counting
+> +
+> +API Functions
+> +-------------
+> +
+> +The following functions are provided for managing shared devlink instances:
+> +
+> +* ``devlink_shd_get()``: Get or create a shared devlink instance identified by a string ID
+> +* ``devlink_shd_put()``: Release a reference on a shared devlink instance
+> +* ``devlink_shd_get_priv()``: Get private data from shared devlink instance
+> +
+> +Initialization Flow
+> +-------------------
+> +
+> +1. **PF calls shared devlink init** during driver probe
+> +2. **Chip identification** using driver-specific method to determine device identity
+
+This isn't very clear.
+
+> +3. **Get or create shared instance** using ``devlink_shd_get()``:
+
+Just "Call ``devlink_shd_get()`` with the identifier constructed in
+step 2" (?) and then have the points below explain that it gets or
+recreates
+
+> +   * The function looks up existing instance by identifier
+> +   * If none exists, creates new instance:
+> +     - Creates faux device with chip identifier as name
+> +     - Allocates and registers devlink instance
+> +     - Adds to global shared instances list
+> +     - Increments reference count
+> +
+> +4. **Set nested devlink instance** for the PF devlink instance using
+> +   ``devl_nested_devlink_set()`` before registering the PF devlink instance
+> +
+> +Cleanup Flow
+> +------------
+> +
+> +1. **Cleanup** when PF is removed
+
+"``.remove()`` callback for a PCIe device is called"
+
+> +2. **Call** ``devlink_shd_put()`` to release reference (decrements reference count)
+> +3. **Shared instance is automatically destroyed** when the last PF removes (device list becomes empty)
+> +
+> +Chip Identification
+> +-------------------
+> +
+> +PFs belonging to the same chip are identified using a driver-specific method.
+> +The driver is free to choose any identifier that is suitable for determining
+> +whether two PFs are part of the same device. Examples include:
+> +
+> +* **PCI VPD serial numbers**: Extract from PCI VPD
+> +* **Device tree properties**: Read chip identifier from device tree
+> +* **Other hardware-specific identifiers**: Any unique identifier that groups PFs by chip
+> +
+> +Locking
+> +-------
+> +
+> +A global mutex (``shd_mutex``) protects the shared instances list during
+> +registration/deregistration.
+> +
+> +Similarly to other nested devlink instance relationships, devlink lock of
+> +the shared instance should be always taken after the devlink lock of PF.
+
+of an instance, not a PF
+
+> +
+> +Reference Counting
+> +------------------
+> +
+> +Each shared devlink instance maintains a reference count (``refcount_t refcount``).
+> +The reference count is incremented when ``devlink_shd_get()`` is called and
+> +decremented when ``devlink_shd_put()`` is called. When the reference count
+> +reaches zero, the shared instance is automatically destroyed.
+
+I think AI went too far with the text generation here, this is very
+obvious from the previous sections.
+-- 
+pw-bot: cr
 
