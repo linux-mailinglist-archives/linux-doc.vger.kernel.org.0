@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-75171-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75172-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aLzkI5lvgmlkUAMAu9opvQ
-	(envelope-from <linux-doc+bounces-75171-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:58:49 +0100
+	id gP79Dz1vgmlkUAMAu9opvQ
+	(envelope-from <linux-doc+bounces-75172-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:57:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 490C1DF0B7
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:58:49 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D67E5DF08A
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:57:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 9D58630C938D
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:51:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 0188F30ED13B
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:51:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88218374751;
-	Tue,  3 Feb 2026 21:47:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6595D374758;
+	Tue,  3 Feb 2026 21:48:02 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 263E9371070;
-	Tue,  3 Feb 2026 21:47:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC97E371070;
+	Tue,  3 Feb 2026 21:48:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770155276; cv=none; b=iOatI1pxCaoUX5+PypeIWp0Xt9iGnEPLTlgNCGu4P/MHJBhveZqPVYGK3Uoo9oIpFkFc191Chqc12lRYHG9LcV470lJS7G6PBoXNmLHToyDkIUUeVaU2QeLu+zuVQz6Af5k/WukjZ4ujqDHgSefJb32/eQqUcJc4zfu7p47W1VI=
+	t=1770155282; cv=none; b=AHQJWFb3Xvdl7EUtrXfE/PTrBU2+jlGCT00tKfdjhWk1YNW16CnNep2j9fZPYCMW4eBUbA0nVzJU9JoEWKtRyEtolxQrE6WTqeS8ZuArgVy5+3e/XpXdcmAKmZKoAOTKgVjhW5dgKNlx5is0r0RWxqzdVIXVSuW/6ueTWiwCd5g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770155276; c=relaxed/simple;
-	bh=sOBd2oS2DYf+Hk7hjEniDIjNZvEj1gZUMIpQnk+8TWk=;
+	s=arc-20240116; t=1770155282; c=relaxed/simple;
+	bh=9SmIv8jyb4TB0MoKTSFR+nlBNudY43GiPw6QBN4PbBI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iYSYpC5odU+QDCB/WW2uoO/Wh/6939MAQzFFZ29Hj1Td2ZdcXpLQx8WPXv9ciMRbab2DCSVgG2wKMMhogMPodn8qkj3U0aaYwi+SX6VU8WbQYu6o+0pjSG/mlJnAb2LeGHGvTc9OaDbjdWGZlMWv+EEqfP5U7YzmiDIh46i4RPo=
+	 MIME-Version; b=JbCfg2+VuAqbDiZLlk3jdzzHDIj9wNDEZQ5zUJbZ9zOvTHiV7x/fWiIzb2/0Xf5JbY4paJc3mFV/LHyawgL1gIkmbc2XH99+U9Gr03+kIqcXqHyBKQRNwARpC3sY1XbcLttoBCCokdDj/p2PPzq55QiZPuk9T32sWizXGoHF67c=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6693A1063;
-	Tue,  3 Feb 2026 13:47:48 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 25035339;
+	Tue,  3 Feb 2026 13:47:54 -0800 (PST)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6005E3F778;
-	Tue,  3 Feb 2026 13:47:49 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 21C4B3F778;
+	Tue,  3 Feb 2026 13:47:54 -0800 (PST)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -72,9 +72,9 @@ Cc: amitsinght@marvell.com,
 	kvmarm@lists.linux.dev,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v4 40/41] arm_mpam: Quirk CMN-650's CSU NRDY behaviour
-Date: Tue,  3 Feb 2026 21:43:41 +0000
-Message-ID: <20260203214342.584712-41-ben.horgan@arm.com>
+Subject: [PATCH v4 41/41] arm64: mpam: Add initial MPAM documentation
+Date: Tue,  3 Feb 2026 21:43:42 +0000
+Message-ID: <20260203214342.584712-42-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260203214342.584712-1-ben.horgan@arm.com>
 References: <20260203214342.584712-1-ben.horgan@arm.com>
@@ -90,140 +90,156 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75171-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75172-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_HAM(-0.00)[-0.966];
+	NEURAL_HAM(-0.00)[-0.967];
 	TO_DN_NONE(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	R_DKIM_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[35];
 	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid,arm.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 490C1DF0B7
+X-Rspamd-Queue-Id: D67E5DF08A
 X-Rspamd-Action: no action
 
-From: James Morse <james.morse@arm.com>
-
-CMN-650 is afflicted with an erratum where the CSU NRDY bit never clears.
-This tells us the monitor never finishes scanning the cache. The erratum
-document says to wait the maximum time, then ignore the field.
-
-Add a flag to indicate whether this is the final attempt to read the
-counter, and when this quirk is applied, ignore the NRDY field.
-
-This means accesses to this counter will always retry, even if the counter
-was previously programmed to the same values.
-
-The counter value is not expected to be stable, it drifts up and down with
-each allocation and eviction. The CSU register provides the value for a
-point in time.
+MPAM (Memory Partitioning and Monitoring) is now exposed to user-space via
+resctrl. Add some documentation so the user knows what features to expect.
 
 Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
-Changes since v3:
-parentheses in macro
+Changes by Ben:
+Some tidying, update for current heuristics
 ---
- Documentation/arch/arm64/silicon-errata.rst |  3 +++
- drivers/resctrl/mpam_devices.c              | 12 ++++++++++++
- drivers/resctrl/mpam_internal.h             |  6 ++++++
- 3 files changed, 21 insertions(+)
+ Documentation/arch/arm64/index.rst |  1 +
+ Documentation/arch/arm64/mpam.rst  | 93 ++++++++++++++++++++++++++++++
+ 2 files changed, 94 insertions(+)
+ create mode 100644 Documentation/arch/arm64/mpam.rst
 
-diff --git a/Documentation/arch/arm64/silicon-errata.rst b/Documentation/arch/arm64/silicon-errata.rst
-index e810b2a8f40e..3667650036fb 100644
---- a/Documentation/arch/arm64/silicon-errata.rst
-+++ b/Documentation/arch/arm64/silicon-errata.rst
-@@ -213,6 +213,9 @@ stable kernels.
- | ARM            | GIC-700         | #2941627        | ARM64_ERRATUM_2941627       |
- +----------------+-----------------+-----------------+-----------------------------+
- +----------------+-----------------+-----------------+-----------------------------+
-+| ARM            | CMN-650         | #3642720        | N/A                         |
-++----------------+-----------------+-----------------+-----------------------------+
-++----------------+-----------------+-----------------+-----------------------------+
- | Broadcom       | Brahma-B53      | N/A             | ARM64_ERRATUM_845719        |
- +----------------+-----------------+-----------------+-----------------------------+
- | Broadcom       | Brahma-B53      | N/A             | ARM64_ERRATUM_843419        |
-diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
-index 51cf29bda66e..460ea98a1c92 100644
---- a/drivers/resctrl/mpam_devices.c
-+++ b/drivers/resctrl/mpam_devices.c
-@@ -691,6 +691,12 @@ static const struct mpam_quirk mpam_quirks[] = {
- 	.iidr_mask  = MPAM_IIDR_MATCH_ONE,
- 	.workaround = T241_MBW_COUNTER_SCALE_64,
- 	},
-+	{
-+	/* ARM CMN-650 CSU erratum 3642720 */
-+	.iidr       = MPAM_IIDR_ARM_CMN_650,
-+	.iidr_mask  = MPAM_IIDR_MATCH_ONE,
-+	.workaround = IGNORE_CSU_NRDY,
-+	},
- 	{ NULL } /* Sentinel */
- };
- 
-@@ -1003,6 +1009,7 @@ struct mon_read {
- 	enum mpam_device_features	type;
- 	u64				*val;
- 	int				err;
-+	bool				waited_timeout;
- };
- 
- static bool mpam_ris_has_mbwu_long_counter(struct mpam_msc_ris *ris)
-@@ -1249,6 +1256,10 @@ static void __ris_msmon_read(void *arg)
- 		if (mpam_has_feature(mpam_feat_msmon_csu_hw_nrdy, rprops))
- 			nrdy = now & MSMON___NRDY;
- 		now = FIELD_GET(MSMON___VALUE, now);
+diff --git a/Documentation/arch/arm64/index.rst b/Documentation/arch/arm64/index.rst
+index 6a012c98bdcd..189fa760dade 100644
+--- a/Documentation/arch/arm64/index.rst
++++ b/Documentation/arch/arm64/index.rst
+@@ -23,6 +23,7 @@ ARM64 Architecture
+     memory
+     memory-tagging-extension
+     mops
++    mpam
+     perf
+     pointer-authentication
+     ptdump
+diff --git a/Documentation/arch/arm64/mpam.rst b/Documentation/arch/arm64/mpam.rst
+new file mode 100644
+index 000000000000..0769bccff25e
+--- /dev/null
++++ b/Documentation/arch/arm64/mpam.rst
+@@ -0,0 +1,93 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
-+		if (mpam_has_quirk(IGNORE_CSU_NRDY, msc) && m->waited_timeout)
-+			nrdy = false;
++====
++MPAM
++====
 +
- 		break;
- 	case mpam_feat_msmon_mbwu_31counter:
- 	case mpam_feat_msmon_mbwu_44counter:
-@@ -1386,6 +1397,7 @@ int mpam_msmon_read(struct mpam_component *comp, struct mon_cfg *ctx,
- 			.ctx = ctx,
- 			.type = type,
- 			.val = val,
-+			.waited_timeout = true,
- 		};
- 		*val = 0;
- 
-diff --git a/drivers/resctrl/mpam_internal.h b/drivers/resctrl/mpam_internal.h
-index 7a3a46b94913..b6d083a73fe2 100644
---- a/drivers/resctrl/mpam_internal.h
-+++ b/drivers/resctrl/mpam_internal.h
-@@ -222,6 +222,7 @@ enum mpam_device_quirks {
- 	T241_SCRUB_SHADOW_REGS,
- 	T241_FORCE_MBW_MIN_TO_ONE,
- 	T241_MBW_COUNTER_SCALE_64,
-+	IGNORE_CSU_NRDY,
- 	MPAM_QUIRK_LAST
- };
- 
-@@ -247,6 +248,11 @@ struct mpam_quirk {
- 				 FIELD_PREP_CONST(MPAMF_IIDR_REVISION,    0)	 | \
- 				 FIELD_PREP_CONST(MPAMF_IIDR_IMPLEMENTER, 0x36b))
- 
-+#define MPAM_IIDR_ARM_CMN_650	(FIELD_PREP_CONST(MPAMF_IIDR_PRODUCTID,   0)	 | \
-+				 FIELD_PREP_CONST(MPAMF_IIDR_VARIANT,     0)	 | \
-+				 FIELD_PREP_CONST(MPAMF_IIDR_REVISION,    0)	 | \
-+				 FIELD_PREP_CONST(MPAMF_IIDR_IMPLEMENTER, 0x43b))
++What is MPAM
++============
++  MPAM (Memory Partitioning and Monitoring) is a feature in the CPUs and memory
++  system components such as the caches or memory controllers that allow memory
++  traffic to be labelled, partitioned and monitored.
 +
- /* The values for MSMON_CFG_MBWU_FLT.RWBW */
- enum mon_filter_options {
- 	COUNT_BOTH	= 0,
++  Traffic is labelled by the CPU, based on the control or monitor group the
++  current task is assigned to using resctrl.  Partitioning policy can be set
++  using the schemata file in resctrl, and monitor values read via resctrl.
++  See Documentation/filesystems/resctrl.rst for more details.
++
++  This allows tasks that share memory system resources, such as caches, to be
++  isolated from each other according to the partitioning policy (so called noisy
++  neighbours).
++
++Supported Platforms
++===================
++  Use of this feature requires CPU support, support in the memory system
++  components, and a description from firmware of where the MPAM device controls
++  are in the MMIO address space. (e.g. the 'MPAM' ACPI table).
++
++  The MMIO device that provides MPAM controls/monitors for a memory system
++  component is called a memory system component. (MSC).
++
++  Because the user interface to MPAM is via resctrl, only MPAM features that are
++  compatible with resctrl can be exposed to user-space.
++
++  MSC are considered as a group based on the topology. MSC that correspond with
++  the L3 cache are considered together, it is not possible to mix MSC between L2
++  and L3 to 'cover' a resctrl schema.
++
++  The supported features are:
++    * Cache portion bitmap controls (CPOR) on the L2 or L3 caches.  To expose
++      CPOR at L2 or L3, every CPU must have a corresponding CPU cache at this
++      level that also supports the feature.  Mismatched big/little platforms are
++      not supported as resctrl's controls would then also depend on task
++      placement.
++
++    * Memory bandwidth maximum controls (MBW_MAX) on or after the L3 cache.
++      resctrl uses the L3 cache-id to identify where the memory bandwidth
++      control is applied. For this reason the platform must have an L3 cache
++      with cache-id's supplied by firmware. (It doesn't need to support MPAM.)
++
++      To be exported as the 'MB' schema, the topology of the group of MSC chosen
++      must match the topology of the L3 cache so that the cache-id's can be
++      repainted. For example: Platforms with Memory bandwidth maximum controls
++      on CPU-less NUMA nodes cannot expose the 'MB' schema to resctrl as these
++      nodes do not have a corresponding L3 cache. If the memory bandwidth
++      control is on the memory rather than the L3 then there must be a single
++      global L3 as otherwise it is unknown which L3 the traffic came from.
++
++      When the MPAM driver finds multiple groups of MSC it can use for the 'MB'
++      schema, it prefers the group closest to the L3 cache.
++
++    * Cache Storage Usage (CSU) counters can expose the 'llc_occupancy' provided
++      there is at least one CSU monitor on each MSC that makes up the L3 group.
++      Exposing CSU counters from other caches or devices is not supported.
++
++    * Memory Bandwidth Usage (MBWU) on or after the L3 cache.  resctrl uses the
++      L3 cache-id to identify where the memory bandwidth is measured. For this
++      reason the platform must have an L3 cache with cache-id's supplied by
++      firmware. (It doesn't need to support MPAM.)
++
++      Memory bandwidth monitoring makes use of MBWU monitors in each MSC that
++      makes up the L3 group. If there are more monitors than the maximum number
++      of control and monitor groups, these will be allocated and configured at
++      boot. Otherwise, the monitors will not be usable as they are required to
++      be free running. If the memory bandwidth monitoring is on the memory
++      rather than the L3 then there must be a single global L3 as otherwise it
++      is unknown which L3 the traffic came from.
++
++      To expose 'mbm_total_bytes', the topology of the group of MSC chosen must
++      match the topology of the L3 cache so that the cache-id's can be
++      repainted. For example: Platforms with Memory bandwidth monitors on
++      CPU-less NUMA nodes cannot expose 'mbm_total_bytes' as these nodes do not
++      have a corresponding L3 cache. 'mbm_local_bytes' is not exposed as MPAM
++      cannot distinguish local traffic from global traffic.
++
++Feature emulation
++=================
++  MPAM will emulate the Code Data Prioritisation (CDP) feature on all platforms.
++
++Reporting Bugs
++==============
++  If you are not seeing the counters or controls you expect please share the
++  debug messages produced when enabling dynamic debug and booting with:
++  dyndbg="file mpam_resctrl.c +pl"
 -- 
 2.43.0
 
