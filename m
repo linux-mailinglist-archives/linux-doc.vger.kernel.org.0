@@ -1,189 +1,199 @@
-Return-Path: <linux-doc+bounces-75014-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75012-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wHbyEgHLgWl1JwMAu9opvQ
-	(envelope-from <linux-doc+bounces-75014-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:16:33 +0100
+	id GNAMBsvIgWl1JwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75012-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:07:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6B45D76D1
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:16:32 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DC91D74E3
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:07:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 011F43059A71
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 10:15:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6FD98301E965
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 10:03:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6500029A9F9;
-	Tue,  3 Feb 2026 10:15:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 900E939C626;
+	Tue,  3 Feb 2026 10:03:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WHfJCxHU"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q+gdIPF3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDC5823183F;
-	Tue,  3 Feb 2026 10:15:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC88139C62F
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 10:03:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770113729; cv=none; b=XqWlP+Gx8IK4tVkZo0NrmJEiXFqfAVEjAoWZBbG6u9FBPi9dTLrpn/LFr4+FRvY28Vbn5vwCO54n/VIxOribdfNb/a6PTLeTy8joPsYncOHD5n9yimBW9X9bEidpk2+SrARHphkrP03S7sN3C+38Oki2E5c/qNoYuU5rJt2C1T0=
+	t=1770113005; cv=none; b=maMuX1OyfviRZP0ARwmGnMadolzNLW3Fj1iT2D41drRGsNQmTqnwFvSfY0AXkIy1cK2awblYElNFZ7oqRDndc6ruBCV3fTqRRv9T+M4Wrx5Oe+omtlpv9QDUv6OAvMlQ2vRDE1Pc/kMMWyLwXZrxPd2Z9GlFSFtpuQcM5S0JxFw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770113729; c=relaxed/simple;
-	bh=ltTqItvs5DEbQAayR00+PqL/+NRtgJq6ixieEinQSY4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Q5jjG2QEVNkNXRP2RTfrK1GMOiUYH6UPKgEbwKpBdLGeZyIapCP4xIUdjduYYCelC1/8WjH3KNQMilVzd2sxP9LXQ2iMElxruLRgEvQq6IqpmH4FPc8DmCQ31z/Gd3mxq8IqLIGIX2TTULSA5lfMctxJNBPC4HBqUqSuVoQi/Mw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WHfJCxHU; arc=none smtp.client-ip=192.198.163.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1770113728; x=1801649728;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ltTqItvs5DEbQAayR00+PqL/+NRtgJq6ixieEinQSY4=;
-  b=WHfJCxHU6+m/HKsG1GEUHnC7LYEAoVlCp5pDuHNDURLYdoEDYFbRORys
-   Lk4D7f7h02Orrykg+0t+tdqw6ZDWUlqyALFWmthEf98FPXaS0PGAQBtwm
-   QgjKlOvAaqcH35dSuq9S9Za8hua/CidmhLAnv34VmjsDGLRHy3R6uWSvY
-   c6YMNE8Le7rCnOAbslhhonhRo5jiZ7H17FnEfMCleDQ+iVn4X1jZH6A5O
-   xRcF5tFZxKA5PklK5l89LpJq4MuTnFWaCO5jLhV90cjGpkqYi/GLgYZmA
-   rd1cFOH+ZyF1x+tHM4dFEJpBLyNtmrBZofZhwQVPcScqg/lICl94yNpww
-   w==;
-X-CSE-ConnectionGUID: Q43I6yY3TF6pmKIhbq1+8Q==
-X-CSE-MsgGUID: ou9M2qUoRwCLUcxP0tEM4A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11690"; a="96738240"
-X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
-   d="scan'208";a="96738240"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2026 02:15:26 -0800
-X-CSE-ConnectionGUID: QSwRDmD1RvONYQUf1EbLaA==
-X-CSE-MsgGUID: +XVLnH3CSfiSKxpDX9/BtA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
-   d="scan'208";a="209093662"
-Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
-  by orviesa010.jf.intel.com with ESMTP; 03 Feb 2026 02:15:05 -0800
-Date: Tue, 3 Feb 2026 17:56:37 +0800
-From: Xu Yilun <yilun.xu@linux.intel.com>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Jason Gunthorpe <jgg@ziepe.ca>, Ackerley Tng <ackerleytng@google.com>,
-	Alexey Kardashevskiy <aik@amd.com>, cgroups@vger.kernel.org,
-	kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org, x86@kernel.org,
-	akpm@linux-foundation.org, binbin.wu@linux.intel.com, bp@alien8.de,
-	brauner@kernel.org, chao.p.peng@intel.com, chenhuacai@kernel.org,
-	corbet@lwn.net, dave.hansen@intel.com, dave.hansen@linux.intel.com,
-	david@redhat.com, dmatlack@google.com, erdemaktas@google.com,
-	fan.du@intel.com, fvdl@google.com, haibo1.xu@intel.com,
-	hannes@cmpxchg.org, hch@infradead.org, hpa@zytor.com,
-	hughd@google.com, ira.weiny@intel.com, isaku.yamahata@intel.com,
-	jack@suse.cz, james.morse@arm.com, jarkko@kernel.org,
-	jgowans@amazon.com, jhubbard@nvidia.com, jroedel@suse.de,
-	jthoughton@google.com, jun.miao@intel.com, kai.huang@intel.com,
-	keirf@google.com, kent.overstreet@linux.dev,
-	liam.merwick@oracle.com, maciej.wieczor-retman@intel.com,
-	mail@maciej.szmigiero.name, maobibo@loongson.cn,
-	mathieu.desnoyers@efficios.com, maz@kernel.org, mhiramat@kernel.org,
-	mhocko@kernel.org, mic@digikod.net, michael.roth@amd.com,
-	mingo@redhat.com, mlevitsk@redhat.com, mpe@ellerman.id.au,
-	muchun.song@linux.dev, nikunj@amd.com, nsaenz@amazon.es,
-	oliver.upton@linux.dev, palmer@dabbelt.com, pankaj.gupta@amd.com,
-	paul.walmsley@sifive.com, pbonzini@redhat.com, peterx@redhat.com,
-	pgonda@google.com, prsampat@amd.com, pvorel@suse.cz,
-	qperret@google.com, richard.weiyang@gmail.com,
-	rick.p.edgecombe@intel.com, rientjes@google.com,
-	rostedt@goodmis.org, roypat@amazon.co.uk, rppt@kernel.org,
-	shakeel.butt@linux.dev, shuah@kernel.org, steven.price@arm.com,
-	steven.sistare@oracle.com, suzuki.poulose@arm.com, tabba@google.com,
-	tglx@linutronix.de, thomas.lendacky@amd.com, vannapurve@google.com,
-	vbabka@suse.cz, viro@zeniv.linux.org.uk, vkuznets@redhat.com,
-	wei.w.wang@intel.com, will@kernel.org, willy@infradead.org,
-	wyihan@google.com, xiaoyao.li@intel.com, yan.y.zhao@intel.com,
-	yilun.xu@intel.com, yuzenghui@huawei.com, zhiquan1.li@intel.com
-Subject: Re: [RFC PATCH v1 05/37] KVM: guest_memfd: Wire up
- kvm_get_memory_attributes() to per-gmem attributes
-Message-ID: <aYHGVQTF6RUs7r3g@yilunxu-OptiPlex-7050>
-References: <cover.1760731772.git.ackerleytng@google.com>
- <071a3c6603809186e914fe5fed939edee4e11988.1760731772.git.ackerleytng@google.com>
- <07836b1d-d0d8-40f2-8f7b-7805beca31d0@amd.com>
- <CAEvNRgEuez=JbArRf2SApLAL0usv5-Q6q=nBPOFMHrHGaKAtMw@mail.gmail.com>
- <20260129003753.GZ1641016@ziepe.ca>
- <aXqx3_eE0rNh6nP0@google.com>
+	s=arc-20240116; t=1770113005; c=relaxed/simple;
+	bh=ao5SwoLNTIiHJURJeN/qxgiD0uarUaiktckItiBuuxc=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=V2phnDiOaNvxPfNjWDe8ehi345R9UYW0VcKDAPx6Ab3levArhiaGIFEPtISGYYdNElVF+i6M97/Twwlgv4uOXYVd+vW7CCjtBeMdniHdt6ig4mAETNrq038BJCynlcPVyHE31OQ3uSdsFesab9AOPdcxpvOrhTmeddBMSORSBdI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Q+gdIPF3; arc=none smtp.client-ip=209.85.221.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-435903c4040so3610600f8f.3
+        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 02:03:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770112999; x=1770717799; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=9t5Fe5bGozogr0ZNYAWcRlOMGPdLPrptTIS9SavKeiw=;
+        b=Q+gdIPF3SmpI+vGeoYLyresfGoXQJErwLP4kt0vS7MHbHziBXkiMJr4FGSgqTg3Ba2
+         kYlDInqM//a5uMC4b+BFNwDQ1xhlKT5hFw0ESwENUKUyvnind9qlcMAkhn37VDPfYruZ
+         rI2JA35kbaqVw02DEAqEeJCjf+GnST5hjsQtlz2k1Hye41gYF15v4mvTVBBu0WoI9qRE
+         bx1i+yj6Fo0v1J4E/qDHIPrVE9AX+MkJndllfCIG1ZJ84uskaOXhONfTmZrEXIptq9VM
+         QrrBU1TBFPdNSaAhJa3CzYgpiI6BREvOM1nCKtnzLK2+/Dc0nbLQ/y9yUUJUsSq/+7lQ
+         MsFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770112999; x=1770717799;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=9t5Fe5bGozogr0ZNYAWcRlOMGPdLPrptTIS9SavKeiw=;
+        b=KgoT63IA3l+0UfEtzJgi1i0F1nDFgP68cQ/CCaJVWz0xQzARAGRCP7XgfKk6Ez6ZcK
+         ZnWW9ir168wx2jCdTMKzPPYHClBfcVyYvQDWtULpiwFPRVXj+5Ugs/QHg2+0IL/aFU/X
+         YOdVTt0GhGUwu2jK5YmGVrU+AFrKglet2T0LRFKFR6MiMR1+7wvPvNoUWiO/ebSRS4YZ
+         GGAaUTq99I+91xLvQ8bxRDZO1xWZfDCGddKr61RiXK4fQDey12cvmI0efksiOkKH3CcD
+         tIjeM7LP/LpFTK8t54fgZl/1vekPlUfhJGQ1/yOBv6Ac8ghx8IM00UyO9I3MLTYQSopz
+         Pq0w==
+X-Forwarded-Encrypted: i=1; AJvYcCWV/SQw9CFbnogexBHbuMvuwY2g5B9LarLShR3f35+gKOmpnjPus12frb26mI+hDEIgKadyB7eGn3Q=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzGorFXM1Wt0pnUYrjaGgPd4V9MSGZ78tL0uwL6s07wCvAgrbaB
+	uv7xSSjCPSTKjE9UuHEnb2Ob+cy/8rX8PGxPki7uyDxqVqnqTHM2Yi46
+X-Gm-Gg: AZuq6aI5kA0S3fNNY3Mff8V2HPIQDMKeV69JoHJXKAnss5WKgx+SqWKQHmfTRxxi6NU
+	WoBzx9RfuKi5z2Jx3B2/iQ2c6WxQsJGiqUZCU+F5WW5oCJC+oV79TH8NBiPxu0Zm1fUto6Ookhz
+	6kW8TaLGH0VOehzrFu1qxULdTQQ2ueyqqYpydFZV8h8I+gQC3BHpLEYs9pIe8q5uYU3bPbzIvhE
+	NNffLhFletjsw4Uae5uMrf61ecv9Tbzjq4GP88pFDTqyaxX4PK+nasD3+HV5nQDwFyRyUuGL0kt
+	ZAqtDnVv2yJ3rR8/9R8G8WGCCAhurl15tnrV3K3Kzt8K15odSQ356n5DdCLhSKi3dIDlVAs3A9w
+	DBleqkiqTRSs6mlGFsxauuBWWu3lpw0F3qZK09HLXVQnFWYt2gbbJlQNPuOv8dCjMfFEiKkkopF
+	3BcuXutqoU4CXPmtvCF8IzFb2GR03vrQ==
+X-Received: by 2002:a05:6000:1ac8:b0:432:c37c:d83a with SMTP id ffacd0b85a97d-435f3a86321mr22562027f8f.15.1770112999096;
+        Tue, 03 Feb 2026 02:03:19 -0800 (PST)
+Received: from [192.168.1.187] ([148.63.225.166])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e135422csm52922361f8f.40.2026.02.03.02.03.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Feb 2026 02:03:18 -0800 (PST)
+Message-ID: <c4efbcda461cdfd58c7a7ab8b8c29c5f47fbda01.camel@gmail.com>
+Subject: Re: [PATCH v6 2/8] iio: core: add fixed point parsing with 64-bit
+ parts
+From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
+To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>, 
+	rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org, 
+	linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, David Lechner
+ <dlechner@baylibre.com>,  Andy Shevchenko	 <andy@kernel.org>, Lars-Peter
+ Clausen <lars@metafoo.de>, Michael Hennerich	
+ <Michael.Hennerich@analog.com>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>
+Date: Tue, 03 Feb 2026 10:04:01 +0000
+In-Reply-To: <nzowa6uhnlcllceml2pqjk4so33kl3rf2jwu36eh3znnxug6ub@gfzafmi3m5re>
+References: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
+	 <20260130-adf41513-iio-driver-v6-2-cf46239026bc@analog.com>
+	 <eb1d9b939f95888739ce4a70f516cec07393c6df.camel@gmail.com>
+	 <nzowa6uhnlcllceml2pqjk4so33kl3rf2jwu36eh3znnxug6ub@gfzafmi3m5re>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.2 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aXqx3_eE0rNh6nP0@google.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[ziepe.ca,google.com,amd.com,vger.kernel.org,kvack.org,kernel.org,linux-foundation.org,linux.intel.com,alien8.de,intel.com,lwn.net,redhat.com,cmpxchg.org,infradead.org,zytor.com,suse.cz,arm.com,amazon.com,nvidia.com,suse.de,linux.dev,oracle.com,maciej.szmigiero.name,loongson.cn,efficios.com,digikod.net,ellerman.id.au,amazon.es,dabbelt.com,sifive.com,gmail.com,goodmis.org,amazon.co.uk,linutronix.de,zeniv.linux.org.uk,huawei.com];
-	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75014-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-75012-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,analog.com,vger.kernel.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yilun.xu@linux.intel.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[98];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:dkim]
-X-Rspamd-Queue-Id: C6B45D76D1
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 6DC91D74E3
 X-Rspamd-Action: no action
 
-> +1.  For guest_memfd, we initially defined per-VM memory attributes to track
-> private vs. shared.  But as Ackerley noted, we are in the process of deprecating
-> that support, e.g. by making it incompatible with various guest_memfd features,
-> in favor of having each guest_memfd instance track the state of a given page.
-> 
-> The original guest_memfd design was that it would _only_ hold private pages, and
-> so tracking private vs. shared in guest_memfd didn't make any sense.  As we've
-> pivoted to in-place conversion, tracking private vs. shared in the guest_memfd
-> has basically become mandatory.  We could maaaaaybe make it work with per-VM
-> attributes, but it would be insanely complex.
-> 
-> For a dmabuf fd, the story is the same as guest_memfd.  Unless private vs. shared
-> is all or nothing, and can never change, then the only entity that can track that
-> info is the owner of the dmabuf.  And even if the private vs. shared attributes
-> are constant, tracking it external to KVM makes sense, because then the provider
-> can simply hardcode %true/%false.  
+On Tue, 2026-02-03 at 09:26 +0000, Rodrigo Alencar wrote:
+> On 26/02/02 09:57AM, Nuno S=C3=A1 wrote:
+> > On Fri, 2026-01-30 at 10:06 +0000, Rodrigo Alencar via B4 Relay wrote:
+> > > From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+> > >=20
+> > > Add iio_str_to_fixpoint64() function that leverages simple_strtoull()
+> > > to parse numbers from a string.
+> > > A helper function __iio_str_to_fixpoint64() replaces
+> > > __iio_str_to_fixpoint() implementation, extending its usage for
+> > > 64-bit fixed-point parsing.
+>=20
+> ...
+>=20
+> > > =C2=A0/**
+> > > =C2=A0 * __iio_str_to_fixpoint() - Parse a fixed-point number from a =
+string
+> > > =C2=A0 * @str: The string to parse
+> > > @@ -895,63 +1026,43 @@ static ssize_t iio_read_channel_info_avail(str=
+uct device *dev,
+> > > =C2=A0static int __iio_str_to_fixpoint(const char *str, int fract_mul=
+t,
+> > > =C2=A0				 int *integer, int *fract, bool scale_db)
+> > > =C2=A0{
+> > > -	int i =3D 0, f =3D 0;
+> > > -	bool integer_part =3D true, negative =3D false;
+> > > +	s64 integer64, fract64;
+> > > +	int ret;
+> > > =C2=A0
+> > > -	if (fract_mult =3D=3D 0) {
+> > > -		*fract =3D 0;
+> > > +	ret =3D __iio_str_to_fixpoint64(str, fract_mult, &integer64, &fract=
+64,
+> > > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 scale_db);
+> > > +	if (ret)
+> > > +		return ret;
+> >=20
+> > I know it feels tempting to do the above while adding the 64bit variant=
+. But isn't the
+> > overflow safety also an issue on the 32bit variant? IMO, we should firs=
+t have a patch
+> > adding the overflow safety with a Fixes tag and then add 64bit support.
+>=20
+> I think handling 64-bit support after taclking the overflow issue
+> would require changes on top of previous ones, which might get a messy
+> commit history, no? Mostly because the 64-bit variant of the function
+> is being used inside the 32-bit one. Also, the added auxiliary function
+> that implements the overflow check parses u64, which allowed for the
+> removal of the while loop in the __iio_str_to_fixpoint() implementation.
 
-For CoCo-VM and Tee-IO, I'm wondering if host or KVM has to maintain
-the private/shared attribute for "assigned MMIO". I'm not naming them
-"host MMIO" cause unlike RAM host never needs to access them, either in
-private manner or shared manner.
+Typically we do fixes before because we might want to backport them and we =
+just want to backport the
+fix (so not the 64bit support). But we never really had any known issues wi=
+th the current API
+(AFAIK) so it might be ok as-is. Will defer to Jonathan.
 
-Traditionally, host maps these MMIOs only because KVM needs HVA->HPA
-mapping to find pfn and setup KVM MMU. Now we have FD based approach so
-with dmabuf fd, host no longer needs mapping. Does that give confidence
-that KVM only needs to setup MMU for this type of MMIO as private/shared
-according to guest's intension (which is fault->is_private)?
-
-We don't need to track private/shared in VFIO MMIO dmabuf, only to keep
-them unmappable.
-
-> 
-> As for _how_ to do that, no matter where the attributes are stored, we're going
-> to have to teach KVM to play nice with a non-guest_memfd provider of private
-> memory.
-> 
+- Nuno S=C3=A1
+> before this assignment.
+> =C2=A0
 
