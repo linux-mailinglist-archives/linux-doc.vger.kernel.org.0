@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-75146-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75147-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CNZJBYdtgmlkUAMAu9opvQ
-	(envelope-from <linux-doc+bounces-75146-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:49:59 +0100
+	id 4CixNqNtgmlkUAMAu9opvQ
+	(envelope-from <linux-doc+bounces-75147-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:50:27 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB558DEF76
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:49:58 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 820C0DEF84
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:50:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BE59A303B172
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:46:32 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 1BD0630891C1
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:46:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A1AE437418B;
-	Tue,  3 Feb 2026 21:45:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 895343793D7;
+	Tue,  3 Feb 2026 21:45:35 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 292BA376479;
-	Tue,  3 Feb 2026 21:45:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 261AE37107F;
+	Tue,  3 Feb 2026 21:45:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770155129; cv=none; b=AuPS4906Zud23viYUcqrbIcMBpRvxoHEm4I57vQDOcvjJpuz8f8A1k2IdrnG7tFZ4M4sfd909QYBZWc0Gg3c0YXUNY7OJUVQanIy4GslUg+eBkOhjlpW+ZaAUUWoK3Y+HunuJbQIFCdHIN1Us3EAdY5PNdC/IMG5ZD3SqRonx2o=
+	t=1770155135; cv=none; b=m9aVtJVXRObypd0Twc1f8dwAyhiDqxbCjOCl8qPRaFGVDFxDfY8lfRMa1Ds4OPJF7WYR8RWWzYwpC5rWFQ4C5PD81qwYj9G9L48gQRGMmbyGbqLx/b2VUYaKoaIJ8b743O/hEz6P+bL7lVpC7ThYPnVfrlZ+TDZmKLWZ4O4NTCQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770155129; c=relaxed/simple;
-	bh=3IWYplKHxq8qRQvUK/1nsgOwnp95r549K3W0HMxvO3Q=;
+	s=arc-20240116; t=1770155135; c=relaxed/simple;
+	bh=03HMlr5YT/YpkyMeh6H9mXUvQ5CDummroAAEiQGkVzM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=JT0tcEirRjStB8MAovnKCusQg6MqFX2y50h44Vl7iE5Q02dWi+YSK5w65EICxlnXqkgqVDCexnkf41W2SII2Iv04pQl1IRwwkTck3lPPtKOqkUpMtUuI3BLH1aj02GHeC7KNcxdPR4QR4uKm2AX8oZ3vziPIRQcdLOBKLZBJ5uw=
+	 MIME-Version; b=UVj6awP30VflDdSFPynu7tbs/QRn5HKXS8Vwk7GonbRbB3Dsy0pS0S+QL2Pbv3ZF1/MWuogmLa1HgQJgMKti4z+x566v17JyajBhWWGMlqbmRA3bMGUexkMY4WZaxHGEI4w9dfyGT5Xlgu/Rh6z/n9JKfa5tLMxM/AXJEUmSaTo=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5FAB9339;
-	Tue,  3 Feb 2026 13:45:21 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 41159339;
+	Tue,  3 Feb 2026 13:45:27 -0800 (PST)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 362653F778;
-	Tue,  3 Feb 2026 13:45:22 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 193643F778;
+	Tue,  3 Feb 2026 13:45:27 -0800 (PST)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -73,9 +73,9 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v4 15/41] arm_mpam: resctrl: Pick the caches we will use as resctrl resources
-Date: Tue,  3 Feb 2026 21:43:16 +0000
-Message-ID: <20260203214342.584712-16-ben.horgan@arm.com>
+Subject: [PATCH v4 16/41] arm_mpam: resctrl: Implement resctrl_arch_reset_all_ctrls()
+Date: Tue,  3 Feb 2026 21:43:17 +0000
+Message-ID: <20260203214342.584712-17-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260203214342.584712-1-ben.horgan@arm.com>
 References: <20260203214342.584712-1-ben.horgan@arm.com>
@@ -91,7 +91,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -99,162 +99,97 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[36];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-75146-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75147-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.975];
+	NEURAL_HAM(-0.00)[-0.974];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,arm.com:mid,arm.com:email,huawei.com:email,fujitsu.com:email]
-X-Rspamd-Queue-Id: AB558DEF76
+	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,arm.com:mid,arm.com:email,huawei.com:email]
+X-Rspamd-Queue-Id: 820C0DEF84
 X-Rspamd-Action: no action
 
 From: James Morse <james.morse@arm.com>
 
-Systems with MPAM support may have a variety of control types at any point
-of their system layout. We can only expose certain types of control, and
-only if they exist at particular locations.
-
-Start with the well-known caches. These have to be depth 2 or 3 and support
-MPAM's cache portion bitmap controls, with a number of portions fewer than
-resctrl's limit.
+We already have a helper for resetting an mpam class and component.  Hook
+it up to resctrl_arch_reset_all_ctrls() and the domain offline path.
 
 Tested-by: Gavin Shan <gshan@redhat.com>
 Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 Tested-by: Peter Newman <peternewman@google.com>
-Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
+Cc: Zeng Heng <zengheng4@huawei.com>
 Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
-Changes since rfc:
-Jonathan:
-Remove brackets
-Compress debug message
-Use temp var, r
-
 Changes since v2:
-Return -EINVAL in mpam_resctrl_control_init() for unknown rid
----
- drivers/resctrl/mpam_resctrl.c | 90 +++++++++++++++++++++++++++++++++-
- 1 file changed, 88 insertions(+), 2 deletions(-)
+Don't expose unlocked reset
 
-diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
-index 90cdb5fdd3d6..a59d1659fe12 100644
---- a/drivers/resctrl/mpam_resctrl.c
-+++ b/drivers/resctrl/mpam_resctrl.c
-@@ -65,9 +65,94 @@ struct rdt_resource *resctrl_arch_get_resource(enum resctrl_res_level l)
- 	return &mpam_resctrl_controls[l].resctrl_res;
+Changes since v3:
+Don't use or expose mpam_reset_component_locked()
+---
+ drivers/resctrl/mpam_devices.c  |  2 +-
+ drivers/resctrl/mpam_internal.h |  3 +++
+ drivers/resctrl/mpam_resctrl.c  | 13 +++++++++++++
+ 3 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
+index b81d5c7f44ca..bf99c37a80a7 100644
+--- a/drivers/resctrl/mpam_devices.c
++++ b/drivers/resctrl/mpam_devices.c
+@@ -2568,7 +2568,7 @@ static void mpam_reset_component_locked(struct mpam_component *comp)
+ 	}
  }
  
-+static bool cache_has_usable_cpor(struct mpam_class *class)
+-static void mpam_reset_class_locked(struct mpam_class *class)
++void mpam_reset_class_locked(struct mpam_class *class)
+ {
+ 	struct mpam_component *comp;
+ 
+diff --git a/drivers/resctrl/mpam_internal.h b/drivers/resctrl/mpam_internal.h
+index a9d89d9e18a8..21ade1620147 100644
+--- a/drivers/resctrl/mpam_internal.h
++++ b/drivers/resctrl/mpam_internal.h
+@@ -389,6 +389,9 @@ extern u8 mpam_pmg_max;
+ void mpam_enable(struct work_struct *work);
+ void mpam_disable(struct work_struct *work);
+ 
++/* Reset all the RIS in a class under cpus_read_lock() */
++void mpam_reset_class_locked(struct mpam_class *class);
++
+ int mpam_apply_config(struct mpam_component *comp, u16 partid,
+ 		      struct mpam_config *cfg);
+ 
+diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
+index a59d1659fe12..7fc0b515cfa4 100644
+--- a/drivers/resctrl/mpam_resctrl.c
++++ b/drivers/resctrl/mpam_resctrl.c
+@@ -169,6 +169,19 @@ static int mpam_resctrl_pick_domain_id(int cpu, struct mpam_component *comp)
+ 	return comp->comp_id;
+ }
+ 
++void resctrl_arch_reset_all_ctrls(struct rdt_resource *r)
 +{
-+	struct mpam_props *cprops = &class->props;
-+
-+	if (!mpam_has_feature(mpam_feat_cpor_part, cprops))
-+		return false;
-+
-+	/* resctrl uses u32 for all bitmap configurations */
-+	return class->props.cpbm_wd <= 32;
-+}
-+
-+/* Test whether we can export MPAM_CLASS_CACHE:{2,3}? */
-+static void mpam_resctrl_pick_caches(void)
-+{
-+	struct mpam_class *class;
 +	struct mpam_resctrl_res *res;
 +
 +	lockdep_assert_cpus_held();
 +
-+	guard(srcu)(&mpam_srcu);
-+	list_for_each_entry_srcu(class, &mpam_classes, classes_list,
-+				 srcu_read_lock_held(&mpam_srcu)) {
-+		if (class->type != MPAM_CLASS_CACHE) {
-+			pr_debug("class %u is not a cache\n", class->level);
-+			continue;
-+		}
++	if (!mpam_is_enabled())
++		return;
 +
-+		if (class->level != 2 && class->level != 3) {
-+			pr_debug("class %u is not L2 or L3\n", class->level);
-+			continue;
-+		}
-+
-+		if (!cache_has_usable_cpor(class)) {
-+			pr_debug("class %u cache misses CPOR\n", class->level);
-+			continue;
-+		}
-+
-+		if (!cpumask_equal(&class->affinity, cpu_possible_mask)) {
-+			pr_debug("class %u has missing CPUs, mask %*pb != %*pb\n", class->level,
-+				 cpumask_pr_args(&class->affinity),
-+				 cpumask_pr_args(cpu_possible_mask));
-+			continue;
-+		}
-+
-+		if (class->level == 2)
-+			res = &mpam_resctrl_controls[RDT_RESOURCE_L2];
-+		else
-+			res = &mpam_resctrl_controls[RDT_RESOURCE_L3];
-+		res->class = class;
-+		exposed_alloc_capable = true;
-+	}
++	res = container_of(r, struct mpam_resctrl_res, resctrl_res);
++	mpam_reset_class_locked(res->class);
 +}
 +
- static int mpam_resctrl_control_init(struct mpam_resctrl_res *res)
+ static void mpam_resctrl_domain_hdr_init(int cpu, struct mpam_component *comp,
+ 					 struct rdt_domain_hdr *hdr)
  {
--	/* TODO: initialise the resctrl resources */
-+	struct mpam_class *class = res->class;
-+	struct rdt_resource *r = &res->resctrl_res;
-+
-+	switch (r->rid) {
-+	case RDT_RESOURCE_L2:
-+	case RDT_RESOURCE_L3:
-+		r->alloc_capable = true;
-+		r->schema_fmt = RESCTRL_SCHEMA_BITMAP;
-+		r->cache.arch_has_sparse_bitmasks = true;
-+
-+		r->cache.cbm_len = class->props.cpbm_wd;
-+		/* mpam_devices will reject empty bitmaps */
-+		r->cache.min_cbm_bits = 1;
-+
-+		if (r->rid == RDT_RESOURCE_L2) {
-+			r->name = "L2";
-+			r->ctrl_scope = RESCTRL_L2_CACHE;
-+		} else {
-+			r->name = "L3";
-+			r->ctrl_scope = RESCTRL_L3_CACHE;
-+		}
-+
-+		/*
-+		 * Which bits are shared with other ...things...
-+		 * Unknown devices use partid-0 which uses all the bitmap
-+		 * fields. Until we configured the SMMU and GIC not to do this
-+		 * 'all the bits' is the correct answer here.
-+		 */
-+		r->cache.shareable_bits = resctrl_get_default_ctrl(r);
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
- 
- 	return 0;
- }
-@@ -324,7 +409,8 @@ int mpam_resctrl_setup(void)
- 		res->resctrl_res.rid = rid;
- 	}
- 
--	/* TODO: pick MPAM classes to map to resctrl resources */
-+	/* Find some classes to use for controls */
-+	mpam_resctrl_pick_caches();
- 
- 	/* Initialise the resctrl structures from the classes */
- 	for_each_mpam_resctrl_control(res, rid) {
 -- 
 2.43.0
 
