@@ -1,163 +1,174 @@
-Return-Path: <linux-doc+bounces-75004-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75006-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gPGhN6i7gWm7JAMAu9opvQ
-	(envelope-from <linux-doc+bounces-75004-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 10:11:04 +0100
+	id MH7hOKK9gWm7JAMAu9opvQ
+	(envelope-from <linux-doc+bounces-75006-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 10:19:30 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C749D69CE
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 10:11:04 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D5CBD6B73
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 10:19:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 765FC30488E8
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 09:11:03 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DCBE5304AC2D
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 09:19:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A14D8396B76;
-	Tue,  3 Feb 2026 09:11:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E3AF139525C;
+	Tue,  3 Feb 2026 09:19:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AKkZbvrF"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="PuXzui41"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BACD392C48;
-	Tue,  3 Feb 2026 09:11:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92DC736A024;
+	Tue,  3 Feb 2026 09:19:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770109860; cv=none; b=GCbmLQLaP4BXXLB4T1/zpifyfXRCGQZ1hqQyuNZn7HnzRmpO/DUni4r0Z4r0YmTtZgrnIrZvSeTO5PIjtuvTaMttcwVnTCY1FOisBdb0mlrk4DrgjbmMYmoKcmK918RxTrEK8XFYww14E7lcVfOvoaywd5rx9AZ4wgBqeB0M77k=
+	t=1770110342; cv=none; b=m2N4T5faYgEild/pnMsniPtHGSGhfa41vTD1l0YTCKoIzM6TBdT4LxFsKN5hmI/vg1p+YD/Dr+Zizfp5T0YcbRHJAYpzlq0GTdkY1vvYGJ0CmECEpZ3qA1cSvPVPb/4vztltEY6kqECRd7gEW1k0/A5f42zLD8RwkDxJgQSix04=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770109860; c=relaxed/simple;
-	bh=LlBEaY/B0j9hTW3yp6PhoNQDNcJfMfJRCMziWK3voPI=;
+	s=arc-20240116; t=1770110342; c=relaxed/simple;
+	bh=EL5/CWhuVKlSmqggE8w0nVImAy4Hf9oadRPQy0z32XU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=k3VZYGH5bogwoL+OtYkZ0oTry8kMYYBCpz2/437mZtzMAwizzVOEGASPEZAuJUdsCNlW7wmGkCCOhAUJVJkDrN8meKZQrTu/94Dj7DdwnUN2dO9ZZpZMTd/pAmdR/1tFUPov51yGiSOTd4gDFroPdNDbLF69MYNEAZy2/ZnzqOo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AKkZbvrF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 750C0C116D0;
-	Tue,  3 Feb 2026 09:10:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770109860;
-	bh=LlBEaY/B0j9hTW3yp6PhoNQDNcJfMfJRCMziWK3voPI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=AKkZbvrFGlkyF3SjquTxf2AxylwGIMeyjMAaHltGIHCHUur8gZkI7eI4CpLHAhSAo
-	 64LbmIU7NqNC15I5jM9uoJjmyAr4Ze2EIF7NkhOuZiN/uqZxHClUbyy0djD6tSBGhw
-	 +2Cfz9ZUn0tQuqGZhbRsgtwXJA0i1tCIxbnO5U5NK/h1m0K5eEVCuItYEGlCeXTs1W
-	 XYffYRHngcNeA9/ZgI6Rn/C6rx9JU9ekXeoUhdj1uwSPb83S9b3VBnuMSpIcl8Nw4a
-	 /bi9hAPR8ckrYPbz4zE1CkupV1SXttFPKYQ8p44MC39P7YRIJfA6NVnnlWfK4NLlS0
-	 hdupJ1Y8/mimQ==
-Date: Tue, 3 Feb 2026 10:10:57 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Johan Hovold <johan@kernel.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
-	Tzung-Bi Shih <tzungbi@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, 
-	Wolfram Sang <wsa+renesas@sang-engineering.com>, Simona Vetter <simona.vetter@ffwll.ch>, 
-	Dan Williams <dan.j.williams@intel.com>, linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>, 
-	maarten.lankhorst@linux.intel.com, tzimmermann@suse.de
-Subject: Re: [PATCH 0/3] Revert "revocable: Revocable resource management"
-Message-ID: <20260203-lyrical-taipan-of-enhancement-df5615@houat>
-References: <20260124170535.11756-1-johan@kernel.org>
- <DFX20SA67PF2.VONCFNDOZOZT@kernel.org>
- <2026012554-chatty-policy-42a1@gregkh>
- <aXdxDBXdyqLFfKKI@hovoldconsulting.com>
- <CAESzEGiA2DSp79pkjxBA5X-DWmSAAgyAF7usKn253jkGpYJMew@mail.gmail.com>
- <20260127235232.GS1134360@nvidia.com>
- <20260129010822.GA3310904@killaraus>
- <DG1FF2VY54AO.2Q3YHA4WNLV5C@kernel.org>
- <20260130091049.GH3374091@killaraus>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Uln87Q+WKuodPA/uEumULNC0j/eG80FUDYR6GJgSLWh2xpkM9/r6yTLrrYuDP+3V/qLks5Ymn4Q4d1hZfZiyYAd4UAD4JY1V+5D8Iqt/HU8wNerd2K4uP+DCUn/DFGukwV9ls+VNV5HuOD6++ZDOon8zyw+AALC5RK5MDjOCSoE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=PuXzui41; arc=none smtp.client-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1770110342; x=1801646342;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=EL5/CWhuVKlSmqggE8w0nVImAy4Hf9oadRPQy0z32XU=;
+  b=PuXzui41sAFEpX4RLgNhH5euniT4J9QyLzgUKyBbjx2mbjVLqByOq9PN
+   wqzSOZf+loz/kpHyPu9L/9qulMwBSi5I0XWGNoHZm0pM+SagVrb7Kk8Lg
+   cy32lQuHnxvxITbrofpZjElTCHXac+w2gTt6fal2V/EjfneQDEeKGSssC
+   2L4yg7UVJ/UeEzDl2ulKegFs8ePbyXEbyeOCx4H3+tal8zrpS2EIwnB76
+   6WnK2C0Fc7WY5qUBgxmAvN//UZL3kls5akcRXfxSmwjQuiBkPUOY8GQz1
+   7eie4bs2H5slq7uL1kKpBgkCbZpxri8f3Em/7fajHklmPEcAjsvSqLXr1
+   g==;
+X-CSE-ConnectionGUID: qJ0xDkjbSaWvlA/ks3IDFQ==
+X-CSE-MsgGUID: P5hq5qkaSQSrUelPDcbKjQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11690"; a="88697935"
+X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
+   d="scan'208";a="88697935"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2026 01:19:01 -0800
+X-CSE-ConnectionGUID: vRkcvnMZTSGwT/dXivMC5w==
+X-CSE-MsgGUID: GJOaJvlfRVKSKluBmYXX5Q==
+X-ExtLoop1: 1
+Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
+  by fmviesa003.fm.intel.com with ESMTP; 03 Feb 2026 01:18:57 -0800
+Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vnCYh-00000000gUa-2P0g;
+	Tue, 03 Feb 2026 09:18:55 +0000
+Date: Tue, 3 Feb 2026 17:18:08 +0800
+From: kernel test robot <lkp@intel.com>
+To: Tianyang Zhang <zhangtianyang@loongson.cn>, chenhuacai@kernel.org,
+	kernel@xen0n.name, corbet@lwn.net, alexs@kernel.org,
+	si.yanteng@linux.dev, tglx@linutronix.de, jiaxun.yang@flygoat.com,
+	maobibo@loongson.cn
+Cc: oe-kbuild-all@lists.linux.dev, loongarch@lists.linux.dev,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>,
+	Liupu Wang <wangliupu@loongson.cn>
+Subject: Re: [PATCH v10 4/4] irqchip/irq-loongarch-ir:Add Redirect irqchip
+ support
+Message-ID: <202602031759.6a4E6Hm4-lkp@intel.com>
+References: <20260202091041.2278271-5-zhangtianyang@loongson.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="udewh34oifiokydq"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260130091049.GH3374091@killaraus>
+In-Reply-To: <20260202091041.2278271-5-zhangtianyang@loongson.cn>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.26 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75004-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	TAGGED_FROM(0.00)[bounces-75006-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[intel.com:+];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7C749D69CE
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:email,intel.com:dkim,intel.com:mid,git-scm.com:url]
+X-Rspamd-Queue-Id: 5D5CBD6B73
 X-Rspamd-Action: no action
 
+Hi Tianyang,
 
---udewh34oifiokydq
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 0/3] Revert "revocable: Revocable resource management"
-MIME-Version: 1.0
+kernel test robot noticed the following build warnings:
 
-Hi,
+[auto build test WARNING on tip/irq/core]
+[also build test WARNING on linus/master v6.19-rc8 next-20260202]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-On Fri, Jan 30, 2026 at 11:10:49AM +0200, Laurent Pinchart wrote:
-> On Thu, Jan 29, 2026 at 11:29:03PM +0100, Danilo Krummrich wrote:
-> > (Cc: Maxime, Thomas, Maarten)
-> >=20
-> > On Thu Jan 29, 2026 at 2:08 AM CET, Laurent Pinchart wrote:
-> > > That's what I've been advocating for. The best way to ensure that dri=
-ver
-> > > code will not accessed data freed at .remove() time is to prevent the
-> > > code to run at all.
-> >=20
-> > With this we are in full agreement, I think that'd be best too. But, I =
-also
-> > think that sometimes this isn't possible. For instance, DRM has such a =
-case with
-> > atomic mode setting.
->=20
-> I don't see why it would be impossible there.
+url:    https://github.com/intel-lab-lkp/linux/commits/Tianyang-Zhang/Docs-LoongArch-Add-Advanced-Extended-Redirect-IRQ-model-description/20260202-171607
+base:   tip/irq/core
+patch link:    https://lore.kernel.org/r/20260202091041.2278271-5-zhangtianyang%40loongson.cn
+patch subject: [PATCH v10 4/4] irqchip/irq-loongarch-ir:Add Redirect irqchip support
+config: loongarch-randconfig-r072-20260203 (https://download.01.org/0day-ci/archive/20260203/202602031759.6a4E6Hm4-lkp@intel.com/config)
+compiler: loongarch64-linux-gcc (GCC) 15.2.0
+smatch version: v0.5.0-8994-gd50c5a4c
 
-I'm not quite sure what you have in mind there, but DRM always allowed
-the DRM driver to stick around longer than its device to accomodate the
-fact that userspace might still have an open fd to it.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202602031759.6a4E6Hm4-lkp@intel.com/
 
-If userspace has an open fd, it can still call ioctl so preventing to
-run any code is going to be difficult.
+smatch warnings:
+drivers/irqchip/irq-loongarch-ir.c:206 redirect_table_alloc() warn: unsigned 'index' is never less than zero.
+drivers/irqchip/irq-loongarch-ir.c:206 redirect_table_alloc() warn: error code type promoted to positive: 'index'
 
-Maxime
+vim +/index +206 drivers/irqchip/irq-loongarch-ir.c
 
---udewh34oifiokydq
-Content-Type: application/pgp-signature; name="signature.asc"
+   192	
+   193	static int redirect_table_alloc(int node, u32 nr_irqs)
+   194	{
+   195		struct redirect_table *ird_table = &irde_descs[node].ird_table;
+   196		unsigned int index, order = 0;
+   197	
+   198		if (nr_irqs > 1) {
+   199			nr_irqs = __roundup_pow_of_two(nr_irqs);
+   200			order = ilog2(nr_irqs);
+   201		}
+   202	
+   203		guard(raw_spinlock_irqsave)(&ird_table->lock);
+   204	
+   205		index = bitmap_find_free_region(ird_table->bitmap, IRD_ENTRIES, order);
+ > 206		if (index < 0) {
+   207			pr_err("No redirect entry to use\n");
+   208			return -EINVAL;
+   209		}
+   210	
+   211		return index;
+   212	}
+   213	
 
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaYG7oAAKCRAnX84Zoj2+
-dhQ+AX9t5YGtdLoSB+e30KEQ2ZIVpyqXJO3hiPBr8vM6IhmH0KLv6ZXX8wx4yL9j
-PMJjMNcBf3daV26VIEGZqSHQQvlG3R55Pw+pi42DgcP53HQStDBImAGErY1bXEZj
-8gxa/xvpUg==
-=HDDn
------END PGP SIGNATURE-----
-
---udewh34oifiokydq--
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
