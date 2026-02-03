@@ -1,148 +1,245 @@
-Return-Path: <linux-doc+bounces-75013-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75015-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KBd3K9vJgWl1JwMAu9opvQ
-	(envelope-from <linux-doc+bounces-75013-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:11:39 +0100
+	id sHfTHTnLgWl1JwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75015-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:17:29 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14DA0D75E4
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:11:38 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B4CED774E
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:17:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DD38C30A1B9B
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 10:08:31 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 49BF63043232
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 10:17:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76EE234C815;
-	Tue,  3 Feb 2026 10:08:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C69BE30FC22;
+	Tue,  3 Feb 2026 10:16:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kPRYuiqG"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="MGuhu8HX";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="WZorrZ5s"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54322392C2D;
-	Tue,  3 Feb 2026 10:08:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BB082D8367
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 10:16:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770113311; cv=none; b=mtAk60er/HEgvnMZB7m17ez0m/fc4nSG5Vkzq6mk4wvVWmtFpIYmMUsX5DutNzsWq3i8VcWkD2fAnk2ustv89RDHJyzLhLlzTb0QWdcW3A+zlTWzdIHayjdBd4eO/n21SeHgdrhEp7cnAeGOnjf052fkQrNoW6HJJLH+3KgZXIw=
+	t=1770113817; cv=none; b=shTkiYWKqzVjhizw9K30Ls+rlFPHphF20DC9LSft5azKwnf9wirn90AFBr6HIJEmqG4OoveK25XCIVjtQx+rnyESiWravg51/QtjdnVFaoWwAY2ll9y2y5lm82xzhlHZ/4oJriKM6mmXok16EEN211yPSez7goIa6edxR5xepdo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770113311; c=relaxed/simple;
-	bh=xp9hTc2PImRZi1tongCx4gW7QVJ9IGe+51p0b2/+98o=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=TADZJXj2hdyBmg/Xwp5sw8pKCWrWu/Qdr81JHA7+ZT9kU37w6auRLZiBb9t3U5ToujYR2fyIYUEhU0cb22hS9nbz/szzXBDfNTSPwE4GPQWuzUNcsZZi5Jzw93kWeXKHeBa6KPmfJXdkgwjsPqBBYtJOwh772EGp/XUdRHkGCbI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kPRYuiqG; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13CFFC116D0;
-	Tue,  3 Feb 2026 10:08:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770113310;
-	bh=xp9hTc2PImRZi1tongCx4gW7QVJ9IGe+51p0b2/+98o=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=kPRYuiqGtSr27s2DljdpBYr/ua2hfjyMJUMeQAWKRxhwHuCymYU3wow8YzIErt/T8
-	 bEhghoC8rlJRiqr2D9+2keIwuK2/YMXnRyuilv/fr0eskkVAaSOhElyRxNFR7psokW
-	 EkIhEMlFOWTGwh/5YhnyRbYUKCC7qm9eKJbNLFp0bCiDmt4gDu0NE3+lo1om7LSaSh
-	 vCtG/EYVbZdwLVixIc3Fin799npKPGCHZ0kxnGnu/RTq52h9QVW8NCJr80lfgXcxnu
-	 Alg75pbielnYoavpfb7ZMp7Tt+iFouC5L05J7sUH9BAAos6mXp5lIuT1ZJ8a9+AyFR
-	 47cdHmhhOYLmg==
-From: Thomas Gleixner <tglx@kernel.org>
-To: Alexander Graf <graf@amazon.com>, x86@kernel.org
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Clemens
- Ladisch <clemens@ladisch.de>, Arnd Bergmann <arnd@arndb.de>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, Dave Hansen
- <dave.hansen@linux.intel.com>, Borislav Petkov <bp@alien8.de>, Ingo Molnar
- <mingo@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Paolo Bonzini
- <pbonzini@redhat.com>, Pasha Tatashin <pasha.tatashin@soleen.com>,
- nh-open-source@amazon.com, Nicolas Saenz
- Julienne <nsaenz@amazon.es>, Hendrik Borghorst <hborghor@amazon.de>,
- Filippo
- Sironi <sironi@amazon.de>, David Woodhouse <dwmw@amazon.co.uk>, Jan
- =?utf-8?Q?Sch=C3=B6nherr?= <jschoenh@amazon.de>
-Subject: Re: [PATCH 1/2] x86/ioapic: Add NMI delivery configuration helper
-In-Reply-To: <20260202174803.66640-2-graf@amazon.com>
-References: <20260202174803.66640-1-graf@amazon.com>
- <20260202174803.66640-2-graf@amazon.com>
-Date: Tue, 03 Feb 2026 11:08:26 +0100
-Message-ID: <87ldha3zs5.ffs@tglx>
+	s=arc-20240116; t=1770113817; c=relaxed/simple;
+	bh=zzrjZPXfYdNR5ur4+DAFLb38Y57K+9PEFWBPSbmtPds=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pqdIyjItju2k+8gsywnj00GSw/nF2okBWXRNSFUsnpoTxoiJfPUmPwjVaQsLJlTZ13Aw2BjNbLgxMlGnQYY7iKyQFpYGH6roFlainDwlUIcdufVcjKB0ho/Lg0/SLpou1MYlXUzA8RTOD3O+LfvU0+h88jLBSqeNHZUheHfQ8Xw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=MGuhu8HX; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=WZorrZ5s; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1770113814;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HgOiGNLBCV5ZuGn9jd9GSFwjMR0aHZj7c6CyZV90AEY=;
+	b=MGuhu8HXuyG6Z429aoDjYzvFlU1JTzTGQ5uoHjFD7doV7TiRmvGV2u4P5hGhAWlf2+a9oc
+	8FJ0nmHLsT9v7FoXtQkKqxT+kK9MZdaGvWF660JPvtAh4Uh/5vMqR88FzqzhpkWED2Lq7/
+	A9PpLxPMmRYTFW1b6ZG/SiW6SG1H9i0=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-170-D5jXWe3fNdaxPd2Sunao9w-1; Tue, 03 Feb 2026 05:16:52 -0500
+X-MC-Unique: D5jXWe3fNdaxPd2Sunao9w-1
+X-Mimecast-MFC-AGG-ID: D5jXWe3fNdaxPd2Sunao9w_1770113811
+Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-435991d4a3aso3311469f8f.1
+        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 02:16:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1770113811; x=1770718611; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=HgOiGNLBCV5ZuGn9jd9GSFwjMR0aHZj7c6CyZV90AEY=;
+        b=WZorrZ5sXghZyCstwYDVxGn/NNSD+stCSM7fCSmT+ZCg4OQJRIFql2rrnL55Xdj70H
+         VAvxlw9E41FKVBWb0J/r37OCzbc2HUiK2h+q66/bvPUOG99Qca5voqbe+4qDFXhqyco0
+         tgfEeLadXSpjD4fE3z49eoruA4VKz/hUM8ZdAzRP3EexmewG9SdZfLcagMs0TA+zY3cO
+         UFwr84jXbM9Y+4MBpzS08yLeepq/8Nf7lpm1D2yFC43FlUiRjqbbH8QUutSqCdGc+jZD
+         kPsxrxxtyCAfszKZRBksDTASbfFLxH/CxFYBRHzdkeSrRAVTUQn9yb/2vThgJgYKQwkq
+         cPvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770113811; x=1770718611;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HgOiGNLBCV5ZuGn9jd9GSFwjMR0aHZj7c6CyZV90AEY=;
+        b=US5govHwUqg4DBm5hWPLLg6omq0jrTS72fFeQWFKJjgaRxwcrV9dzQocxLOnQa2KRY
+         FH1iyKZrO1+KV5Csb3WudvwdlwLP7NMG7Wv7BzTIgvhY3dMB1X4pS1ID9+m0rWF7KZKs
+         ASWkioJ2QnuUV1avY/5h9Aq2R6YzH4etCo73RL94Hbk5q7jTy09xNDaIhCWYExIPK/Gi
+         F+P17rKAoNHOTRpjX3GNmlXtDosk4G7teD+212hMXoy7UAYtouokexeKGyQuumq1Ff/3
+         1FL1LbfYqbzh5bhQWEN3cdvK/PGrSiAZHGeCHDUquGLVBVVYfta9d96FGDXZpMA8fvIh
+         Hobw==
+X-Forwarded-Encrypted: i=1; AJvYcCWGya3RQ0zMh+fCtCxVM+hx6nfo+AMKbdfpYgEdGPD+sXHT1eYAQfo5zwvO87nUhz/RxtrcbubGRGk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwHHdamV8Esy1K9M0RyNTbHd0D9jIkY9t1Lw1YespLLDQ+tYSbA
+	NIh5DTkgTfBKWoLSdOkleb+a/243dA22x543nbz1Bvl/bR0e2/raem3IW7WZ8d23kiwKYLxAPHD
+	HiREg/yzGwq31GnVYY8D8HKztdaAuqGFZdpW0ZeNJGMxwhZBdjhrcv2gyoTc0uA==
+X-Gm-Gg: AZuq6aKgYe+JgT8skFcdBOFA44WG9HYW9QbveA7BJMMVezsl07ZLmWssrny0aKvBOmL
+	6J52VN8zweUSmvS+0Sbl8S/jZL/fJAD6tCaUnIkt1ITA7fzetYPpMjppS4yXL1psuc5XV34C7V4
+	yupfsnJMHJMco0aO/yUwoX6QNB5qVMTnJWqd3ZI0x0EELPFMCdhueebMK4WQhuu2jPs0lFMb6Ji
+	f0AuOvbnV8zZb0pag/1nS7/OTv7Xde2JrctZGegZyrZ1H7XDG4xNs9cOlEX45kJuX+v9XmM+0vV
+	FwINUxhTbZAbxbZDEei2HXcXId3yq4L7tLNoPUyWOXFFlc1VLzfqUK01Gz6WsyqEMwcT0Zc1MOz
+	pCJYRptw6VII=
+X-Received: by 2002:a05:6000:1862:b0:435:729b:c390 with SMTP id ffacd0b85a97d-435f3abb192mr22523236f8f.47.1770113811380;
+        Tue, 03 Feb 2026 02:16:51 -0800 (PST)
+X-Received: by 2002:a05:6000:1862:b0:435:729b:c390 with SMTP id ffacd0b85a97d-435f3abb192mr22523181f8f.47.1770113810888;
+        Tue, 03 Feb 2026 02:16:50 -0800 (PST)
+Received: from [192.168.88.32] ([150.228.93.21])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10edfccsm48741670f8f.17.2026.02.03.02.16.49
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 03 Feb 2026 02:16:50 -0800 (PST)
+Message-ID: <ce09e17d-2b74-4bda-a8ec-352c92659a6e@redhat.com>
+Date: Tue, 3 Feb 2026 11:16:45 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next 4/5] selftest: netdevsim: Add devlink port
+ resource test
+To: Tariq Toukan <tariqt@nvidia.com>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S. Miller" <davem@davemloft.net>
+Cc: Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko <jiri@resnulli.us>,
+ Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>,
+ Shuah Khan <shuah@kernel.org>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-rdma@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ Gal Pressman <gal@nvidia.com>, Moshe Shemesh <moshe@nvidia.com>,
+ Shay Drori <shayd@nvidia.com>, Jiri Pirko <jiri@nvidia.com>,
+ Or Har-Toov <ohartoov@nvidia.com>
+References: <20260203071033.1709445-1-tariqt@nvidia.com>
+ <20260203071033.1709445-5-tariqt@nvidia.com>
+Content-Language: en-US
+From: Paolo Abeni <pabeni@redhat.com>
+In-Reply-To: <20260203071033.1709445-5-tariqt@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.84 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75013-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tglx@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,resnulli.us,lwn.net,nvidia.com,kernel.org,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-75015-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[pabeni@redhat.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 14DA0D75E4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2B4CED774E
 X-Rspamd-Action: no action
 
-On Mon, Feb 02 2026 at 17:48, Alexander Graf wrote:
-> To implement an HPET based NMI watchdog, the HPET code will need to
-> reconfigure an IOAPIC pin to NMI mode. Add a function that allows driver
-> code to configure an IOAPIC pin for NMI delivery mode.
-
-A function which violates all layering of the interrupt hierarchy...
-
-> +/**
-> + * ioapic_set_nmi - Configure an IOAPIC pin for NMI delivery
-> + * @gsi: Global System Interrupt number
-> + * @broadcast: true to broadcast to all CPUs, false to send to CPU 0 only
-> + *
-> + * Configures the specified GSI for NMI delivery mode.
-> + *
-> + * Returns 0 on success, negative error code on failure.
-> + */
-> +int ioapic_set_nmi(u32 gsi, bool broadcast)
+On 2/3/26 8:10 AM, Tariq Toukan wrote:
+> From: Or Har-Toov <ohartoov@nvidia.com>
+> 
+> Add selftest to verify port-level resource functionality using netdevsim.
+> 
+> Signed-off-by: Or Har-Toov <ohartoov@nvidia.com>
+> Reviewed-by: Shay Drori <shayd@nvidia.com>
+> Reviewed-by: Moshe Shemesh <moshe@nvidia.com>
+> Signed-off-by: Tariq Toukan <tariqt@nvidia.com>
+> ---
+>  .../drivers/net/netdevsim/devlink.sh          | 32 ++++++++++++++++++-
+>  1 file changed, 31 insertions(+), 1 deletion(-)
+> 
+> diff --git a/tools/testing/selftests/drivers/net/netdevsim/devlink.sh b/tools/testing/selftests/drivers/net/netdevsim/devlink.sh
+> index 1b529ccaf050..674f0e981ab0 100755
+> --- a/tools/testing/selftests/drivers/net/netdevsim/devlink.sh
+> +++ b/tools/testing/selftests/drivers/net/netdevsim/devlink.sh
+> @@ -5,7 +5,7 @@ lib_dir=$(dirname $0)/../../../net/forwarding
+>  
+>  ALL_TESTS="fw_flash_test params_test  \
+>  	   params_default_test regions_test reload_test \
+> -	   netns_reload_test resource_test dev_info_test \
+> +	   netns_reload_test resource_test port_resource_test dev_info_test \
+>  	   empty_reporter_test dummy_reporter_test rate_test"
+>  NUM_NETIFS=0
+>  source $lib_dir/lib.sh
+> @@ -856,6 +856,36 @@ rate_test()
+>  	log_test "rate test"
+>  }
+>  
+> +port_resource_test()
 > +{
-> +	struct IO_APIC_route_entry entry = { };
-> +	int ioapic_idx, pin;
+> +	RET=0
 > +
-> +	ioapic_idx = mp_find_ioapic(gsi);
-> +	if (ioapic_idx < 0)
-> +		return -ENODEV;
+> +	local first_port="${DL_HANDLE}/0"
+> +	local name
+> +	local size
 > +
-> +	pin = mp_find_ioapic_pin(ioapic_idx, gsi);
-> +	if (pin < 0)
-> +		return -ENODEV;
+> +	devlink port resource show "$first_port" > /dev/null 2>&1
+> +	check_err $? "Failed to show port resource for $first_port"
 > +
-> +	entry.delivery_mode = APIC_DELIVERY_MODE_NMI;
-> +	entry.destid_0_7 = broadcast ? 0xFF : boot_cpu_physical_apicid;
-> +	entry.dest_mode_logical = 0;
-> +	entry.masked = 0;
+> +	name=$(cmd_jq "devlink port resource show $first_port -j" \
+> +		      ".[][][].name")
+> +	[ "$name" == "max_sfs" ]
+> +	check_err $? "Unexpected resource name $name (expected max_sfs)"
 > +
-> +	ioapic_write_entry(ioapic_idx, pin, entry);
+> +	size=$(cmd_jq "devlink port resource show $first_port -j" \
+> +		      ".[][][].size")
+> +	[ "$size" == "20" ]
+> +	check_err $? "Unexpected resource size $size (expected 20)"
+> +
+> +	devlink port resource show "$DL_HANDLE" > /dev/null 2>&1
+> +	check_err $? "Failed to show port resources for $DL_HANDLE"
+> +
+> +	devlink port resource show > /dev/null 2>&1
+> +	check_err $? "Failed to dump all port resources"
+> +
+> +	log_test "port resource test"
+> +}
+> +
+>  setup_prepare()
+>  {
+>  	modprobe netdevsim
 
-Q: How is that supposed to work with interrupt remapping?
-A: Not at all.
+This test is failing in NIPA (adding some more context beyond the
+failing test output just in case it may help):
 
-Thanks,
+# Error: netdevsim: Exceeded number of supported fib entries.
+# Error: netdevsim: Exceeded number of supported fib entries.
+# kernel answers: Operation not permitted
+# TEST: resource test                                                 [ OK ]
+# Command "resource" not found
+# Command "resource" not found
+# TEST: port resource test                                            [FAIL]
+# Failed to show port resource for netdevsim/netdevsim10/0
+# TEST: dev_info test                                                 [ OK ]
+# TEST: empty reporter test                                           [ OK ]
+# kernel answers: Success
+# kernel answers: Success
+# ./devlink.sh: line 614: echo: write error: Invalid argument
+# Error: netdevsim: User setup the recover to fail for testing purposes.
 
-        tglx
+/P
+
 
