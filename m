@@ -1,64 +1,63 @@
-Return-Path: <linux-doc+bounces-75068-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75060-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cAd9OLoMgmmCOQMAu9opvQ
-	(envelope-from <linux-doc+bounces-75068-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:58 +0100
+	id EPHQMpAMgmmCOQMAu9opvQ
+	(envelope-from <linux-doc+bounces-75060-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:16 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5699DAE5F
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:58 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id EA236DADEF
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AF25630B7C09
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 14:56:09 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E69E83009E08
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 14:55:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5EA23AE6F1;
-	Tue,  3 Feb 2026 14:55:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B2F83ACF0B;
+	Tue,  3 Feb 2026 14:55:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MGuPs9xj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f/bQSeNP"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5D633ACF01;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 447B33EBF36;
 	Tue,  3 Feb 2026 14:55:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770130555; cv=none; b=GitdkBy/O9G1XUPWLBfe0PeKqBARNP8RBHEDJm5d1MNm8djA72duyP0yutBluLHi6YGK7ou3Ur/MCsSb2JsbzKJkif1yUGLa+vfIaW/QFdlxv9weLWXqUi8/XYL4bDnoE2Gji+4w3zfJDIXslnqFFbs/Rf7/druqb+P/t+PuiZw=
+	t=1770130555; cv=none; b=jyj0dMi3DzTvzLTV7kty9YeZGdCyI4zCZ/VFH6tqmre2Me86rf6JYtGbO3Uk7Kk2YBTLFZsOCnG9DxLozLkl9gfA4BfwOjhVFK9BqkJrHr7rOTw+RiZG4CEUFbXC8SBxHY6Ri/9foxmgFN6sSO9nzGaC/PXhrC49sU3nSGJIW14=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1770130555; c=relaxed/simple;
-	bh=c+lWtus7uYVGOL7ZaUEaEUQ07MpkIkG4WhZzL62rQhY=;
+	bh=6TUEdCCxf08mni1+KzD0z773NWtkiX5r/4OgHtBbpcY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=PXqfI5Fv6vpwwP9xrhjkseVtlVSLUIAHMaKyhVNTmy1p7eTa2dz/YluRO1AhiOFZ+bakOTjr7qT0pWHzmVIpxEN1z/LMZKqKSkAG0QmQ0yV6dDG4+/9pA2Zy21/q0EQfokoHOv3Lq083VrPvLd7rJ8Jprk2BaRXl/f1GxHGUuvE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MGuPs9xj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFCB2C2BCB0;
+	 MIME-Version:Content-Type; b=EVtFaDeRcT9N0o/ywQ++iRIYd2JMEHdC8JRuKUfYoWFPgOF6No0so4RAbxU+7dl61HMcw+yOKtAvyS3hQDtoEsHy3TEXHBkrkLiVmt6rwUdMO9h2gaL4SSP7WV9VxEzEFt6Grr6K/GnQoWG1mwa+Gi6ao4iwGk4qGaKFnrTLMdE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f/bQSeNP; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC5F0C19425;
 	Tue,  3 Feb 2026 14:55:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1770130554;
-	bh=c+lWtus7uYVGOL7ZaUEaEUQ07MpkIkG4WhZzL62rQhY=;
+	bh=6TUEdCCxf08mni1+KzD0z773NWtkiX5r/4OgHtBbpcY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=MGuPs9xjUkE5gdBJmQr4gw+D29rzhHUuMRDvBDGbmfB3nxC3RqZ3dwfbiO6hvwL3A
-	 uqHV5fJ06hfLK87n+JFNl/MKoD/0OmOB8kPsh/SVphgxQy2tM1UodiKL3Vipyam+25
-	 TD1YjUyUrYR+XDJYvtEX67xWKu3lK42s8bwfY3w/EMgqRpdWLG90RTWsOpxZucTYGp
-	 z/+0BXRj+5ksZUttwFT3ip9jcUQLvND3ChvwGWbVkVMavcG+nh1FO25AT8aPQYMLRH
-	 6iX1fSla1xILO68Ga5RMrOgEEgYeg2CE5bUa+9y53XM0B3UssQHFzzQixUyNz6Xl5N
-	 DgbRvLWj1fYUw==
+	b=f/bQSeNPKVBnGLOf+itkb2gDEcFCKRHYs+aiw6PiKdgLt4o71F3N5tr76bcNpMNPN
+	 3vEZBdVFIiC6PHGZcagl86QcjVryyX2m7oRKDzOdGu4IQGVRtiOVRJ4kGIkE4tj38i
+	 uERQ7br/KO6UvRtiQF/ENIbwhf3JuFSxAiYF9V4+XdhXpggJKNy1TQ6iMN/CCnzJyp
+	 z9iAaF3+G55eaCwhBxjMtagO585LYHdTr/VVOir1IqdnboQCw61cFSbWdARZodtZxv
+	 OakLzPCrEByihX5r/4YtYMMvI66sM55GXqM6qiwZT8QK/FMD+LkS0TWJl61Gi1jRsa
+	 pLajFLtzStm2g==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vnHom-000000027U8-3NzE;
+	id 1vnHom-000000027UC-3Vdm;
 	Tue, 03 Feb 2026 15:55:52 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Jani Nikula <jani.nikula@linux.intel.com>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 01/15] unittests: unittest_helper: store verbosity at the environment
-Date: Tue,  3 Feb 2026 15:55:29 +0100
-Message-ID: <a3dff083d3534b3fdc9f8b25dca1681cb3a8279c.1770128540.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH 02/15] unittests: rename kdoc_xforms.py
+Date: Tue,  3 Feb 2026 15:55:30 +0100
+Message-ID: <3ebef224a92a4661e187130763b8bd4096054056.1770128540.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1770128540.git.mchehab+huawei@kernel.org>
 References: <cover.1770128540.git.mchehab+huawei@kernel.org>
@@ -76,70 +75,50 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75068-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75060-lists,linux-doc=lfdr.de,huawei];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A5699DAE5F
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[kdoc_xforms.py:url,test_kdoc_xforms.py:url,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: EA236DADEF
 X-Rspamd-Action: no action
 
-As tests may want to add their own verbosed messages, pass
-the defined verbosity level to the test classes via env.
+Let's start all tests with "tests_", as this makes easer to have
+an unique runner for all tests.
+So:
+
+	tools/unittests/kdoc_xforms.py -> tools/unittests/test_kdoc_xforms.py
+
+No changes at the code.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/unittest_helper.py | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
+ tools/unittests/{kdoc_xforms.py => test_kdoc_xforms.py} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename tools/unittests/{kdoc_xforms.py => test_kdoc_xforms.py} (100%)
 
-diff --git a/tools/lib/python/unittest_helper.py b/tools/lib/python/unittest_helper.py
-index d2efb78d8561..55d444cd73d4 100755
---- a/tools/lib/python/unittest_helper.py
-+++ b/tools/lib/python/unittest_helper.py
-@@ -279,14 +279,19 @@ class TestUnits:
-         if not caller_file and not suite:
-             raise TypeError("Either caller_file or suite is needed at TestUnits")
- 
--        if env:
--            patcher = patch.dict(os.environ, env)
--            patcher.start()
--            # ensure it gets stopped after
--            atexit.register(patcher.stop)
--
-         verbose = args.verbose
- 
-+        if not env:
-+            env = os.environ.copy()
-+
-+        env["VERBOSE"] = f"{verbose}"
-+
-+        patcher = patch.dict(os.environ, env)
-+        patcher.start()
-+        # ensure it gets stopped after
-+        atexit.register(patcher.stop)
-+
-+
-         if verbose >= 2:
-             unittest.TextTestRunner(verbosity=verbose).run = lambda suite: suite
- 
+diff --git a/tools/unittests/kdoc_xforms.py b/tools/unittests/test_kdoc_xforms.py
+similarity index 100%
+rename from tools/unittests/kdoc_xforms.py
+rename to tools/unittests/test_kdoc_xforms.py
 -- 
 2.52.0
 
