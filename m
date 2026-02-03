@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-75065-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75073-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4JUrMa0MgmmCOQMAu9opvQ
-	(envelope-from <linux-doc+bounces-75065-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:45 +0100
+	id aCnnMboMgmkKOwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75073-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:58 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DF2FDAE3E
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BF66DAE5E
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AFEEF30B0F0F
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 14:56:05 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 14FE830B7B35
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 14:56:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54DD13AE6E7;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC54B3AE6FC;
 	Tue,  3 Feb 2026 14:55:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I1hn9eZu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="luSuWlcx"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A29C33ACF00;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE6AE3ACF0A;
 	Tue,  3 Feb 2026 14:55:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770130555; cv=none; b=ATYyUXtyG9/TR3Syt00un0967TG+FSCbN37usHptiUPKlNYhB1l2lzVrsdZw4n4L7y46Ni28TxiUJzF7R+67Lr/q0b9kdrdQI8IGJXVW+ehg+fc2LAIQQS3db7eIoCu6U9bVfldAzaPwkqPmUa4w3G7p+6XBtMJ7l3ndHKRIzBE=
+	t=1770130556; cv=none; b=p4c8m3t9818O+V4XNg0Yy8zip6WZmRmDcrcC4QG/SuL8ZhN5aHA3OfcKRPFEUKHgMIvzKk33Ra7Iy6MXvbbB54tK90AVWy62Ql8hr/gcdrN4hpEEUnckzNHbqB6uSzFfeJIDUEx4y3wCaxLJAA+8HZWkxOdOdi26Z6w2jPbCKqs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770130555; c=relaxed/simple;
-	bh=PaOLRDk0iXEcEwnWCzqzsJpfgjdAgDVAImrhDci59t0=;
+	s=arc-20240116; t=1770130556; c=relaxed/simple;
+	bh=oYC2GDc/Bqbgq6yNVkLkZHK+JYaKpKvhsSMfDzpAVDw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Db9t8wO7dKwuxxgx2owYTHkxHZV1cGiiNFI9ZcZvjXPyz5qZpS6k3K0ugtiID/wOmWEClGvGmEmOfUjoDjXlYcAtroBxQr9rhQIPgHHKC0oG2UEALwnVeSX6lNbnzqm4UO+zF1yCpIrw+zefXolwZwSn9mY5GpxihsG9z1vTyjk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I1hn9eZu; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D149FC19421;
+	 MIME-Version:Content-Type; b=L9dFvz8T0b9feSY7Err3Ll4teDs1vDsCsE5o7Kh31Shl1Pd2GK70fOhOUrJ5nipLM7PuaVrqMCgXMKrb9WrOEiBij1vjdu7BCl2R98l1SpKlkjqvuAydkS33sipg7CjaxEXMQmYz3sufxcbJMYHIIXUoZsRRMX8gR6ZJHvCIZuM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=luSuWlcx; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2638C2BCB1;
 	Tue,  3 Feb 2026 14:55:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770130554;
-	bh=PaOLRDk0iXEcEwnWCzqzsJpfgjdAgDVAImrhDci59t0=;
+	s=k20201202; t=1770130555;
+	bh=oYC2GDc/Bqbgq6yNVkLkZHK+JYaKpKvhsSMfDzpAVDw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=I1hn9eZuOhs+VkCXrq2GGv2yAIF1R19EMOw09r7vylNK5xcOun/eGN5cJ0Yieslpd
-	 aNWM8UUSJqXjZRG5ODUfTLOrq3hKxsMHSUPY8hFKe4tb1IA54ZhkJGI1BGvRaxYc0U
-	 gpda/OI0ekDOR7VKjlFVSCvN9G8RvOEizWZqVd1j+1FH3De/Us2ffpl4EwqMHpPMYy
-	 +r92h3ogzzzHF1nEoHxuIrc6c+Appnq+v6nv9Vxlwysaqrs79AhPCVg2XU85LiXwJZ
-	 b9l9Q2RMZLrqoA7eNZTRwduPmKjo/Y9TVneGLT1jzmjMRPgh4om4qMcWvgG4PSpGtz
-	 7KlzFy/Y562hQ==
+	b=luSuWlcxOOfFHZykyos6xDVZrUMWIAd/9CNjdv+ApDoY/8jWuN0PEAt+hghKg1aD1
+	 H7svdm2dcDuz+hMF83ewGK7UNEwW+taoNlquclkdZtZLgC8XFvQXeNRaD6fwzvwTXm
+	 j65wJdgdV2mRwsAVnRIlmFRG6RgqR4u0O+L7eU8TcjqySrAt9CjaZ+ktfhzAIGBaai
+	 rYsrG9oY6SjUivUFw11JYv+BJi8d9WiAT4q5Hn7JYh0vfgVoFqxrHp+KlQh627DCdS
+	 v4UD1gmCt1eQkrX1QNPPCp6k0h+oex9AmfwDZc+3wngh1OE6lMb2y3ITXoqwRgtUh2
+	 qcqJqCMC4zp+g==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vnHom-000000027UG-3clW;
+	id 1vnHom-000000027UK-3jsn;
 	Tue, 03 Feb 2026 15:55:52 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -54,10 +54,11 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Jani Nikula <jani.nikula@linux.intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 03/15] unittests: add a runner to execute all unittests
-Date: Tue,  3 Feb 2026 15:55:31 +0100
-Message-ID: <fbc29b02eeb3dfb644dad54b1bb8d36f88bc67e2.1770128540.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH 04/15] docs: kdoc_files: use a class to group config parameters
+Date: Tue,  3 Feb 2026 15:55:32 +0100
+Message-ID: <c71213ef14ddc7f79581a874cf8a222ffe4f2d1a.1770128540.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1770128540.git.mchehab+huawei@kernel.org>
 References: <cover.1770128540.git.mchehab+huawei@kernel.org>
@@ -75,68 +76,120 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75065-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75073-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 1DF2FDAE3E
+X-Rspamd-Queue-Id: 8BF66DAE5E
 X-Rspamd-Action: no action
 
-We'll soon have multiple unit tests, add a runner that will
-discover all of them and execute all tests.
-
-It was opted to discover only files that starts with "test",
-as this way unittest discover won't try adding libraries or
-other stuff that might not contain unittest classes.
+Instead of abusing argparse.Namespace, define a class to store
+configuration parameters and logger.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/unittests/run.py | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100755 tools/unittests/run.py
+ tools/lib/python/kdoc/kdoc_files.py | 45 ++++++++++++++++++++---------
+ 1 file changed, 31 insertions(+), 14 deletions(-)
 
-diff --git a/tools/unittests/run.py b/tools/unittests/run.py
-new file mode 100755
-index 000000000000..8c19036d43a1
---- /dev/null
-+++ b/tools/unittests/run.py
-@@ -0,0 +1,17 @@
-+#!/bin/env python3
-+import os
-+import unittest
-+import sys
+diff --git a/tools/lib/python/kdoc/kdoc_files.py b/tools/lib/python/kdoc/kdoc_files.py
+index 8c2059623949..1c5cb9e5f0e8 100644
+--- a/tools/lib/python/kdoc/kdoc_files.py
++++ b/tools/lib/python/kdoc/kdoc_files.py
+@@ -9,7 +9,6 @@ Classes for navigating through the files that kernel-doc needs to handle
+ to generate documentation.
+ """
+ 
+-import argparse
+ import logging
+ import os
+ import re
+@@ -87,6 +86,28 @@ class GlobSourceFiles:
+                 file_not_found_cb(fname)
+ 
+ 
++class KdocConfig():
++    """
++    Stores all configuration attributes that kdoc_parser and kdoc_output
++    needs.
++    """
++    def __init__(self, verbose=False, werror=False, wreturn=False,
++                 wshort_desc=False, wcontents_before_sections=False,
++                 logger=None):
 +
-+TOOLS_DIR=os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")
-+sys.path.insert(0, TOOLS_DIR)
++        self.verbose = verbose
++        self.werror = werror
++        self.wreturn = wreturn
++        self.wshort_desc =  wshort_desc
++        self.wcontents_before_sections = wcontents_before_sections
 +
-+from lib.python.unittest_helper import TestUnits
++        if logger:
++            self.log = logger
++        else:
++            self.log = logging.getLogger(__file__)
 +
-+if __name__ == "__main__":
-+    loader = unittest.TestLoader()
++        self.warning = self.log.warning
 +
-+    suite = loader.discover(start_dir=os.path.join(TOOLS_DIR, "unittests"),
-+                            pattern="test*.py")
+ class KernelFiles():
+     """
+     Parse kernel-doc tags on multiple kernel source files.
+@@ -224,29 +245,25 @@ class KernelFiles():
+             if kdoc_werror:
+                 werror = kdoc_werror
+ 
++        if not logger:
++           logger = logging.getLogger("kernel-doc")
++        else:
++            logger = logger
 +
-+    TestUnits().run("", suite=suite)
+         # Some variables are global to the parser logic as a whole as they are
+         # used to send control configuration to KernelDoc class. As such,
+         # those variables are read-only inside the KernelDoc.
+-        self.config = argparse.Namespace
++        self.config = KdocConfig(verbose, werror, wreturn, wshort_desc,
++                                 wcontents_before_sections, logger)
+ 
+-        self.config.verbose = verbose
+-        self.config.werror = werror
+-        self.config.wreturn = wreturn
+-        self.config.wshort_desc = wshort_desc
+-        self.config.wcontents_before_sections = wcontents_before_sections
++        # Override log warning, as we want to count errors
++        self.config.warning = self.warning
+ 
+         if xforms:
+             self.xforms = xforms
+         else:
+             self.xforms = CTransforms()
+ 
+-        if not logger:
+-            self.config.log = logging.getLogger("kernel-doc")
+-        else:
+-            self.config.log = logger
+-
+-        self.config.warning = self.warning
+-
+         self.config.src_tree = os.environ.get("SRCTREE", None)
+ 
+         # Initialize variables that are internal to KernelFiles
 -- 
 2.52.0
 
