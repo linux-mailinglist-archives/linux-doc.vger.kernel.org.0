@@ -1,63 +1,65 @@
-Return-Path: <linux-doc+bounces-75061-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75067-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uFBuC5oMgmmCOQMAu9opvQ
-	(envelope-from <linux-doc+bounces-75061-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:26 +0100
+	id dIBEILcMgmkKOwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75067-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:55 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5A92DAE0C
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E875DDAE48
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 15:56:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7F5EC3082D58
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 14:55:58 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 104FC309ECF7
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 14:56:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93CBA3ACEF8;
-	Tue,  3 Feb 2026 14:55:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ABC7F3AE6F7;
+	Tue,  3 Feb 2026 14:55:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UF3f7nYZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hN/0/vB8"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5971A394497;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A254A3ACEFE;
 	Tue,  3 Feb 2026 14:55:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770130555; cv=none; b=EvUNk4St1HLcNlX9XHA1N96N/cQv8vfHw8Y09oGfEtU/OjSuLft5sARqfdth9k0/iNYhUbEMn2nXHxU/c2I/SH/1uaTCbSGS+YqQl5rC5bm4kto3Fd7llW8uXYifEl3lQF3/BXF8dzg+OA/6xOZ+QsZYBuvdPY6hzZArlORmMvI=
+	t=1770130555; cv=none; b=oy3sLthCN9nZi9qCAjRpu1zezErfJfFJM7TF0XFhZz3JasKUtLGY6X1cu3Um/OB3nYsAC1n+hUzxHIh2fLoCT7rR6HmLyYMF4rmd3tmfMa3aFjmIHu4fyXh1MEhr3rZXp4DEjORd6TNs7F4ZVAHZ0sq/OUYQpahz1xa9BCFeSrI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1770130555; c=relaxed/simple;
-	bh=12OPqlskckL5HqlY4jj0+cdjZZti4SPQGDREnmoAJkE=;
+	bh=17maUKpPJIi7w1foiKEU2VL1TpBiPLMmE6g5vXMaPPg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=BOTf3WsmN0YU/O5EpF15OdI6qqvkyKOKXLSlKB5km2xylERfIEPgetK0vZTeJxvdPDP9CuHojyYfaZheyWDehBKkjzNjmS0rI0dkvzP5VzbEdMieUGvq+MXKSXwhExE+KaLuwVWIyoLADeZkx5cU9S/XRDDL35QPVSVfgoBWl6A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UF3f7nYZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C40EEC116D0;
+	 MIME-Version:Content-Type; b=Dk0Vhiv+igG+a44cPWF4dt63al0u59BlM30zJw3jO4f8uyE6pKkGJGZNTkblPICqk/9+tk6wSdmNeFsamUYl+dZNnsbTd3ObMKNlM64RPCdeef9hggrRW/IAF4WyZcUv4/7ZYfsu1KsLt7nHK6MjhOQdtqkH3OHBzTl5TOq6nPE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hN/0/vB8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CEF3DC2BC86;
 	Tue,  3 Feb 2026 14:55:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1770130554;
-	bh=12OPqlskckL5HqlY4jj0+cdjZZti4SPQGDREnmoAJkE=;
+	bh=17maUKpPJIi7w1foiKEU2VL1TpBiPLMmE6g5vXMaPPg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=UF3f7nYZYJt6LtqA2Z3zw8NAsjuv9yMpfu6WiKu17rek7bSmj89fM+kusmyUie9d8
-	 mlx6WQj3wtEuJW+bx1FwgLEg3IPtJitI9WaznY6CVQx3Tb+UvcD+nAp6uK7gqadp9u
-	 mI13SgvP6IZsu4lghJrb6oh+dhMwQLMTkiWrWwms90SiWjj6HaciGT2YKsYFUatGf5
-	 UTXh6wjfYfzftZHQ2LrCdvr2KnphduVLFSn2s804ntBnlnOQGkbJq8jD4ovPz7ToUc
-	 kVdQayOCmV1z7UMpWxM+S9SstoOeAbhYrbnpKhtXd4P9V1364dsAmvpeN91yvjCrzU
-	 ZJQnkBvuCEUWw==
+	b=hN/0/vB8P2viE4jK2hZPmWbCPuy9ipAhbu6ODwL3O2A5CK7gg4R9qsExYYTK65+oP
+	 ZF4FZEXoDo85ba/U51i2ZqySOt6ZZ8MsH4VzP1/kh81ntU1xRgfz/IMa8tEXQ6px1c
+	 50ryOvcbHaEmBvnVd9g9a5mXB1mdayGnuMr2PMWe3QV7NBq1T4YKGWGMWiwiTsUj/6
+	 BR3EL5RCNEv8fpfxa8NjFtlz/hLFnrTS1lxUftnKbpj7THMU9t68bOcNVyWSAHovic
+	 P0PyuhmpZT8PXvFsmZCBise4nnZoYnXEIcvNpq4YUUWf9Wr5Bu0aqeAuxeiKP7zAZU
+	 7W1tUCGUSyv4A==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vnHom-000000027UW-45YU;
-	Tue, 03 Feb 2026 15:55:52 +0100
+	id 1vnHon-000000027Ua-00if;
+	Tue, 03 Feb 2026 15:55:53 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Jani Nikula <jani.nikula@linux.intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 07/15] docs: kdoc_item: add support to generate a KdocItem from a dict
-Date: Tue,  3 Feb 2026 15:55:35 +0100
-Message-ID: <01ec6c8007e9ccd40ab07e09b457912ea6866ac7.1770128540.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH 08/15] docs: kdoc_item: fix a typo on sections_start_lines
+Date: Tue,  3 Feb 2026 15:55:36 +0100
+Message-ID: <a988e935f6455fdabbac1bd4c6be74d8e1ef9198.1770128540.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1770128540.git.mchehab+huawei@kernel.org>
 References: <cover.1770128540.git.mchehab+huawei@kernel.org>
@@ -75,106 +77,108 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75061-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75067-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: D5A92DAE0C
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,self.data:url]
+X-Rspamd-Queue-Id: E875DDAE48
 X-Rspamd-Action: no action
 
-When reading the contents on a KdocItem using YAML, the data
-will be imported into a dict.
+Currently, there are 15 occurrences of section?_start_lines,
+with 10 using the plural way.
 
-Add a method to create a new KdocItem from a dict to allow
-converting such input into a real KdocItem.
+This is an issue, as, while kdoc_output works with KdocItem,
+the term doesn't match its init value.
 
-While here, address an issue that, if the class is initialized
-with an internal parameter outside the 4 initial arguments,
-it would end being added inside other_stuff, which breaks
-initializing it from a dict.
+The variable sections_start_lines stores multiple sections,
+so placing it in plural is its correct way.
+
+So, ensure that, on all parts of kdoc, this will be referred
+as sections_start_lines.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_item.py | 35 +++++++++++++++++++++++++++++-
- 1 file changed, 34 insertions(+), 1 deletion(-)
+ tools/lib/python/kdoc/kdoc_item.py   | 2 +-
+ tools/lib/python/kdoc/kdoc_output.py | 2 +-
+ tools/lib/python/kdoc/kdoc_parser.py | 6 +++---
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/tools/lib/python/kdoc/kdoc_item.py b/tools/lib/python/kdoc/kdoc_item.py
-index c0585cdbcbd1..5f41790efacb 100644
+index 5f41790efacb..fe08cac861c2 100644
 --- a/tools/lib/python/kdoc/kdoc_item.py
 +++ b/tools/lib/python/kdoc/kdoc_item.py
-@@ -25,12 +25,31 @@ class KdocItem:
-         self.parameterdesc_start_lines = {}
-         self.parameterdescs = {}
-         self.parametertypes = {}
-+
-+        self.warnings = []
-+
-         #
-         # Just save everything else into our own dict so that the output
-         # side can grab it directly as before.  As we move things into more
-         # structured data, this will, hopefully, fade away.
-         #
--        self.other_stuff = other_stuff
-+        known_keys = {
-+            'declaration_start_line',
-+            'sections',
-+            'sections_start_lines',
-+            'parameterlist',
-+            'parameterdesc_start_lines',
-+            'parameterdescs',
-+            'parametertypes',
-+            'warnings',
-+        }
-+
-+        self.other_stuff = {}
-+        for k, v in other_stuff.items():
-+            if k in known_keys:
-+                setattr(self, k, v)           # real attribute
-+            else:
-+                self.other_stuff[k] = v
- 
-     def get(self, key, default = None):
+@@ -82,7 +82,7 @@ class KdocItem:
+         Set sections and start lines.
          """
-@@ -41,6 +60,20 @@ class KdocItem:
-     def __getitem__(self, key):
-         return self.get(key)
+         self.sections = sections
+-        self.section_start_lines = start_lines
++        self.sections_start_lines = start_lines
  
-+    @classmethod
-+    def from_dict(cls, d):
-+        """Create a KdocItem from a plain dict."""
-+
-+        cp = d.copy()
-+        name        = cp.pop('name', None)
-+        fname       = cp.pop('fname', None)
-+        type        = cp.pop('type', None)
-+        start_line  = cp.pop('start_line', 1)
-+        other_stuff = cp.pop('other_stuff', {})
-+
-+        # Everything that’s left goes straight to __init__
-+        return cls(name, fname, type, start_line, **cp, **other_stuff)
-+
-     #
-     # Tracking of section and parameter information.
-     #
+     def set_params(self, names, descs, types, starts):
+         """
+diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
+index ece03cd9d321..6ab5a13edbb5 100644
+--- a/tools/lib/python/kdoc/kdoc_output.py
++++ b/tools/lib/python/kdoc/kdoc_output.py
+@@ -389,7 +389,7 @@ class RestFormat(OutputFormat):
+             else:
+                 self.data += f'{self.lineprefix}**{section}**\n\n'
+ 
+-            self.print_lineno(args.section_start_lines.get(section, 0))
++            self.print_lineno(args.sections_start_lines.get(section, 0))
+             self.output_highlight(text)
+             self.data += "\n"
+         self.data += "\n"
+diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
+index a280fe581937..940c848d4d80 100644
+--- a/tools/lib/python/kdoc/kdoc_parser.py
++++ b/tools/lib/python/kdoc/kdoc_parser.py
+@@ -152,7 +152,7 @@ class KernelEntry:
+         self.parametertypes = {}
+         self.parameterdesc_start_lines = {}
+ 
+-        self.section_start_lines = {}
++        self.sections_start_lines = {}
+         self.sections = {}
+ 
+         self.anon_struct_union = False
+@@ -232,7 +232,7 @@ class KernelEntry:
+                 self.sections[name] += '\n' + contents
+             else:
+                 self.sections[name] = contents
+-                self.section_start_lines[name] = self.new_start_line
++                self.sections_start_lines[name] = self.new_start_line
+                 self.new_start_line = 0
+ 
+ #        self.config.log.debug("Section: %s : %s", name, pformat(vars(self)))
+@@ -326,7 +326,7 @@ class KernelDoc:
+         for section in ["Description", "Return"]:
+             if section in sections and not sections[section].rstrip():
+                 del sections[section]
+-        item.set_sections(sections, self.entry.section_start_lines)
++        item.set_sections(sections, self.entry.sections_start_lines)
+         item.set_params(self.entry.parameterlist, self.entry.parameterdescs,
+                         self.entry.parametertypes,
+                         self.entry.parameterdesc_start_lines)
 -- 
 2.52.0
 
