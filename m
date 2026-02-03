@@ -1,247 +1,322 @@
-Return-Path: <linux-doc+bounces-75123-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75125-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MKVFCNdigmnfTQMAu9opvQ
-	(envelope-from <linux-doc+bounces-75123-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:04:23 +0100
+	id wP40ILxmgmmETgMAu9opvQ
+	(envelope-from <linux-doc+bounces-75125-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:21:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79129DEB7C
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:04:22 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D886EDECD9
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:20:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2CE0A30214EE
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:04:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 43298301E23B
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:20:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A72791D90DD;
-	Tue,  3 Feb 2026 21:04:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E52F2DF6F6;
+	Tue,  3 Feb 2026 21:20:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nMWwK4pz"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TAOMf8Lm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com [209.85.210.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 290BCAD24
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 21:04:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.210.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770152660; cv=pass; b=RT7PsAoGVSJAsHdyRb0m/R2NG+YLWoWZQriu6KpayVyGRQSyqi+Kv+c5pMTcv96/ny9RZ5DderjTldRA3K/FjYJ2xoOOia83Td5ZYxK0MDJ2DM/FbcdQaVvfltDU41aZT0Joh5KUsM/JzdmnLitQ1U8JT/X2wzwGdidoIki20TM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770152660; c=relaxed/simple;
-	bh=RJWS/5hocPsBCaoCO9iKgBlV56I3HiBK7SRGHVvi0Pg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=BygdJjL1Ns1OGDdmbcQLc8q+zdFfkFGTzHk+0LeUPUTENpD/e0yejb+Dz0KDASK/7tqOdR0g/DH5m5bz/5MLcCwMGIFKlFKs0rh7mC6JBETKed2lZ4V/pWXARdPAg3fMGRHuEyYqdQ2Z/vg7oNb+kOhZ31GgLEfBHtwuG4dWBAU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nMWwK4pz; arc=pass smtp.client-ip=209.85.210.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E44612DCF61
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 21:20:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.65
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770153657; cv=none; b=SFShdUDpMkVQlD1dTWUyjCWSarA0QdLaavcOZ7Phn/r3xUla7CDwjfCeCtGnav7l1mbfwhI/X+4zia7QrnRCRtBA/vqYsu4TtOGNfr5Hh7MjBpmHtYp0DcafB9P1VeWZdlnaJ1TO6ZfmFkOyeNvR+2aXyCPYizUf0DFyAOeNezE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770153657; c=relaxed/simple;
+	bh=AK/bnfFexI75Q/0N26IRCouQSTxRNRsO2xPVvCV9E/E=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=qmUf+xSSdopgKJY1/QbRlVhpbgTCVHTTVSrAPynaO33e7nfQmbnyXF7GDNcPVF1uU6/n/pt+gnqwih2r5CiA6oPpTM5qUNTLUGSygJKaXqoZATlJ5LZx0/wgFEMw6Qn5m5nGhkoVTK22O30MEuV3c7MU4xSp+Of0YKLuV8lue7k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TAOMf8Lm; arc=none smtp.client-ip=209.85.210.65
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-7d195166b2cso4914363a34.3
-        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 13:04:18 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770152658; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ZqJ39ypha79Iqb0XDixbbq/PR5dCN1yhJWpnf7P43EEIlFsexP1HPGMpPveKNKBbiw
-         sGJV1mV88/EjjvAM7WlKewyXK+bGRzORs7Qadd2lOhTd9Vbo/ekRfZvXr+zX44jVHoMm
-         HJbnFYQhtpahyFmV5wvI7VONrj4Sz8ZQ0AFHfcpwaRgO2Wjgi2lnHZxyXVmR8M38kmkQ
-         Ai02IdviSlH7aaeZk+1gjwDZeVMIKfDgD8z4Ry/wTugALIZNDx+9RJCtXKkOUUoAxJ/2
-         ltYaI704pkcWegMcbFHa21/eKttDaZ5DHgJz6L1cFs4bEjq5zCyLyILklXQbTevcWyJO
-         qcZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=QHAFB9FV4IIKqsJ9Dsq1BP6DtSJ08zpqLAnC+6LRrJU=;
-        fh=PcGFxBoU3X2VUwKSfQL8B/R9Q2ayP6JJOoSmAv3kBWY=;
-        b=PhmtV/9+mlzO5lPBsSwqcy16ZbTYKK2nxrzpCmC5JHxf6ttP8Lhs4V6PNg3hranEOE
-         LfZ4fr0vXktqyAsDQQW8t526hF38ZvKj+/yW2JyiO7vtlcDgoKkA7UwNnr4fT85hC6uW
-         Lv2L6NczZ/guLS7LU2586g5aXWodeELUCOlwdcF5CnzkjUzx55ziLXbInctEFS5HVTtP
-         akzWRxFbbJZh4lTJpDtzeAzI17z8c7rGgO5sFSV8O4trh4ewAy6ordxOuLQJeRnZ97C2
-         UPGZS3Jt7AXnJTnvjU3I5/0Cz/+DR59yxuzOH+0aNyYKMf/WRyCk/lHnZWMjbjAS9yQx
-         X/tw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-ot1-f65.google.com with SMTP id 46e09a7af769-7cfd04f1be8so2630178a34.2
+        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 13:20:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770152658; x=1770757458; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1770153655; x=1770758455; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QHAFB9FV4IIKqsJ9Dsq1BP6DtSJ08zpqLAnC+6LRrJU=;
-        b=nMWwK4pzvyqcIp4S8zs2qqo3r+AXXseYGjDojIHnd7ULCRuIV/F54lVnGkOVbe9eZ7
-         qzJG/Uc9ZLVRXXW70GnI0PNHSyDHQDhOQ7lq16btxYRIOat5qE3dg8zN7VwUXq1nwjzr
-         r1TGrlVrhm8fdGLeDZWx5KQ/xrpPGEB56YH1pZAZ+4kzwvVjwFLmxJFSn9mLSvAzfUWs
-         VuqJj+W4efB08yOCblP0ncVZc2nXM0SPZoeTv5aLu8jZOaPkgw3OvtieXHyRQPAXsUlg
-         6hmlRf5Yzbtb4c2Q6oDOJJrXu/CdxVdNd7fulIEqxqwqiofAYjqXP6a8l3YMzyAUTW3y
-         85mQ==
+        bh=/ABMBtHazCQPbXZPvqunvxRiAtO4J7KVdTol8wYfw0Q=;
+        b=TAOMf8LmLT2LJVEFv0FzfrXHjsn49Ir2juPY3ZfvoPwtTyqhBzvWmZ6J0KqhfkgxhY
+         Sd4vMj3KvtiWdVG2dUNej6rboEP8lkEv2hMvluBZlVrJyKTICzsJlKePYLOZ3JE6YhuW
+         1VE3GNtmpCVL39eA8yQ4WUhXd3y8vtAPV13HQz7x/mCT0QYbAZDRS09zq2ZcfvbxWz1s
+         jm+aF1LGdV67DASkyk6KvwMcezYmjynYkW49gtOma5kP8iYJEJqLzNeblbehPHw6dN0U
+         kCZwtJRxi06D37xs22UBJdb1J8cA+6OwKOxkEvmsJtVkZWevIuNMSINQrztiedUwvIno
+         d+Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770152658; x=1770757458;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20230601; t=1770153655; x=1770758455;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=QHAFB9FV4IIKqsJ9Dsq1BP6DtSJ08zpqLAnC+6LRrJU=;
-        b=l1ZGgBYHtFyPeUwNmQE8j6vGlgqsBkKrX85EDhZMOuO7983aArTCxhe0s0MuCnfVbF
-         FsKOce6UiylHIFrOasdIcbViRTMHS2f8mR3xaER4eLZaEIRWTHU7CpMtz0lyi64jjdY/
-         xUABugKmNMxAJLzuf8r1iZLJQ4Ya1XB8Y7xKe4pzuhBsXuybl8IfF5Dotj0zfdC13PA4
-         TzItiJARSqGcdM+Mi8b99ljkWwTOL9UFkYMnSYRKR6CD4NZew6dUewtdjPETPY+J+fR8
-         cc3Jfwwee4rTVUi0z8tTivR0uQoLiypOXbIpF27Sj27gsGieWbIt7ryXBbBtRT6TbgPe
-         5lmg==
-X-Forwarded-Encrypted: i=1; AJvYcCXDxEtzKfBXs0HqP2VY8fM589TVIxD3HkQX2NxA9q+5AQVbWVa2g4rEEmAtOjRdt0Q8rHKyYkO2g7Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0YznMdwORi5FkNyM+YXYyGuWTFjTjnwStk5tVBDa3D/2Z+ZfLDDn
-	PKxyGj+tD1+YVVz1UFq5Fx76a0+zZNN9/+jpsiBUxoef1uSrYR00+lbmgZqdwxgYvHDN1lEMiv2
-	ZoLH6Oywd1MGYnUztNvFU7DaOy6EjrPZsXw==
-X-Gm-Gg: AZuq6aJT4U3sLgDitwQ3JeQXgywD768dNsN65btIXNmMGyOfzpx7uFBCHxKA96MwXN/
-	6l76x7mZoQr2ZfbJd+2S6jX8kjUlYFxNUzxYxeOag5nAh1UFhOTj8joe6ErzHBek1xESLvg/bqZ
-	9B1wTcE++7ZGbLpz2wNY1sZyIhokjZmZv8q8DLWP7JFfJEyJxEGL7O5Z+owXCGBSPgPeppQIxgE
-	wS/GXyqZ82zgsP5A2QhcHLqpuhYJQELYZ+cBUXZrF51OV7SHxP6w8QEN+JOGlhX8iAvlWbbWJYi
-	fLhsASSs6zuKkPYvbFdpMeW0koDV469XxzQ8TdqMkLOpxvRdCjAwUD/nVsOJ
-X-Received: by 2002:a05:6820:1842:b0:659:9a49:9026 with SMTP id
- 006d021491bc7-66a23bf418cmr469936eaf.83.1770152657659; Tue, 03 Feb 2026
- 13:04:17 -0800 (PST)
+        bh=/ABMBtHazCQPbXZPvqunvxRiAtO4J7KVdTol8wYfw0Q=;
+        b=hF1kgaL/NYEbLATQn8wfwCjy7r1rZFTIarSwPHed6mc9xwkRt+HTBOJdb9FbbniSTi
+         zufGrg4j1DUd0J63UslU8kcNsIhYNlnmw2z1k7SEwEmh/kEsNkc1W1bkyOLosEw+w78w
+         feyRuZeUa8qatKZ++44ZJcEdZkq3VHZRE+hKb6eqtLRDGZ3SsOgUHg5T5KQ8KWIEegPK
+         0eo10vmPoASpZFeiMEF4SXvpvPhVKXqJQsnhTT5vU2uo7LSGtH5iFU1XRRTWGihB0Tdh
+         nNy1rxx3jHvf1H+OVXjn7OsQL8p7xLyCih1rwA7gilNvxZ+ZA15MJ8/D30w2wQKFckYz
+         fr+w==
+X-Forwarded-Encrypted: i=1; AJvYcCWNMeQE5ujUAtGB8UXdN8XAmik5FRnF1VXbwjiidGBPuoA2W+z/ifFGstHXUpxsze68t9ob33FinTk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxVV1wnw2KbCvV7pF6bcioLPrAq8Ile3XB1VigmT/rFHMjBIZEP
+	KpmyGRj0fFcZY3G21J8N1dFYkXhjuBK64gMQLiGiwVR+uQL5J173RGPsP71GqJNn
+X-Gm-Gg: AZuq6aJEFbMXm24/ioXuHPxx87gJXBL24PJaDvah42tkzDDJGryOoTYQHT099JPmnbS
+	+LCEJhjkRS6BccuOLvGUC2//J3gYrDUorzKqoVIS6pUsdAMdjlsWjLt5yisUG2IdqX6VCrGRjpU
+	NIFRFsd7kk54a2p5chwdxZ8/2Llq/0Th6UbNeTQXzkQncEiS3lYSoraGZUZTvScGs+aOs07ZKB3
+	s0Agp7mLUgmg1MK2hhg6DMjAuWA0nTu4lxnJfpKWNxiC5+gVxBzs21HnS6jSAXfaU69zgGOpd87
+	+JMg/2ms1eqs3m0epdNKe5sAVMrgClNzxZKytPk1ximDwaWI9PPob4p+ivaED0O7lU/ieNbT/W3
+	vyMff3mx0mbb9liZKJH8HAGBsf8cXh44yN1s35FMgLr7Y2a/MdtCZ+HShPPES1PQ5BZkGn0xNE/
+	SMiGg5TVd8nEpZg3YHkeocafCOIbhO4l/+zAuX
+X-Received: by 2002:a05:6830:2e06:b0:7cf:d1b7:7b28 with SMTP id 46e09a7af769-7d44899a057mr421574a34.4.1770153654637;
+        Tue, 03 Feb 2026 13:20:54 -0800 (PST)
+Received: from frodo (c-98-38-17-99.hsd1.co.comcast.net. [98.38.17.99])
+        by smtp.googlemail.com with ESMTPSA id 46e09a7af769-7d4490f35b7sm454939a34.1.2026.02.03.13.20.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Feb 2026 13:20:54 -0800 (PST)
+From: Jim Cromie <jim.cromie@gmail.com>
+To: intel-gfx-trybot@lists.freedesktop.org
+Cc: Jim Cromie <jim.cromie@gmail.com>,
+	linux-doc@vger.kernel.org
+Subject: [PATCH 04/10] docs/dyndbg: add classmap info to howto
+Date: Tue,  3 Feb 2026 14:19:24 -0700
+Message-ID: <20260203212027.1130311-8-jim.cromie@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260203212027.1130311-1-jim.cromie@gmail.com>
+References: <20260203212027.1130311-1-jim.cromie@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260203184826.81594-1-danielmaraboo@gmail.com>
- <0852503c-1d94-4cea-9364-d390ef076ea6@infradead.org> <CAMAsx6dtKd=kmvJZ-SYr=W+52VPOTTDCigP+3JsXZKOpDrbBkA@mail.gmail.com>
-In-Reply-To: <CAMAsx6dtKd=kmvJZ-SYr=W+52VPOTTDCigP+3JsXZKOpDrbBkA@mail.gmail.com>
-From: Daniel Pereira <danielmaraboo@gmail.com>
-Date: Tue, 3 Feb 2026 18:04:05 -0300
-X-Gm-Features: AZwV_QhbOBXK1XgHD95vmSCbxSzZZR8CTIJnJ9NjojivhHWBB7nMIIL2-nG2Cs4
-Message-ID: <CAMAsx6fEF86EdLRTptdEK+VFwc4e1-GK520vHLNUJo5WkrzepA@mail.gmail.com>
-Subject: Re: [PATCH v4] docs: pt_BR: add initial Portuguese translation
-To: Randy Dunlap <rdunlap@infradead.org>, willy@infradead.org
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75123-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75125-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 79129DEB7C
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: D886EDECD9
 X-Rspamd-Action: no action
 
-On Tue, Feb 3, 2026 at 5:55 PM Randy Dunlap <rdunlap@infradead.org> wrote:
-> Describe your changes in imperative mood, e.g. "make  do frotz"
-> instead of "[This patch] makes  do frotz" or "[I] changed
-> to do frotz", as if you are giving orders to the codebase to change
-> its behaviour.
->
-> so something like
->
-> Introduce the initial ...
+Describe the 3 API macros providing dynamic_debug's classmaps
 
-Hi Randy,
+DYNAMIC_DEBUG_CLASSMAP_DEFINE - create & export a classmap
+DYNAMIC_DEBUG_CLASSMAP_USE    - refer to exported map
+DYNAMIC_DEBUG_CLASSMAP_PARAM  - bind control param to the classmap
+DYNAMIC_DEBUG_CLASSMAP_PARAM_REF + use module's storage - __drm_debug
 
-Thank you for the correction. I will adjust the description to use the
-imperative mood in the v5 patch.
+NB: The _DEFINE & _USE model makes the user dependent on the definer,
+just like EXPORT_SYMBOL(__drm_debug) already does.
 
-On Tue, Feb 3, 2026 at 5:20 PM Matthew Wilcox <willy@infradead.org> wrote:
-> This seems an unnecessary blank line?
+cc: linux-doc@vger.kernel.org
+Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
+---
+ .../admin-guide/dynamic-debug-howto.rst       | 135 ++++++++++++++++--
+ 1 file changed, 123 insertions(+), 12 deletions(-)
 
-Hi Matthew,
+diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
+index 89ee15d7ae58..c85266ee8eed 100644
+--- a/Documentation/admin-guide/dynamic-debug-howto.rst
++++ b/Documentation/admin-guide/dynamic-debug-howto.rst
+@@ -146,6 +146,9 @@ keywords are::
+   "1-30" is valid range but "1 - 30" is not.
+ 
+ 
++Keywords
++--------
++
+ The meanings of each keyword are:
+ 
+ func
+@@ -194,16 +197,6 @@ format
+ 	format "nfsd: SETATTR"  // a neater way to match a format with whitespace
+ 	format 'nfsd: SETATTR'  // yet another way to match a format with whitespace
+ 
+-class
+-    The given class_name is validated against each module, which may
+-    have declared a list of known class_names.  If the class_name is
+-    found for a module, callsite & class matching and adjustment
+-    proceeds.  Examples::
+-
+-	class DRM_UT_KMS	# a DRM.debug category
+-	class JUNK		# silent non-match
+-	// class TLD_*		# NOTICE: no wildcard in class names
+-
+ line
+     The given line number or range of line numbers is compared
+     against the line number of each ``pr_debug()`` callsite.  A single
+@@ -218,6 +211,25 @@ line
+ 	line -1605          // the 1605 lines from line 1 to line 1605
+ 	line 1600-          // all lines from line 1600 to the end of the file
+ 
++class
++
++    The given class_name is validated against each module, which may
++    have declared a list of class_names it accepts.  If the class_name
++    accepted by a module, callsite & class matching and adjustment
++    proceeds.  Examples::
++
++	class DRM_UT_KMS	# a drm.debug category
++	class JUNK		# silent non-match
++	// class TLD_*		# NOTICE: no wildcard in class names
++
++.. note::
++
++    Unlike other keywords, classes are "name-to-change", not
++    "omitting-constraint-allows-change".  See Dynamic Debug Classmaps
++
++Flags
++-----
++
+ The flags specification comprises a change operation followed
+ by one or more flag characters.  The change operation is one
+ of the characters::
+@@ -238,11 +250,15 @@ The flags are::
+   s    Include the source file name
+   l    Include line number
+ 
++.. note::
++
++   * To query without changing	``+_`` or ``-_``.
++   * To clear all flags		``=_`` or ``-fslmpt``.
++
+ For ``print_hex_dump_debug()`` and ``print_hex_dump_bytes()``, only
+ the ``p`` flag has meaning, other flags are ignored.
+ 
+-Note the regexp ``^[-+=][fslmpt_]+$`` matches a flags specification.
+-To clear all flags at once, use ``=_`` or ``-fslmpt``.
++The regexp ``^[-+=][fslmpt_]+$`` matches a flags specification.
+ 
+ 
+ Debug messages during Boot Process
+@@ -394,3 +410,98 @@ just a shortcut for ``print_hex_dump(KERN_DEBUG)``.
+ For ``print_hex_dump_debug()``/``print_hex_dump_bytes()``, format string is
+ its ``prefix_str`` argument, if it is constant string; or ``hexdump``
+ in case ``prefix_str`` is built dynamically.
++
++.. _dyndbg-classmaps:
++
++Dynamic Debug Classmaps
++=======================
++
++The "class" keyword selects prdbgs based on author supplied,
++domain-oriented names.  This complements the nested-scope keywords:
++module, file, function, line.
++
++The main difference from the others: classes must be named to be
++changed.  This protects them from unintended overwrite::
++
++  # IOW this cannot undo any drm.debug settings
++  :#> ddcmd -p
++
++This protection is needed; /sys/module/drm/parameters/debug is ABI.
++drm.debug is authoritative when dyndbg is not used, dyndbg-under-DRM
++is an implementation detail, and must not behave erratically, just
++because another admin fed >control something unrelated.
++
++So each class must be enabled individually (no wildcards)::
++
++  :#> ddcmd class DRM_UT_CORE +p
++  :#> ddcmd class DRM_UT_KMS +p
++  # or more selectively
++  :#> ddcmd class DRM_UT_CORE module drm +p
++
++That makes direct >control wordy and annoying, but it is a secondary
++interface; it is not intended to replace the ABI, just slide in
++underneath and reimplement the guaranteed behavior.  So DRM would keep
++using the convenient way, and be able to trust it::
++
++  :#> echo 0x1ff > /sys/module/drm/parameters/debug
++
++That said, since the sysfs/kparam is the ABI, if the author omits the
++CLASSMAP_PARAM, theres no ABI to guard, and he probably wants a less
++pedantic >control interface.  In this case, protection is dropped.
++
++Dynamic Debug Classmap API
++==========================
++
++DYNAMIC_DEBUG_CLASSMAP_DEFINE(clname,type,_base,classnames) - this maps
++classnames (a list of strings) onto class-ids consecutively, starting
++at _base.
++
++DYNAMIC_DEBUG_CLASSMAP_USE(clname) & _USE_(clname,_base) - modules
++call this to refer to the var _DEFINEd elsewhere (and exported).
++
++DYNAMIC_DEBUG_CLASSMAP_PARAM(clname) - creates the sysfs/kparam,
++maps/exposes bits 0..N as class-names.
++
++Classmaps are opt-in: modules invoke _DEFINE or _USE to authorize
++dyndbg to update those named classes.  "class FOO" queries are
++validated against the classes defined or used by the module, this
++finds the classid to alter; classes are not directly selectable by
++their classid.
++
++Classnames are global in scope, so subsystems (module-groups) should
++prepend a subsystem name; unqualified names like "CORE" are discouraged.
++
++NB: It is an inherent API limitation (due to class_id's int type) that
++the following are possible:
++
++  // these errors should be caught in review
++  __pr_debug_cls(0, "fake DRM_UT_CORE msg");  // this works
++  __pr_debug_cls(62, "un-known classid msg"); // this compiles, does nothing
++
++There are 2 types of classmaps:
++
++* DD_CLASS_TYPE_DISJOINT_BITS: classes are independent, like drm.debug
++* DD_CLASS_TYPE_LEVEL_NUM: classes are relative, ordered (V3 > V2)
++
++DYNAMIC_DEBUG_CLASSMAP_PARAM - modelled after module_param_cb, it
++refers to a DEFINEd classmap, and associates it to the param's
++data-store.  This state is then applied to DEFINEr and USEr modules
++when they're modprobed.
++
++The PARAM interface also enforces the DD_CLASS_TYPE_LEVEL_NUM relation
++amongst the contained classnames; all classes are independent in the
++control parser itself.  There is no implied meaning in names like "V4"
++or "PL_ERROR" vs "PL_WARNING".
++
++Modules or subsystems (drm & drivers) can define multiple classmaps,
++as long as they (all the classmaps) share the limited 0..62
++per-module-group _class_id range, without overlap.
++
++If a module encounters a conflict between 2 classmaps it is _USEing or
++_DEFINEing, it can invoke the extended _USE_(name,_base) macro to
++de-conflict the respective ranges.
++
++``#define DEBUG`` will enable all pr_debugs in scope, including any
++class'd ones.  This won't be reflected in the PARAM readback value,
++but the class'd pr_debug callsites can be forced off by toggling the
++classmap-kparam all-on then all-off.
+-- 
+2.52.0
 
-I will remove this extra line. It was an oversight during the
-reorganization of the file.
-
-> > +Becoming A Kernel Developer
-> > +---------------------------
->
-> Is there a reason to not translate this one heading?
-
-Regarding the heading, as this is an initial patch focused on
-establishing the structure and the first main documents, some
-non-essential headings remained in English. However, my plan is to
-provide the full translation of all internal headings and content
-in the upcoming patches.
-
-> I have a delicate question ... how different are Brazilian and European
-> Portuguese for technical documentation?
-
-This is an important point. While Brazilian and European Portuguese are
-mutually intelligible, the technical terminology and sentence
-construction in a professional context differ significantly.
-
-In Brazil, the community of developers and students is vast, and
-providing documentation in pt_BR is crucial to lowering the entry
-barrier and ensuring that technical nuances are perfectly understood
-without the "distraction" of regional variations from Portugal, which
-can sometimes sound archaic or confusing to a Brazilian developer.
-By starting with pt_BR, we are targeting the largest Portuguese-speaking
-developer base to ensure high-quality contributions from the start.
-
-I am preparing v5 now with these fixes.
-
-Best regards,
-
-Daniel Pereira
-
-
-On Tue, Feb 3, 2026 at 6:02=E2=80=AFPM Daniel Pereira <danielmaraboo@gmail.=
-com> wrote:
->
-> Hi Randy,
->
-> Thanks for catching that. I'll rephrase the opening line in v5 to use
-> the imperative mood as suggested by submitting-patches.rst.
->
-> Best regards,
->
-> Daniel
->
-> On Tue, Feb 3, 2026 at 5:55=E2=80=AFPM Randy Dunlap <rdunlap@infradead.or=
-g> wrote:
-> >
-> > Hi,
-> > One more nit, sorry.
-> >
-> > On 2/3/26 10:48 AM, Daniel wrote:
-> > > From: Daniel Pereira <danielmaraboo@gmail.com>
-> > >
-> > > This patch introduces the initial Portuguese (Brazilian) translation
-> > > for the Linux kernel documentation. It includes the mandatory
-> > > disclaimer, the translation of the HOWTO document, and establishes
-> > > the directory structure for the pt_BR locale.
-> > >
-> > > Signed-off-by: Daniel Pereira <danielmaraboo@gmail.com>
-> > >
-> > > ---
-> >
-> > Documentation/process/submitting-patches.rst says:
-> >
-> > Describe your changes in imperative mood, e.g. "make xyzzy do frotz"
-> > instead of "[This patch] makes xyzzy do frotz" or "[I] changed xyzzy
-> > to do frotz", as if you are giving orders to the codebase to change
-> > its behaviour.
-> >
-> > so something like
-> >
-> > Introduce the initial ...
-> >
-> > would be good.
-> >
-> > --
-> > ~Randy
-> >
 
