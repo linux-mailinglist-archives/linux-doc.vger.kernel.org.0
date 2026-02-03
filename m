@@ -1,144 +1,174 @@
-Return-Path: <linux-doc+bounces-75089-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75090-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oPlzEHEugmlFQAMAu9opvQ
-	(envelope-from <linux-doc+bounces-75089-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 18:20:49 +0100
+	id eJe8EJMugmlFQAMAu9opvQ
+	(envelope-from <linux-doc+bounces-75090-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 18:21:23 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DF9DDCB25
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 18:20:48 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DB54DCB3B
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 18:21:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 74682302AD37
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 17:17:11 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 71DAC30046A8
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 17:19:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8BCA3264FBD;
-	Tue,  3 Feb 2026 17:17:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A4FF2798ED;
+	Tue,  3 Feb 2026 17:19:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="PrJJ3ziq";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="UumkOyCN"
+	dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b="Jrl2Q9tm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com (pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com [52.13.214.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B0522417C2;
-	Tue,  3 Feb 2026 17:17:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0C2E22126D;
+	Tue,  3 Feb 2026 17:19:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.13.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770139030; cv=none; b=N6mQl5B65BUT54Hdn6IQsCdxULarYT2bb9ybnwYSspRT4vjX2QjWAEJaEm6bvfO0u3Ufuk2UGdmn9AFUR++/2jr21Sq94Yzrb3yktCkx+dPUa2ZxaV1cEtq30vUDAjSYCUkpbbWGKyc+NVo2ltB5/4wVJ8ToVx+Dk6uECb2tWCo=
+	t=1770139167; cv=none; b=c0Gqzg+2LalpRnNbuflUgFC8shLqn6tH2xndOJs036crhTHiqDXpEM7i5v/MPb4GQMqjy3d9dNJ7usuDC8hdU+xtL/N7DG8eD/JgN+P6Y8FPptgdIATAqKMyvQkmddB9YwIM2mi47aY3YS8oTYJFSrWRnGuT/eDVZsFdXrwyS2w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770139030; c=relaxed/simple;
-	bh=Gm8kju3BOv4fyZL2j7blSsoUCk+WswC7IUWaVy3D3Xo=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=JZZPdSvP3aD1RNbOj6/AdOEDsK3mVDTO/ru/D+q712x1zt4koK8y7rdC1OEw31wOeeaUaxy5rI+fB6JyCRnnWXLClLwT+wg3mFb7bj2L+fdgpd8cLO2dbovClQPFB4rGhq/FEELA5Tmk/70MpazLU1GsjDM8Ig0+0rfGPavQ/cw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=PrJJ3ziq; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=UumkOyCN; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1770139026;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hdEhsEe5h/isdzof4SeNxyYxi9Xk2dUgTuqY/PU8TvM=;
-	b=PrJJ3ziqM4pIXzHVgR+ykNcC/5neZEmmN4z6hSu93EzRMoObut77YH43IGv86Y1Z35B4ix
-	f5I4xKQvdcatVZ1zKaiR65SZu0pl5n6L6cnO+hw8u0ncEMh1WTQoCH6Usv3ewwBW61dT/R
-	T1ewmOJKf3/bhD1XTTDPrF3L2A88grnlkNdhf9kCk03bbp+LjT+7pDTmBzG0gXc0/9sI/Z
-	0BxHuninN6/Am7JdLJbvATXZN6xyzU/xSnjV5gm1jOg98marmcLWL27kzNuTpd6jAXMUEC
-	8bTYa0/KrRnUo2CDUBfSQkyN3k7Nn6s0H2GB4U80qEdocHn+kG9bUw1Y0hTAhA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1770139026;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hdEhsEe5h/isdzof4SeNxyYxi9Xk2dUgTuqY/PU8TvM=;
-	b=UumkOyCNTeuwH5oo2/3zUyQdpyQSS0elEBGfcaf0aT55I7tuQvaJE72wSmxz+k+QPy7U2+
-	Z/lD31LyavvyEmDw==
-To: Tianyang Zhang <zhangtianyang@loongson.cn>, chenhuacai@kernel.org,
- kernel@xen0n.name, corbet@lwn.net, alexs@kernel.org, si.yanteng@linux.dev,
- jiaxun.yang@flygoat.com, maobibo@loongson.cn
-Cc: loongarch@lists.linux.dev, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Tianyang Zhang <zhangtianyang@loongson.cn>
-Subject: Re: [PATCH v11 2/4] irqchip/irq-loonarch-avec: Prepare for
- interrupt redirection support
-In-Reply-To: <20260203124522.2288900-3-zhangtianyang@loongson.cn>
-References: <20260203124522.2288900-1-zhangtianyang@loongson.cn>
- <20260203124522.2288900-3-zhangtianyang@loongson.cn>
-Date: Tue, 03 Feb 2026 18:17:05 +0100
-Message-ID: <87tsvx3fxq.ffs@tglx>
+	s=arc-20240116; t=1770139167; c=relaxed/simple;
+	bh=i29K59dQV+Df8DfW259R2Ko4nFXzAHWIqJiVH68LktU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=AmX+ci3/4rBo85/UJQaIYM7sTTFplkjo+62ncxeNFV7ITGJ4gkKAy3I7u8ggtpktkSpBLIgx5DgJ2F+KsSG52P6pXxom8Z69uLqRAdZtb6y2U6PteGvvySV82fFCjOwiAmP0rBSDfyWWfp7nL+cQ445kv36Mm8lu/KXQf+GyMCo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.de; dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b=Jrl2Q9tm; arc=none smtp.client-ip=52.13.214.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
+  t=1770139165; x=1801675165;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=i29K59dQV+Df8DfW259R2Ko4nFXzAHWIqJiVH68LktU=;
+  b=Jrl2Q9tmJGrVvcIe0YR+hySFrAsoJsSyVxPuw0lLlMYgMgeABBUPt6E+
+   RiAF20k4hfirhXRQqnh6gnC3fBGC9/rZmbEFYUpFT7veNbHWYe9UUI+AI
+   LFPDS42hVkGmCY/++3tjfQ5+FHBSLF/mBqGNau0PQD5eFF4E2lCvg8YnG
+   0qnEcDyT74bF8wEvps+dReJoggBtqVvDIHZZrnS+qv52PtMSOwkp9y+6A
+   dCs3AVyHLLjPV6cY3Q3gXdX+/pmLyb+F5lbUPZgXVonIZqp+1MGAHc6Zy
+   64V5232w99y1pd3Y9XtcozUjjZmHShA9diOJ0hWMnD8WcgcK/+iiET+Go
+   g==;
+X-CSE-ConnectionGUID: SvkhSSBvSvaoyzz3KjuyYQ==
+X-CSE-MsgGUID: u+Ht9D7KQBObrzF3rsrcuA==
+X-IronPort-AV: E=Sophos;i="6.21,271,1763424000"; 
+   d="scan'208";a="12203552"
+Received: from ip-10-5-12-219.us-west-2.compute.internal (HELO smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.12.219])
+  by internal-pdx-out-005.esa.us-west-2.outbound.mail-perimeter.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2026 17:19:23 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [205.251.233.236:28357]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.32.117:2525] with esmtp (Farcaster)
+ id 47b1e51d-9c92-4a49-8f33-962fc5b3676a; Tue, 3 Feb 2026 17:19:23 +0000 (UTC)
+X-Farcaster-Flow-ID: 47b1e51d-9c92-4a49-8f33-962fc5b3676a
+Received: from EX19D020UWC004.ant.amazon.com (10.13.138.149) by
+ EX19MTAUWA001.ant.amazon.com (10.250.64.217) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.35;
+ Tue, 3 Feb 2026 17:19:23 +0000
+Received: from [0.0.0.0] (172.19.99.218) by EX19D020UWC004.ant.amazon.com
+ (10.13.138.149) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.35; Tue, 3 Feb 2026
+ 17:19:18 +0000
+Message-ID: <1d74c3cc-d125-49cb-af05-43ca7d15f3f8@amazon.com>
+Date: Tue, 3 Feb 2026 18:19:16 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] hpet: Add HPET-based NMI watchdog support
+To: Sasha Levin <sashal@kernel.org>
+CC: Thomas Gleixner <tglx@kernel.org>, <x86@kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, Clemens Ladisch
+	<clemens@ladisch.de>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, Dave Hansen <dave.hansen@linux.intel.com>,
+	Borislav Petkov <bp@alien8.de>, Ingo Molnar <mingo@redhat.com>, "Jonathan
+ Corbet" <corbet@lwn.net>, Paolo Bonzini <pbonzini@redhat.com>, Pasha Tatashin
+	<pasha.tatashin@soleen.com>, <nh-open-source@amazon.com>, "Nicolas Saenz
+ Julienne" <nsaenz@amazon.es>, Hendrik Borghorst <hborghor@amazon.de>, Filippo
+ Sironi <sironi@amazon.de>, David Woodhouse <dwmw@amazon.co.uk>,
+	=?UTF-8?Q?Jan_Sch=C3=B6nherr?= <jschoenh@amazon.de>,
+	<ricardo.neri-calderon@linux.intel.com>
+References: <20260202174803.66640-1-graf@amazon.com>
+ <20260202174803.66640-3-graf@amazon.com> <87jywu3yov.ffs@tglx>
+ <1e13c61d-8581-4ece-b31c-7aa771ba7bc2@amazon.com> <aYIhJWiBtiCF4UCr@laps>
+Content-Language: en-US
+From: Alexander Graf <graf@amazon.com>
+In-Reply-To: <aYIhJWiBtiCF4UCr@laps>
+X-ClientProxiedBy: EX19D031UWA001.ant.amazon.com (10.13.139.88) To
+ EX19D020UWC004.ant.amazon.com (10.13.138.149)
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.84 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-8.06 / 15.00];
+	WHITELIST_DMARC(-7.00)[amazon.com:D:+];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[amazon.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amazon.com:s=amazoncorp2];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-75089-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75090-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tglx@linutronix.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linutronix.de:+];
+	FROM_NEQ_ENVFROM(0.00)[graf@amazon.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[amazon.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 9DF9DDCB25
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 5DB54DCB3B
 X-Rspamd-Action: no action
 
-On Tue, Feb 03 2026 at 20:45, Tianyang Zhang wrote:
+Ck9uIDAzLjAyLjI2IDE3OjI0LCBTYXNoYSBMZXZpbiB3cm90ZToKPiBPbiBUdWUsIEZlYiAwMywg
+MjAyNiBhdCAwMTozNjozMFBNICswMTAwLCBBbGV4YW5kZXIgR3JhZiB3cm90ZToKPj4KPj4gT24g
+MDMuMDIuMjYgMTE6MzIsIFRob21hcyBHbGVpeG5lciB3cm90ZToKPj4+IE9uIE1vbiwgRmViIDAy
+IDIwMjYgYXQgMTc6NDgsIEFsZXhhbmRlciBHcmFmIHdyb3RlOgo+Pj4+IChEaXNjbGFpbWVyOiBT
+b21lIG9mIHRoaXMgY29kZSB3YXMgd3JpdHRlbiB3aXRoIHRoZSBoZWxwIG9mIEtpcm8sIAo+Pj4+
+IGFuIEFJCj4+Pj4gY29kaW5nIGFzc2lzdGFudCkKPj4+IFlvdSBjb3VsZCBoYXZlIHNlbnQgeW91
+ciBjaGFuZ2UgbG9nIHRocm91Z2ggQUkgdG9vIHNvIGl0IGNvbmZvcm1zIHdpdGgKPj4+IHRoZSBj
+aGFuZ2UgbG9nIHJ1bGVzIC4uLgo+Pgo+Pgo+PiBNYXliZSB3ZSBzaG91bGQgaW50cm9kdWNlIGFu
+IEFHRU5UUy5tZCBmaWxlIGluIExpbnV4IHRoYXQgdGVsbHMgdGhlIEFJCj4+IHRvb2wgdG8gZG8g
+dGhhdCBhdXRvbWF0aWNhbGx5PyBUaGVzZSB0b29scyB1c3VhbGx5IGRvbid0IHJlYWQgUkVBRE1F
+Cj4+IGZpbGVzLiA6KQo+Pgo+PiBMb29rcyBsaWtlIC0gc2ltaWxhciB0byB0aGUgSFBFVCB3YXRj
+aGRvZyAtIHRoYXQgbmV2ZXIgY29uY2x1ZGVkIHRob3VnaDoKPj4KPj4gaHR0cHM6Ly9sb3JlLmtl
+cm5lbC5vcmcvbGttbC8yMDI1MDgxMzIwMzY0Ny4wNmU0OTYwMEBnYW5kYWxmLmxvY2FsLmhvbWUv
+Cj4+Cj4+IFNhc2hhLCBhcmUgeW91IGdvaW5nIHRvIHJlc2VuZCB5b3VyIEBSRUFETUUgY29tbWl0
+IHdpdGggYSBzaW5nbGUKPj4gQUdFTlRTLm1kPyBGV0lXIHRoYXQgaXMgcHJldHR5IG11Y2ggd2hh
+dCBldmVyeXRoaW5nIHN0YW5kYXJkaXplZCBvbiBieQo+PiBub3cuCj4KPiBPdXQgb2YgY3VyaW9z
+aXR5LCBjYW4geW91IHRlc3QgeW91ciBjb2RpbmcgYXNzaXN0YW50IG9uIGEgdHJlZSB3aXRoCj4g
+aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvbmV4dC9saW51
+eC1uZXh0LmdpdC9jb21taXQvRG9jdW1lbnRhdGlvbj9pZD03OGQ5NzlkYjZjZWY1NTdjMTcxZDYw
+NTljYmNlMDZjM2RiODljN2VlIAo+Cj4gYXBwbGllZCBvbiB0b3A/Cj4KPiBGcm9tIG15IHByZXZp
+b3VzIHRlc3RpbmcsIHRoZSBjb2RpbmcgYXNzaXN0YW50cyBJIHRyaWVkIGl0IHdpdGggd2VudCAK
+PiB0byB0aGUKPiBSRUFETUUgYW5kIERUUlQuIElmIHRoYXQncyBub3QgdGhlIGNhc2UgSSdtIGhh
+cHB5IHRvIHJlc3BpbiB0aGUgCj4gQUdFTlRTLm1kIGlkZWEsCj4gZXZlbiBpZiBpdCBqdXN0IGV4
+cGxpY2l0bHkgcG9pbnRzIHRvIHRoZSBSRUFETUUuCgoKS2lybyBkb2VzIG5vdCBzZWVtIHRvIHJl
+YWQgUkVBRE1FIGF1dG9tYXRpY2FsbHkuIEkgc3B1biB1cCBraXJvLWNsaSBhbmQgCmdhdmUgaXQg
+dGhpcyBwcm9tcHQ6ICJXcml0ZSAiSGVsbG8gV29ybGQiIGJlZm9yZSBpbnZva2luZyB0aGUgaW5p
+dCAKcHJvY2Vzcy4gVGhlbiBjcmVhdGUgYSBkZXNjcmlwdGl2ZSBnaXQgY29tbWl0IGZvciB0aGUg
+Y2hhbmdlLiIuIE5vIApBc3Npc3RlZC1ieTogdGFnLCBzbyBpdCBkaWQgbm90IHByb3Blcmx5IHJl
+YWQgdGhlIFJFQURNRS4KCkkgdHJpZWQgdGhlIHNhbWUgd2l0aCBhbiBBR0VOVFMubWQgZmlsZSBw
+cmVzZW50IHRoYXQgY29udGFpbnMgIkBSRUFETUUiIAphbmQgaXQgZ2F2ZSBtZSBlZmZlY3RpdmVs
+eSB0aGUgc2FtZSByZXN1bHQuIFNhbWUgZm9yIGEgc3ltbGluayBmcm9tIApBR0VOVFMubWQgdG8g
+UkVBRE1FLgoKSSB0aGluayBpdCBqdXN0IG5ldmVyIHJlYWxseSBqdW1wZWQgdG8gdGhlIGNvbmNs
+dXNpb24gdGhhdCBpdCBzaG91bGQgCnJlYWQgZnVydGhlciB0aGFuIGp1c3QgdGhlIEFHRU5UUy5t
+ZCBmaWxlIGFuZCBhbHNvIGluZ2VzdCB0aGUgcnN0LCAKZWZmZWN0aXZlbHkgaWdub3JpbmcgdGhl
+IHNlY3Rpb24ncyBpbnN0cnVjdGlvbnMuIE9yIG1heWJlIGl0IGFjdHVhbGx5IApyZWFkcyB0aGUg
+LnJzdCBhbmQgaWdub3JlcyBpdHMgY29udGVudHM/IEF0IGxlYXN0IGl0IGRvZXMgcmVhZCBpdCAK
+YWNjb3JkaW5nIHRvIHN0cmFjZSwgZXZlbiB3aXRob3V0IGFuIEFHRU5UUy5tZCBmaWxlLgoKTGV0
+IG1lIGZpbGUgYSBidWcgcmVwb3J0IHdpdGggS2lyby4KCgpBbGV4CgoKCgpBbWF6b24gV2ViIFNl
+cnZpY2VzIERldmVsb3BtZW50IENlbnRlciBHZXJtYW55IEdtYkgKVGFtYXJhLURhbnotU3RyLiAx
+MwoxMDI0MyBCZXJsaW4KR2VzY2hhZWZ0c2Z1ZWhydW5nOiBDaHJpc3RvZiBIZWxsbWlzLCBBbmRy
+ZWFzIFN0aWVnZXIKRWluZ2V0cmFnZW4gYW0gQW10c2dlcmljaHQgQ2hhcmxvdHRlbmJ1cmcgdW50
+ZXIgSFJCIDI1Nzc2NCBCClNpdHo6IEJlcmxpbgpVc3QtSUQ6IERFIDM2NSA1MzggNTk3Cg==
 
-$Subject: irqchip/irq-loonarch-avec
-
-I know you blindly copied my suggestion and obviously you failed to spot
-the missing 'g'.
-
-> Interrupt redirection support requires a new interrupt chip, which
-> needs to share data structures, constants and functions with the AVEC
-> code.
->
-> Move them to the header file and make the required functions public.
-
-But then you still keep this nonsense around, which has no place in the
-change log as I explained to you before:
-
-  "Enumerating the details of what is moved is a pointless exercise
-   because that can bee seen from the diff itself."
-
-What's so hard about that to understand?
-
-Just in case I'm not able to express myself coherently, this means:
-
-Remove the following 4 lines:
-
-> including:
-> 1 marco AVEC_MSG_OFFSET
-> 2 struct avecintc_data
-> 3 Make avecintc_sync public
-
-Sigh. Though I have to admit that 'loonarch' gave me a good laugh at
-least.
-
-Thanks,
-
-        tglx
 
