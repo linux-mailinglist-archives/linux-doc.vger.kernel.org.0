@@ -1,192 +1,131 @@
-Return-Path: <linux-doc+bounces-75040-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75041-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OCH8JyvvgWlAMwMAu9opvQ
-	(envelope-from <linux-doc+bounces-75040-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:50:51 +0100
+	id eIBjHFLvgWlAMwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75041-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:51:30 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBE79D9564
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:50:50 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 28514D95CF
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:51:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 78B6F300683D
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 12:50:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 140153084C16
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 12:51:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C31C3451DC;
-	Tue,  3 Feb 2026 12:50:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EFF273446B3;
+	Tue,  3 Feb 2026 12:50:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="jWD9ZV64";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="IMxrHQHs"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fibgC65F"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD08B3446D3
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 12:50:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD9F7345CC6
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 12:50:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770123047; cv=none; b=JvNIi8T6FhFUyJY5aQYAFs8LKDQY9yhAgy5G9QH3yq257a913vhea3+8hizwbj8LHrPUwg2inZQ6QPWwQbNk9rC/zUmA4eNn2ixTFpfYAFQZLdT0+t1LkV3w+Jup9ZIRw+d1egigVYal7T49lyX91wwxWtXnO8OQ+z605bF0sXw=
+	t=1770123058; cv=none; b=mJY+ygC7NPD7SVhifMVNdk/CMv/ZxnmRNKa3yfdCCH2niN7x50qLTKgmisYPE3VgZ99Y5eW8g4XpuJYZbSEebPezO1iRxK3hTKAz4+36hBUsHjstYMUAUDIuvxB+QUOz7OdgN9OzU38C2eqvb1S8parw/2W6XgJcqB/29bprqYA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770123047; c=relaxed/simple;
-	bh=8KynJT2ddnzGhgGZ8pfYEVkha/4ppnwD3PQCKPf3fF4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=dFlKc+VAAyF23aQ/+r9tX3On890IWoD3fv6E7uJj0a4AXN/0EB34SPkvncr4c1rmvEgjQ7NW5UdHoA0m7AK9MlUbmVTfy2jXtel5pQK+JHk0ew+y0A/c+MUY0C92Gul6HP6CwW3RnQAiC3oX2N2Ml5Q49CMGRFAH6vEvS8coR8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=jWD9ZV64; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=IMxrHQHs; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770123045;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cEWONWPgIK5PTen/Dr95JAV9SFIx8z/zmIXZPCQZI9g=;
-	b=jWD9ZV64DRzRVBZ4USdiznBuxkZqhjTM/Uv5vVlmStdBCjyfci5fgckc3u42e5TIZwEOYs
-	MOoFk6vvPKeFYzG+ndA5BZVCWKeZEzY7Xpq/+ZE1582RhAFvbOvQlct4qszbdYlDNpeZ0M
-	KWFrBbLa0sZ9aR4QRCiFzWWk21z//Qk=
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-190-kIaMkdAAP8KfF015PETLzg-1; Tue, 03 Feb 2026 07:50:43 -0500
-X-MC-Unique: kIaMkdAAP8KfF015PETLzg-1
-X-Mimecast-MFC-AGG-ID: kIaMkdAAP8KfF015PETLzg_1770123042
-Received: by mail-lf1-f71.google.com with SMTP id 2adb3069b0e04-59e2e2f1c91so1309358e87.1
-        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 04:50:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1770123042; x=1770727842; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=cEWONWPgIK5PTen/Dr95JAV9SFIx8z/zmIXZPCQZI9g=;
-        b=IMxrHQHsA0ZqTfNWdggKaeqWMpR6zYgedPADfwgtQDIjOM0wxzGkzaVAz1kUC6Nv7h
-         2tV4fD+KxeAQY6J4zO0gp0sZ2E3KIyBY9OSi0dA9eIDDfo8qnSCa+65o/HWWXybArrPS
-         jRvMPOGzV336ckA2rOarL1IYXai9ZDrQVpM/5M5KZUQQP0MKGSlQ/paIOEG4ZjVEzeAf
-         qyq7Vef42Cr5QDjDfvIAAHmGzdLLoEBgQ/+S93rbJWWp6yGrHn1ZGLbl2P5bm1cgJAWz
-         zi9MWKXlAv/8SKk05DVRyNDbEoMDfdjURs/LM9jZfaRSBAF5M3aib+Sz/4jVOYQt72NU
-         TiqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770123042; x=1770727842;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=cEWONWPgIK5PTen/Dr95JAV9SFIx8z/zmIXZPCQZI9g=;
-        b=AUA5uqKIezMkUpazqYUVGXOw5RXY7KID912GQ6KA/VNFgh+rkceZjK3Q8AUrqQA0Fm
-         QtMwAy8tLjeYmnckkciYG51YfYPSCaX6Ty5W6qzNyU0aGaNlIJySBvjBWYElZe7Gazyz
-         hMF2Ff9Jo3xUxkW0INQo8aYXfQTegzxR+wsAVu1NgAInUkh290ja2Pa8pLargjK1g3Dx
-         N2UuSCNfjREE1CAPrcwwb1qSE3ECGKDa/jLWDq1L+HAEL0FWL8H/7thDORsM/hAJcPIG
-         A6XenBNzLAQKMu0kzWtkZ5xMrh/f8ZjfLT0Vu/GlcJqYUm9oy8niKpFuIoYWYqJyPPnq
-         BQ2w==
-X-Forwarded-Encrypted: i=1; AJvYcCUclpiPparWhDkSbWOkyzx2rVDTFSXQhhbvOuZmKGinNR1a4wXQcsD7IgXrfvXTvmLKH+dkecRntmA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzEmPPLv/7zAF1fW9UyzTnqFWzYXsrZ1FWqORP8wnMb5vySjL/z
-	3T+4+Z/FCrnbq003Ek5S+ppWMdz4W94CfCB0CJfoayMFYR5Pbl213pMBSk7ZGHvIgTpKFQaZvBp
-	SukSaPhJVeXvODl/kbj59OapDACWhYN8VmpxPL3C/O3+0wNElvoPuToLNuvYgqIJ+BvLXGg==
-X-Gm-Gg: AZuq6aI4J0nXNz0ATA28yigWsG/1C41CiXCUiBTzcrvLTaTyTzQ/SZpWt0w+pOnYS0Z
-	V4+duhtIEkfxisfPd7un/kEYCk+X1iz8pkNNsOE6WPNtKedRevA5umI7DNeN7WU3OYOMTRKX/L5
-	cpNC9z2/AIvoL7hXVCRWllLNn4ddhb52UL0FvaFH8GBsrS/gmifaEtHSqOPQstzebHnQRWZLLFp
-	UFykJ4fmr0XbCN5pUPzuaqDXg12tUeru66Sfe2GvE41YZdQ22TWIvAF1dYCGcMJ1mlIKuL48WJP
-	KggX5YKXWjydVrr+BqHoY0sHj+N89dgc92QgGBLtdkZNOQCBENvKG4ZP+HUA0sqk+SK7P/5bb+s
-	GaLGzwN0TLOk=
-X-Received: by 2002:a05:6512:3f21:b0:59e:429:932a with SMTP id 2adb3069b0e04-59e163f573fmr4674357e87.1.1770123041887;
-        Tue, 03 Feb 2026 04:50:41 -0800 (PST)
-X-Received: by 2002:a05:6512:3f21:b0:59e:429:932a with SMTP id 2adb3069b0e04-59e163f573fmr4674323e87.1.1770123041407;
-        Tue, 03 Feb 2026 04:50:41 -0800 (PST)
-Received: from [192.168.88.32] ([150.228.93.21])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-59e0751bb68sm4024086e87.8.2026.02.03.04.50.37
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Feb 2026 04:50:40 -0800 (PST)
-Message-ID: <7df9baf9-040f-41ae-b292-f3155842b5f4@redhat.com>
-Date: Tue, 3 Feb 2026 13:50:34 +0100
+	s=arc-20240116; t=1770123058; c=relaxed/simple;
+	bh=V5oUKRaNj8zfaVSK89Uwq3C3MIcd+hKDDyHLLXvhamU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=CQ95hAGJAHzujNnTMulkdty5Ygoj3pmOXJwP0edWsWem4bv0P5b+oeRxwsRKMY8hbbWFIVx+m2NQ+aquX/Y5X/mhtYOd8XGT/lL+geoj6rfeaJtpa1MEAK2d6n/3EiHCLL2W6AJHqVXkTUl3c36MBK+fdQuIO6vIdXE0zy5vOs0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fibgC65F; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2FC6C2BC87
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 12:50:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770123058;
+	bh=V5oUKRaNj8zfaVSK89Uwq3C3MIcd+hKDDyHLLXvhamU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=fibgC65FCFkGvprqqOdQAumC7I3p0dI1Z+GXy+Rs2Zu/wq7s8hY5trxio7WJBL+sm
+	 KZZ+Mh8eXQTzJyIjLREi+DCab9727FwILizEK6a1XZfkgXf8iVotOmN/hVPilXHn+X
+	 TTG/JMLuDeOVUoK4BmS8l+XEGocJCEi0e9pGyBlZUXqN75VL5i02CUJ6vztF2//lCV
+	 eDs/F1NE/2V49yAYg+o9bMwzOqxSAjHyOwSurPjOjCut0V1hClDKWklKKTPjSYlaPb
+	 MEIVuzhjSEt7O9tac0J2VEfDIxYcmm11GCWvgLKsYwNWtd726yw61ZmKOhyk3YoxCI
+	 AMb9BQUZVryNg==
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-409521ba360so3616607fac.2
+        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 04:50:58 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCVEMsFEwkA9Ri5ha75luWSPriKiSiulo8hLV8eYy3/rfX0Gu1NT3ttIVBpFByRk99kEeQK1dod0JTE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyNhT4jhPQK0vVbpqn/Kz1Jmq6+aYVP5Nm9Y798BiCIUh3Q4sPR
+	fFF5FI19bG1Gzid1Y3AsuI4fmISiMLoZWLuvhkowdueGbxk7mjC+mBfRlLHphohbe1xfKbZpnoZ
+	dKGHHik1rCrMZon/61aC6UiYlAjXgcRA=
+X-Received: by 2002:a05:6870:670f:b0:3e8:44ec:3416 with SMTP id
+ 586e51a60fabf-409a6fa44f9mr8489886fac.46.1770123057599; Tue, 03 Feb 2026
+ 04:50:57 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 net-next 00/15] AccECN protocol case handling series
-To: chia-yu.chang@nokia-bell-labs.com, edumazet@google.com, parav@nvidia.com,
- linux-doc@vger.kernel.org, corbet@lwn.net, horms@kernel.org,
- dsahern@kernel.org, kuniyu@google.com, bpf@vger.kernel.org,
- netdev@vger.kernel.org, dave.taht@gmail.com, jhs@mojatatu.com,
- kuba@kernel.org, stephen@networkplumber.org, xiyou.wangcong@gmail.com,
- jiri@resnulli.us, davem@davemloft.net, andrew+netdev@lunn.ch,
- donald.hunter@gmail.com, ast@fiberby.net, liuhangbin@gmail.com,
- shuah@kernel.org, linux-kselftest@vger.kernel.org, ij@kernel.org,
- ncardwell@google.com, koen.de_schepper@nokia-bell-labs.com,
- g.white@cablelabs.com, ingemar.s.johansson@ericsson.com,
- mirja.kuehlewind@ericsson.com, cheshire@apple.com, rs.ietf@gmx.at,
- Jason_Livingood@comcast.com, vidhi_goel@apple.com
-References: <20260131222515.8485-1-chia-yu.chang@nokia-bell-labs.com>
-Content-Language: en-US
-From: Paolo Abeni <pabeni@redhat.com>
-In-Reply-To: <20260131222515.8485-1-chia-yu.chang@nokia-bell-labs.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260129104817.3752340-1-sumitg@nvidia.com> <20260129104817.3752340-5-sumitg@nvidia.com>
+ <CAJZ5v0gBHrGf4TpjqV+W5YynM+9_xWpepgrOiRegSYS9CvPV1g@mail.gmail.com>
+In-Reply-To: <CAJZ5v0gBHrGf4TpjqV+W5YynM+9_xWpepgrOiRegSYS9CvPV1g@mail.gmail.com>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Tue, 3 Feb 2026 13:50:46 +0100
+X-Gmail-Original-Message-ID: <CAJZ5v0jUHUf_h=GA+71NyynT+Fym2ihzety4EMaTiGOkJskJHg@mail.gmail.com>
+X-Gm-Features: AZwV_Qgu227UTDtr8TTkbpsEWgdQTwyBTnvvGzE1lKTt4jjfaBPdfqbnp67vyAA
+Message-ID: <CAJZ5v0jUHUf_h=GA+71NyynT+Fym2ihzety4EMaTiGOkJskJHg@mail.gmail.com>
+Subject: Re: [PATCH v7 4/7] ACPI: CPPC: add APIs and sysfs interface for min/max_perf
+To: Sumit Gupta <sumitg@nvidia.com>
+Cc: viresh.kumar@linaro.org, pierre.gondois@arm.com, zhenglifeng1@huawei.com, 
+	ionela.voinescu@arm.com, lenb@kernel.org, robert.moore@intel.com, 
+	corbet@lwn.net, rdunlap@infradead.org, ray.huang@amd.com, 
+	gautham.shenoy@amd.com, mario.limonciello@amd.com, perry.yuan@amd.com, 
+	zhanjie9@hisilicon.com, linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org, 
+	linux-doc@vger.kernel.org, acpica-devel@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-tegra@vger.kernel.org, treding@nvidia.com, 
+	jonathanh@nvidia.com, vsethi@nvidia.com, ksitaraman@nvidia.com, 
+	sanjayc@nvidia.com, nhartman@nvidia.com, bbasu@nvidia.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[nokia-bell-labs.com,google.com,nvidia.com,vger.kernel.org,lwn.net,kernel.org,gmail.com,mojatatu.com,networkplumber.org,resnulli.us,davemloft.net,lunn.ch,fiberby.net,cablelabs.com,ericsson.com,apple.com,gmx.at,comcast.com];
+	TAGGED_FROM(0.00)[bounces-75041-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75040-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[33];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pabeni@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TO_DN_NONE(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: CBE79D9564
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 28514D95CF
 X-Rspamd-Action: no action
 
-On 1/31/26 11:25 PM, chia-yu.chang@nokia-bell-labs.com wrote:
-> From: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
-> 
-> Hello,
-> 
-> Plesae find the v13 AccECN case handling patch series, which covers
-> several excpetional case handling of Accurate ECN spec (RFC9768),
-> adds new identifiers to be used by CC modules, adds ecn_delta into
-> rate_sample, and keeps the ACE counter for computation, etc.
-> 
-> This patch series is part of the full AccECN patch series, which is at
-> https://github.com/L4STeam/linux-net-next/commits/upstream_l4steam/
+On Tue, Feb 3, 2026 at 1:43=E2=80=AFPM Rafael J. Wysocki <rafael@kernel.org=
+> wrote:
+>
+> On Thu, Jan 29, 2026 at 11:49=E2=80=AFAM Sumit Gupta <sumitg@nvidia.com> =
+wrote:
+> >
+> > Add cppc_get/set_min_perf() and cppc_get/set_max_perf() APIs to read an=
+d
+> > write the MIN_PERF and MAX_PERF registers.
+> >
+> > Also add sysfs interfaces (min_perf, max_perf) in cppc_cpufreq driver
+> > to expose these controls to userspace. The sysfs values are in frequenc=
+y
+> > (kHz) for consistency with other cpufreq sysfs files.
+>
+> But this is not cpufreq and it is not consistent.
 
-Beside the just shared feedback, the AI reported a bunch of other stuff
-that are not relevant:
-- fixes tags, IMHO not needed since the touched features were just
-partially implemented before
-- uapi breakage, already ruled out as irrelevant since the iproute bits
-are not there yet
-- pktdrill syntax, which is a little inconsistent but AFAICS correct.
-
-I'm not sure about the BIT() macro usage in uAPI, which is already a
-thing in many uAPI exposed headers, but does not look correct. I guess
-it could be handled with a follow-up, if needed.
-
-So the only feedback the could really require a new revision is WRT ECN
-flags handling on retransmission - and I'm not 110% it needs a new
-revision: please double check it.
-
-Thanks,
-
-Paolo
-
+Scratch this, sorry for the noise.
 
