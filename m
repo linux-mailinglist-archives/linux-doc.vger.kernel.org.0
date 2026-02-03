@@ -1,217 +1,183 @@
-Return-Path: <linux-doc+bounces-75102-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75104-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ANmRCLc7gmmVQgMAu9opvQ
-	(envelope-from <linux-doc+bounces-75102-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 19:17:27 +0100
+	id KOGLKTlEgmlHRQMAu9opvQ
+	(envelope-from <linux-doc+bounces-75104-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 19:53:45 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DA85DD6FB
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 19:17:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36BFFDDE29
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 19:53:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 763993069AC5
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 18:16:23 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DB473310770F
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 18:45:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F62036403F;
-	Tue,  3 Feb 2026 18:16:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5056123E32D;
+	Tue,  3 Feb 2026 18:45:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="Mniz/5oy"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jEYIB7wX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF0F21C84A2
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 18:16:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.54
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770142582; cv=none; b=FueEKfGuQ+VKtSa+xt4G+iQ4QClh3U51ikZSye2bGFmKmVoORTBkxwK/WNdBtI6n5U/uT5l9tcAC3xkzNF6NKUjk78+Nj73pZ8nlFm4UzAg3CeJknIDrmB6lFWUZ2fhO1wicdX1bFH2szPLZEDL0MGeMvRBK4FpPKgWpvSu8pAc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770142582; c=relaxed/simple;
-	bh=Qt7o89VltFIBegDzasIbqnP3PJ+WPuTLLON/GuX+fRQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YeGjnKwaXhxlxzIEe+xU/tSWvI/Dm6Ympv/nCAuTUaiPyrf6NzMU6E58YMZB545JzUmy52L3dP3h6UgDERfUbGRsnvcc/beMsuev4m/hGJsynEz/+XI1E1itCV4d4cDeZgEOvZALbtO+5mE9guGl8vUqWnic8iI3qFf8+GxYIVE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=Mniz/5oy; arc=none smtp.client-ip=209.85.219.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
-Received: by mail-qv1-f54.google.com with SMTP id 6a1803df08f44-8947e6ffd30so70835086d6.0
-        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 10:16:20 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C61A81A9F91
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 18:45:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.161.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770144336; cv=pass; b=r6y9Romn92m0DrGNv73S1dZX62rIE5ul1tIBnVnRmq6dUupXS1P+/teJxvTsob1f/UGdJ2jCQXTNTjthseIG9fFoYP2GwXvGIfZ7wDA14tUrxYldFS5QcjZapN1sf0q1JYnA86e3t0AKs+1LitPccDpA+DOQzglT8x3wx8WgPLU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770144336; c=relaxed/simple;
+	bh=PMqkHMXr+ZpQrlwXt9vF6Z4+JXKaoZ54baqMNUxrHVE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Content-Type; b=RR0i/34YpEPzE3FyHKOekXEj+6mzSmeyFfVjBtBJXUPnU2Cmz0q36iPXvS05lVhl1jIuERFGm7WsyNtLa1SV8o4VYcLTCdO/Y82/aSZhEsGuXYlL27nnvxmWMrtMWEKOcGdUfJo18bchSN1tYSZS0MYrOys8ddST2aloc4ikw7k=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jEYIB7wX; arc=pass smtp.client-ip=209.85.161.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-663170b9472so2427437eaf.3
+        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 10:45:34 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770144333; cv=none;
+        d=google.com; s=arc-20240605;
+        b=S1lhDUfeVt7nSm2/6zDvg3qP+KwudaEGyX4WOpxBQmbFlwibKHO/5Oey7eNQRU7lqw
+         R6eAHRGD2xA1QVS5WPrphMh261QTwCdeeOD2flbGYjUJ7/0RMXv9TqI7mWT4QMTEu7CP
+         S+6GnBVlO2Zf51AkYCKImLJXD3nTcQrMTh9nhKmZ4C/gS4wIPj3tavle1+XJME9t4EMu
+         ElUukQzH7Z9/CPKdhXE2KFPRRdEyugKe+G3tRUQSKn+jMmkz4K1V6YnvoKIqDeTLx9zJ
+         XOH0NHXD2+cz08GMcrq7iscE5tGUkZzo2TDubFxeH5+371quRmRmOoDrbSpf1Au86tig
+         ptnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=rSKd3nitYxB7fwwCBP6axPYZO0DTUL1n4IbhiAY6LCM=;
+        fh=RlI5HGectjr9KFDQFUz0xDWD9QrfoZcGCzlpqVt7xFI=;
+        b=BBHH1WOEOHbwtYer0hIfjENB/fPB4JtgRjegsAPXDnpnFprGhoM/CVCWQ3nV4YgOLp
+         C9oNyslZam1RIqpUGzkGT5IvH3S4SCdHund7S7GEQWpDRdkeVOEKh3qQFCJKoL0yV5Ja
+         8dRkgqspFM0hGaUoHyMVwsrM7JXjlCcg2k1rZAYjEWQnPFMTN7IeBbELt5CEJnb8F4nc
+         kPH6k12gevk5aQf/N0qxSOTkqeDxWTQyQm9kCypnggnwGKbCFdUddhcp9xlvUAxWEbTj
+         0FfysHwOqe2eWXiJROK7kXUr9/V73P5oV8E+AZ4lBpgbBcellqyItfKi6vjGRZgQ0cE4
+         VeOw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1770142580; x=1770747380; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=mu1la4UZlbEX7cvXzj/Z/hgnRFrqjHU+qKtYtW0dmkY=;
-        b=Mniz/5oynk/qOI64zPIe8E+PNEyixk4fEB611FX5soFdbulK6R9KmPQtOu4aEAXjcB
-         efjpn/kLP3vsSPGaHohVu6/Rt0K9qXP7QtNggw4Y7iGiQ+lb7Btklx97aDYTLAlUztFI
-         h5yvBEF6xvd6QNj3f/5Rq9dS5pMAQ/wKBPWuMCDaLEXtmpFbJnXArLI2UIvYnmp155Zy
-         0b+yLcNYyG0uUnOruupOuHumm/8Fat9UIruRUI37sLCEsgtmT6QSkgWJF1h0NEiROxuz
-         1abL4IMKxz9NUHd0G1V4nEtr6+1cDHCJ7YB1uyGxhcm0aubd+Dk72keMw16xEPt7BDo4
-         yQIw==
+        d=gmail.com; s=20230601; t=1770144333; x=1770749133; darn=vger.kernel.org;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=rSKd3nitYxB7fwwCBP6axPYZO0DTUL1n4IbhiAY6LCM=;
+        b=jEYIB7wXWh4FUHv3iyaS7SC/VXd1YRZxKNskUGZX+ACcRdznHLDT3M6OVT+FOtG4RX
+         6IubrBCuHJicqOYwDs/pXgE33onMxgSFYiFX1BZtxhkHVIQ/1TgZbf1GtFdXjCe2OZVy
+         OvzbCaAW8+f+bzoUapexdVhHFARTxhoGyQPd4LzMGFkNmCvA4VflBdgVX31tVFvyqZuj
+         dF6qiSfc3EQ+QRQnCFztMfgadY9lgBs+xm6qnIxQAp9JAqgHIYba2S4EzoF2pT2XDWTe
+         wYj8bwh7NKvQtXtf4u9eLHJvA5hnOO7Uvv0YiLqIRHd0/Oez2PQGuNsk76tIcSytw6vx
+         zdpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770142580; x=1770747380;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mu1la4UZlbEX7cvXzj/Z/hgnRFrqjHU+qKtYtW0dmkY=;
-        b=MeFcUjHQeGQj+28qq0P/+83gKStzPtz9orc7oLhZ6fy35eOJQFzHQZIU/ZzxHvdo+5
-         C/4i4M5mGsZ3dBgPQ2te+Xk3phXVG4uxwMkRHF7qiB9usMDc2THN2iYTRq7xpjk/eajv
-         crfw37TiRTkmfSMZ6ekCkBivNGY3MVBrQkoiw/P0YLx2zdnnFZ3osesFJcGycp+n/ELk
-         fbE3JzHyGOfRX3N28SdgHEaEu1aanqPX0J/XlCkgsuJrbAoKoJGBdann+C4QMzFTUOt8
-         1CnIDaqlgnDHClB9J75wbEgmsVQdtplTH669hshImgSC0rFMxjJYS29h4IPTKLAEfKkk
-         O6aw==
-X-Forwarded-Encrypted: i=1; AJvYcCWCV9bk++kTK9wUbHPUXSOIcC0vGB6rw4aeA7Fd2+kcJqdWTNiIcb88zNGvWSznvfN8xrkld1+CiGg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzrCwGK67InA/u0+f1DEsB7C/2lYYnd6xEHA3zVGr0INsQ4zD1n
-	kbz+EtsBo+BmfZTwnTZ4Bz9bKip7iTJJalerj5HMn+uJ5Fz8tABhYMbnGgcv9NqNBGk=
-X-Gm-Gg: AZuq6aKAgbeUq+wjeEnfsxeIUZdVwtm3QFWgKtkmsD6F2k8oD+jR6oLc4IfpGBFJw9b
-	XPx+DCdlomwT3ptCRkS3xUSf7EHoBXANij7acHHBPHyGoSybpOZ1qhfxB/CGqRjIbArRy4VaWjT
-	8PwK/dITi8zUuOly4u7HKzUmiJ93EkUTZwMlop+HKol+ROSlwbmnbMc7o/j3oeZ4uInuzJyW2kh
-	saEM9oUfQyWhQ5aK51aJ7rgcs7QChikcqThzFXbmg+PCRvGXshqFv0WE1a3QOvO3jW9om/pXRaw
-	mvXY6ajET81QSam1+O28gnb9/kjnOkMybRSwnPhglDSqy6DBC7Of3q0RqpFW582n8zMf8xk5hPA
-	oLdMf/z/5PFK9gIk5ihF53YOo+zl+A7cJvifkWiC2Rio47Vagt3D+9EO8n+stONkZ15n5Javgb5
-	d7UmiKMzmmXm7DsB83l7aEgKJGEwpaHfHTVmhIoFJFe545pusLHHB0yFlmByro2E1g7Xc=
-X-Received: by 2002:a05:6214:20ab:b0:87c:22f9:dac4 with SMTP id 6a1803df08f44-8952210b4a5mr5192876d6.15.1770142579616;
-        Tue, 03 Feb 2026 10:16:19 -0800 (PST)
-Received: from ziepe.ca (hlfxns017vw-142-162-112-119.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.112.119])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-89521c00173sm2728446d6.12.2026.02.03.10.16.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Feb 2026 10:16:18 -0800 (PST)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1vnKwk-0000000Gah4-0kfw;
-	Tue, 03 Feb 2026 14:16:18 -0400
-Date: Tue, 3 Feb 2026 14:16:18 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Xu Yilun <yilun.xu@linux.intel.com>
-Cc: Sean Christopherson <seanjc@google.com>,
-	Ackerley Tng <ackerleytng@google.com>,
-	Alexey Kardashevskiy <aik@amd.com>, cgroups@vger.kernel.org,
-	kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org, x86@kernel.org,
-	akpm@linux-foundation.org, binbin.wu@linux.intel.com, bp@alien8.de,
-	brauner@kernel.org, chao.p.peng@intel.com, chenhuacai@kernel.org,
-	corbet@lwn.net, dave.hansen@intel.com, dave.hansen@linux.intel.com,
-	david@redhat.com, dmatlack@google.com, erdemaktas@google.com,
-	fan.du@intel.com, fvdl@google.com, haibo1.xu@intel.com,
-	hannes@cmpxchg.org, hch@infradead.org, hpa@zytor.com,
-	hughd@google.com, ira.weiny@intel.com, isaku.yamahata@intel.com,
-	jack@suse.cz, james.morse@arm.com, jarkko@kernel.org,
-	jgowans@amazon.com, jhubbard@nvidia.com, jroedel@suse.de,
-	jthoughton@google.com, jun.miao@intel.com, kai.huang@intel.com,
-	keirf@google.com, kent.overstreet@linux.dev,
-	liam.merwick@oracle.com, maciej.wieczor-retman@intel.com,
-	mail@maciej.szmigiero.name, maobibo@loongson.cn,
-	mathieu.desnoyers@efficios.com, maz@kernel.org, mhiramat@kernel.org,
-	mhocko@kernel.org, mic@digikod.net, michael.roth@amd.com,
-	mingo@redhat.com, mlevitsk@redhat.com, mpe@ellerman.id.au,
-	muchun.song@linux.dev, nikunj@amd.com, nsaenz@amazon.es,
-	oliver.upton@linux.dev, palmer@dabbelt.com, pankaj.gupta@amd.com,
-	paul.walmsley@sifive.com, pbonzini@redhat.com, peterx@redhat.com,
-	pgonda@google.com, prsampat@amd.com, pvorel@suse.cz,
-	qperret@google.com, richard.weiyang@gmail.com,
-	rick.p.edgecombe@intel.com, rientjes@google.com,
-	rostedt@goodmis.org, roypat@amazon.co.uk, rppt@kernel.org,
-	shakeel.butt@linux.dev, shuah@kernel.org, steven.price@arm.com,
-	steven.sistare@oracle.com, suzuki.poulose@arm.com, tabba@google.com,
-	tglx@linutronix.de, thomas.lendacky@amd.com, vannapurve@google.com,
-	vbabka@suse.cz, viro@zeniv.linux.org.uk, vkuznets@redhat.com,
-	wei.w.wang@intel.com, will@kernel.org, willy@infradead.org,
-	wyihan@google.com, xiaoyao.li@intel.com, yan.y.zhao@intel.com,
-	yilun.xu@intel.com, yuzenghui@huawei.com, zhiquan1.li@intel.com
-Subject: Re: [RFC PATCH v1 05/37] KVM: guest_memfd: Wire up
- kvm_get_memory_attributes() to per-gmem attributes
-Message-ID: <20260203181618.GY2328995@ziepe.ca>
-References: <cover.1760731772.git.ackerleytng@google.com>
- <071a3c6603809186e914fe5fed939edee4e11988.1760731772.git.ackerleytng@google.com>
- <07836b1d-d0d8-40f2-8f7b-7805beca31d0@amd.com>
- <CAEvNRgEuez=JbArRf2SApLAL0usv5-Q6q=nBPOFMHrHGaKAtMw@mail.gmail.com>
- <20260129003753.GZ1641016@ziepe.ca>
- <aXqx3_eE0rNh6nP0@google.com>
- <aYHGVQTF6RUs7r3g@yilunxu-OptiPlex-7050>
+        d=1e100.net; s=20230601; t=1770144333; x=1770749133;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rSKd3nitYxB7fwwCBP6axPYZO0DTUL1n4IbhiAY6LCM=;
+        b=LNUoyhzshJrIs++WTcOE/Z/jFL521pVW/bgThWVaUbKT78SegDvhBTVCf8pku8LXSX
+         6KQyZC9CK7//jVrdRamLY67HeAFPIJRWUPhmDyp1DE4VaMAvuQBz0t/2CNqMvd/of9yz
+         drf1+iKSiCq5iZawD0m+94x52GkueFVvYIsMZ9Kbx0Duc6fgxkZji73dwXGKgcfEqnPh
+         rkvRZVtxDv+3J0wkopfAWnPOP9exkI/audi4NTDlgYqwCJfLTGydckCVmkXsQChiaddV
+         NP5oJRcRA0i7Rj9nARHu82/6o8Oa+EPrgAEmkOXYU1smZBV44X5Ifcg0iuf8yEpZx7ja
+         ExVQ==
+X-Forwarded-Encrypted: i=1; AJvYcCW4iEquKWTE4Hyjjk1AKqmJHK/ab8TZZFNyxRBap1znH6jP1wD19vygHSsj0mTpF8PNvnIag7vdnf4=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywu1DxOvIhzmYxu79bQPC3WsjeqJImN5LfwZ394jNBAaTFwmV24
+	6uP1dEzZJh5Wk/33YkN+OucwJin291/2g7GSkjltHetnvdurMZJXfVeVPva/nSveJFEI3paEv1i
+	TQX8StMGQdEXdgViVqwD2hCbwsyDTLSQzflGgJwA=
+X-Gm-Gg: AZuq6aKSysSYu8p1lfN5DHLfUI0/XyctPPwV0rhWYHISlyStKjfPxDVS3Cx7JerPI4H
+	X8Z4kV1kpPl8s5aQ9xjMUllTr+b2vyWsOZc7n0OJ7Q/+WcMwVnw+v6Czig/bDmefF5B/Zn9LnWt
+	5c70TVbY1n5ZVGoRIluMw7f/A+jqRSFZOY/nY0fWvL76fvDEhHnm7u2GxrW0CtVKjTjLyByj1hz
+	UEqPi5g6D2sn2WBCLO28Pek/mOd01G6x174c9EH7G6AG5JhOh0vi1LGA1LUIT2zm+f3nNDqMEAP
+	yS1pAHgc8y9OZeLSkEImI07r31M=
+X-Received: by 2002:a05:6820:4612:b0:663:1239:9eac with SMTP id
+ 006d021491bc7-66a234318d0mr268800eaf.59.1770144333418; Tue, 03 Feb 2026
+ 10:45:33 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aYHGVQTF6RUs7r3g@yilunxu-OptiPlex-7050>
+References: <20260203120859.65735-1-danielmaraboo@gmail.com> <087b5848-8f51-408c-bd5a-d51fea2731cd@infradead.org>
+In-Reply-To: <087b5848-8f51-408c-bd5a-d51fea2731cd@infradead.org>
+From: Daniel Pereira <danielmaraboo@gmail.com>
+Date: Tue, 3 Feb 2026 15:45:22 -0300
+X-Gm-Features: AZwV_Qgk58GELHo4MobGsH1zofPzaxdV1LCXbGgbPJOa3fj76Jlwe3Pt4RARxQY
+Message-ID: <CAMAsx6eEup1gQitY1=GVZ1OzhKSRPjs8Qi1hzzui+fc8MP=dgA@mail.gmail.com>
+Subject: Re: [PATCH v3] docs: pt_BR: add initial Portuguese translation
+To: Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[google.com,amd.com,vger.kernel.org,kvack.org,kernel.org,linux-foundation.org,linux.intel.com,alien8.de,intel.com,lwn.net,redhat.com,cmpxchg.org,infradead.org,zytor.com,suse.cz,arm.com,amazon.com,nvidia.com,suse.de,linux.dev,oracle.com,maciej.szmigiero.name,loongson.cn,efficios.com,digikod.net,ellerman.id.au,amazon.es,dabbelt.com,sifive.com,gmail.com,goodmis.org,amazon.co.uk,linutronix.de,zeniv.linux.org.uk,huawei.com];
-	DKIM_TRACE(0.00)[ziepe.ca:+];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_NA(0.00)[ziepe.ca];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75102-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWO(0.00)[2];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75104-lists,linux-doc=lfdr.de];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_GT_50(0.00)[98];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:mid,ziepe.ca:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 6DA85DD6FB
+	FREEMAIL_FROM(0.00)[gmail.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:email]
+X-Rspamd-Queue-Id: 36BFFDDE29
 X-Rspamd-Action: no action
 
-On Tue, Feb 03, 2026 at 05:56:37PM +0800, Xu Yilun wrote:
-> > +1.  For guest_memfd, we initially defined per-VM memory attributes to track
-> > private vs. shared.  But as Ackerley noted, we are in the process of deprecating
-> > that support, e.g. by making it incompatible with various guest_memfd features,
-> > in favor of having each guest_memfd instance track the state of a given page.
-> > 
-> > The original guest_memfd design was that it would _only_ hold private pages, and
-> > so tracking private vs. shared in guest_memfd didn't make any sense.  As we've
-> > pivoted to in-place conversion, tracking private vs. shared in the guest_memfd
-> > has basically become mandatory.  We could maaaaaybe make it work with per-VM
-> > attributes, but it would be insanely complex.
-> > 
-> > For a dmabuf fd, the story is the same as guest_memfd.  Unless private vs. shared
-> > is all or nothing, and can never change, then the only entity that can track that
-> > info is the owner of the dmabuf.  And even if the private vs. shared attributes
-> > are constant, tracking it external to KVM makes sense, because then the provider
-> > can simply hardcode %true/%false.  
-> 
-> For CoCo-VM and Tee-IO, I'm wondering if host or KVM has to maintain
-> the private/shared attribute for "assigned MMIO". I'm not naming them
-> "host MMIO" cause unlike RAM host never needs to access them, either in
-> private manner or shared manner.
-> 
-> Traditionally, host maps these MMIOs only because KVM needs HVA->HPA
-> mapping to find pfn and setup KVM MMU.
+On Tue, Feb 3, 2026 at 3:11 PM Randy Dunlap <rdunlap@infradead.org> wrote:
+>
+> Hi,
+>
+> On 2/3/26 4:08 AM, Daniel Pereira wrote:
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 0efa8cc67..c5e0e1f2b 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -21141,6 +21141,12 @@ F:   include/sound/pxa2xx-lib.h
+> >  F:   sound/arm/pxa*
+> >  F:   sound/soc/pxa/
+> >
+> > +PORTUGUESE (BRAZILIAN) TRANSLATION
+> > +M:   Daniel Pereira <danielmaraboo@gmail.com>
+> > +L:   linux-doc@vger.kernel.org
+> > +S:   Maintained
+> > +F:   Documentation/translations/pt_BR/
+> > +
+> >  QAT DRIVER
+> >  M:   Giovanni Cabiddu <giovanni.cabiddu@intel.com>
+> >  L:   qat-linux@intel.com
+> > @@ -28876,3 +28882,5 @@ S:    Buried alive in reporters
+> >  T:   git git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+> >  F:   *
+> >  F:   */
+> > +
+> > +
+>
+> Don't add extra blank lines at the end of this file.
+> I.e., that entire last diff block shouldn't be here.
 
-This is not actually completely true, the host mapping still ends up
-being used by KVM if it happens to trap and emulate a MMIO touching
-instruction.
+Hi Randy,
 
-It really shouldn't do this, but there is a whole set of complex
-machinery in KVM and qemu to handle this case.
+Thank you for the observation. I have just fixed this in the v4 patch
+by removing the extra blank lines at the end of the MAINTAINERS file.
 
-For example if the MSI-X window is not properly aligned then you have
-some MMIO that is trapped and must be reflected to real HW.
+I am resubmitting the corrected patch now.
 
-So the sharable parts of the BAR should still end up being mmaped into
-userspace, I think.
+Best regards,
 
-Which means we need VFIO to know what they are, and hopefully it is
-just static based on the TDISP reports..
-
-Jason
+Daniel Pereira
 
