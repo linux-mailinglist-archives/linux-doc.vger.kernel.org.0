@@ -1,158 +1,189 @@
-Return-Path: <linux-doc+bounces-75011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75014-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qNaVGEHGgWk0JwMAu9opvQ
-	(envelope-from <linux-doc+bounces-75011-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 10:56:17 +0100
+	id wHbyEgHLgWl1JwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75014-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:16:33 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D320FD72E9
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 10:56:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6B45D76D1
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 11:16:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2B84C306E81A
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 09:51:24 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 011F43059A71
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 10:15:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 479CF39901B;
-	Tue,  3 Feb 2026 09:51:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6500029A9F9;
+	Tue,  3 Feb 2026 10:15:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="ESMSiqS5"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WHfJCxHU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-187.mta1.migadu.com (out-187.mta1.migadu.com [95.215.58.187])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 267AE39525C;
-	Tue,  3 Feb 2026 09:51:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.187
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDC5823183F;
+	Tue,  3 Feb 2026 10:15:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770112281; cv=none; b=SfP+hZNptA+Xy7iKNWhtPuxmNcjgsbOvWMUyC65tDJxYiQkBxfFGlajnVmZthbaOsO0aJtgUBDg/MXBK8+b6e+vKvjC/0OzRnn9B8iRxzOilcvsqwKhC8317B9sfjUbBSqAPQUgx0wvkpyZYvQa53EPBhtspAjaFlXtfS8rKGxQ=
+	t=1770113729; cv=none; b=XqWlP+Gx8IK4tVkZo0NrmJEiXFqfAVEjAoWZBbG6u9FBPi9dTLrpn/LFr4+FRvY28Vbn5vwCO54n/VIxOribdfNb/a6PTLeTy8joPsYncOHD5n9yimBW9X9bEidpk2+SrARHphkrP03S7sN3C+38Oki2E5c/qNoYuU5rJt2C1T0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770112281; c=relaxed/simple;
-	bh=JB37f7aWRV58dvpxkW8UNrxVvq8Wiv2PvuKT2/vvQio=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=Xwx0dO8wta3GuCu3mlLKRUeUADxy1UTEWXL1FfD38gnS6lymN3BwZt/wlcIrVkoKLAtxxuqf7awvGD/OdDh9FpW4iYt99OdyGKc4Yk02WYlxnmN15U9j+i5YdDZKFt593WLWV7Zu9NGUcQSFFCc8zqSVd+qOw2Z5kKfBmhTsWxk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=ESMSiqS5; arc=none smtp.client-ip=95.215.58.187
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Content-Type: text/plain;
-	charset=us-ascii
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1770112277;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9LMV/UqSLQLqZskyhJdWEgGaTiL2QvED1GhTKVUM7dY=;
-	b=ESMSiqS5ORHZuZjWRltobDFH6KzSxY4kRV2ycmTIHL0HadXikXjnfkOnrlbsP1Fbvat2zN
-	JZTwdZTssymJkx5X6YALhYhxOhEzwJWov3PuvlVQpLQ6w9EYcqwmDE8Gi3nwvqdiTDy9DL
-	vJ9KphjIGx1nE1AgsHx+O2A8hJQWtX0=
+	s=arc-20240116; t=1770113729; c=relaxed/simple;
+	bh=ltTqItvs5DEbQAayR00+PqL/+NRtgJq6ixieEinQSY4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Q5jjG2QEVNkNXRP2RTfrK1GMOiUYH6UPKgEbwKpBdLGeZyIapCP4xIUdjduYYCelC1/8WjH3KNQMilVzd2sxP9LXQ2iMElxruLRgEvQq6IqpmH4FPc8DmCQ31z/Gd3mxq8IqLIGIX2TTULSA5lfMctxJNBPC4HBqUqSuVoQi/Mw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WHfJCxHU; arc=none smtp.client-ip=192.198.163.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1770113728; x=1801649728;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=ltTqItvs5DEbQAayR00+PqL/+NRtgJq6ixieEinQSY4=;
+  b=WHfJCxHU6+m/HKsG1GEUHnC7LYEAoVlCp5pDuHNDURLYdoEDYFbRORys
+   Lk4D7f7h02Orrykg+0t+tdqw6ZDWUlqyALFWmthEf98FPXaS0PGAQBtwm
+   QgjKlOvAaqcH35dSuq9S9Za8hua/CidmhLAnv34VmjsDGLRHy3R6uWSvY
+   c6YMNE8Le7rCnOAbslhhonhRo5jiZ7H17FnEfMCleDQ+iVn4X1jZH6A5O
+   xRcF5tFZxKA5PklK5l89LpJq4MuTnFWaCO5jLhV90cjGpkqYi/GLgYZmA
+   rd1cFOH+ZyF1x+tHM4dFEJpBLyNtmrBZofZhwQVPcScqg/lICl94yNpww
+   w==;
+X-CSE-ConnectionGUID: Q43I6yY3TF6pmKIhbq1+8Q==
+X-CSE-MsgGUID: ou9M2qUoRwCLUcxP0tEM4A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11690"; a="96738240"
+X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
+   d="scan'208";a="96738240"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2026 02:15:26 -0800
+X-CSE-ConnectionGUID: QSwRDmD1RvONYQUf1EbLaA==
+X-CSE-MsgGUID: +XVLnH3CSfiSKxpDX9/BtA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
+   d="scan'208";a="209093662"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
+  by orviesa010.jf.intel.com with ESMTP; 03 Feb 2026 02:15:05 -0800
+Date: Tue, 3 Feb 2026 17:56:37 +0800
+From: Xu Yilun <yilun.xu@linux.intel.com>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Jason Gunthorpe <jgg@ziepe.ca>, Ackerley Tng <ackerleytng@google.com>,
+	Alexey Kardashevskiy <aik@amd.com>, cgroups@vger.kernel.org,
+	kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+	linux-trace-kernel@vger.kernel.org, x86@kernel.org,
+	akpm@linux-foundation.org, binbin.wu@linux.intel.com, bp@alien8.de,
+	brauner@kernel.org, chao.p.peng@intel.com, chenhuacai@kernel.org,
+	corbet@lwn.net, dave.hansen@intel.com, dave.hansen@linux.intel.com,
+	david@redhat.com, dmatlack@google.com, erdemaktas@google.com,
+	fan.du@intel.com, fvdl@google.com, haibo1.xu@intel.com,
+	hannes@cmpxchg.org, hch@infradead.org, hpa@zytor.com,
+	hughd@google.com, ira.weiny@intel.com, isaku.yamahata@intel.com,
+	jack@suse.cz, james.morse@arm.com, jarkko@kernel.org,
+	jgowans@amazon.com, jhubbard@nvidia.com, jroedel@suse.de,
+	jthoughton@google.com, jun.miao@intel.com, kai.huang@intel.com,
+	keirf@google.com, kent.overstreet@linux.dev,
+	liam.merwick@oracle.com, maciej.wieczor-retman@intel.com,
+	mail@maciej.szmigiero.name, maobibo@loongson.cn,
+	mathieu.desnoyers@efficios.com, maz@kernel.org, mhiramat@kernel.org,
+	mhocko@kernel.org, mic@digikod.net, michael.roth@amd.com,
+	mingo@redhat.com, mlevitsk@redhat.com, mpe@ellerman.id.au,
+	muchun.song@linux.dev, nikunj@amd.com, nsaenz@amazon.es,
+	oliver.upton@linux.dev, palmer@dabbelt.com, pankaj.gupta@amd.com,
+	paul.walmsley@sifive.com, pbonzini@redhat.com, peterx@redhat.com,
+	pgonda@google.com, prsampat@amd.com, pvorel@suse.cz,
+	qperret@google.com, richard.weiyang@gmail.com,
+	rick.p.edgecombe@intel.com, rientjes@google.com,
+	rostedt@goodmis.org, roypat@amazon.co.uk, rppt@kernel.org,
+	shakeel.butt@linux.dev, shuah@kernel.org, steven.price@arm.com,
+	steven.sistare@oracle.com, suzuki.poulose@arm.com, tabba@google.com,
+	tglx@linutronix.de, thomas.lendacky@amd.com, vannapurve@google.com,
+	vbabka@suse.cz, viro@zeniv.linux.org.uk, vkuznets@redhat.com,
+	wei.w.wang@intel.com, will@kernel.org, willy@infradead.org,
+	wyihan@google.com, xiaoyao.li@intel.com, yan.y.zhao@intel.com,
+	yilun.xu@intel.com, yuzenghui@huawei.com, zhiquan1.li@intel.com
+Subject: Re: [RFC PATCH v1 05/37] KVM: guest_memfd: Wire up
+ kvm_get_memory_attributes() to per-gmem attributes
+Message-ID: <aYHGVQTF6RUs7r3g@yilunxu-OptiPlex-7050>
+References: <cover.1760731772.git.ackerleytng@google.com>
+ <071a3c6603809186e914fe5fed939edee4e11988.1760731772.git.ackerleytng@google.com>
+ <07836b1d-d0d8-40f2-8f7b-7805beca31d0@amd.com>
+ <CAEvNRgEuez=JbArRf2SApLAL0usv5-Q6q=nBPOFMHrHGaKAtMw@mail.gmail.com>
+ <20260129003753.GZ1641016@ziepe.ca>
+ <aXqx3_eE0rNh6nP0@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.300.41.1.7\))
-Subject: Re: [PATCHv6 11/17] mm/hugetlb: Remove fake head pages
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Muchun Song <muchun.song@linux.dev>
-In-Reply-To: <20260202155634.650837-12-kas@kernel.org>
-Date: Tue, 3 Feb 2026 17:50:34 +0800
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@redhat.com>,
- Matthew Wilcox <willy@infradead.org>,
- Usama Arif <usamaarif642@gmail.com>,
- Frank van der Linden <fvdl@google.com>,
- Oscar Salvador <osalvador@suse.de>,
- Mike Rapoport <rppt@kernel.org>,
- Vlastimil Babka <vbabka@suse.cz>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Zi Yan <ziy@nvidia.com>,
- Baoquan He <bhe@redhat.com>,
- Michal Hocko <mhocko@suse.com>,
- Johannes Weiner <hannes@cmpxchg.org>,
- Jonathan Corbet <corbet@lwn.net>,
- Huacai Chen <chenhuacai@kernel.org>,
- WANG Xuerui <kernel@xen0n.name>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Albert Ou <aou@eecs.berkeley.edu>,
- Alexandre Ghiti <alex@ghiti.fr>,
- kernel-team@meta.com,
- linux-mm@kvack.org,
- linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org,
- loongarch@lists.linux.dev,
- linux-riscv@lists.infradead.org
-Content-Transfer-Encoding: 7bit
-Message-Id: <1FFEED62-343D-433C-BB81-EB646D066AC9@linux.dev>
-References: <20260202155634.650837-1-kas@kernel.org>
- <20260202155634.650837-12-kas@kernel.org>
-To: Kiryl Shutsemau <kas@kernel.org>
-X-Migadu-Flow: FLOW_OUT
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aXqx3_eE0rNh6nP0@google.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75011-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,redhat.com,infradead.org,gmail.com,google.com,suse.de,kernel.org,suse.cz,oracle.com,nvidia.com,suse.com,cmpxchg.org,lwn.net,xen0n.name,dabbelt.com,sifive.com,eecs.berkeley.edu,ghiti.fr,meta.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.infradead.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[ziepe.ca,google.com,amd.com,vger.kernel.org,kvack.org,kernel.org,linux-foundation.org,linux.intel.com,alien8.de,intel.com,lwn.net,redhat.com,cmpxchg.org,infradead.org,zytor.com,suse.cz,arm.com,amazon.com,nvidia.com,suse.de,linux.dev,oracle.com,maciej.szmigiero.name,loongson.cn,efficios.com,digikod.net,ellerman.id.au,amazon.es,dabbelt.com,sifive.com,gmail.com,goodmis.org,amazon.co.uk,linutronix.de,zeniv.linux.org.uk,huawei.com];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75014-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[muchun.song@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	FROM_NEQ_ENVFROM(0.00)[yilun.xu@linux.intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[98];
+	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,linux.dev:dkim,linux.dev:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: D320FD72E9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:dkim]
+X-Rspamd-Queue-Id: C6B45D76D1
 X-Rspamd-Action: no action
 
+> +1.  For guest_memfd, we initially defined per-VM memory attributes to track
+> private vs. shared.  But as Ackerley noted, we are in the process of deprecating
+> that support, e.g. by making it incompatible with various guest_memfd features,
+> in favor of having each guest_memfd instance track the state of a given page.
+> 
+> The original guest_memfd design was that it would _only_ hold private pages, and
+> so tracking private vs. shared in guest_memfd didn't make any sense.  As we've
+> pivoted to in-place conversion, tracking private vs. shared in the guest_memfd
+> has basically become mandatory.  We could maaaaaybe make it work with per-VM
+> attributes, but it would be insanely complex.
+> 
+> For a dmabuf fd, the story is the same as guest_memfd.  Unless private vs. shared
+> is all or nothing, and can never change, then the only entity that can track that
+> info is the owner of the dmabuf.  And even if the private vs. shared attributes
+> are constant, tracking it external to KVM makes sense, because then the provider
+> can simply hardcode %true/%false.  
 
+For CoCo-VM and Tee-IO, I'm wondering if host or KVM has to maintain
+the private/shared attribute for "assigned MMIO". I'm not naming them
+"host MMIO" cause unlike RAM host never needs to access them, either in
+private manner or shared manner.
 
-> On Feb 2, 2026, at 23:56, Kiryl Shutsemau <kas@kernel.org> wrote:
-> 
-> HugeTLB Vmemmap Optimization (HVO) reduces memory usage by freeing most
-> vmemmap pages for huge pages and remapping the freed range to a single
-> page containing the struct page metadata.
-> 
-> With the new mask-based compound_info encoding (for power-of-2 struct
-> page sizes), all tail pages of the same order are now identical
-> regardless of which compound page they belong to. This means the tail
-> pages can be truly shared without fake heads.
-> 
-> Allocate a single page of initialized tail struct pages per NUMA node
-> per order in the vmemmap_tails[] array in pglist_data. All huge pages of
-> that order on the node share this tail page, mapped read-only into their
-> vmemmap. The head page remains unique per huge page.
-> 
-> Redefine MAX_FOLIO_ORDER using ilog2(). The define has to produce a
-> compile-constant as it is used to specify vmemmap_tail array size.
-> For some reason, compiler is not able to solve get_order() at
-> compile-time, but ilog2() works.
-> 
-> Avoid PUD_ORDER to define MAX_FOLIO_ORDER as it adds dependency to
-> <linux/pgtable.h> which generates hard-to-break include loop.
-> 
-> This eliminates fake heads while maintaining the same memory savings,
-> and simplifies compound_head() by removing fake head detection.
-> 
-> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
+Traditionally, host maps these MMIOs only because KVM needs HVA->HPA
+mapping to find pfn and setup KVM MMU. Now we have FD based approach so
+with dmabuf fd, host no longer needs mapping. Does that give confidence
+that KVM only needs to setup MMU for this type of MMIO as private/shared
+according to guest's intension (which is fault->is_private)?
 
-Reviewed-by: Muchun Song <muchun.song@linux.dev>
+We don't need to track private/shared in VFIO MMIO dmabuf, only to keep
+them unmappable.
 
-
+> 
+> As for _how_ to do that, no matter where the attributes are stored, we're going
+> to have to teach KVM to play nice with a non-guest_memfd provider of private
+> memory.
+> 
 
