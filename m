@@ -1,175 +1,143 @@
-Return-Path: <linux-doc+bounces-75126-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75124-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EAvIF79mgmmETgMAu9opvQ
-	(envelope-from <linux-doc+bounces-75126-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:21:03 +0100
+	id IEduG5FmgmlOTgMAu9opvQ
+	(envelope-from <linux-doc+bounces-75124-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:20:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3465DECE0
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:21:02 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DBB0EDECD1
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 22:20:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 98AAD301DB90
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:21:01 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 29F8C3001AFB
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 21:19:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BFC322DCF61;
-	Tue,  3 Feb 2026 21:21:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0723330E839;
+	Tue,  3 Feb 2026 21:19:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bjv9a/gN"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PwKwJtZz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 517632DF6F6
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 21:20:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7A642F90C4
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 21:19:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770153660; cv=none; b=qYjXqr5dXTf3t8EglGN19mNEIMp6Ka3u7cfFdzKgSJf7FSPQRPJOzHl+Y+7fsr7kk+N5sNU1TvKYckAyYkf8PFnXmhSRgjvnRv1QHmkWz3cpaOBJoXMg2bWmcCr/4SHdNUfbfcKrtNlVHl4mVKK//jxjrd8ecLI1X1P5mL6rFDk=
+	t=1770153593; cv=none; b=iUB41nf3ufc6NIkjthHPvzClVhv6TISezapXgSExtV0snWRH3BR5yETmTsTQ1tkKKQM4spYGleXbh5qVyi3+E8uIGchSrJ1+A0QxNep31c1jCM61EFvx6pwIvSInt8KtyGvUqfcVb7HBUKIiaBnz4aootngmPr/tBLTPv/fGlyo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770153660; c=relaxed/simple;
-	bh=FmkY4SatpzjGfLIPpd6Gpluj/xLWyAKYAcW7/q3R5Ss=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=FPkDeyy0idqQUoUmE/qqcc5IiukcDJQSA99wtp9lFUPhDdzzj0sHabkGpzxUJ9vlW9i804JCKVPqV9MN7mVfDAygXWNvvGgOv+7qOrMbYLAtj90zXPW3jrBjCaYfN25yeXCbfKvsT+gAP7E1XLxqZTNKBLQ7NHDbSPAOsMlP9Cc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bjv9a/gN; arc=none smtp.client-ip=209.85.210.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7d19d3c7208so3339822a34.0
-        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 13:20:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770153658; x=1770758458; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Dw9yO7mwTQnQ0r65U4QsCYOKxY/82LUhk+hkyZXe+sY=;
-        b=bjv9a/gNoA37N7LkV7D/4YEOZA126g/gfEYRycvNGnbtn6UWxwlquYAxKHTL2EmG4y
-         N3iIMf1/oFDKOyNE66ajmNkX6gyFzw/1Vt+RKAYjKV7iHD0wJTzUr8HceVlxH0wycERd
-         HGYh2q2Gi+HFUNRBs3i/pdTAY/A1zbma4xou6xp1PdNdgORbURuyy2fUVXEJnH8Dg7fM
-         gnZWgqfvwgL2bnW2XrH3io2IK+UYIWAVJ79WmohKkOFUKME/zA30btOIw5A8FRLif93A
-         32fUa57eK50/3z1V20ezS99qZ8/x6w+Rdgqt44n2ybjy5WZZFRwZ3P2X65ag9apBFcpu
-         Vr1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770153658; x=1770758458;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Dw9yO7mwTQnQ0r65U4QsCYOKxY/82LUhk+hkyZXe+sY=;
-        b=mrmRoWk9CAtue9w8uMjB81UFK9G6CjlSAG0dER5qAD31zW9bEANKLtKlZ+hX3SjbOS
-         Tv7PwUjX9sLJ8kJRfnWHTixcRB8/iHIMfeQkrN2OVGLyr466YcKMP2rww3eYhlLCRfbd
-         rZyY1ZIKknsXz4m1RyH5aCdvKJSclhf3Jcj3yOeBOGIfhJ/oblG4UhBsf+crmycowqi7
-         roVJxQSr69dpFLrBAap2IaGpChQwWGuGnobwfmbQ5E6rA+SyLu9QVF2gesKIP6kH/Kjf
-         pSIyF/M/DhovdBD2FenUA5ze/OPCzo5XSFAt4tHRD5WwSeJFYSd63Us2uMo53rTMfw5P
-         csTw==
-X-Forwarded-Encrypted: i=1; AJvYcCXEGgIYtzVyLDH7jzQjOCT5s6BuD29ip+V4Ulwr1o/0gkECX6zVrRp4Ua0z4kAzAHlwz/r3bG39a5o=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyt0qyNxESHmoYre2HnHgaGxkOLhMBqWReGG4qFDfsBda4L1rvd
-	u1Sy+gHjVJ1B0H1rcEfi7nPWVnljW32iZIC00DrAEaVUpdtb+LFRJ0xZ
-X-Gm-Gg: AZuq6aJYKuX3Xhfb1N/35T4ibSTJJXpNpAVQPl2eJPadmIl1tln0MJlVsLptTofpcXL
-	Y1QkyqkZ/U6nXQXWJ755XP5+7RXGvOktqbXdJKy9nZkxeuZoAWN6MUn3p/ALFS11NDh9ulJyJcH
-	PuPm/k0pEYr5837N72i+whZb6E6V3OIY2PSGkPMKHrk4CDGBQzzb0UX4Xu08gdGpsbGWGtd+Geg
-	Wso/dNIsXAwUCplFuKL+gjcv+2O3U8OSLwaXFQ/V+kfjYmy505yu2fDtgZvrSPALZNn4EtkWJ2S
-	TK/KRZzotOeRQv62x1AAy2FLw+l6fU9mtTOcGDt97WfTWMubLsww3WorcFJ3NKBZ4pik+am5YiV
-	ICGaQVNrPeQv+fWQZNyVxJP2fJpcDG79Q9erDYivdhj9PzZYMyu4KM1gPQurZUCpdciHJt+PuQ2
-	ubrQ/v0dtxyFfZNm3RXiB6AfdhObCmV/Qellp8
-X-Received: by 2002:a05:6830:91d:b0:7cf:e4a1:8a9d with SMTP id 46e09a7af769-7d4489af712mr603151a34.14.1770153658124;
-        Tue, 03 Feb 2026 13:20:58 -0800 (PST)
-Received: from frodo (c-98-38-17-99.hsd1.co.comcast.net. [98.38.17.99])
-        by smtp.googlemail.com with ESMTPSA id 46e09a7af769-7d4490f35b7sm454939a34.1.2026.02.03.13.20.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Feb 2026 13:20:57 -0800 (PST)
-From: Jim Cromie <jim.cromie@gmail.com>
-To: intel-gfx-trybot@lists.freedesktop.org
-Cc: Jim Cromie <jim.cromie@gmail.com>,
-	linux-doc@vger.kernel.org,
-	Louis Chauvet <louis.chauvet@bootlin.com>
-Subject: [PATCH 05/60] docs/dyndbg: explain flags parse 1st
-Date: Tue,  3 Feb 2026 14:19:26 -0700
-Message-ID: <20260203212027.1130311-10-jim.cromie@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260203212027.1130311-1-jim.cromie@gmail.com>
-References: <20260203212027.1130311-1-jim.cromie@gmail.com>
+	s=arc-20240116; t=1770153593; c=relaxed/simple;
+	bh=utGPEkhMKGkSiwwyZGWFzoQYavLqaML2wkWQSCyQmUg=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=bYTB2lKyBHY+U9DXRwfEhGA2ActkAywQ++wFWZHkoJKTJa3qL8kGUNK3Nt5Nombp5/yYxKZHo75GTtp3oMqLmhBAPHg9obcKZN0KvcbeMWJVsNN2kLJBsWuuuN1bugheS+tk0NXrmXyaxkvNnJ3gIhkXASQQtY07Stzw9BYBaNQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PwKwJtZz; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92EADC2BC86
+	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 21:19:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770153593;
+	bh=utGPEkhMKGkSiwwyZGWFzoQYavLqaML2wkWQSCyQmUg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=PwKwJtZz6Hm073k9ybVBlsX5trEGaU8AVDVp745EEB5WbZmlUusi9Puik/xkxdSeB
+	 FQBkg/BznwGphf87z/GTNAE3iyWLku2O1+9B7tKjkyDdcvYYpRSyA35PnlduUZoKnX
+	 VmE/TRvg+lWZlP3iFgZ+0yWZ0MDFQuC7DV175wPKOw8pTgP+j5H2tnxWQdrLkv8XyN
+	 xc4DxS1+oWU14tcNcuJLytmEgjUhxnXGvdBO/klCYT5npaO4Oi/5yH6Gn9kHOqjaqE
+	 xoKXxn8yZjbh8FwwvRjjCUu3jiN9+mAH5YOAXSFPMz/SzjDjPptWISa5QFqIvHjxCC
+	 x83w6v02p4rXQ==
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-669f0b0290fso326925eaf.1
+        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 13:19:53 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCW+6zR2O98cK+ZQhDMeHPffXexk7KhFdxxWBAT4jvG/nGzGS6uxDYhymTceugiK3NCN0Wi8sm7GTdU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwlDyvDvUjGety23+yvw05Bq+9R/l6Uh8RXq/lfg1TH5yhgri+c
+	4nRUgKEC0UhJYPAJC9AzQgfWSvHzuRmn0Al/34K91tQjj4bqDQet6EXe/UPty3FAciWjNSqD1Mu
+	gCFw+GaeCRXrdqmGogulBCl0cn/ClEe8=
+X-Received: by 2002:a05:6820:138e:b0:663:e8d:ceb with SMTP id
+ 006d021491bc7-66a22599fdbmr388937eaf.47.1770153592592; Tue, 03 Feb 2026
+ 13:19:52 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260203093501.1138721-1-tianyaxiong@kylinos.cn>
+In-Reply-To: <20260203093501.1138721-1-tianyaxiong@kylinos.cn>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Tue, 3 Feb 2026 22:19:41 +0100
+X-Gmail-Original-Message-ID: <CAJZ5v0jup72gcP4gdJPjYQebwsMrcWC2u0soqekoTQCR0UDEwA@mail.gmail.com>
+X-Gm-Features: AZwV_QjWjKjp4S9Wee-STdk_8ZkmHt_O_EEJULrWSbXHSDNtgIlgLU-CszB1b9E
+Message-ID: <CAJZ5v0jup72gcP4gdJPjYQebwsMrcWC2u0soqekoTQCR0UDEwA@mail.gmail.com>
+Subject: Re: [PATCH] cpufreq: docs: Update description of rate_limit_us
+ default value
+To: Yaxiong Tian <tianyaxiong@kylinos.cn>
+Cc: rafael@kernel.org, viresh.kumar@linaro.org, corbet@lwn.net, 
+	skhan@linuxfoundation.org, linux-pm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,bootlin.com];
-	TAGGED_FROM(0.00)[bounces-75126-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-75124-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,bootlin.com:email]
-X-Rspamd-Queue-Id: E3465DECE0
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.gmail.com:mid,kylinos.cn:email]
+X-Rspamd-Queue-Id: DBB0EDECD1
 X-Rspamd-Action: no action
 
-When writing queries to >control, flags are parsed 1st, since they are
-the only required field, and they require specific compositions.  So
-if the flags draw an error (on those specifics), then keyword errors
-aren't reported.  This can be mildly confusing/annoying, so explain it
-instead.
+On Tue, Feb 3, 2026 at 10:35=E2=80=AFAM Yaxiong Tian <tianyaxiong@kylinos.c=
+n> wrote:
+>
+> Due to commit 37c6dccd6837 ("cpufreq: Remove LATENCY_MULTIPLIER")
+> updating the acquisition logic of cpufreq_policy_transition_delay_us(),
+> the original description of 2ms has become inaccurate.
+>
+> Therefore, update the description of the default value for
+> rate_limit_us from 2ms to 1ms.
+>
+> Signed-off-by: Yaxiong Tian <tianyaxiong@kylinos.cn>
+> ---
+>  Documentation/admin-guide/pm/cpufreq.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/admin-guide/pm/cpufreq.rst b/Documentation/adm=
+in-guide/pm/cpufreq.rst
+> index 738d7b4dc33a..dbe6d23a5d67 100644
+> --- a/Documentation/admin-guide/pm/cpufreq.rst
+> +++ b/Documentation/admin-guide/pm/cpufreq.rst
+> @@ -439,7 +439,7 @@ This governor exposes only one tunable:
+>  ``rate_limit_us``
+>         Minimum time (in microseconds) that has to pass between two conse=
+cutive
+>         runs of governor computations (default: 1.5 times the scaling dri=
+ver's
+> -       transition latency or the maximum 2ms).
+> +       transition latency or 1ms if the driver does not provide a latenc=
+y value).
+>
+>         The purpose of this tunable is to reduce the scheduler context ov=
+erhead
+>         of the governor which might be excessive without it.
+> --
 
-cc: linux-doc@vger.kernel.org
-Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
- .../admin-guide/dynamic-debug-howto.rst         | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
-
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 4b14d9fd0300..9c2f096ed1d8 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -109,10 +109,19 @@ The match-spec's select *prdbgs* from the catalog, upon which to apply
- the flags-spec, all constraints are ANDed together.  An absent keyword
- is the same as keyword "*".
- 
--
--A match specification is a keyword, which selects the attribute of
--the callsite to be compared, and a value to compare against.  Possible
--keywords are:::
-+Note that since the match-spec can be empty, the flags are checked 1st,
-+then the pairs of keyword and value.  Flag errs will hide keyword errs::
-+
-+  bash-5.2# ddcmd mod bar +foo
-+  dyndbg: read 13 bytes from userspace
-+  dyndbg: query 0: "mod bar +foo" mod:*
-+  dyndbg: unknown flag 'o'
-+  dyndbg: flags parse failed
-+  dyndbg: processed 1 queries, with 0 matches, 1 errs
-+
-+So a match-spec is a keyword, which selects the attribute of the
-+callsite to be compared, and a value to compare against.  Possible
-+keywords are::
- 
-   match-spec ::= 'func' string |
- 		 'file' string |
--- 
-2.52.0
-
+Applied as 6.20/7.0 material, thanks!
 
