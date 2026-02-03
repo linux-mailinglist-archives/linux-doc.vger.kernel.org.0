@@ -1,169 +1,245 @@
-Return-Path: <linux-doc+bounces-75034-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75037-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kEevN4rugWlAMwMAu9opvQ
-	(envelope-from <linux-doc+bounces-75034-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:48:10 +0100
+	id YOcgGprvgWlAMwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75037-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:52:42 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D414D949F
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:48:10 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C1970D9622
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Feb 2026 13:52:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C051A300B44F
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 12:45:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E3EF030C1EE2
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Feb 2026 12:45:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4D0B345CBE;
-	Tue,  3 Feb 2026 12:45:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XaRNbUqh"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 342843451BB;
+	Tue,  3 Feb 2026 12:45:52 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0FD43451C6
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 12:45:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD05C344DAC;
+	Tue,  3 Feb 2026 12:45:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770122722; cv=none; b=lLk43O93R43YgmDUOVkJrLDZF0opNtdCseZpsPF8anRQnk77cvpoYjUq3rb8EhTV4ZukSMndbiC9cW8bwXIVaPsmTspIHvJedrnSIYSiAKeow5QISaxGultkSNXLXrVEJvzFjaJbDAFB4H1alPawEpLrZn1GFxZRQanuqvqamkY=
+	t=1770122752; cv=none; b=hhCx1nzLQZ65ngsURRH3AVDXqi/Vj0+Z4tBDoSOjr2icBa9KXeBZh7JeL0cMyBsNwf1ARFc4d+Jv0mtCxVf4MptWJEm4tq4xc14H4KEP01qxV02oGxYewh5lF4tqMa3hLgfTLCyqdRTfgAnyivVBmF2BnzqYfPonv5Pce7j+dF4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770122722; c=relaxed/simple;
-	bh=+82RPlBYDQHhn4O86HZF3vxIxA0tssEvTGqVmKABwno=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SNmon03aOJYMqO9FzLnznYK1cLOKbki8JEGAXujud4x+EbyGH/MgrZvYnxQ/ve2k+rrup17zJbSH4tl99p65KmbTYhC/nJ+p0vi/YwtI1Nn18XBkGl2Jr/7Zz0r9KMBh7V3gLjYOz/z2K86gkuuQ+zHOWCzBsyJo+3KBWpAQOfo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XaRNbUqh; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C629C2BC86
-	for <linux-doc@vger.kernel.org>; Tue,  3 Feb 2026 12:45:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770122722;
-	bh=+82RPlBYDQHhn4O86HZF3vxIxA0tssEvTGqVmKABwno=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=XaRNbUqhYPj9cmZVqJT5P2uwkLY63Aw+AvlTDvf1dX1N7qUvhpe5bWNNL48dHXQdK
-	 wf2L5f/VPg+pzhbJ0B7VRiHnNqhbiEp/btQuZHCssCBkWp1atTb9VVzP+ebDquGSSx
-	 FpYo8kb8c3KojUfnJut/npM8Fe2nMxBtJAXzcWVjFLkHY5aVKD7/lzb5eHRPQZ7sKh
-	 7/XK8NTOHvHcYOCXGBArCR/fwqgrH8gv0WX7XBNp4oPZcBRn2KCYnX4Jq7kDItyXy4
-	 dfUkQ/WTAmTdIqUbd1yFohu9VgOFxuyYfA8g8PhnRgH9oWQ/xhm9Ib2wqFLJmtkRLx
-	 f1AV/RcQQElGQ==
-Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-7d18dd2adf7so3301830a34.1
-        for <linux-doc@vger.kernel.org>; Tue, 03 Feb 2026 04:45:22 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCUmeaxchGqXngDW1FWbUiR6gBA7qCkPtBdLBYRsCAspN7r6GHWqXsDuMkE9zo6Ngi3/qnfAIKwCeV0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzhalAtNnuEV/BK/lYl2s2vuOfYQWbRsyu4tRv1/0jEVvitrz6D
-	sWhgk69ywKE7O7VFPC616LqwAMvPkFAKpDd2bjLXXxXKsdNgrJhVQgkqsGuN6Nae/ELNex8/hsN
-	RqcOt+hfG7us50ll+phu2CYTXz+rDuw4=
-X-Received: by 2002:a05:6820:623:b0:662:ffc5:cedc with SMTP id
- 006d021491bc7-6630f01c0a5mr5982202eaf.1.1770122721539; Tue, 03 Feb 2026
- 04:45:21 -0800 (PST)
+	s=arc-20240116; t=1770122752; c=relaxed/simple;
+	bh=1x9Ls8UzR50Q9FACyJGxRFhTk5ENzdtKx8wDZoKx+8M=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=fe2wqq++Z1XbL8kDgGGxR5THNijn27SjRNPrESD6KKxiWjy86dkH+eITXNF7ICM+O30LyEIKZKrBLZ4KAdTy5M37Y6jFQFixuoflCKq7tOpBfnlOYiTaMjqbHkSTsJ1GkuTJwOTlTkQ69xjSOJ/sPrnDP4Y0xWcqaPefh64u/bg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.40.57.136])
+	by gateway (Coremail) with SMTP id _____8DxvsPx7YFp0V0PAA--.50219S3;
+	Tue, 03 Feb 2026 20:45:37 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.40.57.136])
+	by front1 (Coremail) with SMTP id qMiowJDxzsLk7YFp3Bc_AA--.51803S2;
+	Tue, 03 Feb 2026 20:45:24 +0800 (CST)
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+To: chenhuacai@kernel.org,
+	kernel@xen0n.name,
+	corbet@lwn.net,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	tglx@linutronix.de,
+	jiaxun.yang@flygoat.com,
+	maobibo@loongson.cn
+Cc: loongarch@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>
+Subject: [PATCH v11 0/4] Loongarch irq-redirect support
+Date: Tue,  3 Feb 2026 20:45:17 +0800
+Message-ID: <20260203124522.2288900-1-zhangtianyang@loongson.cn>
+X-Mailer: git-send-email 2.41.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260129104817.3752340-1-sumitg@nvidia.com> <20260129104817.3752340-5-sumitg@nvidia.com>
- <4432fa04-e67c-422a-aae4-2938be431985@huawei.com> <c96312c7-b13f-4f5c-9512-cc0382c1c77b@nvidia.com>
- <74f3e6cf-7c13-43e6-a8f6-2b46184b8ad6@gmail.com> <944fc140-e5c5-425f-a6ad-883e87eed8a3@nvidia.com>
-In-Reply-To: <944fc140-e5c5-425f-a6ad-883e87eed8a3@nvidia.com>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Tue, 3 Feb 2026 13:45:09 +0100
-X-Gmail-Original-Message-ID: <CAJZ5v0hUdLsh8UK5G6rHHD49RQGYLAiU1J-11DK-fLTKnuqhUQ@mail.gmail.com>
-X-Gm-Features: AZwV_QhB065_tKI7QjTUgxYReeYNGWgeu7zDKGuhRbpPyUYQlroYk6sWK9959V4
-Message-ID: <CAJZ5v0hUdLsh8UK5G6rHHD49RQGYLAiU1J-11DK-fLTKnuqhUQ@mail.gmail.com>
-Subject: Re: [PATCH v7 4/7] ACPI: CPPC: add APIs and sysfs interface for min/max_perf
-To: Sumit Gupta <sumitg@nvidia.com>
-Cc: Russell Haley <yumpusamongus@gmail.com>, "zhenglifeng (A)" <zhenglifeng1@huawei.com>, 
-	pierre.gondois@arm.com, "Rafael J. Wysocki" <rafael@kernel.org>, viresh.kumar@linaro.org, 
-	ionela.voinescu@arm.com, lenb@kernel.org, robert.moore@intel.com, 
-	corbet@lwn.net, rdunlap@infradead.org, ray.huang@amd.com, 
-	gautham.shenoy@amd.com, mario.limonciello@amd.com, perry.yuan@amd.com, 
-	zhanjie9@hisilicon.com, linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org, 
-	linux-doc@vger.kernel.org, acpica-devel@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-tegra@vger.kernel.org, treding@nvidia.com, 
-	jonathanh@nvidia.com, vsethi@nvidia.com, ksitaraman@nvidia.com, 
-	sanjayc@nvidia.com, nhartman@nvidia.com, bbasu@nvidia.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJDxzsLk7YFp3Bc_AA--.51803S2
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBj93XoW3Gr4xZryrZw1kWr17AF13Awc_yoW7Cry7pF
+	WUuas8trs5CrWxG3Z7ua18ZFy3Cry8GrW7Xa1Skw1293s8ur1vgFy8KFy5XFyrGrs5K3W2
+	qr4qqrWUuF1DAagCm3ZEXasCq-sJn29KB7ZKAUJUUUU3529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUBIb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+	xVW8Jr0_Cr1UM2kKe7AKxVWUAVWUtwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
+	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
+	tVWrXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7V
+	AKI48JMxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
+	6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
+	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xII
+	jxv20xvE14v26ryj6F1UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw2
+	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x02
+	67AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8_gA5UUUUU==
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75034-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,huawei.com,arm.com,kernel.org,linaro.org,intel.com,lwn.net,infradead.org,amd.com,hisilicon.com,vger.kernel.org,lists.linux.dev,nvidia.com];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
+	DMARC_NA(0.00)[loongson.cn];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TAGGED_FROM(0.00)[bounces-75037-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.968];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[zhangtianyang@loongson.cn,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,nvidia.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 0D414D949F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,loongson.cn:mid]
+X-Rspamd-Queue-Id: C1970D9622
 X-Rspamd-Action: no action
 
-On Tue, Feb 3, 2026 at 10:41=E2=80=AFAM Sumit Gupta <sumitg@nvidia.com> wro=
-te:
->
-> >>> Hi Sumit,
-> >>>
-> >>> I am thinking that maybe it is better to call these two sysfs interfa=
-ce
-> >>> 'min_freq' and 'max_freq' as users read and write khz instead of raw
-> >>> value.
-> >> Thanks for the suggestion.
-> >> Kept min_perf/max_perf to match the CPPC register names
-> >> (MIN_PERF/MAX_PERF), making it clear to users familiar with
-> >> CPPC what's being controlled.
-> >> The kHz unit is documented in the ABI.
-> >>
-> >> Thank you,
-> >> Sumit Gupta
-> > On my x86 machine with kernel 6.18.5, the kernel is exposing raw values=
-:
-> >
-> >> grep . /sys/devices/system/cpu/cpu0/acpi_cppc/*
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/feedback_ctrs:ref:34290401885656=
-8
-> > del:437439724183386
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/guaranteed_perf:63
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/highest_perf:88
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/lowest_freq:0
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/lowest_nonlinear_perf:36
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/lowest_perf:1
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/nominal_freq:3900
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/nominal_perf:62
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/reference_perf:62
-> > /sys/devices/system/cpu/cpu0/acpi_cppc/wraparound_time:1844674407370955=
-1615
-> >
-> > It would be surprising for a nearby sysfs interface with very similar
-> > names to use kHz instead.
-> >
-> > Thanks,
-> >
-> > Russell Haley
->
-> I can rename to either of the below:
-> - min/max_freq: might be confused with scaling_min/max_freq.
-> - min/max_perf_freq: keeps the CPPC register association clear.
->
-> Rafael, Any preferences here?
+This series of patches introduces support for interrupt-redirect
+controllers, and this hardware feature will be supported on 3C6000
+for the first time
 
-On x86 the units in CPPC are not kHz and there is no easy reliable way
-to convert them to kHz.
+change log:
+        v0->v1:
+        1.Rename the model names in the document.
+        2.Adjust the code format.
+        3.Remove architecture - specific prefixes.
+        4.Refactor the initialization logic, and IR driver no longer set 
+	  AVEC_ENABLE.
+        5.Enhance compatibility under certain configurations.
 
-Everything under /sys/devices/system/cpu/cpu0/acpi_cppc/ needs to be
-in CPPC units, not kHz (unless, of course, kHz are CPPC units).
+        v1->v2:
+        1.Fixed an erroneous enabling issue.
+
+        v2->v3
+        1.Replace smp_call with address mapping to access registers
+        2.Fix some code style issues
+
+        v3->v4
+        1.Provide reasonable comments on the modifications made to
+	  IRQ_SET_MASK_OK_DONE
+        2.Replace meaningless empty functions with parent_mask/unmask/ack
+        3.Added and indeed released resources
+        4.Added judgment for data structure initialization completion to 
+          avoid duplicate creation during cpuhotplug
+        5.Fixed the code style and some unnecessary troubles
+
+        v4->v5
+	1.when it is detected in avecintc_set_affinity that the current affinity
+	remains valid, the return value is modified to IRQ_SET_MASK_OK_DONE.
+	  After the introduction of redirect-domain, for each interrupt source, 
+	avecintc-domain only provides the CPU/interrupt vector, while redirect-domain 
+	provides other operations to synchronize interrupt affinity information 
+	among multiple cores. 	  The original intention is to notify the cascaded
+	redirect_set_affinity that multi-core synchronization is not required. 
+	  However, this introduces some compatibility issues, such as the new return
+	value causing msi_domain_set_affinity to no longer perform irq_chip_write_msi_msg.
+	  1) When redirect exist in the system, the msi msg_address and msg_data no 
+	longer changes after the allocation phase, so it does not actually require updating
+	the MSI message info.
+	  2) When only avecintc exists in the system, the irq_domain_activate_irq
+	interface will be responsible for the initial configuration of the MSI message,
+	which is unconditional. After that, if unnecessary, no modification to the MSI
+	message is alse correctly.
+
+	2.Restructured the macro definitions to make them appear more logical.
+
+	3.Adjusted the layout of members struct redirect_queue\struct redirect_table and 
+	struct redirect_item, making redirect_item the primary interface for accessing
+	other members.
+
+	4.The method of accessing registers has been standardized to MMIO.
+
+	5.Initialize variables at declaration whenever possible.
+
+	6.Replaced the the "struct page" in redirect_table and redirect_queue with "struct folio".
+
+	7.Adjusted the initialization process so that all irq_desc configurations are completed
+	during driver initialization, no longer relying on specific CPUs being online.
+
+	8.Refactored portions of the code to make them more concise and logical.
+
+	v5->v6
+	Fix the warning messages reported by the test bot.
+
+	v6->v7:
+	1 Split patch:
+ 	 1) Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+	 2) LoongArch: Architectural preparation for Redirect irqchip
+	 3) irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
+	 4) irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep affinity
+	 5) irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+	2 Use sizeof() to replace fixed-size macro definitions.
+
+	3 Unify the data types of the parameters for redirect_write/read_reg*.
+
+	4 rename irde_invalid_entry_node to irde_invalid_entry and add comments 
+	  explaining the 'raddr'.
+
+	5 Fix the critical condition check bug in redirect_table_alloc.
+
+	6 Use clear_bit to replace bitmap_release_region
+
+	7 Delete some goto and handle the failure when it occurs.
+
+	8 Removed the check for the `CONFIG_ACPI` macro, as CONFIG_ACPI 
+          is selected by the arch/loongarch/Kconfig.
+
+	9 Fixed the incorrect error flow in redirect_acpi_init.
+
+	v7->v8:
+	1 Apologies for the chaotic email delivery due to some network issues earlier.
+
+	2 redirect_table_alloc now allocates nr_irqs consecutive redirect table entries to 
+	  support multiple MSI devices.
+
+	v8->v9:
+	1 Rebased and reorganized the patches on the latest irq/core branch.
+
+	v9->v10
+	1 Rewrite the changelog in the order of background, problem and solution.
+	2 Fix the potential undefined issue with 'order' in the redirect_table_alloc.
+	3 Use GPL-2.0-only as SPDX-License-Identifier.
+	4 Update the code creation time.
+	5 Rearrange the order of the header files alphabetically.
+	6 Refactor portions of the code and remove unnecessary line breaks.
+	7 Rename __redirect_irde_fini() to redirect_free_irde() and label it with __init.
+
+	v10->v11
+	1 Adjust the name of patch 0002.
+	2 Simplify some code.
+	3 Fix the incorrect data type.
+
+Tianyang Zhang (4):
+  Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+  irqchip/irq-loonarch-avec: Prepare for interrupt redirection support
+  irqchip/loongarch-avec.c: return IRQ_SET_MASK_OK_DONE when keep
+    affinity
+  irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+ .../arch/loongarch/irq-chip-model.rst         |  38 ++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   |  37 ++
+ drivers/irqchip/Makefile                      |   2 +-
+ drivers/irqchip/irq-loongarch-avec.c          |  20 +-
+ drivers/irqchip/irq-loongarch-ir.c            | 522 ++++++++++++++++++
+ drivers/irqchip/irq-loongson.h                |  19 +
+ 6 files changed, 624 insertions(+), 14 deletions(-)
+ create mode 100644 drivers/irqchip/irq-loongarch-ir.c
+
+-- 
+2.41.0
+
 
