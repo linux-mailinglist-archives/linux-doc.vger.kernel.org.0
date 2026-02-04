@@ -1,537 +1,326 @@
-Return-Path: <linux-doc+bounces-75277-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75279-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id j+hQObvBg2mMuAMAu9opvQ
-	(envelope-from <linux-doc+bounces-75277-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 23:01:31 +0100
+	id 0NyqB1rZg2nEuwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75279-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 00:42:18 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DF26ECE87
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 23:01:31 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 647ABED527
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 00:42:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 25718300C27D
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Feb 2026 22:01:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D76DB300AB16
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Feb 2026 23:42:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CC1A262A6;
-	Wed,  4 Feb 2026 22:01:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C001839A7ED;
+	Wed,  4 Feb 2026 23:42:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ScEQUJ+2";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="Gf1v2rgd"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="Q6HQLuVs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012048.outbound.protection.outlook.com [52.101.48.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 191E921770A
-	for <linux-doc@vger.kernel.org>; Wed,  4 Feb 2026 22:01:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D417352FAC;
+	Wed,  4 Feb 2026 23:42:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.48.48
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770242487; cv=pass; b=r7SkHLVgnWJ2P88VSlVtDuLwHE+swxv7/ifc6j2AY5f7X//AxVLvCCFCJMpEqqCS7msjuIBcQ38xxX306HJGFz1jiXmCFRDsaReq7vvMOSiMcvXr2fIoyJkxyD/iCdVLo6sdGegu+BF6lH3QlcUfjqakXfGEhSLOVv/Gj/vDzyw=
+	t=1770248534; cv=fail; b=d/+A3fQ8GpMcnpWTTUClOIkG6djyegx97I2uHHI9scnfeoxAShICUdjialZJd6LM/69VRercLtqK/fdq4zkIW6ymz4Ci1/MUUa3Iz0QAGqTU7mZi5Vl3mo7D9Do+qY+f5A1BtYdGhMcjoM5uTnTVWVFowm15neEy2lZNOoGyxi0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770242487; c=relaxed/simple;
-	bh=ZATpSEkEjb493SHF9kG4VXaKrQ4+5P8h3wHPNtIoUME=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VoW4wFliyUxBgkZWue3pw1LryHiWMdPnqX/mHDvzb0pgx+axGo9t1Dj33mbEwFuoWGmvr5wzF4KJwcoLjWOnOa7ZPoUbA2LqXiUaqbusTEkAUM4nzjGd3Nu8dNrfA+4EDyDQocKix5z8nrShn6SdiNtIVL9+H5rArPgGMuHNhCQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=ScEQUJ+2; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=Gf1v2rgd; arc=pass smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1770242486;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BQ9b4xt7wkni1thV96wDs9A59mL4ne2sOksOF+2S8Co=;
-	b=ScEQUJ+2zczmrtB877V4T8UBoeAfiQNjhvzYRPFHLr8IhfJVIWHNL1o6+wWS+3t+v5FOUg
-	76yMUzffPTbBlCTwkKbTAik9rCfeUjruNudvsNXxW8TtltkyGHw8UlwlZvAbCL17R5W9qC
-	DttjPTgXFY+dKB1rXZ2k2apoi7oM29w=
-Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
- [74.125.224.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-573-XyX2JUtzM2m9y-hY9JITHQ-1; Wed, 04 Feb 2026 17:01:25 -0500
-X-MC-Unique: XyX2JUtzM2m9y-hY9JITHQ-1
-X-Mimecast-MFC-AGG-ID: XyX2JUtzM2m9y-hY9JITHQ_1770242484
-Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-649e57fd648so650884d50.3
-        for <linux-doc@vger.kernel.org>; Wed, 04 Feb 2026 14:01:25 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770242484; cv=none;
-        d=google.com; s=arc-20240605;
-        b=HXwKfexytKe6/NOqwL/nBt0siUkfwki/M8NdmQvZz/kwZAngJ4qKPwDpOzzD7UrCdN
-         uXqy0oO4bT3C2pY/dOhUKn9n8HTCm3WwvQDL+wvbYnrg4IJmy9bMTVT04Q6wiKfK5MaQ
-         CHzctsYAKrmRlaRhL3rTz6+9unpAVe1KHciRyLz3vWcypjPkgjI/aZKua8M+xjnCaHjE
-         UsdaGZ6yG5+slqK804hG0xjlfMBMDtPbq0kZjTl42ZZAw5384OPnSWB49uP7wtVFAiYc
-         oiBuCtyraEctaOsEZyNLMuoZyONV6XCJCWXPm4Scx24GtTkaXHMHxNdblJMXHahE/eQZ
-         iIgA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=BQ9b4xt7wkni1thV96wDs9A59mL4ne2sOksOF+2S8Co=;
-        fh=Op8JgeZaNfw0IO4+hjxxCkDw1uwIS9zmQTYU/wcxc98=;
-        b=To8VWRF0ap/wpyMbMQojzeMCaRUdS6fAxTYSaPzoIhFJiVaeQEDzJij0idp6JD9lHQ
-         iTTI06FMdRWYGZFk6Q5dj4+WxpU/ZC0yWTwCGdIeSPvsLMHarefzHNmPR4oSwKYcSJyq
-         08uEUnTZxRFXTUWthVJE6isbrbrsqJGOWm0MrvbQ6Qr/jPGEeAFV0PIIy2LaYxyzb4OB
-         YuxGBqLMUArifCTqHPu/kiJ3ew4LS0tDAhci5+z8f4MDt7Sa2DJkhC6BNDwdUDtJNBNl
-         dByok9eq1b6bR8JIfrmr0HZwaxCyAOWh0uSY8ycxsob6YjudCKj3RLCNvUUsnp4+lFVp
-         VRUg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1770242484; x=1770847284; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BQ9b4xt7wkni1thV96wDs9A59mL4ne2sOksOF+2S8Co=;
-        b=Gf1v2rgdrh9A007f/SrLrg2HZ3YswyLus5DhpASher/ksBY/wqEelsw3LMKsWeGVc2
-         sTcXGRAbvrH0LM9RfhPq0xttN6Q1oq681FoDaZbcOCuOjyGJs8J1qCgbSfj9BrL++15C
-         tlkNRb8WbouDnSPS7p+7rU2w0RTCQfgQWa+By+Q0ZPdApWHJgidWxYplD4YIqIqTg9K8
-         +Wsi5efsDTFcK3xyqbFG98JRTZ44foidjApUW4aMbSVLHek6pw23Zx0Q5W84RCq93fQm
-         /u8kdMC8NbmccT5K1ImPxGznS5JT47SDXbnRMVT7TiaUHk8GD9gkKl668uTx/on8eC1H
-         4ekw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770242484; x=1770847284;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=BQ9b4xt7wkni1thV96wDs9A59mL4ne2sOksOF+2S8Co=;
-        b=mfpmhsF0mhf5A6kGlH25vG/19FQE+VMTTSWqkH0sx8kM0fDFoGMoh86EJsZtPBVohn
-         ntZClqhl5nxs6sYKlA+9pGOB0Y/rUe6WiZQtDvrm1F6iYFTRl24akZUkF98k+WiGezxs
-         qrbg30JE6kmc0ET1wXbG1Efz6MVHIGkSUSECVCJupD2ADocnywJz0Anp5jaRWVHysIdt
-         W85tiIBZ6rNW7FI28T+oCchkkG8S99y7g1Yb6qrucDswkKcUnA8ExjN246r0+hv/qrLv
-         P1E/xCe7rhVYWawajuhALg1+jbvezRKQvR3WJrjs0nWuvQnffvHI/gFJnvytE4USg9jJ
-         iAeg==
-X-Forwarded-Encrypted: i=1; AJvYcCU4vNYG65dgWRyqmxam5k4b3CWJc/+5neDSKcpVH/UI1mA85tWrpbctNpJR6+/+78YRY5IBxbqx2rE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzFHmN7BbtRjLCgwQUWuAS1FPVWLncj0AHhqz8ld67/IRo1yXMf
-	XzMpznLAGusSJXnlGs+L0ZgXH49mDwrzn6e2SmmKGYDoEGxsYe1rk4GT5Jy+DK/X/PfokJ8ZMmc
-	S14wyTlmptnaeAmsPkbTKchbKCzAymnjaDV7a+t3meVi/c8b+mUTu+5H5Qsv56GHv5SnRA12yYs
-	Uhi2ltU2xGqzN2jxrW2XJ03zFfuXVhnS3vpjTm
-X-Gm-Gg: AZuq6aL4gXOp49wHCScO2RKAgWiUoRTFBP9sT5TGenc2GaI+SfeHHXn/qckStwXepRB
-	VCtFCYUAOVYtbCkRhTXvNLRKovfYJoCkZKFV3NQGXGNLJHYROk9xdrvSKOfFsU/zpW4hJfZrk1i
-	4R/o0BdMeUHA5O7mzV7b2OS9wxyk7huWhyjxq/ys1/Vk0a3OCO7U0NLcUkWK4TnX0h
-X-Received: by 2002:a05:690c:4612:b0:794:b013:2452 with SMTP id 00721157ae682-794fe84185cmr61397107b3.68.1770242484095;
-        Wed, 04 Feb 2026 14:01:24 -0800 (PST)
-X-Received: by 2002:a05:690c:4612:b0:794:b013:2452 with SMTP id
- 00721157ae682-794fe84185cmr61396207b3.68.1770242483544; Wed, 04 Feb 2026
- 14:01:23 -0800 (PST)
+	s=arc-20240116; t=1770248534; c=relaxed/simple;
+	bh=9WW8NiqXmk5apls6PJ9Zpzz7+zkwXO83VP0rczQhzus=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=mVzw/FlYpINrEgEVD2e3qRny8ddxi70uE6HqgyMzIhu804yES2/7At9Tx/0Bkm96pA3YJveh7JKNXlPfSyvkLhPh2zEavTzPnKMGiQZdpM+o8QasprtnPpiLXbPAMWVFo9XXUgR8o9ijFX9dHwrJpY4Wa0Vlguy9IcotOj0x20k=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Q6HQLuVs; arc=fail smtp.client-ip=52.101.48.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tv8p4tBeMcCYY1o9BHFe/MnGByHQpCCDVIoz5BelG/euQzy2CmFY4dFZ4Z1pdBTrwHkWkBp7OKqmscDp+HLivv2rQQCx29gA/sL27kj5Hgz0OKwYDGaN8aIxFdjYFUDnfCJ3CiPxQVWQKOnSOtG32UB0Ub8COxF3ZRTQWeE6DwjqPZP9F0c2hbsPJXUUJm+x6AqVGzrN8ptqAWLUMUkOvNxqEg6NwfPX/+JdzAzEiUQBaqkjwXAaY6CBdzD/Hy/M3fnmjhHdrCsQgSK5IZuuroc+W49xWotm8l3Vgq14MlS2QDeOm99JeaWyi2FU8eBVmrhrHluVody5q7GcMStT8g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oKo2tnyMCjGfFmxloIQkBh9Ziq9EQEMQ+dPG8GwYeGE=;
+ b=kI4XntVQeJEZsT0zJV2241PTT3uU/k2HB1LIYuV54M4LQjCn/Umb47Z2FVbvF4AX6qJ0dWKUuomQdzcU2XdDMl2DEkti72cmFRXuP+QiiQFN/hOzca67gec6A9zERRW+iLRF3TukAalmBdhTlfblCxVKUh/th8pZP4w5avmrnOdNtQpEuJB9CkyKOLjaOknpKWCczV/MWnDMB84WP3jVHvP6q5RFpqj9nZL+nC0JdjRyeOm+X1uzmLtOMu2Tp2ZfHCVEpCVI9dtoQjRWYTUqeGHaoOlx8bAc/tGFsPedUyldazQOL82OI5BB6zg2gRAv+r/tn6D2SXwvwdkPrwC7gQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oKo2tnyMCjGfFmxloIQkBh9Ziq9EQEMQ+dPG8GwYeGE=;
+ b=Q6HQLuVsQCm7fj/eBFTHSMcIBHhlKlmbqPHXOnAciSaBaJPMqfLvlSvoyYwahpoqQc2XX7v0U3wBR4t4uMnYZj1ACO35G2sCB8FiH/sBhQwZfPifo+RskdbDpb/0yo/c5f4HgMzlCjx4BN6HkBTY/GE//LCKUaaUSEaEyPw/RgnQbaXHED8SQbg8GXOSP5SY7QjON7TxV5gFYYge/gH0Fz//QAgaxO31FcB8nHMf2tFQv53bRhw/HtA4gVcRfdOxAf3f78nbmS9KIWlg5Xj9CWPLDACBE4DacE+af8foMys4puyCU2YPevK8SweO7j3pK0bEhHKr2PRGywlJQC0hyw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
+ CY8PR12MB7537.namprd12.prod.outlook.com (2603:10b6:930:94::18) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.13; Wed, 4 Feb 2026 23:42:10 +0000
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33%4]) with mapi id 15.20.9587.010; Wed, 4 Feb 2026
+ 23:42:10 +0000
+Message-ID: <e5938ebf-c888-4af0-ad0b-66f983ed0dfe@nvidia.com>
+Date: Wed, 4 Feb 2026 18:42:04 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v6 05/26] nova-core: mm: Add support to use PRAMIN
+ windows to write to VRAM
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Dave Airlie <airlied@gmail.com>
+Cc: John Hubbard <jhubbard@nvidia.com>, Danilo Krummrich <dakr@kernel.org>,
+ Zhi Wang <zhiw@nvidia.com>, linux-kernel@vger.kernel.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, Rui Huang <ray.huang@amd.com>,
+ Matthew Auld <matthew.auld@intel.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>,
+ Thomas Hellstrom <thomas.hellstrom@linux.intel.com>,
+ Helge Deller <deller@gmx.de>, Alice Ryhl <aliceryhl@google.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ Bjorn Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin
+ <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Trevor Gross <tmgross@umich.edu>, Alistair Popple <apopple@nvidia.com>,
+ Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
+ Alexandre Courbot <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
+ Andy Ritger <aritger@nvidia.com>, Alexey Ivanov <alexeyi@nvidia.com>,
+ Balbir Singh <balbirs@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
+ Elle Rhumsaa <elle@weathered-steel.dev>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-fbdev@vger.kernel.org
+References: <97af2d85-a905-44d4-951f-e56a40f4312e@nvidia.com>
+ <20260130015901.GA301119@joelbox2>
+ <c064fbdc-9202-437d-80ff-6134d2a33778@nvidia.com>
+ <70d88203-2fe1-4bde-b254-51e8107744eb@nvidia.com>
+ <CAPM=9twm1x9rH==uoGQLYa8b4feQMz=Ne14WPuhCPy9_H1u5Tw@mail.gmail.com>
+ <a50c9e31-a182-4ed7-837c-4a12d220c022@amd.com>
+Content-Language: en-US
+From: Joel Fernandes <joelagnelf@nvidia.com>
+In-Reply-To: <a50c9e31-a182-4ed7-837c-4a12d220c022@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: BLAPR05CA0027.namprd05.prod.outlook.com
+ (2603:10b6:208:335::7) To DS0PR12MB6486.namprd12.prod.outlook.com
+ (2603:10b6:8:c5::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260122192841.128719-1-npache@redhat.com> <20260122192841.128719-9-npache@redhat.com>
- <599ebe0a-086a-4701-b797-dcd801ad02fb@lucifer.local>
-In-Reply-To: <599ebe0a-086a-4701-b797-dcd801ad02fb@lucifer.local>
-From: Nico Pache <npache@redhat.com>
-Date: Wed, 4 Feb 2026 15:00:57 -0700
-X-Gm-Features: AZwV_QhtPTjqCI8Cllr25MJgjjbEFKf_v7zZtVDS9KZH8RlSQwP57ib5pDCOz2w
-Message-ID: <CAA1CXcCCbiV9j+_SVNJrkfVRqKPXjGg+Lt3YnyNUhDHWkRjHGQ@mail.gmail.com>
-Subject: Re: [PATCH mm-unstable v14 08/16] khugepaged: generalize
- collapse_huge_page for mTHP collapse
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	akpm@linux-foundation.org, david@kernel.org, ziy@nvidia.com, 
-	baolin.wang@linux.alibaba.com, Liam.Howlett@oracle.com, ryan.roberts@arm.com, 
-	dev.jain@arm.com, baohua@kernel.org, lance.yang@linux.dev, vbabka@suse.cz, 
-	rppt@kernel.org, surenb@google.com, mhocko@suse.com, corbet@lwn.net, 
-	rostedt@goodmis.org, mhiramat@kernel.org, mathieu.desnoyers@efficios.com, 
-	matthew.brost@intel.com, joshua.hahnjy@gmail.com, rakie.kim@sk.com, 
-	byungchul@sk.com, gourry@gourry.net, ying.huang@linux.alibaba.com, 
-	apopple@nvidia.com, jannh@google.com, pfalcato@suse.de, jackmanb@google.com, 
-	hannes@cmpxchg.org, willy@infradead.org, peterx@redhat.com, 
-	wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com, 
-	vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com, 
-	yang@os.amperecomputing.com, kas@kernel.org, aarcange@redhat.com, 
-	raquini@redhat.com, anshuman.khandual@arm.com, catalin.marinas@arm.com, 
-	tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz, 
-	cl@gentwo.org, jglisse@google.com, zokeefe@google.com, rientjes@google.com, 
-	rdunlap@infradead.org, hughd@google.com, richard.weiyang@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|CY8PR12MB7537:EE_
+X-MS-Office365-Filtering-Correlation-Id: 376844bc-9bd0-4d8b-fb07-08de64470319
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?bENLWEhha25KWlNCYlVHTGU0U3p5ejVQUHhiaURpSnlyQlN0U1JzVkN2bDNT?=
+ =?utf-8?B?MUs3blUxc1o2Mmd5eHRGSDlpZ0MrR0xjOFlXTHNtalBwcHJVejNXeGJHVkJJ?=
+ =?utf-8?B?SEZWRW5VZGVuZGRWZDh5N0Fzb1lrUDZpTXhiVTBXYlNvRDVNVkE3ZzdLRnVC?=
+ =?utf-8?B?OWc5aFFvNERvaXF5SDRESGkxaGc4bHRpTDkyUzlTOTVNNjZma0ZLWWxJUldF?=
+ =?utf-8?B?SXBqblNlWkdwSkZyZ2YvdDFRcm1hK3krYW1BbWx6dUVURWRBblNVUlYwSWlR?=
+ =?utf-8?B?eTcxam9sV1hndEcyYVdCT2hJcWhtVjBwWFJ4V2VxeHJ6Yzl5eTdqY2lyYkZZ?=
+ =?utf-8?B?NGJWUDB1SHNrdW42dkZzOE1UMXpVWERrNld0a09WTzQzeWdmN3RxakpDVTdX?=
+ =?utf-8?B?OUo1WTA0OWVBSlI1c2MyWVQrb0ZTQVJ6VEE0aEZzN21SNkpJdUdDSUdLUmNq?=
+ =?utf-8?B?VWMxZDNrR09FYnlwTGYzaHByT1pnSE9JSTN1OUR5ZktJQVRYVDZ2U0g0Wlk5?=
+ =?utf-8?B?QXRmc3FHVE02VHpFa1F1QkduWGZTRkgrbGhFMytEcHpyM0IxbVZpWGZ3TmRm?=
+ =?utf-8?B?eGhXUnFVbGF4bk0xVW1Wb1BDZ0RyZlJ6SHRrUVJIcjg2ekpSbGVUUE1SdWJE?=
+ =?utf-8?B?azVuVnlQdjlZOHViTzlTUWkvL3pXaGFQSUwyQ0ZaTFZpYnhkNnpHQmVnTmU5?=
+ =?utf-8?B?Y2t1OStremQ1K2ZsQUljVFE4WUlaM2FBb1NlMHJuYjBRY05wZmVXd0dFUm82?=
+ =?utf-8?B?WlZ2NVFrM3kwZkhpMHBSRWt5ZTBsVy9MTFYrSFpvQ2Y3d0lHMXl2SnNTNDBQ?=
+ =?utf-8?B?RVhKUUhQMlJraTIrVWdkOG1IK0lPYUVGNGFqbkJhaEw2ZTVNNXB6cGdYYWNi?=
+ =?utf-8?B?UStXekZ2UGlDVVYrdzNzVGNTeFlUMms1MHpSV2ZZL09zWjFiU00zUDRSMC8w?=
+ =?utf-8?B?a2pjMEtTM3dTNlBCdVN6UUhTNEdOVFpiekwzZElrM201S3NreW5mSjdCWlQ1?=
+ =?utf-8?B?VWJqYWJGQy91MlRpaDFIc2ZydFpYblUzM3hJNlBPbm0yNDZqeWxCbTVyVlpS?=
+ =?utf-8?B?WEIxMXRUSEQ4NWI5TEhlay9qUmhBRFZpYVl5MmF2WHk4QUE3SmhUV2FvUk5s?=
+ =?utf-8?B?bWVHMndGSEVuYnRuejVMTmJqM0NaR2l1K2RWWVlOeFhSZTFCaEttSCszOCtk?=
+ =?utf-8?B?ZEtRWmhKSnJVdVVrWWYrVTVDd2pBTlh5R0NsK1Y0UUM5cHUvc3cvOWdQcThx?=
+ =?utf-8?B?YndsNFZmbURFeDJtaDljWWgyY3phS2p3WVdhS0R4L0Q1SVc1Y3NBemppTjRi?=
+ =?utf-8?B?a3VZTFA4ZUlBdWZ1LzRzaW5SaHFKVjJzaGpLOE45RTZZUUxwVmxWM2Vua0pL?=
+ =?utf-8?B?QkMvcm9aZE8xM3R3WDYzZG5NcTVKVmk5cEg2Z1lGbzJ5L3dGK0VDQnFpelNj?=
+ =?utf-8?B?c2xQcS9Ua1Y1VzhYcVRZdU1OMHJaNXh1YW81YTZtOXpmVVlYRmc3ekFTSVJS?=
+ =?utf-8?B?V2VYUldwZ1E4dGRzeHdFRU1kWEFUYy9RcmtNNWNUN1FyZ3JaVWxHUWdISkhj?=
+ =?utf-8?B?MitrVjZyYUIwZHN4cW5Hd2NBSmtReVVoaXVpZGw5YW00c3cxQnZraW5pWVVa?=
+ =?utf-8?B?b2NLS1llalNvMVFWYUFXNG1na05RSWExR3cyejJXd3FzdGJFUzArTFlhUTRG?=
+ =?utf-8?B?RVk0YUcvR0wrM0Q0K0R4Z2JlMEl4dFBFZjhzS0ZNRisrZjhDejJrMXZOZkFw?=
+ =?utf-8?B?N3BEOC9uY1EzZUVLNEdUcy9NOHpWbnVveUoyOWgxSm1QQ0lmWFI3dFpJWWlR?=
+ =?utf-8?B?UFc5UytWWGkrREFhYVVpM0JmZXhsOVRIUXlWRkorQUxkVjI0K2ZRSzlsaHQr?=
+ =?utf-8?B?NURhZkFzdGhpdFFyODFLcUZvb0t4SHNrdkNLY0UxMDVhMks5QkhGbEw5S1Fl?=
+ =?utf-8?B?K0NQNDgzN1dCZWN2c2x4VXpGYnZENnpaam8vRUxnQnV2S05zcm1MNHEzeEtW?=
+ =?utf-8?B?TjhoNHpMNHdYWDM1dTBsVlpxVlVKNTBDZmw4bC9pTGdEK3pDVTJTazRBdzNs?=
+ =?utf-8?B?SjFDYm9JSGFiOXdHbC8wa2w0TVNSSkwvSitMYjZ5YWl4bUZVWW5sSEgzWU9u?=
+ =?utf-8?Q?jKog=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?dmpKN1ZNVVJKK0RQRjBzSzBkR0dnbVQ5VmlPMHZ0SzlwSXplZ2hESEkvYVF6?=
+ =?utf-8?B?cElOR0h2SGFlYmJidjRCbE95Wk5XbXVDLyt0bFo1MGlubk1YQVI0b1k1R2RL?=
+ =?utf-8?B?c2tpcWYzVGxSMWU5b0J4dXJndDFvOEszeGtiT0NOT2o0ZWdxbUQxUHdKaWhN?=
+ =?utf-8?B?MTZqandiUE5KSmRRYW51UVZoenpDbHRROW0ybjRjeFd5NjJFVE5YM3VKUVh4?=
+ =?utf-8?B?ejZ6ckk5UVVZVU9yUk10dDBRS1RXZkJEb2dzNzBCQ3NLNVFWcWVIaU5HU3ll?=
+ =?utf-8?B?Mzh5b1Q5ZkhyTUtKcTZ1TStkUmZORVN3SXppUjZ5emkyb2RVR2xrZzZIWUFk?=
+ =?utf-8?B?ang5MmVsKzJCMU1YbXhRRzB6YnBIWEFDL1hFTnBpU0h5eEhTQWkzeTBkR0ZE?=
+ =?utf-8?B?VmNzS0YwRVFralVkcnRvb0hNalYvRE4zTitqdFp0dmJrMVY2bm8wanRYTzNB?=
+ =?utf-8?B?eDhGSms0a05jcVdpZjJzQlhIQzZERGFUU0ZqL3F1Wk1xQ2l0aURiWWFNRWxa?=
+ =?utf-8?B?QWdHaFlLQ3hHUnJLTklqd3FkaE9MTFEyckwyeTBsWXkwaHU4WVNwKzFNZWla?=
+ =?utf-8?B?bDc0MnV5QXR2WHNiamMrSHRTbEs4TmVqL1ZCK1NrM1lib3R1NVBQSFhVa0Iw?=
+ =?utf-8?B?TGxzWjNhV1FOemFHRFpkd2FJYkQyOFNiZHp3NW5XVEcyYnRLc2kxeVhmRkox?=
+ =?utf-8?B?dnNEQ09WYXJFZDJIWUwzeTJkWFN4bWdKQ1BIcFU5a2U1ZjI4bjlBU0ZuQkgx?=
+ =?utf-8?B?azhHMi85NExnTDlLOEtCWGxUc1NDeER3ZEpkRlI5U3F1ZDcxNjROMHIyMGtC?=
+ =?utf-8?B?TnliM2dpU3gvZWZHL3hINEVJbGdYQnNidW9wUHhTT0QvLzY5V3N3b1ZkUDBr?=
+ =?utf-8?B?a0JrOEFmWTRBUlZDUEViNmovcGhEc2hIZjZaMTVaQ0EwYkVBYXpNa1JpZnZk?=
+ =?utf-8?B?TThSSlpGelBiZ20yUXRycVVJN1RWRnBQMjhnb0Y2emV6Sk81blFudmkxRFlK?=
+ =?utf-8?B?ZjRnWjlkZlJPQkdFRVdndzNJNVY3Ym9hQXRZSnRJekxaZSt4aStsRjdvUW9h?=
+ =?utf-8?B?ZThmenpDOTFCUVdJT09lRktCL3dOa2k4Z3JSdFF2N0VHc0RjWFpsODhuMjU3?=
+ =?utf-8?B?R2lKMlBpMTYwN3ducVZPRCtUQUNrZ1RPUlJwc2Z5b0xoS3JlSlJ2THI1WkJD?=
+ =?utf-8?B?ZERuOUQ0YkJzSjRiMXVOKzlVY1d5ZWtHbC8xR0lhTHlBMEVCbWdVbkcyZXpM?=
+ =?utf-8?B?SUt1SXF2OEJrMVdHcjNiRm1qSVc1VFZzbEtYbE9vanVhb2pOdEl2UHA0OE5F?=
+ =?utf-8?B?MmppeTdRNHVjOHVvSmVMTXJ3ZDRmZFZwZ2VVdjhzMllvZDg3RkFObEhQcHl1?=
+ =?utf-8?B?MmFjdEFPbm1pVWh2N1hiOStGdUZPWHcwdWtuc05mUjNTSFNZLzl6SHBHVnFo?=
+ =?utf-8?B?dE9UcU9aTzdweWlQb0R3emprbUY1UFYrSEtFazNPSzAyWklTQXpCblYvcUlp?=
+ =?utf-8?B?WS9GK0QzTVNuVXI2MUVybU5xZHpQbTU0K0swa2d3QStvKytWWWdYZWRMZjNQ?=
+ =?utf-8?B?V0trSWh5SVo5WjdZdE5QVS92VWp1eW1ESmptNHlpcjUzVWlkMnFNVnZBZWFS?=
+ =?utf-8?B?UzY4RHpaSkJJVjRVVENTc0ZuUU9OWkp0MnZIbWNMZEdiVG9RcTV2djJyOExG?=
+ =?utf-8?B?ZlE4ZE85LzJvYkVPQVl1RHEwQ3gvcXRRTmhGcWM1UHdxNFpEZm1nS3FZT3gz?=
+ =?utf-8?B?Rnh5b1N4L05PcnAxeFcvZGpwTzBrUVpKaGNJaXJOSUwreUNGQmdtTXgrQlUv?=
+ =?utf-8?B?UFFNVUE5cE9IamNIQjV3NS9uTzN4OEpCT0JmbCt5dUVUT0ZmSUxaWk9DUGtO?=
+ =?utf-8?B?R2dCOW9OL2V6WkJBTnZEWUlRbTdQNUVPYlJ0YzJSMkxqR2c3enpwb1BGUEVJ?=
+ =?utf-8?B?OWlQYU9EdWp2OGtza1RjK1QrMGlGcU9DSUF3VFJ6aGR5NjYvSC9IdW9ZblhO?=
+ =?utf-8?B?eW5uNWNKUDJKN3dPR1NqazVMN3hUQm5DUEs5MEJ1U2R0T1RoelR5WHNPdSsv?=
+ =?utf-8?B?T1FvcFhnQmV5UE9HVXZGNVFQbWxJSlo5WG1iOTRSSlI4ZzVOL3UrVWc0S3Ra?=
+ =?utf-8?B?S0p0YXUyRXc4SVZCcEo2VW9yR1kvVXF6WnJnVkE0MitPWTdHMUx2UDlFa0xy?=
+ =?utf-8?B?TGZjSUhBdkdGYzhlNDFuQUJCTkxDMmtwNjhkbWtRQzZQY1V5akZBRjhpemZC?=
+ =?utf-8?B?US85OVJicGY4dGxNdGc3aUxoWlNSM2d0VmdYK3JINzg1R0JTTVNiTHIzTkYy?=
+ =?utf-8?B?QWNPZXRMTElsTWdGV0NZdW9pdkRIRkJsRW9pZkhTSXBOQzVXbDhDdz09?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 376844bc-9bd0-4d8b-fb07-08de64470319
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2026 23:42:09.8694
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9HFoVqwHleR53IUIJrlqkIqsvjkDbEf1HTWZJhfi4QRuJRKplBxARw6dIb6pqGK5kVXpV20Sqn9TZmbXiJZD5A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7537
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [1.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,linux-foundation.org,kernel.org,nvidia.com,linux.alibaba.com,oracle.com,arm.com,linux.dev,suse.cz,google.com,suse.com,lwn.net,goodmis.org,efficios.com,intel.com,gmail.com,sk.com,gourry.net,suse.de,cmpxchg.org,infradead.org,redhat.com,huawei.com,linux.intel.com,os.amperecomputing.com,gentwo.org];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75277-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[amd.com,gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75279-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[nvidia.com,kernel.org,vger.kernel.org,linux.intel.com,suse.de,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,weathered-steel.dev,collabora.com,lists.freedesktop.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[npache@redhat.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[57];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	RCPT_COUNT_GT_50(0.00)[50];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.gmail.com:mid,oracle.com:email,alibaba.com:email]
-X-Rspamd-Queue-Id: 5DF26ECE87
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,nvidia.com:email,Nvidia.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 647ABED527
 X-Rspamd-Action: no action
 
-On Tue, Feb 3, 2026 at 6:13=E2=80=AFAM Lorenzo Stoakes
-<lorenzo.stoakes@oracle.com> wrote:
->
-> On Thu, Jan 22, 2026 at 12:28:33PM -0700, Nico Pache wrote:
-> > Pass an order and offset to collapse_huge_page to support collapsing an=
-on
-> > memory to arbitrary orders within a PMD. order indicates what mTHP size=
- we
-> > are attempting to collapse to, and offset indicates were in the PMD to
-> > start the collapse attempt.
-> >
-> > For non-PMD collapse we must leave the anon VMA write locked until afte=
-r
-> > we collapse the mTHP-- in the PMD case all the pages are isolated, but =
-in
-> > the mTHP case this is not true, and we must keep the lock to prevent
-> > changes to the VMA from occurring.
-> >
-> > Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
-> > Tested-by: Baolin Wang <baolin.wang@linux.alibaba.com>
-> > Signed-off-by: Nico Pache <npache@redhat.com>
-> > ---
-> >  mm/khugepaged.c | 111 +++++++++++++++++++++++++++++++-----------------
-> >  1 file changed, 71 insertions(+), 40 deletions(-)
-> >
-> > diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> > index 9b7e05827749..76cb17243793 100644
-> > --- a/mm/khugepaged.c
-> > +++ b/mm/khugepaged.c
-> > @@ -1151,44 +1151,54 @@ static enum scan_result alloc_charge_folio(stru=
-ct folio **foliop, struct mm_stru
-> >       return SCAN_SUCCEED;
-> >  }
-> >
-> > -static enum scan_result collapse_huge_page(struct mm_struct *mm, unsig=
-ned long address,
-> > -             int referenced, int unmapped, struct collapse_control *cc=
-)
-> > +static enum scan_result collapse_huge_page(struct mm_struct *mm, unsig=
-ned long start_addr,
-> > +             int referenced, int unmapped, struct collapse_control *cc=
-,
-> > +             bool *mmap_locked, unsigned int order)
-> >  {
-> >       LIST_HEAD(compound_pagelist);
-> >       pmd_t *pmd, _pmd;
-> > -     pte_t *pte;
-> > +     pte_t *pte =3D NULL;
-> >       pgtable_t pgtable;
-> >       struct folio *folio;
-> >       spinlock_t *pmd_ptl, *pte_ptl;
-> >       enum scan_result result =3D SCAN_FAIL;
-> >       struct vm_area_struct *vma;
-> >       struct mmu_notifier_range range;
-> > +     bool anon_vma_locked =3D false;
-> > +     const unsigned long nr_pages =3D 1UL << order;
-> > +     const unsigned long pmd_address =3D start_addr & HPAGE_PMD_MASK;
-> >
-> > -     VM_BUG_ON(address & ~HPAGE_PMD_MASK);
-> > +     VM_WARN_ON_ONCE(pmd_address & ~HPAGE_PMD_MASK);
-> >
-> >       /*
-> >        * Before allocating the hugepage, release the mmap_lock read loc=
-k.
-> >        * The allocation can take potentially a long time if it involves
-> >        * sync compaction, and we do not need to hold the mmap_lock duri=
-ng
-> >        * that. We will recheck the vma after taking it again in write m=
-ode.
-> > +      * If collapsing mTHPs we may have already released the read_lock=
-.
-> >        */
-> > -     mmap_read_unlock(mm);
-> > +     if (*mmap_locked) {
-> > +             mmap_read_unlock(mm);
-> > +             *mmap_locked =3D false;
-> > +     }
-> >
-> > -     result =3D alloc_charge_folio(&folio, mm, cc, HPAGE_PMD_ORDER);
-> > +     result =3D alloc_charge_folio(&folio, mm, cc, order);
-> >       if (result !=3D SCAN_SUCCEED)
-> >               goto out_nolock;
-> >
-> >       mmap_read_lock(mm);
-> > -     result =3D hugepage_vma_revalidate(mm, address, true, &vma, cc,
-> > -                                      HPAGE_PMD_ORDER);
-> > +     *mmap_locked =3D true;
-> > +     result =3D hugepage_vma_revalidate(mm, pmd_address, true, &vma, c=
-c, order);
->
-> Why would we use the PMD address here rather than the actual start addres=
-s?
-
-The revalidation relies on the pmd_addr not the start_addr. It (only)
-uses this to make sure the VMA is still at least PMD sized, and it
-uses the order to validate that the target order is allowed. I left a
-small comment about this in the revalidate function.
-
->
-> Also please add /*expect_anon=3D*/ before the 'true' because it's hard to
-> understand what that references.
-
-ack
-
->
-> >       if (result !=3D SCAN_SUCCEED) {
-> >               mmap_read_unlock(mm);
-> > +             *mmap_locked =3D false;
-> >               goto out_nolock;
-> >       }
-> >
-> > -     result =3D find_pmd_or_thp_or_none(mm, address, &pmd);
-> > +     result =3D find_pmd_or_thp_or_none(mm, pmd_address, &pmd);
-> >       if (result !=3D SCAN_SUCCEED) {
-> >               mmap_read_unlock(mm);
-> > +             *mmap_locked =3D false;
-> >               goto out_nolock;
-> >       }
-> >
-> > @@ -1198,13 +1208,16 @@ static enum scan_result collapse_huge_page(stru=
-ct mm_struct *mm, unsigned long a
-> >                * released when it fails. So we jump out_nolock directly=
- in
-> >                * that case.  Continuing to collapse causes inconsistenc=
-y.
-> >                */
-> > -             result =3D __collapse_huge_page_swapin(mm, vma, address, =
-pmd,
-> > -                                                  referenced, HPAGE_PM=
-D_ORDER);
-> > -             if (result !=3D SCAN_SUCCEED)
-> > +             result =3D __collapse_huge_page_swapin(mm, vma, start_add=
-r, pmd,
-> > +                                                  referenced, order);
-> > +             if (result !=3D SCAN_SUCCEED) {
-> > +                     *mmap_locked =3D false;
-> >                       goto out_nolock;
-> > +             }
-> >       }
-> >
-> >       mmap_read_unlock(mm);
-> > +     *mmap_locked =3D false;
-> >       /*
-> >        * Prevent all access to pagetables with the exception of
-> >        * gup_fast later handled by the ptep_clear_flush and the VM
-> > @@ -1214,20 +1227,20 @@ static enum scan_result collapse_huge_page(stru=
-ct mm_struct *mm, unsigned long a
-> >        * mmap_lock.
-> >        */
-> >       mmap_write_lock(mm);
-> > -     result =3D hugepage_vma_revalidate(mm, address, true, &vma, cc,
-> > -                                      HPAGE_PMD_ORDER);
-> > +     result =3D hugepage_vma_revalidate(mm, pmd_address, true, &vma, c=
-c, order);
-> >       if (result !=3D SCAN_SUCCEED)
-> >               goto out_up_write;
-> >       /* check if the pmd is still valid */
-> >       vma_start_write(vma);
-> > -     result =3D check_pmd_still_valid(mm, address, pmd);
-> > +     result =3D check_pmd_still_valid(mm, pmd_address, pmd);
-> >       if (result !=3D SCAN_SUCCEED)
-> >               goto out_up_write;
-> >
-> >       anon_vma_lock_write(vma->anon_vma);
-> > +     anon_vma_locked =3D true;
-> >
-> > -     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, address,
-> > -                             address + HPAGE_PMD_SIZE);
-> > +     mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm, start_ad=
-dr,
-> > +                             start_addr + (PAGE_SIZE << order));
-> >       mmu_notifier_invalidate_range_start(&range);
-> >
-> >       pmd_ptl =3D pmd_lock(mm, pmd); /* probably unnecessary */
-> > @@ -1239,24 +1252,21 @@ static enum scan_result collapse_huge_page(stru=
-ct mm_struct *mm, unsigned long a
-> >        * Parallel GUP-fast is fine since GUP-fast will back off when
-> >        * it detects PMD is changed.
-> >        */
-> > -     _pmd =3D pmdp_collapse_flush(vma, address, pmd);
-> > +     _pmd =3D pmdp_collapse_flush(vma, pmd_address, pmd);
-> >       spin_unlock(pmd_ptl);
-> >       mmu_notifier_invalidate_range_end(&range);
-> >       tlb_remove_table_sync_one();
-> >
-> > -     pte =3D pte_offset_map_lock(mm, &_pmd, address, &pte_ptl);
-> > +     pte =3D pte_offset_map_lock(mm, &_pmd, start_addr, &pte_ptl);
-> >       if (pte) {
-> > -             result =3D __collapse_huge_page_isolate(vma, address, pte=
-, cc,
-> > -                                                   HPAGE_PMD_ORDER,
-> > -                                                   &compound_pagelist)=
-;
-> > +             result =3D __collapse_huge_page_isolate(vma, start_addr, =
-pte, cc,
-> > +                                                   order, &compound_pa=
-gelist);
-> >               spin_unlock(pte_ptl);
-> >       } else {
-> >               result =3D SCAN_NO_PTE_TABLE;
-> >       }
-> >
-> >       if (unlikely(result !=3D SCAN_SUCCEED)) {
-> > -             if (pte)
-> > -                     pte_unmap(pte);
-> >               spin_lock(pmd_ptl);
-> >               BUG_ON(!pmd_none(*pmd));
-> >               /*
-> > @@ -1266,21 +1276,21 @@ static enum scan_result collapse_huge_page(stru=
-ct mm_struct *mm, unsigned long a
-> >                */
-> >               pmd_populate(mm, pmd, pmd_pgtable(_pmd));
-> >               spin_unlock(pmd_ptl);
-> > -             anon_vma_unlock_write(vma->anon_vma);
-> >               goto out_up_write;
-> >       }
-> >
-> >       /*
-> > -      * All pages are isolated and locked so anon_vma rmap
-> > -      * can't run anymore.
-> > +      * For PMD collapse all pages are isolated and locked so anon_vma
-> > +      * rmap can't run anymore. For mTHP collapse we must hold the loc=
-k
-> >        */
-> > -     anon_vma_unlock_write(vma->anon_vma);
-> > +     if (is_pmd_order(order)) {
-> > +             anon_vma_unlock_write(vma->anon_vma);
-> > +             anon_vma_locked =3D false;
-> > +     }
-> >
-> >       result =3D __collapse_huge_page_copy(pte, folio, pmd, _pmd,
-> > -                                        vma, address, pte_ptl,
-> > -                                        HPAGE_PMD_ORDER,
-> > -                                        &compound_pagelist);
-> > -     pte_unmap(pte);
-> > +                                        vma, start_addr, pte_ptl,
-> > +                                        order, &compound_pagelist);
-> >       if (unlikely(result !=3D SCAN_SUCCEED))
-> >               goto out_up_write;
-> >
-> > @@ -1290,20 +1300,42 @@ static enum scan_result collapse_huge_page(stru=
-ct mm_struct *mm, unsigned long a
-> >        * write.
-> >        */
-> >       __folio_mark_uptodate(folio);
-> > -     pgtable =3D pmd_pgtable(_pmd);
-> > +     if (is_pmd_order(order)) { /* PMD collapse */
-> > +             pgtable =3D pmd_pgtable(_pmd);
-> >
-> > -     spin_lock(pmd_ptl);
-> > -     BUG_ON(!pmd_none(*pmd));
-> > -     pgtable_trans_huge_deposit(mm, pmd, pgtable);
-> > -     map_anon_folio_pmd_nopf(folio, pmd, vma, address);
-> > +             spin_lock(pmd_ptl);
-> > +             WARN_ON_ONCE(!pmd_none(*pmd));
-> > +             pgtable_trans_huge_deposit(mm, pmd, pgtable);
-> > +             map_anon_folio_pmd_nopf(folio, pmd, vma, pmd_address);
-> > +     } else { /* mTHP collapse */
-> > +             pte_t mthp_pte =3D mk_pte(folio_page(folio, 0), vma->vm_p=
-age_prot);
-> > +
-> > +             mthp_pte =3D maybe_mkwrite(pte_mkdirty(mthp_pte), vma);
-> > +             spin_lock(pmd_ptl);
-> > +             WARN_ON_ONCE(!pmd_none(*pmd));
-> > +             folio_ref_add(folio, nr_pages - 1);
-> > +             folio_add_new_anon_rmap(folio, vma, start_addr, RMAP_EXCL=
-USIVE);
-> > +             folio_add_lru_vma(folio, vma);
-> > +             set_ptes(vma->vm_mm, start_addr, pte, mthp_pte, nr_pages)=
-;
-> > +             update_mmu_cache_range(NULL, vma, start_addr, pte, nr_pag=
-es);
-> > +
-> > +             smp_wmb(); /* make PTEs visible before PMD. See pmd_insta=
-ll() */
-> > +             pmd_populate(mm, pmd, pmd_pgtable(_pmd));
->
-> I seriously hate this being open-coded, can we separate it out into anoth=
-er
-> function?
-
-Yeah I think we've discussed this before. I started to generalize
-this, and apply it to other parts of the kernel that maintain a
-similar pattern, but each potential user of the helper was slightly
-different in its approach and I was unable to find a quick solution to
-make it apply to all. I think it will require a lot more thought to
-cleanly refactor this. I figured I could leave this to the later
-cleanup work, or I could just create a static function just for
-khugepaged for now?
-
->
-> > +     }
-> >       spin_unlock(pmd_ptl);
-> >
-> >       folio =3D NULL;
-> >
-> >       result =3D SCAN_SUCCEED;
-> >  out_up_write:
-> > +     if (anon_vma_locked)
-> > +             anon_vma_unlock_write(vma->anon_vma);
->
-> Thanks it's much better tracking this specifically.
->
-> The whole damn thing needs refactoring (by this I mean - khugepaged and r=
-eally
-> THP in general to be clear :) but it's not your fault.
-
-Yeah it has not been the prettiest code to try and understand/work on!
-
->
-> Could I ask though whether you might help out with some cleanups after th=
-is
-> lands :)
->
-> I feel like we all need to do our bit to pay down some technical debt!
 
 
-Yes ofc! I had already planned on doing so. I have some in mind, and I
-believe others have already tackled some. After this land, let's
-discuss further plans (discussion thread or THP meeting).
+On 2/2/2026 4:12 AM, Christian König wrote:
+> On 1/31/26 04:00, Dave Airlie wrote:
+>> On Sat, 31 Jan 2026 at 07:14, Joel Fernandes <joelagnelf@nvidia.com> wrote:
+>>> On 1/29/2026 10:38 PM, John Hubbard wrote:
+[...]
+>>>> For the deadlock above, I think a good way to break that deadlock is
+>>>> to not allow taking that lock in a fence signaling calling path.
+>>>>
+>>>> So during an unmap, instead of "lock, unmap/free, unlock" it should
+>>>> move the item to a deferred-free list, which is processed separately.
+>>>> Of course, this is a little complex, because the allocation and reclaim
+>>>> has to be aware of such lists if they get large.
+>>> Yes, also avoiding GFP_KERNEL allocations while holding any of these mm locks
+>>> (whichever we take during map). The GPU buddy actually does GFP_KERNEL
+>>> allocations internally which is problematic.
+>>>
+>>> Some solutions / next steps:
+>>>
+>>> 1. allocating (VRAM and system memory) outside mm locks just before acquiring them.
+>>>
+>>> 2. pre-allocating both VRAM and system memory needed, before the DMA fence
+>>> critical paths (The issue is also to figure out how much memory to pre-allocate
+>>> for the page table pages based on the VM_BIND request. I think we can analyze
+>>> the page tables in the submit stage to make an estimate).
+>>>
+>>> 3. Unfortunately, I am using gpu-buddy when allocating a VA range in the Vmm
+>>> (called virt_buddy), which itself does GFP_KERNEL memory allocations in the
+>>> allocate path. I am not sure what do yet about this. ISTR the maple tree also
+>>> has similar issues.
+>>>
+>>> 4. Using non-reclaimable memory allocations where pre-allocation or
+>>> pre-allocated memory pools is not possible (I'd like to avoid this #4 so we
+>>> don't fail allocations when memory is scarce).
+>>>
+>>> Will work on these issues for the v7. Thanks,
+>>
+>> The way this works on nouveau at least (and I haven't yet read the
+>> nova code in depth).
+>>
+>> Is we have 4 stages of vmm page table mgmt.
+>>
+>> ref - locked with a ref lock - can allocate/free memory - just makes
+>> sure the page tables exist and are reference counted
+>> map - locked with a map lock - cannot allocate memory - fill in the
+>> PTEs in the page table
+>> unmap - locked with a map lock - cannot allocate memory - removes
+>> entries in PTEs
+>> unref - locked with a ref lock - can allocate/free memory - just drops
+>> references and frees (not sure if it ever merges).
+> 
+> On amdgpu VM page tables are allocated and PTEs filled outside of the fence critical path.
 
-Cheers,
--- Nico
+Does that really work for async VM_BIND? If we're missing anything in nova-core
+related to the timing of when the allocate and update of the page tables, it
+would be good to know.
 
->
-> > +     if (pte)
-> > +             pte_unmap(pte);
-> >       mmap_write_unlock(mm);
-> > +     *mmap_locked =3D false;
-> >  out_nolock:
-> > +     WARN_ON_ONCE(*mmap_locked);
-> >       if (folio)
-> >               folio_put(folio);
-> >       trace_mm_collapse_huge_page(mm, result =3D=3D SCAN_SUCCEED, resul=
-t);
-> > @@ -1471,9 +1503,8 @@ static enum scan_result collapse_scan_pmd(struct =
-mm_struct *mm,
-> >       pte_unmap_unlock(pte, ptl);
-> >       if (result =3D=3D SCAN_SUCCEED) {
-> >               result =3D collapse_huge_page(mm, start_addr, referenced,
-> > -                                         unmapped, cc);
-> > -             /* collapse_huge_page will return with the mmap_lock rele=
-ased */
-> > -             *mmap_locked =3D false;
-> > +                                         unmapped, cc, mmap_locked,
-> > +                                         HPAGE_PMD_ORDER);
-> >       }
-> >  out:
-> >       trace_mm_khugepaged_scan_pmd(mm, folio, referenced,
-> > --
-> > 2.52.0
-> >
->
-> Cheers, Lorenzo
->
+My understanding you have to write the PTEs at the run stage of the job in
+question otherwise you may not know how to map? Are you saying amdgpu writes it
+during the run stage but somehow before fence signaling?
+
+> 
+> Only invalidating PTEs to signal that a shader needs to be taken off the HW are inside the fence critical path and here no memory allocation is needed.
+> 
+> Keep in mind that you not only need to avoid having memory allocations inside the critical path, but also not take locks under which memory is allocated.
+
+Yes, this part I was clear from Danilo's email and clear about the various
+deadlocks. See my analysis where what you mention is in the cases I covered:
+https://lore.kernel.org/all/20e04a3e-8d7d-47bc-9299-deadf8b9e992@nvidia.com/
+
+> Simona added some dma_fence_begin_signalling() and dma_fence_end_signalling() helpers to add lockdep annotations to the fence signaling path. Those have proven to be extremely useful since they allow lockdep to point out mistakes immediately and not just after hours of running on a test system.
+> 
+Yeah, I looked. Nice! Thanks,
+
+--
+Joel Fernandes
 
 
