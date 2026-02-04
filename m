@@ -1,239 +1,183 @@
-Return-Path: <linux-doc+bounces-75207-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75209-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YJGyC2YUg2nihQMAu9opvQ
-	(envelope-from <linux-doc+bounces-75207-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 10:41:58 +0100
+	id UIOkHrkVg2nihQMAu9opvQ
+	(envelope-from <linux-doc+bounces-75209-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 10:47:37 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7FB4E3FBC
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 10:41:57 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF513E40C0
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 10:47:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7304D3026AA2
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Feb 2026 09:36:51 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8C4A63021728
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Feb 2026 09:43:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAB043ACEFD;
-	Wed,  4 Feb 2026 09:36:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A254A3B530F;
+	Wed,  4 Feb 2026 09:43:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="Piy+D2Ae"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gsUc+u/v"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout06.his.huawei.com (canpmsgout06.his.huawei.com [113.46.200.221])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1167F39A7E1;
-	Wed,  4 Feb 2026 09:36:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.221
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B85B3B5309
+	for <linux-doc@vger.kernel.org>; Wed,  4 Feb 2026 09:43:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770197809; cv=none; b=GI+SATEKcE10ybu7IHJR9BD+w+G6w88aU+jICHNGiRSANbyPQuiR+p95ViXwjfxLkYZbGvj5pwb6bZAFtfrPJ0ff8aM+PGTynIUq9w5prtO2Fp+aHQEa6JVn4p5cj5V7R3gF9FB9w9yzEQw8uqvmYTCP7UBDmxQtRjxsVoTKr8w=
+	t=1770198181; cv=none; b=Yvxs6CuXKXE7mgRkzIHP3VUZH+af5hG8C+vjJXeWB9s9JJyaU1/LFc65c7TitpajwnQJu/BoHN2wfINiHZqN0BBnWZEhhlis72qVchUI98kX9jQNCnx37ehH6pQLfQs72wYV/Tz0RKDCB75cicpjOr+P17RNrokwzL7SIJGGxLc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770197809; c=relaxed/simple;
-	bh=rXV050Kc/51xmlnP83x+nk533vY/vf8jfe67EQdWqQg=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=J4nt/EUMIZ3qW//1SrfIbDGbDiuyugRoBOtQWxmeO+wEoD1TvdEIH3RJ9hBBKR7ZxoobuxSaDDKxQTbk3FbjyFC86uiwkfNvx8AG+BEh418Uzd1jlY6XopCwU9AsFWC7W3a9zgiFQxwm3QYTx+ZEl7/1AQsfuMO0ws2D3B3Vt+0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=Piy+D2Ae; arc=none smtp.client-ip=113.46.200.221
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=JCg+l/0tXKCFf/mTir6vjlLYgbGXrZ03085YKEzTp9o=;
-	b=Piy+D2Ae8+BF6TNKkVTiXKJnuFRuLSxDv9GIoqvekPwAbC38MSuPzE4rdAmNy3fDxpahTOecm
-	sKzwPjEQ0ep8SD+2yLXGpYWSH2DZhEAqorz6ufVLlnMdITs3Fz1ny860+YBmJ0BWnHjZrHjvE/C
-	Qjz9qZbGW0FgfxFyHLhAxEY=
-Received: from mail.maildlp.com (unknown [172.19.162.223])
-	by canpmsgout06.his.huawei.com (SkyGuard) with ESMTPS id 4f5ZrF0Lt0zRhRB;
-	Wed,  4 Feb 2026 17:32:13 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id A83CA40561;
-	Wed,  4 Feb 2026 17:36:46 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
- (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 4 Feb
- 2026 17:36:43 +0800
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-To: <corbet@lwn.net>, <catalin.marinas@arm.com>, <will@kernel.org>,
-	<chenhuacai@kernel.org>, <kernel@xen0n.name>, <maddy@linux.ibm.com>,
-	<mpe@ellerman.id.au>, <npiggin@gmail.com>, <chleroy@kernel.org>,
-	<pjw@kernel.org>, <palmer@dabbelt.com>, <aou@eecs.berkeley.edu>,
-	<alex@ghiti.fr>, <tglx@kernel.org>, <mingo@redhat.com>, <bp@alien8.de>,
-	<dave.hansen@linux.intel.com>, <hpa@zytor.com>, <akpm@linux-foundation.org>,
-	<bhe@redhat.com>, <vgoyal@redhat.com>, <dyoung@redhat.com>,
-	<pawan.kumar.gupta@linux.intel.com>, <feng.tang@linux.alibaba.com>,
-	<kees@kernel.org>, <elver@google.com>, <arnd@arndb.de>,
-	<lirongqing@baidu.com>, <fvdl@google.com>, <leitao@debian.org>,
-	<rppt@kernel.org>, <cfsworks@gmail.com>, <osandov@fb.com>,
-	<sourabhjain@linux.ibm.com>, <ardb@kernel.org>, <ryan.roberts@arm.com>,
-	<tangyouling@kylinos.cn>, <ritesh.list@gmail.com>, <bjorn@rivosinc.com>,
-	<songshuaishuai@tinylab.org>, <samuel.holland@sifive.com>,
-	<kevin.brodsky@arm.com>, <junhui.liu@pigmoral.tech>,
-	<vishal.moola@gmail.com>, <coxu@redhat.com>, <jbohac@suse.cz>,
-	<liaoyuanhong@vivo.com>, <brgerst@gmail.com>, <fuqiang.wang@easystack.cn>,
-	<x86@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
-	<linux-riscv@lists.infradead.org>, <kexec@lists.infradead.org>
-CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v3 3/3] riscv: kexec: Add support for crashkernel CMA reservation
-Date: Wed, 4 Feb 2026 17:37:28 +0800
-Message-ID: <20260204093728.1447527-4-ruanjinjie@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260204093728.1447527-1-ruanjinjie@huawei.com>
-References: <20260204093728.1447527-1-ruanjinjie@huawei.com>
+	s=arc-20240116; t=1770198181; c=relaxed/simple;
+	bh=hGwBf1cUBZVW0moEL2wbt4+Dz7qCO/Yl0iuemeryZME=;
+	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=eXv1uZM5yc3+Heb6p37Bu4urJ9I+nPvFuBz0c/awarxDHQmU0yrLZ9KWkKZMhQUWDcslkAROp6K5SUV+PW9w4Smo99LUY/J71fAYMtmbvsse1nY6jytBWS39uzEF7PQng6Sj5qv1Ue36Fvl/7Vi1lgtzID4Jq4GIx4/0LJTaKvs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gsUc+u/v; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42fb6ce71c7so5594836f8f.1
+        for <linux-doc@vger.kernel.org>; Wed, 04 Feb 2026 01:43:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770198180; x=1770802980; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=s6noyEhcNwk/Aw3tl3/LJ2DrKHWXMyz7JjWPgqeEx4o=;
+        b=gsUc+u/vtiNTkp9t7nP06pMtgtzz7q3dAWjPNuYNpbCLA8FFkTuoXlqh9pjxp1m9i0
+         pd/DyxUr26ND8EoErfFGCkKN2mY0ynopnX9tluDGUG5lg5T3Eiz4SSypA3qaJbXL0BMF
+         4A+dLTGDN3P76vBUv7eVmI/vjjtiOkt+ClOzuivj6kGHEIPVrwXLZDVbf+ieXcyInZP9
+         1SoHCMa5ca75AHg8ypzP/rsAfuf72NrSGTHGlYTl5QsfxRgCBD6bWSem91LkVLnqyO0I
+         ou/tZNwPejpq/koqlhmpHiAqfZ8Je94dR+xzHF/Yq7JyItPYVYB7sAu+5ANuZSNGEcmw
+         bnnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770198180; x=1770802980;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=s6noyEhcNwk/Aw3tl3/LJ2DrKHWXMyz7JjWPgqeEx4o=;
+        b=Oz70kZWiDh9CFmtnFoLZmXgSLBuI2GIhcUB6pgTsNwaMX46X6BABtVrcXPKJoCBziL
+         ypjpzXqRdihv2TCWWaYevyIET5Y7Q54cf1juRjGHJs7AKdzTofYoGqPwR5UGWOxvFWa6
+         Xqv+syZ5gIuzyZocn7NUVLlzpVvg/qhfz+jvV7rZfHXWZazZsYire/XMpUBVL6ax5sao
+         +OjbLK6cXJg6sD012YoQ+CLHuJI/IS339LbnTcik6NfsqbLNt6B6zW3oUV+KCh5qHMfC
+         F7KlvbmA7ENbU/yBZ/3veAEfgo2l7qp6Eg1Uj3si1NR/bvi5V7UMoEg8SSJwMm11HdsP
+         1ZEw==
+X-Forwarded-Encrypted: i=1; AJvYcCV20N17GeS5NNluMMsnmpmgPJXppXnmxBvJiTyEDV8fcheqQGYK5SODvRFU96wIrqAvAbZpGVUIrz0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxl4BSr2LaBTgd/a2/BXLW+xa3wj33vGYa/VWppzewDyXWbTgsn
+	5IyKo0OgFbWZH93yjZk/Vuasm8wIqKokBQras0ScQa+3XaaBlSPOYOuf
+X-Gm-Gg: AZuq6aJK4uHO/WvJ0cwQHTNqy+mHnJlcqCkS25v4SFN62o00+F1GISw9wFqO5nU0z72
+	B4AkN1ZJqvfZULOv6QNrzlowrMpWSItMt3EODQcL1I0NlKrhsvFCOZut5rOROWqJwTbxOHCOrv+
+	uqrvfVciDxRF2lY00DzUJuQ0h0iGDtg8N3QE7G9S8qiaDNsbj18Cvg+gV8KKqDEM4LYT7oznoeI
+	Rkl/8OMzT/X61F7qgpKwg7xcKPBOGujrtUC1dYxe/AS8r+1U5i68H4FmWDO4NtwAJAf1YsexOGH
+	rzoVlmTS4izT2AnoTf+o1D/d9m5umEw91LFfFa/Qnq3J2pOSHQTtVdfrI8LJeVhQrHtymiqKO/E
+	UUKMVvNmAXFKNOZRwOiRP26DXtMvG92t0AGmMGAwku9CJxf9aCqpIaNt+JMrhgMtY1r9cGNZ58h
+	TIP8LjvDUFQvYEck3+mLDoBzfyq+Kq535lQiA1ErOBtaxhid6PILTRPUoO524PnzZcZIg15sl83
+	X4L
+X-Received: by 2002:a05:6000:400b:b0:432:a9db:f9a2 with SMTP id ffacd0b85a97d-43618053ca8mr3252156f8f.41.1770198179457;
+        Wed, 04 Feb 2026 01:42:59 -0800 (PST)
+Received: from RDEALENC-L01.ad.analog.com ([24.206.116.103])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43618057f66sm4791738f8f.25.2026.02.04.01.42.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Feb 2026 01:42:58 -0800 (PST)
+From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
+X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
+Date: Wed, 4 Feb 2026 09:42:55 +0000
+To: Andy Shevchenko <andriy.shevchenko@intel.com>, 
+	rodrigo.alencar@analog.com
+Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Jonathan Cameron <jic23@kernel.org>, 
+	David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Subject: Re: [PATCH v6 2/8] iio: core: add fixed point parsing with 64-bit
+ parts
+Message-ID: <7tiv33i65unu5ypk7puj3buzybykyhv2qbwp54bhcem5t4rawq@dpfedqmmxbhx>
+References: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
+ <20260130-adf41513-iio-driver-v6-2-cf46239026bc@analog.com>
+ <aYKkv3dq9Vkm3s_3@smile.fi.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- dggpemf500011.china.huawei.com (7.185.36.131)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aYKkv3dq9Vkm3s_3@smile.fi.intel.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[lwn.net,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,linux.alibaba.com,google.com,arndb.de,baidu.com,debian.org,fb.com,kylinos.cn,rivosinc.com,tinylab.org,sifive.com,pigmoral.tech,suse.cz,vivo.com,easystack.cn,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	TAGGED_FROM(0.00)[bounces-75207-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75209-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_GT_50(0.00)[58];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	TO_DN_NONE(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,huawei.com:dkim,huawei.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A7FB4E3FBC
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: CF513E40C0
 X-Rspamd-Action: no action
 
-Commit 35c18f2933c5 ("Add a new optional ",cma" suffix to the
-crashkernel= command line option") and commit ab475510e042 ("kdump:
-implement reserve_crashkernel_cma") added CMA support for kdump
-crashkernel reservation. This allows the kernel to dynamically allocate
-contiguous memory for crash dumping when needed, rather than permanently
-reserving a fixed region at boot time.
+On 26/02/04 03:45AM, Andy Shevchenko wrote:
+> On Fri, Jan 30, 2026 at 10:06:43AM +0000, Rodrigo Alencar via B4 Relay wrote:
+> 
+> > Add iio_str_to_fixpoint64() function that leverages simple_strtoull()
+> > to parse numbers from a string.
+> > A helper function __iio_str_to_fixpoint64() replaces
+> > __iio_str_to_fixpoint() implementation, extending its usage for
+> > 64-bit fixed-point parsing.
 
-So extend crashkernel CMA reservation support to riscv. The following
-changes are made to enable CMA reservation:
+...
+> > +static ssize_t iio_safe_strntou64(const char *str, const char **endp,
+> > +				  u64 *result, size_t max_chars)
+> > +{
+> > +	u64 digit, acc = 0;
+> > +	ssize_t idx = 0;
+> > +
+> > +	while (isdigit(str[idx]) && idx < max_chars) {
+> > +		digit = str[idx] - '0';
+> > +		if (unlikely(acc & (~0ull << 60))) {
+> > +			if (check_mul_overflow(acc, 10, &acc) ||
+> > +			    check_add_overflow(acc, digit, &acc))
+> > +				return -ERANGE;
+> > +		} else {
+> > +			acc = acc * 10 + digit;
+> > +		}
+> > +		idx++;
+> > +	}
+> > +
+> > +	*endp = str + idx;
+> > +	*result = acc;
+> > +	return idx;
+> > +}
+> 
+> There is a development in the parse_integer in the lib/. I reviewed that series
+> and hopefully it will go in. With that done, we better reuse the lib/ function.
+> 
+> https://lore.kernel.org/linux-hardening/20260202115451.290173-1-dmantipov@yandex.ru/
 
-- Parse and obtain the CMA reservation size along with other crashkernel
-  parameters.
-- Call reserve_crashkernel_cma() to allocate the CMA region for kdump.
-- Include the CMA-reserved ranges for kdump kernel to use.
-- Exclude the CMA-reserved ranges from the crash kernel memory to
-  prevent them from being exported through /proc/vmcore, which is already
-  done in the crash core.
+In this patch, I see that it updates the overflow check, but I am not
+seeing that function being exposed to other kernel modules.
 
-Update kernel-parameters.txt to document CMA support for crashkernel on
-riscv architecture.
-
-Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 16 ++++++++--------
- arch/riscv/kernel/machine_kexec_file.c          | 10 ++++++++--
- arch/riscv/mm/init.c                            |  5 +++--
- 3 files changed, 19 insertions(+), 12 deletions(-)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 36bb642a7edd..3b92324d3a03 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1119,14 +1119,14 @@ Kernel parameters
- 			It will be ignored when crashkernel=X,high is not used
- 			or memory reserved is below 4G.
- 	crashkernel=size[KMG],cma
--			[KNL, X86, ARM64, ppc] Reserve additional crash kernel memory from
--			CMA. This reservation is usable by the first system's
--			userspace memory and kernel movable allocations (memory
--			balloon, zswap). Pages allocated from this memory range
--			will not be included in the vmcore so this should not
--			be used if dumping of userspace memory is intended and
--			it has to be expected that some movable kernel pages
--			may be missing from the dump.
-+			[KNL, X86, ARM64, RISCV, ppc] Reserve additional crash
-+			kernel memory from CMA. This reservation is usable by
-+			the first system's userspace memory and kernel movable
-+			allocations (memory balloon, zswap). Pages allocated
-+			from this memory range will not be included in the vmcore
-+			so this should not be used if dumping of userspace memory
-+			is intended and it has to be expected that some movable
-+			kernel pages may be missing from the dump.
- 
- 			A standard crashkernel reservation, as described above,
- 			is still needed to hold the crash kernel and initrd.
-diff --git a/arch/riscv/kernel/machine_kexec_file.c b/arch/riscv/kernel/machine_kexec_file.c
-index fec3622a13c9..0e4ac70d5a9a 100644
---- a/arch/riscv/kernel/machine_kexec_file.c
-+++ b/arch/riscv/kernel/machine_kexec_file.c
-@@ -59,9 +59,9 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
- {
- 	struct crash_mem *cmem;
- 	unsigned int nr_ranges;
--	int ret;
-+	int ret, i;
- 
--	nr_ranges = 1; /* For exclusion of crashkernel region */
-+	nr_ranges = 1 + crashk_cma_cnt; /* For exclusion of crashkernel region */
- 	walk_system_ram_res(0, -1, &nr_ranges, get_nr_ram_ranges_callback);
- 
- 	cmem = kmalloc(struct_size(cmem, ranges, nr_ranges), GFP_KERNEL);
-@@ -74,6 +74,12 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
- 	if (ret)
- 		goto out;
- 
-+	for (i = 0; i < crashk_cma_cnt; i++) {
-+		cmem->ranges[cmem->nr_ranges].start = crashk_cma_ranges[i].start;
-+		cmem->ranges[cmem->nr_ranges].end = crashk_cma_ranges[i].end;
-+		cmem->nr_ranges++;
-+	}
-+
- 	ret = crash_prepare_elf64_headers(cmem, true, addr, sz);
- 
- out:
-diff --git a/arch/riscv/mm/init.c b/arch/riscv/mm/init.c
-index addb8a9305be..074d2d5f79ee 100644
---- a/arch/riscv/mm/init.c
-+++ b/arch/riscv/mm/init.c
-@@ -1404,7 +1404,7 @@ static inline void setup_vm_final(void)
-  */
- static void __init arch_reserve_crashkernel(void)
- {
--	unsigned long long low_size = 0;
-+	unsigned long long low_size = 0, cma_size = 0;
- 	unsigned long long crash_base, crash_size;
- 	bool high = false;
- 	int ret;
-@@ -1414,11 +1414,12 @@ static void __init arch_reserve_crashkernel(void)
- 
- 	ret = parse_crashkernel(boot_command_line, memblock_phys_mem_size(),
- 				&crash_size, &crash_base,
--				&low_size, NULL, &high);
-+				&low_size, &cma_size, &high);
- 	if (ret)
- 		return;
- 
- 	reserve_crashkernel_generic(crash_size, crash_base, low_size, high);
-+	reserve_crashkernel_cma(cma_size);
- }
- 
- void __init paging_init(void)
 -- 
-2.34.1
+Kind regards,
 
+Rodrigo Alencar
 
