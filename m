@@ -1,262 +1,284 @@
-Return-Path: <linux-doc+bounces-75262-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75264-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AGNhNkGCg2llowMAu9opvQ
-	(envelope-from <linux-doc+bounces-75262-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 18:30:41 +0100
+	id cFc7JR2Yg2lnpwMAu9opvQ
+	(envelope-from <linux-doc+bounces-75264-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 20:03:57 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F62FEAFDC
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 18:30:41 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DDB0CEBD4A
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Feb 2026 20:03:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 661893015CB1
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Feb 2026 17:30:01 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 36F3C300CFD1
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Feb 2026 19:03:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 820B434A76D;
-	Wed,  4 Feb 2026 17:30:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12B0C423A97;
+	Wed,  4 Feb 2026 19:03:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="kWV4dbKK";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="FdznD3Oy";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="kWV4dbKK";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="FdznD3Oy"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AJeDJLfM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com [209.85.219.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F88233B945
-	for <linux-doc@vger.kernel.org>; Wed,  4 Feb 2026 17:30:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD6392367B5
+	for <linux-doc@vger.kernel.org>; Wed,  4 Feb 2026 19:03:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770226200; cv=none; b=sZnmqHuTR1qH51elgw7475lVhiam4+kYqqdcl09SRU7Dv4TsmTCpK/Q4bmLLigyfFKNV30B6cekIX5sxPhOJbq5UD4cuML1ySuiswe5rE+JNf1G8G3XctJU+zAyVW+Eqztw+spjhZFpPUItT48fb6Vt0QYUSw6Hz0It9ia0fiAI=
+	t=1770231833; cv=none; b=q0at7mFCIqsdxbI5YeQwZkvVv5IjuMbkrVHXOyylW87JO9dqd8NNNflmusrqK4rj7JYPeLcJnmA/M3Jtw0LHSbEP/BY0JIRMSkiIbCLyBTotDygLyk3o8GxUHC2nVnpdLSktOfwJ7sa2tpBTY3/OrQAB+anNj/GAAegtCwebIeg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770226200; c=relaxed/simple;
-	bh=FjrBp5UQqCfdT86rQD5v1juUlYlbQv1n6OqQlbGbKA8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=WS/0P1wDGYaDjCZh7EloTLyosWnnbxCDHQ9VSq2Ufi0vpmawNznw1p7NYoGHBMBFtY/7NEQDVas0EC+0B/W3ZZzWZYIYKEiyCVQtaBbdU/2rPjwWjD+9XfbDCstFXNZSGp+tsqmLcY7cRgrq7Tf/6CU+f7Q2swWti+l2JIgDI/Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=kWV4dbKK; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=FdznD3Oy; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=kWV4dbKK; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=FdznD3Oy; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 3E2CB3E75F;
-	Wed,  4 Feb 2026 17:29:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1770226198; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qRb7SE2/fIN4Lp9bRZK1Yx2M3pdPz3YbMCfhr00KEO8=;
-	b=kWV4dbKKci+aEZu7o1Y/ikbGlztfGLreLcfE7e5hU2Eya/IE9FcADWBIbG8G6FVsaw5qRC
-	Rl/oAdpwaWGX2Fso73QWgfFWv4ygWr4kA8m13zem9qNFLw0nZ2QO/NXCiOKCc4zY77o74C
-	4b8zEykzRo8LlUU2O43sLJG8minAMhY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1770226198;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qRb7SE2/fIN4Lp9bRZK1Yx2M3pdPz3YbMCfhr00KEO8=;
-	b=FdznD3OyAGoOTu1qex9UMEBKt8bITLVoTUr0DwAlyauDWn0WqFeGdocDTEX3Y1gOF3hKWf
-	vBD3VB8qSsQzIIAw==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=kWV4dbKK;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=FdznD3Oy
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1770226198; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qRb7SE2/fIN4Lp9bRZK1Yx2M3pdPz3YbMCfhr00KEO8=;
-	b=kWV4dbKKci+aEZu7o1Y/ikbGlztfGLreLcfE7e5hU2Eya/IE9FcADWBIbG8G6FVsaw5qRC
-	Rl/oAdpwaWGX2Fso73QWgfFWv4ygWr4kA8m13zem9qNFLw0nZ2QO/NXCiOKCc4zY77o74C
-	4b8zEykzRo8LlUU2O43sLJG8minAMhY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1770226198;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qRb7SE2/fIN4Lp9bRZK1Yx2M3pdPz3YbMCfhr00KEO8=;
-	b=FdznD3OyAGoOTu1qex9UMEBKt8bITLVoTUr0DwAlyauDWn0WqFeGdocDTEX3Y1gOF3hKWf
-	vBD3VB8qSsQzIIAw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5F75A3EA63;
-	Wed,  4 Feb 2026 17:29:57 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id PcclFBWCg2klHQAAD6G6ig
-	(envelope-from <fmancera@suse.de>); Wed, 04 Feb 2026 17:29:57 +0000
-Message-ID: <8d94faf9-2fb6-483d-9767-bd665c4a4b9a@suse.de>
-Date: Wed, 4 Feb 2026 18:29:56 +0100
+	s=arc-20240116; t=1770231833; c=relaxed/simple;
+	bh=9vSWloqcRXaxL3gvmit7soCRVhcCNrs5LQ17VXzVgV4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YV14DJN5FjSvG/wqf7FT4Fem7EO/BXvShfm+1erX8N9E2elnAHTJL5K4ksUS/rcn1ve5TM0L3cgnoKPCmMtZEUL75FCjBAcL4UzR3Dauot2kiEJj3FOTqBMfT3Pe4sB6brWqw6uqJsRrh6p2LvMMATNA5DibPMUxdc1Ww1urWk8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AJeDJLfM; arc=none smtp.client-ip=209.85.219.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qv1-f41.google.com with SMTP id 6a1803df08f44-8887ac841e2so231866d6.2
+        for <linux-doc@vger.kernel.org>; Wed, 04 Feb 2026 11:03:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770231831; x=1770836631; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=qrnr88nIhCevN+aceQs8WpTSQON3sJePiJ1Sjfxvheg=;
+        b=AJeDJLfMEoii7agAD0KN/CEu+5882HEgS5/wT7Vp8WDW3+MDkayATokiIpi8hfVhsV
+         ykSv19VQ5qjTQl5V7I+Udjhm2k8ODspAz8Aco0NrSbBrvtuQJI8xuXvbeVCEpeUaezKN
+         G2Jxzw1GwQ5/7HOLfHYI40+xjXSqBI5OtsEydyjYPwNHZmnK1MCK3vFOEn11+WWfJSFk
+         BcnrqmceR1fuIyJXVhsul6WxfHluYeNdQJw+uH64CRdewceAPUMjUWQizbuzKIDGyKfC
+         od0dJJYxyUKeUU0oU3kZqjbmcP6jdeYiL67H98DLGp82uDBIUCo76GxsRAxO/Vycu2lY
+         FBSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770231832; x=1770836632;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=qrnr88nIhCevN+aceQs8WpTSQON3sJePiJ1Sjfxvheg=;
+        b=J4rW9v/OkPnPWlVy8wyxq8woYCQNcCquEEFA8rCQ2qD5mysmPYr6AAfMMtC9VGVQUT
+         zlMw5oFqgVEYsxY507//7/W2CbrERtX+XWm09/yBWz79wEHsIN1PLIOoF10bAhubmfYo
+         DJEwKqDgJQ1w+j7dhsXi4XhROHiiYq8GdTKphWZ4Z3NNK+PunoWFHNeNlYThvrM7FU2O
+         cmOCK7UQhY8xMaW+cEQYD1KVtQ0eJPbpPx/CCc33neqNUr1bPMoyB8z2pj6QAXdmM7SD
+         zR2SgMio4KzsH86/ypMp+i/gjoQeiqe8NCWmvzna4724HosOu9GTNXPVpfy5W3dRnYk3
+         deXw==
+X-Forwarded-Encrypted: i=1; AJvYcCWqHAKDtk8fMlP0CjPox7IyZ7xORG4qs1kCsFjH64WkHuvIXa+mXoulch1iARLXrXTPvBKy24FRPz8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw2hoaITxg44uZVpLji1Ep0TXb4x+TzX+uPvXGcf8JJ0bjGpbZj
+	S1jUunFkySPU3rVa4pWG4LJNKMj701ubxAz96kXVDFrPWFp6Y4jN2HklFXo2eA==
+X-Gm-Gg: AZuq6aKjgVviIcrwhfQmyAHDbPYLLZcXABhAQg8aSfbtUrs5138xQdwzL3is86RS2IX
+	ABN51xBx+5eBOaTDJ0/7AgCnY5yE4KhE5bi57CdAw0yCYS8X54cosM1ttieVYmkzmRx9nZ1lFgw
+	sXv834IUUu2sO3ZYRYuZR9ncVTNzYRvVmK+j3cfXqXQP59GrQNRPwJRq6+tClnSe7CgWZOozJ3l
+	6ldtkD4PLlOnRDY60/NP9Yc0q4G5BVd0EcJ+c9Qx7WUYYmexelsnwlDcwQsLy327Hrp6B5yJdVN
+	uC8jIsdWDkcugc9ST2THL2zvUcaoFiLt4UnZc8tgFYS3WnOGQa9re1dHMkODFrWqSE/YOFTeceC
+	RoAz15UqSuqljTQj4HpTa4knewgBTICOn6jVTpZXdm6WCEN3Wd/WWjxZe6VbC+nJF36ahuntZNt
+	n06GceZvAG1GbBnTgZSEkxdFWQAIzIc+jresBmJRSs3xEMidHFKJIGKcvJL1s=
+X-Received: by 2002:a17:903:3d46:b0:2a0:de4f:ca7 with SMTP id d9443c01a7336-2a933cdd064mr26781485ad.1.1770226421229;
+        Wed, 04 Feb 2026 09:33:41 -0800 (PST)
+Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com ([106.51.164.193])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a933884954sm26879545ad.28.2026.02.04.09.33.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Feb 2026 09:33:40 -0800 (PST)
+Date: Wed, 4 Feb 2026 23:03:28 +0530
+From: Mukesh Kumar Chaurasiya <mkchauras@gmail.com>
+To: Link Mauve <linkmauve@linkmauve.fr>
+Cc: rust-for-linux@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>, 
+	Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, 
+	=?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>, 
+	Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+	Trevor Gross <tmgross@umich.edu>, Danilo Krummrich <dakr@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
+	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Josh Poimboeuf <jpoimboe@kernel.org>, Jason Baron <jbaron@akamai.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, Ard Biesheuvel <ardb@kernel.org>, 
+	Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
+	Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, llvm@lists.linux.dev, 
+	officialTechflashYT@gmail.com, Ash Logan <ash@heyquark.com>, 
+	Roberto Van Eeden <rw-r-r-0644@protonmail.com>, Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
+Subject: Re: [PATCH] rust: Add PowerPC support
+Message-ID: <aYOCWHF4CwzDVPuA@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
+References: <20260204030507.8203-1-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC net-next] inet: add ip_retry_random_port sysctl to
- reduce sequential port retries
-To: Eric Dumazet <edumazet@google.com>
-Cc: netdev@vger.kernel.org, davem@davemloft.net, kuba@kernel.org,
- pabeni@redhat.com, horms@kernel.org, corbet@lwn.net, ncardwell@google.com,
- kuniyu@google.com, dsahern@kernel.org, idosch@nvidia.com,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Thorsten Toepper <thorsten.toepper@sap.com>
-References: <20260203175422.4620-1-fmancera@suse.de>
- <CANn89i+UUWx5OhPnJnDhiCfr53BPTAGedBucgqYwyfqkidf_Cg@mail.gmail.com>
-Content-Language: en-US
-From: Fernando Fernandez Mancera <fmancera@suse.de>
-In-Reply-To: <CANn89i+UUWx5OhPnJnDhiCfr53BPTAGedBucgqYwyfqkidf_Cg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Spam-Score: -4.51
-X-Spam-Level: 
-X-Spam-Flag: NO
+In-Reply-To: <20260204030507.8203-1-linkmauve@linkmauve.fr>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	TAGGED_FROM(0.00)[bounces-75262-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75264-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,gmail.com,infradead.org,akamai.com,goodmis.org,lists.ozlabs.org,lists.linux.dev,heyquark.com,gmx.net];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fmancera@suse.de,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 3F62FEAFDC
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: DDB0CEBD4A
 X-Rspamd-Action: no action
 
-On 2/4/26 5:49 PM, Eric Dumazet wrote:
-> On Tue, Feb 3, 2026 at 6:54 PM Fernando Fernandez Mancera
-> <fmancera@suse.de> wrote:
->>
->> With the current port selection algorithm, ports after a reserved port
->> or long time used port are used more often than others. This combines
->> with cloud environments blocking connections between the application
->> server and the database server if there was a previous connection with
->> the same source port. This leads to connectivity problems between
->> applications on cloud environments.
->>
->> The situation is that a source tuple is usable again after being closed
->> for a maximum lifetime segment of two minutes while in the firewall it's
->> still noted as existing for 60 minutes or longer. So in case that the
->> port is reused for the same target tuple before the firewall cleans up,
->> the connection will fail due to firewall interference which itself will
->> reset the activity timeout in its own table. We understand the real
->> issue here is that these firewalls cannot cope with standards-compliant
->> port reuse. But this is a workaround for such situations and an
->> improvement on the distribution of ports selected.
->>
->> The proposed solution is instead of incrementing the port number,
->> performing a re-selection of a new random port within the remaining
->> range. This solution is configured via sysctl new option
->> "net.ipv4.ip_retry_random_port".
->>
->> The test run consists of two processes, a client and a server, and loops
->> connect to the server sending some bytes back. The results we got are
->> promising:
->>
->> Executed test: Current algorithm
->> ephemeral port range: 9000-65499
->> simulated selections: 10000000
->> retries during simulation: 14197718
->> longest retry sequence: 5202
->>
->> Executed test: Proposed modified algorithm
->> ephemeral port range: 9000-65499
->> simulated selections: 10000000
->> retries during simulation: 3976671
->> longest retry sequence: 12
->>
->> In addition, on graphs generated we can observe that the distribution of
->> source ports is more even with the proposed patch.
->>
->> Signed-off-by: Fernando Fernandez Mancera <fmancera@suse.de>
->> Tested-by: Thorsten Toepper <thorsten.toepper@sap.com>
->> ---
->>   .../networking/net_cachelines/netns_ipv4_sysctl.rst        | 1 +
->>   include/net/netns/ipv4.h                                   | 1 +
->>   net/ipv4/inet_hashtables.c                                 | 7 ++++++-
->>   net/ipv4/sysctl_net_ipv4.c                                 | 7 +++++++
->>   4 files changed, 15 insertions(+), 1 deletion(-)
->>
->> diff --git a/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst b/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst
->> index beaf1880a19b..c4041fdca01e 100644
->> --- a/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst
->> +++ b/Documentation/networking/net_cachelines/netns_ipv4_sysctl.rst
->> @@ -47,6 +47,7 @@ u8                              sysctl_tcp_ecn
->>   u8                              sysctl_tcp_ecn_fallback
->>   u8                              sysctl_ip_default_ttl                                                                ip4_dst_hoplimit/ip_select_ttl
->>   u8                              sysctl_ip_no_pmtu_disc
->> +u8                              sysctl_ip_retry_random_port
->>   u8                              sysctl_ip_fwd_use_pmtu                       read_mostly                             ip_dst_mtu_maybe_forward/ip_skb_dst_mtu
->>   u8                              sysctl_ip_fwd_update_priority                                                        ip_forward
->>   u8                              sysctl_ip_nonlocal_bind
->> diff --git a/include/net/netns/ipv4.h b/include/net/netns/ipv4.h
->> index 2dbd46fc4734..d04b07e7c935 100644
->> --- a/include/net/netns/ipv4.h
->> +++ b/include/net/netns/ipv4.h
->> @@ -156,6 +156,7 @@ struct netns_ipv4 {
->>
->>          u8 sysctl_ip_default_ttl;
->>          u8 sysctl_ip_no_pmtu_disc;
->> +       u8 sysctl_ip_retry_random_port;
->>          u8 sysctl_ip_fwd_update_priority;
->>          u8 sysctl_ip_nonlocal_bind;
->>          u8 sysctl_ip_autobind_reuse;
->> diff --git a/net/ipv4/inet_hashtables.c b/net/ipv4/inet_hashtables.c
->> index f5826ec4bcaa..f1c79a7d3fd3 100644
->> --- a/net/ipv4/inet_hashtables.c
->> +++ b/net/ipv4/inet_hashtables.c
->> @@ -1088,8 +1088,13 @@ int __inet_hash_connect(struct inet_timewait_death_row *death_row,
->>          for (i = 0; i < remaining; i += step, port += step) {
->>                  if (unlikely(port >= high))
->>                          port -= remaining;
->> -               if (inet_is_local_reserved_port(net, port))
->> +               if (inet_is_local_reserved_port(net, port)) {
->> +                       if (net->ipv4.sysctl_ip_retry_random_port) {
->> +                               port = low + get_random_u32_below(remaining);
->> +                               port = ((port & 1) == step) ? port : (port - 1);
->> +                       }
+On Wed, Feb 04, 2026 at 04:05:04AM +0100, Link Mauve wrote:
+> For now only Big Endian 32-bit PowerPC is supported, as that is the only
+> hardware I have.  This has been tested on the Nintendo Wii so far, but I
+> plan on also using it on the GameCube, Wii U and Apple G4.
 > 
-> What happens when almost  all ephemeral ports are in use, and
-> hundreds of ports are reserved ?
+> These changes aren’t the only ones required to get the kernel to compile
+> and link on PowerPC, libcore will also have to be changed to not use
+> integer division to format u64, u128 and core::time::Duration, otherwise
+> __udivdi3() and __umoddi3() will have to be added.  I have tested this
+> change by replacing the three implementations with unimplemented!() and
+> it linked just fine.
 > 
-> Choosing a random value each time we meet a reserved port is going to
-> be quite expensive,
-> and we might return an error from this function even if there are many
-> available ports.
-> 
-> Perhaps randomly select @step one time at the beginning of this
-> function so that  @step/2 and @remaining/2
-> are relatively prime numbers.
-> 
+Hey Link,
+I sent a patch with ppc64le support. 
+https://lore.kernel.org/all/20260204042417.83903-1-mkchauras@gmail.com/
 
-That actually makes sense. It would ensure all ports are visited before 
-returning an error. Let me test this out.
+Can i take this patch and put ppc64le support over it and send it out?
 
-Thank you Eric,
-Fernando.
+Regards,
+Mukesh
+> Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
+> ---
+>  Documentation/rust/arch-support.rst   |  1 +
+>  arch/powerpc/Kconfig                  |  1 +
+>  arch/powerpc/Makefile                 |  2 ++
+>  arch/powerpc/include/asm/jump_label.h | 16 ++++++++++------
+>  rust/Makefile                         |  4 +++-
+>  scripts/generate_rust_target.rs       | 10 ++++++++++
+>  6 files changed, 27 insertions(+), 7 deletions(-)
+> 
+> diff --git a/Documentation/rust/arch-support.rst b/Documentation/rust/arch-support.rst
+> index 6e6a515d0899..70b9e192a7a0 100644
+> --- a/Documentation/rust/arch-support.rst
+> +++ b/Documentation/rust/arch-support.rst
+> @@ -18,6 +18,7 @@ Architecture   Level of support  Constraints
+>  ``arm``        Maintained        ARMv7 Little Endian only.
+>  ``arm64``      Maintained        Little Endian only.
+>  ``loongarch``  Maintained        \-
+> +``powerpc``    Maintained        32-bit Big Endian only.
+>  ``riscv``      Maintained        ``riscv64`` and LLVM/Clang only.
+>  ``um``         Maintained        \-
+>  ``x86``        Maintained        ``x86_64`` only.
+> diff --git a/arch/powerpc/Kconfig b/arch/powerpc/Kconfig
+> index 9537a61ebae0..17db23b82e91 100644
+> --- a/arch/powerpc/Kconfig
+> +++ b/arch/powerpc/Kconfig
+> @@ -283,6 +283,7 @@ config PPC
+>  	select HAVE_REGS_AND_STACK_ACCESS_API
+>  	select HAVE_RELIABLE_STACKTRACE
+>  	select HAVE_RSEQ
+> +	select HAVE_RUST			if PPC32
+>  	select HAVE_SAMPLE_FTRACE_DIRECT	if HAVE_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
+>  	select HAVE_SAMPLE_FTRACE_DIRECT_MULTI	if HAVE_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
+>  	select HAVE_SETUP_PER_CPU_AREA		if PPC64
+> diff --git a/arch/powerpc/Makefile b/arch/powerpc/Makefile
+> index a58b1029592c..9fd82c75dcbd 100644
+> --- a/arch/powerpc/Makefile
+> +++ b/arch/powerpc/Makefile
+> @@ -61,6 +61,8 @@ else
+>  KBUILD_LDFLAGS_MODULE += $(objtree)/arch/powerpc/lib/crtsavres.o
+>  endif
+>  
+> +KBUILD_RUSTFLAGS += --target=powerpc-unknown-linux-gnu
+> +
+>  ifdef CONFIG_CPU_LITTLE_ENDIAN
+>  KBUILD_CPPFLAGS	+= -mlittle-endian
+>  KBUILD_LDFLAGS	+= -EL
+> diff --git a/arch/powerpc/include/asm/jump_label.h b/arch/powerpc/include/asm/jump_label.h
+> index d4eaba459a0e..238f0f625a36 100644
+> --- a/arch/powerpc/include/asm/jump_label.h
+> +++ b/arch/powerpc/include/asm/jump_label.h
+> @@ -15,14 +15,18 @@
+>  #define JUMP_ENTRY_TYPE		stringify_in_c(FTR_ENTRY_LONG)
+>  #define JUMP_LABEL_NOP_SIZE	4
+>  
+> +/* This macro is also expanded on the Rust side. */
+> +#define ARCH_STATIC_BRANCH_ASM(key, label)		\
+> +	"1:\n\t"					\
+> +	"nop # arch_static_branch\n\t"			\
+> +	".pushsection __jump_table,  \"aw\"\n\t"	\
+> +	".long 1b - ., " label " - .\n\t"		\
+> +	 JUMP_ENTRY_TYPE key " - .\n\t"			\
+> +	 ".popsection \n\t"
+> +
+>  static __always_inline bool arch_static_branch(struct static_key *key, bool branch)
+>  {
+> -	asm goto("1:\n\t"
+> -		 "nop # arch_static_branch\n\t"
+> -		 ".pushsection __jump_table,  \"aw\"\n\t"
+> -		 ".long 1b - ., %l[l_yes] - .\n\t"
+> -		 JUMP_ENTRY_TYPE "%c0 - .\n\t"
+> -		 ".popsection \n\t"
+> +	asm goto(ARCH_STATIC_BRANCH_ASM("%c0", "%l[l_yes]")
+>  		 : :  "i" (&((char *)key)[branch]) : : l_yes);
+>  
+>  	return false;
+> diff --git a/rust/Makefile b/rust/Makefile
+> index 5c0155b83454..377e6fd68524 100644
+> --- a/rust/Makefile
+> +++ b/rust/Makefile
+> @@ -400,13 +400,15 @@ bindgen_skip_c_flags := -mno-fp-ret-in-387 -mpreferred-stack-boundary=% \
+>  	-fno-inline-functions-called-once -fsanitize=bounds-strict \
+>  	-fstrict-flex-arrays=% -fmin-function-alignment=% \
+>  	-fzero-init-padding-bits=% -mno-fdpic \
+> -	--param=% --param asan-% -fno-isolate-erroneous-paths-dereference
+> +	--param=% --param asan-% -fno-isolate-erroneous-paths-dereference \
+> +	-ffixed-r2 -mmultiple -mno-readonly-in-sdata
+>  
+>  # Derived from `scripts/Makefile.clang`.
+>  BINDGEN_TARGET_x86	:= x86_64-linux-gnu
+>  BINDGEN_TARGET_arm64	:= aarch64-linux-gnu
+>  BINDGEN_TARGET_arm	:= arm-linux-gnueabi
+>  BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
+> +BINDGEN_TARGET_powerpc	:= powerpc-linux-gnu
+>  BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
+>  BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
+>  
+> diff --git a/scripts/generate_rust_target.rs b/scripts/generate_rust_target.rs
+> index 38b3416bb979..0054880ba0ea 100644
+> --- a/scripts/generate_rust_target.rs
+> +++ b/scripts/generate_rust_target.rs
+> @@ -188,6 +188,16 @@ fn main() {
+>          panic!("arm uses the builtin rustc target");
+>      } else if cfg.has("ARM64") {
+>          panic!("arm64 uses the builtin rustc aarch64-unknown-none target");
+> +    } else if cfg.has("PPC32") {
+> +        ts.push("arch", "powerpc");
+> +        ts.push("data-layout", "E-m:e-p:32:32-Fn32-i64:64-n32");
+> +        ts.push("features", "+soft-float");
+> +        ts.push("llvm-target", "powerpc-unknown-eabi");
+> +        if cfg.rustc_version_atleast(1, 91, 0) {
+> +            ts.push("target-pointer-width", 32);
+> +        } else {
+> +            ts.push("target-pointer-width", "32");
+> +        }
+>      } else if cfg.has("RISCV") {
+>          if cfg.has("64BIT") {
+>              panic!("64-bit RISC-V uses the builtin rustc riscv64-unknown-none-elf target");
+> -- 
+> 2.52.0
+> 
 
