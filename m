@@ -1,403 +1,366 @@
-Return-Path: <linux-doc+bounces-75420-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75398-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GBfqNkkHhWlW7gMAu9opvQ
-	(envelope-from <linux-doc+bounces-75420-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 22:10:33 +0100
+	id oAg5D97thGkU6wMAu9opvQ
+	(envelope-from <linux-doc+bounces-75398-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 20:22:06 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E01CF77BB
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 22:10:33 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 544EAF6CB0
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 20:22:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 711BB3001FDC
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 21:10:32 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id A368830055CF
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 19:22:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C95E92F3620;
-	Thu,  5 Feb 2026 21:10:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC86032694E;
+	Thu,  5 Feb 2026 19:21:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aRfpPxhu"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="nytyJqRl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from CH1PR05CU001.outbound.protection.outlook.com (mail-northcentralusazon11010043.outbound.protection.outlook.com [52.101.193.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 797661F5858
-	for <linux-doc@vger.kernel.org>; Thu,  5 Feb 2026 21:10:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.174
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770325829; cv=none; b=pGmiyyRx+g2oZfp9twbKsHl01/NjscRHQF1iqEClHXWPnmMRIarRUheaQf9YAVnjAeGNNw0NaBLQmSwdr6ZRZLBEuDFdDr4QQLgLo6ILKyRx0IXpjvd/1kR4sF8/SofB3kvGB5wBlz9cM/Nsh1BF6wcoOPtWOaHkcyAOZz0zDE8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770325829; c=relaxed/simple;
-	bh=eXwQ9SgcUhDKN59vyhZtqEkgpqtPjys6BZik72szYvI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WNVSj9RWXOTgAjIfTbsiLI3LZp3e0/APH8Gt8XimlBb8PTQxG8o7ao0Rqk2HB4mt7k09YDv9+YgPFUSo/vxWmLsZefTro6z2fd2+UfqlvFe0NJfCyxszJeNVTrag2J3i/3Qbqj9G0kvIvcO50Hy6jwhKCuhahjLZhvToC6WMpWM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aRfpPxhu; arc=none smtp.client-ip=209.85.160.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-5033387c80aso33901731cf.0
-        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 13:10:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770325828; x=1770930628; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iiWXSjYD8iWQZkhbOZvxGQgWjvd+mTWIbvYj/f3atxo=;
-        b=aRfpPxhuxbFJedIriojLMi7zCUqGe9glugXR7ZPTl/zXrh/KHiUKLT8GWgLvUCSGPA
-         W2cB+UT7KumQCVk3fU3wzI6fbsxO+wTwHoRk8VyRyQ81AdhWhvjqSlQdhIGbvRnjNTr/
-         +shp2qCuSMkbngmCoCErJsG35XJhv+LnLDvbzBR8v8Tr80KKxGcfOEDuP18J5wO1L/lg
-         dKZxybbf56GCF8PsXCAKQGG03SmJCY1zmWIMHnmjVmKeDLsQ1Zmj33WElNzHuvQp5hBw
-         FsXYyUmtZ++6aBxcOEG1324rKI9Fy3xs2BGPirxFzj6dpRSBQi+1TIzECbR9oj9hoZ1d
-         Fotw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770325828; x=1770930628;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=iiWXSjYD8iWQZkhbOZvxGQgWjvd+mTWIbvYj/f3atxo=;
-        b=Xn03F2IHnuL+gvtMMwetfcbhdlBlyBi2xAo0faqwmXV0EWue42/4IKKgzpxqUu/66T
-         KeZuqMtbfnEc6Eeg27gOp+L4rIvlyI9hMNBe/+zdSZyaq5IoVrrACJ4k2MomO/sQQvO5
-         PDC9bRpyku5RxVn1Tm/JTGDGs64EA5szsXbN6ECVL5BV2co9+oHgWWJPRxI1jDH6zlyi
-         qxA/djMxH3+WlMshiLGKm5zVfZ2qDgsDN8Jb1y5FFuzE5jSimhORs2L09hIAIFt7x0C2
-         RbhTq97jVKuoL9PN/kEeawHuIlcT4yVFNpNmB6rwI6+MG6HtbgqqrApH0aNjmG6R7n5F
-         wQug==
-X-Forwarded-Encrypted: i=1; AJvYcCX1R4vgOLWV8pVey3XBmjnW1S/H/eGXbxp5MTbr24OhPQuFYbSaL0PiW7kAN5wgjUk6s9WeppkHSho=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz0697kk0A/1UpngASAt/o9hWBewmPgeFOXZVNknQ0r/1OiQCdf
-	fjM58cEN6pEO/yhk1s7Txa7zJ8zUCOEicJRpco7oo+4MC5l0TLxbyd8R0FevJg==
-X-Gm-Gg: AZuq6aLCtqKeuMEocx3fny5oVE6E6J19h+KYFpvtx8rzA7dBcOgs6WRg4+gZTZleByS
-	AhuBieLV5mL8WPdbJLOJCjaI4gJfdbItTsb1XRYbkPaN0mLWKp+7tZRwrYp0m2+8748IHdSoU/f
-	b+vGQU9pUZfmG+7M20Lo1tkz8vJEzGRJUElvOntNKRn55Spfw2RqEmknEn4HBbYcv2ZPc86GY2Q
-	109SOo0Gv7J8CT22ZCsklYENbpA6bB+s5r71MdCoT97tJdtmCj3YTQnRtDpPDSIkg6PhoUf9wAu
-	tz0PeTrJnj2SWHaVNdo1z2WUHLTY/cEB1Do8YH5P0swXrbw0LdcTLTFr0+12xI1iFTOfMy6xAzN
-	IoxPCi90W1NnJXI0jt2bMr2GfSZyFhVqRCJUT0VaUTahOqrYRwBslvDMwW6H1ZTn6iVum4CtcgG
-	3zj8mIvHVMBSsD/4d2vwwEAVR5
-X-Received: by 2002:a05:693c:3111:b0:2b7:a6fa:3f87 with SMTP id 5a478bee46e88-2b855d341cfmr131450eec.19.1770319108298;
-        Thu, 05 Feb 2026 11:18:28 -0800 (PST)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b855c88cb4sm165396eec.30.2026.02.05.11.18.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Feb 2026 11:18:27 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Thu, 5 Feb 2026 11:18:25 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Marius Cristea <marius.cristea@microchip.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH v5 1/2] dt-bindings: hwmon: temperature: add support for
- EMC1812
-Message-ID: <a83b48a4-76ba-48df-9aba-adb018949914@roeck-us.net>
-References: <20260205-hw_mon-emc1812-v5-0-232835aefe8f@microchip.com>
- <20260205-hw_mon-emc1812-v5-1-232835aefe8f@microchip.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83970325735;
+	Thu,  5 Feb 2026 19:21:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.193.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770319318; cv=fail; b=TdVnzgJi4BXjdoXoUqIWmvoebKJAoFBS+B//uAzQN8W7xBpX3LLCL4S/ODXmNUvvJqg/b2xjpofvrhRFOclSsIF/k5YBYYu+AksLKNNBLxcGoh9OXqzc9wpj/+tzLvhx4EONSrWxC4H7ZNtzoCDM5ylCjCB2waTdu6WtRSCFk3g=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770319318; c=relaxed/simple;
+	bh=x3dE5FOxKhfGCE9ntPwbaR1+gMQA8uIEksGpgyvkbM4=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=KmGDZX/61Ro6wG7aMZdaLgcSv+3DVS4bGD76xX4F5GsnkkX5ZeEV13hsMIC3sfCwpU2CCrlou4UwfYetX2BlFKqm0AE2GtSbEQ27vbjQ0igg3fd/tChVwiYt6yeLtgc8dd7wFHEjqFfQ8lJQ98yBfVIquOzbeIP/cQrGO4rPiyU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=nytyJqRl; arc=fail smtp.client-ip=52.101.193.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YNq5wFoihX6TEfb/KWrWhc/qIQrADDIcUqShe8meZZPVXSz8BomH0z6nZo3H+GVYSowj/E2/IVUJ8IAY8EfT1Ldy7yKiJO+oZ0pJONhB1aLwRLCDeXcnD8RQC4nRoRt/L5BqMMJ2440ikvaRrcwjjGeoqdMFW72Qe4jh9io9gC3UUhzWSLkkuO4ET8rVoIldCmrPee5VXOY8xXSm7CCm3qV+BktqQfii7fO4aq7y9oTXQb98gO+xyixZdv/JzlojqyHbt1SSjfgGznvFayLcLHknfc/ZQZFFaZTrbomAN1QD7c+QckQbTD0Vb27X+gfa4x9hUrfUcam/y+xgzHoBdA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qjEYlgk2pPg+xaWMcNln0yU2Aa/TZ2jlwbSwTm87WKA=;
+ b=ZEetN3HwxUluOlDMBvG2qxhENNgjt57nI6NiYtQ+m7BDPv0TyRRcVoUewOyK7kkgVCfgVzCNyuDJVQVzjCzaOhzTqs+leKkA1TQluhysAKQR49dzxxk84ii9r5zFuk18rzbVa3knA7M3LHh3234FYVkeJMC3gVX5PfZ1RFIc369LLQ/1Jpwu13S/QLWu8VhWGzyaB3GlUgRQwn/YYnYf8ql/quDhXTYFbJFfX3iWWizvLaZ0/frXGhwqd5kk3iDwGT/xVD5KhrnnhEWzPb5c7XfnA+KkYUwQ5x4dHRAm0C0qf5JI+ZUG5tfbxDLcU1ZrUMdtchsaku4OjRVOpXyQNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qjEYlgk2pPg+xaWMcNln0yU2Aa/TZ2jlwbSwTm87WKA=;
+ b=nytyJqRlKnGhmLiAeJs7BpO5ummctaeUymWPFQz1Ye9laDlS9U0DrwIYT3dtS+ua8l9R0ZuTx94HZTf+dkYFo+S4E4oJsW7EWPBp01K9DbWaQ8nA8nDgvtYWyOWtDyb1oR7jIk+qspxtg0XjOKWwyqqSBYYjrdLpSLNgj9ErpnTwFw5P4bbjUjgO+60uAPH+QeNai5rIC4iJndBRv5MgGOa+60RQGbstyqAwilzjOt2mahYEuQN4fmF7U5mnV0ljuGtVqeglC57pS4tK4rGCkdpCbI6PlbFEMLN9+I5m0kJHFkGKJdns37hMbQQSOU/AS5jqjZDArZ2kUD+mbmZDSw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from BN9PR12MB5179.namprd12.prod.outlook.com (2603:10b6:408:11c::18)
+ by MN0PR12MB6296.namprd12.prod.outlook.com (2603:10b6:208:3d3::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.13; Thu, 5 Feb
+ 2026 19:21:53 +0000
+Received: from BN9PR12MB5179.namprd12.prod.outlook.com
+ ([fe80::cf08:f59b:d016:c95f]) by BN9PR12MB5179.namprd12.prod.outlook.com
+ ([fe80::cf08:f59b:d016:c95f%5]) with mapi id 15.20.9587.013; Thu, 5 Feb 2026
+ 19:21:53 +0000
+Message-ID: <a1cdc4ee-1aaa-4685-b1a9-a6961a486cd8@nvidia.com>
+Date: Fri, 6 Feb 2026 00:51:40 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 4/7] ACPI: CPPC: add APIs and sysfs interface for
+ min/max_perf
+To: "Rafael J. Wysocki" <rafael@kernel.org>
+Cc: Mario Limonciello <mario.limonciello@amd.com>,
+ Russell Haley <yumpusamongus@gmail.com>,
+ "zhenglifeng (A)" <zhenglifeng1@huawei.com>, pierre.gondois@arm.com,
+ viresh.kumar@linaro.org, ionela.voinescu@arm.com, corbet@lwn.net,
+ rdunlap@infradead.org, ray.huang@amd.com, gautham.shenoy@amd.com,
+ perry.yuan@amd.com, zhanjie9@hisilicon.com, linux-pm@vger.kernel.org,
+ linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org,
+ acpica-devel@lists.linux.dev, linux-kernel@vger.kernel.org,
+ linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com,
+ vsethi@nvidia.com, ksitaraman@nvidia.com, sanjayc@nvidia.com,
+ nhartman@nvidia.com, bbasu@nvidia.com, sumitg@nvidia.com
+References: <20260129104817.3752340-1-sumitg@nvidia.com>
+ <20260129104817.3752340-5-sumitg@nvidia.com>
+ <4432fa04-e67c-422a-aae4-2938be431985@huawei.com>
+ <c96312c7-b13f-4f5c-9512-cc0382c1c77b@nvidia.com>
+ <74f3e6cf-7c13-43e6-a8f6-2b46184b8ad6@gmail.com>
+ <944fc140-e5c5-425f-a6ad-883e87eed8a3@nvidia.com>
+ <CAJZ5v0hUdLsh8UK5G6rHHD49RQGYLAiU1J-11DK-fLTKnuqhUQ@mail.gmail.com>
+ <CAJZ5v0ggzD0PEti-r20Sm-8n0gPigPh=NgE2Oa=UKzMmwB0jpw@mail.gmail.com>
+ <211d9dfa-26e6-4fc3-b70b-f5fbca49e5fd@nvidia.com>
+ <CAJZ5v0if=tMiyLB-efkzB67SniJS-2pCVv1-eN+vzZxqrdAM8Q@mail.gmail.com>
+ <e7570bc3-5420-4743-8a75-8602559ca235@amd.com>
+ <b8603fcb-b0ab-47da-ae90-e82f7b9bcd67@nvidia.com>
+ <CAJZ5v0h4yOAW5y-B76EooeBLdMBmmL1hRf3PZ0udA+FYR4EPKQ@mail.gmail.com>
+Content-Language: en-US
+From: Sumit Gupta <sumitg@nvidia.com>
+In-Reply-To: <CAJZ5v0h4yOAW5y-B76EooeBLdMBmmL1hRf3PZ0udA+FYR4EPKQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA5PR01CA0225.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1f3::18) To BN9PR12MB5179.namprd12.prod.outlook.com
+ (2603:10b6:408:11c::18)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260205-hw_mon-emc1812-v5-1-232835aefe8f@microchip.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR12MB5179:EE_|MN0PR12MB6296:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7a42b6a1-5d53-42ee-7628-08de64ebd11b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|18082099003;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?MTc5NnJjRUVPQy9sZEpGek5ZRGIzS1VSeVJxeFNUSjBGMkpVWkZuRnFJNGdO?=
+ =?utf-8?B?TlRQVzRwYk1wbHV4aFZLcHVQU2FIcGh3Yk4xOEwrM1l1cnQrRmd1VEJXNTR0?=
+ =?utf-8?B?Q3psYkFBYUdVQmwvam94dExWQ3RNczlZYkRkMFhiRm4wb1F5T255WmtuUmZ2?=
+ =?utf-8?B?Y2NXNVJVUWpnYmdQYURTMHBSeEVHcTUweDZkejVxL2pLaU9ZdUoxTTVrZUpL?=
+ =?utf-8?B?SjB0aGhsYStuZTI4dDNIeE8vUGN6VGJQMlpSZ0JJRkVLQ3hSNzFWVlRndUZs?=
+ =?utf-8?B?QWtEaERzb29KWm9YVjBXUXkwcUlVK0VnMWVOQVM2MGY3NUJaeVh4WjJtRFVD?=
+ =?utf-8?B?VENXc2tySlpEamVhZ0VieFhpbnVGWjlwZzNDcEwxZ1l6VFprVC8rcjFodUZ0?=
+ =?utf-8?B?ZDBIV0diWnJ0UDRFcHdmMDc1MnlYTElqNTBKZGFqS1h3VkoxVGwxQzJPUXpR?=
+ =?utf-8?B?WTY1VjNKZkRpSEhxTXczZU55NWNQZWVPM2JLMURWS0NtMFVCdk1qdjFTZUJE?=
+ =?utf-8?B?TWNKdXdGb1lCRU1TNFhlQ2NPc3FIVXE1TkVia002Tmt5cU9mZUdNWFlPSld1?=
+ =?utf-8?B?Wk5qaHhBWVhNVTRKMGJ3clpGWmx0Ky9ib0dMWDJLWThFc3QvbDMya0loQ2JN?=
+ =?utf-8?B?OVlLK2pyelRLaTJlOEhua3p6R213ZzMwRGVlYjVVaTY1Z0JjQWRGZFNNZEVP?=
+ =?utf-8?B?elM5MU5qSENqWEN6YkIwTXBwSnVRaUNzeGZ5MmptSjR5ekU3RlVuSFZrYmpZ?=
+ =?utf-8?B?L251d2ZwUnZ4K2k5RGZ5VmxNZmFETXJiem5ZVVVFa2Q4cXJVcm1BREVRMGQ1?=
+ =?utf-8?B?Wk5NVTZjekthVTNyMUoxUGJJSVh3U2NjOVI2SitBV3ZSbE9yOHdMWmU0NkRJ?=
+ =?utf-8?B?SzgwOUhVNFdVY0hkS2ExaFBDeWR3VUJtQ0pTQUtKWmt6UHpnY1JhRFZmV0VD?=
+ =?utf-8?B?N1grVzRESlE5cU9wQktkR2tGVTJGVVFJNnlTT0RXUlpUcERUYS9tMU90N29s?=
+ =?utf-8?B?Z1VIbGdnYU1YaUk2bzhXdmRGcThxY0RrWU83OHRRUm8zaHV6bFAxdmc1VW1E?=
+ =?utf-8?B?UEVKQjBwTG5uN0dtc2FPM1AvVnQySUNldHJ5ak1wamMyRVpGN3J6NkxFRzFG?=
+ =?utf-8?B?NXNWcExoOVM2K3dQTjZJY0pJOXNyRUs0ODY3cUhSWHJFQlJtTE5NZVFCWWJU?=
+ =?utf-8?B?Zzg3N0w2NjhyUjZ0YUFhRHhPdzFSdkdjalNlUlhaYzdtTTV5ckl0REVBV3FN?=
+ =?utf-8?B?NFhrazY3d0kzMzdTWW9SNXpTZHlQWGJWWjUwZEhqMk5scHBQeUlRWDhHY0R4?=
+ =?utf-8?B?Z0JFc1Z3UTBtNVdWOXN6Nm9WQlJKWThpSkVPS3k5ai9TaVF0a2IyV2FQVm1D?=
+ =?utf-8?B?N0hTUHUzaFltbjh0T1N3ZWhFWWpmWlQ0WHRYSFVYcTJwSjdWRXhpdkRsOFJN?=
+ =?utf-8?B?TXpNeXlUS3N1aWZOdGpKVXVobHBsbnB3R0UzVmdMY2YybUhaTTlwQ0c3UFo5?=
+ =?utf-8?B?MFE4eThZMlR5UjltaE5qeU9YZzNYUzdwS2daQjBScWJzZTR4VGVOeDZRTHcx?=
+ =?utf-8?B?OG9MMTNCVGU1VGpKajFUd2FBQy8vdGduUzRqYUM1UEgrZENxL2d3d2RJREY0?=
+ =?utf-8?B?MzJHUWJlazdkVWNJOVYrSFdmbFhXL2NCTjl4Y0JMUExheDB1KzA2UE1NTHhH?=
+ =?utf-8?B?bDY5dUl4dnBTREZRS0ZqSnJUTWVBU3YyTXBva0VNb1RRSThGbWp6cmRtVlVo?=
+ =?utf-8?B?TmdnTTN6cW53a3AxL0VKOHI0VlZFVzZxQ2hIOFJKYmZUWkhVcHZJQjJ2UGNo?=
+ =?utf-8?B?cFArYlhBSzlPaWUzd01KcWNPa2RCZWFxYkJRb2dZOGE2Vnp5NVl2OWxIUzZU?=
+ =?utf-8?B?alBML0VlSWQ4eXhGd1IzRTd2YVRwR1VmUjNscjlzaDlnMTUrMUt2dUdIb2oy?=
+ =?utf-8?B?Q0Q1N29DVFlWWTQxVzhXVVQ3WnFjT3lEdk4zRWM1aFIvWEpsVHBzYkJPUis3?=
+ =?utf-8?B?bzVoUmRTS040UlJoZkt4Y2V5STkrdEoxT3hLUWpKOWVUUDZUbjRhM1JtYlBN?=
+ =?utf-8?B?MlRZNkE2L3NkczdTMVdwUTkrNzJVR3A4QnRJVU54U0NFcjBrSkRNZlZJS1hJ?=
+ =?utf-8?Q?zklg=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5179.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(18082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MFc5dEZyblhCR1Z0eElOZkhtanNEV3NFYnNJdGw4VkcvUGNqVW9iTGlIK2l4?=
+ =?utf-8?B?cGJ1bEI5bldMTnp6ZzZkY0FRWklYTlJqbDVYSHJKWVVCdkpOdlJscEFmOExP?=
+ =?utf-8?B?bE1SR0RHaHhMQ2RwWlUxSFEwZlZuanlqZlVmWTlBcUh5VlNUY3ZVSFB2cEZ4?=
+ =?utf-8?B?bUVMNkVIMmhzdWltRXl3T1NheGtOd3FKVjNCU01KelNyM2Y0aVU1TVBZajRR?=
+ =?utf-8?B?dGZJaE1TcndYU0JKcldDUUltaFNnUWVnOXhBd29PSnBNUlR5bmVIMEg0SEU0?=
+ =?utf-8?B?eUFnNGZrNkEwQ0VkRnVXTWxGdEhoVEtZU1pHbExDOFI3dXQwOUszeFcydU5T?=
+ =?utf-8?B?Q2M0QzA4L3Z0Zm9kV3VKemY4UkY3RW13RDYwNGJLTHFhTHFUS3d4Tm1hdWJ6?=
+ =?utf-8?B?c3ZBbFptTTViYUFlOXRuWm0rOTE5TVd0ZUhMeHN3Sk0wQ1lVVkVwbnlXOWFR?=
+ =?utf-8?B?bkpNanExcWdEK2JwMDdUOUppbHF6QWNpTzFibW9YekRoYVBObXBVcFo2Q2RC?=
+ =?utf-8?B?bkZGRVRvVzJjZ0gwWW1JRWZVVUh3VlZuYk0yaWd1OXM2cTZPbWlkU3J6bTIy?=
+ =?utf-8?B?bjhIVktEZks3Vmludnp4LzVya3FCWGpGa3BXMUNIaGMrVkZvTFVqWWZQdk50?=
+ =?utf-8?B?bGo2ZGNhb29ZZEFaYWdMZ1ZxVjN5VDE4NUE1OHNaejN6K2dPaHVJVUtKdFZj?=
+ =?utf-8?B?OStYRDQ2cFZhUVg1T3VuYXFmYnY1bXdBbGJUSmJpZGtrRHhYRFovOVZGQVdD?=
+ =?utf-8?B?Qk9xTWhmdFAxQlltL2VOVDFYMEU1RWdaZUdYaXJtZHllaDJ6dzFMYVdBZWpU?=
+ =?utf-8?B?RWRmZVNrckViR0V0dnJ6WnpienRNdEx1bjVQcmgzVkdvZFBQbjB5M3JhYmtO?=
+ =?utf-8?B?YUZXN1ZFY2VIRy9WcXFkYWZyQzJLOEcvRFVqalJTaXJRQmY0SVhaRWtCb0pQ?=
+ =?utf-8?B?ZXhnaGE3WFFwTmxKNHB3bmFXenIwcHdPMU5oZ1BFLzNvL2I2b1VCbmNCN1Nj?=
+ =?utf-8?B?VlZYZUdQWDR1NWhLOGptRzZFNG93S2tqQXQxQ3pzWjlMWkI3RXNtZkUvNElF?=
+ =?utf-8?B?RXJlNU95YmQzNkpkcVNJOTVkSitYT2tGdHRyRW16YzFDU3lqb2lBOHI5bUk0?=
+ =?utf-8?B?dm1DWG8yUWxab3B3LzNxS2RPUXJXeXg3RkkyajFzdnJoNFNOeitxWDQ1NVA0?=
+ =?utf-8?B?aVJqZkg4ZTdEazBKVlAvRGU2MC9VcU1oQkE2R1JqRXkrUzdnVFk3c3lSMWNF?=
+ =?utf-8?B?ZDBHc05XcldqNWdoNjNvOUZPMDg2V21xcExWTmMrNkRhMmFjZzFndDAxcGtr?=
+ =?utf-8?B?eHFBdmhRS29SVG5kVDFrbGRZeUFwazFSZEdtcVJyWU5ZYm1iVkQ2MW5uQ1lm?=
+ =?utf-8?B?MVE4UnRUYlZLNmFBN0lvOWVQZnJjT3VOOElVa1ZtM2xWanRDc3ZXSFg1YmJ0?=
+ =?utf-8?B?Q2k4L1pBMjN6RnpRQmVxRktBSlZLZGtjeTd5ZytRS0IvSHl2QVhhNkFFOVU4?=
+ =?utf-8?B?LzJoWWhBUEp1dk5wVzhxZkNZNFZUdnhPWHBlQnBiSldES2VFVWc5SU41QjVu?=
+ =?utf-8?B?M2p5M2NlZEI2dUJNNHZ2RjVDcXB6ZjdFeWk3RllvYUN2UjRZZGwzVzFnTjI0?=
+ =?utf-8?B?NGJIb01WR1QrZEQvb0pWWjg2Y0htc2hTWktwTVVNdExpdHBJMzBBdXhHZWNK?=
+ =?utf-8?B?ci9Za3JpcENKaXdVRlN4QzdUTUxzbytCUDF6V2FmVFNCb0M1R2N2ZjcvSERx?=
+ =?utf-8?B?OTQ1eE16ZENOd2RENHNhQk5EMzZ3dlpOQyt2QndGKzl6RmZZa2ZkMWVVVEZZ?=
+ =?utf-8?B?cHI4K0V6QnMzT3RHdERTbS9xdFZUaDJEeTFsT1ExS0FLVThZb2VJeHUrRlV1?=
+ =?utf-8?B?M0ZqNXp5ck1nUVQvdS9uQzRaYTdjeTVVb1ArY3U4NVBlM3hOSFRad2hTUEtM?=
+ =?utf-8?B?Y1FUcUFycjdjcFgwU1h4bWRFYUJyNExGMVJwNFZ0N25hbGdMbUpacTU3a05r?=
+ =?utf-8?B?VXZUM0lGemxEeTVlOFFpSFUrWDY4c0lvOGc2UmQvZ08wekl5NEtPZGFBS3pU?=
+ =?utf-8?B?SnRVQ3haaW0zNDlsWVBtZXhmamVsZkpmRi9EVG1wNGZRcUU4WDdTWUVjUVFM?=
+ =?utf-8?B?SzMvbXFxazArRnVLVW1XdnRORENleVZhZWFoaUtONHJycVdTNXBZMkdjY1ph?=
+ =?utf-8?B?cUpuZ1ZrbElhdnZjYjNVcFdKZVRGNUVpYmgraENOZTQvVzZFNUR2ZjdCdXJo?=
+ =?utf-8?B?Y0hkTEVmMmVmUk5OOW9oZmErekpiQkZ4UU9qVEFVOFAvdmczN1BiVE9LdkVk?=
+ =?utf-8?Q?GB+emldSPShvprSJi5?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a42b6a1-5d53-42ee-7628-08de64ebd11b
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5179.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 19:21:52.8723
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kJ4H4UTfQpWXYo7FfgCIZbRI4Hvn2a9MXH8uiLZ9cypTxrGpXpAs3yjsb7JoEbO1wMeAEkcOhiLMHrfOgf28CQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6296
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MISSING_XM_UA(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75420-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[roeck-us.net];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	TAGGED_FROM(0.00)[bounces-75398-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,huawei.com,arm.com,linaro.org,lwn.net,infradead.org,hisilicon.com,vger.kernel.org,lists.linux.dev,nvidia.com];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	DBL_PROHIBIT(0.00)[0.0.0.2:email,0.0.0.4:email];
+	FROM_NEQ_ENVFROM(0.00)[sumitg@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[0.0.0.1:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,4c:email,devicetree.org:url,microchip.com:url,microchip.com:email]
-X-Rspamd-Queue-Id: 7E01CF77BB
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,nvidia.com:mid,Nvidia.com:dkim]
+X-Rspamd-Queue-Id: 544EAF6CB0
 X-Rspamd-Action: no action
 
-On Thu, Feb 05, 2026 at 09:09:03AM +0200, Marius Cristea wrote:
-> This is the devicetree schema for Microchip EMC1812/13/14/15/33
-> Multichannel Low-Voltage Remote Diode Sensor Family.
-> 
-> EMC1812 has one external remote temperature monitoring channel.
-> EMC1813 has two external remote temperature monitoring channels.
-> EMC1814 has three external remote temperature monitoring channels and
-> channels 2 and 3 supports anti parallel diode.
-> EMC1815 has four external remote temperature monitoring channels and
-> channels 1/2  and 3/4 supports anti parallel diode.
-> EMC1833 has two external remote temperature monitoring channels and
-> channels 1 and 2 supports anti parallel diode.
-> 
-> Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
-> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
->  .../bindings/hwmon/microchip,emc1812.yaml          | 182 +++++++++++++++++++++
->  MAINTAINERS                                        |   6 +
->  2 files changed, 188 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/hwmon/microchip,emc1812.yaml b/Documentation/devicetree/bindings/hwmon/microchip,emc1812.yaml
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..759e004eafdfc0772e110fe484767eb66a623294
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/hwmon/microchip,emc1812.yaml
-> @@ -0,0 +1,182 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/hwmon/microchip,emc1812.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Microchip EMC1812/13/14/15/33 multichannel temperature sensor
-> +
-> +maintainers:
-> +  - Marius Cristea <marius.cristea@microchip.com>
-> +
-> +description: |
-> +  The Microchip EMC1812/13/14/15/33 is a high-accuracy 2-wire multichannel
-> +  low-voltage remote diode temperature monitor.
-> +
-> +  The datasheet can be found here:
-> +    https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/EMC1812-3-4-5-33-Data-Sheet-DS20005751.pdf
-> +
-> +  EMC1812 has one external remote temperature monitoring channel
-> +  EMC1813 has two external remote temperature monitoring channels
-> +  EMC1814 has three external remote temperature monitoring channels and
-> +    channels 2 and 3 supports anti parallel diode
-> +  EMC1815 has four external remote temperature monitoring channels and
-> +    channels 1/2  and 3/4 supports anti parallel diode
-> +  EMC1833 has two external remote temperature monitoring channels and
-> +    channels 1 and 2 supports anti parallel diode
-> +
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - microchip,emc1812
-> +      - microchip,emc1813
-> +      - microchip,emc1814
-> +      - microchip,emc1815
-> +      - microchip,emc1833
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  interrupts:
-> +    items:
-> +      - description: alert-therm2 asserts when the ALERT limit is exceeded.
-> +      - description: therm-addr asserts when the THERM limit is exceeded.
-> +    minItems: 1
-> +
-> +  interrupt-names:
-> +    items:
-> +      - enum: [alert-therm2, therm-addr]
+>>>>>>>>>>> Hi Sumit,
+>>>>>>>>>>>
+>>>>>>>>>>> I am thinking that maybe it is better to call these two sysfs
+>>>>>>>>>>> interface
+>>>>>>>>>>> 'min_freq' and 'max_freq' as users read and write khz instead
+>>>>>>>>>>> of raw
+>>>>>>>>>>> value.
+>>>>>>>>>> Thanks for the suggestion.
+>>>>>>>>>> Kept min_perf/max_perf to match the CPPC register names
+>>>>>>>>>> (MIN_PERF/MAX_PERF), making it clear to users familiar with
+>>>>>>>>>> CPPC what's being controlled.
+>>>>>>>>>> The kHz unit is documented in the ABI.
+>>>>>>>>>>
+>>>>>>>>>> Thank you,
+>>>>>>>>>> Sumit Gupta
+>>>>>>>>> On my x86 machine with kernel 6.18.5, the kernel is exposing raw
+>>>>>>>>> values:
+>>>>>>>>>
+>>>>>>>>>> grep . /sys/devices/system/cpu/cpu0/acpi_cppc/*
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/feedback_ctrs:ref:342904018856568
+>>>>>>>>>
+>>>>>>>>> del:437439724183386
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/guaranteed_perf:63
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/highest_perf:88
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/lowest_freq:0
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/lowest_nonlinear_perf:36
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/lowest_perf:1
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/nominal_freq:3900
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/nominal_perf:62
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/reference_perf:62
+>>>>>>>>> /sys/devices/system/cpu/cpu0/acpi_cppc/wraparound_time:18446744073709551615
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> It would be surprising for a nearby sysfs interface with very
+>>>>>>>>> similar
+>>>>>>>>> names to use kHz instead.
+>>>>>>>>>
+>>>>>>>>> Thanks,
+>>>>>>>>>
+>>>>>>>>> Russell Haley
+>>>>>>>> I can rename to either of the below:
+>>>>>>>> - min/max_freq: might be confused with scaling_min/max_freq.
+>>>>>>>> - min/max_perf_freq: keeps the CPPC register association clear.
+>>>>>>>>
+>>>>>>>> Rafael, Any preferences here?
+>>>>>>> On x86 the units in CPPC are not kHz and there is no easy reliable
+>>>>>>> way
+>>>>>>> to convert them to kHz.
+>>>>>>>
+>>>>>>> Everything under /sys/devices/system/cpu/cpu0/acpi_cppc/ needs to be
+>>>>>>> in CPPC units, not kHz (unless, of course, kHz are CPPC units).
+>>>>>
+>>>>> In v1 [1], these controls were added under acpi_cppc sysfs.
+>>>>> After discussion, they were moved under cpufreq, and [2] was merged
+>>>>> first.
+>>>>> The decision to use frequency scale instead of raw perf was made
+>>>>> for consistency with other cpufreq interfaces as per (v3 [3]).
+>>>>>
+>>>>> CPPC units in our case are also not in kHz. The kHz conversion uses the
+>>>>> existing cppc_perf_to_khz()/cppc_khz_to_perf() helpers which are
+>>>>> already
+>>>>> used in cppc_cpufreq attributes. So the conversion behavior is
+>>>>> consistent
+>>>>> with existing cpufreq interfaces.
+>>>>>
+>>>>> [1]
+>>>>> https://lore.kernel.org/lkml/076c199c-a081-4a7f-956c-f395f4d5e156@nvidia.com/
+>>>>>
+>>>>> [2]
+>>>>> https://lore.kernel.org/all/20250507031941.2812701-1-zhenglifeng1@huawei.com/
+>>>>>
+>>>>> [3]
+>>>>> https://lore.kernel.org/lkml/80e16de0-63e4-4ead-9577-4ebba9b1a02d@nvidia.com/
+>>>>>
+>>>>>
+>>>>>> That said, the new attributes will show up elsewhere.
+>>>>>>
+>>>>>> So why do you need to add these things in the first place?
+>>>>> Currently there's no sysfs interface to dynamically control the
+>>>>> MIN_PERF/MAX_PERF bounds when using autonomous mode. This helps
+>>>>> users tune power and performance at runtime.
+>>>> So what about scaling_min_freq and scaling_max_freq?
+>>>>
+>>>> intel_pstate uses them for an analogous purpose.
+>>> FWIW same thing for amd_pstate.
+>>>
+>> intel_pstate and amd_pstate seem to use setpolicy() to update
+>> scaling_min/max_freq and program MIN_PERF/MAX_PERF.
+> That's one possibility.
+>
+> intel_pstate has a "cpufreq-compatible" mode (in which case it is
+> called intel_cpufreq) and still uses HWP (which is the underlying
+> mechanism for CPPC on Intel platforms).
+>
+>> However, as discussed in v5 [1], cppc_cpufreq cannot switch to
+>> a setpolicy based approach because:
+>> - We need per-CPU control of auto_sel: With setpolicy, we can't
+>>     dynamically disable auto_sel for individual CPUs and return to the
+>>     target() (no target hook available).
+>>     intel_pstate and amd_pstate seem to set HW autonomous mode for
+>>     all CPUs, not per-CPU.
+>> - We need to retain the target() callback - the CPPC spec allows
+>>     desired_perf to be used even when autonomous selection is enabled.
+> intel_pstate in the "cpufreq-compatible" mode updates its HWP min and
+> max limits when .target() (or .fast_switch() or .adjust_perf()) is
+> called.
+>
+> I guess that would not be sufficient in cppc_cpufreq for some reason?
+>
+>> [1]
+>> https://lore.kernel.org/lkml/66f58f43-631b-40a0-8d42-4e90cd24b757@arm.com/
 
-AI feedback:
+We can do the same as intel_cpufreq. CPPC spec allows setting
+MIN_PERF/MAX_PERF even when auto_selection is disabled, so we will
+have to update them always from policy limits in target().
 
-If interrupt names are being used to identify the interrupts, should
-the interrupts property be less restrictive?
+However, this would override BIOS-configured MIN_PERF/MAX_PERF values.
+Since policy->min/max are set from hardware capabilities during init,
+any governor would overwrite BIOS bounds with policy limits (hardware
+capability bounds) on their first frequency request - even when user
+hasn't explicitly changed scaling_min/max_freq.
 
-Currently, the items list in interrupts enforces a strict order:
-the first interrupt must match the first description (alert-therm2),
-and the second must match the second description (therm-addr).
+Does intel_cpufreq also override BIOS-configured HWP min/max values?
+Should we preserve BIOS-configured values until user explicitly changes
+scaling_min/max_freq? Is there any mechanism in cpufreq core to detect
+explicit user changes to scaling_min/max_freq?
 
-However, the interrupt-names definition for the first item allows it
-to be "therm-addr".
+Thank you,
+Sumit Gupta
 
-If the intention is to support providing only the second interrupt (therm-addr)
-as the first item in the list, then the interrupts property definition
-prevents that by enforcing the first item to be alert-therm2.
 
-2nd feedback:
-
-The interrupts property description lists two possible interrupts ("alert-therm2"
-and "therm-addr"), but this definition restricts interrupt-names to a single
-item.
-
-Should this be updated to allow providing names for both interrupts if the
-device is configured with both?
-
-[ I don't know how this is supposed to work, so the feedback needs to be taken
-  with two grains of salt. ]
-
-> +
-> +  "#address-cells":
-> +    const: 1
-> +
-> +  "#size-cells":
-> +    const: 0
-> +
-> +  microchip,parasitic-res-on-channel1-2:
-> +    description:
-> +      Indicates that the chip and the diodes/transistors are sufficiently
-> +      far apart that a parasitic resistance is added to the wires, which can
-> +      affect the measurements. Due to the anti-parallel diode connections,
-> +      channels 1 and 2 are affected together.
-> +    type: boolean
-> +
-> +  microchip,parasitic-res-on-channel3-4:
-> +    description:
-> +      Indicates that the chip and the diodes/transistors are sufficiently far
-> +      apart that a parasitic resistance is added to the wires, which can affect
-> +      the measurements. Due to the anti-parallel diode connections, channels
-> +      3 and 4 are affected together.
-> +    type: boolean
-> +
-> +  vdd-supply: true
-> +
-> +patternProperties:
-> +  "^channel@[1-4]$":
-> +    description:
-> +      Represents the external temperature channels to which
-> +      a remote diode is connected.
-> +    type: object
-> +
-> +    properties:
-> +      reg:
-> +        items:
-> +          minimum: 1
-> +          maximum: 4
-
-I (or, rather, AI review) asked this before:
-
-Does this reg property need maxItems: 1?
-
-Without it, the schema might allow reg properties with multiple items,
-provided the first item is within the minimum/maximum range.
-
-[ Presumably the _values_ should be 1..4, not the number of items ]
-
-> +
-> +      label:
-> +        description: Unique name to identify which channel this is.
-> +
-> +    required:
-> +      - reg
-> +
-> +    additionalProperties: false
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - vdd-supply
-> +
-> +allOf:
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            enum:
-> +              - microchip,emc1812
-> +              - microchip,emc1813
-> +              - microchip,emc1833
-> +    then:
-> +      properties:
-> +        microchip,parasitic-res-on-channel3-4: false
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            enum:
-> +              - microchip,emc1812
-> +    then:
-> +      properties:
-> +        channel@1:
-> +          properties:
-> +            reg:
-> +              items:
-> +                const: 1
-> +      patternProperties:
-> +        "^channel@[2-4]$": false
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          pattern: "^microchip,emc18[13]3"
-> +    then:
-> +      patternProperties:
-> +        "^channel@[12]$":
-> +          properties:
-> +            reg:
-> +              items:
-> +                maximum: 2
-> +        "^channel@[34]$": false
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          pattern: "^microchip,emc1814"
-> +    then:
-> +      patternProperties:
-> +        "^channel@[1-3]$":
-> +          properties:
-> +            reg:
-> +              items:
-> +                maximum: 3
-> +      properties:
-> +        channel@4: false
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    i2c {
-> +        #address-cells = <1>;
-> +        #size-cells = <0>;
-> +
-> +        temperature-sensor@4c {
-> +            compatible = "microchip,emc1813";
-> +            reg = <0x4c>;
-> +
-> +            #address-cells = <1>;
-> +            #size-cells = <0>;
-> +
-> +            microchip,parasitic-res-on-channel1-2;
-> +
-> +            vdd-supply = <&vdd>;
-> +
-> +            channel@1 {
-> +                reg = <1>;
-> +                label = "External CH1 Temperature";
-> +            };
-> +
-> +            channel@2 {
-> +                reg = <2>;
-> +                label = "External CH2 Temperature";
-> +            };
-> +        };
-> +    };
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 6d7b697bfdba16e4f0ee5f4f0195b9d7da06dae5..85c236df781e47c78deeb7ef4d80bc94bba604c4 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -16646,6 +16646,12 @@ S:	Supported
->  F:	Documentation/devicetree/bindings/interrupt-controller/microchip,sama7g5-eic.yaml
->  F:	drivers/irqchip/irq-mchp-eic.c
->  
-> +MICROCHIP EMC1812 DRIVER
-> +M:	Marius Cristea <marius.cristea@microchip.com>
-> +L:	linux-hwmon@vger.kernel.org
-> +S:	Supported
-> +F:	Documentation/devicetree/bindings/hwmon/microchip,emc1812.yaml
-> +
->  MICROCHIP I2C DRIVER
->  M:	Codrin Ciubotariu <codrin.ciubotariu@microchip.com>
->  L:	linux-i2c@vger.kernel.org
-> 
-> -- 
-> 2.51.0
-> 
 
