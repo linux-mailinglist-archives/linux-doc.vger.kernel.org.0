@@ -1,276 +1,244 @@
-Return-Path: <linux-doc+bounces-75403-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75394-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CItMEWb1hGlm7AMAu9opvQ
-	(envelope-from <linux-doc+bounces-75403-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 20:54:14 +0100
+	id qRz/L2rehGmi6AMAu9opvQ
+	(envelope-from <linux-doc+bounces-75394-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 19:16:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9669BF6F1C
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 20:54:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F2A9F666C
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 19:16:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3E9A93013A7E
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 19:54:12 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 91A6130078F9
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 18:16:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5AC632A3C8;
-	Thu,  5 Feb 2026 19:54:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3109236453;
+	Thu,  5 Feb 2026 18:16:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mCiHXpLO"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="mN40ooNX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
+Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60F91279324
-	for <linux-doc@vger.kernel.org>; Thu,  5 Feb 2026 19:54:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70761199E89
+	for <linux-doc@vger.kernel.org>; Thu,  5 Feb 2026 18:16:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770321251; cv=none; b=RpBA6AJUm5S7NTDDnqLbQRsCfFAtgQsdy92P/7Jh2qsQdrLqv9BWuM3u25r1u7YsP/Rm5kbM2aq6umeLAAa34AAWIlOcaRzaeJ7rTJpkOi5M3+wy4exvbQb6PFtgW9H0BQMERVGkai9/0yf4f04I2lecVj6NAzaRoOrFirysIj8=
+	t=1770315367; cv=none; b=e/WKBxw+w25qBitcTn8QFKFh9gV2NashbL4YKjXTDC1W91YeiyM6k8veuNHZt5DVV8Ojt2CYI715BY3T1xf16OOLrAg9bJ6IGkemaC0L3/T2P8FdIIwTFtxsB3iBXC57zLqWpcyxGCNPE04Hotfi3kXaplxH0h54J8PJ5ucAOBA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770321251; c=relaxed/simple;
-	bh=pZ1U1Cu6MPwvJitbLSTqOvwj/6OfA38gALmI+6KPpx8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=s8K2de2wZDJ2ZK1/jqTTc9x80TJecy0JVj+mLRDiOV2XBX/tRne5/5mpFjjtJLyg3dc4qzuSSpGpTB7APQa5LUNCGM1xwbwCUknURlN76LO61zKKPBoqdqoLqfmEWd3V36qc6oo3GShgVBCC6NW41Y3Nbky1I0Bgpm1qb4WyQL0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mCiHXpLO; arc=none smtp.client-ip=209.85.219.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f45.google.com with SMTP id 6a1803df08f44-894774491deso16359966d6.2
-        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 11:54:11 -0800 (PST)
+	s=arc-20240116; t=1770315367; c=relaxed/simple;
+	bh=JaSiFx5tGgruRq7Qg3RAVqyVwcNl8rziDHWnfcUwWpk=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=Z2KMlxtaNr5MYDlqUw49shHvpevdpw9ZXd/XV5Chw4QO6Dj3c53MDBIkbEliC3Z5ogODXvj1SWMINVS5OuQ8A5HIhVHNt1z/EtM4UGcgEYpdjAHaVA6RfE4YeyfFSEXX/IrT0eICg0RETRUtU3sidBNuvB0dnLYbtSHVBJH/T+U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=mN40ooNX; arc=none smtp.client-ip=209.85.215.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
+Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-c337cde7e40so760285a12.1
+        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 10:16:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770321250; x=1770926050; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Rvyue3lXA3fGB8HdBoKvnw8CYi0+bdICYfINuIQp+GA=;
-        b=mCiHXpLOCXCepS2eHA2+bALW29ronpRplEeTnahYPsa1bH96AZjD0SwYZ+cxbLJfAm
-         MEmKV2fsSC/dkBgoaxAKJR6IRy5hVq0pHfhcy5fJDBCPd9FntX57IsdXsG7U+8j+Kf75
-         Pp32B0yToeWY6OQG5Rfnc7z7ekFLsqX2porb1JLMEe/ubRd9Z7ewWaDiFEVz47lb3x8W
-         KY4JzIefjXSF4LoGvus2igcFSnugp3BuSE+AP0nav2wH+H4/acbs+LpX5AYeg1Dh99hB
-         ZNCIrHqFfFe0mm0HeJAHinY78yWo08BquNXbja49pJpQLgSFDfxVd3Ou9JBsOUPgtTB/
-         8Llg==
+        d=google.com; s=20230601; t=1770315367; x=1770920167; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:references
+         :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=w63WtH6exvgU3XpaEY5YF/xmw4rPvTE/WzLO1Z+uiT0=;
+        b=mN40ooNXmhao3cRSagt4b2tS8rAftuf/qZbjBeCP0sZc+TcAJJ3r+dzj2zrB1XF6G/
+         1RZ/dpoegkaBzCCEDCwIlgpi17hPJ9TSUTqOatZ9i37uh/rwSdyHz12s5S/2XcrQ1/yy
+         aMAd6LHxSaZ3MaoTl8AvzxRSPqyZ8ZVGK3S6oL4EW/EZ8Dj8BUNWyWj6DomjPVOZRfMK
+         cMu9Mclyn6olt5/+3GkeDnM/v7KQC2uBrbEZthNcz71ItwpVYFImNLtUFMuf+ld6cs7R
+         8UBjN99FbGKsh5FCyqZXj01D5F3H+fqAQWFFbSTsyWG+A80UuTkI19kj6s9W8dKabudM
+         iTUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770321250; x=1770926050;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Rvyue3lXA3fGB8HdBoKvnw8CYi0+bdICYfINuIQp+GA=;
-        b=HLNg+OAThkQbY06MTCJ9S9sxCK6gmlP9DgPIHC4m6A+OfNZ4+0gB2iZmX7ihWwFOtt
-         p4U/okfOsIgVUcmbxU8O0BJlTucLTYE2N2vMA/rTZCxANCRWn2Vg2O1/PC9drfiyw1pR
-         WdwzbzqmAH+gy/SORMH3bCnQtE8fRBuoL53Z0mEH2UkNyBQOxU0Kg4F0E40kfc2GXvrp
-         ON785TFf4GwPXVTefRtZf6v1MwfiS7IFwiR+UFLdhWN3/hLIGy/aqmfpE1zhjBJqABx1
-         e2DSeUwpx21QJeeQMrywNFFXfSMoBZ+uN2D9ECl4hvkD5lsMcdqezx72VKNczqc5ieNA
-         ngyg==
-X-Forwarded-Encrypted: i=1; AJvYcCXg75tcyr0KNUA7RwfRbpr8faEfKr/KBPhKqIwyG+SjObihw0KBrjVsyhCqZ1Sm9845x4z4rz7wxXQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwuiE+c86+n02LOzzNoT5IT/inrINcKx7271WkY7LhbjPbTjd6e
-	tknUYv3eMkpncMxYsbY8fWXSOKmyygV7ExiWpPdxDYWADzlNUwe9ci1h
-X-Gm-Gg: AZuq6aLvRIN9FY2Ig3oBWYQOeRpfsNuH60H9v/2dOMmYWUSSnLF9WStWJSU87JKJerE
-	HbPAQuALtLspKTx0tj26QW5lGh8ALyqB/q52wNT022ESaDPrMyU2tqnzvKAICzPFBzlDbqZh4DV
-	2lFB9Jg98QfYv/TpcvT70Qx40bsOoa6CB3/fuld9//n4xuXPEnI4kITgyB1TDV5AumrwhHr6Tk3
-	AMSm8r+8Ib3xSAc7gapZYsHkIAvzfXRywxm5k6C5w3HuWL3UwKCKxcMaVs1OukIrsIrUdl1c+PU
-	FP/VBgfCy2xwMdUpGcsJyFw8jdVNrDxwunJpSgVSiLOKPetE3dOzH9IObnZ0zZf1M/6nDJvpLHH
-	724dDXjjI+dVnCl5sBocxn47Qgs3YZoyBdq+X+J8OSBoflO6gNSobd9yW+WlqKnX4rhbktQ0B9y
-	Wi0HavWAVJ2SPgnhbU8k7SK0HeFd9MIQ2bHfpjbgVFvRotq2vVKD479MmdZK+GJQ==
-X-Received: by 2002:a05:6a20:d12f:b0:38d:f0f3:b96d with SMTP id adf61e73a8af0-393acf88673mr215443637.2.1770314709806;
-        Thu, 05 Feb 2026 10:05:09 -0800 (PST)
-Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com.com ([106.51.167.8])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c6dcb5436c5sm99812a12.15.2026.02.05.10.05.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Feb 2026 10:05:09 -0800 (PST)
-From: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
-To: linkmauve@linkmauve.fr,
-	ojeda@kernel.org,
-	boqun.feng@gmail.com,
-	gary@garyguo.net,
-	bjorn3_gh@protonmail.com,
-	lossin@kernel.org,
-	a.hindborg@kernel.org,
-	aliceryhl@google.com,
-	tmgross@umich.edu,
-	dakr@kernel.org,
-	corbet@lwn.net,
-	maddy@linux.ibm.com,
-	mpe@ellerman.id.au,
-	npiggin@gmail.com,
-	chleroy@kernel.org,
-	peterz@infradead.org,
-	jpoimboe@kernel.org,
-	jbaron@akamai.com,
-	rostedt@goodmis.org,
-	ardb@kernel.org,
-	rust-for-linux@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org
-Cc: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
-Subject: [PATCH V3 3/3] powerpc: Enable Rust for ppc64le
-Date: Thu,  5 Feb 2026 23:34:29 +0530
-Message-ID: <20260205180429.3280657-4-mkchauras@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260205180429.3280657-1-mkchauras@gmail.com>
-References: <20260205180429.3280657-1-mkchauras@gmail.com>
+        d=1e100.net; s=20230601; t=1770315367; x=1770920167;
+        h=content-transfer-encoding:cc:to:from:subject:message-id:references
+         :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=w63WtH6exvgU3XpaEY5YF/xmw4rPvTE/WzLO1Z+uiT0=;
+        b=VpSE2NbRFitPovS+iOuehahhG4nlKDAa7ezjEHqDdnvNleK2Ow199sNtdTqoT2s83s
+         lKSEjRi1WV8Zk44k9VV2IGz7gX7qT4erf2qyNp0hLZJ4OJgoHnAWxzSlmbIhv4lq4gb7
+         pGtSsgG7CIpxCWYYMsL532zv4qArVwa3C0u4EUaVbENKV4ZhJkg5deBd1KufQCVf21pm
+         J4KwHIJ1hFg0Kdxf00AY2fIUNq4zW/GRFGS8kbwux8PTKUerjJF7wwE734etJTz/I5bW
+         rHCqcnh5I5qXEDBjsRAt0pMc3NkJJcVpnoTN85DFSfHA03JLhnsbMW+b/7YMwcvWTID+
+         Orgw==
+X-Forwarded-Encrypted: i=1; AJvYcCUJj2yygOL5UEzojXZ8oJ81OF+FvMIVQW8J90gXPXtQPNFw2W9ebYycK2So4uRKpqrLCioClJzwCQY=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy84PgDpzHlYui0xvdcjszpt41HK85YEwaladJqdcQlrakviywG
+	Seht1lE/yeWFfQcieyTsxQMjbBOh/rJO9JLdOlDlCKl9FjygQyqdoIuaIEfzt5gYuh2y020cWiv
+	KdB24RQ==
+X-Received: from pgqs26.prod.google.com ([2002:a65:691a:0:b0:c61:3772:dcf4])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6a21:6d9b:b0:35f:6e12:186f
+ with SMTP id adf61e73a8af0-393ad0016c0mr253956637.23.1770315366666; Thu, 05
+ Feb 2026 10:16:06 -0800 (PST)
+Date: Thu, 5 Feb 2026 10:16:05 -0800
+In-Reply-To: <CALMp9eT_uJZwO5AF-wWHFH1DnOKWjUtU2u9TCOs7=ZK8_xCx+w@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+References: <20260113225406.273373-1-jmattson@google.com> <aWbmXTJdZDO_tnvE@google.com>
+ <CALMp9eTYakMk0Bogxa_GdGU5_h4PK-YOXcu-cSQ16m1QcusHxw@mail.gmail.com>
+ <CALMp9eQx7EVim4iYGbAhoHrei2YmTra6oxtdmKaY7bw-M0PHbw@mail.gmail.com>
+ <aYKoJ74MWboBuE_M@google.com> <CALMp9eSc=0zS+6Rk-c_0P-Q1Y8_9Xv58G5BYxieKpv_XaSj0wg@mail.gmail.com>
+ <aYPvyMDipM9Z9Z7t@google.com> <CALMp9eR4trBDwgDnyEJmrHnStKnAMiRgehty=xu=NMnLVN2vtw@mail.gmail.com>
+ <aYStVN5MyME-Pkwt@google.com> <CALMp9eT_uJZwO5AF-wWHFH1DnOKWjUtU2u9TCOs7=ZK8_xCx+w@mail.gmail.com>
+Message-ID: <aYTeZY1DoJUyrGzo@google.com>
+Subject: Re: [PATCH] KVM: VMX: Add quirk to allow L1 to set FREEZE_IN_SMM in vmcs12
+From: Sean Christopherson <seanjc@google.com>
+To: Jim Mattson <jmattson@google.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[gmail.com];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-75403-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[linkmauve.fr,kernel.org,gmail.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-75394-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[seanjc@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linkmauve.fr:email]
-X-Rspamd-Queue-Id: 9669BF6F1C
+	RCPT_COUNT_TWELVE(0.00)[13];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 0F2A9F666C
 X-Rspamd-Action: no action
 
-Enabling rust support for ppc64le only.
+On Thu, Feb 05, 2026, Jim Mattson wrote:
+> On Thu, Feb 5, 2026 at 6:47=E2=80=AFAM Sean Christopherson <seanjc@google=
+.com> wrote:
+> > > > In other words, unless I'm missing something, the only reasonable o=
+ption is to
+> > > > run the guest with FREEZE_IN_SMM=3D1, which means ignoring the gues=
+t's wishes.
+> > > > Or I guess another way to look at it: you can have any color car yo=
+u want, as
+> > > > long as it's black :-)
+> > >
+> > > I would be happy with FREEZE_IN_SMM=3D1. I'm not happy with the host
+> > > dictating FREEZE_IN_SMM=3D0.
+> >
+> > Yep, make sense.
+>=20
+> Perhaps we should ignore both L0 and L1, and arbitrarily set
+> FREEZE_IN_SMM=3D1 for both vmcs01 and vmcs02 when MPT is enabled.=20
 
-Tested on powernv9:
+Hmm, I like that idea even more, because it's waaay simpler to implement.  =
+Argh,
+the wrinkle is that KVM doesn't actually know if DEBUGCTLMSR_FREEZE_IN_SMM =
+is
+supported.  Oh, nice, it's reported in PERF_CAPABILITIES.
 
-$ uname -rm
-6.19.0-rc8+ ppc64le
+  IA32_DEBUGCTL.FREEZE_WHILE_SMM is supported if
+  IA32_PERF_CAPABILITIES.FREEZE_WHILE_SMM[Bit 12] is reporting 1
 
-$ sudo modprobe rust_minimal
-[  632.890850] rust_minimal: Rust minimal sample (init)
-[  632.890881] rust_minimal: Am I built-in? false
-[  632.890898] rust_minimal: test_parameter: 1
+Arguably, this is a fix for mediated PMU support.  Because as you pointed o=
+ut,
+we can freeze PMCs on SMI for mediated vPMUs without impacting host profili=
+ng,
+unlike the legacy vCPU where it being a weird extension of perf means we ca=
+n't
+deny guest profiling without breaking host perf usage.
 
-$ sudo rmmod rust_minimal
-[  648.272832] rust_minimal: My numbers are [72, 108, 200]
-[  648.272873] rust_minimal: Rust minimal sample (exit)
+This? (untested)
 
-$ sudo modprobe rust_print
-[  843.410391] rust_print: Rust printing macros sample (init)
-[  843.410424] rust_print: Emergency message (level 0) without args
-[  843.410451] rust_print: Alert message (level 1) without args
-[  843.410477] rust_print: Critical message (level 2) without args
-[  843.410503] rust_print: Error message (level 3) without args
-[  843.410530] rust_print: Warning message (level 4) without args
-[  843.410557] rust_print: Notice message (level 5) without args
-[  843.410594] rust_print: Info message (level 6) without args
-[  843.410617] rust_print: A line that is continued without args
-[  843.410646] rust_print: Emergency message (level 0) with args
-[  843.410675] rust_print: Alert message (level 1) with args
-[  843.410691] rust_print: Critical message (level 2) with args
-[  843.410727] rust_print: Error message (level 3) with args
-[  843.410761] rust_print: Warning message (level 4) with args
-[  843.410796] rust_print: Notice message (level 5) with args
-[  843.410821] rust_print: Info message (level 6) with args
-[  843.410854] rust_print: A line that is continued with args
-[  843.410892] rust_print: 1
-[  843.410895] rust_print: "hello, world"
-[  843.410924] rust_print: [samples/rust/rust_print_main.rs:35:5] c = "hello, world"
-[  843.410977] rust_print: Arc<dyn Display> says 42
-[  843.410979] rust_print: Arc<dyn Display> says hello, world
-
-$ sudo rmmod rust_print
-[  843.411003] rust_print: "hello, world"
-[  888.499935] rust_print: Rust printing macros sample (exit)
-
-Reviewed-by: Link Mauve <linkmauve@linkmauve.fr>
-Tested-by: Link Mauve <linkmauve@linkmauve.fr>
-Reviewed-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
-Signed-off-by: Mukesh Kumar Chaurasiya (IBM) <mkchauras@gmail.com>
----
- Documentation/rust/arch-support.rst | 2 +-
- arch/powerpc/Kconfig                | 1 +
- arch/powerpc/Makefile               | 9 ++++++++-
- rust/Makefile                       | 8 ++++++++
- 4 files changed, 18 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/rust/arch-support.rst b/Documentation/rust/arch-support.rst
-index e26a94808e97..627471ac9238 100644
---- a/Documentation/rust/arch-support.rst
-+++ b/Documentation/rust/arch-support.rst
-@@ -18,7 +18,7 @@ Architecture   Level of support  Constraints
- ``arm``        Maintained        ARMv7 Little Endian only.
- ``arm64``      Maintained        Little Endian only.
- ``loongarch``  Maintained        \-
--``powerpc``    Experimental      32-bit Big Endian only.
-+``powerpc``    Experimental      64-bit Little Endian. 32-bit Big Endian.
- ``riscv``      Maintained        ``riscv64`` and LLVM/Clang only.
- ``um``         Maintained        \-
- ``x86``        Maintained        ``x86_64`` only.
-diff --git a/arch/powerpc/Kconfig b/arch/powerpc/Kconfig
-index 17db23b82e91..954af27e10c5 100644
---- a/arch/powerpc/Kconfig
-+++ b/arch/powerpc/Kconfig
-@@ -284,6 +284,7 @@ config PPC
- 	select HAVE_RELIABLE_STACKTRACE
- 	select HAVE_RSEQ
- 	select HAVE_RUST			if PPC32
-+	select HAVE_RUST			if PPC64 && CPU_LITTLE_ENDIAN
- 	select HAVE_SAMPLE_FTRACE_DIRECT	if HAVE_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
- 	select HAVE_SAMPLE_FTRACE_DIRECT_MULTI	if HAVE_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
- 	select HAVE_SETUP_PER_CPU_AREA		if PPC64
-diff --git a/arch/powerpc/Makefile b/arch/powerpc/Makefile
-index 9fd82c75dcbd..f93816ddc036 100644
---- a/arch/powerpc/Makefile
-+++ b/arch/powerpc/Makefile
-@@ -61,7 +61,14 @@ else
- KBUILD_LDFLAGS_MODULE += $(objtree)/arch/powerpc/lib/crtsavres.o
- endif
- 
--KBUILD_RUSTFLAGS += --target=powerpc-unknown-linux-gnu
-+ifdef CONFIG_PPC64
-+ifdef CONFIG_CPU_LITTLE_ENDIAN
-+KBUILD_RUSTFLAGS	+= --target=powerpc64le-unknown-linux-gnu
-+endif
-+KBUILD_RUSTFLAGS	+= -Ctarget-feature=-mma,-vsx,-hard-float,-altivec
-+else
-+KBUILD_RUSTFLAGS	+= --target=powerpc-unknown-linux-gnu
-+endif
- 
- ifdef CONFIG_CPU_LITTLE_ENDIAN
- KBUILD_CPPFLAGS	+= -mlittle-endian
-diff --git a/rust/Makefile b/rust/Makefile
-index ae22f2c5f0b3..14febe9c7643 100644
---- a/rust/Makefile
-+++ b/rust/Makefile
-@@ -392,7 +392,15 @@ BINDGEN_TARGET_x86	:= x86_64-linux-gnu
- BINDGEN_TARGET_arm64	:= aarch64-linux-gnu
- BINDGEN_TARGET_arm	:= arm-linux-gnueabi
- BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
+diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-in=
+dex.h
+index 4d3566bb1a93..5563f68158bb 100644
+--- a/arch/x86/include/asm/msr-index.h
++++ b/arch/x86/include/asm/msr-index.h
+@@ -324,6 +324,7 @@
+ #define PERF_CAP_PEBS_TRAP             BIT_ULL(6)
+ #define PERF_CAP_ARCH_REG              BIT_ULL(7)
+ #define PERF_CAP_PEBS_FORMAT           0xf00
++#define PERF_CAP_FREEZE_IN_SMM         BIT_ULL(12)
+ #define PERF_CAP_FW_WRITES             BIT_ULL(13)
+ #define PERF_CAP_PEBS_BASELINE         BIT_ULL(14)
+ #define PERF_CAP_PEBS_TIMING_INFO      BIT_ULL(17)
+diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
+index 27acafd03381..ef0d8108ff42 100644
+--- a/arch/x86/kvm/vmx/vmx.c
++++ b/arch/x86/kvm/vmx/vmx.c
+@@ -8119,13 +8119,12 @@ void vmx_vcpu_after_set_cpuid(struct kvm_vcpu *vcpu=
+)
+ static __init u64 vmx_get_perf_capabilities(void)
+ {
+        u64 perf_cap =3D PERF_CAP_FW_WRITES;
+-       u64 host_perf_cap =3D 0;
+=20
+        if (!enable_pmu)
+                return 0;
+=20
+        if (boot_cpu_has(X86_FEATURE_PDCM))
+-               rdmsrq(MSR_IA32_PERF_CAPABILITIES, host_perf_cap);
++               rdmsrq(MSR_IA32_PERF_CAPABILITIES, kvm_host.perf_capabiliti=
+es);
+=20
+        if (!cpu_feature_enabled(X86_FEATURE_ARCH_LBR) &&
+            !enable_mediated_pmu) {
+@@ -8139,11 +8138,11 @@ static __init u64 vmx_get_perf_capabilities(void)
+                if (!vmx_lbr_caps.has_callstack)
+                        memset(&vmx_lbr_caps, 0, sizeof(vmx_lbr_caps));
+                else if (vmx_lbr_caps.nr)
+-                       perf_cap |=3D host_perf_cap & PERF_CAP_LBR_FMT;
++                       perf_cap |=3D kvm_host.perf_capabilities & PERF_CAP=
+_LBR_FMT;
+        }
+=20
+        if (vmx_pebs_supported()) {
+-               perf_cap |=3D host_perf_cap & PERF_CAP_PEBS_MASK;
++               perf_cap |=3D kvm_host.perf_capabilities & PERF_CAP_PEBS_MA=
+SK;
+=20
+                /*
+                 * Disallow adaptive PEBS as it is functionally broken, can=
+ be
+diff --git a/arch/x86/kvm/vmx/vmx.h b/arch/x86/kvm/vmx/vmx.h
+index 70bfe81dea54..e780d0e06b61 100644
+--- a/arch/x86/kvm/vmx/vmx.h
++++ b/arch/x86/kvm/vmx/vmx.h
+@@ -408,6 +408,11 @@ static inline void vmx_guest_debugctl_write(struct kvm=
+_vcpu *vcpu, u64 val)
+        WARN_ON_ONCE(val & VMX_HOST_OWNED_DEBUGCTL_BITS);
+=20
+        val |=3D vcpu->arch.host_debugctl & VMX_HOST_OWNED_DEBUGCTL_BITS;
 +
-+ifdef CONFIG_PPC64
-+ifdef CONFIG_CPU_LITTLE_ENDIAN
-+BINDGEN_TARGET_powerpc	:= powerpc64le-linux-gnu
-+endif
-+else
- BINDGEN_TARGET_powerpc	:= powerpc-linux-gnu
-+endif
++       if (kvm_vcpu_has_mediated_pmu(vcpu) &&
++           (kvm_host.perf_capabilities & PERF_CAP_FREEZE_IN_SMM))
++               val |=3D DEBUGCTLMSR_FREEZE_IN_SMM;
 +
- BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
- BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
- 
--- 
-2.52.0
-
+        vmcs_write64(GUEST_IA32_DEBUGCTL, val);
+ }
+=20
+diff --git a/arch/x86/kvm/x86.h b/arch/x86/kvm/x86.h
+index 70e81f008030..e0084e1063d0 100644
+--- a/arch/x86/kvm/x86.h
++++ b/arch/x86/kvm/x86.h
+@@ -52,6 +52,7 @@ struct kvm_host_values {
+        u64 xss;
+        u64 s_cet;
+        u64 arch_capabilities;
++       u64 perf_capabilities;
+ };
+=20
+ void kvm_spurious_fault(void);
 
