@@ -1,252 +1,160 @@
-Return-Path: <linux-doc+bounces-75389-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75363-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uIooHOTThGmf5gMAu9opvQ
-	(envelope-from <linux-doc+bounces-75389-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 18:31:16 +0100
+	id oBmlANTChGk45QMAu9opvQ
+	(envelope-from <linux-doc+bounces-75363-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 17:18:28 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B82DCF5F68
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 18:31:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 599D7F51F4
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 17:18:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 12118301D042
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 17:29:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BAD3D301F9BC
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 16:16:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19FA843D4E8;
-	Thu,  5 Feb 2026 17:29:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jRDgzyO6"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0C7343635E;
+	Thu,  5 Feb 2026 16:16:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0DC043CEF6
-	for <linux-doc@vger.kernel.org>; Thu,  5 Feb 2026 17:29:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.43
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEE51407583;
+	Thu,  5 Feb 2026 16:16:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770312555; cv=none; b=Qtvy30P/qDA9m2LPd7oVShkPMrYCtMIjP57FVlghWGFafl0kzMh/IBnmXtSKrGNG6wk5rVJu1FbsUq+oI+IhgZ8evAZ4uyzaME1lj14CwWcGzC7fS9+yxYgnsX+T9Nu4Lz1q1irD7hQt1V6uQnE6WbaTb1dT96A3s323I5rgJWY=
+	t=1770308193; cv=none; b=sutGXZM8VLnwNEqYiPbDSEfm4rUEFJK8b6vKGj/FGNMKVGNCuRGopbL5386xbY87cRzd2xY3oIzyjMIud/DCj/GI1cwHYNbASNkbnOt/+Dkn6aAiiwBwoFi2383aAoAFhmfih+nVbFMRzTkXPgwRCKQb76tfZ1y4X+jE5feAn9U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770312555; c=relaxed/simple;
-	bh=NYMWDUPXh5i9TMfT9ZkR6S3SB3/pBsXfMit+MAuMNRo=;
+	s=arc-20240116; t=1770308193; c=relaxed/simple;
+	bh=MNkzB34P7cQqRXT25Kr9JHE2YCRHfmQ0v7uYbpp8pzM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nHC1Htd43Ziu5zkGEkyJTNKXjmsxOu9sfOm4xhPY/B2MfSxF5x+KZTDgEhJhdlbduV/1Uuw44UqICswZvPHf9Bd3nK6/Ubtk/4/QRG1xE1ISpw5mTESTUXfC3nfG2rbCF68V0u1yPY8XtNBWIAeVaSl3HBbw++pBV2UrMwmdlxo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jRDgzyO6; arc=none smtp.client-ip=209.85.210.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-7d45d37c7a0so361243a34.3
-        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 09:29:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770312553; x=1770917353; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=gDZJl3VWBMgWhsMDZCRhkLiKo6ualtcqNRxB4YFGLLc=;
-        b=jRDgzyO6zrSD2h5gbaGKAI2thoxAE2uOKIcX9uBImGe2ZNP6LOo/Sr2xEf7oFOtl/g
-         YANNQVRMvsY+4xcOlPMpg2h0YkgQ0OzQT3FPUsLcMpN84DjCfFkyd4Boor5qnmydGY9o
-         wKpHfPrUzcO0108q5hDjNRMG27K3C42QIxGVSXXgQVqvFBOPbTN219vt9Zh1qD3xlCAJ
-         lhKFfDdErirGn2z6J2/FYqoaZFoBno1nidWn8CllRKhW626QAsojEMOsZMiMVbSS07j6
-         GVI2Kw/a3jpFFDqBC8axuWhNMrPPwPNyyP+vTi8m+LOgtEa4URYaeYWrsbGhWyqnqj4N
-         oqqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770312553; x=1770917353;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gDZJl3VWBMgWhsMDZCRhkLiKo6ualtcqNRxB4YFGLLc=;
-        b=Mz56tT5APkWk+reipzQz8nuWwvmpvrOl95Te5HujGb7QtxMsqN3jnkFfboMUl4hka4
-         gEoa3XU5OIhjRJ8O+uNrA2EchR0zhahhxLXYVzexRjAk3h3LOKugevQgfg9t3jtpRRop
-         2m+ea7PVJDqVfB1DKF6C5+zxi7I/IeBSzuGAtRHlLQaDpg9dks78YTgqnHEJ/TpWCKGi
-         eCNGtT7mdSFk6VooJvhlgFbwoHRWEk7RsRXE3Vlf2cVL5csqdoC12+6bCMIQ8G0NVq0c
-         sktrotOeE6FkcVd1olzgB77rA8QWdaOvShDct1Ea6h/4aHCt6vXzAF6ZASfqYS2d9e3x
-         kSww==
-X-Forwarded-Encrypted: i=1; AJvYcCVkPMYQJKEH6ntzX6czQHlaby1fI5PzK8hhUlPVT2BxssFtop/EtNyum+cilXCqTW//tyB6fRYVXbA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwGvMV1MFj7OBRNxolyys2mWI8U46qnp7xy6D4oFad9i0q3guH7
-	6+seBYCdxnXJGSLchhSUNhJ6N1QWm7jnKSgSBg4rvBS0iIlL3eZqkArBB3f9og==
-X-Gm-Gg: AZuq6aIfGKT9P6uJ0ZEARtGZeWv4gC+k9PARWAlgmbBq53TPdAUMtZJvdnzBTj0azX4
-	RTcKZYzSs3n18KWY3kMMpRIHCudaFDbVXAGKDSVeDGcQWQdLggFhj6lyqSbYtgGGsJZ2+BOShoj
-	jUBRh7iVTxZC6bKJHB8IJ7HFhW5uFj45poI1hSDFLSF6yTO8PmjXwX2tX4POG9OTb9GUlHnfcVY
-	ejw2tPPt7V/lw9GVTzHEThGk4CQb/Bw4SYg6kyTicNm07ZcPtH8iL8MsqvADUZhiKGp43NK6Evc
-	+bwSheP+kqO3eNM+1Rbh7Qy2wEKelIllXTqWygjEWCVmJt2kqnDXfBqvaUzWcgqY6/xD7IYBUQ6
-	qTMgf03HO3IdNB3fnP7W701gXFI2djlvEUOA5R5WoCF8JRDebdHYJMtDnqLxPijwXS5+6lg+GAl
-	Zxv7P1BrVmtjbAudIm99++UAiZ/cUvxF1PUo2oNj7R7yk9a3QZfjEB7or+
-X-Received: by 2002:a05:6a00:39aa:b0:81a:d633:db03 with SMTP id d2e1a72fcca58-8241c6734a1mr7102468b3a.59.1770306362810;
-        Thu, 05 Feb 2026 07:46:02 -0800 (PST)
-Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com ([106.51.167.8])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8243c22f991sm733144b3a.48.2026.02.05.07.45.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Feb 2026 07:46:02 -0800 (PST)
-Date: Thu, 5 Feb 2026 21:15:52 +0530
-From: Mukesh Kumar Chaurasiya <mkchauras@gmail.com>
-To: Link Mauve <linkmauve@linkmauve.fr>
-Cc: ojeda@kernel.org, boqun.feng@gmail.com, gary@garyguo.net, 
-	bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, 
-	tmgross@umich.edu, dakr@kernel.org, corbet@lwn.net, maddy@linux.ibm.com, 
-	mpe@ellerman.id.au, npiggin@gmail.com, chleroy@kernel.org, peterz@infradead.org, 
-	jpoimboe@kernel.org, jbaron@akamai.com, rostedt@goodmis.org, ardb@kernel.org, 
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org
-Subject: Re: [PATCH V2 3/3] powerpc: Enable Rust for ppc64le
-Message-ID: <aYS6fdNFVSEqoRY-@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
-References: <20260204210125.613350-1-mkchauras@gmail.com>
- <20260204210125.613350-4-mkchauras@gmail.com>
- <aYSgjPD5KRcNN0j4@luna>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ts3iElYDptYPvuOSpOdLDIR887h4UJJszlytGzOzGaPj2Ait/1uIi+0lCPqe+sUEj5UK6oaSrR5eHBolL3I/3ZDwwtCAZ+W6bEtaCgiMilO9y6VdTpLLCQOisCC+NKTwizgeMmnHLo++CR06RqvZf0HENQDi5/KfKUuzJZnmQyc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 56515339;
+	Thu,  5 Feb 2026 08:16:25 -0800 (PST)
+Received: from arm.com (arrakis.cambridge.arm.com [10.1.197.46])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E314C3F632;
+	Thu,  5 Feb 2026 08:16:25 -0800 (PST)
+Date: Thu, 5 Feb 2026 16:16:23 +0000
+From: Catalin Marinas <catalin.marinas@arm.com>
+To: Ben Horgan <ben.horgan@arm.com>
+Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
+	baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
+	dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
+	fenghuay@nvidia.com, gshan@redhat.com, james.morse@arm.com,
+	jonathan.cameron@huawei.com, kobak@nvidia.com, lcherian@marvell.com,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	peternewman@google.com, punit.agrawal@oss.qualcomm.com,
+	quic_jiles@quicinc.com, reinette.chatre@intel.com,
+	rohit.mathew@arm.com, scott@os.amperecomputing.com,
+	sdonthineni@nvidia.com, tan.shaopeng@fujitsu.com,
+	xhao@linux.alibaba.com, will@kernel.org, corbet@lwn.net,
+	maz@kernel.org, oupton@kernel.org, joey.gouly@arm.com,
+	suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
+	zengheng4@huawei.com, linux-doc@vger.kernel.org,
+	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+Subject: Re: [PATCH v4 04/41] arm64: mpam: Context switch the MPAM registers
+Message-ID: <aYTCV8E9ZFn4_FND@arm.com>
+References: <20260203214342.584712-1-ben.horgan@arm.com>
+ <20260203214342.584712-5-ben.horgan@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <aYSgjPD5KRcNN0j4@luna>
+In-Reply-To: <20260203214342.584712-5-ben.horgan@arm.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75389-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_FROM(0.00)[bounces-75363-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[catalin.marinas@arm.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linkmauve.fr:email]
-X-Rspamd-Queue-Id: B82DCF5F68
+	RCVD_COUNT_FIVE(0.00)[5];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.976];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[marvell.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:email]
+X-Rspamd-Queue-Id: 599D7F51F4
 X-Rspamd-Action: no action
 
-On Thu, Feb 05, 2026 at 02:52:12PM +0100, Link Mauve wrote:
-> On Thu, Feb 05, 2026 at 02:31:25AM +0530, Mukesh Kumar Chaurasiya (IBM) w=
-rote:
-> [=E2=80=A6]
-> > diff --git a/rust/Makefile b/rust/Makefile
-> > index ae22f2c5f0b3..c3961fd0d9a4 100644
-> > --- a/rust/Makefile
-> > +++ b/rust/Makefile
-> > @@ -392,10 +392,17 @@ BINDGEN_TARGET_x86	:=3D x86_64-linux-gnu
-> >  BINDGEN_TARGET_arm64	:=3D aarch64-linux-gnu
-> >  BINDGEN_TARGET_arm	:=3D arm-linux-gnueabi
-> >  BINDGEN_TARGET_loongarch	:=3D loongarch64-linux-gnusf
-> > -BINDGEN_TARGET_powerpc	:=3D powerpc-linux-gnu
-> >  BINDGEN_TARGET_um	:=3D $(BINDGEN_TARGET_$(SUBARCH))
-> >  BINDGEN_TARGET		:=3D $(BINDGEN_TARGET_$(SRCARCH))
-> > =20
-> > +ifdef CONFIG_PPC64
-> > +ifdef CONFIG_CPU_LITTLE_ENDIAN
-> > +BINDGEN_TARGET_powerpc	:=3D powerpc64le-linux-gnu
-> > +endif
-> > +else
-> > +BINDGEN_TARGET_powerpc	:=3D powerpc-linux-gnu
-> > +endif
->=20
-> You define BINDGEN_TARGET_powerpc after BINDGEN_TARGET has been set to
-> the value of $(BINDGEN_TARGET_$(SRCARCH)), so it is empty and bindgen
-> then gets passed --target=3D which makes it fail here, with this error
-> message:
-I am able to compile it and boot it on ppc64le qemu pseries and
-powernv9 hardware.
+On Tue, Feb 03, 2026 at 09:43:05PM +0000, Ben Horgan wrote:
+> From: James Morse <james.morse@arm.com>
+> 
+> MPAM allows traffic in the SoC to be labeled by the OS, these labels are
+> used to apply policy in caches and bandwidth regulators, and to monitor
+> traffic in the SoC. The label is made up of a PARTID and PMG value. The x86
+> equivalent calls these CLOSID and RMID, but they don't map precisely.
+> 
+> MPAM has two CPU system registers that is used to hold the PARTID and PMG
+> values that traffic generated at each exception level will use. These can
+> be set per-task by the resctrl file system. (resctrl is the defacto
+> interface for controlling this stuff).
+> 
+> Add a helper to switch this.
+> 
+> struct task_struct's separate CLOSID and RMID fields are insufficient to
+> implement resctrl using MPAM, as resctrl can change the PARTID (CLOSID) and
+> PMG (sort of like the RMID) separately. On x86, the rmid is an independent
+> number, so a race that writes a mismatched closid and rmid into hardware is
+> benign. On arm64, the pmg bits extend the partid.
+> (i.e. partid-5 has a pmg-0 that is not the same as partid-6's pmg-0).  In
+> this case, mismatching the values will 'dirty' a pmg value that resctrl
+> believes is clean, and is not tracking with its 'limbo' code.
+> 
+> To avoid this, the partid and pmg are always read and written as a
+> pair. This requires a new u64 field. In struct task_struct there are two
+> u32, rmid and closid for the x86 case, but as we can't use them here do
+> something else. Add this new field, mpam_partid_pmg, to struct thread_info
+> to avoid adding more architecture specific code to struct task_struct.
+> Always use READ_ONCE()/WRITE_ONCE() when accessing this field.
+> 
+> Resctrl allows a per-cpu 'default' value to be set, this overrides the
+> values when scheduling a task in the default control-group, which has
+> PARTID 0. The way 'code data prioritisation' gets emulated means the
+> register value for the default group needs to be a variable.
+> 
+> The current system register value is kept in a per-cpu variable to avoid
+> writing to the system register if the value isn't going to change.  Writes
+> to this register may reset the hardware state for regulating bandwidth.
+> 
+> Finally, there is no reason to context switch these registers unless there
+> is a driver changing the values in struct task_struct. Hide the whole thing
+> behind a static key. This also allows the driver to disable MPAM in
+> response to errors reported by hardware. Move the existing static key to
+> belong to the arch code, as in the future the MPAM driver may become a
+> loadable module.
+> 
+> All this should depend on whether there is an MPAM driver, hide it behind
+> CONFIG_ARM64_MPAM.
+> 
+> Tested-by: Gavin Shan <gshan@redhat.com>
+> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+> Tested-by: Peter Newman <peternewman@google.com>
+> CC: Amit Singh Tomar <amitsinght@marvell.com>
+> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
+> Signed-off-by: James Morse <james.morse@arm.com>
+> Reviewed-by: Gavin Shan <gshan@redhat.com>
+> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 
-I agree this might cause an issue. Will fix this and send out a new
-revision.
-> ```
-> bindgen ../rust/bindings/bindings_helper.h --blocklist-type __kernel_s?si=
-ze_t --blocklist-type __kernel_ptrdiff_t --opaque-type xregs_state --opaque=
--type desc_struct --opaque-type arch_lbr_state --opaque-type local_apic --o=
-paque-type alt_instr --opaque-type x86_msi_data --opaque-type x86_msi_addr_=
-lo --opaque-type kunit_try_catch --opaque-type spinlock --no-doc-comments -=
--blocklist-function __list_.*_report --blocklist-item ARCH_SLAB_MINALIGN --=
-blocklist-item ARCH_KMALLOC_MINALIGN --with-derive-custom-struct .*=3DMaybe=
-Zeroable --with-derive-custom-union .*=3DMaybeZeroable --rust-target 1.68 -=
--use-core --with-derive-default --ctypes-prefix ffi --no-layout-tests --no-=
-debug '.*' --enable-function-attribute-detection -o rust/bindings/bindings_=
-generated.rs -- -Wp,-MMD,rust/bindings/.bindings_generated.rs.d -nostdinc -=
-I../arch/powerpc/include -I./arch/powerpc/include/generated -I../include -I=
-=2E/include -I../arch/powerpc/include/uapi -I./arch/powerpc/include/generat=
-ed/uapi -I../include/uapi -I./include/generated/uapi -include ../include/li=
-nux/compiler-version.h -include ../include/linux/kconfig.h -include ../incl=
-ude/linux/compiler_types.h -D__KERNEL__ -mbig-endian -m32 -I ../arch/powerp=
-c -fmacro-prefix-map=3D../=3D -std=3Dgnu11 -fshort-wchar -funsigned-char -f=
-no-common -fno-PIE -fno-strict-aliasing -msoft-float -mcpu=3Dpowerpc -mno-p=
-refixed -mno-pcrel -mno-altivec -mno-vsx -mno-mma -fno-asynchronous-unwind-=
-tables -mbig-endian -fno-delete-null-pointer-checks -Os -fno-stack-protecto=
-r -fomit-frame-pointer -ftrivial-auto-var-init=3Dzero -fno-strict-overflow =
--fno-stack-check -fno-builtin-wcslen -Wall -Wextra -Wundef -Werror=3Dimplic=
-it-function-declaration -Werror=3Dimplicit-int -Werror=3Dreturn-type -Werro=
-r=3Dstrict-prototypes -Wno-format-security -Wno-trigraphs -Wno-frame-addres=
-s -Wno-address-of-packed-member -Wmissing-declarations -Wmissing-prototypes=
- -Wframe-larger-than=3D1280 -Wno-main -Wno-dangling-pointer -Wvla-larger-th=
-an=3D1 -Wno-pointer-sign -Wcast-function-type -Wno-array-bounds -Wno-string=
-op-overflow -Wno-alloc-size-larger-than -Wimplicit-fallthrough=3D5 -Werror=
-=3Ddate-time -Werror=3Dincompatible-pointer-types -Werror=3Ddesignated-init=
- -Wenum-conversion -Wunused -Wno-unused-but-set-variable -Wno-unused-const-=
-variable -Wno-packed-not-aligned -Wno-format-overflow -Wno-format-truncatio=
-n -Wno-stringop-truncation -Wno-override-init -Wno-missing-field-initialize=
-rs -Wno-type-limits -Wno-shift-negative-value -Wno-maybe-uninitialized -Wno=
--sign-compare -Wno-unused-parameter -DGCC_PLUGINS -I../rust -Irust -DKBUILD=
-_MODFILE=3D'"rust/bindings_generated"' -DKBUILD_BASENAME=3D'"bindings_gener=
-ated"' -DKBUILD_MODNAME=3D'"bindings_generated"' -D__KBUILD_MODNAME=3Dkmod_=
-bindings_generated -w --target=3D -fno-builtin -D__BINDGEN__ -DMODULE  ; se=
-d -Ei 's/pub const RUST_CONST_HELPER_([a-zA-Z0-9_]*)/pub const /g' rust/bin=
-dings/bindings_generated.rs
-> error: unsupported option '-mbig-endian' for target ''
-> error: unsupported option '-mcpu=3D' for target ''
-> error: unsupported option '-mno-prefixed' for target ''
-> error: unsupported option '-mno-pcrel' for target ''
-> error: unsupported option '-mno-altivec' for target ''
-> error: unsupported option '-mno-vsx' for target ''
-> error: unsupported option '-mno-mma' for target ''
-> error: unsupported option '-mbig-endian' for target ''
-> error: unknown target triple 'unknown'
-> panicked at bindgen/ir/context.rs:562:15:
-> libclang error; possible causes include:
-> - Invalid flag syntax
-> - Unrecognized flags
-> - Invalid flag arguments
-> - File I/O errors
-> - Host vs. target architecture mismatch
-> If you encounter an error missing from this list, please file an issue or=
- a PR!
-> ```
->=20
-> Did this work on PPC64?
->=20
-ppc64be still has some missing things from the toolchain side. For
-ppc64le it does works, atleast on powernv9 hardware and pseries POWER10
-qemu.
-> > +
-> >  # All warnings are inhibited since GCC builds are very experimental,
-> >  # many GCC warnings are not supported by Clang, they may only appear in
-> >  # some configurations, with new GCC versions, etc.
-> > --=20
-> > 2.52.0
-> >=20
->=20
-> With this fixed:
-> Reviewed-by: Link Mauve <linkmauve@linkmauve.fr>
-> Tested-by: Link Mauve <linkmauve@linkmauve.fr>
->=20
-Thanks.
-Regards,
-Mukesh
-> --=20
-> Link Mauve
+Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
 
