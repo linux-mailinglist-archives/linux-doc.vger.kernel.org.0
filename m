@@ -1,122 +1,157 @@
-Return-Path: <linux-doc+bounces-75379-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75380-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CFo/GHnMhGk45QMAu9opvQ
-	(envelope-from <linux-doc+bounces-75379-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 17:59:37 +0100
+	id 4GC8Ao3MhGk45QMAu9opvQ
+	(envelope-from <linux-doc+bounces-75380-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 17:59:57 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA54DF596F
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 17:59:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81859F5977
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 17:59:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EFE743080B11
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 16:54:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5AC8130097F3
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 16:55:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 284FF43C043;
-	Thu,  5 Feb 2026 16:54:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2239B43901F;
+	Thu,  5 Feb 2026 16:55:12 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A8A11438FE3;
-	Thu,  5 Feb 2026 16:54:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2F57423A8F;
+	Thu,  5 Feb 2026 16:55:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770310472; cv=none; b=WATlNd+2emt/g7V4YLLhUuR1n/uJV5uRTYah6u5pqh36z+3gQumVOJpG5SQYbx/z6ljpWKe7e/7CWBto/kB7Tw2Z2gdZ0lOw0L8rmKSKwgmP6DLyVCe41BaBaMxs1Kaw5oKxsGBL7I1zucGRERC3xojLBUZKIaaMbxtQfiiJyeI=
+	t=1770310512; cv=none; b=qKTzu1a3h4ShTXh/QdUEB003rOLBleY+5e7z+yp+reQ/rt9hTUMXrmFym8V/lcnOWsa9uUlwvgXAKAAfMwvSH5LYAa2uCuv9Z75fSE4nq0kWQAByLpSaF0lnRuPISWpa493dIX2aeaxZePq+f8bH1OAymnbuwpAX+NhsEjUTwSU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770310472; c=relaxed/simple;
-	bh=0ywU1iCJv4gW2vXVQpb2iwpF39boGjzpBGJIVYkpIRI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AasmXLM3CIk2T3nFWbK/VlUAcgcMVHtT9Qd4zPPBhs3BLZP1zTrKZ16DqggguJVC0+au4t+PyoApQVh0Tsibe8kW6SA6tAy+0gmHCfr/B4CPjEbkPGoWuWWFv84LeNYgRFxs/B24ejpFBv1Gs4F3exdfyc4NrUjrKADyWNXfG3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B3637339;
-	Thu,  5 Feb 2026 08:54:24 -0800 (PST)
-Received: from arm.com (arrakis.cambridge.arm.com [10.1.197.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 44C3E3F778;
-	Thu,  5 Feb 2026 08:54:25 -0800 (PST)
-Date: Thu, 5 Feb 2026 16:54:22 +0000
-From: Catalin Marinas <catalin.marinas@arm.com>
+	s=arc-20240116; t=1770310512; c=relaxed/simple;
+	bh=Ga4hFHlLuwtyT6EVFY9BlvvKOD94jyY/UmQNDNqpEWE=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=rRL5I6JQpw/4W803QnSg4Ccq1+D9oWexBiSCeVaELYIZTnMkSEVc1mE/9z/wYbHWMkEsHw7TaWOpGm6Q9A2m2hOXOLLZNa9x0m3rxMeCu39FSgQAqBUzXC5kYBzUeZcGRqxITo8MrOAADSfZV1QDumGnGRuR12BuOH2pZnMHJpE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.224.83])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4f6Nbt3fykzJ468h;
+	Fri,  6 Feb 2026 00:54:18 +0800 (CST)
+Received: from dubpeml500005.china.huawei.com (unknown [7.214.145.207])
+	by mail.maildlp.com (Postfix) with ESMTPS id 6EC8B40569;
+	Fri,  6 Feb 2026 00:55:09 +0800 (CST)
+Received: from localhost (10.48.151.164) by dubpeml500005.china.huawei.com
+ (7.214.145.207) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 5 Feb
+ 2026 16:55:07 +0000
+Date: Thu, 5 Feb 2026 16:55:05 +0000
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
 To: Ben Horgan <ben.horgan@arm.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
-	baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
-	dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
-	fenghuay@nvidia.com, gshan@redhat.com, james.morse@arm.com,
-	jonathan.cameron@huawei.com, kobak@nvidia.com, lcherian@marvell.com,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	peternewman@google.com, punit.agrawal@oss.qualcomm.com,
-	quic_jiles@quicinc.com, reinette.chatre@intel.com,
-	rohit.mathew@arm.com, scott@os.amperecomputing.com,
-	sdonthineni@nvidia.com, tan.shaopeng@fujitsu.com,
-	xhao@linux.alibaba.com, will@kernel.org, corbet@lwn.net,
-	maz@kernel.org, oupton@kernel.org, joey.gouly@arm.com,
-	suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
-	zengheng4@huawei.com, linux-doc@vger.kernel.org,
-	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: Re: [PATCH v4 08/41] arm64: mpam: Add cpu_pm notifier to restore
- MPAM sysregs
-Message-ID: <aYTLPqpRmwDap6fM@arm.com>
+CC: <amitsinght@marvell.com>, <baisheng.gao@unisoc.com>,
+	<baolin.wang@linux.alibaba.com>, <carl@os.amperecomputing.com>,
+	<dave.martin@arm.com>, <david@kernel.org>, <dfustini@baylibre.com>,
+	<fenghuay@nvidia.com>, <gshan@redhat.com>, <james.morse@arm.com>,
+	<kobak@nvidia.com>, <lcherian@marvell.com>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
+	<peternewman@google.com>, <punit.agrawal@oss.qualcomm.com>,
+	<quic_jiles@quicinc.com>, <reinette.chatre@intel.com>,
+	<rohit.mathew@arm.com>, <scott@os.amperecomputing.com>,
+	<sdonthineni@nvidia.com>, <tan.shaopeng@fujitsu.com>,
+	<xhao@linux.alibaba.com>, <catalin.marinas@arm.com>, <will@kernel.org>,
+	<corbet@lwn.net>, <maz@kernel.org>, <oupton@kernel.org>,
+	<joey.gouly@arm.com>, <suzuki.poulose@arm.com>, <kvmarm@lists.linux.dev>,
+	<zengheng4@huawei.com>, <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v4 27/41] arm_mpam: resctrl: Add support for csu
+ counters
+Message-ID: <20260205165505.000075a2@huawei.com>
+In-Reply-To: <20260203214342.584712-28-ben.horgan@arm.com>
 References: <20260203214342.584712-1-ben.horgan@arm.com>
- <20260203214342.584712-9-ben.horgan@arm.com>
+	<20260203214342.584712-28-ben.horgan@arm.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260203214342.584712-9-ben.horgan@arm.com>
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: lhrpeml100012.china.huawei.com (7.191.174.184) To
+ dubpeml500005.china.huawei.com (7.214.145.207)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.36 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[huawei.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75379-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	TAGGED_FROM(0.00)[bounces-75380-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[catalin.marinas@arm.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[jonathan.cameron@huawei.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[6];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.978];
+	NEURAL_HAM(-0.00)[-0.979];
 	MID_RHS_MATCH_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,arm.com:mid,arm.com:email,fujitsu.com:email]
-X-Rspamd-Queue-Id: BA54DF596F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,arm.com:email]
+X-Rspamd-Queue-Id: 81859F5977
 X-Rspamd-Action: no action
 
-On Tue, Feb 03, 2026 at 09:43:09PM +0000, Ben Horgan wrote:
+On Tue, 3 Feb 2026 21:43:28 +0000
+Ben Horgan <ben.horgan@arm.com> wrote:
+
 > From: James Morse <james.morse@arm.com>
 > 
-> The MPAM system registers will be lost if the CPU is reset during PSCI's
-> CPU_SUSPEND.
+> resctrl exposes a counter via a file named llc_occupancy. This isn't really
+> a counter as its value goes up and down, this is a snapshot of the cache
+> storage usage monitor.
 > 
-> Add a PM notifier to restore them.
+> Add some picking code which will only find an L3. The resctrl counter
+> file is called llc_occupancy but we don't check it is the last one as
+> it is already identified as L3.
 > 
-> mpam_thread_switch(current) can't be used as this won't make any changes if
-> the in-memory copy says the register already has the correct value. In
-> reality the system register is UNKNOWN out of reset.
-> 
-> Tested-by: Gavin Shan <gshan@redhat.com>
-> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-> Tested-by: Peter Newman <peternewman@google.com>
-> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> Reviewed-by: Gavin Shan <gshan@redhat.com>
 > Signed-off-by: James Morse <james.morse@arm.com>
+> Co-developed-by: Dave Martin <dave.martin@arm.com>
+> Signed-off-by: Dave Martin <dave.martin@arm.com>
 > Signed-off-by: Ben Horgan <ben.horgan@arm.com>
+> ---
+> Changes since rfc:
+> Allow csu counters however many partid or pmg there are
+> else if -> if
+> reduce scope of local variables
+> drop has_csu
+> 
+> Changes since v2:
+> return -> break so works for mbwu in later patch
+> add for_each_mpam_resctrl_mon
+> return error from mpam_resctrl_monitor_init(). It may fail when is abmc
+> allocation introduced in a later patch.
+> Squashed in patch from Dave Martin:
+> https://lore.kernel.org/lkml/20250820131621.54983-1-Dave.Martin@arm.com/
+> 
+> Changes since v3:
+> resctrl_enable_mon_event() signature update
+> Restrict the events considered
+> num-rmid update
+> Use raw_smp_processor_id()
+> Tighten heuristics:
+>  Make sure it is the L3
+>  Please shout if this means the counters aren't exposed on any platforms
+I'm guessing that you mean on platforms where they were under previous version
+of the heuristic?  I'll leave zhengheng to comment on that for our platforms.
 
-Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
+> Drop tags due to change in policy/rework
+> 
+> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
+Doesn't really matter as it's the bit after --- , but what's a SoB doing here?
+
+Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 
