@@ -1,279 +1,192 @@
-Return-Path: <linux-doc+bounces-75391-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75405-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aMZBMMXWhGlo5gMAu9opvQ
-	(envelope-from <linux-doc+bounces-75391-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 18:43:33 +0100
+	id wNDpEeb3hGmb7AMAu9opvQ
+	(envelope-from <linux-doc+bounces-75405-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 21:04:54 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CECDF6180
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 18:43:33 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF915F7077
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 21:04:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 52BBF300FB68
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 17:43:19 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 1AE0D3006800
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 20:04:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A9CC2FD1B5;
-	Thu,  5 Feb 2026 17:43:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9FDEA32B98A;
+	Thu,  5 Feb 2026 20:04:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="V2FYhWU+"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="M00wQn4h"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EDE62FB997
-	for <linux-doc@vger.kernel.org>; Thu,  5 Feb 2026 17:43:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.43
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770313396; cv=pass; b=bzGVbeWf5XeKJOUp9Fva3lGCFNjv3ScKgro4HXzF1teS1IW/DYe/KELkK3LmvMPW7K9R5woGlNJj2cEsdR09a8nYKV2yTJtZBVUx48lJzXXK4kbs0keHs4UYhzdP1ZfFr+1XyY4sRbHeTBULVufU/39y0bpudMFKyBVB0Yozx60=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770313396; c=relaxed/simple;
-	bh=W7PKbjr3sm8K2EitecNIWP8s6CcOSoC5YBXcikD3Z/Q=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=e98xa9XHFiwPsAW2deCSVJxn5DIgo/NqIZiSgDEaRG7A9V0dWYpUj0VVw4t+mR9n6J62P0XBjFzb7ksLE2ubCtJasr8t8awmqSpMyUz+8Nh3/jbO52rL5/ku0KXlnC6q+73RDrtjCrlv/7Z3/D1KRAHzvrSPmG8n3NYEKk9ZcTo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=V2FYhWU+; arc=pass smtp.client-ip=209.85.208.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-64baa44df99so346a12.0
-        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 09:43:15 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770313394; cv=none;
-        d=google.com; s=arc-20240605;
-        b=QND0/bMclqk4NB1wkCa1yi48Lek/5KcFgJF4u/aIsbFTqUWWyUmm1D0tUHqF8SkefF
-         HjhiPv/wfLc9VcqZKMxDbTVyonVu50rcy5vgjK1CX8LChmtZsoRDTqVCgtBwPUbu0Bkg
-         7PjrX489K2jaswZpavK85ISxv+d/Ch+s9t/WVjtsm05dU4fvhRo3uuDeuMoBitWTex57
-         cuRrqTm+lDAHPfEt7etkBPu0E4U6O7/eG3ab4et/W5/Mo/hlccvdmyvK4QMKosb2Xebk
-         dVTOYUS46X2S7U7Vob1CFaOBTWwnkBZLdDOmsGU1HuBLSYRwDsba/CRZw0XHm++pFsSN
-         Xnnw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Ohb+oFC1mbgPld1c1rVcaRxKKHn/WerjH5KdHZYbAwI=;
-        fh=VLaeNlQE0AgVAxrJNA2FBAKrKeeYg/whWpQx3YfmGmw=;
-        b=X9DJmU1NCrTeo34uHDT1WB02OO/6c03Qn8zsHR1JuztL4CBptdtS+xl80ckk92eWPw
-         7l3NoD2nJUKelvBTQpyJOIPwbBNyCWpJZTAfhYEwX5BzTnC3anlwQY3Q9aGg1DC3bNbu
-         mET0m40U0qrBdrMHXcg3FkcmxzP0lKPZJq4iK+9vk3pCMHOmI7eocKPMEDylIrNiFbTL
-         dnhSZI2PAKp1rLlhtjL+LYOsqKkYoe2/XGua8Y5fzayR4UJk8rySlZcRSJjn/aFZTMf+
-         NkmUvkbiDb/NyAUAbieqYNeywmD7kiz4r2dC7+TxYQOm0Eij5N5X6rfss5DrnKthbbFX
-         0S2g==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 627E732ABFF
+	for <linux-doc@vger.kernel.org>; Thu,  5 Feb 2026 20:04:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.176
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770321890; cv=none; b=laumKozYyd2EhYxnpW1skBbe3duzqDmKj3tTt1MG4CmETclxk8AIaWzIRjl0yfSemO7lGftURkopUBxFpbW/OWS4Y/WQ5MUpxfzJzq/vumVUuyxwtztInqxPadPH2WYhpBe09h+YTBh4oLNrC0q/qFVsvvOBUeBlcMRmvFKJo68=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770321890; c=relaxed/simple;
+	bh=rp+KY3soTs9OffEIYMUs0A+TcFMDd/NIg5e/e7FzZcQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=SW+GA3ylBowufrQAaIByEA3tRcvoDFmk+nqeJCG96dcFeFZnQj0MjFe9wDpWZjhojkPObz6IlZXlEAgoMsLY5NoiOxK0X11EK/7GcudnrQWQIpJPi+VYGei6UUSJhJ7g24USINakcU/Ix/cBO7kmyXHRa5IPrkHyJ0pT1IdKnuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=M00wQn4h; arc=none smtp.client-ip=74.125.82.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-2b7da62b487so2507211eec.1
+        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 12:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1770313394; x=1770918194; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ohb+oFC1mbgPld1c1rVcaRxKKHn/WerjH5KdHZYbAwI=;
-        b=V2FYhWU+rADJOagkSqGOfUO2E/edQ5pK5MwLldb/dwq0aYYjhH+bxdkeDpZ6wVTqwL
-         mpheB+FvdGksnuqEExz5VMH/44FpxwKozpxXEnlp3rQpJNKV82pzOApOuxDt/3Tdiciq
-         q7k+YjE8ob5I5QDSN7GQFw4aXJ5GvgbucTZqpVntQApTDavxQaladE9pkIuYBjS/X0vo
-         6pvXprPeZ+IE1qdJi8cMrHkk9oJoXTXBNYTRVUc6KM1Z/J9ou3yrcgYzkUxzeHoNKPZJ
-         euxdXOo2whLQXsP4F43tDcqcvJxApWjdf/2roJc5d9YSorHIU0wEH459fqDV5goXCPj7
-         3qSg==
+        d=gmail.com; s=20230601; t=1770321889; x=1770926689; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lutadAeu4e7BBQbDMidbIXRD6r3yDEuccAzMlRoMGq0=;
+        b=M00wQn4hIIjghsxWHIcLt2u9HGbV38BlsURscqAqczAsOpkP3QBrqzOfqj/zM9FjnL
+         tmJvGm+84Xi1NsYys0+bZ+h0CIzDcCpfOMCOX2DNvudN7MJgtYA//aGAyEV4qOsbwEj1
+         xaFjABZ7U6V2Sv9sz+amgVUekmDNj//Zdiawpa41pNunrtnSVwzgfRwaskvurSKacqHF
+         5do9HgZwOI0Id5ALxeQEoWK37+bjc5pY+xkuX+jHtwgz/2ZFwWA8J6zoLyTt8pqKnmPW
+         PMta4m5DE87D3/WVUTYnUCeyoADmJviDW9PhJhCwajHme9u1KDEyclf4OaHz3RlNGULD
+         EMQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770313394; x=1770918194;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Ohb+oFC1mbgPld1c1rVcaRxKKHn/WerjH5KdHZYbAwI=;
-        b=VCVQOuacwD6jmuH+/DHoR35a6o0nAHl4Hjm/uwRE8SxdLkmAz78D8UOQ/YL9UMugfs
-         tKpbCYhKBjOEMDWe8CkJxSvYRcHHitzPQzft5FjFezHXQPYa8h4bt93qc999btQGtT5w
-         J3R4+aw4ymIoFiP31OjlUXhboSQhD0rpYtdqoXMo6g95isZK5zqQy1FSFjkcalfIorG2
-         aokIMdMC2iRvhRwNSAowWeE3Y5cXf/uqtdYKfB8yL2V/b0q0tnvX+COnuTFK2ICx+q7a
-         NsarropVRQMnwi8ayYLGYlyHfxx73XA7EHMTuO18AYUYDzY0Da6nwa0ABAxI0CZTVw3G
-         R46g==
-X-Forwarded-Encrypted: i=1; AJvYcCXdZYFBAH/x6/A2WOIvPTJSOvl0T49b3woBYqnWSizBhu9kptZ0MyV9kK5/C/HLw2J2NopQ2rKlRHc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx8d+oOyOK7DkD2PajO11G5l9lMyd6gAB+MTogABugSyFd+pvJO
-	NfFqjYw/zJo594F82uNSdN3u0HqkQ0uRc84sLMas2BkqYjSxgoL2sNOY2qYaGH+pt5r35zqsDOi
-	EPcUcnOEcgQarTrlkAIgh2uIOeM5yEZWmdTgufQDP
-X-Gm-Gg: AZuq6aKCjYfmRx3lrRa9KvxVAXxNCX9uoG0NATp+779KETQGmlWcWmeJkwe1aAGl12U
-	ChF19ikjBLZ5tV1vEJB318MMtTxo7muhcX6AmSff+YrfAP/xTOcndMaIW4qdWITIilSpUwIbanT
-	/8pu43FYVXZfoHdXhAY9hix9N6EfmK5GLCBVAsmvUeqKrQnx0kcnjV5/rEDHABmG75rZmlJw0+F
-	8Ixwi/t+b5WsPRMjLBlb3q6DW7kN7sZOIwnJP16YyNW3z1y1va1kZeP0MYTtqMA7cPb6Mg=
-X-Received: by 2002:a05:6402:510f:b0:64b:560e:41e2 with SMTP id
- 4fb4d7f45d1cf-659634ab258mr56359a12.6.1770313394070; Thu, 05 Feb 2026
- 09:43:14 -0800 (PST)
+        d=1e100.net; s=20230601; t=1770321889; x=1770926689;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lutadAeu4e7BBQbDMidbIXRD6r3yDEuccAzMlRoMGq0=;
+        b=tAZApPLwcZP6YvuGiJCM52QUB8qzESSns/Tao0d4ShDTA7GNcdMzh9bl+e71ytIEDH
+         5VGnTEnuDtmIr66B3IpRbtmOCxh9QUx8Ic5unnOlMS+NYg0eZC5NJCrlVM2reaJzw015
+         RdEWoPbXKam+74iwovUWwKaFDQSf4dGdbscUo3JmfoBMw5XTCQHUNQytJlLI6t2pWDS8
+         AuQmGGWDC6toJWRO43EcVVz9o6UoyzL9P77kZrfuLY31YUvmFsQVtIlA167/H46iqXso
+         mQXMchzyNAqVmn0xNsxLFtXXkaXHOB/9STyVcPeDVbvtuS9UuShs+bP7eHXKqseRewIs
+         pR/w==
+X-Forwarded-Encrypted: i=1; AJvYcCU2aZYzLfYIJxBcPrIdJsm83ylkARhgX1rOPnsgOQacKvtTxQevJf47Pl9txi8rlVIfp+2rzhBTYQE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxzVgy0hv+J2vKI+qGlYD6BrgwELOJmoGOKktmGOufWIRfI+YOF
+	40Za/kjJ57eV9l2MawecpJNa0fo/G/WmBNI9Y7TqAbXwwrnCmirJ09x00b2oQg==
+X-Gm-Gg: AZuq6aLsCsP0NSmI5rZbSTjEtH5n5xvbnWNrO45ZlJwZ8Aqw4mdUS1M5FxH1TGcEujB
+	q94yBKUYe8ixCWyCSybAD65fQNZPrRTyKcuuzbkSMGkxxEJcYuqr8F40zI3bzivSFB5jmiYNFKO
+	kAnZLpmHtdDYHY4HWzlj2RfdcWs63OmrDXc/n9l50+f/Wm9KRpvuTcytJl9wyXGLxOkTSrwyjbB
+	U7tPPggVUwvfqw8U1OWFDMl4h8QTYqNITFTT3BQ/PBEt6bYuesFlbOaiRdOE3tGcQuMUNmFxgo8
+	UY/jWdkc8GqqLJssAc7opun1OmiHcZELgPTiL2yoBG0g2BeOLDANAykDzZE4EIeVjsLxdQ0+Xp2
+	wxCymh8H9ei4kdoYaS7tjXjThLIYME1rLHDANxNSBVOLd7Rmw3SzVdVty5hwo+391kTG2JxcR46
+	zNKxkNxotPAF8bkOvclpuX3dADNkY0cwPG12FrK1ndYn4llk4knllT9RCLdaKGFQ==
+X-Received: by 2002:a05:6a20:3d0a:b0:38d:f405:709e with SMTP id adf61e73a8af0-393ad307e51mr212862637.48.1770314685545;
+        Thu, 05 Feb 2026 10:04:45 -0800 (PST)
+Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com.com ([106.51.167.8])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c6dcb5436c5sm99812a12.15.2026.02.05.10.04.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Feb 2026 10:04:45 -0800 (PST)
+From: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
+To: linkmauve@linkmauve.fr,
+	ojeda@kernel.org,
+	boqun.feng@gmail.com,
+	gary@garyguo.net,
+	bjorn3_gh@protonmail.com,
+	lossin@kernel.org,
+	a.hindborg@kernel.org,
+	aliceryhl@google.com,
+	tmgross@umich.edu,
+	dakr@kernel.org,
+	corbet@lwn.net,
+	maddy@linux.ibm.com,
+	mpe@ellerman.id.au,
+	npiggin@gmail.com,
+	chleroy@kernel.org,
+	peterz@infradead.org,
+	jpoimboe@kernel.org,
+	jbaron@akamai.com,
+	rostedt@goodmis.org,
+	ardb@kernel.org,
+	rust-for-linux@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org
+Cc: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
+Subject: [PATCH V3 0/3] Rust support for powerpc
+Date: Thu,  5 Feb 2026 23:34:26 +0530
+Message-ID: <20260205180429.3280657-1-mkchauras@gmail.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260113225406.273373-1-jmattson@google.com> <aWbmXTJdZDO_tnvE@google.com>
- <CALMp9eTYakMk0Bogxa_GdGU5_h4PK-YOXcu-cSQ16m1QcusHxw@mail.gmail.com>
- <CALMp9eQx7EVim4iYGbAhoHrei2YmTra6oxtdmKaY7bw-M0PHbw@mail.gmail.com>
- <aYKoJ74MWboBuE_M@google.com> <CALMp9eSc=0zS+6Rk-c_0P-Q1Y8_9Xv58G5BYxieKpv_XaSj0wg@mail.gmail.com>
- <aYPvyMDipM9Z9Z7t@google.com> <CALMp9eR4trBDwgDnyEJmrHnStKnAMiRgehty=xu=NMnLVN2vtw@mail.gmail.com>
- <aYStVN5MyME-Pkwt@google.com>
-In-Reply-To: <aYStVN5MyME-Pkwt@google.com>
-From: Jim Mattson <jmattson@google.com>
-Date: Thu, 5 Feb 2026 09:43:01 -0800
-X-Gm-Features: AZwV_Qigg_-JCEjJmebwjFdGWMLQ6vwSO12veSukovsezN310bnQnkd0-q3_c9M
-Message-ID: <CALMp9eT_uJZwO5AF-wWHFH1DnOKWjUtU2u9TCOs7=ZK8_xCx+w@mail.gmail.com>
-Subject: Re: [PATCH] KVM: VMX: Add quirk to allow L1 to set FREEZE_IN_SMM in vmcs12
-To: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75391-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-75405-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_TO(0.00)[linkmauve.fr,kernel.org,gmail.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FREEMAIL_CC(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jmattson@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3CECDF6180
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: DF915F7077
 X-Rspamd-Action: no action
 
-On Thu, Feb 5, 2026 at 6:47=E2=80=AFAM Sean Christopherson <seanjc@google.c=
-om> wrote:
->
-> On Wed, Feb 04, 2026, Jim Mattson wrote:
-> > On Wed, Feb 4, 2026 at 5:18=E2=80=AFPM Sean Christopherson <seanjc@goog=
-le.com> wrote:
-> > >
-> > > On Wed, Feb 04, 2026, Jim Mattson wrote:
-> > > > On Tue, Feb 3, 2026 at 6:00=E2=80=AFPM Sean Christopherson <seanjc@=
-google.com> wrote:
-> > > > >
-> > > > > On Thu, Jan 22, 2026, Jim Mattson wrote:
-> > > > > > On Tue, Jan 13, 2026 at 7:47=E2=80=AFPM Jim Mattson <jmattson@g=
-oogle.com> wrote:
-> > > > > > > On Tue, Jan 13, 2026 at 4:42=E2=80=AFPM Sean Christopherson <=
-seanjc@google.com> wrote:
-> > > > > > > >
-> > > > > > > > On Tue, Jan 13, 2026, Jim Mattson wrote:
-> > > > > > > > > Add KVM_X86_QUIRK_VMCS12_FREEZE_IN_SMM to allow L1 to set
-> > > > > > > > > IA32_DEBUGCTL.FREEZE_IN_SMM in vmcs12 when using nested V=
-MX.  Prior to
-> > > > > > > > > commit 6b1dd26544d0 ("KVM: VMX: Preserve host's
-> > > > > > > > > DEBUGCTLMSR_FREEZE_IN_SMM while running the guest"), L1 c=
-ould set
-> > > > > > > > > FREEZE_IN_SMM in vmcs12 to freeze PMCs during physical SM=
-M coincident
-> > > > > > > > > with L2's execution.  The quirk is enabled by default for=
- backwards
-> > > > > > > > > compatibility; userspace can disable it via KVM_CAP_DISAB=
-LE_QUIRKS2 if
-> > > > > > > > > consistency with WRMSR(IA32_DEBUGCTL) is desired.
-> > > > > > > >
-> > > > > > > > It's probably worth calling out that KVM will still drop FR=
-EEZE_IN_SMM in vmcs02
-> > > > > > > >
-> > > > > > > >         if (vmx->nested.nested_run_pending &&
-> > > > > > > >             (vmcs12->vm_entry_controls & VM_ENTRY_LOAD_DEBU=
-G_CONTROLS)) {
-> > > > > > > >                 kvm_set_dr(vcpu, 7, vmcs12->guest_dr7);
-> > > > > > > >                 vmx_guest_debugctl_write(vcpu, vmcs12->gues=
-t_ia32_debugctl &
-> > > > > > > >                                                vmx_get_supp=
-orted_debugctl(vcpu, false)); <=3D=3D=3D=3D
-> > > > > > > >         } else {
-> > > > > > > >                 kvm_set_dr(vcpu, 7, vcpu->arch.dr7);
-> > > > > > > >                 vmx_guest_debugctl_write(vcpu, vmx->nested.=
-pre_vmenter_debugctl);
-> > > > > > > >         }
-> > > > > > > >
-> > > > > > > > both from a correctness standpoint and so that users aren't=
- mislead into thinking
-> > > > > > > > the quirk lets L1 control of FREEZE_IN_SMM while running L2=
-.
-> > > > > > >
-> > > > > > > Yes, it's probably worth pointing out that the VM is now subj=
-ect to
-> > > > > > > the whims of the L0 administrators.
-> > > > > > >
-> > > > > > > While that makes some sense for the legacy vPMU, where KVM is=
- just
-> > > > > > > another client of host perf, perhaps the decision should be r=
-evisited
-> > > > > > > in the case of the MPT vPMU, where KVM owns the PMU while the=
- vCPU is
-> > > > > > > in VMX non-root operation.
-> > > > >
-> > > > > Eh, running guests with FREEZE_IN_SMM=3D0 seems absolutely crazy =
-from a security
-> > > > > perspective.  If an admin wants to disable FREEZE_IN_SMM, they ge=
-t to keep the
-> > > > > pieces.  And KVM definitely isn't going to override the admin, e.=
-g. to allow the
-> > > > > guest to profile host SMM.
-> > > >
-> > > > I'm not sure what you mean by "they get to keep the pieces." What i=
-s
-> > > > the security problem with allowing L1 to freeze *guest-owned* PMCs
-> > > > during SMM?
-> > >
-> > > To give L1 the option to freeze PMCs, KVM would also need to give L1 =
-the option
-> > > to *not* freeze PMCs.  At that point, the guest can use its PMCs to p=
-rofile host
-> > > SMM code.  Maybe even leverage a PMI to attack a poorly written SMM h=
-andler.
-> >
-> > Perhaps I'm missing something. I was thinking, essentially, of a logica=
-l or:
-> >
-> > vmcs02.debugctl.freeze_in_smm =3D vmcs12.debugctl.freeze_in_smm |
-> > vmcs01.debugctl.freeze_in_smm
-> >
-> > So, an L1 request to freeze counters in SMM would be granted, but an
-> > L1 request to *not* freeze counters could be overruled by the host.
->
-> /facepalm
->
-> Sorry, I misunderstood what you were suggesting.  Not sure how, it's supe=
-r obvious,
-> at least in hindsight.
+Enable experimental rust support for ppc64le and ppc32be. The patch for
+ppc32 has been provided by Link Mauve[1] and ppc64le support[2] has been 
+merged over it. ppc32 needs some toolchain fixes mentioned in the patch 
+`rust: Add PowerPC support` and the discussion for that is done here[1]. 
 
-My bad. I should have been more explicit (or maybe I should have just
-omitted the aside).
+This has been tested on powernv9 hardware and power10 pseries qemu. I
+I request Link to test the ppc32 part as i don't have a hardware to test
+it out. 
 
-> > I'm not suggesting this in the context of the legacy vPMU, because
-> > some PMCs may be counting host-initiated perf events, and L1 should
-> > not have any say in what those PMCs count. However, with the mediated
-> > vPMU, L1 owns the entire PMU while L2 is running, so it seems
-> > reasonable to allow it to freeze the counters during physical SMM.
->
-> Agreed.
->
-> > > In other words, unless I'm missing something, the only reasonable opt=
-ion is to
-> > > run the guest with FREEZE_IN_SMM=3D1, which means ignoring the guest'=
-s wishes.
-> > > Or I guess another way to look at it: you can have any color car you =
-want, as
-> > > long as it's black :-)
-> >
-> > I would be happy with FREEZE_IN_SMM=3D1. I'm not happy with the host
-> > dictating FREEZE_IN_SMM=3D0.
->
-> Yep, make sense.
+[1] https://lore.kernel.org/all/20260204030507.8203-1-linkmauve@linkmauve.fr
+[2] https://lore.kernel.org/all/20260204042417.83903-1-mkchauras@gmail.com
 
-Perhaps we should ignore both L0 and L1, and arbitrarily set
-FREEZE_IN_SMM=3D1 for both vmcs01 and vmcs02 when MPT is enabled. But, I
-don't think that discussion should block the resolution of this quirk.
-I'll try to send v2 out later today.
+Changelog:
+V2 -> V3:
+- Splited HAVE_RUST in 2 lines
+- BINDGEN_TARGET_powerpc initialized before assigning the same to
+  BINDGEN_TARGET
+V2: https://lore.kernel.org/all/20260204210125.613350-1-mkchauras@gmail.com
+
+V1 -> V2:
+- jump label fix for rust has been moved to a separate patch
+- PPC32 support has been taken
+- rust support has been marked experimental
+- target.json dependency has been removed
+- HAVE_RUST now depends on CPU_LITTLE_ENDIAN for PPC64
+
+Link Mauve (1):
+  rust: Add PowerPC support
+
+Mukesh Kumar Chaurasiya (IBM) (2):
+  powerpc/jump_label: adjust inline asm to be consistent
+  powerpc: Enable Rust for ppc64le
+
+ Documentation/rust/arch-support.rst   |  1 +
+ arch/powerpc/Kconfig                  |  2 ++
+ arch/powerpc/Makefile                 |  9 +++++++++
+ arch/powerpc/include/asm/jump_label.h | 23 +++++++++++++----------
+ rust/Makefile                         | 12 +++++++++++-
+ 5 files changed, 36 insertions(+), 11 deletions(-)
+
+-- 
+2.52.0
+
 
