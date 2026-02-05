@@ -1,126 +1,153 @@
-Return-Path: <linux-doc+bounces-75395-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75397-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oOitLRvkhGlC6QMAu9opvQ
-	(envelope-from <linux-doc+bounces-75395-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 19:40:27 +0100
+	id ICd+NfzkhGlf6QMAu9opvQ
+	(envelope-from <linux-doc+bounces-75397-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 19:44:12 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F2C6F67F2
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 19:40:27 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B024F6896
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 19:44:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E6DE5300C5AB
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 18:40:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 749A730484EC
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 18:42:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E2093033D9;
-	Thu,  5 Feb 2026 18:40:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1242E308F3D;
+	Thu,  5 Feb 2026 18:42:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kQ+h2QpK"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JUM7DQVY"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 098D4222575;
-	Thu,  5 Feb 2026 18:40:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E319B305E01;
+	Thu,  5 Feb 2026 18:42:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770316825; cv=none; b=mAvy3d0L5pGmfe4qPGLBdUfWAkBTCSkPRd3MWjtYdcTc46xPAVoZ/7BLesoshVeXKWD8I/ze51Ig7wYS0FRZIw4fE9XGvi7+1ugUn6NJg2U28k6zLKvVZPVIZ3PQeGs99kuGbCa9zl48mHKNPN5Qq/pahi5UUm3MzhMPW1EAPwQ=
+	t=1770316938; cv=none; b=jIBWDuKFASgPP8FPUYdPOMVEYOMTEfBrw4AdeO/W9oDoR/GMcMf5ygMk86n7SiJZmebFI92t6aRgE2eZs1YkctCHS/8OvuKS3wE7SdySCyEQcsvlWHWclfySfvcu0OUkqRnEZhyX7mHObZfFjosbc5kjh0R4D8qs/t3mwJaqUc4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770316825; c=relaxed/simple;
-	bh=S+i5FblNJQbHGB/LuAZ6zsUMPn9TsCtgzHeSToD4PCs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IncxmFfPXOseSnYsNdMqCefwziYdNYjaSwONFIv9tSy5gKKhneQKZE0rl+1/bERqs/q+dY6g+yhGvCy0AxZ1X8lgKDc3kG2ggERV5SrWsbqRujfMPpYwWP4rUgInDy0Oqu6g78rhSkF25dyfXloky/XSVaAbAW+LWzsazxu+9+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kQ+h2QpK; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23774C4CEF7;
-	Thu,  5 Feb 2026 18:40:21 +0000 (UTC)
+	s=arc-20240116; t=1770316938; c=relaxed/simple;
+	bh=Uyt29Sm4Nu3Uzv9llDir3IcWj7UstP5pqref+2nh6Bg=;
+	h=Date:Content-Type:MIME-Version:From:Cc:To:In-Reply-To:References:
+	 Message-Id:Subject; b=A9F8c0VBxR3HdayQSUZ582DXmjNWxsnHKRgoyrAd0eGFxYYNzuGacLhqtHJOc4s7ftNwTN3QREtRI6javdGqUYDkGww9DCc7kghWl+c+hs9tNtP9qV53pjB8pS6kZjeVeQXzlOraBolBTzxVd2+UyBAdcf0GMe/fVGIdeY8rlO8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JUM7DQVY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55EB0C19421;
+	Thu,  5 Feb 2026 18:42:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770316824;
-	bh=S+i5FblNJQbHGB/LuAZ6zsUMPn9TsCtgzHeSToD4PCs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=kQ+h2QpKxywhjtLFJndMJSrGY3FE8lfZhQcGwpAhQZmMcZfHsZ7GKXdl0l6WYurG4
-	 4m+UTwuj3aOFD3d81oq58zzwSExoT13JN1mbIqKH83611ggOmXNZTUitsunBjc7lOx
-	 2Lv5EXrRBcY0hIwJiWUyz9+zzefhwRHb8Llwx5uXPE86IOBFXZdjG5Dq6cjTpUdYro
-	 h0d4XZt2jp4KecQ2UYEMTrLMCGsjVrHoXHc9/useRiwLauL0VVB+mCzBczZ+H5VDHq
-	 /pbZcsxP+A2QUjyq5PuLlEQSidbY/oPWrNYzCKf2c96Gg4i2Yr1y0mGe2ZiU5cG+5o
-	 PlDiwJvhWt9iA==
-Date: Thu, 5 Feb 2026 18:40:20 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Colin Huang <u8813345@gmail.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, Colin.Huang2@amd.com, Carl.Lee@amd.com,
-	Peter.Shen@amd.com
-Subject: Re: [PATCH 2/3] dt-bindings: trivial-devices: Add Delta Q54SN120A1
- and Q54SW120A7
-Message-ID: <20260205-quiet-preface-cfcb1fc456d4@spud>
-References: <20260205-add-q54sn120a1-q54q54sw120a7-v1-0-09061ecacfc7@gmail.com>
- <20260205-add-q54sn120a1-q54q54sw120a7-v1-2-09061ecacfc7@gmail.com>
+	s=k20201202; t=1770316937;
+	bh=Uyt29Sm4Nu3Uzv9llDir3IcWj7UstP5pqref+2nh6Bg=;
+	h=Date:From:Cc:To:In-Reply-To:References:Subject:From;
+	b=JUM7DQVYQEQcQr0mhOUyuqBjFzvtAot2+3VM7iSCkKlpmVRxpPU8dztzYnUphTisg
+	 r5t3GrDguea7xLFcHA4FvLIoJ1hfbI9AAlfkWmOQfQi/Rxz2NYcV7sf0H58CXzHLCS
+	 dFTxuc70I8Yi19/6xyGb3Gb+v8he9bb1uAJyaoNu75Rk/g5mSElOx6dYbZL0NbYdLM
+	 Wdt3gqhwBsXiKPz37a46X9dbAyes7LpB4Hl3TAWn1GJAglCgZNC8dKEu0hOFRp1o9K
+	 yeSAHnYc8g44/ZaoT8DnUvY5FPPqSySULsw4GZKYbW3E5l6yHf1Y5trNM/XfJENJoo
+	 /szEotAPfluEw==
+Date: Thu, 05 Feb 2026 12:42:16 -0600
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="nm8/3iV4YSXnfxTq"
-Content-Disposition: inline
-In-Reply-To: <20260205-add-q54sn120a1-q54q54sw120a7-v1-2-09061ecacfc7@gmail.com>
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: michael.hennerich@analog.com, conor+dt@kernel.org, 
+ dlechner@baylibre.com, marcelo.schmitt1@gmail.com, eblanc@baylibre.com, 
+ linux-doc@vger.kernel.org, krzk+dt@kernel.org, linux-iio@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, jic23@kernel.org, corbet@lwn.net, 
+ nuno.sa@analog.com, andy@kernel.org, devicetree@vger.kernel.org, 
+ Conor Dooley <conor.dooley@microchip.com>
+To: Marcelo Schmitt <marcelo.schmitt@analog.com>
+In-Reply-To: <4b879f53450e87739afc0dbd832dab5a3f83efb1.1770309522.git.marcelo.schmitt@analog.com>
+References: <cover.1770309522.git.marcelo.schmitt@analog.com>
+ <4b879f53450e87739afc0dbd832dab5a3f83efb1.1770309522.git.marcelo.schmitt@analog.com>
+Message-Id: <177031693646.1530107.11962546739352301287.robh@kernel.org>
+Subject: Re: [PATCH v7 6/8] dt-bindings: iio: adc: adi,ad4030: Add ADAQ4216
+ and ADAQ4224
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.26 / 15.00];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75395-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[analog.com,kernel.org,baylibre.com,gmail.com,vger.kernel.org,lwn.net,microchip.com];
+	TAGGED_FROM(0.00)[bounces-75397-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[microchip.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3F2C6F67F2
+X-Rspamd-Queue-Id: 5B024F6896
 X-Rspamd-Action: no action
 
 
---nm8/3iV4YSXnfxTq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On Thu, 05 Feb 2026 13:48:55 -0300, Marcelo Schmitt wrote:
+> ADAQ4216 and ADAQ4224 are similar to AD4030 except that ADAQ devices have a
+> PGA (programmable gain amplifier) that scales the input signal prior to it
+> reaching the ADC inputs. The PGA is controlled through a couple of pins (A0
+> and A1) that set one of four possible signal gain configurations.
+> 
+> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+> Signed-off-by: Marcelo Schmitt <marcelo.schmitt@analog.com>
+> ---
+> Change log v6 -> v7
+> - No changes.
+> 
+>  .../bindings/iio/adc/adi,ad4030.yaml          | 70 +++++++++++++++++--
+>  1 file changed, 65 insertions(+), 5 deletions(-)
+> 
 
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
-pw-bot: not-applicable
+My bot found errors running 'make dt_binding_check' on your patch:
 
---nm8/3iV4YSXnfxTq
-Content-Type: application/pgp-signature; name="signature.asc"
+yamllint warnings/errors:
+./Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml:139:1: [warning] too many blank lines (2 > 1) (empty-lines)
+./Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml:142:1: [error] duplication of key "allOf" in mapping (key-duplicates)
 
------BEGIN PGP SIGNATURE-----
+dtschema/dtc warnings/errors:
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml: ignoring, error parsing file
+./Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml:142:1: found duplicate key "allOf" with value "[]" (original value: "[]")
+make[2]: *** Deleting file 'Documentation/devicetree/bindings/iio/adc/adi,ad4030.example.dts'
+Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml:142:1: found duplicate key "allOf" with value "[]" (original value: "[]")
+make[2]: *** [Documentation/devicetree/bindings/Makefile:26: Documentation/devicetree/bindings/iio/adc/adi,ad4030.example.dts] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [/builds/robherring/dt-review-ci/linux/Makefile:1587: dt_binding_check] Error 2
+make: *** [Makefile:248: __sub-make] Error 2
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaYTkEwAKCRB4tDGHoIJi
-0kIFAP4pVB/Z6rbrb1UXk3+anmTyqg3Nn3SNiS4jTV9ektmi7AD7BJUBfcMUmXdr
-IIwbKPlN05tf8q0VjPFP4UntIN/RXQs=
-=WXdw
------END PGP SIGNATURE-----
+doc reference errors (make refcheckdocs):
 
---nm8/3iV4YSXnfxTq--
+See https://patchwork.kernel.org/project/devicetree/patch/4b879f53450e87739afc0dbd832dab5a3f83efb1.1770309522.git.marcelo.schmitt@analog.com
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
 
