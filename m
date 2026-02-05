@@ -1,116 +1,146 @@
-Return-Path: <linux-doc+bounces-75402-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75404-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0F7yMwvzhGkF7AMAu9opvQ
-	(envelope-from <linux-doc+bounces-75402-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 20:44:11 +0100
+	id IEdQIFz3hGmb7AMAu9opvQ
+	(envelope-from <linux-doc+bounces-75404-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 21:02:36 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C521F6EB0
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 20:44:11 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id F1484F7022
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Feb 2026 21:02:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2286130055D4
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 19:44:08 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C50E5301981C
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 20:02:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B02C329E44;
-	Thu,  5 Feb 2026 19:44:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73CB83277B8;
+	Thu,  5 Feb 2026 20:02:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hqsDL0Cg"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WK/Rgv0W"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E32613EBF07;
-	Thu,  5 Feb 2026 19:44:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4ED5C2F4A0C;
+	Thu,  5 Feb 2026 20:02:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770320647; cv=none; b=Zu0vZrGNaHqRsyZ2Z4tJDdW8zBCrd92PeAgOWbLZZdXZsdg3WMzdzDIQ3bVSKvQpKs0DFurzSvHLpfgB9M+m4cpw3tNDQoCtF9GBRYIe/7Cq+/p3UtV78AYZrR2VlnQA+rKpa54kVcmKVl4Jj5rG7HfZr+16sMuH0UUZvSdk+kU=
+	t=1770321751; cv=none; b=i4zSWbR6zUNt/BXftMHX69zyVjh1A676MeAW5ryr2J+o/ynILqkR5Dlr977Ghwj6X8wSC4j+Unt+uX2PXSfoqRjztvgxcvGdu4an5wX3RI62eZpM2SXde/bhlgbknmRWVZGZVjSAdPpOVCAEjRCDM7GWiwqjjQs7C1eZL/znhxg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770320647; c=relaxed/simple;
-	bh=6GKsR1UGDaI2kFu6+Ifiu666cSkmslW/zGyy2MiofTs=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kSJBOj7hXi+LnlEiP52pXIo9eDp8GdemKamz8hS0pD7S16t/BrBuB1kRuw7C+2/+UUvkh8uBo2TOTmX8NqSzmEGjjlFIh9hNQKDLod1jELlapAHr5/6UZTLnokLODFs3tqeUoMA0VgFII/eegLQIn6sgTz9HyxCXOLF2I0SpSNU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hqsDL0Cg; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BB5AC4CEF7;
-	Thu,  5 Feb 2026 19:44:01 +0000 (UTC)
+	s=arc-20240116; t=1770321751; c=relaxed/simple;
+	bh=SFGAh9JJzYHViSrH+N5Q4JCcy+AltvYYtmD2XxefkXk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bhycFS6WcnFv47isTpU241WGBsWyK7Xrkm8klHkhhuNGt1y8m5EzrJ6A8YEQQXZgsmSZzHn748JBKJljDeoRPm8xDrp9eIkFqJQca/fw+H4IRzne1/qfXWOBnyVSzlSm9hfVvJCMRWwzxf2VeyPExey8b1yt9GIhpDZFhejiPcg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WK/Rgv0W; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1987AC4CEF7;
+	Thu,  5 Feb 2026 20:02:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770320646;
-	bh=6GKsR1UGDaI2kFu6+Ifiu666cSkmslW/zGyy2MiofTs=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=hqsDL0CgNmIMIVwzC8w+qH15fj+8Z/BeMcWDECP26tMj9rUfqyvwkXiVslgfJaTlh
-	 972X8jy/6FDRvGS1TSF1KqRNeFP2v2g7QJJepPcHbxn/0GTdSVJ9fg1ucEN/crAI2V
-	 cO7ngjjZAdlThJqDWaWjSMoY2qWaxZ+UARQV0Tc0plmsqL6xmzahbAJNr7a6nP4AzF
-	 xRSzAacBojmeetFBYkBRwyZSQtHsoba5JHMXSdu4rSep7LzbVa0f/xRpRPtmMdk395
-	 yiD/uJessrYECNuTcMVdNOvxxCUrQ6OKKt733bIxLgYHjCocm6UkmJbyzceuX/RdOW
-	 xumLAFm7h38hQ==
-Date: Thu, 5 Feb 2026 19:43:54 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Marcelo Schmitt <marcelo.schmitt@analog.com>
-Cc: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <michael.hennerich@analog.com>, <nuno.sa@analog.com>,
- <eblanc@baylibre.com>, <dlechner@baylibre.com>, <andy@kernel.org>,
- <robh@kernel.org>, <krzk+dt@kernel.org>, <conor+dt@kernel.org>,
- <corbet@lwn.net>, <marcelo.schmitt1@gmail.com>
-Subject: Re: [PATCH v7 0/8] Add SPI offload support to AD4030
-Message-ID: <20260205194354.1e13143c@jic23-huawei>
-In-Reply-To: <cover.1770309522.git.marcelo.schmitt@analog.com>
-References: <cover.1770309522.git.marcelo.schmitt@analog.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
+	s=k20201202; t=1770321750;
+	bh=SFGAh9JJzYHViSrH+N5Q4JCcy+AltvYYtmD2XxefkXk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=WK/Rgv0WoN69gXl/scqZ7qkgu6PdyplCxPfXa+i3e7YHDx+PkO8ZL86NwJfvjJr0E
+	 HIDg+Nt874Yw4XyK+b4w2qGGhHvGVAmCAxrMtHcPzC+XjzYp3IhuGLMjElm+jNc1AX
+	 aZI6l0HE+Oje1bzOFYJLXRbWL8PkHCpj2tJypG6ZpPkfZ5xlUaSP6OaNMAB3wZPYqa
+	 KUkvwaCRDgiuoVFtrAQVUDAOS6XtZ/NqpeeOQ7fwqSRzUdFgyOlOczAOGMFVJTZcri
+	 ZsT0SFt5I2RJLHjBe22NpcgwUXYel3f7RhICE0EyG+tOJTtyIT+ajPMw4DXlxUFC3W
+	 PpmUzAX2rnMJg==
+Date: Thu, 5 Feb 2026 13:02:22 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc: Mukesh Kumar Chaurasiya <mkchauras@gmail.com>,
+	Jubilee Young <workingjubilee@gmail.com>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Venkat Rao Bagalkote <venkat88@linux.ibm.com>,
+	Link Mauve <linkmauve@linkmauve.fr>, ojeda@kernel.org,
+	boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com,
+	lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com,
+	tmgross@umich.edu, dakr@kernel.org, corbet@lwn.net,
+	maddy@linux.ibm.com, mpe@ellerman.id.au, npiggin@gmail.com,
+	chleroy@kernel.org, peterz@infradead.org, jpoimboe@kernel.org,
+	jbaron@akamai.com, rostedt@goodmis.org, ardb@kernel.org,
+	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	clang-built-linux <llvm@lists.linux.dev>
+Subject: Re: [PATCH V2 3/3] powerpc: Enable Rust for ppc64le
+Message-ID: <20260205200222.GA1298159@ax162>
+References: <20260204210125.613350-1-mkchauras@gmail.com>
+ <20260204210125.613350-4-mkchauras@gmail.com>
+ <aYSgjPD5KRcNN0j4@luna>
+ <1ed12a72-06e4-461b-907e-2581e25e3e38@linux.ibm.com>
+ <aYS2oWCE0ZCC3don@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
+ <CANiq72mi-V_SF+JErMJu1wZEd27HPHqhsxE8dELtd5e3ZEaA4w@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANiq72mi-V_SF+JErMJu1wZEd27HPHqhsxE8dELtd5e3ZEaA4w@mail.gmail.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75402-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_CC(0.00)[vger.kernel.org,analog.com,baylibre.com,kernel.org,lwn.net,gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75404-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[32];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nathan@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[gmail.com,google.com,linux.ibm.com,linkmauve.fr,kernel.org,garyguo.net,protonmail.com,umich.edu,lwn.net,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org,lists.linux.dev];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3C521F6EB0
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: F1484F7022
 X-Rspamd-Action: no action
 
-On Thu, 5 Feb 2026 13:46:28 -0300
-Marcelo Schmitt <marcelo.schmitt@analog.com> wrote:
-
-> Hi,
+On Thu, Feb 05, 2026 at 08:34:27PM +0100, Miguel Ojeda wrote:
+> On Thu, Feb 5, 2026 at 6:29 PM Mukesh Kumar Chaurasiya
+> <mkchauras@gmail.com> wrote:
+> >
+> > use rust version nightly-2026-01-28
+> >
+> > the latest one has some issue. I just raised a bug for the rustc
+> > here[1].
+> >
+> > [1] https://github.com/rust-lang/rust/issues/152177
 > 
-Hi Marcelo
+> It appears to be a bug in LLVM 22 for ppc64, not present in 21.
+> 
+> If I understand correctly, then it may be fixed in 22.1.9 if it gets released.
+> 
+> Thanks Jubilee for the quick reply there!
+> 
+> Cc'ing Clang/LLVM build support, in case they didn't hear about it.
 
-Just a quick note to say I took another look through and what I spotted
-was a subset of stuff Andy already pointed out.
+Thanks for the CC, I had not seen that issue. LLVM 22 is currently in
+the -rc phase and I see that the fix has been merged into the
+release/22.x branch as of yesterday so it should be in LLVM 21.1.0-rc3
+when it get released on February 10. LLVM 21.1.8 was the last release of
+the 21.x series (hard to keep up with all the numbers...) and it sounds
+like this is only a regression from the LLVM 22 development cycle.
 
-Given this is now next cycle material anyway, please just tidy those
-bits up in a v8 and I'll get this queued up.
-
-Thanks,
-
-Jonathan
+Cheers,
+Nathan
 
