@@ -1,176 +1,130 @@
-Return-Path: <linux-doc+bounces-75463-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75464-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ULkGIrOmhWljEgQAu9opvQ
-	(envelope-from <linux-doc+bounces-75463-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 09:30:43 +0100
+	id YC4xBNymhWmYEgQAu9opvQ
+	(envelope-from <linux-doc+bounces-75464-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 09:31:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E042FFB844
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 09:30:42 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 693DFFB87A
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 09:31:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E5F3F300DDD5
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 08:30:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 11CA3300CC2F
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 08:31:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5241E32B9A7;
-	Fri,  6 Feb 2026 08:30:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6D1C30E0F1;
+	Fri,  6 Feb 2026 08:31:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KbZxmDrr"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G9VX0zCG"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D31A3B28D;
-	Fri,  6 Feb 2026 08:30:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A499B29A9FA
+	for <linux-doc@vger.kernel.org>; Fri,  6 Feb 2026 08:31:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770366637; cv=none; b=b69sChzFO5/CiHNsDJHnldcA4FdoNEkMJgmIVqjzK1NtuLqzD4thqwP8veyGCYs86V2bQ3oF8oQ9z9XdV4Sp6Lr02Bywtxdh3av2PQp2G7X/ehMr6MPPJ08KC/X5HMZwnypGr4nQRldGGpE7FLLUj3KvB5Fi7s2tupmiSV0bj/g=
+	t=1770366675; cv=none; b=T+VS18fbXpvzFFAQ780br/3T0luFqn3cMwrB+voLQh9sW1yIzGMnfbHGcfvTeGsz27otQHMyyT3fhtLDRIGQNjM5sBzNBplp0O1Aecg9ugNY38/i2POZz6DYQSf8qUB1nsUpTEDgrbTC9ftSJWxtNDmEvj2xKyBePSWk3G0EEfA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770366637; c=relaxed/simple;
-	bh=CyWrZOJATVNS9+Rj5D0Boe5KDdvWmaNR5FdjGU15MAE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VIn9wtxXT7PWmn0ZO9AkK+HEQNTY2Iv8ST0bdTLYTvboL+LQzyk5u1OBPjl+LAAezYPtRWLROdxYteKn3t2bScp2y7gyAq+F+o6BS79pzpPu3k14SwR77rWMRc5gvLB4GmMCTkmKZ/NvSF4+TdUss6wtjWGsalVIrtbwABsdKTc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KbZxmDrr; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 487F2C116C6;
-	Fri,  6 Feb 2026 08:30:36 +0000 (UTC)
+	s=arc-20240116; t=1770366675; c=relaxed/simple;
+	bh=RZuiCDy4/g9LV1rpngu3qNY+4nbVNkSvSeCbDiQVFW0=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=the+7lG6POvXLRBbjVF4UFIsQr840/iEctaAlOKba0S8vmMGbJ7h4JiGVb9jp57Fd4K2Biz7G9onDX93BSjt72LR4XrjlxMuNp4ZMr3y8zmq0zs0vst3VFxVA/qrBsHMOTHlckMC+vo6N0+lTp+CxUXnoElH3vayN5l5YLg3NgU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G9VX0zCG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 129E8C116C6;
+	Fri,  6 Feb 2026 08:31:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770366636;
-	bh=CyWrZOJATVNS9+Rj5D0Boe5KDdvWmaNR5FdjGU15MAE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=KbZxmDrrcakJ1Zbg86za3Nn9bxpJJasJZ16hyHVIpnfS1mGRcJ3jNdVJC+Jj19++i
-	 PnqWZFYx52twIezwwpk0X6QS6xzo4JcNBncQACzeVxjyHXngXPgP3tIbbteQ/24IT9
-	 hiiwZu6Dywo+w3kpTYZNBhw5+WZLY5UX7R/ohVMYzH1KHFl62weRoMxRPY3pR5QjVO
-	 d5VSXMwhPOYk1nZJeUxwaJDqXNznFEJjahtBzWO4YYlcyvgUVDHJmKKgafFuD0pdIN
-	 vbno5/RvKlSCcd79Gf4Z2Kqme2oRkRu8CzIQ5fv1QDygN6tvY3nONmqGvGHrUztUps
-	 EmR0AXYyecAlg==
-Date: Fri, 6 Feb 2026 09:30:08 +0100
-From: Nicolas Schier <nsc@kernel.org>
-To: Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>
-Cc: Nathan Chancellor <nathan@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Petr Pavlu <petr.pavlu@suse.com>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Daniel Gomez <da.gomez@samsung.com>,
-	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
-	"Serge E. Hallyn" <serge@hallyn.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Naveen N Rao <naveen@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>,
-	Roberto Sassu <roberto.sassu@huawei.com>,
-	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-	Eric Snowberg <eric.snowberg@oracle.com>,
-	Daniel Gomez <da.gomez@kernel.org>,
-	Aaron Tomlin <atomlin@atomlin.com>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>,
-	Xiu Jianfeng <xiujianfeng@huawei.com>,
-	Fabian =?iso-8859-1?Q?Gr=FCnbichler?= <f.gruenbichler@proxmox.com>,
-	Arnout Engelen <arnout@bzzt.net>,
-	Mattia Rizzolo <mattia@mapreri.org>, kpcyrd <kpcyrd@archlinux.org>,
-	Christian Heusel <christian@heusel.eu>,
-	=?iso-8859-1?Q?C=E2ju?= Mihai-Drosi <mcaju95@gmail.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
-	linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-integrity@vger.kernel.org
-Subject: Re: [PATCH v4 05/17] module: Switch load_info::len to size_t
-Message-ID: <aYWmkEzjvo9RrzI9@levanger>
-Mail-Followup-To: Nicolas Schier <nsc@kernel.org>,
-	Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>, Luis Chamberlain <mcgrof@kernel.org>,
-	Petr Pavlu <petr.pavlu@suse.com>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Daniel Gomez <da.gomez@samsung.com>,
-	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
-	"Serge E. Hallyn" <serge@hallyn.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Naveen N Rao <naveen@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>,
-	Roberto Sassu <roberto.sassu@huawei.com>,
-	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-	Eric Snowberg <eric.snowberg@oracle.com>,
-	Daniel Gomez <da.gomez@kernel.org>,
-	Aaron Tomlin <atomlin@atomlin.com>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>,
-	Xiu Jianfeng <xiujianfeng@huawei.com>,
-	Fabian =?iso-8859-1?Q?Gr=FCnbichler?= <f.gruenbichler@proxmox.com>,
-	Arnout Engelen <arnout@bzzt.net>,
-	Mattia Rizzolo <mattia@mapreri.org>, kpcyrd <kpcyrd@archlinux.org>,
-	Christian Heusel <christian@heusel.eu>,
-	=?iso-8859-1?Q?C=E2ju?= Mihai-Drosi <mcaju95@gmail.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
-	linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-integrity@vger.kernel.org
-References: <20260113-module-hashes-v4-0-0b932db9b56b@weissschuh.net>
- <20260113-module-hashes-v4-5-0b932db9b56b@weissschuh.net>
+	s=k20201202; t=1770366675;
+	bh=RZuiCDy4/g9LV1rpngu3qNY+4nbVNkSvSeCbDiQVFW0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=G9VX0zCGlZ5/oObf96dKPIrm4pcKz33GvJIf0ow0V3WHzqDH1NTz808KnqemdrSkS
+	 JlFJLOE6vB6t/IOORHBUkmE1rJa0dCq+pezcVozPhQ7g4q4JjXbOQWkSLTSllUY28z
+	 xdw+KYh86V+wN4uqdb8mviRf2aGN3dRfbKS2YC6wux7AWk44SZvgJt6nS5e2qjNt8u
+	 R4lfEM+JR0YY68agazFZqDB7QT6uLAjFxqeFcRhDqXxb58dJq6lJhs4i9JDgaBN12+
+	 /3lT5+0N49Ais8UJrEUvrIZ0HXoDT9O+1CIUOyzQYOmf3OYiV5fEbGYgApzAqqPAVk
+	 oN8uwuaSKmknA==
+Date: Fri, 6 Feb 2026 09:31:07 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: linux-doc@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Subject: Re: [PATCH] docs: kdoc_parser: allow __exit in function prototypes
+Message-ID: <20260206093101.39c06f0d@foz.lan>
+In-Reply-To: <20260206065440.2412185-1-rdunlap@infradead.org>
+References: <20260206065440.2412185-1-rdunlap@infradead.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260113-module-hashes-v4-5-0b932db9b56b@weissschuh.net>
-X-TUID: cnlOAPnJljc+
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75463-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75464-lists,linux-doc=lfdr.de,huawei];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[39];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,arndb.de,suse.com,google.com,samsung.com,paul-moore.com,namei.org,hallyn.com,lwn.net,linux.ibm.com,ellerman.id.au,gmail.com,huawei.com,oracle.com,atomlin.com,oss.cyber.gouv.fr,proxmox.com,bzzt.net,mapreri.org,archlinux.org,heusel.eu,linutronix.de,vger.kernel.org,lists.ozlabs.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nsc@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E042FFB844
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_FIVE(0.00)[5];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lwn.net:email,infradead.org:email,linuxfoundation.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,foz.lan:mid]
+X-Rspamd-Queue-Id: 693DFFB87A
 X-Rspamd-Action: no action
 
-On Tue, Jan 13, 2026 at 01:28:49PM +0100, Thomas Weißschuh wrote:
-> Switching the types will make some later changes cleaner.
-> size_t is also the semantically correct type for this field.
+On Thu,  5 Feb 2026 22:54:40 -0800
+Randy Dunlap <rdunlap@infradead.org> wrote:
+
+> Handle functions that are marked with __exit to prevent warnings:
 > 
-> As both 'size_t' and 'unsigned int' are always the same size, this
-> should be risk-free.
+> Documentation/networking/iucv:35: ../net/iucv/iucv.c:1918: WARNING: Error in declarator or parameters
+> Invalid C declaration: Expecting "(" in parameters. [error at 12]
+>   void __exit iucv_exit (void)
+>   ------------^
+> 
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> ---
+> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Shuah Khan <skhan@linuxfoundation.org>
 
-include/uapi/asm-generic/posix_types.h states:
-| * Most 32 bit architectures use "unsigned int" size_t,
-| * and all 64 bit architectures use "unsigned long" size_t.
+Reviewed-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+> 
+>  tools/lib/python/kdoc/kdoc_parser.py |    1 +
+>  1 file changed, 1 insertion(+)
+> 
+> --- linux-next-20260204.orig/tools/lib/python/kdoc/kdoc_parser.py
+> +++ linux-next-20260204/tools/lib/python/kdoc/kdoc_parser.py
+> @@ -176,6 +176,7 @@ function_xforms  = [
+>      (KernRe(r"^__FORTIFY_INLINE +"), ""),
+>      (KernRe(r"__init +"), ""),
+>      (KernRe(r"__init_or_module +"), ""),
+> +    (KernRe(r"__exit +"), ""),
+>      (KernRe(r"__deprecated +"), ""),
+>      (KernRe(r"__flatten +"), ""),
+>      (KernRe(r"__meminit +"), ""),
 
-Is that statement wrong?  Or did I mix up the context?
 
 
-Kind regards,
-Nicolas
+Thanks,
+Mauro
 
