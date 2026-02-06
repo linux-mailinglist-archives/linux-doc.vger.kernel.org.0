@@ -1,167 +1,121 @@
-Return-Path: <linux-doc+bounces-75427-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75428-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wYGZDcwuhWn/9gMAu9opvQ
-	(envelope-from <linux-doc+bounces-75427-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 00:59:08 +0100
+	id gIecHzgzhWkl+AMAu9opvQ
+	(envelope-from <linux-doc+bounces-75428-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 01:18:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAB8AF875E
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 00:59:07 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0F8AF888C
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 01:17:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B5201301E7CA
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Feb 2026 23:59:05 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7DFF53016934
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 00:17:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7AAEC33D510;
-	Thu,  5 Feb 2026 23:59:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 906741DE8BB;
+	Fri,  6 Feb 2026 00:17:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="YY+56P16"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gf9tjtCJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D39B2C3255;
-	Thu,  5 Feb 2026 23:59:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69E5215A86D;
+	Fri,  6 Feb 2026 00:17:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770335945; cv=none; b=GoxpD+uMXyk7JtqgpNTcDzsC24FcZiNCVGRV08TGLUSFxmFHw7dYxg63lcxrca+j02WXS5JYxeXeQkd3OKMDfWEyMy4XpS6YSTFv0jJMlGYMsfHR9US9LZCYvitRdduMzUzg1TpATV8k05abOYGvK0zmeoHfA64jlLlJEuqkoIw=
+	t=1770337069; cv=none; b=i0IfNo7KAI0/Bh/beyzg67mRf2MuCJ/ej9QNKmskOdltfKZUNOouaSC1eldJBV/l2VaORGbalJnqm/p+dIYALQU3S1sZkhGMfGK/J9qrClGTw7EO8Av6MpONzHAjE0Wi0foxSOrTDGxtF9bo4hw7yOWLcy/BZrHdXh7gwnrfvBw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770335945; c=relaxed/simple;
-	bh=Qoo20fLVB5hL7SiezW/J5kKKcaNVQMPbLJ207X/e/S0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bQVqymgdL12bD5ouWhotjgLXqBi3AtLh2TKimxVsEBosv0bvWlmnyYgmLFdw3hUdBLtTRKD0Nh/wfbEj5WZVBpFGuwYW80/ifqmCHfJDXE66qX9uDKCt0bS+OX/hrYnwDQe8ghLsJ/+x4KwAwLKFXTCAFX0yBlIBTm9mCZDHGaM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=YY+56P16; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from chenste-Virtual-Machine.mshome.net (unknown [131.107.1.186])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 3512F20B716D;
-	Thu,  5 Feb 2026 15:59:04 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 3512F20B716D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1770335944;
-	bh=hSq2uVGwQwQK28jR9rsi7Mp9gy+zPDYhUdE3iqYWgE4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YY+56P16WkvfJlIDiyqvoHg2EALS/UwSV4N1eFgZF+hI1XLH9aDJJ+rR/2uidfS7P
-	 EoLUAV5qVqyWfjrT6Up7IqCz9S/MHhKSQ7f5LD+ShgVVwCGLFXdtu+U3yEfvhYhSzW
-	 vmuwyP9gAcS14YOkvv1hAwst1S2jpeMV4V5FhI8U=
-From: steven chen <chenste@linux.microsoft.com>
-To: linux-integrity@vger.kernel.org
-Cc: zohar@linux.ibm.com,
-	roberto.sassu@huawei.com,
-	dmitry.kasatkin@gmail.com,
-	eric.snowberg@oracle.com,
-	corbet@lwn.net,
-	serge@hallyn.com,
-	paul@paul-moore.com,
-	jmorris@namei.org,
-	linux-security-module@vger.kernel.org,
-	anirudhve@linux.microsoft.com,
-	chenste@linux.microsoft.com,
-	gregorylumen@linux.microsoft.com,
-	nramas@linux.microsoft.com,
-	sushring@linux.microsoft.com,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v4 3/3] ima: add new critical data record to measure log trim
-Date: Thu,  5 Feb 2026 15:58:48 -0800
-Message-ID: <20260205235849.7086-4-chenste@linux.microsoft.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260205235849.7086-1-chenste@linux.microsoft.com>
-References: <20260205235849.7086-1-chenste@linux.microsoft.com>
+	s=arc-20240116; t=1770337069; c=relaxed/simple;
+	bh=DQrq5c1J+kiv5UEj7nlCQrtJTusd0d502vuVJr1r7pE=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Io1r9SIYEgGXX3KlMpXo3ixm1xyuru3Ou5LXVTbOiH3iuYYjeE/KdpnWiy93JmELwfarLxGEhjbDzRrS/Y08KPYXrYerqQzKYbQrrVvCjCHKsxQi6Svxd9/upStEXtac/Ot6vW7Q3IZvgDe1iQNW4bbreagocs4tWa2/ljEhCds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gf9tjtCJ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59429C4CEF7;
+	Fri,  6 Feb 2026 00:17:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770337069;
+	bh=DQrq5c1J+kiv5UEj7nlCQrtJTusd0d502vuVJr1r7pE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=gf9tjtCJFiCokVo3TecNVaL7vYEpVzQS+7qD7EkE4j0zwz6pQa8CJzf8yq9jCKQPh
+	 inzUgyrJC/kXCAypadw2sf4WwKVDYiZpLAJ3vJtNXFKbaMABNo/IABgZ78lhjDoy3T
+	 KrRc97EcUTmRJ5KPSZratWTiMDx2crawaWu41OnmHKeRBkPTjPlAqEg7qbQRoCqYQu
+	 wcdjmdRXX/zZctk/GubMb8xTmTrtJiEbmboWrZfXfzGiNRfxIYC/uyEJwhU/T1twax
+	 RhHenQ/IlbuNZ8iCDPEeuLPPZrOhuOmRsGkmzn98SaM2Sio/TXjfFDM9+suE00uxKk
+	 yBIBVmhLjVuog==
+Date: Thu, 5 Feb 2026 16:17:47 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Tariq Toukan <tariqt@nvidia.com>
+Cc: Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko
+ <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed
+ <saeedm@nvidia.com>, "Leon Romanovsky" <leon@kernel.org>, Mark Bloch
+ <mbloch@nvidia.com>, Shuah Khan <shuah@kernel.org>,
+ <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
+ <linux-kselftest@vger.kernel.org>, Gal Pressman <gal@nvidia.com>, Moshe
+ Shemesh <moshe@nvidia.com>, Shay Drori <shayd@nvidia.com>, Jiri Pirko
+ <jiri@nvidia.com>
+Subject: Re: [PATCH net-next V2 0/7] devlink: add per-port resource support
+Message-ID: <20260205161747.26dd7bc5@kernel.org>
+In-Reply-To: <20260205142833.1727929-1-tariqt@nvidia.com>
+References: <20260205142833.1727929-1-tariqt@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[linux.ibm.com,huawei.com,gmail.com,oracle.com,lwn.net,hallyn.com,paul-moore.com,namei.org,vger.kernel.org,linux.microsoft.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75427-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-75428-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[chenste@linux.microsoft.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[google.com,redhat.com,lunn.ch,davemloft.net,gmail.com,resnulli.us,lwn.net,nvidia.com,kernel.org,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.microsoft.com:+];
-	TO_DN_NONE(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.microsoft.com:mid,linux.microsoft.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: EAB8AF875E
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:url]
+X-Rspamd-Queue-Id: E0F8AF888C
 X-Rspamd-Action: no action
 
-Add a new critical data record to measure the trimming event when
-ima event records are deleted since system boot up.
+On Thu, 5 Feb 2026 16:28:26 +0200 Tariq Toukan wrote:
+> Userspace patches for iproute2:
+> https://github.com/ohartoov/iproute2/tree/port_resource
 
-If all IMA event logs are saved in the userspace, use this log to get total
-numbers of records deleted since system boot up at that point.
+I pulled this but the test still doesn't pass:
 
-Signed-off-by: steven chen <chenste@linux.microsoft.com>
----
- security/integrity/ima/ima_fs.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+# TEST: resource test                                                 [ OK ]
+# TEST: port resource test                                            [FAIL]
+# Unexpected resource name test_resource (expected max_sfs)
+# TEST: dev_info test                                                 [ OK ]
+# TEST: empty reporter test                                           [ OK ]
 
-diff --git a/security/integrity/ima/ima_fs.c b/security/integrity/ima/ima_fs.c
-index 7f805ab62f6c..1d6befa51044 100644
---- a/security/integrity/ima/ima_fs.c
-+++ b/security/integrity/ima/ima_fs.c
-@@ -43,6 +43,7 @@ static int valid_policy = 1;
- 
- #define IMA_LOG_TRIM_REQ_NUM_LENGTH 15
- #define IMA_LOG_TRIM_REQ_TOTAL_LENGTH 32
-+#define IMA_LOG_TRIM_EVENT_LEN 256
- 
- static long trimcount;
- /* mutex protects atomicity of trimming measurement list
-@@ -364,6 +365,22 @@ static const struct file_operations ima_ascii_measurements_ops = {
- 	.release = ima_measurements_release,
- };
- 
-+static void ima_measure_trim_event(void)
-+{
-+	char ima_log_trim_event[IMA_LOG_TRIM_EVENT_LEN];
-+	struct timespec64 ts;
-+	u64 time_ns;
-+	int n;
-+
-+	ktime_get_real_ts64(&ts);
-+	time_ns = (u64)ts.tv_sec * 1000000000ULL + ts.tv_nsec;
-+	n = scnprintf(ima_log_trim_event, IMA_LOG_TRIM_EVENT_LEN,
-+		      "time= %llu; number= %lu;", time_ns, trimcount);
-+
-+	ima_measure_critical_data("ima_log_trim", "trim ima event logs",
-+				  ima_log_trim_event, n, false, NULL, 0);
-+}
-+
- static int ima_log_trim_open(struct inode *inode, struct file *file)
- {
- 	bool write = !!(file->f_mode & FMODE_WRITE);
-@@ -438,6 +455,8 @@ static ssize_t ima_log_trim_write(struct file *file,
- 		goto out;
- 
- 	trimcount += ret;
-+	if (ret > 0)
-+		ima_measure_trim_event();
- 
- 	ret = datalen;
- out:
+https://netdev-ctrl.bots.linux.dev/logs/vmksft/netdevsim/results/505601/9-devlink-sh/stdout
 -- 
-2.43.0
-
+pw-bot: cr
 
