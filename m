@@ -1,177 +1,178 @@
-Return-Path: <linux-doc+bounces-75530-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75532-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UFuUBhcdhmmTJwQAu9opvQ
-	(envelope-from <linux-doc+bounces-75530-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 17:55:51 +0100
+	id aLIyOl0ghmm/JwQAu9opvQ
+	(envelope-from <linux-doc+bounces-75532-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 18:09:49 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FA291009B7
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 17:55:50 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 90797100C00
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 18:09:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2BDFF300D151
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 16:55:39 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 0185E30054DC
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 17:09:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEDB92DE719;
-	Fri,  6 Feb 2026 16:55:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB592371074;
+	Fri,  6 Feb 2026 17:09:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UAOSvIpd"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="fS0z7GCT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8ACF82D9782;
-	Fri,  6 Feb 2026 16:55:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770396937; cv=none; b=txctyOAqK24MqCUq/TxG0u36aAGe7CMmXbPQpgxWsqnTSMUd58EEtVqqp212ZACqYpdu7zvax8KfKXN18EuiLHWJh1j7YbQ4bUMxu9jBtPl2h32EDXgEPDJgpXkMu1Fgu7p+ItsxmNOeknrZuIx17anQpH0Z/gePI8VTVtv9Fks=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770396937; c=relaxed/simple;
-	bh=VAGbAjFRLgzEG5qlKmMk/Zx3k/7uGzz80gHCBWr+3YM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=URJF7jpqDiVf+abZma4iCMPrcDnafKTLPdQi+o12dSwE8KoWNXOVmF8J9kSkN9tFkUfYnXbwT8DXHak2H4fcoxzEjy5Ic8FWmehhhLrI6qR8nFUZOR0l4Wa6kALRA88e8P61ldt0qdDbiMzdJvASVxFdDGfvHnhDLucCrbOiOj8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UAOSvIpd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0967CC116C6;
-	Fri,  6 Feb 2026 16:55:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770396937;
-	bh=VAGbAjFRLgzEG5qlKmMk/Zx3k/7uGzz80gHCBWr+3YM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=UAOSvIpdYYuU9nUSq3XQaGn0LmZo1zdo8cpsXdhcy/5+buUK8zBKivWJsZPShl3Kg
-	 f5RA9zd4uql69vajRUYOVZNfjSIW4oFbpNGNHwlOMbpBJaGopEMpUT5FYz3VNhSTwt
-	 pmEibAdW3g0B2sNOSy+0evb/hbSJSbAjG6ZWvvE/MaZvTl84jyatYazqPdLZP+h0Os
-	 WthU2pI0uTbd5x3zQmfbJGk3msNrDgOy4EDJxHTmSwZnjndOVuOHwOVguHRRuy6fvR
-	 yC9IIWPr2xTNg2LskXggRB4b2xcQUBJvxOcZ930qeNcb3Mzi5SNECuoTdjrU3YfAiB
-	 ovbxroxvUjeAw==
-Message-ID: <26a84810-df70-47b7-a60a-2b74babcd73e@kernel.org>
-Date: Fri, 6 Feb 2026 17:55:33 +0100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0D7936E472
+	for <linux-doc@vger.kernel.org>; Fri,  6 Feb 2026 17:09:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.170
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770397786; cv=pass; b=OncatJqVUS3LI6oqNmesmhnTaRit/25z5ekvn8zW0nS7NKrPVhipSGnst+lgBxAfynk53ROL711TxOIyK6qxXl5NySbE/omaHH+yUXJ5puE5pYB1A8r/piWJJ9b+dwp//dpRVRI7Am+E2JdL1MS2pnYZS7ID3/NhFWaEBgz3e2M=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770397786; c=relaxed/simple;
+	bh=2D3+3zXtP4JhUK7/PLg4nJFv+DRLaz8NltH9x+kquWQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=PA7nYQIMZUH+9s7wZoJQ+A68AoUKhbFA5eeNr5KcjrhaovnPakgFdqXsDpN2UAuBCloAH60lmNQxsOfdIvW7zs1Lb99s6xd3buzhQMc3IaHGscoOsch2t3ijTG7hLRSWiFq4K4lJwXeKQqdkLVWSwcHEBxVTgZJbYNEI/Kunl6I=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=fS0z7GCT; arc=pass smtp.client-ip=209.85.160.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-50335b926c2so21741191cf.2
+        for <linux-doc@vger.kernel.org>; Fri, 06 Feb 2026 09:09:46 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770397785; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Hq95D+Hu0Ud1XdlsJM/Es5/uAEjT74IbiyVB2D/lVRUtOKDMRHSmcMRi7EqXJlW09g
+         Rfgob5u1Em1USnxlk4ihbyh6p1dUdzUdxfl964AX3TBDNZk3I5Y+tx+N7PkW7rAjdB/G
+         qB3lnfQ0/tjTGpMhq6eQx6bhTy2Icoc7zSvpLe7JfUn/l7S9ECbXxmL8MkQakk2Oqw8Z
+         +iZhwcl8fu85phcsjFEk8W1zk8sZPatFOKYOr0i+8d5YjCBJaXqfLQWLCJG6u2Q3jk9Y
+         cB/2IPo9Em9p5G1acwuA7+hosHXW/CjtGtDhBkgvKjoneQKiec/6kbC/VPyGaT6jJO88
+         PHdg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=2D3+3zXtP4JhUK7/PLg4nJFv+DRLaz8NltH9x+kquWQ=;
+        fh=+ZhEZ6tJAcd1qVP0M14pTrUIhSdEeve8ArTOTjdZTPQ=;
+        b=cjexEgvHW9TdDgfT+2D84DiWsHRE7MZNNF/2hGSrKVMY2uLMgu5eEofIC+CW0gzvZl
+         EMr2mtVMYi0pjzwUBhrGX2iansaykUUHcw8yLWtJna4h3HxHbz+DAzoKZ43I1uRxEW2u
+         q8gu6gzMnK87KEzaQCH3gz10zJxycHfTx25fcJ1O1Qn/RRfyPSHrXgUfZ6C+GOtl2W2J
+         IPkD+zcwDp81T5L6qqWGkoLEn46IUCRQxrNYN9jQfZnIinc/TXAdQc0PyNFKhqNtvoHE
+         nSZRTjFlGmhf8Kl3QDtrybw041OLsC5V76o6vOw5TLMITBPYzwTXjNgbkerrZx8OgJbB
+         HtQA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1770397785; x=1771002585; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2D3+3zXtP4JhUK7/PLg4nJFv+DRLaz8NltH9x+kquWQ=;
+        b=fS0z7GCTc6IbYxJbbtmxP1sW7GNzMyPHokXsdBggcMMvZwxD8wcnyVqn58ub5RkARI
+         N29oWTcB97VObPMPz5nSdybnHVRrubxuDLJ4Y9FyEvRsBmPbeQZPpDRATerOu7d1agp+
+         PP+L/WQ1IVILvORZGnV6wje4Zg9toBa3shFmntM3hex8oLQOjj1LoRiThBCX9viYfW98
+         uamfynpWUp/mtfXsFOiMNsV6ARb+GCrBMU98oCaJU8+ZXjwUa7LnJyMKYT0QBWNtckhV
+         qyObzNR+3gLfPFwc5TJ+s6YQOJOgItgxiC/S5cdFrmS+L+22DjPt6hW8p4pjMXAMOF2c
+         Bj2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770397785; x=1771002585;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=2D3+3zXtP4JhUK7/PLg4nJFv+DRLaz8NltH9x+kquWQ=;
+        b=rBahoYyxCtF9dTeKv41ZtnWtDvLtHilVVRmeCOwMJQYHa7PC2aXtIpVAMmfkppxpoY
+         DAyVFiNEY3C2q46atsO02VK5mWgleWTYvuIap6JpH6cY/ZndxOpimVYP1CG74/JEvZ3w
+         Z4c1UPU8tQGCLIgyTF0Hr3KdqBDzEqroyANrKXwq222NBfpcbND7DhQtLa3JCpFCh3Ec
+         EgKZueWIZF1adM5XXvjKnE1c9ToGSydk1F4tB/9VxR4VAovUpaQHUCnmu5vHA/6jA/x0
+         1Qd0FwtkbCpVEefOUbXvwGhOzHup17IB/vzbF+PvMPiISQyI4EJCkYEscy+GbX9bUTJ2
+         dqFQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV35rVg2cqhov33LfgPwAl4b56lqPlryCH1pCzl0o6XiSpVdQF6xr3AOhqj0ypDED9N4u5b5OlRfLw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxu5MilrW+thiZSUxoRJK+BpEqQL5fWD2JRDBKntwCK+4ADTVYQ
+	7Lvmg838+QTQiu/MYXelnFyX1QYMXQF4BLbFuPzlbk1s3VnroR1OTe4ZLnepe+9/bvJGbgRzwey
+	MRUuoZPLeQLRGHfDw9zQIe60Sgu++d3IaIOlpKD4v
+X-Gm-Gg: AZuq6aJYOC8Po6D2P+d5DSl5RXCx5+lyrj8vlxFa8fOWq/vqjMuBjCxW/sGPCtoPIBY
+	mR+ZqMLm0XA9Dnoxt6SyidxGgfblOBn3ZL84Wbx3qjL7Yt4DzOFmw96lYgoUam3Js035Go2fVyC
+	HsnJE8voeHhM+THrh2WEyxsXM+SEUqtRAKUhqaPhNaxYEa8pSjSUyrNFRbnrT7JUMOdJ6C3TS9L
+	gceJ+gEHlGGmf3HnzdfhQPIOVP90yj6aCZjwbuGpNm19SEg/OBeymk1Ss8ajHJamzOjhQ==
+X-Received: by 2002:a05:622a:130f:b0:502:e3c8:2e25 with SMTP id
+ d75a77b69052e-506399c903emr47797061cf.76.1770397785036; Fri, 06 Feb 2026
+ 09:09:45 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/2] add support in hwmon for MCP998X
-To: victor.duicu@microchip.com, linux@roeck-us.net, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org, corbet@lwn.net
-Cc: marius.cristea@microchip.com, linux-hwmon@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260127151823.9728-1-victor.duicu@microchip.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <20260127151823.9728-1-victor.duicu@microchip.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260203175422.4620-1-fmancera@suse.de> <CANn89i+UUWx5OhPnJnDhiCfr53BPTAGedBucgqYwyfqkidf_Cg@mail.gmail.com>
+ <8d94faf9-2fb6-483d-9767-bd665c4a4b9a@suse.de> <1649583d-71c2-425e-a2df-685d5f6dc67d@suse.de>
+In-Reply-To: <1649583d-71c2-425e-a2df-685d5f6dc67d@suse.de>
+From: Eric Dumazet <edumazet@google.com>
+Date: Fri, 6 Feb 2026 18:09:32 +0100
+X-Gm-Features: AZwV_Qidxz5uIrMnB8dhKLOScV5vhsNf8LrEzY_iHNMnqdoi8vLbqK75xYPLiXo
+Message-ID: <CANn89iK3Pu2NXxejTSLF-7MhBc03_ZJUjOtZcTC4nMsbsDpbSw@mail.gmail.com>
+Subject: Re: [PATCH RFC net-next] inet: add ip_retry_random_port sysctl to
+ reduce sequential port retries
+To: Fernando Fernandez Mancera <fmancera@suse.de>
+Cc: netdev@vger.kernel.org, davem@davemloft.net, kuba@kernel.org, 
+	pabeni@redhat.com, horms@kernel.org, corbet@lwn.net, ncardwell@google.com, 
+	kuniyu@google.com, dsahern@kernel.org, idosch@nvidia.com, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Thorsten Toepper <thorsten.toepper@sap.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-75530-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75532-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-0.996];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[microchip.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 6FA291009B7
+	FROM_NEQ_ENVFROM(0.00)[edumazet@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
+	NEURAL_HAM(-0.00)[-0.998];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,0xffsoftware.com:url,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 90797100C00
 X-Rspamd-Action: no action
 
-On 27/01/2026 16:18, victor.duicu@microchip.com wrote:
-> From: Victor Duicu <victor.duicu@microchip.com>
-> 
-> Add support in hwmon for Microchip MCP998X/33 and MCP998XD/33D Multichannel
-> Automotive Temperature Monitor Family.
-> 
-> The chips in the family have different numbers of external channels,
-> ranging from 1 (MCP9982) to 4 channels (MCP9985).
-> Reading diodes in anti-parallel connection is supported by MCP9984/85/33
-> and MCP9984D/85D/33D. Dedicated hardware shutdown circuitry is present
-> only in MCP998XD and MCP9933D.
-> 
-> The driver supports reading the temperature channels, the temperature
-> limits and their corresponding alarms. The user can set the limits,
-> the update interval and the hysteresis.
-> 
-> This driver is based on the IIO driver for MCP998X:
-> https://lore.kernel.org/all/20250930133131.13797-1-victor.duicu@microchip.com/
-> 
-> Differences related to previous patch:
-> v3:
+On Fri, Feb 6, 2026 at 5:28=E2=80=AFPM Fernando Fernandez Mancera
+<fmancera@suse.de> wrote:
+>
+>
+>
+> It makes sense. I have tested this approach and we got a more even
+> distribution of source ports when having thousands of reserved ports. No
+> difference at all when not using reserved ports.
+>
+> Please, you can find the distribution graph with the current algorithm
+> [1] and with the random step algorithm [2].
+>
+> While I understand that this approach is introducing a call to
+> get_random_u32_below() on every connect, I am wondering if it makes
+> sense to replace the existing algorithm with this variant. What do you
+> think?
 
-That's v9 and I already asked you to start numbering this correctly and
-include ENTIRE previous changelog.
+I would ask RFC 6056 experts like Fernando Gont what they think.
 
-What's more important you ignored several people's feedback over the
-time. Did not implement it and did not respond to it. These were several
-people, David, me, Andy, Jonathan - you ignored all of them?
+Note that if we use random at each connect(), we defeat one of the principl=
+es
+of ephemeral port selection : try very hard to avoid 4-tuple collision.
 
-Lack of responses from you mean this review is pointless and I will be
-just NAKing your patches.
-
-
-Best regards,
-Krzysztof
+>
+> Please, notice the implementation below. I plan to send an official v1
+> once net-next is open. In addition, I am rewriting the commit message as
+> I find the current one confusing.
+>
+> [1] https://0xffsoftware.com/port_graph_current_alg.html
+>
+> [2] https://0xffsoftware.com/port_graph_random_step_alg.html
 
