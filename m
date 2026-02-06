@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-75485-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75486-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qPEPOK23hWmOFgQAu9opvQ
-	(envelope-from <linux-doc+bounces-75485-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 10:43:09 +0100
+	id uOEtOFTBhWnEFwQAu9opvQ
+	(envelope-from <linux-doc+bounces-75486-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 11:24:20 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 931E9FC306
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 10:43:09 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66665FC9C5
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 11:24:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A8B81300B198
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 09:43:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0A608302AD3B
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 10:23:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81FAC360756;
-	Fri,  6 Feb 2026 09:43:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6AD3A36F428;
+	Fri,  6 Feb 2026 10:23:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b0q2M1Y1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lkgsOVjM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DF23308F1D;
-	Fri,  6 Feb 2026 09:43:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46F863009F6;
+	Fri,  6 Feb 2026 10:23:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770370986; cv=none; b=e4Wel1pTgghCihaQFYutpjBgQhVTfPARYmiehDB0gGpoPqa2qrKAsAi/+LORA1Iq4Zz0zsdAGmC+vS0A+8YTHuWNXAAQwlVrdXP+oS9VNqWP0FvZus5z3ztRFT27zOuTAzMi/rg9Ju87YuABXEFDu8dThNXlUZ7prXLrHu8sgm0=
+	t=1770373436; cv=none; b=ZqEBkJR0TxrwQ+BePMAY8AM9z8gUq6Mna1rdb2eVZRUgWibLBDdBz1MUV+vsaJ/EMrRWkoP8OAavSQSJ7fkcmtKfoh5TEZijd8hjNLRonbzFxR/FzX7tiDm2WyBShMTkc35zfhZYLUxdlOA9Mq3lTOUVuqWYRAO1W+m0iv0kG5s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770370986; c=relaxed/simple;
-	bh=opKNMeKc5dUGPWp6AFdxTH7O+3QX2spoWarAppjxqc0=;
+	s=arc-20240116; t=1770373436; c=relaxed/simple;
+	bh=CVRfjenhPNZ53C5ptXLpHu6G+l5qThn6T1w+S3R43J4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qDAy+l1/8CJUtkJXnNIeKHID2EUw2rQB0AJU0tP6UEywM6N0IXQd77/xuVJFM9kkgNoVPxGwR4j247F/27BB78PiIcKLiP7yF2DS3RUyLlmlCJp52Fba8g4rBfFh0wlGaTPjb6LgvGEullOORx+kZMLec4Tjt5Fz00/PBzLFuIg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b0q2M1Y1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C084C116C6;
-	Fri,  6 Feb 2026 09:43:00 +0000 (UTC)
+	 In-Reply-To:Content-Type; b=nu6IfMP3nrWeu9iIN2FNMNHo0VAvqAkoY9TGJ1+Y0jV1fffQrHow0vgGxfC03lxrlqi2xs+mgJ/CFA9ZIRyHRzNFwo5VqJn/IXpczT+76TiLEmUfo0p7kbd8TCmI3yKxdUrmdWcpeB/o7maG7blAOsWO/UqYFYUJJ7mjkhR9NZI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lkgsOVjM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA86DC19422;
+	Fri,  6 Feb 2026 10:23:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770370986;
-	bh=opKNMeKc5dUGPWp6AFdxTH7O+3QX2spoWarAppjxqc0=;
+	s=k20201202; t=1770373435;
+	bh=CVRfjenhPNZ53C5ptXLpHu6G+l5qThn6T1w+S3R43J4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=b0q2M1Y1+zFPHhE8ZfPQRp3VzxIogdG5i7e6pVAmwCnkqZPgiOkhMl2qkj3kC5NEg
-	 Axto48z8EEp6E+zuf9FLH4pnYtMWe46vAG4eYCOmfS+gE2nvNHhyCacw8WicO7aJFN
-	 iSH/EqOPEgf+At3uRYkyWNwfZZNKNh9bPQUVdLdW5QDEojnAfrnUJA5DKNufmuLMHd
-	 GH6RBqlMqSwoEKrcIyfmIS5x0Z1ZkDgRhnPL6MfhgJfpbvx6UJz2WqOfW7JACfIbgF
-	 GN1R89A+idESDTjIRjGwz1hS/d6rNe5iGfc9RKewY6R+4qqVJj4clFyq6YJNw8/AQA
-	 KIT3r+LwgJSTw==
-Message-ID: <33e5e080-6e07-4cc0-88da-0cb55c9d0ae2@kernel.org>
-Date: Fri, 6 Feb 2026 10:42:59 +0100
+	b=lkgsOVjM8345QQjYJiRfQfJ0oSMWqIL/dF3b44KB/OYvtFa5wtksT4epKW7dc7zQK
+	 n13iIxkGzKpBzMaIzGDTNhk7k+VRqM3ICVJzDUOySg0Dee4z13wjFn7Cl2EN1ekcLW
+	 XWt4/jPFLIpPhf3JY1BeyzKTbyedA1v9JDaYVUAjI9tYMJtEuJsfrVQR+lDly5qhC1
+	 zCwWghcKG4Qbwjg/A1hG6Xsrw28MryrTIl0yqvYqtw7HzK9njc9BhbXFrF7jt0cFdj
+	 aloqve3suzVNAbni2tS3Lc0IjWEudBVqDr37kT5BZXF3tUmnGa4ntBhXN5Von7/OEX
+	 EKyVfiMLATw8A==
+Message-ID: <ac8ea0ef-4175-4563-b312-d888b31b83a9@kernel.org>
+Date: Fri, 6 Feb 2026 11:23:48 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,8 +53,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCHv6 14/17] mm/hugetlb: Remove hugetlb_optimize_vmemmap_key
- static key
+Subject: Re: [PATCHv6 15/17] mm: Remove the branch from compound_head()
 To: Kiryl Shutsemau <kas@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>,
  Muchun Song <muchun.song@linux.dev>, Matthew Wilcox <willy@infradead.org>,
@@ -71,7 +70,7 @@ Cc: Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>,
  linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  loongarch@lists.linux.dev, linux-riscv@lists.infradead.org
 References: <20260202155634.650837-1-kas@kernel.org>
- <20260202155634.650837-15-kas@kernel.org>
+ <20260202155634.650837-16-kas@kernel.org>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -118,14 +117,14 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260202155634.650837-15-kas@kernel.org>
+In-Reply-To: <20260202155634.650837-16-kas@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -134,11 +133,11 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[kernel.org,linux-foundation.org,linux.dev,infradead.org,gmail.com,google.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75485-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75486-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[27];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
@@ -148,21 +147,73 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 931E9FC306
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,linux.dev:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 66665FC9C5
 X-Rspamd-Action: no action
 
 On 2/2/26 16:56, Kiryl Shutsemau wrote:
-> The hugetlb_optimize_vmemmap_key static key was used to guard fake head
-> detection in compound_head() and related functions. It allowed skipping
-> the fake head checks entirely when HVO was not in use.
+> The compound_head() function is a hot path. For example, the zap path
+> calls it for every leaf page table entry.
 > 
-> With fake heads eliminated and the detection code removed, the static
-> key serves no purpose. Remove its definition and all increment/decrement
-> calls.
+> Rewrite the helper function in a branchless manner to eliminate the risk
+> of CPU branch misprediction.
 > 
 > Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
 > Reviewed-by: Muchun Song <muchun.song@linux.dev>
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> ---
+>   include/linux/page-flags.h | 27 +++++++++++++++++----------
+>   1 file changed, 17 insertions(+), 10 deletions(-)
+> 
+> diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
+> index 1aaa604f4b9b..16384cb6f962 100644
+> --- a/include/linux/page-flags.h
+> +++ b/include/linux/page-flags.h
+> @@ -224,25 +224,32 @@ static __always_inline bool compound_info_has_mask(void)
+>   static __always_inline unsigned long _compound_head(const struct page *page)
+>   {
+>   	unsigned long info = READ_ONCE(page->compound_info);
+> +	unsigned long mask;
+> +
+> +	if (!compound_info_has_mask()) {
+> +		/* Bit 0 encodes PageTail() */
+> +		if (info & 1)
+> +			return info - 1;
+>   
+> -	/* Bit 0 encodes PageTail() */
+> -	if (!(info & 1))
+>   		return (unsigned long)page;
+> -
+> -	/*
+> -	 * If compound_info_has_mask() is false, the rest of compound_info is
+> -	 * the pointer to the head page.
+> -	 */
+> -	if (!compound_info_has_mask())
+> -		return info - 1;
+> +	}
+>   
+>   	/*
+>   	 * If compoun_info_has_mask() is true the rest of the info encodes
+>   	 * the mask that converts the address of the tail page to the head page.
+>   	 *
+>   	 * No need to clear bit 0 in the mask as 'page' always has it clear.
+> +	 *
+> +	 * Let's do it in a branchless manner.
+>   	 */
+> -	return (unsigned long)page & info;
+> +
+> +	/* Non-tail: -1UL, Tail: 0 */
+> +	mask = (info & 1) - 1;
+> +
+> +	/* Non-tail: -1UL, Tail: info */
+> +	mask |= info;
+> +
+> +	return (unsigned long)page & mask;
+>   }
+>   
+>   #define compound_head(page)	((typeof(page))_compound_head(page))
+
+Nice!
 
 Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
