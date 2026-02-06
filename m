@@ -1,199 +1,238 @@
-Return-Path: <linux-doc+bounces-75437-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75444-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YCyzH4lJhWkN/QMAu9opvQ
-	(envelope-from <linux-doc+bounces-75437-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 02:53:13 +0100
+	id SbbHE8dQhWmV/wMAu9opvQ
+	(envelope-from <linux-doc+bounces-75444-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 03:24:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DECFDF916E
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 02:53:12 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07270F93D9
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 03:24:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0B6D33008D0B
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 01:49:00 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 10E0D303C82C
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 02:23:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B1402505AA;
-	Fri,  6 Feb 2026 01:48:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RSO+dHb8"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FAB3238D27;
+	Fri,  6 Feb 2026 02:23:42 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out28-145.mail.aliyun.com (out28-145.mail.aliyun.com [115.124.28.145])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED6EC23EA85
-	for <linux-doc@vger.kernel.org>; Fri,  6 Feb 2026 01:48:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.219.52
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770342539; cv=pass; b=XzJ48jK5DBz+bNTybqEIySNKFqJKh+EANn5aWItnLP/ZrX6/5cWkXF+lN+qCBC5MTLyjZvaBLdUGRHCNJgZrsjftI/BAmXksVp5Mf+6DGOL/FQjUc11D28Ta45rAFMJ+BMSdgR8o5OaSkeHmLLBTtE85hLIceqTHLdtUQhDf+2c=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770342539; c=relaxed/simple;
-	bh=qp2Y2OYYUKPukWWko+9fCBsOvav98ZHz2x3RlIJSAHU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=fkIvvNHFyC8kFAQTvf7ULw1LuoUdL/W3NW2E/BxcBMjiCLhDLy5T3h0vGrWuKBIw60bviwOUyBfGOMFTu+GmtE+yMmBElGvEemT6c9yRqebj19jzNo4Pxt07JvbdvFxOIs1UajEn4CXqO9D3YXoNKGBiJJlMxpI8x9kkXPyTocQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RSO+dHb8; arc=pass smtp.client-ip=209.85.219.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-8951c720496so12860846d6.2
-        for <linux-doc@vger.kernel.org>; Thu, 05 Feb 2026 17:48:58 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770342538; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Oj/zIsHs0TPd2jhu+6byUnmFtWhwiegy2K9vuINxpt/tg+kJQMcP+jjPpAtSfhSETh
-         0Xxzs7f8DmdIIaB5/77882wru5eXnL+ENH7CCaubbmXGnqPUpYofyI0m6m45pvf2bQPD
-         cZ9iUksvryUUzIQvmfOahSJVt7ht++EG+bqDQKAAFVNOBteuUw7Ruxk2dVft3eUnfQjI
-         RTjSyVtXIZpdtXBW2I/w09q4nOJ1OWhmJTh36kw34Cg0VE6C+YMC0CcQseUsj/8FBGY6
-         uBxXFXT+fkTT0nNxFarSyMuWxIy8yPxIJak7hYeY1IRAj7IT3qie/SD7DkVooCkC5UW4
-         nX8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=qp2Y2OYYUKPukWWko+9fCBsOvav98ZHz2x3RlIJSAHU=;
-        fh=Cb8k656GrCznplVrJU90urIBLS0eZ4xEztXfeRxqe7w=;
-        b=UwL5cgYwR43QifcZn62HPzFCfZR+3lYgVFmDIM/rGsu1eRpfFijSxKYkbkrMTFcoyY
-         LBisHv2BajhkicPHqWFAqenjLsy8Vujfj8zpYmSN5xC7M1aeVM+tTB0S1MgNHaoX3GzE
-         m5tgdTniahmCUQZaOUbPsKHhKd+5dGQNI8GMAASvh+7hAc56mzuwQTx+EJFfZsQJ8sWE
-         uCG6HvVKdCp2s7l3Lsp1+tdOWRmaWr2UF8y5JN9tPIXZ5e3Br8jTJbr9D0pPXPZ0GnnV
-         eo8dj22W8yJ1whW94gUwPlmMgWV9XAcVMBMpu+vmvcp/PHK4tL2VMFFPjjNEEFgkriyk
-         JKvA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770342538; x=1770947338; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=qp2Y2OYYUKPukWWko+9fCBsOvav98ZHz2x3RlIJSAHU=;
-        b=RSO+dHb8hCYS8eQGF6mFZ5GtOIutzXtL22MzW5vs+SkWw7e72WLP2HFwGWY5ftbyHo
-         fHvxfrkmd9G+vmmgohs10bl9oxvYPwOmBlFJlBDSSWJGac24T/sfBEqlStR71XVuDgpD
-         4S27igf8upM7T1TXzzQM39mlwg2FWLO7yfXDjQoJbaqnaGGSesYbvET32p5Dr/bhhFxx
-         Z/FZhNn86RiWtq8HzwMySL/CSnhkI38m/01DoOpOT8ShMAxlYKk6rxYIDZKx95q0Qixw
-         gdsW8qIvDZQkMga2c3+H5gqxwrieC1rS7lWWHd71hjTuzHmhaF7jbzxTJTRAu5FLN37K
-         1ipg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770342538; x=1770947338;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qp2Y2OYYUKPukWWko+9fCBsOvav98ZHz2x3RlIJSAHU=;
-        b=tlWo10z4ayPxWj+WYpvq73Pty/k/WQlydTPZuvto3QM//HBplroFBMpVZE2jTlFdPm
-         H7eGaWfXFGWiCPsUe1Y5CWBm+QymwHo1YK9F18vBfwk7w4q82laHbcFL5zU483RoCjDf
-         fU1CEpA+RjC4N/EKlu5SgdLYX7uq+n5sZTGItFJxTQdIjwLrOkTQu5Tlvjwv/ZSzeCsx
-         8mTMyKnIHYiE81nlHfe/8V8yLH5Oxc8hpwUkmzQvZY6qZ6EmebdQOp1o3bZbCdAct3KK
-         3RJDLSbPlHvZkVM5XRiyGObyr1mY6iS3JMC3ascgVk0lclLqYCMQlqw49hXemUzTtUNV
-         5LVA==
-X-Forwarded-Encrypted: i=1; AJvYcCWeCAXOSTBrw2jcCpsvynl8W00CuQBoKW+mgkXF3iotb4g/BCO1RpLkspX8aLylH6EYSZk3f+atIhw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywxdkw+N4VYS+sKp3P2uPL7EhTUT1jjzZS8SnicleCS9j5fdU2+
-	84eiNe6nzPexbuLmGceZUGcSd7RShf6CkcSSXpM+CbHidOqU8He4PbQ8KvFEL76wHVlctonB/5m
-	qejOsh/qZEzbMZpeORHJPiBibf8WHsYc=
-X-Gm-Gg: AZuq6aKpwFoWSwPg9RBLciZ/WvZuOPBZK5jWUBwXfh2IM/5Q039cOtGiyufGNfLYmfS
-	/AAGhPCUZKBPX6zYVPozwjKiICUsIRpBf2nAvX5DAhGgl0mvOkwUZ6kwMlxHeZh0sEbJ2P4Vc89
-	5HXNIk+Zx1tWIyR7yr2RMKyhb0HDJr/qZv0+B6y/JtpoOBHYqMER1490NfoXn+/jqOqcYgQ3whP
-	9rFJi5QwwB9jxCpy1J5jWZXUnJhZHcNdMZWH7NTkrGFT8Ywh0MVtIWc0Hnt9J9wyKB3PIwOVsXs
-	xP496850JaUPeXY/KqDc8ugOHZPETA9n7u6CFu2IzbJ+8jDFX58O3Zo=
-X-Received: by 2002:a05:620a:470d:b0:8ca:123e:8194 with SMTP id
- af79cd13be357-8caef409c65mr147454885a.33.1770342537850; Thu, 05 Feb 2026
- 17:48:57 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF08561FFE;
+	Fri,  6 Feb 2026 02:23:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.145
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770344622; cv=none; b=eeglw5hcHU8Nzm0LA39FhjIcLxSbqULSQBpx4bYPVFe67BXw8UPP/8uzonkoLNXGnmS5cw/f2Uln6CJG7E8fZLjFVXBAipVu50629COlcB4kR1jNwA1gFKAh5/2vf24Mk+xxN2LGFys79scac0wb/Ln9ja8iBp+fSQ3IkEudoRo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770344622; c=relaxed/simple;
+	bh=R1RE0kAv+Fxj5p4anUrIoQsxpSMlD4p4lsH/ZoEiAs4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=KfIgacISCYgcVAl9oHhwoLRlXeG7oXjxzSff5yqFr2H0bhU2m5gaWQqVx+K+LsybRXB5qnc9CA2ruRqxAFZfjuRXWpjgBwveOnMEgL2x59IkrG5l7qRasocV/aZVnt0V8NOpaxr/blB7RZjiLANBA1fLYU1fHs69FPI3IsDTlvA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=115.124.28.145
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nebula-matrix.com
+Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.gQHg4as_1770344289 cluster:ay29)
+          by smtp.aliyun-inc.com;
+          Fri, 06 Feb 2026 10:18:10 +0800
+From: "illusion.wang" <illusion.wang@nebula-matrix.com>
+To: dimon.zhao@nebula-matrix.com,
+	illusion.wang@nebula-matrix.com,
+	alvin.wang@nebula-matrix.com,
+	sam.chen@nebula-matrix.com,
+	netdev@vger.kernel.org
+Cc: andrew+netdev@lunn.ch,
+	corbet@lwn.net,
+	kuba@kernel.org,
+	linux-doc@vger.kernel.org,
+	lorenzo@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	vadim.fedorenko@linux.dev,
+	lukas.bulwahn@redhat.com,
+	edumazet@google.com,
+	linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH v4 net-next 00/11] nbl driver for Nebulamatrix NICs
+Date: Fri,  6 Feb 2026 10:15:52 +0800
+Message-ID: <20260206021608.85381-1-illusion.wang@nebula-matrix.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260206003451.1914130-1-joelagnelf@nvidia.com> <06ff773a-06bf-4d60-bd0a-75a0359ce41c@nvidia.com>
-In-Reply-To: <06ff773a-06bf-4d60-bd0a-75a0359ce41c@nvidia.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Fri, 6 Feb 2026 11:48:46 +1000
-X-Gm-Features: AZwV_QiCn6zHej5_Mme9jV7jp01t4GcOY8De2NKm9jmAO6FZQzlBgU_JLG2YX-I
-Message-ID: <CAPM=9tw=jzQxGvVrsUSv14RxQtnaw2rH6K2b3Gxh_UUHnOGTkA@mail.gmail.com>
-Subject: Re: [PATCH -next] gpu: Move DRM buddy allocator one level up
-To: Joel Fernandes <joelagnelf@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
-	Alex Deucher <alexander.deucher@amd.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Jani Nikula <jani.nikula@linux.intel.com>, 
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
-	Tvrtko Ursulin <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>, 
-	Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, 
-	Lucas De Marchi <lucas.demarchi@intel.com>, 
-	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
-	Helge Deller <deller@gmx.de>, Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
-	Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
-	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Trevor Gross <tmgross@umich.edu>, John Hubbard <jhubbard@nvidia.com>, 
-	Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>, 
-	Alexandre Courbot <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>, 
-	Andy Ritger <aritger@nvidia.com>, Zhi Wang <zhiw@nvidia.com>, Alexey Ivanov <alexeyi@nvidia.com>, 
-	Balbir Singh <balbirs@nvidia.com>, Philipp Stanner <phasta@kernel.org>, 
-	Elle Rhumsaa <elle@weathered-steel.dev>, Daniel Almeida <daniel.almeida@collabora.com>, 
-	joel@joelfernandes.org, nouveau@lists.freedesktop.org, 
-	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, 
-	linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org, 
-	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
-	linux-fbdev@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [1.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75437-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-75444-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[nebula-matrix.com];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,nvidia.com,weathered-steel.dev,collabora.com,joelfernandes.org,lists.freedesktop.org];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[51];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[airlied@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nvidia.com:email]
-X-Rspamd-Queue-Id: DECFDF916E
+	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.974];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nebula-matrix.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,illusion.wang:url]
+X-Rspamd-Queue-Id: 07270F93D9
 X-Rspamd-Action: no action
 
-On Fri, 6 Feb 2026 at 11:06, Joel Fernandes <joelagnelf@nvidia.com> wrote:
->
->
->
-> On 2/5/2026 7:34 PM, Joel Fernandes wrote:
-> > Move the DRM buddy allocator one level up so that it can be used by GPU
-> > drivers (example, nova-core) that have usecases other than DRM (such as
-> > VFIO vGPU support). Modify the API, structures and Kconfigs to use
-> > "gpu_buddy" terminology. Adapt the drivers and tests to use the new API.
-> >
-> > The commit cannot be split due to bisectability, however no functional
-> > change is intended. Verified by running K-UNIT tests and build tested
-> > various configurations.
-> >
-> > Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
->
-> I forgot to add Dave Airlie's review tag here from his other email. When you
-> apply, could you add it?
->
-> Or, let me know if I should resend it. Thanks.
->
+This patch series represents the first phase. We plan to integrate it in
+two phases: the first phase covers mailbox and chip configuration,
+while the second phase involves net dev configuration.
+Together, they will provide basic PF-based Ethernet port transmission and
+reception capabilities.
 
-This one was a bit messy, so I've taken this into drm-misc-next now,
-it doesn't quite end up in the same places as yours, but it looks the
-same, and I updated MAINTAINERS at the end.
+After that, we will consider other features, such as ethtool support,
+flow management, adminq messaging, VF support, debugfs support, etc.
 
-Now you can just care about the rust side of it.
+ps:The "nbl_core" issue has not been modified yet as it is still under discussion.
+(https://lore.kernel.org/netdev/17d3aa72-23a8-4ea8-9721-bc20fe39fdf4.sam.chen@nebula-matrix.com/)
+We will make the modification once a conclusion is reached.
+Excluding patch 3,4, the total comes to about 5000 lines.
 
-Regards,
-Dave.
+changes v3->v4
+Link to v3: https://lore.kernel.org/netdev/20260123011804.31263-1-illusion.wang@nebula-matrix.com
+1.cut down to part of a mini driver(mailbox and chip init)
+--Jakub Kicinski Simon Horman(some sort of staged approached)
+2.modify issues found by ai.
+3. Reverse Christmas tree/nbl_err/devm_kfree/remove some macros/
+void type to real type/others
+--Andrew Lunn
+4.change deprecated pci_enable_msix_range to pci_alloc_irq_vectors
+5.delete service layer
+6.the style of kconfig---Randy Dunlap
+7.add to Documentation/networking/device_drivers/ethernet/index.rst
+--Simon Horman
+chanages v2 →v3
+Link to v2: https://lore.kernel.org/netdev/20260109100146.63569-1-illusion.wang@nebula-matrix.com/
+1.cut down to a mini driver:
+    delete vf support
+    use promisc mode to cut down flow management
+    drop patch15 in v2
+    delete adminq msg
+    delete abnormal handling
+    delete some unimportant interfaces
+2.modify issues found by ai review
+Changes v1->v2
+Link to v1: https://lore.kernel.org/netdev/20251223035113.31122-1-illusion.wang@nebula-matrix.com/
+1.Format Issues and Compilation Issues
+- Paolo Abeni
+2.add sysfs patch and drop coexisting patch
+- Andrew Lunn
+3.delete some unimportant ndo operations
+4.add machine generated headers patch
+5.Modify the issues found in patch1-2 and apply the same fixes to other
+patches
+6.modify issues found by nipa
+
+illusion.wang (11):
+  net/nebula-matrix: add minimum nbl build framework
+  net/nebula-matrix: add our driver architecture
+  net/nebula-matrix: add chip related definitions
+  net/nebula-matrix: channel msg value and msg struct
+  net/nebula-matrix: add channel layer
+  net/nebula-matrix: add common resource implementation
+  net/nebula-matrix: add intr resource implementation
+  net/nebula-matrix: add vsi resource implementation
+  net/nebula-matrix: add Dispatch layer implementation
+  net/nebula-matrix: add common/ctrl dev init/reinit operation
+  net/nebula-matrix: add common dev start/stop operation
+
+ .../device_drivers/ethernet/index.rst         |    1 +
+ .../ethernet/nebula-matrix/m18100.rst         |   47 +
+ MAINTAINERS                                   |   10 +
+ drivers/net/ethernet/Kconfig                  |    1 +
+ drivers/net/ethernet/Makefile                 |    1 +
+ drivers/net/ethernet/nebula-matrix/Kconfig    |   36 +
+ drivers/net/ethernet/nebula-matrix/Makefile   |    6 +
+ .../net/ethernet/nebula-matrix/nbl/Makefile   |   22 +
+ .../nbl/nbl_channel/nbl_channel.c             |  872 +++++
+ .../nbl/nbl_channel/nbl_channel.h             |  159 +
+ .../nebula-matrix/nbl/nbl_common/nbl_common.c |  227 ++
+ .../nebula-matrix/nbl/nbl_common/nbl_common.h |   28 +
+ .../net/ethernet/nebula-matrix/nbl/nbl_core.h |   84 +
+ .../nebula-matrix/nbl/nbl_core/nbl_dev.c      |  472 +++
+ .../nebula-matrix/nbl/nbl_core/nbl_dev.h      |   53 +
+ .../nebula-matrix/nbl/nbl_core/nbl_dispatch.c |  492 +++
+ .../nebula-matrix/nbl/nbl_core/nbl_dispatch.h |   51 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_hw.h         |  128 +
+ .../nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.c  |  765 +++++
+ .../nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.h  | 1183 +++++++
+ .../nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.c | 2902 +++++++++++++++++
+ .../nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.h |   12 +
+ .../nbl_hw_leonis/nbl_resource_leonis.c       |  292 ++
+ .../nbl_hw_leonis/nbl_resource_leonis.h       |   11 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_hw_reg.h     |  131 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_interrupt.c  |  233 ++
+ .../nebula-matrix/nbl/nbl_hw/nbl_interrupt.h  |   13 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_resource.c   |  142 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_resource.h   |  128 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_vsi.c        |   54 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_vsi.h        |   12 +
+ .../nbl/nbl_include/nbl_def_channel.h         |  363 +++
+ .../nbl/nbl_include/nbl_def_common.h          |  122 +
+ .../nbl/nbl_include/nbl_def_dev.h             |   12 +
+ .../nbl/nbl_include/nbl_def_dispatch.h        |   40 +
+ .../nbl/nbl_include/nbl_def_hw.h              |   50 +
+ .../nbl/nbl_include/nbl_def_resource.h        |   34 +
+ .../nbl/nbl_include/nbl_include.h             |   81 +
+ .../nbl/nbl_include/nbl_product_base.h        |   20 +
+ .../net/ethernet/nebula-matrix/nbl/nbl_main.c |  320 ++
+ 40 files changed, 9610 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/nebula-matrix/m18100.rst
+ create mode 100644 drivers/net/ethernet/nebula-matrix/Kconfig
+ create mode 100644 drivers/net/ethernet/nebula-matrix/Makefile
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/Makefile
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_channel/nbl_channel.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_channel/nbl_channel.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_resource_leonis.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_resource_leonis.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_reg.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_interrupt.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_interrupt.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_vsi.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_vsi.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_channel.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_dev.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_dispatch.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_hw.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_resource.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_include.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_product_base.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
+
+-- 
+2.47.3
+
 
