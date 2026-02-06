@@ -1,142 +1,204 @@
-Return-Path: <linux-doc+bounces-75540-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75542-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kK2MOn4vhmkTKQQAu9opvQ
-	(envelope-from <linux-doc+bounces-75540-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 19:14:22 +0100
+	id iKXOJtkxhmneKQQAu9opvQ
+	(envelope-from <linux-doc+bounces-75542-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 19:24:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82DA0101AF8
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 19:14:22 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A83F5101C4A
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Feb 2026 19:24:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 22157301DAC8
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 18:14:03 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 60D5A300E44C
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Feb 2026 18:24:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 747BA4279E0;
-	Fri,  6 Feb 2026 18:14:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="ldwtKf+R"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BFFB0428472;
+	Fri,  6 Feb 2026 18:24:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com [91.218.175.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23718426EA1
-	for <linux-doc@vger.kernel.org>; Fri,  6 Feb 2026 18:14:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1DF4426D1F
+	for <linux-doc@vger.kernel.org>; Fri,  6 Feb 2026 18:23:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770401641; cv=none; b=jAst4qwdsxx1cRGN2ET/0U/J44bzAPX7RDwRRkuGviSh2R4sfNaU7MaTMeV2VJev6yVnAn6kvnqTFHJy93U70B6nRSbtVk9vW8IQjYJwW8lmH12W7nAaAs95e9XcQkkZu/qAApAL5iUPF48VLjcnzyaD3vrceHLBDvboUagvivk=
+	t=1770402241; cv=none; b=k+HB2l4s3Mon5oTVoSZU5YdNU3xs80Zxsh1YvqmkccWbf0BbyHqkIVN/P7TiSHrXhn70GxHQ3kzE8NNZ7RioTphKp06LCASfW/sJYZTsXHNdn3L18022jwHNizAIPPBmagU+7Nl/r3tiB+LykLBhNUhS9cifJDd6L4qmNkYw8Iw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770401641; c=relaxed/simple;
-	bh=31l9a/J3ky9SSmLpO5OPKYpJeNyF1GgMD+f+x/7HQnI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=avqFizB7MJETj40JYeCdgDUXPdkrVNKBKFT/m8lj5Kz4L0q0D1507seOxanjGQGXK7S4YBixLdUMf1q4Yc/NQMzOQU/etr7ONKA9IwO+OoZ+CDibLPh7n3rXpAaojq6SArC5bZMG8MI30r96OE/l1yW3txVs3eW6B0REO2/JM9o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=ldwtKf+R; arc=none smtp.client-ip=91.218.175.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Date: Fri, 6 Feb 2026 10:13:33 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1770401629;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=g5Gy1VnuwP3PRcgfNvx+OUQirue6Tb+SWeRbQ4+gTFk=;
-	b=ldwtKf+RlhBjVz8gW9tXGFBeH8QYbZvKLVfPvUO6+wkMhQ3QSSDUOVoaWpNn9b16Vm4Nba
-	tDIeGZvul77SFT9Ck2OrTXNC5bTf8CaDletMpTENThSVk65UomdZufhBvGqEwoAm1L7G8Y
-	IIaCLRscj0sRvFK1lyfkq8eFQ1ceYvw=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Shakeel Butt <shakeel.butt@linux.dev>
-To: Jiayuan Chen <jiayuan.chen@linux.dev>
-Cc: linux-mm@kvack.org, Jiayuan Chen <jiayuan.chen@shopee.com>, 
-	Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, 
-	Michal =?utf-8?Q?Koutn=C3=BD?= <mkoutny@suse.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Michal Hocko <mhocko@kernel.org>, Roman Gushchin <roman.gushchin@linux.dev>, 
-	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, 
-	Yosry Ahmed <yosry.ahmed@linux.dev>, Nhat Pham <nphamcs@gmail.com>, 
-	Chengming Zhou <chengming.zhou@linux.dev>, Shuah Khan <shuah@kernel.org>, cgroups@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] selftests/cgroup: add test for zswap
- incompressible pages
-Message-ID: <aYYvNq0CibG_ABEG@linux.dev>
-References: <20260206072220.144008-1-jiayuan.chen@linux.dev>
- <20260206072220.144008-3-jiayuan.chen@linux.dev>
+	s=arc-20240116; t=1770402241; c=relaxed/simple;
+	bh=2+t/XBHJhNmnBBZvpZXK21VXE1q7IsC0yC80NgSLp2w=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=nabBBSRALEsxmmXlUBBhqIYFa+4jqMGvnzVph0C68pXtUHKTT2pIzlzksnFs1+GcVXl9RtFntehYaDbnHH0YotxpsIeon7bR5L5PpAZRjNTNEIBFIvz1V/PI+L5saptgKQy3J4c+wssXbNlh8QiRACBAZrcWYQqTQCP4f4nxfGQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 599525BCE0;
+	Fri,  6 Feb 2026 18:23:58 +0000 (UTC)
+Authentication-Results: smtp-out2.suse.de;
+	none
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 27A833EA63;
+	Fri,  6 Feb 2026 18:23:58 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id eNs0Cb4xhmkTCQAAD6G6ig
+	(envelope-from <neelx@suse.com>); Fri, 06 Feb 2026 18:23:58 +0000
+From: Daniel Vacek <neelx@suse.com>
+To: Chris Mason <clm@fb.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Eric Biggers <ebiggers@kernel.org>,
+	"Theodore Y. Ts'o" <tytso@mit.edu>,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	Jens Axboe <axboe@kernel.dk>,
+	David Sterba <dsterba@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: linux-block@vger.kernel.org,
+	Daniel Vacek <neelx@suse.com>,
+	linux-fscrypt@vger.kernel.org,
+	linux-btrfs@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v6 08/43] fscrypt: add documentation about extent encryption
+Date: Fri,  6 Feb 2026 19:22:40 +0100
+Message-ID: <20260206182336.1397715-9-neelx@suse.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260206182336.1397715-1-neelx@suse.com>
+References: <20260206182336.1397715-1-neelx@suse.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260206072220.144008-3-jiayuan.chen@linux.dev>
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spam-Flag: NO
+X-Spam-Score: -4.00
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spam-Level: 
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [1.54 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[suse.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75540-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kvack.org,shopee.com,kernel.org,cmpxchg.org,suse.com,lwn.net,linux.dev,linux-foundation.org,gmail.com,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shakeel.butt@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_FROM(0.00)[bounces-75542-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[neelx@suse.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[shopee.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 82DA0101AF8
+	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-0.991];
+	RCVD_COUNT_FIVE(0.00)[6];
+	R_DKIM_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[toxicpanda.com:email,suse.com:mid,suse.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A83F5101C4A
 X-Rspamd-Action: no action
 
-On Fri, Feb 06, 2026 at 03:22:16PM +0800, Jiayuan Chen wrote:
-> From: Jiayuan Chen <jiayuan.chen@shopee.com>
-> 
-> Add test_zswap_incompressible() to verify that the zswap_incomp memcg
-> stat correctly tracks incompressible pages.
-> 
-> The test allocates memory filled with random data from /dev/urandom,
-> which cannot be effectively compressed by zswap. When this data is
-> swapped out to zswap, it should be stored as-is and tracked by the
-> zswap_incomp counter.
-> 
-> The test verifies that:
-> 1. Pages are swapped out to zswap (zswpout increases)
-> 2. Incompressible pages are tracked (zswap_incomp increases)
-> 
-> test:
-> dd if=/dev/zero of=/swapfile bs=1M count=2048
-> chmod 600 /swapfile
-> mkswap /swapfile
-> swapon /swapfile
-> echo Y > /sys/module/zswap/parameters/enabled
-> 
-> ./test_zswap
->  TAP version 13
->  1..8
->  ok 1 test_zswap_usage
->  ok 2 test_swapin_nozswap
->  ok 3 test_zswapin
->  ok 4 test_zswap_writeback_enabled
->  ok 5 test_zswap_writeback_disabled
->  ok 6 test_no_kmem_bypass
->  ok 7 test_no_invasive_cgroup_shrink
->  ok 8 test_zswap_incompressible
->  Totals: pass:8 fail:0 xfail:0 xpass:0 skip:0 error:0
-> 
-> Signed-off-by: Jiayuan Chen <jiayuan.chen@shopee.com>
+From: Josef Bacik <josef@toxicpanda.com>
 
-Acked-by: Shakeel Butt <shakeel.butt@linux.dev>
+Add a couple of sections to the fscrypt documentation about per-extent
+encryption.
+
+Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+Signed-off-by: Daniel Vacek <neelx@suse.com>
+---
+
+v5: https://lore.kernel.org/linux-btrfs/7b2cc4dd423c3930e51b1ef5dd209164ff11c05a.1706116485.git.josef@toxicpanda.com/
+ * No changes since.
+---
+ Documentation/filesystems/fscrypt.rst | 41 +++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+
+diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
+index 70af896822e1..8afec55dd913 100644
+--- a/Documentation/filesystems/fscrypt.rst
++++ b/Documentation/filesystems/fscrypt.rst
+@@ -283,6 +283,21 @@ alternative master keys or to support rotating master keys.  Instead,
+ the master keys may be wrapped in userspace, e.g. as is done by the
+ `fscrypt <https://github.com/google/fscrypt>`_ tool.
+ 
++Per-extent encryption keys
++--------------------------
++
++For certain file systems, such as btrfs, it's desired to derive a
++per-extent encryption key.  This is to enable features such as snapshots
++and reflink, where you could have different inodes pointing at the same
++extent.  When a new extent is created fscrypt randomly generates a
++16-byte nonce and the file system stores it along side the extent.
++Then, it uses a KDF (as described in `Key derivation function`_) to
++derive the extent's key from the master key and nonce.
++
++Currently the inode's master key and encryption policy must match the
++extent, so you cannot share extents between inodes that were encrypted
++differently.
++
+ DIRECT_KEY policies
+ -------------------
+ 
+@@ -1488,6 +1503,27 @@ by the kernel and is used as KDF input or as a tweak to cause
+ different files to be encrypted differently; see `Per-file encryption
+ keys`_ and `DIRECT_KEY policies`_.
+ 
++Extent encryption context
++-------------------------
++
++The extent encryption context mirrors the important parts of the above
++`Encryption context`_, with a few ommisions.  The struct is defined as
++follows::
++
++        struct fscrypt_extent_context {
++                u8 version;
++                u8 encryption_mode;
++                u8 master_key_identifier[FSCRYPT_KEY_IDENTIFIER_SIZE];
++                u8 nonce[FSCRYPT_FILE_NONCE_SIZE];
++        };
++
++Currently all fields much match the containing inode's encryption
++context, with the exception of the nonce.
++
++Additionally extent encryption is only supported with
++FSCRYPT_EXTENT_CONTEXT_V2 using the standard policy, all other policies
++are disallowed.
++
+ Data path changes
+ -----------------
+ 
+@@ -1511,6 +1547,11 @@ buffer.  Some filesystems, such as UBIFS, already use temporary
+ buffers regardless of encryption.  Other filesystems, such as ext4 and
+ F2FS, have to allocate bounce pages specially for encryption.
+ 
++Inline encryption is not optional for extent encryption based file
++systems, the amount of objects required to be kept around is too much.
++Inline encryption handles the object lifetime details which results in a
++cleaner implementation.
++
+ Filename hashing and encoding
+ -----------------------------
+ 
+-- 
+2.51.0
+
 
