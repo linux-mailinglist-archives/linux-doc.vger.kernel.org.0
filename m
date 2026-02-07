@@ -1,248 +1,168 @@
-Return-Path: <linux-doc+bounces-75585-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75587-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OG/pKISjhmkPPgQAu9opvQ
-	(envelope-from <linux-doc+bounces-75585-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 03:29:24 +0100
+	id uJDyD8nThmkPRQQAu9opvQ
+	(envelope-from <linux-doc+bounces-75587-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 06:55:21 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08748104A6B
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 03:29:23 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FD351050DB
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 06:55:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9FC5430A7F65
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Feb 2026 02:25:07 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C6AD230072BC
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Feb 2026 05:55:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BA1A33123C;
-	Sat,  7 Feb 2026 02:25:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D1342FE57B;
+	Sat,  7 Feb 2026 05:55:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jUNABPud"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y4qN5NdE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1810B3314B9;
-	Sat,  7 Feb 2026 02:25:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08B995FDA7;
+	Sat,  7 Feb 2026 05:55:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770431106; cv=none; b=VeMDu6J+9bYIMznmmGW2+96tyOMP9t03549vcpp04fohptplq3BjiYgX4Fy4UswE9Nymrs58bD2R0RWEKSW0ND6t0W77n2oqLY8ZKs0uL9p9OwnFn+Ns0BbSCP+JMXFY9mZ1itcbIp2urDlTeI7nzDSBIKYM/5aENAd0fcUpi6g=
+	t=1770443716; cv=none; b=E40mX4TmCFKo504QTHtaNwjSA/3LiR9wqP604TlwdMcquKEBV3wDr/6v+k2HBKX26XOVjYu9zduc2+a8RXwMpM7QiP20BaIAEaQHbFDby4ulzFJUNF0qKVTjl3z1GsqoijKP96eBH7lydLGqfbKMbUtTDg7nfqJGcCHnKvOLg9E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770431106; c=relaxed/simple;
-	bh=O5RxZKcWfHCwHkoJgJXfTdfLHf0/gYoaNp18myJOvQ0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=cs22GXR96wL2vgALF/DGADvZpM8OWl2VvcNR1qqZR6LdA5nlGMnptOalSpXsORvEc57fosXL2Sp2yijTZL2baQ059PbwZ4/CTGneZVJc1ril6B2b4dtDQ/VDE3hXr6FdxrZRNVmOqaCauCAmnariN1PAlkQPqeforhhlc7Fgvw0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jUNABPud; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B923C116C6;
-	Sat,  7 Feb 2026 02:25:05 +0000 (UTC)
+	s=arc-20240116; t=1770443716; c=relaxed/simple;
+	bh=8PukKFBx0ZPMJSJYocWLm+117LmZbUdDqx7PaS3ZQhE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=XvkfSvE7hUH+W0+bxwogy1fWhusvVT5bD/PfgqV2BMdI+3J4mOZvyIIO0LqquHllaKK09/CH+w4VP819WYyLgurr6Gy/kDRT87kzKhBKaFpwfl2A5od1MWftm9BmwD7gU/94iDfhkxthhgYmJYSRRRfqSni2BkaX1DqqgIt2iUU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y4qN5NdE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F28E2C116D0;
+	Sat,  7 Feb 2026 05:55:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770431105;
-	bh=O5RxZKcWfHCwHkoJgJXfTdfLHf0/gYoaNp18myJOvQ0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jUNABPud0UlM4VE6XfTRrAPtzDeo2yoRYuj0YfQ6SpiGEBiocep3qMvkGGhREEQ/0
-	 lk3WAV+ChzxGEs9NCIs4ba+V7rHBkNR5AK/7VJRSy5kVL3li8KRjXsIWEIutnsg5Mr
-	 D3Tq+Q6nCJtIssCN/FFtcR3YKAghePpDHd3yr/S4lJXyJODRBaCVUYI9ID++U8bZhL
-	 vPTO0L0InWN5ioX00iaSROy4j3Y4EzqvPncseRNe8om0pTorUsJDF0D064xHw23MF3
-	 KqupMeRRx3KcshQHgjL39in7rb7clyUekBXcSQpGwvDZg6tMP10muOILjmYm39fOAM
-	 gFa8JfHk8MFaQ==
-From: Jakub Kicinski <kuba@kernel.org>
-To: illusion.wang@nebula-matrix.com
-Cc: Jakub Kicinski <kuba@kernel.org>,
-	sam.chen@nebula-matrix.com,
-	lukas.bulwahn@redhat.com,
-	dimon.zhao@nebula-matrix.com,
-	netdev@vger.kernel.org,
-	vadim.fedorenko@linux.dev,
-	linux-kernel@vger.kernel.org (open list),
-	corbet@lwn.net,
-	lorenzo@kernel.org,
-	alvin.wang@nebula-matrix.com,
-	andrew+netdev@lunn.ch,
-	linux-doc@vger.kernel.org,
-	pabeni@redhat.com,
-	edumazet@google.com,
-	horms@kernel.org
-Subject: Re: [v4,net-next,11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Fri,  6 Feb 2026 18:25:03 -0800
-Message-ID: <20260207022504.4018024-1-kuba@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260206021608.85381-12-illusion.wang@nebula-matrix.com>
-References: <20260206021608.85381-12-illusion.wang@nebula-matrix.com>
+	s=k20201202; t=1770443715;
+	bh=8PukKFBx0ZPMJSJYocWLm+117LmZbUdDqx7PaS3ZQhE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Y4qN5NdEJvGU5Obp06Gold/eJ5wAAyowy4yEejppiJvN44Ojl5C36+4e5JdV23tpw
+	 Ljm0YwaAhPA4H9UAksqiKW7acrebCd2QZRMOSxnRmzfklW/XTpv1C3KjHzTm9GDmc4
+	 NnC9xTffRs9rsUGrzKwnre9WCgF+dC/pi0TBo6bT/YuCPi0XPNJuGgbrkP9tq7XCtE
+	 jrMkwx98xIIK1KDETiD3HcOMTeLisGhnTp61JZJuz7VtskM12M0u0ZkQ0TdRQ9n2Av
+	 lcQFJfjv6EZQuAZnMEoNkXehFCQH8Y5kReIIXpAkBhFLe15+mXmQF96PzhleXzkI7J
+	 1qV2zgf5rHGBg==
+Date: Fri, 6 Feb 2026 22:55:13 -0700
+From: Keith Busch <kbusch@kernel.org>
+To: Lukas Wunner <lukas@wunner.de>
+Cc: Bjorn Helgaas <helgaas@kernel.org>, Breno Leitao <leitao@debian.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mahesh J Salgaonkar <mahesh@linux.ibm.com>,
+	Oliver O'Halloran <oohall@gmail.com>,
+	Bjorn Helgaas <bhelgaas@google.com>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	linux-pci@vger.kernel.org, dcostantino@meta.com, rneu@meta.com,
+	kernel-team@meta.com
+Subject: Re: [PATCH] PCI/AER: Add option to panic on unrecoverable errors
+Message-ID: <aYbTwfShdDE4fouM@kbusch-mbp>
+References: <20260206-pci-v1-1-85160f02d956@debian.org>
+ <20260206185232.GA70936@bhelgaas>
+ <aYY_hMZyVp7GZvX2@kbusch-mbp>
+ <aYZU09qCN3u-_byj@wunner.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aYZU09qCN3u-_byj@wunner.de>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TAGGED_FROM(0.00)[bounces-75585-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-75587-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,debian.org,lwn.net,linux.ibm.com,gmail.com,google.com,vger.kernel.org,lists.ozlabs.org,meta.com];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kbusch@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.995];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:url]
-X-Rspamd-Queue-Id: 08748104A6B
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 5FD351050DB
 X-Rspamd-Action: no action
 
-This is an AI-generated review of your patch. The human sending this
-email says "This is an automated AI code reviewer, please treat what
-it says with a grain of salt."
+On Fri, Feb 06, 2026 at 09:53:39PM +0100, Lukas Wunner wrote:
+> On Fri, Feb 06, 2026 at 12:22:44PM -0700, Keith Busch wrote:
+> > On Fri, Feb 06, 2026 at 12:52:32PM -0600, Bjorn Helgaas wrote:
+> > > Are there any other similar flags you already use that we could
+> > > piggy-back on?  E.g., if we raised the level to KERN_WARNING, maybe
+> > > the existing "panic_on_warn" would be enough?
+> > 
+> > There are many KERN_WARNING messages that don't rise to the level of
+> > warranting a 'panic' that don't want to enable such an option in
+> > production. It looks like the panic_on_warn was introduced for developer
+> > debugging.
+> 
+> panic_on_warn springs into action on WARN() splats, not arbitrary
+> messages with KERN_WARNING severity.  Also, sysctl kernel.warn_limit
+> may be used to grant a certain number of panic-free WARNs.
 
-For local reproduction steps see https://netdev-ai.bots.linux.dev/ai-local.html
----
-net/nebula-matrix: add common dev start/stop operation
+Okay, but the warn panic param still isn't an option for production.
 
-This commit adds MSI-X interrupt initialization for the common device
-layer, including configuring MSI-X vector mappings, allocating interrupt
-resources, and registering mailbox interrupt handlers.
+> FWIW, the "pcieportdrv.aer_unrecoverable_fatal" parameter introduced
+> by this patch feels somewhat oddly named.  Something like
+> "pci.panic_on_fatal" might be clearer and more succinct.
 
-> diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-> index 9927dd3a1791..59d23e93e923 100644
-> --- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-> +++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
+Naming is hard; thanks for the suggestion.
 
-[ ... ]
+> > I agree the curnent INFO level is too low for the generic unrecovered
+> > condition, though.
+> 
+> At least for unbound devices, I think 918b4053184c went way too far.
+> I think an unbound device should generally be considered recoverable
+> through a reset.
 
-> @@ -14,6 +25,179 @@ static void nbl_dev_register_common_irq(struct nbl_dev_mgt *dev_mgt)
->  	msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num = 1;
->  }
->
-> +static int nbl_dev_request_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
+Yes, I agree, especially considering the generic probe saves a
+checkpoint of the state that we can restore to that is consistent with
+the kernel's view. There's no clear reason to fail recovery when there's
+no bound driver, so this changing that behavior s a good idea.
 
-[ ... ]
+> As for bound devices whose drivers lack pci_error_handlers, it has been
+> painful in practice that they're considered unrecoverable wholesale.
 
-> +static int nbl_dev_configure_msix_map(struct nbl_dev_mgt *dev_mgt)
-> +{
-> +	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-> +	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-> +	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-> +	bool mask_en = msix_info->serv_info[NBL_MSIX_NET_TYPE].hw_self_mask_en;
-> +	u16 msix_net_num = msix_info->serv_info[NBL_MSIX_NET_TYPE].num;
-> +	u16 msix_not_net_num = 0;
-> +	int err, i;
-> +
-> +	for (i = NBL_MSIX_NET_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-> +		msix_info->serv_info[i].base_vector_id =
-> +			msix_info->serv_info[i - 1].base_vector_id +
-> +			msix_info->serv_info[i - 1].num;
-             ^^^^^^
+Yes, it gets tricky when there is a bound driver; there's no telling
+whether or not it may initiate a broken transaction with cascading
+consequences for the rest of the system if anything in the chain is not
+cooperating with the error recovery orchestration. I don't know if there
+is a best default action, so allowing it to be user defined seems okay.
 
-Does this loop cause an array underflow? NBL_MSIX_NET_TYPE equals 0 (from
-the enum in nbl_dev.h), so on the first iteration i=0 and the code accesses
-serv_info[-1].
+> E.g. GPUs often expose an audio device as well as telemetry devices,
+> all arranged below an integrated PCIe switch.  All of these devices
+> need drivers with pci_error_handlers in order for the GPU to be
+> recoverable.  In some cases, dummy callbacks were added to render
+> the whole thing recoverable.
 
-The serv_info array is declared with NBL_MSIX_TYPE_MAX (2) elements in
-struct nbl_msix_info, giving valid indices [0,1]. Accessing index -1 reads
-uninitialized memory before the array start.
+This experience sounds familiar, and it really does appear that a hard
+reboot is the best outcome in many cases because orchestrating all the
+components to recover is not going to happen. Hence the reboot param.
 
-Call chain: nbl_core_start()->nbl_dev_start()->nbl_dev_start_common_dev()
-->nbl_dev_configure_msix_map() guarantees this occurs during device start.
+> So I wouldn't consider 918b4053184c to have been a universally successful
+> approach and I fear that this patch goes even further.
 
-Should the loop start at i=1 (NBL_MSIX_MAILBOX_TYPE) instead, or should
-serv_info[0].base_vector_id be initialized before the loop?
-
-> +
-> +	for (i = NBL_MSIX_MAILBOX_TYPE; i < NBL_MSIX_TYPE_MAX; i++) {
-
-[ ... ]
-
-> +static int nbl_dev_alloc_msix_intr(struct nbl_dev_mgt *dev_mgt)
-> +{
-> +	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-> +	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-> +	struct nbl_common_info *common = dev_mgt->common;
-> +	int needed = 0;
-> +	int err;
-> +	int i;
-> +
-> +	for (i = 0; i < NBL_MSIX_TYPE_MAX; i++)
-> +		needed += msix_info->serv_info[i].num;
-> +
-> +	err = pci_alloc_irq_vectors(common->pdev, needed, needed,
-> +				    PCI_IRQ_MSIX | PCI_IRQ_AFFINITY);
-> +	if (err < 0) {
-> +		pr_err("pci_enable_msix_range failed, err = %d.\n", err);
-                       ^^^^^^^^
-
-This isn't a bug, but the error message says "pci_enable_msix_range failed"
-while the actual function being called is pci_alloc_irq_vectors.
-
-> +		goto enable_msix_failed;
-> +	}
-
-[ ... ]
-
-> diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-> index a16a685e4f29..55ed560624d3 100644
-> --- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-> +++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-> @@ -283,7 +283,38 @@ static struct pci_driver nbl_driver = {
->  	.remove = nbl_remove,
->  };
->
-> -module_pci_driver(nbl_driver);
-> +static int __init nbl_module_init(void)
-> +{
-> +	int status;
-> +
-> +	status = nbl_common_create_wq();
-> +	if (status) {
-> +		pr_err("Failed to create wq, err = %d\n", status);
-> +		goto wq_create_failed;
-> +	}
-> +	status = pci_register_driver(&nbl_driver);
-> +	if (status) {
-> +		pr_err("Failed to register PCI driver, err = %d\n", status);
-> +		goto pci_register_driver_failed;
-> +	}
-> +	pr_info("nbl module loaded\n");
-> +	return 0;
-
-Previous review feedback from Andrew Lunn on v3 noted that the config is
-named 'NBL_CORE' and the module is named 'nbl_core'. He pointed out that
-'_CORE' naming is unusual for a driver - CORE is typically a library shared
-by multiple drivers. The Kconfig still shows:
-
-config NBL_CORE
-	tristate "Nebula-matrix Ethernet Controller m18100 Family support"
-
-Should this be renamed to follow the naming convention for standalone
-drivers?
-
-Link: https://lore.kernel.org/netdev/88c7e349-f941-4216-89ca-70a49e82b378@lunn.ch/
-
-
-Andrew Lunn also noted in v3 that variable declarations should follow
-reverse Christmas tree ordering (longest line first). Looking at functions
-in this commit like nbl_dev_request_mailbox_irq():
-
-	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-	struct nbl_common_info *common = dev_mgt->common;
-
-the declarations are not in reverse Christmas tree order.
-
-Link: https://lore.kernel.org/netdev/c6d37ecd-7dc6-4f83-b76c-2735a5f116fd@lunn.ch/
+If anyone goes through the effort of fixing that, will it be considered?
+You told me in Vienna LPC '24 that you'd help resolve the pci hotplug
+deadlocks that have been plaguing pci for the last 10 years, but not a
+single comment has happened despite multiple complete and validated
+solutions offered.
 
