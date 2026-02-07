@@ -1,64 +1,69 @@
-Return-Path: <linux-doc+bounces-75600-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75601-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IGEpCmFmh2lwXgQAu9opvQ
-	(envelope-from <linux-doc+bounces-75600-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 17:20:49 +0100
+	id KPExAIlvh2n7XwQAu9opvQ
+	(envelope-from <linux-doc+bounces-75601-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 17:59:53 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 831641067DF
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 17:20:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87AC910697F
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Feb 2026 17:59:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 627D83018BEB
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Feb 2026 16:20:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3204E301D075
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Feb 2026 16:59:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 47020271443;
-	Sat,  7 Feb 2026 16:20:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1C4E23385B6;
+	Sat,  7 Feb 2026 16:59:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Rd/F6S0G"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PTAveMUT"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 221EA125A0;
-	Sat,  7 Feb 2026 16:20:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED30D332EB5;
+	Sat,  7 Feb 2026 16:59:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770481245; cv=none; b=TSydtHE10tmZ5eOOXj/sU1PDC/hupMgsEV+YeDCkZafHVlG/GtWjzd2JGVMbMTYPJrtftHP/SHJ0mLZ8jVCanhfIYwgjdACWbq7N9A/cZpY38dUj7oxtybh4xEJzFP9Ndo4QACIg8SW4ZfjzYXer5C4O+pKaayPBFOtd9UXIH2w=
+	t=1770483589; cv=none; b=fRaZFG3Rwy20owUqI39qg4PSkrr3irWZYwxc1p2W/kNuWlb3+skgv0S6RVHGeCr+5iUFbYyRIb39w6gAjjtL3/prWEN5SBedqyv3DIED9u266P2aBukLJFa1zBo0FivYcl3NeVO0WZpBJ3Yzgj44h0oupn480EBpQdj7dwY+I6I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770481245; c=relaxed/simple;
-	bh=ejJfSQFOA01ro05Yn7RiAuT1mEsViwjJwvaaoi8RfEo=;
+	s=arc-20240116; t=1770483589; c=relaxed/simple;
+	bh=PHvLWFRxlqO1CmD8vcd7RCrm1+V+balcd29X2sSmIQ8=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=m0xLSzKcChbonOpfy+lYZNRKPc3Um8TKTImdEvB4kWlJLREHdNt4AD+TZsyGGEqy0VbjvswvfspTbpZlxfNveq1Rt3gPkmXXh6yX2qz6K0KnRWHDeeTuX5RrTtlNF/9gl7LJEs7K4XcSkkfnx9lVkNNcrrqFmQENhlZJt9Uv2c8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Rd/F6S0G; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFEBAC116D0;
-	Sat,  7 Feb 2026 16:20:39 +0000 (UTC)
+	 MIME-Version:Content-Type; b=AzYIMP4Zcrk86+r5P4zr6l3HND1DTlDWvv4EPOYombXIsOCq35D7OIrvvIloaf6lKFmuIFSU5m0sOMRwrIWsLYdnLipPSr6vUGGBHSE9wIZyJKTvfvLnF9YsROUAHqX5Te7hhhuYws1Wvwl/IBKbbLqqJXtWh/MavYrIp7PNDNg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PTAveMUT; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40F11C116D0;
+	Sat,  7 Feb 2026 16:59:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770481244;
-	bh=ejJfSQFOA01ro05Yn7RiAuT1mEsViwjJwvaaoi8RfEo=;
+	s=k20201202; t=1770483588;
+	bh=PHvLWFRxlqO1CmD8vcd7RCrm1+V+balcd29X2sSmIQ8=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=Rd/F6S0GAlV2HjcPPhLbgHBVk4J/Rh4lQfHW63xSSBKKtL4fTG/x7M8PvQXnHISLY
-	 nOWFeaosdU51RhNCfVIw9pZilmty+WCUTIV1SSb7KXu/j5UD/lNdfq5G3XtEKRe19e
-	 3HL42m5d5gVw/oE1VxxsMSOqNya+HVQV7icBkikp4PcHgDLCEzVlWjWXUmzYsxJ5oo
-	 N7qFuHpicMnkhir7ZzjvAN/2LukL+kolA5WXgJR5tvEzgYQS2xfC3jHXKZUIWerRG5
-	 pWKEnghQVYdf3+Z157J6f5gD8Ej3G9zwI/1G9vOicM1yszNNX/MYjmz8/WpzalmxVl
-	 L5sOQ+QRZrIPw==
-Date: Sat, 7 Feb 2026 16:20:35 +0000
+	b=PTAveMUTBqQDg2iDp3KZi+YP6mcIdG3rioQCUS2nEkJqAfPXsj9eQdJt5QFTPpP/b
+	 +qz3KOO7ESggD5hqHAk+j8yRFR0Ksbt8CB8g60y0v9ewSGrzjChxqoSrAHT4V8Kx+w
+	 ATCrVXNLuLs8tVBL/J7Volq8p4GRtY52cAVNWD4JRWZjpzSlr34VSvSmpxZ1i90b/V
+	 W+1lfdNVLnARjJUYlk7qJxu66BhTRub90HUoUvwoDSaXKHmLUVaWEj6bcl5N0OFtF3
+	 njo4WDZ0gL1MH1BKwoLKovgXKQjzpedQssRzMm41v8iwPhqYyY7KuO1MMretAPM/1I
+	 y5j0lIFYLldZA==
+Date: Sat, 7 Feb 2026 16:59:38 +0000
 From: Jonathan Cameron <jic23@kernel.org>
-To: Taha Ed-Dafili <0rayn.dev@gmail.com>
-Cc: me@brighamcampbell.com, skhan@linuxfoundation.org,
- linux-kernel-mentees-archive@lists.linuxfoundation.org,
- rdunlap@infradead.org, dlechner@baylibre.com, nuno.sa@analog.com,
- andy@kernel.org, corbet@lwn.net, lars@metafoo.de,
- Michael.Hennerich@analog.com, linux-iio@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 4/4] docs: iio: adxl345: update math and examples for
- scaling
-Message-ID: <20260207162035.16533a3e@jic23-huawei>
-In-Reply-To: <20260201183320.27023-5-0rayn.dev@gmail.com>
-References: <20260201183320.27023-1-0rayn.dev@gmail.com>
-	<20260201183320.27023-5-0rayn.dev@gmail.com>
+To: Nuno =?UTF-8?B?U8Oh?= <noname.nuno@gmail.com>
+Cc: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>,
+ rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org,
+ linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org, David Lechner <dlechner@baylibre.com>, Andy
+ Shevchenko	 <andy@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>,
+ Michael Hennerich	 <Michael.Hennerich@analog.com>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Subject: Re: [PATCH v6 2/8] iio: core: add fixed point parsing with 64-bit
+ parts
+Message-ID: <20260207165938.59d6895f@jic23-huawei>
+In-Reply-To: <c4efbcda461cdfd58c7a7ab8b8c29c5f47fbda01.camel@gmail.com>
+References: <20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com>
+	<20260130-adf41513-iio-driver-v6-2-cf46239026bc@analog.com>
+	<eb1d9b939f95888739ce4a70f516cec07393c6df.camel@gmail.com>
+	<nzowa6uhnlcllceml2pqjk4so33kl3rf2jwu36eh3znnxug6ub@gfzafmi3m5re>
+	<c4efbcda461cdfd58c7a7ab8b8c29c5f47fbda01.camel@gmail.com>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -66,8 +71,8 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -79,50 +84,99 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75600-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75601-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.987];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_CC(0.00)[gmail.com,analog.com,vger.kernel.org,baylibre.com,kernel.org,metafoo.de,lwn.net];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 831641067DF
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 87AC910697F
 X-Rspamd-Action: no action
 
-On Sun,  1 Feb 2026 13:33:13 -0500
-Taha Ed-Dafili <0rayn.dev@gmail.com> wrote:
+On Tue, 03 Feb 2026 10:04:01 +0000
+Nuno S=C3=A1 <noname.nuno@gmail.com> wrote:
 
-> Update the documentation to reflect the addition of event scaling
-> and correct existing technical errors inscale values.
+> On Tue, 2026-02-03 at 09:26 +0000, Rodrigo Alencar wrote:
+> > On 26/02/02 09:57AM, Nuno S=C3=A1 wrote: =20
+> > > On Fri, 2026-01-30 at 10:06 +0000, Rodrigo Alencar via B4 Relay wrote=
+: =20
+> > > > From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+> > > >=20
+> > > > Add iio_str_to_fixpoint64() function that leverages simple_strtoull=
+()
+> > > > to parse numbers from a string.
+> > > > A helper function __iio_str_to_fixpoint64() replaces
+> > > > __iio_str_to_fixpoint() implementation, extending its usage for
+> > > > 64-bit fixed-point parsing. =20
+> >=20
+> > ...
+> >  =20
+> > > > =C2=A0/**
+> > > > =C2=A0 * __iio_str_to_fixpoint() - Parse a fixed-point number from =
+a string
+> > > > =C2=A0 * @str: The string to parse
+> > > > @@ -895,63 +1026,43 @@ static ssize_t iio_read_channel_info_avail(s=
+truct device *dev,
+> > > > =C2=A0static int __iio_str_to_fixpoint(const char *str, int fract_m=
+ult,
+> > > > =C2=A0				 int *integer, int *fract, bool scale_db)
+> > > > =C2=A0{
+> > > > -	int i =3D 0, f =3D 0;
+> > > > -	bool integer_part =3D true, negative =3D false;
+> > > > +	s64 integer64, fract64;
+> > > > +	int ret;
+> > > > =C2=A0
+> > > > -	if (fract_mult =3D=3D 0) {
+> > > > -		*fract =3D 0;
+> > > > +	ret =3D __iio_str_to_fixpoint64(str, fract_mult, &integer64, &fra=
+ct64,
+> > > > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 scale_db);
+> > > > +	if (ret)
+> > > > +		return ret; =20
+> > >=20
+> > > I know it feels tempting to do the above while adding the 64bit varia=
+nt. But isn't the
+> > > overflow safety also an issue on the 32bit variant? IMO, we should fi=
+rst have a patch
+> > > adding the overflow safety with a Fixes tag and then add 64bit suppor=
+t. =20
+> >=20
+> > I think handling 64-bit support after taclking the overflow issue
+> > would require changes on top of previous ones, which might get a messy
+> > commit history, no? Mostly because the 64-bit variant of the function
+> > is being used inside the 32-bit one. Also, the added auxiliary function
+> > that implements the overflow check parses u64, which allowed for the
+> > removal of the while loop in the __iio_str_to_fixpoint() implementation=
+. =20
+>=20
+> Typically we do fixes before because we might want to backport them and w=
+e just want to backport the
+> fix (so not the 64bit support). But we never really had any known issues =
+with the current API
+> (AFAIK) so it might be ok as-is. Will defer to Jonathan.
 
-Trivial but please wrap commit messages to 75 chars.
-
-> 
-> key changes:
-> - Fix the 62.5 g/LSB typo to 62.5 mg/LSB and add SI unit conversion.
-> - Correct decimal precision of in_accel_scale and
-> in_accel_scale_available to match actual SI unit (m/s^2)
-> values reported by the driver.
-> - Add sysfs example showing how to read and interpret the
-> newly implemented event scale factor.
-> 
-> Suggested-by: Jonathan Cameron <jic23@kernel.org>
-> Signed-off-by: Taha Ed-Dafili <0rayn.dev@gmail.com>
-As David suggested, better to just document the scale attribute and not
-add it to all the others.
+When we say overflow, I assume we just get the wrong value?  If so
+then I doubt anyone ever noticed it.  Worth tidying up as a useability
+improvement but not sure it's worth back porting.
 
 Jonathan
 
+>=20
+> - Nuno S=C3=A1
+> > before this assignment.
+> > =C2=A0 =20
 
 
