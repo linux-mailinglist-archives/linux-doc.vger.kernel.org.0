@@ -1,181 +1,151 @@
-Return-Path: <linux-doc+bounces-75671-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75673-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yAIlENz0iWkaFAAAu9opvQ
-	(envelope-from <linux-doc+bounces-75671-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 15:53:16 +0100
+	id KNGNN6H3iWl7FAAAu9opvQ
+	(envelope-from <linux-doc+bounces-75673-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 16:05:05 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7891F111275
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 15:53:15 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F8051117B8
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 16:05:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C0531300FEF7
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Feb 2026 14:46:55 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7011B30B0351
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Feb 2026 14:48:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04A0D37AA91;
-	Mon,  9 Feb 2026 14:46:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8615E28725B;
+	Mon,  9 Feb 2026 14:48:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lsT5x/q8"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="QTOPP3Er"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14C52DB7B4
-	for <linux-doc@vger.kernel.org>; Mon,  9 Feb 2026 14:46:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 482C22690EC;
+	Mon,  9 Feb 2026 14:48:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770648413; cv=none; b=YT+PWAkwzNHxEovXhM9/jsKL+d7D36Z6dpzBPPc8MM7kbv4Oi+LanXAG9yYI1HlfAW2PdRUyb00xuxavdaTV+FKiyYmeEG+U7u28bl+cBgVdD+PdaokC4Mm8a+2RL8svluXXsdXIciGVeVf+5xiZmVXfVcnbGTJ5aUSoNZlyL4o=
+	t=1770648500; cv=none; b=UOYYYCYTAYEpPWLRCUBFQjSARPGiImyfAbXHwqgPDlaLfT75a0ortOQx2Zv3X+ayJngt0frvYRTTX9U+9B0P5Pf3CuzSTFAKucpdy1CbdMBedwPyXHbx8SGHgVUrK1f8a11BJH6KMtOazPh/7R0lvBJjQRt779IOFsPC4vTZaTU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770648413; c=relaxed/simple;
-	bh=lfCZvo1BYY+V3BUBac9tCSWJ7M2G0L0QR1+eQrvTvus=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WFA88pD4kkrUItNZLlzvQTX5h9LvbX51iGjo4Mc0kYdA/tYwv/qp693K9RZCdLJaVnTjbPjPF8w1U1gl9thpccq8umTTlvENTOWTXT0larvEO6xMBA/emMNji1KC9oOxq9bOx69y5vWjN8RVYab47kadVyfKG3d293Q3Mi4PtlE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lsT5x/q8; arc=none smtp.client-ip=74.125.224.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-64ad9fabd08so1554023d50.2
-        for <linux-doc@vger.kernel.org>; Mon, 09 Feb 2026 06:46:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770648412; x=1771253212; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=iupTL7g1VPbKZeaieFodcs5jMThRswgGpkmXziygeYw=;
-        b=lsT5x/q8rfE8IzypC1nIhUqjWAsBmO3ZXU7CfVbi5RNThj2vwZzknQySyNd5XOjsro
-         vEUUWLz3ytVhzAD/2pbNx2RIvtNrdLhw0oMi2WoxxYRvmcy/xf8cGyW1Tfis68C4/DbH
-         9p9q+fAzy0eA6ATyCOx16H5RRMAAzokcLlPOuL+Ootp0qYjDLD4NOTSsggCTZq0/iuy3
-         ooM8wQszRbksD/sXTa3w7LyyWCcawECzyDFKPhZzVGa6Muu5PajhWECZE+2TGdwipAHP
-         eYPjjtwAjIOsCpYcEtbPg1RIvN0+dshDVR1ZNUUtRWxHJsKTes2wJGwXwxUQY0fO2dmL
-         Os+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770648412; x=1771253212;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iupTL7g1VPbKZeaieFodcs5jMThRswgGpkmXziygeYw=;
-        b=BeKOwa9ONrao7jqXynR0iuUjAuzr8EribyOWyylvTBUod4nCb/TN440nSFBj+U3avy
-         BLArkHar9I8UuELlrZMD8qHE5M0GDwuXhhXUAZhgMokQaCnRflglzNHadhZ2n0Pe7u09
-         DerkvZ8urTQMkEKYPM9CL4R5Oa/JrQrN7YMifh2csaqsJhJb3DJYUG99DAY45KNcbfas
-         ue0rGSfUcO9hFtG4CLx9gMVSb4ocmLuqLM7Nh7CEKUwLuc8D+1pDJqMSeOewOEkGE9X+
-         s5phcacFNzmxSPmnGx6PTvmBCyF8G40OnxFZrdCBxtYydwT+09Zf2G8zt5ASPFY8fMp0
-         Kkkg==
-X-Forwarded-Encrypted: i=1; AJvYcCVJZ40Upad0fZaM2w1MOrWf7hH7TSPzfG8LF6xZoR9nJMCdFTeo2rPpq1+SyqgO15zBCI1ghryT+ks=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzhBxu2Ap+K+T7EH+5im0biQTbdXre59zMPvGg715Yc1wpdczee
-	FT/P/xldylnfphLGCMyfTn1Lcq8iaHKjMIqt2AlwyjGg0DMBk5Em1HjI
-X-Gm-Gg: AZuq6aLX669c4NNPgK0AYJ8WWAhgHQqCypJjKxglfJ4AxUnRYpBEBhsesuiSV6iiEO1
-	g2ve1U4x5rChQ1LgPWaccQ/HO+RlxCrdyndpfQBuWUntRK9IpTL7ehKnzaHE7IoLtbj+UgfJr/m
-	RPDzKUd4ZiJk7KeEVsEkNcpno5MPlOtS5ngJyH1U9YPiolRBT3l6udQHkAQB/Y/yg7b0aKdwVcM
-	JUtVnEXh54pTmXn6lT5IwjVXbpLQGupZoJ09GEQAci0KZ8teSnlQyFdorMWxh6TDscbt/APvZa3
-	B890VB8r3yeOw8QI9a110gE58yVmgi6tcERMNl4UFhNenEmuGNvqBE135P4tqCdvAhoTtr2v1Pb
-	rXwU5CvVPCkkwfeOz0pgXFVX+ktPtM0JuNBIkNRj4v40VcSRObei1RMHKuFvMF1ktSaya1fH/Cf
-	3dPevU8gF/ViZclEak6LgC
-X-Received: by 2002:a05:690e:4085:b0:64a:db22:1cef with SMTP id 956f58d0204a3-64adb221f23mr4737453d50.42.1770648412369;
-        Mon, 09 Feb 2026 06:46:52 -0800 (PST)
-Received: from localhost ([2804:30c:163a:1300:9b68:dd2c:feb4:459b])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-64ae1076ab1sm3552146d50.5.2026.02.09.06.46.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Feb 2026 06:46:51 -0800 (PST)
-Date: Mon, 9 Feb 2026 11:47:19 -0300
-From: Marcelo Schmitt <marcelo.schmitt1@gmail.com>
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: Marcelo Schmitt <marcelo.schmitt@analog.com>, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, jic23@kernel.org,
-	michael.hennerich@analog.com, nuno.sa@analog.com,
-	eblanc@baylibre.com, dlechner@baylibre.com, andy@kernel.org,
-	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-	corbet@lwn.net
-Subject: Re: [PATCH v8 7/8] iio: adc: ad4030: Add support for ADAQ4216 and
- ADAQ4224
-Message-ID: <aYnzd55yYK5xRSpr@debian-BULLSEYE-live-builder-AMD64>
-References: <cover.1770403407.git.marcelo.schmitt@analog.com>
- <b437e4ca90df98220f2cabc514c201743e269889.1770403407.git.marcelo.schmitt@analog.com>
- <aYiXKq5SJ3wNl8DA@smile.fi.intel.com>
+	s=arc-20240116; t=1770648500; c=relaxed/simple;
+	bh=bAcFWYxYWucnehIAESEvF8irVS2ZL2078+qnlPGHapE=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=i85x2FJDwCgwccScIUwlkNDbilftT//nNsgwxle87DB94uYJMSvQ6Ox3fQnSm1Y/og544LWwzI7MeoXOvS+FgcAAGgSzWwKDJo9rhsl4YVWuT1Id4WWrO34Wh3824k/xoPPtBvPWsK2yZqXMl3sH9cL/O+/iOxN/SM2b6tPigMo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=QTOPP3Er; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7FD9540C8B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1770648499; bh=Qdm14cHHj8D24U6COEkXGmQ6Vu/705Cb0Axetnz5Nbs=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=QTOPP3ErsxHjo2jsLBJaTk8MlmXdMV3D7tvzPLhhuwAyRfdCGsm7FMPFEHG3RoBjT
+	 dk68P5aQHoXl2tv6bifVXz/KWrUIapAFwYeapspBTOz7OsP8oG/hndHrCVVA/u4gC/
+	 S5r+Kd9POrbu9gcaovUJwFGc+ex0N3yedOWKPGVN3ZYqsEe47dyXv7mi6xaDvhzObW
+	 NLriV0oxoxCEzaE+V2Rr5Pb/oDzrO6FFOX8KxBkpHKo86sNz9RWd1694Go/pvrEoTj
+	 xr4LWc44i/R4DKM0jm8PiJbiU8mALzZU8FWr2L9uPzDEkost26wD1nxyK3LuKYLMT3
+	 w+ebCu3gwCi4g==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 7FD9540C8B;
+	Mon,  9 Feb 2026 14:48:19 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Min-Hsun Chang <chmh0624@gmail.com>, akpm@linux-foundation.org
+Cc: linux-doc@vger.kernel.org, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, Min-Hsun Chang <chmh0624@gmail.com>
+Subject: Re: [PATCH] Docs/mm: fix typos and grammar in page_tables.rst
+In-Reply-To: <20260209081323.68339-1-chmh0624@gmail.com>
+References: <20260209081323.68339-1-chmh0624@gmail.com>
+Date: Mon, 09 Feb 2026 07:48:18 -0700
+Message-ID: <87wm0m9dn1.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aYiXKq5SJ3wNl8DA@smile.fi.intel.com>
+Content-Type: text/plain
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75671-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75673-lists,linux-doc=lfdr.de];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com,linux-foundation.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,gmail.com];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[marceloschmitt1@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:url,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7891F111275
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,trenco.lwn.net:mid,lwn.net:dkim]
+X-Rspamd-Queue-Id: 3F8051117B8
 X-Rspamd-Action: no action
 
-On 02/08, Andy Shevchenko wrote:
-> On Fri, Feb 06, 2026 at 04:02:19PM -0300, Marcelo Schmitt wrote:
-> > ADAQ4216 and ADAQ4224 are similar to AD4030, but feature a PGA circuitry
-> > that scales the analog input signal prior to it reaching the ADC. The PGA
-> > is controlled through a pair of pins (A0 and A1) whose state define the
-> > gain that is applied to the input signal.
-> > 
-> > Add support for ADAQ4216 and ADAQ4224. Provide a list of PGA options
-> > through the IIO device channel scale available interface and enable control
-> > of the PGA through the channel scale interface.
-> 
-> ...
-> 
-> > +/*
-> > + * Gains computed as fractions of 1000 so they can be expressed by integers.
-> > + */
-> > +static const int adaq4216_hw_gains_vpv[] = {
-> > +	1 * MILLI / 3,		/* 333 */
-> > +	5 * MILLI / 9,		/* 555 */
-> > +	20 * MILLI / 9,		/* 2222 */
-> > +	20 * MILLI / 3,		/* 6666 */
-> 
-> In case you would need a new version, or Jonathan is okay to tweak, I think
-> it's better to use float in the comments. The above comment explains the
-> MILL multiplier for the values.
-> 
-> 	1 * MILLI / 3,		/* 0.333 */
-> 	5 * MILLI / 9,		/* 0.555 */
-> 	20 * MILLI / 9,		/* 0.2222 */
-> 	20 * MILLI / 3,		/* 0.6666 */
-> 
-> > +};
-> 
-> Btw, if this true (if I am not mistaken in the gain values), the question is
-> why 0.2222 is much higher than 0.555.
+Min-Hsun Chang <chmh0624@gmail.com> writes:
 
-I guess it has to do with how the PGA is set up, but I don't really know.
-Those fractions are specified in the data sheet [1] and test results have shown
-those are correct. I can't explain why we have those specific gain values, though.
+> Correct several spelling and grammatical errors in the page tables
+> documentation. This includes:
+> - Fixing "a address" to "an address"
+> - Fixing "pfs" to "pfns"
+> - Correcting the possessive "Torvald's" to "Torvalds'"
+> - Fixing "instruction that want" to "instruction that wants"
+> - Fixing "code path" to "code paths"
+>
+> Signed-off-by: Min-Hsun Chang <chmh0624@gmail.com>
+> ---
+>  Documentation/mm/page_tables.rst | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/Documentation/mm/page_tables.rst b/Documentation/mm/page_tables.rst
+> index e7c69cc32493..d5a2c37b05e4 100644
+> --- a/Documentation/mm/page_tables.rst
+> +++ b/Documentation/mm/page_tables.rst
+> @@ -26,9 +26,9 @@ Physical memory address 0 will be *pfn 0* and the highest pfn will be
+>  the last page of physical memory the external address bus of the CPU can
+>  address.
+>  
+> -With a page granularity of 4KB and a address range of 32 bits, pfn 0 is at
+> +With a page granularity of 4KB and an address range of 32 bits, pfn 0 is at
+>  address 0x00000000, pfn 1 is at address 0x00001000, pfn 2 is at 0x00002000
+> -and so on until we reach pfn 0xfffff at 0xfffff000. With 16KB pages pfs are
+> +and so on until we reach pfn 0xfffff at 0xfffff000. With 16KB pages pfns are
+>  at 0x00004000, 0x00008000 ... 0xffffc000 and pfn goes from 0 to 0x3ffff.
+>  
+>  As you can see, with 4KB pages the page base address uses bits 12-31 of the
+> @@ -38,8 +38,8 @@ address, and this is why `PAGE_SHIFT` in this case is defined as 12 and
+>  Over time a deeper hierarchy has been developed in response to increasing memory
+>  sizes. When Linux was created, 4KB pages and a single page table called
+>  `swapper_pg_dir` with 1024 entries was used, covering 4MB which coincided with
+> -the fact that Torvald's first computer had 4MB of physical memory. Entries in
+> -this single table were referred to as *PTE*:s - page table entries.
+> +the fact that Torvalds' first computer had 4MB of physical memory. Entries in
+> +this single table were referred to as *PTEs* - page table entries.
 
-[1]: https://www.analog.com/media/en/technical-documentation/data-sheets/adaq4216.pdf#unique_2_Connect_42_T1
-> 
-> -- 
-> With Best Regards,
-> Andy Shevchenko
+If you are going to correct that, it should be, by the rules of English,
+"Torvalds's".  The elision of the final "s" is done with plural nouns
+but not those ending naturally with "s".  As we all know, there's only
+one Linus.
+
+Thanks,
+
+jon
 
