@@ -1,264 +1,265 @@
-Return-Path: <linux-doc+bounces-75702-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75704-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id APmSACZVimlvJgAAu9opvQ
-	(envelope-from <linux-doc+bounces-75702-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 22:44:06 +0100
+	id IMDaF3FiimleJwAAu9opvQ
+	(envelope-from <linux-doc+bounces-75704-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 23:40:49 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7700F114E99
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 22:44:05 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 09773115166
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 23:40:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 965F7303CE00
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Feb 2026 21:43:09 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 5B7E2300ACA1
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Feb 2026 22:40:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 659FB30F7FE;
-	Mon,  9 Feb 2026 21:43:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3070A318EC8;
+	Mon,  9 Feb 2026 22:40:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="tS3+AQlx"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="HhXL+lHX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011057.outbound.protection.outlook.com [52.101.52.57])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oi1-f201.google.com (mail-oi1-f201.google.com [209.85.167.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19F9830F535;
-	Mon,  9 Feb 2026 21:43:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.52.57
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770673389; cv=fail; b=AVG1NJwUaswUosxfjYbgLE0N6k401WSxawHXyE5feUH8Cx2JJjV7VlOMNdpzQ0qv1NpXlXq5+H2wy//5gg0q1PyTbA6TdPReLrUjvzvXaB4asrpH5CKbGiFMJTCjyJpK+dFkwHhBXWjPH4HMIJDC1R7X+gWEBKR6xX7LKZ+LewA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770673389; c=relaxed/simple;
-	bh=pINiYB8zyOjrzB76wd7yPh+nfQ9ggKcuoE40RzGqDtc=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=gGJVHRyy4xJ18gc2zSbl9fmhvLHZNSVs118fkJ2lW3aWQPyE/d7iqwOxeOnQR3uLiOc3dqkROyd9g3z3U+YimiyPiKoS5WVQb/xM0a7ycL2wzvCOq6Mk1+jincaajQPjVLpQBloO6iVo964K2wQ3vkAEacR9krGbFXnNPFDQ8+c=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=tS3+AQlx; arc=fail smtp.client-ip=52.101.52.57
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=G+zLbLUb2IBruy2CvMbEs2bQo8DKGmQhSA5pZUdxbGD8PMDkuvQg1VjbfrTPgUI/PG/Hos35coZzFUbbLHNB+OW0l4li0cjep1v5PM60lVnLQiCPtFvb1l/iN+WMIuasVGDkHRC1gOsXJZDGue6JlAmhue3HItYpYAgLb+YU+ZOTRBDzPW2V5Gr85ryY3pWcyaoKmnw2ZDDjDDNcYfQ2I3puXHB/6Gx+mQWRQRtJUKqSOvy1s+2+OR8bHJMtkVAPUwnpWH3aRCc9uKfzSR56AGe+oQn8jpI05rfchf/cBG9SxvzO6SKGiYCJNjzKVfvBVCG65eV/NbPD7W/m3jgl0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=utUoWEkcA/x9uzytAw2kCDNy9UddOYZOThBVEW2ToYw=;
- b=nCSnONm/D6yE5vEtxPfzeftYnrsiNE/v33lV6lXjvCu8WLp45cV9PkTObfy2Gndy0zp7+gdhm2C9fGNuFZ+ZY9+MSJcgAezzTe6ZC19OdRq4RotPqQIoNTbgy8dp2sY+6s8tR4bCo0MBizWQIcKwp1W6r8B18SB48oCCecgdkLkNfgX16y2ZB6/VustO/p/b5Hk6QpQ+V/0BNSGx/FKOlb8miUKq2M59VtyCDW5RV9+c98D02bp7VuvQ5g25R3By96fa8WDQbMWvySxoF05YUdiypMzEiqbxMHXAXFlxK9quzQB2MvqCkPTzHUISRn3XUHdNlqexjv9JcE0rOPspiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=utUoWEkcA/x9uzytAw2kCDNy9UddOYZOThBVEW2ToYw=;
- b=tS3+AQlxx8Yf3r9Nf9OJk/8+U9e33sdynURx3H8dZOELEyYFOrkoTbMM2Yiu9O/fO5jZ6q1uLTzFP4F2FrckzLWH1AuQ+sXeuPqXXeQDLyHoXSPuttZh9WUPfhphIu/WDn2erGdcc4xN7yrJOcDwElDcg63MSDZD3CZIlp4sCG63XTUsUqeSjNelifF0Pee2qMqthX96sMy83CDRmqgESirk5zdlUJTxRzx/poq2xfoPDSe+jHGeIMyp2E8jk1EJ9eM31AgwBVJEwVABAstf34t65hR01YJh4m7As6D1YziQ5wX/EBOzpkY3HY3KkmNrRMIyv6YEd8zGSY7ilZ8fFg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
- CY5PR12MB6108.namprd12.prod.outlook.com (2603:10b6:930:27::15) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.19; Mon, 9 Feb 2026 21:43:03 +0000
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33%4]) with mapi id 15.20.9587.017; Mon, 9 Feb 2026
- 21:43:02 +0000
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: linux-kernel@vger.kernel.org
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Huang Rui <ray.huang@amd.com>,
-	Matthew Auld <matthew.auld@intel.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Lucas De Marchi <lucas.demarchi@intel.com>,
-	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
-	Helge Deller <deller@gmx.de>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Gary Guo <gary@garyguo.net>,
-	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Trevor Gross <tmgross@umich.edu>,
-	John Hubbard <jhubbard@nvidia.com>,
-	Alistair Popple <apopple@nvidia.com>,
-	Timur Tabi <ttabi@nvidia.com>,
-	Edwin Peer <epeer@nvidia.com>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Andrea Righi <arighi@nvidia.com>,
-	Andy Ritger <aritger@nvidia.com>,
-	Zhi Wang <zhiw@nvidia.com>,
-	Balbir Singh <balbirs@nvidia.com>,
-	Philipp Stanner <phasta@kernel.org>,
-	Elle Rhumsaa <elle@weathered-steel.dev>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	joel@joelfernandes.org,
-	nouveau@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	rust-for-linux@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	amd-gfx@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-fbdev@vger.kernel.org,
-	Joel Fernandes <joelagnelf@nvidia.com>
-Subject: [PATCH -next v8 3/3] nova-core: mm: Select GPU_BUDDY for VRAM allocation
-Date: Mon,  9 Feb 2026 16:42:46 -0500
-Message-Id: <20260209214246.2783990-4-joelagnelf@nvidia.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260209214246.2783990-1-joelagnelf@nvidia.com>
-References: <20260209214246.2783990-1-joelagnelf@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BL1PR13CA0026.namprd13.prod.outlook.com
- (2603:10b6:208:256::31) To DS0PR12MB6486.namprd12.prod.outlook.com
- (2603:10b6:8:c5::21)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C73C5163
+	for <linux-doc@vger.kernel.org>; Mon,  9 Feb 2026 22:40:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770676847; cv=none; b=DzXu/hYBkZcN7a9bRa/mPnTNr0gUt9AcjgjPNoooczYECToc7doo0xX0NsDW8LllP1tw8KaedIWC2Cnl/77yjIF8iXWyWDKn0uJ4ioPwjPNVAW/cvmbXqr8IwgaUb9Ny1Fu643mNIXEchN+K6qTEVAQzHpRLUDWUKcIEUCbCTdo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770676847; c=relaxed/simple;
+	bh=2w2NkSfnUYCtKCT1TvD2j7eUbaB9dlOlqow5wyJZoKY=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=eIXPv3K4pxXQE1MVBKlA5CTLbMY5KlFDTysGPQlFvjzu04+x3DM1NhX1+lKnHaKcR8h7WpVZHX2EdGSUmZ8fOyB39lBj08QS2aw0XlASQqFyugEYuJ989xnjcCsXgiJfrUH+kQmGgmuxlu5kzWmnG4PfeMQCPy4CaAc1AIs+pps=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=HhXL+lHX; arc=none smtp.client-ip=209.85.167.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com
+Received: by mail-oi1-f201.google.com with SMTP id 5614622812f47-45e94165d64so841032b6e.1
+        for <linux-doc@vger.kernel.org>; Mon, 09 Feb 2026 14:40:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1770676844; x=1771281644; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=30Nas80AMvo6RyW+BR+2WwHJbWJfG1zda4JX9g84//U=;
+        b=HhXL+lHXdq2/jXdePqpenUlxL1QhrhU2eUgJlgQ2aztzvzgtrzsF+snXRALa4WyjCs
+         Jfy175SB0ER6ISIkj+UJh4Jsn2qk578bJphXpHTEanqTwfx3xZx8kaCkZGX7OCWSpc55
+         IAxUvrn3sOiiH33g4L1rLvoVfGKPYeaf45TRrAihX3HPIH4UwpifJQ05kROyFEXLmMN4
+         nBCIPnm7DWSoJ3kX1v0u03wO5VwM5Rwgp9m7OZqcXWR50n42iRCtdXLWig17PgkjoHTf
+         qJ+AA2Ezb6tzVTMCriGAdffxGVFgodmCAkup/s/+qESwB5LIiDt0DHIyYZcSdUP+oKca
+         INFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770676844; x=1771281644;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=30Nas80AMvo6RyW+BR+2WwHJbWJfG1zda4JX9g84//U=;
+        b=ZiqQrWBFHLizJa/of1lmovYbgJyQzJwkdBNyJP4gBZxhsiRkDZ3zwRyHP1+d9HmZ1j
+         UkOgeNhWmsUObtI8egZkH8XTXNfTGj6DreGb17JAtYdEvvqrukGNej3fhc+8+jQTdnFx
+         U25tOzMEESKMlbJ83N85qRm7+zRyNFE/bA2s46rJug0d5qJgzD3XaNKW1O/S3w6G1Y+P
+         Ii2GdkKhlOGLkwFlQNepOIHWmFHjP5ujgz6CZCgbXCU14X6jQjod4+Ekb2Dk4MZSZBfJ
+         2cA+BhpUHolO/Iys+tmP2YKq2B/PfFCEwcwoVqyW1mNxAmFSXBg8vPiTFjmbHSdQBnE8
+         HNXw==
+X-Forwarded-Encrypted: i=1; AJvYcCWpJu3SsM3ItHT0A1C5z3V3pg0Mr/GTwZrjruVG5tGrv+Z2t3IhBOfeys0wdPQseEYSnKeLo0Fm99A=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywuu/pt4BbcMgThBUGE1YJOEdm2LbgBdqfsen56iwwbDKdj6uMC
+	/CCw3VLMuJm5Lq93T5sl95v52eDmcqYcsKNzThOikmc+rTHoMtuUCiAiIr8lqHz51qJl2QnLNSl
+	/+slU+3mLMe0XIlNrTVGvx2FJAg==
+X-Received: from ileg3.prod.google.com ([2002:a05:6e02:1a23:b0:467:9e40:e391])
+ (user=coltonlewis job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:6820:220b:b0:664:86ce:df46 with SMTP id 006d021491bc7-66d0c472fd0mr6437177eaf.57.1770676843797;
+ Mon, 09 Feb 2026 14:40:43 -0800 (PST)
+Date: Mon,  9 Feb 2026 22:13:55 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|CY5PR12MB6108:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebc4fd9d-30e6-42b0-712c-08de682431f4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?g6VGRZYm2F6TdTONpvBz69avznSd+0cqvXo3ChPfkWsqa89W9ekSXZ4zezJj?=
- =?us-ascii?Q?bvtGiAqdfXhZ4XjCTWBVNlRKFmatuwcmB44cE4khe6NKgImP47l4ujJux1eq?=
- =?us-ascii?Q?6txNb5tHO85xg6nsFzkgblIJh6Zsaq/IIOuePM2tMieNKsQ/aXr6RUEIWjHm?=
- =?us-ascii?Q?w8/mgEU7iVKUVA4XMkRDTFKNvkAkaIFV/IMjNUK2rf1gaHyEwkxfnayk4hBW?=
- =?us-ascii?Q?veeYZJKvmibVWpKwDGtZopAt2faOOpkMHwRSLb6ZegQrgOYu7VsFVriXwVk7?=
- =?us-ascii?Q?VRJaSmKnLNQsYYcatKThKmWDIEqbCIdq0QX1AbaigUCV8/Kz63kVIvZht2Ak?=
- =?us-ascii?Q?Sk9DYp4TPCcyc+M5StC3nbn28scBJgfkHVjVnaF6YEglY9XS09pkXEADbBEC?=
- =?us-ascii?Q?Q/jDgEeVKjf6eCxfHo4L9lMGpx8rMJRjbwa47v5uu28dgqwcGLl98/JOTQK2?=
- =?us-ascii?Q?X7v7c5Ia2P37dB9iJgFh8tE2eTEMZxAJemuVm8KjltNLrljPBVUBSg68VZhk?=
- =?us-ascii?Q?8kkAq3NlkFoYlnkd+tudvKUtQ4nmqaOfGrXJqkfCQLBU9vK0jDWZEIwY0+6H?=
- =?us-ascii?Q?vldJgcB8RhYmMsJ82MOPix5MHzO5gTrkkXtzOSqaWZqS8+46MP1Zf/LAPjC5?=
- =?us-ascii?Q?jKsZ33HgPzbMRysv+LCkfbXavEZ0TYrLg4jS8wwVEqjwhXZ+OkgC283RKygj?=
- =?us-ascii?Q?xW9zHDgkvpejl2HklfZiVkzwlycfcdSW6AAfH/F+g99IuKRcMn22HgRw/3lK?=
- =?us-ascii?Q?tSKhryg/+sldDu/HePIOkCjfjmEMaCM+UXDJmiVRroPfgAzf8puTSgcpIS5j?=
- =?us-ascii?Q?UHnB1v0JkizjaqEHdEZb0D0k5yNYC0T3OnEZn6efTiim2XpekbfLTY34vSb3?=
- =?us-ascii?Q?7VARZ7uyW+d8zTIax1od/Pi2V+YdEge4tvIqH4zRlBf15V+8RNdaEzzCcEjM?=
- =?us-ascii?Q?zL7MXMpWBjn4n6qfuwLz5Nc9sXgXqKTgbWKoGGtI/TQ5VZJfIpfrvhxsZh8I?=
- =?us-ascii?Q?/jed/MQnITFiPouDtjs26b4eoyLzYkwTf+i+Uy39ThNaUfkhqf/MszpVutoN?=
- =?us-ascii?Q?/fYmh96JOEruCxDKBUArU4UP4RwN3Saz5x6HfzG7L/cujvC0Z0ga7eAH/iEM?=
- =?us-ascii?Q?0+3Yy0iq1Ph8rUOYyXlMtgt18J6i9lxOfNoHkrQxac5uv/K4nWwPcDaxOK1s?=
- =?us-ascii?Q?jqJrJvhqPblRnCZwe6ZXjGQoNxZt8zszFwlSQtPMa5mW8sDHKpJeL12gLa2C?=
- =?us-ascii?Q?K1oDG+Wsf22GXx2kQs5ybhPXhBvLBIpUTLVrloY+ijtnL295e0p+MJN8f9NZ?=
- =?us-ascii?Q?sFR/lfnf/jmh4QIQC1pe8oQDyE52N5AoCVdvylB6tO+H8Q9Vkcgl0EXv0Kzk?=
- =?us-ascii?Q?TWHxlcELJPOq9dzjjDCPBb04M/mJ/CObHf+iL+b0Rhh7vB+vshPZHLOE5isX?=
- =?us-ascii?Q?xayeC2caVoUuFz7iWsJDvIffv143rwx46hevKz9SMWT89kW/FxjlQLvJr0n6?=
- =?us-ascii?Q?Dm7UNv2oMkLpw0QI/GAQdhcwENBvfc/3Gzos1IwPuZyVYFJb4v40BL3rc8RY?=
- =?us-ascii?Q?JlJfRqVsRGffY+YBI+A=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?F6ORBMOvjhhWNkYlZX1eHT/aksEDClheDT+Eb+GEF+ZVtraav+hSY8AZamJe?=
- =?us-ascii?Q?q67fnJUr4MYBnuHPNXT89Uir7DIEcHl3J8CCvUW7ZNa1T2tngTfDqBxLGP5S?=
- =?us-ascii?Q?NUcoDd2CbUNFjWWaHc3EL06vWQOR80SjHjtV5gmYoQfZYrTBGnNvSuXZ6F28?=
- =?us-ascii?Q?qXo+SRn3a8JMHwZf2z9XxyjRp3Tw+xTR6Op2tgj6e0GIMoG3NmKwIYvFQhXB?=
- =?us-ascii?Q?McXaEchppg35BK8MJfqetm+3EKXwlDMFhkwmbvxNmHSf2hyoob1ilX8SSgyf?=
- =?us-ascii?Q?0+XVy1VWoN3fDNKHzVMN65LL9Ou30fgQTHScHBRIQ/NmCAJMXYuZpchzezeM?=
- =?us-ascii?Q?VAtajuQYbJOA6jUvMn6FploA2+4aLj+XjXbrmUzhfdjtVvGWwJ/rMd/ma0Sb?=
- =?us-ascii?Q?C9H1frjFeladAYtr8v8G9reFuvCuxDeqhiJoQ+bgh2BEGWDnL253zGLoPeAB?=
- =?us-ascii?Q?2ojd49Bb8NwwkjHrbJQ5IRp6od+ZdP43G9uBr5yMP8R0mVnsJxRXx6ktgMh/?=
- =?us-ascii?Q?T4oNJJEW5Di6Qrpjy4V6+3xZsc0XgNYauhaohJHcJo43zO0OzYgDjccCxe3c?=
- =?us-ascii?Q?EZZnPm7jDKBiUI+aBYpsmGzzSXOwA1NJcY+hf9/smnPeyaHOoU8LqJsW0DAW?=
- =?us-ascii?Q?3RP9BZSD4rlQ5Rz2xZ9vnYxBln5++XqSfkUqdHXUu3jP+opal8LVhVA1bI+S?=
- =?us-ascii?Q?MflQHw2QBDJByt3b8u9Lvwi8Gr7iSM9uiU+Wn5VEAJzP05+p67VkncLgAWkC?=
- =?us-ascii?Q?kblevHM+66Yn6idr3D2WXwdHAIBbIz8F+clop7AuC+/ZpNPJhP8s/k4GhXaf?=
- =?us-ascii?Q?XnCM3cLyTxxYZKdoOlJUcPZ/e4jJOgpWAXaGicdwoMo+bVMEGhV+TplRPtZP?=
- =?us-ascii?Q?d/j2DsFRVmlw3s+2g01lRWIXCX3ylOXmca8n6ZCEO++sw/8hyqmzItIvZNka?=
- =?us-ascii?Q?+aMv+4r+J+5Lz9SJN/sWPHnfYl2bODxDf6fIllLAxQYKcWY/p6sbjAqYN5OQ?=
- =?us-ascii?Q?dj8E1jp5hVFrmeW4ZnjgVFeqdrEKHjhAUYYSDnGbM9vSbi+Awd5jRX+tah0w?=
- =?us-ascii?Q?p/x64L3QAHT138ogJmwbXT3gjkVktxJpo+mvkk/WHBQuDmf3xka1/34Q9C3W?=
- =?us-ascii?Q?DLsAsehTSl7N3Rb0LC8Jq+pNY8rhCfHiR770vbNL8teolkPY+9BR/QQ9ylwU?=
- =?us-ascii?Q?6aazsiZR0lbfRSCG67084aHLmLh2jw8MUDIbWDFMMm/REhrTX6BN9TqogFcM?=
- =?us-ascii?Q?VwZDxA2JnlcXVdkPIOeTKEfGGjYOmypPntjJboUn+qOqHlCWQF3uJiVd4WIc?=
- =?us-ascii?Q?Aywm+vdnc6kfNnSaF5+7KvucjOw1F7Wf4wJITWzjdefp5UcPNihozxiW8mN/?=
- =?us-ascii?Q?BTEzfzlKTYGwJYC1zEFXxI1eROpzphjG5I1QqINrBXye4diqBP8nV+34VE9g?=
- =?us-ascii?Q?Yw8z9MnW4cxZIo+Qu6eRaGWcW3fSlnSbO5r8LWk8oNG9NkYKYsWakX0OM3j7?=
- =?us-ascii?Q?Fo7odqNl5Jlq9sHWysDhVMMhRDaWH1j61J09NxSvy/qo0gXYHvNeAYHc6UzH?=
- =?us-ascii?Q?/F31/uouDwvOXIK9tMnbpOunqI3kgbub0TMmvih9E6gRDdpeNR9FSzshStov?=
- =?us-ascii?Q?CT1AFt/edXaNRia3fObxBbKL0whW1QpgTCWjbzG9wDZMBhMFyASKxyBWJ34F?=
- =?us-ascii?Q?FqByC2koHY9NcEUrj1HHNF7NsWBM96UsCHSRkcONNCwziMsKtlreu19e6TQa?=
- =?us-ascii?Q?TUMsDADZ8w=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebc4fd9d-30e6-42b0-712c-08de682431f4
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2026 21:43:00.0864
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Af6qYgmQDMsI20uZRNUNJiI0A+SYjCpr6pt0ZWxyMb+1C7Kwi4bi5t9K3uB+dD4fDJpvFbnz3oaqwLI5UAR3nw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6108
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.53.0.rc2.204.g2597b5adb4-goog
+Message-ID: <20260209221414.2169465-1-coltonlewis@google.com>
+Subject: [PATCH v6 00/19] ARM64 PMU Partitioning
+From: Colton Lewis <coltonlewis@google.com>
+To: kvm@vger.kernel.org
+Cc: Alexandru Elisei <alexandru.elisei@arm.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Russell King <linux@armlinux.org.uk>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Marc Zyngier <maz@kernel.org>, 
+	Oliver Upton <oliver.upton@linux.dev>, Mingwei Zhang <mizhang@google.com>, 
+	Joey Gouly <joey.gouly@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
+	Zenghui Yu <yuzenghui@huawei.com>, Mark Rutland <mark.rutland@arm.com>, 
+	Shuah Khan <shuah@kernel.org>, Ganapatrao Kulkarni <gankulkarni@os.amperecomputing.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev, 
+	linux-perf-users@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	Colton Lewis <coltonlewis@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75702-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,google.com,garyguo.net,protonmail.com,umich.edu,nvidia.com,weathered-steel.dev,collabora.com,joelfernandes.org,lists.freedesktop.org,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	TAGGED_FROM(0.00)[bounces-75704-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[coltonlewis@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_GT_50(0.00)[51];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,nvidia.com:mid,nvidia.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7700F114E99
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 09773115166
 X-Rspamd-Action: no action
 
-nova-core will use the GPU buddy allocator for physical VRAM management.
-Enable it in Kconfig.
+This series creates a new PMU scheme on ARM, a partitioned PMU that
+allows reserving a subset of counters for more direct guest access,
+significantly reducing overhead. More details, including performance
+benchmarks, can be read in the v1 cover letter linked below.
 
-Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
----
- drivers/gpu/nova-core/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+An overview of what this series accomplishes was presented at KVM
+Forum 2025. Slides [1] and video [2] are linked below.
 
-diff --git a/drivers/gpu/nova-core/Kconfig b/drivers/gpu/nova-core/Kconfig
-index 527920f9c4d3..c129764daa23 100644
---- a/drivers/gpu/nova-core/Kconfig
-+++ b/drivers/gpu/nova-core/Kconfig
-@@ -3,6 +3,7 @@ config NOVA_CORE
- 	depends on 64BIT
- 	depends on PCI
- 	depends on RUST
-+	select GPU_BUDDY
- 	select RUST_FW_LOADER_ABSTRACTIONS
- 	select AUXILIARY_BUS
- 	default n
--- 
-2.34.1
+IMPORTANT: This iteration does not yet implement the dynamic counter
+reservation approach suggested by Will Deacon in January [3]. I am
+working on it, but wanted to send this version first to keep momentum
+going and ensure I've addressed all issues besides that.
 
+v6:
+* Rebase onto v6.19-rc7
+
+* Drop the reorganization patches I had previously included from Sean
+  and Anish and rework without them.
+
+* Inline FGT programming for easier readability
+
+* Change register access path to drop simultaneous writing of the
+  virtual and physical registers and write only where the canonical
+  state should reside. The PMU register fast path behaves like a
+  simple accessor now, relying on generic helpers when needed.
+
+* Related to the previous, drop several patches modifying sys_regs.c
+  and incorporate PMOVS and PMEVTYPER into the fast path instead.
+
+* Move the register fast path call to kvm_hyp_handle_sysreg_vhe since
+  this feature depends on VHE mode
+
+* Remove the heavyweight access checks from the fast path that had the
+  potential to inject an undefined exception. For what checks are
+  necessary, just return false and let the normal path handle
+  injecting exceptions
+
+* Remove the legacy support for writeable PMCR.N. VMMs must use the
+  vCPU attribute to change the number of counters.
+
+* Simplify kvm_pmu_hpmn by relying on kvm_vcpu_on_unsupported_cpu and
+  moving HPMN validation of nr_pmu_counters to the ioctl boundary when
+  it is set.
+
+* Disable preemption during context swap
+
+* Simplify iteration of counters to context swap by iterating a bitmask
+
+* Clear PMOVS flags during load to avoid the possibility of generating
+  a spurious interrupt when writing PMINTEN or PMCNTEN
+
+* Make kvm_pmu_apply_event_filter() hyp safe
+
+* Cleanly separate interrupt handling so the host driver clears the
+  overflow flags for the host counters only and KVM handles clearing
+  the guest counter flags.
+
+* Ensure the guest PMU state is on hardware before checking hardware
+  for the purposes of determining if an overflow should be injected
+  into the guest.
+
+* Naming and commit message improvements
+
+* Change uAPI to vCPU device attribute selected when other PMU
+  attributes are selected.
+
+* Remove some checks for exceptions when accessing invalid counter
+  indices with the Partitioned PMU. Hardware does not guarantee them
+  so the Partitioned PMU can't either.
+
+v5:
+https://lore.kernel.org/kvmarm/20251209205121.1871534-1-coltonlewis@google.com/
+
+v4:
+https://lore.kernel.org/kvmarm/20250714225917.1396543-1-coltonlewis@google.com/
+
+v3:
+https://lore.kernel.org/kvm/20250626200459.1153955-1-coltonlewis@google.com/
+
+v2:
+https://lore.kernel.org/kvm/20250620221326.1261128-1-coltonlewis@google.com/
+
+v1:
+https://lore.kernel.org/kvm/20250602192702.2125115-1-coltonlewis@google.com/
+
+[1] https://gitlab.com/qemu-project/kvm-forum/-/raw/main/_attachments/2025/Optimizing__itvHkhc.pdf
+[2] https://www.youtube.com/watch?v=YRzZ8jMIA6M&list=PLW3ep1uCIRfxwmllXTOA2txfDWN6vUOHp&index=9
+[3] https://lore.kernel.org/kvmarm/aWjlfl85vSd6sMwT@willie-the-truck/
+
+Colton Lewis (18):
+  arm64: cpufeature: Add cpucap for HPMN0
+  KVM: arm64: Reorganize PMU functions
+  perf: arm_pmuv3: Introduce method to partition the PMU
+  perf: arm_pmuv3: Generalize counter bitmasks
+  perf: arm_pmuv3: Keep out of guest counter partition
+  KVM: arm64: Set up FGT for Partitioned PMU
+  KVM: arm64: Define access helpers for PMUSERENR and PMSELR
+  KVM: arm64: Write fast path PMU register handlers
+  KVM: arm64: Setup MDCR_EL2 to handle a partitioned PMU
+  KVM: arm64: Context swap Partitioned PMU guest registers
+  KVM: arm64: Enforce PMU event filter at vcpu_load()
+  KVM: arm64: Implement lazy PMU context swaps
+  perf: arm_pmuv3: Handle IRQs for Partitioned PMU guest counters
+  KVM: arm64: Detect overflows for the Partitioned PMU
+  KVM: arm64: Add vCPU device attr to partition the PMU
+  KVM: selftests: Add find_bit to KVM library
+  KVM: arm64: selftests: Add test case for partitioned PMU
+  KVM: arm64: selftests: Relax testing for exceptions when partitioned
+
+Marc Zyngier (1):
+  KVM: arm64: Reorganize PMU includes
+
+ arch/arm/include/asm/arm_pmuv3.h              |  28 +
+ arch/arm64/include/asm/arm_pmuv3.h            |  12 +-
+ arch/arm64/include/asm/kvm_host.h             |  17 +-
+ arch/arm64/include/asm/kvm_types.h            |   6 +-
+ arch/arm64/include/uapi/asm/kvm.h             |   2 +
+ arch/arm64/kernel/cpufeature.c                |   8 +
+ arch/arm64/kvm/Makefile                       |   2 +-
+ arch/arm64/kvm/arm.c                          |   2 +
+ arch/arm64/kvm/config.c                       |  41 +-
+ arch/arm64/kvm/debug.c                        |  31 +-
+ arch/arm64/kvm/hyp/vhe/switch.c               | 240 ++++++
+ arch/arm64/kvm/pmu-direct.c                   | 439 +++++++++++
+ arch/arm64/kvm/pmu-emul.c                     | 674 +---------------
+ arch/arm64/kvm/pmu.c                          | 717 ++++++++++++++++++
+ arch/arm64/kvm/sys_regs.c                     |   9 +-
+ arch/arm64/tools/cpucaps                      |   1 +
+ arch/arm64/tools/sysreg                       |   6 +-
+ drivers/perf/arm_pmuv3.c                      | 149 +++-
+ include/kvm/arm_pmu.h                         | 126 +++
+ include/linux/perf/arm_pmu.h                  |   1 +
+ include/linux/perf/arm_pmuv3.h                |  14 +-
+ tools/testing/selftests/kvm/Makefile.kvm      |   1 +
+ .../selftests/kvm/arm64/vpmu_counter_access.c | 112 ++-
+ tools/testing/selftests/kvm/lib/find_bit.c    |   1 +
+ 24 files changed, 1889 insertions(+), 750 deletions(-)
+ create mode 100644 arch/arm64/kvm/pmu-direct.c
+ create mode 100644 tools/testing/selftests/kvm/lib/find_bit.c
+
+
+base-commit: 63804fed149a6750ffd28610c5c1c98cce6bd377
+--
+2.53.0.rc2.204.g2597b5adb4-goog
 
