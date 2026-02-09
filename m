@@ -1,86 +1,86 @@
-Return-Path: <linux-doc+bounces-75688-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75690-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QOALH0wmimlKHwAAu9opvQ
-	(envelope-from <linux-doc+bounces-75688-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 19:24:12 +0100
+	id iOu9GRwrimm6HwAAu9opvQ
+	(envelope-from <linux-doc+bounces-75690-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 19:44:44 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0AF6113807
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 19:24:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D12A0113C1D
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Feb 2026 19:44:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A8B303016259
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Feb 2026 18:24:10 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2384030157D2
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Feb 2026 18:44:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1CF962D7DED;
-	Mon,  9 Feb 2026 18:24:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B0EB3A63E8;
+	Mon,  9 Feb 2026 18:44:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="G5ERoHMp"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mBeHIdid"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4CBA134CF
-	for <linux-doc@vger.kernel.org>; Mon,  9 Feb 2026 18:24:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBC7F3803DA
+	for <linux-doc@vger.kernel.org>; Mon,  9 Feb 2026 18:44:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770661448; cv=none; b=A7Hes+372b5exe9+7RBLJ4Wy7X84af67C0OeZbXF2OKG5Dyvvj//veERyVySRgXcQHV/Rqi/dWU1vOrmtHZUCJBuBDytF2XwQRftoPXDWbtGHq9X0gNsP6iR9T+StRcLvNm3HV0vIXxfeg6LXmigovGMsJmgOGYsMofm9bxCsMI=
+	t=1770662669; cv=none; b=ealB7Z7Pe5IzI6PKVpMZj3+ye1WFfB+VYOhlv3QgYjbE7l11oro1ooOYvVN7XdEdRMycbe1owA922aikbcTNdaNB4cApV4NQ9gjk9x5JX0LFeqnp/RsjJwUFBLHLgLrjRn9Yb/FYPmwvDcbFYbXCXsrtjh9o+8ENdlCqPiw+EzY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770661448; c=relaxed/simple;
-	bh=RkU9/1rMMbH6TxGjFImvsq0ZkUWhbC00d9ASGYr4sTQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=SkesbVDKy8ts3D/qMiJRSSdC62zNTuvQmmEdqPhQI8r01q9idwJIAKMaj+idZ2OCCdff+Z0FkLKhsB0y6M4EeZ1DvoLlgw0X7PJsDqLQjQN9RXrjlJkeY0nB396e3zubqqKZB0e4d/3yrxUGtMG/R1IiMhunDbFYB2z6Z3HLP5g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G5ERoHMp; arc=none smtp.client-ip=74.125.82.181
+	s=arc-20240116; t=1770662669; c=relaxed/simple;
+	bh=PZCHU9wfPtTIAfO+nxz1qEKhqB+jgx9chftbDjizfKc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=dWQG/2+wjW0W65v3gc9P9Aa4VNhj6X3eelR2BCYwRIbNo3596AsQqJgEooQhazXhdetGwIV+0rMspIZZY9sZ72HcKClABcEQKU7HmMBBjIDyTQwACAH7Ijk7xbyOzcq4YTiL0Pe0j3DPB15el7jIxqmi/EPBfOskr3qR2NIHA0A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mBeHIdid; arc=none smtp.client-ip=74.125.82.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-2b4520f6b32so35908eec.0
-        for <linux-doc@vger.kernel.org>; Mon, 09 Feb 2026 10:24:07 -0800 (PST)
+Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-2ba6aa57d5fso1499536eec.1
+        for <linux-doc@vger.kernel.org>; Mon, 09 Feb 2026 10:44:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770661447; x=1771266247; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1770662669; x=1771267469; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Po1BxBdSPQE9fn38regWcK2c+4SzwJRmY0TRi9EwGjo=;
-        b=G5ERoHMpY4chIV0Ksx9k5NNyUQo6Uqh63rsT8I8CQ61SX0n/ohZkOq3VGyORXZ6+hx
-         j4KNE9J6Ya30TK7s4p70U09og0+Je0QfYJHLdjt6gIT6GU5ybgqDgzYw0fX5ndugA6WC
-         n9xvOehwmPX7BSyPkiIBgLBp3yqVWDC3UckECgeKROMo1bVcnvlz4vddQp691c7Wc3Tq
-         Jf6un3iUUg1n3Sp47zlTtZ6KaRuDg1bvaDo2uHF48P0uTJWiH9LHXSehlEcQY5T5tn1l
-         y8dAs3L3nI4X+nHbsus7ao5wbMo5o9go+L2qpb4UtkTU4AgZjVG8twoQ5sDKqSqO3bQe
-         ZYrA==
+        bh=AZGaJlxCG/WWhSK4VeNUCIWaT1h3tjdj6Ye4jdHuHRg=;
+        b=mBeHIdidK2Il6sL1q4pUUZpy98af3pscPntjdbGIObknCQ/H9l1s6Z0i0b+AClCAzC
+         HY3GeTtnecFHX6150/HW4QVUhDpzaVT7ds6SSlUYOhmCe8M5FL6OKDjuA57bYm8K3PR8
+         6tlS9khYvfzyVHblrXk82mUvuEse+aCy8/CPE3cuZL01AD+cYWLAEj6KTIBdec1/juNq
+         wG19ZILKE9LumGwPlDX8CI3ueJIjpqqOAp1jWqsCaoOORSH++aH7JudqWIiM+XNKt0sw
+         N64IqPjQWpUzloygjMu8L0F+0zahDXniQcM/4Pl4jx1fEktJ0IABZZzlyKrU+WdW7GlO
+         jjzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770661447; x=1771266247;
+        d=1e100.net; s=20230601; t=1770662669; x=1771267469;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Po1BxBdSPQE9fn38regWcK2c+4SzwJRmY0TRi9EwGjo=;
-        b=JgxqpPgcJxnOntxJ7tAzN8of5MHGT5EEEOBpTcPiydXYTSYQ54EogM3WRMJzAQXQLw
-         uw4gIGqBLN290xsyiUokv3eqkkJpd9ZbBa1rCyDoy6Y4/y8STqzq8lPXr0SK+M2+Lipc
-         wmuuQoTQJJmp3a0UN/Nl+cOZc3yXODIdWOdDWtFttxwmgOTam5RYRq7IBFmdKIEOQdI+
-         vzGUIAWAp74D0aMPBL2cx3lfllBQ39FosGcsWs1AyTyw2Y4Gs9u+7xYyfpFxrC2bXDyO
-         B985MRE0dbaOE+i4qM09YoGFuA8IH3WvoztkN/qnqcFwh8yTANZOsvaX2K/PkmYE2cVU
-         Xz4A==
-X-Gm-Message-State: AOJu0Yzd0ywL6RNCzJgumZBvqXdSTdmSEWWseoacFIeg66Xlq5exL5Xz
-	qCTVcvqur2r2FTWIk35naq1DDQUZQl5SxhQT06pyKhftpBS+MUNhUGMs
-X-Gm-Gg: AZuq6aJJ246DmJ+bBH3TtNIMJNuGL8zHtPyVvJMml290zdDKP1Za3VLZgtSVZ76VUyA
-	oRjEyJD6dxHjEfEphjgq0QoFM82rPLiaJIvaIP7G/6cpL2rABUwv5NrcA/sS25Mpp1nXEB9oAk5
-	8GOqv/djpP/D65BRNYtowJ7T5fuaz+oz7hnMQNUXbiA47iS1v2nLuGybyi8aVkQmqZVURuTSzBZ
-	NGI28ZK7hoAV4V1j19aiAp9WzX0qpZ/AIyhBlWE+fnwfOj1P9dHRbISHSHxTAGUY3TCpVV9+Gg3
-	h5wqjMviaGnRlAwQmjg0vmEgtqZRosfy0/op8ILsLXXQE6BoCtUEgX+e6xCldnWLME1/ch1iwYf
-	0Toi3gccEndDRin60TiXgDLh+DOQBsyfYCM+/j2rTDMk1jjxnus3lKh6IU9hwq5MZ65vow6L/6J
-	JLRv/bwhPfs7Frg1rNKM23SotxsI41q9ATL1rNwx00N0LRgQC+vWKPU4mRTPxlwdNEep9IpEGHX
-	u8hN2Q=
-X-Received: by 2002:a05:7301:5808:b0:2b0:4902:c55c with SMTP id 5a478bee46e88-2b856480f48mr5731759eec.18.1770661446266;
-        Mon, 09 Feb 2026 10:24:06 -0800 (PST)
+        bh=AZGaJlxCG/WWhSK4VeNUCIWaT1h3tjdj6Ye4jdHuHRg=;
+        b=EuAfm/h6A11Zm+IiwpJaW+ShRrJ7zqlPmvLp2k427VrkfSBCJXJdTSgm34r4V+pFMe
+         hz7sizg4zajAx3m3cavH5+Z5fVKl7Od0saC1kpN3pBHCp20JbO0SSaayz4atUlo7+ZEB
+         fQiVoKDIYGtTsiPU2VdArFCvJVsQfnBFYqzM0BoYoscGhP3MSQrSWtFjJXQENQKQsDUd
+         3CHlQL5tvQ6RzKmLPRi3xMpGh4V4KTh87Oj/7p21UEHnX08DhtrAxoRGlQiKT04I73EF
+         6bwEKp3xQ1BeOoZE4fAhCXHiqbXGwli+FxPfYcK5L4rJBjcNC1TBIuja8BvHu3Q32e5Y
+         mkNQ==
+X-Gm-Message-State: AOJu0YyfNs3dLdS5tIYGo/YwY4QcsmCPLHt4hgo/TPBDbFeRqAllW+th
+	q6blk/eCJXfEwhUKXxwB3YiadYiQxPPVceyXGjnJ9wOpica1hLvhUka0
+X-Gm-Gg: AZuq6aJOjBPKtFnsj7NiU1n3lJKyF81PovUlcZ8peFMsJQ08jWjT2Ih9MxUUjPFRF96
+	9ndXvtxUnepSKhlN5WfJScsoquzAum+KOEDKHm2c1LjenCXpsWolZ5jzshFwXSGhPmiDLMsz1VE
+	iVH+4vD2ESBVq6MOtzhDC94F0TH6yyBOKaNXcxsZ1pUOzUIAe3kBsXcaw7xDPUNlI5dHmHXKd5s
+	+ooD96VCx0oEK2T8QH3Sew+ETKl9vSWYY0NrO3V4+MsLf89SSt769ZmT3Qv4QWGMx5p7kPrhl3u
+	IIDYLcOBKOe2bIaB6DFf4rIz3xazY62hwgPLSiBha+HTtqRtbMZ0FIKeo2+XTh6VhZqnXEhrN+r
+	1SEfzloE6m5UBDakEPEnkHD973yVVfNyEu/0E3a2j36JxVvD4fGhNe+VBRWMSHHyQTKSMPU7yq5
+	4Q5Q/WsPiS6rCxa02atPy/8traMdaS5yyglZHUL2pDxjFJCDQ7x2COkm9qz7OAbrnJm2iVrvHBz
+	0BgxII=
+X-Received: by 2002:a05:7300:e80a:b0:2ab:ca55:89ab with SMTP id 5a478bee46e88-2b856b55787mr5513850eec.42.1770662668166;
+        Mon, 09 Feb 2026 10:44:28 -0800 (PST)
 Received: from localhost.localdomain (smtp.hostdime.com.br. [187.45.177.18])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b855c3daf7sm8162180eec.20.2026.02.09.10.24.04
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2ba70f5ed18sm2602223eec.16.2026.02.09.10.44.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Feb 2026 10:24:05 -0800 (PST)
+        Mon, 09 Feb 2026 10:44:27 -0800 (PST)
 From: Daniel Pereira <danielmaraboo@gmail.com>
 To: corbet@lwn.net
 Cc: linux-doc@vger.kernel.org,
 	Daniel Pereira <danielmaraboo@gmail.com>
-Subject: [PATCH v2] docs: pt_BR: translate process/changes.rst
-Date: Mon,  9 Feb 2026 15:22:53 -0300
-Message-ID: <20260209182255.14330-1-danielmaraboo@gmail.com>
+Subject: [PATCH v3] docs: pt_BR: translate process/changes.rst
+Date: Mon,  9 Feb 2026 15:43:42 -0300
+Message-ID: <20260209184343.15191-1-danielmaraboo@gmail.com>
 X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -101,7 +101,7 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75688-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75690-lists,linux-doc=lfdr.de];
 	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -118,7 +118,7 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E0AF6113807
+X-Rspamd-Queue-Id: D12A0113C1D
 X-Rspamd-Action: no action
 
 Translate the Documentation/process/changes.rst file into Portuguese.
@@ -130,6 +130,14 @@ Signed-off-by: Daniel Pereira <danielmaraboo@gmail.com>
 Note: This patch depends on the previous work:
 "[PATCH v5] docs: pt_BR: Add initial Portuguese translation"
 if the pt_BR translation directory is not yet present in the tree.
+
+v3:
+ - Removed the ".. _changes:" label to avoid global namespace collisions.
+ - Updated reference in howto.rst to use :doc: syntax.
+
+v2:
+ - Removed modifications to Documentation/translations/index.rst as requested by Jonathan Corbet.
+ - Reverted global index links to use standard :ref: syntax.
 
  Documentation/translations/pt_BR/index.rst    |   1 +
  .../translations/pt_BR/process/changes.rst    | 540 ++++++++++++++++++
@@ -148,13 +156,13 @@ index 44fafb3c7..55f9f377e 100644
 +   Requisitos mínimos <process/changes>
 diff --git a/Documentation/translations/pt_BR/process/changes.rst b/Documentation/translations/pt_BR/process/changes.rst
 new file mode 100644
-index 000000000..11c430be9
+index 000000000..a212ac29d
 --- /dev/null
 +++ b/Documentation/translations/pt_BR/process/changes.rst
 @@ -0,0 +1,540 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+.. _changes:
++
 +
 +Requisitos mínimos para compilar o Kernel
 +++++++++++++++++++++++++++++++++++++++++++
@@ -693,7 +701,7 @@ index 000000000..11c430be9
 +
 +- <https://www.sphinx-doc.org/>
 diff --git a/Documentation/translations/pt_BR/process/howto.rst b/Documentation/translations/pt_BR/process/howto.rst
-index 8ed780aa1..849b302bb 100644
+index 8ed780aa1..e8ccee6b9 100644
 --- a/Documentation/translations/pt_BR/process/howto.rst
 +++ b/Documentation/translations/pt_BR/process/howto.rst
 @@ -99,7 +99,7 @@ que são de leitura obrigatória:
@@ -701,7 +709,7 @@ index 8ed780aa1..849b302bb 100644
      que são novas no kernel devem começar por aqui.
  
 -  :ref:`Documentation/process/changes.rst <changes>`
-+  :ref:`Documentation/translations/pt_BR/changes.rst <changes>`
++  :doc:`changes`
      Este arquivo fornece uma lista das versões mínimas de vários pacotes de
      software que são necessários para compilar e executar o kernel com
      sucesso.
