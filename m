@@ -1,273 +1,169 @@
-Return-Path: <linux-doc+bounces-75766-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75759-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MEAQJScLi2kdPQAAu9opvQ
-	(envelope-from <linux-doc+bounces-75766-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Feb 2026 11:40:39 +0100
+	id aOodNc73imkzPAAAu9opvQ
+	(envelope-from <linux-doc+bounces-75759-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Feb 2026 10:18:06 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B92F119B8A
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Feb 2026 11:40:38 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B0F2118C89
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Feb 2026 10:18:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DAA223014C68
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Feb 2026 10:40:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 0D0BC30164BA
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Feb 2026 09:18:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E27DF3168F2;
-	Tue, 10 Feb 2026 10:40:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 180FC34027E;
+	Tue, 10 Feb 2026 09:18:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NOf7vsan"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="O+ONlH3G"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
+Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 802693164B0
-	for <linux-doc@vger.kernel.org>; Tue, 10 Feb 2026 10:40:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.49
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770720036; cv=none; b=HD6rKkHwsRkOJwQ5c1iZ+09btcycaJFWrib/01a8z97yzK1bGIZSMTGXKAz8iOoaB8JsJj9dC08ORFQo/FbPY2LRSQsnS9Yi6dYPGHplXYMAyjPFPv1qBa27kiwyMR4hEmZ08X5WgWx8rNqNXNNeKxvfqrXO+bU7L5wmFI/qRR4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770720036; c=relaxed/simple;
-	bh=TeX6FpDhYE6FSzmi7IBpjgfnly62UeaRLnW4YBkuyHg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ttQ1YHMsIh/SPj1fPUxfzcaAza2OTSg+YwPMqUCqmD3WFOqqKv7Wx/LHKHyW2Jf7ka/0W6iLNeiyMSIc3oJyJrYPsInG0yaIz7mKUt1JBPpiKGrri3f6igDlQDU767EH5UGiySE+uNzYgBYc3Sc+55bcLIXw9UTSbXE9z9LQhuo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NOf7vsan; arc=none smtp.client-ip=209.85.161.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 057B9340260
+	for <linux-doc@vger.kernel.org>; Tue, 10 Feb 2026 09:18:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770715083; cv=pass; b=aXvZn9dcgBkAGZwTVGgBBmuaFpPWQfCEkVCjsiZWvDzh+pU/BJ2uRc85sFipiHtTRaHIB2wdyhDcLDAgxJxb1nmmFNV6gElpdC4t9wQ9RvDEWXSvcNkwv323a4//qh2kGZ1bfsax8YZZLc1BnLsr+6pR7yrhAoIDQ5DCUt4TGyA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770715083; c=relaxed/simple;
+	bh=Bjmbq5mCbC4T5DcDtYejLhUrsUYcDi/tzNdDS8UWm6I=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=cJBOv3upYYX6v2b7vrPo6bYrXvEp58skEWNy0a59CtTS3dBapVvMM7sei2H16fsqbfe6uNOdMOFcwtKw9nMzsf46mnAvgvkwbuFAo0FX+THumCoeNZnTFjCnUd3OX6zIlnFpRf5FrDe1l5vX6f/ic/0aaXqcofomhfsDc+F9Cvo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=O+ONlH3G; arc=pass smtp.client-ip=74.125.82.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-66a2278a37dso2037066eaf.0
-        for <linux-doc@vger.kernel.org>; Tue, 10 Feb 2026 02:40:35 -0800 (PST)
+Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-124a2dc92dbso328352c88.2
+        for <linux-doc@vger.kernel.org>; Tue, 10 Feb 2026 01:18:01 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770715081; cv=none;
+        d=google.com; s=arc-20240605;
+        b=JC8csbxHt0Hi4LeWVwj1vTarnzKLYo6sQJ1MWlTVZsWuIQsSVZpmsUJlBIvhhAwewg
+         AbokFuSO9KGTnpjgHRXG4zTDwp5eqzzrDz63Nb2b+iVlgdEHSOwT4v9mmS61YeLoUPw+
+         qnVdz62p45Vu6qOjv1iC/YvxVZDAFu233qKNQMpMTr3LtDJkJPoaZLR/vRXIn8zLESPg
+         kLQ78PEIac1B0NcRjMuYl6kWBVF6WxXGTsTmyX+glrZQwP/NWnctfXxj44ZxluTtsu30
+         UEyQQbw3M6t6r4BO1bvCkECZPbOH1CS7o1aeBv3TBhgPavfAHfy25PbrDw8sFW9WtoyT
+         epGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Bjmbq5mCbC4T5DcDtYejLhUrsUYcDi/tzNdDS8UWm6I=;
+        fh=AQDjx+2xaXKEr62P7aZWDrsDgLQ52Yj4WX3rYO/vgHM=;
+        b=QPTCAJ63PGfLqyHAoh3A/zOzAnIfi88sJLZljnRTDUIQW4W5f6Fn8Slo0s8k2gbIrb
+         7VRba4UXTve0R2lOORe5gpwsfusnWiEOJN6wDpwY8n1+/mc89dABWcUKLZVeQjXSwAGG
+         OujOZmnsOggJZhYtinDK4v/VbCgRM1u5JLwp99dbOkWt8O2kMqVMBEoH28uDwSEeG64k
+         xB5KOMUr40YB8d0MMtEmhIHj1mm0F5+092LRFO2fZwNCJERCG5SlVXaAohkxmRSwaVuI
+         ndPWg6LdcvRdY3/e2tkN6wSUBihw1oMxMQ0tWvnhbvLlKfq2i6SeArNMuym+ETmP6huV
+         ptwQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770720034; x=1771324834; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1770715081; x=1771319881; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fIJz3kYN33qG3Fl2V6Bqi8+KcSudbe9ldFTSf7iXp3g=;
-        b=NOf7vsanOJllfT8OOZ59csWq54yqRx9eCzvq/xVfK0Uea8o2UHbmwBbMBZ+skLn8fq
-         t9ZHCbZaMI+NWvu6okVRbNIKvFGJc4JNEsMLCgy6+yjLqMdqkRHgLBTBPWDJRWm8F7eb
-         yRTvqhT1aFoAJ+tPW9WxLvrPk+DnR10VMSR/tHqoA0uwGZzIZH+C7/RWhrTo2NubrlnQ
-         3KHzASZu5vjpem7onKFXKGn3Hd0aCWgDZY5U6rKJRxwORuhh87cefbMEXLwTc6B0Uwa4
-         00LroIlzvGtotC/kh3SQeTNjzH1MqRjQiFfVpJFeXIg8ZYdd13MWAluq8m+U69nQkl0o
-         pIZA==
+        bh=Bjmbq5mCbC4T5DcDtYejLhUrsUYcDi/tzNdDS8UWm6I=;
+        b=O+ONlH3G/qSP6XaOijperd/UrIM/5cMwRB1H/z69Lri5ONMVUrFWpKlddvXhdH17kt
+         VfB0CogmNKbxLA8EzMfOP8SHe9sN02brFnr7LRbIir8vc5/euKeDBjC5NqVedXsLBmcE
+         uEa08dt97OYQXab/P74DBYQg1FifJR+zTaYuEK+lIAu7G056N+v6D49EXWQwf/x4yfuK
+         kxjLldtD54Bnq6A6Kn0UjdyJ3e90D+KotoaaFl6DcvRGiJBFBqPR6VpenM1AgGfKcuYi
+         YMfiy6QOVSDj7+R0HRo1cCp3Vt6qZa+DO5sZtcXozB05IgNuiLZIMMjen/auligG+fpJ
+         kp8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770720034; x=1771324834;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20230601; t=1770715081; x=1771319881;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=fIJz3kYN33qG3Fl2V6Bqi8+KcSudbe9ldFTSf7iXp3g=;
-        b=KXBhgshOesGmr+NfJkEakh4rG+A1t/y1wjsHxPBuEyyfPl8TiygpfgzKl+syn8wPj7
-         PvlSSkw/2p9R/R4Rhg2ZP69e8KfgnAWduLS27LnP152+48bSXhKBERVEPBkC+gK2Gcpz
-         c8faOI5nKPur/f0P0GUVzykPeicCbVHfjc7R7BKrGZlSjnrh1ilH+PTGZUPgUUQGcbW1
-         utrcV34v/Rl6gMjFV6NCclO7XrqycVojAsh1s6AfYnEwbUGGOBG+M8s/0ZnzBSsMH1Oa
-         JkwUmepLrsokepsWmW8j33IsMQAJcfTlfCXyLV8KWRcRsVaXAHxAZHiYahNQSDUrmQj7
-         evPg==
-X-Forwarded-Encrypted: i=1; AJvYcCXxEeQdciFzKQkH+5hcEgJE9erzi7uUwAcP56GFUM76bECGb81soc/IWTwC3R1D5O4bIbbqAgr91Ec=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwJX6ZsKyVOQHMDZ/2q2i0OCC5cz2AGJecJmVBKmnOTk3K9sVHT
-	BWfz6nckP/YQZTLimAH492cvDvZRURk2MJnVtLuDvE3bOj9N4M6s3SdmCgfiRg==
-X-Gm-Gg: AZuq6aKc9ZKOXV6Jiiwp45qVpVJhntyy0BdXU24Or0OoHz6DGR4KxpT0zukJ7TrEjyq
-	a8DxYEr1/S6DzTYgBgx75lNzg/jNhOpVZO1Es57XoimdrF3Xpofj+mIoqpvQrXtw73PAdnUQvKj
-	7kmH17h8iEzgtzPIQl8e6J/Jrj5sONudwXVVJjMOzWfUVswMxyb7M4zIC3EG07KDrP7Wnle4viC
-	s3NtszYE9KRh0o3b6OIWCO9bt0a8t3K0l1FtR/MbrHxuupkTS7kYN0VsVbwp54AxyQhKTQJeIA5
-	anS6S3cs5Wejjh3IMq9QI9MIaxrIXmwFxHOJ+6ISWYLW8GObjcmASK/1+b6esyW73wZucFxV6/H
-	VosqM5M8JFjpX8zNxARVH25la7VCJQgqjhtgLIp4mf4WAJfYdUf9A5jxBNACs5dNRCpmZ8FWsZF
-	UZ+g2zZywji/XQ7iXunBg8cb+vzV48ZVWB+Byb/eV/wgWqJG8DKIl0aY2pSou4v+fSgZ46pD8=
-X-Received: by 2002:a17:903:b4e:b0:2a0:fe9f:1884 with SMTP id d9443c01a7336-2a95194aaeamr120907585ad.55.1770714055465;
-        Tue, 10 Feb 2026 01:00:55 -0800 (PST)
-Received: from li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.in.ibm.com ([129.41.58.2])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a951c7a342sm129536605ad.26.2026.02.10.01.00.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Feb 2026 01:00:55 -0800 (PST)
-From: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>
-To: linkmauve@linkmauve.fr,
-	ojeda@kernel.org,
-	boqun.feng@gmail.com,
-	gary@garyguo.net,
-	bjorn3_gh@protonmail.com,
-	lossin@kernel.org,
-	a.hindborg@kernel.org,
-	aliceryhl@google.com,
-	tmgross@umich.edu,
-	dakr@kernel.org,
-	corbet@lwn.net,
-	maddy@linux.ibm.com,
-	mpe@ellerman.id.au,
-	npiggin@gmail.com,
-	chleroy@kernel.org,
-	peterz@infradead.org,
-	jpoimboe@kernel.org,
-	jbaron@akamai.com,
-	rostedt@goodmis.org,
-	ardb@kernel.org,
-	rust-for-linux@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org
-Cc: "Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>,
-	Venkat Rao Bagalkote <venkat88@linux.ibm.com>
-Subject: [PATCH V6 3/3] powerpc: Enable Rust for ppc64le
-Date: Tue, 10 Feb 2026 14:30:22 +0530
-Message-ID: <20260210090023.2587534-4-mkchauras@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260210090023.2587534-1-mkchauras@gmail.com>
-References: <20260210090023.2587534-1-mkchauras@gmail.com>
+        bh=Bjmbq5mCbC4T5DcDtYejLhUrsUYcDi/tzNdDS8UWm6I=;
+        b=agdqVtJtZOUKNVnce+3VvzjOnMRPqvnRhYR5Zoflhzv83exkeYNNMLbk1yuPaX1b0c
+         qHh6BHdfojuh1/QkAB95pRF2xdTBTF4CilD1rnkS/pdqGOZe17I8tmlihMIYsbD2Crh3
+         3hcoEPQo/XgY8oGfqgEqHiKKAwb+kzr1c76jMYCtB98tK2dwMgdOaknr1iEt23OCVjMy
+         J94gwTOq8rArbx2m7emydhnJijibSsrS8wFqBk0WXzNHRQZMIJiPXUVCWxuteHry7bbD
+         uTVv3aNWCyNrhDklvFf3HUuMZ0ni0k0fFUejqVByync/tM0xQAlSzXCzSGTGffRy5V5Y
+         TPcQ==
+X-Forwarded-Encrypted: i=1; AJvYcCW9bw0xl+xXXhJKCX3lyreBBs0NlUh0C3X733thuSSp9u5r7bfk5GjPKcj1fVXEszWgk1HMgQ0uUjA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxJYHCQ55VvYpzIyQBdP3GZaaGw/xVq5Cb5jycCCvAW6Khk3Yk+
+	DXmeqaFHcmjN/I63rj/4vNp3a5lEK8NQ4mATSHpeu3zDfTIP4NgyNdQyA7gKH4F2UXaLFpHp9O9
+	ffCdf+F2rXO5VkzNMYuKfa9pCQty0M0E=
+X-Gm-Gg: AZuq6aJ57irYJHbK0hxMKX8RdCwsQMVAhJXUrBuC9Jp37OZorW47rBGCkvMhoyJoOXc
+	ot6YBEsmv+p4VzGZdJ6tmwhcQeRjTdGqiDDMsgJk/CYYO9UlGm1jFYcv2XD0tjjKClEWraeEEL7
+	LYaLXOfLIlU9usjDCfB8Ea1mKwKzGOI4vDj1+7I2MY4iGP8HTr7aFv2jE6+kGjG5spKKOa9OVqo
+	A/CmHVz+fifnI449qvauZDnFndzf90mv/R6MDuGa3tzKs/sjekX2S6s31tTfe+5tqouzUtz1apZ
+	XphzZTmhEENibj/EfsF367oamTnaKtoMY1H2Es3as+XY46Dj8S3Ru3xRMSDpf8kgUm1B911MfEe
+	oINgo13EgYmVVdIs7/zz1FmAb
+X-Received: by 2002:a05:7022:a92:b0:11e:3e9:3e98 with SMTP id
+ a92af1059eb24-1272494f67dmr219752c88.7.1770715080987; Tue, 10 Feb 2026
+ 01:18:00 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260209105456.1551677-1-mkchauras@gmail.com> <20260209105456.1551677-3-mkchauras@gmail.com>
+ <CANiq72nqH=H4a_Yo17KPmku5pPRMVRBADgj8j+=TcR=3r0vOdQ@mail.gmail.com>
+ <b07f1bc6-c63e-4b97-95d6-c639186a89dd@kernel.org> <CANiq72nkVmE_91yz82e1cRuJK8F9SPP5GpD1mT=NYLBbRTL8OQ@mail.gmail.com>
+ <aYrBU52OBCgR-chY@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
+In-Reply-To: <aYrBU52OBCgR-chY@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Tue, 10 Feb 2026 10:17:48 +0100
+X-Gm-Features: AZwV_QjkDsbIYoiftCtGkfNW-taiiY4Gt3cD7LsM0k76oSccc34AX2xXNP97awU
+Message-ID: <CANiq72now=ymUnmqV6ckaynKgSW7xB_3QpWpFmiG8Hvm_yV--Q@mail.gmail.com>
+Subject: Re: [PATCH V4 2/3] rust: Add PowerPC support
+To: Mukesh Kumar Chaurasiya <mkchauras@gmail.com>
+Cc: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, linkmauve@linkmauve.fr, ojeda@kernel.org, 
+	boqun.feng@gmail.com, gary@garyguo.net, bjorn3_gh@protonmail.com, 
+	lossin@kernel.org, a.hindborg@kernel.org, aliceryhl@google.com, 
+	tmgross@umich.edu, dakr@kernel.org, corbet@lwn.net, maddy@linux.ibm.com, 
+	mpe@ellerman.id.au, npiggin@gmail.com, peterz@infradead.org, 
+	jpoimboe@kernel.org, jbaron@akamai.com, rostedt@goodmis.org, ardb@kernel.org, 
+	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75766-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[linkmauve.fr,kernel.org,gmail.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FREEMAIL_CC(0.00)[gmail.com,linux.ibm.com];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mkchauras@gmail.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75759-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[kernel.org,linkmauve.fr,gmail.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 0B92F119B8A
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 3B0F2118C89
 X-Rspamd-Action: no action
 
-Enabling rust support for ppc64le only.
+On Tue, Feb 10, 2026 at 6:27=E2=80=AFAM Mukesh Kumar Chaurasiya
+<mkchauras@gmail.com> wrote:
+>
+> Sure, i'll try to join the call and bring this up.
 
-Tested on powernv9:
+Thanks! Added you to the call.
 
-$ uname -rm
-6.19.0-rc8+ ppc64le
+Any of the weeks we do it should be fine, but if the time zone is bad,
+please let me know.
 
-$ sudo modprobe rust_minimal
-[  632.890850] rust_minimal: Rust minimal sample (init)
-[  632.890881] rust_minimal: Am I built-in? false
-[  632.890898] rust_minimal: test_parameter: 1
-
-$ sudo rmmod rust_minimal
-[  648.272832] rust_minimal: My numbers are [72, 108, 200]
-[  648.272873] rust_minimal: Rust minimal sample (exit)
-
-$ sudo modprobe rust_print
-[  843.410391] rust_print: Rust printing macros sample (init)
-[  843.410424] rust_print: Emergency message (level 0) without args
-[  843.410451] rust_print: Alert message (level 1) without args
-[  843.410477] rust_print: Critical message (level 2) without args
-[  843.410503] rust_print: Error message (level 3) without args
-[  843.410530] rust_print: Warning message (level 4) without args
-[  843.410557] rust_print: Notice message (level 5) without args
-[  843.410594] rust_print: Info message (level 6) without args
-[  843.410617] rust_print: A line that is continued without args
-[  843.410646] rust_print: Emergency message (level 0) with args
-[  843.410675] rust_print: Alert message (level 1) with args
-[  843.410691] rust_print: Critical message (level 2) with args
-[  843.410727] rust_print: Error message (level 3) with args
-[  843.410761] rust_print: Warning message (level 4) with args
-[  843.410796] rust_print: Notice message (level 5) with args
-[  843.410821] rust_print: Info message (level 6) with args
-[  843.410854] rust_print: A line that is continued with args
-[  843.410892] rust_print: 1
-[  843.410895] rust_print: "hello, world"
-[  843.410924] rust_print: [samples/rust/rust_print_main.rs:35:5] c = "hello, world"
-[  843.410977] rust_print: Arc<dyn Display> says 42
-[  843.410979] rust_print: Arc<dyn Display> says hello, world
-
-$ sudo rmmod rust_print
-[  843.411003] rust_print: "hello, world"
-[  888.499935] rust_print: Rust printing macros sample (exit)
-
-Reviewed-by: Link Mauve <linkmauve@linkmauve.fr>
-Tested-by: Link Mauve <linkmauve@linkmauve.fr>
-Reviewed-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
-Tested-by: Venkat Rao Bagalkote <venkat88@linux.ibm.com>
-Signed-off-by: Mukesh Kumar Chaurasiya (IBM) <mkchauras@gmail.com>
----
- Documentation/rust/arch-support.rst | 2 +-
- arch/powerpc/Kconfig                | 1 +
- arch/powerpc/Makefile               | 7 ++++++-
- rust/Makefile                       | 6 ++++++
- 4 files changed, 14 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/rust/arch-support.rst b/Documentation/rust/arch-support.rst
-index 70b9e192a7a0..70bcd726ad0e 100644
---- a/Documentation/rust/arch-support.rst
-+++ b/Documentation/rust/arch-support.rst
-@@ -18,7 +18,7 @@ Architecture   Level of support  Constraints
- ``arm``        Maintained        ARMv7 Little Endian only.
- ``arm64``      Maintained        Little Endian only.
- ``loongarch``  Maintained        \-
--``powerpc``    Maintained        32-bit Big Endian only.
-+``powerpc``    Maintained        64-bit Little Endian. 32-bit Big Endian.
- ``riscv``      Maintained        ``riscv64`` and LLVM/Clang only.
- ``um``         Maintained        \-
- ``x86``        Maintained        ``x86_64`` only.
-diff --git a/arch/powerpc/Kconfig b/arch/powerpc/Kconfig
-index 17db23b82e91..954af27e10c5 100644
---- a/arch/powerpc/Kconfig
-+++ b/arch/powerpc/Kconfig
-@@ -284,6 +284,7 @@ config PPC
- 	select HAVE_RELIABLE_STACKTRACE
- 	select HAVE_RSEQ
- 	select HAVE_RUST			if PPC32
-+	select HAVE_RUST			if PPC64 && CPU_LITTLE_ENDIAN
- 	select HAVE_SAMPLE_FTRACE_DIRECT	if HAVE_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
- 	select HAVE_SAMPLE_FTRACE_DIRECT_MULTI	if HAVE_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
- 	select HAVE_SETUP_PER_CPU_AREA		if PPC64
-diff --git a/arch/powerpc/Makefile b/arch/powerpc/Makefile
-index 9fd82c75dcbd..9385db478c59 100644
---- a/arch/powerpc/Makefile
-+++ b/arch/powerpc/Makefile
-@@ -61,7 +61,12 @@ else
- KBUILD_LDFLAGS_MODULE += $(objtree)/arch/powerpc/lib/crtsavres.o
- endif
- 
--KBUILD_RUSTFLAGS += --target=powerpc-unknown-linux-gnu
-+ifdef CONFIG_PPC64
-+KBUILD_RUSTFLAGS	+= --target=powerpc64le-unknown-linux-gnu
-+KBUILD_RUSTFLAGS	+= -Ctarget-feature=-mma,-vsx,-hard-float,-altivec
-+else
-+KBUILD_RUSTFLAGS	+= --target=powerpc-unknown-linux-gnu
-+endif
- 
- ifdef CONFIG_CPU_LITTLE_ENDIAN
- KBUILD_CPPFLAGS	+= -mlittle-endian
-diff --git a/rust/Makefile b/rust/Makefile
-index ae22f2c5f0b3..0aef472c6cf5 100644
---- a/rust/Makefile
-+++ b/rust/Makefile
-@@ -392,7 +392,13 @@ BINDGEN_TARGET_x86	:= x86_64-linux-gnu
- BINDGEN_TARGET_arm64	:= aarch64-linux-gnu
- BINDGEN_TARGET_arm	:= arm-linux-gnueabi
- BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
-+
-+ifdef CONFIG_PPC64
-+BINDGEN_TARGET_powerpc	:= powerpc64le-linux-gnu
-+else
- BINDGEN_TARGET_powerpc	:= powerpc-linux-gnu
-+endif
-+
- BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
- BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
- 
--- 
-2.53.0
-
+Cheers,
+Miguel
 
