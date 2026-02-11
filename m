@@ -1,207 +1,219 @@
-Return-Path: <linux-doc+bounces-75849-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75850-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AOOfNvqijGlhrwAAu9opvQ
-	(envelope-from <linux-doc+bounces-75849-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:40:42 +0100
+	id QCrbMuCkjGlhrwAAu9opvQ
+	(envelope-from <linux-doc+bounces-75850-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:48:48 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9D55125C31
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:40:41 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4272D125D7D
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:48:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6184B3009F34
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 15:40:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 147C33008502
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 15:48:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E721F30C61F;
-	Wed, 11 Feb 2026 15:40:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 284F7315D5B;
+	Wed, 11 Feb 2026 15:48:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Osf1+son"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CZ8zF+dp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2C9B30C60D;
-	Wed, 11 Feb 2026 15:40:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 968AC2DB7BF
+	for <linux-doc@vger.kernel.org>; Wed, 11 Feb 2026 15:48:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770824435; cv=none; b=VGoSN+eCeQDiX60yZDZBBuUUBa4HBIONCgeJTdo8+SJ4hUpRgc2JKE4CCm/kvuOBEKKZyRcKlelIiilpjisIvwdj3YtjNyEjs5miXPIT+swFvtOabftwzlAViiEN+cSuWDbl0otXWIRkB+M0A0i2u7tzU6XJr9lmmSOiP2f8Ccw=
+	t=1770824926; cv=none; b=gL6V08y2La+CNxk+dPhxhEiiqqDCMhU7EqYg4nx0GPBYbjFcj6gQPTtQAGw48YXSg2qSbwPqYhp+oshgPh//iaU+vdkaYspW8IdklesrVF/10WXFwGqBXiG2TG7HGWEW/Oa9tEALju0HydzxXfZDxaKdcaH+R2iwfWEAyx5jSGk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770824435; c=relaxed/simple;
-	bh=4XK13jjYLred8II2iFJoWFOdf1Y9k6sr2e/uAGf5JAY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=vGdylnsmVFuMrwpBJu6KLac3gm7rhsm+MpvIzDXB0ofWsjslHrmH9LjhXv7+4CBTblLe9Vb/t6fTHU0eZzspvb/QqSROUMMKdarw9h+aunpyStrox9I50uaRMUfcfNufnIQZ0MeCLlczVbrJzeKl2bkydnjjYhHIlX/F2j24sNk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Osf1+son; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E6D8C4CEF7;
-	Wed, 11 Feb 2026 15:40:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770824435;
-	bh=4XK13jjYLred8II2iFJoWFOdf1Y9k6sr2e/uAGf5JAY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Osf1+sonyielfcfujsc2iqg2UF+lVBoIHnyPSvXNLhEj+wiJlUY7u3mDE0d93zCzE
-	 zBpVIqAZfadRZsH27h80LwM9BD0DSwj5cnui9xvD9fUafzn7f0owQ9Uq1ji2Owlwpo
-	 Z4s8PcmJBy8StkHpDAil94og0/4FRu5S+tbUBlzhwRuWJxa79omP4GgLLrh+kRBlYH
-	 0oU2c8wRD5ooc9cUjEyj4ly0fTzufA5SbP4ZpE4vLJxNYiGci+frhgviGdMTK5BCa8
-	 Huv/5f4XXc6H66h5N4v3lOaLSO49WYhSRPqQD61EimKM8C6aQodJSCEI2ajsqeGca8
-	 M7AnWKSbXHOIg==
-Date: Wed, 11 Feb 2026 21:10:26 +0530
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Shawn Lin <shawn.lin@rock-chips.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, 
-	linux-rockchip@lists.infradead.org, linux-pci@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>
-Subject: Re: [PATCH v4 0/3] PCI Controller event and LTSSM tracepoint support
-Message-ID: <u3es7h4mgzdqfhvpl52s3x4vcisrpazcm4qb6x7lu4srmagxpn@hca2begqypeu>
-References: <1769047340-113287-1-git-send-email-shawn.lin@rock-chips.com>
- <9e06e69c-d10a-1f21-cbf7-204319549612@rock-chips.com>
+	s=arc-20240116; t=1770824926; c=relaxed/simple;
+	bh=JuUdPkH25cCxwPFA1XouZJFR/geXAtZmuNACigwymFM=;
+	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=akKYLZqLP6u9SxqPfG2vElZBPJcirfhIQLqIrTtNF7MOmdSgiPiAsyfJD2h46ZJ1YnJD3E7DYr/i4ATptYCOkpv1TRXntv8HCpZq4RDmaNTgAEpVdh6Q9WloiZY21Kv8D88HPjELywYi1prtn0g5rdaM+n7j3JxhoSXzk3lvzs4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CZ8zF+dp; arc=none smtp.client-ip=209.85.128.68
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f68.google.com with SMTP id 5b1f17b1804b1-4830f029407so10089095e9.2
+        for <linux-doc@vger.kernel.org>; Wed, 11 Feb 2026 07:48:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770824923; x=1771429723; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kUog19f3UA9QhTl6kEgUYlRzsmDFYZZB3pA0WGtflsQ=;
+        b=CZ8zF+dpNZKl6+9korVuEHUtjQcyKph5/xuVnhQ/zHKDD4GHw5oC9outveW2qMyR84
+         FlQYaqG+L+A7ZbVtwu6dNIuBC6/3HCTn8GkkL4nouo5Z8dqMMHL5HuE/S4LDwfZS+wxS
+         H2uaomOuoc1wQsetz4MgeYj0kTzWUOdkbZXLYGXfkdm/OFykNXK1uBNAlHdDTdWW+Nn4
+         mKRqCMq2gDv5xd0MXPAyBE/DZNiDjNq9kS32hs0OmrJbTErx49shurLbL50caoY8LmAC
+         gLVTAaAI86nhaTiCx9J92JdImssWpQbgMvmDMb7YoGcYj5aa3UeIkeNEW0zf4ZZBjdf6
+         sE8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770824923; x=1771429723;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kUog19f3UA9QhTl6kEgUYlRzsmDFYZZB3pA0WGtflsQ=;
+        b=aWKNukaR4zJTwTvas/8ykwgxlXRNp3GndCedTX8N8iYvmArLN/qFTnBMFfqtJ3ABWb
+         6XjRGZgtsr/9USLfWDZwDxxk3QkHa6gSlknU5bou9EH2C6CluL5EKcDMwCLwtlcbS1Ct
+         tXoI1DUDTNHX7nOeB2PQOemS7q8qrC3Te13J4B1J7WE6pVblkCrHYtGEHi0J0pAQEge1
+         QWcOVFtOJ694A8YQns3dYi/yhg9reXYpgXF0kQIBelM1sqjLKbRYIQsRKgOtg3AbROLG
+         QFLeNI48PCPCfls3MHT4L3SUqoMEVwUa4CqKgJeb0iw/5tJQTSnW2JXjCL0hHt39U6Yn
+         kx7Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWKAPBkBxnGWS1f8fZziYGd3SsYpBLpn6ygjk30zw/aJjxsFLu6YQb8lgRQYKHmFhpfeo7ikJq+dgc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyxFWQIJuvyZtiB6B52WK0H/70kMx7Obx1PzzQEKawifuVoEU29
+	kX9CR84g/ESsbhRX6nY6V8vqTu6l6VQyT16a+Q5nMzUU8GdtioTeGvJ7
+X-Gm-Gg: AZuq6aItAHcCk8db0XRUwpLaSntnnem2M+er74WaydROtGdUusvYT8avliMTw3y6Yem
+	jCtj++OKChMnVYzfF0inFEOvFx3nr05FGPVdsRrVOXHnlxzLfzPARP9zeWE9tsEopkf8ULeV2X6
+	Pr+cGDcFk16Hy2eb/iST3FT62C9hi5xwa7XX0t+F8GnAbmsA1gB2lYVQWQNZ9/Hh+r6ZcL/81im
+	1m4TNrdqmMEeMNC+/gD2646wkuJbYhDfetG9Y7/UUqLdod5/SyZCzowOy1qYv8jTmZsJ0x3nvOE
+	vxFw+TjjaJaklGApa+l9oKZltEiScNoEozkwa9rXwz4whRlYt1gd5g/E3v2VRRUgwEzFHWZLPZD
+	/8mj02y/k76+uieImCc7P0JDsZ1O+0bqsK7hg4ENVUZzYP00q7zd8RMDXb+TOz73jrr8BnX0+fC
+	K2QijmoEeSa/o4LMKAURVhsgY=
+X-Received: by 2002:a05:600c:8214:b0:475:d7b8:8505 with SMTP id 5b1f17b1804b1-4835e2dca60mr23446085e9.7.1770824922660;
+        Wed, 11 Feb 2026 07:48:42 -0800 (PST)
+Received: from skbuf ([2a02:2f04:d501:d900:d8ac:c964:9b43:1b13])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834d82a4c4sm246760765e9.10.2026.02.11.07.48.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Feb 2026 07:48:42 -0800 (PST)
+From: Vladimir Oltean <olteanv@gmail.com>
+X-Google-Original-From: Vladimir Oltean <vladimir.oltean@nxp.com>
+Date: Wed, 11 Feb 2026 17:48:39 +0200
+To: "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>
+Cc: Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+	linux-phy@lists.infradead.org
+Subject: Re: [PATCH net-next] doc: generic phy: update generic PHY
+ documentation
+Message-ID: <20260211154839.lbh4uovxr5b5s4nv@skbuf>
+References: <E1vo0mF-00000007kbg-1OeA@rmk-PC.armlinux.org.uk>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9e06e69c-d10a-1f21-cbf7-204319549612@rock-chips.com>
+In-Reply-To: <E1vo0mF-00000007kbg-1OeA@rmk-PC.armlinux.org.uk>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75849-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75850-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[olteanv@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TAGGED_RCPT(0.00)[linux-doc,kernel];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E9D55125C31
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,infradead.org:url,infradead.org:email]
+X-Rspamd-Queue-Id: 4272D125D7D
 X-Rspamd-Action: no action
 
-On Wed, Feb 11, 2026 at 09:13:50PM +0800, Shawn Lin wrote:
-> 在 2026/01/22 星期四 10:02, Shawn Lin 写道:
-> > This patch-set adds new pci controller event and LTSSM tracepoint used by host drivers
-> > which provide LTSSM trace functionality. The first user is pcie-dw-rockchip with a 256
-> > Bytes FIFO for recording LTSSM transition.
-> > 
+On Thu, Feb 05, 2026 at 02:56:15PM +0000, Russell King (Oracle) wrote:
+> Update the generic PHY documentation as a result of the discussion for
+> the s32g submission.
 > 
-> Gentle ping...
+> Link: https://lore.kernel.org/r/aXtvDn_-pCuKPrnf@vaman
+> Signed-off-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
+> ---
+> I didn't get any replies to my follow-up question to Vinod:
 > 
+>   Please also indicate in the documentation whether changing the submode
+>   of the serdes (particularly for ethernet) is permitted without doing a
+>   phy_power_down()..phy_power_up() dance around the phy_set_mode_ext()
+>   call.
 
-Merge window is open now, so we can't accept any patches until -rc1. And I'm
-also waiting for an Ack from Steven for the tracing part.
+There's certainly nothing *not* permitting that call sequence.
 
-- Mani
+> I also didn't get any response to:
+> 
+>   For drivers such as stmmac, it will be important that details such as
+>   whether phy_est_mode*() can be called with the PHY powered on are
+>   riveted down and not left up to the generic PHY driver author - without
+>   that, generic PHYs basically aren't usable from SoC/platform
+>   independent code, and stmmac has bazillions of platform specific glue
+>   already because of (a) bad code structuring and (b) lack of
+>   generalisation through standardised interfaces that abstract platform
+>   differences.
+> 
+>   I want to be able for core stmmac code, or even phylink code (which
+>   is even more platform generic) to be able to make use of generic PHY
+>   stuff, but if the calls that can be made into generic PHY are platform
+>   dependent, that is a blocking issue against that, and makes me question
+>   why we have the generic PHY subsystem... it's not very generic if it
+>   exposes the differences of each implementation to users of its
+>   interfaces.
 
-> > Testing
-> > =========
-> > 
-> > This series was tested on RK3588/RK3588s EVB1 with NVMe SSD connected to PCIe3 and PCIe2
-> > root ports.
-> > 
-> > echo 1 > /sys/kernel/debug/tracing/events/pci_controller/pcie_ltssm_state_transition/enable
-> > cat /sys/kernel/debug/tracing/trace_pipe
-> > 
-> >   # tracer: nop
-> >   #
-> >   # entries-in-buffer/entries-written: 64/64   #P:8
-> >   #
-> >   #                                _-----=> irqs-off/BH-disabled
-> >   #                               / _----=> need-resched
-> >   #                              | / _---=> hardirq/softirq
-> >   #                              || / _--=> preempt-depth
-> >   #                              ||| / _-=> migrate-disable
-> >   #                              |||| /     delay
-> >   #           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
-> >   #              | |         |   |||||     |         |
-> >        kworker/0:0-9       [000] .....     5.600194: pcie_ltssm_state_transition: dev: a40000000.pcie state: DETECT_ACT rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600198: pcie_ltssm_state_transition: dev: a40000000.pcie state: DETECT_WAIT rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600199: pcie_ltssm_state_transition: dev: a40000000.pcie state: DETECT_ACT rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600201: pcie_ltssm_state_transition: dev: a40000000.pcie state: POLL_ACTIVE rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600202: pcie_ltssm_state_transition: dev: a40000000.pcie state: POLL_CONFIG rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600204: pcie_ltssm_state_transition: dev: a40000000.pcie state: CFG_LINKWD_START rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600206: pcie_ltssm_state_transition: dev: a40000000.pcie state: CFG_LINKWD_ACEPT rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600207: pcie_ltssm_state_transition: dev: a40000000.pcie state: CFG_LANENUM_WAI rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600208: pcie_ltssm_state_transition: dev: a40000000.pcie state: CFG_LANENUM_ACEPT rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600210: pcie_ltssm_state_transition: dev: a40000000.pcie state: CFG_COMPLETE rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600212: pcie_ltssm_state_transition: dev: a40000000.pcie state: CFG_IDLE rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600213: pcie_ltssm_state_transition: dev: a40000000.pcie state: L0 rate: 2.5 GT/s
-> >        kworker/0:0-9       [000] .....     5.600214: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_LOCK rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600216: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_RCVRCFG rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600217: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_SPEED rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600218: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_LOCK rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600220: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_EQ1 rate: Unknown
-> >        kworker/0:0-9       [000] .....     5.600221: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_EQ2 rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600222: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_EQ3 rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600224: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_LOCK rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600225: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_RCVRCFG rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600226: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_IDLE rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600227: pcie_ltssm_state_transition: dev: a40000000.pcie state: L0 rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600228: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_LOCK rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600229: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_RCVRCFG rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600231: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_IDLE rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600232: pcie_ltssm_state_transition: dev: a40000000.pcie state: L0 rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600233: pcie_ltssm_state_transition: dev: a40000000.pcie state: L123_SEND_EIDLE rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600234: pcie_ltssm_state_transition: dev: a40000000.pcie state: L1_IDLE rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600236: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_LOCK rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600237: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_RCVRCFG rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600238: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_IDLE rate: 8.0 GT/s
-> >        kworker/0:0-9       [000] .....     5.600239: pcie_ltssm_state_transition: dev: a40000000.pcie state: L0 rate: 8.0 GT/s
-> > 
-> > 
-> > Changes in v4:
-> > - use TRACE_EVENT_FN to notify when to start and stop the tracepoint,
-> >    and export pci_ltssm_tp_enabled() for host drivers to use
-> > - skip trace if pci_ltssm_tp_enabled() is false.(Steven)
-> > - wrap into 80 columns(Bjorn)
-> > 
-> > Changes in v3:
-> > - add TRACE_DEFINE_ENUM for all enums(Steven Rostedt)
-> > - Add toctree entry in Documentation/trace/index.rst(Bagas Sanjaya)
-> > - fix mismatch section underline length(Bagas Sanjaya)
-> > - Make example snippets in code block(Bagas Sanjaya)
-> > - warp context into 80 columns and fix the file name(Bjorn)
-> > - reorder variables(Mani)
-> > - rename loop to i; rename en to enable(Mani)
-> > - use FIELD_GET(Mani)
-> > - add comment about how the FIFO works(Mani)
-> > 
-> > Changes in v2:
-> > - use tracepoint
-> > 
-> > Shawn Lin (3):
-> >    PCI: trace: Add PCI controller LTSSM transition tracepoint
-> >    Documentation: tracing: Add PCI controller event documentation
-> >    PCI: dw-rockchip: Add pcie_ltssm_state_transition trace support
-> > 
-> >   Documentation/trace/events-pci-controller.rst |  42 ++++++++++
-> >   Documentation/trace/index.rst                 |   1 +
-> >   drivers/pci/controller/dwc/pcie-dw-rockchip.c | 111 ++++++++++++++++++++++++++
-> >   drivers/pci/trace.c                           |  20 +++++
-> >   include/linux/pci.h                           |   4 +
-> >   include/trace/events/pci_controller.h         |  57 +++++++++++++
-> >   6 files changed, 235 insertions(+)
-> >   create mode 100644 Documentation/trace/events-pci-controller.rst
-> >   create mode 100644 include/trace/events/pci_controller.h
-> > 
+It may well be that the "one consumer, multiple PHY providers, requiring
+unified behaviour" situation you bring up is sufficiently unique here,
+with stmmac/phylink, that local conventions are not sufficient.
 
--- 
-மணிவண்ணன் சதாசிவம்
+I'm not sure that precise answers exist for your questions. Rather,
+it's best if you could lay out common sense requirements, and generic
+PHY reviewers will make sure they are followed.
+
+As far as the framework is concerned, power and mode are fundamentally
+decoupled, so I think the documentation is actually muddying the waters,
+more than anything, by talking about a preferred calling order.
+If there's any connection between power and mode, it should be handled
+internally by the PHY provider driver.
+
+>  Documentation/driver-api/phy/phy.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/driver-api/phy/phy.rst b/Documentation/driver-api/phy/phy.rst
+> index 719a2b3fd2ab..cf73e4fb0951 100644
+> --- a/Documentation/driver-api/phy/phy.rst
+> +++ b/Documentation/driver-api/phy/phy.rst
+> @@ -142,6 +142,7 @@ Order of API calls
+>  
+>      [devm_][of_]phy_get()
+>      phy_init()
+> +    [phy_set_mode[_ext]()]
+>      phy_power_on()
+>      [phy_set_mode[_ext]()]
+>      ...
+> @@ -154,7 +155,7 @@ but controllers should always call these functions to be compatible with other
+>  PHYs. Some PHYs may require :c:func:`phy_set_mode <phy_set_mode_ext>`, while
+>  others may use a default mode (typically configured via devicetree or other
+>  firmware). For compatibility, you should always call this function if you know
+> -what mode you will be using. Generally, this function should be called after
+> +what mode you will be using. Generally, this function should be called before
+>  :c:func:`phy_power_on`, although some PHY drivers may allow it at any time.
+
+My 2 cents: I would actually remove any reference to any sort of preferred
+call order. There's nothing in the framework to back up such a concept.
+Just say that it is recommended for PHY provider drivers to not rely on
+a particular calling order, such that PHY consumers have the freedom to
+choose depending on what suits them best.
+
+>  
+>  Releasing a reference to the PHY
+> -- 
+> 2.47.3
+> 
+> 
+> -- 
+> linux-phy mailing list
+> linux-phy@lists.infradead.org
+> https://lists.infradead.org/mailman/listinfo/linux-phy
 
