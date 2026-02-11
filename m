@@ -1,136 +1,135 @@
-Return-Path: <linux-doc+bounces-75838-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75832-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eJWwGQpujGlmngAAu9opvQ
-	(envelope-from <linux-doc+bounces-75838-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 12:54:50 +0100
+	id gGPMGJxJjGmJkgAAu9opvQ
+	(envelope-from <linux-doc+bounces-75832-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 10:19:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF575123FEF
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 12:54:49 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5356122A25
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 10:19:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B4FEA300D978
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 11:54:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 167983021E5D
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 09:19:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6E1B315D3F;
-	Wed, 11 Feb 2026 11:54:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3914C338581;
+	Wed, 11 Feb 2026 09:19:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="UIp9g7gh"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aVn6Hz7e"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49251.qiye.163.com (mail-m49251.qiye.163.com [45.254.49.251])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B5D8314D07;
-	Wed, 11 Feb 2026 11:54:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.251
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1418B311597;
+	Wed, 11 Feb 2026 09:19:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770810884; cv=none; b=CEZEXMJ8yky7ayCqPjT1HQpipAaVpzKeS2EvYKggt5HJ5MMVjVEKI6B3wE1TKe+Yco5uM+3b/CnBEy1qsiSXMascABsii3x+71AiHqkVAFQvJIV+lF/TSoNxMMa3W646yOvpu7lY8tf6x5SotEa8uCPdfWod2xYz87dwfNVGR1c=
+	t=1770801561; cv=none; b=sbidF6NaTEy4G0bzsEs7taF4uWjPB5r5OGfnCfulbWqqAWAxgVPjYYYnPkSKCceVSXAhg9dVewJRcAtIFWSBDgrJZVVEqhKvZNitVhYmtQAiG4p9P6jcqcxciJAXRGEP6CbkZnOENYqnkNMkIJpzy1uMaQ8/ngpC/fQ3jryTiY0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770810884; c=relaxed/simple;
-	bh=UVFhv5Z7BlBBKfH8QaYu3fxEmBpx7rK85du1nEWo4Ls=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=VnOMY6vM/ghuSeCgZe+VM0z+WI7z1OPVgeZuEod16XqMtSvJQqwoNcp8u7t5hIRX6h4z21dqK2MqN+WkJZG2UTmMaPCjps8dWzXRFhWBTeIO2R0FteAdaR/HJYzAY9iYtfZIuXt8nHWYHe60KFEDM2ChkeP5NERtpCRfQipE9Kk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=UIp9g7gh; arc=none smtp.client-ip=45.254.49.251
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
-Received: from localhost.localdomain (unknown [58.22.7.114])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 33d86957e;
-	Wed, 11 Feb 2026 16:25:19 +0800 (GMT+08:00)
-From: Shawn Lin <shawn.lin@rock-chips.com>
-To: Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-pci@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Philipp Stanner <phasta@kernel.org>,
-	Shawn Lin <shawn.lin@rock-chips.com>
-Subject: [PATCH v2 3/3] PCI/MSI: Add TODO comment about legacy pcim_enable_device() side-effect
-Date: Wed, 11 Feb 2026 16:24:59 +0800
-Message-Id: <1770798299-202288-4-git-send-email-shawn.lin@rock-chips.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1770798299-202288-1-git-send-email-shawn.lin@rock-chips.com>
-References: <1770798299-202288-1-git-send-email-shawn.lin@rock-chips.com>
-X-HM-Tid: 0a9c4bce081409cckunm6cb3bb0ee19cd
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhkfSFYfSR5DTR0YShgeTElWFRQJFh
-	oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
-	hVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=UIp9g7ghBfQGQZ/3okgBqWjahEVRpOtzhoVw/oMnzmr8wntmjpYyvuG/D3PeBpnwvseClvlb7lSwRIFvQauk9xdRxJuqFUvb/AYDUy+8I9M73lO+Q4XUMo0+riMG50H00/SjiXEOPQdwj0rtNNoyB0mtO50yB5IldeC/1V+A0HE=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
-	bh=wXzM0K0CcUqD2rLTcHZcO8hNOKAiCR32tUQai7tG7qY=;
-	h=date:mime-version:subject:message-id:from;
+	s=arc-20240116; t=1770801561; c=relaxed/simple;
+	bh=78vTmn6thDBzfMtB97lbGjUwbhyWjHfpO01rDAwelEE=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
+	 References:In-Reply-To; b=KZISYO2d1UTcXUWMn3Nm1PApW4bldVTF4j5j+4rfZw0XBzt2uU2GGVbwgasIOyhg/iignWKATra9bSqypPAFlTC6zYwtphWsjCD6hqeLX4ebU3ROnAJA3cT3gELGIPOS/NkBetG4RqYslH8BV3R5K7/HRVt3B0e9xg6Je76dqkc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aVn6Hz7e; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC37CC4CEF7;
+	Wed, 11 Feb 2026 09:19:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770801560;
+	bh=78vTmn6thDBzfMtB97lbGjUwbhyWjHfpO01rDAwelEE=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+	b=aVn6Hz7exp0YJcrbUnRdD+gd17f1RCAA1sl62249pmqhZS29AgnCdsbpjMH8vQ6gs
+	 cSQv5HLMWxo2QDS1hKjJFEG/YQ3uBYw43zlB4S1skWSy39hiqhsDcP+QPulot0nfxO
+	 N8j7Uh02sfUFF5Jhx0zgR69nlFtP2B/SzwZCUn2oP0aJmSZAl8Ua0YFXABPQFIKkDM
+	 A5yL2AFL3lts4OTxoYgANVJoQuhUr1/6YkJ2GPgK/rEbSvM6fi6j8ESdROE7LSLGad
+	 OUlqfK9D+aK85lrsm9/ouuaH1cbTAOZNYb2LkVWX8e2xjyzD6r3ZBk4ldQggiNdhql
+	 8+jd/QPt2oy9w==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 11 Feb 2026 10:19:09 +0100
+Message-Id: <DGC0RDIBDEYB.195QJ6S6GF9WL@kernel.org>
+Subject: Re: [PATCH -next v9 0/3] rust: Add CList and GPU buddy allocator
+ bindings
+Cc: <linux-kernel@vger.kernel.org>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Simona Vetter" <simona@ffwll.ch>, "Jonathan Corbet" <corbet@lwn.net>,
+ "Alex Deucher" <alexander.deucher@amd.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Jani Nikula"
+ <jani.nikula@linux.intel.com>, "Joonas Lahtinen"
+ <joonas.lahtinen@linux.intel.com>, "Rodrigo Vivi" <rodrigo.vivi@intel.com>,
+ "Tvrtko Ursulin" <tursulin@ursulin.net>, "Huang Rui" <ray.huang@amd.com>,
+ "Matthew Auld" <matthew.auld@intel.com>, "Matthew Brost"
+ <matthew.brost@intel.com>, "Lucas De Marchi" <lucas.demarchi@intel.com>,
+ =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ "Helge Deller" <deller@gmx.de>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Miguel Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>,
+ "Boqun Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Trevor
+ Gross" <tmgross@umich.edu>, "Alistair Popple" <apopple@nvidia.com>,
+ "Alexandre Courbot" <acourbot@nvidia.com>, "Andrea Righi"
+ <arighi@nvidia.com>, "Zhi Wang" <zhiw@nvidia.com>, "Philipp Stanner"
+ <phasta@kernel.org>, "Elle Rhumsaa" <elle@weathered-steel.dev>, "Daniel
+ Almeida" <daniel.almeida@collabora.com>, "David Airlie"
+ <airlied@gmail.com>, "Edwin Peer" <epeer@nvidia.com>, "John Hubbard"
+ <jhubbard@nvidia.com>, "Andy Ritger" <aritger@nvidia.com>, "Balbir Singh"
+ <balbirs@nvidia.com>, "Timur Tabi" <ttabi@nvidia.com>,
+ <joel@joelfernandes.org>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <intel-xe@lists.freedesktop.org>,
+ <linux-fbdev@vger.kernel.org>
+To: "Joel Fernandes" <joelagnelf@nvidia.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20260210233204.790524-1-joelagnelf@nvidia.com>
+In-Reply-To: <20260210233204.790524-1-joelagnelf@nvidia.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[rock-chips.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[rock-chips.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75838-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75832-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[shawn.lin@rock-chips.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,linux.intel.com,kernel.org,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,nvidia.com,weathered-steel.dev,collabora.com,joelfernandes.org,lists.freedesktop.org];
+	RCPT_COUNT_TWELVE(0.00)[49];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[rock-chips.com:+];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rock-chips.com:mid,rock-chips.com:dkim,rock-chips.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: AF575123FEF
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: B5356122A25
 X-Rspamd-Action: no action
 
-Add a TODO comment in pci/msi/msi.c to document that the automatic IRQ
-vector management activated by pcim_enable_device() is a dangerous and
-confusing.
+On Wed Feb 11, 2026 at 12:32 AM CET, Joel Fernandes wrote:
+> Link to v8: https://lore.kernel.org/all/20260209214246.2783990-1-joelagne=
+lf@nvidia.com/
+> Link to v7: https://lore.kernel.org/all/20260206004110.1914814-1-joelagne=
+lf@nvidia.com/
 
-The comment is placed near pcim_setup_msi_release() where the automatic
-management is implemented, serving as a marker for future cleanup work.
+I already asked about this in [1], can you please add a changlog to your se=
+ries?
 
-Suggested-by: Philipp Stanner <phasta@kernel.org>
-Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
-
----
-
-Changes in v2: None
-
- drivers/pci/msi/msi.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/drivers/pci/msi/msi.c b/drivers/pci/msi/msi.c
-index e241217..81d24a2 100644
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -77,6 +77,16 @@ static void pcim_msi_release(void *pcidev)
- /*
-  * Needs to be separate from pcim_release to prevent an ordering problem
-  * vs. msi_device_data_release() in the MSI core code.
-+ *
-+ * TODO: Remove the legacy side-effect of pcim_enable_device() that
-+ * activates automatic IRQ vector management. This design is dangerous
-+ * and confusing because it switches normally un-managed functions
-+ * into managed mode. Drivers should explicitly manage their IRQ vectors
-+ * without this implicit behavior.
-+ *
-+ * The current implementation uses both pdev->is_managed and
-+ * pdev->is_msi_managed flags, which adds unnecessary complexity.
-+ * This should be simplified in a future kernel version.
-  */
- static int pcim_setup_msi_release(struct pci_dev *dev)
- {
--- 
-2.7.4
-
+[1] https://lore.kernel.org/all/DG0MRL6T7ACW.25G3GLJMP7PN1@kernel.org/
 
