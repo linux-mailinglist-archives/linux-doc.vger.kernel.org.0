@@ -1,62 +1,62 @@
-Return-Path: <linux-doc+bounces-75829-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75838-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YLfUJ1A+jGlyjwAAu9opvQ
-	(envelope-from <linux-doc+bounces-75829-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 09:31:12 +0100
+	id eJWwGQpujGlmngAAu9opvQ
+	(envelope-from <linux-doc+bounces-75838-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 12:54:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58522122405
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 09:31:12 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF575123FEF
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 12:54:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AF0873032DC0
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 08:30:40 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B4FEA300D978
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 11:54:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 115B2273809;
-	Wed, 11 Feb 2026 08:30:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6E1B315D3F;
+	Wed, 11 Feb 2026 11:54:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="EfZ5Fa+Z"
+	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="UIp9g7gh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973182.qiye.163.com (mail-m1973182.qiye.163.com [220.197.31.82])
+Received: from mail-m49251.qiye.163.com (mail-m49251.qiye.163.com [45.254.49.251])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EF6F352F88;
-	Wed, 11 Feb 2026 08:30:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.82
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B5D8314D07;
+	Wed, 11 Feb 2026 11:54:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.251
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770798636; cv=none; b=Yi0V0N/sGh6p2rlBABidpsGoamIyBPHajgZ23MP/lBiWRVmg73BVibLaymKOo8zZhOWzdjhW6HkSIkXLpdkl/DjJw6VOPL/zRWuCC15RwJ0xmK2WVbCsEwpX0WPe0E8rC0oqm5nSG96M9WV/xPBnQArxlfRfro6ljhsINPnZs68=
+	t=1770810884; cv=none; b=CEZEXMJ8yky7ayCqPjT1HQpipAaVpzKeS2EvYKggt5HJ5MMVjVEKI6B3wE1TKe+Yco5uM+3b/CnBEy1qsiSXMascABsii3x+71AiHqkVAFQvJIV+lF/TSoNxMMa3W646yOvpu7lY8tf6x5SotEa8uCPdfWod2xYz87dwfNVGR1c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770798636; c=relaxed/simple;
-	bh=39IhSfP889KuErdo30Vg2Tp412GVcDTlaLzshjaoxo8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=jlQX08ucvlM09oN34VypU2vYUVn5rMsjXyaDgjx4UJ1c443luWVeTBc1IJby4GGjT8I+ExJmT31xkwTvC8qnMeIBRpSpTPwuykiDJ8Np2gLSf8CMlP7DnXMCMbijSldvYKv7psaz0CSsO430REIeLp6hQU6fCGJcEEpSejr2/7I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=EfZ5Fa+Z; arc=none smtp.client-ip=220.197.31.82
+	s=arc-20240116; t=1770810884; c=relaxed/simple;
+	bh=UVFhv5Z7BlBBKfH8QaYu3fxEmBpx7rK85du1nEWo4Ls=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=VnOMY6vM/ghuSeCgZe+VM0z+WI7z1OPVgeZuEod16XqMtSvJQqwoNcp8u7t5hIRX6h4z21dqK2MqN+WkJZG2UTmMaPCjps8dWzXRFhWBTeIO2R0FteAdaR/HJYzAY9iYtfZIuXt8nHWYHe60KFEDM2ChkeP5NERtpCRfQipE9Kk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=UIp9g7gh; arc=none smtp.client-ip=45.254.49.251
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
 Received: from localhost.localdomain (unknown [58.22.7.114])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 33d869564;
-	Wed, 11 Feb 2026 16:25:14 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 33d86957e;
+	Wed, 11 Feb 2026 16:25:19 +0800 (GMT+08:00)
 From: Shawn Lin <shawn.lin@rock-chips.com>
 To: Bjorn Helgaas <bhelgaas@google.com>
 Cc: linux-pci@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	Philipp Stanner <phasta@kernel.org>,
 	Shawn Lin <shawn.lin@rock-chips.com>
-Subject: [PATCH v2 2/3] PCI/MSI: Add warning to pci_free_irq_vectors() documentation
-Date: Wed, 11 Feb 2026 16:24:58 +0800
-Message-Id: <1770798299-202288-3-git-send-email-shawn.lin@rock-chips.com>
+Subject: [PATCH v2 3/3] PCI/MSI: Add TODO comment about legacy pcim_enable_device() side-effect
+Date: Wed, 11 Feb 2026 16:24:59 +0800
+Message-Id: <1770798299-202288-4-git-send-email-shawn.lin@rock-chips.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1770798299-202288-1-git-send-email-shawn.lin@rock-chips.com>
 References: <1770798299-202288-1-git-send-email-shawn.lin@rock-chips.com>
-X-HM-Tid: 0a9c4bcdf5b209cckunm6cb3bb0ee1970
+X-HM-Tid: 0a9c4bce081409cckunm6cb3bb0ee19cd
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx1KHVZLThpMTxlDQ0JJQxhWFRQJFh
+	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhkfSFYfSR5DTR0YShgeTElWFRQJFh
 	oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
 	hVSktLVUpCS0tZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=EfZ5Fa+ZO5GOTYaBK/OjHlkREhkNMJNcMzNN3NqN4ScVvp6BUXm6ez+Lo+NaJNKAX01uVyXaS2zj0of3tgJrqZnznFdDuU2tNoi8PTp8dQJWr9+lzDZ5JqMW1QLUH3lvjdntfuvfqgHn115NvazdgYeCSqwF7o+k15ZtlZcIEHw=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
-	bh=UNLkQLdTwuW2iDIl9UAI8P2DkWhepEE7viKVGVG8WIM=;
+	b=UIp9g7ghBfQGQZ/3okgBqWjahEVRpOtzhoVw/oMnzmr8wntmjpYyvuG/D3PeBpnwvseClvlb7lSwRIFvQauk9xdRxJuqFUvb/AYDUy+8I9M73lO+Q4XUMo0+riMG50H00/SjiXEOPQdwj0rtNNoyB0mtO50yB5IldeC/1V+A0HE=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+	bh=wXzM0K0CcUqD2rLTcHZcO8hNOKAiCR32tUQai7tG7qY=;
 	h=date:mime-version:subject:message-id:from;
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -70,12 +70,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[rock-chips.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[rock-chips.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75829-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-75838-lists,linux-doc=lfdr.de];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -86,48 +86,49 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[rock-chips.com:+];
 	PRECEDENCE_BULK(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,rock-chips.com:mid,rock-chips.com:dkim,rock-chips.com:email]
-X-Rspamd-Queue-Id: 58522122405
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rock-chips.com:mid,rock-chips.com:dkim,rock-chips.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: AF575123FEF
 X-Rspamd-Action: no action
 
-Update the kernel-doc comment for pci_free_irq_vectors() to warn drivers
-that this function should not be called when the device has been enabled
-with pcim_enable_device().
+Add a TODO comment in pci/msi/msi.c to document that the automatic IRQ
+vector management activated by pcim_enable_device() is a dangerous and
+confusing.
 
-For legacy reasons, pcim_enable_device() activates automatic management
-of IRQ vectors via pcim_msi_release(). Calling pci_free_irq_vectors() on
-such devices can cause double-free issues.
-
-This warning complements the documentation in msi-howto.rst and helps
-developers who primarily read function API documentation when working
-with the PCI/MSI subsystem.
+The comment is placed near pcim_setup_msi_release() where the automatic
+management is implemented, serving as a marker for future cleanup work.
 
 Suggested-by: Philipp Stanner <phasta@kernel.org>
 Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
+
 ---
 
 Changes in v2: None
 
- drivers/pci/msi/api.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/pci/msi/msi.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/pci/msi/api.c b/drivers/pci/msi/api.c
-index 818d55f..c18559b 100644
---- a/drivers/pci/msi/api.c
-+++ b/drivers/pci/msi/api.c
-@@ -370,6 +370,11 @@ EXPORT_SYMBOL(pci_irq_get_affinity);
-  * Undo the interrupt vector allocations and possible device MSI/MSI-X
-  * enablement earlier done through pci_alloc_irq_vectors_affinity() or
-  * pci_alloc_irq_vectors().
+diff --git a/drivers/pci/msi/msi.c b/drivers/pci/msi/msi.c
+index e241217..81d24a2 100644
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -77,6 +77,16 @@ static void pcim_msi_release(void *pcidev)
+ /*
+  * Needs to be separate from pcim_release to prevent an ordering problem
+  * vs. msi_device_data_release() in the MSI core code.
 + *
-+ * WARNING: Do not call this function if the device has been enabled
-+ * with pcim_enable_device(). In that case, IRQ vectors are automatically
-+ * managed via pcim_msi_release() and calling pci_free_irq_vectors() can
-+ * lead to double-free issues.
++ * TODO: Remove the legacy side-effect of pcim_enable_device() that
++ * activates automatic IRQ vector management. This design is dangerous
++ * and confusing because it switches normally un-managed functions
++ * into managed mode. Drivers should explicitly manage their IRQ vectors
++ * without this implicit behavior.
++ *
++ * The current implementation uses both pdev->is_managed and
++ * pdev->is_msi_managed flags, which adds unnecessary complexity.
++ * This should be simplified in a future kernel version.
   */
- void pci_free_irq_vectors(struct pci_dev *dev)
+ static int pcim_setup_msi_release(struct pci_dev *dev)
  {
 -- 
 2.7.4
