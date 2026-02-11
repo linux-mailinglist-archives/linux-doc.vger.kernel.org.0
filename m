@@ -1,203 +1,262 @@
-Return-Path: <linux-doc+bounces-75827-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75831-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sK+PC5QwjGnPiwAAu9opvQ
-	(envelope-from <linux-doc+bounces-75827-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 08:32:36 +0100
+	id aBqDDlVCjGnYkAAAu9opvQ
+	(envelope-from <linux-doc+bounces-75831-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 09:48:21 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3A97121E25
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 08:32:34 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BB7912262C
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 09:48:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 68BCF300C01E
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 07:32:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C373930191AD
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 08:48:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4DF11632E7;
-	Wed, 11 Feb 2026 07:32:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F56F2DECCC;
+	Wed, 11 Feb 2026 08:48:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="ame38AOD"
+	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="fcRExfDl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49201.qiye.163.com (mail-m49201.qiye.163.com [45.254.49.201])
+Received: from www3141.sakura.ne.jp (www3141.sakura.ne.jp [49.212.207.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D179E32C929;
-	Wed, 11 Feb 2026 07:32:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770795151; cv=none; b=K7DDQ6VvB7k+2GEeGl9452QNUxqQYDpckXjTTJANod6YRsikW901zfnBWlVBxMyFxZw25m9GDcBiVnkAtIXvs9TppGB4NGmjVfVR3zq/bNRX9ZfoD5aj1ylz7gv4kBToqU3BVDRJCLu/ALwr+/+KG90+hRxRG7b6KKvDL2sPKoM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770795151; c=relaxed/simple;
-	bh=41FlcwNioZ88g31eXuDyQVh3Dqp0ef6QyLPNmyndQdQ=;
-	h=Cc:Subject:To:References:From:Message-ID:Date:MIME-Version:
-	 In-Reply-To:Content-Type; b=YgoDWL2BGm5dfap+1yXaOGkoS7wjthXVXo2knlgqn5rgsZYQFyFL0tZUeEP+kvGsjDAZbVTwWxsFSJTUXLMojHp8dFzm1a8UQH3E+RziC58dilO1upE+450hF3ywr4Tb/MgvbjhwTEYCekFuPpWd3a7SGFFzdIHTBcw1tg1oo74=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=ame38AOD; arc=none smtp.client-ip=45.254.49.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
-Received: from [172.16.12.14] (unknown [58.22.7.114])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 33d65732f;
-	Wed, 11 Feb 2026 15:27:12 +0800 (GMT+08:00)
-Cc: shawn.lin@rock-chips.com, Bjorn Helgaas <bhelgaas@google.com>,
- linux-pci@vger.kernel.org, linux-doc@vger.kernel.org,
- Bjorn Helgaas <helgaas@kernel.org>
-Subject: Re: [PATCH] Documentation: PCI: Clarify pci_free_irq_vectors() usage
- for managed devices
-To: phasta@kernel.org
-References: <20260206223304.GA99007@bhelgaas>
- <5fb5bc0ecbd4f51791b6c330088879588a1518ac.camel@mailbox.org>
-From: Shawn Lin <shawn.lin@rock-chips.com>
-Message-ID: <68347b24-fb59-eece-2b48-0fd90917c75b@rock-chips.com>
-Date: Wed, 11 Feb 2026 15:27:10 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47427324B0C;
+	Wed, 11 Feb 2026 08:48:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=49.212.207.181
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1770799696; cv=pass; b=qxuemohowyt1QiAh/sDsG2PWOqNHwRiCaQWopfCV0juyVzXNQ/U2eq/yZwOdMK2r8yTYl4OlCOhie0C/811zA79gr3FB7kya3n0UJOmSd7wspVJMKdEyhpc+fQ5k0OwY+z9hIEjtmr7HW2yXsmh6stV0pTfHyX+f8R7WoGiJmyM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1770799696; c=relaxed/simple;
+	bh=f+G8Ggd6Q1brldySKoXnnOrfgmS2m/dbULCycTeMqcE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=SaWhxh1VTCtUTitM1zAEObwexkjeXWCpYspp85KlRjmn0gDK2tXl/PGMBg2fmtmpAafwCSoUZ/uaBVS6/m5usWJ+huugMsrHfavq+N6GrSsOlvDI5sBxWyZi+sex2zmjWQkRyLnvMM2z5ZQBaiL6hBf86+P50bXzQRFxxkEUzfw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=fcRExfDl; arc=pass smtp.client-ip=49.212.207.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+	(authenticated bits=0)
+	by www3141.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 61B82PBK016725
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Wed, 11 Feb 2026 17:02:26 +0900 (JST)
+	(envelope-from weibu@redadmin.org)
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id 9437E109EFDF7;
+	Wed, 11 Feb 2026 17:02:24 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HtAwUPxqo9H4; Wed, 11 Feb 2026 17:02:20 +0900 (JST)
+Received: by www.redadmin.org (Postfix, from userid 1000)
+	id BEA4B109EFDEC; Wed, 11 Feb 2026 17:02:20 +0900 (JST)
+Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
+ARC-Seal: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space; t=1770796940;
+	cv=none; b=AibvlmCasadlIuImwfMfPyCIxbpiH3ZLgOqBbPhIq1bSqtX/B8RjM5Qks6Xdlw3ne+MvpJ+mnnlFvvvUkBuCfaRvKfUJxR5LhhqFYn4Ql1sUFkYZWBQqx9UNmYN5RuL3y2djc7lJmTTOVquVawR4gn06XP7hOsqPD1voW15+qpE=
+ARC-Message-Signature: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space;
+	t=1770796940; c=relaxed/relaxed;
+	bh=fLcNQu9Lddq2dLDqGsBdy7LUbO7A+xafv3J0/srrfe0=;
+	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding; b=ucVIqbRbFjj6ArGGlWXAI5IiPBXUsPLZDknSE+TS4/1qXSMqBF+c99mrWuHISCFympQfQREaNpO/aqqZweZGRJppjWzE5DYtz61egPgz0GPKj4x4Mv+jEfFhN0MmahAY1Dp5jDibXBDrzco9AMyxutZInQOAHqfB45O/rWtQVsE=
+ARC-Authentication-Results: i=1; www.redadmin.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org BEA4B109EFDEC
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1770796940;
+	bh=fLcNQu9Lddq2dLDqGsBdy7LUbO7A+xafv3J0/srrfe0=;
+	h=From:To:Cc:Subject:Date:From;
+	b=fcRExfDluC3+RGVT2hbak/T4IGWEq/HbHctHhSH3IDxPsvzU42BbrBWSCpEmcn4f8
+	 nzqcyqyWJ7414N9F0+QzjXg/bV9QxshLGh56L1zGKtQfTZuBWF710f4mHCOIWrv+0+
+	 ae5spvpvzmTPWm37sBJZvM3A6BM+bdXQku40FrWQ=
+From: Akiyoshi Kurita <weibu@redadmin.org>
+To: corbet@lwn.net
+Cc: akiyks@gmail.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Akiyoshi Kurita <weibu@redadmin.org>
+Subject: [PATCH v1] docs: ja_JP: process: translate 'Describe your changes'
+Date: Wed, 11 Feb 2026 17:02:18 +0900
+Message-ID: <20260211080218.890115-1-weibu@redadmin.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <5fb5bc0ecbd4f51791b6c330088879588a1518ac.camel@mailbox.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9c4b98d09109cckunm8a859971d6021
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ04ZGFYZQkhPGR9DTU5MQklWFRQJFh
-	oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
-	hVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=ame38AODlW5B+VxaoNlZ1HjbV6FATMDpX46nJY6FMcrGxlEGqtd5a1JgLW5+/3lIECDDp8RyzJabDRfWk6Ls9YH4hN+Eienu4HAZNhIKdMt7TLlaHqrMZpKn02GRfzCOYH5uw5ROcqd1HVdGUG7QuQpdyiBESbZCW0DD6yJP+hU=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
-	bh=lHoajEgjenqD27eClZ8ttgA/7VF9D+tkev7LFV+E/XM=;
-	h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[rock-chips.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[rock-chips.com:s=default];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75831-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,redadmin.org];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,rock-chips.com:mid,rock-chips.com:dkim,rock-chips.com:email];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shawn.lin@rock-chips.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,redadmin.org:mid,redadmin.org:dkim,redadmin.org:email];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75827-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[rock-chips.com:+]
-X-Rspamd-Queue-Id: B3A97121E25
+	RCPT_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[redadmin.org:+];
+	PRECEDENCE_BULK(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 0BB7912262C
 X-Rspamd-Action: no action
 
-在 2026/02/09 星期一 16:05, Philipp Stanner 写道:
-> On Fri, 2026-02-06 at 16:33 -0600, Bjorn Helgaas wrote:
->> [+cc Philipp, any comment? would like your ack if possible]
-> 
-> The patch is a good idea and desirable. I think, however, that it
-> should be a series with a second patch informing about this behavior in
-> pci_free_irq_vectors() docu, too. I think that more people read
-> function API documentation than the generated full docs, especially
-> when hacking something together quickly.
-> 
->>
->> On Mon, Jan 26, 2026 at 10:57:13AM +0800, Shawn Lin wrote:
->>> Update the msi-howto.rst documentation to clarify that drivers using the
->>> resource-managed function pcim_enable_device()
->>>
-> 
-> pcim_enable_device() can be called a "resource-managed function"
-> because itself is managed in the sense of it setting up a consequence
-> for its own actions, which is automatic device-enablement. I.e., after
-> calling it, calling pci_disable_device() becomes obsolete.
-> 
-> That's, however, not decisive here. What is decisive is that it also
-> switches those MSI functions into "hybrid mode" so that they suddenly
-> have side-effects. So pcim_enable_device() does *two* things.
-> 
-> Depending on what you want to achieve with your detailed commit
-> message, you might want to point that out. Some inspiration might come
-> from my commits in various drivers. To make it bullet proof, I would
-> say sth like:
-> 
-> "For legacy reasons, pcim_enable_device() switched several, normally
-> un-managed, functions into managed mode. Since various cleanups, the
-> only function affected in such a way by pcim_enable_device() today are
-> callers of pcim_setup_msi_release(). This behavior is dangerous and
-> confusing and should be removed from the kernel."
-> 
-> depending on how verbose you want to be. This could be merged with the
-> below, of course.
-> 
->>>   must not call pci_free_irq_vectors().
->>> This is because such devices have automatic IRQ vector management via pcim_msi_release(),
->>> which is registered by pci_setup_msi_context() when pdev->is_managed is true.
-> 
-> There is unfortunately also pdev->is_msi_managed in addition to
-> is_managed.
-> 
-> I think you don't need to hint at the internal implementation in the
-> commit message – but a separate patch with a code TODO in pci/msi/msi.c
-> where you point out that this is broken and should be removed sounds
-> like a good idea to me.
-> 
-> Could also be put on a PCI TODO list if there is one (Bjorn?)
-> 
->>>
->>> Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
->>> ---
->>>
->>>   Documentation/PCI/msi-howto.rst | 7 +++++--
->>>   1 file changed, 5 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/Documentation/PCI/msi-howto.rst b/Documentation/PCI/msi-howto.rst
->>> index 667ebe2..dc85f1e 100644
->>> --- a/Documentation/PCI/msi-howto.rst
->>> +++ b/Documentation/PCI/msi-howto.rst
->>> @@ -113,8 +113,11 @@ vectors, use the following function::
->>>   
->>>     int pci_irq_vector(struct pci_dev *dev, unsigned int nr);
->>>   
->>> -Any allocated resources should be freed before removing the device using
->>> -the following function::
->>> +If the driver enables the device using the resource-managed function
->>> +pcim_enable_device(),
-> 
-> Same, "resource-managed" is not the decisive criterium. I would simply
-> state "pcim_enable_device() activates automatic management for IRQ
-> vectors".
-> 
-> (I'm a bit nitty; here it's not that important, but in the commit
-> message I would address this).
-> 
-> 
-> You can keep me on Cc, I can do a review for the next revision.
-> 
+Translate the "Describe your changes" section in
+Documentation/translations/ja_JP/process/submitting-patches.rst.
 
-Thanks for these helpful review, will work on v2.
+Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
+---
+ .../ja_JP/process/submitting-patches.rst      | 31 +++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-> And thanks for picking this up!
-> 
-> Philipp
-> 
->>>   the driver shouldn't call pci_free_irq_vectors()
->>> +because the IRQ vectors are automatically managed. Otherwise, the driver
->>> +should free any allocated IRQ vectors before removing the device using the
->>> +following function::
->>>   
->>>     void pci_free_irq_vectors(struct pci_dev *dev);
->>>   
->>> -- 
->>> 2.7.4
->>>
-> 
-> 
-> 
+diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rs=
+t b/Documentation/translations/ja_JP/process/submitting-patches.rst
+index d61583399ef4..daf02b8983cf 100644
+--- a/Documentation/translations/ja_JP/process/submitting-patches.rst
++++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
+@@ -54,3 +54,34 @@ Documentation/devicetree/bindings/submitting-patches.rst=
+ =E3=82=92=E8=AA=AD=E3=82=93=E3=81=A7=E3=81=8F=E3=81=A0=E3=81=95
+=20
+ =E5=A4=89=E6=9B=B4=E5=86=85=E5=AE=B9=E3=82=92=E8=AA=AC=E6=98=8E=E3=81=99=
+=E3=82=8B
+ ------------------
++
++=E5=95=8F=E9=A1=8C=E3=82=92=E8=AA=AC=E6=98=8E=E3=81=97=E3=81=A6=E3=81=8F=
+=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE=E3=
+=83=91=E3=83=83=E3=83=81=E3=81=8C 1 =E8=A1=8C=E3=81=AE=E3=83=90=E3=82=B0=E4=
+=BF=AE=E6=AD=A3=E3=81=A7=E3=81=82=E3=81=A3=E3=81=A6=E3=82=82=E3=80=81
++5000 =E8=A1=8C=E3=81=AE=E6=96=B0=E6=A9=9F=E8=83=BD=E3=81=A7=E3=81=82=E3=81=
+=A3=E3=81=A6=E3=82=82=E3=80=81=E3=81=9D=E3=82=8C=E3=82=92=E8=A1=8C=E3=81=86=
+=E5=8B=95=E6=A9=9F=E3=81=A8=E3=81=AA=E3=81=A3=E3=81=9F=E6=A0=B9=E6=9C=AC=E7=
+=9A=84=E3=81=AA=E5=95=8F=E9=A1=8C=E3=81=8C=E5=BF=85=E3=81=9A=E3=81=82=E3=82=
+=8B=E3=81=AF=E3=81=9A=E3=81=A7=E3=81=99=E3=80=82
++=E4=BF=AE=E6=AD=A3=E3=81=99=E3=81=B9=E3=81=8D=E4=BE=A1=E5=80=A4=E3=81=AE=
+=E3=81=82=E3=82=8B=E5=95=8F=E9=A1=8C=E3=81=8C=E5=AD=98=E5=9C=A8=E3=81=97=E3=
+=80=81=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=8C=E6=9C=80=E5=88=
+=9D=E3=81=AE=E6=AE=B5=E8=90=BD=E4=BB=A5=E9=99=8D=E3=82=92=E8=AA=AD=E3=82=80=
+=E6=84=8F=E5=91=B3=E3=81=8C=E3=81=82=E3=82=8B=E3=81=93=E3=81=A8=E3=82=92
++=E7=B4=8D=E5=BE=97=E3=81=95=E3=81=9B=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=
+=E3=81=84=E3=80=82
++
++=E3=83=A6=E3=83=BC=E3=82=B6=E3=83=BC=E3=81=8B=E3=82=89=E8=A6=8B=E3=81=88=
+=E3=82=8B=E5=BD=B1=E9=9F=BF=E3=82=92=E8=AA=AC=E6=98=8E=E3=81=97=E3=81=A6=E3=
+=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=82=AF=E3=83=A9=E3=83=83=E3=82=
+=B7=E3=83=A5=E3=82=84=E3=83=8F=E3=83=B3=E3=82=B0=EF=BC=88=E3=83=AD=E3=83=83=
+=E3=82=AF=E3=82=A2=E3=83=83=E3=83=97=EF=BC=89=E3=81=AF
++=E5=88=86=E3=81=8B=E3=82=8A=E3=82=84=E3=81=99=E3=81=84=E3=81=A7=E3=81=99=
+=E3=81=8C=E3=80=81=E3=81=99=E3=81=B9=E3=81=A6=E3=81=AE=E3=83=90=E3=82=B0=E3=
+=81=8C=E3=81=9D=E3=81=93=E3=81=BE=E3=81=A7=E9=9C=B2=E9=AA=A8=E3=81=A8=E3=81=
+=AF=E9=99=90=E3=82=8A=E3=81=BE=E3=81=9B=E3=82=93=E3=80=82=E3=81=9F=E3=81=A8=
+=E3=81=88=E3=82=B3=E3=83=BC=E3=83=89=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E4=
+=B8=AD=E3=81=AB
++=E8=A6=8B=E3=81=A4=E3=81=8B=E3=81=A3=E3=81=9F=E5=95=8F=E9=A1=8C=E3=81=A7=
+=E3=81=82=E3=81=A3=E3=81=A6=E3=82=82=E3=80=81=E3=83=A6=E3=83=BC=E3=82=B6=E3=
+=83=BC=E3=81=AB=E3=81=A9=E3=81=AE=E3=82=88=E3=81=86=E3=81=AA=E5=BD=B1=E9=9F=
+=BF=E3=81=8C=E3=81=82=E3=82=8A=E5=BE=97=E3=82=8B=E3=81=8B=E3=82=92=E8=AA=AC=
+=E6=98=8E=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
++Linux =E3=81=AE=E5=A4=9A=E3=81=8F=E3=81=AE=E7=92=B0=E5=A2=83=E3=81=AF=E3=
+=80=81=E4=B8=8A=E6=B5=81=E3=81=8B=E3=82=89=E7=89=B9=E5=AE=9A=E3=81=AE=E3=83=
+=91=E3=83=83=E3=83=81=E3=81=A0=E3=81=91=E3=82=92=E5=8F=96=E3=82=8A=E8=BE=BC=
+=E3=82=80=E4=BA=8C=E6=AC=A1=E7=9A=84=E3=81=AA=E5=AE=89=E5=AE=9A=E7=89=88=E3=
+=83=84=E3=83=AA=E3=83=BC=E3=82=84
++=E3=83=99=E3=83=B3=E3=83=80=E3=83=BC=EF=BC=8F=E8=A3=BD=E5=93=81=E5=9B=BA=
+=E6=9C=89=E3=81=AE=E3=83=84=E3=83=AA=E3=83=BC=E3=81=AE=E3=82=AB=E3=83=BC=E3=
+=83=8D=E3=83=AB=E3=81=A7=E5=8B=95=E3=81=84=E3=81=A6=E3=81=84=E3=81=BE=E3=81=
+=99=E3=80=82=E3=81=97=E3=81=9F=E3=81=8C=E3=81=A3=E3=81=A6=E3=80=81=E5=A4=89=
+=E6=9B=B4=E3=82=92=E4=B8=8B=E6=B5=81=E3=81=B8
++=E9=81=A9=E5=88=87=E3=81=AB=E6=B5=81=E3=81=99=E5=8A=A9=E3=81=91=E3=81=AB=
+=E3=81=AA=E3=82=8B=E6=83=85=E5=A0=B1=EF=BC=88=E7=99=BA=E7=94=9F=E6=9D=A1=E4=
+=BB=B6=E3=80=81dmesg =E3=81=AE=E6=8A=9C=E7=B2=8B=E3=80=81=E3=82=AF=E3=83=A9=
+=E3=83=83=E3=82=B7=E3=83=A5=E5=86=85=E5=AE=B9=E3=80=81=E6=80=A7=E8=83=BD=E5=
+=8A=A3=E5=8C=96=E3=80=81
++=E3=83=AC=E3=82=A4=E3=83=86=E3=83=B3=E3=82=B7=E3=81=AE=E3=82=B9=E3=83=91=
+=E3=82=A4=E3=82=AF=E3=80=81=E3=83=8F=E3=83=B3=E3=82=B0=EF=BC=8F=E3=83=AD=E3=
+=83=83=E3=82=AF=E3=82=A2=E3=83=83=E3=83=97=E7=AD=89=EF=BC=89=E3=81=8C=E3=81=
+=82=E3=82=8C=E3=81=B0=E8=A8=98=E8=BC=89=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=
+=E3=81=95=E3=81=84=E3=80=82
++
++=E6=9C=80=E9=81=A9=E5=8C=96=E3=81=A8=E3=83=88=E3=83=AC=E3=83=BC=E3=83=89=
+=E3=82=AA=E3=83=95=E3=82=92=E5=AE=9A=E9=87=8F=E7=9A=84=E3=81=AB=E7=A4=BA=E3=
+=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=83=91=E3=83=
+=95=E3=82=A9=E3=83=BC=E3=83=9E=E3=83=B3=E3=82=B9=E3=80=81=E3=83=A1=E3=83=A2=
+=E3=83=AA=E6=B6=88=E8=B2=BB=E9=87=8F=E3=80=81
++=E3=82=B9=E3=82=BF=E3=83=83=E3=82=AF=E3=83=95=E3=83=83=E3=83=88=E3=83=97=
+=E3=83=AA=E3=83=B3=E3=83=88=E3=80=81=E3=83=90=E3=82=A4=E3=83=8A=E3=83=AA=E3=
+=82=B5=E3=82=A4=E3=82=BA=E3=81=AE=E6=94=B9=E5=96=84=E3=82=92=E4=B8=BB=E5=BC=
+=B5=E3=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=AF=E3=80=81=E3=81=9D=E3=82=8C=
+=E3=82=92=E8=A3=8F=E4=BB=98=E3=81=91=E3=82=8B=E6=95=B0=E5=80=A4=E3=82=92
++=E8=A8=98=E8=BC=89=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
+=E3=80=82=E3=81=BE=E3=81=9F=E3=80=81=E7=9B=AE=E3=81=AB=E8=A6=8B=E3=81=88=E3=
+=81=AA=E3=81=84=E3=82=B3=E3=82=B9=E3=83=88=E3=81=AB=E3=81=A4=E3=81=84=E3=81=
+=A6=E3=82=82=E8=AA=AC=E6=98=8E=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=
+=E3=81=84=E3=80=82=E6=9C=80=E9=81=A9=E5=8C=96=E3=81=AF=E9=80=9A=E5=B8=B8=E3=
+=80=81
++CPU=E3=80=81=E3=83=A1=E3=83=A2=E3=83=AA=E3=80=81=E5=8F=AF=E8=AA=AD=E6=80=
+=A7=E3=81=AA=E3=81=A9=E3=81=AE=E3=82=B3=E3=82=B9=E3=83=88=E3=82=92=E4=BC=B4=
+=E3=81=84=E3=81=BE=E3=81=99=E3=80=82=E3=83=92=E3=83=A5=E3=83=BC=E3=83=AA=E3=
+=82=B9=E3=83=86=E3=82=A3=E3=82=AF=E3=82=B9=E3=81=AE=E5=A0=B4=E5=90=88=E3=81=
+=AF=E3=80=81=E7=95=B0=E3=81=AA=E3=82=8B
++=E3=83=AF=E3=83=BC=E3=82=AF=E3=83=AD=E3=83=BC=E3=83=89=E9=96=93=E3=81=AE=
+=E3=83=88=E3=83=AC=E3=83=BC=E3=83=89=E3=82=AA=E3=83=95=E3=82=82=E7=99=BA=E7=
+=94=9F=E3=81=97=E3=81=BE=E3=81=99=E3=80=82=E3=83=AC=E3=83=93=E3=83=A5=E3=83=
+=BC=E3=82=A2=E3=81=8C=E3=82=B3=E3=82=B9=E3=83=88=E3=81=A8=E3=83=A1=E3=83=AA=
+=E3=83=83=E3=83=88=E3=82=92=E6=AF=94=E8=BC=83=E6=A4=9C=E8=A8=8E=E3=81=A7=E3=
+=81=8D=E3=82=8B=E3=82=88=E3=81=86=E3=80=81
++=E6=9C=80=E9=81=A9=E5=8C=96=E3=81=AB=E3=82=88=E3=81=A3=E3=81=A6=E4=BA=88=
+=E6=83=B3=E3=81=95=E3=82=8C=E3=82=8B=E3=83=87=E3=83=A1=E3=83=AA=E3=83=83=E3=
+=83=88=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6=E3=82=82=E8=AA=AC=E6=98=8E=E3=81=
+=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
++
++=E5=95=8F=E9=A1=8C=E3=81=8C=E7=89=B9=E5=AE=9A=E3=81=A7=E3=81=8D=E3=81=9F=
+=E3=82=89=E3=80=81=E5=AE=9F=E9=9A=9B=E3=81=AB=E3=81=A9=E3=81=AE=E3=82=88=E3=
+=81=86=E3=81=AA=E5=AF=BE=E7=AD=96=E3=82=92=E8=AC=9B=E3=81=98=E3=81=A6=E3=81=
+=84=E3=82=8B=E3=81=8B=E3=82=92=E6=8A=80=E8=A1=93=E7=9A=84=E3=81=AB=E8=A9=B3=
+=E3=81=97=E3=81=8F=E8=AA=AC=E6=98=8E=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=
+=81=95=E3=81=84=E3=80=82
++=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=8C=E3=82=B3=E3=83=BC=
+=E3=83=89=E3=81=8C=E6=84=8F=E5=9B=B3=E3=81=97=E3=81=9F=E3=81=A8=E3=81=8A=E3=
+=82=8A=E3=81=AB=E5=8B=95=E4=BD=9C=E3=81=97=E3=81=A6=E3=81=84=E3=82=8B=E3=81=
+=8B=E3=82=92=E7=A2=BA=E8=AA=8D=E3=81=A7=E3=81=8D=E3=82=8B=E3=82=88=E3=81=86=
+=E3=80=81=E5=A4=89=E6=9B=B4=E5=86=85=E5=AE=B9=E3=82=92=E5=B9=B3=E6=98=93=E3=
+=81=AA=E8=A8=80=E8=91=89=E3=81=A7
++=E8=AA=AC=E6=98=8E=E3=81=99=E3=82=8B=E3=81=93=E3=81=A8=E3=81=8C=E9=87=8D=
+=E8=A6=81=E3=81=A7=E3=81=99=E3=80=82
++
++=E3=83=91=E3=83=83=E3=83=81=E8=AA=AC=E6=98=8E=E3=82=92 Linux =E3=81=AE=E3=
+=82=BD=E3=83=BC=E3=82=B9=E3=82=B3=E3=83=BC=E3=83=89=E7=AE=A1=E7=90=86=E3=82=
+=B7=E3=82=B9=E3=83=86=E3=83=A0 ``git`` =E3=81=AE=E3=80=8C=E3=82=B3=E3=83=9F=
+=E3=83=83=E3=83=88=E3=83=AD=E3=82=B0=E3=80=8D=E3=81=A8=E3=81=97=E3=81=A6=E3=
+=81=9D=E3=81=AE=E3=81=BE=E3=81=BE
++=E5=8F=96=E3=82=8A=E8=BE=BC=E3=82=81=E3=82=8B=E5=BD=A2=E3=81=A7=E6=9B=B8=
+=E3=81=91=E3=81=B0=E3=80=81=E3=83=A1=E3=83=B3=E3=83=86=E3=83=8A=E3=81=AF=E5=
+=8A=A9=E3=81=8B=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82=E8=A9=B3=E7=B4=B0=E3=81=
+=AF :ref:`the_canonical_patch_format` =E3=82=92
++=E5=8F=82=E7=85=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
+=E3=80=82
++
++1 =E3=81=A4=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=81=A7=E3=81=AF 1 =E3=81=
+=A4=E3=81=AE=E5=95=8F=E9=A1=8C=E3=81=A0=E3=81=91=E3=82=92=E8=A7=A3=E6=B1=BA=
+=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E8=AA=AC=E6=
+=98=8E=E3=81=8C=E9=95=B7=E3=81=8F=E3=81=AA=E3=82=8A=E5=A7=8B=E3=82=81=E3=81=
+=9F=E3=82=89=E3=80=81=E3=83=91=E3=83=83=E3=83=81=E3=82=92
++=E5=88=86=E5=89=B2=E3=81=99=E3=81=B9=E3=81=8D=E3=82=B5=E3=82=A4=E3=83=B3=
+=E3=81=A7=E3=81=99=E3=80=82:ref:`split_changes` =E3=82=92=E5=8F=82=E7=85=A7=
+=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
+
+base-commit: a592a36e49372172d7c7551ec19ed18184c935e1
+prerequisite-patch-id: 5569479a56e04681cfd6b22f5de9d850e10c8f5f
+--=20
+2.47.3
+
 
