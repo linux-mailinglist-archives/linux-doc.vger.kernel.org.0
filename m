@@ -1,144 +1,194 @@
-Return-Path: <linux-doc+bounces-75846-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75847-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBTULxSajGkhrgAAu9opvQ
-	(envelope-from <linux-doc+bounces-75846-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:02:44 +0100
+	id QAYqEuGejGmPrgAAu9opvQ
+	(envelope-from <linux-doc+bounces-75847-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:23:13 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 818A6125669
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:02:42 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 838B912596D
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 16:23:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7A0703004C90
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 15:02:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A95E730305D4
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Feb 2026 15:19:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61189284671;
-	Wed, 11 Feb 2026 15:02:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="THxYDRk6"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 010602C029C;
+	Wed, 11 Feb 2026 15:19:45 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA5C027FD56;
-	Wed, 11 Feb 2026 15:02:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4850F4A32;
+	Wed, 11 Feb 2026 15:19:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770822156; cv=none; b=cbVzQuAmyShKWpFGX9T5Ehoq82vF0doxiFGpO72RNiab/5P3dBNHA+TaBi1qopeJ6r1EBmtjEEQRma/JVS8XHLaRHWXGrhxHezHEEVPyhisxc4adQywgrwP+Rk00tDFhZnmnWU+ucMIc/09SruZZwWg0XGcoDX3ULzNzbXGunD0=
+	t=1770823184; cv=none; b=AFOo3/rdb1sqImhNblCGIJ7OKooddJC9vVCmYCf+5ObtZpKdmgjXcI2gHe9Pqp0lDIdccMHIZJrin7wnBbX1OjwRfUuE8NnEbPP8gyKCPusFRL2jft2Y8LHVTUdvl1mi9lci9bFN6YDLYQd6llwlFqdQgvEIA4aOpRvIxoMd3kM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770822156; c=relaxed/simple;
-	bh=rrvyiIc/o8FkZYCQ7mUHp/9VbmvT7q/TyTPBahJPoD8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=E1ntQ3fTCH/FkGFZ/t3zYsYbg/NM3T59xvcZZ9/LBup4sQshde65uL5aJPmpjgyxlbEoCxWgJgFh8KtsvG1ZZ2rzTAFeHjnrSzVhVit+BRo1J6iBbMWErY96Im2uVZVjRCF+1Vzv5BIzlYYmjWb1CZSvtHndHSEzs3JTIKux5gc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=THxYDRk6; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B569740C7C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1770822147; bh=EIbkpU9L1q/Nn/4cX/6BL8Iuu3XPE9u3NeZNNDIBeiI=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=THxYDRk6VMiU4F937KJveX3oFXnsKmLrts04KYb7VIrQJHnSXwbpAqP5PyOBzv99i
-	 WdUSlSI+NN2sy2xu7E9WohDoUN5nwnXzl/M1MBY/zCJHoQhJz7dlL21wlNymQ+cZZv
-	 2Wf1mJIlZxbpiiuwdpDvJEaKawgC0Ay34EkluUGbeX3pSpYAJjn6jW+nNuMsoSuVvF
-	 bhB7IPMl8OP7+B8BIRp958GzqE2QWZa2CMk1ZWWZPlxqE9BqOH4//3bFz11GO3h4Kp
-	 4KuRQK9ss27/NXgE3a47534lp6LInMhapPvQQ6K8M2S1w5MZFUTu0x/hapt3GOkXLn
-	 vhBYMtOharEGA==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id B569740C7C;
-	Wed, 11 Feb 2026 15:02:27 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Tang Yizhou <yizhou.tang@shopee.com>
-Cc: tj@kernel.org, axboe@kernel.dk, hch@lst.de, cgroups@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mkoutny@suse.com
-Subject: Re: [PATCH] docs: Fix blk-iolatency peer throttling description
-In-Reply-To: <CACuPKxnY0Uo6RU5Cw2_fS=hQcjUBwiA+G3U-LUaviVYyf0Pojw@mail.gmail.com>
-References: <20260114110837.84126-1-yizhou.tang@shopee.com>
- <guqq2cm3mk5qf45rcman3twiu7vax4sgkrhj23jrjb26tt3sk3@bh2h6s7givfq>
- <CACuPKxnY0Uo6RU5Cw2_fS=hQcjUBwiA+G3U-LUaviVYyf0Pojw@mail.gmail.com>
-Date: Wed, 11 Feb 2026 08:02:26 -0700
-Message-ID: <874inn2uil.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1770823184; c=relaxed/simple;
+	bh=KS1e7CmG0w1tPJUBX/Ojww7iQLgyqXI8VM7PXu/UY2k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=R7/dpQ1Kla3p0iTRgwIUP9k/+UQeS3E/or3tCo71fCuwAfgdWyT/ZirNrlRF2gRrFqdr0x+6ZUsJXVv6AYVdMj4DxiALR5PsCBCu82o2jpHYDiIhvXnRg1YCO5h2KtUT5n5SZyJnKRSqGFEaplfWBnN5AhoY1PW8bcFuWeM/TFw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 47853339;
+	Wed, 11 Feb 2026 07:19:36 -0800 (PST)
+Received: from [10.1.196.46] (e134344.arm.com [10.1.196.46])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0706C3F63F;
+	Wed, 11 Feb 2026 07:19:35 -0800 (PST)
+Message-ID: <a212711a-7af1-4daa-86e7-124ae15a9521@arm.com>
+Date: Wed, 11 Feb 2026 15:19:34 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 09/19] x86/resctrl: Add plza_capable in rdt_resource
+ data structure
+To: Babu Moger <babu.moger@amd.com>, corbet@lwn.net, tony.luck@intel.com,
+ reinette.chatre@intel.com, Dave.Martin@arm.com, james.morse@arm.com,
+ tglx@kernel.org, mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com
+Cc: x86@kernel.org, hpa@zytor.com, peterz@infradead.org,
+ juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+ rostedt@goodmis.org, bsegall@google.com, mgorman@suse.de,
+ vschneid@redhat.com, akpm@linux-foundation.org,
+ pawan.kumar.gupta@linux.intel.com, pmladek@suse.com,
+ feng.tang@linux.alibaba.com, kees@kernel.org, arnd@arndb.de,
+ fvdl@google.com, lirongqing@baidu.com, bhelgaas@google.com,
+ seanjc@google.com, xin@zytor.com, manali.shukla@amd.com,
+ dapeng1.mi@linux.intel.com, chang.seok.bae@intel.com,
+ mario.limonciello@amd.com, naveen@kernel.org, elena.reshetova@intel.com,
+ thomas.lendacky@amd.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, kvm@vger.kernel.org, peternewman@google.com,
+ eranian@google.com, gautham.shenoy@amd.com
+References: <cover.1769029977.git.babu.moger@amd.com>
+ <7b7507eac245988473e7b769a559bd193321e046.1769029977.git.babu.moger@amd.com>
+From: Ben Horgan <ben.horgan@arm.com>
+Content-Language: en-US
+In-Reply-To: <7b7507eac245988473e7b769a559bd193321e046.1769029977.git.babu.moger@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75846-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,shopee.com:email]
-X-Rspamd-Queue-Id: 818A6125669
+	RCPT_COUNT_TWELVE(0.00)[44];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75847-lists,linux-doc=lfdr.de];
+	R_DKIM_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,arm.com:mid]
+X-Rspamd-Queue-Id: 838B912596D
 X-Rspamd-Action: no action
 
-Tang Yizhou <yizhou.tang@shopee.com> writes:
+Hi Babu,
 
-> On Tue, Jan 20, 2026 at 9:37=E2=80=AFPM Michal Koutn=C3=BD <mkoutny@suse.=
-com> wrote:
->>
->> On Wed, Jan 14, 2026 at 07:08:37PM +0800, Tang Yizhou <yizhou.tang@shope=
-e.com> wrote:
->> > From: Tang Yizhou <yizhou.tang@shopee.com>
->> >
->> > The current text states that peers with a lower latency target are
->> > throttled, which is the opposite of the actual behavior. In fact,
->> > blk-iolatency throttles peer groups with a higher latency target in or=
-der
->> > to protect the more latency-sensitive group.
->> >
->> > In addition, peer groups without a configured latency target are also
->> > throttled, as they are treated as lower priority compared to groups wi=
-th
->> > explicit latency requirements.
->> >
->> > Update the documentation to reflect the correct throttling behavior.
->> >
->> > Signed-off-by: Tang Yizhou <yizhou.tang@shopee.com>
->> > ---
->> >  Documentation/admin-guide/cgroup-v2.rst | 10 ++++++----
->> >  1 file changed, 6 insertions(+), 4 deletions(-)
->>
->> Not a big deal but it could've been confusing.
->>
->>
->> Acked-by: Michal Koutn=C3=BD <mkoutny@suse.com>
->
-> Hi Jon, just checking in, do you think this patch is ready to be merged?
+On 1/21/26 21:12, Babu Moger wrote:
+> Add plza_capable field to the rdt_resource structure to indicate whether
+> Privilege Level Zero Association (PLZA) is supported for that resource
+> type.
+> 
+> Signed-off-by: Babu Moger <babu.moger@amd.com>
+> ---
+>  arch/x86/kernel/cpu/resctrl/core.c     | 6 ++++++
+>  arch/x86/kernel/cpu/resctrl/rdtgroup.c | 5 +++++
+>  include/linux/resctrl.h                | 3 +++
+>  3 files changed, 14 insertions(+)
+> 
+> diff --git a/arch/x86/kernel/cpu/resctrl/core.c b/arch/x86/kernel/cpu/resctrl/core.c
+> index 2de3140dd6d1..e41fe5fa3f30 100644
+> --- a/arch/x86/kernel/cpu/resctrl/core.c
+> +++ b/arch/x86/kernel/cpu/resctrl/core.c
+> @@ -295,6 +295,9 @@ static __init bool __rdt_get_mem_config_amd(struct rdt_resource *r)
+>  
+>  	r->alloc_capable = true;
+>  
+> +	if (rdt_cpu_has(X86_FEATURE_PLZA))
+> +		r->plza_capable = true;
+> +
+>  	return true;
+>  }
+>  
+> @@ -314,6 +317,9 @@ static void rdt_get_cache_alloc_cfg(int idx, struct rdt_resource *r)
+>  	if (boot_cpu_data.x86_vendor == X86_VENDOR_INTEL)
+>  		r->cache.arch_has_sparse_bitmasks = ecx.split.noncont;
+>  	r->alloc_capable = true;
+> +
+> +	if (rdt_cpu_has(X86_FEATURE_PLZA))
+> +		r->plza_capable = true;
+>  }
+>  
+>  static void rdt_get_cdp_config(int level)
+> diff --git a/arch/x86/kernel/cpu/resctrl/rdtgroup.c b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+> index 885026468440..540e1e719d7f 100644
+> --- a/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+> +++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
+> @@ -229,6 +229,11 @@ bool resctrl_arch_get_cdp_enabled(enum resctrl_res_level l)
+>  	return rdt_resources_all[l].cdp_enabled;
+>  }
+>  
+> +bool resctrl_arch_get_plza_capable(enum resctrl_res_level l)
+> +{
+> +	return rdt_resources_all[l].r_resctrl.plza_capable;
+> +}
+> +
+>  void resctrl_arch_reset_all_ctrls(struct rdt_resource *r)
+>  {
+>  	struct rdt_hw_resource *hw_res = resctrl_to_arch_res(r);
+> diff --git a/include/linux/resctrl.h b/include/linux/resctrl.h
+> index 63d74c0dbb8f..ae252a0e6d92 100644
+> --- a/include/linux/resctrl.h
+> +++ b/include/linux/resctrl.h
+> @@ -319,6 +319,7 @@ struct resctrl_mon {
+>   * @name:		Name to use in "schemata" file.
+>   * @schema_fmt:		Which format string and parser is used for this schema.
+>   * @cdp_capable:	Is the CDP feature available on this resource
+> + * @plza_capable:	Is Privilege Level Zero Association capable?
+>   */
+>  struct rdt_resource {
+>  	int			rid;
+> @@ -334,6 +335,7 @@ struct rdt_resource {
+>  	char			*name;
+>  	enum resctrl_schema_fmt	schema_fmt;
+>  	bool			cdp_capable;
+> +	bool			plza_capable;
 
-Tejun usually takes cgroup-related docs changes directly, so I was
-deferring on this one.  If the preference is for it to go through the
-docs tree I can certainly pick it up.
+Why are you making plza a resource property? Certainly for MPAM we'd
+want this to be global across resources and I see above that you are
+just checking a cpu property rather then anything per resource.
+
+>  };
+>  
+>  /*
+> @@ -481,6 +483,7 @@ static inline u32 resctrl_get_config_index(u32 closid,
+>  
+>  bool resctrl_arch_get_cdp_enabled(enum resctrl_res_level l);
+>  int resctrl_arch_set_cdp_enabled(enum resctrl_res_level l, bool enable);
+> +bool resctrl_arch_get_plza_capable(enum resctrl_res_level l);
+>  
+>  /**
+>   * resctrl_arch_mbm_cntr_assign_enabled() - Check if MBM counter assignment
+
 
 Thanks,
 
-jon
+Ben
+
 
