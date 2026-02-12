@@ -1,160 +1,177 @@
-Return-Path: <linux-doc+bounces-75940-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75941-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kCUzHFxBjmleBQEAu9opvQ
-	(envelope-from <linux-doc+bounces-75940-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 22:08:44 +0100
+	id unUfLTFCjml3BQEAu9opvQ
+	(envelope-from <linux-doc+bounces-75941-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 22:12:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E18A5131225
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 22:08:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28D7613125C
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 22:12:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A6A213034CB1
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 21:08:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id F34603052348
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 21:12:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 114832D7DE3;
-	Thu, 12 Feb 2026 21:08:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA92A2D94B5;
+	Thu, 12 Feb 2026 21:12:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="f8jy3zsw"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I6Q/9GJS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f73.google.com (mail-oa1-f73.google.com [209.85.160.73])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9DB71D5147
-	for <linux-doc@vger.kernel.org>; Thu, 12 Feb 2026 21:08:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.73
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A70AAF4F1;
+	Thu, 12 Feb 2026 21:12:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770930520; cv=none; b=gQhYxrh/Jluc3MJIS09qByxIszwtps9FplA+ZVMrJepsFMFpK7i87DJPiT5JEoDO6CdiorD8hsNnGLar1xonFxcMPlJKNB1H7M8d+1/4DpKN2g+BRTiN3rU3rgszRnv/L7AY1L6YmYYqfbZ6+kD/c8tEJvdKTz+oIY93snc/xZo=
+	t=1770930733; cv=none; b=GLNR58RTLwXJy6za99OEzGg2yI+AguX++pZRxV4v9zfkLIyXfVcklE9Cg+2cWIzEgz1mlvLTEMMQE8cdshLVfthmfPWxI8TgJpLOPReQ5GMZZXo5JWiVL/E+nXUc7lefK0Yz0MCbUxFXykK0VHmZNwHYurXN/o3IAeL+YvYw1fc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770930520; c=relaxed/simple;
-	bh=Si4a3lubEVIsFr5xg//zf0cPvmnb0GNinNu5h5MauAE=;
-	h=Date:In-Reply-To:Mime-Version:Message-ID:Subject:From:To:Cc:
-	 Content-Type; b=DGj+YT9ZbGw1yNI5cNSx15z+A95HVXkADzkTsPDhe2BPKrg59tNGztwWWNlks27euaVfZ+DeD4k/DxsOPDWRSOIkOjXjU1+SFQKCwc1DOGfxHMQDDULaHS3iPW0xvLzpcMN7gUUMIOkvREVWXQbFVOXxfy1q+uW4ZuKU/J3Etxo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=f8jy3zsw; arc=none smtp.client-ip=209.85.160.73
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com
-Received: by mail-oa1-f73.google.com with SMTP id 586e51a60fabf-409ef98c150so884237fac.3
-        for <linux-doc@vger.kernel.org>; Thu, 12 Feb 2026 13:08:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1770930518; x=1771535318; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:mime-version:in-reply-to:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=DEi6lE69DtAre9+98et1Td5y86Gv96d2+RPCeTq+27M=;
-        b=f8jy3zsw9Uhk0b4rInPMiIs/KIJkcZftveWo2R13oY5ZXtqJoVJZKhiYEPY/PzrFzr
-         mpCP0oOH9McaaBPWnQyEGSqZLIs47USxQ5YmisJIjhA5xl/cXYd7krqkBh1h6BWqk/gY
-         EoiZIuUnBCzmJmrlmECggq37K3gNx+6mbmCqHLWVeCri9A7STJDwzVovNcnMG5KBoiNt
-         wlj8rrJ9h7bFf3Cow96e3Voems+MqtAm5rjlVWu9fmRAnvzIMRK4TlvkKl68BmVNYIG6
-         uhw3Mw4o+HOsOgeTRuu067BqT9eBnV5WK0CeqSH7vIt5vMEOQKnzzVO0qsErxTxKkAXF
-         eH2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770930518; x=1771535318;
-        h=cc:to:from:subject:message-id:mime-version:in-reply-to:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=DEi6lE69DtAre9+98et1Td5y86Gv96d2+RPCeTq+27M=;
-        b=scsI02egzS1oMaYNfuBArhSXeVTAwuv5XjfbxXFfZdrR2rVaw9mc4BckhDy7CqndZh
-         JoTv5r5vuM2KwJFTLZdHEknQHEhxStixHaYFXpFj2ii4fP9XFVmeDo+zDZDfO3JDoQVm
-         c6I1I2nuJDewSGHJmqNZT5KS4FTQCFGnMbMJ5vU4hZ8zcxXO7u0Lju3oLJNBCsF27W8h
-         mVl3VxxbjknPT4gBR/acfBSoh5MSxxHb4W9YcoWCrtG+GtMes0xYXWORznSPdWCgF0e0
-         N/+yGXvAhU9f7cRBhPPUItn405toFQ9K2ZizwDUuDQN9qU72JmDsOsWM+wa2MBI8gvQm
-         vYBQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUEHvayX+v5NH2Rk3jFzgKLiomzORvO2l5mHs+Zyb6VnOBu6XqTXIGgZO6AI7W11x9VtnsTwKsYH84=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzwsC1KIzMtDMsrSG8HWxyWdCjrkKzm4mHrBGl54T1ZqlX1NPTz
-	ap9PA74qRomN/Ut8b2vIoSJEThUKVhIrXm50mWyZTjXg88TTPY12d6s816GoZa55maHW6ICgJtx
-	sd40I1Nqf6QR1Ml0WnkB3XEIHWw==
-X-Received: from ilmv6.prod.google.com ([2002:a92:c6c6:0:b0:468:4e21:6fcf])
- (user=coltonlewis job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6820:61d:b0:663:2b12:14f1 with SMTP id 006d021491bc7-677243b521amr65721eaf.83.1770930517469;
- Thu, 12 Feb 2026 13:08:37 -0800 (PST)
-Date: Thu, 12 Feb 2026 21:08:36 +0000
-In-Reply-To: <86v7g5asp4.wl-maz@kernel.org> (message from Marc Zyngier on Tue,
- 10 Feb 2026 08:49:59 +0000)
+	s=arc-20240116; t=1770930733; c=relaxed/simple;
+	bh=XizmmF3lxxSnLLMxo8fUj4LGwSFbwQ8dvaEF5IhQtZ8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Uf6amrsjZTbQzmaNqAxnbQUsBbSzYEA/P4T09r7u+67RRFYlACo1VNlj7SQnxORlDGx0y7BcZu7x08intVO3HKO+AVVt+k+FLRKFY+t4jGMBKQFvgfH2zt5EIwAKJW0WEyU/e1LAcgvcIYCPJDS6R3WCd80TnetCquDLoZIPCgc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I6Q/9GJS; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 35475C4CEF7;
+	Thu, 12 Feb 2026 21:12:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1770930733;
+	bh=XizmmF3lxxSnLLMxo8fUj4LGwSFbwQ8dvaEF5IhQtZ8=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=I6Q/9GJSIQPV5d1lTzf6NPguHl0+rsv1qHNopjPyRqppAx7jRCvEGKCc7t97oNUSr
+	 kXSh3beaS7bBtvaYAD/+bLP77y4FUEHNfZSfEePv/u/CTDaQddg0mb/ARJNrGHVPl3
+	 hiU0/MCeYZa8XfS3nPhSUGYUc1otveR3Ch60O0OgDIZZWKSYF9Kq9D+S/C7Ioe2vbi
+	 nkggz9zJIyXBA2dgnry5yQICWhguGYkNO0XjHlpaQ+U+IarU70rneQVH8EO7tof6kQ
+	 fyMNinrnVwvIcs1BH8GHRbVqF5q7c2UcdxM4Ea1+nC8MHq+ArlnnMl4Oswx1nrlKz/
+	 DuE1Br+HOfEfQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 281CDEEA852;
+	Thu, 12 Feb 2026 21:12:13 +0000 (UTC)
+From: Mayank Rungta via B4 Relay <devnull+mrungta.google.com@kernel.org>
+Subject: [PATCH 0/4] watchdog/hardlockup: Improvements to hardlockup
+ detection and documentation
+Date: Thu, 12 Feb 2026 14:12:09 -0700
+Message-Id: <20260212-hardlockup-watchdog-fixes-v1-0-745f1dce04c3@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Message-ID: <gsnt8qcxhdpn.fsf@coltonlewis-kvm.c.googlers.com>
-Subject: Re: [PATCH v6 00/19] ARM64 PMU Partitioning
-From: Colton Lewis <coltonlewis@google.com>
-To: Marc Zyngier <maz@kernel.org>
-Cc: kvm@vger.kernel.org, alexandru.elisei@arm.com, pbonzini@redhat.com, 
-	corbet@lwn.net, linux@armlinux.org.uk, catalin.marinas@arm.com, 
-	will@kernel.org, oliver.upton@linux.dev, mizhang@google.com, 
-	joey.gouly@arm.com, suzuki.poulose@arm.com, yuzenghui@huawei.com, 
-	mark.rutland@arm.com, shuah@kernel.org, gankulkarni@os.amperecomputing.com, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev, 
-	linux-perf-users@vger.kernel.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAClCjmkC/x3LywqAIBBA0V+JWTegRs9fiRaiUw5FhvaC6N+Tl
+ ofLfSBSYIrQZQ8EOjmyXxNknoFxep0I2SaDEqoSSkp0OtjFm/nY8NK7cdZPOPJNEStRyLpsG22
+ UgPRvgf6Q9n543w+BGVJ1awAAAA==
+X-Change-ID: 20260211-hardlockup-watchdog-fixes-60317598ac20
+To: Jonathan Corbet <corbet@lwn.net>, Petr Mladek <pmladek@suse.com>, 
+ Jinchao Wang <wangjinchao600@gmail.com>, 
+ Yunhui Cui <cuiyunhui@bytedance.com>, Stephane Eranian <eranian@google.com>, 
+ Ian Rogers <irogers@google.com>, Li Huafei <lihuafei1@huawei.com>, 
+ Feng Tang <feng.tang@linux.alibaba.com>, 
+ Max Kellermann <max.kellermann@ionos.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Douglas Anderson <dianders@chromium.org>, 
+ Andrew Morton <akpm@linux-foundation.org>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Mayank Rungta <mrungta@google.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1770930732; l=2564;
+ i=mrungta@google.com; s=20260212; h=from:subject:message-id;
+ bh=XizmmF3lxxSnLLMxo8fUj4LGwSFbwQ8dvaEF5IhQtZ8=;
+ b=9cOvWrv+W8cZ9WoLN1hnGKf3VDxgydz3lULolLYHZAMSoALvOyPsWfpwqqUMuZWDybswdJK2u
+ dg23qktnDUnBQ7KS2JPBZeSAU34dqvKH4hKKl7wltlGBaOmWMIYxAzK
+X-Developer-Key: i=mrungta@google.com; a=ed25519;
+ pk=2Bjwbv/ibL10QnyvK9G7DoKpffXy7z6+M4NawEYgYDI=
+X-Endpoint-Received: by B4 Relay for mrungta@google.com/20260212 with
+ auth_id=634
+X-Original-From: Mayank Rungta <mrungta@google.com>
+Reply-To: mrungta@google.com
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[lwn.net,suse.com,gmail.com,bytedance.com,google.com,huawei.com,linux.alibaba.com,ionos.com,chromium.org,linux-foundation.org];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-75940-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[coltonlewis@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-75941-lists,linux-doc=lfdr.de,mrungta.google.com];
 	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FROM_HAS_DN(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	HAS_REPLYTO(0.00)[mrungta@google.com];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E18A5131225
+X-Rspamd-Queue-Id: 28D7613125C
 X-Rspamd-Action: no action
 
-Hey Marc, thanks for the review.
+This series addresses limitations in the hardlockup detector implementations
+and updates the documentation to reflect actual behavior and recent changes.
 
-Marc Zyngier <maz@kernel.org> writes:
+The changes are structured as follows:
 
-> On Mon, 09 Feb 2026 22:13:55 +0000,
-> Colton Lewis <coltonlewis@google.com> wrote:
+Hardlockup Detection Improvements (Patches 1 & 3)
+=================================================
+The hardlockup detector logic relies on updating saved interrupt counts to
+determine if the CPU is making progress.
 
->> This series creates a new PMU scheme on ARM, a partitioned PMU that
->> allows reserving a subset of counters for more direct guest access,
->> significantly reducing overhead. More details, including performance
->> benchmarks, can be read in the v1 cover letter linked below.
+Patch 1 ensures that the saved interrupt count is updated unconditionally
+before checking the "touched" flag. This prevents stale comparisons which
+can delay detection. This is a logic fix that ensures the detector remains
+accurate even when the watchdog is frequently touched.
 
->> An overview of what this series accomplishes was presented at KVM
->> Forum 2025. Slides [1] and video [2] are linked below.
+Patch 3 improves the Buddy detector's timeliness. The current checking
+interval (every 3rd sample) causes high variability in detection time (up
+to 24s). This patch changes the Buddy detector to check at every hrtimer
+interval (4s) with a missed-interrupt threshold of 3, narrowing the
+detection window to a consistent 8-12 second range.
 
->> IMPORTANT: This iteration does not yet implement the dynamic counter
->> reservation approach suggested by Will Deacon in January [3]. I am
->> working on it, but wanted to send this version first to keep momentum
->> going and ensure I've addressed all issues besides that.
+Documentation Updates (Patches 2 & 4)
+=====================================
+The current documentation does not fully capture the variable nature of
+detection latency or the details of the Buddy system.
 
-> [...]
+Patch 2 removes the strict "10 seconds" definition of a hardlockup, which
+was misleading given the periodic nature of the detector. It adds a
+"Detection Overhead" section to the admin guide, using "Best Case" and
+"Worst Case" scenarios to illustrate that detection time can vary
+significantly (e.g., ~6s to ~20s).
 
-> As I have asked before, this is missing an example of how userspace is
-> going to use this. Without it, it is impossible to correctly review
-> this series.
+Patch 4 adds a dedicated section for the Buddy detector, which was previously
+undocumented. It details the mechanism, the new timing logic, and known
+limitations.
 
-> Please consider this as a blocker.
+Signed-off-by: Mayank Rungta <mrungta@google.com>
+---
+Mayank Rungta (4):
+      watchdog/hardlockup: Always update saved interrupts during check
+      doc: watchdog: Clarify hardlockup detection timing
+      watchdog/hardlockup: improve buddy system detection timeliness
+      doc: watchdog: Document buddy detector
 
-Understood. I remember you asking for a QEMU patch specifically.
+ Documentation/admin-guide/lockup-watchdogs.rst | 132 +++++++++++++++++++++----
+ include/linux/nmi.h                            |   1 +
+ kernel/watchdog.c                              |  41 ++++++--
+ kernel/watchdog_buddy.c                        |   9 +-
+ 4 files changed, 146 insertions(+), 37 deletions(-)
+---
+base-commit: 0dddf20b4fd4afd59767acc144ad4da60259f21f
+change-id: 20260211-hardlockup-watchdog-fixes-60317598ac20
 
-I had hoped that the use in the selftest was sufficient to show how to
-use the uAPI. If not, I can send out an example QEMU patch to the QEMU
-ARM mailing list.
+Best regards,
+-- 
+Mayank Rungta <mrungta@google.com>
 
-> Thanks,
 
-> 	M.
-
-> --
-> Without deviation from the norm, progress is not possible.
 
