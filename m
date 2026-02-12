@@ -1,69 +1,97 @@
-Return-Path: <linux-doc+bounces-75889-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75891-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6FbhLwh0jWn42gAAu9opvQ
-	(envelope-from <linux-doc+bounces-75889-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 07:32:40 +0100
+	id yHZGKh+TjWl54QAAu9opvQ
+	(envelope-from <linux-doc+bounces-75891-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 09:45:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E96112AC08
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 07:32:40 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A1B812B7E0
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 09:45:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7F19F310E7AF
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 06:30:19 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8238730209F5
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Feb 2026 08:45:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1233E2BD580;
-	Thu, 12 Feb 2026 06:30:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7446C2DC781;
+	Thu, 12 Feb 2026 08:45:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dQdBVOoo"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jhnR9Aw4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E10272BCF4A;
-	Thu, 12 Feb 2026 06:30:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E0DF2D9EF9
+	for <linux-doc@vger.kernel.org>; Thu, 12 Feb 2026 08:45:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770877819; cv=none; b=F4LlI3LJgQU6q+Qc7VmwIbEbzZn71ZIlmvADhNKYAO7S4lWzlg/97KW+GWFQTn430/D+6HxiIvCBB4xymJlpQ755JYs/q0LD/IITcTUZwzL0qJm3mTjP6o5htTxla825nqjEhSJ8rVQAFdzrfLxKN1Ayps0hBGCKtHyf+VFnowo=
+	t=1770885910; cv=none; b=UF++gzuMTEv/nKyauofqKmSluL6mLfmSEx3SUGCf4tPWrijjUl4tzWWvE7JGfansr9J2OZbHR9rrB20w0GkgmU+4NqPpCTkM8OIQDBkcbLI3DgZExTh8W0MBRQ12S3R6Y9D+cz6OKYkhKkvj7sf5DYcHR0TyUa7HDIH9BQKBGXo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770877819; c=relaxed/simple;
-	bh=pW8zfzWPeGX/NrtwmdEhpxnSoeYoudMU3BLTUgjZrks=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IfJcsUgVwtd9AEgC/yC8mEMNlr24NZ8x1mwJnbAKFqVz+TKlDR1EvjU6BTrHUpf7IY+Xhk657XdDEDlfgaUGpEncl5ryWTba1trvHjELcJxw1wCBT6SlCQ011GVWq560nI0x7wxqwbMp8msenmqJtzH3f9oPOR1+6tg7SFmtsek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dQdBVOoo; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 242F1C4CEF7;
-	Thu, 12 Feb 2026 06:30:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770877818;
-	bh=pW8zfzWPeGX/NrtwmdEhpxnSoeYoudMU3BLTUgjZrks=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dQdBVOooaa7gvsHwCnljCEeeqnL5QpFI2pjxdkuOhWGIEotMDtyThVuqfFrInzeuV
-	 O4IcwF9shTMX1YwjINUlOxQM2lS0ErJaA8l4N6XfwEg7iOa+zbpSJUoqI5iTMTUSbd
-	 YAPdYaOdB00uwiS4P8jHqDvM2yf6sdbPhO04G8+vTPuf36/K/eH0TcOALKwTiQva1o
-	 Y3ynfsSnA2nPfOL12U9AGX3Cu6y17fApeKRiqjJU6rl0Q78XLIcJ2nEm1I00E+ont6
-	 F1+qnVYq5go4sNdsolG7zxUHNOZf6ezLtrSp9oy4r6K59hVWDxz2SxfShHjRCFqCDL
-	 qSV9vCKFTRzhg==
-From: SeongJae Park <sj@kernel.org>
-To: SeongJae Park <sj@kernel.org>
-Cc: Yunjeong Mun <yunjeong.mun@sk.com>,
-	honggyu.kim@sk.com,
-	kernel_team@skhynix.com,
-	Ravi Jonnalagadda <ravis.opensrc@gmail.com>,
-	damon@lists.linux.dev,
-	linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	akpm@linux-foundation.org,
+	s=arc-20240116; t=1770885910; c=relaxed/simple;
+	bh=FMWBPm49ifKRkjLl8zUDWt9HyBY6118sqYd1if5HkLQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=pUghGBg84+bsmBaGQBou3Trxxp+Is1BDu8I5bhTK6LtTSWsxsHapAv6ESDSs8jBTAZJ/gB6FHfpacL1nJBpsS3cDqFyUUtcTL0rNoKl7eThfrPfWLbu/7T8lEOzCXL+FtSZvFdBzceVafBUtMhSXK3k6hxb6wyGRV8OtM11Qbgs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=jhnR9Aw4; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-48039fdc8aeso18323335e9.3
+        for <linux-doc@vger.kernel.org>; Thu, 12 Feb 2026 00:45:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770885905; x=1771490705; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kB22oilQpbKLorleBbZlAN5tq3XvDpZ40Y2OzAeJ9vU=;
+        b=jhnR9Aw4p09D4nim/WxVyE/4G07/vKHDeiW7qc1iaLBN7lRXwGLdZ70LXoPC5EpTzD
+         jBHO+uX9BJG3AzEPY5XBDMCggqkTH/8pceZ5zOjtmCh+k4jpXgJlBI/qS34GD1RNxvG2
+         jM9tiiQt6713E/UCsIVch7Ms5oNIxzRob7dHptLNq96nQnsXTcytqrvYoajoBcEOh4lQ
+         z+ULOeopTbixpkPxmatuB/gE8TnqgHumunFfbN36p9vPs05GD1VRN0LnnT9UrbiGLc7z
+         rPvUtsg67cxgI8h9oq41SSGeQfuTA9l6rrMvDom0uA0xLipNZ6LkGhSGUrHpams+eeMY
+         uCaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770885905; x=1771490705;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kB22oilQpbKLorleBbZlAN5tq3XvDpZ40Y2OzAeJ9vU=;
+        b=vt3BmVK4jiwuZq5IM8LNxkI0jNBdT0G8b9Rohdz0H0P1e/1Xl9VNvpkoXKGdIQst+J
+         8WZbW1dTmLeZ+KwXoMqmEXImGA3fFBsMXZtdZhWwZLbfQvdCVOegnagSiIgThi/1Sep9
+         Km89FMq1L5i9wmcSWBq6m28rl1Zp24oBSzq3+6cxyIF4vcq+NAhQ6Src+AQ4Va2BTYNV
+         jvWisEbnYKp/oYQl58lzSofUoTscxoUOF9tw/muEJDKlMz22+GUvD0ZdC0it4TMimy5Q
+         vgQ78hKkEQcyxkrUyzzK8w8pYxdhEooY3fC1jgdN8g4RSkb9YLQ389xu5C5R7uphBUqv
+         YPVg==
+X-Forwarded-Encrypted: i=1; AJvYcCWD1TpmpKJh2vPHwU13Gm7p13aXz/MXK3emPXQtp71i5ZV8YyQa0AEbdBlD9mgPnWyhHWsSQK0FtH0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz7DLm2ObLtYeYDrcLnDTxFv2x9xOXNgaiKthAeDvXyU2bfqLRU
+	wfnlVzhTw1UYpLvD4othshk6C/ykB4Nc5/+v6nUNIzGe1umd1rvWZ96176geN06+DKA=
+X-Gm-Gg: AZuq6aJ1UZMHbhDfsIzUjxzDR/5JaTLb/GJXOun4zpxAsIFAWwllgDsXEIclzj0VRVy
+	i4Wy3jELqAE7nD5hWYWRIOdhi7+V4xJsZzQ5U7lyKBUjaR1ubBJ43IFUrBd2Pk//Y9EPjoJxilR
+	XGEEPrD6OEdcSCq5hGLouNVu4CnjpOfzgEPVfwYTvg7skjkXyaVB5du481eOauyVIEJ3NumrDpn
+	sS9wMqdTIATOgHAOigw/0e2E9fU0XOCbGT3Gzfui80dJZCDOGvkgsEiMTYX3zhAegHMfc9GqphG
+	cSAjY82sbSzzn3TMVX7HtYxpujqfmn8yEv5MbS8V4tSAtKUqIPO55dnEhkJaHY9EJ95N/0135cX
+	COvGadgyXlghA0BGEqC0nDyTBHtGWCdXJwLUSQiuGfGZgo0vNx6phdqyB9qTFtbyVD+zh5Bb4DA
+	WNLvmgbbEGLzR5kvUfjO1fxhywbrn0EsocFgrw1AotZLa40c7thi1H+aH9fwbbYmkUnZzOZQU6F
+	3prAKCjQw==
+X-Received: by 2002:a05:600c:818c:b0:483:2c98:435e with SMTP id 5b1f17b1804b1-4836717eb60mr20304835e9.34.1770885905577;
+        Thu, 12 Feb 2026 00:45:05 -0800 (PST)
+Received: from silence.. ([46.10.240.40])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4835dd0e15bsm82753705e9.13.2026.02.12.00.45.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Feb 2026 00:45:05 -0800 (PST)
+From: Stoyan Bogdanov <sbogdanov@baylibre.com>
+To: jbrunet@baylibre.com,
+	linux@roeck-us.net,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
 	corbet@lwn.net,
-	bijan311@gmail.com,
-	ajayjoshi@micron.com
-Subject: Re: [RFC PATCH 0/5] mm/damon: Add node_sys_bp quota goal metric for
-Date: Wed, 11 Feb 2026 22:30:09 -0800
-Message-ID: <20260212063009.70556-1-sj@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260204060641.97191-1-sj@kernel.org>
-References: 
+	skhan@linuxfoundation.org
+Cc: linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Stoyan Bogdanov <sbogdanov@baylibre.com>
+Subject: [PATCH v1 0/3] Add TI TPS1689 pmbus eFuse
+Date: Thu, 12 Feb 2026 10:44:59 +0200
+Message-Id: <20260212084502.1795-1-sbogdanov@baylibre.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -72,80 +100,59 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [1.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[baylibre-com.20230601.gappssmtp.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-75891-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-75889-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[sk.com,skhynix.com,gmail.com,lists.linux.dev,kvack.org,vger.kernel.org,linux-foundation.org,lwn.net,micron.com];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	DMARC_NA(0.00)[baylibre.com];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sbogdanov@baylibre.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[baylibre-com.20230601.gappssmtp.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 1E96112AC08
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[baylibre.com:mid]
+X-Rspamd-Queue-Id: 4A1B812B7E0
 X-Rspamd-Action: no action
 
-On Tue,  3 Feb 2026 22:06:40 -0800 SeongJae Park <sj@kernel.org> wrote:
+Rework TPS25990 eFuse pmbus driver to provide more unified way for
+non standard direct conversions.Remove existing defines for TPS25990
+conversions and replace them with enum listing all supported parameters
+and structure using m, b, R. Add fucntion to covert raw to real value
+and real value back to raw. Add data structure to hold pmbus_driver_info
+and local_direct_values for direct conversion.
 
-> On Wed,  4 Feb 2026 11:25:35 +0900 Yunjeong Mun <yunjeong.mun@sk.com> wrote:
-> 
-> > On Fri, Jan 23, 2026 at 05:50:43PM -0800, SeongJae Park wrote:
-[...]
-> > > IIRC, SK hynix people also confused with the behavior when they experimented
-> > > migrate_{hot,cold} action with NODE_MEM_USED_BP goal based quota auto-tuning,
-> > > but using only a single scheme that does migration in a single direction.
-> > > Because this is at least second time it made confusion, if you need, maybe I
-> > > can try to add a feature for making DAMOS immediately stops after the goal is
-> > > satisfied.  Let me know if such new feature can be useful for you.  Cc-ing SK
-> > > hynix people (Honggyu and Yunjeong) so that they can correct me if my memory is
-> > > broken, or answer if the new feature I described here can be useful for them.
-> > > 
-> > 
-> > Yes, you're absolutely right. Currently, esz(effective size) starts from 0 and 
-> > esz gradually increases as `current` approaches `target`.
-> > Once `current` reaches `target`,  `esz` then begins to decrease.
-> > 
-> > However, we observed that even after `current` hits `target`, 
-> > migration still continues relatively aggressively - because `esz`  remains high, 
-> > and it takes time for it to decrease.
-> > 
-> > To address this, we previously suggested that initializing `esz`  at `target`
-> > (or something suitably large value, rather than 0) and letting it gradually 
-> > decrease as `current` gets closer to  `target`.  
-> > This would allow for stronger migration when `current` is far form `target`, 
-> > and gradually weaken migration as `current` approaches `target`.
-> > 
-> > Such a feature would be useful for us to experiment with tiered memory system :)
-> 
-> Thank you for confirming, Yunjeong.  I now agree this is what really need to be
-> implemented.  And I agree your suggestion makes sense for the use case.  I want
-> to take sufficient time for good design of it, though.  I will share update as
-> soon as I get some idea.
+Add support TPS1689 support to TPS25990 driver, since both
+chips are sharing a lot of similar internal functions with exception of
+work range like Voltage and Current.
 
-I just posted an RFC patch series for this:
-https://lore.kernel.org/20260212062314.69961-1-sj@kernel.org
+Stoyan Bogdanov (3):
+  hwmon: (pmbus/tps25990): Rework TPS25990 non standatd direct
+    conversion
+  dt-bindings: hwmon: pmbus/tps1689: Add TPS1689 support
+  hwmon: (pmbus/tps1689): Add TPS1689 support
 
+ .../bindings/hwmon/pmbus/ti,tps25990.yaml     |   4 +-
+ Documentation/hwmon/tps25990.rst              |  15 +-
+ drivers/hwmon/pmbus/tps25990.c                | 185 +++++++++++++++---
+ 3 files changed, 171 insertions(+), 33 deletions(-)
 
-Thanks,
-SJ
+-- 
+2.34.1
 
-[...]
 
