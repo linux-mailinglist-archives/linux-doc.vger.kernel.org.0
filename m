@@ -1,129 +1,173 @@
-Return-Path: <linux-doc+bounces-75986-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-75989-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4AGNCegyj2k+MQEAu9opvQ
-	(envelope-from <linux-doc+bounces-75986-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Feb 2026 15:19:20 +0100
+	id yNdAEIdRj2kJQQEAu9opvQ
+	(envelope-from <linux-doc+bounces-75989-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Feb 2026 17:29:59 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3D1D137063
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Feb 2026 15:19:19 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AAD7E1380A6
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Feb 2026 17:29:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2B4C33010BA8
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Feb 2026 14:19:05 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4FBFF30DD339
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Feb 2026 16:28:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54E4B28C037;
-	Fri, 13 Feb 2026 14:19:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBCF735CBCE;
+	Fri, 13 Feb 2026 16:28:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K0Fbb1dZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X/GZ7oSe"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 325181E376C;
-	Fri, 13 Feb 2026 14:19:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B44A22E6CB8;
+	Fri, 13 Feb 2026 16:28:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770992344; cv=none; b=vALPJlxnvghPwDNFEF+THA7upL5mbWIWVsldz0KMK4Ri3zliBCHqygdCwhTUKM6hL3C+8mlbfwSZlE00E29aNZ0RzRts15vMPC/hrxHOMGM/qDTb5ObGSOeyCsRwE3/6Pv7wmbBcNUbRSTIruKMiP3QG1A5UbMzgdE1x+FgNNAI=
+	t=1771000126; cv=none; b=YIHIMnp9hbXHYjuFE3q543m+dlPKbsCj2fBau7W2B45SCB9m6YqllnaMXNbh1otBWkV47vo4Wu2u02EcmcsNoSw/QnVNU4SHSDO2m/XXfZpLum/SdXQ4Rl78FCMXzc4MZ6zjvxkTM7W6ZPOxQDVr0j1DZvBulNjO2qzJZ35Yz+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1770992344; c=relaxed/simple;
-	bh=T+WU0QN6oLz5dRbHnI15ISCNNguwotjY59hsUOGBEuE=;
+	s=arc-20240116; t=1771000126; c=relaxed/simple;
+	bh=1fzPsvpz3zBlz/HKxjoMGBiAr5SavJd0WmfYKo7UbVw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mAdrbgyy+FJ3XCAoU+nob3lJ/NJdEkccl3P3fJS8YbOvFDJDc7R9vdzQrpwGV+kjAYNi17ScFnbRQm6jgGs3tCNG+FGXzRspFH+TneO31wmcUP7bi/yj4ovew6UWbs8QWjX7UdHrcpmB/V6Kxc4H4h+5rJqqsI9ZpJVsFYBqjpM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K0Fbb1dZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7C00C16AAE;
-	Fri, 13 Feb 2026 14:19:01 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=Us/razOP6HZdl0VqaE9k4/F+RBG8zHKIgLtIy5/nM2B39CaQH7LvNp4ySLvtX2Xh65y0URUmywEYCdNgzHE9Uk/tf10ErntrxhbU394UuNsev0yaxSUPUAH7BL4PYDdRw/1VOpYokC11fakEkTT3rosVbBxgG2ozygYV1GEsR64=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X/GZ7oSe; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBC3FC116C6;
+	Fri, 13 Feb 2026 16:28:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1770992343;
-	bh=T+WU0QN6oLz5dRbHnI15ISCNNguwotjY59hsUOGBEuE=;
+	s=k20201202; t=1771000126;
+	bh=1fzPsvpz3zBlz/HKxjoMGBiAr5SavJd0WmfYKo7UbVw=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=K0Fbb1dZFif3zC5eISWPo54HKbjuhmBzb6zxCWXHtCI6PbHFTS9ruQtabCz9IY0GX
-	 d+7uJuB7mySEm00o1VpFgjKOGvD/mizoo1YTEEKOjum1EyQ2SRofxBSfSWPgMjb/y1
-	 mOJfZhCvf2XgY8vX6zmL9vR5PWmcBgLQpw0eZj0+aRPNswYJTzOZPYWWwDcHQQrir1
-	 bQ6E8UxL4xYpM4I8MztaqPQsCxMUHCNFAwVXF4Zdv/428bmwLd1zoVGvZghPniTRDW
-	 imaIrXVsPrUJSU4Xxf2flLli9Xx4fVimUillDTMYomwvH4LbsDcuNYOzyB6//xSwZP
-	 9duHW7Bag7qow==
-Date: Fri, 13 Feb 2026 14:18:59 +0000
-From: Simon Horman <horms@kernel.org>
-To: Paolo Abeni <pabeni@redhat.com>
-Cc: Yohei Kojima <yk@y-koj.net>, Andrew Lunn <andrew@lunn.ch>,
-	Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jonathan Corbet <corbet@lwn.net>, netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v2] docs: ethtool: clarify the bit-by-bit bitset
- format description
-Message-ID: <aY8y0zTlif9dGuLA@horms.kernel.org>
-References: <f43999612ed9d17fb7fe8f21e777e1c784f23c46.1770457868.git.yk@y-koj.net>
- <f2882370-a531-4a83-ab39-cf73878c0d03@redhat.com>
+	b=X/GZ7oSeIm81oBp0EFVVKVX3NqyM5TA+otjfeY5LjfGWHvJP1GO9t+J5HY2ZonXnI
+	 m9xbZhOtuLzKAmOC2GYdcCYGa4Lp4UNigCk0e3NLwLfmkn0uTGo1XVl7gHImtTD2d3
+	 D2J4UDLzhf8fMlwIJH1eGVdIvXPhFWaAVh+2jh1lxjthGI1efko/fh/0DAMCkTdYSY
+	 X7ZXh5JIWDVxNEat7r1IunJ4zKpoFeWA3t88+JdkTJXNf3gNneTQGBdf4H/QgV2BYT
+	 xRDJ9pn5UJIu0TVJcx9208exMj42cxMvGkePYFNYmy5cpJ3I+PLYlWY2EkMSjqyk+q
+	 MxCr6YM/tAswg==
+Date: Fri, 13 Feb 2026 16:09:48 +0100
+From: Nicolas Schier <nsc@kernel.org>
+To: Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>
+Cc: Nathan Chancellor <nathan@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Petr Pavlu <petr.pavlu@suse.com>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Daniel Gomez <da.gomez@samsung.com>,
+	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
+	"Serge E. Hallyn" <serge@hallyn.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Naveen N Rao <naveen@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>,
+	Roberto Sassu <roberto.sassu@huawei.com>,
+	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
+	Eric Snowberg <eric.snowberg@oracle.com>,
+	Daniel Gomez <da.gomez@kernel.org>,
+	Aaron Tomlin <atomlin@atomlin.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>,
+	Xiu Jianfeng <xiujianfeng@huawei.com>,
+	Fabian =?iso-8859-1?Q?Gr=FCnbichler?= <f.gruenbichler@proxmox.com>,
+	Arnout Engelen <arnout@bzzt.net>,
+	Mattia Rizzolo <mattia@mapreri.org>, kpcyrd <kpcyrd@archlinux.org>,
+	Christian Heusel <christian@heusel.eu>,
+	=?iso-8859-1?Q?C=E2ju?= Mihai-Drosi <mcaju95@gmail.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
+	linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org, linux-integrity@vger.kernel.org
+Subject: Re: [PATCH v4 10/17] module: Move integrity checks into dedicated
+ function
+Message-ID: <aY8-vICrltcCtP51@derry.ads.avm.de>
+Mail-Followup-To: Nicolas Schier <nsc@kernel.org>,
+	Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>, Luis Chamberlain <mcgrof@kernel.org>,
+	Petr Pavlu <petr.pavlu@suse.com>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Daniel Gomez <da.gomez@samsung.com>,
+	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
+	"Serge E. Hallyn" <serge@hallyn.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Naveen N Rao <naveen@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>,
+	Roberto Sassu <roberto.sassu@huawei.com>,
+	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
+	Eric Snowberg <eric.snowberg@oracle.com>,
+	Daniel Gomez <da.gomez@kernel.org>,
+	Aaron Tomlin <atomlin@atomlin.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>,
+	Xiu Jianfeng <xiujianfeng@huawei.com>,
+	Fabian =?iso-8859-1?Q?Gr=FCnbichler?= <f.gruenbichler@proxmox.com>,
+	Arnout Engelen <arnout@bzzt.net>,
+	Mattia Rizzolo <mattia@mapreri.org>, kpcyrd <kpcyrd@archlinux.org>,
+	Christian Heusel <christian@heusel.eu>,
+	=?iso-8859-1?Q?C=E2ju?= Mihai-Drosi <mcaju95@gmail.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
+	linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org, linux-integrity@vger.kernel.org
+References: <20260113-module-hashes-v4-0-0b932db9b56b@weissschuh.net>
+ <20260113-module-hashes-v4-10-0b932db9b56b@weissschuh.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <f2882370-a531-4a83-ab39-cf73878c0d03@redhat.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260113-module-hashes-v4-10-0b932db9b56b@weissschuh.net>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-75986-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-75989-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[39];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[kernel.org,arndb.de,suse.com,google.com,samsung.com,paul-moore.com,namei.org,hallyn.com,lwn.net,linux.ibm.com,ellerman.id.au,gmail.com,huawei.com,oracle.com,atomlin.com,oss.cyber.gouv.fr,proxmox.com,bzzt.net,mapreri.org,archlinux.org,heusel.eu,linutronix.de,vger.kernel.org,lists.ozlabs.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[horms@kernel.org,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nsc@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,horms.kernel.org:mid]
-X-Rspamd-Queue-Id: C3D1D137063
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,weissschuh.net:email]
+X-Rspamd-Queue-Id: AAD7E1380A6
 X-Rspamd-Action: no action
 
-On Wed, Feb 11, 2026 at 12:55:55PM +0100, Paolo Abeni wrote:
-> On 2/7/26 11:25 AM, Yohei Kojima wrote:
-> > Clarify the bit-by-bit bitset format's behavior around mandatory
-> > attributes and bit identification. More specifically, the following
-> > changes are made:
-> > 
-> > * Rephrase a misleading sentence which implies name and index are
-> >   mutually exclusive
-> > * Describe that ETHTOOL_A_BITSET_BITS nest is mandatory
-> > * Describe that a request fails if inconsistent identifiers are given
-> > 
-> > Signed-off-by: Yohei Kojima <yk@y-koj.net>
-> > ---
-> > Current ethtool-netlink documentation doesn't describe several behavior
-> > around bit-by-bit bitset, which makes it hard to develop a ethtool
-> > library without digging into the kernel code. This patch eases the gap
-> > between the kernel behavior and the documentation by adding descriptions
-> > around the mandatory attribute and bit identification.
+On Tue, Jan 13, 2026 at 01:28:54PM +0100, Thomas Weiﬂschuh wrote:
+> With the addition of hash-based integrity checking, the configuration
+> matrix is easier to represent in a dedicated function and with explicit
+> usage of IS_ENABLED().
 > 
-> This needs review by someone provided with English natural language
-> skills far better than mine. I'm wrapping the net-next PR right now;
-> this has to be deferred after the merge window, I'm sorry.
+> Drop the now unnecessary stub for module_sig_check().
+> 
+> Signed-off-by: Thomas Weiﬂschuh <linux@weissschuh.net>
+> ---
+>  kernel/module/internal.h |  7 -------
+>  kernel/module/main.c     | 18 ++++++++++++++----
+>  2 files changed, 14 insertions(+), 11 deletions(-)
+> 
 
-Hi Paolo,
-
-It's my opinion that, from an English language perspective, the changes
-in this patch match the description.
-
-Reviewed-by: Simon Horman <horms@kernel.org>
+Reviewed-by: Nicolas Schier <nsc@kernel.org>
 
