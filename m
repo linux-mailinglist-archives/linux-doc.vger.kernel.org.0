@@ -1,709 +1,428 @@
-Return-Path: <linux-doc+bounces-76067-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76071-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qPpyCAgMk2nw1AEAu9opvQ
-	(envelope-from <linux-doc+bounces-76067-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Feb 2026 13:22:32 +0100
+	id 6NnzF60Vk2nD1QEAu9opvQ
+	(envelope-from <linux-doc+bounces-76071-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Feb 2026 14:03:41 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D2401434F1
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Feb 2026 13:22:31 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA21D143974
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Feb 2026 14:03:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 215E93003635
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Feb 2026 12:22:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id CAB773019137
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Feb 2026 13:03:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A997301000;
-	Mon, 16 Feb 2026 12:22:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E47A5306480;
+	Mon, 16 Feb 2026 13:02:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="Y6IHf9gq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 916532F4A05;
-	Mon, 16 Feb 2026 12:22:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771244546; cv=none; b=kpIjnISlqauMqGktW9RdYMv4vlY02qjyqOtSnO0mHTj5X0rsC0LosZCb3cSMopxkqAMqBfz5qZfvFzBsHg2ewgpFPWBouK7djfO/UsISExi6LsVOF9JwMHI70RNOD5IIIcWXJQhfQRCd6N0NMHUUv0ljqIdOShAJF6LMcTdO/CM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771244546; c=relaxed/simple;
-	bh=bWnFaOVa0+yFR9y8lCxW59b1YsHn0T/VZtPn9tfqxxI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pJeWq71n1dR8g16TfnTdXPrzENOaetA2HUM4iK80qwMbXcRqn3P/m7c0wqfoKdla7ns9PCb8KDbXKbM/r/dsCjGVlOi54JywV/Y0cknlRkPbk8+AjZ/Sdwk5kN+2rqOdxd+PilSDwT1hBOY6bxh+ArsrviEHEx7UdE0Q65dp8lg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5844C150C;
-	Mon, 16 Feb 2026 04:22:15 -0800 (PST)
-Received: from [10.1.196.46] (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4786B3F73F;
-	Mon, 16 Feb 2026 04:22:16 -0800 (PST)
-Message-ID: <b844c632-c8fc-48f1-b347-07f166019b22@arm.com>
-Date: Mon, 16 Feb 2026 12:22:14 +0000
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39E183002BB;
+	Mon, 16 Feb 2026 13:02:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771246974; cv=pass; b=qtMncpz1F+hfZYeZ9fSxUpwGEfsHCYrAoXrnJ6yW8fyzH6Ijd3/sxUpMAW/DKLDRXfoBL6RnonFtof6vuRS+GUtsS4ozWtKnO5yoNF+k9nr5ypw9+9unSUnhDoG1W2cB+NcwsYwvb7v+8SMCjkB7aAS6+xCCW2PWXcxPM5Dodq0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771246974; c=relaxed/simple;
+	bh=sViUpUh2Iietmzr1bi6iTUfP2+jnfisSrKIUUCtB66s=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=RhkexyUn5RIQkGH0zhvz0ohzXIG0KatgJ5ESKyDg46xtSBwFYwIkvVkDAVffY3n4Zn456HOMPZSSk3t39TVBdv+VAcUDTi4yKYSsG6f4lR8CgkoKEeIEW0Q84r7YNbHKESmS2fT/hLxOPalLuiAo2RbYRPQ58s05sv4F/nGpD/Y=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=Y6IHf9gq; arc=pass smtp.client-ip=136.143.188.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1771246901; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=aqwflEEqWy+UMtIwpzANuwSiv/fLNKhEw8pxOm1tDaG6dPBMIUKpOYyvq+6q//wIVHMuzwABvO8+e92NTSF2ShzoIpNTqJ47+LifiE7ufrnWzD4VV00rzhziKg1fu4qs3wDiSFps4X2Xk1Yc6cEIjPeWSJy99ccmkYIp99rWRsY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1771246901; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=kBBFaFSoSfH60LrLCQNLPElgnZby6jwc9r08YJz1XEg=; 
+	b=K4vkoHn+2bCD52QahLPcFtyJOvXUZjBFm5jkr/l1O/kjMAN4YcS2a4GRnn4t2rD3vJNWyb9iAwyCpiCTzvYZo7Z5vOdkt3+Ev3R3WK64BKAqJJBhkQ24H0+1nSMXKC8BK9BP2ViRLr4mahcmXIc3+fFtv/tqc57HfK2e4E3UxVc=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
+	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1771246901;
+	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
+	h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Reply-To;
+	bh=kBBFaFSoSfH60LrLCQNLPElgnZby6jwc9r08YJz1XEg=;
+	b=Y6IHf9gqryBIEG5boznDt/QMrI6NqbAmtlqrqT3J08sgqSINsNPnMGq3N/wysFw1
+	yGySh5/QKpwPm5fuZMCORSDUTwzGv6FMVPGqO74mxPRdd9r5IxI+FWiXDRPtY9OB5oX
+	NmN4kMAm7FbgJY29tRloIKKGACyukrEEIN+L6lhk=
+Received: by mx.zohomail.com with SMTPS id 1771246898996134.97705115586757;
+	Mon, 16 Feb 2026 05:01:38 -0800 (PST)
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+Subject: [PATCH v8 00/20] Add new general DRM property "color format"
+Date: Mon, 16 Feb 2026 14:01:14 +0100
+Message-Id: <20260216-color-format-v8-0-5722ce175dd5@collabora.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/41] arm_mpam: Add KVM/arm64 and resctrl glue code
-To: Zeng Heng <zengheng4@huawei.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
- baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
- dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
- fenghuay@nvidia.com, gshan@redhat.com, james.morse@arm.com,
- jonathan.cameron@huawei.com, kobak@nvidia.com, lcherian@marvell.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- peternewman@google.com, punit.agrawal@oss.qualcomm.com,
- quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
- scott@os.amperecomputing.com, sdonthineni@nvidia.com,
- tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
- will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
- joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- linux-doc@vger.kernel.org, Kefeng Wang <wangkefeng.wang@huawei.com>
-References: <20260203214342.584712-1-ben.horgan@arm.com>
- <9945d28e-f1f2-e11a-1481-8d80167d6f89@huawei.com>
-From: Ben Horgan <ben.horgan@arm.com>
-Content-Language: en-US
-In-Reply-To: <9945d28e-f1f2-e11a-1481-8d80167d6f89@huawei.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33P3U7EIBAF4FdpuJbK0B/oXvkexgsogyUpywpdo
+ tn03WXrarTZeEVOyHxz5kISRoeJHKoLiZhdcuFYgnyoyDip4ytSZ0omnPEOGJd0DHOI1Ibo1UL
+ bwZryowXIhpSRU0Tr3jfu+aVkG4OnyxRR/SBsAICGiWao26HpKVCvojunOs/KPBV9VjpEVY/B3
+ 8SIb+fSa/liiVYJSwvv3XKoTCy+Oz3eXnJdOrm0hPixnZTbbWZrDyD+ts8tZZQZNIJrA5qx3fo
+ rlrtfwP783BWgb1ByC0YDwj2g/wZ6Bhx2QF8AoSUoIWA0TN8DxH+AKABaMTCjUEg27oF1XT8Bt
+ Tumw+QBAAA=
+X-Change-ID: 20251028-color-format-49fd202b7183
+To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
+ Rodrigo Siqueira <siqueira@igalia.com>, 
+ Alex Deucher <alexander.deucher@amd.com>, 
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Sandy Huang <hjc@rock-chips.com>, 
+ =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+ Andy Yan <andy.yan@rock-chips.com>, 
+ Jani Nikula <jani.nikula@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+ Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-doc@vger.kernel.org, 
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, 
+ Werner Sembach <wse@tuxedocomputers.com>, 
+ Andri Yngvason <andri@yngvason.is>, Marius Vlad <marius.vlad@collabora.com>, 
+ Andy Yan <andyshrk@163.com>
+X-Mailer: b4 0.14.3
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.36 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76067-lists,linux-doc=lfdr.de];
-	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:email,localhost:email,arm.com:url,arm.com:mid]
-X-Rspamd-Queue-Id: 6D2401434F1
+	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-76071-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[collabora.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,tuxedocomputers.com,yngvason.is,163.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:mid,collabora.com:dkim,collabora.com:email,nv12:email,gitlab.freedesktop.org:url,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: CA21D143974
 X-Rspamd-Action: no action
 
-Hi Zeng,
+Hello,
 
-On 2/14/26 09:40, Zeng Heng wrote:
-> Hi Ben,
-> 
-> On 2026/2/4 5:43, Ben Horgan wrote:
-[...]
->>
->> Based on:
->> [1] git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git x86/cache
->> (To include telemetry code which changes the resctrl arch interface)
->>
->> The series can be retrieved from:
->> https://gitlab.arm.com/linux-arm/linux-bh.git mpam_resctrl_glue_v4
->> (Final commit is a fix already in 6.19-rc8)
->>
-[...]
->>
-> 
-> I've tested the MPAM functionality on my local Kunpeng platform. Here's
-> a summary of the results:
+this is a follow-up to
+https://lore.kernel.org/all/20250911130739.4936-1-marius.vlad@collabora.com/
+which in of itself is a follow-up to
+https://lore.kernel.org/dri-devel/20240115160554.720247-1-andri@yngvason.is/ where
+a new DRM connector property has been added allowing users to
+force a particular color format.
 
-Thank you very much for your testing and detailed report.
+That in turn was actually also a follow-up from Werner Sembach's posted at
+https://lore.kernel.org/dri-devel/20210630151018.330354-1-wse@tuxedocomputers.com/
 
-> 
-> Features enabled and verified:
->   * L2 and L3 CPBM
->   * L3 CSU
->   * L2 and L3 CDP
-> All enabled features passed functional testing as expected.
-> 
-> + Tested-by: Zeng Heng <zengheng4@huawei.com>
-> 
-> Features not enabled:
->   1. MATA MBMAX partition and MBWU monitor.
+As the number of cooks have reached critical mass, I'm hoping I'll be
+the last person to touch this particular series.
 
-What's MATA here? Just memory allocation or something more specific?
+We have an implementation in Weston at
+https://gitlab.freedesktop.org/wayland/weston/-/merge_requests/1825 that
+adds support for this property. This patch series has been tested
+against that MR on i915 (HDMI, DP), amdgpu (HDMI, DP) and on rockchip
+(HDMI).
 
->      Reason: These do not meet the driver's current topology>     
-expectations for MB support, hence they were not initialized.
->      This behavior is expected.
+You can also manually test this with modetest like so, but beware that
+this is a non-atomic invocation, so testing YUV420 like this will result
+in weird outcomes if only some of the modes support YUV420:
 
-Is this because you have more than 1 L3 cache?
+  $ modetest -s 115:1920x1080-60@NV12 -w 115:'color format':4
 
-> 
->   2. L2 CSU and MBWU monitors.
->      Reason: The current MPAM driver does not support L2-related
->      functionality yet.
+where 115 is the connector ID and '4' is the enum value for a particular
+color format.
 
-Thanks for letting us know you have these. But, yes, unfortunately
-monitoring is only supported on the L3 at the moment.
+General notes on the approach taken by me: instead of silently switching
+to a different format than was explicitly requested, or even worse,
+outputting something to the sink the sink doesn't support, bubble up an
+error to userspace instead. "color format" is a "I want this" type
+property, not a "force this" type property, i.e. the kernel will respect
+the limits imposed by the hardware.
 
-> 
-> + Tested-by: Zeng Heng <zengheng4@huawei.com>
-> 
-> 
-> Detailed test logs are as follows:
+I'm not sure if my drm_bridge change actually achieves what I want in a
+more complex bridge setup. I'd need to either come up with a virtual
+bridge to test these scenarios, or spend some time making a flat flex
+cable adapter for the DSI-HDMI bridge board I have here. Before I invest
+too much time into either of those, I'd like to get some feedback on
+this approach however.
 
-I'm confused by these logs as it looks like you aren't getting any
-monitors but you verified the L3 CSU. Also, it looks like cpor (cbpm) is
-disabled (at least partially) but you verified L2 and L3 CPBM. Is this
-across different machines?
+Things I've tested:
+- HDMI (YCbCr 4:4:4 + YCbCr 4:2:2 (8-bit) + RGB + Auto) on RK3588
+- HDMI (YCbCr 4:4:4 + YCbCr 4:2:2 (8-bit) + RGB + Auto) on RK3576
+- HDMI + DP (YCbCr 4:4:4, YCbCr 4:2:0, RGB, Auto) on Intel N97 (i915)
+  DP-MST is untested, and no longer trivially equivalent.
+- HDMI (YCbCr 4:4:4, YCbCr 4:2:2, YCbCr 4:2:0, RGB, Auto) + DP (YCbCr
+  4:4:4, RGB, Auto) on an AMD Radeon RX 550 (amdgpu). DP-MST is
+  untested.
 
-> 
-> Boot logs:
-> [root@localhost ~]# dmesg | grep -i mpam
-> [    0.000000] ACPI: MPAM 0x000000007FF35018 003024 (v01 HISI   HIP12
-> 00000000 HISI 20151124)
-> [    9.509852] mpam_msc mpam_msc.64: Merging features for
-> vmsc:0xffff0800973cf5a0 |= ris:0xffff08009757ee90
-> [    9.509859] mpam_msc mpam_msc.254: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff080097628520
-> [    9.509860] mpam:__props_mismatch:
-> mpam_has_feature(mpam_feat_cpor_part, parent) = 1
-> [    9.509864] mpam:__props_mismatch:
-> mpam_has_feature(mpam_feat_cpor_part, child) = 0
-> [    9.509866] mpam:__props_mismatch: parent->cpbm_wd = 8
-> [    9.509869] mpam:__props_mismatch: child->cpbm_wd = 0
-> [    9.509871] mpam:__props_mismatch: alias = 0
-> [    9.509873] mpam:__props_mismatch: cleared cpor_part
+Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+---
+Changes in v8:
+- Drop "drm/rockchip: vop2: Fix YUV444 output", as the original problem
+  could not be reproduced anymore, and the justification did not make
+  sense.
+- Remove the 12-bit format from "drm/rockchip: vop2: Recognise 10/12-bit
+  YUV422 as YUV formats".
+- Refactor to keep the original DRM_COLOR_FORMAT bitshifted defines
+  as-is, but introduce a new drm_color_format_enum enum.
+- Adjust conversion functions for the newly refactored enum, ensuring
+  they only return valid enum values, and only convert in directions
+  that open up no error value cans of worms.
+- Rework the property uapi code for the newly refactored enum, since
+  it no longer needs to do any bitshifting or ffs().
+- Rework all the device drivers for the new enum.
+- Rework all the tests for the refactored enum.
+- Rework the hdmi state helper for the new enum, and also make it more
+  explicit about the auto behaviour by not relying on a conversion
+  function to map AUTO to RGB, but do this in the framework itself.
+- rockchip dw_hdmi_qp: Fix the GRF value to check for color >= 0 instead
+  of color > 0, as the latter broke switching back to RGB.
+- Rebase onto a recent drm-tip. This necessitated blindly reworking some
+  of the i915 dp-mst code.
+- Drop the __maybe_unused edid test patch, as I could no longer
+  reproduce the build warnings I added it for. I blame ghosts.
+- drm_bridge tests: remove "destroyed" member from struct
+  drm_bridge_chain_priv and all associated code, as it was not used in
+  any test.
+- Link to v7: https://lore.kernel.org/r/20260121-color-format-v7-0-ef790dae780c@collabora.com
 
-cpor (partially) disabled?
+Changes in v7:
+- Fix drm_bridge kunit test build failure caused by rebasing across an
+  API change.
+- Make compilers shut up about unused EDID definitions in the test
+  suites.
+- Empty line checkpatch fixes that b4 prep --check didn't catch.
+- Link to v6: https://lore.kernel.org/r/20260121-color-format-v6-0-7b81a771cd0b@collabora.com
 
-> [    9.509876] mpam:__props_mismatch: took the min num_csu_mon
-> [    9.509878] mpam:__props_mismatch: took the min num_mbwu_mon
-> [    9.509881] mpam_msc mpam_msc.252: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800976284a0
-> [    9.509884] mpam_msc mpam_msc.250: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff080097628420
-> [    9.509887] mpam_msc mpam_msc.248: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800976283a0
-> [    9.509889] mpam_msc mpam_msc.246: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff080097628320
-> [    9.509892] mpam_msc mpam_msc.244: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800976282a0
-> [    9.509894] mpam_msc mpam_msc.242: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff080097628220
-> [    9.509897] mpam_msc mpam_msc.240: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800976281a0
-> [    9.509900] mpam_msc mpam_msc.238: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff080097628120
-> [    9.509902] mpam_msc mpam_msc.236: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800976280a0
-> [    9.509905] mpam_msc mpam_msc.234: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff080097628020
-> [    9.509907] mpam_msc mpam_msc.232: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975affa0
-> [    9.509910] mpam_msc mpam_msc.230: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aff20
-> [    9.509913] mpam_msc mpam_msc.228: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afea0
-> [    9.509915] mpam_msc mpam_msc.226: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afe20
-> [    9.509918] mpam_msc mpam_msc.224: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afda0
-> [    9.509920] mpam_msc mpam_msc.222: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afd20
-> [    9.509923] mpam_msc mpam_msc.220: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afca0
-> [    9.509925] mpam_msc mpam_msc.218: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afc20
-> [    9.509928] mpam_msc mpam_msc.216: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afba0
-> [    9.509931] mpam_msc mpam_msc.214: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afb20
-> [    9.509933] mpam_msc mpam_msc.212: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afaa0
-> [    9.509936] mpam_msc mpam_msc.210: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975afa20
-> [    9.509938] mpam_msc mpam_msc.208: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af9a0
-> [    9.509941] mpam_msc mpam_msc.206: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af920
-> [    9.509943] mpam_msc mpam_msc.204: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af8a0
-> [    9.509946] mpam_msc mpam_msc.202: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af820
-> [    9.509949] mpam_msc mpam_msc.200: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af7a0
-> [    9.509951] mpam_msc mpam_msc.198: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af720
-> [    9.509954] mpam_msc mpam_msc.196: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af6a0
-> [    9.509956] mpam_msc mpam_msc.194: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af620
-> [    9.509959] mpam_msc mpam_msc.192: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af5a0
-> [    9.509962] mpam_msc mpam_msc.190: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af520
-> [    9.509964] mpam_msc mpam_msc.188: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af4a0
-> [    9.509967] mpam_msc mpam_msc.186: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af420
-> [    9.509969] mpam_msc mpam_msc.184: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af3a0
-> [    9.509972] mpam_msc mpam_msc.182: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af320
-> [    9.509974] mpam_msc mpam_msc.180: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af2a0
-> [    9.509977] mpam_msc mpam_msc.178: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af220
-> [    9.509980] mpam_msc mpam_msc.176: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af1a0
-> [    9.509982] mpam_msc mpam_msc.174: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af120
-> [    9.509985] mpam_msc mpam_msc.172: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af0a0
-> [    9.509987] mpam_msc mpam_msc.170: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975af020
-> [    9.509990] mpam_msc mpam_msc.168: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aefa0
-> [    9.509993] mpam_msc mpam_msc.166: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aef20
-> [    9.509995] mpam_msc mpam_msc.164: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aeea0
-> [    9.509998] mpam_msc mpam_msc.162: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aee20
-> [    9.510000] mpam_msc mpam_msc.160: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aeda0
-> [    9.510003] mpam_msc mpam_msc.158: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aed20
-> [    9.510005] mpam_msc mpam_msc.156: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aeca0
-> [    9.510008] mpam_msc mpam_msc.154: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aec20
-> [    9.510010] mpam_msc mpam_msc.152: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aeba0
-> [    9.510013] mpam_msc mpam_msc.150: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aeb20
-> [    9.510016] mpam_msc mpam_msc.148: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aeaa0
-> [    9.510018] mpam_msc mpam_msc.146: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975aea20
-> [    9.510021] mpam_msc mpam_msc.144: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae9a0
-> [    9.510023] mpam_msc mpam_msc.142: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae920
-> [    9.510026] mpam_msc mpam_msc.140: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae8a0
-> [    9.510029] mpam_msc mpam_msc.138: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae820
-> [    9.510031] mpam_msc mpam_msc.136: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae7a0
-> [    9.510034] mpam_msc mpam_msc.134: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae720
-> [    9.510036] mpam_msc mpam_msc.132: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae6a0
-> [    9.510039] mpam_msc mpam_msc.130: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae620
-> [    9.510041] mpam_msc mpam_msc.128: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae5a0
-> [    9.510044] mpam_msc mpam_msc.126: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae520
-> [    9.510047] mpam_msc mpam_msc.124: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae4a0
-> [    9.510049] mpam_msc mpam_msc.122: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae420
-> [    9.510052] mpam_msc mpam_msc.120: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae3a0
-> [    9.510054] mpam_msc mpam_msc.118: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae2a0
-> [    9.510057] mpam_msc mpam_msc.116: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae220
-> [    9.510060] mpam_msc mpam_msc.114: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae1a0
-> [    9.510062] mpam_msc mpam_msc.112: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae120
-> [    9.510065] mpam_msc mpam_msc.110: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae0a0
-> [    9.510067] mpam_msc mpam_msc.108: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800975ae020
-> [    9.510070] mpam_msc mpam_msc.106: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff08009729c720
-> [    9.510073] mpam_msc mpam_msc.104: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cffa0
-> [    9.510075] mpam_msc mpam_msc.102: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cff20
-> [    9.510078] mpam_msc mpam_msc.100: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfea0
-> [    9.510080] mpam_msc mpam_msc.98: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfe20
-> [    9.510083] mpam_msc mpam_msc.96: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfda0
-> [    9.510086] mpam_msc mpam_msc.94: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfd20
-> [    9.510088] mpam_msc mpam_msc.92: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfca0
-> [    9.510091] mpam_msc mpam_msc.90: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfc20
-> [    9.510094] mpam_msc mpam_msc.88: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfba0
-> [    9.510096] mpam_msc mpam_msc.86: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfb20
-> [    9.510099] mpam_msc mpam_msc.84: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfaa0
-> [    9.510102] mpam_msc mpam_msc.82: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cfa20
-> [    9.510104] mpam_msc mpam_msc.80: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf9a0
-> [    9.510107] mpam_msc mpam_msc.78: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf920
-> [    9.510109] mpam_msc mpam_msc.76: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf8a0
-> [    9.510112] mpam_msc mpam_msc.74: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf820
-> [    9.510115] mpam_msc mpam_msc.72: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf7a0
-> [    9.510117] mpam_msc mpam_msc.70: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf720
-> [    9.510120] mpam_msc mpam_msc.68: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf6a0
-> [    9.510123] mpam_msc mpam_msc.66: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf620
-> [    9.510125] mpam_msc mpam_msc.64: Merging features for
-> class:0xffff08009736fe50 &= vmsc:0xffff0800973cf5a0
-> [    9.510129] mpam_msc mpam_msc.62: Merging features for
-> vmsc:0xffff0800973cf520 |= ris:0xffff08009757ea90
-> [    9.510132] mpam_msc mpam_msc.60: Merging features for
-> vmsc:0xffff0800973cf4a0 |= ris:0xffff08009757e690
-> [    9.510133] mpam_msc mpam_msc.58: Merging features for
-> vmsc:0xffff0800973cf420 |= ris:0xffff08009757e290
-> [    9.510136] mpam_msc mpam_msc.56: Merging features for
-> vmsc:0xffff0800973cf3a0 |= ris:0xffff08009757de90
-> [    9.510139] mpam_msc mpam_msc.54: Merging features for
-> vmsc:0xffff0800973cf320 |= ris:0xffff08009757da90
-> [    9.510141] mpam_msc mpam_msc.52: Merging features for
-> vmsc:0xffff0800973cf2a0 |= ris:0xffff08009757d690
-> [    9.510144] mpam_msc mpam_msc.50: Merging features for
-> vmsc:0xffff0800973cf220 |= ris:0xffff08009757d290
-> [    9.510146] mpam_msc mpam_msc.48: Merging features for
-> vmsc:0xffff0800973cf1a0 |= ris:0xffff08009757ce90
-> [    9.510149] mpam_msc mpam_msc.46: Merging features for
-> vmsc:0xffff0800973cf120 |= ris:0xffff08009757ca90
-> [    9.510152] mpam_msc mpam_msc.44: Merging features for
-> vmsc:0xffff0800973cf0a0 |= ris:0xffff08009757c690
-> [    9.510154] mpam_msc mpam_msc.42: Merging features for
-> vmsc:0xffff0800973cf020 |= ris:0xffff08009757c290
-> [    9.510157] mpam_msc mpam_msc.40: Merging features for
-> vmsc:0xffff0800973cefa0 |= ris:0xffff08009757be90
-> [    9.510160] mpam_msc mpam_msc.38: Merging features for
-> vmsc:0xffff0800973cef20 |= ris:0xffff08009757ba90
-> [    9.510162] mpam_msc mpam_msc.36: Merging features for
-> vmsc:0xffff0800973ceea0 |= ris:0xffff08009757b690
-> [    9.510166] mpam_msc mpam_msc.34: Merging features for
-> vmsc:0xffff0800973cee20 |= ris:0xffff08009757b290
-> [    9.510167] mpam_msc mpam_msc.32: Merging features for
-> vmsc:0xffff0800973ceda0 |= ris:0xffff08009757ae90
-> [    9.510170] mpam_msc mpam_msc.30: Merging features for
-> vmsc:0xffff0800973ced20 |= ris:0xffff08009757aa90
-> [    9.510173] mpam_msc mpam_msc.28: Merging features for
-> vmsc:0xffff0800973ceca0 |= ris:0xffff08009757a690
-> [    9.510175] mpam_msc mpam_msc.26: Merging features for
-> vmsc:0xffff0800973cec20 |= ris:0xffff08009757a290
-> [    9.510178] mpam_msc mpam_msc.24: Merging features for
-> vmsc:0xffff0800973ceba0 |= ris:0xffff080097579e90
-> [    9.510181] mpam_msc mpam_msc.22: Merging features for
-> vmsc:0xffff0800973ceb20 |= ris:0xffff080097579a90
-> [    9.510183] mpam_msc mpam_msc.20: Merging features for
-> vmsc:0xffff0800973ceaa0 |= ris:0xffff080097579690
-> [    9.510186] mpam_msc mpam_msc.18: Merging features for
-> vmsc:0xffff0800973cea20 |= ris:0xffff080097579290
-> [    9.510189] mpam_msc mpam_msc.16: Merging features for
-> vmsc:0xffff0800973ce9a0 |= ris:0xffff080097578e90
-> [    9.510191] mpam_msc mpam_msc.62: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf520
-> [    9.510195] mpam_msc mpam_msc.60: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf4a0
-> [    9.510196] mpam_msc mpam_msc.58: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf420
-> [    9.510199] mpam_msc mpam_msc.56: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf3a0
-> [    9.510202] mpam_msc mpam_msc.54: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf320
-> [    9.510204] mpam_msc mpam_msc.52: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf2a0
-> [    9.510207] mpam_msc mpam_msc.50: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf220
-> [    9.510209] mpam_msc mpam_msc.48: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf1a0
-> [    9.510212] mpam_msc mpam_msc.46: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf120
-> [    9.510214] mpam_msc mpam_msc.44: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf0a0
-> [    9.510217] mpam_msc mpam_msc.42: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cf020
-> [    9.510219] mpam_msc mpam_msc.40: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cefa0
-> [    9.510222] mpam_msc mpam_msc.38: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cef20
-> [    9.510224] mpam_msc mpam_msc.36: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ceea0
-> [    9.510227] mpam_msc mpam_msc.34: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cee20
-> [    9.510230] mpam_msc mpam_msc.32: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ceda0
-> [    9.510232] mpam_msc mpam_msc.30: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ced20
-> [    9.510235] mpam_msc mpam_msc.28: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ceca0
-> [    9.510237] mpam_msc mpam_msc.26: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cec20
-> [    9.510240] mpam_msc mpam_msc.24: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ceba0
-> [    9.510242] mpam_msc mpam_msc.22: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ceb20
-> [    9.510245] mpam_msc mpam_msc.20: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ceaa0
-> [    9.510247] mpam_msc mpam_msc.18: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973cea20
-> [    9.510250] mpam_msc mpam_msc.16: Merging features for
-> class:0xffff08009736cc50 &= vmsc:0xffff0800973ce9a0
-> [    9.510254] mpam_msc mpam_msc.14: Merging features for
-> vmsc:0xffff0800973ce920 |= ris:0xffff080097578a90
-> [    9.510255] mpam_msc mpam_msc.12: Merging features for
-> vmsc:0xffff0800973ce8a0 |= ris:0xffff080097578690
-> [    9.510258] mpam_msc mpam_msc.10: Merging features for
-> vmsc:0xffff0800973ce820 |= ris:0xffff080097578290
-> [    9.510260] mpam_msc mpam_msc.8: Merging features for
-> vmsc:0xffff0800973ce7a0 |= ris:0xffff080097417e90
-> [    9.510263] mpam_msc mpam_msc.6: Merging features for
-> vmsc:0xffff0800973ce720 |= ris:0xffff080097417a90
-> [    9.510266] mpam_msc mpam_msc.4: Merging features for
-> vmsc:0xffff0800973ce6a0 |= ris:0xffff080097417690
-> [    9.510268] mpam_msc mpam_msc.2: Merging features for
-> vmsc:0xffff0800973ce620 |= ris:0xffff080097417290
-> [    9.510271] mpam_msc mpam_msc.0: Merging features for
-> vmsc:0xffff0800973ce5a0 |= ris:0xffff080097416e90
-> [    9.510274] mpam_msc mpam_msc.14: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce920
-> [    9.510276] mpam_msc mpam_msc.12: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce8a0
-> [    9.510279] mpam_msc mpam_msc.10: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce820
-> [    9.510281] mpam_msc mpam_msc.8: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce7a0
-> [    9.510284] mpam_msc mpam_msc.6: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce720
-> [    9.510287] mpam_msc mpam_msc.4: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce6a0
-> [    9.510289] mpam_msc mpam_msc.2: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce620
-> [    9.510292] mpam_msc mpam_msc.0: Merging features for
-> class:0xffff08009735bb50 &= vmsc:0xffff0800973ce5a0
-> [   10.978496] mpam:mpam_resctrl_pick_caches: class 2 cache misses CPOR
+Changes in v6:
+- Checkpatch fixes
+- Add drm_bridge.c kerneldoc fix patch to b4 deps so the kernel docs
+  required for every contribution to the subsystem can be built
+- dw-hdmi-qp core has gained the atomic_get_output_bus_fmts bridge func,
+  which allows it to participate in the drm_bridge chain recursive format
+  selection code properly.
+- The Rockchip dw-hdmi-qp integration now no longer reimplements the
+  color format logic (improperly), but reads the bus format of the first
+  bridge as set by the recursive bridge format selection. If the input
+  format is FIXED, it'll use the output format. Otherwise, the input
+  format is used.
+- In the synopsys drivers, YUV422 uses the same bus format as the non-qp
+  hdmi encoder driver. Probably correcter this way. The Rockchip vop2
+  is_yuv function has been extended to recognise this format as well.
+- KUnit tests for drm_bridge chains are now included, which exercise the
+  chain's recursive bus format selection.
+- On HDMI connectors, the drm_bridge bus format selection will try to target
+  the color format that the HDMI layer came up with. This means the AUTO
+  logic is not duplicated for HDMI connectors.
+- The enum conversion function commit gained a function for converting
+  from hdmi_colorspace to drm_color_format, and its author changed as no
+  original code remains anyway. Marius is still included as a
+  Co-developer.
+- Some tests for the HDMI state helper's mode_valid have been written.
+  They are incomplete as we lack a test EDID for a 420-also mode that
+  would violate the clock constraints on RGB. I hacked one together with
+  a hex editor, but it reports a too high of a clock rate, and there's
+  no EDID editor I could find which supports these extension blocks.
+- The color_format KUnit tests have been more heavily parameterised, the
+  auto case absorbed into other tests, and the comments around them
+  rewritten.
+- Add a few paragraphs of documentation that explain the bridge format
+  selection, and how to make use of it in a display driver.
+- Link to v5: https://lore.kernel.org/r/20251128-color-format-v5-0-63e82f1db1e1@collabora.com
 
-No L2 cpor?
+Changes in v5:
+- Rebase onto drm-tip
+- Drop DRM_MODE_COLOR_FORMAT_* as an enum
+- Unify DRM_COLOR_FORMAT_NONE and DRM_COLOR_FORMAT_AUTO, with AUTO being
+  0. This makes conversion and general logic much easier.
+- Adjust the drm_color_format enum to not needlessly renumber the
+  existing defines, as it doesn't need to correspond to how HDMI numbers
+  them.
+- Make the DRM-to-HDMI conversion function static inline __pure, because
+  the assembly it generates is tiny, and the function is pure.
+- Don't accept nothing as the list of supported color formats for
+  registration of the property.
+- Drop the per-connector variants of the color format registration
+  function, as it's not needed.
+- drm_hdmi_state_helper: Fix mode_valid rejecting 420-only modes.
+- drm_hdmi_state_helper: Only fall back to YUV420 with
+  DRM_COLOR_FORMAT_AUTO.
+- drm_hdmi_state_helper: Remove redundant AUTO->RGB condition, as the
+  conversion already does this.
+- Add KUnit tests for hdmi_compute_config.
+- drm/bridge: Refactor bus_format_is_color_fmt and add a few more YUV422
+  formats.
+- Register the color format property in drmm_connector_hdmi_init based
+  on the supported HDMI formats passed to it. This means rockchip
+  dw_hdmi_qp no longer needs to register it.
+- amdgpu: Simplify YUV420 logic
+- amdgpu: Don't try to pick YUV444 on YUV420-only modes
+- i915: Try to make behaviour more or less the same as that of the drm
+  hdmi state helper.
+- rockchip dw_hdmi_qp: Set supported HDMI formats
+- rockchip dw_hdmi_qp: Set the right VO GRF values depending on color
+  format.
+- rockchip dw_hdmi_qp: Act on the color format property in this driver,
+  rather than in VOP2, by setting the bus_format appropriately.
+- rockchip VOP2: Can the BCSH-based implementation. BCSH isn't available
+  on all video ports of the hardware, and the code was extremely
+  suspect. Instead, plug into the existing YUV-to-RGB/RGB-to-YUV code,
+  which can be done now that the HDMI driver sets the bus format.
+- A whole bunch of Rockchip VOP2 fixes.
+- Link to v4: https://lore.kernel.org/r/20251117-color-format-v4-0-0ded72bd1b00@collabora.com
 
-> [   10.978497] mpam:mpam_resctrl_pick_caches: class 255 is not a cache
-> [   10.980470] mpam:mpam_resctrl_pick_mba: class 2 is before L3
-> [   10.980472] mpam:mpam_resctrl_pick_mba: class 3 has no bandwidth control
-> [   10.997406] mpam:topology_matches_l3: class 255 component 0 has
-> Mismatched CPU mask with L3 equivalent
-> [   10.997411] mpam:mpam_resctrl_pick_mba: class 255 topology doesn't
-> match L3
-> [   10.997415] mpam:mpam_resctrl_pick_counters: class 2 is before L3
-> [   11.024109] mpam:topology_matches_l3: class 3 component 276 has
-> Mismatched CPU mask with L3 equivalent
-> [   11.024114] mpam:class_has_usable_mbwu: monitors usable in free-
-> running mode
+Changes in v4:
+- Rebase onto next-20251117
+- Get rid of HDMI_COLORSPACE_AUTO
+- Split hdmi_compute_config change into separate patch
+- Add missing symbol export for color_format_to_hdmi_colorspace to fix
+  builds in certain configurations
+- Drop "drm: Pass supported color formats straight onto drm_bridge"
+- Make dw-hdmi-qp set the platform data's supported color formats as
+  the bridge's supported HDMI color formats
+- drm_hdmi_state_helper: pass requested color format to
+  hdmi_compute_format_bpc if set.
+- drm_bridge: limit the bus formats to those explicitly requested with
+  the color format property during the atomic bridge check call,
+  specifically in drm_atomic_bridge_chain_select_bus_fmts.
+- i915: Remove INTEL_OUTPUT_FORMAT_AUTO, as automatic format selection
+  does not need to involve the hardware state
+- i915: Deduplicate ntel_output_format_to_drm_color_format code by
+  moving it as a static inline __pure function into a shared header
+- i915: rework logic in HDMI, DP and DP-MST output config functions to
+  remove redundant locals, simplify execution flow, and return an error
+  to userspace if an explicit color_format request can't be satisfied.
+- i915: assign myself as the author and make the others Co-developers,
+  so that they don't get the blame for any of my bugs.
+- amdgpu: refactor fill_stream_properties_from_drm_display_mode to
+  improve readability and ensure that impossible color format requests
+  get bubbled up to userspace as errors
+- amdgpu: don't pick YUV444 over RGB.
+- amdgpu: assign authorship to myself, with others as Co-developers, as
+  logic was modified and the blame should fall on me
+- dw_hdmi_qp-rockchip: set the supported color formats platform data
+  member
+- rockchip: remove drm property registration for rk3066_hdmi and
+  inno_hdmi. None of the platforms that use these use vop2 as the
+  video output processor.
+- Link to v3: https://lore.kernel.org/all/20250911130739.4936-1-marius.vlad@collabora.com/
 
-mbwu enabled?
+Changes in v3 by mvlad compared to Andri's v2 series:
+- renamed the property to just 'color format'
+- the property is added dynamically similar to the Colorspace property
+- a key point from previous comments was that drivers should advertise
+  the color formats they support and userspace would query EDID and
+  perform an intersection from those color formats which users can
+  further use. With this patch set each driver that adds this property
+  has such list of hard-coded color formats, but fundamentally the idea
+  is that driver can query the HW and do that on its own. The
+  infrastructure is now in place to allow to do that
+- by default the 'AUTO' color format is set. With this patch series that
+  has been introduced as a fallback to RGB. Drivers could further
+  customize this behavour and could perform additional checks on the sink
+  to pick another suitable color format they'd like for AUTO
+- drm_bridge bridge code has been improved to allow initialization with
+  the same color formats list as the DRM connector property. Similarly, bpc
+  pick-up now takes the color format into consideration when deciding
+  which bpc to choose from
+- The new DRM color format re-uses HDMI_COLORPSACE enum and provides an
+  enum translations between the two to avoid touching all other drivers that
+  use HDMI_COLORPSACE enum. I believe at this point that this allows the
+  least amount of disruption and avoids a massive bike shedding around
+  that part
+- a rockchip implementation has been by my colleague Derek Foreman
+- YUV444 color format has been added in i915
+- address comment about "Remove unnecessary SIGNAL_TYPE_HDMI_TYPE_A
+  check" where aconnector might be invalid
+- Link to v2: https://lore.kernel.org/dri-devel/20240115160554.720247-1-andri@yngvason.is/
 
-> [   11.063882] mpam:topology_matches_l3: class 255 component 0 has
-> Mismatched CPU mask with L3 equivalent
-> [   11.113183] mpam:mpam_resctrl_alloc_domain: Skipped monitor domain
-> online - no monitors
-> [   11.113189] MPAM enabled with 32 PARTIDs and 4 PMGs
-> 
-> 
-> Kunit test logs:
-> [   31.253697] KTAP version 1
-> [   31.253698] 1..2
-> [   31.258263]     KTAP version 1
-> [   31.258265]     # Subtest: mpam_devices_test_suite
-> [   31.258267]     # module: mpam
-> [   31.258268]     1..3
-> [   31.258775]     ok 1 test_mpam_reset_msc_bitmap
-> [   31.259558]     ok 2 test_mpam_enable_merge_features
-> [   31.260259]     ok 3 test__props_mismatch
-> [   31.260261] # mpam_devices_test_suite: pass:3 fail:0 skip:0 total:3
-> [   31.260263] # Totals: pass:3 fail:0 skip:0 total:3
-> [   31.260265] ok 1 mpam_devices_test_suite
-> [   31.260267]     KTAP version 1
-> [   31.260268]     # Subtest: mpam_resctrl_test_suite
-> [   31.260269]     # module: mpam
-> [   31.260271]     1..7
-> [   31.260965]     ok 1 test_get_mba_granularity
-> [   31.260968]         KTAP version 1
-> [   31.260969]         # Subtest: test_mbw_max_to_percent
-> [   31.261372]         ok 1 pc=1, width=8, value=0x01
-> [   31.261794]         ok 2 pc=1, width=12, value=0x027
-> [   31.262081]         ok 3 pc=1, width=16, value=0x028e
-> [   31.262183]         ok 4 pc=25, width=8, value=0x3f
-> [   31.262287]         ok 5 pc=25, width=12, value=0x3ff
-> [   31.262388]         ok 6 pc=25, width=16, value=0x3fff
-> [   31.262489]         ok 7 pc=33, width=8, value=0x53
-> [   31.262608]         ok 8 pc=33, width=12, value=0x546
-> [   31.262860]         ok 9 pc=33, width=16, value=0x5479
-> [   31.263113]         ok 10 pc=35, width=8, value=0x58
-> [   31.263491]         ok 11 pc=35, width=12, value=0x598
-> [   31.263872]         ok 12 pc=35, width=16, value=0x5998
-> [   31.264249]         ok 13 pc=45, width=8, value=0x72
-> [   31.264352]         ok 14 pc=45, width=12, value=0x732
-> [   31.264455]         ok 15 pc=45, width=16, value=0x7332
-> [   31.264559]         ok 16 pc=50, width=8, value=0x7f
-> [   31.264661]         ok 17 pc=50, width=12, value=0x7ff
-> [   31.264764]         ok 18 pc=50, width=16, value=0x7fff
-> [   31.264872]         ok 19 pc=52, width=8, value=0x84
-> [   31.264978]         ok 20 pc=52, width=12, value=0x850
-> [   31.265082]         ok 21 pc=52, width=16, value=0x851d
-> [   31.265190]         ok 22 pc=55, width=8, value=0x8b
-> [   31.265297]         ok 23 pc=55, width=12, value=0x8cb
-> [   31.265403]         ok 24 pc=55, width=16, value=0x8ccb
-> [   31.265507]         ok 25 pc=58, width=8, value=0x93
-> [   31.265609]         ok 26 pc=58, width=12, value=0x946
-> [   31.265714]         ok 27 pc=58, width=16, value=0x9479
-> [   31.265817]         ok 28 pc=75, width=8, value=0xbf
-> [   31.265918]         ok 29 pc=75, width=12, value=0xbff
-> [   31.266020]         ok 30 pc=75, width=16, value=0xbfff
-> [   31.266120]         ok 31 pc=80, width=8, value=0xcb
-> [   31.266220]         ok 32 pc=80, width=12, value=0xccb
-> [   31.266322]         ok 33 pc=80, width=16, value=0xcccb
-> [   31.266425]         ok 34 pc=88, width=8, value=0xe0
-> [   31.266533]         ok 35 pc=88, width=12, value=0xe13
-> [   31.266637]         ok 36 pc=88, width=16, value=0xe146
-> [   31.266758]         ok 37 pc=95, width=8, value=0xf2
-> [   31.267150]         ok 38 pc=95, width=12, value=0xf32
-> [   31.267535]         ok 39 pc=95, width=16, value=0xf332
-> [   31.267918]         ok 40 pc=100, width=8, value=0xff
-> [   31.268160]         ok 41 pc=100, width=12, value=0xfff
-> [   31.268264]         ok 42 pc=100, width=16, value=0xffff
-> [   31.268266]     # test_mbw_max_to_percent: pass:42 fail:0 skip:0
-> total:42
-> [   31.268268]     ok 2 test_mbw_max_to_percent
-> [   31.268270]         KTAP version 1
-> [   31.268271]         # Subtest: test_percent_to_mbw_max
-> [   31.268376]         ok 1 pc=1, width=8, value=0x01
-> [   31.268483]         ok 2 pc=1, width=12, value=0x027
-> [   31.268595]         ok 3 pc=1, width=16, value=0x028e
-> [   31.268701]         ok 4 pc=25, width=8, value=0x3f
-> [   31.268806]         ok 5 pc=25, width=12, value=0x3ff
-> [   31.268915]         ok 6 pc=25, width=16, value=0x3fff
-> [   31.269022]         ok 7 pc=33, width=8, value=0x53
-> [   31.269129]         ok 8 pc=33, width=12, value=0x546
-> [   31.269237]         ok 9 pc=33, width=16, value=0x5479
-> [   31.269342]         ok 10 pc=35, width=8, value=0x58
-> [   31.269446]         ok 11 pc=35, width=12, value=0x598
-> [   31.269551]         ok 12 pc=35, width=16, value=0x5998
-> [   31.269658]         ok 13 pc=45, width=8, value=0x72
-> [   31.269764]         ok 14 pc=45, width=12, value=0x732
-> [   31.269868]         ok 15 pc=45, width=16, value=0x7332
-> [   31.269975]         ok 16 pc=50, width=8, value=0x7f
-> [   31.270081]         ok 17 pc=50, width=12, value=0x7ff
-> [   31.270185]         ok 18 pc=50, width=16, value=0x7fff
-> [   31.270287]         ok 19 pc=52, width=8, value=0x84
-> [   31.270388]         ok 20 pc=52, width=12, value=0x850
-> [   31.270494]         ok 21 pc=52, width=16, value=0x851d
-> [   31.270606]         ok 22 pc=55, width=8, value=0x8b
-> [   31.271004]         ok 23 pc=55, width=12, value=0x8cb
-> [   31.271387]         ok 24 pc=55, width=16, value=0x8ccb
-> [   31.271770]         ok 25 pc=58, width=8, value=0x93
-> [   31.272151]         ok 26 pc=58, width=12, value=0x946
-> [   31.272260]         ok 27 pc=58, width=16, value=0x9479
-> [   31.272366]         ok 28 pc=75, width=8, value=0xbf
-> [   31.272472]         ok 29 pc=75, width=12, value=0xbff
-> [   31.272580]         ok 30 pc=75, width=16, value=0xbfff
-> [   31.272686]         ok 31 pc=80, width=8, value=0xcb
-> [   31.272790]         ok 32 pc=80, width=12, value=0xccb
-> [   31.272895]         ok 33 pc=80, width=16, value=0xcccb
-> [   31.273000]         ok 34 pc=88, width=8, value=0xe0
-> [   31.273106]         ok 35 pc=88, width=12, value=0xe13
-> [   31.273209]         ok 36 pc=88, width=16, value=0xe146
-> [   31.273318]         ok 37 pc=95, width=8, value=0xf2
-> [   31.273424]         ok 38 pc=95, width=12, value=0xf32
-> [   31.273528]         ok 39 pc=95, width=16, value=0xf332
-> [   31.273635]         ok 40 pc=100, width=8, value=0xff
-> [   31.273742]         ok 41 pc=100, width=12, value=0xfff
-> [   31.273847]         ok 42 pc=100, width=16, value=0xffff
-> [   31.273849]     # test_percent_to_mbw_max: pass:42 fail:0 skip:0
-> total:42
-> [   31.273850]     ok 3 test_percent_to_mbw_max
-> [   31.273852]         KTAP version 1
-> [   31.273853]         # Subtest: test_mbw_max_to_percent_limits
-> [   31.273957]         ok 1 wd=1
-> [   31.274064]         ok 2 wd=2
-> [   31.274171]         ok 3 wd=3
-> [   31.274276]         ok 4 wd=4
-> [   31.274381]         ok 5 wd=5
-> [   31.274485]         ok 6 wd=6
-> [   31.274603]         ok 7 wd=7
-> [   31.274710]         ok 8 wd=8
-> [   31.274974]         ok 9 wd=9
-> [   31.275362]         ok 10 wd=10
-> [   31.275746]         ok 11 wd=11
-> [   31.276122]         ok 12 wd=12
-> [   31.276230]         ok 13 wd=13
-> [   31.276335]         ok 14 wd=14
-> [   31.276444]         ok 15 wd=15
-> [   31.276551]         ok 16 wd=16
-> [   31.276553]     # test_mbw_max_to_percent_limits: pass:16 fail:0
-> skip:0 total:16
-> [   31.276554]     ok 4 test_mbw_max_to_percent_limits
-> [   31.276605]     # test_percent_to_max_rounding: Round-up rate: 43%
-> (18/42)
-> [   31.276668]     ok 5 test_percent_to_max_rounding
-> [   31.276671]         KTAP version 1
-> [   31.276672]         # Subtest: test_percent_max_roundtrip_stability
-> [   31.276776]         ok 1 wd=1
-> [   31.276883]         ok 2 wd=2
-> [   31.276988]         ok 3 wd=3
-> [   31.277096]         ok 4 wd=4
-> [   31.277202]         ok 5 wd=5
-> [   31.277309]         ok 6 wd=6
-> [   31.277416]         ok 7 wd=7
-> [   31.277524]         ok 8 wd=8
-> [   31.277629]         ok 9 wd=9
-> [   31.277737]         ok 10 wd=10
-> [   31.277843]         ok 11 wd=11
-> [   31.277948]         ok 12 wd=12
-> [   31.278061]         ok 13 wd=13
-> [   31.278167]         ok 14 wd=14
-> [   31.278273]         ok 15 wd=15
-> [   31.278380]         ok 16 wd=16
-> [   31.278381]     # test_percent_max_roundtrip_stability: pass:16
-> fail:0 skip:0 total:16
-> [   31.278383]     ok 6 test_percent_max_roundtrip_stability
-> [   31.278385]         KTAP version 1
-> [   31.278386]         # Subtest: test_rmid_idx_encoding
-> [   31.278490]         ok 1 max_partid=0, max_pmg=0
-> [   31.278604]         ok 2 max_partid=1, max_pmg=4
-> [   31.279008]         ok 3 max_partid=3, max_pmg=1
-> [   31.279394]         ok 4 max_partid=5, max_pmg=9
-> [   31.279777]         ok 5 max_partid=4, max_pmg=4
-> [   31.280167]         ok 6 max_partid=100, max_pmg=11
-> [   31.358979]         ok 7 max_partid=65535, max_pmg=255
-> [   31.358985]     # test_rmid_idx_encoding: pass:7 fail:0 skip:0 total:7
-> [   31.358987]     ok 7 test_rmid_idx_encoding
-> [   31.358989] # mpam_resctrl_test_suite: pass:7 fail:0 skip:0 total:7
-> [   31.358990] # Totals: pass:125 fail:0 skip:0 total:125
-> [   31.358992] ok 2 mpam_resctrl_test_suite
-> 
-> 
-> ------
-> 
-> Best regards,
-> Zeng Heng
+---
+Andri Yngvason (1):
+      drm: Add new general DRM property "color format"
 
-Thanks,
+Nicolas Frattaroli (18):
+      drm: Add enum conversions for drm_color_format_enum
+      drm/bridge: Act on the DRM color format property
+      drm/display: hdmi-state-helper: Act on color format DRM property
+      drm/display: hdmi-state-helper: Try subsampling in mode_valid
+      drm/i915: Implement the "color format" DRM property
+      drm/amdgpu: Implement "color format" DRM property
+      drm/rockchip: Add YUV422 output mode constants for VOP2
+      drm/rockchip: vop2: Add RK3576 to the RG swap special case
+      drm/rockchip: vop2: Recognise 10-bit YUV422 as YUV format
+      drm/rockchip: vop2: Set correct output format for RK3576 YUV422
+      drm/bridge: dw-hdmi-qp: Implement atomic_get_output_bus_fmts
+      drm/rockchip: dw_hdmi_qp: Implement "color format" DRM property
+      drm/rockchip: dw_hdmi_qp: Set supported_formats platdata
+      drm/connector: Register color format property on HDMI connectors
+      drm/tests: hdmi: Add tests for the color_format property
+      drm/tests: hdmi: Add tests for HDMI helper's mode_valid
+      drm/tests: bridge: Add KUnit tests for bridge chain format selection
+      drm/bridge: Document bridge chain format selection
 
-Ben
+Werner Sembach (1):
+      drm/amd/display: Remove unnecessary SIGNAL_TYPE_HDMI_TYPE_A check
+
+ Documentation/gpu/drm-kms-helpers.rst              |   6 +
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c  |  88 ++-
+ .../amd/display/amdgpu_dm/amdgpu_dm_mst_types.c    |  13 +
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c       | 178 +++++
+ drivers/gpu/drm/display/drm_hdmi_state_helper.c    |  43 +-
+ drivers/gpu/drm/drm_atomic_helper.c                |   5 +
+ drivers/gpu/drm/drm_atomic_uapi.c                  |  11 +
+ drivers/gpu/drm/drm_bridge.c                       | 117 ++-
+ drivers/gpu/drm/drm_connector.c                    | 163 +++++
+ drivers/gpu/drm/i915/display/intel_connector.c     |  11 +
+ drivers/gpu/drm/i915/display/intel_connector.h     |   1 +
+ drivers/gpu/drm/i915/display/intel_display_types.h |  15 +
+ drivers/gpu/drm/i915/display/intel_dp.c            |  58 +-
+ drivers/gpu/drm/i915/display/intel_dp.h            |   4 +
+ drivers/gpu/drm/i915/display/intel_dp_mst.c        |  34 +-
+ drivers/gpu/drm/i915/display/intel_hdmi.c          |  57 +-
+ drivers/gpu/drm/rockchip/dw_hdmi_qp-rockchip.c     | 111 ++-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.h        |   4 +
+ drivers/gpu/drm/rockchip/rockchip_drm_vop2.c       |  21 +-
+ drivers/gpu/drm/tests/drm_bridge_test.c            | 786 +++++++++++++++++++++
+ drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c | 300 ++++++++
+ include/drm/drm_connector.h                        | 169 ++++-
+ 22 files changed, 2136 insertions(+), 59 deletions(-)
+---
+base-commit: 61f9012482333d2ee4749de5a493993211a28671
+change-id: 20251028-color-format-49fd202b7183
+
+Best regards,
+-- 
+Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
 
