@@ -1,148 +1,167 @@
-Return-Path: <linux-doc+bounces-76125-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76127-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNHVL4Dfk2nc9QEAu9opvQ
-	(envelope-from <linux-doc+bounces-76125-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 04:24:48 +0100
+	id 0NLCHOQilGmqAAIAu9opvQ
+	(envelope-from <linux-doc+bounces-76127-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 09:12:20 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BC501489BD
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 04:24:48 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 20735149BFC
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 09:12:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D680F3014C10
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 03:24:46 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 8AD7F300C0EF
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 08:12:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7758278F39;
-	Tue, 17 Feb 2026 03:24:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58A252D8793;
+	Tue, 17 Feb 2026 08:12:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="QMfHVQJO"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jUJwPgRG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4546820010C
-	for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 03:24:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F491292B2E
+	for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 08:12:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771298686; cv=none; b=jZD73s1dymPm/DsvuTAqVSM6zXWffIwDJjht3SIZGux+z5uKW2EaazofyRh/NL8GjnERay8j5YA71CBoeGQqaKuF47hn4zgtBTw62R0dUHlxAtd6+mqICuStHmIgjXWnFUCvkBBJNjRC7+zguAmWtlGGnk+YhIRYf7p0ylw/6JA=
+	t=1771315934; cv=none; b=Lf/M4sEGR4evnEHzXQeoZJMIFSij+hpIh3ldnNF966YpBA+LI9k1SiWKH3RUgAMEU5lrIApUmm8iIncSrKMJAraxENxPcIrGPNd5iVw8OqTG+3WG7K5mXLAUzqgDjaAWtUlMCeBHqPQzcMcX8b1q3AD4g+Z3dUeedSZjGMsS1Ik=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771298686; c=relaxed/simple;
-	bh=LPuKz4SWVNH82TqpP1h2em379lBcSDWR7MS0vzMn74U=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=k0yIPv/hqhFJRJ/yxFex0Bnw+mVUNRs7QlueRj3LSD7iuak9qibufYHpRsEVvh/y2oiNc2l5a+JPO3Y0RIcvB7QDChRLfD1vrePucK5NX/X2OCg8sSpwN2jBLhj2m1nShQ0yfERyYLY7YlafE6ygNQVOLO/Rn9WcmzQDLK+hQ+w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=QMfHVQJO; arc=none smtp.client-ip=192.198.163.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1771298684; x=1802834684;
-  h=date:from:to:cc:subject:message-id;
-  bh=LPuKz4SWVNH82TqpP1h2em379lBcSDWR7MS0vzMn74U=;
-  b=QMfHVQJOh/nC0gtVLyrw+/t58aMV/4mib/BK7rXXnKhvP1wwQtke7uYP
-   nZdfSAoH8cQVOWKp96yPIfZ8om99rFWJdCD0T3MFHOZ5o8VZY1Et7aP2W
-   NVmrOynl4nM/rw5SLvRc8Bw4SAzwGso13meAha5+tf7Uv3bYaq3uy4l3X
-   PYtTyhdstwjS98SIRm+B1/Lr/Gmlsl/HbUUlFJYIh0mmiWO7VLXQZ29yy
-   d8awspkKmkps+pqivnRqYYCPaxXF/sYM9bFs5scR+fVO1oIhO2DOgx4Fu
-   9KDNoCVToAcUi1iBRZeWkY1U3BYDypB8XoH3b7Uq9JGelpl/JK35tm5wt
-   Q==;
-X-CSE-ConnectionGUID: RNLUwNJYTHSJBlgh4DvMEg==
-X-CSE-MsgGUID: Zji1CdrBT2+Cj9HoySjAmA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11703"; a="59935368"
-X-IronPort-AV: E=Sophos;i="6.21,295,1763452800"; 
-   d="scan'208";a="59935368"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Feb 2026 19:24:43 -0800
-X-CSE-ConnectionGUID: uT826gnbQzCR8cNDgith4A==
-X-CSE-MsgGUID: W/zp6u/rSqiOEHp+COsssQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,295,1763452800"; 
-   d="scan'208";a="217900334"
-Received: from igk-lkp-server01.igk.intel.com (HELO e5404a91d123) ([10.211.93.152])
-  by orviesa003.jf.intel.com with ESMTP; 16 Feb 2026 19:24:42 -0800
-Received: from kbuild by e5404a91d123 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vsBhX-000000002mH-2ZRw;
-	Tue, 17 Feb 2026 03:24:39 +0000
-Date: Tue, 17 Feb 2026 04:24:37 +0100
-From: kernel test robot <lkp@intel.com>
-To: Marco Felsch <m.felsch@pengutronix.de>
-Cc: oe-kbuild-all@lists.linux.dev, Lucas Stach <l.stach@pengutronix.de>,
- linux-doc@vger.kernel.org
-Subject: [pengutronix:mfe/v6.19/topic/touchscreen-axiom 5/5]
- htmldocs: Documentation/ABI/testing/sysfs-driver-input-touchnetix-axiom:63:
- WARNING: Block quote ends without a blank line; unexpected unindent.
- [docutils]
-Message-ID: <202602170408.zNbIg5NA-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	s=arc-20240116; t=1771315934; c=relaxed/simple;
+	bh=nUEhTFG/7UBE/bp1GdYkZho+b3xUavo+boubP6XYsBw=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=lPKqyNAWoo4638V+TSOVzIkdkPAPqexg+E1oufiiqEWsNfoJYySW7/GuYEiNan2RMHBkY2qI63TnsABg78redN6GX/SQjRZ9X9MzVc/1nAFX7Pt3qV/5XtxNs5kpRkSsLipt7xHHQ2POtZSGw3votRa7zPtq3FKuXh2cOIJX4dg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=jUJwPgRG; arc=none smtp.client-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4807068eacbso29966805e9.2
+        for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 00:12:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1771315929; x=1771920729; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Gb6W1GryaZfBbGOxIz34ZV52pWSStvnj73mIghaUYWU=;
+        b=jUJwPgRGOdcXz9utJSkIrokB+h+hNDJpOIhmYbEEGxq50sWZ2dDPoZ/Vi2NAvUNkdd
+         plJMKeR8pBbdg9DwPtW93YaO8l0qXFlZy6MlfrPXnd1fMi6GduR6nzCe27wuJMUwHhdb
+         EFChAFAhmMTBHSe6u36h1Pe+amsCEZxcQBGcqkhx4CtzDLjtwNaCvpt8aoSXOR/g3iCy
+         ScCiCTsMlq3q5cxwbaUqZnlHbmitj6CB9t+BJO1CGTYw8faG7Behj9LrvRqzZT2UmwsZ
+         Ap9jhvu2r8zF94ft42+jOpdN+6Qi02F7WBUUV8/bnKukaKfzNrodyj1dcAi/fwyf/1JS
+         3cXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771315929; x=1771920729;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Gb6W1GryaZfBbGOxIz34ZV52pWSStvnj73mIghaUYWU=;
+        b=xObJpX/0Rw51zV6orrh6CsUJNQ3NBifKWvMy0fAZRVZ9++WsY+qmWW4OYl8GQNaO6e
+         GxSJyerdyZQxF91ZAJp5denpT8HclmHUSw2nskVfsZl/jaGkm7jQwF2KPtTfTRwmmYr0
+         XgbqpRoPfSs/ib9ee+frD3yaqxqulMXE5tbngcOhxJ9WppmczNCG9+QpaLvwfdxQtgu+
+         xzl3EoQnYJwpntcU4qbCP5rHv0VhhpkzwTxCtEeP3bDGA1UodaOjTwfavVIl2uE6MzP3
+         JkNBwOYEUWfzAkLGnGLRfScUPC38KmGPVIBVAacMVzWSixyWTvnMCnJQZzYhffKjtzMV
+         yTug==
+X-Forwarded-Encrypted: i=1; AJvYcCWR9WUEFTgeokkRf7tzV3N2nIvGxAUshSKSXD4qsMyoMQooOrNnfr9oLIsutpNKwGU5qXhfYZ4QAXw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YykPm8gG5a+esLUB4MYUluUQw1FzXK/viqvHrB4OTcAcW2+NxmS
+	c+olhbuc9FGRpT3TA94EWzz7g17QYmwRVdE0FQpbYf6IE3Ofh+h5JNdQgQq28099999kag8RKTE
+	v4uPT/Jc=
+X-Gm-Gg: AZuq6aIGHv3sL7wb5naAcQGFLkni0YkCuX8msXTqcAA86oqRVn8aT5occR+FfpjzXtn
+	KGQZvvTtEZYKTuH1h3b4MEayCw19vXIcRDdaOiUFqE4A33JMtIHmOIu+ZdMBN0YhODHoI5a0hx9
+	dYS8MzI7G4/+h/JsEYJ+wY8NBEuvOETmy1iSszRmcu13o8nlUGzWuO9ZCSRP/QfwFxo5WovX+qF
+	n68YfpVeK3w34fx0KBIuv76z84cDQDE567Lxh2W3ByxMx/Gtwr4nKgZvKLvR3OfXgiv2j8UnqSs
+	Okj1nt0COf/xno8uks0gaR2wWbFsrYd0zh4pHLCHR+fgtkdWvA6O4ydDAabL5cHdTFvYxcwTQON
+	QMPtM9x1jjKlf7c9bC7vd3LhQmml7LJDfh+iCss/lT60N/MvxXMgwt7EFaAZDrKmNiUu8diukqj
+	jj8LBsuChZK7bxqaI486q2EWd/bzD5JBSg6UfR6hfBIPovotXhlNeHhvUg7L4Tlhsd3owt28sJu
+	o02CAI9yg==
+X-Received: by 2002:a05:600c:3d87:b0:480:3ad0:93c0 with SMTP id 5b1f17b1804b1-48373a5d6d5mr188570635e9.23.1771315929400;
+        Tue, 17 Feb 2026 00:12:09 -0800 (PST)
+Received: from silence.. ([46.10.240.40])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796a5d156sm35757690f8f.5.2026.02.17.00.12.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Feb 2026 00:12:08 -0800 (PST)
+From: Stoyan Bogdanov <sbogdanov@baylibre.com>
+To: jbrunet@baylibre.com,
+	linux@roeck-us.net,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org
+Cc: linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Stoyan Bogdanov <sbogdanov@baylibre.com>
+Subject: [PATCH v3 0/3]  Add TI TPS1689 pmbus eFuse
+Date: Tue, 17 Feb 2026 10:12:00 +0200
+Message-Id: <20260217081203.1792025-1-sbogdanov@baylibre.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.89 / 15.00];
-	LONG_SUBJ(1.55)[207];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[baylibre-com.20230601.gappssmtp.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-76127-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76125-lists,linux-doc=lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCPT_COUNT_THREE(0.00)[4];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
+	DMARC_NA(0.00)[baylibre.com];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[sbogdanov@baylibre.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[baylibre-com.20230601.gappssmtp.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,pengutronix.de:url]
-X-Rspamd-Queue-Id: 2BC501489BD
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 20735149BFC
 X-Rspamd-Action: no action
 
-tree:   https://git.pengutronix.de/git/linux-0-day mfe/v6.19/topic/touchscreen-axiom
-head:   a2c0b8aee58d5ef254750920bb8a89e4caaadbab
-commit: a2c0b8aee58d5ef254750920bb8a89e4caaadbab [5/5] Input: Add TouchNetix aXiom I2C Touchscreen support
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260217/202602170408.zNbIg5NA-lkp@intel.com/reproduce)
+Rework TPS25990 eFuse pmbus driver to provide more unified way for
+non standard direct conversions.Remove existing defines for TPS25990
+conversions and replace them with enum listing all supported parameters
+and structure using m, b, R. Add functions to covert raw to real value
+and real value back to raw. Add data structure to hold pmbus_driver_info
+and local_direct_values for direct conversion.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202602170408.zNbIg5NA-lkp@intel.com/
+Add support TPS1689 support to TPS25990 driver, since both
+chips are sharing a lot of similar internal functions with exception of
+work range like Voltage and Current.
 
-All warnings (new ones prefixed by >>):
+Change log v2 -> v3:
+- Fix error detected from kernel test bot regarding division
 
-   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: Documentation/devicetree/dt-object-internal.txt
-   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: m,^Documentation/scheduler/sched-pelt
-   Warning: tools/docs/documentation-file-ref-check references a file that doesn't exist: m,(Documentation/translations/[
-   Using alabaster theme
-   Documentation/ABI/testing/sysfs-driver-input-touchnetix-axiom:63: ERROR: Unexpected indentation. [docutils]
->> Documentation/ABI/testing/sysfs-driver-input-touchnetix-axiom:63: WARNING: Block quote ends without a blank line; unexpected unindent. [docutils]
-   Documentation/ABI/testing/sysfs-driver-input-touchnetix-axiom:63: ERROR: Unexpected indentation. [docutils]
->> Documentation/ABI/testing/sysfs-driver-input-touchnetix-axiom:63: WARNING: Block quote ends without a blank line; unexpected unindent. [docutils]
-   WARNING: ./include/crypto/skcipher.h:166 struct member 'SKCIPHER_ALG_COMMON' not described in 'skcipher_alg'
-   WARNING: ./include/linux/virtio.h:183 struct member 'map' not described in 'virtio_device'
-   WARNING: ./include/linux/virtio.h:183 struct member 'VIRTIO_DECLARE_FEATURES(features' not described in 'virtio_device'
-   WARNING: ./include/linux/virtio.h:183 struct member 'vmap' not described in 'virtio_device'
-   WARNING: ./drivers/gpu/drm/amd/display/dc/dc.h:2796 This comment starts with '/**', but isn't a kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
+Tests:
+- Test builds for x86_64, arm64, i386
+- Retest driver on arm64
+- Validate driver direct conversion functions manualy
 
+Stoyan Bogdanov (3):
+  hwmon: (pmbus/tps25990): Rework TPS25990 non standatd direct
+    conversion
+  dt-bindings: hwmon: pmbus/tps1689: Add TPS1689
+  hwmon: (pmbus/tps1689): Add TPS1689 support
 
-vim +63 Documentation/ABI/testing/sysfs-driver-input-touchnetix-axiom
-
-  > 63	What:		/sys/bus/i2c/devices/xxx/device_state
+ .../bindings/hwmon/pmbus/ti,tps25990.yaml     |   4 +-
+ Documentation/hwmon/tps25990.rst              |  15 +-
+ drivers/hwmon/pmbus/tps25990.c                | 190 +++++++++++++++---
+ 3 files changed, 175 insertions(+), 34 deletions(-)
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.34.1
+
 
