@@ -1,81 +1,82 @@
-Return-Path: <linux-doc+bounces-76127-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76126-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0NLCHOQilGmqAAIAu9opvQ
-	(envelope-from <linux-doc+bounces-76127-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 09:12:20 +0100
+	id IOoxMuMilGmqAAIAu9opvQ
+	(envelope-from <linux-doc+bounces-76126-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 09:12:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20735149BFC
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 09:12:20 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00BE0149BEA
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 09:12:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 8AD7F300C0EF
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 08:12:18 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 73D923002D31
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Feb 2026 08:12:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58A252D8793;
-	Tue, 17 Feb 2026 08:12:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3E872DC357;
+	Tue, 17 Feb 2026 08:12:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jUJwPgRG"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CGEhoovy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F491292B2E
-	for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 08:12:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42A272DB78B
+	for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 08:12:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771315934; cv=none; b=Lf/M4sEGR4evnEHzXQeoZJMIFSij+hpIh3ldnNF966YpBA+LI9k1SiWKH3RUgAMEU5lrIApUmm8iIncSrKMJAraxENxPcIrGPNd5iVw8OqTG+3WG7K5mXLAUzqgDjaAWtUlMCeBHqPQzcMcX8b1q3AD4g+Z3dUeedSZjGMsS1Ik=
+	t=1771315933; cv=none; b=UqFeVxlgYw/kiZBxbgriyFwH96laNsBgQsYJfXoSp81D6m4N4wXDJbANQq9A23Qsc9vt1Cbcbf5XAbWqvbc7jlp4rSYaoKhLragt6tazcqvxprI/mEOnwVe/wOo+AyWi5Vu2WU1uuLXUcIwtKI5fVL3c3dNxpdPH3PbueeIY+P0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771315934; c=relaxed/simple;
-	bh=nUEhTFG/7UBE/bp1GdYkZho+b3xUavo+boubP6XYsBw=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=lPKqyNAWoo4638V+TSOVzIkdkPAPqexg+E1oufiiqEWsNfoJYySW7/GuYEiNan2RMHBkY2qI63TnsABg78redN6GX/SQjRZ9X9MzVc/1nAFX7Pt3qV/5XtxNs5kpRkSsLipt7xHHQ2POtZSGw3votRa7zPtq3FKuXh2cOIJX4dg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=jUJwPgRG; arc=none smtp.client-ip=209.85.128.50
+	s=arc-20240116; t=1771315933; c=relaxed/simple;
+	bh=MBxXvm9SN85wIbPQozevHNwhIzjPtliVSJlxB+6iP8A=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=VbH0w/SKswxyIDoNder8jHzqGU7/8DDbQERLWK0IJE2uEgYLCdLx78Mavli+A1RRckkUIOdX+hHt3cxXdowuJHSN6uT17cWBekRsSP00kzyy29YL/5zwFoLDTNFFjyQZiNgJIio6OqxKAMQdj8B4ltNHREf1nx9auG1AfC4QLLg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=CGEhoovy; arc=none smtp.client-ip=209.85.221.50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4807068eacbso29966805e9.2
-        for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 00:12:10 -0800 (PST)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4359a316d89so3467926f8f.0
+        for <linux-doc@vger.kernel.org>; Tue, 17 Feb 2026 00:12:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1771315929; x=1771920729; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Gb6W1GryaZfBbGOxIz34ZV52pWSStvnj73mIghaUYWU=;
-        b=jUJwPgRGOdcXz9utJSkIrokB+h+hNDJpOIhmYbEEGxq50sWZ2dDPoZ/Vi2NAvUNkdd
-         plJMKeR8pBbdg9DwPtW93YaO8l0qXFlZy6MlfrPXnd1fMi6GduR6nzCe27wuJMUwHhdb
-         EFChAFAhmMTBHSe6u36h1Pe+amsCEZxcQBGcqkhx4CtzDLjtwNaCvpt8aoSXOR/g3iCy
-         ScCiCTsMlq3q5cxwbaUqZnlHbmitj6CB9t+BJO1CGTYw8faG7Behj9LrvRqzZT2UmwsZ
-         Ap9jhvu2r8zF94ft42+jOpdN+6Qi02F7WBUUV8/bnKukaKfzNrodyj1dcAi/fwyf/1JS
-         3cXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771315929; x=1771920729;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1771315931; x=1771920731; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Gb6W1GryaZfBbGOxIz34ZV52pWSStvnj73mIghaUYWU=;
-        b=xObJpX/0Rw51zV6orrh6CsUJNQ3NBifKWvMy0fAZRVZ9++WsY+qmWW4OYl8GQNaO6e
-         GxSJyerdyZQxF91ZAJp5denpT8HclmHUSw2nskVfsZl/jaGkm7jQwF2KPtTfTRwmmYr0
-         XgbqpRoPfSs/ib9ee+frD3yaqxqulMXE5tbngcOhxJ9WppmczNCG9+QpaLvwfdxQtgu+
-         xzl3EoQnYJwpntcU4qbCP5rHv0VhhpkzwTxCtEeP3bDGA1UodaOjTwfavVIl2uE6MzP3
-         JkNBwOYEUWfzAkLGnGLRfScUPC38KmGPVIBVAacMVzWSixyWTvnMCnJQZzYhffKjtzMV
-         yTug==
-X-Forwarded-Encrypted: i=1; AJvYcCWR9WUEFTgeokkRf7tzV3N2nIvGxAUshSKSXD4qsMyoMQooOrNnfr9oLIsutpNKwGU5qXhfYZ4QAXw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YykPm8gG5a+esLUB4MYUluUQw1FzXK/viqvHrB4OTcAcW2+NxmS
-	c+olhbuc9FGRpT3TA94EWzz7g17QYmwRVdE0FQpbYf6IE3Ofh+h5JNdQgQq28099999kag8RKTE
-	v4uPT/Jc=
-X-Gm-Gg: AZuq6aIGHv3sL7wb5naAcQGFLkni0YkCuX8msXTqcAA86oqRVn8aT5occR+FfpjzXtn
-	KGQZvvTtEZYKTuH1h3b4MEayCw19vXIcRDdaOiUFqE4A33JMtIHmOIu+ZdMBN0YhODHoI5a0hx9
-	dYS8MzI7G4/+h/JsEYJ+wY8NBEuvOETmy1iSszRmcu13o8nlUGzWuO9ZCSRP/QfwFxo5WovX+qF
-	n68YfpVeK3w34fx0KBIuv76z84cDQDE567Lxh2W3ByxMx/Gtwr4nKgZvKLvR3OfXgiv2j8UnqSs
-	Okj1nt0COf/xno8uks0gaR2wWbFsrYd0zh4pHLCHR+fgtkdWvA6O4ydDAabL5cHdTFvYxcwTQON
-	QMPtM9x1jjKlf7c9bC7vd3LhQmml7LJDfh+iCss/lT60N/MvxXMgwt7EFaAZDrKmNiUu8diukqj
-	jj8LBsuChZK7bxqaI486q2EWd/bzD5JBSg6UfR6hfBIPovotXhlNeHhvUg7L4Tlhsd3owt28sJu
-	o02CAI9yg==
-X-Received: by 2002:a05:600c:3d87:b0:480:3ad0:93c0 with SMTP id 5b1f17b1804b1-48373a5d6d5mr188570635e9.23.1771315929400;
-        Tue, 17 Feb 2026 00:12:09 -0800 (PST)
+        bh=nkpDAlBYfnDGxcVrWynzmo5K/OoXZi98TxFwnjNQDvI=;
+        b=CGEhoovyrTXMH3AGZk2ioO/R21qCAlzaHC+2A16Mf4inI7GtLktrKRTdTA/ayTqeVz
+         vmUzKjuG845s16Fest5iKf7P8To540+UB8NLWZ8sdSTMgnMxtV8kCd+5oTQQtiLJQVIp
+         xGsC874JgyTizIek/XIQryT5M9rX6KNE96LvS72Jfj10UC7NxCsExUVvSCv+tCu7VDI5
+         govp1pXa8oyj1aL06273xXk2KBU2XnSYuEwfoYSlGjO/1E+LiZpwB/h3SBWPrd6PA4Eh
+         BN+UN283Z49PBY4uIlasQHhCMXB4Qe4d4KKRwA8doiwPTMxcPAFMtXylRDo6ii7cIPUW
+         hldQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771315931; x=1771920731;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=nkpDAlBYfnDGxcVrWynzmo5K/OoXZi98TxFwnjNQDvI=;
+        b=iK0JczvgqyeZKFNknzTyDHxPAGvjLHw5JD8i+4dJDuE3/n4/omllkT81GVazSaBWRg
+         R2VxT1+HPzYyVH9Yx07pf3uJjngNEjCH3rBuil6d6vBtBode6GwowASNXI0kyi8eRFZL
+         Le5Pwyxd8Xmp2A2ZezRPO+4J1mvuGgYAVlLB8zyFWZ0QS3aRaHBH0yJS/k8PlcfEktFU
+         yQUT+pqU5QccuvwZvgsH5ZaUAeP2KPbFjUqH5JPV4F0elQLe59tVoHr7LEkdF5yUcOVs
+         LOGBOgUwmOKoKmadCeYlIEclM+eNs1RGVPhkK4aEFL+iXPgHl78XPzRqIcOf5dLqv/bN
+         7VwQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX17nyuNEtk6nGlUnZpls3J7+mQeKSdGNvfMAEJXTbpa0DQTSm/bVjaPwSiZF4vTqqCd+yUC70TuxU=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzda7KBaUy6HZtuAPWPLcDRqI7r0EztuYEiuTOddGLn/4yVLXhJ
+	XR4kD8+fYP/6OQMM/Yti/ri2F9RvrmokLYXfo2RewomyEItKZS/dVCHOmlOgNnzc1MU=
+X-Gm-Gg: AZuq6aK6JB9Zr24quI5zgbExMJ3dkhQScD5xVJep1EA8k9O8F9nh321Lr1qJJTgkJ6N
+	AYR/hyK1t7DYrBNZCcrRWIVXViU+g8laEgImNxfyUSxKH358xqHQ6y73MnDki8XUzHbBigJ3xTF
+	AtCaGZ7+GeQnSirY/eE9K3jy45TMdr5To2qQNQaUKUJXQY0SEUxchX0iBZYLlF6tsxlPwvJvZx1
+	tMNKZZcf5xnMOJ0Y2/YL7zUZV3pR2RTIQGMFrj4jLCllnWV0KHoX9TgchogXX+qnf/z9gHOxl9f
+	q5KdHKUlH2ArkEwlWCBRAlSVPrS1MWZwJW+h9/3E5/j8Z+HvzgoXB8fjJOaBorQz8hj5F06C/2V
+	mJlfPKIRsUXVyS+cQmzTRLLIFfuQ9LZPyrHg0sylexPbB2SWdxryGVRrfLMmJp/WdYAbIYD4WnZ
+	y48QMA37DKHFEnBvSbtLRpvXxiYBTpdTg6QT28eatnfHFYKwPk3h/fdKViy9deHx2C2jjDg7S07
+	8e31J0uVUniao9Imlja
+X-Received: by 2002:a05:6000:4203:b0:437:8fc0:8802 with SMTP id ffacd0b85a97d-4379793d751mr24549679f8f.48.1771315930539;
+        Tue, 17 Feb 2026 00:12:10 -0800 (PST)
 Received: from silence.. ([46.10.240.40])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796a5d156sm35757690f8f.5.2026.02.17.00.12.08
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796a5d156sm35757690f8f.5.2026.02.17.00.12.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Feb 2026 00:12:08 -0800 (PST)
+        Tue, 17 Feb 2026 00:12:10 -0800 (PST)
 From: Stoyan Bogdanov <sbogdanov@baylibre.com>
 To: jbrunet@baylibre.com,
 	linux@roeck-us.net,
@@ -89,10 +90,12 @@ Cc: linux-hwmon@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Stoyan Bogdanov <sbogdanov@baylibre.com>
-Subject: [PATCH v3 0/3]  Add TI TPS1689 pmbus eFuse
-Date: Tue, 17 Feb 2026 10:12:00 +0200
-Message-Id: <20260217081203.1792025-1-sbogdanov@baylibre.com>
+Subject: [PATCH v3 1/3] hwmon: (pmbus/tps25990): Rework TPS25990 non standatd direct conversion
+Date: Tue, 17 Feb 2026 10:12:01 +0200
+Message-Id: <20260217081203.1792025-2-sbogdanov@baylibre.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260217081203.1792025-1-sbogdanov@baylibre.com>
+References: <20260217081203.1792025-1-sbogdanov@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -106,18 +109,18 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[baylibre-com.20230601.gappssmtp.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-76127-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76126-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[12];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_NA(0.00)[baylibre.com];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sbogdanov@baylibre.com,linux-doc@vger.kernel.org];
@@ -127,40 +130,221 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 20735149BFC
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 00BE0149BEA
 X-Rspamd-Action: no action
 
-Rework TPS25990 eFuse pmbus driver to provide more unified way for
-non standard direct conversions.Remove existing defines for TPS25990
-conversions and replace them with enum listing all supported parameters
-and structure using m, b, R. Add functions to covert raw to real value
-and real value back to raw. Add data structure to hold pmbus_driver_info
-and local_direct_values for direct conversion.
+Rework existing implementation for calculation of direct
+format conversion for TPS25990. With this implamentation
+is leveraged code reusability for non standard parameters.
+ - Add enum for parameter
+ - Add m, b, R structure to hold value per device
+ - Add data structure to hold for pmbus_driver_info and
+   local_direct_values
+ - Conversion functions are implemented according to formula from
+   TPS25990 datasheet
+ - Remove previously used defines replace with structure
 
-Add support TPS1689 support to TPS25990 driver, since both
-chips are sharing a lot of similar internal functions with exception of
-work range like Voltage and Current.
+Signed-off-by: Stoyan Bogdanov <sbogdanov@baylibre.com>
+---
+ drivers/hwmon/pmbus/tps25990.c | 115 +++++++++++++++++++++++++--------
+ 1 file changed, 88 insertions(+), 27 deletions(-)
 
-Change log v2 -> v3:
-- Fix error detected from kernel test bot regarding division
-
-Tests:
-- Test builds for x86_64, arm64, i386
-- Retest driver on arm64
-- Validate driver direct conversion functions manualy
-
-Stoyan Bogdanov (3):
-  hwmon: (pmbus/tps25990): Rework TPS25990 non standatd direct
-    conversion
-  dt-bindings: hwmon: pmbus/tps1689: Add TPS1689
-  hwmon: (pmbus/tps1689): Add TPS1689 support
-
- .../bindings/hwmon/pmbus/ti,tps25990.yaml     |   4 +-
- Documentation/hwmon/tps25990.rst              |  15 +-
- drivers/hwmon/pmbus/tps25990.c                | 190 +++++++++++++++---
- 3 files changed, 175 insertions(+), 34 deletions(-)
-
+diff --git a/drivers/hwmon/pmbus/tps25990.c b/drivers/hwmon/pmbus/tps25990.c
+index c13edd7e1abf..33f6367f797c 100644
+--- a/drivers/hwmon/pmbus/tps25990.c
++++ b/drivers/hwmon/pmbus/tps25990.c
+@@ -36,17 +36,58 @@
+ #define  TPS25990_UNLOCKED		BIT(7)
+ 
+ #define TPS25990_8B_SHIFT		2
+-#define TPS25990_VIN_OVF_NUM		525100
+-#define TPS25990_VIN_OVF_DIV		10163
+-#define TPS25990_VIN_OVF_OFF		155
+-#define TPS25990_IIN_OCF_NUM		953800
+-#define TPS25990_IIN_OCF_DIV		129278
+-#define TPS25990_IIN_OCF_OFF		157
+ 
+ #define PK_MIN_AVG_RST_MASK		(PK_MIN_AVG_RST_PEAK | \
+ 					 PK_MIN_AVG_RST_AVG  | \
+ 					 PK_MIN_AVG_RST_MIN)
+ 
++enum tps25990_parameters {
++	TPS25990_VIN_OVF = 0, /* VIN over volatage fault */
++	TPS25990_IIN_OCF, /* IIN Over currect fault */
++	TPS25590_DIRECT_VALUES_MAX, /* Max value ensure there enough space */
++};
++
++struct local_direct_value {
++	int m[TPS25590_DIRECT_VALUES_MAX]; /* mantissa for direct data format */
++	int b[TPS25590_DIRECT_VALUES_MAX]; /* offset */
++	int R[TPS25590_DIRECT_VALUES_MAX]; /* exponent */
++};
++
++struct tps25990_data {
++	struct pmbus_driver_info *info;
++	struct local_direct_value *info_local;
++};
++
++static int tps25990_raw_to_value(struct i2c_client *client, int param, int raw)
++{
++	struct tps25990_data *data = (struct tps25990_data *)of_device_get_match_data(&client->dev);
++	struct local_direct_value *info_local = data->info_local;
++
++	/* Formula : X = (Y / 10^R - b) / m */
++	if (info_local->R[param] >= 0)
++		raw /= int_pow(10, info_local->R[param]);
++	else
++		raw *= int_pow(10, -info_local->R[param]);
++
++	return DIV_ROUND_CLOSEST(raw - info_local->b[param], info_local->m[param]);
++}
++
++static unsigned int tps25990_value_to_raw(struct i2c_client *client, int param, int val)
++{
++	struct tps25990_data *data = (struct tps25990_data *)of_device_get_match_data(&client->dev);
++	struct local_direct_value *info_local = data->info_local;
++
++	/* Formula : Y = ( m * X + b) * 10^R */
++	val = (long)val * info_local->m[param] + info_local->b[param];
++
++	if (info_local->R[param] >= 0)
++		val *= int_pow(10, info_local->R[param]);
++	else
++		val = DIV_ROUND_CLOSEST(val, int_pow(10, -info_local->R[param]));
++
++	return val;
++}
++
+ /*
+  * Arbitrary default Rimon value: 1kOhm
+  * This correspond to an overcurrent limit of 55A, close to the specified limit
+@@ -184,9 +225,7 @@ static int tps25990_read_word_data(struct i2c_client *client,
+ 		ret = pmbus_read_word_data(client, page, phase, reg);
+ 		if (ret < 0)
+ 			break;
+-		ret = DIV_ROUND_CLOSEST(ret * TPS25990_VIN_OVF_NUM,
+-					TPS25990_VIN_OVF_DIV);
+-		ret += TPS25990_VIN_OVF_OFF;
++		ret = tps25990_raw_to_value(client, TPS25990_VIN_OVF, ret);
+ 		break;
+ 
+ 	case PMBUS_IIN_OC_FAULT_LIMIT:
+@@ -198,9 +237,7 @@ static int tps25990_read_word_data(struct i2c_client *client,
+ 		ret = pmbus_read_byte_data(client, page, TPS25990_VIREF);
+ 		if (ret < 0)
+ 			break;
+-		ret = DIV_ROUND_CLOSEST(ret * TPS25990_IIN_OCF_NUM,
+-					TPS25990_IIN_OCF_DIV);
+-		ret += TPS25990_IIN_OCF_OFF;
++		ret = tps25990_raw_to_value(client, TPS25990_IIN_OCF, ret);
+ 		break;
+ 
+ 	case PMBUS_VIRT_SAMPLES:
+@@ -246,17 +283,13 @@ static int tps25990_write_word_data(struct i2c_client *client,
+ 		break;
+ 
+ 	case PMBUS_VIN_OV_FAULT_LIMIT:
+-		value -= TPS25990_VIN_OVF_OFF;
+-		value = DIV_ROUND_CLOSEST(((unsigned int)value) * TPS25990_VIN_OVF_DIV,
+-					  TPS25990_VIN_OVF_NUM);
++		value = tps25990_value_to_raw(client, TPS25990_VIN_OVF, value);
+ 		value = clamp_val(value, 0, 0xf);
+ 		ret = pmbus_write_word_data(client, page, reg, value);
+ 		break;
+ 
+ 	case PMBUS_IIN_OC_FAULT_LIMIT:
+-		value -= TPS25990_IIN_OCF_OFF;
+-		value = DIV_ROUND_CLOSEST(((unsigned int)value) * TPS25990_IIN_OCF_DIV,
+-					  TPS25990_IIN_OCF_NUM);
++		value = tps25990_value_to_raw(client, TPS25990_IIN_OCF, value);
+ 		value = clamp_val(value, 0, 0x3f);
+ 		ret = pmbus_write_byte_data(client, page, TPS25990_VIREF, value);
+ 		break;
+@@ -337,7 +370,16 @@ static const struct regulator_desc tps25990_reg_desc[] = {
+ };
+ #endif
+ 
+-static const struct pmbus_driver_info tps25990_base_info = {
++struct local_direct_value tps25590_local_info = {
++	.m[TPS25990_VIN_OVF] = 10163,
++	.b[TPS25990_VIN_OVF] = -30081,
++	.R[TPS25990_VIN_OVF] = -4,
++	.m[TPS25990_IIN_OCF] = 9538,
++	.b[TPS25990_IIN_OCF] = 0,
++	.R[TPS25990_IIN_OCF] = -6,
++};
++
++static struct pmbus_driver_info tps25990_base_info = {
+ 	.pages = 1,
+ 	.format[PSC_VOLTAGE_IN] = direct,
+ 	.m[PSC_VOLTAGE_IN] = 5251,
+@@ -386,14 +428,19 @@ static const struct pmbus_driver_info tps25990_base_info = {
+ #endif
+ };
+ 
++struct tps25990_data data_tps25990 = {
++	.info = &tps25990_base_info,
++	.info_local = &tps25590_local_info,
++};
++
+ static const struct i2c_device_id tps25990_i2c_id[] = {
+-	{ "tps25990" },
++	{ .name = "tps25990", .driver_data = (kernel_ulong_t)&data_tps25990 },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(i2c, tps25990_i2c_id);
+ 
+ static const struct of_device_id tps25990_of_match[] = {
+-	{ .compatible = "ti,tps25990" },
++	{ .compatible = "ti,tps25990", .data = &data_tps25990 },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(of, tps25990_of_match);
+@@ -401,23 +448,37 @@ MODULE_DEVICE_TABLE(of, tps25990_of_match);
+ static int tps25990_probe(struct i2c_client *client)
+ {
+ 	struct device *dev = &client->dev;
+-	struct pmbus_driver_info *info;
++	struct tps25990_data *data;
+ 	u32 rimon = TPS25990_DEFAULT_RIMON;
++	struct pmbus_driver_info *info_get;
++	struct local_direct_value *info_local_get;
+ 	int ret;
+ 
+ 	ret = device_property_read_u32(dev, "ti,rimon-micro-ohms", &rimon);
+ 	if (ret < 0 && ret != -EINVAL)
+ 		return dev_err_probe(dev, ret, "failed to get rimon\n");
+ 
+-	info = devm_kmemdup(dev, &tps25990_base_info, sizeof(*info), GFP_KERNEL);
+-	if (!info)
++	data = (struct tps25990_data *)of_device_get_match_data(dev);
++	if (!data)
++		return -EOPNOTSUPP;
++
++	info_get = data->info;
++	/* Make copy of pmbus_info and replace it to preserve original values */
++	data->info = devm_kmemdup(dev, info_get, sizeof(*info_get), GFP_KERNEL);
++	if (!data->info)
++		return -ENOMEM;
++
++	info_local_get = data->info_local;
++	/* Make copy of pmbus_info and replace it to preserve original values */
++	data->info_local = devm_kmemdup(dev, info_local_get, sizeof(*info_local_get), GFP_KERNEL);
++	if (!data->info_local)
+ 		return -ENOMEM;
+ 
+ 	/* Adapt the current and power scale for each instance */
+-	tps25990_set_m(&info->m[PSC_CURRENT_IN], rimon);
+-	tps25990_set_m(&info->m[PSC_POWER], rimon);
++	tps25990_set_m(&data->info->m[PSC_CURRENT_IN], rimon);
++	tps25990_set_m(&data->info->m[PSC_POWER], rimon);
+ 
+-	return pmbus_do_probe(client, info);
++	return pmbus_do_probe(client, data->info);
+ }
+ 
+ static struct i2c_driver tps25990_driver = {
 -- 
 2.34.1
 
