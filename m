@@ -1,313 +1,189 @@
-Return-Path: <linux-doc+bounces-76285-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76287-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oPhrAPcJl2nvtwIAu9opvQ
-	(envelope-from <linux-doc+bounces-76285-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 14:02:47 +0100
+	id QErRF5APl2n7uAIAu9opvQ
+	(envelope-from <linux-doc+bounces-76287-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 14:26:40 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0BF615ED2F
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 14:02:45 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 727F515F0B2
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 14:26:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B3A70302736D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 13:01:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C7C10300A262
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 13:26:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6BF433B6E8;
-	Thu, 19 Feb 2026 13:01:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 242AE33A9FA;
+	Thu, 19 Feb 2026 13:26:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="w/x3PmW5"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A+CGzuZm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from SN4PR0501CU005.outbound.protection.outlook.com (mail-southcentralusazon11011007.outbound.protection.outlook.com [40.93.194.7])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B0FA33B6E3;
-	Thu, 19 Feb 2026 13:01:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.194.7
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771506100; cv=fail; b=D2rcy+o7hZs7I9EwKo3BX1+21M8tJY+iups2YHesgXaop8/nu0fwjeWx8lgCG68HQzJrYh9eQ/CUSs8mzY2Qa/0CVsD4aN+6LjJb7feSRUs2twgu/QF70NPioghsoL5G32dJl1LDGyZw254XVLEWtx21zP//DlznchLgwCQD0d4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771506100; c=relaxed/simple;
-	bh=wPGwWpzGzOiRyh8mAVsNZ2WJdkg1+xfU6SXc8xJJRVs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=sSsmfe3VQfNmyOOIajyOtfM7KeKfhHJh1UK4bqyUQ+2kCOcmbInYNrLbTR2ha1AXVRJaEvark5acQtEQUrAOInBweYVPLlWtmV0NDshPSPMFp+JldFG2cvo2WklsAR+C3Ieb1T/gl7f0ofWuUyTHfNHtaQ9mq32ciTss4cW3ATU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com; spf=pass smtp.mailfrom=gehealthcare.com; dkim=pass (2048-bit key) header.d=gehealthcare.com header.i=@gehealthcare.com header.b=w/x3PmW5; arc=fail smtp.client-ip=40.93.194.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gehealthcare.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sKcL68ks+bmKHChKKcOTLRPRyDm19A+/mD/GuJltkXV9iOKs/w52XCftASJww8LsFUXp7F6v1mLRC+d02zBAGhpTY7T3E36nl6E/90MLMJGESrL3k6x7rW3Z4yxoOl0VGck3/kPiRVv+rddNgkEF8/444753l8aSfZkS080+a5ZKp5se/kPhBsh4ZCdWVQTVPBlpZPpTPXk+Ha9sIEY6vBlWx/hXJ9/7VBnMlmfJEAzUDQuMf+9d+Bx98so8OSovrZtGwAw/nTUaC9D3f390qI7BB0TXit6tCdd71q0mm2qLhg5U3iX2m3A7tQEBUirp+GOlGwzVtVOphYJVU0tGoA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Zn/YjKO7q6k/Ly/TAPwDNvswDziYzMAFLS6mvshx4h8=;
- b=mXperVuBgBEjefW/KtK7Lz/adHhZ3CrRiKyR8GDAl36HnKMSlFNG2TakSeM2okZ0Yh2CcN7U9rgL++YzFE1WLaJJrTPRHvShthEXu2vgkdbRqvDkZU7ZfC3ji6ZSOzgYVj3Z12nPA59KM9ODDUp8hFbdv5i/SKWwd92FTrHBRq6y4WTWDZlOtkAITAGyRrEOm5JdskkjBHr4aZhhzGfNZpjmQqbvqHIcC4Qgo4RQViipruf0nOtlYQAKp2SOjfWNZjNPh9I7+xMnvNVHe1jTSEXgt35DV+6tVO1XSUUkMtFuNrvSotMDtv7eY2169WMO095tPfE70swUaii1AZ8Jrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 165.85.157.49) smtp.rcpttodomain=vger.kernel.org
- smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
- pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
- not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zn/YjKO7q6k/Ly/TAPwDNvswDziYzMAFLS6mvshx4h8=;
- b=w/x3PmW5naDlyug0ZU2JmwSMbQCEyVmYM6AakUO8WaVoAe2V/GlIQODz5q53C6Ng9EjyvEMKVJ2OnYnsiKpb0wwr9JuTgmKQvoBchYhIrjQRSDE1hELOpfx5jAyFpykE2FxOgzG8/7EFRwy7JzS0V+1+C6vb3/Rc//vD7Y4CMpkv6oWPAkc1pv8lo4wrK9o5sKZ0u5qwXrqAGIhtii5ihMOtv3wlAHQKEeHWSpL1HySjJTrORMIrMCE5RsqvQ+3hjjrLdLg2oF6ig+yXWIefyRnR06B18olK4hzMygZXr/c2rGgPndu5VXRI6GdoGwiw0U1K3m+O3GOdDiikrIChCw==
-Received: from CH0PR03CA0085.namprd03.prod.outlook.com (2603:10b6:610:cc::30)
- by DS4PPF7F045B8D9.namprd22.prod.outlook.com (2603:10b6:f:fc00::b31) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.11; Thu, 19 Feb
- 2026 13:01:35 +0000
-Received: from DS3PEPF0000C37A.namprd04.prod.outlook.com
- (2603:10b6:610:cc:cafe::89) by CH0PR03CA0085.outlook.office365.com
- (2603:10b6:610:cc::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.16 via Frontend Transport; Thu,
- 19 Feb 2026 13:01:23 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
- smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
-Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
- not designate 165.85.157.49 as permitted sender)
- receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=atlrelay1.compute.ge-healthcare.net;
-Received: from atlrelay1.compute.ge-healthcare.net (165.85.157.49) by
- DS3PEPF0000C37A.mail.protection.outlook.com (10.167.23.4) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 13:01:34 +0000
-Received: from zeus.fihel.lab.ge-healthcare.net (zoo13.fihel.lab.ge-healthcare.net [10.168.174.111])
-	by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 71D07FFDA4;
-	Thu, 19 Feb 2026 15:01:31 +0200 (EET)
-From: Ian Ray <ian.ray@gehealthcare.com>
-To: Guenter Roeck <linux@roeck-us.net>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: Ian Ray <ian.ray@gehealthcare.com>,
-	=?UTF-8?q?Bence=20Cs=C3=B3k=C3=A1s?= <bence98@sch.bme.hu>,
-	=?UTF-8?q?Toma=C5=BE=20Zaman?= <tomaz@mono.si>,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	devicetree@vger.kernel.org
-Subject: [PATCH V2 3/3] hwmon: (ina2xx) Add support for INA234
-Date: Thu, 19 Feb 2026 15:01:24 +0200
-Message-ID: <20260219130127.87901-4-ian.ray@gehealthcare.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20260219130127.87901-1-ian.ray@gehealthcare.com>
-References: <20260219130127.87901-1-ian.ray@gehealthcare.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0FFF30BF72;
+	Thu, 19 Feb 2026 13:26:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771507590; cv=none; b=IYCEdHHcs9laLTzMZY8dRnk/vnUvKIVcIGw1oX4UevKGE4q+E9KGqplARYyQhGPqI0LbTqijhbt3zrFXEiCHnDGRLNqR0mxraEpzYhWecFn0lS0bMNXcEi/mrsTlgU8PrkQJUMXv4HmuiJlsC5q6nrL/20es5ko/5ZoV9AyGqdA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771507590; c=relaxed/simple;
+	bh=0E6w62v3rpN+tm5LDZUfdbYvALDslKvhZRYY6apfWIw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=RiRoqlGHbPAogdjrtomf25qT9qM9d4NWKQf66nUNXELoggNUUc4GRnpdXkLsY99Ud5GeR8h8lRp3+K7Xf0xM9Gr6qSEgxDRM6GMGS66cS0U9setuBoClxOlkyyw/9EGcpBiM4i79DoqlKk/6BQyD+AzwRhZt+WmhbBCd4YCg3tQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A+CGzuZm; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BFDFC4CEF7;
+	Thu, 19 Feb 2026 13:26:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1771507589;
+	bh=0E6w62v3rpN+tm5LDZUfdbYvALDslKvhZRYY6apfWIw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=A+CGzuZmT1I+fwuzQ12nCaQ/awcw1JNhSP53gqx2x+tYgYbgz5R9c0DiM6bWwgycl
+	 UxqJsI4/Uq2iN2pMmLQbcLQBrtUkwWElqzcvKq6RLbRZGB5+VlYOjIR76hgpd8L+dn
+	 5dN7oDANZKbiSrXxkX4KEZXRcPCmgIpT1Bae4ZOBBx5KuLKsu+eH8Q2MwTrJUoQLZb
+	 H5gD1ikb49N3+aJWh2f3bQGca7TtJJwA8/tBAD3krZoI5lfxjV09lhpS05pTSCGIbW
+	 oGePebtPbpNwl9XV5M4ZsmwrRxmbxPq+1I8AoYOhm5eXkeEncLSCwTK7MMJ1bjREsp
+	 6aF9gH8Hr+35w==
+Date: Thu, 19 Feb 2026 07:26:26 -0600
+From: Bjorn Andersson <andersson@kernel.org>
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Thara Gopinath <thara.gopinath@gmail.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	Udit Tiwari <quic_utiwari@quicinc.com>, Daniel Perez-Zoghbi <dperezzo@quicinc.com>, 
+	Md Sadre Alam <mdalam@qti.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, dmaengine@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: Re: [PATCH v9 03/11] dmaengine: qcom: bam_dma: implement support for
+ BAM locking
+Message-ID: <sqaimyrvtf4mzasg7e326c254cfd3jkviqei55whc2rp62lseo@wdlyf25br5cz>
+References: <CAMRc=McO-Fbb=O3VjFk5C14CD6oVA4UmLroN4_ddCVxtfxr03A@mail.gmail.com>
+ <aUpyrIvu_kG7DtQm@vaman>
+ <CAMRc=Md6ucK-TAmtvWMmUGX1KuVE9Wj_z4i7_-Gc7YXP=Omtcw@mail.gmail.com>
+ <aVZh3hb32r1oVcwG@vaman>
+ <CAMRc=MePAVMZPju6rZsyQMir4CkQi+FEqbC++omQtVQC1rHBVg@mail.gmail.com>
+ <aVf5WUe9cAXZHxPJ@vaman>
+ <CAMRc=Mdaucen4=QACDAGMuwTR1L5224S0erfC0fA7yzVzMha_Q@mail.gmail.com>
+ <aWBndOfbtweRr0uS@vaman>
+ <CAMRc=McPz+W4GOCbNMx-tpSav3+wuUrLT2CF5FhoV5U29oiK6A@mail.gmail.com>
+ <ana2ugshqjicqscwpdgo6knv53n4zzuwqp376qil27spco5vwh@ck7wmplz52qs>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37A:EE_|DS4PPF7F045B8D9:EE_
-X-MS-Office365-Filtering-Correlation-Id: 755afe0f-042b-48e8-e46b-08de6fb702cf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?TDVqbFMyVS9lbHI5RVdaNUJDcG1sMk5jaFVoUVV2ckNNUTVzNk5xNTNidTE4?=
- =?utf-8?B?SEtabXg4NU9TdGNoeWEyRC9mSWZlS2dNWmpRNnI3aFRqamtDT3F4Vk9oYnl2?=
- =?utf-8?B?OGtqaG4vWVYzeDltSGRENFhuUmdIbXhOYVpRU3BnazlWK1BZUE5uLytRQXZx?=
- =?utf-8?B?eENVek1mb3E4YjYra0s1czM5UDd1RlBJL0xEckRScU9JUVEzZ3UyOHF0U09o?=
- =?utf-8?B?VHVDMk5laWdtTmR2Ym91eTlGU0F6UVM0UXhJL3BOSHdMckwrT3h6RWJNVFVQ?=
- =?utf-8?B?UEhjcWhWYTl0cmRhUFlTWDAzVm51SDdPdjdlWjl4Vld2ZDRucUc4ekQ1UEZt?=
- =?utf-8?B?L3UrQkp6a1JmeW91ajFDTk1NQkxHQ2t6bm1SQy94aS9MMS94aUs0YWtqV2p1?=
- =?utf-8?B?amdSVGdrNTJUQ2s4dERRK2ZWb2NLb1hGaC9PWFZVTFI3UVVDZXFXZzBGWlZY?=
- =?utf-8?B?UWhXc2dzWVdZWS9jNlg2WmZ2Qm9wWkQ3UVVza2E1TzFjemJld3dBV25mS2c4?=
- =?utf-8?B?UGROOStHOTFwWlh0SHM3empXQzRUWU93cVlaaFd6TE01dEdHTVB2VmZwTGMv?=
- =?utf-8?B?V2h1Z3E5cjNoeittdDA3OFFNMW1saFd1NlpMQk9GNCtKUGM3REdoOVFPSGJY?=
- =?utf-8?B?Q1pmSVBvbzNEd0ZIWGs5ZzduMkRyT040cW9PcEdPNmtJcW9uQVc1NjYxcjRl?=
- =?utf-8?B?S3B3YnB0WFY5ZlpqUFc0MDVCZDdPQ0Vic0RaOUlwWUNmYjhoQ2dWSHZyRlNH?=
- =?utf-8?B?MnBiSFVNeXBMdUZRK1JHaGZUNHQ3NXczKzA0YVVGQWttUWtOTXFXU0J0bDZ6?=
- =?utf-8?B?ODFVenZaSGJ1RlpzdWlTMnIySXpiQ2hxVXpQWGo3cUl0OG40QVpzT0ZFYXJP?=
- =?utf-8?B?U3JLOHdzRUR1Zm56SGUxNVRweEJrSkN0cWxFWVd2dzRaSWxIWjBlNHpBMFp5?=
- =?utf-8?B?MlA4a3BtYk1tN0tXV3BSRVhUdEZmYnNHSVowbk5OTkxsMjduQmNjMHZUK1ZB?=
- =?utf-8?B?UktiWUNJajJTUUt5R3dFdzVTRVUvTTZDMGRyVzcvL0pmc01zbjZhTFlweC9z?=
- =?utf-8?B?Y2hiWldzUG9DUTVKNEMzWktmNjNZcHdGYjVsWUJJUmZjYy9RTC9UNXhRSE8x?=
- =?utf-8?B?dUJON2FxS0dHR1VoS2t3SGtlWlhMS0ZZSlUyUzJlc2JPVUVndjhtdHN2dGpn?=
- =?utf-8?B?OVRoRkowMVhtT1k1SjZaNXN0eHVmaVp0WFkzc1VTMENvTVBsSnRIVWhPZ1F2?=
- =?utf-8?B?R0hab0FDYUkwM0NXaWpNY3hvNTFhODZ4QlFtanprQ1JRV1JaZ21WUDBqOTNY?=
- =?utf-8?B?TkkxYWhVbWlLK0JwZWdzeWtMSnJWZGhGS0k0dzZDUlhhTDZrNEg3Wmx0MkxG?=
- =?utf-8?B?UnpFSG5pcTB6K0VvZkJJR21LOVdsbTNYSVR2cEQ5aGxyZ0pKUmZVVkt5UHFD?=
- =?utf-8?B?SHJoWjE2a3E3OXNqQXZFbU5KQ2k4SHUwTEJwM3NZQ3B6ZlBBdXhvRjVyOTRH?=
- =?utf-8?B?ZU1MN25USjl6am1ucDd3RS9DcURyVVBkaVVxbkR0YU14am41MlIxcWFyWWJp?=
- =?utf-8?B?bkdZeDAyVHFMTklMU0plYVE3WVF1SWdnUndLWVcrb2VISnBINU9yL1QvVkpR?=
- =?utf-8?B?SWlTbkVFdk5MMVFrWkRUMDZ6WW1abW9XM3FKU0ZTY3lTUTBKV2lPR3JGdzlS?=
- =?utf-8?B?WEo0enRYNUsyc1pyK0UyOFZPN1pubjM1b3ZRS2UyWU1BUWVtNkxkTllnZjMz?=
- =?utf-8?B?N0FERlJCZlUwUDR3SUEvalovVENjT0tzeTl6aHZzaVJhZjJKNFlwRE5DM2x6?=
- =?utf-8?B?VDNNQkkxeTJ0di8xVmtIanVwTXVHWVY3RWdKZUp5YVNYRSs4WitMeVZqNlo5?=
- =?utf-8?B?aVJmOHZ2VTZYRUZoejRQd210eGtxSU5GSnpRWGZUK1JwUW5uam5vemNLczVx?=
- =?utf-8?B?a3ViNDI2UTF2cHgwOTBxYWROZmdyWGpuV1FvdW83cHU1M1VEaDF0VjBFWmpt?=
- =?utf-8?B?OE94aGlycnhZSEp6QnIwN2lHeDVkY1EzeGw3SDBZZ0NIRHZlRHNMR3pUZC9D?=
- =?utf-8?B?Y0g2N3FWL2hFaXloSkZKSlEvWW1ERWdlMUJTREV2a3kwSDBjWDdBUjc5ODY2?=
- =?utf-8?B?TG5qRitjM3p5ODROM1QzUFprZmYzR08wYjN4NURzaWxzTkVDWldqOElWU29E?=
- =?utf-8?B?bHc9PQ==?=
-X-Forefront-Antispam-Report:
-	CIP:165.85.157.49;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:atlrelay1.compute.ge-healthcare.net;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	oKPAgEMFAQFIqiZdP6RNCliKNdXu96RwTxdpr7ECTfYqFn7BKgiD/O35aAUg1x7LRDpi03WyKpnQPNl0DO8hhNtU534EsV3RpdCt0p044vdO90yF5dYqMYxu5BRbpzLKZVKZ46fjqesJdSsZY4GPWeElCsw1+CWDjLbD3knzOFLBlgk5h2ghpsSH9BoBd2tkRAM54JarkEb/sRUTecXem1zvvMXI4WJbtrz7L6csqdPgKobdqc4YKGr84qPYOgC+LFeF3Mr/I2M5EBVDS4rE9BUtNboEAJkhjdfZTWnrAFFrI2AtgVuGtfA7/ESp/cbawKrVs9X+aWLoVwHGvqHAiknm6o0BKvN+VeVkG2D6+DAox75uBGVdWDlc4VchNBuKlz7yOnJe1884TDGf4wHEiScOP9PNIF/jJETsb//j6mFxTnxhja5p74oU9BztOej1
-X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:01:34.7252
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 755afe0f-042b-48e8-e46b-08de6fb702cf
-X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf;Ip=[165.85.157.49];Helo=[atlrelay1.compute.ge-healthcare.net]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-DS3PEPF0000C37A.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPF7F045B8D9
+In-Reply-To: <ana2ugshqjicqscwpdgo6knv53n4zzuwqp376qil27spco5vwh@ck7wmplz52qs>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.34 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gehealthcare.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[gehealthcare.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76285-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76287-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RSPAMD_URIBL_FAIL(0.00)[gehealthcare.com:server fail];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,gehealthcare.com:mid,gehealthcare.com:dkim,gehealthcare.com:email,silergy.com:url,ti.com:url];
-	DKIM_TRACE(0.00)[gehealthcare.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ian.ray@gehealthcare.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,vger.kernel.org,linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: E0BF615ED2F
+	FROM_NEQ_ENVFROM(0.00)[andersson@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 727F515F0B2
 X-Rspamd-Action: no action
 
-INA234 is register compatible to INA226 (excepting manufacturer and die
-or device id registers) but has different scaling.
+On Thu, Feb 19, 2026 at 05:42:09PM +0530, Manivannan Sadhasivam wrote:
+> On Fri, Jan 09, 2026 at 03:15:38PM +0100, Bartosz Golaszewski wrote:
+> > On Fri, Jan 9, 2026 at 3:27 AM Vinod Koul <vkoul@kernel.org> wrote:
+> > >
+> > > >
+> > > > We need an API because we send a locking descriptor, then a regular
+> > > > descriptor (or descriptors) for the actual transaction(s) and then an
+> > > > unlocking descriptor. It's a thing the user of the DMA engine needs to
+> > > > decide on, not the DMA engine itself.
+> > >
+> > > I think downstream sends lock descriptor always. What is the harm in
+> > > doing that every time if we go down that path?
+> > 
+> > No, in downstream it too depends on the user setting the right bits.
+> > Currently the only user of the BAM locking downstream is the NAND
+> > driver. I don't think the code where the crypto driver uses it is
+> > public yet.
+> > 
+> > And yes, there is harm - it slightly impacts performance. For QCE it
+> > doesn't really matter as any users wanting to offload skcipher or SHA
+> > are better off using the Arm Crypto Extensions anyway as they are
+> > faster by an order of magnitude (!). It's also the default upstream,
+> > where the priorities are set such that the ARM CEs are preferred over
+> > the QCE. QCE however, is able to coordinate with the TrustZone and
+> > will be used to support the DRM use-cases.
+> > 
+> > I prefer to avoid impacting any other users of BAM DMA.
+> > 
+> 
+> Sorry for jumping late. But I disagree with the argument that the client drivers
+> have to set the LOCK/UNLOCK bit. These bits are specific to BAM DMA IP for
+> serializing the command descriptors from multiple entities. So DMA clients like
+> Crypto/NAND have no business in setting this flag. It is the job of the BAM
+> dmaengine driver to set/unset it at the start and end of the descriptor chain.
+> 
 
-Signed-off-by: Ian Ray <ian.ray@gehealthcare.com>
----
- Documentation/hwmon/ina2xx.rst | 13 ++++++++++++-
- drivers/hwmon/Kconfig          |  2 +-
- drivers/hwmon/ina2xx.c         | 18 ++++++++++++++++++
- 3 files changed, 31 insertions(+), 2 deletions(-)
+Thanks for pointing this out, Mani.
 
-diff --git a/Documentation/hwmon/ina2xx.rst b/Documentation/hwmon/ina2xx.rst
-index a4ddf4bd2b08..d64e7af46a12 100644
---- a/Documentation/hwmon/ina2xx.rst
-+++ b/Documentation/hwmon/ina2xx.rst
-@@ -74,6 +74,16 @@ Supported chips:
- 	       https://us1.silergy.com/
- 
- 
-+  * Texas Instruments INA234
-+
-+    Prefix: 'ina234'
-+
-+    Addresses: I2C 0x40 - 0x43
-+
-+    Datasheet: Publicly available at the Texas Instruments website
-+
-+	       https://www.ti.com/
-+
- Author: Lothar Felten <lothar.felten@gmail.com>
- 
- Description
-@@ -89,7 +99,7 @@ interface. The INA220 monitors both shunt drop and supply voltage.
- The INA226 is a current shunt and power monitor with an I2C interface.
- The INA226 monitors both a shunt voltage drop and bus supply voltage.
- 
--INA230 and INA231 are high or low side current shunt and power monitors
-+INA230, INA231, and INA234 are high or low side current shunt and power monitors
- with an I2C interface. The chips monitor both a shunt voltage drop and
- bus supply voltage.
- 
-@@ -132,6 +142,7 @@ Additional entries are available for the following chips:
-   * ina226
-   * ina230
-   * ina231
-+  * ina234
-   * ina260
-   * sy24655
- 
-diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index 41c381764c2b..6aa8a89f4747 100644
---- a/drivers/hwmon/Kconfig
-+++ b/drivers/hwmon/Kconfig
-@@ -2284,7 +2284,7 @@ config SENSORS_INA2XX
- 	select REGMAP_I2C
- 	help
- 	  If you say yes here you get support for INA219, INA220, INA226,
--	  INA230, INA231, INA260, and SY24655 power monitor chips.
-+	  INA230, INA231, INA234, INA260, and SY24655 power monitor chips.
- 
- 	  The INA2xx driver is configured for the default configuration of
- 	  the part as described in the datasheet.
-diff --git a/drivers/hwmon/ina2xx.c b/drivers/hwmon/ina2xx.c
-index 4bf609e25f8a..d6032183b055 100644
---- a/drivers/hwmon/ina2xx.c
-+++ b/drivers/hwmon/ina2xx.c
-@@ -140,6 +140,7 @@ static const struct regmap_config ina2xx_regmap_config = {
- enum ina2xx_ids {
- 	ina219,
- 	ina226,
-+	ina234,
- 	ina260,
- 	sy24655
- };
-@@ -193,6 +194,18 @@ static const struct ina2xx_config ina2xx_config[] = {
- 		.has_power_average = false,
- 		.has_update_interval = true,
- 	},
-+	[ina234] = {
-+		.config_default = INA226_CONFIG_DEFAULT,
-+		.calibration_value = 2048,
-+		.shunt_div = 400, /* 2.5 µV/LSB raw ADC reading from INA2XX_SHUNT_VOLTAGE */
-+		.bus_voltage_shift = 4,
-+		.bus_voltage_lsb = 25600,
-+		.power_lsb_factor = 32,
-+		.has_alerts = true,
-+		.has_ishunt = false,
-+		.has_power_average = false,
-+		.has_update_interval = true,
-+	},
- 	[ina260] = {
- 		.config_default = INA260_CONFIG_DEFAULT,
- 		.shunt_div = 400,
-@@ -995,6 +1008,7 @@ static const struct i2c_device_id ina2xx_id[] = {
- 	{ "ina226", ina226 },
- 	{ "ina230", ina226 },
- 	{ "ina231", ina226 },
-+	{ "ina234", ina234 },
- 	{ "ina260", ina260 },
- 	{ "sy24655", sy24655 },
- 	{ }
-@@ -1026,6 +1040,10 @@ static const struct of_device_id __maybe_unused ina2xx_of_match[] = {
- 		.compatible = "ti,ina231",
- 		.data = (void *)ina226
- 	},
-+	{
-+		.compatible = "ti,ina234",
-+		.data = (void *)ina234
-+	},
- 	{
- 		.compatible = "ti,ina260",
- 		.data = (void *)ina260
--- 
-2.49.0
+I agree, pushing this responsibility to the clients breaks the
+abstraction between the components and leads to nasty debugging
+scenarios.
 
+The question worth answering is if there are any legitimate cases for
+holding the lock beyond what can reasonably be expressed as a descriptor
+chain.
+
+Regards,
+Bjorn
+
+> > > Reg Dmitry question above, this is dma hw capability, how will client
+> > > know if it has to lock on older rev of hardware or not...?
+> > >
+> > > > Also: only the crypto engine needs it for now, not all the other users
+> > > > of the BAM engine.
+> > >
+> > 
+> > Trying to set the lock/unlock bits will make
+> > dmaengine_desc_attach_metadata() fail if HW does not support it.
+> > 
+> 
+> The BAM dmaengine driver *must* know based on the IP version whether it supports
+> the LOCK/UNLOCK bits or not, not the client drivers. How can the client drivers
+> know about the BAM DMA IP capability?
+> 
+> For all these reasons, BAM driver should handle the locking mechanism internaly.
+> This will allow the client drivers to work without any modifications.
+> 
+> FWIW, NAND driver too is impacted by this missing feature in the BAM driver as
+> both Modem and Linux tries to driver BAM and currently Linux BAM driver doesn't
+> set these bits leading to crashes.
+> 
+> - Mani
+> 
+> -- 
+> மணிவண்ணன் சதாசிவம்
+> 
 
