@@ -1,226 +1,280 @@
-Return-Path: <linux-doc+bounces-76303-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76305-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IAn0N3Mrl2nmvQIAu9opvQ
-	(envelope-from <linux-doc+bounces-76303-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 16:25:39 +0100
+	id 0MejHkcxl2kcvgIAu9opvQ
+	(envelope-from <linux-doc+bounces-76305-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 16:50:31 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AF601601A6
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 16:25:39 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB3AD1605E5
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 16:50:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 723973014C48
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 15:25:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7FFAF30B1239
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 15:45:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D6B9342526;
-	Thu, 19 Feb 2026 15:25:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5BA0E349B17;
+	Thu, 19 Feb 2026 15:45:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="iIEEhClb"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KBb7ndUW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B460F3033FD;
-	Thu, 19 Feb 2026 15:25:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3051734A76E;
+	Thu, 19 Feb 2026 15:45:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771514717; cv=none; b=N8BmcjSNzRr09qCgCmQOZCF8EL3E37wHQmReStFs6+PpxG617NoMNKaiWtFlcFe+hA9XY8vmcnOrl/um5p+snNlARnITChSSx/f3kMs4k+/RJfch1JYlIIgGw2TKaG8h1lRO2YoTZ8gHFBhHOGdXqTy2+PN7BXuRulekDoLCIZ0=
+	t=1771515931; cv=none; b=YpZQWQ0699m+/ePZwu1YFKxMW3sXDLZ0tMfcYGMQDPE8LEDIzFDo0qhgWBD6ld8ZbQug9LlCUA8PRJ7z4QxlBFlPNsxK94ZKqF0roNpbyu9hTnI06W4Cf+lRGQVdkhzaiOwRIU3p/NC/7mv0vBEuG4UzsqOeQloD0hjVsezIn4M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771514717; c=relaxed/simple;
-	bh=gi8Twbxo+Bi4tBD2h8CtYYswZk1dZz9KjAqpID7UBqU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RbM+g0k9+pPw5x8dGLGrfhEmUODztUx++h7nS+s74HuyiKTczL+xfJgzGuCaVFYvUo9cQaYwli7JNehAIwFi+ch+i95Fa9Tqgii50p5TXyHuTn0Bm5nilvL/EIw/lfn4gBcMBexw7QwmyhyhM3EyR0WJxvOyBLIF5nNoiyKxDwk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=iIEEhClb; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=Fidi+2ln7umxrDQrxUrSCVpfHVT2QnpMsuI3rE07J/w=; b=iIEEhClbtSqJowi0yjw0/pFAb7
-	R/9wjkxlPiTsX1rNPko4Azu4BG4gERyauQmLJFpDyX0BItUmhIbdcMjj+rGH8i350WZ46AOMirRtj
-	uF81P4gGItjk4fbR574O15VhXOCkClBoh7HVleQB0O550D3Z5ANdl6ABcHpxdRgqrXTg=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1vt5to-007vz6-SH; Thu, 19 Feb 2026 16:25:04 +0100
-Date: Thu, 19 Feb 2026 16:25:04 +0100
-From: Andrew Lunn <andrew@lunn.ch>
-To: Shenwei Wang <shenwei.wang@nxp.com>
-Cc: Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Frank Li <frank.li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
-	"imx@lists.linux.dev" <imx@lists.linux.dev>,
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
-	dl-linux-imx <linux-imx@nxp.com>,
-	Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: Re: [PATCH v8 3/4] gpio: rpmsg: add generic rpmsg GPIO driver
-Message-ID: <5e227857-7e33-43ad-8330-5304fa3616d5@lunn.ch>
-References: <20260212213656.662437-1-shenwei.wang@nxp.com>
- <20260212213656.662437-4-shenwei.wang@nxp.com>
- <aae7c851-a93b-4d57-a118-43c6e68c4790@foss.st.com>
- <44804825-5e61-4c3c-96bf-e5a3f3eacec1@lunn.ch>
- <PAXPR04MB9185EFFB8C73462E215EF486896BA@PAXPR04MB9185.eurprd04.prod.outlook.com>
+	s=arc-20240116; t=1771515931; c=relaxed/simple;
+	bh=2tel+xr7GLPTXAeWWTV0pNMbxcro+AF4/Zk3M5cR9sc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=vCU2FONYBtTBRwTbgHLm4t3ThPvltLEPhQEkPp2984NvWuLSP3mSsePg/Y8dH56jgaVZaU98/8USDhkHjNAXERZqE3J5QZJIJWzPaAdjB+e/uJOSwPtuOImpQrE+p46ZboXiW+KPzvkMmdKq7Y3EAf6z1iDQI5A73WsAtsoNtGs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KBb7ndUW; arc=none smtp.client-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1771515928; x=1803051928;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=2tel+xr7GLPTXAeWWTV0pNMbxcro+AF4/Zk3M5cR9sc=;
+  b=KBb7ndUWvK8jmmjRYAN/U3nkUUcJ56ZZoyo3jyEtSAf7PcSXxpQPfXCb
+   NgQTE7ly+5uQsm3xzc9TZdv6irXkzFGfEogyv9hjbukT9uKPcAbffTMM5
+   n+DdPTOFVx71NmaEpZcuS76dt58dtOtv689f05VWNdT1DK3I0jvwLddW5
+   p16s5+3hTRUhsw64WJGVRrllKjFcu+8dkQUVKkgqLS3HnF/ovDLrgjKLD
+   L1yrestfM4E5cJ/22HnigKGtl2ZRUCk1W6MfNoE50ZgrCrwRuIUNVLDop
+   8EpnRs49vHrd7LzGtlCddW1tMhVcakI0yjmg2Jvk0XrPYru0S1U/ECFh8
+   A==;
+X-CSE-ConnectionGUID: iQ4CNZr/QSu4hccEnHVG0w==
+X-CSE-MsgGUID: ggKRObpEQWyqzWrY+L21MQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11706"; a="90011824"
+X-IronPort-AV: E=Sophos;i="6.21,300,1763452800"; 
+   d="scan'208";a="90011824"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Feb 2026 07:41:48 -0800
+X-CSE-ConnectionGUID: 2UNbJJT1QwWcglV/ZWOzMQ==
+X-CSE-MsgGUID: 2+Zeibn4Samq6kR6s/gMAQ==
+X-ExtLoop1: 1
+Received: from dnelso2-mobl.amr.corp.intel.com (HELO [10.125.110.20]) ([10.125.110.20])
+  by fmviesa003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Feb 2026 07:41:45 -0800
+Message-ID: <3d4f6d14-4b5e-42e4-bab6-2d055088de7b@intel.com>
+Date: Thu, 19 Feb 2026 08:41:44 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <PAXPR04MB9185EFFB8C73462E215EF486896BA@PAXPR04MB9185.eurprd04.prod.outlook.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V7 06/19] dax: Add dax_set_ops() for setting
+ dax_operations at bind time
+To: John Groves <john@jagalactic.com>, John Groves <John@Groves.net>,
+ Miklos Szeredi <miklos@szeredi.hu>, Dan Williams <dan.j.williams@intel.com>,
+ Bernd Schubert <bschubert@ddn.com>,
+ Alison Schofield <alison.schofield@intel.com>
+Cc: John Groves <jgroves@micron.com>, John Groves <jgroves@fastmail.com>,
+ Jonathan Corbet <corbet@lwn.net>, Vishal Verma <vishal.l.verma@intel.com>,
+ Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Alexander Viro <viro@zeniv.linux.org.uk>,
+ David Hildenbrand <david@kernel.org>, Christian Brauner
+ <brauner@kernel.org>, "Darrick J . Wong" <djwong@kernel.org>,
+ Randy Dunlap <rdunlap@infradead.org>, Jeff Layton <jlayton@kernel.org>,
+ Amir Goldstein <amir73il@gmail.com>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Stefan Hajnoczi <shajnocz@redhat.com>, Joanne Koong
+ <joannelkoong@gmail.com>, Josef Bacik <josef@toxicpanda.com>,
+ Bagas Sanjaya <bagasdotme@gmail.com>, James Morse <james.morse@arm.com>,
+ Fuad Tabba <tabba@google.com>, Sean Christopherson <seanjc@google.com>,
+ Shivank Garg <shivankg@amd.com>, Ackerley Tng <ackerleytng@google.com>,
+ Gregory Price <gourry@gourry.net>, Aravind Ramesh <arramesh@micron.com>,
+ Ajay Joshi <ajayjoshi@micron.com>,
+ "venkataravis@micron.com" <venkataravis@micron.com>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>,
+ "linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
+References: <0100019bd33b1f66-b835e86a-e8ae-443f-a474-02db88f7e6db-000000@email.amazonses.com>
+ <20260118223157.92407-1-john@jagalactic.com>
+ <0100019bd33c9e30-6de962ed-6feb-4481-a68a-c225ee8808ff-000000@email.amazonses.com>
+Content-Language: en-US
+From: Dave Jiang <dave.jiang@intel.com>
+In-Reply-To: <0100019bd33c9e30-6de962ed-6feb-4481-a68a-c225ee8808ff-000000@email.amazonses.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
-	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76303-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[foss.st.com,kernel.org,lwn.net,linaro.org,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,bgdev.pl];
-	RCPT_COUNT_TWELVE(0.00)[25];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[38];
+	FREEMAIL_CC(0.00)[micron.com,fastmail.com,lwn.net,intel.com,infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,gmail.com,huawei.com,redhat.com,toxicpanda.com,arm.com,google.com,amd.com,gourry.net,vger.kernel.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-76305-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lunn.ch:+];
-	NEURAL_HAM(-0.00)[-0.999];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 5AF601601A6
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dave.jiang@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_COUNT_FIVE(0.00)[5];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[groves.net:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:mid,intel.com:dkim,intel.com:email]
+X-Rspamd-Queue-Id: BB3AD1605E5
 X-Rspamd-Action: no action
 
-On Thu, Feb 19, 2026 at 02:17:26PM +0000, Shenwei Wang wrote:
+
+
+On 1/18/26 3:32 PM, John Groves wrote:
+> From: John Groves <John@Groves.net>
 > 
+> Add a new dax_set_ops() function that allows drivers to set the
+> dax_operations after the dax_device has been allocated. This is needed
+> for fsdev_dax where the operations need to be set during probe and
+> cleared during unbind.
 > 
-> > -----Original Message-----
-> > From: Andrew Lunn <andrew@lunn.ch>
-> > Sent: Thursday, February 19, 2026 7:27 AM
-> > To: Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>
-> > Cc: Shenwei Wang <shenwei.wang@nxp.com>; Linus Walleij
-> > <linusw@kernel.org>; Bartosz Golaszewski <brgl@kernel.org>; Jonathan Corbet
-> > <corbet@lwn.net>; Rob Herring <robh@kernel.org>; Krzysztof Kozlowski
-> > <krzk+dt@kernel.org>; Conor Dooley <conor+dt@kernel.org>; Bjorn Andersson
-> > <andersson@kernel.org>; Mathieu Poirier <mathieu.poirier@linaro.org>; Frank Li
-> > <frank.li@nxp.com>; Sascha Hauer <s.hauer@pengutronix.de>; Shuah Khan
-> > <skhan@linuxfoundation.org>; linux-gpio@vger.kernel.org; linux-
-> > doc@vger.kernel.org; linux-kernel@vger.kernel.org; Pengutronix Kernel Team
-> > <kernel@pengutronix.de>; Fabio Estevam <festevam@gmail.com>; Peng Fan
-> > <peng.fan@nxp.com>; devicetree@vger.kernel.org; linux-
-> > remoteproc@vger.kernel.org; imx@lists.linux.dev; linux-arm-
-> > kernel@lists.infradead.org; dl-linux-imx <linux-imx@nxp.com>; Bartosz
-> > Golaszewski <brgl@bgdev.pl>
-> > Subject: [EXT] Re: [PATCH v8 3/4] gpio: rpmsg: add generic rpmsg GPIO driver
-> > 
-> > > > +   if (sync) {
-> > > > +           err = wait_for_completion_timeout(&info->cmd_complete,
-> > > > +                                             msecs_to_jiffies(RPMSG_TIMEOUT));
-> > > > +           if (err == 0) {
-> > > > +                   dev_err(&info->rpdev->dev, "rpmsg_send timeout!\n");
-> > > > +                   return -ETIMEDOUT;
-> > >
-> > > strange condition you return an error if err == 0, for redability use 'ret'
-> > > variable or simply:
-> > >
-> > >               if(!wait_for_completion_timeout(&info->cmd_complete,
-> > >                                 msecs_to_jiffies(RPMSG_TIMEOUT)) {
-> > >                       dev_err(&info->rpdev->dev, "rpmsg_send timeout!\n");
-> > >                       return -ETIMEDOUT;
-> > >               }
-> > 
-> > This will be from a comment i made. It appears that
-> > do_wait_for_common() can return -ERESTARTSYS. I assume that should be
-> > returned to user space?
-> > 
+> The fsdev driver uses devm_add_action_or_reset() for cleanup consistency,
+> avoiding the complexity of mixing devm-managed resources with manual
+> cleanup in a remove() callback. This ensures cleanup happens automatically
+> in the correct reverse order when the device is unbound.
 > 
-> It looks like there might be a bit of confusion around what wait_for_completion_timeout() 
-> actually returns. That function never returns -ERESTARTSYS. Instead, its behavior is pretty 
-> simple:
+> Signed-off-by: John Groves <john@groves.net>
+
+Reviewed-by: Dave Jiang <dave.jiang@intel.com>
+
+> ---
+>  drivers/dax/fsdev.c | 16 ++++++++++++++++
+>  drivers/dax/super.c | 38 +++++++++++++++++++++++++++++++++++++-
+>  include/linux/dax.h |  1 +
+>  3 files changed, 54 insertions(+), 1 deletion(-)
 > 
-> - 0 means the wait timed out
-> - A positive value means the completion happened (the value is just the remaining jiffies)
-> 
-> So the driver returns the timeout error, and the upper application can decide how it wants
-> to handle that situation, for example restart or ignore.
+> diff --git a/drivers/dax/fsdev.c b/drivers/dax/fsdev.c
+> index 5d17ad39227f..4949aa41dcf4 100644
+> --- a/drivers/dax/fsdev.c
+> +++ b/drivers/dax/fsdev.c
+> @@ -119,6 +119,13 @@ static void fsdev_kill(void *dev_dax)
+>  	kill_dev_dax(dev_dax);
+>  }
+>  
+> +static void fsdev_clear_ops(void *data)
+> +{
+> +	struct dev_dax *dev_dax = data;
+> +
+> +	dax_set_ops(dev_dax->dax_dev, NULL);
+> +}
+> +
+>  /*
+>   * Page map operations for FS-DAX mode
+>   * Similar to fsdax_pagemap_ops in drivers/nvdimm/pmem.c
+> @@ -301,6 +308,15 @@ static int fsdev_dax_probe(struct dev_dax *dev_dax)
+>  	if (rc)
+>  		return rc;
+>  
+> +	/* Set the dax operations for fs-dax access path */
+> +	rc = dax_set_ops(dax_dev, &dev_dax_ops);
+> +	if (rc)
+> +		return rc;
+> +
+> +	rc = devm_add_action_or_reset(dev, fsdev_clear_ops, dev_dax);
+> +	if (rc)
+> +		return rc;
+> +
+>  	run_dax(dax_dev);
+>  	return devm_add_action_or_reset(dev, fsdev_kill, dev_dax);
+>  }
+> diff --git a/drivers/dax/super.c b/drivers/dax/super.c
+> index c00b9dff4a06..ba0b4cd18a77 100644
+> --- a/drivers/dax/super.c
+> +++ b/drivers/dax/super.c
+> @@ -157,6 +157,9 @@ long dax_direct_access(struct dax_device *dax_dev, pgoff_t pgoff, long nr_pages,
+>  	if (!dax_alive(dax_dev))
+>  		return -ENXIO;
+>  
+> +	if (!dax_dev->ops)
+> +		return -EOPNOTSUPP;
+> +
+>  	if (nr_pages < 0)
+>  		return -EINVAL;
+>  
+> @@ -207,6 +210,10 @@ int dax_zero_page_range(struct dax_device *dax_dev, pgoff_t pgoff,
+>  
+>  	if (!dax_alive(dax_dev))
+>  		return -ENXIO;
+> +
+> +	if (!dax_dev->ops)
+> +		return -EOPNOTSUPP;
+> +
+>  	/*
+>  	 * There are no callers that want to zero more than one page as of now.
+>  	 * Once users are there, this check can be removed after the
+> @@ -223,7 +230,7 @@ EXPORT_SYMBOL_GPL(dax_zero_page_range);
+>  size_t dax_recovery_write(struct dax_device *dax_dev, pgoff_t pgoff,
+>  		void *addr, size_t bytes, struct iov_iter *iter)
+>  {
+> -	if (!dax_dev->ops->recovery_write)
+> +	if (!dax_dev->ops || !dax_dev->ops->recovery_write)
+>  		return 0;
+>  	return dax_dev->ops->recovery_write(dax_dev, pgoff, addr, bytes, iter);
+>  }
+> @@ -307,6 +314,35 @@ void set_dax_nomc(struct dax_device *dax_dev)
+>  }
+>  EXPORT_SYMBOL_GPL(set_dax_nomc);
+>  
+> +/**
+> + * dax_set_ops - set the dax_operations for a dax_device
+> + * @dax_dev: the dax_device to configure
+> + * @ops: the operations to set (may be NULL to clear)
+> + *
+> + * This allows drivers to set the dax_operations after the dax_device
+> + * has been allocated. This is needed when the device is created before
+> + * the driver that needs specific ops is bound (e.g., fsdev_dax binding
+> + * to a dev_dax created by hmem).
+> + *
+> + * When setting non-NULL ops, fails if ops are already set (returns -EBUSY).
+> + * When clearing ops (NULL), always succeeds.
+> + *
+> + * Return: 0 on success, -EBUSY if ops already set
+> + */
+> +int dax_set_ops(struct dax_device *dax_dev, const struct dax_operations *ops)
+> +{
+> +	if (ops) {
+> +		/* Setting ops: fail if already set */
+> +		if (cmpxchg(&dax_dev->ops, NULL, ops) != NULL)
+> +			return -EBUSY;
+> +	} else {
+> +		/* Clearing ops: always allowed */
+> +		dax_dev->ops = NULL;
+> +	}
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(dax_set_ops);
+> +
+>  bool dax_alive(struct dax_device *dax_dev)
+>  {
+>  	lockdep_assert_held(&dax_srcu);
+> diff --git a/include/linux/dax.h b/include/linux/dax.h
+> index fe1315135fdd..5aaaca135737 100644
+> --- a/include/linux/dax.h
+> +++ b/include/linux/dax.h
+> @@ -247,6 +247,7 @@ static inline void dax_break_layout_final(struct inode *inode)
+>  
+>  bool dax_alive(struct dax_device *dax_dev);
+>  void *dax_get_private(struct dax_device *dax_dev);
+> +int dax_set_ops(struct dax_device *dax_dev, const struct dax_operations *ops);
+>  long dax_direct_access(struct dax_device *dax_dev, pgoff_t pgoff, long nr_pages,
+>  		enum dax_access_mode mode, void **kaddr, unsigned long *pfn);
+>  size_t dax_copy_from_iter(struct dax_device *dax_dev, pgoff_t pgoff, void *addr,
 
-wait_for_completion_timeout():
-	return wait_for_common(x, timeout, TASK_UNINTERRUPTIBLE);
-
-wait_for_common():
-	return __wait_for_common(x, io_schedule_timeout, timeout, state);
-
-__wait_for_common():
-	timeout = do_wait_for_common(x, action, timeout, state);
-	...
-	return timeout;
-
-do_wait_for_common():
-
-		do {
-			if (signal_pending_state(state, current)) {
-				timeout = -ERESTARTSYS;
-				break;
-			}
-...		
-		} while (!x->done && timeout);
-...
-		if (!x->done)
-			return timeout;
-...
-	return timeout ?: 1;
-
-This last line is interesting, and i had to go look at the
-documentation:
-
-https://gcc.gnu.org/onlinedocs/gcc/Conditionals.html
-
-So this is equivalent to
-
-        return timeout ? timeout : 1;
-
-Hence, it does appear wait_for_completion_timeout() can return
--ERESTARTSYS
-
-There is however a comment in include/linux/errno.h
-
-/*
- * These should never be seen by user programs.  To return one of ERESTART*
- * codes, signal_pending() MUST be set.  Note that ptrace can observe these
- * at syscall exit tracing, but they will never be left for the debugged user
- * process to see.
- */
-#define ERESTARTSYS	512
-
-So we do seem to be talking about a corner case, allowing gdb(1) to
-know about it, but not user space.
-
-	Andrew
 
