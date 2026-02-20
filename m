@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-76396-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76397-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2L9HG9JBmGneDwMAu9opvQ
-	(envelope-from <linux-doc+bounces-76396-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 12:13:22 +0100
+	id CPTXK19CmGneDwMAu9opvQ
+	(envelope-from <linux-doc+bounces-76397-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 12:15:43 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE19E1672D1
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 12:13:21 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52E8516730D
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 12:15:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C2A0530221E2
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 11:13:19 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 8D9EB3004DC9
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 11:15:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E495D341AD6;
-	Fri, 20 Feb 2026 11:13:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6662032ABCD;
+	Fri, 20 Feb 2026 11:15:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KgI5id6u"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mn2jb7IZ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEB3B267B89;
-	Fri, 20 Feb 2026 11:13:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4272229B79B;
+	Fri, 20 Feb 2026 11:15:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771585998; cv=none; b=M1qDwT4o/agsO3kF2y34NUNiat6T6zE7CQ1cnCP04VmandZqQJlZ2LD2LFi3OgX3X7E/+um1xGDXH3nQfM2l3nQ+4iEZe5qQKHO4vy/qkP16GPOmfTsccEnv9LKcmg5Piaq8yNA0bvqvkPkPJn5Aws6PYMXdCzcv6pcpBE5hWKE=
+	t=1771586141; cv=none; b=G/DGCVTfkj8dcAmZUHTwLoYU/dBXMCHyU/D8+CUiYJ0ZipGdEYKutWCdSIfCWI67jzBppSt48N/jaQUOBV9fjrXHkI3OmotIzrxwtK8e2V4vflRwQUrijZq1JN4UyXW0oT9Vzb5MEyHiuqgN4bV4I/pxL//ThnRsZJdKYSkb5Ow=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771585998; c=relaxed/simple;
-	bh=vs9mtD2LKa45Fxlt9Q6Eqd0MYrNkieEY89fd/Jb2+rU=;
+	s=arc-20240116; t=1771586141; c=relaxed/simple;
+	bh=Fhg4pvzbeZdPLOARDlQ7RDz1OmUa8aNoDpTeYV95amA=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=igjUtS3iTDIL6/uw82cwHZ9TUBHpnSbfQ1xVhTsd2Pc8wNvNeaKmxSVbqmAHiP3iBQ3SZ37h5bnXKG17Pijyho5vB1c6PfCIItSo/7TgfZ2Iwq8G2T02iV+I9gSYgDdSkWiXSoD8h4nDjPPewDYtNrUkNiyDzIPYz7yk0mAp89w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KgI5id6u; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C874AC116C6;
-	Fri, 20 Feb 2026 11:13:12 +0000 (UTC)
+	 MIME-Version:Content-Type; b=XGwuDtcG4OMT5QqgYBNkFXTycZKEjEMVy8pMLmunP4yllWYNt3DLy8E98ccc8uKz6uCc5po5j5xn0oopwKTI48a6XxSVN09QUfdpvHsdoo1i0YGJMh+gbA7n6Whm43KR6XkrcTSOg8VK6WC+aiFfSuFPHRiOgSCrjgeQZibUhYw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mn2jb7IZ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41266C116C6;
+	Fri, 20 Feb 2026 11:15:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1771585998;
-	bh=vs9mtD2LKa45Fxlt9Q6Eqd0MYrNkieEY89fd/Jb2+rU=;
+	s=k20201202; t=1771586140;
+	bh=Fhg4pvzbeZdPLOARDlQ7RDz1OmUa8aNoDpTeYV95amA=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=KgI5id6ulgZW7y8YrvliueO9nlADvWAPrGvgY9AhqzPR4uopvZrVjTjmf7E3TXDlt
-	 pw+POZregMGY3CbrTNY8NGVPoOuTRm5GzsF45W2cNlU4plwfYwQdoPv6R0eTiM4HvU
-	 b2+20ZFLzBWP8lv89iQLcsCPF0YjyIujPX4SIznfkWntnesSCGTg682Ff8nKI9ScXi
-	 PNCXKi79QIaCgE2d6XD89VxR7FETxzcY6jv/JmsSIv7daZpYDyLkb6hiSc7WAPFS5R
-	 dE4rcPdEJxM8X6uPf7MJs6YMMHnrVR5bt6XBVOR4oSTCmiOHUQsfOHkmMRkUJzh09u
-	 NQS0VZ3xrR1VA==
-Date: Fri, 20 Feb 2026 11:13:07 +0000
+	b=mn2jb7IZ4Wq2GJGlLMznR9XXfNPaC3RP654QNIATXbil53Ne6OR9OCyf5NQp4iCIr
+	 YGlKhy9ZU7PuIR499Hfj9YNsvInmBja6malLa8CBUCvn3hSOQiiWbJZcamct3RuvBH
+	 c0ZoY6wZpsNjCSq6b+YMwamXRxCih9sHnrKJv8ntzERYmd+WG5A8jWCVheZmgsMo0y
+	 Cxwazp4cj1/8s9X5HxIUm+ZrQtx213HxAgWCPROZRz+p0vvulEMSzYdLm7dUgDVD3W
+	 6smvsOsEI46JhUVCz0QgTvi4MHGRMNI3hGrbsQK+ITG4hJ3/bMEzrZGhnUjKu7sLJw
+	 ySdf3MMn/NNzA==
+Date: Fri, 20 Feb 2026 11:15:30 +0000
 From: Jonathan Cameron <jic23@kernel.org>
 To: Marcelo Schmitt <marcelo.schmitt@analog.com>
 Cc: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
@@ -52,14 +52,14 @@ Cc: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
  <michael.hennerich@analog.com>, <nuno.sa@analog.com>,
  <eblanc@baylibre.com>, <dlechner@baylibre.com>, <andy@kernel.org>,
  <robh@kernel.org>, <krzk+dt@kernel.org>, <conor+dt@kernel.org>,
- <corbet@lwn.net>, <marcelo.schmitt1@gmail.com>, Conor Dooley
- <conor.dooley@microchip.com>
-Subject: Re: [PATCH v9 1/8] dt-bindings: iio: adc: adi,ad4030: Reference
- spi-peripheral-props
-Message-ID: <20260220111307.0cb4b6e0@jic23-huawei>
-In-Reply-To: <4cec105bd339aa67b3e1cd1eba71a8dd2f3a389e.1771253601.git.marcelo.schmitt@analog.com>
+ <corbet@lwn.net>, <marcelo.schmitt1@gmail.com>, Andy Shevchenko
+ <andy.shevchenko@gmail.com>
+Subject: Re: [PATCH v9 4/8] iio: adc: ad4030: Use BIT macro to improve code
+ readability
+Message-ID: <20260220111530.66ca4382@jic23-huawei>
+In-Reply-To: <5f62866d5c8d4a0ea80e24ba009a2d35b9cf902d.1771253601.git.marcelo.schmitt@analog.com>
 References: <cover.1771253601.git.marcelo.schmitt@analog.com>
-	<4cec105bd339aa67b3e1cd1eba71a8dd2f3a389e.1771253601.git.marcelo.schmitt@analog.com>
+	<5f62866d5c8d4a0ea80e24ba009a2d35b9cf902d.1771253601.git.marcelo.schmitt@analog.com>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -67,76 +67,86 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76396-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76397-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[16];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,analog.com,baylibre.com,kernel.org,lwn.net,gmail.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,analog.com,baylibre.com,kernel.org,lwn.net,gmail.com,microchip.com];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: BE19E1672D1
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:email]
+X-Rspamd-Queue-Id: 52E8516730D
 X-Rspamd-Action: no action
 
-On Mon, 16 Feb 2026 11:59:10 -0300
+On Mon, 16 Feb 2026 12:00:22 -0300
 Marcelo Schmitt <marcelo.schmitt@analog.com> wrote:
 
-> AD4030 and similar devices all connect to the system as SPI peripherals.
-> Reference spi-peripheral-props so common SPI peripheral can be used from
-> ad4030 dt-binding.
-> 
-> Acked-by: Conor Dooley <conor.dooley@microchip.com>
+> Use BIT macro to make the list of average modes more readable.
+>=20
+> Suggested-by: Andy Shevchenko <andy.shevchenko@gmail.com>
+> Reviewed-by: Nuno S=C3=A1 <nuno.sa@analog.com>
+> Acked-by: Andy Shevchenko <andy.shevchenko@gmail.com>
 > Signed-off-by: Marcelo Schmitt <marcelo.schmitt@analog.com>
-As this stands on it's own, I've picked it up now.
+Stands on it's own a good improvement so picked up now
+as another one we can all forget about ;)
 
-Applied to the testing branch of iio.git which will get rebased on rc1.
+Applied to the testing branch of iio.git.
 
-I'm having one of those days where there are too many things
-in the 'in progress queue' so I'm nibbling off anything I can.
+thanks,
 
 Jonathan
 
 > ---
 > No changes in v9.
-> 
->  Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml b/Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml
-> index e22d518135f2..29e266865805 100644
-> --- a/Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml
-> +++ b/Documentation/devicetree/bindings/iio/adc/adi,ad4030.yaml
-> @@ -20,6 +20,8 @@ description: |
->    * https://www.analog.com/media/en/technical-documentation/data-sheets/ad4630-24_ad4632-24.pdf
->    * https://www.analog.com/media/en/technical-documentation/data-sheets/ad4630-16-4632-16.pdf
->  
-> +$ref: /schemas/spi/spi-peripheral-props.yaml#
-> +
->  properties:
->    compatible:
->      enum:
+>=20
+>  drivers/iio/adc/ad4030.c | 12 +++++++++---
+>  1 file changed, 9 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/iio/adc/ad4030.c b/drivers/iio/adc/ad4030.c
+> index 68446db9bef1..def3e1d01ceb 100644
+> --- a/drivers/iio/adc/ad4030.c
+> +++ b/drivers/iio/adc/ad4030.c
+> @@ -232,10 +232,16 @@ struct ad4030_state {
+>  	.num_ext_scan_type =3D ARRAY_SIZE(_scan_type),			\
+>  }
+> =20
+> +/*
+> + * AD4030 can average over 2^N samples, where N =3D 1, 2, 3, ..., 16.
+> + * We use N =3D 0 to mean no sample averaging.
+> + */
+>  static const int ad4030_average_modes[] =3D {
+> -	1, 2, 4, 8, 16, 32, 64, 128,
+> -	256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
+> -	65536,
+> +	BIT(0),					/* No sampling average */
+> +	BIT(1), BIT(2), BIT(3), BIT(4),
+> +	BIT(5), BIT(6), BIT(7), BIT(8),
+> +	BIT(9), BIT(10), BIT(11), BIT(12),
+> +	BIT(13), BIT(14), BIT(15), BIT(16),
+>  };
+> =20
+>  static int ad4030_enter_config_mode(struct ad4030_state *st)
 
 
