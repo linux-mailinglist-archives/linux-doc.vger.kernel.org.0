@@ -1,173 +1,244 @@
-Return-Path: <linux-doc+bounces-76350-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76355-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id a7CuORijl2mf3wIAu9opvQ
-	(envelope-from <linux-doc+bounces-76350-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 00:56:08 +0100
+	id a/XwBVq1l2kf6wIAu9opvQ
+	(envelope-from <linux-doc+bounces-76355-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 02:14:02 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77321163B2A
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 00:56:08 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60910164193
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 02:14:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A2F97300398D
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Feb 2026 23:56:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id EC28530131C4
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 01:13:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2DA3306D3F;
-	Thu, 19 Feb 2026 23:56:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 447611EF091;
+	Fri, 20 Feb 2026 01:13:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZqZ9+qsJ"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aKxlCoqP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEA6B15539A;
-	Thu, 19 Feb 2026 23:56:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2BB31A9F8D;
+	Fri, 20 Feb 2026 01:13:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771545364; cv=none; b=gA6Iv1XRfkVE576gJlbQnwzK+ZpnOaToS+0IREDXKBZL4PNldHH5T8g/tw96sfKfC709ghJnJVusBog0pqNLUQqFudeoOrWMaSF4+axJx6Oossq3nNq0fHmPuqqWZfZc55ZE1VNcAEN0Aud+ZDGZ6Mm8xy+tg4Orey1V3xYCbsU=
+	t=1771550039; cv=none; b=JnYlADoW7oARvdOkjn676ku4Ccgy+nvgZcj46leuRR9BxlRpi2buN83dookCeToPD+j90Qb1mhOSYdA0QH2OwJQuKTzXwjL70QOkpov0NAlTpNCp2SnAWO1YgQXjqUFLgLQRxHqbpZWWCztdDKKZta4QOU4CFdifOn0Ohs7hkmo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771545364; c=relaxed/simple;
-	bh=W4+lTtQg9XK2AMyVTLl5/C3YX/X14q1QnU9K2rdiGfM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rOTcum6COGlwSyy7ktpcWBYzgHv7t/orYLdVrWxtX4fjJXRen6YCJFD9cy2DBrc8UqESJSwTPBG1r6r/vg8gzdf4DDuPIRmJu9TW2O5nrgj07hSf5wsv/l72HDc8NsNnFuwOqm7u76u4mSPCU/bqzzOK5N3AXSXLrUbBt3Q7Qko=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZqZ9+qsJ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A151DC2BC87;
-	Thu, 19 Feb 2026 23:56:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1771545364;
-	bh=W4+lTtQg9XK2AMyVTLl5/C3YX/X14q1QnU9K2rdiGfM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=ZqZ9+qsJ7zOUH1OAdo3wIjwSIygpVGra27qCSgAIacM/KVMYYDVxzHQDiAgFrN2E9
-	 XZF2p8e4yUp6VBnTbX2w6RzDVBwBtVS7QDvzoyu2WH5Leajt0/vbW1l415x/2tknQr
-	 iXviLEV4ON/sG5OL1J71wgnDXN94ihihmMO6QYy8ItDsEPooQZ50u/4PWDikVia5m+
-	 r+wsPlSAR1ehtgaSmQMy8ErIVB2K6bsp/xt1mdCimXWOWwFZVA0SfqIbpiAk7GHQT5
-	 XAL+h86iw1fiLdZTuCPp6Q1+Eg/5YMp5zKzFB1+Rvl7jNLX9XQFKOwOt7UbvrPBS8C
-	 XA2LoSXj+EioA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96478C531F3;
-	Thu, 19 Feb 2026 23:56:04 +0000 (UTC)
-From: Simon Baatz via B4 Relay <devnull+gmbnomis.gmail.com@kernel.org>
-Date: Fri, 20 Feb 2026 00:55:17 +0100
-Subject: [PATCH RFC net-next 4/4] selftests/net: packetdrill: add
- tcp_rcv_toobig_back_to_back.pkt
+	s=arc-20240116; t=1771550039; c=relaxed/simple;
+	bh=Uq4XQS8dU09FtCJ8bnNQfMf26F15Ik2f8EpY3Wa09Z4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=RaVx8OozlTLBZ3qMOBTy1FmVX2Rrh+vmqFVmH7o7ZD3WXcZ7doP8nPQPH88uEWarVew6U0SWvoYka0fJ7D40vpgBPbiGcKNI+/M2k//8d4GoF5N40myG7mjWElWQdyMgX+Ad3h3PRI1JLLou4OeEP5xzCFFhnuDa7UWSUl7o2kk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=aKxlCoqP; arc=none smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1771550037; x=1803086037;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Uq4XQS8dU09FtCJ8bnNQfMf26F15Ik2f8EpY3Wa09Z4=;
+  b=aKxlCoqPGXf/3phYGN1QPCuPTw6ruL25fb8JK+MAVQxk/FkED4B0ZJrs
+   m5zujorxP4BPTTNdzALj05FwSv/i87c6glQAHpC7D1LmiBvqIOwr3adq2
+   h/CtoHT8LKPoNqpMWyqVdDOoLsneXyKshC4d+K2D4p28Sgm0Nv2JZ/iCa
+   RDYmbMYHbOwdRy9hLC37hDZhTahl/T8/IvrnY0Qj2sEAGATdfXUBEuCJR
+   ocXpjjyvawINBVs2VL5mTZvYgmZOpFVdW9tv8ancLcUQHC47hHGXh6qfC
+   MJMU1NyKJKwG048XbyeApcm5S+7ZWeimmXdBKcvPCFHV5ZNmh0PuA4TVB
+   w==;
+X-CSE-ConnectionGUID: ruhqB8fiTUix7SjLiwD/qw==
+X-CSE-MsgGUID: EubmqbdgS2mJGgauFF8fTQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11706"; a="90232786"
+X-IronPort-AV: E=Sophos;i="6.21,301,1763452800"; 
+   d="scan'208";a="90232786"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Feb 2026 17:13:57 -0800
+X-CSE-ConnectionGUID: Hh94V0sQRrSdFC5OGfN1hA==
+X-CSE-MsgGUID: HZApc8IJQdqIOVtNmEtqsg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,301,1763452800"; 
+   d="scan'208";a="213939680"
+Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
+  by orviesa010.jf.intel.com with ESMTP; 19 Feb 2026 17:13:54 -0800
+Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vtF5b-000000013gW-1zU3;
+	Fri, 20 Feb 2026 01:13:51 +0000
+Date: Fri, 20 Feb 2026 09:13:12 +0800
+From: kernel test robot <lkp@intel.com>
+To: Ian Ray <ian.ray@gehealthcare.com>, Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, Ian Ray <ian.ray@gehealthcare.com>,
+	Bence =?iso-8859-1?B?Q3Pza+Fz?= <bence98@sch.bme.hu>,
+	=?utf-8?B?VG9tYcW+?= Zaman <tomaz@mono.si>,
+	linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH V2 2/3] hwmon: (ina2xx) Make it easier to add more devices
+Message-ID: <202602200951.bP8YVa4Y-lkp@intel.com>
+References: <20260219130127.87901-3-ian.ray@gehealthcare.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260220-tcp_rfc7323_retract_wnd_rfc-v1-4-904942561479@gmail.com>
-References: <20260220-tcp_rfc7323_retract_wnd_rfc-v1-0-904942561479@gmail.com>
-In-Reply-To: <20260220-tcp_rfc7323_retract_wnd_rfc-v1-0-904942561479@gmail.com>
-To: Eric Dumazet <edumazet@google.com>, 
- Neal Cardwell <ncardwell@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, 
- "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, 
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- David Ahern <dsahern@kernel.org>, Stefano Brivio <sbrivio@redhat.com>, 
- Jon Maloy <jmaloy@redhat.com>, Jason Xing <kerneljasonxing@gmail.com>, 
- mfreemon@cloudflare.com, Shuah Khan <shuah@kernel.org>
-Cc: Christian Ebner <c.ebner@proxmox.com>, netdev@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, Simon Baatz <gmbnomis@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1771545363; l=1646;
- i=gmbnomis@gmail.com; s=20260220; h=from:subject:message-id;
- bh=c1eQDsHINo/iLpDzO11WhQUeLWxzIkGGeSmjjLGkjpQ=;
- b=tGiZqmdvVs1iMDN93UHdsZnv90evQhVamdSvCoez+vPECABVnnhvp0nW717BsblYUJtRlcHaH
- oPH4k/Yj/LuCnEItmj3gZHey/IHNif1Hx88V/lBkZm2UFDkSKgvE2qo
-X-Developer-Key: i=gmbnomis@gmail.com; a=ed25519;
- pk=T/JIz/6F5bf1uQJr69lmyi7czVG+F9TVZ/8x5z9Wtqw=
-X-Endpoint-Received: by B4 Relay for gmbnomis@gmail.com/20260220 with
- auth_id=641
-X-Original-From: Simon Baatz <gmbnomis@gmail.com>
-Reply-To: gmbnomis@gmail.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260219130127.87901-3-ian.ray@gehealthcare.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	FREEMAIL_REPLYTO_NEQ_FROM(2.00)[];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_TO(0.00)[google.com,davemloft.net,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,cloudflare.com];
+	TAGGED_FROM(0.00)[bounces-76355-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_REPLYTO(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-76350-lists,linux-doc=lfdr.de,gmbnomis.gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[proxmox.com,vger.kernel.org,gmail.com];
-	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	HAS_REPLYTO(0.00)[gmbnomis@gmail.com];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 77321163B2A
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[intel.com:+];
+	NEURAL_HAM(-0.00)[-0.999];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:mid,intel.com:dkim,intel.com:email]
+X-Rspamd-Queue-Id: 60910164193
 X-Rspamd-Action: no action
 
-From: Simon Baatz <gmbnomis@gmail.com>
+Hi Ian,
 
-This test verifies the sequence number checks using the maximum
-advertised window sequence number when we accept a packet going beyond
-any window that was ever advertised (i.e. rcv_nxt advances beyond
-rcv_mwnd_seq).
+kernel test robot noticed the following build warnings:
 
-Signed-off-by: Simon Baatz <gmbnomis@gmail.com>
----
- .../packetdrill/tcp_rcv_toobig_back_to_back.pkt    | 27 ++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+[auto build test WARNING on groeck-staging/hwmon-next]
+[also build test WARNING on robh/for-next linus/master v6.19 next-20260219]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-diff --git a/tools/testing/selftests/net/packetdrill/tcp_rcv_toobig_back_to_back.pkt b/tools/testing/selftests/net/packetdrill/tcp_rcv_toobig_back_to_back.pkt
-new file mode 100644
-index 0000000000000000000000000000000000000000..4d4c33d248948d3dfaf9b0c5b243ed27321e9b10
---- /dev/null
-+++ b/tools/testing/selftests/net/packetdrill/tcp_rcv_toobig_back_to_back.pkt
-@@ -0,0 +1,27 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+--mss=1000
-+
-+`./defaults.sh`
-+
-+// Establish a connection.
-+   +0 socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
-+   +0 setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
-+   +0 setsockopt(3, SOL_SOCKET, SO_RCVBUF, [20000], 4) = 0
-+   +0 bind(3, ..., ...) = 0
-+   +0 listen(3, 1) = 0
-+
-+   +0 < S 0:0(0) win 32792 <mss 1000,nop,wscale 7>
-+   +0 > S. 0:0(0) ack 1 win 18980 <mss 1460,nop,wscale 0>
-+  +.1 < . 1:1(0) ack 1 win 257
-+
-+   +0 accept(3, ..., ...) = 4
-+
-+// A too big packet is accepted if the receive queue is empty
-+   +0 < P. 1:20001(20000) ack 1 win 257
-+// Send a RST immediately so that there is no rcv_wup/rcv_mwnd_seq update yet
-+   +0 < R. 20001:20001(0) ack 1 win 257
-+//    * > .  1:1(0) ack 20001 win 18000
-+
-+  +.1 %{ assert tcpi_state == TCP_CLOSE, tcpi_state }%
-+
+url:    https://github.com/intel-lab-lkp/linux/commits/Ian-Ray/dt-bindings-hwmon-ti-ina2xx-Add-INA234-device/20260219-210940
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging.git hwmon-next
+patch link:    https://lore.kernel.org/r/20260219130127.87901-3-ian.ray%40gehealthcare.com
+patch subject: [PATCH V2 2/3] hwmon: (ina2xx) Make it easier to add more devices
+config: x86_64-randconfig-014-20260219 (https://download.01.org/0day-ci/archive/20260220/202602200951.bP8YVa4Y-lkp@intel.com/config)
+compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260220/202602200951.bP8YVa4Y-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202602200951.bP8YVa4Y-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   drivers/hwmon/ina2xx.c: In function 'ina2xx_is_visible':
+>> drivers/hwmon/ina2xx.c:722:25: warning: unused variable 'chip' [-Wunused-variable]
+     722 |         enum ina2xx_ids chip = data->chip;
+         |                         ^~~~
+
+
+vim +/chip +722 drivers/hwmon/ina2xx.c
+
+5a56a39be7ffb4 Alex Qiu      2020-05-04  714  
+814db9f1b8ec1c Guenter Roeck 2024-07-24  715  static umode_t ina2xx_is_visible(const void *_data, enum hwmon_sensor_types type,
+814db9f1b8ec1c Guenter Roeck 2024-07-24  716  				 u32 attr, int channel)
+814db9f1b8ec1c Guenter Roeck 2024-07-24  717  {
+814db9f1b8ec1c Guenter Roeck 2024-07-24  718  	const struct ina2xx_data *data = _data;
+de0da6ae1908b4 Guenter Roeck 2024-08-27  719  	bool has_alerts = data->config->has_alerts;
+52172ad87a22ed Wenliang Yan  2024-11-06  720  	bool has_power_average = data->config->has_power_average;
+0337abb760db03 Ian Ray       2026-02-19  721  	bool has_update_interval = data->config->has_update_interval;
+814db9f1b8ec1c Guenter Roeck 2024-07-24 @722  	enum ina2xx_ids chip = data->chip;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  723  
+814db9f1b8ec1c Guenter Roeck 2024-07-24  724  	switch (type) {
+814db9f1b8ec1c Guenter Roeck 2024-07-24  725  	case hwmon_in:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  726  		switch (attr) {
+814db9f1b8ec1c Guenter Roeck 2024-07-24  727  		case hwmon_in_input:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  728  			return 0444;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  729  		case hwmon_in_lcrit:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  730  		case hwmon_in_crit:
+de0da6ae1908b4 Guenter Roeck 2024-08-27  731  			if (has_alerts)
+814db9f1b8ec1c Guenter Roeck 2024-07-24  732  				return 0644;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  733  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  734  		case hwmon_in_lcrit_alarm:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  735  		case hwmon_in_crit_alarm:
+de0da6ae1908b4 Guenter Roeck 2024-08-27  736  			if (has_alerts)
+814db9f1b8ec1c Guenter Roeck 2024-07-24  737  				return 0444;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  738  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  739  		default:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  740  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  741  		}
+814db9f1b8ec1c Guenter Roeck 2024-07-24  742  		break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  743  	case hwmon_curr:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  744  		switch (attr) {
+814db9f1b8ec1c Guenter Roeck 2024-07-24  745  		case hwmon_curr_input:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  746  			return 0444;
+4d5c2d986757e4 Guenter Roeck 2024-08-28  747  		case hwmon_curr_lcrit:
+4d5c2d986757e4 Guenter Roeck 2024-08-28  748  		case hwmon_curr_crit:
+de0da6ae1908b4 Guenter Roeck 2024-08-27  749  			if (has_alerts)
+4d5c2d986757e4 Guenter Roeck 2024-08-28  750  				return 0644;
+4d5c2d986757e4 Guenter Roeck 2024-08-28  751  			break;
+4d5c2d986757e4 Guenter Roeck 2024-08-28  752  		case hwmon_curr_lcrit_alarm:
+4d5c2d986757e4 Guenter Roeck 2024-08-28  753  		case hwmon_curr_crit_alarm:
+de0da6ae1908b4 Guenter Roeck 2024-08-27  754  			if (has_alerts)
+4d5c2d986757e4 Guenter Roeck 2024-08-28  755  				return 0444;
+4d5c2d986757e4 Guenter Roeck 2024-08-28  756  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  757  		default:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  758  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  759  		}
+814db9f1b8ec1c Guenter Roeck 2024-07-24  760  		break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  761  	case hwmon_power:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  762  		switch (attr) {
+814db9f1b8ec1c Guenter Roeck 2024-07-24  763  		case hwmon_power_input:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  764  			return 0444;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  765  		case hwmon_power_crit:
+de0da6ae1908b4 Guenter Roeck 2024-08-27  766  			if (has_alerts)
+814db9f1b8ec1c Guenter Roeck 2024-07-24  767  				return 0644;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  768  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  769  		case hwmon_power_crit_alarm:
+de0da6ae1908b4 Guenter Roeck 2024-08-27  770  			if (has_alerts)
+814db9f1b8ec1c Guenter Roeck 2024-07-24  771  				return 0444;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  772  			break;
+52172ad87a22ed Wenliang Yan  2024-11-06  773  		case hwmon_power_average:
+52172ad87a22ed Wenliang Yan  2024-11-06  774  			if (has_power_average)
+52172ad87a22ed Wenliang Yan  2024-11-06  775  				return 0444;
+52172ad87a22ed Wenliang Yan  2024-11-06  776  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  777  		default:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  778  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  779  		}
+814db9f1b8ec1c Guenter Roeck 2024-07-24  780  		break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  781  	case hwmon_chip:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  782  		switch (attr) {
+814db9f1b8ec1c Guenter Roeck 2024-07-24  783  		case hwmon_chip_update_interval:
+0337abb760db03 Ian Ray       2026-02-19  784  			if (has_update_interval)
+814db9f1b8ec1c Guenter Roeck 2024-07-24  785  				return 0644;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  786  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  787  		default:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  788  			break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  789  		}
+814db9f1b8ec1c Guenter Roeck 2024-07-24  790  		break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  791  	default:
+814db9f1b8ec1c Guenter Roeck 2024-07-24  792  		break;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  793  	}
+814db9f1b8ec1c Guenter Roeck 2024-07-24  794  	return 0;
+814db9f1b8ec1c Guenter Roeck 2024-07-24  795  }
+814db9f1b8ec1c Guenter Roeck 2024-07-24  796  
 
 -- 
-2.52.0
-
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
