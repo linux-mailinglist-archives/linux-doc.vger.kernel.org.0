@@ -1,313 +1,167 @@
-Return-Path: <linux-doc+bounces-76399-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76402-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yIuTJ65DmGnxEgMAu9opvQ
-	(envelope-from <linux-doc+bounces-76399-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 12:21:18 +0100
+	id kLBtC+BhmGkVHgMAu9opvQ
+	(envelope-from <linux-doc+bounces-76402-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 14:30:08 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 434561673CC
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 12:21:18 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C632E167D1F
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 14:30:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 08243306C471
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 11:20:36 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 1053F301BDF4
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Feb 2026 13:30:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6598432FA12;
-	Fri, 20 Feb 2026 11:20:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 08F76345758;
+	Fri, 20 Feb 2026 13:30:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="mnZ8yb/w"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SiJFrT/k"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CY3PR05CU001.outbound.protection.outlook.com (mail-westcentralusazon11013014.outbound.protection.outlook.com [40.93.201.14])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFC0C32ED20;
-	Fri, 20 Feb 2026 11:20:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.201.14
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771586435; cv=fail; b=jGzewpM2Uragl1ZlHk9ZMPVIyAzfkUUj86Ny6+AR3zbR/W3C8lvQcPI8ebjESbFIWG8aJxvv7y0ir4UNf/MgZJQTsfnEsI23Wb7FVYrE/4exmnsDMNi2wmXQJiuU20u+0buzC8huR+T2GriKsjnpX9fZxS9lj4gD3Q63mX8sFpI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771586435; c=relaxed/simple;
-	bh=effQqiM1FvIuCGlGBH/eGyZl9nZxC11YnI3TqlwDEIw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=b7qXiGBxld4El5mYE2Qd/t241dR/pyeuROQGHTlZSuE8IA+sXS4CWYX5GG9nvHlstseGN1+sOPvzzOGOgnweChRFRBHU51dDeBP00/CcGZMj7NiRZWk38eR0e2fZoBXYL5k43id+PWFTvIfsxMAI3sjzO4w2delrHy0vCLDiObE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com; spf=pass smtp.mailfrom=gehealthcare.com; dkim=pass (2048-bit key) header.d=gehealthcare.com header.i=@gehealthcare.com header.b=mnZ8yb/w; arc=fail smtp.client-ip=40.93.201.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gehealthcare.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cUM4pYGO5kTsguEXj4Zcc/sdxSuxV7kXn95ZBMY6Y9wBzilAD/jACmDK0gKJyDYoyhmIUB+voOYsnrxtYwdP6HZQC74DDZTVtW9sXFguTMIG1ujTO4HZZFQu9Y6Kv66z+s6FCRenWGTXUcjZw5bfVt8JZPU6If6jWaGzcJFA/eKQMUCOarAGlQBGKe7aAQUKZRwVpa4QYHxIzzjkQO6PlQSwc8jbUAgs42kSxPIGNDjowd+1BT5SLLGu7lC/8dLrESQNPoC5EAfPVs0dEMD9wBnP71i9z39NNIrqZTIavcPBPUPDLlgrrn/iY4LYr0aSFxq6yd3xgqC7lLqGwqIOig==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gxQe06a6988zwclH3GEFrprzjEj2xXX8XUBxyrUYWhE=;
- b=JSFgWpJ3f9/mTEt64InqkLdo19frX89ScKT+N/htyjx1wIs1XH6x4bkmtYh3HiiKzpTs1E9YG+YiP7s6FGiemanQV7TtMzaIkWLBCJzDPgl4JabB712zF7Fwxj3syTx8QiWK0G/jl4FDSiACuoYAs8BvLttmXFlTW+EhDJVKq6ITw1VAknM8p464xuu6vMM1DzBiwPgK38cLhNkj2a139iJAixdeT7BYgDqNwDWZ6VBL1aZ8lhrb145UymBUsSRgvI7W6UjTarGKHNHBtIxcSdxiwe7csTTpBbTCZnNYMQjG1NhtTK0LX0xVASoB/q/pRwY2qpbSSSpqiemEW5LrdA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 165.85.157.49) smtp.rcpttodomain=vger.kernel.org
- smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
- pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
- not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gxQe06a6988zwclH3GEFrprzjEj2xXX8XUBxyrUYWhE=;
- b=mnZ8yb/whR9SbkveLSJZArqH9Qm+dlNKsX237AIo9Z0h2kJ8cGa4WSxp+ooKOm0UYPsG63Wik/iAJJsGqSv5vtQRqbUk4TquXwNXEhslT7TkUf34mJygN5eF2lhgSCAtvmYgmCvMGvf/Lu3FDP81GxxDrrGtf6f/h/G2gysz8yjDf3riOfQ1G8P2LncQuF1JExMFDZBq7S305QC3RNG1aZmy5R+Ru6GpEKyRVq4D1saP4xaMEV1eQowKpLUzKGVoI9gumH0CUjRlgQ75Bih9bsJ3DRc01W5GU80EX2IhGUT4T760S9AJJ699SBO8MG/R/e32FQryNvJitLMZAJkY8w==
-Received: from MN0P220CA0021.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::11)
- by LV8PR22MB5891.namprd22.prod.outlook.com (2603:10b6:408:25f::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.16; Fri, 20 Feb
- 2026 11:20:30 +0000
-Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
- (2603:10b6:208:52e:cafe::b6) by MN0P220CA0021.outlook.office365.com
- (2603:10b6:208:52e::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.16 via Frontend Transport; Fri,
- 20 Feb 2026 11:20:25 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
- smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
-Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
- not designate 165.85.157.49 as permitted sender)
- receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=mkerelay2.compute.ge-healthcare.net;
-Received: from mkerelay2.compute.ge-healthcare.net (165.85.157.49) by
- MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Fri, 20 Feb 2026 11:20:30 +0000
-Received: from zeus.fihel.lab.ge-healthcare.net (zoo13.fihel.lab.ge-healthcare.net [10.168.174.111])
-	by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 7C044FFDA2;
-	Fri, 20 Feb 2026 13:20:26 +0200 (EET)
-From: Ian Ray <ian.ray@gehealthcare.com>
-To: Guenter Roeck <linux@roeck-us.net>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: Ian Ray <ian.ray@gehealthcare.com>,
-	=?UTF-8?q?Bence=20Cs=C3=B3k=C3=A1s?= <bence98@sch.bme.hu>,
-	=?UTF-8?q?Toma=C5=BE=20Zaman?= <tomaz@mono.si>,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	devicetree@vger.kernel.org
-Subject: [PATCH V3 3/3] hwmon: (ina2xx) Add support for INA234
-Date: Fri, 20 Feb 2026 13:20:22 +0200
-Message-ID: <20260220112024.97446-4-ian.ray@gehealthcare.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20260220112024.97446-1-ian.ray@gehealthcare.com>
-References: <20260220112024.97446-1-ian.ray@gehealthcare.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C94B346E58
+	for <linux-doc@vger.kernel.org>; Fri, 20 Feb 2026 13:30:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.193
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771594205; cv=none; b=nVD5QNMYaXo6I0/dvaprY1vOTwX+ioE2BRh9nsTfkSoz7YI3Hs0CMRH2efo8gJq48vuZgfUB4GClADTqDk4uyEOujbT9GIuW7hTB4UPDpPwlE4rjUMSeavHwr8Kojxh2dQefz6753Y3Uj64e4zY1jitISK/c1New9gt8LxKYubc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771594205; c=relaxed/simple;
+	bh=LGPe+usfcJCKf/UAlz7Wan07KA1SbhndzIWG9nbBskM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iH4PrG8HBJkfAEDzZ1x9QUfMQvcLkzv0DBQYxSPANMrmA1gQ0m/93LQIJErtdug5caD5/GGnUH+PSOH8GWFnf1+A6Kk5DibU/cCG/4QIBG3h3K891kV/j5VShTa6yOsk7mAWgtsLA0kZFQw9TMpEeEYWEZS6td8a0yhZfPZV2iU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SiJFrT/k; arc=none smtp.client-ip=209.85.215.193
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f193.google.com with SMTP id 41be03b00d2f7-c54f700b5b1so1326019a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 20 Feb 2026 05:30:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1771594203; x=1772199003; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/0o/RmLTUMvz6io+AT/DPftRCk0iXRLPXeaFhwBdO5I=;
+        b=SiJFrT/k6Yi5dOd8e7opIncHECRsXwfXsaF5A0G8duyyom8krpgdWJIt7O5LG5rI0I
+         VnDAoKyp3/R1J9JsuAThGfz1v96J0KMxVTcFD1cWQzH6h2cRKmxq5pmGS42LIaTK21YQ
+         +Xdp4DxDN1+XiOf37oxJfBfS0q3c/Ncs3q94fhzZNknqYg9aqJMv0ak864gDTBB+Jrdm
+         DFODLuk4HYNPV9AG7rQG5FqEd4VfOUrU+mg+NdpZDRt3p7CBGyVmwTeBv2XwHF1bEhux
+         MnHtFRLGWy4uAIe/dqsoRL6a6cdlxrHApT759d0lj+5IUI4IlwGmXpwZFBmTuA+n4Ow0
+         nUAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771594203; x=1772199003;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/0o/RmLTUMvz6io+AT/DPftRCk0iXRLPXeaFhwBdO5I=;
+        b=mHZ6RL6AsOduRKDZWzGjSdU+bLw4ZYtEkWQ6O/p+5puqW9xK+3pOtSSfM4Ah2AglOx
+         ohIzZkmYEWckUm8bxjeCM4AvMwLVf5JCUHBhFgNSYsgoSlRotNwvk4ysNmMpEh8kvku0
+         CGwnkYVRjU5Q1NrxirFXHi+r8k+CAVww+otmf5iHpsdD6z7uye4gHioy5q4X4RuALZnz
+         NE2+i33uKNLLSCvSlSK4v+76/2Dt0/ck8l7heesi3RCHseeiOegiDpLg2GEEa+c1KflN
+         H0oWuGV5Moo81hHSVfNL5GAweb3d/yozQmOkkVz8uw2AAqDPihe06QRbqx9Zvc4GcoTN
+         ku+g==
+X-Gm-Message-State: AOJu0YzIPVsoUSJnBHmSFne5OObysRPp8bXGT53h1V0TSkLSO4oQMSZ1
+	n+EAgKZd9Um0HPsoDOv23+lJCq8xf0U7RF7oFNLFZ77f7B5/aDa3faknpoMKnvbqm4I=
+X-Gm-Gg: AZuq6aITfrQPc3reSUNRft9alxR9pA8nV5ixZMqvCYKNJm+FJ4RgXk+UCnEXk3HeWxd
+	JBSqgfwgXoe8SfhMc9um6AAwMAvKoVrrreXkzeCiwueOmW1wf2r6n18NKhQ/X5Q4UGkWK4ZgCWP
+	uwxIYatYPfTDs+0t3Dtvp119MTTovCwTafS2LJTcqDGb6LSaSDl0WaQv7lrzqc/19gYqaKg4lrz
+	4jX3TBdmluwqUkDHbuKFL94o4o54NeAoU/EctzVYjfnJ4QBQejH/TUMuoOmvfaC8cpYXWRKX6Ch
+	aLp1OzhKvlnN05gRT902Da7ZD1IyOfPcNhXe03DymiFKYjlrKzeYp+Vel4JlM59BZdZJdZZCQTJ
+	WNeDuSyQCG3gh2J8NNkKNZgxZKD3b74RWUlMRnQlaDsxnC3J4n0fCViBn64HRqqim9oSozX9GxY
+	9W65jK18OaAJOOCaGiLwNQ61DKMJIOwMJvDIA=
+X-Received: by 2002:a05:6a21:7a4a:b0:394:5ae0:2921 with SMTP id adf61e73a8af0-39483aa0b89mr19127593637.62.1771594203427;
+        Fri, 20 Feb 2026 05:30:03 -0800 (PST)
+Received: from localhost ([103.251.247.23])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-824cc22f4d9sm21119904b3a.39.2026.02.20.05.30.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Feb 2026 05:30:03 -0800 (PST)
+From: Ariful Islam Shoikot <islamarifulshoikat@gmail.com>
+To: linux-doc@vger.kernel.org
+Cc: greg@kroah.com,
+	Ariful Islam Shoikot <islamarifulshoikat@gmail.com>
+Subject: [PATCH] Documentation: polish Executive Summary and Intro in stable-api-nonsense.rst
+Date: Fri, 20 Feb 2026 19:29:09 +0600
+Message-ID: <20260220132910.9645-1-islamarifulshoikat@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|LV8PR22MB5891:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85320773-3234-4285-7a43-08de70720e66
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014|13003099007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?cVBSQ0k1d044K3JZL2JUeGNsTTRSZTJDRkZjZ3lkd0IvdnBkRVNtd2kxWG85?=
- =?utf-8?B?V3JZcG1vaVRwa2dYUENQTmtoYXpvOHJQUlZZVlJRQnZ5R3liRFJYMEJZaWpu?=
- =?utf-8?B?b0RIS2g4cndTcXFJQXRRdEQ2eDM2czJITGVUQlFHblFMVWUyZGZTckFrcXNv?=
- =?utf-8?B?ZHpOOVhxNWNJNHpTRGNYNXZuR2RHd0VBU3lndGRxdEtpWXdrdFgxRTdqU0tE?=
- =?utf-8?B?YzRoTnhSL3lKcjMzUEtZMHpLK2tZbkNOeFpOdGt2SENXbnEwL1I1OTk4S0N4?=
- =?utf-8?B?MFJoWDdMdzVMRWpOSlZ5TzJkS0VTRFpUNjk4ZlYzL1plWFNMRXhsVFBQT1Nr?=
- =?utf-8?B?QXo4enJwWWhCSitrZzVGMkR0TmxJU3hPaVRNYyswNjc4OStKakxlODNMM0d0?=
- =?utf-8?B?WUpheHhDcFFTTCtuR20yeVk0b0QrRDRrakh0QnlMbW9PVTk1OXZ3djltRisy?=
- =?utf-8?B?VXJaZ1RmODZYRWhVblNFK1drTUg5ZUo2endMcVR4d2tJOSs5d0FCUGFsUVRh?=
- =?utf-8?B?RGlyZDNsUXUzdlJUZmJhRk5pbGcwYmNVamdMZjZtVUJOdDFNVXZ2MHoveTN0?=
- =?utf-8?B?eVNzY05jR0FUaWN2MUtYb3gyRmxoOEQ5RExpQVNIdFhUdElDcGJOai9WMnM1?=
- =?utf-8?B?TFI4TkJYeGtveHlra2lNQnczV0hUc2NxSk5DSVYrWm5wUGdISDBVUjU1SUdJ?=
- =?utf-8?B?ZkIxaGxLcTZJeFJ6WE8xUkQyclM2aE1UTG85SnJKSzJJRklJeVRpY2V4dFRS?=
- =?utf-8?B?R29HUHdsTEJDZDgycG9oSGNRTlVNSFp0VjlDaU1lNjNuRnUxc3ZoWC9yc0oz?=
- =?utf-8?B?cUhCU3VCZWduRGpFZTRvQXNOUHJqWVJvMFJzVlFEclBWNExxRDJLT3FhbnR3?=
- =?utf-8?B?dVI1bFhpbWszcnhyMXhucjE3Vk1kSGRFcHExMUkxRzVZckZ6K1RaeExnSUg3?=
- =?utf-8?B?S3BiRllhLzZySTlLTTdubTZzWXBPLzNBdnc1bzNmdk02dlZ0ZWducWh5UFdB?=
- =?utf-8?B?THNwRktwaUF4M09rWCt4d283ZFdNUGFKSTZHek1pejlaVVgvU3VPdVNnb01T?=
- =?utf-8?B?K3VzcG5KSHYrQ0kxSThiYzhtdDNNWEliRE8vY0pFRHZ4MzI4aWEwUFBCMVlm?=
- =?utf-8?B?UUhMZVF4S2tEZ1BJWjFyajBaWmZoNkd2TEFGdmhoU3dMaFhpZVo0dUlYOW5p?=
- =?utf-8?B?TnRFRzFTSDNHZFpsRG5SUDdCZ1RiRkJyK21NY2J0bEQrZzdTdkZSdlZ6SFBa?=
- =?utf-8?B?bkl3Z21OZFlYRHJtckZrZUxqRWR5a3FUamNVUkpzcTdtSStNbG1KaU1hWHhq?=
- =?utf-8?B?REpGR3BHVEMwVEdmTDBEZHhsODlPaGNoV1lvbjBmNElkYzlkV2ZZYVRycDB2?=
- =?utf-8?B?d2ZTUnA0MThsQUhqNWVQYUNWMzArcFlWK0VIdlMvT21TSUZUZWhJaC94M3Uy?=
- =?utf-8?B?TFd4K0JzWkNlem9ja1RqdGY5cndWd0dLT3ZMZERqcnZpZXBkeVFvVWhlTU1H?=
- =?utf-8?B?TFJOck5DejZ3NkJ3NjQ0cVNTcjBlMk04VUNNdXYzbHpFTTFFcGh0TnFMejd3?=
- =?utf-8?B?MTd6MFM1T1BRcXpRdFVXNkV1RlZ3UU1FQjhoMzVRTHFlUGpjTnMvdWU0SVdW?=
- =?utf-8?B?c1YrR0VzT0NOQW9hQkNiaGlKc3c3RXRremJsUWZuTDBETUVoKzVEcDdHZlN0?=
- =?utf-8?B?M2l5aldPMklzVjZPd1llUXZTRFo5N3BpVXJqd2xpdjBWeG43VE1MRzcrekgx?=
- =?utf-8?B?M1N5emtoS0ZzSkxXOFhuUDErNXc1MUlJU3BEbHFDVjRlRTNLZUR4RGdpM0Mv?=
- =?utf-8?B?WnAvdWlYOGVpcXJXS0QyZXdNTG8xTTUxS0dKWHNXLzlYQkttb0hPdHd2YVZL?=
- =?utf-8?B?K09jcldpajJlcXJ0M0N1dEVUN1QrRDJFcDgyT2xuaVRuSUhVVms2aWlqQXpm?=
- =?utf-8?B?K09iUFZGL09wbVZmeDRzbmhRckZhMEJlNGQ2MXRGaXplR0t6bnhrYk1WeDhL?=
- =?utf-8?B?Qlg4RTZaQTBwZGFSYXd3ZFJkMG8xK0ZDaGhHcE1oNUNZN3k5NHEvQi9jSm9w?=
- =?utf-8?B?RWZNRkpFdS8rU3NqcHdHSlFic3NkVW9jekJCRk1ZdGNFMjFPNHRCMlhpSG9o?=
- =?utf-8?B?NnVKM1ZEeCtNOUl6UzB5dkpJWUpJZ28yaEtMZzM2Nm5laEtQV0Zmd1l3Yk1C?=
- =?utf-8?B?K2c9PQ==?=
-X-Forefront-Antispam-Report:
-	CIP:165.85.157.49;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mkerelay2.compute.ge-healthcare.net;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	q7MA1Cx9ucJvv/Ht9fwup+vFx1lu7x+RxFX3M/t4zfCMMZ7Gx23DndzYd0m4gu/fGkhuvVEE0M3Pdm82NMCO/CAF6fj1fFqAtmxuFkD4f9MWY5nKBHGC60GKAM94EZ8CPuAKWb4zWHsQBK7TeXqLQdBm+NbZuaDuhQU3gFFYtULJAimQ23OxFl01p7Wo+p1/WD2HB0maZt7RBTm9BKMCDmBbMv1cm5ZS2egjdkZlDLH8QNsQCuFSx3LTyLuBricOd1ATs/M5YgPn6ikOis2On3tul5re5308OtK2YI0gWXvSF3J61PZcxNwljem++YuVO1kGyhff8gMwo3sgMhB1BWO4teZLdtxlDyqOS4+pwWmepcYC+YyNC9hLy3HG4vPO1x675vQZLR4GJ5qI5taGtORauyvkOQoW8skFHg8tFc3yI5K5AKkS3qT3THXEedCW
-X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2026 11:20:30.0231
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85320773-3234-4285-7a43-08de70720e66
-X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf;Ip=[165.85.157.49];Helo=[mkerelay2.compute.ge-healthcare.net]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-MN1PEPF0000ECD8.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR22MB5891
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gehealthcare.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gehealthcare.com:s=selector1];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	TAGGED_FROM(0.00)[bounces-76399-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[kroah.com,gmail.com];
+	TAGGED_FROM(0.00)[bounces-76402-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[silergy.com:url,gehealthcare.com:mid,gehealthcare.com:dkim,gehealthcare.com:email,bme.hu:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	DKIM_TRACE(0.00)[gehealthcare.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ian.ray@gehealthcare.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 434561673CC
+	FROM_NEQ_ENVFROM(0.00)[islamarifulshoikat@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: C632E167D1F
 X-Rspamd-Action: no action
 
-INA234 is register compatible to INA226 (excepting manufacturer and die
-or device id registers) but has different scaling.
-
-Signed-off-by: Ian Ray <ian.ray@gehealthcare.com>
-Reviewed-by: Bence Csókás <bence98@sch.bme.hu> # v2
+Signed-off-by: Ariful Islam Shoikot <islamarifulshoikat@gmail.com>
 ---
- Documentation/hwmon/ina2xx.rst | 13 ++++++++++++-
- drivers/hwmon/Kconfig          |  2 +-
- drivers/hwmon/ina2xx.c         | 18 ++++++++++++++++++
- 3 files changed, 31 insertions(+), 2 deletions(-)
+ Documentation/process/stable-api-nonsense.rst | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/Documentation/hwmon/ina2xx.rst b/Documentation/hwmon/ina2xx.rst
-index a4ddf4bd2b08..d64e7af46a12 100644
---- a/Documentation/hwmon/ina2xx.rst
-+++ b/Documentation/hwmon/ina2xx.rst
-@@ -74,6 +74,16 @@ Supported chips:
- 	       https://us1.silergy.com/
+diff --git a/Documentation/process/stable-api-nonsense.rst b/Documentation/process/stable-api-nonsense.rst
+index a9625ab1fdc2..120c10ec2ab1 100644
+--- a/Documentation/process/stable-api-nonsense.rst
++++ b/Documentation/process/stable-api-nonsense.rst
+@@ -17,7 +17,7 @@ kernel interface, nor does it have a stable kernel interface**.
  
+   The kernel to userspace interface is the one that application programs use,
+   the syscall interface.  That interface is **very** stable over time, and
+-  will not break.  I have old programs that were built on a pre 0.9something
++  will not break.  I have old programs that were built on a pre 0.9 something
+   kernel that still work just fine on the latest 2.6 kernel release.
+   That interface is the one that users and application programmers can count
+   on being stable.
+@@ -25,13 +25,13 @@ kernel interface, nor does it have a stable kernel interface**.
  
-+  * Texas Instruments INA234
+ Executive Summary
+ -----------------
+-You think you want a stable kernel interface, but you really do not, and
+-you don't even know it.  What you want is a stable running driver, and
+-you get that only if your driver is in the main kernel tree.  You also
+-get lots of other good benefits if your driver is in the main kernel
+-tree, all of which has made Linux into such a strong, stable, and mature
+-operating system which is the reason you are using it in the first
+-place.
 +
-+    Prefix: 'ina234'
-+
-+    Addresses: I2C 0x40 - 0x43
-+
-+    Datasheet: Publicly available at the Texas Instruments website
-+
-+	       https://www.ti.com/
-+
- Author: Lothar Felten <lothar.felten@gmail.com>
++You might think you want a stable kernel interface, but you really do not - and
++you may not even realize it. What you truly want is a stable, running driver,
++which you get only if your driver is in the main kernel tree. Being in the main
++kernel tree also provides many additional benefits, all of which have helped 
++make Linux a strong, stable, and mature operating system - the very reason you 
++are using it today.
  
- Description
-@@ -89,7 +99,7 @@ interface. The INA220 monitors both shunt drop and supply voltage.
- The INA226 is a current shunt and power monitor with an I2C interface.
- The INA226 monitors both a shunt voltage drop and bus supply voltage.
  
--INA230 and INA231 are high or low side current shunt and power monitors
-+INA230, INA231, and INA234 are high or low side current shunt and power monitors
- with an I2C interface. The chips monitor both a shunt voltage drop and
- bus supply voltage.
- 
-@@ -132,6 +142,7 @@ Additional entries are available for the following chips:
-   * ina226
-   * ina230
-   * ina231
-+  * ina234
-   * ina260
-   * sy24655
- 
-diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index 41c381764c2b..6aa8a89f4747 100644
---- a/drivers/hwmon/Kconfig
-+++ b/drivers/hwmon/Kconfig
-@@ -2284,7 +2284,7 @@ config SENSORS_INA2XX
- 	select REGMAP_I2C
- 	help
- 	  If you say yes here you get support for INA219, INA220, INA226,
--	  INA230, INA231, INA260, and SY24655 power monitor chips.
-+	  INA230, INA231, INA234, INA260, and SY24655 power monitor chips.
- 
- 	  The INA2xx driver is configured for the default configuration of
- 	  the part as described in the datasheet.
-diff --git a/drivers/hwmon/ina2xx.c b/drivers/hwmon/ina2xx.c
-index cd0d39ee7616..836e15a5a780 100644
---- a/drivers/hwmon/ina2xx.c
-+++ b/drivers/hwmon/ina2xx.c
-@@ -138,6 +138,7 @@ static const struct regmap_config ina2xx_regmap_config = {
- enum ina2xx_ids {
- 	ina219,
- 	ina226,
-+	ina234,
- 	ina260,
- 	sy24655
- };
-@@ -191,6 +192,18 @@ static const struct ina2xx_config ina2xx_config[] = {
- 		.has_power_average = false,
- 		.has_update_interval = true,
- 	},
-+	[ina234] = {
-+		.config_default = INA226_CONFIG_DEFAULT,
-+		.calibration_value = 2048,
-+		.shunt_div = 400, /* 2.5 µV/LSB raw ADC reading from INA2XX_SHUNT_VOLTAGE */
-+		.bus_voltage_shift = 4,
-+		.bus_voltage_lsb = 25600,
-+		.power_lsb_factor = 32,
-+		.has_alerts = true,
-+		.has_ishunt = false,
-+		.has_power_average = false,
-+		.has_update_interval = true,
-+	},
- 	[ina260] = {
- 		.config_default = INA260_CONFIG_DEFAULT,
- 		.shunt_div = 400,
-@@ -992,6 +1005,7 @@ static const struct i2c_device_id ina2xx_id[] = {
- 	{ "ina226", ina226 },
- 	{ "ina230", ina226 },
- 	{ "ina231", ina226 },
-+	{ "ina234", ina234 },
- 	{ "ina260", ina260 },
- 	{ "sy24655", sy24655 },
- 	{ }
-@@ -1023,6 +1037,10 @@ static const struct of_device_id __maybe_unused ina2xx_of_match[] = {
- 		.compatible = "ti,ina231",
- 		.data = (void *)ina226
- 	},
-+	{
-+		.compatible = "ti,ina234",
-+		.data = (void *)ina234
-+	},
- 	{
- 		.compatible = "ti,ina260",
- 		.data = (void *)ina260
+ Intro
 -- 
-2.49.0
+2.43.0
 
 
