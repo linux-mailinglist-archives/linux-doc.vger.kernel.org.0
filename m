@@ -1,267 +1,135 @@
-Return-Path: <linux-doc+bounces-76471-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76473-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MIXkH+3PmWmNWwMAu9opvQ
-	(envelope-from <linux-doc+bounces-76471-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Feb 2026 16:31:57 +0100
+	id OPqgGFDgmWnMXAMAu9opvQ
+	(envelope-from <linux-doc+bounces-76473-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Feb 2026 17:41:52 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E95D16D2C3
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Feb 2026 16:31:56 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF09B16D4A4
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Feb 2026 17:41:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 663133001197
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Feb 2026 15:21:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 876CE303C01D
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Feb 2026 16:41:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F55A19A2A3;
-	Sat, 21 Feb 2026 15:21:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 249A332AAB1;
+	Sat, 21 Feb 2026 16:41:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (4096-bit key) header.d=airmail.cc header.i=@airmail.cc header.b="AYr3GlZz"
+	dkim=pass (1024-bit key) header.d=inria.fr header.i=@inria.fr header.b="pXaVrPyO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.cock.li (unknown [37.120.193.123])
+Received: from mail3-relais-sop.national.inria.fr (mail3-relais-sop.national.inria.fr [192.134.164.104])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C43541FB1;
-	Sat, 21 Feb 2026 15:21:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=37.120.193.123
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 367BD23643F;
+	Sat, 21 Feb 2026 16:41:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.134.164.104
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771687316; cv=none; b=M613BKerxOF81q8oN45k7PYlAGXsOvbtMQ7TTLjrH7V77y+tza5uVaHpw8rWiyovrN90/0x/Lr6gBiE9HOGNfqdiaiqjA2jWo1vgGXPQTyrI5qUyPh8caHXn3z3RBUgXpstNle8rUiTehNd6MfKs3xZy3QvqkI2j6zyD2YGU2Fk=
+	t=1771692108; cv=none; b=GTIW4z4U12Eacm/nd/7oLF2nwnOM1L2c+MdAFAy0wH2PJ4LmHT7Sse87PfkazzYGYqO4lFB4LPWuNfVzg3FsYdiexOm2Ym9S/X2GmNZ+lAhEUjSKM3YxstKQa6B8oW/aISHS9h+1+Kx2KKDLSdo7PqdnFq2hixQq9fmk+zWkNCg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771687316; c=relaxed/simple;
-	bh=6tJjslt4k6dcumDC6VArJO1XrCBfl0Swoi1WQnvzvU4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qw8J/657vUV0L14CcS7nbrFNfIzEhFHhqJ9lr7qeYXaVPWQ4d3L5VNdkPF55CD3nM55a6YhYrDhA86jEKnBA0ZmkyXN+oSNDSiI5y90D4MQ+HdfjYOwfKGCBEC5iCDKfCRZWoFkH70DZstIAWon7SEVEJO/mHrV3HK2kqQ+DxBg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=airmail.cc; spf=pass smtp.mailfrom=airmail.cc; dkim=fail (4096-bit key) header.d=airmail.cc header.i=@airmail.cc header.b=AYr3GlZz reason="signature verification failed"; arc=none smtp.client-ip=37.120.193.123
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=airmail.cc
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=airmail.cc
-From: Hans Anda <hansa@airmail.cc>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=airmail.cc; s=mail;
-	t=1771687301; bh=6tJjslt4k6dcumDC6VArJO1XrCBfl0Swoi1WQnvzvU4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=AYr3GlZzYTt4XYEQWfzdgv68PWlHzltfUFDvmrl7cXtoYaWTUlOQe3Blu8GwZTc0e
-	 J+V2ZG1XTPbgmXwrAf4YoHxGrxUyz/scP10iZ3BFgP/NjUoljCUkxJudCbFwDdIiw1
-	 7z4a7vTun0BUE2jBKfvNVOIYUyKsQeEy456EWldwK5FVuOJ2uo/0F35jXPoLHvaGuX
-	 Yba07b6by4+/Lmv5u8mb3Th6t/Hfm//iOn1ELl92+ubSqfpo6P+9jyB81rc9a94RHM
-	 x3vFeKlCfkvQM04bh90U/N9mMq3ZZI5BhveA9C43XwAyvSbe7/PB6vWRXvmd8lJDik
-	 WYxYkmDVmcVmw==
-To: Jonathan Corbet <corbet@lwn.net>,
-	Collin Funk <collin.funk1@gmail.com>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Hans Anda <hansa@airmail.cc>
-Subject: [PATCH] scripts: sort ver_linux and list in changes.rst
-Date: Sat, 21 Feb 2026 16:21:14 +0100
-Message-ID: <20260221152113.28322-2-hansa@airmail.cc>
-X-Mailer: git-send-email 2.53.0
+	s=arc-20240116; t=1771692108; c=relaxed/simple;
+	bh=ab9k+FViLxYiGa6HUAKp6E8heaHxscWcvE3m3wPCFTM=;
+	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=DB4IL0jy5g24KScoEObBZu6G+XVbzsUKjMabhoo+U+ui/MkXKqY7/UuilEQxf8nRe0n1/2OIoNimyn1WnrViibBmaRly2r3wGcUxWF/pVWNGyCMe8OBJlW8+xyhevEZJuk5gLxtGcyJQDN6JAtTYzoDsFL94KFB5owQeEUmLDt0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=inria.fr; spf=pass smtp.mailfrom=inria.fr; dkim=pass (1024-bit key) header.d=inria.fr header.i=@inria.fr header.b=pXaVrPyO; arc=none smtp.client-ip=192.134.164.104
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=inria.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inria.fr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=inria.fr; s=dc;
+  h=date:from:to:cc:subject:in-reply-to:message-id:
+   references:mime-version;
+  bh=0E0cRYqijrCwJh0X9loWN0ExmdDOCjZ4/52FX0z2YyY=;
+  b=pXaVrPyOzLVeVMa+pkGOMDtqSUGLNrU7++EZvkBD/1eJBgsCV0dN1B/h
+   WWVN3elRD8SDZ8VxuxS83EXK7CsJO4QSAIfGD82FW1XCieD52tEv3/XuU
+   0T63PMSc5WjKQtOImXnsrHQ08ltW0rpzwkc112UMdv3TukZxAdeel1nLW
+   8=;
+X-CSE-ConnectionGUID: XshNDX13RiGDrwkmXEs6Uw==
+X-CSE-MsgGUID: H9TCGdPvS/WbwM0UP93BxQ==
+Authentication-Results: mail3-relais-sop.national.inria.fr; dkim=none (message not signed) header.i=none; spf=SoftFail smtp.mailfrom=julia.lawall@inria.fr; dmarc=fail (p=none dis=none) d=inria.fr
+X-IronPort-AV: E=Sophos;i="6.21,304,1763420400"; 
+   d="scan'208";a="139448696"
+Received: from 231.85.89.92.rev.sfr.net (HELO hadrien) ([92.89.85.231])
+  by mail3-relais-sop.national.inria.fr with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2026 17:40:34 +0100
+Date: Sat, 21 Feb 2026 17:40:33 +0100 (CET)
+From: Julia Lawall <julia.lawall@inria.fr>
+To: Benjamin Philip <benjamin.philip495@gmail.com>
+cc: Julia Lawall <Julia.Lawall@inria.fr>, 
+    Nicolas Palix <nicolas.palix@imag.fr>, Jonathan Corbet <corbet@lwn.net>, 
+    cocci@inria.fr, workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+    linux-kernel@vger.kernel.org
+Subject: Re: [cocci] [PATCH RESEND 0/3] scripts: coccicheck: document debug
+ log handling
+In-Reply-To: <20260106190836.36630-1-benjamin.philip495@gmail.com>
+Message-ID: <905ec76f-027-c71-5154-76d8c4e7dbc8@inria.fr>
+References: <20260106190836.36630-1-benjamin.philip495@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.04 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[airmail.cc : SPF not aligned (strict),quarantine];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_REJECT(1.00)[airmail.cc:s=mail];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
+	DMARC_POLICY_ALLOW(-0.50)[inria.fr,none];
+	R_DKIM_ALLOW(-0.20)[inria.fr:s=dc];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-76473-lists,linux-doc=lfdr.de];
+	URIBL_MULTI_FAIL(0.00)[inria.fr:server fail,sea.lore.kernel.org:server fail];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76471-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_TO(0.00)[lwn.net,gmail.com,linuxfoundation.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	GREYLIST(0.00)[pass,body];
 	MIME_TRACE(0.00)[0:+];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hansa@airmail.cc,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	NEURAL_HAM(-0.00)[-0.967];
-	DKIM_TRACE(0.00)[airmail.cc:-];
+	NEURAL_HAM(-0.00)[-0.997];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[julia.lawall@inria.fr,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[inria.fr:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DM_SURBL(0.00)[airmail.cc:mid,airmail.cc:email];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,airmail.cc:mid,airmail.cc:email]
-X-Rspamd-Queue-Id: 9E95D16D2C3
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: AF09B16D4A4
 X-Rspamd-Action: no action
 
-It is a pain in the ass to compare the software versions on the running
-system (scripts/ver_linux) with the minimal required versions (changes.rst).
 
-Sort both lists alphabetically
-Add missing tools in ver_linux
- (bash, bc, bindgen, bindutils, btrfs, clang, e2fsck, awk, tar, gtags,
-  iptables, kmod, mcelog, mkimage, openssl, pahole, python, Rust, sphinx,
-  squashfs-tools, udev)
-Fix minor issues (add grub2)
 
-Signed-off-by: Hans Anda <hansa@airmail.cc>
----
- Documentation/process/changes.rst | 50 +++++++++++++--------------
- scripts/ver_linux                 | 56 +++++++++++++++++++++----------
- 2 files changed, 63 insertions(+), 43 deletions(-)
+On Wed, 7 Jan 2026, Benjamin Philip wrote:
 
-diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
-index 6b373e193548..fb810c3710bb 100644
---- a/Documentation/process/changes.rst
-+++ b/Documentation/process/changes.rst
-@@ -29,40 +29,40 @@ you probably needn't concern yourself with pcmciautils.
- ====================== ===============  ========================================
-         Program        Minimal version       Command to check the version
- ====================== ===============  ========================================
--GNU C                  8.1              gcc --version
--Clang/LLVM (optional)  15.0.0           clang --version
--Rust (optional)        1.78.0           rustc --version
--bindgen (optional)     0.65.1           bindgen --version
--GNU make               4.0              make --version
- bash                   4.2              bash --version
-+bc                     1.06.95          bc --version
-+bindgen (optional)     0.65.1           bindgen --version
- binutils               2.30             ld -v
--flex                   2.5.35           flex --version
- bison                  2.0              bison --version
--pahole                 1.22             pahole --version
--util-linux             2.10o            mount --version
--kmod                   13               depmod -V
-+btrfs-progs            0.18             btrfs --version
-+Clang/LLVM (optional)  15.0.0           clang --version
- e2fsprogs              1.41.4           e2fsck -V
-+flex                   2.5.35           flex --version
-+GNU AWK (optional)     5.1.0            gawk --version
-+GNU C                  8.1              gcc --version
-+GNU make               4.0              make --version
-+GNU tar                1.28             tar --version
-+grub                   0.93             grub --version || grub-install --version
-+gtags (optional)       6.6.5            gtags --version
-+iptables               1.4.2            iptables -V
- jfsutils               1.1.3            fsck.jfs -V
--xfsprogs               2.6.0            xfs_db -V
--squashfs-tools         4.0              mksquashfs -version
--btrfs-progs            0.18             btrfs --version
-+kmod                   13               depmod -V
-+mcelog                 0.6              mcelog --version
-+mkimage (optional)     2017.01          mkimage --version
-+nfs-utils              1.0.5            showmount --version
-+openssl & libcrypto    1.0.0            openssl version
-+pahole                 1.22             pahole --version
- pcmciautils            004              pccardctl -V
--quota-tools            3.09             quota -V
- PPP                    2.4.0            pppd --version
--nfs-utils              1.0.5            showmount --version
- procps                 3.2.0            ps --version
--udev                   081              udevd --version
--grub                   0.93             grub --version || grub-install --version
--mcelog                 0.6              mcelog --version
--iptables               1.4.2            iptables -V
--openssl & libcrypto    1.0.0            openssl version
--bc                     1.06.95          bc --version
--Sphinx\ [#f1]_         3.4.3            sphinx-build --version
--GNU tar                1.28             tar --version
--gtags (optional)       6.6.5            gtags --version
--mkimage (optional)     2017.01          mkimage --version
- Python                 3.9.x            python3 --version
--GNU AWK (optional)     5.1.0            gawk --version
-+quota-tools            3.09             quota -V
-+Rust (optional)        1.78.0           rustc --version
-+Sphinx\ [#f1]_         3.4.3            sphinx-build --version
-+squashfs-tools         4.0              mksquashfs -version
-+udev                   081              udevadm --version
-+util-linux             2.10o            mount --version
-+xfsprogs               2.6.0            xfs_db -V
- ====================== ===============  ========================================
- 
- .. [#f1] Sphinx is needed only to build the Kernel documentation
-diff --git a/scripts/ver_linux b/scripts/ver_linux
-index d6f2362d3792..6c829448b4d4 100755
---- a/scripts/ver_linux
-+++ b/scripts/ver_linux
-@@ -17,37 +17,57 @@ BEGIN {
- 	libc = "libc[.]so[.][0-9]+$"
- 	libcpp = "(libg|stdc)[+]+[.]so([.][0-9]+)+$"
- 
--	printversion("GNU C", version("gcc -dumpversion"))
--	printversion("GNU Make", version("make --version"))
-+	printversion("bash", version("bash --version"))
-+	printversion("bc", version("bc --version"))
-+	printversion("bindgen", version("bindgen --version"))
- 	printversion("Binutils", version("ld -v"))
--	printversion("Util-linux", version("mount --version"))
--	printversion("Mount", version("mount --version"))
--	printversion("Module-init-tools", version("depmod -V"))
--	printversion("E2fsprogs", version("tune2fs"))
--	printversion("Jfsutils", version("fsck.jfs -V"))
--	printversion("Xfsprogs", version("xfs_db -V"))
--	printversion("Pcmciautils", version("pccardctl -V"))
--	printversion("Pcmcia-cs", version("cardmgr -V"))
--	printversion("Quota-tools", version("quota -V"))
--	printversion("PPP", version("pppd --version"))
--	printversion("Isdn4k-utils", version("isdnctrl"))
--	printversion("Nfs-utils", version("showmount --version"))
- 	printversion("Bison", version("bison --version"))
-+	printversion("btrfs-progs", version("btrfs --version"))
-+	printversion("Clang", version("clang --version"))
-+	printversion("Console-tools", version("loadkeys -V"))
-+	printversion("Dynamic linker (ldd)", version("ldd --version"))
-+	printversion("E2fsprogs", version("e2fsck -V"))
- 	printversion("Flex", version("flex --version"))
-+	printversion("GNU AWK", version("gawk -version"))
-+	printversion("GNU C", version("gcc -dumpversion"))
-+	printversion("GNU make", version("make --version"))
-+	printversion("GNU tar", version("tar --version"))
-+	printversion("GRUB", version("grub-install --version"))
-+	printversion("GRUB2", version("grub2-install --version"))
-+	printversion("gtags", version("gtags --version"))
-+	printversion("iptables", version("iptables -V"))
-+	printversion("Isdn4k-utils", version("isdnctrl"))
-+	printversion("Jfsutils", version("fsck.jfs -V"))
-+	printversion("Kbd", version("loadkeys -V"))
-+	printversion("kmod", version("kmod -V"))
- 
- 	while ("ldconfig -p 2>/dev/null" | getline > 0)
- 		if ($NF ~ libc || $NF ~ libcpp)
- 			if (!seen[ver = version("readlink " $NF)]++)
- 				printversion("Linux C" ($NF ~ libcpp? "++" : "") " Library", ver)
- 
--	printversion("Dynamic linker (ldd)", version("ldd --version"))
--	printversion("Procps", version("ps --version"))
-+	printversion("mcelog", version("mcelog --version"))
-+	printversion("mkimage", version("mkimage --version"))
-+	printversion("Module-init-tools", version("depmod -V"))
-+	printversion("Mount", version("mount --version"))
- 	printversion("Net-tools", version("ifconfig --version"))
--	printversion("Kbd", version("loadkeys -V"))
--	printversion("Console-tools", version("loadkeys -V"))
-+	printversion("Nfs-utils", version("showmount --version"))
-+	printversion("openssl", version("openssl version"))
-+	printversion("pahole", version("pahole --version"))
-+	printversion("Pcmcia-cs", version("cardmgr -V"))
-+	printversion("Pcmciautils", version("pccardctl -V"))
-+	printversion("PPP", version("pppd --version"))
-+	printversion("Procps", version("ps --version"))
-+	printversion("Python", version("python3 -V"))
-+	printversion("Quota-tools", version("quota -V"))
-+	printversion("Rust", version("rustc --version"))
- 	printversion("Sh-utils", version("expr --v"))
-+	printversion("Sphinx", version("sphinx-build --version"))
-+	printversion("squashfs-tools", version("mksquashfs -version"))
- 	printversion("Udev", version("udevadm --version"))
-+	printversion("Util-linux", version("mount --version"))
- 	printversion("Wireless-tools", version("iwconfig --version"))
-+	printversion("Xfsprogs", version("xfs_db -V"))
- 
- 	while ("sort /proc/modules" | getline > 0) {
- 		mods = mods sep $1
--- 
-2.53.0
+> Currently coccicheck prints debug logs to stdout unless a debug file has been
+> set. This makes it hard to read coccinelle's suggested changes, especially for
+> someone new to coccicheck.
+>
+> This patchset documents this behaviour in both the coccicheck script as well as
+> in the dev-tools documentation. Additionally, it simplifies some of the logic
+> for handling debug files.
 
+All applied, thanks.
+
+julia
+
+>
+> Benjamin Philip (3):
+>   scripts: coccicheck: simplify debug file handling
+>   scripts: coccicheck: warn on unset debug file
+>   Documentation: Coccinelle: document debug log handling
+>
+>  Documentation/dev-tools/coccinelle.rst | 21 ++++++++++++++++-----
+>  scripts/coccicheck                     | 21 +++++++++++++--------
+>  2 files changed, 29 insertions(+), 13 deletions(-)
+>
+> --
+> 2.52.0
+>
+>
 
