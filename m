@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-76484-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76485-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eCUWGp+Cmmm8cAMAu9opvQ
-	(envelope-from <linux-doc+bounces-76484-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 05:14:23 +0100
+	id DLuoGWysmmnMfgMAu9opvQ
+	(envelope-from <linux-doc+bounces-76485-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 08:12:44 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BB5C16E77B
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 05:14:22 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D89D16E92A
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 08:12:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2B7433010239
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 04:14:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3D0FA30182BC
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 07:12:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AB9341632DD;
-	Sun, 22 Feb 2026 04:14:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A99A1A2C04;
+	Sun, 22 Feb 2026 07:12:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nx50bLWy"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tsp6UoNm"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 827F0EAC7;
-	Sun, 22 Feb 2026 04:14:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0420C1534EC;
+	Sun, 22 Feb 2026 07:12:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771733655; cv=none; b=b+SCg4GNng0E51LSAF1bL6A7SDDBoN06iihwA5mrL4LgcYj32+vzFQ0zrPezbfEBZ3r2/m7wNaeWHdzEsY+RZgEVWmezzlyZJCaJGb1Y5lMRo+L3wMaff6ZVxuK1siMu+72f/P/I7YPAmBR066x9ouWnlkf2CS0BhToi4BuU26U=
+	t=1771744360; cv=none; b=YbrXmzoCmQOXA7VCswV3mYVcnQcPzJf1txYIo0bsLIH+vrW38393fcC2ydJvgYWJHSuO++cZaus4MPWM4L6fOdOooEZhsB8dzEC5wYqvMWseLKpVATIUD0p/2LheqzR0CAuqLiM4dqHnPYQd77WoRSG8QEDxzpNLSu5DPGCTsJQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771733655; c=relaxed/simple;
-	bh=e4nGV4qjxyKzsXnZLO07rEcHKaCZ4nqj/dbjC/wbzzw=;
+	s=arc-20240116; t=1771744360; c=relaxed/simple;
+	bh=DmIYaptlf7pY4fnaKfTkBxqecJdfaE7l+PBLh5NmUV8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cqsAqNMQw0DtkwTuQ7MYT1K7gH/828fzLay4uQLIfwda7MD6qmj8QyIW33klgBUZgPSluK9l7TJgN2bD41A6wVBtmJwnwQJf9Zkclrje6LtEV6DQz7wnN9pz5IJnbjMfit5cqlLbWSMGpnNu4sO70fsfjlq2px9CAmCIqDPUDiU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nx50bLWy; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8AE8C116D0;
-	Sun, 22 Feb 2026 04:14:13 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=XlCIWutgH0ItSlCBHAY5jZ8hGjcdKp/TCNaDxoDjZMdbYeliV6HYpGvl8QeR1zvRwvRMjtoBIol7OAYdrfYvIp1ytffl5HOPt/yG+Y8IQSxmMX20vjGbar6VWKveqQxyTXKKUmfiMQ1hxUMtd+yxO/wUygtESOrTkJEXQOLHwRU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tsp6UoNm; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 819E6C116D0;
+	Sun, 22 Feb 2026 07:12:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1771733655;
-	bh=e4nGV4qjxyKzsXnZLO07rEcHKaCZ4nqj/dbjC/wbzzw=;
+	s=k20201202; t=1771744359;
+	bh=DmIYaptlf7pY4fnaKfTkBxqecJdfaE7l+PBLh5NmUV8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=nx50bLWyBtC33JXvKqxon7Xg0/1Q2tgTcwgawrwEEiZ6s491TBcBCacKw6ZOUFwl0
-	 Yvfn+gdFBnaRaYNHvEUBAgwJN7QwBYVKRXWwrLtgK3GjjhtYaayEiUll+QvFWH3dXh
-	 r0woYii6OEqRTJgrRraU1WXpzL/8agg6ncXXH2PtQqYN1LrX2GeG20V8ROPJe1lo1G
-	 oJ7Jd8BA6stP1dEcn3gVTnRNYwLeXqQimCbKV32XIHfSX1sCHiJGOcE8hciQI/kcnV
-	 HA/E5GvbOg+B92ym+FdEN4qpdVaIQfx9RJixLi8XamMk3wknekwwp0kH/bX3/adv9t
-	 /h9QBlsm62DfQ==
-Date: Sat, 21 Feb 2026 20:13:24 -0800
-From: Eric Biggers <ebiggers@kernel.org>
-To: Kees Cook <kees@kernel.org>
+	b=tsp6UoNmMj3lcvtgDnsP9DNOlmwsbewFHhdUreKfP92YaZx/EM4E0mN4TZhNWrMDO
+	 CohMXKT5TLYh3l5i7zWVReBdakhTfH5lMJHPG0BYMf9nYcn9TYSBu+/OHoYTD+b+tn
+	 ks+/rKTqf0SI8YAETZNG+haXBEJ4BRAh2RH/BxlDSJrkVa6HnyBW0kcSNnBBoy7CUp
+	 5BPx1t+ZVNgApJsSZD4RMAASI51pHkOETF3mioaQmmVAsUyEAOg1tMhcPBqkH8Thby
+	 wxImQkHL5ysMRVutJD0cObrkNtccIx/p7e2xTQ+okr7QmCRsn6MO9FH8uCHNqV/Kz6
+	 U4Y04OIiQYHmw==
+Date: Sat, 21 Feb 2026 23:12:39 -0800
+From: Kees Cook <kees@kernel.org>
+To: Eric Biggers <ebiggers@kernel.org>
 Cc: Vlastimil Babka <vbabka@suse.cz>, Julia Lawall <Julia.Lawall@inria.fr>,
 	Nicolas Palix <nicolas.palix@imag.fr>, cocci@inria.fr,
 	Linus Torvalds <torvalds@linux-foundation.org>,
@@ -79,9 +79,10 @@ Cc: Vlastimil Babka <vbabka@suse.cz>, Julia Lawall <Julia.Lawall@inria.fr>,
 	linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
 	linux-doc@vger.kernel.org, llvm@lists.linux.dev
 Subject: Re: [PATCH v6 5/5] coccinelle: Add kmalloc_objs conversion script
-Message-ID: <20260222041324.GA10695@sol>
+Message-ID: <202602212306.BC7A8E8F@keescook>
 References: <20251203233029.it.641-kees@kernel.org>
  <20251203233036.3212363-5-kees@kernel.org>
+ <20260222041324.GA10695@sol>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,7 +91,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251203233036.3212363-5-kees@kernel.org>
+In-Reply-To: <20260222041324.GA10695@sol>
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -98,11 +99,11 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76484-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76485-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -114,59 +115,74 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ebiggers@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[kees@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[inria.fr:email,imag.fr:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7BB5C16E77B
+	DBL_BLOCKED_OPENRESOLVER(0.00)[inria.fr:email,imag.fr:email]
+X-Rspamd-Queue-Id: 9D89D16E92A
 X-Rspamd-Action: no action
 
-On Wed, Dec 03, 2025 at 03:30:35PM -0800, Kees Cook wrote:
-> Finds and converts sized kmalloc-family of allocations into the
-> typed kmalloc_obj-family of allocations.
+On Sat, Feb 21, 2026 at 08:13:24PM -0800, Eric Biggers wrote:
+> On Wed, Dec 03, 2025 at 03:30:35PM -0800, Kees Cook wrote:
+> > Finds and converts sized kmalloc-family of allocations into the
+> > typed kmalloc_obj-family of allocations.
+> > 
+> > Signed-off-by: Kees Cook <kees@kernel.org>
+> > ---
+> > Cc: Julia Lawall <Julia.Lawall@inria.fr>
+> > Cc: Nicolas Palix <nicolas.palix@imag.fr>
+> > Cc: cocci@inria.fr
+> > ---
+> >  scripts/coccinelle/api/kmalloc_objs.cocci | 109 ++++++++++++++++++++++
+> >  1 file changed, 109 insertions(+)
+> >  create mode 100644 scripts/coccinelle/api/kmalloc_objs.cocci
 > 
-> Signed-off-by: Kees Cook <kees@kernel.org>
-> ---
-> Cc: Julia Lawall <Julia.Lawall@inria.fr>
-> Cc: Nicolas Palix <nicolas.palix@imag.fr>
-> Cc: cocci@inria.fr
-> ---
->  scripts/coccinelle/api/kmalloc_objs.cocci | 109 ++++++++++++++++++++++
->  1 file changed, 109 insertions(+)
->  create mode 100644 scripts/coccinelle/api/kmalloc_objs.cocci
+> Is there a way to reproduce commit 69050f8d6d075dc using this semantic
+> patch as claimed?  I spend a while installing the latest version of
+> spatch (which was quite hard to do due to all the unusual dependencies),
+> but it complains that no rules apply:
+> 
+> $ /usr/local/bin/spatch --sp-file scripts/coccinelle/api/kmalloc_objs.cocci --dir . --in-place
+> init_defs_builtins: /usr/local/lib/coccinelle/standard.h
+> SPECIAL NAMES: adding u8 as a type
+> SPECIAL NAMES: adding u16 as a type
+> SPECIAL NAMES: adding u32 as a type
+> SPECIAL NAMES: adding u64 as a type
+> SPECIAL NAMES: adding __u8 as a type
+> SPECIAL NAMES: adding __u16 as a type
+> SPECIAL NAMES: adding __u32 as a type
+> SPECIAL NAMES: adding __u64 as a type
+> SPECIAL NAMES: adding uint8_t as a type
+> SPECIAL NAMES: adding uint16_t as a type
+> SPECIAL NAMES: adding uint32_t as a type
+> SPECIAL NAMES: adding uint64_t as a type
+> SPECIAL NAMES: adding uchar as a type
+> SPECIAL NAMES: adding ushort as a type
+> SPECIAL NAMES: adding uint as a type
+> SPECIAL NAMES: adding ulong as a type
+> SPECIAL NAMES: adding __le16 as a type
+> SPECIAL NAMES: adding __le32 as a type
+> SPECIAL NAMES: adding __le64 as a type
+> SPECIAL NAMES: adding __be16 as a type
+> SPECIAL NAMES: adding __be32 as a type
+> SPECIAL NAMES: adding __be64 as a type
+> SPECIAL NAMES: adding wchar_t as a type
+> No rules apply.  Perhaps your semantic patch doesn't contain any +/-/* code, or you have a failed dependency.  If the problem is not clear, try --debug-parse-cocci or check whether any virtual rules (e.g., patch) should be defined.
 
-Is there a way to reproduce commit 69050f8d6d075dc using this semantic
-patch as claimed?  I spend a while installing the latest version of
-spatch (which was quite hard to do due to all the unusual dependencies),
-but it complains that no rules apply:
+I'm running:
 
-$ /usr/local/bin/spatch --sp-file scripts/coccinelle/api/kmalloc_objs.cocci --dir . --in-place
-init_defs_builtins: /usr/local/lib/coccinelle/standard.h
-SPECIAL NAMES: adding u8 as a type
-SPECIAL NAMES: adding u16 as a type
-SPECIAL NAMES: adding u32 as a type
-SPECIAL NAMES: adding u64 as a type
-SPECIAL NAMES: adding __u8 as a type
-SPECIAL NAMES: adding __u16 as a type
-SPECIAL NAMES: adding __u32 as a type
-SPECIAL NAMES: adding __u64 as a type
-SPECIAL NAMES: adding uint8_t as a type
-SPECIAL NAMES: adding uint16_t as a type
-SPECIAL NAMES: adding uint32_t as a type
-SPECIAL NAMES: adding uint64_t as a type
-SPECIAL NAMES: adding uchar as a type
-SPECIAL NAMES: adding ushort as a type
-SPECIAL NAMES: adding uint as a type
-SPECIAL NAMES: adding ulong as a type
-SPECIAL NAMES: adding __le16 as a type
-SPECIAL NAMES: adding __le32 as a type
-SPECIAL NAMES: adding __le64 as a type
-SPECIAL NAMES: adding __be16 as a type
-SPECIAL NAMES: adding __be32 as a type
-SPECIAL NAMES: adding __be64 as a type
-SPECIAL NAMES: adding wchar_t as a type
-No rules apply.  Perhaps your semantic patch doesn't contain any +/-/* code, or you have a failed dependency.  If the problem is not clear, try --debug-parse-cocci or check whether any virtual rules (e.g., patch) should be defined.
+$ spatch --version
+spatch version 1.1.1-00467-g578998d7826c compiled with OCaml version 4.13.1
+
+Running Coccinelle scripts is normally done with the coccicheck target:
+
+$ make coccicheck V=1 MODE=patch COCCI=scripts/coccinelle/api/kmalloc_objs.cocci
+
+-Kees
+
+-- 
+Kees Cook
 
