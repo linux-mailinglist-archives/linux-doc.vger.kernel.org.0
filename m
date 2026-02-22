@@ -1,176 +1,274 @@
-Return-Path: <linux-doc+bounces-76498-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76500-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yNapAuZUm2kVyQMAu9opvQ
-	(envelope-from <linux-doc+bounces-76498-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 20:11:34 +0100
+	id eVtGAhZ0m2lXzwMAu9opvQ
+	(envelope-from <linux-doc+bounces-76500-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 22:24:38 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98728170239
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 20:11:33 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D79D1706B3
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 22:24:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D8E263007508
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 19:11:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D821C300E3B2
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Feb 2026 21:24:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E11F359705;
-	Sun, 22 Feb 2026 19:11:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D7F02222AC;
+	Sun, 22 Feb 2026 21:24:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="C+740L7Z"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="BSwc8IGy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C8BB2749DC
-	for <linux-doc@vger.kernel.org>; Sun, 22 Feb 2026 19:11:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.178
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771787491; cv=pass; b=raRLVlvc1qD1UCWBwA/QiyZS0jXOY/gvNou02dshdzfSvPXK287Hj3fskZrLLa9I6HSxvMrmeHicfbZ/5QguXAkfQsNaywLuaPdbtBzAJn1lDSWwOnG5rOi6j9FbMNZxD6QmyPnAkkdqs+I8jHypsZXGQyHFkyGxZMLTcI8HqoU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771787491; c=relaxed/simple;
-	bh=s/YD0OLVc6+h/cuK+yNzdFi8vPgttaGJW9YhqP9hbDA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=nQMym8/67B++PTwY6pQYi1G0omCjj2VSZ1kd3r77G71bj2W80Al9zCO9mibIdQpImYvJrZeAEEToXPusMESVOhf++JSs6XVbg+6axJ5k/OSgs/tkPTL4QDmcwhtfz93r/lGTkhbx/JLZzDq1TGmMBWDDmQPSaF3BjE14g20tZHo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=C+740L7Z; arc=pass smtp.client-ip=74.125.82.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-2ba7eb6022eso73349eec.1
-        for <linux-doc@vger.kernel.org>; Sun, 22 Feb 2026 11:11:30 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771787489; cv=none;
-        d=google.com; s=arc-20240605;
-        b=G+q+XFJksulxBXzh7zliClI7WbzwLeOK0Tt5U/jvLEIDSweSR5ISVHQi+WJ957SkLy
-         grDnOktL34N9iZEWt1eKXPr2KR3xH4QrVxwYgE/cIW0F2MnmCN6iOBWokS1gIw7LQ3jg
-         Mab3k6FFEHAbcQncpiatE6ra+NR8UBV7P0JjLuQB++XZ7T2ns1KOcvW2mSi+XY6FaIFY
-         i1zDq59RRykBChtDqV0KrWoUOUq3jwcl8b/ZTT9V2Ka5vWCoAqjdz23Ih1iE+q6qfx1t
-         NPOA9kCknIGQPPb67GjhJ47zGZ2ppOr7jcQU9ME2AnQtOg+W2uJi/Kr9y5zVnc/esnXf
-         /Xbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=YEfRoAIWjupjNUOZFtJHLhbd771aYMAh/CpJMSay5VU=;
-        fh=+mg2Hh6zfdk0lQmp32G/+wS5oBzrqQHVPUlkycH/cIs=;
-        b=RsPP2rsLTbt0PlhAkVBk/uxXtTnro7oiRgxauaJ/Ir+Dqrw1zvXgSBmCveTT5sqxI9
-         8HSj3eo5jbmak1oUO9f+fUh4PnWgkB0yT8w3QUAcO5yFI1L+Zp04hCrsEu6iN6AIYe7g
-         P9amjzd6qg6uDsJQIpf56AgFigtV63/CAd4qD5kTSv/YYtPTpMtVNiQTh7yUPtiicksm
-         KulRKP3vUYPC9E7uce5S7Mm0ragv7+BAnmSyK87djtcv/EYtnqDnBoEN+RQvDOIz8PDA
-         hvg6nMfXXElJAQ6uivZQabzoqph53bSZSLtBMoCJTLdwFoCF7p5znkg3tYwhD6S2A6GA
-         qS7A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771787489; x=1772392289; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YEfRoAIWjupjNUOZFtJHLhbd771aYMAh/CpJMSay5VU=;
-        b=C+740L7ZI+ARrHZpUBT4/Bzp7+mcOI9e4c8rOOKNCos7cPFrHt1dVuimCMbzVXJz0j
-         Z7PMhyPsndmkPw+KUtxGyDN+nnow1wlJzbiS9MfwB4x7IOoyZuRi+51VKALc+o48IP2p
-         ASLsT13DTq+zvp35lzvjGeD8YRffLJtofHelrve6QXioAS2b4ryls2xnYN06U15aFE0t
-         VPKJz8dSNbNCcz9M+KWYfnGHpvmUTssvKC7NKhjMz6GgYPNK83sSztx7lVqZ/4xLY2YM
-         5p6OwXoP05urEJjMRVP1zHqSKcc+sZdgiw7s9A1M2ZZQLjQ+QIFU2FLEK9usHxoKh654
-         +FBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771787489; x=1772392289;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=YEfRoAIWjupjNUOZFtJHLhbd771aYMAh/CpJMSay5VU=;
-        b=n7IW1ejDNCtx5MuFnlkBFxjYzLnG8W6xwmi4H1xbSSxrzAZ0vDaEWM8xbXPy6QY8rK
-         woucN0sSVSyjLrxaHcpC60ddrUXNdcd6cVLFiI/+xNh7lgfzck9W0qTsT6uKdNXv0rHO
-         toOyWew1QVbW27CpJsWoRIwy6iEenzURsHaBpu3jIjWqYAalDqCuo6JyHg6F/HK1DiE/
-         k/CbIrgpUhvBj5yVAAyl4JgIkB3DVGSKDiVH278ysxbtKhXk4DuWOIc7vR/a401lG0l0
-         UvfxJcSXPwZ7LwgUl6ambz9PX6I+GXZuAdI5uUga+BHiMdEGoDwhnKukB/tubiBdntRM
-         UuKQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV14WBxscRZAKichrizZZbavJBXfX8NEj/OxoHbeVsy+CTUqh2kpU2gOptbnt46jSeXj4ZO0zr11TE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxuveqrerzssrr88hVm0p0laK0uIPYYhgCRvQ7hWcrfnLQcU96I
-	v2i1zL1fwdo7fCOXDOqFM3H5/MnLdtyKr4arHGntMZ/NpOiFN7Tek3MJ+AWOguwy0+LcUusn31n
-	VpnX/j3Xe1eJlwrJVA+9+tGAd+hpL10A=
-X-Gm-Gg: AZuq6aLuUJp/hyPxBIJ4AsLOEiPipOqmBgSRxg4LrRF+Y4ZgVcnbSAqRlrjooxRFzAQ
-	3Wh+u2VHGcOvMKeHA4ejKBx0pFcS9XyaHxnKfmctxAEUeHgMbIkCin6bGenqhO74Viwk+M828xT
-	knJUkesEnp0bEEcWLa6MQtSOUp7PERmSiK00m7pfdVa+h+gylr+Xj26FqdLKwNugIeANErbhB0H
-	7iYHy6aWJ3BZR+RXPi9WDfj1QccRsZBBsNeCjJKC2n/JSDjfndYOKtAN1IQHR5XnYHyY3Xz8jiX
-	80s+UoONlZr/fJ05bjZyxC963YXbKyvVX27A4NZ7YuQbD4+xHlUXOEqEIqJNjmvjT96gU9RtZDu
-	xzzO/hIWV/g5hovifNQlmKlmxHkjkPAn1XPs=
-X-Received: by 2002:a05:693c:25c7:b0:2b7:f145:a70 with SMTP id
- 5a478bee46e88-2bd7b9ed182mr1491522eec.1.1771787489452; Sun, 22 Feb 2026
- 11:11:29 -0800 (PST)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDF011A2C04;
+	Sun, 22 Feb 2026 21:24:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771795474; cv=none; b=dmuUICgjCqzVNOPpdrj0s/rTNu+TIsUP8b7lFonAzWDA6uPS+Bn3kMrmFJ4Tby6mZrRQZTM/34GeyrNY7ZJMNh5C47goz2IzJFCxJMXoYYHXtifBNpnoH8Jk5r+y14P05TD0Snw/YJVO9UpOBy6ictB/eMeBP1mvCVP6IDv41lk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771795474; c=relaxed/simple;
+	bh=bkgGI2WMJRUrC6413r99xgdbIc0+f+gsulT3sQyzjYM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XQKNwCxd3wH2Y2pNskGQw5NCV/W/xNZ623Qmhl02+dTYKpHgWXpWk5lIHERvLJXes2+4Q2JHXk5davTFncQEwsGWrVlbC4OWN4PPPcG8ckVk6uJXOktD6kbiCrq1T6y90nQKrCuXCxSdprhs55JQkqX+pcR5lPYldzHZEr4QSF4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=BSwc8IGy; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: by linux.microsoft.com (Postfix, from userid 1006)
+	id C5AEB20B6F00; Sun, 22 Feb 2026 13:24:26 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C5AEB20B6F00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1771795466;
+	bh=Cu9vE1o/2Xdjq6JTuKE+z+eMXOB+YTsvz8yR1vX+7Zc=;
+	h=From:To:Cc:Subject:Date:From;
+	b=BSwc8IGybxHSGkEOrdo8uvHOdRLVVIqIt0fY6NdFCO4XSVTLElTy+h/wnjhv/Usn4
+	 1dLgFB0TuenW3gpaCWl1rg2WPS9erk3qXTdI5ZE54Uc7l6OkjLP9ORptyU1mWn8KdG
+	 OFVhSj8KR+Omgc5tEVGhMYnJdeR2GFdKwXD+KJNE=
+From: Haiyang Zhang <haiyangz@linux.microsoft.com>
+To: linux-hyperv@vger.kernel.org,
+	netdev@vger.kernel.org,
+	Andrew Lunn <andrew@lunn.ch>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"Kory Maincent (Dent Project)" <kory.maincent@bootlin.com>,
+	Gal Pressman <gal@nvidia.com>,
+	Oleksij Rempel <o.rempel@pengutronix.de>,
+	Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: haiyangz@microsoft.com,
+	paulros@microsoft.com
+Subject: [PATCH net-next] net: ethtool: add COALESCE_RX_CQE_FRAMES/NSECS parameters
+Date: Sun, 22 Feb 2026 13:23:17 -0800
+Message-ID: <20260222212328.736628-1-haiyangz@linux.microsoft.com>
+X-Mailer: git-send-email 2.43.7
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260210090023.2587534-1-mkchauras@gmail.com> <20260210090023.2587534-3-mkchauras@gmail.com>
- <CAH5fLgi3Owm4=4g8wQ5Rnr7Y63XJ1D8apOdkewW6WpRfg6vV_w@mail.gmail.com> <aZtT4MH0Q8Ic9ZiM@luna>
-In-Reply-To: <aZtT4MH0Q8Ic9ZiM@luna>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 22 Feb 2026 20:11:17 +0100
-X-Gm-Features: AaiRm53bLm8BaSMJ6yUOF3BzlMMZn0BBot3u7XXipnBmPLeFtS2Lh6iTAtxhJHc
-Message-ID: <CANiq72nEam8n_daX5LyYrpH=i71k+pb+HLn6EEPdJJc-Zi9Q3A@mail.gmail.com>
-Subject: Re: [PATCH V6 2/3] rust: Add PowerPC support
-To: Link Mauve <linkmauve@linkmauve.fr>
-Cc: Alice Ryhl <aliceryhl@google.com>, 
-	"Mukesh Kumar Chaurasiya (IBM)" <mkchauras@gmail.com>, ojeda@kernel.org, boqun.feng@gmail.com, 
-	gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, 
-	a.hindborg@kernel.org, tmgross@umich.edu, dakr@kernel.org, corbet@lwn.net, 
-	maddy@linux.ibm.com, mpe@ellerman.id.au, npiggin@gmail.com, 
-	chleroy@kernel.org, peterz@infradead.org, jpoimboe@kernel.org, 
-	jbaron@akamai.com, rostedt@goodmis.org, ardb@kernel.org, 
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-76500-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76498-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[vger.kernel.org,lunn.ch,kernel.org,gmail.com,davemloft.net,google.com,redhat.com,lwn.net,linuxfoundation.org,bootlin.com,nvidia.com,pengutronix.de,linux.dev];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FREEMAIL_CC(0.00)[google.com,gmail.com,kernel.org,garyguo.net,protonmail.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[linux.microsoft.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[haiyangz@linux.microsoft.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 98728170239
+	NEURAL_HAM(-0.00)[-0.998];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2D79D1706B3
 X-Rspamd-Action: no action
 
-On Sun, Feb 22, 2026 at 8:07=E2=80=AFPM Link Mauve <linkmauve@linkmauve.fr>=
- wrote:
->
-> Should we come back to describing the target like I did in my first
-> patch[1] in scripts/generate_rust_target.rs, or should I bring that to
-> Rust to create a powerpc-unknown-unknown-softfloat target upstream?  Or
-> is there a better third solution I=E2=80=99m not thinking of?
+From: Haiyang Zhang <haiyangz@microsoft.com>
 
-We are trying to stop using the custom target specs, so we should ask
-upstream to give you a built-in target you can use (or equivalently, a
-flag to do what you need, but I think the idea is to not have such a
-flag).
+Add two parameters for drivers supporting Rx CQE Coalescing.
 
-i.e. even if you used the custom target JSON, we would still need to
-ask, since the goal is to remove that script entirely.
+ETHTOOL_A_COALESCE_RX_CQE_FRAMES:
+Maximum number of frames that can be coalesced into a CQE.
 
-Thanks!
+ETHTOOL_A_COALESCE_RX_CQE_NSECS:
+Time out value in nanoseconds after the first packet arrival in a
+coalesced CQE to be sent.
 
-Cheers,
-Miguel
+Signed-off-by: Haiyang Zhang <haiyangz@microsoft.com>
+---
+ Documentation/netlink/specs/ethtool.yaml       |  8 ++++++++
+ Documentation/networking/ethtool-netlink.rst   | 10 ++++++++++
+ include/linux/ethtool.h                        |  6 +++++-
+ include/uapi/linux/ethtool_netlink_generated.h |  2 ++
+ net/ethtool/coalesce.c                         | 14 +++++++++++++-
+ 5 files changed, 38 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/netlink/specs/ethtool.yaml b/Documentation/netlink/specs/ethtool.yaml
+index 0a2d2343f79a..951d98f6bb12 100644
+--- a/Documentation/netlink/specs/ethtool.yaml
++++ b/Documentation/netlink/specs/ethtool.yaml
+@@ -861,6 +861,12 @@ attribute-sets:
+         name: tx-profile
+         type: nest
+         nested-attributes: profile
++      -
++        name: rx-cqe-frames
++        type: u32
++      -
++        name: rx-cqe-nsecs
++        type: u32
+ 
+   -
+     name: pause-stat
+@@ -2244,6 +2250,8 @@ operations:
+             - tx-aggr-time-usecs
+             - rx-profile
+             - tx-profile
++            - rx-cqe-frames
++            - rx-cqe-nsecs
+       dump: *coalesce-get-op
+     -
+       name: coalesce-set
+diff --git a/Documentation/networking/ethtool-netlink.rst b/Documentation/networking/ethtool-netlink.rst
+index af56c304cef4..a3e78b69fd07 100644
+--- a/Documentation/networking/ethtool-netlink.rst
++++ b/Documentation/networking/ethtool-netlink.rst
+@@ -1072,6 +1072,8 @@ Kernel response contents:
+   ``ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS``    u32     time (us), aggr, Tx
+   ``ETHTOOL_A_COALESCE_RX_PROFILE``            nested  profile of DIM, Rx
+   ``ETHTOOL_A_COALESCE_TX_PROFILE``            nested  profile of DIM, Tx
++  ``ETHTOOL_A_COALESCE_RX_CQE_FRAMES``         u32     max packets, Rx CQE
++  ``ETHTOOL_A_COALESCE_RX_CQE_NSECS``          u32     delay (ns), Rx CQE
+   ===========================================  ======  =======================
+ 
+ Attributes are only included in reply if their value is not zero or the
+@@ -1105,6 +1107,12 @@ well with frequent small-sized URBs transmissions.
+ to DIM parameters, see `Generic Network Dynamic Interrupt Moderation (Net DIM)
+ <https://www.kernel.org/doc/Documentation/networking/net_dim.rst>`_.
+ 
++Rx CQE coalescing allows multiple received packets to be coalesced into a single
++Completion Queue Entry (CQE). ``ETHTOOL_A_COALESCE_RX_CQE_FRAMES`` describes the
++maximum number of frames that can be coalesced into a CQE.
++``ETHTOOL_A_COALESCE_RX_CQE_NSECS`` describes max time in nanoseconds after the
++first packet arrival in a coalesced CQE to be sent.
++
+ COALESCE_SET
+ ============
+ 
+@@ -1143,6 +1151,8 @@ Request contents:
+   ``ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS``    u32     time (us), aggr, Tx
+   ``ETHTOOL_A_COALESCE_RX_PROFILE``            nested  profile of DIM, Rx
+   ``ETHTOOL_A_COALESCE_TX_PROFILE``            nested  profile of DIM, Tx
++  ``ETHTOOL_A_COALESCE_RX_CQE_FRAMES``         u32     max packets, Rx CQE
++  ``ETHTOOL_A_COALESCE_RX_CQE_NSECS``          u32     delay (ns), Rx CQE
+   ===========================================  ======  =======================
+ 
+ Request is rejected if it attributes declared as unsupported by driver (i.e.
+diff --git a/include/linux/ethtool.h b/include/linux/ethtool.h
+index 798abec67a1b..25ccd2d5d4dc 100644
+--- a/include/linux/ethtool.h
++++ b/include/linux/ethtool.h
+@@ -332,6 +332,8 @@ struct kernel_ethtool_coalesce {
+ 	u32 tx_aggr_max_bytes;
+ 	u32 tx_aggr_max_frames;
+ 	u32 tx_aggr_time_usecs;
++	u32 rx_cqe_frames;
++	u32 rx_cqe_nsecs;
+ };
+ 
+ /**
+@@ -380,7 +382,9 @@ bool ethtool_convert_link_mode_to_legacy_u32(u32 *legacy_u32,
+ #define ETHTOOL_COALESCE_TX_AGGR_TIME_USECS	BIT(26)
+ #define ETHTOOL_COALESCE_RX_PROFILE		BIT(27)
+ #define ETHTOOL_COALESCE_TX_PROFILE		BIT(28)
+-#define ETHTOOL_COALESCE_ALL_PARAMS		GENMASK(28, 0)
++#define ETHTOOL_COALESCE_RX_CQE_FRAMES		BIT(29)
++#define ETHTOOL_COALESCE_RX_CQE_NSECS		BIT(30)
++#define ETHTOOL_COALESCE_ALL_PARAMS		GENMASK(30, 0)
+ 
+ #define ETHTOOL_COALESCE_USECS						\
+ 	(ETHTOOL_COALESCE_RX_USECS | ETHTOOL_COALESCE_TX_USECS)
+diff --git a/include/uapi/linux/ethtool_netlink_generated.h b/include/uapi/linux/ethtool_netlink_generated.h
+index 556a0c834df5..efc6e4ade77b 100644
+--- a/include/uapi/linux/ethtool_netlink_generated.h
++++ b/include/uapi/linux/ethtool_netlink_generated.h
+@@ -371,6 +371,8 @@ enum {
+ 	ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS,
+ 	ETHTOOL_A_COALESCE_RX_PROFILE,
+ 	ETHTOOL_A_COALESCE_TX_PROFILE,
++	ETHTOOL_A_COALESCE_RX_CQE_FRAMES,
++	ETHTOOL_A_COALESCE_RX_CQE_NSECS,
+ 
+ 	__ETHTOOL_A_COALESCE_CNT,
+ 	ETHTOOL_A_COALESCE_MAX = (__ETHTOOL_A_COALESCE_CNT - 1)
+diff --git a/net/ethtool/coalesce.c b/net/ethtool/coalesce.c
+index 3e18ca1ccc5e..349bb02c517a 100644
+--- a/net/ethtool/coalesce.c
++++ b/net/ethtool/coalesce.c
+@@ -118,6 +118,8 @@ static int coalesce_reply_size(const struct ethnl_req_info *req_base,
+ 	       nla_total_size(sizeof(u32)) +	/* _TX_AGGR_MAX_BYTES */
+ 	       nla_total_size(sizeof(u32)) +	/* _TX_AGGR_MAX_FRAMES */
+ 	       nla_total_size(sizeof(u32)) +	/* _TX_AGGR_TIME_USECS */
++	       nla_total_size(sizeof(u32)) +	/* _RX_CQE_FRAMES */
++	       nla_total_size(sizeof(u32)) +	/* _RX_CQE_NSECS */
+ 	       total_modersz * 2;		/* _{R,T}X_PROFILE */
+ }
+ 
+@@ -269,7 +271,11 @@ static int coalesce_fill_reply(struct sk_buff *skb,
+ 	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES,
+ 			     kcoal->tx_aggr_max_frames, supported) ||
+ 	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS,
+-			     kcoal->tx_aggr_time_usecs, supported))
++			     kcoal->tx_aggr_time_usecs, supported) ||
++	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_RX_CQE_FRAMES,
++			     kcoal->rx_cqe_frames, supported) ||
++	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_RX_CQE_NSECS,
++			     kcoal->rx_cqe_nsecs, supported))
+ 		return -EMSGSIZE;
+ 
+ 	if (!req_base->dev || !req_base->dev->irq_moder)
+@@ -338,6 +344,8 @@ const struct nla_policy ethnl_coalesce_set_policy[] = {
+ 	[ETHTOOL_A_COALESCE_TX_AGGR_MAX_BYTES] = { .type = NLA_U32 },
+ 	[ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES] = { .type = NLA_U32 },
+ 	[ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS] = { .type = NLA_U32 },
++	[ETHTOOL_A_COALESCE_RX_CQE_FRAMES] = { .type = NLA_U32 },
++	[ETHTOOL_A_COALESCE_RX_CQE_NSECS] = { .type = NLA_U32 },
+ 	[ETHTOOL_A_COALESCE_RX_PROFILE] =
+ 		NLA_POLICY_NESTED(coalesce_profile_policy),
+ 	[ETHTOOL_A_COALESCE_TX_PROFILE] =
+@@ -570,6 +578,10 @@ __ethnl_set_coalesce(struct ethnl_req_info *req_info, struct genl_info *info,
+ 			 tb[ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES], &mod);
+ 	ethnl_update_u32(&kernel_coalesce.tx_aggr_time_usecs,
+ 			 tb[ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS], &mod);
++	ethnl_update_u32(&kernel_coalesce.rx_cqe_frames,
++			 tb[ETHTOOL_A_COALESCE_RX_CQE_FRAMES], &mod);
++	ethnl_update_u32(&kernel_coalesce.rx_cqe_nsecs,
++			 tb[ETHTOOL_A_COALESCE_RX_CQE_NSECS], &mod);
+ 
+ 	if (dev->irq_moder && dev->irq_moder->profile_flags & DIM_PROFILE_RX) {
+ 		ret = ethnl_update_profile(dev, &dev->irq_moder->rx_profile,
+-- 
+2.34.1
+
 
