@@ -1,227 +1,299 @@
-Return-Path: <linux-doc+bounces-76556-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76552-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WP6/B8s7nGlCBgQAu9opvQ
-	(envelope-from <linux-doc+bounces-76556-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 12:36:43 +0100
+	id wKxOF684nGlCBgQAu9opvQ
+	(envelope-from <linux-doc+bounces-76552-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 12:23:27 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 455E1175984
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 12:36:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEC2D175709
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 12:23:26 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id A32DB302146E
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 11:36:39 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E35563023D79
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 11:23:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C504362121;
-	Mon, 23 Feb 2026 11:36:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0FA2936164A;
+	Mon, 23 Feb 2026 11:23:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cab.de header.i=@cab.de header.b="RUkBlseO"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="ey8Oc4N/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx08-007fc201.pphosted.com (mx08-007fc201.pphosted.com [91.207.212.40])
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFC6B1ACEDE;
-	Mon, 23 Feb 2026 11:36:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.207.212.40
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771846596; cv=none; b=CGP4TYDHbapGfXVqxboqfz9puxgPNdIXwrNmidiGNTzsENLVEg1l4GEr8IWXO40rBwT1MhdccMTbCkfW1aARJmdkH8r2MfOPG2KF/RdtzfhU3BXRuYdbcCub+ZjYoYgLI2biXVsAa3Nby0jyV+b7ZhbMIvm06RMW6Hk5cm7Gzuk=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771846596; c=relaxed/simple;
-	bh=oxFl4PoAqx7YUdTUv0y7BupZwpZjtn5xeK5UvZWPQGk=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=slkW5UTbAwX8vSCf20HdN06SuxAZtQaIsMLZFW7NQkyV6rx/jh6ZyDMx8esOrJOV47egZEiEXvHnyt+2RH8pcQzmw31seZJVukZOmTQZ9L/D6WYVDEMU3DPJ/oOKLlbogUZVJpVLYa0EAah+DMuCbnFoI9NYmqP+pH0Qn76OUqQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=cab.de; spf=pass smtp.mailfrom=cab.de; dkim=pass (2048-bit key) header.d=cab.de header.i=@cab.de header.b=RUkBlseO; arc=none smtp.client-ip=91.207.212.40
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=cab.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cab.de
-Received: from pps.filterd (m0456229.ppops.net [127.0.0.1])
-	by mx08-007fc201.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NB1UDv3066866;
-	Mon, 23 Feb 2026 12:13:19 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cab.de; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=pp-2025; bh=CqpwoGjLfHtoyJL/hsV1/+p3
-	lBtiWRUIOOw8sOlMBbA=; b=RUkBlseOFx0nwa0dO5tGQ5E37sDOF3BViDaB4Nri
-	QGEX+iIo2Y7HzU3L2vzaOZrqBs/MM9mdL8wietnMFOIZ4w9T9LooQGFqANbxLEyq
-	0cvzu297J072Nh7OW3jVZa6zbb/SRLGgdn5bTa/Sw04MZYhGTJENOCUfxHpHaEKY
-	OfqZwqbcAvvgeaH3EeZO0iolIhHqZkhxTH04y4c4zS1jtZnMAnsrlNBPQiOSugjj
-	i/0GfnVzma9acR685FGGbbxcdmx0/N5hFRNQU8ZklTtOTq7pFNL4n7Mxdlob8yzc
-	CT+ZPOniSVR6sZNsM6yt3Ec8Fqxa1d6+9w3fcp1ARxWwJA==
-Received: from adranos.cab.de (adranos.cab.de [46.232.229.107])
-	by mx08-007fc201.pphosted.com (PPS) with ESMTPS id 4cfspm8djj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 23 Feb 2026 12:13:19 +0100 (CET)
-Received: from KAN23-025.cab.de (10.100.0.16) by Adranos.cab.de (10.10.1.54)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 23 Feb
- 2026 12:13:18 +0100
-From: Markus Heidelberg <m.heidelberg@cab.de>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Alex Shi <alexs@kernel.org>,
-        Yanteng Si
-	<si.yanteng@linux.dev>, Jonathan Corbet <corbet@lwn.net>
-CC: Markus Heidelberg <m.heidelberg@cab.de>, Dongliang Mu <dzm91@hust.edu.cn>,
-        Shuah Khan <skhan@linuxfoundation.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-Subject: [PATCH] docs: dt: unittest: update to current unittest filenames
-Date: Mon, 23 Feb 2026 12:12:03 +0100
-Message-ID: <20260223111207.54640-1-m.heidelberg@cab.de>
-X-Mailer: git-send-email 2.43.0
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 920FE3612FF;
+	Mon, 23 Feb 2026 11:23:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771845787; cv=pass; b=F1jTfeXm0ZYV0JwRZZwAxPhV6SBCJoSiAV4/VqVQbnhMsmGtP9rGJMYi1i/8EmPdL3tpq9xBeSikvxRaGmMk7xzecGSRDjAg8ShvKJg6bRzow26Atih0kyln2j67qa3zQ2UDJTVAUu8YKa8Z1/fxrzC0TvaQKyuBiuq+7VOd4BI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771845787; c=relaxed/simple;
+	bh=Elj2ArRu/bcaDlVYIQVJGZs/iwEJCrtvAjdPiyDsCxQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=XzKmhtYUxvM4V0e+ui3PpGTuoAyJ6PHqffqyvXcM3S6J8yHguMfw3oqONl2SOHbjdcS1FaZolZY8YeUC+IOtfw3dMjj2SOM+jPtEofUA8JB1czz4vp1U7eAfhgx2pYaCIB/LTRUIF4msRyjTerTAM+NYR8ZbQ46chTlGYPlGO48=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=ey8Oc4N/; arc=pass smtp.client-ip=136.143.188.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1771845726; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=S2IB7ZD6DSdp0K9Cc0NBmF40o2LhuWVfCMBxDrxcFijbXLcaH0Lyf5O+2kZkLiznNdkANWcE+BWKHonsRq9KrsrbjcrODuvcKSNxIqKHvtuAbvhQuY8SR2HXpfIgKNQxPAR0kwT3+1adyLsr7+PsZ0/XmR6FDUPRTzuOt2Q3rRg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1771845726; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=zE1zLu6pL3uqgPGPzZfTY/83E+cY4Cd10iRFX9/SaOs=; 
+	b=Po53vDPX65HL6NClbbr3hhqP5yF7v8feEJRZ4aacu/eltttbeEFv2plJ6LJDIZFQ3ye/Yf/DnnD0kAORtkCD42bluLAxEQFl4MrlEVKBONaQE3/CtleL1546UG23I8FrPP7I7OKil6TwHw40C4Q84Y58qH6kwlEbMoRxjwnYajw=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
+	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1771845726;
+	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
+	bh=zE1zLu6pL3uqgPGPzZfTY/83E+cY4Cd10iRFX9/SaOs=;
+	b=ey8Oc4N/ijwyIwISAsnqyuzxwVpaDXPyWdOQrkVUmuNLUqcBICMAqwTs8Zyvf7Uk
+	V3SFa2egcB4yao+jcsR4TTgjiNmrdjggG0klVO2zrceXcT92E/POQQ6LygQdb1+w9tA
+	wV1bodCAlzCCpYR9uF+d/exsYpJDZf2sbF9djF+0=
+Received: by mx.zohomail.com with SMTPS id 1771845725129427.58768335061166;
+	Mon, 23 Feb 2026 03:22:05 -0800 (PST)
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
+ Rodrigo Siqueira <siqueira@igalia.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Sandy Huang <hjc@rock-chips.com>,
+ Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ linux-doc@vger.kernel.org
+Subject:
+ Re: [PATCH v8 13/20] drm/bridge: dw-hdmi-qp: Implement
+ atomic_get_output_bus_fmts
+Date: Mon, 23 Feb 2026 12:21:56 +0100
+Message-ID: <5968719.DvuYhMxLoT@workhorse>
+In-Reply-To: <ff7b531a-77c1-4c7d-b09d-47779b640193@collabora.com>
+References:
+ <20260216-color-format-v8-0-5722ce175dd5@collabora.com>
+ <20260216-color-format-v8-13-5722ce175dd5@collabora.com>
+ <ff7b531a-77c1-4c7d-b09d-47779b640193@collabora.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: Adranos.cab.de (10.10.1.54) To Adranos.cab.de (10.10.1.54)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDA5NyBTYWx0ZWRfX5m2dohKzn+x7
- KevsZ6iLO/MzNWUexxOwB1+w7NPUzrGgsaGKMBJSGbTLVcnVfk5XO2z+coy64AFrhYIqOgDAwfI
- 8HEN9ctPKQiFognpVnB0dCOqb4vzkXlAO1VeAypM2DciXXAKsB1VKPc7VR8aTS96IAVj80/ZvMX
- s9nSQMmUtwStuOjgPftym/6cvVjvoEYQqzCStcfkIuE5LuWWxXdVgnug9R2OaZnEJo0fvTdjenW
- +Sxj3azc9FNA68qDQM9xu9qlPqmpepN6bGPsYL5mhfMmy8sWzsNvraUPZZ2MX9An0w1SIQInkPf
- Xpw0clqimcCC+21OZvpyWPfvmDfiz+Wfp3kUT9ytRhPTkPSgSuZ2FhY0nyS3jodSdGb5mFyyTO4
- wvJ8pvUQH1zYAX0YAOW/4EKbWLg5RX1mdvqOSAEzIFtbtOBKBKp75Y90+FhE/amg4Ubaj6Ama52
- IcwyyetGw84bcc27dZw==
-X-Proofpoint-GUID: NNChiMEL02J-Q3ZQNuUw_jWHlMPnacJ_
-X-Authority-Analysis: v=2.4 cv=SPNPlevH c=1 sm=1 tr=0 ts=699c364f cx=c_pps
- a=LmW7qmVeM6tFdl5svFU9Cg==:117 a=LmW7qmVeM6tFdl5svFU9Cg==:17
- a=qfRZnU_letMA:10 a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10
- a=VkNPw1HP01LnGYTKEx00:22 a=cWcFGAZ52ywjfBe9x-Am:22 a=fhGH0ZMTm4w8Nt5gLHlq:22
- a=hDEah0MY560ib8Dcy1oA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: NNChiMEL02J-Q3ZQNuUw_jWHlMPnacJ_
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[cab.de,reject];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	CTE_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[cab.de:s=pp-2025];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76556-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,collabora.com];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-76552-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[m.heidelberg@cab.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[cab.de:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	NEURAL_HAM(-0.00)[-0.998];
+	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[collabora.com:+];
+	NEURAL_HAM(-0.00)[-0.997];
 	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 455E1175984
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: CEC2D175709
 X-Rspamd-Action: no action
 
-There have been several renamings and modified Make rules since
-introduction of this unittest document.
+On Sunday, 22 February 2026 11:42:39 Central European Standard Time Cristian Ciocaltea wrote:
+> Hi Nicolas,
+> 
+> On 2/16/26 3:01 PM, Nicolas Frattaroli wrote:
+> > The atomic_get_output_bus_fmts callback is used by the DRM bridge layer
+> > to recursively select a suitable output format in a bridge chain.
+> > 
+> > As a bridge that outputs to HDMI, dw-hdmi-qp will have its output
+> > formats determined by which formats the platform-specific integration of
+> > the hardware supports, and the chosen HDMI output bit depth.
+> > 
+> > Implement this callback. The returned u32* buffer is supposed to be
+> > freed by the caller of this callback, as specified by the callback's
+> > documentation.
+> > 
+> > Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> > ---
+> >  drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c | 178 +++++++++++++++++++++++++++
+> >  1 file changed, 178 insertions(+)
+> > 
+> > diff --git a/drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c b/drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c
+> > index d649a1cf07f5..4c00218e5fd7 100644
+> > --- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c
+> > +++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c
+> > @@ -11,6 +11,7 @@
+> >  #include <linux/export.h>
+> >  #include <linux/i2c.h>
+> >  #include <linux/irq.h>
+> > +#include <linux/media-bus-format.h>
+> >  #include <linux/minmax.h>
+> >  #include <linux/module.h>
+> >  #include <linux/mutex.h>
+> > @@ -749,6 +750,182 @@ static struct i2c_adapter *dw_hdmi_qp_i2c_adapter(struct dw_hdmi_qp *hdmi)
+> >  	return adap;
+> >  }
+> >  
+> > +static int dw_hdmi_qp_config_avi_infoframe(struct dw_hdmi_qp *hdmi,
+> > +					   const u8 *buffer, size_t len)
+> > +{
+> > +	u32 val, i, j;
+> > +
+> > +	if (len != HDMI_INFOFRAME_SIZE(AVI)) {
+> > +		dev_err(hdmi->dev, "failed to configure avi infoframe\n");
+> > +		return -EINVAL;
+> > +	}
+> > +
+> > +	/*
+> > +	 * DW HDMI QP IP uses a different byte format from standard AVI info
+> > +	 * frames, though generally the bits are in the correct bytes.
+> > +	 */
+> > +	val = buffer[1] << 8 | buffer[2] << 16;
+> > +	dw_hdmi_qp_write(hdmi, val, PKT_AVI_CONTENTS0);
+> > +
+> > +	for (i = 0; i < 4; i++) {
+> > +		for (j = 0; j < 4; j++) {
+> > +			if (i * 4 + j >= 14)
+> > +				break;
+> > +			if (!j)
+> > +				val = buffer[i * 4 + j + 3];
+> > +			val |= buffer[i * 4 + j + 3] << (8 * j);
+> > +		}
+> > +
+> > +		dw_hdmi_qp_write(hdmi, val, PKT_AVI_CONTENTS1 + i * 4);
+> > +	}
+> > +
+> > +	dw_hdmi_qp_mod(hdmi, 0, PKTSCHED_AVI_FIELDRATE, PKTSCHED_PKT_CONFIG1);
+> > +
+> > +	dw_hdmi_qp_mod(hdmi, PKTSCHED_AVI_TX_EN | PKTSCHED_GCP_TX_EN,
+> > +		       PKTSCHED_AVI_TX_EN | PKTSCHED_GCP_TX_EN, PKTSCHED_PKT_EN);
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +static int dw_hdmi_qp_config_drm_infoframe(struct dw_hdmi_qp *hdmi,
+> > +					   const u8 *buffer, size_t len)
+> > +{
+> > +	u32 val, i;
+> > +
+> > +	if (len != HDMI_INFOFRAME_SIZE(DRM)) {
+> > +		dev_err(hdmi->dev, "failed to configure drm infoframe\n");
+> > +		return -EINVAL;
+> > +	}
+> > +
+> > +	dw_hdmi_qp_mod(hdmi, 0, PKTSCHED_DRMI_TX_EN, PKTSCHED_PKT_EN);
+> > +
+> > +	val = buffer[1] << 8 | buffer[2] << 16;
+> > +	dw_hdmi_qp_write(hdmi, val, PKT_DRMI_CONTENTS0);
+> > +
+> > +	for (i = 0; i <= buffer[2]; i++) {
+> > +		if (i % 4 == 0)
+> > +			val = buffer[3 + i];
+> > +		val |= buffer[3 + i] << ((i % 4) * 8);
+> > +
+> > +		if ((i % 4 == 3) || i == buffer[2])
+> > +			dw_hdmi_qp_write(hdmi, val,
+> > +					 PKT_DRMI_CONTENTS1 + ((i / 4) * 4));
+> > +	}
+> > +
+> > +	dw_hdmi_qp_mod(hdmi, 0, PKTSCHED_DRMI_FIELDRATE, PKTSCHED_PKT_CONFIG1);
+> > +	dw_hdmi_qp_mod(hdmi, PKTSCHED_DRMI_TX_EN, PKTSCHED_DRMI_TX_EN,
+> > +		       PKTSCHED_PKT_EN);
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +/*
+> > + * Static values documented in the TRM
+> > + * Different values are only used for debug purposes
+> > + */
+> > +#define DW_HDMI_QP_AUDIO_INFOFRAME_HB1	0x1
+> > +#define DW_HDMI_QP_AUDIO_INFOFRAME_HB2	0xa
+> > +
+> > +static int dw_hdmi_qp_config_audio_infoframe(struct dw_hdmi_qp *hdmi,
+> > +					     const u8 *buffer, size_t len)
+> > +{
+> > +	/*
+> > +	 * AUDI_CONTENTS0: { RSV, HB2, HB1, RSV }
+> > +	 * AUDI_CONTENTS1: { PB3, PB2, PB1, PB0 }
+> > +	 * AUDI_CONTENTS2: { PB7, PB6, PB5, PB4 }
+> > +	 *
+> > +	 * PB0: CheckSum
+> > +	 * PB1: | CT3    | CT2  | CT1  | CT0  | F13  | CC2 | CC1 | CC0 |
+> > +	 * PB2: | F27    | F26  | F25  | SF2  | SF1  | SF0 | SS1 | SS0 |
+> > +	 * PB3: | F37    | F36  | F35  | F34  | F33  | F32 | F31 | F30 |
+> > +	 * PB4: | CA7    | CA6  | CA5  | CA4  | CA3  | CA2 | CA1 | CA0 |
+> > +	 * PB5: | DM_INH | LSV3 | LSV2 | LSV1 | LSV0 | F52 | F51 | F50 |
+> > +	 * PB6~PB10: Reserved
+> > +	 *
+> > +	 * AUDI_CONTENTS0 default value defined by HDMI specification,
+> > +	 * and shall only be changed for debug purposes.
+> > +	 */
+> > +	u32 header_bytes = (DW_HDMI_QP_AUDIO_INFOFRAME_HB1 << 8) |
+> > +			  (DW_HDMI_QP_AUDIO_INFOFRAME_HB2 << 16);
+> > +
+> > +	regmap_bulk_write(hdmi->regm, PKT_AUDI_CONTENTS0, &header_bytes, 1);
+> > +	regmap_bulk_write(hdmi->regm, PKT_AUDI_CONTENTS1, &buffer[3], 1);
+> > +	regmap_bulk_write(hdmi->regm, PKT_AUDI_CONTENTS2, &buffer[4], 1);
+> > +
+> > +	/* Enable ACR, AUDI, AMD */
+> > +	dw_hdmi_qp_mod(hdmi,
+> > +		       PKTSCHED_ACR_TX_EN | PKTSCHED_AUDI_TX_EN | PKTSCHED_AMD_TX_EN,
+> > +		       PKTSCHED_ACR_TX_EN | PKTSCHED_AUDI_TX_EN | PKTSCHED_AMD_TX_EN,
+> > +		       PKTSCHED_PKT_EN);
+> > +
+> > +	/* Enable AUDS */
+> > +	dw_hdmi_qp_mod(hdmi, PKTSCHED_AUDS_TX_EN, PKTSCHED_AUDS_TX_EN, PKTSCHED_PKT_EN);
+> > +
+> > +	return 0;
+> > +}
+> 
+> Something's wrong with this patch as all the functions above have been dropped
+> since the HDMI VSI & SPD InfoFrames series [1] got merged.  The previous
+> revision was fine though, hence that's likely an unexpected artifact of the
+> latest rebase.
 
-The file list in the Chinese translation had been extended.
-For a change to drivers/of/unittest-data/tests-*.dtsi surrounding
-translation has to be updated.
+Oops, yeah, I think I messed this up during rebase. Thanks for letting me know!
 
-Signed-off-by: Markus Heidelberg <m.heidelberg@cab.de>
----
- Documentation/devicetree/of_unittest.rst      | 20 +++++++++---------
- .../zh_CN/devicetree/of_unittest.rst          | 21 +++++++++++--------
- 2 files changed, 22 insertions(+), 19 deletions(-)
+> 
+> [1] https://lore.kernel.org/all/20260129-dw-hdmi-qp-iframe-v2-0-0157ad05232c@collabora.com/
+> 
 
-diff --git a/Documentation/devicetree/of_unittest.rst b/Documentation/devicetree/of_unittest.rst
-index 8b557acd29d1..6ed6e3291964 100644
---- a/Documentation/devicetree/of_unittest.rst
-+++ b/Documentation/devicetree/of_unittest.rst
-@@ -48,30 +48,30 @@ from 'scripts/dtc/of_unittest_expect --help'.
- 3. Test-data
- ============
- 
--The Device Tree Source file (drivers/of/unittest-data/testcases.dts) contains
-+The Device Tree Source file (drivers/of/unittest-data/testcases.dtso) contains
- the test data required for executing the unit tests automated in
- drivers/of/unittest.c. See the content of the folder::
- 
-     drivers/of/unittest-data/tests-*.dtsi
- 
--for the Device Tree Source Include files (.dtsi) included in testcases.dts.
-+for the Device Tree Source Include files (.dtsi) included in testcases.dtso.
- 
- When the kernel is built with CONFIG_OF_UNITTEST enabled, then the following make
- rule::
- 
--    $(obj)/%.dtb: $(src)/%.dts FORCE
--	    $(call if_changed_dep, dtc)
-+    $(obj)/%.dtbo: $(src)/%.dtso $(DTC) FORCE
-+	    $(call if_changed_dep,dtc)
- 
--is used to compile the DT source file (testcases.dts) into a binary blob
--(testcases.dtb), also referred as flattened DT.
-+is used to compile the DT source file (testcases.dtso) into a binary blob
-+(testcases.dtbo), also referred as flattened DT.
- 
- After that, using the following rule the binary blob above is wrapped as an
--assembly file (testcases.dtb.S)::
-+assembly file (testcases.dtbo.S)::
- 
--    $(obj)/%.dtb.S: $(obj)/%.dtb
--	    $(call cmd, dt_S_dtb)
-+    $(obj)/%.dtbo.S: $(obj)/%.dtbo FORCE
-+	    $(call if_changed,wrap_S_dtb)
- 
--The assembly file is compiled into an object file (testcases.dtb.o), and is
-+The assembly file is compiled into an object file (testcases.dtbo.o), and is
- linked into the kernel image.
- 
- 
-diff --git a/Documentation/translations/zh_CN/devicetree/of_unittest.rst b/Documentation/translations/zh_CN/devicetree/of_unittest.rst
-index 5c1a8e0cfd16..cfd0b751ef27 100644
---- a/Documentation/translations/zh_CN/devicetree/of_unittest.rst
-+++ b/Documentation/translations/zh_CN/devicetree/of_unittest.rst
-@@ -32,27 +32,30 @@ OF Selftest被设计用来测试提供给设备驱动开发者的接口（includ
- 2. 测试数据
- ===========
- 
--设备树源文件（drivers/of/unittest-data/testcases.dts）包含执行drivers/of/unittest.c
--中自动化单元测试所需的测试数据。目前，以下设备树源包含文件（.dtsi）被包含在testcases.dt中::
-+设备树源文件（drivers/of/unittest-data/testcases.dtso）包含执行drivers/of/unittest.c
-+中自动化单元测试所需的测试数据。目前，以下设备树源包含文件（.dtsi）被包含在testcases.dtso中::
- 
-     drivers/of/unittest-data/tests-interrupts.dtsi
-     drivers/of/unittest-data/tests-platform.dtsi
-     drivers/of/unittest-data/tests-phandle.dtsi
-     drivers/of/unittest-data/tests-match.dtsi
-+    drivers/of/unittest-data/tests-address.dtsi
-+    drivers/of/unittest-data/tests-overlay.dtsi
-+    drivers/of/unittest-data/tests-lifecycle.dtsi
- 
- 当内核在启用CONFIG_OF_UNITTEST的情况下被构建时，那么下面的make规则::
- 
--    $(obj)/%.dtb: $(src)/%.dts FORCE
--	    $(call if_changed_dep, dtc)
-+    $(obj)/%.dtbo: $(src)/%.dtso $(DTC) FORCE
-+	    $(call if_changed_dep,dtc)
- 
--用于将DT源文件（testcases.dts）编译成二进制blob（testcases.dtb），也被称为扁平化的DT。
-+用于将DT源文件（testcases.dtso）编译成二进制blob（testcases.dtbo），也被称为扁平化的DT。
- 
--之后，使用以下规则将上述二进制blob包装成一个汇编文件（testcases.dtb.S）::
-+之后，使用以下规则将上述二进制blob包装成一个汇编文件（testcases.dtbo.S）::
- 
--    $(obj)/%.dtb.S: $(obj)/%.dtb
--	    $(call cmd, dt_S_dtb)
-+    $(obj)/%.dtbo.S: $(obj)/%.dtbo FORCE
-+	    $(call if_changed,wrap_S_dtb)
- 
--汇编文件被编译成一个对象文件（testcases.dtb.o），并被链接到内核镜像中。
-+汇编文件被编译成一个对象文件（testcases.dtbo.o），并被链接到内核镜像中。
- 
- 
- 2.1. 添加测试数据
--- 
-2.43.0
+
+
 
 
