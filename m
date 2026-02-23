@@ -1,68 +1,74 @@
-Return-Path: <linux-doc+bounces-76591-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76592-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oGmLEO6KnGl8JQQAu9opvQ
-	(envelope-from <linux-doc+bounces-76591-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 18:14:22 +0100
+	id +DDrLHOKnGl8JQQAu9opvQ
+	(envelope-from <linux-doc+bounces-76592-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 18:12:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A391017A850
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 18:14:21 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4F0517A769
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 18:12:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6D007313D162
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 17:09:46 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 66D64300088C
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Feb 2026 17:09:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89CC432ED50;
-	Mon, 23 Feb 2026 17:09:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEDAC330311;
+	Mon, 23 Feb 2026 17:09:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="aBGsyHFQ"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="SzsotIPu"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 034E432939F;
-	Mon, 23 Feb 2026 17:09:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DB7D32F76D;
+	Mon, 23 Feb 2026 17:09:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771866570; cv=none; b=VD0prWCquaCBDoAL+1bpJPSHl541BlH+VQiZdw8L7ZdjhmGaceIKmdQLeN+5gX2yUYx3Hcdzh0XZaHKxqlX2j+1KRdaGWnYFj8ujWTLjNfST61fhi5EvkCjjs39utTSaCUzr3tVo6nNgBM+2t9LMBvybMiQwlCur0Jh/FaBPxe8=
+	t=1771866574; cv=none; b=QxNhS/CtjK+YGzwpSg6y1UwvanuRFQgljnYLO7LF5U6zcHLVoiQ6bkxaieJRckL/cwv/onm8xQbLEdniEWup/BWMrwZ6bcZzTkCdmiGVLZT82u3VHqLYxZfIUz6lMZ4pyTduzqEMU/0U6uF/MGI0JK5COGx8UGd+IGaDyKKw04I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771866570; c=relaxed/simple;
-	bh=45LEM47uhhpwNJ8pBj8luNIcApHIa68GG2HYJFgMJsc=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=pn1pHi3XaCQKphfa7XZC9XGHfEMhQHgXxP3WxCxerIP2K/l50zlZ7rK32euR7bPdQamLdU7525fLs//UmYMfEPm/RMvuSbb9NkCsiu5XxpX+Pw3ZjQs9PoqBMx/ZDywcBuwdFzEWlzhyjoeg/yajaTJal4+rrghJqdxuPfLsJEM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=aBGsyHFQ; arc=none smtp.client-ip=148.163.135.77
+	s=arc-20240116; t=1771866574; c=relaxed/simple;
+	bh=R2orQ0fUTsumHAXEsIUetW2JXM9VGMjVcbzJBuzBH9s=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=UT+am9/dxlzEBbc18b+ltgtQtZ0bsNhCKx09jym9lllAcYppO9e3GR/9KnrqmvBxEP8We+Kgu/YIBTXUG4q/QHXhgmi9M4vsrblTT53PlnlqbZ/iGCkNmDjhlITjfEdHutTAiOZEralgYpC/Dwkvsq1EFn7jzHLyZDYOU5YPFGc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=SzsotIPu; arc=none smtp.client-ip=148.163.135.77
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
 Received: from pps.filterd (m0516787.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NDe9AP1742941;
-	Mon, 23 Feb 2026 12:09:12 -0500
+	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NDSEVD1743194;
+	Mon, 23 Feb 2026 12:09:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=DKIM; bh=BSJ4KY6w529CCltmJzuSwV8FGW0
-	/H8fOc7EhU9qXYMo=; b=aBGsyHFQ9H2bunFDZyAl3wRh0vP8xRIGWnuH/cdVZ4e
-	y5SKlY2xzIFXOr1r+DNot7l8t6ZlP6xK/VI+hQKYIvk/yErVNMaRwmIsemT+58a6
-	Ofmnsz+U8QQK+mMacNciMACRzJgkxC8LZGItFTsxcQnNuCCKDPy7VslH1pS6ps1K
-	yerF+X4fiA3/gvCvz2XA1Pyq8RsxlUpUjEmCz27elCiZdoxwudgF3dIQdWTVhx1M
-	baijPugNXQO611islPKdtnCzqp+bbyEF4uBZUe4OK5QciaBIvERy0d+MvzDx8zaP
-	YKQ1mJMmoaxA6J1KJBObcTowkhxFj4t9YVqaoQbkaLQ==
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=DKIM; bh=9YrJo
+	tMMLs/jd+j5qq7gpYBTltgtYkAYqhe30pzfz6c=; b=SzsotIPuToheCjfS34iNh
+	EdkdBJoxxbv1Ixo1h1wRXyBx5lvksLwn8woxN7E92crYytZWKGnonxE0EKHB7B8W
+	ctMLCFVjynjdwz2kcCsL27j6iImdgK3TQo0+ZFeS6HBy/fyYlNvMKN3zznjt97oC
+	gyUzaNB3H2iiNe9A/tHt3JEDj/Eulq9OppKskd6BDqo40TbE3gsBZv9kzEWrBifC
+	aPBkQNhLf5Q+FZfne8svfzDWhS2sr6QZ8hQZYrQMZPyJSKzkxJ+nstVe4CRvv7sB
+	746iADVJLyUrO07xx/BsoC4VkkuqMDzPfS5BLFubjMNmZv37uUnMNEFh9WgS/XtX
+	w==
 Received: from nwd2mta4.analog.com ([137.71.173.58])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4cg7p4kux9-1
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4cg7p4kv01-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 23 Feb 2026 12:09:11 -0500 (EST)
-Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
-	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 61NH9A3r036341
+	Mon, 23 Feb 2026 12:09:26 -0500 (EST)
+Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 61NH9P5s036355
 	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 23 Feb 2026 12:09:10 -0500
-Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.37; Mon, 23 Feb
- 2026 12:09:10 -0500
+	Mon, 23 Feb 2026 12:09:25 -0500
+Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+ ASHBMBX8.ad.analog.com (10.64.17.5) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.37; Mon, 23 Feb 2026 12:09:25 -0500
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
+ ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.37; Mon, 23 Feb 2026 12:09:25 -0500
 Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
  (10.64.17.5) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
- Transport; Mon, 23 Feb 2026 12:09:10 -0500
+ Transport; Mon, 23 Feb 2026 12:09:25 -0500
 Received: from work.ad.analog.com (HYB-hERzalRezfV.ad.analog.com [10.65.205.9])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 61NH8sE8017789;
-	Mon, 23 Feb 2026 12:08:57 -0500
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 61NH9BKb017794;
+	Mon, 23 Feb 2026 12:09:14 -0500
 From: Marcelo Schmitt <marcelo.schmitt@analog.com>
 To: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
         <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
@@ -70,10 +76,12 @@ CC: <jic23@kernel.org>, <michael.hennerich@analog.com>, <nuno.sa@analog.com>,
         <eblanc@baylibre.com>, <dlechner@baylibre.com>, <andy@kernel.org>,
         <robh@kernel.org>, <krzk+dt@kernel.org>, <conor+dt@kernel.org>,
         <corbet@lwn.net>, <marcelo.schmitt1@gmail.com>
-Subject: [PATCH v10 0/6] Add SPI offload support to AD4030
-Date: Mon, 23 Feb 2026 14:08:50 -0300
-Message-ID: <cover.1771865684.git.marcelo.schmitt@analog.com>
+Subject: [PATCH v10 1/6] Docs: iio: ad4030: Add double PWM SPI offload doc
+Date: Mon, 23 Feb 2026 14:09:11 -0300
+Message-ID: <c19d03a6b52223ea01f9b3107d4a1c8037336e96.1771865684.git.marcelo.schmitt@analog.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <cover.1771865684.git.marcelo.schmitt@analog.com>
+References: <cover.1771865684.git.marcelo.schmitt@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -83,21 +91,22 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE0NiBTYWx0ZWRfX9BrZqDlLrWo8
- veEPRL6xMstM/AXJ1/lowYRHk967CzeLLUkFompKBcdMVkI2QhexUgkBIFGcih+SXtqdbvVMwuj
- XM6eLv64IFMQGOV5t6KT3ohKhvt74TeoWtsqyoQaDc9kYTrkBLT+WSKkFacGYolWutJKMxHxHj1
- 9+iF9XXtVuLC1yGg1t7tPYPG7KTq/fu2K0I6X0qv6kqC6Eacr0FROVCJrDFGuRN5cw5YmN53MCN
- h+XVprnaGugBIq4TLROb+ZIbJnnx8wua3YxVft3Pz0ZR991WA+zL4H0Ue23ME5Uo3wySAlg6fTS
- yrQIdxJ3dzcQX9NbDLFgmqhKqNT8qF2fur09FC+dKYbNIuD1/4xcOqOGcQICEWGFPtbjo/XEOGV
- U1t9Dst3SpsTgn020Y7gDwF9G5JOalm/VzWdmIqZJpO6kcFrhbBROvSGbei9heQHG5lu/H3fXLT
- znml3Oha3fIDs5oLKeg==
-X-Proofpoint-ORIG-GUID: NnCBX_SR8AVEQyM6Uah17uuE_D9V1rII
-X-Authority-Analysis: v=2.4 cv=LfgxKzfi c=1 sm=1 tr=0 ts=699c89b7 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjIzMDE0NiBTYWx0ZWRfXykVXUVar9Ows
+ Zi1LS84hbcmI36LscRNvH98XH+VD0iMsxZulU5l+UcCo/XkcdFl/m2P7duQWwvsTa8zF7JrrnJl
+ pskJSRZQkRdeMUkTBtYKm/GA/zPzQ2Vuq8fvhHQLqgY+RfOKM13/0P0lTgfR+lY4pIVIehI9K+P
+ fQ5hVhqreh9FnpyLydl2Ci2Hs1jZvHbkFHqE2pZ+SU13qvVAiIYb90KT1ph++DNF4Jxu12eR1MP
+ VB8jNHHa+EJVsxUk1p6yZQ+/pka4BSQlCUTRf+6JlOQsVSZYcXHw6azF7aQmlMfcZaVmMQ8M7Al
+ zvxgDkTQFv9QdkUK+ONHiB2I1JhwH415tOyNPAyK2MbuPld7vdcgtLX+AjI19qn3Ss20PDGy7xP
+ MmnGM6zPEKEK4HNVt8y25zJQmdqQq3U0VxfD9236MNNOPTCJpRlraxJRQ9VaZFcGR7nTyAsfn84
+ H+WxYDzG4xpUaGKnT9w==
+X-Proofpoint-ORIG-GUID: aYEA1WAEz2y2gYxX7dmX0cPz-Yefekme
+X-Authority-Analysis: v=2.4 cv=LfgxKzfi c=1 sm=1 tr=0 ts=699c89c6 cx=c_pps
  a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
  a=HzLeVaNsDn8A:10 a=VkNPw1HP01LnGYTKEx00:22 a=0sLvza09kfJOxVLZPwjg:22
- a=OmVn7CZJonkx5R5zMQLL:22 a=VwQbUJbxAAAA:8 a=gAnH3GRIAAAA:8
- a=DtX16q9jjA3GmR8T9d8A:9
-X-Proofpoint-GUID: NnCBX_SR8AVEQyM6Uah17uuE_D9V1rII
+ a=OmVn7CZJonkx5R5zMQLL:22 a=wI1k2SEZAAAA:8 a=IpJZQVW2AAAA:8 a=gAnH3GRIAAAA:8
+ a=Z7BqY8bEq__jAXHbdh4A:9 a=qcg49hLlgF0N60+LroqrWnV/Vu4=:19
+ a=6HWbV-4b7c7AdzY24d_u:22 a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-GUID: aYEA1WAEz2y2gYxX7dmX0cPz-Yefekme
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-23_04,2026-02-23_03,2025-10-01_01
@@ -113,12 +122,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76591-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76592-lists,linux-doc=lfdr.de];
 	FREEMAIL_CC(0.00)[kernel.org,analog.com,baylibre.com,lwn.net,gmail.com];
 	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -128,57 +137,76 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,analog.com:mid,analog.com:dkim];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[baylibre.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,analog.com:mid,analog.com:dkim,analog.com:email,analogdevicesinc.github.io:url];
 	DKIM_TRACE(0.00)[analog.com:+];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCPT_COUNT_TWELVE(0.00)[15];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: A391017A850
+	RCVD_COUNT_SEVEN(0.00)[10]
+X-Rspamd-Queue-Id: C4F0517A769
 X-Rspamd-Action: no action
 
-Hello,
+Document double PWM setup SPI offload wiring schema.
 
-This is v10 of high speed data capture support for AD4030/AD4630 and similar ADCs.
-It also adds support for ADAQ4216 and ADAQ4224.
-
-Rebased on top of IIO testing.
-
-Looks like a devm_pwm_get_disabled() interface might not get accepted so I
-didn't change the handling of PWM initialization on v10.
-
+Reviewed-by: David Lechner <dlechner@baylibre.com>
+Signed-off-by: Marcelo Schmitt <marcelo.schmitt@analog.com>
+---
 Change log v9 -> v10
-[DT]
 - No changes.
-[IIO]
-- Explained the need of PWM in commint message.
-- Fixed off-by-one bug.
-- Use in-loop counter declaration.
-- Correctly prepared patches, dropping unsupported bindings for input gain control.
-- Skipped the patches applied from previous version.
-- Initialize iio_scan_type struct fields on same order they are on structure definition.
 
-Link to v9: https://lore.kernel.org/linux-iio/cover.1771253601.git.marcelo.schmitt@analog.com/
+ Documentation/iio/ad4030.rst | 39 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-Thanks,
-Marcelo
-
-Marcelo Schmitt (6):
-  Docs: iio: ad4030: Add double PWM SPI offload doc
-  dt-bindings: iio: adc: adi,ad4030: Add PWM
-  iio: adc: ad4030: Add SPI offload support
-  dt-bindings: iio: adc: adi,ad4030: Add ADAQ4216 and ADAQ4224
-  iio: adc: ad4030: Add support for ADAQ4216 and ADAQ4224
-  iio: adc: ad4030: Support common-mode channels with SPI offloading
-
- .../bindings/iio/adc/adi,ad4030.yaml          |  62 ++
- Documentation/iio/ad4030.rst                  |  39 ++
- drivers/iio/adc/Kconfig                       |   5 +
- drivers/iio/adc/ad4030.c                      | 641 +++++++++++++++++-
- 4 files changed, 726 insertions(+), 21 deletions(-)
-
-
-base-commit: 0be8a2716187607daaa8ba80687a926438d88432
+diff --git a/Documentation/iio/ad4030.rst b/Documentation/iio/ad4030.rst
+index b57424b650a8..9caafa4148b0 100644
+--- a/Documentation/iio/ad4030.rst
++++ b/Documentation/iio/ad4030.rst
+@@ -92,6 +92,45 @@ Interleaved mode
+ In this mode, both channels conversion results are bit interleaved one SDO line.
+ As such the wiring is the same as `One lane mode`_.
+ 
++SPI offload wiring
++^^^^^^^^^^^^^^^^^^
++
++.. code-block::
++
++    +-------------+         +-------------+
++    |         CNV |<-----+--| GPIO        |
++    |             |      +--| PWM0        |
++    |             |         |             |
++    |             |      +--| PWM1        |
++    |             |      |  +-------------+
++    |             |      +->| TRIGGER     |
++    |          CS |<--------| CS          |
++    |             |         |             |
++    |     ADC     |         |     SPI     |
++    |             |         |             |
++    |         SDI |<--------| SDO         |
++    |         SDO |-------->| SDI         |
++    |        SCLK |<--------| SCLK        |
++    +-------------+         +-------------+
++
++In this mode, both the ``cnv-gpios`` and a ``pwms`` properties are required.
++The ``pwms`` property specifies the PWM that is connected to the ADC CNV pin.
++The SPI offload will have a ``trigger-sources`` property to indicate the SPI
++offload (PWM) trigger source. For AD4030 and similar ADCs, there are two
++possible data transfer zones for sample N. One of them (zone 1) starts after the
++data conversion for sample N is complete while the other one (zone 2) starts 9.8
++nanoseconds after the rising edge of CNV for sample N + 1.
++
++The configuration depicted in the above diagram is intended to perform data
++transfer in zone 2. To achieve high sample rates while meeting ADC timing
++requirements, an offset is added between the rising edges of PWM0 and PWM1 to
++delay the SPI transfer until 9.8 nanoseconds after CNV rising edge. This
++requires a specialized PWM controller that can provide such an offset.
++The `AD4630-FMC HDL project`_, for example, can be configured to sample AD4030
++data during zone 2 data read window.
++
++.. _AD4630-FMC HDL project: https://analogdevicesinc.github.io/hdl/projects/ad4630_fmc/index.html
++
+ SPI Clock mode
+ --------------
+ 
 -- 
 2.39.2
 
