@@ -1,323 +1,432 @@
-Return-Path: <linux-doc+bounces-76769-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76763-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6Ky1LZ6UnWnKQgQAu9opvQ
-	(envelope-from <linux-doc+bounces-76769-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 13:07:58 +0100
+	id uNtxGDd9nWk1QQQAu9opvQ
+	(envelope-from <linux-doc+bounces-76763-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 11:28:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23DFA186B96
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 13:07:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD712185539
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 11:28:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1C47C30234C7
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 12:07:57 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 18CEE30D21CE
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:27:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8AA03815C1;
-	Tue, 24 Feb 2026 12:07:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C8486378D7E;
+	Tue, 24 Feb 2026 10:27:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KGyJgCop"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="Ry0U/U1r";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="rfSlQjhI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 195D53806CC
-	for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 12:07:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.53
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771934875; cv=none; b=hKUnwoUXWv+lFgCB7J6nRRXzx8bMwk2qiBIiajN8Grw0SenxPbFykPbbAIxOJo3xY5FFH9Gh+SCfZJj+p8VI0M3DDhB+QGHcByWLogxzJa7NDO+TYhGH6JkGEWLWssEF7ydx1KdX52FwX0W+xjxKqTSdQDNOx8q3IvusU8JzX9E=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771934875; c=relaxed/simple;
-	bh=qVcOp5MnvlONbLG06msjRU6TJXzRsaX/t8tfbP70eys=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NC0RbgOtq+s2Pd1Xccnfe41R35ZmpEh//56v1zaqndVhfDkqcu8etHR1t2kw6I0PVXTGl7wnp1lwBGiDTFZLN1zbLZ4ocqAwc+ljycpRO0z+PngM31Ib9JidX8M58T+vHlRY057t6S+EVU9gje2LXbPCDUWLpND5m792SgMi1N0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KGyJgCop; arc=none smtp.client-ip=209.85.218.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b90bb0e8376so244493266b.0
-        for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 04:07:53 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93C013783C1;
+	Tue, 24 Feb 2026 10:27:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771928849; cv=fail; b=Sl8P0/5tbH5A3d4eT7TyvmuFVlwt4tGaHD5+0LKLKFaTwYr/jRDCKF7m6sL4hqSPrHipcFFGI0ZGRX5NPHeaayvVro/MUZu7ycFA2XHBu+uGbnxHW8VLKw/UqgAf41iPU3zqX9WLgqfZFnjmy/6WWCxouJci8t9ObBSsnQCFwkk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771928849; c=relaxed/simple;
+	bh=iHUbqJ8AJaCtVPKyTQrknQZPhkhv+mVBIjopINLbXbA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=O2Kd6RaDkb2y0to2QVGF/6rcbCeoBVZuBxJ1WrB95hsU7FCE3eiv9FWGNj6P9mkojOlvkNv+9ut7XJv8+t9zML0O39Q0Xlv6TsNKqryC9rgCvNYTo/UQHbIEDO60paYXysPLQ4GfrydwjFtsx/c+0DQHZH7bX0w5igAC/FrGwHM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=Ry0U/U1r; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=rfSlQjhI; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61NMv4P32948644;
+	Tue, 24 Feb 2026 10:26:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=p8QFUtid2XGM4ZrrGw
+	Q4VFEkbPb6WXg3AEv7+VpXCfA=; b=Ry0U/U1rkiLtrF9ahH4bqh/tK4eptiAwwo
+	gXMdbjsdKtx143KkOuFYfZxtiYoxJ8eWglBip96bRNAY/Z1h1hSNQrCE7KIzZM37
+	kveYiphk0aDlVwHjJqc6XENwp+TB6Gp7RtyEIIIvUuBDAJzZaBDSjeNO1rxJnsle
+	kdzFxLfe0hLBO8hN7e7jyw9JLccxrznzgv7Vngi3MNMO4v4LJlkTuLQxXes+AcLg
+	ela6D8X45Wx+eUTb5L3npJqtQRjInP51RHhvXU9juaZ7uyJKZP+lXOwaAGR7EYHQ
+	mW6NVj0rkmMrm+2AA6mOkCc0W6WZh/4uKBOzsXyERDlCXlQXIwXQ==
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4cf34b40q8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 24 Feb 2026 10:26:47 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 61O9dXmF012751;
+	Tue, 24 Feb 2026 10:26:46 GMT
+Received: from byapr05cu005.outbound.protection.outlook.com (mail-westusazon11010023.outbound.protection.outlook.com [52.101.85.23])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 4cf35dscju-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 24 Feb 2026 10:26:46 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o8hDnnxdr6kyOYBB9PPA1ICWA9OFxh7dkJa4getJ0RJ88pOYYnWhjnlMyZu0M/GmJyom0W4szX7piTrhum+5l9MUGFh9HlXli1TXOyQdk8aZc9LtHhEQngqTeoSxa0WyRf1hcKKUqn93hSTHiUGjwXwMSJwdYTCNsW/y6t9aCpyM7JX0v8ahLCyANxn5D0tQvbNKkkPS7fRNmR/HEytGhjOqqgID6IU0aFVV+AVyblHAdjJiTt9/3/cgOM2JXYzVB4JMP2AI8XtvmZILBO2IWwdHRBYADvWe9orWop/jz2CicblhssOOn3tMHFH3L1hH/s3H9Xncj5Oq7LDOoGU8pg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=p8QFUtid2XGM4ZrrGwQ4VFEkbPb6WXg3AEv7+VpXCfA=;
+ b=VeXKmA91/JRtBzmc67SrlVJ37kMlvR5gDg4fdqFxUjtLppQreh3xYv/y0I7Rlq91ezD7dO5z/BOdRRdJgNUh8fB4QldEa0Kv5SfeByaPCV6KVcXLg5xpN6Yh/B+zKDptNg7aiuMeRXM0soG93jE6Im2iRKmEEAngSlBpQSATwl2NnqM2gJ0hsEovFfyOpa0CZ5EPGsJHa2KQba1TTYHBliP4jtbdAp9smW4IAsuy4U2O79yVY8UtsyiI0FBJDoLWWtfoymkAUkr16qpg2ZcvjZ/9yxIPgZpf/b+2i5E9/qCzS1wob56bUaxNwycAdsWI57TYnPxXUyz3wq8yCcsw5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771934872; x=1772539672; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=bZ4fv5w72iR4alZnfS3RK7xFl8sWnyZEZWYM2yXruBI=;
-        b=KGyJgCopVSkGz5uG7FPz9svzvU/lkisutmbspXBq93w2iRcvUaAJ20cOjCUVkxGwTq
-         +JkwHR6G5sEDC9hGh4FLtzSA/DYZLxG0wTE40azPBr80Y02HnD1Nv89wpa80cbpRMKsi
-         erLBRpZ39SkSKAf1HVsFOFdYKl1afBRFgo6BHK0Dde/edi+3yBjt4S0WY/LCgaz82VLt
-         5FC2OaGr4NlC4lsBeNM+RfkR5GKuzuNvMRb7h3pMVWJzCP9HIyFvX+ziJz4I/nMLq1jZ
-         LnG+wddK3VsU40pYRAnLCe5pvUDgCxvvE+mj4dn9TR+nUyJ4ecRGMVYmRB/7qtOCQB+8
-         MLCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771934872; x=1772539672;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bZ4fv5w72iR4alZnfS3RK7xFl8sWnyZEZWYM2yXruBI=;
-        b=tIXo0ndyurjnPR88m28XTyg3yjUE8y+m2c9WlMxBL2RIC/QTGPRJJDCpvIn0of2v3R
-         YWR1JhNemjlSdZK8oQ4fO1qGz1UmTaeGGSn4QIS7HehEk6MCtLdcnWNZbqpdQ6qEXSvV
-         8ybWRgK9ibDCCoTy2nq/SfV7ElpdfMQwFYaGPcQHfnfnrkOCt3b2rgOjJm/aweNjnch6
-         mfibgV9DYq9sjsQuaJw2WT51egG4PpzlYUCtR7q5/EwOw0oCNElaFUVwWp/Q6XwqjVQ9
-         QodD0Kz7E9rH4jFQpnkWThk018vNVq/Pb3Dl/SFwkD7qIIGwFcD8y/UfGP31Xe2hcE6K
-         /5Ug==
-X-Forwarded-Encrypted: i=1; AJvYcCU4lScxsv9gS3u3T5ajLU6jAgbCVIr0jzd4NPoCD+1yKQcYmQp6iPf8F6N1A1thpdrb2nwBuwAFzsM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxSygI/v2dLcJsl4YeJ+Cbk0aGU9Mo6iDOz21Cf0/WbYP6SPsOL
-	YLsCqVeo7A1U/RIir+/Kqtq8nN8RTmBWnrGSmqM+knyNC7JkJ6MGiRwU
-X-Gm-Gg: ATEYQzyx2QZqW2/vEZAxKUnW4vpIBlLpcB1SxsRb+JB/wVpyl3WHM+lfFdXFbgFUvJq
-	tjthf9Zoe8xXRVe6VZ14zSYZxd2eC8j8xPbSMipPfTDFw1/wDluAeC6u4R6E6tkl2gt6FjfiDzO
-	fDro7sm5j+bJpTj40mrCGvxBrfxSxGY+E2MXDGiWiR7sStJEsULgrDE5cvVghbeAjLK3XOYGC5V
-	83ZqJctvAGcgjE/6VTg8joI7ox3Pe9sGYyoVDe1hmcdveXC5DPHk/otAAcLa4dQ/F1hTcLLeXxp
-	j/InQzKd1iSehLGGKCNKSwiekuwT9rWmyDQwsnRAL1OJSY1Ekwz40iKXkMp4Wb9vtlvyQ3Gar03
-	ATWEG3Ol24eeipXkIqjib7/Krgl0Q5pyvF/uytXvSByNTDIfxHoXRNUW/Dtj4yO4KyBXXWac1YG
-	net+uTlrDpSuRsPHdUVvdODXZ3SYLiPEoVtUQeSFvElUJi8HA=
-X-Received: by 2002:adf:e3c3:0:b0:439:8bb9:db03 with SMTP id ffacd0b85a97d-4398bb9dedemr632589f8f.3.1771928510821;
-        Tue, 24 Feb 2026 02:21:50 -0800 (PST)
-Received: from [10.221.199.249] ([165.85.126.46])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43970c09897sm26186806f8f.17.2026.02.24.02.21.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 24 Feb 2026 02:21:49 -0800 (PST)
-Message-ID: <9ed3ade5-717d-4f03-ac13-40614a0f093c@gmail.com>
-Date: Tue, 24 Feb 2026 12:21:47 +0200
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=p8QFUtid2XGM4ZrrGwQ4VFEkbPb6WXg3AEv7+VpXCfA=;
+ b=rfSlQjhIvzeeIiSnTHqZq132kQVVNkG166/4GbdobhWvWtGBYyCuAzJ8o0ZwvLiCjLTWgP0Nf7wVgYB8mbLYhhnNDI4s/NVgogSkgQOGF6o/hzZ6wMSTc111HfLox0rQ1LZ+KPNHLDaU3K7BXJu+EhmwVQm7uESywubNc5UetII=
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
+ by CH3PR10MB7415.namprd10.prod.outlook.com (2603:10b6:610:139::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Tue, 24 Feb
+ 2026 10:26:41 +0000
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::f3ea:674e:7f2e:b711]) by DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::f3ea:674e:7f2e:b711%4]) with mapi id 15.20.9632.010; Tue, 24 Feb 2026
+ 10:26:41 +0000
+Date: Tue, 24 Feb 2026 10:26:36 +0000
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: Kees Cook <kees@kernel.org>
+Cc: Vlastimil Babka <vbabka@suse.cz>, Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Christoph Lameter <cl@gentwo.org>,
+        David Rientjes <rientjes@google.com>,
+        Roman Gushchin <roman.gushchin@linux.dev>,
+        Harry Yoo <harry.yoo@oracle.com>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-mm@kvack.org, linux-hardening@vger.kernel.org,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>, Miguel Ojeda <ojeda@kernel.org>,
+        Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        John Hubbard <jhubbard@nvidia.com>, Joe Perches <joe@perches.com>,
+        Christoph Lameter <cl@linux.com>, Marco Elver <elver@google.com>,
+        Vegard Nossum <vegard.nossum@oracle.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>, Bill Wendling <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>, Jann Horn <jannh@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Sasha Levin <sashal@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+        Jakub Kicinski <kuba@kernel.org>, Yafang Shao <laoar.shao@gmail.com>,
+        Tony Ambardar <tony.ambardar@gmail.com>,
+        Alexander Lobakin <aleksander.lobakin@intel.com>,
+        Jan Hendrik Farr <kernel@jfarr.cc>,
+        Alexander Potapenko <glider@google.com>, linux-kernel@vger.kernel.org,
+        llvm@lists.linux.dev
+Subject: Re: [PATCH v6 4/5] slab: Introduce kmalloc_flex() and family
+Message-ID: <675ec547-dac8-465f-b3c9-a0f97c5bdef7@lucifer.local>
+References: <20251203233029.it.641-kees@kernel.org>
+ <20251203233036.3212363-4-kees@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251203233036.3212363-4-kees@kernel.org>
+X-ClientProxiedBy: AS9PR04CA0052.eurprd04.prod.outlook.com
+ (2603:10a6:20b:46a::21) To DM4PR10MB8218.namprd10.prod.outlook.com
+ (2603:10b6:8:1cc::16)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next] net: ethtool: add COALESCE_RX_CQE_FRAMES/NSECS
- parameters
-To: Haiyang Zhang <haiyangz@linux.microsoft.com>,
- linux-hyperv@vger.kernel.org, netdev@vger.kernel.org,
- Andrew Lunn <andrew@lunn.ch>, Jakub Kicinski <kuba@kernel.org>,
- Donald Hunter <donald.hunter@gmail.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- "Kory Maincent (Dent Project)" <kory.maincent@bootlin.com>,
- Gal Pressman <gal@nvidia.com>, Oleksij Rempel <o.rempel@pengutronix.de>,
- Vadim Fedorenko <vadim.fedorenko@linux.dev>, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-Cc: haiyangz@microsoft.com, paulros@microsoft.com
-References: <20260222212328.736628-1-haiyangz@linux.microsoft.com>
-Content-Language: en-US
-From: Tariq Toukan <ttoukan.linux@gmail.com>
-In-Reply-To: <20260222212328.736628-1-haiyangz@linux.microsoft.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|CH3PR10MB7415:EE_
+X-MS-Office365-Filtering-Correlation-Id: 884ae578-4569-425d-eb91-08de738f3329
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?xLbSMXsCIzc2gH/f7sdg+7JzADoGA4rmKVHChxMnDpxLTfiClkuxgUkZN+gy?=
+ =?us-ascii?Q?zHHGLMtNIrERvlzP++brbz4LIxJzwnQYrgy0Gb/Xu3QICnCVsBf0iGi9hUUB?=
+ =?us-ascii?Q?zxjnluvDIZBye7Lx7EWSOKFH6qrpHEdoylDe7DIsqf5e5MtlAAqtB0UVxMfk?=
+ =?us-ascii?Q?vb7P/45Wj9XiOwxL3ALBC9GCVaRSizMnQ5Mtv3PD+xqw4gUYol9Ddda2ISOG?=
+ =?us-ascii?Q?fGpvTFmG63KYua6wsJ2ZLTWfFMVp/kn26ke2eYOX9yOKicWpq+v25xFPQNE+?=
+ =?us-ascii?Q?Gia2FnukhoZgHSwpodcsTUH6rMD4EZ6x5fFRRr++WB7umOj8sW+qX8w+KsrW?=
+ =?us-ascii?Q?HQVzEQ+e+GpyNT6j2WlYU81ekgMoW5u0QgUaR3wG2aAyhyddR5yrRDJycOyU?=
+ =?us-ascii?Q?C2LqZuti/Tbk1FxtzSP1p0yNz1pxongSpc8TTGtfPtbVy676Kt06Jj4QcZ2W?=
+ =?us-ascii?Q?EZ+YN8XeaU13DSmppYDbuSPOi66SNKlTS0oXnpXLsKeDIgyStVDcxBJYfCnq?=
+ =?us-ascii?Q?9L5a3pRabVslSzlgkScj+sUziloplwxu6RxM+SC3PH9ivWcttvkHsxTo2TpJ?=
+ =?us-ascii?Q?ozmYi3wvSFPnYFo/M63Q5HrpyGkFCj+uw3OJ/SG8hpBp4dS8aCOx/ltt2VUZ?=
+ =?us-ascii?Q?QHfXm7pXzybmj9nqbWhRK3F/WIxiM4X4cZ55rH7+YZtiOf3lmZjACPLbl6rC?=
+ =?us-ascii?Q?ieeBPDP08LL3SDvzGrfclP4gmH4ERylvfg6gC83fd2Z2GCjHQ6uEs1UPHie8?=
+ =?us-ascii?Q?p8QukonFPcBAKHYiIxBosH3E7TZNNLlQndKxzyfgEncNyn9JYO4cV+MfwxA0?=
+ =?us-ascii?Q?bZX6Rol+TD2hFtu2WMVBiigI1chekDcl3usR/wxwV8BhVYVVMWXnFQ/bGfzi?=
+ =?us-ascii?Q?e6yum0ZJXxiE3IhBaLkoXXeZ3HOD+B235MKfX8MdhZRC6mkBuHmFuXqdaDvb?=
+ =?us-ascii?Q?tt1tE3t32TA1daDfqeu9q77zvADk4bp8ZkfqcjoUS5aAaTG67QAe7DYLtrvX?=
+ =?us-ascii?Q?FDDo1QOXE3mbSHo8tfeJYGAdSkkDNYHNwyrcJjGg/jHXJ1Rmz66nrvd0VCcE?=
+ =?us-ascii?Q?iSMLSWKTxr2CLAT9au7agmz9lv1G7LTNf5QH0vNBvIqO8HOxmg37MfQ63M3u?=
+ =?us-ascii?Q?xrjz2xOMyBk0L4c/zCvDanQ8Ev4PFl8zvIEK5EDwcvEHO+ukTo1hkQctDj8d?=
+ =?us-ascii?Q?+vaFgIXQWVdwRVuyXJzG2o/wbe3/31HhjWBhm7g4Mr2dhU8RvwcVHo4E5wd3?=
+ =?us-ascii?Q?WiAW25trg9DfmlsBXNbvagzpq90IlFRRUfoK0Ru0oIC0DnQjKyHUR08R6W/J?=
+ =?us-ascii?Q?6S4NdbvpQX3EXfRAg5HwNrNhOEdTStpUw4TzhOKKAW3DgpfHcaaNpzMWP/a6?=
+ =?us-ascii?Q?29RQyTiP7JUAo74UjLVwRe7a/HQQdEYPkjBfM9ZnfQr9k/KKXFbZBaU5NcSW?=
+ =?us-ascii?Q?jbIa11xXGv1rF0oDOfKe67xaG47+oXDmgs0vYYOxd6uJPEGoan5n3V3A00vR?=
+ =?us-ascii?Q?q1ia4rQ/HadpbnlmbfVCFgmpT5Gouim3NSLLP5Na+xeYn8TFln4K87zDMRuZ?=
+ =?us-ascii?Q?eFO4E263eAUq9D4k3Ao=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?zP+NWvkV7i79WjSseLtkhcxKrs7/wDB7ZgJC02F0fJGoO8NFrkssGPT+GPTD?=
+ =?us-ascii?Q?RxBq8PgzzAJbi35rlDcchTItGiy7t2ubolVpBXo61L7ETVl0AcT/D9Uq4VO8?=
+ =?us-ascii?Q?5E9PxTf03XgFWtUtwARWA+vT5rkdnmGfKaHidPND16gYnYS0OPKMHbjIeHNC?=
+ =?us-ascii?Q?EdYklwqtbGbsqB7lKaR0sxx3T9eCzKInQUcpmBdj+2f+FnQDOeDRK+aOhcX+?=
+ =?us-ascii?Q?J8loruejK7jiykiBAFdBguZ73suKDHrg4CsLJg0BT4T+/pbgUYuXrh5inEiJ?=
+ =?us-ascii?Q?QMeiAd/rHUWyJgzo7SavjnEFf+ao9msD5A7JR1pIxPgQ3uL7RUGPFtbDThGT?=
+ =?us-ascii?Q?iJ9XDZeA18hcA0KYt10CeP8LEWyiQd+raRtYDVc5VLUssZSL6yJeVzDvf8aL?=
+ =?us-ascii?Q?llMtYpT5TjAj8QYCZ+1LUIf6Efqw0YerL8n760YK/ytRUESisLkD6QM+IoE/?=
+ =?us-ascii?Q?6yjvJF00W7UZGJFgjQPZRqpyPTCzBFQb3MZbu/Hwf4EMr9Vg6stw78dhU1d9?=
+ =?us-ascii?Q?rTLZ1wm9WA0Y0az+SWc6exDhTd5Y/Qw25QHwQURen7+v6VBV/zAPxB1QAdx3?=
+ =?us-ascii?Q?B0/VHZg2Wb60rqfieeFrnkUdgEglxM3+/gzPN2NBkn7QuaDCE7wUpDDI04by?=
+ =?us-ascii?Q?fgzpSjpdRgLEGukH6AeLBwP8Eom9ErhjpK3WO7bDFcIKUZMNUxkHdoYU9+UN?=
+ =?us-ascii?Q?z0MXDsj+sw80+mO8KDZUzIBGRE8HflboeDgO5JP1+e1wgG4i18iPxIt5j7zL?=
+ =?us-ascii?Q?7pGmOonZA9VfIw678kymOBSH8iYOVzM1qVFYkFyWnDjXnE9TzoxRKZ2fckPi?=
+ =?us-ascii?Q?VNrIJ2USlcokecJan+V12Py5hnpgBDzjkorAOJo5bINMION1UzVYhymX3jmp?=
+ =?us-ascii?Q?ZbYFTx2Sezf8WAID3v7rw6XhZKtAjV+xds4t9t/e/MVm4D6JCzLHE9xlVYt8?=
+ =?us-ascii?Q?bjr8fz/be4xaT9Vr9YdQ+Lk4F1KCXEfVjiJrtuviteK2eo4LNMP094L/8gWG?=
+ =?us-ascii?Q?iI+6DomIIyBDisGMLx1hX/m92OUjo9VchPPLPz1tKDl9Z87lQxNP3kIxSnt1?=
+ =?us-ascii?Q?Ko6R2u60x3MrP989dFO88oLMLCfzGwfOhD8Ex6bdg4rfAKQzDbtj/ZP7Z6hO?=
+ =?us-ascii?Q?er0pB+IlTwBJ+bGUYG80aONy/HGWJ/d9Z5OOIIyuabmRoAG1LchCwL9nsx17?=
+ =?us-ascii?Q?REyU1UdhhQwe+PWR6Yc+FGUP+iIPV6Wv3fLbgtKfY2ZoRQau8Sic/c4UWdw7?=
+ =?us-ascii?Q?Fo7MtEQJwYmoNeXk6Lth/+dFdTeTAsMAvrAWQYX5Vp61XForWi7NaxKQShpY?=
+ =?us-ascii?Q?SqgZDpjh527BEJl0/TjWHK4Ge23AZCgZ8IGQqi/gijF5eWvPUKywZ5sEc3Nd?=
+ =?us-ascii?Q?1KezKbr2pHAUZvD7NN4bS6IPS9d693TU7kc25C8KN94UcIpn84K2bwVxhNzD?=
+ =?us-ascii?Q?nA2vwmW0JcE8hIyPxvCVI4C/VtaIRxSzCZfCsiJC+Aw53O201zCM7p0TK6sR?=
+ =?us-ascii?Q?F1R8/pvSGpzwRyEUiSAS7CbwAOCMFlLJ5MhMIzHYryHhA0IdAGdzF5RhKPO3?=
+ =?us-ascii?Q?dajhg2ROimE1iIxcR3VnvZ9hQPeZeYDbQL9yHxVtaxLHZjSnxl/LYiidrQ4l?=
+ =?us-ascii?Q?zZZU6baNoAaoEJbuSjRfUjVnawlPdhj16ZNDnqA1scC2DbSofMKKqPl12VaG?=
+ =?us-ascii?Q?jIAUgYrYO9C5gK0nNkd6yZAC5eBrnzxHal0ZNTZs1f9Io0SlwfWN11lrY2Lc?=
+ =?us-ascii?Q?BovAI1hnqewG2sWZ7StoKTlg8EXanto=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	/hEUYaH7rDa5tJtRKEN5tuRbWRv3dr9TcAwXRHHkcMpXJPFlDpCAY8Kodj9hVXPVKyW/XB/ywakU4DUOM0QcwWjUFy0graPzLXMH7Q7GudNxjAAkeVtVdXfPskq5gY/7In81YOCxVUcMsH/l/GOPy508Mb4/pD8zt9/QurVPERJXXSnAjxvWePQopLdE5NaXlV2ZT+39x52a6/HvcfhKiZ5oJ5I3TXVH16e9WJde9bjd3xFlUxQ2FS+wfimzYXQpFkl5TA7CPZkcYKPl5oqeeU/vaSEEi9ZEz+XQGsUgZskQV9sC1+UXsI+feJQKmcTZ1WiYhzAQqG6fM50q+VEmh/LrByT2B+Sq5W7+rwkbQQqToC85QRpD4tr+LiShc+/QY2SOopmOsPXZkjyEtxM7rJf6uQpW78wZ6cTTwq53EoU/8zRlojZHiKMNtChsI8v55EAeGtsQOPLwXRbX2ySMnLbEajSQXAQpokvrevieIjDZSbEBI/LPJWApnKAoPItaQS0s/QytS7FPw0uyHe+1mTyvdx0r4g5S6bkrvUK5571hbewBX1PsR9MQI+NhK4oepa69bL1CYtCBShDKEEVNMpPd+NIjeoDwfrEccWyJxe0=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 884ae578-4569-425d-eb91-08de738f3329
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 10:26:41.2601
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xa+4O16/q0PP7TPzpBtqWJwSW+GxHY2kLQ8dtulpcAZ7xvmIyeOZ69Qob28JuRhxCY9vARQTSWskfM4ok0LhtYC73lEMYU5QsMlznxB5Bx8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7415
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-24_01,2026-02-23_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 adultscore=0
+ bulkscore=0 spamscore=0 phishscore=0 malwarescore=0 suspectscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2602130000 definitions=main-2602240085
+X-Authority-Analysis: v=2.4 cv=GrlPO01C c=1 sm=1 tr=0 ts=699d7ce7 b=1 cx=c_pps
+ a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=HzLeVaNsDn8A:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=VwQbUJbxAAAA:8
+ a=07d9gI8wAAAA:8 a=Z4Rwk6OoAAAA:8 a=PuvxfXWCAAAA:8 a=1XWaLZrsAAAA:8
+ a=yPCof4ZbAAAA:8 a=37rDS-QxAAAA:8 a=crXs_MzoAVXMaapXFGwA:9 a=CjuIK1q_8ugA:10
+ a=e2CUPOnPG4QKp8I52DXD:22 a=HkZW87K1Qel5hWWM3VKY:22 a=uAr15Ul7AJ1q7o2wzYQp:22
+ a=k1Nq6YrhK2t884LQW06G:22 cc=ntf awl=host:13810
+X-Proofpoint-ORIG-GUID: buc-QJMJfae7AUPal2NRVBOlW-HD7tqS
+X-Proofpoint-GUID: buc-QJMJfae7AUPal2NRVBOlW-HD7tqS
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI0MDA4NSBTYWx0ZWRfX6sR9qq72T5si
+ oSwOMRspNgqC7VVAOhnqZve3vB//BMqEsP7hsDTqZ/QIZuMmeBaZ7N94XALqUAOp0IFtLmSzaA0
+ OivFxyLzRCYVtH1NtfH5eKhyuSKKFwdV5ObXrkVaYv+cPZv332nuaQoxcZ7LaPEsr0Zf8oo4bt4
+ KYvTpJ5rd98HPylr3V8AKI+oQuC669LDiVwQ0K3Gg8oSnUVaQ+g+4BXpTWnkSkgQqksdus0ZScN
+ kQ/c3jPWcUf892mOLclEkVhZKc5w1H4azE3S2WKdNCYY3sHdyrYjCpPQaL6Wj+bFbj/jGrQAuND
+ WB4L8bKpz6lza8nNT9nyjgfNHCCVUa9zYyP98S75ulsTIYjavJMdx2CZJX/R96ibuqPVRsdh+su
+ WBPSaKkHFC4F5WOs/em4n5lgpSz5VmKrhTvGnLYDlhIpALK5WgQwFXGynwE/Pf0vf7ER5ZnsXNl
+ 1ZicKvXlv+bgfSrwe6EtOBVeesZB8J1NuROB52ho=
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [1.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25,oracle.onmicrosoft.com:s=selector2-oracle-onmicrosoft-com];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76769-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[linux.microsoft.com,vger.kernel.org,lunn.ch,kernel.org,gmail.com,davemloft.net,google.com,redhat.com,lwn.net,linuxfoundation.org,bootlin.com,nvidia.com,pengutronix.de,linux.dev];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	TAGGED_FROM(0.00)[bounces-76763-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[suse.cz,lwn.net,linux-foundation.org,gentwo.org,google.com,linux.dev,oracle.com,kernel.org,vger.kernel.org,kvack.org,infradead.org,intel.com,nvidia.com,perches.com,linux.com,lge.com,linuxfoundation.org,gmail.com,jfarr.cc,lists.linux.dev];
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ttoukanlinux@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 23DFA186B96
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lorenzo.stoakes@oracle.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[oracle.com:+,oracle.onmicrosoft.com:+];
+	NEURAL_HAM(-0.00)[-0.996];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[9]
+X-Rspamd-Queue-Id: CD712185539
 X-Rspamd-Action: no action
 
-
-
-On 22/02/2026 23:23, Haiyang Zhang wrote:
-> From: Haiyang Zhang <haiyangz@microsoft.com>
-> 
-> Add two parameters for drivers supporting Rx CQE Coalescing.
-> 
-> ETHTOOL_A_COALESCE_RX_CQE_FRAMES:
-> Maximum number of frames that can be coalesced into a CQE.
-> 
-> ETHTOOL_A_COALESCE_RX_CQE_NSECS:
-> Time out value in nanoseconds after the first packet arrival in a
-> coalesced CQE to be sent.
-> 
-> Signed-off-by: Haiyang Zhang <haiyangz@microsoft.com>
+On Wed, Dec 03, 2025 at 03:30:34PM -0800, Kees Cook wrote:
+> As done for kmalloc_obj*(), introduce a type-aware allocator for flexible
+> arrays, which may also have "counted_by" annotations:
+>
+> 	ptr = kmalloc(struct_size(ptr, flex_member, count), gfp);
+>
+> becomes:
+>
+> 	ptr = kmalloc_flex(*ptr, flex_member, count, gfp);
+>
+> The internal use of __flex_counter() allows for automatically setting
+> the counter member of a struct's flexible array member when it has
+> been annotated with __counted_by(), avoiding any missed early size
+> initializations while __counted_by() annotations are added to the
+> kernel. Additionally, this also checks for "too large" allocations based
+> on the type size of the counter variable. For example:
+>
+> 	if (count > type_max(ptr->flex_counter))
+> 		fail...;
+> 	size = struct_size(ptr, flex_member, count);
+> 	ptr = kmalloc(size, gfp);
+> 	ptr->flex_counter = count;
+>
+> becomes (n.b. unchanged from earlier example):
+>
+> 	ptr = kmalloc_flex(*ptr, flex_member, count, gfp);
+> 	ptr->flex_count = count;
+>
+> Note that manual initialization of the flexible array counter is still
+> required (at some point) after allocation as not all compiler versions
+> support the __counted_by annotation yet. But doing it internally makes
+> sure they cannot be missed when __counted_by _is_ available, meaning
+> that the bounds checker will not trip due to the lack of "early enough"
+> initializations that used to work before enabling the stricter bounds
+> checking. For example:
+>
+> 	ptr = kmalloc_flex(*ptr, flex_member, count, gfp);
+> 	fill(ptr->flex, count);
+> 	ptr->flex_count = count;
+>
+> This works correctly before adding a __counted_by annotation (since
+> nothing is checking ptr->flex accesses against ptr->flex_count). After
+> adding the annotation, the bounds sanitizer would trip during fill()
+> because ptr->flex_count wasn't set yet. But with kmalloc_flex() setting
+> ptr->flex_count internally at allocation time, the existing code works
+> without needing to move the ptr->flex_count assignment before the call
+> to fill(). (This has been a stumbling block for __counted_by adoption.)
+>
+> Signed-off-by: Kees Cook <kees@kernel.org>
 > ---
->   Documentation/netlink/specs/ethtool.yaml       |  8 ++++++++
->   Documentation/networking/ethtool-netlink.rst   | 10 ++++++++++
->   include/linux/ethtool.h                        |  6 +++++-
->   include/uapi/linux/ethtool_netlink_generated.h |  2 ++
->   net/ethtool/coalesce.c                         | 14 +++++++++++++-
->   5 files changed, 38 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/netlink/specs/ethtool.yaml b/Documentation/netlink/specs/ethtool.yaml
-> index 0a2d2343f79a..951d98f6bb12 100644
-> --- a/Documentation/netlink/specs/ethtool.yaml
-> +++ b/Documentation/netlink/specs/ethtool.yaml
-> @@ -861,6 +861,12 @@ attribute-sets:
->           name: tx-profile
->           type: nest
->           nested-attributes: profile
-> +      -
-> +        name: rx-cqe-frames
-> +        type: u32
-> +      -
-> +        name: rx-cqe-nsecs
-> +        type: u32
->   
->     -
->       name: pause-stat
-> @@ -2244,6 +2250,8 @@ operations:
->               - tx-aggr-time-usecs
->               - rx-profile
->               - tx-profile
-> +            - rx-cqe-frames
-> +            - rx-cqe-nsecs
->         dump: *coalesce-get-op
->       -
->         name: coalesce-set
-> diff --git a/Documentation/networking/ethtool-netlink.rst b/Documentation/networking/ethtool-netlink.rst
-> index af56c304cef4..a3e78b69fd07 100644
-> --- a/Documentation/networking/ethtool-netlink.rst
-> +++ b/Documentation/networking/ethtool-netlink.rst
-> @@ -1072,6 +1072,8 @@ Kernel response contents:
->     ``ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS``    u32     time (us), aggr, Tx
->     ``ETHTOOL_A_COALESCE_RX_PROFILE``            nested  profile of DIM, Rx
->     ``ETHTOOL_A_COALESCE_TX_PROFILE``            nested  profile of DIM, Tx
-> +  ``ETHTOOL_A_COALESCE_RX_CQE_FRAMES``         u32     max packets, Rx CQE
-> +  ``ETHTOOL_A_COALESCE_RX_CQE_NSECS``          u32     delay (ns), Rx CQE
->     ===========================================  ======  =======================
->   
->   Attributes are only included in reply if their value is not zero or the
-> @@ -1105,6 +1107,12 @@ well with frequent small-sized URBs transmissions.
->   to DIM parameters, see `Generic Network Dynamic Interrupt Moderation (Net DIM)
->   <https://www.kernel.org/doc/Documentation/networking/net_dim.rst>`_.
->   
-> +Rx CQE coalescing allows multiple received packets to be coalesced into a single
-> +Completion Queue Entry (CQE). ``ETHTOOL_A_COALESCE_RX_CQE_FRAMES`` describes the
-> +maximum number of frames that can be coalesced into a CQE.
-> +``ETHTOOL_A_COALESCE_RX_CQE_NSECS`` describes max time in nanoseconds after the
-> +first packet arrival in a coalesced CQE to be sent.
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Vlastimil Babka <vbabka@suse.cz>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Christoph Lameter <cl@gentwo.org>
+> Cc: David Rientjes <rientjes@google.com>
+> Cc: Roman Gushchin <roman.gushchin@linux.dev>
+> Cc: Harry Yoo <harry.yoo@oracle.com>
+> Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+> Cc: <workflows@vger.kernel.org>
+> Cc: <linux-doc@vger.kernel.org>
+> Cc: <linux-mm@kvack.org>
+> Cc: <linux-hardening@vger.kernel.org>
+> ---
+>  Documentation/process/deprecated.rst |  7 ++++
+>  include/linux/slab.h                 | 48 ++++++++++++++++++++++++++++
+>  2 files changed, 55 insertions(+)
+>
+> diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
+> index 91c628fa2d59..fed56864d036 100644
+> --- a/Documentation/process/deprecated.rst
+> +++ b/Documentation/process/deprecated.rst
+> @@ -387,6 +387,7 @@ allocations. For example, these open coded assignments::
+>  	ptr = kzalloc(sizeof(*ptr), gfp);
+>  	ptr = kmalloc_array(count, sizeof(*ptr), gfp);
+>  	ptr = kcalloc(count, sizeof(*ptr), gfp);
+> +	ptr = kmalloc(struct_size(ptr, flex_member, count), gfp);
+>  	ptr = kmalloc(sizeof(struct foo, gfp);
+>
+>  become, respectively::
+> @@ -395,4 +396,10 @@ become, respectively::
+>  	ptr = kzalloc_obj(*ptr, gfp);
+>  	ptr = kmalloc_objs(*ptr, count, gfp);
+>  	ptr = kzalloc_objs(*ptr, count, gfp);
+> +	ptr = kmalloc_flex(*ptr, flex_member, count, gfp);
+>  	__auto_type ptr = kmalloc_obj(struct foo, gfp);
 > +
+> +If `ptr->flex_member` is annotated with __counted_by(), the allocation
+> +will automatically fail if `count` is larger than the maximum
+> +representable value that can be stored in the counter member associated
+> +with `flex_member`.
+> diff --git a/include/linux/slab.h b/include/linux/slab.h
+> index 726457daedbd..2656ea610b68 100644
+> --- a/include/linux/slab.h
+> +++ b/include/linux/slab.h
+> @@ -982,6 +982,33 @@ void *kmalloc_nolock_noprof(size_t size, gfp_t gfp_flags, int node);
+>  	(TYPE *)KMALLOC(__obj_size, GFP);				\
+>  })
+>
+> +/**
+> + * __alloc_flex - Allocate an object that has a trailing flexible array
+> + * @KMALLOC: kmalloc wrapper function to use for allocation.
+> + * @GFP: GFP flags for the allocation.
+> + * @TYPE: type of structure to allocate space for.
+> + * @FAM: The name of the flexible array member of @TYPE structure.
+> + * @COUNT: how many @FAM elements to allocate space for.
+> + *
+> + * Returns: Newly allocated pointer to @TYPE with @COUNT-many trailing
+> + * @FAM elements, or NULL on failure or if @COUNT cannot be represented
+> + * by the member of @TYPE that counts the @FAM elements (annotated via
+> + * __counted_by()).
+> + */
+> +#define __alloc_flex(KMALLOC, GFP, TYPE, FAM, COUNT)			\
+> +({									\
+> +	const size_t __count = (COUNT);					\
+> +	const size_t __obj_size = struct_size_t(TYPE, FAM, __count);	\
+> +	TYPE *__obj_ptr;						\
+> +	if (WARN_ON_ONCE(overflows_flex_counter_type(TYPE, FAM,	__count))) \
+> +		__obj_ptr = NULL;					\
 
-I am trying to understand how generic this feature/API is.
-Can you please elaborate on the feature you want to configure here?
+I wonder if this is correct? Because overflows_flex_counter_type() is:
 
-A single CQE to describe several packets?
-What is the price? What per-packet information/hw offloads do you lose 
-in the process?
+#define overflows_flex_counter_type(TYPE, FAM, COUNT)		\
+	(!overflows_type(COUNT, typeof_flex_counter(((TYPE *)NULL)->FAM)))
 
-For comparison, in mlx5 we have RX CQE compression, which can be applied 
-on multiple near-identical completions that share/match several fields. 
-Still, there is a per-packet mini-cqe with distinctive per-packet fields 
-like csum.
+I.e. returns true if overflows_type() returns false, and whose comment states:
 
->   COALESCE_SET
->   ============
->   
-> @@ -1143,6 +1151,8 @@ Request contents:
->     ``ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS``    u32     time (us), aggr, Tx
->     ``ETHTOOL_A_COALESCE_RX_PROFILE``            nested  profile of DIM, Rx
->     ``ETHTOOL_A_COALESCE_TX_PROFILE``            nested  profile of DIM, Tx
-> +  ``ETHTOOL_A_COALESCE_RX_CQE_FRAMES``         u32     max packets, Rx CQE
-> +  ``ETHTOOL_A_COALESCE_RX_CQE_NSECS``          u32     delay (ns), Rx CQE
->     ===========================================  ======  =======================
->   
->   Request is rejected if it attributes declared as unsupported by driver (i.e.
-> diff --git a/include/linux/ethtool.h b/include/linux/ethtool.h
-> index 798abec67a1b..25ccd2d5d4dc 100644
-> --- a/include/linux/ethtool.h
-> +++ b/include/linux/ethtool.h
-> @@ -332,6 +332,8 @@ struct kernel_ethtool_coalesce {
->   	u32 tx_aggr_max_bytes;
->   	u32 tx_aggr_max_frames;
->   	u32 tx_aggr_time_usecs;
-> +	u32 rx_cqe_frames;
-> +	u32 rx_cqe_nsecs;
->   };
->   
->   /**
-> @@ -380,7 +382,9 @@ bool ethtool_convert_link_mode_to_legacy_u32(u32 *legacy_u32,
->   #define ETHTOOL_COALESCE_TX_AGGR_TIME_USECS	BIT(26)
->   #define ETHTOOL_COALESCE_RX_PROFILE		BIT(27)
->   #define ETHTOOL_COALESCE_TX_PROFILE		BIT(28)
-> -#define ETHTOOL_COALESCE_ALL_PARAMS		GENMASK(28, 0)
-> +#define ETHTOOL_COALESCE_RX_CQE_FRAMES		BIT(29)
-> +#define ETHTOOL_COALESCE_RX_CQE_NSECS		BIT(30)
-> +#define ETHTOOL_COALESCE_ALL_PARAMS		GENMASK(30, 0)
->   
->   #define ETHTOOL_COALESCE_USECS						\
->   	(ETHTOOL_COALESCE_RX_USECS | ETHTOOL_COALESCE_TX_USECS)
-> diff --git a/include/uapi/linux/ethtool_netlink_generated.h b/include/uapi/linux/ethtool_netlink_generated.h
-> index 556a0c834df5..efc6e4ade77b 100644
-> --- a/include/uapi/linux/ethtool_netlink_generated.h
-> +++ b/include/uapi/linux/ethtool_netlink_generated.h
-> @@ -371,6 +371,8 @@ enum {
->   	ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS,
->   	ETHTOOL_A_COALESCE_RX_PROFILE,
->   	ETHTOOL_A_COALESCE_TX_PROFILE,
-> +	ETHTOOL_A_COALESCE_RX_CQE_FRAMES,
-> +	ETHTOOL_A_COALESCE_RX_CQE_NSECS,
->   
->   	__ETHTOOL_A_COALESCE_CNT,
->   	ETHTOOL_A_COALESCE_MAX = (__ETHTOOL_A_COALESCE_CNT - 1)
-> diff --git a/net/ethtool/coalesce.c b/net/ethtool/coalesce.c
-> index 3e18ca1ccc5e..349bb02c517a 100644
-> --- a/net/ethtool/coalesce.c
-> +++ b/net/ethtool/coalesce.c
-> @@ -118,6 +118,8 @@ static int coalesce_reply_size(const struct ethnl_req_info *req_base,
->   	       nla_total_size(sizeof(u32)) +	/* _TX_AGGR_MAX_BYTES */
->   	       nla_total_size(sizeof(u32)) +	/* _TX_AGGR_MAX_FRAMES */
->   	       nla_total_size(sizeof(u32)) +	/* _TX_AGGR_TIME_USECS */
-> +	       nla_total_size(sizeof(u32)) +	/* _RX_CQE_FRAMES */
-> +	       nla_total_size(sizeof(u32)) +	/* _RX_CQE_NSECS */
->   	       total_modersz * 2;		/* _{R,T}X_PROFILE */
->   }
->   
-> @@ -269,7 +271,11 @@ static int coalesce_fill_reply(struct sk_buff *skb,
->   	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES,
->   			     kcoal->tx_aggr_max_frames, supported) ||
->   	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS,
-> -			     kcoal->tx_aggr_time_usecs, supported))
-> +			     kcoal->tx_aggr_time_usecs, supported) ||
-> +	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_RX_CQE_FRAMES,
-> +			     kcoal->rx_cqe_frames, supported) ||
-> +	    coalesce_put_u32(skb, ETHTOOL_A_COALESCE_RX_CQE_NSECS,
-> +			     kcoal->rx_cqe_nsecs, supported))
->   		return -EMSGSIZE;
->   
->   	if (!req_base->dev || !req_base->dev->irq_moder)
-> @@ -338,6 +344,8 @@ const struct nla_policy ethnl_coalesce_set_policy[] = {
->   	[ETHTOOL_A_COALESCE_TX_AGGR_MAX_BYTES] = { .type = NLA_U32 },
->   	[ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES] = { .type = NLA_U32 },
->   	[ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS] = { .type = NLA_U32 },
-> +	[ETHTOOL_A_COALESCE_RX_CQE_FRAMES] = { .type = NLA_U32 },
-> +	[ETHTOOL_A_COALESCE_RX_CQE_NSECS] = { .type = NLA_U32 },
->   	[ETHTOOL_A_COALESCE_RX_PROFILE] =
->   		NLA_POLICY_NESTED(coalesce_profile_policy),
->   	[ETHTOOL_A_COALESCE_TX_PROFILE] =
-> @@ -570,6 +578,10 @@ __ethnl_set_coalesce(struct ethnl_req_info *req_info, struct genl_info *info,
->   			 tb[ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES], &mod);
->   	ethnl_update_u32(&kernel_coalesce.tx_aggr_time_usecs,
->   			 tb[ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS], &mod);
-> +	ethnl_update_u32(&kernel_coalesce.rx_cqe_frames,
-> +			 tb[ETHTOOL_A_COALESCE_RX_CQE_FRAMES], &mod);
-> +	ethnl_update_u32(&kernel_coalesce.rx_cqe_nsecs,
-> +			 tb[ETHTOOL_A_COALESCE_RX_CQE_NSECS], &mod);
->   
->   	if (dev->irq_moder && dev->irq_moder->profile_flags & DIM_PROFILE_RX) {
->   		ret = ethnl_update_profile(dev, &dev->irq_moder->rx_profile,
+ * Returns: true if @COUNT can be represented in the @FAM's counter. When
+ * @FAM is not annotated with __counted_by(), always returns true.
 
+So we warn on when the @COUNT _can_ be represented in @FAM's counter?
+
+I'm seeing the warning for the following:
+
+struct multi_remaps {
+	unsigned int nr, cap;
+	long offsets[] __counted_by(cap);
+};
+...
+unsigned int cap;
+...
+multi = kmalloc_flex(*multi, offsets, cap, gfp);
+
+Surely that ! should not be there?
+
+Annnd now I typed that I realise that Linus fixed this up in mainline and I was
+working with a stale version of this file :))
+
+Anyway, I see that the comment isn't fixed up, so I think that's something we
+should patch, like:
+
+ * Returns: true if @COUNT can be represented in the @FAM's counter. When
+ * @FAM is not annotated with __counted_by(), always returns true.
+
+->
+
+ * Returns: true if @COUNT cannot be represented in the @FAM's counter. When
+ * @FAM is not annotated with __counted_by(), always returns false.
+
+Cheers, Lorenzo
 
