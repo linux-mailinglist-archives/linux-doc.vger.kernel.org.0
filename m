@@ -1,246 +1,161 @@
-Return-Path: <linux-doc+bounces-76747-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76750-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WNwvGZhonWnBPwQAu9opvQ
-	(envelope-from <linux-doc+bounces-76747-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:00:08 +0100
+	id cDYTN9hqnWnhPwQAu9opvQ
+	(envelope-from <linux-doc+bounces-76750-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:09:44 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 066FC184248
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:00:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44B8C18447E
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:09:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6512331AC47A
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 08:55:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CE7C3301B734
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 09:06:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35A3B369217;
-	Tue, 24 Feb 2026 08:55:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A81036656F;
+	Tue, 24 Feb 2026 09:06:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="KAFY5ARO"
+	dkim=pass (1024-bit key) header.d=ralfj.de header.i=@ralfj.de header.b="qBoTYToU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
+Received: from r-passerv.ralfj.de (r-passerv.ralfj.de [109.230.236.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E14736827F;
-	Tue, 24 Feb 2026 08:55:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 717523346A0;
+	Tue, 24 Feb 2026 09:06:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.230.236.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771923308; cv=none; b=fqjFkjzhlgXD6T0aAJFxaop9gQ0gzVw8l/3Qk66ZXeUzqHHldCPIG11gdo88SqSG9gTHhxREmP8iQFsd34vYe3IhL92NFDOcA8An9/ttqyiFZxIKGCPNS67n2sXPGjyDbHh6tXwHj+f4yY04FMgle2vkFWHHJ3Y3hucO99HpBjw=
+	t=1771923980; cv=none; b=HUWKmtgJc9NWx/KpsbWCtt4DHLuIeefhIrlzkJOioRpU+kES6BYrGHKS/Ppz9U5yPUKviMkPZaoV6WIJU82ArK8EvXtoWbUlhegMM/AIzSQe6cSEekHnyk7uQNfjJwiDPD6wB5GEIe8IL47ghnJA2NoI7pIXM+SgDKezZgdK3fU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771923308; c=relaxed/simple;
-	bh=/xCjAhtGnlvVH7RhPesJq4BiDO6rAsTUSi5DesDKMuI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HoYbTMNfezKXAFAsh4mq+InCOABRXrCzguAr4A6YkHAEs6hGxEVtD4Y2TbRyy2O6OpZ14CoEB4vt+/tW5IyQycgoJL/nu9pXq9v2dSKcIwk3TaXfzAGG6tebPphhD0NLUrl1GL9pBh79yeDWOPIgSsEjbxr/plt7C0O078nHsyA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=KAFY5ARO; arc=none smtp.client-ip=113.46.200.217
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=rNYav2yGpg/yhEliv79lwhJ8COerKJd3gx9DFjPKfgs=;
-	b=KAFY5ARO3lkVVlwifRHD59MvsYOIxlEqBKCuVdt9gR43+fi6kz761/nmCdIH8aKkL2My7T0x+
-	XSGqwaW1YlXTdSb0joV2Ga1dvUnO2qFrEpDnU5u9/XXt/LGEIsgjOvZSzDomn1uY9e6UrIk7gDS
-	PNte+t/SYwF58Yq+2OvlD8A=
-Received: from mail.maildlp.com (unknown [172.19.162.144])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4fKryM166Wzcb1W;
-	Tue, 24 Feb 2026 16:50:03 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 1A20240567;
-	Tue, 24 Feb 2026 16:55:02 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
- (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Tue, 24 Feb
- 2026 16:54:59 +0800
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
-	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
-	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
-	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
-	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
-	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
-	<hpa@zytor.com>, <akpm@linux-foundation.org>, <bhe@redhat.com>,
-	<vgoyal@redhat.com>, <dyoung@redhat.com>, <rdunlap@infradead.org>,
-	<pmladek@suse.com>, <dapeng1.mi@linux.intel.com>, <kees@kernel.org>,
-	<paulmck@kernel.org>, <lirongqing@baidu.com>, <arnd@arndb.de>,
-	<ardb@kernel.org>, <leitao@debian.org>, <rppt@kernel.org>,
-	<cfsworks@gmail.com>, <ryan.roberts@arm.com>, <sourabhjain@linux.ibm.com>,
-	<tangyouling@kylinos.cn>, <eajames@linux.ibm.com>, <hbathini@linux.ibm.com>,
-	<ritesh.list@gmail.com>, <songshuaishuai@tinylab.org>,
-	<samuel.holland@sifive.com>, <kevin.brodsky@arm.com>,
-	<vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>, <coxu@redhat.com>,
-	<liaoyuanhong@vivo.com>, <fuqiang.wang@easystack.cn>, <jbohac@suse.cz>,
-	<brgerst@gmail.com>, <x86@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
-	<linux-riscv@lists.infradead.org>, <kexec@lists.infradead.org>
-CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v6 5/5] riscv: kexec: Add support for crashkernel CMA reservation
-Date: Tue, 24 Feb 2026 16:53:42 +0800
-Message-ID: <20260224085342.387996-6-ruanjinjie@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260224085342.387996-1-ruanjinjie@huawei.com>
-References: <20260224085342.387996-1-ruanjinjie@huawei.com>
+	s=arc-20240116; t=1771923980; c=relaxed/simple;
+	bh=OSQW9JK0igywcpVRUVNtIHNuLXdUzjzJawoBHMP3w30=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HlvNdMSma/I46CCWZ86+AMncIPpet80xnSyBvq7Adp7y77BUVe9HXhArRvRxHvqi4DrLUUWvxTj+3qiKO5KsGRue+I9IMEjLelpjdUw5cI1iZcXp2tvrhjmUiVl6oX6yVQZoJHsMymLp1uUJQHIObr2RBe8is6EiDHTb3xhXx5U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ralfj.de; spf=pass smtp.mailfrom=ralfj.de; dkim=pass (1024-bit key) header.d=ralfj.de header.i=@ralfj.de header.b=qBoTYToU; arc=none smtp.client-ip=109.230.236.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ralfj.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ralfj.de
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=ralfj.de; s=mail;
+	t=1771923494; bh=OSQW9JK0igywcpVRUVNtIHNuLXdUzjzJawoBHMP3w30=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=qBoTYToU6O6WpDW4IWSgV8tCF1IeZzUS6BbFTM0hMfWV+qxwzJcuZo3qw4P4Wdprg
+	 bEUqNiB10O/dILFrEOOpb+6Cq7BoEyHXim3bcEJEF+XebylUKqmVGXlHR2Pi61sUuG
+	 mPC+NCvSHP82KwObVmRnNZp9+YcBNcJs0RQivlnw=
+Received: from [192.168.178.20] (53.206.40.145.ftth.as8758.net [145.40.206.53])
+	by r-passerv.ralfj.de (Postfix) with ESMTPSA id 7E4E320525FE;
+	Tue, 24 Feb 2026 09:58:13 +0100 (CET)
+Message-ID: <0a176f95-eeba-428e-b19b-b08503d9ca5d@ralfj.de>
+Date: Tue, 24 Feb 2026 09:58:10 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V6 2/3] rust: Add PowerPC support
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+ Mukesh Kumar Chaurasiya <mkchauras@gmail.com>
+Cc: Link Mauve <linkmauve@linkmauve.fr>, Alice Ryhl <aliceryhl@google.com>,
+ ojeda@kernel.org, boqun.feng@gmail.com, gary@garyguo.net,
+ bjorn3_gh@protonmail.com, lossin@kernel.org, a.hindborg@kernel.org,
+ tmgross@umich.edu, dakr@kernel.org, corbet@lwn.net, maddy@linux.ibm.com,
+ mpe@ellerman.id.au, npiggin@gmail.com, chleroy@kernel.org,
+ peterz@infradead.org, jpoimboe@kernel.org, jbaron@akamai.com,
+ rostedt@goodmis.org, ardb@kernel.org, rust-for-linux@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, Jubilee Young <workingjubilee@gmail.com>,
+ Matthew Maurer <mmaurer@google.com>, David Wood <david@davidtw.co>,
+ Wesley Wiser <wwiser@gmail.com>
+References: <20260210090023.2587534-1-mkchauras@gmail.com>
+ <20260210090023.2587534-3-mkchauras@gmail.com>
+ <CAH5fLgi3Owm4=4g8wQ5Rnr7Y63XJ1D8apOdkewW6WpRfg6vV_w@mail.gmail.com>
+ <aZtT4MH0Q8Ic9ZiM@luna>
+ <CANiq72nEam8n_daX5LyYrpH=i71k+pb+HLn6EEPdJJc-Zi9Q3A@mail.gmail.com>
+ <aZu6cSqnvO91w1m4@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
+ <CANiq72mg+D4QZmBhrNj7dB+V3GHsQoZT2cSG1ffHYDYJWXyopQ@mail.gmail.com>
+From: Ralf Jung <post@ralfj.de>
+Content-Language: en-US, de-DE
+In-Reply-To: <CANiq72mg+D4QZmBhrNj7dB+V3GHsQoZT2cSG1ffHYDYJWXyopQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
- dggpemf500011.china.huawei.com (7.185.36.131)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	R_DKIM_ALLOW(-0.20)[ralfj.de:s=mail];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,suse.com,baidu.com,arndb.de,debian.org,kylinos.cn,tinylab.org,sifive.com,pigmoral.tech,vivo.com,easystack.cn,suse.cz,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	TAGGED_FROM(0.00)[bounces-76747-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_GT_50(0.00)[59];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-76750-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[30];
+	DMARC_NA(0.00)[ralfj.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[ralfj.de:+];
+	NEURAL_HAM(-0.00)[-0.999];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[post@ralfj.de,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[linkmauve.fr,google.com,kernel.org,gmail.com,garyguo.net,protonmail.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org,davidtw.co];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:dkim,huawei.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 066FC184248
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ralfj.de:mid,ralfj.de:dkim]
+X-Rspamd-Queue-Id: 44B8C18447E
 X-Rspamd-Action: no action
 
-Commit 35c18f2933c5 ("Add a new optional ",cma" suffix to the
-crashkernel= command line option") and commit ab475510e042 ("kdump:
-implement reserve_crashkernel_cma") added CMA support for kdump
-crashkernel reservation. This allows the kernel to dynamically allocate
-contiguous memory for crash dumping when needed, rather than permanently
-reserving a fixed region at boot time.
+Hi all,
 
-So extend crashkernel CMA reservation support to riscv. The following
-changes are made to enable CMA reservation:
+On 23.02.26 16:31, Miguel Ojeda wrote:
+> On Mon, Feb 23, 2026 at 3:26 AM Mukesh Kumar Chaurasiya
+> <mkchauras@gmail.com> wrote:
+>>
+>> I think, disabling altivec, fpu and vsx with compiler flag will work.
+>>
+>> What are your opinion on this?
+> 
+> It is really up to upstream Rust -- for us, i.e. the kernel, it
+> usually doesn't really matter much how things like that are
+> accomplished: whether via flags, a built-in target, a custom target,
+> etc. However, we need to know what the path to stability is.
+> 
+> My understanding (but I may be wrong) is that upstream Rust prefer we
+> use built-in targets for softfloat instead of disabling via
+> `-Ctarget-feature` (and that the other options may go away soon and/or
+> will never be stable) -- at least for some cases. For instance, for
+> arm64, please this recent change kernel-side regarding `neon` as an
+> entry point:
+> 
+>    446a8351f160 ("arm64: rust: clean Rust 1.85.0 warning using softfloat target")
+> 
+> So please ask upstream Rust (probably in their Zulip, e.g. in
+> t-compiler or rust-for-linux channels) what you should do for powerpc.
+> They will likely be happy with a PR adding the target (or whatever
+> they decide) as Alice mentions. And until we reach that minimum
+> version (in a year or more), we can use something else meanwhile. But
+> at least we will have a way towards the end goal, if that makes sense.
+> 
+> In case it helps, let me Cc Ralf, Jubilee and Matthew who were
+> involved in some of that discussion in the past, plus the compiler
+> leads.
 
-- Parse and obtain the CMA reservation size along with other crashkernel
-  parameters.
-- Call reserve_crashkernel_cma() to allocate the CMA region for kdump.
-- Include the CMA-reserved ranges for kdump kernel to use.
-- Exclude the CMA-reserved ranges from the crash kernel memory to
-  prevent them from being exported through /proc/vmcore, which is already
-  done in the crash core.
+Upstream Rust dev here. Indeed we'd strongly prefer if this could use a built-in 
+Rust target; we can work with you on adding a new target if that is needed.
+The kernel currently uses a custom JSON target on x86 and that's quite the 
+headache for compiler development: JSON targets are highly unstable and directly 
+expose low-level details of how the compiler internally represents targets. When 
+we change that representation, we update all built-in targets, but of course we 
+cannot update JSON targets. So whenever possible we'd like to move towards 
+reducing the number of JSON targets used by the kernel, not increase it. :)
 
-Update kernel-parameters.txt to document CMA support for crashkernel on
-riscv architecture.
-
-Acked-by: Paul Walmsley <pjw@kernel.org> # arch/riscv
-Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 16 ++++++++--------
- arch/riscv/kernel/machine_kexec_file.c          | 16 ++++++++++++++--
- arch/riscv/mm/init.c                            |  5 +++--
- 3 files changed, 25 insertions(+), 12 deletions(-)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 497f63b76898..3f9ca148167e 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1121,14 +1121,14 @@ Kernel parameters
- 			It will be ignored when crashkernel=X,high is not used
- 			or memory reserved is below 4G.
- 	crashkernel=size[KMG],cma
--			[KNL, X86, ARM64, ppc] Reserve additional crash kernel memory from
--			CMA. This reservation is usable by the first system's
--			userspace memory and kernel movable allocations (memory
--			balloon, zswap). Pages allocated from this memory range
--			will not be included in the vmcore so this should not
--			be used if dumping of userspace memory is intended and
--			it has to be expected that some movable kernel pages
--			may be missing from the dump.
-+			[KNL, X86, ARM64, RISCV, ppc] Reserve additional crash
-+			kernel memory from CMA. This reservation is usable by
-+			the first system's userspace memory and kernel movable
-+			allocations (memory balloon, zswap). Pages allocated
-+			from this memory range will not be included in the vmcore
-+			so this should not be used if dumping of userspace memory
-+			is intended and it has to be expected that some movable
-+			kernel pages may be missing from the dump.
- 
- 			A standard crashkernel reservation, as described above,
- 			is still needed to hold the crash kernel and initrd.
-diff --git a/arch/riscv/kernel/machine_kexec_file.c b/arch/riscv/kernel/machine_kexec_file.c
-index d0e331d87155..605903e21c01 100644
---- a/arch/riscv/kernel/machine_kexec_file.c
-+++ b/arch/riscv/kernel/machine_kexec_file.c
-@@ -46,7 +46,7 @@ static int get_nr_ram_ranges_callback(struct resource *res, void *arg)
- 
- unsigned int arch_get_system_nr_ranges(void)
- {
--	unsigned int nr_ranges = 1; /* For exclusion of crashkernel region */
-+	unsigned int nr_ranges = 1 + crashk_cma_cnt; /* For exclusion of crashkernel region */
- 
- 	walk_system_ram_res(0, -1, &nr_ranges, get_nr_ram_ranges_callback);
- 
-@@ -66,8 +66,20 @@ static int prepare_elf64_ram_headers_callback(struct resource *res, void *arg)
- 
- int arch_crash_populate_cmem(struct crash_mem *cmem)
- {
-+	int ret, i;
-+
- 	cmem->nr_ranges = 0;
--	return walk_system_ram_res(0, -1, cmem, prepare_elf64_ram_headers_callback);
-+	ret = walk_system_ram_res(0, -1, cmem, prepare_elf64_ram_headers_callback);
-+	if (ret)
-+		return ret;
-+
-+	for (i = 0; i < crashk_cma_cnt; i++) {
-+		cmem->ranges[cmem->nr_ranges].start = crashk_cma_ranges[i].start;
-+		cmem->ranges[cmem->nr_ranges].end = crashk_cma_ranges[i].end;
-+		cmem->nr_ranges++;
-+	}
-+
-+	return 0;
- }
- 
- static char *setup_kdump_cmdline(struct kimage *image, char *cmdline,
-diff --git a/arch/riscv/mm/init.c b/arch/riscv/mm/init.c
-index 811e03786c56..4cd49afa9077 100644
---- a/arch/riscv/mm/init.c
-+++ b/arch/riscv/mm/init.c
-@@ -1398,7 +1398,7 @@ static inline void setup_vm_final(void)
-  */
- static void __init arch_reserve_crashkernel(void)
- {
--	unsigned long long low_size = 0;
-+	unsigned long long low_size = 0, cma_size = 0;
- 	unsigned long long crash_base, crash_size;
- 	bool high = false;
- 	int ret;
-@@ -1408,11 +1408,12 @@ static void __init arch_reserve_crashkernel(void)
- 
- 	ret = parse_crashkernel(boot_command_line, memblock_phys_mem_size(),
- 				&crash_size, &crash_base,
--				&low_size, NULL, &high);
-+				&low_size, &cma_size, &high);
- 	if (ret)
- 		return;
- 
- 	reserve_crashkernel_generic(crash_size, crash_base, low_size, high);
-+	reserve_crashkernel_cma(cma_size);
- }
- 
- void __init paging_init(void)
--- 
-2.34.1
+Kind regards,
+Ralf
 
 
