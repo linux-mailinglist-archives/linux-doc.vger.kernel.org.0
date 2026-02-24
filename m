@@ -1,135 +1,184 @@
-Return-Path: <linux-doc+bounces-76771-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76774-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gKRSLnGanWnwQgQAu9opvQ
-	(envelope-from <linux-doc+bounces-76771-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 13:32:49 +0100
+	id EO3kEzOmnWmgQwQAu9opvQ
+	(envelope-from <linux-doc+bounces-76774-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 14:22:59 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A730187000
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 13:32:49 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3DA5187933
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 14:22:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 0A82330349A5
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 12:32:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AF299322000F
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 13:16:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0EA9A3815F8;
-	Tue, 24 Feb 2026 12:32:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B0AC439E18E;
+	Tue, 24 Feb 2026 13:16:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ARsFXEib"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="QKpMSpAI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com [113.46.200.216])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6C673803DB
-	for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 12:32:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 076BB39C65C;
+	Tue, 24 Feb 2026 13:16:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.216
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771936366; cv=none; b=r4kbgB5i0bgSQJ7D+9jqqWyeIlgtDFjw9sQ0m6cDZTdPw1iKiwGgREExvKgSDM6d9TtL2tEsp3F6m/R+QVSwLltH0zHAzIBCEmzC68hfbg8kRAvhn9nNaR8Cggu6V23n1JkexPCWIOIL4r7WI7uNY5xUsld8JIBbDLVMSCunYjQ=
+	t=1771938975; cv=none; b=tThCN9Q7ZghgAIE3ntpROpqER6TsOPfmylh68tn1brzqF/YaEtuFj5hGRYZIJVpCQ289nW6k0dP+p7ni+vTxM3fQrTIE05J4KtnUImzq9FRlCgTDmCM1H13TjgyCFH79r+VOHFa5L0w39ULzBOVzZXksyGQRMitpvMF/lb4M8e4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771936366; c=relaxed/simple;
-	bh=rX2HtGxlLMbbddQm/hghS6l99iLwtyKOhOWYRkT7wyk=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=ot96ggBiaQ1wv2bSkESJCT3lh0tSd92ADNxqymnYENS61WMZlEtlPwF584gmtkkm3XbANjJpH5BCc98eXM4aXwg4UyZVn7VsVE35OMvCyZotd1vqFkazNXnObIzfL7f1zjqGEkpkHVXOSK5k+dbGALyfteua1C6Zma9zJFhGEBM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ARsFXEib; arc=none smtp.client-ip=192.198.163.8
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1771936366; x=1803472366;
-  h=date:from:to:cc:subject:message-id;
-  bh=rX2HtGxlLMbbddQm/hghS6l99iLwtyKOhOWYRkT7wyk=;
-  b=ARsFXEibeUzGujPBG6nj0PU/aZziW5Nr05L7hjCRpawh3bRwtN13axmF
-   RN3gjl9dhdd1qFCbRBawjDE9N9E1zLsIPK8WoN6Xtu6qb2NtUYcZLy+iO
-   prG5QXbbaldeV8lXlHhsD+MwZ+ozaFtflIgjS/YiJn4zw8s+k8o3FNCvu
-   HNd6Zqy/kAw+ry3Lh8OQ4ZDwdERJ9Yz2njey4Ffob4ghBFwwfcIUTDchN
-   aEXXf24XUym2okrY3C/s4GWYDZgqgcKQR4/YReA3P7sPFQ9Ph6H8uhvky
-   Nro8pjkADv3+DgkL3CCYxLj1WUabNEtwEzlTsGiSM74svsl40V7a8Mq3d
-   Q==;
-X-CSE-ConnectionGUID: KVrPHiCrTtiWR1GaLU8N+g==
-X-CSE-MsgGUID: vCZtsSEFT3SwAjpiN0GimA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11710"; a="90529707"
-X-IronPort-AV: E=Sophos;i="6.21,308,1763452800"; 
-   d="scan'208";a="90529707"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Feb 2026 04:32:45 -0800
-X-CSE-ConnectionGUID: ZippTyupReu9gQ97XOFyHQ==
-X-CSE-MsgGUID: HtkoxouKQ9+eU+U9MHxboQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,308,1763452800"; 
-   d="scan'208";a="220476848"
-Received: from igk-lkp-server01.igk.intel.com (HELO e5404a91d123) ([10.211.93.152])
-  by fmviesa005.fm.intel.com with ESMTP; 24 Feb 2026 04:32:43 -0800
-Received: from kbuild by e5404a91d123 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vuraj-000000005HZ-03Gu;
-	Tue, 24 Feb 2026 12:32:41 +0000
-Date: Tue, 24 Feb 2026 13:32:06 +0100
-From: kernel test robot <lkp@intel.com>
-To: Arnd Bergmann <arnd@arndb.de>
-Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org
-Subject: [arnd-playground:randconfig-7.1-next 31/733] htmldocs:
- Documentation/arch/ia64/index.rst: WARNING: document isn't included in any
- toctree [toc.not_included]
-Message-ID: <202602241336.XHZQth3a-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	s=arc-20240116; t=1771938975; c=relaxed/simple;
+	bh=GF/oHl/8hMLdsJmFBHfQUTk9KqyrNTSf61qDfrlAWqk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=XekFuHGuLkG7xFRTD9SDLt7p1tbsi+QR6hiNsYo60/NARWfRLm80oFqiLHo8aoALWgxyfqStGSIwhC/dLxMZ+H6oyysm9R8z6BkIt1kYJEJ/hKLWulTlB8CFdRrqB5na5qK3rb/2AKfCjxuc6payWEb96JZshR8s99qz5p9CC+8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=QKpMSpAI; arc=none smtp.client-ip=113.46.200.216
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=IMiEa0RUKKNBqPTwHrxxYXdut90yci9zePakTv5j+6g=;
+	b=QKpMSpAIVbPsxR2sZZp2mdc/S1BOw/PBnvdgZmpbwUv6aMBExxJnmNgXudjS4orJ2f3gl7bkB
+	9Le101kmLy54NvdTEamAVtjVFaPIlNpnoyyCXC1abaD58TYezVe79yfLOlyqWx2GeOTdSJYnI2A
+	ViHPeC+kcVz01umL9ahpso4=
+Received: from mail.maildlp.com (unknown [172.19.163.0])
+	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4fKylh4dh4z1T4Mf;
+	Tue, 24 Feb 2026 21:11:12 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 471A04056B;
+	Tue, 24 Feb 2026 21:16:03 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.189.124) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Tue, 24 Feb 2026 21:16:02 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
+	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
+	<andrew+netdev@lunn.ch>
+CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
+	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
+	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
+	<shijing34@huawei.com>
+Subject: [PATCH net-next v01 00/15] net: hinic3: Fix code styles
+Date: Tue, 24 Feb 2026 21:15:37 +0800
+Message-ID: <cover.1771916043.git.zhuyikai1@h-partners.com>
+X-Mailer: git-send-email 2.51.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[intel.com:+];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76771-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_THREE(0.00)[3];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_FROM(0.00)[bounces-76774-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.994];
 	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,intel.com:mid,intel.com:dkim,intel.com:email]
-X-Rspamd-Queue-Id: 5A730187000
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[h-partners.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:dkim]
+X-Rspamd-Queue-Id: A3DA5187933
 X-Rspamd-Action: no action
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/arnd/playground.git randconfig-7.1-next
-head:   76f9bd9e344ecd3faf7bdadedc7027b64a6f2d63
-commit: 8f115a8869712a4d22aa5218e1765f659af5fb63 [31/733] Revert "arch: Remove Itanium (IA-64) architecture"
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260224/202602241336.XHZQth3a-lkp@intel.com/reproduce)
+This patchset provides 4 code styles fixes:
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202602241336.XHZQth3a-lkp@intel.com/
+Remove empty lines between error handling.
+Remove defensive txq_num check.
+Use array_size instead of multiplying.
+SQ use SQ_CTXT_PREF_CI_HI to improve readability.
 
-All warnings (new ones prefixed by >>):
+Changes:
 
-   Documentation/userspace-api/landlock:526: ./include/uapi/linux/landlock.h:45: ERROR: Unknown target name: "network flags". [docutils]
-   Documentation/userspace-api/landlock:526: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
-   Documentation/userspace-api/landlock:526: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
-   Documentation/userspace-api/landlock:535: ./include/uapi/linux/landlock.h:166: ERROR: Unknown target name: "filesystem flags". [docutils]
-   Documentation/userspace-api/landlock:535: ./include/uapi/linux/landlock.h:189: ERROR: Unknown target name: "network flags". [docutils]
->> Documentation/arch/ia64/index.rst: WARNING: document isn't included in any toctree [toc.not_included]
-   Documentation/networking/skbuff:36: ./include/linux/skbuff.h:181: WARNING: Failed to create a cross reference. A title or caption not found: 'crc' [ref.ref]
+PATCH V01: https://lore.kernel.org/netdev/cover.1768915707.git.zhuyikai1@h-partners.com/
 
+PATCH V02: https://lore.kernel.org/netdev/cover.1769142701.git.zhuyikai1@h-partners.com/
+* Send "Fix netif_queue_set_napi queue_index parameter passing error" to net (Jakub Kicinski)
+
+PATCH V03:
+* Modify commit description to be more accurate and clear (Simon Horman)
+
+Fan Gong (15):
+  hinic3: Add command queue detailed-respone interfaces
+  hinic3: Add Command Queue/Async Event Queue/Mailbox dump interfaces
+  hinic3: Add chip_present_flag checks to prevent errors when card is
+    absent
+  hinic3: Add RX GRO and VLAN offload support
+  hinic3: Add msg_send_lock for message sending concurrecy
+  hinic3: Add PF device support and function type validation
+  hinic3: Add PF FLR wait and timeout handling
+  hinic3: Add PF/VF capability parsing and parameter validation
+  hinic3: Add ethtool basic ops
+  hinic3: Add ethtool queue ops
+  hinic3: Add ethtool statistic ops
+  hinic3: Add ethtool coalesce ops
+  hinic3: Add ethtool rss ops
+  hinic3: Add MTU size validation
+  hinic3: Config netdev->watchdog_timeo to set nic tx timeout
+
+ drivers/net/ethernet/huawei/hinic3/Makefile   |    1 +
+ .../net/ethernet/huawei/hinic3/hinic3_cmdq.c  |  225 ++-
+ .../net/ethernet/huawei/hinic3/hinic3_cmdq.h  |   15 +
+ .../ethernet/huawei/hinic3/hinic3_common.h    |    1 +
+ .../net/ethernet/huawei/hinic3/hinic3_csr.h   |    2 +
+ .../net/ethernet/huawei/hinic3/hinic3_eqs.c   |   67 +
+ .../net/ethernet/huawei/hinic3/hinic3_eqs.h   |    6 +
+ .../ethernet/huawei/hinic3/hinic3_ethtool.c   | 1217 +++++++++++++++++
+ .../ethernet/huawei/hinic3/hinic3_hw_cfg.c    |   53 +-
+ .../ethernet/huawei/hinic3/hinic3_hw_cfg.h    |    8 +
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.c   |   65 +
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.h   |    2 +
+ .../ethernet/huawei/hinic3/hinic3_hw_intf.h   |   25 +-
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.c |   11 +
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.h |    1 +
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.c  |   31 +-
+ .../net/ethernet/huawei/hinic3/hinic3_irq.c   |    3 +-
+ .../net/ethernet/huawei/hinic3/hinic3_lld.c   |    1 +
+ .../net/ethernet/huawei/hinic3/hinic3_main.c  |   10 +
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.c  |   35 +-
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.h  |    2 +
+ .../huawei/hinic3/hinic3_mgmt_interface.h     |   55 +-
+ .../huawei/hinic3/hinic3_netdev_ops.c         |   76 +-
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.c   |  167 +++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.h   |  219 +++
+ .../ethernet/huawei/hinic3/hinic3_nic_dev.h   |   30 +
+ .../ethernet/huawei/hinic3/hinic3_nic_io.h    |    4 +
+ .../huawei/hinic3/hinic3_pci_id_tbl.h         |    1 +
+ .../net/ethernet/huawei/hinic3/hinic3_rss.c   |  487 ++++++-
+ .../net/ethernet/huawei/hinic3/hinic3_rss.h   |   19 +
+ .../net/ethernet/huawei/hinic3/hinic3_rx.c    |   84 +-
+ .../net/ethernet/huawei/hinic3/hinic3_rx.h    |   17 +
+ .../net/ethernet/huawei/hinic3/hinic3_tx.c    |   72 +-
+ .../net/ethernet/huawei/hinic3/hinic3_tx.h    |    2 +
+ 34 files changed, 2985 insertions(+), 29 deletions(-)
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_ethtool.c
+
+
+base-commit: f77c7b96014471f2c39823ed9fcb42967e7d9ede
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.43.0
+
 
