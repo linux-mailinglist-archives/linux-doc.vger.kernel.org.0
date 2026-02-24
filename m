@@ -1,149 +1,181 @@
-Return-Path: <linux-doc+bounces-76756-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76742-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OLSfKEhxnWmAQAQAu9opvQ
-	(envelope-from <linux-doc+bounces-76756-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:37:12 +0100
+	id mHwdIxRonWlgPQQAu9opvQ
+	(envelope-from <linux-doc+bounces-76742-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 09:57:56 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05C31184B6A
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:37:11 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CDB51841AD
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 09:57:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A4B04300FEC3
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 09:32:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E73E9313CE35
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 08:54:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89E5336BCCC;
-	Tue, 24 Feb 2026 09:32:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8A6DB36920C;
+	Tue, 24 Feb 2026 08:54:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="6mvmQ08n"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-4.orcon.net.nz (smtp-4.orcon.net.nz [60.234.4.59])
+Received: from canpmsgout08.his.huawei.com (canpmsgout08.his.huawei.com [113.46.200.223])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28DB8369982;
-	Tue, 24 Feb 2026 09:32:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=60.234.4.59
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFA8236828B;
+	Tue, 24 Feb 2026 08:54:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.223
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771925564; cv=none; b=JuQ9fS/fP3qkEq1VND7rUtiIqCrLRf3Dk7cijIGIiicRJUhQTo8Eegw7NK1QR3TjDkzyj5aMMmE6YE7094haOoZuFi4O7kgEJRTlsUNYOoIODY8QFD9WqEe6EEDub325w3KcqOo6nxRtOrPxvUpNVt1+5Isi4ij3cEsIvReNobo=
+	t=1771923294; cv=none; b=L3kJZDtDhZHCJvSDhc3PCpxsMP4YpHlzqWYcGlAsWrHaNz6/sTLStgR2cT/oJq0pwLjFmtkAeKaLNT4nXUIpOPZA3q8Dzy+AXs+N9uH3gcmtKwwdqvO7Vh1l+vs4G7g/er13q1GkHxse6lGUPCK54oyRwiJKMmu+o97rfKU/bYI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771925564; c=relaxed/simple;
-	bh=IOJgxaam+EX1KGnYY0VduJPKBbOwGW6h09urZlUbJOQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Be4sov9JBvhfOw+j3sE3JPaa6Dzby+L6Nh+Dlb5mmeO7Mhd50qwDLKwfj2b4p9MhZ2ts3aDdaZAB4jhtpaLrBAaPnAXYeZFR1bmdJBpdbd8UmREgrNPQwBz3v3qI/u18m6ooi9pOS7pgNgcEgqyaN0TM1MI+r8vohyjAJ3bm0bw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=orcon.net.nz; spf=pass smtp.mailfrom=orcon.net.nz; arc=none smtp.client-ip=60.234.4.59
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=orcon.net.nz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=orcon.net.nz
-Received: from [121.99.247.178] (port=50414 helo=creeky)
-	by smtp-4.orcon.net.nz with esmtpa (Exim 4.90_1)
-	(envelope-from <mcree@orcon.net.nz>)
-	id 1vuoAV-0002yB-L4; Tue, 24 Feb 2026 21:53:24 +1300
-Date: Tue, 24 Feb 2026 21:53:15 +1300
-From: Michael Cree <mcree@orcon.net.nz>
-To: Magnus Lindholm <linmag7@gmail.com>
-Cc: richard.henderson@linaro.org, mattst88@gmail.com,
-	linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org,
-	corbet@lwn.net, linux-doc@vger.kernel.org,
-	glaubitz@physik.fu-berlin.de, macro@orcam.me.uk, macro@redhat.com,
-	ink@unseen.parts
-Subject: Re: [PATCH v2 0/1] alpha: add support for SECCOMP and SECCOMP_FILTER
-Message-ID: <aZ1m-3sKgvvwDQFZ@creeky>
-Mail-Followup-To: Michael Cree <mcree@orcon.net.nz>,
-	Magnus Lindholm <linmag7@gmail.com>, richard.henderson@linaro.org,
-	mattst88@gmail.com, linux-kernel@vger.kernel.org,
-	linux-alpha@vger.kernel.org, corbet@lwn.net,
-	linux-doc@vger.kernel.org, glaubitz@physik.fu-berlin.de,
-	macro@orcam.me.uk, macro@redhat.com, ink@unseen.parts
-References: <20260220105757.25104-1-linmag7@gmail.com>
+	s=arc-20240116; t=1771923294; c=relaxed/simple;
+	bh=dGe5AJtuOi6pa16sbmTvjxhS4yVaLIp+mOvklFl9JzM=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=oReCszu1gf3uK99YNMkTF8VahUy2RAK0VL+8oXbE/NeSQ4nZSMIA9W6m+YgwVQU1aee7VjXHvOEy/pwKNpXE482DrI0jc1KSI1zYunt4okka/NKiQpUPf1gXa9va9dWtg9kTOnabRJrXSkeZ0FEsAVUGqKeB+zyBdx9zr2gzu/Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=6mvmQ08n; arc=none smtp.client-ip=113.46.200.223
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=Rj8PWSOYXTg3Y1UAvq0lqqf9rZsdqg+RR9xCPK5IpV8=;
+	b=6mvmQ08nBnbmNo9FUuiDx7FDue6lBFgQt7AUs+gx3RTWTiDgPE+gw1gkK22WPQTYkiigF7hzj
+	oKnNTJO9H4HyXuToRa6ZTLbUlVEb3aDAYC4b8Cn/w6SsXs8Swi3h54VflsSnBGgCmFBXx/mikzw
+	OjkCq3N15kKzXu+kDCHJdKk=
+Received: from mail.maildlp.com (unknown [172.19.163.127])
+	by canpmsgout08.his.huawei.com (SkyGuard) with ESMTPS id 4fKryK20m6zmVBy;
+	Tue, 24 Feb 2026 16:50:01 +0800 (CST)
+Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
+	by mail.maildlp.com (Postfix) with ESMTPS id 6A252402AB;
+	Tue, 24 Feb 2026 16:54:48 +0800 (CST)
+Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
+ (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Tue, 24 Feb
+ 2026 16:54:45 +0800
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
+	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
+	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
+	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
+	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
+	<hpa@zytor.com>, <akpm@linux-foundation.org>, <bhe@redhat.com>,
+	<vgoyal@redhat.com>, <dyoung@redhat.com>, <rdunlap@infradead.org>,
+	<pmladek@suse.com>, <dapeng1.mi@linux.intel.com>, <kees@kernel.org>,
+	<paulmck@kernel.org>, <lirongqing@baidu.com>, <arnd@arndb.de>,
+	<ardb@kernel.org>, <leitao@debian.org>, <rppt@kernel.org>,
+	<cfsworks@gmail.com>, <ryan.roberts@arm.com>, <sourabhjain@linux.ibm.com>,
+	<tangyouling@kylinos.cn>, <eajames@linux.ibm.com>, <hbathini@linux.ibm.com>,
+	<ritesh.list@gmail.com>, <songshuaishuai@tinylab.org>,
+	<samuel.holland@sifive.com>, <kevin.brodsky@arm.com>,
+	<vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>, <coxu@redhat.com>,
+	<liaoyuanhong@vivo.com>, <fuqiang.wang@easystack.cn>, <jbohac@suse.cz>,
+	<brgerst@gmail.com>, <x86@kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
+	<linux-riscv@lists.infradead.org>, <kexec@lists.infradead.org>
+CC: <ruanjinjie@huawei.com>
+Subject: [PATCH v6 0/5] arm64/riscv: Add support for crashkernel CMA reservation
+Date: Tue, 24 Feb 2026 16:53:37 +0800
+Message-ID: <20260224085342.387996-1-ruanjinjie@huawei.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260220105757.25104-1-linmag7@gmail.com>
-X-GeoIP: NZ
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
+ dggpemf500011.china.huawei.com (7.185.36.131)
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.86 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
-	DMARC_POLICY_SOFTFAIL(0.10)[orcon.net.nz : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76756-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[linaro.org,gmail.com,vger.kernel.org,lwn.net,physik.fu-berlin.de,orcam.me.uk,redhat.com,unseen.parts];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,suse.com,baidu.com,arndb.de,debian.org,kylinos.cn,tinylab.org,sifive.com,pigmoral.tech,vivo.com,easystack.cn,suse.cz,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	TAGGED_FROM(0.00)[bounces-76742-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.967];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mcree@orcon.net.nz,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_GT_50(0.00)[59];
+	TO_DN_NONE(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,orcon.net.nz:email]
-X-Rspamd-Queue-Id: 05C31184B6A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 0CDB51841AD
 X-Rspamd-Action: no action
 
-On Fri, Feb 20, 2026 at 11:50:09AM +0100, Magnus Lindholm wrote:
-> This patch adds SECCOMP and SECCOMP_FILTER support to the Alpha
-> architecture.
-> 
-> The seccomp-bpf selftests exercise syscall tracing, restart, and signal
-> interaction paths that were previously untested on Alpha. To support
-> these, the ptrace/strace syscall path is updated to reliably distinguish
-> internal skip-dispatch from userspace invalid syscall numbers, ensuring
-> that syscall(-1) continues to return -ENOSYS with correct r0/a3
-> semantics.
-> 
-> Supporting seccomp also requires correct syscall restart handling when
-> ptrace and signal delivery are involved. The traced syscall entry path
-> now consistently tracks syscall state using r0, r1, and r2 while
-> preserving Alpha's a3-based error reporting ABI:
-> 
->   - r1 holds the mutable "current" syscall number
->   - r2 preserves the original syscall number for restart
->   - r0 and r19 (a3) retain their traditional roles as return value and
->     error indicator
-> 
-> This separation allows syscall restarts to be gated strictly on valid
-> ERESTART* return codes in the ptrace/strace paths and prevents
-> kernel-internal restart values from leaking into userspace.
-> 
-> Alpha also lacked support for PTRACE_GETREGSET(NT_PRSTATUS), causing
-> ptrace-based seccomp tests to fail with -EIO. Minimal GETREGSET and
-> SETREGSET support is added to export struct pt_regs directly.
-> 
-> With these changes applied, the seccomp-bpf and ptrace syscall selftests
-> (seccomp_bpf, extended for Alpha) pass reliably on Alpha systems.
-> 
-> ---
-> Changes since v1:
->  - Update features documentation for seccomp-filter/alpha
-> Link: https://lore.kernel.org/linux-alpha/20260205133049.526-1-linmag7@gmail.com/T/#t
-> 
-> Magnus Lindholm (1):
->   alpha: add support for SECCOMP and SECCOMP_FILTER
-> 
+The crash memory allocation, and the exclude of crashk_res, crashk_low_res
+and crashk_cma memory are almost identical across different architectures,
+This patch set handle them in crash core in a general way, which eliminate
+a lot of duplication code.
 
-Passes the seccomp-bpf selftests and the live tests of Adrian's
-alpha-support branch of libseccomp on my ES45.
+And add support for crashkernel CMA reservation for arm64 and riscv.
 
-Tested-by: Michael Cree <mcree@orcon.net.nz>
+Rebased on v7.0-rc1.
 
-Cheers,
-Michael.
+Basic test were performed on QEMU platforms for x86, ARM64, and RISC-V
+architectures with the following parameters:
+
+	"cma=256M crashkernel=256M crashkernel=64M,cma"
+
+Changes in v6:
+- Update the crash core exclude code as Mike suggested.
+- Rebased on v7.0-rc1.
+- Add acked-by.
+- Link to v5: https://lore.kernel.org/all/20260212101001.343158-1-ruanjinjie@huawei.com/
+
+Changes in v5:
+- Fix the kernel test robot build warnings.
+- Sort crash memory ranges before preparing elfcorehdr for powerpc
+- Link to v4: https://lore.kernel.org/all/20260209095931.2813152-1-ruanjinjie@huawei.com/
+
+Changes in v4:
+- Move the size calculation (and the realloc if needed) into the
+  generic crash.
+- Link to v3: https://lore.kernel.org/all/20260204093728.1447527-1-ruanjinjie@huawei.com/
+
+Changs in v3:
+- Exclude crash kernel memory in crash core as Mike suggested.
+- Add acked-by.
+
+Jinjie Ruan (4):
+  crash: Exclude crash kernel memory in crash core
+  crash: Use crash_exclude_core_ranges() on powerpc
+  arm64: kexec: Add support for crashkernel CMA reservation
+  riscv: kexec: Add support for crashkernel CMA reservation
+
+Sourabh Jain (1):
+  powerpc/crash: sort crash memory ranges before preparing elfcorehdr
+
+ .../admin-guide/kernel-parameters.txt         |  16 +--
+ arch/arm64/kernel/machine_kexec_file.c        |  41 +++----
+ arch/arm64/mm/init.c                          |   5 +-
+ arch/loongarch/kernel/machine_kexec_file.c    |  39 +++----
+ arch/powerpc/include/asm/kexec_ranges.h       |   4 +-
+ arch/powerpc/kexec/crash.c                    |   5 +-
+ arch/powerpc/kexec/ranges.c                   | 101 +-----------------
+ arch/riscv/kernel/machine_kexec_file.c        |  40 ++++---
+ arch/riscv/mm/init.c                          |   5 +-
+ arch/x86/kernel/crash.c                       |  89 +++------------
+ include/linux/crash_core.h                    |   9 ++
+ kernel/crash_core.c                           |  89 ++++++++++++++-
+ 12 files changed, 178 insertions(+), 265 deletions(-)
+
+-- 
+2.34.1
+
 
