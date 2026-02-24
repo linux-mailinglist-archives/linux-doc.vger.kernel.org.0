@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-76840-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76841-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gP0LJr3mnWlDSgQAu9opvQ
-	(envelope-from <linux-doc+bounces-76840-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 18:58:21 +0100
+	id UPcrKCrnnWlDSgQAu9opvQ
+	(envelope-from <linux-doc+bounces-76841-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 19:00:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C9DE18AD81
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 18:58:21 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C37818ADF1
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 19:00:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A53F7306A166
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 17:57:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 71FEC3107314
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 17:57:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F31573A9DA4;
-	Tue, 24 Feb 2026 17:57:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE2123AA1B3;
+	Tue, 24 Feb 2026 17:57:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57D303A9DA5;
-	Tue, 24 Feb 2026 17:57:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84A5E3AA1B2;
+	Tue, 24 Feb 2026 17:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771955861; cv=none; b=raUgHK1N4LZ9mUbNLkcBta/DsB8aHPNdxuzlO5JKXorSbAmaW0qkwAxFYvgHTiYm0GW2FKT1G/FgHDp0j/co1iS2YCXf0K4VWTAgoPK4t5DoJDKaz7FTa5R1NRwrkd55H/xcHP/qyR7B/wZKjALaiJ29T/PgUuh/hQlATlEfTjc=
+	t=1771955866; cv=none; b=ZRejrwLLGV92umQpcX38OSwDGadvJ++kazKjRxZgaYPU9plCeNNCxZhqn5xdPgYmOB3nt9SLtDwkCGdbpBu8zzUAzo8Cq+hjx67+BopWKuRyF/dv6wCcwrfVm8G7YTJz539sdiDnCxpVjmfp5jh8JR4SgUhE6Q+LyL2P85ktDJY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771955861; c=relaxed/simple;
-	bh=hQYlAxBtf3z2cYrEoizfszJZ4I3rc1ryt9RMyoSxtE8=;
+	s=arc-20240116; t=1771955866; c=relaxed/simple;
+	bh=f1DxKLISpAM0S+vQEQu/JFleluN+ClWUsI4hwK9IAZg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=tO9bcrSyQzbPeX1JBAaZ6Bftr1v50GvyCpiChHE5H18RDnWOatMVu2ChhmWy3WxcsWvnpuTTzfNZly/3aNm5XVnii4/8jBJ/eetVYcnt0EEX7CUm2fNZOzZZtxLaumOGB997B7X1EbMaC/tX1vp1QT/r9dcMdRMu/Ks6TPAeqd0=
+	 MIME-Version; b=Dp0AeBw77AF0qLpsn+w5lkVIEQjXTaTu9jwzrB3pZzPlMKUFx7xoZFT5VhEf/YEECk/o3kfiYrtfhrAnyYjNuIhjCFV+n5A6woscyp23Mkgpqiil958DmrKkB1ONjZ8ElszO8PXB+weygaoJnfNfoQPsT5uBu38pFOCl9p2AD9M=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E846497;
-	Tue, 24 Feb 2026 09:57:33 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A71CE339;
+	Tue, 24 Feb 2026 09:57:38 -0800 (PST)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 08CB53F59E;
-	Tue, 24 Feb 2026 09:57:34 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1114B3F59E;
+	Tue, 24 Feb 2026 09:57:39 -0800 (PST)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -73,9 +73,9 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v5 01/41] arm64/sysreg: Add MPAMSM_EL1 register
-Date: Tue, 24 Feb 2026 17:56:40 +0000
-Message-ID: <20260224175720.2663924-2-ben.horgan@arm.com>
+Subject: [PATCH v5 02/41] KVM: arm64: Preserve host MPAM configuration when changing traps
+Date: Tue, 24 Feb 2026 17:56:41 +0000
+Message-ID: <20260224175720.2663924-3-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260224175720.2663924-1-ben.horgan@arm.com>
 References: <20260224175720.2663924-1-ben.horgan@arm.com>
@@ -91,7 +91,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -99,10 +99,10 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[36];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-76840-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76841-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
@@ -112,12 +112,19 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 5C9DE18AD81
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:mid,arm.com:email,huawei.com:email,fujitsu.com:email]
+X-Rspamd-Queue-Id: 1C37818ADF1
 X-Rspamd-Action: no action
 
-The MPAMSM_EL1 register determines the MPAM configuration for an SMCU. Add
-the register definition.
+When kvm enables or disables MPAM traps to EL2 it clears all other bits in
+MPAM2_EL2.  Notably, it clears the partition ids (PARTIDs) and performance
+monitoring groups (PMGs). Avoid changing these bits in anticipation of
+adding support for MPAM in the kernel. Otherwise, on a VHE system with the
+host running at EL2 where MPAM2_EL2 and MPAM1_EL1 access the same register,
+any attempt to use MPAM to monitor or partition resources for kernel space
+would be foiled by running a KVM guest. Additionally, MPAM2_EL2.EnMPAMSM is
+always set to 0 which causes MPAMSM_EL1 to always trap. Keep EnMPAMSM set
+to 1 when not in a guest so that the kernel can use MPAMSM_EL1.
 
 Tested-by: Gavin Shan <gshan@redhat.com>
 Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
@@ -126,31 +133,50 @@ Tested-by: Zeng Heng <zengheng4@huawei.com>
 Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 Reviewed-by: Gavin Shan <gshan@redhat.com>
-Acked-by: Catalin Marinas <catalin.marinas@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
- arch/arm64/tools/sysreg | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm64/kvm/hyp/include/hyp/switch.h | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/tools/sysreg b/arch/arm64/tools/sysreg
-index 9d1c21108057..1287cb1de6f3 100644
---- a/arch/arm64/tools/sysreg
-+++ b/arch/arm64/tools/sysreg
-@@ -5172,6 +5172,14 @@ Field	31:16	PARTID_D
- Field	15:0	PARTID_I
- EndSysreg
+diff --git a/arch/arm64/kvm/hyp/include/hyp/switch.h b/arch/arm64/kvm/hyp/include/hyp/switch.h
+index 2597e8bda867..0b50ddd530f3 100644
+--- a/arch/arm64/kvm/hyp/include/hyp/switch.h
++++ b/arch/arm64/kvm/hyp/include/hyp/switch.h
+@@ -267,7 +267,8 @@ static inline void __deactivate_traps_hfgxtr(struct kvm_vcpu *vcpu)
  
-+Sysreg	MPAMSM_EL1	3	0	10	5	3
-+Res0	63:48
-+Field	47:40	PMG_D
-+Res0	39:32
-+Field	31:16	PARTID_D
-+Res0	15:0
-+EndSysreg
+ static inline void  __activate_traps_mpam(struct kvm_vcpu *vcpu)
+ {
+-	u64 r = MPAM2_EL2_TRAPMPAM0EL1 | MPAM2_EL2_TRAPMPAM1EL1;
++	u64 clr = MPAM2_EL2_EnMPAMSM;
++	u64 set = MPAM2_EL2_TRAPMPAM0EL1 | MPAM2_EL2_TRAPMPAM1EL1;
+ 
+ 	if (!system_supports_mpam())
+ 		return;
+@@ -277,18 +278,21 @@ static inline void  __activate_traps_mpam(struct kvm_vcpu *vcpu)
+ 		write_sysreg_s(MPAMHCR_EL2_TRAP_MPAMIDR_EL1, SYS_MPAMHCR_EL2);
+ 	} else {
+ 		/* From v1.1 TIDR can trap MPAMIDR, set it unconditionally */
+-		r |= MPAM2_EL2_TIDR;
++		set |= MPAM2_EL2_TIDR;
+ 	}
+ 
+-	write_sysreg_s(r, SYS_MPAM2_EL2);
++	sysreg_clear_set_s(SYS_MPAM2_EL2, clr, set);
+ }
+ 
+ static inline void __deactivate_traps_mpam(void)
+ {
++	u64 clr = MPAM2_EL2_TRAPMPAM0EL1 | MPAM2_EL2_TRAPMPAM1EL1 | MPAM2_EL2_TIDR;
++	u64 set = MPAM2_EL2_EnMPAMSM;
 +
- Sysreg	ISR_EL1	3	0	12	1	0
- Res0	63:11
- Field	10	IS
+ 	if (!system_supports_mpam())
+ 		return;
+ 
+-	write_sysreg_s(0, SYS_MPAM2_EL2);
++	sysreg_clear_set_s(SYS_MPAM2_EL2, clr, set);
+ 
+ 	if (system_supports_mpam_hcr())
+ 		write_sysreg_s(MPAMHCR_HOST_FLAGS, SYS_MPAMHCR_EL2);
 -- 
 2.43.0
 
