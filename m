@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-76861-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76862-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CHZkGDrqnWlDSgQAu9opvQ
-	(envelope-from <linux-doc+bounces-76861-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 19:13:14 +0100
+	id GHrjKnzonWlDSgQAu9opvQ
+	(envelope-from <linux-doc+bounces-76862-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 19:05:48 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD1A18B145
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 19:13:13 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CBFA18AF0E
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 19:05:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AB5A831B4A01
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 18:01:14 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 947FB308CC50
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 18:01:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF7543AEF57;
-	Tue, 24 Feb 2026 17:59:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2FBA23ACEE5;
+	Tue, 24 Feb 2026 17:59:36 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F4DD3B8BB5;
-	Tue, 24 Feb 2026 17:59:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62B9F3AEF5A;
+	Tue, 24 Feb 2026 17:59:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771955970; cv=none; b=WMrgBTgGmO1PdC625UuvHbUo/KsyEkzz9GdN/Wjz8YgMHxAHpGt04U1InmPFc/HjTysRxDnJKGdqaVWSqEH1HptAenQR71tpKfB+L3nk9B0BwLILM9soZAl/WFvUm9vXn7jLO6HqUJFfd5AeaG4bONzodPYw6w+QSnu2+9nD+Bw=
+	t=1771955976; cv=none; b=oiGLyykIbT1J+LezQnXwMZS8KYekqVTPTer8TB7qBQ06v5y6PfihsC6q2e0lyMFLwPcCc1yzjd7uq7rCQDD43JDq6m4XoWBtOv46mFg/4eAub+PwRh7Wj9JqK4D3Wm6xv8YwZT4JvJDD9J1JJTV7RumV6VD9RCOyQoMkRti2wXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771955970; c=relaxed/simple;
-	bh=R2xBk9dp3RAsHolZotQZ/loxsDB/JsrZLyypX3amti4=;
+	s=arc-20240116; t=1771955976; c=relaxed/simple;
+	bh=ZXc6vGwNJjANj/75YatMRZr1nL+DiByBtNRUU+1Ipm8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gXh+NclphwXweCT0RhT/t//37peM1LxZNT5c0xykdW1dS6ToO7IFreZ9JVJmj1uXLlKf4t10L3znM79oEz7gspSxFSo44qsvKSIBHRiQgp9myqdpcH73/HtuHfBNsu7oikMNezhhZvflq9gkU2yL7jrgP8Pp9smT+6jdwpUMA2A=
+	 MIME-Version; b=gPwlXETkJgsLmg8/NqH7CH/ihfBndB5ZXEyW1cyOgajyqAf+qv4VfVJvlbgLnB48jdYSClwKFaqA55mVmkN1gG6fl3aioMxasc5RiDbFm58tOcD9qxpEq2/6kLsntaX9MwwDV+mWJdaKWYLxLlGiFrG5op+LG0Iiib5gU7nvhtU=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 94BFC339;
-	Tue, 24 Feb 2026 09:59:22 -0800 (PST)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E94D1595;
+	Tue, 24 Feb 2026 09:59:27 -0800 (PST)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 01ABA3F59E;
-	Tue, 24 Feb 2026 09:59:23 -0800 (PST)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 08D303F59E;
+	Tue, 24 Feb 2026 09:59:28 -0800 (PST)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -73,9 +73,9 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v5 22/41] arm_mpam: resctrl: Add rmid index helpers
-Date: Tue, 24 Feb 2026 17:57:01 +0000
-Message-ID: <20260224175720.2663924-23-ben.horgan@arm.com>
+Subject: [PATCH v5 23/41] arm_mpam: resctrl: Add kunit test for rmid idx conversions
+Date: Tue, 24 Feb 2026 17:57:02 +0000
+Message-ID: <20260224175720.2663924-24-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260224175720.2663924-1-ben.horgan@arm.com>
 References: <20260224175720.2663924-1-ben.horgan@arm.com>
@@ -91,7 +91,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -99,10 +99,10 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[36];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-76861-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76862-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
@@ -112,77 +112,93 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,arm.com:mid,arm.com:email,huawei.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: EBD1A18B145
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid,arm.com:email,huawei.com:email,fujitsu.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 4CBFA18AF0E
 X-Rspamd-Action: no action
 
-Because MPAM's pmg aren't identical to RDT's rmid, resctrl handles some
-data structures by index. This allows x86 to map indexes to RMID, and MPAM
-to map them to partid-and-pmg.
+As MPAM's pmg are scoped by partid and RDT's rmid are global the
+rescrl mapping to an index needs to differ.
 
-Add the helpers to do this.
+Add some tests for the MPAM rmid mapping.
 
 Tested-by: Gavin Shan <gshan@redhat.com>
 Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 Tested-by: Peter Newman <peternewman@google.com>
 Tested-by: Zeng Heng <zengheng4@huawei.com>
 Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Suggested-by: James Morse <james.morse@arm.com>
 Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
-Changes since rfc:
-Use ~0U instead of ~0 in lhs of left shift
+ drivers/resctrl/test_mpam_resctrl.c | 49 +++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-Changes since v2:
-Drop changes signed-off-by as reworked patch
-Use multiply and add rather than shift to avoid holes
----
- drivers/resctrl/mpam_resctrl.c | 16 ++++++++++++++++
- include/linux/arm_mpam.h       |  3 +++
- 2 files changed, 19 insertions(+)
-
-diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
-index ded18a9d4cd4..48f96d7f9109 100644
---- a/drivers/resctrl/mpam_resctrl.c
-+++ b/drivers/resctrl/mpam_resctrl.c
-@@ -130,6 +130,22 @@ u32 resctrl_arch_get_num_closid(struct rdt_resource *ignored)
- 	return mpam_partid_max + 1;
+diff --git a/drivers/resctrl/test_mpam_resctrl.c b/drivers/resctrl/test_mpam_resctrl.c
+index b93d6ad87e43..a20da161d965 100644
+--- a/drivers/resctrl/test_mpam_resctrl.c
++++ b/drivers/resctrl/test_mpam_resctrl.c
+@@ -296,6 +296,54 @@ static void test_percent_to_max_rounding(struct kunit *test)
+ 	KUNIT_EXPECT_LE(test, 4 * num_rounded_up, 3 * total);
  }
  
-+u32 resctrl_arch_system_num_rmid_idx(void)
++struct rmid_idx_case {
++	u32 max_partid;
++	u32 max_pmg;
++};
++
++static const struct rmid_idx_case rmid_idx_cases[] = {
++	{0, 0}, {1, 4}, {3, 1}, {5, 9}, {4, 4}, {100, 11}, {0xFFFF, 0xFF},
++};
++
++static void test_rmid_idx_desc(const struct rmid_idx_case *param, char *desc)
 +{
-+	return (mpam_pmg_max + 1) * (mpam_partid_max + 1);
++	snprintf(desc, KUNIT_PARAM_DESC_SIZE, "max_partid=%d, max_pmg=%d\n",
++		 param->max_partid, param->max_pmg);
 +}
 +
-+u32 resctrl_arch_rmid_idx_encode(u32 closid, u32 rmid)
++KUNIT_ARRAY_PARAM(test_rmid_idx, rmid_idx_cases, test_rmid_idx_desc);
++
++static void test_rmid_idx_encoding(struct kunit *test)
 +{
-+	return closid * (mpam_pmg_max + 1) + rmid;
++	u32 orig_mpam_partid_max = mpam_partid_max;
++	u32 orig_mpam_pmg_max = mpam_pmg_max;
++	const struct rmid_idx_case *param = test->param_value;
++	u32 idx, num_idx, count = 0;
++
++	mpam_partid_max = param->max_partid;
++	mpam_pmg_max = param->max_pmg;
++
++	for (u32 partid = 0; partid <= mpam_partid_max; partid++) {
++		for (u32 pmg = 0; pmg <= mpam_pmg_max; pmg++) {
++			u32 partid_out, pmg_out;
++
++			idx = resctrl_arch_rmid_idx_encode(partid, pmg);
++			/* Confirm there are no holes in the rmid idx range */
++			KUNIT_EXPECT_EQ(test, count, idx);
++			count++;
++			resctrl_arch_rmid_idx_decode(idx, &partid_out, &pmg_out);
++			KUNIT_EXPECT_EQ(test, pmg, pmg_out);
++			KUNIT_EXPECT_EQ(test, partid, partid_out);
++		}
++	}
++	num_idx = resctrl_arch_system_num_rmid_idx();
++	KUNIT_EXPECT_EQ(test, idx + 1, num_idx);
++
++	/* Restore global variables that were messed with */
++	mpam_partid_max = orig_mpam_partid_max;
++	mpam_pmg_max = orig_mpam_pmg_max;
 +}
 +
-+void resctrl_arch_rmid_idx_decode(u32 idx, u32 *closid, u32 *rmid)
-+{
-+	*closid = idx / (mpam_pmg_max + 1);
-+	*rmid = idx % (mpam_pmg_max + 1);
-+}
-+
- void resctrl_arch_sched_in(struct task_struct *tsk)
- {
- 	lockdep_assert_preemption_disabled();
-diff --git a/include/linux/arm_mpam.h b/include/linux/arm_mpam.h
-index d329b1dc148b..7d23c90f077d 100644
---- a/include/linux/arm_mpam.h
-+++ b/include/linux/arm_mpam.h
-@@ -58,6 +58,9 @@ void resctrl_arch_set_cpu_default_closid_rmid(int cpu, u32 closid, u32 rmid);
- void resctrl_arch_sched_in(struct task_struct *tsk);
- bool resctrl_arch_match_closid(struct task_struct *tsk, u32 closid);
- bool resctrl_arch_match_rmid(struct task_struct *tsk, u32 closid, u32 rmid);
-+u32 resctrl_arch_rmid_idx_encode(u32 closid, u32 rmid);
-+void resctrl_arch_rmid_idx_decode(u32 idx, u32 *closid, u32 *rmid);
-+u32 resctrl_arch_system_num_rmid_idx(void);
+ static struct kunit_case mpam_resctrl_test_cases[] = {
+ 	KUNIT_CASE(test_get_mba_granularity),
+ 	KUNIT_CASE_PARAM(test_mbw_max_to_percent, test_percent_value_gen_params),
+@@ -304,6 +352,7 @@ static struct kunit_case mpam_resctrl_test_cases[] = {
+ 	KUNIT_CASE(test_percent_to_max_rounding),
+ 	KUNIT_CASE_PARAM(test_percent_max_roundtrip_stability,
+ 			 test_all_bwa_wd_gen_params),
++	KUNIT_CASE_PARAM(test_rmid_idx_encoding, test_rmid_idx_gen_params),
+ 	{}
+ };
  
- /**
-  * mpam_register_requestor() - Register a requestor with the MPAM driver
 -- 
 2.43.0
 
