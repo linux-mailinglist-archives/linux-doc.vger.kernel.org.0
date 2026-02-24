@@ -1,193 +1,244 @@
-Return-Path: <linux-doc+bounces-76755-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76757-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WFMfHEdvnWk9QAQAu9opvQ
-	(envelope-from <linux-doc+bounces-76755-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:28:39 +0100
+	id gOBgKrRxnWmAQAQAu9opvQ
+	(envelope-from <linux-doc+bounces-76757-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:39:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B58A18496C
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:28:39 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 168A4184C0F
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 10:39:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 72A83311E75A
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 09:22:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0F20E30FBDB7
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 09:36:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED34036BCFA;
-	Tue, 24 Feb 2026 09:22:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34C0A36C588;
+	Tue, 24 Feb 2026 09:36:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="cKmojdgk"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="V7bmlFVg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BF48366DCF
-	for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 09:22:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.180
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771924955; cv=pass; b=FuiEkK6ndL3IUMJMZ1YCEzW3sbTvuXGjGaNY2f0DROhLgP2Bulmg/d0jyYQY3tn78LdDd5WYzusY+rMdf+EV9rvVt4f/hqAHv1tC9I3bpB+3MrJ/LscI/JgbUHMJQ8ZIgETojU25Gagjz/2vp77PbYPnSWaUrriwS3Sv/AYP2zM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771924955; c=relaxed/simple;
-	bh=W1IR9WScIDkn/Ldtj14H5MHS1TFfCVSY4+W1vxZj6aE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=GCr4ShmceODqDjJ1UVPfK1v0s8mC379x5fgFY568gZyE2dWLpuV+6rW79+Nbdy9DenVliMjr/F1esZYBddkbwaca6ZQTI82QpS+l5qzZZyhHJB3yqohf/GBkblpIdFWXNKUN2HbnhJIH6n8icHC+0szw+kiSjd/iEmzk7hrOfZU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=cKmojdgk; arc=pass smtp.client-ip=209.85.160.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5DB336C5A3
+	for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 09:36:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1771925776; cv=none; b=Gnx5Yx4JT6cs9FNdsLQXrA3Dshf1s8MpLduyketQKlXOALilQyqBqcx8UiAZW4t1T90fkQ+KvV4ZWPk0lxYVziZKM0zCirvJIpEb2RWTfiZI9uU52rhcNDrb2SB0bQedFFChjqqVgJErwdInBrYQ8yXVtGRZ+d0BOwkHYAzxEZU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1771925776; c=relaxed/simple;
+	bh=+R3GnLFPJHPtRP+BOZs4qESabAsxap6QdyfJp9LLyPw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=KOy4ruGpbdFB80zCapZK8tW7HqYzA9WkEAUmvnb7WabsYxB3dakr2Xa9oD4bJXvW3A6B4kS0bplGeUEYPAJgUWWzDir1Rd/5KYUFFLES/5fInkYCIPOW/ojJha3G6PV80NYtmFsoImXdj52FcNdQRRdmsr0ne1+DLj6I3EetiQE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=V7bmlFVg; arc=none smtp.client-ip=209.85.214.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-5033387c80aso82645031cf.0
-        for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 01:22:34 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771924953; cv=none;
-        d=google.com; s=arc-20240605;
-        b=bhd2z1NNta2PcLuvIVE+kz29WDzxbixWc2bHa6WgUBU5UuCJz1GQR0c/6sJ0OvJJcT
-         UCG6oNijrNrqaKJAmG4HhHvMkJh5MjVbwOlj2PKoeqWZ6emAMci5tlpOjjZrFzcm7Qty
-         dcHJpaGcOgYxZ1kmoLwPs6Y0a93hAXcLtZ7gouiF01qG6XdH0s5hmmWxHpc7toDlGG+N
-         vx3Fbbe0OB83qNVBF1GyhAqbbH0SHVCUPzoORTn4JVqqennYzRFT6atx0+YdsTkJOfKB
-         PUqNEPKQPkDuyeYSVJpGWNjYt5F2wHaSbhLX/35hYytLPKUt+yeTlr201oHvtDIIMwrp
-         ehPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=bK9XwEb9y6Wjy1j2b+uWduqpfjZe/0b6JObJU2L/7Zc=;
-        fh=EcoHiGiU32CmLgt9VFMDfsyAr+vYWgNhtO8IfitFSo8=;
-        b=LBol5GGu3shZnR/xObBEbhmZO97kZyBJngpTqvPXkyH6vE4l42VSNKjl/y5+LM5gt2
-         EEuK9nViIsCQsU3H8KGX8aJxM00z7zik+RcVQW/TTAZhglPVKhAmOUww7ClOEC0pL67g
-         PrHE55mE5f/9u6E6xjZUZwoMm52TGE35h7zZbJhbzZUQtkkWMu4fUIY0Jmg9ywzCqnRm
-         e2k6flla2bHsGqj0fd5f/oOEpDg3CpWEtxMCjrQVhBvLxw4kUUcnP57JOUG1o3di78Dx
-         KXczrOGLpN3S/sY7xQ6mXGXJnDf25QWKDElmO9rH/rrx/nxweG2qXdGIT34S5HqGr3ls
-         FgVQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2ada9e4ea32so39605ad.1
+        for <linux-doc@vger.kernel.org>; Tue, 24 Feb 2026 01:36:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1771924953; x=1772529753; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bK9XwEb9y6Wjy1j2b+uWduqpfjZe/0b6JObJU2L/7Zc=;
-        b=cKmojdgkRw4js7rFJxZ1jn65i1bqplTVNCvpA6hkpBQeDVtcB8FH/vkbmTbnDqFaup
-         KHNMv5VSsuDxqvMuPofBmFzQXO8PjB61FDeAhCxPPeifvPXoPz0ZNGcy75zjWfR6m7Ra
-         HriuqCv5gxqMIDKPGksYZEg82wFhsztUf5IOGjBZbPNYwEgth+niDzLjr5oFguEoVH8O
-         6mJTzLH9+GGaL3zVccwSUIiVkdTTnbT9EyZGMC3mtO5p478s5HC2EnHwz5TjSu8KZORN
-         aK4nCVoav/Vxw2FtesI65/YoEc2KWdotuub7RsCe4oQU9F41wuxDX3aq6qptWWzbYtdF
-         3GTA==
+        d=google.com; s=20230601; t=1771925774; x=1772530574; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=24cju2hDHQ+kbJrPkzmdwVRuKgiC4K6oV6u1w7p/OMI=;
+        b=V7bmlFVgfPICsNoYRoEVqinb/2Fn+EuQQN3U0VnKDnfuK48STwZadt+2LtCZrdnr4U
+         NspRl/viZ4yeddu9kk+rC1QpN2zTNprU8cUb4dPk4U7BBhy1c4JWihj4y32qrM44wD/N
+         NayazJvZzaCKcxyQCy4Nf2R5EI4IUsKYpoWbOXG+kQmoEOTZBFNwsNDhCSyaBSQDBBvf
+         IZFqX2TEv7sGZTbe97Zjw1yGiYN7agJjotlHRgTiI8NcOnIiT0eiYeGY7xCTBFIJ5uYU
+         keWvkTFFpiPbU9l19BAtIqriobTwF9n7MTm4HkZy+s61492jTLmNn7uKNqg95DwR2Rcf
+         UYKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771924953; x=1772529753;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=bK9XwEb9y6Wjy1j2b+uWduqpfjZe/0b6JObJU2L/7Zc=;
-        b=Q5icHuF2AecT/oMzkYAyuvTovIe8VGdgEayQbYI7DZw0Wng6Rp2wPYht+BP9PxeWzh
-         Et7ko9Px/2o78Y7x0xj31Qx0M1EspOL/TaazO0BDdsuFIp8z0JfZ8/1JnlmM2Ixq/i9q
-         SCpjjDyiGP02u5sZY63AAv53Z2IY3KYPLkACAx4p70sjEroVvA8A5TXM18D47ZLJ7W8g
-         dQFfC89O9KKSaHcLOxmgOuPArkCQvblEy0ki8RYeDjTTu7oCKhCQMcn0Ck94MTDatY6x
-         MfNvQnXAP2gPoAf77dD0D4Z9S0b5UV43rJcfmYNNbCcXtZqF09NZBvbOBFiaFrByOGBN
-         Z1fw==
-X-Forwarded-Encrypted: i=1; AJvYcCWTnp5/NN41RFFQZAou6IegSPWILCB2xpgc8pgfAaZUwvhYm3FtMq9zj23cubRyMONVblJFCXfH+Qw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwyJNgMLHjQZUsPxsJk4uobV+4dEevW9R5DUq6iRlt5+v+MKZUg
-	++B/sLqnIcAHLMlHvgqFs1eb1LgH8xHuV0ytEcrCVk1C1LfdUruDo0JfWLAdKnFssFCTR422N3w
-	MXnMlnYYy9Z2F9AOt/mfA3SPGBE5/YJbobBFvDY6s
-X-Gm-Gg: AZuq6aKqMKQphIVAv8gvQeFHsViYxBmTesoBKQrZjGdZo5Pz+RDoQWPksbSGY3x4Ko0
-	cFwFxkMTa3/PlafS7Xu2M5b5g0GSoO9lOB4xd6c81KYVKBMF/8/+KMFpyONDC6R5xeBlySRZRMY
-	lMKql50TGRc9coPxowUQqV7K5DgmLeElOnvV2937rsRLnRyMlUv6ENcTm5JowIzM+4riDYqP20F
-	Ja1jh2J18aQucuwKh/82ock7CsQ9UgXQdXVO3Vg9dS/3JqIPSEMbGhSsRn1hfq0jvASIjqjNvzA
-	KxBUAKu0rV9z9Ou6Rvlr4o+RX1NNzjJPCtnbLBDD/A==
-X-Received: by 2002:ac8:7fc1:0:b0:4ee:1dd0:5a50 with SMTP id
- d75a77b69052e-5070c2bd60amr156825011cf.17.1771924952622; Tue, 24 Feb 2026
- 01:22:32 -0800 (PST)
+        d=1e100.net; s=20230601; t=1771925774; x=1772530574;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=24cju2hDHQ+kbJrPkzmdwVRuKgiC4K6oV6u1w7p/OMI=;
+        b=liEXi0OLF1btHJOSydw8klVG4BUyRGJkMZKJnONqBDJNYkTVb7W5eWDvHBFPIMKZ8h
+         xoVRwz0PtTtw8xxrntSoOfiaQ+U52I8ZuOktwSBgveTQq0rtL8Ele/F1kl7VFjDU0axu
+         +CJjxqGcGewvQIq343V1LwQjJImIIATDKCawu9Rq5xj2qmbBx4m8BoE0mKeIcxZ4NZO7
+         r8nBPT69NemQ7arwsWiqGoVUVFkqHePeHAVSLRjHjRoC6SmiRrEa9+lYzA2sZ3u+qOA1
+         H2pGUNp65Ap2EGqhgA/Avi2sjn9jGVrEKT0z8Gp6NseV2e9EVqvDJbPEzkgc7y2Q8Jpm
+         /30w==
+X-Forwarded-Encrypted: i=1; AJvYcCWxFrF2Cg1Avnll1Wx0qhw/LD6yqaDFDKt5htxi15T61t/dQNikT9qZtAn0YEeOcXDdrTeuWYmdJkQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyb43f7KxKWJAstChxiB91sX4jDfNqqxXXiQyiMYQZNzQWuYjaK
+	HVPuPPrZ9y0t3Dm50YZSbqM2tP8IA3j8W1sBBG6yHR11ljjJSp2hGRIh1ZOArsn6fA==
+X-Gm-Gg: ATEYQzx4lUQHEAp7wreNu/hw/fCIV/6IyV9WaDp/U1JXxibXE/rli9EVjNiidEN/UQA
+	OhnqraOE4reGO7ecLBp7VB3ziY2cM7Nx3JJ5MsX9bq+njER0vHsJijFF6oJEcYRvkPoxAJJ8ufn
+	LeJKeKOVfo+7VNBro+BAZN6bEST2F8/zIq2vvTm97Iykt0hfX6/4pWwajBkgeeJJRY8o0PWFFeb
+	HL8yn6G/wPE3SLi+v/uNkJrk8ypkMNTou3rrfSmfD2f/tMgzwAPK/osMY8YysemuYGKtYIJCCIg
+	1xVlzQynDDvcmt5I8GcpkmT3UGpHyCmbOYkh3tFOn2bMtVRb//p9hStZoLonpcYSyFZMt11f71s
+	M6ccAdLOc+wVTTYLhtC1D8wgFAnrqCjyxny0TYrjJdkYSi4L16EXKa1RtkHI7Y3tEBzZvxnw68a
+	j7mSnWdcesUt2AK1rRWCAsbyGv+kFttf09BDeenXpY0GDBjMr0AOZppOnT8trp
+X-Received: by 2002:a17:902:e78f:b0:2a7:7f07:340e with SMTP id d9443c01a7336-2ad993a510cmr1492795ad.4.1771925773665;
+        Tue, 24 Feb 2026 01:36:13 -0800 (PST)
+Received: from google.com (222.245.187.35.bc.googleusercontent.com. [35.187.245.222])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c70b71a7351sm10754939a12.8.2026.02.24.01.36.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Feb 2026 01:36:13 -0800 (PST)
+Date: Tue, 24 Feb 2026 09:36:03 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: David Matlack <dmatlack@google.com>
+Cc: Alex Williamson <alex@shazbot.org>,
+	Adithya Jayachandran <ajayachandra@nvidia.com>,
+	Alexander Graf <graf@amazon.com>, Alex Mastro <amastro@fb.com>,
+	Alistair Popple <apopple@nvidia.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Ankit Agrawal <ankita@nvidia.com>,
+	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Jacob Pan <jacob.pan@linux.microsoft.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>,
+	Kevin Tian <kevin.tian@intel.com>, kexec@lists.infradead.org,
+	kvm@vger.kernel.org, Leon Romanovsky <leon@kernel.org>,
+	Leon Romanovsky <leonro@nvidia.com>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org, linux-pci@vger.kernel.org,
+	Lukas Wunner <lukas@wunner.de>,
+	=?utf-8?Q?Micha=C5=82?= Winiarski <michal.winiarski@intel.com>,
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Pratyush Yadav <pratyush@kernel.org>,
+	Raghavendra Rao Ananta <rananta@google.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Saeed Mahameed <saeedm@nvidia.com>,
+	Samiullah Khawaja <skhawaja@google.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
+	Tomita Moeko <tomitamoeko@gmail.com>,
+	Vipin Sharma <vipinsh@google.com>,
+	Vivek Kasireddy <vivek.kasireddy@intel.com>,
+	William Tu <witu@nvidia.com>, Yi Liu <yi.l.liu@intel.com>,
+	Zhu Yanjun <yanjun.zhu@linux.dev>
+Subject: Re: [PATCH v2 03/22] PCI: Inherit bus numbers from previous kernel
+ during Live Update
+Message-ID: <aZ1xAyN0vgLWIi5y@google.com>
+References: <20260129212510.967611-1-dmatlack@google.com>
+ <20260129212510.967611-4-dmatlack@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260220-tcp_rfc7323_retract_wnd_rfc-v1-0-904942561479@gmail.com>
- <CANn89iLd=P2nftdMReVkc+d-8+0PGi1ACxhrhnVCxFVxNOhvJg@mail.gmail.com> <aZuaQSdsuWaAZza8@gandalf.schnuecks.de>
-In-Reply-To: <aZuaQSdsuWaAZza8@gandalf.schnuecks.de>
-From: Eric Dumazet <edumazet@google.com>
-Date: Tue, 24 Feb 2026 10:22:21 +0100
-X-Gm-Features: AaiRm522a6qXQbkPHi8t91KDO1mc-rlMizziA9EwmS69J1Clnl3Iw5_n02w5ZPk
-Message-ID: <CANn89iL1rQ=ZhuQwNsxt2H1LPtigJbbNx+WtSjqDqJ1dmpF_ug@mail.gmail.com>
-Subject: Re: [PATCH RFC net-next 0/4] tcp: RFC 7323-compliant window
- retraction handling
-To: Simon Baatz <gmbnomis@gmail.com>
-Cc: Neal Cardwell <ncardwell@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, 
-	"David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, David Ahern <dsahern@kernel.org>, 
-	Stefano Brivio <sbrivio@redhat.com>, Jon Maloy <jmaloy@redhat.com>, 
-	Jason Xing <kerneljasonxing@gmail.com>, mfreemon@cloudflare.com, 
-	Shuah Khan <shuah@kernel.org>, Christian Ebner <c.ebner@proxmox.com>, netdev@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260129212510.967611-4-dmatlack@google.com>
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[shazbot.org,nvidia.com,amazon.com,fb.com,linux-foundation.org,google.com,kernel.org,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,wunner.de,soleen.com,linuxfoundation.org,linux.intel.com,gmail.com,linux.dev];
+	TAGGED_FROM(0.00)[bounces-76757-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-76755-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[google.com:+];
+	RCPT_COUNT_TWELVE(0.00)[44];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FREEMAIL_CC(0.00)[google.com,davemloft.net,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,cloudflare.com,proxmox.com,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[edumazet@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[praan@google.com,linux-doc@vger.kernel.org];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 1B58A18496C
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 168A4184C0F
 X-Rspamd-Action: no action
 
-On Mon, Feb 23, 2026 at 1:07=E2=80=AFAM Simon Baatz <gmbnomis@gmail.com> wr=
-ote:
->
-> Hi Eric,
->
-> On Fri, Feb 20, 2026 at 09:58:00AM +0100, Eric Dumazet wrote:
-> > Hi Simon, thanks for the clean series.
-> >
-> > I would guess you use some AI ? This is fine, just curious.
->
-> Thank you!  Yes, I=E2=80=99ve found AI helpful for getting familiar with =
-a
-> new code base.  I also use it to refine or clean up the wording of
-> bigger commit messages.  Code generation works quite well for quick,
-> throw=E2=80=91away code (like reproducers).
->
-> > Can you add more tests, in memory stress situations ?
-> >
-> > Like :
-> >
-> > A receiver grew the RWIN over time up to 8 MB.
-> >
-> > Then the application (or the kernel under stress) used SO_RCVBUF to 16K=
-.
-> >
-> > I want to make sure the socket wont accept packets to fill the prior
-> > window and consume 8MB
->
-> I suspect generating 8=E2=80=AFMB worth of RX data in packetdrill won't b=
-e
-> fun (unless there=E2=80=99s a trick I=E2=80=99m missing).  And using regu=
-lar TCP
-> sockets on both ends would probably be rather uninteresting (no
-> packets sent once RWIN =3D 0)
->
+On Thu, Jan 29, 2026 at 09:24:50PM +0000, David Matlack wrote:
+> Inherit bus numbers from the previous kernel during a Live Update when
+> one or more PCI devices are being preserved. This is necessary so that
+> preserved devices can DMA through the IOMMU during a Live Update
+> (changing bus numbers would break IOMMU translation).
+> 
+> Signed-off-by: David Matlack <dmatlack@google.com>
+> ---
+>  drivers/pci/probe.c | 21 ++++++++++++++++++---
+>  1 file changed, 18 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
+> index af6356c5a156..ca6e5f79debb 100644
+> --- a/drivers/pci/probe.c
+> +++ b/drivers/pci/probe.c
+> @@ -1351,6 +1351,20 @@ static bool pci_ea_fixed_busnrs(struct pci_dev *dev, u8 *sec, u8 *sub)
+>  	return true;
+>  }
+>  
+> +static bool pci_assign_all_busses(void)
+> +{
+> +	/*
+> +	 * During a Live Update where devices are preserved by the previous
+> +	 * kernel, inherit all bus numbers assigned by the previous kernel. Bus
+> +	 * numbers must remain stable for preserved devices so that they can
+> +	 * perform DMA during the Live Update uninterrupted.
+> +	 */
+> +	if (pci_liveupdate_incoming_nr_devices())
+> +		return false;
 
-8MB was only to show my point.
+Following the comment on Patch 2 regarding propagating errors, the check
+if (pci_liveupdate_incoming_nr_devices()) should be made explicit to 
+distinguish between "Preservation Active" and "Retrieval Failed".
 
-A packetdrill test reaching 1MB should be doable.
+> +
+> +	return pcibios_assign_all_busses();
+> +}
+> +
+>  /*
+>   * pci_scan_bridge_extend() - Scan buses behind a bridge
+>   * @bus: Parent bus the bridge is on
+> @@ -1378,6 +1392,7 @@ static int pci_scan_bridge_extend(struct pci_bus *bus, struct pci_dev *dev,
+>  				  int max, unsigned int available_buses,
+>  				  int pass)
+>  {
+> +	bool assign_all_busses = pci_assign_all_busses();
+>  	struct pci_bus *child;
+>  	int is_cardbus = (dev->hdr_type == PCI_HEADER_TYPE_CARDBUS);
+>  	u32 buses, i, j = 0;
+> @@ -1424,7 +1439,7 @@ static int pci_scan_bridge_extend(struct pci_bus *bus, struct pci_dev *dev,
+>  	pci_write_config_word(dev, PCI_BRIDGE_CONTROL,
+>  			      bctl & ~PCI_BRIDGE_CTL_MASTER_ABORT);
+>  
+> -	if ((secondary || subordinate) && !pcibios_assign_all_busses() &&
+> +	if ((secondary || subordinate) && !assign_all_busses &&
+>  	    !is_cardbus && !broken) {
+>  		unsigned int cmax, buses;
+>  
+> @@ -1467,7 +1482,7 @@ static int pci_scan_bridge_extend(struct pci_bus *bus, struct pci_dev *dev,
+>  		 * do in the second pass.
+>  		 */
+>  		if (!pass) {
+> -			if (pcibios_assign_all_busses() || broken || is_cardbus)
+> +			if (assign_all_busses || broken || is_cardbus)
+>  
+>  				/*
+>  				 * Temporarily disable forwarding of the
+> @@ -1542,7 +1557,7 @@ static int pci_scan_bridge_extend(struct pci_bus *bus, struct pci_dev *dev,
+>  							max+i+1))
+>  					break;
+>  				while (parent->parent) {
+> -					if ((!pcibios_assign_all_busses()) &&
+> +					if (!assign_all_busses &&
+>  					    (parent->busn_res.end > max) &&
+>  					    (parent->busn_res.end <= max+i)) {
+>  						j = 1;
+
+Looks like we over-ride the pci=assign-busses boot param here. 
+We should document how this change affects the pci=assign-busses kernel
+command line. If both are present, the inheritance required by LUO would
+likely take precedence to prevent DMA corruption, but a doc update & a 
+warning to the user would be nice.
+
+Thanks,
+Praan
 
