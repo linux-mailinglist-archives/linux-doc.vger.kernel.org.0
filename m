@@ -1,130 +1,294 @@
-Return-Path: <linux-doc+bounces-76722-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76725-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gApxO6cvnWkDNQQAu9opvQ
-	(envelope-from <linux-doc+bounces-76722-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 05:57:11 +0100
+	id eJ5wGX85nWl1NgQAu9opvQ
+	(envelope-from <linux-doc+bounces-76725-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 06:39:11 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C75F181BF9
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 05:57:11 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB6291821EB
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 06:39:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9885930474E4
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 04:57:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2CD233006163
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Feb 2026 05:36:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B4612773FF;
-	Tue, 24 Feb 2026 04:57:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 98B08299920;
+	Tue, 24 Feb 2026 05:36:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linux.org.uk header.i=@linux.org.uk header.b="GWspiLXh"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FP0RhfiG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from zeniv.linux.org.uk (zeniv.linux.org.uk [62.89.141.173])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1200833EC;
-	Tue, 24 Feb 2026 04:57:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.89.141.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 745CD2773C6;
+	Tue, 24 Feb 2026 05:36:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771909028; cv=none; b=QZ775monPczAaGph2/oNLoyWJMIkt0t3MFsK6ML1cqw/8rNX6THIo1HHbYrytxRy0uYJ+Uu5lPSrdjzw6/YAM0c0ZPL49ngkKByQzMXkMvCfHIe47c5wklWj6FUDw5oyg0l1bT8wHTrWKVuLEKMP+GXnL6koKTVaRK/PYlLV0rI=
+	t=1771911396; cv=none; b=LNKXMyH/uqu4TADFVQWERePVP6/2sUCiivyfsj6fpAYue/LQesw9O8IA6JJwcUB+xPy8QE6ZMopmaywpoX0semXIzZ/+ly6XJl6K9jN9JJSBWgBtDS9T4ZoBXtQCqlZtDT7g51kWLHFFYhLhKf9db+tMk9E1jVsVO4c+jkzc510=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771909028; c=relaxed/simple;
-	bh=AhhjjOASLbIaeW/z8zkeDg7A7hCTrNC0/vi9OGt4C6c=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uHobSVJKIbFm5ISVJEjfKD8c+nD/bCHlwHqBFZ20Ehcy37TdvQiXHfCxFaiDyzFk5r1bGCWRTvRDnK/d1hB89uL6XjBMN5d/fvorTqb9PuDBuO49G227DnWnMjApsn3jD07xw+lcrkokSzR44Z+eED6udmR5XTc7E6DkAOJ1jkQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zeniv.linux.org.uk; spf=none smtp.mailfrom=ftp.linux.org.uk; dkim=pass (2048-bit key) header.d=linux.org.uk header.i=@linux.org.uk header.b=GWspiLXh; arc=none smtp.client-ip=62.89.141.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zeniv.linux.org.uk
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=ftp.linux.org.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=KfsVo9a4VPe2XxpUgmbkc2AGH7Q08m0DArfgjXTC13U=; b=GWspiLXhxAjlUadKUnUUInIdo7
-	M4ERPRZ7o/JlWfgt+T5LPbp8gF/By1NnwgmDJfZxWkn0q4EOqP94hHG5r3n8298ghmuqarTY2Bj1j
-	wSpqQpPwiV9Sq2sAtod2oA5Xe/4fDEWeJwf2ZcNNiwl5gsSHwpn2kNljIn70J4Tal0P951M9q+tbh
-	VpVQo4SkWslsvZEVXihDct3llEYFR7OLL2OIXp6TI5wf2oCOPsp/EFo14gKBwbRzQRtKIHGuV177L
-	F09EXFHCDN0AGlj4N9xqmo7lccRfoMVAE1NP+KhJrrEW9rowRQwz43XdW52BFFfL+mB2GiQJb6N+i
-	X69LTTgg==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1vukWH-00000008LKO-0yQJ;
-	Tue, 24 Feb 2026 04:59:37 +0000
-Date: Tue, 24 Feb 2026 04:59:37 +0000
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Ariful Islam Shoikot <islamarifulshoikat@gmail.com>
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] docs: reflect equal support for gcc and clang
-Message-ID: <20260224045937.GA1762976@ZenIV>
-References: <20260224031132.14478-1-islamarifulshoikat@gmail.com>
+	s=arc-20240116; t=1771911396; c=relaxed/simple;
+	bh=bCkiAOs8zg+h4YWw2lU5IsN8hUlomxIStRc2ZuJPKjY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=UnFhIBsZJ5RpHMADeQE/6M0W8kATSNRuFSE+VQSiIxAo3YbLR0Y6g7eJtLMwG5h5EGcxWdRF34iNPhDm0jf988pMqCgR3wE0PdsY+Z6V5e4JA4KnRTgKM+WkqwBOWuiE5mpTZ9a4vtzyiLGNdVGsHS/QgHsd0JuCBn2r52rA5X4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FP0RhfiG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A405DC116D0;
+	Tue, 24 Feb 2026 05:36:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1771911396;
+	bh=bCkiAOs8zg+h4YWw2lU5IsN8hUlomxIStRc2ZuJPKjY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=FP0RhfiG2oH64sS1x2NbtAk24gVTqWaDJR4xr+OZpTM4ggZWcj+AVWxZrIsEM9HpO
+	 4cG+jYpP3yUkzSgP7C1C/lm96Vpr7c7DYA43EQHarkJDkhLwhbv7w7UZ1nL8293cXV
+	 UkRqmD6PUK54Pqh17aROGLONBLzFS2LYfGVv0hcgyhELCWpWtBACBLJzNQ5Sg6Gwgb
+	 cc5BTGJj+LI4wlKgqy4SV9kUcKL89d2YE+nkG65FjfTB/Kh8L2CQYW9naAQBCUNXcx
+	 t8NrRoyV4NhG/1xZPC+xZ1SuElkj81faS+l9TT55Not5s31ZH37wpj+3jO/8HJP8gn
+	 RISMGhTeKXiCw==
+From: SeongJae Park <sj@kernel.org>
+To: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
+Cc: SeongJae Park <sj@kernel.org>,
+	damon@lists.linux.dev,
+	linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	akpm@linux-foundation.org,
+	corbet@lwn.net,
+	bijan311@gmail.com,
+	ajayjoshi@micron.com,
+	honggyu.kim@sk.com,
+	yunjeong.mun@sk.com
+Subject: Re: [RFC PATCH v3 0/4] mm/damon: Introduce node_eligible_mem_bp and node_ineligible_mem_bp Quota Goal Metrics
+Date: Mon, 23 Feb 2026 21:36:33 -0800
+Message-ID: <20260224053633.58448-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260223123232.12851-1-ravis.opensrc@gmail.com>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260224031132.14478-1-islamarifulshoikat@gmail.com>
-Sender: Al Viro <viro@ftp.linux.org.uk>
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[zeniv.linux.org.uk,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[linux.org.uk:s=zeniv-20220401];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76722-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-76725-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_TO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[kernel.org,lists.linux.dev,kvack.org,vger.kernel.org,linux-foundation.org,lwn.net,gmail.com,micron.com,sk.com];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[viro@zeniv.linux.org.uk,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.org.uk:+];
-	NEURAL_HAM(-0.00)[-0.997];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 4C75F181BF9
+X-Rspamd-Queue-Id: BB6291821EB
 X-Rspamd-Action: no action
 
-On Tue, Feb 24, 2026 at 09:09:06AM +0600, Ariful Islam Shoikot wrote:
-> Update the programming language documentation to reflect that both
-> gcc and clang are fully supported compilers.
-> 
-> Signed-off-by: Ariful Islam Shoikot <islamarifulshoikat@gmail.com>
-> ---
->  Documentation/process/programming-language.rst | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Documentation/process/programming-language.rst b/Documentation/process/programming-language.rst
-> index c18e307ccb56..491138ae17cb 100644
-> --- a/Documentation/process/programming-language.rst
-> +++ b/Documentation/process/programming-language.rst
-> @@ -4,10 +4,11 @@ Programming Language
->  ====================
->  
->  The Linux kernel is written in the C programming language [c-language]_.
-> -More precisely, it is typically compiled with ``gcc`` [gcc]_
-> -under ``-std=gnu11`` [gcc-c-dialect-options]_: the GNU dialect of ISO C11.
-> -``clang`` [clang]_ is also supported; see documentation on
-> -:ref:`Building Linux with Clang/LLVM <kbuild_llvm>`.
-> +More precisely, it is compiled with either ``gcc`` [gcc]_ or
-> +``clang`` [clang]_, both of which are fully supported, using
+Hello Ravi,
 
-"Fully" is a bit of stretch.  Realistically, if you have x86,
-arm/arm64, riscv or s390, it should work.  Beyond that... 
+On Mon, 23 Feb 2026 12:32:28 +0000 Ravi Jonnalagadda <ravis.opensrc@gmail.com> wrote:
 
-Quite a few architectures are in the "hopefully the resulting kernel
-will work" state (ppc, mips) and it runs all the way through "if you
-are lucky, it builds" (sparc64, IIRC), some requiring a fork of clang
-(openrisc, for example), to "you are SOL, this target doesn't have
-even an attempted out-of-tree support" (alpha and parisc, at least).
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=UTF-8
+> Content-Transfer-Encoding: 8bit
+> 
+> This series introduces two new DAMON quota goal metrics for controlling
+> memory migration in heterogeneous memory systems (e.g., DRAM and CXL
+> memory tiering) using physical address (PA) mode monitoring.
+
+Thank you for keep working on and sharing this :)
+
+> 
+> v2: https://lore.kernel.org/linux-mm/20260129215814.1618-1-ravis.opensrc@gmail.com/
+> 
+> Changes since v2:
+> =================
+> 
+> - Split single metric into two complementary metrics:
+>   * node_eligible_mem_bp: hot memory present ON the specified node
+>   * node_ineligible_mem_bp: hot memory NOT on the specified node.
+>   This enables both PUSH and PULL schemes to work together.
+
+This perfectly aligns with the direction we agreed on the previous discussion.
+Sounds good and reasonable to me.
+
+> 
+> - Added PA-mode detection lag compensation cache (see dedicated section
+>   below for design details).
+
+I'm not very sure if this is really needed, though.  I'll leave comment on the
+dedicated section below.
+
+> 
+> - Added fix for esz=0 quota bypass that allowed unlimited migration when
+>   goal was achieved.
+> 
+> - Added fix for goal_tuner sysfs setting being ignored due to
+>   damon_new_scheme() always defaulting to CONSIST.
+
+Thank you for finding and fixing these issues in my previously shared RFC patch
+series!  I left a few comments to the patches.  In short, the second fix looks
+good and I will add that to the next revision of my RFC patch series, if you
+don't mind.  For the first fix, I'd like to take more time on thinking more
+cleaner solution.
+
+> 
+> - Rebased on SJ's damon/next branch which includes the TEMPORAL goal
+>   tuner required for these metrics.
+
+Thank you for clarifying this!  This kind of context is very helpful at
+revidewing patches.
+
+> 
+> Background and Motivation
+> =========================
+> 
+> In heterogeneous memory systems, controlling hot memory distribution
+> across NUMA nodes is essential for performance optimization. This series
+> enables system wide hot page distribution with target-state goals like
+> "maintain 30% of hot memory on CXL" using PA-mode DAMON schemes.
+> 
+> Two-Scheme Setup for Hot Page Distribution
+> ==========================================
+> 
+> For maintaining 30% of hot memory on CXL (node 1):
+> 
+>     PUSH scheme (DRAM->CXL): migrate_hot from node 0 -> node 1
+>       goal: node_eligible_mem_bp, nid=1, target=3000
+>       Activates when node 1 has less than 30% hot memory
+> 
+>     PULL scheme (CXL->DRAM): migrate_hot from node 1 -> node 0
+>       goal: node_ineligible_mem_bp, nid=1, target=7000
+>       Activates when node 1 has more than 30% hot memory
+> 
+> Both schemes use the TEMPORAL goal tuner which sets esz to maximum when
+> under goal and zero when achieved. Together they converge to equilibrium
+> at the target distribution.
+
+When this kind of complementary setup is being used, in my opinion, CONSIST
+tuner might be better, especially when the access pattern is dynamic.  But it
+is up to user's choice.
+
+> 
+> What These Metrics Do
+> =====================
+> 
+> node_eligible_mem_bp measures:
+>     effective_hot_bytes_on_node / total_hot_bytes * 10000
+> 
+> node_ineligible_mem_bp measures:
+>     (total_hot_bytes - effective_hot_bytes_on_node) / total_hot_bytes * 10000
+> 
+> The metrics are complementary: eligible_bp + ineligible_bp = 10000 bp.
+
+All make sense to me, so far.
+
+> 
+> PA-Mode Detection Lag and Cache Design
+> ======================================
+> 
+> In PA-mode, when pages are migrated:
+> 1. Source node detection drops immediately (pages are gone)
+> 2. Target node detection increases slowly (new addresses need sampling)
+
+I agree.  And this is not what I clearly expected during the previous
+discussion.  Thank you for sharing this issue.
+
+> 
+> This asymmetry causes temporary underestimation of hot memory on the
+> target node. Without compensation, the system keeps migrating even after
+> reaching the goal.
+
+But, is this really significant?  I believe people may use complementary
+auto-tune setup especially when they expect dynamic access pattern.  In the
+case, even if we can perfectly compensate this kind of gap, some of oscillation
+will happen.  You also mentioned "eventual convergence" could be acceptable.
+
+> 
+> The cache addresses this by remembering how much was recently migrated.
+> When calculating effective hot memory:
+> - Source node: reduce detected amount by recent migrations out
+> - Target node: boost detected amount by recent migrations in
+> 
+> The cache uses a rolling window to track migrations over time, and
+> expires after a configurable timeout (default 10s) when no migration
+> activity occurs. It also detects when its baseline becomes stale due
+> to new hot memory appearing in the workload.
+
+I will leave more comments to the patch implementing this.  But this seems too
+much at the current stage, unless there are clear test results showing its
+needs.  I'd recommend proceeding without this, and later revisit if the problem
+becomes clearly significant.
+
+> 
+> Dependencies
+> ============
+> 
+> This series is based on SJ's damon/next branch which includes:
+> 
+> - mm/damon/core: introduce damos_quota_goal_tuner [1]
+> - mm/damon/core: set quota-score histogram with core filters [2]
+> - mm/damon: always respect min_nr_regions from the beginning [3]
+> - mm/damon/core: disallow non-power of two min_region_sz [4]
+> 
+> [1] https://lore.kernel.org/linux-mm/20260212062314.69961-1-sj@kernel.org/
+> [2] https://lore.kernel.org/linux-mm/20260131194145.66286-1-sj@kernel.org/
+> [3] https://lore.kernel.org/linux-mm/20260217000400.69056-1-sj@kernel.org/
+> [4] https://lore.kernel.org/linux-mm/20260214214124.87689-1-sj@kernel.org/
+> 
+> Patch Organization
+> ==================
+> 
+> 1. mm/damon/sysfs: set goal_tuner after scheme creation
+>     - Fixes goal_tuner initialization order in sysfs scheme creation
+> 
+> 2. mm/damon: fix esz=0 quota bypass allowing unlimited migration
+>     - Ensures esz=0 stops migration rather than bypassing quota entirely
+> 
+> 3. mm/damon: add node_eligible_mem_bp and node_ineligible_mem_bp goal metrics
+>     - Adds the two complementary metrics for hot memory distribution control
+> 
+> 4. mm/damon: add PA-mode cache for eligible memory detection lag
+>     - Implements rolling window cache to compensate for PA-mode detection lag
+>     - Adds configurable cache timeout via sysfs
+> 
+> Testing Status
+> ==============
+> 
+> Functionally tested on a two-node heterogeneous memory system (DRAM + CXL)
+> with PUSH+PULL scheme configuration.
+
+Glad to hear the functionality is tested.  Looking forward to the next results!
+
+> 
+> This is an RFC and feedback on the design is appreciated.
+
+I'm yet to further reply to the fourth patch, but I hope my comments be worthy
+:)
+
+
+Thanks,
+SJ
+
+[...]
 
