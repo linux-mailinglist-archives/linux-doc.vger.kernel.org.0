@@ -1,186 +1,657 @@
-Return-Path: <linux-doc+bounces-76993-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76995-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4KuUEZ/FnmkuXQQAu9opvQ
-	(envelope-from <linux-doc+bounces-76993-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:49:19 +0100
+	id 6N1qC+DGnmkuXQQAu9opvQ
+	(envelope-from <linux-doc+bounces-76995-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:54:40 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4730195492
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:49:18 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id C431A1955B2
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:54:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BC83D301F4AB
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:48:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D864E303609E
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:52:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E92FF38E5F8;
-	Wed, 25 Feb 2026 09:48:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2AD7285C9F;
+	Wed, 25 Feb 2026 09:52:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="xG7D2YoJ"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="JYwqqUn2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com [91.218.175.177])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F2FE304BB4
-	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:48:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93C2F38F23A
+	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:52:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772012916; cv=none; b=D5Dv3EktROD7lzE7GDlWpHN3aNXap3mZSihkR8SPk6lB6lOp+Ruj8Z46Axyshm02PrBkXVq3y1JSgTu9mnqxDmguCttFE+Za8678YJwEWJp+NxYlLsyQeVMjo9E2BN7fm1E6Ewx5gta5fYeOFyAyZh5kXR8BXndc5/w0AcfCT7A=
+	t=1772013122; cv=none; b=rT+dwfJHhpAy767cpdm1fotfh9xNw0qnxvv63BDB/vORbcI4kG96i3sTWluvxVJZ4v7LwVGGmlmMFoWyPZ/BH+5OmPJi5fhhY/x7ov7hBNuPCoOjKQcLaQIelhT7EAMm+M3oJdOx8LFAdJIa0OdgaUo24gDRlL7qtscoT9Z+fnA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772012916; c=relaxed/simple;
-	bh=0vuh+UkammmyujgIvqj3KuIm9vzV56ONGePfocRu8yc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rq4r6CMFjaxR5sXlF05sTosUE9ixymgcv0QFZJf8C9dZQ2SGWoEZegQZJCfyu631ipyVi6EOQkJI/SGW7jxI6HTEbiGffhdA1sPl5zzNql6Vu5Q+/LsBYBHerfJXs5VP9WocDzzKbyoIpkk7pP82y/WhTmmCs4tBWElcVUDvSWQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=xG7D2YoJ; arc=none smtp.client-ip=91.218.175.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Message-ID: <f6eae6e1-b0ad-4027-ac53-26abbfabe2c6@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1772012903;
+	s=arc-20240116; t=1772013122; c=relaxed/simple;
+	bh=dqzvUWNl/OWriFwxYwstaxongq7bKMWwgESUanph19o=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=W/CI45vMDKUzzjftYFwuLXWkhx8dsTWxvUsfvhfQc5AWPqgkt7azuBfccxoVr392sku6Xaiwj0qNdMBw1chk9QjztIZKmVPW61xBYgRh7zK57YZVMAdG8xtR6NcbJlbioJ/psEXa6mDtLjY4VOGm3PZVDrFZTOCNEXuxj2V3m9I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=JYwqqUn2; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1772013119;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=y7F++bMkQXdIC4u8xt2NgZr7EX4XnUN5usbpMgsViBs=;
-	b=xG7D2YoJxlHSSR2JyXaJ4MVXWyoaaDnDONqw3Z3mf21T9P9YNdfFXd5w7Wf9PPdd7ssVU2
-	ChA1Ugzr+uYlYVcypAZP5F7CFsPqE6w3H3l9Ny5bIhN3U9iUqblNfr1JJ/g4pDVeayf1bJ
-	K5KqMWOp2dqEsS7xXmgx0BckLrleofA=
-Date: Wed, 25 Feb 2026 17:48:09 +0800
+	bh=cS6uuzY2WP/rUYxGwOr8uNmNha3R/HgF2rOjnX0+zow=;
+	b=JYwqqUn2V2df6sFiQvyyjEcc89Afh1PwPkm5NJkCPpf2tJUgn59rM4HU9xdoVXh6Uv9lm5
+	kElAMlL7m7rBgQfMZDe5BEwlxOuMPmbt4lnUPJ9v55tRo6QUEZmEBEBjKBW1l9c7774OmE
+	6kIBInyZcqrnyNIZr9/as3/qQjQZjyw=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-519-qXgyhczxPCidTkz8-wf1Rw-1; Wed,
+ 25 Feb 2026 04:51:57 -0500
+X-MC-Unique: qXgyhczxPCidTkz8-wf1Rw-1
+X-Mimecast-MFC-AGG-ID: qXgyhczxPCidTkz8-wf1Rw_1772013116
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 9F02119560B0;
+	Wed, 25 Feb 2026 09:51:56 +0000 (UTC)
+Received: from gmonaco-thinkpadt14gen3.rmtit.csb (unknown [10.44.34.216])
+	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 6A53C1800370;
+	Wed, 25 Feb 2026 09:51:52 +0000 (UTC)
+From: Gabriele Monaco <gmonaco@redhat.com>
+To: linux-kernel@vger.kernel.org,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Nam Cao <namcao@linutronix.de>,
+	Juri Lelli <jlelli@redhat.com>,
+	Gabriele Monaco <gmonaco@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Tomas Glozar <tglozar@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	John Kacur <jkacur@redhat.com>
+Subject: [PATCH v6 05/16] Documentation/rv: Add documentation about hybrid automata
+Date: Wed, 25 Feb 2026 10:51:11 +0100
+Message-ID: <20260225095122.80683-6-gmonaco@redhat.com>
+In-Reply-To: <20260225095122.80683-1-gmonaco@redhat.com>
+References: <20260225095122.80683-1-gmonaco@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [RFC PATCH net-next] tcp: Add net.ipv4.tcp_purge_receive_queue
- sysctl
-Content-Language: en-US
-To: Eric Dumazet <edumazet@google.com>, Leon Hwang <leon.huangfu@shopee.com>
-Cc: netdev@vger.kernel.org, "David S . Miller" <davem@davemloft.net>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, David Ahern <dsahern@kernel.org>,
- Neal Cardwell <ncardwell@google.com>, Kuniyuki Iwashima <kuniyu@google.com>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ij@kernel.org>,
- Ido Schimmel <idosch@nvidia.com>, kerneljasonxing@gmail.com,
- lance.yang@linux.dev, jiayuan.chen@linux.dev, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260225074633.149590-1-leon.huangfu@shopee.com>
- <CANn89i+RZtN0wcyBUxKf83pkcbH4=nN_Cpc62tNwwS8T-LQR2A@mail.gmail.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Leon Hwang <leon.hwang@linux.dev>
-In-Reply-To: <CANn89i+RZtN0wcyBUxKf83pkcbH4=nN_Cpc62tNwwS8T-LQR2A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76993-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,davemloft.net,kernel.org,redhat.com,lwn.net,linuxfoundation.org,google.com,nvidia.com,gmail.com,linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-76995-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
 	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[shopee.com:email,linux.dev:mid,linux.dev:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A4730195492
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linutronix.de:email]
+X-Rspamd-Queue-Id: C431A1955B2
 X-Rspamd-Action: no action
 
+Describe theory and implementation of hybrid automata in the dedicated
+page hybrid_automata.rst
+Include a section on how to integrate a hybrid automaton in
+monitor_synthesis.rst
+Also remove a hanging $ in deterministic_automata.rst
 
+Reviewed-by: Nam Cao <namcao@linutronix.de>
+Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
+---
 
-On 25/2/26 16:31, Eric Dumazet wrote:
-> On Wed, Feb 25, 2026 at 8:46 AM Leon Hwang <leon.huangfu@shopee.com> wrote:
->>
->> Introduce a new sysctl knob, net.ipv4.tcp_purge_receive_queue, to
->> address a memory leak scenario related to TCP sockets.
-> 
-> We use the term "memory leak" for a persistent loss of memory (until reboot)
-> 
+Notes:
+    V3:
+    * Improve documentation clarity after review
 
-Thanks for the clarification.
+ .../trace/rv/deterministic_automata.rst       |   2 +-
+ Documentation/trace/rv/hybrid_automata.rst    | 341 ++++++++++++++++++
+ Documentation/trace/rv/index.rst              |   1 +
+ Documentation/trace/rv/monitor_synthesis.rst  | 117 +++++-
+ 4 files changed, 458 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/trace/rv/hybrid_automata.rst
 
-> Lets not abuse it and confuse various AI/human agents which will
-> declare emergency situations
-> caused by an inexistent fatal error.
-> 
-
-I'll reword it in the next revision.
-
->>
->> Issue:
->> When a TCP socket in the CLOSE_WAIT state receives a RST packet, the
->> current implementation does not clear the socket's receive queue. This
->> causes SKBs in the queue to remain allocated until the socket is
->> explicitly closed by the application. As a consequence:
->>
->> 1. The page pool pages held by these SKBs are not released.
-> 
-> This situation also applies for normal TCP_ESTABLISHED sockets, when
-> applications
-> do not drain the receive queue.
-> 
-> As long the application has not called close(), kernel should not
-> assume the application
-> will _not_ read the data that was received.
-> 
-
-Understood.
-
-This patch provides an option to drain the receive queue in the
-CLOSE_WAIT + RST case, instead of purging it unconditionally upon
-receiving a RST packet.
-
-> 
->> 2. The associated page pool cannot be freed.
->>
->> RFC 9293 Section 3.10.7.4 specifies that when a RST is received in
->> CLOSE_WAIT state, "all segment queues should be flushed." However, the
->> current implementation does not flush the receive queue.
-> 
-> Some buggy stacks send RST anyway after FIN. I think that forcingly
-> purging good data
-> received before the RST would add many surprises.
-> 
-
-Understood.
-
-There is a tcp_write_queue_purge(sk) call in tcp_done_with_error(),
-which means sk_write_queue is always purged when a RST packet is
-received. I assume the reason for purging sk_write_queue is that any
-pending transmissions become meaningless once a RST is received.
-
-Would it be better to defer kb_queue_purge(&sk->sk_receive_queue) until
-after tcp_done_with_error()?
-
-[...]
-
->>
-> 
-> Please prepare a packetdrill test.
-
-Ack.
-
-I'll add a packetdrill test in the next revision.
-
-Thanks,
-Leon
+diff --git a/Documentation/trace/rv/deterministic_automata.rst b/Documentation/trace/rv/deterministic_automata.rst
+index d0638f95a455..7a1c2b20ec72 100644
+--- a/Documentation/trace/rv/deterministic_automata.rst
++++ b/Documentation/trace/rv/deterministic_automata.rst
+@@ -11,7 +11,7 @@ where:
+ - *E* is the finite set of events;
+ - x\ :subscript:`0` is the initial state;
+ - X\ :subscript:`m` (subset of *X*) is the set of marked (or final) states.
+-- *f* : *X* x *E* -> *X* $ is the transition function. It defines the state
++- *f* : *X* x *E* -> *X* is the transition function. It defines the state
+   transition in the occurrence of an event from *E* in the state *X*. In the
+   special case of deterministic automata, the occurrence of the event in *E*
+   in a state in *X* has a deterministic next state from *X*.
+diff --git a/Documentation/trace/rv/hybrid_automata.rst b/Documentation/trace/rv/hybrid_automata.rst
+new file mode 100644
+index 000000000000..39c037a71b89
+--- /dev/null
++++ b/Documentation/trace/rv/hybrid_automata.rst
+@@ -0,0 +1,341 @@
++Hybrid Automata
++===============
++
++Hybrid automata are an extension of deterministic automata, there are several
++definitions of hybrid automata in the literature. The adaptation implemented
++here is formally denoted by G and defined as a 7-tuple:
++
++        *G* = { *X*, *E*, *V*, *f*, x\ :subscript:`0`, X\ :subscript:`m`, *i* }
++
++- *X* is the set of states;
++- *E* is the finite set of events;
++- *V* is the finite set of environment variables;
++- x\ :subscript:`0` is the initial state;
++- X\ :subscript:`m` (subset of *X*) is the set of marked (or final) states.
++- *f* : *X* x *E* x *C(V)* -> *X* is the transition function.
++  It defines the state transition in the occurrence of an event from *E* in the
++  state *X*. Unlike deterministic automata, the transition function also
++  includes guards from the set of all possible constraints (defined as *C(V)*).
++  Guards can be true or false with the valuation of *V* when the event occurs,
++  and the transition is possible only when constraints are true. Similarly to
++  deterministic automata, the occurrence of the event in *E* in a state in *X*
++  has a deterministic next state from *X*, if the guard is true.
++- *i* : *X* -> *C'(V)* is the invariant assignment function, this is a
++  constraint assigned to each state in *X*, every state in *X* must be left
++  before the invariant turns to false. We can omit the representation of
++  invariants whose value is true regardless of the valuation of *V*.
++
++The set of all possible constraints *C(V)* is defined according to the
++following grammar:
++
++        g = v < c | v > c | v <= c | v >= c | v == c | v != c | g && g | true
++
++With v a variable in *V* and c a numerical value.
++
++We define the special case of hybrid automata whose variables grow with uniform
++rates as timed automata. In this case, the variables are called clocks.
++As the name implies, timed automata can be used to describe real time.
++Additionally, clocks support another type of guard which always evaluates to true:
++
++        reset(v)
++
++The reset constraint is used to set the value of a clock to 0.
++
++The set of invariant constraints *C'(V)* is a subset of *C(V)* including only
++constraint of the form:
++
++        g = v < c | true
++
++This simplifies the implementation as a clock expiration is a necessary and
++sufficient condition for the violation of invariants while still allowing more
++complex constraints to be specified as guards.
++
++It is important to note that any hybrid automaton is a valid deterministic
++automaton with additional guards and invariants. Those can only further
++constrain what transitions are valid but it is not possible to define
++transition functions starting from the same state in *X* and the same event in
++*E* but ending up in different states in *X* based on the valuation of *V*.
++
++Examples
++--------
++
++Wip as hybrid automaton
++~~~~~~~~~~~~~~~~~~~~~~~
++
++The 'wip' (wakeup in preemptive) example introduced as a deterministic automaton
++can also be described as:
++
++- *X* = { ``any_thread_running`` }
++- *E* = { ``sched_waking`` }
++- *V* = { ``preemptive`` }
++- x\ :subscript:`0` = ``any_thread_running``
++- X\ :subscript:`m` = {``any_thread_running``}
++- *f* =
++   - *f*\ (``any_thread_running``, ``sched_waking``, ``preemptive==0``) = ``any_thread_running``
++- *i* =
++   - *i*\ (``any_thread_running``) = ``true``
++
++Which can be represented graphically as::
++
++     |
++     |
++     v
++   #====================#   sched_waking;preemptive==0
++   H                    H ------------------------------+
++   H any_thread_running H                               |
++   H                    H <-----------------------------+
++   #====================#
++
++In this example, by using the preemptive state of the system as an environment
++variable, we can assert this constraint on ``sched_waking`` without requiring
++preemption events (as we would in a deterministic automaton), which can be
++useful in case those events are not available or not reliable on the system.
++
++Since all the invariants in *i* are true, we can omit them from the representation.
++
++Stall model with guards (iteration 1)
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++As a sample timed automaton we can define 'stall' as:
++
++- *X* = { ``dequeued``, ``enqueued``, ``running``}
++- *E* = { ``enqueue``, ``dequeue``, ``switch_in``}
++- *V* = { ``clk`` }
++- x\ :subscript:`0` = ``dequeue``
++- X\ :subscript:`m` = {``dequeue``}
++- *f* =
++   - *f*\ (``enqueued``, ``switch_in``, ``clk < threshold``) = ``running``
++   - *f*\ (``running``, ``dequeue``) = ``dequeued``
++   - *f*\ (``dequeued``, ``enqueue``, ``reset(clk)``) = ``enqueued``
++- *i* = *omitted as all true*
++
++Graphically represented as::
++
++       |
++       |
++       v
++     #============================#
++     H          dequeued          H <+
++     #============================#  |
++       |                             |
++       | enqueue; reset(clk)         |
++       v                             |
++     +----------------------------+  |
++     |          enqueued          |  | dequeue
++     +----------------------------+  |
++       |                             |
++       | switch_in; clk < threshold  |
++       v                             |
++     +----------------------------+  |
++     |          running           | -+
++     +----------------------------+
++
++This model imposes that the time between when a task is enqueued (it becomes
++runnable) and when the task gets to run must be lower than a certain threshold.
++A failure in this model means that the task is starving.
++One problem in using guards on the edges in this case is that the model will
++not report a failure until the ``switch_in`` event occurs. This means that,
++according to the model, it is valid for the task never to run.
++
++Stall model with invariants (iteration 2)
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++The first iteration isn't exactly what was intended, we can change the model as:
++
++- *X* = { ``dequeued``, ``enqueued``, ``running``}
++- *E* = { ``enqueue``, ``dequeue``, ``switch_in``}
++- *V* = { ``clk`` }
++- x\ :subscript:`0` = ``dequeue``
++- X\ :subscript:`m` = {``dequeue``}
++- *f* =
++   - *f*\ (``enqueued``, ``switch_in``) = ``running``
++   - *f*\ (``running``, ``dequeue``) = ``dequeued``
++   - *f*\ (``dequeued``, ``enqueue``, ``reset(clk)``) = ``enqueued``
++- *i* =
++   - *i*\ (``enqueued``) = ``clk < threshold``
++
++Graphically::
++
++    |
++    |
++    v
++  #=========================#
++  H        dequeued         H <+
++  #=========================#  |
++    |                          |
++    | enqueue; reset(clk)      |
++    v                          |
++  +-------------------------+  |
++  |        enqueued         |  |
++  |    clk < threshold      |  | dequeue
++  +-------------------------+  |
++    |                          |
++    | switch_in                |
++    v                          |
++  +-------------------------+  |
++  |         running         | -+
++  +-------------------------+
++
++In this case, we moved the guard as an invariant to the ``enqueued`` state,
++this means we not only forbid the occurrence of ``switch_in`` when ``clk`` is
++past the threshold but also mark as invalid in case we are *still* in
++``enqueued`` after the threshold. This model is effectively in an invalid state
++as soon as a task is starving, rather than when the starving task finally runs.
++
++Hybrid Automaton in C
++---------------------
++
++The definition of hybrid automata in C is heavily based on the deterministic
++automata one. Specifically, we add the set of environment variables and the
++constraints (both guards on transitions and invariants on states) as follows.
++This is a combination of both iterations of the stall example::
++
++  /* enum representation of X (set of states) to be used as index */
++  enum states {
++	dequeued,
++	enqueued,
++	running,
++	state_max,
++  };
++
++  #define INVALID_STATE state_max
++
++  /* enum representation of E (set of events) to be used as index */
++  enum events {
++	dequeue,
++	enqueue,
++	switch_in,
++	event_max,
++  };
++
++  /* enum representation of V (set of environment variables) to be used as index */
++  enum envs {
++	clk,
++	env_max,
++	env_max_stored = env_max,
++  };
++
++  struct automaton {
++	char *state_names[state_max];                  // X: the set of states
++	char *event_names[event_max];                  // E: the finite set of events
++	char *env_names[env_max];                      // V: the finite set of env vars
++	unsigned char function[state_max][event_max];  // f: transition function
++	unsigned char initial_state;                   // x_0: the initial state
++	bool final_states[state_max];                  // X_m: the set of marked states
++  };
++
++  struct automaton aut = {
++	.state_names = {
++		"dequeued",
++		"enqueued",
++		"running",
++	},
++	.event_names = {
++		"dequeue",
++		"enqueue",
++		"switch_in",
++	},
++	.env_names = {
++		"clk",
++	},
++	.function = {
++		{ INVALID_STATE,      enqueued, INVALID_STATE },
++		{ INVALID_STATE, INVALID_STATE,       running },
++		{      dequeued, INVALID_STATE, INVALID_STATE },
++	},
++	.initial_state = dequeued,
++	.final_states = { 1, 0, 0 },
++  };
++
++  static bool verify_constraint(enum states curr_state, enum events event,
++                                enum states next_state)
++  {
++	bool res = true;
++
++	/* Validate guards as part of f */
++	if (curr_state == enqueued && event == sched_switch_in)
++		res = get_env(clk) < threshold;
++	else if (curr_state == dequeued && event == sched_wakeup)
++		reset_env(clk);
++
++	/* Validate invariants in i */
++	if (next_state == curr_state || !res)
++		return res;
++	if (next_state == enqueued)
++		ha_start_timer_jiffy(ha_mon, clk, threshold_jiffies);
++	else if (curr_state == enqueued)
++		res = !ha_cancel_timer(ha_mon);
++	return res;
++  }
++
++The function ``verify_constraint``, here reported as simplified, checks guards,
++performs resets and starts timers to validate invariants according to
++specification.
++Due to the complex nature of environment variables, the user needs to provide
++functions to get and reset environment variables that are not common clocks
++(e.g. clocks with ns or jiffy granularity).
++Since invariants are only defined as clock expirations (e.g. *clk <
++threshold*), reaching the expiration of a timer armed when entering the state
++is in fact a failure in the model and triggers a reaction. Leaving the state
++stops the timer.
++
++It is important to note that timers implemented with hrtimers introduce
++overhead, if the monitor has several instances (e.g. all tasks) this can become
++an issue. The impact can be decreased using the timer wheel (``HA_TIMER_TYPE``
++set to ``HA_TIMER_WHEEL``), this lowers the responsiveness of the timer without
++damaging the accuracy of the model, since the invariant condition is checked
++before disabling the timer in case the callback is late.
++Alternatively, if the monitor is guaranteed to *eventually* leave the state and
++the incurred delay to wait for the next event is acceptable, guards can be used
++in place of invariants, as seen in the stall example.
++
++Graphviz .dot format
++--------------------
++
++Also the Graphviz representation of hybrid automata is an extension of the
++deterministic automata one. Specifically, guards can be provided in the event
++name separated by ``;``::
++
++    "state_start" -> "state_dest" [ label = "sched_waking;preemptible==0;reset(clk)" ];
++
++Invariant can be specified in the state label (not the node name!) separated by ``\n``::
++
++    "enqueued" [label = "enqueued\nclk < threshold_jiffies"];
++
++Constraints can be specified as valid C comparisons and allow spaces, the first
++element of the comparison must be the clock while the second is a numerical or
++parametrised value. Guards allow comparisons to be combined with boolean
++operations (``&&`` and ``||``), resets must be separated from other constraints.
++
++This is the full example of the last version of the 'stall' model in DOT::
++
++  digraph state_automaton {
++      {node [shape = circle] "enqueued"};
++      {node [shape = plaintext, style=invis, label=""] "__init_dequeued"};
++      {node [shape = doublecircle] "dequeued"};
++      {node [shape = circle] "running"};
++      "__init_dequeued" -> "dequeued";
++      "enqueued" [label = "enqueued\nclk < threshold_jiffies"];
++      "running" [label = "running"];
++      "dequeued" [label = "dequeued"];
++      "enqueued" -> "running" [ label = "switch_in" ];
++      "running" -> "dequeued" [ label = "dequeue" ];
++      "dequeued" -> "enqueued" [ label = "enqueue;reset(clk)" ];
++      { rank = min ;
++          "__init_dequeued";
++          "dequeued";
++      }
++  }
++
++References
++----------
++
++One book covering model checking and timed automata is::
++
++  Christel Baier and Joost-Pieter Katoen: Principles of Model Checking,
++  The MIT Press, 2008.
++
++Hybrid automata are described in detail in::
++
++  Thomas Henzinger: The theory of hybrid automata,
++  Proceedings 11th Annual IEEE Symposium on Logic in Computer Science, 1996.
+diff --git a/Documentation/trace/rv/index.rst b/Documentation/trace/rv/index.rst
+index a2812ac5cfeb..ad298784bda2 100644
+--- a/Documentation/trace/rv/index.rst
++++ b/Documentation/trace/rv/index.rst
+@@ -9,6 +9,7 @@ Runtime Verification
+    runtime-verification.rst
+    deterministic_automata.rst
+    linear_temporal_logic.rst
++   hybrid_automata.rst
+    monitor_synthesis.rst
+    da_monitor_instrumentation.rst
+    monitor_wip.rst
+diff --git a/Documentation/trace/rv/monitor_synthesis.rst b/Documentation/trace/rv/monitor_synthesis.rst
+index cc5f97977a29..2c1b5a0ae154 100644
+--- a/Documentation/trace/rv/monitor_synthesis.rst
++++ b/Documentation/trace/rv/monitor_synthesis.rst
+@@ -18,8 +18,8 @@ functions that glue the monitor to the system reference model, and the
+ trace output as a reaction to event parsing and exceptions, as depicted
+ below::
+ 
+- Linux  +----- RV Monitor ----------------------------------+ Formal
+-  Realm |                                                   |  Realm
++ Linux   +---- RV Monitor ----------------------------------+ Formal
++  Realm  |                                                  |  Realm
+   +-------------------+     +----------------+     +-----------------+
+   |   Linux kernel    |     |     Monitor    |     |     Reference   |
+   |     Tracing       |  -> |   Instance(s)  | <-  |       Model     |
+@@ -45,6 +45,7 @@ creating monitors. The header files are:
+ 
+   * rv/da_monitor.h for deterministic automaton monitor.
+   * rv/ltl_monitor.h for linear temporal logic monitor.
++  * rv/ha_monitor.h for hybrid automaton monitor.
+ 
+ rvgen
+ -----
+@@ -252,6 +253,118 @@ the task, the monitor may need some time to start validating tasks which have
+ been running before the monitor is enabled. Therefore, it is recommended to
+ start the tasks of interest after enabling the monitor.
+ 
++rv/ha_monitor.h
+++++++++++++++++
++
++The implementation of hybrid automaton monitors derives directly from the
++deterministic automaton one. Despite using a different header
++(``ha_monitor.h``) the functions to handle events are the same (e.g.
++``da_handle_event``).
++
++Additionally, the `rvgen` tool populates skeletons for the
++``ha_verify_constraint``, ``ha_get_env`` and ``ha_reset_env`` based on the
++monitor specification in the monitor source file.
++
++``ha_verify_constraint`` is typically ready as it is generated by `rvgen`:
++
++* standard constraints on edges are turned into the form::
++
++    res = ha_get_env(ha_mon, ENV) < VALUE;
++
++* reset constraints are turned into the form::
++
++    ha_reset_env(ha_mon, ENV);
++
++* constraints on the state are implemented using timers
++
++  - armed before entering the state
++
++  - cancelled while entering any other state
++
++  - untouched if the state does not change as a result of the event
++
++  - checked if the timer expired but the callback did not run
++
++  - available implementation are `HA_TIMER_HRTIMER` and `HA_TIMER_WHEEL`
++
++    - hrtimers are more precise but may have higher overhead
++
++    - select by defining `HA_TIMER_TYPE` before including the header::
++
++      #define HA_TIMER_TYPE HA_TIMER_HRTIMER
++
++Constraint values can be specified in different forms:
++
++* literal value (with optional unit). E.g.::
++
++    preemptive == 0
++    clk < 100ns
++    threshold <= 10j
++
++* constant value (uppercase string). E.g.::
++
++    clk < MAX_NS
++
++* parameter (lowercase string). E.g.::
++
++    clk <= threshold_jiffies
++
++* macro (uppercase string with parentheses). E.g.::
++
++    clk < MAX_NS()
++
++* function (lowercase string with parentheses). E.g.::
++
++    clk <= threshold_jiffies()
++
++In all cases, `rvgen` will try to understand the type of the environment
++variable from the name or unit. For instance, constants or parameters
++terminating with ``_NS`` or ``_jiffies`` are intended as clocks with ns and jiffy
++granularity, respectively. Literals with measure unit `j` are jiffies and if a
++time unit is specified (`ns` to `s`), `rvgen` will convert the value to `ns`.
++
++Constants need to be defined by the user (but unlike the name, they don't
++necessarily need to be defined as constants). Parameters get converted to
++module parameters and the user needs to provide a default value.
++Also function and macros are defined by the user, by default they get as an
++argument the ``ha_monitor``, a common usage would be to get the required value
++from the target, e.g. the task in per-task monitors, using the helper
++``ha_get_target(ha_mon)``.
++
++If `rvgen` determines that the variable is a clock, it provides the getter and
++resetter based on the unit. Otherwise, the user needs to provide an appropriate
++definition.
++Typically non-clock environment variables are not reset. In such case only the
++getter skeleton will be present in the file generated by `rvgen`.
++For instance, the getter for preemptive can be filled as::
++
++  static u64 ha_get_env(struct ha_monitor *ha_mon, enum envs env)
++  {
++      if (env == preemptible)
++          return preempt_count() == 0;
++      return ENV_INVALID_VALUE;
++  }
++
++The function is supplied the ``ha_mon`` parameter in case some storage is
++required (as it is for clocks), but environment variables without reset do not
++require a storage and can ignore that argument.
++The number of environment variables requiring a storage is limited by
++``MAX_HA_ENV_LEN``, however such limitation doesn't stand for other variables.
++
++Finally, constraints on states are only valid for clocks and only if the
++constraint is of the form `clk < N`. This is because such constraints are
++implemented with the expiration of a timer.
++Typically the clock variables are reset just before arming the timer, but this
++doesn't have to be the case and the available functions take care of it.
++It is a responsibility of per-task monitors to make sure no timer is left
++running when the task exits.
++
++By default the generator implements timers with hrtimers (setting
++``HA_TIMER_TYPE`` to ``HA_TIMER_HRTIMER``), this gives better responsiveness
++but higher overhead. The timer wheel (``HA_TIMER_WHEEL``) is a good alternative
++for monitors with several instances (e.g. per-task) that achieves lower
++overhead with increased latency, yet without compromising precision.
++
+ Final remarks
+ -------------
+ 
+-- 
+2.53.0
 
 
