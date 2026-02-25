@@ -1,88 +1,110 @@
-Return-Path: <linux-doc+bounces-77014-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77018-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oJuJCMj5nmm+YAQAu9opvQ
-	(envelope-from <linux-doc+bounces-77014-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 14:31:52 +0100
+	id IGOfGY36nmm+YAQAu9opvQ
+	(envelope-from <linux-doc+bounces-77018-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 14:35:09 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78BDF1981A0
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 14:31:51 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1282F198238
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 14:35:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B5CA7300878C
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 13:30:14 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 197C0303D5E5
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 13:34:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD6E13B960F;
-	Wed, 25 Feb 2026 13:30:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F25183BFE2A;
+	Wed, 25 Feb 2026 13:34:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FnnZaTB3"
+	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="y39Gkj4P"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6CF43B9600
-	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 13:30:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B37D3B95F9
+	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 13:34:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.67
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772026212; cv=none; b=ZAuvBcoCKdIXfeDnO2kK2aA2a9fE8nMPi2Uma0dTtBHpnhsxCQhjXp5IiGH51HATLPrGnCHaU8lNsbp1FNJx4AL4ixiQJC+7EuPVxnzwtKm0oLcLLdRRHNUHazqQ8rPAMwdFDj/zku0J6yyGeejWpm03g/1Kr1C4rLlN2elBFKw=
+	t=1772026471; cv=none; b=EWqqyymEHGM0O+zhOQZPlnxeCWlar1+weTOjJ6+o9rvNN5FCnggzID2zOv2g4QkbnU2q44wfspbt9NtFoFyiRNRwqtQnq23dL9inHJWdzAuGIjhilU/TpMiTz0CE0j5qFQmk+l+wnIvK3UAF31g4Kjzq+gXXIKZgtonceWFmKq4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772026212; c=relaxed/simple;
-	bh=gHdj8z1Ix9woDAerFqOFuS6Wnzwu2BM1MpTyHSSg5S0=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=uhU0kMI3562orJe+TKfYcT7GIIPcX6iz4ewxs5HPVgIrzxPFJ7x04EP3JPKEkZGZjPV3+DywoXBJwrbyIvg8uucEONjS6QvFQKB5iPXYxrD4bie1lcFmfzo7JWxbYTzNwCZcfbHfI7/OwVTAhvjh+bAqYwGJFIxMTvT4VuGUk/E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FnnZaTB3; arc=none smtp.client-ip=209.85.210.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-824b32875e7so3270667b3a.3
-        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 05:30:09 -0800 (PST)
+	s=arc-20240116; t=1772026471; c=relaxed/simple;
+	bh=9Xz+6VxPCwoVZU0iO1RTKRbG6dMJCxhC3xLfrYIRCTc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KKYQlnNQGKVDrB8kAf4+HDYUlZPyFk6ro46KKkpSYSW9GVLrV6lQix+qZ8u4uwic1ZNCNi+FcV/IVT/AI0PjtLoaggxpf9PRlyqnCANRXx4MKU3aMPc60na4DDFsXHv0LRkoQUOVjQPdSApi9vNw8JvlGncSDKR6JNpkXUhAVqY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=y39Gkj4P; arc=none smtp.client-ip=209.85.221.67
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
+Received: by mail-wr1-f67.google.com with SMTP id ffacd0b85a97d-4327790c4e9so5085639f8f.2
+        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 05:34:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772026209; x=1772631009; darn=vger.kernel.org;
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1772026465; x=1772631265; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Rhh6QAfKKTjEbE7eB5GmrSEBN9nF3F+rYR9Ew8n6uFE=;
-        b=FnnZaTB3/UXs/vnFB2u3buYfxd+0winvk6ZFYAgtoz56sFy+w7PB2dXAwWVKvZ1dZ+
-         ugAfzI4C5+d900ZYUiQM4Zkhf7LQpN9Tm0P/gpSXJwoFMSiicarxovP03SEt4h1LsloD
-         0Fa3FBC2Wzls5OyRHa7hrGueXAmOvixmcoClOfaNe6nVgYe6ajHRDrdKCF6Vkna3nd26
-         sA94g1ivya22/NqSVi8MXVC3DP/oDjjpPh5+tevJwE5ZaRyPGTaolS0fwKRg2a8ABO2S
-         Qr0e+EanWhW3ZDz/AV4vS0VGbFhCDRUFUbvgBX1tesHll0Pf4klBxkqTb9P+20V2rgpo
-         7LWw==
+        bh=YWW7/I/6Js+wUg3YiqGf7C70f+o6TdnB97onUwiUnHc=;
+        b=y39Gkj4PkxQF6Io4z8RqIwVg5bxxFbJxqYQwhSdB8toAtBk7xKMhSe8aM9bL2dUf+f
+         ikmhgj7eq/NgjWGfHIzMzmXmNPXkauJyNla8sPh2klQ4RAk+XZ7P1/t2rXqkROVT4hh9
+         hl7EMYleQ6kut2Ks6QRAKDeqnOqDekrcPTYnTnrWXERkSJ0fAKcO187aWExzu/EZMEg5
+         fozXHhJ5Djxu2ZGbUtlzdmw6/w3O/ee83V+u4FGuen9QHv9Q7Euglfwjum/jtMf8UDfg
+         GSyOXrktF68q+kPbUq1VXM0oVzU2dqueotrM5EAIjf2xGGHwdEXwrGHwvMKik4FIYrzU
+         NEpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772026209; x=1772631009;
+        d=1e100.net; s=20230601; t=1772026465; x=1772631265;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Rhh6QAfKKTjEbE7eB5GmrSEBN9nF3F+rYR9Ew8n6uFE=;
-        b=Dv+XlOOMR7rapLDNe5frv8CjUIZ3OaVboeEPAWLTmkZg8l8nAEDDxIdnKaaYlqZ475
-         OwUB4mAXSgyi2hsPc48Zr8q5PTFBdFGTas2W5LpYJjgqqXsD9tE1msYMl9cpni87XTsB
-         CcYdWPfRwN+fd1JAqxGTrkRwqfK1yiXBKJJ/ab//PCJ3dHD43Cs/KT5Oe/HpBWFYVYhG
-         1HC60wyrT7IF31UtpDdy2uh1HRS73/csu1RA1lsyFPWXcsJUQ9tYpk1pMZB0IW63xFUs
-         gGecdK+zbVWb9RxrO4YXlCU5W5nwVsE+eE7FqVy3OF2zYdM1jluqsPFC+WMMIDBM31Fk
-         6KUQ==
-X-Gm-Message-State: AOJu0Yx2gciE+9dRgXtjetgFCxlQgghkxFf4LKytvm3soakvprHcw5hC
-	/NwAgt6Hpbh0StoKrtQ1IRVoMM0A+5b1VgECLKMhDupKvr0aIgSM93ig
-X-Gm-Gg: ATEYQzwTdXtoaoo4wh6J4RUOzzGaVfJY0keWCUfvSuEju8uS5hLMazxwPcRFlT+VVYY
-	kSSljYWC5XMIncYFwVae1ghybjmTZkDAhrxucU1f/GFLMA06L70QhGSpDzuJMSz5fe361FVTMS6
-	ogY3TCVx/S2QaaUtdcLHb2DE9qRsMRPTPzMN2CAqwTJIAYUvfG6GIxgb8N0il636LzUCUBZfU6j
-	Xr9Yb422CneCZbr7SdqID0blBv8ZDMv370tmo2bXumCf0VTd7K1wS6Cllnoi4I/pl+GwISaAVBu
-	tjdR2pTPFm+vun2ko9SNRe1Twb41IQpVbGry79PwtKNyNsn0HOvrEA6UW1GtJ5k0iqb2SpEDKWf
-	6DN6F/OwK07Z2o6jPpx/8/YRUZak8l/lEJlpUTP8O+b7YzJfAC4iJN0y+OgoTbcKMEasQwvuZa9
-	sH6MTsjNNp6BTsi03JU35faTbtd396Wj34YZ/8785HOxI1zjV7ZlcDues7Mk5RjzQ8FIDSpEAWD
-	t+qQ33XyceO
-X-Received: by 2002:a05:6a00:4f8f:b0:824:a8f2:7de7 with SMTP id d2e1a72fcca58-826daa8944dmr13646933b3a.60.1772026208953;
-        Wed, 25 Feb 2026 05:30:08 -0800 (PST)
-Received: from pranav.. ([47.247.29.178])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-826dd64111csm13697587b3a.6.2026.02.25.05.30.06
+        bh=YWW7/I/6Js+wUg3YiqGf7C70f+o6TdnB97onUwiUnHc=;
+        b=v8JcoOQSgCUxVxGPXv4XsVvOfROPecx519JWjL337VEoaGGsWLfOeMfU0LkmeahL4x
+         gjD7LE88BAm2pp1JG2jQw/GmFfuSjbBJWBVD1cPBEUx6DdMWnCABlUEn0/Og2buzWrZc
+         339Dk6AF4The+U+sZmxGJH7XMe4rXDML0oT6w0MZBdhGed3rDSq3t0GREZykLYvLTp1L
+         EKiQjxHL2yNTDmQbi+KGZT4wnF4ns2W4f/U1h0Vpv/ZQONgVUgOBlghvhb4pShKe3//N
+         0IHR7iWWFKSWlXp1EY1XYNV2mVYL3UnI2QyHgGCuuQdOktPnyQbkeeCvmCSL77e8NG3T
+         BJ2Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWV4CpBryvUuI014PIVSIQZnsfnUJwG/ShY37/hHX9xZxfxmfAAoA4K/9L1jKDudYCdw7acwyxoF8Y=@vger.kernel.org
+X-Gm-Message-State: AOJu0YynznxfxAmGD3ZxH7PB+bUtUhwIphTaqS3JhMw7827I0KKjLpoF
+	WIi2nACHY4eoTN8an21tZRKp+8MFnZ8HjE4bb6BcyKnhOPunoK7Wzj6FSfJS88QdsOo=
+X-Gm-Gg: ATEYQzw8X3jDu1oi4gUX93z9NCFQb8m02ASrrrspSp3cGk59Z0qTKW4YF4tla/ay/+D
+	MEuiH7wmuojto1S1SDqFDtAzA4kHGKaaA5nbgG47q1QKuwfokqKfZyp+oero/kKNRCRwjBPFQTF
+	64m/AZbb8YXNgxYsCTJwxSdJQavxOn9KwbOMTXdu/6EkSoBkh/Ty2nMP5e8PTiVe/fRJdIop3pH
+	QKilb9dOCXVO3Ot4puwbCOdH85Wj7fZn7DHOvRTTSMjgu9g2kfESGhfTHu7UXJ0/Ii/zGjvg2oz
+	M1J26RNJ6Hix8AMA1Jy1YxNeeiiXdund8NgodpQ3S5cT0JPxGIKOWQjyi1iR1VDeetRw1WQrQgL
+	QYJ24x3Vkq1W5Cn5MRF237JY2VxjYy4aKP+I7Wt/3LLU7pjRdcgLpyb4yRwed6FUWCyDZklRhnK
+	V9j8wRkEDlw3m3wQ==
+X-Received: by 2002:a5d:5888:0:b0:436:1951:21f2 with SMTP id ffacd0b85a97d-4396f16e3d7mr27778818f8f.12.1772026463906;
+        Wed, 25 Feb 2026 05:34:23 -0800 (PST)
+Received: from localhost ([85.163.81.98])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43970d3ff6dsm36040237f8f.25.2026.02.25.05.34.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Feb 2026 05:30:08 -0800 (PST)
-From: Pranav Kharche <pranavkharche7@gmail.com>
-To: corbet@lwn.net
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Pranav Kharche <pranavkharche7@gmail.com>
-Subject: [PATCH v2] docs: kernel-parameters: Fix repeated word in initramfs_options entry
-Date: Wed, 25 Feb 2026 18:59:51 +0530
-Message-Id: <20260225132951.36624-1-pranavkharche7@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        Wed, 25 Feb 2026 05:34:23 -0800 (PST)
+From: Jiri Pirko <jiri@resnulli.us>
+To: netdev@vger.kernel.org
+Cc: davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	donald.hunter@gmail.com,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	saeedm@nvidia.com,
+	leon@kernel.org,
+	tariqt@nvidia.com,
+	mbloch@nvidia.com,
+	przemyslaw.kitszel@intel.com,
+	mschmidt@redhat.com,
+	andrew+netdev@lunn.ch,
+	rostedt@goodmis.org,
+	mhiramat@kernel.org,
+	mathieu.desnoyers@efficios.com,
+	chuck.lever@oracle.com,
+	matttbe@kernel.org,
+	cjubran@nvidia.com,
+	daniel.zahka@gmail.com,
+	linux-doc@vger.kernel.org,
+	linux-rdma@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org
+Subject: [PATCH net-next v2 00/10] devlink: introduce shared devlink instance for PFs on same chip
+Date: Wed, 25 Feb 2026 14:34:12 +0100
+Message-ID: <20260225133422.290965-1-jiri@resnulli.us>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -91,59 +113,131 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[resnulli-us.20230601.gappssmtp.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77014-lists,linux-doc=lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCPT_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[davemloft.net,google.com,kernel.org,redhat.com,gmail.com,lwn.net,linuxfoundation.org,nvidia.com,intel.com,lunn.ch,goodmis.org,efficios.com,oracle.com,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	DMARC_NA(0.00)[resnulli.us];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77018-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_TRACE(0.00)[resnulli-us.20230601.gappssmtp.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[26];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pranavkharche7@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-0.874];
+	TO_DN_NONE(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 78BDF1981A0
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[resnulli.us:mid,nvidia.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 1282F198238
 X-Rspamd-Action: no action
 
-Remove the duplicate word 'for' in the initramfs_options description.
+From: Jiri Pirko <jiri@nvidia.com>
 
-Signed-off-by: Pranav Kharche <pranavkharche7@gmail.com>
+Multiple PFs on a network adapter often reside on the same physical
+chip, running a single firmware. Some resources and configurations
+are inherently shared among these PFs - PTP clocks, VF group rates,
+firmware parameters, and others. Today there is no good object in
+the devlink model to attach these chip-wide configuration knobs to.
+Drivers resort to workarounds like pinning shared state to PF0 or
+maintaining ad-hoc internal structures (e.g., ice_adapter) that are
+invisible to userspace.
+
+This problem was discussed extensively starting with Przemek Kitszel's
+"whole device devlink instance" RFC for the ice driver [1]. Several
+approaches for representing the parent instance were considered:
+using a partial PCI BDF as the dev_name (breaks when PFs have different
+BDFs in VMs), creating a per-driver bus, using auxiliary devices, or
+using faux devices. All of these required a backing struct device for
+the parent devlink instance, which does not naturally exist - there is
+no PCI device that represents the chip as a whole.
+
+This patchset takes a different approach: allow devlink instances to
+exist without any backing struct device. The instance is identified
+purely by its internal index, exposed over devlin netlink. This avoids
+fabricating fake devices and keeps the devlink handle semantics clean.
+
+The first seven patches prepare the devlink core for device-less
+instances by decoupling the handle from the parent device. The last
+three introduce the shared devlink infrastructure and its first user
+in the mlx5 driver.
+
+Example output showing the shared instance and nesting:
+
+  pci/0000:08:00.0: index 0
+    nested_devlink:
+      auxiliary/mlx5_core.eth.0
+  devlink_index/1: index 1
+    nested_devlink:
+      pci/0000:08:00.0
+      pci/0000:08:00.1
+  auxiliary/mlx5_core.eth.0: index 2
+  pci/0000:08:00.1: index 3
+    nested_devlink:
+      auxiliary/mlx5_core.eth.1
+  auxiliary/mlx5_core.eth.1: index 4
+
+[1] https://lore.kernel.org/netdev/20250219164410.35665-1-przemyslaw.kitszel@intel.com/
+
 ---
- Documentation/admin-guide/kernel-parameters.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Decoupled from "devlink and mlx5: Support cross-function rate scheduling"
+patchset to maintain 15-patches limit.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index cb850e5290c2..c3460c920f84 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -6733,7 +6733,7 @@ Kernel parameters
- 			Default is 'on'.
- 
- 	initramfs_options= [KNL]
--                        Specify mount options for for the initramfs mount.
-+			Specify mount options for the initramfs mount.
- 
- 	rootfstype=	[KNL] Set root filesystem type
- 
+See individual patches for changelog.
+
+Jiri Pirko (10):
+  devlink: expose devlink instance index over netlink
+  devlink: store bus_name and dev_name pointers in struct devlink
+  devlink: avoid extra iterations when found devlink is not registered
+  devlink: allow to use devlink index as a command handle
+  devlink: support index-based lookup via bus_name/dev_name handle
+  devlink: add devlink_dev_driver_name() helper and use it in trace
+    events
+  devlink: allow devlink instance allocation without a backing device
+  devlink: introduce shared devlink instance for PFs on same chip
+  documentation: networking: add shared devlink documentation
+  net/mlx5: Add a shared devlink instance for PFs on same chip
+
+ Documentation/netlink/specs/devlink.yaml      |  56 +++
+ .../networking/devlink/devlink-shared.rst     |  89 +++++
+ Documentation/networking/devlink/index.rst    |   1 +
+ .../net/ethernet/mellanox/mlx5/core/Makefile  |   5 +-
+ .../net/ethernet/mellanox/mlx5/core/main.c    |  17 +
+ .../ethernet/mellanox/mlx5/core/sh_devlink.c  |  62 ++++
+ .../ethernet/mellanox/mlx5/core/sh_devlink.h  |  12 +
+ include/linux/mlx5/driver.h                   |   1 +
+ include/net/devlink.h                         |   9 +
+ include/trace/events/devlink.h                |  36 +-
+ include/uapi/linux/devlink.h                  |   4 +
+ net/devlink/Makefile                          |   2 +-
+ net/devlink/core.c                            |  59 ++-
+ net/devlink/dev.c                             |  11 +-
+ net/devlink/devl_internal.h                   |  17 +-
+ net/devlink/netlink.c                         |  38 +-
+ net/devlink/netlink_gen.c                     | 350 +++++++++++-------
+ net/devlink/port.c                            |  19 +-
+ net/devlink/sh_dev.c                          | 142 +++++++
+ 19 files changed, 738 insertions(+), 192 deletions(-)
+ create mode 100644 Documentation/networking/devlink/devlink-shared.rst
+ create mode 100644 drivers/net/ethernet/mellanox/mlx5/core/sh_devlink.c
+ create mode 100644 drivers/net/ethernet/mellanox/mlx5/core/sh_devlink.h
+ create mode 100644 net/devlink/sh_dev.c
+
 -- 
-2.34.1
+2.51.1
 
 
