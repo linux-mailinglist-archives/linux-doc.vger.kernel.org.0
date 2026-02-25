@@ -1,226 +1,121 @@
-Return-Path: <linux-doc+bounces-76997-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77002-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2AEGOQ3HnmkuXQQAu9opvQ
-	(envelope-from <linux-doc+bounces-76997-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:55:25 +0100
+	id 8NTtEDLInmkuXQQAu9opvQ
+	(envelope-from <linux-doc+bounces-77002-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 11:00:18 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8806E1955E3
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:55:25 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53C12195692
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 11:00:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 920B930FC924
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:52:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CC906302880C
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:58:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3581F38F24A;
-	Wed, 25 Feb 2026 09:52:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cfWecix+"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1E9D38F924;
+	Wed, 25 Feb 2026 09:58:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from proxmox-new.maurer-it.com (proxmox-new.maurer-it.com [94.136.29.106])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09FD338F238;
-	Wed, 25 Feb 2026 09:52:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6337D3242D8;
+	Wed, 25 Feb 2026 09:58:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=94.136.29.106
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772013136; cv=none; b=IIglay5jaMRXP1LKywGCClqeAf7V2eIekbrIWnYh5JQyF4qJeYpjxfImLAmbKRzu4A+8Uh2mPizjP30ve3hVO3KJvGNtvmtj6b8MBCXtS3MXHc8aTIOY7irH6zPcAY7I+4CzyqZM8HVYOikFjuZw0Xxu1LLq5Z3MRaaGL8ZvpXQ=
+	t=1772013519; cv=none; b=VoqrxirxMYwM6PgRqUy7WX2z+9yICBPdoWGMzvbQGXot4ZNnunz9OIFpHN54kZIJ1sK3izNMtYn58Oq4HtzpwcO12HidA/0cz7HRJYhDRh6Q5ug/Ye8A8XzZwhrjfP7ZleHFA6lims0g2tu5l0mny9J3s7pJkn6UODXE7sK/UoA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772013136; c=relaxed/simple;
-	bh=64AR6GQw5wetkmyW2DX8vIhUpyQSLEYiMb7oLsS8C8k=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=b8Vgx0uaG9nnZCiM9kRf52zBAf2wGNyagUzMUQSowBHPZro9sJErDnKxduABOdtH2irVe8i3bBE4kHPlv5YIJ6Dyp0QDG2uLhOPwEV+VSULQn+pYt3Qz5uVDGtF86Zm4oulFDN4l4FKjDRtfWgGb2284TBI4hg3GdTjJvEamcP0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cfWecix+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03215C19422;
-	Wed, 25 Feb 2026 09:52:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772013135;
-	bh=64AR6GQw5wetkmyW2DX8vIhUpyQSLEYiMb7oLsS8C8k=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=cfWecix+zaTLA6BKRqcRNH9ciC29tn+9RbWqXvuSUijFdaUnA8pAtWUj5RjjvmvNK
-	 SCTGgCFHYkh6p03KgRFu9tiV89wFUrgnd/liBhO5G2vsQqXxXNS135GfVBhzM8dDiF
-	 yXZiJYM8Jy7T66v6zhNamyB6kPhz0YB1xEdRmn/hdiaCJ7DYhZ3uwTixzza6xJ8xNZ
-	 KqAl28FgiDnc7wTViNwrdUwp8YgCcHw10y+C+aEi3K0zILaUQ/rb665wmfRH3VLtci
-	 h1Ita/68wEbwIzptjBLB63SkNfgoKz6wSLlZAP8i/dUxlZWiqlHYfVb9TpsdPT2tvs
-	 x5FcwTl2PPGiw==
-Date: Wed, 25 Feb 2026 15:22:11 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	Udit Tiwari <quic_utiwari@quicinc.com>,
-	Daniel Perez-Zoghbi <dperezzo@quicinc.com>,
-	Md Sadre Alam <mdalam@qti.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>, dmaengine@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: Re: [PATCH v9 03/11] dmaengine: qcom: bam_dma: implement support for
- BAM locking
-Message-ID: <aZ7GS5W1VNNB2fLi@vaman>
-References: <CAMRc=Md6ucK-TAmtvWMmUGX1KuVE9Wj_z4i7_-Gc7YXP=Omtcw@mail.gmail.com>
- <aVZh3hb32r1oVcwG@vaman>
- <CAMRc=MePAVMZPju6rZsyQMir4CkQi+FEqbC++omQtVQC1rHBVg@mail.gmail.com>
- <aVf5WUe9cAXZHxPJ@vaman>
- <CAMRc=Mdaucen4=QACDAGMuwTR1L5224S0erfC0fA7yzVzMha_Q@mail.gmail.com>
- <aWBndOfbtweRr0uS@vaman>
- <CAMRc=McPz+W4GOCbNMx-tpSav3+wuUrLT2CF5FhoV5U29oiK6A@mail.gmail.com>
- <ana2ugshqjicqscwpdgo6knv53n4zzuwqp376qil27spco5vwh@ck7wmplz52qs>
- <CAMRc=MevcsQ+sWsERQzod-a9A+F8feoLnbBXSkZrUk4zBPYCSQ@mail.gmail.com>
- <xuiiqsrj63rtg4onuu2vmohwu2b2sd3so5uzakdzuucmwqaufn@7xwecs4apayt>
+	s=arc-20240116; t=1772013519; c=relaxed/simple;
+	bh=xBH62Z1LMF0U5LLL/D1+BAGVaRAy1YDVP5FPbMvG+XM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=A+zS2Qp9ZPreDRrWJgefSNBAfEpVeqi1PVwxULWTtrc+H640+yjvk/NtwoRTCsfljTSAn+sAlzq05C2yRC4GJP6X+VndSU83dpbF83t9jxXw8GXQr1oG2AReY/S3mhordbOPQqn/P7bTA1gETKuKENZ3sGt9/HK0kex5AeEO7Zg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=proxmox.com; spf=pass smtp.mailfrom=proxmox.com; arc=none smtp.client-ip=94.136.29.106
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=proxmox.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proxmox.com
+Received: from proxmox-new.maurer-it.com (localhost.localdomain [127.0.0.1])
+	by proxmox-new.maurer-it.com (Proxmox) with ESMTP id 2F26F48796;
+	Wed, 25 Feb 2026 10:58:28 +0100 (CET)
+From: Gabriel Goller <g.goller@proxmox.com>
+To: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH net-next] docs: net: document neigh gc_interval sysctl
+Date: Wed, 25 Feb 2026 10:58:10 +0100
+Message-ID: <20260225095822.44050-1-g.goller@proxmox.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <xuiiqsrj63rtg4onuu2vmohwu2b2sd3so5uzakdzuucmwqaufn@7xwecs4apayt>
+X-Bm-Milter-Handled: 55990f41-d878-4baa-be0a-ee34c49e34d2
+X-Bm-Transport-Timestamp: 1772013491051
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-76997-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77002-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[proxmox.com];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,vger.kernel.org,linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[g.goller@proxmox.com,linux-doc@vger.kernel.org];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vkoul@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 8806E1955E3
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,proxmox.com:mid,proxmox.com:email]
+X-Rspamd-Queue-Id: 53C12195692
 X-Rspamd-Action: no action
 
-On 19-02-26, 20:10, Manivannan Sadhasivam wrote:
-> On Thu, Feb 19, 2026 at 07:30:04AM -0600, Bartosz Golaszewski wrote:
-> > On Thu, 19 Feb 2026 13:12:09 +0100, Manivannan Sadhasivam
-> > <mani@kernel.org> said:
-> > > On Fri, Jan 09, 2026 at 03:15:38PM +0100, Bartosz Golaszewski wrote:
-> > >> On Fri, Jan 9, 2026 at 3:27 AM Vinod Koul <vkoul@kernel.org> wrote:
-> > >> >
-> > >> > >
-> > >> > > We need an API because we send a locking descriptor, then a regular
-> > >> > > descriptor (or descriptors) for the actual transaction(s) and then an
-> > >> > > unlocking descriptor. It's a thing the user of the DMA engine needs to
-> > >> > > decide on, not the DMA engine itself.
-> > >> >
-> > >> > I think downstream sends lock descriptor always. What is the harm in
-> > >> > doing that every time if we go down that path?
-> > >>
-> > >> No, in downstream it too depends on the user setting the right bits.
-> > >> Currently the only user of the BAM locking downstream is the NAND
-> > >> driver. I don't think the code where the crypto driver uses it is
-> > >> public yet.
-> > >>
-> > >> And yes, there is harm - it slightly impacts performance. For QCE it
-> > >> doesn't really matter as any users wanting to offload skcipher or SHA
-> > >> are better off using the Arm Crypto Extensions anyway as they are
-> > >> faster by an order of magnitude (!). It's also the default upstream,
-> > >> where the priorities are set such that the ARM CEs are preferred over
-> > >> the QCE. QCE however, is able to coordinate with the TrustZone and
-> > >> will be used to support the DRM use-cases.
-> > >>
-> > >> I prefer to avoid impacting any other users of BAM DMA.
-> > >>
-> > >
-> > > Sorry for jumping late. But I disagree with the argument that the client drivers
-> > > have to set the LOCK/UNLOCK bit. These bits are specific to BAM DMA IP for
-> > > serializing the command descriptors from multiple entities. So DMA clients like
-> > > Crypto/NAND have no business in setting this flag. It is the job of the BAM
-> > > dmaengine driver to set/unset it at the start and end of the descriptor chain.
-> > >
-> > 
-> > But what if a given client does not need locking? We don't want to enable it
-> > for everyone - as I explained before.
-> > 
-> 
-> That's not going to hurt. AFAIK, enabling locking wouldn't cause any notable
-> performance overhead.
+Add entry for the neigh/default/gc_interval sysctl. This sysctl is
+unused since kernel v2.6.8.
 
-I was always skeptical on this one. I had never seen why locking should
-be pushed to clients. As Bjorn said it leads to more mess than worth it.
-Thanks Mnai
+Suggested-by: Jakub Kicinski <kuba@kernel.org>
+Signed-off-by: Gabriel Goller <g.goller@proxmox.com>
+---
+ Documentation/networking/ip-sysctl.rst | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-> 
-> > >> > Reg Dmitry question above, this is dma hw capability, how will client
-> > >> > know if it has to lock on older rev of hardware or not...?
-> > >> >
-> > >> > > Also: only the crypto engine needs it for now, not all the other users
-> > >> > > of the BAM engine.
-> > >> >
-> > >>
-> > >> Trying to set the lock/unlock bits will make
-> > >> dmaengine_desc_attach_metadata() fail if HW does not support it.
-> > >>
-> > >
-> > > The BAM dmaengine driver *must* know based on the IP version whether it supports
-> > > the LOCK/UNLOCK bits or not, not the client drivers. How can the client drivers
-> > > know about the BAM DMA IP capability?
-
-Lock bits are on the BAM DMA IP or client? Can we not add this
-capability to BAM driver and lock for IPs that support
-
-> > >
-> > 
-> > FYI: the current version of this is v10[1].
-> > 
-> > In it (and in this one too but let's discuss the current one) the BAM driver
-> > *does* know *based on IP version* whether is supports locking or not. The client
-> > requests a lock but this will fail if the BAM does not support it. The
-> > client does
-> > not check the BAM IP revision. So yes: it's the BAM driver that's in charge.
-> > 
-> 
-> This design looks flawed. The client *doesn't* know whether it needs locking or
-> not. If the BAM supports locking, it should enable it for all descriptors.
-
-Ack
-
-> 
-> > > For all these reasons, BAM driver should handle the locking mechanism internaly.
-> > > This will allow the client drivers to work without any modifications.
-> > >
-> > 
-> > Ok, I'm open to alternatives but please help me figure out the "hows": How do
-> > you tell the BAM driver that the client needs (or does not) locking?
-> 
-> As said above, BAM doesn't need to know. Locking is the hardware capability of
-> the BAM, not clients.
-> 
-> > How do
-> > you handle the case where we need to lock the BAM, send an arbitrary number
-> > of descriptors from the client and then unlock it? How can the BAM know *when*
-> > to lock/unlock?
-> > 
-> 
-> BAM driver has to perform lock during issue_pending() and unlock while reporting
-> the completion using vchan_cookie_complete().
-
-Sounds good to me, thanks Mani
-
+diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
+index d1eeb5323af0..265158534cda 100644
+--- a/Documentation/networking/ip-sysctl.rst
++++ b/Documentation/networking/ip-sysctl.rst
+@@ -202,6 +202,13 @@ neigh/default/gc_thresh3 - INTEGER
+ 
+ 	Default: 1024
+ 
++neigh/default/gc_interval - INTEGER
++	Specifies how often the garbage collector for neighbor entries
++	should run. This value applies to the entire table, not
++	individual entries. Unused since kernel v2.6.8.
++
++	Default: 30 seconds
++
+ neigh/default/gc_stale_time - INTEGER
+ 	Determines how long a neighbor entry can remain unused before it is
+ 	considered stale and eligible for garbage collection. Entries that have
 -- 
-~Vinod
+2.47.3
+
+
 
