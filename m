@@ -1,384 +1,186 @@
-Return-Path: <linux-doc+bounces-76991-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76993-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uOAIGPrBnmnsXAQAu9opvQ
-	(envelope-from <linux-doc+bounces-76991-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:33:46 +0100
+	id 4KuUEZ/FnmkuXQQAu9opvQ
+	(envelope-from <linux-doc+bounces-76993-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:49:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BFE51950E0
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:33:45 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4730195492
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:49:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B102930AFD5E
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:23:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BC83D301F4AB
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:48:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F20438E5C4;
-	Wed, 25 Feb 2026 09:22:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E92FF38E5F8;
+	Wed, 25 Feb 2026 09:48:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="w1+0taeu"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="xG7D2YoJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com [209.85.208.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com [91.218.175.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 678AA389454
-	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:22:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.66
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F2FE304BB4
+	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:48:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772011362; cv=none; b=RUkFxOtaag8xH8HAJ2oPTReigfFmK6L7KL0VAlCkVL4M3O0lSkMi8p50soVpmtcyhwPUGef+++pdvMXoBf/PqP/ZpuENdK5en2+PcLjfFpvLgqUmr8tEwimkgXAwY6fPImaNkhHD9aPRbFxuUmqQU3D4VdVLw4mIlpx9nhID7iQ=
+	t=1772012916; cv=none; b=D5Dv3EktROD7lzE7GDlWpHN3aNXap3mZSihkR8SPk6lB6lOp+Ruj8Z46Axyshm02PrBkXVq3y1JSgTu9mnqxDmguCttFE+Za8678YJwEWJp+NxYlLsyQeVMjo9E2BN7fm1E6Ewx5gta5fYeOFyAyZh5kXR8BXndc5/w0AcfCT7A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772011362; c=relaxed/simple;
-	bh=Fl7LDcwloEYYSrRYhs41Ef8t1sJ/mzLn9ohsJEcU+Fs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=C62MJMIXrz2A6ZzD7YedbL386iPfMz616BmpWp+GkJHTpVlHVBj84QBukjASV+8Cjx2VNTgH9jMrir2qDpLYsaQ7MdsAMV7GANU4FUBcM1b8DlDrwK5pkowQeMtZJseqvyeVX7ec+ro8KuSvOcgcsiN304z2cvXvjxZia+OL15o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=w1+0taeu; arc=none smtp.client-ip=209.85.208.66
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-ed1-f66.google.com with SMTP id 4fb4d7f45d1cf-65bf302471dso6793409a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 01:22:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1772011359; x=1772616159; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:user-agent
-         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OGuxkMX0kM60aNE9QHAj3qrKDisClRlnBUy8ZVl16+8=;
-        b=w1+0taeufuWI/SoofHvsqEu7Oqbj0v8zu4IJ8K7hVpvhxU5v1DZ4SLWDaiDBsId+s5
-         C/JsuKG3DnBEIxmp4oBLok6RFzZ3/HZ09+i1B8BLJpAnqirh6TROEPSKyQU/bmXAnjgm
-         0KtDKge4fldMfu4OGtDmwN1jSAE186vGfxu5uW5YbRmtmyiOiIDa80D4OKi7wrAM6dCh
-         jawHxtNe3aS3ZYmTxP38Hh0puyQJE6zPjDfA+a4qgQgetfMck56zX4iPrRhO0JMcFGDu
-         d5R+tOHn/aHWi/SReXVIw4Q7x3kKibcfJV/lGFOZV3gq0xrNUzEVjwl2JiUEw1TejDH2
-         91fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772011359; x=1772616159;
-        h=content-transfer-encoding:mime-version:message-id:date:user-agent
-         :references:in-reply-to:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=OGuxkMX0kM60aNE9QHAj3qrKDisClRlnBUy8ZVl16+8=;
-        b=NR7cY/SPNsw53p+X/dRbadJ6gQAKVUoNu2GQ0Y360ElIiVt72qUZdB2QsO34WFKQVn
-         Y7wXQ8gMijxp02+NbWrWC+1CejFgfNaiww25J9lJvk5qNNaT4yuSzx4GgqBJHL2GxRGF
-         vgg5LNsBa0d/7IiY22ij8KJmBYusAxszdmAK/qy4E2EstOG9e4fXGAVOJbCzYLXp4GvG
-         +PnWx19WTpytuw2btAqQ0iQQ4pnm07PDzLEjmnwQuulfku56a48KCk3kYgy93uZ5c+v5
-         /xT00wbNpI+oY3plfnBBvyfjhal9J13MlU1m8gJnXHblyb406habnDFTnrs7H+VyId2n
-         Qb4A==
-X-Forwarded-Encrypted: i=1; AJvYcCVj9tw8G43ARXbuNXvU9Rh0dHS4CWHxCG9O3vchv69+SaTRVq1Ys28Eaqqgjs2yNJxrRKBcLMnRg9s=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywk+OMKgvy8EmjN+tfc9aI81ugsv4ONMNS4H6KlXyeSHSfURNVN
-	R93kVidOtrKl2/HlaFte+FTkVU0eN4ZEg0AakTPNulVOLecxLD+LXZQh3fCcKonHJRI=
-X-Gm-Gg: ATEYQzzQskNzNUXh66vZiOAzc6LMrT/nk3xQrHEvLsBIrxlvejk5QwD1f0HF4kjDk/K
-	fCwIpI8SwnjjfF9YgKrggU4ghlEkKy5DTEZ8P+sI0M/v2JUXpCrSRnXWzjmaNufkSqr2G+ZXrgw
-	Si8eYjlYfuJHA35KVs22VqPtDAY+mzQdDsVAtn7DWuhEjhSI97Yvp43EMVZdmrznnbfq7/oMwAg
-	xp9fuDrN8s+9XEBsW4ak8mdh5fQoFHlumk4n2ALB7inMTc2c5LOidnKl5FwR1xrmdTuqE3uVxSn
-	5HJnFRbzLkyaLaT72xNR8NW2lzPdCGotCdESjjNG9UAkOkGpHnQdWsUKU6bU4IPDJTAzPpQhGba
-	HMqBf1CPYdp5pzemmbOCMzJ2VSWSpfBHUfhmIzRw7lWLUQxM+Yz1u7cA5CqsYyVpEZhKalOC3Fd
-	oVUTR54CaOTIW0cSgoDv7XYgc=
-X-Received: by 2002:a17:907:d8c:b0:b8f:a8bc:a081 with SMTP id a640c23a62f3a-b9081a02587mr927550166b.19.1772011358547;
-        Wed, 25 Feb 2026 01:22:38 -0800 (PST)
-Received: from draig.lan ([185.124.0.126])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-65eaba1375dsm4099202a12.21.2026.02.25.01.22.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Feb 2026 01:22:37 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
-	by draig.lan (Postfix) with ESMTP id EAB235F834;
-	Wed, 25 Feb 2026 09:22:36 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: Marc Zyngier <maz@kernel.org>,  Joey Gouly <joey.gouly@arm.com>,
-  Catalin Marinas <catalin.marinas@arm.com>,  Suzuki K Poulose
- <suzuki.poulose@arm.com>,  Will Deacon <will@kernel.org>,  Paolo Bonzini
- <pbonzini@redhat.com>,  Jonathan Corbet <corbet@lwn.net>,  Shuah Khan
- <shuah@kernel.org>,  Oliver Upton <oupton@kernel.org>,  Dave Martin
- <Dave.Martin@arm.com>,  Fuad Tabba <tabba@google.com>,  Mark Rutland
- <mark.rutland@arm.com>,  Ben Horgan <ben.horgan@arm.com>,
-  linux-arm-kernel@lists.infradead.org,  kvmarm@lists.linux.dev,
-  linux-kernel@vger.kernel.org,  kvm@vger.kernel.org,
-  linux-doc@vger.kernel.org,  linux-kselftest@vger.kernel.org,  Peter
- Maydell <peter.maydell@linaro.org>,  Eric Auger <eric.auger@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: Re: [PATCH v9 00/30] KVM: arm64: Implement support for SME
-In-Reply-To: <20251223-kvm-arm64-sme-v9-0-8be3867cb883@kernel.org> (Mark
-	Brown's message of "Tue, 23 Dec 2025 01:20:54 +0000")
-References: <20251223-kvm-arm64-sme-v9-0-8be3867cb883@kernel.org>
-User-Agent: mu4e 1.14.0-pre1; emacs 30.1
-Date: Wed, 25 Feb 2026 09:22:36 +0000
-Message-ID: <87fr6p2n4z.fsf@draig.linaro.org>
+	s=arc-20240116; t=1772012916; c=relaxed/simple;
+	bh=0vuh+UkammmyujgIvqj3KuIm9vzV56ONGePfocRu8yc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=rq4r6CMFjaxR5sXlF05sTosUE9ixymgcv0QFZJf8C9dZQ2SGWoEZegQZJCfyu631ipyVi6EOQkJI/SGW7jxI6HTEbiGffhdA1sPl5zzNql6Vu5Q+/LsBYBHerfJXs5VP9WocDzzKbyoIpkk7pP82y/WhTmmCs4tBWElcVUDvSWQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=xG7D2YoJ; arc=none smtp.client-ip=91.218.175.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <f6eae6e1-b0ad-4027-ac53-26abbfabe2c6@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1772012903;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=y7F++bMkQXdIC4u8xt2NgZr7EX4XnUN5usbpMgsViBs=;
+	b=xG7D2YoJxlHSSR2JyXaJ4MVXWyoaaDnDONqw3Z3mf21T9P9YNdfFXd5w7Wf9PPdd7ssVU2
+	ChA1Ugzr+uYlYVcypAZP5F7CFsPqE6w3H3l9Ny5bIhN3U9iUqblNfr1JJ/g4pDVeayf1bJ
+	K5KqMWOp2dqEsS7xXmgx0BckLrleofA=
+Date: Wed, 25 Feb 2026 17:48:09 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [RFC PATCH net-next] tcp: Add net.ipv4.tcp_purge_receive_queue
+ sysctl
+Content-Language: en-US
+To: Eric Dumazet <edumazet@google.com>, Leon Hwang <leon.huangfu@shopee.com>
+Cc: netdev@vger.kernel.org, "David S . Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, David Ahern <dsahern@kernel.org>,
+ Neal Cardwell <ncardwell@google.com>, Kuniyuki Iwashima <kuniyu@google.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ij@kernel.org>,
+ Ido Schimmel <idosch@nvidia.com>, kerneljasonxing@gmail.com,
+ lance.yang@linux.dev, jiayuan.chen@linux.dev, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260225074633.149590-1-leon.huangfu@shopee.com>
+ <CANn89i+RZtN0wcyBUxKf83pkcbH4=nN_Cpc62tNwwS8T-LQR2A@mail.gmail.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Leon Hwang <leon.hwang@linux.dev>
+In-Reply-To: <CANn89i+RZtN0wcyBUxKf83pkcbH4=nN_Cpc62tNwwS8T-LQR2A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[bounces-76991-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-76993-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,davemloft.net,kernel.org,redhat.com,lwn.net,linuxfoundation.org,google.com,nvidia.com,gmail.com,linux.dev];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alex.bennee@linaro.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leon.hwang@linux.dev,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[svcr.sm:url,draig.linaro.org:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linaro.org:email,linaro.org:dkim,pstate.sm:url]
-X-Rspamd-Queue-Id: 8BFE51950E0
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[shopee.com:email,linux.dev:mid,linux.dev:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A4730195492
 X-Rspamd-Action: no action
 
-Mark Brown <broonie@kernel.org> writes:
 
-> I've removed the RFC tag from this version of the series, but the items
-> that I'm looking for feedback on remains the same:
->
->  - The userspace ABI, in particular:
->   - The vector length used for the SVE registers, access to the SVE
->     registers and access to ZA and (if available) ZT0 depending on
->     the current state of PSTATE.{SM,ZA}.
->   - The use of a single finalisation for both SVE and SME.
->
 
-Hi Mark,
+On 25/2/26 16:31, Eric Dumazet wrote:
+> On Wed, Feb 25, 2026 at 8:46 AM Leon Hwang <leon.huangfu@shopee.com> wrote:
+>>
+>> Introduce a new sysctl knob, net.ipv4.tcp_purge_receive_queue, to
+>> address a memory leak scenario related to TCP sockets.
+> 
+> We use the term "memory leak" for a persistent loss of memory (until reboot)
+> 
 
-Richard has posted an initial QEMU RFC series here:
+Thanks for the clarification.
 
-  Message-ID: <20260216034432.23912-1-richard.henderson@linaro.org>
-  Date: Mon, 16 Feb 2026 13:44:19 +1000
-  Subject: [RFC PATCH 00/13] target/arm: Support SME for KVM
-  From: Richard Henderson <richard.henderson@linaro.org>
+> Lets not abuse it and confuse various AI/human agents which will
+> declare emergency situations
+> caused by an inexistent fatal error.
+> 
 
-For those that would like to test. Given the residency of SME2 context
-and the timing of running everything under TCG it might be worth adding
-some SME2 workloads to the kvm-unit-tests similar to how the GIC ITS
-migration is tested.
+I'll reword it in the next revision.
 
->  - The addition of control for enabling fine grained traps in a similar
->    manner to FGU but without the UNDEF, I'm not clear if this is desired
->    at all and at present this requires symmetric read and write traps like
->    FGU. That seemed like it might be desired from an implementation
->    point of view but we already have one case where we enable an
->    asymmetric trap (for ARM64_WORKAROUND_AMPERE_AC03_CPU_38) and it
->    seems generally useful to enable asymmetrically.
->
-> This series implements support for SME use in non-protected KVM guests.
-> Much of this is very similar to SVE, the main additional challenge that
-> SME presents is that it introduces a new vector length similar to the
-> SVE vector length and two new controls which change the registers seen
-> by guests:
->
->  - PSTATE.ZA enables the ZA matrix register and, if SME2 is supported,
->    the ZT0 LUT register.
->  - PSTATE.SM enables streaming mode, a new floating point mode which
->    uses the SVE register set with the separately configured SME vector
->    length.  In streaming mode implementation of the FFR register is
->    optional.
->
-> It is also permitted to build systems which support SME without SVE, in
-> this case when not in streaming mode no SVE registers or instructions
-> are available.  Further, there is no requirement that there be any
-> overlap in the set of vector lengths supported by SVE and SME in a
-> system, this is expected to be a common situation in practical systems.
->
-> Since there is a new vector length to configure we introduce a new
-> feature parallel to the existing SVE one with a new pseudo register for
-> the streaming mode vector length.  Due to the overlap with SVE caused by
-> streaming mode rather than finalising SME as a separate feature we use
-> the existing SVE finalisation to also finalise SME, a new define
-> KVM_ARM_VCPU_VEC is provided to help make user code clearer.  Finalising
-> SVE and SME separately would introduce complication with register access
-> since finalising SVE makes the SVE registers writeable by userspace and
-> doing multiple finalisations results in an error being reported.
-> Dealing with a state where the SVE registers are writeable due to one of
-> SVE or SME being finalised but may have their VL changed by the other
-> being finalised seems like needless complexity with minimal practical
-> utility, it seems clearer to just express directly that only one
-> finalisation can be done in the ABI.
->
-> Access to the floating point registers follows the architecture:
->
->  - When both SVE and SME are present:
->    - If PSTATE.SM =3D=3D 0 the vector length used for the Z and P registe=
-rs
->      is the SVE vector length.
->    - If PSTATE.SM =3D=3D 1 the vector length used for the Z and P registe=
-rs
->      is the SME vector length.
->  - If only SME is present:
->    - If PSTATE.SM =3D=3D 0 the Z and P registers are inaccessible and the
->      floating point state accessed via the encodings for the V registers.
->    - If PSTATE.SM =3D=3D 1 the vector length used for the Z and P registe=
-rs
->  - The SME specific ZA and ZT0 registers are only accessible if SVCR.ZA i=
-s 1.
->
-> The VMM must understand this, in particular when loading state SVCR
-> should be configured before other state.  It should be noted that while
-> the architecture refers to PSTATE.SM and PSTATE.ZA these PSTATE bits are
-> not preserved in SPSR_ELx, they are only accessible via SVCR.
->
-> There are a large number of subfeatures for SME, most of which only
-> offer additional instructions but some of which (SME2 and FA64) add
-> architectural state. These are configured via the ID registers as per
-> usual.
->
-> Protected KVM supported, with the implementation maintaining the
-> existing restriction that the hypervisor will refuse to run if streaming
-> mode or ZA is enabled.  This both simplfies the code and avoids the need
-> to allocate storage for host ZA and ZT0 state, there seems to be little
-> practical use case for supporting this and the memory usage would be
-> non-trivial.
->
-> The new KVM_ARM_VCPU_VEC feature and ZA and ZT0 registers have not been
-> added to the get-reg-list selftest, the idea of supporting additional
-> features there without restructuring the program to generate all
-> possible feature combinations has been rejected.  I will post a separate
-> series which does that restructuring.
->
-> Signed-off-by: Mark Brown <broonie@kernel.org>
-> ---
-> Changes in v9:
-> - Rebase onto v6.19-rc1.
-> - ABI document clarifications.
-> - Add changes dropping asserts on single bit wide bitfields in set_id_reg=
-s.
-> - Link to v8: https://lore.kernel.org/r/20250902-kvm-arm64-sme-v8-0-2cb21=
-99c656c@kernel.org
->
-> Changes in v8:
-> - Small fixes in ABI documentation.
-> - Link to v7: https://lore.kernel.org/r/20250822-kvm-arm64-sme-v7-0-7a65d=
-82b8b10@kernel.org
->
-> Changes in v7:
-> - Rebase onto v6.17-rc1.
-> - Handle SMIDR_EL1 as a VM wide ID register and use this in feat_sme_smps=
-().
-> - Expose affinity fields in SMIDR_EL1.
-> - Remove SMPRI_EL1 from vcpu_sysreg, the value is always 0 currently.
-> - Prevent userspace writes to SMPRIMAP_EL2.
-> - Link to v6: https://lore.kernel.org/r/20250625-kvm-arm64-sme-v6-0-114cf=
-f4ffe04@kernel.org
->
-> Changes in v6:
-> - Rebase onto v6.16-rc3.
-> - Link to v5: https://lore.kernel.org/r/20250417-kvm-arm64-sme-v5-0-f469a=
-2d5f574@kernel.org
->
-> Changes in v5:
-> - Rebase onto v6.15-rc2.
-> - Add pKVM guest support.
-> - Always restore SVCR.
-> - Link to v4: https://lore.kernel.org/r/20250214-kvm-arm64-sme-v4-0-d64a6=
-81adcc2@kernel.org
->
-> Changes in v4:
-> - Rebase onto v6.14-rc2 and Mark Rutland's fixes.
-> - Expose SME to nested guests.
-> - Additional cleanups and test fixes following on from the rebase.
-> - Flush register state on VMM PSTATE.{SM,ZA}.
-> - Link to v3: https://lore.kernel.org/r/20241220-kvm-arm64-sme-v3-0-05b01=
-8c1ffeb@kernel.org
->
-> Changes in v3:
-> - Rebase onto v6.12-rc2.
-> - Link to v2: https://lore.kernel.org/r/20231222-kvm-arm64-sme-v2-0-da226=
-cb180bb@kernel.org
->
-> Changes in v2:
-> - Rebase onto v6.7-rc3.
-> - Configure subfeatures based on host system only.
-> - Complete nVHE support.
-> - There was some snafu with sending v1 out, it didn't make it to the
->   lists but in case it hit people's inboxes I'm sending as v2.
->
-> ---
-> Mark Brown (30):
->       arm64/sysreg: Update SMIDR_EL1 to DDI0601 2025-06
->       arm64/fpsimd: Update FA64 and ZT0 enables when loading SME state
->       arm64/fpsimd: Decide to save ZT0 and streaming mode FFR at bind time
->       arm64/fpsimd: Check enable bit for FA64 when saving EFI state
->       arm64/fpsimd: Determine maximum virtualisable SME vector length
->       KVM: arm64: Pay attention to FFR parameter in SVE save and load
->       KVM: arm64: Pull ctxt_has_ helpers to start of sysreg-sr.h
->       KVM: arm64: Move SVE state access macros after feature test macros
->       KVM: arm64: Rename SVE finalization constants to be more general
->       KVM: arm64: Document the KVM ABI for SME
->       KVM: arm64: Define internal features for SME
->       KVM: arm64: Rename sve_state_reg_region
->       KVM: arm64: Store vector lengths in an array
->       KVM: arm64: Implement SME vector length configuration
->       KVM: arm64: Support SME control registers
->       KVM: arm64: Support TPIDR2_EL0
->       KVM: arm64: Support SME identification registers for guests
->       KVM: arm64: Support SME priority registers
->       KVM: arm64: Provide assembly for SME register access
->       KVM: arm64: Support userspace access to streaming mode Z and P regi=
-sters
->       KVM: arm64: Flush register state on writes to SVCR.SM and SVCR.ZA
->       KVM: arm64: Expose SME specific state to userspace
->       KVM: arm64: Context switch SME state for guests
->       KVM: arm64: Handle SME exceptions
->       KVM: arm64: Expose SME to nested guests
->       KVM: arm64: Provide interface for configuring and enabling SME for =
-guests
->       KVM: arm64: selftests: Remove spurious check for single bit safe va=
-lues
->       KVM: arm64: selftests: Skip impossible invalid value tests
->       KVM: arm64: selftests: Add SME system registers to get-reg-list
->       KVM: arm64: selftests: Add SME to set_id_regs test
->
->  Documentation/virt/kvm/api.rst                   | 120 ++++++++---
->  arch/arm64/include/asm/fpsimd.h                  |  26 +++
->  arch/arm64/include/asm/kvm_emulate.h             |   6 +
->  arch/arm64/include/asm/kvm_host.h                | 163 ++++++++++++---
->  arch/arm64/include/asm/kvm_hyp.h                 |   5 +-
->  arch/arm64/include/asm/kvm_pkvm.h                |   2 +-
->  arch/arm64/include/asm/vncr_mapping.h            |   2 +
->  arch/arm64/include/uapi/asm/kvm.h                |  33 +++
->  arch/arm64/kernel/cpufeature.c                   |   2 -
->  arch/arm64/kernel/fpsimd.c                       |  89 ++++----
->  arch/arm64/kvm/arm.c                             |  10 +
->  arch/arm64/kvm/config.c                          |  11 +-
->  arch/arm64/kvm/fpsimd.c                          |  28 ++-
->  arch/arm64/kvm/guest.c                           | 252 +++++++++++++++++=
-+++---
->  arch/arm64/kvm/handle_exit.c                     |  14 ++
->  arch/arm64/kvm/hyp/fpsimd.S                      |  28 ++-
->  arch/arm64/kvm/hyp/include/hyp/switch.h          | 168 +++++++++++++--
->  arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h       | 110 ++++++----
->  arch/arm64/kvm/hyp/nvhe/hyp-main.c               |  86 ++++++--
->  arch/arm64/kvm/hyp/nvhe/pkvm.c                   |  85 ++++++--
->  arch/arm64/kvm/hyp/nvhe/switch.c                 |   4 +-
->  arch/arm64/kvm/hyp/nvhe/sys_regs.c               |   6 +
->  arch/arm64/kvm/hyp/vhe/switch.c                  |  17 +-
->  arch/arm64/kvm/hyp/vhe/sysreg-sr.c               |   7 +
->  arch/arm64/kvm/nested.c                          |   3 +-
->  arch/arm64/kvm/reset.c                           | 156 ++++++++++----
->  arch/arm64/kvm/sys_regs.c                        | 140 ++++++++++++-
->  arch/arm64/tools/sysreg                          |   8 +-
->  include/uapi/linux/kvm.h                         |   1 +
->  tools/testing/selftests/kvm/arm64/get-reg-list.c |  15 +-
->  tools/testing/selftests/kvm/arm64/set_id_regs.c  |  84 ++++++--
->  31 files changed, 1367 insertions(+), 314 deletions(-)
-> ---
-> base-commit: 3e7f562e20ee87a25e104ef4fce557d39d62fa85
-> change-id: 20230301-kvm-arm64-sme-06a1246d3636
->
-> Best regards,
+>>
+>> Issue:
+>> When a TCP socket in the CLOSE_WAIT state receives a RST packet, the
+>> current implementation does not clear the socket's receive queue. This
+>> causes SKBs in the queue to remain allocated until the socket is
+>> explicitly closed by the application. As a consequence:
+>>
+>> 1. The page pool pages held by these SKBs are not released.
+> 
+> This situation also applies for normal TCP_ESTABLISHED sockets, when
+> applications
+> do not drain the receive queue.
+> 
+> As long the application has not called close(), kernel should not
+> assume the application
+> will _not_ read the data that was received.
+> 
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+Understood.
+
+This patch provides an option to drain the receive queue in the
+CLOSE_WAIT + RST case, instead of purging it unconditionally upon
+receiving a RST packet.
+
+> 
+>> 2. The associated page pool cannot be freed.
+>>
+>> RFC 9293 Section 3.10.7.4 specifies that when a RST is received in
+>> CLOSE_WAIT state, "all segment queues should be flushed." However, the
+>> current implementation does not flush the receive queue.
+> 
+> Some buggy stacks send RST anyway after FIN. I think that forcingly
+> purging good data
+> received before the RST would add many surprises.
+> 
+
+Understood.
+
+There is a tcp_write_queue_purge(sk) call in tcp_done_with_error(),
+which means sk_write_queue is always purged when a RST packet is
+received. I assume the reason for purging sk_write_queue is that any
+pending transmissions become meaningless once a RST is received.
+
+Would it be better to defer kb_queue_purge(&sk->sk_receive_queue) until
+after tcp_done_with_error()?
+
+[...]
+
+>>
+> 
+> Please prepare a packetdrill test.
+
+Ack.
+
+I'll add a packetdrill test in the next revision.
+
+Thanks,
+Leon
+
 
