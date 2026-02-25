@@ -1,842 +1,384 @@
-Return-Path: <linux-doc+bounces-76989-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-76991-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GH1kC/G7nmnwWwQAu9opvQ
-	(envelope-from <linux-doc+bounces-76989-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:08:01 +0100
+	id uOAIGPrBnmnsXAQAu9opvQ
+	(envelope-from <linux-doc+bounces-76991-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:33:46 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4B0C194A62
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:08:00 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BFE51950E0
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 10:33:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 89CE030DA6D5
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 08:59:48 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B102930AFD5E
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 09:23:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20D12329E7D;
-	Wed, 25 Feb 2026 08:59:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F20438E5C4;
+	Wed, 25 Feb 2026 09:22:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=yeah.net header.i=@yeah.net header.b="iuxXfl/M"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="w1+0taeu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m16.yeah.net (mail-m16.yeah.net [1.95.21.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com [209.85.208.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AA4A2D29C8;
-	Wed, 25 Feb 2026 08:59:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=1.95.21.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 678AA389454
+	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:22:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.66
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772009988; cv=none; b=ZJ/cqTPmK/tGHv/axzI+5aLpMwPoF+q8LIjMnwrcW49cv2sWPyVyWyhPmQllfQzYNlHBaZkH9ICK8T62TrfHxxyzWBNDCe7GkIqdn0u5WYEG+MCpnfp/ZLaxbU3791j5kjo9kFlgrc9HdpMGoAZMyp3GMTcmkoo5Pw5rAoOGs9M=
+	t=1772011362; cv=none; b=RUkFxOtaag8xH8HAJ2oPTReigfFmK6L7KL0VAlCkVL4M3O0lSkMi8p50soVpmtcyhwPUGef+++pdvMXoBf/PqP/ZpuENdK5en2+PcLjfFpvLgqUmr8tEwimkgXAwY6fPImaNkhHD9aPRbFxuUmqQU3D4VdVLw4mIlpx9nhID7iQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772009988; c=relaxed/simple;
-	bh=QONqX4L4KkNkMRxbADoBbm44ZgP/93v+P0X7inohcso=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=IbEurKQ/gyBx47wAGARwDVTam0QrfVCmG35t2fGoTRAk1vYlIYC0Fx5PZWSopLzZC8qYj1rLCiEJp+GV9RQ95Yb1cQ0G0UbaqTbb6nl/I6vCTJxDduQjI2h6KUz2fbK3FIWp2+kk25XdgKxvaEKsa6ZHY/yck7c6U01qNks2OHw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yeah.net; spf=pass smtp.mailfrom=yeah.net; dkim=pass (1024-bit key) header.d=yeah.net header.i=@yeah.net header.b=iuxXfl/M; arc=none smtp.client-ip=1.95.21.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yeah.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yeah.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=29
-	caBgwvLdp01T9ylIV0Y3ctirsurnxcwSNjNWjKepo=; b=iuxXfl/MFnvTry85CN
-	lN6538N4vIbq2rGAL+SjIfxuCubd+2zHoH47Cb/htXFqirVVU75yWKxxp2AJ1KeC
-	qEgXOSC89nkcwpMg0xz80l+JsnTnRNl3IvQsekQXKqsFMSwz+n4RN0jAN7PIV75x
-	IGqEN66oOeS7gNvdXlAguTwyw=
-Received: from localhost.localdomain (unknown [])
-	by gzsmtp3 (Coremail) with UTF8SMTPA id M88vCgDnv49DuZ5p3qKHAQ--.38590S3;
-	Wed, 25 Feb 2026 16:56:41 +0800 (CST)
-From: wenswang@yeah.net
-To: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	linux@roeck-us.net,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org
-Cc: devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Wensheng Wang <wenswang@yeah.net>
-Subject: [PATCH 2/2] hwmon: add MP2845 driver
-Date: Wed, 25 Feb 2026 16:56:31 +0800
-Message-Id: <20260225085631.165106-2-wenswang@yeah.net>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260225085631.165106-1-wenswang@yeah.net>
-References: <20260225085501.164819-1-wenswang@yeah.net>
- <20260225085631.165106-1-wenswang@yeah.net>
+	s=arc-20240116; t=1772011362; c=relaxed/simple;
+	bh=Fl7LDcwloEYYSrRYhs41Ef8t1sJ/mzLn9ohsJEcU+Fs=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=C62MJMIXrz2A6ZzD7YedbL386iPfMz616BmpWp+GkJHTpVlHVBj84QBukjASV+8Cjx2VNTgH9jMrir2qDpLYsaQ7MdsAMV7GANU4FUBcM1b8DlDrwK5pkowQeMtZJseqvyeVX7ec+ro8KuSvOcgcsiN304z2cvXvjxZia+OL15o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=w1+0taeu; arc=none smtp.client-ip=209.85.208.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-ed1-f66.google.com with SMTP id 4fb4d7f45d1cf-65bf302471dso6793409a12.1
+        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 01:22:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1772011359; x=1772616159; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:user-agent
+         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OGuxkMX0kM60aNE9QHAj3qrKDisClRlnBUy8ZVl16+8=;
+        b=w1+0taeufuWI/SoofHvsqEu7Oqbj0v8zu4IJ8K7hVpvhxU5v1DZ4SLWDaiDBsId+s5
+         C/JsuKG3DnBEIxmp4oBLok6RFzZ3/HZ09+i1B8BLJpAnqirh6TROEPSKyQU/bmXAnjgm
+         0KtDKge4fldMfu4OGtDmwN1jSAE186vGfxu5uW5YbRmtmyiOiIDa80D4OKi7wrAM6dCh
+         jawHxtNe3aS3ZYmTxP38Hh0puyQJE6zPjDfA+a4qgQgetfMck56zX4iPrRhO0JMcFGDu
+         d5R+tOHn/aHWi/SReXVIw4Q7x3kKibcfJV/lGFOZV3gq0xrNUzEVjwl2JiUEw1TejDH2
+         91fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772011359; x=1772616159;
+        h=content-transfer-encoding:mime-version:message-id:date:user-agent
+         :references:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=OGuxkMX0kM60aNE9QHAj3qrKDisClRlnBUy8ZVl16+8=;
+        b=NR7cY/SPNsw53p+X/dRbadJ6gQAKVUoNu2GQ0Y360ElIiVt72qUZdB2QsO34WFKQVn
+         Y7wXQ8gMijxp02+NbWrWC+1CejFgfNaiww25J9lJvk5qNNaT4yuSzx4GgqBJHL2GxRGF
+         vgg5LNsBa0d/7IiY22ij8KJmBYusAxszdmAK/qy4E2EstOG9e4fXGAVOJbCzYLXp4GvG
+         +PnWx19WTpytuw2btAqQ0iQQ4pnm07PDzLEjmnwQuulfku56a48KCk3kYgy93uZ5c+v5
+         /xT00wbNpI+oY3plfnBBvyfjhal9J13MlU1m8gJnXHblyb406habnDFTnrs7H+VyId2n
+         Qb4A==
+X-Forwarded-Encrypted: i=1; AJvYcCVj9tw8G43ARXbuNXvU9Rh0dHS4CWHxCG9O3vchv69+SaTRVq1Ys28Eaqqgjs2yNJxrRKBcLMnRg9s=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywk+OMKgvy8EmjN+tfc9aI81ugsv4ONMNS4H6KlXyeSHSfURNVN
+	R93kVidOtrKl2/HlaFte+FTkVU0eN4ZEg0AakTPNulVOLecxLD+LXZQh3fCcKonHJRI=
+X-Gm-Gg: ATEYQzzQskNzNUXh66vZiOAzc6LMrT/nk3xQrHEvLsBIrxlvejk5QwD1f0HF4kjDk/K
+	fCwIpI8SwnjjfF9YgKrggU4ghlEkKy5DTEZ8P+sI0M/v2JUXpCrSRnXWzjmaNufkSqr2G+ZXrgw
+	Si8eYjlYfuJHA35KVs22VqPtDAY+mzQdDsVAtn7DWuhEjhSI97Yvp43EMVZdmrznnbfq7/oMwAg
+	xp9fuDrN8s+9XEBsW4ak8mdh5fQoFHlumk4n2ALB7inMTc2c5LOidnKl5FwR1xrmdTuqE3uVxSn
+	5HJnFRbzLkyaLaT72xNR8NW2lzPdCGotCdESjjNG9UAkOkGpHnQdWsUKU6bU4IPDJTAzPpQhGba
+	HMqBf1CPYdp5pzemmbOCMzJ2VSWSpfBHUfhmIzRw7lWLUQxM+Yz1u7cA5CqsYyVpEZhKalOC3Fd
+	oVUTR54CaOTIW0cSgoDv7XYgc=
+X-Received: by 2002:a17:907:d8c:b0:b8f:a8bc:a081 with SMTP id a640c23a62f3a-b9081a02587mr927550166b.19.1772011358547;
+        Wed, 25 Feb 2026 01:22:38 -0800 (PST)
+Received: from draig.lan ([185.124.0.126])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-65eaba1375dsm4099202a12.21.2026.02.25.01.22.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Feb 2026 01:22:37 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+	by draig.lan (Postfix) with ESMTP id EAB235F834;
+	Wed, 25 Feb 2026 09:22:36 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Mark Brown <broonie@kernel.org>
+Cc: Marc Zyngier <maz@kernel.org>,  Joey Gouly <joey.gouly@arm.com>,
+  Catalin Marinas <catalin.marinas@arm.com>,  Suzuki K Poulose
+ <suzuki.poulose@arm.com>,  Will Deacon <will@kernel.org>,  Paolo Bonzini
+ <pbonzini@redhat.com>,  Jonathan Corbet <corbet@lwn.net>,  Shuah Khan
+ <shuah@kernel.org>,  Oliver Upton <oupton@kernel.org>,  Dave Martin
+ <Dave.Martin@arm.com>,  Fuad Tabba <tabba@google.com>,  Mark Rutland
+ <mark.rutland@arm.com>,  Ben Horgan <ben.horgan@arm.com>,
+  linux-arm-kernel@lists.infradead.org,  kvmarm@lists.linux.dev,
+  linux-kernel@vger.kernel.org,  kvm@vger.kernel.org,
+  linux-doc@vger.kernel.org,  linux-kselftest@vger.kernel.org,  Peter
+ Maydell <peter.maydell@linaro.org>,  Eric Auger <eric.auger@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: Re: [PATCH v9 00/30] KVM: arm64: Implement support for SME
+In-Reply-To: <20251223-kvm-arm64-sme-v9-0-8be3867cb883@kernel.org> (Mark
+	Brown's message of "Tue, 23 Dec 2025 01:20:54 +0000")
+References: <20251223-kvm-arm64-sme-v9-0-8be3867cb883@kernel.org>
+User-Agent: mu4e 1.14.0-pre1; emacs 30.1
+Date: Wed, 25 Feb 2026 09:22:36 +0000
+Message-ID: <87fr6p2n4z.fsf@draig.linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:M88vCgDnv49DuZ5p3qKHAQ--.38590S3
-X-Coremail-Antispam: 1Uf129KBjvAXoW3tr18Wry5tFWfGw17ur1kGrg_yoW8Ary3Ko
-	WfGF4Sv3WrAr1UZrWI9r47tFW7Xw4UCrZ5tw13Za1DWryakr1Yga93uws8uay2qw1rGw10
-	9F4kG343tr4avrnrn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvj4RG6wCDUUUU
-X-CM-SenderInfo: 5zhq24xdqjq5hhdkh0dhw/1tbiIgmCJ2meuUldngAA3K
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[yeah.net,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[yeah.net:s=s110527];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,yeah.net];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-76989-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	TAGGED_FROM(0.00)[bounces-76991-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[yeah.net];
-	NEURAL_HAM(-0.00)[-0.996];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wenswang@yeah.net,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[yeah.net:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,yeah.net:mid,yeah.net:dkim,yeah.net:email]
-X-Rspamd-Queue-Id: A4B0C194A62
+	FROM_NEQ_ENVFROM(0.00)[alex.bennee@linaro.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[svcr.sm:url,draig.linaro.org:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linaro.org:email,linaro.org:dkim,pstate.sm:url]
+X-Rspamd-Queue-Id: 8BFE51950E0
 X-Rspamd-Action: no action
 
-From: Wensheng Wang <wenswang@yeah.net>
+Mark Brown <broonie@kernel.org> writes:
 
-Add support for MPS VR controller mp2845. This driver exposes
-telemetry and limit value readings.
+> I've removed the RFC tag from this version of the series, but the items
+> that I'm looking for feedback on remains the same:
+>
+>  - The userspace ABI, in particular:
+>   - The vector length used for the SVE registers, access to the SVE
+>     registers and access to ZA and (if available) ZT0 depending on
+>     the current state of PSTATE.{SM,ZA}.
+>   - The use of a single finalisation for both SVE and SME.
+>
 
-Signed-off-by: Wensheng Wang <wenswang@yeah.net>
----
- Documentation/hwmon/index.rst  |   1 +
- Documentation/hwmon/mp2845.rst | 143 ++++++++++
- MAINTAINERS                    |   7 +
- drivers/hwmon/Kconfig          |  10 +
- drivers/hwmon/Makefile         |   1 +
- drivers/hwmon/mp2845.c         | 493 +++++++++++++++++++++++++++++++++
- 6 files changed, 655 insertions(+)
- create mode 100644 Documentation/hwmon/mp2845.rst
- create mode 100644 drivers/hwmon/mp2845.c
+Hi Mark,
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index d91dbb20c7dc..0a2176e5b694 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -176,6 +176,7 @@ Hardware Monitoring Kernel Drivers
-    mcp3021
-    menf21bmc
-    mlxreg-fan
-+   mp2845
-    mp2856
-    mp2869
-    mp2888
-diff --git a/Documentation/hwmon/mp2845.rst b/Documentation/hwmon/mp2845.rst
-new file mode 100644
-index 000000000000..dc6328855e27
---- /dev/null
-+++ b/Documentation/hwmon/mp2845.rst
-@@ -0,0 +1,143 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver mp2845
-+====================
-+
-+Supported chips:
-+
-+  * MPS mp2845
-+
-+    Prefix: 'mp2845'
-+
-+  * MPS mp2845
-+
-+    Prefix: 'mp2845'
-+
-+Author:
-+
-+	Wensheng Wang <wenswang@yeah.net>
-+
-+Description
-+-----------
-+
-+This driver implements support for Monolithic Power Systems, Inc. (MPS)
-+MP2845 Dual Loop Digital Multi-phase Controller.
-+
-+Device compliant with:
-+
-+- Smbus interface.
-+
-+The driver exports the following attributes via the 'sysfs' files
-+for input voltage:
-+
-+**in0_input**
-+
-+**in0_label**
-+
-+**in0_crit**
-+
-+**in0_crit_alarm**
-+
-+**in0_lcrit_alarm**
-+
-+**in0_min**
-+
-+The driver provides the following attributes for output voltage:
-+
-+**in1_input**
-+
-+**in1_label**
-+
-+**in1_crit_alarm**
-+
-+**in1_lcrit_alarm**
-+
-+**in2_input**
-+
-+**in2_label**
-+
-+**in2_crit_alarm**
-+
-+**in2_lcrit_alarm**
-+
-+**in3_input**
-+
-+**in3_label**
-+
-+**in3_crit_alarm**
-+
-+**in3_lcrit_alarm**
-+
-+**in4_input**
-+
-+**in4_label**
-+
-+**in4_crit_alarm**
-+
-+**in4_lcrit_alarm**
-+
-+The driver provides the following attributes for input current:
-+
-+**curr1_input**
-+
-+**curr1_label**
-+
-+The driver provides the following attributes for output current:
-+
-+**curr1_input**
-+
-+**curr1_label**
-+
-+**curr1_crit**
-+
-+**curr1_crit_alarm**
-+
-+**curr1_max**
-+
-+**curr2_input**
-+
-+**curr2_label**
-+
-+**curr2_crit**
-+
-+**curr2_crit_alarm**
-+
-+**curr2_max**
-+
-+**curr3_input**
-+
-+**curr3_label**
-+
-+**curr3_crit**
-+
-+**curr3_crit_alarm**
-+
-+**curr3_max**
-+
-+**curr4_input**
-+
-+**curr4_label**
-+
-+**curr4_crit**
-+
-+**curr4_crit_alarm**
-+
-+**curr4_max**
-+
-+The driver provides the following attributes for temperature:
-+
-+**temp1_input**
-+
-+**temp1_crit_alarm**
-+
-+**temp2_input**
-+
-+**temp2_crit_alarm**
-+
-+**temp3_input**
-+
-+**temp3_crit_alarm**
-+
-+**temp4_input**
-+
-+**temp4_crit_alarm**
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 55af015174a5..f1539307de5f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17905,6 +17905,13 @@ F:	drivers/resctrl/mpam_*
- F:	drivers/resctrl/test_mpam_*
- F:	include/linux/arm_mpam.h
- 
-+MPS MP2845 DRIVER
-+M:	Wensheng Wang <wenswang@yeah.net>
-+L:	linux-hwmon@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/hwmon/mp2845.rst
-+F:	drivers/hwmon/mp2845.c
-+
- MPS MP2869 DRIVER
- M:	Wensheng Wang <wenswang@yeah.net>
- L:	linux-hwmon@vger.kernel.org
-diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index 41c381764c2b..3f77982e50ea 100644
---- a/drivers/hwmon/Kconfig
-+++ b/drivers/hwmon/Kconfig
-@@ -1432,6 +1432,16 @@ config SENSORS_MENF21BMC_HWMON
- 	  This driver can also be built as a module. If so the module
- 	  will be called menf21bmc_hwmon.
- 
-+config SENSORS_MP2845
-+	tristate "MPS MP2845"
-+	depends on I2C
-+	help
-+	  If you say yes here you get hardware monitoring support for
-+	  MPS MP2845 Dual Loop Digital Multi-Phase Controller.
-+
-+	  This driver can also be built as a module. If so, the module
-+	  will be called mp2845.
-+
- config SENSORS_MR75203
- 	tristate "Moortec Semiconductor MR75203 PVT Controller"
- 	select REGMAP_MMIO
-diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-index eade8e3b1bde..4372759f2e60 100644
---- a/drivers/hwmon/Makefile
-+++ b/drivers/hwmon/Makefile
-@@ -174,6 +174,7 @@ obj-$(CONFIG_SENSORS_TC654)	+= tc654.o
- obj-$(CONFIG_SENSORS_TPS23861)	+= tps23861.o
- obj-$(CONFIG_SENSORS_MLXREG_FAN) += mlxreg-fan.o
- obj-$(CONFIG_SENSORS_MENF21BMC_HWMON) += menf21bmc_hwmon.o
-+obj-$(CONFIG_SENSORS_MP2845)	+= mp2845.o
- obj-$(CONFIG_SENSORS_MR75203)	+= mr75203.o
- obj-$(CONFIG_SENSORS_NCT6683)	+= nct6683.o
- obj-$(CONFIG_SENSORS_NCT6694)	+= nct6694-hwmon.o
-diff --git a/drivers/hwmon/mp2845.c b/drivers/hwmon/mp2845.c
-new file mode 100644
-index 000000000000..adecde7c9b71
---- /dev/null
-+++ b/drivers/hwmon/mp2845.c
-@@ -0,0 +1,493 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Hardware monitoring driver for MPS Digital Controller(MP2845)
-+ */
-+#include <linux/bitfield.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/hwmon.h>
-+#include <linux/hwmon-sysfs.h>
-+#include <linux/i2c.h>
-+#include <linux/init.h>
-+#include <linux/kernel.h>
-+#include <linux/module.h>
-+
-+#define MP2845_IOUT_SCALE_MASK1	GENMASK(5, 3)
-+#define MP2845_IOUT_SCALE_MASK2	GENMASK(13, 11)
-+
-+#define MFR_VIN_OV_UV_SET	0x71
-+#define MFR_OVUV_OCWARN_THRES	0x75
-+#define MFR_TOTAL_OCP_SET	0x76
-+#define MFR_PROTECT_STATUS1	0x80
-+#define MFR_PROTECT_STATUS2 0x81
-+
-+#define MP2845_VIN_LIMIT_UINT	125
-+#define MP2845_READ_VIN_UINT	3125
-+#define MP2845_READ_VIN_DIV	100
-+#define MP2845_READ_IOUT_UINT	3125
-+#define MP2845_READ_IOUT_DIV	100
-+#define MP2845_READ_VOUT_UINT	5
-+#define MP2845_TEMP_UINT	1000
-+
-+#define MFR_READ_VIN	0xA6
-+#define MFR_READ_VOUT	0xA7
-+#define MFR_READ_IOUT	0xA8
-+#define MFR_READ_TEMP	0xA9
-+#define MFR_MFG_ID_SCALE_VI1	0x77
-+#define MFR_MFG_ID_SCALE_VI2	0x78
-+
-+struct mp2845_data {
-+	struct i2c_client *client;
-+	int iout_gain[4];
-+	/* lock for preventing concurrency issue */
-+	struct mutex lock;
-+};
-+
-+static umode_t mp2845_is_visible(const void *data, enum hwmon_sensor_types type,
-+				 u32 attr, int channel)
-+{
-+	switch (type) {
-+	case hwmon_temp:
-+	case hwmon_in:
-+	case hwmon_curr:
-+		return 0444;
-+	default:
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
-+static int mp2845_read_string(struct device *dev, enum hwmon_sensor_types type,
-+			      u32 attr, int channel, const char **str)
-+{
-+	struct mp2845_data *data;
-+	int ret = 0;
-+
-+	data = dev_get_drvdata(dev);
-+
-+	mutex_lock(&data->lock);
-+
-+	switch (type) {
-+	case hwmon_in:
-+		if (channel == 0)
-+			*str = "vin";
-+		else if (channel == 1)
-+			*str = "vout1";
-+		else if (channel == 2)
-+			*str = "vout2";
-+		else if (channel == 3)
-+			*str = "vout3";
-+		else
-+			*str = "vout4";
-+		break;
-+	case hwmon_curr:
-+		if (channel == 0)
-+			*str = "iout1";
-+		else if (channel == 1)
-+			*str = "iout2";
-+		else if (channel == 2)
-+			*str = "iout3";
-+		else
-+			*str = "iout4";
-+		break;
-+	default:
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	mutex_unlock(&data->lock);
-+
-+	return ret;
-+}
-+
-+static int mp2845_read(struct device *dev, enum hwmon_sensor_types type,
-+		       u32 attr, int channel, long *val)
-+{
-+	int ret;
-+	struct mp2845_data *data;
-+
-+	data = dev_get_drvdata(dev);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	mutex_lock(&data->lock);
-+
-+	switch (type) {
-+	case hwmon_in:
-+		if (channel == 0) {
-+			if (attr == hwmon_in_input) {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_READ_VIN);
-+				if (ret < 0)
-+					break;
-+
-+				*val = DIV_ROUND_CLOSEST((ret & GENMASK(9, 0)) *
-+							 MP2845_READ_VIN_UINT,
-+							 MP2845_READ_VIN_DIV);
-+			} else if (attr == hwmon_in_crit) {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_VIN_OV_UV_SET);
-+				if (ret < 0)
-+					break;
-+
-+				*val = FIELD_GET(GENMASK(15, 8), ret) * MP2845_VIN_LIMIT_UINT;
-+			} else if (attr == hwmon_in_min) {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_VIN_OV_UV_SET);
-+				if (ret < 0)
-+					break;
-+
-+				*val = FIELD_GET(GENMASK(7, 0), ret) * MP2845_VIN_LIMIT_UINT;
-+			} else if (attr == hwmon_in_crit_alarm) {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS2);
-+				if (ret < 0)
-+					break;
-+
-+				*val = FIELD_GET(GENMASK(5, 5), ret);
-+			} else {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS2);
-+				if (ret < 0)
-+					break;
-+
-+				*val = FIELD_GET(GENMASK(4, 4), ret);
-+			}
-+		} else {
-+			if (attr == hwmon_in_input) {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, channel - 1);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_READ_VOUT);
-+				if (ret < 0)
-+					break;
-+
-+				*val = (ret & GENMASK(9, 0)) * MP2845_READ_VOUT_UINT;
-+			} else if (attr == hwmon_in_crit_alarm) {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS1);
-+				if (ret < 0)
-+					break;
-+
-+				if (channel == 1)
-+					*val = FIELD_GET(GENMASK(10, 10), ret);
-+				else if (channel == 2)
-+					*val = FIELD_GET(GENMASK(7, 7), ret);
-+				else if (channel == 3)
-+					*val = FIELD_GET(GENMASK(4, 4), ret);
-+				else
-+					*val = FIELD_GET(GENMASK(1, 1), ret);
-+			} else {
-+				ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+				if (ret < 0)
-+					break;
-+
-+				ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS1);
-+				if (ret < 0)
-+					break;
-+
-+				if (channel == 1)
-+					*val = FIELD_GET(GENMASK(11, 11), ret);
-+				else if (channel == 2)
-+					*val = FIELD_GET(GENMASK(8, 8), ret);
-+				else if (channel == 3)
-+					*val = FIELD_GET(GENMASK(5, 5), ret);
-+				else
-+					*val = FIELD_GET(GENMASK(2, 2), ret);
-+			}
-+		}
-+		break;
-+	case hwmon_temp:
-+		if (attr == hwmon_temp_input) {
-+			ret = i2c_smbus_write_byte_data(data->client, 0, channel);
-+			if (ret < 0)
-+				break;
-+
-+			ret = i2c_smbus_read_word_data(data->client, MFR_READ_TEMP);
-+			if (ret < 0)
-+				break;
-+
-+			*val = ((ret & GENMASK(7, 0)) - 40) * MP2845_TEMP_UINT;
-+		} else {
-+			ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+			if (ret < 0)
-+				break;
-+
-+			ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS1);
-+				if (ret < 0)
-+					break;
-+
-+			if (channel == 0) {
-+				*val = FIELD_GET(GENMASK(12, 12), ret);
-+			} else if (channel == 1) {
-+				*val = FIELD_GET(GENMASK(14, 14), ret);
-+			} else if (channel == 2) {
-+				ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS2);
-+				if (ret < 0)
-+					break;
-+
-+				*val = FIELD_GET(GENMASK(0, 0), ret);
-+			} else {
-+				ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS2);
-+				if (ret < 0)
-+					break;
-+
-+				*val = FIELD_GET(GENMASK(2, 2), ret);
-+			}
-+		}
-+		break;
-+	case hwmon_curr:
-+		if (attr == hwmon_curr_input) {
-+			ret = i2c_smbus_write_byte_data(data->client, 0, channel);
-+			if (ret < 0)
-+				break;
-+
-+			ret = i2c_smbus_read_word_data(data->client, MFR_READ_IOUT);
-+			if (ret < 0)
-+				break;
-+
-+			*val = DIV_ROUND_CLOSEST((ret & GENMASK(9, 0)) * data->iout_gain[channel] *
-+						 MP2845_READ_IOUT_UINT, MP2845_READ_IOUT_DIV);
-+		} else if (attr == hwmon_curr_max) {
-+			ret = i2c_smbus_write_byte_data(data->client, 0, channel);
-+			if (ret < 0)
-+				break;
-+
-+			ret = i2c_smbus_read_word_data(data->client, MFR_OVUV_OCWARN_THRES);
-+			if (ret < 0)
-+				break;
-+
-+			*val = DIV_ROUND_CLOSEST(FIELD_GET(GENMASK(15, 8), ret) *
-+						 data->iout_gain[channel] * MP2845_READ_IOUT_UINT *
-+						 4 * 2, MP2845_READ_IOUT_DIV);
-+		} else if (attr == hwmon_curr_crit) {
-+			ret = i2c_smbus_write_byte_data(data->client, 0, channel);
-+			if (ret < 0)
-+				break;
-+
-+			ret = i2c_smbus_read_word_data(data->client, MFR_TOTAL_OCP_SET);
-+			if (ret < 0)
-+				break;
-+
-+			*val = DIV_ROUND_CLOSEST(FIELD_GET(GENMASK(15, 8), ret) *
-+						 data->iout_gain[channel] * MP2845_READ_IOUT_UINT *
-+						 4 * 2, MP2845_READ_IOUT_DIV);
-+		} else {
-+			ret = i2c_smbus_write_byte_data(data->client, 0, 0);
-+			if (ret < 0)
-+				break;
-+
-+			ret = i2c_smbus_read_word_data(data->client, MFR_PROTECT_STATUS1);
-+			if (ret < 0)
-+				break;
-+
-+			if (channel == 0)
-+				*val = FIELD_GET(GENMASK(9, 9), ret);
-+			else if (channel == 2)
-+				*val = FIELD_GET(GENMASK(6, 6), ret);
-+			else if (channel == 3)
-+				*val = FIELD_GET(GENMASK(3, 3), ret);
-+			else
-+				*val = FIELD_GET(GENMASK(0, 0), ret);
-+		}
-+		break;
-+	default:
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	mutex_unlock(&data->lock);
-+
-+	return ret;
-+}
-+
-+static int
-+mp2845_identify_iout_scale(struct mp2845_data *data, int page)
-+{
-+	int gain;
-+	int ret;
-+
-+	ret = i2c_smbus_write_byte_data(data->client, 0x00, page);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = i2c_smbus_read_word_data(data->client, page == 0 ? MFR_MFG_ID_SCALE_VI2 :
-+				       MFR_MFG_ID_SCALE_VI1);
-+	if (ret < 0)
-+		return ret;
-+
-+	gain = page == 0 ? FIELD_GET(MP2845_IOUT_SCALE_MASK1, ret) :
-+	       FIELD_GET(MP2845_IOUT_SCALE_MASK2, ret);
-+	switch (gain) {
-+	case 1:
-+		data->iout_gain[page] = 1;
-+		break;
-+	case 2:
-+		data->iout_gain[page] = 2;
-+		break;
-+	case 3:
-+		data->iout_gain[page] = 4;
-+		break;
-+	case 4:
-+		data->iout_gain[page] = 8;
-+		break;
-+	case 5:
-+		data->iout_gain[page] = 16;
-+		break;
-+	case 6:
-+		data->iout_gain[page] = 32;
-+		break;
-+	case 7:
-+		data->iout_gain[page] = 64;
-+		break;
-+	default:
-+		data->iout_gain[page] = 1;
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct hwmon_channel_info *mp2845_info[] = {
-+	HWMON_CHANNEL_INFO(in,
-+			   HWMON_I_INPUT | HWMON_I_MIN | HWMON_I_CRIT | HWMON_I_CRIT_ALARM |
-+			   HWMON_I_LCRIT_ALARM | HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_CRIT_ALARM | HWMON_I_LCRIT_ALARM |
-+			   HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_CRIT_ALARM | HWMON_I_LCRIT_ALARM |
-+			   HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_CRIT_ALARM | HWMON_I_LCRIT_ALARM |
-+			   HWMON_I_LABEL,
-+			   HWMON_I_INPUT | HWMON_I_CRIT_ALARM | HWMON_I_LCRIT_ALARM |
-+			   HWMON_I_LABEL),
-+	HWMON_CHANNEL_INFO(temp,
-+			   HWMON_T_INPUT | HWMON_T_CRIT_ALARM,
-+			   HWMON_T_INPUT | HWMON_T_CRIT_ALARM,
-+			   HWMON_T_INPUT | HWMON_T_CRIT_ALARM,
-+			   HWMON_T_INPUT | HWMON_T_CRIT_ALARM),
-+	HWMON_CHANNEL_INFO(curr,
-+			   HWMON_C_INPUT | HWMON_C_CRIT | HWMON_C_CRIT_ALARM | HWMON_C_MAX |
-+			   HWMON_C_LABEL,
-+			   HWMON_C_INPUT | HWMON_C_CRIT | HWMON_C_CRIT_ALARM | HWMON_C_MAX |
-+			   HWMON_C_LABEL,
-+			   HWMON_C_INPUT | HWMON_C_CRIT | HWMON_C_CRIT_ALARM | HWMON_C_MAX |
-+			   HWMON_C_LABEL,
-+			   HWMON_C_INPUT | HWMON_C_CRIT | HWMON_C_CRIT_ALARM | HWMON_C_MAX |
-+			   HWMON_C_LABEL),
-+	NULL
-+};
-+
-+static const struct hwmon_ops mp2845_hwmon_ops = {
-+	.is_visible = mp2845_is_visible,
-+	.read = mp2845_read,
-+	.read_string = mp2845_read_string,
-+};
-+
-+static const struct hwmon_chip_info mp2845_chip_info = {
-+	.ops = &mp2845_hwmon_ops,
-+	.info = mp2845_info,
-+};
-+
-+static int mp2845_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct device *hwmon_dev;
-+	struct mp2845_data *data;
-+	int ret;
-+
-+	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA |
-+				     I2C_FUNC_SMBUS_WORD_DATA)) {
-+		dev_err(dev, "check failed, smbus byte and/or word data not supported!\n");
-+		return -ENODEV;
-+	}
-+
-+	data = devm_kzalloc(dev, sizeof(struct mp2845_data), GFP_KERNEL);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	mutex_init(&data->lock);
-+	data->client = client;
-+
-+	ret = mp2845_identify_iout_scale(data, 0);
-+	if (ret < 0) {
-+		dev_err(dev, "unable to identify rail1 iout scale, errno = %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = mp2845_identify_iout_scale(data, 1);
-+	if (ret < 0) {
-+		dev_err(dev, "unable to identify rail2 iout scale, errno = %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = mp2845_identify_iout_scale(data, 2);
-+	if (ret < 0) {
-+		dev_err(dev, "unable to identify rail3 iout scale, errno = %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = mp2845_identify_iout_scale(data, 3);
-+	if (ret < 0) {
-+		dev_err(dev, "unable to identify rail4 iout scale, errno = %d\n", ret);
-+		return ret;
-+	}
-+
-+	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name,
-+							 data, &mp2845_chip_info,
-+							 NULL);
-+	if (IS_ERR(hwmon_dev)) {
-+		dev_err(dev, "unable to register mp2845 hwmon device\n");
-+		return PTR_ERR(hwmon_dev);
-+	}
-+
-+	dev_info(dev, "%s: sensor '%s'\n", dev_name(hwmon_dev), client->name);
-+
-+	return 0;
-+}
-+
-+static const struct i2c_device_id mp2845_ids[] = {
-+	{"mp2845", 0},
-+	{}
-+};
-+MODULE_DEVICE_TABLE(i2c, mp2845_ids);
-+
-+static const struct of_device_id __maybe_unused mp2845_of_match[] = {
-+	{.compatible = "mps,mp2845"},
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, mp2845_of_match);
-+
-+static struct i2c_driver mp2845_driver = {
-+	.class		= I2C_CLASS_HWMON,
-+	.driver = {
-+		.name	= "mp2845",
-+		.of_match_table = mp2845_of_match,
-+	},
-+	.probe		= mp2845_probe,
-+	.id_table	= mp2845_ids,
-+};
-+module_i2c_driver(mp2845_driver);
-+
-+MODULE_AUTHOR("Wensheng Wang <wenswang@yeah.net>");
-+MODULE_DESCRIPTION("MP2845 driver");
-+MODULE_LICENSE("GPL");
--- 
-2.25.1
+Richard has posted an initial QEMU RFC series here:
 
+  Message-ID: <20260216034432.23912-1-richard.henderson@linaro.org>
+  Date: Mon, 16 Feb 2026 13:44:19 +1000
+  Subject: [RFC PATCH 00/13] target/arm: Support SME for KVM
+  From: Richard Henderson <richard.henderson@linaro.org>
+
+For those that would like to test. Given the residency of SME2 context
+and the timing of running everything under TCG it might be worth adding
+some SME2 workloads to the kvm-unit-tests similar to how the GIC ITS
+migration is tested.
+
+>  - The addition of control for enabling fine grained traps in a similar
+>    manner to FGU but without the UNDEF, I'm not clear if this is desired
+>    at all and at present this requires symmetric read and write traps like
+>    FGU. That seemed like it might be desired from an implementation
+>    point of view but we already have one case where we enable an
+>    asymmetric trap (for ARM64_WORKAROUND_AMPERE_AC03_CPU_38) and it
+>    seems generally useful to enable asymmetrically.
+>
+> This series implements support for SME use in non-protected KVM guests.
+> Much of this is very similar to SVE, the main additional challenge that
+> SME presents is that it introduces a new vector length similar to the
+> SVE vector length and two new controls which change the registers seen
+> by guests:
+>
+>  - PSTATE.ZA enables the ZA matrix register and, if SME2 is supported,
+>    the ZT0 LUT register.
+>  - PSTATE.SM enables streaming mode, a new floating point mode which
+>    uses the SVE register set with the separately configured SME vector
+>    length.  In streaming mode implementation of the FFR register is
+>    optional.
+>
+> It is also permitted to build systems which support SME without SVE, in
+> this case when not in streaming mode no SVE registers or instructions
+> are available.  Further, there is no requirement that there be any
+> overlap in the set of vector lengths supported by SVE and SME in a
+> system, this is expected to be a common situation in practical systems.
+>
+> Since there is a new vector length to configure we introduce a new
+> feature parallel to the existing SVE one with a new pseudo register for
+> the streaming mode vector length.  Due to the overlap with SVE caused by
+> streaming mode rather than finalising SME as a separate feature we use
+> the existing SVE finalisation to also finalise SME, a new define
+> KVM_ARM_VCPU_VEC is provided to help make user code clearer.  Finalising
+> SVE and SME separately would introduce complication with register access
+> since finalising SVE makes the SVE registers writeable by userspace and
+> doing multiple finalisations results in an error being reported.
+> Dealing with a state where the SVE registers are writeable due to one of
+> SVE or SME being finalised but may have their VL changed by the other
+> being finalised seems like needless complexity with minimal practical
+> utility, it seems clearer to just express directly that only one
+> finalisation can be done in the ABI.
+>
+> Access to the floating point registers follows the architecture:
+>
+>  - When both SVE and SME are present:
+>    - If PSTATE.SM =3D=3D 0 the vector length used for the Z and P registe=
+rs
+>      is the SVE vector length.
+>    - If PSTATE.SM =3D=3D 1 the vector length used for the Z and P registe=
+rs
+>      is the SME vector length.
+>  - If only SME is present:
+>    - If PSTATE.SM =3D=3D 0 the Z and P registers are inaccessible and the
+>      floating point state accessed via the encodings for the V registers.
+>    - If PSTATE.SM =3D=3D 1 the vector length used for the Z and P registe=
+rs
+>  - The SME specific ZA and ZT0 registers are only accessible if SVCR.ZA i=
+s 1.
+>
+> The VMM must understand this, in particular when loading state SVCR
+> should be configured before other state.  It should be noted that while
+> the architecture refers to PSTATE.SM and PSTATE.ZA these PSTATE bits are
+> not preserved in SPSR_ELx, they are only accessible via SVCR.
+>
+> There are a large number of subfeatures for SME, most of which only
+> offer additional instructions but some of which (SME2 and FA64) add
+> architectural state. These are configured via the ID registers as per
+> usual.
+>
+> Protected KVM supported, with the implementation maintaining the
+> existing restriction that the hypervisor will refuse to run if streaming
+> mode or ZA is enabled.  This both simplfies the code and avoids the need
+> to allocate storage for host ZA and ZT0 state, there seems to be little
+> practical use case for supporting this and the memory usage would be
+> non-trivial.
+>
+> The new KVM_ARM_VCPU_VEC feature and ZA and ZT0 registers have not been
+> added to the get-reg-list selftest, the idea of supporting additional
+> features there without restructuring the program to generate all
+> possible feature combinations has been rejected.  I will post a separate
+> series which does that restructuring.
+>
+> Signed-off-by: Mark Brown <broonie@kernel.org>
+> ---
+> Changes in v9:
+> - Rebase onto v6.19-rc1.
+> - ABI document clarifications.
+> - Add changes dropping asserts on single bit wide bitfields in set_id_reg=
+s.
+> - Link to v8: https://lore.kernel.org/r/20250902-kvm-arm64-sme-v8-0-2cb21=
+99c656c@kernel.org
+>
+> Changes in v8:
+> - Small fixes in ABI documentation.
+> - Link to v7: https://lore.kernel.org/r/20250822-kvm-arm64-sme-v7-0-7a65d=
+82b8b10@kernel.org
+>
+> Changes in v7:
+> - Rebase onto v6.17-rc1.
+> - Handle SMIDR_EL1 as a VM wide ID register and use this in feat_sme_smps=
+().
+> - Expose affinity fields in SMIDR_EL1.
+> - Remove SMPRI_EL1 from vcpu_sysreg, the value is always 0 currently.
+> - Prevent userspace writes to SMPRIMAP_EL2.
+> - Link to v6: https://lore.kernel.org/r/20250625-kvm-arm64-sme-v6-0-114cf=
+f4ffe04@kernel.org
+>
+> Changes in v6:
+> - Rebase onto v6.16-rc3.
+> - Link to v5: https://lore.kernel.org/r/20250417-kvm-arm64-sme-v5-0-f469a=
+2d5f574@kernel.org
+>
+> Changes in v5:
+> - Rebase onto v6.15-rc2.
+> - Add pKVM guest support.
+> - Always restore SVCR.
+> - Link to v4: https://lore.kernel.org/r/20250214-kvm-arm64-sme-v4-0-d64a6=
+81adcc2@kernel.org
+>
+> Changes in v4:
+> - Rebase onto v6.14-rc2 and Mark Rutland's fixes.
+> - Expose SME to nested guests.
+> - Additional cleanups and test fixes following on from the rebase.
+> - Flush register state on VMM PSTATE.{SM,ZA}.
+> - Link to v3: https://lore.kernel.org/r/20241220-kvm-arm64-sme-v3-0-05b01=
+8c1ffeb@kernel.org
+>
+> Changes in v3:
+> - Rebase onto v6.12-rc2.
+> - Link to v2: https://lore.kernel.org/r/20231222-kvm-arm64-sme-v2-0-da226=
+cb180bb@kernel.org
+>
+> Changes in v2:
+> - Rebase onto v6.7-rc3.
+> - Configure subfeatures based on host system only.
+> - Complete nVHE support.
+> - There was some snafu with sending v1 out, it didn't make it to the
+>   lists but in case it hit people's inboxes I'm sending as v2.
+>
+> ---
+> Mark Brown (30):
+>       arm64/sysreg: Update SMIDR_EL1 to DDI0601 2025-06
+>       arm64/fpsimd: Update FA64 and ZT0 enables when loading SME state
+>       arm64/fpsimd: Decide to save ZT0 and streaming mode FFR at bind time
+>       arm64/fpsimd: Check enable bit for FA64 when saving EFI state
+>       arm64/fpsimd: Determine maximum virtualisable SME vector length
+>       KVM: arm64: Pay attention to FFR parameter in SVE save and load
+>       KVM: arm64: Pull ctxt_has_ helpers to start of sysreg-sr.h
+>       KVM: arm64: Move SVE state access macros after feature test macros
+>       KVM: arm64: Rename SVE finalization constants to be more general
+>       KVM: arm64: Document the KVM ABI for SME
+>       KVM: arm64: Define internal features for SME
+>       KVM: arm64: Rename sve_state_reg_region
+>       KVM: arm64: Store vector lengths in an array
+>       KVM: arm64: Implement SME vector length configuration
+>       KVM: arm64: Support SME control registers
+>       KVM: arm64: Support TPIDR2_EL0
+>       KVM: arm64: Support SME identification registers for guests
+>       KVM: arm64: Support SME priority registers
+>       KVM: arm64: Provide assembly for SME register access
+>       KVM: arm64: Support userspace access to streaming mode Z and P regi=
+sters
+>       KVM: arm64: Flush register state on writes to SVCR.SM and SVCR.ZA
+>       KVM: arm64: Expose SME specific state to userspace
+>       KVM: arm64: Context switch SME state for guests
+>       KVM: arm64: Handle SME exceptions
+>       KVM: arm64: Expose SME to nested guests
+>       KVM: arm64: Provide interface for configuring and enabling SME for =
+guests
+>       KVM: arm64: selftests: Remove spurious check for single bit safe va=
+lues
+>       KVM: arm64: selftests: Skip impossible invalid value tests
+>       KVM: arm64: selftests: Add SME system registers to get-reg-list
+>       KVM: arm64: selftests: Add SME to set_id_regs test
+>
+>  Documentation/virt/kvm/api.rst                   | 120 ++++++++---
+>  arch/arm64/include/asm/fpsimd.h                  |  26 +++
+>  arch/arm64/include/asm/kvm_emulate.h             |   6 +
+>  arch/arm64/include/asm/kvm_host.h                | 163 ++++++++++++---
+>  arch/arm64/include/asm/kvm_hyp.h                 |   5 +-
+>  arch/arm64/include/asm/kvm_pkvm.h                |   2 +-
+>  arch/arm64/include/asm/vncr_mapping.h            |   2 +
+>  arch/arm64/include/uapi/asm/kvm.h                |  33 +++
+>  arch/arm64/kernel/cpufeature.c                   |   2 -
+>  arch/arm64/kernel/fpsimd.c                       |  89 ++++----
+>  arch/arm64/kvm/arm.c                             |  10 +
+>  arch/arm64/kvm/config.c                          |  11 +-
+>  arch/arm64/kvm/fpsimd.c                          |  28 ++-
+>  arch/arm64/kvm/guest.c                           | 252 +++++++++++++++++=
++++---
+>  arch/arm64/kvm/handle_exit.c                     |  14 ++
+>  arch/arm64/kvm/hyp/fpsimd.S                      |  28 ++-
+>  arch/arm64/kvm/hyp/include/hyp/switch.h          | 168 +++++++++++++--
+>  arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h       | 110 ++++++----
+>  arch/arm64/kvm/hyp/nvhe/hyp-main.c               |  86 ++++++--
+>  arch/arm64/kvm/hyp/nvhe/pkvm.c                   |  85 ++++++--
+>  arch/arm64/kvm/hyp/nvhe/switch.c                 |   4 +-
+>  arch/arm64/kvm/hyp/nvhe/sys_regs.c               |   6 +
+>  arch/arm64/kvm/hyp/vhe/switch.c                  |  17 +-
+>  arch/arm64/kvm/hyp/vhe/sysreg-sr.c               |   7 +
+>  arch/arm64/kvm/nested.c                          |   3 +-
+>  arch/arm64/kvm/reset.c                           | 156 ++++++++++----
+>  arch/arm64/kvm/sys_regs.c                        | 140 ++++++++++++-
+>  arch/arm64/tools/sysreg                          |   8 +-
+>  include/uapi/linux/kvm.h                         |   1 +
+>  tools/testing/selftests/kvm/arm64/get-reg-list.c |  15 +-
+>  tools/testing/selftests/kvm/arm64/set_id_regs.c  |  84 ++++++--
+>  31 files changed, 1367 insertions(+), 314 deletions(-)
+> ---
+> base-commit: 3e7f562e20ee87a25e104ef4fce557d39d62fa85
+> change-id: 20230301-kvm-arm64-sme-06a1246d3636
+>
+> Best regards,
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
