@@ -1,246 +1,189 @@
-Return-Path: <linux-doc+bounces-77032-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77034-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KIbMOdoSn2nWYwQAu9opvQ
-	(envelope-from <linux-doc+bounces-77032-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:18:50 +0100
+	id cLq4A1gVn2nWYwQAu9opvQ
+	(envelope-from <linux-doc+bounces-77034-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:29:28 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BA731996D7
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:18:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87AE11999AF
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:29:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CE6CD31F8F9A
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 15:10:05 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5941E31E127E
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 15:16:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC0623D332F;
-	Wed, 25 Feb 2026 15:10:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEB7A15C158;
+	Wed, 25 Feb 2026 15:15:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lM8AT7Q6"
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=y-koj.net header.i=@y-koj.net header.b="2TYCnWDU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from outbound.st.icloud.com (p-east2-cluster6-host1-snip4-10.eps.apple.com [57.103.76.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEDEF3D34B7
-	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 15:10:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.196
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD20D27280F
+	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 15:15:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.76.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772032204; cv=none; b=IX5ecnRamNhD+MYlUR7YGpND9GuV+FRXNLHhAbkFq+s1LAMy95DGy9JJkjRmsULrMAizhlWHIFFEPPRj5amV/2KzBq04uGLOsJd/MHDetVIpqMWPpaK9soaHPT6kqEr2m6f08LXbCv510sJGMdGqsSmKlh+UuV3dS8QQ9GZETjI=
+	t=1772032515; cv=none; b=kTcu4H7/jKYqfzo2c/20zdwmaa4gNAs7RsyyXXKCb6KhARM0gvnISCKwnhQCUvn4Vi9mbPvCg8X7lSzGyoeE4AsD0q1+wMlCkBfG3DJoMBJCeNZdUMae3PmvR6EPiYupiIcrsRbS6s5yYkXL0yT4u/O5Ke27nFZwcTF8aMdB73c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772032204; c=relaxed/simple;
-	bh=fjcvYWRXHa6b955JUroJONpwr9Ltb1zbqSBjfgqGqUU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=qE6Mg/I4+kJAw01dS7BchvOkg735myYVoUqvmHc047XZr8weNEpdZA2MO/RgnuN7DP0mr4Nruu0G2muPEfPddhTG4T8jvygxScOe8lEo4+mG08X+hav8QaR1oIxnpdnyVKtHylXVixlzDYUUmKxVODAUH7pCQG9u+zqtM2j550s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lM8AT7Q6; arc=none smtp.client-ip=209.85.214.196
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f196.google.com with SMTP id d9443c01a7336-2ab39b111b9so29324885ad.1
-        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 07:10:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772032202; x=1772637002; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=APncnMz6ov6H21p2K2T3I+ylEiS2pkEh0cwFXYlvQM4=;
-        b=lM8AT7Q6dDWC57Otq4g5jytb4bJ7cpAUkjo4+rUF/1c61fI4df5IctkVXMHB2RL02k
-         X6VS1Sfi8zT2dIElEhB/+Smc6cJXaIamlM8M2Tr3LUNPZR7ZbSaD1qZAY3fLv9yc8Ymh
-         //dFNfTHWZVz6HsSs66rkAFdgblhKp06D4ao4bSQY66SuWzIUIWXh1urEG3z2bgUaV1/
-         wRVx7XutBYIKdUy1pMKvoelcrsJsLrJiRJdu9SvZp5L6hoKtho4RqW9c3bBTV+62B2I7
-         GjxmFmbeSGBA8hO1MDOYquMnSr8wCfYhA+OWxM6Yd+tatL1IvR0jzIlUYpnOeTRTq0Sy
-         7trQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772032202; x=1772637002;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=APncnMz6ov6H21p2K2T3I+ylEiS2pkEh0cwFXYlvQM4=;
-        b=jT3hRgeQK73qP02VUdTZqyqGEQwchCXA3hbzHrZFFLj1rQZLDkQ3g4ed0fe9cousWy
-         QUFqG7jJ1YpAG7SKFUMIaP5aF2dcxL5zeAaXeW/eRwfgO8yshcIqbtHKGuRwA0eZDvLi
-         Wko+oLNNxr76GFaFm9OBG1Pfc3UpiixUGLK4q7RLh4Q24AOorNSZ0qcpYOWxYCZuqBcS
-         j+rkJPIrtB+OyPMyMfUFE8p57477rAA4hzpqpvK04cjYPC3RBTyzYXi83mgpMGW1n8im
-         UcsQ6ipboZRQR2PmHOPFB5vcyN2iaeTGc4Pw+KsJgqQltJ2R1evHop7qVy73n27V+sAz
-         /m3Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVkdlyx2Bn8uppFvQxsqWYTUtcqfj88ldj5BebstT/Q9bd8mtec7wrYs7jSD+xKEBxubF2TaL5Xjm0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwO0i+y6RaK8mqLfNrBiHqyelBiL4zSPokSXX4YonwjOjYAgtjP
-	Kk1Z/DjuaBMAVpFzNHZnGDV+Y+AARwuVlH7qVIsOc9BGl5cH5ay9g+Yz
-X-Gm-Gg: ATEYQzwq07lqM9T9lfgi/EyWXBZVSmOUBnXtm7IpT5MuUTru0zyECIBcUMNFlkcChED
-	DQeQKg2xUA/JlGfZJ2IopL0+NOnyAriRlVAC0XkHPVWLkxrQ2Q+zJhPZhPEu4lFPgBB4Qd7KjsK
-	S/Vyy0RufPEXFS0ueZts+a2kBcOUBG3hyU4f4sRbj0kacIyJBcscPdI1gQ9EcH0k468cn2kpBSV
-	WEKSg4RCddoOThFptgKndJIES5+Mjj0sduTHMx2LQlLT6VVsqLqoge64G4r84nyCd3EkmKIv9fD
-	E21AqFbhyBBOhDeb4JI1mJxikmegRo2X4+8Crl6udjV39KUmMPNmwwjV98ZROcnGTlYD+DiTx0X
-	qomsPnYnEYm4+Lh72FZeOZ1z4a2AZ4p8dJaskuXrN7n0HarTLHt5uI9SLcnpfuKkGs/UQvHMbPe
-	+ZEFlyAGm6uDow6rcFTIS9n3pjqQqQORhhC1DToVzqRGKolZUvkw==
-X-Received: by 2002:a17:902:d58f:b0:295:ceaf:8d76 with SMTP id d9443c01a7336-2ade9a643c6mr6674975ad.47.1772032202144;
-        Wed, 25 Feb 2026 07:10:02 -0800 (PST)
-Received: from aruoarch ([2406:da16:1c5:d100:9a33:3971:d96c:a13])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ad74f5dd7asm186673535ad.28.2026.02.25.07.09.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Feb 2026 07:10:01 -0800 (PST)
-From: Song Hongyi <szpcq123@gmail.com>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev,
-	corbet@lwn.net
-Cc: dzm91@hust.edu.cn,
-	skhan@linuxfoundation.org,
-	w1ndys@qq.com,
+	s=arc-20240116; t=1772032515; c=relaxed/simple;
+	bh=ZZ7ix51AfEYIX0Jt+w6zB/ER9ghq5eP5PmN1S+UyLnc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=K2t0FWZFfLt6k0oQcmWFvlgjRCtIlGQT8Bky6FDNbYZghfG7PkFmHYzuBV3ARwjWC4b/hSVAssk/YsD/LBJiqnUUQ95TeWAYcJ7iMQKMGBuSiORuhxTapGTbhleMq+hl0eFSSbbDAepfIAY/YIxNR7M8FTlKQ/BU3LzORtwSzLk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=y-koj.net; spf=pass smtp.mailfrom=y-koj.net; dkim=fail (0-bit key) header.d=y-koj.net header.i=@y-koj.net header.b=2TYCnWDU reason="key not found in DNS"; arc=none smtp.client-ip=57.103.76.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=y-koj.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=y-koj.net
+Received: from outbound.st.icloud.com (unknown [127.0.0.2])
+	by p00-icloudmta-asmtp-us-east-1a-60-percent-12 (Postfix) with ESMTPS id C3D78180016C;
+	Wed, 25 Feb 2026 15:15:10 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=y-koj.net; s=sig1; t=1772032512; x=1774624512; bh=SN1JpAZST7zZcbBBH7RXi7OwS7WQdyzRqZ6Jk74I9i0=; h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme; b=2TYCnWDUvGakyX0EkX/fGsxbRUT5Lrx8bCbELGOVsThKlrhRUfDsgfjlSJn8+nGu9TtWJDa2+hBit2NdUHNX8PrqUIPOhmKV7MXNUDqW0D2CXzRpNA3EaoYt/MNAM4A8Y6KYrFWWTLyjGm60DVFx/i8m0cCp61LpB0xEGJQh7flpYgOAIgfTyxr5WuC8ribI0nff82L1yV/dbzigZhJRLN2yEnk/OmFg10k+Lu3NyvNfPsaYhe7ya6kyb2L6BaWwEtui9fGmq3wNpxW1EOOiJPqatdodTcQPK2Qtb4r5z49GfmsqPS4Wc27lDsOGA9GRXoc6GwNtW5ymQy9T6z+n8A==
+mail-alias-created-date: 1719758601013
+Received: from desktop.tail809fd.ts.net (unknown [17.42.251.67])
+	by p00-icloudmta-asmtp-us-east-1a-60-percent-12 (Postfix) with ESMTPSA id D6BB81800214;
+	Wed, 25 Feb 2026 15:15:07 +0000 (UTC)
+From: Yohei Kojima <yk@y-koj.net>
+To: Andrew Lunn <andrew@lunn.ch>,
+	Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: Yohei Kojima <yk@y-koj.net>,
+	netdev@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Song Hongyi <szpcq123@gmail.com>
-Subject: [PATCH] docs/zh_CN: sync process/2.Process.rst with English version
-Date: Wed, 25 Feb 2026 23:09:57 +0800
-Message-ID: <20260225151013.200635-1-szpcq123@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	linux-kernel@vger.kernel.org
+Subject: [PATCH net-next v3] docs: ethtool: clarify the bit-by-bit bitset format description
+Date: Thu, 26 Feb 2026 00:12:09 +0900
+Message-ID: <ef90a56965ca66e57aa177929ce3e10c5ca815fa.1772031974.git.yk@y-koj.net>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=yes
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI1MDE0NiBTYWx0ZWRfX1VNyKWyrL6HS
+ d9Ryq47JyulJ13KPXNcH2IeV2kfHG9qgIFfV7ef2DXBuJO39R+uFm/eboN4GUy9HXEGU9hb1pER
+ mUJBZOURdSdMWxZ6PijI1PLsfAhicJT09TrDejRRFae7b3OutMHKrhaB+0D378aTO6LtEV1oU5k
+ UGYXdra4GFugOB7/JEX3oyEmfo1afz/nmpnOn+pNARTCE8jUeG6L9S/PK3DwatrEoUkfNaNZwLX
+ 4AzBwClcKzBDGMpgE5udHvtlXRxjYmH3PFqFfzYfy4sLNeB+4p18DbN2ltw98RJRymeGy6y0Wxq
+ mJE5IX+RiiPO1ffFdoSxn1sr/BLK1FzDQAT0SMCQR4hJHYrrgcAifh28B54BlM=
+X-Authority-Info-Out: v=2.4 cv=BcfVE7t2 c=1 sm=1 tr=0 ts=699f11ff
+ cx=c_apl:c_apl_out:c_pps a=YrL12D//S6tul8v/L+6tKg==:117
+ a=YrL12D//S6tul8v/L+6tKg==:17 a=HzLeVaNsDn8A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=VwQbUJbxAAAA:8
+ a=jnl5ZKOAAAAA:8 a=8WQVRTqVWvD3vaqRZeAA:9 a=RNrZ5ZR47oNZP8zBN2PD:22
+X-Proofpoint-ORIG-GUID: K6e5Zvfi3hVp0fk10h1dDgdg-5bvmlOg
+X-Proofpoint-GUID: K6e5Zvfi3hVp0fk10h1dDgdg-5bvmlOg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-25_01,2026-02-25_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ malwarescore=0 adultscore=0 suspectscore=0 mlxlogscore=999 lowpriorityscore=0
+ phishscore=0 mlxscore=0 spamscore=0 clxscore=1030 classifier=spam authscore=0
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
+ definitions=main-2602250146
+X-JNJ: AAAAAAAB8l25vLSFFMxQeBFCwhCHSSa78ZEjmitzaxLHv2ZaC6TZzGpgB+7wr0Qs5ooVYoDL9xLfB95umgtVx3oqZvgXrQQvn+q5tWlRYPu5blV1EOLZGX1HslMDWBhwGS/8ZMfqK4RIuxkHAECGe7ZT3HCTtzYe/5E/gpd5SHaZVLXDXjtSGfFtnx6d9Zq2A69bOj3Fc8z01ZfNACOA4Ooeax961eT2TzBhAFuf33HQsGVCFG+LZz3c/SVpEuoCVQ4OMQosulx0wwdyW9gs9O9+tzkccGxakHomqca5V+M5+rO87UExLStykmwyZl7Xt8HBQnL3Lni2DSG1+f/9VrLn3dShXQ2kxNNuUYqgjw/mR5LaCFaOWUenMZ5YeviTQNBLlE46OR1MJMDYcPFg8qlHwjnt+G1c4WCCe5bo1pPvdbhmw5eSLiGFiPOsqA2KLEeUb/14H7AFFyRtH4Ivx/B5qF6irLMXOoYYGOnOAhXncj/RzhZfG+UdUJLG05RUu8ivYvyiIO+HpmKvjpFwnfNdHLQoWcXBMRGl44RZLB8DS0HewgXRh6lI5nETJbqWD2w1bWSwDDEM9rGzg5fHtTXVpxNFAvEG3zO53wQ2nDKERRKnKp8tDDjL+mO4Wbs38vUJFC2+kHy0mEC/Zls7zKi0IDzG6cDhmp4tm8PD4ARJ03GLi/Ro8qdl7+vOdqDb7ePEePZifbi+GkgBukhx9dJHNkuU7JbAh4c088dtNw/wSeflUns7ubylhgQtVpws/rVulJSYCGUcSi8BA7+vRHNNnY7tRzGAYLQ1AxuSrKZsJS7LZYk=
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[hust.edu.cn,linuxfoundation.org,qq.com,vger.kernel.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-77032-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	DKIM_TRACE(0.00)[y-koj.net:~];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[szpcq123@gmail.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-77034-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[y-koj.net];
+	R_DKIM_PERMFAIL(0.00)[y-koj.net:s=sig1];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[wikipedia.org:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 5BA731996D7
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yk@y-koj.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-0.774];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,y-koj.net:mid,y-koj.net:email]
+X-Rspamd-Queue-Id: 87AE11999AF
 X-Rspamd-Action: no action
 
-The Chinese translation of the development process documentation was
-outdated. Sync it with the current English version to ensure consistency.
+Clarify the bit-by-bit bitset format's behavior around mandatory
+attributes and bit identification. More specifically, the following
+changes are made:
 
-Key changes include:
-- Update versioning examples from 5.x to the 9.x placeholder.
-- Add footnote [1] to explain the non-semantic versioning scheme.
-- Replace the obsolete LTS kernel table with a link to kernel.org.
-- Add a cross-reference for the "interleaved replies" section.
+* Rephrase a misleading sentence which implies name and index are
+  mutually exclusive
+* Describe that ETHTOOL_A_BITSET_BITS nest is mandatory
+* Describe that a request fails if inconsistent identifiers are given
 
-Signed-off-by: Song Hongyi <szpcq123@gmail.com>
+Signed-off-by: Yohei Kojima <yk@y-koj.net>
+Reviewed-by: Jakub Kicinski <kuba@kernel.org>
+Reviewed-by: Simon Horman <horms@kernel.org>
 ---
- .../translations/zh_CN/process/2.Process.rst  | 56 +++++++++----------
- 1 file changed, 25 insertions(+), 31 deletions(-)
+Current ethtool-netlink documentation doesn't describe several behaviors
+around bit-by-bit bitset, which makes it hard to develop a ethtool
+library without digging into the kernel code. This patch eases the gap
+between the kernel behavior and the documentation by adding descriptions
+around the mandatory attribute and bit identification.
 
-diff --git a/Documentation/translations/zh_CN/process/2.Process.rst b/Documentation/translations/zh_CN/process/2.Process.rst
-index 31b0e2c994f6..ca00672c313e 100644
---- a/Documentation/translations/zh_CN/process/2.Process.rst
-+++ b/Documentation/translations/zh_CN/process/2.Process.rst
-@@ -23,21 +23,18 @@
- 总览
- ----
+ChangeLog
+=========
+v3 (this version):
+* Rebase to the latest net-next/main
+* Add Reviewed-by tag provided by Jakub and Simon. Thank you!
+v2: https://lore.kernel.org/netdev/f43999612ed9d17fb7fe8f21e777e1c784f23c46.1770457868.git.yk@y-koj.net/
+* Minimize the diff for ease of review
+v1: https://lore.kernel.org/lkml/e9ea0fe8bf7935d6439e4dc883414b685afbaf58.1770045398.git.yk@y-koj.net/
+
+---
+ Documentation/networking/ethtool-netlink.rst | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/networking/ethtool-netlink.rst b/Documentation/networking/ethtool-netlink.rst
+index af56c304cef4..32179168eb73 100644
+--- a/Documentation/networking/ethtool-netlink.rst
++++ b/Documentation/networking/ethtool-netlink.rst
+@@ -96,7 +96,7 @@ For short bitmaps of (reasonably) fixed length, standard ``NLA_BITFIELD32``
+ type is used. For arbitrary length bitmaps, ethtool netlink uses a nested
+ attribute with contents of one of two forms: compact (two binary bitmaps
+ representing bit values and mask of affected bits) and bit-by-bit (list of
+-bits identified by either index or name).
++bits identified by index or name).
  
--内核开发人员使用一个松散的基于时间的发布过程，每两到三个月发布一次新的主要
--内核版本。最近的发布历史记录如下：
--
--	======  =================
--	5.0	2019年3月3日
--	5.1	2019年5月5日
--	5.2	2019年7月7日
--	5.3	2019年9月15日
--	5.4	2019年11月24日
--	5.5	2020年1月6日
--	======  =================
--
--每个5.x版本都是一个主要的内核版本，具有新特性、内部API更改等等。一个典型的5.x
--版本包含大约13000个变更集，变更了几十万行代码。因此，5.x是Linux内核开发的前
--沿；内核使用滚动开发模型，不断集成重大变化。
-+内核开发使用一个松散的、基于时间的滚动发布（rolling release）开发模型。
-+一个新的主内核发行版本（作为示例，我们将其称为 9.x） [1]_ 大约每两到三个月
-+发布一次，它带来了新特性、内部 API 的更改等。一个典型的版本包含大约 13,000
-+个变更集（changesets），涉及几十万行代码的修改。最近的发行版本及其日期可以
-+在这里找到
-+`维基百科 <https://en.wikipedia.org/wiki/Linux_kernel_version_history>`_
+ Verbose (bit-by-bit) bitsets allow sending symbolic names for bits together
+ with their values which saves a round trip (when the bitset is passed in a
+@@ -156,12 +156,16 @@ Bit-by-bit form: nested (bitset) attribute contents:
+  | | | ``ETHTOOL_A_BITSET_BIT_VALUE`` | flag   | present if bit is set       |
+  +-+-+--------------------------------+--------+-----------------------------+
+ 
+-Bit size is optional for bit-by-bit form. ``ETHTOOL_A_BITSET_BITS`` nest can
++For bit-by-bit form, ``ETHTOOL_A_BITSET_SIZE`` is optional, and
++``ETHTOOL_A_BITSET_BITS`` is mandatory. ``ETHTOOL_A_BITSET_BITS`` nest can
+ only contain ``ETHTOOL_A_BITSET_BITS_BIT`` attributes but there can be an
+ arbitrary number of them.  A bit may be identified by its index or by its
+ name. When used in requests, listed bits are set to 0 or 1 according to
+-``ETHTOOL_A_BITSET_BIT_VALUE``, the rest is preserved. A request fails if
+-index exceeds kernel bit length or if name is not recognized.
++``ETHTOOL_A_BITSET_BIT_VALUE``, the rest is preserved.
 +
-+
-+.. [1] 严格来说，Linux 内核并不采用语义化版本号方案，而是将 9.x 这一组数字
-+       作为一个整体来标识主发行版本号。对于每一个版本，x 都会递增，但只有
-+       当 x 被认为足够大时，9 才会递增（例如：Linux 5.0 是紧随 Linux 4.20
-+       之后发布的）。
++A request fails if index exceeds kernel bit length or if name is not
++recognized. If both name and index are set, the request will fail if they
++point to different bits.
  
- 对于每个版本的补丁合并，遵循一个相对简单的规则。在每个开发周期的开头，“合并
- 窗口”被打开。这时，被认为足够稳定（并且被开发社区接受）的代码被合并到主线内
-@@ -48,8 +45,8 @@
- 提前收集、测试和分级的。稍后将详细描述该过程的工作方式。）
- 
- 合并窗口持续大约两周。在这段时间结束时，Linus Torvalds将声明窗口已关闭，并
--释放第一个“rc”内核。例如，对于目标为5.6的内核，在合并窗口结束时发生的释放
--将被称为5.6-rc1。-rc1 版本是一个信号，表示合并新特性的时间已经过去，稳定下一
-+释放第一个“rc”内核。例如，对于目标为9.x的内核，在合并窗口结束时发生的释放
-+将被称为9.x-rc1。-rc1 版本是一个信号，表示合并新特性的时间已经过去，稳定下一
- 个内核的时间已经到来。
- 
- 在接下来的6到10周内，只有修复问题的补丁才应该提交给主线。有时会允许更大的
-@@ -84,11 +81,14 @@
- 开发人员的目标是在稳定发布之前修复所有已知的回归。在现实世界中，这种完美是
- 很难实现的；在这种规模的项目中，变数太多了。需要说明的是，延迟最终版本只会
- 使问题变得更糟；等待下一个合并窗口的更改将变多，导致下次出现更多的回归错误。
--因此，大多数5.x内核都有一些已知的回归错误，不过，希望没有一个是严重的。
-+因此，大多数内核发布时都会带有一部分已知的回归问题，不过希望它们都不是严重
-+的问题。
- 
- 一旦一个稳定的版本发布，它的持续维护工作就被移交给“稳定团队”，目前由
--Greg Kroah-Hartman领导。稳定团队将使用5.x.y编号方案不定期地发布稳定版本的
--更新。要合入更新版本，补丁必须（1）修复一个重要的缺陷，且（2）已经合并到
-+Greg Kroah-Hartman领导。稳定团队将使用9.x.y编号方案不定期地发布稳定版本的
-+更新。
-+
-+要合入更新版本，补丁必须（1）修复一个重要的缺陷，且（2）已经合并到
- 下一个开发版本主线中。内核通常会在其初始版本后的一个以上的开发周期内收到
- 稳定版更新。例如，5.2内核的历史如下（2019年）：
- 
-@@ -105,17 +105,10 @@ Greg Kroah-Hartman领导。稳定团队将使用5.x.y编号方案不定期地发
- 
- 5.2.21是5.2版本的最终稳定更新。
- 
--有些内核被指定为“长期”内核；它们将得到更长时间的支持。在本文中，当前的长期
--内核及其维护者是：
-+有些内核被指定为“长期”内核；它们将得到更长时间的支持。请参考以下链接
-+获取当前长期支持内核版本及其维护者的列表：
- 
--	======  ================================	================
--	3.16	Ben Hutchings				（长期稳定内核）
--	4.4	Greg Kroah-Hartman & Sasha Levin	（长期稳定内核）
--	4.9	Greg Kroah-Hartman & Sasha Levin
--	4.14	Greg Kroah-Hartman & Sasha Levin
--	4.19	Greg Kroah-Hartman & Sasha Levin
--	5.4	Greg Kroah-Hartman & Sasha Levin
--	======  ================================	================
-+  https://www.kernel.org/category/releases.html
- 
- 长期支持内核的选择纯粹是维护人员是否有需求和时间来维护该版本的问题。
- 目前还没有为即将发布的任何特定版本提供长期支持的已知计划。
-@@ -320,7 +313,8 @@ Quilt 是一个补丁管理系统，而不是源代码管理系统。它不会
-   没有完成家庭作业的人感到不耐烦。
- 
- - 避免顶部回复（把你的答案放在你要回复的引文上面的做法）。这会让你的回答更难
--  理解，印象也很差。
-+  理解，印象也很差，详细请查看
-+  :ref:`Documentation/process/submitting-patches.rst <interleaved_replies>`
- 
- - 在正确的邮件列表发问。linux-kernel 可能是通用的讨论场所，但它不是寻找所有
-   子系统开发人员的最佳场所。
+ When ``ETHTOOL_A_BITSET_NOMASK`` flag is present, bitset is interpreted as
+ a simple bitmap. ``ETHTOOL_A_BITSET_BIT_VALUE`` attributes are not used in
 -- 
-2.53.0
+2.52.0
 
 
