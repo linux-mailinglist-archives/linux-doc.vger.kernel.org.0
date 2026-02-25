@@ -1,82 +1,82 @@
-Return-Path: <linux-doc+bounces-77044-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77046-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6FrhITY0n2lXZQQAu9opvQ
-	(envelope-from <linux-doc+bounces-77044-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 18:41:10 +0100
+	id UMmRO1s1n2m5ZQQAu9opvQ
+	(envelope-from <linux-doc+bounces-77046-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 18:46:04 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 276C319BAE7
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 18:41:10 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4803519BBE9
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 18:46:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 86F543007B81
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 17:41:09 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D4DD93020E84
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 17:45:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 067F23ED10A;
-	Wed, 25 Feb 2026 17:41:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94BF03ED11B;
+	Wed, 25 Feb 2026 17:45:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="RFGlMuG+"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Tnsk8RNq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f74.google.com (mail-ot1-f74.google.com [209.85.210.74])
+Received: from mail-oo1-f74.google.com (mail-oo1-f74.google.com [209.85.161.74])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BB253ED114
-	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 17:40:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B5533E9F87
+	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 17:45:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.74
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772041260; cv=none; b=K7AapkeMpGW83dnxpwKz52l0sN0bGmAawrHZroZQgmQfuOdnAWoIy0V48d6vGFPZ36WeaxvpNn6AGQxmYkakCLhXJcqShy03J7RQptYO5fVzlYedc/+BfsfROxAvE7soKxsCK7UNvfsWGP5RpiN7XoBx3IdaGcCMSEA4xCHtpVo=
+	t=1772041509; cv=none; b=RJhzLxcXYd1zkR0g1MMwJrs7ycsOyKUoTX3Eh5Hy568B661bvks6onnQZp4RmRIv3jL70yCGjs5UlX6U9J+ePUEoZ5s+UfYb0Bq1iCu5nf/ZHZL/0ie+5Xs2QKM+ZPn+JtlLqCVa3r5+KBavxBVFxw6jnwJQJVelsDRnsBACdTU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772041260; c=relaxed/simple;
-	bh=vfPVzGsOpxFMqLnHbeOt97S7ASvz/dPPsmfURT55c2c=;
+	s=arc-20240116; t=1772041509; c=relaxed/simple;
+	bh=P/hBoEMiXYtzSJAai3x+/Zjn0NP0IL/2TZ2kRQnBAyM=;
 	h=Date:In-Reply-To:Mime-Version:Message-ID:Subject:From:To:Cc:
-	 Content-Type; b=psan6Nu9oLLSaOg8cdyaOc3nOrD5nZqJnOWA4bfiH6nePWmJlXAEpoTnz8I5eEjCvvkkGDWlAAYmkPRQPRq4Cu/PmUhjiB2X0ubgjZOcN11SaiIKGd54oTCEH9UC0t/2J9bIphScX8Y0o+gxLGIhEs3tHQFg3WCHxnom7zjzLA8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=RFGlMuG+; arc=none smtp.client-ip=209.85.210.74
+	 Content-Type; b=lWC3sD0ln2gYKnBzvOwxOAq/xzQvdtAbK7OJ+mFTdWw+RHr988RwWBnQ7jtyhZAQkjMizfUKuvEqtQCh+KBzXW+c3Zeu/nlMTU7qkvevBcq+GCUR+oNaTAE/RO3t4pjUpJtLiNlWSY169SWkIektocjE1pJvPvgXn7Pcm/47ZnE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Tnsk8RNq; arc=none smtp.client-ip=209.85.161.74
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--coltonlewis.bounces.google.com
-Received: by mail-ot1-f74.google.com with SMTP id 46e09a7af769-7d496d080d8so41055211a34.0
-        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:40:58 -0800 (PST)
+Received: by mail-oo1-f74.google.com with SMTP id 006d021491bc7-679c5ed0942so538936eaf.1
+        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 09:45:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1772041257; x=1772646057; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1772041507; x=1772646307; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:mime-version:in-reply-to:date:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=vfPVzGsOpxFMqLnHbeOt97S7ASvz/dPPsmfURT55c2c=;
-        b=RFGlMuG+RlBMZrbOsRHSvqyhEwvpeQcTEJJ6pxS/L1GkYKdprHSLNvn0+CqMjCdmq8
-         GJqB7lFXU3ZEixmIuTAQTT5v14RH9CUEiJ1bUNpeAJc8R4ox6Mz8r0qJAkicg4UvpHjJ
-         G8+VYutk2uWcIi4Z1R1Bo/M3ZoEBT0G7lNZ1MD+z4DDKpuM56Hm+Oirty558xOYgWXPp
-         BwbcJmqAS3hXfLbOKsMkUqMzhv7vY1tUBtG+hnKULyozp6sk+8LO6rnsPs6uDFAHZ2Ev
-         fqCcQkAHOMuFB4zx9KQkzYAJ+K5uFnNvV7M/Rom9vHhyv796wUcfJZDb9xWBfwo1hZd8
-         M4/Q==
+        bh=P/hBoEMiXYtzSJAai3x+/Zjn0NP0IL/2TZ2kRQnBAyM=;
+        b=Tnsk8RNqXvrlURO+79j6rF/IGLZCfEuUzOW/l9ObO7BYIMHuN+2+1ZBZOsq/GFkKY7
+         cC3DH8/VfTSsrr+mnpD+rmyzz+qghMIbbudXX+ILgf2yvu6XOgSr583TwOPDFiQ28l3G
+         s4b8uBB12KRjdukTBU3l5aiuEjCsw8tR+ZxQNaT5etDSIotFLgWXPuP8fOweNGwEKyC1
+         n/Z9rLMkZwWi7fhEt2u4v4A/OH7ZwE74MZTo4E0c1+UBa/tAK/z+jRKs9j8EQIiBqx3/
+         3s11m+bKzy88u02gt+7+ESYdDYyRIB+0SEJBfRGaBnd05QuFfD2/mFSCm60cO/noRbYV
+         fDuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772041257; x=1772646057;
+        d=1e100.net; s=20230601; t=1772041507; x=1772646307;
         h=cc:to:from:subject:message-id:mime-version:in-reply-to:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vfPVzGsOpxFMqLnHbeOt97S7ASvz/dPPsmfURT55c2c=;
-        b=Xf66C8/M+R9XP9MCN/Ypl4JZ2D074I7y1eBWNqqcWHbVpr0Nh8G31vH/LrJR1LPPus
-         Ws5bIWyZTGkd4ZgcNE75Vu8VSU4GB91ovTwjcuDb+0t3KhKUNK000hARBjD6GIq+yhwH
-         xcz3qUc4wZscZjhkzJ2O/5iXaJthWLmnTtJbX9KAZQI8X+aLz5OoXcn7qIF2wtplVn5T
-         R6dlSTvn1GM3D1NqBqdJA3vKdwEaWqT2KIMNw0k4QiPC0l1gQjwQ2G70jKK3Hvhkswxr
-         llFxzXw2iNWbKefRaqyPvRkixYBJtM+X97nOyBzHw083iiEBVa468bUvQGxb9ScYJ0Nd
-         71kQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWeO87G7qrz83V9nEdhNfLC7xNX9vGV8dfhwZ9air/aV7D/mzkkDCV1QbBflONCLa8ycTnu9vG52QQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwZ3KL2lCjOjqVqYeTIZxP2PD0f/Y8q6S8Pbrb3fYTWEK+eZzaL
-	y3nhkm1bafsO3jn+rutMj/AT/Eg7SgyfZGzm4HrLCAf91jfYnZyLOHULSdox+visIYoAMwwSFJQ
-	5s4VPHXcrPJ+Yfd6LJRdZktyjCw==
-X-Received: from iluj15.prod.google.com ([2002:a05:6e02:154f:b0:4d2:8640:5d64])
+        bh=P/hBoEMiXYtzSJAai3x+/Zjn0NP0IL/2TZ2kRQnBAyM=;
+        b=IgPYQzk/4eEsf+51UUlP9/NCid/i4jVw+m/P3MPlHIo1Mms903TPNnSXHwW5eP4AUx
+         fqsWT7MOg+kIbUIkc5J74sGWvzk+OsjeXJX3BQOewsZP6/edh1n8uYRFTkafKodhN/Js
+         7Ic3cyTNqHon9dsHKmWoUdUd/z1cf2hvE1rduHpvu62me9RUTV8d4SFrFLwUVhdqqp0w
+         6DP/AUAFqpGOibPMgc9A4KedGI912Aa1xwM0QnG+4dOSbRdFm1KpIGVYQ0M0doJNx8tx
+         Cua+8ZlzplfmYnUMPjUSihngruNNb+zwM8W8wwjGc9tFXQ2j7cpJSTgeFEu9SX3XZLcB
+         XlAQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUCpy5WJuh6eTIkGA/4SGzzO1Wyv1rhk/K7u+SKSKh6JwzWEo/Lsh38431fNQUD6i8G0XfVfIOC0rY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzJG3xWW9hHylLABJXq9OhxxzBKsMnLEh3IAvWio44njAkt/3Su
+	ftzelt1XD71tQiceb693eR4o552hXBjDXK3LT6MdvnqxjMdfyRsSW6b7r8u5wMMEjnYupWeeNIE
+	bEL7xGmYkmqTM1htpwsecLuV4UA==
+X-Received: from iobjf28.prod.google.com ([2002:a05:6602:649c:b0:957:6d3d:c3bf])
  (user=coltonlewis job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6820:2019:b0:672:e67a:96cf with SMTP id 006d021491bc7-679c4684cbcmr8062877eaf.16.1772041256681;
- Wed, 25 Feb 2026 09:40:56 -0800 (PST)
-Date: Wed, 25 Feb 2026 17:40:55 +0000
-In-Reply-To: <86h5rlawru.wl-maz@kernel.org> (message from Marc Zyngier on Fri,
- 13 Feb 2026 08:11:01 +0000)
+ 2002:a05:6820:2d01:b0:679:a4cc:e04f with SMTP id 006d021491bc7-679c4618dbbmr8769461eaf.51.1772041506836;
+ Wed, 25 Feb 2026 09:45:06 -0800 (PST)
+Date: Wed, 25 Feb 2026 17:45:06 +0000
+In-Reply-To: <86ldgyba96.wl-maz@kernel.org> (message from Marc Zyngier on Thu,
+ 12 Feb 2026 09:07:33 +0000)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
-Message-ID: <gsnty0kgoh5k.fsf@coltonlewis-kvm.c.googlers.com>
-Subject: Re: [PATCH v6 00/19] ARM64 PMU Partitioning
+Message-ID: <gsntv7fkogyl.fsf@coltonlewis-kvm.c.googlers.com>
+Subject: Re: [PATCH v6 09/19] KVM: arm64: Write fast path PMU register handlers
 From: Colton Lewis <coltonlewis@google.com>
 To: Marc Zyngier <maz@kernel.org>
 Cc: kvm@vger.kernel.org, alexandru.elisei@arm.com, pbonzini@redhat.com, 
@@ -93,77 +93,50 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MV_CASE(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77044-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_FROM(0.00)[bounces-77046-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[coltonlewis@google.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[22];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 276C319BAE7
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,coltonlewis-kvm.c.googlers.com:mid]
+X-Rspamd-Queue-Id: 4803519BBE9
 X-Rspamd-Action: no action
 
 Marc Zyngier <maz@kernel.org> writes:
 
-> On Thu, 12 Feb 2026 21:08:36 +0000,
+> On Mon, 09 Feb 2026 22:14:04 +0000,
 > Colton Lewis <coltonlewis@google.com> wrote:
 
->> Hey Marc, thanks for the review.
+>> We may want a partitioned PMU but not have FEAT_FGT to untrap the
+>> specific registers that would normally be untrapped. Add a handler for
+>> those registers in the fast path so we can still get a performance
+>> boost from partitioning.
 
->> Marc Zyngier <maz@kernel.org> writes:
+>> The idea is to handle traps for all the PMU registers quickly by
+>> writing directly to the hardware when possible instead of hooking into
+>> the emulated vPMU as the standard handlers in sys_regs.c do.
 
->> > On Mon, 09 Feb 2026 22:13:55 +0000,
->> > Colton Lewis <coltonlewis@google.com> wrote:
+> This seems extremely premature. My assumption is that PMU traps are
+> rare, and that doing a full exit should be acceptable. Until you
+> demonstrate the contrary, I don't want this sort of massive bloat in
+> the most performance-critical path.
 
->> >> This series creates a new PMU scheme on ARM, a partitioned PMU that
->> >> allows reserving a subset of counters for more direct guest access,
->> >> significantly reducing overhead. More details, including performance
->> >> benchmarks, can be read in the v1 cover letter linked below.
-
->> >> An overview of what this series accomplishes was presented at KVM
->> >> Forum 2025. Slides [1] and video [2] are linked below.
-
->> >> IMPORTANT: This iteration does not yet implement the dynamic counter
->> >> reservation approach suggested by Will Deacon in January [3]. I am
->> >> working on it, but wanted to send this version first to keep momentum
->> >> going and ensure I've addressed all issues besides that.
-
->> > [...]
-
->> > As I have asked before, this is missing an example of how userspace is
->> > going to use this. Without it, it is impossible to correctly review
->> > this series.
-
->> > Please consider this as a blocker.
-
->> Understood. I remember you asking for a QEMU patch specifically.
-
-> No. *any* VMM. QEMU, kvmtool, crosvm, firecrackpoter, whichever you want.
-
->> I had hoped that the use in the selftest was sufficient to show how to
->> use the uAPI.
-
-> The selftests are absolutely pointless, like 99% of all selftests.
-> They don't demonstrate how the userspace API works, now how
-> configuring the PMU is ordered with the rest of the save/restore flow.
-
->> If not, I can send out an example QEMU patch to the QEMU ARM mailing
->> list.
-
-Okay I sent one to you, qemu-arm, and everyone else I asked to review
-this series.
+After some consideration I agree. I will try a full exit and see if that
+is sufficient.
 
