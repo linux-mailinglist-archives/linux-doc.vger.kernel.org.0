@@ -1,189 +1,185 @@
-Return-Path: <linux-doc+bounces-77034-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77033-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cLq4A1gVn2nWYwQAu9opvQ
-	(envelope-from <linux-doc+bounces-77034-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:29:28 +0100
+	id OBatMWQTn2nWYwQAu9opvQ
+	(envelope-from <linux-doc+bounces-77033-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:21:08 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87AE11999AF
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:29:27 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A2481997C0
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 16:21:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5941E31E127E
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 15:16:05 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B9DAD309996D
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Feb 2026 15:15:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEB7A15C158;
-	Wed, 25 Feb 2026 15:15:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 468D53D5240;
+	Wed, 25 Feb 2026 15:12:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="key not found in DNS" (0-bit key) header.d=y-koj.net header.i=@y-koj.net header.b="2TYCnWDU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="olWIYesR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from outbound.st.icloud.com (p-east2-cluster6-host1-snip4-10.eps.apple.com [57.103.76.181])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD20D27280F
-	for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 15:15:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.76.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FA72392800;
+	Wed, 25 Feb 2026 15:12:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772032515; cv=none; b=kTcu4H7/jKYqfzo2c/20zdwmaa4gNAs7RsyyXXKCb6KhARM0gvnISCKwnhQCUvn4Vi9mbPvCg8X7lSzGyoeE4AsD0q1+wMlCkBfG3DJoMBJCeNZdUMae3PmvR6EPiYupiIcrsRbS6s5yYkXL0yT4u/O5Ke27nFZwcTF8aMdB73c=
+	t=1772032371; cv=none; b=Y/TiUNJ4/KfWFn3y+55dksVkBgWbdfGhZMJIwj256yV6LG+S6rWRTnkkW2XD3qz8kHj0s6s/0RkHvuBDVpsk7TLIoEf8L0JAdZ34El+ELMpCeVz9tNMEL80SBKFRDtxYrnab3/gmS3e/Q9o6WXebKe/+u/tsSsit1xyL3sCmw+I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772032515; c=relaxed/simple;
-	bh=ZZ7ix51AfEYIX0Jt+w6zB/ER9ghq5eP5PmN1S+UyLnc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=K2t0FWZFfLt6k0oQcmWFvlgjRCtIlGQT8Bky6FDNbYZghfG7PkFmHYzuBV3ARwjWC4b/hSVAssk/YsD/LBJiqnUUQ95TeWAYcJ7iMQKMGBuSiORuhxTapGTbhleMq+hl0eFSSbbDAepfIAY/YIxNR7M8FTlKQ/BU3LzORtwSzLk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=y-koj.net; spf=pass smtp.mailfrom=y-koj.net; dkim=fail (0-bit key) header.d=y-koj.net header.i=@y-koj.net header.b=2TYCnWDU reason="key not found in DNS"; arc=none smtp.client-ip=57.103.76.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=y-koj.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=y-koj.net
-Received: from outbound.st.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-east-1a-60-percent-12 (Postfix) with ESMTPS id C3D78180016C;
-	Wed, 25 Feb 2026 15:15:10 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=y-koj.net; s=sig1; t=1772032512; x=1774624512; bh=SN1JpAZST7zZcbBBH7RXi7OwS7WQdyzRqZ6Jk74I9i0=; h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme; b=2TYCnWDUvGakyX0EkX/fGsxbRUT5Lrx8bCbELGOVsThKlrhRUfDsgfjlSJn8+nGu9TtWJDa2+hBit2NdUHNX8PrqUIPOhmKV7MXNUDqW0D2CXzRpNA3EaoYt/MNAM4A8Y6KYrFWWTLyjGm60DVFx/i8m0cCp61LpB0xEGJQh7flpYgOAIgfTyxr5WuC8ribI0nff82L1yV/dbzigZhJRLN2yEnk/OmFg10k+Lu3NyvNfPsaYhe7ya6kyb2L6BaWwEtui9fGmq3wNpxW1EOOiJPqatdodTcQPK2Qtb4r5z49GfmsqPS4Wc27lDsOGA9GRXoc6GwNtW5ymQy9T6z+n8A==
-mail-alias-created-date: 1719758601013
-Received: from desktop.tail809fd.ts.net (unknown [17.42.251.67])
-	by p00-icloudmta-asmtp-us-east-1a-60-percent-12 (Postfix) with ESMTPSA id D6BB81800214;
-	Wed, 25 Feb 2026 15:15:07 +0000 (UTC)
-From: Yohei Kojima <yk@y-koj.net>
-To: Andrew Lunn <andrew@lunn.ch>,
-	Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: Yohei Kojima <yk@y-koj.net>,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH net-next v3] docs: ethtool: clarify the bit-by-bit bitset format description
-Date: Thu, 26 Feb 2026 00:12:09 +0900
-Message-ID: <ef90a56965ca66e57aa177929ce3e10c5ca815fa.1772031974.git.yk@y-koj.net>
-X-Mailer: git-send-email 2.52.0
+	s=arc-20240116; t=1772032371; c=relaxed/simple;
+	bh=WBE2By5FzkP5SLbnPSG3o0NgugwGTYXwxmVW/sbRDIw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=f5rVnAgp/XPYlGqbeWC5ssrEAJ7YQc6ougQaNQBmpVM3INZ9ULwunvYd3sh/SDBQzCqnNiEj6Rab5scednPm8ABIW8xDbYbkai6cCSJa6xCG03gDb2wke820TKmNnTmsz15msA8lgJIu8ZrgXRZDBaPQoczNHNXaaSxCyXDC7yQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=olWIYesR; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73BEFC116D0;
+	Wed, 25 Feb 2026 15:12:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772032370;
+	bh=WBE2By5FzkP5SLbnPSG3o0NgugwGTYXwxmVW/sbRDIw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=olWIYesRWiw65xkODMWGjed+aMm2qj32u6gVvmfLAViXpgfQ1gV5euIFOYqvzyXKS
+	 1oBjv1D1FTk1wR7rMSeAmVBJmSYp1VZMujILP/lxeKQLisP+WFoCBJSvHgrg3aUY3G
+	 o55VFauH6L5QLsO4DYrMf5yk93ODqho4R4lpocJaU2wzmq0zPxpd0cTDezXbJtbtdP
+	 /OJCdoFKX0X5bkE917xIuyjMETyXUBUHJ86z0zVUQQOfhQ0d3fwlrlGb+29Bjbz5N6
+	 c7uzqpRNp6BBV/ZOpgHGboQQIXulvsYguBBOqtlXiUDdZB9VHUdXaViALWDNYzYiOp
+	 VtX+a33PmtVOA==
+Date: Wed, 25 Feb 2026 09:12:46 -0600
+From: Bjorn Andersson <andersson@kernel.org>
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>, 
+	Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
+	Robin Murphy <robin.murphy@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, 
+	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev, linux-media@vger.kernel.org, 
+	linaro-mm-sig@lists.linaro.org, Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bharath Kumar <quic_bkumar@quicinc.com>, 
+	Chenna Kesava Raju <quic_chennak@quicinc.com>
+Subject: Re: [PATCH RFC 01/18] accel/qda: Add Qualcomm QDA DSP accelerator
+ driver docs
+Message-ID: <opjniedtfhkv7vlb57g3xyikcfkxelthx3lmspmypws4vxz4oc@4uypmmf4t6fb>
+References: <20260224-qda-firstpost-v1-0-fe46a9c1a046@oss.qualcomm.com>
+ <20260224-qda-firstpost-v1-1-fe46a9c1a046@oss.qualcomm.com>
+ <e94ce683-d47c-4c8e-8b26-cd327c891cc8@oss.qualcomm.com>
+ <5a278b02-f2ad-408b-b0ad-f2297817bd7e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI1MDE0NiBTYWx0ZWRfX1VNyKWyrL6HS
- d9Ryq47JyulJ13KPXNcH2IeV2kfHG9qgIFfV7ef2DXBuJO39R+uFm/eboN4GUy9HXEGU9hb1pER
- mUJBZOURdSdMWxZ6PijI1PLsfAhicJT09TrDejRRFae7b3OutMHKrhaB+0D378aTO6LtEV1oU5k
- UGYXdra4GFugOB7/JEX3oyEmfo1afz/nmpnOn+pNARTCE8jUeG6L9S/PK3DwatrEoUkfNaNZwLX
- 4AzBwClcKzBDGMpgE5udHvtlXRxjYmH3PFqFfzYfy4sLNeB+4p18DbN2ltw98RJRymeGy6y0Wxq
- mJE5IX+RiiPO1ffFdoSxn1sr/BLK1FzDQAT0SMCQR4hJHYrrgcAifh28B54BlM=
-X-Authority-Info-Out: v=2.4 cv=BcfVE7t2 c=1 sm=1 tr=0 ts=699f11ff
- cx=c_apl:c_apl_out:c_pps a=YrL12D//S6tul8v/L+6tKg==:117
- a=YrL12D//S6tul8v/L+6tKg==:17 a=HzLeVaNsDn8A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=VwQbUJbxAAAA:8
- a=jnl5ZKOAAAAA:8 a=8WQVRTqVWvD3vaqRZeAA:9 a=RNrZ5ZR47oNZP8zBN2PD:22
-X-Proofpoint-ORIG-GUID: K6e5Zvfi3hVp0fk10h1dDgdg-5bvmlOg
-X-Proofpoint-GUID: K6e5Zvfi3hVp0fk10h1dDgdg-5bvmlOg
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-25_01,2026-02-25_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- malwarescore=0 adultscore=0 suspectscore=0 mlxlogscore=999 lowpriorityscore=0
- phishscore=0 mlxscore=0 spamscore=0 clxscore=1030 classifier=spam authscore=0
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
- definitions=main-2602250146
-X-JNJ: AAAAAAAB8l25vLSFFMxQeBFCwhCHSSa78ZEjmitzaxLHv2ZaC6TZzGpgB+7wr0Qs5ooVYoDL9xLfB95umgtVx3oqZvgXrQQvn+q5tWlRYPu5blV1EOLZGX1HslMDWBhwGS/8ZMfqK4RIuxkHAECGe7ZT3HCTtzYe/5E/gpd5SHaZVLXDXjtSGfFtnx6d9Zq2A69bOj3Fc8z01ZfNACOA4Ooeax961eT2TzBhAFuf33HQsGVCFG+LZz3c/SVpEuoCVQ4OMQosulx0wwdyW9gs9O9+tzkccGxakHomqca5V+M5+rO87UExLStykmwyZl7Xt8HBQnL3Lni2DSG1+f/9VrLn3dShXQ2kxNNuUYqgjw/mR5LaCFaOWUenMZ5YeviTQNBLlE46OR1MJMDYcPFg8qlHwjnt+G1c4WCCe5bo1pPvdbhmw5eSLiGFiPOsqA2KLEeUb/14H7AFFyRtH4Ivx/B5qF6irLMXOoYYGOnOAhXncj/RzhZfG+UdUJLG05RUu8ivYvyiIO+HpmKvjpFwnfNdHLQoWcXBMRGl44RZLB8DS0HewgXRh6lI5nETJbqWD2w1bWSwDDEM9rGzg5fHtTXVpxNFAvEG3zO53wQ2nDKERRKnKp8tDDjL+mO4Wbs38vUJFC2+kHy0mEC/Zls7zKi0IDzG6cDhmp4tm8PD4ARJ03GLi/Ro8qdl7+vOdqDb7ePEePZifbi+GkgBukhx9dJHNkuU7JbAh4c088dtNw/wSeflUns7ubylhgQtVpws/rVulJSYCGUcSi8BA7+vRHNNnY7tRzGAYLQ1AxuSrKZsJS7LZYk=
+In-Reply-To: <5a278b02-f2ad-408b-b0ad-f2297817bd7e@oss.qualcomm.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.04 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	DKIM_TRACE(0.00)[y-koj.net:~];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-77034-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[y-koj.net];
-	R_DKIM_PERMFAIL(0.00)[y-koj.net:s=sig1];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yk@y-koj.net,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-0.774];
+	TAGGED_FROM(0.00)[bounces-77033-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,y-koj.net:mid,y-koj.net:email]
-X-Rspamd-Queue-Id: 87AE11999AF
+	FREEMAIL_CC(0.00)[oss.qualcomm.com,kernel.org,lwn.net,linuxfoundation.org,8bytes.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.linaro.org,quicinc.com];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andersson@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2A2481997C0
 X-Rspamd-Action: no action
 
-Clarify the bit-by-bit bitset format's behavior around mandatory
-attributes and bit identification. More specifically, the following
-changes are made:
+On Wed, Feb 25, 2026 at 07:47:08PM +0530, Ekansh Gupta wrote:
+> 
+> 
+> On 2/24/2026 9:03 AM, Trilok Soni wrote:
+> > On 2/23/2026 11:08 AM, Ekansh Gupta wrote:
+> >> Add initial documentation for the Qualcomm DSP Accelerator (QDA) driver
+> >> integrated in the DRM accel subsystem.
+> >>
+> >> The new docs introduce QDA as a DRM/accel-based implementation of
+> >> Hexagon DSP offload that is intended as a modern alternative to the
+> >> legacy FastRPC driver in drivers/misc. The text describes the driver
+> >> motivation, high-level architecture and interaction with IOMMU context
+> >> banks, GEM-based buffer management and the RPMsg transport.
+> >>
+> >> The user-space facing section documents the main QDA IOCTLs used to
+> >> establish DSP sessions, manage GEM buffer objects and invoke remote
+> >> procedures using the FastRPC protocol, along with a typical lifecycle
+> >> example for applications.
+> >>
+> >> Finally, the driver is wired into the Compute Accelerators
+> >> documentation index under Documentation/accel, and a brief debugging
+> >> section shows how to enable dynamic debug for the QDA implementation.
+> > So existing applications written over character device UAPI needs to be
+> > rewritten over new UAPI and it will be broken once this driver gets
+> > merged? Are we going to keep both the drivers in the Linux kernel
+> > and not deprecate the /char device one? 
+> >
+> > Is Qualcomm going to provide the wrapper library in the userspace
+> > so that existing applications by our customers and developers
+> > keep working w/ the newer kernel if the char interface based
+> > driver gets deprecated? It is not clear from your text above. 
+> Thanks for raising this, Trilok.
+> 
+> This is one of the open items that I have. I'm not exactly sure what would be the
+> acceptable way for this. 
+> 
+> As you mentioned, applications that rely on /dev/fastrpc* might not work on QDA
+> without modification.
+> 
+> I was thinking in the same lines as you have mentioned and  having some shim/compat
+> driver to translate FastRPC UAPI to QDA. The compat driver would expose the existing
+> character devices and route the calls to QDA. The compat driver could be built via Kconfig.
+> 
 
-* Rephrase a misleading sentence which implies name and index are
-  mutually exclusive
-* Describe that ETHTOOL_A_BITSET_BITS nest is mandatory
-* Describe that a request fails if inconsistent identifiers are given
+This is a fundamental requirement, you need to address this in order for
+this to move forward.
 
-Signed-off-by: Yohei Kojima <yk@y-koj.net>
-Reviewed-by: Jakub Kicinski <kuba@kernel.org>
-Reviewed-by: Simon Horman <horms@kernel.org>
----
-Current ethtool-netlink documentation doesn't describe several behaviors
-around bit-by-bit bitset, which makes it hard to develop a ethtool
-library without digging into the kernel code. This patch eases the gap
-between the kernel behavior and the documentation by adding descriptions
-around the mandatory attribute and bit identification.
+Which makes me wonder if it would be possible to reach an accel driver
+through incremental transition of the current driver, instead of just
+dropping in a few thousand lines of new code/design.
 
-ChangeLog
-=========
-v3 (this version):
-* Rebase to the latest net-next/main
-* Add Reviewed-by tag provided by Jakub and Simon. Thank you!
-v2: https://lore.kernel.org/netdev/f43999612ed9d17fb7fe8f21e777e1c784f23c46.1770457868.git.yk@y-koj.net/
-* Minimize the diff for ease of review
-v1: https://lore.kernel.org/lkml/e9ea0fe8bf7935d6439e4dc883414b685afbaf58.1770045398.git.yk@y-koj.net/
+> However, I haven’t encountered an example of such a UAPI‑translation driver in the kernel
+> before, so I would want guidance from maintainers on whether this is an acceptable
+> model or not.
+> 
+> Regarding your question about library, all the APIs exposed by github/fastrpc library are kept
+> unchanged in terms of definitions and expectation. The same project can be build for both
+> FastRPC and QDA based on configure options. So, the applications using github/fastrpc should
+> not face any problem if the libs is built with proper configure options.
+> 
 
----
- Documentation/networking/ethtool-netlink.rst | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+You're assuming that the kernel and userspace are a unified piece of
+software, they are not. It must be possible for me to install a new
+kernel package without having to replace the userspace libraries.
 
-diff --git a/Documentation/networking/ethtool-netlink.rst b/Documentation/networking/ethtool-netlink.rst
-index af56c304cef4..32179168eb73 100644
---- a/Documentation/networking/ethtool-netlink.rst
-+++ b/Documentation/networking/ethtool-netlink.rst
-@@ -96,7 +96,7 @@ For short bitmaps of (reasonably) fixed length, standard ``NLA_BITFIELD32``
- type is used. For arbitrary length bitmaps, ethtool netlink uses a nested
- attribute with contents of one of two forms: compact (two binary bitmaps
- representing bit values and mask of affected bits) and bit-by-bit (list of
--bits identified by either index or name).
-+bits identified by index or name).
- 
- Verbose (bit-by-bit) bitsets allow sending symbolic names for bits together
- with their values which saves a round trip (when the bitset is passed in a
-@@ -156,12 +156,16 @@ Bit-by-bit form: nested (bitset) attribute contents:
-  | | | ``ETHTOOL_A_BITSET_BIT_VALUE`` | flag   | present if bit is set       |
-  +-+-+--------------------------------+--------+-----------------------------+
- 
--Bit size is optional for bit-by-bit form. ``ETHTOOL_A_BITSET_BITS`` nest can
-+For bit-by-bit form, ``ETHTOOL_A_BITSET_SIZE`` is optional, and
-+``ETHTOOL_A_BITSET_BITS`` is mandatory. ``ETHTOOL_A_BITSET_BITS`` nest can
- only contain ``ETHTOOL_A_BITSET_BITS_BIT`` attributes but there can be an
- arbitrary number of them.  A bit may be identified by its index or by its
- name. When used in requests, listed bits are set to 0 or 1 according to
--``ETHTOOL_A_BITSET_BIT_VALUE``, the rest is preserved. A request fails if
--index exceeds kernel bit length or if name is not recognized.
-+``ETHTOOL_A_BITSET_BIT_VALUE``, the rest is preserved.
-+
-+A request fails if index exceeds kernel bit length or if name is not
-+recognized. If both name and index are set, the request will fail if they
-+point to different bits.
- 
- When ``ETHTOOL_A_BITSET_NOMASK`` flag is present, bitset is interpreted as
- a simple bitmap. ``ETHTOOL_A_BITSET_BIT_VALUE`` attributes are not used in
--- 
-2.52.0
+Regards,
+Bjorn
 
+> I have noted your point regarding the doc not providing clear details, I have added interface
+> compatibility information in cover letter and will try pulling the same to Doc.
+> >
+> > ---Trilok Soni
+> 
+> 
 
