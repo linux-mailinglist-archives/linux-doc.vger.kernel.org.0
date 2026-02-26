@@ -1,226 +1,238 @@
-Return-Path: <linux-doc+bounces-77231-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77232-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OGHaHXl8oGlhkQQAu9opvQ
-	(envelope-from <linux-doc+bounces-77231-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 18:01:45 +0100
+	id GIBVA/GIoGlvkgQAu9opvQ
+	(envelope-from <linux-doc+bounces-77232-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 18:54:57 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A35A1AB8D9
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 18:01:40 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85BAA1AD025
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 18:54:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 994EE3325428
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 16:49:27 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id E7A2F309722D
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 17:09:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A574E44DB65;
-	Thu, 26 Feb 2026 16:27:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15D7E368952;
+	Thu, 26 Feb 2026 17:05:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="oYncBP7R"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pqviDWj8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com [95.215.58.171])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 775EF43D50F
-	for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 16:27:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6DE5368951;
+	Thu, 26 Feb 2026 17:05:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772123228; cv=none; b=A24l+m0IgRtgaLHMXH8iPYCAkqb8ne/hX8kAaY1WxXBOWWytu6DQ8vHP41qZaURuQX0yWcloJeyroGev4X5Qbd/XfyU2rLbkXA/Rt/jcuz3BDp93I9lKReuEUm0gqUxms/YNphFDOAy/kNf9yIW68kHte7JwDihPDDuWFh2Bl+I=
+	t=1772125514; cv=none; b=D6Q5EjbC3+o0WLZeyPY3uejG+4qfCpOJjt0jXWkg/vw2YCm/4A862gTA/HJR+dXLgj+EOa13Y3jCIafSPsXG3PDrSQh3Qd+YrG5tzOXtZp2lp6fzGXO8y/QeQTZZxP2lvcZO9wBVzuqJpi3z3Qk3MKEoc5VQeVu0H+OmIspOc3Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772123228; c=relaxed/simple;
-	bh=HKqtr3coDZJQB8tfZLk/fEJRSL3Be6NnnvgjgP9uZHU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IVMtIb41i5qJQtxlw+drNoln2ewIwNNDLC++5iXNfCB+nK8GjVqRarAt4a6XylaELrw8Yvq/oXsEDoUixhk1wy5hO4tSo23hAZLIWeBRX667dVqN3PU/NKC65EDVeP3dY0fcxKhrFaSnX4NfI2CdnPew814ezEaJP1q9zuGpSkc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=oYncBP7R; arc=none smtp.client-ip=95.215.58.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1772123222;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ZhpPpUmawavr8/7XO4FkbjGyfWyIYMOEPuIKrXPIOZ8=;
-	b=oYncBP7RaHS8J3MMylYArslXoH71eizg7mSGfgLGYgnJQMZRPlGt3Og7eMjJ3PDXcu0Cjf
-	Iiuihwux6vl14q6/NYTTenfiDG7eC8xz67swamRfYHsVdoFeTWT3Bp41LT1gfO69H4ips3
-	QprD6BI2Yb6LF4d3T1CZMn9JbixT3Hc=
-From: Usama Arif <usama.arif@linux.dev>
-To: Nico Pache <npache@redhat.com>
-Cc: Usama Arif <usama.arif@linux.dev>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org,
-	akpm@linux-foundation.org,
-	anshuman.khandual@arm.com,
-	apopple@nvidia.com,
-	baohua@kernel.org,
-	baolin.wang@linux.alibaba.com,
-	byungchul@sk.com,
-	catalin.marinas@arm.com,
-	cl@gentwo.org,
-	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	david@kernel.org,
-	dev.jain@arm.com,
-	gourry@gourry.net,
-	hannes@cmpxchg.org,
-	hughd@google.com,
-	jack@suse.cz,
-	jackmanb@google.com,
-	jannh@google.com,
-	jglisse@google.com,
-	joshua.hahnjy@gmail.com,
-	kas@kernel.org,
-	lance.yang@linux.dev,
-	Liam.Howlett@oracle.com,
-	lorenzo.stoakes@oracle.com,
-	mathieu.desnoyers@efficios.com,
-	matthew.brost@intel.com,
-	mhiramat@kernel.org,
-	mhocko@suse.com,
-	peterx@redhat.com,
-	pfalcato@suse.de,
-	rakie.kim@sk.com,
-	raquini@redhat.com,
-	rdunlap@infradead.org,
-	richard.weiyang@gmail.com,
-	rientjes@google.com,
-	rostedt@goodmis.org,
-	rppt@kernel.org,
-	ryan.roberts@arm.com,
-	shivankg@amd.com,
-	sunnanyong@huawei.com,
-	surenb@google.com,
-	thomas.hellstrom@linux.intel.com,
-	tiwai@suse.de,
-	usamaarif642@gmail.com,
-	vbabka@suse.cz,
-	vishal.moola@gmail.com,
-	wangkefeng.wang@huawei.com,
-	will@kernel.org,
-	willy@infradead.org,
-	yang@os.amperecomputing.com,
-	ying.huang@linux.alibaba.com,
-	ziy@nvidia.com,
-	zokeefe@google.com
-Subject: Re: [PATCH mm-unstable v15 11/13] mm/khugepaged: avoid unnecessary mTHP collapse attempts
-Date: Thu, 26 Feb 2026 08:26:52 -0800
-Message-ID: <20260226162653.3802758-1-usama.arif@linux.dev>
-In-Reply-To: <20260226032631.234234-1-npache@redhat.com>
-References: 
+	s=arc-20240116; t=1772125514; c=relaxed/simple;
+	bh=UWPlr3Z5zWw7+Km3JJCkWA7s1gIgF4/6DYP1bgIKhlU=;
+	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=GQKMwIuWChyXQlZQ/WPCTSeTbgHbSbqBXaY/HVLk5bjtmbx+h/OqPTFvEPOPnxDKT0XAD9fDgyX32A7rczUt9ymdfL+EbEO1xHRDN9w3xhVLh+soA+OYZLDs5SEJobk6ZSJALlggb40CynZobMJzEJC35ms/TwYL68ADq8QAJ+s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pqviDWj8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3777EC19424;
+	Thu, 26 Feb 2026 17:05:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772125513;
+	bh=UWPlr3Z5zWw7+Km3JJCkWA7s1gIgF4/6DYP1bgIKhlU=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=pqviDWj8SPpVypDaNlTFoEcMpJ/kYxnMqXwgKegygilsUwmQgZjx/Ofai7usx9gPp
+	 ZeATi507pLBnBXuD3DlERP4dGf6NZNlPwTij2AGs4O5Q0xoHcMljvBopYvSrO9/UhY
+	 P/b9rPfc9DaQja5fVDMf3abfGybSdGTeTEmzIc2TRfKyVRM+NGrgXjZMtjopXksOCq
+	 3kY7Gy0Cccg5wtbRyW9WNmVRzlFBhx0ygmBSzuWttm+yTf0Ly1kZrYOU2gHseUsiSh
+	 50eVUakSKmCL80pBEcyjJqGYrlsTuQPuu3D7S8qvsCihzRdPXnh0AU7HL0ZwRyKsir
+	 X0LnqGh5oQtkg==
+Date: Thu, 26 Feb 2026 18:05:10 +0100 (CET)
+From: Jiri Kosina <jikos@kernel.org>
+To: "Derek J. Clark" <derekjohn.clark@gmail.com>
+cc: Benjamin Tissoires <bentiss@kernel.org>, 
+    Richard Hughes <hughsient@gmail.com>, 
+    Mario Limonciello <mario.limonciello@amd.com>, 
+    Zhixin Zhang <zhangzx36@lenovo.com>, Mia Shao <shaohz1@lenovo.com>, 
+    Mark Pearson <mpearson-lenovo@squebb.ca>, 
+    "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>, 
+    linux-input@vger.kernel.org, linux-doc@vger.kernel.org, 
+    linux-kernel@vger.kernel.org, 
+    Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+    "Rafael J. Wysocki" <rafael@kernel.org>
+Subject: Re: [PATCH v5 01/16] include: device.h: Add named device
+ attributes
+In-Reply-To: <20260224013217.1363996-2-derekjohn.clark@gmail.com>
+Message-ID: <478589q4-1rp6-87q8-02o8-n50071039639@xreary.bet>
+References: <20260224013217.1363996-1-derekjohn.clark@gmail.com> <20260224013217.1363996-2-derekjohn.clark@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=US-ASCII
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[linux.dev,vger.kernel.org,kvack.org,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,oracle.com,efficios.com,intel.com,suse.com,redhat.com,suse.de,infradead.org,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TAGGED_FROM(0.00)[bounces-77231-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77232-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	RSPAMD_EMAILBL_FAIL(0.00)[usama.arif.linux.dev:query timed out];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[usama.arif@linux.dev,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,gmail.com,amd.com,lenovo.com,squebb.ca,valvesoftware.com,vger.kernel.org,linuxfoundation.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jikos@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-0.992];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux.dev:mid,linux.dev:dkim,linux.dev:email]
-X-Rspamd-Queue-Id: 3A35A1AB8D9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,squebb.ca:email,xreary.bet:mid]
+X-Rspamd-Queue-Id: 85BAA1AD025
 X-Rspamd-Action: no action
 
-On Wed, 25 Feb 2026 20:26:31 -0700 Nico Pache <npache@redhat.com> wrote:
+You would need and Ack from driver core maintainers (CCing Greg and Rafael 
+here) on this one so that I can take it together with the rest of the 
+series.
 
-> There are cases where, if an attempted collapse fails, all subsequent
-> orders are guaranteed to also fail. Avoid these collapse attempts by
-> bailing out early.
+Thanks,
+
+-- 
+Jiri Kosina
+SUSE Labs
+
+On Tue, 24 Feb 2026, Derek J. Clark wrote:
+
+> Adds DEVICE_ATTR_[RW|RO|WO]_NAMED macros for adding attributes that
+> reuse the same sysfs name in a driver under separate subdirectories.
 > 
-> Signed-off-by: Nico Pache <npache@redhat.com>
+> When dealing with some devices it can be useful to be able to reuse
+> the same name for similar attributes under a different subdirectory.
+> For example, a single logical HID endpoint may provide a configuration
+> interface for multiple physical devices. In such a case it is useful to
+> provide symmetrical attribute names under different subdirectories on
+> the configuration device. The Lenovo Legion Go is one such device,
+> providing configuration to a detachable left controller, detachable
+> right controller, the wireless transmission dongle, and the MCU. It is
+> therefore beneficial to treat each of these as individual devices in
+> the driver, providing a subdirectory for each physical device in the
+> sysfs. As some attributes are reused by each physical device, it
+> provides a much cleaner interface if the same driver can reuse the same
+> attribute name in sysfs while uniquely distinguishing the store/show
+> functions in the driver, rather than repeat string portions.
+> 
+> Example new WO attrs:
+> ATTRS{left_handle/reset}=="(not readable)"
+> ATTRS{right_handle/reset}=="(not readable)"
+> ATTRS{tx_dongle/reset}=="(not readable)"
+> 
+> vs old WO attrs in a subdir:
+> ATTRS{left_handle/left_handle_reset}=="(not readable)"
+> ATTRS{right_handle/right_handle_reset}=="(not readable)"
+> ATTRS{tx_dongle/tx_dongle_reset}=="(not readable)"
+> 
+> or old WO attrs with no subdir:
+> ATTRS{left_handle_reset}=="(not readable)"
+> ATTRS{right_handle_reset}=="(not readable)"
+> ATTRS{tx_dongle_reset}=="(not readable)"
+> 
+> While the third option is usable, it doesn't logically break up the
+> physical devices and creates a device directory with over 80 attributes
+> once all attrs are defined.
+> 
+> Reviewed-by: Mark Pearson <mpearson-lenovo@squebb.ca>
+> Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
 > ---
->  mm/khugepaged.c | 35 ++++++++++++++++++++++++++++++++++-
->  1 file changed, 34 insertions(+), 1 deletion(-)
+> v4:
+>   - Use dmabuf per request instead of devm allocated static buffer.
+>     Resolves bug with side effects during suspend.
+> ---
+>  include/linux/device.h | 46 ++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 46 insertions(+)
 > 
-> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> index 1c3711ed4513..388d3f2537e2 100644
-> --- a/mm/khugepaged.c
-> +++ b/mm/khugepaged.c
-> @@ -1492,9 +1492,42 @@ static int mthp_collapse(struct mm_struct *mm, unsigned long address,
->  			ret = collapse_huge_page(mm, collapse_address, referenced,
->  						 unmapped, cc, mmap_locked,
->  						 order);
-> -			if (ret == SCAN_SUCCEED) {
-> +
-> +			switch (ret) {
-> +			/* Cases were we continue to next collapse candidate */
-> +			case SCAN_SUCCEED:
->  				collapsed += nr_pte_entries;
-> +				fallthrough;
-> +			case SCAN_PTE_MAPPED_HUGEPAGE:
->  				continue;
-> +			/* Cases were lower orders might still succeed */
-> +			case SCAN_LACK_REFERENCED_PAGE:
-> +			case SCAN_EXCEED_NONE_PTE:
-> +			case SCAN_EXCEED_SWAP_PTE:
-> +			case SCAN_EXCEED_SHARED_PTE:
-> +			case SCAN_PAGE_LOCK:
-> +			case SCAN_PAGE_COUNT:
-> +			case SCAN_PAGE_LRU:
-> +			case SCAN_PAGE_NULL:
-> +			case SCAN_DEL_PAGE_LRU:
-> +			case SCAN_PTE_NON_PRESENT:
-> +			case SCAN_PTE_UFFD_WP:
-> +			case SCAN_ALLOC_HUGE_PAGE_FAIL:
-> +				goto next_order;
-> +			/* Cases were no further collapse is possible */
-> +			case SCAN_CGROUP_CHARGE_FAIL:
-
-The only one that stands out to me is SCAN_CGROUP_CHARGE_FAIL. memcg charging
-of higher order folio might fail, but a lower order folio might pass?
-That said, if the cgroup is that tight, continuing collapse work may not
-be productive.
-
-Acked-by: Usama Arif <usama.arif@linux.dev>
-
-> +			case SCAN_COPY_MC:
-> +			case SCAN_ADDRESS_RANGE:
-> +			case SCAN_NO_PTE_TABLE:
-> +			case SCAN_ANY_PROCESS:
-> +			case SCAN_VMA_NULL:
-> +			case SCAN_VMA_CHECK:
-> +			case SCAN_SCAN_ABORT:
-> +			case SCAN_PAGE_ANON:
-> +			case SCAN_PMD_MAPPED:
-> +			case SCAN_FAIL:
-> +			default:
-> +				return collapsed;
->  			}
->  		}
+> diff --git a/include/linux/device.h b/include/linux/device.h
+> index 0be95294b6e61..381463baed6d3 100644
+> --- a/include/linux/device.h
+> +++ b/include/linux/device.h
+> @@ -189,6 +189,22 @@ ssize_t device_show_string(struct device *dev, struct device_attribute *attr,
+>  #define DEVICE_ATTR_ADMIN_RW(_name) \
+>  	struct device_attribute dev_attr_##_name = __ATTR_RW_MODE(_name, 0600)
 >  
+> +/**
+> + * DEVICE_ATTR_RW_NAMED - Define a read-write device attribute with a sysfs name
+> + * that differs from the function name.
+> + * @_name: Attribute function preface
+> + * @_attrname: Attribute name as it wil be exposed in the sysfs.
+> + *
+> + * Like DEVICE_ATTR_RW(), but allows for reusing names under separate paths in
+> + * the same driver.
+> + */
+> +#define DEVICE_ATTR_RW_NAMED(_name, _attrname)                            \
+> +	struct device_attribute dev_attr_##_name = {                      \
+> +		.attr = { .name = _attrname, .mode = 0644 }, \
+> +		.show = _name##_show,                                     \
+> +		.store = _name##_store,                                   \
+> +	}
+> +
+>  /**
+>   * DEVICE_ATTR_RO - Define a readable device attribute.
+>   * @_name: Attribute name.
+> @@ -207,6 +223,21 @@ ssize_t device_show_string(struct device *dev, struct device_attribute *attr,
+>  #define DEVICE_ATTR_ADMIN_RO(_name) \
+>  	struct device_attribute dev_attr_##_name = __ATTR_RO_MODE(_name, 0400)
+>  
+> +/**
+> + * DEVICE_ATTR_RO_NAMED - Define a read-only device attribute with a sysfs name
+> + * that differs from the function name.
+> + * @_name: Attribute function preface
+> + * @_attrname: Attribute name as it wil be exposed in the sysfs.
+> + *
+> + * Like DEVICE_ATTR_RO(), but allows for reusing names under separate paths in
+> + * the same driver.
+> + */
+> +#define DEVICE_ATTR_RO_NAMED(_name, _attrname)                            \
+> +	struct device_attribute dev_attr_##_name = {                      \
+> +		.attr = { .name = _attrname, .mode = 0444 }, \
+> +		.show = _name##_show,                                     \
+> +	}
+> +
+>  /**
+>   * DEVICE_ATTR_WO - Define an admin-only writable device attribute.
+>   * @_name: Attribute name.
+> @@ -216,6 +247,21 @@ ssize_t device_show_string(struct device *dev, struct device_attribute *attr,
+>  #define DEVICE_ATTR_WO(_name) \
+>  	struct device_attribute dev_attr_##_name = __ATTR_WO(_name)
+>  
+> +/**
+> + * DEVICE_ATTR_WO_NAMED - Define a read-only device attribute with a sysfs name
+> + * that differs from the function name.
+> + * @_name: Attribute function preface
+> + * @_attrname: Attribute name as it wil be exposed in the sysfs.
+> + *
+> + * Like DEVICE_ATTR_WO(), but allows for reusing names under separate paths in
+> + * the same driver.
+> + */
+> +#define DEVICE_ATTR_WO_NAMED(_name, _attrname)                            \
+> +	struct device_attribute dev_attr_##_name = {                      \
+> +		.attr = { .name = _attrname, .mode = 0200 }, \
+> +		.store = _name##_store,                                   \
+> +	}
+> +
+>  /**
+>   * DEVICE_ULONG_ATTR - Define a device attribute backed by an unsigned long.
+>   * @_name: Attribute name.
 > -- 
-> 2.53.0
-> 
+> 2.52.0
 > 
 
