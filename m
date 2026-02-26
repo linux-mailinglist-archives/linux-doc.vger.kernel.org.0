@@ -1,204 +1,149 @@
-Return-Path: <linux-doc+bounces-77172-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77183-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sJV0LFT8n2n3fAQAu9opvQ
-	(envelope-from <linux-doc+bounces-77172-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 08:55:00 +0100
+	id aBJDC4cYoGmzfgQAu9opvQ
+	(envelope-from <linux-doc+bounces-77183-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 10:55:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A0C81A21EA
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 08:55:00 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 378CE1A3D08
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 10:55:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id CF1BE3082A61
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 07:48:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2BE5E307A569
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 09:42:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D74E4392805;
-	Thu, 26 Feb 2026 07:48:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jV6+Z+Hc"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 019C4374179;
+	Thu, 26 Feb 2026 09:42:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B41253115B8;
-	Thu, 26 Feb 2026 07:48:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1C9F2BCF6C
+	for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 09:42:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772092100; cv=none; b=tkMyU/0uE+sw8jXe8iDNnQZ3bo0VIausuz6hGkPtun7cCQIxAMOshPCdg3FVHEGZF0knOBRknz03aTrFccCnmYuI8yEpI3HDPoHuiFdg5uCGHHnUdf14TYlrYxVwyCPk2TUw3h2qRxuDckW2xTNgfG/4Tpc/JFerC+hSwwAkXqs=
+	t=1772098924; cv=none; b=tIqo40dsD+D8wWNKeT0pXxp5cbdbRly36xY+T0KHzaXwRdI7h7E19oFhgFZJ61VMJ9j4SewLbo1HbLHuxuKsvdNglgrj562p0RP0ARlrLb52A7dBxKSKKq8ERNxMUbiIOHUylnaQ2MZHXCFuSfEd6NstymJBjBX77Mir60Abacw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772092100; c=relaxed/simple;
-	bh=ie6eGxPY1q4fI9vb9x4urJnzwZGcBFpN4BvSkTUqc9Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZU2//XcKHXWsmQ/rJ8yKyOOaKqfSl8UDWxhnFtR/7fZkO6PR7j0d648RRnoKBj6MPPEPxF9uuGA+6BEdOpup5E+8qRvlpgg+zBtqHDugt2iMOVwSR6FlBnRDbWkgGm82XVw88VGDGF5XbhvGwoVSeItJ56R1NSwgCYizOQOznCk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jV6+Z+Hc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CDB50C19422;
-	Thu, 26 Feb 2026 07:48:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772092100;
-	bh=ie6eGxPY1q4fI9vb9x4urJnzwZGcBFpN4BvSkTUqc9Y=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=jV6+Z+HcS5M29io9elV6nhBHhyKnAgCN2n09T6aNyF1fYfdLNANqNG09Jc6j6+3hD
-	 xH/3I15e2+5+md+5Ld2jzqWyN2nk4qea1IqJpU8HipnfAPppJHgzUaqbbEWZUQ/c0H
-	 o3kzk/jFzGWQIUVUyvEJpXt60LdcyVt/a6DMfcrtpsfunkdlxqKvsPTTpWXDE8ZyCS
-	 3OyUoUEVzFnHG6v3UF6xRwgjxBRDXYWy1S3AVvI3+puS3DhVYf5Fxq7nPwryg3VnR2
-	 MboJsVvsnivJJQ/2KjGw/bPgWeFyxngQkLn/GXt3jxQ3bvhXq4U8FUixv/1KKEzMq+
-	 REZBIXH53sHgg==
-Date: Thu, 26 Feb 2026 08:48:17 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: wenswang@yeah.net
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
-	linux@roeck-us.net, corbet@lwn.net, skhan@linuxfoundation.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH 2/2] hwmon: add MP2845 driver
-Message-ID: <20260226-vagabond-opalescent-cockle-3dea1b@quoll>
-References: <20260225085501.164819-1-wenswang@yeah.net>
- <20260225085631.165106-1-wenswang@yeah.net>
- <20260225085631.165106-2-wenswang@yeah.net>
+	s=arc-20240116; t=1772098924; c=relaxed/simple;
+	bh=gKdDRJ4k87LaAx3+R8LuhxvDrJ8opW/pPfIrEoH1PWI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=BQ2V2T9nkaxISQgnccSXPNYEY9FBN7Fepj106FzaNewj6VlDlKuigKpdSrxddhoeWcZ9hSmuEdRzXOlNgHbjkbZ/aEQ/rJpxtgSDW07KJYH2+qWoUIzL+T1T6HL6wswOaUugZyT1hgJxwyn4hCznwzkGOgrZaWOrEaIBmRgaxNQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=74.125.82.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-2bdca815fdfso500031eec.1
+        for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 01:42:03 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772098923; x=1772703723;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wN7QFDReg+d0oErhjLdM9CGSLPE5PA9L2wZop8EojNM=;
+        b=M5tAwwADJrsiW/qLkRE5sj7K9hLcaDnX4BnIO8fUdu/ZJNhDjeLwVgvKBBG3VAu3Rw
+         5OCpBhnyBelz8GdHvtCVhmiqi8bMT+fgUK+E47u6QCdFaKaKkxtjN44PFXX9pfkc5Xxa
+         rvK5G97ycAhi6xyRokOOHPiojWxQ5VI8lcRwtYjBdmBlOjtgl/77YkdE4gm2aCK0fK2I
+         mSOM+LjvUHYXQ98xAZFxkGWBgr9WbVZrvC1BHeQfLv5O+oFhPvF+lp7+DpxPYXmUN1ty
+         fb9tRaOyQ0tKJcX3tNO7D5mrjDmhxKuzJK9hT7Cr8juf2vuMM/j545UV+oRt7VTIprwh
+         +9AA==
+X-Forwarded-Encrypted: i=1; AJvYcCW1gCx1qLw+V2tSetO5ddvL5ySKI2szMxBNB853QKVER8crLaVyXXNZLhfOMfX2OPHOVqbOBC8eugE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw6H8zIb+gRQE7LloZvBzk2pWk9i0aSTdqGyaGK7oLlvotzyyZn
+	k4oiS1MGmBq+qa9ygmuj+BVT5cFy30mJdi7F0oFrL3Xzv6Xg3fgSflGeb8Yj7g==
+X-Gm-Gg: ATEYQzyU5lkAva1nNwRMmxiJv18g/3b8JFeK8yXbvdH3t+sCcD9zK/FMXkewfMairHI
+	KUvDX3ObN1FwoCEydZAHADvghAxtSn2w+v8lYmNMrY23+OiDC0cWpXKgZj3y67PJLOfO5wcOjiX
+	sUYGQN8ypVmW5x+DgiTprnbZ4fjwfNlrJbQm5UqNmXI5zBcCmc+hiXQyXzY9XIYbAc6g5fBzfGP
+	DEgzpUMlfBSOClM7xo4RQYukBIPxnJ6y5q5wBdR0XUYnU0DPjx/lVS0YE2CrPyWi5mbzmupYUCW
+	MGN02FNyebAXSrOurBAMV3maW8aSa172bA9n83tud8yDkecC3GmqSAveEhQdXquy6UJ/OgEvF2n
+	LqNm9qQAk8akRnenRdvDKH6IX+p2wQ2GM05WxDuc9VrJ+fWDPwn8ytox/soAGOffjokvcC5FqyG
+	CpErW8poATVGeDwPhxMW5zUdQt0yEJrqRlO87ALDZ8q7gg3VxplObf5HiQxJK+
+X-Received: by 2002:a05:6102:5112:b0:5f5:4d37:8118 with SMTP id ada2fe7eead31-5feb2e8e9d3mr10009192137.2.1772092224351;
+        Wed, 25 Feb 2026 23:50:24 -0800 (PST)
+Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com. [209.85.222.53])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-94df645b877sm967359241.8.2026.02.25.23.50.23
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Feb 2026 23:50:23 -0800 (PST)
+Received: by mail-ua1-f53.google.com with SMTP id a1e0cc1a2514c-94dd0f3c4b7so345588241.1
+        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 23:50:23 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCXvYLcLFULEBDAAtdZvus+chZFztULudiIwxZcgfqUc9DRl7cbGM7uiagHHon/lQIAaDmWG6r1T1QE=@vger.kernel.org
+X-Received: by 2002:a05:6102:510e:b0:5fd:fa9b:1a2 with SMTP id
+ ada2fe7eead31-5feb30d4af4mr10289856137.28.1772092222850; Wed, 25 Feb 2026
+ 23:50:22 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260225085631.165106-2-wenswang@yeah.net>
+References: <aZ4_sBIy8rOUL59Q@devuan> <2026022531-tightness-rare-6a14@gregkh> <aZ87Z24f9HZsofGl@devuan>
+In-Reply-To: <aZ87Z24f9HZsofGl@devuan>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Thu, 26 Feb 2026 08:50:11 +0100
+X-Gmail-Original-Message-ID: <CAMuHMdVDPPgkWTHPb3Mfhn2cGmv7YPquakEuF6z7zam7gGVW_g@mail.gmail.com>
+X-Gm-Features: AaiRm51mZ3TMr9-1T3RZtvPkGB-I32VB6CDd1n0kyHAM014BC7DctANFpncyC8Y
+Message-ID: <CAMuHMdVDPPgkWTHPb3Mfhn2cGmv7YPquakEuF6z7zam7gGVW_g@mail.gmail.com>
+Subject: Re: [PATCH] Add short author date to Fixes tag
+To: Alejandro Colomar <alx@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Steven Rostedt <rostedt@goodmis.org>, 
+	Mark Brown <broonie@kernel.org>, Sasha Levin <sashal@kernel.org>, 
+	Jacob Keller <jacob.e.keller@intel.com>, Yeking@red54.com, kuba@kernel.org, 
+	Jonathan Corbet <corbet@lwn.net>, "Theodore Ts'o" <tytso@mit.edu>, Andy Whitcroft <apw@canonical.com>, 
+	Joe Perches <joe@perches.com>, Dwaipayan Ray <dwaipayanray1@gmail.com>, 
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, tech-board-discuss@lists.linux.dev, 
+	Andrew Lunn <andrew@lunn.ch>
+Content-Type: text/plain; charset="UTF-8"
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77172-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,goodmis.org,kernel.org,intel.com,red54.com,lwn.net,mit.edu,canonical.com,perches.com,gmail.com,linux-foundation.org,vger.kernel.org,lists.linux.dev,lunn.ch];
+	TAGGED_FROM(0.00)[bounces-77183-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[linux-m68k.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[yeah.net];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	NEURAL_HAM(-0.00)[-0.936];
+	TAGGED_RCPT(0.00)[linux-doc];
+	R_DKIM_NA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[yeah.net:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 2A0C81A21EA
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux-m68k.org:email,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 378CE1A3D08
 X-Rspamd-Action: no action
 
-On Wed, Feb 25, 2026 at 04:56:31PM +0800, wenswang@yeah.net wrote:
-> +#define MFR_VIN_OV_UV_SET	0x71
-> +#define MFR_OVUV_OCWARN_THRES	0x75
-> +#define MFR_TOTAL_OCP_SET	0x76
-> +#define MFR_PROTECT_STATUS1	0x80
-> +#define MFR_PROTECT_STATUS2 0x81
-> +
-> +#define MP2845_VIN_LIMIT_UINT	125
-> +#define MP2845_READ_VIN_UINT	3125
-> +#define MP2845_READ_VIN_DIV	100
-> +#define MP2845_READ_IOUT_UINT	3125
-> +#define MP2845_READ_IOUT_DIV	100
-> +#define MP2845_READ_VOUT_UINT	5
-> +#define MP2845_TEMP_UINT	1000
-> +
-> +#define MFR_READ_VIN	0xA6
-> +#define MFR_READ_VOUT	0xA7
-> +#define MFR_READ_IOUT	0xA8
-> +#define MFR_READ_TEMP	0xA9
-> +#define MFR_MFG_ID_SCALE_VI1	0x77
-> +#define MFR_MFG_ID_SCALE_VI2	0x78
-> +
-> +struct mp2845_data {
-> +	struct i2c_client *client;
-> +	int iout_gain[4];
-> +	/* lock for preventing concurrency issue */
+Hi Alejandro,
 
-This is completely useless comment. The definition of lock is to prevent
-concurrency issues. It's like adding a comment to a function: "it is a
-function".
+On Wed, 25 Feb 2026 at 19:20, Alejandro Colomar <alx@kernel.org> wrote:
+> The case where it would matter is if you commit a fix for a commit that
+> is only in your stable branch.  However, since the stable branches are
+> not real branches, but actually a set of patches, I expect you would
+> just drop the faulty patch, right?
 
-You must here explain which data or code logic is protected by this.
+Stable branches are real branches, cfr.
+https://web.git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/refs/heads.
 
-> +	struct mutex lock;
-> +};
+Gr{oetje,eeting}s,
 
-...
+                        Geert
 
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-> +
-> +static int mp2845_probe(struct i2c_client *client)
-> +{
-> +	struct device *dev = &client->dev;
-> +	struct device *hwmon_dev;
-> +	struct mp2845_data *data;
-> +	int ret;
-> +
-> +	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA |
-> +				     I2C_FUNC_SMBUS_WORD_DATA)) {
-> +		dev_err(dev, "check failed, smbus byte and/or word data not supported!\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	data = devm_kzalloc(dev, sizeof(struct mp2845_data), GFP_KERNEL);
-
-sizeof(*)
-
-> +	if (!data)
-> +		return -ENOMEM;
-> +
-> +	mutex_init(&data->lock);
-> +	data->client = client;
-> +
-> +	ret = mp2845_identify_iout_scale(data, 0);
-> +	if (ret < 0) {
-> +		dev_err(dev, "unable to identify rail1 iout scale, errno = %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = mp2845_identify_iout_scale(data, 1);
-> +	if (ret < 0) {
-> +		dev_err(dev, "unable to identify rail2 iout scale, errno = %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = mp2845_identify_iout_scale(data, 2);
-> +	if (ret < 0) {
-> +		dev_err(dev, "unable to identify rail3 iout scale, errno = %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = mp2845_identify_iout_scale(data, 3);
-> +	if (ret < 0) {
-> +		dev_err(dev, "unable to identify rail4 iout scale, errno = %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name,
-> +							 data, &mp2845_chip_info,
-> +							 NULL);
-> +	if (IS_ERR(hwmon_dev)) {
-> +		dev_err(dev, "unable to register mp2845 hwmon device\n");
-> +		return PTR_ERR(hwmon_dev);
-> +	}
-> +
-> +	dev_info(dev, "%s: sensor '%s'\n", dev_name(hwmon_dev), client->name);
-
-Driver should be silent on success probe. See also coding style and
-driver development docs.
-
-Best regards,
-Krzysztof
-
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
 
