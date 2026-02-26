@@ -1,194 +1,111 @@
-Return-Path: <linux-doc+bounces-77182-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77184-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AONNGs8VoGlifgQAu9opvQ
-	(envelope-from <linux-doc+bounces-77182-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 10:43:43 +0100
+	id CHd5EXcboGmzfgQAu9opvQ
+	(envelope-from <linux-doc+bounces-77184-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 11:07:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF6311A3A42
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 10:43:42 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id D1E851A3FA6
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 11:07:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 04EA730F4DFF
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 09:35:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1B701300B988
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 10:05:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF699314A77;
-	Thu, 26 Feb 2026 09:35:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA5F23A0EBC;
+	Thu, 26 Feb 2026 10:05:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="DWNv0GeH";
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="DWNv0GeH"
+	dkim=pass (2048-bit key) header.d=airmail.cc header.i=@airmail.cc header.b="LMaXahdA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+Received: from mail.cock.li (unknown [37.120.193.123])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B48F314A90;
-	Thu, 26 Feb 2026 09:35:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.187
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96A1C3A0E91;
+	Thu, 26 Feb 2026 10:05:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=37.120.193.123
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772098534; cv=none; b=BgSu139DyFO3UHiy4/D6j3HkF0GAu7G6r+Ke/YdYeyduIuzU9TEqViBmxAv1zUUlD1ieKpd90NIZNXAMpqIKg9Shx5zWALvqkbwOysht/AkiCHSJBcC4XuC60AWwwC+h2EWo2LuB7CXOJeYFxo19mBK5YvmZZRKvc0UtpnsRw2w=
+	t=1772100317; cv=none; b=PsoVeC8+LYnJ9E81AWeb7cL2yITP33ntz9FxxvHBm9a32WIi9c9Mctd6bas0TiI4Zl2S9iUTEyZxyke+OtlJwJRtkSmZkTtDW2hLy5JCQ4oFss5pjk1WJ9jQbcPu5IeV1G6gfsZIVKkzIgq6A/bZdTSAFvnsu1iG1njN7n+hOaA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772098534; c=relaxed/simple;
-	bh=p5gP5tx9RQ7vZD9jKRbxdIIw6QLuFGxeAWtY8jM32Ds=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=K6L8LE8Q7pWS62G+2zXCrsYphMW5WzEl7rrX1fSpqQCsdkqCNsL7ncjqaJo/5OZdi6aTzEZXyrVVbvI0n8Kke+kQiK5QDRhxmhGGtxG5e6/rTfgzqWLLVnd5TXs1SZqSSjBr5KV4+g4nDMvWD7fGRSC1qHP6UZPXdTBEEwMXj6Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=DWNv0GeH; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=DWNv0GeH; arc=none smtp.client-ip=45.249.212.187
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=cArUbXgPd0s4ZtREeL/7x46kP7PE/lat666eUsS6sDM=;
-	b=DWNv0GeHcKAOhD5xvaCowiagwlW275NAmdFdeG8qlLEXg0HK9DVne1d75o15RGyJa7vwcAWO6
-	vwEOtoSqxVKaatv+CDrTZSmvfXkTGoof3Dzf35VFrW/nnCipbp9TUQ6QsuUvS03Qv/DbB9CjEPb
-	Q7rsPApKKIvJvhGOP5dZOd0=
-Received: from canpmsgout01.his.huawei.com (unknown [172.19.92.178])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTPS id 4fM5sL26Lkz1BGHW;
-	Thu, 26 Feb 2026 17:35:02 +0800 (CST)
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=cArUbXgPd0s4ZtREeL/7x46kP7PE/lat666eUsS6sDM=;
-	b=DWNv0GeHcKAOhD5xvaCowiagwlW275NAmdFdeG8qlLEXg0HK9DVne1d75o15RGyJa7vwcAWO6
-	vwEOtoSqxVKaatv+CDrTZSmvfXkTGoof3Dzf35VFrW/nnCipbp9TUQ6QsuUvS03Qv/DbB9CjEPb
-	Q7rsPApKKIvJvhGOP5dZOd0=
-Received: from mail.maildlp.com (unknown [172.19.162.144])
-	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4fM5m15ySPz1T4Fg;
-	Thu, 26 Feb 2026 17:30:25 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 11EC340567;
-	Thu, 26 Feb 2026 17:35:19 +0800 (CST)
-Received: from [10.67.109.254] (10.67.109.254) by
- dggpemf500011.china.huawei.com (7.185.36.131) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Thu, 26 Feb 2026 17:35:15 +0800
-Message-ID: <15ea8a98-2b0c-dd51-b0d4-911905b194c3@huawei.com>
-Date: Thu, 26 Feb 2026 17:35:14 +0800
+	s=arc-20240116; t=1772100317; c=relaxed/simple;
+	bh=+mp1GZfpY+7A8iKfsDMVdpmc++VqvTaOxRKoUcjUPuI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=cXdxYGui9B2t0GEBX3I5HcoUywSFxqqLLIEjFXgqSFlyMcrasfVAJeSUldwu0fg4JWqSbj4SUUde9FPE40u5RvOe2jTQ0MOSeizrlhSzV+sqEsWUrWQbbLV9ngwmwIEAkwmMGKYl0CzZF8vml1dXYkzGQnTjay6pdav81p7g9Dk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=airmail.cc; spf=pass smtp.mailfrom=airmail.cc; dkim=pass (2048-bit key) header.d=airmail.cc header.i=@airmail.cc header.b=LMaXahdA; arc=none smtp.client-ip=37.120.193.123
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=airmail.cc
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=airmail.cc
+From: Hans Anda <hansa@airmail.cc>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=airmail.cc; s=mail;
+	t=1772100304; bh=+mp1GZfpY+7A8iKfsDMVdpmc++VqvTaOxRKoUcjUPuI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=LMaXahdAPoFFOy3ij+726ZHRsodYOWhsb3o0ipqQaPPV9VpnmdYJuFRYf0V7BbXe/
+	 g9TRZHH0XEX/GCMOQ9f7rWugT33JUDBbfHhYafIZ6s14z9mCzENUki0LOgboRPDfPz
+	 zaWhESQeksH+bvD1eL911d4uufLsGCu+is1pB7Ot/BkFbq3WhHsXRs+TOd24Bi0Q62
+	 8AkHcqBUbINBzylGTWtaCLBZ0q5U5Shoo495fLStS31qQbflLzX61aHnlKlCIRTjVk
+	 x4auuJV+NNhLZiYpdVg44TSPAT2rk9HDA5hNuzPTvvNg+s9KmTyS4pHos1yq/BtI3R
+	 VhH5+TW7YhM9g==
+To: Jonathan Corbet <corbet@lwn.net>,
+	Collin Funk <collin.funk1@gmail.com>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Hans Anda <hansa@airmail.cc>
+Subject: [PATCH v2 0/2] scripts: workflow: sort ver_linux
+Date: Thu, 26 Feb 2026 11:02:57 +0100
+Message-ID: <20260226100256.40215-2-hansa@airmail.cc>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260221152113.28322-2-hansa@airmail.cc>
+References: <20260221152113.28322-2-hansa@airmail.cc>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.0
-Subject: Re: [PATCH v6 1/5] powerpc/crash: sort crash memory ranges before
- preparing elfcorehdr
-Content-Language: en-US
-To: Baoquan He <bhe@redhat.com>
-CC: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
-	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
-	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
-	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
-	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
-	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
-	<hpa@zytor.com>, <akpm@linux-foundation.org>, <vgoyal@redhat.com>,
-	<dyoung@redhat.com>, <rdunlap@infradead.org>, <pmladek@suse.com>,
-	<dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <paulmck@kernel.org>,
-	<lirongqing@baidu.com>, <arnd@arndb.de>, <ardb@kernel.org>,
-	<leitao@debian.org>, <rppt@kernel.org>, <cfsworks@gmail.com>,
-	<ryan.roberts@arm.com>, <sourabhjain@linux.ibm.com>,
-	<tangyouling@kylinos.cn>, <eajames@linux.ibm.com>, <hbathini@linux.ibm.com>,
-	<ritesh.list@gmail.com>, <songshuaishuai@tinylab.org>,
-	<samuel.holland@sifive.com>, <kevin.brodsky@arm.com>,
-	<vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>, <coxu@redhat.com>,
-	<liaoyuanhong@vivo.com>, <fuqiang.wang@easystack.cn>, <jbohac@suse.cz>,
-	<brgerst@gmail.com>, <x86@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
-	<linux-riscv@lists.infradead.org>, <kexec@lists.infradead.org>
-References: <20260224085342.387996-1-ruanjinjie@huawei.com>
- <20260224085342.387996-2-ruanjinjie@huawei.com>
- <aaARRZh9k_0oG3Qo@MiWiFi-R3L-srv>
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-In-Reply-To: <aaARRZh9k_0oG3Qo@MiWiFi-R3L-srv>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
- dggpemf500011.china.huawei.com (7.185.36.131)
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[airmail.cc,quarantine];
+	R_DKIM_ALLOW(-0.20)[airmail.cc:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,suse.com,baidu.com,arndb.de,debian.org,kylinos.cn,tinylab.org,sifive.com,pigmoral.tech,vivo.com,easystack.cn,suse.cz,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	TAGGED_FROM(0.00)[bounces-77182-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[lwn.net,gmail.com,linuxfoundation.org];
+	TAGGED_FROM(0.00)[bounces-77184-lists,linux-doc=lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-foundation.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:mid,huawei.com:dkim,huawei.com:email,ellerman.id.au:email];
-	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[hansa@airmail.cc,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_GT_50(0.00)[58];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.994];
+	DKIM_TRACE(0.00)[airmail.cc:+];
+	DM_SURBL(0.00)[airmail.cc:mid,airmail.cc:dkim,airmail.cc:email];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	NEURAL_HAM(-0.00)[-0.998];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: BF6311A3A42
+	DBL_BLOCKED_OPENRESOLVER(0.00)[airmail.cc:mid,airmail.cc:dkim,airmail.cc:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: D1E851A3FA6
 X-Rspamd-Action: no action
 
+It is a pain in the ass to compare the software versions on the running
+system (scripts/ver_linux) with the minimal required versions (changes.rst).
 
+[v1] -> [v2]
+split v1 into a patch series
+changes.rst:
+ add reference to ver_linux
+ver_linux:
+ fix path to changes.rst
 
-On 2026/2/26 17:24, Baoquan He wrote:
-> On 02/24/26 at 04:53pm, Jinjie Ruan wrote:
->> From: Sourabh Jain <sourabhjain@linux.ibm.com>
->>
->> During a memory hot-remove event, the elfcorehdr is rebuilt to exclude
->> the removed memory. While updating the crash memory ranges for this
->> operation, the crash memory ranges array can become unsorted. This
->> happens because remove_mem_range() may split a memory range into two
->> parts and append the higher-address part as a separate range at the end
->> of the array.
->>
->> So far, no issues have been observed due to the unsorted crash memory
->> ranges. However, this could lead to problems once crash memory range
->> removal is handled by generic code, as introduced in the upcoming
->> patches in this series.
->>
->> Currently, powerpc uses a platform-specific function,
->> remove_mem_range(), to exclude hot-removed memory from the crash memory
->> ranges. This function performs the same task as the generic
->> crash_exclude_mem_range() in crash_core.c. The generic helper also
->> ensures that the crash memory ranges remain sorted. So remove the
->> redundant powerpc-specific implementation and instead call
->> crash_exclude_mem_range_guarded() (which internally calls
->> crash_exclude_mem_range()) to exclude the hot-removed memory ranges.
->>
->> Cc: Andrew Morton <akpm@linux-foundation.org>
->> Cc: Baoquan he <bhe@redhat.com>
->> Cc: Jinjie Ruan <ruanjinjie@huawei.com>
->> Cc: Hari Bathini <hbathini@linux.ibm.com>
->> Cc: Madhavan Srinivasan <maddy@linux.ibm.com>
->> Cc: Mahesh Salgaonkar <mahesh@linux.ibm.com>
->> Cc: Michael Ellerman <mpe@ellerman.id.au>
->> Cc: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
->> Cc: Shivang Upadhyay <shivangu@linux.ibm.com>
->> Cc: linux-kernel@vger.kernel.org
->> Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
->> Signed-off-by: Sourabh Jain <sourabhjain@linux.ibm.com>
-> 
-> You should add your own Signed-off-by since you sent it out.
-
-Ack, I'll add my Signed-off-by in the next revision.
-Thanks,
-
-> 
->> ---
->>  arch/powerpc/include/asm/kexec_ranges.h |  4 +-
->>  arch/powerpc/kexec/crash.c              |  5 +-
->>  arch/powerpc/kexec/ranges.c             | 87 +------------------------
->>  3 files changed, 7 insertions(+), 89 deletions(-)
-> ......snip...
-> 
-> 
+Signed-off-by: Hans Anda <hansa@airmail.cc>
 
