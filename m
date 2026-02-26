@@ -1,203 +1,126 @@
-Return-Path: <linux-doc+bounces-77240-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77242-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IMAPJKG5oGnClwQAu9opvQ
-	(envelope-from <linux-doc+bounces-77240-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 22:22:41 +0100
+	id gPsBBf65oGnClwQAu9opvQ
+	(envelope-from <linux-doc+bounces-77242-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 22:24:14 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4920C1AFAE7
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 22:22:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF46D1AFB58
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 22:24:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 33473300A10D
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 21:22:19 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 202E8300AC35
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 21:24:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00568439014;
-	Thu, 26 Feb 2026 21:22:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34D7042DFE9;
+	Thu, 26 Feb 2026 21:24:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="gtY88Zhf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from todd.t-8ch.de (todd.t-8ch.de [159.69.126.157])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E57730F555
-	for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 21:22:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1584E352F8E;
+	Thu, 26 Feb 2026 21:24:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.126.157
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772140935; cv=none; b=fDxVO+oKplngIJchiHuEltCvAZ+3Gddzv5FIcpYPghj5ychGRIWFCOV3reoGkTyTHtNFQcRZ4VbRxWGseDp7dnfVYGppIFvkRCazIvDKVeVj3qjeDsNpxX3Y35PKxNGnNujOEk7sYVONL529mRMlvzXkT2jIZVwxqOJP2cSsFQI=
+	t=1772141044; cv=none; b=FU0vddmWyu+3/cauWY+nlKkSOwG8aaQ4ertgtKZuJPy/SgbshLCFBopc+LGZeInQ/VXa/Slulh4868AifWoWCVEzaYTF+sWZQ+blTr53kocdvgXKKjK9hVBNYA/Ve5sZg1La57EcFx7k5CbVivsSXRzSlYtJPe8iIKk2Zu+bSf0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772140935; c=relaxed/simple;
-	bh=sfTslLLnI37XJQ6uxMdt3uWTnKJaFYngSG3T3NhVl6Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AreZl1lVQX4wzceHh8CTZaY4YKpT+OyDRdJy7/iJzqEGue2MQNsJTTSRiATz1AgSGAZqgxsYLpkUfnsmznGCktaso0DpEQWgu/Lc9x7FRcb/cTMTQPo7lt2nS7Rw1Mq+Qiue8hqsBCeFLju/hIiUQRuzOFjr+YYUdBTui8aoOcA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 6E4A24E2DB;
-	Thu, 26 Feb 2026 21:22:11 +0000 (UTC)
-Authentication-Results: smtp-out1.suse.de;
-	none
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 25AC63EA62;
-	Thu, 26 Feb 2026 21:22:08 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id CH6xBYC5oGlMRAAAD6G6ig
-	(envelope-from <pfalcato@suse.de>); Thu, 26 Feb 2026 21:22:08 +0000
-Date: Thu, 26 Feb 2026 21:22:06 +0000
-From: Pedro Falcato <pfalcato@suse.de>
-To: Kalesh Singh <kaleshsingh@google.com>
-Cc: "David Hildenbrand (Arm)" <david@kernel.org>, 
-	Anthony Yznaga <anthony.yznaga@oracle.com>, linux-mm@kvack.org, akpm@linux-foundation.org, 
-	andreyknvl@gmail.com, arnd@arndb.de, bp@alien8.de, brauner@kernel.org, 
-	bsegall@google.com, corbet@lwn.net, dave.hansen@linux.intel.com, 
-	dietmar.eggemann@arm.com, ebiederm@xmission.com, hpa@zytor.com, jakub.wartak@mailbox.org, 
-	jannh@google.com, juri.lelli@redhat.com, khalid@kernel.org, 
-	liam.howlett@oracle.com, linyongting@bytedance.com, lorenzo.stoakes@oracle.com, 
-	luto@kernel.org, markhemm@googlemail.com, maz@kernel.org, mhiramat@kernel.org, 
-	mgorman@suse.de, mhocko@suse.com, mingo@redhat.com, muchun.song@linux.dev, 
-	neilb@suse.de, osalvador@suse.de, pcc@google.com, peterz@infradead.org, 
-	rostedt@goodmis.org, rppt@kernel.org, shakeel.butt@linux.dev, surenb@google.com, 
-	tglx@linutronix.de, vasily.averin@linux.dev, vbabka@suse.cz, 
-	vincent.guittot@linaro.org, viro@zeniv.linux.org.uk, vschneid@redhat.com, 
-	willy@infradead.org, x86@kernel.org, xhao@linux.alibaba.com, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, 
-	Isaac Manjarres <isaacmanjarres@google.com>, "T.J. Mercier" <tjmercier@google.com>, 
-	android-mm <android-mm@google.com>
-Subject: Re: [PATCH v3 00/22] Add support for shared PTEs across processes
-Message-ID: <5tdailzxoywzzunbwhtlk4yjfmzunntniqtudkb52q6hib74ql@oq4mi226dedv>
-References: <20250820010415.699353-1-anthony.yznaga@oracle.com>
- <CAC_TJvcaJdEzK8n9BK0qgEXdzjzXtbA_Zk-ybfmG8kjNExVCzw@mail.gmail.com>
- <b82a5ac3-33e9-4cbf-892a-f0c7f6fe0c20@kernel.org>
- <CAC_TJvdgvyjyJsU4v6W+3tHKx_2e8UMJU3RT2HKLSngcC+yH3Q@mail.gmail.com>
+	s=arc-20240116; t=1772141044; c=relaxed/simple;
+	bh=7nhCbx+WxSIG5JM5HldR/pn6Ks+0+YiL2SV34Hb71V4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=avBFygk53jw9H57gu6WSV7+ZIog9A5BLxhOSIpfwq1Vbro/VZFLyqW1YrKa3neFeLzKkNAp3GtJxwZifAJiR5pjO7wJSPGpqC/oKu/WeDNQ2oTTiBlxPMB4GIYyz56a2fg71kvO/1ncNUFTMmYB0BLdSYLZElBidDz00OkDVBlE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=gtY88Zhf; arc=none smtp.client-ip=159.69.126.157
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=weissschuh.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=weissschuh.net;
+	s=mail; t=1772141040;
+	bh=7nhCbx+WxSIG5JM5HldR/pn6Ks+0+YiL2SV34Hb71V4=;
+	h=From:Subject:Date:To:Cc:From;
+	b=gtY88Zhf1c8aiotvJlH70tuyuLY/Ogp7n3FD4p7CLyjDf7MENIRzfrME0uFvMiKtp
+	 M74F7ELqPLkLzoQLjhHHYlw1KMcT5o6Ve4ecPhOTgmFLna408SfHKXZGQiCQ+2GK/e
+	 EZTZ4VD4jwtEFfF8+PBI+0NugGc7k7RlF4wfzGww=
+From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
+Subject: [PATCH 0/2] kbuild: Follow-up to "Reject unexpected values for
+ LLVM="
+Date: Thu, 26 Feb 2026 22:23:56 +0100
+Message-Id: <20260226-kbuild-llvm-followup-v1-0-201cc2a492d9@weissschuh.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAC_TJvdgvyjyJsU4v6W+3tHKx_2e8UMJU3RT2HKLSngcC+yH3Q@mail.gmail.com>
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spam-Flag: NO
-X-Spam-Score: -4.00
-X-Spam-Level: 
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDIyMz3eyk0sycFN2cnLJc3bT8nJz88tICXdPEFDMjU+M0C9NkCyWg1oK
+ i1LTMCrCx0bG1tQBVIDTNZgAAAA==
+X-Change-ID: 20260226-kbuild-llvm-followup-5ad6253f85c8
+To: Nathan Chancellor <nathan@kernel.org>, 
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, 
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
+ Nicolas Schier <nsc@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: llvm@lists.linux.dev, linux-kbuild@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772141039; l=523;
+ i=linux@weissschuh.net; s=20221212; h=from:subject:message-id;
+ bh=7nhCbx+WxSIG5JM5HldR/pn6Ks+0+YiL2SV34Hb71V4=;
+ b=3gnlGhkBt8C4AftkLHwcRAgB1Uyr9vEV8IkDayElDp8Hv0SbjrKUV4scML3fjavguFXaJwWxt
+ BEr3FFREeJPBD3o74UhnJiabR1HtSkoFkN0A0i26x6iQKwbXLTTYcMi
+X-Developer-Key: i=linux@weissschuh.net; a=ed25519;
+ pk=KcycQgFPX2wGR5azS7RhpBqedglOZVgRPfdFSPB1LNw=
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.86 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[weissschuh.net,quarantine];
+	R_DKIM_ALLOW(-0.20)[weissschuh.net:s=mail];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[suse.de : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,oracle.com,kvack.org,linux-foundation.org,gmail.com,arndb.de,alien8.de,google.com,lwn.net,linux.intel.com,arm.com,xmission.com,zytor.com,mailbox.org,redhat.com,bytedance.com,googlemail.com,suse.de,suse.com,linux.dev,infradead.org,goodmis.org,linutronix.de,suse.cz,linaro.org,zeniv.linux.org.uk,linux.alibaba.com,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-77240-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77242-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[kernel.org,gmail.com,google.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pfalcato@suse.de,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[linux@weissschuh.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[weissschuh.net:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCPT_COUNT_GT_50(0.00)[53];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 4920C1AFAE7
+X-Rspamd-Queue-Id: BF46D1AFB58
 X-Rspamd-Action: no action
 
-On Wed, Feb 25, 2026 at 03:06:10PM -0800, Kalesh Singh wrote:
-> On Tue, Feb 24, 2026 at 1:40 AM David Hildenbrand (Arm)
-> <david@kernel.org> wrote:
-> >
-> > > I believe that managing a pseudo-filesystem (msharefs) and mapping via
-> > > ioctl during process creation could introduce overhead that impacts
-> > > app startup latency. Ideally, child apps shouldn't be aware of this
-> > > sharing or need to manage the pseudo-filesystem on their end.
-> > All process must be aware of these special semantics.
-> >
-> > I'd assume that fork() would simply replicate mshare region into the
-> > fork'ed child process. So from that point of view, it's "transparent" as
-> > in "no special mshare() handling required after fork".
-> 
-> Hi David,
-> 
-> That's agood  point. If fork() simply replicates the mshare region, it
-> does achieve transparency in terms of setup.
-> 
-> I am still concerned about transparency in terms of observability.
-> Applications and sometimes inspect their own mappings (from
-> /proc/self/maps) to locate specific code or data regions for various
-> anti-tamper and obfuscation techniques. [2] If those mappings suddenly
-> point to an msharefs pseudo-file instead of the expected shared
-> library backing, it may break user-space assumptions and cause
-> compatibility issues.
+Some cleanups.
 
-I'm not worried about transparency because this is not supposed to be
-transparent. This is not supposed to be used by most core system software.
-This is supposed to help replace hugetlb page table sharing.
+Signed-off-by: Thomas Weißschuh <linux@weissschuh.net>
+---
+Thomas Weißschuh (2):
+      Documentation/llvm: drop note about LLVM=0
+      tools/build: Reject unexpected values for LLVM=
 
-Transparent page table sharing has other constraints. I like the idea, in
-theory, but there are a number of constraints that make the idea unfeasible
-for now. There are a couple of problems we need to solve first:
+ Documentation/kbuild/llvm.rst  | 4 ----
+ tools/scripts/Makefile.include | 2 ++
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+---
+base-commit: 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+change-id: 20260226-kbuild-llvm-followup-5ad6253f85c8
 
-1) Every spot where we modify PTEs needs to be assessed and use different
-helpers (that can un-cow page tables). Every pte_offset_map_lock() can now
-feasibly fail for OOM reasons (and that also needs to be assessed).
-
-2) Various bits of PTE modification/unmapping now needs special care wrt TLB
-invalidation. The kernel needs to be aware of how the page tables are shared.
-I don't think the current rmap data structures are well suited to this kind
-of stuff (perhaps with Lorenzo's WIP anon rmap rework we'll get something
-better). Basically every spot that goes "modify PTE, flush TLB for mm" now
-needs to go "modify PTE, for every mm that maps this page table, flush $mm"
-(if you're thinking that COW will save us, it technically won't, or shouldn't,
-because of stuff like try_to_unmap_one() that is used in reclaim).
-
-3) Reclaim loses even more information as now N processes share the same A
-bits. I don't know what effects this can cause. It would require
-experimentation. Perhaps something like "if page table is shared, value
-pte_young more". I don't know if this can work as a bandaid, but it's not
-ideal.
-
-4) It's not known whether page table COW fork() is a real win in most cases,
-or all cases. Would want measurement.
-
-5) It becomes even harder to estimate RSS and PSS for each process.
-
-For these reasons (and more, certainly), I don't think working mshare() into
-a transparent, all-great thing that fits the zygote model can work. It has been
-discussed at length how to pull off certain hard bits like TLB invalidation and
-locking for mshare, and with mshare we have the advantage of not needing to
-support every feature ever (tailoring it more to the big database users of
-hugetlb). And we'll still need to adapt certain bits of arch code just to get
-it to work efficiently.
-
-This said, if you want to discuss pulling this off, I'm all ears and it could
-be perhaps a fun discussion (too late for LSF, I guess), but I don't think
-it's workeable into the current mshare efforts. And, believe me, I would love
-a unified feature here :)
-
+Best regards,
 -- 
-Pedro
+Thomas Weißschuh <linux@weissschuh.net>
+
 
