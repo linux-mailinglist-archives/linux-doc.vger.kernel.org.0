@@ -1,228 +1,186 @@
-Return-Path: <linux-doc+bounces-77202-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77203-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kLM0CkJGoGkuhwQAu9opvQ
-	(envelope-from <linux-doc+bounces-77202-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 14:10:26 +0100
+	id GDnaFVpPoGmIiAQAu9opvQ
+	(envelope-from <linux-doc+bounces-77203-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 14:49:14 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3485C1A622A
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 14:10:24 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E24F01A6F2F
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 14:49:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 4EA52306C86D
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 13:06:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BB130301A900
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 13:41:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 999DE318ED7;
-	Thu, 26 Feb 2026 13:05:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="P/ctHr74"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B32C436C59E;
+	Thu, 26 Feb 2026 13:41:06 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
+Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF4D630ACF8;
-	Thu, 26 Feb 2026 13:05:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.222
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 367B836C0BB;
+	Thu, 26 Feb 2026 13:41:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=92.121.34.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772111142; cv=none; b=HOmbZxn6IXe/6NL9bc+9uJcdraCXFa0j+sDJXcbWAAYr6yWNO8V/GYJrBbBSAc1Hcp6rNNhNsCsdHHzofLqPHEOrK0hxbNtCZcCJ2qL4ynGCFeA5Mwu556m8JkJFjPL+bYq4Np4P+gMtjH0K2dlpkglVsfF0XbGFSvRfC6TS/tY=
+	t=1772113266; cv=none; b=OufbdUXEDcmmb4MQy6cJjE0Nc34UIaTdmych26HnvUIlBq7LiflKUYb4f4Z1s1oPGzxMUk+p/O+VA4JyLDg+hHRj00h/hqH+Un2hq8vpQ5lJ1+3fGx2DUs81mOKnD/X9LTCy/PTp3c6SH8sy09DhSrzSHp5q5CuAQAGNhR/n9rU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772111142; c=relaxed/simple;
-	bh=Yy7TYOq9+DLW5lTV5qgrvxr0Wq43dOTY3mD9Ti2H2g8=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RBYPN2/nHss0p7r8/vA1M0OA13reUKtzP5ft8S80kGAO8CSHtHC/OyC95+psBlEyJLQ+tPd9cNGBWraoOw2vGdzKUWCgvumM4Bfx+Xs74i3FDAokthrH3KfVXnWdHyETv00OQ/MUULfGkPiSLea81m7aBSwINjNRArfMeFvy6cQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=P/ctHr74; arc=none smtp.client-ip=113.46.200.222
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=5KMCn7a2GKKaDXYDNep+ArUoPi23K/kWIYh5pBL8RVE=;
-	b=P/ctHr74UaOq4A6mzMooorWBwvIH3h5TwQ3bYTUJ73OQ+qtkfUMG+xT/SWoMOl18gSo+wfLw8
-	ZQ5Vy7bUgT7ZR6HUShJjraNXtT93za/waZsQN/NSvUikGNxQidB9Ulfr8DutOIDeGB2Onhj8b4u
-	7sFx9+hyKvTa+Iz5UpvTSGM=
-Received: from mail.maildlp.com (unknown [172.19.163.127])
-	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4fMBQm6QxGzLlTK;
-	Thu, 26 Feb 2026 21:00:48 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 4F2AF40363;
-	Thu, 26 Feb 2026 21:05:36 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
- (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 26 Feb
- 2026 21:05:33 +0800
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
-	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
-	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
-	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
-	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
-	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
-	<hpa@zytor.com>, <robh@kernel.org>, <saravanak@kernel.org>,
-	<akpm@linux-foundation.org>, <bhe@redhat.com>, <vgoyal@redhat.com>,
-	<dyoung@redhat.com>, <pmladek@suse.com>, <rdunlap@infradead.org>,
-	<dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <paulmck@kernel.org>,
-	<lirongqing@baidu.com>, <arnd@arndb.de>, <rppt@kernel.org>,
-	<ardb@kernel.org>, <leitao@debian.org>, <sourabhjain@linux.ibm.com>,
-	<jbohac@suse.cz>, <cfsworks@gmail.com>, <ryan.roberts@arm.com>,
-	<tangyouling@kylinos.cn>, <ritesh.list@gmail.com>, <hbathini@linux.ibm.com>,
-	<eajames@linux.ibm.com>, <songshuaishuai@tinylab.org>,
-	<samuel.holland@sifive.com>, <kevin.brodsky@arm.com>,
-	<vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>, <coxu@redhat.com>,
-	<liaoyuanhong@vivo.com>, <brgerst@gmail.com>, <fuqiang.wang@easystack.cn>,
-	<x86@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
-	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
-	<kexec@lists.infradead.org>
-CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v7 5/5] riscv: kexec: Add support for crashkernel CMA reservation
-Date: Thu, 26 Feb 2026 21:04:37 +0800
-Message-ID: <20260226130437.1867658-6-ruanjinjie@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260226130437.1867658-1-ruanjinjie@huawei.com>
-References: <20260226130437.1867658-1-ruanjinjie@huawei.com>
+	s=arc-20240116; t=1772113266; c=relaxed/simple;
+	bh=/7MY8hy5jQlEhxj9eGiR1iRl0W6znJ9KfDclM2QxDN8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=qXcc3WWmn3s2RGTiSKQg++2EOmyLUrBWlmXnEKfEAU+ZM6x9Z4pMO3tn/rCZV7wzcB6dzi6jKVXvJ6qldNyVpHlr1DSst4akRYZDPb+9Bg2ED0Y7QJun2JjHrIXxL7IUFriKLIZKBhjWKk1BETHF653zu/3oRzXD+vOC+Ww5sUM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; arc=none smtp.client-ip=92.121.34.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+Received: from inva020.nxp.com (localhost [127.0.0.1])
+	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 05E7A1A14A6;
+	Thu, 26 Feb 2026 14:40:58 +0100 (CET)
+Received: from inva024.eu-rdc02.nxp.com (inva024.eu-rdc02.nxp.com [134.27.226.22])
+	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id EBD211A2549;
+	Thu, 26 Feb 2026 14:40:57 +0100 (CET)
+Received: from lsv15149.swis.ro-buh01.nxp.com (lsv15149.swis.ro-buh01.nxp.com [10.162.246.145])
+	by inva024.eu-rdc02.nxp.com (Postfix) with ESMTP id 3F2952035B;
+	Thu, 26 Feb 2026 14:40:56 +0100 (CET)
+From: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
+Subject: [PATCH 0/9] accel: New driver for NXP's Neutron NPU
+Date: Thu, 26 Feb 2026 15:40:39 +0200
+Message-Id: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- dggpemf500011.china.huawei.com (7.185.36.131)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFhNoGkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDIyMz3bzU0pKi/DzdZBNj01RjyxRDM/M0JaDqgqLUtMwKsEnRsbW1AOD
+ Yn/tZAAAA
+X-Change-ID: 20260226-neutron-c435e39d167f
+To: Oded Gabbay <ogabbay@kernel.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, devicetree@vger.kernel.org, imx@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, 
+ linaro-mm-sig@lists.linaro.org, Jiwei Fu <jiwei.fu@nxp.com>, 
+ Forrest Shi <xuelin.shi@nxp.com>, Alexandru Taran <alexandru.taran@nxp.com>, 
+ Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772113256; l=3577;
+ i=ruxandra.radulescu@nxp.com; s=20260204; h=from:subject:message-id;
+ bh=/7MY8hy5jQlEhxj9eGiR1iRl0W6znJ9KfDclM2QxDN8=;
+ b=XoBoTREGvNXkcj74Qdwpy1rPE9Srk5uacOSO9MTQQEa59XXxIe2u/tWgmnYx+T7BKj7G+iZtI
+ ZjQy748HLl7D6BMVVeD4pa/vQ8RKwzMN3ApPcTl7A9vLaek1BrNL4df
+X-Developer-Key: i=ruxandra.radulescu@nxp.com; a=ed25519;
+ pk=zoq4b4OYR0c4faAH97xoTxdr6vfR8OvPbS+Cx0XhIBY=
+X-Virus-Scanned: ClamAV using ClamSMTP
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [0.14 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,suse.com,infradead.org,baidu.com,arndb.de,debian.org,suse.cz,kylinos.cn,tinylab.org,sifive.com,pigmoral.tech,vivo.com,easystack.cn,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	TAGGED_FROM(0.00)[bounces-77202-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_GT_50(0.00)[62];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	TO_DN_NONE(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,nxp.com,amd.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:mid,huawei.com:dkim,huawei.com:email]
-X-Rspamd-Queue-Id: 3485C1A622A
+	TAGGED_FROM(0.00)[bounces-77203-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ruxandra.radulescu@nxp.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.992];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nxp.com:mid,nxp.com:email]
+X-Rspamd-Queue-Id: E24F01A6F2F
 X-Rspamd-Action: no action
 
-Commit 35c18f2933c5 ("Add a new optional ",cma" suffix to the
-crashkernel= command line option") and commit ab475510e042 ("kdump:
-implement reserve_crashkernel_cma") added CMA support for kdump
-crashkernel reservation. This allows the kernel to dynamically allocate
-contiguous memory for crash dumping when needed, rather than permanently
-reserving a fixed region at boot time.
+Introduce a new accel driver for the Neutron Neural Processing Unit
+(NPU), along with associated dt-bindings and DTS node.
 
-So extend crashkernel CMA reservation support to riscv. The following
-changes are made to enable CMA reservation:
+The first patch extends the GEM DMA helper APIs to allow bidirectional
+mapping of non-coherent DMA buffers. While not part of the Neutron
+driver, it's a prerequisite allowing us to use the GEM DMA helper.
 
-- Parse and obtain the CMA reservation size along with other crashkernel
-  parameters.
-- Call reserve_crashkernel_cma() to allocate the CMA region for kdump.
-- Include the CMA-reserved ranges for kdump kernel to use, which was
-  already done in of_kexec_alloc_and_setup_fdt().
-- Exclude the CMA-reserved ranges from the crash kernel memory to
-  prevent them from being exported through /proc/vmcore, which was
-  already done in the crash core.
+Neutron is a Neural Processing Unit from NXP, providing machine
+learning (ML) acceleration for edge AI applications. Neutron is
+integrated on NXP SoCs such as the i.MX95.
 
-Update kernel-parameters.txt to document CMA support for crashkernel on
-riscv architecture.
+The NPU consists of the following:
+- RISC-V core running a proprietary firmware
+- One or more Neutron cores, representing the main computation
+  engine performing ML operations
+- Dedicated fast memory (TCM)
+- DMA engine that handles data transfers between DDR and TCM
 
-Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-Acked-by: Paul Walmsley <pjw@kernel.org> # arch/riscv
-Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
+The firmware is closed source and distributed as a binary here [1].
+
+The Neutron software stack also contains a userspace library [1] and
+a LiteRT custom delegate [2] that allow integration with standard
+LiteRT tools.
+
+[1] https://github.com/nxp-upstream/neutron/tree/upstream
+[2] https://github.com/nxp-imx/tflite-neutron-delegate
+
+Signed-off-by: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
 ---
- Documentation/admin-guide/kernel-parameters.txt | 16 ++++++++--------
- arch/riscv/kernel/machine_kexec_file.c          |  2 +-
- arch/riscv/mm/init.c                            |  5 +++--
- 3 files changed, 12 insertions(+), 11 deletions(-)
+Ioana Ciocoi-Radulescu (9):
+      drm/gem-dma: Add flag for bidirectional mapping of non-coherent GEM DMA buffers
+      accel/neutron: Add documentation for NXP Neutron accelerator driver
+      dt-bindings: npu: Add bindings for NXP Neutron
+      accel/neutron: Add driver for NXP Neutron NPU
+      accel/neutron: Add GEM buffer object support
+      accel/neutron: Add mailbox support
+      accel/neutron: Add job submission IOCTL
+      accel/neutron: Add logging support
+      arm64: dts: imx95: Add Neutron node
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index afb3112510f7..3fe5724d6e39 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1121,14 +1121,14 @@ Kernel parameters
- 			It will be ignored when crashkernel=X,high is not used
- 			or memory reserved is below 4G.
- 	crashkernel=size[KMG],cma
--			[KNL, X86, ARM64, PPC] Reserve additional crash kernel memory from
--			CMA. This reservation is usable by the first system's
--			userspace memory and kernel movable allocations (memory
--			balloon, zswap). Pages allocated from this memory range
--			will not be included in the vmcore so this should not
--			be used if dumping of userspace memory is intended and
--			it has to be expected that some movable kernel pages
--			may be missing from the dump.
-+			[KNL, X86, ARM64, RISCV, PPC] Reserve additional crash
-+			kernel memory from CMA. This reservation is usable by
-+			the first system's userspace memory and kernel movable
-+			allocations (memory balloon, zswap). Pages allocated
-+			from this memory range will not be included in the vmcore
-+			so this should not be used if dumping of userspace memory
-+			is intended and it has to be expected that some movable
-+			kernel pages may be missing from the dump.
- 
- 			A standard crashkernel reservation, as described above,
- 			is still needed to hold the crash kernel and initrd.
-diff --git a/arch/riscv/kernel/machine_kexec_file.c b/arch/riscv/kernel/machine_kexec_file.c
-index d0e331d87155..297b910e4116 100644
---- a/arch/riscv/kernel/machine_kexec_file.c
-+++ b/arch/riscv/kernel/machine_kexec_file.c
-@@ -46,7 +46,7 @@ static int get_nr_ram_ranges_callback(struct resource *res, void *arg)
- 
- unsigned int arch_get_system_nr_ranges(void)
- {
--	unsigned int nr_ranges = 1; /* For exclusion of crashkernel region */
-+	unsigned int nr_ranges = 1 + crashk_cma_cnt; /* For exclusion of crashkernel region */
- 
- 	walk_system_ram_res(0, -1, &nr_ranges, get_nr_ram_ranges_callback);
- 
-diff --git a/arch/riscv/mm/init.c b/arch/riscv/mm/init.c
-index 811e03786c56..4cd49afa9077 100644
---- a/arch/riscv/mm/init.c
-+++ b/arch/riscv/mm/init.c
-@@ -1398,7 +1398,7 @@ static inline void setup_vm_final(void)
-  */
- static void __init arch_reserve_crashkernel(void)
- {
--	unsigned long long low_size = 0;
-+	unsigned long long low_size = 0, cma_size = 0;
- 	unsigned long long crash_base, crash_size;
- 	bool high = false;
- 	int ret;
-@@ -1408,11 +1408,12 @@ static void __init arch_reserve_crashkernel(void)
- 
- 	ret = parse_crashkernel(boot_command_line, memblock_phys_mem_size(),
- 				&crash_size, &crash_base,
--				&low_size, NULL, &high);
-+				&low_size, &cma_size, &high);
- 	if (ret)
- 		return;
- 
- 	reserve_crashkernel_generic(crash_size, crash_base, low_size, high);
-+	reserve_crashkernel_cma(cma_size);
- }
- 
- void __init paging_init(void)
+ Documentation/accel/index.rst                      |   1 +
+ Documentation/accel/neutron/index.rst              |  12 +
+ Documentation/accel/neutron/neutron.rst            | 131 ++++++++
+ .../devicetree/bindings/npu/nxp,imx95-neutron.yaml |  95 ++++++
+ MAINTAINERS                                        |  10 +
+ arch/arm64/boot/dts/freescale/imx95.dtsi           |  28 ++
+ drivers/accel/Kconfig                              |   1 +
+ drivers/accel/Makefile                             |   3 +-
+ drivers/accel/neutron/Kconfig                      |  16 +
+ drivers/accel/neutron/Makefile                     |  12 +
+ drivers/accel/neutron/neutron_debugfs.c            |  34 ++
+ drivers/accel/neutron/neutron_debugfs.h            |  15 +
+ drivers/accel/neutron/neutron_device.c             | 239 ++++++++++++++
+ drivers/accel/neutron/neutron_device.h             | 158 +++++++++
+ drivers/accel/neutron/neutron_driver.c             | 262 +++++++++++++++
+ drivers/accel/neutron/neutron_driver.h             |  16 +
+ drivers/accel/neutron/neutron_gem.c                | 115 +++++++
+ drivers/accel/neutron/neutron_gem.h                |  14 +
+ drivers/accel/neutron/neutron_job.c                | 367 +++++++++++++++++++++
+ drivers/accel/neutron/neutron_job.h                |  45 +++
+ drivers/accel/neutron/neutron_mailbox.c            |  47 +++
+ drivers/accel/neutron/neutron_mailbox.h            |  42 +++
+ drivers/gpu/drm/drm_gem_dma_helper.c               |   6 +-
+ include/drm/drm_gem_dma_helper.h                   |   3 +
+ include/uapi/drm/neutron_accel.h                   | 130 ++++++++
+ 25 files changed, 1799 insertions(+), 3 deletions(-)
+---
+base-commit: 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+change-id: 20260226-neutron-c435e39d167f
+
+Best regards,
 -- 
-2.34.1
+Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
 
 
