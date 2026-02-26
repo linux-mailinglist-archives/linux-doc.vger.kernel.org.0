@@ -1,113 +1,221 @@
-Return-Path: <linux-doc+bounces-77103-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77104-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4ANKImmQn2kicwQAu9opvQ
-	(envelope-from <linux-doc+bounces-77103-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:14:33 +0100
+	id qMm3K9WRn2kicwQAu9opvQ
+	(envelope-from <linux-doc+bounces-77104-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:20:37 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEC5219F52F
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:14:32 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9B7519F596
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:20:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BAEE4301E6DA
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 00:14:30 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6B086300A645
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 00:20:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF1FC13B7A3;
-	Thu, 26 Feb 2026 00:14:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3DD6316F288;
+	Thu, 26 Feb 2026 00:20:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AmJqUl2A"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0010.hostedemail.com [216.40.44.10])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6509C14BF97;
-	Thu, 26 Feb 2026 00:14:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1870B1EB5B;
+	Thu, 26 Feb 2026 00:20:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772064869; cv=none; b=UCDUrCo/8s7jKn4052Q1Ezy5B5Z+st5CL0e00xELLXkIMs/3rcyJ+IbbL4Xiya8911Iexyo8JUkIqoLWWWAOjWNOHfo3UvNlqAOURYTE3JhGK8mFkRd4zLOfCWSCY1DrhIE1vEodjAED6t/pm32tmGaDKbjYce6fa4Bw7hjdOHs=
+	t=1772065233; cv=none; b=JicTvkvj2sP41WKRMx95X6pYAomwowcB0BSmviT246xjfgZHI8s5dy8R0+isFVot7R9RQIMuOW0OxUWrs6ODme9H0HMTkLsX61CPkZwgsYlxLuL1xxe4xO5/nRCFUo7KlQv5U9GbyBjnCkZp8ImTVWVhO/wT0dFbt6/OU7qC8cM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772064869; c=relaxed/simple;
-	bh=HzgWSanUYiV8Wi6BUPvg+V46PMaO5xRpf7YcCw8co/g=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=gLKf+3j/0IGb/SnUIg+9dYniR5BPs4i/k3oZbvKZne1B759iXk5nLT1MHEkZgrE1Vpl2Z6iU5fWRLQBrbR7tNjIroEDhq2DomFWvdphQU5ikRdGwT35JeflJwtHT2PMy44e2VBXoCiJUU3uw0XbkHrijNSlCmO8R+pMvzC0G+5A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
-Received: from omf15.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay01.hostedemail.com (Postfix) with ESMTP id EEF7D1C395;
-	Thu, 26 Feb 2026 00:14:26 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf15.hostedemail.com (Postfix) with ESMTPA id 111131C;
-	Thu, 26 Feb 2026 00:14:24 +0000 (UTC)
-Date: Wed, 25 Feb 2026 19:13:42 -0500
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Shawn Lin <shawn.lin@rock-chips.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas
- <bhelgaas@google.com>, linux-rockchip@lists.infradead.org,
- linux-pci@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>
-Subject: Re: [PATCH v4 3/3] PCI: dw-rockchip: Add
- pcie_ltssm_state_transition trace support
-Message-ID: <20260225191342.6025c3b0@fedora>
-In-Reply-To: <6177ba1f-c89e-486a-fdb5-9344c6551d72@rock-chips.com>
-References: <1769047340-113287-1-git-send-email-shawn.lin@rock-chips.com>
-	<1769047340-113287-4-git-send-email-shawn.lin@rock-chips.com>
-	<20260224091115.6e32c38e@fedora>
-	<20260224091601.48a7b3c0@fedora>
-	<6177ba1f-c89e-486a-fdb5-9344c6551d72@rock-chips.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1772065233; c=relaxed/simple;
+	bh=vQ9100hika6XOwYaftLaiYtlieJs6dQvC4bVW3nQWVk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pv/l6XLCYBGPtQ8uMV/4nbqoIGLdNb62UeGCVU4y/9kIpm5ZPvOq0cYbw0A+SzMWn0Qk85O6sC5jMbAgxUmh5VRyq3Du6S0I9z9ZDW431M4swg2KeDUtU9LyKV2Qpyzsf6rfql5LelkFvICYCB4hlMe5Q5tC/ePL1EDVYSYCPFk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AmJqUl2A; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B16F2C116D0;
+	Thu, 26 Feb 2026 00:20:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772065232;
+	bh=vQ9100hika6XOwYaftLaiYtlieJs6dQvC4bVW3nQWVk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=AmJqUl2ASn6bqmwLkn5vT/0ezdEM6YnqFKJMhujeX/RXesODN1ty+Uyx/4rHlchUu
+	 F5Z2na9dABbEze/R+1f53bkshkGjLQMZMWoRLq/tE64uV2S9jNDJPp85BOlSegGhZ6
+	 ILCZpJy8e+B0PNm8/UiQAJpvUeAcJrAR2qL4GZ9Jsm1PjvS+KHkiTHEjnxAUPgKWFp
+	 R41HCj8/penECWeYWcftGUhmIOQjsV3wszAGUyftzhuxJQVlSrYSIrHfu1GusSe1dm
+	 jtKE1qeErDwm1eWvIvt2bsl4OUBS/Hd993wXVb19xLZmBJmGnjFOegHEfctd/rTtt0
+	 g991JFu0HRlew==
+Date: Thu, 26 Feb 2026 01:20:26 +0100
+From: Alejandro Colomar <alx@kernel.org>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>, Mark Brown <broonie@kernel.org>, 
+	Sasha Levin <sashal@kernel.org>, Geert Uytterhoeven <geert@linux-m68k.org>, 
+	Jacob Keller <jacob.e.keller@intel.com>, Yeking@red54.com, kuba@kernel.org, 
+	Jonathan Corbet <corbet@lwn.net>, Theodore Ts'o <tytso@mit.edu>, 
+	Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>, 
+	Dwaipayan Ray <dwaipayanray1@gmail.com>, Lukas Bulwahn <lukas.bulwahn@gmail.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, tech-board-discuss@lists.linux.dev, Andrew Lunn <andrew@lunn.ch>
+Subject: Re: [PATCH] Add short author date to Fixes tag
+Message-ID: <aZ-NVcaidg58qXEu@devuan>
+References: <aZ4_sBIy8rOUL59Q@devuan>
+ <2026022531-tightness-rare-6a14@gregkh>
+ <aZ87Z24f9HZsofGl@devuan>
+ <2026022539-commotion-huskiness-8736@gregkh>
+ <aZ9p2RMrJL1mQ10w@devuan>
+ <2026022547-confirm-upturned-a736@gregkh>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Stat-Signature: t841fxjk1mky8pmyyp9by8w3fubijr6i
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX19/dSNO991F9MDut7wN2qrCWlhj3EPOQT0=
-X-HE-Tag: 1772064864-882250
-X-HE-Meta: U2FsdGVkX1/HiYaZRW248n0xpLIre8UsQzpzQlA3Z8SuRsYMaqAOxcVzwJvTJ3A6lKPdhHrnHSQ7KFLJQTanN2tli/FRfY9H2UMvQuAc+qxEXXOtEfBHJ1OvMf/ZNpmzpqudM78kX4pPbU725KfKF5vxDNZMD2SahAo0vEofsKa+i0GboLDrsP3aZocfw2ryXHJQzIDPwBjs6KPVBtGWke+SUV6EUatV/wMP9KdfancbVedZ+1MtoxTy9o8hJNgXgxWT06yOdsrrSeH3BuHG4E9BWq8yg5/w8HysLsR9GBff+GNlps/5uf1yP9k21O/1N9u30p4wDn0Fq6q1g0QAgY4nxw3DuJ/xAdYiYQQE48uQpPhnr5dGAMlB0he5ty41
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="zubq56rjnllg3g3p"
+Content-Disposition: inline
+In-Reply-To: <2026022547-confirm-upturned-a736@gregkh>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.86 / 15.00];
+X-Spamd-Result: default: False [-2.26 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_FROM(0.00)[bounces-77103-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-77104-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	FREEMAIL_CC(0.00)[goodmis.org,kernel.org,linux-m68k.org,intel.com,red54.com,lwn.net,mit.edu,canonical.com,perches.com,gmail.com,linux-foundation.org,vger.kernel.org,lists.linux.dev,lunn.ch];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-0.996];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linux-doc@vger.kernel.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	R_DKIM_NA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[alx@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: BEC5219F52F
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,alejandro-colomar.es:url]
+X-Rspamd-Queue-Id: D9B7519F596
 X-Rspamd-Action: no action
 
-On Wed, 25 Feb 2026 09:25:16 +0800
-Shawn Lin <shawn.lin@rock-chips.com> wrote:
 
-> I must admit I borrow it from arch/powerpc/include/asm/trace.h and
-> include/trace/events/i2c.h for reference, where the reg and unreg
-> just increase and decrease the ref count to indicate if the tp
-> should be continued. Sure, the static branch could be used instead,
-> even without reg and unreg implementation.
+--zubq56rjnllg3g3p
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+From: Alejandro Colomar <alx@kernel.org>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>, Mark Brown <broonie@kernel.org>, 
+	Sasha Levin <sashal@kernel.org>, Geert Uytterhoeven <geert@linux-m68k.org>, 
+	Jacob Keller <jacob.e.keller@intel.com>, Yeking@red54.com, kuba@kernel.org, 
+	Jonathan Corbet <corbet@lwn.net>, Theodore Ts'o <tytso@mit.edu>, 
+	Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>, 
+	Dwaipayan Ray <dwaipayanray1@gmail.com>, Lukas Bulwahn <lukas.bulwahn@gmail.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, tech-board-discuss@lists.linux.dev, Andrew Lunn <andrew@lunn.ch>
+Subject: Re: [PATCH] Add short author date to Fixes tag
+Message-ID: <aZ-NVcaidg58qXEu@devuan>
+References: <aZ4_sBIy8rOUL59Q@devuan>
+ <2026022531-tightness-rare-6a14@gregkh>
+ <aZ87Z24f9HZsofGl@devuan>
+ <2026022539-commotion-huskiness-8736@gregkh>
+ <aZ9p2RMrJL1mQ10w@devuan>
+ <2026022547-confirm-upturned-a736@gregkh>
+MIME-Version: 1.0
+In-Reply-To: <2026022547-confirm-upturned-a736@gregkh>
 
-The i2c.h looks like it should be switched over to the
-trace_<tracepoint>_enabled(), but the powerpc enables a static branch
-in assembly, so that one does make sense to do it the way it did it.
+Hi Greg,
 
--- Steve
+On 2026-02-25T15:46:28-0800, Greg Kroah-Hartman wrote:
+[...]
+> > Secondarily, it helps with the ID, in case it becomes ambiguous.  But
+> > I started using it for the human part of it.
+>=20
+> Our ids are not ambiguous.  Our "problem" is people putting git ids in
+> the logs that are not valid git ids.  Just happened again today as we
+> are "human".  Putting the date in there would not help with that very
+> real problem we have today at all.
+
+It would help locate the commit it refers to.  If you have a commit
+date, you know that if it was rebased, the date can only increase.  So,
+instead of having to search exclusively by subject, you can limit your
+search to dates no older than the date from the Fixes tag.
+
+Let's say we want to locate
+
+	bogus-hash (2025-11-21; "bug: Add BUG_FORMAT_ARGS infrastructure")
+
+We can first of all check if maybe there's a typo in the hash (maybe
+the first character is missing, due to a cut/paste accident).
+
+	$ git log --oneline --before 2025-11-22 --after 2025-11-20 \
+	| grep BUG_FORMAT_ARGS;
+	5c47b7f3d1a9 bug: Add BUG_FORMAT_ARGS infrastructure
+
+But even if the date was wrong.  Let's say someone used a reference to
+a commit that got rebased a year later, as the case you stated.
+
+	old-hash (2025-01-21; "bug: Add BUG_FORMAT_ARGS infrastructure")
+
+We can search by date something that looks similar.  We know the date
+can't be older than that, if it wasrebased.
+
+	$ git log --oneline --after 2025-11-20 | grep infrastructure
+	cb2dc6d2869a can: Kconfig: select CAN driver infrastructure by default
+	93d7a7ed0734 netfilter: flowtable: move path discovery infrastructure to i=
+ts own file
+	23343b6b09ac sched/mmcid: Introduce per task/CPU ownership infrastructure
+	775465fd26a3 lib/test_hmm: add zone device private THP test infrastructure
+	99e4e1028337 RDMA/bng_re: Add basic debugfs infrastructure
+	4f830cd8d7fe RDMA/bng_re: Add infrastructure for enabling Firmware channel
+	5c47b7f3d1a9 bug: Add BUG_FORMAT_ARGS infrastructure
+	d292dbb5640c bug: Add BUG_FORMAT infrastructure
+
+So, we'd start looking at the tail of that list (assuming the rebase was
+close to the commit date), and depart from that as necessary.  In this
+case, we find it as the second commit.
+
+On the other hand, if you have no date, you must look at the entire
+git-log(1), which is a lot more work.
+
+> thanks,
+>=20
+> greg k-h
+
+Have a lovely night!
+Alex
+
+--=20
+<https://www.alejandro-colomar.es>
+
+--zubq56rjnllg3g3p
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEES7Jt9u9GbmlWADAi64mZXMKQwqkFAmmfkb4ACgkQ64mZXMKQ
+wqkHcw//b0sPsO3GJVOzCienU9HT8eFzJL6b2B0uwuium6S0m5HcmtXYdQ2YIDIv
+b5c6ykDVOcbSzWN9aFraxFLu0oUKxr70jFb1W0YmMbJbXF0frzrmTAkjyr+kaFXh
+WBW+AUcPYbiywxBiT37p8bNut2giQGcx2N0rwwiFMqP+NTNAsxww/0rJDWVJVQim
+hOhTFGnHxHQJvgGJQOpnfFmB0HPRiYGR/Hze2n10fjjCEUh0k4fkzznhTeY1tsgN
+kTZVePf7ZERMAXeHE2WKMXqMgFEdxBNRTkYtmZxUHv7FcJtp9OIs2aDhOwwe+vAh
+NkXNuuNZzETsakhW5tswt5HPbt9DescVN7uU1VLAUQw268dRuuxeRBUPb0AJERYr
+SNGUH5QnWcXOE247iSXCdkBcyEO72txtb3iFmEK1ydgZFhaKGWH0eKP2GE7GGKAV
+O669xQsf6GXHJqoUlO3CH3sHjnKpMU9G0TdKRNrV3KYdZW5qG3v2ZK/xle8V6gjy
+woZDITVtsBZ7BGKWlGXlFJ720OnfnZ5dV54RPjPdCAE2PPovxznITko9Q00ih9b+
+K2a5eDJJLFqmFSXWL0WYfi2eyJCtmUkMKxIo2CRDcnZ/Gza8JuHoSwry4kh8D+5L
+9jQe7Pv5xuAVTWOITDVdmbK+5K5yatbB9pApo0nNi7OxhmltNrg=
+=qO8H
+-----END PGP SIGNATURE-----
+
+--zubq56rjnllg3g3p--
 
