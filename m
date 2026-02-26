@@ -1,207 +1,655 @@
-Return-Path: <linux-doc+bounces-77158-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77154-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8IXHHOfzn2kyfAQAu9opvQ
-	(envelope-from <linux-doc+bounces-77158-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 08:19:03 +0100
+	id 6NL9GWzwn2kyfAQAu9opvQ
+	(envelope-from <linux-doc+bounces-77154-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 08:04:12 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E40721A1BF0
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 08:19:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFD3F1A1932
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 08:04:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B7C423014698
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 07:19:00 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AA64630698FE
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 07:02:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B3B536215A;
-	Thu, 26 Feb 2026 07:18:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 338C438BF9C;
+	Thu, 26 Feb 2026 07:02:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iaT6n/0f"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gdta/EM5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aCDSWfb7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D05D2EB5BA;
-	Thu, 26 Feb 2026 07:18:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772090338; cv=none; b=V8XmkPTnmXQllaBipjvrXEQaro0ZpjMxXEZeG4S7SpP3ye6IrLtlFAbNbDNY1QD1aZkXoMjp66P1Wdsfznu2VFsNRNDXF3r30VO5VTNZtGgdcSSqBpKDecCYj7YQ9ejDsZDu7yzkqeS+4Ck3V94/F66LJYxz5DJXZxELvsRUzZs=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772090338; c=relaxed/simple;
-	bh=rVWWGoLzfnEr4YZDjcPykaqYCDvmIZeFsihBUzb3/3w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jUwrEEeTTMt5cWOqK007c1vmqtNp5HMu5DTXAuo4PP0D4adEoP3X9A2E1bHtbLNtXDVIWaKjknuP3ETcA/sG6As1FrqtLEsrlYk1duc5eJA9pElsngNqxSfUJw3++XCX/29Ke1Jkqr7Tt9PBLq0PrvB/GO/JFok3FmzGqGOTeOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=iaT6n/0f; arc=none smtp.client-ip=192.198.163.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1772090336; x=1803626336;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=rVWWGoLzfnEr4YZDjcPykaqYCDvmIZeFsihBUzb3/3w=;
-  b=iaT6n/0fVlopl97mA648y131clFvguPXVEnFnVy+JDuG04NNkYIsYD9C
-   4n/oIG4pGU1kqc7uGk0VVwx92MetDchbCt0L5Me3Zlq/n//HaSXGMCCqA
-   7yuwgryS4ugBH2qCspNuWdjI00oBMNuwvmiv953rb4WlEPQvh4aD/oiRW
-   KJLS8pVvb0dRk+FY5zXBeYKcQzqBySEFx6oBS3IqzAE05ywuC1kizCO0m
-   D6ET+5lYBO9qSeZUKnUlcr9SpdOBR1zbQrJEfr2kVfK6yavYqTQ0dz/AC
-   2pFqk4Sdh/t2egxxmPyiDyUgarblvOxmLXAslLSMRH9wpDJjh4roRgHeH
-   Q==;
-X-CSE-ConnectionGUID: kIgSWHIKTpeDTZiUT4cvuA==
-X-CSE-MsgGUID: V/f+evVxQZWSOPYsJPrgzw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11712"; a="72354094"
-X-IronPort-AV: E=Sophos;i="6.21,311,1763452800"; 
-   d="scan'208";a="72354094"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Feb 2026 23:18:55 -0800
-X-CSE-ConnectionGUID: tzLjy4iLShKJpLYq/aCM9w==
-X-CSE-MsgGUID: ZC3eU4WWRpiXnwMax+3VUg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,311,1763452800"; 
-   d="scan'208";a="220617388"
-Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
-  by orviesa003.jf.intel.com with ESMTP; 25 Feb 2026 23:18:46 -0800
-Date: Thu, 26 Feb 2026 14:59:12 +0800
-From: Xu Yilun <yilun.xu@linux.intel.com>
-To: Peter Colberg <pcolberg@redhat.com>
-Cc: Danilo Krummrich <dakr@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
-	=?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Dave Ertman <david.m.ertman@intel.com>,
-	Ira Weiny <ira.weiny@intel.com>, Leon Romanovsky <leon@kernel.org>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>, Xu Yilun <yilun.xu@intel.com>,
-	Tom Rix <trix@redhat.com>, Moritz Fischer <mdf@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>, linux-pci@vger.kernel.org,
-	rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Alistair Popple <apopple@nvidia.com>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	John Hubbard <jhubbard@nvidia.com>, Zhi Wang <zhiw@nvidia.com>,
-	nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org, linux-fpga@vger.kernel.org,
-	driver-core@lists.linux.dev, Jason Gunthorpe <jgg@ziepe.ca>
-Subject: Re: [PATCH v2 02/10] fpga: dfl-pci: set driver flag to disable
- SR-IOV on remove()
-Message-ID: <aZ/vQHV3zr49r7E+@yilunxu-OptiPlex-7050>
-References: <20260205-rust-pci-sriov-v2-0-ef9400c7767b@redhat.com>
- <20260205-rust-pci-sriov-v2-2-ef9400c7767b@redhat.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 918262D7DD5
+	for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 07:02:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1772089323; cv=pass; b=ULOohEpFLBaRYxKHfwqmbOl4fJdxdO82ryyYzhqEjDvI+tKjIklYg8gM0Uniwz3soRyvlBeHPpxaSfRkT1hCjENUcKMWPtjkq1V0kxn+zO//GsBWAVlArvAA4nFlR66YRizh9HzdWWxEgFqNGPDEfm/JxVfv4+UgJzp0mIHUdsg=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1772089323; c=relaxed/simple;
+	bh=kZ4LwUnvC2DyZr1N00c+azhtmALaEsS/mIV7Pkmnonw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=UkoEPOtLfAph5xD2SwkACDK6L9lwRherNwCuN1subKuF856thzltxZ3edA3U5RrmN3ABi2F7J481CsUcMXOojmY3OKTff+nJBxCX+mjlYjVwish0l3h+zqaDzK6UvkIr3XxzoTI4qf5d+1Ux6yFSWW9ZVFZfbb3kmdxer9fLUMI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gdta/EM5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aCDSWfb7; arc=pass smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61Q4UvFI3493279
+	for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 07:02:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	PuwrpYHKTq+yUBpseafFLTw4rFPjcM9QQ+vB3eBHFCU=; b=gdta/EM5CvQGlG0K
+	ut6mwjp8R1yuSSizLf5WFvAjSRpdaMukUrXqxJJes+U/SpXDCAE10KgwTLo+9ZiB
+	NbLHwEMra7xF65M6dLb/5BO7zvqALTGPK2pakphfiLY9NHn5pcr0cP0+dI3DM8o6
+	xACP7BVCih/hWaDHA2Q00eZJT/WzOyYcQ7lEdW4q4WFv42S7lObaOxmSqJP9MMo8
+	tncgQtI7VfJg5pCCXTO37YVSdnHm0XEsCgGRTetRuTg7+0hiJyHteVEecZf1KHNU
+	o82ZwnM7/3DuktbaVBSpo3qn+tdFL1PUTl0TBYmouZsnmZjSL2pSi5Lj1Bbf6FRX
+	28R1ZA==
+Received: from mail-oo1-f69.google.com (mail-oo1-f69.google.com [209.85.161.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cj8bd9e0u-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Thu, 26 Feb 2026 07:02:00 +0000 (GMT)
+Received: by mail-oo1-f69.google.com with SMTP id 006d021491bc7-679dda090fbso12839522eaf.2
+        for <linux-doc@vger.kernel.org>; Wed, 25 Feb 2026 23:02:00 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772089320; cv=none;
+        d=google.com; s=arc-20240605;
+        b=iFNINi7tihS1jQZxnnHwKCnab7dZ9ok73AjIi4ODDP6vAgOmfAiQdYT2ih+WpYEnGN
+         02GB4RxUKii+91XWm2t7Zi8/dxRcEtk09YPT3p/GB+G9WI2bXdjUm2TASiGHuXb762c5
+         25mYJe6qxKCyowywUfmkT7s41fEsGbiUhpneuy57FELeDpMPsffhpa6JuNzloQXER7fk
+         zuiLzJHERxOVUux2/2zSY1D3VPHmy2RufGSuSqlR9muzRqo8QEMokuTL1HrHmhGsKllO
+         /g4U0nObr6yZnAnKhuKq0joYHpVbvMG2FaPYZlpnytaDd/UoWfT/HlkxtMD3+OlkzH8l
+         +Zkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=PuwrpYHKTq+yUBpseafFLTw4rFPjcM9QQ+vB3eBHFCU=;
+        fh=F3fSqE92Pp0iU3XKfBc9TdAWVqUaIK8+q6ANRzOAC5E=;
+        b=bOfqqr26m7+zDljdIaJQMgXi38CU03g2Rsnbvg8PT4ER3QyeNkgrmw4s3M8uzXew9a
+         wW9N39rllh5xbc+E8E5kjKAER02n0PtlOdzNkkELH2+NW3BwwbqXUHwZWk2uUsvvkeCx
+         WeIsxbO7F1WqtDfvx6tZglxoyCLNXay+/cGBu+6lR8tT3v/nrSKhO40p6N0VOyoJh3Kc
+         jbXdcT03rlXlSGsG6Gc5YIFZxay+/xXiHWnqdk1eB8TMKQ3S6P1vNC2DXKS4InGUsKXs
+         WWIzG4f2JpraX1P4LvfBnWyES/Oh/x12SG/e9wo8aFgEklXHOzb1aGezJQ6IP77CmTi/
+         3v0A==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1772089320; x=1772694120; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PuwrpYHKTq+yUBpseafFLTw4rFPjcM9QQ+vB3eBHFCU=;
+        b=aCDSWfb7EoCDTbOaQTIj7l6TycP+iIVMk1UmPwcgVzKkVWZZJjjVV0Bj2RIM9v+Kma
+         hY9UtINOX+AAg6tFo/Xf7oRNcBlq2EdmXbfjjBO0Qb8/KntkVgwrl1L0v2u+G6wYwU5G
+         +nW1Q8ybWiV4m+PPZcYPcP4iSXp3bu/RhXEDEFn2SLSwkMWbi+1RYYcJYYTPrmUjmJJG
+         7xBrRAgvDghYp8g7XjLL7znO9qw+DDdbPZ9lESyOA0N5wiQ+rNigcZV/xKbd0Y0dCluJ
+         3obOc7FRrKoKkERHyH+k6gfeo3b2bdOFHrdhjXsRkcsOYU4y7yHiI2y97eEud5BSIB47
+         R9+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772089320; x=1772694120;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=PuwrpYHKTq+yUBpseafFLTw4rFPjcM9QQ+vB3eBHFCU=;
+        b=IuANnr6BpgFLm6p3jRX1Dk4TboBntEZr976CaWAXOLZC9MxQ+CaZ2BA8DpaQq/RSgN
+         S/FU55mgEsGfpM5Y6U0hCgxssN1EoHNsikXBeaD3HDCMU1ws2WY9zbPCvB3eoVSJENSF
+         APlltdSk1KzzUZKd2sTTI1hZMPscaGfAgAxG8KrUtuvSOVOZMbHzHnUJpGt7aEV9qPX7
+         HHJb8hoGnX0g9tXwr4TsOj7IEUucba/kDwHDRYUwK+tGGJDIN3xwd5Uza5zGZl+ennFn
+         01h4VDxnTigbn3iDH3IgrQ7CS3vIIAqVQQNS5dRbTpGFnZea6dUSVrPohJneyYeC2uaC
+         BlxA==
+X-Forwarded-Encrypted: i=1; AJvYcCVO0aDekWLRotbxIFMmjycm8cPTh2O/ZidBvG31Mzj+nnt1zxW4hAdKk7GFZ0dwFnepTajWZ/95Tt0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxOgdOxniux95U43FRodGL5TNzsQ8V3xnEHZ67gNvgsjyj3uzhM
+	RPSU0j2taTQEeS9SfOk859FLR3oh2wqRdWMoKHju2k7lqz4MvUxB6HnVDDR7TwojQlNKJ7dgLuf
+	VLFPhXcDcujdtkocwMMSYLPD3udwvZjzDKUWJwlANZels+gQ1Dm7hXe6P0DgLBbimDrvUMneIa1
+	Rz7jWwRtAEjXfOuRJVIL+rQJuZAAo8mLEDlN5t4Q==
+X-Gm-Gg: ATEYQzwXK/+QQi+ymufIzoBToaRdw8kiCy1W7t3Q411lWeOndUgJNoAKoli0SEM764c
+	5JGfMmpNN2n46Bs7cHSi2dRhcWflLufmz2FFxOS5T1O87jZhg07AMO1gmrLpeMbrnX03xXg/me6
+	C7xMk4Gvr1ml0jG2dr7vIo1UWNKT91yavBLlOV+9FWptzrcgm2fWUdq3UQSE1Ska/qZbEBmfAk2
+	aHqz5Y=
+X-Received: by 2002:a05:6820:1620:b0:662:ff03:c213 with SMTP id 006d021491bc7-679ef989c63mr1389656eaf.61.1772089319783;
+        Wed, 25 Feb 2026 23:01:59 -0800 (PST)
+X-Received: by 2002:a05:6820:1620:b0:662:ff03:c213 with SMTP id
+ 006d021491bc7-679ef989c63mr1389647eaf.61.1772089319185; Wed, 25 Feb 2026
+ 23:01:59 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260205-rust-pci-sriov-v2-2-ef9400c7767b@redhat.com>
+References: <20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-0-347fa2d7351b@arm.com>
+ <20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-11-347fa2d7351b@arm.com>
+In-Reply-To: <20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-11-347fa2d7351b@arm.com>
+From: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
+Date: Thu, 26 Feb 2026 12:31:46 +0530
+X-Gm-Features: AaiRm50IC1HsOl6QMRXAOVKf4_ryi0l229YCdeA9iFVtyFNBsgVnkGuVYYlysYg
+Message-ID: <CA+Ht8=bj_5UDYmHrdp5s+1e3amO7ErPm-K28Wog2y3+j4PtjNw@mail.gmail.com>
+Subject: Re: [PATCH v2 11/11] RAS: add DeviceTree firmware-first CPER provider
+To: Ahmed Tiba <ahmed.tiba@arm.com>
+Cc: devicetree@vger.kernel.org, linux-acpi@vger.kernel.org,
+        Dmitry.Lamerov@arm.com, catalin.marinas@arm.com, bp@alien8.de,
+        robh@kernel.org, rafael@kernel.org, will@kernel.org, conor@kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        krzk+dt@kernel.org, Michael.Zhao2@arm.com, tony.luck@intel.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=FKQWBuos c=1 sm=1 tr=0 ts=699fefe8 cx=c_pps
+ a=lVi5GcDxkcJcfCmEjVJoaw==:117 a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yOCtJkima9RkubShWh1s:22 a=7CQSdrXTAAAA:8 a=QyXUC8HyAAAA:8
+ a=0_E0fn6IqdgZwImqbKcA:9 a=QEXdDO2ut3YA:10 a=rBiNkAWo9uy_4UTK5NWh:22
+ a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-GUID: EeWrK5BxWpVzFx2lW3rzCEtUbYImIUR0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI2MDA2MSBTYWx0ZWRfXxJkxXmcPE/Rx
+ EWY+p4aC5dhPN7+YMKqHLNBZtmetkpLtHI/7QGxrrmPWA8FGXPA1Nzdm4ASPRPF8fyNXvJaw8tg
+ 2lWIn6usIfKSvoE8lwUOphSQzVuVol2Ih3fX1HyNKnxx1jZ6Y4Zf/uDH4Vx4sMjY+iRofN3zc8g
+ 1k8T/kLLDWL/yXlfWF+n4l4yKMnFTMnzK3yxW1qT2ZM4yR+dUKIOFIYbdJbyOvS/HutcpIkJYvX
+ g4BwZdlV0xgmO5xG1ofgn5MqkkzC1DEwrpaex4cXJdFH/swvrQAti7sfXYFHN3HwzJoWH7YAZMQ
+ ISeMH6b43ceRPmkh99caHlNVsPqzgBpYx+g9reX9xdjZJL2PGNfCD7kSsumh4tWAZs0YwTwvmLn
+ WaEPzuS0udY3bp9KfJAVD82E3l7AzbLdibuCJOzNXB/ALZzpEmWZFQi4HWi70k19A5HT9AtgtX+
+ p8J6Q1O7ax0a5GY80Zg==
+X-Proofpoint-ORIG-GUID: EeWrK5BxWpVzFx2lW3rzCEtUbYImIUR0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-25_04,2026-02-25_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 clxscore=1015 malwarescore=0 bulkscore=0 phishscore=0
+ lowpriorityscore=0 spamscore=0 suspectscore=0 priorityscore=1501
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2602130000
+ definitions=main-2602260061
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77158-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[41];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,collabora.com,arm.com,linuxfoundation.org,intel.com,ffwll.ch,lwn.net,redhat.com,vger.kernel.org,nvidia.com,lists.freedesktop.org,lists.linux.dev,ziepe.ca];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77154-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yilun.xu@linux.intel.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[intel.com:+];
-	NEURAL_HAM(-0.00)[-0.996];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:dkim]
-X-Rspamd-Queue-Id: E40721A1BF0
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[himanshu.chauhan@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	NEURAL_HAM(-0.00)[-0.999];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,arm.com:email,qualcomm.com:dkim,oss.qualcomm.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:email]
+X-Rspamd-Queue-Id: DFD3F1A1932
 X-Rspamd-Action: no action
 
-On Thu, Feb 05, 2026 at 03:59:49PM -0500, Peter Colberg wrote:
-> Set the flag managed_sriov in the pci_driver structure to show how a
-> PCI driver may opt into disabling the Single Root I/O Virtualization
-> (SR-IOV) capability of the device when the driver is removed.
-> 
-> Merge the function cci_remove_feature_devs() into cci_pci_remove().
-
-I think it makes much clearer demonstration if you split the unrelated
-changes out.
-
-> 
-> Signed-off-by: Peter Colberg <pcolberg@redhat.com>
+On Fri, Feb 20, 2026 at 7:13=E2=80=AFPM Ahmed Tiba <ahmed.tiba@arm.com> wro=
+te:
+>
+> Add a DeviceTree firmware-first CPER provider that reuses the shared
+> GHES helpers, wire it into the RAS Kconfig/Makefile and document it in
+> the admin guide. Update MAINTAINERS now that the driver exists.
+>
+> Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com>
 > ---
-> Changes in v2:
-> - Demonstrate flag managed_sriov for dfl-pci driver.
-> ---
->  drivers/fpga/dfl-pci.c | 17 +++++------------
->  1 file changed, 5 insertions(+), 12 deletions(-)
-> 
-> diff --git a/drivers/fpga/dfl-pci.c b/drivers/fpga/dfl-pci.c
-> index 602807d6afcc09af9e1d53368b41460ef86545d8..7965c307f9b79bdd2c2c3277d519ab2c4e701797 100644
-> --- a/drivers/fpga/dfl-pci.c
-> +++ b/drivers/fpga/dfl-pci.c
-> @@ -125,15 +125,6 @@ static int cci_init_drvdata(struct pci_dev *pcidev)
->  	return 0;
->  }
->  
-> -static void cci_remove_feature_devs(struct pci_dev *pcidev)
+>  Documentation/admin-guide/RAS/main.rst |  18 +++
+>  MAINTAINERS                            |   1 +
+>  drivers/acpi/apei/apei-internal.h      |  10 +-
+>  drivers/acpi/apei/ghes_cper.c          |   2 +
+>  drivers/ras/Kconfig                    |  12 ++
+>  drivers/ras/Makefile                   |   1 +
+>  drivers/ras/esource-dt.c               | 264 +++++++++++++++++++++++++++=
+++++++
+>  include/acpi/ghes_cper.h               |   9 ++
+>  8 files changed, 308 insertions(+), 9 deletions(-)
+>
+> diff --git a/Documentation/admin-guide/RAS/main.rst b/Documentation/admin=
+-guide/RAS/main.rst
+> index 5a45db32c49b..4ffabaaeabb1 100644
+> --- a/Documentation/admin-guide/RAS/main.rst
+> +++ b/Documentation/admin-guide/RAS/main.rst
+> @@ -205,6 +205,24 @@ Architecture (MCA)\ [#f3]_.
+>  .. [#f3] For more details about the Machine Check Architecture (MCA),
+>    please read Documentation/arch/x86/x86_64/machinecheck.rst at the Kern=
+el tree.
+>
+> +Firmware-first CPER via DeviceTree
+> +----------------------------------
+> +
+> +Some systems expose Common Platform Error Record (CPER) data
+> +via DeviceTree instead of ACPI HEST tables.
+> +Enable ``CONFIG_RAS_ESOURCE_DT`` to build the ``drivers/ras/esource-dt.c=
+``
+> +driver and describe the CPER error source buffer with the
+> +``Documentation/devicetree/bindings/firmware/arm,ras-ffh.yaml`` binding.
+> +The driver reuses the GHES CPER helper object in
+> +``drivers/acpi/apei/ghes_cper.c`` so the logging, notifier chains, and
+> +memory failure handling match the ACPI GHES behaviour even when
+> +ACPI is disabled.
+> +
+> +Once a platform describes a firmware-first provider, both ACPI GHES and =
+the
+> +DeviceTree driver reuse the same code paths. This keeps the behaviour
+> +consistent regardless of whether the error source is described via ACPI
+> +tables or DeviceTree.
+> +
+>  EDAC - Error Detection And Correction
+>  *************************************
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 47db7877b485..fa6113b482b7 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -22031,6 +22031,7 @@ RAS ERROR STATUS
+>  M:     Ahmed Tiba <ahmed.tiba@arm.com>
+>  S:     Maintained
+>  F:     Documentation/devicetree/bindings/firmware/arm,ras-ffh.yaml
+> +F:     drivers/ras/esource-dt.c
+>
+>  RAS INFRASTRUCTURE
+>  M:     Tony Luck <tony.luck@intel.com>
+> diff --git a/drivers/acpi/apei/apei-internal.h b/drivers/acpi/apei/apei-i=
+nternal.h
+> index 77c10a7a7a9f..c16ac541f15b 100644
+> --- a/drivers/acpi/apei/apei-internal.h
+> +++ b/drivers/acpi/apei/apei-internal.h
+> @@ -8,6 +8,7 @@
+>  #define APEI_INTERNAL_H
+>
+>  #include <linux/acpi.h>
+> +#include <acpi/ghes_cper.h>
+>
+>  struct apei_exec_context;
+>
+> @@ -120,15 +121,6 @@ int apei_exec_collect_resources(struct apei_exec_con=
+text *ctx,
+>  struct dentry;
+>  struct dentry *apei_get_debugfs_dir(void);
+>
+> -static inline u32 cper_estatus_len(struct acpi_hest_generic_status *esta=
+tus)
 > -{
-> -	struct cci_drvdata *drvdata = pci_get_drvdata(pcidev);
-> -
-> -	/* remove all children feature devices */
-> -	dfl_fpga_feature_devs_remove(drvdata->cdev);
-> -	cci_pci_free_irq(pcidev);
+> -       if (estatus->raw_data_length)
+> -               return estatus->raw_data_offset + \
+> -                       estatus->raw_data_length;
+> -       else
+> -               return sizeof(*estatus) + estatus->data_length;
 > -}
 > -
->  static int *cci_pci_create_irq_table(struct pci_dev *pcidev, unsigned int nvec)
->  {
->  	unsigned int i;
-> @@ -425,10 +416,11 @@ static int cci_pci_sriov_configure(struct pci_dev *pcidev, int num_vfs)
->  
->  static void cci_pci_remove(struct pci_dev *pcidev)
->  {
-> -	if (dev_is_pf(&pcidev->dev))
-> -		cci_pci_sriov_configure(pcidev, 0);
-> +	struct cci_drvdata *drvdata = pci_get_drvdata(pcidev);
->  
-> -	cci_remove_feature_devs(pcidev);
-> +	/* remove all children feature devices */
-> +	dfl_fpga_feature_devs_remove(drvdata->cdev);
-> +	cci_pci_free_irq(pcidev);
+>  int apei_osc_setup(void);
+>
+>  int einj_get_available_error_type(u32 *type, int einj_action);
+> diff --git a/drivers/acpi/apei/ghes_cper.c b/drivers/acpi/apei/ghes_cper.=
+c
+> index 29b790160e91..9b2d1b8cf9f4 100644
+> --- a/drivers/acpi/apei/ghes_cper.c
+> +++ b/drivers/acpi/apei/ghes_cper.c
+> @@ -42,7 +42,9 @@
+>  #include <asm/fixmap.h>
+>  #include <asm/tlbflush.h>
+>
+> +#ifdef CONFIG_ACPI_APEI
+>  #include "apei-internal.h"
+> +#endif
+>
+>  ATOMIC_NOTIFIER_HEAD(ghes_report_chain);
+>
+> diff --git a/drivers/ras/Kconfig b/drivers/ras/Kconfig
+> index fc4f4bb94a4c..ea6d96713020 100644
+> --- a/drivers/ras/Kconfig
+> +++ b/drivers/ras/Kconfig
+> @@ -34,6 +34,18 @@ if RAS
+>  source "arch/x86/ras/Kconfig"
+>  source "drivers/ras/amd/atl/Kconfig"
+>
+> +config RAS_ESOURCE_DT
+> +       bool "DeviceTree firmware-first CPER error source block provider"
+> +       depends on OF
+> +       depends on ARM64
+> +       select GHES_CPER_HELPERS
+> +       help
+> +         Enable support for firmware-first Common Platform Error Record =
+(CPER)
+> +         error source block providers that are described via DeviceTree
+> +         instead of ACPI HEST tables. The driver reuses the existing GHE=
+S
+> +         CPER helpers so the error processing matches the ACPI code path=
+s,
+> +         but it can be built even when ACPI is disabled.
+> +
+>  config RAS_FMPM
+>         tristate "FRU Memory Poison Manager"
+>         default m
+> diff --git a/drivers/ras/Makefile b/drivers/ras/Makefile
+> index 11f95d59d397..53558a1707b3 100644
+> --- a/drivers/ras/Makefile
+> +++ b/drivers/ras/Makefile
+> @@ -2,6 +2,7 @@
+>  obj-$(CONFIG_RAS)      +=3D ras.o
+>  obj-$(CONFIG_DEBUG_FS) +=3D debugfs.o
+>  obj-$(CONFIG_RAS_CEC)  +=3D cec.o
+> +obj-$(CONFIG_RAS_ESOURCE_DT)   +=3D esource-dt.o
+>
+>  obj-$(CONFIG_RAS_FMPM) +=3D amd/fmpm.o
+>  obj-y                  +=3D amd/atl/
+> diff --git a/drivers/ras/esource-dt.c b/drivers/ras/esource-dt.c
+> new file mode 100644
+> index 000000000000..b575a2258536
+> --- /dev/null
+> +++ b/drivers/ras/esource-dt.c
+> @@ -0,0 +1,264 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * DeviceTree provider for firmware-first CPER error source block.
+> + *
+> + * This driver shares the GHES CPER helpers so we keep the reporting and
+> + * notifier behaviour identical to ACPI GHES
+> + *
+> + * Copyright (C) 2025 ARM Ltd.
+> + * Author: Ahmed Tiba <ahmed.tiba@arm.com>
+> + */
+> +
+> +#include <linux/atomic.h>
+> +#include <linux/bitops.h>
+> +#include <linux/device.h>
+> +#include <linux/interrupt.h>
+> +#include <linux/io.h>
+> +#include <linux/io-64-nonatomic-lo-hi.h>
+> +#include <linux/module.h>
+> +#include <linux/of_address.h>
+> +#include <linux/of_irq.h>
+> +#include <linux/panic.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/slab.h>
+> +#include <linux/spinlock.h>
+> +
+> +#include <acpi/ghes.h>
+> +#include <acpi/ghes_cper.h>
+> +
+> +static atomic_t ghes_ffh_source_ids =3D ATOMIC_INIT(0);
+> +
+> +struct ghes_ffh_ack {
+> +       void __iomem *addr;
+> +       u64 preserve;
+> +       u64 set;
+> +       u8 width;
+> +       bool present;
+> +};
+
+Please don't use ffh. FFH stands for Fixed Feature Hardware. This is
+making it confusing. As per ACPI specification, FFH can be used to
+register read/write while handling errors.
+I have started feeling that all this churn should be avoided. All the
+GHES code is also being moved in the name of CPER helpers.
+
+> +
+> +struct ghes_ffh {
+> +       struct device *dev;
+> +       void __iomem *status;
+> +       size_t status_len;
+> +
+> +       struct ghes_ffh_ack ack;
+> +
+> +       struct acpi_hest_generic *generic;
+> +       struct acpi_hest_generic_status *estatus;
+> +
+> +       bool sync;
+> +       int irq;
+> +
+> +       /* Serializes access to the firmware-owned buffer. */
+> +       spinlock_t lock;
+> +};
+> +
+> +static int ghes_ffh_init_pool(void)
+> +{
+> +       if (ghes_estatus_pool)
+> +               return 0;
+> +
+> +       return ghes_estatus_pool_init(1);
+> +}
+> +
+> +static int ghes_ffh_copy_status(struct ghes_ffh *ctx)
+> +{
+> +       memcpy_fromio(ctx->estatus, ctx->status, ctx->status_len);
+> +       return 0;
+> +}
+> +
+> +static void ghes_ffh_ack(struct ghes_ffh *ctx)
+> +{
+> +       u64 val;
+> +
+> +       if (!ctx->ack.present)
+> +               return;
+> +
+> +       if (ctx->ack.width =3D=3D 64) {
+> +               val =3D readq(ctx->ack.addr);
+> +               val &=3D ctx->ack.preserve;
+> +               val |=3D ctx->ack.set;
+> +               writeq(val, ctx->ack.addr);
+> +       } else {
+> +               val =3D readl(ctx->ack.addr);
+> +               val &=3D (u32)ctx->ack.preserve;
+> +               val |=3D (u32)ctx->ack.set;
+> +               writel(val, ctx->ack.addr);
+> +       }
+> +}
+> +
+> +static void ghes_ffh_fatal(struct ghes_ffh *ctx)
+> +{
+> +       __ghes_print_estatus(KERN_EMERG, ctx->generic, ctx->estatus);
+> +       add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+> +       panic("GHES: fatal firmware-first CPER record from %s\n",
+> +             dev_name(ctx->dev));
+> +}
+> +
+> +static void ghes_ffh_process(struct ghes_ffh *ctx)
+> +{
+> +       unsigned long flags;
+> +       int sev;
+> +
+> +       spin_lock_irqsave(&ctx->lock, flags);
+> +
+> +       if (ghes_ffh_copy_status(ctx))
+> +               goto out;
+> +
+> +       sev =3D ghes_severity(ctx->estatus->error_severity);
+> +       if (sev >=3D GHES_SEV_PANIC)
+> +               ghes_ffh_fatal(ctx);
+> +
+> +       if (!ghes_estatus_cached(ctx->estatus)) {
+> +               if (ghes_print_estatus(NULL, ctx->generic, ctx->estatus))
+> +                       ghes_estatus_cache_add(ctx->generic, ctx->estatus=
+);
+> +       }
+> +
+> +       ghes_cper_handle_status(ctx->dev, ctx->generic, ctx->estatus, ctx=
+->sync);
+> +
+> +       ghes_ffh_ack(ctx);
+> +
+> +out:
+> +       spin_unlock_irqrestore(&ctx->lock, flags);
+> +}
+> +
+> +static irqreturn_t ghes_ffh_irq(int irq, void *data)
+> +{
+> +       struct ghes_ffh *ctx =3D data;
+> +
+> +       ghes_ffh_process(ctx);
+> +
+> +       return IRQ_HANDLED;
+> +}
+> +
+> +static int ghes_ffh_init_ack(struct platform_device *pdev,
+> +                            struct ghes_ffh *ctx)
+> +{
+> +       struct resource *res;
+> +       size_t size;
+> +
+> +       res =3D platform_get_resource(pdev, IORESOURCE_MEM, 1);
+> +       if (!res)
+> +               return 0;
+> +
+> +       ctx->ack.addr =3D devm_ioremap_resource(&pdev->dev, res);
+> +       if (IS_ERR(ctx->ack.addr))
+> +               return PTR_ERR(ctx->ack.addr);
+> +
+> +       size =3D resource_size(res);
+> +       switch (size) {
+> +       case 4:
+> +               ctx->ack.width =3D 32;
+> +               ctx->ack.preserve =3D ~0U;
+> +               break;
+> +       case 8:
+> +               ctx->ack.width =3D 64;
+> +               ctx->ack.preserve =3D ~0ULL;
+> +               break;
+> +       default:
+> +               dev_err(&pdev->dev, "Unsupported ack resource size %zu\n"=
+, size);
+> +               return -EINVAL;
+> +       }
+> +
+> +       ctx->ack.set =3D BIT_ULL(0);
+> +       ctx->ack.present =3D true;
+> +       return 0;
+> +}
+> +
+> +static int ghes_ffh_probe(struct platform_device *pdev)
+> +{
+> +       struct ghes_ffh *ctx;
+> +       struct resource *res;
+> +       int rc;
+> +
+> +       ctx =3D devm_kzalloc(&pdev->dev, sizeof(*ctx), GFP_KERNEL);
+> +       if (!ctx)
+> +               return -ENOMEM;
+> +
+> +       spin_lock_init(&ctx->lock);
+> +       ctx->dev =3D &pdev->dev;
+> +       ctx->sync =3D of_property_read_bool(pdev->dev.of_node, "arm,sea-n=
+otify");
+> +
+> +       res =3D platform_get_resource(pdev, IORESOURCE_MEM, 0);
+> +       if (!res) {
+> +               dev_err(&pdev->dev, "status region missing\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       ctx->status_len =3D resource_size(res);
+> +       if (!ctx->status_len) {
+> +               dev_err(&pdev->dev, "Status region has zero length\n");
+> +               return -EINVAL;
+> +       }
+> +
+> +       ctx->status =3D devm_ioremap_resource(&pdev->dev, res);
+> +       if (IS_ERR(ctx->status))
+> +               return PTR_ERR(ctx->status);
+> +
+> +       rc =3D ghes_ffh_init_ack(pdev, ctx);
+> +       if (rc)
+> +               return rc;
+> +
+> +       rc =3D ghes_ffh_init_pool();
+> +       if (rc)
+> +               return rc;
+> +
+> +       ctx->estatus =3D devm_kzalloc(&pdev->dev, ctx->status_len, GFP_KE=
+RNEL);
+> +       if (!ctx->estatus)
+> +               return -ENOMEM;
+> +
+> +       ctx->generic =3D devm_kzalloc(&pdev->dev, sizeof(*ctx->generic), =
+GFP_KERNEL);
+> +       if (!ctx->generic)
+> +               return -ENOMEM;
+> +
+> +       ctx->generic->header.type =3D ACPI_HEST_TYPE_GENERIC_ERROR;
+> +       ctx->generic->header.source_id =3D
+> +               atomic_inc_return(&ghes_ffh_source_ids);
+> +       ctx->generic->notify.type =3D ctx->sync ?
+> +               ACPI_HEST_NOTIFY_SEA : ACPI_HEST_NOTIFY_EXTERNAL;
+> +       ctx->generic->error_block_length =3D ctx->status_len;
+> +
+> +       ctx->irq =3D platform_get_irq_optional(pdev, 0);
+> +       if (ctx->irq <=3D 0) {
+> +               if (ctx->irq =3D=3D -EPROBE_DEFER)
+> +                       return ctx->irq;
+> +               dev_err(&pdev->dev, "interrupt is required (%d)\n", ctx->=
+irq);
+> +               return -EINVAL;
+> +       }
+> +
+> +       rc =3D devm_request_threaded_irq(&pdev->dev, ctx->irq,
+> +                                      NULL, ghes_ffh_irq,
+> +                                      IRQF_ONESHOT,
+> +                                      dev_name(&pdev->dev), ctx);
+> +       if (rc)
+> +               return rc;
+> +
+> +       platform_set_drvdata(pdev, ctx);
+> +       dev_info(&pdev->dev, "Firmware-first CPER status provider (interr=
+upt)\n");
+> +       return 0;
+> +}
+> +
+> +static void ghes_ffh_remove(struct platform_device *pdev)
+> +{
+> +}
+> +
+> +static const struct of_device_id ghes_ffh_of_match[] =3D {
+> +       { .compatible =3D "arm,ras-ffh" },
+> +       { /* sentinel */ }
+> +};
+> +MODULE_DEVICE_TABLE(of, ghes_ffh_of_match);
+> +
+> +static struct platform_driver ghes_ffh_driver =3D {
+> +       .driver =3D {
+> +               .name =3D "esource-dt",
+> +               .of_match_table =3D ghes_ffh_of_match,
+> +       },
+> +       .probe =3D ghes_ffh_probe,
+> +       .remove =3D ghes_ffh_remove,
+> +};
+> +
+> +module_platform_driver(ghes_ffh_driver);
+> +
+> +MODULE_AUTHOR("Ahmed Tiba <ahmed.tiba@arm.com>");
+> +MODULE_DESCRIPTION("Firmware-first CPER provider for DeviceTree platform=
+s");
+> +MODULE_LICENSE("GPL");
+> diff --git a/include/acpi/ghes_cper.h b/include/acpi/ghes_cper.h
+> index f7c9fba62585..d43185c020ee 100644
+> --- a/include/acpi/ghes_cper.h
+> +++ b/include/acpi/ghes_cper.h
+> @@ -75,6 +75,15 @@ static inline bool is_hest_sync_notify(struct ghes *gh=
+es)
+>         return notify_type =3D=3D ACPI_HEST_NOTIFY_SEA;
 >  }
->  
->  static struct pci_driver cci_pci_driver = {
-> @@ -437,6 +429,7 @@ static struct pci_driver cci_pci_driver = {
->  	.probe = cci_pci_probe,
->  	.remove = cci_pci_remove,
->  	.sriov_configure = cci_pci_sriov_configure,
-> +	.managed_sriov = true,
->  };
->  
->  module_pci_driver(cci_pci_driver);
-> 
-> -- 
-> 2.52.0
-> 
-> 
+>
+> +static inline u32 cper_estatus_len(struct acpi_hest_generic_status *esta=
+tus)
+> +{
+> +       if (estatus->raw_data_length)
+> +               return estatus->raw_data_offset + \
+> +                       estatus->raw_data_length;
+> +       else
+> +               return sizeof(*estatus) + estatus->data_length;
+> +}
+> +
+>  struct ghes_vendor_record_entry {
+>         struct work_struct work;
+>         int error_severity;
+>
+> --
+> 2.43.0
+>
+>
 
