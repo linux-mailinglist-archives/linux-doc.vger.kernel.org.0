@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-77119-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77120-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SAofFqeZn2mucwQAu9opvQ
-	(envelope-from <linux-doc+bounces-77119-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:53:59 +0100
+	id AJw4HNCZn2mucwQAu9opvQ
+	(envelope-from <linux-doc+bounces-77120-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:54:40 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D0CF19FA31
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:53:58 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1ADB219FA43
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 01:54:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id DB613302E1EE
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 00:53:55 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 4C51F302E109
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Feb 2026 00:54:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 556467081F;
-	Thu, 26 Feb 2026 00:53:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 190AD7081F;
+	Thu, 26 Feb 2026 00:54:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xqlkl38o"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GreAoEyx"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32544286A8;
-	Thu, 26 Feb 2026 00:53:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E812817D6;
+	Thu, 26 Feb 2026 00:54:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772067232; cv=none; b=GgHMKl0j3GdIGwNPAoBie/4ZqwjFzV/jw3OUMC2v3nL5CIaYa/RY4WirWBu7HNxMwLaUu0xGGlqBLqdvB4ifE4KZzIBx46nXloAexDuGoQbzBRp4+JUWcZx3Cfsn5kKB8nPZwVNgHJ/aM5snJfJoEPR4D8WKpnNJJ3ISXhNwpiM=
+	t=1772067278; cv=none; b=QhA3LNe3irR0gjaAIlREm6SiiZM5nuIgRxrdOVqakv13KEC82l98I878yIngZ/OcxqaBYhQQ+T791Ot7lkcfJdZwyFwUa6tiTFjpeaXS7DuKL5wUz2XMqQbOWZ0tXaRIZQ+e9PiJdGUEHCyiYspQ4q0JkvwBPAPZ6NVNmcogQ04=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772067232; c=relaxed/simple;
-	bh=H+4ZFB56eGq4gNOwEmh7VtVx1y/BR3AOfSM4+GziBoQ=;
+	s=arc-20240116; t=1772067278; c=relaxed/simple;
+	bh=N92T+3E8LhZQO5VlmuG98fMnfwS5aJm8dE5mN5TOOPA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=cUfH42IITlzxoKBzXK0qqFA/hCL+Cv1CoZ0fX69GEQUa6nvGdPuqV5G9q1Y83Edrt7oYWcIAaDcA0x9VxTVgy3tkYMYeViOji1E+xQ6nna7dWl8KmWQXjmXEmGlOntV43ZBaNX0xjzu2S8FNUfiwhX7SNFc7hUYoXHKzeEfE0pw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xqlkl38o; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64945C116D0;
-	Thu, 26 Feb 2026 00:53:51 +0000 (UTC)
+	 MIME-Version:Content-Type; b=Z21/LuO8/oCR7NFbt3/X06qzLsWGZbsO47rJQC0/smiklkXkvCMOBVk5LR/uazo/w9avhji27eOaKziIPwmLKGy2rTLanILIuMCa73+/YrH38cnf9ohdw27OjaiiIsdoDc4WZ3TzxfI0Wku/jGCL9yPu5LVskz+XGXKhaFm0oJI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GreAoEyx; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C5F5C116D0;
+	Thu, 26 Feb 2026 00:54:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772067231;
-	bh=H+4ZFB56eGq4gNOwEmh7VtVx1y/BR3AOfSM4+GziBoQ=;
+	s=k20201202; t=1772067277;
+	bh=N92T+3E8LhZQO5VlmuG98fMnfwS5aJm8dE5mN5TOOPA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Xqlkl38otYDSZdSJptQyN0H83BcVNsYv/0+EPC7EBKPWvPIMIWovn+bgfZftbUmjp
-	 S2AWI/ciM1Ayfn+pk72wGKwm1WECAEsguLw3YxEpCFuspjPTgN6vqwXnvRsCezrKBf
-	 TJHE7SWpexdjA6Ry8U6dWZe0ZTYEJTNCJm+1intc7XOyS5i3KP6MhlFwdFp7V3iazl
-	 7chYT+RIJDWTG/aEvv44utQuEpCgBO+AXKPhvRtIUAhw5oUnmsZH2v2UPFFwqVJmMs
-	 d/H/ccfoNMnBg+ZuoGLX3o5hpGQ1InrLkgGPKpt+2MHo9Cm6YJgt63sIBbbu3cJ1Vd
-	 Br4VJZ9P2yTSw==
+	b=GreAoEyxNF1eCY+CIwrbtaTJSy8AV5QsujAvVhjp7m7ngK8yWSr9tyhAOIP7jbLqg
+	 FHKjWE3mTCyROdAbSdDehqcSGc7iDgX0sE0iAWIDHeNWn0EM3tEac8t1nQxuwpbwUH
+	 SNy8bLmX5q5ZnTKUDMBIckIMitO7xkRNF6GM4z9Ze66Wa/Wc87gnkaG0EYHC0kQ69P
+	 5ar1/ljiF1kT6uhBEQ3e8yJXk+REgpcy2VP1wue02mKeKsqmXmeV07HAHNea5xlADN
+	 7JS6b05uPvt1YReO3pRWF7S7gWeGu111D4xLAT/V2O5K0UeJ3uzPJJbH7u9SxwZZ7l
+	 sYweuYj21WS1g==
 From: SeongJae Park <sj@kernel.org>
 To: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
 Cc: SeongJae Park <sj@kernel.org>,
@@ -57,11 +57,11 @@ Cc: SeongJae Park <sj@kernel.org>,
 	ajayjoshi@micron.com,
 	honggyu.kim@sk.com,
 	yunjeong.mun@sk.com
-Subject: Re: [RFC PATCH v3 1/4] mm/damon/sysfs: set goal_tuner after scheme creation
-Date: Wed, 25 Feb 2026 16:53:48 -0800
-Message-ID: <20260226005350.7612-1-sj@kernel.org>
+Subject: Re: [RFC PATCH v3 2/4] mm/damon: fix esz=0 quota bypass allowing unlimited migration
+Date: Wed, 25 Feb 2026 16:54:34 -0800
+Message-ID: <20260226005435.7720-1-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <CALa+Y15MQecahb-FfeQEJK2uwFdC7VxUH7GHCfSvy3uQ_jNC_A@mail.gmail.com>
+In-Reply-To: <CALa+Y15BbvgKttRRxrNrr38y3Pt4A+MP8tfQZZ7LVyoUS+_0fQ@mail.gmail.com>
 References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -78,12 +78,12 @@ X-Spamd-Result: default: False [0.34 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77119-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77120-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_TWELVE(0.00)[12];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -92,85 +92,76 @@ X-Spamd-Result: default: False [0.34 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[kernel.org,lists.linux.dev,kvack.org,vger.kernel.org,linux-foundation.org,lwn.net,gmail.com,micron.com,sk.com];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7D0CF19FA31
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 1ADB219FA43
 X-Rspamd-Action: no action
 
-On Wed, 25 Feb 2026 10:23:09 -0800 Ravi Jonnalagadda <ravis.opensrc@gmail.com> wrote:
+On Wed, 25 Feb 2026 10:28:30 -0800 Ravi Jonnalagadda <ravis.opensrc@gmail.com> wrote:
 
-> On Mon, Feb 23, 2026 at 5:40 PM SeongJae Park <sj@kernel.org> wrote:
+> On Mon, Feb 23, 2026 at 5:54 PM SeongJae Park <sj@kernel.org> wrote:
 > >
-> > On Mon, 23 Feb 2026 12:32:29 +0000 Ravi Jonnalagadda <ravis.opensrc@gmail.com> wrote:
+> > On Mon, 23 Feb 2026 12:32:30 +0000 Ravi Jonnalagadda <ravis.opensrc@gmail.com> wrote:
 > >
-> > > damon_new_scheme() always sets quota.goal_tuner to CONSIST (the default)
-> > > regardless of what was passed in the quota struct. This caused the sysfs
-> > > goal_tuner setting to be ignored.
+> > > When the TEMPORAL goal tuner sets esz_bp=0 to signal that a goal has
+> > > been achieved, the quota check was not actually stopping migration.
 > > >
-> > > The comment in damon_new_scheme() says "quota.goals and .goal_tuner
-> > > should be separately set by caller", but the sysfs code wasn't doing
-> > > this. Add explicit assignment of goal_tuner after damon_new_scheme()
-> > > returns to properly apply the user's setting.
+> > > The condition:
+> > >     if (quota->esz && quota->charged_sz >= quota->esz)
 > > >
-> > > Without this fix, setting goal_tuner to "temporal" via sysfs has no
-> > > effect - the scheme always uses the CONSIST (feed loop) tuner, causing
-> > > overshoot when the goal is reached instead of immediate stop.
+> > > When esz=0, this evaluates to (false && ...) = false, so the continue
+> > > is never executed and migration proceeds without limit.
 > >
-> > Thank you for catching this, Ravi!  So, this is a fix for the RFC patch series
-> > [1] that not yet merged, right?  I think this fix is better to be carried with
-> > the series, and squashed into the broken commit to not introduce unnecessary
-> > regression.
-> >
-> > So, if you don't mind, I will squash this into the sysfs-schemes part change on
-> > my tree, with your Co-developed-by: tag.
+> > Nice finding, thank you for sharing this!
 > 
-> Yes. Please go ahead and squash it into your series.
+> Thanks!
 > 
 > >
-> > [1] https://lore.kernel.org/20260212062314.69961-1-sj@kernel.org
-> > [2] https://lore.kernel.org/20260212062314.69961-4-sj@kernel.org
-> >
 > > >
-> > > Signed-off-by: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
-> >
-> > Reviewed-by: SeongJae Park <sj@kernel.org>
-> >
-> > > ---
-> > >  mm/damon/sysfs-schemes.c | 3 +++
-> > >  1 file changed, 3 insertions(+)
+> > > Change the logic to:
+> > >     if (!quota->esz || quota->charged_sz >= quota->esz)
 > > >
-> > > diff --git a/mm/damon/sysfs-schemes.c b/mm/damon/sysfs-schemes.c
-> > > index bbea908074bb..fe2e3b2db9e1 100644
-> > > --- a/mm/damon/sysfs-schemes.c
-> > > +++ b/mm/damon/sysfs-schemes.c
-> > > @@ -2809,6 +2809,9 @@ static struct damos *damon_sysfs_mk_scheme(
-> > >       if (!scheme)
-> > >               return NULL;
-> > >
-> > > +     /* Set goal_tuner after damon_new_scheme() as it defaults to CONSIST */
-> > > +     scheme->quota.goal_tuner = sysfs_quotas->goal_tuner;
-> > > +
-> > >       err = damos_sysfs_add_quota_score(sysfs_quotas->goals, &scheme->quota);
-> > >       if (err) {
-> > >               damon_destroy_scheme(scheme);
+> > > Now when esz=0, (!0 = true) causes the continue to execute, properly
+> > > stopping migration when the goal is achieved.
 > >
-> > To follow the order on the comment ("quota.goals and .goal_tuner should be
-> > separately set by caller"), I'd prefer setting the goal_tuner after
-> > damos_sysfs_add_quota_Score() call here, if you don't mind.  Let me know if you
-> > prefer keeping the current order.  If not, I will just make the change when I
-> > apply this to damon/next.
+> > But this code is written in the way because the current code assumes zero 'esz'
+> > means it is not being used and therefore be ignored.  This change should be ok
+> > for your use case, but could introduce an unexpected behavioral change for
+> > other users.
+> >
+> > One easy workaround would be setting esz_bp with a value smaller than 40960000
+> > instead of 0.  That is, esz_bp is the bytes in bp, so setting it smaller than
+> > 40960000 will result in making it effectively zero, e.g., like below.
+> >
+> > '''
+> > --- a/mm/damon/core.c
+> > +++ b/mm/damon/core.c
+> > @@ -2623,7 +2623,7 @@ static void damos_goal_tune_esz_bp_temporal(struct damos_quota *quota)
+> >         unsigned long score = damos_quota_score(quota);
+> >
+> >         if (score >= 10000)
+> > -               quota->esz_bp = 0;
+> > +               quota->esz_bp = 10000;
+> >         else if (quota->sz)
+> >                 quota->esz_bp = quota->sz * 10000;
+> >         else
+> > '''
+> >
+> > But maybe there is a better way to cleanly fix this.  Let me take a time to
+> > think more...
 > >
 > 
-> Agreed. Please make that change when you apply it.
+> I understand. Please take your time. I'm happy to test whatever approach
+> you come up with.
 
-Thank you, I will do!
+Thank you for being flexible, I will do!
 
 
 Thanks,
