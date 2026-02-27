@@ -1,166 +1,289 @@
-Return-Path: <linux-doc+bounces-77299-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77301-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AErIKaJeoWmksQQAu9opvQ
-	(envelope-from <linux-doc+bounces-77299-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 10:06:42 +0100
+	id 0GycOldmoWkJsgQAu9opvQ
+	(envelope-from <linux-doc+bounces-77301-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 10:39:35 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CD411B4E84
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 10:06:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6672C1B5756
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 10:39:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9E0E43088269
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 09:04:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C64A130FE023
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 09:36:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C76E838BF7B;
-	Fri, 27 Feb 2026 09:04:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46B0B39A803;
+	Fri, 27 Feb 2026 09:36:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bV3DNDdY"
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b="s5jjOGFr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A23A436BCFA;
-	Fri, 27 Feb 2026 09:04:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AE3B372B36;
+	Fri, 27 Feb 2026 09:36:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=49.212.243.89
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772183048; cv=none; b=s+dDKQTp1ROnTVbzuLbLLsD9DHHLcLAA5+vqLNZSqLX9YBJM4eCLNZYCjJqxPPrtLzMLzxu3Im4VXAns4h7GchCf0uWUNR+X37vnLl6SSUcumXpMGxuV+efJHqepIMn8JpEcgfqV9sOsg+4P0GpAazhVS9kox/F1J45NFqO3ic0=
+	t=1772184972; cv=none; b=pMxAfZADkvsiT79tgNr1KshAJcP85GDXxmWM7aWrlLvi4lcUxBC8YwZ/9nmzzF8Ixd3i5pESiMCqWe74dZrgDIVMweannXC2nQ5hsOYxWjQSMm9ldbzttT2pchC24IacbXVFtDvJuN3lJQuF74xToc0E5qld0MU8//U287uUpwA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772183048; c=relaxed/simple;
-	bh=ULqmscrmRYbb7GaDQ1iw2PdzZRP98XQa3VtXm4mRQjU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dLXXTwA957pysy1sju1fMG9S7fvUojYwfp/4+xECByVMQWKjrpgPsFWOqv7U/smdaQDwEe09m3lzS0b0Ym/rSrgCOC0QM9TZ38mMqy4lly7OUj0H1p7KXkCzdi+Qm3Ra+piBBnqzobK/CTtE8e7UyYPmWcwvFqnJfFfluG/Y/v4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bV3DNDdY; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE6E0C116C6;
-	Fri, 27 Feb 2026 09:04:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772183048;
-	bh=ULqmscrmRYbb7GaDQ1iw2PdzZRP98XQa3VtXm4mRQjU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bV3DNDdY9xhWKrvNO/Wuy+ina1DeOPshRfqwbuTvmPjwRx4yGWjfQVOgUGjL9uVMz
-	 jn9nl5F9K8IhoNQLMCgFUH+GwmMQjIB5QuGp7Bt2NGg+KO+KkooOYyQUKMC14i5Hbn
-	 U+rwxMtwtNNVF6xJ8KqiYPYB8xqqE5zPgytc64riiVotu95z9lGEZbQtVqXrVuOewd
-	 XNCpS2TWddFXJVBwHUJe+rl3evQjIJlQSeutsmpSHggaEe8uGS62b8/FNSMNSKTmTH
-	 lmoxE/xzS2yUe7U3f8TvMsax/mz/zTfFJ6W0NylHRtRMeUr05tjwISn8pY1SmERF+f
-	 D83rEBW+zmhKA==
-Date: Fri, 27 Feb 2026 09:04:01 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Daniel Baluta <daniel.baluta@oss.nxp.com>
-Cc: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>,
-	Oded Gabbay <ogabbay@kernel.org>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-	Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>,
-	Alexandru Taran <alexandru.taran@nxp.com>
-Subject: Re: [PATCH 3/9] dt-bindings: npu: Add bindings for NXP Neutron
-Message-ID: <20260227-shakable-mummified-ba7bb54e0e05@spud>
-References: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
- <20260226-neutron-v1-3-46eccb3bb50a@nxp.com>
- <20260226-unthread-reformat-92b855c4acf9@spud>
- <16172163-8aef-4d94-be62-70e159aae182@oss.nxp.com>
+	s=arc-20240116; t=1772184972; c=relaxed/simple;
+	bh=JatrjCh9rXYX1jXJ8diwK86Ywvjtzzka6onpEElf6Vk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=fECZsDR/shQBRzuH56YJ3EWQ+BQETGKg7QWmqYcbeapuOw38A/u9mmp1KyfjTWr8Sbi/dcmC+w47BqD8vV7wkUDOBwcdkJCQQ7oMzTBa9CdR7sd4vbyfh7cncploo+hRyjoWf/UFa2p1xLgyQimbH7aCPekSDPPfe1ZI8EWUmk0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=s5jjOGFr reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp
+Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
+	(authenticated bits=0)
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 61R9YgsP068326
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Fri, 27 Feb 2026 18:35:18 +0900 (JST)
+	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=px5XieEPKmbuo9CrIiuS5zCR9teM+ZDzb7WZFA/ue1Q=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=From:Message-ID:To:Subject:Date;
+        s=rs20250326; t=1772184918; v=1;
+        b=s5jjOGFrW9QHij3qAVZnKPHOFsghNeaW8zQT6IuwDs7t2PShZEQeXy33VCPfziRT
+         6+JLSEU28wP8EP+nDfodCUc7u0vjTX8JvWrUn7LjgiiAnrf2awCPPJ4igZ9E9R2u
+         EzJUyQp1USQYoeFg8Br9VmnI+LJ6k7aYUW0ouGDfIFavAUjllPQacOyDX5G7DkoZ
+         lYsPFUHKC4JAv4XTVx+zXs/TdwawYCujbocHIZMdP+UYxMwmL6t4OlqONRmNB6T+
+         LYR9C0XdtF0IdswVYWd/1UoXymFJy4NRNlQukRqsUNDU8239NEk5KQ7SxiYqV/Tk
+         F5cf5t2Hjd8Rd5pxcreQew==
+Message-ID: <c5e5d2b2-ee47-4241-b0c8-3099cd8e73cb@rsg.ci.i.u-tokyo.ac.jp>
+Date: Fri, 27 Feb 2026 18:34:40 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="HGUIQTmEq3BO0PCt"
-Content-Disposition: inline
-In-Reply-To: <16172163-8aef-4d94-be62-70e159aae182@oss.nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY
+To: Oliver Upton <oupton@kernel.org>
+Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu
+ <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>, linux-arm-kernel@lists.infradead.org,
+        kvmarm@lists.linux.dev, linux-kernel@vger.kernel.org,
+        linux-hardening@vger.kernel.org, devel@daynix.com, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org
+References: <20260225-hybrid-v3-0-46e8fe220880@rsg.ci.i.u-tokyo.ac.jp>
+ <20260225-hybrid-v3-1-46e8fe220880@rsg.ci.i.u-tokyo.ac.jp>
+ <aaA0gn9O8QAf9Gpu@kernel.org>
+ <fbcadab4-676b-44e4-8afa-b8bd095f8981@rsg.ci.i.u-tokyo.ac.jp>
+ <b81cbeb7-6541-4a1f-b08e-2b5c9ee66b69@rsg.ci.i.u-tokyo.ac.jp>
+ <aaDRtkdU85kULqwm@kernel.org>
+Content-Language: en-US
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <aaDRtkdU85kULqwm@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.26 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	TAGGED_FROM(0.00)[bounces-77301-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77299-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
 	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FREEMAIL_CC(0.00)[nxp.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.infradead.org,lists.linaro.org];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[rsg.ci.i.u-tokyo.ac.jp:~];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FROM_NEQ_ENVFROM(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	NEURAL_HAM(-0.00)[-0.906];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,4ab00000:email,fdab0000:email]
-X-Rspamd-Queue-Id: 0CD411B4E84
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rsg.ci.i.u-tokyo.ac.jp:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 6672C1B5756
 X-Rspamd-Action: no action
 
 
---HGUIQTmEq3BO0PCt
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 27, 2026 at 08:45:29AM +0200, Daniel Baluta wrote:
-> On 2/26/26 20:20, Conor Dooley wrote:
-> [..]
-> >> +  - |
-> >> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> >> +    #include <dt-bindings/interrupt-controller/irq.h>
-> >> +
-> >> +    bus {
-> >> +      #address-cells =3D <2>;
-> >> +      #size-cells =3D <2>;
-> >> +
-> >> +      neutron@4ab00000 {
-> > "neutron" is not a generic node name. This should be something like
-> > "accelerator" or similar.
-> >
-> The only dts nodes I could find using accel subsystem are from rockhip. A=
-nd they use npu@
->=20
-> e.g:
->=20
-> =BB=A0 =A0 =A0 =A0rknn_core_0: npu@fdab0000 {
-> =BB=A0 =A0 =A0 =A0=BB=A0 =A0 =A0 =A0compatible =3D "rockchip,rk3588-rknn-=
-core";
->=20
-> Also, Ethos-U64 introduced by Rob with [1] is using npu@.
->=20
-> So, I think we should go wit that. I haven't seen any document to standar=
-dize the naming.
+On 2026/02/27 8:05, Oliver Upton wrote:
+> On Thu, Feb 26, 2026 at 11:47:54PM +0900, Akihiko Odaki wrote:
+>> On 2026/02/26 23:43, Akihiko Odaki wrote:
+>>> On 2026/02/26 20:54, Oliver Upton wrote:
+>>>> Hi Akihiko,
+>>>>
+>>>> On Wed, Feb 25, 2026 at 01:31:15PM +0900, Akihiko Odaki wrote:
+>>>>> @@ -629,6 +629,8 @@ void kvm_arch_vcpu_load(struct kvm_vcpu
+>>>>> *vcpu, int cpu)
+>>>>>            kvm_vcpu_load_vhe(vcpu);
+>>>>>        kvm_arch_vcpu_load_fp(vcpu);
+>>>>>        kvm_vcpu_pmu_restore_guest(vcpu);
+>>>>> +    if (test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY,
+>>>>> &vcpu- >kvm->arch.flags))
+>>>>> +        kvm_make_request(KVM_REQ_CREATE_PMU, vcpu);
+>>>>
+>>>> We only need to set the request if the vCPU has migrated to a different
+>>>> PMU implementation, no?
+>>>
+>>> Indeed. I was too lazy to implement such a check since it won't affect
+>>> performance unless the new feature is requested, but having one may be
+>>> still nice.
+> 
+> I'd definitely like to see this.
+> 
+>>>>
+>>>>>        if (kvm_arm_is_pvtime_enabled(&vcpu->arch))
+>>>>>            kvm_make_request(KVM_REQ_RECORD_STEAL, vcpu);
+>>>>> @@ -1056,6 +1058,9 @@ static int check_vcpu_requests(struct
+>>>>> kvm_vcpu *vcpu)
+>>>>>            if (kvm_check_request(KVM_REQ_RELOAD_PMU, vcpu))
+>>>>>                kvm_vcpu_reload_pmu(vcpu);
+>>>>> +        if (kvm_check_request(KVM_REQ_CREATE_PMU, vcpu))
+>>>>> +            kvm_vcpu_create_pmu(vcpu);
+>>>>> +
+>>>>
+>>>> My strong preference would be to squash the migration handling into
+>>>> kvm_vcpu_reload_pmu(). It is already reprogramming PMU events in
+>>>> response to other things.
+>>>
+>>> Can you share a reason for that?
+>>>
+>>> In terms of complexity, I don't think it will help reducing complexity
+>>> since the only common things between kvm_vcpu_reload_pmu() and
+>>> kvm_vcpu_create_pmu() are the enumeration of enabled counters, which is
+>>> simple enough.
+> 
+> I prefer it in terms of code organization. We should have a single
+> helper that refreshes the backing perf events when something has
+> globally changed for the vPMU.
+> 
+> Besides this, "create" is confusing since the vPMU has already been
+> instantiated.
+> 
+>>> In terms of performance, I guess it is better to keep
+>>> kvm_vcpu_create_pmu() small since it is triggered for each migration.
+> 
+> I think the surrounding KVM code for iterating over the counters is
+> inconsequential compared to the overheads of calling into perf to
+> recreate the PMU events. Since we expect this to be slow, we should only
+> set the request when absolutely necessary.
 
-accelerator, npu, makes no difference to me, so sure.
+I see. I'll squash it into kvm_vcpu_reload_pmu().
 
---HGUIQTmEq3BO0PCt
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+>>>>> +static bool kvm_pmu_counter_is_enabled(struct kvm_pmc *pmc)
+>>>>> +{
+>>>>> +    struct kvm_vcpu *vcpu = kvm_pmc_to_vcpu(pmc);
+>>>>> +
+>>>>> +    return kvm_pmu_enabled_counter_mask(vcpu) & BIT(pmc->idx);
+>>>>>    }
+>>>>
+>>>> You're churning a good bit of code, this needs to happen in a separate
+>>>> patch (if at all).
+>>>
+>>> It makes sense. The next version will have a separate patch for this.
+> 
+> If I have the full picture right, you may not need it with a common
+> request handler.
 
------BEGIN PGP SIGNATURE-----
+I think I'm going to use it to check if the vCPU is covered by the perf 
+events currently enabled before requesting KVM_REQ_RELOAD_PMU.
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaaFeAQAKCRB4tDGHoIJi
-0jXWAQDkJ0uqFe0zBBD97N8Nc9W1uspEgrsZpTqEwgxIVIlnKwD/SKBKuEJxP5os
-9i6n1nocp64AivMzqCek95MinbTDIgQ=
-=lAaA
------END PGP SIGNATURE-----
+> 
+>>>>
+>>>>> @@ -689,6 +710,14 @@ static void
+>>>>> kvm_pmu_create_perf_event(struct kvm_pmc *pmc)
+>>>>>        int eventsel;
+>>>>>        u64 evtreg;
+>>>>> +    if (!arm_pmu) {
+>>>>> +        arm_pmu = kvm_pmu_probe_armpmu(vcpu->cpu);
+>>>>
+>>>> kvm_pmu_probe_armpmu() takes a global mutex, I'm not sure that's what we
+>>>> want.
+>>>>
+>>>> What prevents us from opening a PERF_TYPE_RAW event and allowing perf to
+>>>> work out the right PMU for this CPU?
+>>>
+>>> Unfortunately perf does not seem to have a capability to switch to the
+>>> right PMU. tools/perf/Documentation/intel-hybrid.txt says the perf tool
+>>> creates events for each PMU in a hybird configuration, for example.
+>>
+>> I think I misunderstood what you meant. Letting
+>> perf_event_create_kernel_counter() to figure out what a PMU to use may be a
+>> good idea. I'll give a try with the next version.
+> 
+> Yep, this is what I was alluding to.
 
---HGUIQTmEq3BO0PCt--
+I tried this, but unfortunately it didn't work well. Simply using 
+PERF_TYPE_RAW let perf_event_create_kernel_counter() choose an arbitrary 
+PMU, potentially not covering the current PCPU.
+
+We can change the cpu parameter of the function to fix this, but it 
+binds the perf event to that particular PCPU and requires recreating 
+perf event when migrating to another PCPU covered by the same PMU.
+
+I think I'm going to use RCU to avoid locking a global mutex.
+
+> 
+>>>
+>>>>
+>>>>> +        if (!arm_pmu) {
+>>>>> +            vcpu_set_on_unsupported_cpu(vcpu);
+>>>>
+>>>> At this point it seems pretty late to flag the CPU as unsupported. Maybe
+>>>> instead we can compute the union cpumask for all the PMU implemetations
+>>>> the VM may schedule on.
+>>>
+>>> This is just a safe guard and it is a responsibility of the userspace to
+>>> schedule the VCPU properly. It is conceptually same with what
+>>> kvm_arch_vcpu_load() does when migrating to an unsupported CPU.
+> 
+> I agree with you that we need to have some handling for this situation.
+> 
+> What I don't like about this is userspace doesn't discover its mistake
+> until the guest actually programs a PMC. I'd much rather preserve the
+> existing ABI where KVM proactively rejects running a vCPU on an
+> unsupported CPU.
+
+Thanks for explanation. I'll change this with the next version.
+
+> 
+>>>>> +    case KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY:
+>>>>> +        lockdep_assert_held(&vcpu->kvm->arch.config_lock);
+>>>>> +        if (test_bit(KVM_ARCH_FLAG_PMU_V3_FIXED_COUNTERS_ONLY,
+>>>>> &vcpu->kvm->arch.flags))
+>>>>> +            return 0;
+>>>>
+>>>> We don't need a getter for this, userspace should remember how it
+>>>> provisioned the VM.
+>>>
+>>> The getter is useful for debugging and testing. The selftest will use it
+>>> to query the current state.
+> 
+> That's fine for debugging this on your own kernel but we don't need it
+> upstream. There's several other vPMU attributes that are write-only,
+> like KVM_ARM_VCPU_PMU_V3_SET_PMU.
+
+Not just for debugging kernel, but it will be useful for userspace 
+debugging.
+
+Indeed there are other readonly attributes, but there is also an 
+attribute with getter: KVM_ARM_VCPU_PMU_V3_IRQ. I think there are more 
+if you look at a scope broader than the KVM_ARM_VCPU_PMU_V3_CTRL group, 
+and such existing getters for read/write attributes are probably only 
+useful for kernel/userspace debugging either. I think having a getter 
+can be justified, given that these preexisting examples.
+
+Regards,
+Akihiko Odaki
 
