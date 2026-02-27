@@ -1,150 +1,166 @@
-Return-Path: <linux-doc+bounces-77298-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77299-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iLNDIc1VoWk+sQQAu9opvQ
-	(envelope-from <linux-doc+bounces-77298-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 09:29:01 +0100
+	id AErIKaJeoWmksQQAu9opvQ
+	(envelope-from <linux-doc+bounces-77299-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 10:06:42 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B7991B48B8
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 09:29:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CD411B4E84
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 10:06:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7610C303DD00
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 08:27:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9E0E43088269
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Feb 2026 09:04:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B4593876AC;
-	Fri, 27 Feb 2026 08:27:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C76E838BF7B;
+	Fri, 27 Feb 2026 09:04:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="BUbKSCA8"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bV3DNDdY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch [79.135.106.31])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2310338A72B;
-	Fri, 27 Feb 2026 08:27:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.31
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A23A436BCFA;
+	Fri, 27 Feb 2026 09:04:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772180876; cv=none; b=t9F2JZVOGwdNL/Clqgffr17gWcaeIgpvv6iBJT8/IeyWs7TF5Hn+9XSv97FzfyhpsZG4dRjzv3YbJjvHDpORHfPntMPpa5ZXbRYVYdz8qDVEBveDwQXNBBJUNw80c3VnPWfVMgaS/bQpGpQxuwi+FFzgcU16c9TreDw6/ZXXTWs=
+	t=1772183048; cv=none; b=s+dDKQTp1ROnTVbzuLbLLsD9DHHLcLAA5+vqLNZSqLX9YBJM4eCLNZYCjJqxPPrtLzMLzxu3Im4VXAns4h7GchCf0uWUNR+X37vnLl6SSUcumXpMGxuV+efJHqepIMn8JpEcgfqV9sOsg+4P0GpAazhVS9kox/F1J45NFqO3ic0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772180876; c=relaxed/simple;
-	bh=6C3cMM/gHC6Ff7yqF4c0Tovc8j6lpGWIr+4iZ/HJVcY=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=M11K2rednOAqemkwGa1qZdM2JVPOFoeDCF0Be1CNy7y2vFq43O+9TVJRr0FrxAFq7DS4VaQ4kU4/5QYrDMxQlSZFfyjNvslqBmJYq7q4nvZ665pFxi+PePv9Ztrw8M+xiQmD3Gcdk613SjhmHHzKPAbu0u5cGsoChTieMkfNOXk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=BUbKSCA8; arc=none smtp.client-ip=79.135.106.31
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1772180869; x=1772440069;
-	bh=w1GCmvI9nDdcfpwv/EBNLFU8kur4WRAZzbZH+/hHGr4=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=BUbKSCA8rMLpH4diWu8+qNpkBu8rwdNvP3PQX7+KdePmgbyPDqqkofUa0Q1gDf4N5
-	 vNi7PAt9rxLG0sC22KHfiv4sVrIIAgxEXWUHxGBLw3BcL2RDYRCKgWvGoOx+j2EECT
-	 2L9peFmczADoIso6h+zfazpGTslRpa78reEUcqfRhv51tU3MscxoKc2Kx5ov+2QQPJ
-	 sTUzeNzHd+l2vCJi0eR8cAbvTYpTf+Yl4vBO38h5TvxAZzgYnEjjLcscOFaBtdsjEd
-	 xIUNLnhnVbi+eTHzHcjmxiaEy3SpkmMKUASLYv0MctPQZ2m3j9M/hFrDU4QUdU39dW
-	 9ieH08Jp5rs2g==
-Date: Fri, 27 Feb 2026 08:27:44 +0000
-To: Dave Hansen <dave.hansen@intel.com>
-From: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
-Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>, Andrey Ryabinin <ryabinin.a.a@gmail.com>, Alexander Potapenko <glider@google.com>, Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>, Vincenzo Frascino <vincenzo.frascino@arm.com>, Andy Lutomirski <luto@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Andrew Morton <akpm@linux-foundation.org>, Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, kasan-dev@googlegroups.com, workflows@vger.kernel.org
-Subject: Re: [PATCH v10 13/13] x86/kasan: Make software tag-based kasan available
-Message-ID: <aaFVCivIQ1kjKhUZ@wieczorr-mobl1.localdomain>
-In-Reply-To: <fb8d8d51-66c8-4cb1-8b14-bc670c629afa@intel.com>
-References: <cover.1770232424.git.m.wieczorretman@pm.me> <8fd6275f980b90c62ddcb58cfbc78796c9fa7740.1770232424.git.m.wieczorretman@pm.me> <f25c328f-4ce7-4494-a200-af4ba928e724@intel.com> <aZ1qOpMc9PohArcL@wieczorr-mobl1.localdomain> <fb8d8d51-66c8-4cb1-8b14-bc670c629afa@intel.com>
-Feedback-ID: 164464600:user:proton
-X-Pm-Message-ID: 98763143edaccaef44e93295f566fd10be419899
+	s=arc-20240116; t=1772183048; c=relaxed/simple;
+	bh=ULqmscrmRYbb7GaDQ1iw2PdzZRP98XQa3VtXm4mRQjU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=dLXXTwA957pysy1sju1fMG9S7fvUojYwfp/4+xECByVMQWKjrpgPsFWOqv7U/smdaQDwEe09m3lzS0b0Ym/rSrgCOC0QM9TZ38mMqy4lly7OUj0H1p7KXkCzdi+Qm3Ra+piBBnqzobK/CTtE8e7UyYPmWcwvFqnJfFfluG/Y/v4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bV3DNDdY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE6E0C116C6;
+	Fri, 27 Feb 2026 09:04:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772183048;
+	bh=ULqmscrmRYbb7GaDQ1iw2PdzZRP98XQa3VtXm4mRQjU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bV3DNDdY9xhWKrvNO/Wuy+ina1DeOPshRfqwbuTvmPjwRx4yGWjfQVOgUGjL9uVMz
+	 jn9nl5F9K8IhoNQLMCgFUH+GwmMQjIB5QuGp7Bt2NGg+KO+KkooOYyQUKMC14i5Hbn
+	 U+rwxMtwtNNVF6xJ8KqiYPYB8xqqE5zPgytc64riiVotu95z9lGEZbQtVqXrVuOewd
+	 XNCpS2TWddFXJVBwHUJe+rl3evQjIJlQSeutsmpSHggaEe8uGS62b8/FNSMNSKTmTH
+	 lmoxE/xzS2yUe7U3f8TvMsax/mz/zTfFJ6W0NylHRtRMeUr05tjwISn8pY1SmERF+f
+	 D83rEBW+zmhKA==
+Date: Fri, 27 Feb 2026 09:04:01 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Daniel Baluta <daniel.baluta@oss.nxp.com>
+Cc: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>,
+	Oded Gabbay <ogabbay@kernel.org>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
+	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+	Jiwei Fu <jiwei.fu@nxp.com>, Forrest Shi <xuelin.shi@nxp.com>,
+	Alexandru Taran <alexandru.taran@nxp.com>
+Subject: Re: [PATCH 3/9] dt-bindings: npu: Add bindings for NXP Neutron
+Message-ID: <20260227-shakable-mummified-ba7bb54e0e05@spud>
+References: <20260226-neutron-v1-0-46eccb3bb50a@nxp.com>
+ <20260226-neutron-v1-3-46eccb3bb50a@nxp.com>
+ <20260226-unthread-reformat-92b855c4acf9@spud>
+ <16172163-8aef-4d94-be62-70e159aae182@oss.nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="HGUIQTmEq3BO0PCt"
+Content-Disposition: inline
+In-Reply-To: <16172163-8aef-4d94-be62-70e159aae182@oss.nxp.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-2.26 / 15.00];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[pm.me,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[pm.me:s=protonmail3];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77298-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_CC(0.00)[kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,lwn.net,gmail.com,google.com,arm.com,infradead.org,linux-foundation.org,intel.com,vger.kernel.org,googlegroups.com];
+	TAGGED_FROM(0.00)[bounces-77299-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FREEMAIL_CC(0.00)[nxp.com,kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev,lists.infradead.org,lists.linaro.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[m.wieczorretman@pm.me,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[pm.me:+];
-	NEURAL_HAM(-0.00)[-0.990];
+	FROM_NEQ_ENVFROM(0.00)[conor@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 8B7991B48B8
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,4ab00000:email,fdab0000:email]
+X-Rspamd-Queue-Id: 0CD411B4E84
 X-Rspamd-Action: no action
 
-On 2026-02-26 at 15:29:15 -0800, Dave Hansen wrote:
->On 2/24/26 01:10, Maciej Wieczor-Retman wrote:
->>>> -   ffdf000000000000 |   -8.25 PB | fffffbffffffffff |   ~8 PB | KASAN=
- shadow memory
->>>> +   ffdf000000000000 |   -8.25 PB | fffffbffffffffff |   ~8 PB | KASAN=
- shadow memory (generic mode)
->>>> +   ffeffc0000000000 |   -6    PB | fffffbffffffffff |    4 PB | KASAN=
- shadow memory (software tag-based mode)
->>>>    __________________|____________|__________________|_________|______=
-______________________________________________________
->>> I think the idea of these is that you can run through, find *one* range
->>> and know what a given address maps to. This adds overlapping ranges.
->>> Could you make it clear that part of the area is "generic mode" only an=
-d
->>> the other part is for generic mode and for "software tag-based mode"?
->> Boris suggested adding a footnote to clarify these are alternative range=
-s [1].
->> Perhaps I can add a star '*' next to these two so it can notify someone =
-to look for
->> the footnote?
->>
->> [1] https://lore.kernel.org/
->> all/20260113161047.GNaWZuh21aoxqtTNXS@fat_crate.local/
->
->
->I'd rather this be:
->
->  ffdf000000000000 |   -8.25 PB | fffffbffffffffff |   ~8 PB | KASAN shado=
-w memory[1]
->
->...
->
->1. talk about the ranges here. Maybe: Addresses <ffeffc0000000000 are used=
- by
->   KASAN "generic mode" only. Addresses >=3Dffeffc0000000000 can additiona=
-lly
->   be used by the software tag-based mode.
->
->Or, list both ranges as separate:
->
->  ffdf000000000000 |   -8.25 PB | ffeffbffffffffff |   ~8 PB | KASAN shado=
-w memory (generic mode only)
->  ffeffc0000000000 |   -6    PB | fffffbffffffffff |    4 PB | KASAN shado=
-w memory (generic or
->=09=09=09=09=09=09=09=09=09=09    software tag-based)
->and describe the same use (generic mode) twice.
 
-Thanks, I like the first option, I'll work on that.
+--HGUIQTmEq3BO0PCt
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---=20
-Kind regards
-Maciej Wiecz=C3=B3r-Retman
+On Fri, Feb 27, 2026 at 08:45:29AM +0200, Daniel Baluta wrote:
+> On 2/26/26 20:20, Conor Dooley wrote:
+> [..]
+> >> +  - |
+> >> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> >> +    #include <dt-bindings/interrupt-controller/irq.h>
+> >> +
+> >> +    bus {
+> >> +      #address-cells =3D <2>;
+> >> +      #size-cells =3D <2>;
+> >> +
+> >> +      neutron@4ab00000 {
+> > "neutron" is not a generic node name. This should be something like
+> > "accelerator" or similar.
+> >
+> The only dts nodes I could find using accel subsystem are from rockhip. A=
+nd they use npu@
+>=20
+> e.g:
+>=20
+> =BB=A0 =A0 =A0 =A0rknn_core_0: npu@fdab0000 {
+> =BB=A0 =A0 =A0 =A0=BB=A0 =A0 =A0 =A0compatible =3D "rockchip,rk3588-rknn-=
+core";
+>=20
+> Also, Ethos-U64 introduced by Rob with [1] is using npu@.
+>=20
+> So, I think we should go wit that. I haven't seen any document to standar=
+dize the naming.
 
+accelerator, npu, makes no difference to me, so sure.
+
+--HGUIQTmEq3BO0PCt
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaaFeAQAKCRB4tDGHoIJi
+0jXWAQDkJ0uqFe0zBBD97N8Nc9W1uspEgrsZpTqEwgxIVIlnKwD/SKBKuEJxP5os
+9i6n1nocp64AivMzqCek95MinbTDIgQ=
+=lAaA
+-----END PGP SIGNATURE-----
+
+--HGUIQTmEq3BO0PCt--
 
