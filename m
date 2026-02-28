@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-77444-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77445-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MBe1HDR0o2n+DQUAu9opvQ
-	(envelope-from <linux-doc+bounces-77444-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 00:03:16 +0100
+	id ou2vB9x0o2mwDgUAu9opvQ
+	(envelope-from <linux-doc+bounces-77445-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 00:06:04 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5E491C999F
-	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 00:03:15 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E4631C99C7
+	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 00:06:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id CED9E301BEF2
-	for <lists+linux-doc@lfdr.de>; Sat, 28 Feb 2026 23:03:14 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D1F603011A49
+	for <lists+linux-doc@lfdr.de>; Sat, 28 Feb 2026 23:06:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F14F37416E;
-	Sat, 28 Feb 2026 23:03:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 09DF538D012;
+	Sat, 28 Feb 2026 23:06:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dQzVym2d"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="drBFJaXi"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECA963176EF;
-	Sat, 28 Feb 2026 23:03:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA186274650;
+	Sat, 28 Feb 2026 23:06:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772319793; cv=none; b=mfy19BHGICOQnTTfEhXX7m5zNA68D3pFM38w42yFSXWwi1wv+8B9T0Ykh0dIUrBB6qMnM5tYQ77TEmWJSW1S2OpBd24pEciDC+pKcBv5sAnR72qOOeiBH3SBZ0IBJHmDtdbg/Q66tYrhKBhMN5BSOIHYnvP4/8WqGfGGfxbu5fU=
+	t=1772319960; cv=none; b=HYO59SCY1adG7o/gPihJPYdyD/mQo4F/WNucxh8p3C//LK6GRzXYLhwKYMqTUtG1AEhYu/US74UZqDsgA1lBZA0lLdlQBkD+FuzGjPg2knvdbhvsmnDdTDQD5ZApUDRzpYkjwklcVTCyQmxYAnoh3OLbM3/JqpOgcYTIOXSWIls=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772319793; c=relaxed/simple;
-	bh=XAmYS0SfODrg1XPDl6AADcpqQeng3ZTSgu8ko+uE+AQ=;
+	s=arc-20240116; t=1772319960; c=relaxed/simple;
+	bh=A6M2iDOhmSVC++8GhnKmIQhmOUtWCEws46FWPCDoinE=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=jI+/Uzj+kUWOXY6ljouBKQZn+Xt1CwE0U3nrdiKi7l7NKbg9HJY2PU6/LYq9+HjgOM0JhlE9bX6pXcwHCZiHVTnKBOg9T2MGiwri/QckWML4wgx0BJqQcdpefnzGlJdkRwv8XKjci7nWi8pXGq0RYjezUuLMmN/faUiCjTPukos=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dQzVym2d; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D86FBC116D0;
-	Sat, 28 Feb 2026 23:03:11 +0000 (UTC)
+	 MIME-Version:Content-Type; b=AcSzwWcyDC5F396YCGnn3/7JM2kHGXQZ5HJYb577lPVcDBN9IMemRGQhdiZg7S8xG31gwd4w+ioJowP0c6ZSzrR+EUogWcW4JZhWI4MHgKkS4FdPyDEQGCi4TLcJDItC+44CtbJbCQa01dAXnY714buphRc79jGGLmXbpdOD3tM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=drBFJaXi; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77F03C116D0;
+	Sat, 28 Feb 2026 23:05:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772319792;
-	bh=XAmYS0SfODrg1XPDl6AADcpqQeng3ZTSgu8ko+uE+AQ=;
+	s=k20201202; t=1772319960;
+	bh=A6M2iDOhmSVC++8GhnKmIQhmOUtWCEws46FWPCDoinE=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=dQzVym2dAvOtJ70Kq9OfEgb4o2GP7rZ54HZzxh5ZuiF5Vu9Wo8zsCd3bPZBouiYLp
-	 cLK7YsUyxsy9MeoCOXrS6M9WTGSAZK2habv81eW5/6NlKgtdQOWXXv/ExYmAStNufp
-	 C+qqXMYvIk9DnQsoGiQF6zUwq0pU+8ZG484Wxs93kEqUmsqlLUijJ6Bs8IMdMhr5Gd
-	 7Es862K1SGvbwzuhmoZPTxXcrUwYsylAdjqehT5081G4beyvKBVNc1B591o1zJqrKV
-	 udGv3ha3wVSAadEg/aaZT1IPGmJ/8adOlneN7zWJaHszI+JUVkVKmnimwtj+CPegj8
-	 Yqe8N7T1L9GJg==
-Date: Sat, 28 Feb 2026 15:03:11 -0800
+	b=drBFJaXi3mSj4lyumQKUzSyEEhaUVEhD9gLWoHad2nQa2zc7yIdx0QHigj8silyMu
+	 rjUja3m7KmTeS6mko2Qufh4SaNwt1eDBNGp9nf5fONPQOTJSTpD1U5ybU/OCeLfrC4
+	 jyIwYvccHd8Iv4YoXwfqfX1zi2ETjfr2OmP/axwZFiyRX1dhx4L3zTHtvEU0Yd5PGW
+	 eYf3jtfx2Asurza/kWLkfRmhgEBERaccb13rxEYrCxNCvqA0+K9IL2XjnsvjEOttwF
+	 1HyjdhOG5R+5fiAkFw5wLDUP/XdrBDpN7aTXzY9YjcrdKpU27j3DhEdTvRLmpgJdPW
+	 St6N2A21tLpLA==
+Date: Sat, 28 Feb 2026 15:05:58 -0800
 From: Jakub Kicinski <kuba@kernel.org>
 To: Jiri Pirko <jiri@resnulli.us>
 Cc: netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com,
@@ -56,12 +56,12 @@ Cc: netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com,
  chuck.lever@oracle.com, matttbe@kernel.org, cjubran@nvidia.com,
  daniel.zahka@gmail.com, linux-doc@vger.kernel.org,
  linux-rdma@vger.kernel.org, linux-trace-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v2 08/10] devlink: introduce shared devlink
- instance for PFs on same chip
-Message-ID: <20260228150311.1a1ded74@kernel.org>
-In-Reply-To: <20260225133422.290965-9-jiri@resnulli.us>
+Subject: Re: [PATCH net-next v2 09/10] documentation: networking: add shared
+ devlink documentation
+Message-ID: <20260228150558.46f3be36@kernel.org>
+In-Reply-To: <20260225133422.290965-10-jiri@resnulli.us>
 References: <20260225133422.290965-1-jiri@resnulli.us>
-	<20260225133422.290965-9-jiri@resnulli.us>
+	<20260225133422.290965-10-jiri@resnulli.us>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -76,11 +76,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77444-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77445-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -98,21 +98,19 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: D5E491C999F
+X-Rspamd-Queue-Id: 7E4631C99C7
 X-Rspamd-Action: no action
 
-On Wed, 25 Feb 2026 14:34:20 +0100 Jiri Pirko wrote:
-> +struct devlink_shd {
-> +	struct list_head list; /* Node in shd list */
-> +	const char *id; /* Identifier string (e.g., serial number) */
-> +	refcount_t refcount; /* Reference count */
-> +	char priv[] __aligned(NETDEV_ALIGN); /* Driver private data */
-> +};
+On Wed, 25 Feb 2026 14:34:21 +0100 Jiri Pirko wrote:
+> +Shared devlink instances allow multiple physical functions (PFs) on the same
+> +chip to share an additional devlink instance for chip-wide operations. This
+> +is implemented within individual drivers alongside the individual PF devlink
+> +instances, not replacing them.
 
-As pointed out by AI you promised a size member and a __counted_by()
-annotation :)
--- 
-pw-bot: cr
+Sounds like you want to preclude what was the goal in the discussion
+with Przemek you quoted - a shared instance _only_ case. We don't have
+to implement it today, but I think it's an entirely sane direction.
+So the docs should not state otherwise.
 
