@@ -1,63 +1,73 @@
-Return-Path: <linux-doc+bounces-77459-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77460-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OAInOqArpGnZZgUAu9opvQ
-	(envelope-from <linux-doc+bounces-77459-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 13:05:52 +0100
+	id MOOqLfYvpGmBaAUAu9opvQ
+	(envelope-from <linux-doc+bounces-77460-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 13:24:22 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EA981CF80D
-	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 13:05:52 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D6AB1CF942
+	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 13:24:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id EA05A30185B0
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Mar 2026 12:05:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 806FF301F483
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Mar 2026 12:23:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58BB03242A9;
-	Sun,  1 Mar 2026 12:05:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 324B231A805;
+	Sun,  1 Mar 2026 12:23:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qQ7jW+cO"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SRqQaxkl"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 364C6322C99;
-	Sun,  1 Mar 2026 12:05:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 067AA28640B;
+	Sun,  1 Mar 2026 12:23:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772366734; cv=none; b=GPD+d0l7G4K54pg2qeMHrbb9sV3i0/G3kxK+F9tNfNCW5k48tz5+KYLytkY7VAxziJR0ZMj1Yhr02/pKXnI1W5Dgjx3DR4D62HYVLOB6Lnr5wKbqj8IZ1WTXFKs08Jzxzchw4SZOaIN59KqJTaUV8TwdF56QfwL5xN2x8bozdws=
+	t=1772367832; cv=none; b=O8plDOI+jxJg4VIDtd9nbKtGwgVCoF5S4DlkZ206PqDMAma6TQcR6KU5jPwt7musV52cXXCQ/M3n3UMszO9RRioJ9obBbh6FKXDQf1Rt8iJ0uwlJjdz8gbi92emnQnviMmqm7oPIyuCLrPhgiRglV3dpOCVTfcQhlIHSkH+rgYA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772366734; c=relaxed/simple;
-	bh=qEc7qeGNVclcQbZr5qkobSg2nqBpVYaw2dYdofFbQ4M=;
+	s=arc-20240116; t=1772367832; c=relaxed/simple;
+	bh=B5RHnWouZGbSWRKvAJTvQTX52TqXg+P+s4M4a2aEP54=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qR9/yz7OuGS2hlYmCiz/XDzvUJDbE2D2VgAJj+dT/FhPpfxCVaZewEaFcfZFwsM84MSyuJm8G9Q3AKTfvvVFwZolgMFTQHfPqDth0ByJwzbB7PS2G+RZsccunaoVYSeEoRtOJz+SItwSfUynth2WG3fEXqsSs7cK8V5Hy0KtaHQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qQ7jW+cO; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D1C9C116C6;
-	Sun,  1 Mar 2026 12:05:28 +0000 (UTC)
+	 MIME-Version:Content-Type; b=OuxtSKum7/C3WBGBIBQkR0T9RkSZCtqJQyBwTbAom8AIyWgPMFV/D5Kb+Z7lNreprWcF2UwdIVE8XjMjgC2CeGGyQpARCJMLftrsYRKwoalu59Tqvogqca2e/9KCeZfdpLfGv3+OXPcZChkhiOX0lKfFmVET4wrlWS416klYyYw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SRqQaxkl; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB996C116C6;
+	Sun,  1 Mar 2026 12:23:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772366733;
-	bh=qEc7qeGNVclcQbZr5qkobSg2nqBpVYaw2dYdofFbQ4M=;
+	s=k20201202; t=1772367831;
+	bh=B5RHnWouZGbSWRKvAJTvQTX52TqXg+P+s4M4a2aEP54=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=qQ7jW+cOA/7TJ1XD3R8Xlf7zJSznJAwSQRbjUr5ub+jCiwRWx81DHNVyehn909Y4n
-	 0P/8CYryQGT4Ju2t1Ot26MlTiY0KNakWF4vOee0eaZkgtEt7Hmhs/noZHawqcjpPsd
-	 ARfsAy9u0ELNqQFaDcyc4f7Uro8rlbJpjeAhCISWhbwhMVeLZ9bU5/3mxNYHItoK5E
-	 hRnaikt5ZelEjv+3MuoiRnQPa2nw8P6vhAi4Hgu21HfvbYbi3mPNascwpKuEH0Lss9
-	 4dpLrJRLC3fVpXrimEdtdw0SHl4aFT9ikmKAF/bHRUhfsA3Pe0+SbFsXpEAQ61ZaB0
-	 +WJ1H9DykQztQ==
-Date: Sun, 1 Mar 2026 12:05:24 +0000
+	b=SRqQaxkl1c5qvEi3MWrQPTMCN4Hktj/5X40pwrkmaIhIq4Wdiq7MS0iKYdkuUtebB
+	 3OkkAzGJnc16M5WmK5//QMdMVOSE6bADQhHi5FfixmPshN5x/VR+0FK+gOQGEox+GG
+	 SR+MDqgSWl//mwx0kYPacgwEyKN4sYpR+vCcWDgB316T+stKEKOu91LhJ54loIx1Xp
+	 JurezoT8ndzyF60cI9mPaxeFk4J90njUunDEXAenJXFMusobOQVopUiYo0Q6xzfdi+
+	 UEw+A2EywqSdKgA0XbAspGkJnAxgDA6b8k4UxYI41snPAZsee1DlpiqQrTSOSTxbtR
+	 2P8VjGaLAgkWA==
+Date: Sun, 1 Mar 2026 12:23:40 +0000
 From: Jonathan Cameron <jic23@kernel.org>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Taha Ed-Dafili <0rayn.dev@gmail.com>, linux-iio@vger.kernel.org,
- rdunlap@infradead.org, skhan@linuxfoundation.org, nuno.sa@analog.com,
- andy@kernel.org, corbet@lwn.net, lars@metafoo.de,
- Michael.Hennerich@analog.com, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 0/5] iio: accel: adxl345: Implement event scaling and
- ABI compliance
-Message-ID: <20260301120524.710676e5@jic23-huawei>
-In-Reply-To: <f697a233-2fde-49e8-8c85-dbcf2599eaa9@baylibre.com>
-References: <20260226151108.22383-1-0rayn.dev@gmail.com>
-	<f697a233-2fde-49e8-8c85-dbcf2599eaa9@baylibre.com>
+To: Andy Shevchenko <andy.shevchenko@gmail.com>
+Cc: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>, Andy Shevchenko
+ <andriy.shevchenko@intel.com>, Rodrigo Alencar via B4 Relay
+ <devnull+rodrigo.alencar.analog.com@kernel.org>,
+ rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org,
+ linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org, David Lechner <dlechner@baylibre.com>, Andy
+ Shevchenko <andy@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Michael
+ Hennerich <Michael.Hennerich@analog.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Dmitry Antipov
+ <dmantipov@yandex.ru>
+Subject: Re: [PATCH v7 2/8] iio: core: add fixed point parsing with 64-bit
+ parts
+Message-ID: <20260301122340.3fedf64e@jic23-huawei>
+In-Reply-To: <CAHp75VdSV2QDMR0DueCuP=Ds-5A1NsNjqPWtmRbG4NvoJ=LjXQ@mail.gmail.com>
+References: <20260216-adf41513-iio-driver-v7-0-b0ed387ab559@analog.com>
+	<20260216-adf41513-iio-driver-v7-2-b0ed387ab559@analog.com>
+	<20260222172912.60a103c0@jic23-huawei>
+	<aZwYshRxNgSh3CWk@smile.fi.intel.com>
+	<zb752y7tnjzsc35na572o4sip6efwv3i4lha4ls6fhdrr52h5v@bfgy65cmae4p>
+	<CAHp75VdSV2QDMR0DueCuP=Ds-5A1NsNjqPWtmRbG4NvoJ=LjXQ@mail.gmail.com>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -65,52 +75,121 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77459-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	TAGGED_FROM(0.00)[bounces-77460-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,infradead.org,linuxfoundation.org,analog.com,kernel.org,lwn.net,metafoo.de];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FREEMAIL_CC(0.00)[gmail.com,intel.com,kernel.org,analog.com,vger.kernel.org,baylibre.com,metafoo.de,lwn.net,yandex.ru];
+	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,baylibre.com:email]
-X-Rspamd-Queue-Id: 7EA981CF80D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,analog.com:email]
+X-Rspamd-Queue-Id: 3D6AB1CF942
 X-Rspamd-Action: no action
 
-On Sat, 28 Feb 2026 10:27:35 -0600
-David Lechner <dlechner@baylibre.com> wrote:
+On Mon, 23 Feb 2026 12:41:45 +0200
+Andy Shevchenko <andy.shevchenko@gmail.com> wrote:
 
-> On 2/26/26 9:11 AM, Taha Ed-Dafili wrote:
-> > This series addresses ADXL345 driver non-compliance with the IIO ABI.
-> >   
-> Reviewed-by: David Lechner <dlechner@baylibre.com>
-> 
+> On Mon, Feb 23, 2026 at 12:37=E2=80=AFPM Rodrigo Alencar
+> <455.rodrigo.alencar@gmail.com> wrote:
+> > On 26/02/23 11:06AM, Andy Shevchenko wrote: =20
+> > > On Sun, Feb 22, 2026 at 05:29:12PM +0000, Jonathan Cameron wrote: =20
+> > > > On Mon, 16 Feb 2026 15:02:17 +0000
+> > > > Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@ke=
+rnel.org> wrote:
+> > > > =20
+> > > > > Add iio_str_to_fixpoint64() function that leverages simple_strtou=
+ll()
+> > > > > to parse numbers from a string.
+> > > > > A helper function __iio_str_to_fixpoint64() replaces
+> > > > > __iio_str_to_fixpoint() implementation, extending its usage for
+> > > > > 64-bit fixed-point parsing.
+> > > > >
+> > > > > Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com> =20
+> > > > Hi Rodrigo.
+> > > >
+> > > > This looks fine to me, but given earlier discussions I'd ideally li=
+ke
+> > > > to wait for a final review from Andy. =20
+> > >
+> > > It all depends on the series from Dmitry Antipov.
+> > > Can somebody help reviewing the patch 1 there?
+> > > https://lore.kernel.org/linux-hardening/20260212125628.739276-1-dmant=
+ipov@yandex.ru/ =20
+> >
+> > can we push for the exposure of that function to kernel modules?
+> > We have discussed that in v6, and I understand that:
+> >
+> > EXPORT_SYMBOL_FOR_MODULES(_parse_integer_limit, "industrialio");
+> > in lib/kstrtox.c;
+> >
+> > #include "../../lib/kstrtox.h"
+> > in drivers/iio/industrialio-core.c
+> >
+> > is not a good call... =20
+>=20
+> Yep, because it's a temporary band-aid. The proper solution is to have
+> shared code provided by the lib/. So, the wrapper to parse 64-bit out
+> from the constant string literal should be part of the lib/ in the
+> result.
+>=20
+> > > When it's in, we can continue on this one. TL;DR: for me this is on h=
+old.
+> > > But if you see the need to have the driver being in IIO, please add a=
+ big
+> > > fat FIXME to make sure we will get this all being sorted out in the
+> > > (nearest?) future. =20
+> >
+> > I could add the FIXME into iio_safe_strntou64() doc header. It explains
+> > the context:
+> > =20
+> > > + * The implementation of this function is similar to _parse_integer_=
+limit()
+> > > + * available in lib/kstrtox.h, but that header/function is not avail=
+able to be
+> > > + * used in kernel modules. Hence, this implementation may need to ch=
+ange or
+> > > + * removed to reuse a new suitable helper that is properly exposed. =
+=20
+>=20
+> Up to Jonathan, I hope we can move the above mentioned series forward.
+> Without that, as I pointed out, this one sounds to me suboptimal and
+> unneeded double effort.
+>=20
+I don't want to hold this series for another cycle, but we are still
+fairly early in this one, so some focus on moving that forwards seems
+sensible.  If we are running out of time, we can fallback to a loud
+FIXME and a plan to move to the generic version in the library next cycle.
+So let's set a rough deadline of rc5 and see how things are going then.
 
-Updated to add your tag.
+For now I'm going to mark this series as "changes requested" in patchwork
+and stop tracking it.=20
 
-Thanks,
+Jonathan
 
-J
+>=20
+
 
