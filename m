@@ -1,466 +1,624 @@
-Return-Path: <linux-doc+bounces-77452-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77454-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yGpaJ5Ofo2k3IQUAu9opvQ
-	(envelope-from <linux-doc+bounces-77452-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 03:08:19 +0100
+	id 2MN9BFewo2kmJwUAu9opvQ
+	(envelope-from <linux-doc+bounces-77454-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 04:19:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E0201CD0AA
-	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 03:08:19 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BD7D1CE65F
+	for <lists+linux-doc@lfdr.de>; Sun, 01 Mar 2026 04:19:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A71FB30185DD
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Mar 2026 02:02:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D8E2D3046002
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Mar 2026 02:37:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 805362FDC20;
-	Sun,  1 Mar 2026 02:02:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CB98F30B50C;
+	Sun,  1 Mar 2026 02:37:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="irRMQdGd"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NqrNlxQl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ua1-f44.google.com (mail-ua1-f44.google.com [209.85.222.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D1F413D53C;
-	Sun,  1 Mar 2026 02:02:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B3662C0F6F
+	for <linux-doc@vger.kernel.org>; Sun,  1 Mar 2026 02:37:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772330568; cv=none; b=DAvfJQ4OfYEDgQdvkPeh+YXy52fgu0VS4D1OcQij1u8PaMpnCQphB3QRkmjpHWDvg+zyw+ghQv1RRx8qdBm/YEpLmyaSncRgYgzUg9SJFty1AoL9Iib5XdgWtSU0l8nPZE2GMjE7NG9APHlCxo/2QyShbYjgofp6REs7t2NHnS0=
+	t=1772332635; cv=none; b=Hi+CVzPkLx0SazUjItLoIwZOGfiw/EOPFqM63Ve3nbvbU3YT2P1fUmoa5/f6wri9LSu5QM5oYTO7zYrgTm3WMmnywQ9C9S95a6QlrCnA92TdlvIh2mGrI+IpFWFYpQiPsHxKoApNFPx5JxANwkjXKun8urmTgskX9iPiqJpoEis=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772330568; c=relaxed/simple;
-	bh=RQcBnZsGm1a578ubRGJsgCZ+AAv6nSB7DY/6r/jwZ5s=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=TQl3FAx3L7KKyYkI9dHZTVVdOaeUbWsz/M86X1B9kYDMBlkZNiLHSwYxBnJ+EEWuk4SBHtR31yn1/gGN6BkFCg78E8lId3zctr9XW26taXaeKnwxO7oPqEe7eqqh63R/WZKwBkTvW0IPF7LXkFJZOEq+e6LHeAGrObGOf/QiSTM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=irRMQdGd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DE3EC19421;
-	Sun,  1 Mar 2026 02:02:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772330568;
-	bh=RQcBnZsGm1a578ubRGJsgCZ+AAv6nSB7DY/6r/jwZ5s=;
-	h=From:To:Cc:Subject:Date:From;
-	b=irRMQdGdLhw0ry5ojA8pG8yJW4/Az9cn0H+s9f4IEgKzNRE+ccAszjbCFdIhDAAc3
-	 VTODpR9izU2fwrkykndokT4hspEhtYTz9SIC7pDm1ait494Mi5z1EFoWCmONtR1RGm
-	 j2xBe2/ZtiapnGxmDGJORGdisP8K6l1lhX68QVEdriSMXx+tO6YCbpLpgk/vSV3sWt
-	 EEPdzvcCEN2WFNLRMlhYUVc9X1QyLAHuPASeCB0ahdgMCOI9n/6mUOBUw8dXiAfRsp
-	 J62MnDpoUeGBgZfYRQMFdJp0VtgVzN+yZB1bUz38wFFBEatj+Cqzrq4ZNPA0hErcps
-	 JV5gx0LKMCTUQ==
-From: Sasha Levin <sashal@kernel.org>
-To: stable@vger.kernel.org,
-	khushit.shah@nutanix.com
-Cc: David Woodhouse <dwmw2@infradead.org>,
-	Sean Christopherson <seanjc@google.com>,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: FAILED: Patch "KVM: x86: Add x2APIC "features" to control EOI broadcast suppression" failed to apply to 5.10-stable tree
-Date: Sat, 28 Feb 2026 21:02:45 -0500
-Message-ID: <20260301020246.1730675-1-sashal@kernel.org>
-X-Mailer: git-send-email 2.51.0
+	s=arc-20240116; t=1772332635; c=relaxed/simple;
+	bh=IyEbJYxrsV1JBwMnMEihZVIf7mSxu6wGclfq/BJprUc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=e8df0QkDrsYzd+iPv2G5Fjv7uted0xNr25GHl5o63X1/cQL2A9riJWL4jqH0VfSGaS9rNGL03n8ZD6jNmIm/6sBqBMpiRu4vJU+9aA1TKokWDlT3DaT9ogpZmvC5qK3WUIkPdgN7DMIXEXBkO5FwST927QgcKOikmwyP/pYpdzk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NqrNlxQl; arc=none smtp.client-ip=209.85.222.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ua1-f44.google.com with SMTP id a1e0cc1a2514c-94dd687e040so737906241.3
+        for <linux-doc@vger.kernel.org>; Sat, 28 Feb 2026 18:37:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1772332633; x=1772937433; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/i9SCxmAm1rOFvHJgHTXMn0zU3SmPhUk/avAtlfnink=;
+        b=NqrNlxQlXTtGgc+V8jAnQsqOadn/uqBt8teiuWEO5ZlCTnb8vR/iP/PjPj1rC4jTYD
+         3iwzbyt0WogokPIX0z3gekSTHfbxvXsBmUte+6Lvm9XtdoB3bccfzmEmxnM9/SQDg3tj
+         3Qi2HZFYe4hMYb+aQ0Bp7Hac9lMHJpVwfSmvRqBTNT9zG/hWST4eZeBDFyaEWCBnklLI
+         GEC1iVHPklOxRqTjMEWHYqH1KaSzgGZUwA60MSB8ogKIqfm0vZBXGZ5MeFVBI8qLYigG
+         +G2OqV5N5mXwQovNx0smMqlyB8x6d6ddikrJAgWtwjZTTuQtwz7Lj3SlpuJmTHjInZjq
+         5S9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772332633; x=1772937433;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/i9SCxmAm1rOFvHJgHTXMn0zU3SmPhUk/avAtlfnink=;
+        b=DZPqfGX6Ij2m3kQ8LL4dHuMQv0W2tFyi2kJM3FmXZzZzraiWda3of//pCQx3BIVBPB
+         WAo7vtOkbr7kyJoDOXwBz44ddq5Aa6mkHdnZQjVJGW8UnENUjjXMGT1Q2l/p9gnWDBBn
+         JGC2vOR3SXaaNkEwYZYSjN2wGOPvwFfz6P/GKSlCw+IgP6pAnxy/CAbjPRXmWXwDB9rm
+         GTNMDold7WEu3h2Bhu6ljOUyqVlEFYib7Cw3Fkvc0PEf1WzpQvgzR94ID4by7tum1tph
+         HrXsPp7XoH5cauTREEhJa9pTO6hKurpiRkA3hpSA4BJ916TvWjb0NqA09JDf6ILt+Rzn
+         B5Ag==
+X-Forwarded-Encrypted: i=1; AJvYcCXVUgRyw6RFp7zHaqXv6Gnfz3Y3LpR6qYZmwbvq9oyrabkgM3E3Ns2tymQ4cSfg64ewxmqUNcesH6E=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw/jDojG7O7Vu7kylKPa6whYEQ7brfq0PTUJx6QfiyXeaBmyILF
+	fZaPSKoC6IXLm4vcGgP85EDssjtld43zQdt64AxD4fKfXccTW0RQE401
+X-Gm-Gg: ATEYQzzJmGytxj2j8ypqLKhpRnv01sBtwTlPXDBZYphc1LFCJKfV+ALKhf9oPP87gAX
+	/WnP4/vcX2rhY5Ux2Q2sBuPt2U8+SFR0t+xtocij5s10tvFXMqpr3V6c2jkczqioG0D0laDNWPu
+	2wDhF2Zi/lRDHDiwtCokBRPUxt40zZDtY366Ad9G1tgTjZXC2UYVU+brNQynpl3GqPtbhkNpnd4
+	j7xO5PyF+Vzme9eyOUq2kUViYj4yHPU9yp+GgqxVXVg3GjSIF+uANJpnuIBnm3ZakDqXixHgsp0
+	nFx+LySZHx53h6bM5WSP4giG70Xa+M7lhyXloi8thLwbxfcd0Fu4EX2YUfWh97/49dUvVJYcfOi
+	C568hEbFEcZFmnEpetybOqXo/hKjvP0WFdh/olNS7tAI+XcfFtFP7hL6yo3egvtUfsTuP9IdKUy
+	L/2EBK7hTwl2ZBPHeHjlTCSPumUJ4CM7wC5W90LtDrLm5fVo5kX9WQbSDim0VfuxZ5jpG6vWk=
+X-Received: by 2002:a05:6102:5090:b0:5ed:679:d9ce with SMTP id ada2fe7eead31-5ff32308df7mr3098189137.9.1772332632823;
+        Sat, 28 Feb 2026 18:37:12 -0800 (PST)
+Received: from localhost.localdomain ([2800:810:454:2302:21e3:1f3d:4de1:310a])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-94df61672ddsm8703261241.0.2026.02.28.18.37.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 28 Feb 2026 18:37:11 -0800 (PST)
+From: Mariano Abad <weimaraner@gmail.com>
+To: linux-hwmon@vger.kernel.org
+Cc: linux@roeck-us.net,
+	corbet@lwn.net,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Mariano Abad <weimaraner@gmail.com>
+Subject: [PATCH] hwmon: Add LattePanda Sigma EC driver
+Date: Sat, 28 Feb 2026 23:37:07 -0300
+Message-ID: <20260301023707.1184592-1-weimaraner@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Patchwork-Hint: ignore
-X-stable: review
 Content-Transfer-Encoding: 8bit
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77452-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[roeck-us.net,lwn.net,vger.kernel.org,gmail.com];
+	TAGGED_FROM(0.00)[bounces-77454-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[weimaraner@gmail.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_FIVE(0.00)[6];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,msgid.link:url,infradead.org:email,nutanix.com:email]
-X-Rspamd-Queue-Id: 4E0201CD0AA
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 8BD7D1CE65F
 X-Rspamd-Action: no action
 
-The patch below does not apply to the 5.10-stable tree.
-If someone wants it applied there, or to any other stable or longterm
-tree, then please email the backport, including the original git commit
-id to <stable@vger.kernel.org>.
+The LattePanda Sigma is an x86 single-board computer made by DFRobot,
+featuring an Intel Core i5-1340P and an ITE IT8613E Embedded Controller
+that manages fan speed and thermal monitoring.
 
-Thanks,
-Sasha
+The BIOS declares the ACPI Embedded Controller as disabled (_STA returns
+0), so standard Linux hwmon interfaces do not expose the EC sensors.
+This driver reads the EC directly via the ACPI EC I/O ports (0x62/0x66)
+to provide:
+  - CPU fan speed (RPM)
+  - Board temperature
+  - CPU proximity temperature
 
------------------- original commit in Linus's tree ------------------
+The driver uses DMI matching and only loads on verified LattePanda Sigma
+hardware. Fan speed is controlled autonomously by the EC firmware and is
+read-only from the host.
 
-From 6517dfbcc918f970a928d9dc17586904bac06893 Mon Sep 17 00:00:00 2001
-From: Khushit Shah <khushit.shah@nutanix.com>
-Date: Fri, 23 Jan 2026 12:56:25 +0000
-Subject: [PATCH] KVM: x86: Add x2APIC "features" to control EOI broadcast
- suppression
+The EC register map was discovered through firmware reverse engineering
+and confirmed by physical testing (stopping the fan, observing RPM drop
+to zero).
 
-Add two flags for KVM_CAP_X2APIC_API to allow userspace to control support
-for Suppress EOI Broadcasts when using a split IRQCHIP (I/O APIC emulated
-by userspace), which KVM completely mishandles. When x2APIC support was
-first added, KVM incorrectly advertised and "enabled" Suppress EOI
-Broadcast, without fully supporting the I/O APIC side of the equation,
-i.e. without adding directed EOI to KVM's in-kernel I/O APIC.
-
-That flaw was carried over to split IRQCHIP support, i.e. KVM advertised
-support for Suppress EOI Broadcasts irrespective of whether or not the
-userspace I/O APIC implementation supported directed EOIs. Even worse,
-KVM didn't actually suppress EOI broadcasts, i.e. userspace VMMs without
-support for directed EOI came to rely on the "spurious" broadcasts.
-
-KVM "fixed" the in-kernel I/O APIC implementation by completely disabling
-support for Suppress EOI Broadcasts in commit 0bcc3fb95b97 ("KVM: lapic:
-stop advertising DIRECTED_EOI when in-kernel IOAPIC is in use"), but
-didn't do anything to remedy userspace I/O APIC implementations.
-
-KVM's bogus handling of Suppress EOI Broadcast is problematic when the
-guest relies on interrupts being masked in the I/O APIC until well after
-the initial local APIC EOI. E.g. Windows with Credential Guard enabled
-handles interrupts in the following order:
-  1. Interrupt for L2 arrives.
-  2. L1 APIC EOIs the interrupt.
-  3. L1 resumes L2 and injects the interrupt.
-  4. L2 EOIs after servicing.
-  5. L1 performs the I/O APIC EOI.
-
-Because KVM EOIs the I/O APIC at step #2, the guest can get an interrupt
-storm, e.g. if the IRQ line is still asserted and userspace reacts to the
-EOI by re-injecting the IRQ, because the guest doesn't de-assert the line
-until step #4, and doesn't expect the interrupt to be re-enabled until
-step #5.
-
-Unfortunately, simply "fixing" the bug isn't an option, as KVM has no way
-of knowing if the userspace I/O APIC supports directed EOIs, i.e.
-suppressing EOI broadcasts would result in interrupts being stuck masked
-in the userspace I/O APIC due to step #5 being ignored by userspace. And
-fully disabling support for Suppress EOI Broadcast is also undesirable, as
-picking up the fix would require a guest reboot, *and* more importantly
-would change the virtual CPU model exposed to the guest without any buy-in
-from userspace.
-
-Add KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST and
-KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST flags to allow userspace to
-explicitly enable or disable support for Suppress EOI Broadcasts. This
-gives userspace control over the virtual CPU model exposed to the guest,
-as KVM should never have enabled support for Suppress EOI Broadcast without
-userspace opt-in. Not setting either flag will result in legacy quirky
-behavior for backward compatibility.
-
-Disallow fully enabling SUPPRESS_EOI_BROADCAST when using an in-kernel
-I/O APIC, as KVM's history/support is just as tragic.  E.g. it's not clear
-that commit c806a6ad35bf ("KVM: x86: call irq notifiers with directed EOI")
-was entirely correct, i.e. it may have simply papered over the lack of
-Directed EOI emulation in the I/O APIC.
-
-Note, Suppress EOI Broadcasts is defined only in Intel's SDM, not in AMD's
-APM. But the bit is writable on some AMD CPUs, e.g. Turin, and KVM's ABI
-is to support Directed EOI (KVM's name) irrespective of guest CPU vendor.
-
-Fixes: 7543a635aa09 ("KVM: x86: Add KVM exit for IOAPIC EOIs")
-Closes: https://lore.kernel.org/kvm/7D497EF1-607D-4D37-98E7-DAF95F099342@nutanix.com
-Cc: stable@vger.kernel.org
-Suggested-by: David Woodhouse <dwmw2@infradead.org>
-Signed-off-by: Khushit Shah <khushit.shah@nutanix.com>
-Link: https://patch.msgid.link/20260123125657.3384063-1-khushit.shah@nutanix.com
-[sean: clean up minor formatting goofs and fix a comment typo]
-Co-developed-by: Sean Christopherson <seanjc@google.com>
-Signed-off-by: Sean Christopherson <seanjc@google.com>
+Signed-off-by: Mariano Abad <weimaraner@gmail.com>
 ---
- Documentation/virt/kvm/api.rst  | 28 +++++++++++-
- arch/x86/include/asm/kvm_host.h |  7 +++
- arch/x86/include/uapi/asm/kvm.h |  6 ++-
- arch/x86/kvm/ioapic.c           |  2 +-
- arch/x86/kvm/lapic.c            | 76 +++++++++++++++++++++++++++++----
- arch/x86/kvm/lapic.h            |  2 +
- arch/x86/kvm/x86.c              | 21 ++++++++-
- 7 files changed, 127 insertions(+), 15 deletions(-)
+ Documentation/hwmon/lattepanda-sigma-ec.rst |  64 ++++
+ MAINTAINERS                                 |   7 +
+ drivers/hwmon/Kconfig                       |  17 +
+ drivers/hwmon/Makefile                      |   1 +
+ drivers/hwmon/lattepanda-sigma-ec.c         | 328 ++++++++++++++++++++
+ 5 files changed, 417 insertions(+)
+ create mode 100644 Documentation/hwmon/lattepanda-sigma-ec.rst
+ create mode 100644 drivers/hwmon/lattepanda-sigma-ec.c
 
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index 01a3abef8abb9..f1f1d2e5dc7c9 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -7835,8 +7835,10 @@ Will return -EBUSY if a VCPU has already been created.
- 
- Valid feature flags in args[0] are::
- 
--  #define KVM_X2APIC_API_USE_32BIT_IDS            (1ULL << 0)
--  #define KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK  (1ULL << 1)
-+  #define KVM_X2APIC_API_USE_32BIT_IDS                          (1ULL << 0)
-+  #define KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK                (1ULL << 1)
-+  #define KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST              (1ULL << 2)
-+  #define KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST             (1ULL << 3)
- 
- Enabling KVM_X2APIC_API_USE_32BIT_IDS changes the behavior of
- KVM_SET_GSI_ROUTING, KVM_SIGNAL_MSI, KVM_SET_LAPIC, and KVM_GET_LAPIC,
-@@ -7849,6 +7851,28 @@ as a broadcast even in x2APIC mode in order to support physical x2APIC
- without interrupt remapping.  This is undesirable in logical mode,
- where 0xff represents CPUs 0-7 in cluster 0.
- 
-+Setting KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST instructs KVM to enable
-+Suppress EOI Broadcasts.  KVM will advertise support for Suppress EOI
-+Broadcast to the guest and suppress LAPIC EOI broadcasts when the guest
-+sets the Suppress EOI Broadcast bit in the SPIV register.  This flag is
-+supported only when using a split IRQCHIP.
+diff --git a/Documentation/hwmon/lattepanda-sigma-ec.rst b/Documentation/hwmon/lattepanda-sigma-ec.rst
+new file mode 100644
+index 000000000..e8bc9a71e
+--- /dev/null
++++ b/Documentation/hwmon/lattepanda-sigma-ec.rst
+@@ -0,0 +1,64 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
 +
-+Setting KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST disables support for
-+Suppress EOI Broadcasts entirely, i.e. instructs KVM to NOT advertise
-+support to the guest.
++Kernel driver lattepanda-sigma-ec
++=================================
 +
-+Modern VMMs should either enable KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST
-+or KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST.  If not, legacy quirky
-+behavior will be used by KVM: in split IRQCHIP mode, KVM will advertise
-+support for Suppress EOI Broadcasts but not actually suppress EOI
-+broadcasts; for in-kernel IRQCHIP mode, KVM will not advertise support for
-+Suppress EOI Broadcasts.
++Supported systems:
 +
-+Setting both KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST and
-+KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST will fail with an EINVAL error,
-+as will setting KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST without a split
-+IRCHIP.
++  * LattePanda Sigma (Intel 13th Gen i5-1340P)
 +
- 7.8 KVM_CAP_S390_USER_INSTR0
- ----------------------------
++    DMI vendor: LattePanda
++
++    DMI product: LattePanda Sigma
++
++    Datasheet: Not available (EC registers discovered empirically)
++
++Author: Mariano Abad <weimaraner@gmail.com>
++
++Description
++-----------
++
++This driver provides hardware monitoring for the LattePanda Sigma
++single-board computer. The board's Embedded Controller manages a CPU
++cooling fan but does not expose sensor data through standard ACPI
++interfaces.
++
++The BIOS declares the ACPI Embedded Controller (``PNP0C09``) with
++``_STA`` returning 0 (not present), preventing the kernel's ACPI EC
++subsystem from initializing. However, the EC hardware is fully
++functional on the standard ACPI EC I/O ports (``0x62`` data, ``0x66``
++command/status). This driver uses direct port I/O with EC read command
++``0x80`` to access sensor registers.
++
++The EC register map was discovered empirically by dumping all 256
++registers, identifying those that change in real-time, then validating
++by physically stopping the fan and observing the RPM drop to zero.
++
++The driver uses DMI matching and will only load on LattePanda Sigma
++hardware.
++
++Sysfs attributes
++----------------
++
++======================= ===============================================
++``fan1_input``          Fan speed in RPM (EC registers 0x2E:0x2F,
++                        16-bit big-endian)
++``fan1_label``          "CPU Fan"
++``temp1_input``         Board/ambient temperature in millidegrees
++                        Celsius (EC register 0x60)
++``temp1_label``         "Board Temp"
++``temp2_input``         CPU proximity temperature in millidegrees
++                        Celsius (EC register 0x70)
++``temp2_label``         "CPU Temp"
++======================= ===============================================
++
++Known limitations
++-----------------
++
++* The EC register map was reverse-engineered on a LattePanda Sigma with
++  BIOS version 5.27. Different BIOS versions may use different register
++  offsets.
++* Fan speed control is not supported. The fan is always under EC
++  automatic control.
++* The I/O ports ``0x62``/``0x66`` are shared with the ACPI EC subsystem
++  and are not exclusively reserved by this driver.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 96e97d25e..7b0c5bb5d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14414,6 +14414,13 @@ F:	drivers/net/wan/framer/
+ F:	drivers/pinctrl/pinctrl-pef2256.c
+ F:	include/linux/framer/
  
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index 80fd7ca69c873..0414859bfa66e 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -1228,6 +1228,12 @@ enum kvm_irqchip_mode {
- 	KVM_IRQCHIP_SPLIT,        /* created with KVM_CAP_SPLIT_IRQCHIP */
- };
++LATTEPANDA SIGMA EC HARDWARE MONITOR DRIVER
++M:	Mariano Abad <weimaraner@gmail.com>
++L:	linux-hwmon@vger.kernel.org
++S:	Maintained
++F:	Documentation/hwmon/lattepanda-sigma-ec.rst
++F:	drivers/hwmon/lattepanda-sigma-ec.c
++
+ LASI 53c700 driver for PARISC
+ M:	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
+ L:	linux-scsi@vger.kernel.org
+diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
+index 41c381764..f2e2ee96f 100644
+--- a/drivers/hwmon/Kconfig
++++ b/drivers/hwmon/Kconfig
+@@ -990,6 +990,23 @@ config SENSORS_LAN966X
+ 	  This driver can also be built as a module. If so, the module
+ 	  will be called lan966x-hwmon.
  
-+enum kvm_suppress_eoi_broadcast_mode {
-+	KVM_SUPPRESS_EOI_BROADCAST_QUIRKED, /* Legacy behavior */
-+	KVM_SUPPRESS_EOI_BROADCAST_ENABLED, /* Enable Suppress EOI broadcast */
-+	KVM_SUPPRESS_EOI_BROADCAST_DISABLED /* Disable Suppress EOI broadcast */
++config SENSORS_LATTEPANDA_SIGMA_EC
++	tristate "LattePanda Sigma EC hardware monitoring"
++	depends on X86
++	depends on DMI
++	depends on HAS_IOPORT
++	help
++	  If you say yes here you get support for the hardware monitoring
++	  features of the Embedded Controller on LattePanda Sigma
++	  single-board computers, including CPU fan speed (RPM) and
++	  board and CPU temperatures.
++
++	  The driver reads the EC directly via ACPI EC I/O ports and
++	  uses DMI matching to ensure it only loads on supported hardware.
++
++	  This driver can also be built as a module. If so, the module
++	  will be called lattepanda-sigma-ec.
++
+ config SENSORS_LENOVO_EC
+         tristate "Sensor reader for Lenovo ThinkStations"
+         depends on X86
+diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
+index eade8e3b1..0372fedbb 100644
+--- a/drivers/hwmon/Makefile
++++ b/drivers/hwmon/Makefile
+@@ -114,6 +114,7 @@ obj-$(CONFIG_SENSORS_K10TEMP)	+= k10temp.o
+ obj-$(CONFIG_SENSORS_KBATT)	+= kbatt.o
+ obj-$(CONFIG_SENSORS_KFAN)	+= kfan.o
+ obj-$(CONFIG_SENSORS_LAN966X)	+= lan966x-hwmon.o
++obj-$(CONFIG_SENSORS_LATTEPANDA_SIGMA_EC) += lattepanda-sigma-ec.o
+ obj-$(CONFIG_SENSORS_LENOVO_EC)	+= lenovo-ec-sensors.o
+ obj-$(CONFIG_SENSORS_LINEAGE)	+= lineage-pem.o
+ obj-$(CONFIG_SENSORS_LOCHNAGAR)	+= lochnagar-hwmon.o
+diff --git a/drivers/hwmon/lattepanda-sigma-ec.c b/drivers/hwmon/lattepanda-sigma-ec.c
+new file mode 100644
+index 000000000..60558e449
+--- /dev/null
++++ b/drivers/hwmon/lattepanda-sigma-ec.c
+@@ -0,0 +1,328 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Hardware monitoring driver for LattePanda Sigma EC.
++ *
++ * Reads fan RPM and temperatures from the Embedded Controller via
++ * ACPI EC I/O ports (0x62 data, 0x66 cmd/status). The BIOS reports
++ * the ACPI EC as disabled (_STA=0), so direct port I/O is used.
++ *
++ * Copyright (c) 2026 Mariano Abad <weimaraner@gmail.com>
++ */
++
++#include <linux/delay.h>
++#include <linux/dmi.h>
++#include <linux/hwmon.h>
++#include <linux/io.h>
++#include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/platform_device.h>
++
++#define DRIVER_NAME	"lattepanda_sigma_ec"
++
++/* EC I/O ports (standard ACPI EC interface) */
++#define EC_DATA_PORT	0x62
++#define EC_CMD_PORT	0x66	/* also status port */
++
++/* EC commands */
++#define EC_CMD_READ	0x80
++
++/* EC status register bits */
++#define EC_STATUS_OBF	0x01	/* Output Buffer Full */
++#define EC_STATUS_IBF	0x02	/* Input Buffer Full */
++
++/* EC register offsets for LattePanda Sigma */
++#define EC_REG_FAN_RPM_HI	0x2E
++#define EC_REG_FAN_RPM_LO	0x2F
++#define EC_REG_TEMP1		0x60
++#define EC_REG_TEMP2		0x70
++#define EC_REG_FAN_DUTY		0x93
++
++/* Timeout for EC operations (in microseconds) */
++#define EC_TIMEOUT_US		25000
++#define EC_POLL_INTERVAL_US	5
++
++struct lattepanda_sigma_ec_data {
++	struct mutex lock;	/* serialize EC access */
 +};
 +
- struct kvm_x86_msr_filter {
- 	u8 count;
- 	bool default_allow:1;
-@@ -1477,6 +1483,7 @@ struct kvm_arch {
- 
- 	bool x2apic_format;
- 	bool x2apic_broadcast_quirk_disabled;
-+	enum kvm_suppress_eoi_broadcast_mode suppress_eoi_broadcast_mode;
- 
- 	bool has_mapped_host_mmio;
- 	bool guest_can_read_msr_platform_info;
-diff --git a/arch/x86/include/uapi/asm/kvm.h b/arch/x86/include/uapi/asm/kvm.h
-index 7ceff65836525..1208932e5cc3c 100644
---- a/arch/x86/include/uapi/asm/kvm.h
-+++ b/arch/x86/include/uapi/asm/kvm.h
-@@ -914,8 +914,10 @@ struct kvm_sev_snp_launch_finish {
- 	__u64 pad1[4];
- };
- 
--#define KVM_X2APIC_API_USE_32BIT_IDS            (1ULL << 0)
--#define KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK  (1ULL << 1)
-+#define KVM_X2APIC_API_USE_32BIT_IDS			_BITULL(0)
-+#define KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK		_BITULL(1)
-+#define KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST	_BITULL(2)
-+#define KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST	_BITULL(3)
- 
- struct kvm_hyperv_eventfd {
- 	__u32 conn_id;
-diff --git a/arch/x86/kvm/ioapic.c b/arch/x86/kvm/ioapic.c
-index 2c2783296aedb..a26fa4222f292 100644
---- a/arch/x86/kvm/ioapic.c
-+++ b/arch/x86/kvm/ioapic.c
-@@ -561,7 +561,7 @@ static void kvm_ioapic_update_eoi_one(struct kvm_vcpu *vcpu,
- 	spin_lock(&ioapic->lock);
- 
- 	if (trigger_mode != IOAPIC_LEVEL_TRIG ||
--	    kvm_lapic_get_reg(apic, APIC_SPIV) & APIC_SPIV_DIRECTED_EOI)
-+	    kvm_lapic_suppress_eoi_broadcast(apic))
- 		return;
- 
- 	ASSERT(ent->fields.trig_mode == IOAPIC_LEVEL_TRIG);
-diff --git a/arch/x86/kvm/lapic.c b/arch/x86/kvm/lapic.c
-index 01c2557bfa055..738ec3c1b0b57 100644
---- a/arch/x86/kvm/lapic.c
-+++ b/arch/x86/kvm/lapic.c
-@@ -105,6 +105,63 @@ bool kvm_apic_pending_eoi(struct kvm_vcpu *vcpu, int vector)
- 		apic_test_vector(vector, apic->regs + APIC_IRR);
- }
- 
-+static bool kvm_lapic_advertise_suppress_eoi_broadcast(struct kvm *kvm)
++static struct platform_device *lps_ec_pdev;
++
++static int ec_wait_ibf_clear(void)
 +{
-+	switch (kvm->arch.suppress_eoi_broadcast_mode) {
-+	case KVM_SUPPRESS_EOI_BROADCAST_ENABLED:
-+		return true;
-+	case KVM_SUPPRESS_EOI_BROADCAST_DISABLED:
-+		return false;
-+	case KVM_SUPPRESS_EOI_BROADCAST_QUIRKED:
-+		/*
-+		 * The default in-kernel I/O APIC emulates the 82093AA and does not
-+		 * implement an EOI register. Some guests (e.g. Windows with the
-+		 * Hyper-V role enabled) disable LAPIC EOI broadcast without
-+		 * checking the I/O APIC version, which can cause level-triggered
-+		 * interrupts to never be EOI'd.
-+		 *
-+		 * To avoid this, KVM doesn't advertise Suppress EOI Broadcast
-+		 * support when using the default in-kernel I/O APIC.
-+		 *
-+		 * Historically, in split IRQCHIP mode, KVM always advertised
-+		 * Suppress EOI Broadcast support but did not actually suppress
-+		 * EOIs, resulting in quirky behavior.
-+		 */
-+		return !ioapic_in_kernel(kvm);
++	int timeout = EC_TIMEOUT_US / EC_POLL_INTERVAL_US;
++
++	while (timeout--) {
++		if (!(inb(EC_CMD_PORT) & EC_STATUS_IBF))
++			return 0;
++		udelay(EC_POLL_INTERVAL_US);
++	}
++	return -ETIMEDOUT;
++}
++
++static int ec_wait_obf_set(void)
++{
++	int timeout = EC_TIMEOUT_US / EC_POLL_INTERVAL_US;
++
++	while (timeout--) {
++		if (inb(EC_CMD_PORT) & EC_STATUS_OBF)
++			return 0;
++		udelay(EC_POLL_INTERVAL_US);
++	}
++	return -ETIMEDOUT;
++}
++
++static int ec_read_reg(struct lattepanda_sigma_ec_data *data, u8 reg, u8 *val)
++{
++	int ret;
++
++	mutex_lock(&data->lock);
++
++	ret = ec_wait_ibf_clear();
++	if (ret)
++		goto out;
++
++	outb(EC_CMD_READ, EC_CMD_PORT);
++
++	ret = ec_wait_ibf_clear();
++	if (ret)
++		goto out;
++
++	outb(reg, EC_DATA_PORT);
++
++	ret = ec_wait_obf_set();
++	if (ret)
++		goto out;
++
++	*val = inb(EC_DATA_PORT);
++
++out:
++	mutex_unlock(&data->lock);
++	return ret;
++}
++
++/*
++ * Read a 16-bit big-endian value from two consecutive EC registers.
++ * Both bytes are read within a single mutex hold to prevent tearing.
++ */
++static int ec_read_reg16(struct lattepanda_sigma_ec_data *data,
++			 u8 reg_hi, u8 reg_lo, u16 *val)
++{
++	int ret;
++	u8 hi, lo;
++
++	mutex_lock(&data->lock);
++
++	/* Read high byte */
++	ret = ec_wait_ibf_clear();
++	if (ret)
++		goto out;
++	outb(EC_CMD_READ, EC_CMD_PORT);
++	ret = ec_wait_ibf_clear();
++	if (ret)
++		goto out;
++	outb(reg_hi, EC_DATA_PORT);
++	ret = ec_wait_obf_set();
++	if (ret)
++		goto out;
++	hi = inb(EC_DATA_PORT);
++
++	/* Read low byte */
++	ret = ec_wait_ibf_clear();
++	if (ret)
++		goto out;
++	outb(EC_CMD_READ, EC_CMD_PORT);
++	ret = ec_wait_ibf_clear();
++	if (ret)
++		goto out;
++	outb(reg_lo, EC_DATA_PORT);
++	ret = ec_wait_obf_set();
++	if (ret)
++		goto out;
++	lo = inb(EC_DATA_PORT);
++
++	*val = ((u16)hi << 8) | lo;
++
++out:
++	mutex_unlock(&data->lock);
++	return ret;
++}
++
++static int
++lattepanda_sigma_ec_read_string(struct device *dev,
++				enum hwmon_sensor_types type,
++				u32 attr, int channel,
++				const char **str)
++{
++	switch (type) {
++	case hwmon_fan:
++		*str = "CPU Fan";
++		return 0;
++	case hwmon_temp:
++		*str = channel == 0 ? "Board Temp" : "CPU Temp";
++		return 0;
 +	default:
-+		WARN_ON_ONCE(1);
-+		return false;
++		return -EOPNOTSUPP;
 +	}
 +}
 +
-+bool kvm_lapic_suppress_eoi_broadcast(struct kvm_lapic *apic)
++static umode_t
++lattepanda_sigma_ec_is_visible(const void *drvdata,
++			       enum hwmon_sensor_types type,
++			       u32 attr, int channel)
 +{
-+	struct kvm *kvm = apic->vcpu->kvm;
-+
-+	if (!(kvm_lapic_get_reg(apic, APIC_SPIV) & APIC_SPIV_DIRECTED_EOI))
-+		return false;
-+
-+	switch (kvm->arch.suppress_eoi_broadcast_mode) {
-+	case KVM_SUPPRESS_EOI_BROADCAST_ENABLED:
-+		return true;
-+	case KVM_SUPPRESS_EOI_BROADCAST_DISABLED:
-+		return false;
-+	case KVM_SUPPRESS_EOI_BROADCAST_QUIRKED:
-+		/*
-+		 * Historically, in split IRQCHIP mode, KVM ignored the suppress
-+		 * EOI broadcast bit set by the guest and broadcasts EOIs to the
-+		 * userspace I/O APIC. For In-kernel I/O APIC, the support itself
-+		 * is not advertised, can only be enabled via KVM_SET_APIC_STATE,
-+		 * and KVM's I/O APIC doesn't emulate Directed EOIs; but if the
-+		 * feature is enabled, it is respected (with odd behavior).
-+		 */
-+		return ioapic_in_kernel(kvm);
++	switch (type) {
++	case hwmon_fan:
++		if (attr == hwmon_fan_input || attr == hwmon_fan_label)
++			return 0444;
++		break;
++	case hwmon_temp:
++		if (attr == hwmon_temp_input || attr == hwmon_temp_label)
++			return 0444;
++		break;
 +	default:
-+		WARN_ON_ONCE(1);
-+		return false;
++		break;
++	}
++	return 0;
++}
++
++static int
++lattepanda_sigma_ec_read(struct device *dev,
++			 enum hwmon_sensor_types type,
++			 u32 attr, int channel, long *val)
++{
++	struct lattepanda_sigma_ec_data *data = dev_get_drvdata(dev);
++	u16 rpm;
++	u8 v;
++	int ret;
++
++	switch (type) {
++	case hwmon_fan:
++		if (attr != hwmon_fan_input)
++			return -EOPNOTSUPP;
++		ret = ec_read_reg16(data, EC_REG_FAN_RPM_HI,
++				    EC_REG_FAN_RPM_LO, &rpm);
++		if (ret)
++			return ret;
++		*val = rpm;
++		return 0;
++
++	case hwmon_temp:
++		if (attr != hwmon_temp_input)
++			return -EOPNOTSUPP;
++		ret = ec_read_reg(data,
++				  channel == 0 ? EC_REG_TEMP1 : EC_REG_TEMP2,
++				  &v);
++		if (ret)
++			return ret;
++		/* hwmon temps are in millidegrees Celsius */
++		*val = (long)v * 1000;
++		return 0;
++
++	default:
++		return -EOPNOTSUPP;
 +	}
 +}
 +
- __read_mostly DEFINE_STATIC_KEY_FALSE(kvm_has_noapic_vcpu);
- EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_has_noapic_vcpu);
- 
-@@ -554,15 +611,9 @@ void kvm_apic_set_version(struct kvm_vcpu *vcpu)
- 
- 	v = APIC_VERSION | ((apic->nr_lvt_entries - 1) << 16);
- 
--	/*
--	 * KVM emulates 82093AA datasheet (with in-kernel IOAPIC implementation)
--	 * which doesn't have EOI register; Some buggy OSes (e.g. Windows with
--	 * Hyper-V role) disable EOI broadcast in lapic not checking for IOAPIC
--	 * version first and level-triggered interrupts never get EOIed in
--	 * IOAPIC.
--	 */
++static const struct hwmon_channel_info * const lattepanda_sigma_ec_info[] = {
++	HWMON_CHANNEL_INFO(fan, HWMON_F_INPUT | HWMON_F_LABEL),
++	HWMON_CHANNEL_INFO(temp,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL),
++	NULL
++};
 +
- 	if (guest_cpu_cap_has(vcpu, X86_FEATURE_X2APIC) &&
--	    !ioapic_in_kernel(vcpu->kvm))
-+	    kvm_lapic_advertise_suppress_eoi_broadcast(vcpu->kvm))
- 		v |= APIC_LVR_DIRECTED_EOI;
- 	kvm_lapic_set_reg(apic, APIC_LVR, v);
- }
-@@ -1517,6 +1568,15 @@ static void kvm_ioapic_send_eoi(struct kvm_lapic *apic, int vector)
- 
- 	/* Request a KVM exit to inform the userspace IOAPIC. */
- 	if (irqchip_split(apic->vcpu->kvm)) {
-+		/*
-+		 * Don't exit to userspace if the guest has enabled Directed
-+		 * EOI, a.k.a. Suppress EOI Broadcasts, in which case the local
-+		 * APIC doesn't broadcast EOIs (the guest must EOI the target
-+		 * I/O APIC(s) directly).
-+		 */
-+		if (kvm_lapic_suppress_eoi_broadcast(apic))
-+			return;
++static const struct hwmon_ops lattepanda_sigma_ec_ops = {
++	.is_visible = lattepanda_sigma_ec_is_visible,
++	.read = lattepanda_sigma_ec_read,
++	.read_string = lattepanda_sigma_ec_read_string,
++};
 +
- 		apic->vcpu->arch.pending_ioapic_eoi = vector;
- 		kvm_make_request(KVM_REQ_IOAPIC_EOI_EXIT, apic->vcpu);
- 		return;
-diff --git a/arch/x86/kvm/lapic.h b/arch/x86/kvm/lapic.h
-index 282b9b7da98cd..e5f5a222eced0 100644
---- a/arch/x86/kvm/lapic.h
-+++ b/arch/x86/kvm/lapic.h
-@@ -231,6 +231,8 @@ static inline int kvm_lapic_latched_init(struct kvm_vcpu *vcpu)
- 
- bool kvm_apic_pending_eoi(struct kvm_vcpu *vcpu, int vector);
- 
-+bool kvm_lapic_suppress_eoi_broadcast(struct kvm_lapic *apic);
++static const struct hwmon_chip_info lattepanda_sigma_ec_chip_info = {
++	.ops = &lattepanda_sigma_ec_ops,
++	.info = lattepanda_sigma_ec_info,
++};
 +
- void kvm_wait_lapic_expire(struct kvm_vcpu *vcpu);
- 
- void kvm_bitmap_or_dest_vcpus(struct kvm *kvm, struct kvm_lapic_irq *irq,
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 1ea94f4a3dcbc..67e666921a12e 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -121,8 +121,10 @@ static u64 __read_mostly efer_reserved_bits = ~((u64)EFER_SCE);
- 
- #define KVM_CAP_PMU_VALID_MASK KVM_PMU_CAP_DISABLE
- 
--#define KVM_X2APIC_API_VALID_FLAGS (KVM_X2APIC_API_USE_32BIT_IDS | \
--                                    KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK)
-+#define KVM_X2APIC_API_VALID_FLAGS (KVM_X2APIC_API_USE_32BIT_IDS		| \
-+				    KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK	| \
-+				    KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST	| \
-+				    KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST)
- 
- static void update_cr8_intercept(struct kvm_vcpu *vcpu);
- static void process_nmi(struct kvm_vcpu *vcpu);
-@@ -4932,6 +4934,8 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
- 		break;
- 	case KVM_CAP_X2APIC_API:
- 		r = KVM_X2APIC_API_VALID_FLAGS;
-+		if (kvm && !irqchip_split(kvm))
-+			r &= ~KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST;
- 		break;
- 	case KVM_CAP_NESTED_STATE:
- 		r = kvm_x86_ops.nested_ops->get_state ?
-@@ -6740,11 +6744,24 @@ int kvm_vm_ioctl_enable_cap(struct kvm *kvm,
- 		if (cap->args[0] & ~KVM_X2APIC_API_VALID_FLAGS)
- 			break;
- 
-+		if ((cap->args[0] & KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST) &&
-+		    (cap->args[0] & KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST))
-+			break;
++static int lattepanda_sigma_ec_probe(struct platform_device *pdev)
++{
++	struct device *dev = &pdev->dev;
++	struct lattepanda_sigma_ec_data *data;
++	struct device *hwmon;
++	u8 test;
++	int ret;
 +
-+		if ((cap->args[0] & KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST) &&
-+		    !irqchip_split(kvm))
-+			break;
++	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
++	if (!data)
++		return -ENOMEM;
 +
- 		if (cap->args[0] & KVM_X2APIC_API_USE_32BIT_IDS)
- 			kvm->arch.x2apic_format = true;
- 		if (cap->args[0] & KVM_X2APIC_API_DISABLE_BROADCAST_QUIRK)
- 			kvm->arch.x2apic_broadcast_quirk_disabled = true;
- 
-+		if (cap->args[0] & KVM_X2APIC_ENABLE_SUPPRESS_EOI_BROADCAST)
-+			kvm->arch.suppress_eoi_broadcast_mode = KVM_SUPPRESS_EOI_BROADCAST_ENABLED;
-+		if (cap->args[0] & KVM_X2APIC_DISABLE_SUPPRESS_EOI_BROADCAST)
-+			kvm->arch.suppress_eoi_broadcast_mode = KVM_SUPPRESS_EOI_BROADCAST_DISABLED;
++	mutex_init(&data->lock);
++	platform_set_drvdata(pdev, data);
 +
- 		r = 0;
- 		break;
- 	case KVM_CAP_X86_DISABLE_EXITS:
++	/* Sanity check: verify EC is responsive */
++	ret = ec_read_reg(data, EC_REG_FAN_DUTY, &test);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "EC not responding on ports 0x%x/0x%x\n",
++				     EC_DATA_PORT, EC_CMD_PORT);
++
++	hwmon = devm_hwmon_device_register_with_info(dev, DRIVER_NAME, data,
++						     &lattepanda_sigma_ec_chip_info,
++						     NULL);
++	if (IS_ERR(hwmon))
++		return dev_err_probe(dev, PTR_ERR(hwmon),
++				     "Failed to register hwmon device\n");
++
++	dev_dbg(dev, "EC hwmon registered (fan duty: %u%%)\n", test);
++	return 0;
++}
++
++static const struct dmi_system_id lattepanda_sigma_ec_dmi_table[] = {
++	{
++		.ident = "LattePanda Sigma",
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "LattePanda"),
++			DMI_MATCH(DMI_PRODUCT_NAME, "LattePanda Sigma"),
++		},
++	},
++	{ }	/* terminator */
++};
++MODULE_DEVICE_TABLE(dmi, lattepanda_sigma_ec_dmi_table);
++
++static struct platform_driver lattepanda_sigma_ec_driver = {
++	.probe	= lattepanda_sigma_ec_probe,
++	.driver	= {
++		.name = DRIVER_NAME,
++	},
++};
++
++static int __init lattepanda_sigma_ec_init(void)
++{
++	int ret;
++
++	if (!dmi_check_system(lattepanda_sigma_ec_dmi_table))
++		return -ENODEV;
++
++	lps_ec_pdev = platform_device_register_simple(DRIVER_NAME, -1, NULL, 0);
++	if (IS_ERR(lps_ec_pdev))
++		return PTR_ERR(lps_ec_pdev);
++
++	ret = platform_driver_register(&lattepanda_sigma_ec_driver);
++	if (ret) {
++		platform_device_unregister(lps_ec_pdev);
++		return ret;
++	}
++
++	return 0;
++}
++
++static void __exit lattepanda_sigma_ec_exit(void)
++{
++	platform_driver_unregister(&lattepanda_sigma_ec_driver);
++	platform_device_unregister(lps_ec_pdev);
++}
++
++module_init(lattepanda_sigma_ec_init);
++module_exit(lattepanda_sigma_ec_exit);
++
++MODULE_AUTHOR("Mariano Abad <weimaraner@gmail.com>");
++MODULE_DESCRIPTION("Hardware monitoring driver for LattePanda Sigma EC");
++MODULE_LICENSE("GPL");
 -- 
-2.51.0
-
-
-
+2.43.0
 
 
