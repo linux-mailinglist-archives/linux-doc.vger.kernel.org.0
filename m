@@ -1,57 +1,57 @@
-Return-Path: <linux-doc+bounces-77617-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77618-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sMgJMvLOpWm1GwAAu9opvQ
-	(envelope-from <linux-doc+bounces-77617-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 18:54:58 +0100
+	id aG7wOOnPpWm1GwAAu9opvQ
+	(envelope-from <linux-doc+bounces-77618-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 18:59:05 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47DE61DE20E
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 18:54:58 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65F8D1DE271
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 18:59:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C95E630451D2
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 17:54:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 30C153059A83
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 17:58:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 160C6317176;
-	Mon,  2 Mar 2026 17:54:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 202E83EBF28;
+	Mon,  2 Mar 2026 17:58:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VlQKop6V"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LwdACAA4"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6BBE311973;
-	Mon,  2 Mar 2026 17:54:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F05BC2DE717;
+	Mon,  2 Mar 2026 17:58:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772474045; cv=none; b=e9BxGy2H9jQ0i54AgawgWGE5gZ/qSspa55783VVq5Pfii5CVOW4O5hSKlEMRYjBRvqqyxSI95tExGhg6DxRtcYEHztzK7itNWCAkZohB8P9U3GXRuBAet/wuRXnuTlO9gA7ntM7+pF511HX8YTNyqHJgps7IpOlwFSDyZdVVKHg=
+	t=1772474297; cv=none; b=iyozIZ+6pKFtC1mwNThnbMN/+r4akDRFXgM75zMm/ZxWR2grgRqXcS49XkJU1urE9F0uLIugjzt8dAbI1LHmvo904HtYPFbLZLrJ6zUZLz1RPcG7PUWstgSQKyJEBxrRmmHm+R8cP+WCzl0ZqVSPuICqn3mY5cMkuEl2+e0YJZ0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772474045; c=relaxed/simple;
-	bh=4s2+oQrCTsTX/U0FPD1SSCHqKbKcPyx/1cjPCg2PTW0=;
+	s=arc-20240116; t=1772474297; c=relaxed/simple;
+	bh=OB8JESXZ/eN8f+6G0rBZ7mCW9a2zuwMU13jphTg+7jU=;
 	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Uxx0r8bCYxVNUHoLmOP5lkUwRpZ9zac1/9cYupIYYnitiXcHdgLAR+dkNhUwTRuI7B8DIYFgFl6tZ8YNqJYxbIDumak8ZFD9H0IKnE+GAd9ALIO2q7/hs+KidtEesBHbu6WWfgXC39cDu04QQXitBJDjf4+ZFwD5s1uLqm7R7pg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VlQKop6V; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 665FBC19423;
-	Mon,  2 Mar 2026 17:54:04 +0000 (UTC)
+	 MIME-Version:Content-Type; b=lXt8eV1yFazTQ3VBY6QqhyLQ1GqQiR74Ct0nC4Vbf4T9V4t3Si36HnDDD38fQq31gKA12fhM33/4zgjc95xC7mzE7ApdRkxJUfDnd2V36VTZ3jeHacOepWaVpOwXXKe24SwZJ8cEf+rAZOmWOGe8MiAbKrrNas/XJwOrZnazp58=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LwdACAA4; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64961C19423;
+	Mon,  2 Mar 2026 17:58:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772474044;
-	bh=4s2+oQrCTsTX/U0FPD1SSCHqKbKcPyx/1cjPCg2PTW0=;
+	s=k20201202; t=1772474296;
+	bh=OB8JESXZ/eN8f+6G0rBZ7mCW9a2zuwMU13jphTg+7jU=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=VlQKop6VWWe8+QMFSAXlRcmH3fXQOhdXqKV3mCya4UL5gFuD+LUM5B/xxyt1TrhrR
-	 1+A3KAd5SzypoD+hvQUDlWKnsL0yu8iRp0u/3mtDH/SapFFNR3LV7muf40LiwA0YOn
-	 PRHI4ypp3wovk/eSUib1GJXU/kqCBl79Si8RROAEMmXvKHn5sIG/NeUjo4S1DIvM4q
-	 TnfV9ZJ//GUTJAgAqTCFT2WPqngY7yfz4rRTGz6v2A0aurQkhPXL4gAtAGqjqGi3gs
-	 0Se86Y0++fFvozEMpwBvepVQ015vakhO+ysL4DMrhV1gNX2hR9dCxl6wH7c4ocd32a
-	 tVZ9fLjC3CZuQ==
+	b=LwdACAA4muSULFDIa6Stc3FxkBousSfjxsyHR3c7814L9t2L/maRDQRgbh7jo/bOc
+	 X2KoGCrx5iCh1E9RIPxocjrs29TH0cP9cyVAOMC6Z0njCvKr1mL/aVlNn6GwL6OC9H
+	 RuFmgE1TiULKxooQI3pM0KNm2jpIGZ19pDwRNCE+MWg2J6RQK7qklXgnS/1sn+TL7T
+	 qnMrhC0tsu0ItzN8t2pWY+5Oe7fNX3BA4w8EvZsvEvr2MtF/2Il0laRIsTNr+nqwUv
+	 /tTVuimO9PlDcgrHEcuBgOCeg606U2aY5jdAH3TVorPGgDTz1XfFguPKhiMqe1rG4b
+	 fEHDPF9oXdAzQ==
 Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
 	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.98.2)
 	(envelope-from <maz@kernel.org>)
-	id 1vx7T0-0000000FLi8-0hBo;
-	Mon, 02 Mar 2026 17:54:02 +0000
-Date: Mon, 02 Mar 2026 17:54:01 +0000
-Message-ID: <86ms0q86di.wl-maz@kernel.org>
+	id 1vx7X3-0000000FLmV-3puJ;
+	Mon, 02 Mar 2026 17:58:14 +0000
+Date: Mon, 02 Mar 2026 17:58:12 +0000
+Message-ID: <86ldga866j.wl-maz@kernel.org>
 From: Marc Zyngier <maz@kernel.org>
 To: Ben Horgan <ben.horgan@arm.com>
 Cc: amitsinght@marvell.com,
@@ -88,10 +88,10 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: Re: [PATCH v5 03/41] KVM: arm64: Make MPAMSM_EL1 accesses UNDEF
-In-Reply-To: <20260224175720.2663924-4-ben.horgan@arm.com>
+Subject: Re: [PATCH v5 11/41] KVM: arm64: Force guest EL1 to use user-space's partid configuration
+In-Reply-To: <20260224175720.2663924-12-ben.horgan@arm.com>
 References: <20260224175720.2663924-1-ben.horgan@arm.com>
-	<20260224175720.2663924-4-ben.horgan@arm.com>
+	<20260224175720.2663924-12-ben.horgan@arm.com>
 User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
  FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
  (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
@@ -106,25 +106,25 @@ X-SA-Exim-Connect-IP: 185.219.108.64
 X-SA-Exim-Rcpt-To: ben.horgan@arm.com, amitsinght@marvell.com, baisheng.gao@unisoc.com, baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com, dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com, fenghuay@nvidia.com, gshan@redhat.com, james.morse@arm.com, jonathan.cameron@huawei.com, kobak@nvidia.com, lcherian@marvell.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, peternewman@google.com, punit.agrawal@oss.qualcomm.com, quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com, scott@os.amperecomputing.com, sdonthineni@nvidia.com, tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com, will@kernel.org, corbet@lwn.net, oupton@kernel.org, joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev, zengheng4@huawei.com, linux-doc@vger.kernel.org, tan.shaopeng@jp.fujitsu.com
 X-SA-Exim-Mail-From: maz@kernel.org
 X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
-X-Rspamd-Queue-Id: 47DE61DE20E
+X-Rspamd-Queue-Id: 65F8D1DE271
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77617-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77618-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[35];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[maz@kernel.org,linux-doc@vger.kernel.org];
@@ -133,21 +133,25 @@ X-Spamd-Result: default: False [-1.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,huawei.com:email,arm.com:email,fujitsu.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,huawei.com:email,fujitsu.com:email,arm.com:email]
 X-Rspamd-Action: no action
 
-On Tue, 24 Feb 2026 17:56:42 +0000,
+On Tue, 24 Feb 2026 17:56:50 +0000,
 Ben Horgan <ben.horgan@arm.com> wrote:
 > 
-> The MPAMSM_EL1 controls the MPAM labeling for an SMCU, Streaming Mode
-
-nit: The MPAMSM_EL1 *register* controls...
-
-> Compute Unit. As there is on MPAM support in kvm, make sure MPAMSM_EL1
-
-s/on/no/, s/kvm/KVM/.
-
-> accesses trigger an UNDEF.
+> From: James Morse <james.morse@arm.com>
+> 
+> While we trap the guest's attempts to read/write the MPAM control
+> registers, the hardware continues to use them. Guest-EL0 uses KVM's
+> user-space's configuration, as the value is left in the register, and
+> guest-EL1 uses either the host kernel's configuration, or in the case of
+> VHE, the UNKNOWN reset value of MPAM1_EL1.
+> 
+> We want to force the guest-EL1 to use KVM's user-space's MPAM
+> configuration. On nVHE rely on MPAM0_EL1 and MPAM1_EL1 always being
+> programmed the same and on VHE copy MPAM0_EL1 into the guest's
+> MPAM1_EL1. There is no need to restore as this is out of context once TGE
+> is set.
 > 
 > Tested-by: Gavin Shan <gshan@redhat.com>
 > Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
@@ -155,28 +159,8 @@ s/on/no/, s/kvm/KVM/.
 > Tested-by: Zeng Heng <zengheng4@huawei.com>
 > Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 > Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> Reviewed-by: Gavin Shan <gshan@redhat.com>
+> Signed-off-by: James Morse <james.morse@arm.com>
 > Signed-off-by: Ben Horgan <ben.horgan@arm.com>
-> ---
-> Changes since v2:
-> Remove paragraph from commit on allowed range of values
-> ---
->  arch/arm64/kvm/sys_regs.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/arch/arm64/kvm/sys_regs.c b/arch/arm64/kvm/sys_regs.c
-> index a7cd0badc20c..2c9a52e66fe0 100644
-> --- a/arch/arm64/kvm/sys_regs.c
-> +++ b/arch/arm64/kvm/sys_regs.c
-> @@ -3373,6 +3373,8 @@ static const struct sys_reg_desc sys_reg_descs[] = {
->  
->  	{ SYS_DESC(SYS_MPAM1_EL1), undef_access },
->  	{ SYS_DESC(SYS_MPAM0_EL1), undef_access },
-> +	{ SYS_DESC(SYS_MPAMSM_EL1), undef_access },
-> +
->  	{ SYS_DESC(SYS_VBAR_EL1), access_rw, reset_val, VBAR_EL1, 0 },
->  	{ SYS_DESC(SYS_DISR_EL1), NULL, reset_val, DISR_EL1, 0 },
->  
 
 Acked-by: Marc Zyngier <maz@kernel.org>
 
