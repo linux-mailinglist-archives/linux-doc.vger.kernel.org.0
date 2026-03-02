@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-77606-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77605-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SOTcKHW/pWknFgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77606-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:48:53 +0100
+	id mN8JLjfBpWknFgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77605-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:56:23 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 372951DD36F
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:48:53 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2E1B1DD55B
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:56:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D22FD30EFA83
+	by sin.lore.kernel.org (Postfix) with ESMTP id 68BED3019E12
 	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F387426686;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 158C0425CFF;
 	Mon,  2 Mar 2026 16:41:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xye5RCmi"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q8NPyhwt"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6AEC425CEE;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5E35425CE4;
 	Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772469671; cv=none; b=sRCFyU04rXtW/OFRxBUArnZ0I6u0SwqeiYWrccbOuojzbNfd1cFLyWqxKGz056QaZATvjtQ+wiUltYGzFdFuCUkzyj4JX7UQmKsW2GDwmIyO5tgU2wz7QMjcb/SySM2yt/tKV9SbdbIDEvLKExZ1ZgZUNsIIlEVIBjuQY5qtrAU=
+	t=1772469671; cv=none; b=M5L8XCY0zzKi2IkHc+V4K9VouMHioPbAW8SgpV8ImxgloPcH2HGA7sLHwhhlAzzbl5DY6urNteOSmZDITmgjyFdejLeoeNp2denZQATQCRArXgY/u78AKh50Orjo3+8hq/8xTaIz29Jv+AgOV8irDAm5xFYV4YGbXB3+wL8JiIQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772469671; c=relaxed/simple;
-	bh=61qjPlozwdHGFvs8c7DRWC7o3HB3XcjbiutDDyCkiOs=;
+	bh=krVuokXcDhCbYSFJJTspYEwemL25zHoulATY+A6cBdM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=lVVZgPi7Kb6LIc3d0SMFIVt6RPiCxuW1Aj283KOtFBVpCFhccWy8yZn3razTk2q+9smeuexLiscuzgohb/21mmPd7POMALLm0MB/m2Upo6zLTTZV3tR6GG5LcmiHcpZJoYEDBBpgspBfg+GTXfYHY6ah6GDJN37MCdvIbFzzS1k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xye5RCmi; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3EB5C2BC9E;
+	 MIME-Version:Content-Type; b=u26DXnGNdIsHvimCLlS7DixQ6HGmHSoTtjSh3HT801uPeS1GhdV/hPoLxtRrwiJ7HgDgrRuFm9/aPbC185uQPwVRF9tympG+STBU3qT0ONdp5BjMoVot3C6yykFGTJJD1ZadLVDmKGn10gknzBFD06mKhjWKmIgvcicElBp5FlA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q8NPyhwt; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C417DC2BCB2;
 	Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772469670;
-	bh=61qjPlozwdHGFvs8c7DRWC7o3HB3XcjbiutDDyCkiOs=;
+	bh=krVuokXcDhCbYSFJJTspYEwemL25zHoulATY+A6cBdM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Xye5RCmi5xwFqa2D1USh3659QwPyNjT0/WYBASKxeORUNAju7/Z1H4E2NG1M/Pmwy
-	 Ek5+hnsLejOn9tSf7b+9oSjc8zvcOLH+//Jf4jqQuwhWh1F739hbeC23QabvbKRhz2
-	 MP4Qpv0ED6wS+Rlp7XmxF2gsPheebuVGAq69fInn594/ThojYzeSBdUeWPYcuT2bjo
-	 uB/1c40XN6yFivPNDbq97djllR6Ljx6xO81mEsOpLZoYSvIMabct3eZQ6Zu3IAK0Ml
-	 YeopJQH8joLiSx3v4XPxNU1fTCSErt3VKwnGhv8WedtqJOyPGP6pDOIwXolup0J8MB
-	 8La2xAcwDYjBQ==
+	b=Q8NPyhwtgCAgKtm9B1ikATdhImsF4zpAgZVPcFtuKFDQ1nZqrTGrphRBmY0ZnyPrR
+	 fLX7iqDmS+XlIBpW6OW1ce2R/biSY1RukB5kpn5rVR52K1z+k2Som5ytkH+HsJtKz3
+	 5mLgb7Ft3XnFZGMFT8FdZMu49C/b4GReujtiszsOYwp49PqtCQrxydVtsQSEOrmhSs
+	 FIOL5HKjnqrDX02r1ne/mym6vakGCy0eO5usQ1bDJyGCIvYY1IgdTboyat0CfLATQ9
+	 p54CCaLf+QRrKWkT3fi5rbhPRLx0AHpsMFxaQDseevn1oL5PMTwmZBNXtIpIE9iQW5
+	 nOSbt7p/8wNpg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vx6KS-0000000038M-2b0y;
+	id 1vx6KS-0000000039Z-3OS1;
 	Mon, 02 Mar 2026 17:41:08 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 10/18] docs: kdoc_parser: handle struct member macro VIRTIO_DECLARE_FEATURES(name)
-Date: Mon,  2 Mar 2026 17:40:53 +0100
-Message-ID: <6f62e1f1210e74906fa50f4e937f66f54813661b.1772469446.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 11/18] docs: kdoc_re: better show KernRe() at documentation
+Date: Mon,  2 Mar 2026 17:40:54 +0100
+Message-ID: <80d27732368c14125c1b76048a70d8b4aee527ef.1772469446.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1772469446.git.mchehab+huawei@kernel.org>
 References: <cover.1772469446.git.mchehab+huawei@kernel.org>
@@ -71,62 +71,82 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 372951DD36F
+X-Rspamd-Queue-Id: E2E1B1DD55B
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-77606-lists,linux-doc=lfdr.de,huawei];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77605-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[7];
-	TO_DN_SOME(0.00)[]
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,intel.com:email]
 X-Rspamd-Action: no action
 
-From: Randy Dunlap <rdunlap@infradead.org>
+the __repr__() function is used by autodoc to document macro
+initialization.
 
-Parse the macro VIRTIO_DECLARE_FEATURES(name) and expand it to its
-definition. These prevents one build warning:
+Add a better representation for them.
 
-WARNING: include/linux/virtio.h:188 struct member 'VIRTIO_DECLARE_FEATURES(features' not described in 'virtio_device'
-
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Reviewed-by: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 1 +
- 1 file changed, 1 insertion(+)
+ tools/lib/python/kdoc/kdoc_re.py | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index 1df869061bf3..917e4528bfbf 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -150,6 +150,7 @@ struct_xforms = [
-             struct_args_pattern + r'\)', re.S), r'\1 \2[]'),
-     (KernRe(r'DEFINE_DMA_UNMAP_ADDR\s*\(' + struct_args_pattern + r'\)', re.S), r'dma_addr_t \1'),
-     (KernRe(r'DEFINE_DMA_UNMAP_LEN\s*\(' + struct_args_pattern + r'\)', re.S), r'__u32 \1'),
-+    (KernRe(r'VIRTIO_DECLARE_FEATURES\(([\w_]+)\)'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
- ]
- #
- # Regexes here are guaranteed to have the end delimiter matching
+diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
+index 6c44fcce0415..664c04c8cc9f 100644
+--- a/tools/lib/python/kdoc/kdoc_re.py
++++ b/tools/lib/python/kdoc/kdoc_re.py
+@@ -52,7 +52,28 @@ class KernRe:
+         return self.regex.pattern
+ 
+     def __repr__(self):
+-        return f're.compile("{self.regex.pattern}")'
++        """
++        Returns a displayable version of the class init.
++        """
++
++        flag_map = {
++            re.IGNORECASE: "re.I",
++            re.MULTILINE: "re.M",
++            re.DOTALL: "re.S",
++            re.VERBOSE: "re.X",
++        }
++
++        flags = []
++        for flag, name in flag_map.items():
++            if self.regex.flags & flag:
++                flags.append(name)
++
++        flags_name = " | ".join(flags)
++
++        if flags_name:
++            return f'KernRe("{self.regex.pattern}", {flags_name})'
++        else:
++            return f'KernRe("{self.regex.pattern}")'
+ 
+     def __add__(self, other):
+         """
 -- 
 2.52.0
 
