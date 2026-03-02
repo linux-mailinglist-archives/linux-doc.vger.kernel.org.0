@@ -1,62 +1,62 @@
-Return-Path: <linux-doc+bounces-77629-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77631-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wIXaIHvepWkvHgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77629-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:01:15 +0100
+	id INxBDZ7epWkvHgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77631-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:01:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1937E1DE8FB
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:01:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0CCA1DE911
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:01:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 75943304A9F3
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 19:00:00 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B0BAF3072FE6
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 19:00:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5676D38736C;
-	Mon,  2 Mar 2026 18:59:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B041389452;
+	Mon,  2 Mar 2026 18:59:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="qshaKfVa"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="BX60HLoF"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 134D83859FD;
-	Mon,  2 Mar 2026 18:59:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2B5A379ECA;
+	Mon,  2 Mar 2026 18:59:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772477977; cv=pass; b=SaxK2/gc0XdBAsshZ1ZqVzZDHD8q+B90FjjVBopDnLMJW4rMxzIGNAMhuHQVCd861EzZIU78PNFcqgVbzJUPowjaWMCzrc6PFRjKfnSlENkuk35FM8Sn3MtzW4toTGvH4/7TkUdYWQYqx3/s5WvrpYBSW2OToOYdQHSK+ffkn+s=
+	t=1772477981; cv=pass; b=hZSmzCVB54cloqNyP/eA9fUijIGg5weAFDLKj7EJEjFin1GPADz0D/U4YUekr86LYskgoDSzElrUis6V0mA04yRI4+cRQCHv5wDMkqAipJ5XpKxHGnsmWcyLgZMNQRehsiiPxBXFIEU7H6ShTaxKRZp27J4wmGHs4SAelbJJNU4=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772477977; c=relaxed/simple;
-	bh=E90wE1wuk4q4Njnn47OTbEtjKUtAuOq3F6cInIdE8Rc=;
+	s=arc-20240116; t=1772477981; c=relaxed/simple;
+	bh=EqITlv+EbhlzAOQ3dpJsvuLTjCTSxHNxpDavAdqO8Lo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=uOSrccauFBes6AeB5V/WhAzWIOY9XJNQNOt+rPDtS877kgzwxmmPd6Zmst/i8/pbHLgAqzdxY8SgMPN6HiezL21DmgZasiz5yTbcoGWBFTZVdrr7pLxJv7Ib14Mle/QfhIDWu6OCtiKKVK7Tdv5ZCj3KLmHhOAvvwHPLC9mVg7c=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=qshaKfVa; arc=pass smtp.client-ip=136.143.188.15
+	 MIME-Version; b=kaHNxhtGBuVK4zgyQAw9Fhlu5P4Bb9mecQkaGyXPMkydxZEw7z5J38lQKgG6xvTp7u4of9lC5ycaNyAF6O4akmoMJueAyS0+5VD4hByDhn73Aov3xeZhx+nCKDsBTbj7v8+/l1/qsGiHJlXWn7scys2TY/bloSwUCf9Qijmeheo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=BX60HLoF; arc=pass smtp.client-ip=136.143.188.15
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
-ARC-Seal: i=1; a=rsa-sha256; t=1772477963; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1772477967; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=Fk+PViuctFmzl4E29n73RX5qEl+I3CegOvnEEeFK5GdgwBkE/xwEZvhbFtNbbrYgiEWeIqlHz7YRskrTBPkF49uK/QEe7wOzE8n/j0RS2LktBlpbN1shKsJ94h7e4gW47MpcDLn3HuoOCanmtYv9jiOnA7/2o+JDvmBhVqp7hJI=
+	b=A6BhBzNwcEyY4Uvqaj1Ol//Ff+ZCLPcIT9fKFr8GZXBPGrh6nEJv7zv69sqO3RyfpboMptqZFfsYrdR09bxXWA6awqdzkNM0KIkwI9CFEYOwZQhrU9XiL5Yok0PmghCFYBKMQbI483/SG8rvNq8+DkkL+A7rCDSfGgrL7H2TFzA=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1772477963; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=8ZCcQUb9VW8DjR9aznsCaYh+9K7iFtDmGRjmJ8Tn9pw=; 
-	b=me0/ZCjGFpzpGBHqpU1Mn2ZtxyR8TjR28ky1DR8SRH801Y/PjjPoNQuyrgmTh25IzSnKU4/FIg4rXlAj1YxR4vy1wfGt7+omGHDi8zyNL0wUpZEmSvhmFmMO3IpV4kf+VGbBTJn36qtMoRWai0vAMa5Gy18XMPfQ8rwTIgNwnas=
+	t=1772477967; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=cnvKzgd+ZrIGAomDFx05CT0ALtcmXrFrh4aUidtShoE=; 
+	b=Umjq6JaexnLvu7/XCz2OcRB3OV2P0EHE2Cts9q37VPHjd3uXsGBFqbuKEtyoPr6mp4cljTtRcYXavug1snlFS4ThlA1cTZh6LP6DnCPF0qlOvSB5i0i4+7HTuumtexr7UtYYO8TvvGO6jpxD3igmvz+ZSt78CwE6YNpA1hGXxjM=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=rong.moe;
 	spf=pass  smtp.mailfrom=i@rong.moe;
 	dmarc=pass header.from=<i@rong.moe>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772477963;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772477967;
 	s=zmail2048; d=rong.moe; i=i@rong.moe;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=8ZCcQUb9VW8DjR9aznsCaYh+9K7iFtDmGRjmJ8Tn9pw=;
-	b=qshaKfVa2Jt8DycIzyA6SOrnd+7iEaHo5cBt7yo/rQ+xC0MwBZEX+R7e9n16o6pW
-	0W+PbqHLJw6BUmjwBrEzuI87qPZvUklAE8NYPNxk+dQSQumUMqEq9G+GxgO1XXQj+uI
-	yCXV/yVxgruHimudooMdDOovlfWC508VtArTt3LBYC/0iIr6VY7xWVBDWoEYl1Jm+43
-	FRt6R+rgvwwkLA52z1Om22tiQ07wm1kEtzfHyeA7r5HXLMDwTWIdyAGkW+Fs5CCT3fg
-	nfu4lotkrFYuDXoyWcBw3parV/rJf/gdEPG7FW7ghs+ZhMTHMBzbvDljJ+OsVt6p/Pf
-	PNwV96dKiw==
-Received: by mx.zohomail.com with SMTPS id 1772477962321798.6615877962031;
-	Mon, 2 Mar 2026 10:59:22 -0800 (PST)
+	bh=cnvKzgd+ZrIGAomDFx05CT0ALtcmXrFrh4aUidtShoE=;
+	b=BX60HLoFZnEs4gtbkhMj+9uqiiODiOKVfn2QQFsKJqr/bPliI07wcoGXKVnqZpsB
+	ag58ozrAs7mh8gdC8UwaIb4xlAHjH9AoAU6MO7m1/swzxrUkji/kU104kFy3zMgvLEA
+	5+aDfr4BfJGlr1PM+Yxj+JKxLLf0MMAcW/ErUQOMr+Ds9GtD/2PouccUCywJvV8Vrxv
+	xdOygAz4MPucxhibcjTJbGVWOTjg/KCUsGiM2l8SVFNyEknAKGBMNr10HP+W/Bl9N2l
+	8mQuTFomzie62kk5nlo+mEJov0rI/UWPp2V62BF0TbrkJNB7sgApn3or3Qf63tITx7i
+	dv34yFKf8g==
+Received: by mx.zohomail.com with SMTPS id 1772477965430847.6246907547841;
+	Mon, 2 Mar 2026 10:59:25 -0800 (PST)
 From: Rong Zhang <i@rong.moe>
 To: Jaroslav Kysela <perex@perex.cz>,
 	Takashi Iwai <tiwai@suse.com>
@@ -69,9 +69,9 @@ Cc: Rong Zhang <i@rong.moe>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Icenowy Zheng <uwu@icenowy.me>
-Subject: [PATCH v2 5/8] ALSA: usb-audio: Deconflict VID between Focusrite Novation & MV-SILICON
-Date: Tue,  3 Mar 2026 02:58:56 +0800
-Message-ID: <20260302185900.427415-6-i@rong.moe>
+Subject: [PATCH v2 6/8] ALSA: usb-audio: Add QUIRK_FLAG_MIXER_{PLAYBACK,CAPTURE}_LINEAR_VOL
+Date: Tue,  3 Mar 2026 02:58:57 +0800
+Message-ID: <20260302185900.427415-7-i@rong.moe>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260302185900.427415-1-i@rong.moe>
 References: <20260302185900.427415-1-i@rong.moe>
@@ -83,7 +83,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
-X-Rspamd-Queue-Id: 1937E1DE8FB
+X-Rspamd-Queue-Id: A0CCA1DE911
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
@@ -99,7 +99,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77629-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77631-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[rong.moe:+];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TO_DN_SOME(0.00)[];
@@ -110,69 +110,145 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[11];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rong.moe:dkim,rong.moe:email,rong.moe:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,rong.moe:dkim,rong.moe:email,rong.moe:mid]
 X-Rspamd-Action: no action
 
-MV-SILICON is a SoC manufacturer producing multifunctional audio SoCs.
-Many budget-oriented OEM devices are built on top of them. However, some
-of them are just too budget-constrained that their manufacturers didn't
-even have a USB VID and simply picked a random VID.
+Some quirky devices tune their volume by linearly tuning the voltage
+level (linear volume). In other words, such devices has a linear TLV
+mapping of DECLARE_TLV_DB_LINEAR(scale, TLV_DB_GAIN_MUTE, 0).
 
-Some OEMs unfortunately picked the VID of Focusrite Novation (0x1235),
-resulting in VID conflicts as we had defined a VENDOR_FLG() for the
-latter.
+Add quirk flags MIXER_PLAYBACK_LINEAR_VOL and MIXER_CAPTURE_LINEAR_VOL
+to represent this case respectively for playback and capture mixers.
 
-Add a VENDOR_STRING_FLG() for MV-SILICON to stop the matching procedure
-for these quirky devices, so that quirk flags for Focusrite Novation
-won't be accidentally applied on them.
-
-Quirky device samples:
-
-  usb 7-1: New USB device found, idVendor=1235, idProduct=0003, bcdDevice= 1.00
-  usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-  usb 7-1: Product: G1
-  usb 7-1: Manufacturer: MV-SILICON
-  usb 7-1: SerialNumber: 20190808
-
-  usb 7-1: New USB device found, idVendor=1235, idProduct=0003, bcdDevice= 1.00
-  usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-  usb 7-1: Product: mvsilicon B1 usb audio
-  usb 7-1: Manufacturer: MV-SILICON
-  usb 7-1: SerialNumber: 20190808
-
-  usb 1-1.2: New USB device found, idVendor=1235, idProduct=0002, bcdDevice= 1.00
-  usb 1-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=...
-  usb 1-1.2: Product: V8
-  usb 1-1.2: Manufacturer: MV-SILICON
-  usb 1-1.2: SerialNumber: ...
-  * https://github.com/linuxhw/Dmesg/blob/main/Desktop/Others/Intel/Intel%20X79/96ED1CC44499/LINUXMINT-19.3/5.0.0-32-GENERIC/X86_64/5BE1E4C74C#L1122
-
-  usb 2-1.6: New USB device found, idVendor=1235, idProduct=0002, bcdDevice= 1.00
-  usb 2-1.6: New USB device strings: Mfr=1, Product=2, SerialNumber=...
-  usb 2-1.6: Product: V9
-  usb 2-1.6: Manufacturer: MV-SILICON
-  usb 2-1.6: SerialNumber: ...
-  * https://github.com/linuxhw/Dmesg/blob/main/Desktop/Hewlett-Packard/ProLiant/ProLiant%20ML110%20G6/79B1D707316A/KUBUNTU-21.04/5.11.0-33-GENERIC/X86_64/A43F59C4AB#L1009
+No functional change intended.
 
 Signed-off-by: Rong Zhang <i@rong.moe>
 ---
- sound/usb/quirks.c | 3 +++
- 1 file changed, 3 insertions(+)
+ Documentation/sound/alsa-configuration.rst |  7 +++++
+ sound/usb/mixer_quirks.c                   | 34 ++++++++++++++++++++++
+ sound/usb/quirks.c                         |  2 ++
+ sound/usb/usbaudio.h                       | 12 ++++++++
+ 4 files changed, 55 insertions(+)
 
+diff --git a/Documentation/sound/alsa-configuration.rst b/Documentation/sound/alsa-configuration.rst
+index 0a4eaa7d66ddd..d72ab49a783fc 100644
+--- a/Documentation/sound/alsa-configuration.rst
++++ b/Documentation/sound/alsa-configuration.rst
+@@ -2372,6 +2372,13 @@ quirk_flags
+           audible volume
+         * bit 25: ``mixer_capture_min_mute``
+           Similar to bit 24 but for capture streams
++        * bit 27: ``mixer_playback_linear_vol``
++          Set linear volume mapping for devices where the playback volume
++          control value is mapped to voltage (instead of dB) level linearly.
++          In short: ``x(raw) = (raw - raw_min) / (raw_max - raw_min)``;
++          ``V(x) = k * x``; ``dB(x) = 20 * log10(x)``. Overrides bit 24
++        * bit 28: ``mixer_capture_linear_vol``
++          Similar to bit 27 but for capture streams. Overrides bit 25
+ 
+ This module supports multiple devices, autoprobe and hotplugging.
+ 
+diff --git a/sound/usb/mixer_quirks.c b/sound/usb/mixer_quirks.c
+index 11e205da7964d..539044c0c6440 100644
+--- a/sound/usb/mixer_quirks.c
++++ b/sound/usb/mixer_quirks.c
+@@ -4634,6 +4634,25 @@ static void snd_fix_plt_name(struct snd_usb_audio *chip,
+ 	usb_audio_dbg(chip, "something wrong in kctl name %s\n", id->name);
+ }
+ 
++static void snd_usb_mixer_fu_quirk_linear_scale(struct usb_mixer_interface *mixer,
++						struct usb_mixer_elem_info *cval,
++						struct snd_kcontrol *kctl)
++{
++	static const DECLARE_TLV_DB_LINEAR(scale, TLV_DB_GAIN_MUTE, 0);
++
++	if (cval->min_mute) {
++		/*
++		 * We are clearing SNDRV_CTL_ELEM_ACCESS_TLV_CALLBACK,
++		 * resulting in min_mute being a no-op.
++		 */
++		usb_audio_warn(mixer->chip, "LINEAR_VOL overrides MIN_MUTE\n");
++	}
++
++	kctl->tlv.p = scale;
++	kctl->vd[0].access |= SNDRV_CTL_ELEM_ACCESS_TLV_READ;
++	kctl->vd[0].access &= ~SNDRV_CTL_ELEM_ACCESS_TLV_CALLBACK;
++}
++
+ void snd_usb_mixer_fu_apply_quirk(struct usb_mixer_interface *mixer,
+ 				  struct usb_mixer_elem_info *cval, int unitid,
+ 				  struct snd_kcontrol *kctl)
+@@ -4660,6 +4679,21 @@ void snd_usb_mixer_fu_apply_quirk(struct usb_mixer_interface *mixer,
+ 				       "applying capture min mute quirk\n");
+ 			cval->min_mute = 1;
+ 		}
++
++	if (mixer->chip->quirk_flags & QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL)
++		if (cval->control == UAC_FU_VOLUME && strstr(kctl->id.name, "Playback")) {
++			usb_audio_info(mixer->chip,
++				       "applying playback linear volume quirk\n");
++			snd_usb_mixer_fu_quirk_linear_scale(mixer, cval, kctl);
++		}
++
++	if (mixer->chip->quirk_flags & QUIRK_FLAG_MIXER_CAPTURE_LINEAR_VOL)
++		if (cval->control == UAC_FU_VOLUME && strstr(kctl->id.name, "Capture")) {
++			usb_audio_info(mixer->chip,
++				       "applying capture linear volume quirk\n");
++			snd_usb_mixer_fu_quirk_linear_scale(mixer, cval, kctl);
++		}
++
+ 	/* ALSA-ify some Plantronics headset control names */
+ 	if (USB_ID_VENDOR(mixer->chip->usb_id) == 0x047f &&
+ 	    (cval->control == UAC_FU_MUTE || cval->control == UAC_FU_VOLUME))
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 8deeb9d247500..c5b89d7964b48 100644
+index c5b89d7964b48..1c7ca52c92d08 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -2440,6 +2440,9 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
- 		   QUIRK_FLAG_ALIGN_TRANSFER),
+@@ -2540,6 +2540,8 @@ static const char *const snd_usb_audio_quirk_flag_names[] = {
+ 	QUIRK_STRING_ENTRY(MIXER_PLAYBACK_MIN_MUTE),
+ 	QUIRK_STRING_ENTRY(MIXER_CAPTURE_MIN_MUTE),
+ 	QUIRK_STRING_ENTRY(SKIP_IFACE_SETUP),
++	QUIRK_STRING_ENTRY(MIXER_PLAYBACK_LINEAR_VOL),
++	QUIRK_STRING_ENTRY(MIXER_CAPTURE_LINEAR_VOL),
+ 	NULL
+ };
  
- 	/* Vendor and string descriptor matches */
-+	VENDOR_STRING_FLG(0x1235, /* VID conflict with Focusrite Novation */
-+			  "MV-SILICON",
-+			  0), /* Stop matching */
+diff --git a/sound/usb/usbaudio.h b/sound/usb/usbaudio.h
+index 085530cf62d92..58fd07f8c3c97 100644
+--- a/sound/usb/usbaudio.h
++++ b/sound/usb/usbaudio.h
+@@ -228,6 +228,14 @@ extern bool snd_usb_skip_validation;
+  *  Skip the probe-time interface setup (usb_set_interface,
+  *  init_pitch, init_sample_rate); redundant with
+  *  snd_usb_endpoint_prepare() at stream-open time
++ * QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL
++ *  Set linear volume mapping for devices where the playback volume control
++ *  value is mapped to voltage (instead of dB) level linearly. In short:
++ *  x(raw) = (raw - raw_min) / (raw_max - raw_min); V(x) = k * x;
++ *  dB(x) = 20 * log10(x). Overrides QUIRK_FLAG_MIXER_PLAYBACK_MIN_MUTE
++ * QUIRK_FLAG_MIXER_CAPTURE_LINEAR_VOL
++ *  Similar to QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL, but for capture streams.
++ *  Overrides QUIRK_FLAG_MIXER_CAPTURE_MIN_MUTE
+  */
  
- 	/* Vendor matches */
- 	VENDOR_FLG(0x045e, /* MS Lifecam */
+ enum {
+@@ -258,6 +266,8 @@ enum {
+ 	QUIRK_TYPE_MIXER_PLAYBACK_MIN_MUTE	= 24,
+ 	QUIRK_TYPE_MIXER_CAPTURE_MIN_MUTE	= 25,
+ 	QUIRK_TYPE_SKIP_IFACE_SETUP		= 26,
++	QUIRK_TYPE_MIXER_PLAYBACK_LINEAR_VOL	= 27,
++	QUIRK_TYPE_MIXER_CAPTURE_LINEAR_VOL	= 28,
+ /* Please also edit snd_usb_audio_quirk_flag_names */
+ };
+ 
+@@ -290,5 +300,7 @@ enum {
+ #define QUIRK_FLAG_MIXER_PLAYBACK_MIN_MUTE	QUIRK_FLAG(MIXER_PLAYBACK_MIN_MUTE)
+ #define QUIRK_FLAG_MIXER_CAPTURE_MIN_MUTE	QUIRK_FLAG(MIXER_CAPTURE_MIN_MUTE)
+ #define QUIRK_FLAG_SKIP_IFACE_SETUP		QUIRK_FLAG(SKIP_IFACE_SETUP)
++#define QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL	QUIRK_FLAG(MIXER_PLAYBACK_LINEAR_VOL)
++#define QUIRK_FLAG_MIXER_CAPTURE_LINEAR_VOL	QUIRK_FLAG(MIXER_CAPTURE_LINEAR_VOL)
+ 
+ #endif /* __USBAUDIO_H */
 -- 
 2.51.0
 
