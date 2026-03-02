@@ -1,119 +1,237 @@
-Return-Path: <linux-doc+bounces-77567-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77568-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aEyYFzCWpWmPEQYAu9opvQ
-	(envelope-from <linux-doc+bounces-77567-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 14:52:48 +0100
+	id aNGtNoaZpWnxEgYAu9opvQ
+	(envelope-from <linux-doc+bounces-77568-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 15:07:02 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DEEA1DA281
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 14:52:47 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60C001DA60A
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 15:07:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 42BA4300C37F
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 13:52:29 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 70AB73063413
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 13:58:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 103863E5563;
-	Mon,  2 Mar 2026 13:52:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AE5C3E715B;
+	Mon,  2 Mar 2026 13:58:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="ai5HoXsw"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Bk7vU4uG";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="MXyCYiJu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-172.mta0.migadu.com (out-172.mta0.migadu.com [91.218.175.172])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC1636C9D0
-	for <linux-doc@vger.kernel.org>; Mon,  2 Mar 2026 13:52:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B42C23218B3
+	for <linux-doc@vger.kernel.org>; Mon,  2 Mar 2026 13:58:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772459548; cv=none; b=CNXWMD/KDyyzly9tbVUfh/Kl8c8wWYOQ+0vsPS++8Gv+/KRJGZwxiZ12LF98R3g17yiAVfj2c4v3vLPqXPHYkseYR5PSyhGg1lCi9pqsH6q+rh7OwABgXa2BOK6FCyzFzJaS2Gopz9eJ2QCj7BPREWSedShUHARjZmVhNNzHJO8=
+	t=1772459936; cv=none; b=RgrivpwPvDqTqIGoy8CCG3YqTMC+MUxzxswp2yMrEsCE53wA6lkCR00CtN5lMjWTwzegn5iSNryA4ox6weyvoCobNDfsSkR+v9nurBsoN8a8bboYjZGv2bXJTmvEnZJ3IBL6iTmKju+r6rKN9zRl3ADsu0fNzLMEEgvx4/XcjZo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772459548; c=relaxed/simple;
-	bh=nEWI01aw8sQ2UhDWbmhb/eDRmKVCVIQdOa82//Djx6I=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dy/VB60hAjbvKtWYZkYbHz/HqtAy48BEL2L9slwHPNEG4xblNHw5ZRw0nKy1gMskgDzkguVjP65lAYj8gSMU1K+FEb/yklIHKNs8+CcfKqipT98rj2AHUsdK+fjWMTI65prdXA6Z+U5gU5UZZSc5LNLw96BEdKV9ZH35Iej7ns4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=ai5HoXsw; arc=none smtp.client-ip=91.218.175.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1772459534;
+	s=arc-20240116; t=1772459936; c=relaxed/simple;
+	bh=Vup7WS03UeljBKAxRmSAsILBwKizCecVYLzL7awCpkM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZMaKz4+832yHedk/pzBFHsuj0lq16o/g+0zKH8WdyfircbOLtAAicfY0WMClpg9RXtHH/CCDpMt18XDk6timVI8wY1qMFzZNa91TIWX3RHzF0fkn60rYgLcZiEJptw9GOnOHUsufOdnH+bH8/cs07lsPOpoB4JBtUqmWYcG7358=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Bk7vU4uG; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=MXyCYiJu; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1772459933;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=3CjI6zZAWQ/pg0Nb8eCP0hEFm8Ja5hA1ON+alHZYdPQ=;
-	b=ai5HoXswInkj4bu4gvvrfmO+pqH8OfUcRcyVwfiuCO7VgqauBtgsTTo4OI50P7QxGehVZm
-	DCIyvC+bvD7FLLzQny7XhvAAoiZkBel+WJ4sWIgyW3CjDTEcFMZdIzL6p6UKJpzzGjKTs7
-	f0EBpd5UoaGFjqTw4ADRTRUmeejdRD8=
-From: Thorsten Blum <thorsten.blum@linux.dev>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: Thorsten Blum <thorsten.blum@linux.dev>,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation/maintainer-tip: Fix grammar
-Date: Mon,  2 Mar 2026 14:51:42 +0100
-Message-ID: <20260302135141.3213-2-thorsten.blum@linux.dev>
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=CeiEMsIq1M19XQRSyjWmM83RqV4mUxb0zPC+IH30st0=;
+	b=Bk7vU4uG9RVlh1iV/9kJ9jVsv0KqeAswW+c7lIoJQIaW5nXnksm4fW/lyF7VmEsQSnUeZg
+	c2l6FuQMo6WFC+//K1U62rhiCj+mIpcy8Hki2p6lX1yLYZpi2ACTyQ+Hcxtb/o5Ej5ltiN
+	1cGoAEmZ/YDLMcSzZfI1EGWqaCbkM4s=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-696-sAGNhSEzMqmoY5MkvZlYNg-1; Mon, 02 Mar 2026 08:58:52 -0500
+X-MC-Unique: sAGNhSEzMqmoY5MkvZlYNg-1
+X-Mimecast-MFC-AGG-ID: sAGNhSEzMqmoY5MkvZlYNg_1772459931
+Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-48071615686so35550075e9.1
+        for <linux-doc@vger.kernel.org>; Mon, 02 Mar 2026 05:58:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1772459931; x=1773064731; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=CeiEMsIq1M19XQRSyjWmM83RqV4mUxb0zPC+IH30st0=;
+        b=MXyCYiJuisC0xm0wWSBdSxiNqio3QlV3ikuoGDtUoDqzmJSlRGmeDC5nrljnccLDR1
+         OCwS/iyKX93qfIHMCM5ev1GJXd7YJ/nH9XtVwghsY/uFyyxwQkUp/moqI0n6GMjDrZZo
+         t1gnxmFv6hxzAlmzkkAR2M9Wi8n5WsjNze7ZAF3/CYWDgsRMN2e84/Raw7jj/xiE7XVy
+         hkN8qcsYb8lg99PtF2uwGljwdiTkhHk8W48UIt/h/fXWLVVMmwse+yNEQGzuvbZwvGH4
+         hgC5A6W+V0TocVAq8xWDBlLOJBfkdcBPqyOxMtLco7hIHGi1dSytV3+WLXtCO7ehZiXh
+         mXtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772459931; x=1773064731;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CeiEMsIq1M19XQRSyjWmM83RqV4mUxb0zPC+IH30st0=;
+        b=amkFufPQcDdSjra6sbooZq9U57E/repIwxau94rnHxcZozZD52ppv7Ni6ITz/WGzVK
+         SFk7bSgtX1PWjtmzjgJy1m07p4YpmqURXxWQ8uHDL7nYEt860xUj3lA6SDl3mJ1PBdat
+         q+nv6XPsFlf7C+WMMCOkFBNsavs0VXaepY9f9KXxGbgOfwo7U6/VpzrrGlKZYA0jMOFf
+         dzb0Z8R6rMzpNI5d3YqO7j9CrYY9L1aY+OLDaWJ8sMm6onYIwI83SE96nVxCXe5cwutU
+         MY60rxfUAo9AsGTkTXZAifFeMhIYZXo4pb5wOiFbQOL9yF5CIJvxIqfSMKaPhXONIX/e
+         uoIQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXd9LWiqn5I8cBD+ue7RpR5RCO9TxxkYTSILRCr7bNuPkgysF2KKyMUrhj5GbjkI6dFYsjDM3hpnSs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwNgG+TnwzIiU2UUbM6AHK9Cn1aaEtmRPB/EI51Pl9KqcekkzNc
+	GFXsDHlG021EvrZypedC24RqsIs5Iua7TYI0d5/D1Dp1EluUr/yh0EWurB5kAc35I7OIMx4++SG
+	2gnRPgnkBhBghaxOscVyBg51mJMWlptKEPjlXm+yXC2sK+EGjjPyJd1LLG4uhBA==
+X-Gm-Gg: ATEYQzyfhBQ4wRhp8cQgS1goAr9DN0ZDexwypHAk4/8Ng5aAk5kbPmrC09yo4dP8ETD
+	glB/cE3q/t0eaiaSEp5cO3iY5Oz9fhIZMUo12p+kMaaa2lCOhVC95/RiTGVZsBB/4wiH8aRPWyc
+	yqu6/X1eZIOxjPBaDxHWIzGJFj1ny93pNTCFy5jRJIv8X/OCaI2+CiCTzwQYrra0toMNrQ60gsU
+	/rZewoCz9UNJcZCatWq9MWAkVvrBX282qu586pcxF36K+S3MbdtGgfz5tcCYU/mUazwCKtvGNbA
+	VIXROut5ZQCX4wEClQv2b4cSDCvKzlsXTUyu+wZwhBZ623fti8wamWIKDkRRV729V4J9YOsfLJ9
+	iC+FcPDezMbXPwKUB+HYdTCjGafLLWKd4YQscU7vGvK3Y9kN6DIg=
+X-Received: by 2002:a05:600c:4f11:b0:477:7925:f7fb with SMTP id 5b1f17b1804b1-483c9babeaamr234251745e9.10.1772459931334;
+        Mon, 02 Mar 2026 05:58:51 -0800 (PST)
+X-Received: by 2002:a05:600c:4f11:b0:477:7925:f7fb with SMTP id 5b1f17b1804b1-483c9babeaamr234251295e9.10.1772459930831;
+        Mon, 02 Mar 2026 05:58:50 -0800 (PST)
+Received: from jlelli-thinkpadt14gen4.remote.csb ([151.29.73.19])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439b41831easm10784198f8f.12.2026.03.02.05.58.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Mar 2026 05:58:50 -0800 (PST)
+Date: Mon, 2 Mar 2026 14:58:48 +0100
+From: Juri Lelli <juri.lelli@redhat.com>
+To: Gabriele Monaco <gmonaco@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+	Nam Cao <namcao@linutronix.de>, Juri Lelli <jlelli@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	Tomas Glozar <tglozar@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	John Kacur <jkacur@redhat.com>
+Subject: Re: [PATCH v6 05/16] Documentation/rv: Add documentation about
+ hybrid automata
+Message-ID: <aaWXmBVIvTlVtiRp@jlelli-thinkpadt14gen4.remote.csb>
+References: <20260225095122.80683-1-gmonaco@redhat.com>
+ <20260225095122.80683-6-gmonaco@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260225095122.80683-6-gmonaco@redhat.com>
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77567-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77568-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[thorsten.blum@linux.dev,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[juri.lelli@redhat.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[6];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:mid,linux.dev:dkim,linux.dev:email]
-X-Rspamd-Queue-Id: 5DEEA1DA281
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linutronix.de:email,jlelli-thinkpadt14gen4.remote.csb:mid]
+X-Rspamd-Queue-Id: 60C001DA60A
 X-Rspamd-Action: no action
 
-s/a empty newline/an empty newline/
+Hello,
 
-Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
----
- Documentation/process/maintainer-tip.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 25/02/26 10:51, Gabriele Monaco wrote:
+> Describe theory and implementation of hybrid automata in the dedicated
+> page hybrid_automata.rst
+> Include a section on how to integrate a hybrid automaton in
+> monitor_synthesis.rst
+> Also remove a hanging $ in deterministic_automata.rst
+> 
+> Reviewed-by: Nam Cao <namcao@linutronix.de>
+> Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
+> ---
 
-diff --git a/Documentation/process/maintainer-tip.rst b/Documentation/process/maintainer-tip.rst
-index 41d5855700cd..b2b14439be22 100644
---- a/Documentation/process/maintainer-tip.rst
-+++ b/Documentation/process/maintainer-tip.rst
-@@ -352,7 +352,7 @@ following tag ordering scheme:
-      Changelog text starts here....
- 
-    so the authorship is preserved. The 'From:' line has to be followed
--   by a empty newline. If that 'From:' line is missing, then the patch
-+   by an empty newline. If that 'From:' line is missing, then the patch
-    would be attributed to the person who sent (transported, handled) it.
-    The 'From:' line is automatically removed when the patch is applied
-    and does not show up in the final git changelog. It merely affects
--- 
-Thorsten Blum <thorsten.blum@linux.dev>
-GPG: 1D60 735E 8AEF 3BE4 73B6  9D84 7336 78FD 8DFE EAD4
+...
+
+> diff --git a/Documentation/trace/rv/hybrid_automata.rst b/Documentation/trace/rv/hybrid_automata.rst
+> new file mode 100644
+> index 000000000000..39c037a71b89
+> --- /dev/null
+> +++ b/Documentation/trace/rv/hybrid_automata.rst
+> @@ -0,0 +1,341 @@
+> +Hybrid Automata
+> +===============
+
+...
+
+> +Stall model with invariants (iteration 2)
+> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +The first iteration isn't exactly what was intended, we can change the model as:
+> +
+> +- *X* = { ``dequeued``, ``enqueued``, ``running``}
+> +- *E* = { ``enqueue``, ``dequeue``, ``switch_in``}
+> +- *V* = { ``clk`` }
+> +- x\ :subscript:`0` = ``dequeue``
+> +- X\ :subscript:`m` = {``dequeue``}
+> +- *f* =
+> +   - *f*\ (``enqueued``, ``switch_in``) = ``running``
+> +   - *f*\ (``running``, ``dequeue``) = ``dequeued``
+> +   - *f*\ (``dequeued``, ``enqueue``, ``reset(clk)``) = ``enqueued``
+                              ^^^
+
+> +- *i* =
+> +   - *i*\ (``enqueued``) = ``clk < threshold``
+> +
+> +Graphically::
+> +
+> +    |
+> +    |
+> +    v
+> +  #=========================#
+> +  H        dequeued         H <+
+> +  #=========================#  |
+> +    |                          |
+> +    | enqueue; reset(clk)      |
+> +    v                          |
+> +  +-------------------------+  |
+> +  |        enqueued         |  |
+> +  |    clk < threshold      |  | dequeue
+> +  +-------------------------+  |
+> +    |                          |
+> +    | switch_in                |
+> +    v                          |
+> +  +-------------------------+  |
+> +  |         running         | -+
+> +  +-------------------------+
+
+...
+
+> +  static bool verify_constraint(enum states curr_state, enum events event,
+> +                                enum states next_state)
+> +  {
+> +	bool res = true;
+> +
+> +	/* Validate guards as part of f */
+> +	if (curr_state == enqueued && event == sched_switch_in)
+> +		res = get_env(clk) < threshold;
+> +	else if (curr_state == dequeued && event == sched_wakeup)
+> +		reset_env(clk);
+
+Considering the spec above, does the 'event' need to be 'enqueue'
+instead of 'sched_wakeup' (or the other way around)? Or maybe it's
+equivalent?
+
+Thanks,
+Juri
 
 
