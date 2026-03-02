@@ -1,67 +1,67 @@
-Return-Path: <linux-doc+bounces-77597-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77595-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IOypFw2+pWn8FQAAu9opvQ
-	(envelope-from <linux-doc+bounces-77597-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:42:53 +0100
+	id oE7gDTy/pWknFgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77595-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:47:56 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11A031DD16F
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:42:53 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 87AD21DD32E
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:47:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 67B5C303BF44
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 775C630CAD4D
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F29CD423144;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4638421A13;
 	Mon,  2 Mar 2026 16:41:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WPN01yPd"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fMgepz2i"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7323421EE7;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A089635CBD7;
 	Mon,  2 Mar 2026 16:41:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772469669; cv=none; b=uO71Rw66yNMC7xSaF/oYEjooRhAIzy2lSUHP6k+eQv6FxgRIThMzQoMC9ATEhuTXglXCeQH4lARpsTjGwGkXYy62nJjBD+NGaXTJHOOqygTuB4urVMdLIWYdBtGNcK6mKGyptlF3HjcmEHd2v6ThE3Lib/bS/XMT3u5n2xxINPE=
+	t=1772469669; cv=none; b=YJfV3w/bgGAG4JLOHlnYjQqbFSn5+7mfETNJyaeKhTJKvIhZSiSDuyOrXpwjy1HWBfZ6qRAsdhbhNm4cTriX4nCjwbsPhF8IZW53BR86hTSycqUmLRMKQ/am5gwN2kwOH2AqIZo58i2sV6DRBprVTWQTFuacFSbgV0PdTVHC4SY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772469669; c=relaxed/simple;
-	bh=0jNrpo+eOITeMIDsfrxBUzUTtzXK5Dxhxq5r0rjYEUU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=k6GLqIeZzZhYsJ58qQ0lZPhqHnZkwJNn4wbG4xD0sqJRjNKyGPyfzx/B+WafftDAk42Xzwip5CYEdKxws95WBBk8aIP1A2CIVtRhHETTu58mhnWgOTPRUgGrbNhhrfhJl6U8F8ZxLodEmGkE2h8woR7Em6wrD91cVwN0UBuAPJU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WPN01yPd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72115C2BC86;
+	bh=Mq94eCCs+RKATmleknUccsvrIqNogkHHQ1NGR1scPL0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=IjnmaZNyx9YzKDM+5pITQps71U7CuE1hiKumkvXRa9fqpKdwdbl+0hKhcI/6PWaAGDjW4ycOT7oydxSUMbCMiAReqGyf0oZVTIBWQiUEsxL+LWynD0hsiw9oTKBkV357I8RBazD/2G/5blJTifzlI5Q1tgvaP2YJm6Fka3akhx0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fMgepz2i; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70318C19423;
 	Mon,  2 Mar 2026 16:41:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772469669;
-	bh=0jNrpo+eOITeMIDsfrxBUzUTtzXK5Dxhxq5r0rjYEUU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=WPN01yPdEoQsl4KI9StwU1RKtptz1+vPoo4qCK/aodGURiKD7BTIemoAdzT2DLLlf
-	 n2tYSoINMw5nulsi5B7TAQ/YfalAXsTL1zbMc6SkiggxXerdyedZ6BSvJPmNE9MNDn
-	 /+LIV+MDGmcXfekA7NvKGFlr+zUGYboIwvG2jszTGOvmLlMV2CwbcTjdXvXUKfgmJS
-	 L4WsaS6yDDkfdapZye0CK5XgZcVm2l32Hrzca2mMzKVGLPScHWp6akwbAxh9uZ43FW
-	 Q/CS04m9SXb+v1apOJdTFwr8oPWeUdY4bRZumVKP0oPWxxiuMbtKGi8rqZV02G0BbK
-	 Ty9W8hTH2o2nw==
+	bh=Mq94eCCs+RKATmleknUccsvrIqNogkHHQ1NGR1scPL0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=fMgepz2ijwJ2lQZdNDNyl/x7TVksfnAOjg5d/9XXaeFFNnJY4mPW+RTQDK9BFAp8J
+	 RSzo7c1VNJGZsymdwr3Hotm7sbyvt7/++jmjR4bJNjXD9Uzfi4/EGOyVjfqbXRJly4
+	 oVc7v0l2WTZOrg0YRc+ehvx2wu6rgiJdJ1nG6+WMPtU1kgVHRq4nzehLfF6fiZo5qs
+	 4yTuxkcMKvsDcMP28k8oa6kopTamVnNjJwwP0/b4yJQ1/k5Afe6w4WE4K+UO1s4Uzp
+	 ozSIStTLFXRk4PTKnqse1CZamCsCc0wvVVpAyWeiCmP7SF2Q1OBICmxWcuhzxsxQE5
+	 PqDLAZon2rz3A==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vx6KQ-000000002vk-2jiT;
+	id 1vx6KQ-000000002x1-3bCs;
 	Mon, 02 Mar 2026 17:41:06 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
-	Kees Cook <kees@kernel.org>
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-doc@vger.kernel.org,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 00/18] Several kdoc fixes
-Date: Mon,  2 Mar 2026 17:40:43 +0100
-Message-ID: <cover.1772469446.git.mchehab+huawei@kernel.org>
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH 01/18] docs: kdoc_re: add support for groups()
+Date: Mon,  2 Mar 2026 17:40:44 +0100
+Message-ID: <20d1a9c77200e28cc2ff1d6122635c43f8ba6a71.1772469446.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1772469446.git.mchehab+huawei@kernel.org>
+References: <cover.1772469446.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -71,13 +71,13 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 11A031DD16F
+X-Rspamd-Queue-Id: 87AD21DD32E
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -85,10 +85,10 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-77597-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-77595-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	PRECEDENCE_BULK(0.00)[];
@@ -97,57 +97,39 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-Hi Jon,
+Add an equivalent to re groups() method.
+This is useful on debug messages.
 
-This series contains patches from:
-	https://lore.kernel.org/linux-doc/87sear2kbm.fsf@trenco.lwn.net/T/#t
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
+Reviewed-by: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
+---
+ tools/lib/python/kdoc/kdoc_re.py | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-I rebased them to make the changes cleaner, fixing mostly on fixes.
-
-I dropped stuff related to NestedMatch arguments parsing.
-I'll be sending you on a new patch series, likely tomorrow.
-
-The changes here basically addresses several issues discoverd by
-Randy and by me and makes NestedMatch more similar to KernRe.
-
-It also moves the transforms ruleset to a separate file, to make
-easier to maintain kernel-doc code.
-
-Mauro Carvalho Chehab (16):
-  docs: kdoc_re: add support for groups()
-  docs: kdoc_re: don't go past the end of a line
-  docs: kdoc_parser: move var transformers to the beginning
-  docs: kdoc_parser: don't mangle with function defines
-  docs: kdoc_parser: fix variable regexes to work with size_t
-  docs: kdoc_parser: fix the default_value logic for variables
-  docs: kdoc_parser: don't exclude defaults from prototype
-  docs: kdoc_parser: fix parser to support multi-word types
-  docs: kdoc_parser: add support for LIST_HEAD
-  docs: kdoc_re: better show KernRe() at documentation
-  docs: kdoc_parser: move transform lists to a separate file
-  docs: kdoc_re: handle strings and escape chars on NextMatch
-  docs: kdoc_re: don't recompile NestedMatch regex every time
-  docs: kdoc_re: Change NestedMath args replacement to \0
-  docs: kdoc_re: make NestedMatch use KernRe
-  docs: kdoc_parser: move nested match transforms to xforms_lists.py
-
-Randy Dunlap (2):
-  docs: kdoc_parser: handle struct member macro
-    VIRTIO_DECLARE_FEATURES(name)
-  docs: xforms_lists: ignore context analysis and lock attributes
-
- Documentation/tools/kdoc_parser.rst   |   8 ++
- tools/lib/python/kdoc/kdoc_files.py   |   3 +-
- tools/lib/python/kdoc/kdoc_parser.py  | 172 +++-----------------------
- tools/lib/python/kdoc/kdoc_re.py      | 115 +++++++++++++----
- tools/lib/python/kdoc/xforms_lists.py | 170 +++++++++++++++++++++++++
- 5 files changed, 286 insertions(+), 182 deletions(-)
- create mode 100644 tools/lib/python/kdoc/xforms_lists.py
-
+diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
+index 0bf9e01cdc57..774dd747ecb0 100644
+--- a/tools/lib/python/kdoc/kdoc_re.py
++++ b/tools/lib/python/kdoc/kdoc_re.py
+@@ -106,6 +106,13 @@ class KernRe:
+ 
+         return self.last_match.group(num)
+ 
++    def groups(self):
++        """
++        Returns the group results of the last match
++        """
++
++        return self.last_match.groups()
++
+ 
+ class NestedMatch:
+     """
 -- 
 2.52.0
 
