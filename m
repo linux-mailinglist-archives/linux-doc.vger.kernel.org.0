@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-77604-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77601-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GF95Mi6+pWn8FQAAu9opvQ
-	(envelope-from <linux-doc+bounces-77604-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:43:26 +0100
+	id 4EP9MyW+pWkbFgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77601-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:43:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2C621DD1E1
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:43:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C5061DD19B
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:43:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 8ECA23041B06
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:38 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B90323032D09
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9CAA0423A9A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DE22423A83;
 	Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A24yQteX"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="B5+5UFsv"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 784E7423A77;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56F22423A67;
 	Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772469670; cv=none; b=U6+CB8iuf9iyfUiGLlp/9yFKToRheaGU7ZdWas+qqaBah5YlKyp0zUQwBBvsB99+VETBNSfVASba2yZiUl1KiWDHViquc2w5mrxicOJFy9l4TN6yFbESvC7z8qBUw69f6LJaSc81Y8inhuYuM3Pr3Jv3ttrew436gwicNS1F5sQ=
+	t=1772469670; cv=none; b=s6PwT323NaKUHGMkiMuMQ3QZ4hH2C0hcon+f9fjE+bVkaVIivbjx7fXKX7C3j56r9iVuwULUwZJasf2/l5BtLHAYXGzLX/8VdjIVpxw084oUlbmTTb86VU8aIojCWeyTMZfJlFpFvALjyauRtLcSATK6vLkGk9PujK2d4R16/ko=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772469670; c=relaxed/simple;
-	bh=JFl/dLUF5g2ndZqfUyzTuu/xxP7qt+WvHToR++nCWEA=;
+	bh=Cz/nEycnBHQCO4/w8hm2Eo242zi9lKr/VICMSuqJXdw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KHFG6oNqmK/TK/W1ga8lutnAg9lK9M+8BxnRk5p2irMJpLVFLyqMRTaBzVNz5IzrkX0FKbjH11NJR8uc4QXoTFL1/v1cQwZRvgUCOZmpCMsKpZNHkXFdh5N6ddRa56lQivaH/XV5QlF+ZyIHEW0XMHNtMsX3z5oEgMzeSsS/K5A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A24yQteX; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B760C2BC87;
+	 MIME-Version:Content-Type; b=G6ozi6xJTAIn1mBRnLP4svI9mxu4C05khzvoyW9b3pxtJGY405SLJXTDKukXE5PyOD7P81ZbOkkj4foVQBtYclKIn6SAHChvQoeEQjnLIjvIlDKoqYnbsz8XgqdtzaYN8jiN5rnClkgJT7FJjQ2cVqs5giKFv57ynrMuxwfL28Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B5+5UFsv; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35FE3C19423;
 	Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772469670;
-	bh=JFl/dLUF5g2ndZqfUyzTuu/xxP7qt+WvHToR++nCWEA=;
+	bh=Cz/nEycnBHQCO4/w8hm2Eo242zi9lKr/VICMSuqJXdw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=A24yQteX5U1M5fNAhThvq+29qWdIp5RcIs/U8xTBS7BbN6IGm4HWGo3tgi3SFwz0i
-	 NRdbldVsysOfYhiOhgFl773BTWvNPnRnOJmiZpMTUMDBoIkzGAYNPn+z6CnGLFu0qE
-	 4sCSyR2C/mhTePb9OivF9qjq7vYfSNsc/ZJDDigBc/BYCgkEXxuBui0dSNJt9HXu+o
-	 DNdZjBDIvPthIcqWY/q/Ch5Ko1AS4oNYwUx5V2kea6uVfvwJZyvn/KrxERk/j9BtQ/
-	 2vrCGQ8lAX9sOcKirMXJlEyn4HkjqcLnrZjY4/lAzYoKa+qsZfELnRAPH07gzuTAC7
-	 noL9RtqqJVIbQ==
+	b=B5+5UFsv2VkRh7U/2I9W1NgiGTA90D1siDOibs+9CWTz/Fqw5pf9CpqFtbEd3OnIu
+	 BbJ0UR/zDmcCsN4KqbXlf63g9n98ckb6LKlnNO1dPqMGMxYMrCKY6oo1sFuIVeR4kR
+	 ++P8yq8rKOCeNP4WBF1B3j9W0zUsuQSYgYBhlYwuCZ7n5KKgle9CEyJ0Nt36R23KJQ
+	 i86QMWtWYwVPrVhhvmI436XHX/oe0/eO1/iawD98vOVypU8e6w/12kaLpsSTaSCVUf
+	 0HE9NcL04TlaIHtG9yiOS5LSjtP2LzNhJnLHUbYgb/nKI3MDow1CDbUvx6YK8BN4GV
+	 j3HzXZeElIpIQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vx6KR-0000000033S-3anc;
-	Mon, 02 Mar 2026 17:41:07 +0100
+	id 1vx6KS-0000000034f-0BnH;
+	Mon, 02 Mar 2026 17:41:08 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 06/18] docs: kdoc_parser: fix the default_value logic for variables
-Date: Mon,  2 Mar 2026 17:40:49 +0100
-Message-ID: <681f18338abd6ae33cb9c15d72bb31a1cba75a9a.1772469446.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 07/18] docs: kdoc_parser: don't exclude defaults from prototype
+Date: Mon,  2 Mar 2026 17:40:50 +0100
+Message-ID: <cedf2a819846d2f082388e9ba3d95047c35df6fd.1772469446.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1772469446.git.mchehab+huawei@kernel.org>
 References: <cover.1772469446.git.mchehab+huawei@kernel.org>
@@ -71,7 +71,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: B2C621DD1E1
+X-Rspamd-Queue-Id: 6C5061DD19B
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -85,7 +85,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-77604-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-77601-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
@@ -101,33 +101,28 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-The indentation is wrong for the second regex, which causes
-problems on variables with defaults.
+If we do that, the defaults won't be parsed.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Acked-by: Randy Dunlap <rdunlap@infradead.org>
 Tested-by: Randy Dunlap <rdunlap@infradead.org>
 Reviewed-by: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/lib/python/kdoc/kdoc_parser.py | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index 9c9443281c40..4bf55244870f 100644
+index 4bf55244870f..39ff27d421eb 100644
 --- a/tools/lib/python/kdoc/kdoc_parser.py
 +++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -1027,9 +1027,9 @@ class KernelDoc:
-             default_val = r.group(2)
-         else:
-             r= KernRe(OPTIONAL_VAR_ATTR + r"(?:[\w_]*)?\s+(?:\*+)?(?:[\w_]+)\s*[\d\]\[]*\s*(=.*)?")
--        if r.match(proto):
--            default_val = r.group(1)
+@@ -201,7 +201,6 @@ var_xforms = [
+     (KernRe(r"(?://.*)$"), ""),
+     (KernRe(r"(?:/\*.*\*/)"), ""),
+     (KernRe(r";$"), ""),
+-    (KernRe(r"=.*"), ""),
+ ]
  
-+            if r.match(proto):
-+                default_val = r.group(1)
-         if not declaration_name:
-            self.emit_msg(ln,f"{proto}: can't parse variable")
-            return
+ #
 -- 
 2.52.0
 
