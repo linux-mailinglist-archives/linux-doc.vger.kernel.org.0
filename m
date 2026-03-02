@@ -1,192 +1,250 @@
-Return-Path: <linux-doc+bounces-77559-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77561-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IEU/FTuFpWl+DAYAu9opvQ
-	(envelope-from <linux-doc+bounces-77559-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 13:40:27 +0100
+	id KFOFJ16GpWn4DAYAu9opvQ
+	(envelope-from <linux-doc+bounces-77561-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 13:45:18 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAF491D8D21
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 13:40:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 016EA1D8F36
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 13:45:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8954430CE462
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 12:29:49 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6F8F030642E5
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 12:37:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD3AB36D9ED;
-	Mon,  2 Mar 2026 12:29:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C9D7371046;
+	Mon,  2 Mar 2026 12:36:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ralfj.de header.i=@ralfj.de header.b="BCOnjU22"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="RoNcasnd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from r-passerv.ralfj.de (r-passerv.ralfj.de [109.230.236.95])
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com [136.143.188.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC36C36C5AF;
-	Mon,  2 Mar 2026 12:29:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.230.236.95
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772454545; cv=none; b=MM5/XTLzZoy0EDYPUr4vIWFz2C5nghy2Q6ucAn+uOu+GwAqlRM1txuSm7JWabt5Lfaa1IBEzjFgnHI+WWO7DqjC+DEjhKzZ9yeaVInxLqflVNSDKS2f4PMefkIhd7dvzjTEHThiXPXSKwIqnf6deOnRS2/hxyn+f1ZL+Q0VyR48=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772454545; c=relaxed/simple;
-	bh=esTLKb+WUSLP+AsKnFLMgNAf+diFPkDDjV0Pd6WW1/0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ujkekJud9+Yjm8UPHZ/sMtmELOSWFjbiVcL2dar9MFEo8cYbZ3AkDDfQL4Ne0pIPspDEPAT+uixUw3y9ta0l63/3Cg2Op2L85yE3TeCOY+uuGm+eM4K2GPDQ0CCIaGsmJpa7B5uOSn+ExpTQhv5cmMc7pB6piVkBang5j23M1Cw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ralfj.de; spf=pass smtp.mailfrom=ralfj.de; dkim=pass (1024-bit key) header.d=ralfj.de header.i=@ralfj.de header.b=BCOnjU22; arc=none smtp.client-ip=109.230.236.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ralfj.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ralfj.de
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=ralfj.de; s=mail;
-	t=1772454536; bh=esTLKb+WUSLP+AsKnFLMgNAf+diFPkDDjV0Pd6WW1/0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=BCOnjU22b/jdLSEp9fI4ZXsYJIYsFRiLCHfZrQ7spHnfClt7sp1JELo970f4LgOol
-	 JnQ8VD6EkHCcT/ZDfQjEL+kWWTE8+JDW0z0DlBZeSA6YN15Jr7mj8S2uErEFix8yes
-	 juIvP/O56YjynhkqGGgznD9455bI65Gxauk+JHPQ=
-Received: from [IPV6:2001:67c:10ec:5784:8000::12e7] (2001-67c-10ec-5784-8000--12e7.net6.ethz.ch [IPv6:2001:67c:10ec:5784:8000::12e7])
-	by r-passerv.ralfj.de (Postfix) with ESMTPSA id 9A52A2053392;
-	Mon,  2 Mar 2026 13:28:55 +0100 (CET)
-Message-ID: <fa775d83-73ad-450d-a592-7a9d3a3e2271@ralfj.de>
-Date: Mon, 2 Mar 2026 13:28:50 +0100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23D1836DA15;
+	Mon,  2 Mar 2026 12:36:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.12
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1772455016; cv=pass; b=amw9hkIMaaT8FI1WHawiEWc8T6h3sgQqnuawxsK1JH6CB9foCsJw/fXCDf6Mw1VFsVcAybncQbNsN6Kqji1yljANbmF9cuiNSEZunAOngpeuu/otRZj7ZpzbjOJlFtBsTjKoGJrnRnpg/vclNXs6takzDw8UCqz8mAGVLohBgT8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1772455016; c=relaxed/simple;
+	bh=i2PaH7mcmgnXSUUp+CWSP+o26LYx16eN4NbzWNUWqOw=;
+	h=Message-ID:Subject:From:To:Cc:In-Reply-To:References:Content-Type:
+	 Date:MIME-Version; b=XwqgnT1tEvYAlPzz+CDWqybOSfpHyYTsMY933VCjQL0zAG+nEkldV5G/cCcht9bPGVXPiW9X7ebl3x36LgaXH2QIlSJPJNa+Op0iDywACDk5GysSPOK/YdKJ1UYchMy6Xy23ydoyLw8+QtQaED1r4Yxf6xCM/THNOzHFVIYwEas=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=RoNcasnd; arc=pass smtp.client-ip=136.143.188.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
+ARC-Seal: i=1; a=rsa-sha256; t=1772454994; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Xz3gk0dsdCfqpF8Z/WT4RzR69rWGSqYBPXy4sv3rlsEj3ENMyOapfKLvSmlqb5DyR3j5vW+E/SMgfNBqDNcoFOrZ1GpgFxb5QXjb2xuF420ggw6C37QR9Wc/ixaYpXFdVEh2XZLDYlYQmMkyjqNdkORAqNr2RYriYWbHzsIqi4c=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1772454994; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=EsZpR6vMuAbfQSEH07cTsIQT6XkmB9hhhtN7g2YBkjE=; 
+	b=GYRhpCvtkqv1pge/qVcT0+OLJNQMmVBbnhqblt2qsew4wPAS9TTyaWgJjMcLxGWWCLeVeHGWDm4TlnUhWqZ7Z8BPuhaM+9QoPKS0n/DgFlCJwF2LixkH0aRoEQxAK1N2ptmYH7KPQDCBJsGjapL2d4zZMloxd8+3bTmRRD3IUtE=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=rong.moe;
+	spf=pass  smtp.mailfrom=i@rong.moe;
+	dmarc=pass header.from=<i@rong.moe>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772454994;
+	s=zmail2048; d=rong.moe; i=i@rong.moe;
+	h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date:Date:MIME-Version:Message-Id:Reply-To;
+	bh=EsZpR6vMuAbfQSEH07cTsIQT6XkmB9hhhtN7g2YBkjE=;
+	b=RoNcasndp7fp3Gtk/jHIvYo3/CP7yeKAObgWnwBIfAAsqq59EeqOSiJCWcBg3iiZ
+	8xBKvgZWPIJ6kd0QQwZeWONSFE3ZgeQCoOsdkftB5p0xoaFo9teJwEA35i3Xt7mHGKz
+	uZxa+gnSsqP9CNuydgWy1NKDTk72h+xlDbFfI85+JPmMLVSgUX6m1cO3byu+R16PCQt
+	ZYXNaQuLIMNPWxRD+RQodB8YE/woRDqT1Ctt8tbiNY+gj4qYq6V/BHolMcw2hM50s/L
+	JuaSpwFHpIcRFg6KwBVHwwLE2+xtiEddChqFe3aHXnnm1axnkuZzwYswpETxplMcayd
+	WhZeo3b2uQ==
+Received: by mx.zohomail.com with SMTPS id 1772454993200513.7002571997001;
+	Mon, 2 Mar 2026 04:36:33 -0800 (PST)
+Message-ID: <136445f6a9b01e423b6b380fb87bad059900f2b3.camel@rong.moe>
+Subject: Re: [PATCH 4/9] ALSA: usb-audio: Support string-descriptor-based
+ quirk table entry
+From: Rong Zhang <i@rong.moe>
+To: Takashi Iwai <tiwai@suse.de>
+Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Jonathan Corbet	 <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Cryolitia PukNgae	 <cryolitia@uniontech.com>, Arun Raghavan
+ <arunr@valvesoftware.com>, 	linux-sound@vger.kernel.org,
+ linux-doc@vger.kernel.org, 	linux-kernel@vger.kernel.org, Icenowy Zheng
+ <uwu@icenowy.me>
+In-Reply-To: <87ms0qmu8e.wl-tiwai@suse.de>
+References: <20260301213726.428505-1-i@rong.moe>
+		<20260301213726.428505-5-i@rong.moe> <87ms0qmu8e.wl-tiwai@suse.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 02 Mar 2026 20:31:27 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V6 2/3] rust: Add PowerPC support
-To: Alice Ryhl <aliceryhl@google.com>,
- Mukesh Kumar Chaurasiya <mkchauras@gmail.com>
-Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
- Link Mauve <linkmauve@linkmauve.fr>, ojeda@kernel.org, boqun.feng@gmail.com,
- gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org,
- a.hindborg@kernel.org, tmgross@umich.edu, dakr@kernel.org, corbet@lwn.net,
- maddy@linux.ibm.com, mpe@ellerman.id.au, npiggin@gmail.com,
- chleroy@kernel.org, peterz@infradead.org, jpoimboe@kernel.org,
- jbaron@akamai.com, rostedt@goodmis.org, ardb@kernel.org,
- rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- Jubilee Young <workingjubilee@gmail.com>, Matthew Maurer
- <mmaurer@google.com>, David Wood <david@davidtw.co>,
- Wesley Wiser <wwiser@gmail.com>
-References: <20260210090023.2587534-1-mkchauras@gmail.com>
- <20260210090023.2587534-3-mkchauras@gmail.com>
- <CAH5fLgi3Owm4=4g8wQ5Rnr7Y63XJ1D8apOdkewW6WpRfg6vV_w@mail.gmail.com>
- <aZtT4MH0Q8Ic9ZiM@luna>
- <CANiq72nEam8n_daX5LyYrpH=i71k+pb+HLn6EEPdJJc-Zi9Q3A@mail.gmail.com>
- <aZu6cSqnvO91w1m4@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
- <CANiq72mg+D4QZmBhrNj7dB+V3GHsQoZT2cSG1ffHYDYJWXyopQ@mail.gmail.com>
- <0a176f95-eeba-428e-b19b-b08503d9ca5d@ralfj.de>
- <aaUlwfP72ZpshLPL@li-1a3e774c-28e4-11b2-a85c-acc9f2883e29.ibm.com>
- <aaU8VC-kLOKDyYDP@google.com>
-From: Ralf Jung <post@ralfj.de>
-Content-Language: en-US, de-DE
-In-Reply-To: <aaU8VC-kLOKDyYDP@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+User-Agent: Evolution 3.56.2-8 
+X-ZohoMailClient: External
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[ralfj.de:s=mail];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-77561-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[google.com,gmail.com];
-	TAGGED_FROM(0.00)[bounces-77559-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[30];
-	DMARC_NA(0.00)[ralfj.de];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[rong.moe:+];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[ralfj.de:+];
-	NEURAL_HAM(-0.00)[-0.994];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[post@ralfj.de,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,linkmauve.fr,kernel.org,garyguo.net,protonmail.com,umich.edu,lwn.net,linux.ibm.com,ellerman.id.au,infradead.org,akamai.com,goodmis.org,vger.kernel.org,lists.ozlabs.org,google.com,davidtw.co];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rust-lang.org:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ralfj.de:mid,ralfj.de:dkim]
-X-Rspamd-Queue-Id: AAF491D8D21
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,rong.moe:mid,rong.moe:dkim]
+X-Rspamd-Queue-Id: 016EA1D8F36
 X-Rspamd-Action: no action
 
-Hi all,
+Hi Takashi,
 
-On 02.03.26 08:29, Alice Ryhl wrote:
-> On Mon, Mar 02, 2026 at 11:25:54AM +0530, Mukesh Kumar Chaurasiya wrote:
->> On Tue, Feb 24, 2026 at 09:58:10AM +0100, Ralf Jung wrote:
->>> Hi all,
->>>
->>> On 23.02.26 16:31, Miguel Ojeda wrote:
->>>> On Mon, Feb 23, 2026 at 3:26 AM Mukesh Kumar Chaurasiya
->>>> <mkchauras@gmail.com> wrote:
->>>>>
->>>>> I think, disabling altivec, fpu and vsx with compiler flag will work.
->>>>>
->>>>> What are your opinion on this?
->>>>
->>>> It is really up to upstream Rust -- for us, i.e. the kernel, it
->>>> usually doesn't really matter much how things like that are
->>>> accomplished: whether via flags, a built-in target, a custom target,
->>>> etc. However, we need to know what the path to stability is.
->>>>
->>>> My understanding (but I may be wrong) is that upstream Rust prefer we
->>>> use built-in targets for softfloat instead of disabling via
->>>> `-Ctarget-feature` (and that the other options may go away soon and/or
->>>> will never be stable) -- at least for some cases. For instance, for
->>>> arm64, please this recent change kernel-side regarding `neon` as an
->>>> entry point:
->>>>
->>>>     446a8351f160 ("arm64: rust: clean Rust 1.85.0 warning using softfloat target")
->>>>
->>>> So please ask upstream Rust (probably in their Zulip, e.g. in
->>>> t-compiler or rust-for-linux channels) what you should do for powerpc.
->>>> They will likely be happy with a PR adding the target (or whatever
->>>> they decide) as Alice mentions. And until we reach that minimum
->>>> version (in a year or more), we can use something else meanwhile. But
->>>> at least we will have a way towards the end goal, if that makes sense.
->>>>
->>>> In case it helps, let me Cc Ralf, Jubilee and Matthew who were
->>>> involved in some of that discussion in the past, plus the compiler
->>>> leads.
->>>
->>> Upstream Rust dev here. Indeed we'd strongly prefer if this could use a
->>> built-in Rust target; we can work with you on adding a new target if that is
->>> needed.
->>> The kernel currently uses a custom JSON target on x86 and that's quite the
->>> headache for compiler development: JSON targets are highly unstable and
->>> directly expose low-level details of how the compiler internally represents
->>> targets. When we change that representation, we update all built-in targets,
->>> but of course we cannot update JSON targets. So whenever possible we'd like
->>> to move towards reducing the number of JSON targets used by the kernel, not
->>> increase it. :)
->>>
->>> Kind regards,
->>> Ralf
->>>
->> Hey,
->>
->> Sorry for delayed response. I was out of network zone.
->>
->> I am not sure about the process of how to get this in rust toolchain.
->> Should I raise an issue of github for this?
-> 
-> You would need to add a new file to compiler/rustc_target/src/spec/targets
-> in the rustc repository.
-> 
-> If you're not sure what to put there, I would suggest coming up with
-> something that looks plausible, and opening a PR with that. Then others
-> can help you with filling out the target correctly.
+Thanks for your review.
 
-Also see the documentation at 
-<https://doc.rust-lang.org/rustc/target-tier-policy.html#adding-a-new-target>.
+On Mon, 2026-03-02 at 10:54 +0100, Takashi Iwai wrote:
+> On Sun, 01 Mar 2026 22:37:20 +0100,
+> Rong Zhang wrote:
+> > @@ -2558,14 +2585,69 @@ void snd_usb_apply_flag_dbg(const char *reason,
+> >  	}
+> >  }
+> > =20
+> > +#define USB_STRING_SIZE 128
+> > +
+> > +static inline int snd_usb_get_strings(struct snd_usb_audio *chip,
+> > +				      char *manufacturer, char *product)
+> > +{
+> > +	int ret;
+> > +
+> > +	if (manufacturer) {
+> > +		ret =3D usb_string(chip->dev, chip->dev->descriptor.iManufacturer,
+> > +				 manufacturer, USB_STRING_SIZE);
+> > +		if (ret < 0) {
+> > +			usb_audio_warn(chip, "failed to get manufacturer string: %d\n", ret=
+);
+> > +			return ret;
+> > +		}
+> > +	}
+> > +
+> > +	if (product) {
+> > +		ret =3D usb_string(chip->dev, chip->dev->descriptor.iProduct,
+> > +				 product, USB_STRING_SIZE);
+> > +		if (ret < 0) {
+> > +			usb_audio_warn(chip, "failed to get product string: %d\n", ret);
+> > +			return ret;
+> > +		}
+> > +	}
+> > +
+> > +	return 1; /* ok */
+> > +}
+> > +
+> >  void snd_usb_init_quirk_flags_table(struct snd_usb_audio *chip)
+> >  {
+> >  	const struct usb_audio_quirk_flags_table *p;
+> > +	char manufacturer[USB_STRING_SIZE];
+> > +	char product[USB_STRING_SIZE];
+>=20
+> Keeping those a bit largish strings on the stack doesn't look good.
+> Maybe better to do kalloc with __free(kfree).
 
-Kind regards,
-Ralf
+Makes sense.
 
+> > +	int got_usb_strings =3D 0; /* <0: error, 0: pending, >0: ok */
+>=20
+> I think this global flag could go wrong since...
+>=20
+> >  	for (p =3D quirk_flags_table; p->id; p++) {
+> >  		if (chip->usb_id =3D=3D p->id ||
+> >  		    (!USB_ID_PRODUCT(p->id) &&
+> >  		     USB_ID_VENDOR(chip->usb_id) =3D=3D USB_ID_VENDOR(p->id))) {
+> > +			if (!p->usb_string_match)
+> > +				goto apply; /* DEVICE_FLG or VENDOR_FLG */
+> > +
+> > +			/* DEVICE_STRING_FLG or VENDOR_STRING_FLG */
+> > +			if (!got_usb_strings) {
+> > +				got_usb_strings =3D snd_usb_get_strings(chip,
+> > +					p->usb_string_match->manufacturer ? manufacturer : NULL,
+> > +					p->usb_string_match->product ? product : NULL);
+>=20
+> ... here you try to extract strings only once, but this retrieval
+> depends on the current entry.  If the current entry has only
+> manufacturer and the next entry has only product, it won't work.
+
+Nice catch! Thanks. Will fix it in v2.
+
+> IMO, a simpler way would be something like:
+>=20
+> #define USB_STRING_SIZE 128
+>=20
+> static char *snd_usb_get_string(struct snd_usb_audio *chip, int id)
+> {
+> 	char *buf =3D kmalloc(USB_STRING_SIZE, GFP_KERNEL);
+> 	int ret;
+>=20
+> 	if (!buf)
+> 		return ERR_PTR(-ENOMEM);
+> 	ret =3D usb_string(chip->dev, id, buf, USB_STRING_SIZE);
+> 	if (ret < 0) {
+> 		usb_audio_warn(chip, "failed to get string for id%d: %d\n", ret);
+> 		kfree(buf);
+> 		return ERR_PTR(ret);
+> 	}
+> 	return buf;
+> }
+
+I guess we may use usb_cache_string() so that we don't need to
+kmalloc() the buffer ourselves and can get rid of USB_STRING_SIZE.
+
+> void snd_usb_init_quirk_flags_table(struct snd_usb_audio *chip)
+> {
+> 	....
+> 	char *manufacturer __free(kfree) =3D NULL;
+> 	char *product __free(kfree) =3D NULL;
+>=20
+>   	for (p =3D quirk_flags_table; p->id; p++) {
+> 		....
+> 		if (p->usb_string_match->manufacturer) {
+> 			if (!manufacturer)
+> 				manufaturer =3D
+> 					snd_usb_get_string(chip,
+> 						chip->dev->descriptor.iManufacturer);
+> 			if (!IS_ERR_OR_NULL(manufacturer) &&
+> 			    strcmp(p->usb_string_match->manufacturer, manufacturer))
+> 				continue;		=09
+> 		}
+> 		if (p->usb_string_match->product) {
+> 			if (!product)
+> 				product =3D
+> 					snd_usb_get_string(chip,
+> 						chip->dev->descriptor.iProduct);
+> 			if (!IS_ERR_OR_NULL(product) &&
+> 			    strcmp(p->usb_string_match->product, product))
+> 				continue;		=09
+> 		}
+>=20
+>=20
+
+Sounds neat. Will do in v2. I will also skip the warning if id =3D=3D 0
+since string-descriptor-based quirk table entries has nothing to do
+with devices without corresponding descriptors.
+
+Thanks,
+Rong
+
+> thanks,
+>=20
+> Takashi
 
