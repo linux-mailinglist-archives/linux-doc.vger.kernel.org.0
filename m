@@ -1,62 +1,62 @@
-Return-Path: <linux-doc+bounces-77630-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77632-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cMFaD03epWkvHgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77630-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:00:29 +0100
+	id 0HAfLGrepWkvHgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77632-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:00:58 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D49EB1DE8CF
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:00:28 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF06D1DE8EC
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 20:00:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CC11A30325C2
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 19:00:10 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E55693017AA1
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 19:00:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D73BE379ED5;
-	Mon,  2 Mar 2026 18:59:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A8B437C107;
+	Mon,  2 Mar 2026 18:59:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="L8mofidm"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="FFSLnSat"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2AC3375ACE;
-	Mon,  2 Mar 2026 18:59:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14E9C376BF1;
+	Mon,  2 Mar 2026 18:59:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772477981; cv=pass; b=Rgpo8B3F1cZIn/3oMehPnSODKFn84IJtS3H7LAk9em/JuY6rQsyT8f9G2Zp06pn+T4Gkurs7RCloS6dkS4BPiLMMfrqSEIQNDr+KhVPOqZCw7chRkYiuh3Gz0xln1Zx4Cdpp6NddBDOGr8jqN4vfBwVe/CwDLx/8njFiCL4n0TA=
+	t=1772477987; cv=pass; b=D9PVoXZromv5iPmLSqFOocjSEz/UAtAMfb5pQjLi0gvEUa1f82DFCuLA7A/C2nxS/OQ9fzBGtwMyCCKAP+2xyfjSK33mFW4T1m0bsNWv+Z213kzQdi1LlM7CNEG2f230jS9+1xt0Wq3T5/nW0hz4c3+Uf5QxP+4fN5Mjaz8v9f4=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772477981; c=relaxed/simple;
-	bh=jkOYA2NxwZJOVf2xfldlhNIEcy3ntqlXitFNbPnDQ8E=;
+	s=arc-20240116; t=1772477987; c=relaxed/simple;
+	bh=A5QVI4sc3toPzsBJ0eGEdjAvm937Zw+ZKOz9Z1bfWys=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=HxQgfnAyR9b//Vdl2NQ/7nKgWVWvFNtCu+3AEpp5oNdc/UPxV7ExMoInyWzqLedCzI6dMhoF36Q9LZEwVVLNQZfg8cPTjpHJB+T1uUhJ/cxqV0QzY4SETgmoJiMNA3/AsDb78JCuhOifhESAKIWfxYMyD4Qlj/b/xOk8KDSVD+c=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=L8mofidm; arc=pass smtp.client-ip=136.143.188.15
+	 MIME-Version:Content-Type; b=utS0wAkYvZo3n4/Yh37CORoZkybvEGi4GFapltAuX18Wmr2PaXAODdCD7An5bi5afhrww7ZNMkV9hIibO2hdJV3CV4fzLD3xwbEnMGOs/zV/F0btTQTHSjzHRlfV2SuVfbeFQg6+T/6eEZ4/xP7dNWXNpSewB2JeT71ievWCudg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=FFSLnSat; arc=pass smtp.client-ip=136.143.188.15
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
-ARC-Seal: i=1; a=rsa-sha256; t=1772477969; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1772477973; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=UlbTrGcJIoFX6njB8HfmY5d2uKb8PnF3+NbO0Qn5Uabd/XBQy74QHI4tqFA8sx9I46FNP0Pfzwuc6/XQM4QHHqmkdsL1QLNRDijt+S1ZS02FlgdxPEkQLjB59drciaMe1zjZHoWrZazYbf5rDsPRzwIclALta5eaBnzvxfvPjJA=
+	b=eaiAJK7NBboKKuN0DtvG+kkCaWfGG7qD0q+SN42lX/MlM4uEbzWqjQy4V4p/A1P2M8ME+0ZTW8y9C1H21JyKPY/P0l8/tIyfOSni6mwAXPA8D2C/ew4lbKRUE4Vv1yTY7I1+tneNxh8orHPMKWRPwUKyytYDY9JMx1VnbdJCOoU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1772477969; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=2vILH0Hgahd9bs8JmMib5OXj/WY5tcMeweFVJlplY/M=; 
-	b=IIcqXCYSWGHCAghNdB7nHJB2NOk5niN9SsNMkrniCUltRlPYRXk8wmlRmhR22UrzMuVweckU9Uw6gEXCrKElonqummbdNDd5zNkguEvc0n+FS2KLVTOhn3y6IWXIoY84I5WSxUbqpl2VkLlrCn/LR4hzo3JWGBqFdXoS0s2nBqU=
+	t=1772477973; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=/BvEQBitzjedx/UMLrqh7LvNZcltcVro9BjyKn24tic=; 
+	b=fmxJkiADteJ9o8fcYJ3/gxy32GUShA5QRC5vzRFbYOn5hnj3aze52rl1SqjNZexqIwICNSzvcWn/rBETyh2u3Fj7KtYCF9NboI6psY5uMDfnY80QJSx6Z1zrNceJWQOHkzlVE5KTeiX/Jk2hi+GB6bOJWxVQEEkT33He4h9r9t8=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=rong.moe;
 	spf=pass  smtp.mailfrom=i@rong.moe;
 	dmarc=pass header.from=<i@rong.moe>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772477969;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772477973;
 	s=zmail2048; d=rong.moe; i=i@rong.moe;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=2vILH0Hgahd9bs8JmMib5OXj/WY5tcMeweFVJlplY/M=;
-	b=L8mofidmvBt6LwpR9HvBW9spfwRolyEBsnOWHIP/e1lrpG2XWxTaZX3wl3+nAswh
-	DTd19LpldtSy3c6e9mWxX8B2zovbZfPZyD/448yC6p9qxrHk2OV+KBxD+C9tAlkpzG8
-	1aUojoif0eD8da0b1WPBRrTJvUzX8oP8ZTQMP8tunJwkJ0SWYh+orI2avzvpUtG0UeS
-	ybCYknrXeSGEAbSixck2EMBpCmZj057XA57HmpWOvN5GTpahS91SDRjmumdeQGdTq20
-	3AMnH/wl86hI672qi/tsaRFFWmsuROvBeYeXBQU7ifSSyzFR3WEi8jiKs95N9pFDMJj
-	pyTOOA90Tg==
-Received: by mx.zohomail.com with SMTPS id 1772477968532963.3711183766075;
-	Mon, 2 Mar 2026 10:59:28 -0800 (PST)
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=/BvEQBitzjedx/UMLrqh7LvNZcltcVro9BjyKn24tic=;
+	b=FFSLnSatLUDtf3zAdZ1oTXigGelOFhP09EVndbNIBBavC1XNrL0EeTDP62xZO9pw
+	+dwSP7imHZwOi1Yf9QP8w4i6Swj3vhATUwVup3W6XrSxWe8iAxJDm9I9tpcpLIqUSyQ
+	FhkKzgwwHY9r78gajCXFyGD/uHl+waZscJ+AL90VBC0rNz4SGXXMDkmlSVJEq/gWxpn
+	OC8UyA944a9cVELcE2LTH/JYXjHphxoVv0emqlucUhFr8O7iQV4iUHwMbuHoTW01CoP
+	2e3yntSX9F2ao40ASwA0MkiPcFiyo9haD5bPt72x7zfctQIBLCQ+Z9v+2UOQg9vtul+
+	jxjHNWzWbQ==
+Received: by mx.zohomail.com with SMTPS id 1772477972008652.7818658540505;
+	Mon, 2 Mar 2026 10:59:32 -0800 (PST)
 From: Rong Zhang <i@rong.moe>
 To: Jaroslav Kysela <perex@perex.cz>,
 	Takashi Iwai <tiwai@suse.com>
@@ -69,9 +69,9 @@ Cc: Rong Zhang <i@rong.moe>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Icenowy Zheng <uwu@icenowy.me>
-Subject: [PATCH v2 7/8] ALSA: usb-audio: Add linear volume quirk for Hotone Audio Pulze Mini
-Date: Tue,  3 Mar 2026 02:58:58 +0800
-Message-ID: <20260302185900.427415-8-i@rong.moe>
+Subject: [PATCH v2 8/8] ALSA: usb-audio: Apply linear volume quirk on MV-SILICON devices
+Date: Tue,  3 Mar 2026 02:58:59 +0800
+Message-ID: <20260302185900.427415-9-i@rong.moe>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260302185900.427415-1-i@rong.moe>
 References: <20260302185900.427415-1-i@rong.moe>
@@ -81,70 +81,126 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
-X-Rspamd-Queue-Id: D49EB1DE8CF
+X-Rspamd-Queue-Id: AF06D1DE8EC
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-77632-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77630-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[rong.moe:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[rong.moe:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rong.moe:dkim,rong.moe:email,rong.moe:mid,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,rong.moe:dkim,rong.moe:email,rong.moe:mid,ubuntu-it.org:url]
 X-Rspamd-Action: no action
 
-Hotone Audio Pulze Mini is a modeling amplifier with UAC interface. Its
-Playback and Capture mixers use linear volume with val = 0/100/1.
+MV-SILICON is a SoC manufacturer producing multifunctional audio SoCs.
+Many devices built on top of their SDK share a common quirk that the
+Playback and Capture mixers use linear volume with val = 0/4096/1.
 
-Add a quirk table entry matching VID/PID=0x84ef/0x0082 and applying
-linear volume quirk flags, so that it can work properly.
+The SDK seems to always report "MV-SILICON" for manufacturer string.
+Hence, match it so that we don't need to define quirk table entries
+separately for each devices. The "val = 0/4096/1" pattern is also
+checked against before applying the quirk, in order that the quirk won't
+accidentally break unseen variants.
 
-Quirky device sample:
+Quirky device samples:
 
-  usb 7-1: New USB device found, idVendor=84ef, idProduct=0082, bcdDevice= 1.03
+  usb 7-1: New USB device found, idVendor=1235, idProduct=0003, bcdDevice= 1.00
   usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-  usb 7-1: Product: Pulze Mini
-  usb 7-1: Manufacturer: Hotone Audio
-  usb 7-1: SerialNumber: 20240807
+  usb 7-1: Product: G1
+  usb 7-1: Manufacturer: MV-SILICON
+  usb 7-1: SerialNumber: 20190808
+
+  usb 7-1: New USB device found, idVendor=1235, idProduct=0003, bcdDevice= 1.00
+  usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+  usb 7-1: Product: mvsilicon B1 usb audio
+  usb 7-1: Manufacturer: MV-SILICON
+  usb 7-1: SerialNumber: 20190808
+
+  usb 5-1.4: New USB device found, idVendor=8888, idProduct=1719, bcdDevice= 1.00
+  usb 5-1.4: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+  usb 5-1.4: Product: HF310 USB Audio
+  usb 5-1.4: Manufacturer: MV-SILICON
+  usb 5-1.4: SerialNumber: 20190808
+
+  usb 7-1: New USB device found, idVendor=2717, idProduct=5086, bcdDevice= 1.00
+  usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+  usb 7-1: Product: Redmi 电脑音箱
+  usb 7-1: Manufacturer: MV-SILICON
+  usb 7-1: SerialNumber: 20190808
+
+  usb 2-1.2: New USB device found, idVendor=3142, idProduct=a601, bcdDevice= 1.00
+  usb 2-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+  usb 2-1.2: Product: fifine Microphone
+  usb 2-1.2: Manufacturer: MV-SILICON
+  usb 2-1.2: SerialNumber: 20190808
+  * https://forum.ubuntu-it.org/viewtopic.php?t=659345
 
 Signed-off-by: Rong Zhang <i@rong.moe>
 ---
- sound/usb/quirks.c | 2 ++
- 1 file changed, 2 insertions(+)
+ sound/usb/mixer_quirks.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 1c7ca52c92d08..d907b273a1cc1 100644
---- a/sound/usb/quirks.c
-+++ b/sound/usb/quirks.c
-@@ -2438,6 +2438,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
- 		   QUIRK_FLAG_ALIGN_TRANSFER),
- 	DEVICE_FLG(0x534d, 0x2109, /* MacroSilicon MS2109 */
- 		   QUIRK_FLAG_ALIGN_TRANSFER),
-+	DEVICE_FLG(0x84ef, 0x0082, /* Hotone Audio Pulze Mini */
-+		   QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL | QUIRK_FLAG_MIXER_CAPTURE_LINEAR_VOL),
+diff --git a/sound/usb/mixer_quirks.c b/sound/usb/mixer_quirks.c
+index 539044c0c6440..e97814dc90259 100644
+--- a/sound/usb/mixer_quirks.c
++++ b/sound/usb/mixer_quirks.c
+@@ -4588,6 +4588,24 @@ static void snd_dragonfly_quirk_db_scale(struct usb_mixer_interface *mixer,
+ 	}
+ }
  
- 	/* Vendor and string descriptor matches */
- 	VENDOR_STRING_FLG(0x1235, /* VID conflict with Focusrite Novation */
++static void snd_usb_mv_silicon_quirks(struct usb_mixer_interface *mixer,
++				      struct usb_mixer_elem_info *cval,
++				      struct snd_kcontrol *kctl)
++{
++	if (cval->min == 0 && cval->max == 4096 && cval->res == 1) {
++		/* The final effects will be printed later. */
++		usb_audio_info(mixer->chip, "applying MV-SILICON quirks (0/4096/1 variant)\n");
++
++		/* Respect MIN_MUTE set by module parameters. */
++		if (!(mixer->chip->quirk_flags & QUIRK_FLAG_MIXER_PLAYBACK_MIN_MUTE))
++			mixer->chip->quirk_flags |= QUIRK_FLAG_MIXER_PLAYBACK_LINEAR_VOL;
++		if (!(mixer->chip->quirk_flags & QUIRK_FLAG_MIXER_CAPTURE_MIN_MUTE))
++			mixer->chip->quirk_flags |= QUIRK_FLAG_MIXER_CAPTURE_LINEAR_VOL;
++	} else {
++		usb_audio_dbg(mixer->chip, "not applying MV-SILICON quirks on unknown variant");
++	}
++}
++
+ /*
+  * Some Plantronics headsets have control names that don't meet ALSA naming
+  * standards. This function fixes nonstandard source names. By the time
+@@ -4664,6 +4682,10 @@ void snd_usb_mixer_fu_apply_quirk(struct usb_mixer_interface *mixer,
+ 		break;
+ 	}
+ 
++	if (cval->control == UAC_FU_VOLUME &&
++	    !strncmp(mixer->chip->card->longname, "MV-SILICON", 10))
++		snd_usb_mv_silicon_quirks(mixer, cval, kctl);
++
+ 	/* lowest playback value is muted on some devices */
+ 	if (mixer->chip->quirk_flags & QUIRK_FLAG_MIXER_PLAYBACK_MIN_MUTE)
+ 		if (strstr(kctl->id.name, "Playback")) {
 -- 
 2.51.0
 
