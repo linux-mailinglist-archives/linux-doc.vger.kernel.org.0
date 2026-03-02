@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-77598-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77599-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OK8/C1G/pWknFgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77598-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:48:17 +0100
+	id gCFPAQ++pWkbFgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77599-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:42:55 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB3461DD356
-	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:48:16 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DBDE11DD177
+	for <lists+linux-doc@lfdr.de>; Mon, 02 Mar 2026 17:42:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BF4EE30D926F
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:16 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 5524F303C4DF
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2026 16:41:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00150423145;
-	Mon,  2 Mar 2026 16:41:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04298423152;
+	Mon,  2 Mar 2026 16:41:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VRbrwor0"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hHssqK16"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C73C1421EEC;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7483421EED;
 	Mon,  2 Mar 2026 16:41:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772469669; cv=none; b=P9nvy/Yofgz/d1mw9rL1VRieoQVkOQVFIpVWYUBPk+K8bFnUy5dVm9SQhsNXxm+RTmbAPCNqJyhaN6SVJanRGn59r55NxBVIwH5fyIkvPk/ae3U07YybncL+zPrlkm1E46OI0l0EI503N8wKBjC05uSc9lZa4FJEvsOp1GCqHn8=
+	t=1772469669; cv=none; b=Gh+bJXNEg8FGPT2YhS2miAos+Y/Y6w+sT8Ghh+yvcqM0RqI1nARHX6HawUgDEKn46bIol6Wtn1LAPmSuaqaoXmoCwt1aaJYXuqE0b030e+l4ArynW4vxYS5COFrspNURJQWPvO9PYFByXJYlFG4XYhTknRQjSkOXpeTATnUDKK8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772469669; c=relaxed/simple;
-	bh=l1TnXg9K1HZGJE+MUFeDj5Ao7LGwzZBBWNXmq8OcdpM=;
+	bh=3YzxxHgVjkBet+RBKm4GWxqcg0N/we4EFRl+qm5WAOs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=DPju2sZdXjcTxx9YShOi3KJqqo5tI6VdqrXQFcpEi9oPBfgpdFDcT7vwF5apn+v6VjzzbPJjgGwjKRjYS7kPoEU/Tyk7Q5H2j6yriLYCBBNXs8vJ/3Y3qOZY0mk05MLCpPSeS2KTAjMaBsrWO6A4Nc8XD6S7417ny6JjkpdEJ4Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VRbrwor0; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CF6FC2BC87;
+	 MIME-Version:Content-Type; b=MpxaK6gqWGCIz9rLCnksvQ02wuTtebmFORb1ZsQq3M/lYr4QDcgKYtCOB/naHwBoSrA3IxGcMu1f8aSUVHwR3PUkuadrIKZsGYb5ajkOJdmue+E16vlLnuAqktI1MnHfi1E7M2aHx34Hg8PLTY4ESXcNx5eWAaoFUCrYIH4qO+I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hHssqK16; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82B81C2BCAF;
 	Mon,  2 Mar 2026 16:41:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772469669;
-	bh=l1TnXg9K1HZGJE+MUFeDj5Ao7LGwzZBBWNXmq8OcdpM=;
+	bh=3YzxxHgVjkBet+RBKm4GWxqcg0N/we4EFRl+qm5WAOs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=VRbrwor0sf65/BAVNyn5/8Bc4uF2uUGQDaoBNcIgYcQ3t1W6cGGfhcoTlPPu6d2l1
-	 I6Tl1oLUwI5O+N/bO/jGoQmrYHR22Trnm32B7DH50NbkB7h/U7JuDBR6udpHM61v4L
-	 hBoLwHOnH267kgi6NnM+uHI2QdnsWbE3iJu26qvI+fCquoVetlOv6cD+aiaJ8/M05a
-	 s4f/TGhS7TwVTo5feNc+5jlwg4Z88sob3ZG9TSuxdH2zzQPiUZ4AZPh7GEyVKRSCDS
-	 lIPLgKVSCocRVTWOXKopFMGyZZrHKIjn7cT4L9hdJVPN95cnsG/ftU80USShkFmSjs
-	 jdIbyT2Wi1wxw==
+	b=hHssqK16wou1zOz3yoo/HO9erjhMozloQ4bEl4tLNbPxPwyKeJq6DOCLEiZurlEhX
+	 zFWaVC4a5sRcuEjNrVbcn7U56lR0vNhzqWqpa+OBAC6haKtYDVFPnZMwYxAgCSJS+B
+	 eh5JsQU3J0Xja1ha+IN0h7188xwZYz4uYkmook3gYroMc7Be1/F06NCEfM00ZoJbxG
+	 Gb5oZOkX/1ZXSfczB6hMvjS22hM8C9fl8SULfXAFK4YxcYbe9KcIHmItu8dEBN/uI7
+	 B65+FVNQf9QOOrKRy9B2VVzkGQLlkGlkQTWWo624bk9R3sWpvQNrgE4XsLhocs+vbo
+	 BfLM7ZuR5k8fQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vx6KR-00000000311-1z8t;
+	id 1vx6KR-0000000032F-2n4B;
 	Mon, 02 Mar 2026 17:41:07 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 04/18] docs: kdoc_parser: don't mangle with function defines
-Date: Mon,  2 Mar 2026 17:40:47 +0100
-Message-ID: <8f9854c8ca1c794b6a3fe418f7adbc32aa68b432.1772469446.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 05/18] docs: kdoc_parser: fix variable regexes to work with size_t
+Date: Mon,  2 Mar 2026 17:40:48 +0100
+Message-ID: <8230715239929cf9d475ab81ca1df7de65d82d06.1772469446.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1772469446.git.mchehab+huawei@kernel.org>
 References: <cover.1772469446.git.mchehab+huawei@kernel.org>
@@ -71,13 +71,13 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: CB3461DD356
+X-Rspamd-Queue-Id: DBDE11DD177
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -85,10 +85,10 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-77598-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-77599-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	PRECEDENCE_BULK(0.00)[];
@@ -101,66 +101,53 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-Mangling with #defines is not nice, as we may end removing
-the macro names, preventing several macros from being properly
-documented.
+The regular expressions meant to pick variable types are too
+naive: they forgot that the type word may contain underlines.
 
-Also, on defines, we have something like:
+It also means that we need to change the regex which detects
+var attributes to handle "const".
 
-	#define foo(a1, a2, a3, ...)			 \
-		/* some real implementation */
-
-The prototype part (first line on this example) won't contain
-any macros, so no need to apply any regexes on it.
-
-With that, move the apply_transforms() logic to ensure that
-it will be called only on functions.
-
+Co-developed-by: Randy Dunlap <rdunlap@infradead.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Acked-by: Randy Dunlap <rdunlap@infradead.org>
 Tested-by: Randy Dunlap <rdunlap@infradead.org>
 Reviewed-by: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ tools/lib/python/kdoc/kdoc_parser.py | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index 68a5aea9175d..9643ffb7584a 100644
+index 9643ffb7584a..9c9443281c40 100644
 --- a/tools/lib/python/kdoc/kdoc_parser.py
 +++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -163,7 +163,7 @@ struct_nested_prefixes = [
- #
- # Transforms for function prototypes
- #
--function_xforms  = [
-+function_xforms = [
-     (KernRe(r"^static +"), ""),
-     (KernRe(r"^extern +"), ""),
-     (KernRe(r"^asmlinkage +"), ""),
-@@ -1066,10 +1066,7 @@ class KernelDoc:
-         found = func_macro = False
-         return_type = ''
-         decl_type = 'function'
--        #
--        # Apply the initial transformations.
--        #
--        prototype = apply_transforms(function_xforms, prototype)
-+
-         #
-         # If we have a macro, remove the "#define" at the front.
-         #
-@@ -1088,6 +1085,11 @@ class KernelDoc:
-                 declaration_name = r.group(1)
-                 func_macro = True
-                 found = True
-+        else:
-+            #
-+            # Apply the initial transformations.
-+            #
-+            prototype = apply_transforms(function_xforms, prototype)
+@@ -981,8 +981,9 @@ class KernelDoc:
+         """
+         VAR_ATTRIBS = [
+             "extern",
++            "const",
+         ]
+-        OPTIONAL_VAR_ATTR = "^(?:" + "|".join(VAR_ATTRIBS) + ")?"
++        OPTIONAL_VAR_ATTR = r"^(?:\b(?:" +"|".join(VAR_ATTRIBS) +r")\b\s*)*"
  
-         # Yes, this truly is vile.  We are looking for:
-         # 1. Return type (may be nothing if we're looking at a macro)
+         #
+         # Store the full prototype before modifying it
+@@ -1018,14 +1019,14 @@ class KernelDoc:
+ 
+         default_val = None
+ 
+-        r= KernRe(OPTIONAL_VAR_ATTR + r"\w.*\s+(?:\*+)?([\w_]+)\s*[\d\]\[]*\s*(=.*)?")
++        r= KernRe(OPTIONAL_VAR_ATTR + r"[\w_]*\s+(?:\*+)?([\w_]+)\s*[\d\]\[]*\s*(=.*)?")
+         if r.match(proto):
+             if not declaration_name:
+                 declaration_name = r.group(1)
+ 
+             default_val = r.group(2)
+         else:
+-            r= KernRe(OPTIONAL_VAR_ATTR + r"(?:\w.*)?\s+(?:\*+)?(?:[\w_]+)\s*[\d\]\[]*\s*(=.*)?")
++            r= KernRe(OPTIONAL_VAR_ATTR + r"(?:[\w_]*)?\s+(?:\*+)?(?:[\w_]+)\s*[\d\]\[]*\s*(=.*)?")
+         if r.match(proto):
+             default_val = r.group(1)
+ 
 -- 
 2.52.0
 
