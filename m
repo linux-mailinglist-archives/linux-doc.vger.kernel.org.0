@@ -1,153 +1,136 @@
-Return-Path: <linux-doc+bounces-77654-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77652-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id jf3ZOfBcpmnJOgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77654-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 05:00:48 +0100
+	id UCMqNfhUpmkbOAAAu9opvQ
+	(envelope-from <linux-doc+bounces-77652-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 04:26:48 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4B551E89BF
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 05:00:47 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61EE21E87B4
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 04:26:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 20442301D0E2
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 04:00:47 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 86B79300DD60
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 03:26:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 909131F1534;
-	Tue,  3 Mar 2026 04:00:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2057037CD37;
+	Tue,  3 Mar 2026 03:26:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="fcOCZunh"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sZzYK34q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m32107.qiye.163.com (mail-m32107.qiye.163.com [220.197.32.107])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B0FC2F851;
-	Tue,  3 Mar 2026 04:00:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.107
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEDA61A6810;
+	Tue,  3 Mar 2026 03:26:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772510445; cv=none; b=KrgSqtipTpGzjupqRMRaUxxdRymg9q54RTSn+kHO/yto3e78QjXLDW12QYTcKawZrqh/8Yo8H1/IOQcgwWwyPNvuBXjYL4986g0XIAZFb3CfIykekIRABAjdBt6kd1eXplxjkB+yjUhuJqNYielmIU+6C2d76DeIRLliooRH3Vs=
+	t=1772508403; cv=none; b=l2bHR3AmJowFyFrb9ZWiqlntTP7jVHv5VPK50C2zXiurKZd+2JGbneYVL91SOcVplecHT0qryt0dNmOJdQtmR5wWjVxjk8bCqyIw7krVTPyk5DNukamyR93FxBoCtnifZa6/1WrAmYujO2G8CEb0mkdzp/celxU3X/O7qEzXdFw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772510445; c=relaxed/simple;
-	bh=wc+eqZZVfxysn7nqDrFIPL65yksKv2aJmNV0TCBsyxw=;
-	h=Cc:Subject:To:References:From:Message-ID:Date:MIME-Version:
-	 In-Reply-To:Content-Type; b=UDAhtWF4F/hiJuHtuHoivNUuYbs/Yi1JvZPCmGrnx34D0w1doz/NQNPPVflWpYXGMhKuI9OI7mEBHamhdrbdzEnE/nABRiei3G7lb7BEWtFaeJahtAC89ycJhOM9v+sK76RQVnWht9VjYrbZ7zrC1IMXuVfiC5eFuxTF7uLnXsM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=fcOCZunh; arc=none smtp.client-ip=220.197.32.107
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
-Received: from [172.16.12.14] (unknown [58.22.7.114])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 35873ab86;
-	Tue, 3 Mar 2026 11:25:04 +0800 (GMT+08:00)
-Cc: shawn.lin@rock-chips.com, Manivannan Sadhasivam <mani@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, linux-rockchip@lists.infradead.org,
- linux-pci@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>
-Subject: Re: [PATCH v4 3/3] PCI: dw-rockchip: Add pcie_ltssm_state_transition
- trace support
-To: Steven Rostedt <rostedt@goodmis.org>
-References: <1769047340-113287-1-git-send-email-shawn.lin@rock-chips.com>
- <1769047340-113287-4-git-send-email-shawn.lin@rock-chips.com>
- <20260224091115.6e32c38e@fedora> <20260224091601.48a7b3c0@fedora>
-From: Shawn Lin <shawn.lin@rock-chips.com>
-Message-ID: <9c58271e-394c-a49e-ab2f-797f31ac9a79@rock-chips.com>
-Date: Tue, 3 Mar 2026 11:25:03 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+	s=arc-20240116; t=1772508403; c=relaxed/simple;
+	bh=4zf61ALQTMK14img1HViSIDfxFknaHCr69Rl17qSQGw=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=UBm03PgMY975O5aWP/6kSLknKhXHdqO3N9tqzdL7Ul5SBUIVUHgL9eWmN6UcpTnaYxeevr7qyIDxVSwJeIW3Dnf5Tamtuxose+e/zZp+BGuJymxhGpi+vt36UZNc/ZQzPjtPGr0khCNWzXEwLm40jvGsG3cBz1purs2uqLIFaAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sZzYK34q; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4766C19423;
+	Tue,  3 Mar 2026 03:26:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772508402;
+	bh=4zf61ALQTMK14img1HViSIDfxFknaHCr69Rl17qSQGw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=sZzYK34q0BRTj07TilzGsQwaXUIwwANpvSCCq/V9QelZ5EHSUiF8FPL24xGhjPWTw
+	 /k/VfPBRODiDwVF8MTGdyebPO/HSzlCyaBCfVc8MSodNuEWJaXblnXJ0bJULhRY5lG
+	 glziYAWp9B5Ti71/OQRLLuaNin8ZjvbZVD1N1SqvXX4+Y2Xj1S74JfBzPbz9//ggVo
+	 WCtESLc46MPYF1kEzz8O1hSY/HrPw+PAKHL8h1k93eGDWmcr5eorH6d+jv37SXPTLg
+	 ttKItjGaEyPwHMrqgahjd80aG/McSVbE//TsRlaJIRO3DFGkUFiUJ9+PQqPfw4sp7H
+	 yR+RnyItx4wfA==
+Date: Mon, 2 Mar 2026 19:26:40 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Tariq Toukan <tariqt@nvidia.com>
+Cc: Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko
+ <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed
+ <saeedm@nvidia.com>, "Leon Romanovsky" <leon@kernel.org>, Mark Bloch
+ <mbloch@nvidia.com>, Shuah Khan <shuah@kernel.org>,
+ <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
+ <linux-kselftest@vger.kernel.org>, Gal Pressman <gal@nvidia.com>, Dragos
+ Tatulea <dtatulea@nvidia.com>, Shay Drory <shayd@nvidia.com>, Jiri Pirko
+ <jiri@nvidia.com>, Moshe Shemesh <moshe@nvidia.com>
+Subject: Re: [PATCH net-next V3 00/10] devlink: add per-port resource
+ support
+Message-ID: <20260302192640.49af074f@kernel.org>
+In-Reply-To: <20260226221916.1800227-1-tariqt@nvidia.com>
+References: <20260226221916.1800227-1-tariqt@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20260224091601.48a7b3c0@fedora>
-Content-Type: text/plain; charset=gbk; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9cb1ba533c09cckunm664397451064e69
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkNCHVYZQx1JSUkZQkNCHkhWFRQJFh
-	oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
-	hVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=fcOCZunhr7Y/DHLUF7L3Wb8FLFNDfUkfU7AkKjjWaKuAbLrt3jIhPnhzA3AfgYiNDKuBBUgCaVP6YnlBWUypnln5kdTxA1wA8MCwJG7nI/KUvkm9UqLMCPMd3+zrOwRI+sCwIUCV6TH0CvJ8RlVDvwmPBaPnXAX33ISLhEt1JS8=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
-	bh=o7qDpfAmCY+KKmwW4NiVQPzaWeAB3Pm4lOV/bydwgz8=;
-	h=date:mime-version:subject:message-id:from;
-X-Rspamd-Queue-Id: C4B551E89BF
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 61EE21E87B4
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[rock-chips.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
-	R_DKIM_ALLOW(-0.20)[rock-chips.com:s=default];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77654-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77652-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[rock-chips.com:+];
+	FREEMAIL_CC(0.00)[google.com,redhat.com,lunn.ch,davemloft.net,gmail.com,resnulli.us,lwn.net,nvidia.com,kernel.org,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shawn.lin@rock-chips.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,rock-chips.com:dkim,rock-chips.com:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Hi Steven,
-
-在 2026/02/24 星期二 22:16, Steven Rostedt 写道:
-> On Tue, 24 Feb 2026 09:11:15 -0500
-> Steven Rostedt <rostedt@goodmis.org> wrote:
+On Fri, 27 Feb 2026 00:19:06 +0200 Tariq Toukan wrote:
+> With this series, users can query per-port resources:
 > 
-
-...
-
->>> +	}
->>> +
->>> +skip_trace:
->>> +	schedule_delayed_work(&rockchip->trace_work, msecs_to_jiffies(5000));
->>> +}
->>> +
+> $ devlink port resource show pci/0000:03:00.0/196608
+> pci/0000:03:00.0/196608:
+>   name max_SFs size 20 unit entry
 > 
-> Hmm, so basically you only want to call the work when tracing is
-> enabled? That's what I was thinking should be enabled by the reg and
-> unreg functions. That is, the reg should enabled the delayed work, and
-> the unreg should disable it from being called.
-> 
-> This looks like it calls the work regardless of if tracing is enabled
-> or not. Why waste the cycles when tracing is disabled?
-> 
+> $ devlink port resource show
+> pci/0000:03:00.0/196608:
+>   name max_SFs size 20 unit entry
+> pci/0000:03:00.1/262144:
+>   name max_SFs size 20 unit entry
 
+Code LGTM, I have a question about having a new cmd, tho.
 
-I looked into implementing reg and unreg callbacks to directly schedule
-and cancel the delayed work. The challenge is that this tracepoint
-belongs to the shared PCI subsystem trace hierarchy, while the polling
-work itself is per-controller. I haven't found a clean way to register
-per-driver callbacks in this common context.
+Does it matter to the user how the resource is scoped? 
+Whether the resource is at the instance level or at the port level?
 
-Creating a separate Rockchip-specific tracepoint via
-tracepoint_probe_register() would detach it from the standard PCIe trace
-event hierarchy, which seems undesirable.
+I worry we are mechanically following the design of other commands.
+Since the dump handler is new we could just dump resources with port-id
+there. No existing user space may be using it. Alternatively we could
+add a new attribute to select a bitmask of which scope user wants to
+dump.
 
-As a practical middle ground, I implement reg and unreg to maintain a
-user count like this v4. All drivers using this tracepoint would then
-rely on the count to gate their work execution, making the delayed work
-essentially a no-op when tracing is disabled.
+I have a strong suspicion that the user will want to access all
+resources of a device. `devlink resource show [$dev]` should dump 
+all resources devlink knows about, including port ones.
 
-Alternatively, we could simply revert to the V3 approach and rely
-entirely on the trace_pcie_ltssm_state_transition_enabled() static
-branch check, which would remove the need for reg and unreg altogether.
-
-If you have better suggestions or can point me to a preferred pattern 
-for this, I'd appreciate your advice.
-
-> -- Steve
-> 
+What's the reason for the new command?
 
