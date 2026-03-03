@@ -1,187 +1,232 @@
-Return-Path: <linux-doc+bounces-77688-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77691-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WKEkGZzbpmnHWgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77688-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:01:16 +0100
+	id mJs4L1/ipmlAYgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77691-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:30:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1AC61EFCC5
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:01:10 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C109A1F03FE
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:30:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DA3313010BB2
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 12:57:08 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4214830391A4
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 13:27:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD1C935F181;
-	Tue,  3 Mar 2026 12:57:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 872D7426EBF;
+	Tue,  3 Mar 2026 13:27:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Rh/xtQ2P"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TgQ592a7"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B84B934166B
-	for <linux-doc@vger.kernel.org>; Tue,  3 Mar 2026 12:57:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57269335543;
+	Tue,  3 Mar 2026 13:27:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772542627; cv=none; b=FGoiHNjTyLpq9/bKpratDR3C5teZ76eT0PjKur0uqb571TxCfBKMsW57CSHdEbJmi3klQhwXsnCJWct995zS5ce9ZUiCP6OqKvOgv0i8WOpFGlN27iXrB6My0zQse4rY2rnKSq7NKyeGkumgoXCHmBmDRopqeEq/E29cSSr2YmE=
+	t=1772544445; cv=none; b=hNEEv2oZPt8H4zonKoMfQQnFjw4cuHKTrxCFnSdigoDwxnuZxsEVT3q/47PfL9ODmy7+n0yn8QI2mntLbFXuoHFqoVtY/Oz8Ljkw8yfpMLc31wEw1DQ03Duy9IiSIzNiwVZjZRIu65lD+YXgbMhJ//xVktj1U2PAYE/eQPX3EVQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772542627; c=relaxed/simple;
-	bh=2y5Udud1w9el92nDGw3MAoHFspsRDspk+6XQIuYd3+8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Nuvp/CTyGXTM2jTanAhLDQraPmzdARuooaB8C7aLOK1iptewlmcHR/IG/k49ddBr/bUvLG57WFLYCdmkqw6PeCq747uhd4Lk5/iL8cCYIx5kIv74wF1t15qrglO8SIri7oEYcKn7oEdmT4zPkZeHuvca9fuJS5ug52X8rAXHoLc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Rh/xtQ2P; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8349AC2BCC4
-	for <linux-doc@vger.kernel.org>; Tue,  3 Mar 2026 12:57:07 +0000 (UTC)
+	s=arc-20240116; t=1772544445; c=relaxed/simple;
+	bh=oQ18lU+cSsDbl0sd4Y3oXZBV21JoGiUMKeTFizDUe2g=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=HxziD/iEmbnOAr/ADuxec1KrJMsaiOqVuHd/9urQocbiOVWacCJaUB3r4b7cjhuOAnR4ju7zTzc1c8CtVXqOu4CR+mb49k2BEIbUh0atl48ossTUpYc12vvk8iqdEud+oMraHADNjPVt6MWvhmbRVCyLBDqj5kwGvKlzNhoS4xo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TgQ592a7; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id ED4C9C116C6;
+	Tue,  3 Mar 2026 13:27:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772542627;
-	bh=2y5Udud1w9el92nDGw3MAoHFspsRDspk+6XQIuYd3+8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=Rh/xtQ2PfEdy9h+mFHmJQtMu9in4NIZz77vdXqFOxi2qJBdz4H/HKFOKLN4w+Bv3X
-	 8mKx18Yob5aY1B3ewea3IYfRB+7cnC8rF99DsHn/8jkHZ9CUGY0in/KLfY79ubuMHZ
-	 u6VKtGeCOKdSaPv0+BciddobJ1+cRxIng4YPDr2lBP7DLTQGITYLh45qQx1926uUYx
-	 A4uCp/BQFfNepLtvcSv1TeIhfEG18Tqe3iV+z719ruEjW4ggTEkiiMG6txqxzAc4h4
-	 lQ4joinhMpnlbuYyrZVY1P5SVn/n3xSkqSRZGoLiIX/D1bgXHx65GuF3qQF/FrdnNS
-	 Uv68zIfofJ1BQ==
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-38a23dd61c1so3843451fa.1
-        for <linux-doc@vger.kernel.org>; Tue, 03 Mar 2026 04:57:07 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCWB5n3utqZO0PcZVR2l6p+3xNFOxoRUpREECGGtTmVQgCA5rCtJGzF4wS4JaCIxfoeufccNncr5Stg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyRmxw4+0VTvC1g5lzO8Uv513bNcPH3KSdBCPJdBkaC0UOCvMUX
-	59n5DzoKcy2b4QGM4wtihmuFOUQHQm3aYWHKe+INGpoDNh8JkYekzhaw6UJUG2n9N6ggqRmWOkd
-	Uoi9ISyPmha9zGN+/0WqH2mBdLzkzvX8cwgmdw51k9w==
-X-Received: by 2002:a2e:be9b:0:b0:389:fcc6:4923 with SMTP id
- 38308e7fff4ca-389ff36c676mr123347411fa.36.1772542625858; Tue, 03 Mar 2026
- 04:57:05 -0800 (PST)
+	s=k20201202; t=1772544445;
+	bh=oQ18lU+cSsDbl0sd4Y3oXZBV21JoGiUMKeTFizDUe2g=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=TgQ592a7uqv9pP0Sj8erTpQHPIK0y7RL8DOZIvZvRAK4Eav+j7YOdwpIvpRK0lX5Z
+	 1+0j2sCSzTFFGSL9zK8mOh/TkeTOHDdjwb9DAgGgN8aGo6QlXdGgnsG19WKZcbNV36
+	 41IR70KBslfdg4tRPDfEqCc5ipvq9YZUk+bBaGs+SUTlHO6zwnDoM0AgHvaoG2/p5f
+	 eS1v3N1/7Qk97XqQ/dAz7/hYQ5K05tL27nJ2nDwehgm6uiUVzqIuTMmKRW/uyVnq0c
+	 jJRAG5m8szZ9+WfSH4Jw4Z3Q4YYLDOidYI2EzkLqYnNAllJCsWux+6Obz7b7FuEzo8
+	 wG3yk5FZeE6qg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5536EC143E;
+	Tue,  3 Mar 2026 13:27:24 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH v8 00/10] ADF41513/ADF41510 PLL frequency synthesizers
+Date: Tue, 03 Mar 2026 13:27:05 +0000
+Message-Id: <20260303-adf41513-iio-driver-v8-0-8dd2417cc465@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260302-qcom-qce-cmd-descr-v11-0-4bf1f5db4802@oss.qualcomm.com> <scr5qvxa7f7k22pms4c6k5gwiky7lhssrw6qryfngexlek44g2@rayinnnwqgbt>
-In-Reply-To: <scr5qvxa7f7k22pms4c6k5gwiky7lhssrw6qryfngexlek44g2@rayinnnwqgbt>
-From: Bartosz Golaszewski <brgl@kernel.org>
-Date: Tue, 3 Mar 2026 13:56:53 +0100
-X-Gmail-Original-Message-ID: <CAMRc=McCXg+YjSL2_tBW2G-oBwQn3UyLGu1HxZtrognoag_CHQ@mail.gmail.com>
-X-Gm-Features: AaiRm52NOJdgTLTN2sMabKBu44N91ubF3l3v3ULSOW8VIGjX28hNaR8okhr4RNg
-Message-ID: <CAMRc=McCXg+YjSL2_tBW2G-oBwQn3UyLGu1HxZtrognoag_CHQ@mail.gmail.com>
-Subject: Re: [PATCH RFC v11 00/12] crypto/dmaengine: qce: introduce BAM
- locking and use DMA for register I/O
-To: Manivannan Sadhasivam <mani@kernel.org>, Vinod Koul <vkoul@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Daniel Perez-Zoghbi <dperezzo@quicinc.com>, Md Sadre Alam <mdalam@qti.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Peter Ujfalusi <peter.ujfalusi@gmail.com>, 
-	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>, dmaengine@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: A1AC61EFCC5
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKrhpmkC/33Q3U7EIBAF4FfZcC2GGcpPvfI9jBdTGHZJtDXUN
+ JpN313axGxNu14eAt8w5ypGLplH8XS6isJTHvPQ1+AfTiJcqD+zzLFmgQoNAChJMTVgQMucBxl
+ LnrhIokCeXPLKs6gvPwqn/LWqL681X/L4OZTvdcgEy+n/3gRSSYzJd6xSDJafqae34fwYhnexg
+ BPeEIT2GMGKdIwteR2Na/UO0b+IVaD8MaKXn+gI2gFxavwOaTYI2GOkqUjsOhet84jgdojZIKi
+ PEbN2EtgDEsZIO8RuEH2nWFuRkBqLuq33urBD3A3Be+u4pVjFUXtHnTHtH2Se5x+YJMCsVQIAA
+ A==
+X-Change-ID: 20251110-adf41513-iio-driver-aaca8a7f808e
+To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+ Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Andy Shevchenko <andriy.shevchenko@intel.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772544443; l=5006;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=oQ18lU+cSsDbl0sd4Y3oXZBV21JoGiUMKeTFizDUe2g=;
+ b=Nu0gUpvI9dy6EOiGvFx5y6+ECQ0ztHV/IMxMPiTW85CcXwxZKJXxRrmTZDYa0aoOs2UL/He5e
+ R+2JF9CyWjnDRUArPWPx2L10dQEcZmHNgRHGVMi5WABh4MlcKOxlpeJ
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
+X-Rspamd-Queue-Id: C109A1F03FE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77688-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[oss.qualcomm.com,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,kernel.org,amd.com,vger.kernel.org,lists.infradead.org,linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	ASN_FAIL(0.00)[10.253.234.172.asn.rspamd.com:query timed out];
+	TAGGED_FROM(0.00)[bounces-77691-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[brgl@kernel.org,linux-doc@vger.kernel.org];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.997];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:replyto,analog.com:email,analog.com:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On Tue, Mar 3, 2026 at 1:44=E2=80=AFPM Manivannan Sadhasivam <mani@kernel.o=
-rg> wrote:
->
-> On Mon, Mar 02, 2026 at 04:57:13PM +0100, Bartosz Golaszewski wrote:
-> > NOTE: Please note that even though this is version 11, I changed the
-> > prefix to RFC as this is an entirely new approach resulting from
-> > discussions under v9. I AM AWARE of the existing memory leaks in the
-> > last patch of this series - I'm sending it because I want to first
-> > discuss the approach and get a green light from Vinod as well as Mani
-> > and Bjorn. Especially when it comes to communicating the address for th=
-e
-> > dummy rights from the client to the BAM driver.
-> > /NOTE
-> >
-> > Currently the QCE crypto driver accesses the crypto engine registers
-> > directly via CPU. Trust Zone may perform crypto operations simultaneous=
-ly
-> > resulting in a race condition. To remedy that, let's introduce support
-> > for BAM locking/unlocking to the driver. The BAM driver will now wrap
-> > any existing issued descriptor chains with additional descriptors
-> > performing the locking when the client starts the transaction
-> > (dmaengine_issue_pending()). The client wanting to profit from locking
-> > needs to switch to performing register I/O over DMA and communicate the
-> > address to which to perform the dummy writes via a call to
-> > dmaengine_slave_config().
-> >
->
-> Thanks for moving the LOCK/UNLOCK bits out of client to the BAM driver. I=
-t looks
-> neat now. I understand the limitation that for LOCK/UNLOCK, BAM needs to =
-perform
-> a dummy write to an address in the client register space. So in this case=
-, you
-> can also use the previous metadata approach to pass the scratchpad regist=
-er to
-> the BAM driver from clients. The BAM driver can use this register to perf=
-orm
-> LOCK/UNLOCK.
->
+This patch series adds support for the Analog Devices ADF41513 and ADF41510
+ultralow noise PLL frequency synthesizers. These devices are designed for
+implementing local oscillators (LOs) in high-frequency applications.
+The ADF41513 covers frequencies from 1 GHz to 26.5 GHz, while the ADF41510
+operates from 1 GHz to 10 GHz.
 
-I thought about reusing descriptor metadata but this is attached to
-every descriptor created with dmaengine_prep_slave_sg() (as opposed to
-doing it once with dmaengine_slave_config()). We would also still need
-a custom struct in the existing BAM DMA header.
+Key features supported by this driver:
+- Integer-N and fractional-N operation modes
+- High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
+- 25-bit fixed modulus or 49-bit variable modulus fractional modes
+- Digital lock detect functionality
+- Phase resync capability for consistent output phase
+- Load Enable vs Reference signal syncronization
 
-I'm fine with that. Vinod: could you please say if that's sound for
-you and if so - I'll rework it and also fix the memory leaks by
-reworking the cleanup path.
+The series includes:
+1. PLL driver implementation
+2. Device tree bindings documentation
+3. IIO ABI documentation
 
-> It may sound like I'm suggesting a part of your previous design, but it f=
-its the
-> design more cleanly IMO. The BAM performs LOCK/UNLOCK on its own, but it =
-gets
-> the scratchpad register address from the clients through the metadata onc=
-e.
->
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v8:
+- Add new function kstrntoull() to lib/kstrtox.c and tests to lib/test-kstrtox.c.
+- Drop custom iio u64 parser, replacing it for kstrntoull().
+- Dedicated MAINTAINERS entry for drivers/iio/test/iio-test-fixpoint-parse.c.
+- Link to v7: https://lore.kernel.org/r/20260216-adf41513-iio-driver-v7-0-b0ed387ab559@analog.com
 
-If that gets it upstream, then it's fine with me.
+Changes in v7:
+- Addressed minor suggestions.
+- frequency_resolution ABI for AD4350 removed in favor of generic one.
+- Link to v6: https://lore.kernel.org/r/20260130-adf41513-iio-driver-v6-0-cf46239026bc@analog.com
 
-> It is very unfortunate that the IP doesn't accept '0' address for LOCK/UN=
-LOCK or
-> some of them cannot append LOCK/UNLOCK to the actual CMD descriptors pass=
-ed from
-> the clients. These would've made the code/design even more cleaner.
->
+Changes in v6:
+- Drop usage of simple_strtoull().
+- Implement better overflow checks with iio_safe_strntou64().
+- Link to v5: https://lore.kernel.org/r/20260123-adf41513-iio-driver-v5-0-2dce812a2dda@analog.com
 
-For sure but I double-checked this. :(
+Changes in v5:
+- Drop local parsing of 64-bit plus fractional parts
+- Add iio_str_to_fixpoint64() to iio core with parsing tests
+- Add DT property dependency for adi,charge-pump-resistor-ohms
+- Add local definition for ADF41513_HZ_PER_GHZ and drop units.h patch
+- Link to v4: https://lore.kernel.org/r/20260116-adf41513-iio-driver-v4-0-dbb7d6782217@analog.com
 
-Bart
+Changes in v4:
+- Proper usage of units.h macros
+- Simplifications to DT property parsing
+- Adjustments to return value handling
+- Drop of simple DT property node example
+- Link to v3: https://lore.kernel.org/r/20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com
+
+Changes in v3:
+- Use FIELD_MODIFY macro in driver implementation
+- Drop refin_frequency iio attribute
+- Drop muxout-select property from dt-bindings (and rename logic-level property)
+- Use -mhz suffix in power-up frequency property
+- Address documentation issues
+- Link to v2: https://lore.kernel.org/r/20251219-adf41513-iio-driver-v2-0-be29a83d5793@analog.com
+
+Changes in v2:
+- separate driver implementation from extra features and improve commit messages
+- use macros from units.h
+- explanation of custom parse function: adf41513_parse_uhz
+- reorganize driver data structures
+- drop clock framework support for now
+- reorganize documentation
+- Link to v1: https://lore.kernel.org/r/20251110-adf41513-iio-driver-v1-0-2df8be0fdc6e@analog.com
+
+---
+Rodrigo Alencar (10):
+      dt-bindings: iio: frequency: add adf41513
+      lib: kstrtox: add kstrntoull() helper
+      lib: test-kstrtox: add tests for kstrntoull()
+      iio: core: add fixed point parsing with 64-bit parts
+      iio: test: add kunit test for fixed-point parsing
+      iio: frequency: adf41513: driver implementation
+      iio: frequency: adf41513: handle LE synchronization feature
+      iio: frequency: adf41513: features on frequency change
+      docs: iio: add documentation for adf41513 driver
+      Documentation: ABI: testing: add common ABI file for iio/frequency
+
+ Documentation/ABI/testing/sysfs-bus-iio-frequency  |   11 +
+ .../ABI/testing/sysfs-bus-iio-frequency-adf4350    |   10 -
+ .../bindings/iio/frequency/adi,adf41513.yaml       |  215 ++++
+ Documentation/iio/adf41513.rst                     |  199 ++++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |   15 +
+ drivers/iio/frequency/Kconfig                      |   10 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/adf41513.c                   | 1240 ++++++++++++++++++++
+ drivers/iio/industrialio-core.c                    |  167 ++-
+ drivers/iio/test/Kconfig                           |   12 +
+ drivers/iio/test/Makefile                          |    1 +
+ drivers/iio/test/iio-test-fixpoint-parse.c         |  470 ++++++++
+ include/linux/iio/iio.h                            |    2 +
+ include/linux/kstrtox.h                            |    3 +
+ lib/kstrtox.c                                      |   47 +-
+ lib/test-kstrtox.c                                 |  121 ++
+ 17 files changed, 2461 insertions(+), 64 deletions(-)
+---
+base-commit: cce8de7f9744a210a4441ca8a667a9950515eea7
+change-id: 20251110-adf41513-iio-driver-aaca8a7f808e
+
+Best regards,
+-- 
+Rodrigo Alencar <rodrigo.alencar@analog.com>
+
+
 
