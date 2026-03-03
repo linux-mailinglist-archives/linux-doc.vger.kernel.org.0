@@ -1,155 +1,167 @@
-Return-Path: <linux-doc+bounces-77782-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77784-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UNUZJYVkp2mghAAAu9opvQ
-	(envelope-from <linux-doc+bounces-77782-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:45:25 +0100
+	id JOvVN+Zsp2nRhQAAu9opvQ
+	(envelope-from <linux-doc+bounces-77784-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 00:21:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED3DA1F821B
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:45:24 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F4F21F8516
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 00:21:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3452F30AF5A1
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 22:45:09 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D62853028F6E
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 23:21:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B395838C428;
-	Tue,  3 Mar 2026 22:45:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7467032B9A9;
+	Tue,  3 Mar 2026 23:21:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Y4LTncgR"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="BInh+0nV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79DA1382388
-	for <linux-doc@vger.kernel.org>; Tue,  3 Mar 2026 22:45:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 657D93264CB;
+	Tue,  3 Mar 2026 23:21:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772577908; cv=none; b=bjRM6+SswTnN+l5bbGj+I5ZbyIRKSijvoGa5KsF/DdMap61BPOJp9qdDq6ffpSzT1Ko4a6LlviDXahGoyWB8fzrhL+HlAW+b5Mj994Jcj1rBVGABDLtsT0uudhv0w1AzFAJ5GiLMzZOKtXhV8VgLLI3sDEO1GVCCmTbBeRujj5U=
+	t=1772580065; cv=none; b=nb/IUfNebhlK/faKhqCKTgA5WZkWFMBpxghfSvG/z2IvGAWM8ryNn+XXiedrtFKoraxtvsPefWJe4KSjWG5F5cgi1L6lQpklpzkV40E1vdvEN1z4mIIas8ZwGm0AviSENptNjrhrB4NvGINIruTdAH6tG41ptK1YVHivocXyucs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772577908; c=relaxed/simple;
-	bh=gT+4UsZeu87kB1GcB9paauQ5Vo3N9fedCom4NsX5T7U=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=uloCOtJ/MMwOvQATxmfoI0MD9zOhJpG0dahRlVLlk+zy7t9WqOay3yeHbI2cX2n0tdw2BUAFWX/6oAIzQvGZbbh/u/Mg+JHh/b20TPAEvVyUNY+/ztTMPUyEnXlOgqgsd+Nq+TFhWi3QhFim8SEMMWs0m/a9FLoD98h2+NUyK4Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Y4LTncgR; arc=none smtp.client-ip=209.85.222.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-8cb40030be5so524463485a.3
-        for <linux-doc@vger.kernel.org>; Tue, 03 Mar 2026 14:45:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772577906; x=1773182706; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TGapXhFYPxeYZaB83ey3cJIs7U21VzM4YwAzM0NLpWY=;
-        b=Y4LTncgRHL3bgLamKpGiL3zGsQAO2EvB2I43rARmvpiJB2RTCP5jste+cwmzTZMkOm
-         /mMvzuqUkAx1jSSgq+0Am6STIJ5TUaXNOZoK3M27AiYjM4S4HSf8G5JHQHa1UwGLFN5u
-         yGDb9jcPe6/7+aiYPDQG2QROKPDyseB6OQK9JehDnGG80nt3NL7u8zyYYU8nkOhZkzfa
-         9f/Be3nl7ChC/eWKOm53Q2lh12Z5JAfpsoCGNwqypDYuDDZS7hXNtp6+aNxQLLz2nz6M
-         fa8drU/jL54BJ42HBzkvPtFoAfJxzfp6Neopvp6UJvOdS8ok0M05auRdw0N5fcECQ0Gl
-         oqdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772577906; x=1773182706;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=TGapXhFYPxeYZaB83ey3cJIs7U21VzM4YwAzM0NLpWY=;
-        b=V6OnPnMonU8xekYWlAW15qttCIYGBoFTNxpd4Kluts7Ojp7mmRbPpKbWzmFyGpEfDR
-         +QMAQ5DSrsyTLEJcGs5itkQ5TPAapzM2D2gy2mgFhCkny5fKLO5t/U4aUiH6jV087eys
-         DeMQAnpclLQYVuzxyb84rt/aGLi1Kau+e4wiUO9YwlZe3Jgsd1PSSAGq9oV0ZduCA/8c
-         PaKJvzjREdffzws773b45s4m+owivThuax0U4dZHDLcIq6cGnGhd1yxKYlQSR4wD8QqK
-         jxuAcncH46II2dzBLbMlh6YqrFTrPaB1qA2JsMdqa40JqKH83zAB8E4VqbS5GrjFmhnk
-         DCow==
-X-Gm-Message-State: AOJu0YyvkCL6GErzuKofVKHMzFLzMVktrDRpM8bVaHJ0bBFIyEyQb42u
-	uUWGuqyaayfc/wHZFLcpXt9KSHzoLMPg2v/YttzLgfq/6EPHAU51UUPLFI353w==
-X-Gm-Gg: ATEYQzxFIITe1liB60o5zPsX8ngNd8YJ/YrgzjxbIA6vplVFUfRLLHcqPrTBFvoRDqB
-	e2B493xOj6OMwJXDOophL70Q8RdmKBXE/jovrBCCA89yKc+21bVjOOjJ0AOsJJ4Io9TPRrQiFfF
-	zjc76nPA0yve+hIXnZlcgTnnTL7wgDP38N6pM16t9GRzhNMRff1OGoLWEuZPxTQ4G1V+rxtu7eU
-	cfnA75WPJRY3g1S3U87m5dT3pzIZE1xmxIfwtJG4wq2U/ELAHtXUYqCEBFlqIT036emD5QVhT3X
-	RXcbFevfvC43UmchAkeD3cVgeQi7bVrcST5ZQGqgparQigyhevMjfVu5YoDv0bkxSrLtlKzsUAu
-	bFjpPn4rBBp8TSqA/+II2jO0mYv69iwdEWDi1Ge2xUCRWRhEPxlO4EhiPXwnHYVc2KfMdvy9num
-	53fA2WuGLX7efovKpUtl7P4Yep6/qwzH2Bna72srRVLcNA/WWGPNAr
-X-Received: by 2002:a05:620a:4686:b0:8c5:311a:2023 with SMTP id af79cd13be357-8cd5af10fc9mr7124885a.22.1772577905875;
-        Tue, 03 Mar 2026 14:45:05 -0800 (PST)
-Received: from daniel-desktop3.localnet ([204.48.79.88])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8cbbf7319bdsm1510111385a.43.2026.03.03.14.45.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Mar 2026 14:45:05 -0800 (PST)
-From: Daniel Tang <danielzgtg.opensource@gmail.com>
-To: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Fox Chen <foxhlchen@gmail.com>
-Cc: NeilBrown <neilb@suse.de>, Jonathan Corbet <corbet@lwn.net>,
- vegard.nossum@oracle.com, viro@zeniv.linux.org.uk, rdunlap@infradead.org,
- grandmaster@al2klimov.de
-Subject: [PATCH v2] docs: path-lookup: fix unrenamed WALK_GET
-Date: Tue, 03 Mar 2026 17:45:02 -0500
-Message-ID: <5332975.31r3eYUQgx@daniel-desktop3>
-In-Reply-To: <13098721.O9o76ZdvQC@daniel-desktop3>
-References: <13098721.O9o76ZdvQC@daniel-desktop3>
+	s=arc-20240116; t=1772580065; c=relaxed/simple;
+	bh=z9miA0rsyB+WgQ/oRHOS5/bQukKeeiVmFL0wrdmxvvY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=h7UIGOP7WzbTz2w7ad7aegBIyzZwlh9lzz/wW0r22q6qZaKma48Uhr8zAVdQacBDG6vS6F1jTDpK3Hvk5kLIwx5lqPJ3RsiAQKk6hVaYZlcci0x5gKSnj9XK1SVW0RGWkLlHYoiKrIyj8Qq2GJvYu3Zpu2uVuQHuEVsdHAw5zr4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=BInh+0nV; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=ayHSwzqaJiHYN3XMJxmPhSEL8WIs1aTm4xWDzxCaiLs=; b=BInh+0nVimbGHWPSnZdjKhZTbX
+	c2qUdmBpaSbluIE+rS2mynQodaDWZ8xwxQtiYxFgEfFXMt4ij0X1D9blMr2sznP0We8RWPxuxqZfL
+	qOALAi0UB34ZXKtk6Q0wVp6N6qjbqBwDXABJvDblz0Du/+E7PLIfbxl+UGKcp91wCxevV87k3q0gR
+	KNz8ElhZBPseH3ENZAJdYaouFp/LPR/pjovIChhdImS5LTubyPOLWcJ841yv7sH0905iEc1eDHDN6
+	BmesO3vL4BVAdY9PnbICxxBazQBuGIL1MxRex2U1vjdJe6tev5HszHBs+l9N1cSKgs3/HvniecV4s
+	C3OJ5Wyw==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vxZ2z-0000000G5CK-0pWB;
+	Tue, 03 Mar 2026 23:21:01 +0000
+Message-ID: <452cad19-b5a3-4424-9fa9-85833a6a3d7a@infradead.org>
+Date: Tue, 3 Mar 2026 15:20:59 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
-X-Rspamd-Queue-Id: ED3DA1F821B
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sched/deadline: document new sched_getattr() feature for
+ retrieving current parameters for DEADLINE tasks
+To: Tommaso Cucinotta <tommaso.cucinotta@gmail.com>,
+ Peter Zijlstra <peterz@infradead.org>
+Cc: Tommaso Cucinotta <tommaso.cucinotta@santannapisa.it>,
+ linux-api@vger.kernel.org, Juri Lelli <juri.lelli@redhat.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shashank Balaji <shashank.mahadasyam@sony.com>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260303104215.1324243-1-tommaso.cucinotta@santannapisa.it>
+ <20260303184313.1356499-1-tommaso.cucinotta@santannapisa.it>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260303184313.1356499-1-tommaso.cucinotta@santannapisa.it>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4F4F21F8516
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	CTE_CASE(0.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-77782-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[vger.kernel.org,gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77784-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[danielzgtgopensource@gmail.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com,infradead.org];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-0.999];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,infradead.org:dkim,infradead.org:mid,santannapisa.it:email]
 X-Rspamd-Action: no action
 
-Fixes: de9414adafe4 ("docs: path-lookup: update WALK_GET, WALK_PUT desc")
-Signed-off-by: Daniel Tang <danielzgtg.opensource@gmail.com>
----
- Documentation/filesystems/path-lookup.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This patch should be marked as v2, with the differences between
+v1 and v2 described.
 
-diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/filesystems/path-lookup.rst
-index 9ced1135608e..6957c70f18db 100644
---- a/Documentation/filesystems/path-lookup.rst
-+++ b/Documentation/filesystems/path-lookup.rst
-@@ -1364,7 +1364,7 @@ it sets ``LOOKUP_AUTOMOUNT``, as does "``quotactl()``" and the handling of
- symlinks.  Some system calls set or clear it implicitly, while
- others have API flags such as ``AT_SYMLINK_FOLLOW`` and
- ``UMOUNT_NOFOLLOW`` to control it.  Its effect is similar to
--``WALK_GET`` that we already met, but it is used in a different way.
-+``WALK_TRAILING`` that we already met, but it is used in a different way.
- 
- ``LOOKUP_DIRECTORY`` insists that the final component is a directory.
- Various callers set this and it is also set when the final component
+
+
+On 3/3/26 10:42 AM, Tommaso Cucinotta wrote:
+> Document in Documentation/sched/sched-deadline.rst the new capability of
+> sched_getattr() to retrieve, for DEADLINE tasks, the runtime left and absolute
+> deadline (setting the flags syscall parameter to 1), in addition to the static
+> parameters (obtained with flags=0).
+> 
+> Signed-off-by: Tommaso Cucinotta <tommaso.cucinotta@santannapisa.it>
+> Acked-by: Juri Lelli <juri.lelli@redhat.com>
+> ---
+>  Documentation/scheduler/sched-deadline.rst | 19 +++++++++++++++----
+>  1 file changed, 15 insertions(+), 4 deletions(-)
+> 
+> diff --git a/Documentation/scheduler/sched-deadline.rst b/Documentation/scheduler/sched-deadline.rst
+> index ec543a12..76fdf435 100644
+> --- a/Documentation/scheduler/sched-deadline.rst
+> +++ b/Documentation/scheduler/sched-deadline.rst
+> @@ -628,10 +628,21 @@ Deadline Task Scheduling
+>    * the new scheduling related syscalls that manipulate it, i.e.,
+>      sched_setattr() and sched_getattr() are implemented.
+>  
+> - For debugging purposes, the leftover runtime and absolute deadline of a
+> - SCHED_DEADLINE task can be retrieved through /proc/<pid>/sched (entries
+> - dl.runtime and dl.deadline, both values in ns). A programmatic way to
+> - retrieve these values from production code is under discussion.
+> + The leftover runtime and absolute deadline of a SCHED_DEADLINE task can be
+> + read using the sched_getattr() syscall, setting the last syscall parameter
+> + flags to the SCHED_GETATTR_FLAG_DL_DYNAMIC=1 value. This updates the
+
+About the build warning due to the use of  `flags':
+If you want smart quotes, just use 'flags'.
+If you want italics, use           `flags`.
+If you want a code-look (monotype), use ``flags``.
+
+> + runtime left, converts the absolute deadline in CLOCK_MONOTONIC reference,
+> + then returns these parameters to user-space. The absolute deadline is
+> + returned as the number of nanoseconds since the CLOCK_MONOTONIC time
+> + reference (boot instant), as a u64 in the sched_deadline field of sched_attr,
+> + which can represent nearly 585 years since boot time (calling sched_getattr()
+> + with flags=0 causes retrieval of the static parameters instead).
+> +
+> + For debugging purposes, these parameters can also be retrieved through
+> + /proc/<pid>/sched (entries dl.runtime and dl.deadline, both values in ns),
+> + but: this is highly inefficient; the returned runtime left is not updated as
+> + done by sched_getattr(); the deadline is provided in kernel rq_clock time
+> + reference, that is not directly usable from user-space.
+>  
+>  
+>  4.3 Default behavior
+> 
+> base-commit: f74d204baf9febf96237af6c1d7eff57fba7de36
+
 -- 
-2.51.0
-
-
+~Randy
 
 
