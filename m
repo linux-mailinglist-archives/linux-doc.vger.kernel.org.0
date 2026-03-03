@@ -1,245 +1,173 @@
-Return-Path: <linux-doc+bounces-77780-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77783-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0H6ZOoxep2lWhAAAu9opvQ
-	(envelope-from <linux-doc+bounces-77780-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:19:56 +0100
+	id CDyKNilmp2mghAAAu9opvQ
+	(envelope-from <linux-doc+bounces-77783-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:52:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C8691F7E9F
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:19:56 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B53E1F82D8
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:52:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B42C530CA255
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 22:18:50 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 005233036ABD
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 22:52:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C7F2D38642E;
-	Tue,  3 Mar 2026 22:18:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBE19381AE1;
+	Tue,  3 Mar 2026 22:52:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QIFyxr1H"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="U8VFaajR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3D8037269F;
-	Tue,  3 Mar 2026 22:18:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E1FD370D52;
+	Tue,  3 Mar 2026 22:52:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772576329; cv=none; b=iyp/V3dbf5U2jf3pn9h2KcfCBYs1aCtEaHjGGzhKdKxxYPTv3qsWps/sD5NBVryboQdTntIdPL1kBb02RH4DIxEQqI9vIl2ooqd2LpP19fYwLBUwwU8RQZ9RIvmvMXHjKNlCbgrLPQ+7Fd1kvhtZJLN1hxzKJLrTcpH8EQ/2jdg=
+	t=1772578342; cv=none; b=akr9+JQOEA5ADFI32tLeLaAFiUPuCOUH4IKGyX+FjyFyv0sH3rXFOnT8djlaNJTwnEi+j8E4rLzZeJBtRiO8In6QquOEGPjgfZgtxKHPatpMm7Pa8r//xXK8sy4CJYM6UjFsLKXI3GTUFAAMCLwXnbDGj7O6wYbZgIy7ZeGEEPc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772576329; c=relaxed/simple;
-	bh=t8ybpGAdNihDZQ9kZ3/Q1qm+ufzQOMPCxFRbUnfMLvE=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=L/1W2IHzD4/1GmGQkobCS5hqT1KH+8TOhZQMnNr1oGEmMWChb15kRJEH793WYaXSCD0WfTT4ICy93BErGZi64WycQys0l/ypsIj7oD0QoKuTP71o5tfjVX2UzgN6MZ9qjM932akewYP7X0mHhYzXMnz8DeC39pjLn4rcXjYUGoM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QIFyxr1H; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4439C116C6;
-	Tue,  3 Mar 2026 22:18:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772576329;
-	bh=t8ybpGAdNihDZQ9kZ3/Q1qm+ufzQOMPCxFRbUnfMLvE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=QIFyxr1HQSSPJhQ/1Vn1H1V0G1NerSvlK14HOUsE5AwW/CoUiOK8RAMdrG4nlYZEQ
-	 vC6WDgkAuVLZHiBI1b+Yw3ucxtNLYCwSb0LGFJjsrqKV+Kr/kjRofNMZvKhM5g5RQ1
-	 t7+boolw8gsRLzoKfLSlrKyIFM+sW56u1E3Gyq57IQh0TPhLkqE80UbCMa9uYdVl5r
-	 EUdR1DOBbQ+YHdOqaiWf57ROcDEdXXN3VZ7wvDyBg9Rl3bzCpPd4y15sbwxf/1ftaV
-	 OEsvf5CCcAERWWacUxH/n/67qYHYQVXcUbnD8bYaOeNNPNVUfDsjrNDj8LaDuIBZYH
-	 +36Y20lMmt46g==
-Date: Tue, 3 Mar 2026 23:18:43 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org, Aleksandr
- Loktionov <aleksandr.loktionov@intel.com>, Randy Dunlap
- <rdunlap@infradead.org>, Jani Nikula <jani.nikula@linux.intel.com>
-Subject: Re: [PATCH 08/18] docs: kdoc_parser: fix parser to support
- multi-word types
-Message-ID: <20260303231843.040f41d0@foz.lan>
-In-Reply-To: <87cy1kacfc.fsf@trenco.lwn.net>
-References: <cover.1772469446.git.mchehab+huawei@kernel.org>
-	<544c73a9e670b6fef1828bf4f2ba0de7d29d8675.1772469446.git.mchehab+huawei@kernel.org>
-	<87jyvsbyvb.fsf@trenco.lwn.net>
-	<20260303211951.0e2b7faf@foz.lan>
-	<87cy1kacfc.fsf@trenco.lwn.net>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1772578342; c=relaxed/simple;
+	bh=KkKFMt+NKSjC/iuAWFOKDY+6iw+XZpHyZpJ2eGO+Vk8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VXb6YWu9AXCVslnrf2ViwVsZwShbFOwddo1jQZ0pLHIAHBY1x2sG99yfF2F1y5zpW4iGXK2sn+f4/Olu2vSjnV4EpKWPauQTF6nd5Kh1cdehYmr+jIHOWHJSOsdQ1U6ScN2Tk9QWXTJxeySTu2iYlT6G+3WDrAtY6ZsBhht2VEM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=U8VFaajR; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from [172.27.2.41] (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 623MZNuw3553846
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+	Tue, 3 Mar 2026 14:35:24 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 623MZNuw3553846
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026022301; t=1772577327;
+	bh=PWkUhVKmvPcsYyQkSE4NsHuA0TlmqkuDcsXL0WFf/qo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=U8VFaajRyrd9D/ni57g7wy0FTw3hgzom41MFBWfMDP4bxMGgwlC/D5AkQ24CkrHM2
+	 UYM/pWGsL6ZTaEf6ruWZbE0rAiUfMo6gpX0XtTMZMQlb77hSWF+Z7uBDkdSyyUV+1V
+	 uHICECWKzLonM4GhPIwwUTOZhn/OLmV2wwRGDYEMpKOVZX71koUpomJhIRH+yeui1T
+	 NeU7bXoUjViZObR4nVN6+m1CVm4ammnIHtTIPtP7RijvcIKFdKmqSL2y55RswBprHX
+	 IcVSthQNF2rJsbc4WEgwpCW+pAQyD4KMHJEXOpcqdu3CAgG57FM6uWJuhK3dOiAIvL
+	 uh7IlOo0SLFaQ==
+Message-ID: <3212161f-64b2-4825-8bcc-c36201ab6589@zytor.com>
+Date: Tue, 3 Mar 2026 14:35:18 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] x86/vsyscall: Add vsyscall emulation for #GP
+To: Sohil Mehta <sohil.mehta@intel.com>, Dave Hansen <dave.hansen@intel.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Kiryl Shutsemau <kas@kernel.org>,
+        Brendan Jackman <jackmanb@google.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Nam Cao <namcao@linutronix.de>, Cedric Xing <cedric.xing@intel.com>,
+        Rick Edgecombe <rick.p.edgecombe@intel.com>,
+        Andrew Cooper <andrew.cooper3@citrix.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Maciej Wieczor-Retman <m.wieczorretman@pm.me>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260219233600.154313-1-sohil.mehta@intel.com>
+ <20260219233600.154313-4-sohil.mehta@intel.com>
+ <1383b357-2a10-4b36-afb9-42e2724faa31@intel.com>
+ <faf58379-36df-4535-8c17-bcfe838ae4c4@intel.com>
+Content-Language: en-US, sv-SE
+From: "H. Peter Anvin" <hpa@zytor.com>
+In-Reply-To: <faf58379-36df-4535-8c17-bcfe838ae4c4@intel.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 5C8691F7E9F
+X-Rspamd-Queue-Id: 1B53E1F82D8
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026022301];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77780-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-77783-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	DKIM_TRACE(0.00)[zytor.com:+];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:email,python.org:url]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-On Tue, 03 Mar 2026 13:24:55 -0700
-Jonathan Corbet <corbet@lwn.net> wrote:
-
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+On 2026-03-03 13:20, Sohil Mehta wrote:
 > 
-> > Heh, if we start using a code like the tokenizer I'm experimenting
-> > here:
-> >
-> > 	https://lore.kernel.org/linux-doc/20260303155310.5235b367@localhost/
-> >
-> > we could probably get rid of regexes in the future, using instead
-> > a loop that would be picking "ID" tokens, e.g. basically we would
-> > have something similar to this completely untested code snippet:  
+> Sure, combining things from the cover letter and what you suggested
+> here. How about?
+>
+
+[...]
+
 > 
-> ...which has some appeal, but I will confess to being leery of another
-> massive kernel-doc thrash; it would be nice if things settled for a bit.
+> "The vsyscall page is located in the high/kernel part of the address
+> space. LASS prevents access to this page from userspace. The current
+> kernel only enables LASS when all vsyscall modes are disabled.
 
-Yeah, I feel your pain. The idea is not to simply rewrite the entire
-kernel-doc. Just to use it at the places that have known hard to solve
-bugs.
+Suggest making an introductory paragraph here with the background information,
+instead of mixing it into the rest of the text in a somewhat incoherent manner:
 
-> One can always dream :)
+"vsyscall emulation can be execute-only (XONLY) or read-execute (EMULATE),
+specified by the vsyscall= kernel command line option. XONLY mode is the
+default. The EMULATE mode has been deprecated since 2022 and is considered
+insecure.
 
-The thing is that there are some issues at kernel-doc that can only be
-solved with a better parser, and a plain regex logic won't fix, even
-with really complex expressions.
+This patch adds support for LASS with XONLY vsyscall emulation.
 
-I'm not talking about variable handling like on this specific patch.
-For it, the current pure regex approach works fine, at least for the 
-cases we already mapped.
+> With LASS, vsyscall page accesses trigger a #GP instead of a #PF. In
+> XONLY (execute-only) mode, directly reading the vsyscall page is
+> disallowed. So, the faulting RIP can be easily used to determine if the
+> #GP was triggered due to a vsyscall access.
 
-However, kernel-doc, even after this series, do a crap job on
-several places:
+How about:
 
-1. Macros used to build structs and function prototypes.
+"With LASS, vsyscall page accesses trigger a #GP instead of a #PF. For XONLY
+mode, all that is needed is the faulting RIP, which is trivially available
+regardless of the type of fault."
 
-   During the conversion I wrote a half-baked NestedMatch class to be 
-   able of properly handling struct_group*(), which is the best
-   example of the involved complexity. It works, but it requires parsing
-   the code twice.
+> Reuse the #PF emulation code during a #GP and emulate the vsyscall
+> access in XONLY mode. As multiple fault handlers are now using the
+> emulation code, add a sanity check to ensure that the fault truly
+> happened in 64-bit user mode.
+> 
+> In contrast, when vsyscall=emulate (deprecated) is configured, it maps
+> the vsyscall page as readable. Supporting EMULATE mode with LASS is much
+> harder because the #GP doesn't provide enough error information (such as
+> PFEC and CR2 in case of #PF). So, complex instruction decoding would be
+> required in the #GP handler which isn't worth the effort.
 
-   Also, It probably will fail with nested struct_group;
+"... as remaining users of EMULATE mode can be reasonably assumed to be niche
+users, who are already trading off security for compatibility."
 
-2. Nested structs.
+Use "EMULATE mode" consistently here. Captializing it makes it clear that it
+is a term and not just a prose word.
 
-   Current logic just transform them on an un-nested struct-like
-   pseudo-code to re-use the structs regex-based parser;
+> LASS and
+> vsyscall=emulate will be kept mutually exclusive for simplicity."
 
-3. Nested struct identifiers handling.
+	-hpa
 
-   Spec says that if one has:
-
-	struct {
-		struct {
-			int foo;
-		} a;
-	} b;
-
-   kernel-doc should document "foo"  as "a.foo", but this is not
-   always the case, due to bugs at the parser. So, on some places,
-   you need to use "foo"; on others, "a.foo".
-
-4. Public/private handling.
-
-   Code almost works, but when it finds a unmatched private inside
-   a nested struct, it will can hide close brackets. This prevents
-   fixing (2).
-
-5. Comments strip.
-
-   Code kinda works if you don't touch it, but when trying to solve
-   the previous issues, I ended discovering some hidden problems
-   related to the way it does.
-
-   (That's basically when I ended opting to try a different approach:
-   too much changes to try to live with a plain regex approach,
-   plus all stuff needed for NestedMatch to do a better job)
-
-6. Proper whitespace and alignment at the output.
-
-   The current way we parse things mean that little changes end
-   mangling with whitespaces, line breaks and/or indentation.
-
-   Perhaps we could use some token-based formatter for man pages
-   to properly handle open/close brackets.
-
-   For rst output, we're relying at the C domain to handle it for
-   us. Still, perhaps a tokenizer-based approach can just add a
-   single whitespace everywhere, which would help us to check
-   before/after differences on kernel-doc changes.
-
-I attempted fixing this at the /38 patch series and afterwards
-(good news that that we have 18 less patches after you merged
-this one), but my current pending patch pile has stlll +40 patches
-to address issues and add unit tests.
-
-Among them, I have changes:
-
-- adding support for "\1", "\2", "\3"... group matches at
-  NestedMatch sub. It works. The code itself is small, but
-  very complex;
-
-- writing a different logic to address comment stripping;
-
-- write a logic to pick struct IDs on nested cases that will
-  be using an approach similar to NestedMatch.
-
-- some of those new logic are recursive, which makes them 
-  more complex to be understood and tested.
-
-Such approach works, but, as Jani pointed, this ends adding lots
-of complexity, and the main reason is that we're acquainted to
-use regexes - or perhaps too afraid to handle it on a different
-way. Also, they ended introducing extra bugs.
-
-I had to confess that I also a little reticent on trying to use
-a tokenizer, as I was afraid that this would require extra libraries 
-to have something similar to what flex/bison would be doing. Then,
-I realized that perhaps the already internal libraries might just
-have what we needed. So, after some research, looking at:
-
-	https://docs.python.org/3/library/re.html#writing-a-tokenizer
-
-and doing some (so far simple) tests, I'm starting to think about
-modifying my pending patches to use a code similar to it.
-
-Note that, at this point, I didn't try yet to use the tokenizer,
-so for now this is still mostly a brainstorm.
-
-I intend to try to use the tokenizer to handle comments e.g. touching 
-the logic at trim_private_members() and see how it behaves. This is
-self-contained, checking the results would likely be easy, and I don't
-expect big surprises.
-
-Depending on such tests, I may try to modify NestedMatch and my patches
-using it to use the same approach.
-
-So, if all ends well, the changes will so far be confined to the code
-used by dump_struct().
-
-Let's see.
-
-Thanks,
-Mauro
 
