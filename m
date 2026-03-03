@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-77690-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77692-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cLBkNEHjpmnpYgAAu9opvQ
-	(envelope-from <linux-doc+bounces-77690-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:33:53 +0100
+	id GM0fN9PhpmlAYgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77692-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:27:47 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 945281F0540
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:33:53 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C72921F032F
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 14:27:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5948430C16BA
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 13:27:27 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 4933430379F5
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 13:27:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80BD3426D3C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8405428487;
 	Tue,  3 Mar 2026 13:27:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q7C8x/Po"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QFwMtiHQ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 571DF320A00;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B75F426EC9;
 	Tue,  3 Mar 2026 13:27:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772544445; cv=none; b=bPCJbLL/ZRdtiSmRXBuCFb0V9crXuwWr1RKV5B41/2uyHQ3FCVD+PaLV9D6bm1jWFiZILvvrwOwdYgNazQQAZVM2Fqu/BiREA97KOUMUJWQywUj+Od+iZWGUhtA1PZlKEshpMsb/br/mI+D+PF9EdNHNtsm/9y6pH5BI4WawDjY=
+	t=1772544445; cv=none; b=lAqLvfGiKFlLtR32l6uO/rbye1dsJkMWhn4zL2ezVtpfZJ4l8b3sNtEKjRexoMEMZAdAHsltmuWk/5Fy64tyVfO8DfLM1nbr0wBZz6ExbIpEzVxrN6almCSRhBlz3kTF7Is4wLgdGFQTLe/WoPTAt6mLSnMb/hVULn2Of/niLlY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772544445; c=relaxed/simple;
-	bh=N1VfDg8H/7194eoYlOpUeo1wfbx91H88u4KEWIcBo/I=;
+	bh=xOGftZZO3xR/YkCPAbbzPAMCQRytfrvcdY0SCUp90pE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=T9gy9cPYDTd7MOMZJeTgKZU42gI9KQEsZDx7pRDerW7oU4YGkTY2nhGzcHPi35MgyBSbq+7VcRRDJ1cpRRo2p+w18+SBgQ+bREuN0yYpBDT1CH7Q8jhfs+XQRXDeNAP6s/QytElGRcYDixM3sJeHsc/jFtLITDTNZYsliOQiHmY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q7C8x/Po; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 22224C2BCB1;
+	 In-Reply-To:To:Cc; b=Kxc3g5/OaRAn/7ug8uEjchgx+4AfsGQbyT3KU+C3f4wkR57TARHk8tKqEmua99JtfwcNDX/9CcJzPkL0VqTRURKb15I097JQom48a49kkCBwTLvF/9lzuZFKaj7iceKzWAOkCcxa3CKmPRgsxTlSMBu3SKYa22Wo6pwuVliVJIU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QFwMtiHQ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 69478C2BCAF;
 	Tue,  3 Mar 2026 13:27:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772544445;
-	bh=N1VfDg8H/7194eoYlOpUeo1wfbx91H88u4KEWIcBo/I=;
+	bh=xOGftZZO3xR/YkCPAbbzPAMCQRytfrvcdY0SCUp90pE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Q7C8x/PoLrq5kh/pCh3/2IA8YgA9Syu7k3EUuzGmSexJOvIIpu2i2rBE3SPKWe6R7
-	 gIsFYMgE9FC/X2Fy/+AL8IlAZxEW0tycqgh6Eg0j4oOY7HRdwIGuwEp/09qWeDQU8a
-	 cWZtgH+Pxa2BncxZqpuNka2q775m+T9SuuU2ZctMvi6uuZrz4USrfRW+iP4BRW93Q5
-	 d8o9V4fJcOhWymqoHBE4GlFcd+4Gi8fGug58zUlQSU4eitGQmMjOSjrEB5fIqe/q9V
-	 sxkwwzolq95I+8IDtzGKjZno0se8VHZl8lb9EKv0QkT97hRAuwBL6399VFSbAvYrIv
-	 WapCsG0PbFuqQ==
+	b=QFwMtiHQxhAD6BBLhlJ8Hyn3ZqTPfbjZ9qGTMN25nP15HTXZy3mAM1S3kebVMsrgi
+	 xSDDGgFSqWodXEmlMx6DtwdLKXzEI4ofxXwXLFW5WjkhGAnoYAf8fyNXtAKhDMCa27
+	 MFlAV2uH0iqNb7Z6EN7+vNNM6NJnzeBywZ4z8YT+8JWuzi+f51z5iZcibR4U4hUpvI
+	 UMRUuMjU5VSGEhkXmJXxk7tRHt4/vFXP17G8ejz4DQYFBIyNr8m5kPIwNzh+EGe4sR
+	 ipl7EAlQrdvusunDqnkQUPFmigUXOBFQtxAClYGmNbvNV/NEfkCa5SVT4emfslPAHe
+	 9Lz7o/I2iBmcA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11FFBEC1441;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E922EC1441;
 	Tue,  3 Mar 2026 13:27:25 +0000 (UTC)
 From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Tue, 03 Mar 2026 13:27:07 +0000
-Subject: [PATCH v8 02/10] lib: kstrtox: add kstrntoull() helper
+Date: Tue, 03 Mar 2026 13:27:08 +0000
+Subject: [PATCH v8 03/10] lib: test-kstrtox: add tests for kstrntoull()
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -58,7 +58,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260303-adf41513-iio-driver-v8-2-8dd2417cc465@analog.com>
+Message-Id: <20260303-adf41513-iio-driver-v8-3-8dd2417cc465@analog.com>
 References: <20260303-adf41513-iio-driver-v8-0-8dd2417cc465@analog.com>
 In-Reply-To: <20260303-adf41513-iio-driver-v8-0-8dd2417cc465@analog.com>
 To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
@@ -72,30 +72,30 @@ Cc: Jonathan Cameron <jic23@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>, 
  Rodrigo Alencar <rodrigo.alencar@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1772544443; l=3621;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772544443; l=4874;
  i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=QOA2ebXlCGOu4rEF7LtCPczO4bNdBpAyoo2OhH/870A=;
- b=wV3bcB78rfX1cS1C53uRVYeEZWLj9IlYYYqbKdCGwFXsZ9gp+BQgGEIz+SeKEFkki+7v3FBtC
- yQX8C5gQY2JD/Sxq364rygWsMEnB7CNS5Gh/P9MyRdSWPl4nE2Gmg3A
+ bh=on3FpvpRalj0PIdH7WCk6vmRu4hDbH1Z0/+fJowkZVQ=;
+ b=IAqWCFIDmLHXOgRb5CvzPQvGqnHhRHpKfOaZW2lL/RGQ/C7gRe4aBF8eQDyfQF0fjl3sJe3+9
+ 0PBIjUMveHnBKypsaz0Ham7YEca4p9sowenwjvj85kd75Vtl1zFOSU8
 X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
  pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
 X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
  with auth_id=561
 X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 Reply-To: rodrigo.alencar@analog.com
-X-Rspamd-Queue-Id: 945281F0540
+X-Rspamd-Queue-Id: C72921F032F
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77690-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
+	TAGGED_FROM(0.00)[bounces-77692-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[15];
@@ -109,107 +109,170 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,analog.com:replyto,analog.com:email,analog.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
 From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Add kstrntoull() function, which converts a string to an ULL with a max
-character limit. The function is an alternative integer parsing function
-that does not require a null-terminated string. It becomes a better option
-over simple_strtoull() or kstrtoull() when parsing integers from a buffer
-with custom delimiters without having to create temporary copies.
-The function is consumed inside the implementation _kstrtoull(),
-promoting reuse.
+Add test cases for the new kstrntoull() function which converts a string
+to unsigned long long with a maximum character limit.
+
+The OK tests cover basic decimal conversion, max_chars truncation, octal
+and hex with both autodetection and explicit base, stop-at-non-digit
+behavior, and chained conversions where the return value is used to
+advance through a compound string (e.g. "192.168.1.0", "123::456").
+
+The fail tests cover overflow for decimal, hex, and octal, prefix
+consumed entirely by max_chars, zero max_chars, empty string, and bare
+hex prefix.
 
 Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 ---
- include/linux/kstrtox.h |  3 +++
- lib/kstrtox.c           | 47 +++++++++++++++++++++++++++++++++++++++++++----
- 2 files changed, 46 insertions(+), 4 deletions(-)
+ lib/test-kstrtox.c | 121 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 121 insertions(+)
 
-diff --git a/include/linux/kstrtox.h b/include/linux/kstrtox.h
-index 6ea897222af1..49a6102b8e15 100644
---- a/include/linux/kstrtox.h
-+++ b/include/linux/kstrtox.h
-@@ -9,6 +9,9 @@
- int __must_check _kstrtoul(const char *s, unsigned int base, unsigned long *res);
- int __must_check _kstrtol(const char *s, unsigned int base, long *res);
- 
-+ssize_t __must_check kstrntoull(const char *s, unsigned int base,
-+				unsigned long long *res, size_t max_chars);
-+
- int __must_check kstrtoull(const char *s, unsigned int base, unsigned long long *res);
- int __must_check kstrtoll(const char *s, unsigned int base, long long *res);
- 
-diff --git a/lib/kstrtox.c b/lib/kstrtox.c
-index bdde40cd69d7..202ecc058284 100644
---- a/lib/kstrtox.c
-+++ b/lib/kstrtox.c
-@@ -93,17 +93,56 @@ unsigned int _parse_integer(const char *s, unsigned int base, unsigned long long
- 	return _parse_integer_limit(s, base, p, INT_MAX);
+diff --git a/lib/test-kstrtox.c b/lib/test-kstrtox.c
+index ee87fef66cb5..c3fe2a3bc142 100644
+--- a/lib/test-kstrtox.c
++++ b/lib/test-kstrtox.c
+@@ -703,6 +703,124 @@ static void __init test_kstrtos8_fail(void)
+ 	TEST_FAIL(kstrtos8, s8, "%hhd", test_s8_fail);
  }
  
--static int _kstrtoull(const char *s, unsigned int base, unsigned long long *res)
-+/**
-+ * kstrntoull - convert a string to an unsigned long long with a maximum
-+ * character limit
-+ * @s: The start of the string. The string does not need to be null-terminated.
-+ * The first character cannot be a sign.
-+ * @base: The number base to use. The maximum supported base is 16. If base is
-+ *  given as 0, then the base of the string is automatically detected with the
-+ *  conventional semantics - If it begins with 0x the number will be parsed as a
-+ *  hexadecimal (case insensitive), if it otherwise begins with 0, it will be
-+ *  parsed as an octal number. Otherwise it will be parsed as a decimal.
-+ * @res: Where to write the result of the conversion.
-+ * @max_chars: The maximum number of characters to convert.
-+ *
-+ * Conversion stops when the maximum number of characters is reached or a
-+ * non-digit character is encountered.
-+ *
-+ * Returns the number of characters consumed on success, -ERANGE on overflow and
-+ * -EINVAL on invalid input. Return code must be checked.
-+ */
-+noinline
-+ssize_t kstrntoull(const char *s, unsigned int base, unsigned long long *res,
-+		   size_t max_chars)
- {
--	unsigned long long _res;
-+	const char *cp;
-+	size_t prefix_cnt;
- 	unsigned int rv;
- 
--	s = _parse_integer_fixup_radix(s, &base);
--	rv = _parse_integer(s, base, &_res);
-+	cp = _parse_integer_fixup_radix(s, &base);
-+	prefix_cnt = cp - s;
-+	if (prefix_cnt >= max_chars)
-+		return -EINVAL;
-+
-+	rv = _parse_integer_limit(cp, base, res, max_chars - prefix_cnt);
- 	if (rv & KSTRTOX_OVERFLOW)
- 		return -ERANGE;
- 	if (rv == 0)
- 		return -EINVAL;
-+
-+	return prefix_cnt + rv;
-+}
-+EXPORT_SYMBOL(kstrntoull);
-+
-+static int _kstrtoull(const char *s, unsigned int base, unsigned long long *res)
++static void __init test_kstrntoull_ok(void)
 +{
-+	unsigned long long _res;
-+	ssize_t rv;
++	struct test_ntoull {
++		const char *str;
++		size_t step;
++		unsigned int base;
++		size_t max_chars;
++		ssize_t expected_rv;
++		unsigned long long expected_res;
++	};
++	static const struct test_ntoull test[] __initconst = {
++		/* basic decimal */
++		{"0",		0,	10,	1,	1,	0ULL},
++		{"1",		0,	10,	1,	1,	1ULL},
++		{"123",		0,	10,	3,	3,	123ULL},
++		{"123",		0,	10,	10,	3,	123ULL},
++		/* max_chars truncation */
++		{"1234567",	0,	10,	1,	1,	1ULL},
++		{"1234567",	0,	10,	3,	3,	123ULL},
++		{"1234567",	0,	10,	5,	5,	12345ULL},
++		/* octal with base autodetection */
++		{"0177",	0,	0,	4,	4,	0177ULL},
++		{"0177",	0,	0,	3,	3,	017ULL},
++		{"0177",	0,	0,	2,	2,	01ULL},
++		/* octal with explicit base */
++		{"01777",	0,	8,	4,	4,	0177ULL},
++		{"01777",	0,	8,	3,	3,	017ULL},
++		/* hex with base autodetection */
++		{"0xff",	0,	0,	4,	4,	0xffULL},
++		{"0xffff",	0,	0,	4,	4,	0xffULL},
++		{"0xffff",	0,	0,	6,	6,	0xffffULL},
++		{"0xFF",	0,	0,	4,	4,	0xffULL},
++		/* hex with explicit base */
++		{"0xff",	0,	16,	4,	4,	0xffULL},
++		{"ff",		0,	16,	2,	2,	0xffULL},
++		/* stop at non-digit */
++		{"12abc",	0,	10,	5,	2,	12ULL},
++		/* large values */
++		{"18446744073709551615", 0, 10, 20, 20, 18446744073709551615ULL},
++		{"ffffffffffffffff", 0, 16, 16, 16, 0xffffffffffffffffULL},
++		/* chained tests */
++		{"123::456",	0,	10,	10,	3,	123ULL},
++		{NULL,		2,	10,	10,	3,	456ULL},
++		{"192.168.1.0",	0,	10,	10,	3,	192ULL},
++		{NULL,		1,	10,	10,	3,	168ULL},
++		{NULL,		1,	10,	10,	1,	1ULL},
++		{NULL,		1,	10,	10,	1,	0ULL},
++		{"123-beef",	0,	10,	10,	3,	123ULL},
++		{NULL,		1,	16,	10,	4,	0xBEEFULL},
++		{"12345678",	0,	10,	5,	5,	12345ULL},
++		{NULL,		0,	10,	5,	3,	678ULL},
++	};
++	unsigned int i;
++	const char *s = NULL;
 +
-+	rv = kstrntoull(s, base, &_res, INT_MAX);
-+	if (rv < 0)
-+		return rv;
- 	s += rv;
- 	if (*s == '\n')
- 		s++;
++	for_each_test(i, test) {
++		const struct test_ntoull *t = &test[i];
++		unsigned long long res = ~0ULL;
++		ssize_t rv;
++
++		if (t->str)
++			s = t->str;
++		s += t->step;
++
++		rv = kstrntoull(s, t->base, &res, t->max_chars);
++		if (rv != t->expected_rv) {
++			WARN(1, "str '%s', base %u, max_chars %zu, expected rv %zd, got %zd\n",
++			     s, t->base, t->max_chars, t->expected_rv, rv);
++			continue;
++		}
++		if (rv >= 0 && res != t->expected_res) {
++			WARN(1, "str '%s', base %u, max_chars %zu, expected %llu, got %llu\n",
++			     s, t->base, t->max_chars, t->expected_res, res);
++			continue;
++		}
++		s += rv;
++	}
++}
++
++static void __init test_kstrntoull_fail(void)
++{
++	struct test_ntoull_fail {
++		const char *str;
++		unsigned int base;
++		size_t max_chars;
++		ssize_t expected_rv;
++	};
++	static const struct test_ntoull_fail test[] __initconst = {
++		/* overflow */
++		{"18446744073709551616",	10,	20,	-ERANGE},
++		{"10000000000000000",		16,	17,	-ERANGE},
++		{"2000000000000000000000",	8,	22,	-ERANGE},
++		/* max_chars is too small */
++		{"123",		10,	0,	-EINVAL},
++		{"0xff",	0,	1,	-EINVAL},
++		{"0xff",	0,	2,	-EINVAL},
++		{"0xff",	16,	1,	-EINVAL},
++		{"0xff",	16,	2,	-EINVAL},
++		/* empty string */
++		{"",		10,	10,	-EINVAL},
++		{"0x",		16,	10,	-EINVAL},
++	};
++	unsigned int i;
++
++	for_each_test(i, test) {
++		const struct test_ntoull_fail *t = &test[i];
++		unsigned long long res = 0;
++		ssize_t rv;
++
++		rv = kstrntoull(t->str, t->base, &res, t->max_chars);
++		if (rv != t->expected_rv) {
++			WARN(1, "str '%s', base %u, max_chars %zu, expected %zd, got %zd\n",
++			     t->str, t->base, t->max_chars, t->expected_rv, rv);
++			continue;
++		}
++	}
++}
++
+ static int __init test_kstrtox_init(void)
+ {
+ 	test_kstrtoull_ok();
+@@ -729,6 +847,9 @@ static int __init test_kstrtox_init(void)
+ 	test_kstrtou8_fail();
+ 	test_kstrtos8_ok();
+ 	test_kstrtos8_fail();
++
++	test_kstrntoull_ok();
++	test_kstrntoull_fail();
+ 	return -EINVAL;
+ }
+ module_init(test_kstrtox_init);
 
 -- 
 2.43.0
