@@ -1,68 +1,43 @@
-Return-Path: <linux-doc+bounces-77710-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77712-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id APFFFEYNp2k0cwAAu9opvQ
-	(envelope-from <linux-doc+bounces-77710-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:33:10 +0100
+	id WOpXC5YOp2k0cwAAu9opvQ
+	(envelope-from <linux-doc+bounces-77712-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:38:46 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1D661F3DC8
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:33:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86A341F3EFC
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:38:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 28F0D301E3E9
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 16:27:29 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 82F7B3061AEC
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 16:33:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A924937B018;
-	Tue,  3 Mar 2026 16:27:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="dqHKwvAr"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 322A5481FA5;
+	Tue,  3 Mar 2026 16:33:38 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06FCC361653;
-	Tue,  3 Mar 2026 16:27:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEC0A4DC549;
+	Tue,  3 Mar 2026 16:33:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772555248; cv=none; b=Jn1E5HmQIj/aa7CGF/3h7kcvyJ5XRopfPdlRPBUtVAr+LrnPHwg5RCM8guSvLBrvOFm+qnAOKENz5cKkbyVayHPfpzvFLLm5Ld4Hz4G5xvhsAIB/ARXJ6B88kevoKEUJ/q89olCOxKfcV5B5AnC1RCYRQ5fe2+WnMEwk2jEC9j0=
+	t=1772555618; cv=none; b=froVQfCpzVdFHSVORRLAxc3m0JU4JraKtVVzS/ehfEH8gV10zyeihI5kL0Xsc/TF7kGnBll17Y5ZgWKIJ3nxQ65TJEn6+ueBZD+b171MikBGGj+/ggaS0nEtIsG5HT8eRvKmWX9AwDpUZttxvoig7a8YRcN9Lb/w5WcdD12hpyA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772555248; c=relaxed/simple;
-	bh=Ndel+Mmc6YqtxDurpebbQXz8m92fczG0wOpXzsmjQ5g=;
+	s=arc-20240116; t=1772555618; c=relaxed/simple;
+	bh=FdbJz+2GnMDWrCreI2X/cWqA3lnADEjuc8bvbU9/Iek=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GTyj6fBPjyEyBc+f3zA7tq1G2VTlihyZenjq5T1WSSuTdAKvZz4YakL31TWwxU6sGPRLsGywgU5as2UMFZKJCO5rnmon94H/RIjASewfp1gsbqFtO9adUTTPHE2zOjtwoLi9qvALP1pFcLLcwA6ZZdcsp6SBfYskpdGdF3pMJio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=dqHKwvAr; arc=none smtp.client-ip=192.198.163.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1772555243; x=1804091243;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=Ndel+Mmc6YqtxDurpebbQXz8m92fczG0wOpXzsmjQ5g=;
-  b=dqHKwvArJTf60w/Uy+e+O+2H1GZEM1S6w7RB+xpvIbrJebP73KP2JAAh
-   IPU8/pSiHhFFEeO5P3WnU1l3eDXy+vumA2h3DllF76kQBxwI2vDiyC9fV
-   GPZJ63+feRu6GB02qbNdj0zoFBSkq/2rP6Eq2YttuuJhuLq9CEDJuvCOc
-   +0qNo2HtX3ZYNcvu1BFg66ihzKN1xO1zoHce7fC63mkccacLCAqv8oKbv
-   Td+xZyamUE8wXdVyByEEhXE4hZlQOZC2s/fFHNh/jyXc7x9XLeBNwIynu
-   +psI4nFyE1bN3aigQvDIeWUbgz319bHQDSuLhe9tYFgGrn4G1sUF5fDwE
-   w==;
-X-CSE-ConnectionGUID: UCpfuu0ESyCvLQTfGF+VuQ==
-X-CSE-MsgGUID: AIl8Wo17TMyWECoD37SzFw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11718"; a="99073806"
-X-IronPort-AV: E=Sophos;i="6.21,322,1763452800"; 
-   d="scan'208";a="99073806"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2026 08:27:22 -0800
-X-CSE-ConnectionGUID: HjkZ4ez5S/KqsVbqDKOUTQ==
-X-CSE-MsgGUID: usoivkydQnCqUatm+a4Gdg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,322,1763452800"; 
-   d="scan'208";a="222702381"
-Received: from rchatre-mobl4.amr.corp.intel.com (HELO [10.125.108.135]) ([10.125.108.135])
-  by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2026 08:27:21 -0800
-Message-ID: <b044b3cf-ce30-44f6-b3ee-ce552407e95a@intel.com>
-Date: Tue, 3 Mar 2026 08:27:26 -0800
+	 In-Reply-To:Content-Type; b=rYZIG3RFWWe7gLtIW8Bu/V7fDF8fQWIMD2JMeEXLdO/WYkrlS79Efz7Y/QGtUCGIlLsADEu0p2GW3+UFanV7DdR6Rl6v3JfWkOi4OGdCFPEzkCHOgG5Y6rooio7WedY+Mbb6WuNgMK2lI5j2T3y0gFONgcHhklUjLFsWokz3BaA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 91B8A339;
+	Tue,  3 Mar 2026 08:33:28 -0800 (PST)
+Received: from [10.1.196.46] (e134344.arm.com [10.1.196.46])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5702B3F694;
+	Tue,  3 Mar 2026 08:33:30 -0800 (PST)
+Message-ID: <fd0cf579-77c4-4a76-bc8e-b19bb7988155@arm.com>
+Date: Tue, 3 Mar 2026 16:33:23 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,112 +45,157 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] x86: Enable LASS support with vsyscall emulation
-To: Sohil Mehta <sohil.mehta@intel.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- "H . Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>,
- Kiryl Shutsemau <kas@kernel.org>, Brendan Jackman <jackmanb@google.com>,
- Sean Christopherson <seanjc@google.com>, Nam Cao <namcao@linutronix.de>,
- Cedric Xing <cedric.xing@intel.com>,
- Rick Edgecombe <rick.p.edgecombe@intel.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Tony Luck <tony.luck@intel.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Maciej Wieczor-Retman <m.wieczorretman@pm.me>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260219233600.154313-1-sohil.mehta@intel.com>
-From: Dave Hansen <dave.hansen@intel.com>
+Subject: Re: [PATCH v5 12/41] KVM: arm64: Use kernel-space partid
+ configuration for hypercalls
+To: Marc Zyngier <maz@kernel.org>
+Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
+ baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
+ dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
+ fenghuay@nvidia.com, gshan@redhat.com, james.morse@arm.com,
+ jonathan.cameron@huawei.com, kobak@nvidia.com, lcherian@marvell.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ peternewman@google.com, punit.agrawal@oss.qualcomm.com,
+ quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
+ scott@os.amperecomputing.com, sdonthineni@nvidia.com,
+ tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
+ will@kernel.org, corbet@lwn.net, oupton@kernel.org, joey.gouly@arm.com,
+ suzuki.poulose@arm.com, kvmarm@lists.linux.dev, zengheng4@huawei.com,
+ linux-doc@vger.kernel.org, Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+References: <20260224175720.2663924-1-ben.horgan@arm.com>
+ <20260224175720.2663924-13-ben.horgan@arm.com> <86jyvu85dj.wl-maz@kernel.org>
+From: Ben Horgan <ben.horgan@arm.com>
 Content-Language: en-US
-Autocrypt: addr=dave.hansen@intel.com; keydata=
- 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
-In-Reply-To: <20260219233600.154313-1-sohil.mehta@intel.com>
+In-Reply-To: <86jyvu85dj.wl-maz@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: F1D661F3DC8
+X-Rspamd-Queue-Id: 86A341F3EFC
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[bounces-77710-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	URIBL_MULTI_FAIL(0.00)[sea.lore.kernel.org:server fail,fujitsu.com:server fail,arm.com:server fail,huawei.com:server fail];
+	TAGGED_FROM(0.00)[bounces-77712-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dave.hansen@intel.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:mid]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.990];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid,arm.com:email,huawei.com:email,fujitsu.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On 2/19/26 15:35, Sohil Mehta wrote:
-> These patches primarily update the #GP handler to reuse the existing
-> vsyscall emulation code for #PF. In XONLY mode, the faulting RIP is
-> readily available and can be used to determine if the #GP was triggered
-> due to a vsyscall access.
+Hi Marc,
+
+On 3/2/26 18:15, Marc Zyngier wrote:
+> On Tue, 24 Feb 2026 17:56:51 +0000,
+> Ben Horgan <ben.horgan@arm.com> wrote:
+>>
+>> On nVHE systems whether or not MPAM is enabled, EL2 continues to use
+>> partid-0 for hypercalls, even when the host may have configured its kernel
+>> threads to use a different partid. 0 may have been assigned to another
+>> task. Copy the EL1 MPAM register to EL2. This ensures hypercalls use the
+>> same partid as the kernel thread does on the host.
+>>
+>> Tested-by: Gavin Shan <gshan@redhat.com>
+>> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+>> Tested-by: Peter Newman <peternewman@google.com>
+>> Tested-by: Zeng Heng <zengheng4@huawei.com>
+>> Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+>> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
+>> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
+>> ---
+>> Changes since v2:
+>> Use mask
+>> Use read_sysreg_el1 to cope with hvhe
+>>
+>> Changes since v3:
+>> Set MPAM2_EL2.MPAMEN to 1 as we rely on that before and after
+>> ---
+>>  arch/arm64/kvm/hyp/nvhe/hyp-main.c | 9 +++++++++
+>>  1 file changed, 9 insertions(+)
+>>
+>> diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-main.c b/arch/arm64/kvm/hyp/nvhe/hyp-main.c
+>> index e7790097db93..80e71eeddc03 100644
+>> --- a/arch/arm64/kvm/hyp/nvhe/hyp-main.c
+>> +++ b/arch/arm64/kvm/hyp/nvhe/hyp-main.c
+>> @@ -638,6 +638,15 @@ static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
+>>  	unsigned long hcall_min = 0;
+>>  	hcall_t hfn;
+>>  
+>> +	if (system_supports_mpam()) {
+>> +		u64 mask = MPAM1_EL1_PARTID_D | MPAM1_EL1_PARTID_I |
+>> +			MPAM1_EL1_PMG_D | MPAM1_EL1_PMG_I;
+>> +		u64 val = MPAM2_EL2_MPAMEN | (read_sysreg_el1(SYS_MPAM1) & mask);
+>> +
+>> +		write_sysreg_s(val, SYS_MPAM2_EL2);
+>> +		isb();
+>> +	}
+>> +
+>>  	/*
+>>  	 * If pKVM has been initialised then reject any calls to the
+>>  	 * early "privileged" hypercalls. Note that we cannot reject
 > 
-> In contrast, the vsyscall EMULATE mode is deprecated and not expected to
-> be used by anyone. Supporting EMULATE mode with LASS would require
-> complex instruction decoding in the #GP fault handler, which is not
-> worth the effort. So, LASS is disabled in the rare case when someone
-> absolutely needs to enable vsyscall=emulate via the command line.
+> It is extremely debatable whether this is desirable:
+> 
+> - pKVM really shouldn't be influenced by what the host does, which
+>   means reserving PARTIDs and indirecting what the host sees. This can
+>   be deferred until pKVM is actually useful upstream.
+> 
+> - repeatedly hammering that register plus an ISB on the hot path of a
+>   hypercall is a sure way to make things worse than they should be,
+>   and that should be fixed now.
 
-So this part is actually pretty nice.
+Would a read modify write be preferable?
 
-Could we forklift a bit of this into patch 3, please?
+> 
+> Do you really expect the EL1 settings to change on a regular basis? If
+
+The MPAM EL1 partid/pmg configuration is kept in sync with the MPAM EL0
+partid/pmg configuration (see mpam_thread_switch() in patch 4) which
+means that the EL1 configuration will change whenever the user changes
+the EL0 configuration.
+
+> so, I'd rather you use a specific host hypercall, or even a trap to
+> propagate the EL1 configuration. If not, just set it as part of the
+
+I think this ends up trapping context switch which doesn't seem any more
+desirable.
+
+> KVM init and be done with it.
+
+If we just forego this patch then the MPAM configuration for el2 as
+initially configured, partid=0, pmg=0 would be used. This is also the
+default for requestors that aren't MPAM aware or unconfigured, like
+trusted firmware, its, gpu. VHE mode (required from 8.1?) should be
+available in any platform that has MPAM (introduced in 8.4, back
+portable to 8.3) and so using nvhe with MPAM seems unlikely and the
+amount of data should be small enough. That leaves pKVM for which,
+perhaps, doing nothing is also the correct answer.
+
+What do you think? Drop, read modify write, or something else?
+
+> 
+> Thanks,
+> 
+> 	M.
+> 
+
+Thanks,
+
+Ben
+
 
