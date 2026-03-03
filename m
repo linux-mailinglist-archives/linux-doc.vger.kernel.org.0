@@ -1,68 +1,68 @@
-Return-Path: <linux-doc+bounces-77711-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77713-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WLRfIF8Np2k0cwAAu9opvQ
-	(envelope-from <linux-doc+bounces-77711-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:33:35 +0100
+	id GInrCbgOp2k0cwAAu9opvQ
+	(envelope-from <linux-doc+bounces-77713-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:39:20 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 308F31F3DEE
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:33:34 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C13C1F3F19
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 17:39:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 9CDFC30089B8
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 16:33:31 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 757053034E18
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 16:37:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B2B447DF80;
-	Tue,  3 Mar 2026 16:33:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5D593264EF;
+	Tue,  3 Mar 2026 16:37:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="HXSb78l1"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="mF7MCBJ2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCB2F3CC9F4;
-	Tue,  3 Mar 2026 16:33:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43D1D4F798C;
+	Tue,  3 Mar 2026 16:37:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772555610; cv=none; b=f+IS/mI9XB+O1mzkFwMfoTCJxkrjDDiEhdAzUcULtlcRi+4/u6VftBRaPpZPmb07WZQutb2kk4pssBJVqrjkig+jnu7vP+S0Bsvd9UEZkb6WNI2ad3vlcZZmX1/a+ieccCA2aw41x7Ad5GJsbTFYImMAWObVS+RJHveSuN9L2yg=
+	t=1772555834; cv=none; b=hFMD7vKnsAG9f7/eMEJyL+MHEcjildndtiXgLu2BApZDKOZUgCa5hsXhNE8DYY9cb2rEpxGJcYB/FUmooHbgjhj+QZqxPdMd+DoYdsScEypX+ei65RpY+nv7r0DTDOttx5J85SHUgJLkJwgDcIAjdu40lEJrSBeB/Os/ja4EuwI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772555610; c=relaxed/simple;
-	bh=PnaW7jNUJh72pG+7cpItmLsze0kI2N1FQNPYYPktStY=;
+	s=arc-20240116; t=1772555834; c=relaxed/simple;
+	bh=hA392OTWQcJlOkCrtnf6e8HTiwyD2+P9i0Z7ioSGMVQ=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ccn2fwtrF6R6gsz8tCFOBHyK3zcKqUWkgHIA4Peg0hFfNn3sZIhZgMng4SWtkIccO/YL6zBIyke5KWkp+dyK+FWc4xE8N/8CDkKkNWRitysQLQNJFCVEtPIESXIH5SM+YoDr3wjFZGJMmHPTmR1CiISLPGUrqOaHUhE766+bNHw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=HXSb78l1; arc=none smtp.client-ip=192.198.163.18
+	 In-Reply-To:Content-Type; b=gZGH2je4Qyp8nz36I73x/dPOSM4U+Dh2+eQUHGRoVtQVKsBew8g6zLc4DRlOBk+Rg9tBCKu9RTG5JF7bVyZ4fqrHN7KnkzgXJsS3DppE/WP1AWcjw07fvtHvQ4wnGk13cMivSen2J+WYZtQT6NPuQ4lzNClywGEn6/IqbXhUynE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=mF7MCBJ2; arc=none smtp.client-ip=198.175.65.21
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1772555608; x=1804091608;
+  t=1772555834; x=1804091834;
   h=message-id:date:mime-version:subject:to:cc:references:
    from:in-reply-to:content-transfer-encoding;
-  bh=PnaW7jNUJh72pG+7cpItmLsze0kI2N1FQNPYYPktStY=;
-  b=HXSb78l10KDse+sBOUSGBj6KOQade1L69eKUzFU5Y9gyaGHGqSNnuD7j
-   tmQjLakCtQGdpg3k5S4zFbt+EPeh6WP56n1FRjc2w/Zr4nu56K6EiCH7U
-   Y5NeupgVVeUxlfpB7T9EKTsgurA38vCGUPj9ggLwgyxiu2JUGLVF53z/g
-   UrpCuHbqSuusYvuV+9x2pYjCtRuI43xQCx8EbjPyjKiC6Ej/Xc7kdLVkf
-   W8ItXTyFKC5AyoGfXmImZXgd0m4J1kbWMom4DyKvx4+vexBn0q6J6hOHQ
-   SNa2GJa4miBLCeZX5XcQ2c4bGOtELXXfOai34qJg4drTGsNiHuJ+nbMLm
-   g==;
-X-CSE-ConnectionGUID: +8UBJORgSfu8NjBcP4jjqg==
-X-CSE-MsgGUID: pncPlyvMTfC4ISUDD2qHXg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11718"; a="72799694"
+  bh=hA392OTWQcJlOkCrtnf6e8HTiwyD2+P9i0Z7ioSGMVQ=;
+  b=mF7MCBJ2ZD3dwkcHIYl94fOJP4RvtzwfHeItfZjaZnmAGfWCd5XHA46c
+   V6Od1xHmUQQ+gFYpYvcbxNFD7RS92t/ByFJRFUEFTRHW2w9LJN5eFcIz6
+   GRhUsxT1sAbjng/7yPDWYvqRvwdXdS8uLTrpmlMBbq6S6hblgEN0bcJCt
+   H23v9K4qT/VRTj0xriUhEHN52EI1+bC9PZb+bC4adQtjxccLO3K7y+PXU
+   64LU2+aBxfYegbeZLu1rATypRfIlHU38Md/vgffqo9aPT7ttavhShTl+f
+   YLXZpBnthDVBDGC4yDwUkZy3Pg/r5qD9oqUmlp7Gp3cZylUQq97KeRuzk
+   Q==;
+X-CSE-ConnectionGUID: SiOiaFjpSqa7Sn1tU5G4xw==
+X-CSE-MsgGUID: ZmQ29X6eQJeEiGdZq2xCcQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11718"; a="73472918"
 X-IronPort-AV: E=Sophos;i="6.21,322,1763452800"; 
-   d="scan'208";a="72799694"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2026 08:33:27 -0800
-X-CSE-ConnectionGUID: lbCUyvFGRL+y1QI0hW92jg==
-X-CSE-MsgGUID: k7YM1JDMR7qKmE+b0QeRwQ==
+   d="scan'208";a="73472918"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2026 08:37:13 -0800
+X-CSE-ConnectionGUID: Ssfcex3ERUOuDjRPUAeFFA==
+X-CSE-MsgGUID: fiSTaDNKQJCgFdfGwe2yLA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.21,322,1763452800"; 
-   d="scan'208";a="217290947"
+   d="scan'208";a="248542201"
 Received: from rchatre-mobl4.amr.corp.intel.com (HELO [10.125.108.135]) ([10.125.108.135])
-  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2026 08:33:27 -0800
-Message-ID: <c6385777-b99b-48ba-a2cf-888f58de6bb6@intel.com>
-Date: Tue, 3 Mar 2026 08:33:31 -0800
+  by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2026 08:37:12 -0800
+Message-ID: <16d8599f-195d-46d0-8346-f7b267cbb349@intel.com>
+Date: Tue, 3 Mar 2026 08:37:18 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,8 +70,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] x86/vsyscall: Disable LASS if vsyscall mode is set to
- EMULATE
+Subject: Re: [PATCH 5/5] x86/cpu: Remove LASS restriction on vsyscall
+ emulation
 To: Sohil Mehta <sohil.mehta@intel.com>,
  Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
  Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
@@ -87,9 +87,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
  Maciej Wieczor-Retman <m.wieczorretman@pm.me>, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org
 References: <20260219233600.154313-1-sohil.mehta@intel.com>
- <20260219233600.154313-5-sohil.mehta@intel.com>
-From: Dave Hansen <dave.hansen@intel.com>
+ <20260219233600.154313-6-sohil.mehta@intel.com>
 Content-Language: en-US
+From: Dave Hansen <dave.hansen@intel.com>
 Autocrypt: addr=dave.hansen@intel.com; keydata=
  xsFNBE6HMP0BEADIMA3XYkQfF3dwHlj58Yjsc4E5y5G67cfbt8dvaUq2fx1lR0K9h1bOI6fC
  oAiUXvGAOxPDsB/P6UEOISPpLl5IuYsSwAeZGkdQ5g6m1xq7AlDJQZddhr/1DC/nMVa/2BoY
@@ -133,22 +133,22 @@ Autocrypt: addr=dave.hansen@intel.com; keydata=
  MTsCeQDdjpgHsj+P2ZDeEKCbma4m6Ez/YWs4+zDm1X8uZDkZcfQlD9NldbKDJEXLIjYWo1PH
  hYepSffIWPyvBMBTW2W5FRjJ4vLRrJSUoEfJuPQ3vW9Y73foyo/qFoURHO48AinGPZ7PC7TF
  vUaNOTjKedrqHkaOcqB185ahG2had0xnFsDPlx5y
-In-Reply-To: <20260219233600.154313-5-sohil.mehta@intel.com>
+In-Reply-To: <20260219233600.154313-6-sohil.mehta@intel.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 308F31F3DEE
+X-Rspamd-Queue-Id: 2C13C1F3F19
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[bounces-77711-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77713-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+];
@@ -157,34 +157,22 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[dave.hansen@intel.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,intel.com:dkim,intel.com:email,intel.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,intel.com:dkim,intel.com:email,intel.com:mid]
 X-Rspamd-Action: no action
 
-On 2/19/26 15:35, Sohil Mehta wrote:
-> The EMULATE mode of vsyscall maps the vsyscall page with a high kernel
-> address directly into user address space. Reading the vsyscall page in
-> EMULATE mode would cause LASS to trigger a #GP.
+On 2/19/26 15:36, Sohil Mehta wrote:
+> As vsyscall emulation is now supported during #GP, remove the
+> restriction on LASS when vsyscall emulation is compiled in.
 > 
-> Fixing the LASS violation in EMULATE mode would require complex
-> instruction decoding because the resulting #GP does not include any
-> useful error information, and the vsyscall address is not readily
-> available in the RIP.
-> 
-> The EMULATE mode has been deprecated since 2022 and can only be enabled
-> using the command line parameter vsyscall=emulate. See commit
-> bf00745e7791 ("x86/vsyscall: Remove CONFIG_LEGACY_VSYSCALL_EMULATE") for
-> details. At this point, no one is expected to be using this insecure
-> mode. The rare usages that need it obviously do not care about security.
-> 
-> Disable LASS when EMULATE mode is requested to avoid breaking legacy
-> user software. Also, update the vsyscall documentation to reflect this.
-> LASS will only be supported if vsyscall mode is set to XONLY (default)
-> or NONE.
+> As a result, there is no need for setup_lass() anymore. LASS is enabled
+> by default through a late_initcall().
 
 Reviewed-by: Dave Hansen <dave.hansen@linux.intel.com>
+
+Now we just need to get patch 3 settled.
 
