@@ -1,173 +1,150 @@
-Return-Path: <linux-doc+bounces-77783-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77781-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CDyKNilmp2mghAAAu9opvQ
-	(envelope-from <linux-doc+bounces-77783-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:52:25 +0100
+	id 8OHzIGFjp2mghAAAu9opvQ
+	(envelope-from <linux-doc+bounces-77781-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:40:33 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B53E1F82D8
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:52:24 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DBE611F8136
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 23:40:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 005233036ABD
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 22:52:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3C7303003625
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 22:40:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBE19381AE1;
-	Tue,  3 Mar 2026 22:52:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6613E372688;
+	Tue,  3 Mar 2026 22:40:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="U8VFaajR"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XvF1cy5T"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E1FD370D52;
-	Tue,  3 Mar 2026 22:52:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47F3E3559F2
+	for <linux-doc@vger.kernel.org>; Tue,  3 Mar 2026 22:40:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772578342; cv=none; b=akr9+JQOEA5ADFI32tLeLaAFiUPuCOUH4IKGyX+FjyFyv0sH3rXFOnT8djlaNJTwnEi+j8E4rLzZeJBtRiO8In6QquOEGPjgfZgtxKHPatpMm7Pa8r//xXK8sy4CJYM6UjFsLKXI3GTUFAAMCLwXnbDGj7O6wYbZgIy7ZeGEEPc=
+	t=1772577629; cv=none; b=KFV4HgL+V8vnnySqfRxRS2GZuFK28/oe0csceIIWqLEPQqvBcEoDNMEJggj7JaTwZZAKgPPW6u1adFAY2sKrh90PEknNaSzdkWU9RxwoR/RhTm2hJ0W3gCVUEuJqRnTzsv2ilmEjEpQ06DKzF6+tSONTH8B7bgUZ3bFAiWCfBCU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772578342; c=relaxed/simple;
-	bh=KkKFMt+NKSjC/iuAWFOKDY+6iw+XZpHyZpJ2eGO+Vk8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VXb6YWu9AXCVslnrf2ViwVsZwShbFOwddo1jQZ0pLHIAHBY1x2sG99yfF2F1y5zpW4iGXK2sn+f4/Olu2vSjnV4EpKWPauQTF6nd5Kh1cdehYmr+jIHOWHJSOsdQ1U6ScN2Tk9QWXTJxeySTu2iYlT6G+3WDrAtY6ZsBhht2VEM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=U8VFaajR; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from [172.27.2.41] (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 623MZNuw3553846
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Tue, 3 Mar 2026 14:35:24 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 623MZNuw3553846
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026022301; t=1772577327;
-	bh=PWkUhVKmvPcsYyQkSE4NsHuA0TlmqkuDcsXL0WFf/qo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=U8VFaajRyrd9D/ni57g7wy0FTw3hgzom41MFBWfMDP4bxMGgwlC/D5AkQ24CkrHM2
-	 UYM/pWGsL6ZTaEf6ruWZbE0rAiUfMo6gpX0XtTMZMQlb77hSWF+Z7uBDkdSyyUV+1V
-	 uHICECWKzLonM4GhPIwwUTOZhn/OLmV2wwRGDYEMpKOVZX71koUpomJhIRH+yeui1T
-	 NeU7bXoUjViZObR4nVN6+m1CVm4ammnIHtTIPtP7RijvcIKFdKmqSL2y55RswBprHX
-	 IcVSthQNF2rJsbc4WEgwpCW+pAQyD4KMHJEXOpcqdu3CAgG57FM6uWJuhK3dOiAIvL
-	 uh7IlOo0SLFaQ==
-Message-ID: <3212161f-64b2-4825-8bcc-c36201ab6589@zytor.com>
-Date: Tue, 3 Mar 2026 14:35:18 -0800
+	s=arc-20240116; t=1772577629; c=relaxed/simple;
+	bh=X3WpDnbnNoKx1p2WZuj8dYLyj7IenOTPLiw2GMtaDQM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=ZwfB2RuHHuNKiuYnwhoFJvu75BZW9Dfg0ICmtEL1uqhNf2/AX/gWoz0BZgLk1X4jVGwyROF/fCVgV4c4QySvYUoNI9+UMWzDQ4fHtQMkzy90IQBUE54erH9jTGoZaYxh2GXywxqo2PGgQnO97fqMExuzVgPJ0ByNMrEfnQvibp8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XvF1cy5T; arc=none smtp.client-ip=209.85.160.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-5069b3e0c66so98957561cf.1
+        for <linux-doc@vger.kernel.org>; Tue, 03 Mar 2026 14:40:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1772577627; x=1773182427; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Rg9uYfe6pN1Ub/RndC6QSgAdpkYFGdsISivzOGdjaU8=;
+        b=XvF1cy5T12nRohW32ED3f5XVtHNYzqtcsSN8TinWRAf6q+nhbP3/A7oDd0yH0HhjRz
+         lNc6XI22psDNyF7LuJJIcACMO3QMQUcfbW1h3hNXSa5mDpLre21ZATEsEa0GDFClkpD+
+         tQc6Q9mqfjMgMQ2rLP98X39qr0XzMcNts31k9FvlzqNfeFv2tBDNJ6cY7fNR1/hPFQPe
+         bS3dfVgg4Vz5vxZgQaDwJpFCYYQmq7GvktCymKyHsqcQIIFaQEgU2eZCWokDX6IwibpG
+         wNX5TGd4m4urv+qmMCNpkPqD0smnLjD02vhBBMyh3k9SkD1knD0rvmMRz/on40d/Tw8N
+         Y2ZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772577627; x=1773182427;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Rg9uYfe6pN1Ub/RndC6QSgAdpkYFGdsISivzOGdjaU8=;
+        b=Mbc/n8kp/3p5qfXXuDFqbSz1wL6lWVrMxut6AGFYZH81IPhvHuijYPtqqlsRBguXHw
+         eZXRPa+S2CdZGWzsV7KSFaH+9ldxZg5PiPvZdj4CxY/cpSbWMH0YpTzL3N3CZqS3B+rR
+         Y2Jolw4DQLy1XtooSLiBdnqex8c6YBu8WTGXr3yU181usXL90Y804LhsAp+UQ6fNKXHY
+         owoxb9hP0DiBX+qmdoxnYyEFQruRh72OB9b+Rgg1GPjjie98AaT1Qd+VF9zAbVNg9QPl
+         qphqCwxE/7ixJKLMMWkiXf/5PL4HzKMnLk/GqMFTd/ecx3jyp5dl0CDywIdbO4JffW5B
+         QWqw==
+X-Gm-Message-State: AOJu0YwLHRosoRGz2NuXGq3FopwGstfyoWFUcYCC1t8n/cSmjfAeVxZL
+	wG+r8KQ+DFOOiGswm2pYsb+tMbWb4N1V1HAKxPobjoWWeWc76J3wUiOAWgPW7w==
+X-Gm-Gg: ATEYQzyAooL1mFt6Ws/Td92SwGwB6H7KsKiOflI/WoKf7QoqGukD02nYrbeMAGDvNBD
+	CfoLSiF/QIo30rNRZX2lC85g9LLW9zj/T+gPxke5RF2GjiIh1Ref4P4btEjGoe//U7JRyu5132D
+	7uxFiE59/k5vNrLGOyAyr1dsuxmSu5Jl5qN2ih+FSfOZQ3NrOKZl8UU16JYenfR4Gr9R0mt6nNe
+	AVIoR+L7SU5DgPuKg05ONTqY31fdOAEeCRopKw2Fgj4NCqnIaLtYq5vTY+nP5sKYFo9X3x3etAc
+	JE9zrpsHOkKV79Ju0fE5Jv0pN6b9AbqSRRGXF7AsDDbRbFErVpsKOg5vHyIpieSIr9XBxmkvzGq
+	ZEosmyDvUaTImboADTM2l1J1aO1m0QpTgIh3mnb6CZQGKjtPjxxuwuRZjNT9tPaUSCg4SNHxs34
+	JDOfSkBIqSCQku5I+EmeAOOwLPLc5l5bG8ZnaZNOsjtvGNZdjffXLJAg==
+X-Received: by 2002:ac8:5a84:0:b0:4ee:232e:4950 with SMTP id d75a77b69052e-508ce9a38dfmr45275631cf.8.1772577626801;
+        Tue, 03 Mar 2026 14:40:26 -0800 (PST)
+Received: from daniel-desktop3.localnet ([204.48.79.162])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-507449874b7sm136424621cf.9.2026.03.03.14.40.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Mar 2026 14:40:26 -0800 (PST)
+From: Daniel Tang <danielzgtg.opensource@gmail.com>
+To: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Fox Chen <foxhlchen@gmail.com>
+Cc: NeilBrown <neilb@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+ vegard.nossum@oracle.com, viro@zeniv.linux.org.uk, rdunlap@infradead.org,
+ grandmaster@al2klimov.de
+Subject: [PATCH] docs: path-lookup: fix unrenamed WALK_GET
+Date: Tue, 03 Mar 2026 17:40:24 -0500
+Message-ID: <13098721.O9o76ZdvQC@daniel-desktop3>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] x86/vsyscall: Add vsyscall emulation for #GP
-To: Sohil Mehta <sohil.mehta@intel.com>, Dave Hansen <dave.hansen@intel.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Kiryl Shutsemau <kas@kernel.org>,
-        Brendan Jackman <jackmanb@google.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Nam Cao <namcao@linutronix.de>, Cedric Xing <cedric.xing@intel.com>,
-        Rick Edgecombe <rick.p.edgecombe@intel.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Maciej Wieczor-Retman <m.wieczorretman@pm.me>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260219233600.154313-1-sohil.mehta@intel.com>
- <20260219233600.154313-4-sohil.mehta@intel.com>
- <1383b357-2a10-4b36-afb9-42e2724faa31@intel.com>
- <faf58379-36df-4535-8c17-bcfe838ae4c4@intel.com>
-Content-Language: en-US, sv-SE
-From: "H. Peter Anvin" <hpa@zytor.com>
-In-Reply-To: <faf58379-36df-4535-8c17-bcfe838ae4c4@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 1B53E1F82D8
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
+X-Rspamd-Queue-Id: DBE611F8136
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026022301];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	CTE_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77783-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[zytor.com:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77781-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[vger.kernel.org,gmail.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[danielzgtgopensource@gmail.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
+	FREEMAIL_FROM(0.00)[gmail.com]
 X-Rspamd-Action: no action
 
-On 2026-03-03 13:20, Sohil Mehta wrote:
-> 
-> Sure, combining things from the cover letter and what you suggested
-> here. How about?
->
+Fixes: de9414adafe4 ("docs: path-lookup: update WALK_GET, WALK_PUT desc")
+---
+ Documentation/filesystems/path-lookup.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-[...]
+diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/filesystems/path-lookup.rst
+index 9ced1135608e..6957c70f18db 100644
+--- a/Documentation/filesystems/path-lookup.rst
++++ b/Documentation/filesystems/path-lookup.rst
+@@ -1364,7 +1364,7 @@ it sets ``LOOKUP_AUTOMOUNT``, as does "``quotactl()``" and the handling of
+ symlinks.  Some system calls set or clear it implicitly, while
+ others have API flags such as ``AT_SYMLINK_FOLLOW`` and
+ ``UMOUNT_NOFOLLOW`` to control it.  Its effect is similar to
+-``WALK_GET`` that we already met, but it is used in a different way.
++``WALK_TRAILING`` that we already met, but it is used in a different way.
+ 
+ ``LOOKUP_DIRECTORY`` insists that the final component is a directory.
+ Various callers set this and it is also set when the final component
+-- 
+2.51.0
 
-> 
-> "The vsyscall page is located in the high/kernel part of the address
-> space. LASS prevents access to this page from userspace. The current
-> kernel only enables LASS when all vsyscall modes are disabled.
 
-Suggest making an introductory paragraph here with the background information,
-instead of mixing it into the rest of the text in a somewhat incoherent manner:
 
-"vsyscall emulation can be execute-only (XONLY) or read-execute (EMULATE),
-specified by the vsyscall= kernel command line option. XONLY mode is the
-default. The EMULATE mode has been deprecated since 2022 and is considered
-insecure.
-
-This patch adds support for LASS with XONLY vsyscall emulation.
-
-> With LASS, vsyscall page accesses trigger a #GP instead of a #PF. In
-> XONLY (execute-only) mode, directly reading the vsyscall page is
-> disallowed. So, the faulting RIP can be easily used to determine if the
-> #GP was triggered due to a vsyscall access.
-
-How about:
-
-"With LASS, vsyscall page accesses trigger a #GP instead of a #PF. For XONLY
-mode, all that is needed is the faulting RIP, which is trivially available
-regardless of the type of fault."
-
-> Reuse the #PF emulation code during a #GP and emulate the vsyscall
-> access in XONLY mode. As multiple fault handlers are now using the
-> emulation code, add a sanity check to ensure that the fault truly
-> happened in 64-bit user mode.
-> 
-> In contrast, when vsyscall=emulate (deprecated) is configured, it maps
-> the vsyscall page as readable. Supporting EMULATE mode with LASS is much
-> harder because the #GP doesn't provide enough error information (such as
-> PFEC and CR2 in case of #PF). So, complex instruction decoding would be
-> required in the #GP handler which isn't worth the effort.
-
-"... as remaining users of EMULATE mode can be reasonably assumed to be niche
-users, who are already trading off security for compatibility."
-
-Use "EMULATE mode" consistently here. Captializing it makes it clear that it
-is a term and not just a prose word.
-
-> LASS and
-> vsyscall=emulate will be kept mutually exclusive for simplicity."
-
-	-hpa
 
 
