@@ -1,61 +1,62 @@
-Return-Path: <linux-doc+bounces-77758-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77752-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WOSALos8p2mofwAAu9opvQ
-	(envelope-from <linux-doc+bounces-77758-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:54:51 +0100
+	id 6C1cLmA7p2mofwAAu9opvQ
+	(envelope-from <linux-doc+bounces-77752-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:49:52 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44D631F6716
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:54:51 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E2611F65C6
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:49:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 22F2530BF86E
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 19:50:36 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BC817308CC7C
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 19:48:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8F0538425B;
-	Tue,  3 Mar 2026 19:50:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0450138425D;
+	Tue,  3 Mar 2026 19:48:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="dYwAQ6z9"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="JaX5wAbm"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A103C38643D;
-	Tue,  3 Mar 2026 19:50:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1048937C932;
+	Tue,  3 Mar 2026 19:48:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772567430; cv=pass; b=O5ib4nquY5+y/b0Jl/kmBMVDyH7rleLD5M5jg24xCBwUIF4iE4uC6l/0gF3mN9WNjVb+I+x0hHkbEWzjbIp+wW8REd8dxlidhdYg3R+6QyHxk1DRegfBAT37N/OlSNvug6iEo4LxHi1xLMkahL2Seae/jfcx7EJSZUSWLmczsz8=
+	t=1772567318; cv=pass; b=i0mde5XSm8zcjmogTSEaFPD6L71gsfrPJLbqDylXYw84uc5eT/qEyzluweAvDrVB6/PFXYuJnOweEhIQTg3Xw+5q9cfT0jnrGb59cAWxpaAtezHTQW0xa+hJFo9RYgdWyjI1/cMvdAOQWJH4Nhef8OMkQjbdqGJeuJ+I53e6Rwg=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772567430; c=relaxed/simple;
-	bh=DgCDy76J/msDhB3mPy6eXfxx3MwQApX7KCISfKk1anY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=T/ftU28Cz15ceMC/vNXS9KywyCoxggDv5yX4dglbz6qpi+Wir0Q2aHd0WRSzzR2xz5K7542ZqL7gcGUeved8l6Br8c1Vvou1aXfZUWYl99ocRdFo+RCzpNZvvqdoSaac2q/LZWmoYcybk6aiUPePnWfBUbF+LQjZ6dmcjh87AEQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=dYwAQ6z9; arc=pass smtp.client-ip=136.143.188.15
+	s=arc-20240116; t=1772567318; c=relaxed/simple;
+	bh=Ol5wfXidt2YBtsIvhP73Xs9hMxo3bigYItyn+32vSZ8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=XQyTWRKD51fQ8u++Z+hDiGw3FE5kyg+9LI/4hv5dTZFFhE3UWi4Pr1IRgL+EnUWqOAQasgA0pvVV1RRnJr+tIWrXT0O/Jo7/CyMagWxFOfGG1lcTLwbC4Jpa7WaZNWTTJSEhaNRrOz6Mq/PFhpgqrOu/sQ7nu93fFRDH/cuYBl4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=JaX5wAbm; arc=pass smtp.client-ip=136.143.188.15
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
-ARC-Seal: i=1; a=rsa-sha256; t=1772567293; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1772567297; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=eP4l0NDbHn7Jutj+JV475DmQoVlop1OCw+8R3/0jv99ZOPUHvn2belgQrlRs2KdlTzP2bf+FDHr64e54+laYiwykqZWUO5Z3rzIUIpRwsVU0ONwoUl7nyQBG7SM0zy3yifVSnmkEb/MX3AU1M1M58G7QwTtX0tUD5IH0uCJCdpA=
+	b=g76eAs3aVQHdB+1PIKmssuAXwIsNRripgKtt+l7YeeNu64AT+rbsAx38RebFCs9+D7PG3NjZSlrF/DarkekPaNWais7Kf10Y9JGdkTeZAEQuARKp9RAuCeaeEu02IM4uLHaMdXS5f8hhPq2weRADM0z+ENfUrbxKFpKFyoTRcgg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1772567293; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=Y18qqMZWDPBwIEG3oJSl7DALpFqCPbAAjqKcRfr13ZE=; 
-	b=OS6LJTxLMhr1dh40ZDnsthy+lrgc6LD7zIuhIigva596I8Hh0K1xLmYRCprzaM4omPZ6qn40gqFReY8LkagHLKdSmfoGmrQtAsbDMOa9T770L85WRCeFB/S0k1HtU+yF5F1MktHgWsr/Ra1Lnyl6uLqkPoyk9M5s4SxdQZJUjsM=
+	t=1772567297; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=nsa1pQ/g85W+rCXtSixQQwz2hYzHYiKCiOFYkThsOOQ=; 
+	b=fEgD7FFeOul+2ZT62/z8KDBsJ6jyzxNw84HE7rPRSEj9PyVgx46ixguLjvBIwJocU59bF9RFr/+J5zVNQL2clnBSE0DYApVGyhSqmfGMa/lmu1nFkkglHqNn54e14BND7RG1kvA6z2CApUpxzam+6EIN/2x8d8lUPHuzMCe6170=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=rong.moe;
 	spf=pass  smtp.mailfrom=i@rong.moe;
 	dmarc=pass header.from=<i@rong.moe>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772567293;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772567297;
 	s=zmail2048; d=rong.moe; i=i@rong.moe;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=Y18qqMZWDPBwIEG3oJSl7DALpFqCPbAAjqKcRfr13ZE=;
-	b=dYwAQ6z979U1JabpUetgdmonVBEaFls1tIrAoPh1DZcXWB3KjYSTVndA/9zPgM58
-	nAkrJSkCVfJawStLdVAPSwVlLaqTyISRSKE/NMqbfkOhLXPsp2QfR+tZ/Bk2RBj+m4s
-	xuvl+Hdj8i93aMj5WqH/DGMWd0b60YR/0XWuWUWSLtq8z55WDiSAqGJz5S/UdoLWZT8
-	9Z9PBo/Iz7hInHJdFi89JIG+4nD1SQT3khGXWaDXYVI2LgjmaxWZ/m5PcD7hccVC3Sm
-	grqkgFFULvFX9K/vtjUgYAgHJKs5kAJOEtbpJ+Zqcnqs5lH4ABXlJnFVCrYWjqwdXPx
-	/MU9Xr81OQ==
-Received: by mx.zohomail.com with SMTPS id 1772567292500723.4550315360998;
-	Tue, 3 Mar 2026 11:48:12 -0800 (PST)
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=nsa1pQ/g85W+rCXtSixQQwz2hYzHYiKCiOFYkThsOOQ=;
+	b=JaX5wAbmTTHKNvMB/xXGAdzFZSgo4E2+uiC+zqLSr1Awa57WMyxpC5GVBsk2z5Oo
+	UUm4P9z7pLbUhDUJ3NrkMU0ibFNyX5ZbTKZD+4kVZXZK8LbUzPw4yoYKzx4FuEGPb4w
+	ZZtQfPTHfufuNjotrVpvP8T8oFMQJs7IHKr6A/A4FrcfmJmb45qtlrRhsW/+kH+k3Vl
+	xLwVlghf2aaV1lgULsyPwwWbhFq8ffZm+e3qpdtwMH6H768OeyKW+mzrRcs7T+2fUG9
+	N+KgZwIC8/Ifrpx9UERYTmtd/2LVTSHHAQtMqcKpzOXgZVDWwdKmp1/1YLqbr2BNsEg
+	A3H5mJ2wuA==
+Received: by mx.zohomail.com with SMTPS id 1772567295942497.5492576939479;
+	Tue, 3 Mar 2026 11:48:15 -0800 (PST)
 From: Rong Zhang <i@rong.moe>
 To: Jaroslav Kysela <perex@perex.cz>,
 	Takashi Iwai <tiwai@suse.com>
@@ -67,109 +68,89 @@ Cc: Rong Zhang <i@rong.moe>,
 	linux-sound@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Icenowy Zheng <uwu@icenowy.me>
-Subject: [PATCH v3 0/8] ALSA: usb-audio: Add quirks for linear volume devices and deconflict VID
-Date: Wed,  4 Mar 2026 03:47:55 +0800
-Message-ID: <20260303194805.266158-1-i@rong.moe>
+	Icenowy Zheng <uwu@icenowy.me>,
+	stable@vger.kernel.org
+Subject: [PATCH v3 1/8] Revert "ALSA: usb: Increase volume range that triggers a warning"
+Date: Wed,  4 Mar 2026 03:47:56 +0800
+Message-ID: <20260303194805.266158-2-i@rong.moe>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260303194805.266158-1-i@rong.moe>
+References: <20260303194805.266158-1-i@rong.moe>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
-X-Rspamd-Queue-Id: 44D631F6716
+X-Rspamd-Queue-Id: 4E2611F65C6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77758-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77752-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[rong.moe:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[11];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,rong.moe:dkim,rong.moe:mid]
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[rong.moe:+];
+	PRECEDENCE_BULK(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[valvesoftware.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Some quirky devices tune their volume by linearly tuning the voltage
-level (linear volume). In other words, such devices has a linear TLV
-mapping of DECLARE_TLV_DB_LINEAR(scale, TLV_DB_GAIN_MUTE, 0).
+UAC uses 2 bytes to store volume values, so the maximum volume range is
+0xFFFF (65535, val = -32768/32767/1).
 
-The series mainly adds quirk flags MIXER_PLAYBACK_LINEAR_VOL and
-MIXER_CAPTURE_LINEAR_VOL to represent this case respectively for
-playback and capture mixers. Afterward, apply these quirk flags on them.
+The reverted commit bumpped the range of triggering the warning to >
+65535, effectively making the range check a no-op. It didn't fix
+anything but covered any potential problems and deviated from the
+original intention of the range check.
 
-Some MV-SILICON devices with these quirks also have another quirk: VID
-conflicts with Focusrite Novation (0x1235). Hence, add support for
-string-descriptor-based quirk table entries and define an entry for MV-
-SILICON to deconflict them.
+This reverts commit 6b971191fcfc9e3c2c0143eea22534f1f48dbb62.
 
-Some improvements to the logic of volume range checks is also included
-in the series to help identify quirky devices with linear volume.
+Fixes: 6b971191fcfc ("ALSA: usb: Increase volume range that triggers a warning")
+Cc: stable@vger.kernel.org
+Signed-off-by: Rong Zhang <i@rong.moe>
+Acked-by: Arun Raghavan <arunr@valvesoftware.com>
+---
+ sound/usb/mixer.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-Changes in v3:
-- Adopt __free(kfree) on string buffers as it turns out to be able to
-  handle ERR_PTR() gracefully (thanks Takashi Iwai)
-- Improve readability by replacing the goto pattern with
-  `p->usb_string_match && p->usb_string_match->*'. The compiler should
-  generate equivalent control paths thanks to the optimizer
-- Link to v2: https://lore.kernel.org/r/20260302185900.427415-1-i@rong.moe/
-
-Changes in v2:
-- Separate [PATCH v1 6/9] into https://lore.kernel.org/r/20260302173300.322673-1-i@rong.moe/
-- Alloc string buffers with kmalloc() instead of on stack (thanks
-  Takashi Iwai)
-- Get string descriptors in a neater way (ditto)
-- Tiny differences compared to Takashi's sugeestion:
-  - Use `IS_ERR_OR_NULL() || strcmp()' instead of `!IS_ERR_OR_NULL() &&
-    strcmp()', so failure in getting the string descriptor won't
-    resulting in quirk flags being applied to irrelevant devices
-  - Use trivial goto cleanup patterns instead of `__free(kfree)' as the
-    latter can't handle ERR_PTR()
-- Tiny differences compared to my previous reply:
-  - Use usb_string() as Takashi suggested instead of usb_cache_string(),
-    so that we can retrieve the errno and print it out on failure
-- Link to v1: https://lore.kernel.org/r/20260301213726.428505-1-i@rong.moe/
-
-Rong Zhang (8):
-  Revert "ALSA: usb: Increase volume range that triggers a warning"
-  ALSA: usb-audio: Add helper function for volume range checks
-  ALSA: usb-audio: Improve volume range checks
-  ALSA: usb-audio: Support string-descriptor-based quirk table entry
-  ALSA: usb-audio: Deconflict VID between Focusrite Novation &
-    MV-SILICON
-  ALSA: usb-audio: Add QUIRK_FLAG_MIXER_{PLAYBACK,CAPTURE}_LINEAR_VOL
-  ALSA: usb-audio: Add linear volume quirk for Hotone Audio Pulze Mini
-  ALSA: usb-audio: Apply linear volume quirk on MV-SILICON devices
-
- Documentation/sound/alsa-configuration.rst |  7 ++
- sound/usb/mixer.c                          | 84 +++++++++++++++++----
- sound/usb/mixer_quirks.c                   | 56 ++++++++++++++
- sound/usb/quirks.c                         | 85 ++++++++++++++++++++++
- sound/usb/usbaudio.h                       | 12 +++
- 5 files changed, 229 insertions(+), 15 deletions(-)
-
-
-base-commit: 63082d085f52a3c77ef572d71d2d08c642da2a55
+diff --git a/sound/usb/mixer.c b/sound/usb/mixer.c
+index ac8c71ba9483..df0d3df9c7ec 100644
+--- a/sound/usb/mixer.c
++++ b/sound/usb/mixer.c
+@@ -1813,10 +1813,11 @@ static void __build_feature_ctl(struct usb_mixer_interface *mixer,
+ 
+ 	range = (cval->max - cval->min) / cval->res;
+ 	/*
+-	 * There are definitely devices with a range of ~20,000, so let's be
+-	 * conservative and allow for a bit more.
++	 * Are there devices with volume range more than 255? I use a bit more
++	 * to be sure. 384 is a resolution magic number found on Logitech
++	 * devices. It will definitively catch all buggy Logitech devices.
+ 	 */
+-	if (range > 65535) {
++	if (range > 384) {
+ 		usb_audio_warn(mixer->chip,
+ 			       "Warning! Unlikely big volume range (=%u), cval->res is probably wrong.",
+ 			       range);
 -- 
 2.53.0
 
