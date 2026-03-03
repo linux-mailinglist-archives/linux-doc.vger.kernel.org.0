@@ -1,223 +1,176 @@
-Return-Path: <linux-doc+bounces-77748-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77758-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SKpqDDI3p2mUfwAAu9opvQ
-	(envelope-from <linux-doc+bounces-77748-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:32:02 +0100
+	id WOSALos8p2mofwAAu9opvQ
+	(envelope-from <linux-doc+bounces-77758-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:54:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C98E1F6036
-	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:32:01 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 44D631F6716
+	for <lists+linux-doc@lfdr.de>; Tue, 03 Mar 2026 20:54:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AB196305DBB5
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 19:30:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 22F2530BF86E
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2026 19:50:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1172A37C90E;
-	Tue,  3 Mar 2026 19:30:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8F0538425B;
+	Tue,  3 Mar 2026 19:50:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="H0QoC5uY"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="dYwAQ6z9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from todd.t-8ch.de (todd.t-8ch.de [159.69.126.157])
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E57C2BFC7B;
-	Tue,  3 Mar 2026 19:30:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.126.157
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772566227; cv=none; b=feCFuTzDW0o+ZKl1lMfLKzyL49BFBT1YulgVKKJ/B8WDmSuFwZvOwwTHCNlo9R5eCt3h7WGDffq8oMttsd5UUeJh/1mcU/VSq1hBxqmurOk1nOGQLx9VvIKK6T62YIfPcDZtKe83RVsUzzYu9g+p4I/SGgf68cObqtV+eg9SvlA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772566227; c=relaxed/simple;
-	bh=ZyDDN8IfV7javYUzEVMkbcj53mHDRFN3jws0u3RiBbQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DkREEi5HYx2P8FHKkPq7OEI9cm5F9lkKWAkwwIZ3+5tZUmHkUtRaq9HReLLO+O5w7XpRcTOgdPe6X5Sn6PcnyiF/pRo2ExajFWZV/BzcxRk6vCw7tafIgIseNj4iByO8pbtodlL5+3UEtR3+kfm0o3rbWExrIE9Bq4tjOcObYPI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=H0QoC5uY; arc=none smtp.client-ip=159.69.126.157
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=weissschuh.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=weissschuh.net;
-	s=mail; t=1772566223;
-	bh=ZyDDN8IfV7javYUzEVMkbcj53mHDRFN3jws0u3RiBbQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=H0QoC5uYPhW7DjyBofiWUrg4m+kVgDlGtS/07eoog25ZEUZ12cIfhPe5c+17O0sFP
-	 UYSuoAbl9xPpVPpKfDtrA7sOYq6cdazjKoV2SAn3qbTg5WnS65iIQeGy1pGd64Wbfi
-	 Tx8M0fCWnS9VYwr7IyAMjpFTHhkv3erH5+YFqED8=
-Date: Tue, 3 Mar 2026 20:30:23 +0100
-From: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Aureo Serrano <aureo.serrano@arctic.de>, 
-	"linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] hwmon: add driver for ARCTIC Fan Controller
-Message-ID: <d1d27763-c49d-4d02-9157-ec798bd10604@t-8ch.de>
-References: <FR6P281MB590006F97DAC7A5C224D957BEF7FA@FR6P281MB5900.DEUP281.PROD.OUTLOOK.COM>
- <51d91216-8949-44a9-93d9-646d3f3563b1@t-8ch.de>
- <8dd3367b-4a7c-414b-a4f4-41dc54578e2b@roeck-us.net>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A103C38643D;
+	Tue,  3 Mar 2026 19:50:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1772567430; cv=pass; b=O5ib4nquY5+y/b0Jl/kmBMVDyH7rleLD5M5jg24xCBwUIF4iE4uC6l/0gF3mN9WNjVb+I+x0hHkbEWzjbIp+wW8REd8dxlidhdYg3R+6QyHxk1DRegfBAT37N/OlSNvug6iEo4LxHi1xLMkahL2Seae/jfcx7EJSZUSWLmczsz8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1772567430; c=relaxed/simple;
+	bh=DgCDy76J/msDhB3mPy6eXfxx3MwQApX7KCISfKk1anY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=T/ftU28Cz15ceMC/vNXS9KywyCoxggDv5yX4dglbz6qpi+Wir0Q2aHd0WRSzzR2xz5K7542ZqL7gcGUeved8l6Br8c1Vvou1aXfZUWYl99ocRdFo+RCzpNZvvqdoSaac2q/LZWmoYcybk6aiUPePnWfBUbF+LQjZ6dmcjh87AEQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=dYwAQ6z9; arc=pass smtp.client-ip=136.143.188.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
+ARC-Seal: i=1; a=rsa-sha256; t=1772567293; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=eP4l0NDbHn7Jutj+JV475DmQoVlop1OCw+8R3/0jv99ZOPUHvn2belgQrlRs2KdlTzP2bf+FDHr64e54+laYiwykqZWUO5Z3rzIUIpRwsVU0ONwoUl7nyQBG7SM0zy3yifVSnmkEb/MX3AU1M1M58G7QwTtX0tUD5IH0uCJCdpA=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1772567293; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Y18qqMZWDPBwIEG3oJSl7DALpFqCPbAAjqKcRfr13ZE=; 
+	b=OS6LJTxLMhr1dh40ZDnsthy+lrgc6LD7zIuhIigva596I8Hh0K1xLmYRCprzaM4omPZ6qn40gqFReY8LkagHLKdSmfoGmrQtAsbDMOa9T770L85WRCeFB/S0k1HtU+yF5F1MktHgWsr/Ra1Lnyl6uLqkPoyk9M5s4SxdQZJUjsM=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=rong.moe;
+	spf=pass  smtp.mailfrom=i@rong.moe;
+	dmarc=pass header.from=<i@rong.moe>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772567293;
+	s=zmail2048; d=rong.moe; i=i@rong.moe;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=Y18qqMZWDPBwIEG3oJSl7DALpFqCPbAAjqKcRfr13ZE=;
+	b=dYwAQ6z979U1JabpUetgdmonVBEaFls1tIrAoPh1DZcXWB3KjYSTVndA/9zPgM58
+	nAkrJSkCVfJawStLdVAPSwVlLaqTyISRSKE/NMqbfkOhLXPsp2QfR+tZ/Bk2RBj+m4s
+	xuvl+Hdj8i93aMj5WqH/DGMWd0b60YR/0XWuWUWSLtq8z55WDiSAqGJz5S/UdoLWZT8
+	9Z9PBo/Iz7hInHJdFi89JIG+4nD1SQT3khGXWaDXYVI2LgjmaxWZ/m5PcD7hccVC3Sm
+	grqkgFFULvFX9K/vtjUgYAgHJKs5kAJOEtbpJ+Zqcnqs5lH4ABXlJnFVCrYWjqwdXPx
+	/MU9Xr81OQ==
+Received: by mx.zohomail.com with SMTPS id 1772567292500723.4550315360998;
+	Tue, 3 Mar 2026 11:48:12 -0800 (PST)
+From: Rong Zhang <i@rong.moe>
+To: Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>
+Cc: Rong Zhang <i@rong.moe>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Cryolitia PukNgae <cryolitia@uniontech.com>,
+	Arun Raghavan <arunr@valvesoftware.com>,
+	linux-sound@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Icenowy Zheng <uwu@icenowy.me>
+Subject: [PATCH v3 0/8] ALSA: usb-audio: Add quirks for linear volume devices and deconflict VID
+Date: Wed,  4 Mar 2026 03:47:55 +0800
+Message-ID: <20260303194805.266158-1-i@rong.moe>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <8dd3367b-4a7c-414b-a4f4-41dc54578e2b@roeck-us.net>
-X-Rspamd-Queue-Id: 8C98E1F6036
+X-ZohoMailClient: External
+X-Rspamd-Queue-Id: 44D631F6716
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[weissschuh.net,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[weissschuh.net:s=mail];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
+	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77748-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[weissschuh.net:+];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77758-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@weissschuh.net,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[rong.moe:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,t-8ch.de:mid,weissschuh.net:dkim,arctic.de:email]
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,rong.moe:dkim,rong.moe:mid]
 X-Rspamd-Action: no action
 
-On 2026-03-03 11:00:25-0800, Guenter Roeck wrote:
-> On 3/3/26 10:10, Thomas Weißschuh wrote:
-> > Hi!
-> > 
-> > On 2026-03-03 08:25:04+0000, Aureo Serrano wrote:
-> > >  From 1cc962124ca4343e682219372b08dec5d611d1af Mon Sep 17 00:00:00 2001
-> > > From: Aureo Serrano de Souza <aureo.serrano@arctic.de>
-> > > Date: Tue, 3 Mar 2026 15:06:35 +0800
-> > > Subject: [PATCH] hwmon: add driver for ARCTIC Fan Controller
-> > > 
-> > > Add hwmon driver for the ARCTIC Fan Controller (USB HID VID 0x3904,
-> > > PID 0xF001) with 10 fan channels. Exposes fan RPM and PWM via sysfs.
-> > > Device pushes IN reports ~1 Hz; PWM set via OUT reports.
-> > > 
-> > > Signed-off-by: Aureo Serrano de Souza <aureo.serrano@arctic.de>
-> > > ---
-> 
-> checkpatch reports:
-> 
-> total: 11 errors, 53 warnings, 6 checks, 360 lines checked
-> 
-> primarily because the patch uses spaces instead of tabs.
+Some quirky devices tune their volume by linearly tuning the voltage
+level (linear volume). In other words, such devices has a linear TLV
+mapping of DECLARE_TLV_DB_LINEAR(scale, TLV_DB_GAIN_MUTE, 0).
 
-It looks like it was pushed through some Microsoft mail product with
-copious amounts of force.
+The series mainly adds quirk flags MIXER_PLAYBACK_LINEAR_VOL and
+MIXER_CAPTURE_LINEAR_VOL to represent this case respectively for
+playback and capture mixers. Afterward, apply these quirk flags on them.
 
-(...)
+Some MV-SILICON devices with these quirks also have another quirk: VID
+conflicts with Focusrite Novation (0x1235). Hence, add support for
+string-descriptor-based quirk table entries and define an entry for MV-
+SILICON to deconflict them.
 
-> > > +     }
-> > > +     for (i = 0; i < ARCTIC_NUM_FANS; i++) {
-> > > +           priv->fan_rpm[i] = (u32)(buf[rpm_off + i * 2] |
-> > > +                             (buf[rpm_off + i * 2 + 1] << 8));
-> > 
-> > get_unaligned_u32()
-> > 
-> 
-> That doesn't seem to exist. get_unaligned_le16(), maybe, but the data
-> is never unaligned. le16_to_cpup() might do.
+Some improvements to the logic of volume range checks is also included
+in the series to help identify quirky devices with linear volume.
 
-Indeed, get_unaligned_le16() is the one.
-Does the HID core guarantee that raw event buffers are always aligned
-sufficiently to access them as *u32? Personally I don't know all the
-alignment requirements of all the supported architectures.
-get_unaligned_le16() will always do the right thing and avoids typecasts.
+Changes in v3:
+- Adopt __free(kfree) on string buffers as it turns out to be able to
+  handle ERR_PTR() gracefully (thanks Takashi Iwai)
+- Improve readability by replacing the goto pattern with
+  `p->usb_string_match && p->usb_string_match->*'. The compiler should
+  generate equivalent control paths thanks to the optimizer
+- Link to v2: https://lore.kernel.org/r/20260302185900.427415-1-i@rong.moe/
 
-(...)
+Changes in v2:
+- Separate [PATCH v1 6/9] into https://lore.kernel.org/r/20260302173300.322673-1-i@rong.moe/
+- Alloc string buffers with kmalloc() instead of on stack (thanks
+  Takashi Iwai)
+- Get string descriptors in a neater way (ditto)
+- Tiny differences compared to Takashi's sugeestion:
+  - Use `IS_ERR_OR_NULL() || strcmp()' instead of `!IS_ERR_OR_NULL() &&
+    strcmp()', so failure in getting the string descriptor won't
+    resulting in quirk flags being applied to irrelevant devices
+  - Use trivial goto cleanup patterns instead of `__free(kfree)' as the
+    latter can't handle ERR_PTR()
+- Tiny differences compared to my previous reply:
+  - Use usb_string() as Takashi suggested instead of usb_cache_string(),
+    so that we can retrieve the errno and print it out on failure
+- Link to v1: https://lore.kernel.org/r/20260301213726.428505-1-i@rong.moe/
 
-> > > +     } else {
-> > > +           spin_unlock_irqrestore(&priv->lock, flags);
-> > 
-> > You can use the new guard() syntax from cleanup.h to avoid manual
-> > unlocks on error paths.
-> > 
-> 
-> Why would this code need interrupt disabled spinlocks in the first place ?
+Rong Zhang (8):
+  Revert "ALSA: usb: Increase volume range that triggers a warning"
+  ALSA: usb-audio: Add helper function for volume range checks
+  ALSA: usb-audio: Improve volume range checks
+  ALSA: usb-audio: Support string-descriptor-based quirk table entry
+  ALSA: usb-audio: Deconflict VID between Focusrite Novation &
+    MV-SILICON
+  ALSA: usb-audio: Add QUIRK_FLAG_MIXER_{PLAYBACK,CAPTURE}_LINEAR_VOL
+  ALSA: usb-audio: Add linear volume quirk for Hotone Audio Pulze Mini
+  ALSA: usb-audio: Apply linear volume quirk on MV-SILICON devices
 
-I *suspect* that it tries to be compatible with some semaphores in the
-HID core.
-
-> It reads individual entries from priv, but even if those are updated
-> in parallel I don't see why that would warrant disabling interrupts,
-> both here and in arctic_fan_parse_report().
-> 
-> The hwmon core already serializes read and write operations, so
-> the locks (much less interrupt disabling spinlocks) are not needed
-> for that either.
-
-The HID callbacks can be fired at any time from the HID core,
-concurrently to hwmon core logic. But I also dislike the spinlocks.
-Maybe a mutex works, too?
-
-(...)
-
-> > > +static int arctic_fan_probe(struct hid_device *hdev,
-> > > +                     const struct hid_device_id *id)
-> > > +{
-> > > +     struct arctic_fan_data *priv;
-> > > +     struct device *hwmon_dev;
-> > > +     int ret;
-> > > +
-> > > +     ret = hid_parse(hdev);
-> > > +     if (ret)
-> > > +           return ret;
-> > > +
-> > > +     priv = devm_kzalloc(&hdev->dev, sizeof(*priv), GFP_KERNEL);
-> > > +     if (!priv)
-> > > +           return -ENOMEM;
-> > > +
-> > > +     priv->out_buf = devm_kmalloc(&hdev->dev, ARCTIC_REPORT_LEN, GFP_KERNEL);
-> > > +     if (!priv->out_buf)
-> > > +           return -ENOMEM;
-> > 
-> > The 32 byte buffer could be on the stack, saving this allocation and
-> > avoiding a shared resource.
-> 
-> It might need to be cache aligned, but even then it could be part of
-> struct arctic_fan_data.
-
-What would be the advantage of that over an on-stack placement?
-
-> > > +
-> > > +     priv->hdev = hdev;
-> > > +     spin_lock_init(&priv->lock);
-> > > +     hid_set_drvdata(hdev, priv);
-> > > +
-> > > +     ret = hid_hw_start(hdev, HID_CONNECT_DRIVER);
-> > > +     if (ret)
-> > > +           return ret;
-> > > +
-> > > +     ret = hid_hw_open(hdev);
-> > > +     if (ret)
-> > > +           goto out_stop;
-> > > +
-> > > +     hid_device_io_start(hdev);
-> > > +
-> > > +     hwmon_dev = devm_hwmon_device_register_with_info(&hdev->dev, "arctic_fan",
-> > > +                                          priv, &arctic_fan_chip_info,
-> > > +                                          NULL);
-> > 
-> > You could assign directly to priv->hwmon_dev.
-> 
-> I don't immediately see where priv->hwmon_dev is used in the first place.
-
-Indeed.
+ Documentation/sound/alsa-configuration.rst |  7 ++
+ sound/usb/mixer.c                          | 84 +++++++++++++++++----
+ sound/usb/mixer_quirks.c                   | 56 ++++++++++++++
+ sound/usb/quirks.c                         | 85 ++++++++++++++++++++++
+ sound/usb/usbaudio.h                       | 12 +++
+ 5 files changed, 229 insertions(+), 15 deletions(-)
 
 
-Thomas
+base-commit: 63082d085f52a3c77ef572d71d2d08c642da2a55
+-- 
+2.53.0
+
 
