@@ -1,187 +1,183 @@
-Return-Path: <linux-doc+bounces-77879-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77880-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ACcOB5xwqGkkugAAu9opvQ
-	(envelope-from <linux-doc+bounces-77879-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 18:49:16 +0100
+	id kNs+IyhxqGkkugAAu9opvQ
+	(envelope-from <linux-doc+bounces-77880-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 18:51:36 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7825C2056D3
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 18:49:15 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04EE7205757
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 18:51:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8B6C030E992F
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2026 17:45:35 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 54D01300C9B4
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2026 17:50:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 553C93CD8B1;
-	Wed,  4 Mar 2026 17:45:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 201463CCA0D;
+	Wed,  4 Mar 2026 17:50:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="Ciuh2OlT"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BnxaPJez"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB3DC3CCA1D
-	for <linux-doc@vger.kernel.org>; Wed,  4 Mar 2026 17:45:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF1923A0EAB;
+	Wed,  4 Mar 2026 17:50:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772646334; cv=none; b=XDlbT+OnJQdVyjlIroSdQqEq0ZOLbAgunzbpszUFoznICcfBw+mnMS2Cy9/CBbv7kve3kYCbQUsesBDgKgH/IbSqzeKFMWpKg/nljoYhmwOP98gkiLsf7d2EnH5abM7PgYD1dkeFOtLQve5RwR1lQ4t/6ZQ307OJsvz1bjurN0A=
+	t=1772646612; cv=none; b=Wc82MASWhsix8ozrmPl1SV9Ev8pzdFKGs8r7Hz1D8kGfBHr9cobRnqpVDXeEKERbocsD4GG1f7vFp8ucao6fm7e8WSaRjj4HISWg0kKYlVo4lP/FK2bxEYnmfvmI0AtszYCPpTSvgwWFjt8OzsQbGxADFDkR2y+i1tQe2Ig4SWE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772646334; c=relaxed/simple;
-	bh=Z/NZQvcQCIgLMH/ylHiLwhG3hRbIZ3DJdjrycXHaYe8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jq8NAHkqNPpsoGEKouP8Yt48gacToYLok+RBYQpos+KLAQhPhpCntE6qNElMSzuxWqcstwCAtEgOr01Oh12kTOPpY8XvsBkrKaxj5zw1G0X+feXT1zLNB2WVKKUkMTcbg9T99VBQaapwUXWKe5nSa+/wkzbbWbwZ0soxVHmp8R0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=Ciuh2OlT; arc=none smtp.client-ip=209.85.222.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
-Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-8c710439535so465944785a.1
-        for <linux-doc@vger.kernel.org>; Wed, 04 Mar 2026 09:45:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1772646332; x=1773251132; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=nSAtzjXqss+uxlpk1YxZqBQHrNvbCWRFoP2RW9VjGUc=;
-        b=Ciuh2OlT5LbvGe2fLekjmWaFRmLjXcQ8+K3Q2RMQB08V72mMUT0d237S0cMP6/MXfw
-         xOh94/jCUlZlk2z3AQAWmVtiXffk4ko/7txAqj5IN+gGXZlSvQHwcpHwxfY4sFJoIhAr
-         k9CEkvEz/XaO/jKOZ3On01JDbOyBodBB/PafBIsJUHAXpcfODzDv15OBeNLanlFRmJlg
-         DTA3dqlCpMRh1aDznm5plekJncXeDjPx5SzQi9XBjcy++ug5Qv9kMpuW2raKxItuExKP
-         Sygl9M7ucBy54LbxYgn3kddbZhxLymSNrR89fDjKrpBekrPlT79wZ34Wf5QPYwzSK9m0
-         IIJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772646332; x=1773251132;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nSAtzjXqss+uxlpk1YxZqBQHrNvbCWRFoP2RW9VjGUc=;
-        b=uB9DT3RWrn/zBuFPBucUA47muTK7U2wl7JEnp1E8JU00CxOhQlJNwr4JFi8jvqK5xP
-         yzAs+tmfsvRVTulaGyCANeEd8xAqf4bJnQkDi6aU4Kf7sTdAfdOb8mqQTB8c0TYhuYQX
-         Go9LPXY4UhCEhbfTwld05S8tN08oqlx7Tg4BUcs5SVHRP4klATYJYNaLG2pgHaKvL6Ab
-         /yYZ+3i+pXtH3cDS7UsbNHfC/G0xoTynwFxTtHkR92VzHvQOkMfUewT8kLgnKB1Ej4ZD
-         ioKUiWXgURjtotB1wEqxZc1oXaE+nAHQj4+kpZsppGcWk5ayWy0hlP+a9gWCyBnm3jiD
-         Lqrw==
-X-Forwarded-Encrypted: i=1; AJvYcCVszq8MoAienmDkvKjuR1X1ConjQUNkqzBfw0vUQ5fBsKKD8e+fu7/O406PJBEIvN8DseIb6YFbhQA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyfQr3CwMFzbTjZptmmU0/j5fBewySuJuoudK+5dse48uLdIFZC
-	n/PN27qNk1xBsKYgMSwi5ntz2Astw4JAGXrClfIXy6Z9CSFQyQmZDgIhJNFDRqMx/9A=
-X-Gm-Gg: ATEYQzxA6olw3vx5GDo+rLudqqSUmBWPMJMiUPEx9RrXihuge4YU4z7Ke1uV4NORcXq
-	+LadwKe/Hpyev+bJaAWSmMdOEFZks90lCkm8avMehYplW6tqL3dZuNcAjr03iX4ojmB/Vspa+sD
-	N5fJlHnlITvyAbEo85qJfuxJ4q9CEVe1ORlzdbcF9PRGsfRrIGhfau3uDnhINBzKeYb4+o9zBUE
-	lvCl310f7CcLY//lauV0jhuNhWGUvh6AVJAItmM44Zlbq95Zza6UtYwi25+KLO9M/GRLPzncuIm
-	2+Ocsd94L09y8KT15gLxtMlut6aEaynKs8Z7HStla7btK0ENdNoUgJHVDgrvFqzUI2pLWpSUM2L
-	yVXCE8mxeK02cyb2J5W0Hg2mYe67UEf9wg0udSfDSryU8+rnyz4m85ZUP3fCg/QNghQdaYVc7PT
-	JE864sCuOTcHA2V4dY48WCyq+sfV0SyVXnzNVkZlsZqiAA/8n89t52eozddIi51YPtOEI057S2D
-	joNlpRU
-X-Received: by 2002:a05:620a:4481:b0:8c6:ee09:5eae with SMTP id af79cd13be357-8cd5adb8d1cmr343907185a.0.1772646331749;
-        Wed, 04 Mar 2026 09:45:31 -0800 (PST)
-Received: from ziepe.ca (hlfxns017vw-142-162-112-119.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.112.119])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-89a1fcb781fsm8074876d6.23.2026.03.04.09.45.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Mar 2026 09:45:31 -0800 (PST)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1vxqHq-00000005ET5-2S2S;
-	Wed, 04 Mar 2026 13:45:30 -0400
-Date: Wed, 4 Mar 2026 13:45:30 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Leon Romanovsky <leon@kernel.org>
-Cc: Danilo Krummrich <dakr@kernel.org>, Peter Colberg <pcolberg@redhat.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Alex Gaynor <alex.gaynor@gmail.com>, Gary Guo <gary@garyguo.net>,
-	=?utf-8?B?QmrDtnJu?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Dave Ertman <david.m.ertman@intel.com>,
-	Ira Weiny <ira.weiny@intel.com>, David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>,
-	Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
-	Moritz Fischer <mdf@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Boqun Feng <boqun@kernel.org>, linux-pci@vger.kernel.org,
-	rust-for-linux@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Alistair Popple <apopple@nvidia.com>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	John Hubbard <jhubbard@nvidia.com>, Zhi Wang <zhiw@nvidia.com>,
-	nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org, linux-fpga@vger.kernel.org,
-	driver-core@lists.linux.dev
-Subject: Re: [PATCH v3 00/10] rust: pci: add abstractions for SR-IOV
- capability
-Message-ID: <20260304174530.GH964116@ziepe.ca>
-References: <20260303-rust-pci-sriov-v3-0-4443c35f0c88@redhat.com>
- <20260304084750.GW12611@unreal>
- <20260304141852.GF964116@ziepe.ca>
- <20260304142600.GB12611@unreal>
- <DGU347RJX5BV.1CZYELSZ9GS9D@kernel.org>
- <20260304162711.GI12611@unreal>
- <20260304164551.GG964116@ziepe.ca>
- <20260304170249.GJ12611@unreal>
+	s=arc-20240116; t=1772646612; c=relaxed/simple;
+	bh=E4znfVinBg671eglK8T1taFw+aFY5/rXYKUjl3WI3wk=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
+	 References:In-Reply-To; b=or+2Xg9iOIA2/rh/o17WpP22ilBBN1RCqZ/FSlDHfdgirmTTlxLw8IdsdjfNMxnRcJ6vo4o+tFHR/6egod1ftgde27puVZe5d3byo1ZSot4kUCxI9CYq+GYaswZzI7jobc96cOIC7pyvY84GCLeMX65704X8GV+xbeBbHwLojS0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BnxaPJez; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F283C4CEF7;
+	Wed,  4 Mar 2026 17:50:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772646611;
+	bh=E4znfVinBg671eglK8T1taFw+aFY5/rXYKUjl3WI3wk=;
+	h=Date:Subject:Cc:To:From:References:In-Reply-To:From;
+	b=BnxaPJez/SGvWsdn9rFcxp1SWi2seMtpjZi8xUe0Em3idKqLKyZUYNWYn5P8zZSAL
+	 J1sdpkcRmZ5TJ03pG7ShVlWlXqP2po1Dqta5bAqqQBQeiFn8l1In6EXafPYi9hNSWj
+	 7LkWlTwuYY6dQNI6zjtrp0cVxXMR+r53gJCFfTVOKZWm3HmOa2KWXuE0c4v3e6XegB
+	 DO3RcT+4GZS9MPpiApeygGxi09mPDKR3qNT/v4y3tgtK3WQdKd1km1ffLByhFC4zf+
+	 q4DWNAG1ulOiDVZOpKolL38Gdck7at60opVYY6NlMIViFWDgQvDP7APYg2Nf+MhV78
+	 S6Jpfw8wqH5YQ==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 04 Mar 2026 18:50:02 +0100
+Message-Id: <DGU6RZ7MWNAV.21PQC3NNK05D6@kernel.org>
+Subject: Re: [PATCH v3 00/10] rust: pci: add abstractions for SR-IOV
+ capability
+Cc: "Jason Gunthorpe" <jgg@ziepe.ca>, "Peter Colberg" <pcolberg@redhat.com>,
+ "Bjorn Helgaas" <bhelgaas@google.com>,
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, "Miguel
+ Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Gary
+ Guo" <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
+ Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
+ "Trevor Gross" <tmgross@umich.edu>, "Abdiel Janulgue"
+ <abdiel.janulgue@gmail.com>, "Daniel Almeida"
+ <daniel.almeida@collabora.com>, "Robin Murphy" <robin.murphy@arm.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>, "Dave Ertman"
+ <david.m.ertman@intel.com>, "Ira Weiny" <ira.weiny@intel.com>, "David
+ Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Jonathan
+ Corbet" <corbet@lwn.net>, "Xu Yilun" <yilun.xu@intel.com>, "Tom Rix"
+ <trix@redhat.com>, "Moritz Fischer" <mdf@kernel.org>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, "Boqun Feng" <boqun@kernel.org>,
+ <linux-pci@vger.kernel.org>, <rust-for-linux@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, "Alexandre Courbot" <acourbot@nvidia.com>,
+ "Alistair Popple" <apopple@nvidia.com>, "Joel Fernandes"
+ <joelagnelf@nvidia.com>, "John Hubbard" <jhubbard@nvidia.com>, "Zhi Wang"
+ <zhiw@nvidia.com>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>, <linux-doc@vger.kernel.org>,
+ <linux-fpga@vger.kernel.org>, <driver-core@lists.linux.dev>
+To: "Leon Romanovsky" <leon@kernel.org>
+From: "Danilo Krummrich" <dakr@kernel.org>
+References: <20260303-rust-pci-sriov-v3-0-4443c35f0c88@redhat.com>
+ <20260304084750.GW12611@unreal> <20260304141852.GF964116@ziepe.ca>
+ <20260304142600.GB12611@unreal> <DGU347RJX5BV.1CZYELSZ9GS9D@kernel.org>
+ <20260304162711.GI12611@unreal> <20260304164551.GG964116@ziepe.ca>
+ <20260304170249.GJ12611@unreal>
 In-Reply-To: <20260304170249.GJ12611@unreal>
-X-Rspamd-Queue-Id: 7825C2056D3
+X-Rspamd-Queue-Id: 04EE7205757
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77879-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77880-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[ziepe.ca];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,redhat.com,google.com,gmail.com,garyguo.net,protonmail.com,umich.edu,collabora.com,arm.com,linuxfoundation.org,intel.com,ffwll.ch,lwn.net,vger.kernel.org,nvidia.com,lists.freedesktop.org,lists.linux.dev];
+	FREEMAIL_CC(0.00)[ziepe.ca,redhat.com,google.com,kernel.org,gmail.com,garyguo.net,protonmail.com,umich.edu,collabora.com,arm.com,linuxfoundation.org,intel.com,ffwll.ch,lwn.net,vger.kernel.org,nvidia.com,lists.freedesktop.org,lists.linux.dev];
 	RCPT_COUNT_TWELVE(0.00)[40];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[ziepe.ca:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@ziepe.ca,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,ziepe.ca:dkim,ziepe.ca:mid]
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On Wed, Mar 04, 2026 at 07:02:49PM +0200, Leon Romanovsky wrote:
-> > No, illegal, and it doesn't even work right. When VFIO FLRs the PF it
-> > will blow up the half baked SRIOV and break everything.
-> 
+On Wed Mar 4, 2026 at 6:02 PM CET, Leon Romanovsky wrote:
+> On Wed, Mar 04, 2026 at 12:45:51PM -0400, Jason Gunthorpe wrote:
+>> On Wed, Mar 04, 2026 at 06:27:11PM +0200, Leon Romanovsky wrote:
+>> > On Wed, Mar 04, 2026 at 03:57:57PM +0100, Danilo Krummrich wrote:
+>> > > On Wed Mar 4, 2026 at 3:26 PM CET, Leon Romanovsky wrote:
+>> > > > On Wed, Mar 04, 2026 at 10:18:52AM -0400, Jason Gunthorpe wrote:
+>> > > >> On Wed, Mar 04, 2026 at 10:47:50AM +0200, Leon Romanovsky wrote:
+>> > > >> > On Tue, Mar 03, 2026 at 04:15:20PM -0500, Peter Colberg wrote:
+>> > > >> > > Add Rust abstractions for the Single Root I/O Virtualization =
+(SR-IOV)
+>> > > >> > > capability of a PCI device. Provide a minimal set of wrappers=
+ for the
+>> > > >> > > SR-IOV C API to enable and disable SR-IOV for a device, and q=
+uery if
+>> > > >> > > a PCI device is a Physical Function (PF) or Virtual Function =
+(VF).
+>> > > >> >=20
+>> > > >> > <...>
+>> > > >> >=20
+>> > > >> > > For PF drivers written in C, disabling SR-IOV on remove() may=
+ be opted
+>> > > >> > > into by setting the flag managed_sriov in the pci_driver stru=
+cture. For
+>> > > >> > > PF drivers written in Rust, disabling SR-IOV on unbind() is m=
+andatory.
+>> > > >> >=20
+>> > > >> > Why? Could you explain the rationale behind this difference bet=
+ween C and
+>> > > >> > Rust? Let me remind you that SR=E2=80=91IOV devices which do no=
+t disable VFs do so
+>> > > >> > for a practical and well=E2=80=91established reason: maximizing=
+ hardware
+>> > > >> > utilization.
+>> > > >>=20
+>> > > >> Personally I think drivers doing this are wrong. That such a driv=
+er
+>> > > >> bug was allowed to become UAPI is pretty bad. The rust approach i=
+s
+>> > > >> better.
+>> > > >
+>> > > > We already had this discussion. I see this as a perfectly valid
+>> > > > use-case.
+>> > >=20
+>> > > Can you remind about a specific use-case for this please? (Ideally, =
+one that
+>> > > can't be solved otherwise.)
+>> >=20
+>> > You create X VFs through sriov_configure, unbind PF, bind it to vfio
+>> > instead and forward (X + 1) functions to different VMs.
+>>=20
+>> No, illegal, and it doesn't even work right. When VFIO FLRs the PF it
+>> will blow up the half baked SRIOV and break everything.
+>
 > The FLR can be disabled. For example, PCI_DEV_FLAGS_NO_FLR_RESET flag
 > will do it.
 
-Well that would break all the security properties of VFIO.
-
-> > VFIO already has its own sriov_config support, the right flow is to
-> > bind the PF to VFIO and then enable sriov and do your assignments.
-> 
-> VFIO started to support SR-IOV in 137e5531351d ("vfio/pci: Add
-> sriov_configure support"), which was added 8 years after VFIO core was
-> added cba3345cc494 ("vfio: VFIO core").
-
-Well, time to upgrade, I see no reason to allow Rust drivers to
-further propogate these mistakes.
-
-Jason
+But this is a quirk and not a feature, no? So, we shouldn't use it as a bas=
+eline
+for actual features.
 
