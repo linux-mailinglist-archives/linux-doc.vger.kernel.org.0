@@ -1,190 +1,133 @@
-Return-Path: <linux-doc+bounces-77832-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77834-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MGcYLXkjqGl3ogAAu9opvQ
-	(envelope-from <linux-doc+bounces-77832-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 13:20:09 +0100
+	id 6Db4MyI7qGkTqgAAu9opvQ
+	(envelope-from <linux-doc+bounces-77834-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 15:01:06 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 316BD1FF9C0
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 13:20:09 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 27D71200E23
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 15:01:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7D43B302B226
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2026 12:19:49 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 8C2B8302EE1D
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2026 13:56:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F33423F26A;
-	Wed,  4 Mar 2026 12:19:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 53C33256C61;
+	Wed,  4 Mar 2026 13:56:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mPGS7qcY"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="odAkdFgD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F1B53A7825
-	for <linux-doc@vger.kernel.org>; Wed,  4 Mar 2026 12:19:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9248156C6A;
+	Wed,  4 Mar 2026 13:56:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772626786; cv=none; b=qe3tKMGxSczC9PT0fVP9uOZuO5oL6D4tLeoE+0T97xEv9QR4VrdJunx+tvjjTNeNqoKb6kbeeyOyYWYJ5jxyT8D9lKa+qasK8G/xW0dC8VUZL1FN2r8H1P3Bo1haP9LIugMNHDkE7eLoQ5lELupd20RvvvLqhBtOo0yqR7UsGMY=
+	t=1772632608; cv=none; b=Ob6v8P+22+gTlawAHQqIvinP1IucJ9lepz/R74KsdkxyndOKe/8t7GC4DtsXcgcGDj0C7xDmSwjAs+V0l0F7M3fEm3pZ6A8VdZWJZuKlsRsPuzLSlm0q9c2IRLeqFZe7hBxmOBQch1x/q2VAi4g/7CGFyjYRR4h+g9mgcHTEjl8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772626786; c=relaxed/simple;
-	bh=8jaB9xhr+C3taJqbbWa5n/w0SjBdD0Ab/HQmNKTmf5w=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=eJ0H/B6vJwSSb+/siceW9BkUQRNr6wuuVlmVlUDnI3jL9+dV7S7Vay8fpBCRVklR5JUmOFKgIbiyC0qNDgaZgbY1rawkiVv/i2Uefzd5bPECWKdq1cdVeVok3OdQNAlZ8H6Lp6f/o+Xj3QJMsWHrpXJaSy7poXsqlZ5J/pfWPEs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mPGS7qcY; arc=none smtp.client-ip=209.85.221.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-439b790af67so1934082f8f.0
-        for <linux-doc@vger.kernel.org>; Wed, 04 Mar 2026 04:19:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772626782; x=1773231582; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=FrV9cbgp4wuO7j5QZsaUWjFR+kDOuc1YVBeslenYsE8=;
-        b=mPGS7qcYgizPq0GUZEFxBiiZXF7J3p+av3wLK1Y+kbcw9Zz4Hi0XPDjE3MnudZb42x
-         5MYVxuHHhzpxS2V1aHm8eI+I+0Tf5qIbElxaYYqDPw6Ax73zRmJwkyr+Nysi17c3Rppk
-         z3its7D8ypyaT2gg7RKuZ41epVo8umsilAbjwI+JvMbz8QZq14KK19EBTMSgtt/4ZcgC
-         RYnH2xIRZK5G2+Nmim/vXEx9EZPOcuBR9n/t2usMiuG9OyopEW+fTr9+MOhZbKj7JXvF
-         B6GNfEdf4hIXoIOf9zT71etn5a5IE6Km6u7TwlZNblgB6hj/NClk9fd81to/W49WEJLt
-         H5aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772626782; x=1773231582;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FrV9cbgp4wuO7j5QZsaUWjFR+kDOuc1YVBeslenYsE8=;
-        b=b3dNm90DrSqhVCOSu9BKcvutU0CuPpsGfqrn2DdaEbnk4LZSI0pOsFuI+LUzdGT+uO
-         cONdml5ImfG37KH17Du8QPjcReoKt38cuxRHYz7sVSRyVW/bx9b+yeF5wMNaFdiOGgUV
-         XlJyJ/ZNTsBByJlTpYmiQw9RMrNLqNoZ6U7QdyNh8/vXs9mXNmwur8iXechNvNK4R0nR
-         Pse++a+ZERH7HhwviOPtUFeX6bUisaaFyIkzM1qGYp12fnoS7VC7xGW020der+IPv++r
-         nh8DNfHcPez6tUZNk9t1mUr856kzpr1P1Lk+AbKH+VRsuMvBPqjdTpbD7Ct2532JtCND
-         gf9Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUXfSvTpPRQYLH3OS0QRVfh4xIu6WyAOA26Mo21QJlEPTMaT9wtBAH3THd7Ju8FG71Utbue9qMMV2g=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywqpndcm0HoUShitfh0ZGApo6j49oRU1iazKvlGcxY1TB9sxgel
-	Ioz2lHTGd+gNdIm7M0xrDr0PQu7pz9kMxEa8qcNBWDYAQPmB4CTMdqJE
-X-Gm-Gg: ATEYQzxoALRtIv7a2C/kdpYT0GLmTXYU5PcoyxnldqiKJG8W3C/pp/qQDzPdtijigeQ
-	uPuqq4cnL91E+gXR6QKcEUQ4dSohvNX0rHnRLvk6tSyTq08eRoDi//nSSwyn4wnUaRcH2o42i+M
-	iOkzA42C0+BVkP0+p7Mdb4VR80H+QCzjn3VV6yQqDhE//03cvNMf1tp9ERqbl4P13CdyTTOP+y4
-	eP1jND/zBo6WP8Nv0jh2b8yvrcshIqs/dBO0xGY+rnogWHjvScQkP4f+7MC3u00aBBdWTGOmpus
-	6G36ACqi3bL3uQPOm/PAzwNyBWHZ+8KJsqA1iWQTN6lggdMJ6CkJ2e3cG31BsqYmeic1zMVF5nu
-	jnd/Y6MdPkEKq6VJGuVg+78GFNKb+xmJVRFH6326ImfdcIJgYJvlyi6eInnClh9sZm0CdXpazjD
-	Gk9sf137P+AoXJ5GXIcZJnJGsrKp2AXps=
-X-Received: by 2002:a05:6000:2912:b0:439:b9e8:635f with SMTP id ffacd0b85a97d-439c8a9f004mr3065699f8f.21.1772626781522;
-        Wed, 04 Mar 2026 04:19:41 -0800 (PST)
-Received: from [192.168.1.187] ([148.63.225.166])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439b3cc2e65sm27010827f8f.2.2026.03.04.04.19.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Mar 2026 04:19:41 -0800 (PST)
-Message-ID: <f3fa4c490a61c4544fa93682f3dd18e0f98b8473.camel@gmail.com>
-Subject: Re: [PATCH v6 2/3] hwmon: ltc4283: Add support for the LTC4283 Swap
- Controller
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: kernel test robot <lkp@intel.com>, Nuno =?ISO-8859-1?Q?S=E1?= via B4
- Relay <devnull+nuno.sa.analog.com@kernel.org>, linux-gpio@vger.kernel.org, 
-	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, Guenter Roeck <linux@roeck-us.net>, Rob
- Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>, Conor
- Dooley <conor+dt@kernel.org>,  Jonathan Corbet	 <corbet@lwn.net>, Linus
- Walleij <linusw@kernel.org>, Bartosz Golaszewski	 <brgl@kernel.org>
-Date: Wed, 04 Mar 2026 12:20:25 +0000
-In-Reply-To: <202603041109.HFnPWnj8-lkp@intel.com>
-References: <20260303-ltc4283-support-v6-2-efe11502fad2@analog.com>
-	 <202603041109.HFnPWnj8-lkp@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	s=arc-20240116; t=1772632608; c=relaxed/simple;
+	bh=dzQ5Z0aWE6Qj7FDEDXMAwnOwPDdvOzGKs3TewCc9a34=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iQdhvzxx7/r9vSeVeAq04/X5gIwAWy0ivUvNFsQ2P6C0wNJQ1TloCSwjBau31xYy+uGK6s5Q5XoccBJJ6owUjZigfmyKy+iSgQAVWA9fpB3P/p6BF3bhjrdk19Fnwy39g9MGa57n8bNLa3QsPofNUKQYGoUiUVYcY1sPobbA6LM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=odAkdFgD; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=dRGxkNI+jiy5ziDfD2yEF2JYrz4BhhOkGGuTJeJcL4c=; b=odAkdFgD9Sc7pzOLhuhHoxkP/H
+	FPePLdcjvJzQe5LVNXJSoYY1GiNHZUGPPRuiTP8G10My3T0lfTNfuE/Thlkco5BXomdY71oighoYb
+	PP8HtVCH9U5izk4EfDOReAPO6bhhxe/dX5ertTDqsTiXrXZM3ktJ218wUy0W1BmOMfZ8=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1vxmi6-00A6Wz-Om; Wed, 04 Mar 2026 14:56:22 +0100
+Date: Wed, 4 Mar 2026 14:56:22 +0100
+From: Andrew Lunn <andrew@lunn.ch>
+To: Illusion Wang <Illusion.Wang@nebula-matrix.com>
+Cc: Dimon <dimon.zhao@nebula-matrix.com>,
+	Alvin <alvin.wang@nebula-matrix.com>,
+	Sam <sam.chen@nebula-matrix.com>, netdev <netdev@vger.kernel.org>,
+	andrew+netdev <andrew+netdev@lunn.ch>, corbet <corbet@lwn.net>,
+	kuba <kuba@kernel.org>, linux-doc <linux-doc@vger.kernel.org>,
+	lorenzo <lorenzo@kernel.org>, pabeni <pabeni@redhat.com>,
+	horms <horms@kernel.org>,
+	"vadim.fedorenko" <vadim.fedorenko@linux.dev>,
+	"lukas.bulwahn" <lukas.bulwahn@redhat.com>,
+	edumazet <edumazet@google.com>,
+	open list <linux-kernel@vger.kernel.org>
+Subject: Re: =?utf-8?B?5Zue5aSN77yaW1BBVENIIHY1IG5l?= =?utf-8?Q?t-nex?=
+ =?utf-8?Q?t?= 11/11] net/nebula-matrix: add common dev start/stop operation
+Message-ID: <66a61cf8-7dbf-4b33-b687-b44debf7e726@lunn.ch>
+References: <20260226073840.3222-1-illusion.wang@nebula-matrix.com>
+ <20260226073840.3222-12-illusion.wang@nebula-matrix.com>
+ <b8f71f46-735b-4b1f-8df8-01a532bc7964@lunn.ch>
+ <34c4ed3f-fef6-4c4c-8b0f-9951fedf580c.Illusion.Wang@nebula-matrix.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 316BD1FF9C0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <34c4ed3f-fef6-4c4c-8b0f-9951fedf580c.Illusion.Wang@nebula-matrix.com>
+X-Rspamd-Queue-Id: 27D71200E23
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77832-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_ALL(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77834-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,nuno.sa.analog.com,dt];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,intel.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,lunn.ch:dkim,lunn.ch:mid]
 X-Rspamd-Action: no action
 
-On Wed, 2026-03-04 at 12:05 +0100, kernel test robot wrote:
-> Hi Nuno,
->=20
-> kernel test robot noticed the following build warnings:
->=20
-> [auto build test WARNING on 78558965440b27814592ec82d8f3668395953b1b]
->=20
-> url:=C2=A0=C2=A0=C2=A0
-> https://github.com/intel-lab-lkp/linux/commits/Nuno-S-via-B4-Relay/dt-bin=
-dings-hwmon-Document-the-LTC4283-Swap-Controller/20260304-010255
-> base:=C2=A0=C2=A0 78558965440b27814592ec82d8f3668395953b1b
-> patch link:=C2=A0=C2=A0=C2=A0 https://lore.kernel.org/r/20260303-ltc4283-=
-support-v6-2-efe11502fad2%40analog.com
-> patch subject: [PATCH v6 2/3] hwmon: ltc4283: Add support for the LTC4283=
- Swap Controller
-> compiler: clang version 20.1.8
-> (https://github.com/llvm/llvm-project=C2=A087f0227cb60147a26a1eeb4fb06e3b=
-505e9c7261)
-> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-> reproduce:
-> (https://download.01.org/0day-ci/archive/20260304/202603041109.HFnPWnj8-l=
-kp@intel.com/reproduce)
->=20
-> If you fix the issue in a separate patch/commit (i.e. not just a new vers=
-ion of
-> the same patch/commit), kindly add following tags
-> > Reported-by: kernel test robot <lkp@intel.com>
-> > Closes: https://lore.kernel.org/oe-kbuild-all/202603041109.HFnPWnj8-lkp=
-@intel.com/
->=20
-> All warnings (new ones prefixed by >>):
->=20
-> =C2=A0=C2=A0 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D [docutils]
-> > > Documentation/hwmon/ltc4283.rst:258: WARNING: Blank line required aft=
-er table. [docutils]
-> =C2=A0=C2=A0 Documentation/mm/memfd_preservation:7: ./mm/memfd_luo.c:13: =
-ERROR: Unexpected section title.
->=20
->=20
-> vim +258 Documentation/hwmon/ltc4283.rst
->=20
-> =C2=A0=C2=A0 256=09
-> =C2=A0=C2=A0 257	=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D		=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> =C2=A0> 258	power1_failed_fault_log		Set to 1 by a power1 fault occurring=
-.
+On Wed, Mar 04, 2026 at 03:20:44PM +0800, Illusion Wang wrote:
+> 
+> > > +int nbl_dev_start(struct nbl_adapter *adapter, struct nbl_init_param *param)
+> > > +{
+> > > + int ret;
+> > > +
+> > > + ret = nbl_dev_start_common_dev(adapter, param);
+> > > + return ret;
+> 
+> >return nbl_dev_start_common_dev(adapter, param);
+> 
+> >But then i have to ask, why bother having nbl_dev_start() when you can
+> >just call nbl_dev_start_common().
+> 
+> You're absolutely right. However, we're considering facilitating future
+> expansion for the next-stage netdev configuration.
 
-Arggh, will wait for more feedback before spinning a new version.
+You seem to be over engineering this whole driver. It seems a lot more
+complex than it needs to be. Complex drivers take a lot longer to get
+merged, some never get merged. Drivers which start KISS, and slowly
+get features added get merged a lot faster.
 
-- Nuno S=C3=A1
+    Andrew
+
 
