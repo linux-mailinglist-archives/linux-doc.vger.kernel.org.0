@@ -1,48 +1,49 @@
-Return-Path: <linux-doc+bounces-77792-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77793-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id /N7CIP23p2mhjQAAu9opvQ
-	(envelope-from <linux-doc+bounces-77792-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 05:41:33 +0100
+	id 6P0FFDC4p2mhjQAAu9opvQ
+	(envelope-from <linux-doc+bounces-77793-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 05:42:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA8AF1FAB76
-	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 05:41:32 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E53331FABB7
+	for <lists+linux-doc@lfdr.de>; Wed, 04 Mar 2026 05:42:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9140B3014118
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2026 04:41:29 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0DD5830FD75F
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2026 04:41:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 844BB37E317;
-	Wed,  4 Mar 2026 04:41:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 770C537F8CC;
+	Wed,  4 Mar 2026 04:41:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OaYTmdTU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="drGqn8oa"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C2A31DEFE9;
-	Wed,  4 Mar 2026 04:41:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 546C537F8C4;
+	Wed,  4 Mar 2026 04:41:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772599288; cv=none; b=YFTGXetLiEoyJ64Ie12tsI9PyKEJ8/X3JIx4ZidcAof/OQiL6t8VQ2JhdHh5QicQ3J/Q+INO4/u0WBBc3z8Q1Seu382i8oMWhDQpr0qWWpK+5Zk7+bRxIWXNVtsmbBBYuMoKsC/D2TKuzotK8v6BVxDpNAAtByRIdulLqqDbz2M=
+	t=1772599289; cv=none; b=Wr2xMkxvBSO9lFVj4OVukX46UBbvqQW33JS+nX2YJ16Nqn9bs7JVMZJXScRRNUuQTVF3/xct21RQMdfHnhhe4RSP7i2niubg6OyVJZT5Ug22/209SqsYXfsFm7hCpMbxuF9U4CJtcZ+/IKpm2N90wHHAcll+OzmGWMmk/0xl1co=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772599288; c=relaxed/simple;
-	bh=QuJFb/rFJcLkJTaWE+LU8ObndCC324KIqzke1jWKe1U=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=sM8VTHEbf+++7eZA1spEfO2i9wBFQOOSjDKT/DRmaS7zq7JNx6wpKdDpDqRtZ5NyQcJfZVnCTEKtlTooVuzhSmbMmYVzEe5OBTZrgFOfHToS3b5aj28txsZjp25YsR6vLvAoew2e3ID13+Z1Zr2ytLBUtVp28nlNH9ZQn6sjJuE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OaYTmdTU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 847B8C19423;
-	Wed,  4 Mar 2026 04:41:27 +0000 (UTC)
+	s=arc-20240116; t=1772599289; c=relaxed/simple;
+	bh=BRPVQ//gFwEK7BX6XnTBEauvn4um7HRHs55ygHmJ5MY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=VV7C18uF21JCnqVJhdG7puu2wD3WO+cZYdOQ/00V2gum2qzvSYYAvYThCwQRLASyx/5tLaB9XS5gedJGuvPkEqhjK3K7i7wBly0m9OONUjCO8vgYGOAL9jWq0MVde0v8gyTRSVppsI9EB331M9WnS/KtjCTTfP83QKERFqlY5x4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=drGqn8oa; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5912C2BCAF;
+	Wed,  4 Mar 2026 04:41:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772599287;
-	bh=QuJFb/rFJcLkJTaWE+LU8ObndCC324KIqzke1jWKe1U=;
-	h=From:To:Cc:Subject:Date:From;
-	b=OaYTmdTUhz6YdoeoglHASzmk9ymccLLodxEiNkLIpitj+mI4JhGw8p9k1WO3hLMqd
-	 7k1oVSXl9i1mOF2nR9DOO/2c9MlrqoL2lxqm8VHOaZ2Opos9LXLLlDZKE38RMSmdoP
-	 utOPFgwzG+5wRS9ZgnzcXStwQwea1xkHyIxRS4eow2UZ5LO7sgc0nBoRZAqlXGEPL1
-	 NS38O9REMTpSx1QOkh73zJ/8h/avHG2Pi6X+Am4sjOChBPIoSmV6A7T4V2GP4To//L
-	 fYfgyIQWPTCeTE+VLfEKseyOoyjL5kVxlZILWhQZ0zS5i3UR+ncT64Kq81q68u4FdX
-	 Du+ToqMVcQwsg==
+	s=k20201202; t=1772599289;
+	bh=BRPVQ//gFwEK7BX6XnTBEauvn4um7HRHs55ygHmJ5MY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=drGqn8oasNMPpRGlhAVrnnqVCuASZrV5LJe28KZ7+yMqDFjIfwo3qSejyNL+lvPck
+	 8nuOYiRbROexyxJYKh4PbkVpIpcPyPwuoYLupU9EhZ7uqocsHsmMEhWn6VfWaGQwOT
+	 pBgRSbF2r1ZonJCXHSJn0bMHnOPSGtJDzlgA3iLhyfxFb/8sTrBaByila6IXVC4QzE
+	 Tcvm9sRda6B2KP0ywrJh7QdzdVvE3tP7ai4oSIStmu2d4geB22MXDbcw78VC1Uow2/
+	 NHUeVU68Qk8AsGzbkszZfUbqTqkf7ZQU/pTP9mIewE092cN7/fg1d/KGitPokgStKx
+	 66e6IhuPilUdw==
 From: SeongJae Park <sj@kernel.org>
 To: 
 Cc: SeongJae Park <sj@kernel.org>,
@@ -53,19 +54,19 @@ Cc: SeongJae Park <sj@kernel.org>,
 	Lorenzo Stoakes <ljs@kernel.org>,
 	Michal Hocko <mhocko@suse.com>,
 	Mike Rapoport <rppt@kernel.org>,
-	Shuah Khan <shuah@kernel.org>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	Suren Baghdasaryan <surenb@google.com>,
 	Vlastimil Babka <vbabka@kernel.org>,
 	damon@lists.linux.dev,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [RFC PATCH v2 00/10] mm/damon: support multiple goal-based quota tuning algorithms
-Date: Tue,  3 Mar 2026 20:41:09 -0800
-Message-ID: <20260304044122.79394-1-sj@kernel.org>
+Subject: [RFC PATCH v2 05/10] Docs/mm/damon/design: document the goal-based quota tuner selections
+Date: Tue,  3 Mar 2026 20:41:14 -0800
+Message-ID: <20260304044122.79394-6-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260304044122.79394-1-sj@kernel.org>
+References: <20260304044122.79394-1-sj@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -73,25 +74,25 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: CA8AF1FAB76
+X-Rspamd-Queue-Id: E53331FABB7
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77792-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77793-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
@@ -104,110 +105,37 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Aim-oriented DAMOS quota auto-tuning uses a single tuning algorithm.
-The algorithm is designed to find a quota value that should be
-consistently kept for achieving the aimed goal for long term.  It is
-useful and reliable at automatically operating systems that have dynamic
-environments in the long term.
+Update the design document for the newly added goal-based quota tuner
+selection feature.
 
-As always, however, no single algorithm fits all.  When the environment
-has static characteristics or there are control towers in not only the
-kernel space but also the user space, the algorithm shows some
-limitations.  In such environments, users want kernel work in a more
-short term deterministic way.  Actually there were at least two reports
-[1,2] of such cases.
+Signed-off-by: SeongJae Park <sj@kernel.org>
+---
+ Documentation/mm/damon/design.rst | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-Extend DAMOS quotas goal to support multiple quota tuning algorithms
-that users can select.  Keep the current algorithm as the default one,
-to not break the old users.  Also give it a name, "consist", as it is
-designed to "consistently" apply the DAMOS action.  And introduce a new
-tuning algorithm, namely "temporal".  It is designed to apply the DAMOS
-action only temporally, in a deterministic way.  In more detail, as long
-as the goal is under-achieved, it uses the maximum quota available.
-Once the goal is over-achieved, it sets the quota zero.
-
-Tests
-=====
-
-I confirmed the feature is working as expected using the latest version
-of DAMON user-space tool, like below.
-
-    $ # start DAMOS for reclaiming memory aiming 30% free memory
-    $ sudo ./damo/damo start --damos_action pageout \
-            --damos_quota_goal_tuner temporal \
-            --damos_quota_goal node_mem_free_bp 30% 0 \
-            --damos_quota_interval 1s \
-            --damos_quota_space 100M
-
-Note that >=3.1.8 version of DAMON user-space tool supports this feature
-(--damos_quota_goal_tuner).  As expected, DAMOS stops reclaiming memory
-as soon as the goal amount of free memory is made.  When 'consist' tuner
-is used, the reclamation was continued even after the goal amount of
-free memory is made, resulting in more than goal amount of free memory,
-as expected.
-
-Patch Sequence
-==============
-
-First four patches implement the features.  Patch 1 extends core API to
-allow multiple tuners and make the current tuner as the default and only
-available tuner, namely 'consist'.  Patch 2 allows future tuners setting
-zero effective quota.  Patch 3 introduces the second tuner, namely
-'temporal'.  Patch 4 further extends DAMON sysfs API to let users use
-that.
-
-Three following patches (patches 5-7) update design, usage, and ABI
-documents, respectively.
-
-Final three patches (patches 8-10) are for adding selftests.  The eighth
-and the ninth patches extend the testing-purpose DAMON sysfs control
-helper and DAMON status dumping tool to support the newly added feature.
-The tenth patch extends the existing online commit test to cover the new
-feature.
-
-References
-==========
-
-[1] https://lore.kernel.org/CALa+Y17__d=ZsM1yX+MXx0ozVdsXnFqF4p0g+kATEitrWyZFfg@mail.gmail.com
-[2] https://lore.kernel.org/20260204022537.814-1-yunjeong.mun@sk.com
-
-Changelog
-=========
-
-Changes from RFC v1
-(https://lore.kernel.org/20260212062314.69961-1-sj@kernel.org)
-- Add selftest for goal_tuner commitment.
-- Set goal tuner inside damon_new_scheme().
-- Allow zero size effective size quota.
-- Update the ABI document.
-- Wordsmith change descriptions.
-
-SeongJae Park (10):
-  mm/damon/core: introduce damos_quota_goal_tuner
-  mm/damon/core: allow quota goals set zero effective size quota
-  mm/damon/core: introduce DAMOS_QUOTA_GOAL_TUNER_TEMPORAL
-  mm/damon/sysfs-schemes: implement quotas->goal_tuner file
-  Docs/mm/damon/design: document the goal-based quota tuner selections
-  Docs/admin-guide/mm/damon/usage: document goal_tuner sysfs file
-  Docs/ABI/damon: update for goal_tuner
-  selftests/damon/_damon_sysfs: support goal_tuner setup
-  selftests/damon/drgn_dump_damon_status: support quota goal_tuner
-    dumping
-  selftests/damon/sysfs.py: test goal_tuner commit
-
- .../ABI/testing/sysfs-kernel-mm-damon         |  6 ++
- Documentation/admin-guide/mm/damon/usage.rst  | 16 +++--
- Documentation/mm/damon/design.rst             | 12 ++++
- include/linux/damon.h                         | 11 ++++
- mm/damon/core.c                               | 60 +++++++++++++++----
- mm/damon/sysfs-schemes.c                      | 58 ++++++++++++++++++
- tools/testing/selftests/damon/_damon_sysfs.py | 12 +++-
- .../selftests/damon/drgn_dump_damon_status.py |  1 +
- tools/testing/selftests/damon/sysfs.py        |  7 +++
- 9 files changed, 166 insertions(+), 17 deletions(-)
-
-
-base-commit: bbba4ca6322dd5c4f66fe31b1b374f77a8d2b2e5
+diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+index dd64f5d7f3193..28d932ceaf7ed 100644
+--- a/Documentation/mm/damon/design.rst
++++ b/Documentation/mm/damon/design.rst
+@@ -564,6 +564,18 @@ aggressiveness (the quota) of the corresponding scheme.  For example, if DAMOS
+ is under achieving the goal, DAMOS automatically increases the quota.  If DAMOS
+ is over achieving the goal, it decreases the quota.
+ 
++There are two such tuning algorithms that users can select as they need.
++
++- ``consist``: A proportional feedback loop based algorithm.  Tries to find an
++  optimum quota that should be consistently kept, to keep achieving the goal.
++  Useful for kernel-only operation on dynamic and long-running environments.
++  This is the default selection.  If unsure, use this.
++- ``temporal``: More straightforward algorithm.  Tries to achieve the goal as
++  fast as possible, using maximum allowed quota, but only for a temporal short
++  time.  When the quota is under-achieved, this algorithm keeps tuning quota to
++  a maximum allowed one.  Once the quota is [over]-achieved, this sets the
++  quota zero.  Useful for deterministic control required environments.
++
+ The goal can be specified with five parameters, namely ``target_metric``,
+ ``target_value``, ``current_value``, ``nid`` and ``path``.  The auto-tuning
+ mechanism tries to make ``current_value`` of ``target_metric`` be same to
 -- 
 2.47.3
 
