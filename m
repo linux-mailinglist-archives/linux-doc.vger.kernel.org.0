@@ -1,57 +1,57 @@
-Return-Path: <linux-doc+bounces-78104-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78110-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8IXjBugGqmldJwEAu9opvQ
-	(envelope-from <linux-doc+bounces-78104-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 23:42:48 +0100
+	id 8BgHBDoPqmngKQEAu9opvQ
+	(envelope-from <linux-doc+bounces-78110-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 00:18:18 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F83B218FCC
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 23:42:47 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64BD92193A0
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 00:18:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3D457303C63E
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 22:42:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1ACBA3031CFA
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 23:18:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48478364059;
-	Thu,  5 Mar 2026 22:42:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ABFF6366076;
+	Thu,  5 Mar 2026 23:18:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="BYOKglcj"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="esXiOeWq"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 174673630B4;
-	Thu,  5 Mar 2026 22:42:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C70F366043;
+	Thu,  5 Mar 2026 23:18:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772750550; cv=none; b=n6og+VB/sRrWEoljCKnIw0fowaRWXM9uGX3j6hRCVk43dNmA9mepwNPtzszz8UC5cmiPcA0/xdwrLRwIEqb6f6cKGhuMXu8q50y3GzLtGtlUjN/SuTFXHL3zLfHhKiyrE5lMdpMxgIPN2JbP45F8mnvnWX9BDNqO+I1T2ZC1Ndw=
+	t=1772752695; cv=none; b=qhY9B1ePxk+TekIoaigIvBrcN6OroOzq+uxh/Cx5tHt/OSVlO5GTZaYsecc7vkEuC7yYN+T6Io/VaTwfYoyWkLGdjfytxhxqH3QDC3lguAXOIxcTFhwdQ7DzC+h9d/ulJ8F2ficA1HSJKFDyWRoBLAS3vFc2cPnuKuOprk8Ro1g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772750550; c=relaxed/simple;
-	bh=DUPJexJleYu6Vg98FCtp1+b79Qn3pqAQMBWcGBTDvIk=;
+	s=arc-20240116; t=1772752695; c=relaxed/simple;
+	bh=NRe5SxlQmfuV+FT3Qn+JDIdyoBHSSd5ZOmTifbSFqzc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=jGA5ePUYlIgcuJ2RthNNetSI/dBXhihWTh770Loi7eXYMJJC2j+JJAIY4RxI1K+aQK1rM79mzz6HlhR6PS8+7P2a9S36fGFXeMk/rq/OSQRn1BmL3rmvqULnmmWuQ1RPKJWrYbbRjig/TLQInePancRJqXHDgQaReJS8YV66CYY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=BYOKglcj; arc=none smtp.client-ip=198.137.202.136
+	 In-Reply-To:Content-Type; b=DGxlqlumMB56zuMLD363OrgfPKyNf/d7iQzVhEQpcROoGQE2R0+8eKEPt6KNs+3JA6pQO8AP6hOShubg3l+JEVdEh3cCE2Da6IgqlxieM9zgeVmIfv07E34UqThFZv0cxBIt4DG2FYuwPPz4Ea8UY3CTXSKAKxZYeIkkEjmVPsw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=esXiOeWq; arc=none smtp.client-ip=198.137.202.136
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
 Received: from [172.27.2.41] (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
 	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 625MfD7K4029791
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 625MjSjf4038010
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Thu, 5 Mar 2026 14:41:14 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 625MfD7K4029791
+	Thu, 5 Mar 2026 14:45:34 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 625MjSjf4038010
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026022301; t=1772750477;
-	bh=02DuAYCD8u99FixTc+hp/jQH56usQlch2YTa0ti+kbY=;
+	s=2026022301; t=1772750739;
+	bh=QG866fBkY0ZnxCOc+cBgWHy9UMsZa1nYrHc16jg5Tew=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=BYOKglcjtuOiV/jU+RfIjH6a8mCGIR48x32UZb8B0l99Kw7xKKWi821L1kWcgsb+A
-	 ZIs5zjG9RwHsFWytpudYbhjqI2ZUyULhzd9W2VcdjCOC9x0kBIAfNCfUrGiH3eJWw2
-	 KRGgrx3FAHuF8CCWa5t/7EaU2eN9VbuQUM5FPLDVnoTKg9YwiXkEvL/yKDYSclRcPv
-	 hDYYcM9Ey3VesSCyiiRIE+p5V6m6BC2GQ25I71E1Dbx/7ZDb6I19H3yuxX9A+A/zTM
-	 eJaJnqiJyF5Hp1WzM8OMMoMsc4YFNkePsdLpoX8Cm4TIzR4MqXZhQiJWsnlpop2iqP
-	 CN9djAABzshVQ==
-Message-ID: <ee1a171a-ec3c-43ee-8a32-2b7a2fd5795d@zytor.com>
-Date: Thu, 5 Mar 2026 14:41:08 -0800
+	b=esXiOeWqjfNFHGo3pQKjaiJxtPy5zx1wXYY8ajZjjgfY6R1UfNc4fu2me9TJPSezf
+	 la/c/ase0urh9PZag2OK8odjKrQmEVrqauY0zPcC/pBkvFYiGKa70eH/WOq2+y9wd4
+	 Bgbk8YZm8vHi+6wQoD2qcgK4s2feTvLVfRzi5SvqXGTrFWK3BhRkPcsmXUXBGYDBn2
+	 SpPdoij5iUuQxQe0fMOC+HiEMM/EjNB6sXCpjILCqMTRlYd+vKeWFRVFAdgbd/gPiw
+	 KO1cI4nb3zXj2Nl+mLH06e3iLhbqhMEQdS9bxR4a2ldcfymKs7hWTlJe7x5XMQ8V9L
+	 GaGsAih/kruHw==
+Message-ID: <7b379620-07a7-4af6-b95f-c2011d2e456d@zytor.com>
+Date: Thu, 5 Mar 2026 14:45:22 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,8 +59,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] x86/traps: Consolidate user fixups in the #GP
- handler
+Subject: Re: [PATCH v2 3/5] x86/vsyscall: Restore vsyscall=xonly mode under
+ LASS
 To: Sohil Mehta <sohil.mehta@intel.com>,
         Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
         Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
@@ -78,99 +78,185 @@ Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
         Maciej Wieczor-Retman <m.wieczorretman@pm.me>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <20260305214026.3887452-1-sohil.mehta@intel.com>
- <20260305214026.3887452-3-sohil.mehta@intel.com>
+ <20260305214026.3887452-4-sohil.mehta@intel.com>
 From: "H. Peter Anvin" <hpa@zytor.com>
-In-Reply-To: <20260305214026.3887452-3-sohil.mehta@intel.com>
+In-Reply-To: <20260305214026.3887452-4-sohil.mehta@intel.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 6F83B218FCC
+X-Rspamd-Queue-Id: 64BD92193A0
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026022301];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-78104-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[zytor.com:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78110-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[22];
+	DKIM_TRACE(0.00)[zytor.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
 On 2026-03-05 13:40, Sohil Mehta wrote:
-> Move the UMIP exception fixup under the common "if (user_mode(regs))"
-> condition where the rest of user mode fixups reside. Also, move the UMIP
-> feature check into its fixup function to keep the calling code
-> consistent and clean.
+> Background
+> ==========
+> The vsyscall page is located in the high/kernel part of the address
+> space. Prior to LASS, a vsyscall page access from userspace would always
+> generate a #PF. The kernel emulates the accesses in the #PF handler and
+> returns the appropriate values to userspace.
 > 
-> No functional change intended.
+> Vsyscall emulation has two modes of operation, specified by the
+> vsyscall={xonly, emulate} kernel command line option. The vsyscall page
+> behaves as execute-only in XONLY mode or read-execute in EMULATE mode.
+> XONLY mode is the default and the only one expected to be commonly used.
+> The EMULATE mode has been deprecated since 2022 and is considered
+> insecure.
 > 
-> Suggested-by: Dave Hansen <dave.hansen@intel.com>
+> With LASS, a vsyscall page access triggers a #GP instead of a #PF.
+> Currently, LASS is only enabled when all vsyscall modes are disabled.
+> 
+> LASS with XONLY mode
+> ====================
+> Now add support for LASS specifically with XONLY vsyscall emulation. For
+> XONLY mode, all that is needed is the faulting RIP, which is trivially
+> available regardless of the type of fault. Reuse the #PF emulation code
+> during the #GP when the fault address points to the vsyscall page.
+> 
+> As multiple fault handlers will now be using the emulation code, add a
+> sanity check to ensure that the fault truly happened in 64-bit user
+> mode.
+> 
+> LASS with EMULATE mode
+> ======================
+> Supporting vsyscall=emulate with LASS is much harder because the #GP
+> doesn't provide enough error information (such as PFEC and CR2 as in
+> case of a #PF). So, complex instruction decoding would be required to
+> emulate this mode in the #GP handler.
+> 
+> This isn't worth the effort as remaining users of EMULATE mode can be
+> reasonably assumed to be niche users, who are already trading off
+> security for compatibility. LASS and vsyscall=emulate will be kept
+> mutually exclusive for simplicity.
+> 
 > Signed-off-by: Sohil Mehta <sohil.mehta@intel.com>
-> Acked-by: Dave Hansen <dave.hansen@linux.intel.com>
 > ---
 > v2:
->  - No change
+>  - Rewrote the commit message
 > ---
->  arch/x86/kernel/traps.c | 8 +++-----
->  arch/x86/kernel/umip.c  | 3 +++
->  2 files changed, 6 insertions(+), 5 deletions(-)
+>  arch/x86/entry/vsyscall/vsyscall_64.c | 22 +++++++++++++++++-----
+>  arch/x86/include/asm/vsyscall.h       |  6 ++++++
+>  arch/x86/kernel/traps.c               |  4 ++++
+>  3 files changed, 27 insertions(+), 5 deletions(-)
 > 
+> diff --git a/arch/x86/entry/vsyscall/vsyscall_64.c b/arch/x86/entry/vsyscall/vsyscall_64.c
+> index 5c6559c37c5b..b34c8763d5e9 100644
+> --- a/arch/x86/entry/vsyscall/vsyscall_64.c
+> +++ b/arch/x86/entry/vsyscall/vsyscall_64.c
+> @@ -23,7 +23,7 @@
+>   * soon be no new userspace code that will ever use a vsyscall.
+>   *
+>   * The code in this file emulates vsyscalls when notified of a page
+> - * fault to a vsyscall address.
+> + * fault or a general protection fault to a vsyscall address.
+>   */
+>  
+>  #include <linux/kernel.h>
+> @@ -118,10 +118,9 @@ static bool __emulate_vsyscall(struct pt_regs *regs, unsigned long address)
+>  	long ret;
+>  	unsigned long orig_dx;
+>  
+> -	/*
+> -	 * No point in checking CS -- the only way to get here is a user mode
+> -	 * trap to a high address, which means that we're in 64-bit user code.
+> -	 */
+> +	/* Confirm that the fault happened in 64-bit user mode */
+> +	if (!user_64bit_mode(regs))
+> +		return false;
+>  
+>  	if (vsyscall_mode == NONE) {
+>  		warn_bad_vsyscall(KERN_INFO, regs,
+> @@ -282,6 +281,19 @@ bool emulate_vsyscall_pf(unsigned long error_code, struct pt_regs *regs,
+>  	return __emulate_vsyscall(regs, address);
+>  }
+>  
+> +bool emulate_vsyscall_gp(struct pt_regs *regs)
+> +{
+> +	/* Without LASS, vsyscall accesses are expected to generate a #PF */
+> +	if (!cpu_feature_enabled(X86_FEATURE_LASS))
+> +		return false;
+> +
+> +	/* Emulate only if the RIP points to the vsyscall address */
+> +	if (!is_vsyscall_vaddr(regs->ip))
+> +		return false;
+> +
+> +	return __emulate_vsyscall(regs, regs->ip);
+> +}
+> +
+>  /*
+>   * A pseudo VMA to allow ptrace access for the vsyscall page.  This only
+>   * covers the 64bit vsyscall page now. 32bit has a real VMA now and does
+> diff --git a/arch/x86/include/asm/vsyscall.h b/arch/x86/include/asm/vsyscall.h
+> index f34902364972..538053b1656a 100644
+> --- a/arch/x86/include/asm/vsyscall.h
+> +++ b/arch/x86/include/asm/vsyscall.h
+> @@ -15,6 +15,7 @@ extern void set_vsyscall_pgtable_user_bits(pgd_t *root);
+>   * Returns true if handled.
+>   */
+>  bool emulate_vsyscall_pf(unsigned long error_code, struct pt_regs *regs, unsigned long address);
+> +bool emulate_vsyscall_gp(struct pt_regs *regs);
+>  #else
+>  static inline void map_vsyscall(void) {}
+>  static inline bool emulate_vsyscall_pf(unsigned long error_code,
+> @@ -22,6 +23,11 @@ static inline bool emulate_vsyscall_pf(unsigned long error_code,
+>  {
+>  	return false;
+>  }
+> +
+> +static inline bool emulate_vsyscall_gp(struct pt_regs *regs)
+> +{
+> +	return false;
+> +}
+>  #endif
+>  
+>  /*
 > diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
-> index 4dbff8ef9b1c..614a281bd419 100644
+> index 614a281bd419..0ca3912ecb7f 100644
 > --- a/arch/x86/kernel/traps.c
 > +++ b/arch/x86/kernel/traps.c
-> @@ -921,11 +921,6 @@ DEFINE_IDTENTRY_ERRORCODE(exc_general_protection)
+> @@ -70,6 +70,7 @@
+>  #include <asm/tdx.h>
+>  #include <asm/cfi.h>
+>  #include <asm/msr.h>
+> +#include <asm/vsyscall.h>
 >  
->  	cond_local_irq_enable(regs);
->  
-> -	if (static_cpu_has(X86_FEATURE_UMIP)) {
-> -		if (user_mode(regs) && fixup_umip_exception(regs))
-> -			goto exit;
-> -	}
-> -
->  	if (v8086_mode(regs)) {
->  		local_irq_enable();
->  		handle_vm86_fault((struct kernel_vm86_regs *) regs, error_code);
-> @@ -940,6 +935,9 @@ DEFINE_IDTENTRY_ERRORCODE(exc_general_protection)
->  		if (fixup_vdso_exception(regs, X86_TRAP_GP, error_code, 0))
+>  #ifdef CONFIG_X86_64
+>  #include <asm/x86_init.h>
+> @@ -938,6 +939,9 @@ DEFINE_IDTENTRY_ERRORCODE(exc_general_protection)
+>  		if (fixup_umip_exception(regs))
 >  			goto exit;
 >  
-> +		if (fixup_umip_exception(regs))
+> +		if (emulate_vsyscall_gp(regs))
 > +			goto exit;
 > +
 >  		gp_user_force_sig_segv(regs, X86_TRAP_GP, error_code, desc);
 >  		goto exit;
 >  	}
-> diff --git a/arch/x86/kernel/umip.c b/arch/x86/kernel/umip.c
-> index d432f3824f0c..3ce99cbcf187 100644
-> --- a/arch/x86/kernel/umip.c
-> +++ b/arch/x86/kernel/umip.c
-> @@ -354,6 +354,9 @@ bool fixup_umip_exception(struct pt_regs *regs)
->  	void __user *uaddr;
->  	struct insn insn;
->  
-> +	if (!cpu_feature_enabled(X86_FEATURE_UMIP))
-> +		return false;
-> +
->  	if (!regs)
->  		return false;
->  
 
 Reviewed-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 
