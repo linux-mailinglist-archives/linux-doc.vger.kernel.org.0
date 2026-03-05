@@ -1,282 +1,136 @@
-Return-Path: <linux-doc+bounces-77922-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77925-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yA+6HfEgqWkL2gAAu9opvQ
-	(envelope-from <linux-doc+bounces-77922-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:21:37 +0100
+	id CP8sIZYnqWmr2gAAu9opvQ
+	(envelope-from <linux-doc+bounces-77925-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:49:58 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57A8620B77F
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:21:32 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E24FA20BDFD
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:49:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BD8C33024929
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 06:21:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9A775308957D
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 06:48:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6DBC82882C5;
-	Thu,  5 Mar 2026 06:21:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D75D2F12AE;
+	Thu,  5 Mar 2026 06:48:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="BIE4dWJW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from cosmicgizmosystems.com (cosmicgizmosystems.com [63.249.102.155])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BC8429B22F;
-	Thu,  5 Mar 2026 06:21:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=63.249.102.155
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8B8630B514;
+	Thu,  5 Mar 2026 06:48:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772691688; cv=none; b=uCjnfT/3BCOn9VMt0+HIAtPE0X1OnYAVlYoSlacTQCNbPaKHmM1pKZOKcylMrzrN2ebPat9nc2HawAUVSPwx2M8mSdobS2DSKiL8WScKWGJ/WvqCVw2seY44GiBMv4jEzyLqA3WcxFXYNFWhrx8kAQUuS5J9kp61z4SPynHiVgo=
+	t=1772693289; cv=none; b=PqeZi1bJXVsiq3jBaNgeyTmiL5Zh+VAgsbXRwUTJbbnbDK4YTtYE4qHm0O+SmXE9Kgh29rzyri/ctCEtH2g42vbv2KmIsiH42Mz7aDn/W7WputjHTjm35hdul5yOcrK5wq4FyavW6Sui+F09jzhZqaOWkJArGvcHP2F7Vq5rRaA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772691688; c=relaxed/simple;
-	bh=F7C4BRk18D0QQDUoxo6NttmALDgv2k9ynY+QQZdT1eU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=POhNbmwr37Gip+lYFSCrRnqiqp5VmGxsYj78tKnhBiG7Bc2KkMFJA662tA3F4ryb5xmd64OghPNKDGMqIU5GO1lKjtnMVgh6vYwrJcr1DE/hdwd1ThyQrFrsSE5ZYFlVkz9l0EC93tyDBJmTu5qLcTaec8RbYAGwxXH6DNzBMp4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=cosmicgizmosystems.com; spf=pass smtp.mailfrom=cosmicgizmosystems.com; arc=none smtp.client-ip=63.249.102.155
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=cosmicgizmosystems.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cosmicgizmosystems.com
-Received: from [10.0.0.100] (unknown [76.144.184.162])
-	by host11.cruzio.com (Postfix) with ESMTPSA id DC7B81F0DB57;
-	Wed,  4 Mar 2026 22:13:33 -0800 (PST)
-Message-ID: <b59da54a-9c80-4212-a337-c5ea98da52d1@cosmicgizmosystems.com>
-Date: Wed, 4 Mar 2026 22:13:32 -0800
+	s=arc-20240116; t=1772693289; c=relaxed/simple;
+	bh=nAIMGSgYi9XRRLBSfTYPT5G1klATEwCnOUQgYY1b2Ns=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
+	 MIME-Version:Content-Type; b=EO6pRTSjLhuTqSmrW710P7c1jHCM+RrQl6hh3n4rFQsGA20D8ivaq5GlwStPO1wXCcfFWKQqyCOypIXR/2c6BwSdtg7DS3pcL1mY2XVMZq7+xtparMjTuwQ+9sAiyHHVTpxg7t33BuzDQd3tbr43kER705uJd4tQDPaWg7wMJmI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=BIE4dWJW; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 6256VJDP2443815
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+	Wed, 4 Mar 2026 22:31:19 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 6256VJDP2443815
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026022301; t=1772692283;
+	bh=nAIMGSgYi9XRRLBSfTYPT5G1klATEwCnOUQgYY1b2Ns=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+	b=BIE4dWJWCh3DjuzfRW8Y/9pMLOtV/KEhFRy412Mho9HQu/qi6USP7heUwYyuBOXOz
+	 I5k3A+UimAhK75KEUwnTxvgrSyoFC+Q0/jZMiVwPKYz/jmP3zyIQkUF+snBu5wlBcs
+	 bGi8WH4B+BGTMeaJbZze51RbF8iQA9eIpA+bc3vmZ+wacKdLC4tZsSeofeFz7XEmJD
+	 wPjmjgZStBNl/6MWU5nIqPxt0ijThGVyDQALmpCM3X4WxEAW4NOdyyUFJkBp/+PXHU
+	 G9QUT//tMJ4nDETVxOof0MN6sNPlIpFnkcDYgPjfmf+j7IkfEvYzm9BKNTS4d80kdj
+	 wiBdHPUOTTLbw==
+Date: Wed, 04 Mar 2026 22:31:13 -0800
+From: "H. Peter Anvin" <hpa@zytor.com>
+To: Dave Hansen <dave.hansen@intel.com>, Sohil Mehta <sohil.mehta@intel.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
+CC: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Kiryl Shutsemau <kas@kernel.org>,
+        Brendan Jackman <jackmanb@google.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Nam Cao <namcao@linutronix.de>, Cedric Xing <cedric.xing@intel.com>,
+        Rick Edgecombe <rick.p.edgecombe@intel.com>,
+        Andrew Cooper <andrew.cooper3@citrix.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Maciej Wieczor-Retman <m.wieczorretman@pm.me>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/5] x86/vsyscall: Add vsyscall emulation for #GP
+User-Agent: K-9 Mail for Android
+In-Reply-To: <2e3b1765-ae56-4642-8a94-61805a64497e@intel.com>
+References: <20260219233600.154313-1-sohil.mehta@intel.com> <20260219233600.154313-4-sohil.mehta@intel.com> <1383b357-2a10-4b36-afb9-42e2724faa31@intel.com> <faf58379-36df-4535-8c17-bcfe838ae4c4@intel.com> <3212161f-64b2-4825-8bcc-c36201ab6589@zytor.com> <eeec4ac0-be05-4a4e-a9c7-8716de50cfbb@intel.com> <2e3b1765-ae56-4642-8a94-61805a64497e@intel.com>
+Message-ID: <FB1827F9-69C9-4E79-90E6-EABDD7F34445@zytor.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/9] ALSA: usb-audio: Support string-descriptor-based
- quirk table entry
-To: Rong Zhang <i@rong.moe>, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Cryolitia PukNgae <cryolitia@uniontech.com>,
- Arun Raghavan <arunr@valvesoftware.com>, linux-sound@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Icenowy Zheng <uwu@icenowy.me>
-References: <20260301213726.428505-1-i@rong.moe>
- <20260301213726.428505-5-i@rong.moe>
-Content-Language: en-US
-From: Terry Junge <linuxsound@cosmicgizmosystems.com>
-In-Reply-To: <20260301213726.428505-5-i@rong.moe>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 57A8620B77F
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: E24FA20BDFD
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.46 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026022301];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77922-lists,linux-doc=lfdr.de];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_NA(0.00)[cosmicgizmosystems.com];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_FROM(0.00)[bounces-77925-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_FAIL(0.00)[rong.moe:query timed out];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linuxsound@cosmicgizmosystems.com,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	DKIM_TRACE(0.00)[zytor.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.991];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	R_DKIM_NA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,cosmicgizmosystems.com:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:email,zytor.com:dkim,zytor.com:mid]
 X-Rspamd-Action: no action
 
+On March 4, 2026 5:45:48 PM PST, Dave Hansen <dave=2Ehansen@intel=2Ecom> wr=
+ote:
+>On 3/4/26 16:10, Sohil Mehta wrote:
+>> Vsyscall emulation has two modes of operation, specified by the
+>> vsyscall=3D{xonly, emulate} kernel command line option=2E The vsyscall =
+page
+>> is marked as execute-only in XONLY mode or read-execute in EMULATE mode=
+=2E
+>
+>Is it really "marked as execute only"? We don't have a real execute-only
+>paging permission on x86, the closest we've got is memory marked with a
+>pkey that's got the AccessDisable bit set=2E
+>
+>I think it's _called_ execute-only because the kernel makes it behave
+>like execute-only memory when it's handling the page fault=2E But I dobn'=
+t
+>think it is super accurate to say it is "marked" as execute-only=2E
+>
+>The rest of it looks great to me, though=2E
 
-
-On 3/1/26 1:37 PM, Rong Zhang wrote:
-> Some quirky devices do not have a unique VID/PID. Matching them using
-> DEVICE_FLG() or VENDOR_FLG() may result in conflicts.
-> 
-> Add two new macros DEVICE_STRING_FLG() and VENDOR_STRING_FLG() to match
-> USB string descriptors (manufacturer and/or product) in addition to VID
-> and/or PID, so that we can deconflict these devices safely.
-> 
-> No functional change intended.
-> 
-> Signed-off-by: Rong Zhang <i@rong.moe>
-> ---
->  sound/usb/quirks.c | 82 ++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 82 insertions(+)
-> 
-> diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-> index c6a78efbcaa30..495dd46ce515c 100644
-> --- a/sound/usb/quirks.c
-> +++ b/sound/usb/quirks.c
-> @@ -2,8 +2,10 @@
->  /*
->   */
->  
-> +#include <linux/build_bug.h>
->  #include <linux/init.h>
->  #include <linux/slab.h>
-> +#include <linux/string.h>
->  #include <linux/usb.h>
->  #include <linux/usb/audio.h>
->  #include <linux/usb/midi.h>
-> @@ -2135,16 +2137,39 @@ void snd_usb_audioformat_attributes_quirk(struct snd_usb_audio *chip,
->  /*
->   * driver behavior quirk flags
->   */
-> +struct usb_string_match {
-> +	const char *manufacturer;
-> +	const char *product;
-> +};
-> +
->  struct usb_audio_quirk_flags_table {
->  	u32 id;
->  	u32 flags;
-> +	const struct usb_string_match *usb_string_match;
->  };
->  
->  #define DEVICE_FLG(vid, pid, _flags) \
->  	{ .id = USB_ID(vid, pid), .flags = (_flags) }
->  #define VENDOR_FLG(vid, _flags) DEVICE_FLG(vid, 0, _flags)
->  
-> +/* Use as a last resort if using DEVICE_FLG() is prone to VID/PID conflicts. */
-> +#define DEVICE_STRING_FLG(vid, pid, _manufacturer, _product, _flags)	\
-> +{									\
-> +	.id = USB_ID(vid, pid),						\
-> +	.usb_string_match = &(const struct usb_string_match) {		\
-> +		.manufacturer = _manufacturer,				\
-> +		.product = _product,					\
-> +	},								\
-> +	.flags = (_flags),						\
-> +}
-> +
-> +/* Use as a last resort if using VENDOR_FLG() is prone to VID conflicts. */
-> +#define VENDOR_STRING_FLG(vid, _manufacturer, _flags)			\
-> +	DEVICE_STRING_FLG(vid, 0, _manufacturer, NULL, _flags)
-> +
->  static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
-> +	/* Device and string descriptor matches */
-> +
->  	/* Device matches */
->  	DEVICE_FLG(0x001f, 0x0b21, /* AB13X USB Audio */
->  		   QUIRK_FLAG_FORCE_IFACE_RESET | QUIRK_FLAG_IFACE_DELAY),
-> @@ -2414,6 +2439,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
->  	DEVICE_FLG(0x534d, 0x2109, /* MacroSilicon MS2109 */
->  		   QUIRK_FLAG_ALIGN_TRANSFER),
->  
-> +	/* Vendor and string descriptor matches */
-> +
->  	/* Vendor matches */
->  	VENDOR_FLG(0x045e, /* MS Lifecam */
->  		   QUIRK_FLAG_GET_SAMPLE_RATE),
-> @@ -2558,14 +2585,69 @@ void snd_usb_apply_flag_dbg(const char *reason,
->  	}
->  }
->  
-> +#define USB_STRING_SIZE 128
-> +
-> +static inline int snd_usb_get_strings(struct snd_usb_audio *chip,
-> +				      char *manufacturer, char *product)
-
-Hi Rong,
-
-This function is not necessary.
-Both the manufacturer and product strings can be found in struct usb_device.
-
-If the device has a manufacturer string then chip->dev->manufacturer points to it.
-Otherwise chip->dev->manufacturer is null.
-
-Likewise, chip->dev->product points to the product string if there is one, else null.
-
-> +{
-> +	int ret;
-> +
-> +	if (manufacturer) {
-> +		ret = usb_string(chip->dev, chip->dev->descriptor.iManufacturer,
-> +				 manufacturer, USB_STRING_SIZE);
-> +		if (ret < 0) {
-> +			usb_audio_warn(chip, "failed to get manufacturer string: %d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
-> +	if (product) {
-> +		ret = usb_string(chip->dev, chip->dev->descriptor.iProduct,
-> +				 product, USB_STRING_SIZE);
-> +		if (ret < 0) {
-> +			usb_audio_warn(chip, "failed to get product string: %d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
-> +	return 1; /* ok */
-> +}
-> +
->  void snd_usb_init_quirk_flags_table(struct snd_usb_audio *chip)
->  {
->  	const struct usb_audio_quirk_flags_table *p;
-> +	char manufacturer[USB_STRING_SIZE];
-> +	char product[USB_STRING_SIZE];
-> +	int got_usb_strings = 0; /* <0: error, 0: pending, >0: ok */
->  
->  	for (p = quirk_flags_table; p->id; p++) {
->  		if (chip->usb_id == p->id ||
->  		    (!USB_ID_PRODUCT(p->id) &&
->  		     USB_ID_VENDOR(chip->usb_id) == USB_ID_VENDOR(p->id))) {
-> +			if (!p->usb_string_match)
-> +				goto apply; /* DEVICE_FLG or VENDOR_FLG */
-> +
-> +			/* DEVICE_STRING_FLG or VENDOR_STRING_FLG */
-> +			if (!got_usb_strings) {
-> +				got_usb_strings = snd_usb_get_strings(chip,
-> +					p->usb_string_match->manufacturer ? manufacturer : NULL,
-> +					p->usb_string_match->product ? product : NULL);
-> +			}
-
-No need to get the strings as they can be found at chip->dev->manufacturer and chip->dev->product
-if the device declared them.
-
-> +
-> +			BUILD_BUG_ON(!got_usb_strings);
-> +
-> +			if (got_usb_strings < 0)
-> +				continue;
-> +
-> +			if (p->usb_string_match->manufacturer &&
-> +			    strcmp(p->usb_string_match->manufacturer, manufacturer))
-> +				continue;
-
-Examples and intent:
-
-DEVICE_STRING_FLG(vid, pid, "acme", "alpha", flags) // match vid, pid, "acme", and "alpha" strings
-DEVICE_STRING_FLG(vid, pid, "acme", "", flags) // match vid, pid, "acme", and device has no product string
-DEVICE_STRING_FLG(vid, pid, "acme", 0, flags) // match vid, pid, "acme", and any product string
-DEVICE_STRING_FLG(vid, pid, 0, "alpha", flags) // match vid, pid, any manufacturer string, and "alpha"
-DEVICE_STRING_FLG(vid, pid, "", "alpha", flags) // match vid, pid, no manufacturer string, and "alpha"
-DEVICE_STRING_FLG(vid, pid, "", "", flags) // match vid, pid, no manufacturer, and no product strings
-
-This test would change to something like
-
-	if (p->usb_string_match->manufacturer &&
-	    strcmp(p->usb_string_match->manufacturer, chip->dev->manufacturer ? chip->dev->manufacturer : ""))
-		continue; 
-
-> +
-> +			if (p->usb_string_match->product &&
-> +			    strcmp(p->usb_string_match->product, product))
-> +				continue;
-
-Same here but product instead of manufacturer.
-
-Thanks,
-Terry
-
-> +
-> +apply:
->  			snd_usb_apply_flag_dbg("builtin table", chip, p->flags);
->  			chip->quirk_flags |= p->flags;
->  			return;
-
+It's not marked as anything; it is in fact not present=2E
 
