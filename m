@@ -1,63 +1,62 @@
-Return-Path: <linux-doc+bounces-77977-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77981-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CCOHEVeRqWmvAAEAu9opvQ
-	(envelope-from <linux-doc+bounces-77977-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:21:11 +0100
+	id SB4JJ1CSqWmoAAEAu9opvQ
+	(envelope-from <linux-doc+bounces-77981-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:25:20 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A4D42132EA
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:21:10 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 008662134B2
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:25:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 20436301FE6F
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 14:21:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DF96830D36FA
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 14:21:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D22E246BCD;
-	Thu,  5 Mar 2026 14:21:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D521939C643;
+	Thu,  5 Mar 2026 14:21:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="gsYuswA5"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="hy06T9Ch"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23D014F881;
-	Thu,  5 Mar 2026 14:21:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 279212566D3;
+	Thu,  5 Mar 2026 14:21:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772720464; cv=pass; b=YDpchM6dL59Y5fwc4t5X5oZdsMf5iMCHyTV8x+gB+kVy19hLscmZxjiQBoYbqZ9mDQXfdLqTvNuo3TC5xe1t/EZk264FdW96rTyWiXi0F+gUpBamo0Fp0LKSeLLeMX+YAcXAagphw9SC7094jsT14GEDCSwhAtRGQi1b+XiUZvk=
+	t=1772720483; cv=pass; b=nh9WAqFC6fnVtewxUmok6j9trb5E8s5hGml+oQTz7uAfio89cjzk6Gr0PTGRdE2suOxEtywavVD7RJrZs33PHaT2q/lbwjFIk1H9tqIE8HswUCBkAEjD1QAbmaJ70u1PetQe6iB6PyiDM/Fia2YiDH5Apdau8opRJJwv6Sv9Jsc=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772720464; c=relaxed/simple;
-	bh=TL1/vYhV/hWfPZMJ/fXHeOKc0KDESt6NF1boI7LsI8M=;
+	s=arc-20240116; t=1772720483; c=relaxed/simple;
+	bh=aPJ6IvIhz1BgQE3G2/pi+b0hd7MOg80HXrNr1ggjFzc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Lnogej6ZoL1pAY3u3Aem87GLx0JM5HSok5e5tKlE0BIQhZ22w/u0HDu9kxZ5woTrVuu8AuhKq6l4+ZIPY3OsW+PRDAzw2+Ip/d3E9zR2Ok8Pf5wzowDdggyqP7zSm3OdcFJ1WYn3Q1fdNgYOMEbLEFG92NZqc9dmlVIrx/Layt8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=gsYuswA5; arc=pass smtp.client-ip=136.143.188.112
+	 In-Reply-To:To:Cc; b=sxhKImw0mZspCjEg4r74yVw2TCcYuDQbJ4cCOmcY/T7g/FrTkwlvHHTLChcHMARwZ4vJIy0WEG45MLwgooNhTGzPascNM12aB/LBShBAW6l8di/rXImU5stJLF793GfMY3NtlXuLLy5aVefqknNONzbuy3MjHzMCkIN4PbjQ0as=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=hy06T9Ch; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1772720421; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1772720427; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=HKWXVWlukgUsfHVpvCzeBDWSavyCwTbVws71k18RMiy9vIlny2XLjG1vLjE+oTyG1CZ1jbkbRB4Au2gTd00uWXKJcspyeiCpp3Td9s1tbgddj02/7yadwj2ngzK92ib8fzIF1VV5eWny2uPJOKGemdpRL+ZjegLd3i4vIZDBWnc=
+	b=kE1gkYIy4roB7Zqx6C0hPAB8EnLR09rtZFvkeznCqbAa14wqu0BflrUfYIhNbSGQusSGjPuDFijVaxKgYK0JW8NR+9/eEBHMXCEDmBwQhUKsiA8z6PrFW3nVRUNOV3QKADb6PNLxvflHA4QjZaVtPyLUtO83Y6uf/qqS91wgVAs=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1772720421; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=teYdXlpZ3cIFB/KVuvUlCWQ6jKeFsJHbOWV4790/irk=; 
-	b=NJGg/6RGEoGltKaLcNzmijDwCQGqc6ZNSt6VsXrK3kY/8x9aEhQgnZ+Nk/k+HvzmUIAp5zGPeYh0UaiuH/NGR6MYc2n6rU6SNDky5N4RH2pY1pr8/ImrPMfmrqS2i6HghmFvZ6kUrTldhmKbKklW+42ykGAFdBuivrJuakxb+nI=
+	t=1772720427; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=1GYBntpDRl1K9/KJsuLXL9DarNNNt6t+bGGjopojHHU=; 
+	b=jnlP2aLHefduuOf68GW98eMAtIHkXFavv/1MJ9DbyghpJSS72wEQBUEiVijzyBQg3MndgaEafDAuvt2JoANXPoVWC5Iw0qd3H/iAJCjwt/9siP0y/ZMST4iDVVnk6WXGSn6crRbgjTaKvxH5K+dvowBOnJZEyhP2P0rzGg9tDwI=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772720421;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1772720427;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=teYdXlpZ3cIFB/KVuvUlCWQ6jKeFsJHbOWV4790/irk=;
-	b=gsYuswA5DDlXsMWiu2cjXrRi57Zd0zljwVKCZm/DxfgJCdFEfpMTSwsANMNgXBWV
-	bEYTmkBjDsOMV2CxNV68E9e8bzeewES8F2pUTcr7hP4W2323HkUMjtEh89TZYfHOEm+
-	XoSpX0RjcGXcdIGFOHiOS9/onjAK2GWn24c/g0Cs=
-Received: by mx.zohomail.com with SMTPS id 1772720418573978.9095009439815;
-	Thu, 5 Mar 2026 06:20:18 -0800 (PST)
+	bh=1GYBntpDRl1K9/KJsuLXL9DarNNNt6t+bGGjopojHHU=;
+	b=hy06T9ChiZe1ouMxO2gqIcCP8Dx+SjwWGt08Un9yX/uRSAB67wy8ikvum1SznSef
+	QsQg6317b21peo26LGII0GAsvo2fUSMix/AW8aftPVbYfA8tDieAD/Ou66skxOg6viA
+	cfikXI53XmNfr9teCmYZo/45t2nSJL55Vcs7VOpc=
+Received: by mx.zohomail.com with SMTPS id 1772720426504290.57315155882134;
+	Thu, 5 Mar 2026 06:20:26 -0800 (PST)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Thu, 05 Mar 2026 15:19:28 +0100
-Subject: [PATCH v10 02/22] drm/display: hdmi-state-helper: Use default case
- for unsupported formats
+Date: Thu, 05 Mar 2026 15:19:29 +0100
+Subject: [PATCH v10 03/22] drm: Add new general DRM property "color format"
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -66,7 +65,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260305-color-format-v10-2-a58c68a11868@collabora.com>
+Message-Id: <20260305-color-format-v10-3-a58c68a11868@collabora.com>
 References: <20260305-color-format-v10-0-a58c68a11868@collabora.com>
 In-Reply-To: <20260305-color-format-v10-0-a58c68a11868@collabora.com>
 To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
@@ -94,73 +93,383 @@ Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org,
  linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
  linux-doc@vger.kernel.org, 
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, 
+ Werner Sembach <wse@tuxedocomputers.com>, 
+ Andri Yngvason <andri@yngvason.is>, Marius Vlad <marius.vlad@collabora.com>
 X-Mailer: b4 0.14.3
-X-Rspamd-Queue-Id: 4A4D42132EA
+X-Rspamd-Queue-Id: 008662134B2
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
 	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77977-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77981-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[38];
+	RCPT_COUNT_TWELVE(0.00)[41];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[collabora.com:+];
 	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-Switch statements that do not handle all possible values of an
-enumeration will generate a warning during compilation. In preparation
-for adding a COUNT value to the end of the enum, this needs to be dealt
-with.
+Add a new general DRM property named "color format" which can be used by
+userspace to request the display driver to output a particular color
+format.
 
-Add a default case to sink_supports_format_bpc's DRM_OUTPUT_COLOR_FORMAT
-switch statement, and move the log-and-return unknown pixel format
-handling into it.
+Possible options are:
+    - auto (setup by default, driver internally picks the color format)
+    - rgb
+    - ycbcr444
+    - ycbcr422
+    - ycbcr420
 
-No functional change.
+Drivers should advertise from this list which formats they support.
+Together with this list and EDID data from the sink we should be able
+to relay a list of usable color formats to users to pick from.
 
+Co-developed-by: Werner Sembach <wse@tuxedocomputers.com>
+Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
+Co-developed-by: Andri Yngvason <andri@yngvason.is>
+Signed-off-by: Andri Yngvason <andri@yngvason.is>
+Signed-off-by: Marius Vlad <marius.vlad@collabora.com>
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- drivers/gpu/drm/display/drm_hdmi_state_helper.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/drm_atomic_helper.c |   5 ++
+ drivers/gpu/drm/drm_atomic_uapi.c   |  11 ++++
+ drivers/gpu/drm/drm_connector.c     | 108 ++++++++++++++++++++++++++++++++++++
+ include/drm/drm_connector.h         | 104 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 228 insertions(+)
 
-diff --git a/drivers/gpu/drm/display/drm_hdmi_state_helper.c b/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-index 9f3b696aceeb..a0d88701d236 100644
---- a/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-+++ b/drivers/gpu/drm/display/drm_hdmi_state_helper.c
-@@ -541,10 +541,11 @@ sink_supports_format_bpc(const struct drm_connector *connector,
- 		drm_dbg_kms(dev, "YUV444 format supported in that configuration.\n");
+diff --git a/drivers/gpu/drm/drm_atomic_helper.c b/drivers/gpu/drm/drm_atomic_helper.c
+index 26953ed6b53e..b7753454b777 100644
+--- a/drivers/gpu/drm/drm_atomic_helper.c
++++ b/drivers/gpu/drm/drm_atomic_helper.c
+@@ -737,6 +737,11 @@ drm_atomic_helper_check_modeset(struct drm_device *dev,
+ 			if (old_connector_state->max_requested_bpc !=
+ 			    new_connector_state->max_requested_bpc)
+ 				new_crtc_state->connectors_changed = true;
++
++			if (old_connector_state->color_format !=
++			    new_connector_state->color_format)
++				new_crtc_state->connectors_changed = true;
++
+ 		}
  
- 		return true;
--	}
+ 		if (funcs->atomic_check)
+diff --git a/drivers/gpu/drm/drm_atomic_uapi.c b/drivers/gpu/drm/drm_atomic_uapi.c
+index 87de41fb4459..e7ce79bb161e 100644
+--- a/drivers/gpu/drm/drm_atomic_uapi.c
++++ b/drivers/gpu/drm/drm_atomic_uapi.c
+@@ -931,6 +931,15 @@ static int drm_atomic_connector_set_property(struct drm_connector *connector,
+ 		state->privacy_screen_sw_state = val;
+ 	} else if (property == connector->broadcast_rgb_property) {
+ 		state->hdmi.broadcast_rgb = val;
++	} else if (property == connector->color_format_property) {
++		if (val > INT_MAX || !drm_connector_color_format_valid(val)) {
++			drm_dbg_atomic(connector->dev,
++				       "[CONNECTOR:%d:%s] unknown color format %llu\n",
++				       connector->base.id, connector->name, val);
++			return -EINVAL;
++		}
++
++		state->color_format = val;
+ 	} else if (connector->funcs->atomic_set_property) {
+ 		return connector->funcs->atomic_set_property(connector,
+ 				state, property, val);
+@@ -1016,6 +1025,8 @@ drm_atomic_connector_get_property(struct drm_connector *connector,
+ 		*val = state->privacy_screen_sw_state;
+ 	} else if (property == connector->broadcast_rgb_property) {
+ 		*val = state->hdmi.broadcast_rgb;
++	} else if (property == connector->color_format_property) {
++		*val = state->color_format;
+ 	} else if (connector->funcs->atomic_get_property) {
+ 		return connector->funcs->atomic_get_property(connector,
+ 				state, property, val);
+diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_connector.c
+index 47dc53c4a738..e848374dee0b 100644
+--- a/drivers/gpu/drm/drm_connector.c
++++ b/drivers/gpu/drm/drm_connector.c
+@@ -1388,6 +1388,18 @@ static const u32 hdmi_colorspaces =
+ 	BIT(DRM_MODE_COLORIMETRY_DCI_P3_RGB_D65) |
+ 	BIT(DRM_MODE_COLORIMETRY_DCI_P3_RGB_THEATER);
  
--	drm_dbg_kms(dev, "Unsupported pixel format.\n");
--	return false;
++static const u32 hdmi_colorformats =
++	BIT(DRM_OUTPUT_COLOR_FORMAT_RGB444) |
++	BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444) |
++	BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR422) |
++	BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR420);
++
++static const u32 dp_colorformats =
++	BIT(DRM_OUTPUT_COLOR_FORMAT_RGB444) |
++	BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444) |
++	BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR422) |
++	BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR420);
++
+ /*
+  * As per DP 1.4a spec, 2.2.5.7.5 VSC SDP Payload for Pixel Encoding/Colorimetry
+  * Format Table 2-120
+@@ -2940,6 +2952,102 @@ int drm_connector_attach_colorspace_property(struct drm_connector *connector)
+ }
+ EXPORT_SYMBOL(drm_connector_attach_colorspace_property);
+ 
++/**
++ * drm_connector_attach_color_format_property - create and attach color format property
++ * @connector: connector to create the color format property on
++ * @supported_color_formats: bitmask of bit-shifted &enum drm_output_color_format
++ *                           values the connector supports
++ *
++ * Called by a driver to create a color format property. The property is
++ * attached to the connector automatically on success.
++ *
++ * @supported_color_formats should only include color formats the connector
++ * type can actually support.
++ *
++ * Returns:
++ * 0 on success, negative errno on error
++ */
++int drm_connector_attach_color_format_property(struct drm_connector *connector,
++					       unsigned long supported_color_formats)
++{
++	struct drm_device *dev = connector->dev;
++	struct drm_prop_enum_list enum_list[DRM_CONNECTOR_COLOR_FORMAT_COUNT];
++	unsigned int i = 0;
++	unsigned long fmt;
++
++	if (connector->color_format_property)
++		return 0;
++
++	if (!supported_color_formats) {
++		drm_err(dev, "No supported color formats provided on [CONNECTOR:%d:%s]\n",
++			connector->base.id, connector->name);
++		return -EINVAL;
++	}
++
++	if (supported_color_formats & ~GENMASK(DRM_OUTPUT_COLOR_FORMAT_COUNT - 1, 0)) {
++		drm_err(dev, "Unknown color formats provided on [CONNECTOR:%d:%s]\n",
++			connector->base.id, connector->name);
++		return -EINVAL;
++	}
++
++	switch (connector->connector_type) {
++	case DRM_MODE_CONNECTOR_HDMIA:
++	case DRM_MODE_CONNECTOR_HDMIB:
++		if (supported_color_formats & ~hdmi_colorformats) {
++			drm_err(dev, "Color formats not allowed for HDMI on [CONNECTOR:%d:%s]\n",
++				connector->base.id, connector->name);
++			return -EINVAL;
++		}
++		break;
++	case DRM_MODE_CONNECTOR_DisplayPort:
++	case DRM_MODE_CONNECTOR_eDP:
++		if (supported_color_formats & ~dp_colorformats) {
++			drm_err(dev, "Color formats not allowed for DP on [CONNECTOR:%d:%s]\n",
++				connector->base.id, connector->name);
++			return -EINVAL;
++		}
++		break;
++	}
++
++	enum_list[0].name = "AUTO";
++	enum_list[0].type = DRM_CONNECTOR_COLOR_FORMAT_AUTO;
++
++	for_each_set_bit(fmt, &supported_color_formats, DRM_OUTPUT_COLOR_FORMAT_COUNT) {
++		switch (fmt) {
++		case DRM_OUTPUT_COLOR_FORMAT_RGB444:
++			enum_list[++i].type = DRM_CONNECTOR_COLOR_FORMAT_RGB444;
++			break;
++		case DRM_OUTPUT_COLOR_FORMAT_YCBCR444:
++			enum_list[++i].type = DRM_CONNECTOR_COLOR_FORMAT_YCBCR444;
++			break;
++		case DRM_OUTPUT_COLOR_FORMAT_YCBCR422:
++			enum_list[++i].type = DRM_CONNECTOR_COLOR_FORMAT_YCBCR422;
++			break;
++		case DRM_OUTPUT_COLOR_FORMAT_YCBCR420:
++			enum_list[++i].type = DRM_CONNECTOR_COLOR_FORMAT_YCBCR420;
++			break;
++		default:
++			drm_warn(dev, "Unknown supported format %ld on [CONNECTOR:%d:%s]\n",
++				 fmt, connector->base.id, connector->name);
++			continue;
++		}
++		enum_list[i].name = drm_hdmi_connector_get_output_format_name(fmt);
++	}
++
++	connector->color_format_property =
++		drm_property_create_enum(dev, DRM_MODE_PROP_ENUM, "color format",
++					 enum_list, i + 1);
++
++	if (!connector->color_format_property)
++		return -ENOMEM;
++
++	drm_object_attach_property(&connector->base, connector->color_format_property,
++				   DRM_CONNECTOR_COLOR_FORMAT_AUTO);
++
++	return 0;
++}
++EXPORT_SYMBOL(drm_connector_attach_color_format_property);
++
+ /**
+  * drm_connector_atomic_hdr_metadata_equal - checks if the hdr metadata changed
+  * @old_state: old connector state to compare
+diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
+index af8b92d2d5b7..bd549f912b76 100644
+--- a/include/drm/drm_connector.h
++++ b/include/drm/drm_connector.h
+@@ -571,14 +571,102 @@ enum drm_colorspace {
+  *   YCbCr 4:2:2 output format (ie. with horizontal subsampling)
+  * @DRM_OUTPUT_COLOR_FORMAT_YCBCR420:
+  *   YCbCr 4:2:0 output format (ie. with horizontal and vertical subsampling)
++ * @DRM_OUTPUT_COLOR_FORMAT_COUNT:
++ *   Number of valid output color format values in this enum
+  */
+ enum drm_output_color_format {
+ 	DRM_OUTPUT_COLOR_FORMAT_RGB444 = 0,
+ 	DRM_OUTPUT_COLOR_FORMAT_YCBCR444,
+ 	DRM_OUTPUT_COLOR_FORMAT_YCBCR422,
+ 	DRM_OUTPUT_COLOR_FORMAT_YCBCR420,
++	DRM_OUTPUT_COLOR_FORMAT_COUNT,
+ };
+ 
++/**
++ * enum drm_connector_color_format - Connector Color Format Request
++ *
++ * This enum, unlike &enum drm_output_color_format, is used to specify requests
++ * for a specific color format on a connector through the DRM "color format"
++ * property. The difference is that it has an "AUTO" value to specify that
++ * no specific choice has been made.
++ */
++enum drm_connector_color_format {
++	/**
++	 * @DRM_CONNECTOR_COLOR_FORMAT_AUTO: The driver or display protocol
++	 * helpers should pick a suitable color format. All implementations of a
++	 * specific display protocol must behave the same way with "AUTO", but
++	 * different display protocols do not necessarily have the same "AUTO"
++	 * semantics.
++	 *
++	 * For HDMI, "AUTO" picks RGB, but falls back to YCbCr 4:2:0 if the
++	 * bandwidth required for full-scale RGB is not available, or the mode
++	 * is YCbCr 4:2:0-only, as long as the mode and output both support
++	 * YCbCr 4:2:0.
++	 *
++	 * For display protocols other than HDMI, the recursive bridge chain
++	 * format selection picks the first chain of bridge formats that works,
++	 * as has already been the case before the introduction of the "color
++	 * format" property. Non-HDMI bridges should therefore either sort their
++	 * bus output formats by preference, or agree on a unified auto format
++	 * selection logic that's implemented in a common state helper (like
++	 * how HDMI does it).
++	 */
++	DRM_CONNECTOR_COLOR_FORMAT_AUTO = 0,
++
++	/**
++	 * @DRM_CONNECTOR_COLOR_FORMAT_RGB444: RGB output format
++	 */
++	DRM_CONNECTOR_COLOR_FORMAT_RGB444,
++
++	/**
++	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR444: YCbCr 4:4:4 output format (ie.
++	 * not subsampled)
++	 */
++	DRM_CONNECTOR_COLOR_FORMAT_YCBCR444,
++
++	/**
++	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR422: YCbCr 4:2:2 output format (ie.
++	 * with horizontal subsampling)
++	 */
++	DRM_CONNECTOR_COLOR_FORMAT_YCBCR422,
++
++	/**
++	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR420: YCbCr 4:2:0 output format (ie.
++	 * with horizontal and vertical subsampling)
++	 */
++	DRM_CONNECTOR_COLOR_FORMAT_YCBCR420,
++
++	/**
++	 * @DRM_CONNECTOR_COLOR_FORMAT_COUNT: Number of valid connector color
++	 * format values in this enum
++	 */
++	DRM_CONNECTOR_COLOR_FORMAT_COUNT,
++};
++
++/**
++ * drm_connector_color_format_valid - Validate drm_connector_color_format value
++ * @fmt: value to check against all values of &enum drm_connector_color_format
++ *
++ * Checks whether the passed in value of @fmt is one of the allowable values in
++ * &enum drm_connector_color_format.
++ *
++ * Returns: %true if it's a valid value for the enum, %false otherwise.
++ */
++static inline bool __pure
++drm_connector_color_format_valid(enum drm_connector_color_format fmt)
++{
++	switch (fmt) {
++	case DRM_CONNECTOR_COLOR_FORMAT_AUTO:
++	case DRM_CONNECTOR_COLOR_FORMAT_RGB444:
++	case DRM_CONNECTOR_COLOR_FORMAT_YCBCR444:
++	case DRM_CONNECTOR_COLOR_FORMAT_YCBCR422:
++	case DRM_CONNECTOR_COLOR_FORMAT_YCBCR420:
++		return true;
 +	default:
-+		drm_dbg_kms(dev, "Unsupported pixel format.\n");
 +		return false;
 +	}
- }
++}
++
+ const char *
+ drm_hdmi_connector_get_output_format_name(enum drm_output_color_format fmt);
  
- static enum drm_mode_status
+@@ -1129,6 +1217,13 @@ struct drm_connector_state {
+ 	 */
+ 	enum drm_colorspace colorspace;
+ 
++	/**
++	 * @color_format: State variable for Connector property to request
++	 * color format change on Sink. This is most commonly used to switch
++	 * between RGB to YUV and vice-versa.
++	 */
++	enum drm_connector_color_format color_format;
++
+ 	/**
+ 	 * @writeback_job: Writeback job for writeback connectors
+ 	 *
+@@ -2127,6 +2222,12 @@ struct drm_connector {
+ 	 */
+ 	struct drm_property *colorspace_property;
+ 
++	/**
++	 * @color_format_property: Connector property to set the suitable
++	 * color format supported by the sink.
++	 */
++	struct drm_property *color_format_property;
++
+ 	/**
+ 	 * @path_blob_ptr:
+ 	 *
+@@ -2610,6 +2711,9 @@ bool drm_connector_has_possible_encoder(struct drm_connector *connector,
+ 					struct drm_encoder *encoder);
+ const char *drm_get_colorspace_name(enum drm_colorspace colorspace);
+ 
++int drm_connector_attach_color_format_property(struct drm_connector *connector,
++					       unsigned long supported_color_formats);
++
+ /**
+  * drm_for_each_connector_iter - connector_list iterator macro
+  * @connector: &struct drm_connector pointer used as cursor
 
 -- 
 2.53.0
