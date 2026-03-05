@@ -1,175 +1,261 @@
-Return-Path: <linux-doc+bounces-78106-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78108-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gH6WAV0IqmmVJwEAu9opvQ
-	(envelope-from <linux-doc+bounces-78106-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 23:49:01 +0100
+	id QCiJHccMqmlbKQEAu9opvQ
+	(envelope-from <linux-doc+bounces-78108-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 00:07:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BD3D219130
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 23:49:00 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 054252192C3
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 00:07:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DAECB302A69C
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 22:47:55 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B46ED30186A6
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 23:07:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 228F3342526;
-	Thu,  5 Mar 2026 22:47:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="Tk+AbOuy"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C4F3364E8C;
+	Thu,  5 Mar 2026 23:07:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from relay.hostedemail.com (smtprelay0013.hostedemail.com [216.40.44.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF34035979;
-	Thu,  5 Mar 2026 22:47:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A36C364EA5;
+	Thu,  5 Mar 2026 23:07:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772750875; cv=none; b=f5ahPO/HuwAVTZLvAvwZEqiemUgTTSdIcxmQViPbrtXJv5V2pb4C5sdhOwpAncfpHIRIlGoON/mfdQQEQOS7JcyAEszVU/84+CB5vJIh2bjWCvVXo+GW+VUcWVquZcFAg/o7NFX9mZOM35XxV6BJmWv7b36qwgtyyyWK4x6vADw=
+	t=1772752068; cv=none; b=bfu+0nWUFROTBE4XSlXF92eu4xJS3jCWzeoZOaICC0DiAJZ5jHh33awQp/B4ABKuUih4U8DLRVBYEUVwZYifa6SF1lVD9gGXIw4yvaysGgX/T1R/nnwbEnS0fjkIk+KCdFZcpc/vvBLsBhPQegLCdfUwlHfqFOleck9+aVtAj2U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772750875; c=relaxed/simple;
-	bh=KhAGM6pflvptDSiMvnM0kYZxZAn+R7XntVrqa1UYsWo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eTP18mAml8/G0UECsFBjiJBCK+hUMEf1C5cUZvQObNv2cU1SsX03or2aTvKI2/xiLdRqWxDHrEDXUqRjUCJZDqt5Z/5sMMtH/upXYgO9E6cOigh22YYaPp3WxzaclP+l9IfmWEt1DnVaRguRLrBS++0aIFfCut8oTt8H2lK/BtE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=Tk+AbOuy; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from [172.27.2.41] (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 625Mku5P4040031
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Thu, 5 Mar 2026 14:46:57 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 625Mku5P4040031
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026022301; t=1772750821;
-	bh=LnwuwovknsVFEz/5whX6O+PiryYsTPmBI9q23JdqKLk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Tk+AbOuyxVxKckwd862StdX6Femt1S5IfB9I3eIT7ij2GQrSMcgh/KYDTAL478Mo0
-	 MlLYuNZghQwnKwKJcslRF8txal1hlwhd4KehQzOdzO8wUjbi4bxXsMSwFugAzBPJCi
-	 UQQitt2KABSEUQs/zkjsucSo+SBqSR0bNwPhoM/PxIr4yW0QT5L/b1C4K/4/yB0mnf
-	 RU8I6oRVwVn+XLRDy8m0K5wp+o5Xrwxj3TmvkTm59LrTr/YjaOW2vzoPoxrSkE8uo0
-	 z/K9TA9boEIabFbjofzhSHWl1ULr9iKnETDYChDXgDIugq/z0vln+d1DbxyZjmLnD6
-	 fk5kn+pLMF5ww==
-Message-ID: <343d6536-dac3-45e2-9407-61734bec4ab0@zytor.com>
-Date: Thu, 5 Mar 2026 14:46:51 -0800
+	s=arc-20240116; t=1772752068; c=relaxed/simple;
+	bh=6vkn9RGfycYWW3Rnndysdl2DVF6yOew9y7fmGirUJf4=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=oLh4piSx2cjzfvkO+iLAhBEs1cweJfyUpn0rTIQv62Lp9JFSIuluRQVyMDgtuC0MOGlZMVB4EFJ9m9bfRgJraVkb+byBJWGLNdOYlHv0iIa7ZrkX6X5Qh99EdG7G1JCU7aPLwXlV5PORk5bESuKiUZdPP/8/zkX7fqaw7zUSSfo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
+Received: from omf20.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay03.hostedemail.com (Postfix) with ESMTP id BFC83B71F1;
+	Thu,  5 Mar 2026 23:07:44 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf20.hostedemail.com (Postfix) with ESMTPA id AEB9B20025;
+	Thu,  5 Mar 2026 23:07:42 +0000 (UTC)
+Date: Thu, 5 Mar 2026 18:07:41 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
+To: "Ahmed S. Darwish" <darwi@linutronix.de>
+Cc: Jonathan Corbet <corbet@lwn.net>, Clark Williams <clrkwllms@kernel.org>,
+ linux-rt-devel@lists.linux.dev, Sebastian Andrzej Siewior
+ <bigeasy@linutronix.de>, John Ogness <john.ogness@linutronix.de>, Derek
+ Barbosa <debarbos@redhat.com>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 1/1] Documentation: real-time: Add kernel
+ configuration guide
+Message-ID: <20260305180741.7bd114f4@gandalf.local.home>
+In-Reply-To: <20260305205023.361530-2-darwi@linutronix.de>
+References: <20260305205023.361530-1-darwi@linutronix.de>
+	<20260305205023.361530-2-darwi@linutronix.de>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] x86/cpu: Remove LASS restriction on vsyscall
- emulation
-To: Sohil Mehta <sohil.mehta@intel.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Andy Lutomirski <luto@kernel.org>, Borislav Petkov <bp@alien8.de>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-        Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Kiryl Shutsemau <kas@kernel.org>,
-        Brendan Jackman <jackmanb@google.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Nam Cao <namcao@linutronix.de>, Cedric Xing <cedric.xing@intel.com>,
-        Rick Edgecombe <rick.p.edgecombe@intel.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Maciej Wieczor-Retman <m.wieczorretman@pm.me>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260305214026.3887452-1-sohil.mehta@intel.com>
- <20260305214026.3887452-6-sohil.mehta@intel.com>
-Content-Language: en-US, sv-SE
-From: "H. Peter Anvin" <hpa@zytor.com>
-In-Reply-To: <20260305214026.3887452-6-sohil.mehta@intel.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 5BD3D219130
+X-Stat-Signature: z5o75ma7sayq8tw47zzqrafys4qj81bi
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX19NDJgygpWrsWb1PYpHdPezzEuUTIlJhLo=
+X-HE-Tag: 1772752062-894614
+X-HE-Meta: U2FsdGVkX1+Uo6DLkJ0nb4AD1Y4oP/on/GXFnfOUjOQOtkFncBjTuyK67cBAfYZWfCJhzekqUy3NiRNTK2GqIAnb16gmNeMTNP6GQkdBbqL/rHYcDJyTi77E69cnSGuqBaSfbF9bKzB6smxfi9S9iFUX3Ehz9TY5Tf7SRjNmmztpaZJJFh+16w1sh98PBazgOL5I7iGV2DoYWE86DMhpR+VZg4VkiUVAuni1kR1/3dVH7H7WjYKHbq1pxTggILuNDz2+mkjBii7WkXYP7nSZjB4op8gPkz5mu9K5vB39qlwUjaUt4qlexiIoAnMUB/uaRU2180aUuiipUhQaHZif+MHdhJmyS3AZSNTFgkawKa5nQyz7vTGMrNEeO/Xu6se4tGWzRDfNmHDOJp3AGGbQJve7eZD8zEh0yz/dsbtl2M0=
+X-Rspamd-Queue-Id: 054252192C3
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026022301];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78106-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	DKIM_TRACE(0.00)[zytor.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hpa@zytor.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.990];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,zytor.com:dkim,zytor.com:email,zytor.com:mid,intel.com:email]
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	R_DKIM_NA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78108-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[]
 X-Rspamd-Action: no action
 
-On 2026-03-05 13:40, Sohil Mehta wrote:
-> Vsyscall emulation has two modes of operation: XONLY and EMULATE. The
-> default XONLY mode is now supported with a LASS-triggered #GP. OTOH,
-> LASS is disabled if someone requests the deprecated EMULATE mode via the
-> vsyscall=emulate command line option. So, remove the restriction on LASS
-> when the overall vsyscall emulation support is compiled in.
-> 
-> As a result, there is no need for setup_lass() anymore. LASS is enabled
-> by default through a late_initcall().
-> 
-> Signed-off-by: Sohil Mehta <sohil.mehta@intel.com>
-> Reviewed-by: Dave Hansen <dave.hansen@linux.intel.com>
-> ---
-> v2:
->  - Picked up Dave's review tag
->  - Improve commit message
-> ---
->  arch/x86/kernel/cpu/common.c | 15 ---------------
->  1 file changed, 15 deletions(-)
-> 
-> diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-> index 3557f0e6b3aa..02472fc763d9 100644
-> --- a/arch/x86/kernel/cpu/common.c
-> +++ b/arch/x86/kernel/cpu/common.c
-> @@ -406,20 +406,6 @@ static __always_inline void setup_umip(struct cpuinfo_x86 *c)
->  	cr4_clear_bits(X86_CR4_UMIP);
->  }
->  
-> -static __always_inline void setup_lass(struct cpuinfo_x86 *c)
-> -{
-> -	if (!cpu_feature_enabled(X86_FEATURE_LASS))
-> -		return;
-> -
-> -	/*
-> -	 * Legacy vsyscall page access causes a #GP when LASS is active.
-> -	 * Disable LASS because the #GP handler doesn't support vsyscall
-> -	 * emulation.
-> -	 */
-> -	if (IS_ENABLED(CONFIG_X86_VSYSCALL_EMULATION))
-> -		setup_clear_cpu_cap(X86_FEATURE_LASS);
-> -}
-> -
->  static int enable_lass(unsigned int cpu)
->  {
->  	cr4_set_bits(X86_CR4_LASS);
-> @@ -2061,7 +2047,6 @@ static void identify_cpu(struct cpuinfo_x86 *c)
->  	setup_smep(c);
->  	setup_smap(c);
->  	setup_umip(c);
-> -	setup_lass(c);
->  
->  	/* Enable FSGSBASE instructions if available. */
->  	if (cpu_has(c, X86_FEATURE_FSGSBASE)) {
+On Thu,  5 Mar 2026 21:50:12 +0100
+"Ahmed S. Darwish" <darwi@linutronix.de> wrote:
 
-Love a patch that just deletes code!
+> Add a configuration guide for real-time kernels.
+> 
+> List all Kconfig options that are recommended to be either enabled or
+> disabled.  Explicitly add a table of contents at the top of the document,
+> so that all the options can be seen in a glance.
+> 
+> Whenever appropriate, link to other kernel guides; e.g. cpuidle, cpufreq,
+> power management, and no_hz.
+> 
+> Add a summary at the end of the document warning users that there is a no
+> "one size fits all solution" for configuring a real-time system.
+> 
 
-Reviewed-by: H> Peter Anvin (Intel) <hpa@zytor.com>
+Very nice document!
+
+> Signed-off-by: Ahmed S. Darwish <darwi@linutronix.de>
+> ---
+>  Documentation/core-api/real-time/index.rst    |   1 +
+>  .../real-time/kernel-configuration.rst        | 297 ++++++++++++++++++
+>  2 files changed, 298 insertions(+)
+>  create mode 100644 Documentation/core-api/real-time/kernel-configuration.rst
+> 
+
+> +``CONFIG_EFI_DISABLE_RUNTIME``
+> +------------------------------
+> +
+> +:Expectation: enabled
+> +:Severity: *medium*
+> +
+> +EFI is the standard boot and firmware interface for multiple
+> +architectures.  EFI runtime services provide callback functions to be
+> +called from the kernel; e.g., as utilized by (``CONFIG_EFI_VARS*``) or
+> +(``CONFIG_RTC_DRV_EFI``).  For the former, the kernel calls into EFI to
+> +update the EFI variables.
+> +
+> +Calling into EFI means invoking firmware callbacks.  During such
+> +invocations, the system might not be able to react to interrupts and will
+> +thus not be able to perform a context switch.  This can cause significant
+> +latency spikes for the real-time system.
+
+
+> +
+> +``CONFIG_PREEMPT_RT`` enables this option by default.  If this option is
+> +disabled during the kernel build, pass the following boot parameter [1]_::
+> +
+> +  efi=noruntime
+
+The above reads a bit funny. Maybe reword it to:
+
+  ``CONFIG_PREEMPT_RT`` enables this option by default. If this option is
+  manually disabled at build time, the following boot parameter [1]_ may
+  be used to disable EFI runtime at boot up::
+
+Or something like that.
+
+> +
+> +There is ongoing `development work`_ to allow EFI variables access for a
+> +real-time Linux system.
+
+  .. to allow access to EFI variables for a real-time Linux system
+
+ ?
+
+> +``CONFIG_TRACING`` (and tracing options)
+> +----------------------------------------
+> +
+> +:Expectation: enabled
+> +:Severity: *info*
+> +
+> +Shipping kernels with tracing support enabled (but not actively running)
+> +is highly recommended.  This will allow the users to extract more
+> +information if latency problems arise.
+> +
+> +.. caution::
+> +
+> +  Users should *not* make use of tracers or trace events during production
+> +  real-time kernel operation as they can add considerable overhead and
+> +  degrade the system's latency.
+
+I wonder if a special note should be called out for:
+
+  CONFIG_IRQSOFF_TRACER and CONFIG_PREEMPT_TRACER should be avoided as they
+  do incur measurable overhead even when tracing is not currently active.
+
+Maybe the above should be added in the "Problematic debug options"?
+
+
+> +Kernel Debug Options
+> +====================
+> +
+> +Most kernel debug options add runtime overhead that increases the
+> +worst-case latency.
+> +
+> +.. caution::
+> +
+> +  During development and early testing, users are encouraged to run their
+> +  real-time workloads and peripherals with lockdep and other kernel debug
+> +  options enabled, for a considerable amount of time.  Such workloads
+> +  might trigger kernel code paths that were not triggered during the
+> +  internal Linux real-time kernel development, thus helping to uncover any
+> +  real-time latency issues in the kernel.
+
+Hmm, perhaps there should be some note that connects the use of "lockdep"
+with CONFIG_PROVE_LOCKING below (as that is what enables lockdep). The last
+sentence above makes it sound like lockdep can uncover latency issues, but
+it will most likely cause latency issues. Perhaps a bit more explanation
+should be used here.
+
+> +
+> +Problematic debug options
+> +-------------------------
+> +
+> +``CONFIG_LOCKUP_DETECTOR``
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Severity: *high*
+> +
+> +The lockup detector creates kernel timer callbacks that execute every few
+> +seconds, in hard-IRQ context, even on real-time kernels.  These periodic
+> +interrupts can cause latency spikes.
+> +
+> +Users should use hardware watchdogs instead, which will provide a similar
+> +functionality without the software-induced latency.
+> +
+> +``CONFIG_PROVE_LOCKING``
+> +^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +Severity: *high*
+> +
+> +Proving the correctness of all kernel locking adds substantial overhead
+> +and significantly increases worst-case latency.
+
+
+
+> +Summary
+> +=======
+> +
+> +There is no "one size fits all" solution for configuring a real-time Linux
+> +system.  Beginning with the system real-time requirements, integrators
+> +must consider the features and functions of the system's hardware, kernel,
+> +and userspace.  All such components must be properly configured in order
+> +to establish and constrain the system's maximum latency.
+> +
+> +With that in mind, any false real-time kernel configuration could cause a
+
+  s/false/incorrect/ ?
+
+> +new maximum latency that shows up at the wrong time and is catastrophic
+> +for the real-time system's latency.
+> +
+> +References
+> +==========
+> +
+> +.. [1] See :doc:`/admin-guide/kernel-parameters`
+> +
+> +.. _development work: https://lore.kernel.org/r/20260205115559.1625236-1-bigeasy@linutronix.de
+> +
+> +.. _Real-Time and Graphics\: A Contradiction?: https://web.archive.org/web/20221025085614/https://linutronix.de/PDF/Realtime_and_graphics-acontradiction2021.pdf
+
+Nice job!
+
+-- Steve
 
 
