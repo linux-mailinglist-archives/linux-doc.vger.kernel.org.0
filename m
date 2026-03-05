@@ -1,161 +1,130 @@
-Return-Path: <linux-doc+bounces-77963-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77965-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WG9hLD14qWl77wAAu9opvQ
-	(envelope-from <linux-doc+bounces-77963-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 13:34:05 +0100
+	id kDntNJZ+qWlB9QAAu9opvQ
+	(envelope-from <linux-doc+bounces-77965-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 14:01:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58F25211BBF
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 13:34:05 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D842212479
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 14:01:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 75E8830172FC
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 12:34:04 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 628AA3069674
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 12:58:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB9AF39E18B;
-	Thu,  5 Mar 2026 12:33:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C5303A0B00;
+	Thu,  5 Mar 2026 12:58:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="ewk5wwW3"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dV+iriVY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F77139B4A9
-	for <linux-doc@vger.kernel.org>; Thu,  5 Mar 2026 12:33:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18CF638836C
+	for <linux-doc@vger.kernel.org>; Thu,  5 Mar 2026 12:58:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772714039; cv=none; b=DSyJDEMsEM9yTVShgZoOwj+SbE3Mn+g+jKi8HENQcgyvlY00mT0P8zGGhP7ddL+DmkAlQdD7UfMQADa9U1HTZYkHxckyLmo8x/ySEjlDujlwnbnEk05TY6zp+YS1fI6GeCUj0/D4inM3W/z5/PK8qGwoUuDPWeN1/J9C74OCcqM=
+	t=1772715523; cv=none; b=uYq4dHFL1vdb5+E3iYyDjFM1nHlCROoIwepiLXfDyVUko/H3zo6UpcM0o6mcVS0XHXOqJCKc9b+mZf7PMMjlBeCfNpYjvBglg6/CmxcgDUgiKD3SqPVI2mf4ZCZ29iQSaO6rtB8W5m1r5TudZtR7wvNIAS7E/LvrG7ZultA8+ds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772714039; c=relaxed/simple;
-	bh=bBMU2eq1b9VpHdnnbb9a9Ixp6lzEZOYLQ0CxuTv4hvw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WPlPc2m7Zs+c/smTkuEctHkGpYSVKZQTAvX4Y3kJ1MMf4tCDQB2QzWmyOJP1Yh4tQ9bhUVYZvy5XTl4N1SIEAbrxAVnVtezBd2owRfrrMUEsf9ZMzrqAy4fWfnsrpQkF6gYrBWW19nbZU16/VKAr7RVqNOQxxuspXYUV+CE2ncc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=ewk5wwW3; arc=none smtp.client-ip=209.85.128.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-483487335c2so66671485e9.2
-        for <linux-doc@vger.kernel.org>; Thu, 05 Mar 2026 04:33:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1772714033; x=1773318833; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=IAtyjRxqfQiyhlre0tqh/uCmfnBFujz89wTA1BKqRRE=;
-        b=ewk5wwW3tEkKzNfDTrZuDfrY+sd6XdXEXZGJj1HJcy4PuQUgptnO1k8Yu+TyhYIIU0
-         /j/EM33msisiUYXOAQUxQwlodnhMLDIueMmswU2RxpvFYU0x9zM2cUIoggsQTHwQhVpb
-         d5zhs+bYIBeX8qszVrYj1gxVsDW7D4eBJidhHMSnzVgJOwAoOjQUn1yKobLdevyDdurw
-         DDxbi3wsFAufmhs+Hdlae6Bz/daga6F+8u/AzLMqa2WhXQwy2fSdv2nl9SS3xkKUYe7t
-         FskLuu+YjniiFNtdGpBREk8h7sQmeNIPAWy1V8gr3aTJs3Vtq1O+uI2Hn021bOtPwxRe
-         X5iA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772714033; x=1773318833;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=IAtyjRxqfQiyhlre0tqh/uCmfnBFujz89wTA1BKqRRE=;
-        b=YHEM0CI79JyzFPaUtXDaDr6sMIRSn5U7RNhPONaeHFG7z13poUn271Qhv2XxNCmvns
-         qDuZs0Z2XsgVdZ1v4V5tXRrbCyPTSdNhINZSdjr6IXqVQ3CGrb0OmpWulRDJm3s2dhOl
-         hgjfz+qPmpubMKWh0x+e8HjhLhVqwvoRDFjF7shAsOfpWRTSWOLGO7GqyEORYpXhCHU4
-         EBNI/Oml3DVUE0ZJnY48VS4L12ffzLJkUxzlyphF32cw+6DMAupZJQ1xkeZa2eRqri4x
-         8LNjQ73DdSLFowhhc77U/k7wKWnHIdoMlVtBsEOZf3ydaGCECPZNRPhAx+J7DGGLD48b
-         abJQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVts3UK5UMIwlyx/b7ISP9UBkjGHSofA5QS4rpqwsJnXftVJ0sS/v/cy7cJnplgFqqs0GodhBG2a3o=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzCBjdfwgcR8AaVhcrC12fTA5MEWSFnFQdcXTGdye0R98bDVp8Z
-	G/Rvclb1RdCmNY3tO+lzaWIdBg8JNhWG2HulRM9MtLdyW0Ui8uore+XEX9m9LCwMcc4=
-X-Gm-Gg: ATEYQzxR0GBLDwwFi+D2Qy+dqxKlny430BXasFqF1yIY70hGiIhfejn2WnQXbmISlhl
-	ECDoK5Def6qZOjCwsP7WtFozS/sqYE/OdkKucJ1ZxUA1qDqX7J7XK70/ifRk2QuWf3WjUbpby/q
-	gdNOTcexyx5/qKSDDILkwEVg1+9CYZn5ZeAMepHODCt4V0J3FndJwVcW8fZLT0NV3tJdNOXvZqC
-	XH0z0DdQoi37tG8el3JfBuGmXxP4YHf9cZeBDTsA4S/euNpMVDMPAqHzNT9bhkXRcq8w9tTavU9
-	LkoppPmDQj3fKh4lvPO3ztwLX3GMBC2v+tYoucciclD9LfXR9D4ohIfHVGfW6as/49E6AH4Q4Dj
-	qwsnPXA77SJUOECBTGKMOe6og0VN44ZflbCECrHGIezzklAh6Bu/RpksHQT6DLRAhbrUPgq3LjC
-	RenZUYr6A74d6hl6um/ggOCBVrLw==
-X-Received: by 2002:a05:600c:6487:b0:47a:810f:1d06 with SMTP id 5b1f17b1804b1-48519828e0dmr93690085e9.4.1772714033117;
-        Thu, 05 Mar 2026 04:33:53 -0800 (PST)
-Received: from pathway.suse.cz ([176.114.240.130])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4851fadeb5bsm55010055e9.5.2026.03.05.04.33.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Mar 2026 04:33:52 -0800 (PST)
-Date: Thu, 5 Mar 2026 13:33:50 +0100
-From: Petr Mladek <pmladek@suse.com>
-To: mrungta@google.com
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Jinchao Wang <wangjinchao600@gmail.com>,
-	Yunhui Cui <cuiyunhui@bytedance.com>,
-	Stephane Eranian <eranian@google.com>,
-	Ian Rogers <irogers@google.com>, Li Huafei <lihuafei1@huawei.com>,
-	Feng Tang <feng.tang@linux.alibaba.com>,
-	Max Kellermann <max.kellermann@ionos.com>,
-	Douglas Anderson <dianders@chromium.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH 2/4] doc: watchdog: Clarify hardlockup detection timing
-Message-ID: <aal4LiOEpO3kDuaY@pathway.suse.cz>
-References: <20260212-hardlockup-watchdog-fixes-v1-0-745f1dce04c3@google.com>
- <20260212-hardlockup-watchdog-fixes-v1-2-745f1dce04c3@google.com>
+	s=arc-20240116; t=1772715523; c=relaxed/simple;
+	bh=5are5agdAPBNhp9zXXwfI62i9NhVAzVx4EzODqm4TGU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=YL4BwnxKMvsXmmJW3qRoXiVK4JrI0Cqfkm0R7UqU8+RD87nJq7/3+KROwW4zLvp6vWHoD/Ybm0g1e30mgQ3ZPp0V76A/7+OgUlpZwHxI3iggBqrQ2MNkfm6d8BWbNjIosEV/GGZH9RBm2dcWFgrZmDyEVNebZx3ELS5mD28ESUI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dV+iriVY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6897C2BCB9
+	for <linux-doc@vger.kernel.org>; Thu,  5 Mar 2026 12:58:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772715522;
+	bh=5are5agdAPBNhp9zXXwfI62i9NhVAzVx4EzODqm4TGU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=dV+iriVYRSVkaLwZWL3RYxUVzrSC8aD09FYxF5jNKwSm5Q1YyPTJsFvSzgCigsGzx
+	 HTMHgHkuc6N4hI6dLH2FrL4N6624GGkh2DzGuYN82jY6oeYT+0ZZnShusqFd4BG/Kg
+	 B1JkTJG72xoKJ5V5FpMaG3Mde4MvfUWAe6CEvDOvdpIy1wzvO2zDb4SjHoqi08W4+n
+	 btTVRpbcLf83Ku7WUyELXiwkcystoAPidj7LlhvuXaGCjIxxaUHfn6lHoq+76cQZRJ
+	 8fJ63KdmGO1rwKGTsIhQpXPFjeeJEKbzRjR4F1fnBj4tMXrZ/dSOKAtgx8OzbOSDqF
+	 t6okvHWVh3vLQ==
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-798374d0f44so120735417b3.0
+        for <linux-doc@vger.kernel.org>; Thu, 05 Mar 2026 04:58:42 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCVDSvbdEw7sGwmNzagjjNzNGp7thxhDkqC7uCNcw7JJpXJauG3nYcTDZBETXGxtbbux8qPVMAVKRaA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx7V43zPoTaYjB3efDuaEPjrQO57d182eBry98shGMXk7UL5YGq
+	cgnm9XzrzgSZ9WATvQJbCplRUOX7zyiW9PbV/KawjQzElbH39HUGDkh0XKbF8ElQGk06tMPzHko
+	WFP0uwCMPIhesSZA2NAIMcfOr6zunFDQ=
+X-Received: by 2002:a53:e19e:0:b0:64a:e56f:49fc with SMTP id
+ 956f58d0204a3-64d07111ed8mr1184395d50.20.1772715522083; Thu, 05 Mar 2026
+ 04:58:42 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260212-hardlockup-watchdog-fixes-v1-2-745f1dce04c3@google.com>
-X-Rspamd-Queue-Id: 58F25211BBF
+References: <20260305-gpio-hog-fwnode-v1-0-97d7df6bbd17@oss.qualcomm.com> <20260305-gpio-hog-fwnode-v1-1-97d7df6bbd17@oss.qualcomm.com>
+In-Reply-To: <20260305-gpio-hog-fwnode-v1-1-97d7df6bbd17@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 5 Mar 2026 13:58:30 +0100
+X-Gmail-Original-Message-ID: <CAD++jL=Zog5wPPiDDBp=mv1nhCgjOZkuG8NtZjvzfhc0KK5Z7Q@mail.gmail.com>
+X-Gm-Features: AaiRm52DhevPDbjjg-MMnWaC2zgG9VailzGdf5hJANa7pRgxzk-RHGIdAAju58g
+Message-ID: <CAD++jL=Zog5wPPiDDBp=mv1nhCgjOZkuG8NtZjvzfhc0KK5Z7Q@mail.gmail.com>
+Subject: Re: [PATCH 1/6] gpio: of: clear OF_POPULATED on hog nodes in remove path
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Frank Rowand <frowand.list@gmail.com>, Mika Westerberg <westeri@kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Aaro Koskinen <aaro.koskinen@iki.fi>, 
+	Janusz Krzysztofik <jmkrzyszt@gmail.com>, Tony Lindgren <tony@atomide.com>, 
+	Russell King <linux@armlinux.org.uk>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, linux-gpio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org, 
+	linux-doc@vger.kernel.org, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: 5D842212479
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77963-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[lwn.net,gmail.com,bytedance.com,google.com,huawei.com,linux.alibaba.com,ionos.com,chromium.org,linux-foundation.org,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-77965-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[kernel.org,glider.be,gmail.com,linux.intel.com,iki.fi,atomide.com,armlinux.org.uk,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[suse.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pmladek@suse.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[linusw@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,pathway.suse.cz:mid]
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,mail.gmail.com:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On Thu 2026-02-12 14:12:11, Mayank Rungta via B4 Relay wrote:
-> From: Mayank Rungta <mrungta@google.com>
-> 
-> The current documentation implies that a hardlockup is strictly defined
-> as looping for "more than 10 seconds." However, the detection mechanism
-> is periodic (based on `watchdog_thresh`), meaning detection time varies
-> significantly depending on when the lockup occurs relative to the NMI
-> perf event.
-> 
-> Update the definition to remove the strict "more than 10 seconds"
-> constraint in the introduction and defer details to the Implementation
-> section.
-> 
-> Additionally, add a "Detection Overhead" section illustrating the
-> Best Case (~6s) and Worst Case (~20s) detection scenarios to provide
-> administrators with a clearer understanding of the watchdog's
-> latency.
-> 
-> Signed-off-by: Mayank Rungta <mrungta@google.com>
+On Thu, Mar 5, 2026 at 10:51=E2=80=AFAM Bartosz Golaszewski
+<bartosz.golaszewski@oss.qualcomm.com> wrote:
 
-Great addition:
+> The previously set OF_POPULATED flag should be cleared on the hog nodes
+> when removing the chip.
+>
+> Cc: stable@vger.kernel.org
+> Fixes: 63636d956c455 ("gpio: of: Add DT overlay support for GPIO hogs")
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
-Reviewed-by: Petr Mladek <pmladek@suse.com>
+I have no idea how OF_POPULATED is supposed to be used
+so I just trust you on this one:
+Acked-by: Linus Walleij <linusw@kernel.org>
 
-Best Regards,
-Petr
+Yours,
+Linus Walleij
 
