@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-77920-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77921-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KCWxGskfqWnI2QAAu9opvQ
-	(envelope-from <linux-doc+bounces-77920-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:16:41 +0100
+	id EBDFBrQfqWmg2QAAu9opvQ
+	(envelope-from <linux-doc+bounces-77921-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:16:20 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9DBF20B562
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:16:40 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 21CDA20B52D
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:16:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F3F98306F94B
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 06:13:23 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 0D5CE303A24F
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 06:13:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95492296BDB;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9EF2629AB05;
 	Thu,  5 Mar 2026 06:13:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="lED43wNG"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="MPhIxNM5"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12D9F1D47B4;
-	Thu,  5 Mar 2026 06:13:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B754246778;
+	Thu,  5 Mar 2026 06:13:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772691200; cv=none; b=bf7S/PCg6ZpuQZA1R9OEa/9veoDzUwn7Q4p1gDSG2wgk6kqbeViIE5OHuwlk7LQdi+3r0BMTSELpVDp0g+ayR1DuqRjDvx5MPu/yfgEh4NuADmsZXTVKjmMzRCHerD0vy18AomLAqRQkydFpxlvOl7HTt0aKdLuK3S0cOB9Wb14=
+	t=1772691200; cv=none; b=VimdR+znaeIku0QL+ajOhjveEsA3Xd4VCrRyxC7TgCMAC2s1v2qUt7zZMUSYsvuL52+Pv7zi4+PuPM8I9AzihttnqJ4MoOmI1mIZ/BJF8nnL/7PHNQ0asl3/K04t12hYMYZp8J9Ff5ZjIBFYRdIUYGYFjQUiJnYNCt0uEJjEIJ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772691200; c=relaxed/simple;
 	bh=ko7F95C/qNfEuKQ7fgpE6IoqafkSggugoMhxPZdpimc=;
 	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
 	 Message-Id:References:To; b=f9pqZ/HYN7+tFZp6P0bNx21SZwE5M9lFpTAR5kA3VE+uxJUo+yaChDL4ibg1VRzJvu7tpJrsQKpYML14BPVjgLYCebpjeRNq9T+MrYElNxUMVgwvi1ODWr/JP92edCHuxRghKBkWgs8YZhUVyDW6FHp4nX22v201EpsgPj9bRI0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=lED43wNG; arc=none smtp.client-ip=198.137.202.136
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=MPhIxNM5; arc=none smtp.client-ip=198.137.202.136
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
 Received: from smtpclient.apple (c-24-130-165-117.hsd1.ca.comcast.net [24.130.165.117])
 	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 6255uqoE2389035
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 6255usdv2389074
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Wed, 4 Mar 2026 21:56:53 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 6255uqoE2389035
+	Wed, 4 Mar 2026 21:56:55 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 6255usdv2389074
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026022301; t=1772690215;
+	s=2026022301; t=1772690216;
 	bh=ko7F95C/qNfEuKQ7fgpE6IoqafkSggugoMhxPZdpimc=;
 	h=Subject:From:In-Reply-To:Date:Cc:References:To:From;
-	b=lED43wNG7PaOWoUEpDO8IcogseMsNgNxMXF7oXdhEK9RO4Tg3ummE/XQxc9Vv7SIZ
-	 Flk94mMxOoBqcfigznNlwzZ4ysarTWAOQZqqGg4BLIkVmuAFTszwwUqbrauP6/eFba
-	 yTQoNx0tyTjxUp1q6qgdYvDKAww1gjHZmNc9D5JMdsEx+PKTXjYp3shZuZ7a+KOmtc
-	 C5wfznj0a7EXi09daEf7ZsRsAQL3jyCMzAKgUOjX38n/IQBTOeNFGebmhsaQX4GbgO
-	 GYOwHBd4l6lZ23Yq+gSOJWBNNoGa40ebFNO8nM2/znl2YnycTVfBNogGyp2hu3yaHO
-	 u/3WycfhKVI2g==
+	b=MPhIxNM55GW/GqnlBY30qkRehZTOT9VERYWOkGORSHDyAhscaCHoZ74MVclEYVZjk
+	 IXbX8jPWaDVgZVLsrNWc/RPthph3BQ+wWY0s711OxREdaPOse4o4q2kqknBOnRsQJl
+	 gj0eg8CyrETaPuDkFsF7UF5kl2fxXfj6p78HHT6x3bDCoDwa9vX3BBeLRHmWcYecRz
+	 YTlXVtrDbY0xrbyxNZkTFtfJk6lE7GExwLboV1Nl6JsjmF8lp5nio5O55wgIIkWrOn
+	 jcYR3+1HSe2hRy0UmUiPDcX+GqhI4GkMKuNBRytO3Lqig3OsLgvlsp4s48wasbcO4D
+	 qsReyLvYv69sQ==
 Content-Type: text/plain;
 	charset=utf-8
 Precedence: bulk
@@ -75,17 +75,17 @@ References: <20251026201911.505204-1-xin@zytor.com>
  <aajS9HFx5HabmCTq@google.com>
 To: Sean Christopherson <seanjc@google.com>
 X-Mailer: Apple Mail (2.3864.400.21)
-X-Rspamd-Queue-Id: D9DBF20B562
+X-Rspamd-Queue-Id: 21CDA20B52D
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026022301];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77920-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-77921-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -98,12 +98,12 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[xin@zytor.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	APPLE_MAILER_COMMON(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,zytor.com:dkim,zytor.com:mid,intel.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,zytor.com:dkim,zytor.com:mid,intel.com:email]
 X-Rspamd-Action: no action
 
 
