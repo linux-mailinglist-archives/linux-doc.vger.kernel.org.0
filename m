@@ -1,186 +1,117 @@
-Return-Path: <linux-doc+bounces-78031-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78032-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EJeeKL+rqWlSBwEAu9opvQ
-	(envelope-from <linux-doc+bounces-78031-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 17:13:51 +0100
+	id sDwzIYqrqWlSBwEAu9opvQ
+	(envelope-from <linux-doc+bounces-78032-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 17:12:58 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2C0F2153AD
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 17:13:50 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C5F421537F
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 17:12:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 69111301F5FD
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 16:03:17 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 6D2FA302E56C
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 16:12:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50FCF334373;
-	Thu,  5 Mar 2026 16:03:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9486F3CE48A;
+	Thu,  5 Mar 2026 16:12:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="rEj6T7J+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0017.hostedemail.com [216.40.44.17])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6755282F27;
-	Thu,  5 Mar 2026 16:03:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EE173CE48F;
+	Thu,  5 Mar 2026 16:12:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772726594; cv=none; b=XUp5H/Z+VGzDJ5K2zYq6lRsAnEozot6KQeOqWMnzDqPag/QpPVlVEECmvM/jrdDCUm0A1eDWayOo0njrk9Q4UjE2pyIR6QCC22UZRRNugM4L/jO/ARFFvX4lmIXgKP+klU4PjGgHfeqfGRLIH1kwj+XVzFVCy8Ltalszyjzfk0E=
+	t=1772727161; cv=none; b=fhMVNfFkVlERCWJkdU82eqEWp9ndvz9q7rEqxeVcwDVa0hToFdA7rMt4IGjdobiJzF9ShH+TOJBMVhkgfKvhHQVYLsGy7BgeRKLt648343J1fiFzrF6FoFjqPcKlogGW/knAP6O33QI7m0Z0e5KZR7OoarQzGCMO6KlBfJt7yjE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772726594; c=relaxed/simple;
-	bh=kbCdHrPQfuik8kSiEUlPcr8xDBSE+5onkdlqnirYpD4=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RDqzG/926qVD1z516iKA3XdRixZZt9JiHuvrcn03vmAhou2XOBGmIc7awO1UiM8iBmROm0jxWulvtzCgZm8wuOK+ysgpW0SEPGLTP9VX92R+Izm0a6fVM7feh5WA9ikmA8aRvUDn7D8Aj9mzA4zAyzKXl8v1+ZHiO7gd9Eeii2Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
-Received: from omf20.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay10.hostedemail.com (Postfix) with ESMTP id 104D4C0BE4;
-	Thu,  5 Mar 2026 16:03:11 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf20.hostedemail.com (Postfix) with ESMTPA id 222CB20029;
-	Thu,  5 Mar 2026 16:03:09 +0000 (UTC)
-Date: Thu, 5 Mar 2026 11:03:47 -0500
-From: Steven Rostedt <rostedt@goodmis.org>
-To: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+	s=arc-20240116; t=1772727161; c=relaxed/simple;
+	bh=c6EKYDX5VRUP5zuUqQiObUXeJ4E2BosPNvpwZFkd9Vk=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=qliedEvfHbDJTuKropTooeLkeJWu/+KvADusSgsJh4BBCj+SqDJYd8dbYwIAr4rhCjsnz54/G/hVZ4hnIGpsEwaeNbnfx1Dmc3irxcn7xRJz/nJaAzWUqnZ6A2DJ72d8LBdY0gU6NiTqVg3cze9y5wTFr6qd1Es9FxrixfU7sHU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=rEj6T7J+; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 09CEF40C6E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1772727158; bh=c6EKYDX5VRUP5zuUqQiObUXeJ4E2BosPNvpwZFkd9Vk=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=rEj6T7J+38xFJ3C7Xh/zUQzP6LW4F1V+ELrjmRtJq0iJuUhC+kUnk0FwbdLYoH8S2
+	 jw0TSMuMlM2YCYLsygVwsKL9HBktEFqj21YO+gSpm1V5NjqaitfO5B24JvVZvtqx7o
+	 k0NqoiI0AbefwtWGoK2IJjliwg1fNA9Mox7zx24nxdiQOezznEXmISya+MhqkjPXy4
+	 Mgf6fwsf1y9odB5W2JMKJuHu8IQDPyrjsKN9q5qmQDoCkr9WDAT+q+J/9+IO+jUJ8V
+	 FAs7hFCVFC5JwqDsE2c/EhTuRShWjj/84l0pnczqHgPifdq9TLKuYmauf+AvsaMWr/
+	 o8PcQVu3+Vn2w==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 09CEF40C6E;
+	Thu,  5 Mar 2026 16:12:37 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Steven Rostedt <rostedt@goodmis.org>, linux-doc@vger.kernel.org
 Cc: LKML <linux-kernel@vger.kernel.org>, Linux Trace Kernel
  <linux-trace-kernel@vger.kernel.org>, Masami Hiramatsu
  <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
  Tom Zanussi <zanussi@kernel.org>
 Subject: Re: [PATCH] tracing: Documentation: Update histogram-design.rst for
  fn() handling
-Message-ID: <20260305110347.31d6bae5@gandalf.local.home>
-In-Reply-To: <20260126181742.03e8f0d5@gandalf.local.home>
+In-Reply-To: <20260305110347.31d6bae5@gandalf.local.home>
 References: <20260126181742.03e8f0d5@gandalf.local.home>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ <20260305110347.31d6bae5@gandalf.local.home>
+Date: Thu, 05 Mar 2026 09:12:37 -0700
+Message-ID: <87pl5i2r2i.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Stat-Signature: uoozexr41qgcctxprzbdjn7jkm5kuh7k
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX1/jJwSATMn83cMt9oeARCb76zNWrA+xnME=
-X-HE-Tag: 1772726589-685616
-X-HE-Meta: U2FsdGVkX1972E0Ssok5izdEAf7siT7PUdYoYldJnzC5jjW/ZXkGUqtti7XObvXqi550Z3CJt+CpYaPDGAjmPLcXCTaDd5jdg3x+R/74iH8VMHltzUB3LzfBXj8RG4l1UMg9gUwMPVMw9QbGDD89gcitZPRQvAREeoif/3hh+Tc74ctBpkcDf1CifFM8p1RwtwginjuYkTbXvhRcbIp5KScAmJXzZLo34tc1GyLS+1PzruVaW/E6vZwWRHiPWliMUG0gSWsvk4/XfeAT9KEcNk1GTxNBWCBxnaBvknAjxWHpm3M8D34E7wuPJ2ramACe+aehLLJdZY2kWSil9RotubcLI2RthkltFSgQ/FY23rX2DFBh+IUSBkpROC5owAdT
-X-Rspamd-Queue-Id: A2C0F2153AD
+Content-Type: text/plain
+X-Rspamd-Queue-Id: 9C5F421537F
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.36 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.988];
-	R_DKIM_NA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	PRECEDENCE_BULK(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78031-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[goodmis.org:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,gandalf.local.home:mid]
+	TAGGED_FROM(0.00)[bounces-78032-lists,linux-doc=lfdr.de];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,goodmis.org:email,lwn.net:dkim]
 X-Rspamd-Action: no action
 
+Steven Rostedt <rostedt@goodmis.org> writes:
 
-Hi Jon,
+> Hi Jon,
+>
+> Can you take this through your tree?
 
-Can you take this through your tree?
+Sure, will do.
 
 Thanks,
 
--- Steve
-
-
-On Mon, 26 Jan 2026 18:17:42 -0500
-Steven Rostedt <rostedt@goodmis.org> wrote:
-
-> From: Steven Rostedt <rostedt@goodmis.org>
-> 
-> The histogram documentation describes the old method of the histogram
-> triggers using the fn() field of the histogram field structure to process
-> the field. But due to Spectre mitigation, the function pointer to handle
-> the fields at runtime caused a noticeable overhead. It was converted over
-> to a fn_num and hist_fn_call() is now used to call the specific functions
-> for the fields via a switch statement based on the field's fn_num value.
-> 
-> Update the documentation to reflect this change.
-> 
-> Signed-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>
-> ---
->  Documentation/trace/histogram-design.rst | 20 +++++++++++++-------
->  1 file changed, 13 insertions(+), 7 deletions(-)
-> 
-> diff --git a/Documentation/trace/histogram-design.rst b/Documentation/trace/histogram-design.rst
-> index ae71b5bf97c6..e92f56ebd0b5 100644
-> --- a/Documentation/trace/histogram-design.rst
-> +++ b/Documentation/trace/histogram-design.rst
-> @@ -69,7 +69,8 @@ So in this histogram, there's a separate bucket for each pid, and each
->  bucket contains a value for that bucket, counting the number of times
->  sched_waking was called for that pid.
->  
-> -Each histogram is represented by a hist_data struct.
-> +Each histogram is represented by a hist_data struct
-> +(struct hist_trigger_data).
->  
->  To keep track of each key and value field in the histogram, hist_data
->  keeps an array of these fields named fields[].  The fields[] array is
-> @@ -82,7 +83,7 @@ value or not, which the above histogram does not.
->  
->  Each struct hist_field contains a pointer to the ftrace_event_field
->  from the event's trace_event_file along with various bits related to
-> -that such as the size, offset, type, and a hist_field_fn_t function,
-> +that such as the size, offset, type, and a hist field function,
->  which is used to grab the field's data from the ftrace event buffer
->  (in most cases - some hist_fields such as hitcount don't directly map
->  to an event field in the trace buffer - in these cases the function
-> @@ -241,28 +242,33 @@ it, event_hist_trigger() is called.  event_hist_trigger() first deals
->  with the key: for each subkey in the key (in the above example, there
->  is just one subkey corresponding to pid), the hist_field that
->  represents that subkey is retrieved from hist_data.fields[] and the
-> -hist_field_fn_t fn() associated with that field, along with the
-> +hist field function associated with that field, along with the
->  field's size and offset, is used to grab that subkey's data from the
->  current trace record.
->  
-> +Note, the hist field function use to be a function pointer in the
-> +hist_field stucture. Due to spectre mitigation, it was converted into
-> +a fn_num and hist_fn_call() is used to call the associated hist field
-> +function that corresponds to the fn_num of the hist_field structure.
-> +
->  Once the complete key has been retrieved, it's used to look that key
->  up in the tracing_map.  If there's no tracing_map_elt associated with
->  that key, an empty one is claimed and inserted in the map for the new
->  key.  In either case, the tracing_map_elt associated with that key is
->  returned.
->  
-> -Once a tracing_map_elt available, hist_trigger_elt_update() is called.
-> +Once a tracing_map_elt is available, hist_trigger_elt_update() is called.
->  As the name implies, this updates the element, which basically means
->  updating the element's fields.  There's a tracing_map_field associated
->  with each key and value in the histogram, and each of these correspond
->  to the key and value hist_fields created when the histogram was
->  created.  hist_trigger_elt_update() goes through each value hist_field
-> -and, as for the keys, uses the hist_field's fn() and size and offset
-> +and, as for the keys, uses the hist_field's function and size and offset
->  to grab the field's value from the current trace record.  Once it has
->  that value, it simply adds that value to that field's
->  continually-updated tracing_map_field.sum member.  Some hist_field
-> -fn()s, such as for the hitcount, don't actually grab anything from the
-> -trace record (the hitcount fn() just increments the counter sum by 1),
-> +functions, such as for the hitcount, don't actually grab anything from the
-> +trace record (the hitcount function just increments the counter sum by 1),
->  but the idea is the same.
->  
->  Once all the values have been updated, hist_trigger_elt_update() is
-
+jon
 
