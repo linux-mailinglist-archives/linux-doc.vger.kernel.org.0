@@ -1,164 +1,253 @@
-Return-Path: <linux-doc+bounces-78061-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78063-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KBRAFY/GqWmcEgEAu9opvQ
-	(envelope-from <linux-doc+bounces-78061-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 19:08:15 +0100
+	id ELY4GxLUqWmaFwEAu9opvQ
+	(envelope-from <linux-doc+bounces-78063-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 20:05:54 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC7B0216CA9
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 19:08:14 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB247217368
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 20:05:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 969D63023D91
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 18:08:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 25ACD305DEEF
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 19:05:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E06FC3E3D8B;
-	Thu,  5 Mar 2026 18:08:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F0712FE056;
+	Thu,  5 Mar 2026 19:05:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BkNw8Yqs"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PGDHBfDc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97FA43E3D9C
-	for <linux-doc@vger.kernel.org>; Thu,  5 Mar 2026 18:08:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.50
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772734090; cv=none; b=MRg4aNpR+uY2JMeWNGdaoI51pMQRi8PcwF5wRoKLuy4kt6xKahUeZu9Tj4TwvOO46vvvAVU4c6Ex1ZA1qJKMvrryOoJhw7j1OA1mdH3daEYiln8vMAUr5SfsmRrAi/fzIZF2GhLntQvnZCXhZfgsNv3O2thm57Ov7WTla0Ac2I4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772734090; c=relaxed/simple;
-	bh=2ctX1mZz+0YJrGol754hzx2Gmt4W2jykkiI3ik0bJWk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=B3wTfF2JWXoKMLRQbr5F9qnOHMAtfQaEByfGh4usoMxxvhu9d7jOxlCXATtRvEumzQOqI2u7z5tK3TowtoEIaN3U4A9nflIgmmr2ooy+Y1vMD1lnPODPdxle27aFfr/5DABpJh8AQZQNpixeG4EMZ1T1DQIZW+3f2VQ183sBI6A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BkNw8Yqs; arc=none smtp.client-ip=209.85.216.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 033A62F659F
+	for <linux-doc@vger.kernel.org>; Thu,  5 Mar 2026 19:05:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.170
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1772737551; cv=pass; b=ilqEM0x8i7FM+acPPMCh7QJbZW1BDm+t/76cY88qBWXI3LmNGSzxOw+4sU0t1iXeJsUrRrb5aQ2g6+rRfSyCxF1emazXQdJK5iBt2s2eSA9Q8iERZoQ509KI8SUBlpPLd5ikgLJurLoCc01Ky/GM5QbRvnLf5s4SX12tjPzFNBQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1772737551; c=relaxed/simple;
+	bh=OiEKC9dj80TLcUp3yk+ZVSKiJN0ebZG15+u03MmyUhM=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=K54oxUZe0gHxsSMeXmFEHFteJdET5uqyNEe2hv74ALZu6imvQrBK8FgdeZu721dw+QanbhdZeRnKo5a/iJ6XNSmgZLE4l3Nu4WEa8JD95PQqfs1Lspfn6mGsdLUaAlGXiw9jMqZwsA89reG9+VjFFM7GcUOrwz1Q6OkmS5j7jms=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PGDHBfDc; arc=pass smtp.client-ip=209.85.128.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-35995cb33a8so2477454a91.0
-        for <linux-doc@vger.kernel.org>; Thu, 05 Mar 2026 10:08:09 -0800 (PST)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-797d6bde07fso5082087b3.2
+        for <linux-doc@vger.kernel.org>; Thu, 05 Mar 2026 11:05:49 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772737549; cv=none;
+        d=google.com; s=arc-20240605;
+        b=VJ7Usu8a2CjDcFOLpM+mqAOoSRbUNRVGidS+NvsSBkafSaJSRec4Fnp6CzfFSG96DW
+         VViGB9LlM3raW21zIW0eKBwBm0HvgJWwxqve0VaZC/Ap955MHTSpPRa7Y1MNp/GvgVGt
+         eLjWQB6rwQW+/MniKxFo3jkpEvi0uUvfzg+CL3P4rzgdFaxbKcsbKb0L3RzkkFkVe67a
+         N9mFBH3Kbcl2d6xV0rSeP51XtLwLzu0c9APLnCBSuGQHxllBsRiDV0fNc0Y0ZGNDPwJl
+         NtDFufRIyhBXsg4B82+FxE1U7ULgDxaLX3kZ4TN8fK/Pfp/ZSU5VwLeKqZ60hzwqtxCd
+         8DCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=DUfdbW7OxfhKiR73pKbZr0uWEl4+qEzhZGOpiUb5qj8=;
+        fh=hJtsMcm63KAxZOkNKTVPqJlyQHIBOVr0T5dLDawG2zk=;
+        b=TuivbDnJTh2NJUkJE49TrL2cYGHRfn5LvfhezA2etvtzCRaSv8S07hFWv+FrA9uGEy
+         DOUxdnqCGGE/wVGfsmlaSowCwii//TTZgZaCNRLcTShkkN0qk0Ijxej7mLjvizAFVi4S
+         3+7vCQHdyk7GqsShVSVawksUKHkjYq7cagT+2VC5Pzr6ggdreXA2xOhV6gk+d94HyDT2
+         eNEmHbuPrZXGPE8Ow0aRQ5RJDUPnnHnvfdcKvaleygLGMfK/3VnNOdn751/q8g7/foh8
+         8P9LwLt/Jz0nZ+n+BjxA0I1ZKpxHdsOowrsfH3FghUE0Yjv6AXj/G4qdz85zLxuk7IGE
+         TWMg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772734088; x=1773338888; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=UQsGapjWvt7DkE/WwtDK7xc0/QU5KL1TvsMkrixcHyA=;
-        b=BkNw8YqsHxFLxkl8W8//VPR5ycoQEtMxba5W97UEHblfXsU/ct49SJ4uSE/1DOra7o
-         KvW+yafNVkSq6zs4h9oExchTczqjWfka1MBFs46wW4GgKj/IqajhQQYMi6yFpwDj0Hgq
-         RZekSCKx29GjNcUcq/pBBk2SuTJOBoQSJjV1+jQ+KCU0lJ3wtyP3cgq1JsKehuZaOXDk
-         /n9zrDYb4VoYDGPZJX9KI+4Lo+TOtVkRbnpJbZeIDf82Kca2Y6YS+kHUHUbAoZOfOb4Y
-         83gKufrlfKeavFSjHt3Vf/St0MeyUymYjPDP3Ds89jqCww26ziswGZkjKnyWvNlH1A5m
-         eLQA==
+        d=gmail.com; s=20230601; t=1772737549; x=1773342349; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DUfdbW7OxfhKiR73pKbZr0uWEl4+qEzhZGOpiUb5qj8=;
+        b=PGDHBfDcvLabTp72Em/A1p3xWwIMXxb5OPdsMMut5RG+EV/wbrTkt4lpWKP763RNQR
+         5YMRwWuignb6eIxMtaGOJraHLWeNhw2QhnkQ2N5s89Jyshrj8WKlwxosnz1SLfiW6HxK
+         h+2nG3pnZpVPyc6fYCauXUvcj72fqd/ky5bhE1R5sLBuMURwTNwPE/7CZ57qOuS5vlP2
+         q7S0ttvPPq6obsGqA0YmnYTci3ZKoshdkJ2aYQ57V7yiMjesiQDcILZjeWsP5VRCPIM+
+         GCoLkJfASXEtn+F+eTetRw+cU6f5l0uSjqFy5ck/uP9T81Dv6YUy8z1t4rMBzRNvHfb2
+         scMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772734088; x=1773338888;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UQsGapjWvt7DkE/WwtDK7xc0/QU5KL1TvsMkrixcHyA=;
-        b=Wpu9uQ6eoJfdeLJAelXbg9Yi6dpI2qo5oaAMizAJCpieVebLvOXg0tovbMoXvPIcI0
-         ilPODS5EzQXOoXT7GdQH1O2izSy6rbIqDWTl1iuEHkIb1UsCekc1B47nQTuSPD3DgBy6
-         yD+3Bg0nD7bcrn8Fn7IUp6AfgDDhn2bGN5aC9c/n6xUfqRXyujLZQyoc481xS+l+C0jn
-         QqR++s9NMTAdFLLWEJ0NhS9MqZkuXdgvtB+k6ARUQB/dgpW6bvUxQPMmV/l7/jnMNLOe
-         /NEiZO1xXKgfvSjk50S1D6VRB8FJknLSrX4Pxvr4wVwtuIpGHcGJzqy9vXAuDDP4okTu
-         7mvw==
-X-Gm-Message-State: AOJu0YyBPcpr2WUp6lvAZpoJ+ufG1MPMGL+Z7XPcoTq7HeMEGMuEWwLk
-	iFOCUX+6CiYphwtuXXPD8FYg4+waAPSzmRjTOcKNRijQMhiRKmECVbqnK822o31B
-X-Gm-Gg: ATEYQzyisre3bxJRN5oJCtEJPrKM+0oVA5E+NnAulIAmTX5vBLBXfsWicZMWBIfTmdS
-	/0KvtGsclUJDP92teeaHr91PssvufAnF976VLHPwj3meV9mtIfkWU1bZjX+NYkIt6oR39XbmwX9
-	lUiRqMQ1BeklCJpn9uIT2fIjmFNwfPdTgmLrjAg7QatPuf1Ro4yZl1dLNzjZEK02wmKrzua/6cS
-	Hn/gbO3lAIP6fyDtQuNlCQV56akeN4za4ruKjVsAlwIX1snQdsNhuH/88Xxs6n4Tn23/h/ZRoHY
-	TW0CfC4r6BQC4q71P8ed9udd1k5j1t5Er+SFTHJO9h/nqho4LeJ5qRT3rMR1pbarf/MYTad2VpN
-	hynY7w4Jg2oLPtAceMcQXTRqxaOAk/bfA7DxnMr+NHu0pAMIWip6dkuTm4n8oLG3IZncUkrPguV
-	0+kAYW9HD0gYVfmeST8JEBs7XPCmkaIbR4HFG3XDERdvEStCLypjzNAMyASWv/RTu/vDY=
-X-Received: by 2002:a17:90b:55c8:b0:356:24c8:2291 with SMTP id 98e67ed59e1d1-359b1ac4e05mr2725431a91.0.1772734088524;
-        Thu, 05 Mar 2026 10:08:08 -0800 (PST)
-Received: from fedora.mrout-thinkpadp16vgen1.punetw6.csb ([223.181.53.201])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-359b2d40427sm2638396a91.5.2026.03.05.10.08.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Mar 2026 10:08:07 -0800 (PST)
-From: Malaya Kumar Rout <malayarout91@gmail.com>
-To: linux-doc@vger.kernel.org
-Cc: mrout@redhat.com,
-	skhan@linuxfoundation.org,
-	me@brighamcampbell.com,
-	Malaya Kumar Rout <malayarout91@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Marneni PoornaChandu <poornachandumarneni@gmail.com>,
-	Kevin Paul Reddy Janagari <kevinpaul468@gmail.com>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] docs: driver-api: usb: Document USBDEVFS_BULK return value and short reads
-Date: Thu,  5 Mar 2026 23:37:50 +0530
-Message-ID: <20260305180753.114732-1-malayarout91@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        d=1e100.net; s=20230601; t=1772737549; x=1773342349;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DUfdbW7OxfhKiR73pKbZr0uWEl4+qEzhZGOpiUb5qj8=;
+        b=bloizY2u5t8KO6k4Mzfb0ECh+cGqs5pHx3Gf+MXosQ4khaJiozSjeTQOI3Mt6dR3ZT
+         v5SGUMMjCAgxZM9a/J3VdSfYwgBrUSCmnMj1uGUW/K0mtbbNvirOuvqJJmDg2e1qbIpj
+         RGgZx2xwDXSdqht9UCpRH3ln6XYGk2pHacVjuaVW81rDShj/vTWDENoPI+jh1efbfSkx
+         djeMfe2Z3tt0z+EKm6Nf6S2v/K5gAHN6ZtkJm9n2xX1gCEuKgodA+SLwUBisNLKvY0HQ
+         uXK661gg6D22OIRP9EXZsFQorSw9jt1piOthTSOJdkI4gE/fHaHGsgWHgxi6Fcc79EN0
+         dLcA==
+X-Forwarded-Encrypted: i=1; AJvYcCVqg1jikS3SuqbuhTJChZfK1bT3A7TuamoOpCay/wl8XoCcKMWTMudASm5WmnY1I2RmDeS+Boz36tE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwtMcGzWCC8NoXsLDvkg2Cg5aN5kiW/zi5z2IZ59iQFemVmGoD+
+	t0cpalit16AYL8+/zNlVkaUULcgLE9+uT5UhmqaYeJrJvDNU/tbwbn+0uxgRtXMMBAG7ZUjA4Bs
+	WwYfJvWpOATJm1CkH2vnR4DwJJgFDykg=
+X-Gm-Gg: ATEYQzyaA8j87NEll/mkXriFcEyfRTXm5WArtQACsxHq/RJFhdjvnm105R8WEPv6Lyg
+	0/XRj0jdJT3F0Ech1+X3/SJTq7rnC8NURNwu0Jb2kFE12Zo//UGAqlPdh7KiUEMUB4BOGHk1tTa
+	d+3sdQqA6H97Ngt3qQmvQuMyHTVl/Z3tsQFLqrzGeJpb6pJXA2KgoPF0UfIfHWvNusRNxurksf6
+	6nAEE2lMOHpsf2GsKz3LiA2uWWzv79eoKVXFNgnD3P0jbfUKNoPHn1//zAqmSD298EhoSVKfSV4
+	wij3uw==
+X-Received: by 2002:a05:690c:e3ca:b0:798:1de:f894 with SMTP id
+ 00721157ae682-798c6c843e6mr49794737b3.4.1772737548885; Thu, 05 Mar 2026
+ 11:05:48 -0800 (PST)
+Received: from 95991385052 named unknown by gmailapi.google.com with HTTPREST;
+ Thu, 5 Mar 2026 13:05:48 -0600
+Received: from 95991385052 named unknown by gmailapi.google.com with HTTPREST;
+ Thu, 5 Mar 2026 13:05:48 -0600
+From: Andrey Ryabinin <ryabinin.a.a@gmail.com>
+In-Reply-To: <bd935d83b2fe3ddfedff052323a2b84e85061042.1770232424.git.m.wieczorretman@pm.me>
+References: <cover.1770232424.git.m.wieczorretman@pm.me> <bd935d83b2fe3ddfedff052323a2b84e85061042.1770232424.git.m.wieczorretman@pm.me>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: BC7B0216CA9
+Date: Thu, 5 Mar 2026 13:05:48 -0600
+X-Gm-Features: AaiRm51wLGHSZ9SaMaT4E-JYzg2vW23YHvcBblsyf-Lc9uQK9qhJFdTRUjtyx2g
+Message-ID: <CAPAsAGxpHBqzppoKCrqvH0mfhEn6p0aEHR30ZifB3uv81v68EA@mail.gmail.com>
+Subject: Re: [PATCH v10 01/13] kasan: sw_tags: Use arithmetic shift for shadow computation
+To: Maciej Wieczor-Retman <m.wieczorretman@pm.me>, Catalin Marinas <catalin.marinas@arm.com>, 
+	Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Alexander Potapenko <glider@google.com>, Andrey Konovalov <andreyknvl@gmail.com>, 
+	Dmitry Vyukov <dvyukov@google.com>, Vincenzo Frascino <vincenzo.frascino@arm.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Jan Kiszka <jan.kiszka@siemens.com>, 
+	Kieran Bingham <kbingham@kernel.org>, Nathan Chancellor <nathan@kernel.org>, 
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Bill Wendling <morbo@google.com>, 
+	Justin Stitt <justinstitt@google.com>
+Cc: Samuel Holland <samuel.holland@sifive.com>, 
+	Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>, linux-arm-kernel@lists.infradead.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	kasan-dev@googlegroups.com, workflows@vger.kernel.org, linux-mm@kvack.org, 
+	llvm@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+X-Rspamd-Queue-Id: BB247217368
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[redhat.com,linuxfoundation.org,brighamcampbell.com,gmail.com,lwn.net,vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78061-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TAGGED_FROM(0.00)[bounces-78063-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[pm.me,arm.com,kernel.org,lwn.net,google.com,gmail.com,linux-foundation.org,siemens.com];
 	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[malayarout91@gmail.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ryabininaa@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-0.949];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,mail.gmail.com:mid]
 X-Rspamd-Action: no action
 
-Remove a longstanding FIXME comment in the USBDEVFS_BULK documentation
-by properly documenting the return value behavior. The ioctl returns the
-actual number of bytes transferred on success, which naturally handles
-short reads (where fewer bytes are read than requested) by returning a
-value less than the requested length.
+Maciej Wieczor-Retman <m.wieczorretman@pm.me> writes:
 
-This information was verified by examining the implementation in
-drivers/usb/core/devio.c:do_proc_bulk(), which returns the actual
-transfer length on success.
+> --- a/mm/kasan/kasan.h
+> +++ b/mm/kasan/kasan.h
+> @@ -558,6 +558,13 @@ static inline bool kasan_arch_is_ready(void)	{ return true; }
+>  #error kasan_arch_is_ready only works in KASAN generic outline mode!
+>  #endif
+>
+> +#ifndef arch_kasan_non_canonical_hook
+> +static inline bool arch_kasan_non_canonical_hook(unsigned long addr)
+> +{
+> +	return false;
+> +}
+> +#endif
+> +
+>  #if IS_ENABLED(CONFIG_KASAN_KUNIT_TEST)
+>
+>  void kasan_kunit_test_suite_start(void);
+> diff --git a/mm/kasan/report.c b/mm/kasan/report.c
+> index 62c01b4527eb..53152d148deb 100644
+> --- a/mm/kasan/report.c
+> +++ b/mm/kasan/report.c
+> @@ -642,10 +642,19 @@ void kasan_non_canonical_hook(unsigned long addr)
+>  	const char *bug_type;
+>
+>  	/*
+> -	 * All addresses that came as a result of the memory-to-shadow mapping
+> -	 * (even for bogus pointers) must be >= KASAN_SHADOW_OFFSET.
+> +	 * For Generic KASAN, kasan_mem_to_shadow() uses the logical right shift
+> +	 * and never overflows with the chosen KASAN_SHADOW_OFFSET values. Thus,
+> +	 * the possible shadow addresses (even for bogus pointers) belong to a
+> +	 * single contiguous region that is the result of kasan_mem_to_shadow()
+> +	 * applied to the whole address space.
+>  	 */
+> -	if (addr < KASAN_SHADOW_OFFSET)
+> +	if (IS_ENABLED(CONFIG_KASAN_GENERIC)) {
+> +		if (addr < (unsigned long)kasan_mem_to_shadow((void *)(0ULL)) ||
+> +		    addr > (unsigned long)kasan_mem_to_shadow((void *)(~0ULL)))
+> +			return;
+> +	}
+> +
+> +	if (arch_kasan_non_canonical_hook(addr))
+>  		return;
+>
 
-Signed-off-by: Malaya Kumar Rout <malayarout91@gmail.com>
----
- Documentation/driver-api/usb/usb.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
+I've noticed that we currently classify bugs incorrectly in SW_TAGS
+mode. I've sent the fix for it [1] :
+ [1] https://lkml.kernel.org/r/20260305185659.20807-1-ryabinin.a.a@gmail.com
 
-diff --git a/Documentation/driver-api/usb/usb.rst b/Documentation/driver-api/usb/usb.rst
-index 7f2f41e80c1c..a01d72af479b 100644
---- a/Documentation/driver-api/usb/usb.rst
-+++ b/Documentation/driver-api/usb/usb.rst
-@@ -539,6 +539,12 @@ USBDEVFS_BULK
-     kernels support requests up to about 128KBytes. *FIXME say how read
-     length is returned, and how short reads are handled.*.
- 
-+    kernels support requests up to about 128KBytes. On success, the
-+    ioctl returns the number of bytes actually transferred. Short reads
-+    are supported; if fewer bytes are received than requested, only the
-+    actual number of bytes received are copied to the buffer and that
-+    count is returned. On error, a negative error code is returned.
-+
- USBDEVFS_CLEAR_HALT
-     Clears endpoint halt (stall) and resets the endpoint toggle. This is
-     only meaningful for bulk or interrupt endpoints. The ioctl parameter
+While at it, I was thinking whether we can make the logic above more
+arch/mode agnotstic and without per-arch hooks, so I've ended up with
+the following patch (it is on top of [1] fix).
+I think it should work with any arch or mode and both with signed or
+unsigned shifting.
+
+diff --git a/mm/kasan/report.c b/mm/kasan/report.c
+index e804b1e1f886..1e4521b5ef14 100644
+--- a/mm/kasan/report.c
++++ b/mm/kasan/report.c
+@@ -640,12 +640,20 @@ void kasan_non_canonical_hook(unsigned long addr)
+ {
+ 	unsigned long orig_addr, user_orig_addr;
+ 	const char *bug_type;
++	void *tagged_null = set_tag(NULL, KASAN_TAG_KERNEL);
++	void *tagged_addr = set_tag((void *)addr, KASAN_TAG_KERNEL);
+
+ 	/*
+-	 * All addresses that came as a result of the memory-to-shadow mapping
+-	 * (even for bogus pointers) must be >= KASAN_SHADOW_OFFSET.
++	 * Filter out addresses that cannot be shadow memory accesses generated
++	 * by the compiler.
++	 *
++	 * In SW_TAGS mode, when computing a shadow address, the compiler always
++	 * sets the kernel tag (some top bits) on the pointer *before* computing
++	 * the memory-to-shadow mapping. As a result, valid shadow addresses
++	 * are derived from tagged kernel pointers.
+ 	 */
+-	if (addr < KASAN_SHADOW_OFFSET)
++	if (tagged_addr < kasan_mem_to_shadow(tagged_null) ||
++	    tagged_addr > kasan_mem_to_shadow((void *)(~0ULL)))
+ 		return;
+
+ 	orig_addr = (unsigned long)kasan_shadow_to_mem((void *)addr);
+@@ -670,7 +678,7 @@ void kasan_non_canonical_hook(unsigned long addr)
+ 	} else if (user_orig_addr < TASK_SIZE) {
+ 		bug_type = "probably user-memory-access";
+ 		orig_addr = user_orig_addr;
+-	} else if (addr_in_shadow((void *)addr))
++	} else if (addr_in_shadow(tagged_addr))
+ 		bug_type = "probably wild-memory-access";
+ 	else
+ 		bug_type = "maybe wild-memory-access";
 -- 
-2.53.0
-
+2.52.0
 
