@@ -1,182 +1,178 @@
-Return-Path: <linux-doc+bounces-77924-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-77926-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +JLWEYsmqWkL2gAAu9opvQ
-	(envelope-from <linux-doc+bounces-77924-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:45:31 +0100
+	id +LK4I7csqWlN2wAAu9opvQ
+	(envelope-from <linux-doc+bounces-77926-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 08:11:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 736FB20BD01
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 07:45:30 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2886E20C3A9
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 08:11:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 363E13024400
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 06:45:26 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 3F10230266E3
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 07:11:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B27C2F12AE;
-	Thu,  5 Mar 2026 06:45:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A1FC31355D;
+	Thu,  5 Mar 2026 07:11:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="a5SWfDjR"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="QjcfWv0L"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out162-62-57-87.mail.qq.com (out162-62-57-87.mail.qq.com [162.62.57.87])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFAF4336896
-	for <linux-doc@vger.kernel.org>; Thu,  5 Mar 2026 06:45:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.62.57.87
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB30C3101B2;
+	Thu,  5 Mar 2026 07:11:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772693125; cv=none; b=s10bMpcV5l1C7162gvlCl2OESgrhPR2etGSKqtLgkQ17Be6UkIlU2uaRrHkeSzO23rn7+9nUScEeulDO7julSBMIMInpn7lG+jw9/ZuE/bX/TCbxivzO4IZiZiCjzhEcUkG91yhvj6yxC/lqM7VDFG/KQzESw1hhhLuvNOyjQLc=
+	t=1772694708; cv=none; b=s1IlQM8OApo1vatRxQuCkiBA6UCc0gXbOm/SwoPlUfb/r0GQc5YobgkJEGvebKpatzYH0+TqeReoPRHh7KxXW78ixVCkR4QC4kF2HoxQmnFZ0zjNpFoJ7yOwXnK8qh6cDfdRV4uvvrr4oUULEnmfcJpiuK2MkOTk2U4VO6TqZx8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772693125; c=relaxed/simple;
-	bh=e3rvKJhqgU4v4vTlGVkYlWMiImT+lKsUX/t0JBIaGz0=;
-	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version; b=tsyptH8GhFaMKwWnUtyMvnXigRG2ZZ1WwJ2MdOeTHfLzyza7aSaOkJUz8LJYel21B6HK5OYTTLd4ABmAvbxAmwk1rZ2ckzOli0Ep2XI1wIYYDZcC51b0nqkWcwhuV/vki/bdgYeaHJ2j/hpiq+ybJ2RO+IwzFKvk/sJEaaZe2XI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=a5SWfDjR; arc=none smtp.client-ip=162.62.57.87
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1772693112; bh=p5gYO06tETbxxzm5AlgGXCG+lX5qbKRYLKDTXW/fKOw=;
-	h=From:To:Cc:Subject:Date;
-	b=a5SWfDjRU/59iOepr9C+m8IaiXIidyy6PF9Yr1ExMN+Hd4yQvAlG7++w9pl53lkDk
-	 bqAPbLqI09gUJSyKNlvBBj7LQBcrYUydCIOVQ5JbHpVw1SweEJzjgpG04eHUTz3DJl
-	 ajY4/TlI41cTLYpu4+MbFHhrn4+cBQELzTLU4fjM=
-Received: from localhost.localdomain ([124.70.231.53])
-	by newxmesmtplogicsvrszc43-0.qq.com (NewEsmtp) with SMTP
-	id A77894DD; Thu, 05 Mar 2026 14:41:55 +0800
-X-QQ-mid: xmsmtpt1772692915t4vy7ysco
-Message-ID: <tencent_6D5FBEBE0E2FDACC93E50D0893497F676407@qq.com>
-X-QQ-XMAILINFO: M+6QKz8nsrJQi/KvNYyCXKgA+6OpX2Gn0n5asWo9P//gfkHcrvwRDdIuIPFJtj
-	 eJAuuAkZRpWgB7SKqPL+GvGB7IYR/I7fRNT87R6+frGeT3dT+o5GzuAtZGCjBCcq3Y7RmG+H4u5A
-	 F3JqssaVJmdj/9JMbpgy2YXbfT5ivVusu4kSKb5+QFYKtpyFeuXca9YguctJcWaPiVci8XDo37J2
-	 6FoqTqxZPZ5fXechgFUpaLbC4kJPQPuwdgOOnsZHyTZRiWbEI5MRO8f4XViyzIqg7spV2U8OgHwI
-	 r37WOfR/KtlAuS/dviwQAXN90jnDiJqMSm8BCjpfGUtk+v4yWDbJ1BjLJEARtgBa9mSym5LunJyc
-	 ItjnkgP6Jh4PVizBpObbmSXWefMKzobGqZC9BTK8b10O2To59nPRFwklcmu8nkWqrY4ovPrF21FQ
-	 yyvNP6zLooJfwpLcfcLod/Yo+6cvqV+eELKGbWHCtm6k0VcW8tqza864tU6IM3oqHeym8wJCA6bi
-	 OaejOgnBq/q1/zhAm0jePtkS6iiBTD/JT1aGDraGJu51k1gMY7zjkvw7SNujO6SDaTcqQTDeoHoR
-	 3UnWB7LpA4MCTF9VfZr9LTpmAUv4HXracgwm95ChfzfOReK1DH+O5qrI50/wk2WGf9Tt5+qqrwS3
-	 J1fP0vWxgn4wTQ8fT2yiRPi6zaMfIRPW37dlW3JOfn8WJEl1HK9gEVMnnFKIgD6I35gi77FlgOsV
-	 s8B82c2IgGLVkh60i1350Cf6KwXUWpX0Y1Pwhl+8wtLpkRjfIn0RxajvqFSoHAN/kjghp1YMXe6V
-	 v/a4+33YAxqdhoMk1KmsOL0s8hkzmruNAYfZxxoWaU3QLZMxMYSu/7EU0EqewdCtCVNCuBpySA/+
-	 qea5ubzGY0B/MMcTLV9oTg4ku5B6tiwNQrL4w6nDDYF0lcW5Uc8ogzGl0vL7hIvHL5t6Hfgp66p0
-	 M+f5pJddIjC0Amqbx23PatCtMCOdl6gNXdLXfyIQ0kkSGqBzQW6g5HFZ+YeuwtLMtxXdCKnNA=
-X-QQ-XMRINFO: MPJ6Tf5t3I/ylTmHUqvI8+Wpn+Gzalws3A==
-From: hujinfei <3288824963@qq.com>
-To: linux-doc@vger.kernel.org
-Cc: pmladek@suse.com,
-	senozhatsky@chromium.org,
-	qujingling@huawei.com,
-	zhangjiaji1@huawei.com,
-	xushuangxing@huawei.com,
-	rostedt@goodmis.org,
-	john.ogness@linutronix.de,
-	hujinfei3@huawei.com
-Subject: [PATCH] Documentation: printk: warn about lockups from excessive use
-Date: Thu,  5 Mar 2026 14:41:40 +0800
-X-OQ-MSGID: <20260305064140.1828-1-3288824963@qq.com>
-X-Mailer: git-send-email 2.46.0.windows.1
+	s=arc-20240116; t=1772694708; c=relaxed/simple;
+	bh=mh7TqYGtwyz8BNhFD30DS+eTl5ENs1RwMsa8SpKQyfA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WUDYgFHmt8YkxTDbx4bXeyN6+lI2Tph772MBw48lW59GUROYQUtIpCdbbs6nzEoy+iqVOTpjkqkyMB7ypJWOUPkvGcZmbTHl+9JUFCPFQgx/ay3hpYL2JFvVLqVKGIFtc4+HfJ+3ulpQvYT3A9RR1zWaNLXsdu8dlFuvft9xIY8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=QjcfWv0L; arc=none smtp.client-ip=192.198.163.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1772694707; x=1804230707;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=mh7TqYGtwyz8BNhFD30DS+eTl5ENs1RwMsa8SpKQyfA=;
+  b=QjcfWv0L8UzoMjC9zl2GmwGsLypqTWpedVkMe4DdWTWg4Qu5CqAQawAg
+   0Hew030BZEEDf5paPV7Bqc36JvDw8mRhXoxa6Fb0E6Uqhv6EAnHotmxNU
+   0FrbTcGY87qhTR7kxZKMlKSbQE8Fdg62QrUSynVyLP1h/7M1go0EwwRze
+   rp13Tsx40ouXHbrRe/reU4oasN4ddG9DBfwUHtXjBpG0b188428FxtbYz
+   uQaC18XBqFQ54RlWt1IUZOhlgMjFTLlKWTb9P7+9eJJgFJnF0FVe5qIfs
+   5qk2s+RMbSXVy6oWI+45yGstrzyqVM9tdZRmHBjs9hJdcEYj3uW1+vOxk
+   Q==;
+X-CSE-ConnectionGUID: tOyStoCbT0aS9ZOgm8iNkA==
+X-CSE-MsgGUID: TxLf4fUlSamGMeckgXYsiQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11719"; a="73687281"
+X-IronPort-AV: E=Sophos;i="6.21,325,1763452800"; 
+   d="scan'208";a="73687281"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Mar 2026 23:11:47 -0800
+X-CSE-ConnectionGUID: 4I7EZlacT7CX44ivW2zzbA==
+X-CSE-MsgGUID: tDPbyxNBSTmeAN8d90KA2Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,325,1763452800"; 
+   d="scan'208";a="241600936"
+Received: from igk-lkp-server01.igk.intel.com (HELO 9958d990ccf2) ([10.211.93.152])
+  by fmviesa002.fm.intel.com with ESMTP; 04 Mar 2026 23:11:41 -0800
+Received: from kbuild by 9958d990ccf2 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vy2rz-000000001y1-2aM6;
+	Thu, 05 Mar 2026 07:11:39 +0000
+Date: Thu, 5 Mar 2026 08:11:29 +0100
+From: kernel test robot <lkp@intel.com>
+To: Shenwei Wang <shenwei.wang@nxp.com>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+	arnaud.pouliquen@foss.st.com
+Cc: oe-kbuild-all@lists.linux.dev, Shuah Khan <skhan@linuxfoundation.org>,
+	linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Shenwei Wang <shenwei.wang@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+	devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	linux-imx@nxp.com
+Subject: Re: [PATCH v9 1/5] docs: driver-api: gpio: rpmsg gpio driver over
+ rpmsg bus
+Message-ID: <202603050819.478UbJ2l-lkp@intel.com>
+References: <20260304211808.1437846-2-shenwei.wang@nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 736FB20BD01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260304211808.1437846-2-shenwei.wang@nxp.com>
+X-Rspamd-Queue-Id: 2886E20C3A9
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-77924-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[3288824963@qq.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	FREEMAIL_CC(0.00)[lists.linux.dev,linuxfoundation.org,vger.kernel.org,pengutronix.de,gmail.com,nxp.com,lists.infradead.org];
+	TAGGED_FROM(0.00)[bounces-77926-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[qq.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	FREEMAIL_FROM(0.00)[qq.com];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,qq.com:dkim,qq.com:mid]
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[intel.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,01.org:url,intel.com:dkim,intel.com:email,intel.com:mid]
 X-Rspamd-Action: no action
 
-From: hujinfei <hujinfei3@huawei.com>=0D
+Hi Shenwei,
 
-Add a section 'Avoiding lockups from excessive printk() use' to=0D
-printk-basics.rst, explaining the risk of calling printk() in hot paths=0D
-with slow consoles and suggesting alternatives like ratelimited printing,=0D
-tracepoints, nbcon, and log level filtering.=0D
-=0D
-Signed-off-by: hujinfei <hujinfei3@huawei.com>=0D
----=0D
- Documentation/core-api/printk-basics.rst | 29 ++++++++++++++++++++++++=0D
- 1 file changed, 29 insertions(+)=0D
-=0D
-diff --git a/Documentation/core-api/printk-basics.rst b/Documentation/core-=
-api/printk-basics.rst=0D
-index 2dde24ca7..f6ca1bc55 100644=0D
---- a/Documentation/core-api/printk-basics.rst=0D
-+++ b/Documentation/core-api/printk-basics.rst=0D
-@@ -103,6 +103,35 @@ For debugging purposes there are also two conditionall=
-y-compiled macros:=0D
- pr_debug() and pr_devel(), which are compiled-out unless ``DEBUG`` (or=0D
- also ``CONFIG_DYNAMIC_DEBUG`` in the case of pr_debug()) is defined.=0D
- =0D
-+Avoiding lockups from excessive printk() use=0D
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=0D
-+=0D
-+Do not use ``printk()`` in hot paths such as interrupt handlers, timer=0D
-+callbacks, or high-frequency network receive routines. When a slow console=
-=0D
-+(e.g., ``console=3DttyS0``) is active, ``printk()`` may synchronously acqu=
-ire=0D
-+``console_sem`` and block while flushing messages, potentially disabling=0D
-+interrupts long enough to trigger hard or soft lockup detectors.=0D
-+=0D
-+To avoid this:=0D
-+=0D
-+- Avoid ``printk()`` in hot paths and interrupt contexts.=0D
-+- Use rate-limited variants (e.g., ``pr_xxx_ratelimited()``) or one-time m=
-acros=0D
-+  (e.g., ``pr_xxx_once()``).=0D
-+- Assign lower log levels (e.g., ``KERN_DEBUG``) to non-essential messages=
- and=0D
-+  filter console output via ``console_loglevel``.=0D
-+- Use consoles that implement the non-blocking ``nbcon`` API (indicated by=
-=0D
-+  ``CON_NBCON``), which offload message printing to a dedicated kernel thr=
-ead=0D
-+  outside emergency contexts. Note that asynchronous printing increases th=
-e risk=0D
-+  of message loss during crashes; increasing the kernel log buffer size ma=
-y help=0D
-+  retain more messages.=0D
-+=0D
-+Temporary debugging may use ``trace_printk()``, but it must not appear in=
-=0D
-+mainline code. See the section about ``trace_printk()`` in=0D
-+``Documentation/trace/debugging.rst``.=0D
-+=0D
-+If more permanent output is needed in a hot path, trace events can be used=
-. See=0D
-+``Documentation/trace/events.rst`` and=0D
-+``samples/trace_events/trace-events-sample.[ch]``.=0D
- =0D
- Function reference=0D
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=0D
--- =0D
-2.33.0=
+kernel test robot noticed the following build warnings:
 
+[auto build test WARNING on brgl/gpio/for-next]
+[also build test WARNING on remoteproc/rproc-next robh/for-next next-20260304]
+[cannot apply to linus/master v6.16-rc1]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Shenwei-Wang/docs-driver-api-gpio-rpmsg-gpio-driver-over-rpmsg-bus/20260305-052440
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/brgl/linux.git gpio/for-next
+patch link:    https://lore.kernel.org/r/20260304211808.1437846-2-shenwei.wang%40nxp.com
+patch subject: [PATCH v9 1/5] docs: driver-api: gpio: rpmsg gpio driver over rpmsg bus
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260305/202603050819.478UbJ2l-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202603050819.478UbJ2l-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   .. code-block:: none
+   +-----+-----+-----+-----+-----+----+
+   |0x00 |0x01 |0x02 |0x03 |0x04 |0x05|
+   | 1   | 2   |port |line | err | dir|
+   +-----+-----+-----+-----+-----+----+ [docutils]
+>> Documentation/driver-api/gpio/gpio-rpmsg.rst:115: WARNING: Title underline too short.
+
+
+vim +115 Documentation/driver-api/gpio/gpio-rpmsg.rst
+
+   112	
+   113	
+   114	GET_VALUE (Cmd=4)
+ > 115	~~~~~~~~~~~~~~~~
+   116	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
