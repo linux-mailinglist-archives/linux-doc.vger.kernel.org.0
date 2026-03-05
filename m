@@ -1,145 +1,139 @@
-Return-Path: <linux-doc+bounces-77995-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78005-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yMr8MyeTqWlCAQEAu9opvQ
-	(envelope-from <linux-doc+bounces-77995-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:28:55 +0100
+	id kAklLc+VqWnYAQEAu9opvQ
+	(envelope-from <linux-doc+bounces-78005-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:40:15 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5248B21364A
-	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:28:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B855E213A03
+	for <lists+linux-doc@lfdr.de>; Thu, 05 Mar 2026 15:40:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3D72931F0448
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 14:23:34 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D390031A6797
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2026 14:25:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5319A3AA1A3;
-	Thu,  5 Mar 2026 14:22:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 633A73A6F06;
+	Thu,  5 Mar 2026 14:25:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="jFYrdIlD"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WcVX9lqP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout05.his.huawei.com (canpmsgout05.his.huawei.com [113.46.200.220])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DAC221E091;
-	Thu,  5 Mar 2026 14:22:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.220
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D92143A0B05;
+	Thu,  5 Mar 2026 14:25:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772720545; cv=none; b=KBdJ4/6CSXQgJN5jAzgW+tNugfUI7nLR9fz9AmNbaeJkZFecSmey+jPmABI6fOZiNPR2/iP0hHA+UPW3+tb14UpH9czrA0Lr15sIMRNErCrgeCKzOzTcRL/CqEmOi5yFTpFZSCTvIlWpDwy70t2qCA5Yjj+mEsjkMzayjoo7JZA=
+	t=1772720709; cv=none; b=pALOe9G6mNyA7OY9gfxjwZICJN5txFv+njW2cBBI4o0dQpbO/FojRFqOIJkDEBl1bEFiIdJ6p18+595O9o2fAe4yr59GOyFn62k7Qi2PXYuQEGzEcLmoZ+CgaaJLjRqpvYvAZHZL00w4HwVKoBMZVRQSvfIhNJmxWbO38rT5ewY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772720545; c=relaxed/simple;
-	bh=kCqO2ZJkcDyyuTwrrkKrfVhZlwsoYyDv6tsJCP9WnZ0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YVSOB29BmVgzSR8kGc6L3AD/ELrSUg29vImTqHYweKI6pzVjQO8qcQhZDcDvp+vorOtbAEXrc1JOTryxknaZGkUX1XCyF69hltrvOSIp8Sc3w6potjJvpq0f9jCrsCxlmfBApy2+oMVHodR+rES0kBwdfIvar4lLkhEYuPaMwwc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=jFYrdIlD; arc=none smtp.client-ip=113.46.200.220
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=oTXEVLgDumVCBFxpbO8s07ckXDCKC5Us7m6vOmueETk=;
-	b=jFYrdIlD6scNu1lCaG+lOb4ovAPAm3AE9S1DxjPS7XzWJTmJ91siw+9jJyf+J11uZU12gG9yH
-	LrnTfdTLhSwbMToijlqDkRUVizKzS3vHaCZhmU4HQ65F+hNejkdJvNhi2AWqUghbMyFPrVX1hO0
-	jCqW7GUZ1Ef7kIbZk0dcWgE=
-Received: from mail.maildlp.com (unknown [172.19.162.223])
-	by canpmsgout05.his.huawei.com (SkyGuard) with ESMTPS id 4fRWpC4cqwz12LDV;
-	Thu,  5 Mar 2026 22:17:39 +0800 (CST)
-Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id 6EFDB40561;
-	Thu,  5 Mar 2026 22:22:15 +0800 (CST)
-Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.189.124) by
- kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Thu, 5 Mar 2026 22:22:14 +0800
-From: Fan Gong <gongfan1@huawei.com>
-To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
-	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
-	<andrew+netdev@lunn.ch>
-CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
-	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
-	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
-	<shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>
-Subject: [PATCH net-next v02 4/4] hinic3: RQ use RQ_CTXT_PREF_CI_HI instead of SQ_CTXT_PREF_CI_HI
-Date: Thu, 5 Mar 2026 22:22:01 +0800
-Message-ID: <522daf5931c4554fcc67672a0bcfa714ca1dce93.1769142701.git.zhuyikai1@h-partners.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <cover.1769142701.git.zhuyikai1@h-partners.com>
-References: <cover.1769142701.git.zhuyikai1@h-partners.com>
+	s=arc-20240116; t=1772720709; c=relaxed/simple;
+	bh=UND8xvhahcE7q/80K7vvrBC8EEtbqKcSL68hzKgc8Lw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Aw/tX3k/fHAl0BfqGGGJF3pvUfNqrPnryzlBnTuesr96KKnGQE3Xv9mbbXkhwDuaPFXWGqo+CV7lkxDeChZzXq5qh2jV3PBWU4ySQhfnBK8QxQCAfpBb99J2GqjdDOkVSCTe7PAkCpNrPg9/uKlk8YNp/3dN0jz/L+ibvFmbmNg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WcVX9lqP; arc=none smtp.client-ip=192.198.163.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1772720707; x=1804256707;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=UND8xvhahcE7q/80K7vvrBC8EEtbqKcSL68hzKgc8Lw=;
+  b=WcVX9lqPvGat+f7l/F/SnHSVbcasb/nn2NT3Hzq72m7NmUUzX5YrAvdD
+   xNqLS44b2VxNsA8RmAGwE6Faff9Navr9TZFRFQEk+9WjbeskyAPKZxvl6
+   itUh7IbBja8/1TB5PLyNIA4+2etaK0cimXgr4OmzAeFRk8jTqKmk6Euw/
+   D9sjhT6nDY6kUUhyShYlVLMxm/0g00Pr3p4XcuEydzfb9DXr6p2ulQv2d
+   H9wl3R2+0otgGyyXLQppLOrnPgKU/iQDptQDcS6gE3jbrM9q2TGDK6kxf
+   bfO/HtjAFHglRHL2Eq+DltAT3QV/eviAzAzL5tPtaPscKAjIvk/wj5L0F
+   w==;
+X-CSE-ConnectionGUID: XhTww3hNQjmnNUpoemuXUA==
+X-CSE-MsgGUID: xF7VZhfzT3Ok2HLJrptGUA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11720"; a="72835923"
+X-IronPort-AV: E=Sophos;i="6.23,103,1770624000"; 
+   d="scan'208";a="72835923"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Mar 2026 06:25:06 -0800
+X-CSE-ConnectionGUID: F23Q4HAtQZOHCQj1Y+ZJiQ==
+X-CSE-MsgGUID: 8InoVMI7SAakhBhZj/4klQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,103,1770624000"; 
+   d="scan'208";a="217938311"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa010.jf.intel.com with ESMTP; 05 Mar 2026 06:25:02 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1001)
+	id B050B95; Thu, 05 Mar 2026 15:25:00 +0100 (CET)
+Date: Thu, 5 Mar 2026 15:25:00 +0100
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Frank Rowand <frowand.list@gmail.com>,
+	Mika Westerberg <westeri@kernel.org>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Janusz Krzysztofik <jmkrzyszt@gmail.com>,
+	Tony Lindgren <tony@atomide.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, linux-gpio@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH 2/6] gpio: move hogs into GPIO core
+Message-ID: <20260305142500.GB2275908@black.igk.intel.com>
+References: <20260305-gpio-hog-fwnode-v1-0-97d7df6bbd17@oss.qualcomm.com>
+ <20260305-gpio-hog-fwnode-v1-2-97d7df6bbd17@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- kwepemf100013.china.huawei.com (7.202.181.12)
-X-Rspamd-Queue-Id: 5248B21364A
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260305-gpio-hog-fwnode-v1-2-97d7df6bbd17@oss.qualcomm.com>
+X-Rspamd-Queue-Id: B855E213A03
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-77995-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	FREEMAIL_CC(0.00)[kernel.org,glider.be,gmail.com,linux.intel.com,iki.fi,atomide.com,armlinux.org.uk,lwn.net,linuxfoundation.org,vger.kernel.org,lists.infradead.org];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78005-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[intel.com:+];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[huawei.com:+];
+	MISSING_XM_UA(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mika.westerberg@linux.intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-Separate the CTX_PREF_CI_HI of rq and sq to improve readability.
+On Thu, Mar 05, 2026 at 10:51:27AM +0100, Bartosz Golaszewski wrote:
+> Refactor line hogging code by moving the parts duplicated in
+> gpiolib-acpi-core.c and gpiolib-of.c into gpiolib.c, leaving just the
+> OF-specific bits in the latter.
+> 
+> This makes fwnode the primary API for setting up hogs and allows to use
+> software nodes in addition to ACPI and OF nodes.
+> 
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
-Co-developed-by: Zhu Yikai <zhuyikai1@h-partners.com>
-Signed-off-by: Zhu Yikai <zhuyikai1@h-partners.com>
-Signed-off-by: Fan Gong <gongfan1@huawei.com>
----
- drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
-index d86cd1ba4605..90887d2bb127 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_io.c
-@@ -162,6 +162,9 @@ struct hinic3_clean_queue_ctxt {
- #define SQ_CTXT_WQ_BLOCK_SET(val, member)  \
- 	FIELD_PREP(SQ_CTXT_WQ_BLOCK_##member##_MASK, val)
- 
-+/* reuse SQ macro for RQ because the hardware format is identical */
-+#define RQ_CTXT_PREF_CI_HI(val)            SQ_CTXT_PREF_CI_HI(val)
-+
- #define RQ_CTXT_PI_IDX_MASK                GENMASK(15, 0)
- #define RQ_CTXT_CI_IDX_MASK                GENMASK(31, 16)
- #define RQ_CTXT_CI_PI_SET(val, member)  \
-@@ -629,7 +632,8 @@ static void hinic3_rq_prepare_ctxt(struct hinic3_io_queue *rq,
- 			    RQ_CTXT_PREF_SET(RQ_WQ_PREFETCH_THRESHOLD, CACHE_THRESHOLD));
- 
- 	rq_ctxt->pref_ci_owner =
--		cpu_to_le32(RQ_CTXT_PREF_SET(SQ_CTXT_PREF_CI_HI(ci_start), CI_HI) |
-+		cpu_to_le32(RQ_CTXT_PREF_SET(RQ_CTXT_PREF_CI_HI(ci_start),
-+					     CI_HI) |
- 			    RQ_CTXT_PREF_SET(1, OWNER));
- 
- 	rq_ctxt->pref_wq_pfn_hi_ci =
--- 
-2.43.0
-
+Reviewed-by: Mika Westerberg <mika.westerberg@linux.intel.com>
 
