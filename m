@@ -1,51 +1,49 @@
-Return-Path: <linux-doc+bounces-78164-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78172-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SNLrJjzVqmmqXgEAu9opvQ
-	(envelope-from <linux-doc+bounces-78164-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 14:23:08 +0100
+	id 8E80NtTYqmnmXgEAu9opvQ
+	(envelope-from <linux-doc+bounces-78172-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 14:38:28 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0163A22183B
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 14:23:07 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 898EE221D90
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 14:38:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0BDE530E2B94
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2026 13:22:05 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 15BCC3007BA9
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2026 13:37:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72BF1396564;
-	Fri,  6 Mar 2026 13:22:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZHbqGrmy"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 281FF3002B9;
+	Fri,  6 Mar 2026 13:37:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FED9395D87;
-	Fri,  6 Mar 2026 13:22:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE6252FE04E;
+	Fri,  6 Mar 2026 13:37:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=92.121.34.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772803324; cv=none; b=ICU667sgRTDw/IsfYHDRVUozPARqzjPV6mM4LzMJhLrSMSmbiZAJhEZITpd90Lk8sxxjxe0C789WXLSfPjDuR39zJ5Q3Tv1saxMK2vtWWMPUbomukZEPA4wiwTb2GVYWJyuUFwuWoHslzWN3NNPxQJ3X7vpyg9FAryfXy1W5xVQ=
+	t=1772804225; cv=none; b=jlWGLtuovJKqrUHnBVgVbJiDYWj82/2RdXUz/tXYDHXcv+cxeuaWrjMtq2VesCGFTJ9sMQ3wWNqvDNY+k+WeMhIzhOZcqQCLwlC4K9iF/zlqTODnMkZu8/6K8Y0ZBXmt+SH48xdYCs9PZnaRkTc2K+V4HJdNu8xFrBe+xHs3sd8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772803324; c=relaxed/simple;
-	bh=NJHi9UE6B7k4HX132rW8BDVazxPXELdfJWmQQW6qgOI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Dv83jI/rJIVZVhQSI3fGkIGEyLQhWHRTIPLu2p5CZIQB68gALyVNJ68mBaPhKVjCp0NA1L7cd/baBYgL6Qu0dKpPw8IrTeyhI+pE1fTzOhaAl6JM10UPyhdR7DreIG4ZqPoZK4Ua+xaOuCZcNSxIPB1OcVi4lQ9e7Rn9OWAEm7Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZHbqGrmy; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E347C4CEF7;
-	Fri,  6 Mar 2026 13:22:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772803323;
-	bh=NJHi9UE6B7k4HX132rW8BDVazxPXELdfJWmQQW6qgOI=;
-	h=From:Date:Subject:To:Cc:From;
-	b=ZHbqGrmyKGYH2y5ZwV/12M71uDwXdqnMOfEpCdAYN6ExpJXAopCXQ+2X2Tk0AhmPA
-	 gVVt4L39uD1DUYr1jHSaLE77Zrp+OWICzCJvUJc6OfsBg7ajzg4Sj8oYeDUrbObyXA
-	 Hst6eyhm2ZMmvJPmgXKTsUKuxwjF5khf8qHb3+tYBMXkwojcV+KncLGYvTE3/8Zwhg
-	 c2RfBD0nYMIfP8NBq7CYECpJwMAASuxxRm96is83ia5RVEef5i7Gdq1DwZGeBjsEEX
-	 Rj4j/ZXq5us0TnKRnTZ/mTKaOy7/rsBztSUfJS+JO6uwT7RnrLrfR6mLKKrHHh4VB5
-	 R+7HsGccUbo1w==
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 06 Mar 2026 14:22:00 +0100
-Subject: [PATCH] gpio: Document line value semantics
+	s=arc-20240116; t=1772804225; c=relaxed/simple;
+	bh=lqDoB7KMfku/0vKx1ILRlUdtCxtORssmxE6KB556SDo=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=D4iEhne6rX+lU1G6sUX8Tt/okH24V+VjJ7PutM4mGvoHU5dqhSwoFOqu0MZ3z2R0upRTdlDzP+Y+bZ/C5h8dC9FQmIgGkFAkCwzdHVgmViwuwMUH4o4lJWzejor45YeVUUn+6TsMhLFtcQkorjnt/n35iGzIf7jzbXjdJSkQyeg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; arc=none smtp.client-ip=92.121.34.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id A387D200107;
+	Fri,  6 Mar 2026 14:28:02 +0100 (CET)
+Received: from inva024.eu-rdc02.nxp.com (inva024.eu-rdc02.nxp.com [134.27.226.22])
+	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 936D32000ED;
+	Fri,  6 Mar 2026 14:28:02 +0100 (CET)
+Received: from lsv15149.swis.ro-buh01.nxp.com (lsv15149.swis.ro-buh01.nxp.com [10.162.246.145])
+	by inva024.eu-rdc02.nxp.com (Postfix) with ESMTP id 2506920270;
+	Fri,  6 Mar 2026 14:28:01 +0100 (CET)
+From: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
+Subject: [PATCH v2 0/9] accel: New driver for NXP's Neutron NPU
+Date: Fri, 06 Mar 2026 15:27:17 +0200
+Message-Id: <20260306-neutron-v2-0-3019bd8c91ef@nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -54,127 +52,147 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260306-gpio-doc-levels-v1-1-19928739e400@kernel.org>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avErBswp1x0lWgROtWAqChIEN49a
- fkW/79QOAsXWIcXMlcpEkPHNA5g7yNcjOK6QSttFCmDV5KILlr0XNkXXIitIzJuphl6lTKf8vz
- HbW/tA59L+mxhAAAA
-X-Change-ID: 20260306-gpio-doc-levels-53ecd336d434
-To: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, 
- David Jander <david@protonic.nl>, Linus Walleij <linusw@kernel.org>
+X-B4-Tracking: v=1; b=H4sIADbWqmkC/2XMyw6CMBCF4Vchs7amF6jRle9hWNAyyCxsyRQbD
+ Om7W9m6/E9Ovh0SMmGCW7MDY6ZEMdTQpwb8PIQnChprg5baSq2tCPheOQbhW9OhuY7KXiao74V
+ xou2QHn3tmdIa+XPAWf3WfyMrIUVr0XtnnOvkcA/bcvbxBX0p5QtclHlwnAAAAA==
+X-Change-ID: 20260226-neutron-c435e39d167f
+To: Oded Gabbay <ogabbay@kernel.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Sumit Semwal <sumit.semwal@linaro.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Shawn Guo <shawnguo@kernel.org>, 
+ Frank Li <Frank.Li@nxp.com>, 
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, devicetree@vger.kernel.org, imx@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, 
+ linaro-mm-sig@lists.linaro.org, Jiwei Fu <jiwei.fu@nxp.com>, 
+ Forrest Shi <xuelin.shi@nxp.com>, Alexandru Taran <alexandru.taran@nxp.com>, 
+ Daniel Baluta <daniel.baluta@nxp.com>, 
+ Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
 X-Mailer: b4 0.14.3
-X-Rspamd-Queue-Id: 0163A22183B
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772803680; l=3871;
+ i=ruxandra.radulescu@nxp.com; s=20260204; h=from:subject:message-id;
+ bh=lqDoB7KMfku/0vKx1ILRlUdtCxtORssmxE6KB556SDo=;
+ b=V73PbnYRt98K55aGU8OUY1dj8IbWgXlGFZl2PZsf6CgHZeuSfNzvuj/0xYl/hbV+zvlAGXdWU
+ 35pD+XnIjslC7+hPa20BGk9IzTbp9DzuaSabrpNmw5xuAjy3fj0ZcOj
+X-Developer-Key: i=ruxandra.radulescu@nxp.com; a=ed25519;
+ pk=zoq4b4OYR0c4faAH97xoTxdr6vfR8OvPbS+Cx0XhIBY=
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-Rspamd-Queue-Id: 898EE221D90
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.14 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[nxp.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-78164-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FREEMAIL_TO(0.00)[kernel.org,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,nxp.com,amd.com];
+	RCPT_COUNT_TWELVE(0.00)[26];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-78172-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linusw@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[ruxandra.radulescu@nxp.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.360];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,protonic.nl:email]
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo,nxp.com:mid,nxp.com:email]
 X-Rspamd-Action: no action
 
-It is not clearly documented that the GPIO driver API expect the
-driver to get/set the physical level of the GPIO line and the
-consumer API will get/set the logic level. Document this in
-relevant places.
+Introduce a new accel driver for the Neutron Neural Processing Unit
+(NPU), along with associated dt-bindings and DTS node.
 
-Reported-by: David Jander <david@protonic.nl>
-Signed-off-by: Linus Walleij <linusw@kernel.org>
+The first patch extends the GEM DMA helper APIs to allow bidirectional
+mapping of non-coherent DMA buffers. While not part of the Neutron
+driver, it's a prerequisite allowing us to use the GEM DMA helper.
+
+Neutron is a Neural Processing Unit from NXP, providing machine
+learning (ML) acceleration for edge AI applications. Neutron is
+integrated on NXP SoCs such as the i.MX95.
+
+The NPU consists of the following:
+- RISC-V core running a proprietary firmware
+- One or more Neutron cores, representing the main computation
+  engine performing ML operations
+- Dedicated fast memory (TCM)
+- DMA engine that handles data transfers between DDR and TCM
+
+The firmware is closed source and distributed as a binary here [1].
+
+The Neutron software stack also contains a userspace library [1] and
+a LiteRT custom delegate [2] that allow integration with standard
+LiteRT tools.
+
+[1] https://github.com/nxp-upstream/neutron/tree/upstream
+[2] https://github.com/nxp-imx/tflite-neutron-delegate
+
+Signed-off-by: Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
 ---
- Documentation/driver-api/gpio/driver.rst | 27 +++++++++++++++++++++++++++
- include/linux/gpio/driver.h              | 10 ++++++++--
- 2 files changed, 35 insertions(+), 2 deletions(-)
+Changes in v2:
+- rebase on newer drm-misc-next 
+- dt bindings: clock fixes and renames
+- update DTS to match new names
+- remove unnecessary fields from neutron_job structure
+- fix use of uninitialized variable
 
-diff --git a/Documentation/driver-api/gpio/driver.rst b/Documentation/driver-api/gpio/driver.rst
-index 85d86f92c41b..a4f160b95089 100644
---- a/Documentation/driver-api/gpio/driver.rst
-+++ b/Documentation/driver-api/gpio/driver.rst
-@@ -87,6 +87,33 @@ atomic context on realtime kernels (inside hard IRQ handlers and similar
- contexts). Normally this should not be required.
- 
- 
-+GPIO level semantics
-+--------------------
-+
-+The gpip_chip .get/set[_multiple]() line values are clamped to the boolean
-+space [0, 1], low level or high level.
-+
-+Low and high values are defined as physical low on the line in/out to the
-+connector such as a physical pad, pin or rail.
-+
-+The GPIO library has internal logic to handle lines that are active low, such
-+as indicated by overstrike or #name in a schematic, and the driver should not
-+try to second-guess the logic value of a line.
-+
-+The way GPIO values are handled by the consumers is that the library present
-+the *logical* value to the consumer. A line is *asserted* if its *logical*
-+value is 1, and *de-asserted* if its logical value is 0. If inversion is
-+required, this is handled by gpiolib and configured using hardware descriptions
-+such as device tree or ACPI that can clearly indicate if a line is active
-+high or low.
-+
-+Since electronics commonly insert inverters as driving stages or protection
-+buffers in front of a GPIO line it is necessary that this semantic is part
-+of the hardware description, so that consumers such as kernel drivers need
-+not worry about this, and can for example assert a RESET line tied to a GPIO
-+pin by setting it to logic 1 even if it is physically active low.
-+
-+
- GPIO electrical configuration
- -----------------------------
- 
-diff --git a/include/linux/gpio/driver.h b/include/linux/gpio/driver.h
-index fabe2baf7b50..af93bf401cb4 100644
---- a/include/linux/gpio/driver.h
-+++ b/include/linux/gpio/driver.h
-@@ -344,11 +344,17 @@ struct gpio_irq_chip {
-  * @direction_output: configures signal "offset" as output, returns 0 on
-  *	success or a negative error number. This can be omitted on input-only
-  *	or output-only gpio chips.
-- * @get: returns value for signal "offset", 0=low, 1=high, or negative error
-+ * @get: returns value for signal "offset", 0=low, 1=high, or negative error.
-+ *	the low and high values are defined as physical low on the line
-+ *	in/out to the connector such as a physical pad, pin or rail. The GPIO
-+ *	library has internal logic to handle lines that are active low, such
-+ *	as indicated by overstrike or #name in a schematic, and the driver
-+ *	should not try to second-guess the logic value of a line.
-  * @get_multiple: reads values for multiple signals defined by "mask" and
-  *	stores them in "bits", returns 0 on success or negative error
-  * @set: assigns output value for signal "offset", returns 0 on success or
-- *       negative error value
-+ *	negative error value. The output value follows the same semantic
-+ *	rules as for @get.
-  * @set_multiple: assigns output values for multiple signals defined by
-  *                "mask", returns 0 on success or negative error value
-  * @set_config: optional hook for all kinds of settings. Uses the same
+- Link to v1: https://lore.kernel.org/r/20260226-neutron-v1-0-46eccb3bb50a@nxp.com
 
 ---
-base-commit: 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
-change-id: 20260306-gpio-doc-levels-53ecd336d434
+Ioana Ciocoi-Radulescu (9):
+      drm/gem-dma: Add flag for bidirectional mapping of non-coherent GEM DMA buffers
+      accel/neutron: Add documentation for NXP Neutron accelerator driver
+      dt-bindings: npu: Add NXP Neutron
+      accel/neutron: Add driver for NXP Neutron NPU
+      accel/neutron: Add GEM buffer object support
+      accel/neutron: Add mailbox support
+      accel/neutron: Add job submission IOCTL
+      accel/neutron: Add logging support
+      arm64: dts: imx95: Add Neutron node
+
+ Documentation/accel/index.rst                      |   1 +
+ Documentation/accel/neutron/index.rst              |  12 +
+ Documentation/accel/neutron/neutron.rst            | 131 ++++++++
+ .../devicetree/bindings/npu/nxp,imx95-neutron.yaml |  96 ++++++
+ MAINTAINERS                                        |  10 +
+ arch/arm64/boot/dts/freescale/imx95.dtsi           |  28 ++
+ drivers/accel/Kconfig                              |   1 +
+ drivers/accel/Makefile                             |   3 +-
+ drivers/accel/neutron/Kconfig                      |  16 +
+ drivers/accel/neutron/Makefile                     |  12 +
+ drivers/accel/neutron/neutron_debugfs.c            |  34 ++
+ drivers/accel/neutron/neutron_debugfs.h            |  15 +
+ drivers/accel/neutron/neutron_device.c             | 239 +++++++++++++
+ drivers/accel/neutron/neutron_device.h             | 155 +++++++++
+ drivers/accel/neutron/neutron_driver.c             | 262 +++++++++++++++
+ drivers/accel/neutron/neutron_driver.h             |  16 +
+ drivers/accel/neutron/neutron_gem.c                | 116 +++++++
+ drivers/accel/neutron/neutron_gem.h                |  14 +
+ drivers/accel/neutron/neutron_job.c                | 372 +++++++++++++++++++++
+ drivers/accel/neutron/neutron_job.h                |  43 +++
+ drivers/accel/neutron/neutron_mailbox.c            |  47 +++
+ drivers/accel/neutron/neutron_mailbox.h            |  42 +++
+ drivers/gpu/drm/drm_gem_dma_helper.c               |   6 +-
+ include/drm/drm_gem_dma_helper.h                   |   3 +
+ include/uapi/drm/neutron_accel.h                   | 130 +++++++
+ 25 files changed, 1801 insertions(+), 3 deletions(-)
+---
+base-commit: 6716101ae42949e98ad4b9e71eeba08c055be410
+change-id: 20260226-neutron-c435e39d167f
 
 Best regards,
 -- 
-Linus Walleij <linusw@kernel.org>
+Ioana Ciocoi-Radulescu <ruxandra.radulescu@nxp.com>
 
 
