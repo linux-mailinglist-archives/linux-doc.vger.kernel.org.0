@@ -1,61 +1,63 @@
-Return-Path: <linux-doc+bounces-78205-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78204-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uFeBGRr3qmlxZAEAu9opvQ
-	(envelope-from <linux-doc+bounces-78205-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:47:38 +0100
+	id OJF5Fxn3qmlxZAEAu9opvQ
+	(envelope-from <linux-doc+bounces-78204-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:47:37 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E51EC2242D2
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:47:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0D8E2242C4
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:47:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D8B4E309E293
+	by sea.lore.kernel.org (Postfix) with ESMTP id BA6D3309B087
 	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2026 15:46:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 407493ECBE2;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 210323ECBC6;
 	Fri,  6 Mar 2026 15:46:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CIE5diok"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ddgTToKN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B26F13EBF38;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92FFC3EBF32;
 	Fri,  6 Mar 2026 15:45:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772811959; cv=none; b=JHjcL9/pLfmoink+6x+SnqAAgZthd99rB3eXsVwidxkATzvfRZFOAXesHXDVh6H+GHOqXD4OEA5ODDgL6ST/AEOLC46vubfRzolHZVVyx3DBGkf5Gu3TjSsAuBBuGE+C26lRumXYMUNC9DRJRUUzc/g3NtYt5MUu01UP2qQ5a9A=
+	t=1772811959; cv=none; b=X1P9GmwD2tFfMPlPVOcv7DKyYJoYDilDYo0Y8O5SbhhD/WRdaOghDWBUFY/g9/GOW33GAxrwcIlLTDf/solNUcGuZ454V2KNVLETkhaIZ7kKAakxz68G8ks8iFSbGX47ekjVD+pZltZEFpy5DNl8qG+6wXJpbIN/oPnGjhVvx1M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772811959; c=relaxed/simple;
-	bh=eIvW6vOTsydL4ttyaabmt7sLOOgqDZhdhKgwjQj87GA=;
+	bh=J6aWOl4+bZyYo837nUHeE6Bf+UJ1MQRqQj8sRXyED9k=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FmIE4zJg0N+pkDJvbjYQkBGCyRb3veAdlv5HpQNb2Dw6WOBuH/A9mBzbNp3c30lUzqqadUfr9ZxZrctsIRJJLeHmFUiIbfCLj/PkmamEP5Jnh9e+RwfbFAiVguEZDHIME/zBzHJfw/ZmLm9xVdbTqga61Lt9CSCLDP+XSVBbnjw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CIE5diok; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 479A9C2BC87;
+	 MIME-Version:Content-Type; b=DNdvq7c02DpARn1ZnE151ZME5/TFm/o5DemrmmZjwlpFBnOYFycyaXsXg2Y9iUnxI12nXn2Gb5BXWFNmCUZ1FCC1NbksMiRk417yUlBzBGBkyspwKHnHodB2l/fmzqKUFr6dHLP3cbs7h7ipBgWboO5JrNKvHi3nYj/2NR82CMw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ddgTToKN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76ACFC2BCB4;
 	Fri,  6 Mar 2026 15:45:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772811959;
-	bh=eIvW6vOTsydL4ttyaabmt7sLOOgqDZhdhKgwjQj87GA=;
+	bh=J6aWOl4+bZyYo837nUHeE6Bf+UJ1MQRqQj8sRXyED9k=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=CIE5diok0VnlYtuLDOnlqXnf97pQYgslTMUcN2P6k3tWeJnIhEF2ZwmCwiKuTC8sD
-	 SmCCKgop+5Y877jW/jy98AaOkCcDYpiz23B9bITCvt+89kN9TGSj7b88jJGb7+/xBE
-	 w2A+XwxNRxRR7rb79+UoBAlwTEq9UW1uvqAJdNZ7OQ70/btsiUxm6okdeFcSHIZLRG
-	 qFxRtAkjDy3nYmU6jwSVyQETIu9+TjIzvoYvnlIBbLkPoLmiNoHWKI/ukyMU+ZFIcE
-	 eDbTLVWSmTSBrhrIhKedGt1Alzi0SdcsiDTsBxrX+YjhQeMUeh62OwxOogb04Wz+GY
-	 hOZPLFK0rePHw==
+	b=ddgTToKNEOaJKUD39fee/bXWQg6n2Jdc/bilzEvAT3fzSqHILrOd7zXtox37kZjOv
+	 my2q3DtUUqJNs5MUjH9h30rbAZmctqcHxywl3pxUi1nQpnFmfB+AEILXX86fR6w/Bq
+	 gG2Qy7GHsYDB2Nx3jssj3vAFVPXS3CFpFff/whSj/e3p4rq/SYIOAVCa58k38+4xhj
+	 IJSyLOeVf+GHI0LgxSt6CYnuNjAfqXVtefJdhr720dKlATmJP49l1SBf5FSPLjXntO
+	 AByLlxz9xNxhgpXRP4e8w9MZtvI8XEA8HEGMIbQjBoRfgs8d6+nWwsaS4Rhb8EVITp
+	 x4icBeWi6MnOg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vyXNF-00000007Ef0-2EeU;
+	id 1vyXNF-00000007EgG-32Oo;
 	Fri, 06 Mar 2026 16:45:57 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 08/13] docs: kdoc_output: describe the class init parameters
-Date: Fri,  6 Mar 2026 16:45:46 +0100
-Message-ID: <7c57f26150aae11fced259f30898a980b96efb68.1772810752.git.mchehab+huawei@kernel.org>
+	linux-kernel@vger.kernel.org,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v2 09/13] docs: kdoc_output: pick a better default for modulename
+Date: Fri,  6 Mar 2026 16:45:47 +0100
+Message-ID: <8a5d91c93c0b9b34c2f60e389f4464742804d0d6.1772810752.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1772810752.git.mchehab+huawei@kernel.org>
 References: <cover.1772810752.git.mchehab+huawei@kernel.org>
@@ -68,9 +70,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: E51EC2242D2
+X-Rspamd-Queue-Id: D0D8E2242C4
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
@@ -78,75 +81,73 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78204-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78205-lists,linux-doc=lfdr.de,huawei];
-	RCPT_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.958];
+	NEURAL_HAM(-0.00)[-0.982];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[self.date:url,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,self.data:url]
 X-Rspamd-Action: no action
 
-As this class is part of the ABI used by both Sphinx kerneldoc
-extension and docs/tools/kernel-doc, better describe what
-parmeters are used to initialize ManOutput class.
+Instead of placing the same data for modulename for all generated
+man pages, use the directory from the filename used to produce
+kernel docs as basis.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_output.py | 29 +++++++++++++++++++++++++++-
- 1 file changed, 28 insertions(+), 1 deletion(-)
+ tools/docs/kernel-doc                | 1 -
+ tools/lib/python/kdoc/kdoc_output.py | 7 ++++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/tools/docs/kernel-doc b/tools/docs/kernel-doc
+index aed09f9a54dd..3a932f95bdf5 100755
+--- a/tools/docs/kernel-doc
++++ b/tools/docs/kernel-doc
+@@ -210,7 +210,6 @@ def main():
+                         help="Enable debug messages")
+ 
+     parser.add_argument("-M", "-modulename", "--modulename",
+-                        default="Kernel API",
+                         help="Allow setting a module name at the output.")
+ 
+     parser.add_argument("-l", "-enable-lineno", "--enable_lineno",
 diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
-index cf834dbf2725..7a181b40810d 100644
+index 7a181b40810d..c25f80a39cdc 100644
 --- a/tools/lib/python/kdoc/kdoc_output.py
 +++ b/tools/lib/python/kdoc/kdoc_output.py
-@@ -580,7 +580,34 @@ class RestFormat(OutputFormat):
+@@ -589,7 +589,8 @@ class ManFormat(OutputFormat):
+     ``modulename``
+         Defines the module name to be used at the troff ``.TH`` output.
  
+-        This argument is mandatory.
++        This argument is optional. If not specified, it will be filled
++        with the directory which contains the documented file.
  
- class ManFormat(OutputFormat):
--    """Consts and functions used by man pages output."""
-+    """
-+    Consts and functions used by man pages output.
-+
-+    This class has one mandatory parameter and some optional ones, which
-+    are needed to define the title header contents:
-+
-+    ``modulename``
-+        Defines the module name to be used at the troff ``.TH`` output.
-+
-+        This argument is mandatory.
-+
-+    ``section``
-+        Usually a numeric value from 0 to 9, but man pages also accept
-+        some strings like "p".
-+
-+        Defauls to ``9``
-+
-+    ``manual``
-+        Defaults to ``Kernel API Manual``.
-+
-+    The above controls the output of teh corresponding fields on troff
-+    title headers, which will be filled like this::
-+
-+        .TH "{name}" {section} "{date}" "{modulename}" "{manual}"
-+
-+    where ``name``` will match the API symbol name, and ``date`` will be
-+    either the date where the Kernel was compiled or the current date
-+    """
+     ``section``
+         Usually a numeric value from 0 to 9, but man pages also accept
+@@ -645,8 +646,8 @@ class ManFormat(OutputFormat):
+         title = name.strip()
+         module = self.modulename(args)
  
-     highlights = (
-         (type_constant, r"\1"),
+-        self.data += f'.TH "{name}" {self.section} "{self.date}" '
+-        self.data += f'"{self.modulename}" "{self.manual}"\n'
++        self.data += f'.TH "{title}" {self.section} "{self.date}" '
++        self.data += f'"{module}" "{self.manual}"\n'
+ 
+     def __init__(self, modulename=None, section="9", manual="Kernel API Manual"):
+         """
 -- 
 2.52.0
 
