@@ -1,61 +1,61 @@
-Return-Path: <linux-doc+bounces-78206-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78207-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kO7SMBv3qmlxZAEAu9opvQ
-	(envelope-from <linux-doc+bounces-78206-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:47:39 +0100
+	id kIz1H9D2qmlxZAEAu9opvQ
+	(envelope-from <linux-doc+bounces-78207-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:46:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AE7C2242DA
-	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:47:39 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E6B8224234
+	for <lists+linux-doc@lfdr.de>; Fri, 06 Mar 2026 16:46:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2617A3039838
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2026 15:46:10 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 898B230225BC
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2026 15:46:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E9CE3ECBED;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D526F3ED10F;
 	Fri,  6 Mar 2026 15:46:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IOhL2ByE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EfkJDEEn"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD2423EBF3A;
-	Fri,  6 Mar 2026 15:45:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64FDD3ECBF0;
+	Fri,  6 Mar 2026 15:46:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772811959; cv=none; b=rbVIQQwoM0thMhw5hTBDGvg7En2gQ74l8UWRbC9nZIO+FTZN+CmQaJ5k2dys68hk7uWUbbMijwEHLVuUAExtDU/GzyndRkig9DU4ctctz9WOOlxzHzmclXtfBJQK5thecKAlqmEJaEXyyt+1WSsT3dHERDUp5GFgX1NyGZuPyVk=
+	t=1772811960; cv=none; b=AnnxCwGgz6wR0ZkMHHNUNHs47Ec1ToeANl9yPXNbjIwCGKfSd0ClxgtcmIa+l45n6FoQ2/PUZqzikZdy71ST0bVKG0WvHq35utmuMIHJqOkeu02LkBCB3XW04anrtH1/xptItZeBlzzr38/enNVXYI7g+faZk5gsFor2VwNI9uY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772811959; c=relaxed/simple;
-	bh=7COCcajjMpNCqEJgxqFWGc78MkIQYZ67DzkUU7rjqRQ=;
+	s=arc-20240116; t=1772811960; c=relaxed/simple;
+	bh=9wu4zIA922C3Stn1+dXiQYG1rhAOlEJZPy1s0WQ2X8I=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=a2DsSNMtmOyd0SEJXxNE7gLeQSoRzbbDlMFeKiW17oPQEj7mf6/bMs1Oq28GKC1XrIAxosI9YVZeA/0kYm+FnH/NrqVMQQ2HdDO3xbVWW8okVtU4gUiEPYYC53lzICvi5uYY4JoHqXvg0U7pTf/zCdjVdOaLkJTXfcLDPzBLuVI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IOhL2ByE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EBB6C2BC86;
+	 MIME-Version:Content-Type; b=qZFEM9WqbxgeVkAk77hj682ijm+qafXZZG7gcry6bhSCF8Opm6KHysXKF8BaIqWskfEftwGSLwecdCJ8QdRgPR8fVsC7lv+ArMrPzTw7fktuqcNJbBZgtCTotjL0QATZ20c6B2wwavd9CCBOMP5WlYEKSPWgZJOJBheDw6Q1T04=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EfkJDEEn; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF5C4C2BC87;
 	Fri,  6 Mar 2026 15:45:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772811959;
-	bh=7COCcajjMpNCqEJgxqFWGc78MkIQYZ67DzkUU7rjqRQ=;
+	s=k20201202; t=1772811960;
+	bh=9wu4zIA922C3Stn1+dXiQYG1rhAOlEJZPy1s0WQ2X8I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=IOhL2ByEDIFS0CnFrHKGZFuEBlNYkixExxWTKmB+DsgpqtPFJP63Qpt/r3YEjzNUp
-	 LNgnreZ7FAtmLbuqzqlIWcG2PE2V7/5+mCcj8U1kBjiawAAkC3GXEGYXp3+cMUkeBR
-	 GP1iO1ZWtJopXrMR7s/u+6Nr/0pbzNz46tSw0RddIWMjKqB3CL6oKJ85YtKzSHpoLk
-	 gW6xty15axxJ1IEZaZOXgB6HqB8nXuAaD7J+uYmOyfuRWiKpdRllk3Kc8B/guwb7Ca
-	 Q9NJOtFq41G1nA5VoAuL4+xmgKZgVUYlY7xY2UmD6O0gDAZdJbOkALn9186ywxgMg1
-	 1WW0FLEj5ncSQ==
+	b=EfkJDEEnAV8iTyjZ9yIB9BL73WQ4Y0BA1nL2W36lAqgVV6TtzX+cvn9b3g3pZLjJQ
+	 50GsAwo3WoZK4ffkz6AfCNJIeFW3HDvngH7l/mFXpOSFxeecQQvt41fyWqyNDA0jH6
+	 QHL9ZDvFASK+lCrc4XCtTSV6U0mHxRRhfQAprfNDON3UN1NFPunXG0YKnzGbjMm8tO
+	 o3xuxSbazrz0nGz11bZ2EvaGcgu6E9UBEpRcB+d3ow0335juYjU8fJLSz/8OMZoYFp
+	 LoE2TvZnAcwQrcXcOlv0idsgBorAWaPZG4oLy1k3p+Z4pEOR/FxojACCCVQM8gFIfP
+	 Xl1MLSSi+jiKQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vyXNF-00000007EhU-3p6I;
-	Fri, 06 Mar 2026 16:45:57 +0100
+	id 1vyXNG-00000007Eih-0QU3;
+	Fri, 06 Mar 2026 16:45:58 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 10/13] docs: kdoc_output: Change the logic to handle man highlight
-Date: Fri,  6 Mar 2026 16:45:48 +0100
-Message-ID: <6ae2301a40b3fcb4381dd9dda8c75d14f9616b46.1772810752.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 11/13] docs: kdoc_output: add a logic to handle tables inside kernel-doc markups
+Date: Fri,  6 Mar 2026 16:45:49 +0100
+Message-ID: <442ad76442c325044eb9f34a155d5f484341fb35.1772810752.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1772810752.git.mchehab+huawei@kernel.org>
 References: <cover.1772810752.git.mchehab+huawei@kernel.org>
@@ -68,12 +68,12 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 6AE7C2242DA
+X-Rspamd-Queue-Id: 8E6B8224234
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -82,7 +82,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78206-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-78207-lists,linux-doc=lfdr.de,huawei];
 	RCPT_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -90,63 +90,173 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.973];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	NEURAL_HAM(-0.00)[-0.981];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,self.data:url]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,self.data:url]
 X-Rspamd-Action: no action
 
-The code inside ManFormat code to output man pages is too simple:
-it produces very bad results when the content has tables or code
-blocks.
+specially when DOC is used, it is not uncommon to have tables
+inside a kernel-doc markup.
 
-Change the way lines are parsed there to allow adding extra
-logic to handle some special cases.
+Add support for simple tables and complex grid tables when output
+in groff format.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_output.py | 26 +++++++++++++++++---------
- 1 file changed, 17 insertions(+), 9 deletions(-)
+ tools/lib/python/kdoc/kdoc_output.py | 130 +++++++++++++++++++++++++++
+ 1 file changed, 130 insertions(+)
 
 diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
-index c25f80a39cdc..9caffe0d9753 100644
+index 9caffe0d9753..7848514a4d22 100644
 --- a/tools/lib/python/kdoc/kdoc_output.py
 +++ b/tools/lib/python/kdoc/kdoc_output.py
-@@ -755,15 +755,23 @@ class ManFormat(OutputFormat):
-         if isinstance(contents, list):
-             contents = "\n".join(contents)
+@@ -744,6 +744,126 @@ class ManFormat(OutputFormat):
  
--        for line in contents.strip("\n").split("\n"):
--            line = KernRe(r"^\s*").sub("", line)
--            if not line:
--                continue
--
--            if line[0] == ".":
--                self.data += "\\&" + line + "\n"
--            else:
--                self.data += line + "\n"
-+        lines = contents.strip("\n").split("\n")
-+        i = 0
+         return self.data
+ 
++    def emit_table(self, colspec_row, rows):
++
++        if not rows:
++            return ""
++
++        out = ""
++        colspec = "\t".join(["l"] * len(rows[0]))
++
++        out += "\n.TS\n"
++        out += "box;\n"
++        out += f"{colspec}.\n"
++
++        if colspec_row:
++            out_row = []
++
++            for text in colspec_row:
++                out_row.append(f"\\fB{text}\\fP")
++
++            out += "\t".join(out_row) + "\n_\n"
++
++        for r in rows:
++            out += "\t".join(r) + "\n"
++
++        out += ".TE\n"
++
++        return out
++
++    def grid_table(self, lines, start):
++        """
++        Ancillary function to help handling a grid table inside the text.
++        """
++
++        i = start + 1
++        rows = []
++        colspec_row = None
 +
 +        while i < len(lines):
-+            org_line = lines[i]
++            line = lines[i]
 +
-+            line = KernRe(r"^\s*").sub("", org_line)
++            if KernRe(r"^\s*\|.*\|\s*$").match(line):
++                parts = []
 +
-+            if line:
-+                if line[0] == ".":
-+                    self.data += "\\&" + line + "\n"
-+                    i += 1
-+                    continue
++                for p in line.strip('|').split('|'):
++                    parts.append(p.strip())
++
++                rows.append(parts)
++
++            elif KernRe(r'^\+\=[\+\=]+\+\s*$').match(line):
++                if rows and rows[0]:
++                    if not colspec_row:
++                        colspec_row = [""] * len(rows[0])
++
++                    for j in range(0, len(rows[0])):
++                        content = []
++                        for row in rows:
++                            content.append(row[j])
++
++                        colspec_row[j] = " ".join(content)
++
++                    rows = []
++
++            elif KernRe(r"^\s*\+[-+]+\+.*$").match(line):
++                pass
++
++            else:
++                break
 +
 +            i += 1
 +
-+            self.data += line + "\n"
++        return i, self.emit_table(colspec_row, rows)
++
++    def simple_table(self, lines, start):
++        """
++        Ancillary function to help handling a simple table inside the text.
++        """
++
++        i = start
++        rows = []
++        colspec_row = None
++
++        pos = []
++        for m in KernRe(r'\-+').finditer(lines[i]):
++            pos.append((m.start(), m.end() - 1))
++
++        i += 1
++        while i < len(lines):
++            line = lines[i]
++
++            if KernRe(r"^\s*[\-]+[ \t\-]+$").match(line):
++                i += 1
++                break
++
++            elif KernRe(r'^[\s=]+$').match(line):
++                if rows and rows[0]:
++                    if not colspec_row:
++                        colspec_row = [""] * len(rows[0])
++
++                    for j in range(0, len(rows[0])):
++                        content = []
++                        for row in rows:
++                            content.append(row[j])
++
++                        colspec_row[j] = " ".join(content)
++
++                    rows = []
++
++            else:
++                row = [""] * len(pos)
++
++                for j in range(0, len(pos)):
++                    start, end = pos[j]
++
++                    row[j] = line[start:end].strip()
++
++                rows.append(row)
++
++            i += 1
++
++        return i, self.emit_table(colspec_row, rows)
++
+     def output_highlight(self, block):
+         """
+         Outputs a C symbol that may require being highlighted with
+@@ -764,6 +884,16 @@ class ManFormat(OutputFormat):
+             line = KernRe(r"^\s*").sub("", org_line)
  
-     def out_doc(self, fname, name, args):
-         if not self.check_doc(name, args):
+             if line:
++                if KernRe(r"^\+\-[-+]+\+.*$").match(line):
++                    i, text = self.grid_table(lines, i)
++                    self.data += text
++                    continue
++
++                if KernRe(r"^\-+[ \t]\-[ \t\-]+$").match(line):
++                    i, text = self.simple_table(lines, i)
++                    self.data += text
++                    continue
++
+                 if line[0] == ".":
+                     self.data += "\\&" + line + "\n"
+                     i += 1
 -- 
 2.52.0
 
