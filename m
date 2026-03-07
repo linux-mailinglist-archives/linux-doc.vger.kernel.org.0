@@ -1,121 +1,119 @@
-Return-Path: <linux-doc+bounces-78287-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78288-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2DQIGGycq2kJewEAu9opvQ
-	(envelope-from <linux-doc+bounces-78287-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 04:33:00 +0100
+	id uMIkKVi5q2n7fwEAu9opvQ
+	(envelope-from <linux-doc+bounces-78288-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 06:36:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D49F2229F0F
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 04:32:59 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9F5622A4E0
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 06:36:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id CF39C301F150
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 03:32:58 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 941963010174
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 05:36:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52A6C3002B9;
-	Sat,  7 Mar 2026 03:32:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB651286D60;
+	Sat,  7 Mar 2026 05:36:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lGyqRF/3"
+	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="B6KoEVns"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F25C2DD5F6;
-	Sat,  7 Mar 2026 03:32:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 580613368B0;
+	Sat,  7 Mar 2026 05:36:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772854376; cv=none; b=nEMmfeKP5df/6O//xhsIYQCRl5B8jvhVxL+lOv/5Kp4UkB5ghoq5iXYW+GoTEDOdMKbVgDG2WVHnHDZx5375qEjW57SO0cOVYMK1BDsDcmwbYumF+sphbe9kpBFOINzgomfuDstDvPTN8pfYPNUv9pbsK8+zK+6WbDFv2lp+NuU=
+	t=1772861781; cv=none; b=qXDmOLLVI7sPK3EnpYgXB0aSIrWMmuPzk/vDhKEtG7ACprHSBXrUl76E0F4eRHtovjfFoKMlhzz0peRmRA5lhhNLfIvqY7e3lo84+tt4JNmEULEJXujscss8KZFLdL3Z82wA2Me7EWa9KYeYPd7PHzAPn1SgCqej5v27jpko6Eg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772854376; c=relaxed/simple;
-	bh=UB4aqVHBkq7Z6U0PCU86267heuJHua5cm31mgeVxY3I=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XeBiXyw78tiQFs5MfApf+8vdLMKGom0epL5lEQ4b4PfyANrSDfeDRvU+lI7eOqM4IH5APNidQNrgirQJ4TnLqMHgSr2ffJH9U+ZA7LcBj3eJBe6wKjA5vqRx1gs1S+niU04oj3qOag1MbvexUDhSfPDtO2+hOoTaeWvyZc/WlEU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lGyqRF/3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A69D9C19422;
-	Sat,  7 Mar 2026 03:32:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772854375;
-	bh=UB4aqVHBkq7Z6U0PCU86267heuJHua5cm31mgeVxY3I=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=lGyqRF/3qzEa7lUUuOdYRlHTYZ8SUHXAAJTLsEiatdGzW/HtZ0lre9XP1JLBn9FT4
-	 FiB8d6JjDEBERM5v9dDKjL9ZRFWnIVKcKCTQRNG7/LAaP3Zzc6Lp3//EjpID8pnFBo
-	 5e4K9pd3jXePOLfbQ0bga42/+X20Gs37yz3iGKGwbReGfvo40vSYXrE1bB/+hs79JN
-	 MMDMX/wuV8tpMKLLtpSofe2S1yk+kr/shs1IGhF6wbU0DhCnRHIFxH+VE+EzBgOMHN
-	 OVIU0NfXL/Uspb2E4ksgXotAe2pnN7Dlf5zwCRTtf9Yu9yGKT//AWVXjEX4wsf421L
-	 i0ORcG8R3BMzA==
-Date: Fri, 6 Mar 2026 19:32:53 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: Jiri Pirko <jiri@resnulli.us>
-Cc: netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com,
- pabeni@redhat.com, horms@kernel.org, donald.hunter@gmail.com,
- corbet@lwn.net, skhan@linuxfoundation.org, saeedm@nvidia.com,
- leon@kernel.org, tariqt@nvidia.com, mbloch@nvidia.com,
- przemyslaw.kitszel@intel.com, mschmidt@redhat.com, andrew+netdev@lunn.ch,
- rostedt@goodmis.org, mhiramat@kernel.org, mathieu.desnoyers@efficios.com,
- chuck.lever@oracle.com, matttbe@kernel.org, cjubran@nvidia.com,
- daniel.zahka@gmail.com, linux-doc@vger.kernel.org,
- linux-rdma@vger.kernel.org, linux-trace-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v3 01/13] devlink: expose devlink instance
- index over netlink
-Message-ID: <20260306193253.6d7d2383@kernel.org>
-In-Reply-To: <20260304160022.6114-2-jiri@resnulli.us>
-References: <20260304160022.6114-1-jiri@resnulli.us>
-	<20260304160022.6114-2-jiri@resnulli.us>
+	s=arc-20240116; t=1772861781; c=relaxed/simple;
+	bh=VQ5zPYOBI/rwIQoo2vVHUqldVHGjoJ7CmG6UM2WQIQ0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iMX1PCeZ98VjI390Q5oE5hehKP5ltcFtxDATsKE0OzwbVZAHDZ4KQKLczLK0IV4H/F3b+t0Ox0Y92B0PLBRQ+pb36rNq3odcWLB+4/hlsfFmrU41g1YJAYeQa05pZqKqPIXqudABw3696NGKWabQNZB0WaDB4EAaMhX4P4jfKA0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=B6KoEVns; arc=none smtp.client-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=ne7KG7Ae/T1QzwvnrcsHo0sjk1sY0y8RIuqRaAf1Vck=; 
+	b=B6KoEVnsvHNiR7w6X2DT26H+fZUrx/3J0PBVcLLqXRY0K3skUtFRGAtiYfQ5GwHy7xm11qDKdeP
+	ihOGDYvUoLVz/ULD78/j4Qt4N39LMwvxrQnLRVitFlN3JQuWfxHu5z89CtVwfytELUp0domez0fMN
+	TBfR9JzJqPln6nf8+huL02Ri/ZCj46haaYKU3HNIjcwqQSe2gcU+1zau/gG0PiaxoyEdlppwjjUCL
+	8xED05Uj8x8pHPHHAb522gcbOHBdVh6kGg6YpFBf5wmbFHNFdsrqFF1Q6xHBwTRIWhlUwZE7BnlsV
+	MXmHlOYf3eKH86oZXhJNCQPBFZ3y9LONAPTw==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.96 #2 (Debian))
+	id 1vykKX-00CJeG-0V;
+	Sat, 07 Mar 2026 13:36:02 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Sat, 07 Mar 2026 14:36:01 +0900
+Date: Sat, 7 Mar 2026 14:36:01 +0900
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Alexander Dahl <ada@thorsis.com>
+Cc: linux-doc@vger.kernel.org, Stephan Mueller <smueller@chronox.de>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"open list:CRYPTO API" <linux-crypto@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] docs: crypto: userspace-if: Fix outdated links
+Message-ID: <aau5QS7oIUx0ntvw@gondor.apana.org.au>
+References: <20260226155627.3243344-1-ada@thorsis.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: D49F2229F0F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260226155627.3243344-1-ada@thorsis.com>
+X-Rspamd-Queue-Id: E9F5622A4E0
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[apana.org.au,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gondor.apana.org.au:s=h01];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-78287-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,davemloft.net,google.com,redhat.com,kernel.org,gmail.com,lwn.net,linuxfoundation.org,nvidia.com,intel.com,lunn.ch,goodmis.org,efficios.com,oracle.com];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[gondor.apana.org.au:+];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	NEURAL_HAM(-0.00)[-0.991];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78288-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[herbert@gondor.apana.org.au,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	NEURAL_HAM(-0.00)[-0.951];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[apana.org.au:url,apana.org.au:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,gondor.apana.org.au:dkim,gondor.apana.org.au:mid]
 X-Rspamd-Action: no action
 
-On Wed,  4 Mar 2026 17:00:10 +0100 Jiri Pirko wrote:
-> +      -
-> +        name: index
-> +        type: uint
-> +        doc: Unique devlink instance index.
+On Thu, Feb 26, 2026 at 04:56:27PM +0100, Alexander Dahl wrote:
+> According to archive.org the site threw HTTP errors 404 since early 2024.
+> The last snapshot in the archive having actual content was from late 2023.
+> The page behind the new URL has more or less the same content as the
+> archived page from 2023, so it probably was just moved without setting
+> up a redirect.
+> 
+> Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> ---
+>  Documentation/crypto/userspace-if.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-AI complains on patch 6 that the index is truncated because it's saved
-to a u32. Let's add:
-
-        checks:
-           max: u32-max
-
-here and the policy will take care of the check, you can then remove
-the explicit checks too
+Patch applied.  Thanks.
 -- 
-pw-bot: cr
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
 
