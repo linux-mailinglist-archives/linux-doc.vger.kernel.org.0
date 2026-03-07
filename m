@@ -1,84 +1,93 @@
-Return-Path: <linux-doc+bounces-78324-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78326-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sHINEYVXrGnNowEAu9opvQ
-	(envelope-from <linux-doc+bounces-78324-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 17:51:17 +0100
+	id AK5AL3JerGl/pAEAu9opvQ
+	(envelope-from <linux-doc+bounces-78326-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 18:20:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCE1222CBD1
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 17:51:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F6FE22CE33
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 18:20:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0CBAF3047BDB
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 16:50:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8D444300E718
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 17:20:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7228E32F75B;
-	Sat,  7 Mar 2026 16:50:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 159AA296BBA;
+	Sat,  7 Mar 2026 17:20:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YTY/oyEi"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qv/Yw1Hj"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C7EC329C7F;
-	Sat,  7 Mar 2026 16:50:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD95827A92E;
+	Sat,  7 Mar 2026 17:20:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772902213; cv=none; b=iWIlADQaHvHiaXQcxPFpL12SQ0M0auNAiQt5qTbZr9HOd5qTnIPHXJcjKliUYtxXFw0fvn83kyaVz6DZv9fRm7VlDROoaQmnhYogK7nsdpa7nUOJf9c1o6vsnFey2KGA3ldO4LsOPugFUTTfFbyj/Je6SoyLFHOJNIfQL1jY4es=
+	t=1772904027; cv=none; b=GqBk2EgP2UswSJC+MRSLAGxPT3+vgm+Vx4gmYbYLjiKyJQdfGToNM7YzbFuYh9Pkt0E80RCzenQ8XT9/AzN03ZEAbWL8ESo7UDkGGXfiqf9Hsg0qaxDOpRTb/FKrZQtBCxIeUvZ/aHpU8fUyUN4NIZWvfFb0Oe2X7Cgf9guuNUI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772902213; c=relaxed/simple;
-	bh=1DSnUB7QM/N59SEckdGEQ/tMYUzqKaN/J5qEg7lviFo=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=S487Gx+f0CocqXhesLI9GcnOxsjEZtFu387QqHC7wtygR20hR7PulryaMPePdja3scCbg9E9qXa6Tlib16IqSuFHVLC8bfjJx1DgDCFgbWQXpbnqeElhD38H6UcMibhnjVdbxIgt31E3TlIr/rWiGYLXim5Z7pFiuWo5oTPVMwI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YTY/oyEi; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAB0AC2BC86;
-	Sat,  7 Mar 2026 16:50:12 +0000 (UTC)
+	s=arc-20240116; t=1772904027; c=relaxed/simple;
+	bh=xNjldZBtYihS/cKdR8u/FDbbgV8jDa5zgeUG88cv/YQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Ahv+S+PjHaUwEqij+ex5j9NVljWfgcQAMCDUqI4mUlssOBGzvtCyYTa7t93CKUY+MovF56Rx1QYgzGBE25hKU5eYdhThmTQf82+DSI07xqEebIneZBh4mKEZ0ksMQrtK/W0Ym79Mq+WsISkMZqNIKrAoy1mPPZMOLOOfjSwZ5ts=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qv/Yw1Hj; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 048D8C19422;
+	Sat,  7 Mar 2026 17:20:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772902213;
-	bh=1DSnUB7QM/N59SEckdGEQ/tMYUzqKaN/J5qEg7lviFo=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YTY/oyEiaUE08OFzSSzmJLXht3DQTWMUsa3ziwMfj948nciKAHuk7Ob5U+0CyXDaR
-	 nA45hiIY9pebdypvlxk5n1soIZHc3qbnE6JjQqjhKsP34Dux489gy09UAmUB4RYaeE
-	 URDVf6Y1vZt175tc1Zo6yBhUNhIu8oK76PthO4vKvU7uLAnBuXCJYB8rMsDllLqMKe
-	 80Q/QMlc359sOjfp/pIuPYFTUhoOT8i3bZ2ckMtIBjuR7TeODfoHqrmI40XqsLanVL
-	 7uM2JRzm3P6OVBVCKDwRVoOORb5bHJtCKFGRAvk4o+DRwMkpAYO5fgvH1jz4FssOak
-	 c4/pREKQs/j2w==
-From: Leon Romanovsky <leon@kernel.org>
-To: Marek Szyprowski <m.szyprowski@samsung.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Petr Tesarik <ptesarik@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Jason Wang <jasowang@redhat.com>,
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	=?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Leon Romanovsky <leon@kernel.org>
-Cc: iommu@lists.linux.dev,
+	s=k20201202; t=1772904026;
+	bh=xNjldZBtYihS/cKdR8u/FDbbgV8jDa5zgeUG88cv/YQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=qv/Yw1HjruxXKYdphDCIdYrsY3jxaMYebd/bE9Qe/XtZVA635f0AwmfPIimRAVqc1
+	 5kURReGeA7sdGc8CKa8FFJFA10/9tDzJjprzcpFDHd5AvkjvPbtMHDcADYkGWsdUe1
+	 6r9ZYUo1DWdCcV04z4S+wYT+RCHChHS2YhnHXmaj+YMz44OrprO+xhs16OFdvjrTWY
+	 47iadLBA2pStFD1O8KBFJBfbir+2dbjNkrnpFpgKT9PcjqR2QGXFUmJRfW1nkQYyWW
+	 bMtBHe01blYx+S7YX9dBnPj+jwPEUZrEgeDvEEZAe//ErEnDEgnFIGzk5Agiim3xxy
+	 2uklrYbPQqjcg==
+From: Sasha Levin <sashal@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Richard Weinberger <richard@nod.at>,
+	Juergen Gross <jgross@suse.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	James Bottomley <James.Bottomley@HansenPartnership.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nsc@kernel.org>,
+	Petr Pavlu <petr.pavlu@suse.com>,
+	Daniel Gomez <da.gomez@kernel.org>,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Petr Mladek <pmladek@suse.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Kees Cook <kees@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Thorsten Leemhuis <linux@leemhuis.info>,
+	Vlastimil Babka <vbabka@kernel.org>,
 	linux-kernel@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	linux-modules@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	virtualization@lists.linux.dev,
-	linux-rdma@vger.kernel.org
-Subject: [PATCH 3/3] RDMA/umem: Tell DMA debug that cacheline overlap is expected
-Date: Sat,  7 Mar 2026 18:49:57 +0200
-Message-ID: <20260307-dma-debug-overlap-v1-3-c034c38872af@nvidia.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260307-dma-debug-overlap-v1-0-c034c38872af@nvidia.com>
-References: <20260307-dma-debug-overlap-v1-0-c034c38872af@nvidia.com>
+	deller@gmx.de,
+	rdunlap@infradead.org,
+	laurent.pinchart@ideasonboard.com,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH v2 0/4] kallsyms: embed source file:line info in kernel stack traces
+Date: Sat,  7 Mar 2026 12:20:17 -0500
+Message-ID: <20260307172022.460402-1-sashal@kernel.org>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.15-dev-18f8f
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: CCE1222CBD1
+X-Rspamd-Queue-Id: 3F6FE22CE33
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
@@ -87,101 +96,215 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78324-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[lwn.net,kernel.org,suse.com,linuxfoundation.org,goodmis.org,infradead.org,leemhuis.info,vger.kernel.org,gmx.de,ideasonboard.com];
+	TAGGED_FROM(0.00)[bounces-78326-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.939];
+	NEURAL_HAM(-0.00)[-0.975];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qemu.org:url,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,nvidia.com:mid,nvidia.com:email]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-From: Leon Romanovsky <leonro@nvidia.com>
+This series adds CONFIG_KALLSYMS_LINEINFO, which embeds source file:line
+information directly in the kernel image so that stack traces annotate
+every frame with the originating source location - no external tools, no
+debug symbols at runtime, and safe to use in NMI/panic context.
 
-The RDMA subsystem exposes DMA regions through the verbs interface. A
-given region can be exported multiple times, which can trigger warnings
-about cacheline overlaps. In this case the warnings are false positives,
-because RDMA does not use SWIOTLB and uverbs operate only on CPU‑coherent
-architectures.
+Motivation
+==========
 
-infiniband rocep8s0f0: mlx5_ib_reg_user_mr:1592:(pid 5812): start 0x2b28c000, iova 0x2b28c000, length 0x1000, access_flags 0x1
-infiniband rocep8s0f0: mlx5_ib_reg_user_mr:1592:(pid 5812): start 0x2b28c001, iova 0x2b28c001, length 0xfff, access_flags 0x1
- ------------[ cut here ]------------
- DMA-API: mlx5_core 0000:08:00.0: cacheline tracking EEXIST, overlapping mappings aren't supported
- WARNING: kernel/dma/debug.c:620 at add_dma_entry+0x1bb/0x280, CPU#6: ibv_rc_pingpong/5812
- Modules linked in: veth xt_conntrack xt_MASQUERADE nf_conntrack_netlink nfnetlink iptable_nat nf_nat xt_addrtype br_netfilter rpcsec_gss_krb5 auth_rpcgss oid_registry overlay mlx5_fwctl zram zsmalloc mlx5_ib fuse rpcrdma rdma_ucm ib_uverbs ib_iser libiscsi scsi_transport_iscsi ib_umad rdma_cm ib_ipoib iw_cm ib_cm mlx5_core ib_core
- CPU: 6 UID: 2733 PID: 5812 Comm: ibv_rc_pingpong Tainted: G        W           6.19.0+ #129 PREEMPT
- Tainted: [W]=WARN
- Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.13.0-0-gf21b5a4aeb02-prebuilt.qemu.org 04/01/2014
- RIP: 0010:add_dma_entry+0x1be/0x280
- Code: 8b 7b 10 48 85 ff 0f 84 c3 00 00 00 48 8b 6f 50 48 85 ed 75 03 48 8b 2f e8 ff 8e 6a 00 48 89 c6 48 8d 3d 55 ef 2d 01 48 89 ea <67> 48 0f b9 3a 48 85 db 74 1a 48 c7 c7 b0 00 2b 82 e8 9c 25 fd ff
- RSP: 0018:ff11000138717978 EFLAGS: 00010286
- RAX: ffffffffa02d7831 RBX: ff1100010246de00 RCX: 0000000000000000
- RDX: ff110001036fac30 RSI: ffffffffa02d7831 RDI: ffffffff82678650
- RBP: ff110001036fac30 R08: ff11000110dcb4a0 R09: ff11000110dcb478
- R10: 0000000000000000 R11: ffffffff824b30a8 R12: 0000000000000000
- R13: 00000000ffffffef R14: 0000000000000202 R15: ff1100010246de00
- FS:  00007f59b411c740(0000) GS:ff110008dcc99000(0000) knlGS:0000000000000000
- CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
- CR2: 00007ffe538f7000 CR3: 000000010e066005 CR4: 0000000000373eb0
- Call Trace:
-  <TASK>
-  debug_dma_map_sg+0x1b4/0x390
-  __dma_map_sg_attrs+0x6d/0x1a0
-  dma_map_sgtable+0x19/0x30
-  ib_umem_get+0x254/0x380 [ib_uverbs]
-  mlx5_ib_reg_user_mr+0x68/0x2a0 [mlx5_ib]
-  ib_uverbs_reg_mr+0x17f/0x2a0 [ib_uverbs]
-  ib_uverbs_handler_UVERBS_METHOD_INVOKE_WRITE+0xc2/0x130 [ib_uverbs]
-  ib_uverbs_cmd_verbs+0xa0b/0xae0 [ib_uverbs]
-  ? ib_uverbs_handler_UVERBS_METHOD_QUERY_PORT_SPEED+0xe0/0xe0 [ib_uverbs]
-  ? mmap_region+0x7a/0xb0
-  ? do_mmap+0x3b8/0x5c0
-  ib_uverbs_ioctl+0xa7/0x110 [ib_uverbs]
-  __x64_sys_ioctl+0x14f/0x8b0
-  ? ksys_mmap_pgoff+0xc5/0x190
-  do_syscall_64+0x8c/0xbf0
-  entry_SYSCALL_64_after_hwframe+0x4b/0x53
- RIP: 0033:0x7f59b430aeed
- Code: 04 25 28 00 00 00 48 89 45 c8 31 c0 48 8d 45 10 c7 45 b0 10 00 00 00 48 89 45 b8 48 8d 45 d0 48 89 45 c0 b8 10 00 00 00 0f 05 <89> c2 3d 00 f0 ff ff 77 1a 48 8b 45 c8 64 48 2b 04 25 28 00 00 00
- RSP: 002b:00007ffe538f9430 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
- RAX: ffffffffffffffda RBX: 00007ffe538f94c0 RCX: 00007f59b430aeed
- RDX: 00007ffe538f94e0 RSI: 00000000c0181b01 RDI: 0000000000000003
- RBP: 00007ffe538f9480 R08: 0000000000000028 R09: 00007ffe538f9684
- R10: 0000000000000001 R11: 0000000000000246 R12: 00007ffe538f9684
- R13: 000000000000000c R14: 000000002b28d170 R15: 000000000000000c
-  </TASK>
- ---[ end trace 0000000000000000 ]---
+The recent "slowly decommission bugzilla?" thread [1] surfaced a recurring
+problem: when users encounter kernel crashes they see stack traces like
+`func+0x1ec/0x240` but have no way to identify which subsystem or
+maintainer to contact.  Richard Weinberger proposed building a database
+mapping symbols to source files using nm/DWARF.  Linus pointed to
+scripts/decode_stacktrace.sh as the existing solution.  But as the
+discussion progressed, it became clear that decode_stacktrace.sh has
+significant practical barriers that prevent it from being useful in the
+common case.
 
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/infiniband/core/umem.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Problems with scripts/decode_stacktrace.sh
+==========================================
 
-diff --git a/drivers/infiniband/core/umem.c b/drivers/infiniband/core/umem.c
-index cff4fcca2c345..4ae04b6e6927c 100644
---- a/drivers/infiniband/core/umem.c
-+++ b/drivers/infiniband/core/umem.c
-@@ -169,7 +169,7 @@ struct ib_umem *ib_umem_get(struct ib_device *device, unsigned long addr,
- 	unsigned long lock_limit;
- 	unsigned long new_pinned;
- 	unsigned long cur_base;
--	unsigned long dma_attr = 0;
-+	unsigned long dma_attr = DMA_ATTR_CPU_CACHE_OVERLAP;
- 	struct mm_struct *mm;
- 	unsigned long npages;
- 	int pinned, ret;
+- Requires debug symbols: the script needs vmlinux with DWARF debug info.
+  Many distros don't retain debug symbols for older or security kernels,
+  and even when available, asking users to obtain matching debuginfo
+  packages is a significant hurdle.
+
+- Requires toolchain: users need addr2line and nm installed.
+
+- Version-matching requirement: debug symbols must exactly match the
+  running kernel binary.
+
+What this series does
+=====================
+
+Patch 1: CONFIG_KALLSYMS_LINEINFO
+
+  At build time, a host tool (scripts/gen_lineinfo) reads DWARF
+  .debug_line from vmlinux, extracts address-to-file:line mappings,
+  and embeds them as sorted lookup tables in .rodata.  At runtime,
+  kallsyms_lookup_lineinfo() binary-searches the table and
+  __sprint_symbol() appends "(file:line)" to each stack frame.
+  NMI/panic-safe (no locks, no allocations), KASLR-compatible.
+
+Patch 2: CONFIG_KALLSYMS_LINEINFO_MODULES
+
+  Extends lineinfo to loadable modules.  Each .ko gets a .mod_lineinfo
+  section embedded at build time.  The module loader picks it up at load
+  time.  Same zero-allocation, NMI-safe lookup.
+
+Patch 3: delta compression
+
+  Block-indexed delta-encoding with ULEB128 varints, implementing
+  the approach suggested by Juergen Gross in the RFC review.  Reduces
+  overhead from ~44 MiB to ~11 MiB (~3.7 bytes/entry), addressing the
+  primary size concern from the RFC.
+
+Patch 4: KUnit tests
+
+  New in v2.  30 KUnit tests covering the lineinfo lookup paths,
+  delta-decode logic, boundary conditions, and integration with the
+  backtrace formatting APIs.
+
+Example output
+==============
+
+  [   11.206749]  dump_stack_lvl+0x5d/0x80 (lib/dump_stack.c:94)
+  [   11.207403]  vpanic+0x36e/0x620 (kernel/panic.c:650)
+  [   11.209324]  panic+0xc9/0xd0 (kernel/panic.c:787)
+  [   11.213312]  sysrq_handle_crash+0x1a/0x20 (drivers/tty/sysrq.c:154)
+  [   11.214005]  __handle_sysrq.cold+0x66/0x256 (drivers/tty/sysrq.c:611)
+  [   11.214712]  write_sysrq_trigger+0x65/0x80 (drivers/tty/sysrq.c:1221)
+  [   11.215424]  proc_reg_write+0x1bd/0x3c0 (fs/proc/inode.c:330)
+  [   11.216061]  vfs_write+0x1c6/0xff0 (fs/read_write.c:686)
+  [   11.218848]  ksys_write+0xfa/0x200 (fs/read_write.c:740)
+  [   11.222394]  do_syscall_64+0xf3/0x690 (arch/x86/entry/syscall_64.c:63)
+
+Size impact
+===========
+
+Measured with a Debian kernel config:
+
+  bzImage:          +3.6 MiB  (14 MiB -> 18 MiB, +26%)
+  Runtime memory:   +5.9 MiB  (text+data+bss)
+  Code overhead:    +5.0 KiB  (.text, lookup functions only)
+  Data overhead:    +5.9 MiB  (.data, lineinfo tables)
+
+Lineinfo data breakdown:
+
+  lineinfo_data (delta-compressed):   5,728 KiB  (97%)
+  lineinfo_block_addrs:                  99 KiB
+  lineinfo_block_offsets:                99 KiB
+  lineinfo_filenames:                   111 KiB
+  lineinfo_file_offsets:                 17 KiB
+
+The ~5.9 MiB is after 2.7x delta compression; uncompressed would be
+~16 MiB.  This is a fraction of the cost of shipping full DWARF debug
+info (hundreds of MiB), which distros must store and serve for every
+kernel version.
+
+For distros, maintaining debug symbol repositories is expensive:
+storage, mirrors, and CDN bandwidth for hundreds of MiB per kernel
+build add up quickly.  A ~5.9 MiB increase in the kernel image itself
+is a modest cost that eliminates the need for users to find, download,
+and version-match debuginfo packages just to make a crash report
+useful.
+
+For developers, the file:line annotations appear immediately in crash
+traces - no post-processing with decode_stacktrace.sh needed.
+
+Changes since v1
+================
+
+- Fix path stripping regression on architectures where DWARF comp_dir
+  is a subdirectory (e.g. arch/parisc/kernel) rather than the source
+  tree root: paths now correctly show "kernel/traps.c:212" instead of
+  bare "traps.c:212".  Added kernel_dirs[] fallback scan and bare-
+  filename recovery via comp_dir.  (Reported by Helge Deller)
+
+- Fix RST heading: overline/underline must be at least as long as the
+  heading text in kallsyms-lineinfo.rst.  (Reported by Randy Dunlap)
+
+- Fix MAINTAINERS alphabetical ordering: move KALLSYMS LINEINFO entry
+  before KASAN.  (Reported by Randy Dunlap)
+
+- Fix arch-portability of .debug_line relocation handling: replace
+  hardcoded R_X86_64_32 with r_type_abs32() supporting x86, arm,
+  arm64, riscv, s390, mips, ppc, loongarch, and parisc.
+
+- Fix vmlinux compressed-path data_end for the last block: use
+  lineinfo_data_size instead of UINT_MAX.
+
+- Add file_offsets[] and filenames_size bounds checks in vmlinux
+  lookup path (the module path already had them).
+
+- Add alignment padding for file_offsets[] in module .mod_lineinfo
+  binary format (data[] is variable-length u8, followed by u32[]).
+
+- Remove sym_start cross-validation check that incorrectly rejected
+  valid lineinfo entries for assembly-adjacent functions.
+
+- Add KUnit test suite (new patch 4/4): 30 tests covering vmlinux
+  lookup, module lookup, delta decode, boundary conditions, and
+  backtrace formatting integration.
+
+Changes since RFC
+=================
+
+- Added module support (patch 2)
+- Added delta compression (patch 3), reducing size from ~44 MiB to
+  ~11 MiB, addressing the primary concern from RFC review
+- Added documentation (Documentation/admin-guide/kallsyms-lineinfo.rst)
+- Added MAINTAINERS entry
+
+Link: https://lore.kernel.org/all/1786920159.1633.1772291851870.JavaMail.zimbra@nod.at/ [1]
+
+Sasha Levin (4):
+  kallsyms: embed source file:line info in kernel stack traces
+  kallsyms: extend lineinfo to loadable modules
+  kallsyms: delta-compress lineinfo tables for ~2.7x size reduction
+  kallsyms: add KUnit tests for lineinfo feature
+
+ Documentation/admin-guide/index.rst           |   1 +
+ .../admin-guide/kallsyms-lineinfo.rst         |  97 ++
+ MAINTAINERS                                   |   9 +
+ include/linux/kallsyms.h                      |  32 +-
+ include/linux/mod_lineinfo.h                  | 140 +++
+ include/linux/module.h                        |  19 +
+ init/Kconfig                                  |  35 +
+ kernel/kallsyms.c                             | 136 +++
+ kernel/kallsyms_internal.h                    |  13 +
+ kernel/module/kallsyms.c                      | 153 +++
+ kernel/module/main.c                          |   4 +
+ lib/Kconfig.debug                             |  10 +
+ lib/tests/Makefile                            |   3 +
+ lib/tests/lineinfo_kunit.c                    | 772 +++++++++++++++
+ scripts/.gitignore                            |   1 +
+ scripts/Makefile                              |   4 +
+ scripts/Makefile.modfinal                     |   6 +
+ scripts/gen-mod-lineinfo.sh                   |  48 +
+ scripts/gen_lineinfo.c                        | 928 ++++++++++++++++++
+ scripts/kallsyms.c                            |  17 +
+ scripts/link-vmlinux.sh                       |  78 +-
+ 21 files changed, 2502 insertions(+), 4 deletions(-)
+ create mode 100644 Documentation/admin-guide/kallsyms-lineinfo.rst
+ create mode 100644 include/linux/mod_lineinfo.h
+ create mode 100644 lib/tests/lineinfo_kunit.c
+ create mode 100755 scripts/gen-mod-lineinfo.sh
+ create mode 100644 scripts/gen_lineinfo.c
 
 -- 
-2.53.0
+2.51.0
 
 
