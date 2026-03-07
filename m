@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-78336-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78337-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oCMfHaeCrGkLqQEAu9opvQ
-	(envelope-from <linux-doc+bounces-78336-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:55:19 +0100
+	id GPJ3D2mCrGkCqQEAu9opvQ
+	(envelope-from <linux-doc+bounces-78337-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:54:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4DC822D6C0
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:55:18 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D78CA22D65F
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:54:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 25082301110F
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 19:54:14 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 7B6F9300C30E
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 19:54:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6FBFE3A7F74;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B030E3A9015;
 	Sat,  7 Mar 2026 19:54:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FSOiYs1b"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zfm8IcIz"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C77D3A7F6C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CCFD3A8754;
 	Sat,  7 Mar 2026 19:54:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772913249; cv=none; b=uv7YgIAloHyjIhKXQ+gM9Ef5Xj0C8WbxIr+vjN4EG+QvPWcUmp/bYpxc85uwUneXSPjONLLe5BRaop9CCRpLJpUW6AfVa+f9kfULxL3RY/bLcdplYfPlK7Hqn72oiZihIgWHgKnie72uBxfxl2/hgqOStRp3Wh02LOFUvqE5vng=
+	t=1772913249; cv=none; b=of6lUDwRJJldNSMf0YmShYXGDgXnge38ekbbHZiWdrNP45jZmRYz17bjxJkZ5MEKq66U4irdS3/nZwfp4+ZBa96ntLVgX5KIFWYEggOtB/MQIc5cxD+p457ctmI/OhqyGHRAB6RMxvtROk+O9IXt7tZNu8CijBCb4+4wTS5/SWY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1772913249; c=relaxed/simple;
-	bh=aXU5Q1Q+3FzifQR8qcbWlvPD8SNvGBDeL5AQyGi3NNY=;
+	bh=j1nhe+UiGfff5E3sKkGedNU4ILDb3IrXge2niBaw9Ww=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=l7/epfGRVzp/ZRsDXAxsktROO8m2U/bEpefv70w5FpUURnFaV4pnFGX/jfCHW7B3VKj2ZBFqmHQ8WhIjq8zbGu0Pft/FkbSKfeIUVKe/0cKRqcgM2aSjCfREgXmuWI7GXFbCmU/tYNW1M2FxTgcjICKiIcdqU/S85nMLCyjEwpk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FSOiYs1b; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7B39C4AF10;
-	Sat,  7 Mar 2026 19:54:08 +0000 (UTC)
+	 MIME-Version; b=V+94aY2fK3dLsbO5S6Ch1lBl3MqCnFm+xfNbHY1jpwHFK0hj1NUBFJ1Cg4EUdGWkWYus48+DYn3DqkoStIDJdbwYruBgj74hhLx9rAgSYjj+5VHZ6VSSGXZ+mwibgN4+v3onV5PvGG5LlgtjtNYNhySGh+aiYlIv+hljLhgIQks=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zfm8IcIz; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E7B1C2BCB0;
+	Sat,  7 Mar 2026 19:54:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1772913249;
-	bh=aXU5Q1Q+3FzifQR8qcbWlvPD8SNvGBDeL5AQyGi3NNY=;
+	bh=j1nhe+UiGfff5E3sKkGedNU4ILDb3IrXge2niBaw9Ww=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=FSOiYs1b2B/+nNgtIR8T1MYGu38lIX3TFEhAazL66ct1GCypCUfspGzVQbYE/HhCM
-	 210DDt3yYiTv0sasfiK0pv62AHXnD1Mig/VY7E+ZHdh1DDAwyG4iPiXtragubZU6U+
-	 2WBYCtG1FzeiQlBddfdwmOEiAmQJAhmTgBzcL6a/cCxI/dweD3ed5dLrJS/qgDWE7L
-	 uA5fMuqQLjpt1hbDvQroNeVfEJn+R8iMcTpe0bZKLLU5iR3UX4jlOcNukNqe2wqO0P
-	 3hw6VVXPsf1WfFd6//Ig+4bJeeHuWA2K4GGZuW4VXGnHDgIpF+dRN+ZrMg7rs5ZyGy
-	 6QIEZEpiZkjPg==
+	b=Zfm8IcIzwKBjgEdFr5ilU2FR1Wnuj8tGCMfMRx/gq50o5ayXhw6mC8xy/KPocNVkL
+	 MR34iZVDuwQSl1D86BxFp+s2BLo33olaB+M0xjen3Vng7mDi1XVHuDgDDAW6SjtsV4
+	 yhwjlZdDz/ZXycAzOOBsX9BIBlGEA7cYhURRJ/UrRZ6XFGYFh0fZtLu4rNjUV0+NzE
+	 LIemH8X5Za9ln8hQpvoBBUxzm58mFMIQ1qiShRJnfxaYjjvY7x+EYKTlX9wGhELioV
+	 S4RYlbEthuPiD0+gwsepw1Gf5NieO65DbqRzr9oS7+mr8OMAvNjo4xtKJYxtiZclD9
+	 trvfg5wDHS8+g==
 From: SeongJae Park <sj@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: SeongJae Park <sj@kernel.org>,
@@ -60,9 +60,9 @@ Cc: SeongJae Park <sj@kernel.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 6/7] Docs/mm/damon/maintainer-profile: use flexible review cadence
-Date: Sat,  7 Mar 2026 11:53:54 -0800
-Message-ID: <20260307195356.203753-7-sj@kernel.org>
+Subject: [PATCH 7/7] Docs/mm/damon/index: fix typo: autoamted -> automated
+Date: Sat,  7 Mar 2026 11:53:55 -0800
+Message-ID: <20260307195356.203753-8-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260307195356.203753-1-sj@kernel.org>
 References: <20260307195356.203753-1-sj@kernel.org>
@@ -73,65 +73,58 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: C4DC822D6C0
+X-Rspamd-Queue-Id: D78CA22D65F
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78336-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-78337-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.979];
+	NEURAL_HAM(-0.00)[-0.978];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-The document mentions the maitainer is working in the usual 9-5 fashion.
-The maintainer nowadays prefers working in a more flexible way.  Update
-the document to avoid contributors having a wrong time expectation.
+There is an obvious typo.  Fix it (s/autoamted/automated/).
 
+Fixes: 32d11b320897 ("Docs/mm/damon/index: simplify the intro")
 Signed-off-by: SeongJae Park <sj@kernel.org>
 ---
- Documentation/mm/damon/maintainer-profile.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ Documentation/mm/damon/index.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/mm/damon/maintainer-profile.rst b/Documentation/mm/damon/maintainer-profile.rst
-index 41b1d73b9bd7b..bcb9798a27a86 100644
---- a/Documentation/mm/damon/maintainer-profile.rst
-+++ b/Documentation/mm/damon/maintainer-profile.rst
-@@ -63,10 +63,10 @@ management subsystem maintainer.
- Review cadence
- --------------
+diff --git a/Documentation/mm/damon/index.rst b/Documentation/mm/damon/index.rst
+index 82f6c5eea49a7..318f6a7bfea47 100644
+--- a/Documentation/mm/damon/index.rst
++++ b/Documentation/mm/damon/index.rst
+@@ -12,7 +12,7 @@ DAMON is a Linux kernel subsystem for efficient :ref:`data access monitoring
+  - *light-weight* (for production online usages),
+  - *scalable* (in terms of memory size),
+  - *tunable* (for flexible usages), and
+- - *autoamted* (for production operation without manual tunings).
++ - *automated* (for production operation without manual tunings).
  
--The DAMON maintainer does the work on the usual work hour (09:00 to 17:00,
--Mon-Fri) in PT (Pacific Time).  The response to patches will occasionally be
--slow.  Do not hesitate to send a ping if you have not heard back within a week
--of sending a patch.
-+The DAMON maintainer usually work in a flexible way, except early morning in PT
-+(Pacific Time).  The response to patches will occasionally be slow.  Do not
-+hesitate to send a ping if you have not heard back within a week of sending a
-+patch.
- 
- Mailing tool
- ------------
+ .. toctree::
+    :maxdepth: 2
 -- 
 2.47.3
 
