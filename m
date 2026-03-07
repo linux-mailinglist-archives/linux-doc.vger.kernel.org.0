@@ -1,157 +1,158 @@
-Return-Path: <linux-doc+bounces-78300-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78302-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UI2WJ0fZq2kqhQEAu9opvQ
-	(envelope-from <linux-doc+bounces-78300-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 08:52:39 +0100
+	id 6FCsOCvpq2m7hwEAu9opvQ
+	(envelope-from <linux-doc+bounces-78302-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 10:00:27 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B72422AA6D
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 08:52:39 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F08C22AC40
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 10:00:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2197D3029255
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 07:52:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CC3FF3018779
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 09:00:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 380023112A5;
-	Sat,  7 Mar 2026 07:52:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D4300375F86;
+	Sat,  7 Mar 2026 09:00:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="Mzgeg7MI"
+	dkim=pass (2048-bit key) header.d=nslick.com header.i=@nslick.com header.b="LRjlzkf5";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="PeaKTDBk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from fhigh-b3-smtp.messagingengine.com (fhigh-b3-smtp.messagingengine.com [202.12.124.154])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E205B1DDC1B
-	for <linux-doc@vger.kernel.org>; Sat,  7 Mar 2026 07:52:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 249B22D7DDB;
+	Sat,  7 Mar 2026 09:00:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.154
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772869954; cv=none; b=ZCOncaTtNv9A+mFl3Qa7XJcnIKJNhuh8l6QaBlqCxdOspQWQX+NVWwS85YDUNSNVz0cMRb/Jnt822QbEt/xhdmwMWi+NIfUV2dlBkjsS5ip/Q9/S+vnlYIQVzADHgx6pNGZwiOWfrSf7eYmpIyvZ0US+7aDfPRHRALF45Fs8tBg=
+	t=1772874024; cv=none; b=u9yF4BeoT6OWuwAeRfdTs2ahp0NCxfQG2GS8gOpfvWzeI0fEA2HSboNzf5wzZm8rGJIlUTo/SwCCj/FFRsfKetIDbzIHsoYhIjQPzMBKZDJwEDrK7EhMy4Xpf25zrmqM2EX+74ic8gqcp+QBdwph5HGLjuw3dehwDJnSiQgWJOM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772869954; c=relaxed/simple;
-	bh=PLl3ybbEvtBt4usL1tVzzE3ceztfK3Ph05TigYRMy6o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RvKQWo31YuNk11Sb9jkGEeh4dYIIGjfhPR4Jq12RIuFgwb7a6660g9AktVcNM3whsrLEg9jYSs0YJpZteJww/LrtEtfMADm5QcPTRvoLU4dj+DQywxjtzxt6mdcV6s/mJHXFmc2wassfIDFkdd0WObO6UOgmT62N2oBUeK2pqy8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=Mzgeg7MI; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4807068eacbso83799095e9.2
-        for <linux-doc@vger.kernel.org>; Fri, 06 Mar 2026 23:52:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1772869949; x=1773474749; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Q82vwVSYqsxgUfO5PF4fV0qSf8sFXrhZ9cxXt5gjXgk=;
-        b=Mzgeg7MIOIrjh+c3vI3Akf/UIjsNyGah6a6RbQ11xw0pXsGQ+c9Wsv43WQfpej1Mfo
-         dtehQ3GsKzPO+PydcLr/RnoknSaS27Z/tH49od5FsnCCB7MeCkj8qyLutf1JLXc7Fdd7
-         ThvyXVsnu+Q7c2an3F+1SjedMiGdA5C3dSfulg93qQwup8IWQ6elfpQlhRQOTAZH1tP6
-         P+tdaZ+mC23yQicU1Zdxxf+JCJiq4BYqQ74/jU3PUECHrc1dPph9IWH5Nv+NXSVTl1AT
-         cDQz1MeaW1cB5T9aGQK5Xs7tR9qRJPLK5Fki8r80GzKu0VJmH1PfO3WLJzy6zXgIMh7V
-         I2Zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772869949; x=1773474749;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Q82vwVSYqsxgUfO5PF4fV0qSf8sFXrhZ9cxXt5gjXgk=;
-        b=Smp7l+uLDIBaLxlnj9cjKeM6g69bdez16sOrsOBeVpQ/w3s3/rRt1mqSVHa9kbNBtJ
-         SEuhFSZ6OI/wN2lg8PX+R85MhtGTtIAcQWlGaEdlD3/z83lEY3/01zPa88uZIoDBH7LE
-         s7m5r9vSIiOio7h1bOEFKOK0an1PKCEunEg/6vy3wCptOTf2HR4qsKVsw61E+fDHPdLI
-         oMdMMVobFeRM+Oghsa9rmx2GKkGqp82bk6QOysZmZbTfWYOTdCfC+Ug9TkPj5hKDiR0g
-         KgFXYEZ1nvVWnDGSqepGheBAq9VpcJfVMwarbkKi/zgIJxD0PEJudAKEUt8AEKYOuprH
-         JkPw==
-X-Forwarded-Encrypted: i=1; AJvYcCXKZLVu5qaPOXJ3WVB5sVuTiDw07FLQMOrHi7eKAdqPFmnvlFpLDhKjc7pzOgIJFcAjhHrqdsybgbc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwWgxKYncbnNvCEkE8tzLBZGQ0mEi0qpuat4amN338/FOoygKsg
-	ZdibviKQ0Of5/DaDgWHIMeIyEUgvSPsiE3xbR3STCnXDHuVq0iX6H95NDtdzZIguBxI=
-X-Gm-Gg: ATEYQzx6DqxtZHiuNg5eD6ENWXDykh9m5WvXPcU2p5PUNOVbNbvhcHE3p7i20SSzNPz
-	VPHbuhSM6CyxHF8JMLX9ijKeDpkQ05iKWx1BaDgPHlWVJwXJS8mWqOrGiATgcoMBpQJFCecSYwH
-	U9d/nJQ6RFjkr4XoPUddji+tlG6dIX4IwK32iLBxzSd8ulMtdwys22MvAcLQwllesd/Lva5r0oG
-	Xx02pWoGbyGbl2xzAERBGY7Nk6LAlm1u6ocjBqRVfYVCII0tT8nu1b5ItDHSLg9cmX+5jLqe/oD
-	z5qIsBoxn29gbvRBARo028x5Lld4ZtDLR4SvQfPThDCDcbR9/5daMIfTWZ4Nd3hi94M3kJ8PG1g
-	CBhkyq6GM2mLOIyXEtJGAJFtqhboSDZmN383Kg9qBiDixNuML79dH0aRM0u24er1ENaXDPRSgJ+
-	fpLqAoPtki1u+gEsrHu1Tuh3m8qV/RVk4=
-X-Received: by 2002:a05:600c:870e:b0:47b:e2a9:2bd7 with SMTP id 5b1f17b1804b1-48526951415mr82861225e9.19.1772869949098;
-        Fri, 06 Mar 2026 23:52:29 -0800 (PST)
-Received: from FV6GYCPJ69 ([208.127.45.21])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4852381c61csm36839135e9.11.2026.03.06.23.52.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Mar 2026 23:52:28 -0800 (PST)
-Date: Sat, 7 Mar 2026 08:52:24 +0100
-From: Jiri Pirko <jiri@resnulli.us>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org, davem@davemloft.net, edumazet@google.com, 
-	pabeni@redhat.com, horms@kernel.org, donald.hunter@gmail.com, corbet@lwn.net, 
-	skhan@linuxfoundation.org, saeedm@nvidia.com, leon@kernel.org, tariqt@nvidia.com, 
-	mbloch@nvidia.com, przemyslaw.kitszel@intel.com, mschmidt@redhat.com, 
-	andrew+netdev@lunn.ch, rostedt@goodmis.org, mhiramat@kernel.org, 
-	mathieu.desnoyers@efficios.com, chuck.lever@oracle.com, matttbe@kernel.org, cjubran@nvidia.com, 
-	daniel.zahka@gmail.com, linux-doc@vger.kernel.org, linux-rdma@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v3 01/13] devlink: expose devlink instance index
- over netlink
-Message-ID: <xf2qlcvpmw64zpqsjogibda2ys33vwyectptwo5imdstwtp6a6@qokwax4d2iwn>
-References: <20260304160022.6114-1-jiri@resnulli.us>
- <20260304160022.6114-2-jiri@resnulli.us>
- <20260306193253.6d7d2383@kernel.org>
+	s=arc-20240116; t=1772874024; c=relaxed/simple;
+	bh=rZDUnuQy7P9XaYnLYn16SJaXfibyQK3FL3f/3cZOGXU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=FNL10Put+2IrEuCRml1AyMg95qcfv7rbeBhoY0Tn+/juO85SSBS/wjGoF/AfAMbCSbg6ykyve9CgZZVZJeauQSbgkB/1zM6gBK9eHM5qF2sPndvKj+4Zwajt3BlKhe1dW2OKkTP/rAkhaoe5kBL2RGWBvE+Eqoba6pU07ncdOc4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=opensource.nslick.com; spf=none smtp.mailfrom=opensource.nslick.com; dkim=pass (2048-bit key) header.d=nslick.com header.i=@nslick.com header.b=LRjlzkf5; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=PeaKTDBk; arc=none smtp.client-ip=202.12.124.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=opensource.nslick.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=opensource.nslick.com
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+	by mailfhigh.stl.internal (Postfix) with ESMTP id A2B3C7A026E;
+	Sat,  7 Mar 2026 04:00:21 -0500 (EST)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-03.internal (MEProxy); Sat, 07 Mar 2026 04:00:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nslick.com; h=cc
+	:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to; s=fm2; t=1772874021; x=1772960421; bh=Os7er9WYslCoaajGmGRTM
+	57xLafy+XkKflJDIrwq9N0=; b=LRjlzkf58uZq9lzJ1m5MK6+Cz0KkwOIezPq6c
+	9DJAWQyVeXISNkWPQnwCKu0KP2c5eEGeHgqM7tPFQVctNKtVZd9MQ7g62YPfiWR3
+	fQd/oTxfCY1nLtcld+7oINs6v2qOJE7k6pJXNiO7u9PATu7JcJqLMVqWyW4W8pY0
+	1GVFJULiMzQLHsJCIIiSQDLSgzR7WqB5hdNYevz8g6psoL7BdJDBIWiLT/1aJuwW
+	ZrYOkgu3CZaU2e7Eoat+Vltgdg7l1ZJVe9iMIbMft9xAOXo0nhSrnnYIjCA2Q8iN
+	d1ud40ZsFEz6mX6qYqwehA5p2gSqd23g3JMB8BkRSIZXYjYyA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1772874021; x=1772960421; bh=Os7er9WYslCoaajGmGRTM57xLafy+XkKflJ
+	DIrwq9N0=; b=PeaKTDBkC5Ry75jUHCGhzL0vUpENgax/ALb8UFe0Z9o1mve/JAZ
+	miNkRwuNG/QNZC1CaIBodJIEOjbgn/pNo0nge9oIJnibLu+xFn3YeDTjm6pu7+Ro
+	IDs9hhaEsWoyeRoyVtAYQijoX6oNbXh5qxkue0nokLgbtERSWeraKqgtC5rWntfH
+	NTBxcJS2uVdQ8VgV6hVwNJwAWEzRRw1esOIWESPASZQSlOlXl3V3uS9IthKCmk8y
+	i7X7SeEbOISmemGRK8a81kRHQWlMZ2j2hJzq7jO0Wco+ZowfE9oVwqsqvTFmj0k+
+	QgHYL/k2q126tT7F5f6zdXMz2dDuGOfaOGw==
+X-ME-Sender: <xms:IumraZkVXaMwaEXdLITmJZf3IAwsRVfGTYJngO1O1_jfJIJn1YrRJw>
+    <xme:IumraRMo9gcbufsoRVVKrq1WauxeTcKGXI9AnwGTeBdgU0QfenW977k7hJ3hVwj_L
+    edTl5tpkckpEeHB2jVCMblOjQcYMZwfBRW3-9jZOCYjBN5hYp4t--Q>
+X-ME-Received: <xmr:IumraUGzDzrABNZyUv7oRiMh8MQqPuu7TMuTTBd5_-4tATY5c8XolJEZkD4>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgddvjedukedtucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheppfhitghhohhlrghs
+    ucfuihgvlhhitghkihcuoehlihhnuhigsehophgvnhhsohhurhgtvgdrnhhslhhitghkrd
+    gtohhmqeenucggtffrrghtthgvrhhnpeduieeuffeguddvuefhteetueeuffevgeekueei
+    tedvkeffkeelteefhfehveffvdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+    epmhgrihhlfhhrohhmpehlihhnuhigsehophgvnhhsohhurhgtvgdrnhhslhhitghkrdgt
+    ohhmpdhnsggprhgtphhtthhopedugedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtoh
+    epmhgtghhrohhfsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehpvghtrhdrphgrvhhl
+    uhesshhushgvrdgtohhmpdhrtghpthhtohepuggrrdhgohhmvgiisehkvghrnhgvlhdroh
+    hrghdprhgtphhtthhopehsrghmihhtohhlvhgrnhgvnhesghhoohhglhgvrdgtohhmpdhr
+    tghpthhtoheprghtohhmlhhinhesrghtohhmlhhinhdrtghomhdprhgtphhtthhopehmrg
+    gvnhhnihgthhesghhoohhglhgvrdgtohhmpdhrtghpthhtohepphgvthgvrhiisehinhhf
+    rhgruggvrggurdhorhhgpdhrtghpthhtoheptghorhgsvghtsehlfihnrdhnvghtpdhrtg
+    hpthhtohepshhkhhgrnheslhhinhhugihfohhunhgurghtihhonhdrohhrgh
+X-ME-Proxy: <xmx:IumraXvN3Pho6LzadnRMWwkL3IE3SxeFlxHGrw7NZJEOHVZ5ich5bg>
+    <xmx:IumraUSfyhq6jySZ-916wrYTO4jqu4-rrk5KGKdgNmWr8NsTmae__w>
+    <xmx:IumraRMMdFkvkCM3IbQtdqTn3RvVU6E98x2SDVSCxpIJWq7JPgscdA>
+    <xmx:IumraS478Yg-M0VprUTp_gxQYcR2KhWc0b3URopc1BbE5XzXXyKMbg>
+    <xmx:JemraXwCksR8kvoEOnNNAOs1IzTvE3sBuC6qwRf01Y991PX8OFElgXuQ>
+Feedback-ID: i78f146c6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 7 Mar 2026 04:00:13 -0500 (EST)
+From: Nicholas Sielicki <linux@opensource.nslick.com>
+To: Luis Chamberlain <mcgrof@kernel.org>,
+	Petr Pavlu <petr.pavlu@suse.com>,
+	Daniel Gomez <da.gomez@kernel.org>
+Cc: Sami Tolvanen <samitolvanen@google.com>,
+	Aaron Tomlin <atomlin@atomlin.com>,
+	Matthias Maennich <maennich@google.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	linux-modules@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Nicholas Sielicki <linux@opensource.nslick.com>
+Subject: [PATCH v2 0/2] module: expose imported namespaces via sysfs
+Date: Sat,  7 Mar 2026 03:00:08 -0600
+Message-ID: <20260307090010.20828-1-linux@opensource.nslick.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260306193253.6d7d2383@kernel.org>
-X-Rspamd-Queue-Id: 4B72422AA6D
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 1F08C22AC40
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[resnulli-us.20230601.gappssmtp.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[nslick.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[nslick.com:s=fm2,messagingengine.com:s=fm1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78300-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[resnulli.us];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-78302-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	FREEMAIL_CC(0.00)[vger.kernel.org,davemloft.net,google.com,redhat.com,kernel.org,gmail.com,lwn.net,linuxfoundation.org,nvidia.com,intel.com,lunn.ch,goodmis.org,efficios.com,oracle.com];
-	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FROM_NEQ_ENVFROM(0.00)[linux@opensource.nslick.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[resnulli-us.20230601.gappssmtp.com:+];
-	NEURAL_HAM(-0.00)[-0.992];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-0.985];
+	DKIM_TRACE(0.00)[nslick.com:+,messagingengine.com:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,opensource.nslick.com:mid]
 X-Rspamd-Action: no action
 
-Sat, Mar 07, 2026 at 04:32:53AM +0100, kuba@kernel.org wrote:
->On Wed,  4 Mar 2026 17:00:10 +0100 Jiri Pirko wrote:
->> +      -
->> +        name: index
->> +        type: uint
->> +        doc: Unique devlink instance index.
->
->AI complains on patch 6 that the index is truncated because it's saved
->to a u32. Let's add:
->
->        checks:
->           max: u32-max
->
->here and the policy will take care of the check, you can then remove
->the explicit checks too
+Add /sys/module/*/import_ns to expose the symbol namespaces imported
+by a loaded module.
 
-Okay. Thanks!
-
->-- 
->pw-bot: cr
+Changes since v1:
+- Simplified commit message to drop unnecessary/incorrect background
+- Use .setup/.free callbacks in module_attribute to ensure
+  imported_namespaces is NULL-initialized before error paths and
+  NULL'd after kfree (Sami)
+- Updated KernelVersion to 7.1 in docs for next merge window
 
