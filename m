@@ -1,54 +1,53 @@
-Return-Path: <linux-doc+bounces-78334-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78335-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mIG/NWKCrGkLqQEAu9opvQ
-	(envelope-from <linux-doc+bounces-78334-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:54:10 +0100
+	id sLXhEoqCrGkLqQEAu9opvQ
+	(envelope-from <linux-doc+bounces-78335-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:54:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73B6D22D647
-	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:54:10 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA0C822D6B2
+	for <lists+linux-doc@lfdr.de>; Sat, 07 Mar 2026 20:54:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 744BD301F4A1
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 19:54:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E405D3034E0E
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Mar 2026 19:54:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B552D38B7A3;
-	Sat,  7 Mar 2026 19:54:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD2C93A7F44;
+	Sat,  7 Mar 2026 19:54:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wq2xWmi4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m2QCmobp"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91AE0329367;
-	Sat,  7 Mar 2026 19:54:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9EF33A7855;
+	Sat,  7 Mar 2026 19:54:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772913247; cv=none; b=J0GvRiJ2VMD2/4J3l4sqoUU+HgqLzkj2aSG05E7eBbUHDzO51K9BxKfSeItqVO04fNV//qzf8BsFa/YAu9TX0IU2h/OBrhIkC9f5Pt4RHWfl1zwYl898vBmzd81q1f5eYiH56gSnmhqVLcOm+wRCLkmT26mslPA14D7f/zn5Wy8=
+	t=1772913248; cv=none; b=grXQ5SDKIBplFjn8ayYZlcTgVmeTlq2JbnYvVcovLz/tTVsifxdoM1eeMSVTpSH0piYdWWXD1nZ6QZgbyFsOyqLZcOyM+haM4pN6+DT05a4i9IgjYBVv6x5yPATZ0MdqkyDOiCWyFonLWA1gN8XSpyN5RYFq/ZTkgDYZ5o1bp+s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772913247; c=relaxed/simple;
-	bh=7ODZDQJM/Fjl22DmH1XWyzvb3MSVSALXM4f2MjB/9Bw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=C1hzhEtylq4iZNhtsgOf2DYifrde05BrUpyH/qowfLaZXnxfOo1aSR9HuLHc2hPUaoIcEiHtbMaB2GRoBHXkexHxqXc1JLRbJQThAJKhezpt9DS3eCuyBeylvptGaGvo/UC6NU3MN6Hf7JjFkz7B3ABJlAJrd0ISj0IFAnrorjs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wq2xWmi4; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7A1FC19422;
-	Sat,  7 Mar 2026 19:54:06 +0000 (UTC)
+	s=arc-20240116; t=1772913248; c=relaxed/simple;
+	bh=gLiv+pNotyPVa+VV/9QXIoANdJw8lI0sD1zcvN05ExA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=LVNHOnUAhX1GOSFeLgqbZg3m3X36GtmgmjmN/phr+frMk9r91kDj0rVhw13tHVZYw0Kt4F/MuXuozxCwYkjxExsmz5kLD28PFFVwPt6IW+aHbU6o2RWMYKE7Masl+BFezKdNKnUNQuuve9wv5G284fTBJvvOfIqR6eJ9Q45czAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m2QCmobp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39B7BC2BC9E;
+	Sat,  7 Mar 2026 19:54:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772913247;
-	bh=7ODZDQJM/Fjl22DmH1XWyzvb3MSVSALXM4f2MjB/9Bw=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Wq2xWmi4yYSpo/lcxJhDT7T/lmEBVCzdUEzZ2yMEyV3qoLcloM1VKkdIj7rsIXgVR
-	 FYtUGLSd9bra3Wexb8R0tSfamwTQreuDrEcbOSm1wW6I0lhEhhirxA41zJfXd6+qxi
-	 DCXY4vwLz3zObm8iS8eQASFKWKJRcJH07joiDvCBU/Zf0KIKR4DrFu8oWq/wpdjko3
-	 EhQ0nP2bpfc8BGngw24mek2z0jtmguzblsnmosh3AdMS0CTWU/rmCqpJDbJcBB5eoT
-	 vN0XbGWsW1arlYmE5rlmZ97LKGwjLN5FvnoPxNhNN0vmgyhBezB1dp7SqiOjA4uDaW
-	 5y4/i99PboWoQ==
+	s=k20201202; t=1772913248;
+	bh=gLiv+pNotyPVa+VV/9QXIoANdJw8lI0sD1zcvN05ExA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=m2QCmobpyIIHTNmOdBlq/087P28EA10hWT0WVhLHTwQ+diKNGEGwjcBnW/xlDvg3X
+	 xeQcSDw+fDTq5VDVDtT8/frS9C+p1jdjmBrfN7SuBNVSoCf7tfxN0yCoJ0NynEVTx2
+	 5BGYOl0P0lxD/vOe1gxfWpHXO7uoeS+L2DTD8DukjshY0vJYqbY3DPBBuU/2GVDGSw
+	 YNInUZn4JASMbrYuB1ucXx2lb2OdRhoabXpweEnxkRxJJ4yQNhUUoe17ZwuSXPZIOH
+	 +TsEkO53u8XEPwuYiXu/XeV0UJI5ht/pChFzCFXYDOXEsdNcadhkxEP0fCdDBSOHpt
+	 U+YkFFtTlyY7w==
 From: SeongJae Park <sj@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: SeongJae Park <sj@kernel.org>,
 	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
-	Brendan Higgins <brendan.higgins@linux.dev>,
-	David Gow <davidgow@google.com>,
 	David Hildenbrand <david@kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Lorenzo Stoakes <ljs@kernel.org>,
@@ -58,16 +57,16 @@ Cc: SeongJae Park <sj@kernel.org>,
 	Suren Baghdasaryan <surenb@google.com>,
 	Vlastimil Babka <vbabka@kernel.org>,
 	damon@lists.linux.dev,
-	kunit-dev@googlegroups.com,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
 	linux-mm@kvack.org,
 	wang lian <lianux.mm@gmail.com>
-Subject: [PATCH 0/7] mm/damon: improve/fixup/update ratio calculation, test and documentation
-Date: Sat,  7 Mar 2026 11:53:48 -0800
-Message-ID: <20260307195356.203753-1-sj@kernel.org>
+Subject: [PATCH 5/7] Docs/admin-guide/mm/damn/lru_sort: fix intervals autotune parameter name
+Date: Sat,  7 Mar 2026 11:53:53 -0800
+Message-ID: <20260307195356.203753-6-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260307195356.203753-1-sj@kernel.org>
+References: <20260307195356.203753-1-sj@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -75,7 +74,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 73B6D22D647
+X-Rspamd-Queue-Id: DA0C822D6B2
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -84,14 +83,14 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,oracle.com,linux.dev,google.com,lwn.net,suse.com,linuxfoundation.org,lists.linux.dev,googlegroups.com,vger.kernel.org,kvack.org,gmail.com];
+	FREEMAIL_CC(0.00)[kernel.org,oracle.com,lwn.net,suse.com,linuxfoundation.org,google.com,lists.linux.dev,vger.kernel.org,kvack.org,gmail.com];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	TAGGED_FROM(0.00)[bounces-78334-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_FROM(0.00)[bounces-78335-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
@@ -101,40 +100,36 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.997];
+	NEURAL_HAM(-0.00)[-0.996];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Yet another batch of misc/minor improvements and fixups.  Use
-mult_frac() instead of the worse open-coding for rate calculations
-(patch 1).  Add a test for a previously found and fixed bug (patch 2).
-Improve and update comments and documentations for easier code review
-and up-to-date information (patches 3-6).  Finally, fix an obvious typo
-(patch 7).
+The section name should be the same as the parameter name.  Fix it.
 
-SeongJae Park (7):
-  mm/damon/core: use mult_frac()
-  mm/damon/tests/core-kunit: add a test for damon_is_last_region()
-  mm/damon/core: clarify damon_set_attrs() usages
-  mm/damon: document non-zero length damon_region assumption
-  Docs/admin-guide/mm/damn/lru_sort: fix intervals autotune parameter
-    name
-  Docs/mm/damon/maintainer-profile: use flexible review cadence
-  Docs/mm/damon/index: fix typo: autoamted -> automated
+Fixes: ed581147a417 ("Docs/admin-guide/mm/damon/lru_sort: document intervals autotuning")
+Signed-off-by: SeongJae Park <sj@kernel.org>
+---
+ Documentation/admin-guide/mm/damon/lru_sort.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- .../admin-guide/mm/damon/lru_sort.rst         |  4 +--
- Documentation/mm/damon/index.rst              |  2 +-
- Documentation/mm/damon/maintainer-profile.rst |  8 ++---
- include/linux/damon.h                         |  2 ++
- mm/damon/core.c                               | 32 ++++++++++++-------
- mm/damon/tests/core-kunit.h                   | 23 +++++++++++++
- 6 files changed, 52 insertions(+), 19 deletions(-)
-
-
-base-commit: fa1e30b2dede645519bf6743439d3925922651bc
+diff --git a/Documentation/admin-guide/mm/damon/lru_sort.rst b/Documentation/admin-guide/mm/damon/lru_sort.rst
+index 20a8378d5a946..73980bacc3a02 100644
+--- a/Documentation/admin-guide/mm/damon/lru_sort.rst
++++ b/Documentation/admin-guide/mm/damon/lru_sort.rst
+@@ -91,8 +91,8 @@ increases and decreases the effective level of the quota aiming the LRU
+ 
+ Disabled by default.
+ 
+-Auto-tune monitoring intervals
+-------------------------------
++autotune_monitoring_intervals
++-----------------------------
+ 
+ If this parameter is set as ``Y``, DAMON_LRU_SORT automatically tunes DAMON's
+ sampling and aggregation intervals.  The auto-tuning aims to capture meaningful
 -- 
 2.47.3
 
