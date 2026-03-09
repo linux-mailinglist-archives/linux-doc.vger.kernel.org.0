@@ -1,145 +1,179 @@
-Return-Path: <linux-doc+bounces-78492-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78494-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GDanKOT5rmnZKgIAu9opvQ
-	(envelope-from <linux-doc+bounces-78492-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:48:36 +0100
+	id iOREHEv7rmnZKgIAu9opvQ
+	(envelope-from <linux-doc+bounces-78494-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:54:35 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10C8423D0BA
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:48:35 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E555023D24C
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:54:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B98C130D3AE7
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:39:49 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A610D30532A7
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:48:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B192D3B8D4D;
-	Mon,  9 Mar 2026 16:39:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 196522BE7C6;
+	Mon,  9 Mar 2026 16:48:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Ue6ZOJpF"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BTLy6Gr3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A13463B5307;
-	Mon,  9 Mar 2026 16:39:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB1362741B6;
+	Mon,  9 Mar 2026 16:48:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773074388; cv=none; b=YFe2D3taCNh7RFvTHBs3Q0/S7GRFPoGQzCLnNwlw661gJzxo6wTfpwWmY2JMsd6YSK+XuCvWzy4zauCSB1uqboEWRnkXl7jUhUafU1vDLNeZ/5ETX31ji6yMmRXEm5WZxNrhmFXXXMpIOZ8XcxO98a3NYIJrKrEqma34meZ9YHM=
+	t=1773074886; cv=none; b=qIfqpEXHzk7JvkBExdeIpQebF3krKvxYUepgQWrvhCv0h9fTYFFy91Crt0uqXuR+jNEfClEeNezHDBpTUMWZDRVNWDKxRi/Zo8FV0L6rNklnggFC9dU15pm6s6ujHzw4WDQZ2rwHldFhl12PyVAnBaahbRTgMnynkg24eiNjk5U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773074388; c=relaxed/simple;
-	bh=bXYSkHY17HtECgpDQua1zdQqh0CmVbiJL+TdSR4Lw+k=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=CRguDXycxNf5bRVIEbUIFhyG2PcN8X0Zo/jr60e5cQoWFl1PRG21RWrxTqVzX6WM7KfGrERfIhJKHPED74Xl5verEfYBcf6A+mrSois9r4DsXzA8XdceU8BzGr4Hr/dVHSRpErrOHf5NQIWJmnsatY2zNAnHtZGuU2TvsFumJBg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Ue6ZOJpF; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 04D1E40C9C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1773074387; bh=IHcXnOJGe4wi/1j99x89ioNGBTSZLhQ504eFvqa86O4=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Ue6ZOJpFeisd/rkz0nG+XaKXo2SBAxu02lcrMfuatlB1gZHPEEFeZp5J6cWHwMhHC
-	 VaLxxOut7dKRtPkkJECMxC2oFMjlygtfU4vV7yHpKcP/dK8UFvURrJ8S+/BDvu6qPz
-	 8SXy4DMPj0E9ZIpVyxGrVh9blnc+k1l3am0NzuAk6+3t2RWOUKvh5WzFN5t4EizOjE
-	 ESk8TmE+ZXTINj6nzDgCCOrnwGKqnUtUtGanphuq0SmCJ+t0dEa0+GQB1GVHy4MMUG
-	 hKrRoALj1dTgaCDUWXxeW3XyjtljEmhos7UpFNsJ9/UhZQfpA/U+ouqWG9o/ZBmN1D
-	 cmjf86XBSg0mA==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 04D1E40C9C;
-	Mon,  9 Mar 2026 16:39:46 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Haoyang Liu <tttturtleruss@gmail.com>, Dongliang Mu <dzm91@hust.edu.cn>,
- Yanteng Si <si.yanteng@linux.dev>, Alex Shi <alexs@kernel.org>, Shuah Khan
- <skhan@linuxfoundation.org>, Mauro Carvalho Chehab <mchehab@kernel.org>,
- Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers
- <nick.desaulniers+lkml@gmail.com>, Bill Wendling <morbo@google.com>,
- Justin Stitt <justinstitt@google.com>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- llvm@lists.linux.dev
-Subject: Re: [PATCH] tools/docs/checktransupdate.py: add support for
- scanning directory
-In-Reply-To: <13926087-127d-423e-a4d6-55b8aabb32ce@gmail.com>
-References: <20260308111314.27333-1-tttturtleruss@gmail.com>
- <87zf4hvvep.fsf@trenco.lwn.net>
- <13926087-127d-423e-a4d6-55b8aabb32ce@gmail.com>
-Date: Mon, 09 Mar 2026 10:39:45 -0600
-Message-ID: <87sea9ufce.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1773074886; c=relaxed/simple;
+	bh=EbGxY36L5SHyoRpmiRM2A+SFv9oh9MdFsH7yh2scoVY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=nez5wv65bZxN+eT8eNT+xZ2wbhYaF+g+mqA+9bjBLR6+0+Nn2KAcwf8a0jrKFJETOa+Qu2kbuvRdqo80CINIoE3izRAq37Ho1Ruk9R5i+7xZA6A70sO0vjJBs7ScBCRj5OcrGvifdV/bhC5KrNTVWTHH0wQQ+5fY3BspuVvqbOM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BTLy6Gr3; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F823C4CEF7;
+	Mon,  9 Mar 2026 16:48:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773074885;
+	bh=EbGxY36L5SHyoRpmiRM2A+SFv9oh9MdFsH7yh2scoVY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=BTLy6Gr3hjinG+58i9TwaTUjgRRZ6kRBWo0eQBo4Pkk/veow98jLPk4rCaOYOAzsn
+	 yEW82eHHg0LYrxTE38fGS4DNyN4N1fQicBKlK2oZRpJ+wjJlxsof9jvgKjQRMH5FaT
+	 b265N7R35smnNIbPE2drS+Bo0ajVxu5GsW9Am0WIhXbwvxuh3nKKOr0hn4AnbyLDFM
+	 wg8loHdP2XjE/uvrrV5DEezEgSDSWjEalJE3ahCZawlmsXGcrlcgjB8oDLECOihUUj
+	 pBoV46Wv5c555F16oEdqycXyLb9Z3WHaJE44468Iy5DpJ6RTt32qf17RC9/pvOJUpg
+	 vufipluOrtODg==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vzdlz-0000000BhWm-1tS8;
+	Mon, 09 Mar 2026 17:48:03 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 0/8] Fix public/private kernel-doc issues
+Date: Mon,  9 Mar 2026 17:47:51 +0100
+Message-ID: <cover.1773074166.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Rspamd-Queue-Id: 10C8423D0BA
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-Rspamd-Queue-Id: E555023D24C
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78492-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,hust.edu.cn,linux.dev,kernel.org,linuxfoundation.org,google.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78494-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,lkml];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:dkim,trenco.lwn.net:mid]
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	NEURAL_HAM(-0.00)[-0.977];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Haoyang Liu <tttturtleruss@gmail.com> writes:
+Hi Jon,
 
-> On 3/10/2026 12:07 AM, Jonathan Corbet wrote:
->> Haoyang LIU <tttturtleruss@gmail.com> writes:
->>
->>> Origin script can only accept a file as parameter, this commit enables
->>> it to scan a directory.
->>>
->>> Usage example:
->>> ./scripts/checktransupdate.py Documentation/translations/zh_CN/dev-tools
->> I've applied this, with one tweak:
->>
->>> +    else:
->>> +        # check if the files are directories or files
->>> +        new_files = []
->>> +        for file in files:
->>> +            if os.path.isfile(file):
->>> +                new_files.append(file)
->>> +            elif os.path.isdir(file):
->>> +                # for directories, list all files in the directory and its subfolders
->>> +                new_files.extend(list_files_with_excluding_folders(
->>> +                    file, [], "rst"))
->> There's no reason to break that line there, so I took the liberty of
->> joining it back together.
->
-> Dear Jon,
->
-> Thanks for pointing it out, I didn't notice when I make this change, and 
-> I'm sorry for that.
+This patch set fixes public/private handling inside comments.
 
-Not a big problem!  Thanks for working to make our tools better.
+The current logic has currently an issue: it breaks nested
+structs if private: is not followed by public:.
 
-jon
+It also solves a currently undefined behavior: now,
+public/private are applied only to the current and
+inner statements. So, if one does:
+
+  struct {
+	struct {
+		/* private: */
+		int a;
+		struct {
+			int b;
+		};
+	};
+	int c;
+  };
+
+The output will be:
+
+  struct {
+	int c;
+  };
+
+Besides making sensing itself, the new behavior solves
+an issue when struct_group() macros are used, as the
+private from one struct_group won't propagate to other
+ones nor to the struct encapsulating one or more
+struct_group().
+
+This series start with 2 unittests to detect the problem.
+If you apply those two patches and run the unit test,
+you'll be able to see the issue.
+
+After applying the changes, it renames the unit test,
+making it test directly the code there, instead of the
+current wrapper at kdoc_re, and add more tests meant
+to check the tokenizer itself.
+
+-
+
+As commented previously, I'm now working on a patchset
+using the tokenizer for NestedMatch. I have already
+some code here, but not properly tested yet.
+
+Anyway, the idea is to keep submitting it in small
+chunks, to make it easier to review.
+
+Mauro Carvalho Chehab (8):
+  docs: python: add helpers to run unit tests
+  unittests: add a testbench to check public/private kdoc comments
+  docs: kdoc: don't add broken comments inside prototypes
+  docs: kdoc: properly handle empty enum arguments
+  docs: kdoc_re: add a C tokenizer
+  docs: kdoc: use tokenizer to handle comments on structs
+  unittests: test_private: modify it to use CTokenizer directly
+  unittests: test_tokenizer: check if the tokenizer works
+
+ Documentation/tools/python.rst       |   2 +
+ Documentation/tools/unittest.rst     |  24 ++
+ tools/lib/python/kdoc/kdoc_parser.py |  25 +-
+ tools/lib/python/kdoc/kdoc_re.py     | 234 ++++++++++++++
+ tools/lib/python/unittest_helper.py  | 353 ++++++++++++++++++++
+ tools/unittests/test_tokenizer.py    | 462 +++++++++++++++++++++++++++
+ 6 files changed, 1088 insertions(+), 12 deletions(-)
+ create mode 100644 Documentation/tools/unittest.rst
+ create mode 100755 tools/lib/python/unittest_helper.py
+ create mode 100755 tools/unittests/test_tokenizer.py
+
+-- 
+2.52.0
+
 
