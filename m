@@ -1,68 +1,69 @@
-Return-Path: <linux-doc+bounces-78466-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78467-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8FxsFM3UrmlhJAIAu9opvQ
-	(envelope-from <linux-doc+bounces-78466-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 15:10:21 +0100
+	id SKlxODHermm/JQIAu9opvQ
+	(envelope-from <linux-doc+bounces-78467-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 15:50:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF1B023A4B7
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 15:10:20 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E6DC23AE4B
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 15:50:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 19963300B98E
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 14:10:19 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 89D5F305BBCC
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 14:47:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3678B3AA183;
-	Mon,  9 Mar 2026 14:10:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94A923D349D;
+	Mon,  9 Mar 2026 14:47:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="lm71oT2U"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Sl1YzcOf"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B728539903B;
-	Mon,  9 Mar 2026 14:10:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BC323D413B;
+	Mon,  9 Mar 2026 14:47:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773065416; cv=none; b=eBVtNK0xsOKAJkIK7x6n1M6YhTs2Ph8y3Ydrf2Qdn/qquywkEYPkurWaq+bJgC8NIZPp3VUZCXquVIL8Aj7E20m2kAc0MmpMoPN/ecRwxHPuSJQFeZFPyQHSJchgCcmvaqys70zlsxPTH392vUImSEt66lQoRxInuY+WNcbMWfk=
+	t=1773067657; cv=none; b=AUyslSfNMo3CP3vB+VMp/jPOJoozRsYykY0IQ1p8FZdjxus3A8pWIjWP1MOq110K5m/TmKFV6Rvzg6YpkIu1/AVnCdx9FL/srHnh/0Bd3ixAAMMqw1xh16iwM1uuq1u+v/y6m33Z17mVRud/995d2qSYSz4utC4dO3RdEPpJVEQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773065416; c=relaxed/simple;
-	bh=Sl/elZgfIKb5XNDP5DkR1xycGcRNMwkvaXY7wg/7+Bc=;
+	s=arc-20240116; t=1773067657; c=relaxed/simple;
+	bh=sdEHiDK+W/hF4X27J1GHcjyD6Z62npf9pOMCF61r9wU=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=gjn9WX6ikNtqGNeZuu/s3wt0EimOrh2C+0mFVFDnA5qH+aTnW7g/rGBP8X5BBso9+BSTpvnZwfxZiAHt/3HnQf/WMo+M8+dm6dmXRggn3HADTFiqbY0VOJvtmT6AQv2OIifHBC11eKzr1BnuLSe94tYsFaILPPSzEnhMXGJudZ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=lm71oT2U; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=UOCz5tZIVjwMYwzOtsVDsPDjFoG2y3Es0aexo8R0n4v/jcgmVhEYApEfvy3/zqAGqHRB7O4VOVxVH/YSodsFCe+jradru43o0wrfokoQxDrIfWFtct3L0a6RmT76Rwv0/7NYxAheHTMAn43uo2rIsGdbqkvBvem3KSlGQSvj+8w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Sl1YzcOf; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 92D6340429
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A8E6F40429
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1773065407; bh=D9/uTcdlMENaUsnh5zjBKG3b8mkuUAgLvaUqEAQn0rM=;
+	t=1773067655; bh=d8NcYng2sN1DCPkFUwB5WJS1bDEq2XrCazyT9C9vBP4=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=lm71oT2UQES3LP8AY/C/n/grRnvuK4cvA9lnl0vRM3kblCwZIMPPvCmmoXxPdPsGu
-	 iPGgd61vUY9TABVLk85e6QyV2PgX+gOOhKMwcHQmF3PWreW4K2V7arPOcNq8DqANoW
-	 ecMJNvuAHAEATKnJaRnaUPrZq/Mx2NXFAlYXWH2J+xs0XjFLeohZVFDBIVaOPfhg5/
-	 EFQrce1otH4HcpMQDPo0iVpmoLgpWj41Bndzh73oaGskMqEcguNWLFwCA/koIKAEaJ
-	 uN6b/RrnBukeZ95XyekZfzPvQZSeMHYARR2tLwjWfeK+P/FtnLhqWJ3fmdo64Bb28B
-	 kuXvXlsTAhUow==
+	b=Sl1YzcOfy6IL73uEBNtDkTPyUFAK98iwgPRooZHq3RsFukmc11GiGCknTj1Lrmt4f
+	 f9THq+IaE0pExHWyuhi/dgPWCXzFV6BGN6292poWML9ZV2DqhibpywWnK6WLSn1Y/k
+	 Jd8NSoWzw0mH1IG2YKzSCnpaEg8OrZgu+oYQRazL5qWhznTbXknyLsZBKXaUUw9GwY
+	 zZizCN7K3l4kV2BQEfJYnlDpEb9iIM1t7nildsMpQFsg4bJTQV84Wzv6L+sKWWr4jc
+	 BQ7tP7hCukuiIcSWhvWcTHNnAqMtGz6q4g9c1bCJ0+ta++orodadWh+gO07KniCsk3
+	 gnRZaYazdSkPA==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 92D6340429;
-	Mon,  9 Mar 2026 14:10:07 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id A8E6F40429;
+	Mon,  9 Mar 2026 14:47:35 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Haoyang LIU <tttturtleruss@gmail.com>, Dongliang Mu <dzm91@hust.edu.cn>,
- Yanteng Si <si.yanteng@linux.dev>, Alex Shi <alexs@kernel.org>, Mauro
- Carvalho Chehab <mchehab@kernel.org>, Shuah Khan
- <skhan@linuxfoundation.org>
-Cc: Haoyang LIU <tttturtleruss@gmail.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] tools/docs/checktransupdate.py: use metadata to lookup
- origin path
-In-Reply-To: <20260309095832.41209-1-tttturtleruss@gmail.com>
-References: <20260309095832.41209-1-tttturtleruss@gmail.com>
-Date: Mon, 09 Mar 2026 08:10:06 -0600
-Message-ID: <87pl5dxfep.fsf@trenco.lwn.net>
+To: Burak Emir <bqe@google.com>, Alexei Starovoitov <ast@kernel.org>, Daniel
+ Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>
+Cc: Burak Emir <bqe@google.com>, Martin KaFai Lau <martin.lau@linux.dev>,
+ Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>, Yonghong
+ Song <yonghong.song@linux.dev>, John Fastabend <john.fastabend@gmail.com>,
+ KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@fomichev.me>, Hao
+ Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+ bpf@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [RFC PATCH v2 0/1] bpf, docs: structured overview of verifier
+In-Reply-To: <20260309134630.2638181-1-bqe@google.com>
+References: <20260309134630.2638181-1-bqe@google.com>
+Date: Mon, 09 Mar 2026 08:47:34 -0600
+Message-ID: <87ldg1xdo9.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,56 +71,70 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Rspamd-Queue-Id: AF1B023A4B7
+X-Rspamd-Queue-Id: 4E6DC23AE4B
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
 	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-78466-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,hust.edu.cn,linux.dev,kernel.org,linuxfoundation.org];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78467-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FREEMAIL_CC(0.00)[google.com,linux.dev,gmail.com,kernel.org,fomichev.me,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lwn.net:dkim,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,trenco.lwn.net:mid]
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:dkim,trenco.lwn.net:mid]
 X-Rspamd-Action: no action
 
-Haoyang LIU <tttturtleruss@gmail.com> writes:
+Burak Emir <bqe@google.com> writes:
 
-> The get_origin_path() function assumes that translation files have the
-> same relative path as their origin files, just with "translations/{locale}"
-> inserted after "Documentation/". However, this assumption is incorrect
-> for several translation files where the origin path differs. For example:
-> translations/zh_CN/dev-tools/gdb-kernel-debugging.rst
-> -> process/debugging/gdb-kernel-debugging.rst
+> This is an RFC for adding overview documentation for the BPF verifier.
+>
+> The existing verifier.rst has detail but IMHO it lacks structure and
+> background. Here is my humble proposal to make the verifier docs
+> more helpful for newcomers.
+>
+> Finding a balance between overview and detail in documentation is 
+> never easy. The idea here is to describe abstract interpretation and have
+> enough information that anyone interested can learn what is going on. 
+>
+> Please let me know what you think. I used Gemini 3 to get a first draft,
+> which I then checked word-for-word and reworked.
 
-Honestly, rather than trying to work around such things, I think it
-would be far better to fix the places where the translated structure
-differs from the original.  Those differences can only lead to
-confusion, and I've been trying to avoid creating any more of them.
+I only got the cover letter for the second version, so these overall
+comments are based on the first.
 
-Thanks,
+- Please stick to the 80-column line limit for text material; we want
+  people to be able read it.
+
+- Why split this into five different files?  It is not a massive amount
+  of material; spreading it out just makes the reader work harder.
+
+- It is overly heavy on the markup.  If nothing else, function
+  references should just be function(), without ``literal`` markup; that
+  lets the automarkup code do its thing.  Same with "struct foo".
+
+Hopefully the BPF folks can take a more substantive look as well.
 
 jon
 
