@@ -1,173 +1,192 @@
-Return-Path: <linux-doc+bounces-78427-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78429-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GOIlK4iNrmnlFwIAu9opvQ
-	(envelope-from <linux-doc+bounces-78427-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 10:06:16 +0100
+	id +CqHKJ+QrmnVGAIAu9opvQ
+	(envelope-from <linux-doc+bounces-78429-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 10:19:27 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28289235E0C
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 10:06:15 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 819AC23607D
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 10:19:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 999E13048116
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 09:03:54 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 26BAF3012E40
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 09:19:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DFD1377EC6;
-	Mon,  9 Mar 2026 09:03:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 261B0378829;
+	Mon,  9 Mar 2026 09:19:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RFBfbL1e"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZVF/Ebxo";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E+KYAKGH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE5973E47B;
-	Mon,  9 Mar 2026 09:03:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8431378800
+	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 09:19:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773047026; cv=none; b=SWR3brc0yBoX4tOHuxuUe1e6PqdUuh96l260Y6oA6oIarvUAMZUVof8o1eflR90B8VbnL/CtB41ayKH9vhd8T+1NLEvGSC4v9VKewZMzV9a7W+TL8BX/r4MSyMjL7jWi21iY4lslsAwhVLGOnb6DebIzAywaw+q+sYFeD7ze85E=
+	t=1773047965; cv=none; b=cCtk2rRPTa1usk7nWBe9bqJjWAswHEnFMpVg7U5aBcxpzKe1QOXavB1UJq4IVp0Du0zZe+3yOe2wjx9iw9oiD861nVGWtUX2eGzcHyika2ZwO7jhQoFOSWbmC2gsVE49xhBlSQ3EPiYRhlNoK2OM2vp5B/No4v16bmKBfZuIG1A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773047026; c=relaxed/simple;
-	bh=kSDROP9IQjvBUSAyPonTwVkd0K8lsZ7gTLjiEtj28Ko=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZXD1qblP5+E3ZnUdkgNU3KV7IV+HxCKoqEhH6A3HSOHhG2Q/TgLseCBpaCD51ZhseaKWGwILoF8b/U142IHt+gEMwSOJxmaTvbmkRcTwgLgrvHTxeQizR91D7Q6cMva5MoLpKTMP1KlwkKGjaz9nyKwrE7Ht33jZ211NYXBDOjc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RFBfbL1e; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3E98C2BCB1;
-	Mon,  9 Mar 2026 09:03:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773047026;
-	bh=kSDROP9IQjvBUSAyPonTwVkd0K8lsZ7gTLjiEtj28Ko=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=RFBfbL1eN4cFAmF5H1JfgbhSnAUKt069jyxJtD6j98AZOuEhgvvTlHkHniae5dGvN
-	 /QPZvCjn2IuAfw/q0YF0SGcs50q2FJj1eK2RhpwgpNwUNfFaYUdBbW0I0m1wHir3Lt
-	 M8s6XKTl+UCfp0nYfFnIxKKgM6CpnElK7TDMDSlWjx69g1GxtepXLquAZsbkk1kzTp
-	 pDljsgSteA22r7FtTxpnrVzlG9bsl4+TnTh78EkVdCuuuM3F5w00GWOU1rZrTw7nkY
-	 50kOUyofYTO/xOdkuR+rv3w2eTw0IISvUTO7zxdAFYYRZijowOtm4fGc2G3K3cD3Ec
-	 CLm7coZ05l3OA==
-Date: Mon, 9 Mar 2026 11:03:42 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Jason Gunthorpe <jgg@ziepe.ca>,
-	Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Robin Murphy <robin.murphy@arm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Petr Tesarik <ptesarik@suse.com>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Jason Wang <jasowang@redhat.com>,
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
-	iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, virtualization@lists.linux.dev,
-	linux-rdma@vger.kernel.org
-Subject: Re: [PATCH 2/3] dma-mapping: Clarify valid conditions for CPU cache
- line overlap
-Message-ID: <20260309090342.GS12611@unreal>
-References: <20260307-dma-debug-overlap-v1-0-c034c38872af@nvidia.com>
- <20260307-dma-debug-overlap-v1-2-c034c38872af@nvidia.com>
- <20260308181920.GH1687929@ziepe.ca>
- <20260308184902.GR12611@unreal>
- <20260308230916.GI1687929@ziepe.ca>
+	s=arc-20240116; t=1773047965; c=relaxed/simple;
+	bh=sWYxcos8CMroC8A0lEd/tGK72D2EmXzR79qIMS/1B8o=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=NGgbheGxg4HEc5lKYf7dcXDYUO5uVDUd7yNk0wTWQ4amz4MgzGYSXTaJV83YDf+Gyvqa/VN14hOiKHze0LZbgMyjBUSnKwuQqzClJl6ZJxsfmqfPMMIGwj0e35Xq0lUN3Cw3bhVP955L0stIZiR9k+lyRRI2NJpOGfuW3MZOcec=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZVF/Ebxo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E+KYAKGH; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6298FE7i2697191
+	for <linux-doc@vger.kernel.org>; Mon, 9 Mar 2026 09:19:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	5FHXZeFzUeyWtXo9cOsbCZfVzR7z7yw/JrW7ploJ2qc=; b=ZVF/Ebxo5j0WzHW8
+	Om6ekYQlRbCDxrceniKGYKNM+7/P53FtG4qFWmMZwkrMW9vHNNsyj6g/ov9Sg4Ni
+	452e6zFzQdaox6/lTUn+sKakw7vhIYZBfpGD2Yfy17ogtheyTyKtZjdSzf4bKoCS
+	OHPr4Cwf2FL8wYYmIDPX/d6GhPdJ/tcNC7mo+BY6noOPt2R4v5WjjgKs5QMZQTUA
+	c17iCzE/CIKTFDWFV4TqExpQ+LNHnalFNPmv/P4u29WusXN8j6r9k3/Alq5kycPq
+	cp4RaTvXrviDPM/kNCIRqLUxL89IHSvn1+uqyhH503+O/pJ6C0V/ufOIvFWrvgtD
+	FFcEMA==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cr9cpn124-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 09:19:22 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-8cd773dd39bso1301097185a.2
+        for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 02:19:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1773047962; x=1773652762; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5FHXZeFzUeyWtXo9cOsbCZfVzR7z7yw/JrW7ploJ2qc=;
+        b=E+KYAKGHaOauMibN6qQKvKiNDhotLj5ONZ81J38ktCpYv0KGal2jqdz9guXh8vpU/+
+         vfhOEqVPzmDXYFbA0AVp1dIy2oGmD4paQR/0SZmgOmAVKpDcbSBDMb4v8hUPYqvPFhMH
+         ErYhlNVfT5cUffTznudgNfSrRZ4qbQ05dKn5IFNy8ZJ7byp85Kyo3w3wfDYp31UW1GKV
+         otzesbsPtMgT8MJaM014VWGG5DwbRyMn6KBLGOhiG0BnrR7g5kCJNnhB6qSEYe6WNcSE
+         GVJ/PT7KI7FLTWuT5v2UVW9ma3oh2oslH5sVkrz12DDMlKqhaaCiaN9VQiuqOmxJ5W2n
+         DT/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773047962; x=1773652762;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=5FHXZeFzUeyWtXo9cOsbCZfVzR7z7yw/JrW7ploJ2qc=;
+        b=Us1eWIH82134iwuaGLdmMf52CPwIU5aLGYooTB5G9X3aEaE9pjZwSYBZ874UnHaEni
+         zkrxOD7QxyzrH+82sUfPTCQDTJgfQMhkS5dyacYI3gIjqxdLS3zDni+RGoX9AaW082mX
+         xjJr5vWRbEAh7PzN5QQq7tQQn+W86hZmsAt1a5zlkVR9HBKZm0OFGQ9IgYsEvrTxVNLW
+         U/K2IM0azeQGXCtV4vgq3/hoSvXr1x5soK6cHXaXXV8+6U+cU0Jz+ioqxb56wDR3YzPt
+         kEOxhiwlyirImEXWfVI5ND0yDTlXUrcD9HrEhF6SONFd8O0jDRRHt3amwlXiJxZkB5c2
+         5REg==
+X-Forwarded-Encrypted: i=1; AJvYcCU2NTXxXvLcr9g+UjqRmQPIcIaNFLDdbqOGO75i0hbdBIU+wGJZCYsZKL9ttSRyiAkfIe+z0xMhZPs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzLzZYZNI5s+pECj7bnvUFMhJUMx5StNycqqsgrburdeRbIZDw2
+	cJ935g8JL7ifM+vhbVau4Iukvbxs4DefFv17dgYdvpecKHnHrdz2ufir4qSvkzJ4ss1ixDXP8t6
+	oJfTXF36A3OihvU8kxFXP2fa1exQm3yfcwGwABJdIYug6zSJa+hWJ/DtrHExb+r0=
+X-Gm-Gg: ATEYQzzBucoE5W75JqHFj7FFZDplLB5DjzN/KoK3GapLIDnb5Ta/dI7Yvs7ef5lQoq8
+	6bRrvD3Uhm7lMMqBTAZXwfuuN5rvDuq+/NGkSZwwiIv1wzAuLuUEkgFcgFNmqqch5+pqKDrXh2/
+	QVBm0rJYLaP1feZC9gGuk7hh6jOw64Uttvoq41s1lMZ1g1zWyWsVoujT6jIR/zTCF/Io4o6j6pP
+	yDAQ3bJWRp7/z/FCCzUPxCQq43LVC+zRvu8cccH/sIviE3hhNxPjzPM0KOvJ3/gFSKbap353mjW
+	lCj+yeB8tuYeLHwaVG9jO5ZrUz15IsjcSaobch4e8+3pYZkSTsInrx28Ctx7BROtcAKY+olSVeP
+	C8HZw3UL4wheRTZ9/vmVPFqXg7x5LzRX8aWCke4xXJG1XxYWc
+X-Received: by 2002:a05:620a:480c:b0:8cb:4d05:aa43 with SMTP id af79cd13be357-8cd6d52bb78mr1199076785a.59.1773047962208;
+        Mon, 09 Mar 2026 02:19:22 -0700 (PDT)
+X-Received: by 2002:a05:620a:480c:b0:8cb:4d05:aa43 with SMTP id af79cd13be357-8cd6d52bb78mr1199074785a.59.1773047961774;
+        Mon, 09 Mar 2026 02:19:21 -0700 (PDT)
+Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:ba90:b1dc:5545:17])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4853252cae1sm150954195e9.3.2026.03.09.02.19.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Mar 2026 02:19:21 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Linus Walleij <linusw@kernel.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
+        David Jander <david@protonic.nl>
+Subject: Re: [PATCH] gpio: Document line value semantics
+Date: Mon,  9 Mar 2026 10:19:13 +0100
+Message-ID: <177304793359.9428.6068485267622762602.b4-ty@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260306-gpio-doc-levels-v1-1-19928739e400@kernel.org>
+References: <20260306-gpio-doc-levels-v1-1-19928739e400@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260308230916.GI1687929@ziepe.ca>
-X-Rspamd-Queue-Id: 28289235E0C
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA5MDA4NiBTYWx0ZWRfX7ZR7W/6BIaQ+
+ 0q0+iU7Jr7gAvwz4x7edDRrgiyVa3LUa7aIA1BdhKAuTsKcws2ADrPiAPcHb8hORyA1bjWY4ry4
+ 3w7zxzZFhQL9hNII5ZW6TvbfKaCIXfkJDIENfefTyULE8RQTG6mWCaIlT2ngCI+V4NqwK45fCpl
+ jHIsj+znE91E8VpPxecNfEHo6BMJPeKN+vp9mwP5pwpK3uW+w4HXERRvXkb0UmcwFkmos11KNEe
+ sALD920uiwW+0BfXJn8XU7ks94eeikte9nV0YwS2PzthCZBeVAREcr0IBrOZYrx0PkJlz3RxC0Y
+ 3Rz6v/AxN9eNXPi1kqaSc7cED4mDoG2dFbxvCBlSSPJye+k66dV2dxVHSbNTG/2GRi0ly5S59L9
+ 5SKDBQKoGmzNyGCPBz1JH7nND+N4uMyqRKDrPp0YT622KVaAACZIWTwJXifMTRVXAXLIiP8tWpA
+ JGlYrjwe5UhQwE37JLQ==
+X-Proofpoint-ORIG-GUID: iUuH6X9Ij71EDrHZLcBnezzOTKAiCIWk
+X-Proofpoint-GUID: iUuH6X9Ij71EDrHZLcBnezzOTKAiCIWk
+X-Authority-Analysis: v=2.4 cv=e7sLiKp/ c=1 sm=1 tr=0 ts=69ae909a cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=rrvb0uiYveUXytfXFyYA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-09_03,2026-03-06_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ suspectscore=0 spamscore=0 bulkscore=0 impostorscore=0 malwarescore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2602130000
+ definitions=main-2603090086
+X-Rspamd-Queue-Id: 819AC23607D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78427-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.926];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:dkim,oss.qualcomm.com:mid,qualcomm.com:dkim,qualcomm.com:email,sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78429-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[bartosz.golaszewski@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+	PRECEDENCE_BULK(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.957];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 
-On Sun, Mar 08, 2026 at 08:09:16PM -0300, Jason Gunthorpe wrote:
-> On Sun, Mar 08, 2026 at 08:49:02PM +0200, Leon Romanovsky wrote:
-> > On Sun, Mar 08, 2026 at 03:19:20PM -0300, Jason Gunthorpe wrote:
-> > > On Sat, Mar 07, 2026 at 06:49:56PM +0200, Leon Romanovsky wrote:
-> > > 
-> > > > -This attribute indicates the CPU will not dirty any cacheline overlapping this
-> > > > -DMA_FROM_DEVICE/DMA_BIDIRECTIONAL buffer while it is mapped. This allows
-> > > > -multiple small buffers to safely share a cacheline without risk of data
-> > > > -corruption, suppressing DMA debug warnings about overlapping mappings.
-> > > > -All mappings sharing a cacheline should have this attribute.
-> > > > +DMA_ATTR_CPU_CACHE_OVERLAP
-> > > 
-> > > This is a very specific and well defined use case that allows some cache
-> > > flushing behaviors to work only under the promise that the CPU doesn't
-> > > touch the memory to cause cache inconsistencies.
-> > > 
-> > > > +Another valid use case is on systems that are CPU-coherent and do not use
-> > > > +SWIOTLB, where the caller can guarantee that no cache maintenance operations
-> > > > +(such as flushes) will be performed that could overwrite shared cache lines.
-> > > 
-> > > This is something completely unrelated. 
-> > 
-> > I disagree. The situation is equivalent in that callers guarantee the
-> > CPU cache will not be overwritten.
-> 
-> The RDMA callers do no such thing, they just don't work at all if
-> there is non-coherence in the mapping which is why it is not a bug.
-> 
-> virtio looks like it does actually keep the caches clean for different
-> mappings (and probably also in practice forced coherent as well given
-> qemu is coherent with the VM and VFIO doesn't allow non-coherent DMA
-> devices)
-> 
-> > > What I would really like is a new DMA_ATTR_REQUIRE_COHERENT which
-> > > fails any mappings requests that would use any SWIOTLB or cache
-> > > flushing.
-> > 
-> > You are proposing something orthogonal that operates at a different layer
-> > (DMA mapping). However, for DMA debugging, your new attribute will be
-> > equivalent to DMA_ATTR_CPU_CACHE_OVERLAP.
-> 
-> DMA_ATTR is a dma mapping flag, if you want some weird dma debugging
-> flag it should be called DMA_ATTR_DEBUGGING_IGNORE_CACHELINES with
-> some kind of statement at the user why it is OK.
 
-And this is the issue: the existing DMA_ATTR_CPU_CACHE_CLEAN is essentially
-a debug-oriented attribute. The upper layers are already handled through
-__dma_from_device_group_begin()/end(), which pad cache lines on
-non-coherent systems.
-
-Marek,
-
-What do you see as the right path forward here? RDMA has a legitimate use
-case where CPU cache lines may overlap. The underlying reason differs from
-VirtIO, but the outcome is the same. Should I keep the current name? Should
-we rename it to the proposed DMA_ATTR_CPU_CACHE_OVERLAP or
-DMA_ATTR_DEBUGGING_IGNORE_CACHELINES? Should we introduce a new
-DMA_ATTR_REQUIRE_COHERENT attribute instead? Or do you have another
-recommendation?
-
-Thanks
-
+On Fri, 06 Mar 2026 14:22:00 +0100, Linus Walleij wrote:
+> It is not clearly documented that the GPIO driver API expect the
+> driver to get/set the physical level of the GPIO line and the
+> consumer API will get/set the logic level. Document this in
+> relevant places.
 > 
-> Jason
+> 
+
+Applied, thanks!
+
+[1/1] gpio: Document line value semantics
+      https://git.kernel.org/brgl/c/5645f805927c9bd4443e6143e487ef3ffea34aaf
+
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
