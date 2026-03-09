@@ -1,210 +1,208 @@
-Return-Path: <linux-doc+bounces-78515-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78507-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gB7/B0sUr2nJNQIAu9opvQ
-	(envelope-from <linux-doc+bounces-78515-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 19:41:15 +0100
+	id YB0wFoAOr2njNAIAu9opvQ
+	(envelope-from <linux-doc+bounces-78507-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 19:16:32 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACD5323EB96
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 19:41:14 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E94BF23E763
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 19:16:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EE75A3011BF1
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 18:40:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A997C3024164
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 18:12:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 381C33C1976;
-	Mon,  9 Mar 2026 18:40:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 110A32C15BA;
+	Mon,  9 Mar 2026 18:12:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aGD+NU4g"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="XT+MySc7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6CF43BED75
-	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 18:40:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 975E92C0303;
+	Mon,  9 Mar 2026 18:12:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773081610; cv=none; b=q3UlwtZDTKKfw2fgqM35jC//LKn66DoEWpE000oQCgWLmhIPi2j0m+JQliWQM+ROxzJykL8TWnowDD8N0XP9gNo30l7rF4EwLN4Sx1TsP64QFhSwo2ciMrhSvVRF1oA9EYEo8N25pAGXu0S6Jf2x1jyn0Iyso9n4A8uwsBKh2oc=
+	t=1773079961; cv=none; b=DOJxsQIHRJLB5r+lZX5VSDUTMkITsgHdABMtBygCe6gSzvYIG6T2s50beyKhRzTrDGA+Q80H+ie7mnkecw24vOun9CelaU+gojeq7ZfX3mbZtRlwWfJwDBt/+g9Ib+hfL8khk+medHWqpJa/nSmlxMW4yOVFP6MDar96TbsrBC4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773081610; c=relaxed/simple;
-	bh=Rm9ju9C7zGqX4zi+4bcBnh0tAbe4lY4A0PEi0NI2lDc=;
-	h=Content-Type:From:Mime-Version:Subject:Date:Message-Id:References:
-	 Cc:In-Reply-To:To; b=JDJsxPcVN7pmIntU5PzyCD7jFF2dKR8wNMJKuEcjIrMEPl8ZMT6GPc46pncr+6shBQk9slzvPPPcUeKbFnFfP6XjNtRSAjjjlYvhwa0CBXxaBAax9iR+v0GOkhq9XF8WhQHZp6Cc6J1c4ch+cULexp7BGNCsMOfmlaNC2i4+hw4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aGD+NU4g; arc=none smtp.client-ip=209.85.214.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2ae3a2f6007so67337225ad.2
-        for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 11:40:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773081608; x=1773686408; darn=vger.kernel.org;
-        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
-         :from:content-transfer-encoding:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rd9zk9JvX98f/Az0TArJAGomAXgRJmfryFiyIjHxE7Q=;
-        b=aGD+NU4g1q7OPEaGoP+PS/ajHFSfWgdV0U8d/M56mmqxxtOzPzDnchh5p6CgtmvxAB
-         Y8FFt7WDwpqsnOBsuqsg8Bk6a/e6eLHVxStsj6WVA7um7BRyI5nxKLTW3RtlFwIznKcT
-         VuBmashGveqXckLdn609pJXVdYQob18N7vYRrbhiLVfCYSKKh5ipZCbYs104kb4PouTB
-         AtAHZQ31vq0lu0s7oCdpXBOcn+c1Ygd3UzOXmcyk97wuU9hFtM/71t1+qXILer0BGdmF
-         lHDIjFr4pTd4e0/OvFSkYUkz8ZxbyaiCz/nmwK+ggIhCBfkuJfMm+p78anyfadjm0T4i
-         yxIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773081608; x=1773686408;
-        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
-         :from:content-transfer-encoding:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=rd9zk9JvX98f/Az0TArJAGomAXgRJmfryFiyIjHxE7Q=;
-        b=i9dUTTrIO/4l6QxrCvaPH926nFSp1kiL3wEnXTp630IWlwB85zKrloL9KbwYYyMEjx
-         u0MTtmDm57kkPpwsElmv55d2mMmhTG+W/WQqS9mxeCJqhsFdzIJRlmCqkl04rsPISfQa
-         wKVbqJr8NxEBPK94Mg4j3roRWQrITB0US/6Q1RhA6CGcX8Nkfxl2qZ55RvPmZA22Swg/
-         himIwmOtucRuZSXvxUc2/01qhm+kztzrs2kRF54MbN+D88ItrS+iYkXaeRp42v2y8bzI
-         rjQ011Ybyx7TcnVbTDV0qqhgQnxiRPJANIUqzuTmsOMw21WHMwigYbxiY6NdDFtWY9k4
-         f0tw==
-X-Gm-Message-State: AOJu0YwBaLuP9hSoRtdo83klxJ8Fpj3TXMCOpZD/okRxaOx0qS9T3cJW
-	laAQgXhq7LcdLHQCaIVKJJjJRDXubDDBciTZus6RzmDKVnUgoioQY6A/f7lgkautOFpHEg5o
-X-Gm-Gg: ATEYQzzAsquCpBQcXy2mj7jI8KnBBDCdVcX5rP+4+jcC1fXoNZ9pIrKUZSaao0PG/Ua
-	pTV5hMRVM5wjnOvXPBcMzmVWHl9ntH0TSzwxg6UF9SNE/OkkAvSfqfH8WnDSKtFYyG+591npi3U
-	pwe0DxWoVKgcsI+JDpHbR2VBFvuqUd0Obg1SKLP6b96541B6F/KI1QPRGv+KGaJxHvpNQLGyFJb
-	0B9wug8QV7zkbvW4YKWm6uKiWQ1X6R3l4mZ/zAtndCVHIPPrakDSzNi9SATXVLeJp6wqlatZjpP
-	yPIh7lo/dPsngWjM1dPNgInV5NJlfqADibuPxLirqu4lpB1LzLOqUb3SyviWE3DLCKMR0m3jiXh
-	QcbLPTmX1A24JQsPr8b48/ABw2QSgFgDsBxOESEds9BudDz6SQ8EMGGRovKjNF0vqznP1BWnRbG
-	VbC3iRrSkn+an5iRcOwCfgpjS5WoO19SqlnU0j66HI8N3DV7FNAdfZSYgYHvikGvnHZzw8owfwL
-	Q==
-X-Received: by 2002:a17:902:ce83:b0:2ae:4e2b:f565 with SMTP id d9443c01a7336-2ae823062f1mr121666055ad.0.1773081607947;
-        Mon, 09 Mar 2026 11:40:07 -0700 (PDT)
-Received: from smtpclient.apple (wf121-066.ust.hk. [175.159.121.66])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ae83e57740sm117802505ad.15.2026.03.09.11.40.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 11:40:07 -0700 (PDT)
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-From: =?utf-8?B?5YiY5rWp6Ziz?= <tttturtleruss@gmail.com>
+	s=arc-20240116; t=1773079961; c=relaxed/simple;
+	bh=oaES2sEc9N3xIIhZcMfmd7bFcesKKy2fZX/llHamKwc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=uzsUDHVhzyIpbMJIuCFdpBOYnrn1uiijtvF+nghmWiiUGFhydjgdxAkw2ocyvpnh0by3Jmv8POBMabATpOt73O/mXDaIQPBZYTJ1+4VWe/N7f0f2Ph2fEE1GQ9eQ0q2fwRR/qlwIVKX0dl2fc8giWmQpcC8QFKlpH9XOSg0Xmjg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=XT+MySc7; arc=none smtp.client-ip=198.175.65.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1773079959; x=1804615959;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=oaES2sEc9N3xIIhZcMfmd7bFcesKKy2fZX/llHamKwc=;
+  b=XT+MySc7TGD/fQCIFKfA0wI6W6U/jp24Bu0/yRolYH/FQQjymZ8/0eXA
+   Ekmf6r1wWX/S5ruKtS3fY2yyfX44Wb5Lnku2eIZAOTMuIV49w5YR1/ZL9
+   YUcV12+9J52wbM1R2K2HtD8iPTkujPts4p2jrGg6tMLyA4EXUXly3X5s1
+   erHWUVsGCJFpKqm+J0DQUZG0Q8jGAoQAKP+lvovePwjqtA9ywJJbIZgn2
+   1AFLf3pSm+6rEibllB3luGHFmNQR0y+IgqXXo0p9EWpr3ljaZHQIEk1ag
+   oLc5SJArknpRDPhuieYvsuTuM//5gDNw51aSgGW4XNSdcaTSYXOzEnqft
+   g==;
+X-CSE-ConnectionGUID: n9O3FPPaTCypyaCj0cUzAQ==
+X-CSE-MsgGUID: g1lLZ5gHRd+p45xkXzlAgA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11724"; a="73992013"
+X-IronPort-AV: E=Sophos;i="6.23,109,1770624000"; 
+   d="scan'208";a="73992013"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Mar 2026 11:12:37 -0700
+X-CSE-ConnectionGUID: VZa45FFDQnKViOT+7U8qIA==
+X-CSE-MsgGUID: ZyRW4zXQSLqt2TudOrdmaA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,109,1770624000"; 
+   d="scan'208";a="224774431"
+Received: from sohilmeh.sc.intel.com ([172.25.103.65])
+  by orviesa005.jf.intel.com with ESMTP; 09 Mar 2026 11:12:36 -0700
+From: Sohil Mehta <sohil.mehta@intel.com>
+To: Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	Andy Lutomirski <luto@kernel.org>,
+	Borislav Petkov <bp@alien8.de>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	"H . Peter Anvin" <hpa@zytor.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Sohil Mehta <sohil.mehta@intel.com>,
+	Kiryl Shutsemau <kas@kernel.org>,
+	Brendan Jackman <jackmanb@google.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Nam Cao <namcao@linutronix.de>,
+	Cedric Xing <cedric.xing@intel.com>,
+	Rick Edgecombe <rick.p.edgecombe@intel.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Tony Luck <tony.luck@intel.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Maciej Wieczor-Retman <m.wieczorretman@pm.me>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/5] x86: Enable LASS support with vsyscall=xonly mode
+Date: Mon,  9 Mar 2026 11:10:24 -0700
+Message-ID: <20260309181029.398498-1-sohil.mehta@intel.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [PATCH v2] tools/docs/checktransupdate.py: fix all issues reported by pylint
-Date: Tue, 10 Mar 2026 01:42:02 +0800
-Message-Id: <061376E6-9AA1-4658-9B49-EFD2C754B4D4@gmail.com>
-References: <b497e871-f9b8-4e3f-bc4f-eec9c76adca2@gmail.com>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <b497e871-f9b8-4e3f-bc4f-eec9c76adca2@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Dongliang Mu <dzm91@hust.edu.cn>, Si Yanteng <si.yanteng@linux.dev>
-X-Mailer: iPhone Mail (23A355)
-X-Rspamd-Queue-Id: ACD5323EB96
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: E94BF23E763
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_FROM(0.00)[bounces-78515-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78507-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[intel.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sohil.mehta@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tttturtleruss@gmail.com,linux-doc@vger.kernel.org];
-	APPLE_IOS_MAILER_COMMON(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,intel.com:dkim,intel.com:mid]
 X-Rspamd-Action: no action
 
+Linear Address Space Separation (LASS) is currently disabled [1] when
+support for vsyscall emulation is configured. This series extends LASS
+support specifically to the default mode (vsyscall=xonly).
 
-Sent from my iPhone
+Changes in v3
+-------------
+ - Pick up review tags from Peter Anvin.
+ - Pick up tested-by tags from Maciej.
+ - Minor change in patch 1 to make the reorganized code flow similar to
+   the original.
 
-> On 10 Mar 2026, at 00:56, Haoyang Liu <tttturtleruss@gmail.com> wrote:
->=20
-> =EF=BB=BF
->> On 3/9/2026 11:54 PM, Jonathan Corbet wrote:
->> Haoyang LIU <tttturtleruss@gmail.com> writes:
->>=20
->>> This patch fixes all issues reported by pylint, including:
->>> 1. Format issue in logging.
->>> 2. Variable name style issue.
->> I'm somewhat unconvinced about that second change.  We haven't come up
->> with a coding style for Python code in the kernel, but I think we do
->> want it to look at least a bit like kernel code and not just defer all
->> decisions to tools like pylint.  I'm not really opposed to this change
->> either, mind you, but the process of getting there worries me a bit.
->=20
-> Dear Jon,
->=20
-> My initial thought was that 'HASH' looks like a global-style constant, whi=
-le it's actually a local variable. However, the lowercase 'hash' has conflic=
-t with python built-in hash function, so I renamed it to hash_re to indicate=
- that it's a regular expression.
->=20
->>=20
->>> Fixes: 63e96ce050e5 ("scripts: fix all issues reported by pylint")
->>> Signed-off-by: Haoyang LIU <tttturtleruss@gmail.com>
->>> ---
->>> V1 -> V2: fix variable name style name and keep the format consistent wi=
-th other logging format
->>>=20
->>>  tools/docs/checktransupdate.py | 8 ++++----
->>>  1 file changed, 4 insertions(+), 4 deletions(-)
->>>=20
->>> diff --git a/tools/docs/checktransupdate.py b/tools/docs/checktransupdat=
-e.py
->>> index e894652369a5..cc07cda667fc 100755
->>> --- a/tools/docs/checktransupdate.py
->>> +++ b/tools/docs/checktransupdate.py
->>> @@ -76,11 +76,11 @@ def get_origin_from_trans_smartly(origin_path, t_fro=
-m_head):
->>>      (2) Update the translation through commit HASH (TITLE)
->>>      """
->>>      # catch flag for 12-bit commit hash
->>> -    HASH =3D r'([0-9a-f]{12})'
->>> +    hash_re =3D r'([0-9a-f]{12})'
->>>      # pattern 1: contains "update to commit HASH"
->>> -    pat_update_to =3D re.compile(rf'update to commit {HASH}')
->>> +    pat_update_to =3D re.compile(rf'update to commit {hash_re}')
->>>      # pattern 2: contains "Update the translation through commit HASH"
->>> -    pat_update_translation =3D re.compile(rf'Update the translation thr=
-ough commit {HASH}')
->>> +    pat_update_translation =3D re.compile(rf'Update the translation thr=
-ough commit {hash_re}')
->>>        origin_commit_hash =3D None
->>>      for line in t_from_head["message"]:
->>> @@ -131,7 +131,7 @@ def check_per_file(file_path):
->>>      opath =3D get_origin_path(file_path)
->>>        if not os.path.isfile(opath):
->>> -        logging.error("Cannot find the origin path for {file_path}")
->>> +        logging.error("Cannot find the origin path for %s", file_path)
->> Why was this change made?  The first time around, you'd simply added the
->> obviously missing "f", which seems better?
-> I used the "%s" style mainly to keep the logging format consistent with th=
-e other logging statements in this file, which follow the same pattern. To m=
-e, using f-string or lazy format.
-To me, using f-string or lazy format are the same. ( sorry for the unfinishe=
-d message)
+Note, Peter suggested a few more changes to tighten the #PF vsyscall
+emulation code. I'll post those separately as they are beyond the scope
+of this series.
 
-Haoyang
->=20
-> Sincerely,
-> Haoyang
->=20
->>=20
->> Thanks,
->>=20
->> jon
+v2: https://lore.kernel.org/lkml/20260305214026.3887452-1-sohil.mehta@intel.com/
+
+Patches
+-------
+These patches were originally part of the v10 LASS series [2] before
+being split out into a smaller series to make it easier to review and
+merge. The overall approach to enable vsyscall support was okayed by
+Andy Lutomirski [3].
+
+The patches are based on the tip x86/cpu branch which has the recently
+merged LASS-EFI series [4].
+
+Issue
+-----
+Userspace attempts to access any kernel address generate a #GP when LASS
+is enabled. Legacy vsyscall functions are located in the address range
+0xffffffffff600000 - 0xffffffffff601000. Prior to LASS, default access
+(XONLY) to the vsyscall page would generate a page fault and the access
+would be emulated in the kernel. Currently, as the #GP handler lacks any
+emulation support, LASS is disabled when config X86_VSYSCALL_EMULATION
+is set.
+
+Solution
+--------
+These patches primarily update the #GP handler to reuse the existing
+vsyscall emulation code for #PF. In XONLY mode, the faulting RIP is
+readily available and can be used to determine if the #GP was triggered
+due to a vsyscall access.
+
+In contrast, the vsyscall EMULATE mode is deprecated and not expected to
+be used by anyone. Supporting EMULATE mode with LASS would require
+complex instruction decoding in the #GP fault handler, which is not
+worth the effort. So, LASS is disabled in the rare case when someone
+absolutely needs to enable vsyscall=emulate via the command line.
+
+Please find more details in the individual commit messages.
+
+Links
+-----
+[1]: https://lore.kernel.org/lkml/20251118182911.2983253-1-sohil.mehta@intel.com/
+[2]: https://lore.kernel.org/lkml/20251007065119.148605-1-sohil.mehta@intel.com/
+[3]: https://lore.kernel.org/lkml/f4ae0030-9bc2-4675-ae43-e477cd894750@app.fastmail.com/
+[4]: https://lore.kernel.org/lkml/20260120234730.2215498-1-sohil.mehta@intel.com/
+
+Sohil Mehta (5):
+  x86/vsyscall: Reorganize the page fault emulation code
+  x86/traps: Consolidate user fixups in the #GP handler
+  x86/vsyscall: Restore vsyscall=xonly mode under LASS
+  x86/vsyscall: Disable LASS if vsyscall mode is set to EMULATE
+  x86/cpu: Remove LASS restriction on vsyscall emulation
+
+ .../admin-guide/kernel-parameters.txt         |  4 +-
+ arch/x86/entry/vsyscall/vsyscall_64.c         | 91 ++++++++++++-------
+ arch/x86/include/asm/vsyscall.h               | 13 ++-
+ arch/x86/kernel/cpu/common.c                  | 15 ---
+ arch/x86/kernel/traps.c                       | 12 ++-
+ arch/x86/kernel/umip.c                        |  3 +
+ arch/x86/mm/fault.c                           |  2 +-
+ 7 files changed, 79 insertions(+), 61 deletions(-)
+
+
+base-commit: 68400c1aaf02636a97c45ba198110b66feb270a9
+-- 
+2.43.0
+
 
