@@ -1,65 +1,73 @@
-Return-Path: <linux-doc+bounces-78482-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78483-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YP7dJ/PzrmnZKgIAu9opvQ
-	(envelope-from <linux-doc+bounces-78482-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:23:15 +0100
+	id cJkwJWf0rmnZKgIAu9opvQ
+	(envelope-from <linux-doc+bounces-78483-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:25:11 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D98523CA62
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:23:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B9EA23CAA7
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:25:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id F0DA33017A94
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:12:02 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B3FB83051697
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:14:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C75313B95FC;
-	Mon,  9 Mar 2026 16:12:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 629843BED6D;
+	Mon,  9 Mar 2026 16:14:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="r/wo5gNt"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="rIHyROpF"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29A6C3BED05
-	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 16:11:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 461D83ACA6B;
+	Mon,  9 Mar 2026 16:14:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773072721; cv=none; b=AK8DIUGjVlzit6hxU2ocnsUrz5WTbAvHNrb2hbfRPEQD65ZWNB9FIMAQOn4dtP0qD2amFjIoNDQJhR6Wf0qa6fov1uJRuS1K3YLkeq0hICnq7llIo7DvOHUS2hdmu3WDMDcEbkHkDrpSyJBJFtiBTcEYl9gNkwln502PTtWKWh4=
+	t=1773072873; cv=none; b=FG6hLKejGirSDRjelBXfoSq2GG899wa35yGQpGO5fcALHY/ehdmKsFaDp1H/CEBoUJQ7QweKOdtcraZf4jLtG8DV3+gomcYChIpoIJc99wrPHILZiPEyx9Aw/n5wM3n8jJtFLASLB3KLlJMwIkX3gpmq8K2FGMXWL26xhC/INUg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773072721; c=relaxed/simple;
-	bh=LPt0dfila2NyBqZzbSxHIKbfVI0edSOfwcbjFT4it9g=;
+	s=arc-20240116; t=1773072873; c=relaxed/simple;
+	bh=p1jDg/PoZE134/hvzAZp30erwJqRyaAnX8Tci2InXOo=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=g7qGs00kAmKHIeKi368vq5ujIfzfmEHToZbAkC3h/Hx3uim8xpeiuCbyTDFNdVKc0DMbVKzS9mFA/E1xIsWH9WeAYZITSGj28TRy/RANKkkoEKY2GITFa6IadNKNvqIl7szHj4SyTYMRol59ePTZEGGyMIB/8Irtp4ZwnFYQB1Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=r/wo5gNt; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=i8rOAJfw4s0ozmhl6Y+9eNwF31XidrV9SyqIIsulLQejdiiqGV/Ht6EHTFI0KbDGVOV5S/ACq9juBo+03xsVXx3VG++yn+2D0Uv3o3uCNTEzPwDMGxNJbVZCe97Eae9kNdCmtv5skHd4xZIiMBxEyesNkJdtaftfBit2ZzhI9TE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=rIHyROpF; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7E11D40C9C
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7913540C9C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1773072719; bh=YejBCxJ/HS7Hw1i90FheifYe1ic3iw2fKyDcxPJuffM=;
+	t=1773072871; bh=p1jDg/PoZE134/hvzAZp30erwJqRyaAnX8Tci2InXOo=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=r/wo5gNtF0Uh/Mv1U/r7xU19jjJUbepas0Rt3pShXWS1fMiJZarysCSqgcJFAHKdT
-	 kkKFxaDLYwGo7uM4lhdfj4LtgPXGPNtSME0aG0z1l6Gl2cx6xjlTtKzJpkACmmETDs
-	 t6v04OPtdtCY/qm2O4Oo/UkJ6jdABx1Y8b8FmsOMrs2vvkVmBXEWAh/XNUT23krIS2
-	 8OniJceIgOwUctYU2sIe/l0bJ9IkilN3A710y/sbFkkMzpQj47SRUYZUvgVnPRFkps
-	 hHE+COYS4TEluDmQqosnmJhd2jfAPIsjWCQm46d9s5dPPGJM5O0eXEqjo1tM+wdT+m
-	 hlYNATmC9ERew==
+	b=rIHyROpFd/tKHNE2cNLLgwSlk7bC/Xbm5umP3AawrfzYgfiuvY/yRdDBI5REo6fKC
+	 +niFUjJQGCUOuG4AC4Q06wb2V5v+NFkg3x6MoeuryvNSOn+xU2cZmFraCDAVHY3v3j
+	 7CbmunT6w4hBHEsE6QGd2xBiaspuz1WRDboznSeWWZ+5DUY4nAl9adTmdqCM9/HCCi
+	 l5W6THUrTQqmjNw+WVSUrxTnRQzSOT1wJQx3M8ngkpRb0prHUuR2dvaw1RegGHjKcb
+	 PuJ6ZAR7/qpWekypRt7R7VGDHNDZPamBJznl1wPy42xS23XRyIfvr3pl6BdyJDRwjO
+	 gnApntLob1Wwg==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 7E11D40C9C;
-	Mon,  9 Mar 2026 16:11:59 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 7913540C9C;
+	Mon,  9 Mar 2026 16:14:31 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Ariful Islam Shoikot <islamarifulshoikat@gmail.com>,
- linux-doc@vger.kernel.org
-Cc: bhanumaiya@chromium.org, Ariful Islam Shoikot
- <islamarifulshoikat@gmail.com>
-Subject: Re: [PATCH] Documentation/mm: Fix typo in NUMA paragraph
-In-Reply-To: <20260307114006.33183-1-islamarifulshoikat@gmail.com>
-References: <20260307114006.33183-1-islamarifulshoikat@gmail.com>
-Date: Mon, 09 Mar 2026 10:11:58 -0600
-Message-ID: <87qzptvv75.fsf@trenco.lwn.net>
+To: "David Hildenbrand (Arm)" <david@kernel.org>, linux-kernel@vger.kernel.org
+Cc: linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-mm@kvack.org, "David Hildenbrand (Arm)" <david@kernel.org>, Zi Yan
+ <ziy@nvidia.com>, Lance Yang <lance.yang@linux.dev>, Vlastimil Babka
+ <vbabka@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Lorenzo
+ Stoakes <lorenzo.stoakes@oracle.com>, Baolin Wang
+ <baolin.wang@linux.alibaba.com>, "Liam R . Howlett"
+ <Liam.Howlett@oracle.com>, Nico Pache <npache@redhat.com>, Dev Jain
+ <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, Shuah Khan
+ <skhan@linuxfoundation.org>, Usama Arif <usamaarif642@gmail.com>, Andi
+ Kleen <ak@linux.intel.com>
+Subject: Re: [PATCH v2] docs: filesystems: clarify KernelPageSize vs.
+ MMUPageSize in smaps
+In-Reply-To: <20260306081916.38872-1-david@kernel.org>
+References: <20260306081916.38872-1-david@kernel.org>
+Date: Mon, 09 Mar 2026 10:14:30 -0600
+Message-ID: <87ms0hvv2x.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,63 +75,67 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Rspamd-Queue-Id: 9D98523CA62
+X-Rspamd-Queue-Id: 9B9EA23CAA7
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78482-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,kernel.org,nvidia.com,linux.dev,linux-foundation.org,oracle.com,linux.alibaba.com,redhat.com,arm.com,linuxfoundation.org,gmail.com,linux.intel.com];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org];
-	FREEMAIL_CC(0.00)[chromium.org,gmail.com];
+	TAGGED_FROM(0.00)[bounces-78483-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[lwn.net:+];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,lwn.net:dkim,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,lwn.net:dkim]
 X-Rspamd-Action: no action
 
-Ariful Islam Shoikot <islamarifulshoikat@gmail.com> writes:
+"David Hildenbrand (Arm)" <david@kernel.org> writes:
 
-> Fixed a typo in Documentation/mm/numa.rst:
-> -changed 'allocated' to 'allocate' in the paragraph about
-> memoryless nodes.
+> There was recently some confusion around THPs and the interaction with
+> KernelPageSize / MMUPageSize. Historically, these entries always
+> correspond to the smallest size we could encounter, not any current
+> usage of transparent huge pages or larger sizes used by the MMU.
 >
-> Signed-off-by: Ariful Islam Shoikot <islamarifulshoikat@gmail.com>
-> ---
->  Documentation/mm/numa.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Ever since we added THP support many, many years ago, these entries
+> would keep reporting the smallest (fallback) granularity in a VMA.
 >
-> diff --git a/Documentation/mm/numa.rst b/Documentation/mm/numa.rst
-> index 0f1b56809dca..b765295c6e85 100644
-> --- a/Documentation/mm/numa.rst
-> +++ b/Documentation/mm/numa.rst
-> @@ -140,7 +140,7 @@ this.
->  
->  If the architecture supports--does not hide--memoryless nodes, then CPUs
->  attached to memoryless nodes would always incur the fallback path overhead
-> -or some subsystems would fail to initialize if they attempted to allocated
-> +or some subsystems would fail to initialize if they attempted to allocate
->  memory exclusively from a node without memory.  To support such
+> For this reason, they default to PAGE_SIZE for all VMAs except for
+> VMAs where we have the guarantee that the system and the MMU will
+> always use larger page sizes. hugetlb, for example, exposes a custom
+> vm_ops->pagesize callback to handle that. Similarly, dax/device
+> exposes a custom vm_ops->pagesize callback and provides similar
+> guarantees.
+>
+> Let's clarify the historical meaning of KernelPageSize / MMUPageSize,
+> and point at "AnonHugePages", "ShmemPmdMapped" and "FilePmdMapped"
+> regarding PMD entries.
+>
+> While at it, document "FilePmdMapped", clarify what the "AnonHugePages"
+> and "ShmemPmdMapped" entries really mean, and make it clear that there
+> are no other entries for other THP/folio sizes or mappings.
+>
+> Also drop the duplicate "KernelPageSize" and "MMUPageSize" entries in
+> the example.
 
 Applied, thanks.
 
