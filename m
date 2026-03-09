@@ -1,73 +1,71 @@
-Return-Path: <linux-doc+bounces-78483-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78484-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cJkwJWf0rmnZKgIAu9opvQ
-	(envelope-from <linux-doc+bounces-78483-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:25:11 +0100
+	id SOdbM5rzrmnZKgIAu9opvQ
+	(envelope-from <linux-doc+bounces-78484-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:21:46 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B9EA23CAA7
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:25:10 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C4FB23CA1D
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:21:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id B3FB83051697
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:14:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2CF973071A4A
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:17:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 629843BED6D;
-	Mon,  9 Mar 2026 16:14:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 691E43DBD67;
+	Mon,  9 Mar 2026 16:17:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="rIHyROpF"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="nGZzrxo7"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 461D83ACA6B;
-	Mon,  9 Mar 2026 16:14:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D3323B7B7C;
+	Mon,  9 Mar 2026 16:17:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773072873; cv=none; b=FG6hLKejGirSDRjelBXfoSq2GG899wa35yGQpGO5fcALHY/ehdmKsFaDp1H/CEBoUJQ7QweKOdtcraZf4jLtG8DV3+gomcYChIpoIJc99wrPHILZiPEyx9Aw/n5wM3n8jJtFLASLB3KLlJMwIkX3gpmq8K2FGMXWL26xhC/INUg=
+	t=1773073053; cv=none; b=BtGT+644BIJ/dNDN5R0MMUo+UDllsPCQdNxFV9uvoxDFBQ6g4QmuA62JMG7DZq7giL96QbnuULXM6gHlT8PEvWXWATZeC58k+51TauNP6fLHp9F62Wv4KwT5vr8mz9HkuPKDW02xlwEThPZ3Ca3ed3xKxPb+N2AHuUPWTxw6p3w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773072873; c=relaxed/simple;
-	bh=p1jDg/PoZE134/hvzAZp30erwJqRyaAnX8Tci2InXOo=;
+	s=arc-20240116; t=1773073053; c=relaxed/simple;
+	bh=UD0dm+OloczYr1ek1MUFdc3Us4Kx5Rl5ZAUrOon9nzM=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=i8rOAJfw4s0ozmhl6Y+9eNwF31XidrV9SyqIIsulLQejdiiqGV/Ht6EHTFI0KbDGVOV5S/ACq9juBo+03xsVXx3VG++yn+2D0Uv3o3uCNTEzPwDMGxNJbVZCe97Eae9kNdCmtv5skHd4xZIiMBxEyesNkJdtaftfBit2ZzhI9TE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=rIHyROpF; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=oiBGzOY6NjpIuxCtKfVrWQESKpxFOPECqXyKlUwk143l3396sLJaqvcjreOWNw9z690rcpNSyQLQ+L1pczLyPWms3IKRujiJ+8q7yKdgflwWBwwjyNRfbOM+0SRTaENzaDwDsvg4soA8cJ3UqeSYYYc/onFhsO3E27/0X0Ewtyk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=nGZzrxo7; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 7913540C9C
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 89D2540429
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1773072871; bh=p1jDg/PoZE134/hvzAZp30erwJqRyaAnX8Tci2InXOo=;
+	t=1773073051; bh=T9zkIHLV7xrYDf350oGtXbmqwAFtsvJ1iVEnCrbfp4M=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=rIHyROpFd/tKHNE2cNLLgwSlk7bC/Xbm5umP3AawrfzYgfiuvY/yRdDBI5REo6fKC
-	 +niFUjJQGCUOuG4AC4Q06wb2V5v+NFkg3x6MoeuryvNSOn+xU2cZmFraCDAVHY3v3j
-	 7CbmunT6w4hBHEsE6QGd2xBiaspuz1WRDboznSeWWZ+5DUY4nAl9adTmdqCM9/HCCi
-	 l5W6THUrTQqmjNw+WVSUrxTnRQzSOT1wJQx3M8ngkpRb0prHUuR2dvaw1RegGHjKcb
-	 PuJ6ZAR7/qpWekypRt7R7VGDHNDZPamBJznl1wPy42xS23XRyIfvr3pl6BdyJDRwjO
-	 gnApntLob1Wwg==
+	b=nGZzrxo7I84z8s+QcErmdbvT01e61IguJUf+4btWOjDP7YqjAaR4p+l+K4zdIu+F1
+	 oOxb/lRSBgwyUhoX6R44SeS6rxrg4nlQ+VupgTm+r9gvz8gXatCDIa1kLvEt+nyyI+
+	 0LeCVLXET5TlxNpZBZ5OK5ERGGwUfOoWUXduOV7hYaPseqLGlY85NJ4ef3soBVCRg9
+	 CRgg42kOeJjkFcanMcmHTKzjqE/iWUXKFkrzss2yHOXcbXAaXp9cG6H3biyoET1Bf7
+	 HwpuCCevWa4TVyPK1ztg8En06SWKv7wpM6Gk/N7BbY44lL+XffgnlcE2yJc86nHqF7
+	 yLde68mUltFsg==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 7913540C9C;
-	Mon,  9 Mar 2026 16:14:31 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 89D2540429;
+	Mon,  9 Mar 2026 16:17:31 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: "David Hildenbrand (Arm)" <david@kernel.org>, linux-kernel@vger.kernel.org
-Cc: linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-mm@kvack.org, "David Hildenbrand (Arm)" <david@kernel.org>, Zi Yan
- <ziy@nvidia.com>, Lance Yang <lance.yang@linux.dev>, Vlastimil Babka
- <vbabka@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Lorenzo
- Stoakes <lorenzo.stoakes@oracle.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, "Liam R . Howlett"
- <Liam.Howlett@oracle.com>, Nico Pache <npache@redhat.com>, Dev Jain
- <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, Shuah Khan
- <skhan@linuxfoundation.org>, Usama Arif <usamaarif642@gmail.com>, Andi
- Kleen <ak@linux.intel.com>
-Subject: Re: [PATCH v2] docs: filesystems: clarify KernelPageSize vs.
- MMUPageSize in smaps
-In-Reply-To: <20260306081916.38872-1-david@kernel.org>
-References: <20260306081916.38872-1-david@kernel.org>
-Date: Mon, 09 Mar 2026 10:14:30 -0600
-Message-ID: <87ms0hvv2x.fsf@trenco.lwn.net>
+To: Tommaso Cucinotta <tommaso.cucinotta@gmail.com>, Peter Zijlstra
+ <peterz@infradead.org>
+Cc: Tommaso Cucinotta <tommaso.cucinotta@santannapisa.it>,
+ linux-api@vger.kernel.org, Juri Lelli <juri.lelli@redhat.com>, Shuah Khan
+ <skhan@linuxfoundation.org>, Shashank Balaji
+ <shashank.mahadasyam@sony.com>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] sched/deadline: document new sched_getattr() feature
+ for retrieving current parameters for DEADLINE tasks
+In-Reply-To: <20260304102843.1373905-2-tommaso.cucinotta@santannapisa.it>
+References: <20260303104215.1324243-1-tommaso.cucinotta@santannapisa.it>
+ <20260304102843.1373905-1-tommaso.cucinotta@santannapisa.it>
+ <20260304102843.1373905-2-tommaso.cucinotta@santannapisa.it>
+Date: Mon, 09 Mar 2026 10:17:30 -0600
+Message-ID: <87ikb5vuxx.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -75,67 +73,53 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Rspamd-Queue-Id: 9B9EA23CAA7
+X-Rspamd-Queue-Id: 2C4FB23CA1D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
 	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,kernel.org,nvidia.com,linux.dev,linux-foundation.org,oracle.com,linux.alibaba.com,redhat.com,arm.com,linuxfoundation.org,gmail.com,linux.intel.com];
+	TAGGED_FROM(0.00)[bounces-78484-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78483-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,infradead.org];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lwn.net:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,lwn.net:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,lwn.net:dkim,santannapisa.it:email,trenco.lwn.net:mid]
 X-Rspamd-Action: no action
 
-"David Hildenbrand (Arm)" <david@kernel.org> writes:
+Tommaso Cucinotta <tommaso.cucinotta@gmail.com> writes:
 
-> There was recently some confusion around THPs and the interaction with
-> KernelPageSize / MMUPageSize. Historically, these entries always
-> correspond to the smallest size we could encounter, not any current
-> usage of transparent huge pages or larger sizes used by the MMU.
+> Document in Documentation/sched/sched-deadline.rst the new capability of
+> sched_getattr() to retrieve, for DEADLINE tasks, the runtime left and absolute
+> deadline (setting the flags syscall parameter to 1), in addition to the static
+> parameters (obtained with flags=0).
 >
-> Ever since we added THP support many, many years ago, these entries
-> would keep reporting the smallest (fallback) granularity in a VMA.
->
-> For this reason, they default to PAGE_SIZE for all VMAs except for
-> VMAs where we have the guarantee that the system and the MMU will
-> always use larger page sizes. hugetlb, for example, exposes a custom
-> vm_ops->pagesize callback to handle that. Similarly, dax/device
-> exposes a custom vm_ops->pagesize callback and provides similar
-> guarantees.
->
-> Let's clarify the historical meaning of KernelPageSize / MMUPageSize,
-> and point at "AnonHugePages", "ShmemPmdMapped" and "FilePmdMapped"
-> regarding PMD entries.
->
-> While at it, document "FilePmdMapped", clarify what the "AnonHugePages"
-> and "ShmemPmdMapped" entries really mean, and make it clear that there
-> are no other entries for other THP/folio sizes or mappings.
->
-> Also drop the duplicate "KernelPageSize" and "MMUPageSize" entries in
-> the example.
+> Signed-off-by: Tommaso Cucinotta <tommaso.cucinotta@santannapisa.it>
+> Acked-by: Juri Lelli <juri.lelli@redhat.com>
+> ---
+>  Documentation/scheduler/sched-deadline.rst | 19 +++++++++++++++----
+>  1 file changed, 15 insertions(+), 4 deletions(-)
 
 Applied, thanks.
 
