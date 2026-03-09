@@ -1,63 +1,61 @@
-Return-Path: <linux-doc+bounces-78493-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78497-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0EtTEwn7rmm8LAIAu9opvQ
-	(envelope-from <linux-doc+bounces-78493-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:53:29 +0100
+	id wE8CBxX7rmnZKgIAu9opvQ
+	(envelope-from <linux-doc+bounces-78497-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:53:41 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2E1223D208
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:53:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 884D023D22F
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 17:53:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 970AD301AB86
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:48:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 598193062FAD
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 16:48:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F385B29346F;
-	Mon,  9 Mar 2026 16:48:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61D023CC9E9;
+	Mon,  9 Mar 2026 16:48:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ShuknLG/"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OAJ3jtqZ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D170822A1D4;
-	Mon,  9 Mar 2026 16:48:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DA423BE14A;
+	Mon,  9 Mar 2026 16:48:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773074885; cv=none; b=rnUaWalFyQqaU0ORzLoV+TwNofBjy4M+BdE6he/HOaaa3UEIMbeXHCJWGUvdKG/zSNIyeDVZJGsi3Du7+UX5o1Cj2gar/BJfMurH079dAPmTvJcI7YZ3tilrdpsM3chxDRkDtJYxFtKM/sGoTpn+KmkyWGzKiLY9qPDYAMQuPTA=
+	t=1773074886; cv=none; b=YkRFwjUAeJu35TA5lFVjKyjJKXQVkllUvmFJtIB/LMPa5Q1gPBAnWJG/oM3FIKJM3FS0vOpfgmGqC4sWWJ5LnOB3GUgiJ/lyBlU3T2+yNNwi8QzIZ1KxigTrVy/aEVXWpbZHyREsK50tnykD7VojxGDIsRkYT+xiMY7Yc+hFiCM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773074885; c=relaxed/simple;
-	bh=lTdoS2vsiheWATIVgcF8OQSQ0Xw+s5JEdZeeekTiLBQ=;
+	s=arc-20240116; t=1773074886; c=relaxed/simple;
+	bh=QUqLYmPuQ3O4ZK29hZAwAg0doyghqKMTrXuQP8pJrMQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RGMOZnIwFdkjoiZE/+p9Eh/4A0eZy7k6d2Qwgw9Jerj/CvCfP72GLVwblfzvWsTHIs5RFdNc/WEM8aOlIJrZjTgi0aqci95DDU6fhZuq6xXNh0zCoTM/2A7CvQOzyuzppVARA0YyAgG7aDUGOxOaBx3mG6HRHaL8++WUIzUJDpA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ShuknLG/; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8831CC2BC9E;
+	 MIME-Version:Content-Type; b=e4wL8zUMdU8nuNWlT+/iXkakgf7zZ/onDRLqi9xtW0Vr+3E5dJ8WvPXvK3iaVVzv1Mv1r2wJKopXQnDPi/HNEugO7IrUF6gAWjEDW6P3C/ZSnxsegv8TI+F/jvXhgwAXyvG6MDMzflKZOa98DcfhbPAGedUAqNhxhyiLtGz/h34=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OAJ3jtqZ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C14D5C2BCB0;
 	Mon,  9 Mar 2026 16:48:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773074885;
-	bh=lTdoS2vsiheWATIVgcF8OQSQ0Xw+s5JEdZeeekTiLBQ=;
+	s=k20201202; t=1773074886;
+	bh=QUqLYmPuQ3O4ZK29hZAwAg0doyghqKMTrXuQP8pJrMQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ShuknLG/9JbKKrc499mUfg6nXJLU62Qy5PZeBkWHji2cHr9K+hfpJlkv7jBSQsQlK
-	 pKxrWju1wmIcUY0IaTmgRN/BJ49GEW3gYf6JnuCcDkWQqOnr2peS1ptp8l/l4etN7W
-	 0Gm+u85+sU1KixsZPKHxGxFUstQ1Eyq5JoGKBcuA7hPVsVYescg3AJwmzfkpayEOZl
-	 v+Hkio3KCENa327OE2P0L+11La3fDG674kkbGiiHUH1L4iEKLnOELv5c+hJC7PUg0+
-	 TtoxIDTHB8LTnU3q8BGv3DmGP/VPzk7sChdV5voV3putHqEWDjn4PJGHh8wtlFdpiX
-	 RmpRRFG+PWNOg==
+	b=OAJ3jtqZsO3bO8eiCpMFkYulaN4oCuILxwC6HxXPAmoVbien7B+BIMovr0arFnnyx
+	 47GYt+L4ilEjQlywGBKLbAQK6IRNCPE06vD37lBkHEKy6iIbYdHt2wOSvX70sdOebm
+	 jbqdOHr28XdiuRhvlmpC+bQ8RzJgSX8VaL6SZFf4bhXfoV8vCmPb20aC7+VMUETHQl
+	 9M+aZpI8WwFV6YU5uRnJIN50enflnzIDt3AlGwZtuTO+DFfuSsrl9FC4EASFMLCE+l
+	 nV0YrqA5sje/cGzjFyMQDD40S8LKiBa4jI+WWVGtK5vU2cIvdkXoO5TlAWTnqPITIT
+	 uO8PviTZvrCFA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vzdlz-0000000BhYE-2l0s;
+	id 1vzdlz-0000000BhZR-3cs0;
 	Mon, 09 Mar 2026 17:48:03 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 1/8] docs: python: add helpers to run unit tests
-Date: Mon,  9 Mar 2026 17:47:52 +0100
-Message-ID: <37999041f616ddef41e84cf2686c0264d1a51dc9.1773074166.git.mchehab+huawei@kernel.org>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 2/8] unittests: add a testbench to check public/private kdoc comments
+Date: Mon,  9 Mar 2026 17:47:53 +0100
+Message-ID: <144f4952e0cb74fe9c9adc117e9a21ec8aa1cc10.1773074166.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773074166.git.mchehab+huawei@kernel.org>
 References: <cover.1773074166.git.mchehab+huawei@kernel.org>
@@ -70,10 +68,9 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: A2E1223D208
+X-Rspamd-Queue-Id: 884D023D22F
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
@@ -81,442 +78,391 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78493-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78497-lists,linux-doc=lfdr.de,huawei];
+	RCPT_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.986];
+	NEURAL_HAM(-0.00)[-0.983];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-While python internal libraries have support for unit tests, its
-output is not nice. Add a helper module to improve its output.
+Add unit tests to check if the public/private and comments strip
+is working properly.
 
-I wrote this module last year while testing some scripts I used
-internally. The initial skeleton was generated with the help of
-LLM tools, but it was higly modified to ensure that it will work
-as I would expect.
+Running it shows that, on several cases, public/private is not
+doing what it is expected:
+
+  test_private:
+    TestPublicPrivate:
+        test balanced_inner_private:                                 OK
+        test balanced_non_greddy_private:                            OK
+        test balanced_private:                                       OK
+        test no private:                                             OK
+        test unbalanced_inner_private:                               FAIL
+        test unbalanced_private:                                     FAIL
+        test unbalanced_struct_group_tagged_with_private:            FAIL
+        test unbalanced_two_struct_group_tagged_first_with_private:  FAIL
+        test unbalanced_without_end_of_line:                         FAIL
+
+  Ran 9 tests
+
+  FAILED (failures=5)
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/tools/python.rst      |   2 +
- Documentation/tools/unittest.rst    |  24 ++
- tools/lib/python/unittest_helper.py | 353 ++++++++++++++++++++++++++++
- 3 files changed, 379 insertions(+)
- create mode 100644 Documentation/tools/unittest.rst
- create mode 100755 tools/lib/python/unittest_helper.py
+ tools/unittests/test_private.py | 331 ++++++++++++++++++++++++++++++++
+ 1 file changed, 331 insertions(+)
+ create mode 100755 tools/unittests/test_private.py
 
-diff --git a/Documentation/tools/python.rst b/Documentation/tools/python.rst
-index 1444c1816735..3b7299161f20 100644
---- a/Documentation/tools/python.rst
-+++ b/Documentation/tools/python.rst
-@@ -11,3 +11,5 @@ Python libraries
-    feat
-    kdoc
-    kabi
-+
-+   unittest
-diff --git a/Documentation/tools/unittest.rst b/Documentation/tools/unittest.rst
-new file mode 100644
-index 000000000000..14a2b2a65236
---- /dev/null
-+++ b/Documentation/tools/unittest.rst
-@@ -0,0 +1,24 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===============
-+Python unittest
-+===============
-+
-+Checking consistency of python modules can be complex. Sometimes, it is
-+useful to define a set of unit tests to help checking them.
-+
-+While the actual test implementation is usecase dependent, Python already
-+provides a standard way to add unit tests by using ``import unittest``.
-+
-+Using such class, requires setting up a test suite. Also, the default format
-+is a little bit ackward. To improve it and provide a more uniform way to
-+report errors, some unittest classes and functions are defined.
-+
-+
-+Unittest helper module
-+======================
-+
-+.. automodule:: lib.python.unittest_helper
-+   :members:
-+   :show-inheritance:
-+   :undoc-members:
-diff --git a/tools/lib/python/unittest_helper.py b/tools/lib/python/unittest_helper.py
+diff --git a/tools/unittests/test_private.py b/tools/unittests/test_private.py
 new file mode 100755
-index 000000000000..55d444cd73d4
+index 000000000000..eae245ae8a12
 --- /dev/null
-+++ b/tools/lib/python/unittest_helper.py
-@@ -0,0 +1,353 @@
++++ b/tools/unittests/test_private.py
+@@ -0,0 +1,331 @@
 +#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright(c) 2025-2026: Mauro Carvalho Chehab <mchehab@kernel.org>.
-+#
-+# pylint: disable=C0103,R0912,R0914,E1101
 +
 +"""
-+Provides helper functions and classes execute python unit tests.
-+
-+Those help functions provide a nice colored output summary of each
-+executed test and, when a test fails, it shows the different in diff
-+format when running in verbose mode, like::
-+
-+    $ tools/unittests/nested_match.py -v
-+    ...
-+    Traceback (most recent call last):
-+    File "/new_devel/docs/tools/unittests/nested_match.py", line 69, in test_count_limit
-+        self.assertEqual(replaced, "bar(a); bar(b); foo(c)")
-+        ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+    AssertionError: 'bar(a) foo(b); foo(c)' != 'bar(a); bar(b); foo(c)'
-+    - bar(a) foo(b); foo(c)
-+    ?       ^^^^
-+    + bar(a); bar(b); foo(c)
-+    ?       ^^^^^
-+    ...
-+
-+It also allows filtering what tests will be executed via ``-k`` parameter.
-+
-+Typical usage is to do::
-+
-+    from unittest_helper import run_unittest
-+    ...
-+
-+    if __name__ == "__main__":
-+        run_unittest(__file__)
-+
-+If passing arguments is needed, on a more complex scenario, it can be
-+used like on this example::
-+
-+    from unittest_helper import TestUnits, run_unittest
-+    ...
-+    env = {'sudo': ""}
-+    ...
-+    if __name__ == "__main__":
-+        runner = TestUnits()
-+        base_parser = runner.parse_args()
-+        base_parser.add_argument('--sudo', action='store_true',
-+                                help='Enable tests requiring sudo privileges')
-+
-+        args = base_parser.parse_args()
-+
-+        # Update module-level flag
-+        if args.sudo:
-+            env['sudo'] = "1"
-+
-+        # Run tests with customized arguments
-+        runner.run(__file__, parser=base_parser, args=args, env=env)
++Unit tests for struct/union member extractor class.
 +"""
 +
-+import argparse
-+import atexit
++
 +import os
 +import re
 +import unittest
 +import sys
 +
-+from unittest.mock import patch
++from unittest.mock import MagicMock
++
++SRC_DIR = os.path.dirname(os.path.realpath(__file__))
++sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
++
++from kdoc.kdoc_parser import trim_private_members
++from unittest_helper import run_unittest
++
++#
++# List of tests.
++#
++# The code will dynamically generate one test for each key on this dictionary.
++#
++
++#: Tests to check if CTokenizer is handling properly public/private comments.
++TESTS_PRIVATE = {
++    #
++    # Simplest case: no private. Ensure that trimming won't affect struct
++    #
++    "no private": {
++        "source": """
++            struct foo {
++                int a;
++                int b;
++                int c;
++            };
++        """,
++        "trimmed": """
++            struct foo {
++                int a;
++                int b;
++                int c;
++            };
++        """,
++    },
++
++    #
++    # Play "by the books" by always having a public in place
++    #
++
++    "balanced_private": {
++        "source": """
++            struct foo {
++                int a;
++                /* private: */
++                int b;
++                /* public: */
++                int c;
++            };
++        """,
++        "trimmed": """
++            struct foo {
++                int a;
++                int c;
++            };
++        """,
++    },
++
++    "balanced_non_greddy_private": {
++        "source": """
++            struct foo {
++                int a;
++                /* private: */
++                int b;
++                /* public: */
++                int c;
++                /* private: */
++                int d;
++                /* public: */
++                int e;
++
++            };
++        """,
++        "trimmed": """
++            struct foo {
++                int a;
++                int c;
++                int e;
++            };
++        """,
++    },
++
++    "balanced_inner_private": {
++        "source": """
++            struct foo {
++                struct {
++                    int a;
++                    /* private: ignore below */
++                    int b;
++                /* public: but this should not be ignored */
++                };
++                int b;
++            };
++        """,
++        "trimmed": """
++            struct foo {
++                struct {
++                    int a;
++                };
++                int b;
++            };
++        """,
++    },
++
++    #
++    # Test what happens if there's no public after private place
++    #
++
++    "unbalanced_private": {
++        "source": """
++            struct foo {
++                int a;
++                /* private: */
++                int b;
++                int c;
++            };
++        """,
++        "trimmed": """
++            struct foo {
++                int a;
++            };
++        """,
++    },
++
++    "unbalanced_inner_private": {
++        "source": """
++            struct foo {
++                struct {
++                    int a;
++                    /* private: ignore below */
++                    int b;
++                /* but this should not be ignored */
++                };
++                int b;
++            };
++        """,
++        "trimmed": """
++            struct foo {
++                struct {
++                    int a;
++                };
++                int b;
++            };
++        """,
++    },
++
++    "unbalanced_struct_group_tagged_with_private": {
++        "source": """
++            struct page_pool_params {
++                struct_group_tagged(page_pool_params_fast, fast,
++                        unsigned int    order;
++                        unsigned int    pool_size;
++                        int             nid;
++                        struct device   *dev;
++                        struct napi_struct *napi;
++                        enum dma_data_direction dma_dir;
++                        unsigned int    max_len;
++                        unsigned int    offset;
++                };
++                struct_group_tagged(page_pool_params_slow, slow,
++                        struct net_device *netdev;
++                        unsigned int queue_idx;
++                        unsigned int    flags;
++                        /* private: used by test code only */
++                        void (*init_callback)(netmem_ref netmem, void *arg);
++                        void *init_arg;
++                };
++            };
++        """,
++        "trimmed": """
++            struct page_pool_params {
++                struct_group_tagged(page_pool_params_fast, fast,
++                        unsigned int    order;
++                        unsigned int    pool_size;
++                        int             nid;
++                        struct device   *dev;
++                        struct napi_struct *napi;
++                        enum dma_data_direction dma_dir;
++                        unsigned int    max_len;
++                        unsigned int    offset;
++                };
++                struct_group_tagged(page_pool_params_slow, slow,
++                        struct net_device *netdev;
++                        unsigned int queue_idx;
++                        unsigned int    flags;
++                };
++            };
++        """,
++    },
++
++    "unbalanced_two_struct_group_tagged_first_with_private": {
++        "source": """
++            struct page_pool_params {
++                struct_group_tagged(page_pool_params_slow, slow,
++                        struct net_device *netdev;
++                        unsigned int queue_idx;
++                        unsigned int    flags;
++                        /* private: used by test code only */
++                        void (*init_callback)(netmem_ref netmem, void *arg);
++                        void *init_arg;
++                };
++                struct_group_tagged(page_pool_params_fast, fast,
++                        unsigned int    order;
++                        unsigned int    pool_size;
++                        int             nid;
++                        struct device   *dev;
++                        struct napi_struct *napi;
++                        enum dma_data_direction dma_dir;
++                        unsigned int    max_len;
++                        unsigned int    offset;
++                };
++            };
++        """,
++        "trimmed": """
++            struct page_pool_params {
++                struct_group_tagged(page_pool_params_slow, slow,
++                        struct net_device *netdev;
++                        unsigned int queue_idx;
++                        unsigned int    flags;
++                };
++                struct_group_tagged(page_pool_params_fast, fast,
++                        unsigned int    order;
++                        unsigned int    pool_size;
++                        int             nid;
++                        struct device   *dev;
++                        struct napi_struct *napi;
++                        enum dma_data_direction dma_dir;
++                        unsigned int    max_len;
++                        unsigned int    offset;
++                };
++            };
++        """,
++    },
++    "unbalanced_without_end_of_line": {
++        "source": """ \
++            struct page_pool_params { \
++                struct_group_tagged(page_pool_params_slow, slow, \
++                        struct net_device *netdev; \
++                        unsigned int queue_idx; \
++                        unsigned int    flags;
++                        /* private: used by test code only */
++                        void (*init_callback)(netmem_ref netmem, void *arg); \
++                        void *init_arg; \
++                }; \
++                struct_group_tagged(page_pool_params_fast, fast, \
++                        unsigned int    order; \
++                        unsigned int    pool_size; \
++                        int             nid; \
++                        struct device   *dev; \
++                        struct napi_struct *napi; \
++                        enum dma_data_direction dma_dir; \
++                        unsigned int    max_len; \
++                        unsigned int    offset; \
++                }; \
++            };
++        """,
++        "trimmed": """
++            struct page_pool_params {
++                struct_group_tagged(page_pool_params_slow, slow,
++                        struct net_device *netdev;
++                        unsigned int queue_idx;
++                        unsigned int    flags;
++                };
++                struct_group_tagged(page_pool_params_fast, fast,
++                        unsigned int    order;
++                        unsigned int    pool_size;
++                        int             nid;
++                        struct device   *dev;
++                        struct napi_struct *napi;
++                        enum dma_data_direction dma_dir;
++                        unsigned int    max_len;
++                        unsigned int    offset;
++                };
++            };
++        """,
++    },
++}
 +
 +
-+class Summary(unittest.TestResult):
++class TestPublicPrivate(unittest.TestCase):
 +    """
-+    Overrides ``unittest.TestResult`` class to provide a nice colored
-+    summary. When in verbose mode, displays actual/expected difference in
-+    unified diff format.
++    Main test class. Populated dynamically at runtime.
 +    """
-+    def __init__(self, *args, **kwargs):
-+        super().__init__(*args, **kwargs)
 +
-+        #: Dictionary to store organized test results.
-+        self.test_results = {}
++    def setUp(self):
++        self.maxDiff = None
 +
-+        #: max length of the test names.
-+        self.max_name_length = 0
-+
-+    def startTest(self, test):
-+        super().startTest(test)
-+        test_id = test.id()
-+        parts = test_id.split(".")
-+
-+        # Extract module, class, and method names
-+        if len(parts) >= 3:
-+            module_name = parts[-3]
-+        else:
-+            module_name = ""
-+        if len(parts) >= 2:
-+            class_name = parts[-2]
-+        else:
-+            class_name = ""
-+
-+        method_name = parts[-1]
-+
-+        # Build the hierarchical structure
-+        if module_name not in self.test_results:
-+            self.test_results[module_name] = {}
-+
-+        if class_name not in self.test_results[module_name]:
-+            self.test_results[module_name][class_name] = []
-+
-+        # Track maximum test name length for alignment
-+        display_name = f"{method_name}:"
-+
-+        self.max_name_length = max(len(display_name), self.max_name_length)
-+
-+    def _record_test(self, test, status):
-+        test_id = test.id()
-+        parts = test_id.split(".")
-+        if len(parts) >= 3:
-+            module_name = parts[-3]
-+        else:
-+            module_name = ""
-+        if len(parts) >= 2:
-+            class_name = parts[-2]
-+        else:
-+            class_name = ""
-+        method_name = parts[-1]
-+        self.test_results[module_name][class_name].append((method_name, status))
-+
-+    def addSuccess(self, test):
-+        super().addSuccess(test)
-+        self._record_test(test, "OK")
-+
-+    def addFailure(self, test, err):
-+        super().addFailure(test, err)
-+        self._record_test(test, "FAIL")
-+
-+    def addError(self, test, err):
-+        super().addError(test, err)
-+        self._record_test(test, "ERROR")
-+
-+    def addSkip(self, test, reason):
-+        super().addSkip(test, reason)
-+        self._record_test(test, f"SKIP ({reason})")
-+
-+    def printResults(self):
++    def add_test(cls, name, source, trimmed):
 +        """
-+        Print results using colors if tty.
++        Dynamically add a test to the class
 +        """
-+        # Check for ANSI color support
-+        use_color = sys.stdout.isatty()
-+        COLORS = {
-+            "OK":            "\033[32m",   # Green
-+            "FAIL":          "\033[31m",   # Red
-+            "SKIP":          "\033[1;33m", # Yellow
-+            "PARTIAL":       "\033[33m",   # Orange
-+            "EXPECTED_FAIL": "\033[36m",   # Cyan
-+            "reset":         "\033[0m",    # Reset to default terminal color
-+        }
-+        if not use_color:
-+            for c in COLORS:
-+                COLORS[c] = ""
++        def test(cls):
++            result = trim_private_members(source)
 +
-+        # Calculate maximum test name length
-+        if not self.test_results:
-+            return
-+        try:
-+            lengths = []
-+            for module in self.test_results.values():
-+                for tests in module.values():
-+                    for test_name, _ in tests:
-+                        lengths.append(len(test_name) + 1)  # +1 for colon
-+            max_length = max(lengths) + 2  # Additional padding
-+        except ValueError:
-+            sys.exit("Test list is empty")
++            result = re.sub(r"\s++", " ", result).strip()
++            expected = re.sub(r"\s++", " ", trimmed).strip()
 +
-+        # Print results
-+        for module_name, classes in self.test_results.items():
-+            print(f"{module_name}:")
-+            for class_name, tests in classes.items():
-+                print(f"    {class_name}:")
-+                for test_name, status in tests:
-+                    # Get base status without reason for SKIP
-+                    if status.startswith("SKIP"):
-+                        status_code = status.split()[0]
-+                    else:
-+                        status_code = status
-+                    color = COLORS.get(status_code, "")
-+                    print(
-+                        f"        {test_name + ':':<{max_length}}{color}{status}{COLORS['reset']}"
-+                    )
-+            print()
++            msg = f"failed when parsing this source:\n" + source
 +
-+        # Print summary
-+        print(f"\nRan {self.testsRun} tests", end="")
-+        if hasattr(self, "timeTaken"):
-+            print(f" in {self.timeTaken:.3f}s", end="")
-+        print()
++            cls.assertEqual(result, expected, msg=msg)
 +
-+        if not self.wasSuccessful():
-+            print(f"\n{COLORS['FAIL']}FAILED (", end="")
-+            failures = getattr(self, "failures", [])
-+            errors = getattr(self, "errors", [])
-+            if failures:
-+                print(f"failures={len(failures)}", end="")
-+            if errors:
-+                if failures:
-+                    print(", ", end="")
-+                print(f"errors={len(errors)}", end="")
-+            print(f"){COLORS['reset']}")
++        test.__name__ = f'test {name}'
++
++        setattr(TestPublicPrivate, test.__name__, test)
 +
 +
-+def flatten_suite(suite):
-+    """Flatten test suite hierarchy."""
-+    tests = []
-+    for item in suite:
-+        if isinstance(item, unittest.TestSuite):
-+            tests.extend(flatten_suite(item))
-+        else:
-+            tests.append(item)
-+    return tests
++#
++# Populate TestPublicPrivate class
++#
++test_class = TestPublicPrivate()
++for name, test in TESTS_PRIVATE.items():
++    test_class.add_test(name, test["source"], test["trimmed"])
 +
 +
-+class TestUnits:
-+    """
-+    Helper class to set verbosity level.
-+
-+    This class discover test files, import its unittest classes and
-+    executes the test on it.
-+    """
-+    def parse_args(self):
-+        """Returns a parser for command line arguments."""
-+        parser = argparse.ArgumentParser(description="Test runner with regex filtering")
-+        parser.add_argument("-v", "--verbose", action="count", default=1)
-+        parser.add_argument("-f", "--failfast", action="store_true")
-+        parser.add_argument("-k", "--keyword",
-+                            help="Regex pattern to filter test methods")
-+        return parser
-+
-+    def run(self, caller_file=None, pattern=None,
-+            suite=None, parser=None, args=None, env=None):
-+        """
-+        Execute all tests from the unity test file.
-+
-+        It contains several optional parameters:
-+
-+        ``caller_file``:
-+            -  name of the file that contains test.
-+
-+               typical usage is to place __file__ at the caller test, e.g.::
-+
-+                    if __name__ == "__main__":
-+                        TestUnits().run(__file__)
-+
-+        ``pattern``:
-+            - optional pattern to match multiple file names. Defaults
-+              to basename of ``caller_file``.
-+
-+        ``suite``:
-+            - an unittest suite initialized by the caller using
-+              ``unittest.TestLoader().discover()``.
-+
-+        ``parser``:
-+            - an argparse parser. If not defined, this helper will create
-+              one.
-+
-+        ``args``:
-+            - an ``argparse.Namespace`` data filled by the caller.
-+
-+        ``env``:
-+            - environment variables that will be passed to the test suite
-+
-+        At least ``caller_file`` or ``suite`` must be used, otherwise a
-+        ``TypeError`` will be raised.
-+        """
-+        if not args:
-+            if not parser:
-+                parser = self.parse_args()
-+            args = parser.parse_args()
-+
-+        if not caller_file and not suite:
-+            raise TypeError("Either caller_file or suite is needed at TestUnits")
-+
-+        verbose = args.verbose
-+
-+        if not env:
-+            env = os.environ.copy()
-+
-+        env["VERBOSE"] = f"{verbose}"
-+
-+        patcher = patch.dict(os.environ, env)
-+        patcher.start()
-+        # ensure it gets stopped after
-+        atexit.register(patcher.stop)
-+
-+
-+        if verbose >= 2:
-+            unittest.TextTestRunner(verbosity=verbose).run = lambda suite: suite
-+
-+        # Load ONLY tests from the calling file
-+        if not suite:
-+            if not pattern:
-+                pattern = caller_file
-+
-+            loader = unittest.TestLoader()
-+            suite = loader.discover(start_dir=os.path.dirname(caller_file),
-+                                    pattern=os.path.basename(caller_file))
-+
-+        # Flatten the suite for environment injection
-+        tests_to_inject = flatten_suite(suite)
-+
-+        # Filter tests by method name if -k specified
-+        if args.keyword:
-+            try:
-+                pattern = re.compile(args.keyword)
-+                filtered_suite = unittest.TestSuite()
-+                for test in tests_to_inject:  # Use the pre-flattened list
-+                    method_name = test.id().split(".")[-1]
-+                    if pattern.search(method_name):
-+                        filtered_suite.addTest(test)
-+                suite = filtered_suite
-+            except re.error as e:
-+                sys.stderr.write(f"Invalid regex pattern: {e}\n")
-+                sys.exit(1)
-+        else:
-+            # Maintain original suite structure if no keyword filtering
-+            suite = unittest.TestSuite(tests_to_inject)
-+
-+        if verbose >= 2:
-+            resultclass = None
-+        else:
-+            resultclass = Summary
-+
-+        runner = unittest.TextTestRunner(verbosity=args.verbose,
-+                                            resultclass=resultclass,
-+                                            failfast=args.failfast)
-+        result = runner.run(suite)
-+        if resultclass:
-+            result.printResults()
-+
-+        sys.exit(not result.wasSuccessful())
-+
-+
-+def run_unittest(fname):
-+    """
-+    Basic usage of TestUnits class.
-+
-+    Use it when there's no need to pass any extra argument to the tests
-+    with. The recommended way is to place this at the end of each
-+    unittest module::
-+
-+        if __name__ == "__main__":
-+            run_unittest(__file__)
-+    """
-+    TestUnits().run(fname)
++#
++# main
++#
++if __name__ == "__main__":
++    run_unittest(__file__)
 -- 
 2.52.0
 
