@@ -1,404 +1,210 @@
-Return-Path: <linux-doc+bounces-78506-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78515-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2N/pDT4Gr2knLwIAu9opvQ
-	(envelope-from <linux-doc+bounces-78506-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 18:41:18 +0100
+	id gB7/B0sUr2nJNQIAu9opvQ
+	(envelope-from <linux-doc+bounces-78515-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 19:41:15 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F06523DC17
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 18:41:17 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACD5323EB96
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 19:41:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 988D9302C5F8
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 17:40:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id EE75A3011BF1
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 18:40:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 053EA2EFDBA;
-	Mon,  9 Mar 2026 17:40:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 381C33C1976;
+	Mon,  9 Mar 2026 18:40:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="hVsR2tD/"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aGD+NU4g"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BL0PR03CU003.outbound.protection.outlook.com (mail-eastusazon11012057.outbound.protection.outlook.com [52.101.53.57])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CAA92367B5;
-	Mon,  9 Mar 2026 17:40:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.53.57
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773078005; cv=fail; b=jzbcdj4ociiBjo6qjVMWfUGMGnETtAA77mmhLRs6ubyGuS51EqtfTmchGBEuGj73+cu3xyZTIZjPfzcAi+KzPV4zDTIjMW9oV+C2muKtMoMEvWlLUOnGnIIVyH22tc8rx95xoFEMy/g01wSeHJMq1OjBERvf6R0W+2gIwgR/kyU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773078005; c=relaxed/simple;
-	bh=mDPFEdW9GL3T3CY7t+sWxLYXqBMDtM3Omn0xEaaEqww=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=hBAXPNbzAYpOxAaHsRjYW/8i2KfmDVNb19Bvf26gqxEXvasy1Y2V0NYUxHadbNx7uUcTziM2x8/Xlc3bSNhzwdnEtbmLvf30EhlRZhUGWhEZBosJIc0s6DWmPjr7s87lv0zBmckCXzUoQRfukYJckjX2Zefn1zKuXkOvVRVSufQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=hVsR2tD/; arc=fail smtp.client-ip=52.101.53.57
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D5z8LjEtMlcVkH6qJZ0bbUFN55Ayndkev0Wnpjpfp6i+VlFPSoAcYZamWe/GOLfNqRaL6NixTQ2aJRTikQAKFAeTCWcvwGCI5cIl9Dy+XXQ0jAthIzK4Ct8nOh6drbVLpak9Q8nCSOJuImi+QjankK8JCcqw1yZClr+J9eqbjC8251iISudhjApQD/24JmZB1tzqNbzMsnkwf/lk5DVVaxph5C7biLKGmILEawFXav1RWFh7JHIAq1hspl5be4THZwn4pmGIXaN5ZoCRrlH7wwzU6fSo3j3gw2D0WqZIiVRYpQUr6rPZVjlngLUYuIJkpIdiOw/iMvF1RrXyIWVITw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PcZNQmhEAI3AimluuekZJDm0V90HEjjw2VLGZA0wNqY=;
- b=VB29PeDhciW/fbNztgMSsemrcMBVpny4qWxuL1Rd03JQ5zc0NGpLtYa+txPqy7GsY+Nt1VHbvYeeBNkL1FKyuGwYC+f3UxwmffY4KlfOf08BbB5w6rl3QNMEVcbKNY4rrkC3+y2UqrRpF6CjpWUBN1jaocOTb6X+IF6mTQEAPUPikXkFxvzJAnRWen4gIcgNKtUaQoJursYFrcgVtUP5gOcxmjlw7aRC0FTXKDXN4YF3t+ghq96j1a3V/iDd0GBXqo9d4gdRtaKIgc6hew8fJ1h6blPrWryn091ApCVmwrHIKjl/gpQL73xFi2kc4e5+2W+t4V7lZ6GwCeThcyAI+A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PcZNQmhEAI3AimluuekZJDm0V90HEjjw2VLGZA0wNqY=;
- b=hVsR2tD/Utgsh7JNrUGMIpbSKpVkTkVUbinJMY6MgX1bz8PwdnJIxbWvBzuyRNzpQHfguR0WrkyJPoexCWcFsPd5GareHSMZtpcufS0g4q43ch0Afbm4EHcmlwTTZYwU0W/07bWCpWXP6tCmNsjcrWPOK5PgxotZ+CxigmR78mTBjp0u0EWxT9Fvs0h4iyYM0zrznBO1kWu3n+MtjArtlQ8gEsgviiXHrdz7vj9LEU6epU76n+r7BIJnwZZP4JKiJ6CUZs0RqgDxs90zDmcXvfP+coFBEhnaoKD1zbRKnpeY8B35DkqYAP1subbF6JqAKVsQ4uTwZ8XUCVbazoSQrg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DM6PR12MB2667.namprd12.prod.outlook.com (2603:10b6:5:42::28) by
- DS0PR12MB6560.namprd12.prod.outlook.com (2603:10b6:8:d0::22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.11; Mon, 9 Mar 2026 17:39:57 +0000
-Received: from DM6PR12MB2667.namprd12.prod.outlook.com
- ([fe80::aa9a:b827:90c6:506b]) by DM6PR12MB2667.namprd12.prod.outlook.com
- ([fe80::aa9a:b827:90c6:506b%6]) with mapi id 15.20.9700.006; Mon, 9 Mar 2026
- 17:39:56 +0000
-Message-ID: <2aa90f15-f2f0-45d7-9161-2ab08b4d00d4@nvidia.com>
-Date: Mon, 9 Mar 2026 10:39:54 -0700
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 38/41] arm_mpam: Add workaround for T241-MPAM-4
-To: Ben Horgan <ben.horgan@arm.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
- baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
- dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
- gshan@redhat.com, james.morse@arm.com, jonathan.cameron@huawei.com,
- kobak@nvidia.com, lcherian@marvell.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- peternewman@google.com, punit.agrawal@oss.qualcomm.com,
- quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
- scott@os.amperecomputing.com, sdonthineni@nvidia.com,
- tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
- will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
- joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- zengheng4@huawei.com, linux-doc@vger.kernel.org,
- Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-References: <20260224175720.2663924-1-ben.horgan@arm.com>
- <20260224175720.2663924-39-ben.horgan@arm.com>
- <7e496cb6-ab31-4a89-9630-0fa2e6b3607b@nvidia.com>
- <3e26371d-21b5-435e-9f31-7187466c57a2@arm.com>
-Content-Language: en-US
-From: Fenghua Yu <fenghuay@nvidia.com>
-In-Reply-To: <3e26371d-21b5-435e-9f31-7187466c57a2@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR05CA0185.namprd05.prod.outlook.com
- (2603:10b6:a03:330::10) To DM6PR12MB2667.namprd12.prod.outlook.com
- (2603:10b6:5:42::28)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6CF43BED75
+	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 18:40:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773081610; cv=none; b=q3UlwtZDTKKfw2fgqM35jC//LKn66DoEWpE000oQCgWLmhIPi2j0m+JQliWQM+ROxzJykL8TWnowDD8N0XP9gNo30l7rF4EwLN4Sx1TsP64QFhSwo2ciMrhSvVRF1oA9EYEo8N25pAGXu0S6Jf2x1jyn0Iyso9n4A8uwsBKh2oc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773081610; c=relaxed/simple;
+	bh=Rm9ju9C7zGqX4zi+4bcBnh0tAbe4lY4A0PEi0NI2lDc=;
+	h=Content-Type:From:Mime-Version:Subject:Date:Message-Id:References:
+	 Cc:In-Reply-To:To; b=JDJsxPcVN7pmIntU5PzyCD7jFF2dKR8wNMJKuEcjIrMEPl8ZMT6GPc46pncr+6shBQk9slzvPPPcUeKbFnFfP6XjNtRSAjjjlYvhwa0CBXxaBAax9iR+v0GOkhq9XF8WhQHZp6Cc6J1c4ch+cULexp7BGNCsMOfmlaNC2i4+hw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aGD+NU4g; arc=none smtp.client-ip=209.85.214.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2ae3a2f6007so67337225ad.2
+        for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 11:40:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773081608; x=1773686408; darn=vger.kernel.org;
+        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
+         :from:content-transfer-encoding:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rd9zk9JvX98f/Az0TArJAGomAXgRJmfryFiyIjHxE7Q=;
+        b=aGD+NU4g1q7OPEaGoP+PS/ajHFSfWgdV0U8d/M56mmqxxtOzPzDnchh5p6CgtmvxAB
+         Y8FFt7WDwpqsnOBsuqsg8Bk6a/e6eLHVxStsj6WVA7um7BRyI5nxKLTW3RtlFwIznKcT
+         VuBmashGveqXckLdn609pJXVdYQob18N7vYRrbhiLVfCYSKKh5ipZCbYs104kb4PouTB
+         AtAHZQ31vq0lu0s7oCdpXBOcn+c1Ygd3UzOXmcyk97wuU9hFtM/71t1+qXILer0BGdmF
+         lHDIjFr4pTd4e0/OvFSkYUkz8ZxbyaiCz/nmwK+ggIhCBfkuJfMm+p78anyfadjm0T4i
+         yxIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773081608; x=1773686408;
+        h=to:in-reply-to:cc:references:message-id:date:subject:mime-version
+         :from:content-transfer-encoding:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=rd9zk9JvX98f/Az0TArJAGomAXgRJmfryFiyIjHxE7Q=;
+        b=i9dUTTrIO/4l6QxrCvaPH926nFSp1kiL3wEnXTp630IWlwB85zKrloL9KbwYYyMEjx
+         u0MTtmDm57kkPpwsElmv55d2mMmhTG+W/WQqS9mxeCJqhsFdzIJRlmCqkl04rsPISfQa
+         wKVbqJr8NxEBPK94Mg4j3roRWQrITB0US/6Q1RhA6CGcX8Nkfxl2qZ55RvPmZA22Swg/
+         himIwmOtucRuZSXvxUc2/01qhm+kztzrs2kRF54MbN+D88ItrS+iYkXaeRp42v2y8bzI
+         rjQ011Ybyx7TcnVbTDV0qqhgQnxiRPJANIUqzuTmsOMw21WHMwigYbxiY6NdDFtWY9k4
+         f0tw==
+X-Gm-Message-State: AOJu0YwBaLuP9hSoRtdo83klxJ8Fpj3TXMCOpZD/okRxaOx0qS9T3cJW
+	laAQgXhq7LcdLHQCaIVKJJjJRDXubDDBciTZus6RzmDKVnUgoioQY6A/f7lgkautOFpHEg5o
+X-Gm-Gg: ATEYQzzAsquCpBQcXy2mj7jI8KnBBDCdVcX5rP+4+jcC1fXoNZ9pIrKUZSaao0PG/Ua
+	pTV5hMRVM5wjnOvXPBcMzmVWHl9ntH0TSzwxg6UF9SNE/OkkAvSfqfH8WnDSKtFYyG+591npi3U
+	pwe0DxWoVKgcsI+JDpHbR2VBFvuqUd0Obg1SKLP6b96541B6F/KI1QPRGv+KGaJxHvpNQLGyFJb
+	0B9wug8QV7zkbvW4YKWm6uKiWQ1X6R3l4mZ/zAtndCVHIPPrakDSzNi9SATXVLeJp6wqlatZjpP
+	yPIh7lo/dPsngWjM1dPNgInV5NJlfqADibuPxLirqu4lpB1LzLOqUb3SyviWE3DLCKMR0m3jiXh
+	QcbLPTmX1A24JQsPr8b48/ABw2QSgFgDsBxOESEds9BudDz6SQ8EMGGRovKjNF0vqznP1BWnRbG
+	VbC3iRrSkn+an5iRcOwCfgpjS5WoO19SqlnU0j66HI8N3DV7FNAdfZSYgYHvikGvnHZzw8owfwL
+	Q==
+X-Received: by 2002:a17:902:ce83:b0:2ae:4e2b:f565 with SMTP id d9443c01a7336-2ae823062f1mr121666055ad.0.1773081607947;
+        Mon, 09 Mar 2026 11:40:07 -0700 (PDT)
+Received: from smtpclient.apple (wf121-066.ust.hk. [175.159.121.66])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ae83e57740sm117802505ad.15.2026.03.09.11.40.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Mar 2026 11:40:07 -0700 (PDT)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+From: =?utf-8?B?5YiY5rWp6Ziz?= <tttturtleruss@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB2667:EE_|DS0PR12MB6560:EE_
-X-MS-Office365-Filtering-Correlation-Id: 307b7fba-d654-4124-0d83-08de7e02e139
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	pAOO2GeNAHng71SROgtxDW3J36l9exbk8yzibvUEVeLoB7wZGzJsvEgab40GWfR5sd6EncT/SODE3fzrc92WoR6kAjTSILZpx2W3kodcGkYLi9oacvfLBv1T253ELRBVUd9zMn63uVb7YXmJNDtxa8SrByMHIXvQvixIwKYe1myzOdqeidat9Uqph7OO98kmvNymOuPdJSDaCNskVH6otNi4K8JyF30pnCX63X2HxNFv9TdFrJzVpelm2tJffb6GDR4uw4VbWpY+wPpkuhiC6sAgLQZaiEcVoT48+dtgfRYXqdAoWzn2/I0XxMM5NaBbrCZ4xvVh/if9hJ4qf7btzacRcJbjYN4MDJqSPTZ/V0g/uuLS1cJpfoenAYqTDYjb+RdxkBLc7qt9ZHi+P7yE2ONthYCJqxlU5IllWXNEZzSRSyR1HLNxLaQyXly/wmyOk2PYxp74BZC+xp2yaLzUN6khSGnGrRXLNzc8ZrXuQGiK565NtWxOioNAsmbCYy/xgPmqWXsa3jg+w4OjlPafJh4lvMBERHih+sU0ZQSEI3AXdXjAd58xc1oNOiTyjlR1p3ODgjtv5EUEDIUg3Mt8B8ISe7RWXvO2p3BiHnD9CXxL6Ka7QX8c4SQ/LucAmbKUDRZFEn7SHCwJidr3TL/+wzJU3nekG9UNgWouHhV5LynEJ8X8ynCHX2t6LXSNbTdCn0jnNR/6EBt58Y1DQoNXOPQYXDE9jl3/QFXx8rv52Vg=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB2667.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ek9lMkIzMkR5aVVBQlVpc1BMOVVFZ1R4S205RHdMVkxWR2Q5UmpPQ0RMczBi?=
- =?utf-8?B?RjZPZFJIeUFxeHpTOUJab3ZzamZJN0Q3Z053WTRUc1U5N3pnSW14K2Jpamhu?=
- =?utf-8?B?ZVk4NGRzYVlBa0xxNy9nWkltczEzWjllTVE2VDQ1WU0zbDVsV0ZOSVRwMTNH?=
- =?utf-8?B?TVIyTHV2b2M1OFI2R1hGeWw1c0RWNG5mWGpMTkI0QUMxdXN1NmZNaUdPV2VR?=
- =?utf-8?B?YzVyRlFqVDZPNVRwcUJwOHZLcGt4T0twMUtRN2tJdVplcHV2ZllWMmNZRzZY?=
- =?utf-8?B?bWhBS1JITjg5c1ZzOHE3d1N2cjNpMjhQcG82RXlDVDFHRnZCZTV6YlB6a01N?=
- =?utf-8?B?aTZhOE1pSFpIV3d2TDd2VlNlbVVsMWZRc3Nuc1REcHlJQmRlR1p4MWRUWGdO?=
- =?utf-8?B?YW5ZaS9jUnN4K0tKczNXTzE4RWdaREYrRjFwenRsdGpWLzJNYU45bEJQME9I?=
- =?utf-8?B?Q0FTWmJrWGlxa21JYXZGY0hSa29yaXhVZnJVaUlXb2hQT2NCc3k3TkYyelhw?=
- =?utf-8?B?Rzh2K0VrR3VWZmhCd0w5bWZ0NTZjL2wvUyswVUVrUVVPQXQzOXBGazNVOG1H?=
- =?utf-8?B?bGhDendIbHFlN0JaNklPZTEwOC81QVhwZ21HZytOQWl2eGFrVzJWQTdnRUE5?=
- =?utf-8?B?Ui9OZkVJRHFNc3Fpb1gxYmVxSEV1eDc5RW5RZVNUZzVKQXhUNEF2MUFmTnFG?=
- =?utf-8?B?aFZSanZhNlY2TWlnRmRsckxFWkFRWEc5MUJPR3Rmd2Zkc0tiUE1yNUlTbmIy?=
- =?utf-8?B?ZUY4OFlsdSsxeFVUdUhQVDA4dlhtS3E2aWZ5eHJUNktDYVppMDd3eXhZREl0?=
- =?utf-8?B?ejIrS3JTR2pVMU96cmpJcTFrSFh0MWlzdTRnbGNpN0QxNW4xUzlnN0FScmZ6?=
- =?utf-8?B?VExzcjNLOGlRdDhEVERjTDBSREtLU0xCZDJJcGlBRm9xTnJadVA5WXpPT2ZY?=
- =?utf-8?B?aE45OHpCTXg2OVVmZnpFVVBuVURsYldXZWh4Sk5Ic0I2a2dva0l5V3BRNlR6?=
- =?utf-8?B?MlpKLzRWR3JZNkxaWjQvZUJmWWsyU0VpVG0xYUtiRDNKV096bDZGVUFUMUls?=
- =?utf-8?B?UnpBaDFDa3pSeFlta3dSZFRpejFGVjJqbThnOHFwKy9sZVQyZmZ1UG5KOE42?=
- =?utf-8?B?dW1WUk43WnJ5NjB2bkJWQlEzUjQ1WmpCYXQ0WXBGcWEvTldtazNPWUVsUkNJ?=
- =?utf-8?B?bEhyazhLRDRCZitTMm9aWitSTEVqS3NGdEhJZ0dSWTl5MDVLU3JDSGUrVXlI?=
- =?utf-8?B?MnhFU2pxTzFITWphNmt2eldTakJrWkxYZWd5ZEd0d05yZjFNQVdnT0FzdkVH?=
- =?utf-8?B?ZElPLzgzSnQ3UUMwMlVVMnBYak8wdmtFOU9KbEt3RGt2TmFVTXI1REpGakds?=
- =?utf-8?B?MnpTeUhaa1l1NkFjTFprM0cweFhHSW1BYUM2cjlGUmJaVnJPN3FndkxYT3Yy?=
- =?utf-8?B?VmE3TWpQWjRIWWxXVHpOL2ZMaDhxdEw5MFdkU3paUnEwZW5HUEp2QzV5WWM2?=
- =?utf-8?B?d2xUK0dDbE9Db0M4SVV4eTZQOERkU0ppU3dnZUxJTUY0M0s3ekhOWlRldHZC?=
- =?utf-8?B?bWNnM0tSWVkwZFh2dmtqM2EycS9ncCs0dUVkTUxlSkJXY0JYUTY5MEJGNUVP?=
- =?utf-8?B?dWgrTC9iVDhZOHV6VmJ3UHpNTFliRlpYd3ZBMTZieDVucHNaZm5qNzhZZEJG?=
- =?utf-8?B?dU52VGh0d29yaVJRdWxGT1RkUWVFc0d3TFU5UGY5bHFXeTA3UEQ4d0srQ01i?=
- =?utf-8?B?TFJ3V1RTZE50V1JTMWFwcjNyZzdSWnliTnN5ek4xb1FRY2p6bS9ya0E4MG5w?=
- =?utf-8?B?Q01Rc2plZkF0VjlINCtuNGV3KzdneURLazFiU0pCMTdBRm5QRjlsYlIxem1Q?=
- =?utf-8?B?WkdYVnRJQTA5TzhadjdWZHNFNlJtZjd6RE9qMVB6cVNaM0FkV3I4M0pydlMr?=
- =?utf-8?B?b3hEbXhLRi8wVE90UUo5QjFWR25ka0pYQW5LNnB3VjhTRTBxejhsM2dRKzNs?=
- =?utf-8?B?RzAwV010QUNaY1g1RHJmVzJPR3A2OUVxUVdZYnY2cFI3UkVVR2RINk5jTFNB?=
- =?utf-8?B?U2ZEQm92cnpBaFdXWVdzYVZGNjlRRzRhWUplVUZpWWM4MlAxRXpqaWRRN2Uy?=
- =?utf-8?B?S1BQUFZDb2xUcGRuNUNzb1dvYkF4cHZmbGJFVGwza00yNzhPZ0laZHB2U0U0?=
- =?utf-8?B?OFFyV2F2cXhkeEx0NVVIUFpzcHduNEE5V0hPaVFCNzBoSTVLRU1QOExIb2Mx?=
- =?utf-8?B?K2xWWnpaR0pmT1pzYzlZTTIrMlpBbnJ6U0JRdmxLZXVZK2RGRkllTEFJTy94?=
- =?utf-8?B?c2ZVSWVRNmpzOGJOQ0JoRWszTzUxeUZTY3BGcEE2UUovL2MxaVJTZz09?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 307b7fba-d654-4124-0d83-08de7e02e139
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB2667.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2026 17:39:56.8523
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fCo0aCElr6ISevvFrfRIyYPywaou79lAIjP3+L0pBY0v3G1CU01Zg8i+Z2EI/zLCRvsts9awUgj8Xpygjo2Fjw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6560
-X-Rspamd-Queue-Id: 9F06523DC17
+Mime-Version: 1.0 (1.0)
+Subject: Re: [PATCH v2] tools/docs/checktransupdate.py: fix all issues reported by pylint
+Date: Tue, 10 Mar 2026 01:42:02 +0800
+Message-Id: <061376E6-9AA1-4658-9B49-EFD2C754B4D4@gmail.com>
+References: <b497e871-f9b8-4e3f-bc4f-eec9c76adca2@gmail.com>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <b497e871-f9b8-4e3f-bc4f-eec9c76adca2@gmail.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Dongliang Mu <dzm91@hust.edu.cn>, Si Yanteng <si.yanteng@linux.dev>
+X-Mailer: iPhone Mail (23A355)
+X-Rspamd-Queue-Id: ACD5323EB96
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-78506-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TAGGED_FROM(0.00)[bounces-78515-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[fenghuay@nvidia.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tttturtleruss@gmail.com,linux-doc@vger.kernel.org];
+	APPLE_IOS_MAILER_COMMON(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,Nvidia.com:dkim,nvidia.com:mid,nvidia.com:email,arm.com:email]
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-Hi, Ben,
 
-On 3/2/26 09:11, Ben Horgan wrote:
-> Hi Fenghua,
-> 
-> On 3/1/26 17:28, Fenghua Yu wrote:
->> Hi, Ben,
->>
->> On 2/24/26 09:57, Ben Horgan wrote:
->>> From: Shanker Donthineni <sdonthineni@nvidia.com>
->>>
->>> In the T241 implementation of memory-bandwidth partitioning, in the
->>> absence
->>> of contention for bandwidth, the minimum bandwidth setting can affect the
->>> amount of achieved bandwidth. Specifically, the achieved bandwidth in the
->>> absence of contention can settle to any value between the values of
->>> MPAMCFG_MBW_MIN and MPAMCFG_MBW_MAX.  Also, if MPAMCFG_MBW_MIN is set
->>> zero (below 0.78125%), once a core enters a throttled state, it will
->>> never
->>> leave that state.
->>>
->>> The first issue is not a concern if the MPAM software allows to program
->>> MPAMCFG_MBW_MIN through the sysfs interface. This patch ensures program
->>> MBW_MIN=1 (0.78125%) whenever MPAMCFG_MBW_MIN=0 is programmed.
->>>
->>> In the scenario where the resctrl doesn't support the MBW_MIN
->>> interface via
->>> sysfs, to achieve bandwidth closer to MBW_MAX in the absence of
->>> contention,
->>> software should configure a relatively narrow gap between MBW_MIN and
->>> MBW_MAX. The recommendation is to use a 5% gap to mitigate the problem.
->>>
->>> Clear the feature MBW_MIN feature from the class to ensure we don't
->>> accidentally change behaviour when resctrl adds support for a MBW_MIN
->>> interface.
->>>
->>> Tested-by: Gavin Shan <gshan@redhat.com>
->>> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
->>> Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
->>> Signed-off-by: Shanker Donthineni <sdonthineni@nvidia.com>
->>> Signed-off-by: James Morse <james.morse@arm.com>
->>> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
->>
->> Reviewed-by: Fenghua Yu <fenghuay@nvidia.com>
->>
->> This patch itself is good.
->>
->> Please check the following comments.
->>
+Sent from my iPhone
+
+> On 10 Mar 2026, at 00:56, Haoyang Liu <tttturtleruss@gmail.com> wrote:
+>=20
+> =EF=BB=BF
+>> On 3/9/2026 11:54 PM, Jonathan Corbet wrote:
+>> Haoyang LIU <tttturtleruss@gmail.com> writes:
+>>=20
+>>> This patch fixes all issues reported by pylint, including:
+>>> 1. Format issue in logging.
+>>> 2. Variable name style issue.
+>> I'm somewhat unconvinced about that second change.  We haven't come up
+>> with a coding style for Python code in the kernel, but I think we do
+>> want it to look at least a bit like kernel code and not just defer all
+>> decisions to tools like pylint.  I'm not really opposed to this change
+>> either, mind you, but the process of getting there worries me a bit.
+>=20
+> Dear Jon,
+>=20
+> My initial thought was that 'HASH' looks like a global-style constant, whi=
+le it's actually a local variable. However, the lowercase 'hash' has conflic=
+t with python built-in hash function, so I renamed it to hash_re to indicate=
+ that it's a regular expression.
+>=20
+>>=20
+>>> Fixes: 63e96ce050e5 ("scripts: fix all issues reported by pylint")
+>>> Signed-off-by: Haoyang LIU <tttturtleruss@gmail.com>
 >>> ---
->>> [ morse: Added as second quirk, adapted to use the new intermediate
->>> values
->>> in mpam_extend_config() ]
->>>
->>> Changes since rfc:
->>> MPAM_IIDR_NVIDIA_T421 -> MPAM_IIDR_NVIDIA_T241
->>> Handling when reset_mbw_min is set
->>>
->>> Changes since v3:
->>> Move the 5% gap policy back here
->>> Clear mbw_min feature in class
->>> ---
->>>    Documentation/arch/arm64/silicon-errata.rst |  2 +
->>>    drivers/resctrl/mpam_devices.c              | 50 +++++++++++++++++++--
->>>    drivers/resctrl/mpam_internal.h             |  1 +
->>>    3 files changed, 50 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/Documentation/arch/arm64/silicon-errata.rst b/
->>> Documentation/arch/arm64/silicon-errata.rst
->>> index a65620f98e3a..a4b246655e37 100644
->>> --- a/Documentation/arch/arm64/silicon-errata.rst
->>> +++ b/Documentation/arch/arm64/silicon-errata.rst
->>> @@ -249,6 +249,8 @@ stable kernels.
->>>    +----------------+-----------------+-----------------
->>> +-----------------------------+
->>>    | NVIDIA         | T241 MPAM       | T241-MPAM-1     | N/
->>> A                         |
->>>    +----------------+-----------------+-----------------
->>> +-----------------------------+
->>> +| NVIDIA         | T241 MPAM       | T241-MPAM-4     | N/
->>> A                         |
->>> ++----------------+-----------------+-----------------
->>> +-----------------------------+
->>>    +----------------+-----------------+-----------------
->>> +-----------------------------+
->>>    | Freescale/NXP  | LS2080A/LS1043A | A-008585        |
->>> FSL_ERRATUM_A008585         |
->>>    +----------------+-----------------+-----------------
->>> +-----------------------------+
->>> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/
->>> mpam_devices.c
->>> index 08cb080592d9..8f44e9dee207 100644
->>> --- a/drivers/resctrl/mpam_devices.c
->>> +++ b/drivers/resctrl/mpam_devices.c
->>> @@ -679,6 +679,12 @@ static const struct mpam_quirk mpam_quirks[] = {
->>>        .iidr_mask  = MPAM_IIDR_MATCH_ONE,
->>>        .workaround = T241_SCRUB_SHADOW_REGS,
->>>        },
->>> +    {
->>> +    /* NVIDIA t241 erratum T241-MPAM-4 */
->>> +    .iidr       = MPAM_IIDR_NVIDIA_T241,
->>> +    .iidr_mask  = MPAM_IIDR_MATCH_ONE,
->>> +    .workaround = T241_FORCE_MBW_MIN_TO_ONE,
->>> +    },
->>>        { NULL } /* Sentinel */
->>>    };
->>>    @@ -1464,6 +1470,31 @@ static void
->>> mpam_quirk_post_config_change(struct mpam_msc_ris *ris, u16 partid,
->>>            mpam_apply_t241_erratum(ris, partid);
->>>    }
->>>    +static u16 mpam_wa_t241_force_mbw_min_to_one(struct mpam_props *props)
->>> +{
->>> +    u16 max_hw_value, min_hw_granule, res0_bits;
->>> +
->>> +    res0_bits = 16 - props->bwa_wd;
->>> +    max_hw_value = ((1 << props->bwa_wd) - 1) << res0_bits;
->>> +    min_hw_granule = ~max_hw_value;
->>> +
->>> +    return min_hw_granule + 1;
->>> +}
->>> +
->>> +static u16 mpam_wa_t241_calc_min_from_max(struct mpam_config *cfg)
->>> +{
->>> +    u16 val = 0;
->>> +
->>> +    if (mpam_has_feature(mpam_feat_mbw_max, cfg)) {
->>
->> But the problem is mpam_feat_mbw_max feature is NOT set in cfg.
->>
->>> +        u16 delta = ((5 * MPAMCFG_MBW_MAX_MAX) / 100) - 1;
->>> +
->>> +        if (cfg->mbw_max > delta)
->>> +            val = cfg->mbw_max - delta;
->>> +    }
->>> +
->>> +    return val;
->>
->> So 0 is always returned.
->>
->> The workaround will set mbw_min as 1% which is too small and will cause
->> performance degradation, e.g. about 20% degradation on some benchmarks.
->>
->> This patch itself doesn't have any issue.
->>
->> The issue is the mbw_max feature bit in cfg is not set.
-> 
-> This is intended behaviour as the reset is done independently
-> from the value set in the config. The value is there so that
-> resctrl can display the expected values.
-> 
->> This is a legacy issue, not introduced by this patch set.
->>> Here is a fix patch for the issue:
->> https://lore.kernel.org/lkml/20260301171829.1357886-1-
->> fenghuay@nvidia.com/T/#u
-> 
-> I've commented on that patch. I think it's best to fix it in the context
-> of the erratum.
-> 
-> Does the below solve your performance problems?
-> 
-> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
-> index 236f78ab9163..60d3d3e2193f 100644
-> --- a/drivers/resctrl/mpam_devices.c
-> +++ b/drivers/resctrl/mpam_devices.c
-> @@ -1515,16 +1515,20 @@ static u16 mpam_wa_t241_force_mbw_min_to_one(struct mpam_props *props)
->          return min_hw_granule + 1;
->   }
->   
-> -static u16 mpam_wa_t241_calc_min_from_max(struct mpam_config *cfg)
-> +static u16 mpam_wa_t241_calc_min_from_max(struct mpam_props *props,
-> +                                         struct mpam_config *cfg)
->   {
->          u16 val = 0;
-> +       u16 max;
-> +       u16 delta = ((5 * MPAMCFG_MBW_MAX_MAX) / 100) - 1;
->   
-> -       if (mpam_has_feature(mpam_feat_mbw_max, cfg)) {
-> -               u16 delta = ((5 * MPAMCFG_MBW_MAX_MAX) / 100) - 1;
-> +       if (mpam_has_feature(mpam_feat_mbw_max, cfg))
-> +               max = cfg->mbw_max;
-> +       else
-> +               max = GENMASK(15, 16 - cprops->bwa_wd);
->   
-> -               if (cfg->mbw_max > delta)
-> -                       val = cfg->mbw_max - delta;
-> -       }
+>>> V1 -> V2: fix variable name style name and keep the format consistent wi=
+th other logging format
+>>>=20
+>>>  tools/docs/checktransupdate.py | 8 ++++----
+>>>  1 file changed, 4 insertions(+), 4 deletions(-)
+>>>=20
+>>> diff --git a/tools/docs/checktransupdate.py b/tools/docs/checktransupdat=
+e.py
+>>> index e894652369a5..cc07cda667fc 100755
+>>> --- a/tools/docs/checktransupdate.py
+>>> +++ b/tools/docs/checktransupdate.py
+>>> @@ -76,11 +76,11 @@ def get_origin_from_trans_smartly(origin_path, t_fro=
+m_head):
+>>>      (2) Update the translation through commit HASH (TITLE)
+>>>      """
+>>>      # catch flag for 12-bit commit hash
+>>> -    HASH =3D r'([0-9a-f]{12})'
+>>> +    hash_re =3D r'([0-9a-f]{12})'
+>>>      # pattern 1: contains "update to commit HASH"
+>>> -    pat_update_to =3D re.compile(rf'update to commit {HASH}')
+>>> +    pat_update_to =3D re.compile(rf'update to commit {hash_re}')
+>>>      # pattern 2: contains "Update the translation through commit HASH"
+>>> -    pat_update_translation =3D re.compile(rf'Update the translation thr=
+ough commit {HASH}')
+>>> +    pat_update_translation =3D re.compile(rf'Update the translation thr=
+ough commit {hash_re}')
+>>>        origin_commit_hash =3D None
+>>>      for line in t_from_head["message"]:
+>>> @@ -131,7 +131,7 @@ def check_per_file(file_path):
+>>>      opath =3D get_origin_path(file_path)
+>>>        if not os.path.isfile(opath):
+>>> -        logging.error("Cannot find the origin path for {file_path}")
+>>> +        logging.error("Cannot find the origin path for %s", file_path)
+>> Why was this change made?  The first time around, you'd simply added the
+>> obviously missing "f", which seems better?
+> I used the "%s" style mainly to keep the logging format consistent with th=
+e other logging statements in this file, which follow the same pattern. To m=
+e, using f-string or lazy format.
+To me, using f-string or lazy format are the same. ( sorry for the unfinishe=
+d message)
 
-Could you please add some comments on this piece of code? It's worth to 
-comment on why there are different values on cfg and props.
-> +       if (max > delta)
-> +               val = max - delta;
->   
->          return val;
->   }
-> @@ -1577,9 +1581,8 @@ static void mpam_reprogram_ris_partid(struct mpam_msc_ris *ris, u16 partid,
->                  if (mpam_has_quirk(T241_FORCE_MBW_MIN_TO_ONE, msc)) {
->                          u16 min = mpam_wa_t241_force_mbw_min_to_one(rprops);
->   
-> -                       val = mpam_wa_t241_calc_min_from_max(cfg);
-> -                       if (val < min)
-> -                               val = min;
-> +                       val = mpam_wa_t241_calc_min_from_max(rprops, cfg);
-> +                       val = max(val, min);
->                  }
->   
->                  mpam_write_partsel_reg(msc, MBW_MIN, val);
-> 
-
-Otherwise, this change looks good to me.
-
-Thanks.
-
--Fenghua
+Haoyang
+>=20
+> Sincerely,
+> Haoyang
+>=20
+>>=20
+>> Thanks,
+>>=20
+>> jon
 
