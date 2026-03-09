@@ -1,248 +1,352 @@
-Return-Path: <linux-doc+bounces-78440-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78445-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KPsbNNKZrmmqGgIAu9opvQ
-	(envelope-from <linux-doc+bounces-78440-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 10:58:42 +0100
+	id qITxBN63rmnMIAIAu9opvQ
+	(envelope-from <linux-doc+bounces-78445-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 13:06:54 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72C26236A88
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 10:58:42 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A34F92386D4
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 13:06:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C6DC0300147C
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 09:58:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 23054307EED5
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 12:01:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7ABF385504;
-	Mon,  9 Mar 2026 09:58:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A739434C145;
+	Mon,  9 Mar 2026 12:01:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EOPQDGZ+"
+	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="GQt6gMeH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from www3141.sakura.ne.jp (www3141.sakura.ne.jp [49.212.207.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A1CE376BE4
-	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 09:58:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773050320; cv=none; b=hKXvPLjue5o+qEzyXyFEii2xf3CtMWJC+WiLI342IR3Qk1JxOPmTvDQs4HtfYC+lQLb+LeVIF13TTg4acBddGOqPpSiby0YkCSVHedM8x5kJeLiOAZdt4uSx3Jk7TZsywLCYcXb4SXp5ZJ1E2yYUx/SfGUBvlgjNsrzR0Jgx0MU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773050320; c=relaxed/simple;
-	bh=HFUCoglJbXbiR8kUrCXuOUU8Xmz7mxY7BJqznpbLkm0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KM5Xq6+i8BgVzMDvd7mX9EzDQBM9osPuLCAT5wIUFrONiAJz9kf6SlyOm5xdMqO4KSirH0nH684yLA6nGafztMVbH0LuitSXtu2o1ppMQLe7r2RoVDSN5ktiUOzCMEbrr7ZUqyyxeFclTmt5rx/OTy8fAk36kqa3kStKqO3jOOs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EOPQDGZ+; arc=none smtp.client-ip=209.85.214.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2ae43042ea7so91249355ad.0
-        for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 02:58:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773050319; x=1773655119; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8Yvkz94goFK1X6HfxlloW5SpPhXOJ/hm+dKJ/2I7lmU=;
-        b=EOPQDGZ+XBZOawrpIts+mBeBTf12QehaJYAy4j+89Th+rfFKzemhpSpeqyGnDzmfNB
-         h0BrNTP3Z96yBXLiWI4Pf1RjOtrYTzJaqo1jJJP/0Z9XMQoQeC/CGCw88ofJxtqPK2iI
-         NMophoBE8DPXxac4wC5Z7m1QeIiNoe528rRpETojyh2KT5H9amklzANgPdV8Y7qL63nU
-         UoSOzctQDkyLXxnQEdjaZJITUvhihbfIBexWquQ5nYjLmf8GvJdDpghOyAZ7rvXPurUD
-         KFUxsYsjt7xD4MMqzP+QvgaWLZGHNOGe8Fmpf9nu/hWavqfXBjkguXRLpjFELoKaWUgs
-         y+kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773050319; x=1773655119;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8Yvkz94goFK1X6HfxlloW5SpPhXOJ/hm+dKJ/2I7lmU=;
-        b=IVGaDfPCyAO8Q32LjGY4Ee2V/RgVN4yShqd/QiypGzo8BT6TKRMwxyWaZqBxnl/DBu
-         zqhbTHW0xLZYelpNyAMdmeijBX5HFdXi9Qwz30aBTkIveJRMmBHP8NiNc+UmePncek9E
-         koEbPA0FcjTkibpV4ma4da6l6zZXJJEOmAz5zfMbhJGemuPzgKQkoqo01XbFO4tRZfa0
-         Q4ENL1L3qptoI+hkq4RYATHawdqn5ommZOmhfMsxvin+bBAKy5FqFUhk0vC+K9nzOGTY
-         OkqxOLIyxmD9L83CqqwuDiKU5QVDDxX77DrbfPiHHJvptxpMbIrdKnRO1Jtp4j7eZTAF
-         RvVg==
-X-Forwarded-Encrypted: i=1; AJvYcCUmkVkQ5VQqFjuH0/Y3utmfR2zoOXzs4kOLdrp/rKX/8wphRqH6FP43ZppRwEag2NwCQ4dFau90VJ0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzruqTWCaQcJ5d1dOfksnGjlEgx52q9JeDhQ18w/kpD2YBpRjOQ
-	ZLeFTyQoOO7ODXJx7gycMyAhX/I7uid1Zqd5c9wvLZsqorSMkeEHMkPN
-X-Gm-Gg: ATEYQzzW2AuVUC40pYVX3CqYAuH9cY9CVEpRGQDGCksrUMzc6NguqwIgeP1mf/bAZew
-	filNge+ocutTySZsEcWswi2l2PTYFHv51o0nbwSe6k9Hi479LW+4vEnrvzwjEoHJE4iHzLyacWV
-	FTSsAuef5yMd+JF6Cthid1sLEsxvNSo6f8lfhghOFlSVpOjgvorYovc8ACobvs51LKyhZupksTV
-	1S+I3Qs8cp4h1cOZl+i77DoS1ayucTZEA72AlB4WFtN69sgTH4O9gJB3yuCq8NhBqjTj6kVjc6W
-	kXwEerwz6lZn6tEzmgzqjmaTyEldBkfgK018LtXbIOxj4lT86LEVhRoWLPN+dFZ8Ta8aM9F96/w
-	EhQTjx5X4SrDKaiNY/Fnn7F8VSLCkc0B40Uq2q0v+VTvq9Poij2NYUMJt2YAPeA9hrdPuLy2fQ9
-	Er0Ff6WhtuW4IAWm197loI8YbXT3zVUEIsh9bdhHGIZcSLROAmHgCm9EmPTB2EKM3SG0i0BUyvV
-	MrEXTAvhWbItgme9A==
-X-Received: by 2002:a17:903:b4e:b0:2a9:622e:fd46 with SMTP id d9443c01a7336-2ae82265ddemr106533375ad.0.1773050318715;
-        Mon, 09 Mar 2026 02:58:38 -0700 (PDT)
-Received: from russ.ust.hk (ec2-54-255-20-216.ap-southeast-1.compute.amazonaws.com. [54.255.20.216])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ae83e77197sm109972725ad.20.2026.03.09.02.58.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 02:58:38 -0700 (PDT)
-From: Haoyang LIU <tttturtleruss@gmail.com>
-To: Dongliang Mu <dzm91@hust.edu.cn>,
-	Yanteng Si <si.yanteng@linux.dev>,
-	Alex Shi <alexs@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: Haoyang LIU <tttturtleruss@gmail.com>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] tools/docs/checktransupdate.py: use metadata to lookup origin path
-Date: Mon,  9 Mar 2026 17:58:31 +0800
-Message-ID: <20260309095832.41209-1-tttturtleruss@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A41224DCF9;
+	Mon,  9 Mar 2026 12:01:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=49.212.207.181
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773057689; cv=pass; b=Fp/Hifv7q++j8l3VFsPZHCszjh4l1lyDZ16/5L0X7Q7dkaCbwL9H/3AtDcFYVsxmAk9Rn7Bi7ZR6xHHrD1uCFKdPbL/uCxA2WYI3tSBzJAPsAsfGIKMB77wPHcFKufcCdtV1D+8evmFOO0fJsbvKS/sP9+CsXulooS8uoayTt/E=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773057689; c=relaxed/simple;
+	bh=jsieX2kxuH36O9g0xoiluXbz8ayquuEC1ux5tG8NV7w=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=VRS32o2pwCGrgreIaq1hshfuJfnyuAuyJ8o335cYh23IQ2BQhHwn9wN+j06iBJuIfFR+1IWRkuADbyu5z3Zz+13DJ6I4YDrEcNXF99hSzJoN1bAzjBFJoeocC2GFbrLvDLZSkHQtjFucBISbZfIzalp/COXpYs4gHuZjLFS+BJg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=GQt6gMeH; arc=pass smtp.client-ip=49.212.207.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+	(authenticated bits=0)
+	by www3141.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 629AoNIX046939
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Mon, 9 Mar 2026 19:50:24 +0900 (JST)
+	(envelope-from weibu@redadmin.org)
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id 6614D109EFC59;
+	Mon,  9 Mar 2026 19:50:23 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OR19hQ6O0WBw; Mon,  9 Mar 2026 19:50:18 +0900 (JST)
+Received: by www.redadmin.org (Postfix, from userid 1000)
+	id D33E2109EFC58; Mon,  9 Mar 2026 19:50:17 +0900 (JST)
+Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
+ARC-Seal: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space; t=1773053417;
+	cv=none; b=BdFp0fdnvo+8w8g6B4vMo4PBEvr+bFsNzlUuUifOawsaNkO1VvWY9OLBfPgNUYVfJXw+Dz+XDrugqUEshCvsp3GJijNGAFZslMFDp0ujQv3CkN2+Urtdr0NIQSw+g4MS2/R0ugjWKcJvFTAyoKa5WsR7tHQJBSpFc/mnefdDzCg=
+ARC-Message-Signature: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space;
+	t=1773053417; c=relaxed/relaxed;
+	bh=JuFeJlFp2UPceish3Pt4gcdjLVEPPALkUcxLqqQie5g=;
+	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding; b=eEa956G6V92wT0JLbxOqLa78Xf0Fe1QpGUmAklk83DjZ4fcNpGDCkgXCod1gEDpwB3daZtzSw/Fb7kybbdwRJCxPHU9SJNbFmqUFmmRr2BFxe2VqMcCcrvcSiZLfQ3aZtzGo+6XpvUPUTX02JFDjwzOjakMp8aOC9UkzLmqtcbY=
+ARC-Authentication-Results: i=1; www.redadmin.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org D33E2109EFC58
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1773053417;
+	bh=JuFeJlFp2UPceish3Pt4gcdjLVEPPALkUcxLqqQie5g=;
+	h=From:To:Cc:Subject:Date:From;
+	b=GQt6gMeHBaS4zs+eewvogmgRzLXHgwTZpwtu28dG4GZBTYu+VFviqPUqiROkt1h8E
+	 UEYxPX89+6UeLSU/ql3cktfIp+1C1BPXgpm7OLBM2bZXuGY/PM8NHzP5ZS2ihY59J1
+	 y8iUeCXMxVtNB2IsLWH8wjsYZCyP5aDanYvyhVN8=
+From: Akiyoshi Kurita <weibu@redadmin.org>
+To: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, corbet@lwn.net, akiyks@gmail.com,
+        weibu@redadmin.org
+Subject: [PATCH] docs: ja_JP: process: translate second half of 'Describe your changes'
+Date: Mon,  9 Mar 2026 19:50:15 +0900
+Message-ID: <20260309105015.309116-1-weibu@redadmin.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 72C26236A88
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: A34F92386D4
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
+	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,gmail.com,redadmin.org];
+	TAGGED_FROM(0.00)[bounces-78445-lists,linux-doc=lfdr.de];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,redadmin.org:dkim,redadmin.org:email,redadmin.org:mid];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-78440-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tttturtleruss@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[redadmin.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	NEURAL_HAM(-0.00)[-0.989];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:rdns,sto.lore.kernel.org:helo]
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 
-The get_origin_path() function assumes that translation files have the
-same relative path as their origin files, just with "translations/{locale}"
-inserted after "Documentation/". However, this assumption is incorrect
-for several translation files where the origin path differs. For example:
-translations/zh_CN/dev-tools/gdb-kernel-debugging.rst
--> process/debugging/gdb-kernel-debugging.rst
+Translate the remaining part of the "Describe your changes" section in
+Documentation/translations/ja_JP/process/submitting-patches.rst.
 
+Follow review comments on wording and line wrapping, and cover guidance
+on self-contained patch descriptions, imperative mood, commit
+references, and Link:/Closes:/Fixes: tags.
 
-The correct origin path is specified in each translation file's
-:Original: metadata field, which can appear in several formats:
-1. Plain path: :Original: Documentation/path/to/file.rst
-2. With :ref: :Original: :ref:`Documentation/path/to/file.rst <label>`
-3. With :doc: :Original: :doc:`../../../path/to/file`
-
-
-Add get_origin_path_from_metadata() to parse the :Original: metadata
-from translation files and extract the actual origin path. Update
-check_per_file() to use metadata-based lookup first, falling back to
-the path manipulation heuristic only when no metadata is found.
-
-Signed-off-by: Haoyang LIU <tttturtleruss@gmail.com>
+Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
 ---
- tools/docs/checktransupdate.py | 63 ++++++++++++++++++++++++++++++++--
- 1 file changed, 61 insertions(+), 2 deletions(-)
+ .../ja_JP/process/submitting-patches.rst      | 84 +++++++++++++++++++
+ 1 file changed, 84 insertions(+)
 
-diff --git a/tools/docs/checktransupdate.py b/tools/docs/checktransupdate.py
-index cc07cda667fc..b3c695fa0f7a 100755
---- a/tools/docs/checktransupdate.py
-+++ b/tools/docs/checktransupdate.py
-@@ -32,7 +32,7 @@ from datetime import datetime
- 
- 
- def get_origin_path(file_path):
--    """Get the origin path from the translation path"""
-+    """Get the origin path from the translation path by path manipulation (fallback)"""
-     paths = file_path.split("/")
-     tidx = paths.index("translations")
-     opaths = paths[:tidx]
-@@ -40,6 +40,62 @@ def get_origin_path(file_path):
-     return "/".join(opaths)
- 
- 
-+def get_origin_path_from_metadata(file_path):
-+    """Get the origin path from the :Original: metadata in the translation file.
+diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rs=
+t b/Documentation/translations/ja_JP/process/submitting-patches.rst
+index 1c0f694fd2a0..91bd79a0e9dc 100644
+--- a/Documentation/translations/ja_JP/process/submitting-patches.rst
++++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
+@@ -96,3 +96,87 @@ Linux =E3=81=AE=E5=A4=9A=E3=81=8F=E3=81=AE=E7=92=B0=E5=
+=A2=83=E3=81=AF=E3=80=81=E4=B8=8A=E6=B5=81=E3=81=8B=E3=82=89=E7=89=B9=E5=AE=
+=9A=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=81=A0=E3=81=91=E3=82=92=E5=8F=96=
+=E3=82=8A=E8=BE=BC
+=20
+ .. TODO: Convert to file-local cross-reference when the destination is
+    translated.
 +
-+    The :Original: metadata can have several formats:
-+    1. Plain path: :Original: Documentation/path/to/file.rst
-+    2. With :ref: directive: :Original: :ref:`Documentation/path/to/file.rst <label>`
-+    3. With :doc: directive: :Original: :doc:`../../../path/to/file`
++=E3=83=91=E3=83=83=E3=83=81=E3=81=BE=E3=81=9F=E3=81=AF=E3=83=91=E3=83=83=
+=E3=83=81=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=E3=82=92=E6=8A=95=E7=A8=BF=EF=
+=BC=8F=E5=86=8D=E6=8A=95=E7=A8=BF=E3=81=99=E3=82=8B=E9=9A=9B=E3=81=AF=E3=80=
+=81=E3=81=9D=E3=81=AE=E5=AE=8C=E5=85=A8=E3=81=AA
++=E8=AA=AC=E6=98=8E=E3=81=A8=E3=80=81=E3=81=9D=E3=82=8C=E3=82=92=E6=AD=A3=
+=E5=BD=93=E5=8C=96=E3=81=99=E3=82=8B=E7=90=86=E7=94=B1=E3=82=92=E5=90=AB=E3=
+=82=81=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E5=8D=98=E3=81=
+=AB=E3=80=81=E3=81=93=E3=82=8C=E3=81=8C
++=E3=83=91=E3=83=83=E3=83=81=EF=BC=88=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=
+=EF=BC=89=E3=81=AE=E3=83=90=E3=83=BC=E3=82=B8=E3=83=A7=E3=83=B3 N =E3=81=A7=
+=E3=81=82=E3=82=8B=E3=81=A8=E3=81=A0=E3=81=91=E6=9B=B8=E3=81=8B=E3=81=AA=E3=
+=81=84=E3=81=A7=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
++=E3=82=B5=E3=83=96=E3=82=B7=E3=82=B9=E3=83=86=E3=83=A0=E3=83=A1=E3=83=B3=
+=E3=83=86=E3=83=8A=E3=81=8C=E4=BB=A5=E5=89=8D=E3=81=AE=E3=83=91=E3=83=83=E3=
+=83=81=E7=89=88=E3=82=84=E5=8F=82=E7=85=A7=E5=85=88 URL =E3=82=92=E3=81=95=
+=E3=81=8B=E3=81=AE=E3=81=BC=E3=81=A3=E3=81=A6
++=E3=83=91=E3=83=83=E3=83=81=E8=AA=AC=E6=98=8E=E3=82=92=E6=8E=A2=E3=81=97=
+=E3=80=81=E3=81=9D=E3=82=8C=E3=82=92=E3=83=91=E3=83=83=E3=83=81=E3=81=AB=E8=
+=A3=9C=E3=81=86=E3=81=93=E3=81=A8=E3=82=92=E6=9C=9F=E5=BE=85=E3=81=97=E3=81=
+=A6=E3=81=AF=E3=81=84=E3=81=91=E3=81=BE=E3=81=9B=E3=82=93=E3=80=82
++=E3=81=A4=E3=81=BE=E3=82=8A=E3=80=81=E3=83=91=E3=83=83=E3=83=81=EF=BC=88=
+=E3=82=B7=E3=83=AA=E3=83=BC=E3=82=BA=EF=BC=89=E3=81=A8=E3=81=9D=E3=81=AE=E8=
+=AA=AC=E6=98=8E=E3=81=AF=E3=80=81=E3=81=9D=E3=82=8C=E3=81=A0=E3=81=91=E3=81=
+=A7=E5=AE=8C=E7=B5=90=E3=81=97=E3=81=A6=E3=81=84=E3=82=8B=E3=81=B9=E3=81=8D
++=E3=81=A7=E3=81=99=E3=80=82=E3=81=93=E3=82=8C=E3=81=AF=E3=83=A1=E3=83=B3=
+=E3=83=86=E3=83=8A=E3=81=A8=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=
+=81=AE=E5=8F=8C=E6=96=B9=E3=81=AB=E6=9C=89=E7=9B=8A=E3=81=A7=E3=81=99=E3=80=
+=82=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=AE
++=E4=B8=AD=E3=81=AB=E3=81=AF=E3=80=81=E4=BB=A5=E5=89=8D=E3=81=AE=E3=83=91=
+=E3=83=83=E3=83=81=E7=89=88=E3=82=92=E5=8F=97=E3=81=91=E5=8F=96=E3=81=A3=E3=
+=81=A6=E3=81=84=E3=81=AA=E3=81=84=E4=BA=BA=E3=82=82=E3=81=84=E3=82=8B=E3=81=
+=A7=E3=81=97=E3=82=87=E3=81=86=E3=80=82
 +
-+    Returns the origin path if found, None otherwise.
-+    """
-+    # Pattern to match :Original: line
-+    original_re = re.compile(r'^:Original:\s*(.+?)\s*$', re.IGNORECASE)
-+    # Pattern to extract path from :ref:`path <label>` or :ref:`path`
-+    ref_re = re.compile(r':ref:`([^`<]+?)(?:\s*<[^>]+>)?`')
-+    # Pattern to extract path from :doc:`path`
-+    doc_re = re.compile(r':doc:`([^`]+)`')
++=E5=A4=89=E6=9B=B4=E5=86=85=E5=AE=B9=E3=81=AF=E5=91=BD=E4=BB=A4=E5=BD=A2=
+=E3=81=A7=E8=A8=98=E8=BF=B0=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=
+=81=84=E3=80=82=E3=81=9F=E3=81=A8=E3=81=88=E3=81=B0=E3=80=81
++=E3=80=8Cmake xyzzy do frotz=E3=80=8D=E3=81=A8=E3=81=97=E3=80=81
++=E3=80=8C[This patch] makes xyzzy do frotz=E3=80=8D=E3=82=84
++=E3=80=8C[I] changed xyzzy to do frotz=E3=80=8D
++=E3=81=AE=E3=82=88=E3=81=86=E3=81=AB=E3=81=AF=E6=9B=B8=E3=81=8B=E3=81=AA=
+=E3=81=84=E3=81=A7=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=81=82=E3=
+=81=9F=E3=81=8B=E3=82=82=E3=82=B3=E3=83=BC=E3=83=89=E3=83=99=E3=83=BC=E3=82=
+=B9=E3=81=AB=E5=AF=BE=E3=81=97=E3=81=A6=E3=80=81
++=E3=81=9D=E3=81=AE=E6=8C=AF=E3=82=8B=E8=88=9E=E3=81=84=E3=82=92=E5=A4=89=
+=E3=81=88=E3=82=8B=E3=82=88=E3=81=86=E5=91=BD=E4=BB=A4=E3=81=97=E3=81=A6=E3=
+=81=84=E3=82=8B=E3=81=8B=E3=81=AE=E3=82=88=E3=81=86=E3=81=AB=E6=9B=B8=E3=81=
+=84=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
 +
-+    try:
-+        with open(file_path, 'r', encoding='utf-8') as f:
-+            # Only check the first 20 lines for metadata
-+            for _ in range(20):
-+                line = f.readline()
-+                if not line:
-+                    break
-+                match = original_re.match(line.strip())
-+                if match:
-+                    original_value = match.group(1).strip()
++=E7=89=B9=E5=AE=9A=E3=81=AE=E3=82=B3=E3=83=9F=E3=83=83=E3=83=88=E3=81=AB=
+=E8=A8=80=E5=8F=8A=E3=81=97=E3=81=9F=E3=81=84=E5=A0=B4=E5=90=88=E3=81=AF=E3=
+=80=81=E3=82=B3=E3=83=9F=E3=83=83=E3=83=88=E3=81=AE SHA-1 ID =E3=81=A0=E3=
+=81=91=E3=82=92
++=E6=9B=B8=E3=81=8B=E3=81=AA=E3=81=84=E3=81=A7=E3=81=8F=E3=81=A0=E3=81=95=
+=E3=81=84=E3=80=82=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=8C=E3=
+=81=9D=E3=82=8C=E3=81=8C=E4=BD=95=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6=E3=81=
+=AE=E3=82=82=E3=81=AE=E3=81=8B=E3=82=92
++=E6=8A=8A=E6=8F=A1=E3=81=97=E3=82=84=E3=81=99=E3=81=8F=E3=81=AA=E3=82=8B=
+=E3=82=88=E3=81=86=E3=80=81=E3=82=B3=E3=83=9F=E3=83=83=E3=83=88=E3=81=AE 1 =
+=E8=A1=8C=E8=A6=81=E7=B4=84=E3=82=82=E5=90=AB=E3=82=81=E3=81=A6=E3=81=8F=E3=
+=81=A0=E3=81=95=E3=81=84=E3=80=82=E4=BE=8B::
 +
-+                    # Try to extract from :ref:`...`
-+                    ref_match = ref_re.search(original_value)
-+                    if ref_match:
-+                        return ref_match.group(1).strip()
++	Commit e21d2170f36602ae2708 ("video: remove unnecessary
++	platform_set_drvdata()") removed the unnecessary
++	platform_set_drvdata(), but left the variable "dev" unused,
++	delete it.
 +
-+                    # Try to extract from :doc:`...`
-+                    doc_match = doc_re.search(original_value)
-+                    if doc_match:
-+                        doc_path = doc_match.group(1).strip()
-+                        # Handle relative paths - resolve relative to translation file
-+                        if doc_path.startswith('../'):
-+                            trans_dir = os.path.dirname(file_path)
-+                            resolved = os.path.normpath(os.path.join(trans_dir, doc_path))
-+                            # Add .rst extension if not present
-+                            if not resolved.endswith('.rst'):
-+                                resolved += '.rst'
-+                            return resolved
++=E3=81=BE=E3=81=9F=E3=80=81SHA-1 ID =E3=81=AF=E5=B0=91=E3=81=AA=E3=81=8F=
+=E3=81=A8=E3=82=82=E5=85=88=E9=A0=AD 12 =E6=96=87=E5=AD=97=E3=82=92=E4=BD=
+=BF=E3=81=86=E3=82=88=E3=81=86=E3=81=AB=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=
+=E3=81=95=E3=81=84=E3=80=82
++=E3=82=AB=E3=83=BC=E3=83=8D=E3=83=AB=E3=81=AE=E3=83=AA=E3=83=9D=E3=82=B8=
+=E3=83=88=E3=83=AA=E3=81=AB=E3=81=AF=E9=9D=9E=E5=B8=B8=E3=81=AB=E5=A4=9A=E3=
+=81=8F=E3=81=AE=E3=82=AA=E3=83=96=E3=82=B8=E3=82=A7=E3=82=AF=E3=83=88=E3=81=
+=8C=E3=81=82=E3=82=8B=E3=81=9F=E3=82=81=E3=80=81
++=E3=81=9D=E3=82=8C=E3=82=88=E3=82=8A=E7=9F=AD=E3=81=84 ID =E3=81=A7=E3=81=
+=AF=E8=A1=9D=E7=AA=81=E3=81=8C=E7=8F=BE=E5=AE=9F=E3=81=AB=E8=B5=B7=E3=81=93=
+=E3=82=8A=E5=BE=97=E3=81=BE=E3=81=99=E3=80=82=E3=81=84=E3=81=BE 6 =E6=96=87=
+=E5=AD=97=E3=81=AE ID =E3=81=AB
++=E8=A1=9D=E7=AA=81=E3=81=8C=E3=81=AA=E3=81=8F=E3=81=A6=E3=82=82=E3=80=815 =
+=E5=B9=B4=E5=BE=8C=E3=82=82=E3=81=9D=E3=81=86=E3=81=A0=E3=81=A8=E3=81=AF=E9=
+=99=90=E3=82=89=E3=81=AA=E3=81=84=E3=81=93=E3=81=A8=E3=81=AB=E6=B3=A8=E6=84=
+=8F=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
 +
-+                    # Plain path (no directive wrapper)
-+                    if original_value.startswith('Documentation/'):
-+                        return original_value
++=E5=A4=89=E6=9B=B4=E3=81=AB=E9=96=A2=E9=80=A3=E3=81=99=E3=82=8B=E8=AD=B0=
+=E8=AB=96=E3=82=84=E3=80=81=E3=81=9D=E3=81=AE=E8=83=8C=E6=99=AF=E6=83=85=E5=
+=A0=B1=E3=81=8C Web =E4=B8=8A=E3=81=A7=E5=8F=82=E7=85=A7=E3=81=A7=E3=81=8D=
+=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=AF=E3=80=81
++=E3=81=9D=E3=82=8C=E3=82=92=E6=8C=87=E3=81=99 ``Link:`` =E3=82=BF=E3=82=B0=
+=E3=82=92=E8=BF=BD=E5=8A=A0=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=
+=81=84=E3=80=82=E3=83=91=E3=83=83=E3=83=81=E3=81=8C=E9=81=8E=E5=8E=BB=E3=81=
+=AE
++=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=82=B9=E3=83=88=
+=E3=81=A7=E3=81=AE=E8=AD=B0=E8=AB=96=E3=82=84=E3=80=81Web =E3=81=AB=E8=A8=
+=98=E9=8C=B2=E3=81=95=E3=82=8C=E3=81=9F=E4=BD=95=E3=81=8B=E3=81=AE=E7=B5=90=
+=E6=9E=9C=E3=81=A7=E3=81=82=E3=82=8B=E3=81=AA=E3=82=89=E3=80=81
++=E3=81=9D=E3=82=8C=E3=82=92=E7=A4=BA=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=
+=E3=81=95=E3=81=84=E3=80=82
 +
-+    except (IOError, OSError) as e:
-+        logging.debug("Could not read file %s: %s", file_path, e)
++=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=82=B9=E3=83=88=
+=E3=81=AE=E3=82=A2=E3=83=BC=E3=82=AB=E3=82=A4=E3=83=96=E3=81=B8=E3=83=AA=E3=
+=83=B3=E3=82=AF=E3=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=81=AF=E3=80=81=E3=81=
+=A7=E3=81=8D=E3=82=8C=E3=81=B0
++lore.kernel.org =E3=81=AE=E3=83=A1=E3=83=83=E3=82=BB=E3=83=BC=E3=82=B8=E3=
+=82=A2=E3=83=BC=E3=82=AB=E3=82=A4=E3=83=96=E3=82=B5=E3=83=BC=E3=83=93=E3=82=
+=B9=E3=82=92=E4=BD=BF=E3=81=A3=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
+=E3=80=82
++=E3=83=AA=E3=83=B3=E3=82=AF URL =E3=82=92=E4=BD=9C=E3=82=8B=E3=81=AB=E3=81=
+=AF=E3=80=81=E3=81=9D=E3=81=AE=E3=83=A1=E3=83=83=E3=82=BB=E3=83=BC=E3=82=B8=
+=E3=81=AE ``Message-ID`` =E3=83=98=E3=83=83=E3=83=80=E3=81=AE=E5=86=85=E5=
+=AE=B9
++=E3=81=8B=E3=82=89=E3=80=81=E5=89=8D=E5=BE=8C=E3=81=AE=E5=B1=B1=E6=8B=AC=
+=E5=BC=A7=E3=82=92=E5=8F=96=E3=82=8A=E9=99=A4=E3=81=84=E3=81=9F=E3=82=82=E3=
+=81=AE=E3=82=92=E4=BD=BF=E3=81=84=E3=81=BE=E3=81=99=E3=80=82=E4=BE=8B::
 +
-+    return None
++    Link: https://lore.kernel.org/30th.anniversary.repost@klaava.Helsinki.=
+FI
 +
++=E5=AE=9F=E9=9A=9B=E3=81=AB=E3=83=AA=E3=83=B3=E3=82=AF=E3=81=8C=E6=A9=9F=
+=E8=83=BD=E3=81=97=E3=80=81=E8=A9=B2=E5=BD=93=E3=81=99=E3=82=8B=E3=83=A1=E3=
+=83=83=E3=82=BB=E3=83=BC=E3=82=B8=E3=82=92=E6=8C=87=E3=81=97=E3=81=A6=E3=81=
+=84=E3=82=8B=E3=81=93=E3=81=A8=E3=82=92
++=E7=A2=BA=E8=AA=8D=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
+=E3=80=82=E3=81=9F=E3=81=A0=E3=81=97=E3=80=81=E5=A4=96=E9=83=A8=E3=83=AA=E3=
+=82=BD=E3=83=BC=E3=82=B9=E3=82=92=E8=A6=8B=E3=81=AA=E3=81=8F=E3=81=A6=E3=82=
+=82=E8=AA=AC=E6=98=8E=E3=81=8C=E7=90=86=E8=A7=A3=E3=81=A7=E3=81=8D=E3=82=8B
++=E3=82=88=E3=81=86=E3=81=AB=E3=81=99=E3=82=8B=E3=82=88=E3=81=86=E5=8A=AA=
+=E3=82=81=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
 +
- def get_latest_commit_from(file_path, commit):
-     """Get the latest commit from the specified commit for the specified file"""
-     command = f"git log --pretty=format:%H%n%aD%n%cD%n%n%B {commit} -1 -- {file_path}"
-@@ -128,7 +184,10 @@ def valid_commit(commit):
- 
- def check_per_file(file_path):
-     """Check the translation status for the specified file"""
--    opath = get_origin_path(file_path)
-+    opath = get_origin_path_from_metadata(file_path)
-+    if opath is None:
-+        opath = get_origin_path(file_path)
-+        logging.debug("No :Original: metadata found, using path-based fallback for %s", file_path)
- 
-     if not os.path.isfile(opath):
-         logging.error("Cannot find the origin path for %s", file_path)
--- 
-2.53.0
++=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=82=B9=E3=83=88=
+=E3=81=AE=E3=82=A2=E3=83=BC=E3=82=AB=E3=82=A4=E3=83=96=E3=82=84=E3=83=90=E3=
+=82=B0=E3=81=B8=E3=81=AE URL =E3=82=92=E7=A4=BA=E3=81=99=E3=81=A0=E3=81=91=
+=E3=81=A7=E3=81=AA=E3=81=8F=E3=80=81
++=E6=8A=95=E7=A8=BF=E3=81=95=E3=82=8C=E3=81=9F=E3=83=91=E3=83=83=E3=83=81=
+=E3=81=AB=E8=87=B3=E3=81=A3=E3=81=9F=E8=AD=B0=E8=AB=96=E3=81=AE=E8=A6=81=E7=
+=82=B9=E3=82=82=E8=A6=81=E7=B4=84=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=
+=95=E3=81=84=E3=80=82
++
++=E3=83=91=E3=83=83=E3=83=81=E3=81=8C=E3=83=90=E3=82=B0=E3=82=92=E4=BF=AE=
+=E6=AD=A3=E3=81=99=E3=82=8B=E3=82=82=E3=81=AE=E3=81=A7=E3=81=82=E3=82=8C=E3=
+=81=B0=E3=80=81=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=82=
+=B9=E3=83=88=E3=81=AE=E3=82=A2=E3=83=BC=E3=82=AB=E3=82=A4=E3=83=96=E3=82=84
++=E5=85=AC=E9=96=8B=E3=83=90=E3=82=B0=E3=83=88=E3=83=A9=E3=83=83=E3=82=AB=
+=E3=83=BC=E4=B8=8A=E3=81=AE=E5=A0=B1=E5=91=8A=E3=82=92=E6=8C=87=E3=81=99 UR=
+L =E3=82=92=E4=BB=98=E3=81=91=E3=81=A6=E3=80=81``Closes:`` =E3=82=BF=E3=82=
+=B0=E3=82=92
++=E4=BD=BF=E3=81=A3=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=
+=E4=BE=8B::
++
++    Closes: https://example.com/issues/1234
++
++=E3=81=93=E3=81=AE=E3=82=88=E3=81=86=E3=81=AA=E3=82=BF=E3=82=B0=E4=BB=98=
+=E3=81=8D=E3=81=AE=E3=82=B3=E3=83=9F=E3=83=83=E3=83=88=E3=81=8C=E9=81=A9=E7=
+=94=A8=E3=81=95=E3=82=8C=E3=81=9F=E3=81=A8=E3=81=8D=E3=80=81=E8=87=AA=E5=8B=
+=95=E7=9A=84=E3=81=AB issue =E3=82=92
++=E9=96=89=E3=81=98=E3=82=89=E3=82=8C=E3=82=8B=E3=83=90=E3=82=B0=E3=83=88=
+=E3=83=A9=E3=83=83=E3=82=AB=E3=83=BC=E3=82=82=E3=81=82=E3=82=8A=E3=81=BE=E3=
+=81=99=E3=80=82=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=82=
+=B9=E3=83=88=E3=82=92=E7=9B=A3=E8=A6=96=E3=81=97=E3=81=A6=E3=81=84=E3=82=8B
++=E3=83=9C=E3=83=83=E3=83=88=E3=81=AE=E4=B8=AD=E3=81=AB=E3=81=AF=E3=80=81=
+=E3=81=9D=E3=81=AE=E3=82=88=E3=81=86=E3=81=AA=E3=82=BF=E3=82=B0=E3=82=92=E8=
+=BF=BD=E8=B7=A1=E3=81=97=E3=81=A6=E4=B8=80=E5=AE=9A=E3=81=AE=E5=8B=95=E4=BD=
+=9C=E3=82=92=E8=A1=8C=E3=81=86=E3=82=82=E3=81=AE=E3=82=82
++=E3=81=82=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82=E9=9D=9E=E5=85=AC=E9=96=8B=
+=E3=81=AE=E3=83=90=E3=82=B0=E3=83=88=E3=83=A9=E3=83=83=E3=82=AB=E3=83=BC=E3=
+=82=84=E7=84=A1=E5=8A=B9=E3=81=AA URL =E3=81=AF=E7=A6=81=E6=AD=A2=E3=81=A7=
+=E3=81=99=E3=80=82
++
++=E3=83=91=E3=83=83=E3=83=81=E3=81=8C=E7=89=B9=E5=AE=9A=E3=81=AE=E3=82=B3=
+=E3=83=9F=E3=83=83=E3=83=88=E3=81=AB=E5=90=AB=E3=81=BE=E3=82=8C=E3=82=8B=E3=
+=83=90=E3=82=B0=E3=82=92=E4=BF=AE=E6=AD=A3=E3=81=99=E3=82=8B=E3=82=82=E3=81=
+=AE=E3=81=A7=E3=81=82=E3=82=8C=E3=81=B0=E3=80=81
++=E3=81=9F=E3=81=A8=E3=81=88=E3=81=B0 ``git bisect`` =E3=81=A7=E5=95=8F=E9=
+=A1=8C=E3=82=92=E8=A6=8B=E3=81=A4=E3=81=91=E3=81=9F=E5=A0=B4=E5=90=88=E3=81=
+=AB=E3=81=AF=E3=80=81SHA-1 ID =E3=81=AE
++=E5=85=88=E9=A0=AD=E5=B0=91=E3=81=AA=E3=81=8F=E3=81=A8=E3=82=82 12 =E6=96=
+=87=E5=AD=97=E3=81=A8 1 =E8=A1=8C=E8=A6=81=E7=B4=84=E3=82=92=E5=90=AB=E3=82=
+=81=E3=81=A6=E3=80=81``Fixes:`` =E3=82=BF=E3=82=B0=E3=82=92
++=E4=BD=BF=E3=81=A3=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=
+=E3=82=BF=E3=82=B0=E3=82=92=E8=A4=87=E6=95=B0=E8=A1=8C=E3=81=AB=E5=88=86=E5=
+=89=B2=E3=81=97=E3=81=A6=E3=81=AF=E3=81=84=E3=81=91=E3=81=BE=E3=81=9B=E3=82=
+=93=E3=80=82=E3=82=BF=E3=82=B0=E3=81=AF
++=E8=A7=A3=E6=9E=90=E3=82=B9=E3=82=AF=E3=83=AA=E3=83=97=E3=83=88=E3=82=92=
+=E5=8D=98=E7=B4=94=E3=81=AB=E3=81=99=E3=82=8B=E3=81=9F=E3=82=81=E3=80=81=E3=
+=80=8C75 =E6=A1=81=E3=81=A7=E6=8A=98=E3=82=8A=E8=BF=94=E3=81=99=E3=80=8D=E8=
+=A6=8F=E5=89=87=E3=81=AE
++=E4=BE=8B=E5=A4=96=E3=81=A7=E3=81=99=E3=80=82
++
++=E4=BE=8B::
++
++    Fixes: 54a4f0239f2e ("KVM: MMU: make kvm_mmu_zap_page() return the num=
+ber of pages it actually freed")
++
++=E4=B8=8A=E3=81=AE=E5=BD=A2=E5=BC=8F=E3=82=92 ``git log`` =E3=82=84 ``git =
+show`` =E3=81=A7=E5=87=BA=E5=8A=9B=E3=81=97=E3=82=84=E3=81=99=E3=81=8F=E3=
+=81=99=E3=82=8B=E3=81=9F=E3=82=81=E3=81=AB=E3=80=81
++=E6=AC=A1=E3=81=AE ``git config`` =E8=A8=AD=E5=AE=9A=E3=82=92=E4=BD=BF=E3=
+=81=88=E3=81=BE=E3=81=99::
++
++    [core]
++        abbrev =3D 12
++    [pretty]
++        fixes =3D Fixes: %h ("%s")
++
++=E5=91=BC=E3=81=B3=E5=87=BA=E3=81=97=E4=BE=8B::
++
++    $ git log -1 --pretty=3Dfixes 54a4f0239f2e
++    Fixes: 54a4f0239f2e ("KVM: MMU: make kvm_mmu_zap_page() return the num=
+ber of pages it actually freed")
+--=20
+2.47.3
 
 
