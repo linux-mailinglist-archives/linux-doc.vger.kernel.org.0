@@ -1,133 +1,191 @@
-Return-Path: <linux-doc+bounces-78408-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78410-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iBUoHG17rmnoFAIAu9opvQ
-	(envelope-from <linux-doc+bounces-78408-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 08:49:01 +0100
+	id OFFTLXt9rmlGFQIAu9opvQ
+	(envelope-from <linux-doc+bounces-78410-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 08:57:47 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEA2E235011
-	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 08:49:00 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A257C235211
+	for <lists+linux-doc@lfdr.de>; Mon, 09 Mar 2026 08:57:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 83CE430254DC
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 07:47:37 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id CCED13003BE1
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Mar 2026 07:57:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 37F5E36A01B;
-	Mon,  9 Mar 2026 07:47:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83B7836B044;
+	Mon,  9 Mar 2026 07:57:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="wQQ8sP7O"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-vk1-f176.google.com (mail-vk1-f176.google.com [209.85.221.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6678236A73
-	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 07:47:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773042455; cv=none; b=h4O4WQkRI7wAvrpMYsZvDO/EyyNwHQeEChldTrI0onRkuplEBH/BTYkX8vI3wfDDRgifkyAB6DEdCCzfx7fCGPWPg1/LqyMhYt58rqR3tJ7t1QL9mRH2G34sE8Wf3jTeKbZ+k6cdmEG6/idH+o7+sM0JXvNqncx0Ym4LtwRTsnU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773042455; c=relaxed/simple;
-	bh=XiRFtJveGwht3EZeO61RCHRcWcybYrhhYT1r14v9Vo4=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=Kpki8K6heBsrn4skffS4o1yYKJ9m1b/Lq46pW3RlndYrBjHYWKQ13H1A0AEXMlEqGp5CtoR3rXD01txOTRKT9sVhFa+qlBbBTDTdkYeO3hGel19I42etc2YI1wy0yyInUb/lFArb4Unvruqcmi6E2Sp91unUEZh/yVQTQ2ZgP40=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1vzVKp-0007XW-D0; Mon, 09 Mar 2026 08:47:27 +0100
-Received: from lupine.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::4e] helo=lupine)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1vzVKn-004UjR-2m;
-	Mon, 09 Mar 2026 08:47:27 +0100
-Received: from pza by lupine with local (Exim 4.98.2)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1vzVKp-000000001YH-0dYu;
-	Mon, 09 Mar 2026 08:47:27 +0100
-Message-ID: <a53543187f487858afc1b1d58af3cfa1e8791845.camel@pengutronix.de>
-Subject: Re: [PATCH v3 08/14] reset: handle removing supplier before
- consumers
-From: Philipp Zabel <p.zabel@pengutronix.de>
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Krzysztof
- Kozlowski <krzk@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>
-Cc: linux-kernel@vger.kernel.org, brgl@kernel.org, linux-doc@vger.kernel.org
-Date: Mon, 09 Mar 2026 08:47:27 +0100
-In-Reply-To: <20260306-reset-core-refactor-v3-8-599349522876@oss.qualcomm.com>
-References: 
-	<20260306-reset-core-refactor-v3-0-599349522876@oss.qualcomm.com>
-	 <20260306-reset-core-refactor-v3-8-599349522876@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DA3F36896D
+	for <linux-doc@vger.kernel.org>; Mon,  9 Mar 2026 07:57:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.221.176
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773043061; cv=pass; b=RLziDMcNNF2eLOemJ+/zoal9KZM70VQiTeO2cGt/pbCWziKMMEcKPmcNtBJvYhpMzPy+rs85rylesKubWPrV79srEag4puXT0xN7k6DCHzEZGA+wCTfg+QaMFC9i6FM667VOh4ZfTNzfeHo4s6JzcQOr1/iKJvnqdZTqj0lV9/o=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773043061; c=relaxed/simple;
+	bh=Bc5YCzZwaugc6qlY/fyP8r1uGR0PYI0Vhk0jy+TRtSM=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=txayP9gFIU7oqMcFH9fTwyYP1/KNJh8pPao0qWvYcLmO9mjfn8m+FZ2jorUi8VYiJ/v6QdL/44WEr9QoDp802rW1A8gg7Fl/zC8qwPv85aXIsb9dk3lj3JI0VF/tpwPS74Zj5u/mYEjPMxliBLkLshEHxAXkCF1KtKDzZvTQFrA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=wQQ8sP7O; arc=pass smtp.client-ip=209.85.221.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-vk1-f176.google.com with SMTP id 71dfb90a1353d-56af4aad3e5so1406813e0c.3
+        for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 00:57:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773043059; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Bxd0EnzQ22JGyfIJmYTjqRDDKIwfrPtnhjSzIqg381o2NNpe0jAVYP1zqItAPTYQGD
+         aZrexWo0lMnyR7j0n/90bA5xnE25t4DetBqJN9CEeFzN40OJ+PgBIs3+7c8BldBLmzo/
+         paivurAv5PJ+6CTqs/0upyXMZ0kKqCCxNVd7OmQktUGyfhv/9PPxYEe86xhtDBQih5jF
+         pDmamau2EKDb6VTmAk691RU+cvfXjbgn3vRoBaap6YsUw1K8DZJ4hgxPysBVtFBRSw2Q
+         Sca6vJdLNFc+6Kldim1fiaGL7rSdQbDD+7JOfDDRAPPYtYcXduJ2EUaD5R0Ub2fORNjy
+         83zg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=G9secbmrLeczpRPZ42gZHzPMJ4soIG7S5n6DXzNQl4Q=;
+        fh=pIQTQd+nQaOo+SIba0ywPVcAqNxa/ZMV42nqF6157GQ=;
+        b=h1xE57/rKjX9WHsQz/1/FrFQz7RZbHsXJLvkV80R9X6knXKMoZb4Sp9VfjQUdsdMbW
+         h96AmWQ8kg2uROyKkGsw52gCQVJhhObE+jFEqMWB/LU82KNi8dpqL5/Ba+FmL3zwZEQN
+         I/o1i+jnqWKvRXMnmxkz8JzOH6EeACH7MMEgnw/OXuvjV4NS1BGSoyRKoDLgE+VMRzK0
+         PWl04lukuJQpNoCwS+Sh05xhZPbg2/dcAGbUmd/gTTH087i1Wd9skiLe21j6zuQY+DtH
+         HMX3DuB67gbBHbvKrfvcy4P7fHqwSBSXS54XBFKRAClcEKh8QyhJFJYCcxr5ggdvpx4o
+         GH5g==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1773043059; x=1773647859; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=G9secbmrLeczpRPZ42gZHzPMJ4soIG7S5n6DXzNQl4Q=;
+        b=wQQ8sP7OObRVcKgeGGv/EzwD3xLC5blExAfs9xMlsv9wXPz4gTY8BOntw4SjgTmNDN
+         cRZQEL20ABBq7ZxLfp9oZTpp23v1pxAp5y732TxQdk8skhbNcTSzbNOB4VxkQOe+vEYT
+         3QbGCZyRVGPxET4P2rhcv0Macc6trG4PottoMRTws7a2Us9OQGVoromoHQk5zZoeu5Fd
+         1fiUjb4SDwZ+3wETlO2DfqSVB7fHEoT81J8viPUXHb4+2I6ZAcCuXh9+VtRsnrEhEaLR
+         C2JzEkxC/jWSujXPW+/1iwtYKxKzbwiHRi8nf1xTmCbUR1n21O2CRV0XJqxff7GQpKT9
+         HNeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773043059; x=1773647859;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=G9secbmrLeczpRPZ42gZHzPMJ4soIG7S5n6DXzNQl4Q=;
+        b=bzjy7V38+yF9Tshx6WJYx3lUKnRAgkTxNGS1fkfBFOwmUA8yDPja7G8S9zb/69QClx
+         Hvmnb1Eh4juaTEOKR4lwfE7Ap9MCow25f6l57MUuRqQ5srwaPdfYWs5oJl23V914P4Da
+         j6BEsmCDsTUGbhhfcNLxorvbGNFc6NvLXjjPZDSTkXol4zPlKg3pteEaxeQncsorQMHJ
+         U/C+dNTbdCP2GlxFDsuzL/Y4oYbVec6g6Rn1AtIyRADRLvOk0yqD6VEorA9JGXMMrwiN
+         CpwJ0ox3LvR5HgTlBVU3vDeXmGMhz9WQwFiY4/0WqNLm8cUefsmo5Jkfzk1S6PREfeJ7
+         7RuQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVkgLmBsk1N81L+HRnjzejGFNSPmR5aHQmqFFb6UAqy3sZhEPq2YCcF1cuaMI7W8Rciqwjz3w6iJR8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzk59wJUL6Mrl6cp/SFqWd2mmPrvhnUiRpVo61+k2uuKkhvIMoM
+	pQoJ7j5swo2IOEA930XlZ2uJ0hX3m+5vvs4JH9CoOfbim+nNUUrz2NrV5xnPdVlXBy2IyXHwIb/
+	e8chtcRByudNG7RlyqwjJLU7oz/H1JYacMU94dfy1
+X-Gm-Gg: ATEYQzwzQYCKALY2ySNg77PwwmqpsYSHDIWd9CtBt8gr0rcd/4cRCTVexEoyago94pL
+	TXihRw2xI6G4I9m8ehNiRDFwdRIlYa/yDmRuaFkWzHlcSEGxrUsFbnHn+J07EU0fvHKhbOjoRHt
+	c/gzO5AehoXV1V1+weyNGVZKCGpjrgaqcdWETI9s3UTlYHkbMKoGLWjxgYtSoOGN4JlhpdUD9CD
+	fw9gMc9JTNjFAigvGxFaYmQ48pzKGvz39wGUkT3BY5bRIwbzhFbaixHqY062dWLAdrnY/Gf3BkE
+	NZpUUvPrCqn3HpnafMAXuSMyYgCnFXviTNDA6yrHII6L/EMM8znRw915P1MH+40CqYHP5Q==
+X-Received: by 2002:a05:6102:d8c:b0:5ff:d192:ff2c with SMTP id
+ ada2fe7eead31-5ffe6213645mr3556252137.34.1773043058690; Mon, 09 Mar 2026
+ 00:57:38 -0700 (PDT)
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 9 Mar 2026 00:57:38 -0700
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 9 Mar 2026 00:57:38 -0700
+From: Ackerley Tng <ackerleytng@google.com>
+In-Reply-To: <2s33j7wg6ehizvdoz5fggc6kfa5byrs4yg2hk4fvwvfjp7nigo@se7fhyaknqqm>
+References: <20260225-gmem-st-blocks-v2-0-87d7098119a9@google.com>
+ <20260225-gmem-st-blocks-v2-3-87d7098119a9@google.com> <2s33j7wg6ehizvdoz5fggc6kfa5byrs4yg2hk4fvwvfjp7nigo@se7fhyaknqqm>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: p.zabel@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
-X-Rspamd-Queue-Id: DEA2E235011
+Date: Mon, 9 Mar 2026 00:57:38 -0700
+X-Gm-Features: AaiRm539ncfsVFw5AP9VoOkialmaGifm5bQJ7k_NAlY4DMAWUCQTSVmir1fUcmo
+Message-ID: <CAEvNRgEH5X79zwFr8t4EayDccED8i5__-oFyBZ4nb_RkX8826A@mail.gmail.com>
+Subject: Re: [PATCH RFC v2 3/6] fs: Add .unaccount_folio callback
+To: Jan Kara <jack@suse.cz>
+Cc: Paolo Bonzini <pbonzini@redhat.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+	"Matthew Wilcox (Oracle)" <willy@infradead.org>, Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, seanjc@google.com, 
+	rientjes@google.com, rick.p.edgecombe@intel.com, yan.y.zhao@intel.com, 
+	fvdl@google.com, jthoughton@google.com, vannapurve@google.com, 
+	shivankg@amd.com, michael.roth@amd.com, pratyush@kernel.org, 
+	pasha.tatashin@soleen.com, kalyazin@amazon.com, tabba@google.com, 
+	kvm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-fsdevel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Rspamd-Queue-Id: A257C235211
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.46 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[pengutronix.de:mid,pengutronix.de:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,qualcomm.com:email];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	R_DKIM_NA(0.00)[];
-	DMARC_NA(0.00)[pengutronix.de];
-	FROM_NEQ_ENVFROM(0.00)[p.zabel@pengutronix.de,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.302];
-	PRECEDENCE_BULK(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78408-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_FROM(0.00)[bounces-78410-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[]
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	DKIM_TRACE(0.00)[google.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-0.948];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,mail.gmail.com:mid,suse.com:email,suse.cz:email]
 X-Rspamd-Action: no action
 
-On Fr, 2026-03-06 at 18:22 +0100, Bartosz Golaszewski wrote:
-> Except for the reset-gpio, all reset drivers use device tree - and as
-> such - benefit from the device links set up by driver core. This means,
-> that no reset supplier will be unbound before all its consumers have
-> been. For this reason, nobody bothered making the reset core resiliant
-> to the object life-time issues that are plagueing the kernel. In this
-> case: reset control handles referencing the reset provider device with
-> no serialization or NULL-pointer checking.
->=20
-> We now want to make the reset core fwnode-agnostic but before we do, we
-> must make sure it can survive unbinding of suppliers with consumers
-> still holding reset control handles.
->=20
-> To that end: use SRCU to protect the rcdev pointer inside struct
-> reset_control. We protect all sections using the pointer with SRCU
-> read-only critical sections and synchronize SRCU after every
-> modification of the pointer.
->=20
-> This is in line with what the GPIO subsystem does and what the proposed
-> revocable API tries to generalize. When and if the latter makes its way
-> into the kernel, reset core could potentially also be generalized to use
-> it.
->=20
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Jan Kara <jack@suse.cz> writes:
 
-Reviewed-by: Philipp Zabel <p.zabel@pengutronix.de>
+> On Wed 25-02-26 07:20:38, Ackerley Tng wrote:
+>> Add .unaccount_folio callback to allow filesystems to do accounting-related
+>> updates to the inode or struct address_space mapping, when the folio is
+>> about to be removed from the filemap/page_cache.
+>>
+>> .free_folio cannot be used since .free_folio cannot assume that struct
+>> address_space mapping still exists.
+>
+> I agree .free_folio isn't the right place.
+>
+>> From the name, .invalidate_folio and .release_folio seem suitable, but
+>> those are meant only to handle freeing of a folio's private
+>> data. .release_folio is also not called in the truncation path.
+>
+> But this I don't quite understand. .invalidate_folio is called when
+> the file is truncated (or when the whole inode is being evicted from
+> memory). Filesystem can do whatever it wishes there, not just free folio
+> private data. Are you pointing at folio_needs_release() check? But you can
+> mark your mappings with mapping_release_always() - it's there exactly for
+> such usecases... Am I missing something?
+>
 
-regards
-Philipp
+Looking at it again, mapping_release_always() gates both
+.release_folio() in filemap_release_folio() and .invalidate_folio() in
+truncate_cleanup_folio() and truncate_inode_partial_folio().
+
+Let me try that out in the next revision. Thanks for pointing this out!
+
+> 								Honza
+> --
+> Jan Kara <jack@suse.com>
+> SUSE Labs, CR
 
