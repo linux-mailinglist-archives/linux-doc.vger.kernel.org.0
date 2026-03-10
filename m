@@ -1,162 +1,140 @@
-Return-Path: <linux-doc+bounces-78552-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78556-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iEAMHGFvr2m6YQIAu9opvQ
-	(envelope-from <linux-doc+bounces-78552-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 02:09:53 +0100
+	id uHa0IdBvr2m6YQIAu9opvQ
+	(envelope-from <linux-doc+bounces-78556-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 02:11:44 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E81E24357C
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 02:09:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA54224361A
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 02:11:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 0D7E0304669E
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 01:06:49 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 749D2308DCD6
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 01:07:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 533912FFFB5;
-	Tue, 10 Mar 2026 01:05:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F77A303C86;
+	Tue, 10 Mar 2026 01:05:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mwfJFewq"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IfiM1MsN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F2682F363C
-	for <linux-doc@vger.kernel.org>; Tue, 10 Mar 2026 01:05:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AC7630BB9D;
+	Tue, 10 Mar 2026 01:05:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773104731; cv=none; b=Qkd0IdWY24BKKkkFgBWPyy9wqMF7cgX3F2cm53/nlE6o7EBIbPZi2qKBC181z0stuigi1gu0cPREar6eStMfzRU92TBoA6ErV0Rc+PAQX9EXjnpO8JLh+rLFpdJj4pubT2PbWg/kHnEb1+x93A0h6DIJ6oL2chBwzuftxOkKEHk=
+	t=1773104740; cv=none; b=jxtM2xTXqFqpaOVjmsWdTWQ0NZkoqxVOMiQ8yB2mnoygwILngQMv0/j80RW/uSeeJXGNRq16fxhKcnNb55SB2mYz51bFQNysZ6MXFCDXW5jf9iiAti0F5vLrTXQz9fFJ1EyrDHR2b6/ILXpXK9PGfAqZ9+Uu/gyYt4Py2KgvBeI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773104731; c=relaxed/simple;
-	bh=Ecww305Ia0sJAMrTE+J6RL1VvL3KyXvIMciOwyWcBtQ=;
+	s=arc-20240116; t=1773104740; c=relaxed/simple;
+	bh=yTvCo+JXdygWDppuMY59cBuy+ffz+XijY5gZYAbrrfU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mAqceKKq6t2LzFhHKF5XwK+AYlLsYRpBX9yqEuJRHAQCzs6h5aoIIF3CuneUWFdb08f8BuUETf9XVe+Ihy5c7MwPpsz9svaoXI3OzYnj62/lCeFRAy5Zt3LoeqX/yIri7We0O3Pj9357B/53Oo5FAOANuEUGUWEK3K6RDLGnt9o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mwfJFewq; arc=none smtp.client-ip=209.85.219.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-89a018cbbf8so105405336d6.0
-        for <linux-doc@vger.kernel.org>; Mon, 09 Mar 2026 18:05:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773104724; x=1773709524; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PqXEa8MxQJga17ye0Ey4zThMjFUzQyDDE9YHUeEmLhY=;
-        b=mwfJFewqTOsm+ZOWQyhkx5SnoU+/CnF/jhVyfetITEdXDlwguqu2nJo3vbP7+HPOgW
-         YQFFg/knJxD8k+NA7wOIWjILy3iGj/HKjBoXIDIVbg+F9Uqy+hgZiyD4Jj0TRCCH+gt8
-         Kd9xXFtTd9HAakgxz2Uo5fXARSvmpBmTTCaRLDHZLzEQwCHtPbzFYD4weRBYC3b6w7qW
-         lT3HwPafDXN8/QcC6GOfojqXpcEero+xcX40GLZI0Yxi6L5saYnIuNn0wsMhqwtYqYiz
-         xXQih5QMBtByKoewhGr0dloNzT84UM+SIR5+UFefyKf7DCoDxDyBC6OBAx01eeBLWiwt
-         mCYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773104724; x=1773709524;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=PqXEa8MxQJga17ye0Ey4zThMjFUzQyDDE9YHUeEmLhY=;
-        b=mGRRtN7q2bIGQciseW5TB2ndWMBoJo2mPETwTxQbSjmig9KT3baMGpKtQBJaFdvWZ6
-         ocZ57MolZLwN7UsjNp4n5tWVykHafgP4y+7DT8WwGHUSDP1F0i2tRZxbrqnHaNgy6nvO
-         8kj433aapXlDkaxW7CO092m6h+MIhMa3rK3wG+yNhhL9LolsF0xUHRdM1QyiOMRLT6iu
-         +ruakJPPkgL2oDhCP9dnqN6xRlc66tZ9+oPEmxNbik4nM8T/qfC+UTPU30cpuIY34oRo
-         FHqQExKTErLMA+/JhXtlNYrlUW8zILlyFeXxCJSHQhe6lG9Ywpp+oKYrSAnf7705EWSn
-         mS7A==
-X-Gm-Message-State: AOJu0YzPtgpDrJ+SMvJG5QOQ49+eXuLQ9Alq9WCKM6cnZ9T9mLCbGrEQ
-	6blwrdLuwTEuYJI0F/07STzKHCJ4Fbb0rAqadt99f8Mu6VsNKWlk2k9sUH6dnQ==
-X-Gm-Gg: ATEYQzwZ4Vd2/C0YHDxw3MqlRl2ixQoBw+e/vsGfivm0jbXkpNPgFyZ5rOQpy2mXUFr
-	IWM8yfLiTb2Z5WVs51R4qalH3otVEap7zmK5skHkodeleHUodc1TSuHVDC/DZw59Yc5c0X40Lr7
-	jF5bO3g7xvnZbUfdnlYU2y5VKQpxN8Zgl92PvfxXGokSJ9PxR5ZNxGqT2vE8xcHhewaWOJLknYS
-	4cWpG+y/gk56UM4H2bqPDdkkpRLzs36adQlZmqA5X4rEcw8mEQ6k1ctMUppn6i0oqBoRvKNbzsc
-	ikOeoca3/YAZJv5Pki6IAV4Pln9kOBkW0iOYUJiJmN2pDQ3PKQFGpy0vIbrxsX6te+T9Od8n6Ls
-	3xlR7wU23IqPdXCTMzRB4O1EbxcY+QgKlbhOKjwquSvRPuQDTbxixU3qgI88oa/6vPtZ33EZuU0
-	KCFZ7r2sZ/5LDSzXf68CoVn1Y5gM9trg12jA+ZNDEFdQkM4u1iZd04kQ==
-X-Received: by 2002:a05:6214:5089:b0:89a:424:984b with SMTP id 6a1803df08f44-89a57ce97bcmr23637116d6.31.1773104724541;
-        Mon, 09 Mar 2026 18:05:24 -0700 (PDT)
-Received: from daniel-desktop3.localnet ([204.48.79.143])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-89a57c21650sm8852266d6.39.2026.03.09.18.05.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 18:05:23 -0700 (PDT)
-From: Daniel Tang <danielzgtg.opensource@gmail.com>
-To: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Fox Chen <foxhlchen@gmail.com>, Jonathan Corbet <corbet@lwn.net>
-Cc: NeilBrown <neilb@suse.de>, vegard.nossum@oracle.com,
- viro@zeniv.linux.org.uk, rdunlap@infradead.org, grandmaster@al2klimov.de
-Subject: [PATCH v3] docs: path-lookup: fix unrenamed WALK_GET
-Date: Mon, 09 Mar 2026 21:05:21 -0400
-Message-ID: <13011949.O9o76ZdvQC@daniel-desktop3>
-In-Reply-To: <87ecltvuvr.fsf@trenco.lwn.net>
-References:
- <13098721.O9o76ZdvQC@daniel-desktop3> <5332975.31r3eYUQgx@daniel-desktop3>
- <87ecltvuvr.fsf@trenco.lwn.net>
+	 MIME-Version; b=EaTfY7jy5pe9yW5KvypM65mYymvbf9hJJVe5vIeBLYWZmC0hc1VOfovlc3iqVvzMT8e/IgMhLZUVF1Up2L+W4B8SO9jmWbKff/1gDAIRaF/MlPykGviT3nPf5VlXT++rYpOpkxaWk5lVnU40sDiEq8wQ9U/csrdG13eiKGwwbxw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IfiM1MsN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B00F9C2BCAF;
+	Tue, 10 Mar 2026 01:05:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773104740;
+	bh=yTvCo+JXdygWDppuMY59cBuy+ffz+XijY5gZYAbrrfU=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=IfiM1MsNSmm3WEADxWNf29ZgMu+jsFkfxsa2a2ZOxtfqhMDKNeD4ymTphfOlK8ULi
+	 Gpmws3E34ovE+lMw5Jgqouj5gpLzn6WB3zijl+7gt0TWPOFXyY67xN0S07TzsULSrU
+	 cPb1hp7ctCr8nL5HcRsvnTojy3TyNihgWh/Lqvod+yWvM/9Z2XwkqBcPHoOG9Vqm5d
+	 dIdKAu5t9IBBqdnBVxMlE6Y4DQ/kVWYimUhqdXZT47ksdqKjTTp3FtttOtWBA7ds2j
+	 4ycyG6DGB76YlDz+ureGMT/9Yfd71uJ40L3SmuZRl8JP48I3UjH0GIOeGotkXbA5Ce
+	 YZ508Oi6fPOTA==
+From: SeongJae Park <sj@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: SeongJae Park <sj@kernel.org>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH 05/11] Docs/mm/damon/design: document the goal-based quota tuner selections
+Date: Mon,  9 Mar 2026 18:05:21 -0700
+Message-ID: <20260310010529.91162-6-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260310010529.91162-1-sj@kernel.org>
+References: <20260310010529.91162-1-sj@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
-X-Rspamd-Queue-Id: 0E81E24357C
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: EA54224361A
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	CTE_CASE(0.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-78552-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[vger.kernel.org,gmail.com,lwn.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[danielzgtgopensource@gmail.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	TAGGED_FROM(0.00)[bounces-78556-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-The symbol WALK_GET does not appears in the codebase as of
-0031c06807cfa8aa. It was renamed as of 8f64fb1ccef33107. A previous
-documentation update, de9414adafe4, renamed one occurrence in
-path-lookup.rst, but forgot to change another occurrence later in the
-file.
+Update the design document for the newly added goal-based quota tuner
+selection feature.
 
-Fixes: de9414adafe4 ("docs: path-lookup: update WALK_GET, WALK_PUT desc")
-Signed-off-by: Daniel Tang <danielzgtg.opensource@gmail.com>
+Signed-off-by: SeongJae Park <sj@kernel.org>
 ---
- Documentation/filesystems/path-lookup.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/mm/damon/design.rst | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/filesystems/path-lookup.rst
-index 9ced1135608e..6957c70f18db 100644
---- a/Documentation/filesystems/path-lookup.rst
-+++ b/Documentation/filesystems/path-lookup.rst
-@@ -1364,7 +1364,7 @@ it sets ``LOOKUP_AUTOMOUNT``, as does "``quotactl()``" and the handling of
- symlinks.  Some system calls set or clear it implicitly, while
- others have API flags such as ``AT_SYMLINK_FOLLOW`` and
- ``UMOUNT_NOFOLLOW`` to control it.  Its effect is similar to
--``WALK_GET`` that we already met, but it is used in a different way.
-+``WALK_TRAILING`` that we already met, but it is used in a different way.
+diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+index ac795f30519c5..29fff20b3c2a9 100644
+--- a/Documentation/mm/damon/design.rst
++++ b/Documentation/mm/damon/design.rst
+@@ -566,6 +566,18 @@ aggressiveness (the quota) of the corresponding scheme.  For example, if DAMOS
+ is under achieving the goal, DAMOS automatically increases the quota.  If DAMOS
+ is over achieving the goal, it decreases the quota.
  
- ``LOOKUP_DIRECTORY`` insists that the final component is a directory.
- Various callers set this and it is also set when the final component
++There are two such tuning algorithms that users can select as they need.
++
++- ``consist``: A proportional feedback loop based algorithm.  Tries to find an
++  optimum quota that should be consistently kept, to keep achieving the goal.
++  Useful for kernel-only operation on dynamic and long-running environments.
++  This is the default selection.  If unsure, use this.
++- ``temporal``: More straightforward algorithm.  Tries to achieve the goal as
++  fast as possible, using maximum allowed quota, but only for a temporal short
++  time.  When the quota is under-achieved, this algorithm keeps tuning quota to
++  a maximum allowed one.  Once the quota is [over]-achieved, this sets the
++  quota zero.  Useful for deterministic control required environments.
++
+ The goal can be specified with five parameters, namely ``target_metric``,
+ ``target_value``, ``current_value``, ``nid`` and ``path``.  The auto-tuning
+ mechanism tries to make ``current_value`` of ``target_metric`` be same to
 -- 
-2.51.0
-
-
-
+2.47.3
 
