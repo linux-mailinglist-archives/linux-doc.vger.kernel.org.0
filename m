@@ -1,134 +1,165 @@
-Return-Path: <linux-doc+bounces-78707-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78708-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mGqwC2RqsGmNjAIAu9opvQ
-	(envelope-from <linux-doc+bounces-78707-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 20:00:52 +0100
+	id yID3KG9usGmNjAIAu9opvQ
+	(envelope-from <linux-doc+bounces-78708-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 20:18:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DFDE256C6C
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 20:00:51 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id BAEBA256F55
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 20:18:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 5947530259BB
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 19:00:39 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id D60F2301CEEF
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Mar 2026 19:18:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCCCB3B8D70;
-	Tue, 10 Mar 2026 19:00:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE1D934A3A7;
+	Tue, 10 Mar 2026 19:18:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="I1B3pBU4"
+	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="rR9gSYkh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+Received: from mail-244123.protonmail.ch (mail-244123.protonmail.ch [109.224.244.123])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59D69823DD;
-	Tue, 10 Mar 2026 19:00:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C777434A3C4;
+	Tue, 10 Mar 2026 19:18:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.123
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773169235; cv=none; b=KMTqvwZbb19NnA3mMa/tLk4t2JtS9+8pa79JdZi0me5suQtE8bdgiKGCXnhRI2xFVdV1ZCZQU5ika8iLhdnETvn+icrnSdXzpaYB/gMWXxZoLYUzUTu+3+0s8oqXeNc49frzBqtucNbV/iKcBn2+rHLF+P432O2bWP+nTaYzitA=
+	t=1773170282; cv=none; b=I0QCu4uc/smpYpfC2Nxm7V0N9uPJ2GwjcslmfP9R4KVAJMuwanxJtjjaXNA6VK4+Um7kP9cB2q8XxsRuD7gqubCPePz7X6Ro37D/Wr4Tq0lfU1GFB4IYZISdrGn7qJrpryGXaMY7kYnOMUBkaSzUPIxNuMoprTKeU5pwjWpsJ3Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773169235; c=relaxed/simple;
-	bh=h1kVvZyG+gLLU/7Q842ol8WN1mRiir9mvGE/U/D8Pdk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rgFJXjHfIhVWWU49WrOxBdhl/UZ+2xXwiymKkI3oDcyKZU8VXe080ztLdhg2ry+xdpISUKTWxJ5YWGFfiCGV6NRpSIHvOJrCQTR4sVl2x6YLKbkrXVn8JrenihCLPkq4nFrjbd3Z09Rb55gl4BkdhVg70KMFtamiUCP6setGjr0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=I1B3pBU4; arc=none smtp.client-ip=90.155.50.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=h1kVvZyG+gLLU/7Q842ol8WN1mRiir9mvGE/U/D8Pdk=; b=I1B3pBU4UYjCgIOiFQquNxowFU
-	RRssVaBvfYrtohLCATxol+BdsAHe7XEyls/u2M1I99afwktfS9KbOKmScbLlYidLUdZQZgTN3zUsb
-	eefhhedYqQAT45PrzVcBO19+XRWTFm18dnL6AlMxQbPbyk/B01vMQR98YYtdG9sd5N1qDctsOKofy
-	zT7ObILGRanjp9wPZ8DPi+x6brneDR8PGoT3fLbfO0SCO3PfVb/xKTuDYnOYMR5+qBwC1ffPGdy5b
-	fqn8Ec9SHFo4/sOSv8ilac92NByzOkJpRMlRQTlguM5p+3VhVmZw+8Quka7Fc22G8hzGMWalYIUVW
-	JeUL21tg==;
-Received: from 2001-1c00-8d85-5700-266e-96ff-fe07-7dcc.cable.dynamic.v6.ziggo.nl ([2001:1c00:8d85:5700:266e:96ff:fe07:7dcc] helo=noisy.programming.kicks-ass.net)
-	by casper.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1w02Jb-00000008P9i-3Po3;
-	Tue, 10 Mar 2026 19:00:23 +0000
-Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
-	id 2857B300462; Tue, 10 Mar 2026 20:00:22 +0100 (CET)
-Date: Tue, 10 Mar 2026 20:00:22 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
-Cc: urezki@gmail.com, ryan.roberts@arm.com, kevin.brodsky@arm.com,
-	samuel.holland@sifive.com, dave.hansen@linux.intel.com,
-	jeremy.linton@arm.com, weixugc@google.com, ljs@kernel.org,
-	ryabinin.a.a@gmail.com, rppt@kernel.org, bp@alien8.de,
-	luto@kernel.org, jan.kiszka@siemens.com, mingo@redhat.com,
-	david@kernel.org, mhocko@suse.com, akpm@linux-foundation.org,
-	andreas@gaisler.com, kas@kernel.org, Liam.Howlett@oracle.com,
-	morbo@google.com, thuth@redhat.com, catalin.marinas@arm.com,
-	ankur.a.arora@oracle.com, kbingham@kernel.org,
-	nick.desaulniers+lkml@gmail.com, andreyknvl@gmail.com,
-	dvyukov@google.com, corbet@lwn.net, leitao@debian.org,
-	hpa@zytor.com, tglx@kernel.org, yuanchu@google.com, ardb@kernel.org,
-	vincenzo.frascino@arm.com, tabba@google.com, joey.gouly@arm.com,
-	nsc@kernel.org, will@kernel.org, yeoreum.yun@arm.com,
-	nathan@kernel.org, maciej.wieczor-retman@intel.com,
-	skhan@linuxfoundation.org, axelrasmussen@google.com, osandov@fb.com,
-	surenb@google.com, justinstitt@google.com, kees@kernel.org,
-	vbabka@kernel.org, hsj0512@snu.ac.kr, trintaeoitogc@gmail.com,
-	jackmanb@google.com, maz@kernel.org, glider@google.com,
-	linux-doc@vger.kernel.org, x86@kernel.org,
-	linux-kernel@vger.kernel.org, kasan-dev@googlegroups.com,
-	workflows@vger.kernel.org, llvm@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-kbuild@vger.kernel.org,
-	linux-mm@kvack.org
+	s=arc-20240116; t=1773170282; c=relaxed/simple;
+	bh=yNkjvj8zK3UszVO/pQmPPu8PEirskW7YGxcg6RWvrOA=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=ms4eR5YGALMf0XFAUavJGGfHMQYHKI1T8imNNYwyDDlZV79K6TrVz7CV7/KSXBfWF5QTabU8GK4JJK1EzDpybv1NM4xriSJoIf98nFcQqLNSFtIDGmbUF5amAtqGTvXM/sLsw9IcYD2DIDUydTINBTCqUzN1+1ytW8dUTyu3LBg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=rR9gSYkh; arc=none smtp.client-ip=109.224.244.123
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
+	s=protonmail3; t=1773170277; x=1773429477;
+	bh=qoHZk/OhrSl6MrxG5Mj/wzOQ+Ag6/K1R4s+ErDzpvw0=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=rR9gSYkhvunRslGRTcO93zUtjG4S9QPohyc7ONkvqctlqRe5PAr6eHvbGcQDs36n3
+	 33yQN5T+ps4YqoZEpt+gLyhdwBysz/a2OO5acn6s5y8CxSR9RWbUEH0PIVT6p2UtCC
+	 +uztI4Plu+Gmk2sFw6yDf1p441e0Y4cmuh6BD8HOGwl+MQRtA42Sm5SodKs90+7Td2
+	 wlE34NSb2zzCAQpxCfImaeT7NnWInHxaoALO26ADLN7txCDcMhSVsLhxaqpIcUfY1l
+	 2ik5c5wMsrTJTnUVu9RSRaIDQtui9rXEXNSCN8Gl9GupewNhLmIv1OHtkTl1zTwqU0
+	 2OvHHg0vin3Mw==
+Date: Tue, 10 Mar 2026 19:17:43 +0000
+To: Andrew Morton <akpm@linux-foundation.org>
+From: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
+Cc: urezki@gmail.com, ryan.roberts@arm.com, kevin.brodsky@arm.com, samuel.holland@sifive.com, dave.hansen@linux.intel.com, jeremy.linton@arm.com, peterz@infradead.org, weixugc@google.com, ljs@kernel.org, ryabinin.a.a@gmail.com, rppt@kernel.org, bp@alien8.de, luto@kernel.org, jan.kiszka@siemens.com, mingo@redhat.com, david@kernel.org, mhocko@suse.com, andreas@gaisler.com, kas@kernel.org, Liam.Howlett@oracle.com, morbo@google.com, thuth@redhat.com, catalin.marinas@arm.com, ankur.a.arora@oracle.com, kbingham@kernel.org, nick.desaulniers+lkml@gmail.com, andreyknvl@gmail.com, dvyukov@google.com, corbet@lwn.net, leitao@debian.org, hpa@zytor.com, tglx@kernel.org, yuanchu@google.com, ardb@kernel.org, vincenzo.frascino@arm.com, tabba@google.com, joey.gouly@arm.com, nsc@kernel.org, will@kernel.org, yeoreum.yun@arm.com, nathan@kernel.org, maciej.wieczor-retman@intel.com, skhan@linuxfoundation.org, axelrasmussen@google.com, osandov@fb.com, surenb@google.com, justinstitt@google.com,
+	kees@kernel.org, vbabka@kernel.org, hsj0512@snu.ac.kr, trintaeoitogc@gmail.com, jackmanb@google.com, maz@kernel.org, glider@google.com, linux-doc@vger.kernel.org, x86@kernel.org, linux-kernel@vger.kernel.org, kasan-dev@googlegroups.com, workflows@vger.kernel.org, llvm@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-kbuild@vger.kernel.org, linux-mm@kvack.org
 Subject: Re: [PATCH v11 00/15] kasan: x86: arm64: KASAN tag-based mode for x86
-Message-ID: <20260310190022.GI606826@noisy.programming.kicks-ass.net>
-References: <cover.1773164688.git.m.wieczorretman@pm.me>
+Message-ID: <abBpbS3tplFSlVgx@wieczorr-mobl1.localdomain>
+In-Reply-To: <20260310112421.8ceb7415e14b49cbd86db715@linux-foundation.org>
+References: <cover.1773164688.git.m.wieczorretman@pm.me> <20260310112421.8ceb7415e14b49cbd86db715@linux-foundation.org>
+Feedback-ID: 164464600:user:proton
+X-Pm-Message-ID: 0e6fddfcfa9693d70ed9e03b42a5ca69edab13d7
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1773164688.git.m.wieczorretman@pm.me>
-X-Rspamd-Queue-Id: 6DFDE256C6C
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: BAEBA256F55
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[pm.me,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[pm.me:s=protonmail3];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[gmail.com,arm.com,sifive.com,linux.intel.com,google.com,kernel.org,alien8.de,siemens.com,redhat.com,suse.com,linux-foundation.org,gaisler.com,oracle.com,lwn.net,debian.org,zytor.com,intel.com,linuxfoundation.org,fb.com,snu.ac.kr,vger.kernel.org,googlegroups.com,lists.linux.dev,lists.infradead.org,kvack.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-78707-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[peterz@infradead.org,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[gmail.com,arm.com,sifive.com,linux.intel.com,infradead.org,google.com,kernel.org,alien8.de,siemens.com,redhat.com,suse.com,gaisler.com,oracle.com,lwn.net,debian.org,zytor.com,intel.com,linuxfoundation.org,fb.com,snu.ac.kr,vger.kernel.org,googlegroups.com,lists.linux.dev,lists.infradead.org,kvack.org];
+	TAGGED_FROM(0.00)[bounces-78708-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCPT_COUNT_GT_50(0.00)[64];
-	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[m.wieczorretman@pm.me,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[pm.me:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:dkim,sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,noisy.programming.kicks-ass.net:mid]
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On Tue, Mar 10, 2026 at 05:51:19PM +0000, Maciej Wieczor-Retman wrote:
+On 2026-03-10 at 11:24:21 -0700, Andrew Morton wrote:
+>On Tue, 10 Mar 2026 17:51:19 +0000 Maciej Wieczor-Retman <m.wieczorretman@=
+pm.me> wrote:
+>
+>>
+>> [1] Currently inline mode doesn't work on x86 due to things missing in
+>> the compiler. I have written a patch for clang that seems to fix the
+>> inline mode and I was able to boot and check that all patches regarding
+>> the inline mode work as expected. My hope is to post the patch to LLVM
+>> once this series is completed, and then make inline mode available in
+>> the kernel config.
+>>
+>> [2] While I was able to boot the inline tag-based kernel with my
+>> compiler changes in a simulated environment, due to toolchain
+>> difficulties I couldn't get it to boot on the machine I had access to.
+>> Also boot time results from the simulation seem too good to be true, and
+>> they're much too worse for the generic case to be believable. Therefore
+>> I'm posting only results from the physical server platform.
+>>
+>> =3D=3D=3D=3D=3D=3D=3D Compilation
+>> Clang was used to compile the series (make LLVM=3D1) since gcc doesn't
+>> seem to have support for KASAN tag-based compiler instrumentation on
+>> x86. Patchset does seem to compile with gcc without an issue but doesn't
+>> boot afterwards.
+>
+>So LLVM works partially and gcc doesn't work at all?
 
-> ======= Compilation
-> Clang was used to compile the series (make LLVM=1) since gcc doesn't
-> seem to have support for KASAN tag-based compiler instrumentation on
-> x86. Patchset does seem to compile with gcc without an issue but doesn't
-> boot afterwards.
+The non-working options are disabled in Kconfig so right now only outline K=
+ASAN
+with LLVM works fully.
 
-Can you put all that under a specific CONFIG and make that depend on
-CC_IS_CLANG?
+>Do we know which compiler people are using?  Google tells me that
+>Android, ChromeOS, and OpenMandriva use LLVM.  That's pretty thin.
+
+I don't have any numbers on this matter, from working on this I only got th=
+at
+there is much more KASAN traffic around clang. So I thought that most KASAN
+users prefer LLVM.
+
+>This is all rather problematic and it isn't clear (to me) how to
+>proceed at this time.  Do we have any projections on when all this will
+>be fixed up?
+
+My understanding is that there is something off in gcc support. I recall An=
+drey
+Konovalov mentioning that gcc also doesn't work well with arm64's KASAN
+tag-based mode. As for LLVM inline support I do know the codebase a bit so =
+I got
+some WIP patches there. But I wanted to see where this review process goes
+before posting to LLVM.
+
+>> The series is based on mm-new.
+>
+>I actually carry kexec patches in the mm-nonmm-[un]stable branches.
+>But the series applies OK anyway.
+
+Should I base this patchset on top of mm-nonmm-stable in the future? I was =
+after
+one patch by Andrey Ryabinin that was in mm-new and I needed to rebase on t=
+op of
+it.
+
+--=20
+Kind regards
+Maciej Wiecz=C3=B3r-Retman
+
 
