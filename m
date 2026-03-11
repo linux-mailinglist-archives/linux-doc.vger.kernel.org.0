@@ -1,99 +1,82 @@
-Return-Path: <linux-doc+bounces-78822-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78823-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wBaKJt8wsWm0rwIAu9opvQ
-	(envelope-from <linux-doc+bounces-78822-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 10:07:43 +0100
+	id oJlGL7gwsWm0rwIAu9opvQ
+	(envelope-from <linux-doc+bounces-78823-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 10:07:04 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4656C25FFF4
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 10:07:43 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80B9325FFB6
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 10:07:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 47EBF32619BA
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 08:50:21 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 0AFB4307318A
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 09:06:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F6E83C141E;
-	Wed, 11 Mar 2026 08:50:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5A823C279A;
+	Wed, 11 Mar 2026 09:05:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="o4tcifl1";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="LMTIauJ8"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OpaMyPfq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF4543B7775;
-	Wed, 11 Mar 2026 08:50:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C51526D4CD;
+	Wed, 11 Mar 2026 09:05:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773219018; cv=none; b=A5ZRB4C9p5ir5+pLHK4JjV6oaJsiNxZGtPWdvOBzPx0XIoYVHqJLk3QtEbJs0UgXCHXaqu2hroz6GAykHA8Iy408cbuW8LGz1qO931dUbjCAriLyFGPRF+tC6rD8DOvkbUv93UipnaFgDd3rCoPMTRD76PwXbhSM+gDyzcxY62g=
+	t=1773219958; cv=none; b=FrnglTZetlcr9QQqmGl/Wfanbx/Yqs13S6S7tqrSKwtjgioT4DUxlfWH7VgD5Vif/L8azbniXXkanVA1RS4p7qQIzTzaN+BEIuvMFICKYzHQc+gVYwCsqkFnjW//rAUbyYI14sRyK2zBOdCdcjyhD80R+zfQoWtrU+RVZpxfHa4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773219018; c=relaxed/simple;
-	bh=ZjFxYEjK8aozfmve4JoaBaV+xJQhTcTGAjUyYSMn6lQ=;
+	s=arc-20240116; t=1773219958; c=relaxed/simple;
+	bh=D51Pq/e4LwlQGDMBcJS01g9zdaJBXlcZ+FyspkYyjeE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dkknLweiGRXZL0r0X9Aw7ULotf1kxciKseOAE0aUhy2ZsH2mOf/qpaLACyISXnyrR+vOFLV8EUkR967oU25kjN/LlyWJFVsrZr6VZEyM6BMqBNCIwm7ycQan5LFr3EIjA+LMpkE0staIdLHbCMi+wIxenVqy+A/N9xxucfZn7ME=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=o4tcifl1; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=LMTIauJ8; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-Date: Wed, 11 Mar 2026 09:50:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1773219010;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Dh2u910Dr9v3m0hVo537X6ofb5vKqJBESKL7gfq66iU=;
-	b=o4tcifl1o8jywgLPdg/s+WX7sDPzz+eCAnhiMj3T66TG/Q1htV1GOGeOOud7SVVEX+GX92
-	OVl1a0sAtFbXIhn6q8VAYV3nbRQ8ydhQIs0OB6MXRRv1VFkebNYQxNtC6ZpsNfMUc2HPJe
-	my1FYPw0ldYH8kKSZm/D/y2nEimFEJIe4djKU6CH2C6et4c58of1WcZakycG05pAwk+5+R
-	vRjsqZMlne+14maN+9VGVI5qg7hbBIk6aqyB10RpJcYkoRJbGh9dKeD1rxtrSKP3zP2jcK
-	nzJWn+wPTcYCVcLlRx9uC67R6D4rj8jJI+lZcpjDoC0/26vEYJrmilrpcNilQg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1773219010;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Dh2u910Dr9v3m0hVo537X6ofb5vKqJBESKL7gfq66iU=;
-	b=LMTIauJ88fFcgqN/jXiJPCLOHnYrJyLVhh0TJD/NNsp9hdkMfEbyqHXmdDHdxxwf8KEeF3
-	WVtUAKnV6l5hwHDQ==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Eric Biggers <ebiggers@kernel.org>
-Cc: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>, Luis Chamberlain <mcgrof@kernel.org>,
-	Petr Pavlu <petr.pavlu@suse.com>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Daniel Gomez <da.gomez@samsung.com>,
-	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
-	"Serge E. Hallyn" <serge@hallyn.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Naveen N Rao <naveen@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>,
-	Roberto Sassu <roberto.sassu@huawei.com>,
-	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-	Eric Snowberg <eric.snowberg@oracle.com>,
-	Nicolas Schier <nicolas.schier@linux.dev>,
-	Daniel Gomez <da.gomez@kernel.org>,
-	Aaron Tomlin <atomlin@atomlin.com>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Nicolas Schier <nsc@kernel.org>,
-	Nicolas Bouchinet <nicolas.bouchinet@oss.cyber.gouv.fr>,
-	Xiu Jianfeng <xiujianfeng@huawei.com>,
-	Fabian =?utf-8?Q?Gr=C3=BCnbichler?= <f.gruenbichler@proxmox.com>,
-	Arnout Engelen <arnout@bzzt.net>,
-	Mattia Rizzolo <mattia@mapreri.org>, kpcyrd <kpcyrd@archlinux.org>,
-	Christian Heusel <christian@heusel.eu>,
-	=?utf-8?B?Q8OianU=?= Mihai-Drosi <mcaju95@gmail.com>,
-	linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
-	linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-integrity@vger.kernel.org
-Subject: Re: [PATCH v4 15/17] module: Introduce hash-based integrity checking
-Message-ID: <20260311085008.TSnh3YR1@linutronix.de>
-References: <20260113-module-hashes-v4-0-0b932db9b56b@weissschuh.net>
- <20260113-module-hashes-v4-15-0b932db9b56b@weissschuh.net>
- <20260311011218.GA212983@quark>
+	 Content-Type:Content-Disposition:In-Reply-To; b=N46c+d8tgovU+Z93Lb5jGJfgRVxH6VbGSO7U1k3bCcGpyKtUOHebXv3JFUzzIUxa/DAXU1VorDcMgZWBu+OIs+bGPbFDFr3tc7Sokm40QUT49c4NhoJniaoElycg7p4iOm6/37df04qpYxU2hDRMyIX6ChvQCA2QiUyGHmMOhx8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OpaMyPfq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F588C4CEF7;
+	Wed, 11 Mar 2026 09:05:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773219957;
+	bh=D51Pq/e4LwlQGDMBcJS01g9zdaJBXlcZ+FyspkYyjeE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=OpaMyPfq5NJaxf+QkDm+yAtMK9kTWUJspfstygKAnF36YOzTZ2jWyATAqtQgBLBOM
+	 X7EOY4g5cKeILwzeLPh05VN39Ui0Tl0XRCyhPtPKF+XRDBvG3uGRxL3geoxNA01KsV
+	 ofaXr1sB2KM6GdSqJGVEzXwom3ewd9AWlWCw76//1vFUck3bpY/jDA2Z3TJeAS0wct
+	 x7wrFcLwQUXjxKKLVQojnFj42oKnR7IDX+XtyjJleVSLWbpk5XV9qItG3s7hMIzEUc
+	 chvYt7DQKjUQu3mfmM6HFrP1S1qSI/69qT/hoP0l27gPIQJeHYnZR5m2vfxMrlSCKn
+	 nz/28x/sq+9yA==
+Date: Wed, 11 Mar 2026 10:05:55 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Eugen Hristev <eugen.hristev@linaro.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, 
+	Christoph Lameter <cl@gentwo.org>, Andrew Morton <akpm@linux-foundation.org>, 
+	Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Anna-Maria Behnsen <anna-maria@linutronix.de>, Frederic Weisbecker <frederic@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Juri Lelli <juri.lelli@redhat.com>, 
+	Vincent Guittot <vincent.guittot@linaro.org>, Dietmar Eggemann <dietmar.eggemann@arm.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>, 
+	Valentin Schneider <vschneid@redhat.com>, David Hildenbrand <david@kernel.org>, 
+	Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Kees Cook <kees@kernel.org>, 
+	Brendan Jackman <jackmanb@google.com>, Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>, 
+	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>, 
+	Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, 
+	Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, 
+	Petr Mladek <pmladek@suse.com>, John Ogness <john.ogness@linutronix.de>, 
+	Sergey Senozhatsky <senozhatsky@chromium.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Saravana Kannan <saravanak@kernel.org>, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arch@vger.kernel.org, linux-mm@kvack.org, linux-arm-msm@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v2 24/25] dt-bindings: reserved-memory: Add Google Kinfo
+ Pixel reserved memory
+Message-ID: <20260311-light-terrestrial-bison-d9cd97@quoll>
+References: <20260311-minidump-v2-v2-0-f91cedc6f99e@oss.qualcomm.com>
+ <20260311-minidump-v2-v2-24-f91cedc6f99e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -102,96 +85,100 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260311011218.GA212983@quark>
-X-Rspamd-Queue-Id: 4656C25FFF4
+In-Reply-To: <20260311-minidump-v2-v2-24-f91cedc6f99e@oss.qualcomm.com>
+X-Rspamd-Queue-Id: 80B9325FFB6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78822-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[weissschuh.net,kernel.org,arndb.de,suse.com,google.com,samsung.com,paul-moore.com,namei.org,hallyn.com,lwn.net,linux.ibm.com,ellerman.id.au,gmail.com,huawei.com,oracle.com,linux.dev,atomlin.com,oss.cyber.gouv.fr,proxmox.com,bzzt.net,mapreri.org,archlinux.org,heusel.eu,vger.kernel.org,lists.ozlabs.org];
-	RCPT_COUNT_TWELVE(0.00)[41];
+	TAGGED_FROM(0.00)[bounces-78823-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,linaro.org,arndb.de,kernel.org,gentwo.org,linux-foundation.org,infradead.org,linutronix.de,redhat.com,arm.com,goodmis.org,google.com,suse.de,oracle.com,suse.com,cmpxchg.org,nvidia.com,tencent.com,huaweicloud.com,gmail.com,lge.com,chromium.org,vger.kernel.org,kvack.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bigeasy@linutronix.de,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linutronix.de:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,linutronix.de:dkim,linutronix.de:mid]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[57];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,devicetree.org:url,qualcomm.com:email,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On 2026-03-10 18:12:18 [-0700], Eric Biggers wrote:
-> > diff --git a/scripts/modules-merkle-tree.c b/scripts/modules-merkle-tree.c
-> [...]
+On Wed, Mar 11, 2026 at 01:46:08AM +0530, Mukesh Ojha wrote:
+> Add documentation for Google Kinfo Pixel reserved memory area.
 > 
-> > +struct file_entry {
-> > +	char *name;
-> > +	unsigned int pos;
-> > +	unsigned char hash[EVP_MAX_MD_SIZE];
+> Co-developed-by: Eugen Hristev <eugen.hristev@linaro.org>
+> Signed-off-by: Eugen Hristev <eugen.hristev@linaro.org>
+> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> ---
+>  .../bindings/reserved-memory/google,kinfo.yaml     | 46 ++++++++++++++++++++++
+>  MAINTAINERS                                        |  6 +++
+>  2 files changed, 52 insertions(+)
 > 
-> Considering that the hash algorithm is fixed, EVP_MAX_MD_SIZE can be
-> replaced with a tighter local definition:
-> 
->     #define MAX_HASH_SIZE 32
-> 
-> > +static struct file_entry *fh_list;
-> > +static size_t num_files;
-> > +
-> > +struct leaf_hash {
-> > +	unsigned char hash[EVP_MAX_MD_SIZE];
-> > +};
-> > +
-> > +struct mtree {
-> > +	struct leaf_hash **l;
-> > +	unsigned int *entries;
-> > +	unsigned int levels;
-> > +};
-> 
-> 'struct leaf_hash' is confusing because it's actually used for the
-> hashes of internal nodes, not leaf nodes.
+> diff --git a/Documentation/devicetree/bindings/reserved-memory/google,kinfo.yaml b/Documentation/devicetree/bindings/reserved-memory/google,kinfo.yaml
+> new file mode 100644
+> index 000000000000..2f964151f0c0
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/reserved-memory/google,kinfo.yaml
 
-You could still consider the internal nodes as leafs.
+Nothing improved, read previous feedback.
 
-> Maybe rename it to 'struct hash' and use it for both the hashes and leaf
-> nodes and internal nodes.
-> 
-> Also, clearer naming would improve readability, e.g.:
-> 
->     struct merkle_tree {
->             struct hash **level_hashes;
->             unsigned int level_size;
->             unsigned int num_levels;
->     };
+> @@ -0,0 +1,46 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/reserved-memory/google,kinfo.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Google Pixel Kinfo reserved memory
+> +
+> +maintainers:
+> +  - Eugen Hristev <eugen.hristev@linaro.org>
+> +  - Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> +
+> +description: |
 
-but this could improve it, indeed.
+Do not need '|' unless you need to preserve formatting.
 
-> > +	hash_evp = EVP_get_digestbyname("sha256");
-> 
-> EVP_sha256()
+> +  This binding represents reserved-memory used to store data for firmware/bootloader
 
-I would suggest to use EVP_MD_fetch() instead.
+Nothing improved.
 
-> > +	hash_size = EVP_MD_get_size(hash_evp);
-> 
-> The old name 'EVP_MD_size()' would have wider compatibility.
+> +  on the Pixel platform. The stored data is debugging information of the running
+> +  kernel.
+> +
+> +allOf:
+> +  - $ref: reserved-memory.yaml
+> +
+> +properties:
+> +  compatible:
+> +    const: google,debug-kinfo
+> +
+> +  reg:
+> +    description: page-aligned region of memory containing debugging data of running kernel
 
-EVP_MD_fetch() and EVP_MD_get_size() are openssl 3.0.0+ and nothing
-below 3.0.0 is considered supported (while 3.0.0 is EOL 07 Sep 2026).
+Missing constraints.
 
-Sebastian
+Please wrap code according to the preferred limit expressed in Kernel
+coding style (checkpatch is not a coding style description, but only a
+tool).  However don't wrap blindly (see Kernel coding style).
+
+Best regards,
+Krzysztof
+
 
