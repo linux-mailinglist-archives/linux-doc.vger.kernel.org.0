@@ -1,199 +1,170 @@
-Return-Path: <linux-doc+bounces-78845-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78847-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YABcDKRisWnQugIAu9opvQ
-	(envelope-from <linux-doc+bounces-78845-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:40:04 +0100
+	id wLVhHl9ksWnsugIAu9opvQ
+	(envelope-from <linux-doc+bounces-78847-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:47:27 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFEB1263AEC
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:40:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27582263D0D
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:47:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1F8AB3034DD2
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 12:40:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CD46C303DD50
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 12:44:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 817CE31F9B9;
-	Wed, 11 Mar 2026 12:40:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F648373BEC;
+	Wed, 11 Mar 2026 12:44:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eDfNntac"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 515EC269CE6;
-	Wed, 11 Mar 2026 12:39:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 587B11A9FBA;
+	Wed, 11 Mar 2026 12:44:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773232801; cv=none; b=CfZNppHo6R9EiAysDbrGEyoRqGmfv83OKX76sp0A/VHJiRj/ju5CPX+xUnTuik9j7RBRdqZA5ERjsW+Cs2lTe0fqNY6N+376kqC/IQOoW4bFitq5cJZUXU/DESZXkQn+PDe7YZwbe1kIgrFd8XjEn74ioJIkiGzdzl+hpFrcCrk=
+	t=1773233074; cv=none; b=ngl/9VFp+vdnWNzQJjr9VVb0/Omrv9cUb5VQwVs4P33KvnxXmYCeT63la2RZqGcGqVw4eMxeBSMkAjqYVgVEiuUahiKSQtdaKB1mjZdgkRyEUE2sHCT8Ob7/RE/OpjjncsUv658XbjpfQwSmmXKJfvUbFQT7/gdBm5eYhvVRBN0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773232801; c=relaxed/simple;
-	bh=CXmlH99kGw85pQrLoBsTcEEnfwm4/fSlpbsS8YLfIp0=;
-	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=L/AW9+tlLRq9goRZ4jl/qOSAN3ONZXbiEde0vfdojxHH3Ip+HmLJEDTdAbj/ao/vrvTjNZrJbAYL+CPdjxh9g0g1wxC0VBe90TTdYIp2j92HX0eCpuw0ODbC7hNi0Ho5/LIyStFx+pCVRPuwQZO9ri6Sjc3hajbslse7IHAW+8U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.224.107])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4fW9Kg5zfszJ46jW;
-	Wed, 11 Mar 2026 20:39:03 +0800 (CST)
-Received: from dubpeml500005.china.huawei.com (unknown [7.214.145.207])
-	by mail.maildlp.com (Postfix) with ESMTPS id 06FEF40587;
-	Wed, 11 Mar 2026 20:39:50 +0800 (CST)
-Received: from localhost (10.203.177.15) by dubpeml500005.china.huawei.com
- (7.214.145.207) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Wed, 11 Mar
- 2026 12:39:49 +0000
-Date: Wed, 11 Mar 2026 12:39:47 +0000
-From: Jonathan Cameron <jonathan.cameron@huawei.com>
-To: Ahmed Tiba <ahmed.tiba@arm.com>
-CC: <devicetree@vger.kernel.org>, <linux-acpi@vger.kernel.org>,
-	<Dmitry.Lamerov@arm.com>, <catalin.marinas@arm.com>, <bp@alien8.de>,
-	<robh@kernel.org>, <rafael@kernel.org>, <will@kernel.org>,
-	<conor@kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<linux-doc@vger.kernel.org>, <krzk+dt@kernel.org>, <Michael.Zhao2@arm.com>,
-	<tony.luck@intel.com>, Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Subject: Re: [PATCH v2 01/11] ACPI: APEI: GHES: share macros via a private
- header
-Message-ID: <20260311123947.00000be3@huawei.com>
-In-Reply-To: <d0911510-9f87-49ed-b896-fa00e5d2a98b@arm.com>
-References: <20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-0-347fa2d7351b@arm.com>
-	<20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-1-347fa2d7351b@arm.com>
-	<20260224152230.00000531@huawei.com>
-	<d0911510-9f87-49ed-b896-fa00e5d2a98b@arm.com>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
+	s=arc-20240116; t=1773233074; c=relaxed/simple;
+	bh=2TsPW1VUrfzhXFigTHHxqQSuXjl+yKNb6vmNwYfv3Rc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WzEDxEVhsV3XiNUkfdE15XavS16JW8m/L8zwpqdGIErppedgzNYYkhvChIz6OTcwFilLXzLR3JAkK0ctAY2M5z77XyIwrevFhD+6zx0sAEX26RXJEQwB8YlYfL+RFx5iOP6Oj5DREczmceNGPUPk4VmQNXN1iD+F01TxHOAsDDM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eDfNntac; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31755C19425;
+	Wed, 11 Mar 2026 12:43:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773233073;
+	bh=2TsPW1VUrfzhXFigTHHxqQSuXjl+yKNb6vmNwYfv3Rc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=eDfNntacup9W7fsFDmo+L2CKzFeNrMPjOh6O+qT6o4uFua9BVen3NR7GjYAh8DNXV
+	 IKXG7cyu8HA6VGzPRI4Js64Zn99OSyFVl3U013MtS5pxv4GLlJpYwI4eQCZmr7mQkC
+	 dMqdNwRivSNHZdXsm2A+h1zID9gclxQ8SwsDB7VEfzDnPD6XroexoVunYvw0p8bpYs
+	 PoGj9h8IDZf4yVljVZcfRMb4hMfmWiCnUX0mH5VnzYDiQWBnt3tpWofjoZsYN+rOD1
+	 3iG2Tn931m0rCJS34Q/AZjsvyMgPo/3xYa+a78Bx0o8y/0PUB9MzPW5/UZRJiqua9H
+	 ZYINWO658BENg==
+Date: Wed, 11 Mar 2026 18:13:09 +0530
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
+	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
+	Daniel Perez-Zoghbi <dperezzo@quicinc.com>, Md Sadre Alam <mdalam@qti.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Peter Ujfalusi <peter.ujfalusi@gmail.com>, 
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>, dmaengine@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, brgl@kernel.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: Re: [PATCH v12 01/12] dmaengine: constify struct
+ dma_descriptor_metadata_ops
+Message-ID: <gtkfzgmtap6536sd5hexkuxrak25qekyrg3zwr2ikg3gnidwww@kq77l6l4kq66>
+References: <20260310-qcom-qce-cmd-descr-v12-0-398f37f26ef0@oss.qualcomm.com>
+ <20260310-qcom-qce-cmd-descr-v12-1-398f37f26ef0@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: lhrpeml500011.china.huawei.com (7.191.174.215) To
- dubpeml500005.china.huawei.com (7.214.145.207)
-X-Rspamd-Queue-Id: CFEB1263AEC
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260310-qcom-qce-cmd-descr-v12-1-398f37f26ef0@oss.qualcomm.com>
+X-Rspamd-Queue-Id: 27582263D0D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.54 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[huawei.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TAGGED_FROM(0.00)[bounces-78845-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-78847-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,amd.com,vger.kernel.org,lists.infradead.org,linaro.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jonathan.cameron@huawei.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.919];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,huawei.com:mid,arm.com:email]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
 X-Rspamd-Action: no action
 
-On Wed, 11 Mar 2026 11:39:38 +0000
-Ahmed Tiba <ahmed.tiba@arm.com> wrote:
+On Tue, Mar 10, 2026 at 04:44:15PM +0100, Bartosz Golaszewski wrote:
+> There's no reason for the instances of this struct to be modifiable.
+> Constify the pointer in struct dma_async_tx_descriptor and all drivers
+> currently using it.
+> 
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
-> On 24/02/2026 15:22, Jonathan Cameron wrote:
-> > On Fri, 20 Feb 2026 13:42:19 +0000
-> > Ahmed Tiba <ahmed.tiba@arm.com> wrote:
-> >  =20
-> >> Carve the CPER helper macros out of ghes.c and place them in a private
-> >> header so they can be shared with upcoming helper files. This is a
-> >> mechanical include change with no functional differences.
-> >>
-> >> Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com> =20
-> > +CC Mauro as he's been doing a lot of work on error injection recently =
-so
-> > can probably review the use of the various structures much more easily
-> > than I can!
-> >=20
-> > My main comment is on the naming of the new header.
-> >=20
-> > Jonathan =20
->=20
-> The content is intentionally GHES=E2=80=91specific CPER handling,
-> not generic UEFI CPER. It's the GHES view of CPER parsing/handling
-> and is used by the shared GHES/DT path, so keeping it in ghes_cper.h=20
-> documents that boundary better than moving it to ghes.h (which also=20
-> contains non=E2=80=91CPER GHES logic). The helpers moved there are the on=
-es=20
-> needed by the shared CPER handling path.
+Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
 
-Ok. So the intended meaning here is GHES and CPER, not stuff specific
-to the CPER aspects of GHES.  Maybe, though I'm not sure why you
-don't just name ghes.h in that case as GHES always incorporates CPER.
-I guess because that file already exists and covers some ACPI specific parts
-and HEST bits that aren't of use to you.
+- Mani
 
-Ah well, one for the ACPI maintainers to perhaps suggest what makes
-most sense to them.
->=20
-> >> ---
-> >>   drivers/acpi/apei/ghes.c | 60 +-----------------------------
-> >>   include/acpi/ghes_cper.h | 95 ++++++++++++++++++++++++++++++++++++++=
-++++++++++
-> >>   2 files changed, 96 insertions(+), 59 deletions(-)
-> >>
-> >> diff --git a/drivers/acpi/apei/ghes.c b/drivers/acpi/apei/ghes.c
-> >> index f96aede5d9a3..07b70bcb8342 100644
-> >> --- a/drivers/acpi/apei/ghes.c
-> >> +++ b/drivers/acpi/apei/ghes.c =20
-> >  =20
-> >>  =20
-> >>   static struct ghes_estatus_cache __rcu *ghes_estatus_caches[GHES_EST=
-ATUS_CACHES_SIZE];
-> >> diff --git a/include/acpi/ghes_cper.h b/include/acpi/ghes_cper.h
-> >> new file mode 100644
-> >> index 000000000000..2597fbadc4f3
-> >> --- /dev/null
-> >> +++ b/include/acpi/ghes_cper.h
-> >> @@ -0,0 +1,95 @@
-> >> +/* SPDX-License-Identifier: GPL-2.0-only */
-> >> +/*
-> >> + * APEI Generic Hardware Error Source: CPER Helper =20
-> >=20
-> > There is other stuff in her usch as the GHES acks etc
-> > in ghes_clear_estatus(). So I think this intro text
-> > needs a bit more thought.  The boundary is already rather
-> > blurred though as for example cper_estatus_len() is only
-> > tangentially connected to cper.
-> >  =20
-> >> + *
-> >> + * Copyright (C) 2026 ARM Ltd. =20
-> >=20
-> > Doesn't make sense to ad this copyright in this patch as so far
-> > it's cut and paste of code from a file that you didn't write (at least
-> > not in 2026!)
-> >=20
-> > Might make sense after a few patches, in which case add the copyright
-> > when it does. =20
->=20
-> The file is new and maintained by Arm as part of this refactor,
-> so I kept the header consistent with other newly introduced files.
+> ---
+>  drivers/dma/ti/k3-udma.c        | 2 +-
+>  drivers/dma/xilinx/xilinx_dma.c | 2 +-
+>  include/linux/dmaengine.h       | 2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+> index c964ebfcf3b68d86e4bbc9b62bad2212f0ce3ee9..8a2f235b669aaf084a6f7b3e6b23d06b04768608 100644
+> --- a/drivers/dma/ti/k3-udma.c
+> +++ b/drivers/dma/ti/k3-udma.c
+> @@ -3408,7 +3408,7 @@ static int udma_set_metadata_len(struct dma_async_tx_descriptor *desc,
+>  	return 0;
+>  }
+>  
+> -static struct dma_descriptor_metadata_ops metadata_ops = {
+> +static const struct dma_descriptor_metadata_ops metadata_ops = {
+>  	.attach = udma_attach_metadata,
+>  	.get_ptr = udma_get_metadata_ptr,
+>  	.set_len = udma_set_metadata_len,
+> diff --git a/drivers/dma/xilinx/xilinx_dma.c b/drivers/dma/xilinx/xilinx_dma.c
+> index b53292e02448fe528f1ae9ba33b4bcf408f89fd6..97b934ca54101ea699e3ab28d419bed1b45dee4a 100644
+> --- a/drivers/dma/xilinx/xilinx_dma.c
+> +++ b/drivers/dma/xilinx/xilinx_dma.c
+> @@ -653,7 +653,7 @@ static void *xilinx_dma_get_metadata_ptr(struct dma_async_tx_descriptor *tx,
+>  	return seg->hw.app;
+>  }
+>  
+> -static struct dma_descriptor_metadata_ops xilinx_dma_metadata_ops = {
+> +static const struct dma_descriptor_metadata_ops xilinx_dma_metadata_ops = {
+>  	.get_ptr = xilinx_dma_get_metadata_ptr,
+>  };
+>  
+> diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
+> index 99efe2b9b4ea9844ca6161208362ef18ef111d96..92566c4c100e98f48750de21249ae3b5de06c763 100644
+> --- a/include/linux/dmaengine.h
+> +++ b/include/linux/dmaengine.h
+> @@ -623,7 +623,7 @@ struct dma_async_tx_descriptor {
+>  	void *callback_param;
+>  	struct dmaengine_unmap_data *unmap;
+>  	enum dma_desc_metadata_mode desc_metadata_mode;
+> -	struct dma_descriptor_metadata_ops *metadata_ops;
+> +	const struct dma_descriptor_metadata_ops *metadata_ops;
+>  #ifdef CONFIG_ASYNC_TX_ENABLE_CHANNEL_SWITCH
+>  	struct dma_async_tx_descriptor *next;
+>  	struct dma_async_tx_descriptor *parent;
+> 
+> -- 
+> 2.47.3
+> 
 
-It's code moved from elsewhere, so you need to at least also list
-the copyright of the original file alongside the new Arm one.
-Just moving it and dropping that copyright is inconsistent with
-the license.
-
-
->=20
-> >> + * Author: Ahmed Tiba <ahmed.tiba@arm.com>
-> >> + * Based on ACPI APEI GHES driver.
-> >> + *
-> >> + */
-> >> +
-> >> +#ifndef ACPI_APEI_GHES_CPER_H
-> >> +#define ACPI_APEI_GHES_CPER_H
-
+-- 
+மணிவண்ணன் சதாசிவம்
 
