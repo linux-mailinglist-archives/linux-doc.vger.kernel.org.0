@@ -1,262 +1,328 @@
-Return-Path: <linux-doc+bounces-78844-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78846-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cJJxCcBgsWl/uQIAu9opvQ
-	(envelope-from <linux-doc+bounces-78844-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:32:00 +0100
+	id QLBEArhisWnQugIAu9opvQ
+	(envelope-from <linux-doc+bounces-78846-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:40:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76DF1263A33
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:31:59 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF7F1263B29
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 13:40:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D6D3A303DACF
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 12:30:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DA853302C364
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2026 12:40:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61AD219D89E;
-	Wed, 11 Mar 2026 12:30:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0316935A3AF;
+	Wed, 11 Mar 2026 12:40:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LRXkn5nc"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="cNPSpKLj";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="cNPSpKLj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from MRWPR03CU001.outbound.protection.outlook.com (mail-francesouthazon11011040.outbound.protection.outlook.com [40.107.130.40])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 079FB40DFD5
-	for <linux-doc@vger.kernel.org>; Wed, 11 Mar 2026 12:30:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.194
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773232248; cv=none; b=mY0FQxUrVswuh7tPz3KuwKyc2RdiCjPf+MUT6RahbG0LQXtBEQ+rnHFb+HrCk2UcoUfZ8w+IZPItvoOko8BGoDHxYHLIwxr+88HsihP8P4Y+AfZze1aNCIHVMbW/TRrg0ps9zAIN8J7C8IFZz1bAdD5UnayljL2k1bhsxrqU4lk=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773232248; c=relaxed/simple;
-	bh=o5tJ5wblB8GzFTEw15EQokGtFJG2nSUPShyaByRw8wo=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=W4Fm1597Xh10FoRIOb08W+OWOYkt+t2Wmaw5GCw+RIRdoptCOqT4y+fIhRDXxhwkSZe5bf690HNVw2wnAe4OmXRv+4P86VFBokxm3wBqmc0kVM7Ee8CeH/+QxZiaSyhrsB6yHOPcDKGUQvm0mSboChya0ynsW9vYCiEf07AoaqQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LRXkn5nc; arc=none smtp.client-ip=209.85.215.194
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f194.google.com with SMTP id 41be03b00d2f7-c2af7d09533so9086270a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 11 Mar 2026 05:30:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773232246; x=1773837046; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uiqgeYSYZM+IukzBHaoeiiQVQPbxSPd8mL0ZsnGyz7g=;
-        b=LRXkn5nczut9KYjPgY4prpVY3bSLXmCMmeze5bvNH6MFSUo4cihHWuR5jni5ZUrGkx
-         meSygC2MdqkWfZ6EyASlKlZb5ZxUHuF8J44arl6EDe6sXNaIN4J9J/CaWGK1X23pZOIM
-         BaBzuc1ci++hoMAi2PHmK44Id2eayFAgcQy4Z6XhM/2uX0aeDa9kFvHS0rmHGYb4eTvW
-         E4B6PQOmiw8paWCmRkK7izt6akbDMK9U4rUSstB1rVjWB87s9aT+CJjkpEW3R/ydZ+37
-         pCntwvNcTaq5k49c0l3RjIEluGLAUwOq8bYUOzpWwjBzfeySDejD0JlNdFgB7GWUBL+9
-         6YWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773232246; x=1773837046;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=uiqgeYSYZM+IukzBHaoeiiQVQPbxSPd8mL0ZsnGyz7g=;
-        b=Lz+BJnsDTp6wnRJB55zEDsFoTHOnn3gVCnFIl37j6sUV2mVsT0L/kiSLRnt12O/lo6
-         9VAQCixixsPRTmlGiIh/4xTZuEKPRJFRO1FAx+cVYnCbpk+fyYpsYOwrw0vijKEV1W7o
-         rYK74cdihZK6fHTxSwA81LxS3lQ9rf6+2TnNfBpIHpUzgdzA9zJ5qPBJR2Oj+jW2BKTe
-         bS/XbpXb7JckksbU6uRGdP248j85c2hSVuIk4BTowBdJ52ZvVkgJh3G+/nphF3iyUiUp
-         2IaeB/+ALKypG3OP+xxOmEvj+xsgoZGT3G5Fm6HUvMQNR7jkaJbho+qcJjrqIFXtQFR4
-         /btA==
-X-Forwarded-Encrypted: i=1; AJvYcCXbS1qGfHFFoVPVRrMl4ZIVg2VmN1p/WDv7jwFXsCxdz+nx3D86CcqLAaE+C8gbK7Cc2ZeOXfgCwKI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxmO3kKoAwXPd66LEL0WpqzDsvVs8xWlcejfuujbZK3oamDMCWW
-	iSSyHLBrI4g9Q9ZQxEET1QVSfJQ4AX4DTA6MaBtAD8Vm9nv9O70vSDOpcCyJVN+XNAvQ+Yre
-X-Gm-Gg: ATEYQzx5l1VERPliwI7nJIN7ZXsnS92SmSDoNYd9aMr3xcMJg5HEQpHxmdZWimojkCD
-	CJf4WnjyrpLg46NcKuXMFoMjbDqHAf+2cGe9HHvfnvUJMbIdVsTGsM9IiUhMOuplyyeTUODQza0
-	i7vCfqoOEXF3UZx0xGUwxVwaMWb1vbhuBigfgBPREiaUih5PTydDn7HpEENV4WZVPKhQJr1001z
-	XDcKvv3OnpnQtcwnK7DRzFI/Z7RaY15jZsbj982uO/jXGcoq2WRgGWfXDhqfHqaATPWrDV3zaAp
-	q9XvVKFL3wxFrLPO8NjddmQkNmVCINCh2kGm7fkijpG4yicu2fbjSo2+qS2W96g9h1pHuxo1Xm7
-	TmsC9moyj4KYV44LGZVhOb1iN5VdBDik5NcvGAoo65QKkNg8u48nJu0Bc3rhNM3xHJ37Fs5+QK7
-	oF0hDJinaXcBY4kE4VxYIDDY3RNRQJhb4S564VpEOGbOFp0Do5vQ==
-X-Received: by 2002:a17:903:388e:b0:2ae:7f24:2378 with SMTP id d9443c01a7336-2aeae8903a3mr27508055ad.38.1773232246131;
-        Wed, 11 Mar 2026 05:30:46 -0700 (PDT)
-Received: from aruoarch ([2406:da14:b1:2a01:2bb8:19c2:be2c:4043])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2aeae22217dsm23074095ad.4.2026.03.11.05.30.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Mar 2026 05:30:45 -0700 (PDT)
-From: Song Hongyi <szpcq123@gmail.com>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev,
-	corbet@lwn.net
-Cc: dzm91@hust.edu.cn,
-	skhan@linuxfoundation.org,
-	w1ndys@qq.com,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Song Hongyi <szpcq123@gmail.com>
-Subject: [PATCH v2] docs/zh_CN: sync process/2.Process.rst with English version
-Date: Wed, 11 Mar 2026 20:31:03 +0800
-Message-ID: <20260311123107.329769-1-szpcq123@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <9cc4a719-d6ca-4f15-b862-60fb862ba7b2@hust.edu.cn>
-References: <9cc4a719-d6ca-4f15-b862-60fb862ba7b2@hust.edu.cn>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDFA42D94A0;
+	Wed, 11 Mar 2026 12:40:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.130.40
+ARC-Seal:i=3; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773232819; cv=fail; b=D6BApSaYHPkZOFCybNrq1IfS9ibBE9qhMKhSNhvhIMehpKhw6UqxkigrwtAskHuMfFeLz7KumtAnjNDbQqcVX+E2+y0dBKRJZlXwXfuejVMqXW2TeKCr+lSN/T/3BnOaS8Co4t/NVEica9bjz6KbA4RkO8Z877QLky6WLcDfEls=
+ARC-Message-Signature:i=3; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773232819; c=relaxed/simple;
+	bh=jbGRl4PryE4tDt93b9Ia/mxFB4KB2GD+qrD2gjuWvQY=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=pI7fKFbjpShP5D7ittGg2d1CefqVKaiYVkDdC+rL97nVQcKiY+b1ncPTNWzV1Hs7wxvi/TVeI1DB4jsuRKd3JUKGnMnX+T1yob3bGz23GqRnQMqmkXD0UiOMF7vk89NP4Ts0e4yef+srI58S711CzmNCf3u22rId33J3pQpqRkU=
+ARC-Authentication-Results:i=3; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=cNPSpKLj; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=cNPSpKLj; arc=fail smtp.client-ip=40.107.130.40
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=o/jCm6twYoKmENuWrbsre4SvNfUj/NokgrbzJO/Vz4zbVAuCMDZjR+80ieJLkiWxarM0bNj+GSQC2UKsDYMkR47iej4Woh3LCyvMP7FXgjeSVtONRUFoloOY8szr3e0yd7p8pIXygK9DrBYoHVsz2bR0jffK6DFDt+rimMd9ElOzNuu3RNhtyt5+zpRPHGxG4/nvwoVtcSygkT3758Y4OsuKkQUUXVMNz9jkLkbMMCFAny0TOIHeItYFSEUse8b9P/Hr3OSNSLXVL353i9Ap9UQWJXDYAEj6G/kgIna2yLrl5NAwQHzflpJIjTCixIIQPx26BdO6C3awq0eXdu+iyw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2RbuDHtEJH1UAr9Gl8WOZMMDce5+dp+w4DDehgWOVBU=;
+ b=v8i5HlOFu+AblzPda1mo1NPQx1oWGcgny9olaqmqyWOiz6g2WwrsmqbcI8dVfKvlUm8+o9tAaTyKufzrYPo/q6dcydZ959YJ4bQ+8hQJEVV34tG91N36WViImpJGQWNu1YGPty8E6tj3xvhU2CB7AFpgqAVXNKLqIZN53jIQ5KH3iwZU8SETaHhv9B1ZwOC1piLtHh2ueLcQ4NxvfgMboAVOtEv8/xFrPiRZdnPoh+oELWM+Uoi1sRC6zSXoV6pVs0bmJtB2D5KtID3S3SX8Hsji7DBp8uvHQJ/NS0+9bYQ19yDXbLOIvVzBwGyPka+J9gbZmNzSKEBfeI16jRt50A==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=huawei.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2RbuDHtEJH1UAr9Gl8WOZMMDce5+dp+w4DDehgWOVBU=;
+ b=cNPSpKLj/86Id+ruqV8QWrSJsPufxNf2PqNKBk84s1ejXwneJaKhV8YcvS9NNdLgxkGGZTtpW6/Pf23TKLvYNBjoRUqbNl1Pzuw1jZXjLM0t7LYLMxs3JxAKVzxMb1at4Ni1yDpjVgS0AjEQSPQVhbbzFUWDW0au8cEYRrsmiec=
+Received: from DU6P191CA0024.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:540::14)
+ by AS8PR08MB6566.eurprd08.prod.outlook.com (2603:10a6:20b:33a::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Wed, 11 Mar
+ 2026 12:40:10 +0000
+Received: from DB1PEPF00039234.eurprd03.prod.outlook.com
+ (2603:10a6:10:540:cafe::4e) by DU6P191CA0024.outlook.office365.com
+ (2603:10a6:10:540::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.26 via Frontend Transport; Wed,
+ 11 Mar 2026 12:40:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB1PEPF00039234.mail.protection.outlook.com (10.167.8.107) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.16
+ via Frontend Transport; Wed, 11 Mar 2026 12:40:10 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Za/sjSJgd07bhVyf4ZvVaTXpadXbxswRYWkGUTaMPubKPt3hclMcQ9LI4h/vH9M7AvkK0oZ9Zb9la7O9IoixMXQZ6MmkdsUlxe9HyEvw2xSlTyTonIvsE14EdUcOA6c9SIPtbthOLnbuzlOur0yucGwsQFyclsGYPewfV8x9U4z+Tmpox1Fjj7nxZXx84uONibd1daqu5JoonKQIYLVGqyazxLHBrM5wAy+iYaYj/GPFZarQRH+rTQFZxLd1gGsJYkAkQ8J5mKUd7JjIg3XzLX/XilI5cE1if99h/WOfjk7FjkIwkWFyIOd786L51lmGCWaP4lmDu5wenJ5FDlYCmQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2RbuDHtEJH1UAr9Gl8WOZMMDce5+dp+w4DDehgWOVBU=;
+ b=gHhVduWcnDWR3Ec3KhZwSHlW1/u4BqrMZgXx8KLVO7Ilb4XGSahfv4Ox7CXWx10AAsQC8fIDQFm6dAdvR16uUA0UzDERXdYsAqwLEtnP8RPdGBc1kB2N3VOQsYqeB3xOnkFsdRaQ857L5+W0tOqGhJn05bFmLI7rqGMY70s3FnPpJm3tA3qjxIDxh92jy5JvLxiyvhWQ6xHpm+6fUI74JO4xcg0LwEiC5oO4ozZqZJYG3Up5gXAOc6dzqap2CLWRRnT1ZDF2OgwgIuNA6WIU6aaI5sLXns0hgBfnaVmdfYAipAdxTLM/xdCbaNH+12IpMbzagayEu8KHsuBdLmvCkA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2RbuDHtEJH1UAr9Gl8WOZMMDce5+dp+w4DDehgWOVBU=;
+ b=cNPSpKLj/86Id+ruqV8QWrSJsPufxNf2PqNKBk84s1ejXwneJaKhV8YcvS9NNdLgxkGGZTtpW6/Pf23TKLvYNBjoRUqbNl1Pzuw1jZXjLM0t7LYLMxs3JxAKVzxMb1at4Ni1yDpjVgS0AjEQSPQVhbbzFUWDW0au8cEYRrsmiec=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from VI0PR08MB11823.eurprd08.prod.outlook.com (2603:10a6:800:324::5)
+ by PAWPR08MB9639.eurprd08.prod.outlook.com (2603:10a6:102:2e3::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.12; Wed, 11 Mar
+ 2026 12:39:02 +0000
+Received: from VI0PR08MB11823.eurprd08.prod.outlook.com
+ ([fe80::694c:3790:be1a:8ddd]) by VI0PR08MB11823.eurprd08.prod.outlook.com
+ ([fe80::694c:3790:be1a:8ddd%5]) with mapi id 15.20.9700.010; Wed, 11 Mar 2026
+ 12:39:02 +0000
+Message-ID: <b7c95e33-c427-42be-9ea9-99b6556f266e@arm.com>
+Date: Wed, 11 Mar 2026 12:38:59 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/11] ACPI: APEI: GHES: move CPER read helpers
+Content-Language: en-GB
+To: Jonathan Cameron <jonathan.cameron@huawei.com>
+Cc: devicetree@vger.kernel.org, linux-acpi@vger.kernel.org,
+ Dmitry.Lamerov@arm.com, catalin.marinas@arm.com, bp@alien8.de,
+ robh@kernel.org, rafael@kernel.org, will@kernel.org, conor@kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ krzk+dt@kernel.org, Michael.Zhao2@arm.com, tony.luck@intel.com
+References: <20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-0-347fa2d7351b@arm.com>
+ <20260220-topics-ahmtib01-ras_ffh_arm_internal_review-v2-3-347fa2d7351b@arm.com>
+ <20260224153221.00000420@huawei.com>
+From: Ahmed Tiba <ahmed.tiba@arm.com>
+In-Reply-To: <20260224153221.00000420@huawei.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PA7P264CA0294.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:370::18) To VI0PR08MB11823.eurprd08.prod.outlook.com
+ (2603:10a6:800:324::5)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 76DF1263A33
+X-MS-TrafficTypeDiagnostic:
+	VI0PR08MB11823:EE_|PAWPR08MB9639:EE_|DB1PEPF00039234:EE_|AS8PR08MB6566:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5a343f1f-a932-4589-b072-08de7f6b5560
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|1800799024|376014|7416014|366016|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ WMmp8ZjQFuP3WbTrliQfjuYsWezRto1UH1CV3RY1XCxurDqkcYCHTt48WAKuGTT3PxgCThKbjsuse4MFNpORQRR3w544q30ruX18eni2mCBGYCVaJwEwRyvzaMcN2Eu4Gx9PO/sAIgBsLvYcCZa+FOuq2BW2IWC6Ovbq5ddEvrOFWM04zCy97Kwi50+103J57ENmBI34pv80dZ5Y3mik2E55KpvpJ40UoqzqyUINgxCjXIb0OmZcOyVZNZmr6nTHM1NDDJzWX8U5Ns5KrfoQ3G/vKUt667Sj5KZdvGmBdog5bkr3oTzbhHif7GiwdFSkC9huZBUNPYRTQ6skYdqnlDIML6gnta28F2CUbMGKQlc2wXnFbTewCe4G6z6u7RHUKZWQxiMOg9qRkq7aCpF4Zby69xNR/PBDMFu8h/cWPCq+W4zKD6fJHjo1lo/42sGAhmmhHqgD21ljm0Gyf3G1dEvZzfW9Eq/evEh3daaSX1wiXCJHOxl1RpztEgKGO4Vt5ox9Dex6bAq1IGmSarHIgFrU/5UfYAu9gk3Eyc0MN4rCOT9cP2qqYsp2gJsdEPdmgZBRphD1DefwB1e8GKyDDLPxYSZO3j0hp9ja02DWAZ/bpaBCh3CkPy7Gu7DA0ZcravJzPo0KM/fv1VzrWbtWO/5eOn1pTo/zC/XyMHivOeL8ZCHA3ULS2iueMCy3xJVUAGcQOTBgxARWojut7KWfiNFkvsArEvdhIeeZ7mTy1SM=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI0PR08MB11823.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(22082099003)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ n+s2KMXdU0dUk7fbj1AGpB2RWMouFRJCA47L8RFEA9Hsaj0Q9cHDIaCFHIa3AtNIWRI3h4K4KGwTu0BRqnGPOiTauIOCbxdFLOGKCfLEwxNye6wp4sCkbh5KJBiXEvy6Izwdx+32cLUWvxNTw+AR77Un7FBtbS2sMKSmg34zoj1D8i45M7y6+G3AwqBfxKGCaMKMgSPpH6dYEvtClbhJ61lsI0KefACyyI2nKcJLw0FtV7xSbRF20B7YpAAl8E8nOR0MG0mxjGQr3iCykP99S35Xe9xGB01UP5PdOen5D8gcmt2GAp28kxJgSsHMIe2OkKyOIuIBttQJkH9K2pDl5A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB9639
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DB1PEPF00039234.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	6eb1a4a2-3580-4b05-76fc-08de7f6b2cf7
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|14060799003|36860700016|35042699022|7416014|376014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	s4gYjuHI9juKtQCxt0ipnI8PntrCA7iGoo8WwhTEi2rcs2Ty1MOVSqbElTQX9NR/6qOVeldqpueUdir6TyVlomt6gAasCMe+b6L6ivUazrwwCCs0MtWPrSbql/4hpTr0W+2F0d58pZ8zB73wPNh7wWZuOXqiI25pRTiEgU2anJpo/wf0geKIzu4VrXYamlteCXF6FSrDmnLlm4VqUOivBUnMiuqlJPuzxt+rs0HzbUzlCV/lLvVYnKgM2n4RDT6NYa1aHLwaQjEGot71UJzzGpub88SjNgXeyJ27uP7MmKr/yI025jy+mu5tbJPmg4xm2YaOJkMXBMlVqILjXkC5dUjAz8G4RtdaoKTMeIx5NLUFeU2LNA/KfB3TgCfOlQj6qcsOivoqGLJDvIfxt4/uLv/2G406uMrDQN7PPKCl9zOGOcZolgF6lr34FWZFthtqlfTzWBIEPp/0/+5MpFGHykial73AHQg0X82/hQU2cGvw6V2f79z0sYeCIMJPsdTi6ymFw3zFEZ4rdT0m97klo/MrTplUzt80xR5kuKH4XVHdTlOC+x5u0UdGt5VnnT2NbTl/Yid2MhJil827GALq3EpoyqXLudWH2zhgIyFBJEPRnIiawfoABj67tdsyFRzreRJ6UUnZe68FYNC9sOYrdZATSQuC0QkxBnw8Y2H6Kvcxp1kptQ9u4b9kaxVwj9q/htzhCXt9H4e+RXcp96CZVAe/uCvYyfWxsu218cHjYUFABfoLIiNs9bO26y89rpGFIqeCb1iWmQ3VpYV3BbLxtQ==
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(14060799003)(36860700016)(35042699022)(7416014)(376014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	Dlq+89TJZY6wwzOD4WGqNC7lLaDSP+p2KV3ExUL+l+HfOxJfyZzBTbTNU7ZdTsZ0udOugJbIii84jS3cbPk3NJIUtoUGaiWsEdLxuc0wlu3f1AjgaxEyhg3Gfzbg3m5pPTmhfuPNMgZNdX148dufLcKUrZ3a1tYHDCDcBKOmqei7TrtB/CWoOMDMZxBuMgnAkXPzbp0pz8qnSM2jj33x8R1ZR4S6/A6TMjcjnl7nM49aprLuBYa1lPOhOP21Au+sZBTnzU86cwey+llnSiaKayn+GaRybAiGsy9oCxVu0EpBGLR6dJRdY6XBGaJT7QOuaF9fy3Nx11Cgn7qMcoGB3upmEMl3R/onJLNIyWhkeMCjQe6UTq9Amy6jWezQP2e4wxvRVm2WcLZuB7pw70MVcqCuCOkP3LT8m+hbOp5QRiUNGKBxy5x8tzb4RaopovCs
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2026 12:40:10.2560
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a343f1f-a932-4589-b072-08de7f6b5560
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DB1PEPF00039234.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6566
+X-Rspamd-Queue-Id: AF7F1263B29
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[cv is fail on i=3];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[hust.edu.cn,linuxfoundation.org,qq.com,vger.kernel.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-78844-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	TAGGED_FROM(0.00)[bounces-78846-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[szpcq123@gmail.com,linux-doc@vger.kernel.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.994];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,wikipedia.org:url]
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ahmed.tiba@arm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[8]
 X-Rspamd-Action: no action
 
-The Chinese translation of the development process documentation was
-outdated. Sync it with the current English version to ensure consistency.
+On 24/02/2026 15:32, Jonathan Cameron wrote:
+> On Fri, 20 Feb 2026 13:42:21 +0000
+> Ahmed Tiba <ahmed.tiba@arm.com> wrote:
+> 
+>> Relocate the CPER buffer mapping, peek, and clear helpers from ghes.c into
+>> ghes_cper.c so they can be shared with other firmware-first providers.
+>> This commit only shuffles code; behavior stays the same.
+>>
+>> Signed-off-by: Ahmed Tiba <ahmed.tiba@arm.com>
+> Hi Ahmed,
+> 
+> Most of the comments in here are about changing the patch break up.
+> Basic suggest approach is move stuff as it is needed, not in advance of
+> that need.  So when you move the function to the c file, only then add what
+> it needs to the includes / header.
+> 
+> Jonathan
 
-Key changes include:
-- Update versioning examples from 5.x to the 9.x placeholder.
-- Add footnote [1] to explain the non-semantic versioning scheme.
-- Replace the obsolete LTS kernel table with a link to kernel.org.
-- Add a cross-reference for the "interleaved replies" section.
+Thanks Jonathan.
 
-Update the translation through commit 5ce70894f6ca
-("Doc: correct spelling and wording mistakes")
+I’m keeping each patch as a strict mechanical relocation so reviewers 
+can diff‑verify the move. That’s why includes and header prototypes are 
+introduced alongside the moved helpers, not later.
 
-Signed-off-by: Song Hongyi <szpcq123@gmail.com>
----
+>> diff --git a/drivers/acpi/apei/ghes_cper.c b/drivers/acpi/apei/ghes_cper.c
+>> index 63047322a3d9..7e0015e960c1 100644
+>> --- a/drivers/acpi/apei/ghes_cper.c
+>> +++ b/drivers/acpi/apei/ghes_cper.c
+>> @@ -1,7 +1,7 @@
+>>   // SPDX-License-Identifier: GPL-2.0
+>>   /*
+>>    *
+>> - * APEI GHES CPER helper translation unit - staging file for helper moves
+>> + * APEI GHES CPER helper translation unit - code mechanically moved from ghes.c
+> 
+> In the long run, no interest in where it came from. People can
+> look at the git history for that.
+>
 
+I'll drop it.
 
-Hi Dongliang,
+>>    *
+>>    * Copyright (C) 2026 ARM Ltd.
+>>    * Author: Ahmed Tiba <ahmed.tiba@arm.com>
+>> @@ -17,10 +17,176 @@
+>>   #include <linux/slab.h>
+>>   
+>>   #include <acpi/apei.h>
+>> +#include <acpi/ghes_cper.h>
+>>   
+>>   #include <asm/fixmap.h>
+>>   #include <asm/tlbflush.h>
+>>   
+>>   #include "apei-internal.h"
+>>   
+>> -/* Helper bodies will be moved here in follow-up commits. */
+> 
+> If you just do the file creation with this first move, then we don't get churn of
+> comments like this one.
 
-Thanks for the review! I have updated the commit message with the English
-commit hash.
+As above to avoid churny commentary.
 
-Song Hongyi
+>> +/* Read the CPER block, returning its address, and header in estatus. */
+>> +int __ghes_peek_estatus(struct ghes *ghes,
+>> +			       struct acpi_hest_generic_status *estatus,
+>> +			       u64 *buf_paddr, enum fixed_addresses fixmap_idx)
+>> +{
+>> +	struct acpi_hest_generic *g = ghes->generic;
+>> +	int rc;
+>> +
+>> +	rc = apei_read(buf_paddr, &g->error_status_address);
+>> +	if (rc) {
+>> +		*buf_paddr = 0;
+>> +		pr_warn_ratelimited(FW_WARN GHES_PFX
+>> +"Failed to read error status block address for hardware error source: %d.\n",
+> 
+> Unusual indenting.  I'd just fix that whilst you are here. Don't worry about long line.
 
- .../translations/zh_CN/process/2.Process.rst  | 56 +++++++++----------
- 1 file changed, 25 insertions(+), 31 deletions(-)
+I'll fix the odd indentation
 
-diff --git a/Documentation/translations/zh_CN/process/2.Process.rst b/Documentation/translations/zh_CN/process/2.Process.rst
-index 31b0e2c994f6..ca00672c313e 100644
---- a/Documentation/translations/zh_CN/process/2.Process.rst
-+++ b/Documentation/translations/zh_CN/process/2.Process.rst
-@@ -23,21 +23,18 @@
- 总览
- ----
- 
--内核开发人员使用一个松散的基于时间的发布过程，每两到三个月发布一次新的主要
--内核版本。最近的发布历史记录如下：
--
--	======  =================
--	5.0	2019年3月3日
--	5.1	2019年5月5日
--	5.2	2019年7月7日
--	5.3	2019年9月15日
--	5.4	2019年11月24日
--	5.5	2020年1月6日
--	======  =================
--
--每个5.x版本都是一个主要的内核版本，具有新特性、内部API更改等等。一个典型的5.x
--版本包含大约13000个变更集，变更了几十万行代码。因此，5.x是Linux内核开发的前
--沿；内核使用滚动开发模型，不断集成重大变化。
-+内核开发使用一个松散的、基于时间的滚动发布（rolling release）开发模型。
-+一个新的主内核发行版本（作为示例，我们将其称为 9.x） [1]_ 大约每两到三个月
-+发布一次，它带来了新特性、内部 API 的更改等。一个典型的版本包含大约 13,000
-+个变更集（changesets），涉及几十万行代码的修改。最近的发行版本及其日期可以
-+在这里找到
-+`维基百科 <https://en.wikipedia.org/wiki/Linux_kernel_version_history>`_
-+
-+
-+.. [1] 严格来说，Linux 内核并不采用语义化版本号方案，而是将 9.x 这一组数字
-+       作为一个整体来标识主发行版本号。对于每一个版本，x 都会递增，但只有
-+       当 x 被认为足够大时，9 才会递增（例如：Linux 5.0 是紧随 Linux 4.20
-+       之后发布的）。
- 
- 对于每个版本的补丁合并，遵循一个相对简单的规则。在每个开发周期的开头，“合并
- 窗口”被打开。这时，被认为足够稳定（并且被开发社区接受）的代码被合并到主线内
-@@ -48,8 +45,8 @@
- 提前收集、测试和分级的。稍后将详细描述该过程的工作方式。）
- 
- 合并窗口持续大约两周。在这段时间结束时，Linus Torvalds将声明窗口已关闭，并
--释放第一个“rc”内核。例如，对于目标为5.6的内核，在合并窗口结束时发生的释放
--将被称为5.6-rc1。-rc1 版本是一个信号，表示合并新特性的时间已经过去，稳定下一
-+释放第一个“rc”内核。例如，对于目标为9.x的内核，在合并窗口结束时发生的释放
-+将被称为9.x-rc1。-rc1 版本是一个信号，表示合并新特性的时间已经过去，稳定下一
- 个内核的时间已经到来。
- 
- 在接下来的6到10周内，只有修复问题的补丁才应该提交给主线。有时会允许更大的
-@@ -84,11 +81,14 @@
- 开发人员的目标是在稳定发布之前修复所有已知的回归。在现实世界中，这种完美是
- 很难实现的；在这种规模的项目中，变数太多了。需要说明的是，延迟最终版本只会
- 使问题变得更糟；等待下一个合并窗口的更改将变多，导致下次出现更多的回归错误。
--因此，大多数5.x内核都有一些已知的回归错误，不过，希望没有一个是严重的。
-+因此，大多数内核发布时都会带有一部分已知的回归问题，不过希望它们都不是严重
-+的问题。
- 
- 一旦一个稳定的版本发布，它的持续维护工作就被移交给“稳定团队”，目前由
--Greg Kroah-Hartman领导。稳定团队将使用5.x.y编号方案不定期地发布稳定版本的
--更新。要合入更新版本，补丁必须（1）修复一个重要的缺陷，且（2）已经合并到
-+Greg Kroah-Hartman领导。稳定团队将使用9.x.y编号方案不定期地发布稳定版本的
-+更新。
-+
-+要合入更新版本，补丁必须（1）修复一个重要的缺陷，且（2）已经合并到
- 下一个开发版本主线中。内核通常会在其初始版本后的一个以上的开发周期内收到
- 稳定版更新。例如，5.2内核的历史如下（2019年）：
- 
-@@ -105,17 +105,10 @@ Greg Kroah-Hartman领导。稳定团队将使用5.x.y编号方案不定期地发
- 
- 5.2.21是5.2版本的最终稳定更新。
- 
--有些内核被指定为“长期”内核；它们将得到更长时间的支持。在本文中，当前的长期
--内核及其维护者是：
-+有些内核被指定为“长期”内核；它们将得到更长时间的支持。请参考以下链接
-+获取当前长期支持内核版本及其维护者的列表：
- 
--	======  ================================	================
--	3.16	Ben Hutchings				（长期稳定内核）
--	4.4	Greg Kroah-Hartman & Sasha Levin	（长期稳定内核）
--	4.9	Greg Kroah-Hartman & Sasha Levin
--	4.14	Greg Kroah-Hartman & Sasha Levin
--	4.19	Greg Kroah-Hartman & Sasha Levin
--	5.4	Greg Kroah-Hartman & Sasha Levin
--	======  ================================	================
-+  https://www.kernel.org/category/releases.html
- 
- 长期支持内核的选择纯粹是维护人员是否有需求和时间来维护该版本的问题。
- 目前还没有为即将发布的任何特定版本提供长期支持的已知计划。
-@@ -320,7 +313,8 @@ Quilt 是一个补丁管理系统，而不是源代码管理系统。它不会
-   没有完成家庭作业的人感到不耐烦。
- 
- - 避免顶部回复（把你的答案放在你要回复的引文上面的做法）。这会让你的回答更难
--  理解，印象也很差。
-+  理解，印象也很差，详细请查看
-+  :ref:`Documentation/process/submitting-patches.rst <interleaved_replies>`
- 
- - 在正确的邮件列表发问。linux-kernel 可能是通用的讨论场所，但它不是寻找所有
-   子系统开发人员的最佳场所。
--- 
-2.53.0
+>> +				   g->header.source_id);
+>> +		return -EIO;
+> 
+>> diff --git a/include/acpi/ghes_cper.h b/include/acpi/ghes_cper.h
+>> index 2597fbadc4f3..2e3919f0c3e7 100644
+>> --- a/include/acpi/ghes_cper.h
+>> +++ b/include/acpi/ghes_cper.h
+>> @@ -74,21 +74,21 @@ struct ghes_vendor_record_entry {
+>>   	char vendor_record[];
+>>   };
+>>   
+>> -static struct ghes *ghes_new(struct acpi_hest_generic *generic);
+> Huh. Static forward declarations in a header?  That never made sense. Fix it in the
+> earlier patch and remove the statics from the declarations.
+> 
+> Actually no, just bring them into the header only when you need to. So as part
+> of the patch that moves the caller or the function.
+
+I’m keeping the GHES‑CPER interface explicit in one place.
+Moving those declarations later would scatter that interface
+and make the mechanical diffs harder to review.
+
+>> -static void ghes_fini(struct ghes *ghes);
+>> +struct ghes *ghes_new(struct acpi_hest_generic *generic);
+>> +void ghes_fini(struct ghes *ghes);
+>>   
+>> -static int ghes_read_estatus(struct ghes *ghes,
+>> +int ghes_read_estatus(struct ghes *ghes,
+>>   		      struct acpi_hest_generic_status *estatus,
+>>   		      u64 *buf_paddr, enum fixed_addresses fixmap_idx);
+>> -static void ghes_clear_estatus(struct ghes *ghes,
+>> +void ghes_clear_estatus(struct ghes *ghes,
+>>   			struct acpi_hest_generic_status *estatus,
+>>   			u64 buf_paddr, enum fixed_addresses fixmap_idx);
+>> -static int __ghes_peek_estatus(struct ghes *ghes,
+>> +int __ghes_peek_estatus(struct ghes *ghes,
+>>   			struct acpi_hest_generic_status *estatus,
+>>   			u64 *buf_paddr, enum fixed_addresses fixmap_idx);
+>> -static int __ghes_check_estatus(struct ghes *ghes,
+>> +int __ghes_check_estatus(struct ghes *ghes,
+>>   			 struct acpi_hest_generic_status *estatus);
+>> -static int __ghes_read_estatus(struct acpi_hest_generic_status *estatus,
+>> +int __ghes_read_estatus(struct acpi_hest_generic_status *estatus,
+>>   			u64 buf_paddr, enum fixed_addresses fixmap_idx,
+>>   			size_t buf_len);
+>>   
+>>
+> 
 
 
