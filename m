@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-78931-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78929-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GP0fDGtnsmlkMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-78931-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:43 +0100
+	id wEalNWVnsmlkMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-78929-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:37 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 853D926E2CD
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 815B426E2BE
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:37 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E4EB7304C7C0
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3C93C3046054
 	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAB4D3ACF17;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3BA03ACA59;
 	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="exeJ/KkF"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f56AkCuL"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADAE0375F78;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD9AF358389;
 	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773299553; cv=none; b=tkkjv8FCoqBVLWOuqS2RdEMR6iDdeaRxkkDdXpU+5cuLNfL0FeS27if4wBY2Jxzr/5MTMmNTd/a7Mteq6rfyatrqdrmkGsOYayQTn7s89i8GsxvW63HtxfX4Q3US6U4SurSFsHzgl5ZmSx9aNnPAc5wF7rEFsMqGGXtEmrZ3o18=
+	t=1773299553; cv=none; b=amQEU19erHRzwB3qXJoc0z0VVhI3BTFIm64o3/2SBRZyA9kTscvluAeZw+iK/oaN2gsJCEv3CZiMRGU5zgHDbCjLRQ2Mqw+NTNW4CsVmTj1/Si+gfFk84yE92sdt4KCF6GKmA1U5tM5bMb6AHwQgTQQyJJuC3PnwBcZ+g67hxFA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773299553; c=relaxed/simple;
-	bh=GfkGEBCrWYbAWOv2b+GqnMJXIitm+in5/jhJ5VsTDNc=;
+	bh=PBAIltyp/3ki4zWgumnkgvMbL5HEay2TKxHmsD6xLjo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mrrfgaIS5mjbPiqHkxKQC27oVCj232c9XvlAtbWettIOH4CRCIct/5gV5Rv+B6CpyE+fACadELYQbVR9oyVIo7gPXo0Fuzw+TH6mNBjJQ3h98qRMwra+3UsSO/RQXqPIgtIjE5RE6I8+BUcD3Tq+q6KJZVKev8ByXE7VR19lHl8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=exeJ/KkF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50D07C4AF09;
+	 MIME-Version:Content-Type; b=BP9n4s7tXn1igx6FRF8d2RtzS7+F0D6viHmDZtmBP/qET2Mui1FNPj+2MGTFEcGl/zYsMHYA34Y4Gi/ijnbzIpiLGu9f5ZhplWH60KyLJoKZ4k7se7sTP6Fp/0j/GhpQEIbiNqlbucDmzgqS/rUCJdtXqj01UnNb1SRcxXouLBA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f56AkCuL; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55455C2BC87;
 	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773299553;
-	bh=GfkGEBCrWYbAWOv2b+GqnMJXIitm+in5/jhJ5VsTDNc=;
+	bh=PBAIltyp/3ki4zWgumnkgvMbL5HEay2TKxHmsD6xLjo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=exeJ/KkFlke8EuCjetR+4XhTRz1RnUpXnB5etMyQxdguPpfXwY0yfVT1TO6AqIZTP
-	 AagBrDxBzMNUlbuz/6f4yvwx/ChgA6v0B/1PNSIhjBBsnWRE3AwA/hEsBJ04HK2AXC
-	 meI9j8DyyS14K98c4Mjtbtf0UBOKDtxiWwR+viqzVvPevvd59eB2MPWWq1FZQphATg
-	 Q0pBHySrxVV0ArvkBpDqLMHImfu6XUdCX0ZDW/44WHQAYwNr2mIc0kqnMK5YSkHSbC
-	 7NALyOvRhi/VvFCcm58C0ap3izhcwroLvRnaxgtlVvkgpzRfq0tVsyTRVQvZNs3YGc
-	 ONlA1+C9aiLww==
+	b=f56AkCuLttQwji7AenyaHJwygBufbLaJkHjnk3UTnr6cJa2OCYNR424ZrLvFZG661
+	 cG4BZ5F2kLLxwAHPfIYiN0i5l+uiWho1+GVSHwKzT774ZKFUuyCJYpxF2bHbThsf/q
+	 E/IfFN856SABMjR8eGQkQzQaUg7ILvqGA+ZcEyhXwWmoQiRGyguoSnjL8fyxgkJTLR
+	 OdBEz+uY7jF+9mUrYBggGVmusKHBHwmr9ijrbXwWGdAkqTIcwRW8a6z5bCVpAtpkG8
+	 64cPWU0hl4Xx56XLnZvfCI5MUFIVTBEYlQtNk1Dm6q5exKIiM1/dyZaiIN+Kk4JSJB
+	 mmIoh6jRcNZyQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0aDf-000000077gW-26qb;
+	id 1w0aDf-000000077ga-2Dsr;
 	Thu, 12 Mar 2026 08:12:31 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -55,9 +55,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH v2 08/20] unittests: test_private: modify it to use CTokenizer directly
-Date: Thu, 12 Mar 2026 08:12:16 +0100
-Message-ID: <eeb01b2c5e7f6f67a4864f0361a1ba7ad58e3747.1773297828.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 09/20] unittests: test_tokenizer: check if the tokenizer works
+Date: Thu, 12 Mar 2026 08:12:17 +0100
+Message-ID: <6afe36c248f0f9280ce0ed456d878a1f718794a5.1773297828.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773297828.git.mchehab+huawei@kernel.org>
 References: <cover.1773297828.git.mchehab+huawei@kernel.org>
@@ -82,7 +82,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78931-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-78929-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -97,143 +97,167 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 853D926E2CD
+X-Rspamd-Queue-Id: 815B426E2BE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Change the logic to use the tokenizer directly. This allows
-adding more unit tests to check the validty of the tokenizer
-itself.
+Add extra tests to check if the tokenizer is working properly.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <2672257233ff73a9464c09b50924be51e25d4f59.1773074166.git.mchehab+huawei@kernel.org>
 ---
- .../{test_private.py => test_tokenizer.py}    | 76 +++++++++++++------
- 1 file changed, 52 insertions(+), 24 deletions(-)
- rename tools/unittests/{test_private.py => test_tokenizer.py} (85%)
+ tools/lib/python/kdoc/c_lex.py    |   4 +-
+ tools/unittests/test_tokenizer.py | 109 +++++++++++++++++++++++++++++-
+ 2 files changed, 108 insertions(+), 5 deletions(-)
 
-diff --git a/tools/unittests/test_private.py b/tools/unittests/test_tokenizer.py
-similarity index 85%
-rename from tools/unittests/test_private.py
-rename to tools/unittests/test_tokenizer.py
-index eae245ae8a12..da0f2c4c9e21 100755
---- a/tools/unittests/test_private.py
+diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
+index a104c29b63fb..38f70e836eb8 100644
+--- a/tools/lib/python/kdoc/c_lex.py
++++ b/tools/lib/python/kdoc/c_lex.py
+@@ -58,8 +58,8 @@ class CToken():
+ 
+         return CToken.MISMATCH
+ 
+-    def __init__(self, kind, value, pos,
+-                 brace_level, paren_level, bracket_level):
++    def __init__(self, kind, value=None, pos=0,
++                 brace_level=0, paren_level=0, bracket_level=0):
+         self.kind = kind
+         self.value = value
+         self.pos = pos
+diff --git a/tools/unittests/test_tokenizer.py b/tools/unittests/test_tokenizer.py
+index da0f2c4c9e21..efb1d1687811 100755
+--- a/tools/unittests/test_tokenizer.py
 +++ b/tools/unittests/test_tokenizer.py
-@@ -15,20 +15,44 @@ from unittest.mock import MagicMock
+@@ -15,16 +15,118 @@ from unittest.mock import MagicMock
  SRC_DIR = os.path.dirname(os.path.realpath(__file__))
  sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
  
--from kdoc.kdoc_parser import trim_private_members
-+from kdoc.kdoc_re import CTokenizer
+-from kdoc.kdoc_re import CTokenizer
++from kdoc.c_lex import CToken, CTokenizer
  from unittest_helper import run_unittest
  
-+
-+
+-
+-
  #
  # List of tests.
  #
  # The code will dynamically generate one test for each key on this dictionary.
  #
- 
-+def make_private_test(name, data):
++def tokens_to_list(tokens):
++    tuples = []
++
++    for tok in tokens:
++        if tok.kind == CToken.SPACE:
++            continue
++
++        tuples += [(tok.kind, tok.value,
++                    tok.brace_level, tok.paren_level, tok.bracket_level)]
++
++    return tuples
++
++
++def make_tokenizer_test(name, data):
 +    """
 +    Create a test named ``name`` using parameters given by ``data`` dict.
 +    """
 +
 +    def test(self):
 +        """In-lined lambda-like function to run the test"""
-+        tokens = CTokenizer(data["source"])
-+        result = str(tokens)
 +
 +        #
-+        # Avoid whitespace false positives
++        # Check if exceptions are properly handled
 +        #
-+        result = re.sub(r"\s++", " ", result).strip()
-+        expected = re.sub(r"\s++", " ", data["trimmed"]).strip()
++        if "raises" in data:
++            with self.assertRaises(data["raises"]):
++                CTokenizer(data["source"])
++            return
 +
-+        msg = f"failed when parsing this source:\n{data['source']}"
-+        self.assertEqual(result, expected, msg=msg)
++        #
++        # Check if tokenizer is producing expected results
++        #
++        tokens = CTokenizer(data["source"]).tokens
++
++        result = tokens_to_list(tokens)
++        expected = tokens_to_list(data["expected"])
++
++        self.assertEqual(result, expected, msg=f"{name}")
 +
 +    return test
 +
- #: Tests to check if CTokenizer is handling properly public/private comments.
- TESTS_PRIVATE = {
-     #
-     # Simplest case: no private. Ensure that trimming won't affect struct
-     #
-+    "__run__": make_private_test,
-     "no private": {
-         "source": """
-             struct foo {
-@@ -288,41 +312,45 @@ TESTS_PRIVATE = {
-     },
- }
- 
-+#: Dict containing all test groups fror CTokenizer
-+TESTS = {
-+    "TestPublicPrivate": TESTS_PRIVATE,
++#: Tokenizer tests.
++TESTS_TOKENIZER = {
++    "__run__": make_tokenizer_test,
++
++    "basic_tokens": {
++        "source": """
++            int a; // comment
++            float b = 1.23;
++        """,
++        "expected": [
++            CToken(CToken.NAME, "int"),
++            CToken(CToken.NAME, "a"),
++            CToken(CToken.PUNC, ";"),
++            CToken(CToken.COMMENT, "// comment"),
++            CToken(CToken.NAME, "float"),
++            CToken(CToken.NAME, "b"),
++            CToken(CToken.OP, "="),
++            CToken(CToken.NUMBER, "1.23"),
++            CToken(CToken.PUNC, ";"),
++        ],
++    },
++
++    "depth_counters": {
++        "source": """
++            struct X {
++                int arr[10];
++                func(a[0], (b + c));
++            }
++        """,
++        "expected": [
++            CToken(CToken.STRUCT, "struct"),
++            CToken(CToken.NAME, "X"),
++            CToken(CToken.BEGIN, "{", brace_level=1),
++
++            CToken(CToken.NAME, "int", brace_level=1),
++            CToken(CToken.NAME, "arr", brace_level=1),
++            CToken(CToken.BEGIN, "[", brace_level=1, bracket_level=1),
++            CToken(CToken.NUMBER, "10", brace_level=1, bracket_level=1),
++            CToken(CToken.END, "]", brace_level=1),
++            CToken(CToken.PUNC, ";", brace_level=1),
++            CToken(CToken.NAME, "func", brace_level=1),
++            CToken(CToken.BEGIN, "(", brace_level=1, paren_level=1),
++            CToken(CToken.NAME, "a", brace_level=1, paren_level=1),
++            CToken(CToken.BEGIN, "[", brace_level=1, paren_level=1, bracket_level=1),
++            CToken(CToken.NUMBER, "0", brace_level=1, paren_level=1, bracket_level=1),
++            CToken(CToken.END, "]", brace_level=1, paren_level=1),
++            CToken(CToken.PUNC, ",", brace_level=1, paren_level=1),
++            CToken(CToken.BEGIN, "(", brace_level=1, paren_level=2),
++            CToken(CToken.NAME, "b", brace_level=1, paren_level=2),
++            CToken(CToken.OP, "+", brace_level=1, paren_level=2),
++            CToken(CToken.NAME, "c", brace_level=1, paren_level=2),
++            CToken(CToken.END, ")", brace_level=1, paren_level=1),
++            CToken(CToken.END, ")", brace_level=1),
++            CToken(CToken.PUNC, ";", brace_level=1),
++            CToken(CToken.END, "}"),
++        ],
++    },
++
++    "mismatch_error": {
++        "source": "int a$ = 5;",          # $ is illegal
++        "raises": RuntimeError,
++    },
 +}
  
--class TestPublicPrivate(unittest.TestCase):
--    """
--    Main test class. Populated dynamically at runtime.
--    """
-+def setUp(self):
-+    self.maxDiff = None
+ def make_private_test(name, data):
+     """
+@@ -315,6 +417,7 @@ TESTS_PRIVATE = {
+ #: Dict containing all test groups fror CTokenizer
+ TESTS = {
+     "TestPublicPrivate": TESTS_PRIVATE,
++    "TestTokenizer": TESTS_TOKENIZER,
+ }
  
--    def setUp(self):
--        self.maxDiff = None
-+def build_test_class(group_name, table):
-+    """
-+    Dynamically creates a class instance using type() as a generator
-+    for a new class derivated from unittest.TestCase.
- 
--    def add_test(cls, name, source, trimmed):
--        """
--        Dynamically add a test to the class
--        """
--        def test(cls):
--            result = trim_private_members(source)
-+    We're opting to do it inside a function to avoid the risk of
-+    changing the globals() dictionary.
-+    """
- 
--            result = re.sub(r"\s++", " ", result).strip()
--            expected = re.sub(r"\s++", " ", trimmed).strip()
-+    class_dict = {
-+        "setUp": setUp
-+    }
- 
--            msg = f"failed when parsing this source:\n" + source
-+    run = table["__run__"]
- 
--            cls.assertEqual(result, expected, msg=msg)
-+    for test_name, data in table.items():
-+        if test_name == "__run__":
-+            continue
- 
--        test.__name__ = f'test {name}'
-+        class_dict[f"test_{test_name}"] = run(test_name, data)
- 
--        setattr(TestPublicPrivate, test.__name__, test)
-+    cls = type(group_name, (unittest.TestCase,), class_dict)
- 
-+    return cls.__name__, cls
- 
- #
--# Populate TestPublicPrivate class
-+# Create classes and add them to the global dictionary
- #
--test_class = TestPublicPrivate()
--for name, test in TESTS_PRIVATE.items():
--    test_class.add_test(name, test["source"], test["trimmed"])
--
-+for group, table in TESTS.items():
-+    t = build_test_class(group, table)
-+    globals()[t[0]] = t[1]
- 
- #
- # main
+ def setUp(self):
 -- 
 2.53.0
 
