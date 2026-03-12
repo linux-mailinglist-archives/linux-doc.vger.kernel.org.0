@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-79018-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79019-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WNEKHPLTsmlDQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79018-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:46 +0100
+	id mBuyOmXUsmlDQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79019-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:57:41 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33839273B8B
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:46 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 98B8E273C98
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:57:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B1419303EB9F
+	by sea.lore.kernel.org (Postfix) with ESMTP id ED45231AF3D1
 	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:55:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0CF593C73CF;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B8073C73E3;
 	Thu, 12 Mar 2026 14:55:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EJ4YVPiQ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qe71MJgV"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EF143C65FF;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C36BA3C6A39;
 	Thu, 12 Mar 2026 14:55:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773327300; cv=none; b=ueQqe54dQbE3+pbrQdMJvb2ZiSHQLY0hqyfNYkeohbvgvg0Aw0uGzb38H67eE4Wmyc57toSRr7P0xBBx4Iyec0z/6YcrMOdztaIUo4qT2DSQfP8crrui5Tdxe+4pPJDvO/l0bCZ/+ZF61udOhf3001vk6A/68Ca78z3RTjDX6N8=
+	t=1773327300; cv=none; b=cYhkbJASn++jV9Rj2ZfZdBDfL/SZhNPNYf9wLydrXvWxhYZtF250M9+wSHZ4CK5NnnxrAKwn4DhWGc2Ry47rvqFqF0Zcjy4OAE8V8/FcI5V4xQHpMIDX5733Z8spCYB4X3V++vfs+TOhbmLfbzhnM75Ic8zSr8j4H53hQe3d8DQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773327300; c=relaxed/simple;
-	bh=+cEqHBF3A2eDI0UFdrAwJkJULXKI0XvqLjdcjyyS0pU=;
+	bh=FKx+LuqHphjlRc7PLbBh2Hde6kXDY4N4TxpuHIl+h8I=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Ue9mnugkBJ9YN30fLdQtX95bjDDOG7iaRY3l+9+U+fnAisXpDCDeUUTW1m3JX3GMtfwgqkx7yu+N3krmXy+YGmpqXb3njyW7P3sdNEGMAVxihAGDA6nCrK01gjpRYd56xd24OK1LXqaQLqRMypZz5dwPp65jeTQnZWa6biITeKg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EJ4YVPiQ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C432C2BC86;
+	 MIME-Version:Content-Type; b=cU/+eu6Vcmi4rIQk9c4ACDvckJAUsYg+avkF7Xw1Yb+y9EpmEtAKdiVuZxz460lGefx+9xLw2tt6DmIKbRmeMDUIQW7J7NVDubgaF1+HbWC0ovGGV/+VVT3r3IJr5diKqNimMKiO16vBelWsdZmLzrGMJrFQs929cYCGjcKVkCE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qe71MJgV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73A02C19424;
 	Thu, 12 Mar 2026 14:55:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773327300;
-	bh=+cEqHBF3A2eDI0UFdrAwJkJULXKI0XvqLjdcjyyS0pU=;
+	bh=FKx+LuqHphjlRc7PLbBh2Hde6kXDY4N4TxpuHIl+h8I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=EJ4YVPiQNar9+ABqGlMQb05ChiwkCWY0fc+TVBe1EGXv/DaloVeniOLSPOmZBjmed
-	 ggt6v7bOh+6iHLY5YfD0c1NLQRf4gir1rZmSrs/PGFWs3K/h65OPwBGzwRpUoRM4um
-	 jj5wY8YmUcajPAXpjFFyCv5cLIS6NHLP8l1z4FRUbWjRLURx3f8D37z0eLXHE3dwzT
-	 WWZUerkXKBr8CIkkOuRnumrUQcIXEZsSMI4A1/7yCmo1cqCZYx/jzp8aifvcUlxXA0
-	 w0v8AtnKO57s7vx3E1hW/8K/04J8ho81leh0jETHM09YIwEzQGrfKAOVw3pn5ur/hV
-	 IR79qg9/wujIA==
+	b=Qe71MJgVQKU2PbZw0gUvRVIXC56p2sldelaWf1bVQN3FHOzUGklqbQDPeYRR9XrKL
+	 h07sZsn4bM4zA4x8WXBocxEH+ORFcb7f2H4DT3KRTurlLxBxafHKDTdB7FYARbrXqQ
+	 +zU69teR6S9nPbWuh3eM5L1wI22zElJkyJUkS34iewpssgBzL6EXpyEGRVV1hZaTEO
+	 P8tL/gF81N61pTG4Qd/DIFZaMWyqQkiPqrb54wbzBxRnYo2m4SnfFVOHYdQ9FTVvQi
+	 Ota96PGyZ8M/ieny8lo/uI093O614PV465kJNJg5kfA7Vt7RMM9jkVxVPbZpaVqIMA
+	 NSGSNDhEmqXpQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0hRC-00000008y3t-1Gvw;
+	id 1w0hRC-00000008y5B-26JQ;
 	Thu, 12 Mar 2026 15:54:58 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 15/28] docs: kdoc: replace NestedMatch with CMatch
-Date: Thu, 12 Mar 2026 15:54:35 +0100
-Message-ID: <6b21b7653ceaa4d20d62c651fa205cbe94401df1.1773326442.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 16/28] docs: kdoc_re: get rid of NestedMatch class
+Date: Thu, 12 Mar 2026 15:54:36 +0100
+Message-ID: <f1618cace1b0c67245d110e7eb6345a6259eebf9.1773326442.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773326442.git.mchehab+huawei@kernel.org>
 References: <cover.1773326442.git.mchehab+huawei@kernel.org>
@@ -76,7 +76,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -84,7 +84,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79018-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-79019-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -92,106 +92,234 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 33839273B8B
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stackoverflow.com:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 98B8E273C98
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Our previous approach to solve nested structs were to use
-NestedMatch. It works well, but adding support to parse delimiters
-is very complex.
-
-Instead, use CMatch, which uses a C tokenizer, making the code more
-reliable and simpler.
+Now that everything was converted to CMatch, we can get rid of
+the previous NestedMatch implementation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_parser.py  |  2 +-
- tools/lib/python/kdoc/xforms_lists.py | 31 ++++++++++++++-------------
- 2 files changed, 17 insertions(+), 16 deletions(-)
+ tools/lib/python/kdoc/kdoc_re.py | 202 -------------------------------
+ 1 file changed, 202 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index e804e61b09c0..0da95b090a34 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -13,7 +13,7 @@ import sys
- import re
- from pprint import pformat
+diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
+index ba601a4f5035..6f3ae28859ea 100644
+--- a/tools/lib/python/kdoc/kdoc_re.py
++++ b/tools/lib/python/kdoc/kdoc_re.py
+@@ -140,205 +140,3 @@ class KernRe:
+         """
  
--from kdoc.kdoc_re import NestedMatch, KernRe
-+from kdoc.kdoc_re import KernRe
- from kdoc.c_lex import CTokenizer
- from kdoc.kdoc_item import KdocItem
- 
-diff --git a/tools/lib/python/kdoc/xforms_lists.py b/tools/lib/python/kdoc/xforms_lists.py
-index c07cbe1e6349..7fa7f52cec7b 100644
---- a/tools/lib/python/kdoc/xforms_lists.py
-+++ b/tools/lib/python/kdoc/xforms_lists.py
-@@ -4,7 +4,8 @@
- 
- import re
- 
--from kdoc.kdoc_re import KernRe, NestedMatch
-+from kdoc.kdoc_re import KernRe
-+from kdoc.c_lex import CMatch
- 
- struct_args_pattern = r'([^,)]+)'
- 
-@@ -60,7 +61,7 @@ class CTransforms:
-         #
-         # As it doesn't properly match the end parenthesis on some cases.
-         #
--        # So, a better solution was crafted: there's now a NestedMatch
-+        # So, a better solution was crafted: there's now a CMatch
-         # class that ensures that delimiters after a search are properly
-         # matched. So, the implementation to drop STRUCT_GROUP() will be
-         # handled in separate.
-@@ -72,9 +73,9 @@ class CTransforms:
-         #
-         # Replace macros
-         #
--        # TODO: use NestedMatch for FOO($1, $2, ...) matches
-+        # TODO: use CMatch for FOO($1, $2, ...) matches
-         #
--        # it is better to also move those to the NestedMatch logic,
-+        # it is better to also move those to the CMatch logic,
-         # to ensure that parentheses will be properly matched.
-         #
-         (KernRe(r'__ETHTOOL_DECLARE_LINK_MODE_MASK\s*\(([^\)]+)\)', re.S),
-@@ -95,17 +96,17 @@ class CTransforms:
-         (KernRe(r'DEFINE_DMA_UNMAP_LEN\s*\(' + struct_args_pattern + r'\)', re.S), r'__u32 \1'),
-         (KernRe(r'VIRTIO_DECLARE_FEATURES\(([\w_]+)\)'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
- 
--        (NestedMatch(r"__cond_acquires\s*\("), ""),
--        (NestedMatch(r"__cond_releases\s*\("), ""),
--        (NestedMatch(r"__acquires\s*\("), ""),
--        (NestedMatch(r"__releases\s*\("), ""),
--        (NestedMatch(r"__must_hold\s*\("), ""),
--        (NestedMatch(r"__must_not_hold\s*\("), ""),
--        (NestedMatch(r"__must_hold_shared\s*\("), ""),
--        (NestedMatch(r"__cond_acquires_shared\s*\("), ""),
--        (NestedMatch(r"__acquires_shared\s*\("), ""),
--        (NestedMatch(r"__releases_shared\s*\("), ""),
--        (NestedMatch(r'\bSTRUCT_GROUP\('), r'\0'),
-+        (CMatch(r"__cond_acquires"), ""),
-+        (CMatch(r"__cond_releases"), ""),
-+        (CMatch(r"__acquires"), ""),
-+        (CMatch(r"__releases"), ""),
-+        (CMatch(r"__must_hold"), ""),
-+        (CMatch(r"__must_not_hold"), ""),
-+        (CMatch(r"__must_hold_shared"), ""),
-+        (CMatch(r"__cond_acquires_shared"), ""),
-+        (CMatch(r"__acquires_shared"), ""),
-+        (CMatch(r"__releases_shared"), ""),
-+        (CMatch(r"STRUCT_GROUP"), r'\0'),
-     ]
- 
-     #: Transforms for function prototypes.
+         return self.last_match.groups()
+-
+-
+-#: Nested delimited pairs (brackets and parenthesis)
+-DELIMITER_PAIRS = {
+-    '{': '}',
+-    '(': ')',
+-    '[': ']',
+-}
+-
+-#: compiled delimiters
+-RE_DELIM = KernRe(r'[\{\}\[\]\(\)]')
+-
+-
+-class NestedMatch:
+-    """
+-    Finding nested delimiters is hard with regular expressions. It is
+-    even harder on Python with its normal re module, as there are several
+-    advanced regular expressions that are missing.
+-
+-    This is the case of this pattern::
+-
+-            '\\bSTRUCT_GROUP(\\(((?:(?>[^)(]+)|(?1))*)\\))[^;]*;'
+-
+-    which is used to properly match open/close parentheses of the
+-    string search STRUCT_GROUP(),
+-
+-    Add a class that counts pairs of delimiters, using it to match and
+-    replace nested expressions.
+-
+-    The original approach was suggested by:
+-
+-        https://stackoverflow.com/questions/5454322/python-how-to-match-nested-parentheses-with-regex
+-
+-    Although I re-implemented it to make it more generic and match 3 types
+-    of delimiters. The logic checks if delimiters are paired. If not, it
+-    will ignore the search string.
+-    """
+-
+-    # TODO: make NestedMatch handle multiple match groups
+-    #
+-    # Right now, regular expressions to match it are defined only up to
+-    #       the start delimiter, e.g.:
+-    #
+-    #       \bSTRUCT_GROUP\(
+-    #
+-    # is similar to: STRUCT_GROUP\((.*)\)
+-    # except that the content inside the match group is delimiter-aligned.
+-    #
+-    # The content inside parentheses is converted into a single replace
+-    # group (e.g. r`\0').
+-    #
+-    # It would be nice to change such definition to support multiple
+-    # match groups, allowing a regex equivalent to:
+-    #
+-    #   FOO\((.*), (.*), (.*)\)
+-    #
+-    # it is probably easier to define it not as a regular expression, but
+-    # with some lexical definition like:
+-    #
+-    #   FOO(arg1, arg2, arg3)
+-
+-    def __init__(self, regex):
+-        self.regex = KernRe(regex)
+-
+-    def _search(self, line):
+-        """
+-        Finds paired blocks for a regex that ends with a delimiter.
+-
+-        The suggestion of using finditer to match pairs came from:
+-        https://stackoverflow.com/questions/5454322/python-how-to-match-nested-parentheses-with-regex
+-        but I ended using a different implementation to align all three types
+-        of delimiters and seek for an initial regular expression.
+-
+-        The algorithm seeks for open/close paired delimiters and places them
+-        into a stack, yielding a start/stop position of each match when the
+-        stack is zeroed.
+-
+-        The algorithm should work fine for properly paired lines, but will
+-        silently ignore end delimiters that precede a start delimiter.
+-        This should be OK for kernel-doc parser, as unaligned delimiters
+-        would cause compilation errors. So, we don't need to raise exceptions
+-        to cover such issues.
+-        """
+-
+-        stack = []
+-
+-        for match_re in self.regex.finditer(line):
+-            start = match_re.start()
+-            offset = match_re.end()
+-            string_char = None
+-            escape = False
+-
+-            d = line[offset - 1]
+-            if d not in DELIMITER_PAIRS:
+-                continue
+-
+-            end = DELIMITER_PAIRS[d]
+-            stack.append(end)
+-
+-            for match in RE_DELIM.finditer(line[offset:]):
+-                pos = match.start() + offset
+-
+-                d = line[pos]
+-
+-                if escape:
+-                    escape = False
+-                    continue
+-
+-                if string_char:
+-                    if d == '\\':
+-                        escape = True
+-                    elif d == string_char:
+-                        string_char = None
+-
+-                    continue
+-
+-                if d in ('"', "'"):
+-                    string_char = d
+-                    continue
+-
+-                if d in DELIMITER_PAIRS:
+-                    end = DELIMITER_PAIRS[d]
+-
+-                    stack.append(end)
+-                    continue
+-
+-                # Does the end delimiter match what is expected?
+-                if stack and d == stack[-1]:
+-                    stack.pop()
+-
+-                    if not stack:
+-                        yield start, offset, pos + 1
+-                        break
+-
+-    def search(self, line):
+-        """
+-        This is similar to re.search:
+-
+-        It matches a regex that it is followed by a delimiter,
+-        returning occurrences only if all delimiters are paired.
+-        """
+-
+-        for t in self._search(line):
+-
+-            yield line[t[0]:t[2]]
+-
+-    def sub(self, sub, line, count=0):
+-        """
+-        This is similar to re.sub:
+-
+-        It matches a regex that it is followed by a delimiter,
+-        replacing occurrences only if all delimiters are paired.
+-
+-        if the sub argument contains::
+-
+-            r'\0'
+-
+-        it will work just like re: it places there the matched paired data
+-        with the delimiter stripped.
+-
+-        If count is different than zero, it will replace at most count
+-        items.
+-        """
+-        out = ""
+-
+-        cur_pos = 0
+-        n = 0
+-
+-        for start, end, pos in self._search(line):
+-            out += line[cur_pos:start]
+-
+-            # Value, ignoring start/end delimiters
+-            value = line[end:pos - 1]
+-
+-            # replaces \0 at the sub string, if \0 is used there
+-            new_sub = sub
+-            new_sub = new_sub.replace(r'\0', value)
+-
+-            out += new_sub
+-
+-            # Drop end ';' if any
+-            if pos < len(line) and line[pos] == ';':
+-                pos += 1
+-
+-            cur_pos = pos
+-            n += 1
+-
+-            if count and count >= n:
+-                break
+-
+-        # Append the remaining string
+-        l = len(line)
+-        out += line[cur_pos:l]
+-
+-        return out
+-
+-    def __repr__(self):
+-        """
+-        Returns a displayable version of the class init.
+-        """
+-
+-        return f'NestedMatch("{self.regex.regex.pattern}")'
 -- 
 2.52.0
 
