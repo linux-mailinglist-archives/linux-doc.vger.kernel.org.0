@@ -1,142 +1,124 @@
-Return-Path: <linux-doc+bounces-79131-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79133-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aMHhEqIus2nYSwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79131-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 22:22:42 +0100
+	id 0OKKFyEvs2nYSwAAu9opvQ
+	(envelope-from <linux-doc+bounces-79133-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 22:24:49 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 964CA279F39
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 22:22:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B568F279F90
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 22:24:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0AEBD3047E44
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 21:22:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 949DC303DAD9
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 21:23:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED9353C13EA;
-	Thu, 12 Mar 2026 21:22:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2CC083CCFDE;
+	Thu, 12 Mar 2026 21:23:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="h7EhDaTl"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="EYhKsPwq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5AF140DFAB;
-	Thu, 12 Mar 2026 21:22:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E224F3C5DB3;
+	Thu, 12 Mar 2026 21:23:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773350555; cv=none; b=iN1UueB+ot6Yqd/4oY8kZaEgLU6I3C6wfBlS9EEbKfjB7ug4rSpkuRYPRX7dHUuGEFb4o2uP219+hYvXMNmbAC95SN5bhOekyKihEKGzgHin3xPILMfu1UN7IKew7l+UsUMEzzCbKve9yaj/yMFVQ/ICUNn+sqqi7aKFQ8Cv5OQ=
+	t=1773350600; cv=none; b=J1TKLbEnR7f2+pzyHgqsTUcNPc+V9lCZ4ka5B54XXPVZZm4GXsy1Vf5WQCe2dQeNwpYQamzdvZHOHyAbUEb7AwXZ6bWy8z9vR7c9nibksCJ9id5/TIeeRIydKCVqm1AvW9R7NL1ZRlcGE/+l62KkyFt8L0A74GIEZfWLTQj1S7A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773350555; c=relaxed/simple;
-	bh=/zvtEPkxlEgdmnFalEG1U3RoR4ZCdTxr1BmmuBoEV4k=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ch00F50x8RTfZ35KvjNuN/m9e2MGt6/iNbq24fp7JLyTYHDcL1hehsQmtRgO1K9vYFVuyB/WyYBSJkeGee4x0Ae4P4bm0CM9gTWfTLVAC86cktUxLeWh3BZPwjbR6+yaK9IMi3gl7f7t6fBFE8doqod3y0rU+lP5xggGeS9O91c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=h7EhDaTl; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=VaKdAPIhRe7hUwa3N1bm3F+VQZ/SJ2cN2wS/xw5qz0k=; b=h7EhDaTljoHRTEjOZc23S/5KX1
-	67fuWmr68q4OpVVEWejRDeGdUwEubyfUX3WGmb6LNbRFZ8FNgnMT52AbcszdNLZk5dPNinuLVIkZd
-	ls00q1AqcLhKFTrjeXMUS06rIFeVT6Ow3mMSyQ9nwNcvEzwyeGh+T1an87tZz0pfjisySSMsFsQAW
-	Bw7VVIPwGb9xyP16iOBQSyocTX8Ps57n+aTQQuJQhcql65gMeeZfDIQ50d1++RF3xeX2UObuDighS
-	Uojif8vfPU8i28PkCfsvr+/3xilstFm+t7lqo7HoDp6Dda+gnNuWJ66hBE27RvQ777VpRda0Jd/UN
-	NOsTHncg==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1w0nUE-0000000FRw7-1uEG;
-	Thu, 12 Mar 2026 21:22:30 +0000
-Message-ID: <b60ce38c-e4c8-4fd3-b1cd-6b1b5cd04cfc@infradead.org>
-Date: Thu, 12 Mar 2026 14:22:29 -0700
+	s=arc-20240116; t=1773350600; c=relaxed/simple;
+	bh=HZSrZjttw5gIUDbdiKoMciwBk/FMfdKMYI3liALwtx4=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=hmD1xpX7+TF7pjPHVouCUZ3hMrbiCpFqZu+OK2n789aHVc0HsVocP+cV1XBCAHDp5IB3I6boqru9CdsdkHaEmRqdxFvvcoBcr456RuRros8qv9G6tcxGKi7LwnNVJbdxladA39wWmnyD/u0NHts5MNZnNl2Y8X2uAe5sR2CAErk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=EYhKsPwq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 740EDC4CEF7;
+	Thu, 12 Mar 2026 21:23:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+	s=korg; t=1773350599;
+	bh=HZSrZjttw5gIUDbdiKoMciwBk/FMfdKMYI3liALwtx4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=EYhKsPwqoBLREVvoZGgMgVZ6fu+bk+U2fKxToofPR2Up6V9uTgSYZfuyjhIb7C3ZE
+	 7oPxkujHeeUdd441hNsgqAm8c7M0uwByLtnOWXAMkXuUFJ05Rb/GBA1Y8B9jmAfc8h
+	 IikXAtFu3AD5I04crV7xx4fJQZ2Bm8TZEbEULr8U=
+Date: Thu, 12 Mar 2026 14:23:14 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: "Lorenzo Stoakes (Oracle)" <ljs@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Clemens Ladisch <clemens@ladisch.de>,
+ Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>, "K . Y . Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, Alexander
+ Shishkin <alexander.shishkin@linux.intel.com>, Maxime Coquelin
+ <mcoquelin.stm32@gmail.com>, Alexandre Torgue
+ <alexandre.torgue@foss.st.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Bodo Stroesser <bostroesser@gmail.com>, "Martin K . Petersen"
+ <martin.petersen@oracle.com>, David Howells <dhowells@redhat.com>, Marc
+ Dionne <marc.dionne@auristor.com>, Alexander Viro
+ <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara
+ <jack@suse.cz>, David Hildenbrand <david@kernel.org>, "Liam R . Howlett"
+ <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@kernel.org>, Mike
+ Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal
+ Hocko <mhocko@suse.com>, Jann Horn <jannh@google.com>, Pedro Falcato
+ <pfalcato@suse.de>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-hyperv@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-mtd@lists.infradead.org,
+ linux-staging@lists.linux.dev, linux-scsi@vger.kernel.org,
+ target-devel@vger.kernel.org, linux-afs@lists.infradead.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, Ryan Roberts
+ <ryan.roberts@arm.com>
+Subject: Re: [PATCH 00/15] mm: expand mmap_prepare functionality and usage
+Message-Id: <20260312142314.0f7fc516c0ebaffa6ec9fa7c@linux-foundation.org>
+In-Reply-To: <cover.1773346620.git.ljs@kernel.org>
+References: <cover.1773346620.git.ljs@kernel.org>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 1/5] docs: driver-api: gpio: rpmsg gpio driver over
- rpmsg bus
-To: Shenwei Wang <shenwei.wang@nxp.com>, Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Mathieu Poirier <mathieu.poirier@linaro.org>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>, arnaud.pouliquen@foss.st.com
-Cc: Shuah Khan <skhan@linuxfoundation.org>, linux-gpio@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org,
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-imx@nxp.com
-References: <20260312192957.1978329-1-shenwei.wang@nxp.com>
- <20260312192957.1978329-2-shenwei.wang@nxp.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260312192957.1978329-2-shenwei.wang@nxp.com>
-Content-Type: text/plain; charset=UTF-8
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	MV_CASE(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,pengutronix.de,gmail.com,nxp.com,lists.linux.dev,lists.infradead.org];
+	TAGGED_FROM(0.00)[bounces-79133-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[linux-foundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-79131-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lwn.net,ladisch.de,arndb.de,linuxfoundation.org,microsoft.com,kernel.org,linux.intel.com,gmail.com,foss.st.com,bootlin.com,nod.at,ti.com,oracle.com,redhat.com,auristor.com,zeniv.linux.org.uk,suse.cz,google.com,suse.com,suse.de,vger.kernel.org,st-md-mailman.stormreply.com,lists.infradead.org,lists.linux.dev,kvack.org,arm.com];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_TWELVE(0.00)[44];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 964CA279F39
+X-Rspamd-Queue-Id: B568F279F90
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On Thu, 12 Mar 2026 20:27:15 +0000 "Lorenzo Stoakes (Oracle)" <ljs@kernel.org> wrote:
 
+> This series expands the mmap_prepare functionality, which is intended to
+> replace the deprecated f_op->mmap hook which has been the source of bugs
+> and security issues for some time.
 
-On 3/12/26 12:29 PM, Shenwei Wang wrote:
-> diff --git a/Documentation/driver-api/gpio/gpio-rpmsg.rst b/Documentation/driver-api/gpio/gpio-rpmsg.rst
-> new file mode 100644
-> index 000000000000..b2daa387143d
-> --- /dev/null
-> +++ b/Documentation/driver-api/gpio/gpio-rpmsg.rst
-> @@ -0,0 +1,266 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +GPIO RPMSG (Remote Processor Messaging) Protocol
-> +===================
-
-'make htmldocs' build warning:
-
-Documentation/driver-api/gpio/gpio-rpmsg.rst:4: WARNING: Title underline too short.
-
-GPIO RPMSG (Remote Processor Messaging) Protocol
-=================== [docutils]
-
-The "underline" must be at least as long as the heading text line.
-
-> +
-> +The GPIO RPMSG transport protocol is used for communication and interaction
-> +with GPIO controllers located on remote cores on the RPMSG bus.
-
--- 
-~Randy
-
+Thanks, I've added this to mm.git's mm-new branch.
 
