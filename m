@@ -1,301 +1,205 @@
-Return-Path: <linux-doc+bounces-78944-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78950-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OKVqErBnsmlkMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-78944-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:52 +0100
+	id aOBoDR9qsmnSMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-78950-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:24:15 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8F8626E34D
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC60226E50E
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:24:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 62834314E98F
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4AFAD3070B19
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:23:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6DACA3AF67D;
-	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDEA33AE1A0;
+	Thu, 12 Mar 2026 07:23:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jlhxQubG"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="rBBmv+Lp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from canpmsgout08.his.huawei.com (canpmsgout08.his.huawei.com [113.46.200.223])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F3A43AD533;
-	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E5B3331A7B;
+	Thu, 12 Mar 2026 07:23:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.223
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773299554; cv=none; b=LvRIXTteIgiayG5nngQ49kC/Z8CkCHKH5CtylpDGCw6zhWrXL+e1nUsU1cpYwimRjdfzVFu8rv1Hz24ZjAouGd58Bsg6EbYCz16EX6MFYfPYmWwdRbjXHRFiLSiLFsVyfKsu+v1WH+Cy43Cw6nn+QyJcX/SEhc9wvg/6MARfYfs=
+	t=1773300215; cv=none; b=oKrmIHicVBRQcn/5qK0wg8IujVIAyZJBiJbfxbaFuHnqJ9l8K6BEvbDAxzCcu6FZq9J3JJstpqoOyJgwN8yFAhDjMWKItmNXDVbPJ5O9djXWC/1Smhi3EINPL3cPsuS0SF9UUjjBGzJhrBzHMQG6Kk+2PAuX6xmn05dv8h9RBCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773299554; c=relaxed/simple;
-	bh=VgpdCURNXribzlBJhLz5siGjBHNFlZu1TMJYSSZaQ28=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=WgCZnztRVs1iFty+wcf8vvf6uNCNfmFhNZiZvGdn9FpHAW7IGfnp8gah+SWi4iPlIiuFxE0PTQBJ83SRpjnZM1guFwEDsoLNx8LKykzBDwHF0KxoC1fMGkzyJk6/z6o2B/1+FP3ijYRywkNiKniZDc+yTG5UY1IT0bR2uOVoKQU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jlhxQubG; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 964E3C2BD05;
-	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773299553;
-	bh=VgpdCURNXribzlBJhLz5siGjBHNFlZu1TMJYSSZaQ28=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jlhxQubGEyCAqY4x/wuIED1hepP7i9MBpBPwqvemO6sYA3kjaULCAiYmlSbb3dYHl
-	 7NHuHKwhRy17nvtVnMqijtrgNErG5vgs7u84iTuVq8zVToGl2pD8UGAo9cprSQQet4
-	 7PUoqs3RtBp392CsSc7RCcIbeM4NZCCK2en95r7L2Klw16gkxMxkU50ZUKSvRwi8ZW
-	 arDx6GjhIK8HACzJLPAtQynr66STkrD/E/S/eKaIezMfcyb7H0aB7UPZr9JLgLp0Pi
-	 i/8bVLmHP2tsZPchHzfvSEODq7XBo82NUkv8jrLef1dgKWdTzqsIOw6Z+Svm7oZjlO
-	 II+jcnpgUKQrw==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0aDf-000000077hd-3V1B;
-	Thu, 12 Mar 2026 08:12:31 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Kees Cook <kees@kernel.org>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-hardening@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 20/20] docs: xforms_lists: use CMatch for all identifiers
-Date: Thu, 12 Mar 2026 08:12:28 +0100
-Message-ID: <716c6dfa1d5d50c92ca14e9ecbd1ed9ebd07f052.1773297828.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1773297828.git.mchehab+huawei@kernel.org>
-References: <cover.1773297828.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1773300215; c=relaxed/simple;
+	bh=c6WYDxliQ6j+v2i5MKLgDNk5CQ3m0RtYMYEdp20cW8I=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=h2Lz6JsHjKwW1RcdxHWmX/lJFKFVlIdGNM6pr7qU0ts0r0XBS0+JxhpGRyLHLwZDaYpf56Aqh1TR1fGiv3Ljh0wdyll5NPYukVKHTZARJSDtxSjkePhZd67uMHQS6aEhsM91hyNlemqiABg8Pp2JGv9yRKM4+bzavTMZtDq7IeM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=rBBmv+Lp; arc=none smtp.client-ip=113.46.200.223
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=JWR3I9L7KX8a3aClE88ycMtETglowguHrLZMRqWv8Io=;
+	b=rBBmv+LpmD6banh43JS0edaS84dH116/qBok6pLAmwhWmT+MsH/WPIcqF7IxzQwINsFJ6zh0d
+	mJIuJoBHbaPglNXiO3Pr3di3NekDdj/t9i9N3QwQMRBtfQLE/3NhfvwJKUgbM+kmEdJgVXGgKaE
+	7uxc8NBOtepchaLqk9hHm94=
+Received: from mail.maildlp.com (unknown [172.19.163.214])
+	by canpmsgout08.his.huawei.com (SkyGuard) with ESMTPS id 4fWf9H3SBhzmV6N;
+	Thu, 12 Mar 2026 15:18:27 +0800 (CST)
+Received: from kwepemk500009.china.huawei.com (unknown [7.202.194.94])
+	by mail.maildlp.com (Postfix) with ESMTPS id 462344056C;
+	Thu, 12 Mar 2026 15:23:24 +0800 (CST)
+Received: from localhost.localdomain (10.50.163.32) by
+ kwepemk500009.china.huawei.com (7.202.194.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 12 Mar 2026 15:23:22 +0800
+From: Chengwen Feng <fengchengwen@huawei.com>
+To: Bjorn Helgaas <bhelgaas@google.com>, Catalin Marinas
+	<catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, "Rafael J .
+ Wysocki" <rafael@kernel.org>
+CC: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>, Paul
+ Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Thomas Gleixner
+	<tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
+	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, <x86@kernel.org>,
+	"H . Peter Anvin" <hpa@zytor.com>, Juergen Gross <jgross@suse.com>, Boris
+ Ostrovsky <boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>, Sunil V
+ L <sunilvl@ventanamicro.com>, Mark Rutland <mark.rutland@arm.com>, Jonathan
+ Cameron <jonathan.cameron@huawei.com>, Kees Cook <kees@kernel.org>, Yanteng
+ Si <si.yanteng@linux.dev>, Sean Christopherson <seanjc@google.com>, Kai Huang
+	<kai.huang@intel.com>, Tom Lendacky <thomas.lendacky@amd.com>, Thomas Huth
+	<thuth@redhat.com>, Thorsten Blum <thorsten.blum@linux.dev>, Kevin Loughlin
+	<kevinloughlin@google.com>, Zheyun Shen <szy0127@sjtu.edu.cn>, Peter Zijlstra
+	<peterz@infradead.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, Xin
+ Li <xin@zytor.com>, "Ahmed S . Darwish" <darwi@linutronix.de>, Sohil Mehta
+	<sohil.mehta@intel.com>, Ilkka Koskinen <ilkka@os.amperecomputing.com>, Robin
+ Murphy <robin.murphy@arm.com>, James Clark <james.clark@linaro.org>, Besar
+ Wicaksono <bwicaksono@nvidia.com>, Ma Ke <make24@iscas.ac.cn>, Wei Huang
+	<wei.huang2@amd.com>, Andy Gospodarek <andrew.gospodarek@broadcom.com>,
+	Somnath Kotur <somnath.kotur@broadcom.com>, <punit.agrawal@oss.qualcomm.com>,
+	<guohanjun@huawei.com>, <suzuki.poulose@arm.com>, <ryan.roberts@arm.com>,
+	<chenl311@chinatelecom.cn>, <masahiroy@kernel.org>,
+	<wangyuquan1236@phytium.com.cn>, <anshuman.khandual@arm.com>,
+	<heinrich.schuchardt@canonical.com>, <Eric.VanTassell@amd.com>,
+	<wangzhou1@hisilicon.com>, <wanghuiqiang@huawei.com>,
+	<liuyonglong@huawei.com>, <linux-pci@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, <loongarch@lists.linux.dev>,
+	<linux-riscv@lists.infradead.org>, <xen-devel@lists.xenproject.org>,
+	<linux-acpi@vger.kernel.org>, <linux-perf-users@vger.kernel.org>,
+	<stable@vger.kernel.org>
+Subject: [PATCH v6 0/3] Fix get cpu steer-tag fail on ARM64 platform
+Date: Thu, 12 Mar 2026 15:23:13 +0800
+Message-ID: <20260312072316.4806-1-fengchengwen@huawei.com>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemk500009.china.huawei.com (7.202.194.94)
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78950-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78944-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[fengchengwen@huawei.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E8F8626E34D
+	RCPT_COUNT_GT_50(0.00)[69];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:dkim,huawei.com:mid]
+X-Rspamd-Queue-Id: CC60226E50E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-CMatch is lexically correct and replaces only identifiers,
-which is exactly where macro transformations happen.
+This patchset fixes the failure of CPU steer tag retrieval on ARM64
+platforms. The series is structured as follows:
 
-Use it to make the output safer and ensure that all arguments
-will be parsed the right way, even on complex cases.
+1. First commit: Mechanical rename of the ACPI Processor UID retrieval
+   interface (no functional changes) to align naming conventions across
+   architectures;
+2. Second commit: Implement acpi_get_cpu_uid() for the x86 platform to
+   complete the unified ACPI Processor UID interface across all
+   ACPI-enabled architectures;
+3. Third commit: Implement the core fix for the CPU steer tag retrieval
+   logic on ARM64 (the root cause of the retrieval failure).
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+The renaming and x86 implementation lay the groundwork for the unified
+ACPI interface required by the ARM64 steer tag fix, ensuring consistent
+CPU UID retrieval across architectures before addressing the functional
+bug.
+
 ---
- tools/lib/python/kdoc/xforms_lists.py | 151 +++++++++++++-------------
- 1 file changed, 78 insertions(+), 73 deletions(-)
+Changes in v6:
+- Rename existing get_acpi_id_for_cpu() to acpi_get_cpu_uid()
+- Split x86's modify as one commit
 
-diff --git a/tools/lib/python/kdoc/xforms_lists.py b/tools/lib/python/kdoc/xforms_lists.py
-index 2056572852fd..ebb4bf485c3a 100644
---- a/tools/lib/python/kdoc/xforms_lists.py
-+++ b/tools/lib/python/kdoc/xforms_lists.py
-@@ -18,48 +18,46 @@ class CTransforms:
- 
-     #: Transforms for structs and unions.
-     struct_xforms = [
--        # Strip attributes
--        (KernRe(r"__attribute__\s*\(\([a-z0-9,_\*\s\(\)]*\)\)", flags=re.I | re.S, cache=False), ' '),
--        (KernRe(r'\s*__aligned\s*\([^;]*\)', re.S), ' '),
--        (KernRe(r'\s*__counted_by\s*\([^;]*\)', re.S), ' '),
--        (KernRe(r'\s*__counted_by_(le|be)\s*\([^;]*\)', re.S), ' '),
--        (KernRe(r'\s*__guarded_by\s*\([^\)]*\)', re.S), ' '),
--        (KernRe(r'\s*__pt_guarded_by\s*\([^\)]*\)', re.S), ' '),
--        (KernRe(r'\s*__packed\s*', re.S), ' '),
--        (KernRe(r'\s*CRYPTO_MINALIGN_ATTR', re.S), ' '),
--        (KernRe(r'\s*__private', re.S), ' '),
--        (KernRe(r'\s*__rcu', re.S), ' '),
--        (KernRe(r'\s*____cacheline_aligned_in_smp', re.S), ' '),
--        (KernRe(r'\s*____cacheline_aligned', re.S), ' '),
--        (KernRe(r'\s*__cacheline_group_(begin|end)\([^\)]+\);'), ''),
--        (KernRe(r'__ETHTOOL_DECLARE_LINK_MODE_MASK\s*\(([^\)]+)\)', re.S),
--        r'DECLARE_BITMAP(\1, __ETHTOOL_LINK_MODE_MASK_NBITS)'),
--        (KernRe(r'DECLARE_PHY_INTERFACE_MASK\s*\(([^\)]+)\)', re.S),
--        r'DECLARE_BITMAP(\1, PHY_INTERFACE_MODE_MAX)'),
--        (KernRe(r'DECLARE_BITMAP\s*\(' + struct_args_pattern + r',\s*' + struct_args_pattern + r'\)',
--                re.S), r'unsigned long \1[BITS_TO_LONGS(\2)]'),
--        (KernRe(r'DECLARE_HASHTABLE\s*\(' + struct_args_pattern + r',\s*' + struct_args_pattern + r'\)',
--                re.S), r'unsigned long \1[1 << ((\2) - 1)]'),
--        (KernRe(r'DECLARE_KFIFO\s*\(' + struct_args_pattern + r',\s*' + struct_args_pattern +
--                r',\s*' + struct_args_pattern + r'\)', re.S), r'\2 *\1'),
--        (KernRe(r'DECLARE_KFIFO_PTR\s*\(' + struct_args_pattern + r',\s*' +
--                struct_args_pattern + r'\)', re.S), r'\2 *\1'),
--        (KernRe(r'(?:__)?DECLARE_FLEX_ARRAY\s*\(' + struct_args_pattern + r',\s*' +
--                struct_args_pattern + r'\)', re.S), r'\1 \2[]'),
--        (KernRe(r'DEFINE_DMA_UNMAP_ADDR\s*\(' + struct_args_pattern + r'\)', re.S), r'dma_addr_t \1'),
--        (KernRe(r'DEFINE_DMA_UNMAP_LEN\s*\(' + struct_args_pattern + r'\)', re.S), r'__u32 \1'),
--        (KernRe(r'VIRTIO_DECLARE_FEATURES\(([\w_]+)\)'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
-+        (CMatch("__attribute__"), ""),
-+        (CMatch('__aligned'), ""),
-+        (CMatch('__counted_by'), ""),
-+        (CMatch('__counted_by_(le|be)'), ""),
-+        (CMatch('__guarded_by'), ""),
-+        (CMatch('__pt_guarded_by'), ""),
- 
--        (CMatch(r"__cond_acquires"), ""),
--        (CMatch(r"__cond_releases"), ""),
--        (CMatch(r"__acquires"), ""),
--        (CMatch(r"__releases"), ""),
--        (CMatch(r"__must_hold"), ""),
--        (CMatch(r"__must_not_hold"), ""),
--        (CMatch(r"__must_hold_shared"), ""),
--        (CMatch(r"__cond_acquires_shared"), ""),
--        (CMatch(r"__acquires_shared"), ""),
--        (CMatch(r"__releases_shared"), ""),
-+        (CMatch('__packed'), ""),
-+        (CMatch('CRYPTO_MINALIGN_ATTR'), ""),
-+        (CMatch('__private'), ""),
-+        (CMatch('__rcu'), ""),
-+        (CMatch('____cacheline_aligned_in_smp'), ""),
-+        (CMatch('____cacheline_aligned'), ""),
-+
-+        (CMatch('__cacheline_group_(?:begin|end)'), ""),
-+        (CMatch('__ETHTOOL_DECLARE_LINK_MODE_MASK'),
-+                r'DECLARE_BITMAP(\1, __ETHTOOL_LINK_MODE_MASK_NBITS)'),
-+        (CMatch('DECLARE_PHY_INTERFACE_MASK',),
-+                r'DECLARE_BITMAP(\1, PHY_INTERFACE_MODE_MAX)'),
-+        (CMatch('DECLARE_BITMAP'), r'unsigned long \1[BITS_TO_LONGS(\2)]'),
-+
-+        (CMatch('DECLARE_HASHTABLE'), r'unsigned long \1[1 << ((\2) - 1)]'),
-+        (CMatch('DECLARE_KFIFO'), r'\2 *\1'),
-+        (CMatch('DECLARE_KFIFO_PTR'), r'\2 *\1'),
-+        (CMatch('(?:__)?DECLARE_FLEX_ARRAY'), r'\1 \2[]'),
-+        (CMatch('DEFINE_DMA_UNMAP_ADDR'), r'dma_addr_t \1'),
-+        (CMatch('DEFINE_DMA_UNMAP_LEN'), r'__u32 \1'),
-+        (CMatch('VIRTIO_DECLARE_FEATURES'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
-+
-+        (CMatch("__cond_acquires"), ""),
-+        (CMatch("__cond_releases"), ""),
-+        (CMatch("__acquires"), ""),
-+        (CMatch("__releases"), ""),
-+        (CMatch("__must_hold"), ""),
-+        (CMatch("__must_not_hold"), ""),
-+        (CMatch("__must_hold_shared"), ""),
-+        (CMatch("__cond_acquires_shared"), ""),
-+        (CMatch("__acquires_shared"), ""),
-+        (CMatch("__releases_shared"), ""),
-+        (CMatch("__attribute__"), ""),
- 
-         #
-         # Macro __struct_group() creates an union with an anonymous
-@@ -71,47 +69,54 @@ class CTransforms:
-         (CMatch('struct_group_attr'), r'struct { \3+ };'),
-         (CMatch('struct_group_tagged'), r'struct { \3+ };'),
-         (CMatch('__struct_group'), r'struct { \4+ };'),
--
-     ]
- 
-     #: Transforms for function prototypes.
-     function_xforms = [
--        (KernRe(r"^static +"), ""),
--        (KernRe(r"^extern +"), ""),
--        (KernRe(r"^asmlinkage +"), ""),
--        (KernRe(r"^inline +"), ""),
--        (KernRe(r"^__inline__ +"), ""),
--        (KernRe(r"^__inline +"), ""),
--        (KernRe(r"^__always_inline +"), ""),
--        (KernRe(r"^noinline +"), ""),
--        (KernRe(r"^__FORTIFY_INLINE +"), ""),
--        (KernRe(r"__init +"), ""),
--        (KernRe(r"__init_or_module +"), ""),
--        (KernRe(r"__exit +"), ""),
--        (KernRe(r"__deprecated +"), ""),
--        (KernRe(r"__flatten +"), ""),
--        (KernRe(r"__meminit +"), ""),
--        (KernRe(r"__must_check +"), ""),
--        (KernRe(r"__weak +"), ""),
--        (KernRe(r"__sched +"), ""),
-+        (CMatch(r"static"), ""),
-+        (CMatch(r"extern"), ""),
-+        (CMatch(r"asmlinkage"), ""),
-+        (CMatch(r"inline"), ""),
-+        (CMatch(r"__inline__"), ""),
-+        (CMatch(r"__inline"), ""),
-+        (CMatch(r"__always_inline"), ""),
-+        (CMatch(r"noinline"), ""),
-+        (CMatch(r"__FORTIFY_INLINE"), ""),
-+        (CMatch(r"__init"), ""),
-+        (CMatch(r"__init_or_module"), ""),
-+        (CMatch(r"__exit"), ""),
-+        (CMatch(r"__deprecated"), ""),
-+        (CMatch(r"__flatten"), ""),
-+        (CMatch(r"__meminit"), ""),
-+        (CMatch(r"__must_check"), ""),
-+        (CMatch(r"__weak"), ""),
-+        (CMatch(r"__sched"), ""),
-+
-+        #
-+        # HACK: this is similar to process_export() hack. It is meant to
-+        # drop _noproof from function name. See for instance:
-+        # ahash_request_alloc kernel-doc declaration at include/crypto/hash.h.
-+        #
-         (KernRe(r"_noprof"), ""),
--        (KernRe(r"__always_unused *"), ""),
--        (KernRe(r"__printf\s*\(\s*\d*\s*,\s*\d*\s*\) +"), ""),
--        (KernRe(r"__(?:re)?alloc_size\s*\(\s*\d+\s*(?:,\s*\d+\s*)?\) +"), ""),
--        (KernRe(r"__diagnose_as\s*\(\s*\S+\s*(?:,\s*\d+\s*)*\) +"), ""),
--        (KernRe(r"DECL_BUCKET_PARAMS\s*\(\s*(\S+)\s*,\s*(\S+)\s*\)"), r"\1, \2"),
--        (KernRe(r"__no_context_analysis\s*"), ""),
--        (KernRe(r"__attribute_const__ +"), ""),
--        (KernRe(r"__attribute__\s*\(\((?:[\w\s]+(?:\([^)]*\))?\s*,?)+\)\)\s+"), ""),
-+
-+        (CMatch(r"__always_unused"), ""),
-+        (CMatch('__printf'), ""),
-+        (CMatch('__(?:re)?alloc_size'), ""),
-+        (CMatch("__diagnose_as"), ""),
-+        (CMatch("DECL_BUCKET_PARAMS"), r"\1, \2"),
-+        (CMatch(r"__no_context_analysis"), ""),
-+        (CMatch(r"__attribute_const__"), ""),
-+        (CMatch("__attribute__"), ""),
-     ]
- 
-     #: Transforms for variable prototypes.
-     var_xforms = [
--        (KernRe(r"__read_mostly"), ""),
--        (KernRe(r"__ro_after_init"), ""),
--        (KernRe(r'\s*__guarded_by\s*\([^\)]*\)', re.S), ""),
--        (KernRe(r'\s*__pt_guarded_by\s*\([^\)]*\)', re.S), ""),
--        (KernRe(r"LIST_HEAD\(([\w_]+)\)"), r"struct list_head \1"),
-+        (CMatch(r"__read_mostly"), ""),
-+        (CMatch(r"__ro_after_init"), ""),
-+        (CMatch('__guarded_by'), ""),
-+        (CMatch('__pt_guarded_by'), ""),
-+        (CMatch("LIST_HEAD"), r"struct list_head \1"),
-+
-         (KernRe(r"(?://.*)$"), ""),
-         (KernRe(r"(?:/\*.*\*/)"), ""),
-         (KernRe(r";$"), ""),
+Changes in v5:
+- Refine commit-log of commit 2/2
+- Replace cpu_acpi_id() by acpi_get_cpu_acpi_id() on x86
+
+Changes in v4:
+- Split the rename into a separate commit.
+
+Changes in v3:
+- Rename existing get_acpi_id_for_cpu() to acpi_get_cpu_acpi_id() other
+  than add one new API.
+
+Changes in v2:
+- Add ECN _DSM reference doc name and its URL.
+- Separate implement acpi_get_cpu_acpi_id() in each arch which supports
+  ACPI.
+- Refine commit-log.
+
+Chengwen Feng (2):
+  ACPI: Rename get_acpi_id_for_cpu() to acpi_get_cpu_acpi_id() on
+    non-x86
+  PCI/TPH: Fix get cpu steer-tag fail on ARM64 platform
+
+Chengwen Feng (3):
+  ACPI: Rename get_acpi_id_for_cpu() to acpi_get_cpu_uid() on non-x86
+  x86: Implement acpi_get_cpu_uid()
+  PCI/TPH: Fix get cpu steer-tag fail on ARM64 platform
+
+ Documentation/PCI/tph.rst          |  4 +--
+ arch/arm64/include/asm/acpi.h      | 16 +---------
+ arch/arm64/kernel/acpi.c           | 16 ++++++++++
+ arch/arm64/kernel/acpi_numa.c      | 15 ++++++++++
+ arch/loongarch/include/asm/acpi.h  |  5 ----
+ arch/loongarch/kernel/acpi.c       |  9 ++++++
+ arch/riscv/include/asm/acpi.h      |  4 ---
+ arch/riscv/kernel/acpi.c           | 16 ++++++++++
+ arch/riscv/kernel/acpi_numa.c      |  8 +++--
+ arch/x86/include/asm/cpu.h         |  1 -
+ arch/x86/include/asm/smp.h         |  1 -
+ arch/x86/kernel/cpu/common.c       | 15 ++++++++++
+ arch/x86/xen/enlighten_hvm.c       |  5 ++--
+ drivers/acpi/pptt.c                | 47 +++++++++++++++++++++---------
+ drivers/acpi/riscv/rhct.c          |  7 ++++-
+ drivers/pci/tph.c                  | 16 ++++++----
+ drivers/perf/arm_cspmu/arm_cspmu.c |  6 ++--
+ include/linux/acpi.h               | 11 +++++++
+ include/linux/pci-tph.h            |  4 +--
+ 19 files changed, 151 insertions(+), 55 deletions(-)
+
 -- 
-2.53.0
+2.17.1
 
 
