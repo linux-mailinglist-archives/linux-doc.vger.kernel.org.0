@@ -1,69 +1,67 @@
-Return-Path: <linux-doc+bounces-79004-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79006-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qEqtCv7TsmktQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79004-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:58 +0100
+	id 0EcpKA3UsmlDQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79006-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:13 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EADB273BB4
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37EDF273BE7
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1F88F30421FA
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:54:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E542530B011E
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:55:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06C11379EF5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 629FD37CD5E;
 	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AR1Np9P/"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I3ERcSY2"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6E28372682;
-	Thu, 12 Mar 2026 14:54:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30B7A37CD2A;
+	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773327297; cv=none; b=C48S1BMqDu3ZK+20XX/lFFFU/dqPDgNCOH0kB7S2uXXp1zWnYxBrCdXoW2634iixeVVcf17V+ahse7jMKdrOputtqWLGFYoSvVluwU2uqP0yrPhdu8QIkAEtw4zCH6V+JVUtoDjYexbGCZpRdsRxP3DCZ3Lq9GSVskt9XhcqIPw=
+	t=1773327298; cv=none; b=e5ckjVejNa1sdsmdGzmdfpKS7noTjI+XK4A5GW7G3HyEwKbs5tt/99IrNwtWpcRDEr6Jx0zsjAvlWoUXAYnrB3DbqUozxnpKhRSjpObxG+UC/N6W6EBIpgIDG7U1HlPvgO0fzaiLuGugmg17oRD2jll8lGqQ1nJiyean2R9ykHI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773327297; c=relaxed/simple;
-	bh=VSfYVp9xilRiuMSqrxNUFgW7u9agCGt6O81gwpRuu04=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=qfaEkSKne1GQzgE1xYnwbAJykNfLpb3U1euM1qxyYHCM9mciXVFUD8rnjnN9TKI0guAF6MywN0agWmWQcmO1KAkgABgdf9luPaJLQR88fdYckuPuUtOFtvICu76g6hGidRMMCYvIYO3HQ4F3xr8NY2cd+AuyorlJHlvDIuCbngg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AR1Np9P/; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5ED63C4CEF7;
+	s=arc-20240116; t=1773327298; c=relaxed/simple;
+	bh=6GMr10A7PQzOhRN1qRUSN9zmJa91p74hL/Zmw065EaY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=WOSsLsbQilsqJLilrpaTc3ljP7L5cKMntweVqEm6BTBIjsYU8jk7QLHCthTdsaLCfbB9aO9z2Ebu19vpgBpDChvokUvh2OTawgrZioA3NYGur2LaVyqRnPT6LT+q8WFkMLzsZrjuKk4RklKJJ2lJ0McJKfM/JgXABP5dBItDsi8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I3ERcSY2; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D069C19424;
 	Thu, 12 Mar 2026 14:54:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773327297;
-	bh=VSfYVp9xilRiuMSqrxNUFgW7u9agCGt6O81gwpRuu04=;
-	h=From:To:Cc:Subject:Date:From;
-	b=AR1Np9P/0JhRG/i5LoUBKkRWVeYMC1sd1duc0h3Jr09IYcy/tb2OBRHXlE+q6tLRZ
-	 7aA4ZkEy+88x5SdHyr6/jPjbjdRzPrdZK0+F7Aqq0hyE50IWG5EhPYMuTFODWW73mt
-	 qwlVqWDIxcmP3C4JqtLfmsAT7aTdzsAy2WwFzdgLsCeAhiWz5Pwku1FkHoeZB8V799
-	 ffCgPlaIhYF0qRFGy2XAYEaPQ6KOkfCguIZvtiWQXEKvDVnqRqO3KdnLsxL7e4S0N3
-	 mijnzCj3DpT78Rwc8VH+6XkhXJnmEZxfoIdmjlD9dv2YtMp3uboFWsYBZ6sAhqH9i8
-	 MR1EO1KAxZ15w==
+	bh=6GMr10A7PQzOhRN1qRUSN9zmJa91p74hL/Zmw065EaY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=I3ERcSY2upcDB4L7rrw2OFJ+Tuoq2A4dtf7FgRLnErXFXnzqqQNpwn/uMtdsB2k8E
+	 jko7iZjfG22BbwoIxuX64Yj5j9elFzVNQu5UST+HrHP5y0sEljMk7oLftoop98Tbkh
+	 2aOsE9nCPL8OTkOeI1xA1XTwY/eUXIigg96sBMzhkqiI6HHhv+IR5ZUc28YFfe2yDt
+	 h0w84T+RilE10Mms7Fa18PBXrTfvhnGI3C0bcAJ0LjCQ3VMBYTI92PWFRc23PMoSUQ
+	 hyzGQvgc0gaT5rIT1TJrlyAHYJ4Modb9fxtdiEFuslyV7ipcBI/APbBOXd/g+ccKa0
+	 W5BgbYInGbFXA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0hR9-00000008xkj-0zd3;
+	id 1w0hR9-00000008xlw-1uCr;
 	Thu, 12 Mar 2026 15:54:55 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
-	Kees Cook <kees@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-doc@vger.kernel.org,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Vincent Mailhol <mailhol@kernel.org>
-Subject: [PATCH v2 00/28] kernel-doc: use a C lexical tokenizer for transforms
-Date: Thu, 12 Mar 2026 15:54:20 +0100
-Message-ID: <cover.1773326442.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v2 01/28] docs: python: add helpers to run unit tests
+Date: Thu, 12 Mar 2026 15:54:21 +0100
+Message-ID: <d4c7b04f72ef1efb2c5f2a7a17a5de5ba0378767.1773326442.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1773326442.git.mchehab+huawei@kernel.org>
+References: <cover.1773326442.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -77,226 +75,450 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79004-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79006-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,run.py:url]
-X-Rspamd-Queue-Id: 8EADB273BB4
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 37EDF273BE7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Jon,
+While python internal libraries have support for unit tests, its
+output is not nice. Add a helper module to improve its output.
 
-Sorry for respamming this one too quick. It ends that v1 had some
-bugs causing it to fail on several cases. I opted to add extra
-patches in the end. This way, it better integrates with kdoc_re.
-As part of it, now c_lex will output file name when reporting
-errors. With that regards, only more serious errors will raise
-an exception. They are meant to indicate problems at kernel-doc
-itself. Parsing errors are now using the same warning approach
-as kdoc_parser.
+I wrote this module last year while testing some scripts I used
+internally. The initial skeleton was generated with the help of
+LLM tools, but it was higly modified to ensure that it will work
+as I would expect.
 
-I also added a filter at Ctokenizer __str__() logic for the
-string convertion to drop some weirdness whitespaces and uneeded
-";" characters at the output.
-
-Finally, v2 address the undefined behavior about private: comment
-propagation.
-
-This patch series change how kdoc parser handles macro replacements.
-
-Instead of heavily relying on regular expressions that can sometimes
-be very complex, it uses a C lexical tokenizer. This ensures that
-BEGIN/END blocks on functions and structs are properly handled,
-even when nested.
-
-Checking before/after the patch series, for both man pages and
-rst only had:
-    - whitespace differences;
-    - struct_group macros now are shown as inner anonimous structs
-      as it should be.
-
-Also, I didn't notice any relevant change on the documentation build
-time. With that regards, right now, every time a CMatch replacement
-rule takes in place, it does:
-
-    for each transform:
-    - tokenizes the source code;
-    - handle CMatch;
-    - convert tokens back to a string.
-
-A possible optimization would be to do, instead:
-
-    - tokenizes source code;
-    - for each transform handle CMatch;
-    - convert tokens back to a string.
-
-For now, I opted not do do it, because:
-
-    - too much changes on a single row;
-    - docs build time is taking ~3:30 minutes, which is
-      about the same time it ws taken before the changes;
-    - there is a very dirty hack inside function_xforms:
-         (KernRe(r"_noprof"), ""). This is meant to change
-      function prototypes instead of function arguments.
-
-So, if ok for you, I would prefer to merge this one first. We can later
-optimize kdoc_parser to avoid multiple token <-> string conversions.
-
--
-
-One important aspect of this series is that it introduces unittests
-for kernel-doc. I used it a lot during the development of this series,
-to ensure that the changes I was doing were producing the expected
-results. Tests are on two separate files that can be executed directly.
-
-Alternatively, there is a run.py script that runs all of them (and
-any other python script named  tools/unittests/test_*.py"):
-
-  $ tools/unittests/run.py
-  test_cmatch:
-      TestSearch:
-          test_search_acquires_multiple:                               OK
-          test_search_acquires_nested_paren:                           OK
-          test_search_acquires_simple:                                 OK
-          test_search_must_hold:                                       OK
-          test_search_must_hold_shared:                                OK
-          test_search_no_false_positive:                               OK
-          test_search_no_function:                                     OK
-          test_search_no_macro_remains:                                OK
-      TestSubMultipleMacros:
-          test_acquires_multiple:                                      OK
-          test_acquires_nested_paren:                                  OK
-          test_acquires_simple:                                        OK
-          test_mixed_macros:                                           OK
-          test_must_hold:                                              OK
-          test_must_hold_shared:                                       OK
-          test_no_false_positive:                                      OK
-          test_no_function:                                            OK
-          test_no_macro_remains:                                       OK
-      TestSubSimple:
-          test_rise_early_greedy:                                      OK
-          test_rise_multiple_greedy:                                   OK
-          test_strip_multiple_acquires:                                OK
-          test_sub_count_parameter:                                    OK
-          test_sub_mixed_placeholders:                                 OK
-          test_sub_multiple_placeholders:                              OK
-          test_sub_no_placeholder:                                     OK
-          test_sub_single_placeholder:                                 OK
-          test_sub_with_capture:                                       OK
-          test_sub_zero_placeholder:                                   OK
-      TestSubWithLocalXforms:
-          test_functions_with_acquires_and_releases:                   OK
-          test_raw_struct_group:                                       OK
-          test_raw_struct_group_tagged:                                OK
-          test_struct_group:                                           OK
-          test_struct_group_attr:                                      OK
-          test_struct_group_tagged_with_private:                       OK
-          test_struct_kcov:                                            OK
-          test_vars_stackdepot:                                        OK
-  
-  test_tokenizer:
-      TestPublicPrivate:
-          test_balanced_inner_private:                                 OK
-          test_balanced_non_greddy_private:                            OK
-          test_balanced_private:                                       OK
-          test_no private:                                             OK
-          test_unbalanced_inner_private:                               OK
-          test_unbalanced_private:                                     OK
-          test_unbalanced_struct_group_tagged_with_private:            OK
-          test_unbalanced_two_struct_group_tagged_first_with_private:  OK
-          test_unbalanced_without_end_of_line:                         OK
-      TestTokenizer:
-          test_basic_tokens:                                           OK
-          test_depth_counters:                                         OK
-          test_mismatch_error:                                         OK
-  
-  
-  Ran 47 tests
-
-PS.: This series contain the contents of the previous /8 series:
-    https://lore.kernel.org/linux-doc/cover.1773074166.git.mchehab+huawei@kernel.org/
-
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Message-ID: <37999041f616ddef41e84cf2686c0264d1a51dc9.1773074166.git.mchehab+huawei@kernel.org>
 ---
-
-v2:
-  - Added 8 more patches fixing several bugs and modifying unittests
-    accordingly:
-    - don't raise exceptions when not needed;
-    - don't report errors reporting lack of END if there's no BEGIN
-      at the last replacement string;
-    - document private scope propagation;
-    - some changes at unittests to reflect current status;
-    - addition of two unittests to check error raise logic at c_lex.
-
-Mauro Carvalho Chehab (28):
-  docs: python: add helpers to run unit tests
-  unittests: add a testbench to check public/private kdoc comments
-  docs: kdoc: don't add broken comments inside prototypes
-  docs: kdoc: properly handle empty enum arguments
-  docs: kdoc_re: add a C tokenizer
-  docs: kdoc: use tokenizer to handle comments on structs
-  docs: kdoc: move C Tokenizer to c_lex module
-  unittests: test_private: modify it to use CTokenizer directly
-  unittests: test_tokenizer: check if the tokenizer works
-  unittests: add a runner to execute all unittests
-  docs: kdoc: create a CMatch to match nested C blocks
-  tools: unittests: add tests for CMatch
-  docs: c_lex: properly implement a sub() method for CMatch
-  unittests: test_cmatch: add tests for sub()
-  docs: kdoc: replace NestedMatch with CMatch
-  docs: kdoc_re: get rid of NestedMatch class
-  docs: xforms_lists: handle struct_group directly
-  docs: xforms_lists: better evaluate struct_group macros
-  docs: c_lex: add support to work with pure name ids
-  docs: xforms_lists: use CMatch for all identifiers
-  docs: c_lex: add "@" operator
-  docs: c_lex: don't exclude an extra token
-  docs: c_lex: setup a logger to report tokenizer issues
-  docs: unittests: add and adjust tests to check for errors
-  docs: c_lex: better handle BEGIN/END at search
-  docs: kernel-doc.rst: document private: scope propagation
-  docs: c_lex: produce a cleaner str() representation
-  unittests: test_cmatch: remove weird stuff from expected results
-
- Documentation/doc-guide/kernel-doc.rst |   6 +
- Documentation/tools/python.rst         |   2 +
- Documentation/tools/unittest.rst       |  24 +
- tools/lib/python/kdoc/c_lex.py         | 645 +++++++++++++++++++
- tools/lib/python/kdoc/kdoc_parser.py   |  29 +-
- tools/lib/python/kdoc/kdoc_re.py       | 201 ------
- tools/lib/python/kdoc/xforms_lists.py  | 209 +++----
- tools/lib/python/unittest_helper.py    | 353 +++++++++++
- tools/unittests/run.py                 |  17 +
- tools/unittests/test_cmatch.py         | 821 +++++++++++++++++++++++++
- tools/unittests/test_tokenizer.py      | 462 ++++++++++++++
- 11 files changed, 2434 insertions(+), 335 deletions(-)
+ Documentation/tools/python.rst      |   2 +
+ Documentation/tools/unittest.rst    |  24 ++
+ tools/lib/python/unittest_helper.py | 353 ++++++++++++++++++++++++++++
+ 3 files changed, 379 insertions(+)
  create mode 100644 Documentation/tools/unittest.rst
- create mode 100644 tools/lib/python/kdoc/c_lex.py
  create mode 100755 tools/lib/python/unittest_helper.py
- create mode 100755 tools/unittests/run.py
- create mode 100755 tools/unittests/test_cmatch.py
- create mode 100755 tools/unittests/test_tokenizer.py
 
+diff --git a/Documentation/tools/python.rst b/Documentation/tools/python.rst
+index 1444c1816735..3b7299161f20 100644
+--- a/Documentation/tools/python.rst
++++ b/Documentation/tools/python.rst
+@@ -11,3 +11,5 @@ Python libraries
+    feat
+    kdoc
+    kabi
++
++   unittest
+diff --git a/Documentation/tools/unittest.rst b/Documentation/tools/unittest.rst
+new file mode 100644
+index 000000000000..14a2b2a65236
+--- /dev/null
++++ b/Documentation/tools/unittest.rst
+@@ -0,0 +1,24 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++===============
++Python unittest
++===============
++
++Checking consistency of python modules can be complex. Sometimes, it is
++useful to define a set of unit tests to help checking them.
++
++While the actual test implementation is usecase dependent, Python already
++provides a standard way to add unit tests by using ``import unittest``.
++
++Using such class, requires setting up a test suite. Also, the default format
++is a little bit ackward. To improve it and provide a more uniform way to
++report errors, some unittest classes and functions are defined.
++
++
++Unittest helper module
++======================
++
++.. automodule:: lib.python.unittest_helper
++   :members:
++   :show-inheritance:
++   :undoc-members:
+diff --git a/tools/lib/python/unittest_helper.py b/tools/lib/python/unittest_helper.py
+new file mode 100755
+index 000000000000..55d444cd73d4
+--- /dev/null
++++ b/tools/lib/python/unittest_helper.py
+@@ -0,0 +1,353 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: GPL-2.0
++# Copyright(c) 2025-2026: Mauro Carvalho Chehab <mchehab@kernel.org>.
++#
++# pylint: disable=C0103,R0912,R0914,E1101
++
++"""
++Provides helper functions and classes execute python unit tests.
++
++Those help functions provide a nice colored output summary of each
++executed test and, when a test fails, it shows the different in diff
++format when running in verbose mode, like::
++
++    $ tools/unittests/nested_match.py -v
++    ...
++    Traceback (most recent call last):
++    File "/new_devel/docs/tools/unittests/nested_match.py", line 69, in test_count_limit
++        self.assertEqual(replaced, "bar(a); bar(b); foo(c)")
++        ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++    AssertionError: 'bar(a) foo(b); foo(c)' != 'bar(a); bar(b); foo(c)'
++    - bar(a) foo(b); foo(c)
++    ?       ^^^^
++    + bar(a); bar(b); foo(c)
++    ?       ^^^^^
++    ...
++
++It also allows filtering what tests will be executed via ``-k`` parameter.
++
++Typical usage is to do::
++
++    from unittest_helper import run_unittest
++    ...
++
++    if __name__ == "__main__":
++        run_unittest(__file__)
++
++If passing arguments is needed, on a more complex scenario, it can be
++used like on this example::
++
++    from unittest_helper import TestUnits, run_unittest
++    ...
++    env = {'sudo': ""}
++    ...
++    if __name__ == "__main__":
++        runner = TestUnits()
++        base_parser = runner.parse_args()
++        base_parser.add_argument('--sudo', action='store_true',
++                                help='Enable tests requiring sudo privileges')
++
++        args = base_parser.parse_args()
++
++        # Update module-level flag
++        if args.sudo:
++            env['sudo'] = "1"
++
++        # Run tests with customized arguments
++        runner.run(__file__, parser=base_parser, args=args, env=env)
++"""
++
++import argparse
++import atexit
++import os
++import re
++import unittest
++import sys
++
++from unittest.mock import patch
++
++
++class Summary(unittest.TestResult):
++    """
++    Overrides ``unittest.TestResult`` class to provide a nice colored
++    summary. When in verbose mode, displays actual/expected difference in
++    unified diff format.
++    """
++    def __init__(self, *args, **kwargs):
++        super().__init__(*args, **kwargs)
++
++        #: Dictionary to store organized test results.
++        self.test_results = {}
++
++        #: max length of the test names.
++        self.max_name_length = 0
++
++    def startTest(self, test):
++        super().startTest(test)
++        test_id = test.id()
++        parts = test_id.split(".")
++
++        # Extract module, class, and method names
++        if len(parts) >= 3:
++            module_name = parts[-3]
++        else:
++            module_name = ""
++        if len(parts) >= 2:
++            class_name = parts[-2]
++        else:
++            class_name = ""
++
++        method_name = parts[-1]
++
++        # Build the hierarchical structure
++        if module_name not in self.test_results:
++            self.test_results[module_name] = {}
++
++        if class_name not in self.test_results[module_name]:
++            self.test_results[module_name][class_name] = []
++
++        # Track maximum test name length for alignment
++        display_name = f"{method_name}:"
++
++        self.max_name_length = max(len(display_name), self.max_name_length)
++
++    def _record_test(self, test, status):
++        test_id = test.id()
++        parts = test_id.split(".")
++        if len(parts) >= 3:
++            module_name = parts[-3]
++        else:
++            module_name = ""
++        if len(parts) >= 2:
++            class_name = parts[-2]
++        else:
++            class_name = ""
++        method_name = parts[-1]
++        self.test_results[module_name][class_name].append((method_name, status))
++
++    def addSuccess(self, test):
++        super().addSuccess(test)
++        self._record_test(test, "OK")
++
++    def addFailure(self, test, err):
++        super().addFailure(test, err)
++        self._record_test(test, "FAIL")
++
++    def addError(self, test, err):
++        super().addError(test, err)
++        self._record_test(test, "ERROR")
++
++    def addSkip(self, test, reason):
++        super().addSkip(test, reason)
++        self._record_test(test, f"SKIP ({reason})")
++
++    def printResults(self):
++        """
++        Print results using colors if tty.
++        """
++        # Check for ANSI color support
++        use_color = sys.stdout.isatty()
++        COLORS = {
++            "OK":            "\033[32m",   # Green
++            "FAIL":          "\033[31m",   # Red
++            "SKIP":          "\033[1;33m", # Yellow
++            "PARTIAL":       "\033[33m",   # Orange
++            "EXPECTED_FAIL": "\033[36m",   # Cyan
++            "reset":         "\033[0m",    # Reset to default terminal color
++        }
++        if not use_color:
++            for c in COLORS:
++                COLORS[c] = ""
++
++        # Calculate maximum test name length
++        if not self.test_results:
++            return
++        try:
++            lengths = []
++            for module in self.test_results.values():
++                for tests in module.values():
++                    for test_name, _ in tests:
++                        lengths.append(len(test_name) + 1)  # +1 for colon
++            max_length = max(lengths) + 2  # Additional padding
++        except ValueError:
++            sys.exit("Test list is empty")
++
++        # Print results
++        for module_name, classes in self.test_results.items():
++            print(f"{module_name}:")
++            for class_name, tests in classes.items():
++                print(f"    {class_name}:")
++                for test_name, status in tests:
++                    # Get base status without reason for SKIP
++                    if status.startswith("SKIP"):
++                        status_code = status.split()[0]
++                    else:
++                        status_code = status
++                    color = COLORS.get(status_code, "")
++                    print(
++                        f"        {test_name + ':':<{max_length}}{color}{status}{COLORS['reset']}"
++                    )
++            print()
++
++        # Print summary
++        print(f"\nRan {self.testsRun} tests", end="")
++        if hasattr(self, "timeTaken"):
++            print(f" in {self.timeTaken:.3f}s", end="")
++        print()
++
++        if not self.wasSuccessful():
++            print(f"\n{COLORS['FAIL']}FAILED (", end="")
++            failures = getattr(self, "failures", [])
++            errors = getattr(self, "errors", [])
++            if failures:
++                print(f"failures={len(failures)}", end="")
++            if errors:
++                if failures:
++                    print(", ", end="")
++                print(f"errors={len(errors)}", end="")
++            print(f"){COLORS['reset']}")
++
++
++def flatten_suite(suite):
++    """Flatten test suite hierarchy."""
++    tests = []
++    for item in suite:
++        if isinstance(item, unittest.TestSuite):
++            tests.extend(flatten_suite(item))
++        else:
++            tests.append(item)
++    return tests
++
++
++class TestUnits:
++    """
++    Helper class to set verbosity level.
++
++    This class discover test files, import its unittest classes and
++    executes the test on it.
++    """
++    def parse_args(self):
++        """Returns a parser for command line arguments."""
++        parser = argparse.ArgumentParser(description="Test runner with regex filtering")
++        parser.add_argument("-v", "--verbose", action="count", default=1)
++        parser.add_argument("-f", "--failfast", action="store_true")
++        parser.add_argument("-k", "--keyword",
++                            help="Regex pattern to filter test methods")
++        return parser
++
++    def run(self, caller_file=None, pattern=None,
++            suite=None, parser=None, args=None, env=None):
++        """
++        Execute all tests from the unity test file.
++
++        It contains several optional parameters:
++
++        ``caller_file``:
++            -  name of the file that contains test.
++
++               typical usage is to place __file__ at the caller test, e.g.::
++
++                    if __name__ == "__main__":
++                        TestUnits().run(__file__)
++
++        ``pattern``:
++            - optional pattern to match multiple file names. Defaults
++              to basename of ``caller_file``.
++
++        ``suite``:
++            - an unittest suite initialized by the caller using
++              ``unittest.TestLoader().discover()``.
++
++        ``parser``:
++            - an argparse parser. If not defined, this helper will create
++              one.
++
++        ``args``:
++            - an ``argparse.Namespace`` data filled by the caller.
++
++        ``env``:
++            - environment variables that will be passed to the test suite
++
++        At least ``caller_file`` or ``suite`` must be used, otherwise a
++        ``TypeError`` will be raised.
++        """
++        if not args:
++            if not parser:
++                parser = self.parse_args()
++            args = parser.parse_args()
++
++        if not caller_file and not suite:
++            raise TypeError("Either caller_file or suite is needed at TestUnits")
++
++        verbose = args.verbose
++
++        if not env:
++            env = os.environ.copy()
++
++        env["VERBOSE"] = f"{verbose}"
++
++        patcher = patch.dict(os.environ, env)
++        patcher.start()
++        # ensure it gets stopped after
++        atexit.register(patcher.stop)
++
++
++        if verbose >= 2:
++            unittest.TextTestRunner(verbosity=verbose).run = lambda suite: suite
++
++        # Load ONLY tests from the calling file
++        if not suite:
++            if not pattern:
++                pattern = caller_file
++
++            loader = unittest.TestLoader()
++            suite = loader.discover(start_dir=os.path.dirname(caller_file),
++                                    pattern=os.path.basename(caller_file))
++
++        # Flatten the suite for environment injection
++        tests_to_inject = flatten_suite(suite)
++
++        # Filter tests by method name if -k specified
++        if args.keyword:
++            try:
++                pattern = re.compile(args.keyword)
++                filtered_suite = unittest.TestSuite()
++                for test in tests_to_inject:  # Use the pre-flattened list
++                    method_name = test.id().split(".")[-1]
++                    if pattern.search(method_name):
++                        filtered_suite.addTest(test)
++                suite = filtered_suite
++            except re.error as e:
++                sys.stderr.write(f"Invalid regex pattern: {e}\n")
++                sys.exit(1)
++        else:
++            # Maintain original suite structure if no keyword filtering
++            suite = unittest.TestSuite(tests_to_inject)
++
++        if verbose >= 2:
++            resultclass = None
++        else:
++            resultclass = Summary
++
++        runner = unittest.TextTestRunner(verbosity=args.verbose,
++                                            resultclass=resultclass,
++                                            failfast=args.failfast)
++        result = runner.run(suite)
++        if resultclass:
++            result.printResults()
++
++        sys.exit(not result.wasSuccessful())
++
++
++def run_unittest(fname):
++    """
++    Basic usage of TestUnits class.
++
++    Use it when there's no need to pass any extra argument to the tests
++    with. The recommended way is to place this at the end of each
++    unittest module::
++
++        if __name__ == "__main__":
++            run_unittest(__file__)
++    """
++    TestUnits().run(fname)
 -- 
 2.52.0
 
