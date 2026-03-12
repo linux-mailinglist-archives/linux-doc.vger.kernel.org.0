@@ -1,79 +1,81 @@
-Return-Path: <linux-doc+bounces-78957-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78959-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +IeTGaOPsmlINgAAu9opvQ
-	(envelope-from <linux-doc+bounces-78957-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 11:04:19 +0100
+	id UDytG8KPsmlINgAAu9opvQ
+	(envelope-from <linux-doc+bounces-78959-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 11:04:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6266D26FF5A
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 11:04:18 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C77A226FF8B
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 11:04:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 85AFA301778B
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 10:04:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E6A563073A4D
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 10:04:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC2DE3BD25E;
-	Thu, 12 Mar 2026 10:04:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ADE373BE166;
+	Thu, 12 Mar 2026 10:04:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="GNOlJrt4"
+	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="lUFF4zJZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 707353BD254
-	for <linux-doc@vger.kernel.org>; Thu, 12 Mar 2026 10:04:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E6F433D6E6
+	for <linux-doc@vger.kernel.org>; Thu, 12 Mar 2026 10:04:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773309853; cv=none; b=Z6pCbP5w6XSVX6LOhF0bMjSFBQwGRpSLF5aKaPQT59xQcJIetEzMNBdPvay6CbDp7LZ8yE3NLNaM2l4AOvpHzpEPRbstpAk0KM3JDT3xUlqoGJQbOblH0NXtJNG+48uQvjF3zNTrYWDu7Pt1THw5wyc7uFD0MD/3WKKJ5r/gnrQ=
+	t=1773309854; cv=none; b=Swl1Ek5eZCbpRSJnIPWZEbM95sjYQfqZl0Pbku3kTFh94iPY7YbBk+fHUuMBgGyVUz3jQ5r7aC7meKX85MrdpQ/Yu2R2CV8OeovGn//8uu8qeiyIAByeDpNLMJir83K85iAymxl7WJHNqjBJJ82Pl86RBcz6F+ZA5zCvZuaYGCQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773309853; c=relaxed/simple;
-	bh=6VISSpzlZznNj9au7o+yMu5s+elbPaZGvkqibf2jiuk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=k+j6sJFV5ZijsZMZHsvY9dHkgLTnxZ7i8JEHHXRTer3s/PmxEhZpm9pJ1HtQqeghS426bA/mHeap6IvC2dI0C8U0Z/g8GpQymCnApzXymyRIg7NtvVCoXx4cK+NrpBA3Ib8KGbotOq3wtfx8EIZBPAMdU6VJxaEZdg+aglhIfnc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=GNOlJrt4; arc=none smtp.client-ip=209.85.128.54
+	s=arc-20240116; t=1773309854; c=relaxed/simple;
+	bh=Uit1Ti7AU3XxeFhawNvwoDfVMeh6nJo+iBe3Dbimg88=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=rnRrn5HqFLVrm8j4Psh8fkw6nNLgzWwgi7C1S86u2JV8jG6dNJPIsamwFPzgH3D3WQn7LhtuAi04EI/1ahXnPwtITxyI3JTcy9nWcueyelTVNXkGviXhLm6ld88mYtFMuuhymBQyb2aOgbZmNmFguSha4U2K/yD690pJKV3U7+0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=lUFF4zJZ; arc=none smtp.client-ip=209.85.128.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4852f73d0a3so7490985e9.3
-        for <linux-doc@vger.kernel.org>; Thu, 12 Mar 2026 03:04:09 -0700 (PDT)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-482f454be5bso20381265e9.0
+        for <linux-doc@vger.kernel.org>; Thu, 12 Mar 2026 03:04:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1773309848; x=1773914648; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XyRQtY5fUA7eA4hQxNQZFrII39g5Q1jSYxzqSfKvGA8=;
-        b=GNOlJrt47uGW7S28r6cV9gLG1PD6OhoDYrZMB02dqPGuXvVUjSJDTLA3pjnHz+kMdt
-         eXTz/9O9g5Gm975t/iye6AslQbT/ga/tkGY6FUDk2UY6y/lvD4ZFXHN+KsrAU7wUICyE
-         WmDPefMpZbE4i3wlhDeDDvPzLfkG1sC7Id+LQDwEK2eSOOIiGbrMmGT+bpJ6yraaKftL
-         DsX0UYXqPqHUV4jiW1E0yBOVlgn791GBd8ssoTFnnFtjUlRBw7+vfhiPcs3cEgXlcYgZ
-         /MJoDMMSXRyn89Gtnfyd2kpIOf5Ix2uKKV7mGrgKCrmXTsu4aG3zngfmtzFCEKgo4Lh8
-         9osw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773309848; x=1773914648;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1773309850; x=1773914650; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XyRQtY5fUA7eA4hQxNQZFrII39g5Q1jSYxzqSfKvGA8=;
-        b=scSKMhBbatMrcQpTjQoZqmTgQb0IfPljQDMrw+aTogkF4RCYYp1KDUIg7y14NIej4K
-         LGg3woHzKjbie03Qcy87+rdMgvBQwI4xtrdKAhVE9SYySrMiLaOAm5lB3jgzRBC3KA7G
-         UxlZG4g/Lev7CcdRmEYmwLscvN4qURErvb2ZBvDn+Wyfe5HBQd7GL/IXwOeZgwHNaLPL
-         qeicbfErSe9UzgHj7Wav/Qeg0QQh41sKOi/CcDDwGHSxixPOWNeWvonnUcbsTCkpSJGw
-         Bw8M6QklvZ/SyygMy1wPjABahRQHtexabGBKJsORulkpGNztJi3sLRm83PewDamapBur
-         saeQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVszOoQYYjUjUGpb2dIlJtZu4sgatZ3JEN4RAbPB5NHO/VXXBuWSWJ+PrUMpj3UJQu1XVq9Ke5OxcM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywwt3VPyJBXAeyZdz/YrAgGQTOBB4Xi4SQU4UJV1UDh1jNim2J6
-	LKuCcqi9bSzCOZzanzNAynK8I1/LkLDo6WEF3C7+L2YeWROssZlV4c2QxpPhEY2xrE8=
-X-Gm-Gg: ATEYQzxynGM2aMddVZEsdRLMGu3XNgBPmjBLvbd8CyqWAESFMvWrsTS5yroToUqyxKj
-	QYMlXntpQWh/x8Xk+oCGRiBVQkbBWygdnObpRcs2cALtZjif/SoYrmOmWOF3Fuahv/1Fwbk7F7Y
-	YGQHzFWQBUdNF8orc7NCcUyC3GzL85sQL63XyDvfLfowiOoQI1Mjs7YX6aHGJCJ35IWqpMKQdAa
-	8H+/A6Zm9tbgUBJcqYq3Kn4kytvySSka+7GK1d6n9GYPu9okogoe6a0gEbfaAYrxZna0eAJWh81
-	1VMbEfq05hsUF3Pxmjdnev9nyM0wowZeELawfKRLdKoparaf2NR8VEDsU3h6Usib/wI92+RbG1I
-	xXOF0W0rxiJn0KV6txWa1ovoih9k4FgYovdV3grfeQBCC/Rneg4lZgy2YcQB9RZhLuRR8T4Cn3k
-	dyKV2NxB+HI4VYsQ==
-X-Received: by 2002:a05:600c:3103:b0:47e:e2eb:bc22 with SMTP id 5b1f17b1804b1-4854b0acb1amr86891245e9.5.1773309848490;
-        Thu, 12 Mar 2026 03:04:08 -0700 (PDT)
+        bh=d9KLhKGx9RzUBsWoWUkwA/+vgETenzM1WQ8j317w0fU=;
+        b=lUFF4zJZa0hgvIg96v34U0oJWVRFcoFa9sPidhNW/r6tgorFPdAVBUOnJNwV84tpz6
+         gMs/NQWS0EqV6OK+nl1tgxtzz8AkxmsJnJ1RtRnpObyAr4PuEOwefSlyG3WECMcYVywD
+         imyEd50XMM2nyeLI/O22MjeIcSHIYSvHeP6KX9BEsJU90COAM7UK6UzXwMzGazwkqayQ
+         DSTlTolio/zV36wH1/oWeYKJPSdzQaHbT99CSx89fpcnXDqmWHHbAH/RzZIczhVIiNkx
+         HaaZlf3v1pSG8xQ9C0jrPB9HyZISmTrKlF+2WMaAT9MArIxRoDnoqYGR+fJ+JAIx0D3j
+         iDVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773309850; x=1773914650;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=d9KLhKGx9RzUBsWoWUkwA/+vgETenzM1WQ8j317w0fU=;
+        b=E7Mb1iwfU5j8xB7D5kSYzAZkygdj221dS0drI87nRTNfH6gYAYqzjSyCrWJHimGPpd
+         wBZ3ROIl6lLl/aD9OnFEynWrybnqPA/ZTd7bKDORITI2zgC5+gEjJz1sZZDnvRUTBcMe
+         gEayhy8A0NXgxY5fRBFOr91iGj8XvXlYc77BrCWms9lvFFrgcArxrJ0m4Jbn0Wlv64hv
+         y3O6o6bxiyX5V+6mM0uHv2H67jk4K366mZRFNQwZY7dHhU+tacUedp7/q4GzA+76Qouf
+         k1GIPyriUrKl9TY775w+ewwBxlBK48fZI7iZ+0AHfidU0a0l4KVUDZ/7imPoHB2RyY02
+         VlFw==
+X-Forwarded-Encrypted: i=1; AJvYcCUJeLRaOHIYDDKsG6ZD5E71zYuUMnAImbQfiynkF3KSAL4FtdXCHPtSUT7cIkE8G2Ud1acQgJOKJP4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzF4VixtCdhTZjRk8Jjr6DQ4OYZXH0W3qXuGa/AS0cIpWLQojQl
+	EVqyFzuN30WaWFx+tNycjGF2rdVu4SH+JyISFriVtPKFQ+mKItssrspAnH7yQCvJd4g=
+X-Gm-Gg: ATEYQzz3HIJqJZHo1I/IfW4vPvrjB57ovDJYnnUbLafj9zM7V/fw2YN/sVJHmJIb7ln
+	LAr452BvtN18TZAAg0jtxl+9k2tpOx6eWu6jVLgRbUZBNltE5mt739qbW9p0RrYOBhvWOcuDtfB
+	q7G+g5VvexCM0Rba7HjtuIeCkU+N5+m0W60PqfGZqk20FtwbMX0LO68fZUYYhlrkfE4dDyjTKta
+	0ssOuG/SQGqrYU8Og9c9Y5286wl4twrl9SlfjCBWtAM1Ukya2LRR8JQJswV05O5L42YFtutKiU5
+	oMwxwwEYCmrLBgTp7EvvuXsOTN8Lm+ChztHhbSB+ATlcTNVEhXvV2Un+8H7BDzrVbYO3JporjVW
+	zFx2vOckCmmpzI7fydwwcUaQHkOb3hPC/084G+qO0GDvzLBR+4CNaABkHxAU67MqmktTRdVe16g
+	9u9nGx+vfZBWmTdA==
+X-Received: by 2002:a05:600c:4fd5:b0:485:3989:b3e4 with SMTP id 5b1f17b1804b1-4854f578e86mr42674835e9.6.1773309849689;
+        Thu, 12 Mar 2026 03:04:09 -0700 (PDT)
 Received: from localhost ([85.163.81.98])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4854b5e92d5sm117363925e9.1.2026.03.12.03.04.07
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541b6f6e6sm393371665e9.10.2026.03.12.03.04.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Mar 2026 03:04:08 -0700 (PDT)
+        Thu, 12 Mar 2026 03:04:09 -0700 (PDT)
 From: Jiri Pirko <jiri@resnulli.us>
 To: netdev@vger.kernel.org
 Cc: davem@davemloft.net,
@@ -101,10 +103,12 @@ Cc: davem@davemloft.net,
 	linux-doc@vger.kernel.org,
 	linux-rdma@vger.kernel.org,
 	linux-trace-kernel@vger.kernel.org
-Subject: [PATCH net-next v4 00/13] devlink: introduce shared devlink instance for PFs on same chip
-Date: Thu, 12 Mar 2026 11:03:54 +0100
-Message-ID: <20260312100407.551173-1-jiri@resnulli.us>
+Subject: [PATCH net-next v4 01/13] devlink: expose devlink instance index over netlink
+Date: Thu, 12 Mar 2026 11:03:55 +0100
+Message-ID: <20260312100407.551173-2-jiri@resnulli.us>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20260312100407.551173-1-jiri@resnulli.us>
+References: <20260312100407.551173-1-jiri@resnulli.us>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -117,8 +121,8 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[resnulli-us.20230601.gappssmtp.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -127,10 +131,10 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	DMARC_NA(0.00)[resnulli.us];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78957-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-78959-lists,linux-doc=lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_TRACE(0.00)[resnulli-us.20230601.gappssmtp.com:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCPT_COUNT_TWELVE(0.00)[26];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[jiri@resnulli.us,linux-doc@vger.kernel.org];
@@ -141,105 +145,86 @@ X-Spamd-Result: default: False [1.34 / 15.00];
 	TO_DN_NONE(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,resnulli.us:mid,resnulli-us.20230601.gappssmtp.com:dkim]
-X-Rspamd-Queue-Id: 6266D26FF5A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[resnulli.us:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,resnulli-us.20230601.gappssmtp.com:dkim,nvidia.com:email]
+X-Rspamd-Queue-Id: C77A226FF8B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Jiri Pirko <jiri@nvidia.com>
 
-Multiple PFs on a network adapter often reside on the same physical
-chip, running a single firmware. Some resources and configurations
-are inherently shared among these PFs - PTP clocks, VF group rates,
-firmware parameters, and others. Today there is no good object in
-the devlink model to attach these chip-wide configuration knobs to.
-Drivers resort to workarounds like pinning shared state to PF0 or
-maintaining ad-hoc internal structures (e.g., ice_adapter) that are
-invisible to userspace.
+Each devlink instance has an internally assigned index used for xarray
+storage. Expose it as a new DEVLINK_ATTR_INDEX uint attribute alongside
+the existing bus_name and dev_name handle.
 
-This problem was discussed extensively starting with Przemek Kitszel's
-"whole device devlink instance" RFC for the ice driver [1]. Several
-approaches for representing the parent instance were considered:
-using a partial PCI BDF as the dev_name (breaks when PFs have different
-BDFs in VMs), creating a per-driver bus, using auxiliary devices, or
-using faux devices. All of these required a backing struct device for
-the parent devlink instance, which does not naturally exist - there is
-no PCI device that represents the chip as a whole.
-
-This patchset takes a different approach: allow devlink instances to
-exist without any backing struct device. The instance is identified
-purely by its internal index, exposed over devlin netlink. This avoids
-fabricating fake devices and keeps the devlink handle semantics clean.
-
-The first ten patches prepare the devlink core for device-less
-instances by decoupling the handle from the parent device. The last
-three introduce the shared devlink infrastructure and its first user
-in the mlx5 driver.
-
-Example output showing the shared instance and nesting:
-
-  pci/0000:08:00.0: index 0
-    nested_devlink:
-      auxiliary/mlx5_core.eth.0
-  devlink_index/1: index 1
-    nested_devlink:
-      pci/0000:08:00.0
-      pci/0000:08:00.1
-  auxiliary/mlx5_core.eth.0: index 2
-  pci/0000:08:00.1: index 3
-    nested_devlink:
-      auxiliary/mlx5_core.eth.1
-  auxiliary/mlx5_core.eth.1: index 4
-
-[1] https://lore.kernel.org/netdev/20250219164410.35665-1-przemyslaw.kitszel@intel.com/
-
+Signed-off-by: Jiri Pirko <jiri@nvidia.com>
 ---
-Decoupled from "devlink and mlx5: Support cross-function rate scheduling"
-patchset to maintain 15-patches limit.
+ Documentation/netlink/specs/devlink.yaml | 5 +++++
+ include/uapi/linux/devlink.h             | 2 ++
+ net/devlink/devl_internal.h              | 2 ++
+ net/devlink/port.c                       | 1 +
+ 4 files changed, 10 insertions(+)
 
-See individual patches for changelog.
-
-Jiri Pirko (13):
-  devlink: expose devlink instance index over netlink
-  devlink: add helpers to get bus_name/dev_name
-  devlink: avoid extra iterations when found devlink is not registered
-  devlink: allow to use devlink index as a command handle
-  devlink: support index-based lookup via bus_name/dev_name handle
-  devlink: support index-based notification filtering
-  devlink: introduce __devlink_alloc() with dev driver pointer
-  devlink: add devlink_dev_driver_name() helper and use it in trace
-    events
-  devlink: add devl_warn() helper and use it in port warnings
-  devlink: allow devlink instance allocation without a backing device
-  devlink: introduce shared devlink instance for PFs on same chip
-  documentation: networking: add shared devlink documentation
-  net/mlx5: Add a shared devlink instance for PFs on same chip
-
- Documentation/netlink/specs/devlink.yaml      |  58 +++
- .../networking/devlink/devlink-shared.rst     |  97 +++++
- Documentation/networking/devlink/index.rst    |   1 +
- .../net/ethernet/mellanox/mlx5/core/Makefile  |   5 +-
- .../net/ethernet/mellanox/mlx5/core/main.c    |  17 +
- .../ethernet/mellanox/mlx5/core/sh_devlink.c  |  61 +++
- .../ethernet/mellanox/mlx5/core/sh_devlink.h  |  12 +
- include/linux/mlx5/driver.h                   |   1 +
- include/net/devlink.h                         |  10 +
- include/trace/events/devlink.h                |  36 +-
- include/uapi/linux/devlink.h                  |   4 +
- net/devlink/Makefile                          |   2 +-
- net/devlink/core.c                            |  91 ++++-
- net/devlink/dev.c                             |   8 +-
- net/devlink/devl_internal.h                   |  34 +-
- net/devlink/netlink.c                         |  52 ++-
- net/devlink/netlink_gen.c                     | 355 +++++++++++-------
- net/devlink/port.c                            |  19 +-
- net/devlink/sh_dev.c                          | 161 ++++++++
- 19 files changed, 815 insertions(+), 209 deletions(-)
- create mode 100644 Documentation/networking/devlink/devlink-shared.rst
- create mode 100644 drivers/net/ethernet/mellanox/mlx5/core/sh_devlink.c
- create mode 100644 drivers/net/ethernet/mellanox/mlx5/core/sh_devlink.h
- create mode 100644 net/devlink/sh_dev.c
-
+diff --git a/Documentation/netlink/specs/devlink.yaml b/Documentation/netlink/specs/devlink.yaml
+index 837112da6738..1bed67a0eefb 100644
+--- a/Documentation/netlink/specs/devlink.yaml
++++ b/Documentation/netlink/specs/devlink.yaml
+@@ -867,6 +867,10 @@ attribute-sets:
+         type: flag
+         doc: Request restoring parameter to its default value.
+         value: 183
++      -
++        name: index
++        type: uint
++        doc: Unique devlink instance index.
+   -
+     name: dl-dev-stats
+     subset-of: devlink
+@@ -1311,6 +1315,7 @@ operations:
+           attributes:
+             - bus-name
+             - dev-name
++            - index
+             - reload-failed
+             - dev-stats
+       dump:
+diff --git a/include/uapi/linux/devlink.h b/include/uapi/linux/devlink.h
+index e7d6b6d13470..1ba3436db4ae 100644
+--- a/include/uapi/linux/devlink.h
++++ b/include/uapi/linux/devlink.h
+@@ -642,6 +642,8 @@ enum devlink_attr {
+ 	DEVLINK_ATTR_PARAM_VALUE_DEFAULT,	/* dynamic */
+ 	DEVLINK_ATTR_PARAM_RESET_DEFAULT,	/* flag */
+ 
++	DEVLINK_ATTR_INDEX,			/* uint */
++
+ 	/* Add new attributes above here, update the spec in
+ 	 * Documentation/netlink/specs/devlink.yaml and re-generate
+ 	 * net/devlink/netlink_gen.c.
+diff --git a/net/devlink/devl_internal.h b/net/devlink/devl_internal.h
+index 1377864383bc..31fa98af418e 100644
+--- a/net/devlink/devl_internal.h
++++ b/net/devlink/devl_internal.h
+@@ -178,6 +178,8 @@ devlink_nl_put_handle(struct sk_buff *msg, struct devlink *devlink)
+ 		return -EMSGSIZE;
+ 	if (nla_put_string(msg, DEVLINK_ATTR_DEV_NAME, dev_name(devlink->dev)))
+ 		return -EMSGSIZE;
++	if (nla_put_uint(msg, DEVLINK_ATTR_INDEX, devlink->index))
++		return -EMSGSIZE;
+ 	return 0;
+ }
+ 
+diff --git a/net/devlink/port.c b/net/devlink/port.c
+index 93d8a25bb920..1ff609571ea4 100644
+--- a/net/devlink/port.c
++++ b/net/devlink/port.c
+@@ -222,6 +222,7 @@ size_t devlink_nl_port_handle_size(struct devlink_port *devlink_port)
+ 
+ 	return nla_total_size(strlen(devlink->dev->bus->name) + 1) /* DEVLINK_ATTR_BUS_NAME */
+ 	     + nla_total_size(strlen(dev_name(devlink->dev)) + 1) /* DEVLINK_ATTR_DEV_NAME */
++	     + nla_total_size(8) /* DEVLINK_ATTR_INDEX */
+ 	     + nla_total_size(4); /* DEVLINK_ATTR_PORT_INDEX */
+ }
+ 
 -- 
 2.51.1
 
