@@ -1,63 +1,67 @@
-Return-Path: <linux-doc+bounces-78942-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78944-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YF4bMJRnsmlkMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-78942-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:24 +0100
+	id OKVqErBnsmlkMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-78944-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:52 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 370D826E322
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8F8626E34D
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E52773123782
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:40 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 62834314E98F
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 422A73AEF5A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6DACA3AF67D;
 	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QBDauuTQ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jlhxQubG"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09FF03AD52E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F3A43AD533;
 	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773299554; cv=none; b=p8hZnDeBUOd26FjigUrLH7xEudlRqmtHlK0CWtmcS7C3z4t21vqQR8Sqo1rCWZD2C+cuWbViTKASy8aU32g7t/lO+UyRoK467V7K+IFiwrTfZQOR1CFcrV/5ueisdZ2Rr/Q/jFqGT4mdIIMvQxucYKAWXK0dQ1eAMoQOpSC42cM=
+	t=1773299554; cv=none; b=LvRIXTteIgiayG5nngQ49kC/Z8CkCHKH5CtylpDGCw6zhWrXL+e1nUsU1cpYwimRjdfzVFu8rv1Hz24ZjAouGd58Bsg6EbYCz16EX6MFYfPYmWwdRbjXHRFiLSiLFsVyfKsu+v1WH+Cy43Cw6nn+QyJcX/SEhc9wvg/6MARfYfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773299554; c=relaxed/simple;
-	bh=0chB5Q8mELtk7nIsVOn7tboqMd7he9vt6/MdSJhiwBk=;
+	bh=VgpdCURNXribzlBJhLz5siGjBHNFlZu1TMJYSSZaQ28=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=lpBiE6HN8ZgLEMErmEAF0eiP1Ipk5Lcu6pdyHoLLTm0jIz5IC7nHIZbWmBoMxeZ9UCsio/+N8mD6NOVS24ZAfMZaRzvUv/b5hSAjzoRH6avzc4GAPOLHfWU9r7b9euFG22esanSjegP32+qW6u3qOL8j157ZxqyRt+PZLlk4SAE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QBDauuTQ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 864C9C2BCFB;
+	 MIME-Version:Content-Type; b=WgCZnztRVs1iFty+wcf8vvf6uNCNfmFhNZiZvGdn9FpHAW7IGfnp8gah+SWi4iPlIiuFxE0PTQBJ83SRpjnZM1guFwEDsoLNx8LKykzBDwHF0KxoC1fMGkzyJk6/z6o2B/1+FP3ijYRywkNiKniZDc+yTG5UY1IT0bR2uOVoKQU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jlhxQubG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 964E3C2BD05;
 	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773299553;
-	bh=0chB5Q8mELtk7nIsVOn7tboqMd7he9vt6/MdSJhiwBk=;
+	bh=VgpdCURNXribzlBJhLz5siGjBHNFlZu1TMJYSSZaQ28=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QBDauuTQpfbr9GhrzAdhauPG6l+HPthWj/CXUp9OrfOuFGVedv4HECwHBgBWmCMsu
-	 XHklR+CcGIu9o7II1aOfTmNcYTrrZpwtF7I283Zb3C+m51GTCKGKQdQeTdbF8E6kRp
-	 x0h5a5rITAcFAf4wBNn3dz6JuvXWahc2irK75aTmSSXR+4M6J9LUoXnXtcs60AoOfC
-	 LjGQLo1Fc6qPv9BOdr6X08Et0U54zmqFzNQTBDRoJtmlyX3uh2nXk0sh4O3K8x2dV4
-	 1qd7jjulFJmID8wEXGntt/E/P88sVVuRmWx18eEc+dxO2TytRjElKHFSqcQGPOAe2Z
-	 y4/wMwcqvHxtw==
+	b=jlhxQubGEyCAqY4x/wuIED1hepP7i9MBpBPwqvemO6sYA3kjaULCAiYmlSbb3dYHl
+	 7NHuHKwhRy17nvtVnMqijtrgNErG5vgs7u84iTuVq8zVToGl2pD8UGAo9cprSQQet4
+	 7PUoqs3RtBp392CsSc7RCcIbeM4NZCCK2en95r7L2Klw16gkxMxkU50ZUKSvRwi8ZW
+	 arDx6GjhIK8HACzJLPAtQynr66STkrD/E/S/eKaIezMfcyb7H0aB7UPZr9JLgLp0Pi
+	 i/8bVLmHP2tsZPchHzfvSEODq7XBo82NUkv8jrLef1dgKWdTzqsIOw6Z+Svm7oZjlO
+	 II+jcnpgUKQrw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0aDf-000000077hZ-3Ngw;
+	id 1w0aDf-000000077hd-3V1B;
 	Thu, 12 Mar 2026 08:12:31 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
+	Kees Cook <kees@kernel.org>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH v2 19/20] docs: c_lex: add support to work with pure name ids
-Date: Thu, 12 Mar 2026 08:12:27 +0100
-Message-ID: <8ad16ddc6d68d0cc09a16818b240df467a2c7d93.1773297828.git.mchehab+huawei@kernel.org>
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH v2 20/20] docs: xforms_lists: use CMatch for all identifiers
+Date: Thu, 12 Mar 2026 08:12:28 +0100
+Message-ID: <716c6dfa1d5d50c92ca14e9ecbd1ed9ebd07f052.1773297828.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773297828.git.mchehab+huawei@kernel.org>
 References: <cover.1773297828.git.mchehab+huawei@kernel.org>
@@ -74,69 +78,223 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78942-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78944-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 370D826E322
+X-Rspamd-Queue-Id: E8F8626E34D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Most of CMatch complexity is due to the need of parse macros
-with arguments. Still, it is easy enough to support also simple
-name identifiers.
+CMatch is lexically correct and replaces only identifiers,
+which is exactly where macro transformations happen.
 
-Add support for it, as it simplifies xforms logic.
+Use it to make the output safer and ensure that all arguments
+will be parsed the right way, even on complex cases.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/c_lex.py | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
+ tools/lib/python/kdoc/xforms_lists.py | 151 +++++++++++++-------------
+ 1 file changed, 78 insertions(+), 73 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
-index 98031cb7907c..689ad64ecbe4 100644
---- a/tools/lib/python/kdoc/c_lex.py
-+++ b/tools/lib/python/kdoc/c_lex.py
-@@ -477,9 +477,17 @@ class CMatch:
+diff --git a/tools/lib/python/kdoc/xforms_lists.py b/tools/lib/python/kdoc/xforms_lists.py
+index 2056572852fd..ebb4bf485c3a 100644
+--- a/tools/lib/python/kdoc/xforms_lists.py
++++ b/tools/lib/python/kdoc/xforms_lists.py
+@@ -18,48 +18,46 @@ class CTransforms:
  
-                 continue
+     #: Transforms for structs and unions.
+     struct_xforms = [
+-        # Strip attributes
+-        (KernRe(r"__attribute__\s*\(\([a-z0-9,_\*\s\(\)]*\)\)", flags=re.I | re.S, cache=False), ' '),
+-        (KernRe(r'\s*__aligned\s*\([^;]*\)', re.S), ' '),
+-        (KernRe(r'\s*__counted_by\s*\([^;]*\)', re.S), ' '),
+-        (KernRe(r'\s*__counted_by_(le|be)\s*\([^;]*\)', re.S), ' '),
+-        (KernRe(r'\s*__guarded_by\s*\([^\)]*\)', re.S), ' '),
+-        (KernRe(r'\s*__pt_guarded_by\s*\([^\)]*\)', re.S), ' '),
+-        (KernRe(r'\s*__packed\s*', re.S), ' '),
+-        (KernRe(r'\s*CRYPTO_MINALIGN_ATTR', re.S), ' '),
+-        (KernRe(r'\s*__private', re.S), ' '),
+-        (KernRe(r'\s*__rcu', re.S), ' '),
+-        (KernRe(r'\s*____cacheline_aligned_in_smp', re.S), ' '),
+-        (KernRe(r'\s*____cacheline_aligned', re.S), ' '),
+-        (KernRe(r'\s*__cacheline_group_(begin|end)\([^\)]+\);'), ''),
+-        (KernRe(r'__ETHTOOL_DECLARE_LINK_MODE_MASK\s*\(([^\)]+)\)', re.S),
+-        r'DECLARE_BITMAP(\1, __ETHTOOL_LINK_MODE_MASK_NBITS)'),
+-        (KernRe(r'DECLARE_PHY_INTERFACE_MASK\s*\(([^\)]+)\)', re.S),
+-        r'DECLARE_BITMAP(\1, PHY_INTERFACE_MODE_MAX)'),
+-        (KernRe(r'DECLARE_BITMAP\s*\(' + struct_args_pattern + r',\s*' + struct_args_pattern + r'\)',
+-                re.S), r'unsigned long \1[BITS_TO_LONGS(\2)]'),
+-        (KernRe(r'DECLARE_HASHTABLE\s*\(' + struct_args_pattern + r',\s*' + struct_args_pattern + r'\)',
+-                re.S), r'unsigned long \1[1 << ((\2) - 1)]'),
+-        (KernRe(r'DECLARE_KFIFO\s*\(' + struct_args_pattern + r',\s*' + struct_args_pattern +
+-                r',\s*' + struct_args_pattern + r'\)', re.S), r'\2 *\1'),
+-        (KernRe(r'DECLARE_KFIFO_PTR\s*\(' + struct_args_pattern + r',\s*' +
+-                struct_args_pattern + r'\)', re.S), r'\2 *\1'),
+-        (KernRe(r'(?:__)?DECLARE_FLEX_ARRAY\s*\(' + struct_args_pattern + r',\s*' +
+-                struct_args_pattern + r'\)', re.S), r'\1 \2[]'),
+-        (KernRe(r'DEFINE_DMA_UNMAP_ADDR\s*\(' + struct_args_pattern + r'\)', re.S), r'dma_addr_t \1'),
+-        (KernRe(r'DEFINE_DMA_UNMAP_LEN\s*\(' + struct_args_pattern + r'\)', re.S), r'__u32 \1'),
+-        (KernRe(r'VIRTIO_DECLARE_FEATURES\(([\w_]+)\)'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
++        (CMatch("__attribute__"), ""),
++        (CMatch('__aligned'), ""),
++        (CMatch('__counted_by'), ""),
++        (CMatch('__counted_by_(le|be)'), ""),
++        (CMatch('__guarded_by'), ""),
++        (CMatch('__pt_guarded_by'), ""),
  
--            if not started and tok.kind == CToken.BEGIN:
--                started = True
--                continue
-+            if not started:
-+                if tok.kind == CToken.SPACE:
-+                    continue
+-        (CMatch(r"__cond_acquires"), ""),
+-        (CMatch(r"__cond_releases"), ""),
+-        (CMatch(r"__acquires"), ""),
+-        (CMatch(r"__releases"), ""),
+-        (CMatch(r"__must_hold"), ""),
+-        (CMatch(r"__must_not_hold"), ""),
+-        (CMatch(r"__must_hold_shared"), ""),
+-        (CMatch(r"__cond_acquires_shared"), ""),
+-        (CMatch(r"__acquires_shared"), ""),
+-        (CMatch(r"__releases_shared"), ""),
++        (CMatch('__packed'), ""),
++        (CMatch('CRYPTO_MINALIGN_ATTR'), ""),
++        (CMatch('__private'), ""),
++        (CMatch('__rcu'), ""),
++        (CMatch('____cacheline_aligned_in_smp'), ""),
++        (CMatch('____cacheline_aligned'), ""),
 +
-+                if tok.kind == CToken.BEGIN:
-+                    started = True
-+                    continue
-+                else:
-+                    # Name only token without BEGIN/END
-+                    yield start, i
-+                    start = None
++        (CMatch('__cacheline_group_(?:begin|end)'), ""),
++        (CMatch('__ETHTOOL_DECLARE_LINK_MODE_MASK'),
++                r'DECLARE_BITMAP(\1, __ETHTOOL_LINK_MODE_MASK_NBITS)'),
++        (CMatch('DECLARE_PHY_INTERFACE_MASK',),
++                r'DECLARE_BITMAP(\1, PHY_INTERFACE_MODE_MAX)'),
++        (CMatch('DECLARE_BITMAP'), r'unsigned long \1[BITS_TO_LONGS(\2)]'),
++
++        (CMatch('DECLARE_HASHTABLE'), r'unsigned long \1[1 << ((\2) - 1)]'),
++        (CMatch('DECLARE_KFIFO'), r'\2 *\1'),
++        (CMatch('DECLARE_KFIFO_PTR'), r'\2 *\1'),
++        (CMatch('(?:__)?DECLARE_FLEX_ARRAY'), r'\1 \2[]'),
++        (CMatch('DEFINE_DMA_UNMAP_ADDR'), r'dma_addr_t \1'),
++        (CMatch('DEFINE_DMA_UNMAP_LEN'), r'__u32 \1'),
++        (CMatch('VIRTIO_DECLARE_FEATURES'), r'union { u64 \1; u64 \1_array[VIRTIO_FEATURES_U64S]; }'),
++
++        (CMatch("__cond_acquires"), ""),
++        (CMatch("__cond_releases"), ""),
++        (CMatch("__acquires"), ""),
++        (CMatch("__releases"), ""),
++        (CMatch("__must_hold"), ""),
++        (CMatch("__must_not_hold"), ""),
++        (CMatch("__must_hold_shared"), ""),
++        (CMatch("__cond_acquires_shared"), ""),
++        (CMatch("__acquires_shared"), ""),
++        (CMatch("__releases_shared"), ""),
++        (CMatch("__attribute__"), ""),
  
-             if tok.kind == CToken.END and tok.level == stack[-1][1]:
-                 start, level = stack.pop()
+         #
+         # Macro __struct_group() creates an union with an anonymous
+@@ -71,47 +69,54 @@ class CTransforms:
+         (CMatch('struct_group_attr'), r'struct { \3+ };'),
+         (CMatch('struct_group_tagged'), r'struct { \3+ };'),
+         (CMatch('__struct_group'), r'struct { \4+ };'),
+-
+     ]
+ 
+     #: Transforms for function prototypes.
+     function_xforms = [
+-        (KernRe(r"^static +"), ""),
+-        (KernRe(r"^extern +"), ""),
+-        (KernRe(r"^asmlinkage +"), ""),
+-        (KernRe(r"^inline +"), ""),
+-        (KernRe(r"^__inline__ +"), ""),
+-        (KernRe(r"^__inline +"), ""),
+-        (KernRe(r"^__always_inline +"), ""),
+-        (KernRe(r"^noinline +"), ""),
+-        (KernRe(r"^__FORTIFY_INLINE +"), ""),
+-        (KernRe(r"__init +"), ""),
+-        (KernRe(r"__init_or_module +"), ""),
+-        (KernRe(r"__exit +"), ""),
+-        (KernRe(r"__deprecated +"), ""),
+-        (KernRe(r"__flatten +"), ""),
+-        (KernRe(r"__meminit +"), ""),
+-        (KernRe(r"__must_check +"), ""),
+-        (KernRe(r"__weak +"), ""),
+-        (KernRe(r"__sched +"), ""),
++        (CMatch(r"static"), ""),
++        (CMatch(r"extern"), ""),
++        (CMatch(r"asmlinkage"), ""),
++        (CMatch(r"inline"), ""),
++        (CMatch(r"__inline__"), ""),
++        (CMatch(r"__inline"), ""),
++        (CMatch(r"__always_inline"), ""),
++        (CMatch(r"noinline"), ""),
++        (CMatch(r"__FORTIFY_INLINE"), ""),
++        (CMatch(r"__init"), ""),
++        (CMatch(r"__init_or_module"), ""),
++        (CMatch(r"__exit"), ""),
++        (CMatch(r"__deprecated"), ""),
++        (CMatch(r"__flatten"), ""),
++        (CMatch(r"__meminit"), ""),
++        (CMatch(r"__must_check"), ""),
++        (CMatch(r"__weak"), ""),
++        (CMatch(r"__sched"), ""),
++
++        #
++        # HACK: this is similar to process_export() hack. It is meant to
++        # drop _noproof from function name. See for instance:
++        # ahash_request_alloc kernel-doc declaration at include/crypto/hash.h.
++        #
+         (KernRe(r"_noprof"), ""),
+-        (KernRe(r"__always_unused *"), ""),
+-        (KernRe(r"__printf\s*\(\s*\d*\s*,\s*\d*\s*\) +"), ""),
+-        (KernRe(r"__(?:re)?alloc_size\s*\(\s*\d+\s*(?:,\s*\d+\s*)?\) +"), ""),
+-        (KernRe(r"__diagnose_as\s*\(\s*\S+\s*(?:,\s*\d+\s*)*\) +"), ""),
+-        (KernRe(r"DECL_BUCKET_PARAMS\s*\(\s*(\S+)\s*,\s*(\S+)\s*\)"), r"\1, \2"),
+-        (KernRe(r"__no_context_analysis\s*"), ""),
+-        (KernRe(r"__attribute_const__ +"), ""),
+-        (KernRe(r"__attribute__\s*\(\((?:[\w\s]+(?:\([^)]*\))?\s*,?)+\)\)\s+"), ""),
++
++        (CMatch(r"__always_unused"), ""),
++        (CMatch('__printf'), ""),
++        (CMatch('__(?:re)?alloc_size'), ""),
++        (CMatch("__diagnose_as"), ""),
++        (CMatch("DECL_BUCKET_PARAMS"), r"\1, \2"),
++        (CMatch(r"__no_context_analysis"), ""),
++        (CMatch(r"__attribute_const__"), ""),
++        (CMatch("__attribute__"), ""),
+     ]
+ 
+     #: Transforms for variable prototypes.
+     var_xforms = [
+-        (KernRe(r"__read_mostly"), ""),
+-        (KernRe(r"__ro_after_init"), ""),
+-        (KernRe(r'\s*__guarded_by\s*\([^\)]*\)', re.S), ""),
+-        (KernRe(r'\s*__pt_guarded_by\s*\([^\)]*\)', re.S), ""),
+-        (KernRe(r"LIST_HEAD\(([\w_]+)\)"), r"struct list_head \1"),
++        (CMatch(r"__read_mostly"), ""),
++        (CMatch(r"__ro_after_init"), ""),
++        (CMatch('__guarded_by'), ""),
++        (CMatch('__pt_guarded_by'), ""),
++        (CMatch("LIST_HEAD"), r"struct list_head \1"),
++
+         (KernRe(r"(?://.*)$"), ""),
+         (KernRe(r"(?:/\*.*\*/)"), ""),
+         (KernRe(r";$"), ""),
 -- 
 2.53.0
 
