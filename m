@@ -1,65 +1,62 @@
-Return-Path: <linux-doc+bounces-79029-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79030-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gPjBLgzUsmlDQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79029-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:12 +0100
+	id gEoCKaDUsmlDQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79030-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:58:40 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75168273BE0
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:12 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AF7F273D0F
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:58:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A0FC6305B4AA
+	by sea.lore.kernel.org (Postfix) with ESMTP id 60FAF31E34ED
 	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:55:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5DA13C873B;
-	Thu, 12 Mar 2026 14:55:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19F6D3C9426;
+	Thu, 12 Mar 2026 14:55:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X74Jg69c"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VLClXvvC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EFE937C901;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92C6C3C8725;
 	Thu, 12 Mar 2026 14:55:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773327302; cv=none; b=aqfzgYOuutKAUfORU74H+NRfmr/nzB6ZnbB8EMZEAqH6XXZJom1e36XXx45lisreRIpsaPFJiiFjqQi5/gzdZZMSAaNzOBnrSPZESpltigk8j5cX6W+7/JeHRdDWAk1O6LspRRTpQCG1yC57wSimbeunx6tQs89gmc5+PYp+nm4=
+	t=1773327302; cv=none; b=RjFp5v9Kys4HSDMXm66akqSjEuBF/Ns88WdyAoWn2JxICxdPUwOFc4AZUMU1JnoYwjSsPY5LRSXpaJ1URrIwwWqI6QMentPkQjLcFlbm2t2NW9juGMEkN6GsLxYg2YTpaSfhLyMbZ5hHuTzSPe+aXIfH8c9IxhHst8bzfr0Zqdw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773327302; c=relaxed/simple;
-	bh=TmYHPBWmiJoumgXDNjybq4wZqraDZtMhzikKfDnelmU=;
+	bh=cocGuR4ahs9fGSXrTE4ktj6m/i8U23Nz1YJLPdQXD+c=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RmpMdbCup4uNpa+alYTXVP006/BTI/8X1IDTHeOyg89s1rs23A7lGp1AR+fsNpPwS9t/C0tgp3uhcfft6JmIzW8kiZoD7P3jk7EUezfF6rGkPwOh7PuQcbAFe52octw9OyxsUnFvhopofaQ+RQBPUDNuR8Fo8eTYJE8FkCihZng=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X74Jg69c; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32F02C4CEF7;
+	 MIME-Version:Content-Type; b=gBLo0dXhE8Mch+hPEpEWn+d7EJ44Eg+ekFq6OeRZDcoZiEeuCaSUYhZ9CJ6Vd7RQOINgoJo1nv/Mr/sO+Ga2ly0EbF+ncMfXXKmTXKQ6D2r4lprWwSBxfNKFAEu3K6O19c2amPgvmKu1/MAgyyX6mUOPDziaT180n6Sjs5CA5ds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VLClXvvC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65D46C2BC87;
 	Thu, 12 Mar 2026 14:55:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773327302;
-	bh=TmYHPBWmiJoumgXDNjybq4wZqraDZtMhzikKfDnelmU=;
+	bh=cocGuR4ahs9fGSXrTE4ktj6m/i8U23Nz1YJLPdQXD+c=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=X74Jg69cPp+8b5T6fFQfVzPaBkEJ4Rz4JFWG7PCTZy3n8zAMVjABXFgjqoKwW/s5u
-	 GpsQJYrx8upyaga/N/kUlEaA6mw/AT58pjeGOKjUTYmskMKQY78EJFf+3hT4s6uCju
-	 DorAgEYS1+QtDLXHTFxV7h3ZfV608iUOxiVvrKmmX3TZCccTZeFPcJgMzvbh7R1rUu
-	 gaDc1XoGy1tMkfNeXyIsBtWoL0U5QHCKqpOXwQZ1ENDOTLi2YoJRc38ieXDOz4x9zE
-	 /erdgMAU9UzAM59sscM8DrRdhc/SuBZg1TOYRh2kN8/4uVyVV1dA7GWbbvpe9I8YrZ
-	 ORNtOf+OIXhTw==
+	b=VLClXvvCD1iF/POzGTn4ZYtoPLjK7h6NFbbpV/8A2vWbKV2LWCrRNu6XaNswCu94I
+	 AoSGYLPEsL8FfRf72boEgcajK9RZvC24Bfk6kYMPWXuY1tuoYz4WzlggB2GsLiZOvh
+	 NfmoZaVl/PAP0Mxt8C4vus9sqeOqth5APUwXb9F76VHKnH5SS8GeQYc1UihGV3yyzM
+	 yuYGVcTaKEMmiwwUTdcktQFLZWVAUOQ3PdKR90VbOHZE8Ffn3VFhpS/exfRPbkB/VR
+	 942oKQ/lmmdQLhBtfXJP2dqprqpZZS7CCrEzugit+whN2McVP2M8gsMgL1ZV93/0Km
+	 R+um/JXza9nTg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0hRE-00000008yHn-1vRn;
+	id 1w0hRE-00000008yJ6-2l6g;
 	Thu, 12 Mar 2026 15:55:00 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Vincent Mailhol <mailhol@kernel.org>
-Subject: [PATCH v2 26/28] docs: kernel-doc.rst: document private: scope propagation
-Date: Thu, 12 Mar 2026 15:54:46 +0100
-Message-ID: <6bdaba027c1d605df9f71ee504d8e042a71b18c9.1773326442.git.mchehab+huawei@kernel.org>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 27/28] docs: c_lex: produce a cleaner str() representation
+Date: Thu, 12 Mar 2026 15:54:47 +0100
+Message-ID: <5260e485da8f1993bb1bab17595672f2601df6f5.1773326442.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773326442.git.mchehab+huawei@kernel.org>
 References: <cover.1773326442.git.mchehab+huawei@kernel.org>
@@ -72,73 +69,89 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79029-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79030-lists,linux-doc=lfdr.de,huawei];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 75168273BE0
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2AF7F273D0F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This was an undefined behavior, but at least one place used private:
-inside a nested struct meant to not be propagated outside it.
-
-Kernel-doc now defines how this is propagated. So, document that.
+Avoid adding whitespaces before ";" and have duplicated ones
+at the output after converting to string.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/doc-guide/kernel-doc.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
+ tools/lib/python/kdoc/c_lex.py | 27 ++++++++++++++++++++++++---
+ 1 file changed, 24 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/doc-guide/kernel-doc.rst b/Documentation/doc-guide/kernel-doc.rst
-index 8d2c09fb36e4..1c148fe8e1f9 100644
---- a/Documentation/doc-guide/kernel-doc.rst
-+++ b/Documentation/doc-guide/kernel-doc.rst
-@@ -213,6 +213,10 @@ The ``private:`` and ``public:`` tags must begin immediately following a
- ``/*`` comment marker. They may optionally include comments between the
- ``:`` and the ending ``*/`` marker.
+diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
+index e641bace5d69..95c4dd5afe77 100644
+--- a/tools/lib/python/kdoc/c_lex.py
++++ b/tools/lib/python/kdoc/c_lex.py
+@@ -241,7 +241,7 @@ class CTokenizer():
+         out=""
+         show_stack = [True]
  
-+When ``private:`` is used on nested structs, it propagates only to inner
-+structs/unions.
-+
-+
- Example::
+-        for tok in self.tokens:
++        for i, tok in enumerate(self.tokens):
+             if tok.kind == CToken.BEGIN:
+                 show_stack.append(show_stack[-1])
  
-   /**
-@@ -256,8 +260,10 @@ It is possible to document nested structs and unions, like::
-         union {
-           struct {
-             int memb1;
-+            /* private: hides memb2 from documentation */
-             int memb2;
-           };
-+          /* Everything here is public again, as private scope finished */
-           struct {
-             void *memb3;
-             int memb4;
+@@ -270,8 +270,29 @@ class CTokenizer():
+ 
+                 continue
+ 
+-            if show_stack[-1]:
+-                    out += str(tok.value)
++            if not show_stack[-1]:
++                continue
++
++            if i < len(self.tokens) - 1:
++                next_tok = self.tokens[i + 1]
++
++                # Do some cleanups before ";"
++
++                if (tok.kind == CToken.SPACE and
++                    next_tok.kind == CToken.PUNC and
++                    next_tok.value == ";"):
++
++                    continue
++
++                if (tok.kind == CToken.PUNC and
++                    next_tok.kind == CToken.PUNC and
++                    tok.value == ";" and
++                    next_tok.kind == CToken.PUNC and
++                    next_tok.value == ";"):
++
++                    continue
++
++            out += str(tok.value)
+ 
+         return out
+ 
 -- 
 2.52.0
 
