@@ -1,145 +1,285 @@
-Return-Path: <linux-doc+bounces-79068-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79069-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GC3DLg0Ts2mDSAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79068-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 20:25:01 +0100
+	id yJ7hFrUUs2mDSAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79069-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 20:32:05 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F1DA277D40
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 20:25:01 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0387278047
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 20:32:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 100A03294493
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 19:19:44 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 3BCDE3047899
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 19:21:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 49A333FE360;
-	Thu, 12 Mar 2026 19:18:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C13CD336897;
+	Thu, 12 Mar 2026 19:20:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b="uqWBTKcV"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="meSJk7ey"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.tuxedocomputers.com (mail.tuxedocomputers.com [157.90.84.7])
+Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04CF53A9D8F;
-	Thu, 12 Mar 2026 19:18:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=157.90.84.7
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773343096; cv=none; b=JljTBZr58L6/dbIkuFPClbxxfgQ+/I8NdfBop6Mxjy2N4rhillbO0PYxMqRYljbHUDA8r//w6gsX2MfYAwH7V3vPinA3WQ2ekG3lYEcUJ/XXcpTDm+24Uz3alqlE+alTjPiE3CLKDjnTF38t9aK47H6QkDmQYFdOL45NAojh944=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773343096; c=relaxed/simple;
-	bh=4xoksxvNwzcqsd7pTKjnOVXyjQLNKigZ8L1boOx+ROE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ew5F45Jk6G+lrpRigOKPx/OYtBk1S79dqLG59/FHJV9Aav6blIsHLlsMrveZHhdgmNbY8AiM9V59aX5XABAnFBQIzmEnp3o8S3+Mm+tspL3W73Bz3nuOYQ/hry08ikOVT60IU32EisjAfOsgQSSSy3Osh7euZdKaLoNZntEP/HQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com; spf=pass smtp.mailfrom=tuxedocomputers.com; dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b=uqWBTKcV; arc=none smtp.client-ip=157.90.84.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tuxedocomputers.com
-Received: from [192.168.178.24] (i5C75F5CE.versanet.de [92.117.245.206])
-	(Authenticated sender: wse@tuxedocomputers.com)
-	by mail.tuxedocomputers.com (Postfix) with ESMTPSA id 70E852FC004D;
-	Thu, 12 Mar 2026 20:18:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tuxedocomputers.com;
-	s=default; t=1773343090;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vmUeKXLZVIJERJ+3m5aFZr4fnjIqILcMoitvWxz+1NU=;
-	b=uqWBTKcVhgNGAIFlkAU/E4u+jZnJ8pVj76KNtlG8uTe0QVZlM3KSx/WBYPl6/cUUZHLXX+
-	IJDIlud+zFHJUg6Ii5Tur4zYug4TQXfs/uK3sNJQAsZrCwoSv7S3sntStzbAq/PLyjDHNb
-	6/CSidFcC/QSMUSc6dbTIDzPS+yGNx8=
-Authentication-Results: mail.tuxedocomputers.com;
-	auth=pass smtp.auth=wse@tuxedocomputers.com smtp.mailfrom=wse@tuxedocomputers.com
-Message-ID: <8ec1978f-986d-4a13-9af4-71afdb4b9a29@tuxedocomputers.com>
-Date: Thu, 12 Mar 2026 20:18:10 +0100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 506E2326938
+	for <linux-doc@vger.kernel.org>; Thu, 12 Mar 2026 19:20:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.51
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773343224; cv=pass; b=LCCb1XDp+3I5vuOC7x0GMyCzm/upUdco0bsBhOnvyeMk/BZR4aa5KmTjIIOZ9B45y7GQcz5Ns1TQ9T7/D00v6w1f88qIvP7HI7SdxTdjL6ixjeh5hgMMEIL5RaEs0Sx6bm/NdXwvKqqVfxvS0eMpit5UfNW/9FB//iaOZeG+fTs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773343224; c=relaxed/simple;
+	bh=v8TcVZMFN17vUsn7UZbDMvcZkQcIWr9N8al4ytTMSJY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=q1184vUpHjOfP7/lrxFQWDWK6ooivlMDtL2UG2qcaOD6PSznpIZaFH22CvAOCPLYLDa5fPhEJnv+eYxQh56L1Hxjc7GNTHRdLXbpC3Rq3OavtdBEqFWOOdgInXSVADjc5dxYHFRh/nMTvRUzbIvNbdNOJS2JIoiMSrXlLSiB3N8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=meSJk7ey; arc=pass smtp.client-ip=74.125.82.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-12714f01940so65244c88.0
+        for <linux-doc@vger.kernel.org>; Thu, 12 Mar 2026 12:20:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773343222; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Vvk6tq6nJlNbpqSBB1MUZ5E1AnZ8tsVO2GP+V/5MIF5KalOcTKVoSOo1/Q1PG67+HO
+         w6xhVwir0io+EAEFUPLpUxQcmHtBPe/WpQ7BnEhvGZrc84xBacve3P4Jc0Gid4xUULln
+         qwj5ekiLIM+FdWkx8NtYGPUkzS45Ka4xF178bDVlNJa5PYoeKmtYN6WrRsmHfJjpnGAB
+         DyUDy6rvIkAKPJ6Rm1ahguFdwMxfbEcYggWhO7eHxWjLyYTdT7TXqadcdi+TOPOH6C8z
+         yeUHqylUSC8oTBkQ31i2SJP473kTBDz1KxUgFpQfZwfWMWelyhmjCO7f8SL+OIMVKz5R
+         ZaLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=sqyBefgbThwlgKP9KCSuGlJgdIuR2RT0nMZ3gZqSKA8=;
+        fh=Al56DOHAe+ZLDNZO95ilsvdBlE5uU7NcXwyzh39ZEWM=;
+        b=GkNhc+DRMyJdEHKRwAokClEsJ3wttogS7jtShh1nvoyqGSfStWjgGaqKad073l2HYK
+         EFdptqTDndIahvkhsdJzG/9I60aNt693mgvE4psplzJa95j0wiELXAiBL+tt7eJ5lAME
+         u/7VQ1CYYDtP9AOQ5bqxZRqJ4kxrSXjGlcj3Fvg5k3HFAeATZYQ5afBJsDpK5VxKe1FO
+         eknMOjmwvicu2n9ccmMlBPexvPpPUvR0PZrHqCaUa4QhJZwVO26L4kHJ5Ev+gNdC4Ymw
+         p/jq1HXSJg48/fDH1nDRIOJuXEETj/FWfRdI2B4i7tqBu+DDbanL8gyaewUNKr6brc/g
+         F8Zg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773343222; x=1773948022; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sqyBefgbThwlgKP9KCSuGlJgdIuR2RT0nMZ3gZqSKA8=;
+        b=meSJk7eyWO3DuIJhtVEEEm4DMA2bOKynFla2cmUM74iuonzx1lknuD1txLnsq2dfEI
+         eLr8/crV6sCY1naJAQeIVr4pU7vZ8cFJn2TCfC4RCD/sawh2sXZf9h3IfQF0y6e2cw6t
+         Ex/4AAtHBss2KAW+CGaInczp3S/lUFkHnc+U44II41ZeHKO+ZFV1OwbKkaUopEU1TFDA
+         qNLzaVlUYDLE5l0Ax7tHyui0TfJ2t7llybLd8JAeNXwsCCo8uKHvo3uUwhroPvxZTVKV
+         z7/BfdbTlrlFCY7dKDhiiXfwn4ALdP3EW17B24g7j+yOh4lP0Y7UbkJJeB7kMvoYtIVS
+         e2vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773343222; x=1773948022;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=sqyBefgbThwlgKP9KCSuGlJgdIuR2RT0nMZ3gZqSKA8=;
+        b=EYmy+g/4XoF6TnlfFmpyBQrWLIcZw5ufIxGiokPSbCG2f6Mx9YvjrokrVMoXGLTK2L
+         DB8FNarfWUMm9KBvZKdZSwhl7r2h2hQ17PVEqDSnr9t3kMK37RYXZsj+R7bv5Rd6CYgI
+         P5ovEPMKpl4c+HVYNw5YgjfiQpPSjqDYTb+Y4ARgghTW5B6ohaP51x6bvWWDGFiWx0WK
+         0s2bbBDlI2jTlrfKpmVuMpCOg0pyPck4SDO62UWoxEN2a4w7wjBPQig9Dkwd3ytImYF2
+         FLXfhco+w/Lt6KQCQPbcUBjokPZaZ0hP6emmNV6XQNv7YtM5BKoot6PXLwhZQyXNhAHg
+         59yg==
+X-Forwarded-Encrypted: i=1; AJvYcCX1nx7Nila37C3nfCfDDYrOIQQv0G1Nzj9CUiRiDyni7UASF5MY3CWY0+slMLoRsP0iUQTaHJj1HDo=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz9TCZBHjTukN4nrpKqCKTUf8AWclnz3JMVKiHl8NNzJlEGmVNI
+	2/m/SaexKuUSR9+C/mFG+5wCQwaDJaYHNvWzhJxw/AodbZBCH1ojqtU47St9AIrPy/5EfRhKrZp
+	yaxTqxdJq4b2tORnt4C4rKEOFfgE3YPU=
+X-Gm-Gg: ATEYQzyDfOgKZQFpxIIU6Gw59fhCm+eob+PdG+qFxz2xQfXB/cFreTBWXCl5CuXppMX
+	liXIk+j9S8Fkov/MoIivtFY19TmJkS6tM4d3fejxBBQW0HOF5iBib6mVlvnDzJ/H/92uCxvpkzQ
+	NlwiWxXLzLcNiSAIfeo2dWalr2DNcn7Lt8dib3HjewOwemaylpb99BE6aX7nRqox5r4sp3Iz/Eb
+	QKAqSctjmm04gto9zI58rhHoCTsULZlVQDNkZoVZ0ENVUgbPRWy6aNgaK7o4HMyNpEOR+luyh25
+	S19d52xVDtXeeKN9/2GUQ1vnqyM7mS2n/4oWblq62Ks5pNOOvXikwfAtr1Y9csKreer15QiH6Sw
+	DIEycykjc5E8JXT9w87L0c7c=
+X-Received: by 2002:a05:693c:3113:b0:2be:ca4:e136 with SMTP id
+ 5a478bee46e88-2bea539b6c2mr239955eec.2.1773343222351; Thu, 12 Mar 2026
+ 12:20:22 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 5/5] Documentation: laptops: Update documentation for
- uniwill laptops
-To: Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>,
- W_Armin@gmx.de, hansg@kernel.org, ilpo.jarvinen@linux.intel.com,
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: platform-driver-x86@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260310234022.2085232-1-wse@tuxedocomputers.com>
- <20260310234022.2085232-6-wse@tuxedocomputers.com>
- <363b80db-9bf3-44d5-a756-e64d29bd36ec@infradead.org>
- <5bb7a2ae-9754-4375-a1f5-ef23916e26dc@tuxedocomputers.com>
- <878qbxozd4.fsf@trenco.lwn.net>
-Content-Language: en-US
-From: Werner Sembach <wse@tuxedocomputers.com>
-In-Reply-To: <878qbxozd4.fsf@trenco.lwn.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[tuxedocomputers.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[tuxedocomputers.com:s=default];
+References: <20260306203648.1136554-1-joelagnelf@nvidia.com> <20260306203648.1136554-2-joelagnelf@nvidia.com>
+In-Reply-To: <20260306203648.1136554-2-joelagnelf@nvidia.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Thu, 12 Mar 2026 20:20:10 +0100
+X-Gm-Features: AaiRm53FHItUdFEegxUW1-4wt0_otNvbfdbd3Uys6sYfgMCnCSAVDf6Yalvkc30
+Message-ID: <CANiq72kEnDyUpnWMZmheJytjioeiJUK_C-yQJk77dPid89LExw@mail.gmail.com>
+Subject: Re: [PATCH v12 1/1] rust: interop: Add list module for C linked list interface
+To: Joel Fernandes <joelagnelf@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>, 
+	Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, 
+	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+	Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
+	Alex Gaynor <alex.gaynor@gmail.com>, Danilo Krummrich <dakr@kernel.org>, 
+	Dave Airlie <airlied@redhat.com>, David Airlie <airlied@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, 
+	Daniel Almeida <daniel.almeida@collabora.com>, Koen Koning <koen.koning@linux.intel.com>, 
+	Nikola Djukic <ndjukic@nvidia.com>, Alexandre Courbot <acourbot@nvidia.com>, 
+	Philipp Stanner <phasta@kernel.org>, Elle Rhumsaa <elle@weathered-steel.dev>, 
+	Jonathan Corbet <corbet@lwn.net>, Alex Deucher <alexander.deucher@amd.com>, 
+	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Jani Nikula <jani.nikula@linux.intel.com>, 
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	Tvrtko Ursulin <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>, 
+	Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, 
+	Lucas De Marchi <lucas.demarchi@intel.com>, 
+	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+	Helge Deller <deller@gmx.de>, John Hubbard <jhubbard@nvidia.com>, 
+	Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>, 
+	Andrea Righi <arighi@nvidia.com>, Andy Ritger <aritger@nvidia.com>, Zhi Wang <zhiw@nvidia.com>, 
+	Balbir Singh <balbirs@nvidia.com>, alexeyi@nvidia.com, 
+	Eliot Courtney <ecourtney@nvidia.com>, dri-devel@lists.freedesktop.org, 
+	nouveau@lists.freedesktop.org, rust-for-linux@vger.kernel.org, 
+	linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org, 
+	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+	linux-fbdev@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79068-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[lwn.net,infradead.org,gmx.de,kernel.org,linux.intel.com,linuxfoundation.org];
-	DKIM_TRACE(0.00)[tuxedocomputers.com:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,gmail.com,redhat.com,linux.intel.com,suse.de,ffwll.ch,collabora.com,nvidia.com,weathered-steel.dev,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,lists.freedesktop.org];
+	URIBL_MULTI_FAIL(0.00)[nvidia.com:server fail,sto.lore.kernel.org:server fail,rust-lang.github.io:server fail,mail.gmail.com:server fail];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-79069-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_GT_50(0.00)[55];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wse@tuxedocomputers.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,gmx.de:email,infradead.org:email]
-X-Rspamd-Queue-Id: 1F1DA277D40
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,mail.gmail.com:mid,rust-lang.github.io:url]
+X-Rspamd-Queue-Id: F0387278047
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On Fri, Mar 6, 2026 at 9:37=E2=80=AFPM Joel Fernandes <joelagnelf@nvidia.co=
+m> wrote:
+>
+> +//! // Create typed [`CList`] from sentinel head.
+> +//! // SAFETY: head is valid and initialized, items are `SampleItemC` wi=
+th
+> +//! // embedded `link` field, and `Item` is `#[repr(transparent)]` over =
+`SampleItemC`.
+> +//! let list =3D clist_create!(unsafe { head, Item, SampleItemC, link })=
+;
 
-Am 12.03.26 um 16:12 schrieb Jonathan Corbet:
-> Werner Sembach <wse@tuxedocomputers.com> writes:
->
->> Hi Randy,
->>
->> Am 11.03.26 um 05:57 schrieb Randy Dunlap:
->>> Hi Werner,
->>>
->>> On 3/10/26 4:34 PM, Werner Sembach wrote:
->>>> Adds short description for two new sysfs entries, ctgp_offset and
->>>> usb_c_power_priority, to the documentation of uniwill laptops.
->>>>
->>>> Signed-off-by: Werner Sembach <wse@tuxedocomputers.com>
->>>> Reviewed-by: Armin Wolf <W_Armin@gmx.de>
->>>> Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
->>>> ---
->>>>    .../ABI/testing/sysfs-driver-uniwill-laptop   | 25 +++++++++++++++++++
->>>>    .../admin-guide/laptops/uniwill-laptop.rst    | 12 +++++++++
->>>>    2 files changed, 37 insertions(+)
->>>>
->>> Can you give me a lore.kernel.org URL or a message-ID in which
->>> I replied with a "Reviewed-by:" tag for this patch, please?
->>> I don't recall doing so, but I could have.
->> Thought you did go through it because you gave the spelling corrections,
->>
->> Sorry I can ofc remove it again.
-> As described in Documentation/process/submitting-patches.rst, a tag like
-> Reviewed-by must be explicitly offered by the named person; you can't
-> make them up yourself.  That's something you need to be careful about.
-Sorry, will remove it again
->
-> Thanks,
->
-> jon
+Was the patch tested with Clippy? It has several issues.
+
+The worst news is that it seems the "supposed to be `unsafe` block"
+does not count as one for Clippy, i.e.:
+
+    let list =3D clist_create!(unsafe { head, Item, SampleItemC, link });
+
+So we get:
+
+    error: statement has unnecessary safety comment
+        --> rust/doctests_kernel_generated.rs:7416:1
+         |
+    7416 | let list =3D clist_create!(unsafe { head, Item, SampleItemC, lin=
+k });
+         | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^=
+^^^
+         |
+    help: consider removing the safety comment
+        --> rust/doctests_kernel_generated.rs:7414:4
+         |
+    7414 | // SAFETY: head is valid and initialized, items are
+`SampleItemC` with
+         |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^=
+^^^^^^
+         =3D help: for further information visit
+https://rust-lang.github.io/rust-clippy/rust-1.94.0/index.html#unnecessary_=
+safety_comment
+         =3D note: `-D clippy::unnecessary-safety-comment` implied by
+`-D warnings`
+         =3D help: to override `-D warnings` add
+`#[allow(clippy::unnecessary_safety_comment)]`
+
+For this, we could write them as a `// SAFETY*: ` comment or similar,
+to make progress for now, but it would best to request upstream Clippy
+to detect this or to rework the macro to force the `unsafe` block
+outside.
+
+In addition:
+
+    error: unsafe block missing a safety comment
+       --> rust/kernel/interop/list.rs:357:17
+        |
+    112 |     let _list =3D clist_create!(unsafe { head, Item,
+SampleItemC, link });
+        |
+--------------------------------------------------------- in this
+macro invocation
+    ...
+    357 |             |p| unsafe { &raw const (*p).$($field).+ };
+        |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        |
+        =3D help: consider adding a safety comment on the preceding line
+        =3D help: for further information visit
+https://rust-lang.github.io/rust-clippy/rust-1.94.0/index.html#undocumented=
+_unsafe_blocks
+        =3D note: `-D clippy::undocumented-unsafe-blocks` implied by `-D wa=
+rnings`
+        =3D help: to override `-D warnings` add
+`#[allow(clippy::undocumented_unsafe_blocks)]`
+        =3D note: this error originates in the macro `clist_create` (in
+Nightly builds, run with -Z macro-backtrace for more info)
+
+So this needs a `// SAFETY:` comment on top of the closure.
+
+    error: this macro expands metavariables in an unsafe block
+       --> rust/kernel/interop/list.rs:362:9
+        |
+    362 |         unsafe { $crate::interop::list::CList::<$rust_type,
+OFFSET>::from_raw($head) }
+        |
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^=
+^^^
+        |
+        =3D note: this allows the user of the macro to write unsafe code
+outside of an unsafe block
+        =3D help: consider expanding any metavariables outside of this
+block, e.g. by storing them in a variable
+        =3D help: ... or also expand referenced metavariables in a safe
+context to require an unsafe block at callsite
+        =3D help: for further information visit
+https://rust-lang.github.io/rust-clippy/rust-1.94.0/index.html#macro_metava=
+rs_in_unsafe
+        =3D note: `-D clippy::macro-metavars-in-unsafe` implied by `-D warn=
+ings`
+        =3D help: to override `-D warnings` add
+`#[allow(clippy::macro_metavars_in_unsafe)]`
+
+For this one, to begin with, do we expect to have actual expressions
+for `$head`, or could we constrain it for now to an identifier for
+instance?
+
+With an identifier there is no issue then -- the example currently has
+just an identifier anyway.
+
+I hope that helps.
+
+Cheers,
+Miguel
 
