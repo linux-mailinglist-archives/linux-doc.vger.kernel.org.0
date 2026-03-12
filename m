@@ -1,445 +1,256 @@
-Return-Path: <linux-doc+bounces-79102-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79112-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oKFcOfsjs2nMSgAAu9opvQ
-	(envelope-from <linux-doc+bounces-79102-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 21:37:15 +0100
+	id cHRLJd4ks2nMSgAAu9opvQ
+	(envelope-from <linux-doc+bounces-79112-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 21:41:02 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6153527954D
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 21:37:15 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A43D52796C8
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 21:41:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F27C5302F404
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 20:37:13 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7A945304269B
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 20:38:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD20737C0E7;
-	Thu, 12 Mar 2026 20:37:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E68FD37B013;
+	Thu, 12 Mar 2026 20:38:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k3e/St7w"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="2EqGGVUI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012031.outbound.protection.outlook.com [52.101.43.31])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 989D1346FB3;
-	Thu, 12 Mar 2026 20:37:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773347832; cv=none; b=lUvFgQg4TH3QEEStfs69WNSQ7Dm/pK3dENJchW6t1+zUBmAW28NqvQDHVtcmtGr1EvqNyuuAUiXOR7PWQUrhiL9s0K42i7Cq06CPQs/U5eEp/ZW4tvtB7Y503tgRJ1/wIkxPAgp93QvO/ALl6b8mjW+ASCqF/juClB6o6QCdGQI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773347832; c=relaxed/simple;
-	bh=LsutievMoOrqeZOADP/MLwr8hHh7mzdZPbDe4AQ82v4=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=n903BCoUnJJ3L19L8Uf0xW06MZWXZf+C2enYhtZQtxngnSZASU5OWNXfwzqpMOupDM/w4VdpTXR3yRVxmsC7yr/q1dvNZeGXr/wBji/PqhwyHv18c8kFdpLtSKjNTlm3EG3mn1NCN09AUWQRaF4+3y56VVCRNhZpJ4AQptUhMls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k3e/St7w; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DADDBC4CEF7;
-	Thu, 12 Mar 2026 20:36:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773347832;
-	bh=LsutievMoOrqeZOADP/MLwr8hHh7mzdZPbDe4AQ82v4=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
-	b=k3e/St7w+/LE7C6gR6OHeQh1yo5UhhCXmnQzILm4UU+zOTmvOu9OtnvecyAUEY8Mt
-	 hRch27enzckwDuf4QsRxhf82XhQrHoamoYpcuXdPWTVwsoU1rCMOO5/7Oo0/DmaSWt
-	 nY6DTUZHTS6dequcRL5sTJghE91bEL1S2nwuoMl+EY0CFnDhfyO0xoRJGZxLyHayPc
-	 ysIBZ1l10+6ffauxl2m7w1yCRwkqo4irHNutifmFzgcysAPmoEGw+Qhmb7UiJPpNWL
-	 DG90Nq7SHXKyqOnPKCRDjT34rPyrzKha0ItAc4EwIbxE0Im/sZtuHGnKcts1TH2waO
-	 g3kPn3VBA5Idw==
-Message-ID: <ee39e605-0d9f-433b-9dfa-f70fd92edfac@kernel.org>
-Date: Thu, 12 Mar 2026 21:36:55 +0100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B3C5374162;
+	Thu, 12 Mar 2026 20:38:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.43.31
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773347932; cv=fail; b=rcrkWyzMV63u3j1ermPeVYqCeuWJKmTkV2EmVoHYqLv1NoaRFlyfNShWZdms4UeLZh1iVw2lJfflFgqlnIpX71IKoIO6PA9uS4zYmJqza47H16xuPzJBVtbLQLA19bQJj/bIz3BCop9O54d6gOYrovG/6rIRawBeevDj6NgkW74=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773347932; c=relaxed/simple;
+	bh=ewfdkeoSE0LU+mwNyCGKnpANXRbey78B3Ev1b6ioXCY=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=IG3FnXi+XVzya9tuQGdTSW/y/7h9ifvZf3QDN/wQ7OEUwypw3K3r7UesqLwPJ39DL4fyGgzcvGoQWTQBFSgmjxuhiollio7L7b+XIRHxUXNKW6mBHTU2xXU3j4Qpi+lFJsJWAnyJRv5ojfn7zs7vYzvx3Fpo9apKLaSE3HkYBps=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=2EqGGVUI; arc=fail smtp.client-ip=52.101.43.31
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xA5Hya82+gCdAuSLSzzB5RUnVIi5BQypBZXw//5NydTtYWSLBdvrJWR1lqWJNLCJ1V0PdcpxD5pOZkAx/jXP8IyPQPSsLAoxntkGcXLebW/j94UkV6nen20GvYiiuZk+xRFAndUm3z6r9vM+LwdbAT62fzSM+EZOKAtRrerqm9jMKU4ki2/T64gs03W2wjslDBdZdBkDApYupyPoRaAggyKdZMCYTRu7KsaH0PKZfwso3a6Sw9DN23yb/4n2MjVZU9RanEwOmig8E5lyrjyRol/YQ7/+2lZn+IIrOLxW8o9OE6mS5LSLoeaRACdYytx8rSJDrhQz3Ikzwhua920Ivg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xoMeChVdLUw1WYm4EQW0EiCsfzMggrTqbWQZY8aBLmc=;
+ b=wxxfKeJx+qfLD53REb0DJOlqE1bcoaSjkF3HXcHyGgU2eKojZHoAH2dQnTGCyYwaQ6bbvcennpVvzp8P6xV9M9JfMq5fh/Et1S/GM6pQUS+3/x8Q4cJsDfVgHYEPHhkOvEkoKDx6M/gxVWeLxBg6goW+8u3ofykk5n82zTpoyPhTFzX91qWOJJ/7Kwb2F+ejB5yupgcpKdcfIdhlPibPKn4j5MolAitlmeJx8v/tpg+5mFW6xmdUHCAreM0HcJQjQ3YcjLHx+v4IcZEKGfrbDzOIDHgk/465HZrq9koIXqoQK8kzLBlb37KGPj66eT7xWYPNzX7NlXSwgolAcXGmzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xoMeChVdLUw1WYm4EQW0EiCsfzMggrTqbWQZY8aBLmc=;
+ b=2EqGGVUIwJkDMAqWgFs5ZTpEhbZdy6ios+p9re/1GmyJtzrXQ5AMkyUYhKlEVu8KWbASg4z+YMpSx2z+BSs7af18fAgyUmzwfFdSLLGHeNgKQzD1DDaBdzgiuVKDbpBE5U4UQpnMD262Amf8U/eTOvEqla4FUZAsT1776KHSY+E=
+Received: from BYAPR06CA0040.namprd06.prod.outlook.com (2603:10b6:a03:14b::17)
+ by DS0PR12MB6461.namprd12.prod.outlook.com (2603:10b6:8:c7::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Thu, 12 Mar
+ 2026 20:38:44 +0000
+Received: from SJ5PEPF000001D0.namprd05.prod.outlook.com
+ (2603:10b6:a03:14b:cafe::7f) by BYAPR06CA0040.outlook.office365.com
+ (2603:10b6:a03:14b::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.26 via Frontend Transport; Thu,
+ 12 Mar 2026 20:38:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ5PEPF000001D0.mail.protection.outlook.com (10.167.242.52) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 20:38:43 +0000
+Received: from bmoger-ubuntu.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 12 Mar
+ 2026 15:38:39 -0500
+From: Babu Moger <babu.moger@amd.com>
+To: <corbet@lwn.net>, <tony.luck@intel.com>, <reinette.chatre@intel.com>,
+	<Dave.Martin@arm.com>, <james.morse@arm.com>, <tglx@kernel.org>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>
+CC: <skhan@linuxfoundation.org>, <babu.moger@amd.com>, <x86@kernel.org>,
+	<hpa@zytor.com>, <peterz@infradead.org>, <juri.lelli@redhat.com>,
+	<vincent.guittot@linaro.org>, <dietmar.eggemann@arm.com>,
+	<rostedt@goodmis.org>, <bsegall@google.com>, <mgorman@suse.de>,
+	<vschneid@redhat.com>, <kas@kernel.org>, <rick.p.edgecombe@intel.com>,
+	<akpm@linux-foundation.org>, <pmladek@suse.com>, <rdunlap@infradead.org>,
+	<dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <elver@google.com>,
+	<paulmck@kernel.org>, <lirongqing@baidu.com>, <safinaskar@gmail.com>,
+	<fvdl@google.com>, <seanjc@google.com>, <pawan.kumar.gupta@linux.intel.com>,
+	<xin@zytor.com>, <tiala@microsoft.com>, <Neeraj.Upadhyay@amd.com>,
+	<chang.seok.bae@intel.com>, <thomas.lendacky@amd.com>,
+	<elena.reshetova@intel.com>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-coco@lists.linux.dev>,
+	<kvm@vger.kernel.org>, <eranian@google.com>, <peternewman@google.com>
+Subject: [PATCH v2 10/16] x86/resctrl: Add PLZA state tracking and context switch handling
+Date: Thu, 12 Mar 2026 15:36:55 -0500
+Message-ID: <654954974f71dd267c706968f8477e6d7065e789.1773347820.git.babu.moger@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1773347820.git.babu.moger@amd.com>
+References: <cover.1773347820.git.babu.moger@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH mm-unstable v15 03/13] mm/khugepaged: generalize
- __collapse_huge_page_* for mTHP support
-From: "David Hildenbrand (Arm)" <david@kernel.org>
-To: Nico Pache <npache@redhat.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-trace-kernel@vger.kernel.org
-Cc: aarcange@redhat.com, akpm@linux-foundation.org,
- anshuman.khandual@arm.com, apopple@nvidia.com, baohua@kernel.org,
- baolin.wang@linux.alibaba.com, byungchul@sk.com, catalin.marinas@arm.com,
- cl@gentwo.org, corbet@lwn.net, dave.hansen@linux.intel.com,
- dev.jain@arm.com, gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com,
- jack@suse.cz, jackmanb@google.com, jannh@google.com, jglisse@google.com,
- joshua.hahnjy@gmail.com, kas@kernel.org, lance.yang@linux.dev,
- Liam.Howlett@oracle.com, lorenzo.stoakes@oracle.com,
- mathieu.desnoyers@efficios.com, matthew.brost@intel.com,
- mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de,
- rakie.kim@sk.com, raquini@redhat.com, rdunlap@infradead.org,
- richard.weiyang@gmail.com, rientjes@google.com, rostedt@goodmis.org,
- rppt@kernel.org, ryan.roberts@arm.com, shivankg@amd.com,
- sunnanyong@huawei.com, surenb@google.com, thomas.hellstrom@linux.intel.com,
- tiwai@suse.de, usamaarif642@gmail.com, vbabka@suse.cz,
- vishal.moola@gmail.com, wangkefeng.wang@huawei.com, will@kernel.org,
- willy@infradead.org, yang@os.amperecomputing.com,
- ying.huang@linux.alibaba.com, ziy@nvidia.com, zokeefe@google.com
-References: <20260226031741.230674-1-npache@redhat.com>
- <20260226032347.232939-1-npache@redhat.com>
- <8a4568de-e0f9-471b-bc94-1062d4af3938@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <8a4568de-e0f9-471b-bc94-1062d4af3938@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D0:EE_|DS0PR12MB6461:EE_
+X-MS-Office365-Filtering-Correlation-Id: f9cb3bc1-da5e-4e8c-a7b9-08de80775a5e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|36860700016|1800799024|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	MsjWidwv8X2K2tfJIu9WJMv2Y9gIJGIKWlU1Uo55lYc4p2/bJK3S9KTirCz7jtyRdppLbavSN4xkD5XZXTviALtqotvIWfOaxJGPX2SH5Wivi/myu2SHNbxW94eX4NfDmlHDmflqcSN6SFCrntou6QRwxjbHQGe0KUeua59dIRhgI+x9pgQJSm5CaukVPXFL3j1pDIDhjgRSrwYH8oQFqfAUpfs3yaQTsqblF9qoJR+jqbaMsvZwMJrvZcpuSNCn54BZ46X/o1fs7ZDWHVYK5saFVmcpqxeBa3APvujBXRmT7OYnKLu+hRvMmNRisLQ3i/xNyNvv6BI1UhElpRpUuL+KZ6ZhZqRhyw79FwHp8h0bQTEx3vCvEVeCAYw2jZlm5lG/zZNyya+KW2XNOOk9c8FGqvVvaHE7upbeu9Na/IiemTn15Po+S3cxSdVMu10anWlF/Ey9Gjal7ZTeXlkDMT110e/I7+KfuRDuILpUWkwctC2VyMjqL3zLzvB6lFwf+Z2cuZ30Cz+rVPQ456rRQRQ4zbwe/W+UbS4t0kGp+IR+7Wc6o/ohzk51AyCgkaY6zZGQl6Er4YDOkkHEGXcjMCm4xwsPeciFbFXjHEjM2kSusQC5GoLWLSfGJUqDxJhzabHxP1snrY8IgYbZEwC2874lTG8tqqDJEEam7NDIUj3Ks5QM4PX7KbJL2L34qexg+VV4WaCadQgsFuHjXi+0Sa4h0rx18MVGokDLc5yClwnw8pdfe4m93tNSsBXpUMI2tEqAgxUgwaAxKRO4Z43UiA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(36860700016)(1800799024)(82310400026)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	vhInSXajZW+sSEUvKJJqXcNpmlxEGomOBrs4gWJHdyn+Y9q1B4QHZbqoPwvVqwypLF85b6xrSfopWTnPuptnf/1ZPgmaKvXwGoLXRugTbcmB0UTeswEQZiiUr1+3L57eDEFmRtlapJlWz9JVsivRCzgdH3CBD92RUHKRCdAEtBm+y4ZTEo1c5L/Q5MgT0VgL7ACRCGRTyUOZi+EQTRN/DDxwATqb9002UIONng1CJHD4yqyvHps/Q6x4NiSXUtKQWYpeQJQMpjSBSfONzb448n2HpbouUT/pKXGJWA3IO+Bpb83h0zvwuDLLFSBwnI+D5tNEiCwMgQmBl0TjW5PTj1g8ehrWU5osWNhJtvNgFe4J5+6qcI+TQrNpKlN9BdTmd+AWDSAa6DwMVs+YRonlGTEdQbZVYPp+eADe65v6cddKfDdtlrkM2WUcYHlxrs6b
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 20:38:43.7449
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f9cb3bc1-da5e-4e8c-a7b9-08de80775a5e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ5PEPF000001D0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6461
+X-Spamd-Result: default: False [1.34 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,oracle.com,efficios.com,intel.com,suse.com,suse.de,infradead.org,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	TAGGED_FROM(0.00)[bounces-79102-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-79112-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[58];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,amd.com,kernel.org,zytor.com,infradead.org,redhat.com,linaro.org,arm.com,goodmis.org,google.com,suse.de,intel.com,linux-foundation.org,suse.com,linux.intel.com,baidu.com,gmail.com,microsoft.com,vger.kernel.org,lists.linux.dev];
+	DKIM_TRACE(0.00)[amd.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[47];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[babu.moger@amd.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,amd.com:dkim,amd.com:email,amd.com:mid];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,oracle.com:email,alibaba.com:email,arm.com:email]
-X-Rspamd-Queue-Id: 6153527954D
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: A43D52796C8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/12/26 21:32, David Hildenbrand (Arm) wrote:
-> On 2/26/26 04:23, Nico Pache wrote:
->> generalize the order of the __collapse_huge_page_* functions
->> to support future mTHP collapse.
->>
->> mTHP collapse will not honor the khugepaged_max_ptes_shared or
->> khugepaged_max_ptes_swap parameters, and will fail if it encounters a
->> shared or swapped entry.
->>
->> No functional changes in this patch.
->>
->> Reviewed-by: Wei Yang <richard.weiyang@gmail.com>
->> Reviewed-by: Lance Yang <lance.yang@linux.dev>
->> Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
->> Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
->> Co-developed-by: Dev Jain <dev.jain@arm.com>
->> Signed-off-by: Dev Jain <dev.jain@arm.com>
->> Signed-off-by: Nico Pache <npache@redhat.com>
->> ---
->>  mm/khugepaged.c | 73 +++++++++++++++++++++++++++++++------------------
->>  1 file changed, 47 insertions(+), 26 deletions(-)
->>
->> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
->> index a9b645402b7f..ecdbbf6a01a6 100644
->> --- a/mm/khugepaged.c
->> +++ b/mm/khugepaged.c
->> @@ -535,7 +535,7 @@ static void release_pte_pages(pte_t *pte, pte_t *_pte,
->>  
->>  static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
->>  		unsigned long start_addr, pte_t *pte, struct collapse_control *cc,
->> -		struct list_head *compound_pagelist)
->> +		unsigned int order, struct list_head *compound_pagelist)
->>  {
->>  	struct page *page = NULL;
->>  	struct folio *folio = NULL;
->> @@ -543,15 +543,17 @@ static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
->>  	pte_t *_pte;
->>  	int none_or_zero = 0, shared = 0, referenced = 0;
->>  	enum scan_result result = SCAN_FAIL;
->> +	const unsigned long nr_pages = 1UL << order;
->> +	int max_ptes_none = khugepaged_max_ptes_none >> (HPAGE_PMD_ORDER - order);
-> 
-> It might be a bit more readable to move "const unsigned long
-> nr_pages = 1UL << order;" all the way to the top.
-> 
-> Then, have here
-> 
-> 	int max_ptes_none = 0;
-> 
-> and do at the beginning of the function:
-> 
-> 	/* For MADV_COLLAPSE, we always collapse ... */
-> 	if (!cc->is_khugepaged)
-> 		max_ptes_none = HPAGE_PMD_NR;
-> 	/*  ... except if userfaultf relies on MISSING faults. */
-> 	if (!userfaultfd_armed(vma))
-> 		max_ptes_none = khugepaged_max_ptes_none >> (HPAGE_PMD_ORDER - order);
-> 
-> (but see below regarding helper function)
-> 
-> then the code below becomes ...
-> 
->>  
->> -	for (_pte = pte; _pte < pte + HPAGE_PMD_NR;
->> +	for (_pte = pte; _pte < pte + nr_pages;
->>  	     _pte++, addr += PAGE_SIZE) {
->>  		pte_t pteval = ptep_get(_pte);
->>  		if (pte_none_or_zero(pteval)) {
->>  			++none_or_zero;
->>  			if (!userfaultfd_armed(vma) &&
->>  			    (!cc->is_khugepaged ||
->> -			     none_or_zero <= khugepaged_max_ptes_none)) {
->> +			     none_or_zero <= max_ptes_none)) {
-> 
-> ...
-> 
-> 	if (none_or_zero <= max_ptes_none) {
-> 
-> 
-> I see that you do something like that (but slightly different) in the next
-> patch. You could easily extend the above by it.
-> 
-> Or go one step further and move all of that conditional into collapse_max_ptes_none(), whereby
-> you simply also pass the cc and the vma.
-> 
-> Then this all gets cleaned up and you'd end up above with
-> 
-> max_ptes_none = collapse_max_ptes_none(cc, vma, order);
-> if (max_ptes_none < 0)
-> 	return result;
-> 
-> I'd do all that in this patch here, getting rid of #4.
-> 
-> 
->>  				continue;
->>  			} else {
->>  				result = SCAN_EXCEED_NONE_PTE;
->> @@ -585,8 +587,14 @@ static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
->>  		/* See collapse_scan_pmd(). */
->>  		if (folio_maybe_mapped_shared(folio)) {
->>  			++shared;
->> -			if (cc->is_khugepaged &&
->> -			    shared > khugepaged_max_ptes_shared) {
->> +			/*
->> +			 * TODO: Support shared pages without leading to further
->> +			 * mTHP collapses. Currently bringing in new pages via
->> +			 * shared may cause a future higher order collapse on a
->> +			 * rescan of the same range.
->> +			 */
->> +			if (!is_pmd_order(order) || (cc->is_khugepaged &&
->> +			    shared > khugepaged_max_ptes_shared)) {
-> 
-> That's not how we indent within a nested ().
-> 
-> To make this easier to read, what about similarly having at the beginning
-> of the function:
-> 
-> int max_ptes_shared = 0;
-> 
-> /* For MADV_COLLAPSE, we always collapse. */
-> if (cc->is_khugepaged)
-> 	max_ptes_none = HPAGE_PMD_NR;
-> /* TODO ... */
-> if (is_pmd_order(order))
-> 	max_ptes_none = khugepaged_max_ptes_shared;
-> 
-> to turn this code into a
-> 
-> 	if (shared > khugepaged_max_ptes_shared)
-> 
-> Also, here, might make sense to have a collapse_max_ptes_swap(cc, order)
-> to do that and clean it up.
-> 
-> 
->>  				result = SCAN_EXCEED_SHARED_PTE;
->>  				count_vm_event(THP_SCAN_EXCEED_SHARED_PTE);
->>  				goto out;
->> @@ -679,18 +687,18 @@ static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
->>  }
->>  
->>  static void __collapse_huge_page_copy_succeeded(pte_t *pte,
->> -						struct vm_area_struct *vma,
->> -						unsigned long address,
->> -						spinlock_t *ptl,
->> -						struct list_head *compound_pagelist)
->> +		struct vm_area_struct *vma, unsigned long address,
->> +		spinlock_t *ptl, unsigned int order,
->> +		struct list_head *compound_pagelist)
->>  {
->> -	unsigned long end = address + HPAGE_PMD_SIZE;
->> +	unsigned long end = address + (PAGE_SIZE << order);
->>  	struct folio *src, *tmp;
->>  	pte_t pteval;
->>  	pte_t *_pte;
->>  	unsigned int nr_ptes;
->> +	const unsigned long nr_pages = 1UL << order;
-> 
-> Move it further to the top.
-> 
->>  
->> -	for (_pte = pte; _pte < pte + HPAGE_PMD_NR; _pte += nr_ptes,
->> +	for (_pte = pte; _pte < pte + nr_pages; _pte += nr_ptes,
->>  	     address += nr_ptes * PAGE_SIZE) {
->>  		nr_ptes = 1;
->>  		pteval = ptep_get(_pte);
->> @@ -743,13 +751,11 @@ static void __collapse_huge_page_copy_succeeded(pte_t *pte,
->>  }
->>  
->>  static void __collapse_huge_page_copy_failed(pte_t *pte,
->> -					     pmd_t *pmd,
->> -					     pmd_t orig_pmd,
->> -					     struct vm_area_struct *vma,
->> -					     struct list_head *compound_pagelist)
->> +		pmd_t *pmd, pmd_t orig_pmd, struct vm_area_struct *vma,
->> +		unsigned int order, struct list_head *compound_pagelist)
->>  {
->>  	spinlock_t *pmd_ptl;
->> -
->> +	const unsigned long nr_pages = 1UL << order;
->>  	/*
->>  	 * Re-establish the PMD to point to the original page table
->>  	 * entry. Restoring PMD needs to be done prior to releasing
->> @@ -763,7 +769,7 @@ static void __collapse_huge_page_copy_failed(pte_t *pte,
->>  	 * Release both raw and compound pages isolated
->>  	 * in __collapse_huge_page_isolate.
->>  	 */
->> -	release_pte_pages(pte, pte + HPAGE_PMD_NR, compound_pagelist);
->> +	release_pte_pages(pte, pte + nr_pages, compound_pagelist);
->>  }
->>  
->>  /*
->> @@ -783,16 +789,16 @@ static void __collapse_huge_page_copy_failed(pte_t *pte,
->>   */
->>  static enum scan_result __collapse_huge_page_copy(pte_t *pte, struct folio *folio,
->>  		pmd_t *pmd, pmd_t orig_pmd, struct vm_area_struct *vma,
->> -		unsigned long address, spinlock_t *ptl,
->> +		unsigned long address, spinlock_t *ptl, unsigned int order,
->>  		struct list_head *compound_pagelist)
->>  {
->>  	unsigned int i;
->>  	enum scan_result result = SCAN_SUCCEED;
->> -
->> +	const unsigned long nr_pages = 1UL << order;
-> 
-> Same here, all the way to the top.
-> 
->>  	/*
->>  	 * Copying pages' contents is subject to memory poison at any iteration.
->>  	 */
->> -	for (i = 0; i < HPAGE_PMD_NR; i++) {
->> +	for (i = 0; i < nr_pages; i++) {
->>  		pte_t pteval = ptep_get(pte + i);
->>  		struct page *page = folio_page(folio, i);
->>  		unsigned long src_addr = address + i * PAGE_SIZE;
->> @@ -811,10 +817,10 @@ static enum scan_result __collapse_huge_page_copy(pte_t *pte, struct folio *foli
->>  
->>  	if (likely(result == SCAN_SUCCEED))
->>  		__collapse_huge_page_copy_succeeded(pte, vma, address, ptl,
->> -						    compound_pagelist);
->> +						    order, compound_pagelist);
->>  	else
->>  		__collapse_huge_page_copy_failed(pte, pmd, orig_pmd, vma,
->> -						 compound_pagelist);
->> +						 order, compound_pagelist);
->>  
->>  	return result;
->>  }
->> @@ -985,12 +991,12 @@ static enum scan_result check_pmd_still_valid(struct mm_struct *mm,
->>   * Returns result: if not SCAN_SUCCEED, mmap_lock has been released.
->>   */
->>  static enum scan_result __collapse_huge_page_swapin(struct mm_struct *mm,
->> -		struct vm_area_struct *vma, unsigned long start_addr, pmd_t *pmd,
->> -		int referenced)
->> +		struct vm_area_struct *vma, unsigned long start_addr,
->> +		pmd_t *pmd, int referenced, unsigned int order)
->>  {
->>  	int swapped_in = 0;
->>  	vm_fault_t ret = 0;
->> -	unsigned long addr, end = start_addr + (HPAGE_PMD_NR * PAGE_SIZE);
->> +	unsigned long addr, end = start_addr + (PAGE_SIZE << order);
->>  	enum scan_result result;
->>  	pte_t *pte = NULL;
->>  	spinlock_t *ptl;
->> @@ -1022,6 +1028,19 @@ static enum scan_result __collapse_huge_page_swapin(struct mm_struct *mm,
->>  		    pte_present(vmf.orig_pte))
->>  			continue;
->>  
->> +		/*
->> +		 * TODO: Support swapin without leading to further mTHP
->> +		 * collapses. Currently bringing in new pages via swapin may
->> +		 * cause a future higher order collapse on a rescan of the same
->> +		 * range.
->> +		 */
->> +		if (!is_pmd_order(order)) {
->> +			pte_unmap(pte);
->> +			mmap_read_unlock(mm);
->> +			result = SCAN_EXCEED_SWAP_PTE;
->> +			goto out;
->> +		}
->> +
-> 
-> Interesting, we just swapin everything we find :)
-> 
-> But do we really need this check here? I mean, we just found it to be present.
-> 
-> In the rare event that there was a race, do we really care? It was just
-> present, now it's swapped. Bad luck. Just swap it in.
-> 
+When kernel mode (e.g., PLZA) is enabled, the resctrl sched-in path must
+program MSR_IA32_PQR_PLZA_ASSOC in addition to IA32_PQR_ASSOC.
 
-Okay, now I am confused. Why are you not taking care of
-collapse_scan_pmd() in the same context?
+Add resctrl_kmode_mon_en() to indicate whether kernel mode monitoring needs
+to be enabled (GLOBAL_ASSIGN_CTRL_ASSIGN_MON). Task's kmode takes
+precedence when kmode is enabled for that task; otherwise, fall back to the
+per-CPU default_kmode. Write MSR_IA32_PQR_PLZA_ASSOC only when kmode is
+changed.
 
-Because if you make sure that we properly check against a max_ptes_swap
-similar as in the style above, we'd rule out swapin right from the start?
+Protect the PLZA path with rdt_kmode_enable_key to avoid overhead when
+kmode is disabled.
 
-Also, I would expect that all other parameters in there are similarly
-handled?
+Signed-off-by: Babu Moger <babu.moger@amd.com>
+---
+v2: Updated code comments.
+    Added new function resctrl_kmode_mon_en() to check if kernel mode
+    monitoring needs to be enabled.
+---
+ arch/x86/include/asm/resctrl.h | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
+diff --git a/arch/x86/include/asm/resctrl.h b/arch/x86/include/asm/resctrl.h
+index 167be18983c1..ccfd95b98bac 100644
+--- a/arch/x86/include/asm/resctrl.h
++++ b/arch/x86/include/asm/resctrl.h
+@@ -57,6 +57,9 @@ DECLARE_PER_CPU(struct resctrl_pqr_state, pqr_state);
+ extern bool rdt_alloc_capable;
+ extern bool rdt_mon_capable;
+ 
++/* Global kernel mode config; used by resctrl_kmode_mon_en(). */
++extern struct resctrl_kmode_cfg resctrl_kcfg;
++
+ DECLARE_STATIC_KEY_FALSE(rdt_enable_key);
+ DECLARE_STATIC_KEY_FALSE(rdt_alloc_enable_key);
+ DECLARE_STATIC_KEY_FALSE(rdt_mon_enable_key);
+@@ -108,6 +111,17 @@ static inline void resctrl_arch_disable_kmode(void)
+ 	static_branch_dec_cpuslocked(&rdt_enable_key);
+ }
+ 
++/**
++ * resctrl_kmode_mon_en() - True when kernel mode requires RMID in PLZA MSR
++ *
++ * When GLOBAL_ASSIGN_CTRL_ASSIGN_MON is active, MSR_IA32_PQR_PLZA_ASSOC must
++ * program both CLOSID and RMID for kernel work; otherwise only CLOSID is used.
++ */
++static bool resctrl_kmode_mon_en(void)
++{
++	return resctrl_kcfg.kmode_cur & GLOBAL_ASSIGN_CTRL_ASSIGN_MON;
++}
++
+ /*
+  * __resctrl_sched_in() - Writes the task's CLOSid/RMID to IA32_PQR_MSR
+  *
+@@ -127,6 +141,7 @@ static inline void __resctrl_sched_in(struct task_struct *tsk)
+ 	struct resctrl_pqr_state *state = this_cpu_ptr(&pqr_state);
+ 	u32 closid = READ_ONCE(state->default_closid);
+ 	u32 rmid = READ_ONCE(state->default_rmid);
++	u32 kmode = READ_ONCE(state->default_kmode);
+ 	u32 tmp;
+ 
+ 	/*
+@@ -150,6 +165,24 @@ static inline void __resctrl_sched_in(struct task_struct *tsk)
+ 		state->cur_rmid = rmid;
+ 		wrmsr(MSR_IA32_PQR_ASSOC, rmid, closid);
+ 	}
++
++	/*
++	 * When kernel mode (e.g. PLZA) is enabled, program MSR_IA32_PQR_PLZA_ASSOC.
++	 * Task's kmode overrides per-CPU default_kmode. Only write the MSR when
++	 * kmode has changed to avoid unnecessary writes on the scheduler hot path.
++	 */
++	if (static_branch_likely(&rdt_kmode_enable_key)) {
++		tmp = READ_ONCE(tsk->kmode);
++		if (tmp)
++			kmode = tmp;
++
++		if (kmode != state->cur_kmode) {
++			state->cur_kmode = kmode;
++			wrmsr(MSR_IA32_PQR_PLZA_ASSOC,
++			      resctrl_kmode_mon_en() ? (RMID_EN | state->kmode_rmid) : 0,
++			      (kmode ? PLZA_EN : 0) | (CLOSID_EN | state->kmode_closid));
++		}
++	}
+ }
+ 
+ static inline unsigned int resctrl_arch_round_mon_val(unsigned int val)
 -- 
-Cheers,
+2.43.0
 
-David
 
