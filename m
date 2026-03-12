@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-78943-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78931-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MIEbELJnsmlkMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-78943-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:54 +0100
+	id GP0fDGtnsmlkMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-78931-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:43 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6C0626E35C
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:13:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 853D926E2CD
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8EDFE31508C8
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E4EB7304C7C0
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F0183B0AC4;
-	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAB4D3ACF17;
+	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l3xI6Pkd"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="exeJ/KkF"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A08F3AD52F;
-	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADAE0375F78;
+	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773299554; cv=none; b=EqUJFuuJb97rgEScTKOpu+lLEbg0Z4MfjgaQ5wliqVldKduc8Bsdb9gaBCqgCo1PDQUerWT/SwdKSp617OjXvWOPb6Z97Sl/YyXHhhFt92m0bz6TWPsurXlTmZupaFZcix9ylLZtOtsMmaNaiNZfR4mOIE1KCeQE+mG4D7DvvrM=
+	t=1773299553; cv=none; b=tkkjv8FCoqBVLWOuqS2RdEMR6iDdeaRxkkDdXpU+5cuLNfL0FeS27if4wBY2Jxzr/5MTMmNTd/a7Mteq6rfyatrqdrmkGsOYayQTn7s89i8GsxvW63HtxfX4Q3US6U4SurSFsHzgl5ZmSx9aNnPAc5wF7rEFsMqGGXtEmrZ3o18=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773299554; c=relaxed/simple;
-	bh=Iw4hGcMR++9b5HjvzcPazTJn71Wj6E8lsfP0l3hk0pA=;
+	s=arc-20240116; t=1773299553; c=relaxed/simple;
+	bh=GfkGEBCrWYbAWOv2b+GqnMJXIitm+in5/jhJ5VsTDNc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=msL2yFjp2QReGX7WZ7JC8cQyD7Me1gmyouX9tRop9L1qc7kOfsNRlKZYDNDB7CJw4+jWRNqT6vzBQvUBXslZ+OIj21PZHXrdDG5RQp7uFYIXvm4nuSp1jLnM6KQRpyfnc9X2GU6lrJjqzRlvTNyMvz8IkkjHYxttfdEFyniI0Dk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l3xI6Pkd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4EF07C116C6;
+	 MIME-Version:Content-Type; b=mrrfgaIS5mjbPiqHkxKQC27oVCj232c9XvlAtbWettIOH4CRCIct/5gV5Rv+B6CpyE+fACadELYQbVR9oyVIo7gPXo0Fuzw+TH6mNBjJQ3h98qRMwra+3UsSO/RQXqPIgtIjE5RE6I8+BUcD3Tq+q6KJZVKev8ByXE7VR19lHl8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=exeJ/KkF; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50D07C4AF09;
 	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773299553;
-	bh=Iw4hGcMR++9b5HjvzcPazTJn71Wj6E8lsfP0l3hk0pA=;
+	bh=GfkGEBCrWYbAWOv2b+GqnMJXIitm+in5/jhJ5VsTDNc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=l3xI6PkdHWVBFa/8D4ngGu/oG+Ag2LfI/jfiEHXV7WT200eFfHwzGr/PoraQedkOf
-	 +aUaDlEX2C6rpI70apDEZSLo6G6dKmzKOdMrx124Oz2i3Sq8S/eOvQ+9jkO+Fbqygb
-	 pCfgAX5bBoVBIcg5qbnt9QbyjprkojJ0+MXIRbA5LjHavGy/d6xfwIUZ16B40JFbOD
-	 kPNKQiqv5hXRPAS+lTtdZ0PvTQInE8ehRDKzVjlcEjoyxt1GSDEZeDI3vOjduxHpA9
-	 oxrKiHKc55WBI2NzSD20RO29MCe4FuGJq8ZonNXES7ddijc+g6/2yYuamuarqUFmJK
-	 lSdjRkQbeff3Q==
+	b=exeJ/KkFlke8EuCjetR+4XhTRz1RnUpXnB5etMyQxdguPpfXwY0yfVT1TO6AqIZTP
+	 AagBrDxBzMNUlbuz/6f4yvwx/ChgA6v0B/1PNSIhjBBsnWRE3AwA/hEsBJ04HK2AXC
+	 meI9j8DyyS14K98c4Mjtbtf0UBOKDtxiWwR+viqzVvPevvd59eB2MPWWq1FZQphATg
+	 Q0pBHySrxVV0ArvkBpDqLMHImfu6XUdCX0ZDW/44WHQAYwNr2mIc0kqnMK5YSkHSbC
+	 7NALyOvRhi/VvFCcm58C0ap3izhcwroLvRnaxgtlVvkgpzRfq0tVsyTRVQvZNs3YGc
+	 ONlA1+C9aiLww==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0aDf-000000077gS-1zZC;
+	id 1w0aDf-000000077gW-26qb;
 	Thu, 12 Mar 2026 08:12:31 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -54,12 +54,10 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 07/20] docs: kdoc: move C Tokenizer to c_lex module
-Date: Thu, 12 Mar 2026 08:12:15 +0100
-Message-ID: <6f325ef5c6be846c21b0c4df0f48bd0deeb236b0.1773297828.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH v2 08/20] unittests: test_private: modify it to use CTokenizer directly
+Date: Thu, 12 Mar 2026 08:12:16 +0100
+Message-ID: <eeb01b2c5e7f6f67a4864f0361a1ba7ad58e3747.1773297828.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773297828.git.mchehab+huawei@kernel.org>
 References: <cover.1773297828.git.mchehab+huawei@kernel.org>
@@ -76,546 +74,166 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78943-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-78931-lists,linux-doc=lfdr.de,huawei];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A6C0626E35C
+X-Rspamd-Queue-Id: 853D926E2CD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Place the C tokenizer on a different module.
+Change the logic to use the tokenizer directly. This allows
+adding more unit tests to check the validty of the tokenizer
+itself.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Message-ID: <2672257233ff73a9464c09b50924be51e25d4f59.1773074166.git.mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/c_lex.py       | 239 +++++++++++++++++++++++++++
- tools/lib/python/kdoc/kdoc_parser.py |   3 +-
- tools/lib/python/kdoc/kdoc_re.py     | 233 --------------------------
- 3 files changed, 241 insertions(+), 234 deletions(-)
- create mode 100644 tools/lib/python/kdoc/c_lex.py
+ .../{test_private.py => test_tokenizer.py}    | 76 +++++++++++++------
+ 1 file changed, 52 insertions(+), 24 deletions(-)
+ rename tools/unittests/{test_private.py => test_tokenizer.py} (85%)
 
-diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
-new file mode 100644
-index 000000000000..a104c29b63fb
---- /dev/null
-+++ b/tools/lib/python/kdoc/c_lex.py
-@@ -0,0 +1,239 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright(c) 2025: Mauro Carvalho Chehab <mchehab@kernel.org>.
-+
-+"""
-+Regular expression ancillary classes.
-+
-+Those help caching regular expressions and do matching for kernel-doc.
-+"""
-+
-+import re
-+
-+from .kdoc_re import KernRe
-+
-+class CToken():
-+    """
-+    Data class to define a C token.
-+    """
-+
-+    # Tokens that can be used by the parser. Works like an C enum.
-+
-+    COMMENT = 0     #: A standard C or C99 comment, including delimiter.
-+    STRING = 1      #: A string, including quotation marks.
-+    CHAR = 2        #: A character, including apostophes.
-+    NUMBER = 3      #: A number.
-+    PUNC = 4        #: A puntuation mark: ``;`` / ``,`` / ``.``.
-+    BEGIN = 5       #: A begin character: ``{`` / ``[`` / ``(``.
-+    END = 6         #: A end character: ``}`` / ``]`` / ``)``.
-+    CPP = 7         #: A preprocessor macro.
-+    HASH = 8        #: The hash character - useful to handle other macros.
-+    OP = 9          #: A C operator (add, subtract, ...).
-+    STRUCT = 10     #: A ``struct`` keyword.
-+    UNION = 11      #: An ``union`` keyword.
-+    ENUM = 12       #: A ``struct`` keyword.
-+    TYPEDEF = 13    #: A ``typedef`` keyword.
-+    NAME = 14       #: A name. Can be an ID or a type.
-+    SPACE = 15      #: Any space characters, including new lines
-+
-+    MISMATCH = 255  #: an error indicator: should never happen in practice.
-+
-+    # Dict to convert from an enum interger into a string.
-+    _name_by_val = {v: k for k, v in dict(vars()).items() if isinstance(v, int)}
-+
-+    # Dict to convert from string to an enum-like integer value.
-+    _name_to_val = {k: v for v, k in _name_by_val.items()}
-+
-+    @staticmethod
-+    def to_name(val):
-+        """Convert from an integer value from CToken enum into a string"""
-+
-+        return CToken._name_by_val.get(val, f"UNKNOWN({val})")
-+
-+    @staticmethod
-+    def from_name(name):
-+        """Convert a string into a CToken enum value"""
-+        if name in CToken._name_to_val:
-+            return CToken._name_to_val[name]
-+
-+        return CToken.MISMATCH
-+
-+    def __init__(self, kind, value, pos,
-+                 brace_level, paren_level, bracket_level):
-+        self.kind = kind
-+        self.value = value
-+        self.pos = pos
-+        self.brace_level = brace_level
-+        self.paren_level = paren_level
-+        self.bracket_level = bracket_level
-+
-+    def __repr__(self):
-+        name = self.to_name(self.kind)
-+        if isinstance(self.value, str):
-+            value = '"' + self.value + '"'
-+        else:
-+            value = self.value
-+
-+        return f"CToken({name}, {value}, {self.pos}, " \
-+               f"{self.brace_level}, {self.paren_level}, {self.bracket_level})"
-+
-+#: Tokens to parse C code.
-+TOKEN_LIST = [
-+    (CToken.COMMENT, r"//[^\n]*|/\*[\s\S]*?\*/"),
-+
-+    (CToken.STRING,  r'"(?:\\.|[^"\\])*"'),
-+    (CToken.CHAR,    r"'(?:\\.|[^'\\])'"),
-+
-+    (CToken.NUMBER,  r"0[xX][0-9a-fA-F]+[uUlL]*|0[0-7]+[uUlL]*|"
-+                     r"[0-9]+(\.[0-9]*)?([eE][+-]?[0-9]+)?[fFlL]*"),
-+
-+    (CToken.PUNC,    r"[;,\.]"),
-+
-+    (CToken.BEGIN,   r"[\[\(\{]"),
-+
-+    (CToken.END,     r"[\]\)\}]"),
-+
-+    (CToken.CPP,     r"#\s*(define|include|ifdef|ifndef|if|else|elif|endif|undef|pragma)\b"),
-+
-+    (CToken.HASH,    r"#"),
-+
-+    (CToken.OP,      r"\+\+|\-\-|\->|==|\!=|<=|>=|&&|\|\||<<|>>|\+=|\-=|\*=|/=|%="
-+                     r"|&=|\|=|\^=|=|\+|\-|\*|/|%|<|>|&|\||\^|~|!|\?|\:"),
-+
-+    (CToken.STRUCT,  r"\bstruct\b"),
-+    (CToken.UNION,   r"\bunion\b"),
-+    (CToken.ENUM,    r"\benum\b"),
-+    (CToken.TYPEDEF, r"\bkinddef\b"),
-+
-+    (CToken.NAME,      r"[A-Za-z_][A-Za-z0-9_]*"),
-+
-+    (CToken.SPACE,   r"[\s]+"),
-+
-+    (CToken.MISMATCH,r"."),
-+]
-+
-+#: Handle C continuation lines.
-+RE_CONT = KernRe(r"\\\n")
-+
-+RE_COMMENT_START = KernRe(r'/\*\s*')
-+
-+#: tokenizer regex. Will be filled at the first CTokenizer usage.
-+re_scanner = None
-+
-+class CTokenizer():
-+    """
-+    Scan C statements and definitions and produce tokens.
-+
-+    When converted to string, it drops comments and handle public/private
-+    values, respecting depth.
-+    """
-+
-+    # This class is inspired and follows the basic concepts of:
-+    #   https://docs.python.org/3/library/re.html#writing-a-tokenizer
-+
-+    def _tokenize(self, source):
-+        """
-+        Interactor that parses ``source``, splitting it into tokens, as defined
-+        at ``self.TOKEN_LIST``.
-+
-+        The interactor returns a CToken class object.
-+        """
-+
-+        # Handle continuation lines. Note that kdoc_parser already has a
-+        # logic to do that. Still, let's keep it for completeness, as we might
-+        # end re-using this tokenizer outsize kernel-doc some day - or we may
-+        # eventually remove from there as a future cleanup.
-+        source = RE_CONT.sub("", source)
-+
-+        brace_level = 0
-+        paren_level = 0
-+        bracket_level = 0
-+
-+        for match in re_scanner.finditer(source):
-+            kind = CToken.from_name(match.lastgroup)
-+            pos = match.start()
-+            value = match.group()
-+
-+            if kind == CToken.MISMATCH:
-+                raise RuntimeError(f"Unexpected token '{value}' on {pos}:\n\t{source}")
-+            elif kind == CToken.BEGIN:
-+                if value == '(':
-+                    paren_level += 1
-+                elif value == '[':
-+                    bracket_level += 1
-+                else:  # value == '{'
-+                    brace_level += 1
-+
-+            elif kind == CToken.END:
-+                if value == ')' and paren_level > 0:
-+                    paren_level -= 1
-+                elif value == ']' and bracket_level > 0:
-+                    bracket_level -= 1
-+                elif brace_level > 0:    # value == '}'
-+                    brace_level -= 1
-+
-+            yield CToken(kind, value, pos,
-+                         brace_level, paren_level, bracket_level)
-+
-+    def __init__(self, source):
-+        """
-+        Create a regular expression to handle TOKEN_LIST.
-+
-+        While I generally don't like using regex group naming via:
-+            (?P<name>...)
-+
-+        in this particular case, it makes sense, as we can pick the name
-+        when matching a code via re_scanner().
-+        """
-+        global re_scanner
-+
-+        if not re_scanner:
-+            re_tokens = []
-+
-+            for kind, pattern in TOKEN_LIST:
-+                name = CToken.to_name(kind)
-+                re_tokens.append(f"(?P<{name}>{pattern})")
-+
-+            re_scanner = KernRe("|".join(re_tokens), re.MULTILINE | re.DOTALL)
-+
-+        self.tokens = []
-+        for tok in self._tokenize(source):
-+            self.tokens.append(tok)
-+
-+    def __str__(self):
-+        out=""
-+        show_stack = [True]
-+
-+        for tok in self.tokens:
-+            if tok.kind == CToken.BEGIN:
-+                show_stack.append(show_stack[-1])
-+
-+            elif tok.kind == CToken.END:
-+                prev = show_stack[-1]
-+                if len(show_stack) > 1:
-+                    show_stack.pop()
-+
-+                if not prev and show_stack[-1]:
-+                    #
-+                    # Try to preserve indent
-+                    #
-+                    out += "\t" * (len(show_stack) - 1)
-+
-+                    out += str(tok.value)
-+                    continue
-+
-+            elif tok.kind == CToken.COMMENT:
-+                comment = RE_COMMENT_START.sub("", tok.value)
-+
-+                if comment.startswith("private:"):
-+                    show_stack[-1] = False
-+                    show = False
-+                elif comment.startswith("public:"):
-+                    show_stack[-1] = True
-+
-+                continue
-+
-+            if show_stack[-1]:
-+                    out += str(tok.value)
-+
-+        return out
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index 6b181ead3175..e804e61b09c0 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -13,7 +13,8 @@ import sys
- import re
- from pprint import pformat
+diff --git a/tools/unittests/test_private.py b/tools/unittests/test_tokenizer.py
+similarity index 85%
+rename from tools/unittests/test_private.py
+rename to tools/unittests/test_tokenizer.py
+index eae245ae8a12..da0f2c4c9e21 100755
+--- a/tools/unittests/test_private.py
++++ b/tools/unittests/test_tokenizer.py
+@@ -15,20 +15,44 @@ from unittest.mock import MagicMock
+ SRC_DIR = os.path.dirname(os.path.realpath(__file__))
+ sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
  
--from kdoc.kdoc_re import NestedMatch, KernRe, CTokenizer
-+from kdoc.kdoc_re import NestedMatch, KernRe
-+from kdoc.c_lex import CTokenizer
- from kdoc.kdoc_item import KdocItem
+-from kdoc.kdoc_parser import trim_private_members
++from kdoc.kdoc_re import CTokenizer
+ from unittest_helper import run_unittest
+ 
++
++
+ #
+ # List of tests.
+ #
+ # The code will dynamically generate one test for each key on this dictionary.
+ #
+ 
++def make_private_test(name, data):
++    """
++    Create a test named ``name`` using parameters given by ``data`` dict.
++    """
++
++    def test(self):
++        """In-lined lambda-like function to run the test"""
++        tokens = CTokenizer(data["source"])
++        result = str(tokens)
++
++        #
++        # Avoid whitespace false positives
++        #
++        result = re.sub(r"\s++", " ", result).strip()
++        expected = re.sub(r"\s++", " ", data["trimmed"]).strip()
++
++        msg = f"failed when parsing this source:\n{data['source']}"
++        self.assertEqual(result, expected, msg=msg)
++
++    return test
++
+ #: Tests to check if CTokenizer is handling properly public/private comments.
+ TESTS_PRIVATE = {
+     #
+     # Simplest case: no private. Ensure that trimming won't affect struct
+     #
++    "__run__": make_private_test,
+     "no private": {
+         "source": """
+             struct foo {
+@@ -288,41 +312,45 @@ TESTS_PRIVATE = {
+     },
+ }
+ 
++#: Dict containing all test groups fror CTokenizer
++TESTS = {
++    "TestPublicPrivate": TESTS_PRIVATE,
++}
+ 
+-class TestPublicPrivate(unittest.TestCase):
+-    """
+-    Main test class. Populated dynamically at runtime.
+-    """
++def setUp(self):
++    self.maxDiff = None
+ 
+-    def setUp(self):
+-        self.maxDiff = None
++def build_test_class(group_name, table):
++    """
++    Dynamically creates a class instance using type() as a generator
++    for a new class derivated from unittest.TestCase.
+ 
+-    def add_test(cls, name, source, trimmed):
+-        """
+-        Dynamically add a test to the class
+-        """
+-        def test(cls):
+-            result = trim_private_members(source)
++    We're opting to do it inside a function to avoid the risk of
++    changing the globals() dictionary.
++    """
+ 
+-            result = re.sub(r"\s++", " ", result).strip()
+-            expected = re.sub(r"\s++", " ", trimmed).strip()
++    class_dict = {
++        "setUp": setUp
++    }
+ 
+-            msg = f"failed when parsing this source:\n" + source
++    run = table["__run__"]
+ 
+-            cls.assertEqual(result, expected, msg=msg)
++    for test_name, data in table.items():
++        if test_name == "__run__":
++            continue
+ 
+-        test.__name__ = f'test {name}'
++        class_dict[f"test_{test_name}"] = run(test_name, data)
+ 
+-        setattr(TestPublicPrivate, test.__name__, test)
++    cls = type(group_name, (unittest.TestCase,), class_dict)
+ 
++    return cls.__name__, cls
  
  #
-diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
-index 7bed4e9a8810..ba601a4f5035 100644
---- a/tools/lib/python/kdoc/kdoc_re.py
-+++ b/tools/lib/python/kdoc/kdoc_re.py
-@@ -141,239 +141,6 @@ class KernRe:
+-# Populate TestPublicPrivate class
++# Create classes and add them to the global dictionary
+ #
+-test_class = TestPublicPrivate()
+-for name, test in TESTS_PRIVATE.items():
+-    test_class.add_test(name, test["source"], test["trimmed"])
+-
++for group, table in TESTS.items():
++    t = build_test_class(group, table)
++    globals()[t[0]] = t[1]
  
-         return self.last_match.groups()
- 
--class TokType():
--
--    @staticmethod
--    def __str__(val):
--        """Return the name of an enum value"""
--        return TokType._name_by_val.get(val, f"UNKNOWN({val})")
--
--class CToken():
--    """
--    Data class to define a C token.
--    """
--
--    # Tokens that can be used by the parser. Works like an C enum.
--
--    COMMENT = 0     #: A standard C or C99 comment, including delimiter.
--    STRING = 1      #: A string, including quotation marks.
--    CHAR = 2        #: A character, including apostophes.
--    NUMBER = 3      #: A number.
--    PUNC = 4        #: A puntuation mark: ``;`` / ``,`` / ``.``.
--    BEGIN = 5       #: A begin character: ``{`` / ``[`` / ``(``.
--    END = 6         #: A end character: ``}`` / ``]`` / ``)``.
--    CPP = 7         #: A preprocessor macro.
--    HASH = 8        #: The hash character - useful to handle other macros.
--    OP = 9          #: A C operator (add, subtract, ...).
--    STRUCT = 10     #: A ``struct`` keyword.
--    UNION = 11      #: An ``union`` keyword.
--    ENUM = 12       #: A ``struct`` keyword.
--    TYPEDEF = 13    #: A ``typedef`` keyword.
--    NAME = 14       #: A name. Can be an ID or a type.
--    SPACE = 15      #: Any space characters, including new lines
--
--    MISMATCH = 255  #: an error indicator: should never happen in practice.
--
--    # Dict to convert from an enum interger into a string.
--    _name_by_val = {v: k for k, v in dict(vars()).items() if isinstance(v, int)}
--
--    # Dict to convert from string to an enum-like integer value.
--    _name_to_val = {k: v for v, k in _name_by_val.items()}
--
--    @staticmethod
--    def to_name(val):
--        """Convert from an integer value from CToken enum into a string"""
--
--        return CToken._name_by_val.get(val, f"UNKNOWN({val})")
--
--    @staticmethod
--    def from_name(name):
--        """Convert a string into a CToken enum value"""
--        if name in CToken._name_to_val:
--            return CToken._name_to_val[name]
--
--        return CToken.MISMATCH
--
--    def __init__(self, kind, value, pos,
--                 brace_level, paren_level, bracket_level):
--        self.kind = kind
--        self.value = value
--        self.pos = pos
--        self.brace_level = brace_level
--        self.paren_level = paren_level
--        self.bracket_level = bracket_level
--
--    def __repr__(self):
--        name = self.to_name(self.kind)
--        if isinstance(self.value, str):
--            value = '"' + self.value + '"'
--        else:
--            value = self.value
--
--        return f"CToken({name}, {value}, {self.pos}, " \
--               f"{self.brace_level}, {self.paren_level}, {self.bracket_level})"
--
--#: Tokens to parse C code.
--TOKEN_LIST = [
--    (CToken.COMMENT, r"//[^\n]*|/\*[\s\S]*?\*/"),
--
--    (CToken.STRING,  r'"(?:\\.|[^"\\])*"'),
--    (CToken.CHAR,    r"'(?:\\.|[^'\\])'"),
--
--    (CToken.NUMBER,  r"0[xX][0-9a-fA-F]+[uUlL]*|0[0-7]+[uUlL]*|"
--                     r"[0-9]+(\.[0-9]*)?([eE][+-]?[0-9]+)?[fFlL]*"),
--
--    (CToken.PUNC,    r"[;,\.]"),
--
--    (CToken.BEGIN,   r"[\[\(\{]"),
--
--    (CToken.END,     r"[\]\)\}]"),
--
--    (CToken.CPP,     r"#\s*(define|include|ifdef|ifndef|if|else|elif|endif|undef|pragma)\b"),
--
--    (CToken.HASH,    r"#"),
--
--    (CToken.OP,      r"\+\+|\-\-|\->|==|\!=|<=|>=|&&|\|\||<<|>>|\+=|\-=|\*=|/=|%="
--                     r"|&=|\|=|\^=|=|\+|\-|\*|/|%|<|>|&|\||\^|~|!|\?|\:"),
--
--    (CToken.STRUCT,  r"\bstruct\b"),
--    (CToken.UNION,   r"\bunion\b"),
--    (CToken.ENUM,    r"\benum\b"),
--    (CToken.TYPEDEF, r"\bkinddef\b"),
--
--    (CToken.NAME,      r"[A-Za-z_][A-Za-z0-9_]*"),
--
--    (CToken.SPACE,   r"[\s]+"),
--
--    (CToken.MISMATCH,r"."),
--]
--
--#: Handle C continuation lines.
--RE_CONT = KernRe(r"\\\n")
--
--RE_COMMENT_START = KernRe(r'/\*\s*')
--
--#: tokenizer regex. Will be filled at the first CTokenizer usage.
--re_scanner = None
--
--class CTokenizer():
--    """
--    Scan C statements and definitions and produce tokens.
--
--    When converted to string, it drops comments and handle public/private
--    values, respecting depth.
--    """
--
--    # This class is inspired and follows the basic concepts of:
--    #   https://docs.python.org/3/library/re.html#writing-a-tokenizer
--
--    def _tokenize(self, source):
--        """
--        Interactor that parses ``source``, splitting it into tokens, as defined
--        at ``self.TOKEN_LIST``.
--
--        The interactor returns a CToken class object.
--        """
--
--        # Handle continuation lines. Note that kdoc_parser already has a
--        # logic to do that. Still, let's keep it for completeness, as we might
--        # end re-using this tokenizer outsize kernel-doc some day - or we may
--        # eventually remove from there as a future cleanup.
--        source = RE_CONT.sub("", source)
--
--        brace_level = 0
--        paren_level = 0
--        bracket_level = 0
--
--        for match in re_scanner.finditer(source):
--            kind = CToken.from_name(match.lastgroup)
--            pos = match.start()
--            value = match.group()
--
--            if kind == CToken.MISMATCH:
--                raise RuntimeError(f"Unexpected token '{value}' on {pos}:\n\t{source}")
--            elif kind == CToken.BEGIN:
--                if value == '(':
--                    paren_level += 1
--                elif value == '[':
--                    bracket_level += 1
--                else:  # value == '{'
--                    brace_level += 1
--
--            elif kind == CToken.END:
--                if value == ')' and paren_level > 0:
--                    paren_level -= 1
--                elif value == ']' and bracket_level > 0:
--                    bracket_level -= 1
--                elif brace_level > 0:    # value == '}'
--                    brace_level -= 1
--
--            yield CToken(kind, value, pos,
--                         brace_level, paren_level, bracket_level)
--
--    def __init__(self, source):
--        """
--        Create a regular expression to handle TOKEN_LIST.
--
--        While I generally don't like using regex group naming via:
--            (?P<name>...)
--
--        in this particular case, it makes sense, as we can pick the name
--        when matching a code via re_scanner().
--        """
--        global re_scanner
--
--        if not re_scanner:
--            re_tokens = []
--
--            for kind, pattern in TOKEN_LIST:
--                name = CToken.to_name(kind)
--                re_tokens.append(f"(?P<{name}>{pattern})")
--
--            re_scanner = KernRe("|".join(re_tokens), re.MULTILINE | re.DOTALL)
--
--        self.tokens = []
--        for tok in self._tokenize(source):
--            self.tokens.append(tok)
--
--    def __str__(self):
--        out=""
--        show_stack = [True]
--
--        for tok in self.tokens:
--            if tok.kind == CToken.BEGIN:
--                show_stack.append(show_stack[-1])
--
--            elif tok.kind == CToken.END:
--                prev = show_stack[-1]
--                if len(show_stack) > 1:
--                    show_stack.pop()
--
--                if not prev and show_stack[-1]:
--                    #
--                    # Try to preserve indent
--                    #
--                    out += "\t" * (len(show_stack) - 1)
--
--                    out += str(tok.value)
--                    continue
--
--            elif tok.kind == CToken.COMMENT:
--                comment = RE_COMMENT_START.sub("", tok.value)
--
--                if comment.startswith("private:"):
--                    show_stack[-1] = False
--                    show = False
--                elif comment.startswith("public:"):
--                    show_stack[-1] = True
--
--                continue
--
--            if show_stack[-1]:
--                    out += str(tok.value)
--
--        return out
--
- 
- #: Nested delimited pairs (brackets and parenthesis)
- DELIMITER_PAIRS = {
+ #
+ # main
 -- 
 2.53.0
 
