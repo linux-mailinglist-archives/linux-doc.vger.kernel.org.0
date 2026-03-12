@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-79027-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79028-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wJ8FJ5TUsmlDQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79027-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:58:28 +0100
+	id qIESCgrUsmlDQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79028-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F138273CF8
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:58:28 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id C2D58273BD8
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 784F131DA7D5
+	by tor.lore.kernel.org (Postfix) with ESMTP id E9EE530584F4
 	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:55:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 840AE3BFE24;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5D083C8736;
 	Thu, 12 Mar 2026 14:55:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fn6yDNRd"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZQ6/04TI"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7D193C7E0F;
-	Thu, 12 Mar 2026 14:55:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21DD53C7E1D;
+	Thu, 12 Mar 2026 14:55:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773327302; cv=none; b=OAP4otGjwWgdyTzVpjT5lN2XTMuZMCItyLLsZoi2a3r8coj9sKCx7aoVzmQb1qPN/PZLU3vdz8plGz62AmhaFdhYAPzrgqL8Z1ZVW/Hoj/FqtWl+417wEB9p12bmD4w10Bk1rIt4XFh0bsBhb2WQCUM01V629r/3DSch2Gq1BJw=
+	t=1773327302; cv=none; b=IdyPqWbzNNKO7TJ+f5q/g37ZDUKmL/doQQr/SbiE0trPcN1viJUEXbfQgy3oTH73oO3m19qQHrk5p3VmsQbFaUiO0h50FiIuguyMG1OeCk3E6ZRAQqv60VaSDbiOZwYGzGlZtvwDvb26SEotP1pxhMqwiQDNV4cFo67PZcU2Awg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773327302; c=relaxed/simple;
-	bh=Ivzj5p0x4Q8l2OC2OB+jBO38HqdWt02WQNEVEu6ZxqY=;
+	bh=IJSnRIO93NxR2KWmARf1NOwTNiZnK4e1wz54iqqYRaY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=rZGhL2ZJ8Mz/496C9uaYLEOnF2m/ylh1MmNCYTeeJr1vSN3n7OwSqUUY6KRzcRFg2JtHcFo2eJwb6ZHkxLAftTNoiA+UaEEc3sJ5+2X1+JzJ6UQQ3vavWZDaT5Yz3HKZnrpt0z0+3YKXkVamu5zBT5evZSFyMDg1hAtu1+xy9jI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fn6yDNRd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C36F6C2BC86;
-	Thu, 12 Mar 2026 14:55:01 +0000 (UTC)
+	 MIME-Version:Content-Type; b=NDxrzQAc2mgA3LHtG/rWSYpyrj72JtizI/YEeGR3JhM1uQgBrXfn/T1IeBnHRlXSrmsefzENL/+KIeaL4vCcb+8af3iyAj4ldsYtjUcfNQgmtaD7TQs/noopo3pHxcNG+6HyP4EmwmBIuuZs3UkafwjgNr8c5hcgKBnwRhsOtF4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZQ6/04TI; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00EB8C4AF09;
+	Thu, 12 Mar 2026 14:55:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773327301;
-	bh=Ivzj5p0x4Q8l2OC2OB+jBO38HqdWt02WQNEVEu6ZxqY=;
+	s=k20201202; t=1773327302;
+	bh=IJSnRIO93NxR2KWmARf1NOwTNiZnK4e1wz54iqqYRaY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fn6yDNRdaEmsepdqPlD19wZLeauGChAFOYIS+lec2GcBign+9CzJTISdYyfa92X6P
-	 yBCyjzE77fZLQi9JocRz/wdPYwfOy9ynLvn/Qcxy2kYP+UrIlrQUA+8YlyMtxKRNjB
-	 21Kkq96KDrEYBH3kg+8wZK7HmvjnrcCtxJzTht8n8Zxydr4r2Xvho9k0QFealpJSvO
-	 b5lOWUDse+k5bRIVDzqsC7KWRGr5BOPQMdg1lahXarcrK0HTqlzkPZwpi0OXEKRMWm
-	 /L+dJ4pwti6Js8bTGh8ss/qHpeJLl1SXLzIgIn5l4yNsvdVAnCPXhqEcgz5yclDDHy
-	 9HZJzMFF+uJYg==
+	b=ZQ6/04TIt//juwtwiLcMiyEexNQ+nq9ATNEWbgz53whRglhoqMGUs/RaH//iZRTyY
+	 J+wdhlk4xbhgQ5Siu++Nj07XJdi9smoBEpVir1jQBzeRSOv+yCoEjZVGSzwPu9VbEI
+	 +QKdFpVbxzMkkW4gfv4d+7KyJFuiI0fFdTsmWS7YTI6hKO3A1lEmDw9/YDj8VJg2uD
+	 bdAtx0ogItpomJS/FN/c4x9N5lbCplrxMSND8UYrXLWPmK/SGrvFssLTQnBYEEmQTl
+	 YPvehOk+jdhIBomJh54VRf6F/trJ+B31eSMx4P2PtP7LjHYLctbUjdEl9M6GtXh9XF
+	 hkmF31ec0q1zw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0hRE-00000008yFM-0IeP;
+	id 1w0hRE-00000008yGa-16kN;
 	Thu, 12 Mar 2026 15:55:00 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -54,9 +54,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 24/28] docs: unittests: add and adjust tests to check for errors
-Date: Thu, 12 Mar 2026 15:54:44 +0100
-Message-ID: <c7614bdb4edb48d1d4f50e6fddfbb247281c0ad9.1773326442.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 25/28] docs: c_lex: better handle BEGIN/END at search
+Date: Thu, 12 Mar 2026 15:54:45 +0100
+Message-ID: <37627b24590ac26f638ce2c460a5cd400bef14cb.1773326442.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773326442.git.mchehab+huawei@kernel.org>
 References: <cover.1773326442.git.mchehab+huawei@kernel.org>
@@ -72,14 +72,14 @@ Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79027-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-79028-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
@@ -89,101 +89,92 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3F138273CF8
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: C2D58273BD8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Test the errors that are rised and the ones that are logged.
+Currently, the logic is emitting warnings after finishing
+to parse a prototype like:
+
+    static inline unsigned \
+        read_seqretry(const seqlock_t *sl, unsigned start)
+        __releases_shared(sl) __no_context_analysis
+
+The problem is that the last CMatch there doesn't have BEGIN/END,
+but this is already expected.
+
+Make the logic more restrict by:
+    - ensure that BEGIN/END there refers to function-like calls,
+      e.g. foo(...);
+    - only emit a warning after BEGIN is detected.
+
+Instead of hardcoding "(" delim, let the caller specify if a different
+one would be required.
+
+While here, remove an uneeded elsif.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/c_lex.py    |  2 +-
- tools/unittests/test_cmatch.py    | 15 ++++++++++++++-
- tools/unittests/test_tokenizer.py | 11 ++++++-----
- 3 files changed, 21 insertions(+), 7 deletions(-)
+ tools/lib/python/kdoc/c_lex.py | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
 diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
-index 596510bb4e95..8beac59166fc 100644
+index 8beac59166fc..e641bace5d69 100644
 --- a/tools/lib/python/kdoc/c_lex.py
 +++ b/tools/lib/python/kdoc/c_lex.py
-@@ -194,7 +194,7 @@ class CTokenizer():
-             value = match.group()
+@@ -463,8 +463,9 @@ class CMatch:
+     """
  
-             if kind == CToken.MISMATCH:
--                log.error(f"Unexpected token '{value}' on {pos}:\n\t{source}")
-+                log.error(f"Unexpected token '{value}' on pos {pos}:\n\t'{source}'")
-             elif kind == CToken.BEGIN:
-                 if value == '(':
-                     paren_level += 1
-diff --git a/tools/unittests/test_cmatch.py b/tools/unittests/test_cmatch.py
-index f6ccd2a942f1..3fbc5d3bc244 100755
---- a/tools/unittests/test_cmatch.py
-+++ b/tools/unittests/test_cmatch.py
-@@ -288,6 +288,19 @@ class TestSubSimple(TestCaseDiff):
  
-         self.assertLogicallyEqual(result, "int foo;")
+-    def __init__(self, regex):
++    def __init__(self, regex, delim="("):
+         self.regex = KernRe("^" + regex + r"\b")
++        self.start_delim = delim
  
-+    def test_rise_early_greedy(self):
-+        line = f"{self.MACRO}(a, b, c, d);"
-+        sub = r"\1, \2+, \3"
+     def _search(self, tokenizer):
+         """
+@@ -506,15 +507,15 @@ class CMatch:
+                 if tok.kind == CToken.SPACE:
+                     continue
+ 
+-                if tok.kind == CToken.BEGIN:
++                if tok.kind == CToken.BEGIN and tok.value == self.start_delim:
+                     started = True
+                     continue
+-                else:
+-                    # Name only token without BEGIN/END
+-                    if i > start:
+-                        i -= 1
+-                    yield start, i
+-                    start = None
 +
-+        with self.assertRaises(ValueError):
-+            result = self.matcher.sub(sub, line)
-+
-+    def test_rise_multiple_greedy(self):
-+        line = f"{self.MACRO}(a, b, c, d);"
-+        sub = r"\1, \2+, \3+"
-+
-+        with self.assertRaises(ValueError):
-+            result = self.matcher.sub(sub, line)
++                # Name only token without BEGIN/END
++                if i > start:
++                    i -= 1
++                yield start, i
++                start = None
  
- #
- # Test replacements with slashrefs
-@@ -539,7 +552,7 @@ class TestSubWithLocalXforms(TestCaseDiff):
-         self.assertLogicallyEqual(result, expected)
- 
-     def test_raw_struct_group_tagged(self):
--        """
-+        r"""
-         Test cxl_regs with struct_group_tagged patterns from drivers/cxl/cxl.h.
- 
-         NOTE:
-diff --git a/tools/unittests/test_tokenizer.py b/tools/unittests/test_tokenizer.py
-index 3081f27a7786..6a0bd49df72e 100755
---- a/tools/unittests/test_tokenizer.py
-+++ b/tools/unittests/test_tokenizer.py
-@@ -44,11 +44,12 @@ def make_tokenizer_test(name, data):
-         """In-lined lambda-like function to run the test"""
- 
+             if tok.kind == CToken.END and tok.level == stack[-1][1]:
+                 start, level = stack.pop()
+@@ -528,8 +529,10 @@ class CMatch:
+         # picking an incomplete block.
          #
--        # Check if exceptions are properly handled
-+        # Check if logger is working
-         #
--        if "raises" in data:
--            with self.assertRaises(data["raises"]):
--                CTokenizer(data["source"])
-+        if "log_level" in data:
-+            with self.assertLogs('kdoc.c_lex', level='ERROR') as cm:
-+                tokenizer = CTokenizer(data["source"])
+         if start and stack:
+-            s = str(tokenizer)
+-            log.warning(f"can't find a final end at {s}")
++            if started:
++                s = str(tokenizer)
++                log.warning(f"can't find a final end at {s}")
 +
-             return
+             yield start, len(tokenizer.tokens)
  
-         #
-@@ -123,7 +124,7 @@ TESTS_TOKENIZER = {
- 
-     "mismatch_error": {
-         "source": "int a$ = 5;",          # $ is illegal
--        "raises": RuntimeError,
-+        "log_level": "ERROR",
-     },
- }
- 
+     def search(self, source):
 -- 
 2.52.0
 
