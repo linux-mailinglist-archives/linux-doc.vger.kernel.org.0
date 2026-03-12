@@ -1,53 +1,53 @@
-Return-Path: <linux-doc+bounces-79003-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79007-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UN6wFgDUsmktQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79003-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:00 +0100
+	id 6EjfDRbUsmktQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79007-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:22 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08ACD273BBB
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D827A273BF5
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:56:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DF9C230530C4
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:54:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8DC2F30C09C5
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:55:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06AE3379EEB;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EAF137EFED;
 	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JTF21tnz"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JBtwuJS9"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6D9136E46C;
-	Thu, 12 Mar 2026 14:54:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4878D37CD51;
+	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773327297; cv=none; b=EoSGXO3pqb3t+t9b2FwCA+5Gz3cYvSQL4DJkoHYrsASCpZoag+pxUDFmoAIKuG8eQ+6qwD2k9kk4e+nL1tCFj4MWLA8UL4MpfZ/GoZ28+SXyENoMq8KwRDJi4CNLCEYTnMUCHjw4SQJJ2H4j652zf70l6AobyLma3zWfwsy0VME=
+	t=1773327298; cv=none; b=NXGCA2YhAax9g3VAA2z6Y3kMD5J1nAXdum4RfupMXQWeRLskfYYuj9GdUWAASQ7+D9Zh1dv/BLLX/TN+arGWFF9qICdZP4A5fVm/mGMWJL0ino/vFUTFDZYyGI5bDdSRd03XZ5E0BkM9EC5LY1Xs26kXI1OVWshx0q8F+E6Vmuk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773327297; c=relaxed/simple;
-	bh=xUBIjCPiqikLumDJV0/ro119OoQ7PDq8BR8ypLrh5DM=;
+	s=arc-20240116; t=1773327298; c=relaxed/simple;
+	bh=n3BVrBoQMdxdpoipeTxJikhOj3p5syl4ggfaedUESPo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qn55OpmDzesH0mJNjzjvr0LMI8TIbAq8k4Heai6Di6JLUAi0njaP+6jR2rW034xYattDSOR2WuOx6sRvBh6g04sdhdfhF0TTR7xUgKpDzUFwrViGSPLn1Q3a85ucTfyGbze4dwvjxDb1sk0BjYkspJolWfMnmk1on5zQ8PcfKDU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JTF21tnz; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CB6FC2BC87;
-	Thu, 12 Mar 2026 14:54:57 +0000 (UTC)
+	 MIME-Version:Content-Type; b=fsv4Md1yTWELpmVeqCmb9kGzF6uCb0Y8+X6u7iJ7Sg43PqSPW2loEX6LtJmSmIjIgy5S+qMn3RXidqkXCCbfiQ3cr/t3OmYg6FuevJMCFB+KGpf8xKR3kLkRUqRKsiomgCGMR30/TahK95ECuky63nuKUau7b3Fh2CjgFdtgdSY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JBtwuJS9; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F927C2BC86;
+	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773327297;
-	bh=xUBIjCPiqikLumDJV0/ro119OoQ7PDq8BR8ypLrh5DM=;
+	s=k20201202; t=1773327298;
+	bh=n3BVrBoQMdxdpoipeTxJikhOj3p5syl4ggfaedUESPo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=JTF21tnzAGWmtxzbqh8d8uO4V7XvbZqmfPZVn0yG3aL6+BG+8DVhfbwuiQZCIDyWT
-	 e7wljT5cfYivsEcqfTJN7dOqHhX7MZ3c6tRoWaH/z0gJZltCXrvWN9I5zScS4zRYsG
-	 WPpuryfJbFbl3RY03EykPRX0Jer+cihEALlzd70jHT9ClSPwgH51OJJpNm7d4VQyHM
-	 x5uHzJAmCequQvb0AEyfkV25sBLa9aZwvBl/mC28pzI/FrhgXA58qrbqSH3Hi+OzUi
-	 DMqggT9uQ6VPJOsO11sr5OLWl1WINgwcHPoUtaHTt9Le3e3hxqr6OMt05hwop52xJe
-	 nEx0T01HWmUTg==
+	b=JBtwuJS93Ei0ji3+9dLTNknDLYGUVEFH5keP/ymhnribkhxbbmYOmdf/92A9b/MXX
+	 +k/AfX/GsjtmR1I6tnyhVcNqIg7CNOCr0eQUJb3V9g+jqa/+0xblpTeWUZMnU20Ddf
+	 6uYHrbeK3mfk7uorglWp1ZO6/1LYBV3N+3oRnuVprsJyXMh40E1LYEZ2ZgzS+hsjr5
+	 RrLrznlRAZEIldmEIuFErVVt67pKYD3n6+mWHexMVvfsj3QmpeEfNi+uT+a3zu+FkU
+	 5C3axdT4YX5eYzqF7lwOAUFSAQC3BsX7Ngnp6qSDYF+8pwxJy1ecEIqHBKqpdDRwUJ
+	 E8X8yEkoMcHFg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0hR9-00000008xoP-3gC3;
-	Thu, 12 Mar 2026 15:54:55 +0100
+	id 1w0hRA-00000008xpc-0MoI;
+	Thu, 12 Mar 2026 15:54:56 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 03/28] docs: kdoc: don't add broken comments inside prototypes
-Date: Thu, 12 Mar 2026 15:54:23 +0100
-Message-ID: <2b957decdb6cedab4268f71a166c25b7abdb9a61.1773326442.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 04/28] docs: kdoc: properly handle empty enum arguments
+Date: Thu, 12 Mar 2026 15:54:24 +0100
+Message-ID: <abcc260f770c4fcb2ae40be58bd8eea5e44bf697.1773326442.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773326442.git.mchehab+huawei@kernel.org>
 References: <cover.1773326442.git.mchehab+huawei@kernel.org>
@@ -84,7 +84,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79003-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-79007-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -98,53 +98,38 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 08ACD273BBB
+X-Rspamd-Queue-Id: D827A273BF5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Parsing a file like drivers/scsi/isci/host.h, which contains
-broken kernel-doc markups makes it create a prototype that contains
-unmatched end comments.
+Depending on how the enum proto is written, a comma at the end
+may incorrectly make kernel-doc parse an arg like " ".
 
-That causes, for instance, struct sci_power_control to be shown this
-this prototype:
-
-    struct sci_power_control {
-        * it is not. */ bool timer_started;
-        */ struct sci_timer timer;
-        * requesters field. */ u8 phys_waiting;
-        */ u8 phys_granted_power;
-        * mapped into requesters via struct sci_phy.phy_index */ struct isci_phy *requesters[SCI_MAX_PHYS];
-    };
-
-as comments won't start with "/*" anymore.
-
-Fix the logic to detect such cases, and keep adding the comments
-inside it.
+Strip spaces before checking if arg is empty.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <18e577dbbd538dcc22945ff139fe3638344e14f0.1773074166.git.mchehab+huawei@kernel.org>
+Message-ID: <4182bfb7e5f5b4bbaf05cee1bede691e56247eaf.1773074166.git.mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 6 ++++++
- 1 file changed, 6 insertions(+)
+ tools/lib/python/kdoc/kdoc_parser.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index edf70ba139a5..086579d00b5c 100644
+index 086579d00b5c..4b3c555e6c8e 100644
 --- a/tools/lib/python/kdoc/kdoc_parser.py
 +++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -1355,6 +1355,12 @@ class KernelDoc:
-         elif doc_content.search(line):
-             self.emit_msg(ln, f"Incorrect use of kernel-doc format: {line}")
-             self.state = state.PROTO
+@@ -810,9 +810,10 @@ class KernelDoc:
+         member_set = set()
+         members = KernRe(r'\([^;)]*\)').sub('', members)
+         for arg in members.split(','):
+-            if not arg:
+-                continue
+             arg = KernRe(r'^\s*(\w+).*').sub(r'\1', arg)
++            if not arg.strip():
++                continue
 +
-+            #
-+            # Don't let it add partial comments at the code, as breaks the
-+            # logic meant to remove comments from prototypes.
-+            #
-+            self.process_proto_type(ln, "/**\n" + line)
-         # else ... ??
- 
-     def process_inline_text(self, ln, line):
+             self.entry.parameterlist.append(arg)
+             if arg not in self.entry.parameterdescs:
+                 self.entry.parameterdescs[arg] = self.undescribed
 -- 
 2.52.0
 
