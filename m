@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-79011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79013-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id zmLWENnTsmlDQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79011-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:21 +0100
+	id QKsuLOPTsmktQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-79013-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:31 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C918A273B5A
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:19 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 69B0F273B7D
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 15:55:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 0DA8A302D1B1
+	by tor.lore.kernel.org (Postfix) with ESMTP id BDCB33025F50
 	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 14:55:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 434C138D6BD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E1E53B7762;
 	Thu, 12 Mar 2026 14:54:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Lpio/qCu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QxIVbJTp"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F25DD386C06;
-	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36524389E16;
+	Thu, 12 Mar 2026 14:54:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773327299; cv=none; b=P0+rEqTpbmaQRK5KpWQVbVfgJs0H7uhWlTYC5pD3wocIWkit9iIUEod4ERUcw0RyAKdg6jmlN8nufQDNlTkqfnEo19YH2TnX9Vu3/mHrXSErE9E/WRF/a9AcqssNd+RBpHIFF/2OSB53IeujuXTCyaEV8sPF6JtN0lPv5OuGu20=
+	t=1773327299; cv=none; b=locHk7aP8SODIY28Bk8/QJOgILmQZz4KMSJeLLhfihVz+cNQlJnwt2k5q+eyGJNqJOG3dSn/NegglAv1jpiEK7FLJtVzs7g55Jb+5SM3+7j1wUlS+eCE8Zms7Iblm+i01BkM+w1TmMNMP7YKPcvf8H8eWTD89LTVj5qATtZsxGU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773327299; c=relaxed/simple;
-	bh=zTTAicWfcUWKd6xAL89ulZqRllqvvkPOA1LaZJPZRyI=;
+	bh=PaOLRDk0iXEcEwnWCzqzsJpfgjdAgDVAImrhDci59t0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=O2W/qoJVlUKNr83Z3+ssWZQrx2JBpV73MjHICcB+ABvr6XegKJM9pT/9tGBTUe9YZ7x0SvvipF/AfsZiY2Ikc2q+FQzF/8I9RD5n+xEgIzRdRXYCfX3fZNxxvea8HBN2tMGltMAiZ/ctvth248rXkuTfC2rD3pkZX+Nzje1jdz0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Lpio/qCu; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3EC5C2BCAF;
-	Thu, 12 Mar 2026 14:54:58 +0000 (UTC)
+	 MIME-Version:Content-Type; b=Aurb93eJ3dZRjCoLK0cN2iE/2l/cIKshk9kybl2H7QqB8I1trPEdUH6FaK8eltsakZKRcphHoQrwsO+OnDYr0C5Ldn67CBinIYzvnO811CnOu9ADmzFfRVk49+E1YOHuTY14NIuIuK6KHquDmSTYyPYfQnWaTaG7I1oF/ZUoUXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QxIVbJTp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 162EEC2BC87;
+	Thu, 12 Mar 2026 14:54:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773327298;
-	bh=zTTAicWfcUWKd6xAL89ulZqRllqvvkPOA1LaZJPZRyI=;
+	s=k20201202; t=1773327299;
+	bh=PaOLRDk0iXEcEwnWCzqzsJpfgjdAgDVAImrhDci59t0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Lpio/qCuMfkcdSzekcauZThR00tPA0XZO2mbldZsQNZ3RVeClp7HMwzW4pvjAN742
-	 kVef7oaUmv5eo2eqMyZkdfnYQJAd9tE3EVdWbn8vRTj5ICXsNlawnHSdRYSmCfvo/A
-	 n9LPmWilEM7UL6YKDl642xBJl5hCJ59R123eK0JTSpcOIrBj9UCN5bIuftiCLrXbc/
-	 n5eiuXok/u1L92sOsfaJ62Da8uxD5k7p0E+V/WOfd+nidZ29H9NkbEx1Z1N54osfis
-	 YkdCXH1OLXWuPfdMa3rOBE6DNShNzXuDoAxSF+OCdc36v2Woo7W0x5wCDZ6L/0KMxa
-	 6h+1JSUpgCk0A==
+	b=QxIVbJTpIRZrQcT3lAxZM7P5LfaKPUzvCM3GfGr+WEj9+h6qlu19Uc9iSbbf2Y2EB
+	 V9+83zXFKZMiRrAfWG2oG16p3BLNbddc4gfV7/TT0FLCrq8JOIgMcpQpQP4ArERbl4
+	 TpRrwYZu9VwgApr/OFD/1ons1hxBtCe2vEzP0OFfbsRfdi2GUAswfO11kI0heEDXp2
+	 ahGUbKdLLc9knkJxjkLIhKaRJJm1knUMfxkvhmXU4L2oDRcvoiQrNXwPU+cuDtkIGT
+	 /1GH1/Acrxllc8J9liZAYojcl5Mhg6BkGNi4SX2XGS7kzqlVoDDZXFmis1CE7+gnjA
+	 xkSBAKEeF8Zvg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0hRB-00000008xw9-0O9H;
+	id 1w0hRB-00000008xxM-1ESP;
 	Thu, 12 Mar 2026 15:54:57 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -54,9 +54,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 09/28] unittests: test_tokenizer: check if the tokenizer works
-Date: Thu, 12 Mar 2026 15:54:29 +0100
-Message-ID: <6afe36c248f0f9280ce0ed456d878a1f718794a5.1773326442.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 10/28] unittests: add a runner to execute all unittests
+Date: Thu, 12 Mar 2026 15:54:30 +0100
+Message-ID: <fb0bcc317d30200b0e91a3c18150e7394844b6d8.1773326442.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773326442.git.mchehab+huawei@kernel.org>
 References: <cover.1773326442.git.mchehab+huawei@kernel.org>
@@ -72,189 +72,69 @@ Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-79011-lists,linux-doc=lfdr.de,huawei];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79013-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	RCPT_COUNT_FIVE(0.00)[5]
-X-Rspamd-Queue-Id: C918A273B5A
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 69B0F273B7D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add extra tests to check if the tokenizer is working properly.
+We'll soon have multiple unit tests, add a runner that will
+discover all of them and execute all tests.
+
+It was opted to discover only files that starts with "test",
+as this way unittest discover won't try adding libraries or
+other stuff that might not contain unittest classes.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/c_lex.py    |   4 +-
- tools/unittests/test_tokenizer.py | 109 +++++++++++++++++++++++++++++-
- 2 files changed, 108 insertions(+), 5 deletions(-)
+ tools/unittests/run.py | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100755 tools/unittests/run.py
 
-diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
-index a104c29b63fb..38f70e836eb8 100644
---- a/tools/lib/python/kdoc/c_lex.py
-+++ b/tools/lib/python/kdoc/c_lex.py
-@@ -58,8 +58,8 @@ class CToken():
- 
-         return CToken.MISMATCH
- 
--    def __init__(self, kind, value, pos,
--                 brace_level, paren_level, bracket_level):
-+    def __init__(self, kind, value=None, pos=0,
-+                 brace_level=0, paren_level=0, bracket_level=0):
-         self.kind = kind
-         self.value = value
-         self.pos = pos
-diff --git a/tools/unittests/test_tokenizer.py b/tools/unittests/test_tokenizer.py
-index da0f2c4c9e21..efb1d1687811 100755
---- a/tools/unittests/test_tokenizer.py
-+++ b/tools/unittests/test_tokenizer.py
-@@ -15,16 +15,118 @@ from unittest.mock import MagicMock
- SRC_DIR = os.path.dirname(os.path.realpath(__file__))
- sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
- 
--from kdoc.kdoc_re import CTokenizer
-+from kdoc.c_lex import CToken, CTokenizer
- from unittest_helper import run_unittest
- 
--
--
- #
- # List of tests.
- #
- # The code will dynamically generate one test for each key on this dictionary.
- #
-+def tokens_to_list(tokens):
-+    tuples = []
+diff --git a/tools/unittests/run.py b/tools/unittests/run.py
+new file mode 100755
+index 000000000000..8c19036d43a1
+--- /dev/null
++++ b/tools/unittests/run.py
+@@ -0,0 +1,17 @@
++#!/bin/env python3
++import os
++import unittest
++import sys
 +
-+    for tok in tokens:
-+        if tok.kind == CToken.SPACE:
-+            continue
++TOOLS_DIR=os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")
++sys.path.insert(0, TOOLS_DIR)
 +
-+        tuples += [(tok.kind, tok.value,
-+                    tok.brace_level, tok.paren_level, tok.bracket_level)]
++from lib.python.unittest_helper import TestUnits
 +
-+    return tuples
++if __name__ == "__main__":
++    loader = unittest.TestLoader()
 +
++    suite = loader.discover(start_dir=os.path.join(TOOLS_DIR, "unittests"),
++                            pattern="test*.py")
 +
-+def make_tokenizer_test(name, data):
-+    """
-+    Create a test named ``name`` using parameters given by ``data`` dict.
-+    """
-+
-+    def test(self):
-+        """In-lined lambda-like function to run the test"""
-+
-+        #
-+        # Check if exceptions are properly handled
-+        #
-+        if "raises" in data:
-+            with self.assertRaises(data["raises"]):
-+                CTokenizer(data["source"])
-+            return
-+
-+        #
-+        # Check if tokenizer is producing expected results
-+        #
-+        tokens = CTokenizer(data["source"]).tokens
-+
-+        result = tokens_to_list(tokens)
-+        expected = tokens_to_list(data["expected"])
-+
-+        self.assertEqual(result, expected, msg=f"{name}")
-+
-+    return test
-+
-+#: Tokenizer tests.
-+TESTS_TOKENIZER = {
-+    "__run__": make_tokenizer_test,
-+
-+    "basic_tokens": {
-+        "source": """
-+            int a; // comment
-+            float b = 1.23;
-+        """,
-+        "expected": [
-+            CToken(CToken.NAME, "int"),
-+            CToken(CToken.NAME, "a"),
-+            CToken(CToken.PUNC, ";"),
-+            CToken(CToken.COMMENT, "// comment"),
-+            CToken(CToken.NAME, "float"),
-+            CToken(CToken.NAME, "b"),
-+            CToken(CToken.OP, "="),
-+            CToken(CToken.NUMBER, "1.23"),
-+            CToken(CToken.PUNC, ";"),
-+        ],
-+    },
-+
-+    "depth_counters": {
-+        "source": """
-+            struct X {
-+                int arr[10];
-+                func(a[0], (b + c));
-+            }
-+        """,
-+        "expected": [
-+            CToken(CToken.STRUCT, "struct"),
-+            CToken(CToken.NAME, "X"),
-+            CToken(CToken.BEGIN, "{", brace_level=1),
-+
-+            CToken(CToken.NAME, "int", brace_level=1),
-+            CToken(CToken.NAME, "arr", brace_level=1),
-+            CToken(CToken.BEGIN, "[", brace_level=1, bracket_level=1),
-+            CToken(CToken.NUMBER, "10", brace_level=1, bracket_level=1),
-+            CToken(CToken.END, "]", brace_level=1),
-+            CToken(CToken.PUNC, ";", brace_level=1),
-+            CToken(CToken.NAME, "func", brace_level=1),
-+            CToken(CToken.BEGIN, "(", brace_level=1, paren_level=1),
-+            CToken(CToken.NAME, "a", brace_level=1, paren_level=1),
-+            CToken(CToken.BEGIN, "[", brace_level=1, paren_level=1, bracket_level=1),
-+            CToken(CToken.NUMBER, "0", brace_level=1, paren_level=1, bracket_level=1),
-+            CToken(CToken.END, "]", brace_level=1, paren_level=1),
-+            CToken(CToken.PUNC, ",", brace_level=1, paren_level=1),
-+            CToken(CToken.BEGIN, "(", brace_level=1, paren_level=2),
-+            CToken(CToken.NAME, "b", brace_level=1, paren_level=2),
-+            CToken(CToken.OP, "+", brace_level=1, paren_level=2),
-+            CToken(CToken.NAME, "c", brace_level=1, paren_level=2),
-+            CToken(CToken.END, ")", brace_level=1, paren_level=1),
-+            CToken(CToken.END, ")", brace_level=1),
-+            CToken(CToken.PUNC, ";", brace_level=1),
-+            CToken(CToken.END, "}"),
-+        ],
-+    },
-+
-+    "mismatch_error": {
-+        "source": "int a$ = 5;",          # $ is illegal
-+        "raises": RuntimeError,
-+    },
-+}
- 
- def make_private_test(name, data):
-     """
-@@ -315,6 +417,7 @@ TESTS_PRIVATE = {
- #: Dict containing all test groups fror CTokenizer
- TESTS = {
-     "TestPublicPrivate": TESTS_PRIVATE,
-+    "TestTokenizer": TESTS_TOKENIZER,
- }
- 
- def setUp(self):
++    TestUnits().run("", suite=suite)
 -- 
 2.52.0
 
