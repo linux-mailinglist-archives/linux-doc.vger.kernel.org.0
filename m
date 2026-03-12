@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-78930-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-78948-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OHezFWlnsmlkMQAAu9opvQ
-	(envelope-from <linux-doc+bounces-78930-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:41 +0100
+	id CO4JD7tnsmlkMQAAu9opvQ
+	(envelope-from <linux-doc+bounces-78948-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:14:03 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A330326E2C5
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:12:40 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id B44C426E372
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 08:14:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 992FB304A58B
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 26EDE315BFB0
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Mar 2026 07:12:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D6AE13ACEE2;
-	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 741A53B0ACA;
+	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E14ncgOj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="S8Ra4+cy"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADA5836C9E3;
-	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10C713AD53C;
+	Thu, 12 Mar 2026 07:12:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773299553; cv=none; b=Nk8BSDoVcbS1YNSF/2W14q9K6RHjLvdUkzPsSRXxvEbK9ENQIHp/xw+se6gEZY3+juR+6QRzAqFW9R2zXyMYZWsQNlwjXtNwU6LSFBjCZ73qxAjHTwft9O1rS3rkPJzEeNSG6t7snkP1rqU5oK8ZF4BMVBQPwdDE6x6BhmcOoa0=
+	t=1773299554; cv=none; b=rGfXrhJq3/msn+Vv9e0pKewi9fy+A5EII0XEo3VmXNSZS6nDk1Sgut8qCl1D9r3L9NkXnk5AWGZE2ycmU3KytthWTVH8NmZFhAzk8JI/xE23w+fA4cUqdXIm8TE4DZq+d8tgA69xIl8hcbQrvwGx5poHayvkyGKEnc5BnGkuZQg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773299553; c=relaxed/simple;
-	bh=r7ZWNO+ghbGf9tKGR7rDEB46pt/FEZ69GWHK20SQis4=;
+	s=arc-20240116; t=1773299554; c=relaxed/simple;
+	bh=Znhgh5VpMegTURFUzFsOSwJlqZmT0mMIAtISYNXYSXM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ehxQbJ/WB9YPy0zxL0g58DOWt9ug6mFGMS/6kZy2ehulY+CE1++h1+aYfFLV2hlR6UqURHlZinurs2Fvx09YcFnXex56JhoFSMVLFQ2lOe1Fig9jSnfBCPHOSFMOqoqe0GmiGozH+8TnnN4INDeh3nXhiFbIj32vqQ5q0skCYPM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E14ncgOj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66DA9C2BCB2;
+	 MIME-Version:Content-Type; b=Mol0A1MnoIMvNSU6ttph7BYbG0c17jkV/kqA6jikNiXpFTna8J89c1DhBoLxEbU9m3wCCR/9ocJvFp9fuCp4uEJPIXoftdiZ3bfSibO6SLTa8vQdBcfklorRKaJrMX6JSweaal4liBLNAwqcfoF5LgCQQrGo5lOCXW4rRneBjOM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=S8Ra4+cy; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64416C2BCB3;
 	Thu, 12 Mar 2026 07:12:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773299553;
-	bh=r7ZWNO+ghbGf9tKGR7rDEB46pt/FEZ69GWHK20SQis4=;
+	bh=Znhgh5VpMegTURFUzFsOSwJlqZmT0mMIAtISYNXYSXM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=E14ncgOjKLkgw64H+fWmzUQYizwUaLsQJzglUTFTaY+qFb8x2f2Pdjr7QOgsX0dTJ
-	 IfxvyfjG94ZoCAeKlBnVsnfyFgzudGKfHJflA+cb4pw5aOe0JJ95x8c8aEprxB+dsb
-	 Y5YNvMH9Hn+1MKWM7uT7+w9O2s0AYKPG02CLK4sKUW6g+N/HvmXS6ywbx2TwWTHOrQ
-	 hUOFk+0x6jb1YqnaavIbnprDSO1VYw2ZLNJAEVCvw1hEF7c0P+twaQRjm/RDbMyRgZ
-	 SxDhgbZ8yY+fmq/m2o2IO54m03nqd0V2G6TxinMJrKaX9JERC436NDGr50TdyEWYEG
-	 wCNjLX+0rPDGg==
+	b=S8Ra4+cyC4cAuvdogezwt+o/z6U138dgnco6Lr6PABVV2eDL3RarhuTdCZqqKAqQF
+	 hmL0ErRTpCt/L8WNZJ+vvwfiXRfybStNmQJZFnnV1+n1O0gxsjb9XZL0eRnODSZKzg
+	 X/GjSdZKqtJ1qJ3s8QGk5FSeDlL7G3FPjArfDicI+SHJmTuh8dtdaGEyVLvNW1FRal
+	 DpoDkfvroqXjNbearS+lZi603mR+jtZeiHwJXo6qDGdJXpd4FWxhVRfK3fGWROGcQG
+	 V7gmY8ufafEM20tmB0bW4IHkZarmkT1P9x4N1nhUEQikNGsL4hEfSZfHZmRraOy1OW
+	 umwd3OxIpT3Nw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w0aDf-000000077gG-1e5M;
+	id 1w0aDf-000000077gK-1lGt;
 	Thu, 12 Mar 2026 08:12:31 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -57,9 +57,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 04/20] docs: kdoc: properly handle empty enum arguments
-Date: Thu, 12 Mar 2026 08:12:12 +0100
-Message-ID: <abcc260f770c4fcb2ae40be58bd8eea5e44bf697.1773297828.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 05/20] docs: kdoc_re: add a C tokenizer
+Date: Thu, 12 Mar 2026 08:12:13 +0100
+Message-ID: <8541ffa469647db1a7154f274fb2d55b4c127dcb.1773297828.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773297828.git.mchehab+huawei@kernel.org>
 References: <cover.1773297828.git.mchehab+huawei@kernel.org>
@@ -77,7 +77,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -85,7 +85,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-78930-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-78948-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -93,44 +93,275 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[8];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A330326E2C5
+X-Rspamd-Queue-Id: B44C426E372
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Depending on how the enum proto is written, a comma at the end
-may incorrectly make kernel-doc parse an arg like " ".
+Handling C code purely using regular expressions doesn't work well.
 
-Strip spaces before checking if arg is empty.
+Add a C tokenizer to help doing it the right way.
+
+The tokenizer was written using as basis the Python re documentation
+tokenizer example from:
+	https://docs.python.org/3/library/re.html#writing-a-tokenizer
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <4182bfb7e5f5b4bbaf05cee1bede691e56247eaf.1773074166.git.mchehab+huawei@kernel.org>
+Message-ID: <c63ad36c81fe043e9e33ca55630414893f127413.1773074166.git.mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ tools/lib/python/kdoc/kdoc_re.py | 234 +++++++++++++++++++++++++++++++
+ 1 file changed, 234 insertions(+)
 
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index 086579d00b5c..4b3c555e6c8e 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -810,9 +810,10 @@ class KernelDoc:
-         member_set = set()
-         members = KernRe(r'\([^;)]*\)').sub('', members)
-         for arg in members.split(','):
--            if not arg:
--                continue
-             arg = KernRe(r'^\s*(\w+).*').sub(r'\1', arg)
-+            if not arg.strip():
+diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
+index 085b89a4547c..7bed4e9a8810 100644
+--- a/tools/lib/python/kdoc/kdoc_re.py
++++ b/tools/lib/python/kdoc/kdoc_re.py
+@@ -141,6 +141,240 @@ class KernRe:
+ 
+         return self.last_match.groups()
+ 
++class TokType():
++
++    @staticmethod
++    def __str__(val):
++        """Return the name of an enum value"""
++        return TokType._name_by_val.get(val, f"UNKNOWN({val})")
++
++class CToken():
++    """
++    Data class to define a C token.
++    """
++
++    # Tokens that can be used by the parser. Works like an C enum.
++
++    COMMENT = 0     #: A standard C or C99 comment, including delimiter.
++    STRING = 1      #: A string, including quotation marks.
++    CHAR = 2        #: A character, including apostophes.
++    NUMBER = 3      #: A number.
++    PUNC = 4        #: A puntuation mark: ``;`` / ``,`` / ``.``.
++    BEGIN = 5       #: A begin character: ``{`` / ``[`` / ``(``.
++    END = 6         #: A end character: ``}`` / ``]`` / ``)``.
++    CPP = 7         #: A preprocessor macro.
++    HASH = 8        #: The hash character - useful to handle other macros.
++    OP = 9          #: A C operator (add, subtract, ...).
++    STRUCT = 10     #: A ``struct`` keyword.
++    UNION = 11      #: An ``union`` keyword.
++    ENUM = 12       #: A ``struct`` keyword.
++    TYPEDEF = 13    #: A ``typedef`` keyword.
++    NAME = 14       #: A name. Can be an ID or a type.
++    SPACE = 15      #: Any space characters, including new lines
++
++    MISMATCH = 255  #: an error indicator: should never happen in practice.
++
++    # Dict to convert from an enum interger into a string.
++    _name_by_val = {v: k for k, v in dict(vars()).items() if isinstance(v, int)}
++
++    # Dict to convert from string to an enum-like integer value.
++    _name_to_val = {k: v for v, k in _name_by_val.items()}
++
++    @staticmethod
++    def to_name(val):
++        """Convert from an integer value from CToken enum into a string"""
++
++        return CToken._name_by_val.get(val, f"UNKNOWN({val})")
++
++    @staticmethod
++    def from_name(name):
++        """Convert a string into a CToken enum value"""
++        if name in CToken._name_to_val:
++            return CToken._name_to_val[name]
++
++        return CToken.MISMATCH
++
++    def __init__(self, kind, value, pos,
++                 brace_level, paren_level, bracket_level):
++        self.kind = kind
++        self.value = value
++        self.pos = pos
++        self.brace_level = brace_level
++        self.paren_level = paren_level
++        self.bracket_level = bracket_level
++
++    def __repr__(self):
++        name = self.to_name(self.kind)
++        if isinstance(self.value, str):
++            value = '"' + self.value + '"'
++        else:
++            value = self.value
++
++        return f"CToken({name}, {value}, {self.pos}, " \
++               f"{self.brace_level}, {self.paren_level}, {self.bracket_level})"
++
++#: Tokens to parse C code.
++TOKEN_LIST = [
++    (CToken.COMMENT, r"//[^\n]*|/\*[\s\S]*?\*/"),
++
++    (CToken.STRING,  r'"(?:\\.|[^"\\])*"'),
++    (CToken.CHAR,    r"'(?:\\.|[^'\\])'"),
++
++    (CToken.NUMBER,  r"0[xX][0-9a-fA-F]+[uUlL]*|0[0-7]+[uUlL]*|"
++                     r"[0-9]+(\.[0-9]*)?([eE][+-]?[0-9]+)?[fFlL]*"),
++
++    (CToken.PUNC,    r"[;,\.]"),
++
++    (CToken.BEGIN,   r"[\[\(\{]"),
++
++    (CToken.END,     r"[\]\)\}]"),
++
++    (CToken.CPP,     r"#\s*(define|include|ifdef|ifndef|if|else|elif|endif|undef|pragma)\b"),
++
++    (CToken.HASH,    r"#"),
++
++    (CToken.OP,      r"\+\+|\-\-|\->|==|\!=|<=|>=|&&|\|\||<<|>>|\+=|\-=|\*=|/=|%="
++                     r"|&=|\|=|\^=|=|\+|\-|\*|/|%|<|>|&|\||\^|~|!|\?|\:"),
++
++    (CToken.STRUCT,  r"\bstruct\b"),
++    (CToken.UNION,   r"\bunion\b"),
++    (CToken.ENUM,    r"\benum\b"),
++    (CToken.TYPEDEF, r"\bkinddef\b"),
++
++    (CToken.NAME,      r"[A-Za-z_][A-Za-z0-9_]*"),
++
++    (CToken.SPACE,   r"[\s]+"),
++
++    (CToken.MISMATCH,r"."),
++]
++
++#: Handle C continuation lines.
++RE_CONT = KernRe(r"\\\n")
++
++RE_COMMENT_START = KernRe(r'/\*\s*')
++
++#: tokenizer regex. Will be filled at the first CTokenizer usage.
++re_scanner = None
++
++class CTokenizer():
++    """
++    Scan C statements and definitions and produce tokens.
++
++    When converted to string, it drops comments and handle public/private
++    values, respecting depth.
++    """
++
++    # This class is inspired and follows the basic concepts of:
++    #   https://docs.python.org/3/library/re.html#writing-a-tokenizer
++
++    def _tokenize(self, source):
++        """
++        Interactor that parses ``source``, splitting it into tokens, as defined
++        at ``self.TOKEN_LIST``.
++
++        The interactor returns a CToken class object.
++        """
++
++        # Handle continuation lines. Note that kdoc_parser already has a
++        # logic to do that. Still, let's keep it for completeness, as we might
++        # end re-using this tokenizer outsize kernel-doc some day - or we may
++        # eventually remove from there as a future cleanup.
++        source = RE_CONT.sub("", source)
++
++        brace_level = 0
++        paren_level = 0
++        bracket_level = 0
++
++        for match in re_scanner.finditer(source):
++            kind = CToken.from_name(match.lastgroup)
++            pos = match.start()
++            value = match.group()
++
++            if kind == CToken.MISMATCH:
++                raise RuntimeError(f"Unexpected token '{value}' on {pos}:\n\t{source}")
++            elif kind == CToken.BEGIN:
++                if value == '(':
++                    paren_level += 1
++                elif value == '[':
++                    bracket_level += 1
++                else:  # value == '{'
++                    brace_level += 1
++
++            elif kind == CToken.END:
++                if value == ')' and paren_level > 0:
++                    paren_level -= 1
++                elif value == ']' and bracket_level > 0:
++                    bracket_level -= 1
++                elif brace_level > 0:    # value == '}'
++                    brace_level -= 1
++
++            yield CToken(kind, value, pos,
++                         brace_level, paren_level, bracket_level)
++
++    def __init__(self, source):
++        """
++        Create a regular expression to handle TOKEN_LIST.
++
++        While I generally don't like using regex group naming via:
++            (?P<name>...)
++
++        in this particular case, it makes sense, as we can pick the name
++        when matching a code via re_scanner().
++        """
++        global re_scanner
++
++        if not re_scanner:
++            re_tokens = []
++
++            for kind, pattern in TOKEN_LIST:
++                name = CToken.to_name(kind)
++                re_tokens.append(f"(?P<{name}>{pattern})")
++
++            re_scanner = KernRe("|".join(re_tokens), re.MULTILINE | re.DOTALL)
++
++        self.tokens = []
++        for tok in self._tokenize(source):
++            self.tokens.append(tok)
++
++    def __str__(self):
++        out=""
++        show_stack = [True]
++
++        for tok in self.tokens:
++            if tok.kind == CToken.BEGIN:
++                show_stack.append(show_stack[-1])
++
++            elif tok.kind == CToken.END:
++                prev = show_stack[-1]
++                if len(show_stack) > 1:
++                    show_stack.pop()
++
++                if not prev and show_stack[-1]:
++                    #
++                    # Try to preserve indent
++                    #
++                    out += "\t" * (len(show_stack) - 1)
++
++                    out += str(tok.value)
++                    continue
++
++            elif tok.kind == CToken.COMMENT:
++                comment = RE_COMMENT_START.sub("", tok.value)
++
++                if comment.startswith("private:"):
++                    show_stack[-1] = False
++                    show = False
++                elif comment.startswith("public:"):
++                    show_stack[-1] = True
++
 +                continue
 +
-             self.entry.parameterlist.append(arg)
-             if arg not in self.entry.parameterdescs:
-                 self.entry.parameterdescs[arg] = self.undescribed
++            if show_stack[-1]:
++                    out += str(tok.value)
++
++        return out
++
++
+ #: Nested delimited pairs (brackets and parenthesis)
+ DELIMITER_PAIRS = {
+     '{': '}',
 -- 
 2.53.0
 
