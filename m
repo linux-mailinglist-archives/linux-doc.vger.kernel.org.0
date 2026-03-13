@@ -1,84 +1,83 @@
-Return-Path: <linux-doc+bounces-79307-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79309-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MJHnM2kmtGl7hwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79307-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:59:53 +0100
+	id 4NT6LAAstGkEigAAu9opvQ
+	(envelope-from <linux-doc+bounces-79309-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 16:23:44 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9439428571B
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:59:53 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFBCF285E00
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 16:23:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E302130FF9BB
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:53:47 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 80F0530B06FA
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:10:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 908943B0ADB;
-	Fri, 13 Mar 2026 14:49:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B19CC30BF66;
+	Fri, 13 Mar 2026 15:09:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ELk6eE1P"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4122E3AA50F;
-	Fri, 13 Mar 2026 14:49:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B6B2399009;
+	Fri, 13 Mar 2026 15:09:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773413362; cv=none; b=TFnLHrISgyT7gQD5ehBEWe3HMsONm8YfKETMPEYAP76U3p5gNSH9SjPT/Ca67OUXJY2V4H/J3Z3mNfBx1Xz8WydBljXp0Hbc2RXOadivC9HrDV+HhgnhmAznIyv3gz93zlc8BuAhSHoOMpaILYzuAlgt6Kxk0Fudf+xSD93T/hY=
+	t=1773414587; cv=none; b=gZenCXpa3qS4kK3xNdQwcBwZk8IygXunuhEJO2iXSKOSBCZ/i6ydjGWUTB9a5O5yRVMU2qyoDbUIUDCEIgEAgozUJHV2ck2LIFLU1TA+puh83RqfIGlZwyuFSwy81htZTRUxk62SiAIELMvoj25iny1BvlgUv0CMglqV1bINgvw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773413362; c=relaxed/simple;
-	bh=KK0JN0kFWO+Wrhu9OA8tCXQdjEGpMfmQuM2XwJvt/3Y=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hU1ytlHImbH5hNDcg3IIytmc8nCG/43Qi8rYeN8nfVFjeVgksMOR9XYwxkW4htijCsL0ISovujvcr/w1+b/2TlKCr3kOnFc8rMFLiJkJq8y262Z3vNDYoxVKEhEQpTY99Ofs4Q9FEYQ2YMVLchaoxgVXRCoHz6TRb6XyYf4j+/E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5E12125DF;
-	Fri, 13 Mar 2026 07:49:14 -0700 (PDT)
-Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 8FBB83F7BD;
-	Fri, 13 Mar 2026 07:49:16 -0700 (PDT)
-From: Ben Horgan <ben.horgan@arm.com>
-To: ben.horgan@arm.com
-Cc: amitsinght@marvell.com,
-	baisheng.gao@unisoc.com,
-	baolin.wang@linux.alibaba.com,
-	carl@os.amperecomputing.com,
-	dave.martin@arm.com,
-	david@kernel.org,
-	dfustini@baylibre.com,
-	fenghuay@nvidia.com,
-	gshan@redhat.com,
-	james.morse@arm.com,
-	jonathan.cameron@huawei.com,
-	kobak@nvidia.com,
-	lcherian@marvell.com,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	peternewman@google.com,
-	punit.agrawal@oss.qualcomm.com,
-	quic_jiles@quicinc.com,
-	reinette.chatre@intel.com,
-	rohit.mathew@arm.com,
-	scott@os.amperecomputing.com,
-	sdonthineni@nvidia.com,
-	tan.shaopeng@fujitsu.com,
-	xhao@linux.alibaba.com,
-	catalin.marinas@arm.com,
-	will@kernel.org,
-	corbet@lwn.net,
-	maz@kernel.org,
-	oupton@kernel.org,
-	joey.gouly@arm.com,
-	suzuki.poulose@arm.com,
-	kvmarm@lists.linux.dev,
-	zengheng4@huawei.com,
-	linux-doc@vger.kernel.org,
-	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v6 40/40] arm64: mpam: Add initial MPAM documentation
-Date: Fri, 13 Mar 2026 14:46:17 +0000
-Message-ID: <20260313144617.3420416-41-ben.horgan@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260313144617.3420416-1-ben.horgan@arm.com>
-References: <20260313144617.3420416-1-ben.horgan@arm.com>
+	s=arc-20240116; t=1773414587; c=relaxed/simple;
+	bh=G8+4urbwl/kl8Syy8w8X2OZmP6dOqFG95NsWDRZd+Zg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=cEhu/ho8Vj933aiz+nUhKGZbq2Yx+53YXvKKuJCHcxC/C2MuuSQ53HvALK1X0REEpo22f50Qg1nCUDoXRIBUOWaxB6LWB8+9m2tdfOoogNNrm6MuXSNlFj8FfK1SMTjskmVpHdbHDvPtaxHQUkCb45UNtYWNHfLiELbKdBcciYw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ELk6eE1P; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49068C19421;
+	Fri, 13 Mar 2026 15:09:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773414587;
+	bh=G8+4urbwl/kl8Syy8w8X2OZmP6dOqFG95NsWDRZd+Zg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ELk6eE1PBmYWdy9eoLPDeApT2mrAgrUGPLIq4yDpcDkR6SZbwjuDub7i/gczjtq3Q
+	 hppNUMyp8D9z5XbNGowoqAfxLbZTKtUzCRiKL5PmmXRQaP0z2foRrpcuhgaTseg5ch
+	 oiSJU7vcTBgcDxAOfCVjHqJbdPy9NzlNH+WvajyPZ79n17pP05ouKOekZ9/iEOBHSh
+	 Vtijio3ng6Cr7zeD/InpBh55xaHLSO/EFk7R1YT2YB2nbOCIF/L1X8360iOPjAhl6V
+	 7Fr7VwC1YkJR3xgElJkg4ggviJ5rstKwgNEmQ+VpFTrSbIZPGJAL77Wz7xQT4DRQmH
+	 tdc62ySffmE0g==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-api@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: linux-doc@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	workflows@vger.kernel.org,
+	tools@kernel.org,
+	x86@kernel.org,
+	Thomas Gleixner <tglx@kernel.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Cyril Hrubis <chrubis@suse.cz>,
+	Kees Cook <kees@kernel.org>,
+	Jake Edge <jake@lwn.net>,
+	David Laight <david.laight.linux@gmail.com>,
+	Askar Safin <safinaskar@zohomail.com>,
+	Gabriele Paoloni <gpaoloni@redhat.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH 0/9] Kernel API Specification Framework
+Date: Fri, 13 Mar 2026 11:09:10 -0400
+Message-ID: <20260313150928.2637368-1-sashal@kernel.org>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,151 +85,178 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.14 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[36];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linuxfoundation.org,lwn.net,google.com,infradead.org,suse.cz,gmail.com,zohomail.com,redhat.com,zeniv.linux.org.uk,linux-foundation.org,arndb.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[30];
+	TAGGED_FROM(0.00)[bounces-79309-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-79307-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.935];
-	RCVD_COUNT_FIVE(0.00)[5];
-	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:email,arm.com:mid,fujitsu.com:email,huawei.com:email]
-X-Rspamd-Queue-Id: 9439428571B
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: BFBCF285E00
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-MPAM (Memory Partitioning and Monitoring) is now exposed to user-space via
-resctrl. Add some documentation so the user knows what features to expect.
+This proposal introduces machinery for documenting kernel APIs, addressing the
+long-standing challenge of maintaining stable interfaces between the kernel and
+user-space programs. Despite the kernel's commitment to never breaking user
+space, the lack of machine-readable API specifications has led to breakages and
+across system calls and IOCTLs.
 
-Reviewed-by: Zeng Heng <zengheng4@huawei.com>
-Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-Signed-off-by: James Morse <james.morse@arm.com>
-Acked-by: Catalin Marinas <catalin.marinas@arm.com>
-Signed-off-by: Ben Horgan <ben.horgan@arm.com>
----
-Changes by Ben:
-Some tidying, update for current heuristics
+Specifications can document parameter types, valid ranges, constraints, and
+alignment requirements. They capture return value semantics including success
+conditions and error codes with their meaning. Execution context requirements,
+capabilities, locking constraints, signal handling behavior, and side effects
+can all be formally specified.
 
-Changes from v4:
-Fix unusual indentation
+These specifications live alongside the code they document and are both
+human-readable and machine-parseable. They can be validated at runtime when
+CONFIG_KAPI_RUNTIME_CHECKS is enabled, exported via debugfs for userspace
+tools, and extracted from either vmlinux or source code.
 
-Changes from v5:
-Drop cdp (under CONFIG_EXPERT) and mbwu (back with abmc)
----
- Documentation/arch/arm64/index.rst |  1 +
- Documentation/arch/arm64/mpam.rst  | 72 ++++++++++++++++++++++++++++++
- 2 files changed, 73 insertions(+)
- create mode 100644 Documentation/arch/arm64/mpam.rst
+This enables static analysis tools to verify userspace API usage at compile
+time, test generation based on formal specifications, consistent error handling
+validation, automated documentation generation, and formal verification of
+kernel interfaces.
 
-diff --git a/Documentation/arch/arm64/index.rst b/Documentation/arch/arm64/index.rst
-index af52edc8c0ac..98052b4ef4a1 100644
---- a/Documentation/arch/arm64/index.rst
-+++ b/Documentation/arch/arm64/index.rst
-@@ -23,6 +23,7 @@ ARM64 Architecture
-     memory
-     memory-tagging-extension
-     mops
-+    mpam
-     perf
-     pointer-authentication
-     ptdump
-diff --git a/Documentation/arch/arm64/mpam.rst b/Documentation/arch/arm64/mpam.rst
-new file mode 100644
-index 000000000000..570f51a8d4eb
---- /dev/null
-+++ b/Documentation/arch/arm64/mpam.rst
-@@ -0,0 +1,72 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+====
-+MPAM
-+====
-+
-+What is MPAM
-+============
-+MPAM (Memory Partitioning and Monitoring) is a feature in the CPUs and memory
-+system components such as the caches or memory controllers that allow memory
-+traffic to be labelled, partitioned and monitored.
-+
-+Traffic is labelled by the CPU, based on the control or monitor group the
-+current task is assigned to using resctrl.  Partitioning policy can be set
-+using the schemata file in resctrl, and monitor values read via resctrl.
-+See Documentation/filesystems/resctrl.rst for more details.
-+
-+This allows tasks that share memory system resources, such as caches, to be
-+isolated from each other according to the partitioning policy (so called noisy
-+neighbours).
-+
-+Supported Platforms
-+===================
-+Use of this feature requires CPU support, support in the memory system
-+components, and a description from firmware of where the MPAM device controls
-+are in the MMIO address space. (e.g. the 'MPAM' ACPI table).
-+
-+The MMIO device that provides MPAM controls/monitors for a memory system
-+component is called a memory system component. (MSC).
-+
-+Because the user interface to MPAM is via resctrl, only MPAM features that are
-+compatible with resctrl can be exposed to user-space.
-+
-+MSC are considered as a group based on the topology. MSC that correspond with
-+the L3 cache are considered together, it is not possible to mix MSC between L2
-+and L3 to 'cover' a resctrl schema.
-+
-+The supported features are:
-+
-+* Cache portion bitmap controls (CPOR) on the L2 or L3 caches.  To expose
-+  CPOR at L2 or L3, every CPU must have a corresponding CPU cache at this
-+  level that also supports the feature.  Mismatched big/little platforms are
-+  not supported as resctrl's controls would then also depend on task
-+  placement.
-+
-+* Memory bandwidth maximum controls (MBW_MAX) on or after the L3 cache.
-+  resctrl uses the L3 cache-id to identify where the memory bandwidth
-+  control is applied. For this reason the platform must have an L3 cache
-+  with cache-id's supplied by firmware. (It doesn't need to support MPAM.)
-+
-+  To be exported as the 'MB' schema, the topology of the group of MSC chosen
-+  must match the topology of the L3 cache so that the cache-id's can be
-+  repainted. For example: Platforms with Memory bandwidth maximum controls
-+  on CPU-less NUMA nodes cannot expose the 'MB' schema to resctrl as these
-+  nodes do not have a corresponding L3 cache. If the memory bandwidth
-+  control is on the memory rather than the L3 then there must be a single
-+  global L3 as otherwise it is unknown which L3 the traffic came from. There
-+  must be no caches between the L3 and the memory so that the two ends of
-+  the path have equivalent traffic.
-+
-+  When the MPAM driver finds multiple groups of MSC it can use for the 'MB'
-+  schema, it prefers the group closest to the L3 cache.
-+
-+* Cache Storage Usage (CSU) counters can expose the 'llc_occupancy' provided
-+  there is at least one CSU monitor on each MSC that makes up the L3 group.
-+  Exposing CSU counters from other caches or devices is not supported.
-+
-+Reporting Bugs
-+==============
-+If you are not seeing the counters or controls you expect please share the
-+debug messages produced when enabling dynamic debug and booting with:
-+dyndbg="file mpam_resctrl.c +pl"
+The implementation includes a core framework with ELF section storage,
+kerneldoc integration for inline specification, a debugfs interface for runtime
+querying, and a Rust-based extraction tool (tools/kapi) supporting JSON, RST,
+and plain text output formats. Example specifications are provided for the four
+fundamental file syscalls (sys_open, sys_close, sys_read, sys_write). The
+series also includes a KUnit test suite with 38 tests and a runtime
+verification selftest with 29+ TAP tests.
+
+The series with runtime testing enabled (CONFIG_KAPI_RUNTIME_CHECKS=y)
+currently survives LTP tests in a KVM VM.
+
+Changes since RFC v5:
+
+- Streamlined example specs: focus on open/close/read/write to start with.
+
+- Added KUnit test suite.
+
+- Added runtime verification selftest.
+
+- Fixed kernel test robot warnings from v5: fixed "document isn't included in
+  any toctree" (kernel-api-spec.rst now properly added to
+  Documentation/dev-tools/index.rst), fixed sparse "non size-preserving
+  integer to pointer cast" warnings in kernel_api_spec.c.
+
+- Rebased on v7.0-rc1.
+
+References:
+
+  RFC v5: https://lore.kernel.org/lkml/20251218204239.4159453-1-sashal@kernel.org/
+  RFC v4: https://lore.kernel.org/lkml/20250825181434.3340805-1-sashal@kernel.org/
+  RFC v3: https://lore.kernel.org/lkml/20250711114248.2288591-1-sashal@kernel.org/
+  RFC v2: https://lore.kernel.org/lkml/20250624180742.5795-1-sashal@kernel.org/
+  RFC v1: https://lore.kernel.org/lkml/20250614134858.790460-1-sashal@kernel.org/
+
+Sasha Levin (9):
+  kernel/api: introduce kernel API specification framework
+  kernel/api: enable kerneldoc-based API specifications
+  kernel/api: add debugfs interface for kernel API specifications
+  tools/kapi: Add kernel API specification extraction tool
+  kernel/api: add API specification for sys_open
+  kernel/api: add API specification for sys_close
+  kernel/api: add API specification for sys_read
+  kernel/api: add API specification for sys_write
+  kernel/api: add runtime verification selftest
+
+ .gitignore                                    |    1 +
+ Documentation/dev-tools/index.rst             |    1 +
+ Documentation/dev-tools/kernel-api-spec.rst   |  629 +++++++
+ MAINTAINERS                                   |   12 +
+ arch/x86/include/asm/syscall_wrapper.h        |   40 +
+ fs/open.c                                     |  576 +++++-
+ fs/read_write.c                               |  687 +++++++
+ include/asm-generic/vmlinux.lds.h             |   28 +
+ include/linux/kernel_api_spec.h               | 1580 +++++++++++++++++
+ include/linux/syscall_api_spec.h              |  192 ++
+ include/linux/syscalls.h                      |   39 +
+ init/Kconfig                                  |    2 +
+ kernel/Makefile                               |    3 +
+ kernel/api/.gitignore                         |    2 +
+ kernel/api/Kconfig                            |   70 +
+ kernel/api/Makefile                           |   14 +
+ kernel/api/kapi_debugfs.c                     |  503 ++++++
+ kernel/api/kapi_kunit.c                       |  536 ++++++
+ kernel/api/kernel_api_spec.c                  | 1277 +++++++++++++
+ scripts/Makefile.build                        |   31 +
+ scripts/Makefile.clean                        |    3 +
+ tools/docs/kernel-doc                         |    5 +
+ tools/kapi/.gitignore                         |    4 +
+ tools/kapi/Cargo.toml                         |   19 +
+ tools/kapi/src/extractor/debugfs.rs           |  581 ++++++
+ tools/kapi/src/extractor/kerneldoc_parser.rs  | 1554 ++++++++++++++++
+ tools/kapi/src/extractor/mod.rs               |  463 +++++
+ tools/kapi/src/extractor/source_parser.rs     |  405 +++++
+ .../src/extractor/vmlinux/binary_utils.rs     |  505 ++++++
+ .../src/extractor/vmlinux/magic_finder.rs     |  112 ++
+ tools/kapi/src/extractor/vmlinux/mod.rs       |  842 +++++++++
+ tools/kapi/src/formatter/json.rs              |  727 ++++++++
+ tools/kapi/src/formatter/mod.rs               |  140 ++
+ tools/kapi/src/formatter/plain.rs             |  708 ++++++++
+ tools/kapi/src/formatter/rst.rs               |  852 +++++++++
+ tools/kapi/src/main.rs                        |  119 ++
+ tools/lib/python/kdoc/kdoc_apispec.py         |  887 +++++++++
+ tools/lib/python/kdoc/kdoc_output.py          |    9 +-
+ tools/lib/python/kdoc/kdoc_parser.py          |   86 +-
+ tools/testing/selftests/kapi/Makefile         |    7 +
+ tools/testing/selftests/kapi/kapi_test_util.h |   31 +
+ tools/testing/selftests/kapi/test_kapi.c      | 1021 +++++++++++
+ 42 files changed, 15294 insertions(+), 9 deletions(-)
+ create mode 100644 Documentation/dev-tools/kernel-api-spec.rst
+ create mode 100644 include/linux/kernel_api_spec.h
+ create mode 100644 include/linux/syscall_api_spec.h
+ create mode 100644 kernel/api/.gitignore
+ create mode 100644 kernel/api/Kconfig
+ create mode 100644 kernel/api/Makefile
+ create mode 100644 kernel/api/kapi_debugfs.c
+ create mode 100644 kernel/api/kapi_kunit.c
+ create mode 100644 kernel/api/kernel_api_spec.c
+ create mode 100644 tools/kapi/.gitignore
+ create mode 100644 tools/kapi/Cargo.toml
+ create mode 100644 tools/kapi/src/extractor/debugfs.rs
+ create mode 100644 tools/kapi/src/extractor/kerneldoc_parser.rs
+ create mode 100644 tools/kapi/src/extractor/mod.rs
+ create mode 100644 tools/kapi/src/extractor/source_parser.rs
+ create mode 100644 tools/kapi/src/extractor/vmlinux/binary_utils.rs
+ create mode 100644 tools/kapi/src/extractor/vmlinux/magic_finder.rs
+ create mode 100644 tools/kapi/src/extractor/vmlinux/mod.rs
+ create mode 100644 tools/kapi/src/formatter/json.rs
+ create mode 100644 tools/kapi/src/formatter/mod.rs
+ create mode 100644 tools/kapi/src/formatter/plain.rs
+ create mode 100644 tools/kapi/src/formatter/rst.rs
+ create mode 100644 tools/kapi/src/main.rs
+ create mode 100644 tools/lib/python/kdoc/kdoc_apispec.py
+ create mode 100644 tools/testing/selftests/kapi/Makefile
+ create mode 100644 tools/testing/selftests/kapi/kapi_test_util.h
+ create mode 100644 tools/testing/selftests/kapi/test_kapi.c
+
 -- 
-2.43.0
+2.51.0
 
 
