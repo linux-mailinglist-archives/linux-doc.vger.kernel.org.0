@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-79279-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79280-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6PmVCgEltGl7hwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79279-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:53:53 +0100
+	id MPReEx8ltGl7hwAAu9opvQ
+	(envelope-from <linux-doc+bounces-79280-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:54:23 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89FA4285597
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:53:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA7592855BD
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:54:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3448D31125E8
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:47:47 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 0322F300B3D9
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:48:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 416F53A872A;
-	Fri, 13 Mar 2026 14:47:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F399B3A6F1E;
+	Fri, 13 Mar 2026 14:47:24 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCD663A6B84;
-	Fri, 13 Mar 2026 14:47:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 237F63A8733;
+	Fri, 13 Mar 2026 14:47:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773413240; cv=none; b=oPzTCUj7yW53gy0JsYMJckb+kXBRnVvaNDpWNpBTP7r/PnLMfubBygdi8JtePz/7vsMFPZerz38FgXmnMuLn+x/Ygw41C885cV6xXcKoyf8ZFjHFQPTzMO2NDt5zJ9fdTLduUct/Cs20pFd+21v6Ni67Z7xJZDTVMCig4OBLHf0=
+	t=1773413244; cv=none; b=f2o1ASR3Q+Yy3LffKB40i/GWqmB5QrjtMGamMoQ2o6O8PCiCfbMaxYmmRHU0tVDCXzRThWQfxwSLsOTv9ll5QhlFyU6KH+bp4JBRw3W418V79fugyFZShS1l8b/wSd7BB1odvt59Z5C97WfaumATCcuHnf+JBRIUjm3yYPCe7aw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773413240; c=relaxed/simple;
-	bh=C1yOBQONR3ZIKK/mcPn6ZeK/SBUpR9D5Hwzz32dtkDU=;
+	s=arc-20240116; t=1773413244; c=relaxed/simple;
+	bh=M2zEaXmf7MAEoSwHu0M+QohjDnM51bK+2sk19iwWi8c=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=aszGT2S0K5QsAukn5Kdm9J544YNf/t59P3xiR7i/G9LFC+BSmUQ4NlxOepaWW3DeAyc3C+woND3B8IUGaMXPozl1ywZ+W3aQt+cnzshoPwfIBmfE1nL7LjUEmaRH80GXZgPp2BmZu63i6tGNFbHg2O+QeZaDQ4w1zOIatw8FwGI=
+	 MIME-Version; b=qsFEoPy/pS/bK/c4UzTM6461WZafVw686zDzbbewuq8hI8DpotpFwHN2U3yONO9aThY5Rgf36aY4Ek/bdYx9ESvV+900J0r9RdppHpFdFDYXhHHXb9CTq6Zot7LVT59qc+DkE/W4prZYLL+sJkcCYsyW/wB/my7zcOp/ixrFsms=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 399481CC4;
-	Fri, 13 Mar 2026 07:47:12 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 88F531CC4;
+	Fri, 13 Mar 2026 07:47:16 -0700 (PDT)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6E9693F7BD;
-	Fri, 13 Mar 2026 07:47:14 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9FED73F7BD;
+	Fri, 13 Mar 2026 07:47:18 -0700 (PDT)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -72,10 +72,11 @@ Cc: amitsinght@marvell.com,
 	kvmarm@lists.linux.dev,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
-	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v6 11/40] arm64: mpam: Initialise and context switch the MPAMSM_EL1 register
-Date: Fri, 13 Mar 2026 14:45:48 +0000
-Message-ID: <20260313144617.3420416-12-ben.horgan@arm.com>
+	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>,
+	Dave Martin <Dave.Martin@arm.com>
+Subject: [PATCH v6 12/40] arm64: mpam: Add helpers to change a task or cpu's MPAM PARTID/PMG values
+Date: Fri, 13 Mar 2026 14:45:49 +0000
+Message-ID: <20260313144617.3420416-13-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260313144617.3420416-1-ben.horgan@arm.com>
 References: <20260313144617.3420416-1-ben.horgan@arm.com>
@@ -95,10 +96,10 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[36];
+	RCPT_COUNT_TWELVE(0.00)[37];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-79279-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79280-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
@@ -108,110 +109,107 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.926];
+	NEURAL_HAM(-0.00)[-0.929];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,qualcomm.com:email,arm.com:email,arm.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,huawei.com:email]
-X-Rspamd-Queue-Id: 89FA4285597
+	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,qualcomm.com:email,arm.com:email,arm.com:mid,huawei.com:email]
+X-Rspamd-Queue-Id: DA7592855BD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The MPAMSM_EL1 sets the MPAM labels, PMG and PARTID, for loads and stores
-generated by a shared SMCU. Disable the traps so the kernel can use it and
-set it to the same configuration as the per-EL cpu MPAM configuration.
+From: James Morse <james.morse@arm.com>
 
-If an SMCU is not shared with other cpus then it is implementation
-defined whether the configuration from MPAMSM_EL1 is used or that from
-the appropriate MPAMy_ELx. As we set the same, PMG_D and PARTID_D,
-configuration for MPAM0_EL1, MPAM1_EL1 and MPAMSM_EL1 the resulting
-configuration is the same regardless.
+Care must be taken when modifying the PARTID and PMG of a task in any
+per-task structure as writing these values may race with the task being
+scheduled in, and reading the modified values.
 
-The range of valid configurations for the PARTID and PMG in MPAMSM_EL1 is
-not currently specified in Arm Architectural Reference Manual but the
-architect has confirmed that it is intended to be the same as that for the
-cpu configuration in the MPAMy_ELx registers.
+Add helpers to set the task properties, and the CPU default value.  These
+use WRITE_ONCE() that pairs with the READ_ONCE() in mpam_get_regval() to
+avoid causing torn values.
 
 Tested-by: Gavin Shan <gshan@redhat.com>
 Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 Tested-by: Peter Newman <peternewman@google.com>
 Tested-by: Zeng Heng <zengheng4@huawei.com>
 Tested-by: Punit Agrawal <punit.agrawal@oss.qualcomm.com>
+Cc: Dave Martin <Dave.Martin@arm.com>
 Reviewed-by: Zeng Heng <zengheng4@huawei.com>
 Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-Reviewed-by: Gavin Shan <gshan@redhat.com>
 Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
+Reviewed-by: Gavin Shan <gshan@redhat.com>
+Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
-Changes since v2:
-Mention PMG_D and PARTID_D specifically int he commit message
-Add paragraph in commit message on range of MPAMSM_EL1 fields
+Changes since rfc:
+Keep comment attached to mpam_get_regval()
+Add internal helper, __mpam_regval() (Jonathan)
 
 Changes since v3:
-Use cpus_have_cap() in cpu_enable_mpam()
-add {}
+Remove extra CONFIG_ARM64_MPAM guarding
+Extend CONFIG_ARM64_MPAM guarding
 ---
- arch/arm64/include/asm/el2_setup.h | 3 ++-
- arch/arm64/include/asm/mpam.h      | 2 ++
- arch/arm64/kernel/cpufeature.c     | 2 ++
- arch/arm64/kernel/mpam.c           | 4 ++++
- 4 files changed, 10 insertions(+), 1 deletion(-)
+ arch/arm64/include/asm/mpam.h | 28 +++++++++++++++++++++++++++-
+ 1 file changed, 27 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/include/asm/el2_setup.h b/arch/arm64/include/asm/el2_setup.h
-index 85f4c1615472..4d15071a4f3f 100644
---- a/arch/arm64/include/asm/el2_setup.h
-+++ b/arch/arm64/include/asm/el2_setup.h
-@@ -513,7 +513,8 @@
- 	check_override id_aa64pfr0, ID_AA64PFR0_EL1_MPAM_SHIFT, .Linit_mpam_\@, .Lskip_mpam_\@, x1, x2
- 
- .Linit_mpam_\@:
--	msr_s	SYS_MPAM2_EL2, xzr		// use the default partition
-+	mov	x0, #MPAM2_EL2_EnMPAMSM_MASK
-+	msr_s	SYS_MPAM2_EL2, x0		// use the default partition,
- 						// and disable lower traps
- 	mrs_s	x0, SYS_MPAMIDR_EL1
- 	tbz	x0, #MPAMIDR_EL1_HAS_HCR_SHIFT, .Lskip_mpam_\@  // skip if no MPAMHCR reg
 diff --git a/arch/arm64/include/asm/mpam.h b/arch/arm64/include/asm/mpam.h
-index 0747e0526927..6bccbfdccb87 100644
+index 6bccbfdccb87..05aa71200f61 100644
 --- a/arch/arm64/include/asm/mpam.h
 +++ b/arch/arm64/include/asm/mpam.h
-@@ -53,6 +53,8 @@ static inline void mpam_thread_switch(struct task_struct *tsk)
- 		return;
+@@ -4,6 +4,7 @@
+ #ifndef __ASM__MPAM_H
+ #define __ASM__MPAM_H
  
- 	write_sysreg_s(regval | MPAM1_EL1_MPAMEN, SYS_MPAM1_EL1);
-+	if (system_supports_sme())
-+		write_sysreg_s(regval & (MPAMSM_EL1_PARTID_D | MPAMSM_EL1_PMG_D), SYS_MPAMSM_EL1);
- 	isb();
++#include <linux/bitfield.h>
+ #include <linux/jump_label.h>
+ #include <linux/percpu.h>
+ #include <linux/sched.h>
+@@ -22,6 +23,23 @@ DECLARE_PER_CPU(u64, arm64_mpam_current);
+  */
+ extern u64 arm64_mpam_global_default;
  
- 	/* Synchronising the EL0 write is left until the ERET to EL0 */
-diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
-index c3f900f81653..4f34e7a76f64 100644
---- a/arch/arm64/kernel/cpufeature.c
-+++ b/arch/arm64/kernel/cpufeature.c
-@@ -2500,6 +2500,8 @@ cpu_enable_mpam(const struct arm64_cpu_capabilities *entry)
- 		regval = READ_ONCE(per_cpu(arm64_mpam_current, cpu));
++#ifdef CONFIG_ARM64_MPAM
++static inline u64 __mpam_regval(u16 partid_d, u16 partid_i, u8 pmg_d, u8 pmg_i)
++{
++	return FIELD_PREP(MPAM0_EL1_PARTID_D, partid_d) |
++	       FIELD_PREP(MPAM0_EL1_PARTID_I, partid_i) |
++	       FIELD_PREP(MPAM0_EL1_PMG_D, pmg_d) |
++	       FIELD_PREP(MPAM0_EL1_PMG_I, pmg_i);
++}
++
++static inline void mpam_set_cpu_defaults(int cpu, u16 partid_d, u16 partid_i,
++					 u8 pmg_d, u8 pmg_i)
++{
++	u64 default_val = __mpam_regval(partid_d, partid_i, pmg_d, pmg_i);
++
++	WRITE_ONCE(per_cpu(arm64_mpam_default, cpu), default_val);
++}
++
+ /*
+  * The resctrl filesystem writes to the partid/pmg values for threads and CPUs,
+  * which may race with reads in mpam_thread_switch(). Ensure only one of the old
+@@ -30,12 +48,20 @@ extern u64 arm64_mpam_global_default;
+  * value to be stored with cache allocations, despite being considered 'free' by
+  * resctrl.
+  */
+-#ifdef CONFIG_ARM64_MPAM
+ static inline u64 mpam_get_regval(struct task_struct *tsk)
+ {
+ 	return READ_ONCE(task_thread_info(tsk)->mpam_partid_pmg);
+ }
  
- 	write_sysreg_s(regval | MPAM1_EL1_MPAMEN, SYS_MPAM1_EL1);
-+	if (cpus_have_cap(ARM64_SME))
-+		write_sysreg_s(regval & (MPAMSM_EL1_PARTID_D | MPAMSM_EL1_PMG_D), SYS_MPAMSM_EL1);
- 	isb();
- 
- 	/* Synchronising the EL0 write is left until the ERET to EL0 */
-diff --git a/arch/arm64/kernel/mpam.c b/arch/arm64/kernel/mpam.c
-index 48ec0ffd5999..3a490de4fa12 100644
---- a/arch/arm64/kernel/mpam.c
-+++ b/arch/arm64/kernel/mpam.c
-@@ -28,6 +28,10 @@ static int mpam_pm_notifier(struct notifier_block *self,
- 		 */
- 		regval = READ_ONCE(per_cpu(arm64_mpam_current, cpu));
- 		write_sysreg_s(regval | MPAM1_EL1_MPAMEN, SYS_MPAM1_EL1);
-+		if (system_supports_sme()) {
-+			write_sysreg_s(regval & (MPAMSM_EL1_PARTID_D | MPAMSM_EL1_PMG_D),
-+				       SYS_MPAMSM_EL1);
-+		}
- 		isb();
- 
- 		write_sysreg_s(regval, SYS_MPAM0_EL1);
++static inline void mpam_set_task_partid_pmg(struct task_struct *tsk,
++					    u16 partid_d, u16 partid_i,
++					    u8 pmg_d, u8 pmg_i)
++{
++	u64 regval = __mpam_regval(partid_d, partid_i, pmg_d, pmg_i);
++
++	WRITE_ONCE(task_thread_info(tsk)->mpam_partid_pmg, regval);
++}
++
+ static inline void mpam_thread_switch(struct task_struct *tsk)
+ {
+ 	u64 oldregval;
 -- 
 2.43.0
 
