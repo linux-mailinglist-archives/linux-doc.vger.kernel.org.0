@@ -1,139 +1,135 @@
-Return-Path: <linux-doc+bounces-79173-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79174-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id LtC/IQ6Qs2m5YAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79173-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 05:18:22 +0100
+	id QGdnOl2Ts2lhYQAAu9opvQ
+	(envelope-from <linux-doc+bounces-79174-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 05:32:29 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 807F727D3DB
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 05:18:21 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4ED9927D42D
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 05:32:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 4BBBB302443A
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 04:18:18 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 20AC3305A493
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 04:32:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5474835950;
-	Fri, 13 Mar 2026 04:18:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4E90175A68;
+	Fri, 13 Mar 2026 04:32:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="NmUNoRi6"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="NfDDrueV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D294175A93
-	for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 04:18:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B997D38D;
+	Fri, 13 Mar 2026 04:32:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773375495; cv=none; b=SsjsJCJg9zJcietPBDquiisR+/0Qs4Dy0kHuS/DBqCpmg+KO/C0CRhLe6ouQ+bEGZq6k/QcI6RmwUvvQanDSxMNk+Dog2/UMbRqb/cufVGNzlSeYI55YU51d+xdC3mw500/xUxmP/HTWXrL/yjxVEVtu2NToPDiwImPoaxg7DzY=
+	t=1773376345; cv=none; b=BVxUDsMhZZ73FKXiYwutQWxq+4iD9/j/dgV4Jh01qUNYWewQaV6oWXEitJKDdj7Gri1HNWggiGx3zgqfUmpLJd1yhINn0fy0+4+mOErtrDt4eybd/wPgwoEXBqtukSYXUlcxEslc+kAzy+M8tekwoJB4zH2dPtc3IZ+qdZp/0Us=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773375495; c=relaxed/simple;
-	bh=2k/F0SZT7Xv6ggBApqTgD5cbWgwsRk0FUwBiPmm0rP8=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=f+mUBnQNMcpkzexs75AsJ8Nb6BZIqRXOGavTvnGFtUp503WNPMs3nX/GXHJ2TlP4mxw2b1q/mZjM3jEJrSG29XDaitJXdoDCCpiBEUGsuY5EPt3odqJ7fTX3fCMuZ0pda0d6lxm9621YJz60xHXCkciNp5KDPDAhMRybPKe2kcM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=NmUNoRi6; arc=none smtp.client-ip=192.198.163.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1773375493; x=1804911493;
-  h=date:from:to:cc:subject:message-id;
-  bh=2k/F0SZT7Xv6ggBApqTgD5cbWgwsRk0FUwBiPmm0rP8=;
-  b=NmUNoRi63c603N1inMDG6L49FHhJ0lRWzN4qXUcqOztJwUEptWm1iVEY
-   +eBf4ItCQ3ZIwOklxYvsnXrRcvKOllZrl5wDqzc1ggWiThuoCmynwHXKA
-   n4BceqjDOnhmVSddkl7eTls7GKGsErkkAEwDEJMCxUqgxKdqRTZi4n7bO
-   fLA4K7OlPcYrb2spx4qok6b6JdhVvkqKwcvyncc6OUbvaBUPfTDkdOldp
-   8+ZDOS3zTZgykKcOSSgH1hJx7Jqv+23LzYGxnSf/Zr+Juwik/HOn4fj/X
-   zhjBijXzQJrXLGlB5upzGooHzuUtG2SjNr2T0qYRkoqABiG/Wt3gkYEkH
-   w==;
-X-CSE-ConnectionGUID: JfQTXXA6TGSO1v48snKPsg==
-X-CSE-MsgGUID: iLSSxSuAQp+dSkediYVYSA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11727"; a="78374314"
-X-IronPort-AV: E=Sophos;i="6.23,117,1770624000"; 
-   d="scan'208";a="78374314"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Mar 2026 21:18:13 -0700
-X-CSE-ConnectionGUID: rppWKp1nQWWSguyclS7gVQ==
-X-CSE-MsgGUID: zlOdF+XhSOmoxNzuqNLAPA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,117,1770624000"; 
-   d="scan'208";a="221237166"
-Received: from igk-lkp-server01.igk.intel.com (HELO 9958d990ccf2) ([10.211.93.152])
-  by orviesa007.jf.intel.com with ESMTP; 12 Mar 2026 21:18:11 -0700
-Received: from kbuild by 9958d990ccf2 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1w0tyS-000000003d7-2LJs;
-	Fri, 13 Mar 2026 04:18:08 +0000
-Date: Fri, 13 Mar 2026 05:17:44 +0100
-From: kernel test robot <lkp@intel.com>
-To: "Lorenzo Stoakes (Oracle)" <ljs@kernel.org>
-Cc: oe-kbuild-all@lists.linux.dev, David Hildenbrand <david@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Linux Memory Management List <linux-mm@kvack.org>,
- linux-doc@vger.kernel.org
-Subject: [akpm-mm:mm-new 367/381] htmldocs:
- Documentation/filesystems/mmap_prepare.rst: WARNING: document isn't included
- in any toctree [toc.not_included]
-Message-ID: <202603130548.Eq61ZQ3W-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	s=arc-20240116; t=1773376345; c=relaxed/simple;
+	bh=OsO43AEScf2SDzs3vCLiXxAix7CqATBgzLwPUSofLPQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=N7aMG79sLWGj0qh85AK6vVyPhNFA+d5g/eECk/ofOBekT1nDtp6/dcqK11LKuVXchsg7AgHUH7pVksbuTw2CHluu9WNUIncsEU3IZYhgvaxd0pXA3g+7As/fq40J1T5O3VsznEEe1vRGFIkt62GNM2kJciDToTQ8ll3dO6EX+PU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=NfDDrueV; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=4PWorIuVBtzdK1hCG3yXXkHLa5cHfJHYltPsR/+plI4=; b=NfDDrueVefetZKJanjVgnCq4zk
+	UZIkbuQS2jeq093BU7Y0zaXJTOqerb5HzpMh3a8fmR0Ytu/IV/x9zPXXEThTo8H6On6BNYsngyt4k
+	1IXAeQIKZFiWNiq4kbqFoAt/UOiSbi0HUhTkiNiHk1vOCd841OXtycuBMPUxnZDpgt9JXLqosw1WR
+	Wba7Q7+Oal2nKOSpjaf2EZ6PWNwUXvwac+Ks+ST0joPrmnRBF1+4sAYnLpXg+oF4NEZAjoYI35i6d
+	+gltQVHRKto2K4xWJAukJLzeEp8tX6wj40FSBwcU8DN2pg6oOr4KRjy938veusI9cpO6dT6IMk15T
+	8lfr9rKA==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1w0uCE-0000000GVR2-1QIZ;
+	Fri, 13 Mar 2026 04:32:22 +0000
+Message-ID: <4843aecd-fe54-401e-9e30-237e1d9fa1ec@infradead.org>
+Date: Thu, 12 Mar 2026 21:32:21 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-X-Spamd-Result: default: False [-0.66 / 15.00];
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [akpm-mm:mm-new 367/381] htmldocs:
+ Documentation/filesystems/mmap_prepare.rst: WARNING: document isn't included
+ in any toctree [toc.not_included]
+To: kernel test robot <lkp@intel.com>,
+ "Lorenzo Stoakes (Oracle)" <ljs@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, David Hildenbrand <david@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Linux Memory Management List <linux-mm@kvack.org>, linux-doc@vger.kernel.org
+References: <202603130548.Eq61ZQ3W-lkp@intel.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <202603130548.Eq61ZQ3W-lkp@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79174-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79173-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	RCPT_COUNT_FIVE(0.00)[6];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,intel.com:dkim,intel.com:email,intel.com:mid]
-X-Rspamd-Queue-Id: 807F727D3DB
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,infradead.org:dkim,infradead.org:mid]
+X-Rspamd-Queue-Id: 4ED9927D42D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-new
-head:   593fab843afbd6800243552aebcc61d02d3cdcb2
-commit: a6cdd3274e8a03e218fe6bf3ef711902adb76727 [367/381] mm: add documentation for the mmap_prepare file operation callback
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260313/202603130548.Eq61ZQ3W-lkp@intel.com/reproduce)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202603130548.Eq61ZQ3W-lkp@intel.com/
 
-All warnings (new ones prefixed by >>):
+On 3/12/26 9:17 PM, kernel test robot wrote:
+> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-new
+> head:   593fab843afbd6800243552aebcc61d02d3cdcb2
+> commit: a6cdd3274e8a03e218fe6bf3ef711902adb76727 [367/381] mm: add documentation for the mmap_prepare file operation callback
+> compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+> reproduce: (https://download.01.org/0day-ci/archive/20260313/202603130548.Eq61ZQ3W-lkp@intel.com/reproduce)
+> 
+> If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> the same patch/commit), kindly add following tags
+> | Reported-by: kernel test robot <lkp@intel.com>
+> | Closes: https://lore.kernel.org/oe-kbuild-all/202603130548.Eq61ZQ3W-lkp@intel.com/
+> 
+> All warnings (new ones prefixed by >>):
+> 
 
-   Documentation/userspace-api/landlock:526: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
-   Documentation/userspace-api/landlock:526: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
-   Documentation/userspace-api/landlock:535: ./include/uapi/linux/landlock.h:166: ERROR: Unknown target name: "filesystem flags". [docutils]
-   Documentation/userspace-api/landlock:535: ./include/uapi/linux/landlock.h:189: ERROR: Unknown target name: "network flags". [docutils]
-   Documentation/core-api/percpu-counter-tree.rst: WARNING: document isn't included in any toctree [toc.not_included]
->> Documentation/filesystems/mmap_prepare.rst: WARNING: document isn't included in any toctree [toc.not_included]
->> Documentation/filesystems/mmap_prepare.rst:60: WARNING: Pygments lexer name 'Cw' is not known [misc.highlighting_failure]
-   Documentation/networking/skbuff:36: ./include/linux/skbuff.h:181: WARNING: Failed to create a cross reference. A title or caption not found: 'crc' [ref.ref]
+
+>>> Documentation/filesystems/mmap_prepare.rst:60: WARNING: Pygments lexer name 'Cw' is not known [misc.highlighting_failure]
+>    Documentation/networking/skbuff:36: ./include/linux/skbuff.h:181: WARNING: Failed to create a cross reference. A title or caption not found: 'crc' [ref.ref]
+> 
+
+Patch for these 2 is here:
+https://lore.kernel.org/linux-mtd/f0e33b51-d465-462d-b0f6-98a1db66bb15@infradead.org/T/#mf78dd33fe8fec8bb02379ab15eefd4d3eba23f78
+
+(written before k.t.r. reported the warnings, so no Reported-by:)
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+~Randy
+
 
