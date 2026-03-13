@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-79299-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79300-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WA2PLiUmtGmgiAAAu9opvQ
-	(envelope-from <linux-doc+bounces-79299-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:58:45 +0100
+	id INwtOo0ntGkQiQAAu9opvQ
+	(envelope-from <linux-doc+bounces-79300-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 16:04:45 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61EE32856C1
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:58:45 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 028D4285848
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 16:04:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 7135030BC2E3
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:51:47 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 204763089E1E
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:51:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E391D3AD533;
-	Fri, 13 Mar 2026 14:48:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D97CF3AD53A;
+	Fri, 13 Mar 2026 14:48:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40EB73AD529;
-	Fri, 13 Mar 2026 14:48:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D0C03B637D;
+	Fri, 13 Mar 2026 14:48:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773413325; cv=none; b=G/BB7S7km7Tk0WDoXP7wFTXOotshc1VPELDNTaOyFcDAR8v2IYdTqNHgsz9LqlBMRUmUyuhI82e/tENSpt0VEW68NctL3P4hlQMTjlKxLDAhLZxIlCjSXHUMrruTZIkIIVyRmIwHthYOnXIf+p+awdBqyK+bwzAgPYxiUR63tDc=
+	t=1773413328; cv=none; b=M+zmJoMjY/4kE4pxuvJSK5crn7wIWXumpvQRydm3hiQmKstsDY2pg0B5mfsexI40FLuO+cqGpaGkG+9MpPZt3SCw5v+VgxeFKJ50hDeo/SRBe+RFAyM//fwy8rQv/qu7YBZ7qu+DnxxrEY/uX4qADH85QXIufbzcJHTDjLLSBmg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773413325; c=relaxed/simple;
-	bh=DQWiqXmvHCyZytT+Myk6lqO8u9lOnLILZTNCmyVo670=;
+	s=arc-20240116; t=1773413328; c=relaxed/simple;
+	bh=kRJUzdzBZ0IVaCz2WVkDnHdch8e7kG1LhynKEhJORqw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=vGPEi7af7u0zec3KPHLTjDn/AcmUgHYHgADsUIHapBQgyUFgm+I94naNmckppxzM6W2O64vb8RIl6YShMjWtaDiwKf7ZfIs9EvhoKgIi2bh4Sr6mGOZH8S/6XlvJ8YtUHrTNX0dCTFBgrkRCt7yG4n0QzdFa/mroRUNLzMy9CR0=
+	 MIME-Version; b=nZi0kpgIjkaAgtkLS+wbzaCVK6kqeENOKAgWslc++rzXu8c7kOgekfR8x3nIAzmfyf9T2sWmXb6yLYraSSZ5JjQ4zC/MOmM+Ygyufy04/tDK7mfBDnl/DhVcK3KmJcLG3ns4Y11/wEs/hsVF66Ku//BDo2p52ozNl4ew6lFQNRc=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9BD872454;
-	Fri, 13 Mar 2026 07:48:36 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D043824C0;
+	Fri, 13 Mar 2026 07:48:40 -0700 (PDT)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CFFA43F7BD;
-	Fri, 13 Mar 2026 07:48:38 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 0DDC83F7BD;
+	Fri, 13 Mar 2026 07:48:42 -0700 (PDT)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -73,9 +73,9 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v6 31/40] arm_mpam: resctrl: Update the rmid reallocation limit
-Date: Fri, 13 Mar 2026 14:46:08 +0000
-Message-ID: <20260313144617.3420416-32-ben.horgan@arm.com>
+Subject: [PATCH v6 32/40] arm_mpam: resctrl: Add empty definitions for assorted resctrl functions
+Date: Fri, 13 Mar 2026 14:46:09 +0000
+Message-ID: <20260313144617.3420416-33-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260313144617.3420416-1-ben.horgan@arm.com>
 References: <20260313144617.3420416-1-ben.horgan@arm.com>
@@ -90,7 +90,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -98,32 +98,43 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[36];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-79299-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79300-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.934];
+	NEURAL_HAM(-0.00)[-0.936];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,fujitsu.com:email,arm.com:email,arm.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,huawei.com:email]
-X-Rspamd-Queue-Id: 61EE32856C1
+	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,arm.com:email,arm.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,huawei.com:email,qualcomm.com:email]
+X-Rspamd-Queue-Id: 028D4285848
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: James Morse <james.morse@arm.com>
 
-resctrl's limbo code needs to be told when the data left in a cache is
-small enough for the partid+pmg value to be re-allocated.
+A few resctrl features and hooks need to be provided, but aren't needed or
+supported on MPAM platforms.
 
-x86 uses the cache size divided by the number of rmid users the cache may
-have. Do the same, but for the smallest cache, and with the number of
-partid-and-pmg users.
+resctrl has individual hooks to separately enable and disable the
+closid/partid and rmid/pmg context switching code. For MPAM this is all the
+same thing, as the value in struct task_struct is used to cache the value
+that should be written to hardware. arm64's context switching code is
+enabled once MPAM is usable, but doesn't touch the hardware unless the
+value has changed.
+
+For now event configuration is not supported, and can be turned off by
+returning 'false' from resctrl_arch_is_evt_configurable().
+
+The new io_alloc feature is not supported either, always return false from
+the enable helper to indicate and fail the enable.
+
+Add this, and empty definitions for the other hooks.
 
 Tested-by: Gavin Shan <gshan@redhat.com>
 Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
@@ -136,76 +147,115 @@ Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
-Changes since v2:
-Move waiting for cache info into it's own patch
-
 Changes since v3:
-Move check class is csu higher (just kept to document intent)
-continue -> break
+Add resctrl_arch_pre_mount() {}
+resctrl_arch_reset_rmid_all() signature update
+add stubs for abmc
+keep empty definitions together
 
-to squash update rmid limits
-use raw_smp_processor_id()
+Changes since v5:
+Add resctrl_arch_reset_rmid() since mbwu will always use abmc
 ---
- drivers/resctrl/mpam_resctrl.c | 39 ++++++++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ drivers/resctrl/mpam_resctrl.c | 65 ++++++++++++++++++++++++++++++++++
+ include/linux/arm_mpam.h       |  9 +++++
+ 2 files changed, 74 insertions(+)
 
 diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
-index 4f6a53d1bd4f..3979808f7253 100644
+index 3979808f7253..0db147271b0c 100644
 --- a/drivers/resctrl/mpam_resctrl.c
 +++ b/drivers/resctrl/mpam_resctrl.c
-@@ -438,6 +438,42 @@ int resctrl_arch_rmid_read(struct rdt_resource *r, struct rdt_domain_hdr *hdr,
- 				 closid, rmid, val);
+@@ -91,6 +91,71 @@ bool resctrl_arch_mon_capable(void)
+ 	return l3->mon_capable;
  }
  
-+/*
-+ * The rmid realloc threshold should be for the smallest cache exposed to
-+ * resctrl.
-+ */
-+static int update_rmid_limits(struct mpam_class *class)
++bool resctrl_arch_is_evt_configurable(enum resctrl_event_id evt)
 +{
-+	u32 num_unique_pmg = resctrl_arch_system_num_rmid_idx();
-+	struct mpam_props *cprops = &class->props;
-+	struct cacheinfo *ci;
-+
-+	lockdep_assert_cpus_held();
-+
-+	if (!mpam_has_feature(mpam_feat_msmon_csu, cprops))
-+		return 0;
-+
-+	/*
-+	 * Assume cache levels are the same size for all CPUs...
-+	 * The check just requires any online CPU and it can't go offline as we
-+	 * hold the cpu lock.
-+	 */
-+	ci = get_cpu_cacheinfo_level(raw_smp_processor_id(), class->level);
-+	if (!ci || ci->size == 0) {
-+		pr_debug("Could not read cache size for class %u\n",
-+			 class->level);
-+		return -EINVAL;
-+	}
-+
-+	if (!resctrl_rmid_realloc_limit ||
-+	    ci->size < resctrl_rmid_realloc_limit) {
-+		resctrl_rmid_realloc_limit = ci->size;
-+		resctrl_rmid_realloc_threshold = ci->size / num_unique_pmg;
-+	}
-+
-+	return 0;
++	return false;
 +}
 +
- static bool cache_has_usable_cpor(struct mpam_class *class)
- {
- 	struct mpam_props *cprops = &class->props;
-@@ -856,6 +892,9 @@ static void mpam_resctrl_pick_counters(void)
- 			/* CSU counters only make sense on a cache. */
- 			switch (class->type) {
- 			case MPAM_CLASS_CACHE:
-+				if (update_rmid_limits(class))
-+					break;
++void resctrl_arch_mon_event_config_read(void *info)
++{
++}
 +
- 				counter_update_class(QOS_L3_OCCUP_EVENT_ID, class);
- 				break;
- 			default:
++void resctrl_arch_mon_event_config_write(void *info)
++{
++}
++
++void resctrl_arch_reset_rmid_all(struct rdt_resource *r, struct rdt_l3_mon_domain *d)
++{
++}
++
++void resctrl_arch_reset_rmid(struct rdt_resource *r, struct rdt_l3_mon_domain *d,
++			     u32 closid, u32 rmid, enum resctrl_event_id eventid)
++{
++}
++
++void resctrl_arch_reset_cntr(struct rdt_resource *r, struct rdt_l3_mon_domain *d,
++			     u32 closid, u32 rmid, int cntr_id,
++			     enum resctrl_event_id eventid)
++{
++}
++
++void resctrl_arch_config_cntr(struct rdt_resource *r, struct rdt_l3_mon_domain *d,
++			      enum resctrl_event_id evtid, u32 rmid, u32 closid,
++			      u32 cntr_id, bool assign)
++{
++}
++
++int resctrl_arch_cntr_read(struct rdt_resource *r, struct rdt_l3_mon_domain *d,
++			   u32 unused, u32 rmid, int cntr_id,
++			   enum resctrl_event_id eventid, u64 *val)
++{
++	return -EOPNOTSUPP;
++}
++
++bool resctrl_arch_mbm_cntr_assign_enabled(struct rdt_resource *r)
++{
++	return false;
++}
++
++int resctrl_arch_mbm_cntr_assign_set(struct rdt_resource *r, bool enable)
++{
++	return -EINVAL;
++}
++
++int resctrl_arch_io_alloc_enable(struct rdt_resource *r, bool enable)
++{
++	return -EOPNOTSUPP;
++}
++
++bool resctrl_arch_get_io_alloc_enabled(struct rdt_resource *r)
++{
++	return false;
++}
++
++void resctrl_arch_pre_mount(void)
++{
++}
++
+ bool resctrl_arch_get_cdp_enabled(enum resctrl_res_level rid)
+ {
+ 	return mpam_resctrl_controls[rid].cdp_enabled;
+diff --git a/include/linux/arm_mpam.h b/include/linux/arm_mpam.h
+index 86d5e326d2bd..f92a36187a52 100644
+--- a/include/linux/arm_mpam.h
++++ b/include/linux/arm_mpam.h
+@@ -67,6 +67,15 @@ struct rdt_resource;
+ void *resctrl_arch_mon_ctx_alloc(struct rdt_resource *r, enum resctrl_event_id evtid);
+ void resctrl_arch_mon_ctx_free(struct rdt_resource *r, enum resctrl_event_id evtid, void *ctx);
+ 
++/*
++ * The CPU configuration for MPAM is cheap to write, and is only written if it
++ * has changed. No need for fine grained enables.
++ */
++static inline void resctrl_arch_enable_mon(void) { }
++static inline void resctrl_arch_disable_mon(void) { }
++static inline void resctrl_arch_enable_alloc(void) { }
++static inline void resctrl_arch_disable_alloc(void) { }
++
+ static inline unsigned int resctrl_arch_round_mon_val(unsigned int val)
+ {
+ 	return val;
 -- 
 2.43.0
 
