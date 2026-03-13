@@ -1,338 +1,182 @@
-Return-Path: <linux-doc+bounces-79265-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79261-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KHowAHEStGlkgwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79265-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:34:41 +0100
+	id +EqBNigStGlkgwAAu9opvQ
+	(envelope-from <linux-doc+bounces-79261-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:33:28 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CE49283FBB
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:34:40 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 637C9283F6B
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:33:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A246431DC872
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 13:28:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0D1483272BE7
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 13:26:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 816EB3A7586;
-	Fri, 13 Mar 2026 13:24:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9ACB3A0E86;
+	Fri, 13 Mar 2026 13:23:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WBEeMtlW"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="NIuhXoTP";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="qLrFnVlx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 904363A6B88
-	for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 13:24:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 217623932EC
+	for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 13:23:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773408251; cv=none; b=h6d2GjcwAV1X3nBJonmmeCoJxPDO7+85kQcw76Buz5B7WcSj+qb6M+So63s6bhzq7Sjk8nAHa5xSZbjPoYG7Fect//wpVdL5fw7U0MFKg1tIsGAPiWq2MPNizDX05mcjem2poD0PKYaqs3ldYjZ6IuWxiHoj8QO4OK6T3WXYh78=
+	t=1773408233; cv=none; b=aPFXulqmeMrD3jN07WPTueBng/QpdU0ZUSN6jmNdeVkzbnrncZmXn7WxkYLL0lqSF8OEZeBB5LM3aZrKV8gYoec+2YId5d7KC+7xklVId0k5mI+IoO9sYeBmn5Ft5x+Ht0o7le1dBTIhCNjafkTDXGXJmXFm5IYorwCTcP+jjIw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773408251; c=relaxed/simple;
-	bh=1+Gk1wrp2G7JsJ3mKRZOtQ8q8HMv75sNbrro9fnWjmQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CK5n/ZFT06rEdbZddHm89OFqrLIi87dCDNRCJuMF9F7nEQzP776FYdnl8nIGyUXZFqdQ06bQQSjtVXdxGbA62B2WEMs2MjJfD5/qPKY1thORI9MZbciDqj4Qs5UgTxzJ0btRQkIXJYwuNdJcziBbEcMVeDjyCLb3xnH0/m6x4VQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WBEeMtlW; arc=none smtp.client-ip=209.85.167.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-4670676ba03so829737b6e.1
-        for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 06:24:09 -0700 (PDT)
+	s=arc-20240116; t=1773408233; c=relaxed/simple;
+	bh=ZtHwRVLIvoDuwE15SqsQokaOwa/XA5uaZPU2Mzcfynw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IcbfkTz1No6UC+tisDuvIkUVZJTwuDyZKNCcaJwuEZiqNIyV5Cp2a2UTG1j1Fm40ByLb40PNwKSplYlATOpv6tWe75GBAdBI8PJxuofQYRkB9xxzSpQBwRDImm795D/OujBvT0x4W0QesZw6vSkfwPxH1+/aY4XQ2vbYMuHMKuQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=NIuhXoTP; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=qLrFnVlx; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1773408231;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=R7HlaCIiaZDqWdp+o834N7JPGX2olX/c1Y000VF8Mwk=;
+	b=NIuhXoTPTJxBfC2TqV4iGl+Ex9fz0azpXBZ2qegrTL3yspEsD9W2/L5u9ZY8Iw4XUy01w1
+	D+SDUopmOkD3a46TTOLv0xn6E97HtYA2Ktaev9E4dK5euPWuTRKEeunqUisoFxawVJba7N
+	/wwdAZMRQU4R/CiFHJWuLjOu+C8tIEs=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-500-S_8tIMH-P6eqfO0RCZcw7A-1; Fri, 13 Mar 2026 09:23:49 -0400
+X-MC-Unique: S_8tIMH-P6eqfO0RCZcw7A-1
+X-Mimecast-MFC-AGG-ID: S_8tIMH-P6eqfO0RCZcw7A_1773408229
+Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4853ab1cae0so21737235e9.2
+        for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 06:23:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773408248; x=1774013048; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZMVfUVm5fgbPd/qSnAtgDoNjTpRp4guFY8KxOPZIX64=;
-        b=WBEeMtlW6oVP7uLVtM3LYdSMwfXKvnr0Ya4E3FBVOLAZLilc34sF5XAr+TvgN2BWNX
-         K7d9Amo76f8BTD7NzHFFm3yoUO3HSnnymphEHS1LFlejkhVCG4Gf0fCmmLik/qwNHtG3
-         OwZ4fE1el/TDoolAWsMTYPu7Pp3KAiJRmG596K4TYPbTrb25vPAv14YsCbpYPl7m7ovD
-         z0rVOTsEjtMF2D35/0xjJQJSrQD1NumxMtvkrfQHl4cMeZecv9k/2hy+7B7NXciRqR3p
-         fuxhwV9E5UslXz4ZjBiRnE0YHt9XCgz5bCZ+aV4IQVnZAj/a5wQySXZSV/R48GTy25En
-         cA8g==
+        d=redhat.com; s=google; t=1773408229; x=1774013029; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=R7HlaCIiaZDqWdp+o834N7JPGX2olX/c1Y000VF8Mwk=;
+        b=qLrFnVlxY9xtmVRF2P1UIqIEG5AaN0PZ0i2rup1fi0MX5fAqFAGhLo9d/UEY9KrgrV
+         pXPpO4NWzkXUHGh3CN+q0jzX1pJbBNqynrWIQGRhXfRXLWsnmZalJU5l52q1w51yeb8V
+         e18OxwMFm3WYuYOgBFxN4o8sTGvj5nXiNQ0mQqp6/ukDMNhoWEfET7ky09FXCdVuKaUw
+         vPlWqiIT7gkPYPIyLgU9+/i+sCqJzun/g7eK2FyZQveCyhiJLcWlxukCC8fjY8usREA9
+         zd7vE9yobr6wp3vZfke3SKKybZGgrjspqhyKil0H78MLWAS97ddLZcg6irStyG2nrdKE
+         +73w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773408248; x=1774013048;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ZMVfUVm5fgbPd/qSnAtgDoNjTpRp4guFY8KxOPZIX64=;
-        b=o+m3zydxMSf1lGKvfvpMLyxUk1GuNOd5Gfxw82yt13/huOYMJmr/D/J73Z0ngu9x0N
-         MOVCLUfJs3ZlIitaaHrT2cTIFlzkldW6ZmhKLg7LXFnsDAI6UwowrfbC7MOW88DGCONK
-         fy2jF4w7N8Mj83TCKrKs7h3FSBchFHYcQQC/cX9SGlsjYs1mN1QCDFLXSEJJXVe/i/t7
-         ASK5TXyflY9o0Vmd3o80sO+2KSF+0xzRE2c+47E4SrJ8Kwxn1z+/m6/tuayEsBWfi2rD
-         J4UZTsDtKNa0bh1BGnFbourUqs3gh4SqjK8rLmYzKjeJr378hVNje7VoOs5A6+8qcArv
-         apxQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVzz4K0dsTaistUt3yGfvtZ6Pk/EBx6vxjfPjaAi3hMiUuJz/LoD7FLhOMastgO69NkqziXZY1/BVI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxWSVOKH+zhcVysVcIHSMmINVuDdWourABFa5nSFirBS8EjByfh
-	Z5c+RUveZHMzwmpEuuURBnhV89HWz/MBHHgp8gOzdVxZfEF42R1j5ymQ
-X-Gm-Gg: ATEYQzwmnCiNm/A4jDZhtSxhckxd+sE7WG1lC98U7+uYa4FaBXMKuiDkFGS0nUl3jMg
-	NqXMaFZRr1VH0jMJJzkWqX06LT08i0jrYCBZW8+CgcPdsxts8RAnT0/CH4Nq7+3WvAAzJg5RGkw
-	/aWmpryOJgEQehbyit/ViO7f+bKdgiPgU+ByojdmqNnQjotVBINGt3H45eVSvyuaYLpuFUb3ELV
-	BjYlwznWzjCmcoDr1sLyiAeLRVxOXNCPBAglYTYTDq9KonAPRuoYoZNkoTLozboFZ44/fE8J5b0
-	x3IYFAMs9dNsePe6yBy6dasa8B95iGCtXwWfeX83+nWVLpTixIyg6BLyQC5g3zRVCAXWhgiYF4p
-	PLzMgn4+rX7d2Ak2JpQwSFZxYwLWjw+Q06cgpBTXEAoacmPfJatfpx5VAvb6Y5vvqscT9gIxe/v
-	kCKN5RAyE3ynap7z/WZRpVgwphklMXgq6W9qYAYBymHjNuXnbTqBHm8YWCjYA=
-X-Received: by 2002:a05:6808:152b:b0:467:2926:1228 with SMTP id 5614622812f47-467575e9301mr1863785b6e.49.1773408248504;
-        Fri, 13 Mar 2026 06:24:08 -0700 (PDT)
-Received: from frodo (c-98-38-17-99.hsd1.co.comcast.net. [98.38.17.99])
-        by smtp.googlemail.com with ESMTPSA id 5614622812f47-4673434a35csm4795987b6e.20.2026.03.13.06.24.07
+        d=1e100.net; s=20251104; t=1773408229; x=1774013029;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=R7HlaCIiaZDqWdp+o834N7JPGX2olX/c1Y000VF8Mwk=;
+        b=QIGbEunXSiNBtBAtLj3CFHek/C0A66h66ROyOoVTGam9LAIDRDyrywtzR122SO4Wkd
+         eRL8dNJAiwGguC4KBRhyXkW22+iPeu9jDOOW1UDarbRWNI6HopXBTG6N2L2cfyZs+EwS
+         sTfrkGcj/V65p58wE97KuYM+d8x87FKvVydcetzI2IeujtBTIqJpk7H9RgdT21vY8SSf
+         VIiy/TDyRCLdLduQqbB0Uaki9Ea/q0OJxeMs48NHJEERsy68+23Nd/aRbJDSwjok/y2k
+         Sirg4K6+z2Ai+ylXiV49WdprK1AtwfWbVS+ezlyNQKbAziomlwpF8UbMApTIY83NYFau
+         QzLQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUnkrDC56VNawnn23x8rfxSyMvUBS2lOLSiORYfWLHjY+15ZsgPL7CG3mjEx7lUnl3NvGBl2s1gJRg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzzI5NGftvkc/kClC9Y09TSzkTs+HDhevdsDMtIoBii3xiNsrT6
+	j7f/WVX7kWje/p49EhLGofp9TWpfbat9Un73g1UAk1Aif7ZF8Qi5tzi4vAnYwrhYLiT2lRtLuFD
+	wZ6h70AGwFR/8D9Kype6BKzWd75eFVWHq609EanLTHCY0PYhpEAGUcPaMUnk76g==
+X-Gm-Gg: ATEYQzzQp7DNl5dkZ76sU2FmvFMOhkX08vPJkOB+IHNJXTPmHg9Ok9SdBDLDwUc2QKT
+	ftCjuWzSTuH2xZfLKSr0j6aYoyhlbq0jOHC8edUy04P7U7LBCcqKmvY+c9Cc9UoBxGdPJISO0AM
+	Rl1nYj9wOhRtHE/qxXS58XN5GUFLOpMP6lPge5nK0AR1atfbMorKjkyyKXoNuZTRkojUx3jYMSv
+	WI6svl3fejsCkr6SscydalMo3oaVqkd3948nm/qgybi2+fBV++v1nNNTNo9pwX8eW3gQve2ypWq
+	gwCYMsexF+UCnLo93nG73OKMx7nO7eXqiCKeZ4/ZZ4Rl7ilxH33/89dmeQRPNByjHjAjAbX6BDO
+	rYJpfrtFlJBjN5UUrPEVJRAwz5WYx0yGGml+u+sISzLdd+6aFgnM=
+X-Received: by 2002:a05:600c:8b46:b0:485:34b3:858a with SMTP id 5b1f17b1804b1-485566d2d66mr52863335e9.11.1773408228611;
+        Fri, 13 Mar 2026 06:23:48 -0700 (PDT)
+X-Received: by 2002:a05:600c:8b46:b0:485:34b3:858a with SMTP id 5b1f17b1804b1-485566d2d66mr52862635e9.11.1773408228148;
+        Fri, 13 Mar 2026 06:23:48 -0700 (PDT)
+Received: from jlelli-thinkpadt14gen4.remote.csb ([151.29.82.96])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48557784c18sm51257345e9.4.2026.03.13.06.23.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Mar 2026 06:24:08 -0700 (PDT)
-From: Jim Cromie <jim.cromie@gmail.com>
-To: airlied@gmail.com,
-	simona@ffwll.ch,
-	jbaron@akamai.com,
-	gregkh@linuxfoundation.org,
+        Fri, 13 Mar 2026 06:23:47 -0700 (PDT)
+Date: Fri, 13 Mar 2026 14:23:45 +0100
+From: Juri Lelli <juri.lelli@redhat.com>
+To: gmonaco@redhat.com
+Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+	Nam Cao <namcao@linutronix.de>, Juri Lelli <jlelli@redhat.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Jim Cromie <jim.cromie@gmail.com>,
-	mripard@kernel.org,
-	tzimmermann@suse.de,
-	maarten.lankhorst@linux.intel.com,
-	jani.nikula@intel.com,
-	ville.syrjala@linux.intel.com,
-	christian.koenig@amd.com,
-	matthew.auld@intel.com,
-	arunpravin.paneerselvam@amd.com,
-	louis.chauvet@bootlin.com,
-	pmladek@suse.com,
-	ukaszb@chromium.org,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org
-Subject: [PATCH v11 33/65] docs/dyndbg: add classmap info to howto
-Date: Fri, 13 Mar 2026 07:19:58 -0600
-Message-ID: <20260313132103.2529746-34-jim.cromie@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260313132103.2529746-1-jim.cromie@gmail.com>
-References: <20260313132103.2529746-1-jim.cromie@gmail.com>
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	Tomas Glozar <tglozar@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	John Kacur <jkacur@redhat.com>
+Subject: Re: [PATCH v7 05/15] Documentation/rv: Add documentation about
+ hybrid automata
+Message-ID: <abQP4ZwPZsBJ0TO4@jlelli-thinkpadt14gen4.remote.csb>
+References: <20260310105627.332044-1-gmonaco@redhat.com>
+ <20260310105627.332044-6-gmonaco@redhat.com>
+ <abKX1XO4vqY74uA7@jlelli-thinkpadt14gen4.remote.csb>
+ <4620e92b1c7f4d87f192a017f3026dfc17bcaef6.camel@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4620e92b1c7f4d87f192a017f3026dfc17bcaef6.camel@redhat.com>
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TAGGED_FROM(0.00)[bounces-79265-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,suse.de,linux.intel.com,intel.com,amd.com,bootlin.com,suse.com,chromium.org,lists.freedesktop.org];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,akamai.com,linuxfoundation.org,lwn.net,vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79261-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[juri.lelli@redhat.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 9CE49283FBB
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 637C9283F6B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Describe the 3 API macros providing dynamic_debug's classmaps
+On 13/03/26 14:05, gmonaco@redhat.com wrote:
+> Hello,
+> 
+> On Thu, 2026-03-12 at 11:39 +0100, Juri Lelli wrote:
+> > Very minor nit, feel free to ignore, but ...
+> > 
+> > The formal 7-tuple definition includes 'i' (invariant function), but
+> > unlike other elements, 'i' isn't stored in the automaton struct -
+> > it's implemented as generated code in ha_verify_constraint(), IIUC.
+> > Worth a brief note clarifying this design choice so readers don't
+> > expect to find an invariants[] member in the struct? Here or below in
+> > the example C code section.
+> 
+> Thanks for the review! I haven't really thought of that.
+> At this stage we are not mentioning any struct element (it's purely
+> theoretical), so there shouldn't be any expectation from the reader.
+> 
+> Later I mention "The function verify_constraint checks guards,
+> performs resets and starts timers to validate invariants according to
+> specification".
+> In fact, also guards are not represented as part of 'function', I may
+> mention after that sentence something like: "those cannot easily be
+> represented in the automaton struct".
+> 
+> Not sure if saying more wouldn't make it even more confusing than it
+> already is.
 
-DYNAMIC_DEBUG_CLASSMAP_DEFINE - create & export a classmap
-DYNAMIC_DEBUG_CLASSMAP_USE    - refer to exported map
-DYNAMIC_DEBUG_CLASSMAP_PARAM  - bind control param to the classmap
-DYNAMIC_DEBUG_CLASSMAP_PARAM_REF + use module's storage - __drm_debug
-
-NB: The _DEFINE & _USE model makes the user dependent on the definer,
-just like EXPORT_SYMBOL(__drm_debug) already does.
-
-cc: linux-doc@vger.kernel.org
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
- .../admin-guide/dynamic-debug-howto.rst       | 132 ++++++++++++++++--
- 1 file changed, 122 insertions(+), 10 deletions(-)
-
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 0a42b9de55ac..734be0b5fe9a 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -146,6 +146,9 @@ keywords are::
-   "1-30" is valid range but "1 - 30" is not.
- 
- 
-+Keywords
-+--------
-+
- The meanings of each keyword are:
- 
- func
-@@ -194,16 +197,6 @@ format
- 	format "nfsd: SETATTR"  // a neater way to match a format with whitespace
- 	format 'nfsd: SETATTR'  // yet another way to match a format with whitespace
- 
--class
--    The given class_name is validated against each module, which may
--    have declared a list of known class_names.  If the class_name is
--    found for a module, callsite & class matching and adjustment
--    proceeds.  Examples::
--
--	class DRM_UT_KMS	# a DRM.debug category
--	class JUNK		# silent non-match
--	// class TLD_*		# NOTICE: no wildcard in class names
--
- line
-     The given line number or range of line numbers is compared
-     against the line number of each ``pr_debug()`` callsite.  A single
-@@ -218,6 +211,25 @@ line
- 	line -1605          // the 1605 lines from line 1 to line 1605
- 	line 1600-          // all lines from line 1600 to the end of the file
- 
-+class
-+
-+    The given class_name is validated against each module, which may
-+    have declared a list of class_names it accepts.  If the class_name
-+    accepted by a module, callsite & class matching and adjustment
-+    proceeds.  Examples::
-+
-+	class DRM_UT_KMS	# a drm.debug category
-+	class JUNK		# silent non-match
-+	// class TLD_*		# NOTICE: no wildcard in class names
-+
-+.. note::
-+
-+    Unlike other keywords, classes are "name-to-change", not
-+    "omitting-constraint-allows-change".  See Dynamic Debug Classmaps
-+
-+Flags
-+-----
-+
- The flags specification comprises a change operation followed
- by one or more flag characters.  The change operation is one
- of the characters::
-@@ -239,6 +251,11 @@ The flags are::
-   l    Include line number
-   d    Include call trace
- 
-+.. note::
-+
-+   * To query without changing	``+_`` or ``-_``.
-+   * To clear all flags		``=_`` or ``-fslmpt``.
-+
- For ``print_hex_dump_debug()`` and ``print_hex_dump_bytes()``, only
- the ``p`` flag has meaning, other flags are ignored.
- 
-@@ -395,3 +412,98 @@ just a shortcut for ``print_hex_dump(KERN_DEBUG)``.
- For ``print_hex_dump_debug()``/``print_hex_dump_bytes()``, format string is
- its ``prefix_str`` argument, if it is constant string; or ``hexdump``
- in case ``prefix_str`` is built dynamically.
-+
-+.. _dyndbg-classmaps:
-+
-+Dynamic Debug Classmaps
-+=======================
-+
-+The "class" keyword selects prdbgs based on author supplied,
-+domain-oriented names.  This complements the nested-scope keywords:
-+module, file, function, line.
-+
-+The main difference from the others: classes must be named to be
-+changed.  This protects them from unintended overwrite::
-+
-+  # IOW this cannot undo any drm.debug settings
-+  :#> ddcmd -p
-+
-+This protection is needed; /sys/module/drm/parameters/debug is ABI.
-+drm.debug is authoritative when dyndbg is not used, dyndbg-under-DRM
-+is an implementation detail, and must not behave erratically, just
-+because another admin fed >control something unrelated.
-+
-+So each class must be enabled individually (no wildcards)::
-+
-+  :#> ddcmd class DRM_UT_CORE +p
-+  :#> ddcmd class DRM_UT_KMS +p
-+  # or more selectively
-+  :#> ddcmd class DRM_UT_CORE module drm +p
-+
-+That makes direct >control wordy and annoying, but it is a secondary
-+interface; it is not intended to replace the ABI, just slide in
-+underneath and reimplement the guaranteed behavior.  So DRM would keep
-+using the convenient way, and be able to trust it::
-+
-+  :#> echo 0x1ff > /sys/module/drm/parameters/debug
-+
-+That said, since the sysfs/kparam is the ABI, if the author omits the
-+CLASSMAP_PARAM, theres no ABI to guard, and he probably wants a less
-+pedantic >control interface.  In this case, protection is dropped.
-+
-+Dynamic Debug Classmap API
-+==========================
-+
-+DYNAMIC_DEBUG_CLASSMAP_DEFINE(clname,type,_base,classnames) - this maps
-+classnames (a list of strings) onto class-ids consecutively, starting
-+at _base.
-+
-+DYNAMIC_DEBUG_CLASSMAP_USE(clname) & _USE_(clname,_base) - modules
-+call this to refer to the var _DEFINEd elsewhere (and exported).
-+
-+DYNAMIC_DEBUG_CLASSMAP_PARAM(clname) - creates the sysfs/kparam,
-+maps/exposes bits 0..N as class-names.
-+
-+Classmaps are opt-in: modules invoke _DEFINE or _USE to authorize
-+dyndbg to update those named classes.  "class FOO" queries are
-+validated against the classes defined or used by the module, this
-+finds the classid to alter; classes are not directly selectable by
-+their classid.
-+
-+Classnames are global in scope, so subsystems (module-groups) should
-+prepend a subsystem name; unqualified names like "CORE" are discouraged.
-+
-+NB: It is an inherent API limitation (due to class_id's int type) that
-+the following are possible:
-+
-+  // these errors should be caught in review
-+  __pr_debug_cls(0, "fake DRM_UT_CORE msg");  // this works
-+  __pr_debug_cls(62, "un-known classid msg"); // this compiles, does nothing
-+
-+There are 2 types of classmaps:
-+
-+* DD_CLASS_TYPE_DISJOINT_BITS: classes are independent, like drm.debug
-+* DD_CLASS_TYPE_LEVEL_NUM: classes are relative, ordered (V3 > V2)
-+
-+DYNAMIC_DEBUG_CLASSMAP_PARAM - modelled after module_param_cb, it
-+refers to a DEFINEd classmap, and associates it to the param's
-+data-store.  This state is then applied to DEFINEr and USEr modules
-+when they're modprobed.
-+
-+The PARAM interface also enforces the DD_CLASS_TYPE_LEVEL_NUM relation
-+amongst the contained classnames; all classes are independent in the
-+control parser itself.  There is no implied meaning in names like "V4"
-+or "PL_ERROR" vs "PL_WARNING".
-+
-+Modules or subsystems (drm & drivers) can define multiple classmaps,
-+as long as they (all the classmaps) share the limited 0..62
-+per-module-group _class_id range, without overlap.
-+
-+If a module encounters a conflict between 2 classmaps it is _USEing or
-+_DEFINEing, it can invoke the extended _USE_(name,_base) macro to
-+de-conflict the respective ranges.
-+
-+``#define DEBUG`` will enable all pr_debugs in scope, including any
-+class'd ones.  This won't be reflected in the PARAM readback value,
-+but the class'd pr_debug callsites can be forced off by toggling the
-+classmap-kparam all-on then all-off.
--- 
-2.53.0
+Yeah, probably. As mentioned, feel free to ignore, it was just a
+thought. :)
 
 
