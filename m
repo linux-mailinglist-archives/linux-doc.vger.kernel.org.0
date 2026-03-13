@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-79276-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79277-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6P/CLK8ktGl7hwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79276-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:52:31 +0100
+	id 8H3xMc0ktGl7hwAAu9opvQ
+	(envelope-from <linux-doc+bounces-79277-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:53:01 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25BC5285522
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:52:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 661BF285555
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:53:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 49D6F30F48D5
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:47:28 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9FE6F31014E8
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:47:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61AE33A8730;
-	Fri, 13 Mar 2026 14:47:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8FD6D34A773;
+	Fri, 13 Mar 2026 14:47:11 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2FD5B3A963A;
-	Fri, 13 Mar 2026 14:47:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C64C346765;
+	Fri, 13 Mar 2026 14:47:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773413227; cv=none; b=kKa/KVyOwTRNxp/8zO4Ah3P0LHCu7wMRTOYblotUZ6mO+2BQvml3L6A0hOM3KZzV3ey3SShViUW81JDxIPlOxLul1iMR/gH12f4WkuE2L3PEiFXGV4Czz/wyW6xZxOmP9O2wGlADD/pKfMZOf0VvYIdmcC6kzowR8R3ydC6jGNk=
+	t=1773413231; cv=none; b=Dg7mBeyGBW9dyP+e6HmPz4exH2Y/h6OE7qGuKgQg1awRXHSXdtR5A0cQn6hNn6FZV41vfkBg797j+BHp3YCWUFS0RVg3uiXMmQiG9/HM0UCigDGZiVqhgwP019jR+FgMldBRIbOo+zR0i02hrDsHGc2PIVf16UT7axaJAMh3AEE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773413227; c=relaxed/simple;
-	bh=pyUTSmlc09KzVeNHkS3ebB3Bnif8iba8ZbFHhFpW9ZM=;
+	s=arc-20240116; t=1773413231; c=relaxed/simple;
+	bh=b7cfoAfMyZkkrwp7W2dcYMqW5fMaNrAEN8FQQTZTtZg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=poX4okkKz7OSrvHAG1flQkd88H9lYw25hfmN1ReztY+VP7T7tMLtNc9R4KchUpErbok4Ea//c6VylFmS+VFy07tOWeDJ2U3XfZgrZUl5S2dpn+hdXhNE+S5/EhTNC1lKBHJnWk6GE70maGx/hvutWEuw49ffZyy2M6oL82rXCl8=
+	 MIME-Version; b=ScLPaVTw9jA3wezj2RyE4nExx6rdiVD7/KU1BuFxd4Isi+qkjltIxZJLnTnWswl/goXzRgU2JwA/1peY4WLbNv5D9MQHVhVnUtZwzMC0amAKQ7y2NiUWb27/W+UylmGUqLeL4G8BHxX9SE60Av768XwVMGNFOTyYw4f0T+yrNmc=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 993B42308;
-	Fri, 13 Mar 2026 07:46:59 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CD59F244B;
+	Fri, 13 Mar 2026 07:47:03 -0700 (PDT)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CD26E3F7BD;
-	Fri, 13 Mar 2026 07:47:01 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 0A94D3F7BD;
+	Fri, 13 Mar 2026 07:47:05 -0700 (PDT)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -73,9 +73,9 @@ Cc: amitsinght@marvell.com,
 	zengheng4@huawei.com,
 	linux-doc@vger.kernel.org,
 	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Subject: [PATCH v6 08/40] arm64: mpam: Drop the CONFIG_EXPERT restriction
-Date: Fri, 13 Mar 2026 14:45:45 +0000
-Message-ID: <20260313144617.3420416-9-ben.horgan@arm.com>
+Subject: [PATCH v6 09/40] arm64: mpam: Advertise the CPUs MPAM limits to the driver
+Date: Fri, 13 Mar 2026 14:45:46 +0000
+Message-ID: <20260313144617.3420416-10-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260313144617.3420416-1-ben.horgan@arm.com>
 References: <20260313144617.3420416-1-ben.horgan@arm.com>
@@ -90,7 +90,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
@@ -98,7 +98,7 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[36];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-79276-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79277-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
@@ -108,54 +108,73 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.932];
+	NEURAL_HAM(-0.00)[-0.929];
 	RCVD_COUNT_FIVE(0.00)[5];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,fujitsu.com:email,arm.com:email,arm.com:mid,huawei.com:email,qualcomm.com:email]
-X-Rspamd-Queue-Id: 25BC5285522
+	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,qualcomm.com:email,arm.com:email,arm.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,huawei.com:email]
+X-Rspamd-Queue-Id: 661BF285555
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In anticipation of MPAM being useful remove the CONFIG_EXPERT restriction.
+From: James Morse <james.morse@arm.com>
 
+Requestors need to populate the MPAM fields for any traffic they send on
+the interconnect. For the CPUs these values are taken from the
+corresponding MPAMy_ELx register. Each requestor may have a limit on the
+largest PARTID or PMG value that can be used. The MPAM driver has to
+determine the system-wide minimum supported PARTID and PMG values.
+
+To do this, the driver needs to be told what each requestor's limit is.
+
+CPUs are special, but this infrastructure is also needed for the SMMU and
+GIC ITS. Call the helper to tell the MPAM driver what the CPUs can do.
+
+The return value can be ignored by the arch code as it runs well before the
+MPAM driver starts probing.
+
+Tested-by: Gavin Shan <gshan@redhat.com>
+Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+Tested-by: Peter Newman <peternewman@google.com>
 Tested-by: Zeng Heng <zengheng4@huawei.com>
 Tested-by: Punit Agrawal <punit.agrawal@oss.qualcomm.com>
 Reviewed-by: Zeng Heng <zengheng4@huawei.com>
 Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
 Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
+Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
 Reviewed-by: Gavin Shan <gshan@redhat.com>
-Acked-by: Catalin Marinas <catalin.marinas@arm.com>
+Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
- arch/arm64/Kconfig      | 2 +-
- drivers/resctrl/Kconfig | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/arm64/kernel/mpam.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index ecaaca13a969..3170c67464fb 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -2016,7 +2016,7 @@ config ARM64_TLB_RANGE
+diff --git a/arch/arm64/kernel/mpam.c b/arch/arm64/kernel/mpam.c
+index 9866d2ca0faa..e6feff2324ac 100644
+--- a/arch/arm64/kernel/mpam.c
++++ b/arch/arm64/kernel/mpam.c
+@@ -3,6 +3,7 @@
  
- config ARM64_MPAM
- 	bool "Enable support for MPAM"
--	select ARM64_MPAM_DRIVER if EXPERT	# does nothing yet
-+	select ARM64_MPAM_DRIVER
- 	select ACPI_MPAM if ACPI
- 	help
- 	  Memory System Resource Partitioning and Monitoring (MPAM) is an
-diff --git a/drivers/resctrl/Kconfig b/drivers/resctrl/Kconfig
-index c808e0470394..c34e059c6e41 100644
---- a/drivers/resctrl/Kconfig
-+++ b/drivers/resctrl/Kconfig
-@@ -1,6 +1,6 @@
- menuconfig ARM64_MPAM_DRIVER
- 	bool "MPAM driver"
--	depends on ARM64 && ARM64_MPAM && EXPERT
-+	depends on ARM64 && ARM64_MPAM
- 	help
- 	  Memory System Resource Partitioning and Monitoring (MPAM) driver for
- 	  System IP, e.g. caches and memory controllers.
+ #include <asm/mpam.h>
+ 
++#include <linux/arm_mpam.h>
+ #include <linux/jump_label.h>
+ #include <linux/percpu.h>
+ 
+@@ -11,3 +12,14 @@ DEFINE_PER_CPU(u64, arm64_mpam_default);
+ DEFINE_PER_CPU(u64, arm64_mpam_current);
+ 
+ u64 arm64_mpam_global_default;
++
++static int __init arm64_mpam_register_cpus(void)
++{
++	u64 mpamidr = read_sanitised_ftr_reg(SYS_MPAMIDR_EL1);
++	u16 partid_max = FIELD_GET(MPAMIDR_EL1_PARTID_MAX, mpamidr);
++	u8 pmg_max = FIELD_GET(MPAMIDR_EL1_PMG_MAX, mpamidr);
++
++	return mpam_register_requestor(partid_max, pmg_max);
++}
++/* Must occur before mpam_msc_driver_init() from subsys_initcall() */
++arch_initcall(arm64_mpam_register_cpus)
 -- 
 2.43.0
 
