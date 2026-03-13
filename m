@@ -1,182 +1,185 @@
-Return-Path: <linux-doc+bounces-79261-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79266-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +EqBNigStGlkgwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79261-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:33:28 +0100
+	id aBGUATYgtGnahgAAu9opvQ
+	(envelope-from <linux-doc+bounces-79266-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:33:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 637C9283F6B
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:33:28 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 714E82850D9
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:33:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0D1483272BE7
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 13:26:07 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 58D0330848D2
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:28:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9ACB3A0E86;
-	Fri, 13 Mar 2026 13:23:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D93839D6E6;
+	Fri, 13 Mar 2026 14:28:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="NIuhXoTP";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="qLrFnVlx"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="YeCFGCgZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 217623932EC
-	for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 13:23:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773408233; cv=none; b=aPFXulqmeMrD3jN07WPTueBng/QpdU0ZUSN6jmNdeVkzbnrncZmXn7WxkYLL0lqSF8OEZeBB5LM3aZrKV8gYoec+2YId5d7KC+7xklVId0k5mI+IoO9sYeBmn5Ft5x+Ht0o7le1dBTIhCNjafkTDXGXJmXFm5IYorwCTcP+jjIw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773408233; c=relaxed/simple;
-	bh=ZtHwRVLIvoDuwE15SqsQokaOwa/XA5uaZPU2Mzcfynw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IcbfkTz1No6UC+tisDuvIkUVZJTwuDyZKNCcaJwuEZiqNIyV5Cp2a2UTG1j1Fm40ByLb40PNwKSplYlATOpv6tWe75GBAdBI8PJxuofQYRkB9xxzSpQBwRDImm795D/OujBvT0x4W0QesZw6vSkfwPxH1+/aY4XQ2vbYMuHMKuQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=NIuhXoTP; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=qLrFnVlx; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1773408231;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=R7HlaCIiaZDqWdp+o834N7JPGX2olX/c1Y000VF8Mwk=;
-	b=NIuhXoTPTJxBfC2TqV4iGl+Ex9fz0azpXBZ2qegrTL3yspEsD9W2/L5u9ZY8Iw4XUy01w1
-	D+SDUopmOkD3a46TTOLv0xn6E97HtYA2Ktaev9E4dK5euPWuTRKEeunqUisoFxawVJba7N
-	/wwdAZMRQU4R/CiFHJWuLjOu+C8tIEs=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-500-S_8tIMH-P6eqfO0RCZcw7A-1; Fri, 13 Mar 2026 09:23:49 -0400
-X-MC-Unique: S_8tIMH-P6eqfO0RCZcw7A-1
-X-Mimecast-MFC-AGG-ID: S_8tIMH-P6eqfO0RCZcw7A_1773408229
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4853ab1cae0so21737235e9.2
-        for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 06:23:49 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1697538655F
+	for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 14:28:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.41
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773412094; cv=pass; b=tOVDpAijEkLim1qBd4j5iXvBz0p6MQfmoFrfc520ncN8iJk3BNmXYtb3UaixpdCkn1g9WOi8hw1hudoDIOpxni2jE5oHtS8mxYDNogL0vkBqXMB+xOfq+OtLVwDf+GOyWZEDARnL7aU1R5CC8B6lRKLlJdNEAR/yo4W5zeBZjCs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773412094; c=relaxed/simple;
+	bh=3DhJJ93cKQQk3SpyT61kIFsBKzCFpwnhRvsErphsARo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=IW18lwD2kEBRwthOCL7sYxWBWZ9hPSvC/pGk1g0Ic5d+r/x3MMCTJJYRfqqDR4tIyaxJy003l6IZfyrttVADFIN9FKoNAqf7VIyi7e7ntp09pcVP6C4byMbUz2YKMnHtBk0gIFFp7HeJeU0pxy6L4IJLi58AxQJ40JUTzPYVR1w=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=YeCFGCgZ; arc=pass smtp.client-ip=209.85.208.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-660dcafc85aso4222452a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 13 Mar 2026 07:28:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773412091; cv=none;
+        d=google.com; s=arc-20240605;
+        b=lkw80+n2K8HCruZHhLRV24WbvM5zXH4Al7xSwBQC8Sexljv0y6Ffl9KHLoLXbMUAzq
+         TX0ScL0Zkj9eGIRxViBv5hNiipQGBAubLA0UVSlcfWvL5AyyXlJ43+DNwmYz67+9s5Yr
+         WPGEed4HkKpShv9CxFKflwGWKPDQD8XKx3OGA84G5/vj9KCuoaonc6zr3LL8jZ24cxuB
+         HWce2vZgvPQmSdLYQiDsv4fFcm9LYitWUcz62KD3u6xAFf9ue5qo7t61EE3HKPNfVO1D
+         EobV2usVCp10jhTZoBRqOfiFw8XZdFgG51sGFon/y7Mky6A3MF/8e6W7YXPTA4v+R8tT
+         MWaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=3DhJJ93cKQQk3SpyT61kIFsBKzCFpwnhRvsErphsARo=;
+        fh=PaPhXYxf7JM8zcTm5O++02Oc1cEDX9ES5QnwauZnZfc=;
+        b=PAaTzPfkW753xifWUgL/gKExA6bbeGt4m2irPEpL2gR6uPwuHsdu7ZYj7odkk6U/iN
+         q6xQcLvtafGoIjL42S5kPZi7xJn5RxPyGcjcdr9KSHHGbfROTDB5mkjqk2DsUG17y0TA
+         EiZdQpKM55/dxdMoQoPxzWD/sykol8d9BmDJB9oG4kUBONvthuVjkFsiIjM1j6DFg4I9
+         BoQPsQ3PqNOV+3G40YLjt/NvkLnk0Fl4zCXXjGOY4EbvI6kLk6YxjBsa7LWz/PWqVg8g
+         ZnXqe3sr3drFkb+zPKScjkReAD4dYLrEO3CYIDP0WOUU3kdijV+Xj/i2/9aOfKzqm52D
+         e5rA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1773408229; x=1774013029; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=R7HlaCIiaZDqWdp+o834N7JPGX2olX/c1Y000VF8Mwk=;
-        b=qLrFnVlxY9xtmVRF2P1UIqIEG5AaN0PZ0i2rup1fi0MX5fAqFAGhLo9d/UEY9KrgrV
-         pXPpO4NWzkXUHGh3CN+q0jzX1pJbBNqynrWIQGRhXfRXLWsnmZalJU5l52q1w51yeb8V
-         e18OxwMFm3WYuYOgBFxN4o8sTGvj5nXiNQ0mQqp6/ukDMNhoWEfET7ky09FXCdVuKaUw
-         vPlWqiIT7gkPYPIyLgU9+/i+sCqJzun/g7eK2FyZQveCyhiJLcWlxukCC8fjY8usREA9
-         zd7vE9yobr6wp3vZfke3SKKybZGgrjspqhyKil0H78MLWAS97ddLZcg6irStyG2nrdKE
-         +73w==
+        d=soleen.com; s=google; t=1773412091; x=1774016891; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3DhJJ93cKQQk3SpyT61kIFsBKzCFpwnhRvsErphsARo=;
+        b=YeCFGCgZKDa67SbVHtcat6FDI2p7FQTFB0W2KqT/xfXOeMq5fFxQ7198SdTzNflpr0
+         jaqLH90TTIjgwaZGyc9quNQhdQsGFZW9/Bfqywg+2QshVlHXZxQ7kSYlg2m6QIn3k0uI
+         amzLV0Jo5lwcj4kXMrR1CUsGJTI2AQm9T5tCXBJIjoR3E9vzfOFPiKOvrNNjd8+/sskK
+         oF87eECgUqjRSTCrvddU2DeUVvGgcAxBFVXBGp5rsZACzS9VkMR/s7D7V6IGJJy+Nd2r
+         D0nyE8GkcsENU0IyoyfsnkROkCO2C0+QN5iAj95BVoavLIkfRa+5IumQew+drPMSJK6w
+         lU7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773408229; x=1774013029;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=R7HlaCIiaZDqWdp+o834N7JPGX2olX/c1Y000VF8Mwk=;
-        b=QIGbEunXSiNBtBAtLj3CFHek/C0A66h66ROyOoVTGam9LAIDRDyrywtzR122SO4Wkd
-         eRL8dNJAiwGguC4KBRhyXkW22+iPeu9jDOOW1UDarbRWNI6HopXBTG6N2L2cfyZs+EwS
-         sTfrkGcj/V65p58wE97KuYM+d8x87FKvVydcetzI2IeujtBTIqJpk7H9RgdT21vY8SSf
-         VIiy/TDyRCLdLduQqbB0Uaki9Ea/q0OJxeMs48NHJEERsy68+23Nd/aRbJDSwjok/y2k
-         Sirg4K6+z2Ai+ylXiV49WdprK1AtwfWbVS+ezlyNQKbAziomlwpF8UbMApTIY83NYFau
-         QzLQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUnkrDC56VNawnn23x8rfxSyMvUBS2lOLSiORYfWLHjY+15ZsgPL7CG3mjEx7lUnl3NvGBl2s1gJRg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzzI5NGftvkc/kClC9Y09TSzkTs+HDhevdsDMtIoBii3xiNsrT6
-	j7f/WVX7kWje/p49EhLGofp9TWpfbat9Un73g1UAk1Aif7ZF8Qi5tzi4vAnYwrhYLiT2lRtLuFD
-	wZ6h70AGwFR/8D9Kype6BKzWd75eFVWHq609EanLTHCY0PYhpEAGUcPaMUnk76g==
-X-Gm-Gg: ATEYQzzQp7DNl5dkZ76sU2FmvFMOhkX08vPJkOB+IHNJXTPmHg9Ok9SdBDLDwUc2QKT
-	ftCjuWzSTuH2xZfLKSr0j6aYoyhlbq0jOHC8edUy04P7U7LBCcqKmvY+c9Cc9UoBxGdPJISO0AM
-	Rl1nYj9wOhRtHE/qxXS58XN5GUFLOpMP6lPge5nK0AR1atfbMorKjkyyKXoNuZTRkojUx3jYMSv
-	WI6svl3fejsCkr6SscydalMo3oaVqkd3948nm/qgybi2+fBV++v1nNNTNo9pwX8eW3gQve2ypWq
-	gwCYMsexF+UCnLo93nG73OKMx7nO7eXqiCKeZ4/ZZ4Rl7ilxH33/89dmeQRPNByjHjAjAbX6BDO
-	rYJpfrtFlJBjN5UUrPEVJRAwz5WYx0yGGml+u+sISzLdd+6aFgnM=
-X-Received: by 2002:a05:600c:8b46:b0:485:34b3:858a with SMTP id 5b1f17b1804b1-485566d2d66mr52863335e9.11.1773408228611;
-        Fri, 13 Mar 2026 06:23:48 -0700 (PDT)
-X-Received: by 2002:a05:600c:8b46:b0:485:34b3:858a with SMTP id 5b1f17b1804b1-485566d2d66mr52862635e9.11.1773408228148;
-        Fri, 13 Mar 2026 06:23:48 -0700 (PDT)
-Received: from jlelli-thinkpadt14gen4.remote.csb ([151.29.82.96])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48557784c18sm51257345e9.4.2026.03.13.06.23.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Mar 2026 06:23:47 -0700 (PDT)
-Date: Fri, 13 Mar 2026 14:23:45 +0100
-From: Juri Lelli <juri.lelli@redhat.com>
-To: gmonaco@redhat.com
-Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
-	Nam Cao <namcao@linutronix.de>, Juri Lelli <jlelli@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Tomas Glozar <tglozar@redhat.com>,
-	Clark Williams <williams@redhat.com>,
-	John Kacur <jkacur@redhat.com>
-Subject: Re: [PATCH v7 05/15] Documentation/rv: Add documentation about
- hybrid automata
-Message-ID: <abQP4ZwPZsBJ0TO4@jlelli-thinkpadt14gen4.remote.csb>
-References: <20260310105627.332044-1-gmonaco@redhat.com>
- <20260310105627.332044-6-gmonaco@redhat.com>
- <abKX1XO4vqY74uA7@jlelli-thinkpadt14gen4.remote.csb>
- <4620e92b1c7f4d87f192a017f3026dfc17bcaef6.camel@redhat.com>
+        d=1e100.net; s=20251104; t=1773412091; x=1774016891;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=3DhJJ93cKQQk3SpyT61kIFsBKzCFpwnhRvsErphsARo=;
+        b=QU5nSoMXSTDtBC5IeLfkPz1bKv39v4WVbOzOibdG/6Ro8T8jaeetjFzRXDWuoDT1rf
+         8E8EOh1jJIdNGH9MUVVxwWzYLUwxkFc/aPwGbMO4ltFhqP7cgSsXYpgqIfsNvhxPmddP
+         SRNFVof84K+J7FYjF6Qmv00ka6aXzIZ+o1gJ4Q/Qve+zy6NXAswPZV6G9ptmsQc4EY3i
+         zhHouTltaU9/OnSR8g6xmq7Xkp9LHxXKvCKTZMXxDIRvBEBMBYMBZvVAZMNEBnthlCZa
+         //94B6c/vS8CTJi1Z4zkc2SzRXcPcXoitGPT9MPLSeVtv3JpXnAFvzxP18ZeGg0bg+kH
+         2HiQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWp7HqBfSWq4Rz6DHOflsqd2atoDCX9UrT0lK6PhX8fq/PHjsAYDCjmLTivg/pl3FFCv/RgcHEo+p0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwYYykeDv6jf/i7g5B7w/IPijS8+c9c6FS1uM4eeU2SOReTzLAk
+	8yFZhQVunZ0QP+g9pi77xbVpzGtH7cutNzlYeoHqV95lvFlKc3/ULG1CwJyxYU9aPXkRo4SeoNL
+	LHZv3+O3pCErKt37MC7AjMogdSNZOQSN4wRfy3YCsOg==
+X-Gm-Gg: ATEYQzyHWuxt3tugCmw/lNuW5Zg3e77FiVT0cN+Za1HJbnzySrbnfmK15m6wse6L390
+	l1KaEisGrKojz/fEaZVcpXI4H91g+jh1lOomQGJ3fIUzIVpbHSeHqgglbtK4MoxabLoGM4o85GX
+	Bv1EwRfRzI/zVVIw+pfvaZZVZmbn3XJCe0l466CAkKJcUk5AlGZ7vpy1Z4QKGm5TxbtZsWZ2bdM
+	O9WfWk1SORT2ZwoFaGtiFH9FHY+HLDrhr4lIaiEEjjPwoZyPxRmpUWb8qmnkEDT/v5IS6ELmNBc
+	dWcNkuH4IGg2bvre4Om3zJZycebcjwK4qEFxGw==
+X-Received: by 2002:a05:6402:35cd:b0:663:8be1:3649 with SMTP id
+ 4fb4d7f45d1cf-663ba9b776dmr1936388a12.3.1773412090104; Fri, 13 Mar 2026
+ 07:28:10 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <4620e92b1c7f4d87f192a017f3026dfc17bcaef6.camel@redhat.com>
+References: <20260129212510.967611-1-dmatlack@google.com> <20260129212510.967611-8-dmatlack@google.com>
+ <20260226160353.6f3371bc@shazbot.org> <20260303210733.GG972761@nvidia.com>
+ <CA+CK2bDADhFcMVGoJew9RoJ-DsVhYhiZJGJVwfzTBZdGX++8Ng@mail.gmail.com> <20260313122525.GB1586734@nvidia.com>
+In-Reply-To: <20260313122525.GB1586734@nvidia.com>
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+Date: Fri, 13 Mar 2026 10:27:33 -0400
+X-Gm-Features: AaiRm524CkK4OBTNvXFWcAvWcl42dW_YCeYpiFYkXzW17TUn9itgLI7yXbb39d4
+Message-ID: <CA+CK2bD2ryZsvgono-5Yg0jwwCa-p55wefT=hn3DRsDJVc0ADg@mail.gmail.com>
+Subject: Re: [PATCH v2 07/22] vfio/pci: Notify PCI subsystem about devices
+ preserved across Live Update
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Alex Williamson <alex@shazbot.org>, David Matlack <dmatlack@google.com>, 
+	Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, Alex Mastro <amastro@fb.com>, 
+	Alistair Popple <apopple@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	Ankit Agrawal <ankita@nvidia.com>, Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>, 
+	David Rientjes <rientjes@google.com>, Jacob Pan <jacob.pan@linux.microsoft.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>, Kevin Tian <kevin.tian@intel.com>, 
+	kexec@lists.infradead.org, kvm@vger.kernel.org, 
+	Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-mm@kvack.org, linux-pci@vger.kernel.org, Lukas Wunner <lukas@wunner.de>, 
+	=?UTF-8?Q?Micha=C5=82_Winiarski?= <michal.winiarski@intel.com>, 
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, 
+	Pranjal Shrivastava <praan@google.com>, Pratyush Yadav <pratyush@kernel.org>, 
+	Raghavendra Rao Ananta <rananta@google.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>, 
+	Shuah Khan <skhan@linuxfoundation.org>, 
+	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+	Tomita Moeko <tomitamoeko@gmail.com>, Vipin Sharma <vipinsh@google.com>, 
+	Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>, Yi Liu <yi.l.liu@intel.com>, 
+	Zhu Yanjun <yanjun.zhu@linux.dev>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
+	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79266-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79261-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[shazbot.org,google.com,nvidia.com,amazon.com,fb.com,linux-foundation.org,kernel.org,linux.microsoft.com,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,wunner.de,linuxfoundation.org,linux.intel.com,gmail.com,linux.dev];
+	RCPT_COUNT_TWELVE(0.00)[43];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[juri.lelli@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[soleen.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 637C9283F6B
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,nvidia.com:email,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 714E82850D9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 13/03/26 14:05, gmonaco@redhat.com wrote:
-> Hello,
-> 
-> On Thu, 2026-03-12 at 11:39 +0100, Juri Lelli wrote:
-> > Very minor nit, feel free to ignore, but ...
-> > 
-> > The formal 7-tuple definition includes 'i' (invariant function), but
-> > unlike other elements, 'i' isn't stored in the automaton struct -
-> > it's implemented as generated code in ha_verify_constraint(), IIUC.
-> > Worth a brief note clarifying this design choice so readers don't
-> > expect to find an invariants[] member in the struct? Here or below in
-> > the example C code section.
-> 
-> Thanks for the review! I haven't really thought of that.
-> At this stage we are not mentioning any struct element (it's purely
-> theoretical), so there shouldn't be any expectation from the reader.
-> 
-> Later I mention "The function verify_constraint checks guards,
-> performs resets and starts timers to validate invariants according to
-> specification".
-> In fact, also guards are not represented as part of 'function', I may
-> mention after that sentence something like: "those cannot easily be
-> represented in the automaton struct".
-> 
-> Not sure if saying more wouldn't make it even more confusing than it
-> already is.
+On Fri, Mar 13, 2026 at 8:25=E2=80=AFAM Jason Gunthorpe <jgg@nvidia.com> wr=
+ote:
+>
+> On Thu, Mar 12, 2026 at 08:33:27PM -0400, Pasha Tatashin wrote:
+>
+> > If there are active sessions (incoming or outgoing) with preserved
+> > data, how can we safely unregister while they are in-flight? It is a
+> > rare condition, but since the user can cause it, they need to be
+> > notified that unloading the module right now is not a good idea.
+>
+> IMHO blow up the kernel or something in the core code, you can't stop
+> module unloading once it starts so it is pointless to propogate this
 
-Yeah, probably. As mentioned, feel free to ignore, it was just a
-thought. :)
+I see, I will send a separate LUO patches to make unregister functions
+return void.
 
+Pasha
+
+>
+> Jason
 
