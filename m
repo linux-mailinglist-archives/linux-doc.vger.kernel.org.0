@@ -1,41 +1,41 @@
-Return-Path: <linux-doc+bounces-79288-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79289-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aIAMH8gltGl7hwAAu9opvQ
-	(envelope-from <linux-doc+bounces-79288-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:57:12 +0100
+	id 4DlxGhkltGl7hwAAu9opvQ
+	(envelope-from <linux-doc+bounces-79289-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:54:17 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1385928566F
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:57:12 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C9A82855AE
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 15:54:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 29F35314160B
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:49:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 230AE3089B81
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Mar 2026 14:49:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36D453B19C7;
-	Fri, 13 Mar 2026 14:48:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AB6193A6B95;
+	Fri, 13 Mar 2026 14:48:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4D8B3AEF41;
-	Fri, 13 Mar 2026 14:47:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FACB3B19CF;
+	Fri, 13 Mar 2026 14:48:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773413280; cv=none; b=eAYeEAIS6buRU+NWnkz6u5LOXlPXpwj6A+ssT26Zx+Rf3MlNwgfh6GNifouG7ES9gdFwYGolXD0anmHDLfvuYevqOKvHXjw6HU4IPAh/CSbhvYbTwzaRxaf4RZul13w5Q4ht36LXtPN/P9Q4rLC7RAGKk38qZa6lXXp7XN0cdQk=
+	t=1773413284; cv=none; b=iNq45pnJQdRnnAg4JWrjuAWI8Vx2HxY3vSKv84T6gMTihcIMhi8r0a1GZkvx5r7jVEfu8LhF5hbWf7kQtQ5TqxTKucTglUCjFuhTU5VU+rbPHWUJfRkOmZIQCMb+K5Vs2Rv0MpG5eQN5PV8AWfCY7ewsBPUvLMi/wzYB2bLa1fU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773413280; c=relaxed/simple;
-	bh=5eZVUsaXAiinN4CxX29CScTZ3UuWkqXKhZJ7OP8HXFQ=;
+	s=arc-20240116; t=1773413284; c=relaxed/simple;
+	bh=xl4VKzlCqaYsEzZcwZF3Z0Mq6i0OlJzFlqYJJLr30Ms=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=q8DZxw3mOXKKqHbWnjBbCPqtttut59EdQqFB5DzisuZaHiYMxzd6ewQlks2ZieccbzcTXqb37oQHLZHhvJtxYR2g6XJFyBFKj+QsIqcnVBiDVktuJVBwYghmEPiIbRvrBvN/MigJ0PUETFbxeJa/Hzhcwz1Kg46WFgjmPobsB9M=
+	 MIME-Version; b=nInbH4HoV8Slq2Ppt9ZitikxHG9Oemj4sR25BdYDsbp5wOWesgeSlBYtOtyPKjuobjNzYn3jlsNvgzbfjJObbj2B8asC0dD36NvNPkbDZdsDv6vet/TfOHCFsZJ/kBrSlsye/F3xysHs68MljRn3PN/8rE1JCAqu8cz1piUP3gk=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 45BF61E7D;
-	Fri, 13 Mar 2026 07:47:50 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5AB3822C7;
+	Fri, 13 Mar 2026 07:47:54 -0700 (PDT)
 Received: from e134344.cambridge.arm.com (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5DA533F7BD;
-	Fri, 13 Mar 2026 07:47:52 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A88F33F7BD;
+	Fri, 13 Mar 2026 07:47:56 -0700 (PDT)
 From: Ben Horgan <ben.horgan@arm.com>
 To: ben.horgan@arm.com
 Cc: amitsinght@marvell.com,
@@ -71,12 +71,10 @@ Cc: amitsinght@marvell.com,
 	suzuki.poulose@arm.com,
 	kvmarm@lists.linux.dev,
 	zengheng4@huawei.com,
-	linux-doc@vger.kernel.org,
-	Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>,
-	Dave Martin <Dave.Martin@arm.com>
-Subject: [PATCH v6 20/40] arm_mpam: resctrl: Add CDP emulation
-Date: Fri, 13 Mar 2026 14:45:57 +0000
-Message-ID: <20260313144617.3420416-21-ben.horgan@arm.com>
+	linux-doc@vger.kernel.org
+Subject: [PATCH v6 21/40] arm_mpam: resctrl: Hide CDP emulation behind CONFIG_EXPERT
+Date: Fri, 13 Mar 2026 14:45:58 +0000
+Message-ID: <20260313144617.3420416-22-ben.horgan@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260313144617.3420416-1-ben.horgan@arm.com>
 References: <20260313144617.3420416-1-ben.horgan@arm.com>
@@ -91,316 +89,75 @@ X-Spamd-Result: default: False [0.14 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[37];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-79288-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.923];
+	TAGGED_FROM(0.00)[bounces-79289-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-0.929];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
 	R_DKIM_NA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,qualcomm.com:email,arm.com:email,arm.com:mid,marvell.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,huawei.com:email]
-X-Rspamd-Queue-Id: 1385928566F
+	RCPT_COUNT_TWELVE(0.00)[35];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,arm.com:email,arm.com:mid]
+X-Rspamd-Queue-Id: 0C9A82855AE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: James Morse <james.morse@arm.com>
+When CDP is not enabled, the 'rmid_entry's in the limbo list,
+rmid_busy_llc, map directly to a (PARTID,PMG) pair and when CDP is enabled
+the mapping is to two different pairs. As the limbo list is reused between
+mounts and CDP disabled on unmount this can lead to stale mapping and the
+limbo handler will then make monitor reads with potentially out of range
+PARTID. This may then cause an MPAM error interrupt and the driver will
+disable MPAM.
 
-Intel RDT's CDP feature allows the cache to use a different control value
-depending on whether the accesses was for instruction fetch or a data
-access. MPAM's equivalent feature is the other way up: the CPU assigns a
-different partid label to traffic depending on whether it was instruction
-fetch or a data access, which causes the cache to use a different control
-value based solely on the partid.
+No problems are expected if you just mount the resctrl file system
+once with CDP enabled and never unmount it. Hide CDP emulation behind
+CONFIG_EXPERT to protect the unwary.
 
-MPAM can emulate CDP, with the side effect that the alternative partid is
-seen by all MSC, it can't be enabled per-MSC.
-
-Add the resctrl hooks to turn this on or off. Add the helpers that match a
-closid against a task, which need to be aware that the value written to
-hardware is not the same as the one resctrl is using.
-
-Update the 'arm64_mpam_global_default' variable the arch code uses during
-context switch to know when the per-cpu value should be used instead. Also,
-update these per-cpu values and sync the resulting mpam partid/pmg
-configuration to hardware.
-
-resctrl can enable CDP for L2 caches, L3 caches or both. When it is enabled
-by one and not the other MPAM globally enabled CDP but hides the effect
-on the other cache resource. This hiding is possible as CPOR is the only
-supported cache control and that uses a resource bitmap; two partids with
-the same bitmap act as one.
-
-Awkwardly, the MB controls don't implement CDP and CDP can't be hidden as
-the memory bandwidth control is a maximum per partid which can't be
-modelled with more partids. If the total maximum is used for both the data
-and instruction partids then then the maximum may be exceeded and if it is
-split in two then the one using more bandwidth will hit a lower
-limit. Hence, hide the MB controls completely if CDP is enabled for any
-resource.
-
-Tested-by: Gavin Shan <gshan@redhat.com>
-Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Tested-by: Peter Newman <peternewman@google.com>
-Tested-by: Zeng Heng <zengheng4@huawei.com>
-Tested-by: Punit Agrawal <punit.agrawal@oss.qualcomm.com>
-Cc: Dave Martin <Dave.Martin@arm.com>
-Cc: Amit Singh Tomar <amitsinght@marvell.com>
-Reviewed-by: Zeng Heng <zengheng4@huawei.com>
-Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-Signed-off-by: James Morse <james.morse@arm.com>
 Signed-off-by: Ben Horgan <ben.horgan@arm.com>
 ---
-Changes since rfc:
-Fail cdp initialisation if there is only one partid
-Correct data/code confusion
-
-Changes since v2:
-Don't include unused header
-
-Changes since v3:
-Update the per-cpu values and sync to h/w
-
-Changes since v4:
-Enable separately for L2 and L3
-Disable MB controls if CDP enabled
-Consider cdp hiding in resctrl_arch_update_one()
-
-Changes since v5:
-Update comment on call sites
+Adding this ugliness in the hope of avoiding patch churn and extra
+reviewer work. I am looking into the resctrl changes needed to fix this.
 ---
- arch/arm64/include/asm/mpam.h   |   1 +
- drivers/resctrl/mpam_internal.h |   1 +
- drivers/resctrl/mpam_resctrl.c  | 122 ++++++++++++++++++++++++++++++++
- include/linux/arm_mpam.h        |   2 +
- 4 files changed, 126 insertions(+)
+ drivers/resctrl/mpam_resctrl.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/arch/arm64/include/asm/mpam.h b/arch/arm64/include/asm/mpam.h
-index 05aa71200f61..70d396e7b6da 100644
---- a/arch/arm64/include/asm/mpam.h
-+++ b/arch/arm64/include/asm/mpam.h
-@@ -4,6 +4,7 @@
- #ifndef __ASM__MPAM_H
- #define __ASM__MPAM_H
- 
-+#include <linux/arm_mpam.h>
- #include <linux/bitfield.h>
- #include <linux/jump_label.h>
- #include <linux/percpu.h>
-diff --git a/drivers/resctrl/mpam_internal.h b/drivers/resctrl/mpam_internal.h
-index e2704f678af5..57c3d9b962b9 100644
---- a/drivers/resctrl/mpam_internal.h
-+++ b/drivers/resctrl/mpam_internal.h
-@@ -346,6 +346,7 @@ struct mpam_resctrl_dom {
- struct mpam_resctrl_res {
- 	struct mpam_class	*class;
- 	struct rdt_resource	resctrl_res;
-+	bool			cdp_enabled;
- };
- 
- static inline int mpam_alloc_csu_mon(struct mpam_class *class)
 diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
-index 8615c653e0c4..903d1a0f564f 100644
+index 903d1a0f564f..cab3e9ccb5c7 100644
 --- a/drivers/resctrl/mpam_resctrl.c
 +++ b/drivers/resctrl/mpam_resctrl.c
-@@ -35,6 +35,10 @@ static struct mpam_resctrl_res mpam_resctrl_controls[RDT_NUM_RESOURCES];
- /* The lock for modifying resctrl's domain lists from cpuhp callbacks. */
- static DEFINE_MUTEX(domain_list_lock);
+@@ -82,6 +82,18 @@ int resctrl_arch_set_cdp_enabled(enum resctrl_res_level rid, bool enable)
+ 	u32 partid_i = RESCTRL_RESERVED_CLOSID, partid_d = RESCTRL_RESERVED_CLOSID;
+ 	int cpu;
  
-+/*
-+ * MPAM emulates CDP by setting different PARTID in the I/D fields of MPAM0_EL1.
-+ * This applies globally to all traffic the CPU generates.
-+ */
- static bool cdp_enabled;
- 
- bool resctrl_arch_alloc_capable(void)
-@@ -50,6 +54,74 @@ bool resctrl_arch_alloc_capable(void)
- 	return false;
- }
- 
-+bool resctrl_arch_get_cdp_enabled(enum resctrl_res_level rid)
-+{
-+	return mpam_resctrl_controls[rid].cdp_enabled;
-+}
-+
-+/**
-+ * resctrl_reset_task_closids() - Reset the PARTID/PMG values for all tasks.
-+ *
-+ * At boot, all existing tasks use partid zero for D and I.
-+ * To enable/disable CDP emulation, all these tasks need relabelling.
-+ */
-+static void resctrl_reset_task_closids(void)
-+{
-+	struct task_struct *p, *t;
-+
-+	read_lock(&tasklist_lock);
-+	for_each_process_thread(p, t) {
-+		resctrl_arch_set_closid_rmid(t, RESCTRL_RESERVED_CLOSID,
-+					     RESCTRL_RESERVED_RMID);
-+	}
-+	read_unlock(&tasklist_lock);
-+}
-+
-+int resctrl_arch_set_cdp_enabled(enum resctrl_res_level rid, bool enable)
-+{
-+	u32 partid_i = RESCTRL_RESERVED_CLOSID, partid_d = RESCTRL_RESERVED_CLOSID;
-+	int cpu;
-+
-+	/*
-+	 * resctrl_arch_set_cdp_enabled() is only called with enable set to
-+	 * false on error and unmount.
-+	 */
-+	cdp_enabled = enable;
-+	mpam_resctrl_controls[rid].cdp_enabled = enable;
-+
-+	/* The mbw_max feature can't hide cdp as it's a per-partid maximum. */
-+	if (cdp_enabled && !mpam_resctrl_controls[RDT_RESOURCE_MBA].cdp_enabled)
-+		mpam_resctrl_controls[RDT_RESOURCE_MBA].resctrl_res.alloc_capable = false;
-+
-+	if (mpam_resctrl_controls[RDT_RESOURCE_MBA].cdp_enabled &&
-+	    mpam_resctrl_controls[RDT_RESOURCE_MBA].class)
-+		mpam_resctrl_controls[RDT_RESOURCE_MBA].resctrl_res.alloc_capable = true;
-+
-+	if (enable) {
-+		if (mpam_partid_max < 1)
-+			return -EINVAL;
-+
-+		partid_d = resctrl_get_config_index(RESCTRL_RESERVED_CLOSID, CDP_DATA);
-+		partid_i = resctrl_get_config_index(RESCTRL_RESERVED_CLOSID, CDP_CODE);
++	if (!IS_ENABLED(CONFIG_EXPERT) && enable) {
++		/*
++		 * If the resctrl fs is mounted more than once, sequentially,
++		 * then CDP can lead to the use of out of range PARTIDs.
++		 */
++		pr_warn("CDP not supported\n");
++		return -EOPNOTSUPP;
 +	}
 +
-+	mpam_set_task_partid_pmg(current, partid_d, partid_i, 0, 0);
-+	WRITE_ONCE(arm64_mpam_global_default, mpam_get_regval(current));
++	if (enable)
++		pr_warn("CDP is an expert feature and may cause MPAM to malfunction.\n");
 +
-+	resctrl_reset_task_closids();
-+
-+	for_each_possible_cpu(cpu)
-+		mpam_set_cpu_defaults(cpu, partid_d, partid_i, 0, 0);
-+	on_each_cpu(resctrl_arch_sync_cpu_closid_rmid, NULL, 1);
-+
-+	return 0;
-+}
-+
-+static bool mpam_resctrl_hide_cdp(enum resctrl_res_level rid)
-+{
-+	return cdp_enabled && !resctrl_arch_get_cdp_enabled(rid);
-+}
-+
- /*
-  * MSC may raise an error interrupt if it sees an out or range partid/pmg,
-  * and go on to truncate the value. Regardless of what the hardware supports,
-@@ -115,6 +187,30 @@ void resctrl_arch_set_closid_rmid(struct task_struct *tsk, u32 closid, u32 rmid)
- 	}
- }
- 
-+bool resctrl_arch_match_closid(struct task_struct *tsk, u32 closid)
-+{
-+	u64 regval = mpam_get_regval(tsk);
-+	u32 tsk_closid = FIELD_GET(MPAM0_EL1_PARTID_D, regval);
-+
-+	if (cdp_enabled)
-+		tsk_closid >>= 1;
-+
-+	return tsk_closid == closid;
-+}
-+
-+/* The task's pmg is not unique, the partid must be considered too */
-+bool resctrl_arch_match_rmid(struct task_struct *tsk, u32 closid, u32 rmid)
-+{
-+	u64 regval = mpam_get_regval(tsk);
-+	u32 tsk_closid = FIELD_GET(MPAM0_EL1_PARTID_D, regval);
-+	u32 tsk_rmid = FIELD_GET(MPAM0_EL1_PMG_D, regval);
-+
-+	if (cdp_enabled)
-+		tsk_closid >>= 1;
-+
-+	return (tsk_closid == closid) && (tsk_rmid == rmid);
-+}
-+
- struct rdt_resource *resctrl_arch_get_resource(enum resctrl_res_level l)
- {
- 	if (l >= RDT_NUM_RESOURCES)
-@@ -247,6 +343,14 @@ u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 	dom = container_of(d, struct mpam_resctrl_dom, resctrl_ctrl_dom);
- 	cprops = &res->class->props;
- 
-+	/*
-+	 * When CDP is enabled, but the resource doesn't support it,
-+	 * the control is cloned across both partids.
-+	 * Pick one at random to read:
-+	 */
-+	if (mpam_resctrl_hide_cdp(r->rid))
-+		type = CDP_DATA;
-+
- 	partid = resctrl_get_config_index(closid, type);
- 	cfg = &dom->ctrl_comp->cfg[partid];
- 
-@@ -274,6 +378,7 @@ u32 resctrl_arch_get_config(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 			    u32 closid, enum resctrl_conf_type t, u32 cfg_val)
- {
-+	int err;
- 	u32 partid;
- 	struct mpam_config cfg;
- 	struct mpam_props *cprops;
-@@ -291,6 +396,9 @@ int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 	dom = container_of(d, struct mpam_resctrl_dom, resctrl_ctrl_dom);
- 	cprops = &res->class->props;
- 
-+	if (mpam_resctrl_hide_cdp(r->rid))
-+		t = CDP_DATA;
-+
- 	partid = resctrl_get_config_index(closid, t);
- 	if (!r->alloc_capable || partid >= resctrl_arch_get_num_closid(r)) {
- 		pr_debug("Not alloc capable or computed PARTID out of range\n");
-@@ -313,6 +421,20 @@ int resctrl_arch_update_one(struct rdt_resource *r, struct rdt_ctrl_domain *d,
- 		return -EINVAL;
- 	}
- 
-+	/*
-+	 * When CDP is enabled, but the resource doesn't support it, we need to
-+	 * apply the same configuration to the other partid.
-+	 */
-+	if (mpam_resctrl_hide_cdp(r->rid)) {
-+		partid = resctrl_get_config_index(closid, CDP_CODE);
-+		err = mpam_apply_config(dom->ctrl_comp, partid, &cfg);
-+		if (err)
-+			return err;
-+
-+		partid = resctrl_get_config_index(closid, CDP_DATA);
-+		return mpam_apply_config(dom->ctrl_comp, partid, &cfg);
-+	}
-+
- 	return mpam_apply_config(dom->ctrl_comp, partid, &cfg);
- }
- 
-diff --git a/include/linux/arm_mpam.h b/include/linux/arm_mpam.h
-index 5a78299ec464..d329b1dc148b 100644
---- a/include/linux/arm_mpam.h
-+++ b/include/linux/arm_mpam.h
-@@ -56,6 +56,8 @@ void resctrl_arch_set_cpu_default_closid(int cpu, u32 closid);
- void resctrl_arch_set_closid_rmid(struct task_struct *tsk, u32 closid, u32 rmid);
- void resctrl_arch_set_cpu_default_closid_rmid(int cpu, u32 closid, u32 rmid);
- void resctrl_arch_sched_in(struct task_struct *tsk);
-+bool resctrl_arch_match_closid(struct task_struct *tsk, u32 closid);
-+bool resctrl_arch_match_rmid(struct task_struct *tsk, u32 closid, u32 rmid);
- 
- /**
-  * mpam_register_requestor() - Register a requestor with the MPAM driver
+ 	/*
+ 	 * resctrl_arch_set_cdp_enabled() is only called with enable set to
+ 	 * false on error and unmount.
 -- 
 2.43.0
 
