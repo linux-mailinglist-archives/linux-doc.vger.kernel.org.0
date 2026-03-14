@@ -1,147 +1,127 @@
-Return-Path: <linux-doc+bounces-79371-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79372-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UDVTBH6BtWne1AAAu9opvQ
-	(envelope-from <linux-doc+bounces-79371-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 14 Mar 2026 16:40:46 +0100
+	id GM9mOQCDtWkr1QAAu9opvQ
+	(envelope-from <linux-doc+bounces-79372-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 14 Mar 2026 16:47:12 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 811DF28DBBB
-	for <lists+linux-doc@lfdr.de>; Sat, 14 Mar 2026 16:40:45 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id A2DB728DBE0
+	for <lists+linux-doc@lfdr.de>; Sat, 14 Mar 2026 16:47:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DA343302BDE9
-	for <lists+linux-doc@lfdr.de>; Sat, 14 Mar 2026 15:40:25 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C112E300C6EB
+	for <lists+linux-doc@lfdr.de>; Sat, 14 Mar 2026 15:47:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A7932F83A0;
-	Sat, 14 Mar 2026 15:40:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D218239E76;
+	Sat, 14 Mar 2026 15:47:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xj3JbUmK"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="SLE3gcWQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45EE6299A87;
-	Sat, 14 Mar 2026 15:40:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 170171C5D59
+	for <linux-doc@vger.kernel.org>; Sat, 14 Mar 2026 15:47:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773502822; cv=none; b=vFdEN2ZT0eqfpEuLjDXeZ8bakMvn5sfq5Yk9bn/0LFMU6kDz0n5hIRCvOWaociLgCLXMgmRLNw5JGAYgctWsDERfPb1DUeZ9dgZSePow+kLeJwXPsYLNPQ9+Y2fQQVtSbygtmkNdwAvYT96DlvrVSRed+bjY8Qn7x2v8E7Oh4Nc=
+	t=1773503227; cv=none; b=DEH96aOJTSPCMMchGfWHhPpnSmC9KIRUMg9ezHGlllkCkh+72ufN3IgvNLdRvyXokY4/kCvJCMJF/yBCTsfwUaMxOJImw1y/kyCkJf38z8lfyakYzNxzUZeZW9UKGY3hXHzIDEV8IleqBtWpWzC3zDW6pzy1ioUyeVTX+ohCBB4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773502822; c=relaxed/simple;
-	bh=WoPbqZeSHQS7/U+Zg1lu7MCzHBCJT+hDh8F/zCHEdfU=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=KCLhRnRaU07o/JSnEn23V9EnqMUCtIdj7OdRJWgNhNJVBTYsAnLRg/UUhA1Hu4WHm9vG0ylSR/r0Sc1QgndnSO8G2oE/M5a2Y38RHbR0Cj+2zc9jmdzIQloKCe6SVh0ZcD7puqVnAzC488JMEBNZ7xVANAZ9C99v1yN6iFiAS/c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xj3JbUmK; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CBC7DC116C6;
-	Sat, 14 Mar 2026 15:40:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773502821;
-	bh=WoPbqZeSHQS7/U+Zg1lu7MCzHBCJT+hDh8F/zCHEdfU=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=Xj3JbUmKkanbsDjkE/3Byh+gqQTGmHKnhZaI6Z1U35pQMoOszufYV3Qrne9mZSRBN
-	 ++Gj8dVw3EOi87nLPIm52u0T2zvchjYdpxIAMRORdR+qE/KLLSFRJLVmtzZbj+0kq1
-	 +/+VkLA8chEuMNvDXUhPvjEOr6/LkTcKRJBrb9340y++jggBFvIRT3/o3r36UyJFOo
-	 f4vzO/58MHMxP9qIEU0/JyUuuklqJmo4c7v8AYSfknR9+RYRYvIwiNCjgCeY7SyfPd
-	 Za+G/i3r0KlmG7RJ0ahd5l9TgclIFP6ghLhgcoKAh6wtVXf88i9VEnd0ijP52uiqCn
-	 0kSWvazn0MIpQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 402493808200;
-	Sat, 14 Mar 2026 15:40:17 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1773503227; c=relaxed/simple;
+	bh=JRGX4h+1dcIq3Qo41/c8czEuOPaBXN1o6cBiG6Sna24=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=s695eDdajqPkGh1AQNp44qYLCRQ2GJye7l0shbN48gJyZf1qp2oOALs5f8GWGIJnLuuj+LlnyYgSIum4c2OAmObOxk3O/cjxEbw0v6BdPRENFWri6LDn4ndWsvFBPhH4tKyEiO8gbVdeHuJTBR6dE0TczJIMx6NpuN+/TL390MQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=SLE3gcWQ; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net CA90540C63
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1773503219; bh=IcE3J2FqcFfyGlSpJqjrgTPcmLQfS23VafUSp6RS4SI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=SLE3gcWQ+vlnWqX5Q+kIlKgT9eqkXbZ6JtxKSpP7PmPKW53EGYvQM8nZijpjnhI7Y
+	 7Ij6cwpCTWaTsAKDFjExRJmJkvf2ncbCUZyi46vbCV/Sz6MoV/SxOBd/MlxVZaO1sc
+	 gALKy3YVrttKoOncNeIQ2PC6BXWdQgwBuNPIOlFLjpQzi7hi1xgMraQYaeP74bhh3L
+	 P5ngaxEEXW0dBesp2iQQKIQjuztFgNU9LUF7vMXRLh8rHT+Zz5T7+vZuHAqehHNO0S
+	 ysh8713nc1hFhkOl0tOwd568RDQjdU8r5J4yAfK3pLgn3Q99GmC/sRgR64Ss+ZeJPX
+	 6qkw6iTDyWZ1A==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id CA90540C63;
+	Sat, 14 Mar 2026 15:46:58 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Kit Dallege <xaum.io@gmail.com>, akpm@linux-foundation.org,
+ david@kernel.org
+Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org, Kit Dallege
+ <xaum.io@gmail.com>
+Subject: Re: [PATCH] Docs/mm: document Shared Memory Filesystem
+In-Reply-To: <20260314152538.100593-1-xaum.io@gmail.com>
+References: <20260314152538.100593-1-xaum.io@gmail.com>
+Date: Sat, 14 Mar 2026 09:46:57 -0600
+Message-ID: <87ms0ajtvy.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next v3 0/6] tcp: RFC 7323-compliant window retraction
- handling
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <177350281603.1717807.13218820187988201902.git-patchwork-notify@kernel.org>
-Date: Sat, 14 Mar 2026 15:40:16 +0000
-References: <20260309-tcp_rfc7323_retract_wnd_rfc-v3-0-4c7f96b1ec69@gmail.com>
-In-Reply-To: 
- <20260309-tcp_rfc7323_retract_wnd_rfc-v3-0-4c7f96b1ec69@gmail.com>
-To: Simon Baatz <gmbnomis@gmail.com>
-Cc: edumazet@google.com, ncardwell@google.com, kuniyu@google.com,
- davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
- corbet@lwn.net, skhan@linuxfoundation.org, dsahern@kernel.org,
- jmaloy@redhat.com, kerneljasonxing@gmail.com, mfreemon@cloudflare.com,
- shuah@kernel.org, sbrivio@redhat.com, matttbe@kernel.org,
- martineau@kernel.org, geliang@kernel.org, netdev@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, mptcp@lists.linux.dev
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[patchwork-bot@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[google.com,davemloft.net,kernel.org,redhat.com,lwn.net,linuxfoundation.org,gmail.com,cloudflare.com,vger.kernel.org,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-79371-lists,linux-doc=lfdr.de,netdevbpf];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-79372-lists,linux-doc=lfdr.de];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_TO(0.00)[gmail.com,linux-foundation.org,kernel.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_NO_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 811DF28DBBB
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A2DB728DBE0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hello:
+Kit Dallege <xaum.io@gmail.com> writes:
 
-This series was applied to netdev/net-next.git (main)
-by Jakub Kicinski <kuba@kernel.org>:
+> Fill in the shmfs.rst stub created in commit 481cc97349d6
+> ("mm,doc: Add new documentation structure") as part of
+> the structured memory management documentation following
+> Mel Gorman's book outline.
+>
+> Signed-off-by: Kit Dallege <xaum.io@gmail.com>
+> ---
+>  Documentation/mm/shmfs.rst | 114 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 114 insertions(+)
 
-On Mon, 09 Mar 2026 09:02:25 +0100 you wrote:
-> Hi,
-> 
-> this series implements the receiver-side requirements for TCP window
-> retraction as specified in RFC 7323 and adds packetdrill tests to
-> cover the new behavior.
-> 
-> Please see the first patch for background and implementation
-> details. Since MPTCP adjusts the TCP receive window on subflows, the
-> relevant MPTCP code paths are updated accordingly.
-> 
-> [...]
+So we definitely appreciate an effort to improve our documentation, but
+I have to ask...where did all of this material come from?  Did you write
+it yourself?
 
-Here is the summary with links:
-  - [net-next,v3,1/6] tcp: implement RFC 7323 window retraction receiver requirements
-    https://git.kernel.org/netdev/net-next/c/0e24d17bd966
-  - [net-next,v3,2/6] mptcp: keep rcv_mwnd_seq in sync with subflow rcv_wnd
-    https://git.kernel.org/netdev/net-next/c/81714374a29c
-  - [net-next,v3,3/6] tcp: increase LINUX_MIB_BEYOND_WINDOW for SKB_DROP_REASON_TCP_OVERWINDOW
-    https://git.kernel.org/netdev/net-next/c/e2b9c52a2b00
-  - [net-next,v3,4/6] selftests/net: packetdrill: add tcp_rcv_wnd_shrink_nomem.pkt
-    https://git.kernel.org/netdev/net-next/c/ec1adf8ecf95
-  - [net-next,v3,5/6] selftests/net: packetdrill: add tcp_rcv_wnd_shrink_allowed.pkt
-    https://git.kernel.org/netdev/net-next/c/ba58b3e70b86
-  - [net-next,v3,6/6] selftests/net: packetdrill: add tcp_rcv_neg_window.pkt
-    https://git.kernel.org/netdev/net-next/c/3eb371eddad0
+(Haven't had a chance to read it in depth yet).
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+Thanks,
 
-
+jon
 
