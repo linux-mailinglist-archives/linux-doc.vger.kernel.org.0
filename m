@@ -1,91 +1,91 @@
-Return-Path: <linux-doc+bounces-79420-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79422-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ABuTBvzmtmlRKQEAu9opvQ
-	(envelope-from <linux-doc+bounces-79420-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2026 18:06:04 +0100
+	id wLFWGe7mtmlRKQEAu9opvQ
+	(envelope-from <linux-doc+bounces-79422-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2026 18:05:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73B6F29192D
-	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2026 18:06:03 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E716929191E
+	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2026 18:05:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E10123035D46
-	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2026 17:05:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8D9193015874
+	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2026 17:05:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E6E63750DD;
-	Sun, 15 Mar 2026 17:05:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8A433750CA;
+	Sun, 15 Mar 2026 17:05:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MU7XApSd"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lu4uQKvX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEB4B3750AD
-	for <linux-doc@vger.kernel.org>; Sun, 15 Mar 2026 17:05:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40263375AA7
+	for <linux-doc@vger.kernel.org>; Sun, 15 Mar 2026 17:05:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773594337; cv=none; b=ea7T5oyv4Ts2MOYv133X7VQKButGVhh/uXEqk1+eIuzeLGw2Glng4K/JGsGTwDlmRBTAsHHY81xsCF8SSbIlEyTPFByH1BdeO030H3fgdbnwh7xi9bAI9Tyv7Ih9pjd9MqO4NC9IEUTeW1uXYo6PHEGZ9qn76YYs71+iZ8/ykwo=
+	t=1773594338; cv=none; b=iKgW3JfYJ0kx2hYb7p8BknmshhtB6KnlchEGD9KLzrpcRZRNl04OFKIrI9i+TjdC67HlupftVn8aAdSGENJfgWrUbCGifqbaJjnDAHkUOqhZmq6hqYMMbmscwAFQN8hSNgAc9J5mcXUGeDj629sijHpfRalYnex6ThX6hHbvQ6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773594337; c=relaxed/simple;
-	bh=3CgPh5SkE5KRvY8VgEIKPCHGhOMr8ueOxGLL9lxetw8=;
+	s=arc-20240116; t=1773594338; c=relaxed/simple;
+	bh=lrtTPAi516hgTrXg7wPZY0Wtj7OUxn1boGLKpdkz5J4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=L8t5YssAHY7He/FBnNWEC75p9394KdFx12bj+q4pD4DBHo0a3JeMPf9NAKjc6KW0ElnqWRyEkwAp9ynOjdNvn6MRvg4663zzC/xNMWg/LdaLvisMm/U+VZyVSFGjzFXpReikHTigATJO1gCNkUbprMVwfcr2nGJc1iZ5JhODc0A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MU7XApSd; arc=none smtp.client-ip=209.85.221.50
+	 MIME-Version; b=NAqyVVCi4Fop/mCQcMxWK3kOzvqJghxBWTdAlqkVngn8kmhdhWDem7BbxZCyI05dTH+Qubk/Ko3b9FMGgIQ6FxyBiakjz2Y/5S5X/0Tp+enn1iDmfPhExizrRZy9ypawB8P3n2RGU6ztLTGZboNK/exrkOlb58ebYkuWBXu/EAs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lu4uQKvX; arc=none smtp.client-ip=209.85.221.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-439fe4985efso3433397f8f.3
-        for <linux-doc@vger.kernel.org>; Sun, 15 Mar 2026 10:05:35 -0700 (PDT)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-439b2965d4bso2611847f8f.2
+        for <linux-doc@vger.kernel.org>; Sun, 15 Mar 2026 10:05:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773594334; x=1774199134; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1773594336; x=1774199136; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tkDf2WuK8ccioVK5RbdDFkIaIC5K9PKCr8wBG5ZjcvU=;
-        b=MU7XApSdRWoP3bIyc2iJPDexQlg+S+Ix2JG6hoZ+6qAej0YferkpSlcd1aa+QqISVa
-         avvVWQfqSaLdcy885X+uDNs9/kIMo+fZmCOtzsOlvHddiGwyvFxGtadJvIZVWM+B5Eyr
-         5bDbCSX82gXbiImtbM92RNdhpr/gCC3aRmQEiwdSSpkBT91u08ARe4TyhDCwFirjXAWT
-         5y2Y9g7lVj45nQJeVZSjiWxBJJ+8QHEYSw4qvviSa8hALTlEPP7zcLF7R/Qxj7ZAdbwr
-         zyXhxkEVnCkuv+wIig8qCQba6xBbVukjHiNhmSaoRAZiTjU0UJmfywnzvDobWe2J7rd5
-         N1Kg==
+        bh=pazn65XzPfWs0CxG7DTwrB0Lp9Xs6JQpA928mpHNaLc=;
+        b=lu4uQKvXfvpfpaO9KMjb5ZticT/1MTWnLGKG2xntdkTYeFe6fVSoqZb4nk7F6Ht3vH
+         1stSUaScmpMTKyg4nH7E+RPGUJBBpM6qnetJyyt2XY+yuER4fdYH1miXDDC8MqHrUHWt
+         AvPnAW50m/QEX8/RNwkiSl4MtPRiqSn+SozmgQb5EH8rruTYWzGKbjBv9ssR9E3N5iPB
+         HxafYMo0dWSVwTLsDELQD5yA6FKv3cLuN8j24T6i5aGNZ7kz/wylqTIL55nf/Y8stWb2
+         b2HuGvEuBCHlzxLJMaLBVxyhrv0VJFllIdOC18mcK0uJlBT22Z/uNo4g1LkU43bSQhyi
+         mw+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773594334; x=1774199134;
+        d=1e100.net; s=20251104; t=1773594336; x=1774199136;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=tkDf2WuK8ccioVK5RbdDFkIaIC5K9PKCr8wBG5ZjcvU=;
-        b=VxitGGQCw+d2Niu0NBWOwAOCLlfC4wJOt1KqLd8GN3zREkesBQIBi5tUS3qlPM9HEx
-         yrXk+38Tx6591TnapodAccjbHC2rRLUAA/payzeLYjPTDj9DXVZaGd2IBH7VsLJlvqP7
-         iabunj6jGOv5oENCqMpeCsiAkUwlD2CMNip+m7TcAjr/1cR25Jl0HbsMS+e88R6VSNpH
-         DP7grio25QBsaWp6Id/gbtrO2c3YWNGapH49B0oi20fkWPOGJGvmaYM2O4OqArre8Jcw
-         Yd9YZYM2zb94XUeDi+JbR7JMQdjAn7CJaXm0sCxuGFKXjr/ANdLLSRZnyqd/tkwrv8NQ
-         sj1w==
-X-Forwarded-Encrypted: i=1; AJvYcCX6EstXpbeN0IKwUwTjoijxgEj0Tg+3dQ+ppswy/gnsw8KX+IgrWsUy243lzyF2MXHlGaylZBRgqdM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwB+bYdptQjqrHo7uFvxjelmxtglnNgKV7APLm/dJq6XnqU2wwC
-	+wBzRdSVtAv34Br1I+WMj8wDADXkC+QPH6brQQXmeLSqQSd/PlPlvU1n/DdZCr42eUk=
-X-Gm-Gg: ATEYQzwtD+JWZi/ZFXjmg9J4DZC74c6f8V23oNw/oFKcdyWSXBdhh3+bRROv7bcMn7v
-	CJPTzmscjS26Rh8DdBrDsrvqoqt1m3MAsqHubvGaiRgohb3zIIg4EGX5SNIa0Wbw6YdiJrkctJk
-	KP7QFreSkcibGtVNAeEh1ETkZH4A09lNeVfC6tUDjNusb9UWw/fFCxiWCX27QE23Hl82gWixVPp
-	VI4Oo5spdEcb1Cn7RgS5id/5oVBISyrc7pzxT8+3Z/a8seHR9G/yP47cZqY/DjSx19S9jDvrhUO
-	u1K7Fy2jpHteYUzQLQE7eloDIs61CtXDfpsy7Hy07Ix0DH5c6UuySrKfKKC8MjdD+OpuZWUZ1rZ
-	ZXJmYzAczY72TAkxroWOW/YX3gLyFnad9PK2rPJRW5K4p84tRLzbFLUtj4WAlRMGGn12MLAMySz
-	Mt4JH3BXF9TehEkXtZg0370+BgQV3YSLDQ5Xw/FX2NwkMavN6d6CW46ppY73mwcOhSNQGENd/YX
-	uh0QlY3yyfeJsMGvaewvd/Wv8divnaZc2MROG9R
-X-Received: by 2002:a05:6000:2086:b0:439:b60a:b400 with SMTP id ffacd0b85a97d-43a04db4f99mr19634894f8f.31.1773594334164;
-        Sun, 15 Mar 2026 10:05:34 -0700 (PDT)
+        bh=pazn65XzPfWs0CxG7DTwrB0Lp9Xs6JQpA928mpHNaLc=;
+        b=mwCZUfcYnWoRFsjGKDJd+4MFC28ZVztTBobOjTr5Mqk6YYxGJgMMc9f/Al8N/g0Txy
+         BGwNLHMw/o7ZKMlV5ybgG068TSVjOZK4HkilMdzyRPM2Pw7PAhN42eXsfAHGljnsoMUk
+         pFdfB33Q1Z4XrXreWHRKw+DxYxThwgRcJxoHyB/sHCFfjrLwfEhkCzZwMwM2AEs9NUKP
+         9LTOrV1gVzXgU8BKA5EGxfF22btn/j+wIzZqOnTpaFkWCGu2UkIx3we0CRnwJxxcaycG
+         pIz0XzcimzrAKZTLxXB5gl3XLZ1/Ft/qOY7V9X2WEwt168hWLVcaH6sx7a1l+U4TYyqQ
+         xt7g==
+X-Forwarded-Encrypted: i=1; AJvYcCVayb5t7jk2jndC7r5uAuTYMF9yujLi+hYiyM7kf8ukIu/dZFfGT1xVQeOQz+EZLL4JmuG1yJ4SX1E=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy0aYvXjtPzyChTku62s1wnvn+bwVkYZRgh4GfnObOt19WR43tM
+	MUYz1a/54dABmaT7KyK46z8LulBn055+DR6nNTmJdkQ+VyMt3C+4J1Br
+X-Gm-Gg: ATEYQzwE2dhsdSIGk4AWM3y3V/S9NTuqA9IygCT4ESQBLuHE5NokvwrtDJ+uoBsKtPP
+	4VL3NqIcTrNRKEfGGYmFU0Re+NVXxrm5ZA0vyzlODTjOFkbcJf4O2K5sYoPXxEtWaoeBn1Nu3PO
+	UnN9SyLKocg7637OYcWu2VBK4RtFodoPahWozBEiSJjRlFHPPnPiaR4gGhyOU17iVExx83oW+B8
+	fEs5jPDWnGHgwQ6OJARnH1WudM/kGBNuoPxZZMDXpOLLZbL9OXCT+XFwMeNO/b5XV75G2Cj3UfI
+	4Qn+9nBAS2cqV35VOyUevGmILjT17uEqG37fNj7qRHl+ihaXrVPo7uDdb5ftH4mnOcLiu31dDow
+	2GQF7q5O0BwopIr8BTFYDJuZNndBlwphHPslHPtDx71oZBwfRXSEToxpV7lZ2xDkb5G8EWbCJNg
+	mEt0UwD+uCadzEqAmlneGzIu8KF52JbO8yUWjXwsZAkf2e243EvETkmClrdMnr+CjRyWHSTEfGZ
+	fUwhYvsaPW55la+IKusWTTHU+wRxE6TCycpV3xp
+X-Received: by 2002:a05:6000:b08:b0:43b:3cdc:9429 with SMTP id ffacd0b85a97d-43b3cdc9590mr4859719f8f.1.1773594335223;
+        Sun, 15 Mar 2026 10:05:35 -0700 (PDT)
 Received: from DESKTOP-TILNSD1.localdomain ([139.47.104.103])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439fe1a76e5sm34331721f8f.12.2026.03.15.10.05.33
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439fe1a76e5sm34331721f8f.12.2026.03.15.10.05.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Mar 2026 10:05:33 -0700 (PDT)
+        Sun, 15 Mar 2026 10:05:34 -0700 (PDT)
 From: Kit Dallege <xaum.io@gmail.com>
 To: Jonathan Corbet <corbet@lwn.net>
 Cc: Shuah Khan <skhan@linuxfoundation.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 2/3] docs: sched-stats: fix misleading 'per-process' wording
-Date: Sun, 15 Mar 2026 18:05:20 +0100
-Message-ID: <20260315170521.63794-3-xaum.io@gmail.com>
+Subject: [PATCH v2 3/3] docs: process: fix grammatical errors in 2.Process.rst
+Date: Sun, 15 Mar 2026 18:05:21 +0100
+Message-ID: <20260315170521.63794-4-xaum.io@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260315170521.63794-1-xaum.io@gmail.com>
 References: <20260315170521.63794-1-xaum.io@gmail.com>
@@ -100,12 +100,12 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79420-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79422-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -114,7 +114,7 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FROM_NEQ_ENVFROM(0.00)[xaumio@gmail.com,linux-doc@vger.kernel.org];
 	NEURAL_HAM(-0.00)[-0.996];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -123,37 +123,71 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	RCPT_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 73B6F29192D
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: E716929191E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-/proc/<pid>/schedstat provides statistics for the specific task (thread)
-identified by the pid, not an aggregation across all threads of a
-process. Change 'per-process' to 'per-task' to avoid confusion.
+Fix five minor grammatical issues:
+- Add comma after introductory phrase "At that point"
+- Add comma before conditional "if at all possible"
+- Change "close to ready" to "close to being ready"
+- Add article "a" before "more extensive review"
+- Add article "the" before "volume can reach"
 
-Link: https://bugzilla.kernel.org/show_bug.cgi?id=202635
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=214931
 Assisted-by: Claude:claude-opus-4-6
 Signed-off-by: Kit Dallege <xaum.io@gmail.com>
 ---
- Documentation/scheduler/sched-stats.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/process/2.Process.rst | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/scheduler/sched-stats.rst b/Documentation/scheduler/sched-stats.rst
-index 9d6a337755f4..9187cb6ce1cb 100644
---- a/Documentation/scheduler/sched-stats.rst
-+++ b/Documentation/scheduler/sched-stats.rst
-@@ -190,8 +190,8 @@ of idleness (busy, idle and newly idle):
- /proc/<pid>/schedstat
- ---------------------
- schedstats also adds a new /proc/<pid>/schedstat file to include some of
--the same information on a per-process level.  There are three fields in
--this file correlating for that process to:
-+the same information on a per-task level.  There are three fields in
-+this file correlating for that task to:
+diff --git a/Documentation/process/2.Process.rst b/Documentation/process/2.Process.rst
+index 57fa8cac58a6..81dddf0c6ace 100644
+--- a/Documentation/process/2.Process.rst
++++ b/Documentation/process/2.Process.rst
+@@ -63,7 +63,7 @@ As fixes make their way into the mainline, the patch rate will slow over
+ time.  Linus releases new -rc kernels about once a week; a normal series
+ will get up to somewhere between -rc6 and -rc9 before the kernel is
+ considered to be sufficiently stable and the final release is made.
+-At that point the whole process starts over again.
++At that point, the whole process starts over again.
  
-      1) time spent on the cpu (in nanoseconds)
-      2) time spent waiting on a runqueue (in nanoseconds)
+ As an example, here is how the 5.4 development cycle went (all dates in
+ 2019):
+@@ -156,7 +156,7 @@ The stages that a patch goes through are, generally:
+  - Design.  This is where the real requirements for the patch - and the way
+    those requirements will be met - are laid out.  Design work is often
+    done without involving the community, but it is better to do this work
+-   in the open if at all possible; it can save a lot of time redesigning
++   in the open, if at all possible; it can save a lot of time redesigning
+    things later.
+ 
+  - Early review.  Patches are posted to the relevant mailing list, and
+@@ -164,12 +164,12 @@ The stages that a patch goes through are, generally:
+    process should turn up any major problems with a patch if all goes
+    well.
+ 
+- - Wider review.  When the patch is getting close to ready for mainline
++ - Wider review.  When the patch is getting close to being ready for mainline
+    inclusion, it should be accepted by a relevant subsystem maintainer -
+    though this acceptance is not a guarantee that the patch will make it
+    all the way to the mainline.  The patch will show up in the maintainer's
+    subsystem tree and into the -next trees (described below).  When the
+-   process works, this step leads to more extensive review of the patch and
++   process works, this step leads to a more extensive review of the patch and
+    the discovery of any problems resulting from the integration of this
+    patch with work being done by others.
+ 
+@@ -398,7 +398,7 @@ There are lists hosted elsewhere; please check the MAINTAINERS file for
+ the list relevant for any particular subsystem.
+ 
+ The core mailing list for kernel development is, of course, linux-kernel.
+-This list is an intimidating place to be; volume can reach 500 messages per
++This list is an intimidating place to be; the volume can reach 500 messages per
+ day, the amount of noise is high, the conversation can be severely
+ technical, and participants are not always concerned with showing a high
+ degree of politeness.  But there is no other place where the kernel
 -- 
 2.53.0
 
