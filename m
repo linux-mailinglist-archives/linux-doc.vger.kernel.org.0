@@ -1,137 +1,134 @@
-Return-Path: <linux-doc+bounces-79482-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79483-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OEflDjMJuGkWYQEAu9opvQ
-	(envelope-from <linux-doc+bounces-79482-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Mar 2026 14:44:19 +0100
+	id aF28FLoQuGmIYgEAu9opvQ
+	(envelope-from <linux-doc+bounces-79483-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Mar 2026 15:16:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F28BC29AAA4
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Mar 2026 14:44:18 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACB1229B284
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Mar 2026 15:16:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 595463002B15
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Mar 2026 13:44:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E050A3083DC6
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Mar 2026 14:09:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 658E839A070;
-	Mon, 16 Mar 2026 13:44:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="rPIkrdqT"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5995139B4A2;
+	Mon, 16 Mar 2026 14:09:47 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CA593988FC;
-	Mon, 16 Mar 2026 13:44:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FDD4392806;
+	Mon, 16 Mar 2026 14:09:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773668657; cv=none; b=XuS7WVbp8hslVk9SCcBjTk7VKtO7686O4TywP8G5ksxv9cCnWqIcm78kSzPVt7vouW4vRSmfTh79ye72dUn5xywPk2QE4HLJBHDOItHyllgykk4vsXx3OeoKhIjA0TRpzVo15AO+Ihk5dawLrGhiflSjWf1pCzetUjuRn8pqL9c=
+	t=1773670187; cv=none; b=jphxk4lsWJwuc30gW7uY+Cbh6xtB57N6HaJGfQ2C3uhQgjA8zF1RShgMrNw/J5sglFenkabPHRYYfpB+oSgZwREKG7IpEh5TEd/oK3bOU694Rkrr31A4lW+4rxv952ZuO0C8yuWnUVT2mJKu1Rzzxc7+IcCHQMvsQaCvbZSpJy8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773668657; c=relaxed/simple;
-	bh=AX0UsN8O11oGeiC8a8COZbGwOw0yUhHNi+K5aaE48Fo=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=YAJZUXYtgoHOAvHu/zzjvSftif1Q+Awr+n7MXnOLSpS5cIoDtsAhBZIMfvrCL3EwaErcJ8SZ3FWkG8+kt92awUMEfK60zzH4apphnXn+qUirIth+EPwJjAuJJANyWnUL9xKhZCebjN+YeNuaq+DoP1lfd6m3aJ2KOahfGZbQtVg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=rPIkrdqT; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 73CE141209
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1773668655; bh=CiPNXJ99QejqzgrPoHahfnknnW+u0eriWi8xG9cmEe8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=rPIkrdqTLBwwkyYxvOR4K61M8+vczYmrP5wDDKkqWstRpFvzPyim55JSZmn9m8QnG
-	 OyutYiMtY6dN4S+95FKs+VX87lkLLhd0v5qkhVA6om1xw/ShDl7F+NhmXd00/D1y+E
-	 ubVgyHOch+f2MdbLvO6u93qX/Wr69D5cGw3bSpvVYNd5Sqi5j3g9EMuEsIz5DcF9Yp
-	 PVo9ERdK+pSZvd+eMIECR+YIx+VqITnKkalX/wscJKbFQN+5Ysz/eD8pNDwm7wV6pw
-	 Dio0XHocYl4R7uk2W0aTuYN3DDBSQ1zKK0MNvmu2xhgYUimIA+iBGzZUNmPvYPinXk
-	 OJfPWfKcINJgQ==
-Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net [71.229.227.126])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 73CE141209;
-	Mon, 16 Mar 2026 13:44:15 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Kit Dallege <xaum.io@gmail.com>
-Cc: Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH v2 2/3] docs: sched-stats: fix misleading 'per-process'
- wording
-In-Reply-To: <20260315170521.63794-3-xaum.io@gmail.com>
-References: <20260315170521.63794-1-xaum.io@gmail.com>
- <20260315170521.63794-3-xaum.io@gmail.com>
-Date: Mon, 16 Mar 2026 07:44:14 -0600
-Message-ID: <87wlzbj3dd.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1773670187; c=relaxed/simple;
+	bh=IZjs1SzxSGaIK25pDbcIvjHTN7EfwTxLqrolT0tr6Tk=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=JmYQ2b6h4g5QimpnjonmjuPDpIxDeUIuKnRsRWysrm+jRbA0cHMnAeWmqAXqMB9RXEThYjYP94FkApkfdLjxIyteXq3kSDORcbGwQXogqsRN11Hasi6hbJTteexvnccezATpd8ZyFn68wExpHGtAMBa5x0NPW4fKu7CoIYqsbxU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com; spf=pass smtp.mailfrom=huawei-partners.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei-partners.com
+Received: from mail.maildlp.com (unknown [172.18.224.107])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4fZH4t4vNVzJ46DS;
+	Mon, 16 Mar 2026 22:08:46 +0800 (CST)
+Received: from mscpeml500003.china.huawei.com (unknown [7.188.49.51])
+	by mail.maildlp.com (Postfix) with ESMTPS id 3722540584;
+	Mon, 16 Mar 2026 22:09:41 +0800 (CST)
+Received: from mscphis01197.huawei.com (10.123.65.218) by
+ mscpeml500003.china.huawei.com (7.188.49.51) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Mon, 16 Mar 2026 17:09:40 +0300
+From: <gutierrez.asier@huawei-partners.com>
+To: <gutierrez.asier@huawei-partners.com>, <artem.kuzin@huawei.com>,
+	<stepanov.anatoly@huawei.com>, <wangkefeng.wang@huawei.com>,
+	<yanquanmin1@huawei.com>, <zuoze1@huawei.com>, <damon@lists.linux.dev>,
+	<sj@kernel.org>, <akpm@linux-foundation.org>, <ljs@kernel.org>,
+	<Liam.Howlett@oracle.com>, <vbabka@kernel.org>, <rppt@kernel.org>,
+	<surenb@google.com>, <mhocko@suse.com>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <linux-doc@vger.kernel.org>,
+	<linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v1 1/1] Docs/mm/damon: Document DAMON actions when TRANSPARENT_HUGEPAGE is off
+Date: Mon, 16 Mar 2026 14:08:21 +0000
+Message-ID: <20260316140822.2033181-1-gutierrez.asier@huawei-partners.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-ClientProxiedBy: mscpeml500003.china.huawei.com (7.188.49.51) To
+ mscpeml500003.china.huawei.com (7.188.49.51)
+X-Spamd-Result: default: False [1.54 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[huawei-partners.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[gutierrez.asier@huawei-partners.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-79483-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79482-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NO_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.977];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,lwn.net:dkim,trenco.lwn.net:mid]
-X-Rspamd-Queue-Id: F28BC29AAA4
+	RCVD_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: ACB1229B284
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Kit Dallege <xaum.io@gmail.com> writes:
+From: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
 
-> /proc/<pid>/schedstat provides statistics for the specific task (thread)
-> identified by the pid, not an aggregation across all threads of a
-> process. Change 'per-process' to 'per-task' to avoid confusion.
->
-> Link: https://bugzilla.kernel.org/show_bug.cgi?id=202635
-> Assisted-by: Claude:claude-opus-4-6
-> Signed-off-by: Kit Dallege <xaum.io@gmail.com>
-> ---
->  Documentation/scheduler/sched-stats.rst | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/Documentation/scheduler/sched-stats.rst b/Documentation/scheduler/sched-stats.rst
-> index 9d6a337755f4..9187cb6ce1cb 100644
-> --- a/Documentation/scheduler/sched-stats.rst
-> +++ b/Documentation/scheduler/sched-stats.rst
-> @@ -190,8 +190,8 @@ of idleness (busy, idle and newly idle):
->  /proc/<pid>/schedstat
->  ---------------------
->  schedstats also adds a new /proc/<pid>/schedstat file to include some of
-> -the same information on a per-process level.  There are three fields in
-> -this file correlating for that process to:
-> +the same information on a per-task level.  There are three fields in
-> +this file correlating for that task to:
->  
+MADV_HUGEPAGE and MADV_NOHUGEPAGE are guarded and they
+are not available when compiling the kernel without TRANSPARENT_HUGEPAGE
+option. The DAMON behaviour is to silently fail[1] in when DAMOS_HUGEPAGE or
+DAMOS_NOHUGEPAGE are used, but TRANSPARENT_HUGEPAGE is disabled. Update the
+DAMON documentation to reflect this behaviour.
 
-Until you've copied the scheduler maintainers, a change like this will
-not go anywhere useful.
+[1]: https://lore.kernel.org/damon/66131775-180b-4b9f-b7ce-61a3e077b6e6@huawei-partners.com/T/#m278d3c9bbedcceaf2efa51e3dc7b40a40654e51c
 
-jon
+Signed-off-by: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+---
+ Documentation/mm/damon/design.rst | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+index 29fff20b3c2a..478eab4a186a 100644
+--- a/Documentation/mm/damon/design.rst
++++ b/Documentation/mm/damon/design.rst
+@@ -460,9 +460,13 @@ that supports each action are as below.
+  - ``pageout``: Reclaim the region.
+    Supported by ``vaddr``, ``fvaddr`` and ``paddr`` operations set.
+  - ``hugepage``: Call ``madvise()`` for the region with ``MADV_HUGEPAGE``.
+-   Supported by ``vaddr`` and ``fvaddr`` operations set.
++   Supported by ``vaddr`` and ``fvaddr`` operations set. When
++   TRANSPARENT_HUGEPAGE is disabled, the application of the action will just
++   fail.
+  - ``nohugepage``: Call ``madvise()`` for the region with ``MADV_NOHUGEPAGE``.
+-   Supported by ``vaddr`` and ``fvaddr`` operations set.
++   Supported by ``vaddr`` and ``fvaddr`` operations set. When
++   TRANSPARENT_HUGEPAGE is disabled, the application of the action will just
++   fail.
+  - ``lru_prio``: Prioritize the region on its LRU lists.
+    Supported by ``paddr`` operations set.
+  - ``lru_deprio``: Deprioritize the region on its LRU lists.
+-- 
+2.43.0
+
 
