@@ -1,363 +1,209 @@
-Return-Path: <linux-doc+bounces-79643-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79647-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YIRcMuT2uGk5mQEAu9opvQ
-	(envelope-from <linux-doc+bounces-79643-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 07:38:28 +0100
+	id cIX/CiP7uGkTmwEAu9opvQ
+	(envelope-from <linux-doc+bounces-79647-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 07:56:35 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70F312A459F
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 07:38:28 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8109D2A484B
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 07:56:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 108633034335
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 06:38:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 453BE30936E9
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 06:52:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA10733D51B;
-	Tue, 17 Mar 2026 06:38:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="key not found in DNS" (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b="KF33p9pM"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CEF053491C2;
+	Tue, 17 Mar 2026 06:52:18 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F10EE2D5935;
-	Tue, 17 Mar 2026 06:38:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=49.212.243.89
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D2663559F5;
+	Tue, 17 Mar 2026 06:52:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773729492; cv=none; b=J9jhdbv7W6BqPjtNsVnE+U2MrSFDZyZ+5/gJ9dK6TTxEWEVwFqrpGIQRrnkkm9S8Lw/iNGQcVmkBOExo2zQ8ZMTsbd+1NHtSHKWuKq3AiMQsWU7HkttW8FQ/vGYUlEoes8fnRMvBGDLzCORWxMlVz3jLL5EfqtLEe9dCNWrm7Ig=
+	t=1773730338; cv=none; b=P0yk9uw66qGTGDIRjDm8WmsUmuLLrRFaQYfen3ju3owipn82K10ZPoUAcw8eCuyGcgma6HVYGRz1IsquI07VddayfDy62ZHQ9AiQ9GPmTtEI8yEwFQ3KWTxL1zgvund1qQ01XthywqRA9G1zt/1EkKXUkIJOeWBzj9arfvil1WI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773729492; c=relaxed/simple;
-	bh=V7yGTOLIYvJ+y17btsf2NAXw0lQUB6xkJtS6Hal8JcM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=MSW4R3ndS2qIGz87V50q71s/63S9B5Yais4TNMpd/weHq+JMjAGtJtjFsXu/wa5V8oV8K6ogsVRxR5pEwKgqeQJrD9w45bsQ719b8smFYYTP/DtOqfKtsln74emnrfTML89ICSzO5RPbEmuJh/oNXjCEMDmCjkYyQRvVrtULkVk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=KF33p9pM reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp
-Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
-	(authenticated bits=0)
-	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 62H6aoNo004343
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Tue, 17 Mar 2026 15:37:01 +0900 (JST)
-	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=ZtQ5dlfNVl2+jdFm1CbTKfe5Q89iVgHpFp8aH6VaLbI=;
-        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
-        h=From:Message-Id:To:Subject:Date;
-        s=rs20250326; t=1773729421; v=1;
-        b=KF33p9pMgcgIfTvtGcPdqCI3NaQhGBjUMpZkmVE+JZ1EOqjHAzyaSoB54QlgvrU5
-         itk+CX4row7D+aR9jTbA9XRR/W74/iBeGlYlhs+d46pxqXHENGCZUY8mb+BflpJo
-         LvHH9/jGhgiLNi3zopJAMVWsXvnk693ZcY3F2vB6fCjuBQlbteA0Hmrj86+91gjx
-         oX+fawo7CkaMoNFRMs7BxVYyB633lPb0Dke5HA+HwxNTSKqlIp2fuYo4om70vfrC
-         Zrg1mVQ28DXUiubZ8OSxPyCk13SkBVu1GyUAppGGOO7ZaiZm/YWJ6GZScsZtdx3a
-         /HIeFW+uLCs/ay5V256nkQ==
-From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Date: Tue, 17 Mar 2026 15:36:52 +0900
-Subject: [PATCH v4 4/4] KVM: arm64: selftests: Test
- PMU_V3_FIXED_COUNTERS_ONLY
+	s=arc-20240116; t=1773730338; c=relaxed/simple;
+	bh=o8DzjGhgcrwTuqlqWy3/tR/vZ+ckbDsaf6NNFbEzXM0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=KfA+qA9TnMk7lHai0VcyglU/kZL9crBduAScZOy3bch3tfmPmw3DQL/7NMxaiMWa5bbOvhDYGfnUHaDN17bjXQnw6fo20cgLCpWD69MNTU7ptCrcedC6u0GDCvypkHdiNZKumuYdbPs22dVfAE/RXsDNqf0uOWXez52H4VJFXFQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com; spf=pass smtp.mailfrom=huawei-partners.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei-partners.com
+Received: from mail.maildlp.com (unknown [172.18.224.107])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4fZjLH0lcbzHnGdn;
+	Tue, 17 Mar 2026 14:51:51 +0800 (CST)
+Received: from mscpeml500003.china.huawei.com (unknown [7.188.49.51])
+	by mail.maildlp.com (Postfix) with ESMTPS id 2765940584;
+	Tue, 17 Mar 2026 14:52:10 +0800 (CST)
+Received: from [10.123.123.154] (10.123.123.154) by
+ mscpeml500003.china.huawei.com (7.188.49.51) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Tue, 17 Mar 2026 09:52:09 +0300
+Message-ID: <247cd41f-e703-4480-9de3-a8708bb3d9ee@huawei-partners.com>
+Date: Tue, 17 Mar 2026 09:52:09 +0300
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2 1/1] mm/damon: support MADV_COLLAPSE via
+ DAMOS_COLLAPSE scheme action
+To: SeongJae Park <sj@kernel.org>
+CC: <artem.kuzin@huawei.com>, <stepanov.anatoly@huawei.com>,
+	<wangkefeng.wang@huawei.com>, <yanquanmin1@huawei.com>, <zuoze1@huawei.com>,
+	<damon@lists.linux.dev>, <akpm@linux-foundation.org>, <ljs@kernel.org>,
+	<Liam.Howlett@oracle.com>, <vbabka@kernel.org>, <rppt@kernel.org>,
+	<surenb@google.com>, <mhocko@suse.com>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <linux-doc@vger.kernel.org>,
+	<linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>
+References: <20260317003206.89342-1-sj@kernel.org>
+Content-Language: en-US
+From: Gutierrez Asier <gutierrez.asier@huawei-partners.com>
+In-Reply-To: <20260317003206.89342-1-sj@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260317-hybrid-v4-4-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp>
-References: <20260317-hybrid-v4-0-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <20260317-hybrid-v4-0-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp>
-To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oupton@kernel.org>,
-        Joey Gouly <joey.gouly@arm.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        Zenghui Yu <yuzenghui@huawei.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <shuah@kernel.org>
-Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
-        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
-        devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-X-Mailer: b4 0.15-dev-5ab4c
-X-Spamd-Result: default: False [-1.36 / 15.00];
+X-ClientProxiedBy: mscpeml500003.china.huawei.com (7.188.49.51) To
+ mscpeml500003.china.huawei.com (7.188.49.51)
+X-Spamd-Result: default: False [0.04 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[huawei-partners.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79643-lists,linux-doc=lfdr.de];
-	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
-	DKIM_TRACE(0.00)[rsg.ci.i.u-tokyo.ac.jp:~];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.985];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 70F312A459F
+	R_DKIM_NA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gutierrez.asier@huawei-partners.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79647-lists,linux-doc=lfdr.de];
+	NEURAL_HAM(-0.00)[-0.976];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei-partners.com:email,huawei-partners.com:mid,sashiko.dev:url]
+X-Rspamd-Queue-Id: 8109D2A484B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Assert the following:
-- KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY is unset at initialization.
-- KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY can be set.
-- Setting KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY for the first time
-  after setting an event filter results in EBUSY.
-- KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY can be set again even if an
-  event filter has already been set.
-- Setting KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY after running a VCPU
-  results in EBUSY.
-- The existing test cases pass with
-  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY set.
+Hi SJ,
 
-Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
----
- .../selftests/kvm/arm64/vpmu_counter_access.c      | 148 +++++++++++++++++----
- 1 file changed, 122 insertions(+), 26 deletions(-)
+First of all, I just noticed that this was sent as v2 RFC, while
+it should be v1. Bear in mind that the next series will also be
+v2.
 
-diff --git a/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c b/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c
-index ae36325c022f..156bfa636923 100644
---- a/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c
-+++ b/tools/testing/selftests/kvm/arm64/vpmu_counter_access.c
-@@ -403,12 +403,7 @@ static void create_vpmu_vm(void *guest_code)
- {
- 	struct kvm_vcpu_init init;
- 	uint8_t pmuver, ec;
--	uint64_t dfr0, irq = 23;
--	struct kvm_device_attr irq_attr = {
--		.group = KVM_ARM_VCPU_PMU_V3_CTRL,
--		.attr = KVM_ARM_VCPU_PMU_V3_IRQ,
--		.addr = (uint64_t)&irq,
--	};
-+	uint64_t dfr0;
- 
- 	/* The test creates the vpmu_vm multiple times. Ensure a clean state */
- 	memset(&vpmu_vm, 0, sizeof(vpmu_vm));
-@@ -434,8 +429,6 @@ static void create_vpmu_vm(void *guest_code)
- 	TEST_ASSERT(pmuver != ID_AA64DFR0_EL1_PMUVer_IMP_DEF &&
- 		    pmuver >= ID_AA64DFR0_EL1_PMUVer_IMP,
- 		    "Unexpected PMUVER (0x%x) on the vCPU with PMUv3", pmuver);
--
--	vcpu_ioctl(vpmu_vm.vcpu, KVM_SET_DEVICE_ATTR, &irq_attr);
- }
- 
- static void destroy_vpmu_vm(void)
-@@ -461,15 +454,25 @@ static void run_vcpu(struct kvm_vcpu *vcpu, uint64_t pmcr_n)
- 	}
- }
- 
--static void test_create_vpmu_vm_with_nr_counters(unsigned int nr_counters, bool expect_fail)
-+static void test_create_vpmu_vm_with_nr_counters(unsigned int nr_counters,
-+						 bool fixed_counters_only,
-+						 bool expect_fail)
- {
- 	struct kvm_vcpu *vcpu;
- 	unsigned int prev;
- 	int ret;
-+	uint64_t irq = 23;
- 
- 	create_vpmu_vm(guest_code);
- 	vcpu = vpmu_vm.vcpu;
- 
-+	if (fixed_counters_only)
-+		vcpu_device_attr_set(vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+				     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+
-+	vcpu_device_attr_set(vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_IRQ, &irq);
-+
- 	prev = get_pmcr_n(vcpu_get_reg(vcpu, KVM_ARM64_SYS_REG(SYS_PMCR_EL0)));
- 
- 	ret = __vcpu_device_attr_set(vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-@@ -489,15 +492,15 @@ static void test_create_vpmu_vm_with_nr_counters(unsigned int nr_counters, bool
-  * Create a guest with one vCPU, set the PMCR_EL0.N for the vCPU to @pmcr_n,
-  * and run the test.
-  */
--static void run_access_test(uint64_t pmcr_n)
-+static void run_access_test(uint64_t pmcr_n, bool fixed_counters_only)
- {
- 	uint64_t sp;
- 	struct kvm_vcpu *vcpu;
- 	struct kvm_vcpu_init init;
- 
--	pr_debug("Test with pmcr_n %lu\n", pmcr_n);
-+	pr_debug("Test with pmcr_n %lu, fixed_counters_only %d\n", pmcr_n, fixed_counters_only);
- 
--	test_create_vpmu_vm_with_nr_counters(pmcr_n, false);
-+	test_create_vpmu_vm_with_nr_counters(pmcr_n, fixed_counters_only, false);
- 	vcpu = vpmu_vm.vcpu;
- 
- 	/* Save the initial sp to restore them later to run the guest again */
-@@ -531,14 +534,14 @@ static struct pmreg_sets validity_check_reg_sets[] = {
-  * Create a VM, and check if KVM handles the userspace accesses of
-  * the PMU register sets in @validity_check_reg_sets[] correctly.
-  */
--static void run_pmregs_validity_test(uint64_t pmcr_n)
-+static void run_pmregs_validity_test(uint64_t pmcr_n, bool fixed_counters_only)
- {
- 	int i;
- 	struct kvm_vcpu *vcpu;
- 	uint64_t set_reg_id, clr_reg_id, reg_val;
- 	uint64_t valid_counters_mask, max_counters_mask;
- 
--	test_create_vpmu_vm_with_nr_counters(pmcr_n, false);
-+	test_create_vpmu_vm_with_nr_counters(pmcr_n, fixed_counters_only, false);
- 	vcpu = vpmu_vm.vcpu;
- 
- 	valid_counters_mask = get_counters_mask(pmcr_n);
-@@ -588,11 +591,11 @@ static void run_pmregs_validity_test(uint64_t pmcr_n)
-  * the vCPU to @pmcr_n, which is larger than the host value.
-  * The attempt should fail as @pmcr_n is too big to set for the vCPU.
-  */
--static void run_error_test(uint64_t pmcr_n)
-+static void run_error_test(uint64_t pmcr_n, bool fixed_counters_only)
- {
- 	pr_debug("Error test with pmcr_n %lu (larger than the host)\n", pmcr_n);
- 
--	test_create_vpmu_vm_with_nr_counters(pmcr_n, true);
-+	test_create_vpmu_vm_with_nr_counters(pmcr_n, fixed_counters_only, true);
- 	destroy_vpmu_vm();
- }
- 
-@@ -622,22 +625,115 @@ static bool kvm_supports_nr_counters_attr(void)
- 	return supported;
- }
- 
--int main(void)
-+static void test_config(uint64_t pmcr_n, bool fixed_counters_only)
- {
--	uint64_t i, pmcr_n;
--
--	TEST_REQUIRE(kvm_has_cap(KVM_CAP_ARM_PMU_V3));
--	TEST_REQUIRE(kvm_supports_vgic_v3());
--	TEST_REQUIRE(kvm_supports_nr_counters_attr());
-+	uint64_t i;
- 
--	pmcr_n = get_pmcr_n_limit();
- 	for (i = 0; i <= pmcr_n; i++) {
--		run_access_test(i);
--		run_pmregs_validity_test(i);
-+		run_access_test(i, fixed_counters_only);
-+		run_pmregs_validity_test(i, fixed_counters_only);
- 	}
- 
- 	for (i = pmcr_n + 1; i < ARMV8_PMU_MAX_COUNTERS; i++)
--		run_error_test(i);
-+		run_error_test(i, fixed_counters_only);
-+}
-+
-+static void test_fixed_counters_only(void)
-+{
-+	struct kvm_pmu_event_filter filter = { .nevents = 0 };
-+	struct kvm_vm *vm;
-+	struct kvm_vcpu *running_vcpu;
-+	struct kvm_vcpu *stopped_vcpu;
-+	struct kvm_vcpu_init init;
-+	int ret;
-+	uint64_t irq = 23;
-+
-+	create_vpmu_vm(guest_code);
-+	ret = __vcpu_has_device_attr(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+				     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY);
-+	if (ret) {
-+		TEST_ASSERT(ret == -1 && errno == ENXIO,
-+			    KVM_IOCTL_ERROR(KVM_GET_DEVICE_ATTR, ret));
-+		destroy_vpmu_vm();
-+		return;
-+	}
-+
-+	/* Assert that FIXED_COUNTERS_ONLY is unset at initialization. */
-+	ret = __vcpu_device_attr_get(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+				     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+	TEST_ASSERT(ret == -1 && errno == ENXIO,
-+		    KVM_IOCTL_ERROR(KVM_GET_DEVICE_ATTR, ret));
-+
-+	/* Assert that setting FIXED_COUNTERS_ONLY succeeds. */
-+	vcpu_device_attr_set(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+
-+	/* Assert that getting FIXED_COUNTERS_ONLY succeeds. */
-+	vcpu_device_attr_get(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+
-+	/*
-+	 * Assert that setting FIXED_COUNTERS_ONLY again succeeds even if an
-+	 * event filter has already been set.
-+	 */
-+	vcpu_device_attr_set(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_FILTER, &filter);
-+
-+	vcpu_device_attr_set(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+
-+	destroy_vpmu_vm();
-+
-+	create_vpmu_vm(guest_code);
-+
-+	/*
-+	 * Assert that setting FIXED_COUNTERS_ONLY results in EBUSY if an event
-+	 * filter has already been set while FIXED_COUNTERS_ONLY has not.
-+	 */
-+	vcpu_device_attr_set(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_FILTER, &filter);
-+
-+	ret = __vcpu_device_attr_set(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+				     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+	TEST_ASSERT(ret == -1 && errno == EBUSY,
-+		    KVM_IOCTL_ERROR(KVM_GET_DEVICE_ATTR, ret));
-+
-+	destroy_vpmu_vm();
-+
-+	/*
-+	 * Assert that setting FIXED_COUNTERS_ONLY after running a VCPU results
-+	 * in EBUSY.
-+	 */
-+	vm = vm_create(2);
-+	vm_ioctl(vm, KVM_ARM_PREFERRED_TARGET, &init);
-+	init.features[0] |= (1 << KVM_ARM_VCPU_PMU_V3);
-+	running_vcpu = aarch64_vcpu_add(vm, 0, &init, guest_code);
-+	stopped_vcpu = aarch64_vcpu_add(vm, 1, &init, guest_code);
-+	kvm_arch_vm_finalize_vcpus(vm);
-+	vcpu_device_attr_set(vpmu_vm.vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_IRQ, &irq);
-+	vcpu_device_attr_set(running_vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+			     KVM_ARM_VCPU_PMU_V3_INIT, NULL);
-+	vcpu_run(running_vcpu);
-+
-+	ret = __vcpu_device_attr_set(stopped_vcpu, KVM_ARM_VCPU_PMU_V3_CTRL,
-+				     KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY, NULL);
-+	TEST_ASSERT(ret == -1 && errno == EBUSY,
-+		    KVM_IOCTL_ERROR(KVM_GET_DEVICE_ATTR, ret));
-+
-+	kvm_vm_free(vm);
-+
-+	test_config(0, true);
-+}
-+
-+int main(void)
-+{
-+	TEST_REQUIRE(kvm_has_cap(KVM_CAP_ARM_PMU_V3));
-+	TEST_REQUIRE(kvm_supports_vgic_v3());
-+	TEST_REQUIRE(kvm_supports_nr_counters_attr());
-+
-+	test_config(get_pmcr_n_limit(), false);
-+	test_fixed_counters_only();
- 
- 	return 0;
- }
+On 3/17/2026 3:32 AM, SeongJae Park wrote:
+> Hello Asier,
+> 
+> On Mon, 16 Mar 2026 18:38:05 +0000 <gutierrez.asier@huawei-partners.com> wrote:
+> 
+>> From: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+>>
+>> This patch set introces a new action: DAMOS_COLLAPSE.
+>>
+>> For DAMOS_HUGEPAGE and DAMOS_NOHUGEPAGE to work, khugepaged should be
+>> working, since it relies on hugepage_madvise to add a new slot. This
+>> slot should be picked up by khugepaged and eventually collapse (or
+>> not, if we are using DAMOS_NOHUGEPAGE) the pages. If THP is not
+>> enabled, khugepaged will not be working, and therefore no collapse
+>> will happen.
+>>
+>> DAMOS_COLLAPSE eventually calls madvise_collapse, which will collapse
+>> the address range synchronously.
+>>
+>> This new action may be required to support autotuning with hugepage as
+>> a goal.
+> 
+> Above all makes sense.  Thank you for posting this patch.
+> 
+> Do you have some test results that you can also share together?  It would be
+> nice if it can demonstrate the benefit of DAMOS_COLLAPSE over DAMOS_HUGEPAGE.
+I will run some tests and benchmarks.
+> 
+>>
+>> [1] https://lore.kernel.org/lkml/20260314165156.86647-1-sj@kernel.org/
+> 
+> Seems the above link is just added by a mistake?  If not, please clarify.
+Yes, it looks like I copied the wrong link.
+>>
+>> Signed-off-by: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+>> Reviewed-by: SeongJae Park <sj@kernel.org>
+>> ---
+>>  Documentation/mm/damon/design.rst | 4 ++++
+>>  include/linux/damon.h             | 1 +
+>>  mm/damon/sysfs-schemes.c          | 4 ++++
+>>  mm/damon/vaddr.c                  | 3 +++
+>>  4 files changed, 12 insertions(+)
+> [...]
+>> diff --git a/include/linux/damon.h b/include/linux/damon.h
+>> index 3a441fbca170..6720dc70c487 100644
+>> --- a/include/linux/damon.h
+>> +++ b/include/linux/damon.h
+>> @@ -140,6 +140,7 @@ enum damos_action {
+>>  	DAMOS_PAGEOUT,
+>>  	DAMOS_HUGEPAGE,
+>>  	DAMOS_NOHUGEPAGE,
+>> +	DAMOS_COLLAPSE,
+>>  	DAMOS_LRU_PRIO,
+>>  	DAMOS_LRU_DEPRIO,
+>>  	DAMOS_MIGRATE_HOT,
+> 
+> sashiko.dev adds [1] below comments.  Let me also add my comments in line.
+> 
+> : This isn't a bug, but should a kernel-doc entry for @DAMOS_COLLAPSE be added
+> : to the comment block above this enum?
+> 
+> Makes sense.  'make htmldocs' may complain otherwise.  Asier, could you please
+> add the kernel-doc comment for DAMOS_COLLAPSE in the next spin?
+OK, I will split this patch into 2: one with the code and the other one with
+the documentation.
+> : 
+> : Also, does inserting DAMOS_COLLAPSE here shift the integer values of the
+> : subsequent enum entries like DAMOS_STAT?
+> : 
+> : The DAMON sysfs selftest script (tools/testing/selftests/damon/sysfs.py) uses
+> : a hardcoded dictionary action_val to map string names to their integer enum
+> : values.
+> : 
+> : If the enum values shift, the test's assertion:
+> : 
+> : assert_true(dump['action'] == action_val[scheme.action])
+> : 
+> : might fail when checking the struct memory via drgn. Could the python test
+> : dictionary be updated to reflect the new values, or could the new action be
+> : added at the end of the enum list?
+> 
+> There is no test that uses DAMOS actions that defined after DAMOS_NOHUGEPAGE,
+> so no real test will break.  But this is a good point.  It would be better to
+> update the hard-coded value together.  Asier, could you also update the
+> 'action_val' dict of assert_scheme_committed() function in
+> tools/testing/selftets/damon/sysfs.py for the updated enum value in the next
+> version?
+OK, I will do it.
+> 
+> [1] https://sashiko.dev/#/patchset/20260316183805.2090297-1-gutierrez.asier@huawei-partners.com
+> 
+> 
+> Thanks,
+> SJ
+> 
+> [...]
+> 
+Thanks for the feedback.
 
 -- 
-2.53.0
+Asier Gutierrez
+Huawei
 
 
