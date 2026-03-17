@@ -1,263 +1,203 @@
-Return-Path: <linux-doc+bounces-79712-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79716-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uKuKKnFKuWnG/QEAu9opvQ
-	(envelope-from <linux-doc+bounces-79712-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:34:57 +0100
+	id aOpsE85NuWnj/wEAu9opvQ
+	(envelope-from <linux-doc+bounces-79716-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:49:18 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0ABCE2A9F42
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:34:56 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DE1B02AA1C8
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:49:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 35292304F219
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 12:33:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 83AC3308AF73
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 12:47:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBC783BFE23;
-	Tue, 17 Mar 2026 12:33:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7A8F3C5544;
+	Tue, 17 Mar 2026 12:47:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="P4Pnmqxa"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Mmx0yAMP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.166])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 381E93C141A;
-	Tue, 17 Mar 2026 12:33:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.166
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B305C3C2789;
+	Tue, 17 Mar 2026 12:47:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773750820; cv=none; b=Nb9IlmDzqi6gRFWB6XmHXj7K3CjNZ2pg2oXhRf9li1V1PM6WJswFvsLwiS4hVw8aYUYkS/H4Xfh6ikUQMV6U9krxPceMI+DQ3J3TNmHSF+2vO3xL54YwPNB7sv+p06y8DghfgaaDIcIz2DmjTiEqoFRZ9I5koagAoQ0utGV2Qs4=
+	t=1773751651; cv=none; b=NpcxakDIAxEcNlLtm8W/TSx+LlTKIGdZjfu5YhfK0EhfhL+sNF4GN/D7jmIsqib5hrTsf55k6G7Wb5amApbtUUMNqd9BZnxijzSynINOIAIUanjDZDlnnOlkb/rLvK5thWEdkxzWEaQ8KFDrhvmNPz7NrWBQO5AzMHLZ5an/scM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773750820; c=relaxed/simple;
-	bh=DLAZWZvYAQo3AeKnB8RK5xeZq+SfWWnP8P+mULMux5s=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=IILo4G0vb4yZveOSuHpzq0he6Z5Gizmi3XuNTpZ/iiWHD3I39c7Nxp9z0K5n7HOrUf0+Z8NP0pKx/9e/CgJuecX0Nr88nN4viSlFQ9ayOrnT7pa4VU528CnKgbCB/2GVnMoRPJtDrJQbYYU2pHRwvdbeQ71pHvvE0oI9BQjeY8k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=P4Pnmqxa; arc=none smtp.client-ip=188.68.63.166
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
-Received: from mors-relay-8202.netcup.net (localhost [127.0.0.1])
-	by mors-relay-8202.netcup.net (Postfix) with ESMTPS id 4fZrwV6k4Fz43FB;
-	Tue, 17 Mar 2026 13:33:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
-	s=key2; t=1773750810;
-	bh=DLAZWZvYAQo3AeKnB8RK5xeZq+SfWWnP8P+mULMux5s=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=P4PnmqxaZp2bzpYBmKBLL6BvLHZt1aW1gJsmLizylMfjL4E4saFQoAa4XWtvxX/Ya
-	 oylkJg26Ie7yCByEZ8FPjKrZT3OxjU0znZOdV34Q8WnX2lVgZ7Y5T5uDUZc/0OkxSY
-	 w8646hx7RAvg3ez/aUCDT1r4YKC3FmRvnaXuMwKfrdvQJTJMreKkLsmMKqjJNrXRgZ
-	 DTVLHLoc+dZtGg0TsR6mZOOoAEfURH2EZbpKcE1Hyct5z+NrIHvqbkszEzjWDGpaCt
-	 zOEDOyH/L+9ClRuCT0Y17zcE+rd9ihUAKiK0qCHobxmg7vKbIte0sZYxnu0r6qlEVL
-	 v0sxTolQB3/hA==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay-8202.netcup.net (Postfix) with ESMTPS id 4fZrwV61jxz436w;
-	Tue, 17 Mar 2026 13:33:30 +0100 (CET)
-Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4fZrwV3vRQz8svF;
-	Tue, 17 Mar 2026 13:33:30 +0100 (CET)
-Received: from luggage.fritz.box (unknown [IPv6:2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160])
-	by mxe9fb.netcup.net (Postfix) with ESMTPSA id CD33C635A2;
-	Tue, 17 Mar 2026 13:33:29 +0100 (CET)
-Authentication-Results: mxe9fb;
-	spf=pass (sender IP is 2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160) smtp.mailfrom=linux@leemhuis.info smtp.helo=luggage.fritz.box
-Received-SPF: pass (mxe9fb: connection is authenticated)
-From: Thorsten Leemhuis <linux@leemhuis.info>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org,
-	regressions@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 5/5] docs: reporting-issues: create a proper appendix
- explaining specialties
-Date: Tue, 17 Mar 2026 13:33:08 +0100
-Message-ID: 
- <473b36fa9723c46b7167004752f097e6c26d7278.1773750701.git.linux@leemhuis.info>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1773750701.git.linux@leemhuis.info>
-References: <cover.1773750701.git.linux@leemhuis.info>
+	s=arc-20240116; t=1773751651; c=relaxed/simple;
+	bh=JTwsqMb2I4dHEBP3Yr6hdh+SSfntwSOXY7WxnE4Jx3c=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=UJ4NIuem9XkWHIlt/PjaRSRpoISTTuiH4g8yRvq/gRp2qMoZ2sF6JqOCjW7EHH21dd0BEGkzCklHmSPzuay8y/oiUxH+ox7XosJ+a9KjVKpf+sgV5t+a98QyGkWcMvVDrDq54v2Ts5CGe3QnaMgl5KV8FMtq7mrEEASUh8/Uho4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Mmx0yAMP; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B404C19425;
+	Tue, 17 Mar 2026 12:47:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773751651;
+	bh=JTwsqMb2I4dHEBP3Yr6hdh+SSfntwSOXY7WxnE4Jx3c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=Mmx0yAMPyaTi+W7LMOLMl9+7j+cgfxWgN+0e8+WOHglYQuD4eGL8x36KMvnKPf8pn
+	 wVn0efCAa7oEY8R0Id09hXCEmjRworf4hb93qMp5v/xMr+uwYeFP0hoPWqXx65PWUT
+	 28MvJwArdGTlcRdzcbOVdEVX+vwzLSPskqz2CxbZWLn4w9Lf3/9wnOrQNGE78MhC1w
+	 8HqKB40pzPWf8MIbg3kDKy+lOBM54cmDfPUaQ8Go8LlCRvyEMOBq2etcU5lk1GT0fs
+	 /+JtdnBN9kqfbEOA1t2Fw7892WsmzlseiC2e9U/NDToOC6pX9+JrG7YzEzJ2z+7e9/
+	 GD/Agse4pYisw==
+Message-ID: <169a3438-40f9-40bc-86cf-a24535494115@kernel.org>
+Date: Tue, 17 Mar 2026 13:47:22 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCHv7 09/18] mm/hugetlb: Defer vmemmap population for bootmem
+ hugepages
+To: Kiryl Shutsemau <kas@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+ Muchun Song <muchun.song@linux.dev>, Matthew Wilcox <willy@infradead.org>,
+ Usama Arif <usamaarif642@gmail.com>, Frank van der Linden <fvdl@google.com>,
+ Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>,
+ Vlastimil Babka <vbabka@suse.cz>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Zi Yan <ziy@nvidia.com>,
+ Baoquan He <bhe@redhat.com>, Michal Hocko <mhocko@suse.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
+ Huacai Chen <chenhuacai@kernel.org>, WANG Xuerui <kernel@xen0n.name>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ Alexandre Ghiti <alex@ghiti.fr>, kernel-team@meta.com, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ loongarch@lists.linux.dev, linux-riscv@lists.infradead.org
+References: <20260227194302.274384-1-kas@kernel.org>
+ <20260227194302.274384-10-kas@kernel.org>
+ <4e52f70d-e0c3-471f-8073-68c0e9bc94ca@kernel.org>
+ <abk58j2bV0sGabEU@thinkstation>
+From: "David Hildenbrand (Arm)" <david@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=david@kernel.org; keydata=
+ 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
+ qIws/H2t
+In-Reply-To: <abk58j2bV0sGabEU@thinkstation>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-PPP-Message-ID: <177375081005.2889278.2984770644419798803@mxe9fb.netcup.net>
-X-NC-CID: +0R4BnqSs8tEysEHb2JNNUshQAW+yu0JPNHGMyTNZDnhP/lRf58=
-X-Spamd-Result: default: False [-0.66 / 15.00];
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[leemhuis.info:s=key2];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79712-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[leemhuis.info:dkim,leemhuis.info:email,leemhuis.info:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	DMARC_NA(0.00)[leemhuis.info];
-	DKIM_TRACE(0.00)[leemhuis.info:+];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-79716-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@leemhuis.info,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[linux-foundation.org,linux.dev,infradead.org,gmail.com,google.com,suse.de,kernel.org,suse.cz,oracle.com,nvidia.com,redhat.com,suse.com,cmpxchg.org,lwn.net,xen0n.name,dabbelt.com,sifive.com,eecs.berkeley.edu,ghiti.fr,meta.com,kvack.org,vger.kernel.org,lists.linux.dev,lists.infradead.org];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 0ABCE2A9F42
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: DE1B02AA1C8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Merge "Why some bugs remain unfixed and some reports are ignored" with
-the closing words while rewriting and extending the text.
+On 3/17/26 12:28, Kiryl Shutsemau wrote:
+> On Mon, Mar 16, 2026 at 05:48:24PM +0100, David Hildenbrand (Arm) wrote:
+>> On 2/27/26 20:42, Kiryl Shutsemau (Meta) wrote:
+>>> Currently, the vmemmap for bootmem-allocated gigantic pages is populated
+>>> early in hugetlb_vmemmap_init_early(). However, the zone information is
+>>> only available after zones are initialized. If it is later discovered
+>>> that a page spans multiple zones, the HVO mapping must be undone and
+>>> replaced with a normal mapping using vmemmap_undo_hvo().
+>>>
+>>> Defer the actual vmemmap population to hugetlb_vmemmap_init_late(). At
+>>> this stage, zones are already initialized, so it can be checked if the
+>>> page is valid for HVO before deciding how to populate the vmemmap.
+>>>
+>>> This allows us to remove vmemmap_undo_hvo() and the complex logic
+>>> required to rollback HVO mappings.
+>>>
+>>> In hugetlb_vmemmap_init_late(), if HVO population fails or if the zones
+>>> are invalid, fall back to a normal vmemmap population.
+>>>
+>>> Postponing population until hugetlb_vmemmap_init_late() also makes zone
+>>> information available from within vmemmap_populate_hvo().
+>>
+>> So we'll keep marking the sections as SECTION_IS_VMEMMAP_PREINIT such
+>> that sparse_init_nid() will still properly skip it and leave population
+>> to hugetlb_vmemmap_init_late().
+>>
+>> Should we clear SECTION_IS_VMEMMAP_PREINIT in case we run into the
+>> hugetlb_bootmem_page_zones_valid() scenario?
+>>
+>> I suspect we don't care about SECTION_IS_VMEMMAP_PREINIT after boot and
+>> can just leave the flag set. (maybe we wan to add a comment in the code?
+>> above the vmemmap_populate() ?)
+> 
+> I think keeping the flag is right thing to do.
+> 
+> SECTION_IS_VMEMMAP_PREINIT indicates to core-sparse that the section
+> should not be populated and it will be initialized elsewhere. Even in
+> !hugetlb_bootmem_page_zones_valid() we take care of it in
+> hugetlb_vmemmap_init_late().
 
-The result spends fewer words on explaining things that are normal in
-FLOSS -- while outlining where the kernel is different and how that
-makes bug reporting more complicated than in other FLOSS projects.
+Makes sense.
 
-Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
----
- .../admin-guide/reporting-issues.rst          | 119 ++++++++----------
- 1 file changed, 53 insertions(+), 66 deletions(-)
-
-diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
-index aa058b295c5f33..16a66a1f1975f0 100644
---- a/Documentation/admin-guide/reporting-issues.rst
-+++ b/Documentation/admin-guide/reporting-issues.rst
-@@ -1693,72 +1693,59 @@ for the subsystem where the issue seems to have its roots; CC the mailing list
- for the subsystem as well as the stable mailing list (stable@vger.kernel.org).
- 
- 
--Why some issues won't get any reaction or remain unfixed after being reported
--=============================================================================
--
--When reporting a problem to the Linux developers, be aware only 'issues of high
--priority' (regressions, security issues, severe problems) are definitely going
--to get resolved. The maintainers or if all else fails Linus Torvalds himself
--will make sure of that. They and the other kernel developers will fix a lot of
--other issues as well. But be aware that sometimes they can't or won't help; and
--sometimes there isn't even anyone to send a report to.
--
--This is best explained with kernel developers that contribute to the Linux
--kernel in their spare time. Quite a few of the drivers in the kernel were
--written by such programmers, often because they simply wanted to make their
--hardware usable on their favorite operating system.
--
--These programmers most of the time will happily fix problems other people
--report. But nobody can force them to do, as they are contributing voluntarily.
--
--Then there are situations where such developers really want to fix an issue,
--but can't: sometimes they lack hardware programming documentation to do so.
--This often happens when the publicly available docs are superficial or the
--driver was written with the help of reverse engineering.
--
--Sooner or later spare time developers will also stop caring for the driver.
--Maybe their test hardware broke, got replaced by something more fancy, or is so
--old that it's something you don't find much outside of computer museums
--anymore. Sometimes developer stops caring for their code and Linux at all, as
--something different in their life became way more important. In some cases
--nobody is willing to take over the job as maintainer – and nobody can be forced
--to, as contributing to the Linux kernel is done on a voluntary basis. Abandoned
--drivers nevertheless remain in the kernel: they are still useful for people and
--removing would be a regression.
--
--The situation is not that different with developers that are paid for their
--work on the Linux kernel. Those contribute most changes these days. But their
--employers sooner or later also stop caring for their code or make its
--programmer focus on other things. Hardware vendors for example earn their money
--mainly by selling new hardware; quite a few of them hence are not investing
--much time and energy in maintaining a Linux kernel driver for something they
--stopped selling years ago. Enterprise Linux distributors often care for a
--longer time period, but in new versions often leave support for old and rare
--hardware aside to limit the scope. Often spare time contributors take over once
--a company orphans some code, but as mentioned above: sooner or later they will
--leave the code behind, too.
--
--Priorities are another reason why some issues are not fixed, as maintainers
--quite often are forced to set those, as time to work on Linux is limited.
--That's true for spare time or the time employers grant their developers to
--spend on maintenance work on the upstream kernel. Sometimes maintainers also
--get overwhelmed with reports, even if a driver is working nearly perfectly. To
--not get completely stuck, the programmer thus might have no other choice than
--to prioritize issue reports and reject some of them.
--
--But don't worry too much about all of this, a lot of drivers have active
--maintainers who are quite interested in fixing as many issues as possible.
--
--
--Closing words
--=============
--
--Compared with other Free/Libre & Open Source Software it's hard to report
--issues to the Linux kernel developers: the length and complexity of this
--document and the implications between the lines illustrate that. But that's how
--it is for now. The main author of this text hopes documenting the state of the
--art will lay some groundwork to improve the situation over time.
--
-+Appendix: Why it is somewhat hard to report kernel bugs
-+=======================================================
-+
-+The Linux kernel developers are well aware that reporting bugs to them is harder
-+than in other Free/Libre Open Source Projects. Many reasons for that lie in the
-+nature of kernels, Linux' development model, and how the world uses the kernel:
-+
-+* *Most kernels of Linux distributions are totally unsuitable for reporting bugs
-+  upstream.* The reference section above already explained this in detail:
-+  outdated codebases as well as modifications and add-ons lead to kernel bugs
-+  that were fixed upstream a long time ago or never happened there in the first
-+  place. Developers of other Open Source software face these problems as well,
-+  but the situation is a lot worse when it comes to the kernel, as the changes
-+  and their impact are much more severe -- which is why many kernel developers
-+  expect reports with kernels built from fresh and nearly unmodified sources.
-+
-+* *Bugs often only occur in a special environment.* That is because Linux is
-+  mostly drivers and can be used in a multitude of ways. Developers often do not
-+  have a matching setup at hand -- and therefore frequently must rely on bug
-+  reporters for isolating a problems's cause and testing proposed fixes.
-+
-+* *The kernel has hundreds of maintainers, but all-rounders are very rare.* That
-+  again is and effect caused by the multitude of features and drivers, due to
-+  which many kernel developers know little about lower or higher layers related
-+  to their code and even less about other areas.
-+
-+* *It is hard finding where to report issues to, among others, due to the lack
-+  of a central bug tracker.* This is something even some kernel developers
-+  dislike, but that's the situation everyone has to deal with currently.
-+
-+* *Stable and longterm kernels are primarily maintained by a dedicated 'stable
-+  team', which only handles regressions introduced within stable and longterm
-+  series.* When someone reports a bug, say, using Linux 6.1.2, the team will,
-+  therefore, always ask if mainline is affected: if the bug already happened
-+  in 6.1 or occurs with latest mainline (say, 6.2-rc3), they in everybody's
-+  interest shove it to the regular developers, as those know the code best.
-+
-+* *Linux developers are free to focus on latest mainline.* Some, thus, react
-+  coldly to reports about bugs in, say, Linux 6.0 when 6.1 is already out;
-+  even the latter might not be enough once 6.2-rc1 is out. Some will also not
-+  be very welcoming to reports with 6.1.5 or 6.1.6, as the problem might be a
-+  series-specific regression the stable team (see above) caused and must fix.
-+
-+* *Sometimes there is nobody to help.* Sometimes this is due to the lack of
-+  hardware documentation -- for example, when a driver was built using reverse
-+  engineering or was taken over by spare-time developers when the hardware
-+  manufacturer left it behind. Other times there is nobody to even report bugs
-+  to: when maintainers move on without a replacement, their code often remains
-+  in the kernel as long as it's useful.
-+
-+Some of these aspects could be improved to facilitate bug reporting -- many
-+Linux kernel developers are well aware of this and would be glad if a few
-+individuals or an entity would make this their mission.
- 
- ..
-    end-of-content
 -- 
-2.53.0
+Cheers,
 
+David
 
