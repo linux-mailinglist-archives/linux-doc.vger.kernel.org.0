@@ -1,230 +1,188 @@
-Return-Path: <linux-doc+bounces-79693-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79695-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yEibKxswuWn4uAEAu9opvQ
-	(envelope-from <linux-doc+bounces-79693-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:42:35 +0100
+	id UK6sGCY0uWnpugEAu9opvQ
+	(envelope-from <linux-doc+bounces-79695-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:59:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 254252A8272
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:42:35 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B98352A862D
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:59:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 802683037C1A
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 10:41:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A576F3070932
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 10:58:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D78D33A6B80;
-	Tue, 17 Mar 2026 10:41:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1955C367F28;
+	Tue, 17 Mar 2026 10:58:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="G8J/BKoo"
+	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="u1W1gMj2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out162-62-57-49.mail.qq.com (out162-62-57-49.mail.qq.com [162.62.57.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C709939151E
-	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 10:40:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0403B37C0F9
+	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 10:58:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.62.57.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773744060; cv=none; b=LHT1OcOQ7gtpk2Lr7fPjg5GYvN4j3q0wEO40jApYzJ07dTI/pof0nReF9vuzbbVIVJAvORsdF43itVoUFzYoDA1ahx0NKyePXnbVEsf0wMzgb4aur0yLtOnuhzJ/fOy0CdH0t3DOs1BBK+fZnoWRsY0wUWBuNMAqkt2D6dH/NiY=
+	t=1773745107; cv=none; b=QXcVXZtQARnnHSu7BxvOaHxWSiN3PuGdihUC0Wtc4SHso6UM0c2OoPX5FwUt+VgPj50yvespKn4xkgLnsZZuCa2sv0E9tmd5gVGlhk8BhBHNProAMqP0dGVOD6sCQHplvHbV6R+ZlS1IPBaOpwwcMAyyZp71hNJnAVctQY5g0G4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773744060; c=relaxed/simple;
-	bh=d4KD+yU5s7d45rA5ExgcEGlswfbkgijWZZsbyiom9Ug=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=fZJFAbyqYbXz7Z7RhQrM5R75kN/zX9iJDj0kYyf8Nzm5yROPo4LaFjfb3F87oP03Pq5hKA+41rrQsd9NiTUuo1pGXl4warSwg2oZrCUXI2Mdcx7Ki2aLifth040mhwxhdJqDfiVLCNZlfsx4+EE0/vYc4yig2CXKVexwcIdjXBY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=G8J/BKoo; arc=none smtp.client-ip=209.85.221.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-43b4f48c47cso285858f8f.0
-        for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 03:40:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773744057; x=1774348857; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:organization
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=d4KD+yU5s7d45rA5ExgcEGlswfbkgijWZZsbyiom9Ug=;
-        b=G8J/BKoo9f+EWdZfUu9gMkvuFwkHmjOw4+tOVbNC62eQlglZjwB8z3xjB6TcMoxYti
-         u5uE0iTBBCGjfl1/jitKphMYSXRQufoeQvhmU89sfr8dX3+i4XwKXbV8ae+86ZW+2Kkx
-         HEDa2AJ1AFamz7an2IN301dUSCgyjIpNsu4ALMxcdB8ammNV4uAQ/WeZT0Za4Jv1yxRF
-         SCURgTaccLhh6sh+5bniMYOT8xTY0lFjE76sBXtxs+YnJ/eo6JuKX+nHGP/HHnnI1CMd
-         Rv/Qjss3vnNDG9QYUJB9/N1I0e3qShMBqbtiIupEIg2YSQZrDYPJvqNIqaITMP9bbiqi
-         f4BA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773744057; x=1774348857;
-        h=mime-version:user-agent:content-transfer-encoding:organization
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=d4KD+yU5s7d45rA5ExgcEGlswfbkgijWZZsbyiom9Ug=;
-        b=sanCYFMxeLluGh7wI+HG7b0ruM17ogAymtPnkCN5DNdHqN2OanHVYgqMk3n3IaoVEu
-         ZedGVi27KNeg9juL0p+QDWe8nCca5Oi6LJP6Gwk029pmMI0D9WxvwVgNBkztNcBOZ5JE
-         52Lz/u05ta2quCWLDmM7si3tugYlYJeJZJI17QM3K9xYLqbJdsoHx6u3mB2TzVHZ+PUv
-         Ozsr7s359jsreGwBK2b57LgBO5yBW7m3zONmqALKq8Q4nAlHll4uuGUmuLJM2jHmIUP5
-         Z4t2BJQ3QsrCuEyjgo894bjJRiuZr2o4XmlJAtBhRTf7a5eW8ZTJLxgDI//qww/qQVpG
-         wCng==
-X-Forwarded-Encrypted: i=1; AJvYcCWq2qA4nPZGLJ8g88GYpEGIUcVNQTwFL/0lolH+FL4rg7UO0kTdFwcUUWTa6q76auXzP3A4qCfzmYA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzxidMaH7PkCY4i3gIU+HHb9EvVozVYGvK9NofkBeL4PMJ7762H
-	kfpdifdSDHzPCm2OiZRenVnh4mjVjgn76nBo7KsBqDA2+FFNfmNbB7OfzHAeab+VemU=
-X-Gm-Gg: ATEYQzw4NNkDQzQ/PrYCXL6I8/F1l8bNcJiA8TjLIWL8e7ci3QczQz4Gdca0l+iKKre
-	9CP8za48CSDOnFtFcmX9VvWEVMrXqoOG4xsslJ8DD4mxjXC1RlCo2yXH3E6+6rbj9Gds7y2LBRY
-	rRS/gbFscKsDvHwPslehVKvgk/wuPk8gRdwE+e3cTaQI63SYp1B0FAnnkF3nkIE2UN0UAjF1pla
-	9C53lU8RcHOicVPfeecfpMAOl3ktHZHWLUQUpTONoho8cnpmeVOGJX3ORA7lMUs6WDTP5vglya0
-	2w0jDOWqMHBykExeIU9O7KZ99J6nCTBSCBJlo4TjwZ2tqTt1IuuYHYqCdcSHqT5Q2ywlzfBKhIC
-	R17XC471wZBWE3QKg6Dq/4k5cAZI2aSAx6t724CUd0uf/EWYFszmXAVrSWpOqz8TnTUlgvKWKCm
-	AHKkEw5Qk=
-X-Received: by 2002:a05:6000:2283:b0:436:3707:2bf0 with SMTP id ffacd0b85a97d-43a04db7556mr30851486f8f.35.1773744057079;
-        Tue, 17 Mar 2026 03:40:57 -0700 (PDT)
-Received: from [10.128.148.212] ([151.37.253.94])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b41dd93c0sm17716128f8f.10.2026.03.17.03.40.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Mar 2026 03:40:56 -0700 (PDT)
-Message-ID: <1d268ffefd2a035331fd4ab7a920559fdf11cdda.camel@baylibre.com>
-Subject: Re: [PATCH v7 4/6] iio: ABI: Add support for floating-point numbers
- in buffer scan elements
-From: Francesco Lavra <flavra@baylibre.com>
-To: Jonathan Cameron <jic23@kernel.org>, Andy Shevchenko
-	 <andriy.shevchenko@intel.com>
-Cc: David Lechner <dlechner@baylibre.com>, Andy Shevchenko
- <andy.shevchenko@gmail.com>, Nuno =?ISO-8859-1?Q?S=E1?=
- <nuno.sa@analog.com>,  Andy Shevchenko <andy@kernel.org>, Jonathan Corbet
- <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- linux-iio@vger.kernel.org,  linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-Date: Tue, 17 Mar 2026 11:40:54 +0100
-In-Reply-To: <20260307125150.3bc60a45@jic23-huawei>
-References: <20260304080519.2844101-1-flavra@baylibre.com>
-	 <20260304080658.2844434-1-flavra@baylibre.com>
-	 <70f25902-5c79-46f9-8c67-99633b22b5ac@baylibre.com>
-	 <098886563f5fdcde837989d0556ed9a2d8d3203b.camel@baylibre.com>
-	 <CAHp75Vdni=OgHiDi8G5s6CgBFZZuypOyJSo5DFjaKYFkLGPqkQ@mail.gmail.com>
-	 <dd6d1436-d509-4233-ba1f-5a3f870f35fb@baylibre.com>
-	 <aarED5TAWg2qFtxi@ashevche-desk.local>
-	 <20260307125150.3bc60a45@jic23-huawei>
-Organization: BayLibre
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+	s=arc-20240116; t=1773745107; c=relaxed/simple;
+	bh=wxu9NXycGeqsWRgnugSKxkqAYx0rJ7Gws/1l22Be5RA=;
+	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version; b=VNwBnD5IMU2aLrCoCXe9PxJhuBUDjz0oGXxRBHuKb1Iy7GtshLWoMtXiIoONoXXI/Tja2+NqKEwkIMCTkS8o8mRfvTviBvj6XN2hjNejrLaQw6YaytsqiMu/6tFeXwCxJpEkbvwFEJE+QRYkcafKACdiX8q17/K/qb8DfKj8Qqw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=u1W1gMj2; arc=none smtp.client-ip=162.62.57.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1773745094; bh=RkF9UY20o04C9kFbg6GK29csodDBBDFZU3tduWk9JPk=;
+	h=From:To:Cc:Subject:Date;
+	b=u1W1gMj2E+5k0rXOFllEaC3vYAaenJolEscMp8PwjObc1iAy24rdmPTtgHGh/7qtO
+	 dr23pNb36Nf+ZtgjTbcxlk9NUgGWpHzWVEcBd96EYbmDiLuXecNy4Bc9X13PRUT6o9
+	 MeowjQ7Xl6gO0Viz+Dxd7B3OVjrsQJXSiHBJqUDQ=
+Received: from AA2410024078AAC.china.huawei.com ([124.70.231.39])
+	by newxmesmtplogicsvrszb51-0.qq.com (NewEsmtp) with SMTP
+	id E8AAC643; Tue, 17 Mar 2026 18:58:10 +0800
+X-QQ-mid: xmsmtpt1773745090tdjwjplu4
+Message-ID: <tencent_FB5B7DCFFB10BCDE325397D1202226779D09@qq.com>
+X-QQ-XMAILINFO: MRMtjO3A6C9X46cnDKL79vmPRk0yfNMGbkHMFWctGM2j22amP+3PjC9TbJA3Ze
+	 tvLZAF/nW5m28yux+3gxu+pgaKu3u3KOygrTBsFwTz3Qb+oOOcDJZVFXaQGQG0IcLZve6ZOYUOKx
+	 Ksv7+DqNvAhRC1AFnXHisDw3wrDo2X9fQDTZOMqX/RUJq6hSa8AB1E+8pJoxnmgMCOV0iaW6Iep0
+	 wtINi2aSjc/7/uL8Ol4P2WM8ZvpzvI9vJcRpvdljyzWXccoKOmjmQhbLVoBb51nqiw9xd3NfF9Ej
+	 4L9k8Q78R88M+dCmnGBhDLdXglTMr1kjdNRign4XPyXZv/SpgWadzvBjlYFwSpTLS33NSVn9w+8P
+	 TBOTf4O2UUwAiG2t7XbEzB/q7hjVjJXmm5SIOGgBQOy75hk8YSKGlvmd//M8bR9AF6RAAHKDKS5t
+	 7u4S6AJv4Y1+u6GU+2Thi9dkSyPfuR8BZjEBUPHaJOB/BtAd+HqiIjYm3TusxTEHm7IvCtiplUGA
+	 dtmA6FcqkN/ZZDFNzFxlXd1hkFILwMHON44NKDLjbObxCAyw913IWsXHOIsEePMfVB5gykvK/5JX
+	 LZyb3/oxTlresCpsvKLmaPl+5Bd6QicoI10d6pntJ6g3j6PXaH4bxDkkWu3FzcfU4qRrqY78mtyI
+	 TH+vyjA0Fylg55XyZocFuATsSvi0jdtUXezCrmRKv5Uv9UOdKwJOIbkOnQXsqcQpcF+PmLMdhozB
+	 nt9kEjYma9g71saSsSQnDIxO4+Mn+UwsZDhCdYPoCgPZ1/pa7TIsEI6Y/JV+1acIDOb/HX26DhMV
+	 FviWrMxCX7vMYMwHsTohUbpcC1OsfL5YMFNUkgotz3SyEgSA615xrL1VFQ2JkoAgnZxbJ6aH0GBz
+	 GWP/Bm+kug2O+jotAbNvTTl9pwqSdsvY2izltHGp6aJt9jptzV+tLS0KuccQaCPbeW90X0A2rcVz
+	 K6ZnpO63eFdbwnjbBWmYv1zrFukGx94FFCk0AbgqFFtuDphXKV5wstz2TH+6JJTfLPvbAeqff1TN
+	 FwbpE/mg==
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+From: h3288824963 <3288824963@qq.com>
+To: linux-doc@vger.kernel.org
+Cc: pmladek@suse.com,
+	john.ogness@linutronix.de,
+	senozhatsky@chromium.org,
+	rostedt@goodmis.org,
+	qujingling@huawei.com,
+	zhangjiaji1@huawei.com,
+	xushuangxing@huawei.com,
+	hujinfei3@huawei.com,
+	h3288824963 <3288824963@qq.com>
+Subject: [PATCH v2] Documentation: printk: Add section about avoiding lockups
+Date: Tue, 17 Mar 2026 18:57:11 +0800
+X-OQ-MSGID: <20260317105712.879-1-3288824963@qq.com>
+X-Mailer: git-send-email 2.53.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[baylibre-com.20230601.gappssmtp.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79693-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[baylibre.com,gmail.com,analog.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org];
+	FREEMAIL_CC(0.00)[suse.com,linutronix.de,chromium.org,goodmis.org,huawei.com,qq.com];
+	TAGGED_FROM(0.00)[bounces-79695-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[baylibre.com];
-	HAS_ORG_HEADER(0.00)[];
-	DKIM_TRACE(0.00)[baylibre-com.20230601.gappssmtp.com:+];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[qq.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FREEMAIL_FROM(0.00)[qq.com];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[flavra@baylibre.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[3288824963@qq.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,baylibre.com:email,baylibre.com:mid,baylibre-com.20230601.gappssmtp.com:dkim]
-X-Rspamd-Queue-Id: 254252A8272
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qq.com:dkim,qq.com:email,qq.com:mid]
+X-Rspamd-Queue-Id: B98352A862D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat, 2026-03-07 at 12:51 +0000, Jonathan Cameron wrote:
-> On Fri, 6 Mar 2026 14:09:51 +0200
-> Andy Shevchenko <andriy.shevchenko@intel.com> wrote:
->=20
-> > On Thu, Mar 05, 2026 at 08:37:48AM -0600, David Lechner wrote:
-> > > On 3/5/26 3:23 AM, Andy Shevchenko wrote:=C2=A0=20
-> > > > On Thu, Mar 5, 2026 at 11:09=E2=80=AFAM Francesco Lavra
-> > > > <flavra@baylibre.com> wrote:=C2=A0=20
-> > > > > On Wed, 2026-03-04 at 16:45 -0600, David Lechner wrote:=C2=A0=20
-> > > > > > On 3/4/26 2:06 AM, Francesco Lavra wrote:=C2=A0=20
-> > > > > > > In the data storage description of a scan element, the first
-> > > > > > > character
-> > > > > > > after the colon can have the values 's' and 'u' to specify
-> > > > > > > signed and
-> > > > > > > unsigned integers, respectively.
-> > > > > > > Add 'f' as an allowed value to specify floating-point numbers
-> > > > > > > formatted
-> > > > > > > according to the IEEE 754 standard.=C2=A0=20
-> >=20
-> > ...
-> >=20
-> > > > > > > -=C2=A0 Format is [be|le]:[s|u]bits/storagebits[Xrepeat][>>sh=
-ift]
-> > > > > > > .
-> > > > > > > +=C2=A0 Format is
-> > > > > > > [be|le]:[f|s|u]bits/storagebits[Xrepeat][>>shift] .
-> > > > > > >=20
-> > > > > > > =C2=A0=C2=A0 * *be* or *le*, specifies big or little endian.
-> > > > > > > +=C2=A0 * *f*, specifies if floating-point.
-> > > > > > > =C2=A0=C2=A0 * *s* or *u*, specifies if signed (2's complemen=
-t) or
-> > > > > > > unsigned.=C2=A0=20
-> > > > > >=20
-> > > > > > I would keep all of the format options on one bullet point.=C2=
-=A0=20
-> > > > >=20
-> > > > > That's what I did initially, but Andy suggested doing differently
-> > > > > [1].=C2=A0=20
-> > > >=20
-> > > > And still I think it's better to not mix them. The floating in the
-> > > > same sentence is confusing (along with 2's complement mention and
-> > > > sign).=C2=A0=20
-> > >=20
-> > > Then I would split up all 3. It is strange to mix some and not
-> > > all.=C2=A0=20
-> >=20
-> > I don't find it 'strange'. The integer are grouped together, floats do
-> > not
-> > belong to that group.
-> Maybe two paragaraphs in one bullet point?
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0* *f*, specifies if float=
-ing-point.
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *s* or *u*, specif=
-ies if signed (2's complement) or unsigned.=C2=A0=20
->=20
-> Though then we'll definitely need to check it didn't break the formatting
-> in the docs generated from these files.
+Add a section 'Avoiding lockups from excessive printk() use' to
+printk-basics.rst, explaining the risk of calling printk() in hot paths
+with legacy consoles and suggesting alternatives.
 
-This does break the formatting in the HTML docs, where the two paragraphs
-end up in the same line.
+The section covers:
+- Rate-limited and one-time printing variants
+- Log level filtering
+- printk_deferred() for legacy consoles
+- Porting to nbcon API (preferred solution)
+- Using tracepoints for permanent debugging
 
-> For me any of the above are fine.
+This documentation is relevant only for legacy console drivers and
+!PREEMPT_RT kernels.
 
-I will keep it as is.
+Suggested-by: Petr Mladek <pmladek@suse.com>
+Suggested-by: John Ogness <john.ogness@linutronix.de>
+Signed-off-by: h3288824963 <3288824963@qq.com>
+---
+ Documentation/core-api/printk-basics.rst | 36 ++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-> > ...
-> >=20
-> > > > > > > -is [be|le]:[s|u]bits/storagebits[Xrepeat][>>shift], where:
-> > > > > > > +is [be|le]:[f|s|u]bits/storagebits[Xrepeat][>>shift], where:
-> > > > > > >=20
-> > > > > > > =C2=A0- **be** or **le** specifies big or little-endian.
-> > > > > > > +- **f** specifies if floating-point.
-> > > > > > > =C2=A0- **s** or **u** specifies if signed (2's complement) o=
-r
-> > > > > > > unsigned.=C2=A0=20
-> > > > > >=20
-> > > > > > same here=C2=A0=20
-> > > > >=20
-> > > > > [1]
-> > > > > https://lore.kernel.org/linux-iio/aZ7dCdLs5xcJ4UGW@smile.fi.intel=
-.com/
-> > > > > =C2=A0
-> > > >=20
-> > > > Same here.
+diff --git a/Documentation/core-api/printk-basics.rst b/Documentation/core-api/printk-basics.rst
+index 2dde24ca7..48eaff0ce 100644
+--- a/Documentation/core-api/printk-basics.rst
++++ b/Documentation/core-api/printk-basics.rst
+@@ -103,6 +103,42 @@ For debugging purposes there are also two conditionally-compiled macros:
+ pr_debug() and pr_devel(), which are compiled-out unless ``DEBUG`` (or
+ also ``CONFIG_DYNAMIC_DEBUG`` in the case of pr_debug()) is defined.
+ 
++Avoiding lockups from excessive printk() use
++============================================
++
++.. note::
++
++   This section is relevant only for legacy console drivers (those not
++   using the nbcon API) and !PREEMPT_RT kernels. Once all console drivers
++   are updated to nbcon, this documentation can be removed.
++
++Using ``printk()`` in hot paths (such as interrupt handlers, timer
++callbacks, or high-frequency network receive routines) with legacy
++consoles (e.g., ``console=ttyS0``) may cause lockups. Legacy consoles
++synchronously acquire ``console_sem`` and block while flushing messages,
++potentially disabling interrupts long enough to trigger hard or soft
++lockup detectors.
++
++To avoid this:
++
++- Use rate-limited variants (e.g., ``pr_*_ratelimited()``) or one-time
++  macros (e.g., ``pr_*_once()``) to reduce message frequency.
++- Assign lower log levels (e.g., ``KERN_DEBUG``) to non-essential messages
++  and filter console output via ``console_loglevel``.
++- Use ``printk_deferred()`` to log messages immediately to the ringbuffer
++  and defer console printing. This is a workaround for legacy consoles.
++- Port legacy console drivers to the non-blocking ``nbcon`` API (indicated
++  by ``CON_NBCON``). This is the preferred solution, as nbcon consoles
++  offload message printing to a dedicated kernel thread.
++
++For temporary debugging, ``trace_printk()`` can be used, but it must not
++appear in mainline code. See ``Documentation/trace/debugging.rst`` for
++more information.
++
++If more permanent output is needed in a hot path, trace events can be used.
++See ``Documentation/trace/events.rst`` and
++``samples/trace_events/trace-events-sample.[ch]``.
++
+ 
+ Function reference
+ ==================
+-- 
+2.53.0.windows.1
 
-Same here.
 
