@@ -1,132 +1,138 @@
-Return-Path: <linux-doc+bounces-79827-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79828-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0BbDKIGduWn3LAIAu9opvQ
-	(envelope-from <linux-doc+bounces-79827-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:29:21 +0100
+	id 6GxhIV+fuWk1LQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79828-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:37:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1494D2B0F2F
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:29:20 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EE4792B0FF4
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:37:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 94BC9305185A
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:18:31 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DB7BE3048772
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:37:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 21FB037C0F8;
-	Tue, 17 Mar 2026 18:18:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC9F53C871D;
+	Tue, 17 Mar 2026 18:37:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Tt4yoTbb"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="HU23TiBs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68A2F37F8D3
-	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 18:18:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90E5B2DCF61;
+	Tue, 17 Mar 2026 18:37:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773771511; cv=none; b=pGYyrQsD8envw/uEzNxGwsps/uB1zn4Y6e7CETch3z42j0FJA3eTM1Xu3AlvKYQw1diD32RKYZHdlxZG0NcewGCos5SqQzm1cLI00LowIxHeRRsm1a1BDo+o8So+OP3i3O7o2jD9H6YJ9legycDCV3gYo3cdCLc8Qik3UOY1CKU=
+	t=1773772636; cv=none; b=MoOakyboGzSCSieAuhCdl0q3ON8WhVKp1mPyPKQKBegYnzmcoqotqA/uNrTuOu5k4I/vFMPmyORFcEtSIsS2Q0pgmrZ1QRegMP4JeXe/C7GsE/G/QvkO2dJz8oOULAfby0L6/5YfWQhvh6pUlq2TahEfwBdd69lfCJ35v2UUf40=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773771511; c=relaxed/simple;
-	bh=fg32yGe2mdohAI69CbTjZquxppAHQFK69oSiE+SgENw=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=jja+KHZZGESmM55VJekyZnQlhUPM7LtKbQj9x5g9041Slbpp+joWPlAaji9A64RHFeTTTfbEeW53bUbDUer5qkLgH7syk6NeknXMgaSFSReWlnnOMLN2Q/5DzGr7t7s/ORWOlZdoWp74pSJx4LnAZtXXtf7PT6+a97EQoSaTPO0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Tt4yoTbb; arc=none smtp.client-ip=198.175.65.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1773771508; x=1805307508;
-  h=date:from:to:cc:subject:message-id;
-  bh=fg32yGe2mdohAI69CbTjZquxppAHQFK69oSiE+SgENw=;
-  b=Tt4yoTbbnL1cSAxs+7oBrklwJWFks375Tm5/GRZQfZ8jQQkpwt0wXSbO
-   xVRG1ojdyTlBJ8YjzCmvMLBlx6s1tr5aKuqwa58yp0ijy1f2/zvLSSjjV
-   Jz6n30lYy0t6cjrxPhrGx0BW2GzQDGULCYxwXsMBhlu0eDnNyZXtW+pll
-   FjIHgApiG7GGF7lj5B4bXP/vSebbiDfyeIBj1hwCd8RZC3zLi2Nbo/PM5
-   gibQQ8xHbKiXpWHP8DVznnB8HE7JTIPQfg/PEtL1OAgK/ldYgDegmDTRK
-   9dX0dHCM0Lx/SOGNdSADfOoTByxEI5Zv65GLgWqDXLDTey1RAEQmtnsgo
-   A==;
-X-CSE-ConnectionGUID: KfNcpH+xSJqoU5I/WJtafw==
-X-CSE-MsgGUID: 1AAMQABMRiCcQb2K7OeDyA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11732"; a="85893687"
-X-IronPort-AV: E=Sophos;i="6.23,126,1770624000"; 
-   d="scan'208";a="85893687"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Mar 2026 11:18:28 -0700
-X-CSE-ConnectionGUID: PWMhoSJET6WLe8swr9cTwg==
-X-CSE-MsgGUID: QqcAdWy/Q0mPaU7ddZ7ZvQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,126,1770624000"; 
-   d="scan'208";a="246977039"
-Received: from lkp-server01.sh.intel.com (HELO 63737dd503cb) ([10.239.97.150])
-  by fmviesa001.fm.intel.com with ESMTP; 17 Mar 2026 11:18:26 -0700
-Received: from kbuild by 63737dd503cb with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1w2Yzn-000000001mh-3eMI;
-	Tue, 17 Mar 2026 18:18:23 +0000
-Date: Wed, 18 Mar 2026 02:18:06 +0800
-From: kernel test robot <lkp@intel.com>
-To: Sean Christopherson <seanjc@google.com>
-Cc: oe-kbuild-all@lists.linux.dev,
- Dan Williams <dan.j.williams@intel.com>, Chao Gao <chao.gao@intel.com>,
- linux-doc@vger.kernel.org
-Subject: [linux-next:master 2734/6828] Warning:
- arch/x86/virt/vmx/tdx/tdx.c:141 This comment starts with '/**', but isn't a
- kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
-Message-ID: <202603180202.myb6Tv5N-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	s=arc-20240116; t=1773772636; c=relaxed/simple;
+	bh=jjcYOoT+KqyE0+318IMagSsAV+L00HD2nLksUrDJOkc=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=aGsvLc1liy/w9qwhzPr2mPLVCzogRpqmb3NpyK4WNKz88s+Cvd+cHpUJ2DGXtC5u1XXTsTRu5i+hQDEU06Nxie+vSoZKy31CE1cYeHNH1RBcl0axLvHf6x/qW3ElAtesiECKxTLstPX+76QJ8LasSdVO0jricilONlUJMownghQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=HU23TiBs; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B2A7540C7C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1773772634; bh=Avh8bhKuzqGLIIUjaifKg+vcNZMYJQrDENcH3wShTl0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=HU23TiBswDJw7ocrB3Ctri2W3DFMwL/2dNxFiwJ4fzzBd8CStXvB3XVumbVzMZrvZ
+	 dj7BNgXi1gFXZmCIoIB6JL19enkQrRabKTa502NoNfZt+LccNv4m078xjT3IJ/8XL8
+	 f8nEWjAiXLobDaMTGJny6nnvjGDM08J7647WLf+TgxNf466qqIwuoTP2AfT7RZVeix
+	 PavOAT/0V+8f+D+Lsg+xMGF9SB1yxzkS6D9kikgdjau4o3cGYVOkRJa0qdanItIFmO
+	 PpsCB7zvlWBRwFRhLuVv27z6PsgxW3Eu4j/DuNEAUcGxMGNwa2cbZ2C+iS/UzkDKNY
+	 TSFPhLFDi6//g==
+Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net [71.229.227.126])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id B2A7540C7C;
+	Tue, 17 Mar 2026 18:37:14 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Sasha Levin <sashal@kernel.org>, Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>
+Cc: linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ workflows@vger.kernel.org, tools@kernel.org, x86@kernel.org, Thomas
+ Gleixner <tglx@kernel.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ Dmitry Vyukov <dvyukov@google.com>, Randy Dunlap <rdunlap@infradead.org>,
+ Cyril Hrubis <chrubis@suse.cz>, Kees Cook <kees@kernel.org>, Jake Edge
+ <jake@lwn.net>, David Laight <david.laight.linux@gmail.com>, Askar Safin
+ <safinaskar@zohomail.com>, Gabriele Paoloni <gpaoloni@redhat.com>, Mauro
+ Carvalho Chehab <mchehab@kernel.org>, Christian Brauner
+ <brauner@kernel.org>, Alexander Viro <viro@zeniv.linux.org.uk>, Andrew
+ Morton <akpm@linux-foundation.org>, Masahiro Yamada
+ <masahiroy@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, Ingo
+ Molnar <mingo@redhat.com>, Arnd Bergmann <arnd@arndb.de>
+Subject: Re: [PATCH 5/9] kernel/api: add API specification for sys_open
+In-Reply-To: <abQ-iIylzpuqlRv3@laps>
+References: <20260313150928.2637368-1-sashal@kernel.org>
+ <20260313150928.2637368-6-sashal@kernel.org>
+ <2026031343-raft-panhandle-0a21@gregkh> <abQ-iIylzpuqlRv3@laps>
+Date: Tue, 17 Mar 2026 12:37:13 -0600
+Message-ID: <878qbq9uau.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-X-Spamd-Result: default: False [-0.66 / 15.00];
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79828-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,google.com,infradead.org,suse.cz,lwn.net,gmail.com,zohomail.com,redhat.com,zeniv.linux.org.uk,linux-foundation.org,linuxfoundation.org,arndb.de];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79827-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:dkim,intel.com:email,intel.com:mid,01.org:url]
-X-Rspamd-Queue-Id: 1494D2B0F2F
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_HAS_DN(0.00)[]
+X-Rspamd-Queue-Id: EE4792B0FF4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-head:   8e5a478b6d6a5bb0a3d52147862b15e4d826af19
-commit: 165e77353831a85caa0444d16f29bd6b111dd2c5 [2734/6828] KVM: x86/tdx: Do VMXON and TDX-Module initialization during subsys init
-config: x86_64-randconfig-011-20260317 (https://download.01.org/0day-ci/archive/20260318/202603180202.myb6Tv5N-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260318/202603180202.myb6Tv5N-lkp@intel.com/reproduce)
+Sasha Levin <sashal@kernel.org> writes:
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202603180202.myb6Tv5N-lkp@intel.com/
+> On Fri, Mar 13, 2026 at 04:33:57PM +0100, Greg Kroah-Hartman wrote:
+>>On Fri, Mar 13, 2026 at 11:09:15AM -0400, Sasha Levin wrote:
 
-All warnings (new ones prefixed by >>):
+>>> + * since-version: 1.0
+>>
+>>I think since older versions :)
+>
+> Right. I guess that in my mind 1.0 was the first official "release". I'll
+> update it to 0.01.
 
->> Warning: arch/x86/virt/vmx/tdx/tdx.c:141 This comment starts with '/**', but isn't a kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
-    * Enable VMXON and then do one-time TDX module per-cpu initialization SEAMCALL
+That kind of raises the question of just what since-version means.  The
+version-0.01 (or 1.0) version of open() surely didn't do everything
+described in this specification.  So it's saying that some version of
+the system call has existed since then?
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Thanks,
+
+jon
 
