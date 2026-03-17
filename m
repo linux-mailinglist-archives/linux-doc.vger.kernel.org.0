@@ -1,143 +1,122 @@
-Return-Path: <linux-doc+bounces-79799-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79800-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cLGBAqaMuWnkJwIAu9opvQ
-	(envelope-from <linux-doc+bounces-79799-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:17:26 +0100
+	id mNnCOYSSuWk5KQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79800-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:42:28 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40C0B2AF419
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:17:25 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 51C4F2B004A
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:42:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D758D300D9E6
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 17:17:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BE94432BBBF5
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 17:17:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59A4F2459DC;
-	Tue, 17 Mar 2026 17:17:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 081E52DF701;
+	Tue, 17 Mar 2026 17:17:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="fW3gcGAV"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="FHzC+KyJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C0122C11CD;
-	Tue, 17 Mar 2026 17:17:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4916225A38;
+	Tue, 17 Mar 2026 17:17:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773767829; cv=none; b=OQRiaorFmpUNsCdRFW8gcySBXJIup5SmeN8lcUBJs7qmmPRW/3kqOZzgCdsGlM3+SPvf8aOgflr90hifijoqFY0xl8aHmQult3sjA4pLDjJrFPVE/gDo27L7yQwIIrn3ZXNIn/r1wXA3jXcy2tRlwmyR+7SecWWoYjfiijlZ9V4=
+	t=1773767840; cv=none; b=C24RzhKoqk1v+2g8v3h9Rk1oheTz22efLBvLWHcwt6gWeYTHlDJYR1MU2jZ6yUeU+uENFqslbsXiCDlgQ0fGrBbJw4TqRZjaT5TRkllTfDba2szPluSBfW1DvFAbh6O6wkB1k76Ws9b3MPejUokWJCbeoEdwh0wz2q8c5U5N1Gs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773767829; c=relaxed/simple;
-	bh=pTeY+fLcN95htFrNGBHt7vym3xXoDgwY6cA1oE5cXLo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ACTObsNWr55nXzM3c8US85kz6XMKTSh7d3Ui9LVkzBsivJbMtbDaK5sQBX/mn81iM70mX4rIS0vwPkpTIo50V0zWlzVjYgGVGHce3iI1Lz2QdmUdGIVP2nPWoYt5k/pfTNljHWYt0p6iwHq6AgPTWVuySPJLfYl7oM+WTNGW6sg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=fW3gcGAV; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=v7UGPDzTUVntWZ7B9duUilqk99yTEBA4ZZT8dgC32yk=; b=fW3gcGAVDEtTMh6YEqK00To3LE
-	E4vX2+ido/HbsOQoVJFpyOQG8MkuNFk/E6SWu3xt9EJNv1VepyJPxAoDpYU+4gwA1lqENuoyxQQUU
-	BxZlVyhx5jFqLEXJ4Blo1OEIeYj2mqnPp+tV4oOx8nM/SJ2OjN4XpA50/D1CYXVMAiqxcwljSrxtj
-	aII+ZZGMUiAwqiO5CvsUoVN7Sfu+W2aZAZ1fGEGZt1XszUbplnT20qOWZO8cCD6zxGWS4ip6rIbs/
-	TWmv/FFAmxU0V1/pmR8qpoj7Yta4qbnAGkCr3hDqeg8YIH9UdboGs6mLJ1e+DN2Biah/oGmGRLT8U
-	XYWItKbg==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1w2Y2R-00000006urx-0KUn;
-	Tue, 17 Mar 2026 17:17:03 +0000
-Message-ID: <68072e04-49e6-4418-a465-6a70dbb01f13@infradead.org>
-Date: Tue, 17 Mar 2026 10:16:59 -0700
+	s=arc-20240116; t=1773767840; c=relaxed/simple;
+	bh=XhSjXodKL8Rt/Y67hCKslvvCpl7oVhQShD0o7Pvcs6k=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=uApy1CPHOLrZ515HxOA1b89z/uLf8u7iYn2Sama9hWW8leC7cK/e1zWCs1lBY7Gty6efK4MGLtxjmbn/KHVnQyR7qEZq/sCxYyUG20sYUsfQImGxHhR254tHR3N2nRaYTJs3WyyivmHtDGIrOg83sXUNX3ViQb+iiAruFzUzBpU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=FHzC+KyJ; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 3DF9A411D3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1773767839; bh=XhSjXodKL8Rt/Y67hCKslvvCpl7oVhQShD0o7Pvcs6k=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=FHzC+KyJww9n9K3dOwGFMr8Lp8aJM6FHAJXQMgI3cKiLbu9hZ8uNnvgThGuNTGWF1
+	 wmf6vvVafAlxMDplcRgPFok5wx6N1zlNdKfajht6nd8XYJn3gnN5lY8wu1sI8+U0gt
+	 o7LWqUEaXBy0YpCmlt/gG8TJ+eYHFJ2EsA1dE6wwgXLIpPvLZQ/By6yef8rMNdqQv1
+	 pQeg6ZPabk/vr6jHl+ObduuveNeGFRm+EkdoFAH5GC6b3tL2cpp70q0Pe2pbsuSDUz
+	 D8xjae+mRn6HecwUupnl2ZZjMtvFuixWc2mnPVYmA/S6F1WCWb72kq59+Zir5Dup8L
+	 6FMj92vuJgqNw==
+Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net [71.229.227.126])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 3DF9A411D3;
+	Tue, 17 Mar 2026 17:17:19 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Thorsten Leemhuis <linux@leemhuis.info>
+Cc: linux-doc@vger.kernel.org, regressions@lists.linux.dev,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 0/5] docs: reporting-issues: tweak a few areas and
+ rewrite the ending
+In-Reply-To: <cover.1773750701.git.linux@leemhuis.info>
+References: <cover.1773750701.git.linux@leemhuis.info>
+Date: Tue, 17 Mar 2026 11:17:18 -0600
+Message-ID: <87pl529y01.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH mm-unstable v15 05/13] mm/khugepaged: generalize
- collapse_huge_page for mTHP collapse
-To: "Lorenzo Stoakes (Oracle)" <ljs@kernel.org>,
- Nico Pache <npache@redhat.com>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, aarcange@redhat.com,
- akpm@linux-foundation.org, anshuman.khandual@arm.com, apopple@nvidia.com,
- baohua@kernel.org, baolin.wang@linux.alibaba.com, byungchul@sk.com,
- catalin.marinas@arm.com, cl@gentwo.org, corbet@lwn.net,
- dave.hansen@linux.intel.com, david@kernel.org, dev.jain@arm.com,
- gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, jack@suse.cz,
- jackmanb@google.com, jannh@google.com, jglisse@google.com,
- joshua.hahnjy@gmail.com, kas@kernel.org, lance.yang@linux.dev,
- Liam.Howlett@oracle.com, lorenzo.stoakes@oracle.com,
- mathieu.desnoyers@efficios.com, matthew.brost@intel.com,
- mhiramat@kernel.org, mhocko@suse.com, peterx@redhat.com, pfalcato@suse.de,
- rakie.kim@sk.com, raquini@redhat.com, richard.weiyang@gmail.com,
- rientjes@google.com, rostedt@goodmis.org, rppt@kernel.org,
- ryan.roberts@arm.com, shivankg@amd.com, sunnanyong@huawei.com,
- surenb@google.com, thomas.hellstrom@linux.intel.com, tiwai@suse.de,
- usamaarif642@gmail.com, vbabka@suse.cz, vishal.moola@gmail.com,
- wangkefeng.wang@huawei.com, will@kernel.org, willy@infradead.org,
- yang@os.amperecomputing.com, ying.huang@linux.alibaba.com, ziy@nvidia.com,
- zokeefe@google.com
-References: <20260226031741.230674-1-npache@redhat.com>
- <20260226032427.233282-1-npache@redhat.com>
- <9f0b8790-eace-4caa-a0c0-45f66285887f@lucifer.local>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <9f0b8790-eace-4caa-a0c0-45f66285887f@lucifer.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,oracle.com,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,infradead.org,os.amperecomputing.com];
-	TAGGED_FROM(0.00)[bounces-79799-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79800-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,infradead.org:dkim,infradead.org:mid]
-X-Rspamd-Queue-Id: 40C0B2AF419
+	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:dkim]
+X-Rspamd-Queue-Id: 51C4F2B004A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+Thorsten Leemhuis <linux@leemhuis.info> writes:
 
+> This patch-set tweaks a few parts in the fringes of our text on bug
+> reporting while replacing two sections at the end with a new text as
+> proper appendix that hopefully better fits the purpose and covers more
+> aspects.
+>
+> This is the first versions of this patch-set, but it starts as v2, as it
+> contains three patches and a few bits that were part of an earlier and
+> bigger patch-set. This incorporates review feedback given there. The
+> last patch in this series is mostly new, but includes a few bits from
+> patch 4 and 5 of the earlier series.
 
-On 3/17/26 9:51 AM, Lorenzo Stoakes (Oracle) wrote:
-> On Wed, Feb 25, 2026 at 08:24:27PM -0700, Nico Pache wrote:
->> Pass an order and offset to collapse_huge_page to support collapsing anon
->> memory to arbitrary orders within a PMD. order indicates what mTHP size we
->> are attempting to collapse to, and offset indicates were in the PMD to
->> start the collapse attempt.
->>
->> For non-PMD collapse we must leave the anon VMA write locked until after
->> we collapse the mTHP-- in the PMD case all the pages are isolated, but in
-> The '--' seems weird here 🙂 maybe meant to be ' - '?
+I don't see anything to complain about here ... if nobody screams, I'll
+apply them in a few days or so.
 
-"--" is common typewriter(!) style for "dash".
-Single "-" is a hyphen.
+Thanks,
 
--- 
-~Randy
-
+jon
 
