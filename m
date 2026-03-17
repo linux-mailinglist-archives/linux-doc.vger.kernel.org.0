@@ -1,64 +1,64 @@
-Return-Path: <linux-doc+bounces-79714-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79712-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QLLoM2ZMuWnG/QEAu9opvQ
-	(envelope-from <linux-doc+bounces-79714-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:43:18 +0100
+	id uKuKKnFKuWnG/QEAu9opvQ
+	(envelope-from <linux-doc+bounces-79712-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:34:57 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DF252AA0E5
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:43:18 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0ABCE2A9F42
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:34:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B0FA53053A74
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 12:43:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 35292304F219
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 12:33:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 121D73C3C19;
-	Tue, 17 Mar 2026 12:43:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBC783BFE23;
+	Tue, 17 Mar 2026 12:33:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="Y9iNDBJq"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="P4Pnmqxa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.102])
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.166])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A67E33F361;
-	Tue, 17 Mar 2026 12:43:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 381E93C141A;
+	Tue, 17 Mar 2026 12:33:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.166
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773751395; cv=none; b=dByM2527PpmgUvy1mkFmrZntJiTndqpk211NNB3V5y7XaRdnocnjPpAIcEC4t63cboqG//BhnAFvcwHk1PtNfwDUTowEO+K5E+oZycw1AJWygyVaaM+U8HHLV0QFpH+Qemfi+Idxu1eAIh8jHTE5DHsDLxVxKXalOLniIlyftJ0=
+	t=1773750820; cv=none; b=Nb9IlmDzqi6gRFWB6XmHXj7K3CjNZ2pg2oXhRf9li1V1PM6WJswFvsLwiS4hVw8aYUYkS/H4Xfh6ikUQMV6U9krxPceMI+DQ3J3TNmHSF+2vO3xL54YwPNB7sv+p06y8DghfgaaDIcIz2DmjTiEqoFRZ9I5koagAoQ0utGV2Qs4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773751395; c=relaxed/simple;
-	bh=HvFK70HRpg5LxjabB1w8VIetM315CyKC751q1GpP+OM=;
+	s=arc-20240116; t=1773750820; c=relaxed/simple;
+	bh=DLAZWZvYAQo3AeKnB8RK5xeZq+SfWWnP8P+mULMux5s=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FC4zmlHwuI9w3Op9B/XeXT9rMUtrV1/2Afbw1s1Cq4lUkQfUYg+ih/yNTHNFLDk0nEWYoVP/SNh5tszKJGKzJPgpeWEP8vuWn4BkdM87C/RRgcXX3bIQO8iBITQaIVvzFtirDJabXMWilvv43mRM6SsQNj0WR0ZYV4qd5cTXwmQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=Y9iNDBJq; arc=none smtp.client-ip=188.68.63.102
+	 MIME-Version:Content-Type; b=IILo4G0vb4yZveOSuHpzq0he6Z5Gizmi3XuNTpZ/iiWHD3I39c7Nxp9z0K5n7HOrUf0+Z8NP0pKx/9e/CgJuecX0Nr88nN4viSlFQ9ayOrnT7pa4VU528CnKgbCB/2GVnMoRPJtDrJQbYYU2pHRwvdbeQ71pHvvE0oI9BQjeY8k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=P4Pnmqxa; arc=none smtp.client-ip=188.68.63.166
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
-Received: from mors-relay-2502.netcup.net (localhost [127.0.0.1])
-	by mors-relay-2502.netcup.net (Postfix) with ESMTPS id 4fZrwS3bzQz67bZ;
-	Tue, 17 Mar 2026 13:33:28 +0100 (CET)
+Received: from mors-relay-8202.netcup.net (localhost [127.0.0.1])
+	by mors-relay-8202.netcup.net (Postfix) with ESMTPS id 4fZrwV6k4Fz43FB;
+	Tue, 17 Mar 2026 13:33:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
-	s=key2; t=1773750808;
-	bh=HvFK70HRpg5LxjabB1w8VIetM315CyKC751q1GpP+OM=;
+	s=key2; t=1773750810;
+	bh=DLAZWZvYAQo3AeKnB8RK5xeZq+SfWWnP8P+mULMux5s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Y9iNDBJqksIo/wi1x+u3l7YHAeHB8FNJS2F2wjpRKo3yC8VL6ya2A830iydArYFf+
-	 +qp9onbhsQUqVLEXWjpGBgho+1LplDeYWzMc0Ay76E2eVJJC0dSWrPgMQJeY9Oq9fB
-	 H6+yxxi24b+rt8GtbXpmacGq51OpGS89DWaQlewh+kvZr1F3qAtlrNiD/4DOokiDE4
-	 lf5m//kepp0x+gGDXXKlIOvUTgmlKzfdz4jq2/4jjnsm3jkk4jMishIUR2Sp3VG4z8
-	 kY7fRRDuJlaHwf2OdAXrVAxGFn6uPsgTHOURHpmd2MW+zNm3Ora/EcttxyJLpEUr2I
-	 CvyNE0nxQLqtA==
+	b=P4PnmqxaZp2bzpYBmKBLL6BvLHZt1aW1gJsmLizylMfjL4E4saFQoAa4XWtvxX/Ya
+	 oylkJg26Ie7yCByEZ8FPjKrZT3OxjU0znZOdV34Q8WnX2lVgZ7Y5T5uDUZc/0OkxSY
+	 w8646hx7RAvg3ez/aUCDT1r4YKC3FmRvnaXuMwKfrdvQJTJMreKkLsmMKqjJNrXRgZ
+	 DTVLHLoc+dZtGg0TsR6mZOOoAEfURH2EZbpKcE1Hyct5z+NrIHvqbkszEzjWDGpaCt
+	 zOEDOyH/L+9ClRuCT0Y17zcE+rd9ihUAKiK0qCHobxmg7vKbIte0sZYxnu0r6qlEVL
+	 v0sxTolQB3/hA==
 Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay-2502.netcup.net (Postfix) with ESMTPS id 4fZrwS2v7Yz4xLW;
-	Tue, 17 Mar 2026 13:33:28 +0100 (CET)
+	by mors-relay-8202.netcup.net (Postfix) with ESMTPS id 4fZrwV61jxz436w;
+	Tue, 17 Mar 2026 13:33:30 +0100 (CET)
 Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4fZrwS0lP3z8svF;
-	Tue, 17 Mar 2026 13:33:28 +0100 (CET)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4fZrwV3vRQz8svF;
+	Tue, 17 Mar 2026 13:33:30 +0100 (CET)
 Received: from luggage.fritz.box (unknown [IPv6:2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160])
-	by mxe9fb.netcup.net (Postfix) with ESMTPSA id A7CCC635CB;
-	Tue, 17 Mar 2026 13:33:27 +0100 (CET)
+	by mxe9fb.netcup.net (Postfix) with ESMTPSA id CD33C635A2;
+	Tue, 17 Mar 2026 13:33:29 +0100 (CET)
 Authentication-Results: mxe9fb;
 	spf=pass (sender IP is 2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160) smtp.mailfrom=linux@leemhuis.info smtp.helo=luggage.fritz.box
 Received-SPF: pass (mxe9fb: connection is authenticated)
@@ -67,11 +67,11 @@ To: Jonathan Corbet <corbet@lwn.net>
 Cc: linux-doc@vger.kernel.org,
 	regressions@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 4/5] =?UTF-8?q?docs:=20verify-bugs-=E2=80=A6=20and=20qu?=
- =?UTF-8?q?ickly-build-=E2=80=A6:=20improve=20feedback=20section?=
-Date: Tue, 17 Mar 2026 13:33:07 +0100
+Subject: [PATCH v2 5/5] docs: reporting-issues: create a proper appendix
+ explaining specialties
+Date: Tue, 17 Mar 2026 13:33:08 +0100
 Message-ID: 
- <cb219ccd15271bfb99ecce01dcbdbb03cccd7be1.1773750701.git.linux@leemhuis.info>
+ <473b36fa9723c46b7167004752f097e6c26d7278.1773750701.git.linux@leemhuis.info>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773750701.git.linux@leemhuis.info>
 References: <cover.1773750701.git.linux@leemhuis.info>
@@ -83,25 +83,25 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-PPP-Message-ID: <177375080792.2889273.1822819562808559532@mxe9fb.netcup.net>
-X-NC-CID: ZTD0kk1SI7NByACqlbGtBMhZVZleCXzkBH5zxd+hG9lXITp04bc=
+X-PPP-Message-ID: <177375081005.2889278.2984770644419798803@mxe9fb.netcup.net>
+X-NC-CID: +0R4BnqSs8tEysEHb2JNNUshQAW+yu0JPNHGMyTNZDnhP/lRf58=
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[leemhuis.info:s=key2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79714-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79712-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,leemhuis.info:dkim,leemhuis.info:email,leemhuis.info:mid];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[leemhuis.info:dkim,leemhuis.info:email,leemhuis.info:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
 	DMARC_NA(0.00)[leemhuis.info];
 	DKIM_TRACE(0.00)[leemhuis.info:+];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCPT_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux@leemhuis.info,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
@@ -111,73 +111,152 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 6DF252AA0E5
+X-Rspamd-Queue-Id: 0ABCE2A9F42
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Mention sending patches in the section about feedback. This syncs them
-with a section a earlier patch added to reporting-issues.rst, which
-was based on these sections and improved during review.
+Merge "Why some bugs remain unfixed and some reports are ignored" with
+the closing words while rewriting and extending the text.
+
+The result spends fewer words on explaining things that are normal in
+FLOSS -- while outlining where the kernel is different and how that
+makes bug reporting more complicated than in other FLOSS projects.
 
 Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
 ---
- .../admin-guide/quickly-build-trimmed-linux.rst   | 14 ++++++++------
- .../verify-bugs-and-bisect-regressions.rst        | 15 +++++++--------
- 2 files changed, 15 insertions(+), 14 deletions(-)
+ .../admin-guide/reporting-issues.rst          | 119 ++++++++----------
+ 1 file changed, 53 insertions(+), 66 deletions(-)
 
-diff --git a/Documentation/admin-guide/quickly-build-trimmed-linux.rst b/Documentation/admin-guide/quickly-build-trimmed-linux.rst
-index cb4b78468a935d..cb178e0a620848 100644
---- a/Documentation/admin-guide/quickly-build-trimmed-linux.rst
-+++ b/Documentation/admin-guide/quickly-build-trimmed-linux.rst
-@@ -349,12 +349,14 @@ again.
+diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
+index aa058b295c5f33..16a66a1f1975f0 100644
+--- a/Documentation/admin-guide/reporting-issues.rst
++++ b/Documentation/admin-guide/reporting-issues.rst
+@@ -1693,72 +1693,59 @@ for the subsystem where the issue seems to have its roots; CC the mailing list
+ for the subsystem as well as the stable mailing list (stable@vger.kernel.org).
  
- .. _submit_improvements_qbtl:
  
--Did you run into trouble following any of the above steps that is not cleared up
--by the reference section below? Or do you have ideas how to improve the text?
--Then please take a moment of your time and let the maintainer of this document
--know by email (Thorsten Leemhuis <linux@leemhuis.info>), ideally while CCing the
--Linux docs mailing list (linux-doc@vger.kernel.org). Such feedback is vital to
--improve this document further, which is in everybody's interest, as it will
-+Did you run into trouble following the step-by-step guide not cleared up by the
-+reference section below? Did you spot errors? Or do you have ideas on how to
-+improve the guide?
+-Why some issues won't get any reaction or remain unfixed after being reported
+-=============================================================================
+-
+-When reporting a problem to the Linux developers, be aware only 'issues of high
+-priority' (regressions, security issues, severe problems) are definitely going
+-to get resolved. The maintainers or if all else fails Linus Torvalds himself
+-will make sure of that. They and the other kernel developers will fix a lot of
+-other issues as well. But be aware that sometimes they can't or won't help; and
+-sometimes there isn't even anyone to send a report to.
+-
+-This is best explained with kernel developers that contribute to the Linux
+-kernel in their spare time. Quite a few of the drivers in the kernel were
+-written by such programmers, often because they simply wanted to make their
+-hardware usable on their favorite operating system.
+-
+-These programmers most of the time will happily fix problems other people
+-report. But nobody can force them to do, as they are contributing voluntarily.
+-
+-Then there are situations where such developers really want to fix an issue,
+-but can't: sometimes they lack hardware programming documentation to do so.
+-This often happens when the publicly available docs are superficial or the
+-driver was written with the help of reverse engineering.
+-
+-Sooner or later spare time developers will also stop caring for the driver.
+-Maybe their test hardware broke, got replaced by something more fancy, or is so
+-old that it's something you don't find much outside of computer museums
+-anymore. Sometimes developer stops caring for their code and Linux at all, as
+-something different in their life became way more important. In some cases
+-nobody is willing to take over the job as maintainer – and nobody can be forced
+-to, as contributing to the Linux kernel is done on a voluntary basis. Abandoned
+-drivers nevertheless remain in the kernel: they are still useful for people and
+-removing would be a regression.
+-
+-The situation is not that different with developers that are paid for their
+-work on the Linux kernel. Those contribute most changes these days. But their
+-employers sooner or later also stop caring for their code or make its
+-programmer focus on other things. Hardware vendors for example earn their money
+-mainly by selling new hardware; quite a few of them hence are not investing
+-much time and energy in maintaining a Linux kernel driver for something they
+-stopped selling years ago. Enterprise Linux distributors often care for a
+-longer time period, but in new versions often leave support for old and rare
+-hardware aside to limit the scope. Often spare time contributors take over once
+-a company orphans some code, but as mentioned above: sooner or later they will
+-leave the code behind, too.
+-
+-Priorities are another reason why some issues are not fixed, as maintainers
+-quite often are forced to set those, as time to work on Linux is limited.
+-That's true for spare time or the time employers grant their developers to
+-spend on maintenance work on the upstream kernel. Sometimes maintainers also
+-get overwhelmed with reports, even if a driver is working nearly perfectly. To
+-not get completely stuck, the programmer thus might have no other choice than
+-to prioritize issue reports and reject some of them.
+-
+-But don't worry too much about all of this, a lot of drivers have active
+-maintainers who are quite interested in fixing as many issues as possible.
+-
+-
+-Closing words
+-=============
+-
+-Compared with other Free/Libre & Open Source Software it's hard to report
+-issues to the Linux kernel developers: the length and complexity of this
+-document and the implications between the lines illustrate that. But that's how
+-it is for now. The main author of this text hopes documenting the state of the
+-art will lay some groundwork to improve the situation over time.
+-
++Appendix: Why it is somewhat hard to report kernel bugs
++=======================================================
 +
-+If any of that applies, please let the developers know by sending a short note
-+or a patch to Thorsten Leemhuis <linux@leemhuis.info> while ideally CCing the
-+public Linux docs mailing list <linux-doc@vger.kernel.org>. Such feedback is
-+vital to improve this text further, which is in everybody's interest, as it will
- enable more people to master the task described here.
++The Linux kernel developers are well aware that reporting bugs to them is harder
++than in other Free/Libre Open Source Projects. Many reasons for that lie in the
++nature of kernels, Linux' development model, and how the world uses the kernel:
++
++* *Most kernels of Linux distributions are totally unsuitable for reporting bugs
++  upstream.* The reference section above already explained this in detail:
++  outdated codebases as well as modifications and add-ons lead to kernel bugs
++  that were fixed upstream a long time ago or never happened there in the first
++  place. Developers of other Open Source software face these problems as well,
++  but the situation is a lot worse when it comes to the kernel, as the changes
++  and their impact are much more severe -- which is why many kernel developers
++  expect reports with kernels built from fresh and nearly unmodified sources.
++
++* *Bugs often only occur in a special environment.* That is because Linux is
++  mostly drivers and can be used in a multitude of ways. Developers often do not
++  have a matching setup at hand -- and therefore frequently must rely on bug
++  reporters for isolating a problems's cause and testing proposed fixes.
++
++* *The kernel has hundreds of maintainers, but all-rounders are very rare.* That
++  again is and effect caused by the multitude of features and drivers, due to
++  which many kernel developers know little about lower or higher layers related
++  to their code and even less about other areas.
++
++* *It is hard finding where to report issues to, among others, due to the lack
++  of a central bug tracker.* This is something even some kernel developers
++  dislike, but that's the situation everyone has to deal with currently.
++
++* *Stable and longterm kernels are primarily maintained by a dedicated 'stable
++  team', which only handles regressions introduced within stable and longterm
++  series.* When someone reports a bug, say, using Linux 6.1.2, the team will,
++  therefore, always ask if mainline is affected: if the bug already happened
++  in 6.1 or occurs with latest mainline (say, 6.2-rc3), they in everybody's
++  interest shove it to the regular developers, as those know the code best.
++
++* *Linux developers are free to focus on latest mainline.* Some, thus, react
++  coldly to reports about bugs in, say, Linux 6.0 when 6.1 is already out;
++  even the latter might not be enough once 6.2-rc1 is out. Some will also not
++  be very welcoming to reports with 6.1.5 or 6.1.6, as the problem might be a
++  series-specific regression the stable team (see above) caused and must fix.
++
++* *Sometimes there is nobody to help.* Sometimes this is due to the lack of
++  hardware documentation -- for example, when a driver was built using reverse
++  engineering or was taken over by spare-time developers when the hardware
++  manufacturer left it behind. Other times there is nobody to even report bugs
++  to: when maintainers move on without a replacement, their code often remains
++  in the kernel as long as it's useful.
++
++Some of these aspects could be improved to facilitate bug reporting -- many
++Linux kernel developers are well aware of this and would be glad if a few
++individuals or an entity would make this their mission.
  
- Reference section for the step-by-step guide
-diff --git a/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst b/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-index d83601f2a459ff..7d38393f31fb16 100644
---- a/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-+++ b/Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst
-@@ -1062,16 +1062,15 @@ Conclusion
- 
- You have reached the end of the step-by-step guide.
- 
--Did you run into trouble following any of the above steps not cleared up by the
--reference section below? Did you spot errors? Or do you have ideas how to
-+Did you run into trouble following the step-by-step guide not cleared up by the
-+reference section below? Did you spot errors? Or do you have ideas on how to
- improve the guide?
- 
--If any of that applies, please take a moment and let the maintainer of this
--document know by email (Thorsten Leemhuis <linux@leemhuis.info>), ideally while
--CCing the Linux docs mailing list (linux-doc@vger.kernel.org). Such feedback is
--vital to improve this text further, which is in everybody's interest, as it
--will enable more people to master the task described here -- and hopefully also
--improve similar guides inspired by this one.
-+If any of that applies, please let the developers know by sending a short note
-+or a patch to Thorsten Leemhuis <linux@leemhuis.info> while ideally CCing the
-+public Linux docs mailing list <linux-doc@vger.kernel.org>. Such feedback is
-+vital to improve this text further, which is in everybody's interest, as it will
-+enable more people to master the task described here.
- 
- 
- Reference section for the step-by-step guide
+ ..
+    end-of-content
 -- 
 2.53.0
 
