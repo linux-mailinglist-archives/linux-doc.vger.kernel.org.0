@@ -1,62 +1,64 @@
-Return-Path: <linux-doc+bounces-79807-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79805-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oM+wB9GbuWlzLAIAu9opvQ
-	(envelope-from <linux-doc+bounces-79807-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:22:09 +0100
+	id mNEkHGqZuWn5KwIAu9opvQ
+	(envelope-from <linux-doc+bounces-79805-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:11:54 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 280892B0DAE
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:22:08 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C96E2B0ACF
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:11:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id ACDBA30A9880
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:10:28 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 186C03056E09
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:10:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2336A3F65EC;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16D643F54CB;
 	Tue, 17 Mar 2026 18:09:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nh2+XJk5"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iO9bch1Q"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F15C63F0778;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E45323EB810;
 	Tue, 17 Mar 2026 18:09:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773770988; cv=none; b=uHvaBAYBdZed9+8CWdKVAUL94fFfioPiEvTuwaicmiRqrtN9SIi+oSBOc9cFtHSeLTshTO0UcZDS050j1a3+HLgnqfyFT21xsIxp8tDTPt32CKWnKwfHiqhmKxb4r8txTF21nGA5HWrOHq3NZB9uPmBMTWMdJpFhyQXh2CcW3tk=
+	t=1773770988; cv=none; b=kMniCi1YWb2DoC0zjE9+VQvRPomRK5cGEGsvNVfRzbu71dejzr6wwuxDTvQhXAzFndOmTiaAbQvZ/GHAN+kpv6Aw9CigMkJSotpb8cxm7a3M5QdLLZl8OUDHC7daJ3VDFpnsAQAuNlQxWlYQHTdoCNCq7OqFJw+B97yFmBR8ne4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773770988; c=relaxed/simple;
-	bh=1uxfkQgXX2b/e92MF0mNuJcjR0VUeRhzcj4mkmRc5x0=;
+	bh=xUBIjCPiqikLumDJV0/ro119OoQ7PDq8BR8ypLrh5DM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=D8A+pIBKjsEQAIG0A+iGjAnhNtzWC62S5dS6ntsu7wxJ32O0xq2lHCmDLg6kJeHT6R/y8d52uerur5mGF5mBCzzwj8o7f03tleDlOQnb9f4nv1j0DbhF9pONe9a84tA0YAS61iRT28o3YQ3eBjnbZ986MzMd5Esu3UTNZHNZUGs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nh2+XJk5; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3675C2BCB0;
+	 MIME-Version:Content-Type; b=hDc5Ah1aFIK7K+GUX8dvy5J1n6uaWB16AgSwZRGmakzUr5316p7biYJDGsr396NWglkma52JIM1miJqJJUHeyo5ZlhfYdgRqRNBmaUhbzXtVATs80ibe7jqJzJZ2+7V1iPWom49i2JK1Khfo2SlNJbBP82N9FAnz4TKYIAANUag=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iO9bch1Q; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98CF2C2BC9E;
 	Tue, 17 Mar 2026 18:09:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773770987;
-	bh=1uxfkQgXX2b/e92MF0mNuJcjR0VUeRhzcj4mkmRc5x0=;
+	bh=xUBIjCPiqikLumDJV0/ro119OoQ7PDq8BR8ypLrh5DM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=nh2+XJk5rZtLdAPu9GLsX1AKYBAfq7aJ0h+1GczJKc8UkPxlwYep+j/OEwt1JYHLk
-	 yX98iu9v9hriiTOAyh1Ol+VwuJGoBcE7UqFU3GdZsNIOEMmv39xCZpQ12vZVcA+EzP
-	 shtkzFd031LvnK1UzYu5wViP1Nq7JYEL+lHp4J03N0QOToXX6rBsYq9GaW5uxu7Y66
-	 6azcdqdg1tSahwP9q0ipfg9JfSi4ZMi/4polcFss9Entg/jnx8Asr7EyWaYtSAL8g0
-	 Jx69/3mlXkJJWIvdY3/PFt+c/b5TS4ehE/mCJ9QkGtEpdg2AYP67wBdSmX2GcXH1Q/
-	 WhES5y7ECvQcA==
+	b=iO9bch1QYjwx5A64hjbjXnwvv1lSbjisITynowNNomQaF7acj9NwYa0naYkwxLCjw
+	 7zAbSYj8SnnAWXAKj2scVHfqBovy/RQNKuBOjZhkxdoM3mt2P76qMEKHcRO6upc1d1
+	 C3l1rt3BSrQ4b0D3SyDffRdIFSL13FDUwbmrvkdO46SyWqeASwMYlCafDuHYHBH+mQ
+	 Q6gNkTDqRoctJaEN0GfzuLbsuiCBWkCvArMOK3zq8i79ttKiQde6iqq3xc0A81p9RK
+	 G0Nfh26c522cezt0F1o1Sh0iOsFQcHDOmS2sjVo3VNUQftHF/5thXLDwOHAEqNOeie
+	 5c2cQBAfnoIRA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2YrR-0000000H5Gi-2xXp;
+	id 1w2YrR-0000000H5Hy-3oxl;
 	Tue, 17 Mar 2026 19:09:45 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 02/22] unittests: add a testbench to check public/private kdoc comments
-Date: Tue, 17 Mar 2026 19:09:22 +0100
-Message-ID: <c1574b5b67b0442de3fab570fe6de9bc28b17a75.1773770483.git.mchehab+huawei@kernel.org>
+	linux-kernel@vger.kernel.org,
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH v3 03/22] docs: kdoc: don't add broken comments inside prototypes
+Date: Tue, 17 Mar 2026 19:09:23 +0100
+Message-ID: <12ac4a97e2bd5a19d6537122c10098690c38d2c7.1773770483.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773770483.git.mchehab+huawei@kernel.org>
 References: <cover.1773770483.git.mchehab+huawei@kernel.org>
@@ -69,402 +71,79 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79807-lists,linux-doc=lfdr.de,huawei];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_FROM(0.00)[bounces-79805-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 280892B0DAE
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 2C96E2B0ACF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add unit tests to check if the public/private and comments strip
-is working properly.
+Parsing a file like drivers/scsi/isci/host.h, which contains
+broken kernel-doc markups makes it create a prototype that contains
+unmatched end comments.
 
-Running it shows that, on several cases, public/private is not
-doing what it is expected:
+That causes, for instance, struct sci_power_control to be shown this
+this prototype:
 
-  test_private:
-    TestPublicPrivate:
-        test balanced_inner_private:                                 OK
-        test balanced_non_greddy_private:                            OK
-        test balanced_private:                                       OK
-        test no private:                                             OK
-        test unbalanced_inner_private:                               FAIL
-        test unbalanced_private:                                     FAIL
-        test unbalanced_struct_group_tagged_with_private:            FAIL
-        test unbalanced_two_struct_group_tagged_first_with_private:  FAIL
-        test unbalanced_without_end_of_line:                         FAIL
+    struct sci_power_control {
+        * it is not. */ bool timer_started;
+        */ struct sci_timer timer;
+        * requesters field. */ u8 phys_waiting;
+        */ u8 phys_granted_power;
+        * mapped into requesters via struct sci_phy.phy_index */ struct isci_phy *requesters[SCI_MAX_PHYS];
+    };
 
-  Ran 9 tests
+as comments won't start with "/*" anymore.
 
-  FAILED (failures=5)
+Fix the logic to detect such cases, and keep adding the comments
+inside it.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <144f4952e0cb74fe9c9adc117e9a21ec8aa1cc10.1773074166.git.mchehab+huawei@kernel.org>
+Message-ID: <18e577dbbd538dcc22945ff139fe3638344e14f0.1773074166.git.mchehab+huawei@kernel.org>
 ---
- tools/unittests/test_private.py | 331 ++++++++++++++++++++++++++++++++
- 1 file changed, 331 insertions(+)
- create mode 100755 tools/unittests/test_private.py
+ tools/lib/python/kdoc/kdoc_parser.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/tools/unittests/test_private.py b/tools/unittests/test_private.py
-new file mode 100755
-index 000000000000..eae245ae8a12
---- /dev/null
-+++ b/tools/unittests/test_private.py
-@@ -0,0 +1,331 @@
-+#!/usr/bin/env python3
+diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
+index edf70ba139a5..086579d00b5c 100644
+--- a/tools/lib/python/kdoc/kdoc_parser.py
++++ b/tools/lib/python/kdoc/kdoc_parser.py
+@@ -1355,6 +1355,12 @@ class KernelDoc:
+         elif doc_content.search(line):
+             self.emit_msg(ln, f"Incorrect use of kernel-doc format: {line}")
+             self.state = state.PROTO
 +
-+"""
-+Unit tests for struct/union member extractor class.
-+"""
-+
-+
-+import os
-+import re
-+import unittest
-+import sys
-+
-+from unittest.mock import MagicMock
-+
-+SRC_DIR = os.path.dirname(os.path.realpath(__file__))
-+sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
-+
-+from kdoc.kdoc_parser import trim_private_members
-+from unittest_helper import run_unittest
-+
-+#
-+# List of tests.
-+#
-+# The code will dynamically generate one test for each key on this dictionary.
-+#
-+
-+#: Tests to check if CTokenizer is handling properly public/private comments.
-+TESTS_PRIVATE = {
-+    #
-+    # Simplest case: no private. Ensure that trimming won't affect struct
-+    #
-+    "no private": {
-+        "source": """
-+            struct foo {
-+                int a;
-+                int b;
-+                int c;
-+            };
-+        """,
-+        "trimmed": """
-+            struct foo {
-+                int a;
-+                int b;
-+                int c;
-+            };
-+        """,
-+    },
-+
-+    #
-+    # Play "by the books" by always having a public in place
-+    #
-+
-+    "balanced_private": {
-+        "source": """
-+            struct foo {
-+                int a;
-+                /* private: */
-+                int b;
-+                /* public: */
-+                int c;
-+            };
-+        """,
-+        "trimmed": """
-+            struct foo {
-+                int a;
-+                int c;
-+            };
-+        """,
-+    },
-+
-+    "balanced_non_greddy_private": {
-+        "source": """
-+            struct foo {
-+                int a;
-+                /* private: */
-+                int b;
-+                /* public: */
-+                int c;
-+                /* private: */
-+                int d;
-+                /* public: */
-+                int e;
-+
-+            };
-+        """,
-+        "trimmed": """
-+            struct foo {
-+                int a;
-+                int c;
-+                int e;
-+            };
-+        """,
-+    },
-+
-+    "balanced_inner_private": {
-+        "source": """
-+            struct foo {
-+                struct {
-+                    int a;
-+                    /* private: ignore below */
-+                    int b;
-+                /* public: but this should not be ignored */
-+                };
-+                int b;
-+            };
-+        """,
-+        "trimmed": """
-+            struct foo {
-+                struct {
-+                    int a;
-+                };
-+                int b;
-+            };
-+        """,
-+    },
-+
-+    #
-+    # Test what happens if there's no public after private place
-+    #
-+
-+    "unbalanced_private": {
-+        "source": """
-+            struct foo {
-+                int a;
-+                /* private: */
-+                int b;
-+                int c;
-+            };
-+        """,
-+        "trimmed": """
-+            struct foo {
-+                int a;
-+            };
-+        """,
-+    },
-+
-+    "unbalanced_inner_private": {
-+        "source": """
-+            struct foo {
-+                struct {
-+                    int a;
-+                    /* private: ignore below */
-+                    int b;
-+                /* but this should not be ignored */
-+                };
-+                int b;
-+            };
-+        """,
-+        "trimmed": """
-+            struct foo {
-+                struct {
-+                    int a;
-+                };
-+                int b;
-+            };
-+        """,
-+    },
-+
-+    "unbalanced_struct_group_tagged_with_private": {
-+        "source": """
-+            struct page_pool_params {
-+                struct_group_tagged(page_pool_params_fast, fast,
-+                        unsigned int    order;
-+                        unsigned int    pool_size;
-+                        int             nid;
-+                        struct device   *dev;
-+                        struct napi_struct *napi;
-+                        enum dma_data_direction dma_dir;
-+                        unsigned int    max_len;
-+                        unsigned int    offset;
-+                };
-+                struct_group_tagged(page_pool_params_slow, slow,
-+                        struct net_device *netdev;
-+                        unsigned int queue_idx;
-+                        unsigned int    flags;
-+                        /* private: used by test code only */
-+                        void (*init_callback)(netmem_ref netmem, void *arg);
-+                        void *init_arg;
-+                };
-+            };
-+        """,
-+        "trimmed": """
-+            struct page_pool_params {
-+                struct_group_tagged(page_pool_params_fast, fast,
-+                        unsigned int    order;
-+                        unsigned int    pool_size;
-+                        int             nid;
-+                        struct device   *dev;
-+                        struct napi_struct *napi;
-+                        enum dma_data_direction dma_dir;
-+                        unsigned int    max_len;
-+                        unsigned int    offset;
-+                };
-+                struct_group_tagged(page_pool_params_slow, slow,
-+                        struct net_device *netdev;
-+                        unsigned int queue_idx;
-+                        unsigned int    flags;
-+                };
-+            };
-+        """,
-+    },
-+
-+    "unbalanced_two_struct_group_tagged_first_with_private": {
-+        "source": """
-+            struct page_pool_params {
-+                struct_group_tagged(page_pool_params_slow, slow,
-+                        struct net_device *netdev;
-+                        unsigned int queue_idx;
-+                        unsigned int    flags;
-+                        /* private: used by test code only */
-+                        void (*init_callback)(netmem_ref netmem, void *arg);
-+                        void *init_arg;
-+                };
-+                struct_group_tagged(page_pool_params_fast, fast,
-+                        unsigned int    order;
-+                        unsigned int    pool_size;
-+                        int             nid;
-+                        struct device   *dev;
-+                        struct napi_struct *napi;
-+                        enum dma_data_direction dma_dir;
-+                        unsigned int    max_len;
-+                        unsigned int    offset;
-+                };
-+            };
-+        """,
-+        "trimmed": """
-+            struct page_pool_params {
-+                struct_group_tagged(page_pool_params_slow, slow,
-+                        struct net_device *netdev;
-+                        unsigned int queue_idx;
-+                        unsigned int    flags;
-+                };
-+                struct_group_tagged(page_pool_params_fast, fast,
-+                        unsigned int    order;
-+                        unsigned int    pool_size;
-+                        int             nid;
-+                        struct device   *dev;
-+                        struct napi_struct *napi;
-+                        enum dma_data_direction dma_dir;
-+                        unsigned int    max_len;
-+                        unsigned int    offset;
-+                };
-+            };
-+        """,
-+    },
-+    "unbalanced_without_end_of_line": {
-+        "source": """ \
-+            struct page_pool_params { \
-+                struct_group_tagged(page_pool_params_slow, slow, \
-+                        struct net_device *netdev; \
-+                        unsigned int queue_idx; \
-+                        unsigned int    flags;
-+                        /* private: used by test code only */
-+                        void (*init_callback)(netmem_ref netmem, void *arg); \
-+                        void *init_arg; \
-+                }; \
-+                struct_group_tagged(page_pool_params_fast, fast, \
-+                        unsigned int    order; \
-+                        unsigned int    pool_size; \
-+                        int             nid; \
-+                        struct device   *dev; \
-+                        struct napi_struct *napi; \
-+                        enum dma_data_direction dma_dir; \
-+                        unsigned int    max_len; \
-+                        unsigned int    offset; \
-+                }; \
-+            };
-+        """,
-+        "trimmed": """
-+            struct page_pool_params {
-+                struct_group_tagged(page_pool_params_slow, slow,
-+                        struct net_device *netdev;
-+                        unsigned int queue_idx;
-+                        unsigned int    flags;
-+                };
-+                struct_group_tagged(page_pool_params_fast, fast,
-+                        unsigned int    order;
-+                        unsigned int    pool_size;
-+                        int             nid;
-+                        struct device   *dev;
-+                        struct napi_struct *napi;
-+                        enum dma_data_direction dma_dir;
-+                        unsigned int    max_len;
-+                        unsigned int    offset;
-+                };
-+            };
-+        """,
-+    },
-+}
-+
-+
-+class TestPublicPrivate(unittest.TestCase):
-+    """
-+    Main test class. Populated dynamically at runtime.
-+    """
-+
-+    def setUp(self):
-+        self.maxDiff = None
-+
-+    def add_test(cls, name, source, trimmed):
-+        """
-+        Dynamically add a test to the class
-+        """
-+        def test(cls):
-+            result = trim_private_members(source)
-+
-+            result = re.sub(r"\s++", " ", result).strip()
-+            expected = re.sub(r"\s++", " ", trimmed).strip()
-+
-+            msg = f"failed when parsing this source:\n" + source
-+
-+            cls.assertEqual(result, expected, msg=msg)
-+
-+        test.__name__ = f'test {name}'
-+
-+        setattr(TestPublicPrivate, test.__name__, test)
-+
-+
-+#
-+# Populate TestPublicPrivate class
-+#
-+test_class = TestPublicPrivate()
-+for name, test in TESTS_PRIVATE.items():
-+    test_class.add_test(name, test["source"], test["trimmed"])
-+
-+
-+#
-+# main
-+#
-+if __name__ == "__main__":
-+    run_unittest(__file__)
++            #
++            # Don't let it add partial comments at the code, as breaks the
++            # logic meant to remove comments from prototypes.
++            #
++            self.process_proto_type(ln, "/**\n" + line)
+         # else ... ??
+ 
+     def process_inline_text(self, ln, line):
 -- 
 2.52.0
 
