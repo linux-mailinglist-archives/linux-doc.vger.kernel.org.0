@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-79814-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79816-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +FCkMJWZuWn5KwIAu9opvQ
-	(envelope-from <linux-doc+bounces-79814-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:12:37 +0100
+	id WDOuDIOcuWnSLAIAu9opvQ
+	(envelope-from <linux-doc+bounces-79816-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:25:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE6E72B0B39
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:12:37 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id ABD8E2B0E82
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 19:25:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A0BEE30660D2
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:10:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 503A932133CC
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 18:11:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7FA9A3F8DE6;
-	Tue, 17 Mar 2026 18:09:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BC263F8E06;
+	Tue, 17 Mar 2026 18:09:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ms1tAzZ1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oL3beYMF"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BAFB3F881D;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D82DA3F8DEB;
 	Tue, 17 Mar 2026 18:09:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773770989; cv=none; b=H2D3EsgSZ5SIvlq2j+4Qxm3j2ddB/hJpuWW6DSIoiVFSWzOe2noQMP0wKn3HKcaEOk4pKETJAmKGz6iMt4uKOeqzW4R0ud++O78xQgNhU5GfqnAdXxbPMh/hY0aDAARPZhIYZgR3qTODqvihKd3xf7kTo+Psox49pmBIYnjnsBE=
+	t=1773770989; cv=none; b=fxrre951u5rqmo0gpO3mWtBi6/kQf02QVwCHR+m9Al3WYLiVeP7HwK3/g8OOtiz+Fti8mKfPV3uL2Z2QkzraS74pRYDge41DO6BqK73upWK9rX2dhZ3ND6guQXKBbgUiQUyE56+2sgN+QbOIykq58f3ya9pzwvU8zkfAxT+iSIU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773770989; c=relaxed/simple;
-	bh=EY9AfgDGU0mksVrXJ3N/EicUXh9pcg8Dz+yFEsPHERA=;
+	bh=LUcFzGUiEZD4bIprs6ndA9LAE1KebeM/BqrpXPUV0iY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mzBgtDWGER8rq4x/RehMa6hh/Ac8NjFZdSVx1HKJL9szDLVykrLFqUF1GUW/0T0D+IdEhKpDHTpZcsXrYCYJAfCkJAaA6ch7jNUCrAmNxxLCBD497dMB4gKCrad7sWZZTDsZeGHeHq1whjmHzn9RyL2spvTNdFyplvb439L1ZT8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ms1tAzZ1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F826C2BCB0;
+	 MIME-Version:Content-Type; b=QG4G1ksoVSRUD/bwvDtjMiJAVmGr5QdG/azEgBErvwHh61lETdsnAu1GePoGo21/E4YqPtIiEeZt1NdP6JYJ6FRjPRzNLxMgpMfXk7Rqz50ZXxnhI+QtWOBg+yJxrtSy/w0YUsBBQVhrbw8VdJgF8YKiK8HTpKO3GZpBQK7iOis=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oL3beYMF; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94438C2BCB1;
 	Tue, 17 Mar 2026 18:09:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773770989;
-	bh=EY9AfgDGU0mksVrXJ3N/EicUXh9pcg8Dz+yFEsPHERA=;
+	bh=LUcFzGUiEZD4bIprs6ndA9LAE1KebeM/BqrpXPUV0iY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ms1tAzZ1bAY6gJIZVvlmV7RvDjlwgE+f/ObLzzxBBWTJDpxNvi/k4nAND1WnRagET
-	 rk5TpQzGUnGvFwi86t8xyZS3ggyUdg9q9sEEsHLxI4Y5Yz9ItJPA5CLpjfhTt3pzsE
-	 r47WRxkhf6YE3jD3Nw5/CbuC/4yYHNXT/9fpQO8PumB6HxV6PVjlIwlpHx0rFSFl7t
-	 /Ygx4rOIqUJZWGXPPgZYXo662yMl9G7thXHF2OBk4wv2yCDhWBCazrwIg7jwLOmAkb
-	 aTOaUlw5X/nTn9OB6afX7CgVqm24QqbwE4nJACmKdgvErv3enyxom3EJrJwctx+ImT
-	 mrp6Xz8dDR2og==
+	b=oL3beYMFmzSXQZspVzBMqlm4aB81VpvnHsOx0FQEn5NLSlIbPiDX4X/rEFDnAr6zh
+	 uSy68UX27KW2xxaZ8AOG4zI6ah2EU9FZOiDMmCtOZWGUwI7k9Mp9l8SHqLUbKrF13t
+	 lfU4fnxfPiBapM8+sN52VaAeE6kSsHp9WnG8lZ7VdxYfSQ7UupnuYT9TkjgazcGo4b
+	 Ntg+/W7azhNpbYacjrDG5WhVAAF6mW2R5xmF79SCJ7/ROwoKsNgMprtLODX50iZpSO
+	 wo7Rpo8N1TaL6yjjxGRqOACg7FQJb1HZnXAsStpgx/8W7bzrmevGfVu732wdkgjLQw
+	 6cCjwRmza6HFg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2YrT-0000000H5Rm-27gN;
+	id 1w2YrT-0000000H5Sz-309C;
 	Tue, 17 Mar 2026 19:09:47 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -54,9 +54,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 11/22] tools: unittests: add tests for CMatch
-Date: Tue, 17 Mar 2026 19:09:31 +0100
-Message-ID: <119712b5bc53b4c6dda6a81b4a783dcbfd1d970d.1773770483.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v3 12/22] docs: c_lex: properly implement a sub() method for CMatch
+Date: Tue, 17 Mar 2026 19:09:32 +0100
+Message-ID: <dbc45b86db18783289d94cfdbba4b72792c47929.1773770483.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773770483.git.mchehab+huawei@kernel.org>
 References: <cover.1773770483.git.mchehab+huawei@kernel.org>
@@ -72,186 +72,372 @@ Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-79814-lists,linux-doc=lfdr.de,huawei];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79816-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	RCPT_COUNT_FIVE(0.00)[5]
-X-Rspamd-Queue-Id: AE6E72B0B39
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: ABD8E2B0E82
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The CMatch logic is complex enough to justify tests to ensure
-that it is doing its job.
-
-Add unittests to check the functionality provided by CMatch
-by replicating expected patterns.
-
-The CMatch class handles with complex macros. Add an unittest
-to check if its doing the right thing and detect eventual regressions
-as we improve its code.
-
-The initial version was generated using gpt-oss:latest LLM
-on my local GPU, as LLMs aren't bad transforming patterns
-into unittests.
-
-Yet, the curent version contains only the skeleton of what
-LLM produced, as I ended higly changing its content to be
-more representative and to have real case scenarios.
-
-The kdoc_xforms test suite contains 3 test groups. Two of
-them tests the basic functionality of CMatch to
-replace patterns.
-
-The last one (TestRealUsecases) contains real code snippets
-from the Kernel with some cleanups to better fit in 80 columns
-and uses the same transforms as kernel-doc, thus allowing
-to test the logic used inside kdoc_parser to transform
-functions, structs and variable patterns.
-
-Its output is like this:
-
-        $ tools/unittests/kdoc_xforms.py
-        Ran 25 tests in 0.003s
-
-        OK
-	test_cmatch:
-	    TestSearch:
-	        test_search_acquires_multiple:      OK
-	        test_search_acquires_nested_paren:  OK
-	        test_search_acquires_simple:        OK
-	        test_search_must_hold:              OK
-	        test_search_must_hold_shared:       OK
-	        test_search_no_false_positive:      OK
-	        test_search_no_function:            OK
-	        test_search_no_macro_remains:       OK
-
-        Ran 8 tests
+Implement a sub() method to do what it is expected, parsing
+backref arguments like \0, \1, \2, ...
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/unittests/test_cmatch.py | 95 ++++++++++++++++++++++++++++++++++
- 1 file changed, 95 insertions(+)
- create mode 100755 tools/unittests/test_cmatch.py
+ tools/lib/python/kdoc/c_lex.py | 272 +++++++++++++++++++++++++++++++--
+ 1 file changed, 259 insertions(+), 13 deletions(-)
 
-diff --git a/tools/unittests/test_cmatch.py b/tools/unittests/test_cmatch.py
-new file mode 100755
-index 000000000000..53b25aa4dc4a
---- /dev/null
-+++ b/tools/unittests/test_cmatch.py
-@@ -0,0 +1,95 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright(c) 2026: Mauro Carvalho Chehab <mchehab@kernel.org>.
-+#
-+# pylint: disable=C0413,R0904
+diff --git a/tools/lib/python/kdoc/c_lex.py b/tools/lib/python/kdoc/c_lex.py
+index 5da472734ff7..20e50ff0ecd5 100644
+--- a/tools/lib/python/kdoc/c_lex.py
++++ b/tools/lib/python/kdoc/c_lex.py
+@@ -16,6 +16,8 @@ Other errors are logged via log instance.
+ import logging
+ import re
+ 
++from copy import copy
 +
-+
-+"""
-+Unit tests for kernel-doc CMatch.
-+"""
-+
-+import os
-+import re
-+import sys
-+import unittest
-+
-+
-+# Import Python modules
-+
-+SRC_DIR = os.path.dirname(os.path.realpath(__file__))
-+sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
-+
-+from kdoc.c_lex import CMatch
-+from kdoc.xforms_lists import CTransforms
-+from unittest_helper import run_unittest
-+
-+#
-+# Override unittest.TestCase to better compare diffs ignoring whitespaces
-+#
-+class TestCaseDiff(unittest.TestCase):
+ from .kdoc_re import KernRe
+ 
+ log = logging.getLogger(__name__)
+@@ -284,6 +286,172 @@ class CTokenizer():
+         return out
+ 
+ 
++class CTokenArgs:
 +    """
-+    Disable maximum limit on diffs and add a method to better
-+    handle diffs with whitespace differences.
++    Ancillary class to help using backrefs from sub matches.
++
++    If the highest backref contain a "+" at the last element,
++    the logic will be greedy, picking all other delims.
++
++    This is needed to parse struct_group macros with end with ``MEMBERS...``.
 +    """
++    def __init__(self, sub_str):
++        self.sub_groups = set()
++        self.max_group = -1
++        self.greedy = None
 +
-+    @classmethod
-+    def setUpClass(cls):
-+        """Ensure that there won't be limit for diffs"""
-+        cls.maxDiff = None
++        for m in KernRe(r'\\(\d+)([+]?)').finditer(sub_str):
++            group = int(m.group(1))
++            if m.group(2) == "+":
++                if self.greedy and self.greedy != group:
++                    raise ValueError("There are multiple greedy patterns!")
++                self.greedy = group
++
++            self.sub_groups.add(group)
++            self.max_group = max(self.max_group, group)
++
++        if self.greedy:
++            if self.greedy != self.max_group:
++                raise ValueError("Greedy pattern is not the last one!")
++
++            sub_str = KernRe(r'(\\\d+)[+]').sub(r"\1", sub_str)
++
++        self.sub_str = sub_str
++        self.sub_tokeninzer = CTokenizer(sub_str)
++
++    def groups(self, new_tokenizer):
++        """
++        Create replacement arguments for backrefs like:
++
++        ``\0``, ``\1``, ``\2``, ...``\n``
++
++        It also accepts a ``+`` character to the highest backref. When used,
++        it means in practice to ignore delimins after it, being greedy.
++
++        The logic is smart enough to only go up to the maximum required
++        argument, even if there are more.
++
++        If there is a backref for an argument above the limit, it will
++        raise an exception. Please notice that, on C, square brackets
++        don't have any separator on it. Trying to use ``\1``..``\n`` for
++        brackets also raise an exception.
++        """
++
++        level = (0, 0, 0)
++
++        if self.max_group < 0:
++            return level, []
++
++        tokens = new_tokenizer.tokens
++
++        #
++        # Fill \0 with the full token contents
++        #
++        groups_list = [ [] ]
++
++        if 0 in self.sub_groups:
++            inner_level = 0
++
++            for i in range(0, len(tokens)):
++                tok = tokens[i]
++
++                if tok.kind == CToken.BEGIN:
++                    inner_level += 1
++
++                    #
++                    # Discard first begin
++                    #
++                    if not groups_list[0]:
++                        continue
++                elif tok.kind == CToken.END:
++                    inner_level -= 1
++                    if inner_level < 0:
++                        break
++
++                if inner_level:
++                    groups_list[0].append(tok)
++
++        if not self.max_group:
++            return level, groups_list
++
++        delim = None
++
++        #
++        # Ignore everything before BEGIN. The value of begin gives the
++        # delimiter to be used for the matches
++        #
++        for i in range(0, len(tokens)):
++            tok = tokens[i]
++            if tok.kind == CToken.BEGIN:
++                if tok.value == "{":
++                    delim = ";"
++                elif tok.value == "(":
++                    delim = ","
++                else:
++                    self.log.error(fr"Can't handle \1..\n on {sub_str}")
++
++                level = tok.level
++                break
++
++        pos = 1
++        groups_list.append([])
++
++        inner_level = 0
++        for i in range(i + 1, len(tokens)):
++            tok = tokens[i]
++
++            if tok.kind == CToken.BEGIN:
++                inner_level += 1
++            if tok.kind == CToken.END:
++                inner_level -= 1
++                if inner_level < 0:
++                    break
++
++            if tok.kind in [CToken.PUNC, CToken.ENDSTMT] and delim == tok.value:
++                pos += 1
++                if self.greedy and pos > self.max_group:
++                    pos -= 1
++                else:
++                    groups_list.append([])
++
++                    if pos > self.max_group:
++                        break
++
++                    continue
++
++            groups_list[pos].append(tok)
++
++        if pos < self.max_group:
++            log.error(fr"{self.sub_str} groups are up to {pos} instead of {self.max_group}")
++
++        return level, groups_list
++
++    def tokens(self, new_tokenizer):
++        level, groups = self.groups(new_tokenizer)
++
++        new = CTokenizer()
++
++        for tok in self.sub_tokeninzer.tokens:
++            if tok.kind == CToken.BACKREF:
++                group = int(tok.value[1:])
++
++                for group_tok in groups[group]:
++                    new_tok = copy(group_tok)
++
++                    new_level = [0, 0, 0]
++
++                    for i in range(0, len(level)):
++                        new_level[i] = new_tok.level[i] + level[i]
++
++                    new_tok.level = tuple(new_level)
++
++                    new.tokens += [ new_tok ]
++            else:
++                new.tokens += [ tok ]
++
++        return new.tokens
 +
 +
-+#
-+# Tests doing with different macros
-+#
+ class CMatch:
+     """
+     Finding nested delimiters is hard with regular expressions. It is
+@@ -309,10 +477,10 @@ class CMatch:
+     will ignore the search string.
+     """
+ 
+-    # TODO: add a sub method
+ 
+-    def __init__(self, regex):
+-        self.regex = KernRe(regex)
++    def __init__(self, regex, delim="("):
++        self.regex = KernRe("^" + regex + r"\b")
++        self.start_delim = delim
+ 
+     def _search(self, tokenizer):
+         """
+@@ -335,7 +503,6 @@ class CMatch:
+         """
+ 
+         start = None
+-        offset = -1
+         started = False
+ 
+         import sys
+@@ -351,15 +518,24 @@ class CMatch:
+ 
+                 continue
+ 
+-            if not started and tok.kind == CToken.BEGIN:
+-                started = True
+-                continue
++            if not started:
++                if tok.kind == CToken.SPACE:
++                    continue
 +
-+class TestSearch(TestCaseDiff):
-+    """
-+    Test search mechanism
-+    """
++                if tok.kind == CToken.BEGIN and tok.value == self.start_delim:
++                    started = True
++                    continue
 +
-+    def test_search_acquires_simple(self):
-+        line = "__acquires(ctx) foo();"
-+        result = ", ".join(CMatch("__acquires").search(line))
-+        self.assertEqual(result, "__acquires(ctx)")
++                # Name only token without BEGIN/END
++                if i > start:
++                    i -= 1
++                yield start, i
++                start = None
+ 
+             if tok.kind == CToken.END and tok.level == stack[-1][1]:
+                 start, level = stack.pop()
+-                offset = i
+ 
+-                yield CTokenizer(tokenizer.tokens[start:offset + 1])
++                yield start, i
+                 start = None
+ 
+         #
+@@ -367,9 +543,12 @@ class CMatch:
+         # This is meant to solve cases where the caller logic might be
+         # picking an incomplete block.
+         #
+-        if start and offset < 0:
+-            print("WARNING: can't find an end", file=sys.stderr)
+-            yield CTokenizer(tokenizer.tokens[start:])
++        if start and stack:
++            if started:
++                s = str(tokenizer)
++                log.warning(f"can't find a final end at {s}")
 +
-+    def test_search_acquires_multiple(self):
-+        line = "__acquires(ctx) __acquires(other) bar();"
-+        result = ", ".join(CMatch("__acquires").search(line))
-+        self.assertEqual(result, "__acquires(ctx), __acquires(other)")
++            yield start, len(tokenizer.tokens)
+ 
+     def search(self, source):
+         """
+@@ -386,8 +565,75 @@ class CMatch:
+             tokenizer = CTokenizer(source)
+             is_token = False
+ 
+-        for new_tokenizer in self._search(tokenizer):
++        for start, end in self._search(tokenizer):
++            new_tokenizer = CTokenizer(tokenizer.tokens[start:end + 1])
 +
-+    def test_search_acquires_nested_paren(self):
-+        line = "__acquires((ctx1, ctx2)) baz();"
-+        result = ", ".join(CMatch("__acquires").search(line))
-+        self.assertEqual(result, "__acquires((ctx1, ctx2))")
+             if is_token:
+                 yield new_tokenizer
+             else:
+                 yield str(new_tokenizer)
 +
-+    def test_search_must_hold(self):
-+        line = "__must_hold(&lock) do_something();"
-+        result = ", ".join(CMatch("__must_hold").search(line))
-+        self.assertEqual(result, "__must_hold(&lock)")
++    def sub(self, sub_str, source, count=0):
++        """
++        This is similar to re.sub:
 +
-+    def test_search_must_hold_shared(self):
-+        line = "__must_hold_shared(RCU) other();"
-+        result = ", ".join(CMatch("__must_hold_shared").search(line))
-+        self.assertEqual(result, "__must_hold_shared(RCU)")
++        It matches a regex that it is followed by a delimiter,
++        replacing occurrences only if all delimiters are paired.
 +
-+    def test_search_no_false_positive(self):
-+        line = "call__acquires(foo);  // should stay intact"
-+        result = ", ".join(CMatch(r"\b__acquires").search(line))
-+        self.assertEqual(result, "")
++        if the sub argument contains::
 +
-+    def test_search_no_macro_remains(self):
-+        line = "do_something_else();"
-+        result = ", ".join(CMatch("__acquires").search(line))
-+        self.assertEqual(result, "")
++            r'\0'
 +
-+    def test_search_no_function(self):
-+        line = "something"
-+        result = ", ".join(CMatch(line).search(line))
-+        self.assertEqual(result, "")
++        it will work just like re: it places there the matched paired data
++        with the delimiter stripped.
 +
-+#
-+# Run all tests
-+#
-+if __name__ == "__main__":
-+    run_unittest(__file__)
++        If count is different than zero, it will replace at most count
++        items.
++        """
++        if isinstance(source, CTokenizer):
++            is_token = True
++            tokenizer = source
++        else:
++            is_token = False
++            tokenizer = CTokenizer(source)
++
++        # Detect if sub_str contains sub arguments
++
++        args_match = CTokenArgs(sub_str)
++
++        new_tokenizer = CTokenizer()
++        pos = 0
++        n = 0
++
++        #
++        # NOTE: the code below doesn't consider overlays at sub.
++        # We may need to add some extra unit tests to check if those
++        # would cause problems. When replacing by "", this should not
++        # be a problem, but other transformations could be problematic
++        #
++        for start, end in self._search(tokenizer):
++            new_tokenizer.tokens += tokenizer.tokens[pos:start]
++
++            new = CTokenizer(tokenizer.tokens[start:end + 1])
++
++            new_tokenizer.tokens += args_match.tokens(new)
++
++            pos = end + 1
++
++            n += 1
++            if count and n >= count:
++                break
++
++        new_tokenizer.tokens += tokenizer.tokens[pos:]
++
++        if not is_token:
++            return str(new_tokenizer)
++
++        return new_tokenizer
++
++    def __repr__(self):
++        """
++        Returns a displayable version of the class init.
++        """
++
++        return f'CMatch("{self.regex.regex.pattern}")'
 -- 
 2.52.0
 
