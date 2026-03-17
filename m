@@ -1,58 +1,59 @@
-Return-Path: <linux-doc+bounces-79664-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79665-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yIZJMN4suWmVtQEAu9opvQ
-	(envelope-from <linux-doc+bounces-79664-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:28:46 +0100
+	id +E32GCksuWmVtQEAu9opvQ
+	(envelope-from <linux-doc+bounces-79665-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:25:45 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28A082A7E3B
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:28:46 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B8B02A7D8E
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 11:25:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D80833047BE9
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 10:24:17 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4D3B93008CA9
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 10:24:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 71D0B3A3E97;
-	Tue, 17 Mar 2026 10:24:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 696C03A452D;
+	Tue, 17 Mar 2026 10:24:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Aaqk0gG1"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="bTUhlRmE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 860E73A452D
-	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 10:24:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B92139FCAE;
+	Tue, 17 Mar 2026 10:24:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773743057; cv=none; b=FCCjbdRzqc+VtzJjlynxfH25ZGURG+HCrkHu/CVPFYem7YLtr894U1HU1OnLUfrDzVxTckfAM8VW//Zd2G2JPcrlLS+xBDiSC2Jc2WiSW9od//BXjHWyTs5O968xVBOsbw6GM1/b6ath9uj8wxP93/qkfjCLjWLuIbWrAcB12Zg=
+	t=1773743058; cv=none; b=Clf+T168I0C45Hg7LPARfxwtdKswvVISceHgYF9m/7jRVw2FZTHbl8cnPMaIbFHHMvgcvH2xauvmD9c1LfhxOH03nF4g9SHr5dOgPt36X3dbqnUyGhaIodaYjjNbLt9ixOJDZBgvNX5Fx2gxXy04vKlTNIDCr+OgsW4x/Ht3dV4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773743057; c=relaxed/simple;
-	bh=WaihzfZb7D0GgPLI/fHUBiBz/Qojntd45vjXtKX+JR0=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=AU8wSby2r6JAQxy1eAadFyhe+uksKP/k5UgSBG7DGG0uPEsefOIZr+qwb22kOwnfJCfpb5FlFpmoFO30ucEgYv0vlJfgQgcRSAXc3tTwu+RtuKkT1+SaOeM3nCj/WoFNDLnk/z5Xxm26WeMFa/hyXeMEPexvEnm71zBrCgLjIDk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Aaqk0gG1; arc=none smtp.client-ip=185.246.84.56
+	s=arc-20240116; t=1773743058; c=relaxed/simple;
+	bh=fatzP569vqfw/xyBsas/+0N3B+R17VOm20tc23xiw4M=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=D1jGsGNT0/wD/xcMuO00HTd2UC1wuhHJA42UVKSRPHneTtwu2k655wICv3vhiXE/Gb9YfITwaiT6a0K88cIxZlXKB2OCPtSFoy30WKTi3LbAgQ8qMmUDAuLa9f2BMgaatzOjfRyr9wmiBtTZ3PlDnRfLFaYPyBn0q8O2Fb+LlLQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=bTUhlRmE; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 0B5821A2D73;
-	Tue, 17 Mar 2026 10:24:14 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 798874E42629;
+	Tue, 17 Mar 2026 10:24:15 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id D42185FC9A;
-	Tue, 17 Mar 2026 10:24:13 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 85263104503A6;
-	Tue, 17 Mar 2026 11:24:08 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 4E4995FC9A;
+	Tue, 17 Mar 2026 10:24:15 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 38142104503AE;
+	Tue, 17 Mar 2026 11:24:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1773743052; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding; bh=sElk1a0rbyXJo2pC2tiqhDCKfLfW9ww2qocJ8ozGUyk=;
-	b=Aaqk0gG1QlXT/xNCx4Y55fzfBGepX7CPp5up8bZbeaSh+ZD11vCeer/h8+MOiz56iZRZc8
-	s35NETAlpIeX6f/7dJo5YKeFA2NZUQ3M7LkFHWCyEVAN4YJjk8qqadn5y+NuwvB3anCeYy
-	q3PHGFEAq3S4Xy92r0rhjLdmkdQ/g9POg4dcSFXucIRMp01TNNMSvfKmtcXHIxPMMg09Ue
-	3on305oxf5qEiN2uQ6a2BWZczyu10yn8hQr6/igEVJr8WzwkoAWKgc6lFOCBXk3/7YskY3
-	O3xnOr3cyRz15SBFEtool9Zu8QUTpmU2gwsmHTUTAuWP4P0G5d4GriRvQMxGxg==
+	t=1773743054; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=7UGHB4CnkC5yHvpQ1KlMte4F9RtOgCrxhLW069LNgLo=;
+	b=bTUhlRmEA9eD/lL9k3ctzWWtTzNEBpFO4+LerBE3plx/WSl26GYBjk8WtQ1sDmKIzitWxv
+	0UNC8aPSjfBfoG7eFmdoLjVOskYR1SfufuS8r8/DGfw+0Sd6JyvDzVe47ZzZtgcmg2J4tU
+	82bhV2oxGWcgRPFwY5U2Vyfj3KVNeZxOO1yCjIHWRMxlbde90QhqOvG1WdFAbAPRWRElww
+	WNCf2rzUCJk2K776cjVpuq34dWhyrc+HN0qbe3moZKW700cJmMlM2hr0jfqn65BnwPfkZs
+	dhmYrVhfDP+6O4G+3+xsAgZEaBXfCigr/oKTJy0U/SjRhpfffkn51LgTpEnzTg==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH v3 00/27] mtd: spi-nor: Enhance software protection
-Date: Tue, 17 Mar 2026 11:24:03 +0100
-Message-Id: <20260317-winbond-v6-18-rc1-spi-nor-swp-v3-0-2ca9ea4e7b9b@bootlin.com>
+Date: Tue, 17 Mar 2026 11:24:04 +0100
+Subject: [PATCH v3 01/27] mtd: spi-nor: Drop duplicate Kconfig dependency
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,11 +62,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NsQ6CMBSF4Vcxnb2mt5RSnHwP4yClyE20JS0pG
- sK7W0gcnHT8z/CdmUUbyEZ23M0s2ESRvMtR7HfM9Fd3s0Btbia4KBFRwkSu8a6FpAA1BIMQBwL
- nA8RpAK3KtlCd7FRdsmwMwXb03PzzJXdPcfThtd0lXNd/5YTAQeqqMRWKui7w1Hg/3skdjH+w1
- U7i4ymOXP/yRPaMVMJ2miss+Le3LMsbwPZprhwBAAA=
-X-Change-ID: 20251114-winbond-v6-18-rc1-spi-nor-swp-865d36f4f695
+Message-Id: <20260317-winbond-v6-18-rc1-spi-nor-swp-v3-1-2ca9ea4e7b9b@bootlin.com>
+References: <20260317-winbond-v6-18-rc1-spi-nor-swp-v3-0-2ca9ea4e7b9b@bootlin.com>
+In-Reply-To: <20260317-winbond-v6-18-rc1-spi-nor-swp-v3-0-2ca9ea4e7b9b@bootlin.com>
 To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
  Takahiro Kuwano <takahiro.kuwano@infineon.com>, 
  Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
@@ -75,23 +74,23 @@ Cc: Tudor Ambarus <tudor.ambarus@linaro.org>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
  Steam Lin <STLin2@winbond.com>, linux-mtd@lists.infradead.org, 
  linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- Miquel Raynal <miquel.raynal@bootlin.com>, stable@kernel.org
+ Miquel Raynal <miquel.raynal@bootlin.com>
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79664-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79665-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[bootlin.com:+];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -99,140 +98,41 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,bootlin.com:dkim,bootlin.com:email,bootlin.com:mid]
-X-Rspamd-Queue-Id: 28A082A7E3B
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:dkim,bootlin.com:email,bootlin.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 6B8B02A7D8E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hello,
+I do not think the MTD dependency is needed twice. This is likely a
+duplicate coming from a former rebase when the spi-nor core got cleaned
+up a while ago. Remove the extra line.
 
-As recently raised on the mailing-list (link below), it seems that the
-"locking" support in SPI NOR could benefit from some enhancements. As I
-myself had to dig into it recently, here is a proposal.
-
-First issue that I see, the MEMLOCK ioctl is not behaving correctly
-in some cases, as addressed in:
-
-    mtd: spi-nor: swp: Improve locking user experience
-
-Then there is no clear explanation of the shortcuts taken by the kernel
-in terms of uAPI, so there is an attempt to list them in:
-
-    mtd: spi-nor: swp: Explain the MEMLOCK ioctl implementation behaviour
-
-Plus, Tudor also asked if we could cover locking in the testing
-procedure, which is done in:
-
-    mtd: spi-nor: Add steps for testing locking support
-
-In order to simplify this procedure, and because it got very helpful
-during my testing/development, I want to propose additions to the
-debugfs output:
-
-    mtd: spi-nor: debugfs: Add locking support TODO: make the captures again
-
-Finally, I am providing an implementation for the complement (CMP)
-feature in order to allow finer control of the regions locked. This
-feature is for instance available on Winbond chips:
-
-    [core] mtd: spi-nor: swp: Add support for the complement feature
-    [doc]  mtd: spi-nor: Add steps for testing locking with CMP
-    [use]  mtd: spi-nor: winbond: Add CMP locking support
-
-Disclaimer: it was much less straightforward than I initially thought to
-get the CMP feature working correctly. I tested it with as much focus as
-I could, and I am improving the test coverage for the new cases, I am
-also providing extra test cases in the metadata of the commit (which do
-not make sense to test for chip additions, but may be sensible show when
-making core additions like this one), but honestly there are so many
-possibilities, I may still be missing corner cases. I hope this will
-anyway be helpful to others!
-
-All the other patches are misc improvements or style fixes which I faced
-and fixed during my development.
-
-Link: https://lore.kernel.org/linux-mtd/92e99a96-5582-48a5-a4f9-e9b33fcff171@linux.dev/
-
+Fixes: b35b9a10362d ("mtd: spi-nor: Move m25p80 code in spi-nor.c")
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Reviewed-by: Michael Walle <mwalle@kernel.org>
 ---
-Changes in v3:
-- No change at all, just rebased on top of v7.0-rc1.
-- Collected 2 R-by from M. Walle.
-- Link to v2: https://lore.kernel.org/r/20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com
+ drivers/mtd/spi-nor/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-Changes in v2:
-- Collect tags.
-- Add missing Fixes/Cc: stable tags.
-- Add a comment explaining why can_be_top && can_be_bottom is a specific
-  condition.
-- Fix commit logs following Michael Walle's reviews.
-- Amend the documentation following our discussion with Michael Walle as
-  well.
-- Cache the SR register for debugfs use.
-- Create a locked sector map file instead of dumping it as part of the
-  `params` file output.
-- Improved greatly the output of the map as suggested by Michael.
-- Add a patch fixing a duplicate dependency in Kconfig.
-- Add an important comment in the doc about the small 4kiB erase size
-  choice.
-- Add test runs for each and every chip for which the CMP feature is
-  added. This prove me that testing of each and every chip was needed,
-  as some of them seem to feature a broken BFPT table which does not
-  advertise a working 35h (Read CR) command.
-- Added a condition on which the CMP feature is enabled: RDCR must be
-  possible.
-- Link to v1: https://lore.kernel.org/r/20251114-winbond-v6-18-rc1-spi-nor-swp-v1-0-487bc7129931@bootlin.com
+diff --git a/drivers/mtd/spi-nor/Kconfig b/drivers/mtd/spi-nor/Kconfig
+index 24cd25de2b8b..fd05a24d64a9 100644
+--- a/drivers/mtd/spi-nor/Kconfig
++++ b/drivers/mtd/spi-nor/Kconfig
+@@ -1,7 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ menuconfig MTD_SPI_NOR
+ 	tristate "SPI NOR device support"
+-	depends on MTD
+ 	depends on MTD && SPI_MASTER
+ 	select SPI_MEM
+ 	help
 
----
-Miquel Raynal (27):
-      mtd: spi-nor: Drop duplicate Kconfig dependency
-      mtd: spi-nor: debugfs: Fix the flags list
-      mtd: spi-nor: swp: Improve locking user experience
-      mtd: spi-nor: Improve opcodes documentation
-      mtd: spi-nor: debugfs: Align variable access with the rest of the file
-      mtd: spi-nor: debugfs: Enhance output
-      mtd: spi-nor: swp: Explain the MEMLOCK ioctl implementation behaviour
-      mtd: spi-nor: swp: Clarify a comment
-      mtd: spi-nor: swp: Use a pointer for SR instead of a single byte
-      mtd: spi-nor: swp: Create a helper that writes SR, CR and checks
-      mtd: spi-nor: swp: Rename a mask
-      mtd: spi-nor: swp: Create a TB intermediate variable
-      mtd: spi-nor: swp: Create helpers for building the SR register
-      mtd: spi-nor: swp: Simplify checking the locked/unlocked range
-      mtd: spi-nor: swp: Cosmetic changes
-      mtd: spi-nor: Create a local SR cache
-      mtd: spi-nor: debugfs: Add locking support
-      mtd: spi-nor: debugfs: Add a locked sectors map
-      mtd: spi-nor: Add steps for testing locking support
-      mtd: spi-nor: swp: Add support for the complement feature
-      mtd: spi-nor: Add steps for testing locking with CMP
-      mtd: spi-nor: winbond: Add W25H512NWxxAM CMP locking support
-      mtd: spi-nor: winbond: Add W25H01NWxxAM CMP locking support
-      mtd: spi-nor: winbond: Add W25H02NWxxAM CMP locking support
-      mtd: spi-nor: winbond: Add W25H01NWxxIQ CMP locking support
-      mtd: spi-nor: winbond: Add W25Q01NWxxIM CMP locking support
-      mtd: spi-nor: winbond: Add W25Q02NWxxIM CMP locking support
-
- Documentation/driver-api/mtd/spi-nor.rst | 164 ++++++++++++++
- drivers/mtd/spi-nor/Kconfig              |   1 -
- drivers/mtd/spi-nor/core.c               |  74 ++++++-
- drivers/mtd/spi-nor/core.h               |  10 +
- drivers/mtd/spi-nor/debugfs.c            |  63 +++++-
- drivers/mtd/spi-nor/swp.c                | 359 ++++++++++++++++++++++++-------
- drivers/mtd/spi-nor/winbond.c            |  41 +++-
- include/linux/mtd/spi-nor.h              |   7 +-
- 8 files changed, 631 insertions(+), 88 deletions(-)
----
-base-commit: 7ec0b5645131696d2ae9423ae32a80441ce201d6
-change-id: 20251114-winbond-v6-18-rc1-spi-nor-swp-865d36f4f695
-
-Best regards,
 -- 
-Miquel Raynal <miquel.raynal@bootlin.com>
+2.51.1
 
 
