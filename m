@@ -1,201 +1,157 @@
-Return-Path: <linux-doc+bounces-79709-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79713-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WH/KIedIuWmK+QEAu9opvQ
-	(envelope-from <linux-doc+bounces-79709-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:28:23 +0100
+	id uDJUJUdMuWnG/QEAu9opvQ
+	(envelope-from <linux-doc+bounces-79713-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:42:47 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A3F32A9DA1
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:28:22 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id C1D2A2AA0C1
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 13:42:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2142430095F9
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 12:26:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AFCB7304F32F
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 12:42:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4EEE3C197E;
-	Tue, 17 Mar 2026 12:26:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D5353C1419;
+	Tue, 17 Mar 2026 12:42:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="RTf5Aub7";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="b/7nWmUw"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="T9RwhJa5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.98])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A89C3C140A
-	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 12:26:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23AD63BED74;
+	Tue, 17 Mar 2026 12:42:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773750394; cv=none; b=k9PKHqgwrK9jXN6NvKDKfvpJbcYkopjPy/K1t70RT1LIk6rJlYlDbGGm3j80QVu+NP3d764nSZSoC4uEb2XOjjqQtmVjy8+xDw0IpnkuG2DSMA/FyVV+D8i3Zeg69Po+BL+pwKzvJGMEPkkyER33oniCIMfxI0Gd1T59se6X+Dk=
+	t=1773751363; cv=none; b=RtQShW6ndiEY8TKC6GUZyRDgKESqQ47/5UOV9gJK4IW814EeDPX4Q1k8QOP4Eh/BzPs6IQ/SvZAvVIThNwhUvk5bckVsKpPu7v/bX2cLzDEM5s1C2qpEnlE7LVIB7PYDSCJUljvmp7TRrHcldWDO5cZoaLRVK4cBdKJMySxXTB0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773750394; c=relaxed/simple;
-	bh=yc/kkBw6SpWu0OvYbApVk/Tn/fR+d0nZqZWEFwCR5uQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NCoGalMHMm7xavgrnOC0c4ar5PME5PU+NtB094l+AR41TpfXnK1OPKnKG6BylT/si2n3CP2AMtVkQPhTOjregE91kPiO04RF7UczO2WkrpMguWNTWP51hE3tRBRzL9j+wd9JYZaY2SWUmBwBLCMhi4PAs4Q8DKbDm6PD8UOK9b0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=RTf5Aub7; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=b/7nWmUw; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1773750392;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=CX6eu/HWH2lLWhCaUcOwMequpqLf3+91QGi4lPX1PnU=;
-	b=RTf5Aub7efO76+rPDKJb15ZY1iAOTL4Yyz4D3Og1C4edxOrrVVrk15pBPbzeO0YXOXOmQn
-	s3/u3XFSKILKAuf9JluUhINy8oRN9U/rkMhkWkATwrV+TJSZINRj2ScP6rvAs3FbN0bVnZ
-	KCvOetsj1q6WU9BebOGWOKj6PP2hdZI=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-468-92eZ1DzzNPiGL0DNbwjxrQ-1; Tue, 17 Mar 2026 08:26:30 -0400
-X-MC-Unique: 92eZ1DzzNPiGL0DNbwjxrQ-1
-X-Mimecast-MFC-AGG-ID: 92eZ1DzzNPiGL0DNbwjxrQ_1773750390
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-50921f7da6dso3381941cf.0
-        for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 05:26:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1773750390; x=1774355190; darn=vger.kernel.org;
-        h=user-agent:in-reply-to:content-disposition:mime-version:references
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CX6eu/HWH2lLWhCaUcOwMequpqLf3+91QGi4lPX1PnU=;
-        b=b/7nWmUwKsF2YUGJ8EBSh41DEZuwjUQXXr8ixGH06rXbDS6HxEO2fSeXQ1LwLMhrXZ
-         8tIVdTLQDwr185kfTaAvL/qzDXcPJRmA1FJ8+G9ef4SSIyCBV8fnrU4KPHLllHFp0zNU
-         X1wtBaqwkvh4NGRdRsA9rJHBc82UtdlziWPDR1YZ1jFF0aths5Evaw5K4C4fc+3CKLKZ
-         Ho9oGluJYu78CYAaGyWW8dJNHWMTr6Hrte9kdkj4NfFehOvCNnN4dykZt2KUe5IwCAix
-         HtUsCdEr7Fa8MjOhowZ/PqTEPpHiBdIvNnEF8RIASQtsPa1nbsmQKlvMOWBgKDH/TVqN
-         wI+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773750390; x=1774355190;
-        h=user-agent:in-reply-to:content-disposition:mime-version:references
-         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=CX6eu/HWH2lLWhCaUcOwMequpqLf3+91QGi4lPX1PnU=;
-        b=mFGRq2Y46GIDW7EzBx+qZLyH3JF/hPKbKSY7NZDsPjwNtIqoX1ZgNnQ+mJcpXFg3gu
-         8xJmuk6LE+YXg1mo5+kySassDT9OkVNr8E42oAUbN2iQrn8ip8zBNbEy9ecj9EGjCvt8
-         eRVeHuqC5hKp0pFyBQMa+ONTBbK1NjLEaGEcOvbFoO8c7PnDMjF2RIxdlHoU0YiOvs+2
-         RG/H8dLtQpD/WfY0KosuHSsHYwD634rXq1Y/MQu3wuSxBa3XndVoHfZ3Mrp5ShFvZuR9
-         2DFRwHIVf0Ujulhiur2jBgFErn44Pv0NLSx8dSlwPnTcYSvTiZyX7UVGJ3RXWckomQra
-         MmSg==
-X-Forwarded-Encrypted: i=1; AJvYcCW3ISeOpKusZoXrfOA5npQUXeg7QnC2/2GvgvF5Ceof0oiow+nivZGFHlcgZ4iE0j/oc0GwwTmJz4Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzP8xjqqdvDeMezwEWzjiLIlTEuvBdHG1nWxRDElQchK/tS4Hmd
-	fU+Atjoy+Lfyvsg0F5W2E9FlVL4L4dDqtAZUNtVAN3RS/FcPp9xWLFvZgmvPdDWJHhmCh/6gv0X
-	hQippg9ueTkIJMqiAiMVc4RxTkv8vx15RMz1Udj15aVUhKdQc35si4jocDqb8ag==
-X-Gm-Gg: ATEYQzwXtNL41HTE357ycjvI/OG2/9ZEjWu1G3U+V63nLIj4GzanVJZjQ7t/cA2sx3w
-	ORRvOgqOkDV8XFeKmRuDAwjWcmoB7Mu8omBzPnPDdLqnPyBbNS8mNKuaP0prrSxzeTih1JxVkbx
-	pcHmtlWHPFBuHB168qBUpzFDJmENO0bBoUAteNRFXOofpkPYGntO2AeZtOjWBdT4zTA7ajZPRPh
-	8Sq4h3AwnVK9WCMEUPE6SrKV2t8mQTebGitQTYMNENztf8HvYCR7O1GhtgykHck//TqKP5p5DPr
-	ulF61zQeL98mPM6f2sOQr6S7saEwgmoN2yyRJnsi7NgIebgkbhQIfVE19gTYFUn6WpznG/aSXaN
-	eF9ff0pJRqjqCG+2E8AfbjZBAjc/iLTvvsdg/iXM6qPPdyEB1/9qYKDRJ
-X-Received: by 2002:ac8:7f0a:0:b0:509:1949:7b36 with SMTP id d75a77b69052e-50957d494f1mr211113021cf.30.1773750390342;
-        Tue, 17 Mar 2026 05:26:30 -0700 (PDT)
-X-Received: by 2002:ac8:7f0a:0:b0:509:1949:7b36 with SMTP id d75a77b69052e-50957d494f1mr211112661cf.30.1773750389867;
-        Tue, 17 Mar 2026 05:26:29 -0700 (PDT)
-Received: from redhat.com (c-73-183-52-120.hsd1.pa.comcast.net. [73.183.52.120])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5093a146218sm134608351cf.30.2026.03.17.05.26.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Mar 2026 05:26:29 -0700 (PDT)
-Date: Tue, 17 Mar 2026 08:26:27 -0400
-From: Brian Masney <bmasney@redhat.com>
-To: Hans de Goede <hansg@kernel.org>
-Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-	Saravana Kannan <saravanak@kernel.org>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org
-Subject: Re: [PATCH] clk: add new Kconfig to control default behavior of
- disabling unused clocks
-Message-ID: <ablIc4OkoJvdeddT@redhat.com>
-References: <20260316-clk-ignore-unused-kconfig-v1-1-6e95a4fb0c94@redhat.com>
- <20260317-almond-leech-of-correction-2a2ef6@houat>
- <com5zf4bfgb3eoelbmy5pfykhdow6ne3nteua6l7bnzkr72dsb@pehxxygji5z2>
- <90efa4a3-7042-4fdd-9108-9234b0ba9573@kernel.org>
+	s=arc-20240116; t=1773751363; c=relaxed/simple;
+	bh=adtxEG7dFOh4SdXBHztSm6DBpYkJ2W9np+GnxsmKE2Y=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=kQkHVKCVzQ7XUpUDsN15+enPCI9ArnyqKa9+OJZcUfvo+itHRR3D1kFf7euG5mulch6hoZn4So4xZ9HGPJ8EgCBdvWbfFMJq5xUJTB7jE6oNgTg+CGGJuhSe6eH2c2BomgRC6ACxQmUkcao511/j6KTXjf1AlF0+3JiZu7PRRi8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=T9RwhJa5; arc=none smtp.client-ip=188.68.63.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+Received: from mors-relay-2501.netcup.net (localhost [127.0.0.1])
+	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4fZrwQ5VWYz60v4;
+	Tue, 17 Mar 2026 13:33:26 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
+	s=key2; t=1773750806;
+	bh=adtxEG7dFOh4SdXBHztSm6DBpYkJ2W9np+GnxsmKE2Y=;
+	h=From:To:Cc:Subject:Date:From;
+	b=T9RwhJa5hxLnSH+BIXw+u/7xXpC32cdx6IzBNRbZ3SIE1ElB+A7DyrZiG2k3BBMcL
+	 mqhBvajJhHDGpjv/55i/piMY4F5Zb5uvv33HCAiKsUWHUhZkhj7D7HbWzKxLwaSECG
+	 7roI67Idp9MQjsWJ4QOJ0v9KqGTU5ynB79K1V7XT7z1pbshlFLlM/OKpRORZGXKs+i
+	 3qbqcOWBJKQDd9l2M0EGBcrRDxFu+28vttxb972EBVBParLJZvOWXwT3+zrcw5GK8U
+	 NF3YncFmvFjx+kC4z+bhW4gdB+uMT1vVi7b+Jzrx73i+TeOxo0rlOV4Evffc2Iwx79
+	 qaf1sB/Jp+I8g==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
+	by mors-relay-2501.netcup.net (Postfix) with ESMTPS id 4fZrwQ4mpNz4xdP;
+	Tue, 17 Mar 2026 13:33:26 +0100 (CET)
+Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4fZrwP5Pzlz8sgW;
+	Tue, 17 Mar 2026 13:33:25 +0100 (CET)
+Received: from luggage.fritz.box (unknown [IPv6:2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160])
+	by mxe9fb.netcup.net (Postfix) with ESMTPSA id A2719635A2;
+	Tue, 17 Mar 2026 13:33:24 +0100 (CET)
+Authentication-Results: mxe9fb;
+	spf=pass (sender IP is 2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160) smtp.mailfrom=linux@leemhuis.info smtp.helo=luggage.fritz.box
+Received-SPF: pass (mxe9fb: connection is authenticated)
+From: Thorsten Leemhuis <linux@leemhuis.info>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org,
+	regressions@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/5] docs: reporting-issues: tweak a few areas and rewrite
+ the ending
+Date: Tue, 17 Mar 2026 13:33:03 +0100
+Message-ID: <cover.1773750701.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <90efa4a3-7042-4fdd-9108-9234b0ba9573@kernel.org>
-User-Agent: Mutt/2.3.0 (2026-01-25)
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-PPP-Message-ID: 
+ <177375080532.2889253.14031627935577056975@mxe9fb.netcup.net>
+X-NC-CID: ++Kt/dqzTDJc3KbmHsuPei5Mlc5gi1GjMXIJOv1c0sAZ2XJHpbM=
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	MID_CONTAINS_FROM(1.00)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[leemhuis.info:s=key2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	TAGGED_FROM(0.00)[bounces-79709-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79713-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[leemhuis.info:dkim,leemhuis.info:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns];
+	DMARC_NA(0.00)[leemhuis.info];
+	DKIM_TRACE(0.00)[leemhuis.info:+];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[linux@leemhuis.info,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bmasney@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,fedoraproject.org:url]
-X-Rspamd-Queue-Id: 7A3F32A9DA1
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: C1D2A2AA0C1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Hans,
+This patch-set tweaks a few parts in the fringes of our text on bug
+reporting while replacing two sections at the end with a new text as
+proper appendix that hopefully better fits the purpose and covers more
+aspects.
 
-On Tue, Mar 17, 2026 at 01:16:33PM +0100, Hans de Goede wrote:
-> On 17-Mar-26 13:14, Abel Vesa wrote:
-> > On 26-03-17 08:30:24, Maxime Ripard wrote:
-> >> On Mon, Mar 16, 2026 at 06:33:45PM -0400, Brian Masney wrote:
-> >>> At the 2023 Linux Plumbers Conference in Richmond VA, there was a
-> >>> discussion about how large number of systems need to boot with
-> >>> clk_ignore_unused. Per the discussions at the conference, the existing
-> >>> behavior in the clk core is broken, and there is a desire to completely
-> >>> remove this functionality.
-> >>
-> >> Broken how?
-> >>
-> >> clk_ignore_unused is to a point where it's seriously cargo-culted and
-> >> documented as a silver bullet, when in reality it's just a debug tool
-> >> for broken drivers, and the driver must be fixed.
-> >>
-> >> But nobody is actually fixing it.
-> >>
-> >> See
-> >> https://fedoraproject.org/wiki/Changes/Automatic_DTB_selection_for_aarch64_EFI_systems#How_To_Test
-> >> for example. The affected clock could be marked as CLK_IS_CRITICAL, and
-> >> fedora wouldn't have to package anything, change anything, etc. But no,
-> >> the problem is clk_ignore_unused.
-> > 
-> > Nope. Don't ever mark clocks as critical unless system crashes without
-> > them.
-> > 
-> > Here is an example or why clocks cannot be marked as critical but need
-> > to be kept by the clk_ignore_unused: display driver probes later.
-> > If you mark it as critical you just made the clock stay enabled even
-> > when display is off.
-> > 
-> > And this is just one example.
-> 
-> Interesting, so maybe we need a new way flag to mark clocks as not to
-> be turned off when turning unused clocks off, which does not block
-> them getting disabled normally later ?
-> 
-> (I was under the mistaken impression this is what CLK_IS_CRITICAL did)
+This is the first versions of this patch-set, but it starts as v2, as it
+contains three patches and a few bits that were part of an earlier and
+bigger patch-set. This incorporates review feedback given there. The
+last patch in this series is mostly new, but includes a few bits from
+patch 4 and 5 of the earlier series.
 
-There's a separate flag CLK_IGNORE_UNUSED that can be used instead.
+Ciao, Thorsten
 
-Brian
+v2:
+- initial version with 3 patches taken from this abandoned patch-set:
+  https://lore.kernel.org/all/cover.1761481839.git.linux@leemhuis.info/
+- Rewrite the section at the end and make it a proper appendix; based
+  on patches 4 and 5 from above patch-set
+- Incorporate various mostly minor review feedback. Among them:
+  - Drop the change switching from single to double quotes.
+  - Point out that feedback can be sent as a patch, too – and add a
+    patch to sync the text about feedback with two other documents that
+    contain a para which this section is based on.
+
+Thorsten Leemhuis (5):
+  docs: reporting-issues: mention text is best viewed rendered
+  docs: reporting-issues: tweak the reference section intro
+  docs: reporting-issues: add conclusion to the step-by-step guide
+  docs: verify-bugs-… and quickly-build-…: improve feedback section
+  docs: reporting-issues: create a proper appendix explaining
+    specialties
+
+ .../quickly-build-trimmed-linux.rst           |  14 +-
+ .../admin-guide/reporting-issues.rst          | 210 +++++++++---------
+ .../verify-bugs-and-bisect-regressions.rst    |  15 +-
+ 3 files changed, 123 insertions(+), 116 deletions(-)
+
+
+base-commit: 73f175a46330c57ab5797287233cbf83a36b6a99
+-- 
+2.53.0
 
 
