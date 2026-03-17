@@ -1,248 +1,359 @@
-Return-Path: <linux-doc+bounces-79849-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79851-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EMnZAS7QuWmMOAIAu9opvQ
-	(envelope-from <linux-doc+bounces-79849-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 23:05:34 +0100
+	id 2CFtIMrguWk7PAIAu9opvQ
+	(envelope-from <linux-doc+bounces-79851-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 00:16:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BE1B2B2EE2
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 23:05:33 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 687F42B4122
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 00:16:26 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 13067308A8BF
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 22:04:13 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 837FC30ED0CB
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 23:12:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ACB36355F42;
-	Tue, 17 Mar 2026 22:04:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 872F53E4C93;
+	Tue, 17 Mar 2026 23:09:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="VVK741u9"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="JpofF690"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011017.outbound.protection.outlook.com [52.101.57.17])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EE2033ADAD;
-	Tue, 17 Mar 2026 22:04:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.57.17
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773785051; cv=fail; b=OxJAysbhATleD9POEEKvXiG76986uF1q4x5CjSDMHWu2cOdo86vWgMLGpqvf6Ay1PEV/x+A+1xJIg7E0s8bzCo8P7d2oZvzXctdF0va7B8AsrUzD9Cyi7iEEXxhS91DgM4E8Cj4N5Qdl28DYsprM/WtVInqPZOqUCW+uF4oaZeM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773785051; c=relaxed/simple;
-	bh=zOFf/W+2xoWXXVDsM7MlVA+q1SYsSCFQV/T/Sslts5o=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ShEDf7PX7yksvezkbBeYpDWrjkQhBH1YbQaPe4k+qB1jagQ/EuqqwNoTpSGJ/L/k1+wQZcKgA8O2NixPxPTeBUguIDgncaiYoTHBBWb+15DSDrtL2UMg1WV9O7LDv2D+oFYQrsYy7H/U7TY3jGbLy2V5NoH7uhCHV9+yy2E9cmE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=VVK741u9; arc=fail smtp.client-ip=52.101.57.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l+RBJe83K37eueBnMxauCZYGrWSZUgn9SeGgmY5GYR86bH2Kwj+rj8gQmZSkRgHNxsozhfzxMiusSVdsQBOTN10By/e4ZWvZbUSQJ6LwQvANXjNLPHnR0ipz3xedI+wq9SB7BWh2hDeRLOiJu5fSxVYvpVgP95eUdXn9E73Upw8ZzrL1kM5KBQJSGQcleWPtBfppxJ9tbbkRKR7Ni4bDd2hWa5dzoIW36aOAvFcv5Mi8K5BpydzjeI36b7/z3AQATwrkyIKV9n2WRyqme5qxdRbXdluLlDHE56tDMYT3gmZfR6DAHRqXzceH0/bHuX87KoRR3FETrdXEXIg3JF/lBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=a8mu+hppfAii2Oy+pp+HkPKMm0NDU7Xfm+XwQ8L+2hk=;
- b=FRKcmTMR9AWrbKKwfuSaYfNOvt2Dk3Q1VQthP63i1mOZ/5bmhWdINU6qXRQfPZ6IcT8EZDXdBhOpoHDP6inhJBN2lJEF4FIrnQKEiWFQyzYZySUf1ZhpocLpZ3CA6ruYPXMDHypOYTkRWvvXsKWWZjirtdvpngKCM3cSnhp5VkSb7i77gKFFT8EfQ5OtNjhKkXToNlGpLAkbGoVnvD7oOAErz+E9RoQGLtjM5Egiq6QqnAkJ3f45a+MPD7enRxlvyNYEJq7VXp+b/HQTE8IOpvGUZMyxzASb7cTk3VwzhKe1GEPMEnzUdjubXE+qgyiOeChxEGi23LO4KvpsHIOKDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=a8mu+hppfAii2Oy+pp+HkPKMm0NDU7Xfm+XwQ8L+2hk=;
- b=VVK741u9vbrH2AIec5kHbmkBpx0BsbTIQ0MvqYIup91/7BU/7IFF5iJuvOjJlRwQEvWJqS9TTeGWF9bROit7CPtMTCe+PcEM2aFXdHh3AyQdHgtmc1vMHyte3YDLhuKYQzLMBMW58VYIALk5hsIn9YqQyATEUPEq/weUxwhmv5QkbC+wyuTahC0rvejkm7t/RT3ucnSO2tvrcqNmJtA34tLbyR61jGJEVCu7oSMC/egAK48GKq8a9gqcTAtEQXc8Tqaf1HvaZBHLJTnYlMlhx+IslkfipyD7W4svnO/8RrUZkWaTIO0AvPJHGtOoVkXu55RNLCpSTXMfW5ZTp5ZA7g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
- DM4PR12MB9735.namprd12.prod.outlook.com (2603:10b6:8:225::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9723.16; Tue, 17 Mar 2026 22:04:04 +0000
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33%4]) with mapi id 15.20.9723.014; Tue, 17 Mar 2026
- 22:04:03 +0000
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: linux-kernel@vger.kernel.org
-Cc: Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Dave Airlie <airlied@redhat.com>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Koen Koning <koen.koning@linux.intel.com>,
-	dri-devel@lists.freedesktop.org,
-	rust-for-linux@vger.kernel.org,
-	Nikola Djukic <ndjukic@nvidia.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Huang Rui <ray.huang@amd.com>,
-	Matthew Auld <matthew.auld@intel.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Lucas De Marchi <lucas.demarchi@intel.com>,
-	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
-	Helge Deller <deller@gmx.de>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	John Hubbard <jhubbard@nvidia.com>,
-	Alistair Popple <apopple@nvidia.com>,
-	Timur Tabi <ttabi@nvidia.com>,
-	Edwin Peer <epeer@nvidia.com>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Andrea Righi <arighi@nvidia.com>,
-	Andy Ritger <aritger@nvidia.com>,
-	Zhi Wang <zhiw@nvidia.com>,
-	Balbir Singh <balbirs@nvidia.com>,
-	Philipp Stanner <phasta@kernel.org>,
-	Elle Rhumsaa <elle@weathered-steel.dev>,
-	alexeyi@nvidia.com,
-	Eliot Courtney <ecourtney@nvidia.com>,
-	joel@joelfernandes.org,
-	linux-doc@vger.kernel.org,
-	amd-gfx@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-fbdev@vger.kernel.org,
-	Joel Fernandes <joelagnelf@nvidia.com>
-Subject: [PATCH v13 2/2] MAINTAINERS: gpu: buddy: Update reviewer
-Date: Tue, 17 Mar 2026 18:03:23 -0400
-Message-Id: <20260317220323.1909618-3-joelagnelf@nvidia.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260317220323.1909618-1-joelagnelf@nvidia.com>
-References: <20260308180407.3988286-1-joelagnelf@nvidia.com>
- <20260317220323.1909618-1-joelagnelf@nvidia.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BLAPR05CA0023.namprd05.prod.outlook.com
- (2603:10b6:208:36e::25) To DS0PR12MB6486.namprd12.prod.outlook.com
- (2603:10b6:8:c5::21)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C9C93A383A;
+	Tue, 17 Mar 2026 23:09:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773788962; cv=none; b=dFfUKz1ECowzef/+6eOcwOI/Qv6lJSWj2u85ZjKbcuFK64suzpJ1aqOp6vt7+T/IsY6coBeu+8Eezt7plAJ7A144Xt3FGdQv/1X+2/rneJtPVt9FYFw+1ACGLwBcxnZS2fm/F6qsZcn7Jf/LEp0FizENHG4EVkydav1myn4l8AE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773788962; c=relaxed/simple;
+	bh=EEtdb5vDUusZK87MYBHLA4U2DvAHvJNA4vPTu53c4Rc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=G/RWnjJ97+L9w3GVontxtqZLt/sGpzD7hl+LGJDhYvnnOnMxYDqWXSgmxUeDoH9tlH/m/KqVDwiqAh/1mFKTuOEA2ZSnc8mAD5Pu/kC5cljjTPS6sFHF9HFVU1h76Q8nOIu1hK+I81Ta5idAYua9GRRGpbx7J6rqHW8/KWEEFlQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=JpofF690; arc=none smtp.client-ip=198.175.65.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1773788961; x=1805324961;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=EEtdb5vDUusZK87MYBHLA4U2DvAHvJNA4vPTu53c4Rc=;
+  b=JpofF690K+x8H285Ga0EGUFGXCXiGuPCsHvhu0UEEZvqSQQJwyJ7Gp6F
+   qI3Hec7Ut7aOsxzreENkaog1zsM/yPJlX0spB3BBSgoT/kf23SPTgqtKU
+   lVHGDOVYI/FchkkV0x/OiYOKrH1cA7acesncERt6nh9U+zWv9srVt3eA7
+   L5DG4HEHsY2LEKInETBk+Dq+CmNgcfxh3N0bXr9cZ/Z024XVLvQYuSWHW
+   yb+GNtaqO/5DwOwiLltqma4HWLiAQVOYleBh7MuzJma+4U6sDDCMF67OL
+   q2oRV260SpLoywZP/G+Nnhwzm/Q+vc+KOw60mCST6TAfhfBOooSaz9OOV
+   g==;
+X-CSE-ConnectionGUID: oeA0hLxnToyQFK3S/HIBKw==
+X-CSE-MsgGUID: mlZGCd02TniOdC0rH33xhg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11732"; a="74811564"
+X-IronPort-AV: E=Sophos;i="6.23,126,1770624000"; 
+   d="scan'208";a="74811564"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Mar 2026 16:09:20 -0700
+X-CSE-ConnectionGUID: cjk9yN39SGyyexT13blJAw==
+X-CSE-MsgGUID: HXmOvwZuTgCAmvhoXh62ww==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,126,1770624000"; 
+   d="scan'208";a="226566370"
+Received: from anguy11-upstream.jf.intel.com ([10.166.9.133])
+  by orviesa003.jf.intel.com with ESMTP; 17 Mar 2026 16:09:19 -0700
+From: Tony Nguyen <anthony.l.nguyen@intel.com>
+To: davem@davemloft.net,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	edumazet@google.com,
+	andrew+netdev@lunn.ch,
+	netdev@vger.kernel.org
+Cc: Tony Nguyen <anthony.l.nguyen@intel.com>,
+	larysa.zaremba@intel.com,
+	przemyslaw.kitszel@intel.com,
+	aleksander.lobakin@intel.com,
+	sridhar.samudrala@intel.com,
+	anjali.singhai@intel.com,
+	michal.swiatkowski@linux.intel.com,
+	maciej.fijalkowski@intel.com,
+	emil.s.tantilov@intel.com,
+	madhu.chittim@intel.com,
+	joshua.a.hay@intel.com,
+	jacob.e.keller@intel.com,
+	jayaprakash.shanmugam@intel.com,
+	natalia.wochtman@intel.com,
+	jiri@resnulli.us,
+	horms@kernel.org,
+	corbet@lwn.net,
+	richardcochran@gmail.com,
+	linux-doc@vger.kernel.org
+Subject: [PATCH net-next 00/15][pull request] Introduce iXD driver
+Date: Tue, 17 Mar 2026 16:08:48 -0700
+Message-ID: <20260317230905.847744-1-anthony.l.nguyen@intel.com>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|DM4PR12MB9735:EE_
-X-MS-Office365-Filtering-Correlation-Id: f36ac0ae-0627-429b-53f3-08de84711a03
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|7416014|366016|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	/3LDqVoJYF8AzuYLJAAhtY4hfACmwotpsx3blWKjh6eZ7M8pDyR9olYyBYCTtTFxuf5cF1jx0PUrJfNA3TWAUtsBpb2Gl3I2LYPvGFLp15OH8RvSl8gtOFyEqexSvBl6+S0Uxw1Xp9IKGVSrNtH7HZLjSJKl/pyOxgJ0VYwG5a8aM+FCAcoqFhoCIw4QS7b5O7mZGyLaPV9oBSpzVgawC5TV/bQxAgijud7EzdfTizJz4EjGSYJf/4Jztnnt7Gk87Yt6qzzm/t5UXv9XXEclhnAhQwZRPdM2PVYFkFEt4gGzH3yd/C6VhQ1ssCy2I2O7E/3/SvYgd7i2suml8h1as2TW0JlfIQr7395ZKxzZ2yjnJbfiZ4G3epbendNPX/V0CuuE/ag4lfTPaZ5iY7vBKodn8PI9oFGwc4kH0zstlxFeRRYSXqLvwsVtKtEr/xwW17R41gl3LQ3wPeNKTlIP71LVXlWBtQ0qvpTPWBvMQ5QgyytX+VfskOWY5rsiVAILpwji1zyG195NIEZweyHAP2UqNXpHKvRi/sNcmJy7wQAYwnU39+PheMmo8K+V3i8yizNwyDi0zCQ6DlwmhtY4CgIuS72gvXetKdOeU9yMxIYh9GNEoR7enQLiWK0f3t+qwnX2pQD5zEIr2z8mbYypcFqAg68ea2vxckwO/LyX3EZ1Kcd5ulJWwVSZZu0E5OPTx5HrwQYfkv9/moAjr3OmbJxEXQCT8vSsj8QV8aK2Az4=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?RXdjM9Ohq/YAkbu0uEtAK+90GPTANg3Lr+NBjmTZZYgMBWpaFowWzWucv9Qz?=
- =?us-ascii?Q?FIe5zs2kH1TjyYszMpodhQtdc5hPpjSqU+AO0Oosous1+knmbwSf48oZ2/4K?=
- =?us-ascii?Q?S3krXu/I7gXwHahq1Z4YI9W6eTV2LDStWCB/2xpc8jlz1w1C9SvvRA4Tw7dZ?=
- =?us-ascii?Q?MMS9jbde7zP4+rN5IMx3IlULXJDlHsVuOV6YczBvOP1iourQA1td1chcDy8d?=
- =?us-ascii?Q?M/dYLdTuiKtT/jJs62RvuFGs4gicHTCEmvRzb4cpn8q2QuLr76BAx/mSdQzR?=
- =?us-ascii?Q?i1AzLKIcu2fh0prQHAvLBg95CNcE+1x0UUUdS0BbYNRRpE1r0X+xCDbatADt?=
- =?us-ascii?Q?73W5v/X5mRg6snoJ1GmsbFcYBC4RtBoNfpRE+cbJ5CzAlX6QwzjJ632XvNiW?=
- =?us-ascii?Q?HxSMcFdNFuO6o14kWmr4f18TpZraANVbDcR2gZkUBF4xRGV1bYUS/nsVoAU6?=
- =?us-ascii?Q?j/niNBRimi3Fuxe3kVkWKxW6mXgYZ967DN+tec/G/ZxP9LjMCX3mka/AjvdZ?=
- =?us-ascii?Q?IGBnKn4mO0dnK55aBqQ0qfSRz1JX2ce1N4Ek4y5ibB9CN85RVN9xZfTXbsjB?=
- =?us-ascii?Q?h/LonZDZkvILOIQ30dTgKFBu1JcINhnLiHGeJTOx+HQ82PbAiT0BldRVh7Sa?=
- =?us-ascii?Q?7RvRp9wvagHMMu6nEnhydAZ88RRKjFjg5XUL9mr4+8W+0y5bbRiIH45zt9Wo?=
- =?us-ascii?Q?UHI4QgXltmtCWzh/8O1JuLufYbFZxwZdKCZkKnLkAlWq4wxriDHEPuGgUUR6?=
- =?us-ascii?Q?TtTCeRmj7RwgyiYveh5/2hMPffY9XMp6YyJsq/156pdFiiu9VzNU4HNkCgzX?=
- =?us-ascii?Q?bM+O4oihYZQSRga4ozI2ddGbqdZTKA+2mQLXvfVUVAmbHSI0zH7OaKyPUln5?=
- =?us-ascii?Q?GlB4NYvxAZYy2rmUIIaSLmeyRmtUVdDg9UYNE7jh9nqOtt0BQ+gWlzKZe8C6?=
- =?us-ascii?Q?r3S7AW2xFBqxmT064nsK+SFWJHKAZukuSEKyXkb9QnEIiVjWq3GY6h43tIhy?=
- =?us-ascii?Q?0Nfyd1E6scyXksykg2oneAjnORRzilozuBgRYfukz7iUd2AlueuREgZc86ck?=
- =?us-ascii?Q?LnncPIcyfxASOgJUFm+uMyITCpYP1BF4PPj3Jov3L47k7tzbn0NvfS4xevfD?=
- =?us-ascii?Q?RETDYM3Tqvtd+C40esFu5ljp+Bx+mV1+JwwLPohIWttZkOqEDtnBukA2QZcO?=
- =?us-ascii?Q?1WHx1YffNwVjJb+xIPo2Dj1YUv+kqcXwGlc+cqG+RZPdGziBHJFA3dBjKWr9?=
- =?us-ascii?Q?j8fLpslImcCQpOXli96AcgNfSU+ZiQ0x0nnP+atcQZL3A3nA45heBHUUe7OM?=
- =?us-ascii?Q?Y8DyXlarGDegYvw6jsXhSZO4S0c860IZQxvbyc2nKDousp52LncMYFvMncWh?=
- =?us-ascii?Q?DxUfYlvClGM6EOgTwwE6nqOUDIkOpR5ce76qXFhrbuiVd3z4JDwqJWMKfOYI?=
- =?us-ascii?Q?Bf0pWqAGpfJsMrtiVY6UqZpx8E2JCVb7pTnQwbBRNI83ckRMJh/I1S/d3Cry?=
- =?us-ascii?Q?kLKRRxsXZsu9r8rHce4317mm6oYvovOaFSSPk+ZfI1LhLXnrudewuaBSCXY/?=
- =?us-ascii?Q?LdXW09eybTMIs3+teT6KLDv32cmd7DW1r6MuCcYMp7HXPuUhT+k1S0HglFCk?=
- =?us-ascii?Q?JUSdcJW+K2qtBkg7q4F6dSZuH7Nc3oogWLBQ5J8a/NJIC9oXAodT6MOsZq5u?=
- =?us-ascii?Q?EcBgL8L92i1zGTjfVq8QzBqfjliJ2UVi0iqavWOwX+8MgWUE2bz/jEgegsQQ?=
- =?us-ascii?Q?MkeQig4Z9Q=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f36ac0ae-0627-429b-53f3-08de84711a03
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 22:04:03.7162
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: w/WCzwM9tTHdDiF7BvK10GghhrV4w/WartqsI0c1SHabl0Au126dRH4DoccSaokzIEAoBjJddLGf2XB7ft2Vkg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB9735
-X-Spamd-Result: default: False [2.84 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FREEMAIL_CC(0.00)[intel.com,linux.intel.com,resnulli.us,kernel.org,lwn.net,gmail.com,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[25];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,redhat.com,collabora.com,linux.intel.com,lists.freedesktop.org,vger.kernel.org,nvidia.com,suse.de,gmail.com,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,weathered-steel.dev,joelfernandes.org];
-	TAGGED_FROM(0.00)[bounces-79849-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-79851-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[anthony.l.nguyen@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
+	DKIM_TRACE(0.00)[intel.com:+];
 	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_GT_50(0.00)[56];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.freedesktop.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,Nvidia.com:dkim,intel.com:email,nvidia.com:email,nvidia.com:mid]
-X-Rspamd-Queue-Id: 5BE1B2B2EE2
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 687F42B4122
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Christian Koenig mentioned he'd like to step down from the reviewer
-role for the GPU buddy allocator. Joel Fernandes is stepping in as
-reviewer with agreement from Matthew Auld and Arun Pravin.
+Larysa Zaremba says:
 
-Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
----
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This patch series adds the iXD driver, which supports the Intel(R)
+Control Plane PCI Function on Intel E2100 and later IPUs and FNICs.
+It facilitates a centralized control over multiple IDPF PFs/VFs/SFs
+exposed by the same card. The reason for the separation is to be able
+to offload the control plane to the host different from where the data
+plane is running.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cd9505d3be60..3353cbf98be1 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8946,7 +8946,7 @@ F:	include/drm/ttm/
- GPU BUDDY ALLOCATOR
- M:	Matthew Auld <matthew.auld@intel.com>
- M:	Arun Pravin <arunpravin.paneerselvam@amd.com>
--R:	Christian Koenig <christian.koenig@amd.com>
-+R:	Joel Fernandes <joelagnelf@nvidia.com>
- L:	dri-devel@lists.freedesktop.org
- S:	Maintained
- T:	git https://gitlab.freedesktop.org/drm/misc/kernel.git
+This is the first phase in the release of this driver where we implement the
+initialization of the core PCI driver. Subsequent phases will implement
+advanced features like usage of idpf ethernet aux device, link management,
+NVM update via devlink, switchdev port representors, data and exception path,
+flow rule programming, etc.
+
+The first phase entails the following aspects:
+
+1. Additional libie functionalities:
+Patches 1-6 introduces additional common library API for drivers to
+communicate with the control plane through mailbox communication.
+A control queue is a hardware interface which is used by the driver
+to interact with other subsystems (like firmware). The library APIs
+allow the driver to setup and configure the control queues to send and
+receive virtchnl messages. The library has an internal bookkeeping
+(XN API) mechanism to keep track of the send messages. It supports both
+synchronous as well as asynchronous way of handling the messages. The
+library also handles the timeout internally for synchronous messages
+using events. This reduces the driver's overhead in handling the timeout
+error cases.
+
+The current patch series supports only APIs that are needed for device
+initialization. These include APIs in the libie_pci module:
+* Allocating/freeing the DMA memory and mapping the MMIO regions for
+  BAR0, read/write APIs for drivers to access the MMIO memory
+
+and libie_cp module:
+* Control queue initialization and configuration
+* Transport initialization for bookkeeping
+* Blocking and asynchronous mailbox transactions
+
+Once the mailbox is initialized, the drivers can send and receive virtchnl
+messages to/from the control plane.
+
+The modules above are not supposed to be linked with the main libie library,
+but do share the folder with it.
+
+2. idpf:
+Patches 7-11 refactor the idpf driver to use the libie APIs for control
+queue configuration, virtchnl transaction, device initialization and
+reset and adjust related code accordingly.
+
+3. ixd:
+Patches 12-15 add the ixd driver and implement multiple pieces of the
+initialization flow as follows:
+* Add the ability to load
+* A reset is issued to ensure a clean device state, followed by
+  initialization of the mailbox
+* Device capabilities:
+  As part of initialization, the driver has to determine what the device is
+  capable of (ex. max queues, vports, etc). This information is obtained from
+  the firmware and stored by the driver.
+* Enable initial support for the devlink interface
+
+The following are changes since commit 8737d7194d6d5947c3d7d8813895b44a25b84477:
+  net: airoha: select QDMA block according LAN/WAN configuration
+and are available in the git repository at:
+  git://git.kernel.org/pub/scm/linux/kernel/git/tnguy/next-queue 200GbE
+
+Amritha Nambiar (1):
+  ixd: add devlink support
+
+Larysa Zaremba (5):
+  idpf: make mbx_task queueing and cancelling more consistent
+  idpf: print a debug message and bail in case of non-event ctlq message
+  ixd: add basic driver framework for Intel(R) Control Plane Function
+  ixd: add reset checks and initialize the mailbox
+  ixd: add the core initialization
+
+Pavan Kumar Linga (4):
+  libeth: allow to create fill queues without NAPI
+  idpf: remove 'vport_params_reqd' field
+  idpf: refactor idpf to use libie_pci APIs
+  idpf: refactor idpf to use libie control queues
+
+Phani R Burra (3):
+  libie: add PCI device initialization helpers to libie
+  libie: add control queue support
+  libie: add bookkeeping support for control queue messages
+
+Victor Raj (2):
+  virtchnl: create 'include/linux/intel' and move necessary header files
+  virtchnl: introduce control plane version fields
+
+ .../device_drivers/ethernet/index.rst         |    1 +
+ .../device_drivers/ethernet/intel/ixd.rst     |   39 +
+ Documentation/networking/devlink/index.rst    |    1 +
+ Documentation/networking/devlink/ixd.rst      |   35 +
+ MAINTAINERS                                   |    6 +-
+ drivers/infiniband/hw/irdma/i40iw_if.c        |    2 +-
+ drivers/infiniband/hw/irdma/icrdma_if.c       |    2 +-
+ drivers/infiniband/hw/irdma/ig3rdma_if.c      |    2 +-
+ drivers/infiniband/hw/irdma/main.c            |    2 +-
+ drivers/infiniband/hw/irdma/main.h            |    2 +-
+ drivers/net/ethernet/intel/Kconfig            |    2 +
+ drivers/net/ethernet/intel/Makefile           |    1 +
+ drivers/net/ethernet/intel/i40e/i40e.h        |    4 +-
+ .../net/ethernet/intel/i40e/i40e_adminq_cmd.h |    2 +-
+ drivers/net/ethernet/intel/i40e/i40e_client.c |    2 +-
+ drivers/net/ethernet/intel/i40e/i40e_common.c |    2 +-
+ .../net/ethernet/intel/i40e/i40e_ethtool.c    |    2 +-
+ drivers/net/ethernet/intel/i40e/i40e_main.c   |    2 +-
+ .../net/ethernet/intel/i40e/i40e_prototype.h  |    2 +-
+ drivers/net/ethernet/intel/i40e/i40e_txrx.c   |    4 +-
+ drivers/net/ethernet/intel/i40e/i40e_txrx.h   |    2 +-
+ .../ethernet/intel/i40e/i40e_virtchnl_pf.h    |    2 +-
+ drivers/net/ethernet/intel/iavf/iavf.h        |    2 +-
+ .../net/ethernet/intel/iavf/iavf_adminq_cmd.h |    2 +-
+ drivers/net/ethernet/intel/iavf/iavf_common.c |    2 +-
+ drivers/net/ethernet/intel/iavf/iavf_main.c   |    2 +-
+ .../net/ethernet/intel/iavf/iavf_prototype.h  |    2 +-
+ drivers/net/ethernet/intel/iavf/iavf_txrx.c   |    2 +-
+ drivers/net/ethernet/intel/iavf/iavf_txrx.h   |    2 +-
+ drivers/net/ethernet/intel/iavf/iavf_types.h  |    4 +-
+ .../net/ethernet/intel/iavf/iavf_virtchnl.c   |    2 +-
+ drivers/net/ethernet/intel/ice/ice.h          |    2 +-
+ .../net/ethernet/intel/ice/ice_adminq_cmd.h   |    2 +-
+ drivers/net/ethernet/intel/ice/ice_base.c     |    2 +-
+ drivers/net/ethernet/intel/ice/ice_common.h   |    2 +-
+ drivers/net/ethernet/intel/ice/ice_flow.h     |    2 +-
+ drivers/net/ethernet/intel/ice/ice_idc_int.h  |    4 +-
+ drivers/net/ethernet/intel/ice/ice_txrx.c     |    2 +-
+ drivers/net/ethernet/intel/ice/ice_txrx_lib.c |    2 +-
+ drivers/net/ethernet/intel/ice/ice_type.h     |    2 +-
+ drivers/net/ethernet/intel/ice/ice_vf_lib.h   |    2 +-
+ .../net/ethernet/intel/ice/virt/virtchnl.h    |    2 +-
+ drivers/net/ethernet/intel/idpf/Kconfig       |    1 +
+ drivers/net/ethernet/intel/idpf/Makefile      |    2 -
+ drivers/net/ethernet/intel/idpf/idpf.h        |  103 +-
+ .../net/ethernet/intel/idpf/idpf_controlq.c   |   26 +-
+ .../net/ethernet/intel/idpf/idpf_controlq.h   |  144 --
+ .../ethernet/intel/idpf/idpf_controlq_api.h   |  177 --
+ drivers/net/ethernet/intel/idpf/idpf_dev.c    |  101 +-
+ .../net/ethernet/intel/idpf/idpf_ethtool.c    |   32 +-
+ drivers/net/ethernet/intel/idpf/idpf_idc.c    |   38 +-
+ drivers/net/ethernet/intel/idpf/idpf_lib.c    |   69 +-
+ drivers/net/ethernet/intel/idpf/idpf_main.c   |  114 +-
+ drivers/net/ethernet/intel/idpf/idpf_mem.h    |   20 -
+ drivers/net/ethernet/intel/idpf/idpf_txrx.h   |    4 +-
+ drivers/net/ethernet/intel/idpf/idpf_vf_dev.c |   99 +-
+ .../net/ethernet/intel/idpf/idpf_virtchnl.c   | 1792 +++++++----------
+ .../net/ethernet/intel/idpf/idpf_virtchnl.h   |   92 +-
+ .../ethernet/intel/idpf/idpf_virtchnl_ptp.c   |  296 ++-
+ drivers/net/ethernet/intel/ixd/Kconfig        |   15 +
+ drivers/net/ethernet/intel/ixd/Makefile       |   13 +
+ drivers/net/ethernet/intel/ixd/ixd.h          |   58 +
+ drivers/net/ethernet/intel/ixd/ixd_ctlq.c     |  149 ++
+ drivers/net/ethernet/intel/ixd/ixd_ctlq.h     |   33 +
+ drivers/net/ethernet/intel/ixd/ixd_dev.c      |   89 +
+ drivers/net/ethernet/intel/ixd/ixd_devlink.c  |   97 +
+ drivers/net/ethernet/intel/ixd/ixd_devlink.h  |   44 +
+ drivers/net/ethernet/intel/ixd/ixd_lan_regs.h |   68 +
+ drivers/net/ethernet/intel/ixd/ixd_lib.c      |  166 ++
+ drivers/net/ethernet/intel/ixd/ixd_main.c     |  147 ++
+ drivers/net/ethernet/intel/ixd/ixd_virtchnl.c |  178 ++
+ drivers/net/ethernet/intel/ixd/ixd_virtchnl.h |   12 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_type.h |    2 +-
+ .../ethernet/intel/ixgbe/ixgbe_type_e610.h    |    2 +-
+ drivers/net/ethernet/intel/libeth/rx.c        |    9 +-
+ drivers/net/ethernet/intel/libie/Kconfig      |   14 +
+ drivers/net/ethernet/intel/libie/Makefile     |    8 +
+ drivers/net/ethernet/intel/libie/adminq.c     |    2 +-
+ drivers/net/ethernet/intel/libie/controlq.c   | 1197 +++++++++++
+ drivers/net/ethernet/intel/libie/fwlog.c      |    2 +-
+ drivers/net/ethernet/intel/libie/pci.c        |  190 ++
+ drivers/net/ethernet/intel/libie/rx.c         |    2 +-
+ include/linux/{net => }/intel/i40e_client.h   |    0
+ include/linux/{net => }/intel/iidc_rdma.h     |    0
+ include/linux/{net => }/intel/iidc_rdma_ice.h |    0
+ .../linux/{net => }/intel/iidc_rdma_idpf.h    |    0
+ include/linux/{net => }/intel/libie/adminq.h  |    0
+ include/linux/intel/libie/controlq.h          |  423 ++++
+ include/linux/{net => }/intel/libie/fwlog.h   |    2 +-
+ include/linux/intel/libie/pci.h               |   56 +
+ include/linux/{net => }/intel/libie/pctype.h  |    0
+ include/linux/{net => }/intel/libie/rx.h      |    0
+ include/linux/{avf => intel}/virtchnl.h       |    0
+ .../idpf => include/linux/intel}/virtchnl2.h  |    6 +-
+ .../linux/intel}/virtchnl2_lan_desc.h         |    0
+ include/net/libeth/rx.h                       |    4 +-
+ 96 files changed, 4172 insertions(+), 2089 deletions(-)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/intel/ixd.rst
+ create mode 100644 Documentation/networking/devlink/ixd.rst
+ delete mode 100644 drivers/net/ethernet/intel/idpf/idpf_controlq.h
+ delete mode 100644 drivers/net/ethernet/intel/idpf/idpf_controlq_api.h
+ delete mode 100644 drivers/net/ethernet/intel/idpf/idpf_mem.h
+ create mode 100644 drivers/net/ethernet/intel/ixd/Kconfig
+ create mode 100644 drivers/net/ethernet/intel/ixd/Makefile
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd.h
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_ctlq.c
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_ctlq.h
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_dev.c
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.c
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.h
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_lan_regs.h
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_lib.c
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_main.c
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_virtchnl.c
+ create mode 100644 drivers/net/ethernet/intel/ixd/ixd_virtchnl.h
+ create mode 100644 drivers/net/ethernet/intel/libie/controlq.c
+ create mode 100644 drivers/net/ethernet/intel/libie/pci.c
+ rename include/linux/{net => }/intel/i40e_client.h (100%)
+ rename include/linux/{net => }/intel/iidc_rdma.h (100%)
+ rename include/linux/{net => }/intel/iidc_rdma_ice.h (100%)
+ rename include/linux/{net => }/intel/iidc_rdma_idpf.h (100%)
+ rename include/linux/{net => }/intel/libie/adminq.h (100%)
+ create mode 100644 include/linux/intel/libie/controlq.h
+ rename include/linux/{net => }/intel/libie/fwlog.h (98%)
+ create mode 100644 include/linux/intel/libie/pci.h
+ rename include/linux/{net => }/intel/libie/pctype.h (100%)
+ rename include/linux/{net => }/intel/libie/rx.h (100%)
+ rename include/linux/{avf => intel}/virtchnl.h (100%)
+ rename {drivers/net/ethernet/intel/idpf => include/linux/intel}/virtchnl2.h (99%)
+ rename {drivers/net/ethernet/intel/idpf => include/linux/intel}/virtchnl2_lan_desc.h (100%)
+
 -- 
-2.34.1
+2.47.1
 
 
