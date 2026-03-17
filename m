@@ -1,440 +1,410 @@
-Return-Path: <linux-doc+bounces-79729-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79726-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4OrrIPlfuWmrCgIAu9opvQ
-	(envelope-from <linux-doc+bounces-79729-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 15:06:49 +0100
+	id SJ1vDwpfuWnYAgIAu9opvQ
+	(envelope-from <linux-doc+bounces-79726-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 15:02:50 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F032AB705
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 15:06:44 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BF212AB590
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 15:02:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D76DB3136245
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 14:02:52 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 6500E3023680
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 14:02:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED7E43E122E;
-	Tue, 17 Mar 2026 14:02:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C5603E1239;
+	Tue, 17 Mar 2026 14:02:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FWZfcfZu"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="W7imo8Xz";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OEhPi4c6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65C6A3E1D00
-	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 14:02:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BBAC3ACA43
+	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 14:02:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773756171; cv=none; b=BBaMuxojDHyM6V8QORrLTe49Vrf7FZsWSBtPBxDU4Oy0plPJNZ1gSk9Y4IDFteWrUldN47LdtP4iPtk44tFu5zJlBvKN0voMIh7gT+Xou+Nh0l4DSIAgiqAdZSLuMj4vjv7pqJ6gdrdMW/6AD5smUdGnybHoVfAqNJ6a8eRfHSc=
+	t=1773756162; cv=none; b=K2nBEVTAmZnJ7EimpeObIG1iteL2XZ3Pc2M+Fphjl0L5xCghlszJayvjT54gBohhfqfM9w7fBmsUxIRTTtnQEXEKrXxnr/H/AQ3xwwU/S4JmiZHNtb/sLU4oWnZsHjpLVJnWUHblyPVDqWNHRLCJrgGvRY/fm6RlZ2G/UsGA8/Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773756171; c=relaxed/simple;
-	bh=+xooLDYot7HdUqqrrjoQiqBNzK6+XsE951E2cJlKvn8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=aSjG5+Itn1G5wKPAwoPBQSXiehJCtEmuVsnF+R1QnmS/HoclbFz6KrHgymTBJZd/lsysAXXM3jj6y6R1cHIBkzlgwrjfbGLshSjn35Atq0Fu9+I5sraImseqozpKgTveRw8tPg9cR+CojlQT+jG1wJi+U6KEV3HHcVfpT2VHy7k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FWZfcfZu; arc=none smtp.client-ip=209.85.128.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-79a62a2bb8cso9590327b3.3
-        for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 07:02:49 -0700 (PDT)
+	s=arc-20240116; t=1773756162; c=relaxed/simple;
+	bh=n9QmEUx2k+Xw5vQlxuhVJtgHskQc4Z8JEF4CUt+KmJU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=pt7znsP3JOwpDdcb38fmjHojyGOmOox6Mk9ee/IsbA777DLp/tLdHRimGvJ/elh8DMMzlMnyf5D2syu8M3yi18OzXPsMvRA6gRVkT1WYrAJwdqiefIKEV3vOhgw1N1qjXVLJS0wUB5ZkE1Z9PVaWXgh5xHDyqY6n4sVgUrgUris=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=W7imo8Xz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OEhPi4c6; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62HD4wuS668921
+	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 14:02:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=2ux4cjLGAHyb8qfNLkf5TP
+	+0nTrSK+UTuTiz6cAxiMM=; b=W7imo8XzMHXgcYaVY5hor9HlBbNz50eyP0bE1w
+	itTPVA+SSKb3Qin6VZE2ut1C4ZpZl1yxC+KAgErE76Zxk2eFxE/vVbdBm7vBNHF/
+	2kkUIFgZbyb6PvKC8QO1+S3Te7S5QUnOkheIx8bEXlBVGMnvT1/bzwNXskw5ZtIQ
+	Nr6oyJx24YEH6/liD7bStQAKWcMlAZRIbpmcDpi/gNWKgP8P8PBeVlE463iUgtgO
+	HG8a2aEwRcNMGb7RrBYj5XEzmyUNzqx9+T+CC2B8NgxjewmU4eszi8S+eBWp4HG2
+	81R53Yme3Uz2EEbsOaByAhZ7QpkhsXk9Mc83C/7dBm2OrBtA==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cy7he06us-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 14:02:40 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-5fa75a19f21so6439554137.1
+        for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 07:02:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773756168; x=1774360968; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5p50DlN+ku5mDqK2gEPUgW0QiDZAZmuHzUXaopRDyig=;
-        b=FWZfcfZuAqm/7fRNo1X7Vbgxe3VZNTgqX9+V5GCTnrnXTx7ZfvXE61Q9M9L2e2alKF
-         kaIGkQJHf67D3+T5aXFAeUna5zNypGiS5GYPfG+IaB9W16KyZt42bJWJ3gZPtvvnrWR7
-         8HomQQHb1gXcDMhWbaVUIAgj2E6xGO5hoLxOrUMsbPH+mUSkCFxfy7orcC6lYr52vKmj
-         Jgc+CdNyJKgP7s45440TviNpFXyMSlkGHvoJLXqxxQh/IRfsJsZsgU9it5eQmqvAZyai
-         1zJJPmmr8TlIv8k9enLwEopbnVSJ8z8VhlLwCrmGOGm20kykFLT3Y+zym6mgPs6gYTaL
-         5qJA==
+        d=oss.qualcomm.com; s=google; t=1773756159; x=1774360959; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2ux4cjLGAHyb8qfNLkf5TP+0nTrSK+UTuTiz6cAxiMM=;
+        b=OEhPi4c6PwZvg8o0rtDZWl7jD3+176nCxGwQjJWym+rKptOGcWmjViYceNc2PFKTg+
+         thqxhZCimB8LMIxHEC9qFl6xnrvW3ZMSVLM68+I+Rz+kSC7wva3UwHfc5pRwF2+bMAmB
+         Y8kxlHKe0wvFOs+Ue/vWcZrWJPb5i1CsVHUDcDKnPqRCB7SXABiPo99Gm4zEXhzDEbLy
+         UB96m/PzvWBOAhW7WDrGqoB8nv69IVP1G9MredWR13b5WIX0hyafmaF/T91hcXIxz4rF
+         pDP5VT/odCJYa/oxkILS+Y9keSB8i7QFtFeq+mNQ58zXJPFauPIzR0NzWz0S9Jey6qpB
+         XkPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773756168; x=1774360968;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=5p50DlN+ku5mDqK2gEPUgW0QiDZAZmuHzUXaopRDyig=;
-        b=aufEWXueNgjJFVcuk/rFq+sb93OSmnWFCdFrVVJp5jlDhxRs21SAxupGjx5uwK/m2W
-         3o+EQO0NluWXU2ZDrVVFK/vC214ZL4zTF/yKj48X9M2n61i87uIp08uLsDycqLSYRHMN
-         Q29GimifmTacBNjqtx3S5gZlHqetvqmN3hSSiQT6a078JxGjZZdRoCJr3AkmxJEya1Tl
-         jT+IwlfG5PLXUcetSkwBX50ec4+WVn3yjFIMvTEM0gLi7GwJsfeXy5sPoti28uJ0oD7a
-         xRrrYbxo3s28KwimZOszLPn4pjCujPFIntlHkY3Q/Dl5woVlixlxTBGY7S81mV1FUn5z
-         wC8Q==
-X-Gm-Message-State: AOJu0YzHXH4MPNIUuUOKBb/Qp03xs+gPKicPbT2o3nlmYlWq39GO/6yy
-	uJMzCkdB1OND1HtGzHRrR6R0gx3xsXFE1a+pXbt4A3ce4NMfaYKuJTENKHJNBw==
-X-Gm-Gg: ATEYQzzleZrgKS74g45+6PX+j3i+65XPEGJL1CVqLOqJsBAFSPVRi6iTxcpLXe/HRH7
-	I6j8dLIWvcKqqAJJZYeYoduo8MlShP8LBcSCxm3J0DH8zjLsl8IOdZqGJlchPr/OmEr75Jkf9yS
-	ErKU6QMRAaG/y6DtoRoWE5K3rGXKCtB+nzMyaGtIixJPMK3/IpiavIPAPRnNdxOtVs2Dq9Bfber
-	X1lo5kcY6xR8xul5dbXC4qfKKFe5plAp3uOhZ0pau4quOVcRO8onw41B8vk4zVUeE5Zq5FeoLYH
-	tkwCkxxC8OB+euKY1mTS2D7DhWFVwuo9wBzNO/ghNEAyGZMVSlixeSWBRsKyqf/g+TH5OSfJhk/
-	PBumkDvLEWFAVTbZltzb2UM+aJ4DIJbg0yqcE1qaAB4qRQ5DOfc+/C9IgLp8E19zEOAMESP3/F4
-	xKihu4BLuo0kM3md+odQ==
-X-Received: by 2002:a05:690c:6e85:b0:798:23f:7933 with SMTP id 00721157ae682-79a1c18f8cbmr159138057b3.37.1773756167882;
-        Tue, 17 Mar 2026 07:02:47 -0700 (PDT)
-Received: from arch ([177.55.229.85])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-79a2de73263sm58206637b3.43.2026.03.17.07.02.45
+        d=1e100.net; s=20251104; t=1773756159; x=1774360959;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2ux4cjLGAHyb8qfNLkf5TP+0nTrSK+UTuTiz6cAxiMM=;
+        b=eiz56muFqyed/xNjrZdCw3T1w/Ket0R6ohrJ4A9qP9jOYXASM+w/KIFaICYyTC4pTy
+         zkiTsckJGMvm8YpcKGK7eVHE50eekVzMppCb7VNhCaO1uYA6fmAffKmSooMqKHj1k+rA
+         IF+36/0xTpEflSo2MEL2Hj8bdMdIYX3+ni3vii9Uq11ceHVYfDlq+ACYRKivBDCPdj0l
+         gpPTBZRDBGaYX6GOg73cZPXt3iCR58Il/boOk5eoE+9u5BrGAthK3TRRnPNcdo1lmqSF
+         DKlAnICa2tDtoOvFSYAcjd4q/5nxpEJyF4dnLgVAVTyHpK4u/Q0WdbmGn5W8YuJ/UYLo
+         W7KA==
+X-Forwarded-Encrypted: i=1; AJvYcCUyDfAebg8hQaHRrBd+lRw7XZ/S4YB+sY50k9dzYvYM/b+o8sEocNN4A5FML/AD4M4XH2ZCoeNFuyc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyt7hL87jnCq4jzWyivm9owuX1MdAYtCFLGB2cgDKixbaBFzPpG
+	3P2ecOQv9P5gU2cTN+gleBKkdoc5VnJ9w5dlFsjGjd2LB/updePIx339x//Vt8z2MgbPgk8GidR
+	sTseiLtteJyVdTzbF1nw2CwC21/CWPXXfPrbbt+oWScG2G5/ePHPsI2bzZ2lFazE=
+X-Gm-Gg: ATEYQzx/8qZC6+eIlF3Ql2lKRj9Izc/+Q28IbwErEVJIupU3XeTdY7v7XF0QLOg7RIU
+	2jYnSuUmp2kZQORH4WAW4IAtreijDjAxPLGSyR1ON4M2pnA56PnMc8lI8dSRsc7kG4HAFO0fjyQ
+	sTeS28FXO807huAzx0PEXpPYH7IPdAVSLvYajs4RXqxwqZKcz1lsE08beM1gi6gJngaziO72Tz4
+	12KWSUCF4dEQM68z1e9dc1CD2SZYkk7gqzd2IZDX3lcK11xJ3ylqjE5zOTap8i78oI4lhgnLpVe
+	6mLbXKkydOLwJgTUpOz0pZrh9LmqXIuAyn2HMhrEPtSQO8Te3+jK5VRbDIyuQ9OrHYDTvteybKO
+	19PvxZn1TFZJ0/02+uRwcMXJPrLBPCd1c5CGGc2qClUuyzTDB2F1/
+X-Received: by 2002:a05:6102:c46:b0:601:f6ef:af8 with SMTP id ada2fe7eead31-60263f20317mr1644333137.10.1773756159094;
+        Tue, 17 Mar 2026 07:02:39 -0700 (PDT)
+X-Received: by 2002:a05:6102:c46:b0:601:f6ef:af8 with SMTP id ada2fe7eead31-60263f20317mr1644234137.10.1773756158287;
+        Tue, 17 Mar 2026 07:02:38 -0700 (PDT)
+Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:6aa2:dd35:4d6d:8eec])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b4938854csm9359709f8f.34.2026.03.17.07.02.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Mar 2026 07:02:47 -0700 (PDT)
-From: Daniel Castro <arantescastro@gmail.com>
-To: danielmaraboo@gmail.com
-Cc: linux-doc@vger.kernel.org,
-	corbet@lwn.net,
-	Daniel Castro <arantescastro@gmail.com>
-Subject: [PATCH v2] docs: pt_BR: translate process/1.Intro.rst
-Date: Tue, 17 Mar 2026 11:01:34 -0300
-Message-ID: <20260317140136.29256-1-arantescastro@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260316212435.19303-1-arantescastro@gmail.com>
-References: <20260316212435.19303-1-arantescastro@gmail.com>
+        Tue, 17 Mar 2026 07:02:37 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: [PATCH v13 00/12] crypto/dmaengine: qce: introduce BAM locking and
+ use DMA for register I/O
+Date: Tue, 17 Mar 2026 15:02:07 +0100
+Message-Id: <20260317-qcom-qce-cmd-descr-v13-0-0968eb4f8c40@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOBeuWkC/3XOwW7DIAwA0F+pOI8ITBJgp/7HtAMB0yI1YYUt2
+ lTl3+dWq1Zp7GBLtuxnX1jFkrCy592FFVxTTXmhQqqnHfNHtxyQp0ANBgIGKYXiZ59nSsj9HHj
+ A6gv3A9pJyoijsIwW3wrG9HlTX16pPqb6nsvX7chqrt07N7a41XDB0YfgHSiKcX9Kiyu5y+XAr
+ t5qHwwwTcOSYd0QNUzGaoA/hhS/CEjbRKQgJUaN/RR1cKHf51q784c70fDcUfqx5N0ahRLQtiR
+ Z5Mg4hKk3Av6z4MGiB5oWkKWsiUpHGDGKhrVt2zcPZJ9J3gEAAA==
+X-Change-ID: 20251103-qcom-qce-cmd-descr-c5e9b11fe609
+To: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Thara Gopinath <thara.gopinath@gmail.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>,
+        Udit Tiwari <quic_utiwari@quicinc.com>,
+        Md Sadre Alam <mdalam@qti.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+        Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>
+Cc: dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        brgl@kernel.org, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8992;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=n9QmEUx2k+Xw5vQlxuhVJtgHskQc4Z8JEF4CUt+KmJU=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBpuV7qLy5l6tr1UR4kURPLEzoCfhd+cG1mKezrM
+ xr85OwW8HaJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCable6gAKCRAFnS7L/zaE
+ w3ojD/9PL4cZEgdCxe08TvXlNVNrQFpMS/F6pjgg2kc3q461h4h6SN57M/Osl7Inze8QeoKeD6X
+ xTyonz0jRmcvvx7CDXiTVCEk633rF9j+rOkgGMb7ZyR1JVHCD5Y/6gk3h0S/EAY9t+VppRhv6Dv
+ 8nIA29FBStDhDVRmo/st3tzD8b9OlS26J3gaj27SIT0f9O94vuOR5lYTpKltUtuiqzU2gH6Jy6+
+ q2p7z4w+TgBrmt61Z6ZWeHrKhpVaVugdIuKewdDEVnsHeq3Q5rPnjJ2Zdwjh77ArmL0qzYO/28O
+ OXbYD4r5VrQDpJFI4VNijPw5HeuTd9XDYmqb/cFchkqUYHzwgqo8xYa0lVFH0WT27IYVSEJwak0
+ 8dbYMpP09IWi9DzI41zq2Xh52QPl2w8W+APRjHdr8Enp1Sa2UfAR4IUQXm6qEL+VubxlrFMcldm
+ vNDyb94Jhy8zyyikuqdhHQx/ViJKhqdwrZm9f6g4k/v3gjTOLd/djkNsZ8rMX/qBfs6lAjuMqd5
+ lKVNMQF0AZ+obFSevqedoo29V2JBFdYeHioZrf8XGTsQS7vZIjxyUKeimlVQrTdIQO2JAf2u4ES
+ zUtf6T99R2xPexms8OJRQxrMb7lrpLvMJeVRwxbvkzbRCKxcX+XlIuIze7sxra1ZtUw9EJlmUqb
+ jDZ6o2S+GNo4T0g==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Proofpoint-GUID: FEidCHRYJi8--ws6GVdETLSy71mZC99p
+X-Proofpoint-ORIG-GUID: FEidCHRYJi8--ws6GVdETLSy71mZC99p
+X-Authority-Analysis: v=2.4 cv=QsVTHFyd c=1 sm=1 tr=0 ts=69b95f00 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=bC-a23v3AAAA:8
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=COk6AnOGAAAA:8
+ a=3F_D-PAzLxqp5o1pZYoA:9 a=QEXdDO2ut3YA:10 a=gYDTvv6II1OnSo0itH1n:22
+ a=FO4_E8m0qiDe52t0p3_H:22 a=cvBusfyB2V15izCimMoJ:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE3MDEyNCBTYWx0ZWRfX5JVptftLhI31
+ QMR2byQNZWZEHod4lTpTOg/ZsGHLWlsUbqZNkZIsywtflJKRQbYIOeeQ41fb80rnmH+nqTZrmmE
+ bcvoDrZDh8AWGeGd0DzkZZQ4DMX/OQzrrwvyZoSGotBtET5JG5cJZWgZ23OUR1LeJ5Mk9+K8fF/
+ 2XpxfILSdqiFzfShKwkXo5OTR/4SOBkI96z3/9JDgDJtTtPXNRrCO4sXkSDa2zTjfV8NZ5a0gNV
+ cYEKONAyuqviXnljvwRM/zeZulT+Uy3OPZXOoJeWSWlpXTb/DJN072E949jygMnZVr3J4BfYFwh
+ lKQAqwnUsxM97UpFzk4LR++MStITEo3HmvjqzyFPmDpDv4iawe3yyPB311PyJPPMwdYAP6+1LdT
+ 7e6Z5LWiZpqST2S2a6O9daSw9ecuWtXNdTN+T3LqzrpPrvyp7964c0kIK3EhO3MRO8MIX9RDwmn
+ qm+cHsOwIfcwd1TZvzQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-17_01,2026-03-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 priorityscore=1501 spamscore=0 adultscore=0
+ clxscore=1015 lowpriorityscore=0 malwarescore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603170124
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,gmail.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79729-lists,linux-doc=lfdr.de];
-	RBL_SEM_FAIL(0.00)[172.234.253.10:query timed out];
-	FREEMAIL_TO(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,linaro.org,amd.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-79726-lists,linux-doc=lfdr.de];
+	RSPAMD_URIBL_FAIL(0.00)[linaro.org:query timed out];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RSPAMD_EMAILBL_FAIL(0.00)[bartosz.golaszewski.oss.qualcomm.com:query timed out];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oss.qualcomm.com:dkim,oss.qualcomm.com:mid,qualcomm.com:dkim,qualcomm.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[arantescastro@gmail.com,linux-doc@vger.kernel.org];
+	RBL_SEM_FAIL(0.00)[172.232.135.74:server fail];
+	FROM_NEQ_ENVFROM(0.00)[bartosz.golaszewski@oss.qualcomm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	SEM_URIBL_FRESH15_UNKNOWN_FAIL(0.00)[lwn.net:query timed out];
-	SEM_URIBL_UNKNOWN_FAIL(0.00)[lwn.net:query timed out];
-	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	SEM_URIBL_FRESH15_UNKNOWN_FAIL(0.00)[qualcomm.com:server fail,msgid.link:server fail,oss.qualcomm.com:server fail,linaro.org:server fail];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 20F032AB705
+	SEM_URIBL_UNKNOWN_FAIL(0.00)[qualcomm.com:server fail,msgid.link:server fail,oss.qualcomm.com:server fail,linaro.org:server fail];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 1BF212AB590
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add Brazilian Portuguese translation of the development process
-introduction (Documentation/process/1.Intro.rst), covering the
-executive summary, importance of mainline code, and licensing.
+This iteration is quite similar to v12 but uses the BAM's NWD bit on
+data descriptors as suggested by Stephan. To that end, there are some
+more changes like reversing the order of command and data descriptors
+queuedy by the QCE driver.
 
-Assisted-by: Claude:claude-opus-4-6
-Signed-off-by: Daniel Castro <arantescastro@gmail.com>
+Currently the QCE crypto driver accesses the crypto engine registers
+directly via CPU. Trust Zone may perform crypto operations simultaneously
+resulting in a race condition. To remedy that, let's introduce support
+for BAM locking/unlocking to the driver. The BAM driver will now wrap
+any existing issued descriptor chains with additional descriptors
+performing the locking when the client starts the transaction
+(dmaengine_issue_pending()). The client wanting to profit from locking
+needs to switch to performing register I/O over DMA and communicate the
+address to which to perform the dummy writes via a call to
+dmaengine_desc_attach_metadata().
+
+In the specific case of the BAM DMA this translates to sending command
+descriptors performing dummy writes with the relevant flags set. The BAM
+will then lock all other pipes not related to the current pipe group, and
+keep handling the current pipe only until it sees the the unlock bit.
+
+In order for the locking to work correctly, we also need to switch to
+using DMA for all register I/O.
+
+On top of this, the series contains some additional tweaks and
+refactoring.
+
+The goal of this is not to improve the performance but to prepare the
+driver for supporting decryption into secure buffers in the future.
+
+Tested with tcrypt.ko, kcapi and cryptsetup.
+
+Shout out to Daniel and Udit from Qualcomm for helping me out with some
+DMA issues we encountered.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
+Changes in v13:
+- As part of the DMA changes in the QCE driver: reverse the order of
+  queueing the descriptors in the QCE driver: queue command descriptors
+  with all the register writes first, followed by all the data descriptors,
+  this is in line with the recommandations from the BAM HPG
+- Set the NWD (notify-when-done) bit (DMA_PREP_FENCE in dmaengine
+  parlance) on the data descriptors to ensure that the UNLOCK descriptor
+  will not be processed until after they have been processed by the
+  engine. While technically the NWD bit is only needed on the final data
+  descriptor, it's hard to tell which one *will* be the last from the
+  driver's point-of-view and both the downstream driver as well as
+  the Qualcomm TZ against which we want to synchronize sets NWD on every
+  data descriptor,
+- Revert to creating the LOCK/UNLOCK command descriptor pair in one
+  place now that the NWD bit is in place,
+- Link to v12: https://patch.msgid.link/20260310-qcom-qce-cmd-descr-v12-0-398f37f26ef0@oss.qualcomm.com
+
+Changes in v12:
+- Wait until the transaction is done before queueing the UNLOCK command
+  descriptor
+- Use descriptor metadata for communicating the scratchpad address to
+  the BAM driver
+- To that end: reverse the order of the series (first BAM, then QCE) to
+  maintain bisectability
+- Unmap buffers used for dummy writes after the transaction
+- Link to v11: https://patch.msgid.link/20260302-qcom-qce-cmd-descr-v11-0-4bf1f5db4802@oss.qualcomm.com
+
+Changes in v11:
+- Use new approach, not requiring the client to be involved in locking.
+- Add a patch constifying dma_descriptor_metadata_ops
+- Rebase on top of v7.0-rc1
+- Link to v10: https://lore.kernel.org/r/20251219-qcom-qce-cmd-descr-v10-0-ff7e4bf7dad4@oss.qualcomm.com
+
+Changes in v10:
+- Move DESC_FLAG_(UN)LOCK BIT definitions from patch 2 to 3
+- Add a patch constifying the dma engine metadata as the first in the
+  series
+- Use the VERSION register for dummy lock/unlock writes
+- Link to v9: https://lore.kernel.org/r/20251128-qcom-qce-cmd-descr-v9-0-9a5f72b89722@linaro.org
+
+Changes in v9:
+- Drop the global, generic LOCK/UNLOCK flags and instead use DMA
+  descriptor metadata ops to pass BAM-specific information from the QCE
+  to the DMA engine
+- Link to v8: https://lore.kernel.org/r/20251106-qcom-qce-cmd-descr-v8-0-ecddca23ca26@linaro.org
+
+Changes in v8:
+- Rework the command descriptor logic and drop a lot of unneeded code
+- Use the physical address for BAM command descriptor access, not the
+  mapped DMA address
+- Fix the problems with iommu faults on newer platforms
+- Generalize the LOCK/UNLOCK flags in dmaengine and reword the docs and
+  commit messages
+- Make the BAM locking logic stricter in the DMA engine driver
+- Add some additional minor QCE driver refactoring changes to the series
+- Lots of small reworks and tweaks to rebase on current mainline and fix
+  previous issues
+- Link to v7: https://lore.kernel.org/all/20250311-qce-cmd-descr-v7-0-db613f5d9c9f@linaro.org/
+
+Changes in v7:
+- remove unused code: writing to multiple registers was not used in v6,
+  neither were the functions for reading registers over BAM DMA-
+- remove
+- don't read the SW_VERSION register needlessly in the BAM driver,
+  instead: encode the information on whether the IP supports BAM locking
+  in device match data
+- shrink code where possible with logic modifications (for instance:
+  change the implementation of qce_write() instead of replacing it
+  everywhere with a new symbol)
+- remove duplicated error messages
+- rework commit messages
+- a lot of shuffling code around for easier review and a more
+  streamlined series
+- Link to v6: https://lore.kernel.org/all/20250115103004.3350561-1-quic_mdalam@quicinc.com/
+
+Changes in v6:
+- change "BAM" to "DMA"
+- Ensured this series is compilable with the current Linux-next tip of
+  the tree (TOT).
+
+Changes in v5:
+- Added DMA_PREP_LOCK and DMA_PREP_UNLOCK flag support in separate patch
+- Removed DMA_PREP_LOCK & DMA_PREP_UNLOCK flag
+- Added FIELD_GET and GENMASK macro to extract major and minor version
+
+Changes in v4:
+- Added feature description and test hardware
+  with test command
+- Fixed patch version numbering
+- Dropped dt-binding patch
+- Dropped device tree changes
+- Added BAM_SW_VERSION register read
+- Handled the error path for the api dma_map_resource()
+  in probe
+- updated the commit messages for batter redability
+- Squash the change where qce_bam_acquire_lock() and
+  qce_bam_release_lock() api got introduce to the change where
+  the lock/unlock flag get introced
+- changed cover letter subject heading to
+  "dmaengine: qcom: bam_dma: add cmd descriptor support"
+- Added the very initial post for BAM lock/unlock patch link
+  as v1 to track this feature
+
+Changes in v3:
+- https://lore.kernel.org/lkml/183d4f5e-e00a-8ef6-a589-f5704bc83d4a@quicinc.com/
+- Addressed all the comments from v2
+- Added the dt-binding
+- Fix alignment issue
+- Removed type casting from qce_write_reg_dma()
+  and qce_read_reg_dma()
+- Removed qce_bam_txn = dma->qce_bam_txn; line from
+  qce_alloc_bam_txn() api and directly returning
+  dma->qce_bam_txn
+
 Changes in v2:
-- Remove duplicate reference label (.. _development_process_intro:)
-- Fix "propriedade original" -> "titularidade original" (correct legal term)
-- Reflow paragraphs for optimal line filling
+- https://lore.kernel.org/lkml/20231214114239.2635325-1-quic_mdalam@quicinc.com/
+- Initial set of patches for cmd descriptor support
+- Add client driver to use BAM lock/unlock feature
+- Added register read/write via BAM in QCE Crypto driver
+  to use BAM lock/unlock feature
 
- Documentation/translations/pt_BR/index.rst    |   1 +
- .../translations/pt_BR/process/1.Intro.rst    | 269 ++++++++++++++++++
- 2 files changed, 270 insertions(+)
- create mode 100644 Documentation/translations/pt_BR/process/1.Intro.rst
+---
+Bartosz Golaszewski (12):
+      dmaengine: constify struct dma_descriptor_metadata_ops
+      dmaengine: qcom: bam_dma: convert tasklet to a BH workqueue
+      dmaengine: qcom: bam_dma: Extend the driver's device match data
+      dmaengine: qcom: bam_dma: Add pipe_lock_supported flag support
+      dmaengine: qcom: bam_dma: add support for BAM locking
+      crypto: qce - Include algapi.h in the core.h header
+      crypto: qce - Remove unused ignore_buf
+      crypto: qce - Simplify arguments of devm_qce_dma_request()
+      crypto: qce - Use existing devres APIs in devm_qce_dma_request()
+      crypto: qce - Map crypto memory for DMA
+      crypto: qce - Add BAM DMA support for crypto register I/O
+      crypto: qce - Communicate the base physical address to the dmaengine
 
-diff --git a/Documentation/translations/pt_BR/index.rst b/Documentation/translations/pt_BR/index.rst
-index de5c005f91d6..4f7fcc3c66fb 100644
---- a/Documentation/translations/pt_BR/index.rst
-+++ b/Documentation/translations/pt_BR/index.rst
-@@ -66,6 +66,7 @@ kernel e sobre como ver seu trabalho integrado.
- .. toctree::
-    :maxdepth: 1
- 
-+   Introdução <process/1.Intro>
-    Como começar <process/howto>
-    Requisitos mínimos <process/changes>
-    Manuais dos mantenedores <process/maintainer-handbooks>
-diff --git a/Documentation/translations/pt_BR/process/1.Intro.rst b/Documentation/translations/pt_BR/process/1.Intro.rst
-new file mode 100644
-index 000000000000..2995fa49e4c4
---- /dev/null
-+++ b/Documentation/translations/pt_BR/process/1.Intro.rst
-@@ -0,0 +1,269 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Introdução
-+==========
-+
-+Sumário
-+-------
-+
-+O restante desta seção cobre o processo de desenvolvimento do kernel e os
-+tipos de frustração que os desenvolvedores e empresas podem encontrar pelo
-+caminho. Existem diversas razões que justificam a recomendação para que seja
-+feito o merge do código do kernel ao kernel principal ("mainline"), como
-+disponibilidade automática aos usuários, suporte da comunidade em diversas
-+formas, e a oportunidade de influenciar a direção do desenvolvimento do
-+kernel. Contribuições ao kernel Linux obrigatoriamente devem estar disponíveis
-+sob uma licença compatível com a GPL.
-+
-+:ref:`development_process` apresenta o processo de desenvolvimento, o ciclo de
-+lançamento, e a mecânica da janela de merge. As várias fases no desenvolvimento
-+de patch, revisão, e ciclo de merge são explicadas. Algumas ferramentas e
-+listas de e-mail são discutidas. Desenvolvedores que queiram começar a
-+desenvolver o kernel são encorajados a buscar e corrigir bugs como exercício
-+inicial.
-+
-+:ref:`development_early_stage` cobre os primeiros passos do processo de
-+desenvolvimento, com ênfase no envolvimento da comunidade de desenvolvedores o
-+mais cedo possível.
-+
-+:ref:`development_coding` é sobre o processo de codificação; muitas armadilhas
-+já encontradas por outros desenvolvedores são discutidas. Alguns requisitos
-+para patches são explicados, e é feita uma introdução para algumas ferramentas
-+que podem ajudar a garantir que os patches de kernel estão corretos.
-+
-+:ref:`development_posting` fala sobre o processo de envio de patches para
-+revisão. Para serem levados em consideração pela comunidade desenvolvedora, os
-+patches devem estar devidamente formatados e descritos, assim como devem estar
-+no lugar correto. Seguir os conselhos dessa seção pode ajudar na recepção
-+positiva do seu trabalho.
-+
-+:ref:`development_followthrough` cobre o que acontece após o envio dos patches;
-+o trabalho ainda está longe de estar concluído. Trabalhar com os revisores é
-+parte crucial do processo de desenvolvimento; essa seção oferece dicas de como
-+evitar problemas nesse estágio importante. Desenvolvedores são alertados a não
-+presumir que o trabalho acabou após o merge do patch no "mainline".
-+
-+:ref:`development_advancedtopics` introduz dois tópicos mais "avançados":
-+gerenciamento de patches com git e revisão de patches por outros.
-+
-+:ref:`development_conclusion` conclui o documento com indicações de fontes com
-+mais informações sobre o desenvolvimento do kernel.
-+
-+Sobre este documento
-+--------------------
-+
-+O kernel Linux, com mais de 8 milhões de linhas de código e bem mais de 1000
-+contribuintes a cada lançamento ("release"), é um dos maiores e mais ativos
-+projetos de software livre em existência. Desde seu modesto início em 1991,
-+este kernel evoluiu para se tornar um dos melhores componentes de sistemas
-+operacionais, rodando em pequenos players de música digital, PCs de mesa, os
-+maiores supercomputadores em existência, e todos os outros tipos de sistema
-+entre eles. É robusto, eficiente, e uma solução escalável para quase toda
-+situação.
-+
-+O crescimento do Linux trouxe o aumento no número de desenvolvedores (e
-+empresas) desejando participar no seu desenvolvimento. Fabricantes de hardware
-+querem garantir que o Linux suporte bem os seus produtos, tornando-os atrativos
-+para usuários Linux. Fabricantes de sistemas embarcados, que usam o Linux como
-+componente em um produto integrado, querem que o Linux seja tão capaz e
-+adequado quanto possível para a tarefa em questão. Distribuidores de software
-+que baseiam seus produtos em Linux têm claro interesse nas capacidades,
-+performance, e confiabilidade do kernel Linux. É também comum que usuários
-+finais queiram alterar o Linux para atender melhor suas necessidades.
-+
-+Uma das características mais atrativas do Linux é sua facilidade de acesso a
-+esses desenvolvedores; qualquer um com as habilidades necessárias pode melhorar
-+o Linux e influenciar a direção do seu desenvolvimento. Produtos proprietários
-+não conseguem oferecer esse tipo de abertura, que é característico do processo
-+de software livre. O kernel é ainda mais acessível que a maioria dos outros
-+projetos de software livre. Um ciclo típico de três meses de desenvolvimento
-+do kernel pode envolver mais de 1000 desenvolvedores trabalhando para mais de
-+100 empresas (ou absolutamente nenhuma empresa).
-+
-+Trabalhar com a comunidade de desenvolvimento do kernel não é uma tarefa árdua.
-+Contudo, muitos colaboradores potenciais passaram por dificuldades ao tentar
-+trabalhar no kernel. A comunidade evoluiu suas próprias formas de funcionamento
-+que permitem operar de forma fluida (e produzir um produto de alta qualidade)
-+em um ambiente em que milhares de linhas de código são alteradas todos os dias.
-+Não é surpresa que o processo de desenvolvimento do kernel Linux seja muito
-+diferente dos modelos de desenvolvimento proprietários.
-+
-+O processo de desenvolvimento do kernel pode parecer estranho e intimidador
-+para novos desenvolvedores, mas existem bons motivos e uma sólida experiência
-+por trás disso. Um desenvolvedor que não entenda os caminhos próprios da
-+comunidade kernel (ou pior, que tente menosprezá-los ou contorná-los) terá uma
-+experiência frustrante pela frente. A comunidade de desenvolvimento ajuda
-+aqueles que tentam aprender, mas gasta pouco tempo com aqueles que não escutam
-+ou não ligam para o processo de desenvolvimento.
-+
-+Espera-se que aqueles que leiam este documento sejam capazes de evitar essa
-+experiência frustrante. Há muito material aqui, mas o esforço envolvido na sua
-+leitura valerá a pena. A comunidade de desenvolvimento sempre necessita de
-+desenvolvedores que ajudem a melhorar o kernel; o texto a seguir deve ajudar
-+você - ou aqueles trabalhando para você - a se juntar à nossa comunidade.
-+
-+Créditos
-+--------
-+
-+Esse documento foi escrito por Jonathan Corbet, corbet@lwn.net. Aprimorado
-+pelos comentários de Johannes Berg, James Berry, Alex Chiang, Roland Dreier,
-+Randy Dunlap, Jake Edge, Jiri Kosina, Matt Mackall, Arthur Marsh, Amanda
-+McPherson, Andrew Morton, Andrew Price, Tsugikazu Shibata, e Jochen Voß.
-+
-+Esse trabalho contou com o apoio da Linux Foundation; agradecimentos especiais
-+para Amanda McPherson, que viu o valor desse esforço e fez tudo acontecer.
-+
-+A importância de levar o código até o "mainline"
-+-------------------------------------------------
-+
-+Algumas empresas e desenvolvedores ocasionalmente se perguntam por que devem
-+se importar em aprender como trabalhar com a comunidade do kernel e ter seu
-+código no "mainline" (o kernel mantido por Linus Torvalds e usado como base
-+para os distribuidores Linux). No curto prazo, contribuir com o código pode
-+parecer um gasto evitável; parece mais fácil apenas manter o seu código à
-+parte e oferecer suporte direto aos usuários. A verdade é que manter código
-+fora da árvore principal ("out-of-tree") é uma falsa economia.
-+
-+Para ilustrar os custos do código "out-of-tree", aqui estão alguns aspectos
-+relevantes do processo de desenvolvimento do kernel; a maioria será discutida
-+com mais detalhes adiante neste documento. Considere:
-+
-+- Código integrado via merge ao "mainline" fica disponível para todos os
-+  usuários Linux. Estará automaticamente presente em todas as distribuições
-+  que o habilitarem. Não há necessidade de discos de armazenamento, downloads,
-+  ou as complicações de dar suporte a múltiplas versões de variadas
-+  distribuições; tudo simplesmente funciona, para o desenvolvedor e para o
-+  usuário. Incorporação ao "mainline" resolve um grande número de problemas
-+  de distribuição e suporte.
-+
-+- Enquanto desenvolvedores do kernel se esforçam para manter uma interface
-+  estável para o espaço do usuário, a API interna está em constante mudança.
-+  A ausência de uma interface interna estável é uma escolha deliberada de
-+  design; permite que sejam feitas melhorias fundamentais a qualquer tempo e
-+  resulta em código de qualidade superior. Uma consequência dessa política é
-+  que código "out-of-tree" precisa ser constantemente atualizado para que
-+  continue funcionando com novos kernels. Manter código "out-of-tree" requer
-+  significativo trabalho apenas para mantê-lo funcionando.
-+
-+  Por sua vez, código que está no "mainline" não precisa dessa manutenção,
-+  resultado de uma regra simples que exige que qualquer desenvolvedor que
-+  altere uma API, também conserte qualquer código que deixe de funcionar como
-+  resultado da alteração. Código que teve o merge realizado no "mainline" tem
-+  custo significativamente menor de manutenção.
-+
-+- Além disso, código que está no kernel será muitas vezes melhorado por outros
-+  desenvolvedores. Resultados surpreendentes podem surgir ao permitir que sua
-+  comunidade de usuários e clientes melhore seu produto.
-+
-+- Código do kernel está sujeito a revisão, tanto antes como depois do merge ao
-+  "mainline". Independentemente das habilidades do desenvolvedor original, o
-+  processo de revisão invariavelmente encontra maneiras de evoluí-lo. Bugs
-+  severos e problemas de segurança são constantemente encontrados durante o
-+  processo de revisão. Isso é especialmente válido para código desenvolvido em
-+  ambiente isolado; tais códigos se beneficiam fortemente ao serem revistos por
-+  outros desenvolvedores. Código "out-of-tree" é código de baixa qualidade.
-+
-+- Participação no processo de desenvolvimento é a forma pela qual você pode
-+  influenciar a direção do desenvolvimento do kernel. Usuários que se queixam
-+  externamente são ouvidos, porém desenvolvedores ativos têm maior poder de
-+  articulação - e a habilidade de implementar mudanças que façam o kernel
-+  funcionar melhor para suas necessidades.
-+
-+- Quando o código é mantido à parte, sempre existe a possibilidade de que
-+  terceiros contribuam para uma implementação diferente de uma funcionalidade
-+  parecida. Se isso acontecer, ter seu código integrado via merge se tornará
-+  muito mais difícil - ao ponto de ser impossível. Você enfrentará duas
-+  alternativas desagradáveis, (1) manter uma funcionalidade "out-of-tree"
-+  indefinidamente ou (2) abandonar seu código e migrar seus usuários para a
-+  versão na árvore principal ("in-tree").
-+
-+- Contribuição de código é a ação fundamental que faz todo o processo
-+  funcionar. Ao contribuir com seu código você pode adicionar nova
-+  funcionalidade ao kernel e proporcionar capacidades e exemplos que podem ser
-+  usados por outros desenvolvedores de kernel. Se você desenvolveu código para
-+  o Linux (ou está pensando em desenvolver), você claramente tem interesse na
-+  continuidade do sucesso dessa plataforma; contribuição de código é uma das
-+  melhores maneiras de garantir esse sucesso.
-+
-+Todos os argumentos acima se aplicam a qualquer código "out-of-tree", incluindo
-+código distribuído de maneira proprietária, em formato exclusivamente binário.
-+Existem fatores adicionais que devem ser levados em consideração antes de
-+qualquer distribuição de código de kernel apenas em binário, incluindo:
-+
-+- As questões legais da distribuição de kernel proprietário são, no melhor dos
-+  casos, confusas; muitos detentores de direitos autorais do kernel acreditam
-+  que a maioria dos módulos binários são produtos derivados do kernel e que,
-+  como resultado, sua distribuição é uma violação da Licença Pública Geral GNU
-+  ("GNU General Public License"), que será tratada com mais profundidade abaixo.
-+  Este autor não é um advogado, e nada neste documento pode ser considerado
-+  aconselhamento jurídico. O verdadeiro status de módulos privados ("closed
-+  source") só pode ser determinado judicialmente. Independentemente disso, a
-+  incerteza que cerca esses módulos existe.
-+
-+- Os módulos binários aumentam consideravelmente a dificuldade de depuração de
-+  problemas do kernel ("debugging"), a ponto de a maioria dos desenvolvedores
-+  de kernel sequer tentar. Portanto, a distribuição de módulos exclusivamente
-+  binários tornará mais difícil que os seus usuários recebam suporte.
-+
-+- O suporte também é mais difícil para distribuidores de módulos exclusivamente
-+  binários, que precisam fornecer uma versão do módulo para cada distribuição e
-+  cada versão do kernel que desejam suportar. Dezenas de versões de um único
-+  módulo podem ser necessárias para fornecer uma cobertura razoavelmente
-+  abrangente, e seus usuários terão que atualizar seu módulo separadamente
-+  sempre que atualizarem seu kernel.
-+
-+- Tudo o que foi dito acima sobre revisão de código se aplica em dobro ao
-+  código fechado. Como esse código não está disponível, ele não pode ter sido
-+  revisado pela comunidade e, sem dúvida, terá sérios problemas.
-+
-+Os fabricantes de sistemas embarcados, em particular, podem ser tentados a
-+ignorar grande parte do que foi dito nesta seção, acreditando que estão
-+lançando um produto autossuficiente que usa uma versão congelada do kernel e
-+não requer mais desenvolvimento após o lançamento. Esse argumento ignora o
-+valor de uma revisão de código abrangente e o valor de permitir que seus
-+usuários adicionem recursos ao seu produto. Mas esses produtos também têm uma
-+vida comercial limitada, após a qual uma nova versão deve ser lançada. Nesse
-+ponto, os fornecedores cujo código está no "mainline" e bem mantido estarão em
-+uma posição muito melhor para preparar o novo produto para o mercado
-+rapidamente.
-+
-+Licenciamento
-+-------------
-+
-+Código é submetido ao kernel do Linux sob diversas licenças, mas todo ele deve
-+ser compatível com a versão 2 da Licença Pública Geral GNU (GPLv2), que é a
-+licença que cobre a distribuição do kernel como um todo. Na prática, isso
-+significa que todas as contribuições de código são cobertas pela GPLv2 (com,
-+opcionalmente, uma linguagem que permita a distribuição sob versões posteriores
-+da GPL) ou pela licença BSD de três cláusulas. Quaisquer contribuições que não
-+sejam cobertas por uma licença compatível não serão aceitas no kernel.
-+
-+A cessão de direitos autorais não é exigida (nem solicitada) para o código
-+contribuído para o kernel. Todo o código incorporado ao kernel principal mantém
-+sua titularidade original; como resultado, o kernel agora tem milhares de
-+proprietários.
-+
-+Uma implicação dessa estrutura de propriedade é que qualquer tentativa de
-+alterar o licenciamento do kernel está fadada ao fracasso quase certo. Existem
-+poucos cenários práticos em que o acordo de todos os detentores de direitos
-+autorais poderia ser obtido (ou seu código removido do kernel). Portanto, em
-+particular, não há perspectiva de migração para a versão 3 da GPL em um futuro
-+próximo.
-+
-+É imprescindível que todo o código contribuído para o kernel seja legitimamente
-+software livre. Por esse motivo, código de contribuidores sem identidade
-+conhecida ou contribuidores anônimos não será aceito. Todos os contribuidores
-+são obrigados a "assinar" seu código, declarando que ele pode ser distribuído
-+com o kernel sob a GPL. Código que não tenha sido licenciado como software
-+livre por seu proprietário, ou que apresente risco de criar problemas
-+relacionados a direitos autorais para o kernel (como código derivado de
-+esforços de engenharia reversa sem as devidas salvaguardas) não pode ser
-+contribuído.
-+
-+Questões sobre direitos autorais são comuns em listas de discussão de
-+desenvolvimento Linux. Normalmente, essas perguntas recebem muitas respostas,
-+mas é importante lembrar que as pessoas que respondem a essas perguntas não são
-+advogados e não podem fornecer aconselhamento jurídico. Se você tiver dúvidas
-+jurídicas relacionadas ao código-fonte do Linux, não há substituto para
-+conversar com um advogado especializado nessa área. Confiar em respostas
-+obtidas em listas de discussão técnicas é arriscado.
+ drivers/crypto/qce/aead.c        |   8 +-
+ drivers/crypto/qce/common.c      |  20 ++--
+ drivers/crypto/qce/core.c        |  28 ++++-
+ drivers/crypto/qce/core.h        |  11 ++
+ drivers/crypto/qce/dma.c         | 163 +++++++++++++++++++++++-----
+ drivers/crypto/qce/dma.h         |  11 +-
+ drivers/crypto/qce/sha.c         |   8 +-
+ drivers/crypto/qce/skcipher.c    |   8 +-
+ drivers/dma/qcom/bam_dma.c       | 223 ++++++++++++++++++++++++++++++++++-----
+ drivers/dma/ti/k3-udma.c         |   2 +-
+ drivers/dma/xilinx/xilinx_dma.c  |   2 +-
+ include/linux/dma/qcom_bam_dma.h |   4 +
+ include/linux/dmaengine.h        |   2 +-
+ 13 files changed, 402 insertions(+), 88 deletions(-)
+---
+base-commit: a770d984685255ef0e29fc2c8fc91735f94b4432
+change-id: 20251103-qcom-qce-cmd-descr-c5e9b11fe609
+
+Best regards,
 -- 
-2.53.0
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
 
