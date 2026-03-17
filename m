@@ -1,129 +1,188 @@
-Return-Path: <linux-doc+bounces-79641-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79646-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YB3dDmXsuGknlwEAu9opvQ
-	(envelope-from <linux-doc+bounces-79641-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 06:53:41 +0100
+	id cIJgL/v3uGk5mQEAu9opvQ
+	(envelope-from <linux-doc+bounces-79646-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 07:43:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 916772A41A8
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 06:53:40 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FE0B2A463C
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 07:43:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 58F753019FFD
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 05:53:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 02DCB3038AC5
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 06:42:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B0D037F74E;
-	Tue, 17 Mar 2026 05:53:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FD0833CE8A;
+	Tue, 17 Mar 2026 06:42:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="FnpSXFO9"
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b="T3VWcd1T"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-10696.protonmail.ch (mail-10696.protonmail.ch [79.135.106.96])
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AAAC2DCBF3;
-	Tue, 17 Mar 2026 05:53:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.96
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A33B933F368;
+	Tue, 17 Mar 2026 06:42:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=49.212.243.89
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773726817; cv=none; b=WHCUHfSun010pcWWrt0V54NbWpYZknvChpCbbDDSOubj5uuSgQI5lItq16kH5PdRd0iTG+DhT4zPeI98r0SIo9QlwjgXq96Ccaryghi0BAuKO6R2ZZiUyeqTH4mdQpHpB76P0W4nxXg+Vc/EKl9pulhb/fdFvzmhW9+JY+0ULFs=
+	t=1773729760; cv=none; b=lUuv/vKM/OU6wtgfyybwf2INHluC+E0m5ZqKfGdb7c9ri9ducnNV2Xf/r1FlxUWJKnFBP1kz920qA7x8aehWFYw2xi6jlL3MGqnHY7A7s+IDuZkwnGxJcHbqJpAWDQCfoUSQSTvC7kGM+2768P6PopWALV7scRitR18YVwMlGck=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773726817; c=relaxed/simple;
-	bh=gqCEl+B7RpuJ8PHTio9gaZ2DelUivW3gFZxkJUx2B40=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=sFfWDS4m/RHGwkT0wuTPIZ6JBHWhKwO3CYwGC8YJNSY2SBYVnUKXhFNRVEovquu15x7DYIieo7GKaoGos8gDYLqk8oDwhbuKjLBH/NeJRj9VD0n8BPxzAgDPI9k7rqrlB+DrSs8c8shm+odhHIjrTZchWaQL4mjdUbfjCeoyc0w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=FnpSXFO9; arc=none smtp.client-ip=79.135.106.96
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1773726802; x=1773986002;
-	bh=5rcCNNVkPLRd5bF9neQil/o9Cfwp8nKUyrZYbq78+Ko=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=FnpSXFO957DKI1emjDAvmwEC1gGZpEFe1MMn0diqju4kfSNwK8uRxyDJfV1M5BmEz
-	 p5hvQQ25vuKD5YRv3iR3Dg5ASuVWFSoEHqsKjtmKQTuZ2z50E4iksfRJ1ukS11OfnJ
-	 vHvJ1VgwyysHXYUp7Ht5/YhjmiD6HLgaSf0c4FSG/wqga4I9mMbUrXI7N5gVQMWVJc
-	 XGjTKZjR15baEu08krSdzuI7mB0Qzbr6o0dixSsswV3Ftp+w3Pe8N7Wr4P59g/ZgV4
-	 6nZYvatQQd4qD1dlHjK0vdRIzuRdMcc6TI76OuEArHFYd8tv6yT9ntIFV8AuWE0cIH
-	 Q7vei1gw3u/sQ==
-Date: Tue, 17 Mar 2026 05:53:18 +0000
-To: "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-From: pr4veensingh@proton.me
-Cc: "corbet@lwn.net" <corbet@lwn.net>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: [PATCH] docs: memory-hotplug: fix typo 'fo' -> 'for' in NODE_ADDED_FIRST_MEMORY description
-Message-ID: <by7jSPCep0WcWKD6nntH0wGbcN59hRhsEOc2lHBps2QizxRtedH25CdW8DO33YiqJU3Y7kGWesJnBts-jvgMzNqDvLWH3cTDYpJPuNed9hU=@proton.me>
-Feedback-ID: 109586754:user:proton
-X-Pm-Message-ID: cdb0fc95e104488cee97afa252c4f5eaa34ee7dd
+	s=arc-20240116; t=1773729760; c=relaxed/simple;
+	bh=p2jT3cj/dqZTMqBPRODxsJKcCAfEvHGxzp1GHCe76zM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=RBomdW5Lbd8DCn/qBW1+M+E7Ls0n28KKgIjrBMYBOZ09I0ONp6xmaY0T6IUmG41y4WLePOiNgv5tfS1C7Ki19tOCaNeqxbjUZq4du8jSAk9IVgsJf4INdhf8P0MmpMwA01u0Q0m4j9qasz4nbdEs6yEm2V9DAweQ+e73ayyZBMw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=T3VWcd1T reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp
+Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
+	(authenticated bits=0)
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 62H6aoNk004343
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Tue, 17 Mar 2026 15:37:00 +0900 (JST)
+	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=tQPLRdcG2BXep0eW/gY1gtA4+gQ7V3cwSUUxElynWig=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=From:Message-Id:To:Subject:Date;
+        s=rs20250326; t=1773729420; v=1;
+        b=T3VWcd1TYTjORfLvRhbKQXTFPIx/BVQzEBmsUG8cr7eJaO/QTqKPJimcC/hR7t5r
+         eADzWIjJ95qHfYNzy3ZahUpM77rolDmiRDbPunHJRA0x+69do3sjoB5XRVZpRxw6
+         Lr/k1gF2GQWwrcQOzvpr1OvTerXfGawV8A+4dxUoS2keyVT20/s5z/N2SLbdEmXV
+         bNW4/Ut2waJ7Isovenp+pTEBBxgrwQT58qm5MPxiorlUdzK8BsRqIE2BmBv3SxtZ
+         T/5XcaV+Ltev9xBZtUVuP9F4Wuifs9DjPb7VaDVEJXW+WNV83s441nhDCGUq37qj
+         Rjl9IPT2VvPGPenpVNoEAw==
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Subject: [PATCH v4 0/4] KVM: arm64: PMU: Use multiple host PMUs
+Date: Tue, 17 Mar 2026 15:36:48 +0900
+Message-Id: <20260317-hybrid-v4-0-bd62bcd48644@rsg.ci.i.u-tokyo.ac.jp>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAID2uGkC/3XPQW7DIBAF0KtYrAsaMCY0q9yj6oLAEE+r2Ak4V
+ qzIdy/FSrrq8qM/b5gHy5gIM9s3D5ZwpkzjUIJ+a5jv3XBCTqFkpkB1oJTm/XJMFDjI0MWodxi
+ CYqV8SRjpXqGPzy0nvN6KN22P7Ogycj+ezzTtm9kIaYUE9tvtKU9jWuofZlnLdV0r35/rZskl1
+ 0G64CTgDrpDcMtAd1HAaszqb86Cec0pDhyMkQ5966L1h5RPwpMgcePT+L2MwnnxddmM9mmYcmr
+ 3MtpiaIM2olJgLfxrrOv6Ay7e7ftRAQAA
+X-Change-ID: 20250224-hybrid-01d5ff47edd2
+To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oupton@kernel.org>,
+        Joey Gouly <joey.gouly@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
+        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
+        devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+X-Mailer: b4 0.15-dev-5ab4c
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[proton.me,quarantine];
-	R_DKIM_ALLOW(-0.20)[proton.me:s=protonmail];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[u-tokyo.ac.jp : SPF not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[pr4veensingh@proton.me,linux-doc@vger.kernel.org];
-	TO_DN_EQ_ADDR_ALL(0.00)[];
-	DKIM_TRACE(0.00)[proton.me:+];
-	TAGGED_FROM(0.00)[bounces-79641-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	TAGGED_FROM(0.00)[bounces-79646-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_THREE(0.00)[3];
-	MISSING_XM_UA(0.00)[];
+	R_DKIM_PERMFAIL(0.00)[rsg.ci.i.u-tokyo.ac.jp:s=rs20250326];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
+	DKIM_TRACE(0.00)[rsg.ci.i.u-tokyo.ac.jp:~];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[odaki@rsg.ci.i.u-tokyo.ac.jp,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.988];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,proton.me:dkim,proton.me:email,proton.me:mid]
-X-Rspamd-Queue-Id: 916772A41A8
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rsg.ci.i.u-tokyo.ac.jp:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,u-tokyo.ac.jp:email]
+X-Rspamd-Queue-Id: 2FE0B2A463C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On a heterogeneous arm64 system, KVM's PMU emulation is based on the
+features of a single host PMU instance. When a vCPU is migrated to a
+pCPU with an incompatible PMU, counters such as PMCCNTR_EL0 stop
+incrementing.
 
+Although this behavior is permitted by the architecture, Windows does
+not handle it gracefully and may crash with a division-by-zero error.
 
+The current workaround requires VMMs to pin vCPUs to a set of pCPUs
+that share a compatible PMU. This is difficult to implement correctly in
+QEMU/libvirt, where pinning occurs after vCPU initialization, and it
+also restricts the guest to a subset of available pCPUs.
 
-From cf0fb033799f1766841d876728f52ee84c89c676 Mon Sep 17 00:00:00 2001
-From: Praveen Kumar Singh <pr4veensingh@proton.me>
-Date: Tue, 17 Mar 2026 11:10:32 +0530
-Subject: [PATCH] docs: memory-hotplug: fix typo 'fo' -> 'for' in
- NODE_ADDED_FIRST_MEMORY description
+This patch introduces the KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY
+attribute. If set, PMUv3 will be emulated without programmable event
+counters. KVM will be able to run VCPUs on any physical CPUs with a
+compatible hardware PMU.
 
-The description of NODE_ADDED_FIRST_MEMORY notification contains
-a missing 'r' in the word 'for'. Fix the typo.
+This allows Windows guests to run reliably on heterogeneous systems
+without crashing, even without vCPU pinning, and enables VMMs to
+schedule vCPUs across all available pCPUs, making full use of the host
+hardware.
 
-Signed-off-by: Praveen Kumar Singh <pr4veensingh@proton.me>
+A QEMU patch that demonstrates the usage of the new attribute is
+available at:
+https://lore.kernel.org/qemu-devel/20260225-kvm-v2-1-b8d743db0f73@rsg.ci.i.u-tokyo.ac.jp/
+("[PATCH RFC v2] target/arm/kvm: Choose PMU backend")
+
+Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 ---
- Documentation/core-api/memory-hotplug.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v4:
+- Extracted kvm_pmu_enabled_counter_mask() into a separate patch.
+- Added patch "KVM: arm64: PMU: Protect the list of PMUs with RCU".
+- Merged KVM_REQ_CREATE_PMU into KVM_REQ_RELOAD_PMU.
+- Added a check to avoid unnecessary KVM_REQ_RELOAD_PMU requests.
+- Dropped the change to avoid setting kvm_arm_set_default_pmu() when
+  KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY is not set.
+- Link to v3: https://lore.kernel.org/r/20260225-hybrid-v3-0-46e8fe220880@rsg.ci.i.u-tokyo.ac.jp
 
-diff --git a/Documentation/core-api/memory-hotplug.rst b/Documentation/core=
--api/memory-hotplug.rst
-index 8fc97c237..46b0490f5 100644
---- a/Documentation/core-api/memory-hotplug.rst
-+++ b/Documentation/core-api/memory-hotplug.rst
-@@ -96,7 +96,7 @@ NODE_CANCEL_ADDING_FIRST_MEMORY
-  Generated if NODE_ADDING_FIRST_MEMORY fails.
+Changes in v3:
+- Renamed the attribute to KVM_ARM_VCPU_PMU_V3_FIXED_COUNTERS_ONLY.
+- Changed to request the creation of perf counters when loading vCPU.
+- Link to v2: https://lore.kernel.org/r/20250806-hybrid-v2-0-0661aec3af8c@rsg.ci.i.u-tokyo.ac.jp
 
- NODE_ADDED_FIRST_MEMORY
-- Generated when memory has become available fo this node for the first tim=
-e.
-+ Generated when memory has become available for this node for the first ti=
-me.
+Changes in v2:
+- Added the KVM_ARM_VCPU_PMU_V3_COMPOSITION attribute to opt in the
+  feature.
+- Added code to handle overflow.
+- Link to v1: https://lore.kernel.org/r/20250319-hybrid-v1-1-4d1ada10e705@daynix.com
 
- NODE_REMOVING_LAST_MEMORY
-  Generated when the last memory available to this node is about to be offl=
-ined.
---
-2.51.2.windows.1
+---
+Akihiko Odaki (4):
+      KVM: arm64: PMU: Add kvm_pmu_enabled_counter_mask()
+      KVM: arm64: PMU: Protect the list of PMUs with RCU
+      KVM: arm64: PMU: Introduce FIXED_COUNTERS_ONLY
+      KVM: arm64: selftests: Test PMU_V3_FIXED_COUNTERS_ONLY
+
+ Documentation/virt/kvm/devices/vcpu.rst            |  29 ++++
+ arch/arm64/include/asm/kvm_host.h                  |   2 +
+ arch/arm64/include/uapi/asm/kvm.h                  |   1 +
+ arch/arm64/kvm/arm.c                               |   1 +
+ arch/arm64/kvm/pmu-emul.c                          | 190 ++++++++++++++-------
+ include/kvm/arm_pmu.h                              |   2 +
+ .../selftests/kvm/arm64/vpmu_counter_access.c      | 148 +++++++++++++---
+ 7 files changed, 290 insertions(+), 83 deletions(-)
+---
+base-commit: ef87500dc466ef424e4fc344b5063d345e18bf73
+change-id: 20250224-hybrid-01d5ff47edd2
+
+Best regards,
+--  
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+
 
