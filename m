@@ -1,148 +1,152 @@
-Return-Path: <linux-doc+bounces-79781-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79782-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id FQ7iDHx2uWnQGQIAu9opvQ
-	(envelope-from <linux-doc+bounces-79781-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 16:42:52 +0100
+	id yDQpB6N2uWnQGQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79782-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 16:43:31 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id C73942AD379
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 16:42:51 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 87B452AD3A9
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 16:43:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 2A88D302E57E
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 15:42:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8009530082BF
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2026 15:43:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55F353EBF20;
-	Tue, 17 Mar 2026 15:42:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 932B63EAC7E;
+	Tue, 17 Mar 2026 15:43:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BxpYt0xw"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o//ZNOh6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E1E53E9F76
-	for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 15:42:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 702ED3E929E;
+	Tue, 17 Mar 2026 15:43:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773762169; cv=none; b=r9DHNBv8oz9Tfg4vXWDzJSISDwY/LrT0m8SUMxSRPn3tK8sNjTzq7fwnifk6XNLxXd/VNVMbn8vFv7db9ePR7lCEiYI5d5vHFcDAq5Y7SUzVqQjCoYUTLWX9pKT0CmGcd6879NRKpcfwmYBTGMSFUseFLlhO1KEAAf8ucTGnupo=
+	t=1773762208; cv=none; b=NVWkPnEqpA4KVl0OBf8J/Y4bObtZwQhSmVcb5cVGdaR6pyGYbrbEtR3wvrzE+uyQRdGriiSIw7ruknntA/Y5vzQiw0o0EpyyKv1EDu8WgwgBPPx51FcQXYPAEd0EAF4rdm8ye9YBsYdiRRMq3mdffSZg58RCu9u5UKwGaXWsnT0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773762169; c=relaxed/simple;
-	bh=YP9ftBgU40ZMDVr7uKljymEYVi3zFdcjpWVQapD9Goo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qxkQRGjiSk/2aaKOQw/xUoKUZBUn33fB9sFYN4P183mmEmZju+gwcsUxrfIT9RZtEi3O53t78x52KNcCSEHM8NtWPdqw/G28sGGq333esKRMHWagCc+mDp+imTzz8kO4MpTf6oTLUDHDsq9t5ahniiZyQTRythHwTQMPQhS0Zmk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BxpYt0xw; arc=none smtp.client-ip=74.125.82.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-127380532eeso376843c88.1
-        for <linux-doc@vger.kernel.org>; Tue, 17 Mar 2026 08:42:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773762167; x=1774366967; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=DPxQhHLsn9trqYK9Nkt3NTHTqHhfajnqZ3m8HUBGCaQ=;
-        b=BxpYt0xwk4L9xgh/EwJJCqTvVNnHatgRrcbn9dIMhuudN0lGZ1QVGs1ykCl/RZgV6v
-         L5/yHuzlE9Hk5fmY1rNmhJRKUNwZzExSVG5FRdOFkOSVCsRnpKzsvkooMkJjSiN40Azx
-         NjcLgW4V/pBJlXjC1qnnYzJj14fK7his1MqEPgqVPo540I6h7S7Jzqyo2ovekSfSchb5
-         2W0Btc0rZ6yiwOFJMrMB8s5PNq8T6WzRlWB8QAiviOvIFDm9UbC0Z+6mPoN25nzuuB5y
-         GYwG90PnhSjtXAbp1yIYFCtXiiiNRNoYU3WiGqLxadb+ICQYA+krgqrW7FAmtHauL5uQ
-         LEPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773762167; x=1774366967;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=DPxQhHLsn9trqYK9Nkt3NTHTqHhfajnqZ3m8HUBGCaQ=;
-        b=Sb+i/muQ7oEjXKZHyIaJej+tvUW/4mjDBRis2v91/vBuzhlnc5udArtUumY1d5Y2ey
-         CNeFuCnNMAuGPAKOlBx6CGrtS6amKJAXG7NxZadlqtTnFrQ0AePKteOzI4odY7g4wzR/
-         Px0tM0tZ5JuVgFfCG8ghqyPAfZdVIHAjz9h3J6xxwU6T5cIpQnDvcpcln4vcEgtRCMyy
-         R03pfhdNpdawiyPFln0pLKim5IMZSH2916kt3H4Uo69FRbU+FE9bezFFwpn1ccIdPa8x
-         XInkKPN2WLXQC0uZOuyeEioB9W+8ZO42OPnrl1JtHYYy8xQ/5X3TxL+Wp+OeW0FHzQMk
-         2O+g==
-X-Forwarded-Encrypted: i=1; AJvYcCX6IoyaONAKauda3OBPx0f+5W5A4ouKFcUXAamd1ytWtcf9m3O4kF+mUy/ozPsRtOVVZnjuxZ8OoC8=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxx9A+sblQch5zxs22cdJhGbI+iDCfQ4n2O0a8hV2NPxCppn/BT
-	yVjeiKTf6nHx26SlCndr9a8945QzSezxMVhBhfVDCigV5/BCcv14XSIw
-X-Gm-Gg: ATEYQzx0bQz1IMIjS9VntVeH2jfP/08T28jXu7KPRqvVRVtKfpAEkOcfc3kT5ADizuo
-	iHyfVl3UVxcy0dXGL3l9IXltdzfdLQY8rMS712Yv3vhlUY4aNXHGzqC+GVBBsXMEVtKE704MZZP
-	nbzsgDKsqcAVpA1lUaS0YDhPdsLXDiql4Mfj06ro+UgafP2ha28YEJuxy/zPHz4FS+lSg9/wfto
-	rzabo6S2T2BsBUAMD6ecXpUBgvmzcxrcpvkjAoZIK8yHZQR/UflUkGnhnn84zsx4HI6ROBZXxkK
-	o9z1mZUe/LzYnMMfSg/p/z/z2FmxdTUCLx5e/Fv8kin5Q9IOJz2YSli2DAsI22LnMnrYrHH8VqZ
-	Wvv+r80ZhJavrqI7atnC2qmhY9lJcXu8YkumLZ5jKRAorZFPHtGOqsISYQiNEgIeboKutt/1Bhg
-	gLgufJXq26o81AhEQFwMdLlVJlmDelhdXB6yGZ
-X-Received: by 2002:a05:7022:458d:b0:127:5cda:fb7d with SMTP id a92af1059eb24-1299ba11a49mr4977c88.6.1773762167235;
-        Tue, 17 Mar 2026 08:42:47 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-128f639d1e4sm15787042c88.13.2026.03.17.08.42.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Mar 2026 08:42:46 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Tue, 17 Mar 2026 08:42:45 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Colin Huang <u8813345@gmail.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, Colin.Huang2@amd.com, Carl.Lee@amd.com,
-	Peter.Shen@amd.com, Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH v2 1/2] dt-bindings: trivial-devices: Add Delta
- Q54SN120A1 and Q54SW120A7
-Message-ID: <4b448eb4-73cc-4d42-84ea-7a0d9a0153d5@roeck-us.net>
-References: <20260316-add-q54sn120a1-q54q54sw120a7-v2-0-60e6182cc4a7@gmail.com>
- <20260316-add-q54sn120a1-q54q54sw120a7-v2-1-60e6182cc4a7@gmail.com>
+	s=arc-20240116; t=1773762208; c=relaxed/simple;
+	bh=NhUHjMSSSOfIk89dimc4kYWGcNV1qKrVXJaFZr2Wmk0=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=SzKAVy8Q3LQSaT56jCx4/d5+Px5aq301+tHLWfLPntWqEkx6FbsSg8v+/p+JU0Ub62Ma6B1KQMQQj6W6ppQXtApwu6/vBMeNDYibAa70HQapi63vpJQHQ212dISdDGvaEcSk9bK05H07ZDiyPdAz+MV6fSBGZE5zUBl9DVkI2gk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o//ZNOh6; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B894C4CEF7;
+	Tue, 17 Mar 2026 15:43:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773762208;
+	bh=NhUHjMSSSOfIk89dimc4kYWGcNV1qKrVXJaFZr2Wmk0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=o//ZNOh6inlgBG0ERD6jJHpvp0Fw//FrM3endmwbio1xIodEczzurkKcZZaFmuKKe
+	 z02YQW0WfgqL4oWvMaixKbOlW/t1FGClO3Dixk4G/OOKR4NkUjA23i4aaQSFFJW5ad
+	 qiKE09FatQjaMNYQkWNYIlkqrJrm7P1DJhAN1s8cs8D3oqhOM+5qyfuqMnFevQgqB3
+	 46aKT1UOfacSwMgRp2nolkOEeHiSTJyMzgc6yTPWTA1GrLSIypcNOigvv/LRcKES3D
+	 +5kJ/up56FSf9i26p+hFwqej9TJGCFHRXfAfp1nFHI8Rph5+ORNMK4KygLSlyjxhr+
+	 dCthvD88/cLlw==
+Received: from localhost ([::1])
+	by mail.kernel.org with esmtp (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1w2WZq-0000000ELgg-05m7;
+	Tue, 17 Mar 2026 16:43:26 +0100
+Date: Tue, 17 Mar 2026 16:43:25 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Mahad Ibrahim <mahad.ibrahim.dev@gmail.com>
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: fix Sphinx C parser crash on __cond_acquires
+ macro
+Message-ID: <20260317164250.6afae483@localhost>
+In-Reply-To: <20260317151156.1106-1-mahad.ibrahim.dev@gmail.com>
+References: <20260317151156.1106-1-mahad.ibrahim.dev@gmail.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260316-add-q54sn120a1-q54q54sw120a7-v2-1-60e6182cc4a7@gmail.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79781-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-79782-lists,linux-doc=lfdr.de,huawei];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[roeck-us.net];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,microchip.com:email,roeck-us.net:mid]
-X-Rspamd-Queue-Id: C73942AD379
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCPT_COUNT_FIVE(0.00)[5]
+X-Rspamd-Queue-Id: 87B452AD3A9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Mar 16, 2026 at 04:39:33PM +0800, Colin Huang wrote:
-> Add two additional Delta 1/4-brick DC/DC power modules,
-> Q54SN120A1 and Q54SW120A7, to the trivial-devices list.
+On Tue, 17 Mar 2026 11:11:56 -0400
+Mahad Ibrahim <mahad.ibrahim.dev@gmail.com> wrote:
+
+> When building the kernel-docs, the Sphinx C parser threw two errors:
 > 
-> Acked-by: Conor Dooley <conor.dooley@microchip.com>
-> Signed-off-by: Colin Huang <u8813345@gmail.com>
-> ---
+> 1. /home/code/linux/Documentation/core-api/kref:328:
+>    ./include/linux/kref.h:72: WARNING: Invalid C declaration: Expected
+>    end of definition. [error at 96]
+>    int kref_put_mutex (
+>                 struct kref *kref,
+>                 void (*release) (struct kref *kref),
+>                 struct mutex *mutex)
+>                 __cond_acquires(true# mutex)
+> 
+> 2. /home/code/linux/Documentation/core-api/kref:328:
+>    ./include/linux/kref.h:94: WARNING: Invalid C declaration: Expected
+>    end of definition. [error at 92]
+>    int kref_put_lock (
+>                 struct kref *kref,
+>                 void (*release)(struct kref *kref),
+>                 spinlock_t *lock)
+>                 __cond_acquires(true# lock)
+> 
+> The root cause of these errors is due to the parser's inability to
+> understand sparse __cond_acquires() parameterized macro attached to the
+> function. The parser expects a ';' or a '{' to verify a valid function
+> signature ending.
+> As of Sphinx 3.0, the parser is equipped to handle such cases via the
+> c_paren_attributes list however that functionality was not adopted.
+> 
+> Out of all sparse/compiler-based context analysis parameterized macros
+> inside the kernel, only __cond_acquires appears in the context of a
+> kernel-docs comment and function, which is why it is the only macro that
+> threw an error.
+> 
+> This bug may be attributed to the kernel's recent shift from sparse to
+> compiler-based context analysis, increased strictness of Sphinx C
+> parser, or some other change which transcended domains.
+> 
+> Add c_paren_attributes to enable Sphinx parser to handle parameterized
+> function macros like __cond_acquires.
 
-Applied.
+Sorry but this patch is going at the wrong direction, as this is
+a kernel-doc issue. There are already a patch series under review
+meant to handle this one, together with other related issues.
 
+-- 
 Thanks,
-Guenter
+Mauro
 
