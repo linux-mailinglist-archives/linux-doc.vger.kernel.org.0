@@ -1,231 +1,382 @@
-Return-Path: <linux-doc+bounces-79957-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79959-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QP2qHBK1umlWawIAu9opvQ
-	(envelope-from <linux-doc+bounces-79957-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:22:10 +0100
+	id UGf8Hke2umlWawIAu9opvQ
+	(envelope-from <linux-doc+bounces-79959-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:27:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE0552BCFBA
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:22:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CA272BD16F
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:27:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 9D2F7303103E
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 14:21:55 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 5DEB63046D8B
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 14:26:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 774853DB628;
-	Wed, 18 Mar 2026 14:21:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2F2D3D9036;
+	Wed, 18 Mar 2026 14:26:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ncXnZeZI"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LGCzNoQW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D603533C18B
-	for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 14:21:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.172
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773843708; cv=pass; b=bdsYI9VHcwMoedfNtO6dLn17HGIRe3C9MQTTo71UZYtxzXzI5a5h/xv2yXjbhKY0pk/Of/vanscBI7Y2jbm/PqrzOpkI8W6YkAbOfjrY3PaQ+P6jdVfcKDXOMSRgiY6+GWmlHUXntXfPdZSZ3t8rJw0I170Pl4d4LRXrvh6+J9g=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773843708; c=relaxed/simple;
-	bh=KTRA21nAfVjporOLqz1nEfqleKbtz+pYNCQThiLu4Dk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SxGw51IvzcnWLnLbzbQ+VkbyHA+tftOYQo9Wvw3XhPMGWBQOgsOvqMM08nf1WlBHPgSOAGiB2NqmwMo4+v46MIZYX1MKgnUZyla3LZ7CNM7M7398wKd5RobZcF0+j02OwOz1KQ6HCX44QWzu+ZSwq+ljMvkjAPHH17DeAnSi+kA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ncXnZeZI; arc=pass smtp.client-ip=74.125.82.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-2bd5658b901so379422eec.3
-        for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 07:21:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773843706; cv=none;
-        d=google.com; s=arc-20240605;
-        b=IC7LPVT6RbpdliHD2z8p3yubOSjjqvU29Ur1F/jXcDDPpNHklRb0qwK1QE/dcNmgqY
-         2HWiuxkz5IlKy4M/SHCLO4qmmE5Umr71ouZrp1wSSl0rzIuX/udA2t3bvDsh9yVdvfYA
-         V/7asJgfgZE6s4tp4P0Bcu+mlt82HG+TLpFP7gt/fB/qrSN0Hd0eiKvPiOSEuNnBeEBE
-         Ximw1b3Xjj0wBt6JBd0MvPwSedCN4+Ar2gLZoCiXur5J1zRbbdC7fykrn2d1hwZwo21y
-         rXpnEt3dgnk0b7YRBMKW5JM+TGoQ+3g9miK39hgwAfIVESUP4XMtmRrLkKpOvO6/dUnV
-         kdgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=N50RuEjVo0iFefZqItqTOtUCCVZJT3+xKOol5E25ZQw=;
-        fh=ExWzZytEVJ1Zl2MYNNq0uOC1T/0V/xXGY6LmOzq5lws=;
-        b=eBHDhRA75dzYfDVr65pjsycPNlIbp0ZHDcpe7CdYs34YhF1trj/AoqQiK9kyhzorhb
-         mJXD8R8hEDZ6cdOQ7pH6fugf7EJGDhWSrMcqmbYHB9iu3MZyXJjHqeaEdnPgxWdPptli
-         ONwvqaglfY0KEU4SKFf4RkuiaW93t6mqVirUk6dmnLVopgQjHr4AHRw2D0BLjkY0pT90
-         Oy30y4AXS13CHuJElxjnUWHR7/O3mPUeDxYT23qU6pwj07UMKrBNQpInD9C4hVyj2Ubm
-         ejZfJGLziANlEpjVCrmPp8aKDvc0bJVjkL1LyS2l1OPoSbKVs5TJeiiV7N45kqeu8LOH
-         C2Sg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773843706; x=1774448506; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=N50RuEjVo0iFefZqItqTOtUCCVZJT3+xKOol5E25ZQw=;
-        b=ncXnZeZIuOjGeXZuihtqHQjQvOfKIZP6avWEj+G04ST+7/5OoAM+9W4HrAWp2tpeCg
-         qV3oZ6vSIUONar/YjrHxliQhsxbKSf++6gTYV2KDYAwQZzOMCUGbOtGkQ/M6lnz8Si35
-         8cajHQ6rXnuUoFE7lWJ8eh1IQ1/C/m/4KUEtvM30T6T49ccOSw3rhnYbt7WWtvJztqGg
-         xn7Jr0z1OgIglV1lijREgwEUFbNUaZmqaxtkOe9YCHFQ/TStonivbob3Xi4EZ7I40dRu
-         mVfTvnoUa3XQQ/Jr1rI6LfuZlzc4c2+s5rVU8DOEKSJk0D2JdP+oTLNkFO/SoM9RK0oz
-         +L+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773843706; x=1774448506;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=N50RuEjVo0iFefZqItqTOtUCCVZJT3+xKOol5E25ZQw=;
-        b=YE+iiYqk5nm9b7hGpNErYu+MvbUClSQcNj7DzoAbDuiBGGImEHzkD4Vs4ijXEsFEKR
-         WeMckVqhiFIFXEmVjv7GLkVJLCI/b2/B7cDD3hnHIyOSxm6PXf60G1dcxJbrHmK9pthw
-         LTr8lecXR1GTk4qoNOOGbtShIWewo4meJotq86c9XjALmAl1TdpNfgHJ5mrSfEs5fpPr
-         m8QBZPZdoSYdr8rBHmC9PHl4ML1lzzSByNPJfVr20ArTO1vzZ+75GI1lAk3JcF6nJcDw
-         qNLx5oo1MxLRegeDps/MGCdHNK8P9ND9rPPGLew6pAqpl3jtkK42sqGguFg3as4KdZJ3
-         0wTA==
-X-Forwarded-Encrypted: i=1; AJvYcCUALFapcDw49TA1w8l0eG9gvGHpFqYBm7u5Zq4qFU7PnU1l6MElkwsbxNyXMs5N0Gj/UxOTUmt+FDg=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz2TUZsju7LbQHpwjcuKX5FP/BSQNxl+8xE7hglAGwcMJOIXERK
-	wO9LDGX/2tusujxsSplim8QNz8YjmpMNKhGW1w2cPbIBaC8yGZ+BPAh6mYRKNXW7QXATKKn1W/p
-	wVZIO0O53xKqhDcInIv2Cu0iS8UfKDYo=
-X-Gm-Gg: ATEYQzwerhSMqmbXEW3Y/gpy4Z+Q8snq59pmUDvBSi55efnZ/dK5QFi1r3MTvi3QZTs
-	XkoLcWO+1qD5Gechh1jnEj62eVj+l/+HuuUXwJUoXlPLs08sN6kXIwtI8IAVeH5S6fI4dZQaXP+
-	uCHmGgBClK/tGG/+dD4BgQADGYicEG95fyf9x5xvRFwgw789PmS3aVguT/32A2tEcUHtmlOw7ta
-	C/WPVP2ZLn0dk0J9Nqpriqfan/dn6pVDnLYvFP+oVDlCigGJhowueZmVK27uPK4AQL8M5N00rRI
-	fM03n2B+/mAR8hICAb5WA1kj9cgRDztQQ60o6T2WBnjJFWbp1XCxystjz0zXZLx7cEez5qRORNV
-	SFa8UeCAve8+Hsz/GOl0+HHk=
-X-Received: by 2002:a05:7300:3724:b0:2be:1f56:ed32 with SMTP id
- 5a478bee46e88-2c0e4f79e7amr862302eec.1.1773843705849; Wed, 18 Mar 2026
- 07:21:45 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F2C23CE494;
+	Wed, 18 Mar 2026 14:26:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773843979; cv=none; b=RsLGESlqtXtDZ3KKghch3rRBtLO2gcovyitdMOhr3UiJAz6QzYeyYmzyW4ySOI2FUUpwV6g6/6iEoBruAo7ljHrubvk3tifNhaskmSBX79DDtgYqMYwg+8vgZ78KboQ1fcK8kexN2UH5b1Lw/SdqpkTHJZpwJX4wmV+kbCwuwZg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773843979; c=relaxed/simple;
+	bh=BpwNhxJRllBxsUNnr5dU2iSGcWYnZ5DXu4osdBW+RuA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=HgMWCi8o185NxBMNPCDos/Tn+sryKLiQwEs6ZMwSpFg5QatapuqDpAIVj5ZHUtg9IZej/BsGyq7pSg94TzlkKLyQ+98p2mfQIcD5CaCS4dAhzfiAS9WZ8OW/FJbOZxMg7qqI4699F3tbPmOFA8pCKt9Ds0DcEZ88L/aiHG7f5Lk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LGCzNoQW; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1980C19421;
+	Wed, 18 Mar 2026 14:26:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773843979;
+	bh=BpwNhxJRllBxsUNnr5dU2iSGcWYnZ5DXu4osdBW+RuA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=LGCzNoQWrMQb76v9uT5EbbT+p2Hir1Lcr/RN4AGS5LC4X8SVuXzHOAApwuRar4+WA
+	 yKaL8h4Nfql393h327oMoCUyWvgdBahQn9Pe/0PRLCE2ePVlyWW7ktkjut6d1Ju0QI
+	 ad0d7syQ3jPix8BRF9sQekhGHTcsApF4artD1bCXBcreM6s6d1y9SsupmC8YdB1SUX
+	 WqXzMMIRRzrVucy4bpU+rW4Bgeu23gAR5lN/D1XmfvbV35Tr+EzV/0O6gGZihsajFZ
+	 8teKFOI0XO/gBcAn+vfG3tug6flYozwomV9XalekPse7o3+bKyV0/V3ErS4hvyq0Vv
+	 gCzJuJFhzgg6A==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1w2rqj-00000004HVm-09Qh;
+	Wed, 18 Mar 2026 15:26:17 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 0/7] More kernel-doc unit tests
+Date: Wed, 18 Mar 2026 15:26:04 +0100
+Message-ID: <cover.1773841456.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260317201710.934932-1-joelagnelf@nvidia.com>
- <20260317201710.934932-2-joelagnelf@nvidia.com> <46986da6-8c89-475c-8561-964adaa7d034@nvidia.com>
- <abppV3e91iVzplcv@google.com> <DH5UOS96171T.Z8XSRX583Q60@nvidia.com>
-In-Reply-To: <DH5UOS96171T.Z8XSRX583Q60@nvidia.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 18 Mar 2026 15:21:33 +0100
-X-Gm-Features: AaiRm52hYvm4SlfuaD_e2Ur_BKHJMunoPzi20wYq7repEoz5nN2Go3Dpr2oWwgo
-Message-ID: <CANiq72=bmJ_GWKowAgv+DWQ8FcWK_HePwjaVgeDmRH+gVD-z5g@mail.gmail.com>
-Subject: Re: [PATCH v13 1/1] rust: interop: Add list module for C linked list interface
-To: Alexandre Courbot <acourbot@nvidia.com>
-Cc: Alice Ryhl <aliceryhl@google.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
-	linux-kernel@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>, 
-	Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, 
-	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Trevor Gross <tmgross@umich.edu>, Alex Gaynor <alex.gaynor@gmail.com>, 
-	Danilo Krummrich <dakr@kernel.org>, Dave Airlie <airlied@redhat.com>, David Airlie <airlied@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, 
-	Daniel Almeida <daniel.almeida@collabora.com>, Koen Koning <koen.koning@linux.intel.com>, 
-	Nikola Djukic <ndjukic@nvidia.com>, Philipp Stanner <phasta@kernel.org>, 
-	Elle Rhumsaa <elle@weathered-steel.dev>, Jonathan Corbet <corbet@lwn.net>, 
-	Alex Deucher <alexander.deucher@amd.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Jani Nikula <jani.nikula@linux.intel.com>, 
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
-	Tvrtko Ursulin <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>, 
-	Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, 
-	Lucas De Marchi <lucas.demarchi@intel.com>, 
-	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
-	Helge Deller <deller@gmx.de>, John Hubbard <jhubbard@nvidia.com>, 
-	Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>, 
-	Andrea Righi <arighi@nvidia.com>, Andy Ritger <aritger@nvidia.com>, Zhi Wang <zhiw@nvidia.com>, 
-	Balbir Singh <balbirs@nvidia.com>, alexeyi@nvidia.com, 
-	Eliot Courtney <ecourtney@nvidia.com>, dri-devel@lists.freedesktop.org, 
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
-	amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
-	intel-xe@lists.freedesktop.org, linux-fbdev@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-79957-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[google.com,nvidia.com,vger.kernel.org,kernel.org,garyguo.net,protonmail.com,umich.edu,gmail.com,redhat.com,linux.intel.com,suse.de,ffwll.ch,collabora.com,weathered-steel.dev,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,lists.freedesktop.org];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79959-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[54];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-0.708];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: DE0552BCFBA
+	NEURAL_HAM(-0.00)[-0.989];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2CA272BD16F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, Mar 18, 2026 at 11:54=E2=80=AFAM Alexandre Courbot <acourbot@nvidia=
-.com> wrote:
->
-> Ah, so there is a rationale for using a `mod.rs` file after all. What
-> are the project-wide guidelines re: `foo.rs` vs `foo/mod.rs`?
+Hi Jon,
 
-Quoting myself from a few years ago:
+This series comes after
+        https://lore.kernel.org/linux-doc/20260318104321.53065c27@foz.lan/T/#t
 
-  I don't have a strong opinion either way -- this was originally done
-  to improve fuzzy searching, see commit 829c2df153d7 ("rust: move `net`
-  and `sync` modules to uniquely-named files") upstream:
+and contains the remaining patches I have ready to be merged.
 
-    This is so that each file in the module has a unique name instead of th=
-e
-    generic `mod.rs` name. It makes it easier to open files when using fuzz=
-y
-    finders like `fzf` once names are unique.
+Its focus is primarly on adding unit tests for some corner
+cases. Several of such tests came from Randy, and were already
+previously submitted on some old series.
 
-Another reason was that it is what upstream Rust recommends:
+I added a couple of extra tests there to check if tables and code
+blocks will be properly producing rst and man content.
 
-  "Prior to rustc 1.30, using `mod.rs` files was the way to load a
-module with nested children. It is encouraged to use the new naming
-convention as it is more consistent, and avoids having many files
-named mod.rs within a project."
+Due to such test, I ended discovering one bug, fixed on the last
+patch on this series.
 
-  https://doc.rust-lang.org/reference/items/modules.html#r-items.mod.outlin=
-ed.search-mod
-  https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html#no-mo=
-re-modrs
+On this series, the actual tests are not part of the unit test
+source code. Instead, they're loaded from an yaml file that
+uses a properly defined schema. One of the tests check if the
+file follows such schema.
 
-Now, several other people have argued for the other way over the years.
+Now, the end-to-end validation tool also suports specifying
+an yaml file:
 
-For instance, one reason is that tab completion can be smoother with
-`mod.rs`, e.g. every time you complete something like
-`rust/kernel/sync`, you have to decide whether you want `sync.rs` or
-`sync/`, and then if you wanted the folder, you have to tab-complete
-again.
+	$  tools/unittests/test_kdoc_parser.py -h
+	options:
+	  -h, --help            show this help message and exit
+	  -v, --verbose
+	  -f, --failfast
+	  -k, --keyword KEYWORD
+	                        Regex pattern to filter test methods
+	  -y, --yaml-file, --yaml YAML_FILE
+	                        Name of the yaml file to load
 
-So I guess it depends if you use more the shell TAB (like Linus really
-values on the C folders) or the fuzzy finder (like Wedson argued for
-in the commit referenced above).
 
-I personally don't want to bias it one way or the other [*], but
-please let's avoid having both mixed if possible (unless there is a
-reason not to). I can put the result in the new guidelines rules list
-file.
+That alows an workflow where, before applying a patch series,
+one can save either (or both) html and/or man output into an
+yaml and test if something changed before/after a patch series:
 
-I hope that gives some context!
+	$ ./tools/docs/kernel-doc --man --rst --yaml all.yaml . 2>err.log
+	<apply a patch series>
+	$ tools/unittests/test_kdoc_parser.py -y all.yaml
+	...
+	Ran 154975 tests in 237.783s
 
-[*] I would have preferred a middle ground like  modules being inside
-but repeating the folder name, e.g. `.../pci/pci.rs`, but I doubt that
-will ever be supported upstream since one probably wants to support
-the other ways at the same time.
+	OK (expected failures=4)
+	test_kdoc_parser:
+	...
+	Ran 154975 tests
 
-Cheers,
-Miguel
+In practice, instead of running all of them, one could use
+a subset, like checking only the files that are inside
+a Documentation file with:
+
+	$ ./tools/docs/kernel-doc --man --rst --yaml kdoc.yaml $(git grep kernel-doc:: Documentation|cut -d: -f4|sort|uniq) 2>/dev/null
+	<apply a patch series>
+	$ tools/unittests/test_kdoc_parser.py -y kdoc.yaml
+	Ran 35701 tests in 40.083s
+
+	OK (expected failures=4)
+	test_kdoc_parser:
+	    CToMan:
+	        test_man_test_Documentation_gpu_rfc_i915_small_bar_h_000:                       OK
+	        test_man_test_Documentation_gpu_rfc_i915_small_bar_h_001:                       OK
+	...
+	        test_rst_test_tools_testing_selftests_kselftest_harness_h_036:                  OK
+	        test_rst_test_tools_testing_selftests_kselftest_harness_h_037:                  OK
+	    TestSelfValidate:
+	        test_parse_pass:                                                                OK
+
+	Ran 35701 tests
+
+and/or use this to help adding corner cases to tools/unittests/kdoc-test.yaml.
+
+The test scope that will be written inside the yaml file is limited
+by adding one or more of those parameters:
+	--man
+	--rst
+	--kdoc-item
+
+Please notice that the YAML output currently doesn't work for some
+broken kernel-doc markups, as it assumes an 1:1 map between symbols
+and source code entries. On such cases, it will print a warning like
+this one:
+
+	Warning: lengths are different. Ignoring drivers/gpu/drm/drm_gpusvm.c
+
+Currently just 1 test over 35702 ones generated from kernel-doc markup
+has this issue.
+
+After this series, we have 121 unit tests, all passing:
+
+  $ ./tools/unittests/run.py
+  Ran 121 tests in 0.141s
+
+  OK (expected failures=4)
+  test_cmatch:
+    TestSearch:
+        test_search_acquires_multiple:                               OK
+        test_search_acquires_nested_paren:                           OK
+        test_search_acquires_simple:                                 OK
+        test_search_must_hold:                                       OK
+        test_search_must_hold_shared:                                OK
+        test_search_no_false_positive:                               OK
+        test_search_no_function:                                     OK
+        test_search_no_macro_remains:                                OK
+    TestSubMultipleMacros:
+        test_acquires_multiple:                                      OK
+        test_acquires_nested_paren:                                  OK
+        test_acquires_simple:                                        OK
+        test_mixed_macros:                                           OK
+        test_must_hold:                                              OK
+        test_must_hold_shared:                                       OK
+        test_no_false_positive:                                      OK
+        test_no_function:                                            OK
+        test_no_macro_remains:                                       OK
+    TestSubSimple:
+        test_rise_early_greedy:                                      OK
+        test_rise_multiple_greedy:                                   OK
+        test_strip_multiple_acquires:                                OK
+        test_sub_count_parameter:                                    OK
+        test_sub_mixed_placeholders:                                 OK
+        test_sub_multiple_placeholders:                              OK
+        test_sub_no_placeholder:                                     OK
+        test_sub_single_placeholder:                                 OK
+        test_sub_with_capture:                                       OK
+        test_sub_zero_placeholder:                                   OK
+    TestSubWithLocalXforms:
+        test_functions_with_acquires_and_releases:                   OK
+        test_raw_struct_group:                                       OK
+        test_raw_struct_group_tagged:                                OK
+        test_struct_group:                                           OK
+        test_struct_group_attr:                                      OK
+        test_struct_group_tagged_with_private:                       OK
+        test_struct_kcov:                                            OK
+        test_vars_stackdepot:                                        OK
+
+  test_kdoc_parser:
+    CToKdocItem:
+        test_gen_func2:                                              OK
+    CToMan:
+        test_man_acpi_os_acquire_lock:                               OK
+        test_man_acpi_os_release_lock:                               OK
+        test_man_c_stop:                                             OK
+        test_man_char_array:                                         OK
+        test_man_char_pointer_var:                                   OK
+        test_man_const_char_array:                                   OK
+        test_man_contend_for_bm:                                     OK
+        test_man_crypto_alg_lookup:                                  OK
+        test_man_debugfs_enter_cancellation:                         OK
+        test_man_debugfs_leave_cancellation:                         OK
+        test_man_doc_with_complex_table:                             OK
+        test_man_down_read_trylock:                                  OK
+        test_man_enum_var:                                           OK
+        test_man_free_stacks:                                        OK
+        test_man_func1:                                              OK
+        test_man_func_with_ascii_artwork:                            OK
+        test_man_pool_offset:                                        OK
+        test_man_prepare_report_consumer:                            OK
+        test_man_prepare_report_producer:                            OK
+        test_man_simple_tables:                                      OK
+        test_man_spin_lock:                                          OK
+        test_man_stack_pools:                                        OK
+        test_man_static_atomic64_t_var:                              OK
+        test_man_struct_kcov:                                        OK
+        test_man_tcp_sigpool_start:                                  OK
+        test_man_tomoyo_read_lock:                                   OK
+        test_man_tomoyo_read_unlock:                                 OK
+        test_man_tx:                                                 OK
+        test_man_undo_report_consumer:                               OK
+        test_man_unsigned_long:                                      OK
+        test_man_unsigned_long_on_init:                              OK
+        test_man_unsigned_long_var_on_uppercase:                     OK
+        test_man_unsigned_long_with_default:                         OK
+    CToRest:
+        test_rst_acpi_os_acquire_lock:                               OK
+        test_rst_acpi_os_release_lock:                               OK
+        test_rst_c_stop:                                             OK
+        test_rst_char_array:                                         OK
+        test_rst_char_pointer_var:                                   OK
+        test_rst_const_char_array:                                   OK
+        test_rst_contend_for_bm:                                     OK
+        test_rst_crypto_alg_lookup:                                  OK
+        test_rst_debugfs_enter_cancellation:                         OK
+        test_rst_debugfs_leave_cancellation:                         OK
+        test_rst_doc_with_complex_table:                             OK
+        test_rst_down_read_trylock:                                  OK
+        test_rst_enum_var:                                           OK
+        test_rst_free_stacks:                                        OK
+        test_rst_func_with_ascii_artwork:                            OK
+        test_rst_pool_offset:                                        OK
+        test_rst_prepare_report_consumer:                            OK
+        test_rst_prepare_report_producer:                            OK
+        test_rst_simple_tables:                                      OK
+        test_rst_spin_lock:                                          OK
+        test_rst_stack_pools:                                        OK
+        test_rst_static_atomic64_t_var:                              OK
+        test_rst_struct_kcov:                                        OK
+        test_rst_tcp_sigpool_start:                                  OK
+        test_rst_tomoyo_read_lock:                                   OK
+        test_rst_tomoyo_read_unlock:                                 OK
+        test_rst_tx:                                                 OK
+        test_rst_undo_report_consumer:                               OK
+        test_rst_unsigned_long:                                      OK
+        test_rst_unsigned_long_on_init:                              OK
+        test_rst_unsigned_long_var_on_uppercase:                     OK
+        test_rst_unsigned_long_with_default:                         OK
+    KdocItemToMan:
+        test_man_func2:                                              OK
+    KdocItemToRest:
+        test_rst_func2:                                              OK
+    TestSelfValidate:
+        test_parse_pass:                                             OK
+
+  test_kdoc_test_schema:
+    TestYAMLSchemaValidation:
+        test_kdoc_test_yaml_followsschema:                           OK
+
+  test_tokenizer:
+    TestPublicPrivate:
+        test_balanced_inner_private:                                 OK
+        test_balanced_non_greddy_private:                            OK
+        test_balanced_private:                                       OK
+        test_no private:                                             OK
+        test_unbalanced_inner_private:                               OK
+        test_unbalanced_private:                                     OK
+        test_unbalanced_struct_group_tagged_with_private:            OK
+        test_unbalanced_two_struct_group_tagged_first_with_private:  OK
+        test_unbalanced_without_end_of_line:                         OK
+    TestTokenizer:
+        test_basic_tokens:                                           OK
+        test_depth_counters:                                         OK
+        test_mismatch_error:                                         OK
+
+  Ran 121 tests
+
+The new tests covered by the two series I sent today do an end-to-end
+check of the most important logic, as they verify:
+
+	- source code parsed into a KdocItem;
+	- KdocItem to both man and rst;
+	- source to man and to rst output formats.
+
+The coverage of such tests are:
+  - c_lex;
+  - kdoc_item;
+  - kdoc_output;
+  - kdoc_parser;
+  - kdoc_re;
+  - xforms_lists.
+
+Not 100% of kernel-doc, but the most relevant parts (and the ones
+that require more maintainance) are now checked. It doesn't mean
+that all possible corner cases are mapped, but it should be able
+to identify lots of potential regressions, while still running
+on fractions of seconds.
+
+Mauro Carvalho Chehab (7):
+  docs: kdoc_parser: add some debug for variable parsing
+  unittests: test_kdoc_parser: add command line arg to read a YAML file
+  MAINTAINERS: update documentation scripts to add unittests
+  docs: tools: include kdoc_yaml_file at documentation
+  docs: kdoc_yaml_file: add a representer to make strings look nicer
+  docs: kdoc-test.yaml: add more tests
+  docs: kdoc_output: fix handling of simple tables
+
+ Documentation/tools/kdoc_ancillary.rst  |    8 +
+ MAINTAINERS                             |    3 +-
+ tools/lib/python/kdoc/kdoc_output.py    |    6 +-
+ tools/lib/python/kdoc/kdoc_parser.py    |   11 +
+ tools/lib/python/kdoc/kdoc_yaml_file.py |   18 +-
+ tools/unittests/kdoc-test.yaml          | 1548 ++++++++++++++++++++++-
+ tools/unittests/test_kdoc_parser.py     |   23 +-
+ 7 files changed, 1605 insertions(+), 12 deletions(-)
+
+-- 
+2.52.0
+
 
