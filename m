@@ -1,66 +1,65 @@
-Return-Path: <linux-doc+bounces-79921-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79920-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wPf9F2JsumnRWQIAu9opvQ
-	(envelope-from <linux-doc+bounces-79921-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:12:02 +0100
+	id sIOgOr9uumnRWQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79920-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:22:07 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FF552B8B68
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:12:02 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 680E32B8E25
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:22:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 0E81F3035E25
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:29 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4756130B6160
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 218153A5E9D;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 176603A4F55;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fhSlynuV"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UbtVRubQ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0A1E39903B;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C599E39FCDE;
 	Wed, 18 Mar 2026 09:11:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773825080; cv=none; b=FIZZBExH3xs9HGMI1Fi+hdiV416RpJOeUHcA9XG4sjrp2JZKO1lt3d2JZb1P3FX1VOiV21OLs+MlVd/RYbZbNNBTGjaxZgbhYSg5iVrO6P7spdsbkCYGOnVMm6FE70/fWuC+5wbpKMxACA4T8E2CWlpp3d1T2KdolUxZsHi6LcQ=
+	t=1773825080; cv=none; b=WLByfIHQlyHLwwuAF1vYKCLQBvcwJwIRcqAkvBr5wM7TVnDvweH0vkA96bGo/6+iE9YTgfYtZU8xH7TWk/aYhh4xRaj/wvE8wZ1VgdYN1GCckdWNLL02YDHDNtRAMbFrJxyIJgTCiTkiJAIVOy1kTlCdCv9Fc1ru8h1getKSIbk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773825080; c=relaxed/simple;
-	bh=iFj38UFIdiWCje9woaXgH1M7bm+id1nebIlPdkXQ5jM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=RH64MmdNWKuiTtiyOjGEPsbgQLNgf+1J7cM7/kbQIpNN/7NzFW9P38gsyVOh6u7rrvP+ncytS4nWgGTYu85wy6qDwwhuD5mMSCwyLS60DF8sSk1kJniWTRkOVhy9wCDb8Qub7CNBLfeIh51fsQqKIitcTuHweReSAYS5CHaQxv8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fhSlynuV; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EE61C19424;
+	bh=m5R1AXbCcILaBo3xNerP4PoMfOyK0t6s1ZbCKToPNNs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=DVHtQlcIBnxlIGUbPd/i0U6LXOwhxsmLW7gQY8yHVDEeUNC+z9wzSgMnrjRCoZWufk/6mjLJPUBgsCb+3fE53k2lxAfa7Hcq/G7mF7p6q3mNGrs+AxVqaDS8g4+NMrg9kwqADPDweqwwHyTXsyXymxeZOPVSmowTJWwpmsybC9g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UbtVRubQ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C676C19421;
 	Wed, 18 Mar 2026 09:11:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773825080;
-	bh=iFj38UFIdiWCje9woaXgH1M7bm+id1nebIlPdkXQ5jM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=fhSlynuVQtCSOFTkWCo3gKnu7/xKLFzWBVXAmEu6ib21SSnbAZsyj5ZZK/lxXw0Ak
-	 o4Nuos+WiyEuQyMv/v2CivS7IKm8X4630SOVz+d3Kx96jOFwaRQvaxbqgwB87GkSt+
-	 x1t+q+ISe2BDzreK7yoDqR13HXJTJYzDdJeRH8copWa67lg+3gBf7vojWquIOiQC9L
-	 RQCZTVflpQxyRxJL4euOg4CXu4y1UvUikr4VMvkSmN0LKXFilfPCvqy7mD378YUKXt
-	 EK3rjs2dUr8mss3NC0BrQW8Jtj+uelTYuY/69GH6g/IcoKpa4BOSQi5QTAvqw/mOgs
-	 C0aKQwzSvTrsA==
+	bh=m5R1AXbCcILaBo3xNerP4PoMfOyK0t6s1ZbCKToPNNs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=UbtVRubQf8NEHQ9TwuK+JDLk+vr9iz3ePZxQ7AVpPL9G1THNE8XeqSStV/rzXj9P7
+	 oQ38QZOa8M92hCl8k3AWy4FrQq85J9GaGu/SG0gyICokzxqsYKMwcXRXlGNxO2dZqf
+	 uGN60FovXFUPrNOPxeFI2nf1IdBc4UhGknS05PDYxBfT+vOKFQTjHt8UAOVfTxtBYU
+	 PB+sLkm5Y87lFFYxL3nJRPcZ5sHQdp/qVIF8YMiFKqVe4mfU9XbWtIG1sUNLDwGk0L
+	 IREVame0g8jJev1+ERok9NZgnvPetl2jUIebHvpkZ41tG2GOCvjd+CrRuNpe5mzt26
+	 aTAOLSQd/2Yxg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2mvu-00000002fpD-1r3N;
+	id 1w2mvu-00000002fpJ-1yD9;
 	Wed, 18 Mar 2026 10:11:18 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 00/14] More kernel-doc patches
-Date: Wed, 18 Mar 2026 10:11:00 +0100
-Message-ID: <cover.1773823995.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH 01/14] unittests: test_tokenizer: better handle mismatch error
+Date: Wed, 18 Mar 2026 10:11:01 +0100
+Message-ID: <6e19578bc1ffa96e536dc31997ff658017f60173.1773823995.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1773823995.git.mchehab+huawei@kernel.org>
+References: <cover.1773823995.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -74,108 +73,77 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-79921-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79920-lists,linux-doc=lfdr.de,huawei];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 0FF552B8B68
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 680E32B8E25
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Jon,
+The current logic is too sensitive to how c_lex name is
+placed. Also, it doesn't really check the log.
 
-This series comes after:
-    https://lore.kernel.org/linux-doc/cover.1773770483.git.mchehab+huawei@kernel.org/
+Change it to check if the expected message will be reported
+after a call to C tokenizer with an invalid source.
 
-It basically contains patches I submitted before on a 40+ patch series,
-but were less relevant, plus a couple of other minor fixes:
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ tools/unittests/test_tokenizer.py | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-- patch 1 improves one of the CTokenizer unit test, fixing some
-  potential issues on it;
-- patches 2 and 3 contain some improvement/fixes for Sphinx
-  Python autodoc extension. They basically document c_lex.py;
-
-- The remaining patches:
-  - create a new class for kernel-doc config;
-  - fix some internal representations of KdocItem;
-  - add unit tests for KernelDoc() parser class;
-  - add support to output KdocItem in YAML, which is a
-    machine-readable output for all documented kAPI.
-
-None of the patches should affect man or html output.
-
-Before you complain about the diffstats, changes at kdoc
-itself aren't big:
-
- tools/lib/python/kdoc/c_lex.py          |    9 +-
- tools/lib/python/kdoc/kdoc_files.py     |  104 ++++++++++++++++--------
- tools/lib/python/kdoc/kdoc_item.py      |   39 ++++++++-
- tools/lib/python/kdoc/kdoc_output.py    |   23 +++++
- tools/lib/python/kdoc/kdoc_parser.py    |   33 ++++++-
- tools/lib/python/kdoc/kdoc_re.py        |    9 +-
- tools/lib/python/kdoc/kdoc_yaml_file.py |  155 ++++++++++++++++++++++++++++++++++++
- 7 files changed, 325 insertions(+), 47 deletions(-)
-
-e.g. 155 new LoC for the new yaml file output and 123 new LoC for
-the other cleanups/fixes.
-
-The remaining ones are at the YAML files and at unittests.
-
-Mauro Carvalho Chehab (14):
-  unittests: test_tokenizer: better handle mismatch error
-  docs: kdoc_re: better represent long regular expressions
-  docs: kdoc: add c_lex to generated documentation
-  docs: kdoc_files: use a class to group config parameters
-  docs: kdoc_files: move output symbols logic to kdoc_output
-  docs: kdoc_item: fix initial value for parameterdesc_start_lines
-  docs: kdoc_item: add support to generate a KdocItem from a dict
-  docs: kdoc_item: fix a typo on sections_start_lines
-  docs: unittests: add a parser to test kernel-doc parser logic
-  docs: add a schema to help creating unittests for kernel-doc
-  docs: add a simple kdoc-test.yaml together with a validation tool
-  docs: test_kdoc_parser: add support for dynamic test creation
-  docs: add a new file to write kernel-doc output to a YAML file
-  docs: kernel-doc: add support to store output on a YAML file
-
- Documentation/tools/kdoc_ancillary.rst   |   9 +
- tools/docs/kernel-doc                    |  48 +-
- tools/lib/python/kdoc/c_lex.py           |   9 +-
- tools/lib/python/kdoc/kdoc_files.py      | 104 +++--
- tools/lib/python/kdoc/kdoc_item.py       |  39 +-
- tools/lib/python/kdoc/kdoc_output.py     |  23 +-
- tools/lib/python/kdoc/kdoc_parser.py     |  33 +-
- tools/lib/python/kdoc/kdoc_re.py         |   9 +-
- tools/lib/python/kdoc/kdoc_yaml_file.py  | 155 +++++++
- tools/unittests/kdoc-test-schema.yaml    | 156 +++++++
- tools/unittests/kdoc-test.yaml           | 154 +++++++
- tools/unittests/test_kdoc_parser.py      | 534 +++++++++++++++++++++++
- tools/unittests/test_kdoc_test_schema.py |  94 ++++
- tools/unittests/test_tokenizer.py        |  13 +-
- 14 files changed, 1322 insertions(+), 58 deletions(-)
- create mode 100644 tools/lib/python/kdoc/kdoc_yaml_file.py
- create mode 100644 tools/unittests/kdoc-test-schema.yaml
- create mode 100644 tools/unittests/kdoc-test.yaml
- create mode 100755 tools/unittests/test_kdoc_parser.py
- create mode 100755 tools/unittests/test_kdoc_test_schema.py
-
+diff --git a/tools/unittests/test_tokenizer.py b/tools/unittests/test_tokenizer.py
+index 5634b4a7283e..d1f3c565b9cf 100755
+--- a/tools/unittests/test_tokenizer.py
++++ b/tools/unittests/test_tokenizer.py
+@@ -46,10 +46,17 @@ def make_tokenizer_test(name, data):
+         #
+         # Check if logger is working
+         #
+-        if "log_level" in data:
+-            with self.assertLogs('kdoc.c_lex', level='ERROR') as cm:
++        if "log_msg" in data:
++            with self.assertLogs() as cm:
+                 tokenizer = CTokenizer(data["source"])
+ 
++                msg_found = False
++                for result in cm.output:
++                    if data["log_msg"] in result:
++                        msg_found = True
++
++                self.assertTrue(msg_found, f"Missing log {data['log_msg']}")
++
+             return
+ 
+         #
+@@ -124,7 +131,7 @@ TESTS_TOKENIZER = {
+ 
+     "mismatch_error": {
+         "source": "int a$ = 5;",          # $ is illegal
+-        "log_level": "ERROR",
++        "log_msg": "Unexpected token",
+     },
+ }
+ 
 -- 
 2.53.0
 
