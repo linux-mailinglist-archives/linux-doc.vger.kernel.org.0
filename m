@@ -1,64 +1,62 @@
-Return-Path: <linux-doc+bounces-79929-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79930-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eJ9VGqltumnRWQIAu9opvQ
-	(envelope-from <linux-doc+bounces-79929-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:29 +0100
+	id SGryBZ9sumnRWQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79930-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:13:03 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C032E2B8CB6
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:28 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A9C82B8BAA
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:13:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 50CD630C03EB
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:37 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 375F73032ABE
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87B163A6EE3;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F6AA3A640F;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qr3SdTAI"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G5ymZDMY"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A8523A5E84;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15B2E3A4F4B;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773825081; cv=none; b=jHNfIq/JM95yuZ0B2NR6NGpd38fPbqcBB5uTlk38SO1kzR/k/SRLKDWW3WnBQ/i0ON6Ax3EYeGMR9Y+cq43B5oHqtCdouMODoyHKMlat49Rv6IKIaxmaveNPC2zaFIvTg2G7kJ2Pk6+ImhjJWQF8ImT26ee8Qsvzfa8IdPZQdc8=
+	t=1773825081; cv=none; b=bPqboPwdp9UQtcEdIpg7GV8NKkmbttgiy58EUImjxUgka8qEGKJ1mCS+yeF1ekDgySTcDKidtank2W2OfnuH/7sAedtbxqpYKZk04/2gp1JIZRdKX7KihBHUEAqP5IMXVFkKY1bG5VJ+CmPnARpM8lgmAaKPKBL2rXjMk0MkGeM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773825081; c=relaxed/simple;
-	bh=Kho/SfdXlAhptQOMVPd0Peuv9YWwg6RMPsq15weyqbI=;
+	bh=+LuCPjCencCh9Cs3UwkM42H1Wvio+AUTLkCST6A38F8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=QgJTPB1H51aQs8cXW4Oxyu6yJPgWbRfFQ/2mSLcQeuQrglZ8muEv+Slq5ehzJ5pqzpn5+1j559Ubr+2aQdYk3v7KLNoKUXtzR+Fx3EgssWkPhDKteCXl58HnYRpXsyE7Pv/KQPC8vkZ+8c0A19nBJp/u90rBmIVqIUTxwirnx8c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qr3SdTAI; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F16FC2BCB4;
+	 MIME-Version:Content-Type; b=cKEc3khjBqCl6ZVhPJRdABEpsTExm2+AyqjUnHFkHduQBIATI+wd8/yKSW5MS7Ask7u88G2FfGRWmSKwpkvjJ8sJYTv+s3R9sJyt6AVpZsQVOo/JHXWYrUREAbtfrh+OQhX+wwTOVgoJcUt1Jc0kl4Z3zX/rC3/7VGTrIb5mM0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G5ymZDMY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 715C0C2BCB7;
 	Wed, 18 Mar 2026 09:11:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773825080;
-	bh=Kho/SfdXlAhptQOMVPd0Peuv9YWwg6RMPsq15weyqbI=;
+	bh=+LuCPjCencCh9Cs3UwkM42H1Wvio+AUTLkCST6A38F8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Qr3SdTAIi4qOwu+yIHvjhmw59zZSAjdewzbb0m9ZfGJ9/udz07CPtcL21Mp4o2+Qu
-	 v58U1SN21lBLaXoMbxzhbd4pyZlbULjICPXuz9Bm5rAveNFrREXN2YeD/qPbRZ8tGK
-	 6aHFm4E/xvXPq+X/LXwaN79u+q6+GdCbkVWV/mC2Y/HZUYA2qeCyYYvnugibH9gilR
-	 Acgj+tMdZ+TnSGdQaugejfWnvh8nFblBiDfejra2EjwyjPx8jRZo6YG+CAR8dp+/HA
-	 pjXeRN/jNKPm7IOEyufCaPk9ZgMaAVby9nxbt85oqi80ExI6MXUbqKQ1DVUrglM9ON
-	 YPSiUwGnQRIXg==
+	b=G5ymZDMYCAWKEom3QCcGq90Fsrf4HcMpPzz9HvFW/UKSZ6MZ7azRx9KVL+YlIMhfs
+	 jzsQr34W15Icm6P/B92rGLb9ZC5fXdDw5ijmApnUajbpD8kILKzO/kTOSye6z7GBNi
+	 vn1WNsfomSFHcc9xANox5MIcEl0BlcPxgLVCShr1yX5Zt2jND286wPDujXlJIKFFDe
+	 AfRm/VVwODns15LXUwL8zm2rsY9f32ZKMNIYRsTvNfQsAjRArxwe5rl/MyQ8nyJ2oZ
+	 H1JnLpqPAMYOO3mbUddVScgHHZL50JPxrsGQVbEbISbiUzjUecDNTDwLFB3Vw+Epk2
+	 QSO5aFtaP+5VA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2mvu-00000002fpm-2lDF;
+	id 1w2mvu-00000002fpq-2sJj;
 	Wed, 18 Mar 2026 10:11:18 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 08/14] docs: kdoc_item: fix a typo on sections_start_lines
-Date: Wed, 18 Mar 2026 10:11:08 +0100
-Message-ID: <d1e0f1d3f80df41c11a1bbde6a12fd9468bc3813.1773823995.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH 09/14] docs: unittests: add a parser to test kernel-doc parser logic
+Date: Wed, 18 Mar 2026 10:11:09 +0100
+Message-ID: <8d91bfabd69de7aa44a0f5080ccb01aa41957e6d.1773823995.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773823995.git.mchehab+huawei@kernel.org>
 References: <cover.1773823995.git.mchehab+huawei@kernel.org>
@@ -76,108 +74,261 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79929-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79930-lists,linux-doc=lfdr.de,huawei];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[self.data:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: C032E2B8CB6
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5]
+X-Rspamd-Queue-Id: 1A9C82B8BAA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Currently, there are 15 occurrences of section?_start_lines,
-with 10 using the plural way.
+Validating that kernel-doc is parsing data properly is tricky.
 
-This is an issue, as, while kdoc_output works with KdocItem,
-the term doesn't match its init value.
+Add an unittest skeleton that alllows passing a source code
+and check if the corresponding values of export_table and
+entries returned by the parser are properly filled.
 
-The variable sections_start_lines stores multiple sections,
-so placing it in plural is its correct way.
+It works by mocking a file input with the contents of a source
+string, an comparing if:
 
-So, ensure that, on all parts of kdoc, this will be referred
-as sections_start_lines.
+	- exports set matches;
+	- expected KernelItem entries match.
+
+Create a new TestSelfValidate meant to check if the logic
+inside KdocParser.run_test() does its job of checking for
+differences inside KdocItem.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_item.py   | 2 +-
- tools/lib/python/kdoc/kdoc_output.py | 2 +-
- tools/lib/python/kdoc/kdoc_parser.py | 6 +++---
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ tools/unittests/test_kdoc_parser.py | 202 ++++++++++++++++++++++++++++
+ 1 file changed, 202 insertions(+)
+ create mode 100755 tools/unittests/test_kdoc_parser.py
 
-diff --git a/tools/lib/python/kdoc/kdoc_item.py b/tools/lib/python/kdoc/kdoc_item.py
-index 5f41790efacb..fe08cac861c2 100644
---- a/tools/lib/python/kdoc/kdoc_item.py
-+++ b/tools/lib/python/kdoc/kdoc_item.py
-@@ -82,7 +82,7 @@ class KdocItem:
-         Set sections and start lines.
-         """
-         self.sections = sections
--        self.section_start_lines = start_lines
-+        self.sections_start_lines = start_lines
- 
-     def set_params(self, names, descs, types, starts):
-         """
-diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
-index 73d71cbeabb5..1b54117dbe19 100644
---- a/tools/lib/python/kdoc/kdoc_output.py
-+++ b/tools/lib/python/kdoc/kdoc_output.py
-@@ -389,7 +389,7 @@ class RestFormat(OutputFormat):
-             else:
-                 self.data += f'{self.lineprefix}**{section}**\n\n'
- 
--            self.print_lineno(args.section_start_lines.get(section, 0))
-+            self.print_lineno(args.sections_start_lines.get(section, 0))
-             self.output_highlight(text)
-             self.data += "\n"
-         self.data += "\n"
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index f6c4ee3b18c9..35658a7e72d5 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -140,7 +140,7 @@ class KernelEntry:
-         self.parametertypes = {}
-         self.parameterdesc_start_lines = {}
- 
--        self.section_start_lines = {}
-+        self.sections_start_lines = {}
-         self.sections = {}
- 
-         self.anon_struct_union = False
-@@ -220,7 +220,7 @@ class KernelEntry:
-                 self.sections[name] += '\n' + contents
-             else:
-                 self.sections[name] = contents
--                self.section_start_lines[name] = self.new_start_line
-+                self.sections_start_lines[name] = self.new_start_line
-                 self.new_start_line = 0
- 
- #        self.config.log.debug("Section: %s : %s", name, pformat(vars(self)))
-@@ -316,7 +316,7 @@ class KernelDoc:
-         for section in ["Description", "Return"]:
-             if section in sections and not sections[section].rstrip():
-                 del sections[section]
--        item.set_sections(sections, self.entry.section_start_lines)
-+        item.set_sections(sections, self.entry.sections_start_lines)
-         item.set_params(self.entry.parameterlist, self.entry.parameterdescs,
-                         self.entry.parametertypes,
-                         self.entry.parameterdesc_start_lines)
+diff --git a/tools/unittests/test_kdoc_parser.py b/tools/unittests/test_kdoc_parser.py
+new file mode 100755
+index 000000000000..26f74666a000
+--- /dev/null
++++ b/tools/unittests/test_kdoc_parser.py
+@@ -0,0 +1,202 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: GPL-2.0
++# Copyright(c) 2026: Mauro Carvalho Chehab <mchehab@kernel.org>.
++#
++# pylint: disable=C0200,C0413,W0102,R0914
++
++"""
++Unit tests for kernel-doc parser.
++"""
++
++import os
++import unittest
++import re
++import sys
++
++from textwrap import dedent
++from unittest.mock import patch, MagicMock, mock_open
++
++SRC_DIR = os.path.dirname(os.path.realpath(__file__))
++sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
++
++from kdoc.kdoc_parser import KernelDoc
++from kdoc.kdoc_item import KdocItem
++from kdoc.xforms_lists import CTransforms
++from unittest_helper import run_unittest
++
++#: Regex to help cleaning whitespaces
++RE_WHITESPC = re.compile(r"\s++")
++
++def clean_whitespc(val, relax_whitespace=False):
++    """
++    Cleanup whitespaces to avoid false positives.
++
++    By default, strip only bein/end whitespaces, but, when relax_whitespace
++    is true, also replace multiple whitespaces in the middle.
++    """
++
++    if isinstance(val, str):
++        val = val.strip()
++        if relax_whitespace:
++            val = RE_WHITESPC.sub("", val)
++    elif isinstance(val, list):
++        val = [clean_whitespc(item, relax_whitespace) for item in val]
++    elif isinstance(val, dict):
++        val = {k: clean_whitespc(v, relax_whitespace) for k, v in val.items()}
++    return val
++
++#
++# Helper class to help mocking with
++#
++class KdocParser(unittest.TestCase):
++    """
++    Base class to run KernelDoc parser class
++    """
++
++    DEFAULT = vars(KdocItem("", "", "", 0))
++
++    def setUp(self):
++        self.maxDiff = None
++        self.config = MagicMock()
++        self.config.log = MagicMock()
++        self.config.log.debug = MagicMock()
++        self.xforms = CTransforms()
++
++
++    def run_test(self, source, __expected_list, exports={}, fname="test.c",
++                 relax_whitespace=False):
++        """
++        Stores expected values and patch the test to use source as
++        a "file" input.
++        """
++        debug_level = int(os.getenv("VERBOSE", "0"))
++        source = dedent(source)
++
++        # Ensure that default values will be there
++        expected_list = []
++        for e in __expected_list:
++            new_e = self.DEFAULT.copy()
++            new_e["fname"] = fname
++            for key, value in e.items():
++                new_e[key] = value
++
++            expected_list.append(new_e)
++
++        patcher = patch('builtins.open',
++                        new_callable=mock_open, read_data=source)
++
++        kernel_doc = KernelDoc(self.config, fname, self.xforms)
++
++        with patcher:
++            export_table, entries = kernel_doc.parse_kdoc()
++
++            self.assertEqual(export_table, exports)
++            self.assertEqual(len(entries), len(expected_list))
++
++            for i in range(0, len(entries)):
++
++                entry = entries[i]
++                expected = expected_list[i]
++                self.assertNotEqual(expected, None)
++                self.assertNotEqual(expected, {})
++                self.assertIsInstance(entry, KdocItem)
++
++                d = vars(entry)
++                for key, value in expected.items():
++                    result = clean_whitespc(d[key], relax_whitespace)
++                    value = clean_whitespc(value, relax_whitespace)
++
++                    if debug_level > 1:
++                        sys.stderr.write(f"{key}: assert('{result}' == '{value}')\n")
++
++                    self.assertEqual(result, value, msg=f"at {key}")
++
++
++#
++# Selttest class
++#
++class TestSelfValidate(KdocParser):
++    """
++    Tests to check if logic inside KdocParser.run_test() is working.
++    """
++
++    SOURCE = """
++        /**
++         * function3: Exported function
++         * @arg1: @arg1 does nothing
++         *
++         * Does nothing
++         *
++         * return:
++         *    always return 0.
++         */
++        int function3(char *arg1) { return 0; };
++        EXPORT_SYMBOL(function3);
++    """
++
++    EXPECTED = [{
++        'name': 'function3',
++        'type': 'function',
++        'declaration_start_line': 2,
++
++        'sections_start_lines': {
++            'Description': 4,
++            'Return': 7,
++        },
++        'sections': {
++            'Description': 'Does nothing\n\n',
++            'Return': '\nalways return 0.\n'
++        },
++        'other_stuff': {
++            'func_macro': False,
++            'functiontype': 'int',
++            'purpose': 'Exported function',
++            'typedef': False
++        },
++        'parameterdescs': {'arg1': '@arg1 does nothing\n'},
++        'parameterlist': ['arg1'],
++        'parameterdesc_start_lines': {'arg1': 3},
++        'parametertypes': {'arg1': 'char *arg1'},
++    }]
++
++    EXPORTS = {"function3"}
++
++    def test_parse_pass(self):
++        """
++        Test if export_symbol is properly handled.
++        """
++        self.run_test(self.SOURCE, self.EXPECTED, self.EXPORTS)
++
++    @unittest.expectedFailure
++    def test_no_exports(self):
++        """
++        Test if export_symbol is properly handled.
++        """
++        self.run_test(self.SOURCE, [], {})
++
++    @unittest.expectedFailure
++    def test_with_empty_expected(self):
++        """
++        Test if export_symbol is properly handled.
++        """
++        self.run_test(self.SOURCE, [], self.EXPORTS)
++
++    @unittest.expectedFailure
++    def test_with_unfilled_expected(self):
++        """
++        Test if export_symbol is properly handled.
++        """
++        self.run_test(self.SOURCE, [{}], self.EXPORTS)
++
++    @unittest.expectedFailure
++    def test_with_default_expected(self):
++        """
++        Test if export_symbol is properly handled.
++        """
++        self.run_test(self.SOURCE, [self.DEFAULT.copy()], self.EXPORTS)
++
++#
++# Run all tests
++#
++if __name__ == "__main__":
++    run_unittest(__file__)
 -- 
 2.53.0
 
