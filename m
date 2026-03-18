@@ -1,62 +1,65 @@
-Return-Path: <linux-doc+bounces-79932-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79926-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YK3RDKdtumnRWQIAu9opvQ
-	(envelope-from <linux-doc+bounces-79932-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:27 +0100
+	id YBn7F6ZtumnRWQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79926-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C731E2B8C9F
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:26 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06C6E2B8C98
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8BF5D31961D1
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 15B64319429D
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 863003A641D;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76EED3A6403;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QMA3nYgB"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kKjY/H39"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C5C83A5E8F;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 104983A1A55;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773825081; cv=none; b=MDSc/Yatm6a86LfQmYiEoIrmWBK9v9bEhuYHX3rZPVGvfOP5ImAYZf6rimOzvSL5ub+lhrWO9JMwQMuGg1ljA5MdbVBCmRBqndbKGX1DbTiS8lDcsyOFONnYramVWHlbht7wmDFFUowRXCnxbjwi3JPqhJTQnYG1yb4xFmOaj6E=
+	t=1773825081; cv=none; b=sYQslGZuHknMh8gdNRSXtThEFsMGbcRPqMdCQkkNMGljRhnuIeLhWNCmyJ4aE+gvHi0duWoXNsMuRBcaVGCfYccfZXeHoh/8QDmWgoFC2z/j7cUO5Zjpa+ciy+sMpxn62CfD3oYJUXkXQ/D62ns8LxjuIIIfH3CSvW6ADLhwzpI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773825081; c=relaxed/simple;
-	bh=x+z0BOd8CUTKW/M8RsgH8506TTiWFSWuiqgXODs0fGQ=;
+	bh=scL+K6GSvLApr7G1/Af3VPGVcWpWnw78ruddz9ClsaI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=n3H6H9YC7yBZ/BDZ4ERrygdjoyuYlOBRAIdGoYWeLncFQ9gxd/lp0XPpPaAfCZzSCRWulLieuegaXqkC4819A6p7nK7rhpXAtYmQyHCKj4Ira+5iY/JMlmtg8zz6fFjTDHONQGQF19GVx81bqISgHld3NBR401MhUwKFkpHf5Q0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QMA3nYgB; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80C10C2BCF7;
+	 MIME-Version:Content-Type; b=RSrsjn3Jw+d30v7fks95Ut9xgkuHNunHxkKP2c+tSlbG1xIj+mXYKiTwJIvMIrbU6n7ezziE0+5qpAxVs/CLvBn8RgwHSWJHg6ulYLp/AdrjiDH3wb+EG/GkgbzG2/jiMNZ3sU1b6Q0oUQXvp0i95JuXc+qPLNPOgv7awZ8r00c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kKjY/H39; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89D99C4AF0C;
 	Wed, 18 Mar 2026 09:11:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773825080;
-	bh=x+z0BOd8CUTKW/M8RsgH8506TTiWFSWuiqgXODs0fGQ=;
+	bh=scL+K6GSvLApr7G1/Af3VPGVcWpWnw78ruddz9ClsaI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QMA3nYgBKJOTGvhxKjIExIXFbLCffxkYWyKPm8RVzJV+en4VbXAzioz2F7lZ0WCHS
-	 ftEsT3K+CVvZtx48yOGD7zIo6BhR2o4iS17aJ2IA+Aj5s/ilTCklugoI40yr9kWJMc
-	 2nU4mV7NtV8FRVFEGaJ9m61RqXRi6alrgYCD+LvNJAqJPbUUwnUt0Zemtmk1wDoGrJ
-	 5IrOIkVmSHDXUEikq0ixFrtScY3QSBGP0SvljeVlCQr0tMp9wfYlWuqTRF7ciVmkox
-	 7fhMk9VMCwu7FLECSnmBuzqTsQYBxnmxPBUDyKZdkcR3i4EZ0s7Q7eYOTjYkZPUops
-	 mqPCrhgKYTKmg==
+	b=kKjY/H39l9jiKmSMDtZK788cFtVzTVP38/JwHMYZEl6FQVOLLTQs8xmX9+NXFQBSO
+	 mmvdYFSF4X8XgKQbnerfrtCSt4XZUtLFl6OFsbbp2JVxJI+cR0vjoXz/mvDQoxSJzN
+	 +CIClbJPwXZeRkXiT5cqBhY3E2ZGph/eE+6f02d3X+W67oJcgshilK0GeMXa52O79u
+	 oXjwNh+QXfBxzUcRX5IjOnrzKWqwOes37T3iqAm6efwNWKj3yAqqGwERr8MrF7Lm22
+	 xXItJRCG6rEDYUnClV6SSbEpYii8wAkxBmlwkgn4w8ia+S/CMs+pt3ku4mmWDlrsHg
+	 INJva+tyh/wLA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2mvu-00000002fq6-3LVu;
+	id 1w2mvu-00000002fqA-3ScD;
 	Wed, 18 Mar 2026 10:11:18 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 13/14] docs: add a new file to write kernel-doc output to a YAML file
-Date: Wed, 18 Mar 2026 10:11:13 +0100
-Message-ID: <5d084ca1a91f6a620534a1135d1b8183d934319a.1773823995.git.mchehab+huawei@kernel.org>
+	Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 14/14] docs: kernel-doc: add support to store output on a YAML file
+Date: Wed, 18 Mar 2026 10:11:14 +0100
+Message-ID: <ba54277b3c909867153b9547dfa33c1831ca35d9.1773823995.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773823995.git.mchehab+huawei@kernel.org>
 References: <cover.1773823995.git.mchehab+huawei@kernel.org>
@@ -73,206 +76,317 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79932-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79926-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: C731E2B8C9F
+X-Rspamd-Queue-Id: 06C6E2B8C98
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Storing kernel-doc output is helpful to allow debugging problems
-on it and to preparate unit tests.
+Add a command line parameter and library support to optionally
+store:
+- KdocItem intermediate format after parsing;
+- man pages output;
+- rst output.
 
-Add a class to store such contents at the same format as defined
-at kdoc-test-schema.yaml.
+inside a YAML file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_yaml_file.py | 155 ++++++++++++++++++++++++
- 1 file changed, 155 insertions(+)
- create mode 100644 tools/lib/python/kdoc/kdoc_yaml_file.py
+ tools/docs/kernel-doc                | 48 +++++++++++++++++++++++-----
+ tools/lib/python/kdoc/kdoc_files.py  | 47 +++++++++++++++++++++++----
+ tools/lib/python/kdoc/kdoc_parser.py | 27 +++++++++++++++-
+ 3 files changed, 107 insertions(+), 15 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_yaml_file.py b/tools/lib/python/kdoc/kdoc_yaml_file.py
-new file mode 100644
-index 000000000000..db131503c3f6
---- /dev/null
-+++ b/tools/lib/python/kdoc/kdoc_yaml_file.py
-@@ -0,0 +1,155 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+# Copyright(c) 2026: Mauro Carvalho Chehab <mchehab@kernel.org>.
+diff --git a/tools/docs/kernel-doc b/tools/docs/kernel-doc
+index 3a932f95bdf5..d9192c3f1645 100755
+--- a/tools/docs/kernel-doc
++++ b/tools/docs/kernel-doc
+@@ -240,11 +240,9 @@ def main():
+                         help=EXPORT_FILE_DESC)
+ 
+     #
+-    # Output format mutually-exclusive group
++    # Output format
+     #
+-    out_group = parser.add_argument_group("Output format selection (mutually exclusive)")
+-
+-    out_fmt = out_group.add_mutually_exclusive_group()
++    out_fmt = parser.add_argument_group("Output format selection (mutually exclusive)")
+ 
+     out_fmt.add_argument("-m", "-man", "--man", action="store_true",
+                          help="Output troff manual page format.")
+@@ -253,6 +251,12 @@ def main():
+     out_fmt.add_argument("-N", "-none", "--none", action="store_true",
+                          help="Do not output documentation, only warnings.")
+ 
++    out_fmt.add_argument("-y", "--yaml-file", "--yaml",
++                         help="Stores kernel-doc output on a yaml file.")
++    out_fmt.add_argument("-k", "--kdoc-item", "--kdoc", action="store_true",
++                         help="Store KdocItem inside yaml file. Ued together with --yaml.")
 +
-+import os
 +
-+from kdoc.kdoc_output import ManFormat, RestFormat
+     #
+     # Output selection mutually-exclusive group
+     #
+@@ -323,14 +327,42 @@ def main():
+     from kdoc.kdoc_files import KernelFiles             # pylint: disable=C0415
+     from kdoc.kdoc_output import RestFormat, ManFormat  # pylint: disable=C0415
+ 
+-    if args.man:
+-        out_style = ManFormat(modulename=args.modulename)
+-    elif args.none:
++    yaml_content = set()
++    if args.yaml_file:
+         out_style = None
 +
++        if args.man:
++            yaml_content |= {"man"}
 +
-+class KDocTestFile():
-+    """
-+    Handles the logic needed to store kernel‑doc output inside a YAML file.
-+     Useful for unit tests and regression tests.
-+    """
++        if args.rst:
++            yaml_content |= {"rst"}
 +
-+    def __init__(self, config, yaml_file, yaml_content):
-+        #
-+        # Bail out early if yaml is not available
-+        #
-+        try:
-+            import yaml
-+        except ImportError:
-+            sys.exit("Warning: yaml package not available. Aborting it.")
++        if args.kdoc_item or not yaml_content:
++            yaml_content |= {"KdocItem"}
 +
-+        self.config = config
-+        self.test_file = os.path.expanduser(yaml_file)
-+        self.yaml_content = yaml_content
+     else:
+-        out_style = RestFormat()
++        n_outputs = 0
 +
-+        self.tests = []
++        if args.man:
++            out_style = ManFormat(modulename=args.modulename)
++            n_outputs += 1
 +
-+        out_dir = os.path.dirname(self.test_file)
-+        if out_dir and not os.path.isdir(out_dir):
-+            sys.exit(f"Directory {out_dir} doesn't exist.")
++        if args.none:
++            out_style = None
++            n_outputs += 1
 +
-+        self.out_style = []
-+
-+        if "man" in self.yaml_content:
-+            out_style = ManFormat()
-+            out_style.set_config(self.config)
-+
-+            self.out_style.append(out_style)
-+
-+        if "rst" in self.yaml_content:
++        if  args.rst or n_outputs == 0:
++            n_outputs += 1
 +            out_style = RestFormat()
-+            out_style.set_config(self.config)
 +
-+            self.out_style.append(out_style)
++        if n_outputs > 1:
++             parser.error("Those arguments are muttually exclusive: --man, --rst, --none, except when generating a YAML file.")
 +
-+    def set_filter(self, export, internal, symbol, nosymbol,
-+                   function_table, enable_lineno, no_doc_sections):
++        elif not n_outputs:
++            out_style = RestFormat()
+ 
+     kfiles = KernelFiles(verbose=args.verbose,
++                         yaml_file=args.yaml_file, yaml_content=yaml_content,
+                          out_style=out_style, werror=args.werror,
+                          wreturn=args.wreturn, wshort_desc=args.wshort_desc,
+                          wcontents_before_sections=args.wcontents_before_sections)
+diff --git a/tools/lib/python/kdoc/kdoc_files.py b/tools/lib/python/kdoc/kdoc_files.py
+index 58f4ee08e226..5a299ed44d62 100644
+--- a/tools/lib/python/kdoc/kdoc_files.py
++++ b/tools/lib/python/kdoc/kdoc_files.py
+@@ -16,6 +16,7 @@ import re
+ from kdoc.kdoc_parser import KernelDoc
+ from kdoc.xforms_lists import CTransforms
+ from kdoc.kdoc_output import OutputFormat
++from kdoc.kdoc_yaml_file import KDocTestFile
+ 
+ 
+ class GlobSourceFiles:
+@@ -152,6 +153,12 @@ class KernelFiles():
+ 
+         If not specified, defaults to use: ``logging.getLogger("kernel-doc")``
+ 
++    ``yaml_file``
++        If defined, stores the output inside a YAML file.
++
++    ``yaml_content``
++        Defines what will be inside the YAML file.
++
+     Note:
+         There are two type of parsers defined here:
+ 
+@@ -181,7 +188,12 @@ class KernelFiles():
+         if fname in self.files:
+             return
+ 
+-        doc = KernelDoc(self.config, fname, self.xforms)
++        if self.test_file:
++            store_src = True
++        else:
++            store_src = False
++
++        doc = KernelDoc(self.config, fname, self.xforms, store_src=store_src)
+         export_table, entries = doc.parse_kdoc()
+ 
+         self.export_table[fname] = export_table
+@@ -191,6 +203,10 @@ class KernelFiles():
+ 
+         self.results[fname] = entries
+ 
++        source = doc.get_source()
++        if source:
++            self.source[fname] = source
++
+     def process_export_file(self, fname):
+         """
+         Parses ``EXPORT_SYMBOL*`` macros from a single Kernel source file.
+@@ -220,7 +236,7 @@ class KernelFiles():
+     def __init__(self, verbose=False, out_style=None, xforms=None,
+                  werror=False, wreturn=False, wshort_desc=False,
+                  wcontents_before_sections=False,
+-                 logger=None):
++                 yaml_file=None, yaml_content=None, logger=None):
+         """
+         Initialize startup variables and parse all files.
+         """
+@@ -259,6 +275,11 @@ class KernelFiles():
+         # Override log warning, as we want to count errors
+         self.config.warning = self.warning
+ 
++        if yaml_file:
++            self.test_file = KDocTestFile(self.config, yaml_file, yaml_content)
++        else:
++            self.test_file = None
++
+         if xforms:
+             self.xforms = xforms
+         else:
+@@ -273,6 +294,7 @@ class KernelFiles():
+ 
+         self.errors = 0
+         self.results = {}
++        self.source = {}
+ 
+         self.files = set()
+         self.export_files = set()
+@@ -331,16 +353,29 @@ class KernelFiles():
+                 for s in symbol:
+                     function_table.add(s)
+ 
+-            self.out_style.set_filter(export, internal, symbol, nosymbol,
+-                                      function_table, enable_lineno,
+-                                      no_doc_sections)
+-
+             if fname not in self.results:
+                 self.config.log.warning("No kernel-doc for file %s", fname)
+                 continue
+ 
+             symbols = self.results[fname]
+ 
++            if self.test_file:
++                self.test_file.set_filter(export, internal, symbol, nosymbol,
++                                          function_table, enable_lineno,
++                                          no_doc_sections)
++
++                self.test_file.output_symbols(fname, symbols,
++                                              self.source.get(fname))
++
++                continue
++
++            self.out_style.set_filter(export, internal, symbol, nosymbol,
++                                      function_table, enable_lineno,
++                                      no_doc_sections)
++
+             msg = self.out_style.output_symbols(fname, symbols)
+             if msg:
+                 yield fname, msg
++
++        if self.test_file:
++            self.test_file.write()
+diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
+index 35658a7e72d5..a10e64589d76 100644
+--- a/tools/lib/python/kdoc/kdoc_parser.py
++++ b/tools/lib/python/kdoc/kdoc_parser.py
+@@ -246,12 +246,13 @@ class KernelDoc:
+     #: String to write when a parameter is not described.
+     undescribed = "-- undescribed --"
+ 
+-    def __init__(self, config, fname, xforms):
++    def __init__(self, config, fname, xforms, store_src=False):
+         """Initialize internal variables"""
+ 
+         self.fname = fname
+         self.config = config
+         self.xforms = xforms
++        self.store_src = store_src
+ 
+         tokenizer_set_log(self.config.log, f"{self.fname}: CMatch: ")
+ 
+@@ -264,6 +265,9 @@ class KernelDoc:
+         # Place all potential outputs into an array
+         self.entries = []
+ 
++        # When store_src is true, the kernel-doc source content is stored here
++        self.source = None
++
+         #
+         # We need Python 3.7 for its "dicts remember the insertion
+         # order" guarantee
+@@ -1592,6 +1596,15 @@ class KernelDoc:
+         state.DOCBLOCK:			process_docblock,
+         }
+ 
++    def get_source(self):
 +        """
-+        Set filters at the output classes.
++        Return the file content of the lines handled by kernel-doc at the
++        latest parse_kdoc() run.
++
++        Returns none if KernelDoc() was not initialized with store_src,
 +        """
-+        for out_style in self.out_style:
-+            out_style.set_filter(export, internal, symbol,
-+                                 nosymbol, function_table,
-+                                 enable_lineno, no_doc_sections)
++        return self.source
 +
-+    @staticmethod
-+    def get_kdoc_item(arg, start_line=1):
+     def parse_kdoc(self):
+         """
+         Open and process each line of a C source file.
+@@ -1605,6 +1618,8 @@ class KernelDoc:
+         prev = ""
+         prev_ln = None
+         export_table = set()
++        self.source = []
++        self.state = state.NORMAL
+ 
+         try:
+             with open(self.fname, "r", encoding="utf8",
+@@ -1631,6 +1646,8 @@ class KernelDoc:
+                                           ln, state.name[self.state],
+                                           line)
+ 
++                    prev_state = self.state
 +
-+        d = vars(arg)
+                     # This is an optimization over the original script.
+                     # There, when export_file was used for the same file,
+                     # it was read twice. Here, we use the already-existing
+@@ -1641,6 +1658,14 @@ class KernelDoc:
+                         # Hand this line to the appropriate state handler
+                         self.state_actions[self.state](self, ln, line)
+ 
++                    if self.store_src and prev_state != self.state or self.state != state.NORMAL:
++                        if self.state == state.NAME:
++                            # A "/**" was detected. Add a new source element
++                            self.source.append({"ln": ln, "data": line + "\n"})
++                        else:
++                            # Append to the existing one
++                            self.source[-1]["data"] += line + "\n"
 +
-+        declaration_start_line = d.get("declaration_start_line")
-+        if not declaration_start_line:
-+            return d
-+
-+        d["declaration_start_line"] = start_line
-+
-+        parameterdesc_start_lines = d.get("parameterdesc_start_lines")
-+        if parameterdesc_start_lines:
-+            for key in parameterdesc_start_lines:
-+                ln = parameterdesc_start_lines[key]
-+                ln += start_line - declaration_start_line
-+
-+                parameterdesc_start_lines[key] = ln
-+
-+        sections_start_lines = d.get("sections_start_lines")
-+        if sections_start_lines:
-+            for key in sections_start_lines:
-+                ln = sections_start_lines[key]
-+                ln += start_line - declaration_start_line
-+
-+                sections_start_lines[key] = ln
-+
-+        return d
-+
-+    def output_symbols(self, fname, symbols, source):
-+        """
-+        Store source, symbols and output strings at self.tests.
-+        """
-+
-+        #
-+        # KdocItem needs to be converted into dicts
-+        #
-+        kdoc_item = []
-+        expected = []
-+
-+        if not symbols and not source:
-+            return
-+
-+        if not source or len(symbols) != len(source):
-+            print(f"Warning: lengths are different. Ignoring {fname}")
-+
-+            # Folding without line numbers is too hard.
-+            # The right thing to do here to proceed would be to delete
-+            # not-handled source blocks, as len(source) should be bigger
-+            # than len(symbols)
-+            return
-+
-+        base_name = "test_" + fname.replace(".", "_").replace("/", "_")
-+        expected_dict = {}
-+        start_line=1
-+
-+        for i in range(0, len(symbols)):
-+            arg = symbols[i]
-+
-+            if "KdocItem" in self.yaml_content:
-+                msg = self.get_kdoc_item(arg)
-+
-+                expected_dict["kdoc_item"] = msg
-+
-+            for out_style in self.out_style:
-+                if isinstance(out_style, ManFormat):
-+                    key = "man"
-+                else:
-+                    key = "rst"
-+
-+                expected_dict[key]= out_style.output_symbols(fname, [arg])
-+
-+            name = f"{base_name}_{i:03d}"
-+
-+            test = {
-+                "name": name,
-+                "description": f"{fname} line {source[i]["ln"]}",
-+                "fname": fname,
-+                "source": source[i]["data"],
-+                "expected": [expected_dict]
-+            }
-+
-+            self.tests.append(test)
-+
-+            expected_dict = {}
-+
-+    def write(self):
-+        """
-+        Output the content of self.tests to self.test_file.
-+        """
-+        import yaml
-+
-+        data = {"tests": self.tests}
-+
-+        with open(self.test_file, "w", encoding="utf-8") as fp:
-+            yaml.safe_dump(data, fp, sort_keys=False, default_style="|",
-+                           default_flow_style=False, allow_unicode=True)
+             self.emit_unused_warnings()
+ 
+         except OSError:
 -- 
 2.53.0
 
