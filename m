@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-79925-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79928-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QCRgHadtumnRWQIAu9opvQ
-	(envelope-from <linux-doc+bounces-79925-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:27 +0100
+	id oEepBchuumnRWQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79928-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:22:16 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB5472B8CA0
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:17:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A92952B8E35
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 10:22:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2BF203195676
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3E18B31961ED
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:11:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7806D3A6404;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F93A3A6412;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O44EzMM3"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="n2Q7eAnK"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0568039E16C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14C433A4F44;
 	Wed, 18 Mar 2026 09:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773825081; cv=none; b=q86CLMiCZCuZPB4jNZpLM2TfhbYJHAva8P9x96vOWyQ0MReDgGIfjkSiJmVDcAQa1VjYBDToN1Bwz/6fqNKQBBS9mTKKAQsNOEdlzZWCCVEKTV5E//7WBXZavFuPL8ZRGsO96xo0x9FZjmjEL4c0mgso9QGzbDyhN/y09fB8W5A=
+	t=1773825081; cv=none; b=Tdk7X6bMLOPy7ky6tAmtzWivgXg36twbHQxH9qceay5mRsoiZelzqEGejW8b71XCbU41wx5q8QPNeWRqAlZp2R1M3ZKhwEgpoTwizlffr6foIChj42N3P0vbFMrSpWVsZZQaKTg4iJIetb/zZiaXT6cFe/sWCGX9WzOLQzQKgZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773825081; c=relaxed/simple;
-	bh=X1yEX8lbYO0S5xeoDrx5PLqGmHxcZe9gt4OR2H1Y1no=;
+	bh=pG4yNDPd52x57hQuewPFl0zHI66ri1EkY8+dE1xzdJQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mS3L2fKNaV8oI958X6hGBXT+HIpu8Nm4UZK7kXQFF/N3VY1XwqWmRzJEgDHfQrwuh3nWh/Q17ho+yY+x2OnM+P6zAYbYTOUBz+5eV/2QRABrAkVQ+n0iAza2x7zClxfaoeSa4iKLlwdNs2zFVBhPeWBXJZApUeDoFmfoa/Je0oQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O44EzMM3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D38DC2BCC4;
+	 MIME-Version:Content-Type; b=I8RRXz32evfEP70lFbF/eLGo1vwiIriixR4LQD6Jwti9y9eTtqqdh9tJlyCpt7Kh8ZVY0jYr4K4ZKayg9NnqvtxDMgoW9pRMWv6vP38he7kMVjN2xAnJu0ZrwYCNdG0t0C5Pb113AvPrE2NnU6+2YEDNeFj5HVHOB8/TONVHTRg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=n2Q7eAnK; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74EE3C2BCB6;
 	Wed, 18 Mar 2026 09:11:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773825080;
-	bh=X1yEX8lbYO0S5xeoDrx5PLqGmHxcZe9gt4OR2H1Y1no=;
+	bh=pG4yNDPd52x57hQuewPFl0zHI66ri1EkY8+dE1xzdJQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=O44EzMM3fkg8xY0/+XIe0G63xhtWyglXyLSFymMQq29oF2tz5uh67C9hiheDrKn+L
-	 pJmsdCvm7VYO6SVRxH4mlJdQLGvSBK6Ot1BSLJ5phzD39LjOeBN8WBdvbIYCmFP3r1
-	 8wiXN+lIsfxWEMPz9l/A1Nh0eif+jtQu19qbwrCFKsF7Quk8n/4rG9V306TtCs1ioh
-	 IYfVnEDhaDBkYFreIS3r5j14AVO7K5BY17LghKcCy2sNFqc54bhJPFtGwF9ITFxJpo
-	 SrRj25CEuSo8NbHNpU87tSHM/x2lYZiZUfwf9Ccdx8Z+Wc6hdUfbUntkKq7KBSzmHH
-	 /4iqJHOL7YXGw==
+	b=n2Q7eAnKdmMMTOr6iY9yzmXFGPml2GCXAiR8smMRGP+Pd/yGI5nTc/AXYTUmFI5lb
+	 g82toSnsaPA+QYLtckukh2bALvxg4RCYyRJ+nEvsi/kWaBVX6iIZhrfrN8NlCBuVhu
+	 RBMJbNGgPZNVh3Urj7wnSczDgUZeTWZMZdSbwQm3QGD1WBJ3/FXVOJeVWoPXjxx3ed
+	 3oGpZ9H+5p1cQoF0d6TiVxnz1lxjsuDUfmqymg7zrbBdN7XiRvGHFSHtNYYdn6+6JX
+	 bjW/kmTP32Zy6OCtiL3cbBXMpJw2DCkv+SiJfFTHdgCYJlWthdVGEZZ2JiirnlpgUl
+	 Y+rjPEJz7M/QQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2mvu-00000002fpu-2zA8;
+	id 1w2mvu-00000002fpy-37Br;
 	Wed, 18 Mar 2026 10:11:18 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -54,9 +54,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 10/14] docs: add a schema to help creating unittests for kernel-doc
-Date: Wed, 18 Mar 2026 10:11:10 +0100
-Message-ID: <f42fd816ee0d257c736b30977b10f04f6bea27c2.1773823995.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 11/14] docs: add a simple kdoc-test.yaml together with a validation tool
+Date: Wed, 18 Mar 2026 10:11:11 +0100
+Message-ID: <74883976348c964f00161696d525c33ddd8c7641.1773823995.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1773823995.git.mchehab+huawei@kernel.org>
 References: <cover.1773823995.git.mchehab+huawei@kernel.org>
@@ -81,7 +81,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79925-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-79928-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -95,184 +95,293 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,json-schema.org:url]
-X-Rspamd-Queue-Id: DB5472B8CA0
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A92952B8E35
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Instead of hardcoding lots of tests inside a file, let's place
-them inside a yaml file.
+Create a simple kdoc-test.yaml to be used to create unit tests for
+kernel-doc parser and output classes.
 
-Add first a schema to handle it.
+For now, all we want is a simple function mapped on a yaml test
+using the defined schema.
+
+To be sure that the schema is followed, add an unittest for
+the file, which will also validate that the schema is properly
+parsed.
+
+It should be noticed that the .TH definition for the man format
+contains a timestamp. We'll need to handle that when dealing with
+the actual implementation for the ManOutput class unit tests.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/unittests/kdoc-test-schema.yaml | 156 ++++++++++++++++++++++++++
- 1 file changed, 156 insertions(+)
- create mode 100644 tools/unittests/kdoc-test-schema.yaml
+ tools/unittests/kdoc-test.yaml           | 154 +++++++++++++++++++++++
+ tools/unittests/test_kdoc_test_schema.py |  94 ++++++++++++++
+ 2 files changed, 248 insertions(+)
+ create mode 100644 tools/unittests/kdoc-test.yaml
+ create mode 100755 tools/unittests/test_kdoc_test_schema.py
 
-diff --git a/tools/unittests/kdoc-test-schema.yaml b/tools/unittests/kdoc-test-schema.yaml
+diff --git a/tools/unittests/kdoc-test.yaml b/tools/unittests/kdoc-test.yaml
 new file mode 100644
-index 000000000000..cf5079711cd8
+index 000000000000..b6e04f10ccdb
 --- /dev/null
-+++ b/tools/unittests/kdoc-test-schema.yaml
-@@ -0,0 +1,156 @@
++++ b/tools/unittests/kdoc-test.yaml
+@@ -0,0 +1,154 @@
 +# SPDX-License-Identifier: GPL-2.0
-+# Copyright(c) 2026: Mauro Carvalho Chehab <mchehab@kernel.org>.
++# Copyright (c) 2026: Mauro Carvalho Chehab <mchehab@kernel.org>
 +
-+# KDoc Test File Schema
-+
-+# This schema contains objects and properties needed to run kernel-doc
-+# self-tests.
-+
-+$schema: "http://json-schema.org/draft-07/schema#"
++# Test cases for the dynamic tests.
++# Useful to test if kernel-doc classes are doing what it is expected.
++#
 +
 +tests:
-+  type: array
-+  minItems: 1
-+  description: |
-+    A list of kernel-doc tests.
++- name: func1
++  fname: mock_functions.c
++  description: "Simplest function test: do nothing, just rst output"
 +
-+  properties:
-+    type: object
-+    properties:
-+      name:
-+        type: string
-+        description: |
-+          Test name. Should be an unique identifier within the schema.
-+          Don't prepend it with "test", as the dynamic test creation will
-+          do it.
++  source: |
++    /**
++      * func1 - Not exported function
++      * @arg1: @arg1 does nothing
++      *
++      * Does nothing
++      *
++      * return:
++      *    always return 0.
++      */
++    int func1(char *arg1) { return 0; };
 +
-+      description:
-+        type: string
-+        description: |
-+          Test description
 +
-+      source:
-+        type: string
-+        description: |
-+          C source code that should be parsed by kernel-doc.
++  expected:
++  - rst: |
++    .. c:function:: int func1 (char *arg1)
 +
-+      fname:
-+        type: string
-+        description: |
-+          The filename that contains the element.
-+          When placing real testcases, please use here the name of
-+          the C file (or header) from where the source code was picked.
++      Not exported function
 +
-+      exports:
-+        type: array
-+        items: { type: string }
-+        description: |
-+          A list of export identifiers that are expected when parsing source.
++    .. container:: kernelindent
 +
-+      expected:
-+        type: array
-+        minItems: 1
-+        description: |
-+          A list of expected values. This list consists on objects to check
-+          both kdoc_parser and/or kdoc_output objects.
++      **Parameters**
 +
-+        items:
-+          type: object
-+          properties:
-+            #
-+            #  kdoc_item
-+            #
-+            kdoc_item:
-+              type: object
-+              description: |
-+                Object expected to represent the C source code after parsed
-+                by tools/lib/python/kdoc/kdoc_parser.py KernelDoc class.
-+                See tools/lib/python/kdoc/kdoc_item.py for its contents.
++      ``char *arg1``
++        **arg1** does nothing
 +
-+              properties:
-+                name:
-+                  type: string
-+                  description: |
-+                    The name of the identifier (function name, struct name, etc).
-+                type:
-+                  type: string
-+                  description: |
-+                    Type of the object, as filled by kdoc_parser. can be:
-+                    - enum
-+                    - typedef
-+                    - union
-+                    - struct
-+                    - var
-+                    - function
-+                declaration_start_line:
-+                  type: integer
-+                  description: |
-+                    The line number where the kernel-doc markup started.
-+                    The first line of the code is line number 1.
-+                sections:
-+                  type: object
-+                  additionalProperties: { type: string }
-+                  description: |
-+                    Sections inside the kernel-doc markups:
-+                    - "description"
-+                    - "return"
-+                    - any other part of the markup that starts with "something:"
-+                sections_start_lines:
-+                  type: object
-+                  additionalProperties: { type: integer }
-+                  description: |
-+                    a list of section names and the starting line of it.
-+                parameterlist:
-+                  type: array
-+                  items: { type: string }
-+                  description: |
-+                    Ordered list of parameter names.
++      **Description**
 +
-+                parameterdesc_start_lines:
-+                  type: object
-+                  additionalProperties: { type: integer }
-+                  description: |
-+                    Mapping from parameter name to the line where its
-+                    description starts.
-+                parameterdescs:
-+                  type: object
-+                  additionalProperties: { type: string }
-+                  description: |
-+                    Mapping from parameter name to its description.
++      Does nothing
 +
-+                parametertypes:
-+                  type: object
-+                  additionalProperties: { type: string }
-+                  description: |
-+                    Mapping from parameter name to its type.
++      **Return**
 +
-+                other_stuff:
-+                  type: object
-+                  additionalProperties: {}
-+                  description: |
-+                    Extra properties that will be stored at the item.
-+                    Should match what kdoc_output expects.
++      always return 0.
 +
-+              required:
-+                - name
-+                - type
-+                - declaration_start_line
++    # TODO: how to handle timestamps at .TH?
++    man: |
++      .TH "func1" 9 "February 2026"  "" "Kernel API Manual"
++      .SH NAME
++      func1 \- Not exported function
++      .SH SYNOPSIS
++      .B "int" func1
++      .BI "(char *arg1 "  ");"
++      .SH ARGUMENTS
++      .IP "arg1" 12
++      \fIarg1\fP does nothing
++      .SH "DESCRIPTION"
++      Does nothing
++      .SH "RETURN"
++      always return 0.
++      .SH "SEE ALSO"
++      .PP
++      Kernel file \fBmock_functions.c\fR
 +
-+            rst:
-+              type: string
-+              description: |
-+                The expected output for RestOutput class.
++- name: func2
++  fname: func2.c
++  description: Simple test with exports
 +
-+            man:
-+              type: string
-+              description: |
-+                The expected output for ManOutput class.
++  source: |
++    /**
++      * func2() - Exported function
++      * @arg1: @arg1 does nothing
++      *
++      * Does nothing
++      *
++      * return:
++      *    always return 0.
++      */
++    int func2(char *arg1) { return 0; };
++    EXPORT_SYMBOL(func2);
 +
-+        anyOf:
-+          required: kdoc_item
-+          required: source
++  exports: func2
++  expected:
++  - kdoc_item:
++      name: func2
++      type: function
++      declaration_start_line: 1
 +
-+    required:
-+      - name
-+      - fname
-+      - expected
++      sections:
++        Description: |
++          Does nothing
++
++        Return: |
++          always return 0.
++
++      sections_start_lines:
++        Description: 3
++        Return: 6
++
++      parameterdescs:
++        arg1: |
++          @arg1 does nothing
++      parameterlist:
++        - arg1
++      parameterdesc_start_lines:
++        arg1: 2
++      parametertypes:
++        arg1: char *arg1
++
++      other_stuff:
++        func_macro: false
++        functiontype: int
++        purpose: "Exported function"
++        typedef: false
++
++    rst: |
++      .. c:function:: int func2 (char *arg1)
++
++        Exported function
++
++      .. container:: kernelindent
++
++        **Parameters**
++
++        ``char *arg1``
++          **arg1** does nothing
++
++        **Description**
++
++        Does nothing
++
++        **Return**
++
++        always return 0.
++
++    # TODO: how to handle timestamps at .TH?
++    man: |
++      .TH "func2" 9 "February 2026"  "" "Kernel API Manual"
++      .SH NAME
++      func2 \- Exported function
++      .SH SYNOPSIS
++      .B "int" func2
++      .BI "(char *arg1 "  ");"
++      .SH ARGUMENTS
++      .IP "arg1" 12
++      \fIarg1\fP does nothing
++      .SH "DESCRIPTION"
++      Does nothing
++      .SH "RETURN"
++      always return 0.
++      .SH "SEE ALSO"
++      .PP
++      Kernel file \fBfunc2.c\fR
+diff --git a/tools/unittests/test_kdoc_test_schema.py b/tools/unittests/test_kdoc_test_schema.py
+new file mode 100755
+index 000000000000..9eceeba00440
+--- /dev/null
++++ b/tools/unittests/test_kdoc_test_schema.py
+@@ -0,0 +1,94 @@
++#!/usr/bin/env python3
++# SPDX-License-Identifier: GPL-2.0
++"""
++Unit‑test driver for kernel‑doc YAML tests.
++
++Two kinds of tests are defined:
++
++* **Schema‑validation tests** – if ``jsonschema`` is available, the
++  YAML files in this directory are validated against the JSON‑Schema
++  described in ``kdoc-test-schema.yaml``.  When the library is not
++  present, a warning is emitted and the validation step is simply
++  skipped – the dynamic kernel‑doc tests still run.
++
++* **Kernel‑doc tests** – dynamically generate one test method per
++  scenario in ``kdoc-test.yaml``.  Each method simply forwards
++  the data to ``self.run_test`` – you only need to implement that
++  helper in your own code.
++
++File names are kept as module‑level constants so that the
++implementation stays completely independent of ``pathlib``.
++"""
++
++import os
++import sys
++import warnings
++import yaml
++import unittest
++from typing import Any, Dict, List
++
++SRC_DIR = os.path.dirname(os.path.realpath(__file__))
++sys.path.insert(0, os.path.join(SRC_DIR, "../lib/python"))
++
++from unittest_helper import run_unittest
++
++
++#
++# Files to read
++#
++BASE = os.path.realpath(os.path.dirname(__file__))
++
++SCHEMA_FILE = os.path.join(BASE, "kdoc-test-schema.yaml")
++TEST_FILE = os.path.join(BASE, "kdoc-test.yaml")
++
++#
++# Schema‑validation test
++#
++class TestYAMLSchemaValidation(unittest.TestCase):
++    """
++    Checks if TEST_FILE matches SCHEMA_FILE.
++    """
++
++    @classmethod
++    def setUpClass(cls):
++        """
++        Import jsonschema if available.
++        """
++
++        try:
++            from jsonschema import Draft7Validator
++        except ImportError:
++            print("Warning: jsonschema package not available. Skipping schema validation")
++            cls.validator = None
++            return
++
++        with open(SCHEMA_FILE, encoding="utf-8") as fp:
++            cls.schema = yaml.safe_load(fp)
++
++        cls.validator = Draft7Validator(cls.schema)
++
++    def test_kdoc_test_yaml_followsschema(self):
++        """
++        Run jsonschema validation if the validator is available.
++        If not, emit a warning and return without failing.
++        """
++        if self.validator is None:
++            return
++
++        with open(TEST_FILE, encoding="utf-8") as fp:
++            data = yaml.safe_load(fp)
++
++        errors = self.validator.iter_errors(data)
++
++        msgs = []
++        for error in errors:
++            msgs.append(error.message)
++
++        if msgs:
++            self.fail("Schema validation failed:\n\t" + "\n\t".join(msgs))
++
++# --------------------------------------------------------------------
++# Entry point
++# --------------------------------------------------------------------
++if __name__ == "__main__":
++    run_unittest(__file__)
 -- 
 2.53.0
 
