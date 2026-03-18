@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-80079-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80082-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uE+xLbQou2kcfwIAu9opvQ
-	(envelope-from <linux-doc+bounces-80079-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 23:35:32 +0100
+	id oDJ6A/4ou2kcfwIAu9opvQ
+	(envelope-from <linux-doc+bounces-80082-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 23:36:46 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 356412C3838
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 23:35:32 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 918D12C3872
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 23:36:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7EDA1323755A
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 22:30:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 61A2C31B449A
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 22:31:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40A3139902F;
-	Wed, 18 Mar 2026 22:30:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88E4C39657D;
+	Wed, 18 Mar 2026 22:30:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="N1FK5mud"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ODFnzVc8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FDC1395DA4
-	for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 22:30:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6016639A051
+	for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 22:30:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773873022; cv=none; b=KdtRKqYg+qOG8zT0j26gCSfR1fyFlFg/gzGiPS4qRH0q9MmowcrrsT1/XivLxl4/SVfd6/uM1n8QA1cTvwNBJtEqOBEu/gQrNxHtCG8873MNbQbvKrzP3lhNtApo+HWf4mmnxAQe6GZ/2+wcTJiHfZa9DSj/hx9MIzwG3YmqJjc=
+	t=1773873026; cv=none; b=RYHYr148MD7UJu8annkMp0pThnMaAhYvrcFcitPumFEwBMgH2ErmyFsoaTfgZRYrNA2ry7ujtYoC+Ry6R4XX1ThX7DWtTLnNtdzBdyVEMBOos2z/tFnD8hQakEzTb98uItk6wunH7c/SgwCExmpOMuQ4xRd2wTeHue+IDrM8I48=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773873022; c=relaxed/simple;
-	bh=XUG2nMpJeoG6B9ljhBEIzGZmx65mAIf5essHdmFCXwM=;
+	s=arc-20240116; t=1773873026; c=relaxed/simple;
+	bh=fnjImx7VCwMKBpHwkDW1K85lk6CY/A2Ul7Cqjhn0QzU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ISDmjZDMvh48xDnqkxZC3Gzds/uB0WLVS/nHwmWH2YkQuDcpzA49VA/p8HzMfpPILo6zX4jeB0CWLDuNS+m24df/Ti0pB3t71FESlBOXqEnYD2NuDxWz+vvCAxbKsZzDdPlPkZPBdLO21EGKN2d5fOrxFt6GrRtqeD7JQvCjMx8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=N1FK5mud; arc=none smtp.client-ip=209.85.161.42
+	 MIME-Version; b=nxOW9iEKZxUXPHwas73ER90+WwYSINlnK7b6xmuAOm5m+Z0kHyjtH9JTPPy+K8Q2tPSx0IjG/BJtYbSLqCKzuNcUSFie3Ecx6POzq+6/UX34vYdxMj18gHOwUj0vH0aKBustuQu5pwZ7qftACWGKXLMYOcUkKioG3pO23nGlimk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ODFnzVc8; arc=none smtp.client-ip=209.85.210.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-67bb5e4cf5aso13507eaf.2
-        for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 15:30:20 -0700 (PDT)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-7d75371d873so415916a34.3
+        for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 15:30:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773873019; x=1774477819; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1773873022; x=1774477822; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XNNnmWHnRUZm7wwtDTGZLy0ujBXuugSXcNtRiTK4tAk=;
-        b=N1FK5mudQcE3fXighw0xP7NsaVdH4YqhKiHyb7kJO8zob8omU4FgxwVL6E6VFzwLyW
-         HdIf4S66cUz1KHWEKh3R2k4mB5fP4wh/RRmQaundb2vgUHxzASh6kZvW+RfZP0UaEyZf
-         a4pG1ndpONim1Cvzfv0zY4qf7DLodxDAliP42orDJRgBk77mOhga4Q70rV05epfM7O3g
-         yh+brGbHN8nV3/gVsPQfKgslFToDdmvm1+f6PwrpYyoefADU35i6hPAEqr/kPWGQBlW8
-         aBdRaj3ZBIAcyVDrmhJURbc3ZJEXC0jRwQ9DYfFXgaDx1SWNTnxBdrV1Jb3Y+zdyvtgo
-         EqrQ==
+        bh=FKrmsaRryTJ5nHXiiuirqMc/v+zxITLhw4bMyN6ZWm0=;
+        b=ODFnzVc858qDi1mXZysSz7VqRXZ85fqpT46m+xw2hCc9HoK+NtVe89BIpGAhlBGfyU
+         5ezJDUWEqTUnfH7FhbRGCtzJSao3DOonIXH+/ApmLLNzbaIGxGaD9QGgBvPvfFwqMXth
+         aN659UwJvSnoeL3AchKQx8fAL8UOMCQVpaIWi4IvXdYuS3kU0hOElHN4vlALkfnXKXwj
+         2oMnALciPcEHPy4MUeOKoj/X8Rn5DSoCAsUlfhFXaZCjT6aYTVkpuq99Iuf9aRG+PT55
+         fRbqLOmnGkYGR7qFQXb9U3tgQ7ui2Stny67g/GdX2maZCsudg/LosPB3Q2U9xP043z/E
+         n1cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773873019; x=1774477819;
+        d=1e100.net; s=20251104; t=1773873022; x=1774477822;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=XNNnmWHnRUZm7wwtDTGZLy0ujBXuugSXcNtRiTK4tAk=;
-        b=Zvl/yoEoAJOtgyfTHbqgi9/xRRu0qc9oGKjAKhzA1qLSy107md8HFg5v9geobc61BX
-         /Kv+7/xYFM6r8sZUz213U/M6z0P8L/sHdahW/fO1Azo7nlx7STLJH69I8khXgWJoYUSk
-         IbT42VkTzVocV/ClWTc5JWlHpTe9hZyNj2jYznn52SL53f3eOHflwExb1Uz6UDe+nwpp
-         3wELO/2cKqtC0EkJ97SHnrR/tiQjQ2rW0c72xHw/O/X/yDwXUdcHoFqJvYJ4ugS1z/kS
-         PnZtdz3fQK5MqqofUJJ7k1yRKey5omQm09aH7oxhJF85wbet2GNARzs25Q5vFizfzCqn
-         P9Rw==
-X-Forwarded-Encrypted: i=1; AJvYcCVgevtz5zUlKb7M0yozqru5N5yEPNNq1Bm2U9d79NtVSyFyG3fwaaQroYtwyzf1e6l5fFwY8bowUVk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyGnGxB/JkCV2fADdcSaIP9Y14RxaxzwSf7W/iRQtTkw7UQjIuC
-	L1yncYGSiHzEwTMhYp9R8CAkDMrIZ1dbIEPrf0CsPKgQVzWZjmoU3pOi
-X-Gm-Gg: ATEYQzyHqZoGORmclXKN+JG0cnBP4QNKoKpZUnQxsBgiTqogO4qjVaswGavyePhpyV5
-	njkCCns6a9a5+WClQbOGCHJJSvnDFJinkl5Utj3Je4vBjWdfsOOVS3UBJhDzkiSFI3nnaKrKEpv
-	z8jN1Ka8cduHT3Py9LR0efuwznSHLHpTuaTSmS/sovme8Zy/PLss816po3xK/va3TtRQrA/B0Z8
-	K4F5vbQUE4HwrdQy3gn6Z5P1HnW/dnB3fZdUQPLk//Mn/opCMrb74twlnWMg6J/yC4hZGUUZ4rF
-	aSEVy8kT0nUo67x5Js0rbsQanmQ/ojAgJ5SztHg6gxj1yUvHqJBgV2k19pa8DIb0men6cvchjus
-	PFmU1k8qqePP1EoOT1N6J/UEfioAhLeyS8bgX9nXf/QWg4EJVwMyN7c2tI0fJep3vo7NkyDzB2E
-	+b0lG00j4U9tHqYmil7UO2yjPmdG/wQ0s2uc/KkwXBQal6TfrANGdeYgJr
-X-Received: by 2002:a05:6820:c89:b0:67b:ad6a:ac10 with SMTP id 006d021491bc7-67c0db1a703mr3715865eaf.50.1773873019226;
-        Wed, 18 Mar 2026 15:30:19 -0700 (PDT)
-Received: from localhost ([2a03:2880:10ff:58::])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-67c0d88c5bbsm2544446eaf.10.2026.03.18.15.30.18
+        bh=FKrmsaRryTJ5nHXiiuirqMc/v+zxITLhw4bMyN6ZWm0=;
+        b=mRCjcs7jfhYVIx/pkoT+CbgZXXt9lJgJy5EsVL+QWOk2vxhmJ6+HfjwaoGYPkTAuLb
+         BhXPoKAqZxl75Avo6yUw6T66N3DW2m6OP+e0sRoRuX2bRQ/x7HPD3pbGD+5D+s1iCiJl
+         K979U+uARbYr72TnCp7ksHu1jnkRKO9HwhYMxbsJQsxe4IzLYQtO6lF+5a1QXH1hkd80
+         qcgVvncayzCANdxOk7Wr64h+8Q8Izjy871Jdo6YyrD0TjJh3vWODEr2Uave/vIi5UGJx
+         UAil4rCTLeLHEN7tDc8AZ/PkMNPoAJ7BfPCtIPIvle6wcNcaL0Lttk+l39tLKCz5DVjs
+         21IA==
+X-Forwarded-Encrypted: i=1; AJvYcCWWs6asNXRo7axmGvTRJ0XXwxVWhl6g6EjK9Ltym035GbBNXK8XM1r+0yfteSoXCE3WHXvWAoPd6dw=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyiz7GGekrYT+0P6/g2KoLk8tvUH08Sq33M0lD7vQ3ayYwd0uS4
+	dlxmQ0jVI8cmKqjjwrov7v0Q0Y3wAajtXn6MSpn4IYrOTmRk9Y+jJJIU
+X-Gm-Gg: ATEYQzx99c2hPqLhSL4rELTP4hicOgXkY9zloLr106l6uFj2Sn5yRxchVAnNV5/5FtE
+	+PX6SDubmGwlSxDluzNTzip1DmjQA/hydg9Jh7Zmo6+73spWSmhsVfrRAPWVRE1uqMXeXCbtO1i
+	XFFCxVPfSsguEKLjZbUuQqfNGTHWYc3CfrJBcCVSO5IZaNcfy10PUcL7L0Ai180jWKWJAnmdNzW
+	gFUCJ+LHV+Yfefh1TTVN+LFMeLvgPT5VlxptG9K6WpscIpb0Y2u+RLEg5ra9bwtFz8UC3JvjM8z
+	+7FwoDClqhuAMeKYtDteDJcqifKtPd3p1DSQwOd81ZWPzeoRXwPG+2fdJEsMlijH+ZSNPXBFDVn
+	2tXml+Kz6fqKrPBRVTWSZs5k9xB3s1gFy+f6JPy8ovvtll3sT0oyw8KughMhTzWJyyDLh44AURZ
+	QSqiONsJSJ2OGQgcZN6vrRaPTtJZkS0DILjlZn/jpZeK/5pQ==
+X-Received: by 2002:a05:6830:6af5:b0:7d7:d217:5116 with SMTP id 46e09a7af769-7d7d21752afmr1935454a34.17.1773873022052;
+        Wed, 18 Mar 2026 15:30:22 -0700 (PDT)
+Received: from localhost ([2a03:2880:10ff:48::])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7d7c9b3696asm3133813a34.16.2026.03.18.15.30.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Mar 2026 15:30:18 -0700 (PDT)
+        Wed, 18 Mar 2026 15:30:20 -0700 (PDT)
 From: Nhat Pham <nphamcs@gmail.com>
 To: kasong@tencent.com
 Cc: Liam.Howlett@oracle.com,
@@ -131,9 +131,9 @@ Cc: Liam.Howlett@oracle.com,
 	ziy@nvidia.com,
 	kernel-team@meta.com,
 	riel@surriel.com
-Subject: [PATCH v4 15/21] zswap: do not start zswap shrinker if there is no physical swap slots
-Date: Wed, 18 Mar 2026 15:29:46 -0700
-Message-ID: <20260318222953.441758-16-nphamcs@gmail.com>
+Subject: [PATCH v4 16/21] swap: do not unnecesarily pin readahead swap entries
+Date: Wed, 18 Mar 2026 15:29:47 -0700
+Message-ID: <20260318222953.441758-17-nphamcs@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260318222953.441758-1-nphamcs@gmail.com>
 References: <20260318222953.441758-1-nphamcs@gmail.com>
@@ -151,7 +151,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -159,7 +159,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_CC(0.00)[oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80079-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80082-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
@@ -167,46 +167,98 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	NEURAL_HAM(-0.00)[-0.876];
+	NEURAL_HAM(-0.00)[-0.874];
 	RCPT_COUNT_GT_50(0.00)[54];
 	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 356412C3838
+X-Rspamd-Queue-Id: 918D12C3872
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-When swap is virtualized, we no longer pre-allocate a slot on swapfile
-for each zswap entry. Do not start the zswap shrinker if there is no
-physical swap slots available.
+When we perform swap readahead, the target entry is already pinned by
+the caller. No need to pin swap entries in the readahead window that
+belongs in the same virtual swap cluster as the target swap entry.
 
 Signed-off-by: Nhat Pham <nphamcs@gmail.com>
 ---
- mm/zswap.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ mm/swap.h       |  1 +
+ mm/swap_state.c | 22 +++++++++-------------
+ mm/vswap.c      | 10 ++++++++++
+ 3 files changed, 20 insertions(+), 13 deletions(-)
 
-diff --git a/mm/zswap.c b/mm/zswap.c
-index c5e1d252cb463..9d1822753d321 100644
---- a/mm/zswap.c
-+++ b/mm/zswap.c
-@@ -1211,6 +1211,14 @@ static unsigned long zswap_shrinker_count(struct shrinker *shrinker,
- 	if (!zswap_shrinker_enabled || !mem_cgroup_zswap_writeback_enabled(memcg))
- 		return 0;
+diff --git a/mm/swap.h b/mm/swap.h
+index d7981ec82cf49..2229c3485b7e2 100644
+--- a/mm/swap.h
++++ b/mm/swap.h
+@@ -213,6 +213,7 @@ void swap_cache_lock(swp_entry_t entry);
+ void swap_cache_unlock(swp_entry_t entry);
+ void vswap_rmap_set(struct swap_cluster_info *ci, swp_slot_t slot,
+ 			   unsigned long vswap, int nr);
++bool vswap_same_cluster(swp_entry_t entry1, swp_entry_t entry2);
  
-+	/*
-+	 * When swap is virtualized, we do not have any swap slots on swapfile
-+	 * preallocated for zswap objects. If there is no slot available, we
-+	 * cannot writeback and should just bail out here.
-+	 */
-+	if (!get_nr_swap_pages())
-+		return 0;
+ static inline struct address_space *swap_address_space(swp_entry_t entry)
+ {
+diff --git a/mm/swap_state.c b/mm/swap_state.c
+index ad80bf098b63f..e8e0905c7723f 100644
+--- a/mm/swap_state.c
++++ b/mm/swap_state.c
+@@ -553,22 +553,18 @@ static struct folio *swap_vma_readahead(swp_entry_t targ_entry, gfp_t gfp_mask,
+ 		pte_unmap(pte);
+ 		pte = NULL;
+ 		/*
+-		 * Readahead entry may come from a device that we are not
+-		 * holding a reference to, try to grab a reference, or skip.
+-		 *
+-		 * XXX: for now, always try to pin the swap entries in the
+-		 * readahead window to avoid the annoying conversion to physical
+-		 * swap slots. Once we move all swap metadata to virtual swap
+-		 * layer, we can simply compare the clusters of the target
+-		 * swap entry and the current swap entry, and pin the latter
+-		 * swap entry's cluster if it differ from the former's.
++		 * The target entry is already pinned - if the readahead entry
++		 * belongs to the same cluster, it's already protected.
+ 		 */
+-		swapoff_locked = tryget_swap_entry(entry, &si);
+-		if (!swapoff_locked)
+-			continue;
++		if (!vswap_same_cluster(entry, targ_entry)) {
++			swapoff_locked = tryget_swap_entry(entry, &si);
++			if (!swapoff_locked)
++				continue;
++		}
+ 		folio = __read_swap_cache_async(entry, gfp_mask, mpol, ilx,
+ 						&page_allocated, false);
+-		put_swap_entry(entry, si);
++		if (swapoff_locked)
++			put_swap_entry(entry, si);
+ 		if (!folio)
+ 			continue;
+ 		if (page_allocated) {
+diff --git a/mm/vswap.c b/mm/vswap.c
+index fbb7c6003ad8c..b391511e0f0b9 100644
+--- a/mm/vswap.c
++++ b/mm/vswap.c
+@@ -1418,6 +1418,16 @@ void put_swap_entry(swp_entry_t entry, struct swap_info_struct *si)
+ 	rcu_read_unlock();
+ }
+ 
++/*
++ * Check if two virtual swap entries belong to the same vswap cluster.
++ * Useful for optimizing readahead when entries in the same cluster
++ * share protection from a pinned target entry.
++ */
++bool vswap_same_cluster(swp_entry_t entry1, swp_entry_t entry2)
++{
++	return VSWAP_CLUSTER_IDX(entry1) == VSWAP_CLUSTER_IDX(entry2);
++}
 +
- 	/*
- 	 * The shrinker resumes swap writeback, which will enter block
- 	 * and may enter fs. XXX: Harmonize with vmscan.c __GFP_FS
+ static int vswap_cpu_dead(unsigned int cpu)
+ {
+ 	struct vswap_cluster *cluster;
 -- 
 2.52.0
 
