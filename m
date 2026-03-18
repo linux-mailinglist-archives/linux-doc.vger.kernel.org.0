@@ -1,819 +1,291 @@
-Return-Path: <linux-doc+bounces-80027-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80030-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uE5/JGbnumkpdAIAu9opvQ
-	(envelope-from <linux-doc+bounces-80027-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 18:56:54 +0100
+	id 4AMEBALzumkBdQIAu9opvQ
+	(envelope-from <linux-doc+bounces-80030-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 19:46:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 370812C0C42
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 18:56:54 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08C692C1891
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 19:46:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 7ED7E300DF76
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 17:56:53 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 9DEC7311FCFB
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 17:58:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87FC03B9608;
-	Wed, 18 Mar 2026 17:56:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 040BF3AEF2D;
+	Wed, 18 Mar 2026 17:58:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="t/6o99BE"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="e/4yGZmN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011015.outbound.protection.outlook.com [52.101.57.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F64039F16D;
-	Wed, 18 Mar 2026 17:56:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773856572; cv=none; b=uT3usoQjnSvRerzGiWsbdJ/fbcl7xPu8kVsTftPMgUbeXigjVzUWFHSv6vE0QZJ8LisHKMX/6XKGfaFY2hS3wGeqBf5pAa16/IzDOVklYBcv0Cy216KTETPY+EzSxRN8B8/SNTiA51bAQOAbFhHfboa4GeBjdqflt7kkDrrZrw8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773856572; c=relaxed/simple;
-	bh=UHRm0tBHOkHuYW6t7Dwc+FrXs/D+HUeI1hwiWguAHfU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=erHU1TdcccFSO5PnV3uev3ty736raPhkBzou+vimS6b7689ZED3gCglBdrP0hUMHiRMc7LVgoWeqH5aB6ONDHqS7xCqk8J8Fg+j7rksly2ZZqj/WfUUotCGFaCQHgiSiaITipN6de/gb05pC6Uxy1EOTZTQeP4rPX+VTO9KQJiw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=t/6o99BE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B0075C2BCB2;
-	Wed, 18 Mar 2026 17:56:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773856571;
-	bh=UHRm0tBHOkHuYW6t7Dwc+FrXs/D+HUeI1hwiWguAHfU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=t/6o99BEmE4tfBVxoNC6dkjrX2zinmonqXphlAHpRyu8KMJ+KyrXq1M1VwFkOLSk/
-	 SY+xrQ9d7W7veCy5IXnRZb0nPyrhbiaXtZVAHvzaHa6LMotWZ6aPm1lBkyQmKkSytp
-	 HIOjANmoNJghmlGbCpvXb19fKUg75JrG1iDPJMFIrAgjxuFpIgVQMnGNMeQN10u0I4
-	 ZrAxyoFld3vk2lGVq0QbrOvsQxv5ROi3wPDT9kCZvBjT9Oxacb9B+3Sd3nvtpxUnSz
-	 Hz++6uQszIU7CGFKRiIo3KW2OpWGOV6Nh7UVh0vJBcwoAHIsT5Rig+I8U8EiK9sjx1
-	 Zyzs8xDth9yHg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A55531077603;
-	Wed, 18 Mar 2026 17:56:11 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Wed, 18 Mar 2026 17:56:09 +0000
-Subject: [PATCH RFC v2 9/9] docs: iio: add documentation for ad9910 driver
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46D3C3A382E;
+	Wed, 18 Mar 2026 17:58:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.57.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773856708; cv=fail; b=lxOl65rfvl8+a+W75Jn81uI1hyvYLG+xWbG6/ha8hpxVQ/X3tZM3T+m8Qi1deHD9GGc7MNRkfTkTq2/59pDpjGDxpKJBRKxWFdoldzlzEZDKkWEVeLltGqymC4jufJtItUVmdbN+FBan7BysNHYyi6MR8AVllo5TZcXj+A1roEk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773856708; c=relaxed/simple;
+	bh=BjKBlalFJTHJbh9JkbHbFsDtag1vJOYTGe62JptZOvU=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=ENiuIDqTDkQoCwJ0o+W2z/d2rNZsJDCBdUwsP7ZrQvvfTqG0L+G7QqqDI/89tzA+CItNhf9RMYknj4WW+GoFu+Eq3YSJQ/0LkEIVbgYnYXh6ksLi4Go8HHey3b+UYhPHrd7lXj504gUECfYfuIyVFF9HKHZhgPv45P20iOE+G10=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=e/4yGZmN; arc=fail smtp.client-ip=52.101.57.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EXtEd3PbgkXn8fejm201gOfVAXsSGgNRnsc1t+NbZzkpcxgOQ2o588ub4689KFTqY5r9hn/E2c5Z1IpkhgwKDuXCCf5YkToRAOTMTv59adG3r7uMU9tDwJMgOZotyCcCmiasfuaTbXAe8cJLAdbSYlDwM7pS+W9xWRYiAJDncH3cVmNH/CnRJiu03J52tZBWR2hwZJgCCavOG+TPF605QVMTMsD3d8k1vIz2HAqQ/aoM4V5yyU2o92ykLepkah63i6uKRDOfeZZm2535WWwaqx5p9YpL9u3lfF+Wn9YP68PcOlhfANM6QfQa7mI8wdv41wiHWy0AheF8QU4cXTLipA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=x3wh9yhYD38Gto0xfRWcHKzhbBx5g/ha95WJcFnrnac=;
+ b=J9HxHJRfln3eye7X39giZpnITd0yqMuO9IhRCDF3aIjEwvGD+y6EZPQjvy1IBNjb2gJl9q4Bc0k/U2drSr/bK4/zf9JuULPU17bWrDcl/r2N/qlpoGPm6t65/kga0fgmlqVe6QlRDWe243yLq1ibbHE00hL4YqdqqGlH+RbQQamCIq6OHohqodhcO6hR7pXp6qJ7SwqCeL7yQWiJOlMeaJcglQlxOBNf6xH+OSGdcn87QaXVptQuFkgsbUGppHwj4t5TBoou3QH+Zh9bfejh3O5R0IAjN3qXIWnOcunYfrxN9pnZJFfIjSW6p6AWz3QtHk09A7FoMc8w/Fa2zQjWyg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=x3wh9yhYD38Gto0xfRWcHKzhbBx5g/ha95WJcFnrnac=;
+ b=e/4yGZmNza8CxsYjeoZTc7qb2Rt0AVYG3T2z7mHfxzpddSjz2rKlTHmGYPnYa6LYUMjYJH1eF1BwpdsJa2tjwerkXgMUluZkKMSUqg27258tcWpL2YOovTOQsAbgI1lu+q3a+PCkPnOjqVrpWovXSldmZF8gAqHkxWzLkiqVGAfYoyQSNqnLp/i0WnoMv9nqX16rpho/SkZC6PURmZHInbvfPI9BUbA5AXANeuSvClhHKuCaOv7Lv1jhF4Vy+xC5X/1mBS77M227AcmOs72BzMCiohFNb/nt1wBQG3zOWkY0yA8+h3JYtJTy8+yg8gsCUkEv/B214hPPOGaB8RVKQw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
+ BN7PPFED9549B84.namprd12.prod.outlook.com (2603:10b6:40f:fc02::6e7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.8; Wed, 18 Mar
+ 2026 17:58:20 +0000
+Received: from DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
+ ([fe80::88a9:f314:c95f:8b33%4]) with mapi id 15.20.9723.016; Wed, 18 Mar 2026
+ 17:58:20 +0000
+Message-ID: <111cf11a-af95-4dec-994c-ebec6af35625@nvidia.com>
+Date: Wed, 18 Mar 2026 13:58:15 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v13 1/1] rust: interop: Add list module for C linked list
+ interface
+To: Gary Guo <gary@garyguo.net>, Alice Ryhl <aliceryhl@google.com>
+Cc: linux-kernel@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>,
+ Boqun Feng <boqun@kernel.org>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?=
+ <bjorn3_gh@protonmail.com>, Benno Lossin <lossin@kernel.org>,
+ Andreas Hindborg <a.hindborg@kernel.org>, Trevor Gross <tmgross@umich.edu>,
+ Alex Gaynor <alex.gaynor@gmail.com>, Danilo Krummrich <dakr@kernel.org>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Simona Vetter <simona@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Koen Koning <koen.koning@linux.intel.com>, Nikola Djukic
+ <ndjukic@nvidia.com>, Alexandre Courbot <acourbot@nvidia.com>,
+ Philipp Stanner <phasta@kernel.org>, Elle Rhumsaa
+ <elle@weathered-steel.dev>, Jonathan Corbet <corbet@lwn.net>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, Huang Rui <ray.huang@amd.com>,
+ Matthew Auld <matthew.auld@intel.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Helge Deller <deller@gmx.de>, John Hubbard <jhubbard@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
+ Edwin Peer <epeer@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
+ Andy Ritger <aritger@nvidia.com>, Zhi Wang <zhiw@nvidia.com>,
+ Balbir Singh <balbirs@nvidia.com>, alexeyi@nvidia.com,
+ Eliot Courtney <ecourtney@nvidia.com>, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-fbdev@vger.kernel.org
+References: <20260317201710.934932-1-joelagnelf@nvidia.com>
+ <20260317201710.934932-2-joelagnelf@nvidia.com>
+ <46986da6-8c89-475c-8561-964adaa7d034@nvidia.com>
+ <abppV3e91iVzplcv@google.com> <DH5Y1UR318WP.VNY18WXEZHDI@garyguo.net>
+Content-Language: en-US
+From: Joel Fernandes <joelagnelf@nvidia.com>
+In-Reply-To: <DH5Y1UR318WP.VNY18WXEZHDI@garyguo.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL1PR13CA0117.namprd13.prod.outlook.com
+ (2603:10b6:208:2b9::32) To DS0PR12MB6486.namprd12.prod.outlook.com
+ (2603:10b6:8:c5::21)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260318-ad9910-iio-driver-v2-9-e79f93becf11@analog.com>
-References: <20260318-ad9910-iio-driver-v2-0-e79f93becf11@analog.com>
-In-Reply-To: <20260318-ad9910-iio-driver-v2-0-e79f93becf11@analog.com>
-To: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773856569; l=21400;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=CD1yxulQBdjCdan4eY1kiOcKuvikV8SBaM67bnyl/XA=;
- b=/flYDKSK2fJCsml/JLxLVY/6iVZJv+YXX/UuLX3aeSu8FtXnynxB3CVSqXZ0eSIVJQP4GaJVZ
- ET9auFwWK3fAoXDKNCEyew33ILpdmUq6SdNaBY7BTzvFMrxaUshnIf4
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|BN7PPFED9549B84:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0dd37e4e-849f-44b7-8f0e-08de8517f05f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|7416014|13003099007|22082099003|18002099003|56012099003|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	kU06GA3Cw0CBCGvFO23LnHW/5iCxuQ0dMVue4VEVh92paVZWUaOY/pjKKGfA0mkNeMs81IqKxkS2d1FRJGvRe2pwJpE0sRaQvlmJvTvpprYLYoJQFTvKdThXUEgDzbsobxfFhBGpbbi8buQ9wbHCPIgYmrra79KFBSPaMk9q1G+B1WXnQybAyqWCJMOnxkSFvhorMz5Yh5ia3lGQPLw60eCUB3YyDR2yHszK12qJvoC4TwptPMkG6xEvF8t/UPbJuwdmzC3MxFBA7B+aTXlEED9wMan4Vwwax9R/uTyc6tby+Zw5rACNrSYDlWFeasb3Hsqft6u8Xen88gc5ffGeYjJvTRXfe+FbQQNYFsQvnAbFXAhBjcRZ4t002uZ/kpZHhjeqjxP1P4pPTSaZ7XGe58NKbHBjLPiewQskc1lvuzTbRpbMkUksXDEbHysE6+G/HpZtKvCJNkNwNk0IQoY+d300aIqpOxS3xRIjemUKALqvQYHjAwLDBwAjSG4FuqYi3zsWUu28LFr9aipIpBPYW/r/3CvmJ2JtE1aDVKZPB8BeNSFYKDM6uJlZHkT6XK7jyLtcRsU/WNFwhIVaBRB8aC8dX9KdGaZyvHk7LRzhhEr5kwvZWx+S+cWBRS0ximYbqZZjmuDZpJ668hf9TwEUc8P5L1dWBgC/c+15QTS9MgRoM4IgCBL+BbRXtw0JLoirXEZWECzNtufHvmp5nuEjWbp7vTCd6yTK5bPFaa6fm7HliH4I4npepLQmjuSSmTHh
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014)(13003099007)(22082099003)(18002099003)(56012099003)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Y2RzUnR6V0VLMURuS05OWERWc2YzbmhUYUo4UVZVNWZGamxlbTh5ZkttUEhs?=
+ =?utf-8?B?MG90ZW5XMTY3d1k0VGhZYVZPZE1UUHNHZ1M5M3FVdDk5cHl1WGw5WktWZ0NZ?=
+ =?utf-8?B?MzZkelZLVWgvQXowYmJmRWQ4a2RyNHBzYTZYclVKY1liankxdG9GeVhJZHky?=
+ =?utf-8?B?cEJMbFJldUpZU1NuM0djRGZNNWFXa0k0cnFCSmZWeVhtL1VoK3VGU1pRVnA4?=
+ =?utf-8?B?MjVLVXFjVjljVVdQR1d6TWUrUzBvNWhZWUppOXNwZkRQYnYxaDQzTUtkSjV0?=
+ =?utf-8?B?Mm9NMHg1VzQ0ODk5Qm5EZTViQ280TWptdXBsbnJwR2hNaWdUZzV2dllGMlo4?=
+ =?utf-8?B?M0xMMGc5M28zOGxXZUdaWjNOQmpWM3ExT2UyaCs5cmhsNjZjVTIxUUNWWEFJ?=
+ =?utf-8?B?aGIwNHBaa2dMRldCbGdrNFVkSlZUVDU3QjVhNjYvTHc0Z3grczZUQmx5b1No?=
+ =?utf-8?B?bkRQNk5lbE53clBwZzdYeGg2dE1oQ25qd1FRR2NiNnlzaHBKWW5leGpKVkVz?=
+ =?utf-8?B?TDVnaWYxaTZna3VGSUgvYy9Vb0FUSEZpUURjaVdpdHdIRmpsaWs4Tk9NaFJi?=
+ =?utf-8?B?a2RPY09oaEFBZ0lLZW5YTkJwNFFoRjFiWEdLN1JhMmd1NEFJby9GRHdlaFQ5?=
+ =?utf-8?B?YVk1Mm5iMEdkNElCN0ZYRkh0b0hTb3h4SE9WY2RacTRXK2VNQkZoVjRiVFdy?=
+ =?utf-8?B?d1FMc1J4TTVad25nQWtzSmlpbCtjdU1OZ2lwTnI3NytmeFRxakpRaXZkK3NP?=
+ =?utf-8?B?OFJLYkRITEc2cE0wVlB5eDY2bTllYks4UmVQSWc4UzFJVjB1cTduU2g5WHNX?=
+ =?utf-8?B?aE9YVDVPaGlsOXpRalFmVUlKWHdPTUt2ZlBBT09EV3c4SWlnZEhMT2svNXNs?=
+ =?utf-8?B?OEZIOC96QmVKNDVBQ3d1N1pPWGlneTc1ZUpObUp1c2ZoM0dPVGovWHZLOFRK?=
+ =?utf-8?B?b2VjalhuVjA1RFY3bkw3cFM5S2o0SUpuaitwRnJlbGlMRlNxTXM2VFZlL3c4?=
+ =?utf-8?B?SXVnQThMbWdpYWx0V1hCMGJqcy9yRTFRcTBUb1ZPRlNTUTZ6UnRVUlBucnI0?=
+ =?utf-8?B?YzZpRjVGa0lxNUlneXBmYWRPMWp2ODJkRlhHU2dHWU5haDVqbXVYTlJ5M0lz?=
+ =?utf-8?B?cjFEU3NVL011MjVpNUlXaEtqeGxqZ0VkNG5oUWVKTFdqN2lKcFBHRTFCSU1L?=
+ =?utf-8?B?Ujh0TEQzR1h1YTBwZkVMb3FiZm91RElmZEpXRlV0TnlFcE1OdmVNSDZqd0lO?=
+ =?utf-8?B?NlJULzNJYk1rVnV1MUd1cEFPSDBXcTlBOXdQVlIrYUkvNHRaT1hWRGg1Rzk3?=
+ =?utf-8?B?dnF4SDhuSDJ6NEwvV0RsSS9oRWFQcmM5a1ByYldwTzJMYURKdmlnb0NySUFR?=
+ =?utf-8?B?dGRxMmxDWURNWW1MRUVXaHpISHFoMTNnaVFRbHA2SDNjZFRnWjQ4OWQ1bnNM?=
+ =?utf-8?B?cTZzb2NMeXZIS0V0b0R3WnRpd081MFFXNktHUFd3ektNZnArWTQ1Wnh3Y1Vr?=
+ =?utf-8?B?eVBtaktDOWFpdXdSNmRxUjNodzBkYUZtVE0yM1cvaGx0WTd1TmpibGpjTkdm?=
+ =?utf-8?B?RFpISTZ5R0N5YU9BVDJSeThaV3IzbWtmK0oyWXdEYTQvUlNoYVFFZjA3eklD?=
+ =?utf-8?B?MllKTEhNQkxiVGxwY283L21XZW1PelZWNXQydDV1T2dYdWFCdnhNY3REZ3Q0?=
+ =?utf-8?B?NFdXejRmNTc1YVBJQWFya2FCK0Z3d1VFamxxSDdBOWI1QVpQMGV5TmMvb2hl?=
+ =?utf-8?B?WFU0WTVlSGphcTZkVVJoeVVMK1BGeENLeW1CTDVaU1BGb1pJVWN3SkZBanM5?=
+ =?utf-8?B?Qk9HZEk2bFVmbEl5dFUxd3hNdzNKV2haMTBmUHoxNWpqVm5FYnJKdnBkUkVh?=
+ =?utf-8?B?OEUyY3A3OE1oVkszWkR5Z1FxY0xRdElKMVVldUhjOW5yU3hDZUMwNkxKMXR3?=
+ =?utf-8?B?eHRta2U1VzZCbHFyRFVwVkFzUzdzblhZdkRyOHpId041ZzF1ZVpNZUFJbmR3?=
+ =?utf-8?B?TlFscmdnUXNDUzd6Yi85dDhRNHBhYXpUcjJXUHFFTlk3bUJ4bUZmQTJtem1N?=
+ =?utf-8?B?TUNkb2ZXeThuOVAwdUovb3I2VTFRc1I3b0RsSUt2MFJndE54YXhTbEo5MWJy?=
+ =?utf-8?B?NEFRcDVrSXRrcHFsYklVMmNXS2xFZzdEamZDd1MyV3hWZndyc2U5RytETXNK?=
+ =?utf-8?B?TllNcExRZUdLaklHN2F0cFJzNHg1aHdod1RtdG1oVUp1dk1ReENQaU9CSzFq?=
+ =?utf-8?B?UVl4a29RcCtHQVZ0QlJWdUVuQ3l6RngvbC9SZDVpTHJqMENxVEdiUktXNGJO?=
+ =?utf-8?B?VDNTWmRJTFBOdDhDWE1OblBydlB1azFHUFM3WWM3bTVXdTNsbUVzdz09?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0dd37e4e-849f-44b7-8f0e-08de8517f05f
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 17:58:20.0628
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AzvL4QMf2fR2kknjnNIzU8IrvT1l/gFsLt/OnvZKOKUf/hbH3i8XzUc+k9T2o0fdnmgjxfNTKJhbHnv8Skk6XA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPFED9549B84
+X-Spamd-Result: default: False [1.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80027-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,protonmail.com,umich.edu,gmail.com,redhat.com,linux.intel.com,suse.de,ffwll.ch,collabora.com,nvidia.com,weathered-steel.dev,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,lists.freedesktop.org];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80030-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.995];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 370812C0C42
+	RCPT_COUNT_GT_50(0.00)[53];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.987];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 08C692C1891
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Add documentation for the AD9910 DDS IIO driver, which describes channels,
-DDS modes, attributes and ABI usage examples.
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/iio/ad9910.rst | 654 +++++++++++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst  |   1 +
- MAINTAINERS                  |   1 +
- 3 files changed, 656 insertions(+)
+On 3/18/2026 9:31 AM, Gary Guo wrote:
+> On Wed Mar 18, 2026 at 8:59 AM GMT, Alice Ryhl wrote:
+>> On Tue, Mar 17, 2026 at 04:18:46PM -0400, Joel Fernandes wrote:
+>>>
+>>>
+>>> On 3/17/2026 4:17 PM, Joel Fernandes wrote:
+>>>> Add a new module `kernel::interop::list` for working with C's doubly
+>>>> circular linked lists. Provide low-level iteration over list nodes.
+>>>>
+>>>> Typed iteration over actual items is provided with a `clist_create`
+>>>> macro to assist in creation of the `CList` type.
+>>>>
+>>>> Cc: Nikola Djukic <ndjukic@nvidia.com>
+>>>> Reviewed-by: Daniel Almeida <daniel.almeida@collabora.com>
+>>>> Reviewed-by: Alexandre Courbot <acourbot@nvidia.com>
+>>>> Acked-by: Alexandre Courbot <acourbot@nvidia.com>
+>>>> Acked-by: Gary Guo <gary@garyguo.net>
+>>>> Acked-by: Miguel Ojeda <ojeda@kernel.org>
+>>>> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
+>>>> ---
+>>>>  MAINTAINERS                 |   8 +
+>>>>  rust/helpers/helpers.c      |   1 +
+>>>>  rust/helpers/list.c         |  17 ++
+>>>>  rust/kernel/interop.rs      |   9 +
+>>>>  rust/kernel/interop/list.rs | 342 ++++++++++++++++++++++++++++++++++++
+>>>>  rust/kernel/lib.rs          |   2 +
+>>>>  6 files changed, 379 insertions(+)
+>>>>  create mode 100644 rust/helpers/list.c
+>>>>  create mode 100644 rust/kernel/interop.rs
+>>>>  create mode 100644 rust/kernel/interop/list.rs
+>>>>
+>>>> diff --git a/MAINTAINERS b/MAINTAINERS
+>>>> index 4bd6b538a51f..e847099efcc2 100644
+>>>> --- a/MAINTAINERS
+>>>> +++ b/MAINTAINERS
+>>>> @@ -23251,6 +23251,14 @@ T:	git https://github.com/Rust-for-Linux/linux.git alloc-next
+>>>>  F:	rust/kernel/alloc.rs
+>>>>  F:	rust/kernel/alloc/
+>>>>  
+>>>> +RUST [INTEROP]
+>>>> +M:	Joel Fernandes <joelagnelf@nvidia.com>
+>>>> +M:	Alexandre Courbot <acourbot@nvidia.com>
+>>>> +L:	rust-for-linux@vger.kernel.org
+>>>> +S:	Maintained
+>>>> +T:	git https://github.com/Rust-for-Linux/linux.git interop-next
+>>>> +F:	rust/kernel/interop/
+>>>
+>>> Sorry, I forgot to add an additional F: for the rust/kernel/interop.rs file.
+>>> Danilo/Miguel, do you mind adding this when applying?
+>>
+>> I think you should consider a mod.rs file to avoid this. It's tiny, and
+>> just re-exports submodules, so I don't think the "mod.rs name in file
+>> view" concern is that big, and IMO having files related to interop/
+>> inside the directory is much better than having them outside.
+>>
+>> Alice
+> 
+> I wanted this for all modules in general. For modules that grow into multiple
+> files we should really use mod.rs and avoid both module_name.rs and the
+> module_name directory.
+> 
 
-diff --git a/Documentation/iio/ad9910.rst b/Documentation/iio/ad9910.rst
-new file mode 100644
-index 000000000000..116f6af4bc2e
---- /dev/null
-+++ b/Documentation/iio/ad9910.rst
-@@ -0,0 +1,654 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+=============
-+AD9910 driver
-+=============
-+
-+DDS (Direct Digital Synthesizer) driver for the Analog Devices Inc. AD9910.
-+The module name is ``ad9910``.
-+
-+* `AD9910 <https://www.analog.com/en/products/ad9910.html>`_
-+
-+The AD9910 is a 1 GSPS DDS with a 14-bit DAC, driven over SPI. The driver
-+exposes the device through the IIO ``altvoltage`` channel type and supports
-+five DDS operating modes: single tone, parallel port modulation, digital ramp
-+generation (DRG), RAM playback and output shift keying (OSK). The device has
-+8 hardware profiles, each capable of storing independent single tone and RAM
-+playback parameters.
-+
-+
-+Channel hierarchy
-+=================
-+
-+The driver exposes the following IIO output channels, each identified by a
-+unique channel number and a human-readable label:
-+
-+* ``out_altvoltage100``: ``phy``: Physical output: system clock and profile control
-+
-+  * ``out_altvoltage110``: ``single_tone``: Single tone mode: per-profile
-+    frequency, phase, amplitude
-+
-+  * ``out_altvoltage120``: ``parallel_port``: Parallel port modulation: enable
-+    and offset/scale parameters
-+
-+  * ``out_altvoltage130``: ``digital_ramp_generator``: DRG control: enable,
-+    destination, operating mode
-+
-+    * ``out_altvoltage131``: ``digital_ramp_up``: DRG ramp-up parameters:
-+      limits, step sizes, ramp rate
-+    * ``out_altvoltage132``: ``digital_ramp_down``: DRG ramp-down parameters:
-+      limits, step sizes, ramp rate
-+
-+  * ``out_altvoltage140``: ``ram_control``: RAM playback: enable, destination,
-+    operating mode, address range
-+
-+  * ``out_altvoltage150``: ``output_shift_keying``: OSK: enable, amplitude
-+    scale, ramp rate, auto/manual control
-+
-+The ``phy`` channel is the root of the hierarchy. Changing its
-+``sampling_frequency`` reconfigures the system clock (SYSCLK) which affects all
-+other channels. The ``profile`` attribute on this channel selects the active
-+hardware profile (0-7) used by the single tone and RAM channels.
-+
-+All mode-specific channels (parallel port, DRG, RAM, OSK) have an ``enable``
-+attribute. The DRG and RAM channels additionally have ``destination`` and
-+``operating_mode`` attributes that configure which DDS core parameter is
-+modulated and how.
-+
-+DDS modes
-+=========
-+
-+The AD9910 supports multiple modes of operation that can be configured
-+independently or in combination. Such modes and their corresponding IIO channels
-+are described in this section. The following tables are extracted from the
-+AD9910 datasheet and summarizes the control parameters for each mode and their
-+priority when multiple sources are enabled simultaneously:
-+
-+.. flat-table:: DDS Frequency Control
-+   :header-rows: 1
-+
-+   * - Priority
-+     - Data Source
-+     - Conditions
-+
-+   * - Highest Priority
-+     - RAM
-+     - RAM enabled and data destination is frequency
-+
-+   * -
-+     - DRG
-+     - DRG enabled and data destination is frequency
-+
-+   * -
-+     - Parallel data and FTW (frequency_offset)
-+     - Parallel data port enabled and data destination is frequency
-+
-+   * -
-+     - FTW (frequency)
-+     - RAM enabled and data destination is not frequency
-+
-+   * -
-+     - FTW (frequency) in single tone channel for the active profile
-+     - DRG enabled and data destination is not frequency
-+
-+   * -
-+     - FTW (frequency) in single tone channel for the active profile
-+     - Parallel data port enabled and data destination is not frequency
-+
-+   * - Lowest Priority
-+     - FTW (frequency) in single tone channel for the active profile
-+     - None
-+
-+.. flat-table:: DDS Phase Control
-+   :header-rows: 1
-+
-+   * - Priority
-+     - Data Source
-+     - Conditions
-+
-+   * - Highest Priority
-+     - RAM
-+     - RAM enabled and data destination is phase or polar
-+
-+   * -
-+     - DRG
-+     - DRG enabled and data destination is phase
-+
-+   * -
-+     - Parallel data port
-+     - Parallel data port enabled and data destination is phase
-+
-+   * -
-+     - Parallel data port and POW register LSBs (phase_offset)
-+     - Parallel data port enabled and data destination is polar
-+
-+   * -
-+     - POW (phase)
-+     - RAM enabled and destination is not phase nor polar
-+
-+   * -
-+     - POW (phase) in single tone channel for the active profile
-+     - DRG enabled and data destination is not phase
-+
-+   * -
-+     - POW (phase) in single tone channel for the active profile
-+     - Parallel data port enabled and data destination is not phase nor polar
-+
-+   * - Lowest Priority
-+     - POW (phase) in single tone channel for the active profile
-+     - None
-+
-+.. flat-table:: DDS Amplitude Control
-+   :header-rows: 1
-+
-+   * - Priority
-+     - Data Source
-+     - Conditions
-+
-+   * - Highest Priority
-+     - OSK generator
-+     - OSK enabled (auto mode)
-+
-+   * -
-+     - ASF register
-+     - OSK enabled (manual mode)
-+
-+   * -
-+     - RAM
-+     - RAM enabled and data destination is amplitude or polar
-+
-+   * -
-+     - DRG
-+     - DRG enabled and data destination is amplitude
-+
-+   * -
-+     - Parallel data port
-+     - Parallel data port enabled and data destination is amplitude
-+
-+   * -
-+     - Parallel data port and ASF register LSBs (scale_offset)
-+     - Parallel data port enabled and data destination is polar
-+
-+   * - Lowest Priority
-+     - ASF (scale) in single tone channel for the active profile
-+     - (Amplitude scale is already enabled by default)
-+
-+Single tone mode
-+----------------
-+
-+Single tone is the baseline operating mode. The ``single_tone`` channel
-+provides per-profile frequency, phase and amplitude control:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altvoltage110_frequency``
-+     - Hz
-+     - Output frequency. Range [0, SYSCLK/2). Stored in the active profile's
-+       frequency tuning word (FTW).
-+
-+   * - ``out_altvoltage110_phase``
-+     - rad
-+     - Phase offset. Range [0, 2*pi). Stored in the active profile's phase
-+       offset word (POW).
-+
-+   * - ``out_altvoltage110_scale``
-+     - fractional
-+     - Amplitude scale factor. Range [0, 1]. Stored in the active profile's
-+       amplitude scale factor (ASF).
-+
-+When RAM mode is enabled, single tone parameters are stored in a shadow
-+register and are not written to hardware until RAM mode is disabled.
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Set the active profile to 2 and configure a 100 MHz tone:
-+
-+.. code-block:: bash
-+
-+	echo 2 > /sys/bus/iio/devices/iio:device0/out_altvoltage100_profile
-+	echo 100000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage110_frequency
-+	echo 0.5 > /sys/bus/iio/devices/iio:device0/out_altvoltage110_scale
-+	echo 0 > /sys/bus/iio/devices/iio:device0/out_altvoltage110_phase
-+
-+Read back the current single tone frequency:
-+
-+.. code-block:: bash
-+
-+	cat /sys/bus/iio/devices/iio:device0/out_altvoltage110_frequency
-+
-+Parallel port mode
-+------------------
-+
-+When enabled, the parallel port allows real-time modulation of DDS parameters
-+through a 16-bit external data bus.
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altvoltage120_en``
-+     - boolean
-+     - Enable/disable the parallel data port.
-+
-+   * - ``out_altvoltage120_frequency_scale``
-+     - power-of-2
-+     - FM gain multiplier applied to 16-bit parallel input. Range [1, 32768],
-+       must be a power of 2.
-+
-+   * - ``out_altvoltage120_frequency_offset``
-+     - Hz
-+     - Base FTW to which scaled parallel data is added. Range [0, SYSCLK/2).
-+
-+   * - ``out_altvoltage120_phase_offset``
-+     - rad
-+     - Base phase for polar modulation. Lower 8 bits of POW register.
-+       Range [0, 2*pi/256).
-+
-+   * - ``out_altvoltage120_scale_offset``
-+     - fractional
-+     - Base amplitude for polar modulation. Lower 6 bits of ASF register.
-+       Range [0, 1/256).
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Enable parallel port with a frequency scale of 16 and a 50 MHz offset:
-+
-+.. code-block:: bash
-+
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage120_en
-+	echo 16 > /sys/bus/iio/devices/iio:device0/out_altvoltage120_frequency_scale
-+	echo 50000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage120_frequency_offset
-+
-+Digital ramp generator (DRG)
-+----------------------------
-+
-+The DRG produces linear frequency, phase or amplitude sweeps using dedicated
-+hardware. It is controlled through three channels: a parent control channel
-+(``digital_ramp_generator``) and two child ramp channels
-+(``digital_ramp_up``, ``digital_ramp_down``).
-+
-+Control channel attributes
-+^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altvoltage130_en``
-+     - boolean
-+     - Enable/disable the DRG.
-+
-+   * - ``out_altvoltage130_destination``
-+     - enum
-+     - Which DDS parameter is swept: ``frequency``, ``phase`` or
-+       ``amplitude``.
-+
-+   * - ``out_altvoltage130_destination_available``
-+     - string
-+     - Lists available destination values.
-+
-+   * - ``out_altvoltage130_operating_mode``
-+     - enum
-+     - Ramp behavior (see table below).
-+
-+   * - ``out_altvoltage130_operating_mode_available``
-+     - string
-+     - Lists available operating mode values.
-+
-+DRG operating modes:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Mode
-+     - Description
-+
-+   * - ``bidirectional``
-+     - Ramp up then down, dwelling at limits.
-+
-+   * - ``ramp_down``
-+     - No-dwell low; resets to upper limit at lower limit.
-+
-+   * - ``ramp_up``
-+     - No-dwell high; resets to lower limit at upper limit.
-+
-+   * - ``bidirectional_continuous``
-+     - Continuous sweep without dwelling at either limit.
-+
-+Ramp channel attributes
-+^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The ``digital_ramp_up`` (channel 131) and ``digital_ramp_down`` (channel 132)
-+channels share the same attribute set but configure ascending and descending
-+ramp parameters independently:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``frequency``
-+     - Hz
-+     - Ramp limit when destination is ``frequency``. Range [0, SYSCLK/2).
-+
-+   * - ``phase``
-+     - rad
-+     - Ramp limit when destination is ``phase``. Range [0, 2*pi).
-+
-+   * - ``scale``
-+     - fractional
-+     - Ramp limit when destination is ``amplitude``. Range [0, 1).
-+
-+   * - ``sampling_frequency``
-+     - Hz
-+     - Ramp clock rate: SYSCLK / (4 * divider).
-+
-+   * - ``frequency_step``
-+     - Hz
-+     - Per-tick frequency increment/decrement when destination is
-+       ``frequency``.
-+
-+   * - ``phase_step``
-+     - rad
-+     - Per-tick phase increment/decrement when destination is ``phase``.
-+
-+   * - ``scale_step``
-+     - fractional
-+     - Per-tick amplitude increment/decrement when destination is
-+       ``amplitude``. Range [0, 1).
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Configure a frequency sweep from 10 MHz to 100 MHz at a 1 MHz step:
-+
-+.. code-block:: bash
-+
-+	# Set DRG destination to frequency
-+	echo frequency > /sys/bus/iio/devices/iio:device0/out_altvoltage130_destination
-+
-+	# Set operating mode
-+	echo bidirectional_continuous > /sys/bus/iio/devices/iio:device0/out_altvoltage130_operating_mode
-+
-+	# Set ramp limits
-+	echo 60000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage131_frequency
-+	echo 40000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage132_frequency
-+
-+	# Set ramp step size to 1 MHz
-+	echo 1000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage131_frequency_step
-+	echo 1000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage132_frequency_step
-+
-+	# Set ramp clock rate
-+	echo 50000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage131_sampling_frequency
-+
-+	# Enable the DRG
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage130_en
-+
-+Read the current DRG operating mode:
-+
-+.. code-block:: bash
-+
-+	cat /sys/bus/iio/devices/iio:device0/out_altvoltage130_operating_mode
-+
-+RAM mode
-+--------
-+
-+The AD9910 contains a 1024 x 32-bit RAM that can be loaded with waveform data
-+and played back to modulate frequency, phase, amplitude, or polar (phase +
-+amplitude) parameters.
-+
-+RAM control channel attributes
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altvoltage140_en``
-+     - boolean
-+     - Enable/disable RAM playback. Toggling swaps profile registers between
-+       single tone and RAM configurations across all 8 profiles.
-+
-+   * - ``out_altvoltage140_destination``
-+     - enum
-+     - RAM data target: ``frequency``, ``phase``, ``amplitude`` or ``polar``.
-+       Cannot be changed while RAM mode is enabled.
-+
-+   * - ``out_altvoltage140_destination_available``
-+     - string
-+     - Lists available destination values.
-+
-+   * - ``out_altvoltage140_operating_mode``
-+     - enum
-+     - Playback behavior (see table below).
-+
-+   * - ``out_altvoltage140_operating_mode_available``
-+     - string
-+     - Lists available operating mode values.
-+
-+   * - ``out_altvoltage140_frequency``
-+     - Hz
-+     - Frequency tuning word used as the single tone frequency when
-+       RAM destination is not ``frequency``. Range [0, SYSCLK/2).
-+
-+   * - ``out_altvoltage140_phase``
-+     - rad
-+     - Phase offset word used as the single tone phase when RAM destination
-+       is not ``phase``. Range [0, 2*pi).
-+
-+   * - ``out_altvoltage140_sampling_frequency``
-+     - Hz
-+     - RAM playback step rate controlling how fast the address counter
-+       advances: SYSCLK / (4 * step_rate). Stored per-profile.
-+
-+   * - ``out_altvoltage140_address_start``
-+     - integer
-+     - Start address for the active profile. Range [0, 1023]. Cannot be
-+       changed while RAM mode is enabled. If set above current end address,
-+       end address is automatically adjusted.
-+
-+   * - ``out_altvoltage140_address_end``
-+     - integer
-+     - End address for the active profile. Range [address_start, 1023].
-+       Cannot be changed while RAM mode is enabled.
-+
-+RAM operating modes:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Mode
-+     - Description
-+
-+   * - ``direct_switch``
-+     - Start address defines a fixed word used by the selected profile.
-+
-+   * - ``ramp_up``
-+     - One-shot ramp through the current profile's address range.
-+
-+   * - ``bidirectional``
-+     - Ramp up then down through profile 0's address range.
-+
-+   * - ``bidirectional_continuous``
-+     - Continuous ramp up/down through current profile's address range.
-+
-+   * - ``ramp_up_continuous``
-+     - Continuous ramp up through current profile's address range.
-+
-+   * - ``sequenced``
-+     - Sequential playback from profile 0 to the active profile.
-+       Requires active profile > 0.
-+
-+   * - ``sequenced_continuous``
-+     - Continuous sequential playback. Requires active profile > 0.
-+
-+Loading RAM data
-+^^^^^^^^^^^^^^^^
-+
-+RAM data is loaded through the firmware upload framework. The driver registers
-+a firmware upload device named ``iio_deviceX:ram``. Data must be a multiple of
-+4 bytes (32-bit words) and at most 4096 bytes (1024 words).
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Configure RAM mode with frequency destination and load a waveform:
-+
-+.. code-block:: bash
-+
-+	# Set RAM address range for profile 0
-+	echo 0 > /sys/bus/iio/devices/iio:device0/out_altvoltage140_address_start
-+	echo 999 > /sys/bus/iio/devices/iio:device0/out_altvoltage140_address_end
-+
-+	# Set destination and operating mode
-+	echo frequency > /sys/bus/iio/devices/iio:device0/out_altvoltage140_destination
-+	echo ramp_up_continuous > /sys/bus/iio/devices/iio:device0/out_altvoltage140_operating_mode
-+
-+	# Set playback rate
-+	echo 250000 > /sys/bus/iio/devices/iio:device0/out_altvoltage140_sampling_frequency
-+
-+	# Load RAM data via firmware upload
-+	echo 1 > /sys/class/firmware/iio\:device0\:ram/loading
-+	cat waveform.bin > /sys/class/firmware/iio\:device0\:ram/data
-+	echo 0 > /sys/class/firmware/iio\:device0\:ram/loading
-+
-+	# Enable RAM mode
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage140_en
-+
-+Read the current RAM operating mode:
-+
-+.. code-block:: bash
-+
-+	cat /sys/bus/iio/devices/iio:device0/out_altvoltage140_operating_mode
-+
-+Output shift keying (OSK)
-+-------------------------
-+
-+OSK controls the output amplitude envelope, allowing the output to be ramped
-+on/off rather than switched abruptly.
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altvoltage150_en``
-+     - boolean
-+     - Enable/disable OSK.
-+
-+   * - ``out_altvoltage150_scale``
-+     - fractional
-+     - Target amplitude for the OSK ramp. 14-bit ASF field. Range [0, 1).
-+
-+   * - ``out_altvoltage150_sampling_frequency``
-+     - Hz
-+     - OSK ramp rate: SYSCLK / (4 * divider).
-+
-+   * - ``out_altvoltage150_pinctrl_en``
-+     - boolean
-+     - Enable manual external pin control. When enabled, the OSK pin directly
-+       gates the output on/off instead of using the automatic ramp.
-+
-+   * - ``out_altvoltage150_scale_step``
-+     - fractional
-+     - Automatic OSK amplitude step. Writing non-zero enables automatic OSK
-+       and sets the per-tick increment. Writing ``0`` disables it. Rounded to
-+       nearest hardware step: 0.000061, 0.000122, 0.000244 or 0.000488.
-+
-+Usage examples
-+^^^^^^^^^^^^^^
-+
-+Enable OSK with automatic ramping:
-+
-+.. code-block:: bash
-+
-+	# Set ramp rate
-+	echo 1000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage150_sampling_frequency
-+
-+	# Enable automatic OSK with step size
-+	echo 0.000244 > /sys/bus/iio/devices/iio:device0/out_altvoltage150_scale_step
-+
-+	# Enable OSK
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage150_en
-+
-+Enable manual pin-controlled OSK:
-+
-+.. code-block:: bash
-+
-+	# Set target amplitude to full scale
-+	echo 1.0 > /sys/bus/iio/devices/iio:device0/out_altvoltage150_scale
-+
-+	# Enable manual pin control
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage150_pinctrl_en
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage150_en
-+
-+
-+Physical channel
-+================
-+
-+The ``phy`` channel provides device-level control:
-+
-+.. flat-table::
-+   :header-rows: 1
-+
-+   * - Attribute
-+     - Unit
-+     - Description
-+
-+   * - ``out_altvoltage100_sampling_frequency``
-+     - Hz
-+     - System clock (SYSCLK) frequency. With PLL enabled, configures the PLL
-+       multiplier (range 420-1000 MHz). Without PLL, ref clock can only be
-+       divided by 2.
-+
-+   * - ``out_altvoltage100_profile``
-+     - integer
-+     - Active profile index [0, 7]. Selected via GPIO pins. Each profile
-+       stores an independent set of single tone and RAM playback parameters.
-+
-+   * - ``out_altvoltage100_powerdown``
-+     - boolean
-+     - Software power-down. Writing 1 powers down the digital core, DAC,
-+       reference clock input and auxiliary DAC simultaneously.
-+
-+Usage examples
-+--------------
-+
-+Set the system clock to 1 GHz and select profile 3:
-+
-+.. code-block:: bash
-+
-+	echo 1000000000 > /sys/bus/iio/devices/iio:device0/out_altvoltage100_sampling_frequency
-+	echo 3 > /sys/bus/iio/devices/iio:device0/out_altvoltage100_profile
-+
-+Read current system clock frequency:
-+
-+.. code-block:: bash
-+
-+	cat /sys/bus/iio/devices/iio:device0/out_altvoltage100_sampling_frequency
-+
-+Power down the device:
-+
-+.. code-block:: bash
-+
-+	echo 1 > /sys/bus/iio/devices/iio:device0/out_altvoltage100_powerdown
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index ba3e609c6a13..55cb1ce84ba8 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -29,6 +29,7 @@ Industrial I/O Kernel Drivers
-    ad7606
-    ad7625
-    ad7944
-+   ad9910
-    ade9000
-    adis16475
-    adis16480
-diff --git a/MAINTAINERS b/MAINTAINERS
-index edd87ee7da5f..14e4272357ce 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1637,6 +1637,7 @@ S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
- F:	Documentation/ABI/testing/sysfs-bus-iio-frequency-ad9910
- F:	Documentation/devicetree/bindings/iio/frequency/adi,ad9910.yaml
-+F:	Documentation/iio/ad9910.rst
- F:	drivers/iio/frequency/ad9910.c
- 
- ANALOG DEVICES INC MAX22007 DRIVER
+This is how it was, and I changed it based on Alex's feedback:
 
--- 
-2.43.0
+https://lore.kernel.org/all/DH3XD8NUDJNG.2IMPYC40D8DXI@nvidia.com/
+
+I am Ok with both approaches. I would request Danilo if he's applying it,
+that if he could do so without my additional re-send.
+
+thanks,
+
+--
+Joel Fernandes
+
 
 
 
