@@ -1,61 +1,62 @@
-Return-Path: <linux-doc+bounces-79961-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79962-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qLpGH0q2umlWawIAu9opvQ
-	(envelope-from <linux-doc+bounces-79961-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:27:22 +0100
+	id mFS4LSu2umlWawIAu9opvQ
+	(envelope-from <linux-doc+bounces-79962-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:26:51 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25CC22BD19A
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:27:22 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ECF42BD139
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:26:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7B8AB3012BCF
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 14:26:25 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C7C083017DDE
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 14:26:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A8CAC3D9DBE;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DFE213DB625;
 	Wed, 18 Mar 2026 14:26:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Kv6riwQS"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="P8twcLHE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 851363CF697;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B92BF3DA5C5;
 	Wed, 18 Mar 2026 14:26:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773843979; cv=none; b=UqgYwe4tQ1HfTZBd7PZyKwwNETkgGRASADAAokveyEpbG1KFiedfqwb/2FZqNWvWGKpFTAkKThBdoslOpd0wjllqcYTsjgDWmQIZ4dnGd7bc856A0HpeR7IiZFNn44lMg8kYW457jGmzUSUF32w1fhimUnpZZgHANNbApBQ+b3A=
+	t=1773843979; cv=none; b=sjFSzWqBz2l95mx6z4/Bky+RzpDxceWE/IxzVB7XAkkkFyE6ydeZhQFInAB60o9vt6Zth0qOquh9zNIVLTYdYeCpam2IreH3LNNnhTKvthhzvD3aTVRFu5JDJ4H4k71a0hN/cz91GdZ/lCeHxygaHk3RZf1OunKKGP8vOqTa89E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1773843979; c=relaxed/simple;
-	bh=J9mk5CgIixf/IVw/YsnhxrUuwYrtPC7QGEk3ABcDVNY=;
+	bh=54MuExlmgOYmBkPi+JrKM370m6Z9lu/j/7Lwg0YFvgE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=a4q16dyEFSKvNceWS81uT10f5V1i/MkwpIyBTBUjN+OT4Cslu34ilQIqgJ9IcgfOHAgRthcD1EiYmbaZsKO5ginaQMHI9bd6JCbhOnWvW5by58TymA/FwcF2PuujHo8GaMNZ/pYBqY7ZCkDwyqiMcWWK+P/URqdqLYJV+goSk2s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Kv6riwQS; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63A49C2BC87;
+	 MIME-Version:Content-Type; b=Im2y9tEIeeWBmTGI/DGqb1sJl83IvyVe0SlIlX+Ff8ni81nl5cVDvjWMJmm4D+i3lG8KXqvHU0xBW0IdqoRowXtVrrSzqWCMvK9mKMJfGlFxJVm38aXdLu+YYhlq5gIZDN/y1RrHhO9iQ43j6MCPnVEAnrSYdHD47Emyi/EZkS0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=P8twcLHE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97B9EC2BCB6;
 	Wed, 18 Mar 2026 14:26:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1773843979;
-	bh=J9mk5CgIixf/IVw/YsnhxrUuwYrtPC7QGEk3ABcDVNY=;
+	bh=54MuExlmgOYmBkPi+JrKM370m6Z9lu/j/7Lwg0YFvgE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Kv6riwQSEHWeHT8qvWQoAsAJThiVQKHjCxl/FQ6fVi2S70trKWdv74fMz4pNxc8f2
-	 1EvHEAtopY9YZckEB0gwi7VzvwUEZosRWNPSrnmjqPea/N4Y3Nr1gcUUAMoL/sdkMD
-	 tCvZfjHeeMCAdLDTPDyEVe/xdTgB2UGuef4kBfWqa1khK9U+utG2UZ6kdFlsLbDPA0
-	 s1Yynlkz7w3GhsQi95r9IPvsB37PJMByP/8rXsthaoRZyiE3RhvE+RkUZRn1ICOT7D
-	 gv28mEVQTWgGO8YoLyDkhnRTXFoeZ9zISfm0/pxo1fV35sh6tYNjfKpmc5EERfCh3X
-	 +6L0/LV44oy0A==
+	b=P8twcLHEV71fjZLtEBceWkBRaRUF9iEyLrnCL7XWJPZdWlHcc69HuP3axoDLhHXim
+	 nRi61hPDDTBquEuWhmtCXST3qFuEaKeTfnVbLR1ZsTyd/7BvQHSpdPo6/M3Wjo7kx/
+	 iCVaPNeGUWWY6Z32a/dIoIBs8RdL4RV39Eh8iTdlcx64w5OHjEa/1BcCkfd6tiUkXk
+	 FuCLg7y8BTRrEzJQC3P8UQns5PFlrk5Pwz7QJxJASSy4X6Y3brhPQ8LJUckLr/ET5z
+	 gGAf34QXpmEqwVyxNv6pMtWd7RLjoPi8sGgnUx0Mo8SNlw98N6uV5dzoKB8aS46Vgm
+	 twRL3DdajaxVg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1w2rqj-00000004HZh-2lbS;
+	id 1w2rqj-00000004Hau-3ZeY;
 	Wed, 18 Mar 2026 15:26:17 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 3/7] MAINTAINERS: update documentation scripts to add unittests
-Date: Wed, 18 Mar 2026 15:26:07 +0100
-Message-ID: <34ebaf62cf147034064fb55e5869d4d2661284d1.1773841456.git.mchehab+huawei@kernel.org>
+	linux-kernel@vger.kernel.org,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 4/7] docs: tools: include kdoc_yaml_file at documentation
+Date: Wed, 18 Mar 2026 15:26:08 +0100
+Message-ID: <50504851fd75ca970df73f3ade06308baf6748a1.1773841456.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1773841456.git.mchehab+huawei@kernel.org>
 References: <cover.1773841456.git.mchehab+huawei@kernel.org>
@@ -68,61 +69,60 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-79962-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79961-lists,linux-doc=lfdr.de,huawei];
-	RCPT_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	NEURAL_HAM(-0.00)[-0.999];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.997];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,vaga.pv.it:email]
-X-Rspamd-Queue-Id: 25CC22BD19A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 7ECF42BD139
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Ensure that we'll receive e-mails for attempts to touch
-tools/unittests.
-
-While here, place entries alphabetically sorted.
+Add an autodoc entry for the new kdoc_yaml_file module.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- MAINTAINERS | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Documentation/tools/kdoc_ancillary.rst | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c05a72245049..f0b106a4dd96 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7679,8 +7679,9 @@ M:	Mauro Carvalho Chehab <mchehab@kernel.org>
- L:	linux-doc@vger.kernel.org
- S:	Maintained
- F:	Documentation/sphinx/
--F:	tools/lib/python/*
- F:	tools/docs/
-+F:	tools/lib/python/*
-+F:	tools/unittests/*
- 
- DOCUMENTATION/ITALIAN
- M:	Federico Vaga <federico.vaga@vaga.pv.it>
+diff --git a/Documentation/tools/kdoc_ancillary.rst b/Documentation/tools/kdoc_ancillary.rst
+index 85f3806a431a..249753744d11 100644
+--- a/Documentation/tools/kdoc_ancillary.rst
++++ b/Documentation/tools/kdoc_ancillary.rst
+@@ -53,3 +53,11 @@ Python version ancillary methods
+    :members:
+    :show-inheritance:
+    :undoc-members:
++
++Write output on YAML file
++=========================
++
++.. automodule:: lib.python.kdoc.kdoc_yaml_file
++   :members:
++   :show-inheritance:
++   :undoc-members:
 -- 
 2.52.0
 
