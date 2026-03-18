@@ -1,206 +1,301 @@
-Return-Path: <linux-doc+bounces-80019-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80022-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CIZuCHztuml0dAIAu9opvQ
-	(envelope-from <linux-doc+bounces-80019-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 19:22:52 +0100
+	id WAY7FqLtuml0dAIAu9opvQ
+	(envelope-from <linux-doc+bounces-80022-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 19:23:30 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 798BD2C12BC
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 19:22:51 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id A409E2C12E6
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 19:23:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 27BE432A1BAB
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 17:55:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3B4C3330366C
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 17:56:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBA193603CE;
-	Wed, 18 Mar 2026 17:55:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECC8936074F;
+	Wed, 18 Mar 2026 17:56:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EiKdhGp6"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pwj5M45d"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6F4F30FC12;
-	Wed, 18 Mar 2026 17:55:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B779137B01C;
+	Wed, 18 Mar 2026 17:56:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773856521; cv=none; b=roioAG7GAb1MYS/X098UZrSj29Ge4nDxh6vy0T+kOdDVjQxoHwgR3PzGuIO/83E4XaSE91iQa8tm0+KUS9nlCcdHxh8H+FqZcTCjpLrNXjCoYb+raRX3DBPBXzW8AE5VQuOi33cN9Mz0xxSDm3onVUKyoynV5G3C5Ji+TuvFAfk=
+	t=1773856571; cv=none; b=u7UlZPh8Iiy19lddMSTJOI5ZqBQxZhxFvKDaNXa7BUpr4KVpN7p/VVjy+CrfeQ6MDkaueOSkx6FvrHCJg19zAjCZIBLoOGxg6rimwVCClHFTgYOgDzBAb0GIMd57Vi6w8/RHxua7zDJEXyvoeqsuQjO4PV9pscUlgAQvaHYoBcA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773856521; c=relaxed/simple;
-	bh=P7kc8uMgiIZ6+hoGNZb7Lk8njJKNoXVRMLqykWqJoGk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Zm0IwgZHgZv0TGcZQ1lx11LEPgke9cK2Q/fSeOPQdAlvk/iU1V/u39saeCwQ7SGe/ZCVI5TIMM1C9s79kbLLzg7Wv2FkCcMy04COKOScRa3H+HiY6nlMHKdsH8kYhIX0u2+oUxyG+pOohnLuMgpMgwSTgRL3qibccw1P5sUTi74=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EiKdhGp6; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A08CC19421;
-	Wed, 18 Mar 2026 17:55:17 +0000 (UTC)
+	s=arc-20240116; t=1773856571; c=relaxed/simple;
+	bh=Uvo457Wh7y4+UHfmA1m+9aW9HdSvK6o1Rnp5RB93Ae8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ZfSIf7QxxAKnqQ2EDWHMGrpOafl3rCJqakK/FaU6R7DFR94++fFnYNHyilujLWuB2OtGkGuxJnVGHuZrZtqxQbcn4zy7rqxm0QmXglCA5ZBYzEYYQ+B2ml3KQ0aUOJ3Vn5a5/mG21/rC74DjjrT1UvC2XeIl/fQPsh5NwnR0EC0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pwj5M45d; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 14957C2BC87;
+	Wed, 18 Mar 2026 17:56:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1773856521;
-	bh=P7kc8uMgiIZ6+hoGNZb7Lk8njJKNoXVRMLqykWqJoGk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=EiKdhGp6pdH65RIGYoSzbzMf8ER0a1QHMKbgVNC7S8zStXsscXtq7PQbte82l2Tqg
-	 +WtCvx/g5Q5O/WCLTI+Szz0cAJGQpCbK467KwxsAMJOz+W3Y6THn1N6Bpo1+7hbPN1
-	 PGL+UUQUudWs2KZ5ZYFNskog3b7S5KQ1hJaoiZi7rTaK/2UB6Do89Mcw2qYnPt7KEo
-	 hoVqp7yZg39DZfMY1Dl0qY3PFub6rgRwYvu0mKzzEgcYkdiE8U5A6Z0S/75h+Ewlix
-	 wRjjgkfsSlrmIinJhYWiXXRkj30qXUQ64JQiz2lKyT16nVfr/fcjV1GB2vaTK02sLa
-	 SFPy2O2pbJp+g==
-Date: Wed, 18 Mar 2026 17:55:34 +0000
-From: Jean-Philippe Brucker <jpb@kernel.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Will Deacon <will@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
-	Oliver Upton <oupton@kernel.org>, Dave Martin <Dave.Martin@arm.com>,
-	Fuad Tabba <tabba@google.com>, Mark Rutland <mark.rutland@arm.com>,
-	Ben Horgan <ben.horgan@arm.com>,
-	linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
-	linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	Peter Maydell <peter.maydell@linaro.org>,
-	Eric Auger <eric.auger@redhat.com>
-Subject: Re: [PATCH v10 16/30] KVM: arm64: Support TPIDR2_EL0
-Message-ID: <20260318175534.GN2390801@myrica>
-References: <20260306-kvm-arm64-sme-v10-0-43f7683a0fb7@kernel.org>
- <20260306-kvm-arm64-sme-v10-16-43f7683a0fb7@kernel.org>
+	s=k20201202; t=1773856571;
+	bh=Uvo457Wh7y4+UHfmA1m+9aW9HdSvK6o1Rnp5RB93Ae8=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=pwj5M45dSRaeyr0JBBBEOYVnGw+cmWRmTMnkfbNCFzh6rxklvj7GY+/koJGN+7DhT
+	 xfLvnZDSs//dcA7LWhXM8LendIIEIxDZEj9WzbaKnGDOp3tut1sI5IU8Q0LU9p1nU4
+	 V6njkWd77SVjz8VP+fi1QBRFA7yesAs3bi3Dttt/0kbnPoZs8DdSFTHKRCyksaeaos
+	 iYWcagcKkdOpSGPrQOO22lyMERpLc6hS7XjJoIKDcurQoYb/LNuBMoIfyclDHQSPTR
+	 3UO9q7lI7ddzdv71c/bvLLKUrCl/nGDTPYXut0seI4CCkLIOI2lj5/ooMVwrtf4cz5
+	 wqlVA1Ry09MvQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08DD510775FE;
+	Wed, 18 Mar 2026 17:56:11 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH RFC v2 0/9] AD9910 Direct Digital Synthesizer
+Date: Wed, 18 Mar 2026 17:56:00 +0000
+Message-Id: <20260318-ad9910-iio-driver-v2-0-e79f93becf11@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260306-kvm-arm64-sme-v10-16-43f7683a0fb7@kernel.org>
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADDnumkC/22NwQrCMBBEf6Xs2Uh2G0vrSRD8AK/Sw7ZJ2wVtJ
+ JGglP67oV49vhnmzQLRBXERjsUCwSWJ4ucMtCugn3genRKbGUhTpQlrxbZpUCsRr2yQ5IJqutI
+ Smp4OOEDePYMb5L05b3C9nKHN4STx5cNn+0m4VT8l6T/KhEqrsqPKMJuaUZ945rsf971/QLuu6
+ xcCgM4guAAAAA==
+X-Change-ID: 20260218-ad9910-iio-driver-9b3d214c251f
+To: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773856569; l=8760;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=Uvo457Wh7y4+UHfmA1m+9aW9HdSvK6o1Rnp5RB93Ae8=;
+ b=SR/nFpnm9hGI+jcZfDTxLu2NZd/po8+ZMuiaaF9nhKfGlUgb6/q7MD+GfocPrYrVUKSe1Ki9w
+ RDaCqtkcuCSAKtk0MKyTX+jvsIQwBfXvRiDd9iIVlyC2Fj6mcqQGb8l
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80019-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-80022-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jpb@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-0.993];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 798BD2C12BC
+X-Rspamd-Queue-Id: A409E2C12E6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Mar 06, 2026 at 05:01:08PM +0000, Mark Brown wrote:
-> SME adds a new thread ID register, TPIDR2_EL0. This is used in userspace
-> for delayed saving of the ZA state but in terms of the architecture is
-> not really connected to SME other than being part of FEAT_SME. It has an
-> independent fine grained trap and the runtime connection with the rest
-> of SME is purely software defined.
-> 
-> Expose the register as a system register if the guest supports SME,
-> context switching it along with the other EL0 TPIDRs.
+This patch series adds support for the Analog Devices AD9910 DDS.
+This is a RFC so that we can agree/discuss on the design that follows:
 
-I guess the register also needs to be added to locate_register(),
-read_sr_from_cpu and write_sr_to_cpu now
+This is a follow-up of the V1 discussion. We are reaching into this
+channel composition agreement where physical channels may have
+sub-channels. That adds the flexibility necessary for this design.
+Nothing has been changed to iio-core yet, so I've just addressed
+comments, aiming to keep the discussion going forward.
 
-> 
-> Reviewed-by: Fuad Tabba <tabba@google.com>
-> Signed-off-by: Mark Brown <broonie@kernel.org>
-> ---
->  arch/arm64/include/asm/kvm_host.h          |  1 +
->  arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h | 15 +++++++++++++++
->  arch/arm64/kvm/sys_regs.c                  |  3 ++-
->  3 files changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm64/include/asm/kvm_host.h b/arch/arm64/include/asm/kvm_host.h
-> index e5194ffc40a7..ec1ede0c3c12 100644
-> --- a/arch/arm64/include/asm/kvm_host.h
-> +++ b/arch/arm64/include/asm/kvm_host.h
-> @@ -445,6 +445,7 @@ enum vcpu_sysreg {
->  	CSSELR_EL1,	/* Cache Size Selection Register */
->  	TPIDR_EL0,	/* Thread ID, User R/W */
->  	TPIDRRO_EL0,	/* Thread ID, User R/O */
-> +	TPIDR2_EL0,	/* Thread ID, Register 2 */
->  	TPIDR_EL1,	/* Thread ID, Privileged */
->  	CNTKCTL_EL1,	/* Timer Control Register (EL1) */
->  	PAR_EL1,	/* Physical Address Register */
-> diff --git a/arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h b/arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h
-> index 5624fd705ae3..8c3b3d6df99f 100644
-> --- a/arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h
-> +++ b/arch/arm64/kvm/hyp/include/hyp/sysreg-sr.h
-> @@ -88,6 +88,17 @@ static inline bool ctxt_has_sctlr2(struct kvm_cpu_context *ctxt)
->  	return kvm_has_sctlr2(kern_hyp_va(vcpu->kvm));
->  }
->  
-> +static inline bool ctxt_has_sme(struct kvm_cpu_context *ctxt)
-> +{
-> +	struct kvm_vcpu *vcpu;
-> +
-> +	if (!system_supports_sme())
-> +		return false;
+The AD9910 DDS core can be driven through several independent mechanisms:
+single tone profiles, a digital ramp generator, an internal RAM playback
+engine, a parallel data port, and output shift keying. Each of these
+represents a distinct signal path into the DDS accumulator, so the driver
+models them as separate IIO output channels (all IIO_ALTVOLTAGE type).
+This per-channel separation allows userspace to configure each mode
+independently through its own set of sysfs attributes, and to
+enable/disable modes individually via IIO_CHAN_INFO_ENABLE, relying on
+the hardware's own mode selection architecture.
 
-kvm_has_sme() already checks this
+The AD9910 register map is not suited for the regmap framework: register
+widths vary across the map (16, 32, and 64 bits). The driver instead
+implements direct SPI access helpers with a software register cache, using
+type-specific read/write/update functions (ad9910_reg{16,32,64}_{read,
+write,update}) that handle endianness conversion and cache coherency.
 
-Thanks,
-Jean
+Registers are cached for several reasons. The control/function registers
+(CFR1, CFR2) are frequently queried to determine the current operating
+mode (e.g., checking RAM_ENABLE before every profile register access),
+and caching avoids repeated SPI read transactions for what are
+essentially state checks. The cache also enables efficient
+read-modify-write updates on multi-byte registers: the update functions
+merge new field values with the cached register content without issuing
+a SPI read, and skip the write entirely when the value is unchanged.
+Finally, the profile registers serve dual purposes depending on whether
+RAM mode is active -- they hold single tone parameters (FTW, POW, ASF)
+in normal operation but are repurposed for RAM playback configuration
+(start/end address, step rate, operating mode) when RAM is enabled. A
+shadow register array (reg_profile[]) preserves the inactive mode's
+settings across transitions, so no state is lost when switching between
+single tone and RAM operation.
 
-> +
-> +	vcpu = ctxt_to_vcpu(ctxt);
-> +	return kvm_has_sme(kern_hyp_va(vcpu->kvm));
-> +}
-> +
->  static inline bool ctxt_is_guest(struct kvm_cpu_context *ctxt)
->  {
->  	return host_data_ptr(host_ctxt) != ctxt;
-> @@ -127,6 +138,8 @@ static inline void __sysreg_save_user_state(struct kvm_cpu_context *ctxt)
->  {
->  	ctxt_sys_reg(ctxt, TPIDR_EL0)	= read_sysreg(tpidr_el0);
->  	ctxt_sys_reg(ctxt, TPIDRRO_EL0)	= read_sysreg(tpidrro_el0);
-> +	if (ctxt_has_sme(ctxt))
-> +		ctxt_sys_reg(ctxt, TPIDR2_EL0)	= read_sysreg_s(SYS_TPIDR2_EL0);
->  }
->  
->  static inline void __sysreg_save_el1_state(struct kvm_cpu_context *ctxt)
-> @@ -204,6 +217,8 @@ static inline void __sysreg_restore_user_state(struct kvm_cpu_context *ctxt)
->  {
->  	write_sysreg(ctxt_sys_reg(ctxt, TPIDR_EL0),	tpidr_el0);
->  	write_sysreg(ctxt_sys_reg(ctxt, TPIDRRO_EL0),	tpidrro_el0);
-> +	if (ctxt_has_sme(ctxt))
-> +		write_sysreg_s(ctxt_sys_reg(ctxt, TPIDR2_EL0), SYS_TPIDR2_EL0);
->  }
->  
->  static inline void __sysreg_restore_el1_state(struct kvm_cpu_context *ctxt,
-> diff --git a/arch/arm64/kvm/sys_regs.c b/arch/arm64/kvm/sys_regs.c
-> index f13ff8e630f2..66248fd48a7d 100644
-> --- a/arch/arm64/kvm/sys_regs.c
-> +++ b/arch/arm64/kvm/sys_regs.c
-> @@ -3511,7 +3511,8 @@ static const struct sys_reg_desc sys_reg_descs[] = {
->  	  .visibility = s1poe_visibility },
->  	{ SYS_DESC(SYS_TPIDR_EL0), NULL, reset_unknown, TPIDR_EL0 },
->  	{ SYS_DESC(SYS_TPIDRRO_EL0), NULL, reset_unknown, TPIDRRO_EL0 },
-> -	{ SYS_DESC(SYS_TPIDR2_EL0), undef_access },
-> +	{ SYS_DESC(SYS_TPIDR2_EL0), NULL, reset_unknown, TPIDR2_EL0,
-> +	  .visibility = sme_visibility},
->  
->  	{ SYS_DESC(SYS_SCXTNUM_EL0), undef_access },
->  
-> 
-> -- 
-> 2.47.3
-> 
-> 
+RAM data is loaded through firmware upload infrastructure. Userspace
+writes the waveform data as a raw binary buffer (up to 4096 bytes for
+the full 1024x32-bit RAM), and the driver reverses the byte array and
+transfers it to the device in a single SPI transaction. Per-profile
+start/end addresses and playback parameters (operating mode, step rate,
+no-dwell control) are configured through the RAM channel's ext_info
+attributes.
+
+Streaming data to the DDS core through the parallel data port at the
+PD_CLK rate is not covered by this series. That functionality would
+be added in a separate patch series, building on top of the IIO backend
+infrastructure to provide a proper buffered data path.
+
+As I am pushing implementation, as lot has been done already without much
+supervision or agreement, still I would be interested on hearing about
+the design choices discussed above. Here is the output for the iio_info
+at this point:
+
+iio:device3: ad9910
+  8 channels found:
+      altvoltage120:  (output)
+      7 channel-specific attributes found:
+          attr  0: en value: 0
+          attr  1: frequency_offset value: 0.000000
+          attr  2: frequency_scale value: 1
+          attr  3: label value: parallel_port
+          attr  4: phase_offset value: 0.000000
+          attr  5: sampling_frequency value: 250000000.000000
+          attr  6: scale_offset value: 0.000000
+      altvoltage140:  (output)
+      11 channel-specific attributes found:
+          attr  0: address_end value: 1023
+          attr  1: address_start value: 0
+          attr  2: destination value: frequency
+          attr  3: destination_available value: frequency phase amplitude polar
+          attr  4: en value: 0
+          attr  5: frequency value: 0.000000
+          attr  6: label value: ram_control
+          attr  7: operating_mode value: direct_switch
+          attr  8: operating_mode_available value: direct_switch ramp_up
+		           bidirectional bidirectional_continuous ramp_up_continuous
+				   sequenced sequenced_continuous
+          attr  9: phase value: 0.000000
+          attr 10: sampling_frequency value: 250000000.000000
+      altvoltage130:  (output)
+      11 channel-specific attributes found:
+          attr  0: destination value: frequency
+          attr  1: destination_available value: frequency phase amplitude
+          attr  2: en value: 0
+          attr  3: label value: digital_ramp_generator
+          attr  4: operating_mode value: bidirectional_continuous
+          attr  5: operating_mode_available value: bidirectional ramp_down
+		           ramp_up bidirectional_continuous
+      altvoltage110:  (output)
+      4 channel-specific attributes found:
+          attr  0: frequency value: 0.000000
+          attr  1: label value: single_tone
+          attr  2: phase value: 0.000000
+          attr  3: scale value: 0.000000
+      altvoltage132:  (output)
+      8 channel-specific attributes found:
+          attr  0: frequency value: 0.000000
+          attr  1: frequency_step value: 0.000000
+          attr  2: label value: digital_ramp_down
+          attr  3: phase value: 0.000000000
+          attr  4: phase_step value: 0.000000000
+          attr  5: sampling_frequency value: 250000000.000000
+          attr  6: scale value: 0.000000000
+          attr  7: scale_step value: 0.000000000
+      altvoltage131:  (output)
+      8 channel-specific attributes found:
+          attr  0: frequency value: 0.000000
+          attr  1: frequency_step value: 0.000000
+          attr  2: label value: digital_ramp_up
+          attr  3: phase value: 0.000000000
+          attr  4: phase_step value: 0.000000000
+          attr  5: sampling_frequency value: 250000000.000000
+          attr  6: scale value: 0.000000000
+          attr  7: scale_step value: 0.000000000
+      altvoltage100:  (output)
+      4 channel-specific attributes found:
+          attr  0: label value: phy
+          attr  1: powerdown value: 0
+          attr  2: profile value: 0
+          attr  3: sampling_frequency value: 1000000000
+      altvoltage150:  (output)
+      6 channel-specific attributes found:
+          attr  0: en value: 0
+          attr  1: label value: output_shift_keying
+          attr  2: pinctrl_en value: 0
+          attr  3: sampling_frequency value: 250000000.000000
+          attr  4: scale value: 0.000000
+          attr  5: scale_step value: 0.000000
+  4 debug attributes found:
+          debug attr  1: ram_data ERROR: Input/output error (5)
+          debug attr  2: ram_loading value: 0
+          debug attr  3: direct_reg_access value: 0x2
+
+Kind regards,
+
+Rodrigo Alencar
+
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v2:
+- Device-tree bindings changes.
+- RAM loading to use firmware update interface.
+- Rearrange of channels into a hierarchy.
+- Link to v1: https://lore.kernel.org/r/20260220-ad9910-iio-driver-v1-0-3b264aa48a10@analog.com
+
+---
+Rodrigo Alencar (9):
+      dt-bindings: iio: frequency: add ad9910
+      iio: frequency: ad9910: initial driver implementation
+      iio: frequency: ad9910: add simple parallel port mode support
+      iio: frequency: ad9910: add digital ramp generator support
+      iio: frequency: ad9910: add RAM mode support
+      iio: frequency: ad9910: add output shift keying support
+      iio: frequency: ad9910: add channel labels
+      Documentation: ABI: testing: add docs for ad9910 sysfs entries
+      docs: iio: add documentation for ad9910 driver
+
+ .../ABI/testing/sysfs-bus-iio-frequency-ad9910     |  182 ++
+ .../bindings/iio/frequency/adi,ad9910.yaml         |  189 ++
+ Documentation/iio/ad9910.rst                       |  654 ++++++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |   10 +
+ drivers/iio/frequency/Kconfig                      |   20 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/ad9910.c                     | 2261 ++++++++++++++++++++
+ 8 files changed, 3318 insertions(+)
+---
+base-commit: ff0843ceb1fb11a6b73e0e77b932ef7967aecd4b
+change-id: 20260218-ad9910-iio-driver-9b3d214c251f
+
+Best regards,
+-- 
+Rodrigo Alencar <rodrigo.alencar@analog.com>
+
+
 
