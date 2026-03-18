@@ -1,244 +1,150 @@
-Return-Path: <linux-doc+bounces-79971-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79973-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aKOdM1i6umk4bQIAu9opvQ
-	(envelope-from <linux-doc+bounces-79971-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:44:40 +0100
+	id QLQeJNK7ummqbQIAu9opvQ
+	(envelope-from <linux-doc+bounces-79973-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:50:58 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DB812BD6EE
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:44:40 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 095582BD887
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 15:50:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 5886A303E1FA
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 14:41:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DD18030D2E81
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 14:43:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F1173DC4C5;
-	Wed, 18 Mar 2026 14:41:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4461B3D904B;
+	Wed, 18 Mar 2026 14:43:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PLG63xwv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C463E3DC4B5;
-	Wed, 18 Mar 2026 14:41:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1903B386459;
+	Wed, 18 Mar 2026 14:43:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773844917; cv=none; b=F5WVBthXXGhe91hBgFG7keX9w3TmQ7bNAJPJs9dmmS8PKP+iMTq9eqKwfyB6lQP1CYidkMOyGvynLH7eArkCt3HPR8gVWegRyABl7Lx8YdzVDEtUMs+8knRg85gGCBk6rZdAmwNd4UEw0xxcdCxEeiKD9YphcKuY3rVNUlR6F9Y=
+	t=1773844997; cv=none; b=RfR2qG6anc0aq3mJBkh+ufCgsPqMxSG4g0n6MRFoBdSOwe5kss4aZx1Y0K/SV278QhJfoi+V6kgB6yCxWY99zzmDr3dD1IPzY3x2jkCHpMuAoyAosrCa8QFO2h+kLa29LeXltu0kZo1zUUiDE7Dr3hYOWXe1YjphQ0lC4c+mH60=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773844917; c=relaxed/simple;
-	bh=5e8weDSY3ldu9AeUGisPGa9Ryj0nEXxqoClRV/0Qbn4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=XIDYkCrtKXdEs+NfFBlFeXsxSzYOFoBmS+OiU01vqOXoq/EG2W67EiLwcb/bGtxUeiEesu/m8F8MuupsiGkO6MxUfM1RM9DNIdlgsrBPzoQFin31jea/zTTdYo4n9mV6U+MzPve7vP7ziGa9P8qqXVFCfxSc69kWjk0ReFYKTbk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com; spf=pass smtp.mailfrom=huawei-partners.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei-partners.com
-Received: from mail.maildlp.com (unknown [172.18.224.150])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4fbWjk2zqjzHnH7y;
-	Wed, 18 Mar 2026 22:41:30 +0800 (CST)
-Received: from mscpeml500003.china.huawei.com (unknown [7.188.49.51])
-	by mail.maildlp.com (Postfix) with ESMTPS id 181334056A;
-	Wed, 18 Mar 2026 22:41:52 +0800 (CST)
-Received: from [10.123.123.154] (10.123.123.154) by
- mscpeml500003.china.huawei.com (7.188.49.51) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Wed, 18 Mar 2026 17:41:51 +0300
-Message-ID: <e51c09dc-81bd-441c-90ce-b973d21fe311@huawei-partners.com>
-Date: Wed, 18 Mar 2026 17:41:50 +0300
+	s=arc-20240116; t=1773844997; c=relaxed/simple;
+	bh=u09Mfz2oaK3eFSNZEBbTIAth83cK6rCPlN/GqyTfmgM=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:To:From:Subject:
+	 References:In-Reply-To; b=HOs9oPDfIyemnfvX/YqrERxWgdB8eeOXhOQTsqFmn1PJ/DH0gE1RrleU72frXOP9CofaFKNn8QG854WXKNUyzwAUu9VFt6Nc8TsHbybA6eeLEUyvJN/x65e5zI9Fk8vkErmJJmFLfl6AM7tZFzn/w49WTF3Nq5XxIrAKIsIFRUU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PLG63xwv; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00284C19421;
+	Wed, 18 Mar 2026 14:43:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773844996;
+	bh=u09Mfz2oaK3eFSNZEBbTIAth83cK6rCPlN/GqyTfmgM=;
+	h=Date:Cc:To:From:Subject:References:In-Reply-To:From;
+	b=PLG63xwvR24HD+XRf5cIoXpB6gh/EZwGvlYiSAWfypMrqe6k149dqeTeFuuOlHOzk
+	 fcG/KWD2k6CF2gw8wZ70N5s1KGkhpWr0bZ6nj9ecBLJXrgBjuX5q8TqMjGEIeN3crF
+	 v04TSv3PsLfnKRjuFmX+477UMqR3tBmetg2zHzpmS0G3XTXt4LzNtbLeulLOnWGh69
+	 RszEmfLO8Vd+CTGg+m7CRnid4OA9PSrcl4HWxc6qxPalVR9qBLjogmPkWYqo+vYULp
+	 vQWpMOPg/0zvKylcbrrPprf4ruVLQtYMeYr8CX3v5Oui7WNBP/BidARKIxRYx7GqJN
+	 khYLlO+156bnw==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 1/1] mm/damon: support MADV_COLLAPSE via
- DAMOS_COLLAPSE scheme action
-To: SeongJae Park <sj@kernel.org>
-CC: <artem.kuzin@huawei.com>, <stepanov.anatoly@huawei.com>,
-	<wangkefeng.wang@huawei.com>, <yanquanmin1@huawei.com>, <zuoze1@huawei.com>,
-	<damon@lists.linux.dev>, <akpm@linux-foundation.org>, <ljs@kernel.org>,
-	<Liam.Howlett@oracle.com>, <vbabka@kernel.org>, <rppt@kernel.org>,
-	<surenb@google.com>, <mhocko@suse.com>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>, <linux-doc@vger.kernel.org>,
-	<linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>
-References: <20260318005226.132181-1-sj@kernel.org>
-Content-Language: en-US
-From: Gutierrez Asier <gutierrez.asier@huawei-partners.com>
-In-Reply-To: <20260318005226.132181-1-sj@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: mscpeml100003.china.huawei.com (10.199.174.67) To
- mscpeml500003.china.huawei.com (7.188.49.51)
-X-Spamd-Result: default: False [0.04 / 15.00];
-	DMARC_POLICY_QUARANTINE(1.50)[huawei-partners.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 18 Mar 2026 15:43:05 +0100
+Message-Id: <DH5ZKGFWJ0B3.21DGB876S2FYE@kernel.org>
+Cc: "Miguel Ojeda" <miguel.ojeda.sandonis@gmail.com>, "Alexandre Courbot"
+ <acourbot@nvidia.com>, "Joel Fernandes" <joelagnelf@nvidia.com>,
+ <linux-kernel@vger.kernel.org>, "Miguel Ojeda" <ojeda@kernel.org>, "Boqun
+ Feng" <boqun@kernel.org>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <lossin@kernel.org>, "Andreas Hindborg" <a.hindborg@kernel.org>, "Trevor
+ Gross" <tmgross@umich.edu>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Dave
+ Airlie" <airlied@redhat.com>, "David Airlie" <airlied@gmail.com>, "Maarten
+ Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Simona
+ Vetter" <simona@ffwll.ch>, "Daniel Almeida" <daniel.almeida@collabora.com>,
+ "Koen Koning" <koen.koning@linux.intel.com>, "Nikola Djukic"
+ <ndjukic@nvidia.com>, "Philipp Stanner" <phasta@kernel.org>, "Elle Rhumsaa"
+ <elle@weathered-steel.dev>, "Jonathan Corbet" <corbet@lwn.net>, "Alex
+ Deucher" <alexander.deucher@amd.com>, =?utf-8?q?Christian_K=C3=B6nig?=
+ <christian.koenig@amd.com>, "Jani Nikula" <jani.nikula@linux.intel.com>,
+ "Joonas Lahtinen" <joonas.lahtinen@linux.intel.com>, "Rodrigo Vivi"
+ <rodrigo.vivi@intel.com>, "Tvrtko Ursulin" <tursulin@ursulin.net>, "Huang
+ Rui" <ray.huang@amd.com>, "Matthew Auld" <matthew.auld@intel.com>, "Matthew
+ Brost" <matthew.brost@intel.com>, "Lucas De Marchi"
+ <lucas.demarchi@intel.com>, =?utf-8?q?Thomas_Hellstr=C3=B6m?=
+ <thomas.hellstrom@linux.intel.com>, "Helge Deller" <deller@gmx.de>, "John
+ Hubbard" <jhubbard@nvidia.com>, "Alistair Popple" <apopple@nvidia.com>,
+ "Timur Tabi" <ttabi@nvidia.com>, "Edwin Peer" <epeer@nvidia.com>, "Andrea
+ Righi" <arighi@nvidia.com>, "Andy Ritger" <aritger@nvidia.com>, "Zhi Wang"
+ <zhiw@nvidia.com>, "Balbir Singh" <balbirs@nvidia.com>,
+ <alexeyi@nvidia.com>, "Eliot Courtney" <ecourtney@nvidia.com>,
+ <dri-devel@lists.freedesktop.org>, <rust-for-linux@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <amd-gfx@lists.freedesktop.org>,
+ <intel-gfx@lists.freedesktop.org>, <intel-xe@lists.freedesktop.org>,
+ <linux-fbdev@vger.kernel.org>
+To: "Alice Ryhl" <aliceryhl@google.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH v13 1/1] rust: interop: Add list module for C linked
+ list interface
+References: <20260317201710.934932-1-joelagnelf@nvidia.com>
+ <20260317201710.934932-2-joelagnelf@nvidia.com>
+ <46986da6-8c89-475c-8561-964adaa7d034@nvidia.com>
+ <abppV3e91iVzplcv@google.com> <DH5UOS96171T.Z8XSRX583Q60@nvidia.com>
+ <CANiq72=bmJ_GWKowAgv+DWQ8FcWK_HePwjaVgeDmRH+gVD-z5g@mail.gmail.com>
+ <CAH5fLgg-kgeBw3Py-EZmAEJhm357u5NJP6na4qJe8v3aeFW5Cg@mail.gmail.com>
+In-Reply-To: <CAH5fLgg-kgeBw3Py-EZmAEJhm357u5NJP6na4qJe8v3aeFW5Cg@mail.gmail.com>
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,nvidia.com,vger.kernel.org,kernel.org,garyguo.net,protonmail.com,umich.edu,redhat.com,linux.intel.com,suse.de,ffwll.ch,collabora.com,weathered-steel.dev,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,lists.freedesktop.org];
+	TAGGED_FROM(0.00)[bounces-79973-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gutierrez.asier@huawei-partners.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-79971-lists,linux-doc=lfdr.de];
-	NEURAL_HAM(-0.00)[-0.930];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,sashiko.dev:url,huawei-partners.com:email,huawei-partners.com:mid]
-X-Rspamd-Queue-Id: 1DB812BD6EE
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[54];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dakr@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-0.787];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[pci.rs:url,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 095582BD887
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On Wed Mar 18, 2026 at 3:31 PM CET, Alice Ryhl wrote:
+> On Wed, Mar 18, 2026 at 3:21=E2=80=AFPM Miguel Ojeda
+> <miguel.ojeda.sandonis@gmail.com> wrote:
+>> [*] I would have preferred a middle ground like  modules being inside
+>> but repeating the folder name, e.g. `.../pci/pci.rs`, but I doubt that
+>> will ever be supported upstream since one probably wants to support
+>> the other ways at the same time.
 
+I very much like this, because, as you said, the pci/ vs. pci.rs completion
+issue is indeed annoying me a bit. :)
 
-On 3/18/2026 3:52 AM, SeongJae Park wrote:
-> On Tue, 17 Mar 2026 09:52:09 +0300 Gutierrez Asier <gutierrez.asier@huawei-partners.com> wrote:
-> 
->> Hi SJ,
->>
->> First of all, I just noticed that this was sent as v2 RFC, while
->> it should be v1. Bear in mind that the next series will also be
->> v2.
-> 
-> No worry :)
-> 
->>
->> On 3/17/2026 3:32 AM, SeongJae Park wrote:
->>> Hello Asier,
->>>
->>> On Mon, 16 Mar 2026 18:38:05 +0000 <gutierrez.asier@huawei-partners.com> wrote:
->>>
->>>> From: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
->>>>
->>>> This patch set introces a new action: DAMOS_COLLAPSE.
->>>>
->>>> For DAMOS_HUGEPAGE and DAMOS_NOHUGEPAGE to work, khugepaged should be
->>>> working, since it relies on hugepage_madvise to add a new slot. This
->>>> slot should be picked up by khugepaged and eventually collapse (or
->>>> not, if we are using DAMOS_NOHUGEPAGE) the pages. If THP is not
->>>> enabled, khugepaged will not be working, and therefore no collapse
->>>> will happen.
->>>>
->>>> DAMOS_COLLAPSE eventually calls madvise_collapse, which will collapse
->>>> the address range synchronously.
->>>>
->>>> This new action may be required to support autotuning with hugepage as
->>>> a goal.
->>>
->>> Above all makes sense.  Thank you for posting this patch.
->>>
->>> Do you have some test results that you can also share together?  It would be
->>> nice if it can demonstrate the benefit of DAMOS_COLLAPSE over DAMOS_HUGEPAGE.
->> I will run some tests and benchmarks.
-> 
-> Looking forward to.
-> 
->>>
->>>>
->>>> [1] https://lore.kernel.org/lkml/20260314165156.86647-1-sj@kernel.org/
->>>
->>> Seems the above link is just added by a mistake?  If not, please clarify.
->> Yes, it looks like I copied the wrong link.
->>>>
->>>> Signed-off-by: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
->>>> Reviewed-by: SeongJae Park <sj@kernel.org>
->>>> ---
->>>>  Documentation/mm/damon/design.rst | 4 ++++
->>>>  include/linux/damon.h             | 1 +
->>>>  mm/damon/sysfs-schemes.c          | 4 ++++
->>>>  mm/damon/vaddr.c                  | 3 +++
->>>>  4 files changed, 12 insertions(+)
->>> [...]
->>>> diff --git a/include/linux/damon.h b/include/linux/damon.h
->>>> index 3a441fbca170..6720dc70c487 100644
->>>> --- a/include/linux/damon.h
->>>> +++ b/include/linux/damon.h
->>>> @@ -140,6 +140,7 @@ enum damos_action {
->>>>  	DAMOS_PAGEOUT,
->>>>  	DAMOS_HUGEPAGE,
->>>>  	DAMOS_NOHUGEPAGE,
->>>> +	DAMOS_COLLAPSE,
->>>>  	DAMOS_LRU_PRIO,
->>>>  	DAMOS_LRU_DEPRIO,
->>>>  	DAMOS_MIGRATE_HOT,
->>>
->>> sashiko.dev adds [1] below comments.  Let me also add my comments in line.
->>>
->>> : This isn't a bug, but should a kernel-doc entry for @DAMOS_COLLAPSE be added
->>> : to the comment block above this enum?
->>>
->>> Makes sense.  'make htmldocs' may complain otherwise.  Asier, could you please
->>> add the kernel-doc comment for DAMOS_COLLAPSE in the next spin?
->> OK, I will split this patch into 2: one with the code and the other one with
->> the documentation.
-> 
-> Does the 'documentation' mean the change for 'design.rst'?  Or, the kernel-doc
-> comment?  If that's the former case (separating 'design.rst' side change as
-> another patch), that's completely good for me.
-I meant the doc/mm/damon/design.rst
-> 
-> If that's the latter case (separating kernel-doc comment addition as another
-> patch), that will make the commit trigger document build error, and the error
-> will be fixed only after the followup commit is applied.  Please ensure keeping
-> 'damon.h' side changes as a single patch, and therefore no warning or breaks in
-> the middle of the patch series is introduced (and later fixed).
-> 
->>> : 
->>> : Also, does inserting DAMOS_COLLAPSE here shift the integer values of the
->>> : subsequent enum entries like DAMOS_STAT?
->>> : 
->>> : The DAMON sysfs selftest script (tools/testing/selftests/damon/sysfs.py) uses
->>> : a hardcoded dictionary action_val to map string names to their integer enum
->>> : values.
->>> : 
->>> : If the enum values shift, the test's assertion:
->>> : 
->>> : assert_true(dump['action'] == action_val[scheme.action])
->>> : 
->>> : might fail when checking the struct memory via drgn. Could the python test
->>> : dictionary be updated to reflect the new values, or could the new action be
->>> : added at the end of the enum list?
->>>
->>> There is no test that uses DAMOS actions that defined after DAMOS_NOHUGEPAGE,
->>> so no real test will break.  But this is a good point.  It would be better to
->>> update the hard-coded value together.  Asier, could you also update the
->>> 'action_val' dict of assert_scheme_committed() function in
->>> tools/testing/selftets/damon/sysfs.py for the updated enum value in the next
->>> version?
->> OK, I will do it.
-> 
-> Thank you :)
-> 
->>>
->>> [1] https://sashiko.dev/#/patchset/20260316183805.2090297-1-gutierrez.asier@huawei-partners.com
->>>
->>>
->>> Thanks,
->>> SJ
->>>
->>> [...]
->>>
->> Thanks for the feedback.
-> 
-> My pleasure.
-> 
-> 
-> Thanks,
-> SJ
-> 
-> [...]
-> 
+> In principle this is possible using
+>
+> #[path =3D "pci/pci.rs"]
+> pub mod pci;
 
--- 
-Asier Gutierrez
-Huawei
-
+Not exactly pretty, but if it works I think it's worth.
 
