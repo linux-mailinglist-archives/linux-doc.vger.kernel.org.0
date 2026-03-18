@@ -1,176 +1,255 @@
-Return-Path: <linux-doc+bounces-79900-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-79903-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CIe2N6NdumnFUgIAu9opvQ
-	(envelope-from <linux-doc+bounces-79900-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:09:07 +0100
+	id wJtwOCRdumnFUgIAu9opvQ
+	(envelope-from <linux-doc+bounces-79903-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:07:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60F5E2B78DE
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:09:07 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id C57382B77D9
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 09:07:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DD18430D0194
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 08:03:47 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 08D883024B2D
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Mar 2026 08:06:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E13BD37AA68;
-	Wed, 18 Mar 2026 08:03:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B4BB379ECC;
+	Wed, 18 Mar 2026 08:06:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="QgHOLe5E"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="grASQdtC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012012.outbound.protection.outlook.com [52.101.43.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7408378D61
-	for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 08:03:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773820986; cv=none; b=V118UX152Dkg1i/41xwUYm7w904ThVXxUnDQIptyRL8hQU89GaE9CncOv4iPcN9QwVd50VNON1UrMmkECYSOvRK33ykTt4VhoDTXy8UqcIMwO0n2HCdCY0m4NGhcjdEnRNflQ7s1zcqszujaV+4cIX22s4YpApifFPzuKmxBkXw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773820986; c=relaxed/simple;
-	bh=KpETAyrs7YIkUM70PUxFjh8e+vMzcwee8eeDvL3R0fo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=rOTZzLZIoL2QTT4L/rs0CAKl+VFB6qFkMpkNOPkooMAV4jD27haGw/Oo2zH+3ZFE/ezgqOA2kRPR3VSLqx78NANxJmv8ZHPg4yVv1sgzx0DZmD7eqeBSxYhTTSfYVACmYGe2TJfkqZGVh3CiXL0+p1Ci3S/gmVvs4oQsXZJL8fs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=QgHOLe5E; arc=none smtp.client-ip=210.118.77.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260318080302euoutp01ddf3725c3b6a54afedc2a66009f64d17~d4Mkqjb7v0169801698euoutp01P
-	for <linux-doc@vger.kernel.org>; Wed, 18 Mar 2026 08:03:02 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260318080302euoutp01ddf3725c3b6a54afedc2a66009f64d17~d4Mkqjb7v0169801698euoutp01P
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1773820982;
-	bh=5GOrx/bM09mWS7d4FWSxDkysESa+9H3SzC9X1DevVpM=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=QgHOLe5EykCGGsrBolTj2JuPKhQ1Bki0f6knoOEenxKjutlnI1f1a+IvYzTNANjPB
-	 g3MbC1nXSFcfIo0O8YAnngJsBgO+mlGjP/L4WRyaF1fcYTT5wusxKKB3bQtIBpaz+e
-	 S5X3ZWGOfil6XUIO2rZg9WqmuiJ2qfPQBkCSac3g=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20260318080302eucas1p2c05885afc838bdc98d55972adc31ab96~d4MkRZpJ60631706317eucas1p2v;
-	Wed, 18 Mar 2026 08:03:02 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20260318080300eusmtip289c1a6818cde8d982e474c8d0c9ee8f6~d4Mi2Bedq1876518765eusmtip2G;
-	Wed, 18 Mar 2026 08:03:00 +0000 (GMT)
-Message-ID: <de23ccf6-75ef-48af-8c69-2f416c564f2d@samsung.com>
-Date: Wed, 18 Mar 2026 09:03:00 +0100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FC9E3783A8;
+	Wed, 18 Mar 2026 08:06:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.43.12
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1773821189; cv=fail; b=oje7K+WI/PCS1WCpMDDUThgw6YbB4r+SBUl9CW8yFU1jgpyxvxK4Yd3qL69HhgSSjP5tS5eWPQ5IA/7Ze2nE4noYiFer4adRa+BbN7cXMH8wbJvvs/hAwqKGuwZ+cySmwhdVFjhQGgIfMDLRoCj7a0cSVAMT/E3selNTsPiymf4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1773821189; c=relaxed/simple;
+	bh=30wrcOcZq0mY3Tf0cTJ3yEpF9Y2dZzsbAGVethpxNhQ=;
+	h=From:Subject:Date:Message-Id:Content-Type:To:Cc:MIME-Version; b=GyJAp3qhUH/PsE5DVOhKpnCMFhbs0qPVKJE3w6j3EzCGWvxbuLYKh3gfDZBP5dDLmHbstKMPZasdnKtKYxANK/M46QBVGfV0jif4cBv8dRqB5xuROj8Wy5YfX+dPHIqhnU+KfwOX5JeXt+cGUPITu98H6jvotzlAR1EJwOhq0QI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=grASQdtC; arc=fail smtp.client-ip=52.101.43.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jwsskYWKy/NDHYcTJ9eL++aTyKxWOmCKQ/44EeaIpUEaVlfEX+5XAkxsf0Ai7Bx/GAreaoLqPja7Kl2vbR9JK0oEQlN3V1xOF+/k3jDfgxQxqVhN2MoC9axLSuVfnwJelJJTRy4t8MOjCmbs2lENgv/1d4kZrtE1B6VjiZVKYCtnqoyvgspmRJt5n0s1WsafHZTBdrBY/rsCGc0vr3O7ii9CUd/xEG0pIZbze7ojyz9gRGUTEUWY89JABdKBuTnf7wiO5CLWIwM5fzeeGti6mUsXqr7rdTbD2s3hJhnJTF9ZI9XmunXeE0oXb8k71UzDLM6rnEN/kugxX5KOP0aJIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gwnD3585ya/DzCjFi25dZ7f9azPsIClEYGYPXpsXesA=;
+ b=MowzoUcAZJWoaP0EvdkT/tZeMJg0Xos8ggulVkOWzsBCKse1EyACneFBpbZJObaEgqXqJTEfBfgdvOr1FB8A557Dx5pEfiF4Te1Rx9lnB2JyprzVyvmtqosN3HaLP6re6VOs0T/KkUv/wEXU04AIUEGMRwIXrBPqK05F4+wEB4j2JPqXfl6oIhVJruuCbOc4dN/a77MGfN0tLQV/FZ4TjCfsjjPLs/By2/6x7pi4zFeEXpHrhPl7vthisVVJsRN053mSCmYR9ImirMOlAOD8IX6HjbBmOM3qwG8f4HGjieHB75TuF4JJdIjXn+0ii0yBKBgRKXmdkA6xTDwB+1JrJQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gwnD3585ya/DzCjFi25dZ7f9azPsIClEYGYPXpsXesA=;
+ b=grASQdtC2JEXFgEvA+MuIzhGjqmTHhqVkJUpOSj7pVph/EWeNsQYXwU8x5xQ2EC9W+ui7nvqyIjASoTDHFahCbisK7xsPzGwee82axUOnPbVElqNSyXD8P8zNJSPFPFcXKv+W76CrrB1M7KRr01mXQw9WyHQXc9y/tDrU5oxVqnUIz2KjQ/rC0hpsebSlA4SfxwplnnWMm5rNl2sAOiFK1JJpTgSvAcYW8FucuQjTT4c6+0JRBOe5DSuxV1/P9vxXG+ybqg76vzdu8U2HoOum9v20V5mmsW4WXxBVHZlaqTkTjYtrWjCWj01lwZHWJV5DhKLge7a1IyVuvLJa7nMcA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
+ by DS0PR12MB8197.namprd12.prod.outlook.com (2603:10b6:8:f1::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Wed, 18 Mar
+ 2026 08:06:15 +0000
+Received: from CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
+ ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9745.007; Wed, 18 Mar 2026
+ 08:06:08 +0000
+From: Alexandre Courbot <acourbot@nvidia.com>
+Subject: [PATCH 0/8] gpu: nova-core: convert registers to use the kernel
+ register macro
+Date: Wed, 18 Mar 2026 17:05:58 +0900
+Message-Id: <20260318-b4-nova-register-v1-0-22a358aa4c63@nvidia.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MTQqAIBBA4avErBtQS7GuEi36mWw2FmNIEN09a
+ fkt3nsgkTAl6KsHhDInPmKBritY9ikGQl6LwSjjVKM9zi3GI08oFDhdJOg65WertbfWQMlOoY3
+ vfzmM7/sBP0laUGIAAAA=
+X-Change-ID: 20260318-b4-nova-register-6908b5118552
+To: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, 
+ Gary Guo <gary@garyguo.net>, 
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
+ Trevor Gross <tmgross@umich.edu>
+Cc: John Hubbard <jhubbard@nvidia.com>, 
+ Alistair Popple <apopple@nvidia.com>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
+ Zhi Wang <zhiw@nvidia.com>, Eliot Courtney <ecourtney@nvidia.com>, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org, 
+ rust-for-linux@vger.kernel.org, Alexandre Courbot <acourbot@nvidia.com>
+X-Mailer: b4 0.14.3
+X-ClientProxiedBy: TY4P301CA0076.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:36f::18) To MN2PR12MB3997.namprd12.prod.outlook.com
+ (2603:10b6:208:161::11)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH v3 0/8] RDMA: Enable operation with DMA debug enabled
-To: Leon Romanovsky <leon@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>, Petr Tesarik <ptesarik@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-	Jason Wang <jasowang@redhat.com>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	=?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, Jason Gunthorpe
-	<jgg@ziepe.ca>, Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
-	<mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Andrew Morton
-	<akpm@linux-foundation.org>
-Cc: iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, virtualization@lists.linux.dev,
-	linux-rdma@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-	linux-mm@kvack.org
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <20260317190538.GD61385@unreal>
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20260318080302eucas1p2c05885afc838bdc98d55972adc31ab96
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260317190552eucas1p28f3e818f88d252b1e4161332be084177
-X-EPHeader: CA
-X-CMS-RootMailID: 20260317190552eucas1p28f3e818f88d252b1e4161332be084177
-References: <20260316-dma-debug-overlap-v3-0-1dde90a7f08b@nvidia.com>
-	<CGME20260317190552eucas1p28f3e818f88d252b1e4161332be084177@eucas1p2.samsung.com>
-	<20260317190538.GD61385@unreal>
-X-Spamd-Result: default: False [-2.15 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[samsung.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[samsung.com:s=mail20170921];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DS0PR12MB8197:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6eacf677-3276-4a47-f955-08de84c53594
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|7416014|10070799003|366016|921020|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	VKXQulFvpEQuDgM0hH4MS/FjRwo/nA//mw9ZsGyLYIZ49tcBTen6cZldfapEx3QCgBAaUXfDg5jmAkdAf2Zdth5iBZYDcsDwZ/Aq+cfiErAIIDefB6bPro6K3ThEKN7n0gBV1AtlwjlMbxlPIF2cItVS5+N7NJYBprV9kRclf18xMNvqORkjT610GQwwqnVbDwmxnHclsOiAq3LrZk2Yy5h4IAszZYAG+CSm+KJKFw8eTJ3O1W1LwkwEsbqzcJ7KPClHbG/4cIp2x28u7xeQJNsJqbFuWhMYfErUpkO8Et2M1jUn4uYQlJA+LqK7boU+L/pJGHk0ZIp7y7yeEYUr4qE8Ah62nFiz9FRCjc7kBici6Skz1b65MSlH3ZxO6xQmkpOecwzXd0kXFsozaeH6KvkM2nTZYA2c2+aM+kxoUgfYXmMKbcPwoqLhTE4up/no7+eLpyWs8pjXkswPYapR7SnQcoM0BBxViAj/Fg8eiObKhY6DcFLbUHXWYDZo5xZoqtb6VXEOUtALkIk5zYdxcJbyHl3vE7DHsCvb3ZHNXrwQkjtPVhOzyWHP8YwWh+H2AlvMKT7IgtybxkrR+3DqwfCg7FUd+cVUi8nCYKN8yLHc85bYpDIZBAMV9Ops+M+ScQh2rdD2diWtZAM3khwl2MySgG3wTYTLSQnO1yIIEemBUnU4Fh1jJisPCYdKF0wK0hEO4/3AtHmr02F9gKUthV8P2acSiI2ENvqhkyXhRwN9nn/7Bl6CvQrR7EVgsG7LILQM5ehz7BLqNNv5aXsx9A==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(10070799003)(366016)(921020)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?eW0vU0FsbzBHZ0FCdUhhK3BoaVVRVFNNSm1sT1ZvbWF4cEJtWEhldnp5TTZz?=
+ =?utf-8?B?UzZwTEdNd04raWt4eHJ6RUpXOHBMWjgyTktBaVExYThWOU9hQjVwWjNYck10?=
+ =?utf-8?B?eUFrT3VCRlNLT1RaWFh1NkVuYThHTG9QdEZFVGlKNTNXczBiQ1EyRXBGMURV?=
+ =?utf-8?B?TkRhYWpYNU10V2pFVlJwaGRwcEp1UXZ4aUdCbVc4WENma3BoeExVeDlZYTFp?=
+ =?utf-8?B?VzNHVUx6NkR2OXpIVFJ1NGJqcFU5c2xWK3lKbmJTeENiTVE4QjY0c1JlTG1Z?=
+ =?utf-8?B?UlNmSGM1bnlrOWpnMUlIbGZKUktKVitZYmlVenpCUE5yc2QyaExHOFNuZDJY?=
+ =?utf-8?B?cGtLNEFIcnZBbmhkT29LYkFyUThQYlc4VUxkcjkwdW5XU3BwVVFORm53Rnly?=
+ =?utf-8?B?NWhJb2pWaU9qVURWTUFpbW5ReEE3dmMrZGQ5Tmx1NHkvRVNVTHZOLzlHV0NH?=
+ =?utf-8?B?UXUxT2F6Q1FMczZRQ1I1VVkxS3lvd255V2kydUQvVVVQMjBBOC9zNFFVc29V?=
+ =?utf-8?B?Nzdtb2xqcXdqVTJVckJVY2xIRHA0b1JNZXpxYmlDcnAxTjIvOGF5YWpZVm01?=
+ =?utf-8?B?QldMdUVjS2paRGlnZzY5VWRaMTQybzYxbEd0TmFTQU8yYnpHeXVoQlpiQXZw?=
+ =?utf-8?B?aHdqZm5UZ0JWK3dXZUQ0c3pLOGYrby9HQ0N1UjdJR243cEQzc3NicDVNTzNh?=
+ =?utf-8?B?ZVllOUlwaG05bzZsdVNFT3d2RFFwNUJIaVlGc3MvM29uTWd6T1BJZjdLbm5M?=
+ =?utf-8?B?VEtBNHdwbWhNMUhCUTdmMTlERGR3bDZ1K0RIOTZMUnhpN0ptRTlmRlhMclZu?=
+ =?utf-8?B?ZUE1SzdWVEI2b084NDlxdWJHbGpoYWI1S3pZOXpZSUxCOTZSZ2JYa3pNVzQ2?=
+ =?utf-8?B?bmIzRVZ1V0Zsd3lHYTA1dnEzNzFaVi96ZzV5TjZxd2V6L2MrSlNLQ1lKWkw3?=
+ =?utf-8?B?bUNQTDdZSDN3UzQ0THpKSHFibjFUb2pQOTd6RnRPekZtZ2pRbUVZbC9yckxG?=
+ =?utf-8?B?K3BXVlQ5aVlEZ0drcW0ybFNRWjJMei9WL2E1YWhWNUNzQk1WcHlzaWJLQTcr?=
+ =?utf-8?B?NlZsWXNRTXBydFo2cDZraGU2QmVXdlhpSGtzMEZoWjRnL1htby9HVVA2Yi9I?=
+ =?utf-8?B?bnBxNVdtb0lwZU94MGVaVjJNM3MvS0Zqc0hHNDgxbTdwQTBjNFRQaUFmZTdR?=
+ =?utf-8?B?TVIrWHA3TjhTTlpVK3o1ZmtZNUg3VkQwN3BwOGpyTTJZQWJoMVZ6N1pJS1Vv?=
+ =?utf-8?B?ZmZubEkvU3BjYkkrNCtWRGk5eVhsTlNjcm1ZOWhXZjhrajNIRkRzcjA4bFp0?=
+ =?utf-8?B?ZFArNU4vU2YzZFRHZmtiWmp0MHJ6RE1Pb1JmaXFjMFZNSlFlVXdRaG5wRERK?=
+ =?utf-8?B?RUxIS3JyVnVCQW4yOU5BV0xPRW96WlhaQTIvS3o4UVQ4bStDWUpDb2dKVEts?=
+ =?utf-8?B?UGRyOHA1SW5vMEkzbkhVTDFLU3hhcEdPYXIzajM1b3JlT2JTeWRxQmdDY3Az?=
+ =?utf-8?B?UmVvRy9aL0UxWGxYOHRNaU5BTk5Pa0lkK29RNW9TeWprS0d6SjI1VFo2dmtG?=
+ =?utf-8?B?QlRnM3ZPRnZjOTdlZGduUUlBTm1sSWFSUmwwUWRxUU93cXdwUEVxNk5FVVg3?=
+ =?utf-8?B?UzhFLytkbCtrUXVxWExzMkpqbWxQL29CdGE5SStBS050cGtNTmFpaDhtcUJY?=
+ =?utf-8?B?TjZLYWxuQ0g4cUl2M0RtdFNsVjdjRVlrVWFuZ3pjaGpua1dXTmF3WTFkVWFT?=
+ =?utf-8?B?Tm95VW5VazU3eVBFbzBQeXF5aEtHZTF5bDAyQUZNNVRUeU1RYzQ0d2g5cWNl?=
+ =?utf-8?B?UXpDdXh6NHFoa0FaMm9hTHdlMW9iVzB0cWRVaFRhSzR1SDNBd2VvTVhTRjI2?=
+ =?utf-8?B?QWpVYis0cGNYYVA0eTBTZG9mR0oyaktyQWVhcmVPMS81c3E2UDVuMndSYU8w?=
+ =?utf-8?B?eWlKSTYvWDBEVEtrZzFiSWNIckpEclcybkl0UGxGOW1DTjNScXBFS0hUbFpN?=
+ =?utf-8?B?QU5ueHVaaVZsOFVUallTWlYxZVA0ZENOZ2tGbWs5OXZKTitocEVBT0Q4U1FO?=
+ =?utf-8?B?ejBRbXJyNEcvNUJGQmFSL2dwV21jYzBIbkxhMGpyVDRGSkZZWTFFZ2p3MEE4?=
+ =?utf-8?B?M0hwa2FOc282N1dMcTVvRXo1MExjZXZycC9DVnhFRUhJN2FNUHRtVWQ2YTl6?=
+ =?utf-8?B?WXNEeUI4SUVqVXVVTXZFK3ovVGF0VndLdURyOSt0Tk1tNG1YL1lSR2VKZzB5?=
+ =?utf-8?B?RXdyUmJUWURQdW9BeFQyYkpySm9pbjdvRFozRkgyNkZoRllMZlVJZTA1enZi?=
+ =?utf-8?B?UW1DMUdjZ1FPVWRGVHorb2ovM0ZNSVg0YUlvSjkvQUFJeG1wRE9vazJsN25o?=
+ =?utf-8?Q?kB836CMiOckYGmIoq4RKPQ1w8VtPZ9xESl8RvixMgwLQv?=
+X-MS-Exchange-AntiSpam-MessageData-1: tt3YyPOeLgKYjw==
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6eacf677-3276-4a47-f955-08de84c53594
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3997.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 08:06:08.3076
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Nrmo06VZpyLwkrXZGUwOgqdUIiIMf6vbiShRMhF8LX5ePDyQDDrAVOouhJIotfOzcDP/itbvyeolmhm0DoGO2A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8197
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	XM_UA_NO_VERSION(0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TAGGED_FROM(0.00)[bounces-79900-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	TAGGED_FROM(0.00)[bounces-79903-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[samsung.com:+];
+	FREEMAIL_TO(0.00)[kernel.org,google.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,garyguo.net,protonmail.com,umich.edu];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[m.szyprowski@samsung.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,samsung.com:dkim,samsung.com:mid]
-X-Rspamd-Queue-Id: 60F5E2B78DE
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,nvidia.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,Nvidia.com:dkim]
+X-Rspamd-Queue-Id: C57382B77D9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Leon,
+nova-core carried its own helper macro to declare register types. Its
+purpose was to be temporary since the beginning, and to serve as a
+testbed to develop an equivalent that could be used kernel-wide.
 
-On 17.03.2026 20:05, Leon Romanovsky wrote:
-> On Mon, Mar 16, 2026 at 09:06:44PM +0200, Leon Romanovsky wrote:
->> Add a new DMA_ATTR_REQUIRE_COHERENT attribute to the DMA API to mark
->> mappings that must run on a DMA‑coherent system. Such buffers cannot
->> use the SWIOTLB path, may overlap with CPU caches, and do not depend on
->> explicit cache flushing.
->>
->> Mappings using this attribute are rejected on systems where cache
->> side‑effects could lead to data corruption, and therefore do not need
->> the cache‑overlap debugging logic. This series also includes fixes for
->> DMA_ATTR_CPU_CACHE_CLEAN handling.
->> Thanks.
-> <...>
->
->> ---
->> Leon Romanovsky (8):
->>        dma-debug: Allow multiple invocations of overlapping entries
->>        dma-mapping: handle DMA_ATTR_CPU_CACHE_CLEAN in trace output
->>        dma-mapping: Clarify valid conditions for CPU cache line overlap
->>        dma-mapping: Introduce DMA require coherency attribute
->>        dma-direct: prevent SWIOTLB path when DMA_ATTR_REQUIRE_COHERENT is set
->>        iommu/dma: add support for DMA_ATTR_REQUIRE_COHERENT attribute
->>        RDMA/umem: Tell DMA mapping that UMEM requires coherency
->>        mm/hmm: Indicate that HMM requires DMA coherency
->>
->>   Documentation/core-api/dma-attributes.rst | 38 ++++++++++++++++++++++++-------
->>   drivers/infiniband/core/umem.c            |  5 ++--
->>   drivers/iommu/dma-iommu.c                 | 21 +++++++++++++----
->>   drivers/virtio/virtio_ring.c              | 10 ++++----
->>   include/linux/dma-mapping.h               | 15 ++++++++----
->>   include/trace/events/dma.h                |  4 +++-
->>   kernel/dma/debug.c                        |  9 ++++----
->>   kernel/dma/direct.h                       |  7 +++---
->>   kernel/dma/mapping.c                      |  6 +++++
->>   mm/hmm.c                                  |  4 ++--
->>   10 files changed, 86 insertions(+), 33 deletions(-)
-> Marek,
->
-> Despite the "RDMA ..." tag in the subject, the diffstat clearly shows that
-> you are the appropriate person to take this patch.
+That equivalent has now been merged, so it is time to retire the
+nova-core local version.
 
-I plan to take the first 2 patches to the dma-mapping-fixes branch 
-(v7.0-rc) and the next to dma-mapping-for-next. Should I also take the 
-RDMA and HMM patches, or do You want a stable branch for merging them 
-via respective subsystem trees?
+The kernel register macro has evolved into something significantly
+different from the one in nova-core, so it cannot be used as a drop-in
+replacement. All declarations and sites using registers need to be
+updated. No semantic change should happen as a result.
 
-Best regards
+All the patches in this series could also be squashed into a single one
+without altering their reviewability significantly. Actually I am
+leaning towards that option since it doesn't make much sense to
+partially convert the driver anyway. I'm leaving it in split state for
+now in case this drives more people towards review. :)
+
+I hope to be able to merge this quickly so we can rebase in-flight
+series to use the updated register syntax.
+
+This series is based on drm-rust-next as of 2026-03-18.
+
+Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
+---
+Alexandre Courbot (8):
+      gpu: nova-core: convert PMC registers to kernel register macro
+      gpu: nova-core: convert PBUS registers to kernel register macro
+      gpu: nova-core: convert PFB registers to kernel register macro
+      gpu: nova-core: convert GC6 registers to kernel register macro
+      gpu: nova-core: convert FUSE registers to kernel register macro
+      gpu: nova-core: convert PDISP registers to kernel register macro
+      gpu: nova-core: convert falcon registers to kernel register macro
+      Documentation: nova: remove register abstraction task
+
+ Documentation/gpu/nova/core/todo.rst               |  76 ---
+ drivers/gpu/nova-core/falcon.rs                    | 336 +++++-----
+ drivers/gpu/nova-core/falcon/gsp.rs                |  27 +-
+ drivers/gpu/nova-core/falcon/hal/ga102.rs          |  73 +-
+ drivers/gpu/nova-core/falcon/hal/tu102.rs          |  12 +-
+ drivers/gpu/nova-core/falcon/sec2.rs               |  17 +-
+ drivers/gpu/nova-core/fb.rs                        |   6 +-
+ drivers/gpu/nova-core/fb/hal/ga100.rs              |  37 +-
+ drivers/gpu/nova-core/fb/hal/ga102.rs              |   7 +-
+ drivers/gpu/nova-core/fb/hal/tu102.rs              |  17 +-
+ drivers/gpu/nova-core/firmware/fwsec/bootloader.rs |  19 +-
+ drivers/gpu/nova-core/gfw.rs                       |  11 +-
+ drivers/gpu/nova-core/gpu.rs                       |  37 +-
+ drivers/gpu/nova-core/gsp/boot.rs                  |  11 +-
+ drivers/gpu/nova-core/gsp/cmdq.rs                  |   9 +-
+ drivers/gpu/nova-core/regs.rs                      | 616 +++++++++--------
+ drivers/gpu/nova-core/regs/macros.rs               | 739 ---------------------
+ 17 files changed, 685 insertions(+), 1365 deletions(-)
+---
+base-commit: d19ab42867ae7c68be84ed957d95712b7934773f
+change-id: 20260318-b4-nova-register-6908b5118552
+
+Best regards,
 -- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
+Alexandre Courbot <acourbot@nvidia.com>
 
 
