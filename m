@@ -1,167 +1,150 @@
-Return-Path: <linux-doc+bounces-80222-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80223-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EOPaDl0mvGkxtgIAu9opvQ
-	(envelope-from <linux-doc+bounces-80222-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2026 17:37:49 +0100
+	id UCj/AB8ovGkxtgIAu9opvQ
+	(envelope-from <linux-doc+bounces-80223-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2026 17:45:19 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A14E32CEEF4
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2026 17:37:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7D762CF07D
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2026 17:45:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2C257310B93A
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2026 16:28:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 31D0E316622F
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2026 16:29:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31D6C3ED5D4;
-	Thu, 19 Mar 2026 16:28:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CB0C83E3DBD;
+	Thu, 19 Mar 2026 16:29:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="qVsoVvGZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aF5DbFFA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67D323E9F67;
-	Thu, 19 Mar 2026 16:28:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 484BE3ED5B3;
+	Thu, 19 Mar 2026 16:29:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773937727; cv=none; b=ogAoXqhBpH9xATpvHNjNYgW2IyFHyRF2fPKS+B6i/EGvNddEwSda/TEG2CY3t0EO2FOW3BlC6H9FFOeoY2TMBydzVwiehbqyvYaklMvCnFDWFgKHyMr97hbhfDU4fcQPAFsaC6jTzA4AsBk43JIDEEz68nKowyQA1wgx+4zJBr8=
+	t=1773937762; cv=none; b=D2lsa1xovYtGCb9NtzR3iQTVaJ3Zg8MbTH/04ygdW5k8NhtvK++8sVJczlfHNg2izwIIZ4E/JNXUHWb2tZkfKJmul4mZZkoPkESXY94a5HuxZsi9pumopjy2p8BtYLf1ysZQCuZOmoPg3OF1AICivK+r0P50Yvz86NV1zP4cYXE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773937727; c=relaxed/simple;
-	bh=bjOJIOPM/2+acGORPk2A/p5g0k69GeX/tAxVXYIMaxI=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=n/FUIj3LbaN/MuWBGh4U7LsgTmCSycT3Ow0uHIbXuAKka1LIR5ZCwhSKDQiawVYXFoU92YZGMNa7gs4QP6xPKiXsZyCbsRxOaYEWrpcscfoR3kPK1b8sFccKR2yV2zSdHa847E3DXh4rN3l7i63ome5+S/Mv9I7xFFl9bB6Z5nE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=qVsoVvGZ; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from localhost (unknown [20.191.74.188])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 3BEFF20B710C;
-	Thu, 19 Mar 2026 09:28:36 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 3BEFF20B710C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1773937717;
-	bh=H52Zybh5o34dbFpC/ZH35I3IR0TeF3CcjTZ7JtQFu2w=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=qVsoVvGZBgiMTYzcaPymyws/zFtGLAsJuSf42v3omgVhgy4V/7SM/UFdDfZU97k+C
-	 vY11I8eol4oictnvBu/vQMefqoMTn+2RHUiOztqmT14YgkRFwnc3yMPdzePNXNxnxC
-	 Y01VMPNtIKCj5VPxAbfZbdq9ZRMZ8zsrYw0n9y2U=
-Date: Thu, 19 Mar 2026 09:28:35 -0700
-From: Jacob Pan <jacob.pan@linux.microsoft.com>
-To: Vipin Sharma <vipinsh@google.com>
-Cc: David Matlack <dmatlack@google.com>, Alex Williamson <alex@shazbot.org>,
- Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf
- <graf@amazon.com>, Alex Mastro <amastro@fb.com>, Alistair Popple
- <apopple@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>, Ankit
- Agrawal <ankita@nvidia.com>, Bjorn Helgaas <bhelgaas@google.com>, Chris Li
- <chrisl@kernel.org>, David Rientjes <rientjes@google.com>, Jason Gunthorpe
- <jgg@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>, Jonathan Corbet
- <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>, Kevin Tian
- <kevin.tian@intel.com>, kexec@lists.infradead.org, kvm@vger.kernel.org,
- Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-pci@vger.kernel.org, Lukas Wunner <lukas@wunner.de>, =?utf-8?Q?Mich?=
- =?utf-8?Q?a=C5=82?= Winiarski <michal.winiarski@intel.com>, Mike Rapoport
- <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, Pasha Tatashin
- <pasha.tatashin@soleen.com>, Pranjal Shrivastava <praan@google.com>,
- Pratyush Yadav <pratyush@kernel.org>, Raghavendra Rao Ananta
- <rananta@google.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Saeed Mahameed
- <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>, Shuah Khan
- <skhan@linuxfoundation.org>, Thomas =?utf-8?Q?Hellstr=C3=B6m?=
- <thomas.hellstrom@linux.intel.com>, Tomita Moeko <tomitamoeko@gmail.com>,
- Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>,
- Yi Liu <yi.l.liu@intel.com>, Zhu Yanjun <yanjun.zhu@linux.dev>
-Subject: Re: [PATCH v2 10/22] vfio/pci: Skip reset of preserved device after
- Live Update
-Message-ID: <20260319092835.00004887@linux.microsoft.com>
-In-Reply-To: <20260316162518.GB1767448.vipinsh@google.com>
-References: <20260129212510.967611-1-dmatlack@google.com>
-	<20260129212510.967611-11-dmatlack@google.com>
-	<20260226170030.5a938c74@shazbot.org>
-	<aaDqhjdLyf1qSTSh@google.com>
-	<20260227084658.3767d801@shazbot.org>
-	<CALzav=fHy23RAzhgkdaL+JA5T2tL9FT6aPgRfXUh7i9zvYCGPA@mail.gmail.com>
-	<20260227105720.522ca97f@shazbot.org>
-	<CALzav=fjRPa_ZbXu7iFXyemcf_8Kq_dZTWT6c-A0bc6czF_Rdw@mail.gmail.com>
-	<abNOwcOTXqxCxNzt@google.com>
-	<20260313083918.00005731@linux.microsoft.com>
-	<20260316162518.GB1767448.vipinsh@google.com>
-Organization: LSG
-X-Mailer: Claws Mail 3.21.0 (GTK+ 2.24.33; x86_64-w64-mingw32)
+	s=arc-20240116; t=1773937762; c=relaxed/simple;
+	bh=i5FY2xFUG82H2mxUurUo54YyYFYdXZArEFQEN+SDOy0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=TGZv4Sp+knHT+6Rz+pX2vCNpk/eWehpOTuMx7R6RTn9hK6FaNncehrv/xhdEqCLgitypX4AcxkwqYlmq6xR6XSdjXjsu7vkg4E7bo9N9qGDX/9SkUfVSdVDkHV5NX/3WX//aGRAU0S5IXw6OD9asFGyGsR8dR3HENUyJYKl6U/A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aF5DbFFA; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 248A3C19424;
+	Thu, 19 Mar 2026 16:29:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773937761;
+	bh=i5FY2xFUG82H2mxUurUo54YyYFYdXZArEFQEN+SDOy0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=aF5DbFFAnHCvzhvJhT5dGtrQoRtJ9QNrqQlmJnbfZGodcTPOczAfqoQkVJIF/LXmE
+	 NRUWZ3gYSMcre4wgwUNw09xxVKFI5Sgemkg2LAotinZjLLwX4iM1PGYkctTph/RumK
+	 vZbtY4tdz04aVkTwegcY+ogZdGqZvTefi0axkcs96JyYYbbFlBfs82HELbk8bZzpWu
+	 r3XKupXWro4jRmoWCi9Q8Sv10Og+jz9lMJHhwiLehTvhEzP5QW3ShgVjN49nGeFKrY
+	 HHr/eCyrr+oVH6Ygchgg5RWipe/5nmkCpI4UsgYg0JGgzQb2ofwBsZCXqUHlfYYlJr
+	 B/ySfzNIrgg5Q==
+Date: Thu, 19 Mar 2026 16:29:19 +0000
+From: "Lorenzo Stoakes (Oracle)" <ljs@kernel.org>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Clemens Ladisch <clemens@ladisch.de>, 
+	Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	"K . Y . Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>, 
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
+	Bodo Stroesser <bostroesser@gmail.com>, "Martin K . Petersen" <martin.petersen@oracle.com>, 
+	David Howells <dhowells@redhat.com>, Marc Dionne <marc.dionne@auristor.com>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+	David Hildenbrand <david@kernel.org>, "Liam R . Howlett" <Liam.Howlett@oracle.com>, 
+	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Michal Hocko <mhocko@suse.com>, 
+	Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-hyperv@vger.kernel.org, 
+	linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, 
+	linux-mtd@lists.infradead.org, linux-staging@lists.linux.dev, linux-scsi@vger.kernel.org, 
+	target-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-fsdevel@vger.kernel.org, 
+	linux-mm@kvack.org, Ryan Roberts <ryan.roberts@arm.com>
+Subject: Re: [PATCH v2 06/16] mm: add mmap_action_simple_ioremap()
+Message-ID: <939645bf-50c3-47bd-8132-89acf95056c5@lucifer.local>
+References: <cover.1773695307.git.ljs@kernel.org>
+ <1e58aaf3cdb61cc317d890c12c9a558dfc206913.1773695307.git.ljs@kernel.org>
+ <CAJuCfpGocCSRT0yDxPOLg2NZ+W_ZSTjHGPZRKBd3U90=sQtHCw@mail.gmail.com>
+ <330f3614-7dc1-4e80-96c4-8472b25108bb@lucifer.local>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <330f3614-7dc1-4e80-96c4-8472b25108bb@lucifer.local>
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80222-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[google.com,shazbot.org,nvidia.com,amazon.com,fb.com,linux-foundation.org,kernel.org,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,wunner.de,soleen.com,linuxfoundation.org,linux.intel.com,gmail.com,linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[44];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-80223-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jacob.pan@linux.microsoft.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[linux-foundation.org,lwn.net,ladisch.de,arndb.de,linuxfoundation.org,microsoft.com,kernel.org,linux.intel.com,gmail.com,foss.st.com,bootlin.com,nod.at,ti.com,oracle.com,redhat.com,auristor.com,zeniv.linux.org.uk,suse.cz,suse.com,google.com,suse.de,vger.kernel.org,st-md-mailman.stormreply.com,lists.infradead.org,lists.linux.dev,kvack.org,arm.com];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.microsoft.com:+];
-	NEURAL_HAM(-0.00)[-0.999];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.970];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ljs@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.microsoft.com:dkim,linux.microsoft.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A14E32CEEF4
+	RCPT_COUNT_TWELVE(0.00)[44];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: B7D762CF07D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Vipin,
-
-On Mon, 16 Mar 2026 09:28:32 -0700
-Vipin Sharma <vipinsh@google.com> wrote:
-
-> On Fri, Mar 13, 2026 at 08:39:18AM -0700, Jacob Pan wrote:
-> > Hi David,
-> >  =20
-> > > +config VFIO_PCI_LIVEUPDATE
-> > > +       bool "VFIO PCI support for Live Update (EXPERIMENTAL)"
-> > > +       depends on LIVEUPDATE && VFIO_PCI
-> > > +       help
-> > > +         Support for preserving devices bound to vfio-pci across
-> > > a Live
-> > > +         Update. The eventual goal is that preserved devices can
-> > > run
-> > > +         uninterrupted during a Live Update, including DMA to
-> > > preserved
-> > > +         memory buffers and P2P. However there are many steps
-> > > still needed to
-> > > +         achieve this, including:
+On Wed, Mar 18, 2026 at 08:39:25PM +0000, Lorenzo Stoakes (Oracle) wrote:
+> On Mon, Mar 16, 2026 at 09:14:28PM -0700, Suren Baghdasaryan wrote:
+> > > +int simple_ioremap_prepare(struct vm_area_desc *desc)
+> > > +{
+> > > +       struct mmap_action *action = &desc->action;
+> > > +       const phys_addr_t start = action->simple_ioremap.start_phys_addr;
+> > > +       const unsigned long size = action->simple_ioremap.size;
+> > > +       unsigned long pfn;
+> > > +       int err;
 > > > +
-> > > +          - Preservation of iommufd files
-> > > +          - Preservation of IOMMU driver state =20
-> > In the interim, what do you think about moving forward with noiommu
-> > mode without preserving IOMMU driver state? I=E2=80=99ve tested your
-> > vfio_pci_liveupdate_kexec_test with the noiommu cdev, and it works
-> > as expected.
-> >  =20
->=20
-> Just curious, are you using qemu VM without iommu device for noiommu
-> work or do you have actual system without iommu hardware for testing?
+> > > +       err = __simple_ioremap_prep(desc->start, desc->end, desc->pgoff,
+> > > +                                   start, size, &pfn);
+> > > +       if (err)
+> > > +               return err;
+> > > +
+> > > +       /* The I/O remap logic does the heavy lifting. */
+> > > +       mmap_action_ioremap(desc, desc->start, pfn, vma_desc_size(desc));
+> >
+> > nit: Looks like a perfect opportunity to use mmap_action_ioremap_full() here.
+>
+> Yeah can do!
+>
+> >
+> > > +       return mmap_action_prepare(desc);
+> >
+> > Ok, so IIUC this uses recursion:
+> > mmap_action_prepare(MMAP_SIMPLE_IO_REMAP) -> simple_ioremap_prepare()
+> > -> mmap_action_prepare(MMAP_IO_REMAP_PFN).
+>
+> Yep, it's one level, I think that should be ok? :)
 
-I am using a qemu VM without iommu device and with an assigned
-nvme device. I use a low level nvme userspace driver (modified to use
-iommufd noiommu mode) for testing.
-https://github.com/SamsungDS/libvfn
+On second thoughts, it's silly not just to call io_remap_pfn_range_prepare()
+direct so will change it to do that!
+
+Cheers, Lorenzo
 
