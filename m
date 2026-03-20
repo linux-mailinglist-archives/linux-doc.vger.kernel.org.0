@@ -1,191 +1,146 @@
-Return-Path: <linux-doc+bounces-80357-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80358-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iIeSHIJkvWlF9gIAu9opvQ
-	(envelope-from <linux-doc+bounces-80357-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:15:14 +0100
+	id QDsjKj1mvWlF9gIAu9opvQ
+	(envelope-from <linux-doc+bounces-80358-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:22:37 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C757D2DC73B
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:15:13 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BA312DC949
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:22:37 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7CD30306160C
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 15:10:44 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 107C330E02E8
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 15:17:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8370A3C65F2;
-	Fri, 20 Mar 2026 15:10:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 423213C73D6;
+	Fri, 20 Mar 2026 15:17:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="18ungp06";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="TORfhQ+f"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sAZHewiW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2C593C197D;
-	Fri, 20 Mar 2026 15:10:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BF713B2FD4;
+	Fri, 20 Mar 2026 15:17:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774019442; cv=none; b=uVoEFOMmAOEFw8o3gbV4ccXP73nl2T26cdIr01REZkzD/BCl7BT8B3enszH98ZEvU6idLdcP09rQ0FgZPYz4YF30YaKP1oazbXisgnVX+wubEzxmz5AUE5615wQQYOfj5OApPKee1z7W+6rV5Z8+fOo9zV6mzhw9GDlKoQQqf/c=
+	t=1774019857; cv=none; b=Ufe3RVllwxMG+gBDOnireHm4wggBgi3B0WVZoqEgW0Y5X2CJKXjiMHviEqLWEX6Qhk9nS8MxfiLAaq9gOPObPB04nOvdsbc99YRIoYXqyY8+4YJnXd9dCK7pb73Og+GPSjEoSD+OD/RQyw9MBb+CoHx8AJ0WbG9zXYjTNL0zmuo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774019442; c=relaxed/simple;
-	bh=njJWv7fz4vXHfHKJnmQikydvMzaXur1DqYPxOXLvlLM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WR9CUOIH4MNGGuGSLW9Ikd9CuS5dqbBNAL3PM+NJHJ0E++Gfrk+Ds+u9LBdMTGtSEdkk+xucwubiK0Yw3HcMhCkkYisdCUptGklovSMv2xRPNyJDi5hEvdol9t92tJGatlUoUcFkK9Nux7YtGMohe0yc/TRSmz5fl+K+oNyFbvM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=18ungp06; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=TORfhQ+f; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-Date: Fri, 20 Mar 2026 16:10:36 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1774019438;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HWBVSEpos7FQ8DFkU1FmzKeQFzCmk02Cl03mGiGtqr8=;
-	b=18ungp06fGdgLZ59gT+0rQ88DAmo+w4QLZ8+AEJcWXCzkozviq6VinTWtihjYID84LYUfI
-	tznNGl0GMB7he1rS06kIgpoQ+XosUsh+yDNPfGX1FoBEWZkVUGOO7Av/yHlaCdS1O8fgiq
-	Byj2tWIVOH7p6ulnjiNZdQhCiXWuRpkWQ7Xho5VE3dk41lFJ6nVsVmfioBgtkU21fDhLyO
-	zsQ8vyGTmrJLjMVlUMmHjT3mlVudWh7hbJ/z7jMlSfmZ4wcV6BJRkqSYIz+UT5mfacRqg/
-	pODLC0xPtevXKFhBF7+MGLtgMfuMIpphcQJST8oncIVuvJdYPn/ASQ7atMomww==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1774019438;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HWBVSEpos7FQ8DFkU1FmzKeQFzCmk02Cl03mGiGtqr8=;
-	b=TORfhQ+f0H09xwzzZRl00iTQnPuJckk2uSHkC/VRQtuRAaVFttjupI76nukCEWiALTRg+N
-	oi7/EtDZiDxSd4Cg==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Frederic Weisbecker <frederic@kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>,
-	Anna-Maria Behnsen <anna-maria@linutronix.de>,
-	Gabriele Monaco <gmonaco@redhat.com>,
-	Ingo Molnar <mingo@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Marcelo Tosatti <mtosatti@redhat.com>,
-	Marco Crivellari <marco.crivellari@suse.com>,
-	Michal Hocko <mhocko@kernel.org>,
-	"Paul E . McKenney" <paulmck@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>, Phil Auld <pauld@redhat.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Valentin Schneider <vschneid@redhat.com>,
-	Vlastimil Babka <vbabka@suse.cz>, Waiman Long <longman@redhat.com>,
-	linux-doc@vger.kernel.org, John Ogness <john.ogness@linutronix.de>
-Subject: Re: [PATCH] doc: Add CPU Isolation documentation
-Message-ID: <20260320151036.v_Sn93P-@linutronix.de>
-References: <20250809094247.8384-1-frederic@kernel.org>
+	s=arc-20240116; t=1774019857; c=relaxed/simple;
+	bh=grkTVeJT4rKD+G/1Q+egwehQigyFRB+VPVj+azdo7e0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ZPepaTnHOs0xpSjqR1BhAI9kjoR7B8j4nlfP2AZ0mL5IP4vVShP4aiDjmpMVKIt+hiVJnyKb7gqW5g6pLQATGf7KhqWqtM+GJ7CFQnYurfESYiWNYUTTOOULrcHqxQwEi1CKE+HgPLOkdUxVlnYkF7sad3dfRIbfYyj6d6pnWTA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sAZHewiW; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D489C4CEF7;
+	Fri, 20 Mar 2026 15:17:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774019856;
+	bh=grkTVeJT4rKD+G/1Q+egwehQigyFRB+VPVj+azdo7e0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=sAZHewiWExVTt/zyFbzLIdCJD/bpTcUx3fFXkZjbR6wKEsW7ip/YwFCzNC3CwykXJ
+	 w5UpXWdWe93cL6g+gJP9CVwYzxK8GOTOvJ3lF6Wf0AI99wfokjkUr4VCd2AJBtj7AD
+	 pa5VlsXzi8qcT9RN/YdnAypXmVremhTxo3nY7+Ttpxh1U/0D3oBJUqjmUzn2ju/SAl
+	 6YEffy743Q1F9GS390x2hrnmTUIitsfIoIPLHulvQOHVVDK8kDbIn6CoF0Pfx8KynQ
+	 iVY/NTMjmlGIlL3O8xkQBxLmSg5GkZSjX0JEmvcvLlPOD9x/FCx97QX8Gu/v4cDPrQ
+	 hQJlnR4iloMjQ==
+From: SeongJae Park <sj@kernel.org>
+To: SeongJae Park <sj@kernel.org>
+Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [RFC PATCH v2 03/10] Docs/mm/damon/design: update for context pause/resume feature
+Date: Fri, 20 Mar 2026 08:17:28 -0700
+Message-ID: <20260320151729.99156-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260319052157.99433-4-sj@kernel.org>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20250809094247.8384-1-frederic@kernel.org>
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80357-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DKIM_TRACE(0.00)[linutronix.de:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bigeasy@linutronix.de,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-80358-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.990];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-0.970];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: C757D2DC73B
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 0BA312DC949
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2025-08-09 11:42:47 [+0200], Frederic Weisbecker wrote:
-> --- /dev/null
-> +++ b/Documentation/admin-guide/cpu-isolation.rst
-> @@ -0,0 +1,338 @@
-You could start with
+On Wed, 18 Mar 2026 22:21:46 -0700 SeongJae Park <sj@kernel.org> wrote:
 
-=2E. SPDX-License-Identifier: GPL-2.0
+> Update DAMON design document for the context execution pause/resume
+> feature.
+> 
+> Signed-off-by: SeongJae Park <sj@kernel.org>
+> ---
+>  Documentation/mm/damon/design.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+> index 838b14d225193..e2e4fe3fb3986 100644
+> --- a/Documentation/mm/damon/design.rst
+> +++ b/Documentation/mm/damon/design.rst
+> @@ -19,6 +19,13 @@ types of monitoring.
+>  To know how user-space can do the configurations and start/stop DAMON, refer to
+>  :ref:`DAMON sysfs interface <sysfs_interface>` documentation.
+>  
+> +Users can also request each context execution to be paused and resumed.  When
+> +it is paused, the kdamond does nothing but only online parameters updates
+> +including resume request handling.
 
-at the top.
+Sashiko comment
+(https://sashiko.dev/#/patchset/20260319052157.99433-4-sj@kernel.org) below.
 
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +CPU Isolation
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=E2=80=A6
-> +Interface
-> +~~~~~~~~~
-> +
-> +- :ref:`Documentation/admin-guide/cgroup-v2.rst <Cpuset v2 "isolated"
-> +  partitions>`
+: This isn't a bug, but the phrasing "does nothing but only online parameters
+: updates" is a bit awkward. Could this be reworded for clarity, perhaps to
+: something like "does nothing other than apply online parameter updates"?
 
-I've been told by Jonathan once to just use the .rst file without
-anything around it and the HTML render will make the link on its own.
+I pretty sure Sashiko is more English fluent than I.  But, shouldn't
+'s/apply/applying/' ?  I will update the sentence to "When it is paused, the
+kdamond does nothing other than applying online parameter update" in the next
+revision.
 
-=E2=80=A6
 
-> +Tradeoffs
-> +~~~~~~~~~
-> +
-> +In terms of cost, this is the most invasive isolation feature. It is
-> +assumed to be used when the workload spends most of its time in
-> +userspace and doesn't rely on the kernel except for preparatory
-> +work because:
-> +
-> +- RCU is slower due to the locked, offloaded and threaded callbacks
-> +  processing (the same that would be obtained with "rcu_nocb=3D" boot
-> +  parameter).
+Thanks,
+SJ
 
-You mean the callback invocation is delayed? It shouldn't affect grace
-period handling and so on.
-
-=E2=80=A6
-
-> +Checklist
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +You have set up each of the above isolation features but you still
-> +observe jitters that trash your workload? Make sure to check a few
-> +elements before proceeding.
-> +
-> +Some of these checklist items are similar to those of real time
-> +workloads:
-> +
-> +- Use mlock() to prevent your pages from being swapped away. Page
-> +  faults are usually not compatible with jitter sensitive workloads.
-> +
-> +- Avoid SMT to prevent your hardware thread from being "preempted"
-> +  by another one.
-> +
-> +- CPU frequency changes may induce subtle sorts of jitter in a
-> +  workload. Cpufreq should be used and tuned with caution.
-> +
-> +- Deep C-states may result in latency issues upon wake-up. If this
-> +  happens to be a problem, C-states can be limited via kernel boot
-> +  parameters such as processor.max_cstate or intel_idle.max_cstate.
-> +
-
-I intended to make a similar list similar to this for the real time part
-but it somehow faded away. There is now the idea to identify kernel
-options which are not so optimal which include CPU frequency for
-instance. The requirements here are should be the same.
-
-Sebastian
+[...]
 
