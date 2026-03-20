@@ -1,175 +1,164 @@
-Return-Path: <linux-doc+bounces-80374-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80393-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2NdCMN92vWmt9wIAu9opvQ
-	(envelope-from <linux-doc+bounces-80374-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:33:35 +0100
+	id kPr7FCt/vWnH+QIAu9opvQ
+	(envelope-from <linux-doc+bounces-80393-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 18:08:59 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 528BE2DD74D
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:33:35 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01F0B2DE4B0
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 18:08:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6A90430C74E9
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:27:59 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 81126306790A
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:58:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCBA83D331B;
-	Fri, 20 Mar 2026 16:27:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15E7F3B3882;
+	Fri, 20 Mar 2026 16:58:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CgfXYUtv"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="hbbomBaG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64E1A3D1CB5;
-	Fri, 20 Mar 2026 16:27:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA84C282F32;
+	Fri, 20 Mar 2026 16:58:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774024053; cv=none; b=gP/8fBW4vq95CtsEYE9i22+vki7TF0GoAbTAYNkrphZNsl9lB8tvWlgrTIQhCUtU5+lgE6JSC+czQw83aa/yYQhGmZZAt++C7Ruaz5iLpQDwD8C64G5ToqepQtIy1ZQz4d4guf6drZ0uyUIP7seqt1S1ZdkB1uGRfVwf1vyixAY=
+	t=1774025934; cv=none; b=mThafek9IxHqIOAvKOilYjPovNUGqRtjVku6JHTyTTt4wnTzs5gWifWcVtec/IqksHlzZJmgd3jJHo3MgmpWoiO3kMYL/rAxstBuBJEVxk9GTdUcgGsafnFGtoZXjeIp6k4u7qYHL/Z2s7zm3UFE/LK0poD/x/Y+tOBbuV7LqDQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774024053; c=relaxed/simple;
-	bh=9B+csSwynGBtD47HQVlSlvUhKYSoSrYkjk2oqbGoZOQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=im1Jr46YVAq3JlNCsv/NGIEe39y9ZTr0MFt5FaXczUdSWuVA2Zt1pisKWDn1UROqCNrX+3btIwX2ciZKi0Cm6d20vmqe6j6+cVHqRTMoJOJjl+ynNio5Lf+q28OilPLrk9FeeMDODFuFQVucmxgsKbnztjmFsk8lox6ytW/uQGE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CgfXYUtv; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4533CC2BCB8;
-	Fri, 20 Mar 2026 16:27:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774024053;
-	bh=9B+csSwynGBtD47HQVlSlvUhKYSoSrYkjk2oqbGoZOQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=CgfXYUtvYDcCTyQaxmRu1/fkAhl0fRRp58SpIl4fK9p38QB3acojKEkCbrna6zrfx
-	 Nn1rrF8wQnitmq0TugPqPhwNy6KT+nMBaBY3CPiZwbgIoXM+DnDKGfcypCtENlabV/
-	 wa+WErplX3t44i+c5DdkVdlHGaXbTBOfDBqdShZYmQr2wETWnpIqo3GjEfD4TJ8Tpz
-	 U/DPUuC5yyTjyqQ3BICIQAyq8QNhxDVPwmKYTmt4UbqAsIPkdwLwQ+Jp9LObJNS5j3
-	 N9Fwl5Noy/I8/6kPU7dQAciX3YjBBoJ+9uvn4YIF2mcCFeLJkIPCJTg0MqVmtUeIF6
-	 FROb+Xojr4V7w==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C3BD10987A4;
-	Fri, 20 Mar 2026 16:27:33 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Fri, 20 Mar 2026 16:27:34 +0000
-Subject: [PATCH v9 9/9] Documentation: ABI: testing: add common ABI file
- for iio/frequency
+	s=arc-20240116; t=1774025934; c=relaxed/simple;
+	bh=qk4VTItA9agI286S1iP+qevIWA8krtccqNwzrRb/aBc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=XxSeBYnHs9La7qvLESOuy+dS9xQm4uwPoe8U5JdrhRCeEOf9tZ+VoTl7wCxaWUjCXR8xXaNICc7gHZ4Z83d27bFaCJ0C7FNdlNbyFgIGmwPAvgEY2piLcVsVl2eLiHLYOElqZvhr57ZczxVvrU/sSuWBGj/gghOHwoOMV6RdItA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=hbbomBaG; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from [192.168.1.10] (c-67-168-176-124.hsd1.wa.comcast.net [67.168.176.124])
+	by linux.microsoft.com (Postfix) with ESMTPSA id C8BF020B6F01;
+	Fri, 20 Mar 2026 09:58:51 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C8BF020B6F01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1774025932;
+	bh=b9xAtUsCFiluKTtH26H8O3XHZI6EJ/ehZH7lQahfIjQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=hbbomBaG9iUX0poRNazn0EpjyMaYnwQ8FdgPCFFgEYLn4t4eYdItUkhHQhUjzzHOY
+	 4O8KsMbGs0F8oV3DNE5pr2FifvoieCZvhNPO1Uu1B3vCb+lPfHpbrvUZZTxQTSw7CC
+	 +CUhAFCKwBDOlFzwAsHscApToMRM0VcW7G0Waze8=
+Message-ID: <c9258708-2db2-4c08-998f-e67a681781da@linux.microsoft.com>
+Date: Fri, 20 Mar 2026 09:58:52 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260320-adf41513-iio-driver-v9-9-132f0d076374@analog.com>
-References: <20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com>
-In-Reply-To: <20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com>
-To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
- Sergey Senozhatsky <senozhatsky@chromium.org>, 
- Shuah Khan <skhan@linuxfoundation.org>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774024051; l=2210;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=OhPLAamt4hmbeCatH+/iPHehi/HIntujTnWeOacWI/A=;
- b=gLzhWryg6m+oV9bqr+TQj+jLfDlPUCot3iUaeFycI+CTtIlhW7ks7pcWSG3gL4t6xdeJqnGG4
- msaFVCqE+P4AXpivuIPtTbe/wHf49VyvzsRmkdSEuvU+xqw7+nsUbP5
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] ima: Add support for staging measurements for
+ deletion
+To: Mimi Zohar <zohar@linux.ibm.com>,
+ Roberto Sassu <roberto.sassu@huaweicloud.com>, corbet@lwn.net,
+ skhan@linuxfoundation.org, dmitry.kasatkin@gmail.com,
+ eric.snowberg@oracle.com, paul@paul-moore.com, jmorris@namei.org,
+ serge@hallyn.com
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org,
+ gregorylumen@linux.microsoft.com, nramas@linux.microsoft.com,
+ Roberto Sassu <roberto.sassu@huawei.com>,
+ steven chen <chenste@linux.microsoft.com>
+References: <20260311171956.2317781-1-roberto.sassu@huaweicloud.com>
+ <20260311171956.2317781-3-roberto.sassu@huaweicloud.com>
+ <587e11bf4d29552bbbfc029f716146e8ebfca1eb.camel@linux.ibm.com>
+ <25e0a273-9044-4e0d-9812-0171ec99e1b7@linux.microsoft.com>
+ <ffe1d4645a66a690892163be8e16c4b5d24a690d.camel@linux.ibm.com>
+Content-Language: en-US
+From: steven chen <chenste@linux.microsoft.com>
+In-Reply-To: <ffe1d4645a66a690892163be8e16c4b5d24a690d.camel@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
+	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80374-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80393-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[linux.ibm.com,huaweicloud.com,lwn.net,linuxfoundation.org,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-0.997];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,analog.com:replyto,analog.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 528BE2DD74D
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.989];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[chenste@linux.microsoft.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.microsoft.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,linux.microsoft.com:dkim,linux.microsoft.com:mid]
+X-Rspamd-Queue-Id: 01F0B2DE4B0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On 3/20/2026 5:41 AM, Mimi Zohar wrote:
+> On Thu, 2026-03-19 at 14:31 -0700, steven chen wrote:
+>
+>>> - Support for deleting N measurement records (and pre-pending the remaining
+>>> measurement records)
+>> Is there any problem to bring work of "stage" step together to the
+>> deletion step?
+>>
+>> "Trim N" method does everything that "staged" method can do, right?
+>> what's the "stage" method can do but "trim N" method can't do?
+>>
+>> in user space, if in "staged" state, no other user space agent can
+>> access the IMA measure list, right?
+>>
+>> Could you explain the benefit of bringing the "stage" step?
+> The performance improvement is because "staging" the IMA measurement list takes
+> the lock in order to move the measurement list pointer and then releases it.
+> New measurements can then be appended to a new measurement list.  Deleting
+> records is done without taking the lock to walk the staged measurement list.
+>
+> Without staging the measurement list, walking the measurement list to trim N
+> records requires taking and holding the lock.  The performance is dependent on
+> the size of the measurement list.
+>
+> Your question isn't really about "staging" the measurement list records, but
+> requiring a userspace signal to delete them.  To answer that question, deleting
+> N records (third patch) could imply staging all the measurement records and
+> immediately deleting N records without an explicit userspace signal.
+>
+> I expect the requested "documentation" patch will provide the motivation for the
+> delayed deletion of the measurement list.
+>
+> Mimi
 
-Add ABI documentation file for PLL/DDS devices with frequency_resolution
-sysfs entry attribute used by both ADF4350 and ADF41513.
+"Staging" is great on reducing kernel IMA measurement list locking time.
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/ABI/testing/sysfs-bus-iio-frequency         | 11 +++++++++++
- Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350 | 10 ----------
- 2 files changed, 11 insertions(+), 10 deletions(-)
+How about just do "stage N" entries and then delete the staged list in 
+one shot?
+It means merge two APIs into one API
+     int ima_queue_stage(void)
+     int ima_queue_delete_staged(unsigned long req_value)
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-new file mode 100644
-index 000000000000..1ce8ae578fd6
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-@@ -0,0 +1,11 @@
-+What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
-+KernelVersion:	6.20
-+Contact:	linux-iio@vger.kernel.org
-+Description:
-+		Stores channel Y frequency resolution/channel spacing in Hz for PLL
-+		devices. The given value directly influences the operating mode when
-+		fractional-N synthesis is required, as it derives values for
-+		configurable modulus parameters used in the calculation of the output
-+		frequency. It is assumed that the algorithm that is used to compute
-+		the various dividers, is able to generate proper values for multiples
-+		of channel spacing.
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350 b/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
-index 1254457a726e..76987a119feb 100644
---- a/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
-@@ -1,13 +1,3 @@
--What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
--KernelVersion:	3.4.0
--Contact:	linux-iio@vger.kernel.org
--Description:
--		Stores channel Y frequency resolution/channel spacing in Hz.
--		The value given directly influences the MODULUS used by
--		the fractional-N PLL. It is assumed that the algorithm
--		that is used to compute the various dividers, is able to
--		generate proper values for multiples of channel spacing.
--
- What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_refin_frequency
- KernelVersion:	3.4.0
- Contact:	linux-iio@vger.kernel.org
+The kernel lock time will be the same. And user space lock time will be 
+reduced.
 
--- 
-2.43.0
+Thanks,
 
+Steven
+
+>
+>
+>
+>
+>
 
 
