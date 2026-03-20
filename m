@@ -1,52 +1,55 @@
-Return-Path: <linux-doc+bounces-80391-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80364-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IPs4H4d5vWmt9wIAu9opvQ
-	(envelope-from <linux-doc+bounces-80391-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:44:55 +0100
+	id sJliIY51vWmt9wIAu9opvQ
+	(envelope-from <linux-doc+bounces-80364-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:27:58 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11E892DDE97
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:44:54 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C7072DD527
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:27:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 303B4323FE9A
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:32:02 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 33ECC3026935
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:27:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55B713D9DC1;
-	Fri, 20 Mar 2026 16:28:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB1753D092C;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XXskUXJp"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uTGyE+Jk"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E2E93D9DBE;
-	Fri, 20 Mar 2026 16:28:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5CF43D0903;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774024101; cv=none; b=Bty032aJT8JKmLKVvqwLvdvPoxj0ThjbfDO/+KLM8VOsb4XO0kk3/NGqQfV0jSsjIbt0yjUKKjvQmP4kjuLpQNulOpPdjjA//74EgLbjWDDiZA58UxAXI0vRKiRedAzzkBHF66R0IOft6+Mfz9d5DsAuRKDwj3xMO6oO34ZzVdg=
+	t=1774024052; cv=none; b=Z4DpXjyGKLVGm+w3Pk15mIGuhRJOiXiwRbVSzbV9O5zuM+W5KK2tH1jqpy+jFQtuytlw8gMMDtTpf6MlkfByMVp/dKZqA2cgP7u7yCBv2pGR437qmpPCePDPnnvK2g4Th64h51IttEpbTigh0XRc0uYZy0gVVMvMXUozF7WHoSM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774024101; c=relaxed/simple;
-	bh=pmYtpOxkhTjqRgGaAdFbUe+w3uLXCN7Sf0CtbEDxy8k=;
+	s=arc-20240116; t=1774024052; c=relaxed/simple;
+	bh=Je7LTujmkSLqZtXZHQzQccgFgxnm4h0wNIDEYpPWAx4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=lUQKDVW53y7IdCItS8g6YZ/2ZzvKOGExHCU7TLBHrnR81VYa/gNwaBtmiWeG3oHmz6OQq8RTvadm2RgSXv3xfLdwfow0I/LXz1F2HpnOWdNSJtH/dfZn9djdgT9DziYwKMd0HSvzNhld6D0a7JS3TzRZ3DrtyT1xMAM+U6QsDm8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XXskUXJp; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83FD7C2BCAF;
-	Fri, 20 Mar 2026 16:28:20 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=k0gI3DPYpbSVizgio+f5MzxBileS9BHpXJ7g2a9DHStUmUnk0qq1cFKgfmdkrmi+l/fCau2pSIjyRmAVmZFyAdzRnkhDY5jncDkJOe3F81eh0clGTwa3F5PPPnnCO9U2cFRIMVsQw718ZgJqhx6gvuZHD8P5uoKUAatyb3iAewk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uTGyE+Jk; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7E1BFC2BC87;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774024101;
-	bh=pmYtpOxkhTjqRgGaAdFbUe+w3uLXCN7Sf0CtbEDxy8k=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=XXskUXJpKATeGmtvitsgPaTOhTUu5xmAeLwf4Rv2975NoU4vV23dp2mdYGXScbmg4
-	 dPtANbDCjddD/YNGwgzLMWhMi44Ty1P87hJfryUIO1qODAn1eHmURB8ARD0Ns3HKw8
-	 hyrmeXuU5QjbC6hT3c7/q2ReDUd8h1MXU+VQX11/xiXIIHs6DuLk1Zznx1Lu/xL7my
-	 gcDafOtz+OuvBxlkK1PQY+8w5uXP57lLbkqiCqJG2g7sSPQmi+yc63TS0VU0/wYRh9
-	 mxXcRMZVlNup+GovhLVEUapSR2A1eEnJcgJxmKAWF59YTtgFNFHcO1OOZ0+U+RLTiA
-	 35USEatx6KnCA==
-From: Maxime Ripard <mripard@kernel.org>
-Date: Fri, 20 Mar 2026 17:27:26 +0100
-Subject: [PATCH v2 19/20] drm/tidss: Convert to atomic_create_state
+	s=k20201202; t=1774024052;
+	bh=Je7LTujmkSLqZtXZHQzQccgFgxnm4h0wNIDEYpPWAx4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=uTGyE+JkLlPb8FKHcLAGwHlP6NhFJl0WpNLCNK8WwuI52sLkbEqHzwpWhOUdFMloA
+	 iXit1uYxdSgM6o9s3Y8fcJ65IdtA0DU18ny1IeqSDpJDzVWeSNrRBn58MGZAD4nGrZ
+	 m9HhfRQ33t6bUAkcj0lT7piRKEJa4LbxgrVPmG03/yeWV6W0y8fCPHMyS4q2Ly7d3B
+	 d55lc1zrkbozFKQ4Fe+b4VlmcE8VRLFIShp14OivP+iFkM030Yc4aBMmc4B2NquWKG
+	 o0rPH9OAMaeyuMMC3+IWrZ8HMRhbgMaWSJr7JiUKGFtA5mGUpr2ecp3cp/dT0oHvi+
+	 Cx9XoH3SWDGBA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7477D10987A8;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Date: Fri, 20 Mar 2026 16:27:26 +0000
+Subject: [PATCH v9 1/9] dt-bindings: iio: frequency: add adf41513
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,161 +58,326 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260320-drm-mode-config-init-v2-19-c63f1134e76c@kernel.org>
-References: <20260320-drm-mode-config-init-v2-0-c63f1134e76c@kernel.org>
-In-Reply-To: <20260320-drm-mode-config-init-v2-0-c63f1134e76c@kernel.org>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
+Message-Id: <20260320-adf41513-iio-driver-v9-1-132f0d076374@analog.com>
+References: <20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com>
+In-Reply-To: <20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com>
+To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+ Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
  Shuah Khan <skhan@linuxfoundation.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Jyri Sarha <jyri.sarha@iki.fi>, 
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
- Andrzej Hajda <andrzej.hajda@intel.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Simon Ser <contact@emersion.fr>, Harry Wentland <harry.wentland@amd.com>, 
- Melissa Wen <mwen@igalia.com>, Sebastian Wick <sebastian.wick@redhat.com>, 
- Alex Hung <alex.hung@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, Chen-Yu Tsai <wens@kernel.org>, 
- Samuel Holland <samuel@sholland.org>, 
- Dave Stevenson <dave.stevenson@raspberrypi.com>, 
- =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>, 
- Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
-Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Daniel Stone <daniels@collabora.com>, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
- Maxime Ripard <mripard@kernel.org>, 
- Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3205; i=mripard@kernel.org;
- h=from:subject:message-id; bh=pmYtpOxkhTjqRgGaAdFbUe+w3uLXCN7Sf0CtbEDxy8k=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDJl7S3MOJ1UVPcx5/V/NscVk9ew/F+9cjj96jOPPZQlhj
- 5PX97du65jKwiDMySArpsjyRCbs9PL2xVUO9it/wMxhZQIZwsDFKQATCT3LWGd8TpE5ds5KybS3
- BZ83Ligt7trfsMhq138za5PYvrUSDq91u1nMyrbw3/SM28edkjb9IGPDY7VWBl6REM2Nq9isSwr
- 84me5aAltmcgye8OFH2bpL6c/vyNh1zpFQ1RbnEfx7jSPIzcA
-X-Developer-Key: i=mripard@kernel.org; a=openpgp;
- fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
+ Rodrigo Alencar <rodrigo.alencar@analog.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774024051; l=9281;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=4Hl6eJr1otWGgODbMYmIlLBwYdB04tVhvMYABjcX1S8=;
+ b=91kd9Bq0X0tqT/sb6hdlzYx3D06cWhNO6LPDLCtWtWSRYscw4fzzNCPYwSkIhm0r8CPEzYwPo
+ dWnTfwyXgwBC6pJSxx5hpMfIAvMFEVzONsdFelx34tPgzREoB0zAu70
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-80364-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80391-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[39];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ideasonboard.com:email]
-X-Rspamd-Queue-Id: 11E892DDE97
+	DBL_PROHIBIT(0.00)[0.0.0.0:email];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	NEURAL_HAM(-0.00)[-0.995];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:email,analog.com:mid,analog.com:replyto,analog.com:url,qualcomm.com:email,devicetree.org:url]
+X-Rspamd-Queue-Id: 3C7072DD527
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Our driver uses reset to create the various object states, but only
-calls the helper that allocate a new state. They are thus strictly
-equivalent to the new atomic_create_state helpers, so let's switch to
-these.
+From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-Signed-off-by: Maxime Ripard <mripard@kernel.org>
+DT-bindings for ADF41513, an ultralow noise PLL frequency synthesizer that
+can be used to implement local oscillators (LOs) as high as 26.5 GHz.
+Some properties are based upon an existing PLL device properties
+(e.g. ADF4350).
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 ---
- drivers/gpu/drm/tidss/tidss_crtc.c  | 17 +++++++----------
- drivers/gpu/drm/tidss/tidss_plane.c |  2 +-
- 2 files changed, 8 insertions(+), 11 deletions(-)
+ .../bindings/iio/frequency/adi,adf41513.yaml       | 215 +++++++++++++++++++++
+ MAINTAINERS                                        |   7 +
+ 2 files changed, 222 insertions(+)
 
-diff --git a/drivers/gpu/drm/tidss/tidss_crtc.c b/drivers/gpu/drm/tidss/tidss_crtc.c
-index a31c21c5f855ac8a94089dd3908e2510193b7d67..66e3d161c60bc14b2982cff4cdd43030d4086798 100644
---- a/drivers/gpu/drm/tidss/tidss_crtc.c
-+++ b/drivers/gpu/drm/tidss/tidss_crtc.c
-@@ -355,24 +355,21 @@ static void tidss_crtc_destroy_state(struct drm_crtc *crtc,
- 
- 	__drm_atomic_helper_crtc_destroy_state(&tstate->base);
- 	kfree(tstate);
- }
- 
--static void tidss_crtc_reset(struct drm_crtc *crtc)
-+static struct drm_crtc_state *tidss_crtc_create_state(struct drm_crtc *crtc)
- {
- 	struct tidss_crtc_state *tstate;
- 
--	if (crtc->state)
--		tidss_crtc_destroy_state(crtc, crtc->state);
--
- 	tstate = kzalloc_obj(*tstate);
--	if (!tstate) {
--		crtc->state = NULL;
--		return;
--	}
-+	if (!tstate)
-+		return ERR_PTR(-ENOMEM);
- 
--	__drm_atomic_helper_crtc_reset(crtc, &tstate->base);
-+	__drm_atomic_helper_crtc_create_state(crtc, &tstate->base);
+diff --git a/Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml b/Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
+new file mode 100644
+index 000000000000..2d09cb94b6ff
+--- /dev/null
++++ b/Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
+@@ -0,0 +1,215 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/iio/frequency/adi,adf41513.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+	return &tstate->base;
- }
++title: Analog Devices ADF41513 PLL Frequency Synthesizer
++
++maintainers:
++  - Rodrigo Alencar <rodrigo.alencar@analog.com>
++
++description:
++  The ADF41513 is an ultralow noise frequency synthesizer that can be used to
++  implement local oscillators (LOs) as high as 26.5 GHz in the upconversion and
++  downconversion sections of wireless receivers and transmitters. The ADF41510
++  supports frequencies up to 10 GHz.
++
++  https://www.analog.com/en/products/adf41510.html
++  https://www.analog.com/en/products/adf41513.html
++
++$ref: /schemas/spi/spi-peripheral-props.yaml#
++
++properties:
++  compatible:
++    enum:
++      - adi,adf41510
++      - adi,adf41513
++
++  reg:
++    maxItems: 1
++
++  spi-max-frequency:
++    maximum: 25000000
++
++  clocks:
++    maxItems: 1
++    description: Clock that provides the reference input frequency.
++
++  avdd1-supply:
++    description: PFD and Up and Down Digital Driver Power Supply (3.3 V)
++
++  avdd2-supply:
++    description: RF Buffer and Prescaler Power Supply (3.3 V)
++
++  avdd3-supply:
++    description: N Divider Power Supply (3.3 V)
++
++  avdd4-supply:
++    description: R Divider and Lock Detector Power Supply (3.3 V)
++
++  avdd5-supply:
++    description: Sigma-Delta Modulator and SPI Power Supply (3.3 V)
++
++  vp-supply:
++    description: Charge Pump Power Supply (3.3 V)
++
++  enable-gpios:
++    description:
++      GPIO that controls the chip enable pin. A logic low on this pin
++      powers down the device and puts the charge pump output into
++      three-state mode.
++    maxItems: 1
++
++  lock-detect-gpios:
++    description:
++      GPIO for lock detect functionality. When configured for digital lock
++      detect, this pin will output a logic high when the PLL is locked.
++    maxItems: 1
++
++  adi,power-up-frequency-mhz:
++    minimum: 1000
++    maximum: 26500
++    default: 10000
++    description:
++      The PLL tunes to this frequency during the initialization sequence.
++      This property should be set to a frequency supported by the loop filter
++      and VCO used in the design. Range is 1 GHz to 26.5 GHz for ADF41513,
++      and 1 GHz to 10 GHz for ADF41510.
++
++  adi,reference-div-factor:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 1
++    maximum: 32
++    default: 1
++    description:
++      Value for the reference division factor (R Counter). The driver will
++      increment R Counter as needed to achieve a PFD frequency within the
++      allowed range. High R counter values will reduce the PFD frequency, which
++      lowers the frequency resolution, and affects phase noise performance.
++      As it affects the PFD frequency, this value depends on the loop filter
++      design.
++
++  adi,reference-doubler-enable:
++    description:
++      Enables the reference doubler when deriving the PFD frequency.
++      The maximum reference frequency when the doubler is enabled is 225 MHz.
++      As it affects the PFD frequency, this value depends on the loop filter
++      design.
++    type: boolean
++
++  adi,reference-div2-enable:
++    description:
++      Enables the reference divide-by-2 function when deriving the PFD
++      frequency. As it affects the PFD frequency, this value depends on the
++      loop filter design.
++    type: boolean
++
++  adi,charge-pump-resistor-ohms:
++    minimum: 1800
++    maximum: 10000
++    default: 2700
++    description:
++      External charge pump resistor (R_SET) value in ohms. This sets the maximum
++      charge pump current along with the charge pump current setting.
++
++  adi,charge-pump-current-microamp:
++    description:
++      Charge pump current (I_CP) in microamps. The value will be rounded to the
++      nearest supported value. Range of acceptable values depends on the
++      charge pump resistor value, such that 810 mV <= I_CP * R_SET <= 12960 mV.
++      This value depends on the loop filter and the VCO design.
++
++  adi,logic-level-1v8-enable:
++    description:
++      Set MUXOUT and DLD logic levels to 1.8V. Default is 3.3V.
++    type: boolean
++
++  adi,phase-detector-polarity-positive-enable:
++    description:
++      Set phase detector polarity to positive. Default is negative.
++      Use positive polarity with non-inverting loop filter and VCO with
++      positive tuning slope, or with inverting loop filter and VCO with
++      negative tuning slope.
++    type: boolean
++
++  adi,lock-detector-count:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    default: 64
++    description:
++      Sets the value for Lock Detector count of the PLL, which determines the
++      number of consecutive phase detector cycles that must be within the lock
++      detector window before lock is declared. Lower values increase the lock
++      detection sensitivity, while higher values provides a more stable lock
++      detection. Applications that consume the lock detect signal may require
++      different settings based on system requirements.
++    enum: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192]
++
++  adi,phase-resync-period-ns:
++    default: 0
++    description:
++      When this value is non-zero, enable phase resync functionality, which
++      produces a consistent output phase offset with respect to the input
++      reference. The value specifies the resync period in nanoseconds, used
++      to configure clock dividers with respect to the PFD frequency. This value
++      should be set to a value that is at least as long as the worst case lock
++      time, i.e., it depends mostly on the loop filter design.
++
++  adi,le-sync-enable:
++    description:
++      Synchronizes Load Enable (LE) transitions with the reference signal to
++      avoid asynchronous glitches in the output. This is recommended when using
++      the PLL as a frequency synthesizer, where the reference signal will always
++      be present while the device is being configured. When using the PLL as a
++      frequency tracker, where the reference signal may be absent, LE sync
++      should be left disabled.
++    type: boolean
++
++dependencies:
++  adi,charge-pump-resistor-ohms: [ 'adi,charge-pump-current-microamp' ]
++
++required:
++  - compatible
++  - reg
++  - clocks
++  - avdd1-supply
++  - avdd2-supply
++  - avdd3-supply
++  - avdd4-supply
++  - avdd5-supply
++  - vp-supply
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/gpio/gpio.h>
++    spi {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        pll@0 {
++            compatible = "adi,adf41513";
++            reg = <0>;
++            spi-max-frequency = <25000000>;
++            clocks = <&ref_clk>;
++            avdd1-supply = <&avdd1_3v3>;
++            avdd2-supply = <&avdd2_3v3>;
++            avdd3-supply = <&avdd3_3v3>;
++            avdd4-supply = <&avdd4_3v3>;
++            avdd5-supply = <&avdd5_3v3>;
++            vp-supply = <&vp_3v3>;
++            enable-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
++            lock-detect-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
++
++            adi,power-up-frequency-mhz = <15500>;
++            adi,charge-pump-current-microamp = <3600>;
++            adi,charge-pump-resistor-ohms = <2700>;
++            adi,reference-doubler-enable;
++            adi,lock-detector-count = <64>;
++            adi,phase-resync-period-ns = <0>;
++            adi,phase-detector-polarity-positive-enable;
++            adi,le-sync-enable;
++        };
++    };
++...
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 08d8ddf4ef68..e3568f08ea55 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1654,6 +1654,13 @@ W:	https://ez.analog.com/linux-software-drivers
+ F:	Documentation/devicetree/bindings/iio/adc/adi,ade9000.yaml
+ F:	drivers/iio/adc/ade9000.c
  
- static struct drm_crtc_state *tidss_crtc_duplicate_state(struct drm_crtc *crtc)
- {
- 	struct tidss_crtc_state *state, *current_state;
-@@ -403,14 +400,14 @@ static void tidss_crtc_destroy(struct drm_crtc *crtc)
- 	drm_crtc_cleanup(crtc);
- 	kfree(tcrtc);
- }
- 
- static const struct drm_crtc_funcs tidss_crtc_funcs = {
--	.reset = tidss_crtc_reset,
- 	.destroy = tidss_crtc_destroy,
- 	.set_config = drm_atomic_helper_set_config,
- 	.page_flip = drm_atomic_helper_page_flip,
-+	.atomic_create_state = tidss_crtc_create_state,
- 	.atomic_duplicate_state = tidss_crtc_duplicate_state,
- 	.atomic_destroy_state = tidss_crtc_destroy_state,
- 	.enable_vblank = tidss_crtc_enable_vblank,
- 	.disable_vblank = tidss_crtc_disable_vblank,
- };
-diff --git a/drivers/gpu/drm/tidss/tidss_plane.c b/drivers/gpu/drm/tidss/tidss_plane.c
-index aaa02c851c595aa3781ec2e6741af1999092aa40..518498d4576528a0ec59fd03cf27a87b1b3f1e6e 100644
---- a/drivers/gpu/drm/tidss/tidss_plane.c
-+++ b/drivers/gpu/drm/tidss/tidss_plane.c
-@@ -176,12 +176,12 @@ static const struct drm_plane_helper_funcs tidss_primary_plane_helper_funcs = {
- };
- 
- static const struct drm_plane_funcs tidss_plane_funcs = {
- 	.update_plane = drm_atomic_helper_update_plane,
- 	.disable_plane = drm_atomic_helper_disable_plane,
--	.reset = drm_atomic_helper_plane_reset,
- 	.destroy = drm_plane_destroy,
-+	.atomic_create_state = drm_atomic_helper_plane_create_state,
- 	.atomic_duplicate_state = drm_atomic_helper_plane_duplicate_state,
- 	.atomic_destroy_state = drm_atomic_helper_plane_destroy_state,
- };
- 
- struct tidss_plane *tidss_plane_create(struct tidss_device *tidss,
++ANALOG DEVICES INC ADF41513 DRIVER
++M:	Rodrigo Alencar <rodrigo.alencar@analog.com>
++L:	linux-iio@vger.kernel.org
++S:	Supported
++W:	https://ez.analog.com/linux-software-drivers
++F:	Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
++
+ ANALOG DEVICES INC ADF4377 DRIVER
+ M:	Antoniu Miclaus <antoniu.miclaus@analog.com>
+ L:	linux-iio@vger.kernel.org
 
 -- 
-2.53.0
+2.43.0
+
 
 
