@@ -1,292 +1,185 @@
-Return-Path: <linux-doc+bounces-80343-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80345-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wJdPDdQ8vWkH8AIAu9opvQ
-	(envelope-from <linux-doc+bounces-80343-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 13:25:56 +0100
+	id IH7CCLc9vWmJ8AIAu9opvQ
+	(envelope-from <linux-doc+bounces-80345-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 13:29:43 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F8662DA293
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 13:25:55 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9767F2DA3FF
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 13:29:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BF92331C38FA
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 12:21:14 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 363EE301E9B9
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 12:24:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 441C43B27DB;
-	Fri, 20 Mar 2026 12:20:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A51073AD502;
+	Fri, 20 Mar 2026 12:24:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="lHbb/77I"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="V6CoI4TP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from DM1PR04CU001.outbound.protection.outlook.com (mail-centralusazon11010027.outbound.protection.outlook.com [52.101.61.27])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 731CF3AC0D6;
-	Fri, 20 Mar 2026 12:20:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.61.27
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774009248; cv=fail; b=WoYzjQsqMoVICjb5tINznWh8qRljWq8GF45fMuRaqIhGFyBjxuz8b2zBXFRQy2AdtJQcQmc2uKJfNbND6g/NSEtP7p2xqVp7oZ+cKTMBUPI/WmHuHdfITQqBaSgLm5lNyP4lIW+4Fhqo0Mt2R/Ahj8L2bYPXmJukBHUPWzlVRRg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774009248; c=relaxed/simple;
-	bh=P1fVyeME5mlbgX5yzSkR91qadPjWSU7iUwXwgKi2q7g=;
-	h=From:Date:Subject:Content-Type:Message-Id:References:In-Reply-To:
-	 To:Cc:MIME-Version; b=EHRKg5ZJKZbNKlHighsv0sXrReGUz6rW6BmMdemDAGg+wWXyK//oyFCTQmlqp0gOjDuyQmxUdFfCWLARp7S15i3l3JEcpOgelBMOU+rsTrEJ+WtFc6Hu/rcixXaFR211kalLccI2jI/qw/VDQZyqcrmB7Y3vzMPmZYzU50SbVQ0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=lHbb/77I; arc=fail smtp.client-ip=52.101.61.27
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iNOlsY7HEuzCfdUKis2FQsl9qS8guZj8MUjYIj5km5EN3I8KZXMn0y5r50V+PwUUs6J08W/iIn6g/VFG5fLLwfBs8pVcjV5Dd8KTeC9AkUsaAK7IhT8tRGlpjQROjGTbgqsBu5HKtqKlkizra7rIbZYy0E8/aRPEu4HFzEdeMwDVETp9r2Nd2SngMhfh577BpdHypdZl19Y07zp6i2jS9QjtUcqNXHgGOalAERvHBheVEppv78vOqIjFtyb0PWqnWwek5ULT79J1wQsxAlzsrdJw2+B+tamYiY+8WyLJegRMt7AUq/71mnldFnCDvzZp3xxgu8IfEYgg0j6nuVTIGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Zy8Tl5WWumcjy/fKTDHJyNnB0pOx3mI3ywbfheuzQeQ=;
- b=OWtFB+316WRTYT5mrw8DeSjLuQIz2/LebDa6aCMwa635jnHWtTFX0GhPP6skoyJlqHWa44k3iSqN0NU4alUX3SFJ8eQeEn88yu2YueGWrQoh37h4wuSjp79JnWZbURfzira+abhfKAEfh3mRewe2WXSTVbql67T0lsPAFKB4SgMRD+L4o9TqgCBdOCNMtC/oSWOajYCbnLcpLfpO2H43qcR+rhSdgt4XvWMQfhKhR08v+hI98Sokg65EuwrFFwk/5DCT8Fyh6kzGkNI/FJsmGSjPOMHCjB7DZVU+DD/epP5EP4W48T/AwKZC/W1nuuwQkmzi8Egv6d6oAj2UWPn2Vw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zy8Tl5WWumcjy/fKTDHJyNnB0pOx3mI3ywbfheuzQeQ=;
- b=lHbb/77IKTs7Km6IFZfrGsBTQ4NfMCGZJyNYZ9Us0YPNRhBBkYbx4xW/L+ASbzsa4WcUeqMNo27fi41nL3mpYwpwkRD6X3vcpIHPjIgKIyCDJwfjeMmiWssAJ+cppS4Oha6WMow50uF996Zt44Ak8hCh7Cfcg6posqtxTtVMrxM041Zl+rnFKCw6lOILUeorDZtE1sONc2gNpdVqBDVHaen7Zq9agHMnxNU6XzMk6mb2Lh1Y8B9d+dx1JxKlXaW5r9xV/GFEMhvzg+US7MyLNOi8MyipbHMHsRoY6eG7u4SP02766u95L8TDlBV4OD0IpypCXkjepeKHVVrgJYQZjg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com (2603:10b6:610:28::18)
- by DS7PR12MB6119.namprd12.prod.outlook.com (2603:10b6:8:99::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.13; Fri, 20 Mar 2026 12:20:36 +0000
-Received: from CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989]) by CH2PR12MB3990.namprd12.prod.outlook.com
- ([fe80::7de1:4fe5:8ead:5989%6]) with mapi id 15.20.9745.007; Fri, 20 Mar 2026
- 12:20:35 +0000
-From: Alexandre Courbot <acourbot@nvidia.com>
-Date: Fri, 20 Mar 2026 21:19:59 +0900
-Subject: [PATCH v2 10/10] Documentation: nova: remove register abstraction
- task
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260320-b4-nova-register-v2-10-88fcf103e8d4@nvidia.com>
-References: <20260320-b4-nova-register-v2-0-88fcf103e8d4@nvidia.com>
-In-Reply-To: <20260320-b4-nova-register-v2-0-88fcf103e8d4@nvidia.com>
-To: Danilo Krummrich <dakr@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, 
- Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
- Trevor Gross <tmgross@umich.edu>
-Cc: John Hubbard <jhubbard@nvidia.com>, 
- Alistair Popple <apopple@nvidia.com>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Timur Tabi <ttabi@nvidia.com>, 
- Zhi Wang <zhiw@nvidia.com>, Eliot Courtney <ecourtney@nvidia.com>, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org, 
- rust-for-linux@vger.kernel.org, Alexandre Courbot <acourbot@nvidia.com>
-X-Mailer: b4 0.14.3
-X-ClientProxiedBy: TYCP286CA0092.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:2b4::10) To CH2PR12MB3990.namprd12.prod.outlook.com
- (2603:10b6:610:28::18)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDC4F3ACF1A;
+	Fri, 20 Mar 2026 12:24:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774009456; cv=none; b=mHTNzjCe4RR/1bxkE5cBqw+PMMCGhO9o5dUWVX1GZLkAWz/MOMzLWqveLPM1PJbFgfNcGrXHDD0BmDNywWQqeS97TNdXbAI2xH/G8CEmRVQuXpMZkRG96RlzCE2IjK4vmCtDtFrK1lzIUHD+ggF39gutcwNgZxOoSwGkdQ3bj+8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774009456; c=relaxed/simple;
+	bh=kXdtIQsgXEinGhMSEwdoG3L66k14q9FpQSx3NwhGOos=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tusIpciC0wyOmpl/t+51OkOEYP7Cxt7GAgT1w5fEVz/b+LSMi4qA3DEcn3NaCwfdgrlXq4COnJk96J3qlVxJEgd4kSz91YKpso57RQGR6a2EmtJybnh0oBw2rlGbGB1AuNQOJG1lpBRF6FjhHwjSHQsLPycH1wkmD6DvTgP6Ppw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=V6CoI4TP; arc=none smtp.client-ip=192.198.163.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1774009454; x=1805545454;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=kXdtIQsgXEinGhMSEwdoG3L66k14q9FpQSx3NwhGOos=;
+  b=V6CoI4TPTdPlQZhH5T1jClXnfS9ije2zeaC+pLsMl/WmB6CAxY4nolsO
+   zTZZJ7EQ6/2h5/8DHlGzCdYRFfJ7pYWYU7R49WS0wMDSY5qvRiKLACyub
+   Di7kLRf6ZZ7/dH3Nql8s/penywLo08K4q3+yxdeL76SdQgx9SwyWKNhjL
+   Urun4BIzFHZdrOs36F5yCg5Uel434pOHu/71+SaNjcFQIj5fqWjfvLosL
+   tGGOS0ZUAKZ+o116g4+H3lT8yBy2FM9WpmUkEy+JHZUxYgGxoMYIthJnN
+   d7OfYExudYkP4U6vCsLJ/Mmj8n0uTnPGSQgs0NXv8Cl/etSK9OVEsHVlw
+   Q==;
+X-CSE-ConnectionGUID: qvioHfjOQhyrXHTbWHc4hg==
+X-CSE-MsgGUID: LgiHtUK1RtKsPO0NMIp7fA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11735"; a="75002228"
+X-IronPort-AV: E=Sophos;i="6.23,130,1770624000"; 
+   d="scan'208";a="75002228"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Mar 2026 05:24:14 -0700
+X-CSE-ConnectionGUID: MB/c61LnQYiDQ4mVhpUG1Q==
+X-CSE-MsgGUID: m+GeijHTS0634HJNhaVxIQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,130,1770624000"; 
+   d="scan'208";a="218632505"
+Received: from egrumbac-mobl6.ger.corp.intel.com (HELO localhost) ([10.245.245.40])
+  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Mar 2026 05:24:10 -0700
+Date: Fri, 20 Mar 2026 14:24:08 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
+Cc: rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org,
+	linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org, Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>
+Subject: Re: [PATCH v8 02/10] lib: kstrtox: add kstrntoull() helper
+Message-ID: <ab08aHbudFWEtLi8@ashevche-desk.local>
+References: <20260303-adf41513-iio-driver-v8-0-8dd2417cc465@analog.com>
+ <20260303-adf41513-iio-driver-v8-2-8dd2417cc465@analog.com>
+ <aabm23jCikXs1l6F@ashevche-desk.local>
+ <qcloiwjlbehs4yyuttvrt46monh7isef4d5nzuwlaby6uxfael@j3trvc5jwosy>
+ <4mtdzxfj656sjr66npabfvrr7yd7q26l2unhsihjtniz4ossfj@g3qnzonoary6>
+ <rygken7oujyoupeanrdnl7r7smesa7js6sn3jsafbajc4sm3jh@adeslfqwwf3x>
+ <ab00clb7LL-bmJWe@ashevche-desk.local>
+ <ixvzb5mni2lhz733f4fvvzhozmpezkx5s2q7sash3wv3u2g7ov@pgs6pve6kxrq>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PR12MB3990:EE_|DS7PR12MB6119:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8f47b4e4-3261-487c-8430-08de867b16d2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|10070799003|366016|22082099003|18002099003|56012099003|921020;
-X-Microsoft-Antispam-Message-Info:
-	v1cWkccDRxvLmiMOlrI2mw57M3NYUH4Z/xMao9KXw1iIplNtpzJ5SyHaN+QOrUp42KQh7QJJ4TCMQrTuO1WBUxHHuRfBAwLWJVBAmOXj2cuQwWFUKIyG0WcU/+G017gq5HvR2q7eNv9IEfv2AP9iQPmsC0CGTJQfkY2bPqDt/AzgOSPQvNZwvxDJ4aWLMj7HuD3AVpco2815nir/fw4HCQgDBFxQ8qF09QlOhYXFqmx/AUNch650KSWqU5YwkJjMeXXXSD/a0DkSSzuEOJqATEU36WFzeS9QyXHhxJE8mqCA2YrCNEqYBYO6nEnIosNuoVInIDC7RiWpymm7Td3wOH7F+TaHTPZ0bdF/2QLX991bM9SmzAcGmzaMQlxMaid/JVn6KpBtlt451HUGp03cEGfJo6KOC9HtugG4S9FZ1CRalFS+J0wYfkusidqA4rVxa5bbghnFjMRbq4/tAgjqiRpBC1d3rExpUrmZV7vwqcJMgw8sXhj+T19PG8wtB8gvU3Yx/VyLRMyooyZEaUGIlDhYW2ZrZtl6OpFOUlW3UVjTEkk2C8Kw+A+xIfskLhJcy6TBLz/fBc8QtKa78U6dc0N9ezG31jd31fiqRqWkqjg04uE+jYd34jDXRycDiLFDgQY3iB1ZawM8DCd/6ERCzpP4JvpNYoPzNRCZdbTMca5dAYZoLLl3Ko8BHVmRnlcHLSLZfhVJ6sSb1y+0ue0iD3WwSYbUoCgm8g3J8bePipZ0lQcY3JcwaSpzcKLSqFprMWjsO0OBl5nxyZwuubSxyA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR12MB3990.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(10070799003)(366016)(22082099003)(18002099003)(56012099003)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?d3ZRcEJDS054Tmt0NnF2eFM0TDJ6NFNFeFBRTUxoSFdFa2xFdkpjc1VlM0wx?=
- =?utf-8?B?WDJjQ2trVmttU3lVVlVCVjlvdFpLMnNZc2NlSC81MkpjZGwwK0dqRVFja09j?=
- =?utf-8?B?S0owWlZxQllRSjM5MDZoWFh4YTZKYk9hSkxBck5BVmkrajIwZldHS0hvT0x1?=
- =?utf-8?B?RHp6NnFTY1J3ckljcjZXTDdwWFlPdjc0L1A2Sjc4QnFRNHVpMlEzU0JrWjUr?=
- =?utf-8?B?Sk55Mm9FODFxZUpJWVNkSmRZUkxOSWxndXNGeW43dlVUV295dW56ZUdEakRJ?=
- =?utf-8?B?QVQ0NE1Fc1Z0YzFQMGhGT1RYN2FTb29PWDJDdHYyZDdxWDRsTWVLWGRac3dB?=
- =?utf-8?B?d3p2ck1CVnh4aFdHVVNGSDJCTlU5S3BHeTZkK2lmTHV1Q0l2amRPdE5WZXhF?=
- =?utf-8?B?WEk2T25aQkErU0tTa1o2RHNLNFhVZkV6MEdGOHorMm9GdUlqUGVGbE9tVkhl?=
- =?utf-8?B?UG80NStBa2M5cC9WMW1ieVo0STZlUDZzb3lUdHBDQ1FwWXZ6bVZtVzhEUDhY?=
- =?utf-8?B?d2dsYWdMYldZdFd0SnpqbzRwVG9NZW5yUFNwRXptSGt3VG5saVQvV3dCNUlE?=
- =?utf-8?B?UmVoUmttdWNlai9vVTAwbTBtUnhBeDM4c0FMMnV2UE9ja0U5dEs2VERDODR1?=
- =?utf-8?B?d1hibHQvYmFiakFvdEJjNldnVHNaRzduQnJmMzRqZVpPaU9TYWZud2c3K29o?=
- =?utf-8?B?d0c3R3d3cHBUdzlJRHEzaXpCMmx2TjFNSmZkbkRFem4wcWV2YmJzSDJNbU53?=
- =?utf-8?B?UW9hSmdoQ0xXNFY0NW43YXZIYkg5amJJNnZLSGN5NW03ZG5sZ2JRb0p4dkVY?=
- =?utf-8?B?K0haYlRVaDZRazhqbHBQaVBick9xcVNBZmRXclAyUTFodXRqL2VHZE5FUnVw?=
- =?utf-8?B?MUdNb1RyTVNpSWJpamtob0tJK3pISTJTS3N6S0hncW9oL3ozaGFOZUdyS0hN?=
- =?utf-8?B?VTZHRFZPeTMxRDhPNGlwbVpLLzZyZW5UQUdZaDZIbG9wN0xpeFdjYkJsQ0ZL?=
- =?utf-8?B?amswZGtFaHhUcnUwM3dheXUxMzZVVzRLTWdFVFVKblJydnZBcjU1bS9XN1hx?=
- =?utf-8?B?NXRMcGxRRDBSYlluYVNpOWkyMzN0cHBTZ2Nta0JDTnlwSjZzM3A1SnhYV2ww?=
- =?utf-8?B?S3RpM21UcGxXVGRwVVhCUjVuU2V5OTRQUVU5cGN0UUZ2VDRJYWxrRUhHMHpR?=
- =?utf-8?B?LzlFd2dZUlc0ajZXZ3FFK1IycWZBNzhRY25FWDdzelZjZ2pFMTc3VUZnT1E1?=
- =?utf-8?B?TVF0WnowbjhyWjJWTFUxa1p5bC9GaGxIdlVPSmZONDBlMjRFeWxVWWJTYzM5?=
- =?utf-8?B?czQxYlRvRmNxMlJKYVI5Y21oaGVyVHI4UEJYZUhWdWFIdC9QdnFLT3ZMck1m?=
- =?utf-8?B?SzRBVFNQWFZKRnJyaWJ4dC9oNHlWMm9URHdGUGtKRjhXLy9YNWFNMkdBWUlZ?=
- =?utf-8?B?S000WXFKbnZ0ejl6S3cvQVp3Q0JHVHE5VmVmVmxiRnlrcTZjTlpHaHR0cWFi?=
- =?utf-8?B?REphMUFEQlFhSngyUkM4SHpOdjFsMjZ5bUI3bUYxLzFPYWJSY0s1Sk9UTE0y?=
- =?utf-8?B?d0FvT1V4eUtqSDF5VjBNbytZR1pQUW5tNm1GaFdGRkdIbFFpcFJqRmJBTW9W?=
- =?utf-8?B?V1FsVGxuUDMra3o2dWk4WkhqSHFqWFdQZUlLUG9KcUpRMUVaeWNIVnBJUSty?=
- =?utf-8?B?Z2dCcDIva0xaM0J2dXdEV0VCZ2s3YTB2cXMzSE4zUFBVbDJhbWJENEh2c1Y4?=
- =?utf-8?B?b1pGakNlR3ZhZmExanhrQUN4S1JzSGY1ZmNOc3BkSzhDK2NvczZ1bFphV0c1?=
- =?utf-8?B?TDV0RXFhdzlRSkRMelZmT1NjWEswcEFhZDhWRWRxNUxLNGJBT2pQRU1tVHBi?=
- =?utf-8?B?QmVNTllubndlQzlJNDhmdFJWbDZLck9BZEVnRU80NmFwN21sbHl0RXowWGRi?=
- =?utf-8?B?THlzV0dkSUl6YWMxSWxBWUlFcTlaUVIyQ1VMVHBLVW83UTZmbFpLVlNpSnlE?=
- =?utf-8?B?Y3lOaGJkNzBoWDRXcFAxRGhzek9lNk0zVlpnb3hGYU9zUURZdUdIZGFoSjRl?=
- =?utf-8?B?T3V6czdzaHNBUyt1ZEhRWHBmQmphc09NcU1mVDhLeXdqaFg4NDhuSWNDL3Rj?=
- =?utf-8?B?ZE9iUEsyKzFZUytzOTYwc2k0QXNCZ3A2TndscXJ0SUdLSERLenZ1ZzljT3RO?=
- =?utf-8?B?UHNOWUo1bDdpZTNTUzhVcWNRbzhPbWtrNm80Rmd3VkVtVlVNZjRSVVVvNjV3?=
- =?utf-8?B?eUhGUmZHRnBPQ0IyL08zeUxna21TTHpmZ3kycjFhL1FPN2tMODJjd2ttUkx5?=
- =?utf-8?B?NldVWDJGQm5sbXdHSlJxNHRJNno4TFZNcjBPZ3FtekloL0s5TFdDTnord2Zm?=
- =?utf-8?Q?61z/DJw94249f9WoCoDArz67a44V6BPACDVTby0km1ISI?=
-X-MS-Exchange-AntiSpam-MessageData-1: 4wnijD4eCR0FsQ==
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f47b4e4-3261-487c-8430-08de867b16d2
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB3990.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2026 12:20:35.7602
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IjFCxtapEWrCtxdGvbUKq31JgMURW5g2mmvfOP+OY5vjEb1BAltbnvjcdKeOskDlxXcDwEppz9bC8mSOVuxCkA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6119
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ixvzb5mni2lhz733f4fvvzhozmpezkx5s2q7sash3wv3u2g7ov@pgs6pve6kxrq>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	TAGGED_FROM(0.00)[bounces-80343-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80345-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,google.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,garyguo.net,protonmail.com,umich.edu];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[intel.com:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[acourbot@nvidia.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	NEURAL_HAM(-0.00)[-0.998];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,nvidia.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,Nvidia.com:dkim,zulipchat.com:url]
-X-Rspamd-Queue-Id: 8F8662DA293
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	NEURAL_HAM(-0.00)[-0.994];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:dkim]
+X-Rspamd-Queue-Id: 9767F2DA3FF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The `register!` macro has been implemented and all nova-core code
-converted to use it. Remove the corresponding task in todo.rst.
+On Fri, Mar 20, 2026 at 12:08:41PM +0000, Rodrigo Alencar wrote:
+> On 26/03/20 01:50PM, Andy Shevchenko wrote:
+> > On Fri, Mar 20, 2026 at 11:16:32AM +0000, Rodrigo Alencar wrote:
+> > > On 26/03/04 10:02AM, Rodrigo Alencar wrote:
 
-Reviewed-by: Eliot Courtney <ecourtney@nvidia.com>
-Signed-off-by: Alexandre Courbot <acourbot@nvidia.com>
----
- Documentation/gpu/nova/core/todo.rst | 76 ------------------------------------
- 1 file changed, 76 deletions(-)
+...
 
-diff --git a/Documentation/gpu/nova/core/todo.rst b/Documentation/gpu/nova/core/todo.rst
-index d1964eb645e2..d5130b2b08fb 100644
---- a/Documentation/gpu/nova/core/todo.rst
-+++ b/Documentation/gpu/nova/core/todo.rst
-@@ -51,82 +51,6 @@ There also have been considerations of ToPrimitive [2].
- | Link: https://lore.kernel.org/all/cover.1750689857.git.y.j3ms.n@gmail.com/ [1]
- | Link: https://rust-for-linux.zulipchat.com/#narrow/channel/288089-General/topic/Implement.20.60FromPrimitive.60.20trait.20.2B.20derive.20macro.20for.20nova-core/with/541971854 [2]
- 
--Generic register abstraction [REGA]
-------------------------------------
--
--Work out how register constants and structures can be automatically generated
--through generalized macros.
--
--Example:
--
--.. code-block:: rust
--
--	register!(BOOT0, 0x0, u32, pci::Bar<SIZE>, Fields [
--	   MINOR_REVISION(3:0, RO),
--	   MAJOR_REVISION(7:4, RO),
--	   REVISION(7:0, RO), // Virtual register combining major and minor rev.
--	])
--
--This could expand to something like:
--
--.. code-block:: rust
--
--	const BOOT0_OFFSET: usize = 0x00000000;
--	const BOOT0_MINOR_REVISION_SHIFT: u8 = 0;
--	const BOOT0_MINOR_REVISION_MASK: u32 = 0x0000000f;
--	const BOOT0_MAJOR_REVISION_SHIFT: u8 = 4;
--	const BOOT0_MAJOR_REVISION_MASK: u32 = 0x000000f0;
--	const BOOT0_REVISION_SHIFT: u8 = BOOT0_MINOR_REVISION_SHIFT;
--	const BOOT0_REVISION_MASK: u32 = BOOT0_MINOR_REVISION_MASK | BOOT0_MAJOR_REVISION_MASK;
--
--	struct Boot0(u32);
--
--	impl Boot0 {
--	   #[inline]
--	   fn read(bar: &RevocableGuard<'_, pci::Bar<SIZE>>) -> Self {
--	      Self(bar.readl(BOOT0_OFFSET))
--	   }
--
--	   #[inline]
--	   fn minor_revision(&self) -> u32 {
--	      (self.0 & BOOT0_MINOR_REVISION_MASK) >> BOOT0_MINOR_REVISION_SHIFT
--	   }
--
--	   #[inline]
--	   fn major_revision(&self) -> u32 {
--	      (self.0 & BOOT0_MAJOR_REVISION_MASK) >> BOOT0_MAJOR_REVISION_SHIFT
--	   }
--
--	   #[inline]
--	   fn revision(&self) -> u32 {
--	      (self.0 & BOOT0_REVISION_MASK) >> BOOT0_REVISION_SHIFT
--	   }
--	}
--
--Usage:
--
--.. code-block:: rust
--
--	let bar = bar.try_access().ok_or(ENXIO)?;
--
--	let boot0 = Boot0::read(&bar);
--	pr_info!("Revision: {}\n", boot0.revision());
--
--A work-in-progress implementation currently resides in
--`drivers/gpu/nova-core/regs/macros.rs` and is used in nova-core. It would be
--nice to improve it (possibly using proc macros) and move it to the `kernel`
--crate so it can be used by other components as well.
--
--Features desired before this happens:
--
--* Make I/O optional I/O (for field values that are not registers),
--* Support other sizes than `u32`,
--* Allow visibility control for registers and individual fields,
--* Use Rust slice syntax to express fields ranges.
--
--| Complexity: Advanced
--| Contact: Alexandre Courbot
--
- Numerical operations [NUMM]
- ---------------------------
- 
+> > > could you provide more feedback here? Thanks!
+> > 
+> > I don't know what new I can add here.
+> > 
+> > My suggestion was (and still is) to have something in *_strtoull() family
+> > with additional checks added, but no limitations on the input string (i.e.
+> > no max_chars).  If you look at the printf() code the max_chars was added
+> > solely for scanf() and has no use otherwise (yes, I know about and aware
+> > of initramfs case).
+> 
+> but is it include/linux/kstrtox.h the right place for this?
+
+Seems so, there simple_strto*() are declared.
+
+> *_strtoull familly... then can we just expose simple_strntoull(), which is
+> private to lib/vsprintf.c, by changing its prototype to expose a error return?
+
+Why do you need that? I'm lost, sorry, I don't understand this big desire of
+having that max_chars parameter.
+
+> In my case the limitation on the input string is useful for the truncation of
+> decimal places when parsing the fixed point value. It would avoid a 64-bit
+> division.
+
+How is it better than checking the returned end pointer? Just treat anything
+that parses too many digits after dot as invalid input?
+
+	ret = ..._strtoull(..., &end, &result);
+	if (ret)
+		return ret; // overflow!
+
+	if (end - start > $YOUR_LIMIT)
+		return -EINVAL; // bad input
+
+	...process result...
+
+...
+
+Some (stupid) thoughts loudly. IIUC even if we implement '%g' in scanf(), it
+wont help you as you want to have more precise values. Do I get it correct?
 
 -- 
-2.53.0
+With Best Regards,
+Andy Shevchenko
+
 
 
