@@ -1,176 +1,145 @@
-Return-Path: <linux-doc+bounces-80402-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80404-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mHlFEtyHvWnQ+gIAu9opvQ
-	(envelope-from <linux-doc+bounces-80402-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 18:46:04 +0100
+	id WJXpN9eIvWnQ+gIAu9opvQ
+	(envelope-from <linux-doc+bounces-80404-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 18:50:15 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 889BF2DEDF0
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 18:46:03 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id A05552DEEDA
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 18:50:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1E3BA313B37D
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:40:41 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 57651308ECF1
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:46:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 491B53D5236;
-	Fri, 20 Mar 2026 17:40:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62D8A30C360;
+	Fri, 20 Mar 2026 17:45:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="OgsD/4e1"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="BRSLTSxC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA8343D412C;
-	Fri, 20 Mar 2026 17:40:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+Received: from mail-dy1-f202.google.com (mail-dy1-f202.google.com [74.125.82.202])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 362A830AABE
+	for <linux-doc@vger.kernel.org>; Fri, 20 Mar 2026 17:45:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774028435; cv=none; b=kG8mtXKVwhu3Gu2YkekdRKhjDaKmy2OfafPPDlkqz1TxdeAvje6pXYEgy5rmwBe3+rmnxA7gF4CCcA3wbhwhDBSYR4B+8SoIUECvUR/2NXElI7QWVlnP2i+qeUVhJfD3BgoBxCEKeJa/oThqKIlkjKmwZH69uZUmgZaAUN2xMTw=
+	t=1774028759; cv=none; b=b5NvV2nhcUfWtwHm2+mlRHUZQhgu5iBNjR+9xiHqp0IsVh1+I5QldE8l4ZdoyIOX2kyaQoVxuNFyIHVeacM+z81hNijl+Mt9/m7ji3zBm2Ntzm7bHs5pEfMh7XMJCi2tJ4ciK6yKTbaMfDB19Kfi5ncYgAXVGmS8FwaDp0gtH4Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774028435; c=relaxed/simple;
-	bh=lxrM4VrdSOng8feKo8IozpUUIHZJiXEwh6yrcvWsyNc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gm0t8Phll17sSeJZnZYvkj+3ST5yCTed1AaHCLg53xUZTK9ogHcy4sCQ1HHcV+t1nuJXmdMM0ejyml/DobAIhWTA2ojk2U2LgcVlqlXnRIX4ePQ2+vhBZL8uwi01l99+6Svs8KSyvxG4D9M2kmNIBIL5Jjw9cXedV4SVrnXHWlI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=OgsD/4e1; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from [192.168.1.10] (c-67-168-176-124.hsd1.wa.comcast.net [67.168.176.124])
-	by linux.microsoft.com (Postfix) with ESMTPSA id 9F82820B710C;
-	Fri, 20 Mar 2026 10:40:30 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 9F82820B710C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1774028431;
-	bh=BApc9oQNGAxlRGFGXH8mdZ544y8f53Db3gPDBsUcgQU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=OgsD/4e1GH2P6Gq4V/EFODoy+q4UtiDKuZMTJNzgumtH6cwNwhYhxV6Juw2PrQDc6
-	 2pWhQ6hF1Qv5W/nyimmKvZFUYi7PVdDLdPgsOFXf2jxKSrmSSJ4ujOqaIJM8l3yeE5
-	 /k5otW21AUFtUHX9nqN29erhqKy+G0u+NQwcV+R0=
-Message-ID: <94cae71a-2000-4d46-83e2-636a18874205@linux.microsoft.com>
-Date: Fri, 20 Mar 2026 10:40:31 -0700
+	s=arc-20240116; t=1774028759; c=relaxed/simple;
+	bh=EcOY+3sl/y3gmE/1cHinofuMdoJkfkIO2WeYZw2TDjw=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=lyZxpicZC2rfLHfF8nw6xSRVrdjpQpzNImuWMjs5r9/jzCtgNy7ILJDFYV6AwDE88ccX96umsA7SnBfbOo05AmmhoYbZ04QMewwqpZmFi5eA34/YXMpb3atXesEgfOuVfxLyErhM8z8gWCNsLX3p01/A1KwN/EetSl0zhvNmtEs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--samitolvanen.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=BRSLTSxC; arc=none smtp.client-ip=74.125.82.202
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--samitolvanen.bounces.google.com
+Received: by mail-dy1-f202.google.com with SMTP id 5a478bee46e88-2c0ba59a830so791321eec.0
+        for <linux-doc@vger.kernel.org>; Fri, 20 Mar 2026 10:45:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1774028757; x=1774633557; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=7jADpC9+tWP1R9nEbp5/ZrMMGvQP1aDHnBRajrcrePs=;
+        b=BRSLTSxCv8PXV5DZqrwhNOuyWO0dgKiuqZxqh4UOorXHdTABNTegv8klIgEu0aaN15
+         XfFU2pDYBhwruylXWjRKHerYhEElgyT4DJWp9awLOOW0w+IXjHoOINnwt4AA6qd9tiiF
+         OwXKA4PnUBMSj69H1wdWqxG9JmgIrHXZOzNWHNU9g7x3i/DwG1qELspaxFYU2er5byBy
+         yOt6luvXYYREJbEVuSSLHOZ04xE88U7QdopYc0O+8MA8sykSJ5FjLy+6z/AxdXAUj5Uo
+         eOcv7wz6oQTa4yVdVg/Q3hhjYAbLCu7BA87G2qoiz4CJWuDRQkkPscVcOnrzAcSlq58r
+         pYng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774028757; x=1774633557;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=7jADpC9+tWP1R9nEbp5/ZrMMGvQP1aDHnBRajrcrePs=;
+        b=rRSUPAcKQKfrWyc+ZUbr6xwm/vs5tkTT8WgddSs6jYNuGN3dnhebaumEc/e+CTZEjR
+         Ihxi5Ul/rNDcUYrsJokdLbWI2xEUBs/CDUCTrGtdqvC/e5H5nMeMwDW05YeHXPPJm+Du
+         H8bOPTyDXeYb6JH39U/EEeiboyi168lwvb+nKDBfwk1f3jzGlAlWyWz77f77Ejv8wwrd
+         DiI032uvwiWHWgegzEUn04gtv86SSu1RF58vExKxIgbIM3GhCkFjsWb7Ltv44m90BcMN
+         GewaVE+J1a7Q3DRg3I6mIa37fbAaKvwNzbgQoY3kIhhv2HZXMU7QVgEdGyn/w3Cwv3Tr
+         1oFw==
+X-Forwarded-Encrypted: i=1; AJvYcCWgZctO95bzPg2ckl6R7DYXprJDUNOcesZWCDtmYKdZqGaqNALY37YcAq3tpg5IBiWTMDBoSLbPfG8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwrFvBManwD5GlZGZDpMukW7rPGn2vu3mpi9PcYBU0GndIGhopW
+	F85WQXQFTTVx+1aSWJzEra9Hir/B1u4xS1mVt5Bm8KOLG+4LFupehPpERtUcY3IgTi41Jiwqbz1
+	sAazf/JztKiolMU7idYIL9UaUKoh8zQ==
+X-Received: from dyu19.prod.google.com ([2002:a05:693c:8113:b0:2be:4b94:33af])
+ (user=samitolvanen job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:7301:1f05:b0:2be:1246:4dad with SMTP id 5a478bee46e88-2c1095a8109mr1574829eec.8.1774028757194;
+ Fri, 20 Mar 2026 10:45:57 -0700 (PDT)
+Date: Fri, 20 Mar 2026 17:45:55 +0000
+In-Reply-To: <20260307090010.20828-1-linux@opensource.nslick.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] ima: Add support for staging measurements for
- deletion
-To: Roberto Sassu <roberto.sassu@huaweicloud.com>,
- Mimi Zohar <zohar@linux.ibm.com>, corbet@lwn.net, skhan@linuxfoundation.org,
- dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com, paul@paul-moore.com,
- jmorris@namei.org, serge@hallyn.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org,
- gregorylumen@linux.microsoft.com, nramas@linux.microsoft.com,
- Roberto Sassu <roberto.sassu@huawei.com>
-References: <20260311171956.2317781-1-roberto.sassu@huaweicloud.com>
- <20260311171956.2317781-3-roberto.sassu@huaweicloud.com>
- <587e11bf4d29552bbbfc029f716146e8ebfca1eb.camel@linux.ibm.com>
- <25e0a273-9044-4e0d-9812-0171ec99e1b7@linux.microsoft.com>
- <ffe1d4645a66a690892163be8e16c4b5d24a690d.camel@linux.ibm.com>
- <c9258708-2db2-4c08-998f-e67a681781da@linux.microsoft.com>
- <332fc1447c03893988620189a40501cccaa8b4c5.camel@huaweicloud.com>
- <8f66014c-d7c8-4a33-be7b-cfd945af4a3a@linux.microsoft.com>
- <a523c0cf05e10838bf08e4d2e9a05df402f4c9b0.camel@huaweicloud.com>
-Content-Language: en-US
-From: steven chen <chenste@linux.microsoft.com>
-In-Reply-To: <a523c0cf05e10838bf08e4d2e9a05df402f4c9b0.camel@huaweicloud.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Mime-Version: 1.0
+References: <20260307090010.20828-1-linux@opensource.nslick.com>
+X-Mailer: b4 0.14.3
+Message-ID: <177402875586.3545153.7837463244242752504.b4-ty@google.com>
+Subject: Re: [PATCH v2 0/2] module: expose imported namespaces via sysfs
+From: Sami Tolvanen <samitolvanen@google.com>
+To: Luis Chamberlain <mcgrof@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>, 
+	Daniel Gomez <da.gomez@kernel.org>, Nicholas Sielicki <linux@opensource.nslick.com>
+Cc: Aaron Tomlin <atomlin@atomlin.com>, Matthias Maennich <maennich@google.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>, 
+	linux-modules@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
-	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80402-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[huaweicloud.com,linux.ibm.com,lwn.net,linuxfoundation.org,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80404-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[chenste@linux.microsoft.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.microsoft.com:+];
+	FROM_NEQ_ENVFROM(0.00)[samitolvanen@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.microsoft.com:dkim,linux.microsoft.com:mid]
-X-Rspamd-Queue-Id: 889BF2DEDF0
+	NEURAL_HAM(-0.00)[-0.990];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A05552DEEDA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/20/2026 10:26 AM, Roberto Sassu wrote:
-> On Fri, 2026-03-20 at 10:24 -0700, steven chen wrote:
->> On 3/20/2026 10:10 AM, Roberto Sassu wrote:
->>> On Fri, 2026-03-20 at 09:58 -0700, steven chen wrote:
->>>> On 3/20/2026 5:41 AM, Mimi Zohar wrote:
->>>>> On Thu, 2026-03-19 at 14:31 -0700, steven chen wrote:
->>>>>
->>>>>>> - Support for deleting N measurement records (and pre-pending the remaining
->>>>>>> measurement records)
->>>>>> Is there any problem to bring work of "stage" step together to the
->>>>>> deletion step?
->>>>>>
->>>>>> "Trim N" method does everything that "staged" method can do, right?
->>>>>> what's the "stage" method can do but "trim N" method can't do?
->>>>>>
->>>>>> in user space, if in "staged" state, no other user space agent can
->>>>>> access the IMA measure list, right?
->>>>>>
->>>>>> Could you explain the benefit of bringing the "stage" step?
->>>>> The performance improvement is because "staging" the IMA measurement list takes
->>>>> the lock in order to move the measurement list pointer and then releases it.
->>>>> New measurements can then be appended to a new measurement list.  Deleting
->>>>> records is done without taking the lock to walk the staged measurement list.
->>>>>
->>>>> Without staging the measurement list, walking the measurement list to trim N
->>>>> records requires taking and holding the lock.  The performance is dependent on
->>>>> the size of the measurement list.
->>>>>
->>>>> Your question isn't really about "staging" the measurement list records, but
->>>>> requiring a userspace signal to delete them.  To answer that question, deleting
->>>>> N records (third patch) could imply staging all the measurement records and
->>>>> immediately deleting N records without an explicit userspace signal.
->>>>>
->>>>> I expect the requested "documentation" patch will provide the motivation for the
->>>>> delayed deletion of the measurement list.
->>>>>
->>>>> Mimi
->>>> "Staging" is great on reducing kernel IMA measurement list locking time.
->>>>
->>>> How about just do "stage N" entries and then delete the staged list in
->>>> one shot?
->>>> It means merge two APIs into one API
->>>>        int ima_queue_stage(void)
->>>>        int ima_queue_delete_staged(unsigned long req_value)
->>>>
->>>> The kernel lock time will be the same. And user space lock time will be
->>>> reduced.
->>> It is not the same. The walk on the staged list is done without holding
->>> ima_extend_list_mutex.
->>>
->>> Roberto
->> Is it possible to merge two APIs work into one API?
->>        int ima_queue_stage(void)
->>        int ima_queue_delete_staged(unsigned long req_value)
-> It will be done transparently for the user. IMA will call both
-> functions for the same securityfs write.
->
-> Roberto
+On Sat, 07 Mar 2026 03:00:08 -0600, Nicholas Sielicki wrote:
+> Add /sys/module/*/import_ns to expose the symbol namespaces imported
+> by a loaded module.
+> 
+> Changes since v1:
+> - Simplified commit message to drop unnecessary/incorrect background
+> - Use .setup/.free callbacks in module_attribute to ensure
+>   imported_namespaces is NULL-initialized before error paths and
+>   NULL'd after kfree (Sami)
+> - Updated KernelVersion to 7.1 in docs for next merge window
+> 
+> [...]
 
-If merge two APIs into one API, it will reduce user space measurement
-list lock time.
-Thanks,
-Steven
+Applied to modules-next, thanks!
+
+[1/2] module: expose imported namespaces via sysfs
+      commit: 3fe1dcbc2d20c5dbc581c0bb458e05365bfffcf7
+[2/2] docs: symbol-namespaces: mention sysfs attribute
+      commit: f15dbe8a94b6e3768b10e10bf8ab95b28682db80
+
+Best regards,
+
+	Sami
 
 
 
