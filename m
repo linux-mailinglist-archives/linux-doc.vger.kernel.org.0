@@ -1,53 +1,56 @@
-Return-Path: <linux-doc+bounces-80392-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80366-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iMUdEjd5vWmt9wIAu9opvQ
-	(envelope-from <linux-doc+bounces-80392-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:43:35 +0100
+	id KKixBY11vWmt9wIAu9opvQ
+	(envelope-from <linux-doc+bounces-80366-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:27:57 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B78522DDD2E
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:43:34 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id F23112DD509
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 17:27:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A510930AE7F4
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:32:10 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 4723330266C4
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2026 16:27:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9FAB53DA5C3;
-	Fri, 20 Mar 2026 16:28:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 074143D16F0;
+	Fri, 20 Mar 2026 16:27:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BJXf5Zeu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gBbfkR5s"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A24A3D3319;
-	Fri, 20 Mar 2026 16:28:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5E123D0906;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774024104; cv=none; b=DcmzSRuO1jqXON2sHzhdbbPSdyLdAaUarizJmKRStiHg2TxUDZ3Cbi0ERUIXgeEQotgnlYqaGy1VhFmJ1Dg75c7KI07CYuzSeCE8hnMxGz4gW6E+jUZkP5zNgkwEsZn9Peu27SoOkpGC+lFttvPgIPbxjb3egH5q0flJOOg1n4w=
+	t=1774024052; cv=none; b=b1ryBHM72un337b3/ywZ2J02VbwXCcHS462yJCNckHbK+IkudpSIFC5mS/nowpInoD19JVPkbsgjapKP8zLP9EWdnaQMhb+A1VTF+AN7qPmMYosMSfGchTRLZqxUcgHkTDREg0oacc2pSLknqDdSinL4ic+DIbSPjTkuJz2yGFg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774024104; c=relaxed/simple;
-	bh=b66Tl5kZoqYvPt0EneArcC4td5ZO+VTiTMrGRP4Ocis=;
+	s=arc-20240116; t=1774024052; c=relaxed/simple;
+	bh=DuMyvK6DFgnd0Ej9rOVYnF6v/NLqjEekBfg4n169DBk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=dNDokNiq0WmXRSV300oJ/0prjZ4MjI3mJkQKLr+a3P82FZ8XFZ/UX8xX6eTgA+jaU9V4O1T3LZnACEi0RCzXcQ3h/2GmkXVT9hwKBETHJy3YGjguuucMCWySjOk/GnyhZ+tEvQd4pCwODT7MIibnLonBcPqx51K2ld4jlwQCvX0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BJXf5Zeu; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F311C4CEF7;
-	Fri, 20 Mar 2026 16:28:23 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=CHkDgTdqM9iL8qhWOM4sJqoPB9pLUprtQlEZP3DzM822VAHhArTEMf6z2wSqql664+5okEr8yW5uj7Teib34Qy3cglcNRRHTmUJv38u2kzXZz4BWg47vBY16Nw3tobMxX3HHrSkfE08RmbbWFUMY/B+0RH6DXh6f6ziDdfMdetI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gBbfkR5s; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 94236C2BCB0;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774024103;
-	bh=b66Tl5kZoqYvPt0EneArcC4td5ZO+VTiTMrGRP4Ocis=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=BJXf5ZeuYCDIhrvsHxH1x2cWRy5dggsOMwsdh/Y2nmJ4+p2VWxuuAWYNEFkUqEZEX
-	 c5zU/D5fcvlgkNcQhMcg+J4+kHBYh6zYnImaDb3QL6XrPmIqa5aYk7pJv5SuqthjfE
-	 XP3v1PzxM4PxnrBzRVk6VnzOvBbWMFPa4EgjcT64CDMpS2tHGfeu85H0taloLObfeJ
-	 p2/a7p1UULFu83tJjCpwTUhuIbS14XwM3xH0IKEhFkrBuGz2Fba1eQWkLTjspcQaxq
-	 8ewdQnrfExXM7dmP8nAeMzqLUuwC5rnu8/IQqQzzhBQMvNImN+Xbqgnt8vRgw/FmWS
-	 jGNtIzpcnK7wA==
-From: Maxime Ripard <mripard@kernel.org>
-Date: Fri, 20 Mar 2026 17:27:27 +0100
-Subject: [PATCH v2 20/20] drm/bridge_connector: Convert to
- atomic_create_state
+	s=k20201202; t=1774024052;
+	bh=DuMyvK6DFgnd0Ej9rOVYnF6v/NLqjEekBfg4n169DBk=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=gBbfkR5sjygv1DwCJn5M2Akz6fpgNpEkUYAz3wsaBGB2G2dKoosf5pXlsCnNGrXyG
+	 ixjwtd+LX+25W4qlRMIC4iIonA3eTq4dzpb7AStEc0y6q/oJ2uDARl09D/JVtwE98L
+	 fOVWxARXdPhtK2oPhlzhp9Q4rCYkpbVG5513kyGGBlryabPoSrq0bMxPq9yKUDpM+3
+	 KpiZwUyDxJl3+ncPstew+kvueIcQ7fO5uK9B9ZUzRy6lhqosMSN0L1VobH4y+qtB9v
+	 4FshPlet03KWHSNtzLZ3327jiA97f0iFPLLBvdv2/InVqs7ohJvtkS6OOutb2PDZEd
+	 OKdF53pp06alQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 868E010987AA;
+	Fri, 20 Mar 2026 16:27:32 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Date: Fri, 20 Mar 2026 16:27:27 +0000
+Subject: [PATCH v9 2/9] lib: vsprintf: export simple_strntoull() in a safe
+ prototype
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,131 +59,211 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260320-drm-mode-config-init-v2-20-c63f1134e76c@kernel.org>
-References: <20260320-drm-mode-config-init-v2-0-c63f1134e76c@kernel.org>
-In-Reply-To: <20260320-drm-mode-config-init-v2-0-c63f1134e76c@kernel.org>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
+Message-Id: <20260320-adf41513-iio-driver-v9-2-132f0d076374@analog.com>
+References: <20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com>
+In-Reply-To: <20260320-adf41513-iio-driver-v9-0-132f0d076374@analog.com>
+To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+ Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
  Shuah Khan <skhan@linuxfoundation.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Jyri Sarha <jyri.sarha@iki.fi>, 
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
- Andrzej Hajda <andrzej.hajda@intel.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Simon Ser <contact@emersion.fr>, Harry Wentland <harry.wentland@amd.com>, 
- Melissa Wen <mwen@igalia.com>, Sebastian Wick <sebastian.wick@redhat.com>, 
- Alex Hung <alex.hung@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, Chen-Yu Tsai <wens@kernel.org>, 
- Samuel Holland <samuel@sholland.org>, 
- Dave Stevenson <dave.stevenson@raspberrypi.com>, 
- =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>, 
- Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
-Cc: dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Daniel Stone <daniels@collabora.com>, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
- Maxime Ripard <mripard@kernel.org>, 
- Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2228; i=mripard@kernel.org;
- h=from:subject:message-id; bh=b66Tl5kZoqYvPt0EneArcC4td5ZO+VTiTMrGRP4Ocis=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDJl7S3M2nqx88cjFOTf5hobf8dcX952r1ee4+OuTn1bWU
- vl131597JjKwiDMySArpsjyRCbs9PL2xVUO9it/wMxhZQIZwsDFKQATOTedsWHmilddlx2LQsS0
- J3AGCM+fufLdwqwN0ip+73KN75ZNP/IspnKnWaWfW8bG6PKa1FcbbRnrC3MCpxmZOyjqL2H1WSq
- R0VPNLtgu+H3R06dF0u5ffrlxnVjNKzDp9U+/pxovJHkWTVoMAA==
-X-Developer-Key: i=mripard@kernel.org; a=openpgp;
- fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
+ Rodrigo Alencar <rodrigo.alencar@analog.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774024051; l=4961;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=y9XuvOW7WnSOw9U6xKx4a7qJToIhm1Kjwj+aTkUEMP0=;
+ b=7BHPg3COnAmow6RIibVkXv2I8hJnFf5WiTTNEZgjF+DwrsPlq0Yx97QGmtJHuZW3yAJqbXwvH
+ NGDcvO2lErjAS6pRDT6Xu90PlZhbSDwoHRsCVBbU0PtBOavW72Ya7sL
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80392-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[39];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-80366-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,renesas];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,ideasonboard.com:email]
-X-Rspamd-Queue-Id: B78522DDD2E
+	NEURAL_HAM(-0.00)[-0.996];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:email,analog.com:replyto,analog.com:mid]
+X-Rspamd-Queue-Id: F23112DD509
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The connector created by drm_bridge_connector only initializes a
-pristine state in reset, which is equivalent to that atomic_create_state
-would expect. Let's convert to it.
+From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-Signed-off-by: Maxime Ripard <mripard@kernel.org>
+Expose simple_strntoull(), by addressing its FIXME, i.e. its prototype is
+slightly changed so that -ERANGE or -EINVAL can be evaluated by the user.
+Flow of the function is not changed and error value is returned in the
+end. Unsafe internal wrapper is created to reduce amount of changes.
+
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 ---
- drivers/gpu/drm/display/drm_bridge_connector.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ include/linux/kstrtox.h |  4 ++++
+ lib/vsprintf.c          | 59 +++++++++++++++++++++++++++++++++++++++++--------
+ 2 files changed, 54 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/gpu/drm/display/drm_bridge_connector.c b/drivers/gpu/drm/display/drm_bridge_connector.c
-index 929f06b290626d2091418a6377a5230e3c264b60..b640e7d5a065d165a901bd73fc836afaab967dac 100644
---- a/drivers/gpu/drm/display/drm_bridge_connector.c
-+++ b/drivers/gpu/drm/display/drm_bridge_connector.c
-@@ -263,26 +263,33 @@ static void drm_bridge_connector_debugfs_init(struct drm_connector *connector,
- 		if (bridge->funcs->debugfs_init)
- 			bridge->funcs->debugfs_init(bridge, root);
- 	}
- }
+diff --git a/include/linux/kstrtox.h b/include/linux/kstrtox.h
+index 6ea897222af1..5e161073121f 100644
+--- a/include/linux/kstrtox.h
++++ b/include/linux/kstrtox.h
+@@ -148,4 +148,8 @@ extern long simple_strtol(const char *,char **,unsigned int);
+ extern unsigned long long simple_strtoull(const char *,char **,unsigned int);
+ extern long long simple_strtoll(const char *,char **,unsigned int);
  
--static void drm_bridge_connector_reset(struct drm_connector *connector)
-+static struct drm_connector_state *
-+drm_bridge_connector_create_state(struct drm_connector *connector)
- {
- 	struct drm_bridge_connector *bridge_connector =
- 		to_drm_bridge_connector(connector);
-+	struct drm_connector_state *conn_state;
++extern ssize_t __must_check simple_strntoull(const char *startp, const char **endp,
++					     unsigned int base, size_t max_chars,
++					     unsigned long long *res);
 +
-+	conn_state = drm_atomic_helper_connector_create_state(connector);
-+	if (IS_ERR(conn_state))
-+		return conn_state;
- 
--	drm_atomic_helper_connector_reset(connector);
- 	if (bridge_connector->bridge_hdmi)
- 		__drm_atomic_helper_connector_hdmi_state_init(connector,
--							      connector->state);
-+							      conn_state);
-+
-+	return conn_state;
- }
- 
- static const struct drm_connector_funcs drm_bridge_connector_funcs = {
--	.reset = drm_bridge_connector_reset,
- 	.detect = drm_bridge_connector_detect,
- 	.force = drm_bridge_connector_force,
- 	.fill_modes = drm_helper_probe_single_connector_modes,
-+	.atomic_create_state = drm_bridge_connector_create_state,
- 	.atomic_duplicate_state = drm_atomic_helper_connector_duplicate_state,
- 	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
- 	.debugfs_init = drm_bridge_connector_debugfs_init,
- 	.oob_hotplug_event = drm_bridge_connector_oob_hotplug_event,
+ #endif	/* _LINUX_KSTRTOX_H */
+diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+index 800b8ac49f53..6fb880f4013b 100644
+--- a/lib/vsprintf.c
++++ b/lib/vsprintf.c
+@@ -75,25 +75,66 @@ enum hash_pointers_policy {
  };
+ static enum hash_pointers_policy hash_pointers_mode __initdata;
+ 
++/**
++ * simple_strntoull - convert a string to an unsigned long long with a character limit
++ *
++ * @startp: The start of the string
++ * @endp: A pointer to the end of the parsed string will be placed here
++ * @base: The number base to use
++ * @max_chars: The maximum number of characters to parse
++ * @res: Where to write the result of the conversion on success
++ *
++ * Returns amount of processed characters on success, -ERANGE on overflow and
++ * -EINVAL on parsing error.
++ */
+ noinline
+-static unsigned long long simple_strntoull(const char *startp, char **endp, unsigned int base, size_t max_chars)
++ssize_t simple_strntoull(const char *startp, const char **endp,
++			 unsigned int base, size_t max_chars,
++			 unsigned long long *res)
+ {
+ 	const char *cp;
+-	unsigned long long result = 0ULL;
+ 	size_t prefix_chars;
+ 	unsigned int rv;
++	ssize_t ret;
+ 
+ 	cp = _parse_integer_fixup_radix(startp, &base);
+ 	prefix_chars = cp - startp;
+ 	if (prefix_chars < max_chars) {
+-		rv = _parse_integer_limit(cp, base, &result, max_chars - prefix_chars);
+-		/* FIXME */
++		rv = _parse_integer_limit(cp, base, res, max_chars - prefix_chars);
++		if (rv & KSTRTOX_OVERFLOW)
++			ret = -ERANGE;
++		else if (rv == 0)
++			ret = -EINVAL;
++		else
++			ret = rv + prefix_chars;
+ 		cp += (rv & ~KSTRTOX_OVERFLOW);
+ 	} else {
+ 		/* Field too short for prefix + digit, skip over without converting */
+ 		cp = startp + max_chars;
++		ret = -EINVAL;
++		*res = 0ULL;
+ 	}
+ 
++	if (endp)
++		*endp = cp;
++
++	return ret;
++}
++EXPORT_SYMBOL(simple_strntoull);
++
++/* unsafe_strntoull ignores simple_strntoull() return value and endp const qualifier */
++inline
++static unsigned long long unsafe_strntoull(const char *startp, char **endp,
++					   unsigned int base, size_t max_chars)
++{
++	unsigned long long result;
++	const char *cp;
++
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wunused-result"
++	simple_strntoull(startp, &cp, base, max_chars, &result);
++#pragma GCC diagnostic pop
++
+ 	if (endp)
+ 		*endp = (char *)cp;
+ 
+@@ -111,7 +152,7 @@ static unsigned long long simple_strntoull(const char *startp, char **endp, unsi
+ noinline
+ unsigned long long simple_strtoull(const char *cp, char **endp, unsigned int base)
+ {
+-	return simple_strntoull(cp, endp, base, INT_MAX);
++	return unsafe_strntoull(cp, endp, base, INT_MAX);
+ }
+ EXPORT_SYMBOL(simple_strtoull);
+ 
+@@ -132,7 +173,7 @@ EXPORT_SYMBOL(simple_strtoul);
+ unsigned long simple_strntoul(const char *cp, char **endp, unsigned int base,
+ 			      size_t max_chars)
+ {
+-	return simple_strntoull(cp, endp, base, max_chars);
++	return unsafe_strntoull(cp, endp, base, max_chars);
+ }
+ EXPORT_SYMBOL(simple_strntoul);
+ 
+@@ -163,9 +204,9 @@ static long long simple_strntoll(const char *cp, char **endp, unsigned int base,
+ 	 * and the content of *cp is irrelevant.
+ 	 */
+ 	if (*cp == '-' && max_chars > 0)
+-		return -simple_strntoull(cp + 1, endp, base, max_chars - 1);
++		return -unsafe_strntoull(cp + 1, endp, base, max_chars - 1);
+ 
+-	return simple_strntoull(cp, endp, base, max_chars);
++	return unsafe_strntoull(cp, endp, base, max_chars);
+ }
+ 
+ /**
+@@ -3670,7 +3711,7 @@ int vsscanf(const char *buf, const char *fmt, va_list args)
+ 			val.s = simple_strntoll(str, &next, base,
+ 						field_width >= 0 ? field_width : INT_MAX);
+ 		else
+-			val.u = simple_strntoull(str, &next, base,
++			val.u = unsafe_strntoull(str, &next, base,
+ 						 field_width >= 0 ? field_width : INT_MAX);
+ 
+ 		switch (qualifier) {
 
 -- 
-2.53.0
+2.43.0
+
 
 
