@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-80508-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80509-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id jAAQKz8Ov2n3rwMAu9opvQ
-	(envelope-from <linux-doc+bounces-80508-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2026 22:31:43 +0100
+	id MNhLEI4Ov2n3rwMAu9opvQ
+	(envelope-from <linux-doc+bounces-80509-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2026 22:33:02 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id F37382E7532
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2026 22:31:42 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 311272E7544
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2026 22:33:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8356F300EA93
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2026 21:31:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id EE4F93007B22
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2026 21:32:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D29C8136672;
-	Sat, 21 Mar 2026 21:31:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3B1129D291;
+	Sat, 21 Mar 2026 21:32:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="IGnmbo0M"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="eq5U/cLY"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E087D1862;
-	Sat, 21 Mar 2026 21:31:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B56391862;
+	Sat, 21 Mar 2026 21:32:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774128700; cv=none; b=dpQcG5iyP2CLu1K69+jXbSaQNWeBj2XiNJ2glfcNqpgY4ZkMawh59dyzPLb1vIIYYVc4kgdXvboilEeFgup0qtgZl5yGTl5T/DmUEenhaPAxZ6SfHME2jfoYiRZzMNMSnfxjeTRA1BW3uiz3yLZNXh4BVnuDgQnAleVjFpZwOJs=
+	t=1774128776; cv=none; b=jBVUwtEZchomQUFSEonzcwMabSNSNXROMGtssbiTR3umyjAISzLM2JuyKM8/Xz034CRnjoZk2Biip1nEkltgVcM6tkd5cmbQHJ1ChLzU/vh8UH8+YUCQHM2C990ruvLz5XIS0dgeEdTrfZQePvDSzsZb/xkTrywjkfgmtf5Bu2M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774128700; c=relaxed/simple;
-	bh=BLJu0Znb4Daznq4WOQ09T68xAdjFN3NQeDCGX6pbZgM=;
+	s=arc-20240116; t=1774128776; c=relaxed/simple;
+	bh=US2ZkY7ezxO6irwnY/5YvbgPHrs2lKhJFZwLBaO1ln4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nQqaBFHZNlwSvTtg8+cXChp/vxn/3jnVq4ZtEXcd0RKxLnnCOi51SPeSj8sgYDf3if193Z29uB8JLVevS72ILPGWAUenL33fgMyBFVKYevY7wX6Ba0YVSkEmzYLawJyj67HMACwKUQpTcUtMR4JvFIMFEqNSutUQ+ZXz34P13go=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=IGnmbo0M; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=o9GGdNa5ancYrCE6aBSEjIR8bnOXVUxEbfdzUoSaoV57HXewTOUpICd3OUTOsiVWmch4dBqdhBikBXxV5AJZjWbMQOeMUhBed2peZRMbxhIrU6ec87vzt/QLZlfbvQ/RLpnEckb0dFLpiiD7ubvJneLKCcnIVKY1hNlU5jLTZLQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=eq5U/cLY; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=Y/BuSkRQX3ZzcKsvi1tf+be6xEdqYex9OWwfjpdehpM=; b=IGnmbo0MWLJ7U2VcNeelZtBs7r
-	b7ChuDI3kJ8bwJ/e5lB8k8b3BwAS2osPFoJQgn169QaWJHp3joVwbRJ12TjxOKqjQQxQ7JRcfelR8
-	Qd1EoiilB1w0L6TjANjY/+fOJY2MB9AoRVDSTak0qzzCf5uRjsD2rGX5IE5wWRR8ffQ95j+OXCbYx
-	ObaySsJbaqYLRx1QQUc++zX50IDLhhdLOo4qDaeFj0vzws3QU5rHh7fDlY//7K1MqUhscC7Aq8jOf
-	nHKw3luGNpmTE5bCCoFFOwr94qmbx0oQVYmNzobf0bYh1QbsZAm9jKUjXYhHeiJR9jfVSAtgzmYT7
-	UWFDpjPg==;
+	bh=vGgUZkHGxR71KC/fo60+5eRwCvQ/Yq4YeIthjrO12/Q=; b=eq5U/cLYblfMpfroMObICuNnZh
+	1qMMqfoEgAsdYwDLTU+Rz49u6CoFyVPl5wYiNDElmZAfYNcYF8Ggz2bvVvRyqErBqctwxNJiSDrDO
+	feGWLosIKrpqwd8dri5dXWlZdQueQx6+sZOJJIF/IzYQw6n9Xk9TLRT3inqZ4pA1vrK3YuQ4kdG7y
+	4bN6MlJy5ayGtsrwQLf4vIqT1kqDHy66Dpb6ooPlh7bWuK77hN6UFqFKd3eTozIrpmYgeaKQbOKTb
+	SY59ptBjkTchHCnXl7Ko/erPRmhuFRMRWdG8BRIx1HdcAIXc/VhRibGkVYx3iyIo/vlkQZNXG+bhf
+	P6MvoIFA==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1w43uz-0000000EobA-2YK2;
-	Sat, 21 Mar 2026 21:31:37 +0000
-Message-ID: <f81edf19-9b33-4935-904e-636afa4dad79@infradead.org>
-Date: Sat, 21 Mar 2026 14:31:36 -0700
+	id 1w43wF-0000000EodS-14k6;
+	Sat, 21 Mar 2026 21:32:55 +0000
+Message-ID: <e2b86d3b-0ffe-47ea-b4eb-defe313151af@infradead.org>
+Date: Sat, 21 Mar 2026 14:32:54 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,25 +57,27 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/1] docs: examples of pages affected by heading overflow
+Subject: Re: [PATCH 1/1] docs: allow long unbroken headings to wrap and
+ prevent overflow
 To: Rito Rhymes <rito@ritovision.com>, Jonathan Corbet <corbet@lwn.net>,
  linux-doc@vger.kernel.org
 Cc: Shuah Khan <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org
 References: <20260321144855.30429-1-rito@ritovision.com>
+ <20260321144855.30429-2-rito@ritovision.com>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260321144855.30429-1-rito@ritovision.com>
+In-Reply-To: <20260321144855.30429-2-rito@ritovision.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80508-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80509-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -86,68 +88,33 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCPT_COUNT_FIVE(0.00)[5]
-X-Rspamd-Queue-Id: F37382E7532
+X-Rspamd-Queue-Id: 311272E7544
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 
 
 On 3/21/26 7:48 AM, Rito Rhymes wrote:
-> Examples of affected pages on docs.kernel.org this patch improves:
->   userspace-api/gpio/gpio-handle-set-line-values-ioctl.html
->   userspace-api/gpio/gpio-v2-get-lineinfo-watch-ioctl.html
->   userspace-api/gpio/gpio-handle-get-line-values-ioctl.html
->   userspace-api/gpio/gpio-get-lineinfo-unwatch-ioctl.html
->   userspace-api/gpio/gpio-v2-lineinfo-changed-read.html
->   userspace-api/gpio/gpio-get-lineinfo-watch-ioctl.html
->   userspace-api/gpio/gpio-v2-line-set-config-ioctl.html
->   userspace-api/gpio/gpio-v2-line-get-values-ioctl.html
->   userspace-api/sysfs-platform_profile.html
+> Some documentation pages contain long headings with unbroken strings
+> that can exceed the content width and cause page-wide horizontal
+> overflow.
 > 
-> Rito Rhymes (1):
->   docs: allow long unbroken headings to wrap and prevent overflow
+> Allow headings to wrap when needed so they stay within the content
+> column and do not break page layout.
 > 
+> Signed-off-by: Rito Rhymes <rito@ritovision.com>
+> ---
 >  Documentation/sphinx-static/custom.css | 7 +++++++
 >  1 file changed, 7 insertions(+)
-> 
 
-Some of these (html pages listed above) now split the heading where it
-might appear that a split is not needed. Maybe the heading was going past
-the "right margin" previously and after the patch it does not do that?
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
 
-E.g., before the patch I see this heading:
-GPIO_V2_LINE_GET_VALUES_IOCTL
-
-After the patch I see:
-GPIO_V2_LINE_GET_VALUES_IOCT
-L
-
-
-Regarding the last example that has a problem, that heading just needs
-to be fixed. The "(e.g. ...)" part of it shouldn't be in the heading.
-
-To me these 4 patches:
-[PATCH 1/1] docs: allow inline literals in paragraphs to wrap to prevent overflow
-[PATCH 1/1] docs: allow long unbroken headings to wrap and prevent overflow
-[PATCH 1/1] docs: contain horizontal overflow in C API descriptions
-[PATCH 1/1] docs: wrap generated tables to contain small-screen overflow
-
-feel inconsistent. In some cases they add horizontal scrolling while in
-other cases they add auto-wrapping.
-Maybe it's just me, but you might need some more justification for making
-the choices in the patches.
-
-However, prior to these patches there was definitely some loss of
-characters on the right side, e.g., in C API blocks.
-
-thanks.
 -- 
 ~Randy
-
 
