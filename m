@@ -1,143 +1,117 @@
-Return-Path: <linux-doc+bounces-80544-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80545-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aCqvIm4TwGnMDQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80544-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 17:06:06 +0100
+	id KKnvDF8awGnmDgQAu9opvQ
+	(envelope-from <linux-doc+bounces-80545-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 17:35:43 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D9F12E9E67
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 17:06:05 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38DEB2EA062
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 17:35:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 866D93021B2E
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 16:02:02 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6BA7B3004604
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 16:35:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3620364E9E;
-	Sun, 22 Mar 2026 16:02:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F849367F32;
+	Sun, 22 Mar 2026 16:35:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="jmqNVt3a"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="cKJif8Dr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AC862874F5;
-	Sun, 22 Mar 2026 16:01:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E36B03D76;
+	Sun, 22 Mar 2026 16:35:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774195321; cv=none; b=ZgoKjbJnfwohjd5pOh931gbaMF98KmH2F9WZjFePjnAZwaH9dzrxc/cczTuvdbwZcR+kZbxVT7ZHQYoRsjQ/7OlpZC/zqwbFf4LhG385902a2aWl6IEGNS29PNfmayLHg/XOeTfYYLf8G0SMH6plMGGxbdAM2NYB8q3WGrN0/Yo=
+	t=1774197335; cv=none; b=XZx26UC4aDMTycZ1a1dacTu2nMIxy1M4w2J5QZnR7Me/zHR3rmh03YEQjR/1GNIH2KiI87WD6MVFC+y3GPEicclgHgfh5O2vhpHGamP2kyIv8MNMfCua7WAC0+sEywFOiOxOdkkrl7/XwkqdY5nZRQy97zBOtbi3mJgmQ0qvEMQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774195321; c=relaxed/simple;
-	bh=I3Pdyo9vwt7trgpHYyA+oHUegojVnDOxU9SRP75eD2c=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=WdISgUAUHGIl3/tZ7XVmDoPZ3GHuO3iXA/5HokBj6I50yzfvUP5vDegrHQ9niZ1w6U4OFgMJzED9tLgOVHBsnjSgsDCUpLIycqUo75ZZ0uCqoaRYRyK0plnfCatIfIshtMLlZ2oVcKD4Hply2XQBOruR5+PIhHjMNT3BLXUE18o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=jmqNVt3a; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net F228440C79
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1774195313; bh=xALCEN1w1nvvGBHe4qkH9v/E9nRlb+vh55lSN37NRv0=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=jmqNVt3aBY5RB613c2o/CjyZVWlYjkAq9OztknReD8xNfE2WEktVgn2cVCLgqNey3
-	 BUewmmUKsUB+G2gkt/Vly6Q5kWK3AiWfd/pD9qRKZPaAcDEwIAZGbsoYBzd72i7Ysd
-	 8qvxvimYbkBWdhrp5GvZ+/1YjdBVQpXaf7/gHH/AfEm4TQPdL7Qi7B6GU1z0cNa13r
-	 T16HZH2l4tIJfbLX7t0dltk4ekTSt7kYSduK3JyXBhvaSamW2h3X4g+4HJ2jZ4JSsv
-	 vyDJ3Zq8yl7TWmF6VLWZGI667QGQtC78iMQyBe7ns7GE0M2SDPrXiVXTUR2jrzl7y+
-	 xPBWP3rvfeobA==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id F228440C79;
-	Sun, 22 Mar 2026 16:01:52 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Rito Rhymes <rito@ritovision.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, linux-doc@vger.kernel.org
-Cc: Shuah Khan <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- Rito Rhymes <rito@ritovision.com>
-Subject: Re: [PATCH] docs: add advanced search for kernel documentation
-In-Reply-To: <20260321181511.11706-1-rito@ritovision.com>
-References: <20260321181511.11706-1-rito@ritovision.com>
-Date: Sun, 22 Mar 2026 10:01:52 -0600
-Message-ID: <87cy0vetu7.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1774197335; c=relaxed/simple;
+	bh=OhFmczSWdRSHv/PJPv1Hi/xrwWK7ysEMMY4lS4c0YV8=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=kQeM9awa84PhEFoMB5Fc2zH5MgN+D+wbS+60uzgz6F7BuP8omahbwzQb/lp67PnAH8zjaha/PrbEyBDo0TP0rD+pUAcPctbGNcPZkZcuvCoY8QhbrLsp7IlVWpUK36J4U4iMuUNhX96x5RxnJTtWrLKx9tl/e7ixoIl1LhJoUhw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=cKJif8Dr; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96C6EC19424;
+	Sun, 22 Mar 2026 16:35:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+	s=korg; t=1774197334;
+	bh=OhFmczSWdRSHv/PJPv1Hi/xrwWK7ysEMMY4lS4c0YV8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=cKJif8DrRkdnjQvQpQ1ROtGFR6SXXhGNHyUc69cnnJ1Sdksze188JdndUhybUB3bo
+	 Ab5Rl9JPtYSZqu5BrVRWTU9CduRNpLRZefkx+V5O6pTPO83blx7cJ1Bla/qlKyVQh6
+	 SU64HJVBhsXQ8Z/AeQKwL7LTrncj7VIOY0VHC808=
+Date: Sun, 22 Mar 2026 09:35:33 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Sasha Levin <sashal@kernel.org>
+Cc: Masahiro Yamada <masahiroy@kernel.org>, Luis Chamberlain
+ <mcgrof@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>,
+ Richard Weinberger <richard@nod.at>, Juergen Gross <jgross@suse.com>, Geert
+ Uytterhoeven <geert@linux-m68k.org>, James Bottomley
+ <James.Bottomley@HansenPartnership.com>, Jonathan Corbet <corbet@lwn.net>,
+ Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
+ Petr Pavlu <petr.pavlu@suse.com>, Daniel Gomez <da.gomez@kernel.org>, Greg
+ KH <gregkh@linuxfoundation.org>, Petr Mladek <pmladek@suse.com>, Steven
+ Rostedt <rostedt@goodmis.org>, Kees Cook <kees@kernel.org>, Peter Zijlstra
+ <peterz@infradead.org>, Thorsten Leemhuis <linux@leemhuis.info>, Vlastimil
+ Babka <vbabka@kernel.org>, Helge Deller <deller@gmx.de>, Randy Dunlap
+ <rdunlap@infradead.org>, Laurent Pinchart
+ <laurent.pinchart@ideasonboard.com>, Vivian Wang <wangruikang@iscas.ac.cn>,
+ linux-kernel@vger.kernel.org, linux-kbuild@vger.kernel.org,
+ linux-modules@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 0/4] kallsyms: embed source file:line info in kernel
+ stack traces
+Message-Id: <20260322093533.c0aab4ed9f5eef9536d14c21@linux-foundation.org>
+In-Reply-To: <20260322131543.971079-1-sashal@kernel.org>
+References: <20260322131543.971079-1-sashal@kernel.org>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	MV_CASE(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80544-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80545-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[linux-foundation.org];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[kernel.org,linux-foundation.org,nod.at,suse.com,linux-m68k.org,HansenPartnership.com,lwn.net,linuxfoundation.org,goodmis.org,infradead.org,leemhuis.info,gmx.de,ideasonboard.com,iscas.ac.cn,vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 9D9F12E9E67
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url,linux-foundation.org:dkim,linux-foundation.org:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 38DEB2EA062
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Rito Rhymes <rito@ritovision.com> writes:
+On Sun, 22 Mar 2026 09:15:39 -0400 Sasha Levin <sashal@kernel.org> wrote:
 
-> Replace the stock Sphinx search page with one that reuses the
-> existing searchindex.js while adding structured result grouping,
-> filtering, and exact identifier matching.
->
-> Results are grouped into Symbols, Sections, Index entries, and
-> Pages, each in a collapsible section with a count. An Advanced
-> panel exposes filters for documentation area, object type, result
-> kind, and exact match mode. All state is URL-encoded so searches
-> remain shareable.
->
-> Page summary snippets are lazy-loaded via IntersectionObserver to
-> avoid fetching every matching page up front.
->
-> The sidebar keeps the existing quick-search box and adds an
-> "Advanced search" link below it.
->
-> Signed-off-by: Rito Rhymes <rito@ritovision.com>
-> ---
->  Documentation/sphinx-static/custom.css        | 163 ++++
->  Documentation/sphinx-static/kernel-search.js  | 746 ++++++++++++++++++
->  Documentation/sphinx/templates/search.html    | 106 +++
->  Documentation/sphinx/templates/searchbox.html |  18 +
->  4 files changed, 1033 insertions(+)
->  create mode 100644 Documentation/sphinx-static/kernel-search.js
->  create mode 100644 Documentation/sphinx/templates/search.html
->  create mode 100644 Documentation/sphinx/templates/searchbox.html
+> This series adds CONFIG_KALLSYMS_LINEINFO, which embeds source file:line
+> information directly in the kernel image so that stack traces annotate
+> every frame with the originating source location - no external tools, no
+> debug symbols at runtime, and safe to use in NMI/panic context.
 
-Without looking into detail at the work (yet), can you tell me something
-about how this work was created?  We do have guidance for the disclosure
-of the use of coding tools in
-Documentation/process/coding-assistants.rst ...
-
-I'm curious about where you are going with this in general.  A look at
-ritovision.com does not suggest "kernel developer" to me.
-
-Thanks,
-
-jon
+Sashiko review hasn't completed yet, but it has things to say:
+	https://sashiko.dev/#/patchset/20260322131543.971079-1-sashal@kernel.org
 
