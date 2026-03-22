@@ -1,140 +1,135 @@
-Return-Path: <linux-doc+bounces-80514-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80515-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aEWRBzhCv2kj0gMAu9opvQ
-	(envelope-from <linux-doc+bounces-80514-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 02:13:28 +0100
+	id WA46D91Rv2lU2AMAu9opvQ
+	(envelope-from <linux-doc+bounces-80515-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 03:20:13 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B506A2E7D87
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 02:13:27 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 96AF82E7FBA
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 03:20:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 05FC730078BC
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 01:13:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 80FD13008A49
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 02:19:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8AF522EC0A1;
-	Sun, 22 Mar 2026 01:13:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B26033993;
+	Sun, 22 Mar 2026 02:19:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="OkZYLmiE"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="CT9c+ixX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com [136.143.188.12])
+Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com [91.218.175.189])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41A1E2AD00;
-	Sun, 22 Mar 2026 01:13:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.12
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774142005; cv=pass; b=tP4PFuNBEzvUbV2EsaAiDwbWlgrofRg+WuPqyyyIu28eLI8OhlBL9uXF4GQFyDLtTYHEEmzASoG/Q+dDYWHnhSTUIA9KutpqtJOqkJZjOXG7YhHBpb63PFYNAhY/Rr8LtTqUCkzcOtQCdzcJ/rZCUYP8j693+YKVy17RC5c+mmY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774142005; c=relaxed/simple;
-	bh=KurxseXxXQJ5x9bDEN3oAQOTwNu4Dgvqsgmh4p9e9sk=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:From:To:Subject:
-	 References:In-Reply-To; b=Bwg3rE0N3Yfls6ozg+xpFru4cDerCSHdtnhNhsNXwFfHUZMcV712akkr/3HwBtjo97dsI/zd+cRcOrZEu4VM++VE5rVEj/2NedvXlfRdXmNq8mGWPfP+y2Fq5pWyRO/fDy0R3touLSYARTEl+P7AO+zMkTeMoQciQ1zi/V0PNUk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=OkZYLmiE; arc=pass smtp.client-ip=136.143.188.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ritovision.com
-ARC-Seal: i=1; a=rsa-sha256; t=1774141979; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=cN3lX+s7UTVYz9QhyECXfBL+WAUhIvXvkfjYic0amF+WFkBxw1Kxc10ug+N2hrCiCwl8JujcVUA730U5frGRFbrTdo2/uYUZE5pNc9p5JHeYhWGFQYPhJLUM1p/RPaVuO7XW+HuE9VWcaUM5ZVDRln8ZZ+VodNw+DJ+lAp8e5zY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1774141979; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=KurxseXxXQJ5x9bDEN3oAQOTwNu4Dgvqsgmh4p9e9sk=; 
-	b=UWJZy3OqA14EVQ52JFzDLDV1AfF2Bn66y9gsR5TCY7pOISsLyaYtZ6TLDsU0bJPW8NCjPVNDAQJyph17LzAuCdSey2TZvM6IcdNdvBvWzfKPVDvSdRUgrbxWgM26/6zk5ZpGG6Jdb0N92n+V5V+XZ9I05hoyH+CapO9UVOMxhdA=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=ritovision.com;
-	spf=pass  smtp.mailfrom=rito@ritovision.com;
-	dmarc=pass header.from=<rito@ritovision.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774141979;
-	s=zmail; d=ritovision.com; i=rito@ritovision.com;
-	h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:From:From:To:To:Subject:Subject:References:In-Reply-To:Reply-To;
-	bh=KurxseXxXQJ5x9bDEN3oAQOTwNu4Dgvqsgmh4p9e9sk=;
-	b=OkZYLmiEsTyR6gCA+irwW7bukKfsgp9kxmxgbgYVjFqc4HGn0pitJhiB4a7mpZ6B
-	n4GmLUPZ61g5x8A15QTlQTjzGBkKAvXP2bpyajTdvacHbjMlOEQYoI1rjkraXGKNNep
-	izK59S/UwfNavGfjSl2hcz+Fs5PUhEuL7m2owsAo=
-Received: by mx.zohomail.com with SMTPS id 1774141977345483.8527676102449;
-	Sat, 21 Mar 2026 18:12:57 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5C1D40DFBE
+	for <linux-doc@vger.kernel.org>; Sun, 22 Mar 2026 02:19:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.189
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774145959; cv=none; b=H9gfLvsB4JAh2+hCMSgIVaPGaGAipsO/X+W0jp5yR4TolbGBUPCZrxURHS8aAT2gmCZggRpHYkgYPHCTgjcwswubWXO8bTQoJk6C/mFwElWrKPBXjyvzRFncEsqZeI/o3jsr4wMBdmUbgZrHa/drTgcjkVF1E8n3MDUoly/86vg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774145959; c=relaxed/simple;
+	bh=IEx9S7ZLcKuDlX914CBxQlU9Wp/ndEt6rAUfAIl2N6E=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=XK66uunKzSojcnV4VCNxUu2SeqajEX/KCO5vG5oPTlTBKm8C2hQzT6CBMPlMIqBeyh5+ArBKEktoXln6lL1mOJf/tjajbM5VATHrpFXGp8K7omzFVQHDbAfehgvVe/5iwSh9i0acBf4TP96nFTakpZ4F+qli2/PjO7ZQdfu8fGY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=CT9c+ixX; arc=none smtp.client-ip=91.218.175.189
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1774145945;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=8dSaIRMuVhMrUs54qbaoxf4Mz2+8KV+v/+TX/3wx/Lc=;
+	b=CT9c+ixXjHb5VtwyDbprVHIreuwtN97fIwVMaaXEMzNpKtPYSnSY4StGDWxh6n3TH0+6xa
+	VQCzOBsDue6qm2M7m6w/nHNLxpY4blLtTRnKpOhT3HVUHUHkyqKuX+Z6bo0FF4jIYysmc0
+	Fovcn7H+NgcySMe8Pb1DLf8jnug9AN4=
+From: Roman Gushchin <roman.gushchin@linux.dev>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Nhat Pham <nphamcs@gmail.com>,  kasong@tencent.com,
+  Liam.Howlett@oracle.com,  apopple@nvidia.com,  axelrasmussen@google.com,
+  baohua@kernel.org,  baolin.wang@linux.alibaba.com,  bhe@redhat.com,
+  byungchul@sk.com,  cgroups@vger.kernel.org,  chengming.zhou@linux.dev,
+  chrisl@kernel.org,  corbet@lwn.net,  david@kernel.org,  dev.jain@arm.com,
+  gourry@gourry.net,  hannes@cmpxchg.org,  hughd@google.com,
+  jannh@google.com,  joshua.hahnjy@gmail.com,  lance.yang@linux.dev,
+  lenb@kernel.org,  linux-doc@vger.kernel.org,
+  linux-kernel@vger.kernel.org,  linux-mm@kvack.org,
+  linux-pm@vger.kernel.org,  lorenzo.stoakes@oracle.com,
+  matthew.brost@intel.com,  mhocko@suse.com,  muchun.song@linux.dev,
+  npache@redhat.com,  pavel@kernel.org,  peterx@redhat.com,
+  peterz@infradead.org,  pfalcato@suse.de,  rafael@kernel.org,
+  rakie.kim@sk.com,  rppt@kernel.org,  ryan.roberts@arm.com,
+  shakeel.butt@linux.dev,  shikemeng@huaweicloud.com,  surenb@google.com,
+  tglx@kernel.org,  vbabka@suse.cz,  weixugc@google.com,
+  ying.huang@linux.alibaba.com,  yosry.ahmed@linux.dev,
+  yuanchu@google.com,  zhengqi.arch@bytedance.com,  ziy@nvidia.com,
+  kernel-team@meta.com,  riel@surriel.com
+Subject: Re: [PATCH v5 00/21] Virtual Swap Space
+In-Reply-To: <20260321112227.bbcf113a6eae634d12695fd9@linux-foundation.org>
+	(Andrew Morton's message of "Sat, 21 Mar 2026 11:22:27 -0700")
+References: <20260320192735.748051-1-nphamcs@gmail.com>
+	<20260321112227.bbcf113a6eae634d12695fd9@linux-foundation.org>
+Date: Sat, 21 Mar 2026 19:18:50 -0700
+Message-ID: <87cy0wip2t.fsf@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sat, 21 Mar 2026 21:12:53 -0400
-Message-Id: <DH8WUB5VFIDH.B2WQGIM3163@ritovision.com>
-Cc: "Shuah Khan" <skhan@linuxfoundation.org>, <linux-kernel@vger.kernel.org>
-From: "Rito Rhymes" <rito@ritovision.com>
-To: "Randy Dunlap" <rdunlap@infradead.org>, "Rito Rhymes"
- <rito@ritovision.com>, "Jonathan Corbet" <corbet@lwn.net>, "Mauro Carvalho
- Chehab" <mchehab@kernel.org>, <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH] docs: add advanced search for kernel documentation
-X-Mailer: aerc 0.21.0
-References: <20260321181511.11706-1-rito@ritovision.com>
- <621b43a5-256b-4a82-b179-3cefe43d419f@infradead.org>
- <DH8UC6DVQE4P.13E9XDIRGJ645@ritovision.com>
- <6cbf9940-0146-4b4d-bf74-4142b18602df@infradead.org>
-In-Reply-To: <6cbf9940-0146-4b4d-bf74-4142b18602df@infradead.org>
-X-ZohoMailClient: External
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[ritovision.com,reject];
-	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64];
-	R_DKIM_ALLOW(-0.20)[ritovision.com:s=zmail];
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Migadu-Flow: FLOW_OUT
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80514-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[ritovision.com:+];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,tencent.com,oracle.com,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80515-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rito@ritovision.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[roman.gushchin@linux.dev,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[53];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
 	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,ritovision.com:dkim,ritovision.com:mid]
-X-Rspamd-Queue-Id: B506A2E7D87
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:dkim,linux.dev:mid,sashiko.dev:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux-foundation.org:email]
+X-Rspamd-Queue-Id: 96AF82E7FBA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-I was using the in-tree build (`make htmldocs`) before. I just ran
-fresh rebuilds with both in-tree and out-of-tree (`make O=3DDOCS
-htmldocs`) builds, and I got identical search results of 280 hits for
-"futex" when serving both.
+Andrew Morton <akpm@linux-foundation.org> writes:
 
-I ran the builds and served the output on Linux/x86_64, and tested the
-pages in Chrome, Edge, and Firefox on Windows.
+> On Fri, 20 Mar 2026 12:27:14 -0700 Nhat Pham <nphamcs@gmail.com> wrote:
+>
+>> This patch series implements the virtual swap space idea, based on Yosry's
+>> proposals at LSFMMBPF 2023 (see [1], [2], [3]), as well as valuable
+>> inputs from Johannes Weiner. The same idea (with different
+>> implementation details) has been floated by Rik van Riel since at least
+>> 2011 (see [8]).
+>
+> AI review got partway through then decided it couldn't apply patches.  So
+> a partial result: https://sashiko.dev/#/patchset/20260320192735.748051-1-nphamcs@gmail.com
 
-So at this point I have not been able to reproduce the "no output"
-behavior with either build mode, I think we can rule out build mode
-quirks.
+It's a bug in the error handling. I've already fixed it, but haven't
+deployed the new version yet. In the reality, the review failed for some
+other reason (the most popular one now is backend/llm api transient errors).
 
-More debugging:
-
-As a comparison, WITHOUT using my patch, upstream only build, does the
-normal Quick Search work? What results do you get for Futex?
-
-WITH my patch, do Quick Search return any results for Futex?
-
-How are you opening or serving the generated docs? For example, via a
-local web server (`http://...`) or directly from disk (`file://...`)?
-I am serving the generated output over HTTP locally via
-`python -m http.server`.
-
-What Sphinx version are you using for the build?
-I built with Sphinx 9.1.0.
-
-If possible, could you also check in the browser network tab whether
-`_static/kernel-search.js`, `_static/language_data.js`, and
-`searchindex.js` are all loading successfully?
+Sashiko applies the entire patchset first and if it fails, it's not
+reviewing anything.
 
