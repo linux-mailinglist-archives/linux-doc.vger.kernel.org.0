@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-80559-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80560-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sOZMJtY1wGmUEwQAu9opvQ
-	(envelope-from <linux-doc+bounces-80559-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 19:32:54 +0100
+	id UOtRInY+wGnhFAQAu9opvQ
+	(envelope-from <linux-doc+bounces-80560-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 20:09:42 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 026102EA4EC
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 19:32:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D23E92EA70F
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 20:09:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EE51C300AB0A
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 18:32:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6F43130067A5
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2026 19:09:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D65EB257827;
-	Sun, 22 Mar 2026 18:32:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B08041A6815;
+	Sun, 22 Mar 2026 19:09:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="bqPbDTgs"
+	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="H25569o+"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 980F93B7A8;
-	Sun, 22 Mar 2026 18:32:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53DCA36657B;
+	Sun, 22 Mar 2026 19:09:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774204348; cv=pass; b=fC6I1pdYkDD+CD3Z4N9gxTRg5eddGXRTDG2g4NzbOC7HEGYxCgSQNxN60cM7YCrK8vyq+a/GzpGno6K3T6O3H1oezdJoDcKSuAXBnPiUlt/Lgx/Bf/UsvvPPPVqr40icEKaHteUWdMvS0huBrZOqDqi1Ij5Y7JnLm1I/RpAHiy8=
+	t=1774206579; cv=pass; b=EOU5UcGi/tNSb5M2KzHaJnpyyyl1kUbGuA7pGRWp+/icHgZiDRLDHawArm5NL0yWN0uxZdsJIXf2DvrxPZZVLXVbAbCj5xbp/3wUY7rwU326jqqz9vXRCraSHbpfxwlP4GkvbIQ8AEWQ0iE7oecLt5zqy/jsBpTTCuPPJSce6GE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774204348; c=relaxed/simple;
-	bh=ys7AwMD60g00yWdFfk2sZIBXZRgWR82N/JQIp2//PDo=;
+	s=arc-20240116; t=1774206579; c=relaxed/simple;
+	bh=8CmstHOqCikIVfv2H635OhQsIP78qkiSVriNtxRr5Dc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=sYTLd8foBhCfLsGvJWmbL4ohOwqdUS9VIe+GYKg7+BP7XvEn6ihZJ1A+9EAoRiWR3YPVo92neNHwYCl6lon5WcY8bWictjjz/IIfqD6czoDSinKX43EomMoLNThXXP4yXXVwKPDq5iYvDxNtEjiZbDSBtD7M51GWF3mdCdfz4H8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=bqPbDTgs; arc=pass smtp.client-ip=136.143.188.15
+	 MIME-Version; b=jKbGXHfue7G00aBTJPu5lnfGejBDHxGqZfduGkpOhM8jzOA+fNmhxqj4tehIoi4bmcGFVEWw1TqumPjVvaJNbMReo/lfuxXpHBwgYTU23gCRHiU73VZG3NSRV8PgNTcQ2ghXM+yV5OAW1K/o8LuwfWKVPwNc4Zzp0wU3Oe7aFYs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=H25569o+; arc=pass smtp.client-ip=136.143.188.15
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ritovision.com
-ARC-Seal: i=1; a=rsa-sha256; t=1774204344; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1774206567; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=Cxal8k4J6hS+ZV8tWadbTC3Rb1W+/QBPK+xoSEpR9jlV/KNDOgC3S59X57uwB8kE1qfrZrsqrTr9O8XGn5TZjanrnN3Ifn4cEd3co2AgjUovdKAawp+9PdiLUs0qxCwGAmbrw8pMKqY4AxcX5DncTOn1hDBjFElw3E2fUIeh0Ps=
+	b=UOeLS6CxBOgdOwJmmeRee4azv6UOLgRyBNIRFIotWFctueYYrZmxvvd2oYHXZTnnrRju46/T/S7ReRrm5+3OwUlwrBYjuxkMhkhlmRV8Wg4fXMbCE8i9e2faKhDtx/CmLCZpMN4Si6YRl6u/vHtH7SbZjWQWYT3QIMdNbr8FIpo=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1774204344; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=uGH7NUJf6okXAPdUpAOHJYliwQjQr0ByTA2ZnAVbLLU=; 
-	b=nU6kT8WUS9d81saUtIaOt6zBvbGsiNUJwpzGi9OCybBoMA+eI6tlLO89ea7AUJSuSc+Jh+iZYrdZ5zIc310ueJFiaQLMnE/WFG4twiZUZnADmBUxCMYc6AgHAuDJ5wz5bw2rGO+lhnjLwtRUe6x8TUx0w4VRbcTzJ09jGRvanv8=
+	t=1774206567; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Q4m97QkYl0JsXXOi/F0yG+0PO7L7lMioqjt+PREPlXk=; 
+	b=i0D5U4bEsQu8ly4gKks2C8jA58u8OyDSU4jgZocrNOKR6BeeocjkArMvgYKm+fEt5mOqHq4dEMaaw8rrziz7o2kkJaYkAmG2ncg/5Hj2tr/X7pmNwunytbZxncssucug4z8jwsUAVoUec3Kn6BNmF3bWKB36n/onohaKontW7kU=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=ritovision.com;
 	spf=pass  smtp.mailfrom=rito@ritovision.com;
 	dmarc=pass header.from=<rito@ritovision.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774204344;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774206567;
 	s=zmail; d=ritovision.com; i=rito@ritovision.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=uGH7NUJf6okXAPdUpAOHJYliwQjQr0ByTA2ZnAVbLLU=;
-	b=bqPbDTgszo2fgxMG5V1LzabBhbEh5msZaG645I+BanpToqQt/PJ7w8QaAF2GzWZ3
-	o3z3Ki8I5R/X3Bwh1tHEk8YqenC56GDgmb0OysAK9dxMKw5yeQ0w+TfaetaZSeLJGSq
-	mkxNJbFivwsgvYLh13YdTzCMmKfXxbvEK21Gu5DQ=
-Received: by mx.zohomail.com with SMTPS id 1774204341528950.6604549461734;
-	Sun, 22 Mar 2026 11:32:21 -0700 (PDT)
+	bh=Q4m97QkYl0JsXXOi/F0yG+0PO7L7lMioqjt+PREPlXk=;
+	b=H25569o+FbtKqjZY98cC4eoUiXctCw+kQVNyflOfT6NNBXznX7+4IrUgjUefuS3w
+	qSxGizaTLKpYDVqUuNjbEWrTYl6O/7R+mxXz3mDQsv7ZHhrbpIQ2puTOw0yWVj9VBxC
+	vOrmGCKXvtYCRKI+v/sVtkBbeyuBjhP9D0YvKOcs=
+Received: by mx.zohomail.com with SMTPS id 1774206566419157.35078993599097;
+	Sun, 22 Mar 2026 12:09:26 -0700 (PDT)
 From: Rito Rhymes <rito@ritovision.com>
 To: Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org
 Cc: Shuah Khan <skhan@linuxfoundation.org>,
 	linux-kernel@vger.kernel.org,
+	rdunlap@infradead.org,
 	Rito Rhymes <rito@ritovision.com>
-Subject: [PATCH v2 1/1] docs: allow inline literals in paragraphs to wrap to prevent overflow
-Date: Sun, 22 Mar 2026 14:32:13 -0400
-Message-ID: <20260322183213.52235-2-rito@ritovision.com>
+Subject: [PATCH v2 0/1] docs: examples of pages affected by heading overflow
+Date: Sun, 22 Mar 2026 15:09:07 -0400
+Message-ID: <20260322190908.60412-1-rito@ritovision.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260322183213.52235-1-rito@ritovision.com>
-References: <20260321141118.23828-1-rito@ritovision.com>
- <20260322183213.52235-1-rito@ritovision.com>
+In-Reply-To: <20260321144855.30429-1-rito@ritovision.com>
+References: <20260321144855.30429-1-rito@ritovision.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,13 +86,13 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80559-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80560-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_FIVE(0.00)[6];
 	FROM_NEQ_ENVFROM(0.00)[rito@ritovision.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[ritovision.com:+];
@@ -100,50 +100,28 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ritovision.com:dkim,ritovision.com:email,ritovision.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 026102EA4EC
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: D23E92EA70F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Some documentation pages contain long inline literals in paragraph
-text that can force page-wide horizontal scroll overflow and break
-layout on smaller screens.
+Examples of affected pages on docs.kernel.org this patch improves:
+  userspace-api/gpio/gpio-handle-set-line-values-ioctl.html
+  userspace-api/gpio/gpio-v2-get-lineinfo-watch-ioctl.html
+  userspace-api/gpio/gpio-handle-get-line-values-ioctl.html
+  userspace-api/gpio/gpio-get-lineinfo-unwatch-ioctl.html
+  userspace-api/gpio/gpio-v2-lineinfo-changed-read.html
+  userspace-api/gpio/gpio-get-lineinfo-watch-ioctl.html
+  userspace-api/gpio/gpio-v2-line-set-config-ioctl.html
+  userspace-api/gpio/gpio-v2-line-get-values-ioctl.html
+  userspace-api/sysfs-platform_profile.html
 
-Override the default `span.pre` white-space behavior for inline
-literals and use `overflow-wrap: anywhere` so they can wrap when
-needed. For code used as part of a paragraph, wrapping is appropriate
-because it is stylistically part of the surrounding text. Code blocks,
-by contrast, are meant to preserve formatting fidelity and are better
-served by contained horizontal scrolling.
+Rito Rhymes (1):
+  docs: allow long unbroken headings to wrap and prevent overflow
 
-Signed-off-by: Rito Rhymes <rito@ritovision.com>
-Assisted-by: Codex:GPT-5.4
----
-v2: add Assisted-by attribution
+ Documentation/sphinx-static/custom.css | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
- Documentation/sphinx-static/custom.css | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
-index db24f4344..dd69df2a7 100644
---- a/Documentation/sphinx-static/custom.css
-+++ b/Documentation/sphinx-static/custom.css
-@@ -149,6 +149,15 @@ div.language-selection ul li:hover {
-     background: #dddddd;
- }
- 
-+/*
-+ * Let long inline literals in paragraph text wrap as needed to prevent
-+ * overflow.
-+ */
-+code.docutils.literal span.pre {
-+    white-space: normal;
-+    overflow-wrap: anywhere;
-+}
-+
- /* Make xrefs more universally visible */
- a.reference, a.reference:hover {
-     border-bottom: none;
 -- 
 2.51.0
 
