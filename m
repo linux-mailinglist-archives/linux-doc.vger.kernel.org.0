@@ -1,506 +1,247 @@
-Return-Path: <linux-doc+bounces-80724-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80680-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uAkjFrdxwWkQTQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80724-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:00:39 +0100
+	id WPUWGXhHwWlGSAQAu9opvQ
+	(envelope-from <linux-doc+bounces-80680-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:00:24 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5272F2F9474
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:00:37 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 754782F39C9
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:00:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BE02930FFECE
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:18:49 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 12CDD304A005
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 13:51:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CC073C13FE;
-	Mon, 23 Mar 2026 16:17:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55CB73AE1AD;
+	Mon, 23 Mar 2026 13:51:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="BrSsQ+UQ"
+	dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b="UfNa2jjb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from DB3PR0202CU003.outbound.protection.outlook.com (mail-northeuropeazon11010044.outbound.protection.outlook.com [52.101.84.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4123E3B9D90;
-	Mon, 23 Mar 2026 16:17:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774282639; cv=none; b=aVgPoMBsnL58riul7aN9qjZj63TqBEY9gHnKT4G38peKIaQtVoHQjB2ZoDEBqb623553lLgKl5gy+i/BHvEDhIuZjkH5/dApNNKfwfAPv3A86+9cRww/cSf0P6ybwsOd3LXcbsnOEfP3fTcXhhIX9j1UZEhB4w5doNcVdG4QXcE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774282639; c=relaxed/simple;
-	bh=5PUeDAbHDTu6wq4dQ47hPuwz6+nS0aDTxsinDPKiV1w=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=tQWmJE2zhfeRWDy0zsKQvY68XDSFVza4JBJ/5/IyVBPdkvogzrlN/4f3c6tmlCyYvRpn4wP6cWz/hN/OhDJixaw5XomC7HZYQAQmg/EUWSzTvSv0Y87ySRkzOrmMhZJjv6AchEXoEnaGFdZfjzOhosgpNGlJBRO2ye/dbWNixWA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=BrSsQ+UQ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D91AC4CEF7;
-	Mon, 23 Mar 2026 16:17:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1774282638;
-	bh=5PUeDAbHDTu6wq4dQ47hPuwz6+nS0aDTxsinDPKiV1w=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BrSsQ+UQtAWHx+yHPWW46ebQpk9YRhYZC40P3u5FmFC7JA8ws1AqNuN2jy9XMDxnh
-	 LBUuLhER+BEyf/1ci3+P/xlgE5Ff1/ZKmvaTXJ/nKmA5x5sweRsXEaSUACh90Z54vk
-	 9b09bCoF81DNQ53ff0T3YPc1m9ZzSRSIC2H1X9gs=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: stable@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	patches@lists.linux.dev,
-	Randy Dunlap <rdunlap@infradead.org>,
-	John Stultz <jstultz@google.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org,
-	Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 6.1 229/481] time: add kernel-doc in time.c
-Date: Mon, 23 Mar 2026 14:43:31 +0100
-Message-ID: <20260323134530.720347788@linuxfoundation.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260323134525.256603107@linuxfoundation.org>
-References: <20260323134525.256603107@linuxfoundation.org>
-User-Agent: quilt/0.69
-X-stable: review
-X-Patchwork-Hint: ignore
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C55A3AE1B1;
+	Mon, 23 Mar 2026 13:51:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.84.44
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774273879; cv=fail; b=cBRNyO289JJPtAMe8UZWMFeb5gAy212rcsA1rsM3cCFcNB1do41okYy9xIlt08d7iN7b+Jjz57HhGMv/UrQV79PM1o1c9MrNC1IYsOGKk/fKbj8FSjgRx/n41bq9Xli9+odGgVeu0yCQa5TS07wfLpYKUKTQQeLj7S1v+yWEK18=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774273879; c=relaxed/simple;
+	bh=EMLxheDAf5W/XBeTrSPwGPwXlfEpFEdxDDay9gHu2yM=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=UoSPIkqBk7yYPVVE4iE+ZLznPjOH4WnnKUiwzbUYcOzV5Msve3rEJVqZ2i12dedIuyqmTWHaYzW4satE2F/B1qA/cgwN0Vv5C8fZ5B8O6gpAXx/Pz5wPWEgFnn+5iMVyrxf9baEIg+iiwbncmBUD6I0icbww8RKCuOL0lbBiXrs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b=UfNa2jjb; arc=fail smtp.client-ip=52.101.84.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vsaPT76XfV6M+VogFC/TTh0kRdwSYKz7f/SCL4vXPkErmZZA8BTS0QhGCyvPA4Pa95Whyn8xpekNGm2GXFZZM7qOb0hS+S3bMuT7ZjUkh/Ag9jih7Bi12CUCKrSl45sjz2jdcE+U9TeB19Oltp5wm4h9+JZP86aKiZbwmu3bmNiVmtEJDRyU7wTerwncX5UP+3JABpFkHPUOMMqTHKdwXqlIz8YFjVKv4JPogXgHe36DYKA9bRkQsrOm8xtTHLBUlx3lYPxpvS0D4CLxcT06LXI8Fo47BC6T5BmojkMAbUbAbvc5yfcyAwYOnB4RzEVxExqSXLjnOTqbcJtmdpRrQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+3GOWPIVljvKJN7KNFT2U0PYatgsfRiQD1Y7YM77qG8=;
+ b=oTUfAn58S+5zXNOxdNMkvc3yH6eCydKq3b56YE1WKyJLnoAIFG60UdG58e/OYzm26ulToUCisCwGh10QQa4shK5BEncz9uDqK91VU6uizU071DMaeF2aytbAlg5PNTy/BVVV6O2OAynePi4FlRpAlhNG/9Ak0WFhnEHPoGXH6AheyX+JW4zBzzoaJ6r5gJFQtRG5w68BNHUtipih7f7j154itIDiBzp9g4LsNEh7iF8nmb/19W183zTyLJrllzOuVp6IWiUAQ0qru57g11AHV/Q/4f1JxEEiZKxEfSn8J82HquTK6aN4nZNixvbx4flNmT+np8dDH/6bZbsPHK8Ang==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+3GOWPIVljvKJN7KNFT2U0PYatgsfRiQD1Y7YM77qG8=;
+ b=UfNa2jjbw5XC11gXUP9Asoa8P8zxtNXq2Ziq+UuDBMcLpIyRFMcvqKUadRvNPnNw19FNP6pXjHNwYQFLnVhUQIX2QNys5hpbyu4EUqWmkqRgDM4frYZsj8SlIjxISbCaFE+J4BI+k9cQnt83LKBMdkgryU0ZiQ7uJfYSD2LOL8xxIDcT8roAXayyn3WelihmOjyfu3rJVJpelk/o5+aXlMQn6ps1FKxiUYOZ/NX7KLE0Nw/R7wGkCX0Lxf7+6S6hvcWcJ+YH3mFuUOnNomBIoquOoPntdy34l1mXSEhCi1he5bErO/vKg0j7VkZK29nBXpAbf60gnrP5wePZgrph9Q==
+Received: from PAXPR04MB9185.eurprd04.prod.outlook.com (2603:10a6:102:231::11)
+ by DU2PR04MB8613.eurprd04.prod.outlook.com (2603:10a6:10:2d8::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
+ 2026 13:50:55 +0000
+Received: from PAXPR04MB9185.eurprd04.prod.outlook.com
+ ([fe80::b4c0:6119:2228:2ceb]) by PAXPR04MB9185.eurprd04.prod.outlook.com
+ ([fe80::b4c0:6119:2228:2ceb%4]) with mapi id 15.20.9723.030; Mon, 23 Mar 2026
+ 13:51:15 +0000
+From: Shenwei Wang <shenwei.wang@nxp.com>
+To: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Bjorn
+ Andersson <andersson@kernel.org>, Mathieu Poirier
+	<mathieu.poirier@linaro.org>, Frank Li <frank.li@nxp.com>, Sascha Hauer
+	<s.hauer@pengutronix.de>, "arnaud.pouliquen@foss.st.com"
+	<arnaud.pouliquen@foss.st.com>
+CC: Shuah Khan <skhan@linuxfoundation.org>, "linux-gpio@vger.kernel.org"
+	<linux-gpio@vger.kernel.org>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, Pengutronix Kernel Team
+	<kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, Peng Fan
+	<peng.fan@nxp.com>, "devicetree@vger.kernel.org"
+	<devicetree@vger.kernel.org>, "linux-remoteproc@vger.kernel.org"
+	<linux-remoteproc@vger.kernel.org>, "imx@lists.linux.dev"
+	<imx@lists.linux.dev>, "linux-arm-kernel@lists.infradead.org"
+	<linux-arm-kernel@lists.infradead.org>, dl-linux-imx <linux-imx@nxp.com>,
+	Bartosz Golaszewski <brgl@bgdev.pl>, Andrew Lunn <andrew@lunn.ch>
+Subject: RE: [PATCH v12 3/5] gpio: rpmsg: add generic rpmsg GPIO driver
+Thread-Topic: [PATCH v12 3/5] gpio: rpmsg: add generic rpmsg GPIO driver
+Thread-Index: AQHcsyPMkrsH1v1X8EObP4AwJRt0+bW8L85w
+Date: Mon, 23 Mar 2026 13:51:15 +0000
+Message-ID:
+ <PAXPR04MB9185BAA70595FB4BE85F8362894BA@PAXPR04MB9185.eurprd04.prod.outlook.com>
+References: <20260313195801.2043306-1-shenwei.wang@nxp.com>
+ <20260313195801.2043306-4-shenwei.wang@nxp.com>
+In-Reply-To: <20260313195801.2043306-4-shenwei.wang@nxp.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB9185:EE_|DU2PR04MB8613:EE_
+x-ms-office365-filtering-correlation-id: 223e4322-4d2a-425b-52cd-08de88e3409a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|376014|7416014|19092799006|366016|921020|38070700021|56012099003|18002099003|22082099003;
+x-microsoft-antispam-message-info:
+ 4jBgwbXoBXxk0QsVuiu4H3DuiG7O+ez14fBjgZ4O3rM57fF3AmIW+x6xV4tpeBeGWw3jaJLSrh1ftsFL3tFBj8AtuOgUShZCiKAyQrakFS1/I/0OAmB2OHoDz+h5rFDtQa513VfAwl6g6y7eeP4uvEMebzqOuPDEqfr+V6flypdWDxOFOYeUl9yoZGuzCUxeDlML5Jha7zjOAGFp1GbAbR+94ykBPcfZLF/m5BUZe4bBZocIog+lKJDOACm0A7AdYwogZk+eSJt/Pm6zu7MhqOQHSmkQHVXkJfS3eaoIa/gMMVogR3KDun54y5KnfWBwBn97S1lKeuky5F58daFmc/u6vFfkQPIPbj/lF4OP1NUm1Np4NIVNNislgypCVBN+hLOjEThpFb4caEXC4SWpysE9fQZp+w1QF2yX3euu46apFVn2EVdezhyQqD+ISB7jUDBB1BdLTy9rV+vrKVXusINdW8B6vdDJBqmEZR1JQd6x+hionLSjtrG7d5YNSRyl+AszKwJ7osq1fIxLmgKoPlzKc8jjiVkCtxoVlRq8p0xTNcUntRgucSi9aUQdpYYsKWQJHAMsvwW6xQ8NiXw3bAcK4rNXXg0ihdP6zyackw3on5S+K9h0i/OEJ8k4TiU1sk638DXMG/fzbluUw7GM6337ikCr6upns61YUbVyPW2BgSZs+k3X7p6ZPjncgC36LulVj2vEVzuI5FrebS6BS7KCxGghDtFN6+gywqpAoZtFCLn7LgQIigQRzOM0FfGAvTnwUXBmzYaqWz5vj6dux9AyAEXSs5nsOSHQlYFODDFJVzIDTDHwAWa72bSqBkeP
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR04MB9185.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(19092799006)(366016)(921020)(38070700021)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?J/kTa1zOjBVyJEvDi/NeqC+VoNgs96PuNLy9bIScK4mSUTh6bb9wnpRLcKCT?=
+ =?us-ascii?Q?xvxuRMWTAAzTxonH5nYAsXWJ6ODtBK01sYOfATTeCNUJi8SBFHNa91IqSxF7?=
+ =?us-ascii?Q?aV9phS/BNJg0alc2DG46vXD8bfaCLYlK+IvsBKuYl8jNYo6A/lVSKQMabD/t?=
+ =?us-ascii?Q?g+U7yQ373SAwGu86r+pimgrH8YF03Peg8cWgVrErByuxXGKPoKCzm0/G2igR?=
+ =?us-ascii?Q?nTGFuYYc5m5inqnUHEIww2cpd31QTvI+CcX2qTxRy3VzqGTIdx6/DYRnEkKv?=
+ =?us-ascii?Q?1odFLNR/CSQ9IZ2HIKgkG1tajnD+Vprg/suARwlHIKQo/uDI7Aav/E1VdJEC?=
+ =?us-ascii?Q?ix/adUkg9HfgLU56EJROyutIdCf6AzPVMMu0UljXm+nmPVh0x18uXdEkGT1r?=
+ =?us-ascii?Q?oQZv4btwqlb3pJ7SMQl5BXt1/7ep4rK1pFpCq6vAEZYfapf3z/rtP9GL7+9P?=
+ =?us-ascii?Q?MaCnjXG6dJEOiBpF+/2U9C+16vAAjUbgQSpF0dklAufiRXfMbFt8PYhOUMRC?=
+ =?us-ascii?Q?8nyc+grmxu0QZK5ke7eKzTYmQErXYuFwAN0bsuAu8RlELeCuytiM7c/dSa63?=
+ =?us-ascii?Q?RClgXuUF0EpKBLqMkWsONuKgwmCAOMnz0cEo2Gcqs64OcN7YtZ5pnbKPaXf6?=
+ =?us-ascii?Q?HoB6RYK9IuCcFt65nZR1nIlJ8/+PNfB/jyYv4MdUbOXiLBeyFgABJkCWRkUs?=
+ =?us-ascii?Q?1Jw5TyuwrMiPfiGu5OmJ87tBbz8Q3F/iwvNkRzrWU97Q8YfMWCHOmEN3VbGF?=
+ =?us-ascii?Q?FgRoGGPAYWhT1PyYED1JbAZKoXPpqeDgi7i6rjc6kM9XyI05pSjb5MibEkd+?=
+ =?us-ascii?Q?Srzonn4VBqTPXoveWI+iMOoUFfDBELNDlmiS83k5eDQsqyvOBBjf0R9KXC5G?=
+ =?us-ascii?Q?pCURpZuPHsPQzzLrjDDe32KADgeSS6z49g3PZwsO1oOb+Lm2W4iKw/W2S1Od?=
+ =?us-ascii?Q?FafV+583UjFdScJqnlfMiHOF2MXZ2aAlD+2RMdX83LT/mR/TgGbWmYfbgDG1?=
+ =?us-ascii?Q?34Wb1r+mFAZZ/vZhiOxzkuKWyNZ9IX7wVtWdefayEy4u87ccoTlLfwgMjlo5?=
+ =?us-ascii?Q?8HUmw4jy2NmgN4YYt4ri0+Qg6kzsMU+HAkKRFkKGTbPnjN1hTXPLuVTLECqE?=
+ =?us-ascii?Q?omCb3r12wF5qToyq00azlnZ7bFckRQn9xl6vEfUN6SlavJc6Pbi2ySaZPudQ?=
+ =?us-ascii?Q?okJL8EBKqulbr2UtKs6zJvI6v7g4J6bxPBMk5FXF3xP2LI3xOk+n0YdQ/DHt?=
+ =?us-ascii?Q?7gfCJpSisM3M1yyv6GH1NWxvzsiZ36KKtE5rBNJDwTlRgpklDlGste+CJLF2?=
+ =?us-ascii?Q?j76gfhpju/cbe/+APC1KDHyQ5CyjJGgj2yIBzWvj9dRUICkHtSmXa+DfQtdI?=
+ =?us-ascii?Q?u94kKSE0B9xiuaN/g7nP/qdca51maxjbj1VpcfClipowLImHcemXatf2LuLm?=
+ =?us-ascii?Q?OT2iJE5lPPGPabmGa8x6cyXxNuiqHx7I3OkQ+ze5PlJhMQ4lmBEH7CCE7+0l?=
+ =?us-ascii?Q?sjvxgKMJiyav2Qa6UBREP7zk67Bpl1RfizwHwG96yfdkaLM7/2FS4e9DKCBi?=
+ =?us-ascii?Q?P/bH8eqtcQrZYVdO1b0uh/+HREPXd3+lyYtV1XBxeVwKpHawPzCNKvNws6Y/?=
+ =?us-ascii?Q?7z4kLPhFdhGnG/KIiZ+FtB7RLdcJEtWrOdyHlzRcHBVBTQkApQ1Y2omgVrzV?=
+ =?us-ascii?Q?ad6+gZhm0i4KQQk+Kz6jlIcIjjfu6OfLmiTvoD8OFX0c4XWC?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9185.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 223e4322-4d2a-425b-52cd-08de88e3409a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Mar 2026 13:51:15.5640
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: hFIUx9M3hFwnGOwehCjDnNel6QvH8CTlk1s1S10OXxTPHnniBGGtvovQM9k/aZ0/TLjDzZGkCMLic2nx5Hc+xA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8613
+X-Spamd-Result: default: False [1.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nxp.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[nxp.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80724-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	PRECEDENCE_BULK(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80680-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,pengutronix.de,gmail.com,nxp.com,lists.linux.dev,lists.infradead.org,bgdev.pl,lunn.ch];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 5272F2F9474
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[shenwei.wang@nxp.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[nxp.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	NEURAL_HAM(-0.00)[-1.000];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 754782F39C9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-6.1-stable review patch.  If anyone has any objections, please let me know.
+Hi Bjorn,
 
-------------------
+> -----Original Message-----
+> From: Shenwei Wang
+> Sent: Friday, March 13, 2026 2:59 PM
+> To: Linus Walleij <linusw@kernel.org>; Bartosz Golaszewski <brgl@kernel.o=
+rg>;
+> Jonathan Corbet <corbet@lwn.net>; Rob Herring <robh@kernel.org>; Krzyszto=
+f
+> Kozlowski <krzk+dt@kernel.org>; Conor Dooley <conor+dt@kernel.org>; Bjorn
+> Andersson <andersson@kernel.org>; Mathieu Poirier
+> <mathieu.poirier@linaro.org>; Frank Li <frank.li@nxp.com>; Sascha Hauer
+> <s.hauer@pengutronix.de>; arnaud.pouliquen@foss.st.com
+> Cc: Shuah Khan <skhan@linuxfoundation.org>; linux-gpio@vger.kernel.org; l=
+inux-
+> doc@vger.kernel.org; linux-kernel@vger.kernel.org; Pengutronix Kernel Tea=
+m
+> <kernel@pengutronix.de>; Fabio Estevam <festevam@gmail.com>; Shenwei
+> Wang <shenwei.wang@nxp.com>; Peng Fan <peng.fan@nxp.com>;
+> devicetree@vger.kernel.org; linux-remoteproc@vger.kernel.org;
+> imx@lists.linux.dev; linux-arm-kernel@lists.infradead.org; dl-linux-imx <=
+linux-
+> imx@nxp.com>; Bartosz Golaszewski <brgl@bgdev.pl>; Andrew Lunn
+> <andrew@lunn.ch>
+> Subject: [PATCH v12 3/5] gpio: rpmsg: add generic rpmsg GPIO driver
+>=20
 
-From: Randy Dunlap <rdunlap@infradead.org>
-
-[ Upstream commit 67b3f564cb1e769ef8e45835129a4866152fcfdb ]
-
-Add kernel-doc for all APIs that do not already have it.
-
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: John Stultz <jstultz@google.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Stephen Boyd <sboyd@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Acked-by: John Stultz <jstultz@google.com>
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
-Link: https://lore.kernel.org/r/20230704052405.5089-3-rdunlap@infradead.org
-Stable-dep-of: 755a648e78f1 ("time/jiffies: Mark jiffies_64_to_clock_t() notrace")
-Signed-off-by: Sasha Levin <sashal@kernel.org>
+Since I rewrote this version based on your earlier feedback=20
 ---
- kernel/time/time.c | 169 ++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 158 insertions(+), 11 deletions(-)
+"My expectation is that it will be better to just have two separate
+drivers - but reuse all the design-work done in the gpio-virtio."
+---
+I'd glad to hear what you think about this patch.
 
-diff --git a/kernel/time/time.c b/kernel/time/time.c
-index a92c7f3277ad6..be42ace51255c 100644
---- a/kernel/time/time.c
-+++ b/kernel/time/time.c
-@@ -365,11 +365,14 @@ SYSCALL_DEFINE1(adjtimex_time32, struct old_timex32 __user *, utp)
- }
- #endif
- 
--/*
-- * Convert jiffies to milliseconds and back.
-+/**
-+ * jiffies_to_msecs - Convert jiffies to milliseconds
-+ * @j: jiffies value
-  *
-  * Avoid unnecessary multiplications/divisions in the
-- * two most common HZ cases:
-+ * two most common HZ cases.
-+ *
-+ * Return: milliseconds value
-  */
- unsigned int jiffies_to_msecs(const unsigned long j)
- {
-@@ -388,6 +391,12 @@ unsigned int jiffies_to_msecs(const unsigned long j)
- }
- EXPORT_SYMBOL(jiffies_to_msecs);
- 
-+/**
-+ * jiffies_to_usecs - Convert jiffies to microseconds
-+ * @j: jiffies value
-+ *
-+ * Return: microseconds value
-+ */
- unsigned int jiffies_to_usecs(const unsigned long j)
- {
- 	/*
-@@ -408,8 +417,15 @@ unsigned int jiffies_to_usecs(const unsigned long j)
- }
- EXPORT_SYMBOL(jiffies_to_usecs);
- 
--/*
-+/**
-  * mktime64 - Converts date to seconds.
-+ * @year0: year to convert
-+ * @mon0: month to convert
-+ * @day: day to convert
-+ * @hour: hour to convert
-+ * @min: minute to convert
-+ * @sec: second to convert
-+ *
-  * Converts Gregorian date to seconds since 1970-01-01 00:00:00.
-  * Assumes input in normal date format, i.e. 1980-12-31 23:59:59
-  * => year=1980, mon=12, day=31, hour=23, min=59, sec=59.
-@@ -427,6 +443,8 @@ EXPORT_SYMBOL(jiffies_to_usecs);
-  *
-  * An encoding of midnight at the end of the day as 24:00:00 - ie. midnight
-  * tomorrow - (allowable under ISO 8601) is supported.
-+ *
-+ * Return: seconds since the epoch time for the given input date
-  */
- time64_t mktime64(const unsigned int year0, const unsigned int mon0,
- 		const unsigned int day, const unsigned int hour,
-@@ -471,8 +489,7 @@ EXPORT_SYMBOL(ns_to_kernel_old_timeval);
-  * Set seconds and nanoseconds field of a timespec variable and
-  * normalize to the timespec storage format
-  *
-- * Note: The tv_nsec part is always in the range of
-- *	0 <= tv_nsec < NSEC_PER_SEC
-+ * Note: The tv_nsec part is always in the range of 0 <= tv_nsec < NSEC_PER_SEC.
-  * For negative values only the tv_sec field is negative !
-  */
- void set_normalized_timespec64(struct timespec64 *ts, time64_t sec, s64 nsec)
-@@ -501,7 +518,7 @@ EXPORT_SYMBOL(set_normalized_timespec64);
-  * ns_to_timespec64 - Convert nanoseconds to timespec64
-  * @nsec:       the nanoseconds value to be converted
-  *
-- * Returns the timespec64 representation of the nsec parameter.
-+ * Return: the timespec64 representation of the nsec parameter.
-  */
- struct timespec64 ns_to_timespec64(s64 nsec)
- {
-@@ -548,6 +565,8 @@ EXPORT_SYMBOL(ns_to_timespec64);
-  * runtime.
-  * the _msecs_to_jiffies helpers are the HZ dependent conversion
-  * routines found in include/linux/jiffies.h
-+ *
-+ * Return: jiffies value
-  */
- unsigned long __msecs_to_jiffies(const unsigned int m)
- {
-@@ -560,6 +579,12 @@ unsigned long __msecs_to_jiffies(const unsigned int m)
- }
- EXPORT_SYMBOL(__msecs_to_jiffies);
- 
-+/**
-+ * __usecs_to_jiffies: - convert microseconds to jiffies
-+ * @u:	time in milliseconds
-+ *
-+ * Return: jiffies value
-+ */
- unsigned long __usecs_to_jiffies(const unsigned int u)
- {
- 	if (u > jiffies_to_usecs(MAX_JIFFY_OFFSET))
-@@ -568,7 +593,10 @@ unsigned long __usecs_to_jiffies(const unsigned int u)
- }
- EXPORT_SYMBOL(__usecs_to_jiffies);
- 
--/*
-+/**
-+ * timespec64_to_jiffies - convert a timespec64 value to jiffies
-+ * @value: pointer to &struct timespec64
-+ *
-  * The TICK_NSEC - 1 rounds up the value to the next resolution.  Note
-  * that a remainder subtract here would not do the right thing as the
-  * resolution values don't fall on second boundaries.  I.e. the line:
-@@ -582,8 +610,9 @@ EXPORT_SYMBOL(__usecs_to_jiffies);
-  *
-  * The >> (NSEC_JIFFIE_SC - SEC_JIFFIE_SC) converts the scaled nsec
-  * value to a scaled second value.
-+ *
-+ * Return: jiffies value
-  */
--
- unsigned long
- timespec64_to_jiffies(const struct timespec64 *value)
- {
-@@ -601,6 +630,11 @@ timespec64_to_jiffies(const struct timespec64 *value)
- }
- EXPORT_SYMBOL(timespec64_to_jiffies);
- 
-+/**
-+ * jiffies_to_timespec64 - convert jiffies value to &struct timespec64
-+ * @jiffies: jiffies value
-+ * @value: pointer to &struct timespec64
-+ */
- void
- jiffies_to_timespec64(const unsigned long jiffies, struct timespec64 *value)
- {
-@@ -618,6 +652,13 @@ EXPORT_SYMBOL(jiffies_to_timespec64);
- /*
-  * Convert jiffies/jiffies_64 to clock_t and back.
-  */
-+
-+/**
-+ * jiffies_to_clock_t - Convert jiffies to clock_t
-+ * @x: jiffies value
-+ *
-+ * Return: jiffies converted to clock_t (CLOCKS_PER_SEC)
-+ */
- clock_t jiffies_to_clock_t(unsigned long x)
- {
- #if (TICK_NSEC % (NSEC_PER_SEC / USER_HZ)) == 0
-@@ -632,6 +673,12 @@ clock_t jiffies_to_clock_t(unsigned long x)
- }
- EXPORT_SYMBOL(jiffies_to_clock_t);
- 
-+/**
-+ * clock_t_to_jiffies - Convert clock_t to jiffies
-+ * @x: clock_t value
-+ *
-+ * Return: clock_t value converted to jiffies
-+ */
- unsigned long clock_t_to_jiffies(unsigned long x)
- {
- #if (HZ % USER_HZ)==0
-@@ -649,6 +696,12 @@ unsigned long clock_t_to_jiffies(unsigned long x)
- }
- EXPORT_SYMBOL(clock_t_to_jiffies);
- 
-+/**
-+ * jiffies_64_to_clock_t - Convert jiffies_64 to clock_t
-+ * @x: jiffies_64 value
-+ *
-+ * Return: jiffies_64 value converted to 64-bit "clock_t" (CLOCKS_PER_SEC)
-+ */
- u64 jiffies_64_to_clock_t(u64 x)
- {
- #if (TICK_NSEC % (NSEC_PER_SEC / USER_HZ)) == 0
-@@ -671,6 +724,12 @@ u64 jiffies_64_to_clock_t(u64 x)
- }
- EXPORT_SYMBOL(jiffies_64_to_clock_t);
- 
-+/**
-+ * nsec_to_clock_t - Convert nsec value to clock_t
-+ * @x: nsec value
-+ *
-+ * Return: nsec value converted to 64-bit "clock_t" (CLOCKS_PER_SEC)
-+ */
- u64 nsec_to_clock_t(u64 x)
- {
- #if (NSEC_PER_SEC % USER_HZ) == 0
-@@ -687,6 +746,12 @@ u64 nsec_to_clock_t(u64 x)
- #endif
- }
- 
-+/**
-+ * jiffies64_to_nsecs - Convert jiffies64 to nanoseconds
-+ * @j: jiffies64 value
-+ *
-+ * Return: nanoseconds value
-+ */
- u64 jiffies64_to_nsecs(u64 j)
- {
- #if !(NSEC_PER_SEC % HZ)
-@@ -697,6 +762,12 @@ u64 jiffies64_to_nsecs(u64 j)
- }
- EXPORT_SYMBOL(jiffies64_to_nsecs);
- 
-+/**
-+ * jiffies64_to_msecs - Convert jiffies64 to milliseconds
-+ * @j: jiffies64 value
-+ *
-+ * Return: milliseconds value
-+ */
- u64 jiffies64_to_msecs(const u64 j)
- {
- #if HZ <= MSEC_PER_SEC && !(MSEC_PER_SEC % HZ)
-@@ -719,6 +790,8 @@ EXPORT_SYMBOL(jiffies64_to_msecs);
-  * note:
-  *   NSEC_PER_SEC = 10^9 = (5^9 * 2^9) = (1953125 * 512)
-  *   ULLONG_MAX ns = 18446744073.709551615 secs = about 584 years
-+ *
-+ * Return: nsecs converted to jiffies64 value
-  */
- u64 nsecs_to_jiffies64(u64 n)
- {
-@@ -750,6 +823,8 @@ EXPORT_SYMBOL(nsecs_to_jiffies64);
-  * note:
-  *   NSEC_PER_SEC = 10^9 = (5^9 * 2^9) = (1953125 * 512)
-  *   ULLONG_MAX ns = 18446744073.709551615 secs = about 584 years
-+ *
-+ * Return: nsecs converted to jiffies value
-  */
- unsigned long nsecs_to_jiffies(u64 n)
- {
-@@ -757,10 +832,16 @@ unsigned long nsecs_to_jiffies(u64 n)
- }
- EXPORT_SYMBOL_GPL(nsecs_to_jiffies);
- 
--/*
-- * Add two timespec64 values and do a safety check for overflow.
-+/**
-+ * timespec64_add_safe - Add two timespec64 values and do a safety check
-+ * for overflow.
-+ * @lhs: first (left) timespec64 to add
-+ * @rhs: second (right) timespec64 to add
-+ *
-  * It's assumed that both values are valid (>= 0).
-  * And, each timespec64 is in normalized form.
-+ *
-+ * Return: sum of @lhs + @rhs
-  */
- struct timespec64 timespec64_add_safe(const struct timespec64 lhs,
- 				const struct timespec64 rhs)
-@@ -778,6 +859,15 @@ struct timespec64 timespec64_add_safe(const struct timespec64 lhs,
- 	return res;
- }
- 
-+/**
-+ * get_timespec64 - get user's time value into kernel space
-+ * @ts: destination &struct timespec64
-+ * @uts: user's time value as &struct __kernel_timespec
-+ *
-+ * Handles compat or 32-bit modes.
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_timespec64(struct timespec64 *ts,
- 		   const struct __kernel_timespec __user *uts)
- {
-@@ -801,6 +891,14 @@ int get_timespec64(struct timespec64 *ts,
- }
- EXPORT_SYMBOL_GPL(get_timespec64);
- 
-+/**
-+ * put_timespec64 - convert timespec64 value to __kernel_timespec format and
-+ * 		    copy the latter to userspace
-+ * @ts: input &struct timespec64
-+ * @uts: user's &struct __kernel_timespec
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_timespec64(const struct timespec64 *ts,
- 		   struct __kernel_timespec __user *uts)
- {
-@@ -839,6 +937,15 @@ static int __put_old_timespec32(const struct timespec64 *ts64,
- 	return copy_to_user(cts, &ts, sizeof(ts)) ? -EFAULT : 0;
- }
- 
-+/**
-+ * get_old_timespec32 - get user's old-format time value into kernel space
-+ * @ts: destination &struct timespec64
-+ * @uts: user's old-format time value (&struct old_timespec32)
-+ *
-+ * Handles X86_X32_ABI compatibility conversion.
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_old_timespec32(struct timespec64 *ts, const void __user *uts)
- {
- 	if (COMPAT_USE_64BIT_TIME)
-@@ -848,6 +955,16 @@ int get_old_timespec32(struct timespec64 *ts, const void __user *uts)
- }
- EXPORT_SYMBOL_GPL(get_old_timespec32);
- 
-+/**
-+ * put_old_timespec32 - convert timespec64 value to &struct old_timespec32 and
-+ * 			copy the latter to userspace
-+ * @ts: input &struct timespec64
-+ * @uts: user's &struct old_timespec32
-+ *
-+ * Handles X86_X32_ABI compatibility conversion.
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_old_timespec32(const struct timespec64 *ts, void __user *uts)
- {
- 	if (COMPAT_USE_64BIT_TIME)
-@@ -857,6 +974,13 @@ int put_old_timespec32(const struct timespec64 *ts, void __user *uts)
- }
- EXPORT_SYMBOL_GPL(put_old_timespec32);
- 
-+/**
-+ * get_itimerspec64 - get user's &struct __kernel_itimerspec into kernel space
-+ * @it: destination &struct itimerspec64
-+ * @uit: user's &struct __kernel_itimerspec
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_itimerspec64(struct itimerspec64 *it,
- 			const struct __kernel_itimerspec __user *uit)
- {
-@@ -872,6 +996,14 @@ int get_itimerspec64(struct itimerspec64 *it,
- }
- EXPORT_SYMBOL_GPL(get_itimerspec64);
- 
-+/**
-+ * put_itimerspec64 - convert &struct itimerspec64 to __kernel_itimerspec format
-+ * 		      and copy the latter to userspace
-+ * @it: input &struct itimerspec64
-+ * @uit: user's &struct __kernel_itimerspec
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_itimerspec64(const struct itimerspec64 *it,
- 			struct __kernel_itimerspec __user *uit)
- {
-@@ -887,6 +1019,13 @@ int put_itimerspec64(const struct itimerspec64 *it,
- }
- EXPORT_SYMBOL_GPL(put_itimerspec64);
- 
-+/**
-+ * get_old_itimerspec32 - get user's &struct old_itimerspec32 into kernel space
-+ * @its: destination &struct itimerspec64
-+ * @uits: user's &struct old_itimerspec32
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int get_old_itimerspec32(struct itimerspec64 *its,
- 			const struct old_itimerspec32 __user *uits)
- {
-@@ -898,6 +1037,14 @@ int get_old_itimerspec32(struct itimerspec64 *its,
- }
- EXPORT_SYMBOL_GPL(get_old_itimerspec32);
- 
-+/**
-+ * put_old_itimerspec32 - convert &struct itimerspec64 to &struct
-+ *			  old_itimerspec32 and copy the latter to userspace
-+ * @its: input &struct itimerspec64
-+ * @uits: user's &struct old_itimerspec32
-+ *
-+ * Return: %0 on success or negative errno on error
-+ */
- int put_old_itimerspec32(const struct itimerspec64 *its,
- 			struct old_itimerspec32 __user *uits)
- {
--- 
-2.51.0
+Thanks,
+Shenwei
 
-
+> On an AMP platform, the system may include two processors:
+> 	- An MCU running an RTOS
+> 	- An MPU running Linux
+>=20
+> These processors communicate via the RPMSG protocol.
+> The driver implements the standard GPIO interface, allowing the Linux sid=
+e to
+> control GPIO controllers which reside in the remote processor via RPMSG
+> protocol.
+>=20
+> Cc: Bartosz Golaszewski <brgl@bgdev.pl>
+> Cc: Andrew Lunn <andrew@lunn.ch>
+> Signed-off-by: Shenwei Wang <shenwei.wang@nxp.com>
+> ---
+>  drivers/gpio/Kconfig      |  17 ++
+>  drivers/gpio/Makefile     |   1 +
+>  drivers/gpio/gpio-rpmsg.c | 596 ++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 614 insertions(+)
+>  create mode 100644 drivers/gpio/gpio-rpmsg.c
+>=20
+> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig index
+> b45fb799e36c..cff0fda8a283 100644
 
 
