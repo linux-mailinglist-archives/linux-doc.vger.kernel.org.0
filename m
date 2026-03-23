@@ -1,2531 +1,926 @@
-Return-Path: <linux-doc+bounces-80640-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80642-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UF3TM1wUwWnkQQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80640-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:22:20 +0100
+	id QHaVBMgUwWn5QQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80642-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:24:08 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39F062EFEED
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:22:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 972C52EFF89
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:24:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 3F421301E5EB
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:21:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 2B74C301078B
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:23:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 285A438B12B;
-	Mon, 23 Mar 2026 10:20:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CF42338C2A0;
+	Mon, 23 Mar 2026 10:23:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ym3E1WEs"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="mO2uio9K"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EE5129992B
-	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 10:20:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEA8238C42D;
+	Mon, 23 Mar 2026 10:23:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774261253; cv=none; b=bQQVbAlZTRnCWxf31a7acPARPN4bFD68UXlwp8Fi62p5cvYZOsF+EMXs+0w0ncwuiKvOwJcchu0WBROWTm89Jy+N9fX5erTA6vbgeA5JeEbfdhOs5hgEFtWY0N/jqajbmvX9xEBAjbhXC5M56W101/SFelTFUuSyanPO05M8lzk=
+	t=1774261384; cv=none; b=YxW7JsZ71ZpPu+imj34iCDj9znOed6kOz9WfppUqgzcnpQMY3dBhuhAJzlJF/mxGRPxYY8dXinx6cQuytlECXA8+ElCLOKx7sX12JTCLqfyUe5cZ0Pj27xYt5P8JhuvDg3Nmjgndi4AC0C/Y301C7Ootj4SJ4AQPp0fShbkEfYE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774261253; c=relaxed/simple;
-	bh=Oe5UeypWpfgsYp1wLj1DA0+qruK9L/Xc9BhBftn7bnI=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=VLapGk+IQIsII4+gSjLe5JyauozOj2l3HZORVM0sp6kU4Ibkj1BkFi71zFb5O1sJ840YJQyIRObMFiDhrmAPjPI6F1N76Nwsq4v1PgTojVg3A86/UoN+ZnEVMfoVKjJYV69i1EKXDzu1EtLpSI4vFWK41xhJfpfAGtQEmWEsUlg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ym3E1WEs; arc=none smtp.client-ip=209.85.128.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-486fc4725f0so33319535e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 03:20:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774261247; x=1774866047; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=RVfXFDSVP1vLDhk1KVILOy0EiIZntidzuJw+74rAjUQ=;
-        b=Ym3E1WEsTHVyV0I/a65OlFveXypyEEMmwTwUuawcC/OifKdZXdjHm+kitvPQom3/oK
-         3Pnsupkumv/Xr5CqTZJI+WQeHe1LaxRvNIrLWvKKFhj/vE67wd4ILIH7K+i7AFVtpFLs
-         aitVdt6qS1Y103K/SFPlKpgpjIuvHYViyDi02gSt9SOW3gVvNwpacvNoCj+kGnKxoNGj
-         9tamGX1GUWpHnx/vJsIrQmrni+i6yvqHDLj+c8UA9bAFlznhJO8pSs3I9KW8S/4ADH1h
-         L/xMug+ICcVsznt2prL242fqsfBDXrJ0DyCKmFTAwmOEsJod2DDpok34ZniBbPUNR8he
-         JFSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774261247; x=1774866047;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=RVfXFDSVP1vLDhk1KVILOy0EiIZntidzuJw+74rAjUQ=;
-        b=qx+JFmCyocGfxlzM+gMGQasb6wRgl15H7KT6BzEKO2PEYswrpZ7ppfCW7yUVo/WOi1
-         JtbXLiKfO7pqYRUN9ucPwgHyiVYLsmB+lTN042cP/J7wcOJL9pRkO42VhB91Ro0i3JiX
-         TJ3FS+nyPUzXJwrmS4YUUhtKIOtY/K9Ib14lAO1ec1EWlbOEXk+r/+1bTKX5rWVWsTUb
-         ghplyHoKJ44/qfPxR0Y847zfdEHnOHZQB/euH9OH4AQR1/Cj5phWBgiaNrVvyB0qT5/n
-         /DtoeosgQQ440yPpIcJmqIQsLLZRpM/b/yaz/TZttSIO6JOVnidJcoqocm3Dw9+JQm3A
-         U1zQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVx16guNqeoYa4Y7NVm9sgFAZwbeqEsZ9Y/i21OMaDLR8JeN4L/wVuPZaV1pw4ycB8ckxJ824jPnfQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyEIiZrzC5NicCgnAn6ivYUouduskHykW8myW7IzJovqh5Xq4BA
-	oAmjmuYF8StT13Twl8VXwITc8vSpJ6IXBdVybo2P8cfz9VO3s7qXA2QR
-X-Gm-Gg: ATEYQzxLATpGDJXZBNOG+jmbBNaAoaw2VUcnh67gCf3qWAc/V4MkdOxCfyfpiNenMiB
-	+D5A9OzU+Mhwdjglzs+KiFwc1Ed/63JpWP4ykh6OhBl6ciF2r1JdNDzd7Yo+eKfex2qbtJlMtS5
-	2YtJtd21RFUELNjo3nrE+grh6lV2xVaN5uDf5K0ZDGogHuJ4/41zWcG5FZaBdZtVX+gbkcK73wm
-	J8v2h8WwF9W8ebTKlsDRTjrcccbrRhUZf4fiK6k927KA4eCKfqTX7GiOK6LPYNx3WUh5Ims1MQM
-	ab1In5BV8DfECkKlJ+J74XtiJKUGGngqeZzxGPlTgsTekc3gIU23lO7eZoSRgudJ62ePhKqAvWB
-	A5oxSS+W986K6WKih5Uzm04kPNMJ9q5ADjVXUgIba+xMhol/3n+927ROlpbGWJbTSX0OYWjDPvX
-	/opeS25Us6MsFpnVDRPFIjlSCN1z9AZDw=
-X-Received: by 2002:a05:600c:3105:b0:485:3c11:de84 with SMTP id 5b1f17b1804b1-486fe8f08cbmr169317645e9.14.1774261245970;
-        Mon, 23 Mar 2026 03:20:45 -0700 (PDT)
-Received: from [192.168.1.187] ([148.63.225.166])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486fe7d6c54sm623642425e9.4.2026.03.23.03.20.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Mar 2026 03:20:45 -0700 (PDT)
-Message-ID: <f3bb0c7417352e2057e1fa34d3dc737ff1fd5083.camel@gmail.com>
-Subject: Re: [PATCH v7 2/3] hwmon: ltc4283: Add support for the LTC4283 Swap
- Controller
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: Guenter Roeck <linux@roeck-us.net>, Nuno =?ISO-8859-1?Q?S=E1?=
-	 <nuno.sa@analog.com>
-Cc: linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Rob Herring
-	 <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	 <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
-	 <skhan@linuxfoundation.org>, Linus Walleij <linusw@kernel.org>, Bartosz
- Golaszewski <brgl@kernel.org>
-Date: Mon, 23 Mar 2026 10:21:31 +0000
-In-Reply-To: <69e4e158-bd91-4df6-906c-a64f10408ae9@roeck-us.net>
-References: <20260314-ltc4283-support-v7-0-1cda48e93802@analog.com>
-	 <20260314-ltc4283-support-v7-2-1cda48e93802@analog.com>
-	 <69e4e158-bd91-4df6-906c-a64f10408ae9@roeck-us.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	s=arc-20240116; t=1774261384; c=relaxed/simple;
+	bh=U7i/kQTrxgdfXDeBmdFRPY3n76zYgfQiBxfEt4HI4Fo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FuTunovvEsG+nEfiPt1tW+9Cel3cYBM8WDJfBCBaPnYEdmSfai3KfvokFzC0jlWoWERZRsIoYQxc5VIydXpHUoIrt+oSxJJ4vVh/CUVLuB0JfL5f5vSDUZrLjAmPwp3PjZ4mFPeWmmyQVP3iZoBoF8RW1ULU5GifQRwMKe5swuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=mO2uio9K; arc=none smtp.client-ip=212.227.15.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1774261379; x=1774866179; i=w_armin@gmx.de;
+	bh=U7i/kQTrxgdfXDeBmdFRPY3n76zYgfQiBxfEt4HI4Fo=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:cc:content-transfer-encoding:
+	 content-type:date:from:message-id:mime-version:reply-to:subject:
+	 to;
+	b=mO2uio9K9fiwkrNlgbOAh9cOsAhj48+uFimtEnJ6tKmbrG2aemR8DbzE+mAMYat9
+	 sWGDwZ727mRD7pt0dXjXChZkH2OuBlzgrxXRFB7fFNnF9G/60uKro0m2meo1e2/CI
+	 GUDFb0EMyMXxPcTiXUCY/tBlhyW0bAbDE4zwgrz+qfsE+Kktwac+aSL3WYH/5Ve6o
+	 LotuqXuY71VpYq4wdzjhO6TU/Xi3jpAlurxA8B/cdkhip8hIFShkr/BJlTKD7n6Yh
+	 rbvftnajIEgyD1d/7TKuyZgl7V9DNOZxuHyWjz07JLLoYqD8Hh4/Nkrr4j0od8LZN
+	 fVzRt4DH5HZaHqZ+GQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N3KTo-1vNPkW3EmY-00rSWq; Mon, 23
+ Mar 2026 11:22:58 +0100
+Message-ID: <ea41ff3c-4ee1-4fe4-a348-0c7f28fbd20b@gmx.de>
+Date: Mon, 23 Mar 2026 11:22:57 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Spamd-Result: default: False [-0.66 / 15.00];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 1/1] leds: Introduce the multi_max_intensity sysfs
+ attribute
+To: Jacek Anaszewski <jacek.anaszewski@gmail.com>, lee@kernel.org,
+ pavel@kernel.org
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, linux-leds@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ wse@tuxedocomputers.com, pobrn@protonmail.com
+References: <20260314230107.65444-1-W_Armin@gmx.de>
+ <20260314230107.65444-2-W_Armin@gmx.de>
+ <e43fc3be-7cee-432b-90cb-7fbc4af2fa68@gmail.com>
+Content-Language: en-US
+From: Armin Wolf <W_Armin@gmx.de>
+In-Reply-To: <e43fc3be-7cee-432b-90cb-7fbc4af2fa68@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+X-Provags-ID: V03:K1:xdPN3pBhiYZENUSukVFMrQ7XlWGoktavq/IZhk8VlHM0PCWUkSd
+ qY/Hh8E+aD0T1VNhIEiN+w/zpVk8u5p0NRIGBiM5fi4j7N4D+orL1AkLaHGWJeAEZn180SW
+ 9VMj6C6amoBv/37oJbq8/1KIAXRm7h4dXfApNhf9MfLpEw77FX/VOFDbrBRA9FkqjGoTX8f
+ hALZWFHi3JYcCzf0NY6Nw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:UcDbEda6ccM=;yBbE14B0f61f8iIirzUYJnMLLXB
+ OoWrJu/3ZAkDUve8zWaYI59BHeyYcroBMb5awNv1V/o9JyzcJrs8dDNv4VkrlaZtdBoKTEfs5
+ P77Rc9K+S2nyPG9CsX5yKzScx1lHm5bhJ4loVSV0islAhVK3u5yvm4hs775brIM25CDE/LKmq
+ jQAUKVU5P7LwxfwjnuTKzC/ClrVB+ULtDUJGliAAT8ZIkVq53PPpXEIbtIy1M1+aY4t+CoU9i
+ keg1HgM9EwkI7kvNCpQMqQ3rAUsQo4X/Sd8PztwifYuG5tjeVozAEdo2ddGc6Q0aKxhCUZC62
+ jI/kQ/61VMOoI6RoiPh2slmXZS1gyKr4jTBLOYYCeN2dyHsex4bXth2HvXa9Yyk5iSXfrQWUo
+ V5kX3kgIT/UPq2hPLX0kGJ3Hz2dmCnu9lFbXg+o6LiClsqSNhQFw3gp0qPgZmW6QG8ZknaZqG
+ rhbpp51SJwRvDALpE6/jIShtwLHD39rY8RD5ziktgVK5tNo8W6NOVtR4DD5vk7VjYoWTbzbC1
+ OAQ1yKFLsZD1yUa2WboF9aghyZmyc2/+cAKiTEVkwrUCq4qSdzrNyT40/kC/4hrz1G4exmGmb
+ 2z4DwupHDXV/QqFIppyl+uzC0OexAYwh8slPJVO7m8z0ay+wxPRA774UW3wZ84yN/gm3TNTYq
+ XGPcnseABOYf8sO9f5/5TuWcjusmJxfuCrNKETU4wBdT6cmogYzNGSqHiAPjQfQ7t6VKhZSx8
+ VA/ZJeoNM8rKWIOzw7hh6gWRVpzR2NguniRH9MN24NQ9YAUNsjDCuUo+q2rywKzWvHX4EjrC1
+ ANbFUs+9pCemDhWMBXNsgif4RkelCwgqFS0/Cq6Z/MmQ35uT7yvoRiKp/vmUZnKA7VVpq3zl1
+ 83pnib2+8Y7nl4jYYP5lcJpdBk3r7GGjB9o0Tk8C/EzenwjSmFgtoFy1qN+4A6aqi3b/IoxPn
+ hFfpkLDqc6KTtFgfqr3TozH1Q8DWy+0JcuHeeQCPEI6u2bIhnaKl5hYLxWqT/3NeAl71OtJ76
+ dTkxf+pgzl4pvZL8rBqIS7J0+7PaKV1dPhz17fkRx/FPBHefuFeMhdVi4war7zyHtFZDAsBJM
+ GZLYhLH4egtYePrrH9n09a5VFKSd7j2g4wWf+VF+wsyx1kJDrETnQQ7Mz9WIIcvuJAbaweaz3
+ L9KP3OsBgxpzZuv9EjnkXveCNg5Q0WwpiNXHgj0cfrtTTgwLTUdrcIaRV0b7O1ljHKOTV4c+m
+ 4kaH7ybOoTX/16mkRp+LOIgjA/fJlfQWVxWe4Pp5/zmtdh1wHlOV/erAH67UZzmn4uQBVvrz0
+ dZARMq/TLZqxuiy9nbfP8UhNHQfiKrhTzK5N4f/H/yM9c5ablrFHYmeljMh58a51cl7tyEDdm
+ MP0UgDpxmATbfE15+ePNQrLUbMaHfMO6Rd/lkTIojOm2LmQJhwmYE3oiDLJYKEptK4oDQieB5
+ PiSP7vF49Zeo0UOvXMox2vpRGtiqQxiGwUE2c11QrQLRuLuLq2IyZrURzQbmNXGATWo6R6Hkz
+ OoXsPBOXYe4vD/SDwstuEAKGwNgZ7PSEafOXxxrfML6kJQwTcFmz3ICW/fPrsrAVWr1AQVqnN
+ u6vn+FL+EH2UbQIL+5ENMkXESqO4Q+u6L8LsoWMHCwfFPDqYlw/ct0XpqO05L2bop5WfwrIn2
+ BZ1p682zkCBUa7ykMqk3spx4Q3/Bq5fBKQQpUHdzzA7jb29hFmeH6SqspfH07c7/1f8mTn1ht
+ OyYsElK5ql6S0+SwzWtnSL+5bXmF5m1GVLi0AA/xxOl3fuFy03QVKxacU4BpVfQyGcJknMDMi
+ RzDky19sidupD9D9bCJmJOiZEvmPeuw5ELxaYlMJ0y5m0bZKQ6Lwp8FJlcSTfWLkFhViZIXbE
+ sLrt+k/y8HW2Qf8G0bkDB7Ah13qm2Ri8KK+oG7YRCzAdOi/TPUCzTOsALKj37UeflT41T7AnE
+ TRLKPeJyrSY9E/TYVtgldN+7KJn3X9gK2LSexED7Pq62wIMOkbHMQURxMMcA0A05/eUX1o5Xq
+ ctYHV1Ez/YovG8NP+hWwUTHwajCEEdca4Z23oe52pbG/e7zM/9EqdaAr4Zmoucigum0uq80Qx
+ JtdJxKspFDfntwVtTEGrOH3pTob5UA+geWDW0GpS8M1dsRAsIii8ZQweRdxQdU9JzTD0rXa2z
+ LPdZaTBqLrcYWhUhumJ9XaHx8RocC922624PdNrmtgsll2h2KUQU8b6NCD4vvapHpwDYJldtd
+ 3j4I3lXg5W8ojuXHt8PyjXZzE3gpPhbxh3lyG+2wAVSOJFNW4En6wupCOhObSZxeOmKlzm0tb
+ pjiGu98TYkGJw/MPdh+8Hwvxy8KxPF1FS8tZW6Zx466tsVWocy2sGjvkuIM0jG3Eqb9vtcW5c
+ rA318Uz0x+3jY9zxPW5/1wlzlljeX+SlPCpyIZTw5lEwW2390WLjt0jlL2s0FUoZpovmZTPJ6
+ rIpVVyiBFQUeVgzfD40gAwveLMvEGgv+xuZESRs/31GcyOKnaP/mh7bN+MVQdtOuqrQE9/Z9C
+ PZWVxwKIb84eWdCH47Sb9N5TidJ1vdvhKt78NOe5a05xbARiEYPZ++43fBrrL5XszyXCfsuJH
+ e6ExmV5b/civkRxynI1wgJ2fN5E/ARkQMl2k4aeGz6yW02HWoH/OS3PWN7+Lj0M6DlKyN86NE
+ UXXc7OW0YbSeENL9ju6Ska1WSsJI7mMdkprG8Ys26JeeEPoPq9tqdex/nnIewX9nucMOleylw
+ M7ozcP1lAMGaOBSxavkw6bpSoFpl83LRK3g7aLWqhTzCnct7XTPRO3/Zrfv8rBlYOVwtFu+V4
+ GqAGc7WNzBRqXBlJ0dgcL7b7uVmqSgTsZcdRWb7X5yMn4kHvJWENvABMlgFZh03Nhgjl+1B8S
+ tk4NvoMfYd6hT7i8gseF1Pun1McecLgYnwZw8XEHNYqtI7l7fDGJdMxhn4K9XgAtXF7dhpiR+
+ 2QgvybTFdGnJIecsMpeE8KoodA77W5UeY1SKn9anXGKA7uUgtQx1CW8Rd0otV60TlMqVHFz2i
+ qI9VGUPgpE4R+eFDZMWjY7yq1gjkWaBF+kSxJzsKvMrLfpmLiZCMncGsZ1CfAbEGg8oQYAnJh
+ RnLGbMD/Jz9NLPOm2S2tTBoIJNmtcY39h5j54PxGzLKI0k392+CStrrEwMbshh7DqQ4nlu9VA
+ dAXgS8qdMNC4P9Lnp58rolQ4i9TMYz2vojh5YQ82ezvwrPbpEjRz+Oy+x7TBVGfS5UMNHQS7d
+ +R/BSZ8rnXtUf1yGMaD26xqL/994szEIkKn8QJ9WN1PLUIiR/tlG4rg1veudjYn5CwZryAxey
+ 88MBoo0JAqjc/6Q7Es7eV5zz5SBSCj9PfNaRaojaP7VmJyJR4t5AuX/8StSileASXeYjS54wG
+ oFaLkrMPJeK/1Xy6sbEAzcMUUoo0KLZP0jMCXMu5FPlNdTDHOGI4/kGVPPeOYVQrq9hYRyfuZ
+ VmkFIA0V6WPswKTvXHwg+MxXZo1NfmJaRHeux2X8flXm5JcM7kgkemBRxWK7arT6Vor32jqVs
+ t78vVGXVMaXc96beNU/lzpr6EoFCVexlUqC/9x5Zz0Tu5AZM9XYOxmGQWRqcB4P5wAo2+q08U
+ HTaUyD9+SRUxSkyCkDEkGH3Gv2Huqsp+ZEIuTJbPHLvaKymf24FI+1V5R5Vh8lv66uO/uj+3h
+ QlD2mpdhcxTL44YljKOITzqy2llfkzm64eqyK36xf/5X1fS0PABotJlN5uNIIEpL95L038ADW
+ 6yTsQuPsXmBaMzz+5t7k9UyiF7VY2NohVa2rRdUqwRAhGflUuTkJ9FarTD8XDllH2UcxqdPVm
+ 2kPpU66e5kcy4fdSVyzKF6e7j2X1/uI3PX+2X07bgSLqEJSIel/JdX/xWO+p9NtlqHxN5Uz9C
+ gMFRHtSCUz+xsAQfWTXQIJWTX/5+BxykvYxoQntmy1p+faWdX6CyFOEoeN4JIAJp3wVL6U1i/
+ J8xQaTFshg6DNhN3bLyx9X7oLXBhTjxpYJYBZPuc8gGy8lIgi56ZwHlN0Vtqg3WfKNuI2+s7n
+ ebBXKOHYMRmk2Nt89emVJT2cbtL9EcbUQyWnAlRWlQPGbdMRG3r5Sox2lkBg1RGy/3Sdn/bFH
+ SLGk24mykiCQmttmp56wBQ9L2JRylKZIDVaK5GwBHzclNQX4mzC5ZyN+aAtf5fww5rXQmOSEZ
+ /xDR+Vj25K6FS/V+bvyIKfCV+TsxjUBSE/eUMoirejRs+WZewfwLyNCoy0r3jfxhHKiSwObUi
+ g2BfzOSyhlXrwSIhGhfpKfoxZHbykVXIeRlGBOVZGHFPC0hGy2Y5JjWjeWmXoD5BndumsuGqq
+ hmmRRo3xLvXR/m7viocVxEPLWme4aPhT7Jd9P9djEFHFXMHY3QzjrTJoFAXVnyb8Z0N4w7VuF
+ ALleiMhQCOyz0twd6jF9/lKYlqkZKlBhHWi1O1Dg91CVHRtI3bl1obVXFNjDwiKny3Dgp9BnU
+ oqpRiGIOm4pPMC1f3TaHS5XbJXqCo2Bi0LhcQWkUyAIlFeh/1IUHhFZtoHHQ1WqnjNLOfTIUd
+ sJPX6G+ECaKU/ba6w/lFk85ev8SYyJTavZmi3/XB4oG1FzVn9fNeFOTE6RlfruyxPjqDLMhSe
+ D3tsZm8DugOqhhZ3Jiq7N0DL2trCqdTM76H9FyplDbcwk0+pVvH1Hfo1x+3w6S3dQweuwP5MG
+ pslkWTTl4Z5gy2ePMz4dvYvWTNA0iNXdY0kT2+u7X14WjdccRbSQZX2zErcLDh8YOr8kbJGym
+ T7J+t5Ecsz3hN2SdqqlqaXFm2sXTTKdAqv8GXgtTpxFhW5K8qxVr082rHlN6CuTUvDjb6nbiA
+ sAerKj3zW2719Vph2LoywngC5dKGGgehQqucdibxiFe7ipsQKag69c1PkgirPTSh/2jP15B4r
+ ach5UdWvuvTOVV0QlZTp0UeQhlii8/n89FZJ7Ngo8TSK9Yyp+hV7wJpVh0uIKFj0lJiPoQTun
+ Ov4e758KGRmd/Pt8PLIPgiq8qh64D0HLmBtEWJrMr7BQSizX4DwnYD/J1Uk2+hNt0ulGcoeoA
+ Zw8GcyCTv/QckPsySrBjRXumDfs3NqaYSD/l0vCxzN+PlkaXrtT45OZflb1L2KgZuJNJgWOdb
+ zq9StTDDPYTX14F2sxJwvD5S7ofFVWEEC3k128sa3TAgOnbwrmrRXTvomZ5FsgGOJVi5hRcj4
+ WGOnLBHEZzBeVqVSjd9i7F7T9u4veisSAincCejHmtMq7IJF6qrmYgdBjiokfzvaXDs9r5BaI
+ 157bcePImJgYCny4BQvNhclsBswGFMchPxUOpv/6h9GqB2ihPHZAjhU4369kP3QPs+D4QaKUB
+ khGXl4hKkDtmgqoFvrPvFtDRwfbD/yXuVJrjpMOSzzsFMIhggd3QOagKFuvNCXjy4VBIcCThN
+ qe
+X-Spamd-Result: default: False [-0.56 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[gmx.de,quarantine];
+	R_DKIM_ALLOW(-0.20)[gmx.de:s=s31663417];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80640-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_FROM(0.00)[bounces-80642-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,vger.kernel.org,tuxedocomputers.com,protonmail.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FREEMAIL_FROM(0.00)[gmx.de];
+	NEURAL_HAM(-0.00)[-0.964];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[W_Armin@gmx.de,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmx.de:+];
 	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:email,analog.com:url]
-X-Rspamd-Queue-Id: 39F062EFEED
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,gmx.de:dkim,gmx.de:email,gmx.de:mid,ti.com:email]
+X-Rspamd-Queue-Id: 972C52EFF89
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, 2026-03-17 at 18:17 -0700, Guenter Roeck wrote:
-> On Sat, Mar 14, 2026 at 10:52:20AM +0000, Nuno S=C3=A1 wrote:
-> > From: Nuno S=C3=A1 <nuno.sa@analog.com>
-> >=20
-> > Support the LTC4283 Hot Swap Controller. The device features programmab=
-le
-> > current limit with foldback and independently adjustable inrush current=
- to
-> > optimize the MOSFET safe operating area (SOA). The SOA timer limits MOS=
-FET
-> > temperature rise for reliable protection against overstresses.
-> >=20
-> > An I2C interface and onboard ADC allow monitoring of board current,
-> > voltage, power, energy, and fault status.
-> >=20
-> > Signed-off-by: Nuno S=C3=A1 <nuno.sa@analog.com>
-> > ---
-> > =C2=A0Documentation/hwmon/index.rst=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0 1 +
-> > =C2=A0Documentation/hwmon/ltc4283.rst |=C2=A0 266 ++++++
-> > =C2=A0MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=
-=C2=A0=C2=A0 1 +
-> > =C2=A0drivers/hwmon/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 12 +
-> > =C2=A0drivers/hwmon/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0 1 +
-> > =C2=A0drivers/hwmon/ltc4283.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 | 1787 +++++++++++++++++++++++++++++++++++++++
-> > =C2=A06 files changed, 2068 insertions(+)
-> >=20
-> > diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.=
-rst
-> > index 559c32344cd38a9b5bf01a0b7570213f5ae1ab8b..eab95152abee0ae87acd9d0=
-1dab005200d80e924 100644
-> > --- a/Documentation/hwmon/index.rst
-> > +++ b/Documentation/hwmon/index.rst
-> > @@ -144,6 +144,7 @@ Hardware Monitoring Kernel Drivers
-> > =C2=A0=C2=A0=C2=A0 ltc4260
-> > =C2=A0=C2=A0=C2=A0 ltc4261
-> > =C2=A0=C2=A0=C2=A0 ltc4282
-> > +=C2=A0=C2=A0 ltc4283
-> > =C2=A0=C2=A0=C2=A0 ltc4286
-> > =C2=A0=C2=A0=C2=A0 macsmc-hwmon
-> > =C2=A0=C2=A0=C2=A0 max127
-> > diff --git a/Documentation/hwmon/ltc4283.rst b/Documentation/hwmon/ltc4=
-283.rst
-> > new file mode 100644
-> > index 0000000000000000000000000000000000000000..ba88445e45f4c2918a3c7f9=
-9a4b54efe69d4d048
-> > --- /dev/null
-> > +++ b/Documentation/hwmon/ltc4283.rst
-> > @@ -0,0 +1,266 @@
-> > +.. SPDX-License-Identifier: GPL-2.0-only
-> > +
-> > +Kernel drivers ltc4283
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +Supported chips:
-> > +
-> > +=C2=A0 * Analog Devices LTC4283
-> > +
-> > +=C2=A0=C2=A0=C2=A0 Prefix: 'ltc4283'
-> > +
-> > +=C2=A0=C2=A0=C2=A0 Addresses scanned: -
-> > +
-> > +=C2=A0=C2=A0=C2=A0 Datasheet:
-> > +
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 https://www.analog.com/medi=
-a/en/technical-documentation/data-sheets/ltc4283.pdf
-> > +
-> > +Author: Nuno S=C3=A1 <nuno.sa@analog.com>
-> > +
-> > +Description
-> > +___________
-> > +
-> > +The LTC4283 negative voltage hot swap controller drives an external N-=
-channel
-> > +MOSFET to allow a board to be safely inserted and removed from a live =
-backplane.
-> > +The device features programmable current limit with foldback and indep=
-endently
-> > +adjustable inrush current to optimize the MOSFET safe operating area (=
-SOA). The
-> > +SOA timer limits MOSFET temperature rise for reliable protection again=
-st
-> > +overstresses. An I2C interface and onboard gear-shift ADC allow monito=
-ring of
-> > +board current, voltage, power, energy, and fault status.=C2=A0 Additio=
-nal features
-> > +respond to input UV/OV, interrupt the host when a fault has occurred, =
-notify
-> > +when output power is good, detect insertion of a board, turn off the M=
-OSFET
-> > +if an external supply monitor fails to indicate power good within a ti=
-meout
-> > +period, and auto-reboot after a programmable delay following a host co=
-mmanded
-> > +turn-off.
-> > +
-> > +Sysfs entries
-> > +_____________
-> > +
-> > +The following attributes are supported. Limits are read-write and all =
-the other
-> > +attributes are read-only. Note that the VADIOx channels might not be a=
-vailable
-> > +if the ADIO pins are used as GPIOs (naturally also affects the respect=
-ive
-> > +differential channels).
-> > +
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +in0_lcrit_alarm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Critic=
-al Undervoltage alarm
-> > +in0_crit_alarm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 C=
-ritical Overvoltage alarm
-> > +in0_label		Channel label (VIN)
-> > +
-> > +in1_input		Output voltage (mV).
-> > +in1_min			Undervoltage threshold
-> > +in1_max			Overvoltage threshold
-> > +in1_lowest		Lowest measured voltage
-> > +in1_highest		Highest measured voltage
-> > +in1_reset_history	Write 1 to reset history.
-> > +in1_min_alarm		Undervoltage alarm
-> > +in1_max_alarm		Overvoltage alarm
-> > +in1_label		Channel label (VPWR)
-> > +
-> > +in2_input		Output voltage (mV).
-> > +in2_min			Undervoltage threshold
-> > +in2_max			Overvoltage threshold
-> > +in2_lowest		Lowest measured voltage
-> > +in2_highest		Highest measured voltage
-> > +in2_reset_history	Write 1 to reset history.
-> > +in2_min_alarm		Undervoltage alarm
-> > +in2_max_alarm		Overvoltage alarm
-> > +in2_enable		Enable/Disable monitoring.
-> > +in2_label		Channel label (VADI1)
-> > +
-> > +in3_input		Output voltage (mV).
-> > +in3_min			Undervoltage threshold
-> > +in3_max			Overvoltage threshold
-> > +in3_lowest		Lowest measured voltage
-> > +in3_highest		Highest measured voltage
-> > +in3_reset_history	Write 1 to reset history.
-> > +in3_min_alarm		Undervoltage alarm
-> > +in3_max_alarm		Overvoltage alarm
-> > +in3_enable		Enable/Disable monitoring.
-> > +in3_label		Channel label (VADI2)
-> > +
-> > +in4_input		Output voltage (mV).
-> > +in4_min			Undervoltage threshold
-> > +in4_max			Overvoltage threshold
-> > +in4_lowest		Lowest measured voltage
-> > +in4_highest		Highest measured voltage
-> > +in4_reset_history	Write 1 to reset history.
-> > +in4_min_alarm		Undervoltage alarm
-> > +in4_max_alarm		Overvoltage alarm
-> > +in4_enable		Enable/Disable monitoring.
-> > +in4_label		Channel label (VADI3)
-> > +
-> > +in5_input		Output voltage (mV).
-> > +in5_min			Undervoltage threshold
-> > +in5_max			Overvoltage threshold
-> > +in5_lowest		Lowest measured voltage
-> > +in5_highest		Highest measured voltage
-> > +in5_reset_history	Write 1 to reset history.
-> > +in5_min_alarm		Undervoltage alarm
-> > +in5_max_alarm		Overvoltage alarm
-> > +in5_enable		Enable/Disable monitoring.
-> > +in5_label		Channel label (VADI4)
-> > +
-> > +in6_input		Output voltage (mV).
-> > +in6_min			Undervoltage threshold
-> > +in6_max			Overvoltage threshold
-> > +in6_lowest		Lowest measured voltage
-> > +in6_highest		Highest measured voltage
-> > +in6_reset_history	Write 1 to reset history.
-> > +in6_min_alarm		Undervoltage alarm
-> > +in6_max_alarm		Overvoltage alarm
-> > +in6_enable		Enable/Disable monitoring.
-> > +in6_label		Channel label (VADIO1)
-> > +
-> > +in7_input		Output voltage (mV).
-> > +in7_min			Undervoltage threshold
-> > +in7_max			Overvoltage threshold
-> > +in7_lowest		Lowest measured voltage
-> > +in7_highest		Highest measured voltage
-> > +in7_reset_history	Write 1 to reset history.
-> > +in7_min_alarm		Undervoltage alarm
-> > +in7_max_alarm		Overvoltage alarm
-> > +in7_enable		Enable/Disable monitoring.
-> > +in7_label		Channel label (VADIO2)
-> > +
-> > +in8_input		Output voltage (mV).
-> > +in8_min			Undervoltage threshold
-> > +in8_max			Overvoltage threshold
-> > +in8_lowest		Lowest measured voltage
-> > +in8_highest		Highest measured voltage
-> > +in8_reset_history	Write 1 to reset history.
-> > +in8_min_alarm		Undervoltage alarm
-> > +in8_max_alarm		Overvoltage alarm
-> > +in8_enable		Enable/Disable monitoring.
-> > +in8_label		Channel label (VADIO3)
-> > +
-> > +in9_input		Output voltage (mV).
-> > +in9_min			Undervoltage threshold
-> > +in9_max			Overvoltage threshold
-> > +in9_lowest		Lowest measured voltage
-> > +in9_highest		Highest measured voltage
-> > +in9_reset_history	Write 1 to reset history.
-> > +in9_min_alarm		Undervoltage alarm
-> > +in9_max_alarm		Overvoltage alarm
-> > +in9_enable		Enable/Disable monitoring.
-> > +in9_label		Channel label (VADIO4)
-> > +
-> > +in10_input		Output voltage (mV).
-> > +in10_min		Undervoltage threshold
-> > +in10_max		Overvoltage threshold
-> > +in10_lowest		Lowest measured voltage
-> > +in10_highest		Highest measured voltage
-> > +in10_reset_history	Write 1 to reset history.
-> > +in10_min_alarm		Undervoltage alarm
-> > +in10_max_alarm		Overvoltage alarm
-> > +in10_enable		Enable/Disable monitoring.
-> > +in10_label		Channel label (DRNS)
-> > +
-> > +in11_input		Output voltage (mV).
-> > +in11_min		Undervoltage threshold
-> > +in11_max		Overvoltage threshold
-> > +in11_lowest		Lowest measured voltage
-> > +in11_highest		Highest measured voltage
-> > +in11_reset_history	Write 1 to reset history.
-> > +			Also clears fet bad and short fault logs.
-> > +in11_min_alarm		Undervoltage alarm
-> > +in11_max_alarm		Overvoltage alarm
-> > +in11_enable		Enable/Disable monitoring
-> > +in11_fault		Failure in the MOSFET. Either bad or shorted FET.
-> > +in11_label		Channel label (DRAIN)
-> > +
-> > +in12_input		Output voltage (mV).
-> > +in12_min		Undervoltage threshold
-> > +in12_max		Overvoltage threshold
-> > +in12_lowest		Lowest measured voltage
-> > +in12_highest		Highest measured voltage
-> > +in12_reset_history	Write 1 to reset history.
-> > +in12_min_alarm		Undervoltage alarm
-> > +in12_max_alarm		Overvoltage alarm
-> > +in12_enable		Enable/Disable monitoring.
-> > +in12_label		Channel label (ADIN2-ADIN1)
-> > +
-> > +in13_input		Output voltage (mV).
-> > +in13_min		Undervoltage threshold
-> > +in13_max		Overvoltage threshold
-> > +in13_lowest		Lowest measured voltage
-> > +in13_highest		Highest measured voltage
-> > +in13_reset_history	Write 1 to reset history.
-> > +in13_min_alarm		Undervoltage alarm
-> > +in13_max_alarm		Overvoltage alarm
-> > +in13_enable		Enable/Disable monitoring.
-> > +in13_label		Channel label (ADIN4-ADIN3)
-> > +
-> > +in14_input		Output voltage (mV).
-> > +in14_min		Undervoltage threshold
-> > +in14_max		Overvoltage threshold
-> > +in14_lowest		Lowest measured voltage
-> > +in14_highest		Highest measured voltage
-> > +in14_reset_history	Write 1 to reset history.
-> > +in14_min_alarm		Undervoltage alarm
-> > +in14_max_alarm		Overvoltage alarm
-> > +in14_enable		Enable/Disable monitoring.
-> > +in14_label		Channel label (ADIO2-ADIO1)
-> > +
-> > +in15_input		Output voltage (mV).
-> > +in15_min		Undervoltage threshold
-> > +in15_max		Overvoltage threshold
-> > +in15_lowest		Lowest measured voltage
-> > +in15_highest		Highest measured voltage
-> > +in15_reset_history	Write 1 to reset history.
-> > +in15_min_alarm		Undervoltage alarm
-> > +in15_max_alarm		Overvoltage alarm
-> > +in15_enable		Enable/Disable monitoring.
-> > +in15_label		Channel label (ADIO4-ADIO3)
-> > +
-> > +curr1_input		Sense current (mA)
-> > +curr1_min		Undercurrent threshold
-> > +curr1_max		Overcurrent threshold
-> > +curr1_lowest		Lowest measured current
-> > +curr1_highest		Highest measured current
-> > +curr1_reset_history	Write 1 to reset curr1 history.
-> > +			Also clears overcurrent fault logs.
-> > +curr1_min_alarm		Undercurrent alarm
-> > +curr1_max_alarm		Overcurrent alarm
-> > +curr1_crit_alarm=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Critical Ov=
-ercurrent alarm
-> > +curr1_label		Channel label (ISENSE)
-> > +
-> > +power1_input		Power (in uW)
-> > +power1_min		Low power threshold
-> > +power1_max		High power threshold
-> > +power1_input_lowest	Historical minimum power use
-> > +power1_input_highest	Historical maximum power use
-> > +power1_reset_history	Write 1 to reset power1 history.
-> > +			Also clears power fault logs.
-> > +power1_min_alarm	Low power alarm
-> > +power1_max_alarm	High power alarm
-> > +power1_label		Channel label (Power)
-> > +
-> > +energy1_input		Measured energy over time (in microJoule)
-> > +energy1_enable		Enable/Disable Energy accumulation
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +DebugFs entries
-> > +_______________
-> > +
-> > +The chip also has a fault log register where failures can be logged. H=
-ence,
-> > +as these are logging events, we give access to them in debugfs. Note t=
-hat
-> > +even if some failure is detected in these logs, it does necessarily me=
-an
-> > +that the failure is still present. As mentioned in the proper Sysfs en=
-tries,
-> > +these logs can be cleared by writing in the proper reset_history attri=
-bute.
-> > +
-> > +.. warning:: The debugfs interface is subject to change without notice
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 and is only available when the kernel is compiled with
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 ``CONFIG_DEBUG_FS`` defined.
-> > +
-> > +``/sys/kernel/debug/i2c/i2c-[X]/[X]-addr/``
-> > +contains the following attributes:
-> > +
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D	=
-	=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +power1_failed_fault_log		Set to 1 by a power1 fault occurring.
-> > +power1_good_input_fault_log	Set to 1 by a power1 good input fault occu=
-rring at PGIO3.
-> > +in11_fet_short_fault_log	Set to 1 when a FET-short fault occurs.
-> > +in11_fet_bad_fault_log		Set to 1 when a FET-BAD fault occurs.
-> > +in0_lcrit_fault_log		Set to 1 by a VIN undervoltage fault occurring.
-> > +in0_crit_fault_log		Set to 1 by a VIN overvoltage fault occurring.
-> > +curr1_crit_fault_log		Set to 1 by an overcurrent fault occurring.
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=C2=A0	=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 13ae2f3db449e5fd3a7d0fbac92aabdc01734ba9..38d22cf622b7982e157b19e=
-3ecbf30a80dfbb04d 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -15146,6 +15146,7 @@ M:	Nuno S=C3=A1 <nuno.sa@analog.com>
-> > =C2=A0L:	linux-hwmon@vger.kernel.org
-> > =C2=A0S:	Supported
-> > =C2=A0F:	Documentation/devicetree/bindings/hwmon/adi,ltc4283.yaml
-> > +F:	drivers/hwmon/ltc4283.c
-> > =C2=A0
-> > =C2=A0LTC4286 HARDWARE MONITOR DRIVER
-> > =C2=A0M:	Delphine CC Chiu <Delphine_CC_Chiu@Wiwynn.com>
-> > diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-> > index fb77baeeba27b9ec51142040beccc953df0a1e3e..99ab14726d6b559a2f8bc2a=
-f5b79ecd9d0b80b87 100644
-> > --- a/drivers/hwmon/Kconfig
-> > +++ b/drivers/hwmon/Kconfig
-> > @@ -1157,6 +1157,18 @@ config SENSORS_LTC4282
-> > =C2=A0	=C2=A0 This driver can also be built as a module. If so, the mod=
-ule will
-> > =C2=A0	=C2=A0 be called ltc4282.
-> > =C2=A0
-> > +config SENSORS_LTC4283
-> > +	tristate "Analog Devices LTC4283"
-> > +	depends on I2C
-> > +	select REGMAP_I2C
-> > +	select AUXILIARY_BUS
-> > +	help
-> > +	=C2=A0 If you say yes here you get support for Analog Devices LTC4283
-> > +	=C2=A0 Negative Voltage Hot Swap Controller I2C interface.
-> > +
-> > +	=C2=A0 This driver can also be built as a module. If so, the module w=
-ill
-> > +	=C2=A0 be called ltc4283.
-> > +
-> > =C2=A0config SENSORS_LTQ_CPUTEMP
-> > =C2=A0	bool "Lantiq cpu temperature sensor driver"
-> > =C2=A0	depends on SOC_XWAY
-> > diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-> > index 556e86d277b195d8c98798012f0069c78a2f37dc..cb77938dbe07ddb0c2db69f=
-27ade2794139c2d01 100644
-> > --- a/drivers/hwmon/Makefile
-> > +++ b/drivers/hwmon/Makefile
-> > @@ -147,6 +147,7 @@ obj-$(CONFIG_SENSORS_LTC4245)	+=3D ltc4245.o
-> > =C2=A0obj-$(CONFIG_SENSORS_LTC4260)	+=3D ltc4260.o
-> > =C2=A0obj-$(CONFIG_SENSORS_LTC4261)	+=3D ltc4261.o
-> > =C2=A0obj-$(CONFIG_SENSORS_LTC4282)	+=3D ltc4282.o
-> > +obj-$(CONFIG_SENSORS_LTC4283)	+=3D ltc4283.o
-> > =C2=A0obj-$(CONFIG_SENSORS_LTQ_CPUTEMP) +=3D ltq-cputemp.o
-> > =C2=A0obj-$(CONFIG_SENSORS_MACSMC_HWMON)	+=3D macsmc-hwmon.o
-> > =C2=A0obj-$(CONFIG_SENSORS_MAX1111)	+=3D max1111.o
-> > diff --git a/drivers/hwmon/ltc4283.c b/drivers/hwmon/ltc4283.c
-> > new file mode 100644
-> > index 0000000000000000000000000000000000000000..2066ff5d568fbaa75c66d1f=
-75087f7eb8cfe83a2
-> > --- /dev/null
-> > +++ b/drivers/hwmon/ltc4283.c
-> > @@ -0,0 +1,1787 @@
-> > +// SPDX-License-Identifier: GPL-2.0-only
-> > +/*
-> > + * Analog Devices LTC4283 I2C Negative Voltage Hot Swap Controller (HW=
-MON)
-> > + *
-> > + * Copyright 2025 Analog Devices Inc.
-> > + */
-> > +#include <linux/auxiliary_bus.h>
-> > +#include <linux/bitfield.h>
-> > +#include <linux/bitmap.h>
-> > +#include <linux/bitops.h>
-> > +#include <linux/bits.h>
-> > +
-> > +#include <linux/debugfs.h>
-> > +#include <linux/device.h>
-> > +#include <linux/device/devres.h>
-> > +#include <linux/hwmon.h>
-> > +#include <linux/i2c.h>
-> > +#include <linux/math.h>
-> > +#include <linux/math64.h>
-> > +#include <linux/minmax.h>
-> > +#include <linux/module.h>
-> > +
-> > +#include <linux/mod_devicetable.h>
-> > +#include <linux/overflow.h>
-> > +#include <linux/property.h>
-> > +#include <linux/regmap.h>
-> > +#include <linux/unaligned.h>
-> > +#include <linux/units.h>
-> > +
-> > +#define LTC4283_SYSTEM_STATUS		0x00
-> > +#define LTC4283_FAULT_STATUS		0x03
-> > +#define=C2=A0=C2=A0 LTC4283_OV_MASK		BIT(0)
-> > +#define=C2=A0=C2=A0 LTC4283_UV_MASK		BIT(1)
-> > +#define=C2=A0=C2=A0 LTC4283_OC_MASK		BIT(2)
-> > +#define=C2=A0=C2=A0 LTC4283_FET_BAD_MASK		BIT(3)
-> > +#define=C2=A0=C2=A0 LTC4283_FET_SHORT_MASK	BIT(6)
-> > +#define LTC4283_FAULT_LOG		0x04
-> > +#define=C2=A0=C2=A0 LTC4283_OV_FAULT_MASK		BIT(0)
-> > +#define=C2=A0=C2=A0 LTC4283_UV_FAULT_MASK		BIT(1)
-> > +#define=C2=A0=C2=A0 LTC4283_OC_FAULT_MASK		BIT(2)
-> > +#define=C2=A0=C2=A0 LTC4283_FET_BAD_FAULT_MASK	BIT(3)
-> > +#define=C2=A0=C2=A0 LTC4283_PGI_FAULT_MASK	BIT(4)
-> > +#define=C2=A0=C2=A0 LTC4283_PWR_FAIL_FAULT_MASK	BIT(5)
-> > +#define=C2=A0=C2=A0 LTC4283_FET_SHORT_FAULT_MASK	BIT(6)
-> > +#define LTC4283_ADC_ALM_LOG_1		0x05
-> > +#define=C2=A0=C2=A0 LTC4283_POWER_LOW_ALM		BIT(0)
-> > +#define=C2=A0=C2=A0 LTC4283_POWER_HIGH_ALM	BIT(1)
-> > +#define=C2=A0=C2=A0 LTC4283_SENSE_LOW_ALM		BIT(4)
-> > +#define=C2=A0=C2=A0 LTC4283_SENSE_HIGH_ALM	BIT(5)
-> > +#define LTC4283_ADC_ALM_LOG_2		0x06
-> > +#define LTC4283_ADC_ALM_LOG_3		0x07
-> > +#define LTC4283_ADC_ALM_LOG_4		0x08
-> > +#define LTC4283_ADC_ALM_LOG_5		0x09
-> > +#define LTC4283_CONTROL_1		0x0a
-> > +#define=C2=A0=C2=A0 LTC4283_RW_PAGE_MASK		BIT(0)
-> > +#define=C2=A0=C2=A0 LTC4283_PIGIO2_ACLB_MASK	BIT(2)
-> > +#define=C2=A0=C2=A0 LTC4283_PWRGD_RST_CTRL_MASK	BIT(3)
-> > +#define=C2=A0=C2=A0 LTC4283_FET_BAD_OFF_MASK	BIT(4)
-> > +#define=C2=A0=C2=A0 LTC4283_THERM_TMR_MASK	BIT(5)
-> > +#define=C2=A0=C2=A0 LTC4283_DVDT_MASK		BIT(6)
-> > +#define LTC4283_CONTROL_2		0x0b
-> > +#define=C2=A0=C2=A0 LTC4283_OV_RETRY_MASK		BIT(0)
-> > +#define=C2=A0=C2=A0 LTC4283_UV_RETRY_MASK		BIT(1)
-> > +#define=C2=A0=C2=A0 LTC4283_OC_RETRY_MASK		GENMASK(3, 2)
-> > +#define=C2=A0=C2=A0 LTC4283_FET_BAD_RETRY_MASK	GENMASK(5, 4)
-> > +#define=C2=A0=C2=A0 LTC4283_EXT_FAULT_RETRY_MASK	BIT(7)
-> > +#define LTC4283_RESERVED_OC		0x0c
-> > +#define LTC4283_CONFIG_1		0x0d
-> > +#define=C2=A0=C2=A0 LTC4283_FB_MASK		GENMASK(3, 2)
-> > +#define=C2=A0=C2=A0 LTC4283_ILIM_MASK		GENMASK(7, 4)
-> > +#define LTC4283_CONFIG_2		0x0e
-> > +#define=C2=A0=C2=A0 LTC4283_COOLING_DL_MASK	GENMASK(3, 1)
-> > +#define=C2=A0=C2=A0 LTC4283_FTBD_DL_MASK		GENMASK(5, 4)
-> > +#define LTC4283_CONFIG_3		0x0f
-> > +#define=C2=A0=C2=A0 LTC4283_VPWR_DRNS_MASK	BIT(6)
-> > +#define=C2=A0=C2=A0 LTC4283_EXTFLT_TURN_OFF_MASK	BIT(7)
-> > +#define LTC4283_PGIO_CONFIG		0x10
-> > +#define=C2=A0=C2=A0 LTC4283_PGIO1_CFG_MASK	GENMASK(1, 0)
-> > +#define=C2=A0=C2=A0 LTC4283_PGIO2_CFG_MASK	GENMASK(3, 2)
-> > +#define=C2=A0=C2=A0 LTC4283_PGIO3_CFG_MASK	GENMASK(5, 4)
-> > +#define=C2=A0=C2=A0 LTC4283_PGIO4_CFG_MASK	GENMASK(7, 6)
-> > +#define LTC4283_PGIO_CONFIG_2		0x11
-> > +#define=C2=A0=C2=A0 LTC4283_ADC_MASK		GENMASK(2, 0)
-> > +#define LTC4283_ADC_SELECT(c)		(0x13 + (c) / 8)
-> > +#define=C2=A0=C2=A0 LTC4283_ADC_SELECT_MASK(c)	BIT((c) % 8)
-> > +#define LTC4283_SENSE_MIN_TH		0x1b
-> > +#define LTC4283_SENSE_MAX_TH		0x1c
-> > +#define LTC4283_VPWR_MIN_TH		0x1d
-> > +#define LTC4283_VPWR_MAX_TH		0x1e
-> > +#define LTC4283_POWER_MIN_TH		0x1f
-> > +#define LTC4283_POWER_MAX_TH		0x20
-> > +#define LTC4283_ADC_2_MIN_TH(c)		(0x21 + (c) * 2)
-> > +#define LTC4283_ADC_2_MAX_TH(c)		(0x22 + (c) * 2)
-> > +#define LTC4283_ADC_2_MIN_TH_DIFF(c)	(0x39 + (c) * 2)
-> > +#define LTC4283_ADC_2_MAX_TH_DIFF(c)	(0x3a + (c) * 2)
-> > +#define LTC4283_SENSE			0x41
-> > +#define LTC4283_SENSE_MIN		0x42
-> > +#define LTC4283_SENSE_MAX		0x43
-> > +#define LTC4283_VPWR			0x44
-> > +#define LTC4283_VPWR_MIN		0x45
-> > +#define LTC4283_VPWR_MAX		0x46
-> > +#define LTC4283_POWER			0x47
-> > +#define LTC4283_POWER_MIN		0x48
-> > +#define LTC4283_POWER_MAX		0x49
-> > +#define LTC4283_RESERVED_68		0x68
-> > +#define LTC4283_RESERVED_6D		0x6D
-> > +/* get channels from ADC 2 */
-> > +#define LTC4283_ADC_2(c)		(0x4a + (c) * 3)
-> > +#define LTC4283_ADC_2_MIN(c)		(0x4b + (c) * 3)
-> > +#define LTC4283_ADC_2_MAX(c)		(0x4c + (c) * 3)
-> > +#define LTC4283_ADC_2_DIFF(c)		(0x6e + (c) * 3)
-> > +#define LTC4283_ADC_2_MIN_DIFF(c)	(0x6f + (c) * 3)
-> > +#define LTC4283_ADC_2_MAX_DIFF(c)	(0x70 + (c) * 3)
-> > +#define LTC4283_ENERGY			0x7a
-> > +#define LTC4283_METER_CONTROL		0x84
-> > +#define=C2=A0=C2=A0 LTC4283_INTEGRATE_I_MASK	BIT(0)
-> > +#define=C2=A0=C2=A0 LTC4283_METER_HALT_MASK	BIT(6)
-> > +#define LTC4283_RESERVED_86		0x86
-> > +#define LTC4283_RESERVED_8F		0x8F
-> > +#define LTC4283_FAULT_LOG_CTRL		0x90
-> > +#define=C2=A0=C2=A0 LTC4283_FAULT_LOG_EN_MASK	BIT(7)
-> > +#define LTC4283_RESERVED_91		0x91
-> > +#define LTC4283_RESERVED_A1		0xA1
-> > +#define LTC4283_RESERVED_A3		0xA3
-> > +#define LTC4283_RESERVED_AC		0xAC
-> > +#define LTC4283_POWER_PLAY_MSB		0xE7
-> > +#define LTC4283_POWER_PLAY_LSB		0xE8
-> > +#define LTC4283_RESERVED_F1		0xF1
-> > +#define LTC4283_RESERVED_FF		0xFF
-> > +
-> > +/* also applies for differential channels */
-> > +#define LTC4283_ADC1_FS_uV		32768
-> > +#define LTC4283_ADC2_FS_mV		2048
-> > +#define LTC4283_TCONV_uS		64103
-> > +#define LTC4283_VILIM_MIN_uV		15000
-> > +#define LTC4283_VILIM_MAX_uV		30000
-> > +#define LTC4283_VILIM_RANGE	\
-> > +	(LTC4283_VILIM_MAX_uV - LTC4283_VILIM_MIN_uV + 1)
-> > +
-> > +#define LTC4283_PGIO_FUNC_GPIO		2
-> > +#define LTC4283_PGIO2_FUNC_ACLB		3
-> > +
-> > +/* voltage channels */
-> > +enum {
-> > +	LTC4283_CHAN_VIN,
-> > +	LTC4283_CHAN_VPWR,
-> > +	LTC4283_CHAN_ADI_1,
-> > +	LTC4283_CHAN_ADI_2,
-> > +	LTC4283_CHAN_ADI_3,
-> > +	LTC4283_CHAN_ADI_4,
-> > +	LTC4283_CHAN_ADIO_1,
-> > +	LTC4283_CHAN_ADIO_2,
-> > +	LTC4283_CHAN_ADIO_3,
-> > +	LTC4283_CHAN_ADIO_4,
-> > +	LTC4283_CHAN_DRNS,
-> > +	LTC4283_CHAN_DRAIN,
-> > +	/* differential channels */
-> > +	LTC4283_CHAN_ADIN12,
-> > +	LTC4283_CHAN_ADIN34,
-> > +	LTC4283_CHAN_ADIO12,
-> > +	LTC4283_CHAN_ADIO34,
-> > +	LTC4283_CHAN_MAX
-> > +};
-> > +
-> > +/* Just for ease of use on the regmap=C2=A0 */
-> > +#define LTC4283_ADIO34_MAX \
-> > +	LTC4283_ADC_2_MAX_DIFF(LTC4283_CHAN_ADIO34 - LTC4283_CHAN_ADIN12)
-> > +
-> > +struct ltc4283_hwmon {
-> > +	struct regmap *map;
-> > +	struct i2c_client *client;
-> > +	unsigned long gpio_mask;
-> > +	unsigned long ch_enable_mask;
-> > +	/* in microwatt */
-> > +	long power_max;
-> > +	/* in millivolt */
-> > +	u32 vsense_max;
-> > +	/* in tenths of microohm*/
-> > +	u32 rsense;
-> > +	bool energy_en;
-> > +	bool ext_fault;
-> > +};
-> > +
-> > +static int ltc4283_read_voltage_word(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 u32 reg, u32 fs, long *val)
-> > +{
-> > +	unsigned int __raw;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &__raw);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D DIV_ROUND_CLOSEST(__raw * fs, BIT(16));
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_voltage_byte(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 u32 reg, u32 fs, long *val)
-> > +{
-> > +	int ret;
-> > +	u32 in;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &in);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D DIV_ROUND_CLOSEST(in * fs, BIT(8));
-> > +	return 0;
-> > +}
-> > +
-> > +static u32 ltc4283_in_reg(u32 attr, u32 channel)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_in_input:
-> > +		if (channel =3D=3D LTC4283_CHAN_VPWR)
-> > +			return LTC4283_VPWR;
-> > +		if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRA=
-IN)
-> > +			return LTC4283_ADC_2(channel - LTC4283_CHAN_ADI_1);
-> > +		return LTC4283_ADC_2_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	case hwmon_in_highest:
-> > +		if (channel =3D=3D LTC4283_CHAN_VPWR)
-> > +			return LTC4283_VPWR_MAX;
-> > +		if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRA=
-IN)
-> > +			return LTC4283_ADC_2_MAX(channel - LTC4283_CHAN_ADI_1);
-> > +		return LTC4283_ADC_2_MAX_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	case hwmon_in_lowest:
-> > +		if (channel =3D=3D LTC4283_CHAN_VPWR)
-> > +			return LTC4283_VPWR_MIN;
-> > +		if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRA=
-IN)
-> > +			return LTC4283_ADC_2_MIN(channel - LTC4283_CHAN_ADI_1);
-> > +		return LTC4283_ADC_2_MIN_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	case hwmon_in_max:
-> > +		if (channel =3D=3D LTC4283_CHAN_VPWR)
-> > +			return LTC4283_VPWR_MAX_TH;
-> > +		if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRA=
-IN)
-> > +			return LTC4283_ADC_2_MAX_TH(channel - LTC4283_CHAN_ADI_1);
-> > +		return LTC4283_ADC_2_MAX_TH_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	default:
-> > +		if (channel =3D=3D LTC4283_CHAN_VPWR)
-> > +			return LTC4283_VPWR_MIN_TH;
-> > +		if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRA=
-IN)
-> > +			return LTC4283_ADC_2_MIN_TH(channel - LTC4283_CHAN_ADI_1);
-> > +		return LTC4283_ADC_2_MIN_TH_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_read_in_vals(const struct ltc4283_hwmon *st,
-> > +				u32 attr, u32 channel, long *val)
-> > +{
-> > +	u32 reg =3D ltc4283_in_reg(attr, channel);
-> > +	int ret;
-> > +
-> > +	if (channel < LTC4283_CHAN_ADIN12) {
-> > +		if (attr !=3D hwmon_in_max && attr !=3D hwmon_in_min)
-> > +			return ltc4283_read_voltage_word(st, reg,
-> > +							 LTC4283_ADC2_FS_mV,
-> > +							 val);
-> > +
-> > +		return ltc4283_read_voltage_byte(st, reg,
-> > +						 LTC4283_ADC2_FS_mV, val);
-> > +	}
-> > +
-> > +	if (attr !=3D hwmon_in_max && attr !=3D hwmon_in_min)
-> > +		ret =3D ltc4283_read_voltage_word(st, reg,
-> > +						LTC4283_ADC1_FS_uV, val);
-> > +	else
-> > +		ret =3D ltc4283_read_voltage_byte(st, reg,
-> > +						LTC4283_ADC1_FS_uV, val);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D DIV_ROUND_CLOSEST(*val, MILLI);
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_alarm(struct ltc4283_hwmon *st, u32 reg,
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u32 mask, long *val)
-> > +{
-> > +	u32 alarm;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &alarm);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D !!(alarm & mask);
-> > +
-> > +	/* If not status/fault logs, clear the alarm after reading it. */
-> > +	if (reg !=3D LTC4283_FAULT_STATUS && reg !=3D LTC4283_FAULT_LOG)
-> > +		return regmap_clear_bits(st->map, reg, mask);
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_in_alarm(struct ltc4283_hwmon *st, u32 channel=
-,
-> > +				 bool max_alm, long *val)
-> > +{
-> > +	if (channel =3D=3D LTC4283_VPWR)
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_1,
-> > +					=C2=A0 BIT(2 + max_alm), val);
-> > +
-> > +	if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_ADI_=
-4) {
-> > +		u32 bit =3D (channel - LTC4283_CHAN_ADI_1) * 2;
-> > +		/*
-> > +		 * Lower channels go to higher bits. We also want to go +1 down
-> > +		 * in the min_alarm case.
-> > +		 */
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_2,
-> > +					=C2=A0 BIT(7 - bit - !max_alm), val);
-> > +	}
-> > +
-> > +	if (channel >=3D LTC4283_CHAN_ADIO_1 && channel <=3D LTC4283_CHAN_ADI=
-O_4) {
-> > +		u32 bit =3D (channel - LTC4283_CHAN_ADIO_1) * 2;
-> > +
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_3,
-> > +					=C2=A0 BIT(7 - bit - !max_alm), val);
-> > +	}
-> > +
-> > +	if (channel >=3D LTC4283_CHAN_ADIN12 && channel <=3D LTC4283_CHAN_ADI=
-N34) {
-> > +		u32 bit =3D (channel - LTC4283_CHAN_ADIN12) * 2;
-> > +
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_5,
-> > +					=C2=A0 BIT(7 - bit - !max_alm), val);
-> > +	}
-> > +
-> > +	if (channel =3D=3D LTC4283_CHAN_DRNS)
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_4,
-> > +					=C2=A0 BIT(6 + max_alm), val);
-> > +
-> > +	return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_4, BIT(4 + max_alm)=
-,
-> > +				=C2=A0 val);
-> > +}
-> > +
-> > +static int ltc4283_read_in(struct ltc4283_hwmon *st, u32 attr, u32 cha=
-nnel,
-> > +			=C2=A0=C2=A0 long *val)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_in_input:
-> > +		if (!test_bit(channel, &st->ch_enable_mask))
-> > +			return -ENODATA;
-> > +
-> > +		return ltc4283_read_in_vals(st, attr, channel, val);
-> > +	case hwmon_in_highest:
-> > +	case hwmon_in_lowest:
-> > +	case hwmon_in_max:
-> > +	case hwmon_in_min:
-> > +		return ltc4283_read_in_vals(st, attr, channel, val);
-> > +	case hwmon_in_max_alarm:
-> > +		return ltc4283_read_in_alarm(st, channel, true, val);
-> > +	case hwmon_in_min_alarm:
-> > +		return ltc4283_read_in_alarm(st, channel, false, val);
-> > +	case hwmon_in_crit_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_FAULT_STATUS,
-> > +					=C2=A0 LTC4283_OV_MASK, val);
-> > +	case hwmon_in_lcrit_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_FAULT_STATUS,
-> > +					=C2=A0 LTC4283_UV_MASK, val);
-> > +	case hwmon_in_fault:
-> > +		/*
-> > +		 * We report failure if we detect either a fer_bad or a
-> > +		 * fet_short in the status register.
-> > +		 */
-> > +		return ltc4283_read_alarm(st, LTC4283_FAULT_STATUS,
-> > +					=C2=A0 LTC4283_FET_BAD_MASK | LTC4283_FET_SHORT_MASK, val);
-> > +	case hwmon_in_enable:
-> > +		*val =3D test_bit(channel, &st->ch_enable_mask);
-> > +		return 0;
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_current_word(const struct ltc4283_hwmon *st, u=
-32 reg,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 long *val)
-> > +{
-> > +	u64 temp =3D (u64)LTC4283_ADC1_FS_uV * DECA * MILLI;
-> > +	unsigned int __raw;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &__raw);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D DIV64_U64_ROUND_CLOSEST(__raw * temp,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BIT_ULL(16) * st->rsense);
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_current_byte(const struct ltc4283_hwmon *st, u=
-32 reg,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 long *val)
-> > +{
-> > +	u64 temp =3D (u64)LTC4283_ADC1_FS_uV * DECA * MILLI;
-> > +	u32 curr;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &curr);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D DIV_ROUND_CLOSEST_ULL(curr * temp, BIT(8) * st->rsense);
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_curr(struct ltc4283_hwmon *st, u32 attr, long =
-*val)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_curr_input:
-> > +		return ltc4283_read_current_word(st, LTC4283_SENSE, val);
-> > +	case hwmon_curr_highest:
-> > +		return ltc4283_read_current_word(st, LTC4283_SENSE_MAX, val);
-> > +	case hwmon_curr_lowest:
-> > +		return ltc4283_read_current_word(st, LTC4283_SENSE_MIN, val);
-> > +	case hwmon_curr_max:
-> > +		return ltc4283_read_current_byte(st, LTC4283_SENSE_MAX_TH, val);
-> > +	case hwmon_curr_min:
-> > +		return ltc4283_read_current_byte(st, LTC4283_SENSE_MIN_TH, val);
-> > +	case hwmon_curr_max_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_1,
-> > +					=C2=A0 LTC4283_SENSE_HIGH_ALM, val);
-> > +	case hwmon_curr_min_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_1,
-> > +					=C2=A0 LTC4283_SENSE_LOW_ALM, val);
-> > +	case hwmon_curr_crit_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_FAULT_STATUS,
-> > +					=C2=A0 LTC4283_OC_MASK, val);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_read_power_word(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0 u32 reg, long *val)
-> > +{
-> > +	u64 temp =3D (u64)LTC4283_ADC1_FS_uV * LTC4283_ADC2_FS_mV * DECA * MI=
-LLI;
-> > +	unsigned int __raw;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &__raw);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/*
-> > +	 * Power is given by:
-> > +	 *=C2=A0=C2=A0=C2=A0=C2=A0 P =3D CODE(16b) * 32.768mV * 2.048V / (2^1=
-6 * Rsense)
-> > +	 */
-> > +	*val =3D DIV64_U64_ROUND_CLOSEST(temp * __raw, BIT_ULL(16) * st->rsen=
-se);
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_power_byte(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0 u32 reg, long *val)
-> > +{
-> > +	u64 temp =3D (u64)LTC4283_ADC1_FS_uV * LTC4283_ADC2_FS_mV * DECA * MI=
-LLI;
-> > +	u32 power;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, reg, &power);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D DIV_ROUND_CLOSEST_ULL(power * temp, BIT(8) * st->rsense);
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read_power(struct ltc4283_hwmon *st, u32 attr, long=
- *val)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_power_input:
-> > +		return ltc4283_read_power_word(st, LTC4283_POWER, val);
-> > +	case hwmon_power_input_highest:
-> > +		return ltc4283_read_power_word(st, LTC4283_POWER_MAX, val);
-> > +	case hwmon_power_input_lowest:
-> > +		return ltc4283_read_power_word(st, LTC4283_POWER_MIN, val);
-> > +	case hwmon_power_max_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_1,
-> > +					=C2=A0 LTC4283_POWER_HIGH_ALM, val);
-> > +	case hwmon_power_min_alarm:
-> > +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_1,
-> > +					=C2=A0 LTC4283_POWER_LOW_ALM, val);
-> > +	case hwmon_power_max:
-> > +		return ltc4283_read_power_byte(st, LTC4283_POWER_MAX_TH, val);
-> > +	case hwmon_power_min:
-> > +		return ltc4283_read_power_byte(st, LTC4283_POWER_MIN_TH, val);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_read_energy(struct ltc4283_hwmon *st, u32 attr, s64=
- *val)
-> > +{
-> > +	u64 temp =3D LTC4283_ADC1_FS_uV * LTC4283_ADC2_FS_mV, energy, temp_2;
-> > +	u8 raw[8] =3D {};
-> > +	int ret;
-> > +
-> > +	if (!st->energy_en)
-> > +		return -ENODATA;
-> > +
-> > +	ret =3D i2c_smbus_read_i2c_block_data(st->client, LTC4283_ENERGY, 6, =
-raw);
-> > +	if (ret < 0)
-> > +		return ret;
-> > +	if (ret !=3D 6)
-> > +		return -EIO;
-> > +
-> > +	energy =3D get_unaligned_be64(raw) >> 16;
-> > +
-> > +	/*
-> > +	 * The formula for energy is given by:
-> > +	 *	E =3D CODE(48b) * 32.768mV * 2.048V * Tconv / 2^24 * Rsense
-> > +	 *
-> > +	 * As Rsense can have tenths of micro-ohm resolution, we need to
-> > +	 * multiply by DECA to get microjoule.
-> > +	 */
-> > +	if (check_mul_overflow(temp * LTC4283_TCONV_uS, energy, &temp_2)) {
-> > +		/*
-> > +		 * We multiply again by 1000 to make sure that we don't get 0
-> > +		 * in the following division which could happen for big rsense
-> > +		 * values. OTOH, we then divide energy first by 1000 so that
-> > +		 * we do not overflow u64 again for very small rsense values.
-> > +		 * We add 100 factor for proper conversion to microjoule.
-> > +		 */
-> > +		temp_2 =3D DIV64_U64_ROUND_CLOSEST(temp * LTC4283_TCONV_uS * MILLI,
-> > +						 BIT_ULL(24) * st->rsense);
-> > +		energy =3D DIV_ROUND_CLOSEST_ULL(energy, MILLI * CENTI) * temp_2;
-> > +	} else {
-> > +		/* Put rsense back into nanoohm so we get microjoule. */
-> > +		energy =3D DIV64_U64_ROUND_CLOSEST(temp_2, BIT_ULL(24) * st->rsense =
-* CENTI);
-> > +	}
-> > +
-> > +	*val =3D energy;
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_read(struct device *dev, enum hwmon_sensor_types ty=
-pe,
-> > +			u32 attr, int channel, long *val)
-> > +{
-> > +	struct ltc4283_hwmon *st =3D dev_get_drvdata(dev);
-> > +
-> > +	switch (type) {
-> > +	case hwmon_in:
-> > +		return ltc4283_read_in(st, attr, channel, val);
-> > +	case hwmon_curr:
-> > +		return ltc4283_read_curr(st, attr, val);
-> > +	case hwmon_power:
-> > +		return ltc4283_read_power(st, attr, val);
-> > +	case hwmon_energy:
-> > +		*val =3D st->energy_en;
-> > +		return 0;
-> > +	case hwmon_energy64:
-> > +		return ltc4283_read_energy(st, attr, (s64 *)val);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_write_power_byte(const struct ltc4283_hwmon *st, u3=
-2 reg,
-> > +				=C2=A0=C2=A0=C2=A0 long val)
-> > +{
-> > +	u64 temp =3D (u64)LTC4283_ADC1_FS_uV * LTC4283_ADC2_FS_mV * DECA * MI=
-LLI;
-> > +	u32 __raw;
-> > +
-> > +	clamp_val(val, 0, st->power_max);
->=20
-> Result of clamp_val() is ignored.
->=20
-> > +	__raw =3D DIV64_U64_ROUND_CLOSEST(val * BIT_ULL(8) * st->rsense, temp=
-);
-> > +
-> > +	return regmap_write(st->map, reg, __raw);
-> > +}
-> > +
-> > +static int ltc4283_write_power_word(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0=C2=A0 u32 reg, long val)
-> > +{
-> > +	u64 temp =3D st->rsense * BIT_ULL(16), temp_2;
-> > +	u16 __raw;
-> > +
-> > +	if (check_mul_overflow(val, temp, &temp_2)) {
-> > +		temp =3D DIV_ROUND_CLOSEST_ULL(temp, DECA * MILLI);
-> > +		__raw =3D DIV_ROUND_CLOSEST_ULL(temp * val, LTC4283_ADC1_FS_uV *
-> > LTC4283_ADC2_FS_mV);
-> > +	} else {
-> > +		temp =3D (u64)LTC4283_ADC1_FS_uV * LTC4283_ADC2_FS_mV * DECA * MILLI=
-;
-> > +		__raw =3D DIV64_U64_ROUND_CLOSEST(temp_2, temp);
-> > +	}
-> > +
-> > +	return regmap_write(st->map, reg, __raw);
-> > +}
-> > +
-> > +static int ltc4283_reset_power_hist(struct ltc4283_hwmon *st)
-> > +{
-> > +	int ret;
-> > +
-> > +	ret =3D ltc4283_write_power_word(st, LTC4283_POWER_MIN, st->power_max=
-);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D ltc4283_write_power_word(st, LTC4283_POWER_MAX, 0);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/* Clear possible power faults. */
-> > +	return regmap_clear_bits(st->map, LTC4283_FAULT_LOG,
-> > +				 LTC4283_PWR_FAIL_FAULT_MASK | LTC4283_PGI_FAULT_MASK);
-> > +}
-> > +
-> > +static int ltc4283_write_power(struct ltc4283_hwmon *st, u32 attr, lon=
-g val)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_power_max:
-> > +		return ltc4283_write_power_byte(st, LTC4283_POWER_MAX_TH, val);
-> > +	case hwmon_power_min:
-> > +		return ltc4283_write_power_byte(st, LTC4283_POWER_MIN_TH, val);
-> > +	case hwmon_power_reset_history:
-> > +		return ltc4283_reset_power_hist(st);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_write_in_history(struct ltc4283_hwmon *st, u32 reg,
-> > +				=C2=A0=C2=A0=C2=A0 long lowest, u32 fs)
-> > +{
-> > +	u32 __raw;
-> > +	int ret;
-> > +
-> > +	__raw =3D DIV_ROUND_CLOSEST(BIT(16) * lowest, fs);
-> > +	if (__raw =3D=3D BIT(16))
-> > +		__raw =3D U16_MAX;
-> > +
-> > +	ret =3D regmap_write(st->map, reg, __raw);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	return regmap_write(st->map, reg + 1, 0);
-> > +}
-> > +
-> > +static int ltc4283_write_in_byte(const struct ltc4283_hwmon *st,
-> > +				 u32 reg, u32 fs, long val)
-> > +{
-> > +	u32 __raw;
-> > +
-> > +	val =3D clamp_val(val, 0, fs);
-> > +	__raw =3D DIV_ROUND_CLOSEST(val * BIT(8), fs);
-> > +	if (__raw =3D=3D BIT(8))
-> > +		__raw =3D U8_MAX;
-> > +
-> > +	return regmap_write(st->map, reg, __raw);
-> > +}
-> > +
-> > +static int ltc4283_reset_in_hist(struct ltc4283_hwmon *st, u32 channel=
-)
-> > +{
-> > +	u32 reg, fs;
-> > +	int ret;
-> > +
-> > +	/*
-> > +	 * Make sure to clear possible under/over voltage faults. Otherwise t=
-he
-> > +	 * chip won't latch on again.
-> > +	 */
-> > +	if (channel =3D=3D LTC4283_CHAN_VIN)
-> > +		return regmap_clear_bits(st->map, LTC4283_FAULT_LOG,
-> > +					 LTC4283_OV_FAULT_MASK | LTC4283_UV_FAULT_MASK);
-> > +
-> > +	if (channel =3D=3D LTC4283_CHAN_VPWR)
-> > +		return ltc4283_write_in_history(st, LTC4283_VPWR_MIN,
-> > +						LTC4283_ADC2_FS_mV,
-> > +						LTC4283_ADC2_FS_mV);
-> > +
-> > +	if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRAI=
-N) {
-> > +		fs =3D LTC4283_ADC2_FS_mV;
-> > +		reg =3D LTC4283_ADC_2_MIN(channel - LTC4283_CHAN_ADI_1);
-> > +	} else {
-> > +		fs =3D LTC4283_ADC1_FS_uV;
-> > +		reg =3D LTC4283_ADC_2_MIN_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	}
-> > +
-> > +	ret =3D ltc4283_write_in_history(st, reg, fs, fs);
-> > +	if (ret)
-> > +		return ret;
-> > +	if (channel !=3D LTC4283_CHAN_DRAIN)
-> > +		return 0;
-> > +
-> > +	/* Then, let's also clear possible fet faults. Same as above. */
-> > +	return regmap_clear_bits(st->map, LTC4283_FAULT_LOG,
-> > +				 LTC4283_FET_BAD_FAULT_MASK | LTC4283_FET_SHORT_FAULT_MASK);
-> > +}
-> > +
-> > +static int ltc4283_write_in_en(struct ltc4283_hwmon *st, u32 channel, =
-bool en)
-> > +{
-> > +	unsigned int bit, adc_idx =3D channel - LTC4283_CHAN_ADI_1;
-> > +	unsigned int reg =3D LTC4283_ADC_SELECT(adc_idx);
-> > +	int ret;
-> > +
-> > +	bit =3D LTC4283_ADC_SELECT_MASK(adc_idx);
-> > +	if (channel > LTC4283_CHAN_DRAIN)
-> > +		/* Account for two reserved fields after DRAIN. */
-> > +		bit <<=3D 2;
-> > +
-> > +	if (en)
-> > +		ret =3D regmap_set_bits(st->map, reg, bit);
-> > +	else
-> > +		ret =3D regmap_clear_bits(st->map, reg, bit);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	__assign_bit(channel, &st->ch_enable_mask, en);
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_write_minmax(struct ltc4283_hwmon *st, long val,
-> > +				u32 channel, bool is_max)
-> > +{
-> > +	u32 reg;
-> > +
-> > +	if (channel =3D=3D LTC4283_CHAN_VPWR) {
-> > +		if (is_max)
-> > +			return ltc4283_write_in_byte(st, LTC4283_VPWR_MAX_TH,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_ADC2_FS_mV, val);
-> > +
-> > +		return ltc4283_write_in_byte(st, LTC4283_VPWR_MIN_TH,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_ADC2_FS_mV, val);
-> > +	}
-> > +
-> > +	if (channel >=3D LTC4283_CHAN_ADI_1 && channel <=3D LTC4283_CHAN_DRAI=
-N) {
-> > +		if (is_max) {
-> > +			reg =3D LTC4283_ADC_2_MAX_TH(channel - LTC4283_CHAN_ADI_1);
-> > +			return ltc4283_write_in_byte(st, reg,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_ADC2_FS_mV, val);
-> > +		}
-> > +
-> > +		reg =3D LTC4283_ADC_2_MIN_TH(channel - LTC4283_CHAN_ADI_1);
-> > +		return ltc4283_write_in_byte(st, reg, LTC4283_ADC2_FS_mV, val);
-> > +	}
-> > +
-> > +	if (is_max) {
-> > +		reg =3D LTC4283_ADC_2_MAX_TH_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +		return ltc4283_write_in_byte(st, reg, LTC4283_ADC1_FS_uV,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 val * MILLI);
-> > +	}
-> > +
-> > +	reg =3D LTC4283_ADC_2_MIN_TH_DIFF(channel - LTC4283_CHAN_ADIN12);
-> > +	return ltc4283_write_in_byte(st, reg, LTC4283_ADC1_FS_uV, val * MILLI=
-);
-> > +}
-> > +
-> > +static int ltc4283_write_in(struct ltc4283_hwmon *st, u32 attr, long v=
-al,
-> > +			=C2=A0=C2=A0=C2=A0 int channel)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_in_max:
-> > +		return ltc4283_write_minmax(st, val, channel, true);
-> > +	case hwmon_in_min:
-> > +		return ltc4283_write_minmax(st, val, channel, false);
-> > +	case hwmon_in_reset_history:
-> > +		return ltc4283_reset_in_hist(st, channel);
-> > +	case hwmon_in_enable:
-> > +		return ltc4283_write_in_en(st, channel, !!val);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_write_curr_byte(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0 u32 reg, long val)
-> > +{
-> > +	u32 temp =3D LTC4283_ADC1_FS_uV * DECA * MILLI;
-> > +	u32 reg_val, isense_max;
-> > +
-> > +	isense_max =3D DIV_ROUND_CLOSEST(st->vsense_max * MICRO * DECA, st->r=
-sense);
-> > +	clamp_val(val, 0, isense_max);
->=20
-> Result ignored.
-
-Ups!
-
->=20
-> > +	reg_val =3D DIV_ROUND_CLOSEST_ULL(val * BIT_ULL(8) * st->rsense, temp=
-);
-> > +
-> > +	return regmap_write(st->map, reg, reg_val);
-> > +}
-> > +
-> > +static int ltc4283_write_curr_history(struct ltc4283_hwmon *st)
-> > +{
-> > +	int ret;
-> > +
-> > +	ret =3D ltc4283_write_in_history(st, LTC4283_SENSE_MIN,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 st->vsense_max * MILLI,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_ADC1_FS_uV);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/* Now, let's also clear possible overcurrent logs. */
-> > +	return regmap_clear_bits(st->map, LTC4283_FAULT_LOG,
-> > +				 LTC4283_OC_FAULT_MASK);
-> > +}
-> > +
-> > +static int ltc4283_write_curr(struct ltc4283_hwmon *st, u32 attr, long=
- val)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_curr_max:
-> > +		return ltc4283_write_curr_byte(st, LTC4283_SENSE_MAX_TH, val);
-> > +	case hwmon_curr_min:
-> > +		return ltc4283_write_curr_byte(st, LTC4283_SENSE_MIN_TH, val);
-> > +	case hwmon_curr_reset_history:
-> > +		return ltc4283_write_curr_history(st);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static int ltc4283_energy_enable_set(struct ltc4283_hwmon *st, long va=
-l)
-> > +{
-> > +	int ret;
-> > +
-> > +	/* Setting the bit halts the meter. */
-> > +	val =3D !!val;
-> > +	ret =3D regmap_update_bits(st->map, LTC4283_METER_CONTROL,
-> > +				 LTC4283_METER_HALT_MASK,
-> > +				 FIELD_PREP(LTC4283_METER_HALT_MASK, !val));
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	st->energy_en =3D val;
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_write(struct device *dev, enum hwmon_sensor_types t=
-ype,
-> > +			 u32 attr, int channel, long val)
-> > +{
-> > +	struct ltc4283_hwmon *st =3D dev_get_drvdata(dev);
-> > +
-> > +	switch (type) {
-> > +	case hwmon_power:
-> > +		return ltc4283_write_power(st, attr, val);
-> > +	case hwmon_in:
-> > +		return ltc4283_write_in(st, attr, val, channel);
-> > +	case hwmon_curr:
-> > +		return ltc4283_write_curr(st, attr, val);
-> > +	case hwmon_energy:
-> > +		return ltc4283_energy_enable_set(st, val);
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +static umode_t ltc4283_in_is_visible(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 u32 attr, int channel)
-> > +{
-> > +	/* If ADIO is set as a GPIO, don=C2=B4t make it visible. */
-> > +	if (channel >=3D LTC4283_CHAN_ADIO_1 && channel <=3D LTC4283_CHAN_ADI=
-O_4) {
-> > +		/* ADIOX pins come at index 0 in the gpio mask. */
-> > +		channel -=3D LTC4283_CHAN_ADIO_1;
-> > +		if (test_bit(channel, &st->gpio_mask))
-> > +			return 0;
-> > +	}
-> > +
-> > +	/* Also take care of differential channels. */
-> > +	if (channel >=3D LTC4283_CHAN_ADIO12 && channel <=3D LTC4283_CHAN_ADI=
-O34) {
-> > +		channel -=3D LTC4283_CHAN_ADIO12;
-> > +		/* If one channel in the pair is used, make it invisible. */
-> > +		if (test_bit(channel * 2, &st->gpio_mask) ||
-> > +		=C2=A0=C2=A0=C2=A0 test_bit(channel * 2 + 1, &st->gpio_mask))
-> > +			return 0;
-> > +	}
-> > +
-> > +	switch (attr) {
-> > +	case hwmon_in_input:
-> > +	case hwmon_in_highest:
-> > +	case hwmon_in_lowest:
-> > +	case hwmon_in_max_alarm:
-> > +	case hwmon_in_min_alarm:
-> > +	case hwmon_in_label:
-> > +	case hwmon_in_lcrit_alarm:
-> > +	case hwmon_in_crit_alarm:
-> > +	case hwmon_in_fault:
-> > +		return 0444;
-> > +	case hwmon_in_max:
-> > +	case hwmon_in_min:
-> > +	case hwmon_in_enable:
-> > +		return 0644;
-> > +	case hwmon_in_reset_history:
-> > +		return 0200;
-> > +	default:
-> > +		return 0;
-> > +	}
-> > +}
-> > +
-> > +static umode_t ltc4283_curr_is_visible(u32 attr)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_curr_input:
-> > +	case hwmon_curr_highest:
-> > +	case hwmon_curr_lowest:
-> > +	case hwmon_curr_max_alarm:
-> > +	case hwmon_curr_min_alarm:
-> > +	case hwmon_curr_crit_alarm:
-> > +	case hwmon_curr_label:
-> > +		return 0444;
-> > +	case hwmon_curr_max:
-> > +	case hwmon_curr_min:
-> > +		return 0644;
-> > +	case hwmon_curr_reset_history:
-> > +		return 0200;
-> > +	default:
-> > +		return 0;
-> > +	}
-> > +}
-> > +
-> > +static umode_t ltc4283_power_is_visible(u32 attr)
-> > +{
-> > +	switch (attr) {
-> > +	case hwmon_power_input:
-> > +	case hwmon_power_input_highest:
-> > +	case hwmon_power_input_lowest:
-> > +	case hwmon_power_label:
-> > +	case hwmon_power_max_alarm:
-> > +	case hwmon_power_min_alarm:
-> > +		return 0444;
-> > +	case hwmon_power_max:
-> > +	case hwmon_power_min:
-> > +		return 0644;
-> > +	case hwmon_power_reset_history:
-> > +		return 0200;
-> > +	default:
-> > +		return 0;
-> > +	}
-> > +}
-> > +
-> > +static umode_t ltc4283_is_visible(const void *data,
-> > +				=C2=A0 enum hwmon_sensor_types type,
-> > +				=C2=A0 u32 attr, int channel)
-> > +{
-> > +	switch (type) {
-> > +	case hwmon_in:
-> > +		return ltc4283_in_is_visible(data, attr, channel);
-> > +	case hwmon_curr:
-> > +		return ltc4283_curr_is_visible(attr);
-> > +	case hwmon_power:
-> > +		return ltc4283_power_is_visible(attr);
-> > +	case hwmon_energy:
-> > +		/* hwmon_energy_enable */
-> > +		return 0644;
-> > +	case hwmon_energy64:
-> > +		/* hwmon_energy_input */
-> > +		return 0444;
-> > +	default:
-> > +		return 0;
-> > +	}
-> > +}
-> > +
-> > +static const char * const ltc4283_in_strs[] =3D {
-> > +	"VIN", "VPWR", "VADI1", "VADI2", "VADI3", "VADI4", "VADIO1", "VADIO2"=
-,
-> > +	"VADIO3", "VADIO4", "DRNS", "DRAIN", "ADIN2-ADIN1", "ADIN4-ADIN3",
-> > +	"ADIO2-ADIO1", "ADIO4-ADIO3"
-> > +};
-> > +
-> > +static int ltc4283_read_labels(struct device *dev,
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 enum hwmon_sensor_types type,
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u32 attr, int channel, const c=
-har **str)
-> > +{
-> > +	switch (type) {
-> > +	case hwmon_in:
-> > +		*str =3D ltc4283_in_strs[channel];
-> > +		return 0;
-> > +	case hwmon_curr:
-> > +		*str =3D "ISENSE";
-> > +		return 0;
-> > +	case hwmon_power:
-> > +		*str =3D "Power";
-> > +		return 0;
-> > +	default:
-> > +		return -EOPNOTSUPP;
-> > +	}
-> > +}
-> > +
-> > +/*
-> > + * Set max limits for ISENSE and Power as that depends on the max volt=
-age on
-> > + * rsense that is defined in ILIM_ADJUST. This is specially important =
-for power
-> > + * because for some rsense and vfsout values, if we allow the default =
-raw 255
-> > + * value, that would overflow long in 32bit archs when reading back th=
-e max
-> > + * power limit.
-> > + */
-> > +static int ltc4283_set_max_limits(struct ltc4283_hwmon *st, struct dev=
-ice *dev)
-> > +{
-> > +	u32 temp =3D st->vsense_max * DECA * MICRO;
-> > +	int ret;
-> > +
-> > +	ret =3D ltc4283_write_in_byte(st, LTC4283_SENSE_MAX_TH, LTC4283_ADC1_=
-FS_uV,
-> > +				=C2=A0=C2=A0=C2=A0 st->vsense_max * MILLI);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/* Power is given by ISENSE * Vout. */
-> > +	st->power_max =3D DIV_ROUND_CLOSEST(temp, st->rsense) * LTC4283_ADC2_=
-FS_mV;
-> > +	return ltc4283_write_power_byte(st, LTC4283_POWER_MAX_TH, st->power_m=
-ax);
-> > +}
-> > +
-> > +static int ltc4283_parse_array_prop(const struct ltc4283_hwmon *st,
-> > +				=C2=A0=C2=A0=C2=A0 struct device *dev, const char *prop,
-> > +				=C2=A0=C2=A0=C2=A0 const u32 *vals, u32 n_vals)
-> > +{
-> > +	u32 prop_val;
-> > +	int ret;
-> > +	u32 i;
-> > +
-> > +	ret =3D device_property_read_u32(dev, prop, &prop_val);
-> > +	if (ret)
-> > +		return n_vals;
-> > +
-> > +	for (i =3D 0; i < n_vals; i++) {
-> > +		if (prop_val !=3D vals[i])
-> > +			continue;
-> > +
-> > +		return i;
-> > +	}
-> > +
-> > +	return dev_err_probe(dev, -EINVAL,
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid %s property value %u, expected on=
-e of: %*ph\n",
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0 prop, prop_val, n_vals, vals);
-> > +}
-> > +
-> > +static int ltc4283_get_defaults(struct ltc4283_hwmon *st)
-> > +{
-> > +	u32 reg_val, ilm_adjust, c;
-> > +	int ret;
-> > +
-> > +	ret =3D regmap_read(st->map, LTC4283_METER_CONTROL, &reg_val);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	st->energy_en =3D !FIELD_GET(LTC4283_METER_HALT_MASK, reg_val);
-> > +
-> > +	ret =3D regmap_read(st->map, LTC4283_CONFIG_1, &reg_val);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ilm_adjust =3D FIELD_GET(LTC4283_ILIM_MASK, reg_val);
-> > +	st->vsense_max =3D LTC4283_VILIM_MIN_uV / MILLI + ilm_adjust;
-> > +
-> > +	/* VPWR and VIN are always enabled */
-> > +	__set_bit(LTC4283_CHAN_VIN, &st->ch_enable_mask);
-> > +	__set_bit(LTC4283_CHAN_VPWR, &st->ch_enable_mask);
-> > +	for (c =3D LTC4283_CHAN_ADI_1; c < LTC4283_CHAN_MAX; c++) {
-> > +		u32 chan =3D c - LTC4283_CHAN_ADI_1, bit;
-> > +
-> > +		ret =3D regmap_read(st->map, LTC4283_ADC_SELECT(chan), &reg_val);
-> > +		if (ret)
-> > +			return ret;
-> > +
-> > +		bit =3D LTC4283_ADC_SELECT_MASK(chan);
-> > +		if (c > LTC4283_CHAN_DRAIN)
-> > +			/* account for two reserved fields after DRAIN */
-> > +			bit <<=3D 2;
-> > +
-> > +		if (!(bit & reg_val))
-> > +			continue;
-> > +
-> > +		__set_bit(c, &st->ch_enable_mask);
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static const char * const ltc4283_pgio1_funcs[] =3D {
-> > +	"inverted_power_good", "power_good", "gpio"
-> > +};
-> > +
-> > +static const char * const ltc4283_pgio2_funcs[] =3D {
-> > +	 "inverted_power_good", "power_good", "gpio", "active_current_limitin=
-g"
-> > +};
-> > +
-> > +static const char * const ltc4283_pgio3_funcs[] =3D {
-> > +	"inverted_power_good_input", "power_good_input", "gpio"
-> > +};
-> > +
-> > +static const char * const ltc4283_pgio4_funcs[] =3D {
-> > +	"inverted_external_fault", "external_fault", "gpio"
-> > +};
-> > +
-> > +enum {
-> > +	LTC4283_PIN_ADIO1,
-> > +	LTC4283_PIN_ADIO2,
-> > +	LTC4283_PIN_ADIO3,
-> > +	LTC4283_PIN_ADIO4,
-> > +	LTC4283_PIN_PGIO1,
-> > +	LTC4283_PIN_PGIO2,
-> > +	LTC4283_PIN_PGIO3,
-> > +	LTC4283_PIN_PGIO4,
-> > +};
-> > +
-> > +static int ltc4283_pgio_config(struct ltc4283_hwmon *st, struct device=
- *dev)
-> > +{
-> > +	int ret, func;
-> > +
-> > +	func =3D device_property_match_property_string(dev, "adi,pgio1-func",
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_pgio1_funcs,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ARRAY_SIZE(ltc4283_pgio1_funcs));
-> > +	if (func < 0 && func !=3D -EINVAL)
->=20
-> !=3D or =3D=3D ?
->=20
-> for all -EINVAL checks. At the very least,
->=20
-> > +		return dev_err_probe(dev, func,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid adi,pgio1-func property\n");
->=20
-> The "Invalid" messages are confusing. Why say it is invalid when it isn't=
- ?
-> And why _only_ accept -EINVAL errors ? That seems odd.
-
-It's a bit weird but -EINVAL is what is used by FW for missing properties. =
-So if the property
-is not given at all, we ignore. But we do wanna catch other error codes. Ti=
-ny improvement but I'm
-aware that it's also a very common pattern to just ignore any error for opt=
-ional properties so I
-can, also, just do that.
-
->=20
-> > +	if (func >=3D 0) {
-> > +		if (func =3D=3D LTC4283_PGIO_FUNC_GPIO) {
-> > +			__set_bit(LTC4283_PIN_PGIO1, &st->gpio_mask);
-> > +			/* If GPIO, default to an input pin. */
-> > +			func++;
-> > +		}
-> > +
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_PGIO_CONFIG,
-> > +					 LTC4283_PGIO1_CFG_MASK,
-> > +					 FIELD_PREP(LTC4283_PGIO1_CFG_MASK, func));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	func =3D device_property_match_property_string(dev, "adi,pgio2-func",
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_pgio2_funcs,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ARRAY_SIZE(ltc4283_pgio2_funcs));
-> > +
-> > +	if (func < 0 && func !=3D -EINVAL)
-> > +		return dev_err_probe(dev, func,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid adi,pgio2-func property\n");
-> > +	if (func >=3D 0) {
-> > +		if (func !=3D LTC4283_PGIO2_FUNC_ACLB) {
-> > +			if (func =3D=3D LTC4283_PGIO_FUNC_GPIO)=C2=A0 {
-> > +				__set_bit(LTC4283_PIN_PGIO2, &st->gpio_mask);
-> > +				func++;
-> > +			}
-> > +
-> > +			ret =3D regmap_update_bits(st->map, LTC4283_PGIO_CONFIG,
-> > +						 LTC4283_PGIO2_CFG_MASK,
-> > +						 FIELD_PREP(LTC4283_PGIO2_CFG_MASK, func));
-> > +		} else {
-> > +			ret =3D regmap_set_bits(st->map, LTC4283_CONTROL_1,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_PIGIO2_ACLB_MASK);
-> > +		}
-> > +
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	func =3D device_property_match_property_string(dev, "adi,pgio3-func",
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_pgio3_funcs,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ARRAY_SIZE(ltc4283_pgio3_funcs));
-> > +
-> > +	if (func < 0 && func !=3D -EINVAL)
-> > +		return dev_err_probe(dev, func,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid adi,pgio3-func property\n");
-> > +	if (func >=3D 0) {
-> > +		if (func =3D=3D LTC4283_PGIO_FUNC_GPIO) {
-> > +			__set_bit(LTC4283_PIN_PGIO3, &st->gpio_mask);
-> > +			func++;
-> > +		}
-> > +
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_PGIO_CONFIG,
-> > +					 LTC4283_PGIO3_CFG_MASK,
-> > +					 FIELD_PREP(LTC4283_PGIO3_CFG_MASK, func));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	func =3D device_property_match_property_string(dev, "adi,pgio4-func",
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_pgio4_funcs,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 ARRAY_SIZE(ltc4283_pgio4_funcs));
-> > +
-> > +	if (func < 0 && func !=3D -EINVAL)
->=20
-> The usual -EINVAL question.
->=20
-> > +		return dev_err_probe(dev, func,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "Invalid adi,pgio4-func property\n");
-> > +	if (func >=3D 0) {
-> > +		if (func =3D=3D LTC4283_PGIO_FUNC_GPIO) {
-> > +			__set_bit(LTC4283_PIN_PGIO4, &st->gpio_mask);
-> > +			func++;
-> > +		} else {
-> > +			st->ext_fault =3D true;
-> > +		}
-> > +
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_PGIO_CONFIG,
-> > +					 LTC4283_PGIO4_CFG_MASK,
-> > +					 FIELD_PREP(LTC4283_PGIO4_CFG_MASK, func));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
->=20
-> Shouldn't this set the default value (inverted_external_fault) if the
-> property is not provided (i.e., set st->ext_fault and write func =3D 0
-> into LTC4283_PGIO4_CFG_MASK) ?
-
-I guess this would be a wider question about what to do for all properties =
-not provided? Maybe
-(given there's an EEPROM) we should just assume whatever are in the registe=
-rs is to be used? (When
-checking your comments, I started to wonder about this for boolean properti=
-es).
-
-But naturally, at the very least, I need to include st->ext_fault in ltc428=
-3_get_defaults().
->=20
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_adio_config(struct ltc4283_hwmon *st, struct device=
- *dev,
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const char *prop, u32 pin)
-> > +{
-> > +	u32 adc_idx;
-> > +	int ret;
-> > +
-> > +	if (!device_property_read_bool(dev, prop))
-> > +		return 0;
-> > +
-> > +	adc_idx =3D LTC4283_CHAN_ADIO_1 - LTC4283_CHAN_ADI_1 + pin;
-> > +	ret =3D regmap_clear_bits(st->map, LTC4283_ADC_SELECT(adc_idx),
-> > +				LTC4283_ADC_SELECT_MASK(adc_idx));
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	__set_bit(pin, &st->gpio_mask);
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_pin_config(struct ltc4283_hwmon *st, struct device =
-*dev)
-> > +{
-> > +	int ret;
-> > +
-> > +	ret =3D ltc4283_pgio_config(st, dev);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D ltc4283_adio_config(st, dev, "adi,gpio-on-adio1", LTC4283_PIN=
-_ADIO1);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D ltc4283_adio_config(st, dev, "adi,gpio-on-adio2", LTC4283_PIN=
-_ADIO2);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D ltc4283_adio_config(st, dev, "adi,gpio-on-adio3", LTC4283_PIN=
-_ADIO3);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	return ltc4283_adio_config(st, dev, "adi,gpio-on-adio4", LTC4283_PIN_=
-ADIO4);
-> > +}
-> > +
-> > +static const char * const ltc4283_oc_fet_retry[] =3D {
-> > +	"latch-off", "1", "7", "unlimited"
-> > +};
-> > +
-> > +static const u32 ltc4283_fb_factor[] =3D {
-> > +	100, 50, 20, 10
-> > +};
-> > +
-> > +static const u32 ltc4283_cooling_dl[] =3D {
-> > +	512, 1002, 2005, 4100, 8190, 16400, 32800, 65600
-> > +};
-> > +
-> > +static const u32 ltc4283_fet_bad_delay[] =3D {
-> > +	256, 512, 1002, 2005
-> > +};
-> > +
-> > +static int ltc4283_setup(struct ltc4283_hwmon *st, struct device *dev)
-> > +{
-> > +	u32 val, chan;
-> > +	int ret;
-> > +
-> > +	/* The part has an eeprom so let's get the needed defaults from it */
-> > +	ret =3D ltc4283_get_defaults(st);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/*
-> > +	 * Default to 1 micro ohm so we can probe without FW properties. Note
-> > +	 * the below division expects rsense in nano ohms.
-> > +	 */
-> > +	st->rsense =3D 1 * MILLI;
-> > +	ret =3D device_property_read_u32(dev, "adi,rsense-nano-ohms",
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &st->rsense);
-> > +	if (!ret) {
-> > +		if (st->rsense < CENTI)
-> > +			return dev_err_probe(dev, -EINVAL,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 "adi,rsense-nano-ohms too small (< %lu)\=
-n",
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 CENTI);
-> > +	}
-> > +
-> > +	/*
-> > +	 * The resolution for rsense is tenths of micro (eg: 62.5 uOhm) which
-> > +	 * means we need nano in the bindings. However, to make things easier=
- to
-> > +	 * handle (with respect to overflows) we divide it by 100 as we don't
-> > +	 * really need the last two digits.
-> > +	 */
-> > +	st->rsense /=3D CENTI;
-> > +
-> > +	ret =3D device_property_read_u32(dev, "adi,current-limit-sense-microv=
-olt",
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &st->vsense_max);
-> > +	if (!ret) {
-> > +		u32 reg_val;
-> > +
-> > +		if (!in_range(st->vsense_max, LTC4283_VILIM_MIN_uV,
-> > +			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_VILIM_RANGE)) {
-> > +			return dev_err_probe(dev, -EINVAL,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 "adi,current-limit-sense-microvolt (%u) =
-out of
-> > range [%u %u]\n",
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 st->vsense_max, LTC4283_VILIM_MIN_uV,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_VILIM_MAX_uV);
-> > +		}
-> > +
-> > +		st->vsense_max /=3D MILLI;
-> > +		reg_val =3D FIELD_PREP(LTC4283_ILIM_MASK,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 st->vsense_max - LTC4283_VILIM_MIN_uV / M=
-ILLI);
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_CONFIG_1,
-> > +					 LTC4283_ILIM_MASK, reg_val);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	ret =3D ltc4283_parse_array_prop(st, dev, "adi,current-limit-foldback=
--factor",
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_fb_factor, ARRAY_SIZE=
-(ltc4283_fb_factor));
-> > +	if (ret < 0)
-> > +		return ret;
-> > +	if (ret < ARRAY_SIZE(ltc4283_fb_factor)) {
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_CONFIG_1, LTC4283_FB_MAS=
-K,
-> > +					 FIELD_PREP(LTC4283_FB_MASK, ret));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	ret =3D ltc4283_parse_array_prop(st, dev, "adi,cooling-delay-ms",
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_cooling_dl, ARRAY_SIZ=
-E(ltc4283_cooling_dl));
-> > +	if (ret < 0)
-> > +		return ret;
-> > +	if (ret < ARRAY_SIZE(ltc4283_cooling_dl)) {
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_CONFIG_2, LTC4283_COOLIN=
-G_DL_MASK,
-> > +					 FIELD_PREP(LTC4283_COOLING_DL_MASK, ret));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	ret =3D ltc4283_parse_array_prop(st, dev, "adi,fet-bad-timer-delay-ms=
-",
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ltc4283_fet_bad_delay,
-> > ARRAY_SIZE(ltc4283_fet_bad_delay));
-> > +	if (ret < 0)
-> > +		return ret;
->=20
-> This (and other attributes if missing) have a default and should not blin=
-dly
-> return an error.
-
-Maybe I'm missing your point but that helper will return ARRAY_SIZE(ltc4283=
-_fet_bad_delay) - same
-for other properties using the helper - in case the device_property_read_u3=
-2() returns an error.
-
-That is why in here we explicitly check for negative error code.
-
->=20
-> > +	if (ret < ARRAY_SIZE(ltc4283_fet_bad_delay)) {
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_CONFIG_2, LTC4283_FTBD_D=
-L_MASK,
-> > +					 FIELD_PREP(LTC4283_FTBD_DL_MASK, ret));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	ret =3D ltc4283_set_max_limits(st, dev);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D ltc4283_pin_config(st, dev);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	if (device_property_read_bool(dev, "adi,power-good-reset-on-fet")) {
-> > +		ret =3D regmap_clear_bits(st->map, LTC4283_CONTROL_1,
-> > +					LTC4283_PWRGD_RST_CTRL_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,fet-turn-off-disable")) {
-> > +		ret =3D regmap_clear_bits(st->map, LTC4283_CONTROL_1,
-> > +					LTC4283_FET_BAD_OFF_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,tmr-pull-down-disable")) {
-> > +		ret =3D regmap_set_bits(st->map, LTC4283_CONTROL_1,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_THERM_TMR_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,dvdt-inrush-control-disable")=
-) {
-> > +		ret =3D regmap_clear_bits(st->map, LTC4283_CONTROL_1,
-> > +					LTC4283_DVDT_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,undervoltage-retry-disable"))=
- {
-> > +		ret =3D regmap_clear_bits(st->map, LTC4283_CONTROL_2,
-> > +					LTC4283_UV_RETRY_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,overvoltage-retry-disable")) =
-{
-> > +		ret =3D regmap_clear_bits(st->map, LTC4283_CONTROL_2,
-> > +					LTC4283_OV_RETRY_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,external-fault-retry-enable")=
-) {
-> > +		if (!st->ext_fault)
-> > +			return dev_err_probe(dev, -EINVAL,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 "adi,external-fault-retry-enable set but=
- PGIO4 not
-> > configured\n");
-> > +		ret =3D regmap_set_bits(st->map, LTC4283_CONTROL_2,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_EXT_FAULT_RETRY_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,fault-log-enable")) {
-> > +		ret =3D regmap_set_bits(st->map, LTC4283_FAULT_LOG_CTRL,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_FAULT_LOG_EN_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	ret =3D device_property_match_property_string(dev, "adi,overcurrent-r=
-etries",
-> > +						=C2=A0=C2=A0=C2=A0 ltc4283_oc_fet_retry,
-> > +						=C2=A0=C2=A0=C2=A0 ARRAY_SIZE(ltc4283_oc_fet_retry));
-> > +	/* We still want to catch when an invalid string is given. */
-> > +	if (ret !=3D -EINVAL)
->=20
-> Is that supposed to be "=3D=3D -EINVAL" ?
->=20
-> Because otherwise it returns immediately (even if there is no error)
-> all the time.
-
-Sure! Did not hit this because I do have these properties in my DT. Missing=
- a ret < 0 before
-
->=20
-> > +		return dev_err_probe(dev, ret,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "adi,overcurrent-retries invalid value\n"=
-);
-> > +	if (ret >=3D 0) {
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_CONTROL_2,
-> > +					 LTC4283_OC_RETRY_MASK,
-> > +					 FIELD_PREP(LTC4283_OC_RETRY_MASK, ret));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	ret =3D device_property_match_property_string(dev, "adi,fet-bad-retri=
-es",
-> > +						=C2=A0=C2=A0=C2=A0 ltc4283_oc_fet_retry,
-> > +						=C2=A0=C2=A0=C2=A0 ARRAY_SIZE(ltc4283_oc_fet_retry));
-> > +	if (ret !=3D -EINVAL)
->=20
-> Same here.
->=20
-> > +		return dev_err_probe(dev, ret,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "adi,fet-bad-retries invalid value\n");
-> > +	if (ret >=3D 0) {
-> > +		ret =3D regmap_update_bits(st->map, LTC4283_CONTROL_2,
-> > +					 LTC4283_FET_BAD_RETRY_MASK,
-> > +					 FIELD_PREP(LTC4283_FET_BAD_RETRY_MASK, ret));
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,external-fault-fet-off-enable=
-")) {
-> > +		if (!st->ext_fault)
-> > +			return dev_err_probe(dev, -EINVAL,
-> > +					=C2=A0=C2=A0=C2=A0=C2=A0 "adi,external-fault-fet-off-enable set b=
-ut PGIO4
-> > not configured\n");
-> > +		ret =3D regmap_set_bits(st->map, LTC4283_CONFIG_3,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 LTC4283_EXTFLT_TURN_OFF_MASK);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (device_property_read_bool(dev, "adi,vpower-drns-enable")) {
-> > +		__clear_bit(LTC4283_CHAN_DRAIN, &st->ch_enable_mask);
->=20
-> That kind of conflicts with the devicetree description, which says that t=
-he
-> _drain_ voltage should be monitored if this property is enabled.
->=20
-
-Hmm I messed up here during revisions. Before I was only dealing with the a=
-di,vpower-drns-enable
-true case and when I changed to also deal with the lack of the flag, I clea=
-rly messed up.
-
-Anyways, main idea is to remove the DRNS (attenuated drain voltage) from AD=
-C2 if we already have
-it in VPWR.
-
-- Nuno S=C3=A1
-
- =20
-> > +		chan =3D LTC4283_CHAN_DRAIN - LTC4283_CHAN_ADI_1;
-> > +		val =3D 1;
-> > +	} else {
-> > +		__clear_bit(LTC4283_CHAN_DRNS, &st->ch_enable_mask);
-> > +		chan =3D LTC4283_CHAN_DRNS - LTC4283_CHAN_ADI_1;
-> > +		val =3D 0;
-> > +	}
-> > +	/*
-> > +	 * Then, let's by default disable the channel from the ADC2 that is
-> > +	 * already being monitored by the VPWR channel. One can still enable =
-it
-> > +	 * later on if needed.
-> > +	 */
-> > +	ret =3D regmap_clear_bits(st->map, LTC4283_ADC_SELECT(chan),
-> > +				LTC4283_ADC_SELECT_MASK(chan));
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D regmap_update_bits(st->map, LTC4283_CONFIG_3,
-> > +				 LTC4283_VPWR_DRNS_MASK,
-> > +				 FIELD_PREP(LTC4283_VPWR_DRNS_MASK, val));
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/* Make sure the ADC has 12bit resolution since we're assuming that. =
-*/
-> > +	ret =3D regmap_update_bits(st->map, LTC4283_PGIO_CONFIG_2,
-> > +				 LTC4283_ADC_MASK,
-> > +				 FIELD_PREP(LTC4283_ADC_MASK, 3));
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/* Energy reads (which are 6 byte block reads) rely on page access */
-> > +	ret =3D regmap_set_bits(st->map, LTC4283_CONTROL_1, LTC4283_RW_PAGE_M=
-ASK);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	/*
-> > +	 * Make sure we are integrating power as we only support reporting
-> > +	 * consumed energy.
-> > +	 */
-> > +	return regmap_clear_bits(st->map, LTC4283_METER_CONTROL,
-> > +				 LTC4283_INTEGRATE_I_MASK);
-> > +}
-> > +
-> > +static const struct hwmon_channel_info * const ltc4283_info[] =3D {
-> > +	HWMON_CHANNEL_INFO(in,
-> > +			=C2=A0=C2=A0 HWMON_I_LCRIT_ALARM | HWMON_I_CRIT_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX_ALARM | HWMON_I_RESET_HISTORY |
-> > +			=C2=A0=C2=A0 HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_FAULT | HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL,
-> > +			=C2=A0=C2=A0 HWMON_I_INPUT | HWMON_I_LOWEST | HWMON_I_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_I_MAX | HWMON_I_MIN | HWMON_I_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_RESET_HISTORY | HWMON_I_MAX_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_I_ENABLE | HWMON_I_LABEL),
-> > +	HWMON_CHANNEL_INFO(curr,
-> > +			=C2=A0=C2=A0 HWMON_C_INPUT | HWMON_C_LOWEST | HWMON_C_HIGHEST |
-> > +			=C2=A0=C2=A0 HWMON_C_MAX | HWMON_C_MIN | HWMON_C_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_C_MAX_ALARM | HWMON_C_CRIT_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_C_RESET_HISTORY | HWMON_C_LABEL),
-> > +	HWMON_CHANNEL_INFO(power,
-> > +			=C2=A0=C2=A0 HWMON_P_INPUT | HWMON_P_INPUT_LOWEST |
-> > +			=C2=A0=C2=A0 HWMON_P_INPUT_HIGHEST | HWMON_P_MAX | HWMON_P_MIN |
-> > +			=C2=A0=C2=A0 HWMON_P_MAX_ALARM | HWMON_P_MIN_ALARM |
-> > +			=C2=A0=C2=A0 HWMON_P_RESET_HISTORY | HWMON_P_LABEL),
-> > +	HWMON_CHANNEL_INFO(energy,
-> > +			=C2=A0=C2=A0 HWMON_E_ENABLE),
-> > +	HWMON_CHANNEL_INFO(energy64,
-> > +			=C2=A0=C2=A0 HWMON_E_INPUT),
-> > +	NULL
-> > +};
-> > +
-> > +static const struct hwmon_ops ltc4283_ops =3D {
-> > +	.read =3D ltc4283_read,
-> > +	.write =3D ltc4283_write,
-> > +	.is_visible =3D ltc4283_is_visible,
-> > +	.read_string =3D ltc4283_read_labels,
-> > +};
-> > +
-> > +static const struct hwmon_chip_info ltc4283_chip_info =3D {
-> > +	.ops =3D &ltc4283_ops,
-> > +	.info =3D ltc4283_info,
-> > +};
-> > +
-> > +static int ltc4283_show_fault_log(void *arg, u64 *val, u32 mask)
-> > +{
-> > +	struct ltc4283_hwmon *st =3D arg;
-> > +	long alarm;
-> > +	int ret;
-> > +
-> > +	ret =3D ltc4283_read_alarm(st, LTC4283_FAULT_LOG, mask, &alarm);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*val =3D alarm;
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_show_in0_lcrit_fault_log(void *arg, u64 *val)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_UV_FAULT_MASK);
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_in0_lcrit_fault_log,
-> > +			 ltc4283_show_in0_lcrit_fault_log, NULL, "%llu\n");
-> > +
-> > +static int ltc4283_show_in0_crit_fault_log(void *arg, u64 *val)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_OV_FAULT_MASK);
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_in0_crit_fault_log,
-> > +			 ltc4283_show_in0_crit_fault_log, NULL, "%llu\n");
-> > +
-> > +static int ltc4283_show_fet_bad_fault_log(void *arg, u64 *val)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_FET_BAD_FAULT_MASK);
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_fet_bad_fault_log,
-> > +			 ltc4283_show_fet_bad_fault_log, NULL, "%llu\n");
-> > +
-> > +static int ltc4283_show_fet_short_fault_log(void *arg, u64 *val)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_FET_SHORT_FAULT_MASK)=
-;
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_fet_short_fault_log,
-> > +			 ltc4283_show_fet_short_fault_log, NULL, "%llu\n");
-> > +
-> > +static int ltc4283_show_curr1_crit_fault_log(void *arg, u64 *val)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_OC_FAULT_MASK);
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_curr1_crit_fault_log,
-> > +			 ltc4283_show_curr1_crit_fault_log, NULL, "%llu\n");
-> > +
-> > +static int ltc4283_show_power1_failed_fault_log(void *arg, u64 *val)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_PWR_FAIL_FAULT_MASK);
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_power1_failed_fault_log,
-> > +			 ltc4283_show_power1_failed_fault_log, NULL, "%llu\n");
-> > +
-> > +static int ltc4283_show_power1_good_input_fault_log(void *arg, u64 *va=
-l)
-> > +{
-> > +	return ltc4283_show_fault_log(arg, val, LTC4283_PGI_FAULT_MASK);
-> > +}
-> > +DEFINE_DEBUGFS_ATTRIBUTE(ltc4283_power1_good_input_fault_log,
-> > +			 ltc4283_show_power1_good_input_fault_log, NULL, "%llu\n");
-> > +
-> > +static void ltc4283_debugfs_init(struct ltc4283_hwmon *st, struct i2c_=
-client *i2c)
-> > +{
-> > +	debugfs_create_file_unsafe("in0_crit_fault_log", 0400, i2c->debugfs, =
-st,
-> > +				=C2=A0=C2=A0 &ltc4283_in0_crit_fault_log);
-> > +	debugfs_create_file_unsafe("in0_lcrit_fault_log", 0400, i2c->debugfs,=
- st,
-> > +				=C2=A0=C2=A0 &ltc4283_in0_lcrit_fault_log);
-> > +	debugfs_create_file_unsafe("in0_fet_bad_fault_log", 0400, i2c->debugf=
-s, st,
-> > +				=C2=A0=C2=A0 &ltc4283_fet_bad_fault_log);
-> > +	debugfs_create_file_unsafe("in0_fet_short_fault_log", 0400, i2c->debu=
-gfs, st,
-> > +				=C2=A0=C2=A0 &ltc4283_fet_short_fault_log);
-> > +	debugfs_create_file_unsafe("curr1_crit_fault_log", 0400, i2c->debugfs=
-, st,
-> > +				=C2=A0=C2=A0 &ltc4283_curr1_crit_fault_log);
-> > +	debugfs_create_file_unsafe("power1_failed_fault_log", 0400, i2c->debu=
-gfs, st,
-> > +				=C2=A0=C2=A0 &ltc4283_power1_failed_fault_log);
-> > +	debugfs_create_file_unsafe("power1_good_input_fault_log", 0400, i2c->=
-debugfs,
-> > +				=C2=A0=C2=A0 st, &ltc4283_power1_good_input_fault_log);
-> > +}
-> > +
-> > +static bool ltc4283_is_word_reg(unsigned int reg)
-> > +{
-> > +	return reg >=3D LTC4283_SENSE && reg <=3D LTC4283_ADIO34_MAX;
-> > +}
-> > +
-> > +static int ltc4283_reg_read(void *context, unsigned int reg, unsigned =
-int *val)
-> > +{
-> > +	struct i2c_client *client =3D context;
-> > +	int ret;
-> > +
-> > +	if (ltc4283_is_word_reg(reg))
-> > +		ret =3D i2c_smbus_read_word_swapped(client, reg);
-> > +	else
-> > +		ret =3D i2c_smbus_read_byte_data(client, reg);
-> > +
-> > +	if (ret < 0)
-> > +		return ret;
-> > +
-> > +	*val =3D ret;
-> > +	return 0;
-> > +}
-> > +
-> > +static int ltc4283_reg_write(void *context, unsigned int reg, unsigned=
- int val)
-> > +{
-> > +	struct i2c_client *client =3D context;
-> > +
-> > +	if (ltc4283_is_word_reg(reg))
-> > +		return i2c_smbus_write_word_swapped(client, reg, val);
-> > +
-> > +	return i2c_smbus_write_byte_data(client, reg, val);
-> > +}
-> > +
-> > +static const struct regmap_bus ltc4283_regmap_bus =3D {
-> > +	.reg_read =3D ltc4283_reg_read,
-> > +	.reg_write =3D ltc4283_reg_write,
-> > +};
-> > +
-> > +static bool ltc4283_writable_reg(struct device *dev, unsigned int reg)
-> > +{
-> > +	switch (reg) {
-> > +	case LTC4283_SYSTEM_STATUS ... LTC4283_FAULT_STATUS:
-> > +		return false;
-> > +	case LTC4283_RESERVED_OC:
-> > +		return false;
-> > +	case LTC4283_RESERVED_86 ... LTC4283_RESERVED_8F:
-> > +		return false;
-> > +	case LTC4283_RESERVED_91 ... LTC4283_RESERVED_A1:
-> > +		return false;
-> > +	case LTC4283_RESERVED_A3:
-> > +		return false;
-> > +	case LTC4283_RESERVED_AC:
-> > +		return false;
-> > +	case LTC4283_POWER_PLAY_MSB ... LTC4283_POWER_PLAY_LSB:
-> > +		return false;
-> > +	case LTC4283_RESERVED_F1 ... LTC4283_RESERVED_FF:
-> > +		return false;
-> > +	default:
-> > +		return true;
-> > +	}
-> > +}
-> > +
-> > +static const struct regmap_config ltc4283_regmap_config =3D {
-> > +	.reg_bits =3D 8,
-> > +	.val_bits =3D 16,
-> > +	.max_register =3D 0xFF,
-> > +	.writeable_reg =3D ltc4283_writable_reg,
-> > +};
-> > +
-> > +static int ltc4283_probe(struct i2c_client *client)
-> > +{
-> > +	struct device *dev =3D &client->dev, *hwmon;
-> > +	struct auxiliary_device *adev;
-> > +	struct ltc4283_hwmon *st;
-> > +	int ret;
-> > +
-> > +	st =3D devm_kzalloc(dev, sizeof(*st), GFP_KERNEL);
-> > +	if (!st)
-> > +		return -ENOMEM;
-> > +
-> > +	if (!i2c_check_functionality(client->adapter,
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 I2C_FUNC_SMBUS_BYTE_DATA |
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 I2C_FUNC_SMBUS_WORD_DATA |
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 I2C_FUNC_SMBUS_READ_I2C_BLOCK))
-> > +		return -EOPNOTSUPP;
-> > +
-> > +	st->client =3D client;
-> > +	st->map =3D devm_regmap_init(dev, &ltc4283_regmap_bus, client,
-> > +				=C2=A0=C2=A0 &ltc4283_regmap_config);
-> > +	if (IS_ERR(st->map))
-> > +		return dev_err_probe(dev, PTR_ERR(st->map),
-> > +				=C2=A0=C2=A0=C2=A0=C2=A0 "Failed to create regmap\n");
-> > +
-> > +	ret =3D ltc4283_setup(st, dev);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	hwmon =3D devm_hwmon_device_register_with_info(dev, "ltc4283", st,
-> > +						=C2=A0=C2=A0=C2=A0=C2=A0 &ltc4283_chip_info, NULL);
-> > +
-> > +	if (IS_ERR(hwmon))
-> > +		return PTR_ERR(hwmon);
-> > +
-> > +	ltc4283_debugfs_init(st, client);
-> > +
-> > +	if (!st->gpio_mask)
-> > +		return 0;
-> > +
-> > +	adev =3D devm_auxiliary_device_create(dev, "gpio", &st->gpio_mask);
-> > +	if (!adev)
-> > +		return dev_err_probe(dev, -ENODEV, "Failed to add GPIO device\n");
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static const struct of_device_id ltc4283_of_match[] =3D {
-> > +	{ .compatible =3D "adi,ltc4283" },
-> > +	{ }
-> > +};
-> > +
-> > +static const struct i2c_device_id ltc4283_i2c_id[] =3D {
-> > +	{ "ltc4283" },
-> > +	{ }
-> > +};
-> > +MODULE_DEVICE_TABLE(i2c, ltc4283_i2c_id);
-> > +
-> > +static struct i2c_driver ltc4283_driver =3D {
-> > +	.driver	=3D {
-> > +		.name =3D "ltc4283",
-> > +		.of_match_table =3D ltc4283_of_match,
-> > +	},
-> > +	.probe =3D ltc4283_probe,
-> > +	.id_table =3D ltc4283_i2c_id,
-> > +};
-> > +module_i2c_driver(ltc4283_driver);
-> > +
-> > +MODULE_AUTHOR("Nuno S=C3=A1 <nuno.sa@analog.com>");
-> > +MODULE_DESCRIPTION("LTC4283 Hot Swap Controller driver");
-> > +MODULE_LICENSE("GPL");
+QW0gMjIuMDMuMjYgdW0gMTY6NTMgc2NocmllYiBKYWNlayBBbmFzemV3c2tpOg0KDQo+IEhpIEFy
+bWluLA0KPg0KPiBPbiAzLzE1LzI2IDEyOjAxIEFNLCBBcm1pbiBXb2xmIHdyb3RlOg0KPj4gU29t
+ZSBtdWx0aWNvbG9yIExFRHMgc3VwcG9ydCBnbG9iYWwgYnJpZ2h0bmVzcyBjb250cm9sIGluIGhh
+cmR3YXJlLA0KPj4gbWVhbmluZyB0aGF0IHRoZSBtYXhpbXVtIGludGVuc2l0eSBvZiB0aGUgY29s
+b3IgY29tcG9uZW50cyBpcyBub3QNCj4+IGNvbm5lY3RlZCB0byB0aGUgbWF4aW11bSBnbG9iYWwg
+YnJpZ2h0bmVzcy4gU3VjaCBMRURzIGNhbm5vdCBiZQ0KPj4gZGVzY3JpYmVkIHByb3Blcmx5IGJ5
+IHRoZSBjdXJyZW50IG11bHRpY29sb3IgTEVEIGNsYXNzIGludGVyZmFjZSwNCj4+IGJlY2F1c2Ug
+aXQgYXNzdW1lcyB0aGF0IHRoZSBtYXhpbXVtIGludGVuc2l0eSBvZiBlYWNoIGNvbG9yIGNvbXBv
+bmVudA0KPj4gaXMgZGVzY3JpYmVkIGJ5IHRoZSBtYXhpbXVtIGdsb2JhbCBicmlnaHRuZXNzIG9m
+IHRoZSBMRUQuDQo+Pg0KPj4gRml4IHRoaXMgYnkgaW50cm9kdWNpbmcgYSBuZXcgc3lzZnMgYXR0
+cmlidXRlIGNhbGxlZA0KPj4gIm11bHRpX21heF9pbnRlbnNpdHkiIGhvbGRpbmcgdGhlIG1heGlt
+dW0gaW50ZW5zaXR5IHZhbHVlcyBmb3IgdGhlDQo+PiBjb2xvciBjb21wb25lbnRzIG9mIGEgbXVs
+dGljb2xvciBMRUQgY2xhc3MgZGV2aWNlLiBEcml2ZXJzIGNhbiB1c2UNCj4+IHRoZSBuZXcgbWF4
+X2ludGVuc2l0eSBmaWVsZCBpbnNpZGUgc3RydWN0IG1jX3N1YmxlZCB0byB0ZWxsIHRoZQ0KPj4g
+bXVsdGljb2xvciBMRUQgY2xhc3MgY29kZSBhYm91dCB0aG9zZSB2YWx1ZXMuIEludGVuc2l0eSB2
+YWx1ZXMgd3JpdHRlbg0KPj4gYnkgdXNlcnNwYWNlIGFwcGxpY2F0aW9ucyB3aWxsIGJlIGxpbWl0
+ZWQgdG8gdGhpcyBtYXhpbXVtIHZhbHVlLg0KPj4NCj4+IERyaXZlcnMgZm9yIG11bHRpY29sb3Ig
+TEVEcyB0aGF0IGRvIG5vdCBzdXBwb3J0IGdsb2JhbCBicmlnaHRuZXNzDQo+PiBjb250cm9sIGlu
+IGhhcmR3YXJlIG1pZ2h0IHN0aWxsIHdhbnQgdG8gdXNlIHRoZSBtYXhpbXVtIGdsb2JhbCBMRUQN
+Cj4+IGJyaWdodG5lc3Mgc3VwcGxpZWQgdmlhIGRldmljZXRyZWUgYXMgdGhlIG1heGltdW0gaW50
+ZW5zaXR5IG9mIGVhY2gNCj4+IGluZGl2aWR1YWwgY29sb3IgY29tcG9uZW50LiBTdWNoIGRyaXZl
+cnMgc2hvdWxkIHNldCBtYXhfaW50ZW5zaXR5DQo+PiB0byBMRURfVVNFX01BWF9CUklHSFRORVNT
+IHNvIHRoYXQgdGhlIG11bHRpY29sb3IgTEVEIGNvcmUgY2FuIGFjdA0KPg0KPiBTaW5jZSBMRURf
+VVNFX01BWF9CUklHSFRORVNTIHZhbHVlIGlzIDAsIHRoZW4gSSBwcm9wb3NlIG5vdCB0byB0b3Vj
+aA0KPiB0aGUgZHJpdmVycyB3aGljaCB3ZSB3YW50IHRvIHN0aWNrIHRvIHRoZSBkZWZhdWx0IG1h
+eF9pbnRlbnNpdHksDQo+IHVubGVzcyB0aGV5IGRvbid0IGluaXRpYWxpemUgdGhlaXIgbWNfc3Vi
+bGVkIHN0cnVjdHMgdG8gMCwgb3IgZG9uJ3QNCj4gdXNlIHN0cnVjdCBpbml0aWFsaXphdGlvbiBs
+aXN0LCB3aGljaCBpbiBjYXNlIHRoZSBwcm9wZXJ0eSBpcyBvbWl0dGVkLA0KPiBpbml0aWFsaXpl
+cyBpdCB0byAwLg0KPg0KQWdyZWUsIGkgd2lsbCBjaGVjayB3aGljaCBkcml2ZXJzIGRvIHRoaXMg
+d2hlbiBzZW5kaW5nIHRoZSB2MSByZXZpc2lvbi4NCg0KPj4gYWNjb3JkaW5nbHkuDQo+Pg0KPj4g
+Q29tcGlsZS10ZXN0ZWQgb25seS4NCj4+DQo+PiBTaWduZWQtb2ZmLWJ5OiBBcm1pbiBXb2xmIDxX
+X0FybWluQGdteC5kZT4NCj4+IC0tLQ0KPj4gwqAgLi4uL0FCSS90ZXN0aW5nL3N5c2ZzLWNsYXNz
+LWxlZC1tdWx0aWNvbG9ywqDCoMKgIHwgMTYgKysrKysrKy0tDQo+PiDCoCBEb2N1bWVudGF0aW9u
+L2xlZHMvbGVkcy1jbGFzcy1tdWx0aWNvbG9yLnJzdMKgIHwgMjEgKysrKysrKysrKy0NCj4+IMKg
+IGRyaXZlcnMvaGlkL2hpZC1sZy1nMTUuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqAgMyArKw0KPj4gwqAgZHJpdmVycy9oaWQvaGlkLXBsYXlzdGF0aW9uLmPC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMyArKw0KPj4gwqAgZHJpdmVycy9s
+ZWRzL2ZsYXNoL2xlZHMtbXQ2MzYwLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgOCAr
+Ky0tLQ0KPj4gwqAgZHJpdmVycy9sZWRzL2xlZC1jbGFzcy1tdWx0aWNvbG9yLmPCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8IDM2ICsrKysrKysrKysrKysrKysrLS0NCj4+IMKgIGRyaXZlcnMvbGVkcy9s
+ZWRzLWJsaW5rbS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDMg
+KysNCj4+IMKgIGRyaXZlcnMvbGVkcy9sZWRzLWNyb3NfZWMuY8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB8wqAgMSArDQo+PiDCoCBkcml2ZXJzL2xlZHMvbGVkcy1scDUweHgu
+Y8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxICsNCj4+IMKgIGRy
+aXZlcnMvbGVkcy9sZWRzLWxwNTV4eC1jb21tb24uY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
+wqAgNyArKy0tDQo+PiDCoCBkcml2ZXJzL2xlZHMvbGVkcy1tYXg3NzcwNS5jwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMSArDQo+PiDCoCBkcml2ZXJzL2xlZHMvbGVkcy1z
+dW41MGktYTEwMC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMyArKw0KPj4gwqAg
+ZHJpdmVycy9sZWRzL2xlZHMtdHVycmlzLW9tbmlhLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB8wqAgMSArDQo+PiDCoCBkcml2ZXJzL2xlZHMvcmdiL2xlZHMtZ3JvdXAtbXVsdGljb2xvci5j
+wqDCoMKgwqDCoCB8wqAgMSArDQo+PiDCoCBkcml2ZXJzL2xlZHMvcmdiL2xlZHMta3RkMjAyeC5j
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMSArDQo+PiDCoCBkcml2ZXJzL2xlZHMv
+cmdiL2xlZHMtbHA1ODEyLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEgKw0K
+Pj4gwqAgZHJpdmVycy9sZWRzL3JnYi9sZWRzLW10NjM3MC1yZ2IuY8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfMKgIDggKystLS0NCj4+IMKgIGRyaXZlcnMvbGVkcy9yZ2IvbGVkcy1uY3A1NjIzLmPC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA0ICstLQ0KPj4gwqAgZHJpdmVycy9sZWRz
+L3JnYi9sZWRzLXB3bS1tdWx0aWNvbG9yLmPCoMKgwqDCoMKgwqDCoCB8wqAgMSArDQo+PiDCoCBk
+cml2ZXJzL2xlZHMvcmdiL2xlZHMtcWNvbS1scGcuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHzCoCAxICsNCj4+IMKgIGRyaXZlcnMvcGxhdGZvcm0veDg2L3NpbGljb20tcGxhdGZvcm0uY8Kg
+wqDCoMKgwqDCoCB8IDMwICsrKysrKysrKysrKysrKysNCj4+IMKgIGRyaXZlcnMvcGxhdGZvcm0v
+eDg2L3VuaXdpbGwvdW5pd2lsbC1hY3BpLmPCoMKgIHzCoCA0ICstLQ0KPj4gwqAgaW5jbHVkZS9s
+aW51eC9sZWQtY2xhc3MtbXVsdGljb2xvci5owqDCoMKgwqDCoMKgwqDCoMKgIHwgMzIgKysrKysr
+KysrKysrKysrKy0NCj4+IMKgIDIzIGZpbGVzIGNoYW5nZWQsIDE2NCBpbnNlcnRpb25zKCspLCAy
+MyBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9BQkkvdGVz
+dGluZy9zeXNmcy1jbGFzcy1sZWQtbXVsdGljb2xvciANCj4+IGIvRG9jdW1lbnRhdGlvbi9BQkkv
+dGVzdGluZy9zeXNmcy1jbGFzcy1sZWQtbXVsdGljb2xvcg0KPj4gaW5kZXggMTZmYzgyN2IxMGNi
+Li5mYmQ5NWM1MDAzZTIgMTAwNjQ0DQo+PiAtLS0gYS9Eb2N1bWVudGF0aW9uL0FCSS90ZXN0aW5n
+L3N5c2ZzLWNsYXNzLWxlZC1tdWx0aWNvbG9yDQo+PiArKysgYi9Eb2N1bWVudGF0aW9uL0FCSS90
+ZXN0aW5nL3N5c2ZzLWNsYXNzLWxlZC1tdWx0aWNvbG9yDQo+PiBAQCAtMTcsOCArMTcsMjAgQEAg
+S2VybmVsVmVyc2lvbjrCoMKgwqAgNS45DQo+PiDCoCBDb250YWN0OsKgwqDCoCBEYW4gTXVycGh5
+IDxkbXVycGh5QHRpLmNvbT4NCj4+IMKgIERlc2NyaXB0aW9uOsKgwqDCoCByZWFkL3dyaXRlDQo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqAgVGhpcyBmaWxlIGNvbnRhaW5zIGFycmF5IG9mIGludGVnZXJz
+LiBPcmRlciBvZiBjb21wb25lbnRzIGlzDQo+PiAtwqDCoMKgwqDCoMKgwqAgZGVzY3JpYmVkIGJ5
+IHRoZSBtdWx0aV9pbmRleCBhcnJheS4gVGhlIG1heGltdW0gaW50ZW5zaXR5IA0KPj4gc2hvdWxk
+DQo+PiAtwqDCoMKgwqDCoMKgwqAgbm90IGV4Y2VlZCAvc3lzL2NsYXNzL2xlZHMvPGxlZD4vbWF4
+X2JyaWdodG5lc3MuDQo+PiArwqDCoMKgwqDCoMKgwqAgZGVzY3JpYmVkIGJ5IHRoZSBtdWx0aV9p
+bmRleCBhcnJheS4NCj4+ICvCoMKgwqDCoMKgwqDCoCBGb3IgYWRkaXRpb25hbCBkZXRhaWxzIHBs
+ZWFzZSByZWZlciB0bw0KPj4gK8KgwqDCoMKgwqDCoMKgIERvY3VtZW50YXRpb24vbGVkcy9sZWRz
+LWNsYXNzLW11bHRpY29sb3IucnN0Lg0KPg0KPiBXaHkgbm90IHRvIHJlZmVyIHRvIHRoZSBuZXds
+eSBpbnRyb2R1Y2VkIG11bHRpX21heF9pbnRlbnNpdHkgZmlsZSBoZXJlDQo+IGluc3RlYWQ/DQo+
+DQpHb29kIHBvaW50LCBpIGNvcGllZCB0aGlzIGZyb20gdGhlIG90aGVyIGRlc2NyaXB0aW9ucy4g
+SSB3aWxsIHJld29yayB0aGlzIGZvcg0KdGhlIHYxIHJldmlzaW9uLg0KDQo+PiArDQo+PiArV2hh
+dDrCoMKgwqDCoMKgwqDCoCAvc3lzL2NsYXNzL2xlZHMvPGxlZD4vbXVsdGlfbWF4X2ludGVuc2l0
+eQ0KPj4gK0RhdGU6wqDCoMKgwqDCoMKgwqAgTWFyY2ggMjAyNg0KPj4gK0tlcm5lbFZlcnNpb246
+wqDCoMKgIDcuMQ0KPj4gK0NvbnRhY3Q6wqDCoMKgIEFybWluIFdvbGYgPFdfQXJtaW5AZ214LmRl
+Pg0KPj4gK0Rlc2NyaXB0aW9uOsKgwqDCoCByZWFkDQo+PiArwqDCoMKgwqDCoMKgwqAgVGhpcyBm
+aWxlIGNvbnRhaW5zIGFuIGFycmF5IG9mIGludGVnZXJzIGRlc2NyaWJpbmcgdGhlIG1heGltdW0N
+Cj4+ICvCoMKgwqDCoMKgwqDCoCBpbnRlbnNpdHkgdmFsdWUgZm9yIGVhY2ggaW50ZW5zaXR5IGNv
+bXBvbmVudC4gV3JpdGluZyBpbnRlbnNpdHkNCj4+ICvCoMKgwqDCoMKgwqDCoCB2YWx1ZXMgbGFy
+Z2VyIHRoYW4gdGhlIG1heGltdW0gdmFsdWUgb2YgYSBnaXZlbiBjb21wb25lbnQgd2lsbA0KPj4g
+K8KgwqDCoMKgwqDCoMKgIHJlc3VsdCBpbiB0aG9zZSB2YWx1ZXMgYmVpbmcgY2xhbXBlZC4NCj4+
+IMKgIMKgwqDCoMKgwqDCoMKgwqDCoCBGb3IgYWRkaXRpb25hbCBkZXRhaWxzIHBsZWFzZSByZWZl
+ciB0bw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIERvY3VtZW50YXRpb24vbGVkcy9sZWRzLWNsYXNz
+LW11bHRpY29sb3IucnN0Lg0KPj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vbGVkcy9sZWRz
+LWNsYXNzLW11bHRpY29sb3IucnN0IA0KPj4gYi9Eb2N1bWVudGF0aW9uL2xlZHMvbGVkcy1jbGFz
+cy1tdWx0aWNvbG9yLnJzdA0KPj4gaW5kZXggYzZiNDdiNDA5M2M0Li44ZjQyZjEwMDc4YWQgMTAw
+NjQ0DQo+PiAtLS0gYS9Eb2N1bWVudGF0aW9uL2xlZHMvbGVkcy1jbGFzcy1tdWx0aWNvbG9yLnJz
+dA0KPj4gKysrIGIvRG9jdW1lbnRhdGlvbi9sZWRzL2xlZHMtY2xhc3MtbXVsdGljb2xvci5yc3QN
+Cj4+IEBAIC0yNSwxMCArMjUsMTQgQEAgY29sb3IgbmFtZSB0byBpbmRleGVkIHZhbHVlLg0KPj4g
+wqAgVGhlIGBgbXVsdGlfaW5kZXhgYCBmaWxlIGlzIGFuIGFycmF5IHRoYXQgY29udGFpbnMgdGhl
+IHN0cmluZyBsaXN0IA0KPj4gb2YgdGhlIGNvbG9ycyBhcw0KPj4gwqAgdGhleSBhcmUgZGVmaW5l
+ZCBpbiBlYWNoIGBgbXVsdGlfKmBgIGFycmF5IGZpbGUuDQo+PiDCoCAtVGhlIGBgbXVsdGlfaW50
+ZW5zaXR5YGAgaXMgYW4gYXJyYXkgdGhhdCBjYW4gYmUgcmVhZCBvciB3cml0dGVuIHRvIA0KPj4g
+Zm9yIHRoZQ0KPj4gK1RoZSBgYG11bHRpX2ludGVuc2l0eWBgIGZpbGUgaXMgYW4gYXJyYXkgdGhh
+dCBjYW4gYmUgcmVhZCBvciB3cml0dGVuIA0KPj4gdG8gZm9yIHRoZQ0KPj4gwqAgaW5kaXZpZHVh
+bCBjb2xvciBpbnRlbnNpdGllcy7CoCBBbGwgZWxlbWVudHMgd2l0aGluIHRoaXMgYXJyYXkgbXVz
+dCANCj4+IGJlIHdyaXR0ZW4gaW4NCj4+IMKgIG9yZGVyIGZvciB0aGUgY29sb3IgTEVEIGludGVu
+c2l0aWVzIHRvIGJlIHVwZGF0ZWQuDQo+PiDCoCArVGhlIGBgbXVsdGlfbWF4X2ludGVuc2l0eWBg
+IGZpbGUgaXMgYW4gYXJyYXkgdGhhdCBjb250YWlucyB0aGUgDQo+PiBtYXhpbXVtIGludGVuc2l0
+eQ0KPj4gK3ZhbHVlIHN1cHBvcnRlZCBieSBlYWNoIGNvbG9yIGludGVuc2l0eS4gSW50ZW5zaXR5
+IHZhbHVlcyBhYm92ZSB0aGlzIA0KPj4gd2lsbCBiZQ0KPj4gK2F1dG9tYXRpY2FsbHkgY2xhbXBl
+ZCBpbnRvIHRoZSBzdXBwb3J0ZWQgcmFuZ2UuDQo+PiArDQo+PiDCoCBEaXJlY3RvcnkgTGF5b3V0
+IEV4YW1wbGUNCj4+IMKgID09PT09PT09PT09PT09PT09PT09PT09PQ0KPj4gwqAgLi4gY29kZS1i
+bG9jazo6IGNvbnNvbGUNCj4+IEBAIC0zOCw2ICs0Miw3IEBAIERpcmVjdG9yeSBMYXlvdXQgRXhh
+bXBsZQ0KPj4gwqDCoMKgwqDCoCAtci0tci0tci0twqDCoMKgIDEgcm9vdMKgwqDCoMKgIHJvb3TC
+oMKgwqDCoMKgwqDCoMKgwqAgNDA5NiBPY3QgMTkgMTY6MTYgDQo+PiBtYXhfYnJpZ2h0bmVzcw0K
+Pj4gwqDCoMKgwqDCoCAtci0tci0tci0twqDCoMKgIDEgcm9vdMKgwqDCoMKgIHJvb3TCoMKgwqDC
+oMKgwqDCoMKgwqAgNDA5NiBPY3QgMTkgMTY6MTYgDQo+PiBtdWx0aV9pbmRleA0KPj4gwqDCoMKg
+wqDCoCAtcnctci0tci0twqDCoMKgIDEgcm9vdMKgwqDCoMKgIHJvb3TCoMKgwqDCoMKgwqDCoMKg
+wqAgNDA5NiBPY3QgMTkgMTY6MTYgDQo+PiBtdWx0aV9pbnRlbnNpdHkNCj4+ICvCoMKgwqAgLXIt
+LXItLXItLcKgwqDCoCAxIHJvb3TCoMKgwqDCoCByb290wqDCoMKgwqDCoMKgwqDCoMKgIDQwOTYg
+T0N0IDE5IDE2OjE2IA0KPj4gbXVsdGlfbWF4X2ludGVuc2l0eQ0KPj4gwqAgwqAgLi4NCj4+IMKg
+IEBAIC0xMDQsMyArMTA5LDE3IEBAIHRoZSBjb2xvciBMRUQgZ3JvdXAuDQo+PiDCoMKgwqDCoMKg
+IDEyOA0KPj4gwqAgwqAgLi4NCj4+ICsNCj4+ICtXcml0aW5nIGludGVuc2l0eSB2YWx1ZXMgbGFy
+Z2VyIHRoYW4gdGhlIG1heGltdW0gc3BlY2lmaWVkIGluIA0KPj4gYGBtdWx0aV9tYXhfaW50ZW5z
+aXR5YGANCj4+ICt3aWxsIHJlc3VsdCBpbiB0aG9zZSB2YWx1ZXMgYmVpbmcgY2xhbXBlZCBpbnRv
+IHRoZSBzdXBwb3J0ZWQgcmFuZ2UuDQo+PiArDQo+PiArLi4gY29kZS1ibG9jazo6IGNvbnNvbGUN
+Cj4+ICsNCj4+ICvCoMKgICMgY2F0IC9zeXMvY2xhc3MvbGVkcy9tdWx0aWNvbG9yOnN0YXR1cy9t
+dWx0aV9tYXhfaW50ZW5zaXR5DQo+PiArwqDCoCAyNTUgMjU1IDI1NQ0KPj4gKw0KPj4gK8KgwqAg
+IyBlY2hvIDUxMiA1MTIgNTEyID4gDQo+PiAvc3lzL2NsYXNzL2xlZHMvbXVsdGljb2xvcjpzdGF0
+dXMvbXVsdGlfaW50ZW5zaXR5DQo+PiArwqDCoCAjIGNhdCAvc3lzL2NsYXNzL2xlZHMvbXVsdGlj
+b2xvcjpzdGF0dXMvbXVsdGlfaW50ZW5zaXR5DQo+PiArwqDCoCAyNTUgMjU1IDI1NQ0KPj4gKw0K
+Pj4gKy4uDQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9oaWQvaGlkLWxnLWcxNS5jIGIvZHJpdmVy
+cy9oaWQvaGlkLWxnLWcxNS5jDQo+PiBpbmRleCAxYTg4YmM0NGFkYTQuLjIyN2Y1MGIyMWMwNiAx
+MDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvaGlkL2hpZC1sZy1nMTUuYw0KPj4gKysrIGIvZHJpdmVy
+cy9oaWQvaGlkLWxnLWcxNS5jDQo+PiBAQCAtOTc1LDE0ICs5NzUsMTcgQEAgc3RhdGljIHZvaWQg
+bGdfZzE1X3NldHVwX2xlZF9yZ2Ioc3RydWN0IA0KPj4gbGdfZzE1X2RhdGEgKmcxNSwgaW50IGlu
+ZGV4KQ0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGNhc2UgTEVEX0NPTE9SX0lEX1JFRDoNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN1YmxlZF9pbmZvW2ldLmNvbG9yX2luZGV4ID0gTEVE
+X0NPTE9SX0lEX1JFRDsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN1YmxlZF9pbmZv
+W2ldLmludGVuc2l0eSA9IGdsZWQtPnJlZDsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN1
+YmxlZF9pbmZvW2ldLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYnJlYWs7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAg
+Y2FzZSBMRURfQ09MT1JfSURfR1JFRU46DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBz
+dWJsZWRfaW5mb1tpXS5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9HUkVFTjsNCj4+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN1YmxlZF9pbmZvW2ldLmludGVuc2l0eSA9IGdsZWQtPmdy
+ZWVuOw0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3VibGVkX2luZm9baV0ubWF4X2ludGVu
+c2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBicmVhazsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBjYXNlIExFRF9DT0xPUl9JRF9CTFVF
+Og0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3VibGVkX2luZm9baV0uY29sb3JfaW5k
+ZXggPSBMRURfQ09MT1JfSURfQkxVRTsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN1
+YmxlZF9pbmZvW2ldLmludGVuc2l0eSA9IGdsZWQtPmJsdWU7DQo+PiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBzdWJsZWRfaW5mb1tpXS5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hU
+TkVTUzsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOw0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIH0NCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBzdWJsZWRfaW5mb1tpXS5jaGFubmVs
+ID0gaTsNCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2hpZC9oaWQtcGxheXN0YXRpb24uYyANCj4+
+IGIvZHJpdmVycy9oaWQvaGlkLXBsYXlzdGF0aW9uLmMNCj4+IGluZGV4IDNjMGRiOGY5M2M4Mi4u
+YTZkZTRkZDQ5NzUwIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9oaWQvaGlkLXBsYXlzdGF0aW9u
+LmMNCj4+ICsrKyBiL2RyaXZlcnMvaGlkL2hpZC1wbGF5c3RhdGlvbi5jDQo+PiBAQCAtODc0LDgg
+Kzg3NCwxMSBAQCBzdGF0aWMgaW50IHBzX2xpZ2h0YmFyX3JlZ2lzdGVyKHN0cnVjdCBwc19kZXZp
+Y2UgDQo+PiAqcHNfZGV2LCBzdHJ1Y3QgbGVkX2NsYXNzZGV2X21jDQo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqAgcmV0dXJuIC1FTk9NRU07DQo+PiDCoCDCoMKgwqDCoMKgIG1jX2xlZF9pbmZvWzBdLmNv
+bG9yX2luZGV4ID0gTEVEX0NPTE9SX0lEX1JFRDsNCj4+ICvCoMKgwqAgbWNfbGVkX2luZm9bMF0u
+bWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDCoMKgIG1j
+X2xlZF9pbmZvWzFdLmNvbG9yX2luZGV4ID0gTEVEX0NPTE9SX0lEX0dSRUVOOw0KPj4gK8KgwqDC
+oCBtY19sZWRfaW5mb1sxXS5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUzsN
+Cj4+IMKgwqDCoMKgwqAgbWNfbGVkX2luZm9bMl0uY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURf
+QkxVRTsNCj4+ICvCoMKgwqAgbWNfbGVkX2luZm9bMl0ubWF4X2ludGVuc2l0eSA9IExFRF9VU0Vf
+TUFYX0JSSUdIVE5FU1M7DQo+PiDCoCDCoMKgwqDCoMKgIGxpZ2h0YmFyX21jX2Rldi0+c3VibGVk
+X2luZm8gPSBtY19sZWRfaW5mbzsNCj4+IMKgwqDCoMKgwqAgbGlnaHRiYXJfbWNfZGV2LT5udW1f
+Y29sb3JzID0gMzsNCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2xlZHMvZmxhc2gvbGVkcy1tdDYz
+NjAuYyANCj4+IGIvZHJpdmVycy9sZWRzL2ZsYXNoL2xlZHMtbXQ2MzYwLmMNCj4+IGluZGV4IDQ2
+MmE5MDJmNTRlMC4uZjAzMzFjYmVjNmFhIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9sZWRzL2Zs
+YXNoL2xlZHMtbXQ2MzYwLmMNCj4+ICsrKyBiL2RyaXZlcnMvbGVkcy9mbGFzaC9sZWRzLW10NjM2
+MC5jDQo+PiBAQCAtMTAwLDcgKzEwMCw3IEBAIHN0YXRpYyBpbnQgbXQ2MzYwX21jX2JyaWdodG5l
+c3Nfc2V0KHN0cnVjdCANCj4+IGxlZF9jbGFzc2RldiAqbGNkZXYsDQo+PiDCoMKgwqDCoMKgIHN0
+cnVjdCBsZWRfY2xhc3NkZXZfbWMgKm1jY2RldiA9IGxjZGV2X3RvX21jY2RldihsY2Rldik7DQo+
+PiDCoMKgwqDCoMKgIHN0cnVjdCBtdDYzNjBfbGVkICpsZWQgPSBjb250YWluZXJfb2YobWNjZGV2
+LCBzdHJ1Y3QgDQo+PiBtdDYzNjBfbGVkLCBtYyk7DQo+PiDCoMKgwqDCoMKgIHN0cnVjdCBtdDYz
+NjBfcHJpdiAqcHJpdiA9IGxlZC0+cHJpdjsNCj4+IC3CoMKgwqAgdTMyIHJlYWxfYnJpZ2h0LCBl
+bmFibGVfbWFzayA9IDAsIGVuYWJsZSA9IDA7DQo+PiArwqDCoMKgIHUzMiBlbmFibGVfbWFzayA9
+IDAsIGVuYWJsZSA9IDA7DQo+PiDCoMKgwqDCoMKgIGludCBpLCByZXQ7DQo+PiDCoCDCoMKgwqDC
+oMKgIG11dGV4X2xvY2soJnByaXYtPmxvY2spOw0KPj4gQEAgLTExMCwxNCArMTEwLDEzIEBAIHN0
+YXRpYyBpbnQgbXQ2MzYwX21jX2JyaWdodG5lc3Nfc2V0KHN0cnVjdCANCj4+IGxlZF9jbGFzc2Rl
+diAqbGNkZXYsDQo+PiDCoMKgwqDCoMKgIGZvciAoaSA9IDA7IGkgPCBtY2NkZXYtPm51bV9jb2xv
+cnM7IGkrKykgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBtY19zdWJsZWQgKnN1Ymxl
+ZCA9IG1jY2Rldi0+c3VibGVkX2luZm8gKyBpOw0KPj4gwqAgLcKgwqDCoMKgwqDCoMKgIHJlYWxf
+YnJpZ2h0ID0gbWluKGxjZGV2LT5tYXhfYnJpZ2h0bmVzcywgc3VibGVkLT5icmlnaHRuZXNzKTsN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCByZXQgPSByZWdtYXBfdXBkYXRlX2JpdHMocHJpdi0+cmVn
+bWFwLCBNVDYzNjBfUkVHX0lTTksoaSksDQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBNVDYzNjBfSVNOS19NQVNLLCByZWFsX2JyaWdodCk7DQo+PiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBNVDYzNjBfSVNOS19NQVNLLCBzdWJs
+ZWQtPmJyaWdodG5lc3MpOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChyZXQpDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIG91dDsNCj4+IMKgIMKgwqDCoMKgwqDCoMKgwqDC
+oCBlbmFibGVfbWFzayB8PSBNVDYzNjBfSVNOS19FTk1BU0soc3VibGVkLT5jaGFubmVsKTsNCj4+
+IC3CoMKgwqDCoMKgwqDCoCBpZiAocmVhbF9icmlnaHQpDQo+PiArwqDCoMKgwqDCoMKgwqAgaWYg
+KHN1YmxlZC0+YnJpZ2h0bmVzcykNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVuYWJs
+ZSB8PSBNVDYzNjBfSVNOS19FTk1BU0soc3VibGVkLT5jaGFubmVsKTsNCj4+IMKgwqDCoMKgwqAg
+fQ0KPj4gwqAgQEAgLTY2MCw2ICs2NTksNyBAQCBzdGF0aWMgaW50IG10NjM2MF9pbml0X2lzbmtf
+cHJvcGVydGllcyhzdHJ1Y3QgDQo+PiBtdDYzNjBfbGVkICpsZWQsDQo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBwcml2LT5sZWRzX2FjdGl2ZSB8PSBCSVQocmVnKTsNCj4+IMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHN1Yl9sZWRbbnVtX2NvbG9yXS5jb2xvcl9pbmRleCA9IGNvbG9y
+Ow0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3ViX2xlZFtudW1fY29sb3JdLmNoYW5u
+ZWwgPSByZWc7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzdWJfbGVkW251bV9jb2xvcl0u
+bWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBudW1fY29sb3IrKzsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCB9DQo+PiDC
+oCBkaWZmIC0tZ2l0IGEvZHJpdmVycy9sZWRzL2xlZC1jbGFzcy1tdWx0aWNvbG9yLmMgDQo+PiBi
+L2RyaXZlcnMvbGVkcy9sZWQtY2xhc3MtbXVsdGljb2xvci5jDQo+PiBpbmRleCA2YjY3MWYzZjlj
+NjEuLjcyMzIzZTgyNTMzMSAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvbGVkcy9sZWQtY2xhc3Mt
+bXVsdGljb2xvci5jDQo+PiArKysgYi9kcml2ZXJzL2xlZHMvbGVkLWNsYXNzLW11bHRpY29sb3Iu
+Yw0KPj4gQEAgLTcsNiArNyw3IEBADQo+PiDCoCAjaW5jbHVkZSA8bGludXgvaW5pdC5oPg0KPj4g
+wqAgI2luY2x1ZGUgPGxpbnV4L2xlZC1jbGFzcy1tdWx0aWNvbG9yLmg+DQo+PiDCoCAjaW5jbHVk
+ZSA8bGludXgvbWF0aC5oPg0KPj4gKyNpbmNsdWRlIDxsaW51eC9taW5tYXguaD4NCj4+IMKgICNp
+bmNsdWRlIDxsaW51eC9tb2R1bGUuaD4NCj4+IMKgICNpbmNsdWRlIDxsaW51eC9zbGFiLmg+DQo+
+PiDCoCAjaW5jbHVkZSA8bGludXgvdWFjY2Vzcy5oPg0KPj4gQEAgLTI3LDYgKzI4LDMwIEBAIGlu
+dCBsZWRfbWNfY2FsY19jb2xvcl9jb21wb25lbnRzKHN0cnVjdCANCj4+IGxlZF9jbGFzc2Rldl9t
+YyAqbWNsZWRfY2RldiwNCj4+IMKgIH0NCj4+IMKgIEVYUE9SVF9TWU1CT0xfR1BMKGxlZF9tY19j
+YWxjX2NvbG9yX2NvbXBvbmVudHMpOw0KPj4gwqAgK3N0YXRpYyBzc2l6ZV90IG11bHRpX21heF9p
+bnRlbnNpdHlfc2hvdyhzdHJ1Y3QgZGV2aWNlICpkZXYsDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRldmljZV9hdHRyaWJ1dGUgKmludGVuc2l0eV9h
+dHRyLCBjaGFyICpidWYpDQo+PiArew0KPj4gK8KgwqDCoCBzdHJ1Y3QgbGVkX2NsYXNzZGV2ICps
+ZWRfY2RldiA9IGRldl9nZXRfZHJ2ZGF0YShkZXYpOw0KPj4gK8KgwqDCoCBzdHJ1Y3QgbGVkX2Ns
+YXNzZGV2X21jICptY2xlZF9jZGV2ID0gbGNkZXZfdG9fbWNjZGV2KGxlZF9jZGV2KTsNCj4+ICvC
+oMKgwqAgdW5zaWduZWQgaW50IG1heF9pbnRlbnNpdHk7DQo+PiArwqDCoMKgIGludCBsZW4gPSAw
+Ow0KPj4gK8KgwqDCoCBpbnQgaTsNCj4+ICsNCj4+ICvCoMKgwqAgZm9yIChpID0gMDsgaSA8IG1j
+bGVkX2NkZXYtPm51bV9jb2xvcnM7IGkrKykgew0KPj4gK8KgwqDCoMKgwqDCoMKgIG1heF9pbnRl
+bnNpdHkgPSBtY2xlZF9jZGV2LT5zdWJsZWRfaW5mb1tpXS5tYXhfaW50ZW5zaXR5Ow0KPj4gK8Kg
+wqDCoMKgwqDCoMKgIGlmIChtYXhfaW50ZW5zaXR5ID09IExFRF9VU0VfTUFYX0JSSUdIVE5FU1Mp
+DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtYXhfaW50ZW5zaXR5ID0gbGVkX2NkZXYtPm1h
+eF9icmlnaHRuZXNzOw0KPj4gKw0KPj4gK8KgwqDCoMKgwqDCoMKgIGxlbiArPSBzcHJpbnRmKGJ1
+ZiArIGxlbiwgIiV1IiwgbWF4X2ludGVuc2l0eSk7DQo+PiArwqDCoMKgwqDCoMKgwqAgaWYgKGkg
+PCBtY2xlZF9jZGV2LT5udW1fY29sb3JzIC0gMSkNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGxlbiArPSBzcHJpbnRmKGJ1ZiArIGxlbiwgIiAiKTsNCj4+ICvCoMKgwqAgfQ0KPj4gKw0KPj4g
+K8KgwqDCoCBidWZbbGVuKytdID0gJ1xuJzsNCj4+ICvCoMKgwqAgcmV0dXJuIGxlbjsNCj4+ICt9
+DQo+PiArc3RhdGljIERFVklDRV9BVFRSX1JPKG11bHRpX21heF9pbnRlbnNpdHkpOw0KPj4gKw0K
+Pj4gwqAgc3RhdGljIHNzaXplX3QgbXVsdGlfaW50ZW5zaXR5X3N0b3JlKHN0cnVjdCBkZXZpY2Ug
+KmRldiwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRldmlj
+ZV9hdHRyaWJ1dGUgKmludGVuc2l0eV9hdHRyLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBjb25zdCBjaGFyICpidWYsIHNpemVfdCBzaXplKQ0KPj4gQEAgLTM1LDYgKzYw
+LDcgQEAgc3RhdGljIHNzaXplX3QgbXVsdGlfaW50ZW5zaXR5X3N0b3JlKHN0cnVjdCBkZXZpY2Ug
+DQo+PiAqZGV2LA0KPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgbGVkX2NsYXNzZGV2X21jICptY2xlZF9j
+ZGV2ID0gbGNkZXZfdG9fbWNjZGV2KGxlZF9jZGV2KTsNCj4+IMKgwqDCoMKgwqAgaW50IG5yY2hh
+cnMsIG9mZnNldCA9IDA7DQo+PiDCoMKgwqDCoMKgIHVuc2lnbmVkIGludCBpbnRlbnNpdHlfdmFs
+dWVbTEVEX0NPTE9SX0lEX01BWF07DQo+PiArwqDCoMKgIHVuc2lnbmVkIGludCBtYXhfaW50ZW5z
+aXR5Ow0KPj4gwqDCoMKgwqDCoCBpbnQgaTsNCj4+IMKgwqDCoMKgwqAgc3NpemVfdCByZXQ7DQo+
+PiDCoCBAQCAtNTYsOCArODIsMTMgQEAgc3RhdGljIHNzaXplX3QgbXVsdGlfaW50ZW5zaXR5X3N0
+b3JlKHN0cnVjdCANCj4+IGRldmljZSAqZGV2LA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8g
+ZXJyX291dDsNCj4+IMKgwqDCoMKgwqAgfQ0KPj4gwqAgLcKgwqDCoCBmb3IgKGkgPSAwOyBpIDwg
+bWNsZWRfY2Rldi0+bnVtX2NvbG9yczsgaSsrKQ0KPj4gLcKgwqDCoMKgwqDCoMKgIG1jbGVkX2Nk
+ZXYtPnN1YmxlZF9pbmZvW2ldLmludGVuc2l0eSA9IGludGVuc2l0eV92YWx1ZVtpXTsNCj4+ICvC
+oMKgwqAgZm9yIChpID0gMDsgaSA8IG1jbGVkX2NkZXYtPm51bV9jb2xvcnM7IGkrKykgew0KPj4g
+K8KgwqDCoMKgwqDCoMKgIG1heF9pbnRlbnNpdHkgPSBtY2xlZF9jZGV2LT5zdWJsZWRfaW5mb1tp
+XS5tYXhfaW50ZW5zaXR5Ow0KPj4gK8KgwqDCoMKgwqDCoMKgIGlmIChtYXhfaW50ZW5zaXR5ID09
+IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MpDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtYXhf
+aW50ZW5zaXR5ID0gbGVkX2NkZXYtPm1heF9icmlnaHRuZXNzOw0KPj4gKw0KPj4gK8KgwqDCoMKg
+wqDCoMKgIG1jbGVkX2NkZXYtPnN1YmxlZF9pbmZvW2ldLmludGVuc2l0eSA9IA0KPj4gbWluKGlu
+dGVuc2l0eV92YWx1ZVtpXSwgbWF4X2ludGVuc2l0eSk7DQo+PiArwqDCoMKgIH0NCj4+IMKgIMKg
+wqDCoMKgwqAgaWYgKCF0ZXN0X2JpdChMRURfQkxJTktfU1csICZsZWRfY2Rldi0+d29ya19mbGFn
+cykpDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbGVkX3NldF9icmlnaHRuZXNzKGxlZF9jZGV2LCBs
+ZWRfY2Rldi0+YnJpZ2h0bmVzcyk7DQo+PiBAQCAtMTExLDYgKzE0Miw3IEBAIHN0YXRpYyBzc2l6
+ZV90IG11bHRpX2luZGV4X3Nob3coc3RydWN0IGRldmljZSAqZGV2LA0KPj4gwqAgc3RhdGljIERF
+VklDRV9BVFRSX1JPKG11bHRpX2luZGV4KTsNCj4+IMKgIMKgIHN0YXRpYyBzdHJ1Y3QgYXR0cmli
+dXRlICpsZWRfbXVsdGljb2xvcl9hdHRyc1tdID0gew0KPj4gK8KgwqDCoCAmZGV2X2F0dHJfbXVs
+dGlfbWF4X2ludGVuc2l0eS5hdHRyLA0KPj4gwqDCoMKgwqDCoCAmZGV2X2F0dHJfbXVsdGlfaW50
+ZW5zaXR5LmF0dHIsDQo+PiDCoMKgwqDCoMKgICZkZXZfYXR0cl9tdWx0aV9pbmRleC5hdHRyLA0K
+Pj4gwqDCoMKgwqDCoCBOVUxMLA0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbGVkcy9sZWRzLWJs
+aW5rbS5jIGIvZHJpdmVycy9sZWRzL2xlZHMtYmxpbmttLmMNCj4+IGluZGV4IDU3NzQ5N2I5ZDQy
+Ni4uN2QxMTQwNzY3Yzc2IDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9sZWRzL2xlZHMtYmxpbmtt
+LmMNCj4+ICsrKyBiL2RyaXZlcnMvbGVkcy9sZWRzLWJsaW5rbS5jDQo+PiBAQCAtNjk0LDggKzY5
+NCwxMSBAQCBzdGF0aWMgaW50IHJlZ2lzdGVyX211bHRpY29sb3Ioc3RydWN0IGkyY19jbGllbnQg
+DQo+PiAqY2xpZW50LCBzdHJ1Y3QgYmxpbmttX2RhdGEgKmRhDQo+PiDCoMKgwqDCoMKgwqDCoMKg
+wqAgcmV0dXJuIC1FTk9NRU07DQo+PiDCoCDCoMKgwqDCoMKgIG1jX2xlZF9pbmZvW1JFRF0uY29s
+b3JfaW5kZXggPSBMRURfQ09MT1JfSURfUkVEOw0KPj4gK8KgwqDCoCBtY19sZWRfaW5mb1tSRURd
+Lm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqDCoMKgwqDCoCBt
+Y19sZWRfaW5mb1tHUkVFTl0uY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfR1JFRU47DQo+PiAr
+wqDCoMKgIG1jX2xlZF9pbmZvW0dSRUVOXS5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJ
+R0hUTkVTUzsNCj4+IMKgwqDCoMKgwqAgbWNfbGVkX2luZm9bQkxVRV0uY29sb3JfaW5kZXggPSBM
+RURfQ09MT1JfSURfQkxVRTsNCj4+ICvCoMKgwqAgbWNfbGVkX2luZm9bQkxVRV0ubWF4X2ludGVu
+c2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoCDCoMKgwqDCoMKgIG1jX2xlZC0+
+Y2Rldi5tY2xlZF9jZGV2LnN1YmxlZF9pbmZvID0gbWNfbGVkX2luZm87DQo+PiDCoMKgwqDCoMKg
+IG1jX2xlZC0+Y2Rldi5tY2xlZF9jZGV2Lm51bV9jb2xvcnMgPSBOVU1fTEVEUzsNCj4+IGRpZmYg
+LS1naXQgYS9kcml2ZXJzL2xlZHMvbGVkcy1jcm9zX2VjLmMgYi9kcml2ZXJzL2xlZHMvbGVkcy1j
+cm9zX2VjLmMNCj4+IGluZGV4IGJlYTNjYzNmYmZkMi4uYjg5MTQ3MTgxMmZmIDEwMDY0NA0KPj4g
+LS0tIGEvZHJpdmVycy9sZWRzL2xlZHMtY3Jvc19lYy5jDQo+PiArKysgYi9kcml2ZXJzL2xlZHMv
+bGVkcy1jcm9zX2VjLmMNCj4+IEBAIC0yMDIsNiArMjAyLDcgQEAgc3RhdGljIGludCBjcm9zX2Vj
+X2xlZF9wcm9iZV9vbmUoc3RydWN0IGRldmljZSANCj4+ICpkZXYsIHN0cnVjdCBjcm9zX2VjX2Rl
+dmljZSAqY3Jvcw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29udGludWU7DQo+PiDC
+oCDCoMKgwqDCoMKgwqDCoMKgwqAgc3VibGVkc1tzdWJsZWRdLmNvbG9yX2luZGV4ID0gY3Jvc19l
+Y19sZWRfdG9fbGludXhfaWRbaV07DQo+PiArwqDCoMKgwqDCoMKgwqAgc3VibGVkc1tzdWJsZWRd
+Lm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqDCoMKgwqDCoMKg
+wqDCoMKgIGlmIChzdWJsZWQgPT0gMCkNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN1
+YmxlZHNbc3VibGVkXS5pbnRlbnNpdHkgPSAxMDA7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgc3Vi
+bGVkKys7DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9sZWRzL2xlZHMtbHA1MHh4LmMgYi9kcml2
+ZXJzL2xlZHMvbGVkcy1scDUweHguYw0KPj4gaW5kZXggZTJhOWM4NTkyOTUzLi42OWMzNTUwZjFh
+MzEgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL2xlZHMvbGVkcy1scDUweHguYw0KPj4gKysrIGIv
+ZHJpdmVycy9sZWRzL2xlZHMtbHA1MHh4LmMNCj4+IEBAIC01MjUsNiArNTI1LDcgQEAgc3RhdGlj
+IGludCBscDUweHhfcHJvYmVfZHQoc3RydWN0IGxwNTB4eCAqcHJpdikNCj4+IMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIH0NCj4+IMKgIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1jX2xl
+ZF9pbmZvW211bHRpX2luZGV4XS5jb2xvcl9pbmRleCA9IGNvbG9yX2lkOw0KPj4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgbWNfbGVkX2luZm9bbXVsdGlfaW5kZXhdLm1heF9pbnRlbnNpdHkgPSAy
+NTU7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBudW1fY29sb3JzKys7DQo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqAgfQ0KPj4gwqAgZGlmZiAtLWdpdCBhL2RyaXZlcnMvbGVkcy9sZWRzLWxw
+NTV4eC1jb21tb24uYyANCj4+IGIvZHJpdmVycy9sZWRzL2xlZHMtbHA1NXh4LWNvbW1vbi5jDQo+
+PiBpbmRleCBlYTEzMTE3N2RlOTYuLmY2MzdlNzRlODc4MCAxMDA2NDQNCj4+IC0tLSBhL2RyaXZl
+cnMvbGVkcy9sZWRzLWxwNTV4eC1jb21tb24uYw0KPj4gKysrIGIvZHJpdmVycy9sZWRzL2xlZHMt
+bHA1NXh4LWNvbW1vbi5jDQo+PiBAQCAtNDk1LDEwICs0OTUsOSBAQCBzdGF0aWMgaW50IGxwNTV4
+eF9pbml0X2xlZChzdHJ1Y3QgbHA1NXh4X2xlZCAqbGVkLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKg
+IGxlZF9jZGV2LT5icmlnaHRuZXNzX3NldF9ibG9ja2luZyA9IGxwNTV4eF9zZXRfbWNfYnJpZ2h0
+bmVzczsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBsZWQtPm1jX2NkZXYubnVtX2NvbG9ycyA9IHBk
+YXRhLT5sZWRfY29uZmlnW2NoYW5dLm51bV9jb2xvcnM7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAg
+Zm9yIChpID0gMDsgaSA8IGxlZC0+bWNfY2Rldi5udW1fY29sb3JzOyBpKyspIHsNCj4+IC3CoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIG1jX2xlZF9pbmZvW2ldLmNvbG9yX2luZGV4ID0NCj4+IC3CoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcGRhdGEtPmxlZF9jb25maWdbY2hhbl0uY29sb3Jf
+aWRbaV07DQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtY19sZWRfaW5mb1tpXS5jaGFubmVs
+ID0NCj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwZGF0YS0+bGVk
+X2NvbmZpZ1tjaGFuXS5vdXRwdXRfbnVtW2ldOw0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+bWNfbGVkX2luZm9baV0uY29sb3JfaW5kZXggPSANCj4+IHBkYXRhLT5sZWRfY29uZmlnW2NoYW5d
+LmNvbG9yX2lkW2ldOw0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbWNfbGVkX2luZm9baV0u
+Y2hhbm5lbCA9IA0KPj4gcGRhdGEtPmxlZF9jb25maWdbY2hhbl0ub3V0cHV0X251bVtpXTsNCj4+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1jX2xlZF9pbmZvW2ldLm1heF9pbnRlbnNpdHkgPSBM
+RURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIH0NCj4+IMKgIMKg
+wqDCoMKgwqDCoMKgwqDCoCBsZWQtPm1jX2NkZXYuc3VibGVkX2luZm8gPSBtY19sZWRfaW5mbzsN
+Cj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2xlZHMvbGVkcy1tYXg3NzcwNS5jIGIvZHJpdmVycy9s
+ZWRzL2xlZHMtbWF4Nzc3MDUuYw0KPj4gaW5kZXggMWUyMDU0YzFiZjgwLi5iZDJjMDc4YjQyZjMg
+MTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL2xlZHMvbGVkcy1tYXg3NzcwNS5jDQo+PiArKysgYi9k
+cml2ZXJzL2xlZHMvbGVkcy1tYXg3NzcwNS5jDQo+PiBAQCAtMTQ5LDYgKzE0OSw3IEBAIHN0YXRp
+YyBpbnQgbWF4Nzc3MDVfcGFyc2Vfc3VibGVkKHN0cnVjdCBkZXZpY2UgDQo+PiAqZGV2LCBzdHJ1
+Y3QgZndub2RlX2hhbmRsZSAqbnAsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCAiZmFpbGVkIHRvIHBhcnNlIFwiY29sb3JcIiBvZiAlcE9GXG4iLCBucCk7
+DQo+PiDCoCDCoMKgwqDCoMKgIGluZm8tPmNvbG9yX2luZGV4ID0gY29sb3I7DQo+PiArwqDCoMKg
+IGluZm8tPm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqAgwqDC
+oMKgwqDCoCByZXR1cm4gMDsNCj4+IMKgIH0NCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2xlZHMv
+bGVkcy1zdW41MGktYTEwMC5jIA0KPj4gYi9kcml2ZXJzL2xlZHMvbGVkcy1zdW41MGktYTEwMC5j
+DQo+PiBpbmRleCAyYzliZDM2MGFiODEuLjZlNzdjYmNiOGI1NCAxMDA2NDQNCj4+IC0tLSBhL2Ry
+aXZlcnMvbGVkcy9sZWRzLXN1bjUwaS1hMTAwLmMNCj4+ICsrKyBiL2RyaXZlcnMvbGVkcy9sZWRz
+LXN1bjUwaS1hMTAwLmMNCj4+IEBAIC01MDQsMTAgKzUwNCwxMyBAQCBzdGF0aWMgaW50IHN1bjUw
+aV9hMTAwX2xlZGNfcHJvYmUoc3RydWN0IA0KPj4gcGxhdGZvcm1fZGV2aWNlICpwZGV2KQ0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIGZ3bm9kZV9wcm9wZXJ0eV9yZWFkX3UzMihjaGlsZCwgInJlZyIs
+ICZsZWQtPmFkZHIpOw0KPj4gwqAgwqDCoMKgwqDCoMKgwqDCoMKgIGxlZC0+c3VibGVkX2luZm9b
+MF0uY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfUkVEOw0KPj4gK8KgwqDCoMKgwqDCoMKgIGxl
+ZC0+c3VibGVkX2luZm9bMF0ubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbGVkLT5zdWJsZWRfaW5mb1swXS5jaGFubmVsID0gMDsN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBsZWQtPnN1YmxlZF9pbmZvWzFdLmNvbG9yX2luZGV4ID0g
+TEVEX0NPTE9SX0lEX0dSRUVOOw0KPj4gK8KgwqDCoMKgwqDCoMKgIGxlZC0+c3VibGVkX2luZm9b
+MV0ubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDCoMKg
+wqDCoMKgwqAgbGVkLT5zdWJsZWRfaW5mb1sxXS5jaGFubmVsID0gMTsNCj4+IMKgwqDCoMKgwqDC
+oMKgwqDCoCBsZWQtPnN1YmxlZF9pbmZvWzJdLmNvbG9yX2luZGV4ID0gTEVEX0NPTE9SX0lEX0JM
+VUU7DQo+PiArwqDCoMKgwqDCoMKgwqAgbGVkLT5zdWJsZWRfaW5mb1syXS5tYXhfaW50ZW5zaXR5
+ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUzsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBsZWQtPnN1
+YmxlZF9pbmZvWzJdLmNoYW5uZWwgPSAyOw0KPj4gwqAgwqDCoMKgwqDCoMKgwqDCoMKgIGxlZC0+
+bWNfY2Rldi5udW1fY29sb3JzID0gQVJSQVlfU0laRShsZWQtPnN1YmxlZF9pbmZvKTsNCj4+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2xlZHMvbGVkcy10dXJyaXMtb21uaWEuYyANCj4+IGIvZHJpdmVy
+cy9sZWRzL2xlZHMtdHVycmlzLW9tbmlhLmMNCj4+IGluZGV4IDI1ZWU1YzFlYjgyMC4uZmM0MTg5
+MWZlOTcxIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9sZWRzL2xlZHMtdHVycmlzLW9tbmlhLmMN
+Cj4+ICsrKyBiL2RyaXZlcnMvbGVkcy9sZWRzLXR1cnJpcy1vbW5pYS5jDQo+PiBAQCAtMjMzLDYg
+KzIzMyw3IEBAIHN0YXRpYyBpbnQgb21uaWFfbGVkX3JlZ2lzdGVyKHN0cnVjdCBpMmNfY2xpZW50
+IA0KPj4gKmNsaWVudCwgc3RydWN0IG9tbmlhX2xlZCAqbGVkLA0KPj4gwqDCoMKgwqDCoCAvKiBJ
+bml0aWFsIGNvbG9yIGlzIHdoaXRlICovDQo+PiDCoMKgwqDCoMKgIGZvciAoaW50IGkgPSAwOyBp
+IDwgT01OSUFfTEVEX05VTV9DSEFOTkVMUzsgKytpKSB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAg
+bGVkLT5zdWJsZWRfaW5mb1tpXS5pbnRlbnNpdHkgPSAyNTU7DQo+PiArwqDCoMKgwqDCoMKgwqAg
+bGVkLT5zdWJsZWRfaW5mb1tpXS5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVT
+UzsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBsZWQtPnN1YmxlZF9pbmZvW2ldLmJyaWdodG5lc3Mg
+PSAyNTU7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbGVkLT5zdWJsZWRfaW5mb1tpXS5jaGFubmVs
+ID0gaTsNCj4+IMKgwqDCoMKgwqAgfQ0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbGVkcy9yZ2Iv
+bGVkcy1ncm91cC1tdWx0aWNvbG9yLmMgDQo+PiBiL2RyaXZlcnMvbGVkcy9yZ2IvbGVkcy1ncm91
+cC1tdWx0aWNvbG9yLmMNCj4+IGluZGV4IDU0OGM3ZGQ2M2JhMS4uYzQ3MmNjYmQ1MDZlIDEwMDY0
+NA0KPj4gLS0tIGEvZHJpdmVycy9sZWRzL3JnYi9sZWRzLWdyb3VwLW11bHRpY29sb3IuYw0KPj4g
+KysrIGIvZHJpdmVycy9sZWRzL3JnYi9sZWRzLWdyb3VwLW11bHRpY29sb3IuYw0KPj4gQEAgLTEx
+MSw2ICsxMTEsNyBAQCBzdGF0aWMgaW50IGxlZHNfZ21jX3Byb2JlKHN0cnVjdCBwbGF0Zm9ybV9k
+ZXZpY2UgDQo+PiAqcGRldikNCj4+IMKgIMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBDb25maWd1cmUg
+dGhlIExFRCBpbnRlbnNpdHkgdG8gaXRzIG1heGltdW0gKi8NCj4+IMKgwqDCoMKgwqDCoMKgwqDC
+oCBzdWJsZWRbaV0uaW50ZW5zaXR5ID0gbWF4X2JyaWdodG5lc3M7DQo+PiArwqDCoMKgwqDCoMKg
+wqAgc3VibGVkW2ldLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4g
+wqDCoMKgwqDCoCB9DQo+PiDCoCDCoMKgwqDCoMKgIC8qIEluaXRpYWxpc2UgdGhlIG11bHRpY29s
+b3IncyBMRUQgY2xhc3MgZGV2aWNlICovDQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9sZWRzL3Jn
+Yi9sZWRzLWt0ZDIwMnguYyANCj4+IGIvZHJpdmVycy9sZWRzL3JnYi9sZWRzLWt0ZDIwMnguYw0K
+Pj4gaW5kZXggZTRmMGYyNWE1ZTQ1Li40YjA1NDE3NWIzYjUgMTAwNjQ0DQo+PiAtLS0gYS9kcml2
+ZXJzL2xlZHMvcmdiL2xlZHMta3RkMjAyeC5jDQo+PiArKysgYi9kcml2ZXJzL2xlZHMvcmdiL2xl
+ZHMta3RkMjAyeC5jDQo+PiBAQCAtNDIzLDYgKzQyMyw3IEBAIHN0YXRpYyBpbnQga3RkMjAyeF9z
+ZXR1cF9sZWRfcmdiKHN0cnVjdCBrdGQyMDJ4IA0KPj4gKmNoaXAsIHN0cnVjdCBmd25vZGVfaGFu
+ZGxlICpmd24NCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBpbmZvW2ldLmNvbG9yX2luZGV4ID0gbW9u
+b19jb2xvcjsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBpbmZvW2ldLmNoYW5uZWwgPSByZWc7DQo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaW5mb1tpXS5pbnRlbnNpdHkgPSBLVEQyMDJYX01BWF9CUklH
+SFRORVNTOw0KPj4gK8KgwqDCoMKgwqDCoMKgIGluZm9baV0ubWF4X2ludGVuc2l0eSA9IExFRF9V
+U0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaSsrOw0KPj4gwqDCoMKg
+wqDCoCB9DQo+PiDCoCBkaWZmIC0tZ2l0IGEvZHJpdmVycy9sZWRzL3JnYi9sZWRzLWxwNTgxMi5j
+IA0KPj4gYi9kcml2ZXJzL2xlZHMvcmdiL2xlZHMtbHA1ODEyLmMNCj4+IGluZGV4IGNlNmQ3MDM2
+NDFlOC4uNjFmYThkZjQ5M2ZiIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9sZWRzL3JnYi9sZWRz
+LWxwNTgxMi5jDQo+PiArKysgYi9kcml2ZXJzL2xlZHMvcmdiL2xlZHMtbHA1ODEyLmMNCj4+IEBA
+IC0zNTMsNiArMzUzLDcgQEAgc3RhdGljIGludCBscDU4MTJfaW5pdF9sZWQoc3RydWN0IGxwNTgx
+Ml9sZWQgDQo+PiAqbGVkLCBzdHJ1Y3QgbHA1ODEyX2NoaXAgKmNoaXAsIGludA0KPj4gwqDCoMKg
+wqDCoMKgwqDCoMKgIGZvciAoaSA9IDA7IGkgPCBsZWQtPm1jX2NkZXYubnVtX2NvbG9yczsgaSsr
+KSB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtY19sZWRfaW5mb1tpXS5jb2xvcl9p
+bmRleCA9IA0KPj4gY2hpcC0+bGVkX2NvbmZpZ1tjaGFuXS5jb2xvcl9pZFtpXTsNCj4+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1jX2xlZF9pbmZvW2ldLmNoYW5uZWwgPSBjaGlwLT5sZWRf
+Y29uZmlnW2NoYW5dLmxlZF9pZFtpXTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1jX2xl
+ZF9pbmZvW2ldLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgIH0NCj4+IMKgIMKgwqDCoMKgwqDCoMKgwqDCoCBsZWQtPm1jX2NkZXYu
+c3VibGVkX2luZm8gPSBtY19sZWRfaW5mbzsNCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2xlZHMv
+cmdiL2xlZHMtbXQ2MzcwLXJnYi5jIA0KPj4gYi9kcml2ZXJzL2xlZHMvcmdiL2xlZHMtbXQ2Mzcw
+LXJnYi5jDQo+PiBpbmRleCBjNTkyN2QwZWI4MzAuLmVhMTFjYTlkMzMyNiAxMDA2NDQNCj4+IC0t
+LSBhL2RyaXZlcnMvbGVkcy9yZ2IvbGVkcy1tdDYzNzAtcmdiLmMNCj4+ICsrKyBiL2RyaXZlcnMv
+bGVkcy9yZ2IvbGVkcy1tdDYzNzAtcmdiLmMNCj4+IEBAIC00MzcsMTAgKzQzNyw3IEBAIHN0YXRp
+YyBpbnQgbXQ2MzcwX21jX2JyaWdodG5lc3Nfc2V0KHN0cnVjdCANCj4+IGxlZF9jbGFzc2RldiAq
+bGNkZXYsIGVudW0gbGVkX2JyaWdodG4NCj4+IMKgwqDCoMKgwqAgZGlzYWJsZSA9IGVuYWJsZTsN
+Cj4+IMKgIMKgwqDCoMKgwqAgZm9yIChpID0gMDsgaSA8IG1jY2Rldi0+bnVtX2NvbG9yczsgaSsr
+KSB7DQo+PiAtwqDCoMKgwqDCoMKgwqAgdTMyIGJyaWdodG5lc3M7DQo+PiAtDQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgc3VibGVkID0gbWNjZGV2LT5zdWJsZWRfaW5mbyArIGk7DQo+PiAtwqDCoMKg
+wqDCoMKgwqAgYnJpZ2h0bmVzcyA9IG1pbihzdWJsZWQtPmJyaWdodG5lc3MsIGxjZGV2LT5tYXhf
+YnJpZ2h0bmVzcyk7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgZGlzYWJsZSAmPSB+TVQ2MzcwX0NI
+RU5fQklUKHN1YmxlZC0+Y2hhbm5lbCk7DQo+PiDCoCDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGxl
+dmVsID09IDApIHsNCj4+IEBAIC00NTMsMTQgKzQ1MCwxNCBAQCBzdGF0aWMgaW50IG10NjM3MF9t
+Y19icmlnaHRuZXNzX3NldChzdHJ1Y3QgDQo+PiBsZWRfY2xhc3NkZXYgKmxjZGV2LCBlbnVtIGxl
+ZF9icmlnaHRuDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjb250aW51ZTsNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCB9DQo+PiDCoCAtwqDCoMKgwqDCoMKgwqAgaWYgKGJyaWdodG5lc3Mg
+PT0gMCkgew0KPj4gK8KgwqDCoMKgwqDCoMKgIGlmIChzdWJsZWQtPmJyaWdodG5lc3MgPT0gMCkg
+ew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZW5hYmxlICY9IH5NVDYzNzBfQ0hFTl9C
+SVQoc3VibGVkLT5jaGFubmVsKTsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnRp
+bnVlOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIH0NCj4+IMKgIMKgwqDCoMKgwqDCoMKgwqDCoCBl
+bmFibGUgfD0gTVQ2MzcwX0NIRU5fQklUKHN1YmxlZC0+Y2hhbm5lbCk7DQo+PiDCoCAtwqDCoMKg
+wqDCoMKgwqAgcmV0ID0gbXQ2MzcwX3NldF9sZWRfYnJpZ2h0bmVzcyhwcml2LCBzdWJsZWQtPmNo
+YW5uZWwsIA0KPj4gYnJpZ2h0bmVzcyk7DQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0ID0gbXQ2Mzcw
+X3NldF9sZWRfYnJpZ2h0bmVzcyhwcml2LCBzdWJsZWQtPmNoYW5uZWwsIA0KPj4gc3VibGVkLT5i
+cmlnaHRuZXNzKTsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAocmV0KQ0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgZ290byBvdXRfdW5sb2NrOw0KPj4gwqDCoMKgwqDCoCB9DQo+PiBA
+QCAtNzQyLDYgKzczOSw3IEBAIHN0YXRpYyBpbnQgbXQ2MzcwX2Fzc2lnbl9tdWx0aWNvbG9yX2lu
+Zm8oc3RydWN0IA0KPj4gZGV2aWNlICpkZXYsIHN0cnVjdCBtdDYzNzBfbGVkICoNCj4+IMKgwqDC
+oMKgwqDCoMKgwqDCoCBzdWJfbGVkW251bV9jb2xvcl0uY29sb3JfaW5kZXggPSBjb2xvcjsNCj4+
+IMKgwqDCoMKgwqDCoMKgwqDCoCBzdWJfbGVkW251bV9jb2xvcl0uY2hhbm5lbCA9IHJlZzsNCj4+
+IMKgwqDCoMKgwqDCoMKgwqDCoCBzdWJfbGVkW251bV9jb2xvcl0uaW50ZW5zaXR5ID0gMDsNCj4+
+ICvCoMKgwqDCoMKgwqDCoCBzdWJfbGVkW251bV9jb2xvcl0ubWF4X2ludGVuc2l0eSA9IExFRF9V
+U0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbnVtX2NvbG9yKys7DQo+
+PiDCoMKgwqDCoMKgIH0NCj4+IMKgIGRpZmYgLS1naXQgYS9kcml2ZXJzL2xlZHMvcmdiL2xlZHMt
+bmNwNTYyMy5jIA0KPj4gYi9kcml2ZXJzL2xlZHMvcmdiL2xlZHMtbmNwNTYyMy5jDQo+PiBpbmRl
+eCA4NWQ2YmU2ZmZmMmIuLmYyNTI4ZjA2NTA3ZCAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvbGVk
+cy9yZ2IvbGVkcy1uY3A1NjIzLmMNCj4+ICsrKyBiL2RyaXZlcnMvbGVkcy9yZ2IvbGVkcy1uY3A1
+NjIzLmMNCj4+IEBAIC01Niw4ICs1Niw3IEBAIHN0YXRpYyBpbnQgbmNwNTYyM19icmlnaHRuZXNz
+X3NldChzdHJ1Y3QgDQo+PiBsZWRfY2xhc3NkZXYgKmNkZXYsDQo+PiDCoMKgwqDCoMKgIGZvciAo
+aW50IGkgPSAwOyBpIDwgbWNfY2Rldi0+bnVtX2NvbG9yczsgaSsrKSB7DQo+PiDCoMKgwqDCoMKg
+wqDCoMKgwqAgcmV0ID0gbmNwNTYyM193cml0ZShuY3AtPmNsaWVudCwNCj4+IE5DUDU2MjNfUFdN
+X1JFRyhtY19jZGV2LT5zdWJsZWRfaW5mb1tpXS5jaGFubmVsKSwNCj4+IC3CoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtaW4obWNfY2Rldi0+c3VibGVkX2luZm9baV0uaW50
+ZW5zaXR5LA0KPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIE5DUDU2
+MjNfTUFYX0JSSUdIVE5FU1MpKTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBtY19jZGV2LT5zdWJsZWRfaW5mb1tpXS5pbnRlbnNpdHkpOw0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIGlmIChyZXQpDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
+cmV0Ow0KPj4gwqDCoMKgwqDCoCB9DQo+PiBAQCAtMTkwLDYgKzE4OSw3IEBAIHN0YXRpYyBpbnQg
+bmNwNTYyM19wcm9iZShzdHJ1Y3QgaTJjX2NsaWVudCAqY2xpZW50KQ0KPj4gwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgZ290byByZWxlYXNlX2xlZF9ub2RlOw0KPj4gwqAgwqDCoMKgwqDCoMKg
+wqDCoMKgIHN1YmxlZF9pbmZvW25jcC0+bWNfZGV2Lm51bV9jb2xvcnNdLmNoYW5uZWwgPSByZWc7
+DQo+PiArwqDCoMKgwqDCoMKgwqAgc3VibGVkX2luZm9bbmNwLT5tY19kZXYubnVtX2NvbG9yc10u
+bWF4X2ludGVuc2l0eSA9IA0KPj4gTkNQNTYyM19NQVhfQlJJR0hUTkVTUzsNCj4+IMKgwqDCoMKg
+wqDCoMKgwqDCoCBzdWJsZWRfaW5mb1tuY3AtPm1jX2Rldi5udW1fY29sb3JzKytdLmNvbG9yX2lu
+ZGV4ID0gDQo+PiBjb2xvcl9pbmRleDsNCj4+IMKgwqDCoMKgwqAgfQ0KPj4gwqAgZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvbGVkcy9yZ2IvbGVkcy1wd20tbXVsdGljb2xvci5jIA0KPj4gYi9kcml2ZXJz
+L2xlZHMvcmdiL2xlZHMtcHdtLW11bHRpY29sb3IuYw0KPj4gaW5kZXggZTBkN2QzYzkyMTVjLi41
+NzhlNjdkY2M4ODEgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL2xlZHMvcmdiL2xlZHMtcHdtLW11
+bHRpY29sb3IuYw0KPj4gKysrIGIvZHJpdmVycy9sZWRzL3JnYi9sZWRzLXB3bS1tdWx0aWNvbG9y
+LmMNCj4+IEBAIC05NSw2ICs5NSw3IEBAIHN0YXRpYyBpbnQgaXRlcmF0ZV9zdWJsZWRzKHN0cnVj
+dCBkZXZpY2UgKmRldiwgDQo+PiBzdHJ1Y3QgcHdtX21jX2xlZCAqcHJpdiwNCj4+IMKgwqDCoMKg
+wqDCoMKgwqDCoCB9DQo+PiDCoCDCoMKgwqDCoMKgwqDCoMKgwqAgc3VibGVkW3ByaXYtPm1jX2Nk
+ZXYubnVtX2NvbG9yc10uY29sb3JfaW5kZXggPSBjb2xvcjsNCj4+ICvCoMKgwqDCoMKgwqDCoCBz
+dWJsZWRbcHJpdi0+bWNfY2Rldi5udW1fY29sb3JzXS5tYXhfaW50ZW5zaXR5ID0gDQo+PiBMRURf
+VVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHByaXYtPm1jX2NkZXYu
+bnVtX2NvbG9ycysrOw0KPj4gwqDCoMKgwqDCoCB9DQo+PiDCoCBkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9sZWRzL3JnYi9sZWRzLXFjb20tbHBnLmMgDQo+PiBiL2RyaXZlcnMvbGVkcy9yZ2IvbGVkcy1x
+Y29tLWxwZy5jDQo+PiBpbmRleCBmNjA2MWM0N2Y4NjMuLjM5MGRjYmUxY2QxOCAxMDA2NDQNCj4+
+IC0tLSBhL2RyaXZlcnMvbGVkcy9yZ2IvbGVkcy1xY29tLWxwZy5jDQo+PiArKysgYi9kcml2ZXJz
+L2xlZHMvcmdiL2xlZHMtcWNvbS1scGcuYw0KPj4gQEAgLTE0MTEsNiArMTQxMSw3IEBAIHN0YXRp
+YyBpbnQgbHBnX2FkZF9sZWQoc3RydWN0IGxwZyAqbHBnLCBzdHJ1Y3QgDQo+PiBkZXZpY2Vfbm9k
+ZSAqbnApDQo+PiDCoCDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbmZvW2ldLmNvbG9yX2lu
+ZGV4ID0gbGVkLT5jaGFubmVsc1tpXS0+Y29sb3I7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBpbmZvW2ldLmludGVuc2l0eSA9IDA7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBp
+bmZvW2ldLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTOw0KPj4gwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgaSsrOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIH0NCj4+IMKg
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3BsYXRmb3JtL3g4Ni9zaWxpY29tLXBsYXRmb3JtLmMgDQo+
+PiBiL2RyaXZlcnMvcGxhdGZvcm0veDg2L3NpbGljb20tcGxhdGZvcm0uYw0KPj4gaW5kZXggMjY2
+ZjdiYzVlNDE2Li41ZWQxMTViN2RjMDEgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL3BsYXRmb3Jt
+L3g4Ni9zaWxpY29tLXBsYXRmb3JtLmMNCj4+ICsrKyBiL2RyaXZlcnMvcGxhdGZvcm0veDg2L3Np
+bGljb20tcGxhdGZvcm0uYw0KPj4gQEAgLTI4MywxOCArMjgzLDIxIEBAIHN0YXRpYyBzdHJ1Y3Qg
+bWNfc3VibGVkIA0KPj4gcGxhdF8wMjIyX3dhbl9tY19zdWJsZWRfaW5mb1tdIF9faW5pdGRhdGEg
+PSB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbG9yX2luZGV4ID0gTEVEX0NPTE9SX0lEX1dI
+SVRFLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5icmlnaHRuZXNzID0gMSwNCj4+IMKgwqDCoMKg
+wqDCoMKgwqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+ICvCoMKgwqDCoMKgwqDCoCAubWF4X2ludGVu
+c2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNo
+YW5uZWwgPSBPRkZTRVRfQklUX1RPX0NIQU5ORUwoMHgwYywgNyksDQo+PiDCoMKgwqDCoMKgIH0s
+DQo+PiDCoMKgwqDCoMKgIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY29sb3JfaW5kZXggPSBM
+RURfQ09MT1JfSURfWUVMTE9XLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5icmlnaHRuZXNzID0g
+MSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+ICvCoMKgwqDCoMKg
+wqDCoCAubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MsDQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgLmNoYW5uZWwgPSBPRkZTRVRfQklUX1RPX0NIQU5ORUwoMHgwYywgNiksDQo+
+PiDCoMKgwqDCoMKgIH0sDQo+PiDCoMKgwqDCoMKgIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAu
+Y29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfUkVELA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5i
+cmlnaHRuZXNzID0gMSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+
+ICvCoMKgwqDCoMKgwqDCoCAubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1Ms
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNoYW5uZWwgPSBPRkZTRVRfQklUX1RPX0NIQU5ORUwo
+MHgwYywgNSksDQo+PiDCoMKgwqDCoMKgIH0sDQo+PiDCoCB9Ow0KPj4gQEAgLTMwNCwxOCArMzA3
+LDIxIEBAIHN0YXRpYyBzdHJ1Y3QgbWNfc3VibGVkIA0KPj4gcGxhdF8wMjIyX3N5c19tY19zdWJs
+ZWRfaW5mb1tdIF9faW5pdGRhdGEgPSB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbG9yX2lu
+ZGV4ID0gTEVEX0NPTE9SX0lEX1dISVRFLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5icmlnaHRu
+ZXNzID0gMSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+ICvCoMKg
+wqDCoMKgwqDCoCAubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MsDQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgLmNoYW5uZWwgPSBPRkZTRVRfQklUX1RPX0NIQU5ORUwoMHgwYywg
+NCksDQo+PiDCoMKgwqDCoMKgIH0sDQo+PiDCoMKgwqDCoMKgIHsNCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCAuY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfQU1CRVIsDQo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkg
+PSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJ
+R0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9f
+Q0hBTk5FTCgweDBjLCAzKSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9SRUQsDQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKg
+IC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVE
+X1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9G
+RlNFVF9CSVRfVE9fQ0hBTk5FTCgweDBjLCAyKSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgIH07
+DQo+PiBAQCAtMzI1LDI0ICszMzEsMjggQEAgc3RhdGljIHN0cnVjdCBtY19zdWJsZWQgDQo+PiBw
+bGF0XzAyMjJfc3RhdDFfbWNfc3VibGVkX2luZm9bXSBfX2luaXRkYXRhID0gew0KPj4gwqDCoMKg
+wqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9SRUQsDQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRl
+bnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9N
+QVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9C
+SVRfVE9fQ0hBTk5FTCgweDBjLCAxKSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAg
+ew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9HUkVF
+TiwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuYnJpZ2h0bmVzcyA9IDEsDQo+PiDCoMKgwqDCoMKg
+wqDCoMKgwqAgLmludGVuc2l0eSA9IDAsDQo+PiArwqDCoMKgwqDCoMKgwqAgLm1heF9pbnRlbnNp
+dHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jaGFu
+bmVsID0gT0ZGU0VUX0JJVF9UT19DSEFOTkVMKDB4MGMsIDApLA0KPj4gwqDCoMKgwqDCoCB9LA0K
+Pj4gwqDCoMKgwqDCoCB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbG9yX2luZGV4ID0gTEVE
+X0NPTE9SX0lEX0JMVUUsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0K
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKg
+IC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDC
+oMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDBkLCA3KSwNCj4+IMKg
+wqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xv
+cl9pbmRleCA9IExFRF9DT0xPUl9JRF9ZRUxMT1csDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJy
+aWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4g
+K8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgw
+eDBkLCA2KSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgIH07DQo+PiBAQCAtMzUyLDI0ICszNjIs
+MjggQEAgc3RhdGljIHN0cnVjdCBtY19zdWJsZWQgDQo+PiBwbGF0XzAyMjJfc3RhdDJfbWNfc3Vi
+bGVkX2luZm9bXSBfX2luaXRkYXRhID0gew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9p
+bmRleCA9IExFRF9DT0xPUl9JRF9SRUQsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5l
+c3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDC
+oMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDBkLCA1
+KSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKgwqDCoMKgwqDC
+oMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9HUkVFTiwNCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCAuYnJpZ2h0bmVzcyA9IDEsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmludGVuc2l0eSA9
+IDAsDQo+PiArwqDCoMKgwqDCoMKgwqAgLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklH
+SFRORVNTLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jaGFubmVsID0gT0ZGU0VUX0JJVF9UT19D
+SEFOTkVMKDB4MGQsIDQpLA0KPj4gwqDCoMKgwqDCoCB9LA0KPj4gwqDCoMKgwqDCoCB7DQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgLmNvbG9yX2luZGV4ID0gTEVEX0NPTE9SX0lEX0JMVUUsDQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKg
+IC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVE
+X1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9G
+RlNFVF9CSVRfVE9fQ0hBTk5FTCgweDBkLCAzKSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDC
+oMKgwqAgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9J
+RF9ZRUxMT1csDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhf
+aW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDC
+oCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDBkLCAyKSwNCj4+IMKgwqDCoMKg
+wqAgfSwNCj4+IMKgIH07DQo+PiBAQCAtMzc5LDI0ICszOTMsMjggQEAgc3RhdGljIHN0cnVjdCBt
+Y19zdWJsZWQgDQo+PiBwbGF0XzAyMjJfc3RhdDNfbWNfc3VibGVkX2luZm9bXSBfX2luaXRkYXRh
+ID0gew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9S
+RUQsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5z
+aXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hh
+bm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDBkLCAxKSwNCj4+IMKgwqDCoMKgwqAgfSwN
+Cj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExF
+RF9DT0xPUl9JRF9HUkVFTiwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuYnJpZ2h0bmVzcyA9IDEs
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmludGVuc2l0eSA9IDAsDQo+PiArwqDCoMKgwqDCoMKg
+wqAgLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTLA0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIC5jaGFubmVsID0gT0ZGU0VUX0JJVF9UT19DSEFOTkVMKDB4MGQsIDApLA0KPj4g
+wqDCoMKgwqDCoCB9LA0KPj4gwqDCoMKgwqDCoCB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNv
+bG9yX2luZGV4ID0gTEVEX0NPTE9SX0lEX0JMVUUsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJy
+aWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4g
+K8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgw
+eDBlLCAxKSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9ZRUxMT1csDQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRl
+bnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9N
+QVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9C
+SVRfVE9fQ0hBTk5FTCgweDBlLCAwKSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgIH07DQo+PiBA
+QCAtNDk3LDI0ICs1MTUsMjggQEAgc3RhdGljIHN0cnVjdCBtY19zdWJsZWQgDQo+PiBjb3Jkb2Jh
+X2ZwX2xlZnRfbWNfc3VibGVkX2luZm9bXSBfX2luaXRkYXRhID0gew0KPj4gwqDCoMKgwqDCoMKg
+wqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9SRUQsDQo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkg
+PSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJ
+R0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9f
+Q0hBTk5FTCgweDA4LCA2KSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9HUkVFTiwNCj4+
+IMKgwqDCoMKgwqDCoMKgwqDCoCAuYnJpZ2h0bmVzcyA9IDEsDQo+PiDCoMKgwqDCoMKgwqDCoMKg
+wqAgLmludGVuc2l0eSA9IDAsDQo+PiArwqDCoMKgwqDCoMKgwqAgLm1heF9pbnRlbnNpdHkgPSBM
+RURfVVNFX01BWF9CUklHSFRORVNTLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jaGFubmVsID0g
+T0ZGU0VUX0JJVF9UT19DSEFOTkVMKDB4MDgsIDUpLA0KPj4gwqDCoMKgwqDCoCB9LA0KPj4gwqDC
+oMKgwqDCoCB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbG9yX2luZGV4ID0gTEVEX0NPTE9S
+X0lEX0JMVUUsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhf
+aW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDC
+oCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDA5LCA3KSwNCj4+IMKgwqDCoMKg
+wqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRl
+eCA9IExFRF9DT0xPUl9JRF9BTUJFUiwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuYnJpZ2h0bmVz
+cyA9IDEsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmludGVuc2l0eSA9IDAsDQo+PiArwqDCoMKg
+wqDCoMKgwqAgLm1heF9pbnRlbnNpdHkgPSBMRURfVVNFX01BWF9CUklHSFRORVNTLA0KPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgIC5jaGFubmVsID0gT0ZGU0VUX0JJVF9UT19DSEFOTkVMKDB4MDksIDQp
+LA0KPj4gwqDCoMKgwqDCoCB9LA0KPj4gwqAgfTsNCj4+IEBAIC01MjQsMjQgKzU0NiwyOCBAQCBz
+dGF0aWMgc3RydWN0IG1jX3N1YmxlZCANCj4+IGNvcmRvYmFfZnBfY2VudGVyX21jX3N1YmxlZF9p
+bmZvW10gX19pbml0ZGF0YSA9IHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY29sb3JfaW5kZXgg
+PSBMRURfQ09MT1JfSURfUkVELA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5icmlnaHRuZXNzID0g
+MSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+ICvCoMKgwqDCoMKg
+wqDCoCAubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MsDQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgLmNoYW5uZWwgPSBPRkZTRVRfQklUX1RPX0NIQU5ORUwoMHgwOCwgNyksDQo+
+PiDCoMKgwqDCoMKgIH0sDQo+PiDCoMKgwqDCoMKgIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAu
+Y29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfR1JFRU4sDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAg
+LmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0K
+Pj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVT
+UywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5F
+TCgweDA4LCA0KSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKg
+wqDCoMKgwqDCoMKgIC5jb2xvcl9pbmRleCA9IExFRF9DT0xPUl9JRF9CTFVFLA0KPj4gwqDCoMKg
+wqDCoMKgwqDCoMKgIC5icmlnaHRuZXNzID0gMSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuaW50
+ZW5zaXR5ID0gMCwNCj4+ICvCoMKgwqDCoMKgwqDCoCAubWF4X2ludGVuc2l0eSA9IExFRF9VU0Vf
+TUFYX0JSSUdIVE5FU1MsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNoYW5uZWwgPSBPRkZTRVRf
+QklUX1RPX0NIQU5ORUwoMHgwOCwgMyksDQo+PiDCoMKgwqDCoMKgIH0sDQo+PiDCoMKgwqDCoMKg
+IHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfQU1C
+RVIsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5z
+aXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hh
+bm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDA5LCA2KSwNCj4+IMKgwqDCoMKgwqAgfSwN
+Cj4+IMKgIH07DQo+PiBAQCAtNTUxLDI0ICs1NzcsMjggQEAgc3RhdGljIHN0cnVjdCBtY19zdWJs
+ZWQgDQo+PiBjb3Jkb2JhX2ZwX3JpZ2h0X21jX3N1YmxlZF9pbmZvW10gX19pbml0ZGF0YSA9IHsN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfUkVELA0K
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5icmlnaHRuZXNzID0gMSwNCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+ICvCoMKgwqDCoMKgwqDCoCAubWF4X2ludGVuc2l0eSA9
+IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MsDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNoYW5uZWwg
+PSBPRkZTRVRfQklUX1RPX0NIQU5ORUwoMHgwOCwgMiksDQo+PiDCoMKgwqDCoMKgIH0sDQo+PiDC
+oMKgwqDCoMKgIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY29sb3JfaW5kZXggPSBMRURfQ09M
+T1JfSURfR1JFRU4sDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkgPSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5t
+YXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJR0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9fQ0hBTk5FTCgweDA4LCAxKSwNCj4+IMKgwqDC
+oMKgwqAgfSwNCj4+IMKgwqDCoMKgwqAgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb2xvcl9p
+bmRleCA9IExFRF9DT0xPUl9JRF9CTFVFLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5icmlnaHRu
+ZXNzID0gMSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuaW50ZW5zaXR5ID0gMCwNCj4+ICvCoMKg
+wqDCoMKgwqDCoCAubWF4X2ludGVuc2l0eSA9IExFRF9VU0VfTUFYX0JSSUdIVE5FU1MsDQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgLmNoYW5uZWwgPSBPRkZTRVRfQklUX1RPX0NIQU5ORUwoMHgwOCwg
+MCksDQo+PiDCoMKgwqDCoMKgIH0sDQo+PiDCoMKgwqDCoMKgIHsNCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCAuY29sb3JfaW5kZXggPSBMRURfQ09MT1JfSURfQU1CRVIsDQo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqAgLmJyaWdodG5lc3MgPSAxLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5pbnRlbnNpdHkg
+PSAwLA0KPj4gK8KgwqDCoMKgwqDCoMKgIC5tYXhfaW50ZW5zaXR5ID0gTEVEX1VTRV9NQVhfQlJJ
+R0hUTkVTUywNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAuY2hhbm5lbCA9IE9GRlNFVF9CSVRfVE9f
+Q0hBTk5FTCgweDA5LCA1KSwNCj4+IMKgwqDCoMKgwqAgfSwNCj4+IMKgIH07DQo+PiBkaWZmIC0t
+Z2l0IGEvZHJpdmVycy9wbGF0Zm9ybS94ODYvdW5pd2lsbC91bml3aWxsLWFjcGkuYyANCj4+IGIv
+ZHJpdmVycy9wbGF0Zm9ybS94ODYvdW5pd2lsbC91bml3aWxsLWFjcGkuYw0KPj4gaW5kZXggZmVl
+OTM1MzdhYTQzLi45NDY4YTkzZjdhNTkgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL3BsYXRmb3Jt
+L3g4Ni91bml3aWxsL3VuaXdpbGwtYWNwaS5jDQo+PiArKysgYi9kcml2ZXJzL3BsYXRmb3JtL3g4
+Ni91bml3aWxsL3VuaXdpbGwtYWNwaS5jDQo+PiBAQCAtMTA4Miw4ICsxMDgyLDcgQEAgc3RhdGlj
+IGludCB1bml3aWxsX2xlZF9icmlnaHRuZXNzX3NldChzdHJ1Y3QgDQo+PiBsZWRfY2xhc3NkZXYg
+KmxlZF9jZGV2LCBlbnVtIGxlZF9icg0KPj4gwqDCoMKgwqDCoCBndWFyZChtdXRleCkoJmRhdGEt
+PmxlZF9sb2NrKTsNCj4+IMKgIMKgwqDCoMKgwqAgZm9yIChpbnQgaSA9IDA7IGkgPCBMRURfQ0hB
+Tk5FTFM7IGkrKykgew0KPj4gLcKgwqDCoMKgwqDCoMKgIC8qIFByZXZlbnQgdGhlIGJyaWdodG5l
+c3MgdmFsdWVzIGZyb20gb3ZlcmZsb3dpbmcgKi8NCj4+IC3CoMKgwqDCoMKgwqDCoCB2YWx1ZSA9
+IG1pbihMRURfTUFYX0JSSUdIVE5FU1MsIA0KPj4gZGF0YS0+bGVkX21jX3N1YmxlZF9pbmZvW2ld
+LmJyaWdodG5lc3MpOw0KPj4gK8KgwqDCoMKgwqDCoMKgIHZhbHVlID0gZGF0YS0+bGVkX21jX3N1
+YmxlZF9pbmZvW2ldLmJyaWdodG5lc3M7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0ID0gcmVn
+bWFwX3dyaXRlKGRhdGEtPnJlZ21hcCwgDQo+PiB1bml3aWxsX2xlZF9jaGFubmVsX3RvX2FjX3Jl
+Z1tpXSwgdmFsdWUpOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChyZXQgPCAwKQ0KPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJldDsNCj4+IEBAIC0xMTgyLDYgKzExODEs
+NyBAQCBzdGF0aWMgaW50IHVuaXdpbGxfbGVkX2luaXQoc3RydWN0IHVuaXdpbGxfZGF0YSANCj4+
+ICpkYXRhKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJldDsNCj4+IMKg
+IMKgwqDCoMKgwqDCoMKgwqDCoCBkYXRhLT5sZWRfbWNfc3VibGVkX2luZm9baV0uaW50ZW5zaXR5
+ID0gdmFsdWU7DQo+PiArwqDCoMKgwqDCoMKgwqAgZGF0YS0+bGVkX21jX3N1YmxlZF9pbmZvW2ld
+Lm1heF9pbnRlbnNpdHkgPSANCj4+IExFRF9VU0VfTUFYX0JSSUdIVE5FU1M7DQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgZGF0YS0+bGVkX21jX3N1YmxlZF9pbmZvW2ldLmNoYW5uZWwgPSBpOw0KPj4g
+wqDCoMKgwqDCoCB9DQo+PiDCoCBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9sZWQtY2xhc3Mt
+bXVsdGljb2xvci5oIA0KPj4gYi9pbmNsdWRlL2xpbnV4L2xlZC1jbGFzcy1tdWx0aWNvbG9yLmgN
+Cj4+IGluZGV4IGRiOWYzNGM2NzM2ZS4uNjdhYzBhYzBmZDU0IDEwMDY0NA0KPj4gLS0tIGEvaW5j
+bHVkZS9saW51eC9sZWQtY2xhc3MtbXVsdGljb2xvci5oDQo+PiArKysgYi9pbmNsdWRlL2xpbnV4
+L2xlZC1jbGFzcy1tdWx0aWNvbG9yLmgNCj4+IEBAIC05LDEwICs5LDMzIEBADQo+PiDCoCAjaW5j
+bHVkZSA8bGludXgvbGVkcy5oPg0KPj4gwqAgI2luY2x1ZGUgPGR0LWJpbmRpbmdzL2xlZHMvY29t
+bW9uLmg+DQo+PiDCoCArI2RlZmluZSBMRURfVVNFX01BWF9CUklHSFRORVNTIDANCj4+ICsNCj4+
+ICsvKioNCj4+ICsgKiBzdHJ1Y3QgbWNfc3VibGVkIC0gQ29sb3IgY29tcG9uZW50IGRlc2NyaXB0
+aW9uLg0KPj4gKyAqIEBjb2xvcl9pbmRleDogQ29sb3IgSUQuDQo+PiArICogQGJyaWdodG5lc3M6
+IFNjYWxlZCBpbnRlbnNpdHkuDQo+PiArICogQGludGVuc2l0eTogQ3VycmVudCBpbnRlbnNpdHku
+DQo+PiArICogQG1heF9pbnRlbnNpdHk6IE1heGltdW0gc3VwcG9ydGVkIGludGVuc2l0eSB2YWx1
+ZS4NCj4+ICsgKiBAY2hhbm5lbDogQ2hhbm5lbCBpbmRleC4NCj4+ICsgKg0KPj4gKyAqIERlc2Ny
+aWJlcyBhIGNvbG9yIGNvbXBvbmVudCBvZiBhIG11bHRpY29sb3IgTEVELiBNYW55IG11bHRpY29s
+b3IgDQo+PiBMRURzDQo+PiArICogZG8gbm8gc3VwcG9ydCBnb2JhbCBicmlnaHRuZXNzIGNvbnRy
+b2wgaW4gaGFyZHdhcmUsIHNvIHRoZXkgdXNlDQo+PiArICogdGhlIGJyaWdodG5lc3MgZmllbGQg
+aW4gY29ubmVjdGlvbiB3aXRoIA0KPj4gbGVkX21jX2NhbGNfY29sb3JfY29tcG9uZW50cygpDQo+
+PiArICogdG8gcGVyZm9ybSB0aGUgaW50ZW5zaXR5IHNjYWxpbmcgaW4gc29mdHdhcmUuDQo+PiAr
+ICogU3VjaCBkcml2ZXJzIHNob3VsZCBzZXQgbWF4X2ludGVuc2l0eSB0byBMRURfVVNFX01BWF9C
+UklHSFRORVNTDQo+DQo+IEknZCBqdXN0IG1lbnRpb24gaGVyZSB0aGF0IHRoZSBmaWVsZCBuZWVk
+cyB0byBiZSBsZWZ0IGluaXRpYWxpemVkIHRvIDAsDQo+IHRvIGxldCB0aGUgTEVEIHN1YnN5c3Rl
+bSB0byBhZGp1c3QgaXQgdG8gbWF4X2JyaWdodG5lc3MuIE5vdGUgdGhhdCBpbg0KPiBjYXNlIG9m
+IG1heF9icmlnaHRuZXNzIHdlIGFsbG93IGZvciB0aGUgc2FtZSAtIGlmIGl0IGlzIDAsIHRoZW4N
+Cj4gbGVkLWNsYXNzLmMgYWRqdXN0cyBpdCB0byBsZWdhY3kgTEVEX0ZVTEwgKDI1NSkuDQo+DQpP
+SywgZG8geW91IHRoaW5rIHRoYXQgaGF2aW5nIExFRF9VU0VfTUFYX0JSSUdIVE5FU1MgbWFrZXMg
+c2Vuc2U/DQoNCj4+ICsgKiB0byBzaWduYWwgdGhlIG11bHRpY29sb3IgTEVEIGNvcmUgdGhhdCB0
+aGUgbWF4aW11bSBnbG9iYWwgDQo+PiBicmlnaHRuZXNzIG9mIHRoZQ0KPj4gKyAqIExFRCBjbGFz
+cyBkZXZpY2Ugc2hvdWxkIGJlIHVzZWQgZm9yIGxpbWl0aW5nIGluY29taW5nIGludGVuc2l0eSAN
+Cj4+IHZhbHVlcy4NCj4+ICsgKg0KPj4gKyAqIE11bHRpY29sb3IgTEVEcyB0aGF0IGRvIHN1cHBv
+cnQgZ2xvYmFsIGJyaWdodG5lc3MgY29udHJvbCBpbiANCj4+IGhhcmR3YXJlDQo+PiArICogc2hv
+dWxkIGluc3RlYWQgc2V0IG1heF9pbnRlbnNpdHkgdG8gdGhlIG1heGltdW0gaW50ZW5zaXR5IHZh
+bHVlIA0KPj4gc3VwcG9ydGVkDQo+PiArICogYnkgdGhlIGhhcmR3YXJlIGZvciBhIGdpdmVuIGNv
+bG9yIGNvbXBvbmVudC4NCj4+ICsgKi8NCj4+IMKgIHN0cnVjdCBtY19zdWJsZWQgew0KPj4gwqDC
+oMKgwqDCoCB1bnNpZ25lZCBpbnQgY29sb3JfaW5kZXg7DQo+PiDCoMKgwqDCoMKgIHVuc2lnbmVk
+IGludCBicmlnaHRuZXNzOw0KPj4gwqDCoMKgwqDCoCB1bnNpZ25lZCBpbnQgaW50ZW5zaXR5Ow0K
+Pj4gK8KgwqDCoCB1bnNpZ25lZCBpbnQgbWF4X2ludGVuc2l0eTsNCj4+IMKgwqDCoMKgwqAgdW5z
+aWduZWQgaW50IGNoYW5uZWw7DQo+PiDCoCB9Ow0KPj4gwqAgQEAgLTUzLDcgKzc2LDE0IEBAIGlu
+dCBsZWRfY2xhc3NkZXZfbXVsdGljb2xvcl9yZWdpc3Rlcl9leHQoc3RydWN0IA0KPj4gZGV2aWNl
+ICpwYXJlbnQsDQo+PiDCoMKgICovDQo+PiDCoCB2b2lkIGxlZF9jbGFzc2Rldl9tdWx0aWNvbG9y
+X3VucmVnaXN0ZXIoc3RydWN0IGxlZF9jbGFzc2Rldl9tYyANCj4+ICptY2xlZF9jZGV2KTsNCj4+
+IMKgIC0vKiBDYWxjdWxhdGUgYnJpZ2h0bmVzcyBmb3IgdGhlIG1vbm9jaHJvbWUgTEVEIGNsdXN0
+ZXIgKi8NCj4+ICsvKioNCj4+ICsgKiBsZWRfbWNfY2FsY19jb2xvcl9jb21wb25lbnRzKCkgLSBD
+YWxjdWxhdGUgYnJpZ2h0bmVzcyBmb3IgdGhlIA0KPj4gbW9ub2Nocm9tZSBMRUQgY2x1c3Rlci4N
+Cj4NCj4gSXQgZG9lcyBub3QgY2FsY3VsYXRlIGJyaWdodG5lc3MgZm9yIHRoZSB3aG9sZSBMRUQg
+Y2x1c3RlciwgYnV0IGZvciBlYWNoDQo+IHN1Yi1MRUQgaW5kaXZpZHVhbGx5LiBCcmlnaHRuZXNz
+IG9mIHRoZSB3aG9sZSBjbHVzdGVyIGNhbiBiZSBkZWVtZWQgYQ0KPiBsaWdodG5lc3Mgb2YgdGhl
+IG11bHRpY29sb3IgTEVELCBhbmQgdGhlIGJsZW5kIG9mIHRoZSBjb2xvciBjb21wb25lbnRzDQo+
+IGNhbiBiZSBkZWVtZWQgaXRzIGh1ZS4NCj4NCj4gSW4gdGhpcyBjYXNlIEknZCBkb2N1bWVudCBp
+dCBhcyAiQ2FsY3VsYXRlcyBicmlnaHRuZXNzIHZhbHVlcyBmb3IgdGhlDQo+IExFRHMgb2YgdGhl
+IG1vbm9jaHJvbWUgTEVEIGNsdXN0ZXIiLg0KPg0KT0suDQoNClRoYW5rcywNCkFybWluIFdvbGYN
+Cg0KPj4gKyAqIEBtY2xlZF9jZGV2IC0gTXVsdGljb2xvciBMRUQgY2xhc3MgZGV2aWNlIG9mIHRo
+ZSBMRUQgY2x1c3Rlci4NCj4+ICsgKiBAbGVkX2JyaWdodG5lc3MgLSBHbG9iYWwgYnJpZ2h0bmVz
+cyBvZiB0aGUgTEVEIGNsdXN0ZXIuDQo+PiArICoNCj4+ICsgKiBDYWxjdWxhdGVzIHRoZSBicmln
+aHRuZXNzIHZhbHVlcyBmb3IgZWFjaCBjb2xvciBjb21wb25lbnQgb2YgYSANCj4+IG1vbm9jaHJv
+bWUgTEVEIGNsdXN0ZXIsDQo+PiArICogc2VlIERvY3VtZW50YXRpb24vbGVkcy9sZWRzLWNsYXNz
+LW11bHRpY29sb3IucnN0IGZvciBkZXRhaWxzLg0KPj4gKyAqLw0KPj4gwqAgaW50IGxlZF9tY19j
+YWxjX2NvbG9yX2NvbXBvbmVudHMoc3RydWN0IGxlZF9jbGFzc2Rldl9tYyAqbWNsZWRfY2RldiwN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbnVtIGxlZF9icmlnaHRu
+ZXNzIGJyaWdodG5lc3MpOw0KPg0K
 
