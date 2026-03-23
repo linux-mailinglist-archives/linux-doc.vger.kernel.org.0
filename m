@@ -1,41 +1,42 @@
-Return-Path: <linux-doc+bounces-80690-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80691-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MLoIHOFcwWlZSgQAu9opvQ
-	(envelope-from <linux-doc+bounces-80690-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:31:45 +0100
+	id cAj+H5JYwWnbSQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80691-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:13:22 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 468542F66C2
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:31:44 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 183C32F5FF3
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:13:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 0157F3037519
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 14:58:21 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id ADD32304F4AF
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 14:58:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4E8A3AC0EB;
-	Mon, 23 Mar 2026 14:58:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC8663AF650;
+	Mon, 23 Mar 2026 14:58:18 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 429E339A805;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 428192737EB;
 	Mon, 23 Mar 2026 14:58:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774277897; cv=none; b=MGzfTDdROrY39qcTrpDJihIxc/PyKRDv1mFBxwLRNxm68QJqk+qtWllDLSwU+u4CyBDfNWBdcIrGYcIhnCt+7aPNdug2xTlukHlC6GJ7wju4zU0GpZ84dV+mj0Tke5KT7Sjpy2mlUEgZF8gi2rE8yZ4FdEDux44BabPyJ0wSjwc=
+	t=1774277898; cv=none; b=jjE1NvyvRQA8M6Jnct+ZbGEg8CazOHzMd+o+8VaqfSFPaCQQYxgX5ZsQmdFIG8Ng57gUDGDXBLqXbVsfK3sxCiZBWZsxNMhhk/C1I1IB8MFt2KMwwThTQk532RScjDXRWxMLTeBdceOyZxwUJ8S02rdiQSX4S4V6ltfalBuqDtQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774277897; c=relaxed/simple;
-	bh=BKAEJtKN/Id5nY0MZfsNn65CxbC71xBciM9Djd3mE2g=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=rfDabYL95BCYKGkRQ1JDRzEp8jBxgnFSNnTMIZ47WsaDMbrNy5QhPlyPSYn5uonaj03UBvKTKBXZUdjmFEHxIYhxKjEqb03V9t6Xh1BIZKw55azcdLeSH29mH7k/yzPIktbY3QANsSxwnMMmnwV5gP5wmtcal5EF6hI2O/htgXw=
+	s=arc-20240116; t=1774277898; c=relaxed/simple;
+	bh=ODwIbbCc1NuOGF2Bqmkco9xx4KKTX9qodXSBpnggzMs=;
+	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=A7hNJ1GD6dYWDwDJvvv600b5BwmbsZMyjV+7WMr82rBP/vC+7saxNCSeQsH0Glz12uixSuSmnr/Rh9m5kuvRpsXDXRRAfqUW/tSqoGCo9LHVy4NQt6HZQB0tkPATT9BjM93F48b1nccZ9bkQlG/ebPK/shm6smfJcv7m9z3m1vc=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com; spf=pass smtp.mailfrom=huawei-partners.com; arc=none smtp.client-ip=185.176.79.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei-partners.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei-partners.com
 Received: from mail.maildlp.com (unknown [172.18.224.83])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4ffbrZ6H1QzJ46Dc;
-	Mon, 23 Mar 2026 22:58:06 +0800 (CST)
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4ffbr45g9RzHnGdd;
+	Mon, 23 Mar 2026 22:57:40 +0800 (CST)
 Received: from mscpeml500003.china.huawei.com (unknown [7.188.49.51])
-	by mail.maildlp.com (Postfix) with ESMTPS id 4479340572;
+	by mail.maildlp.com (Postfix) with ESMTPS id 5A78A40573;
 	Mon, 23 Mar 2026 22:58:12 +0800 (CST)
 Received: from mscphis01197.huawei.com (10.123.65.218) by
  mscpeml500003.china.huawei.com (7.188.49.51) with Microsoft SMTP Server
@@ -50,10 +51,12 @@ To: <gutierrez.asier@huawei-partners.com>, <artem.kuzin@huawei.com>,
 	<surenb@google.com>, <mhocko@suse.com>, <corbet@lwn.net>,
 	<skhan@linuxfoundation.org>, <linux-doc@vger.kernel.org>,
 	<linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>
-Subject: [RFC PATCH v1 1/1] This patch set introces a new action: DAMOS_COLLAPSE.
-Date: Mon, 23 Mar 2026 14:56:45 +0000
-Message-ID: <20260323145646.4165053-1-gutierrez.asier@huawei-partners.com>
+Subject: [RFC PATCH v2 1/1] mm/damon: support MADV_COLLAPSE via DAMOS_COLLAPSE scheme action
+Date: Mon, 23 Mar 2026 14:56:46 +0000
+Message-ID: <20260323145646.4165053-2-gutierrez.asier@huawei-partners.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260323145646.4165053-1-gutierrez.asier@huawei-partners.com>
+References: <20260323145646.4165053-1-gutierrez.asier@huawei-partners.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,11 +72,11 @@ X-Spamd-Result: default: False [1.54 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	MIME_TRACE(0.00)[0:+];
 	FROM_NO_DN(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[20];
@@ -85,14 +88,16 @@ X-Spamd-Result: default: False [1.54 / 15.00];
 	R_DKIM_NA(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80690-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80691-lists,linux-doc=lfdr.de];
 	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: 468542F66C2
+X-Rspamd-Queue-Id: 183C32F5FF3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+
+This patch set introces a new action:  DAMOS_COLLAPSE.
 
 For DAMOS_HUGEPAGE and DAMOS_NOHUGEPAGE to work, khugepaged should be
 working, since it relies on hugepage_madvise to add a new slot. This
@@ -126,7 +131,7 @@ D c: DAMON action collapse
 
 Changes
 ---------
-v1-v2:
+v1 -> v2:
 Added benchmarks
 Added damos_filter_type documentation for new action to fix kernel-doc
 
