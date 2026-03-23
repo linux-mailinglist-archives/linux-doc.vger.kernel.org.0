@@ -1,148 +1,135 @@
-Return-Path: <linux-doc+bounces-80708-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80681-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sD0HEP5fwWmaSgQAu9opvQ
-	(envelope-from <linux-doc+bounces-80708-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:45:02 +0100
+	id OCrrNChNwWmhSAQAu9opvQ
+	(envelope-from <linux-doc+bounces-80681-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:24:40 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 540242F6D55
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:45:01 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80C532F466E
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:24:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7A8F83146A75
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:29:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 73243320C881
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 14:08:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46E6D3C9EDA;
-	Mon, 23 Mar 2026 15:18:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CB193B19B2;
+	Mon, 23 Mar 2026 14:06:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="CJ5hRoCK"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WC1BXcvm"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C58A3B2FEF;
-	Mon, 23 Mar 2026 15:18:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 576D43AE6E2;
+	Mon, 23 Mar 2026 14:06:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774279129; cv=none; b=rne/jwOse9HAPD/4Q7ZEzh/GIUdAN7Z9DmAfgpUcOEO2WmSyd90K4kW0vV+6rR3Y6yEstCzfySu3/AUQ8LvVnfcyWyKRRdenuh+tb+32Ak1SpoSvTFWQjlqg1TKqRstFRqlyS49cWDFOpPQJD9Mxbxy4oJ0Cs+rxATIov4vPiQc=
+	t=1774274784; cv=none; b=ECInyzyfjzjNSwMlAmqCJzvz2T/XKr+EgzpKCmwebj4aRgPH874XI9mCs2kf3fOLFfbWXHGHted8Y+Z6xW4jw1KkbHTgV7LDTff18QtEXanriPxg2NhXGDseowpAP9WfzvUre1R4jYvRl5PLjQjeUj7aIJTvaAr6ZQjID2eVmcM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774279129; c=relaxed/simple;
-	bh=pbXYxhzMz1CXELl5GAMQGqn3VS0cXr+c3mpboLxq4hA=;
+	s=arc-20240116; t=1774274784; c=relaxed/simple;
+	bh=lrAEia/zHrHkrV8/db4xENVDfDRL21RqR1IjVCxsyC0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VmSXXN8c2WtH3wQQynNMPQ/4OJ1Uiby0h0yibazGqP0nyC08VKPKrqEkc2mYo/CrLemmjYefUxJhEgk+j+9xtLRyyydgJDuY1dBsKpzwQVR5QpZnJ8ozea5zTzisYi+u0qHwyFw4HtTHUCBw2oZbBuStV0Gh2a7JNJHtZkfRpFc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=CJ5hRoCK; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72CCBC4CEF7;
-	Mon, 23 Mar 2026 15:18:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1774279129;
-	bh=pbXYxhzMz1CXELl5GAMQGqn3VS0cXr+c3mpboLxq4hA=;
+	 Content-Type:Content-Disposition:In-Reply-To; b=XNqdvgRuvvYqin5/3QPOzfbxIq2+DcluvP2Mlx/W3ij5kEnhUiNKcAEouFOdmC0v0qcPie1xyZm7oc+dTX72Xx7MCL93AywmxoMvYhkFBCcx/9m+Qc0KVqcgA1Yh1q8gY5fBQZuchDrKWbHtQ03q3tdxkPwTUaHRDmXZFG6bPqU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WC1BXcvm; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E19B2C4CEF7;
+	Mon, 23 Mar 2026 14:06:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774274784;
+	bh=lrAEia/zHrHkrV8/db4xENVDfDRL21RqR1IjVCxsyC0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=CJ5hRoCKajUHc8KKiBAP2gYu1mVfUOfWRR6xc1nDC/KmFM8FTX4OS4y9Nfd8vhfAi
-	 J23Pc2XVcANhfXnjGTAo+urvXkyrzow5gFm2OspORm1S/DdOvkBQZXlQYlKUBUvn28
-	 tpGOuXncYvNz+HkAvROWP9p1b6eqV6ah8hy5xkd8=
-Date: Mon, 23 Mar 2026 14:52:58 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Sasha Levin <sashal@kernel.org>
-Cc: linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	linux-kbuild@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	workflows@vger.kernel.org, tools@kernel.org, x86@kernel.org,
-	Thomas Gleixner <tglx@kernel.org>,
-	"Paul E . McKenney" <paulmck@kernel.org>,
+	b=WC1BXcvmSSbdGEGLPvpyBX8HLabwq5iGVesEqgJ3+k0JOdenhtRXIDHlbTWfUrO5N
+	 9hgAHy5Oefq95CyxFu/d8U//uqjHSlpB9V3bL68zHB5zqqyqRf3Vw4S0O+xP293Ddv
+	 4vuRHpXVBqAAXpWEFRijJneXy4c77UG5rwU50aW9WNbbY4c+b1GuLZOduD5V5sUzjs
+	 HfwlFwajaCqCNtV3udwn57L+sOTT64PPM2KrFlkvYrIOW26AV+bKufpNETWk+K0Vn5
+	 0URvbC6qrgfPSfSVru2BLc/aS+iW+GaHxIihab5fHpLNoSNOXNxeI6GTMqD5Xz66h6
+	 CN89ShUhkNaww==
+Date: Mon, 23 Mar 2026 10:06:21 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Richard Weinberger <richard@nod.at>,
+	Juergen Gross <jgross@suse.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	James Bottomley <James.Bottomley@hansenpartnership.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Dmitry Vyukov <dvyukov@google.com>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nsc@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>,
+	Daniel Gomez <da.gomez@kernel.org>,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Petr Mladek <pmladek@suse.com>,
+	Steven Rostedt <rostedt@goodmis.org>, Kees Cook <kees@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Thorsten Leemhuis <linux@leemhuis.info>,
+	Vlastimil Babka <vbabka@kernel.org>, Helge Deller <deller@gmx.de>,
 	Randy Dunlap <rdunlap@infradead.org>,
-	Cyril Hrubis <chrubis@suse.cz>, Kees Cook <kees@kernel.org>,
-	Jake Edge <jake@lwn.net>,
-	David Laight <david.laight.linux@gmail.com>,
-	Askar Safin <safinaskar@zohomail.com>,
-	Gabriele Paoloni <gpaoloni@redhat.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Masahiro Yamada <masahiroy@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Ingo Molnar <mingo@redhat.com>, Arnd Bergmann <arnd@arndb.de>
-Subject: Re: [PATCH v2 3/9] kernel/api: add debugfs interface for kernel API
- specifications
-Message-ID: <2026032309-jargon-stalling-28c2@gregkh>
-References: <20260322121026.869758-1-sashal@kernel.org>
- <20260322121026.869758-4-sashal@kernel.org>
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Vivian Wang <wangruikang@iscas.ac.cn>, linux-kernel@vger.kernel.org,
+	linux-kbuild@vger.kernel.org, linux-modules@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 0/4] kallsyms: embed source file:line info in kernel
+ stack traces
+Message-ID: <acFI3TfEtxz-r_Hi@laps>
+References: <20260322131543.971079-1-sashal@kernel.org>
+ <20260322093533.c0aab4ed9f5eef9536d14c21@linux-foundation.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <20260322121026.869758-4-sashal@kernel.org>
-X-Spamd-Result: default: False [3.84 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
+In-Reply-To: <20260322093533.c0aab4ed9f5eef9536d14c21@linux-foundation.org>
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-80708-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,lwn.net,google.com,infradead.org,suse.cz,gmail.com,zohomail.com,redhat.com,zeniv.linux.org.uk,linux-foundation.org,linuxfoundation.org,arndb.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80681-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[kernel.org,linux-foundation.org,nod.at,suse.com,linux-m68k.org,hansenpartnership.com,lwn.net,linuxfoundation.org,goodmis.org,infradead.org,leemhuis.info,gmx.de,ideasonboard.com,iscas.ac.cn,vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 540242F6D55
+X-Rspamd-Queue-Id: 80C532F466E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, Mar 22, 2026 at 08:10:17AM -0400, Sasha Levin wrote:
-> Add a debugfs interface to expose kernel API specifications at runtime.
-> This allows tools and users to query the complete API specifications
-> through the debugfs filesystem.
-> 
-> The interface provides:
-> - /sys/kernel/debug/kapi/list - lists all available API specifications
-> - /sys/kernel/debug/kapi/specs/<name> - detailed info for each API
-> 
-> Each specification file includes:
-> - Function name, version, and descriptions
-> - Execution context requirements and flags
-> - Parameter details with types, flags, and constraints
-> - Return value specifications and success conditions
-> - Error codes with descriptions and conditions
-> - Locking requirements and constraints
-> - Signal handling specifications
-> - Examples, notes, and deprecation status
-> 
-> This enables runtime introspection of kernel APIs for documentation
-> tools, static analyzers, and debugging purposes.
-> 
-> Signed-off-by: Sasha Levin <sashal@kernel.org>
+On Sun, Mar 22, 2026 at 09:35:33AM -0700, Andrew Morton wrote:
+>On Sun, 22 Mar 2026 09:15:39 -0400 Sasha Levin <sashal@kernel.org> wrote:
+>
+>> This series adds CONFIG_KALLSYMS_LINEINFO, which embeds source file:line
+>> information directly in the kernel image so that stack traces annotate
+>> every frame with the originating source location - no external tools, no
+>> debug symbols at runtime, and safe to use in NMI/panic context.
+>
+>Sashiko review hasn't completed yet, but it has things to say:
+>	https://sashiko.dev/#/patchset/20260322131543.971079-1-sashal@kernel.org
 
-Debugfs logic looks sane, nice.
+Nice! I looked at the comments, and I don't think that there are any changes
+required as a result of the review. It asked good questions, but the concerns
+are mainly false positives.
 
-But this only works if the kabi stuff is built into the kernel image,
-right?  This doesn't work if any of these abi sections are in a module
-or am I missing that logic here?
-
-thanks,
-
-greg k-h
+-- 
+Thanks,
+Sasha
 
