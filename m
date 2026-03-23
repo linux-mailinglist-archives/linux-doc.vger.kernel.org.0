@@ -1,103 +1,51 @@
-Return-Path: <linux-doc+bounces-80608-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80610-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iMmrFhXkwGkbOQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80608-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 07:56:21 +0100
+	id cE1bGdHpwGl6OQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80610-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 08:20:49 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D146A2ED322
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 07:56:20 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A24032ED739
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 08:20:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7238F300DF7C
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 06:55:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id CDF2A300468E
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 07:20:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7CDF93431F5;
-	Mon, 23 Mar 2026 06:55:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A629D305E3B;
+	Mon, 23 Mar 2026 07:20:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SaOCMMOt";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="r5Hzpd5i"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QA484GZk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 191FB35CBD6
-	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 06:55:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F207217F33;
+	Mon, 23 Mar 2026 07:20:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774248940; cv=none; b=kzT48UJNCYOPtMWnr2C9hGikQ4PxuBGS3M2GDv5+hVAobtjh/h5GOSc4d9P7tnoxWUjxEc4fAEMa775yQ67tll5rz6cNfPwDFVgpK3hvGbqp4E4ZwJayMgUsiDBCklTW0ww8gJesR+FEnmzsoH1NHiVQRhBoyGrxfVFXdeRCxZ8=
+	t=1774250439; cv=none; b=uiFNdubYfWis3Q8IKd3aH/Vd7XZUcW2qwpqllLc1wxSbrgdyg+K3ED0bMb6QhmCkKaBVTXIJXAm35b9EukbDkuAtCWSaG4VhQUa54+khN9CoFZJHW6Z0hk+S8SxIXpU1x4D85kvmQWq+ZzEaPiZDX9JnJD9xJ3r7xxKqURgn3QU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774248940; c=relaxed/simple;
-	bh=vZrXsbPeGeCkiMIqLDbuiKx8v3tlHBlMlQKRAhMixBw=;
+	s=arc-20240116; t=1774250439; c=relaxed/simple;
+	bh=j+4gCwDKNt18nYrPJDaOZxG+CXRwN10EMUoXJTiglkQ=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ubDaAdALvEoQtPlhK9VcqylL3mQUQWN9GRuOxWXCP+jQfBUNARpgXMcdoSoiWjwdMFzh2ySiTpbu15Url2wrFgAoYcttYDjb7+NjXjI6lbWrTDNWKq3lMekhiRGdHSmwGkgdeZWDaD74no2yiIdNEKU0oSu8Ulg+DclMmEgLneI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=SaOCMMOt; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=r5Hzpd5i; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1774248938;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cUFvGhq55JONPygTQtBYsqFeVViX1eQUM3HJHzaMYXs=;
-	b=SaOCMMOtP6rrCr9XSx7byEPy3Nd/aKMwApoc3GVQSLWxanovorO2pk+LSimm1QpO8iYIKE
-	F473zJpcEU18MUrFkL9y/Dk2wrzKnzb0rukZx1VboZ69qLprRAANM4Ot00kj8TIDcKeJsS
-	M6p4CDKnRA2JtuR/iwMVDp8FEO8l618=
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
- [209.85.215.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-450-VvbOcARANniQYidw-zJfyA-1; Mon, 23 Mar 2026 02:55:36 -0400
-X-MC-Unique: VvbOcARANniQYidw-zJfyA-1
-X-Mimecast-MFC-AGG-ID: VvbOcARANniQYidw-zJfyA_1774248936
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c7385a1476aso2851176a12.2
-        for <linux-doc@vger.kernel.org>; Sun, 22 Mar 2026 23:55:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1774248935; x=1774853735; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=cUFvGhq55JONPygTQtBYsqFeVViX1eQUM3HJHzaMYXs=;
-        b=r5Hzpd5iUWCnyDdTho7paarCU2nRJbJ2VSac2D5aWpb58IuYNtMwbMwACcig0suyyI
-         x+ZHUc/gysMsdn0A4ESYZNvr6sCAKXQ9EodP3YuHWNAZkASGbfTPniR9gZVKaDnZtSiJ
-         xb6vq4U9UnlELZgJ9T0EXUwjRoHQtmqrAlSerO3aLII8RMOW1Jpr2hg0AyBSxMByPVhm
-         H4Sc5xAnUdSoWgt9z0k/AlJxMB+chqXbgZKCdpxSu3Hw06vbnmDEn9UTAV24XcLB6G2v
-         i7VIACnddeDzN7zz9V0xokRtWeAJWfNWBLoM0DRypHKNgEaExEejYW7lDRO1MpZ/m2eE
-         JXSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774248935; x=1774853735;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=cUFvGhq55JONPygTQtBYsqFeVViX1eQUM3HJHzaMYXs=;
-        b=mWnx8sQhauOAnMWs91gpeRWfeVl/TK8Il9moIqGZzks5jIEjqpxooPN3WAPlbgUPNe
-         AnvaVJG/ZsylG5etM0vYUoj1Yo33nW3htFbSusnI2rk41TaIM02WDy8aYp1Fv/3hfKue
-         uW1AwZWSX8BRmQxx3FnDWOP5TknftvCuDOA6T4PpensSav7ZOgsogCpEomHK9CQ8di11
-         WeAiOPrNytK/ZI8c5/13aVfXXecdKnWml+NZcJBLbFZjQ1NH6xvtalO07d8axMfbRadZ
-         4B7dKna34acuHJPsREkn4jqnNMq4zTv1czCwmt2l1st+a/M4GUsYco28dwjNNdJrhMpK
-         /WDA==
-X-Forwarded-Encrypted: i=1; AJvYcCVgrylGnBInhz2k2BI95IVEcJz532eLp8sa4O4SIXQHQkLwUTKdYIGJX8vaZL5ViyTswFupL0klgxc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YygBpRszNTMwddHmFsPyXqzSv9eGsuunqtj1d+qDyIpPY49i8Kn
-	6XGTOfvcjjrfwhZj9h2UsTi694Nk9GZrvRNo9DYBF8x5e1mPLooT+D4iar4tyXyUD+iyQ/TIp8F
-	Q0OjyKPYyLSYdnM4rbgugD2G8Og0j1rKjv1H9w4hjCAR+zutJlqfdZMhInKrsFw==
-X-Gm-Gg: ATEYQzwVA+Z59HxDgBDtcjFKtNK18YbxxQ7UOwMaOnxSlwsx+1Z7Zy5IzCIOgQeybdF
-	sOOhwTLS7pWbN0i5LCCDxSPo7t1CWFPgL2gAB6n7a6078DK4bIuyAWCQDlmey94K3phW0j0jHuE
-	vIRNd+xBPfAIBJVyolBQ6O+AuIYMKS5NSben3Fpvc7glvnnbaSSH+F0cEkPGRZNtef7cLGLZJIn
-	Heh1TDs6MC/925RUGWgSVMn62W4l7YDU0z5HZ8nzycP4ZHft5HXGCDbPwYYITYCdX0r0mE8jUh5
-	vNKX/bt5cIPec1Zm7slxUJL8iN0gHV76Z51pKloEAnWdDjm02mcQG1G6gv1Tl07CvnDH0Bqenjf
-	pu1fkRn+oEZXJEJbcsGeCbbfG4VK2FA9FezOjFa2OKP45DQoX/3Pfz9TBo6idboKI
-X-Received: by 2002:a05:6a21:3286:b0:398:7e12:c03b with SMTP id adf61e73a8af0-39bceb41272mr9670983637.44.1774248935568;
-        Sun, 22 Mar 2026 23:55:35 -0700 (PDT)
-X-Received: by 2002:a05:6a21:3286:b0:398:7e12:c03b with SMTP id adf61e73a8af0-39bceb41272mr9670964637.44.1774248935151;
-        Sun, 22 Mar 2026 23:55:35 -0700 (PDT)
-Received: from [192.168.68.51] (n175-34-8-244.mrk21.qld.optusnet.com.au. [175.34.8.244])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c743a7ff529sm6924198a12.2.2026.03.22.23.55.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 22 Mar 2026 23:55:34 -0700 (PDT)
-Message-ID: <670cca31-ef2b-4fd8-89ad-221526a07f7e@redhat.com>
-Date: Mon, 23 Mar 2026 16:55:17 +1000
+	 In-Reply-To:Content-Type; b=B7yxRXZr7CPGmswBxfh3Nd3IMHgNbBskr+Q1KANUA0kdP6k0eUxpd98wcZisNlYaZ6ieRJVRwHCkvShll1WleNQegRdzi6tmBaE/S2DUO1IxeEQqQqdb/SxNVByMjUWWv9SEhM6UkWTsdhUyScsCfJoXNedS0m4RVyN0eRt0ZbM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QA484GZk; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95919C4CEF7;
+	Mon, 23 Mar 2026 07:20:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774250439;
+	bh=j+4gCwDKNt18nYrPJDaOZxG+CXRwN10EMUoXJTiglkQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=QA484GZkXPZaraO56d0yygpwtA9o34pBnD3u3x0MyXXsOOeQnTiENMOGGRHLeaE6G
+	 /wUjib2IEJ/ISzLerCchgWF/JNXOKG3iOUDlyTzejKkephzqrRHINtbRbLA1qNTfIl
+	 RSmcmfT6PVgROWNb7yGZ8KX9DT3gSlC6XBgYoJBpIVKfZHg4CYYlMcEsK90SPHbVxA
+	 nRFhreTzvs5qCzkee/INzYF5lky2yhg5JyQ02MsztdUQ90dXOAKD6qmDd+BDLLtL8P
+	 CZ2NkJSfsN1I0j/tlOfeNIXuq8ptq44+NmNsAtQJRg1YvGk2eojdTtSPn2YPw5JzYd
+	 9TmeBgmimIafw==
+Message-ID: <e199b63c-8137-4cbd-962b-f3dfe13b5739@kernel.org>
+Date: Mon, 23 Mar 2026 08:20:33 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -105,89 +53,121 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 19/40] arm_mpam: resctrl: Add plumbing against arm64
- task and cpu hooks
-To: Ben Horgan <ben.horgan@arm.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
- baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
- dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
- fenghuay@nvidia.com, james.morse@arm.com, jonathan.cameron@huawei.com,
- kobak@nvidia.com, lcherian@marvell.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- peternewman@google.com, punit.agrawal@oss.qualcomm.com,
- quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
- scott@os.amperecomputing.com, sdonthineni@nvidia.com,
- tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
- will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
- joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- zengheng4@huawei.com, linux-doc@vger.kernel.org,
- Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-References: <20260313144617.3420416-1-ben.horgan@arm.com>
- <20260313144617.3420416-20-ben.horgan@arm.com>
+Subject: Re: [PATCH v2 3/3] dt-bindings: hwmon: isl68137: Add compatible
+ strings for RAA228942 and RAA228943
+To: Dawei Liu <dawei.liu.jy@renesas.com>
+Cc: "linux@roeck-us.net" <linux@roeck-us.net>,
+ "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ "linux-renesas-soc@vger.kernel.org" <linux-renesas-soc@vger.kernel.org>,
+ "robh@kernel.org" <robh@kernel.org>, "krzk+dt@kernel.org"
+ <krzk+dt@kernel.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>,
+ "corbet@lwn.net" <corbet@lwn.net>,
+ "skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+ "geert+renesas@glider.be" <geert+renesas@glider.be>,
+ "magnus.damm" <magnus.damm@gmail.com>,
+ Grant Peltier <grant.peltier.jg@renesas.com>,
+ Linda Xin <linda.xin.jg@renesas.com>,
+ "tabreztalks@gmail.com" <tabreztalks@gmail.com>
+References: <20260316053541.3903-1-dawei.liu.jy@renesas.com>
+ <20260318021921.75-1-dawei.liu.jy@renesas.com>
+ <20260318021921.75-4-dawei.liu.jy@renesas.com>
+ <177412601062.18368.450072825684601974.b4-reply@b4>
+ <TYWPR01MB11935F24356873C46E02FAB5CD54BA@TYWPR01MB11935.jpnprd01.prod.outlook.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Gavin Shan <gshan@redhat.com>
-In-Reply-To: <20260313144617.3420416-20-ben.horgan@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGVBBMBCgA/AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJoF1BKBQkWlnSaAAoJEBuTQ307
+ QWKbHukP/3t4tRp/bvDnxJfmNdNVn0gv9ep3L39IntPalBFwRKytqeQkzAju0whYWg+R/rwp
+ +r2I1Fzwt7+PTjsnMFlh1AZxGDmP5MFkzVsMnfX1lGiXhYSOMP97XL6R1QSXxaWOpGNCDaUl
+ ajorB0lJDcC0q3xAdwzRConxYVhlgmTrRiD8oLlSCD5baEAt5Zw17UTNDnDGmZQKR0fqLpWy
+ 786Lm5OScb7DjEgcA2PRm17st4UQ1kF0rQHokVaotxRM74PPDB8bCsunlghJl1DRK9s1aSuN
+ hL1Pv9VD8b4dFNvCo7b4hfAANPU67W40AaaGZ3UAfmw+1MYyo4QuAZGKzaP2ukbdCD/DYnqi
+ tJy88XqWtyb4UQWKNoQqGKzlYXdKsldYqrLHGoMvj1UN9XcRtXHST/IaLn72o7j7/h/Ac5EL
+ 8lSUVIG4TYn59NyxxAXa07Wi6zjVL1U11fTnFmE29ALYQEXKBI3KUO1A3p4sQWzU7uRmbuxn
+ naUmm8RbpMcOfa9JjlXCLmQ5IP7Rr5tYZUCkZz08LIfF8UMXwH7OOEX87Y++EkAB+pzKZNNd
+ hwoXulTAgjSy+OiaLtuCys9VdXLZ3Zy314azaCU3BoWgaMV0eAW/+gprWMXQM1lrlzvwlD/k
+ whyy9wGf0AEPpLssLVt9VVxNjo6BIkt6d1pMg6mHsUEVzsFNBFVDXDQBEADNkrQYSREUL4D3
+ Gws46JEoZ9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLue
+ MNsWLJBvBaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6ei
+ OMheesVS5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wA
+ GldWsRxbf3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA
+ 6z6lBZn0WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9
+ YegxWKvXXHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt
+ 91pFzBSOIpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gU
+ BLHFTg2hYnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/
+ JoFzZ4B0p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu
+ 4vXVFBYIGmpyNPYzRm0QPwARAQABwsF8BBgBCgAmAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtB
+ YpsFAmgXUF8FCRaWWyoACgkQG5NDfTtBYptO0w//dlXJs5/42hAXKsk+PDg3wyEFb4NpyA1v
+ qmx7SfAzk9Hf6lWwU1O6AbqNMbh6PjEwadKUk1m04S7EjdQLsj/MBSgoQtCT3MDmWUUtHZd5
+ RYIPnPq3WVB47GtuO6/u375tsxhtf7vt95QSYJwCB+ZUgo4T+FV4hquZ4AsRkbgavtIzQisg
+ Dgv76tnEv3YHV8Jn9mi/Bu0FURF+5kpdMfgo1sq6RXNQ//TVf8yFgRtTUdXxW/qHjlYURrm2
+ H4kutobVEIxiyu6m05q3e9eZB/TaMMNVORx+1kM3j7f0rwtEYUFzY1ygQfpcMDPl7pRYoJjB
+ dSsm0ZuzDaCwaxg2t8hqQJBzJCezTOIkjHUsWAK+tEbU4Z4SnNpCyM3fBqsgYdJxjyC/tWVT
+ AQ18NRLtPw7tK1rdcwCl0GFQHwSwk5pDpz1NH40e6lU+NcXSeiqkDDRkHlftKPV/dV+lQXiu
+ jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
+ zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
+ XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
+In-Reply-To: <TYWPR01MB11935F24356873C46E02FAB5CD54BA@TYWPR01MB11935.jpnprd01.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	TAGGED_FROM(0.00)[bounces-80608-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80610-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[roeck-us.net,vger.kernel.org,kernel.org,lwn.net,linuxfoundation.org,glider.be,gmail.com,renesas.com];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gshan@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,dt,renesas];
 	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,arm.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:email,qualcomm.com:email]
-X-Rspamd-Queue-Id: D146A2ED322
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A24032ED739
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/14/26 12:45 AM, Ben Horgan wrote:
-> From: James Morse <james.morse@arm.com>
+On 23/03/2026 05:22, Dawei Liu wrote:
+>> If they are compatible, maybe finally this binding should switch to representing this with fallback?
 > 
-> arm64 provides helpers for changing a task's and a cpu's mpam partid/pmg
-> values.
-> 
-> These are used to back a number of resctrl_arch_ functions. Connect them
-> up.
-> 
-> Tested-by: Gavin Shan <gshan@redhat.com>
-> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-> Tested-by: Peter Newman <peternewman@google.com>
-> Tested-by: Zeng Heng <zengheng4@huawei.com>
-> Tested-by: Punit Agrawal <punit.agrawal@oss.qualcomm.com>
-> Reviewed-by: Zeng Heng <zengheng4@huawei.com>
-> Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> Signed-off-by: James Morse <james.morse@arm.com>
-> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
-> ---
-> Changes since v2:
-> apostrophes in commit message
-> ---
->   drivers/resctrl/mpam_resctrl.c | 58 ++++++++++++++++++++++++++++++++++
->   include/linux/arm_mpam.h       |  5 +++
->   2 files changed, 63 insertions(+)
-> 
+> These chips have different hardware interfaces and
+> feature sets compared to existing family members,
+> requiring separate compatible strings for correct
+> hardware identification.
 
-Reviewed-by: Gavin Shan <gshan@redhat.com>
+Really? I see that you do not use the different compatible at all and
+they look completely compatible.
 
-
+Best regards,
+Krzysztof
 
