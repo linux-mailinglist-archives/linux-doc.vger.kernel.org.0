@@ -1,166 +1,181 @@
-Return-Path: <linux-doc+bounces-80618-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80636-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uC2xJ3H3wGkwPAQAu9opvQ
-	(envelope-from <linux-doc+bounces-80618-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:18:57 +0100
+	id CJ4XAf0MwWngQAQAu9opvQ
+	(envelope-from <linux-doc+bounces-80636-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:50:53 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FBE12EE347
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:18:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87A6B2EF5C5
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:50:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 17A6C3043D00
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 08:12:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 012CE3034DE0
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:45:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C270D378D7F;
-	Mon, 23 Mar 2026 08:11:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51E2538759B;
+	Mon, 23 Mar 2026 09:45:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="O4wUbuM3"
+	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="QAUx54Ei"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B43DD376BF1
-	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 08:11:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.174
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774253517; cv=none; b=ic/1vZzjC/hyNF9sjd3R2kqOUBcv9jajV7vHuDH7ltVBKA+v2TboNmjtuf2hexkvWOuqXVhQ+gNLobP4kkO9RbCoz3x26QO671U5afmJBd+ZyfgzTWFp2SnUtvm0LLUh6fQRcTi7JFUkW+VI6TT5SfihjBUm0aYLFUGuiaAZTt4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774253517; c=relaxed/simple;
-	bh=u8TwhwwrgHTBSTQKg/VxP/30hE9odmYKXI0gLQEmKD0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KYo68Ae3COhes83lgIsdQxq4nOdq3yOD9aXFoZCYH7gC4ccBpJcUvcbGoXQZiwoB9V5dhtR8oZsOmAxjStVTsUiKrihJ2iPioQ2puub0ERxV9CSdMoy7vc16/RyOfwHRzuxF/BnnBkYfy6R2wAyicWjulICraw+g8OVUfVwcjPs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=O4wUbuM3; arc=none smtp.client-ip=209.85.215.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-c70f91776fcso1715534a12.0
-        for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 01:11:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774253514; x=1774858314; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=8AUcQbexjBVMetrU5a/fon6YbeCsJd71yudyAgtyq2E=;
-        b=O4wUbuM3JjOtKQQfp/vLgyTV8YyxcesypLgBKhCK7ep6jqMz4+SRx/n4ig1A/HwRl/
-         uliytsze6YTuxIgz9mK0i/ULxM3NhYXvpO4+6O/LH9rwwnvyKfs3g6nh7LvCTwgVuNqu
-         OF/wZekkrUdaJzA4gXOrbk8P+60znIi/c78QZskhHHKJXeCoxvADtKG/QJZukwHcvzjM
-         kA1wjW5AA8Lmcztd1yDIIwnQ1CaktTFheF2yh0tKlAbeeGtu4jx2H+/4+y2kTgxiVNVV
-         NUtZ2PmMUdjezB9v2lwmZhQGemmqSdzbHCVIzx9bkjuTYrVCAj0fHthjSzyGGqxcGkPS
-         iNyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774253514; x=1774858314;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8AUcQbexjBVMetrU5a/fon6YbeCsJd71yudyAgtyq2E=;
-        b=qeYpCCmtE55EHTcUHij0vu08DdrGiDfXbKdF86d/TjRScYObzIWzKrbozdDNJMrZAs
-         Cl94F1Z0bidzDe4XOADidf810WcR3wm7IK5q5v4HOv+4YzA8E/9kDP3Ie6twmFJ8MTLq
-         4RVgC7OpiPbmVtDqxzJHLKyWnlkq/uFS2TjwYr75YoIH+87YNq4wFM++iiT5oaw2WYLG
-         nA9Zq6DZNYN0AFOAdxZFMp6AVHIv+NSz29Jahkq4Pp2coipntLJJTvZ6Zig/qzYsvMC4
-         XSYDuVZGWcrmPh8BQMRiGgMUPalXSO44VHSfbbQxvpShC7XWCbkXmZc+9pOVAUbX9iF3
-         XHMw==
-X-Forwarded-Encrypted: i=1; AJvYcCUAKhJCBWtCj1nsrAXd/rtJVkn67bDUc8au32SvmZNcOeLMMti8jzlG9DV+Kyx25CPu3JJRs9KY1rI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwsVFMiyXR/hWIujcm5+3agZswkqBt5c1BWy9+8janQcLEhT+/V
-	3YJ3BcsBRESoy8R1RyLNNUOhWvaIOkr/IrDecqQaZ3WvWO3AK+jtRjph
-X-Gm-Gg: ATEYQzyOd+ku/DtXAmrydc6TcmhwMJQR5Cp/WoT7qnAZE7OKjjl3WoTo9IIjKta1Y4O
-	UNKd7h1TEWlfjEJZ9d3Md1aeEcPjxkepHBZ6HPpYteALwRO25LxKeyhPK/4JhEr8SVH2XGtTq4a
-	H6S3Qk4cCQ3KzR8IlUquS8HuoXCLjWs87aaoGBLn1uQHqyapMbsIrK4GNQJOej/9sPyWeQVBIgh
-	mYu3xaP/XUJGtaKjgExeNQmZ1zz+sCTMInjJ4+4oDd7KifCMpe1sE/YoxaRYOlznGZqH15DPEO1
-	Gt9Zc6/rZQ4avSKCeKmUeduwFEEs8/1I+tGXVUru75to7U3SfT5eTvj/JaNlAtUGL0IciUIfa1W
-	8W6GZMDtMVRpwqSSg6bGjeKgP4OQajltrfpBunPapel9PMNYB3pN3SaDF/+tmgaykw0XVGrlkGT
-	/g3AHFWd4fYWNp23K3xuJ+1KN6mFxphwCo4y2mUtwa43w/YD1HPUZFXq5EgDrWsmJNGzdy
-X-Received: by 2002:a17:902:f60d:b0:2ae:829d:3c33 with SMTP id d9443c01a7336-2b0826c3d65mr108877025ad.8.1774253513855;
-        Mon, 23 Mar 2026 01:11:53 -0700 (PDT)
-Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp. [106.167.137.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b0836744a5sm100532345ad.63.2026.03.23.01.11.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Mar 2026 01:11:53 -0700 (PDT)
-Message-ID: <68e16682-aba3-4e10-8776-1c04c55b7ddc@gmail.com>
-Date: Mon, 23 Mar 2026 17:11:51 +0900
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10B2F383C7C;
+	Mon, 23 Mar 2026 09:45:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=222.228.43.154
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774259113; cv=pass; b=FkkZUSbRAa1F8A6WEAdwSn/aFcXdi4fvZuIkbJOpKjwT7fd0ELHaSvbSaWCPN0qL0s4owvUxOj4GgJ70R4NeJOoZAc3ja3J3onjvdbnXI4Lo14OZT7r9L6Hg/5bL5BhYIzUejrjGiipzJIsgvBbBKloKFwmHU/hD+tmG5OK1Vz8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774259113; c=relaxed/simple;
+	bh=fZRPkFJ1u5VLlOxU1eIHcOghRkxbrh3ZR0ApR1KxIB0=;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:Content-Type; b=peRs0TNClRL9zoLi+tP4PZsB5E5QCs/TAipHdJbhLje+nhEFdA+o4SDCGfW5vJaSaGsecegt6LMVBczQxKIcCmGJfP03hjTJkwG637aLjOsGgbgp8aWZ3+tQ6mxj8zwR5Lprm9lMTJCzupAF5olTC/JxHDU/5PCt8CP7KbnYYlQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=QAUx54Ei; arc=pass smtp.client-ip=222.228.43.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id D0884109E68B4;
+	Mon, 23 Mar 2026 17:29:24 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id w0BqFK1_7g8g; Mon, 23 Mar 2026 17:29:21 +0900 (JST)
+Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
+DMARC-Filter: OpenDMARC Filter v1.4.2 www.redadmin.org 48847109EFAD6
+ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
+	t=1774254561;
+	b=JmgXQz3qN5MPaEJmc0n48LDtV8JgGvrFR6+9MBqei/HQoaJv7VHv3kCG1ftZcDIt3pb2
+	 zZDsJ2Xh0QyimXM2rLoGt7Wj+EjXCRISxfTeCppnhHB2TO2c+GjteILCpR4bUvq43OJgh
+	 lu3M3VSzLMnEOk2XcVnjm4UmYTscXUM5uU=
+ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
+	c=relaxed/relaxed; t=1774254561;
+	h=DKIM-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
+	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=SzsfmQb9+IK/bBsH4J6q8HEBVce2MtXYfcy9oDqgTEY=;
+	b=d/AfkNXlwPLzwtp6l3MIJA6w1tJL7DBw2VSCrzHNucDEs0G5Sthr1TOMwlIAtuOaUF/q
+	 dR/mNF+M4RFYt30raAw/9tZsaf37pLyPao1AFr4XPJkPs7L2nxSO+9QSmedOvIzm7K7Rm
+	 4QQtfvalcTHmfedZVLfbqpr2BgAFk6ZP3c=
+ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
+Received: from webmail.redadmin.org (redadmin.org [192.168.11.50])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: weibu@redadmin.org)
+	by www.redadmin.org (Postfix) with ESMTPSA id 48847109EFAD6;
+	Mon, 23 Mar 2026 17:29:21 +0900 (JST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org 48847109EFAD6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1774254561;
+	bh=SzsfmQb9+IK/bBsH4J6q8HEBVce2MtXYfcy9oDqgTEY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=QAUx54EiekKD60EIRYRrRCxjo+2+EJDiq9QaNPN2JCSimQfhYk1PICZIXbV5AOdLD
+	 T4rKPABsGQJUr4UFi1wqs150s3W5oWQbTMJmXyRo/dZZa4BtKdAGPAqgdaPNaUvFDX
+	 MRmBLvPJDjSsPl6cansmP98X0k1+WFyk3Vrlj0w4=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+Date: Mon, 23 Mar 2026 17:29:21 +0900
+From: weibu@redadmin.org
+To: Akira Yokosawa <akiyks@gmail.com>
+Cc: corbet@lwn.net, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
 Subject: Re: [PATCH] docs: ja_JP: process: translate second half of 'Describe
  your changes'
-To: Akiyoshi Kurita <weibu@redadmin.org>, corbet@lwn.net
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- Akira Yokosawa <akiyks@gmail.com>
+In-Reply-To: <68e16682-aba3-4e10-8776-1c04c55b7ddc@gmail.com>
 References: <20260309105015.309116-1-weibu@redadmin.org>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <20260309105015.309116-1-weibu@redadmin.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <68e16682-aba3-4e10-8776-1c04c55b7ddc@gmail.com>
+Message-ID: <ab5ea24af2b342e119d13db0447a4987@redadmin.org>
+X-Sender: weibu@redadmin.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
+	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-80618-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akiyks@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80636-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redadmin.org:+];
+	FROM_NO_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,redadmin.org:email]
-X-Rspamd-Queue-Id: 0FBE12EE347
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,redadmin.org:dkim,redadmin.org:email,redadmin.org:mid]
+X-Rspamd-Queue-Id: 87A6B2EF5C5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi,
+Hi Akira-san,
 
-Sorry for the late response.
+Thank you very much for your review and for your kind message.
 
-On Mon,  9 Mar 2026 19:50:15 +0900, Akiyoshi Kurita wrote:
-> Translate the remaining part of the "Describe your changes" section in
-> Documentation/translations/ja_JP/process/submitting-patches.rst.
+I appreciate your taking the time to look at the patch.
+Thank you also for letting me know about the minor translation issues.
+
+If you are willing to prepare a follow-up patch, I would greatly 
+appreciate it.
+I am also glad that the reason for the line wrapping makes sense.
+
+Thank you again for your help and support.
+
+Best regards,
+Akiyoshi Kurita
+
+2026-03-23 17:11 に Akira Yokosawa さんは書きました:
+> Hi,
 > 
-> Follow review comments on wording and line wrapping, and cover guidance
-> on self-contained patch descriptions, imperative mood, commit
-> references, and Link:/Closes:/Fixes: tags.
+> Sorry for the late response.
 > 
-> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
-
-Acked-by: Akira Yokosawa <akiyks@gmail.com>
-
-I have noticed a couple of minor translation issues in this patch,
-but I'd rather submit a patch on top of this, rather than comment on
-those issues in English.
-
-I guess I can prepare a follow-up patch within a week.
-
-By the way, now I see why Kurita-san is wrapping lines at 30 wide-chars
-or so.  I guess they are broken that way so that each line corresponds
-to that in the English text.  That makes sense.
-
-Thanks, Akira
-
-> ---
->  .../ja_JP/process/submitting-patches.rst      | 84 +++++++++++++++++++
->  1 file changed, 84 insertions(+)
+> On Mon,  9 Mar 2026 19:50:15 +0900, Akiyoshi Kurita wrote:
+>> Translate the remaining part of the "Describe your changes" section in
+>> Documentation/translations/ja_JP/process/submitting-patches.rst.
+>> 
+>> Follow review comments on wording and line wrapping, and cover 
+>> guidance
+>> on self-contained patch descriptions, imperative mood, commit
+>> references, and Link:/Closes:/Fixes: tags.
+>> 
+>> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
 > 
-[...]
-
+> Acked-by: Akira Yokosawa <akiyks@gmail.com>
+> 
+> I have noticed a couple of minor translation issues in this patch,
+> but I'd rather submit a patch on top of this, rather than comment on
+> those issues in English.
+> 
+> I guess I can prepare a follow-up patch within a week.
+> 
+> By the way, now I see why Kurita-san is wrapping lines at 30 wide-chars
+> or so.  I guess they are broken that way so that each line corresponds
+> to that in the English text.  That makes sense.
+> 
+> Thanks, Akira
+> 
+>> ---
+>>  .../ja_JP/process/submitting-patches.rst      | 84 
+>> +++++++++++++++++++
+>>  1 file changed, 84 insertions(+)
+>> 
+> [...]
 
