@@ -1,471 +1,258 @@
-Return-Path: <linux-doc+bounces-80758-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80760-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sLi5I4J/wWl2TgQAu9opvQ
-	(envelope-from <linux-doc+bounces-80758-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:59:30 +0100
+	id yHFEJ7V/wWl2TgQAu9opvQ
+	(envelope-from <linux-doc+bounces-80760-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 19:00:21 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD9722FAC00
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:59:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E9E32FAC51
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 19:00:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AE02F320B94B
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 17:44:28 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3A0B1325D389
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 17:47:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DFBAB3D4104;
-	Mon, 23 Mar 2026 17:41:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B90913CB2C7;
+	Mon, 23 Mar 2026 17:44:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aMPBQPza"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QS+RqqJp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2BB63D348C;
-	Mon, 23 Mar 2026 17:41:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 844A33C9ED1;
+	Mon, 23 Mar 2026 17:44:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774287686; cv=none; b=EDENYE2fhnq5l8kAy9mh3vzLoL79D3+bxTep+dhY1WSxnQoDYwHdaLNw3GUI6UZq7HGHdA6Mew37W+lxiXs2+MWU5lN4IQViwaL7VgvLWR59/zQrh58/Jhny1ASjYklJbQFLZ7V3B0Th89x42NIQjomRuIi6SGSkUQOB5hWsdEM=
+	t=1774287892; cv=none; b=u5jTreEZW/M/chc6oCxcD10J/FW9nSMCM9kqSk/LnRrbl8cFNYt1owPSob65qRcTlv1sMPAidAuTnyxvDiPtOFdZV8vMZVA4aXk74EuGozEM0Cpf1jk6ryzpoEbD8zzg71xm8fuj68ALBzGild9b6FY4w1I2OGCDFwLfa42xkmE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774287686; c=relaxed/simple;
-	bh=N+j5bFBQG7IVgb+U+Km1XXCsm7Ik726163g4RGJlU5w=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=tR6bIyIP6YKK1w0pb29gIqZaX6dLWF0AG05piDJ5gQOBJgUupUL5qq5bGzkIwrxeuLyvk28Tm9Ub1xpbSMUbktAgejwHcIGWxtLBqFOE45fhAd5fl1uk9Y0XzJ4ookzJScbxQEfTP5aKwkPOjy9aGKv7Vc73oXzoaj0o/1NZvGY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=aMPBQPza; arc=none smtp.client-ip=198.175.65.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1774287685; x=1805823685;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=N+j5bFBQG7IVgb+U+Km1XXCsm7Ik726163g4RGJlU5w=;
-  b=aMPBQPzamGtaJIDKiTdBWOkSRXmSajUAHgeuS+EPgVuWZil6Zb65fI0U
-   8FR4vDMyncE9CK1mGvHUJDMIxCHV3FCz+LMdoomMtFszmQUdZbmJpHwFh
-   mHpjQ4p7ZraE2qa+2Zn3LQBP5d5Lh4WjFrFfPgS9diHJS0lUFjEOywUyy
-   Hf98TSoXEzCkLKTIDaAxlNzNkq2LlmqNUhTJge4bHUoBgPFtvN6Qct5Nc
-   +bkSurSQQ4kn5XeNVD46n+qH7JIF0MVIrBdKyYDo45b+zFd3X6DxAmPyD
-   t9nadQJJ9i8sd+hw6EFCyXHl07D0zrYIvWiBQGqWpHFU8xJ3CJfY2c6YL
-   g==;
-X-CSE-ConnectionGUID: Y+hPU3SUTa6Cq/ybdMyN/Q==
-X-CSE-MsgGUID: TIrhoBsITUuLoS3ZGwIuog==
-X-IronPort-AV: E=McAfee;i="6800,10657,11738"; a="75484779"
-X-IronPort-AV: E=Sophos;i="6.23,137,1770624000"; 
-   d="scan'208";a="75484779"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Mar 2026 10:41:24 -0700
-X-CSE-ConnectionGUID: TTk9+pwCRKWlKp9c48YfDQ==
-X-CSE-MsgGUID: feJgLBwsTZebLgK6AOC9fg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,137,1770624000"; 
-   d="scan'208";a="228576881"
-Received: from irvmail002.ir.intel.com ([10.43.11.120])
-  by orviesa004.jf.intel.com with ESMTP; 23 Mar 2026 10:41:19 -0700
-Received: from mglak.igk.intel.com (mglak.igk.intel.com [10.237.112.146])
-	by irvmail002.ir.intel.com (Postfix) with ESMTP id 04F3232C8B;
-	Mon, 23 Mar 2026 17:41:16 +0000 (GMT)
-From: Larysa Zaremba <larysa.zaremba@intel.com>
-To: intel-wired-lan@lists.osuosl.org,
-	Tony Nguyen <anthony.l.nguyen@intel.com>
-Cc: aleksander.lobakin@intel.com,
-	sridhar.samudrala@intel.com,
-	"Singhai, Anjali" <anjali.singhai@intel.com>,
-	Michal Swiatkowski <michal.swiatkowski@linux.intel.com>,
-	Larysa Zaremba <larysa.zaremba@intel.com>,
-	"Fijalkowski, Maciej" <maciej.fijalkowski@intel.com>,
-	Emil Tantilov <emil.s.tantilov@intel.com>,
-	Madhu Chittim <madhu.chittim@intel.com>,
-	Josh Hay <joshua.a.hay@intel.com>,
-	"Keller, Jacob E" <jacob.e.keller@intel.com>,
-	jayaprakash.shanmugam@intel.com,
-	Jiri Pirko <jiri@resnulli.us>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH iwl-next v6 14/14] ixd: add devlink support
-Date: Mon, 23 Mar 2026 18:40:45 +0100
-Message-ID: <20260323174052.5355-15-larysa.zaremba@intel.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20260323174052.5355-1-larysa.zaremba@intel.com>
-References: <20260323174052.5355-1-larysa.zaremba@intel.com>
+	s=arc-20240116; t=1774287892; c=relaxed/simple;
+	bh=u/Khsl17x6Xmd5n0KKQ+7kJjdPlgeFr5Ltj5SWPXjok=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=DeCSBU/Qlqz5n041KpLv+U49ngysm9eM4BRXM34T/3/WqSB4o25gtpShtYPTx3xSdPfRgVYpuyJKvZCc+MZ/qCbWQqS6eaLLOkBvYsUFaTHEsntrysFLCbccUhUoQVQOtNg8TqQwLZbdF8MP3COpag2cNSTuT3xIwpcD4O5/328=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QS+RqqJp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B7C1C4CEF7;
+	Mon, 23 Mar 2026 17:44:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774287892;
+	bh=u/Khsl17x6Xmd5n0KKQ+7kJjdPlgeFr5Ltj5SWPXjok=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=QS+RqqJp4xFBciwjIpM8IvOrkwSEkDs/o/d0JaHh1Zu2Ht7JZeqvqawy+CpTT0ETA
+	 oVPRtWyov7cBBH7RkabLeSHcwZoMSVe6xjGQ/uXZC6deBrAaksnEQGDqPDUjEL5FE1
+	 lT6DK0zBbh9fQvIKuUqR1oEjor8vCZyM2e4+KsdeIoP+rv5dOej6uBljW2d9yUV+7t
+	 +H6JjU4tavbT5GlVpYm2P1fBIyhO6J7qK8A3SYn3bepGyWPu1IdEMCjr3drKq7oKEN
+	 pQZheTC5Or9j0dY4jAg35xY1QBb042TYWEw9+b5H3Qy6GP7i2kyU2ABR1kq4I+AXk3
+	 GKfkufUC224mQ==
+Message-ID: <7b785e34-4d49-48d2-b438-afa1def3ec0f@kernel.org>
+Date: Mon, 23 Mar 2026 18:44:28 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.84 / 15.00];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 01/16] set_memory: set_direct_map_* to take address
+To: "Kalyazin, Nikita" <kalyazin@amazon.co.uk>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+ "kvmarm@lists.linux.dev" <kvmarm@lists.linux.dev>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+ "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+ "kernel@xen0n.name" <kernel@xen0n.name>,
+ "linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
+ "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
+ "loongarch@lists.linux.dev" <loongarch@lists.linux.dev>,
+ "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>
+Cc: "pbonzini@redhat.com" <pbonzini@redhat.com>,
+ "corbet@lwn.net" <corbet@lwn.net>, "maz@kernel.org" <maz@kernel.org>,
+ "oupton@kernel.org" <oupton@kernel.org>,
+ "joey.gouly@arm.com" <joey.gouly@arm.com>,
+ "suzuki.poulose@arm.com" <suzuki.poulose@arm.com>,
+ "yuzenghui@huawei.com" <yuzenghui@huawei.com>,
+ "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
+ "will@kernel.org" <will@kernel.org>, "seanjc@google.com"
+ <seanjc@google.com>, "tglx@kernel.org" <tglx@kernel.org>,
+ "mingo@redhat.com" <mingo@redhat.com>, "bp@alien8.de" <bp@alien8.de>,
+ "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+ "x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
+ "luto@kernel.org" <luto@kernel.org>,
+ "peterz@infradead.org" <peterz@infradead.org>,
+ "willy@infradead.org" <willy@infradead.org>,
+ "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+ "lorenzo.stoakes@oracle.com" <lorenzo.stoakes@oracle.com>,
+ "vbabka@kernel.org" <vbabka@kernel.org>, "rppt@kernel.org"
+ <rppt@kernel.org>, "surenb@google.com" <surenb@google.com>,
+ "mhocko@suse.com" <mhocko@suse.com>, "ast@kernel.org" <ast@kernel.org>,
+ "daniel@iogearbox.net" <daniel@iogearbox.net>,
+ "andrii@kernel.org" <andrii@kernel.org>,
+ "martin.lau@linux.dev" <martin.lau@linux.dev>,
+ "eddyz87@gmail.com" <eddyz87@gmail.com>, "song@kernel.org"
+ <song@kernel.org>, "yonghong.song@linux.dev" <yonghong.song@linux.dev>,
+ "john.fastabend@gmail.com" <john.fastabend@gmail.com>,
+ "kpsingh@kernel.org" <kpsingh@kernel.org>, "sdf@fomichev.me"
+ <sdf@fomichev.me>, "haoluo@google.com" <haoluo@google.com>,
+ "jolsa@kernel.org" <jolsa@kernel.org>, "jgg@ziepe.ca" <jgg@ziepe.ca>,
+ "jhubbard@nvidia.com" <jhubbard@nvidia.com>,
+ "peterx@redhat.com" <peterx@redhat.com>, "jannh@google.com"
+ <jannh@google.com>, "pfalcato@suse.de" <pfalcato@suse.de>,
+ "skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+ "riel@surriel.com" <riel@surriel.com>,
+ "ryan.roberts@arm.com" <ryan.roberts@arm.com>,
+ "jgross@suse.com" <jgross@suse.com>,
+ "yu-cheng.yu@intel.com" <yu-cheng.yu@intel.com>,
+ "kas@kernel.org" <kas@kernel.org>, "coxu@redhat.com" <coxu@redhat.com>,
+ "kevin.brodsky@arm.com" <kevin.brodsky@arm.com>,
+ "ackerleytng@google.com" <ackerleytng@google.com>,
+ "yosry@kernel.org" <yosry@kernel.org>,
+ "ajones@ventanamicro.com" <ajones@ventanamicro.com>,
+ "maobibo@loongson.cn" <maobibo@loongson.cn>,
+ "tabba@google.com" <tabba@google.com>, "prsampat@amd.com"
+ <prsampat@amd.com>, "wu.fei9@sanechips.com.cn" <wu.fei9@sanechips.com.cn>,
+ "mlevitsk@redhat.com" <mlevitsk@redhat.com>,
+ "jmattson@google.com" <jmattson@google.com>,
+ "jthoughton@google.com" <jthoughton@google.com>,
+ "agordeev@linux.ibm.com" <agordeev@linux.ibm.com>,
+ "alex@ghiti.fr" <alex@ghiti.fr>,
+ "aou@eecs.berkeley.edu" <aou@eecs.berkeley.edu>,
+ "borntraeger@linux.ibm.com" <borntraeger@linux.ibm.com>,
+ "chenhuacai@kernel.org" <chenhuacai@kernel.org>,
+ "dev.jain@arm.com" <dev.jain@arm.com>, "gor@linux.ibm.com"
+ <gor@linux.ibm.com>, "hca@linux.ibm.com" <hca@linux.ibm.com>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>, "pjw@kernel.org"
+ <pjw@kernel.org>,
+ "shijie@os.amperecomputing.com" <shijie@os.amperecomputing.com>,
+ "svens@linux.ibm.com" <svens@linux.ibm.com>,
+ "thuth@redhat.com" <thuth@redhat.com>, "wyihan@google.com"
+ <wyihan@google.com>,
+ "yang@os.amperecomputing.com" <yang@os.amperecomputing.com>,
+ "Jonathan.Cameron@huawei.com" <Jonathan.Cameron@huawei.com>,
+ "Liam.Howlett@oracle.com" <Liam.Howlett@oracle.com>,
+ "urezki@gmail.com" <urezki@gmail.com>,
+ "zhengqi.arch@bytedance.com" <zhengqi.arch@bytedance.com>,
+ "gerald.schaefer@linux.ibm.com" <gerald.schaefer@linux.ibm.com>,
+ "jiayuan.chen@shopee.com" <jiayuan.chen@shopee.com>,
+ "lenb@kernel.org" <lenb@kernel.org>, "osalvador@suse.de"
+ <osalvador@suse.de>, "pavel@kernel.org" <pavel@kernel.org>,
+ "rafael@kernel.org" <rafael@kernel.org>,
+ "vannapurve@google.com" <vannapurve@google.com>,
+ "jackmanb@google.com" <jackmanb@google.com>,
+ "aneesh.kumar@kernel.org" <aneesh.kumar@kernel.org>,
+ "patrick.roy@linux.dev" <patrick.roy@linux.dev>,
+ "Thomson, Jack" <jackabt@amazon.co.uk>,
+ "Itazuri, Takahiro" <itazur@amazon.co.uk>,
+ "Manwaring, Derek" <derekmn@amazon.com>
+References: <20260317141031.514-1-kalyazin@amazon.com>
+ <20260317141031.514-2-kalyazin@amazon.com>
+From: "David Hildenbrand (Arm)" <david@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=david@kernel.org; keydata=
+ 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
+ qIws/H2t
+In-Reply-To: <20260317141031.514-2-kalyazin@amazon.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[intel.com,linux.intel.com,resnulli.us,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,gmail.com,lunn.ch,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-80758-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80760-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[redhat.com,lwn.net,kernel.org,arm.com,huawei.com,google.com,alien8.de,linux.intel.com,zytor.com,infradead.org,linux-foundation.org,oracle.com,suse.com,iogearbox.net,linux.dev,gmail.com,fomichev.me,ziepe.ca,nvidia.com,suse.de,linuxfoundation.org,surriel.com,intel.com,ventanamicro.com,loongson.cn,amd.com,sanechips.com.cn,linux.ibm.com,ghiti.fr,eecs.berkeley.edu,dabbelt.com,os.amperecomputing.com,bytedance.com,shopee.com,amazon.co.uk,amazon.com];
 	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[larysa.zaremba@intel.com,linux-doc@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:email,intel.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: BD9722FAC00
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[107];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[david@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2E9E32FAC51
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Amritha Nambiar <amritha.nambiar@intel.com>
+On 3/17/26 15:10, Kalyazin, Nikita wrote:
+> From: Nikita Kalyazin <kalyazin@amazon.com>
+> 
 
-Enable initial support for the devlink interface with the ixd driver. The
-ixd hardware is a single function PCIe device. So, the PCIe adapter gets
-its own devlink instance to manage device-wide resources or configuration.
+Just a nit while reading over it once more: restate what the patch
+subject says.
 
-$ devlink dev show
-pci/0000:83:00.6
+Like "Let's convert set_direct_map_*() to take an address instead of a
+page to prepare for adding helpers that operate on folios; it will be
+more efficient to convert from a folio directly to an address without
+going through a page first."
 
-$ devlink dev info pci/0000:83:00.6
-pci/0000:83:00.6:
-  driver ixd
-  serial_number 00-a0-c9-ff-ff-23-45-67
-  versions:
-      fixed:
-        device.type MEV
-      running:
-        virtchnl 2.0
+> This is to avoid excessive conversions folio->page->address when adding
+> helpers on top of set_direct_map_valid_noflush() in the next patch.
+> 
+> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+> Signed-off-by: Nikita Kalyazin <kalyazin@amazon.com>
+> ---
 
-Signed-off-by: Amritha Nambiar <amritha.nambiar@intel.com>
-Reviewed-by: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
-Reviewed-by: Maciej Fijalkowski <maciej.fijalkowski@intel.com>
-Reviewed-by: Przemek Kitszel <przemyslaw.kitszel@intel.com>
-Signed-off-by: Larysa Zaremba <larysa.zaremba@intel.com>
-Tested-by: Bharath R <Bharath.r@intel.com>
-Signed-off-by: Tony Nguyen <anthony.l.nguyen@intel.com>
----
- Documentation/networking/devlink/index.rst   |  1 +
- Documentation/networking/devlink/ixd.rst     | 30 ++++++
- drivers/net/ethernet/intel/ixd/Kconfig       |  1 +
- drivers/net/ethernet/intel/ixd/Makefile      |  1 +
- drivers/net/ethernet/intel/ixd/ixd_devlink.c | 97 ++++++++++++++++++++
- drivers/net/ethernet/intel/ixd/ixd_devlink.h | 44 +++++++++
- drivers/net/ethernet/intel/ixd/ixd_main.c    | 16 +++-
- 7 files changed, 187 insertions(+), 3 deletions(-)
- create mode 100644 Documentation/networking/devlink/ixd.rst
- create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.c
- create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.h
-
-diff --git a/Documentation/networking/devlink/index.rst b/Documentation/networking/devlink/index.rst
-index f7ba7dcf477d..f0c077843fa7 100644
---- a/Documentation/networking/devlink/index.rst
-+++ b/Documentation/networking/devlink/index.rst
-@@ -88,6 +88,7 @@ parameters, info versions, and other features it supports.
-    ionic
-    iosm
-    ixgbe
-+   ixd
-    kvaser_pciefd
-    kvaser_usb
-    mlx4
-diff --git a/Documentation/networking/devlink/ixd.rst b/Documentation/networking/devlink/ixd.rst
-new file mode 100644
-index 000000000000..17b63c8425aa
---- /dev/null
-+++ b/Documentation/networking/devlink/ixd.rst
-@@ -0,0 +1,30 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===================
-+ixd devlink support
-+===================
-+
-+This document describes the devlink features implemented by the ``ixd``
-+device driver.
-+
-+Info versions
-+=============
-+
-+The ``ixd`` driver reports the following versions
-+
-+.. list-table:: devlink info versions implemented
-+    :widths: 5 5 5 90
-+
-+    * - Name
-+      - Type
-+      - Example
-+      - Description
-+    * - ``device.type``
-+      - fixed
-+      - MEV
-+      - The hardware type for this device
-+    * - ``virtchnl``
-+      - running
-+      - 2.0
-+      - 2-digit version number (major.minor) of the communication channel
-+        (virtchnl) used by the device.
-diff --git a/drivers/net/ethernet/intel/ixd/Kconfig b/drivers/net/ethernet/intel/ixd/Kconfig
-index 24510c50070e..34181c59dcdc 100644
---- a/drivers/net/ethernet/intel/ixd/Kconfig
-+++ b/drivers/net/ethernet/intel/ixd/Kconfig
-@@ -7,6 +7,7 @@ config IXD
- 	select LIBETH
- 	select LIBIE_CP
- 	select LIBIE_PCI
-+	select NET_DEVLINK
- 	help
- 	  This driver supports Intel(R) Control Plane PCI Function
- 	  of Intel E2100 and later IPUs and FNICs.
-diff --git a/drivers/net/ethernet/intel/ixd/Makefile b/drivers/net/ethernet/intel/ixd/Makefile
-index 90abf231fb16..03760a2580b9 100644
---- a/drivers/net/ethernet/intel/ixd/Makefile
-+++ b/drivers/net/ethernet/intel/ixd/Makefile
-@@ -8,5 +8,6 @@ obj-$(CONFIG_IXD) += ixd.o
- ixd-y := ixd_main.o
- ixd-y += ixd_ctlq.o
- ixd-y += ixd_dev.o
-+ixd-y += ixd_devlink.o
- ixd-y += ixd_lib.o
- ixd-y += ixd_virtchnl.o
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_devlink.c b/drivers/net/ethernet/intel/ixd/ixd_devlink.c
-new file mode 100644
-index 000000000000..23ab11226978
---- /dev/null
-+++ b/drivers/net/ethernet/intel/ixd/ixd_devlink.c
-@@ -0,0 +1,97 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/* Copyright (c) 2025, Intel Corporation. */
-+
-+#include "ixd.h"
-+#include "ixd_devlink.h"
-+
-+#define IXD_DEVLINK_INFO_LEN	128
-+
-+/**
-+ * ixd_fill_dsn - Get the serial number for the ixd device
-+ * @adapter: adapter to query
-+ * @buf: storage buffer for the info request
-+ */
-+static void ixd_fill_dsn(struct ixd_adapter *adapter, char *buf)
-+{
-+	u8 dsn[8];
-+
-+	/* Copy the DSN into an array in Big Endian format */
-+	put_unaligned_be64(pci_get_dsn(adapter->cp_ctx.mmio_info.pdev), dsn);
-+
-+	snprintf(buf, IXD_DEVLINK_INFO_LEN, "%8phD", dsn);
-+}
-+
-+/**
-+ * ixd_fill_device_name - Get the name of the underlying hardware
-+ * @adapter: adapter to query
-+ * @buf: storage buffer for the info request
-+ * @buf_size: size of the storage buffer
-+ */
-+static void ixd_fill_device_name(struct ixd_adapter *adapter, char *buf,
-+				 size_t buf_size)
-+{
-+	if (adapter->caps.device_type == cpu_to_le32(VIRTCHNL2_MEV_DEVICE))
-+		snprintf(buf, buf_size, "%s", "MEV");
-+	else
-+		snprintf(buf, buf_size, "%s", "UNKNOWN");
-+}
-+
-+/**
-+ * ixd_devlink_info_get - .info_get devlink handler
-+ * @devlink: devlink instance structure
-+ * @req: the devlink info request
-+ * @extack: extended netdev ack structure
-+ *
-+ * Callback for the devlink .info_get operation. Reports information about the
-+ * device.
-+ *
-+ * Return: zero on success or an error code on failure.
-+ */
-+static int ixd_devlink_info_get(struct devlink *devlink,
-+				struct devlink_info_req *req,
-+				struct netlink_ext_ack *extack)
-+{
-+	struct ixd_adapter *adapter = devlink_priv(devlink);
-+	char buf[IXD_DEVLINK_INFO_LEN];
-+	int err;
-+
-+	ixd_fill_dsn(adapter, buf);
-+	err = devlink_info_serial_number_put(req, buf);
-+	if (err)
-+		return err;
-+
-+	ixd_fill_device_name(adapter, buf, IXD_DEVLINK_INFO_LEN);
-+	err = devlink_info_version_fixed_put(req, "device.type", buf);
-+	if (err)
-+		return err;
-+
-+	snprintf(buf, sizeof(buf), "%u.%u",
-+		 adapter->vc_ver.major, adapter->vc_ver.minor);
-+
-+	return devlink_info_version_running_put(req, "virtchnl", buf);
-+}
-+
-+static const struct devlink_ops ixd_devlink_ops = {
-+	.info_get = ixd_devlink_info_get,
-+};
-+
-+/**
-+ * ixd_adapter_alloc - Allocate devlink and return adapter pointer
-+ * @dev: the device to allocate for
-+ *
-+ * Allocate a devlink instance for this device and return the private area as
-+ * the adapter structure.
-+ *
-+ * Return: adapter structure on success, NULL on failure
-+ */
-+struct ixd_adapter *ixd_adapter_alloc(struct device *dev)
-+{
-+	struct devlink *devlink;
-+
-+	devlink = devlink_alloc(&ixd_devlink_ops, sizeof(struct ixd_adapter),
-+				dev);
-+	if (!devlink)
-+		return NULL;
-+
-+	return devlink_priv(devlink);
-+}
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_devlink.h b/drivers/net/ethernet/intel/ixd/ixd_devlink.h
-new file mode 100644
-index 000000000000..c43ce0655de2
---- /dev/null
-+++ b/drivers/net/ethernet/intel/ixd/ixd_devlink.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Copyright (c) 2025, Intel Corporation. */
-+
-+#ifndef _IXD_DEVLINK_H_
-+#define _IXD_DEVLINK_H_
-+#include <net/devlink.h>
-+
-+struct ixd_adapter *ixd_adapter_alloc(struct device *dev);
-+
-+/**
-+ * ixd_devlink_free - teardown the devlink
-+ * @adapter: the adapter structure to free
-+ *
-+ */
-+static inline void ixd_devlink_free(struct ixd_adapter *adapter)
-+{
-+	struct devlink *devlink = priv_to_devlink(adapter);
-+
-+	devlink_free(devlink);
-+}
-+
-+/**
-+ * ixd_devlink_unregister - Unregister devlink resources for this adapter.
-+ * @adapter: the adapter structure to cleanup
-+ *
-+ * Releases resources used by devlink and cleans up associated memory.
-+ */
-+static inline void ixd_devlink_unregister(struct ixd_adapter *adapter)
-+{
-+	devlink_unregister(priv_to_devlink(adapter));
-+}
-+
-+/**
-+ * ixd_devlink_register - Register devlink interface for this adapter
-+ * @adapter: pointer to ixd adapter structure to be associated with devlink
-+ *
-+ * Register the devlink instance associated with this adapter
-+ */
-+static inline void ixd_devlink_register(struct ixd_adapter *adapter)
-+{
-+	devlink_register(priv_to_devlink(adapter));
-+}
-+
-+#endif /* _IXD_DEVLINK_H_ */
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_main.c b/drivers/net/ethernet/intel/ixd/ixd_main.c
-index 6d5e6aca77df..ea6aa793a6a7 100644
---- a/drivers/net/ethernet/intel/ixd/ixd_main.c
-+++ b/drivers/net/ethernet/intel/ixd/ixd_main.c
-@@ -4,6 +4,7 @@
- #include "ixd.h"
- #include "ixd_ctlq.h"
- #include "ixd_lan_regs.h"
-+#include "ixd_devlink.h"
- 
- MODULE_DESCRIPTION("Intel(R) Control Plane Function Device Driver");
- MODULE_IMPORT_NS("LIBIE_CP");
-@@ -21,11 +22,14 @@ static void ixd_remove(struct pci_dev *pdev)
- 	/* Do not mix removal with (re)initialization */
- 	cancel_delayed_work_sync(&adapter->init_task.init_work);
- 
-+	ixd_devlink_unregister(adapter);
-+
- 	/* Leave the device clean on exit */
- 	ixd_trigger_reset(adapter);
- 	ixd_deinit_dflt_mbx(adapter);
- 
- 	libie_pci_unmap_all_mmio_regions(&adapter->cp_ctx.mmio_info);
-+	ixd_devlink_free(adapter);
- }
- 
- /**
-@@ -93,7 +97,7 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	if (WARN_ON(ent->device != IXD_DEV_ID_CPF))
- 		return -EINVAL;
- 
--	adapter = devm_kzalloc(&pdev->dev, sizeof(*adapter), GFP_KERNEL);
-+	adapter = ixd_adapter_alloc(&pdev->dev);
- 	if (!adapter)
- 		return -ENOMEM;
- 
-@@ -102,13 +106,13 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 
- 	err = libie_pci_init_dev(pdev);
- 	if (err)
--		return err;
-+		goto free_adapter;
- 
- 	pci_set_drvdata(pdev, adapter);
- 
- 	err = ixd_iomap_regions(adapter);
- 	if (err)
--		return err;
-+		goto free_adapter;
- 
- 	INIT_DELAYED_WORK(&adapter->init_task.init_work,
- 			  ixd_init_task);
-@@ -118,7 +122,13 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	queue_delayed_work(system_unbound_wq, &adapter->init_task.init_work,
- 			   msecs_to_jiffies(500));
- 
-+	ixd_devlink_register(adapter);
-+
- 	return 0;
-+
-+free_adapter:
-+	ixd_devlink_free(adapter);
-+	return err;
- }
- 
- static const struct pci_device_id ixd_pci_tbl[] = {
 -- 
-2.47.0
+Cheers,
 
+David
 
