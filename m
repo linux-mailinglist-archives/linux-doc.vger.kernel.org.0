@@ -1,241 +1,145 @@
-Return-Path: <linux-doc+bounces-80694-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80709-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ABNdK3hxwWkQTQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80694-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 17:59:36 +0100
+	id gHoBExxgwWmaSgQAu9opvQ
+	(envelope-from <linux-doc+bounces-80709-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:45:32 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1614A2F9400
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 17:59:36 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BCF712F6DAF
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 16:45:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5F2A334C69B4
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:24:33 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 4DDAB3111E5C
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 15:35:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01E243C2777;
-	Mon, 23 Mar 2026 15:16:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9CBA224BBF4;
+	Mon, 23 Mar 2026 15:24:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SVkBF4Ok"
+	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="Y0lEY72b"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D60A3C276B
-	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 15:16:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774279012; cv=none; b=ie9ckrNGMOVS8jZax1c9N07JvXmlHJGeUa1Ay6V23wXiPAsGf1n/HkJ/AVJrP4RuqV87G/mmfb876rbhxut2Q27yyy2NcrPT6kQ4U0DBtr2OXoz/6tVmBWNLbBxADhUuv982psqyWpu4a4/7eF36Lw84VliSQxRKbjZxATFufwg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774279012; c=relaxed/simple;
-	bh=YSmf7SfS+dyoKK/ONc677DunC4obvmMT1f04tsDKnmw=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=dLioEevRcAA0EI2UbDXSRLLJVSEo3el/XYzf7/OU2vyUICqjouMmjXhhbDDAcFNziIX7LBbwnzQ5t/rvYgSlmN6hV93ij7PAY4fcwskuryw8e+/4QMN/UgyaDPpBmZhDjvKn999QmhSmE3QgIiMFeHU2/MooQJxMc2ewHGijkyQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SVkBF4Ok; arc=none smtp.client-ip=209.85.221.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-439cd6b09f8so3199698f8f.3
-        for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 08:16:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774279010; x=1774883810; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=JNANK6Rws1vPjepUbdhCzlW9rrYItMAN/Gh+hzvMyN8=;
-        b=SVkBF4OkFL0iko6YQO829KDX4ElyXVFFl8ngecxNpqqLQx9TeBYWjct80wb1y04X8s
-         lL6o3MV42WBJryML8GJnPdO2bmc8wGuBZDrxP0SK9PYMnerL6M7VD799eag/8UGbQ/9l
-         PmELcO9s9YCQQoTlSi3QgruFV7YWaVFZefooz20sdIyalIkY5qfP00SjbsxKQqqI+poc
-         bC7Jk7mYTqefgMKfJjdnvTfnC+mKjbdx8V3bHMEPkKuh2dosTDJjVljKZGxNGTh2BM6y
-         EVVUUcGd+dgXu1e5xxVpcrykrIYFbl++MBeENhPa82qVdBI4WpGgRKI03cpSgEqwppiy
-         EOXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774279010; x=1774883810;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=JNANK6Rws1vPjepUbdhCzlW9rrYItMAN/Gh+hzvMyN8=;
-        b=WCD5Yu2lzwE4s4hstjDvcoHejDTXX7WMWAsmKRU/7i+eylNthBXxS6flcOY0K8wblp
-         3gSSSSO2Thch1jZlmcBjcFdWihRv20Y42EC7VPZs557Lc95lvNrKwC8t3T+sirAZecMm
-         dUY5cWauBQsCyNh3VePahWxZRbYnZAPpKGt1shOYmDNjgSZPcRNERRuFHZQJwr9QDJBE
-         UE5jWUlteNZw4ARpfSs9I7YVGWFgUGi1ETh2pTxIYB9o2SYjek68F9B7iHyHV3U8I+ez
-         GXJAhLHs6It2aDIdm24MdnyQbA77ZLKFsN4/fJiWJHEkHKiKI685RjILdp19f1TbAgaZ
-         tIqg==
-X-Forwarded-Encrypted: i=1; AJvYcCXP40lJTdX/HBhmbXEIfFdEDPdjscnM6yisjZjLJhic9BRkGjRfMoFfaVKS60bocCS/4LLkn/GHTWo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzjQ6IDxcX06Yj70LoEWEtvbE7Oe4T4E5QH325gEM5U5+chQ2Yo
-	8cNubiXQwmwXr7PUTrFIt4A9oL378Mfh5FRkPKSpEyd0GAOD9qG5hp/4YcHb2sAl
-X-Gm-Gg: ATEYQzwGeW0RIJ1/jbm2dWnVEht46JxTPIgIlbwnLReR26dlE2Z/GgpJH6RnihzlHYr
-	DTM8Tvv0afAZ2A8114nlGTc6FkxqYf8GE7AncTwI3/jPQzVLgc+XKmi86p7VQp/QjRYKwWjjRLC
-	zl4sfqFjnbrFfgDX0xZaA3EzR9FolEyLDROrTnHBI0CZeEQqgqEnudLzqetxEH0Lmq33hVXniuJ
-	WEkhwCfhvB5JkTSYmMFAZWi2E3ei0UW21cChvIUe2xgbpAW3Np/HNjZSQ+f4JMnQ70zLwMQP8TF
-	6KRchMrgZbTlTXHuwcqGGUdoRh1/qYCmvLLZ6VkzfHDs4mT4cBXBiVyH/blz+8Pz6AzsZHVcNyS
-	5gOhIWP/tGV9zMmLQMYDLkXE19zJxGx0s8mdIvregi/eJWorC6o7TS7IxuGTkPHXD+883UMxSTG
-	Od1QvmjktTJpPUpq2Jwa7ft90FiGxzy7XR+t68O2iTnA==
-X-Received: by 2002:a05:6000:250f:b0:43b:4dd4:684f with SMTP id ffacd0b85a97d-43b6428b52amr20099451f8f.47.1774279009482;
-        Mon, 23 Mar 2026 08:16:49 -0700 (PDT)
-Received: from [192.168.1.187] ([148.63.225.166])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b6470393fsm31561116f8f.17.2026.03.23.08.16.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Mar 2026 08:16:48 -0700 (PDT)
-Message-ID: <63baaa6ea6ce7a8534046fea3d9f14fdb26f87a3.camel@gmail.com>
-Subject: Re: [PATCH v7 1/3] dt-bindings: hwmon: Document the LTC4283 Swap
- Controller
-From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-To: Guenter Roeck <linux@roeck-us.net>, nuno.sa@analog.com
-Cc: linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Rob Herring
-	 <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	 <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
-	 <skhan@linuxfoundation.org>, Linus Walleij <linusw@kernel.org>, Bartosz
- Golaszewski <brgl@kernel.org>
-Date: Mon, 23 Mar 2026 15:17:34 +0000
-In-Reply-To: <453dbd6c-c68d-4977-8418-a898008b0fe7@roeck-us.net>
-References: <20260314-ltc4283-support-v7-0-1cda48e93802@analog.com>
-	 <20260314-ltc4283-support-v7-1-1cda48e93802@analog.com>
-	 <c395fad0-ca24-448a-a77f-ddac1cd9f809@roeck-us.net>
-	 <77cd7e879a10df791d9d5eb1f16f1654e9904199.camel@gmail.com>
-	 <453dbd6c-c68d-4977-8418-a898008b0fe7@roeck-us.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25031258CD9;
+	Mon, 23 Mar 2026 15:24:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774279483; cv=pass; b=gyG2AaVANJYNI/CNmYujRlZu8Ezlr/JdHYGRT21HkQw7UVSs6G9jUi1eidxdnPJUygUb0aKxqzFuSiEA6oKCWSk4qfnSFy4ktcuLv2T9C6dNI6xuONS516/DvarBMWbYC6N8v0d3i8u3c/Qmm85T+a1XjUI/3HJmv4ClkKpYczI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774279483; c=relaxed/simple;
+	bh=uFiHoVfu9qJdRqJCicAG5hiiOOLeUcbT64+PDrRCzTM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ctUh9zeuKZB65HCJB8g07unfgRqif4gRV7Aw1rlDqJ8NZ0wDEt03w3VGjI2DuMeaKt2ja21cpmUYBwWq/bCqdYDXzGZ+ToK6lee9sAqhODaZXVVGYkRODM8BboMmGApMgCo+VCYJLWkO5kOw777A/ceZNkO+GXsfzvF/FXTKOuk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=Y0lEY72b; arc=pass smtp.client-ip=136.143.188.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ritovision.com
+ARC-Seal: i=1; a=rsa-sha256; t=1774279472; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=oBkdVH3aruq7HOXqDYUmzlhDdULaN1JxBJSJ/YYffNbc3hC72fwYj9PiIHqgwTiXK2UUSVb8KONwahKwXafKC9v9uTCmx/gbdbPSoVjUR0U/CBWW3QuuobrlXIOXa7L+CUJvsNy59ajVSFSdERM2xdOP/Xu0d039tO7UatVvpEs=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1774279472; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=bKwNC3oYBC87zktx+ult9d2bfUYP6RHypbxps9hFVdE=; 
+	b=LgtJ2GxT7OcW2pcZY3UvoPp8qXHh5rl6bQwvw4NSnM8BFdTvxl/b744UmWJuSURR4mG9MwdjdA07Th9K7fsJURKQbHm5pot5J5LbepedHitifnVhSz5FMec0bJ3xduUVBfSCauW9IWQafr2TC0yJCoqlMCzYt7VtaRsOrpZEnIk=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=ritovision.com;
+	spf=pass  smtp.mailfrom=rito@ritovision.com;
+	dmarc=pass header.from=<rito@ritovision.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774279472;
+	s=zmail; d=ritovision.com; i=rito@ritovision.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=bKwNC3oYBC87zktx+ult9d2bfUYP6RHypbxps9hFVdE=;
+	b=Y0lEY72bs1TsYrRzoB1F7q40Tk/aCbog+dVMnYgryuUYmgMSMR2Ggz8kauK79UGP
+	gmISwR+EjydGRr+kxk6v8dx8mr3gzi6EYN0qxIRb/OBa7LmkD7VwbPy3GKYDjIZwGrT
+	tlrln1AXJB34koz7doNucuStq06YTQMVhtXxT4UM=
+Received: by mx.zohomail.com with SMTPS id 1774279469832708.1824775079593;
+	Mon, 23 Mar 2026 08:24:29 -0700 (PDT)
+From: Rito Rhymes <rito@ritovision.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org
+Cc: Shuah Khan <skhan@linuxfoundation.org>,
+	linux-kernel@vger.kernel.org,
+	rdunlap@infradead.org,
+	Rito Rhymes <rito@ritovision.com>
+Subject: [PATCH v3 1/2] docs: allow long links to wrap per character to prevent page overflow
+Date: Mon, 23 Mar 2026 11:24:27 -0400
+Message-ID: <20260323152428.30483-1-rito@ritovision.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260321180841.10166-1-rito@ritovision.com>
+References: <20260321180841.10166-1-rito@ritovision.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[ritovision.com,reject];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[ritovision.com:s=zmail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80694-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	TAGGED_FROM(0.00)[bounces-80709-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[rito@ritovision.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[ritovision.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 1614A2F9400
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[]
+X-Rspamd-Queue-Id: BCF712F6DAF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 2026-03-23 at 07:33 -0700, Guenter Roeck wrote:
-> [ ...]
-> > > > +=C2=A0 adi,pgio1-func:
-> > > > +=C2=A0=C2=A0=C2=A0 description: Configures the function of the PGI=
-O1 pin.
-> > > > +=C2=A0=C2=A0=C2=A0 $ref: /schemas/types.yaml#/definitions/string
-> > > > +=C2=A0=C2=A0=C2=A0 enum: [inverted_power_good, power_good, gpio]
-> > > > +=C2=A0=C2=A0=C2=A0 default: inverted_power_good
-> > > > +
-> > > > +=C2=A0 adi,pgio2-func:
-> > > > +=C2=A0=C2=A0=C2=A0 description: Configures the function of the PGI=
-O2 pin.
-> > > > +=C2=A0=C2=A0=C2=A0 $ref: /schemas/types.yaml#/definitions/string
-> > > > +=C2=A0=C2=A0=C2=A0 enum: [inverted_power_good, power_good, gpio, a=
-ctive_current_limiting]
-> > > > +=C2=A0=C2=A0=C2=A0 default: inverted_power_good
-> > > > +
-> > > > +=C2=A0 adi,pgio3-func:
-> > > > +=C2=A0=C2=A0=C2=A0 description: Configures the function of the PGI=
-O3 pin.
-> > > > +=C2=A0=C2=A0=C2=A0 $ref: /schemas/types.yaml#/definitions/string
-> > > > +=C2=A0=C2=A0=C2=A0 enum: [inverted_power_good_input, power_good_in=
-put, gpio]
-> > > > +=C2=A0=C2=A0=C2=A0 default: inverted_power_good_input
-> > > > +
-> > > > +=C2=A0 adi,pgio4-func:
-> > > > +=C2=A0=C2=A0=C2=A0 description: Configures the function of the PGI=
-O4 pin.
-> > > > +=C2=A0=C2=A0=C2=A0 $ref: /schemas/types.yaml#/definitions/string
-> > > > +=C2=A0=C2=A0=C2=A0 enum: [inverted_external_fault, external_fault,=
- gpio]
-> > > > +=C2=A0=C2=A0=C2=A0 default: inverted_external_fault
-> > > > +
-> > > > +=C2=A0 adi,gpio-on-adio1:
-> > > > +=C2=A0=C2=A0=C2=A0 description: If set, the ADIO1 pin is used as a=
- GPIO.
-> > > > +=C2=A0=C2=A0=C2=A0 type: boolean
-> > > > +
-> > > > +=C2=A0 adi,gpio-on-adio2:
-> > > > +=C2=A0=C2=A0=C2=A0 description: If set, the ADIO2 pin is used as a=
- GPIO.
-> > > > +=C2=A0=C2=A0=C2=A0 type: boolean
-> > > > +
-> > > > +=C2=A0 adi,gpio-on-adio3:
-> > > > +=C2=A0=C2=A0=C2=A0 description: If set, the ADIO3 pin is used as a=
- GPIO.
-> > > > +=C2=A0=C2=A0=C2=A0 type: boolean
-> > > > +
-> > > > +=C2=A0 adi,gpio-on-adio4:
-> > > > +=C2=A0=C2=A0=C2=A0 description: If set, the ADIO4 pin is used as a=
- GPIO.
-> > > > +=C2=A0=C2=A0=C2=A0 type: boolean
-> > >=20
-> > > Does this dependency block force a redundant specification of adi,pgi=
-o4-func?
-> > > The default for adi,pgio4-func is inverted_external_fault, which mean=
-s the
-> > > default hardware state already supports external fault features.
-> > > If a device tree legitimately omits adi,pgio4-func to rely on that de=
-fault,
-> > > will it fail schema validation here since the dependencies keyword st=
-rictly
-> > > checks for the literal presence of properties without injecting defau=
-lts?
-> >=20
-> > Fair point. I guess it will fail but the alternative is to not have any=
- constrain at all so
-> > maybe worth it to be explicit in here?
-> >=20
->=20
-> I don't claim to understand how to define devicetree properties, but
->=20
-> adi,pgio4-func =3D <"gpio">
->=20
-> and
->=20
-> adi,gpio-on-adio4;
->=20
-> seem to be equivalent to me, and omitting the first property (because
+Some documentation pages contain long link text without natural
+break points, which can force page-wide horizontal scroll overflow
+on small screens.
 
-Not exactly. ADIO4 and PGIO4 are different pins and can be both configured
-as GPIOs. ADIO is a boolean because they are either monitored by the ADC (d=
-efault)
-or configured as GPIOs. PGIOs can have additional configurations and hence =
-the
-enum.
+Use overflow-wrap: anywhere for anchor text in the docs stylesheet so
+links can wrap per character as a fallback when normal word boundaries
+are unavailable.
 
-- Nuno S=C3=A1
+Examples:
+  https://docs.kernel.org/6.15/firmware-guide/acpi/non-d0-probe.html
+  https://docs.kernel.org/6.15/arch/x86/earlyprintk.html
 
-> it defaults to inverted_external_fault) would cause the second to fail.
-> So either both would be necessary or none. If that is correct, what is
-> the point of having the adi,gpio-on-adio4 property in the first place ?
->=20
-> In other words, what is the difference between
-> 	adi,pgio4-func =3D <"gpio">;
-> 	adi,gpio-on-adio4;
->=20
-> and
-> 	adi,pgio4-func =3D <"gpio">;
-> (with no boolean property) ?
+Signed-off-by: Rito Rhymes <rito@ritovision.com>
+Assisted-by: Codex:GPT-5.4
+---
+v3: add latest public versioned URL examples to the patchlog
 
->=20
-> Thanks,
-> Guenter
+ Documentation/sphinx-static/custom.css | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
+index db24f4344..4ec617d40 100644
+--- a/Documentation/sphinx-static/custom.css
++++ b/Documentation/sphinx-static/custom.css
+@@ -149,6 +149,11 @@ div.language-selection ul li:hover {
+     background: #dddddd;
+ }
+ 
++/* Let long link text wrap instead of forcing overflow. */
++a {
++    overflow-wrap: anywhere;
++}
++
+ /* Make xrefs more universally visible */
+ a.reference, a.reference:hover {
+     border-bottom: none;
+-- 
+2.51.0
 
