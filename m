@@ -1,667 +1,204 @@
-Return-Path: <linux-doc+bounces-80639-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80641-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CNAyCeYTwWnkQQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80639-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:20:22 +0100
+	id 2Dx4E4YUwWn5QQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80641-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:23:02 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A4F82EFE59
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:20:21 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DBCB2EFF3A
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:23:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A302D3031F08
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:13:55 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 88CE73009089
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:22:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 10D8A388E51;
-	Mon, 23 Mar 2026 10:13:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C7C3D37CD3F;
+	Mon, 23 Mar 2026 10:22:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="cOELZ+Gz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F9A7340A47;
-	Mon, 23 Mar 2026 10:13:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B3C42BEC3F;
+	Mon, 23 Mar 2026 10:22:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774260834; cv=none; b=Dvb9a0xKj8DlZmDalSN32cmIHPPIPFozX++/Q6a81ztee7nallNJz0LNeObVec0vjj1VTIC/ya5+YEpKHqoaevRqDHgN+MprQczTWNqgbJw3Wog9g46EqqdNVkHffpE/EFy9aHzRHEQxubmfCwgH+3z2JQNu57WkYnYLcbG7xeI=
+	t=1774261365; cv=none; b=b/eis2JZMvc2K09Gz/JySRLhjsdkLnnj/hi+C9onpsz8SiKq9RCTRa6B1gHANvmh34UmBEcgSTzpNpFdtLIuZxiFWwvgRekM+acj/DqXJeVJKE49C5Qc9/0AIjWWukhtQknBz0ILCYCA8XKUQjVN3cQ+OCquEPfYm9LbXzxn2OM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774260834; c=relaxed/simple;
-	bh=U5w0pPtCZNwwEAvQcA085TwadllqINxH1cELV1rxhc4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=u68UXKmEflXwSPzk4t36fwOftxlRfsVu4Sz4gMm8NRzPxsZeJaSGeJZ59jxz7ugHbYix/sMCQnArcrd7KWELWzH7aBtpviph/RxqqlFlEYGMFQUeSgD8tTcatBOKApkW5F4d5Vmfjpz6EUOBXvXvlRlBByseLBlSc1dE+KwNpbY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ABEEE1516;
-	Mon, 23 Mar 2026 03:13:43 -0700 (PDT)
-Received: from [10.1.196.46] (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0B7863F63F;
-	Mon, 23 Mar 2026 03:13:44 -0700 (PDT)
-Message-ID: <80915f50-b5c9-4790-81c6-4f08b2af1274@arm.com>
-Date: Mon, 23 Mar 2026 10:13:43 +0000
+	s=arc-20240116; t=1774261365; c=relaxed/simple;
+	bh=F0Nb0sJhJbVn6r2FesonC+O/5NMRBAs5RhQ19B0t10k=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=KSoie2G1gfBfddyASFNclRNxKnYeyneXl1w0aUlqUJWITQwmvvnC09ZgdJzs9R9c2le0DODjq/W/1JQF8VG7Xi24cbrw99nXBEOgyH1lz655c1MlBqf067OFnNThVzj8EBha1gkK60ejZ2lJKK6y46ChhgBzzNrA9/TkDsiJYGM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=cOELZ+Gz; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+	Reply-To:Content-ID:Content-Description;
+	bh=DH+iNz08X6EuAL3xC9z+JByLMXFyPiPYDRa6C8Lo498=; b=cOELZ+GzPUk5kjUi33kxf6Lu7p
+	GY3nwOVi920GJ9UbvJXatjMBuQEPT0FOX4okImlD8Vj3T4hBJwuD4uVDmjAO+AoxU+1owP1yMDUJv
+	6jIqukt9sJv843ocVhBm8CQf/EgCYlBeY70qonTJ07RkEANn/O90EI9F2qKxX/Ruiw+ig35xTfySr
+	TCQUi13ye1jWvFFXVEayi3gPh6rq4OrCVTXd3UdB4U39KNNRni9xgjm24sZzkklawm4ICVKu9C6Bt
+	6iaiADnz4fz5s6LsXVZRgEIBNtVWG99q9re5mqluxiVD7HtUILcAbo0RaYSXFH39nUpc6WAzPyJnG
+	O3Zbf8gA==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.94.2)
+	(envelope-from <leitao@debian.org>)
+	id 1w4cP7-007SfO-16; Mon, 23 Mar 2026 10:20:59 +0000
+Date: Mon, 23 Mar 2026 03:20:48 -0700
+From: Breno Leitao <leitao@debian.org>
+To: Jinjie Ruan <ruanjinjie@huawei.com>
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, catalin.marinas@arm.com, 
+	will@kernel.org, chenhuacai@kernel.org, kernel@xen0n.name, maddy@linux.ibm.com, 
+	mpe@ellerman.id.au, npiggin@gmail.com, chleroy@kernel.org, pjw@kernel.org, 
+	palmer@dabbelt.com, aou@eecs.berkeley.edu, alex@ghiti.fr, tglx@kernel.org, 
+	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, hpa@zytor.com, 
+	robh@kernel.org, saravanak@kernel.org, akpm@linux-foundation.org, bhe@redhat.com, 
+	vgoyal@redhat.com, dyoung@redhat.com, rdunlap@infradead.org, peterz@infradead.org, 
+	feng.tang@linux.alibaba.com, pawan.kumar.gupta@linux.intel.com, dapeng1.mi@linux.intel.com, 
+	kees@kernel.org, elver@google.com, paulmck@kernel.org, lirongqing@baidu.com, 
+	safinaskar@gmail.com, rppt@kernel.org, ardb@kernel.org, jbohac@suse.cz, 
+	cfsworks@gmail.com, osandov@fb.com, tangyouling@kylinos.cn, 
+	sourabhjain@linux.ibm.com, ritesh.list@gmail.com, eajames@linux.ibm.com, 
+	songshuaishuai@tinylab.org, kevin.brodsky@arm.com, samuel.holland@sifive.com, 
+	vishal.moola@gmail.com, junhui.liu@pigmoral.tech, coxu@redhat.com, liaoyuanhong@vivo.com, 
+	fuqiang.wang@easystack.cn, x86@kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, loongarch@lists.linux.dev, 
+	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org, devicetree@vger.kernel.org, 
+	kexec@lists.infradead.org
+Subject: Re: [PATCH v9 4/5] arm64: kexec: Add support for crashkernel CMA
+ reservation
+Message-ID: <acETyW3FYaWCShUc@gmail.com>
+References: <20260323072745.2481719-1-ruanjinjie@huawei.com>
+ <20260323072745.2481719-5-ruanjinjie@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Thunderbird Daily
-Subject: Re: [PATCH v6 14/40] arm_mpam: resctrl: Add boilerplate cpuhp and
- domain allocation
-To: Gavin Shan <gshan@redhat.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
- baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
- dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
- fenghuay@nvidia.com, james.morse@arm.com, jonathan.cameron@huawei.com,
- kobak@nvidia.com, lcherian@marvell.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- peternewman@google.com, punit.agrawal@oss.qualcomm.com,
- quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
- scott@os.amperecomputing.com, sdonthineni@nvidia.com,
- tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
- will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
- joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- zengheng4@huawei.com, linux-doc@vger.kernel.org,
- Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-References: <20260313144617.3420416-1-ben.horgan@arm.com>
- <20260313144617.3420416-15-ben.horgan@arm.com>
- <98708bfe-7930-49d5-b383-42b7b2d6759d@redhat.com>
-Content-Language: en-US
-From: Ben Horgan <ben.horgan@arm.com>
-In-Reply-To: <98708bfe-7930-49d5-b383-42b7b2d6759d@redhat.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.35 / 15.00];
+In-Reply-To: <20260323072745.2481719-5-ruanjinjie@huawei.com>
+X-Debian-User: leitao
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
-	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	XM_UA_NO_VERSION(0.01)[];
-	TAGGED_FROM(0.00)[bounces-80639-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80641-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DMARC_NA(0.00)[debian.org];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,linux.alibaba.com,google.com,baidu.com,suse.cz,fb.com,kylinos.cn,tinylab.org,sifive.com,pigmoral.tech,vivo.com,easystack.cn,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[62];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ben.horgan@arm.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.694];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[fujitsu.com:email,qualcomm.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:email,arm.com:mid]
-X-Rspamd-Queue-Id: 8A4F82EFE59
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2DBCB2EFF3A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Gavin,
+On Mon, Mar 23, 2026 at 03:27:44PM +0800, Jinjie Ruan wrote:
+> Commit 35c18f2933c5 ("Add a new optional ",cma" suffix to the
+> crashkernel= command line option") and commit ab475510e042 ("kdump:
+> implement reserve_crashkernel_cma") added CMA support for kdump
+> crashkernel reservation.
+> 
+> Crash kernel memory reservation wastes production resources if too
+> large, risks kdump failure if too small, and faces allocation difficulties
+> on fragmented systems due to contiguous block constraints. The new
+> CMA-based crashkernel reservation scheme splits the "large fixed
+> reservation" into a "small fixed region + large CMA dynamic region": the
+> CMA memory is available to userspace during normal operation to avoid
+> waste, and is reclaimed for kdump upon crash—saving memory while
+> improving reliability.
+> 
+> So extend crashkernel CMA reservation support to arm64. The following
+> changes are made to enable CMA reservation:
+> 
+> - Parse and obtain the CMA reservation size along with other crashkernel
+>   parameters.
+> - Call reserve_crashkernel_cma() to allocate the CMA region for kdump.
+> - Include the CMA-reserved ranges for kdump kernel to use.
+> - Exclude the CMA-reserved ranges from the crash kernel memory to
+>   prevent them from being exported through /proc/vmcore, which is already
+>   done in the crash core.
+> 
+> Update kernel-parameters.txt to document CMA support for crashkernel on
+> arm64 architecture.
+> 
+> Acked-by: Rob Herring (Arm) <robh@kernel.org>
+> Acked-by: Baoquan He <bhe@redhat.com>
+> Acked-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+> Acked-by: Ard Biesheuvel <ardb@kernel.org>
+> Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
+> ---
+> v7:
+> - Correct the inclusion of CMA-reserved ranges for kdump
+>   kernel in of/kexec.
+> v3:
+> - Add Acked-by.
+> v2:
+> - Free cmem in prepare_elf_headers()
+> - Add the mtivation.
+> ---
+>  Documentation/admin-guide/kernel-parameters.txt | 2 +-
+>  arch/arm64/kernel/machine_kexec_file.c          | 2 +-
+>  arch/arm64/mm/init.c                            | 5 +++--
+>  drivers/of/fdt.c                                | 9 +++++----
+>  drivers/of/kexec.c                              | 9 +++++++++
+>  5 files changed, 19 insertions(+), 8 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index cb850e5290c2..afb3112510f7 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -1121,7 +1121,7 @@ Kernel parameters
+>  			It will be ignored when crashkernel=X,high is not used
+>  			or memory reserved is below 4G.
+>  	crashkernel=size[KMG],cma
+> -			[KNL, X86, ppc] Reserve additional crash kernel memory from
+> +			[KNL, X86, ARM64, PPC] Reserve additional crash kernel memory from
+>  			CMA. This reservation is usable by the first system's
+>  			userspace memory and kernel movable allocations (memory
+>  			balloon, zswap). Pages allocated from this memory range
+> diff --git a/arch/arm64/kernel/machine_kexec_file.c b/arch/arm64/kernel/machine_kexec_file.c
+> index c338506a580b..cc577d77df00 100644
+> --- a/arch/arm64/kernel/machine_kexec_file.c
+> +++ b/arch/arm64/kernel/machine_kexec_file.c
+> @@ -42,7 +42,7 @@ int arch_kimage_file_post_load_cleanup(struct kimage *image)
+>  #ifdef CONFIG_CRASH_DUMP
+>  unsigned int arch_get_system_nr_ranges(void)
+>  {
+> -	unsigned int nr_ranges = 2; /* for exclusion of crashkernel region */
+> +	unsigned int nr_ranges = 2 + crashk_cma_cnt; /* for exclusion of crashkernel region */
 
-On 3/23/26 06:31, Gavin Shan wrote:
-> Hi Ben,
-> 
-> On 3/14/26 12:45 AM, Ben Horgan wrote:
->> From: James Morse <james.morse@arm.com>
->>
->> resctrl has its own data structures to describe its resources. We can't use
->> these directly as we play tricks with the 'MBA' resource, picking the MPAM
->> controls or monitors that best apply. We may export the same component as
->> both L3 and MBA.
->>
->> Add mpam_resctrl_res[] as the array of class->resctrl mappings we are
->> exporting, and add the cpuhp hooks that allocated and free the resctrl
->> domain structures. Only the mpam control feature are considered here and
->> monitor support will be added later.
->>
->> While we're here, plumb in a few other obvious things.
->>
->> CONFIG_ARM_CPU_RESCTRL is used to allow this code to be built even though
->> it can't yet be linked against resctrl.
->>
->> Tested-by: Gavin Shan <gshan@redhat.com>
->> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
->> Tested-by: Peter Newman <peternewman@google.com>
->> Tested-by: Zeng Heng <zengheng4@huawei.com>
->> Tested-by: Punit Agrawal <punit.agrawal@oss.qualcomm.com>
->> Reviewed-by: Zeng Heng <zengheng4@huawei.com>
->> Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
->> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
->> Signed-off-by: James Morse <james.morse@arm.com>
->> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
->> ---
->> Changes since rfc:
->> Domain list is an rcu list
->> Add synchronize_rcu() to free the deleted element
->> Code flow simplification (Jonathan)
->>
->> Changes since v2:
->> Iterate over mpam_resctrl_dom directly (Jonathan)
->> Code flow clarification
->> Comment tidying
->> Remove power of 2 check as no longer creates holes in rmid indices
->> Remove unused type argument
->> add macro helper for_each_mpam_resctrl_control
->>
->> Changes since v3:
->> Add and use mpam_resctrl_online_domain_hdr()
->> mpam_resctrl_alloc_domain() error paths (Reinette)
->> rebase on x86/cache changes rdt_mon_domain becomes rdt_l3_mon_domain
->> etc
->>
->> Changes since v4:
->> Set rid in domain_hdr
->> Use rescctrl_res.alloc_capable to determine if alloc_capable as the
->> decision may depend on the resctrl mount options (cdp)
->> Squash in arm_mpam: resctrl: Sort the order of the domain lists
->> Move out monitor/counter changes to a separate patch
->> Commit message update
->>
->> Changes since v5:
->> Use r->alloc_capable when resource specific
->> Move offline_ctrl_domain label and cleanup to monitor boilerplate patch
->> ---
->>   drivers/resctrl/Makefile        |   1 +
->>   drivers/resctrl/mpam_devices.c  |  12 ++
->>   drivers/resctrl/mpam_internal.h |  21 +++
->>   drivers/resctrl/mpam_resctrl.c  | 324 ++++++++++++++++++++++++++++++++
->>   include/linux/arm_mpam.h        |   3 +
->>   5 files changed, 361 insertions(+)
->>   create mode 100644 drivers/resctrl/mpam_resctrl.c
->>
-> 
-> With the following two comments addressed. I don't think none of them are critical
-> given the fact that this series has been respinned to v6 and may be ready for Linux
-> v7.1. If there is still a chance for another respin, they may be worthy to be addressed.
+You update arch_get_system_nr_ranges() to account for CMA ranges, but
+prepare_elf_headers() in the same file (line 51) still has the
+hardcoded:
 
-Thanks for the review. Fingers crossed, we will make Linux v7.1.
+        nr_ranges = 2; /* for exclusion of crashkernel region */
 
-> 
-> Reviewed-by: Gavin Shan <gshan@redhat.com>
-> 
->> diff --git a/drivers/resctrl/Makefile b/drivers/resctrl/Makefile
->> index 898199dcf80d..40beaf999582 100644
->> --- a/drivers/resctrl/Makefile
->> +++ b/drivers/resctrl/Makefile
->> @@ -1,4 +1,5 @@
->>   obj-$(CONFIG_ARM64_MPAM_DRIVER)            += mpam.o
->>   mpam-y                        += mpam_devices.o
->> +mpam-$(CONFIG_ARM_CPU_RESCTRL)            += mpam_resctrl.o
->>     ccflags-$(CONFIG_ARM64_MPAM_DRIVER_DEBUG)    += -DDEBUG
->> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
->> index d50461d6ff3f..0e525539b7e2 100644
->> --- a/drivers/resctrl/mpam_devices.c
->> +++ b/drivers/resctrl/mpam_devices.c
->> @@ -1612,6 +1612,9 @@ static int mpam_cpu_online(unsigned int cpu)
->>               mpam_reprogram_msc(msc);
->>       }
->>   +    if (mpam_is_enabled())
->> +        return mpam_resctrl_online_cpu(cpu);
->> +
->>       return 0;
->>   }
->>   @@ -1655,6 +1658,9 @@ static int mpam_cpu_offline(unsigned int cpu)
->>   {
->>       struct mpam_msc *msc;
->>   +    if (mpam_is_enabled())
->> +        mpam_resctrl_offline_cpu(cpu);
->> +
->>       guard(srcu)(&mpam_srcu);
->>       list_for_each_entry_srcu(msc, &mpam_all_msc, all_msc_list,
->>                    srcu_read_lock_held(&mpam_srcu)) {
->> @@ -2500,6 +2506,12 @@ static void mpam_enable_once(void)
->>       mutex_unlock(&mpam_list_lock);
->>       cpus_read_unlock();
->>   +    if (!err) {
->> +        err = mpam_resctrl_setup();
->> +        if (err)
->> +            pr_err("Failed to initialise resctrl: %d\n", err);
->> +    }
->> +
->>       if (err) {
->>           mpam_disable_reason = "Failed to enable.";
->>           schedule_work(&mpam_broken_work);
->> diff --git a/drivers/resctrl/mpam_internal.h b/drivers/resctrl/mpam_internal.h
->> index 4632985bcca6..28ac501e1ac3 100644
->> --- a/drivers/resctrl/mpam_internal.h
->> +++ b/drivers/resctrl/mpam_internal.h
->> @@ -12,6 +12,7 @@
->>   #include <linux/jump_label.h>
->>   #include <linux/llist.h>
->>   #include <linux/mutex.h>
->> +#include <linux/resctrl.h>
->>   #include <linux/spinlock.h>
->>   #include <linux/srcu.h>
->>   #include <linux/types.h>
->> @@ -337,6 +338,16 @@ struct mpam_msc_ris {
->>       struct mpam_garbage    garbage;
->>   };
->>   +struct mpam_resctrl_dom {
->> +    struct mpam_component        *ctrl_comp;
->> +    struct rdt_ctrl_domain        resctrl_ctrl_dom;
->> +};
->> +
->> +struct mpam_resctrl_res {
->> +    struct mpam_class    *class;
->> +    struct rdt_resource    resctrl_res;
->> +};
->> +
->>   static inline int mpam_alloc_csu_mon(struct mpam_class *class)
->>   {
->>       struct mpam_props *cprops = &class->props;
->> @@ -391,6 +402,16 @@ void mpam_msmon_reset_mbwu(struct mpam_component *comp, struct mon_cfg *ctx);
->>   int mpam_get_cpumask_from_cache_id(unsigned long cache_id, u32 cache_level,
->>                      cpumask_t *affinity);
->>   +#ifdef CONFIG_RESCTRL_FS
->> +int mpam_resctrl_setup(void);
->> +int mpam_resctrl_online_cpu(unsigned int cpu);
->> +void mpam_resctrl_offline_cpu(unsigned int cpu);
->> +#else
->> +static inline int mpam_resctrl_setup(void) { return 0; }
->> +static inline int mpam_resctrl_online_cpu(unsigned int cpu) { return 0; }
->> +static inline void mpam_resctrl_offline_cpu(unsigned int cpu) { }
->> +#endif /* CONFIG_RESCTRL_FS */
->> +
->>   /*
->>    * MPAM MSCs have the following register layout. See:
->>    * Arm Memory System Resource Partitioning and Monitoring (MPAM) System
->> diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
->> new file mode 100644
->> index 000000000000..e698b534e3db
->> --- /dev/null
->> +++ b/drivers/resctrl/mpam_resctrl.c
->> @@ -0,0 +1,324 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +// Copyright (C) 2025 Arm Ltd.
->> +
->> +#define pr_fmt(fmt) "%s:%s: " fmt, KBUILD_MODNAME, __func__
->> +
->> +#include <linux/arm_mpam.h>
->> +#include <linux/cacheinfo.h>
->> +#include <linux/cpu.h>
->> +#include <linux/cpumask.h>
->> +#include <linux/errno.h>
->> +#include <linux/list.h>
->> +#include <linux/printk.h>
->> +#include <linux/rculist.h>
->> +#include <linux/resctrl.h>
->> +#include <linux/slab.h>
->> +#include <linux/types.h>
->> +
->> +#include <asm/mpam.h>
->> +
->> +#include "mpam_internal.h"
->> +
->> +/*
->> + * The classes we've picked to map to resctrl resources, wrapped
->> + * in with their resctrl structure.
->> + * Class pointer may be NULL.
->> + */
->> +static struct mpam_resctrl_res mpam_resctrl_controls[RDT_NUM_RESOURCES];
->> +
->> +#define for_each_mpam_resctrl_control(res, rid)                    \
->> +    for (rid = 0, res = &mpam_resctrl_controls[rid];            \
->> +         rid < RDT_NUM_RESOURCES;                        \
->> +         rid++, res = &mpam_resctrl_controls[rid])
->> +
->> +/* The lock for modifying resctrl's domain lists from cpuhp callbacks. */
->> +static DEFINE_MUTEX(domain_list_lock);
->> +
->> +bool resctrl_arch_alloc_capable(void)
->> +{
->> +    struct mpam_resctrl_res *res;
->> +    enum resctrl_res_level rid;
->> +
->> +    for_each_mpam_resctrl_control(res, rid) {
->> +        if (res->resctrl_res.alloc_capable)
->> +            return true;
->> +    }
->> +
->> +    return false;
->> +}
->> +
->> +/*
->> + * MSC may raise an error interrupt if it sees an out or range partid/pmg,
->> + * and go on to truncate the value. Regardless of what the hardware supports,
->> + * only the system wide safe value is safe to use.
->> + */
->> +u32 resctrl_arch_get_num_closid(struct rdt_resource *ignored)
->> +{
->> +    return mpam_partid_max + 1;
->> +}
->> +
->> +struct rdt_resource *resctrl_arch_get_resource(enum resctrl_res_level l)
->> +{
->> +    if (l >= RDT_NUM_RESOURCES)
->> +        return NULL;
->> +
->> +    return &mpam_resctrl_controls[l].resctrl_res;
->> +}
->> +
->> +static int mpam_resctrl_control_init(struct mpam_resctrl_res *res)
->> +{
->> +    /* TODO: initialise the resctrl resources */
->> +
->> +    return 0;
->> +}
->> +
->> +static int mpam_resctrl_pick_domain_id(int cpu, struct mpam_component *comp)
->> +{
->> +    struct mpam_class *class = comp->class;
->> +
->> +    if (class->type == MPAM_CLASS_CACHE)
->> +        return comp->comp_id;
->> +
->> +    /* TODO: repaint domain ids to match the L3 domain ids */
->> +    /* Otherwise, expose the ID used by the firmware table code. */
->> +    return comp->comp_id;
->> +}
->> +
->> +static void mpam_resctrl_domain_hdr_init(int cpu, struct mpam_component *comp,
->> +                     enum resctrl_res_level rid,
->> +                     struct rdt_domain_hdr *hdr)
->> +{
->> +    lockdep_assert_cpus_held();
->> +
->> +    INIT_LIST_HEAD(&hdr->list);
->> +    hdr->id = mpam_resctrl_pick_domain_id(cpu, comp);
->> +    hdr->rid = rid;
->> +    cpumask_set_cpu(cpu, &hdr->cpu_mask);
->> +}
->> +
->> +static void mpam_resctrl_online_domain_hdr(unsigned int cpu,
->> +                       struct rdt_domain_hdr *hdr)
->> +{
->> +    lockdep_assert_cpus_held();
->> +
->> +    cpumask_set_cpu(cpu, &hdr->cpu_mask);
->> +}
->> +
->> +/**
->> + * mpam_resctrl_offline_domain_hdr() - Update the domain header to remove a CPU.
->> + * @cpu:    The CPU to remove from the domain.
->> + * @hdr:    The domain's header.
->> + *
->> + * Removes @cpu from the header mask. If this was the last CPU in the domain,
->> + * the domain header is removed from its parent list and true is returned,
->> + * indicating the parent structure can be freed.
->> + * If there are other CPUs in the domain, returns false.
->> + */
->> +static bool mpam_resctrl_offline_domain_hdr(unsigned int cpu,
->> +                        struct rdt_domain_hdr *hdr)
->> +{
->> +    lockdep_assert_held(&domain_list_lock);
->> +
->> +    cpumask_clear_cpu(cpu, &hdr->cpu_mask);
->> +    if (cpumask_empty(&hdr->cpu_mask)) {
->> +        list_del_rcu(&hdr->list);
->> +        synchronize_rcu();
->> +        return true;
->> +    }
->> +
->> +    return false;
->> +}
->> +
->> +static void mpam_resctrl_domain_insert(struct list_head *list,
->> +                       struct rdt_domain_hdr *new)
->> +{
->> +    struct rdt_domain_hdr *err;
->> +    struct list_head *pos = NULL;
->> +
->> +    lockdep_assert_held(&domain_list_lock);
->> +
->> +    err = resctrl_find_domain(list, new->id, &pos);
->> +    if (WARN_ON_ONCE(err))
->> +        return;
->> +
->> +    list_add_tail_rcu(&new->list, pos);
->> +}
->> +
->> +static struct mpam_resctrl_dom *
->> +mpam_resctrl_alloc_domain(unsigned int cpu, struct mpam_resctrl_res *res)
->> +{
->> +    int err;
->> +    struct mpam_resctrl_dom *dom;
->> +    struct rdt_ctrl_domain *ctrl_d;
->> +    struct mpam_class *class = res->class;
->> +    struct mpam_component *comp_iter, *ctrl_comp;
->> +    struct rdt_resource *r = &res->resctrl_res;
->> +
->> +    lockdep_assert_held(&domain_list_lock);
->> +
->> +    ctrl_comp = NULL;
->> +    guard(srcu)(&mpam_srcu);
->> +    list_for_each_entry_srcu(comp_iter, &class->components, class_list,
->> +                 srcu_read_lock_held(&mpam_srcu)) {
->> +        if (cpumask_test_cpu(cpu, &comp_iter->affinity)) {
->> +            ctrl_comp = comp_iter;
->> +            break;
->> +        }
->> +    }
->> +
->> +    /* class has no component for this CPU */
->> +    if (WARN_ON_ONCE(!ctrl_comp))
->> +        return ERR_PTR(-EINVAL);
->> +
->> +    dom = kzalloc_node(sizeof(*dom), GFP_KERNEL, cpu_to_node(cpu));
->> +    if (!dom)
->> +        return ERR_PTR(-ENOMEM);
->> +
->> +    if (r->alloc_capable) {
->> +        dom->ctrl_comp = ctrl_comp;
->> +
->> +        ctrl_d = &dom->resctrl_ctrl_dom;
->> +        mpam_resctrl_domain_hdr_init(cpu, ctrl_comp, r->rid, &ctrl_d->hdr);
->> +        ctrl_d->hdr.type = RESCTRL_CTRL_DOMAIN;
->> +        err = resctrl_online_ctrl_domain(r, ctrl_d);
->> +        if (err)
->> +            goto free_domain;
->> +
->> +        mpam_resctrl_domain_insert(&r->ctrl_domains, &ctrl_d->hdr);
->> +    } else {
->> +        pr_debug("Skipped control domain online - no controls\n");
->> +    }
->> +    return dom;
->> +
-> 
-> Even though we will never support "r->alloc_capable == false", it's worthy to maintain
-> the consistence in the code level here, meaning @dom needs to be released with a proper
-> error number returned.
-> 
->     if (r->alloc_capable) {
->         :
->     } else {
->         pr_debug("Skipped control domain online - no controls\n");
->         err = -EINVAL;
->         goto free_domain;
->     }
-> 
-> Alternatively, the check can be done before locating the component from its calss.
-> 
->     
->     lockdep_assert_held(&domain_list_lock);
-> 
->     if (!r->alloc_capable) {
->         pr_debug("Skipped control domain online - no controls\n");
->         return ERR_PTR(-EINVAL);
->     }
-> 
->     ctrl_comp = NULL;
-
-Once monitor support is added later in the series this is no longer an
-error path as monitor only platforms are valid. In order to avoid adding
-a change and then reverting it later in the series I would like to keep
-this as it is.
-
-> 
->> +free_domain:
->> +    kfree(dom);
->> +    dom = ERR_PTR(err);
->> +
->> +    return dom;
->> +}
->> +
->> +static struct mpam_resctrl_dom *
->> +mpam_resctrl_get_domain_from_cpu(int cpu, struct mpam_resctrl_res *res)
->> +{
->> +    struct mpam_resctrl_dom *dom;
->> +    struct rdt_resource *r = &res->resctrl_res;
->> +
->> +    lockdep_assert_cpus_held();
->> +
->> +    list_for_each_entry_rcu(dom, &r->ctrl_domains, resctrl_ctrl_dom.hdr.list) {
->> +        if (cpumask_test_cpu(cpu, &dom->ctrl_comp->affinity))
->> +            return dom;
->> +    }
->> +
->> +    return NULL;
->> +}
->> +
->> +int mpam_resctrl_online_cpu(unsigned int cpu)
->> +{
->> +    struct mpam_resctrl_res *res;
->> +    enum resctrl_res_level rid;
->> +
->> +    guard(mutex)(&domain_list_lock);
->> +    for_each_mpam_resctrl_control(res, rid) {
->> +        struct mpam_resctrl_dom *dom;
->> +        struct rdt_resource *r = &res->resctrl_res;
->> +
->> +        if (!res->class)
->> +            continue;    // dummy_resource;
->> +
->> +        dom = mpam_resctrl_get_domain_from_cpu(cpu, res);
->> +        if (!dom) {
->> +            dom = mpam_resctrl_alloc_domain(cpu, res);
->> +        } else {
->> +            if (r->alloc_capable) {
->> +                struct rdt_ctrl_domain *ctrl_d = &dom->resctrl_ctrl_dom;
->> +
->> +                mpam_resctrl_online_domain_hdr(cpu, &ctrl_d->hdr);
->> +            }
->> +        }
->> +        if (IS_ERR(dom))
->> +            return PTR_ERR(dom);
->> +    }
->> +
-> 
-> I think the "if (IS_ERR(dom))" check can be moved after "dom = mpam_resctrl_alloc_domain(cpu, res)"
-> because it seems the only path where an erroneous domain can be returned.
-> 
->         dom = mpam_resctrl_get_domain_from_cpu(cpu, res);
->         if (!dom) {
->             dom = mpam_resctrl_alloc_domain(cpu, res);
->             if (IS_ERR(dom))
->                 return PTR_ERR(dom);
->         } else {
->             ...
->         }
-
-Yes, that would be clearer. I'll make this change if a respin becomes needed.
-
-> 
->> +    resctrl_online_cpu(cpu);
->> +
->> +    return 0;
->> +}
->> +
->> +void mpam_resctrl_offline_cpu(unsigned int cpu)
->> +{
->> +    struct mpam_resctrl_res *res;
->> +    enum resctrl_res_level rid;
->> +
->> +    resctrl_offline_cpu(cpu);
->> +
->> +    guard(mutex)(&domain_list_lock);
->> +    for_each_mpam_resctrl_control(res, rid) {
->> +        struct mpam_resctrl_dom *dom;
->> +        struct rdt_ctrl_domain *ctrl_d;
->> +        bool ctrl_dom_empty;
->> +        struct rdt_resource *r = &res->resctrl_res;
->> +
->> +        if (!res->class)
->> +            continue;    // dummy resource
->> +
->> +        dom = mpam_resctrl_get_domain_from_cpu(cpu, res);
->> +        if (WARN_ON_ONCE(!dom))
->> +            continue;
->> +
->> +        if (r->alloc_capable) {
->> +            ctrl_d = &dom->resctrl_ctrl_dom;
->> +            ctrl_dom_empty = mpam_resctrl_offline_domain_hdr(cpu, &ctrl_d->hdr);
->> +            if (ctrl_dom_empty)
->> +                resctrl_offline_ctrl_domain(&res->resctrl_res, ctrl_d);
->> +        } else {
->> +            ctrl_dom_empty = true;
->> +        }
->> +
->> +        if (ctrl_dom_empty)
->> +            kfree(dom);
->> +    }
->> +}
->> +
->> +int mpam_resctrl_setup(void)
->> +{
->> +    int err = 0;
->> +    struct mpam_resctrl_res *res;
->> +    enum resctrl_res_level rid;
->> +
->> +    cpus_read_lock();
->> +    for_each_mpam_resctrl_control(res, rid) {
->> +        INIT_LIST_HEAD_RCU(&res->resctrl_res.ctrl_domains);
->> +        res->resctrl_res.rid = rid;
->> +    }
->> +
->> +    /* TODO: pick MPAM classes to map to resctrl resources */
->> +
->> +    /* Initialise the resctrl structures from the classes */
->> +    for_each_mpam_resctrl_control(res, rid) {
->> +        if (!res->class)
->> +            continue;    // dummy resource
->> +
->> +        err = mpam_resctrl_control_init(res);
->> +        if (err) {
->> +            pr_debug("Failed to initialise rid %u\n", rid);
->> +            break;
->> +        }
->> +    }
->> +    cpus_read_unlock();
->> +
->> +    if (err) {
->> +        pr_debug("Internal error %d - resctrl not supported\n", err);
->> +        return err;
->> +    }
->> +
->> +    if (!resctrl_arch_alloc_capable()) {
->> +        pr_debug("No alloc(%u) found - resctrl not supported\n",
->> +             resctrl_arch_alloc_capable());
->> +        return -EOPNOTSUPP;
->> +    }
->> +
->> +    /* TODO: call resctrl_init() */
->> +
->> +    return 0;
->> +}
->> diff --git a/include/linux/arm_mpam.h b/include/linux/arm_mpam.h
->> index 7f00c5285a32..2c7d1413a401 100644
->> --- a/include/linux/arm_mpam.h
->> +++ b/include/linux/arm_mpam.h
->> @@ -49,6 +49,9 @@ static inline int mpam_ris_create(struct mpam_msc *msc, u8 ris_idx,
->>   }
->>   #endif
->>   +bool resctrl_arch_alloc_capable(void);
->> +bool resctrl_arch_mon_capable(void);
->> +
->>   /**
->>    * mpam_register_requestor() - Register a requestor with the MPAM driver
->>    * @partid_max:        The maximum PARTID value the requestor can generate.
-> 
-> Thanks,
-> Gavin
-> 
-
+and does not exclude CMA ranges from cmem. If the generic crash core
+handles CMA exclusion from vmcore, then shouldn't
+arch_get_system_nr_ranges() also not need this change?
 
