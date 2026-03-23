@@ -1,203 +1,135 @@
-Return-Path: <linux-doc+bounces-80607-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80609-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AP69ES7jwGkbOQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80607-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 07:52:30 +0100
+	id cFWUMi/lwGliOQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80609-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 08:01:03 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A22AF2ED2E6
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 07:52:29 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id B374B2ED35A
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 08:01:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 891EE300A109
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 06:52:19 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 909893008E1E
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 07:01:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 981F335BDB8;
-	Mon, 23 Mar 2026 06:52:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="V/nJVevj";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="OYReLEFM"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6DABA2D0C9C;
+	Mon, 23 Mar 2026 07:00:59 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from mailout3.hostsharing.net (mailout3.hostsharing.net [144.76.133.104])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BD2035BDAA
-	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 06:52:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 620DF29994B;
+	Mon, 23 Mar 2026 07:00:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=144.76.133.104
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774248738; cv=none; b=JEN9+CmhpUXRGCzWSSsrkNgjD04MPFN6UbpAzQheWDVzuCwbUmwPNxD2rawkF/SY9aizLGVKMgkSELZWvGcwZOPdndL6EulFz+d3Nb0Defp+rrnHH6xa6WsDQukgncsVSe+axsCdvwhPlPG6vSG9J6p8ls0izjTBFMjuuxJpK1E=
+	t=1774249259; cv=none; b=bmoWlFYdanXZYOE9Td1EQzC7X90m//PVcfKplSN/GqCj846R8z7LXO5ozpDxpqtk7mtouNHL41Dh45hqyXq1a3fqfPkSdsSWezBxsPc4yK/dgqpi9meMRzIICtVRoI1Oklte/or1r3p9tGMXiKKqPQLsvXVJgTnGkIyKmrEXbwA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774248738; c=relaxed/simple;
-	bh=Ho3xMrajWw9hSp68d8ltLv/+KIt5O6ifbl/4YdZnT48=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DZNrDWGryk9HwRwXZs3N7/lzBWMvR0GMeP6pisHbkbxdPiCzBmrb678k0MorA9ToEI0jwmvp1grKmio31t7RbWhAQAXExUd+LXMW8RbsTbsNVspRxR9Hy9VbuPhiFDb641gjUHNkQffdJdJaPeBnbgXaBOzF6qV3Gg7uXREOMi4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=V/nJVevj; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=OYReLEFM; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1774248736;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NKbSNz1bnQPVRgBTucbuG+mAtDWNAO0AjF15TWaqka0=;
-	b=V/nJVevjj0DjRhK5QX2jhgyM3dwptn26kG3yo2eeALJKzdaaknNAHEepA0RaZ95qqO9C2x
-	A5uBRHFknoOX1FZo2IIP7TjHKcdOLO7Nqj1zCbT5Edh8kuDHKa9CH/FMBia05Ba+4xUv5I
-	8xPhoicGPRgVDEN+qs1r9QzcfByo8gE=
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-114-CSOKfbCwMESYS5GkJWbu5w-1; Mon, 23 Mar 2026 02:52:15 -0400
-X-MC-Unique: CSOKfbCwMESYS5GkJWbu5w-1
-X-Mimecast-MFC-AGG-ID: CSOKfbCwMESYS5GkJWbu5w_1774248734
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-82a855dc82aso2472869b3a.2
-        for <linux-doc@vger.kernel.org>; Sun, 22 Mar 2026 23:52:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1774248734; x=1774853534; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=NKbSNz1bnQPVRgBTucbuG+mAtDWNAO0AjF15TWaqka0=;
-        b=OYReLEFMKvwg/gRED58Hel1g9LLmR9eA43eFYi1Ls1oUNnCtgoO5bFXvQa7iSfB3j0
-         AxNKDXPXcXKO/uc0GuxN0rNmrhn/BL70b4VzKRvWE7Qvq1s57upQgUecSt2JlLLXupOO
-         1QsfzJvtgoFzJWVsc0noorVWVaM18RSDTWA9xuhiMu3tlO4OY2ckAffVgtwVFgpwdThS
-         BSQLnO9n96tAOglmjhcQqDTzCJaNXkJrDt5s2fASZbeWkZhW/0FdAnRqFM+Nimmyz/lb
-         ylm8oroggJGdWFrMbP/mNEyWBTKoESY5d8XF50oqyycnu61py1JfgHIHK/xLP4c4qFj4
-         Cqeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774248734; x=1774853534;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NKbSNz1bnQPVRgBTucbuG+mAtDWNAO0AjF15TWaqka0=;
-        b=brd8RiF8celz+J93LzRxnUmakTa1RVZUvEpNiPx5InPmXB89WyZTs8rFaeU8Nae8iQ
-         IQShzijUKBbK31XBhdzyzbvtKVW1iJiAGKuxM0/o0GbPJXPFvwWH8ulPM9XtPrSj14fT
-         uTMz9S4Ei4UeCwvoNjjfiFfKgeB7Hrp+kQMo4Pif6O0KzhNuIfabuPnBsuB87UIwdRZc
-         N7WyaY4Zyn/AcdY6wWc/7AsjDN5DGXky8rxjlZdCVienu8j2+KvR4Qwxnt1sWDGptp1M
-         Po2HJstP6aynlOyhH6QobeSQrUMiJ36mTM59x8Ov12oL83F4vPHgo0W4yUY6UT+a+4ku
-         8fmA==
-X-Forwarded-Encrypted: i=1; AJvYcCVV1T/OLdu/8uD7ghFRqrPEpVhua0bcR3Xf5hpgGzQPzx0t8ZX5mXDPEpYGR539AdANydkrRVKTGSs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxpWmD1wAeHY77jNW5YM8ajtkckxb7iL0710jNs2De3NnOppfhw
-	xW9upGDcD2hRdN8t6Lo3UxRFeR/WAd36GIE0E0bLYQWoRaF4sPLdLuQQGZjX0JBtn7EVJ70v85S
-	tGVByGsxOzvkoAqGh8n4vmDC/azMHKvf4H0EmPWbhNlaRy6SLt3KmoStIN3wSxy3C/vz1qQ==
-X-Gm-Gg: ATEYQzwEQUt0MeNds1IYICjg3JU/dh3N+UuHCejMIT8sUPjkEvO1FN94oBFgh1jyBuG
-	nCTG9YSNPgQbWqZPnOTeD6XiOncEHkhRC2J4rdWHQ/owietZ8a+kB6Iiq+DxzjVOy0dnFq5sSLM
-	2x/zTNIpD8JZ+WX4r7aofyv4IdspgkvuemmysXPp3j8xW3S6oyyFYS9MbHMoj45GpcYfjaEW1iG
-	JGbZMDDj2ow8m0mt5gIaJ4r7CoCWb69iBu4sP93mtzQV2a98k8r0FuAa57Y4jGQULIhURJw/uko
-	AwR9/hhKn8S7X/yyT05DUDa62gJoz1qYkCFf1es5uRFkLTC5/xliqXsBWMw4JOqsJ/QjactVmV8
-	pWpFdc8jck2xkA+JnpBcWbDoMkbaLS8ObLALw67rYSY/RMatUVeFdthmhWBD2p0+z
-X-Received: by 2002:a05:6a00:23d6:b0:82a:14aa:795f with SMTP id d2e1a72fcca58-82a8c35da6amr9132173b3a.35.1774248733795;
-        Sun, 22 Mar 2026 23:52:13 -0700 (PDT)
-X-Received: by 2002:a05:6a00:23d6:b0:82a:14aa:795f with SMTP id d2e1a72fcca58-82a8c35da6amr9132130b3a.35.1774248733349;
-        Sun, 22 Mar 2026 23:52:13 -0700 (PDT)
-Received: from [192.168.68.51] (n175-34-8-244.mrk21.qld.optusnet.com.au. [175.34.8.244])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82b03bbebbfsm9997455b3a.18.2026.03.22.23.51.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 22 Mar 2026 23:52:12 -0700 (PDT)
-Message-ID: <98e46fa1-8e33-4288-9894-e1756da113e2@redhat.com>
-Date: Mon, 23 Mar 2026 16:51:56 +1000
+	s=arc-20240116; t=1774249259; c=relaxed/simple;
+	bh=YH4DWVWEgztyUuYoCeNMjlqf6GO+QsfbVOkNkAB2JWY=;
+	h=Message-Id:From:Date:Subject:To:Cc; b=J5GcQ3ZEGSKJE/FCrJW+2mFQvMvqtnQHHUYZqqDyi8rKuiTO7B0sKdUab3YEvVFsgt7tiytOR8qsd9aHRF6pNg4uQ+rVYmyDe3hoNBnvIUGP9+FBUtnV421Xstz0639OJ7KOJaLBQPYSO4aagbiHaef2FSdgZ2pWNfHLIzGzl24=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=wunner.de; spf=pass smtp.mailfrom=wunner.de; arc=none smtp.client-ip=144.76.133.104
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=wunner.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wunner.de
+Received: from h08.hostsharing.net (h08.hostsharing.net [83.223.95.28])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature ECDSA (secp384r1) server-digest SHA384
+	 client-signature ECDSA (secp384r1) client-digest SHA384)
+	(Client CN "*.hostsharing.net", Issuer "GlobalSign GCC R6 AlphaSSL CA 2025" (verified OK))
+	by mailout3.hostsharing.net (Postfix) with ESMTPS id 364E7C23;
+	Mon, 23 Mar 2026 07:53:12 +0100 (CET)
+Received: by h08.hostsharing.net (Postfix, from userid 100393)
+	id 037C96020F68; Mon, 23 Mar 2026 07:53:11 +0100 (CET)
+Message-Id: <bf826c41b4c1d255c7dcb16e266b52f774d944ed.1774246067.git.lukas@wunner.de>
+From: Lukas Wunner <lukas@wunner.de>
+Date: Mon, 23 Mar 2026 07:52:39 +0100
+Subject: [PATCH] Documentation: PCI: Document decoding of TLP Header in AER
+ messages
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, linux-pci@vger.kernel.org, linux-doc@vger.kernel.org, Mika Westerberg <mika.westerberg@linux.intel.com>, Ilpo Jarvinen <ilpo.jarvinen@linux.intel.com>, Maciej Grochowski <mx2pg@pm.me>, Kai-Heng Feng <kaihengf@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 18/40] arm_mpam: resctrl: Implement helpers to update
- configuration
-To: Ben Horgan <ben.horgan@arm.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
- baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
- dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
- fenghuay@nvidia.com, james.morse@arm.com, jonathan.cameron@huawei.com,
- kobak@nvidia.com, lcherian@marvell.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- peternewman@google.com, punit.agrawal@oss.qualcomm.com,
- quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
- scott@os.amperecomputing.com, sdonthineni@nvidia.com,
- tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
- will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
- joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- zengheng4@huawei.com, linux-doc@vger.kernel.org,
- Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-References: <20260313144617.3420416-1-ben.horgan@arm.com>
- <20260313144617.3420416-19-ben.horgan@arm.com>
-Content-Language: en-US
-From: Gavin Shan <gshan@redhat.com>
-In-Reply-To: <20260313144617.3420416-19-ben.horgan@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	TAGGED_FROM(0.00)[bounces-80607-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gshan@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_FROM(0.00)[bounces-80609-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[wunner.de: no valid DMARC record];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[lukas@wunner.de,linux-doc@vger.kernel.org];
+	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,qualcomm.com:email,fujitsu.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,arm.com:email]
-X-Rspamd-Queue-Id: A22AF2ED2E6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[pm.me:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,wunner.de:email,wunner.de:mid]
+X-Rspamd-Queue-Id: B374B2ED35A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/14/26 12:45 AM, Ben Horgan wrote:
-> From: James Morse <james.morse@arm.com>
-> 
-> resctrl has two helpers for updating the configuration.
-> resctrl_arch_update_one() updates a single value, and is used by the
-> software-controller to apply feedback to the bandwidth controls, it has to
-> be called on one of the CPUs in the resctrl:domain.
-> 
-> resctrl_arch_update_domains() copies multiple staged configurations, it can
-> be called from anywhere.
-> 
-> Both helpers should update any changes to the underlying hardware.
-> 
-> Implement resctrl_arch_update_domains() to use
-> resctrl_arch_update_one(). Neither need to be called on a specific CPU as
-> the mpam driver will send IPIs as needed.
-> 
-> Tested-by: Gavin Shan <gshan@redhat.com>
-> Tested-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-> Tested-by: Peter Newman <peternewman@google.com>
-> Tested-by: Zeng Heng <zengheng4@huawei.com>
-> Tested-by: Punit Agrawal <punit.agrawal@oss.qualcomm.com>
-> Reviewed-by: Zeng Heng <zengheng4@huawei.com>
-> Reviewed-by: Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-> Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> Signed-off-by: James Morse <james.morse@arm.com>
-> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
-> ---
-> Changes since rfc:
-> list_for_each_entry -> list_for_each_entry_rcu
-> return 0
-> Restrict scope of local variables
-> 
-> Changes since v2:
-> whitespace fix
-> ---
->   drivers/resctrl/mpam_resctrl.c | 70 ++++++++++++++++++++++++++++++++++
->   1 file changed, 70 insertions(+)
-> 
-Reviewed-by: Gavin Shan <gshan@redhat.com>
+The prefix/header of the TLP that caused an error is recorded by the Root
+Complex and emitted to the kernel log in raw hex format.  Document the
+existence and usage of tlp-tool, which allows decoding the TLP Header
+into human-readable form.
+
+The TLP Header hints at the root cause of an error, yet is often ignored
+because of its seeming opaqueness.  Instead, PCIe errors are frequently
+worked around by a change in the kernel without fully understanding the
+actual source of the problem.  With more documentation on available tools
+we'll hopefully come up with better solutions.
+
+There are also wireshark dissectors for TLPs, but it seems they expect a
+complete TLP, not just the header, and they cannot grok the hex format
+emitted by the kernel directly.  tlp-tool appears to be the most cut and
+dried solution out there.
+
+Signed-off-by: Lukas Wunner <lukas@wunner.de>
+Cc: Maciej Grochowski <mx2pg@pm.me>
+---
+We could also go one step further and point users to this tool
+in a printk_once() message when the first error occurs.
+For now, just amending the documentation is probably sufficient.
+
+ Documentation/PCI/pcieaer-howto.rst | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/Documentation/PCI/pcieaer-howto.rst b/Documentation/PCI/pcieaer-howto.rst
+index 3210c47..90fdfdd 100644
+--- a/Documentation/PCI/pcieaer-howto.rst
++++ b/Documentation/PCI/pcieaer-howto.rst
+@@ -85,6 +85,16 @@ In the example, 'Requester ID' means the ID of the device that sent
+ the error message to the Root Port. Please refer to PCIe specs for other
+ fields.
+ 
++The 'TLP Header' is the prefix/header of the TLP that caused the error
++in raw hex format. To decode the TLP Header into human-readable form
++one may use tlp-tool:
++
++https://github.com/mmpg-x86/tlp-tool
++
++Example usage::
++
++  curl -L https://git.kernel.org/linus/2ca1c94ce0b6 | rtlp-tool --aer
++
+ AER Ratelimits
+ --------------
+ 
+-- 
+2.51.0
 
 
