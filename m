@@ -1,119 +1,122 @@
-Return-Path: <linux-doc+bounces-80792-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80793-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CEl0IfjEwWlTWQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80792-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 23:55:52 +0100
+	id ONXrEB/FwWlTWQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80793-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 23:56:31 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF8682FEA0A
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 23:55:51 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id A19692FEA30
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 23:56:30 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D565430B26FB
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 22:50:53 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 78DA730C6A46
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 22:51:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 289B33815F5;
-	Mon, 23 Mar 2026 22:50:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCD22384220;
+	Mon, 23 Mar 2026 22:50:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="nZ/vT2g1"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="no2U1SRC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com [136.143.188.12])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D77BA37F729;
-	Mon, 23 Mar 2026 22:50:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.12
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774306253; cv=pass; b=mzWKT35iNfaiGwf+CIie0ZSgQGS+EW6EHY3B96i0IRRRnVsEDwFzRizTEBfJon3aa2d5AFtPnySSXkUVE/rCOMOSjeiiDzZ6Y57LijbAf7tYAo46BEBBoIJRKCmGVJKKcfDOO5OEuirFNd0Ki78R4s6Zu7n6kRbJXi2FjMc63RY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774306253; c=relaxed/simple;
-	bh=QPlH5NfaWEm1Q32kGhYBI4nIzXMK/xT50KtgA8uaapQ=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:From:To:Subject:
-	 References:In-Reply-To; b=qJLSpHgcxdGOTydwacDJnAHdCm9YsREBvO4nwDLFNjtzMvBhHKVZpA4+9qLpKmjxespTFPCbhpfWIXGyRhUNs98dPnBbUFOHPYxExz3AibrlRBUoVlISEhvLfxSXg9yTBTHFEgs9kcici2w6nYGvaSHRViBAjYfITbvgisPkdX4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=nZ/vT2g1; arc=pass smtp.client-ip=136.143.188.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ritovision.com
-ARC-Seal: i=1; a=rsa-sha256; t=1774306238; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=U/951eOZoJpdozV83eExAwaKS7yPu3z6jBGV42vtWaCe4RIsbIaoLWDDuf/HtFcMr3UDB68rPmx/vFIL4X7LPaTGrLXGqGt2sSixu8lsbmUhhuXSizauUaXdJLVmWrVv8vjQfIqKPC1Psc8YcrFULxrS40IkDHVncqzYVHu8DD4=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1774306238; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=QPlH5NfaWEm1Q32kGhYBI4nIzXMK/xT50KtgA8uaapQ=; 
-	b=TFCrzinAmI623IWF7Np6Gz+FmM0o131hGyN5GNypqseCaGXSBVVntkVPa/M5zUt3SY5DFjer9RCWV8qIShJHr7RyIndPWcOSWHiLhMapMvrdsv9oSyeFwxZxUGMM2st7k/qcZ7UdELpLWZkIpzhaXaZjyA7O0+xAz8qHx+I+VxQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=ritovision.com;
-	spf=pass  smtp.mailfrom=rito@ritovision.com;
-	dmarc=pass header.from=<rito@ritovision.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774306238;
-	s=zmail; d=ritovision.com; i=rito@ritovision.com;
-	h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Cc:Cc:From:From:To:To:Subject:Subject:References:In-Reply-To:Reply-To;
-	bh=QPlH5NfaWEm1Q32kGhYBI4nIzXMK/xT50KtgA8uaapQ=;
-	b=nZ/vT2g1v4qP1WORul/E47/ND6q0osUG4cEE/IZicPeQHyV1VLctdULMIT513QpW
-	HQpFJcJ0xzeREbrmCDxTRo8+lO4HpMfGm/Y2jYvdmvY1NT+OYOEMyEq9rD9P4WzqeYA
-	Kxi9w4BKWp+XgR7LPttD+G0pRhksQot1FArfq0Q8=
-Received: by mx.zohomail.com with SMTPS id 1774306236496477.96514634513846;
-	Mon, 23 Mar 2026 15:50:36 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8B1F383C7F;
+	Mon, 23 Mar 2026 22:50:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774306259; cv=none; b=cTVBQbXUTBwqxpQfL8gDRMdPCQZ40MPEkk8D/L7pACOFxFWGl2TqXCvGCuUVAhSxwpoRwtKXxKwHmCzoAAttieCV9g4FCVYbJhb+R1m/tooKs6WUZZmdushmFXCHxzcxJ+M5lELa3OhyL9vmt/x7S+fWMh5vc6wy3CmqDloTs+4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774306259; c=relaxed/simple;
+	bh=iM8xi+g7eJ2LFfiOb87u1NfLeTFkw/SR9m4C+FJUB4E=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=cYDrVjS+RAMkdJLYWeX2oOCsz1P5fERSHxjjzA9JX4ECkHipWp4k/9iyc/F/jKt19sGnT1Ac0IIMHHPBRGnlt7gSbUN1XGfV/Le6bHy+ysaWkRTVFDOvQl7CIKUKCxwqsQQw+nfL61nK3QFhZgyJFSKWuK/6JyQQirlmOaSm9ik=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=no2U1SRC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 50F7FC2BCB6;
+	Mon, 23 Mar 2026 22:50:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
+	s=korg; t=1774306259;
+	bh=iM8xi+g7eJ2LFfiOb87u1NfLeTFkw/SR9m4C+FJUB4E=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=no2U1SRCbCx+YwOea+jmKOmJACmet5hnyb2IKo4hHES+gDnQsL9Mqe5fn1AYbROPB
+	 6xce46J5W3z7K7k+XhCtnsd3zXSpWWfNLKnhyZM7RnDsE3pHkfUZlslfXZa8qrzC3F
+	 /m1O+7ZTV5VkLQzEFIRjwi1qIrhRLH1r3C2x/4lg=
+Date: Mon, 23 Mar 2026 15:50:57 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Sasha Levin <sashal@kernel.org>
+Cc: Masahiro Yamada <masahiroy@kernel.org>, Nathan Chancellor
+ <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, Thomas Gleixner
+ <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
+ <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin"
+ <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf
+ <jpoimboe@kernel.org>, Petr Mladek <pmladek@suse.com>, Alexei Starovoitov
+ <ast@kernel.org>, Jonathan Corbet <corbet@lwn.net>, David Gow
+ <davidgow@google.com>, Kees Cook <kees@kernel.org>, Greg KH
+ <gregkh@linuxfoundation.org>, Luis Chamberlain <mcgrof@kernel.org>, Steven
+ Rostedt <rostedt@goodmis.org>, Helge Deller <deller@gmx.de>, Randy Dunlap
+ <rdunlap@infradead.org>, Geert Uytterhoeven <geert@linux-m68k.org>, Juergen
+ Gross <jgross@suse.com>, James Bottomley
+ <James.Bottomley@HansenPartnership.com>, Alexey Dobriyan
+ <adobriyan@gmail.com>, Vlastimil Babka <vbabka@kernel.org>, Laurent
+ Pinchart <laurent.pinchart@ideasonboard.com>, Petr Pavlu
+ <petr.pavlu@suse.com>, x86@kernel.org, linux-kernel@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-modules@vger.kernel.org, bpf@vger.kernel.org
+Subject: Re: [PATCH 0/2] kallsyms: show typed function parameters in
+ oops/WARN dumps
+Message-Id: <20260323155057.29b8e17d10421962d5ed798d@linux-foundation.org>
+In-Reply-To: <20260323164858.1939248-1-sashal@kernel.org>
+References: <20260323164858.1939248-1-sashal@kernel.org>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 23 Mar 2026 18:50:34 -0400
-Message-Id: <DHAJ2FE2Z4OL.ZUA8AQEMPC01@ritovision.com>
-Cc: "Shuah Khan" <skhan@linuxfoundation.org>, <linux-kernel@vger.kernel.org>
-From: "Rito Rhymes" <rito@ritovision.com>
-To: "Randy Dunlap" <rdunlap@infradead.org>, "Rito Rhymes"
- <rito@ritovision.com>, "Jonathan Corbet" <corbet@lwn.net>, "Mauro Carvalho
- Chehab" <mchehab@kernel.org>, <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH] docs: add advanced search for kernel documentation
-X-Mailer: aerc 0.21.0
-References: <20260321181511.11706-1-rito@ritovision.com>
- <621b43a5-256b-4a82-b179-3cefe43d419f@infradead.org>
- <DH8UC6DVQE4P.13E9XDIRGJ645@ritovision.com>
- <6cbf9940-0146-4b4d-bf74-4142b18602df@infradead.org>
- <DH8WUB5VFIDH.B2WQGIM3163@ritovision.com>
- <4620a35c-5293-4973-aa71-49046fae9911@infradead.org>
-In-Reply-To: <4620a35c-5293-4973-aa71-49046fae9911@infradead.org>
-X-ZohoMailClient: External
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[ritovision.com,reject];
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[ritovision.com:s=zmail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80792-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[ritovision.com:+];
+	TAGGED_FROM(0.00)[bounces-80793-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[linux-foundation.org];
+	RCPT_COUNT_TWELVE(0.00)[34];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,infradead.org,suse.com,lwn.net,google.com,linuxfoundation.org,goodmis.org,gmx.de,linux-m68k.org,HansenPartnership.com,gmail.com,ideasonboard.com,vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rito@ritovision.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ritovision.com:dkim,ritovision.com:mid]
-X-Rspamd-Queue-Id: DF8682FEA0A
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-foundation.org:dkim,linux-foundation.org:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A19692FEA30
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-I believe I identified the issue as a Sphinx version compatibility
-problem.
+On Mon, 23 Mar 2026 12:48:55 -0400 Sasha Levin <sashal@kernel.org> wrote:
 
-I've been working on a more robust reroll. I expect to have it by
-tomorrow, and we can test it when you're ready.
+> Building on the lineinfo series, this adds typed function parameter
+> display to oops and WARN dumps.  A build-time tool extracts parameter
+> names and types from DWARF, and the kernel maps pt_regs to the calling
+> convention at crash time.  When BTF is available, struct pointer
+> parameters are dereferenced and their members displayed.
 
-Rito
+mm.git is full and I'm seriously looking at loadshedded.  Can we please
+leave this until next cycle, give your "kallsyms: embed source file:line
+info in kernel stack traces", v4 time to settle in?
 
