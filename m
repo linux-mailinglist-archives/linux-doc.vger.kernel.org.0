@@ -1,181 +1,146 @@
-Return-Path: <linux-doc+bounces-80636-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80619-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CJ4XAf0MwWngQAQAu9opvQ
-	(envelope-from <linux-doc+bounces-80636-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:50:53 +0100
+	id 0B2zJ4P/wGmiPQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80619-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:53:23 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87A6B2EF5C5
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:50:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E72B62EE7D9
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:53:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 012CE3034DE0
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:45:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id F069830057BB
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 08:45:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51E2538759B;
-	Mon, 23 Mar 2026 09:45:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBBF936E484;
+	Mon, 23 Mar 2026 08:45:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="QAUx54Ei"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MqZJJ+jE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10B2F383C7C;
-	Mon, 23 Mar 2026 09:45:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=222.228.43.154
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774259113; cv=pass; b=FkkZUSbRAa1F8A6WEAdwSn/aFcXdi4fvZuIkbJOpKjwT7fd0ELHaSvbSaWCPN0qL0s4owvUxOj4GgJ70R4NeJOoZAc3ja3J3onjvdbnXI4Lo14OZT7r9L6Hg/5bL5BhYIzUejrjGiipzJIsgvBbBKloKFwmHU/hD+tmG5OK1Vz8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774259113; c=relaxed/simple;
-	bh=fZRPkFJ1u5VLlOxU1eIHcOghRkxbrh3ZR0ApR1KxIB0=;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:Content-Type; b=peRs0TNClRL9zoLi+tP4PZsB5E5QCs/TAipHdJbhLje+nhEFdA+o4SDCGfW5vJaSaGsecegt6LMVBczQxKIcCmGJfP03hjTJkwG637aLjOsGgbgp8aWZ3+tQ6mxj8zwR5Lprm9lMTJCzupAF5olTC/JxHDU/5PCt8CP7KbnYYlQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=QAUx54Ei; arc=pass smtp.client-ip=222.228.43.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
-Received: from localhost (localhost [127.0.0.1])
-	by www.redadmin.org (Postfix) with ESMTP id D0884109E68B4;
-	Mon, 23 Mar 2026 17:29:24 +0900 (JST)
-X-Virus-Scanned: amavis at redadmin.org
-Received: from www.redadmin.org ([127.0.0.1])
- by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id w0BqFK1_7g8g; Mon, 23 Mar 2026 17:29:21 +0900 (JST)
-Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
-DMARC-Filter: OpenDMARC Filter v1.4.2 www.redadmin.org 48847109EFAD6
-ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
-	t=1774254561;
-	b=JmgXQz3qN5MPaEJmc0n48LDtV8JgGvrFR6+9MBqei/HQoaJv7VHv3kCG1ftZcDIt3pb2
-	 zZDsJ2Xh0QyimXM2rLoGt7Wj+EjXCRISxfTeCppnhHB2TO2c+GjteILCpR4bUvq43OJgh
-	 lu3M3VSzLMnEOk2XcVnjm4UmYTscXUM5uU=
-ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
-	c=relaxed/relaxed; t=1774254561;
-	h=DKIM-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
-	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=SzsfmQb9+IK/bBsH4J6q8HEBVce2MtXYfcy9oDqgTEY=;
-	b=d/AfkNXlwPLzwtp6l3MIJA6w1tJL7DBw2VSCrzHNucDEs0G5Sthr1TOMwlIAtuOaUF/q
-	 dR/mNF+M4RFYt30raAw/9tZsaf37pLyPao1AFr4XPJkPs7L2nxSO+9QSmedOvIzm7K7Rm
-	 4QQtfvalcTHmfedZVLfbqpr2BgAFk6ZP3c=
-ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=192.168.11.50
-Received: from webmail.redadmin.org (redadmin.org [192.168.11.50])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
-	(Client did not present a certificate)
-	(Authenticated sender: weibu@redadmin.org)
-	by www.redadmin.org (Postfix) with ESMTPSA id 48847109EFAD6;
-	Mon, 23 Mar 2026 17:29:21 +0900 (JST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org 48847109EFAD6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
-	s=20231208space; t=1774254561;
-	bh=SzsfmQb9+IK/bBsH4J6q8HEBVce2MtXYfcy9oDqgTEY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=QAUx54EiekKD60EIRYRrRCxjo+2+EJDiq9QaNPN2JCSimQfhYk1PICZIXbV5AOdLD
-	 T4rKPABsGQJUr4UFi1wqs150s3W5oWQbTMJmXyRo/dZZa4BtKdAGPAqgdaPNaUvFDX
-	 MRmBLvPJDjSsPl6cansmP98X0k1+WFyk3Vrlj0w4=
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96E143009F6;
+	Mon, 23 Mar 2026 08:45:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774255548; cv=none; b=tXUUx6RN4sjWoJwk7F3z/84GxYxSFo0lLKGiRjVbf4VWcUNVvxvAOIv15bILKHXwqieXYFFV1fyOd1rQommX0tZ1oZC8GcohrOIoLxNP87Ssk4EBQnWPoG2d4m+sDP4za4iJZDKQY4YKvfehUPzrBw+/3GV7sHOiAgUuJrIqCg8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774255548; c=relaxed/simple;
+	bh=IZrg3073YvRn5Dp2yAL/QnRBIbaZV1wKQhSYGwFdg0w=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:From:To:
+	 References:In-Reply-To; b=gth8udZDLHCvSGfJESuawaTUWN4tC+UgNowfrYH0ckl1ekusjrK1ucdVUtKBBt/4gXXAhc7lfcwGMr6EZdrvRXhtkGEglwMwHa77OQbGzOvZYZIVEbUDXaF1ZAgWbmfledIpwAd/2qZKPry/ONF07KNJ/BQ0YSjcrHsuG6zZw0c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MqZJJ+jE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE996C4CEF7;
+	Mon, 23 Mar 2026 08:45:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774255548;
+	bh=IZrg3073YvRn5Dp2yAL/QnRBIbaZV1wKQhSYGwFdg0w=;
+	h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
+	b=MqZJJ+jEXv66rnW751yqXlW9hMqAGiXOgu5FRwFFx4ERxXcucMsrpn0wmuKJyfre/
+	 z0b2cJa57c4a6Pzy04GpXyRidWJ14kWnKCMRi3eeULZh/K087FrQ0KiP/6lcPknEGs
+	 bjtsxeanA+J5BKE+ZiRQf+wqwO+vFnjITVtnOxoRUQjMDf3IUln1PWB+DJ2vtIiPFc
+	 9VcUX83Ma/9wRdW0/nn2KvTkgW4sQrC6fQR3RDYbnpG9qXCIPoI7NgcxKtqyxs9KqJ
+	 njgU6s/2VapcsTCeQmQ/TjhQZDWpDW+ks0UZn01j5x3HfuNems7N6rLOvemIejM8D6
+	 ur2+jgFfIaHLg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Date: Mon, 23 Mar 2026 17:29:21 +0900
-From: weibu@redadmin.org
-To: Akira Yokosawa <akiyks@gmail.com>
-Cc: corbet@lwn.net, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] docs: ja_JP: process: translate second half of 'Describe
- your changes'
-In-Reply-To: <68e16682-aba3-4e10-8776-1c04c55b7ddc@gmail.com>
-References: <20260309105015.309116-1-weibu@redadmin.org>
- <68e16682-aba3-4e10-8776-1c04c55b7ddc@gmail.com>
-Message-ID: <ab5ea24af2b342e119d13db0447a4987@redadmin.org>
-X-Sender: weibu@redadmin.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[redadmin.org,none];
-	R_DKIM_ALLOW(-0.20)[redadmin.org:s=20231208space];
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=bd4a73f9dd4d15328054ccc0b5312fbbd2fc1c943838d1efe8c042901083;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Mon, 23 Mar 2026 09:45:37 +0100
+Message-Id: <DHA13HM1GIJW.1E7XCMY349JX7@kernel.org>
+Subject: Re: [PATCH v2 6/7] dt-bindings: watchdog: Drop SMARC-sAM67 support
+Cc: <linux-arm-kernel@lists.infradead.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-hwmon@vger.kernel.org>,
+ <linux-watchdog@vger.kernel.org>, <linux-doc@vger.kernel.org>, "Conor
+ Dooley" <conor.dooley@microchip.com>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Guenter Roeck" <linux@roeck-us.net>, "Nishanth Menon" <nm@ti.com>,
+ "Vignesh Raghavendra" <vigneshr@ti.com>, "Tero Kristo" <kristo@kernel.org>,
+ "Rob Herring" <robh@kernel.org>, "Krzysztof Kozlowski"
+ <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>, "Srinivas
+ Kandagatla" <srini@kernel.org>, "Wim Van Sebroeck"
+ <wim@linux-watchdog.org>, "Jonathan Corbet" <corbet@lwn.net>, "Shuah Khan"
+ <skhan@linuxfoundation.org>
+X-Mailer: aerc 0.20.0
+References: <20260302122540.1377444-1-mwalle@kernel.org>
+ <20260302122540.1377444-7-mwalle@kernel.org>
+ <f124b200-09e3-4e73-a100-f47007732e8f@roeck-us.net>
+In-Reply-To: <f124b200-09e3-4e73-a100-f47007732e8f@roeck-us.net>
+X-Spamd-Result: default: False [-2.26 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-80636-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80619-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[redadmin.org:+];
-	FROM_NO_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,redadmin.org:dkim,redadmin.org:email,redadmin.org:mid]
-X-Rspamd-Queue-Id: 87A6B2EF5C5
+	MID_RHS_MATCH_FROM(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mwalle@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,roeck-us.net:email,microchip.com:email]
+X-Rspamd-Queue-Id: E72B62EE7D9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Akira-san,
+--bd4a73f9dd4d15328054ccc0b5312fbbd2fc1c943838d1efe8c042901083
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Thank you very much for your review and for your kind message.
+Hi,
 
-I appreciate your taking the time to look at the patch.
-Thank you also for letting me know about the minor translation issues.
+On Mon Mar 2, 2026 at 4:01 PM CET, Guenter Roeck wrote:
+> On 3/2/26 04:24, Michael Walle wrote:
+>> I was just informed that this product is discontinued (without being
+>> ever released to the market). Pull the plug and let's not waste any more
+>> maintainers time and revert commit 354f31e9d2a3 ("dt-bindings: watchdog:
+>> Add SMARC-sAM67 support").
+>>=20
+>> Acked-by: Conor Dooley <conor.dooley@microchip.com>
+>> Signed-off-by: Michael Walle <mwalle@kernel.org>
+>
+> Reviewed-by: Guenter Roeck <linux@roeck-us.net>
 
-If you are willing to prepare a follow-up patch, I would greatly 
-appreciate it.
-I am also glad that the reason for the line wrapping makes sense.
+Everything expect this patch was picked up. Guenter, do you want to
+take it, or should it go through the TI SoC queue?
 
-Thank you again for your help and support.
+Thanks,
+-michael
 
-Best regards,
-Akiyoshi Kurita
+--bd4a73f9dd4d15328054ccc0b5312fbbd2fc1c943838d1efe8c042901083
+Content-Type: application/pgp-signature; name="signature.asc"
 
-2026-03-23 17:11 に Akira Yokosawa さんは書きました:
-> Hi,
-> 
-> Sorry for the late response.
-> 
-> On Mon,  9 Mar 2026 19:50:15 +0900, Akiyoshi Kurita wrote:
->> Translate the remaining part of the "Describe your changes" section in
->> Documentation/translations/ja_JP/process/submitting-patches.rst.
->> 
->> Follow review comments on wording and line wrapping, and cover 
->> guidance
->> on self-contained patch descriptions, imperative mood, commit
->> references, and Link:/Closes:/Fixes: tags.
->> 
->> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
-> 
-> Acked-by: Akira Yokosawa <akiyks@gmail.com>
-> 
-> I have noticed a couple of minor translation issues in this patch,
-> but I'd rather submit a patch on top of this, rather than comment on
-> those issues in English.
-> 
-> I guess I can prepare a follow-up patch within a week.
-> 
-> By the way, now I see why Kurita-san is wrapping lines at 30 wide-chars
-> or so.  I guess they are broken that way so that each line corresponds
-> to that in the English text.  That makes sense.
-> 
-> Thanks, Akira
-> 
->> ---
->>  .../ja_JP/process/submitting-patches.rst      | 84 
->> +++++++++++++++++++
->>  1 file changed, 84 insertions(+)
->> 
-> [...]
+-----BEGIN PGP SIGNATURE-----
+
+iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCacD9sxIcbXdhbGxlQGtl
+cm5lbC5vcmcACgkQEic87j4CH/j8xgF/YE8auGYf7y4fj5Wh1h3SKh5Yl6dpVBAG
+OKsJlsNtaEhDxOMkeG3zYURQ/NqDSjQ+AYCRn1+pOiDB/8sAFVZx1L9i4pZWq3cQ
+Eidq3hJvghVNoQcTlcufj4jMfOPRjSUh4QU=
+=P+gh
+-----END PGP SIGNATURE-----
+
+--bd4a73f9dd4d15328054ccc0b5312fbbd2fc1c943838d1efe8c042901083--
 
