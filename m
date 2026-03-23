@@ -1,407 +1,160 @@
-Return-Path: <linux-doc+bounces-80635-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80637-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +ConOJkKwWmVQAQAu9opvQ
-	(envelope-from <linux-doc+bounces-80635-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:40:41 +0100
+	id KCbFKBkQwWk7QQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80637-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:04:09 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CCF42EF37F
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 10:40:41 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5BFD2EFA0E
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 11:04:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0A2D0303B7D8
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:35:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BF3E330A10A1
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 09:57:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3451F386C0E;
-	Mon, 23 Mar 2026 09:35:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9AD2F386453;
+	Mon, 23 Mar 2026 09:57:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tsTpQ8sr"
+	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="kshbpdY0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D8B41FE44A;
-	Mon, 23 Mar 2026 09:35:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774258501; cv=none; b=cTP/QuxMSXF8HhGziyLj3Q+q4WjRXVCd1P35oI7EFQhAp1DENspqM5cyK6HONS/SCHanMHed3TO9+S0wcR7TFetmfNan03fVWw0Izmfr0aykRXICiRL75aF1qwrcn/3AF/0m4EgJjXqlqI54hpoJK8G1Mf9fo97mP5GNVi8qrTg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774258501; c=relaxed/simple;
-	bh=9DVS4XWePq3fWP8PnNkZL1RiZ3dghTt1ujGUsfLlRmM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qnQEftZYvpTuSidk8SNH6yeze1EUuRsFTpxG6U6hYLjC/sdFuSLvL9C9TeLE/VCfQtec68S6r05baxZnvoy33DdXWF9JspSLgIVOAPQNTigwtn8/DFyZMxvDPWHYgotgCKF8f9qzfuVSKLfeHI4uWx4sewcB+Nd6jAryYfxIjhc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tsTpQ8sr; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E831BC2BC9E;
-	Mon, 23 Mar 2026 09:34:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774258500;
-	bh=9DVS4XWePq3fWP8PnNkZL1RiZ3dghTt1ujGUsfLlRmM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=tsTpQ8sr9ZfFe23UYvY9gWpEp4pi3UFpdtCDyFUJ0o7LE32Uk5F4vgOPifpRJNFFY
-	 CK9ZxWImSDjq96G80Dpgjk0eEAT1UzCkSckZ+wUTTo1rwZgtfteXTCxy2eS0I0ivmj
-	 8ygvJ5lQwTk+7ZcemwDn0bDWOPeuokFyWfiIT12I7oWKoDelMfxFKX9wgcyrc3iTzg
-	 irjQBVP6hPhFVtkKv3WUp7FzrarlPkf8AngjZPRtaZEgRqxzwurhCueLJQZ5Xd3GHu
-	 BC0AgZQl897EaidI07vuDFoBbIPRr3E5WYLkF4Xsb9fvCiPPNXazkpFoZtGXnjIMCR
-	 P3Le4Kr6zRJRg==
-Date: Mon, 23 Mar 2026 15:04:50 +0530
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Md Sadre Alam <mdalam@qti.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Stephan Gerhold <stephan.gerhold@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Michal Simek <michal.simek@amd.com>, 
-	Frank Li <Frank.Li@kernel.org>, dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, brgl@kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Subject: Re: [PATCH v13 05/12] dmaengine: qcom: bam_dma: add support for BAM
- locking
-Message-ID: <hohx2judes5c6na4svpah254hqbaf4kbeyu7prwkprfv5dy7hj@26nxwlvb76yp>
-References: <20260317-qcom-qce-cmd-descr-v13-0-0968eb4f8c40@oss.qualcomm.com>
- <20260317-qcom-qce-cmd-descr-v13-5-0968eb4f8c40@oss.qualcomm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50D60387347;
+	Mon, 23 Mar 2026 09:57:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774259869; cv=pass; b=NrP3Ps7mhdAiCjaqPZD0JhQcYWtljWRR0r2Xp0QDx3j/rsklCJXpLh1P40s+GEk9tkx1FTAYFCdYyDRqy7XN1fzkkx4Jtj3lxhr+OPa2y22PHYe13R7P7zK2N0VYKTqwZbvlXIMZJKdlZR56QjYTLjjYfbAuJXd6+vSLaJj+z7A=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774259869; c=relaxed/simple;
+	bh=hJUxfGUSHiaElRZYzXglO2jCav3ZlOnkwh4WOSBrvcA=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:From:To:
+	 References:In-Reply-To; b=HDJ05vpfouEsdnjqekaiDhQ4CBI5o6Eov0Q84mpBg09xTtnIuJarTrp3U+Cr4ObPuZD3Cf59NE7wEGQ/eqJcER1k10f4J5QI3qyqbH4/7BpBjKWJ/dy7CcHpzqir3G+xCC7a6qTq24y6iz9ejp+w5+3OM/07Rr3PRY8asBQQEkY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=kshbpdY0; arc=pass smtp.client-ip=136.143.188.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ritovision.com
+ARC-Seal: i=1; a=rsa-sha256; t=1774259848; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=GF9uO5Bl6leTD0NiT4z2qVunlCAEFAIZDN+2dg+kOZinGOU1eR7aNi7Ur8W6V7v3zyUX5XszLmfugA/b7/ncJ7EyEpaDM9Bn3+Yu3gt89AvMEXFbF1mcEHN4M3rSrjmFrRXq8G+zoF3luDkWif5CNefv0A6XtBPvwveV0LFIDbc=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1774259848; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=hJUxfGUSHiaElRZYzXglO2jCav3ZlOnkwh4WOSBrvcA=; 
+	b=h5kkoq8xUIQu39H8Ss+jvKEEO03qgAWl3JvkKUyZM2tCOWm4Kkk/pZZzXrNB8kP6Ubvmj71NWUxyDnz1+h3ep7fboNx17jKzHyYiY3svOteYwbI/vdAkqyOLFCqUd4WpxoY0QL8hyNNPJXOFWVCA3i1CDua84aQ9IW+geXKegPs=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=ritovision.com;
+	spf=pass  smtp.mailfrom=rito@ritovision.com;
+	dmarc=pass header.from=<rito@ritovision.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774259848;
+	s=zmail; d=ritovision.com; i=rito@ritovision.com;
+	h=Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Date:Message-Id:Message-Id:Subject:Subject:Cc:Cc:From:From:To:To:References:In-Reply-To:Reply-To;
+	bh=hJUxfGUSHiaElRZYzXglO2jCav3ZlOnkwh4WOSBrvcA=;
+	b=kshbpdY0KeValy1cofO/sSYhF0yN88feMcvoKbeM35VMejdDTMP95w7wG243lbp0
+	piH4FNklN1CfCfbyztE0yNnxgQcwHXmSXpNe1kOsLmOpIXLT7YFkyvm3gt+lixK+hEz
+	8p8RaA/HbFPSCwWPD/QOwoN+s64AX6A3ezVl5Tsw=
+Received: by mx.zohomail.com with SMTPS id 1774259846072979.4009215937739;
+	Mon, 23 Mar 2026 02:57:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260317-qcom-qce-cmd-descr-v13-5-0968eb4f8c40@oss.qualcomm.com>
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 23 Mar 2026 05:57:23 -0400
+Message-Id: <DHA2MFSL71FH.1Z930JBKI8AOE@ritovision.com>
+Subject: Re: [PATCH v2 0/1] docs: examples of pages affected by C API
+ signature overflow
+Cc: "Shuah Khan" <skhan@linuxfoundation.org>,
+ <linux-kernel@vger.kernel.org>, <rdunlap@infradead.org>
+From: "Rito Rhymes" <rito@ritovision.com>
+To: "Jonathan Corbet" <corbet@lwn.net>, "Rito Rhymes" <rito@ritovision.com>,
+ <linux-doc@vger.kernel.org>
+X-Mailer: aerc 0.21.0
+References: <20260321142559.26005-2-rito@ritovision.com>
+ <20260322193740.68784-1-rito@ritovision.com>
+ <874im7eh6e.fsf@trenco.lwn.net>
+In-Reply-To: <874im7eh6e.fsf@trenco.lwn.net>
+X-ZohoMailClient: External
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[ritovision.com,reject];
+	MV_CASE(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[ritovision.com:s=zmail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80635-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80637-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,lwn.net,gmail.com,gondor.apana.org.au,davemloft.net,quicinc.com,qti.qualcomm.com,linaro.org,amd.com,vger.kernel.org,lists.infradead.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mani@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[rito@ritovision.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[ritovision.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qualcomm.com:email]
-X-Rspamd-Queue-Id: 4CCF42EF37F
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_FIVE(0.00)[6];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,ritovision.com:dkim,ritovision.com:mid]
+X-Rspamd-Queue-Id: D5BFD2EFA0E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Mar 17, 2026 at 03:02:12PM +0100, Bartosz Golaszewski wrote:
-> Add support for BAM pipe locking. To that end: when starting DMA on an RX
-> channel - prepend the existing queue of issued descriptors with an
-> additional "dummy" command descriptor with the LOCK bit set. Once the
-> transaction is done (no more issued descriptors), issue one more dummy
-> descriptor with the UNLOCK bit.
-> 
-> We *must* wait until the transaction is signalled as done because we
-> must not perform any writes into config registers while the engine is
-> busy.
-> 
-> The dummy writes must be issued into a scratchpad register of the client
-> so provide a mechanism to communicate the right address via descriptor
-> metadata.
-> 
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Thank you for the feedback.
 
-I've left some comments in v12, but looks like you've missed them. Anyhow,
-this version looks good to me as the design looks simple and doesn't warrant
-much change from the client driver other than passing the scratchpad register as
-metadata. I just have some minor comments in this version. 
+I'll put some examples in the changelogs with versioned URLs and
+reroll them without a cover letter.
 
-> ---
->  drivers/dma/qcom/bam_dma.c       | 160 ++++++++++++++++++++++++++++++++++++++-
->  include/linux/dma/qcom_bam_dma.h |   4 +
->  2 files changed, 160 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
-> index 83491e7c2f17d8c9d12a1a055baea7e3a0a75a53..895286452c8b5e701c1df482095e5fe4a49f4246 100644
-> --- a/drivers/dma/qcom/bam_dma.c
-> +++ b/drivers/dma/qcom/bam_dma.c
-> @@ -28,11 +28,13 @@
->  #include <linux/clk.h>
->  #include <linux/device.h>
->  #include <linux/dma-mapping.h>
-> +#include <linux/dma/qcom_bam_dma.h>
->  #include <linux/dmaengine.h>
->  #include <linux/init.h>
->  #include <linux/interrupt.h>
->  #include <linux/io.h>
->  #include <linux/kernel.h>
-> +#include <linux/lockdep.h>
->  #include <linux/module.h>
->  #include <linux/of_address.h>
->  #include <linux/of_dma.h>
-> @@ -60,6 +62,8 @@ struct bam_desc_hw {
->  #define DESC_FLAG_EOB BIT(13)
->  #define DESC_FLAG_NWD BIT(12)
->  #define DESC_FLAG_CMD BIT(11)
-> +#define DESC_FLAG_LOCK BIT(10)
-> +#define DESC_FLAG_UNLOCK BIT(9)
->  
->  struct bam_async_desc {
->  	struct virt_dma_desc vd;
-> @@ -391,6 +395,14 @@ struct bam_chan {
->  	struct list_head desc_list;
->  
->  	struct list_head node;
-> +
-> +	/* BAM locking infrastructure */
-> +	bool locked;
-> +	phys_addr_t scratchpad_addr;
-> +	struct scatterlist lock_sg;
-> +	struct scatterlist unlock_sg;
-> +	struct bam_cmd_element lock_ce;
-> +	struct bam_cmd_element unlock_ce;
->  };
->  
->  static inline struct bam_chan *to_bam_chan(struct dma_chan *common)
-> @@ -652,6 +664,27 @@ static int bam_slave_config(struct dma_chan *chan,
->  	return 0;
->  }
->  
-> +static int bam_metadata_attach(struct dma_async_tx_descriptor *desc, void *data, size_t len)
-> +{
-> +	struct bam_chan *bchan = to_bam_chan(desc->chan);
-> +	const struct bam_device_data *bdata = bchan->bdev->dev_data;
-> +	struct bam_desc_metadata *metadata = data;
-> +
-> +	if (!data)
-> +		return -EINVAL;
-> +
-> +	if (!bdata->pipe_lock_supported)
-> +		return -EOPNOTSUPP;
+> The cover letter tells reviewers what the series as a whole does
 
-As mentioned in v12, you should return 0 to avoid erroring out the clients if
-pipe lock is not supported.
+Admittedly, I knew including a cover letter for a single patch was
+non-standard. Given the quantity of examples I aimed to include,
+I didn't think it acceptable to include it all in the changelog, but I
+knew having the examples was important for testing, so I repurposed the
+cover letter as the vehicle for including them. I'll lay off that.
 
-> +
-> +	bchan->scratchpad_addr = metadata->scratchpad_addr;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct dma_descriptor_metadata_ops bam_metadata_ops = {
-> +	.attach = bam_metadata_attach,
-> +};
-> +
->  /**
->   * bam_prep_slave_sg - Prep slave sg transaction
->   *
-> @@ -668,6 +701,7 @@ static struct dma_async_tx_descriptor *bam_prep_slave_sg(struct dma_chan *chan,
->  	void *context)
->  {
->  	struct bam_chan *bchan = to_bam_chan(chan);
-> +	struct dma_async_tx_descriptor *tx_desc;
->  	struct bam_device *bdev = bchan->bdev;
->  	struct bam_async_desc *async_desc;
->  	struct scatterlist *sg;
-> @@ -723,7 +757,12 @@ static struct dma_async_tx_descriptor *bam_prep_slave_sg(struct dma_chan *chan,
->  		} while (remainder > 0);
->  	}
->  
-> -	return vchan_tx_prep(&bchan->vc, &async_desc->vd, flags);
-> +	tx_desc = vchan_tx_prep(&bchan->vc, &async_desc->vd, flags);
-> +	if (!tx_desc)
-> +		return NULL;
-> +
-> +	tx_desc->metadata_ops = &bam_metadata_ops;
-> +	return tx_desc;
->  }
->  
->  /**
-> @@ -1012,13 +1051,115 @@ static void bam_apply_new_config(struct bam_chan *bchan,
->  	bchan->reconfigure = 0;
->  }
->  
-> +static struct bam_async_desc *
-> +bam_make_lock_desc(struct bam_chan *bchan, struct scatterlist *sg,
-> +		   struct bam_cmd_element *ce, unsigned long flag)
-> +{
-> +	struct dma_chan *chan = &bchan->vc.chan;
-> +	struct bam_async_desc *async_desc;
-> +	struct bam_desc_hw *desc;
-> +	struct virt_dma_desc *vd;
-> +	struct virt_dma_chan *vc;
-> +	unsigned int mapped;
-> +	dma_cookie_t cookie;
-> +	int ret;
-> +
-> +	sg_init_table(sg, 1);
-> +
-> +	async_desc = kzalloc_flex(*async_desc, desc, 1, GFP_NOWAIT);
-> +	if (!async_desc) {
-> +		dev_err(bchan->bdev->dev, "failed to allocate the BAM lock descriptor\n");
-> +		return NULL;
-> +	}
-> +
-> +	async_desc->num_desc = 1;
-> +	async_desc->curr_desc = async_desc->desc;
-> +	async_desc->dir = DMA_MEM_TO_DEV;
-> +
-> +	desc = async_desc->desc;
-> +
-> +	bam_prep_ce_le32(ce, bchan->scratchpad_addr, BAM_WRITE_COMMAND, 0);
-> +	sg_set_buf(sg, ce, sizeof(*ce));
-> +
-> +	mapped = dma_map_sg_attrs(chan->slave, sg, 1, DMA_TO_DEVICE, DMA_PREP_CMD);
-> +	if (!mapped) {
-> +		kfree(async_desc);
-> +		return NULL;
-> +	}
-> +
-> +	desc->flags |= cpu_to_le16(DESC_FLAG_CMD | flag);
-> +	desc->addr = sg_dma_address(sg);
-> +	desc->size = sizeof(struct bam_cmd_element);
-> +
-> +	vc = &bchan->vc;
-> +	vd = &async_desc->vd;
-> +
-> +	dma_async_tx_descriptor_init(&vd->tx, &vc->chan);
-> +	vd->tx.flags = DMA_PREP_CMD;
-> +	vd->tx.desc_free = vchan_tx_desc_free;
-> +	vd->tx_result.result = DMA_TRANS_NOERROR;
-> +	vd->tx_result.residue = 0;
-> +
-> +	cookie = dma_cookie_assign(&vd->tx);
-> +	ret = dma_submit_error(cookie);
-> +	if (ret)
-> +		return NULL;
+> In this case, some examples of the problem being solved are certainly
+> warranted, though perhaps not so many as given here.
 
-You are leaking async_desc here.
+I'll scale it down to just a few for the rerolls in the patchlogs.
 
-> +
-> +	return async_desc;
-> +}
-> +
-> +static int bam_do_setup_pipe_lock(struct bam_chan *bchan, bool lock)
-> +{
-> +	struct bam_device *bdev = bchan->bdev;
-> +	const struct bam_device_data *bdata = bdev->dev_data;
-> +	struct bam_async_desc *lock_desc;
-> +	struct bam_cmd_element *ce;
-> +	struct scatterlist *sgl;
-> +	unsigned long flag;
-> +
-> +	lockdep_assert_held(&bchan->vc.lock);
-> +
-> +	if (!bdata->pipe_lock_supported || !bchan->scratchpad_addr ||
-> +	    bchan->slave.direction != DMA_MEM_TO_DEV)
-> +		return 0;
-> +
-> +	if (lock) {
-> +		sgl = &bchan->lock_sg;
-> +		ce = &bchan->lock_ce;
-> +		flag = DESC_FLAG_LOCK;
-> +	} else {
-> +		sgl = &bchan->unlock_sg;
-> +		ce = &bchan->unlock_ce;
-> +		flag = DESC_FLAG_UNLOCK;
-> +	}
-> +
-> +	lock_desc = bam_make_lock_desc(bchan, sgl, ce, flag);
-> +	if (!lock_desc)
-> +		return -ENOMEM;
-> +
-> +	if (lock)
-> +		list_add(&lock_desc->vd.node, &bchan->vc.desc_issued);
-> +	else
-> +		list_add_tail(&lock_desc->vd.node, &bchan->vc.desc_issued);
-> +
-> +	bchan->locked = lock;
+FWIW my rationale was clear:
 
-What is this flag for?
+"Is this issue a significant enough pattern to justify the risk of
+regressions and the review bandwidth required to address it?"
 
-> +
-> +	return 0;
-> +}
-> +
-> +static void bam_setup_pipe_lock(struct bam_chan *bchan)
-> +{
-> +	if (bam_do_setup_pipe_lock(bchan, true) || bam_do_setup_pipe_lock(bchan, false))
-> +		dev_err(bchan->vc.chan.slave, "Failed to setup BAM pipe lock descriptors");
-> +}
-> +
->  /**
->   * bam_start_dma - start next transaction
->   * @bchan: bam dma channel
->   */
->  static void bam_start_dma(struct bam_chan *bchan)
->  {
-> -	struct virt_dma_desc *vd = vchan_next_desc(&bchan->vc);
-> +	struct virt_dma_desc *vd;
->  	struct bam_device *bdev = bchan->bdev;
->  	struct bam_async_desc *async_desc = NULL;
->  	struct bam_desc_hw *desc;
-> @@ -1030,6 +1171,9 @@ static void bam_start_dma(struct bam_chan *bchan)
->  
->  	lockdep_assert_held(&bchan->vc.lock);
->  
-> +	bam_setup_pipe_lock(bchan);
-> +
-> +	vd = vchan_next_desc(&bchan->vc);
->  	if (!vd)
->  		return;
->  
-> @@ -1157,8 +1301,15 @@ static void bam_issue_pending(struct dma_chan *chan)
->   */
->  static void bam_dma_free_desc(struct virt_dma_desc *vd)
->  {
-> -	struct bam_async_desc *async_desc = container_of(vd,
-> -			struct bam_async_desc, vd);
-> +	struct bam_async_desc *async_desc = container_of(vd, struct bam_async_desc, vd);
-> +	struct bam_desc_hw *desc = async_desc->desc;
-> +	struct dma_chan *chan = vd->tx.chan;
-> +	struct bam_chan *bchan = to_bam_chan(chan);
-> +
-> +	if (le16_to_cpu(desc->flags) & DESC_FLAG_LOCK)
-> +		dma_unmap_sg(chan->slave, &bchan->lock_sg, 1, DMA_TO_DEVICE);
-> +	else if (le16_to_cpu(desc->flags) & DESC_FLAG_UNLOCK)
-> +		dma_unmap_sg(chan->slave, &bchan->unlock_sg, 1, DMA_TO_DEVICE);
->  
->  	kfree(async_desc);
->  }
-> @@ -1350,6 +1501,7 @@ static int bam_dma_probe(struct platform_device *pdev)
->  	bdev->common.device_terminate_all = bam_dma_terminate_all;
->  	bdev->common.device_issue_pending = bam_issue_pending;
->  	bdev->common.device_tx_status = bam_tx_status;
-> +	bdev->common.desc_metadata_modes = DESC_METADATA_CLIENT;
->  	bdev->common.dev = bdev->dev;
->  
->  	ret = dma_async_device_register(&bdev->common);
-> diff --git a/include/linux/dma/qcom_bam_dma.h b/include/linux/dma/qcom_bam_dma.h
-> index 68fc0e643b1b97fe4520d5878daa322b81f4f559..f85e0c72407b5e1a733750ac87bbaba6af6e8c78 100644
-> --- a/include/linux/dma/qcom_bam_dma.h
-> +++ b/include/linux/dma/qcom_bam_dma.h
-> @@ -34,6 +34,10 @@ enum bam_command_type {
->  	BAM_READ_COMMAND,
->  };
->  
-> +struct bam_desc_metadata {
-> +	phys_addr_t scratchpad_addr;
+^ I thought it was important to preempt that question given the size
+of this repo, assuming layout issues aren't exactly top of mind and
+that the potential changes may have systemic effects to consider.
 
-I think it'd be worth adding a comment for this.
+I did an audit for each of the layout fixes and resolved that if I
+couldn't find 10 instances of an issue, it would not be worthwhile or
+defensible to push. As a first-time contributor here, I figured showing
+a concrete list of examples I found was preferable to a take-my-word-
+for-it description of each issue's scale while showing only 1 or 2
+examples.
 
-- Mani
+> The names of HTML files are perhaps not ideal; since you're
+> talking about docs.kernel.org in particular, you could give URLs
+> that people could view directly.
+> So for example
+>
+> https://docs.kernel.org/6.19/core-api/genalloc.html
+>
+> Note the explicit version so that the problem will be findable in the
+> distant future, even after the fix is applied.
 
--- 
-மணிவண்ணன் சதாசிவம்
+Yeah that approach makes more sense; the versioning anchors the fix
+well for future. I had used neutral HTML file names with local user
+testing in mind where the canonical domain wouldn't be used now or in
+post-fix source trees.
+
+Rito
 
