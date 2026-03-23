@@ -1,340 +1,160 @@
-Return-Path: <linux-doc+bounces-80832-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80815-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ALrmE2PVwWmgXAQAu9opvQ
-	(envelope-from <linux-doc+bounces-80832-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:05:55 +0100
+	id 0IzDAk/VwWmgXAQAu9opvQ
+	(envelope-from <linux-doc+bounces-80815-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:05:35 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB3B02FF424
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:05:54 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A65B62FF3DD
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:05:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id E01B7305C74B
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 00:02:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CC52A3104A07
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 23:59:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3732938B13F;
-	Mon, 23 Mar 2026 23:59:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A129538A704;
+	Mon, 23 Mar 2026 23:58:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="iHCuUcD1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X09WVTvq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6022A3E51F1
-	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 23:59:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75BA3389DED;
+	Mon, 23 Mar 2026 23:58:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774310362; cv=none; b=IWuCjXI6hXCBHlcG76tuiTVNcBbRGEDOA6x0MwX7JkDzhz0kfCTzIxc8k7hPObRs/jq5fWX0k6NctEaUvWv0PB9SkrHzxJV2c349vDXOBqETi2+vqwNR+FmKt07c9RL29TqUURDg0eiwGqAMx1z0XZmpEb3n0XOWlKpXaA4hRQ0=
+	t=1774310333; cv=none; b=UvlVG1xKCQAx5X7qSqkOW1+a+z7nFyFSwnZOaWAhLsg301cXu0KOq2K3PTt+zE20/mJ+AgTm/c7pO3WeIUbBSIBNbEPpL3uu8QVqBIHuPVgXWbon9SZ5ghd/seOunP2rujNPa5ZE1w0juI2jb+TbPXZskikBYlkfV22w/1769U0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774310362; c=relaxed/simple;
-	bh=vpHjJ0pn077dUCj9wV/y1NEgQP72set6GB5RHBGwAdM=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=QCg1V15cZD8f9oKlUD8ulmAKlto5L4NL9bWyuQVfDE1r6XwWiisT90cZDmu0C9zBsM+BZvaqQ0b0ECYSoipRBt973k2sMN97SCE77dR4c6WCcWbL5wfPUON98rqRlWjd0TEjvxBsdZXaY34GNGzS1MZ7Gge9OKhQWrars/ItEHs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=iHCuUcD1; arc=none smtp.client-ip=209.85.214.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com
-Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-2b05a3c2421so8473075ad.1
-        for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 16:59:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1774310360; x=1774915160; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=emXTkfduCARpReH/0NkUqCqksAosTTU4j/dciIvOyCs=;
-        b=iHCuUcD1MXluPlFGR9QaLpMovlhc43mYSiP5FnvngghaPKZCwxqWpBQ3l97AKVY4mm
-         C+lIG/50aD4f5beKECih57U0jbIXYtpKSbNL3+jm78RPQgp4ZD1sCB3QcSUASbBfyFrU
-         pefSw9WULtAHhzcEbXM26XiSMtvMc7jp3fVTiHPrBRyNigX5umOTiJeC8VHI5uUhK3FL
-         tCXfDiVgjAzi7ThSb1TK6HACV9WyNK77Cv7Rg9BC5NOg9mquA+OSggYPcB8nrBshn3bU
-         +ZFoZMPQxqpzmYW7U6y/rvzPLcolxmBFzUOpHiEDHe+/JH+7qv7Xv0tePHYuTu5JYwiF
-         UM0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774310360; x=1774915160;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=emXTkfduCARpReH/0NkUqCqksAosTTU4j/dciIvOyCs=;
-        b=qcUxKm+Ix6CxBo4megyqXu7gNevEx4CPdci+JDAo9YpAhRlecbr2MZOf2ctIA0dk1s
-         pcMJGf3h8YRJ0j+gTUqeBx1o+2zF5Ydf1aZWMs5axZLOSxSyUVY7EkxqPXqtMVx+V+Uq
-         99W9Hv66iHU8jnpBEvlTtteMHYIY9fMpNAlYCC80rTGXG0vz6ulK3c6MJk7VaUn4Vy2I
-         ykZRMkOrDUoxe5B8coJaeU4xsuQOIjgGEPm9Hw3//w9oVKHQIq0OgYUfV4SMweVATI3h
-         V13g25VE7CND3S1NvwQzrPzubuoRfAL1EY+uYVdS5ywm+FpAHpuSuPwWRd9dp3Q2tI/a
-         Cp7g==
-X-Forwarded-Encrypted: i=1; AJvYcCX29In+sT2ciQlDFvKMUQ6eZOV3y5y50qEyToYvWhMFFmcsTBxigAwvNru9P9bYb+S79/oHXzre9Xs=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw3RvE2qTflA7URT0Rt6QE0+YYcdlvI/6DcO+KlIwlqVlkaHTcN
-	3SkBvyDXV1ouxcdMFAvlIeJyKh0tKToO1F96KB2HAArbXcNaW+H2DHybNhuOGXJanTs1cFBgGI1
-	7P8jOrcyfxlhx4g==
-X-Received: from plcp2.prod.google.com ([2002:a17:902:e342:b0:2b0:6c44:fc55])
- (user=dmatlack job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:902:d54a:b0:2ae:c9be:5f2c with SMTP id d9443c01a7336-2b08271d042mr130329495ad.21.1774310359658;
- Mon, 23 Mar 2026 16:59:19 -0700 (PDT)
-Date: Mon, 23 Mar 2026 23:58:16 +0000
-In-Reply-To: <20260323235817.1960573-1-dmatlack@google.com>
+	s=arc-20240116; t=1774310333; c=relaxed/simple;
+	bh=09tSdPc4KE+Wrg/3IyzHyq6uHIuy+tsDuWBUHfhcgjg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qVvAaeK6PImMCYzCpn70eTuhyy+4LLqYHIFnIXXxz9M676Q1QTChxyGf4wQEHhKX7j5g+q7lM0puPh4iNeZBy1Gxx96jP8pdTtSV9vEL343NhE+7hOu9fjuP2Y6BXz0hrJMeNGoT52U1B6HWLUv1G0v7LJE0u05DjqPiWM5qG8Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X09WVTvq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F0ABC4AF0D;
+	Mon, 23 Mar 2026 23:58:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774310332;
+	bh=09tSdPc4KE+Wrg/3IyzHyq6uHIuy+tsDuWBUHfhcgjg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=X09WVTvqUzVe6286hdc2QsmRNSrbRb/vw8cWztfvWQ/PsFia8VsgYRjUvi7fytYj+
+	 g77WCldW1KRYfVbqbGvEI953LKcCNiEpqhig+r7z9IXJDtjpbYODlu/5zeqtRPqTGl
+	 WGFYbpUlPhvB4Y75BfaWj+EOwtbx6eoAbzTVsqSmc+la018UkNZJRWX2ZIKWR59p4/
+	 dEHJmDDGskDJimUR5GDykm4AHl27pHnJCuPITXKXDVOD1RFmz/XTClYe9AUIzQX61T
+	 LFm1pUBIv7zc90cEmkak7xQ5+RDcJVj8E2QhFGQqd9DX4R+o5OgtdCSZKMirZgEL8o
+	 3doxRZ3Z7A/XA==
+Date: Mon, 23 Mar 2026 19:58:50 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-kbuild@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	workflows@vger.kernel.org, tools@kernel.org, x86@kernel.org,
+	Thomas Gleixner <tglx@kernel.org>,
+	"Paul E . McKenney" <paulmck@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Cyril Hrubis <chrubis@suse.cz>, Kees Cook <kees@kernel.org>,
+	Jake Edge <jake@lwn.net>,
+	David Laight <david.laight.linux@gmail.com>,
+	Askar Safin <safinaskar@zohomail.com>,
+	Gabriele Paoloni <gpaoloni@redhat.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Ingo Molnar <mingo@redhat.com>, Arnd Bergmann <arnd@arndb.de>
+Subject: Re: [PATCH v2 3/9] kernel/api: add debugfs interface for kernel API
+ specifications
+Message-ID: <acHTupVGxJR3gmFT@laps>
+References: <20260322121026.869758-1-sashal@kernel.org>
+ <20260322121026.869758-4-sashal@kernel.org>
+ <2026032309-jargon-stalling-28c2@gregkh>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260323235817.1960573-1-dmatlack@google.com>
-X-Mailer: git-send-email 2.53.0.983.g0bb29b3bc5-goog
-Message-ID: <20260323235817.1960573-25-dmatlack@google.com>
-Subject: [PATCH v3 24/24] vfio: selftests: Add continuous DMA to vfio_pci_liveupdate_kexec_test
-From: David Matlack <dmatlack@google.com>
-To: Alex Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, 
-	Alex Mastro <amastro@fb.com>, Andrew Morton <akpm@linux-foundation.org>, 
-	Ankit Agrawal <ankita@nvidia.com>, Arnd Bergmann <arnd@arndb.de>, Askar Safin <safinaskar@gmail.com>, 
-	"Borislav Petkov (AMD)" <bp@alien8.de>, Chris Li <chrisl@kernel.org>, Dapeng Mi <dapeng1.mi@linux.intel.com>, 
-	David Matlack <dmatlack@google.com>, David Rientjes <rientjes@google.com>, 
-	Feng Tang <feng.tang@linux.alibaba.com>, Jacob Pan <jacob.pan@linux.microsoft.com>, 
-	Jason Gunthorpe <jgg@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>, Jonathan Corbet <corbet@lwn.net>, 
-	Josh Hilke <jrhilke@google.com>, Kees Cook <kees@kernel.org>, Kevin Tian <kevin.tian@intel.com>, 
-	kexec@lists.infradead.org, kvm@vger.kernel.org, 
-	Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-mm@kvack.org, linux-pci@vger.kernel.org, 
-	Li RongQing <lirongqing@baidu.com>, Lukas Wunner <lukas@wunner.de>, Marco Elver <elver@google.com>, 
-	"=?UTF-8?q?Micha=C5=82=20Winiarski?=" <michal.winiarski@intel.com>, Mike Rapoport <rppt@kernel.org>, 
-	Parav Pandit <parav@nvidia.com>, Pasha Tatashin <pasha.tatashin@soleen.com>, 
-	"Paul E. McKenney" <paulmck@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, 
-	"Peter Zijlstra (Intel)" <peterz@infradead.org>, Pranjal Shrivastava <praan@google.com>, 
-	Pratyush Yadav <pratyush@kernel.org>, Raghavendra Rao Ananta <rananta@google.com>, 
-	Randy Dunlap <rdunlap@infradead.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
-	Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Vipin Sharma <vipinsh@google.com>, 
-	Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>, Yi Liu <yi.l.liu@intel.com>, 
-	Zhu Yanjun <yanjun.zhu@linux.dev>
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <2026032309-jargon-stalling-28c2@gregkh>
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[nvidia.com,amazon.com,fb.com,linux-foundation.org,arndb.de,gmail.com,alien8.de,kernel.org,linux.intel.com,google.com,linux.alibaba.com,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,baidu.com,wunner.de,soleen.com,infradead.org,linuxfoundation.org,linux.dev];
-	TAGGED_FROM(0.00)[bounces-80832-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-80815-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,lwn.net,google.com,infradead.org,suse.cz,gmail.com,zohomail.com,redhat.com,zeniv.linux.org.uk,linux-foundation.org,linuxfoundation.org,arndb.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dmatlack@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	RCPT_COUNT_GT_50(0.00)[54];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: EB3B02FF424
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A65B62FF3DD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add a long-running DMA memcpy operation to
-vfio_pci_liveupdate_kexec_test so that the device attempts to perform
-DMAs continuously during the Live Update.
+On Mon, Mar 23, 2026 at 02:52:58PM +0100, Greg Kroah-Hartman wrote:
+>On Sun, Mar 22, 2026 at 08:10:17AM -0400, Sasha Levin wrote:
+>> Add a debugfs interface to expose kernel API specifications at runtime.
+>> This allows tools and users to query the complete API specifications
+>> through the debugfs filesystem.
+>>
+>> The interface provides:
+>> - /sys/kernel/debug/kapi/list - lists all available API specifications
+>> - /sys/kernel/debug/kapi/specs/<name> - detailed info for each API
+>>
+>> Each specification file includes:
+>> - Function name, version, and descriptions
+>> - Execution context requirements and flags
+>> - Parameter details with types, flags, and constraints
+>> - Return value specifications and success conditions
+>> - Error codes with descriptions and conditions
+>> - Locking requirements and constraints
+>> - Signal handling specifications
+>> - Examples, notes, and deprecation status
+>>
+>> This enables runtime introspection of kernel APIs for documentation
+>> tools, static analyzers, and debugging purposes.
+>>
+>> Signed-off-by: Sasha Levin <sashal@kernel.org>
+>
+>Debugfs logic looks sane, nice.
 
-At this point iommufd preservation is not supported and bus mastering is
-not kept enabled on the device during across the kexec, so most of these
-DMAs will be dropped. However this test ensures that the current device
-preservation support does not lead to system instability or crashes if
-the device is active. And once iommufd and bus mastering are preserved,
-this test can be relaxed to check that the DMA operations completed
-successfully.
+Thanks!
 
-Signed-off-by: David Matlack <dmatlack@google.com>
----
- .../vfio/vfio_pci_liveupdate_kexec_test.c     | 129 ++++++++++++++++++
- 1 file changed, 129 insertions(+)
+>But this only works if the kabi stuff is built into the kernel image,
+>right?  This doesn't work if any of these abi sections are in a module
+>or am I missing that logic here?
 
-diff --git a/tools/testing/selftests/vfio/vfio_pci_liveupdate_kexec_test.c b/tools/testing/selftests/vfio/vfio_pci_liveupdate_kexec_test.c
-index 65c48196e44e..36bddfbb88ed 100644
---- a/tools/testing/selftests/vfio/vfio_pci_liveupdate_kexec_test.c
-+++ b/tools/testing/selftests/vfio/vfio_pci_liveupdate_kexec_test.c
-@@ -1,8 +1,16 @@
- // SPDX-License-Identifier: GPL-2.0-only
- 
-+#include <linux/sizes.h>
-+#include <sys/mman.h>
-+
- #include <libliveupdate.h>
- #include <libvfio.h>
- 
-+#define MEMCPY_SIZE SZ_1G
-+#define DRIVER_SIZE SZ_1M
-+#define MEMFD_SIZE (MEMCPY_SIZE + DRIVER_SIZE)
-+
-+static struct dma_region memcpy_region;
- static const char *device_bdf;
- 
- static char state_session[LIVEUPDATE_SESSION_NAME_LENGTH];
-@@ -11,8 +19,89 @@ static char device_session[LIVEUPDATE_SESSION_NAME_LENGTH];
- enum {
- 	STATE_TOKEN,
- 	DEVICE_TOKEN,
-+	MEMFD_TOKEN,
- };
- 
-+static void dma_memcpy_one(struct vfio_pci_device *device)
-+{
-+	void *src = memcpy_region.vaddr, *dst;
-+	u64 size;
-+
-+	size = min_t(u64, memcpy_region.size / 2, device->driver.max_memcpy_size);
-+	dst = src + size;
-+
-+	memset(src, 1, size);
-+	memset(dst, 0, size);
-+
-+	printf("Kicking off 1 DMA memcpy operations of size 0x%lx...\n", size);
-+	vfio_pci_driver_memcpy(device,
-+			       to_iova(device, src),
-+			       to_iova(device, dst),
-+			       size);
-+
-+	VFIO_ASSERT_EQ(memcmp(src, dst, size), 0);
-+}
-+
-+static void dma_memcpy_start(struct vfio_pci_device *device)
-+{
-+	void *src = memcpy_region.vaddr, *dst;
-+	u64 count, size;
-+
-+	size = min_t(u64, memcpy_region.size / 2, device->driver.max_memcpy_size);
-+	dst = src + size;
-+
-+	/*
-+	 * Rough Math: If we assume the device will perform memcpy at a rate of
-+	 * 30GB/s then 7200GB of transfers will run for about 4 minutes.
-+	 */
-+	count = (u64)7200 * SZ_1G / size;
-+	count = min_t(u64, count, device->driver.max_memcpy_count);
-+
-+	memset(src, 1, size / 2);
-+	memset(dst, 0, size / 2);
-+
-+	printf("Kicking off %lu DMA memcpy operations of size 0x%lx...\n", count, size);
-+	vfio_pci_driver_memcpy_start(device,
-+				     to_iova(device, src),
-+				     to_iova(device, dst),
-+				     size, count);
-+}
-+
-+static void dma_memfd_map(struct vfio_pci_device *device, int fd)
-+{
-+	void *vaddr;
-+
-+	vaddr = mmap(NULL, MEMFD_SIZE, PROT_WRITE, MAP_SHARED, fd, 0);
-+	VFIO_ASSERT_NE(vaddr, MAP_FAILED);
-+
-+	memcpy_region.iova = SZ_4G;
-+	memcpy_region.size = MEMCPY_SIZE;
-+	memcpy_region.vaddr = vaddr;
-+	iommu_map(device->iommu, &memcpy_region);
-+
-+	device->driver.region.iova = memcpy_region.iova + memcpy_region.size;
-+	device->driver.region.size = DRIVER_SIZE;
-+	device->driver.region.vaddr = vaddr + memcpy_region.size;
-+	iommu_map(device->iommu, &device->driver.region);
-+}
-+
-+static void dma_memfd_setup(struct vfio_pci_device *device, int session_fd)
-+{
-+	int fd, ret;
-+
-+	fd = memfd_create("dma-buffer", 0);
-+	VFIO_ASSERT_GE(fd, 0);
-+
-+	ret = fallocate(fd, 0, 0, MEMFD_SIZE);
-+	VFIO_ASSERT_EQ(ret, 0);
-+
-+	printf("Preserving memfd of size 0x%x in session\n", MEMFD_SIZE);
-+	ret = luo_session_preserve_fd(session_fd, fd, MEMFD_TOKEN);
-+	VFIO_ASSERT_EQ(ret, 0);
-+
-+	dma_memfd_map(device, fd);
-+}
-+
- static void before_kexec(int luo_fd)
- {
- 	struct vfio_pci_device *device;
-@@ -32,6 +121,27 @@ static void before_kexec(int luo_fd)
- 	ret = luo_session_preserve_fd(session_fd, device->fd, DEVICE_TOKEN);
- 	VFIO_ASSERT_EQ(ret, 0);
- 
-+	dma_memfd_setup(device, session_fd);
-+
-+	/*
-+	 * If the device has a selftests driver, kick off a long-running DMA
-+	 * operation to exercise the device trying to DMA during a Live Update.
-+	 * Since iommufd preservation is not supported yet, these DMAs should be
-+	 * dropped. So this is just looking to verify that the system does not
-+	 * fall over and crash as a result of a busy device being preserved.
-+	 */
-+	if (device->driver.ops) {
-+		vfio_pci_driver_init(device);
-+		dma_memcpy_start(device);
-+
-+		/*
-+		 * Disable interrupts on the device or freeze() will fail.
-+		 * Unfortunately there isn't a way to easily have a test for
-+		 * that here since the check happens during shutdown.
-+		 */
-+		vfio_pci_msix_disable(device);
-+	}
-+
- 	close(luo_fd);
- 	daemonize_and_wait();
- }
-@@ -78,6 +188,7 @@ static void after_kexec(int luo_fd, int state_session_fd)
- 	struct iommu *iommu;
- 	int session_fd;
- 	int device_fd;
-+	int memfd;
- 	int stage;
- 
- 	check_open_vfio_device_fails();
-@@ -88,6 +199,10 @@ static void after_kexec(int luo_fd, int state_session_fd)
- 	session_fd = luo_retrieve_session(luo_fd, device_session);
- 	VFIO_ASSERT_GE(session_fd, 0);
- 
-+	printf("Retrieving memfd from LUO\n");
-+	memfd = luo_session_retrieve_fd(session_fd, MEMFD_TOKEN);
-+	VFIO_ASSERT_GE(memfd, 0);
-+
- 	printf("Finishing the session before retrieving the device (should fail)\n");
- 	VFIO_ASSERT_NE(luo_session_finish(session_fd), 0);
- 
-@@ -109,9 +224,23 @@ static void after_kexec(int luo_fd, int state_session_fd)
- 	 */
- 	device = __vfio_pci_device_init(device_bdf, iommu, device_fd);
- 
-+	dma_memfd_map(device, memfd);
-+
- 	printf("Finishing the session\n");
- 	VFIO_ASSERT_EQ(luo_session_finish(session_fd), 0);
- 
-+	/*
-+	 * Once iommufd preservation is supported and the device is kept fully
-+	 * running across the Live Update, this should wait for the long-
-+	 * running DMA memcpy operation kicked off in before_kexec() to
-+	 * complete. But for now we expect the device to be reset so just
-+	 * trigger a single memcpy to make sure it's still functional.
-+	 */
-+	if (device->driver.ops) {
-+		vfio_pci_driver_init(device);
-+		dma_memcpy_one(device);
-+	}
-+
- 	vfio_pci_device_cleanup(device);
- 	iommu_cleanup(iommu);
- }
+That is correct, for now.
+
+I'm only trying to tackle syscalls to begin with, and since no syscalls live in
+modules, we have no need for module support.
+
 -- 
-2.53.0.983.g0bb29b3bc5-goog
-
+Thanks,
+Sasha
 
