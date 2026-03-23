@@ -1,186 +1,141 @@
-Return-Path: <linux-doc+bounces-80738-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80740-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4HZHB0x4wWkQTQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80738-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:28:44 +0100
+	id 4PlFHCF7wWkQTQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80740-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:40:49 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA5622F9EF3
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:28:43 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E54092FA2BB
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 18:40:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 74E043031CFF
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 17:07:20 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A6B6F30CF848
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 17:12:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E83B3C3C15;
-	Mon, 23 Mar 2026 17:07:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 577473C5DD0;
+	Mon, 23 Mar 2026 17:12:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="m2zZpA5e"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jQW0qA/j"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com [209.85.217.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 353D93BF687;
-	Mon, 23 Mar 2026 17:07:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94FE83C6A4F
+	for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 17:12:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.217.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774285637; cv=none; b=MdTshzzALFcnT1+Tln+4VixGj8+sfuvnrxwBVw/JvLyX7XC9hIg4hUPEa+pGtn5G9alj5nYuloDH+781VC7WmZQQRX0PtiGeIWjWSeW0nguAZK7xt5M9KzuGU3AKm0d0JJLvIPk2jGWWhmzA0XfSux9Bw+VQdiOFtSEN9OMHdzQ=
+	t=1774285925; cv=none; b=HW3BalueCiGTkMsbtM8t9cP164cCx0+PAoUIpH+gFkmQn6MmMlE5oMORXGtOC1LPcVG/FIA61mPL1qTSzmf6MfaSexHKATQRu2/l6078YP/HI5MPQwxu9bFN4kpQk3WU5ycxYABTrsoPqcawte3zqoXke3IEMT1j52ksfqAj5Jk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774285637; c=relaxed/simple;
-	bh=ZPRtjSbDYAuXP+R2fMzJuVURJbzdyj1iPTpdebc3THE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bskLGxPEzb99/Qy6vmsVA2PkfAdpXTO3JKyEO816HMchN4dEZsLyIqCP604Tn1SZv5sF0/XVjL2NyDFCLSTwQ/F0rKww0xOEShhScB3YFvBOHQfNoQ8HUhz6j+jCrmIiOGyWbzDt+v89HMwbUCvIAE6viUxe+Nybo5GTcv7tIGY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=m2zZpA5e; arc=none smtp.client-ip=192.198.163.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1774285636; x=1805821636;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=ZPRtjSbDYAuXP+R2fMzJuVURJbzdyj1iPTpdebc3THE=;
-  b=m2zZpA5eoXOSOA6rSnbe92h1IrIrvZ91L/PHuHqY5B5RddnLRoH49n3y
-   /ZUStjaftN/d52TDJIP44ESWMsluh7nYD1oYj0j/QHmo0NKEAt8uMDnCw
-   tWtYpkug8Qkv8F1YZgkpSOArzIyHl87o99+aZtNK+nXFJ/GtXQGocPKHH
-   uyKYhojZAZFEp/nWOe8xwQLy1Xj9Kl1bYVyslkEzEsCqdRrGK/d6c7qOF
-   ggiVPDvuT9T5e2VORe+WRWs3vm1VX+vj+FvUQDu9DXSdTeenb0h2tHPe9
-   sUQW31jsv6Zkf8EEZ2UmE4+lWiJbI8HR74hHd1ljD9K5FUyIXVfIYKQ/7
-   w==;
-X-CSE-ConnectionGUID: mwn/cEOOTAa9M2/J68LzmA==
-X-CSE-MsgGUID: 80mGv3fvTbyWvRFvHsqe/A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11738"; a="86657187"
-X-IronPort-AV: E=Sophos;i="6.23,137,1770624000"; 
-   d="scan'208";a="86657187"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Mar 2026 10:07:15 -0700
-X-CSE-ConnectionGUID: m87CQPESS927IIVwJpteSg==
-X-CSE-MsgGUID: BMDfODy4QgaI4VGb46H6FA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,137,1770624000"; 
-   d="scan'208";a="224298095"
-Received: from guptapa-desk.jf.intel.com (HELO desk) ([10.165.239.46])
-  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Mar 2026 10:07:15 -0700
-Date: Mon, 23 Mar 2026 10:07:09 -0700
-From: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
-To: Nikolay Borisov <nik.borisov@suse.com>
-Cc: x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	David Kaplan <david.kaplan@amd.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Andrii Nakryiko <andrii@kernel.org>, KP Singh <kpsingh@kernel.org>,
-	Jiri Olsa <jolsa@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	David Laight <david.laight.linux@gmail.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-	David Ahern <dsahern@kernel.org>,
-	Martin KaFai Lau <martin.lau@linux.dev>,
-	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
-	Yonghong Song <yonghong.song@linux.dev>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Stanislav Fomichev <sdf@fomichev.me>, Hao Luo <haoluo@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-	kvm@vger.kernel.org, Asit Mallick <asit.k.mallick@intel.com>,
-	Tao Zhang <tao1.zhang@intel.com>, bpf@vger.kernel.org,
-	netdev@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v7 03/10] x86/bhi: Rename clear_bhb_loop() to
- clear_bhb_loop_nofence()
-Message-ID: <20260323170709.7lpdet4nnmhbdcxa@desk>
-References: <20260319-vmscape-bhb-v7-0-b76a777a98af@linux.intel.com>
- <20260319-vmscape-bhb-v7-3-b76a777a98af@linux.intel.com>
- <6c315cb3-b3a0-478e-b8ec-36d82684d310@suse.com>
+	s=arc-20240116; t=1774285925; c=relaxed/simple;
+	bh=E51zmPEcmxGiOZYoQO8p6GfNbdBLeRt7rJ2sBizOoYk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Fn/1F+PXnQfUNW4yX5vAH1ushzQamFf6tDRCx1F/qmzOyuVOAgFZegLUI8RW3qFBg4DWmDjPDG1VoEKdSzf90JDvHUN1cRqXA2Xc5ZQ9aNHhKh1m6LQNBpTXrkQEMxB3JDiod4bmlwpJ3Jdu6UMEJYEnkVLIDr3YrhKprFtBGKY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jQW0qA/j; arc=none smtp.client-ip=209.85.217.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-vs1-f51.google.com with SMTP id ada2fe7eead31-602947681e2so217827137.0
+        for <linux-doc@vger.kernel.org>; Mon, 23 Mar 2026 10:12:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1774285919; x=1774890719; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Tbeh4qwPcRnsazlSaihmaNZJiTLzobAX3RSYW7/ADds=;
+        b=jQW0qA/jVHgDQz0ZDo7xwsLa5vYnjHcNaLkJk05FB89/dB8TRQll3Z9T+UlziWtmJS
+         nQRV0ZWdyQi27JATc0zy95oG11goq8LUKv7WXuU2DyuamNSWIn1bjDpKZoTtULdUxFlk
+         ivJTMyLNU28/IMF8uRhisVJadV4dVrGEEqRtAwx0SFnphD3WYC4TsB2O0mW9DEuD6/MK
+         95F8qlsl6NSU9PqAzEggII0JtE6UZ2R2X05sADBNBl5Lk3/rTMUZ2wluj8dh0I5BRVgG
+         ZAkMqxVA7UYqrw7KGWJyDhl5yHyR+HA4rgNiTmz1r03UW0GiPYajszponEgJI5HubR2b
+         3cGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774285919; x=1774890719;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Tbeh4qwPcRnsazlSaihmaNZJiTLzobAX3RSYW7/ADds=;
+        b=JOmCdyl3P9L1dHDoswpCXxvqY3m0xxX41l6hTMVpJ0Gx4N29Otd0JRLrs4InJTDLzb
+         zx0ViFAhfO1kbBjOuVW9BrilKeWwt3MXdwnJwovceRnJtrTCU8Nyufg2PFlXiHfCTeVu
+         W76mv/9xonDi+sDgKAKrJRoohWZNLUBNea1vNpaB9n2vx4vHjyg7XsYlzqPB+99JSF9w
+         kVhoCyn8TfLxPjeOIwMdvvnhbAruk8hETGZaHTOWfY/Pu67mNlne2E+JNU9QAAD32j5+
+         PlFqcjfoBa0v7dSmZ9DTPL+vYdmGgmOXYdsKnuvXPHtPehfSCqYTT5k5os467faCClkZ
+         qFjA==
+X-Gm-Message-State: AOJu0YzQAgz1PAxhK4Dz1tJZYSnwxI17Haq5RQ9We81DCdyUTYDSr2FL
+	QN3zhRp/OJxhPuFwMIb8LMl10tMVqLMO7140uYKPJy5auINJxVFdVABo
+X-Gm-Gg: ATEYQzxf5H6RWyPXLYPoEB2sQ+LZZ4rpszOkw2sf1ugXVXAbfeFaqjXz8DFfnM+eLXl
+	aFcwGfkJj9lqlvklNaXD1NoDTU9oupgLlMB9IwQzjZ6Az4lLcLLQxfGXbtU8ENpntD3GxGYdBaU
+	gEAvU0w4s1wBLag47l+qvt50+AkV5iUe2Qx2JO8qNarAi+BGOG55uXyLZtk4Lz3XweS9JYmIYPh
+	+phqDM2tPybeJx6Bhk8ftMDniYT31Q/jb0jn4JNJM0CIpIZ20Vb1k0g6K6TAIVC4NMzk4kUK6+Y
+	fPjP74wTCa7iYDOcTBfmTRxhTKBYSx6WJGvktYVLWkqcR8B1kt/+ii1ClConivb3dkAbOfS4hOT
+	emSA8U5XC7QBsxvePrg8oVh8ooNgNbJRERQLzGVVCMTd3Jl0dBvYllA3u0VPfod+oyo5MgYcJpk
+	k7Q9ddnltCwLtRHB2GKhQhgGzYBDxVV35SMgJkxR4A+QcRIRvIYF8bZnXLz5r94sIvp+d0d1SA5
+	Q==
+X-Received: by 2002:a05:6102:a46:b0:5ff:b8d8:b40b with SMTP id ada2fe7eead31-602aeb16725mr6341933137.11.1774285918967;
+        Mon, 23 Mar 2026 10:11:58 -0700 (PDT)
+Received: from parrot.dimenoc.com ([2804:29b8:512d:4c55:1868:543f:1aeb:fd26])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-95136bb0901sm9507306241.4.2026.03.23.10.11.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Mar 2026 10:11:57 -0700 (PDT)
+From: Daniel Pereira <danielmaraboo@gmail.com>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org,
+	Daniel Pereira <danielmaraboo@gmail.com>
+Subject: [PATCH 0/2] docs: pt_BR: Add translations for KVM x86 and Conclave
+Date: Mon, 23 Mar 2026 14:11:30 -0300
+Message-ID: <20260323171133.88074-1-danielmaraboo@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <6c315cb3-b3a0-478e-b8ec-36d82684d310@suse.com>
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80738-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[36];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,zytor.com,amd.com,google.com,alien8.de,linux.intel.com,infradead.org,iogearbox.net,davemloft.net,gmail.com,redhat.com,linux.dev,fomichev.me,lwn.net,vger.kernel.org,intel.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80740-lists,linux-doc=lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCPT_COUNT_THREE(0.00)[3];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pawan.kumar.gupta@linux.intel.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[intel.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:email,suse.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,alien8.de:email]
-X-Rspamd-Queue-Id: AA5622F9EF3
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,checkpatch.pl:url]
+X-Rspamd-Queue-Id: E54092FA2BB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Mar 23, 2026 at 04:44:24PM +0200, Nikolay Borisov wrote:
-> 
-> 
-> On 19.03.26 г. 17:40 ч., Pawan Gupta wrote:
-> > To reflect the recent change that moved LFENCE to the caller side.
-> > 
-> > Suggested-by: Borislav Petkov <bp@alien8.de>
-> > Signed-off-by: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
-> 
-> 
-> Nit: I think having the _nofence in the function name is leaking an
-> implementation detail into the name/interface. I.e things change and we
-> decide that the implementation of a particular function must change so we
-> just do the change and substantiate it in the commit message or in a
-> comment. Especially that we don't have a "with an lfence" version.
+This series adds Portuguese (pt_BR) translations for two documents in 
+the process and subsystem-specific documentation.
 
-The explicit "_nofence" is because the series changes the implementation of
-clear_bhb_loop() from lfence. If new call sites miss to add an lfence when
-it is required could lead to a security issue. Having the "_nofence" in the
-name helps avoid it.
+The first patch translates the KVM x86 maintainer guidelines, and the 
+second one adds the translation for the conclave documentation, which 
+covers project continuity.
 
-Apart from the name, the commit message of patch 1/10 and the comment in
-clear_bhb_loop() implementation covers this.
+Both files were validated with sphinx-build and checkpatch.pl.
 
-> What's more I'd consider this a "private" function, that's called via the
-> CLEAR_BRANCH_HISTORY macros, the only place it's called directly is in the
-> bpf jit code, but that's more of an exception.
+Daniel Pereira (2):
+  docs: pt_BR: Add translation for process/conclave.rst
+  docs: pt_BR: Add translation for KVM x86 maintainer guide
 
-Another place where the explicit "_nofence" in the name could help is while
-applying the mitigation in vmscape_apply_mitigation(), which sets the
-static call:
-
-vmscape_apply_mitigation()
-{
-...
-    if (vmscape_mitigation == VMSCAPE_MITIGATION_IBPB_EXIT_TO_USER)
-        static_call_update(vmscape_predictor_flush, write_ibpb);
-    else if (vmscape_mitigation == VMSCAPE_MITIGATION_BHB_CLEAR_EXIT_TO_USER)
-        static_call_update(vmscape_predictor_flush, clear_bhb_loop_nofence);
-
-> Still,
-> 
-> Reviewed-by: Nikolay Borisov <nik.borisov@suse.com>
-
-Thank you.
+Documentation/translations/pt_BR/index.rst             | 2 +
+Documentation/translations/pt_BR/process/conclave.rst  | (linhas)
+Documentation/translations/pt_BR/process/maintainer-kvm-x86.rst | (linhas)
 
