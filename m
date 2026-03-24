@@ -1,157 +1,218 @@
-Return-Path: <linux-doc+bounces-81008-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81010-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +Kw3D6i2wmlilAQAu9opvQ
-	(envelope-from <linux-doc+bounces-81008-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:07:04 +0100
+	id aFiuE623wmlilAQAu9opvQ
+	(envelope-from <linux-doc+bounces-81010-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:11:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98E3B318B12
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:07:03 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C23B6318BEC
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:11:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 601F13151BE7
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 16:00:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D0C18308B1DC
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 16:01:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD04526A08F;
-	Tue, 24 Mar 2026 16:00:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A99D726A08F;
+	Tue, 24 Mar 2026 16:01:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HlDEIdL2"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ckhIZcG6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60DB8390222
-	for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 16:00:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F37F2376FD
+	for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 16:01:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.67
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774368028; cv=none; b=CWBzPgqZ+hBZIDO/ALXrsdLfAm60BhAbJAd7PfgffMPTXVZUDCGUxYhKAoGUKAKcjY+wQnG052VxcWmjf+HBW9YOD6EFQzZ7Xkke2rFrk4AOPsbMXsh77oxpkCgJCQXCLinfIMSQoGXapGRiwRdwp6J5XA0tY599oZ4JysJdFeQ=
+	t=1774368082; cv=none; b=iOkfU9lp/yoVM4I1tnUQNUdx0Eqtben3fWL2UrfN8W/c538q15wGoXTT+7QyyXd/9+yUzd2u7g0bCt37MxlVBoo+pH6ttyWiPIJdGOSNydPACCc/zLyYdhK+Hz4XKG/wu2kaXDRLEKNFG0xaDFbG53SzvZh9Q3hnVs9d1Y/Qb20=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774368028; c=relaxed/simple;
-	bh=GSRmBhTh289JMeFAVm+lGZT1u+oVb+TsC82qWLSJGvs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Pfh6oGybrNtQTdbIAIBx6372xNE902ZzlUFcgN0nK+dJONAOY8NLcQoScqmUo74wypVWklyTzWKAwJa66GUJPdZ0cfvNMGtW/A8ND/tV0Iw5RFCnrzs95pnAWF45OgYHBa35URvuq3f4lYHwQvB0ctTjTK7sxG4MnjQ5pJx+Gqs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=HlDEIdL2; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1774368026;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wC5nlWS/Y001sSjAKXCDip+yjnGKfdG8L6ptY0xqiA8=;
-	b=HlDEIdL2ZtCCRvlLWXoPvbyKl395tnt4alN3aXtgXCgadeSDa/r0I8hnw5vwb+RqdbaaJ8
-	XX7HXYWKRFK5JMAM+nA9ezfZopTk39xqjc3QE8dQvPLVjDMqlHHtNYA/PDK/4eWvOBTCon
-	80l0WkZ44lbWMLIf0TZOeKl4VKZMz5w=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-6-7rwywur6Ot6qqo9pzJ8YaA-1; Tue,
- 24 Mar 2026 12:00:24 -0400
-X-MC-Unique: 7rwywur6Ot6qqo9pzJ8YaA-1
-X-Mimecast-MFC-AGG-ID: 7rwywur6Ot6qqo9pzJ8YaA_1774368022
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 1800318005B6;
-	Tue, 24 Mar 2026 16:00:22 +0000 (UTC)
-Received: from [10.22.65.192] (unknown [10.22.65.192])
-	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id B2EDD180075D;
-	Tue, 24 Mar 2026 16:00:18 +0000 (UTC)
-Message-ID: <579827ac-a933-45ec-b396-01656c30c9e4@redhat.com>
-Date: Tue, 24 Mar 2026 12:00:17 -0400
+	s=arc-20240116; t=1774368082; c=relaxed/simple;
+	bh=+MP5OZfZtfhlhRXIz/gQp3JJyWaLjXeKG3UkGoZNA2A=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MeSwwWIM2NFezhG06aNRsyreioEW2jkdJGIa8UI1uxE+1TqnYIobu1z+AYTEc1l+vEY2sJmym5GAxafAcueW7w621Uboh4IJv38yg18tJKVz2npiNCFzSBnYdG3fcuez1XT7gf8Gf/KsfSKlMO42vbrhPYJfs5R0W7BruoMw6LE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ckhIZcG6; arc=none smtp.client-ip=209.85.128.67
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f67.google.com with SMTP id 5b1f17b1804b1-486fd3a577eso35975785e9.1
+        for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 09:01:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774368080; x=1774972880; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=PfSGofvTqm76QjsXejgeUzCgTv8V+LAKQZ3dxfOOqYU=;
+        b=ckhIZcG6Qg6SPvuVSmawJs2eqlRGEoplWarTJlBjc65UB3UoYQb1sy7GKP3KCIzApf
+         rr7jbh6RLEZ1OiZUylOPUC4wEktr5IeYPprYtTsi+DOgte8fEZ2mLYuSIG74iojGdqoF
+         BaT4d1VS1ayHWf9HFwztyxtAUylrnBkWJOkum2zyaNdSMkmucMqf2DLI4jOAlM7ITmBT
+         kvif0hq6/syMciF8p9hHYixPHEiht/yFL9Z/1PrbQS8DnjjRxiqB+fqxD1LRu7e/0kcD
+         /v/W7m0fqWSMtvy7J+MxFk26D1Aplb11pZjj4ZSJ/IH2kWjBgKLgZ9k56mdpWkHSjftw
+         3w2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774368080; x=1774972880;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PfSGofvTqm76QjsXejgeUzCgTv8V+LAKQZ3dxfOOqYU=;
+        b=jrjiC0p/nIQlO/17SPNQW/pDsL3FeLjPwFTf1785GAEH3zkN6lSLmauDQmi89ukw79
+         kqL12HC3D6S7NLeJGpM2ZxyNRWwVTaXkgrXmWmqs1cCkCF8Q2M1xuHa06ZkpmKbAthEf
+         A3lAhTLT5gXdWaExXLK2YN+/esFrTe3EwO2OvkVzzOsicD7zwAjz3xYcbGtgCLo5ivjp
+         NVG7t4+XllHV9R0Lew0T7C4jWTjwRJdCli5y6pI77sWAzPShbLkpfE2JyjS+qIzylp3l
+         SyV5yezWsDQs/hrXSmFCNHlmlkGXqZGsGxj7GmX5NXTlOn1ysVQVRxRSOQUjtBGZg9OG
+         /wng==
+X-Forwarded-Encrypted: i=1; AJvYcCUXmK99ixV3sq6iJql+b6fvLh8y4h+wBAfHNdq6ADdagypoyhjlFofGQMvFD6Qdplmu1InuYP6TSnk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwuTo5Qi/JoopmQ6PgUAc8gzlCpE0XwV0aDUO5IAntgadkUD42l
+	i9JUKDfmK5qf+YRHFpeptP+MKtKlJ8j3gOP+Zg9MM3y871AmUJvTmQUJ
+X-Gm-Gg: ATEYQzy0SM8RRhscVFTUsryBA3Otg7l7zxRXBHUKm5jzMDM32MLDDlX/DuEGZ0C2llz
+	DRwbcz4WxXPtHSNVjNHr1NsIyheqB+BpK2MikTs3OUqCfu39gEbZ07WFohDSGqFVeulmZHzIifJ
+	6w7iEfxM5h8u57SiilQ4TvlegjsOAxu5faq8xbKLeRTCmIMZTsgESn+ZBCZPEhsRDtntMMXgO2k
+	gjPglE5Qb2FTQO1bnbs6hUZsJGOsOE0AzE4E0igDdYIllaF5PDq4E2NZnAvgrQpCTD1GIoiCfJe
+	2o+S859udUds0via3+IDWswHhr3tOAdgZQ538CGpohVRCqF0/ncjjr1fzWi4e6wBmTHdiCNtGgh
+	/gnSfzcss5i39zH+Vt8c5t4gXFLNZgLj0Jafq7DEl5UaAs151kEVuZr6UqKoWFNoTT8uz7EwkRT
+	d4rMh36xgPIGRpXJK6pYviZqmNQZBAlgat/XxKZj7qt7IE
+X-Received: by 2002:a05:600c:a30d:b0:477:54f9:6ac2 with SMTP id 5b1f17b1804b1-48715f003e8mr4867615e9.0.1774368079199;
+        Tue, 24 Mar 2026 09:01:19 -0700 (PDT)
+Received: from localhost.localdomain ([2a0c:5a87:9504:9400:da3a:ddff:feee:f1b0])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-487116c086dsm64121235e9.8.2026.03.24.09.01.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Mar 2026 09:01:18 -0700 (PDT)
+From: tovicito <tovictakamine@gmail.com>
+To: corbet@lwn.net
+Cc: skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	tovicito <tovictakamine@gmail.com>
+Subject: [PATCH] docs: driver-api: fix 6 spelling typos in Documentation/driver-api
+Date: Tue, 24 Mar 2026 17:00:48 +0100
+Message-ID: <20260324160048.4899-1-tovictakamine@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: Add CPU Isolation documentation
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Frederic Weisbecker <frederic@kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>,
- Anna-Maria Behnsen <anna-maria@linutronix.de>,
- Gabriele Monaco <gmonaco@redhat.com>, Ingo Molnar <mingo@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, Marcelo Tosatti <mtosatti@redhat.com>,
- Marco Crivellari <marco.crivellari@suse.com>,
- Michal Hocko <mhocko@kernel.org>, "Paul E . McKenney" <paulmck@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>, Phil Auld <pauld@redhat.com>,
- Steven Rostedt <rostedt@goodmis.org>, Thomas Gleixner <tglx@linutronix.de>,
- Valentin Schneider <vschneid@redhat.com>, Vlastimil Babka <vbabka@suse.cz>,
- linux-doc@vger.kernel.org
-References: <20250809094247.8384-1-frederic@kernel.org>
- <20260324153823.VKwebBuG@linutronix.de>
-Content-Language: en-US
-From: Waiman Long <longman@redhat.com>
-In-Reply-To: <20260324153823.VKwebBuG@linutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TAGGED_FROM(0.00)[bounces-81008-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,gmail.com];
+	TAGGED_FROM(0.00)[bounces-81010-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[longman@redhat.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[tovictakamine@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 98E3B318B12
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_FIVE(0.00)[5];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: C23B6318BEC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/24/26 11:38 AM, Sebastian Andrzej Siewior wrote:
-> On 2025-08-09 11:42:47 [+0200], Frederic Weisbecker wrote:
-> …
->> --- /dev/null
->> +++ b/Documentation/admin-guide/cpu-isolation.rst
->> @@ -0,0 +1,338 @@
-> …
->> +CPUSET configuration (cgroup v2)
->> +--------------------------------
->> +
->> +Assuming cgroup v2 is mounted to /sys/fs/cgroup, the following script
->> +isolates CPU 7 from scheduler domains.
->> +
->> +  cd /sys/fs/cgroup
->> +  # Activate the cpuset subsystem
->> +  echo +cpuset > cgroup.subtree_control
->> +  # Create partition to be isolated
->> +  mkdir test
->> +  cd test
->> +  echo +cpuset > cgroup.subtree_control
->> +  # Isolate CPU 7
->> +  echo 7 > cpuset.cpus
->> +  echo "isolated" > cpuset.cpus.partition
-> while looking at this again, shouldn't you also do
-> 	echo 7 > cpuset.cpus.exclusive
->
-> to ensure the CPU isn't used somewhere else?
+Signed-off-by: tovicito <tovictakamine@gmail.com>
+---
+ Documentation/driver-api/acpi/acpi-drivers.rst         | 2 +-
+ Documentation/driver-api/cxl/platform/acpi/cedt.rst    | 2 +-
+ Documentation/driver-api/cxl/platform/bios-and-efi.rst | 2 +-
+ Documentation/driver-api/dmaengine/pxa_dma.rst         | 2 +-
+ Documentation/driver-api/libata.rst                    | 2 +-
+ Documentation/driver-api/pci/p2pdma.rst                | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-For backport compatibility, the use of cpuset.cpus.exclusive is optional 
-for creating a local partition underneath the cgroup root. The example 
-should still work without setting cpuset.cpus.exclusive.
-
-Cheers,
-Longman
+diff --git a/Documentation/driver-api/acpi/acpi-drivers.rst b/Documentation/driver-api/acpi/acpi-drivers.rst
+index b1fbbddb8..376b6d8a6 100644
+--- a/Documentation/driver-api/acpi/acpi-drivers.rst
++++ b/Documentation/driver-api/acpi/acpi-drivers.rst
+@@ -47,7 +47,7 @@ generally be avoided and so struct acpi_driver objects should not be used.
+ Moreover, a device ID is necessary to bind a driver directly to an ACPI device
+ node, but device IDs are not generally associated with all of them.  Some of
+ them contain alternative information allowing the corresponding pieces of
+-hardware to be identified, for example represeted by an _ADR object return
++hardware to be identified, for example represented by an _ADR object return
+ value, and device IDs are not used in those cases.  In consequence, confusingly
+ enough, binding an ACPI driver to an ACPI device node may even be impossible.
+ 
+diff --git a/Documentation/driver-api/cxl/platform/acpi/cedt.rst b/Documentation/driver-api/cxl/platform/acpi/cedt.rst
+index 1d9c9d359..217a75fb4 100644
+--- a/Documentation/driver-api/cxl/platform/acpi/cedt.rst
++++ b/Documentation/driver-api/cxl/platform/acpi/cedt.rst
+@@ -55,7 +55,7 @@ voltile vs persistent, etc). One or more bits may be set. ::
+   Bit[1]: CXL Type 3 Memory
+   Bit[2]: Volatile Memory
+   Bit[3]: Persistent Memory
+-  Bit[4]: Fixed Config (HPA cannot be re-used)
++  Bit[4]: Fixed Config (HPA cannot be reused)
+ 
+ INTRA-host-bridge interleave (multiple devices on one host bridge) is NOT
+ reported in this structure, and is solely defined via CXL device decoder
+diff --git a/Documentation/driver-api/cxl/platform/bios-and-efi.rst b/Documentation/driver-api/cxl/platform/bios-and-efi.rst
+index a4b44c018..5d918b06f 100644
+--- a/Documentation/driver-api/cxl/platform/bios-and-efi.rst
++++ b/Documentation/driver-api/cxl/platform/bios-and-efi.rst
+@@ -277,7 +277,7 @@ The CFMWS field of the CEDT has special restriction bits which describe whether
+ the described memory region allows volatile or persistent memory (or both). If
+ the platform intends to support either:
+ 
+-1) A device with multiple medias, or
++1) A device with multiple media, or
+ 2) Using a persistent memory device as normal memory
+ 
+ A platform may wish to create multiple CEDT CFMWS entries to describe the same
+diff --git a/Documentation/driver-api/dmaengine/pxa_dma.rst b/Documentation/driver-api/dmaengine/pxa_dma.rst
+index 442ee691a..8f9da66b0 100644
+--- a/Documentation/driver-api/dmaengine/pxa_dma.rst
++++ b/Documentation/driver-api/dmaengine/pxa_dma.rst
+@@ -40,7 +40,7 @@ Design
+ ======
+ a) Virtual channels
+ Same concept as in sa11x0 driver, ie. a driver was assigned a "virtual
+-channel" linked to the requestor line, and the physical DMA channel is
++channel" linked to the requester line, and the physical DMA channel is
+ assigned on the fly when the transfer is issued.
+ 
+ b) Transfer anatomy for a scatter-gather transfer
+diff --git a/Documentation/driver-api/libata.rst b/Documentation/driver-api/libata.rst
+index 93d97fe78..28b8437f6 100644
+--- a/Documentation/driver-api/libata.rst
++++ b/Documentation/driver-api/libata.rst
+@@ -286,7 +286,7 @@ and other exceptional conditions. The primary responsibility of an
+ implementation is to call :c:func:`ata_std_error_handler`.
+ 
+ :c:func:`ata_std_error_handler` will perform a standard error handling sequence
+-to resurect failed devices, detach lost devices and add new devices (if any).
++to resurrect failed devices, detach lost devices and add new devices (if any).
+ This function will call the various reset operations for a port, as needed.
+ These operations are as follows.
+ 
+diff --git a/Documentation/driver-api/pci/p2pdma.rst b/Documentation/driver-api/pci/p2pdma.rst
+index 280673b50..d3f406cca 100644
+--- a/Documentation/driver-api/pci/p2pdma.rst
++++ b/Documentation/driver-api/pci/p2pdma.rst
+@@ -38,7 +38,7 @@ for all usage refcounts to reach zero.
+ At the lowest level the P2P subsystem offers a naked struct p2p_provider that
+ delegates lifecycle management to the providing driver. It is expected that
+ drivers using this option will wrap their MMIO memory in DMABUF and use DMABUF
+-to provide an invalidation shutdown. These MMIO addresess have no struct page, and
++to provide an invalidation shutdown. These MMIO addresses have no struct page, and
+ if used with mmap() must create special PTEs. As such there are very few
+ kernel uAPIs that can accept pointers to them; in particular they cannot be used
+ with read()/write(), including O_DIRECT.
+-- 
+2.53.0
 
 
