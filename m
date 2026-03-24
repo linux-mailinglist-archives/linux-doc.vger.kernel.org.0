@@ -1,176 +1,273 @@
-Return-Path: <linux-doc+bounces-80844-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80846-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wKQeO1bdwWnxXQQAu9opvQ
-	(envelope-from <linux-doc+bounces-80844-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:39:50 +0100
+	id IME7LiLewWnxXQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80846-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:43:14 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 888052FFCE9
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:39:50 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63E802FFE4D
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:43:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BD809302511B
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 00:39:49 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 87E2830A5637
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 00:40:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79DCE2D73BD;
-	Tue, 24 Mar 2026 00:39:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 635B634DCE6;
+	Tue, 24 Mar 2026 00:40:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=jagalactic.com header.i=@jagalactic.com header.b="IDxL0adn";
-	dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b="LyDgWlLR"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UMAN5iao"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from a48-180.smtp-out.amazonses.com (a48-180.smtp-out.amazonses.com [54.240.48.180])
-	(using TLSv1.2 with cipher AES128-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF1A024468C;
-	Tue, 24 Mar 2026 00:39:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.240.48.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 386E632AAA7;
+	Tue, 24 Mar 2026 00:40:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774312786; cv=none; b=Vav3YwoElx78UnoSOKqu7YXYtQOFbLk7qIE016nDTcHaHMnkJhjd6lBA1U13+SZojlQa+FT00o+du49ovkHXryhV8EonbXwKdFu4n4h2JM4Y9hV2sFmnj1omtcHYbmXB1XiVQZSsoTYAi8dzOMVogNf+IkZw+IkT1IC/4J48DOI=
+	t=1774312801; cv=none; b=LvJ3M4E9sYZOvbljotigY21N/IV92W2PBI5NCo9T7pMYljaP9wtUmPzyJyGbnBpnAqx5hYq6c2m85le+lGLI9SKYtEtCasALgbuvJ8/cia7+VK484rRHegBx/yHNoEe210rPiVwCkecaZ8MRFQXKiGBLwrDJXgJ4SpdNtt75iRQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774312786; c=relaxed/simple;
-	bh=CS0PFGLUThtWxdaPkYO7AYMNE+APMk7d4aScFvo2gFk=;
-	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:In-Reply-To:
-	 References:Message-ID; b=Q7YBzbZ/KyY/C18SymeKNocWeBxLYav33pdjDZxdUYv2d9czDkLJfU++CfXxR0tQpAEpAsvQwrDraXnrLxRrdKsWvT4jeMSwBFi07XSAcX+iKO4RPO+kGPik1ovAOrpxrEgdEsCpK5N4SYadqX5gK5Be00W5cnUjKQ42kSdY+8E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=jagalactic.com; spf=pass smtp.mailfrom=amazonses.com; dkim=pass (1024-bit key) header.d=jagalactic.com header.i=@jagalactic.com header.b=IDxL0adn; dkim=pass (1024-bit key) header.d=amazonses.com header.i=@amazonses.com header.b=LyDgWlLR; arc=none smtp.client-ip=54.240.48.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=jagalactic.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazonses.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=o25mqk5iffcfzgc3wo2zjhkohcyjzsoq; d=jagalactic.com; t=1774312784;
-	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Message-Id;
-	bh=CS0PFGLUThtWxdaPkYO7AYMNE+APMk7d4aScFvo2gFk=;
-	b=IDxL0adno0swqB61p4SlnN/+3L4pSdQAMtRzuaPbYcB/QfM4PkcDLk6AC/Bc+wxM
-	4cx12E+MfwNjSQtixZ8DskSe8V3I+B0lt0PegqMXfSca37saVnmtMZJqjofLMfGW9ri
-	4Kc8N3UVM8aIAqpohTp/+WcyduI8/D606YonMpM0=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1774312784;
-	h=Subject:From:To:Cc:Date:Mime-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Message-Id:Feedback-ID;
-	bh=CS0PFGLUThtWxdaPkYO7AYMNE+APMk7d4aScFvo2gFk=;
-	b=LyDgWlLRLAwgorgoTOvvBV0s2EA44Fw3ZmH5a9dPx1RZ3iejvfYwZdn2OvHbX62M
-	ZrnTiFWVYJZmRwliiqQgxEAjcw7f20PEtmsCCorh2akkuQYPiFcQqzXKQK9EE1wK48f
-	c7mIGsOWDQUR9+7iDz/fY/6OpzHHrec9UJWA9yi4=
-Subject: [PATCH V9 8/8] dax: export dax_dev_get()
-From: =?UTF-8?Q?John_Groves?= <john@jagalactic.com>
-To: =?UTF-8?Q?John_Groves?= <John@Groves.net>, 
-	=?UTF-8?Q?Miklos_Szeredi?= <miklos@szeredi.hu>, 
-	=?UTF-8?Q?Dan_Williams?= <dan.j.williams@intel.com>, 
-	=?UTF-8?Q?Bernd_Schubert?= <bschubert@ddn.com>, 
-	=?UTF-8?Q?Alison_Schofiel?= =?UTF-8?Q?d?= <alison.schofield@intel.com>
-Cc: =?UTF-8?Q?John_Groves?= <jgroves@micron.com>, 
-	=?UTF-8?Q?Jonathan_Corbe?= =?UTF-8?Q?t?= <corbet@lwn.net>, 
-	=?UTF-8?Q?Shuah_Khan?= <skhan@linuxfoundation.org>, 
-	=?UTF-8?Q?Vishal_Verma?= <vishal.l.verma@intel.com>, 
-	=?UTF-8?Q?Dave_Jiang?= <dave.jiang@intel.com>, 
-	=?UTF-8?Q?Matthew_Wilcox?= <willy@infradead.org>, 
-	=?UTF-8?Q?Jan_Kara?= <jack@suse.cz>, 
-	=?UTF-8?Q?Alexander_Viro?= <viro@zeniv.linux.org.uk>, 
-	=?UTF-8?Q?David_Hildenbrand?= <david@kernel.org>, 
-	=?UTF-8?Q?Christian_Bra?= =?UTF-8?Q?uner?= <brauner@kernel.org>, 
-	=?UTF-8?Q?Darrick_J_=2E_Wong?= <djwong@kernel.org>, 
-	=?UTF-8?Q?Randy_Dunlap?= <rdunlap@infradead.org>, 
-	=?UTF-8?Q?Jeff_Layton?= <jlayton@kernel.org>, 
-	=?UTF-8?Q?Amir_Goldstein?= <amir73il@gmail.com>, 
-	=?UTF-8?Q?Jonathan_Cameron?= <Jonathan.Cameron@huawei.com>, 
-	=?UTF-8?Q?Stefan_Hajnoczi?= <shajnocz@redhat.com>, 
-	=?UTF-8?Q?Joanne_Koong?= <joannelkoong@gmail.com>, 
-	=?UTF-8?Q?Josef_Bacik?= <josef@toxicpanda.com>, 
-	=?UTF-8?Q?Bagas_Sanjaya?= <bagasdotme@gmail.com>, 
-	=?UTF-8?Q?Chen_Linxuan?= <chenlinxuan@uniontech.com>, 
-	=?UTF-8?Q?James_Morse?= <james.morse@arm.com>, 
-	=?UTF-8?Q?Fuad_Tabba?= <tabba@google.com>, 
-	=?UTF-8?Q?Sean_Christopherson?= <seanjc@google.com>, 
-	=?UTF-8?Q?Shivank_Garg?= <shivankg@amd.com>, 
-	=?UTF-8?Q?Ackerley_Tng?= <ackerleytng@google.com>, 
-	=?UTF-8?Q?Gregory_Pric?= =?UTF-8?Q?e?= <gourry@gourry.net>, 
-	=?UTF-8?Q?Aravind_Ramesh?= <arramesh@micron.com>, 
-	=?UTF-8?Q?Ajay_Joshi?= <ajayjoshi@micron.com>, 
-	=?UTF-8?Q?venkataravis=40micron=2Ecom?= <venkataravis@micron.com>, 
-	=?UTF-8?Q?linux-doc=40vger=2Ekernel=2Eorg?= <linux-doc@vger.kernel.org>, 
-	=?UTF-8?Q?linux-kernel=40vger=2Ekernel=2Eorg?= <linux-kernel@vger.kernel.org>, 
-	=?UTF-8?Q?nvdimm=40lists=2Elinux=2Edev?= <nvdimm@lists.linux.dev>, 
-	=?UTF-8?Q?linux-cxl=40vger=2Ekernel=2Eorg?= <linux-cxl@vger.kernel.org>, 
-	=?UTF-8?Q?linux-fsdevel=40vger=2Ekernel=2Eorg?= <linux-fsdevel@vger.kernel.org>, 
-	=?UTF-8?Q?John_Groves?= <john@groves.net>
-Date: Tue, 24 Mar 2026 00:39:43 +0000
+	s=arc-20240116; t=1774312801; c=relaxed/simple;
+	bh=vjPTBgwRkNPpj8g60XG24l6u4MKrR9E2q9j+xrBCY/c=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=fffSdwMm0XCr+zOcYjGG4+a7K7qvA4l+Bk/vJX14KqYQenU1FMcxHtUKsHL02nnvkBH8W7v4G1gL/J7fuloMxbdpn6ua4BFaeEq9TPAYX1CWk4oDhZWcIvOmESbTkpmAIljhWbIIoSgU0Wdji5VSa4oYFYzho3adrZPxiy1TCQc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UMAN5iao; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5AB6AC2BCB7;
+	Tue, 24 Mar 2026 00:40:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774312800;
+	bh=vjPTBgwRkNPpj8g60XG24l6u4MKrR9E2q9j+xrBCY/c=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=UMAN5iaoN2R/H4BluGxXNkZeGXMDBR6YJkTKMNLE+NO961MjiVG2tQEldY0QSzZVn
+	 3BiqXbsb3fjMJEViEEfP3uus6I53jVjQR/ymhU2zWmcH/i3j7VKaRBCMwtXbkNJXWr
+	 bU6WIKeMBEoHHz2wF4ogzI28eZndPd5G95BmLHe07xgBGMik/oRSuuA6jazLtc6V7J
+	 VZpv/e4s9Fx33wHsLnCLYJcz5w6kBvpL7RSVelWr0WDbrFyc0FFYY+UgI8sw8tc9kJ
+	 AOMoO1GSXGa1Nea/U4xJEAFGm4a9V6HAyT08GbgzLY8uST8micXKu7GlvNiBQPzks+
+	 M8BA39GykcmuQ==
+From: SeongJae Park <sj@kernel.org>
+To: gutierrez.asier@huawei-partners.com
+Cc: SeongJae Park <sj@kernel.org>,
+	artem.kuzin@huawei.com,
+	stepanov.anatoly@huawei.com,
+	wangkefeng.wang@huawei.com,
+	yanquanmin1@huawei.com,
+	zuoze1@huawei.com,
+	damon@lists.linux.dev,
+	akpm@linux-foundation.org,
+	ljs@kernel.org,
+	Liam.Howlett@oracle.com,
+	vbabka@kernel.org,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH v1 1/1] This patch set introces a new action: DAMOS_COLLAPSE.
+Date: Mon, 23 Mar 2026 17:39:51 -0700
+Message-ID: <20260324003952.86819-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260323145646.4165053-1-gutierrez.asier@huawei-partners.com>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: 
- <0100019d1d463523-617e8165-a084-4d91-aa5e-13778264d5d4-000000@email.amazonses.com>
-References: 
- <0100019d1d463523-617e8165-a084-4d91-aa5e-13778264d5d4-000000@email.amazonses.com> 
- <20260324003933.5127-1-john@jagalactic.com>
-X-Mailer: Amazon WorkMail
-Thread-Index: AQHcuya0Yn9q3UilSx21BadXMeqnCw==
-Thread-Topic: [PATCH V9 8/8] dax: export dax_dev_get()
-X-Wm-Sent-Timestamp: 1774312782
-X-Original-Mailer: git-send-email 2.52.0
-Message-ID: <0100019d1d487fb8-c84bb720-35d3-4d50-8eb4-c92254121bcb-000000@email.amazonses.com>
-Feedback-ID: ::1.us-east-1.LF00NED762KFuBsfzrtoqw+Brn/qlF9OYdxWukAhsl8=:AmazonSES
-X-SES-Outgoing: 2026.03.24-54.240.48.180
-X-Spamd-Result: default: False [0.75 / 15.00];
-	TO_EXCESS_QP(1.20)[];
-	CC_EXCESS_QP(1.20)[];
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[jagalactic.com,quarantine];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[jagalactic.com:s=o25mqk5iffcfzgc3wo2zjhkohcyjzsoq,amazonses.com:s=224i4yxa5dv7c2xz3womw6peuasteono];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	XM_UA_NO_VERSION(0.01)[];
-	TAGGED_FROM(0.00)[bounces-80844-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[40];
+	TAGGED_FROM(0.00)[bounces-80846-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[micron.com,lwn.net,linuxfoundation.org,intel.com,infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,gmail.com,huawei.com,redhat.com,toxicpanda.com,uniontech.com,arm.com,google.com,amd.com,gourry.net,vger.kernel.org,lists.linux.dev,groves.net];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[john@jagalactic.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[jagalactic.com:+,amazonses.com:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EXCESS_QP(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,email.amazonses.com:mid,amazonses.com:dkim,jagalactic.com:dkim,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,groves.net:email]
-X-Rspamd-Queue-Id: 888052FFCE9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,huawei-partners.com:email]
+X-Rspamd-Queue-Id: 63E802FFE4D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: John Groves <john@groves.net>=0D=0A=0D=0Afamfs needs to look up a d=
-ax_device by dev_t when resolving fmap=0D=0Aentries that reference charac=
-ter dax devices.=0D=0A=0D=0AReviewed-by: Dave Jiang <dave.jiang@intel.com=
->=0D=0ASigned-off-by: John Groves <john@groves.net>=0D=0A---=0D=0A driver=
-s/dax/super.c | 3 ++-=0D=0A include/linux/dax.h | 1 +=0D=0A 2 files chang=
-ed, 3 insertions(+), 1 deletion(-)=0D=0A=0D=0Adiff --git a/drivers/dax/su=
-per.c b/drivers/dax/super.c=0D=0Aindex d4ab60c406bf..25cf99dd9360 100644=0D=
-=0A--- a/drivers/dax/super.c=0D=0A+++ b/drivers/dax/super.c=0D=0A@@ -521,=
-7 +521,7 @@ static int dax_set(struct inode *inode, void *data)=0D=0A =09=
-return 0;=0D=0A }=0D=0A=20=0D=0A-static struct dax_device *dax_dev_get(de=
-v_t devt)=0D=0A+struct dax_device *dax_dev_get(dev_t devt)=0D=0A {=0D=0A =
-=09struct dax_device *dax_dev;=0D=0A =09struct inode *inode;=0D=0A@@ -544=
-,6 +544,7 @@ static struct dax_device *dax_dev_get(dev_t devt)=0D=0A=20=0D=
-=0A =09return dax_dev;=0D=0A }=0D=0A+EXPORT_SYMBOL_GPL(dax_dev_get);=0D=0A=
-=20=0D=0A struct dax_device *alloc_dax(void *private, const struct dax_op=
-erations *ops)=0D=0A {=0D=0Adiff --git a/include/linux/dax.h b/include/li=
-nux/dax.h=0D=0Aindex bf37b9a982f3..8c7e23ddf857 100644=0D=0A--- a/include=
-/linux/dax.h=0D=0A+++ b/include/linux/dax.h=0D=0A@@ -54,6 +54,7 @@ struct=
- dax_device *alloc_dax(void *private, const struct dax_operations *ops);=0D=
-=0A void *dax_holder(struct dax_device *dax_dev);=0D=0A void put_dax(stru=
-ct dax_device *dax_dev);=0D=0A void kill_dax(struct dax_device *dax_dev);=
-=0D=0A+struct dax_device *dax_dev_get(dev_t devt);=0D=0A void dax_write_c=
-ache(struct dax_device *dax_dev, bool wc);=0D=0A bool dax_write_cache_ena=
-bled(struct dax_device *dax_dev);=0D=0A bool dax_synchronous(struct dax_d=
-evice *dax_dev);=0D=0A--=20=0D=0A2.53.0=0D=0A=0D=0A
+Hello Asier,
+
+On Mon, 23 Mar 2026 14:56:45 +0000 <gutierrez.asier@huawei-partners.com> wrote:
+
+> From: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+> 
+> For DAMOS_HUGEPAGE and DAMOS_NOHUGEPAGE to work, khugepaged should be
+> working, since it relies on hugepage_madvise to add a new slot. This
+> slot should be picked up by khugepaged and eventually collapse (or
+> not, if we are using DAMOS_NOHUGEPAGE) the pages. If THP is not
+> enabled, khugepaged will not be working, and therefore no collapse
+> will happen.
+> 
+> DAMOS_COLLAPSE eventually calls madvise_collapse, which will collapse
+> the address range synchronously.
+> 
+> This new action may be required to support autotuning with hugepage as
+> a goal[1].
+> 
+> [1]: https://lore.kernel.org/damon/20260313000816.79933-1-sj@kernel.org/
+> 
+> ---------
+> Benchmarks:
+> 
+> T n: THP never
+> T m: THP madvise
+> D h: DAMON action hugepage
+> D c: DAMON action collapse
+> 
+> +------------------+----------+----------+----------+
+> |                  | T n, D h | T m, D h | T n, D c |
+> +------------------+----------+----------+----------+
+> | Total memory use | 2.07     | 2.09     | 2.07     |
+> | Huge pages       | 0        | 1.3      | 1.25     |
+> +------------------+----------+----------+----------+
+
+Thank you for sharing the benchmark results!  But, I'm having a hard time to
+understand what this really means.  Could you please further clarify the setup
+of the benchmarks and interpretation of the results?
+
+> 
+> Changes
+> ---------
+> v1-v2:
+> Added benchmarks
+> Added damos_filter_type documentation for new action to fix kernel-doc
+
+Please add Changelog on the commentary section [1].  Also, please consider
+adding links to previous versions.
+
+> 
+> Signed-off-by: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+> ---
+>  Documentation/mm/damon/design.rst      |  4 ++++
+>  include/linux/damon.h                  |  2 ++
+>  mm/damon/sysfs-schemes.c               |  4 ++++
+>  mm/damon/vaddr.c                       |  3 +++
+>  tools/testing/selftests/damon/sysfs.py | 11 ++++++-----
+>  5 files changed, 19 insertions(+), 5 deletions(-)
+> 
+> diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+> index 838b14d22519..405142641e55 100644
+> --- a/Documentation/mm/damon/design.rst
+> +++ b/Documentation/mm/damon/design.rst
+> @@ -467,6 +467,10 @@ that supports each action are as below.
+>     Supported by ``vaddr`` and ``fvaddr`` operations set. When
+>     TRANSPARENT_HUGEPAGE is disabled, the application of the action will just
+>     fail.
+> + - ``collapse``: Call ``madvise()`` for the region with ``MADV_COLLAPSE``.
+> +   Supported by ``vaddr`` and ``fvaddr`` operations set. When
+> +   TRANSPARENT_HUGEPAGE is disabled, the application of the action will just
+> +   fail.
+>   - ``lru_prio``: Prioritize the region on its LRU lists.
+>     Supported by ``paddr`` operations set.
+>   - ``lru_deprio``: Deprioritize the region on its LRU lists.
+> diff --git a/include/linux/damon.h b/include/linux/damon.h
+> index d9a3babbafc1..6941113968ec 100644
+> --- a/include/linux/damon.h
+> +++ b/include/linux/damon.h
+> @@ -121,6 +121,7 @@ struct damon_target {
+>   * @DAMOS_PAGEOUT:	Reclaim the region.
+>   * @DAMOS_HUGEPAGE:	Call ``madvise()`` for the region with MADV_HUGEPAGE.
+>   * @DAMOS_NOHUGEPAGE:	Call ``madvise()`` for the region with MADV_NOHUGEPAGE.
+> + * @DAMOS_COLLAPSE:	Call ``madvise()`` for the region with MADV_COLLAPSE.
+>   * @DAMOS_LRU_PRIO:	Prioritize the region on its LRU lists.
+>   * @DAMOS_LRU_DEPRIO:	Deprioritize the region on its LRU lists.
+>   * @DAMOS_MIGRATE_HOT:  Migrate the regions prioritizing warmer regions.
+> @@ -140,6 +141,7 @@ enum damos_action {
+>  	DAMOS_PAGEOUT,
+>  	DAMOS_HUGEPAGE,
+>  	DAMOS_NOHUGEPAGE,
+> +	DAMOS_COLLAPSE,
+>  	DAMOS_LRU_PRIO,
+>  	DAMOS_LRU_DEPRIO,
+>  	DAMOS_MIGRATE_HOT,
+> diff --git a/mm/damon/sysfs-schemes.c b/mm/damon/sysfs-schemes.c
+> index 5186966dafb3..aa08a8f885fb 100644
+> --- a/mm/damon/sysfs-schemes.c
+> +++ b/mm/damon/sysfs-schemes.c
+> @@ -2041,6 +2041,10 @@ static struct damos_sysfs_action_name damos_sysfs_action_names[] = {
+>  		.action = DAMOS_NOHUGEPAGE,
+>  		.name = "nohugepage",
+>  	},
+> +	{
+> +		.action = DAMOS_COLLAPSE,
+> +		.name = "collapse",
+> +	},
+>  	{
+>  		.action = DAMOS_LRU_PRIO,
+>  		.name = "lru_prio",
+> diff --git a/mm/damon/vaddr.c b/mm/damon/vaddr.c
+> index b069dbc7e3d2..dd5f2d7027ac 100644
+> --- a/mm/damon/vaddr.c
+> +++ b/mm/damon/vaddr.c
+> @@ -903,6 +903,9 @@ static unsigned long damon_va_apply_scheme(struct damon_ctx *ctx,
+>  	case DAMOS_NOHUGEPAGE:
+>  		madv_action = MADV_NOHUGEPAGE;
+>  		break;
+> +	case DAMOS_COLLAPSE:
+> +		madv_action = MADV_COLLAPSE;
+> +		break;
+>  	case DAMOS_MIGRATE_HOT:
+>  	case DAMOS_MIGRATE_COLD:
+>  		return damos_va_migrate(t, r, scheme, sz_filter_passed);
+> diff --git a/tools/testing/selftests/damon/sysfs.py b/tools/testing/selftests/damon/sysfs.py
+> index 3aa5c91548a5..c6476e63f4fb 100755
+> --- a/tools/testing/selftests/damon/sysfs.py
+> +++ b/tools/testing/selftests/damon/sysfs.py
+> @@ -123,11 +123,12 @@ def assert_scheme_committed(scheme, dump):
+>              'pageout': 2,
+>              'hugepage': 3,
+>              'nohugeapge': 4,
+> -            'lru_prio': 5,
+> -            'lru_deprio': 6,
+> -            'migrate_hot': 7,
+> -            'migrate_cold': 8,
+> -            'stat': 9,
+> +            'collapse': 5
+
+Comman is missed?
+
+> +            'lru_prio': 6,
+> +            'lru_deprio': 7,
+> +            'migrate_hot': 8,
+> +            'migrate_cold': 9,
+> +            'stat': 10,
+>              }
+>      assert_true(dump['action'] == action_val[scheme.action], 'action', dump)
+>      assert_true(dump['apply_interval_us'] == scheme. apply_interval_us,
+> -- 
+> 2.43.0
+
+Other than the selftest part, code looks good.  Please consider dropping RFC
+tag from the next spin.  Clarifying more details about the test would be
+helpful, though.
+
+[1] https://docs.kernel.org/process/submitting-patches.html#commentary
+
+
+Thanks,
+SJ
 
