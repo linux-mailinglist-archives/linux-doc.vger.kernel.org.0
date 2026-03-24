@@ -1,223 +1,123 @@
-Return-Path: <linux-doc+bounces-81026-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81035-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +PiULjK4wmlilAQAu9opvQ
-	(envelope-from <linux-doc+bounces-81026-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:13:38 +0100
+	id 4PjSCNq4wmlilAQAu9opvQ
+	(envelope-from <linux-doc+bounces-81035-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:16:26 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A81B318C88
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:13:38 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65DAD318D25
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 17:16:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id CB99430EB76F
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 16:05:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6722C30DEF7A
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 16:09:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 168F53A16B9;
-	Tue, 24 Mar 2026 16:04:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 718CB35A388;
+	Tue, 24 Mar 2026 16:09:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qh6tn7NE"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="LwK94CJF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A18503939DF
-	for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 16:04:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.44
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774368260; cv=pass; b=ABGT2sGK7Szu8URtj0rCiFlsazBl6+ppa6qfjQA1DKrLcV7j0EmPaeHR2eQHb8fXHbuP1YfPP1Lcr98EFoJFrzJ1flYt81UicUyLEp01WPdncKCp4/kW3tLgQIN4Duw29EsW+ko8uEF3aD3SRdQhWgtUnHRCU+L4pnEgMqfTVtg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774368260; c=relaxed/simple;
-	bh=Bap2I2Iwx1j90rJe9QRr9BlObCdTslZ+pvyg11P5Bkk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=MRbFlkTlUCp/1yO1H1/EBt1aE7Xp0lHqx83qtaatmFXztLsDSjVH8UZK2C+BvbXcMQfKXAuBZAMi0oMS4n0kqf4WzyHLQYymnzvu9lhxiFIVi1fWDQ71t9BXNd+DOMvZfSqn9d3fg9BL3urjdwYOOrkLLnacnyektw0oW26AC1Y=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qh6tn7NE; arc=pass smtp.client-ip=209.85.218.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b9961e4f71bso71620066b.3
-        for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 09:04:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774368256; cv=none;
-        d=google.com; s=arc-20240605;
-        b=NIw6FUyZ34GhmQs6WdKsk9gxtZvOkQ53hd7eg/VgP/MRkV0fRaFZpLbjUM4urMgvEk
-         1nl+2rbT7d8jfrhZ87tYTopub81su86p3NwqP9hTYpp4M0pMlFVakyxyTsb010ThVp9S
-         4yF2zBbrGWbkSTDdfzFhwFAc6m0A4v+5vkRmw5m0qeYhVO1VZAvxvDDScS69x5yD/2Sd
-         uJfu4+Zv1p5YZJvK2HTTMTVPjj93p87HvE0YqyP1d2/aRVsxMCtoxffX3yYpziCHcYEx
-         g+QAkhiRUvjsoziFs0jg5V31IiSQkk/PUvAamHYPRypZjL5HItJoWU1eHSga6KLlMd1j
-         BkEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=9lAIj9nrwaKz6NfMKfdrELFElXaxUC4oA/DBJISnVu8=;
-        fh=eWEm7KH28NgUswDmJa4RllDU3g5yspbHteE+Xdz3EiY=;
-        b=gDeNJuvlkAl3uONiTOkF62iOLcJnz2ASOjhvKkPpSko7hya/K0Iho1+/dFrq4j4Iq8
-         OhxN0ijH891+ZB381knXFKzATBGBXZgn/fg6zF+S9nC6xfaOxpi9HWGhHzbdE54imL5A
-         u04bd9etcF2qF7go73XYeorSOZTArZDqpRcj8XXd8Xbvu3UcbEnBsg3woUYZ7ucw4yVn
-         CdcQRShldbqPYMH7I5fBjlybUfaC9Jw8kYciqcyvp23+PDC9bTiEb0a/D9CQdn5XwzAl
-         nw0KnTugYxeKqJ/qJ1IQHYtSuMnIutOe/h8VcJi6MKRl3azAIZwzWsy521DFIIriV9lV
-         iiFA==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774368256; x=1774973056; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9lAIj9nrwaKz6NfMKfdrELFElXaxUC4oA/DBJISnVu8=;
-        b=qh6tn7NEE62HHX3lMpBe7k2khmCW7U35AtqhMprApltPlBRt9IlTWtAF584ZGtnAf/
-         Rdh/SWyughatgMoucsZtjvMqa3P0la0SKGbrWMU8Z0Bf2/FGFkPPP7oLX2k4OdesqcPa
-         k9k2eid1bA6w6ZouXsQd8pHUDafnTZh1tsFgaKzsXg1ZrvZ/j7c20MG3gacpDE37rIJ4
-         3SWsPTR7SvHbb8DoFVhh3pSq+IrFw4VrLGJS2tlJgubFQ5R3JQS9ozUfD6ep76AFTJLC
-         CbGHW2Rogx5U00e38UbbQjFENm60+9lpMFL1qLJT/nDcVxNzfczk9zreYGRLKQnKThpX
-         RBnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774368256; x=1774973056;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=9lAIj9nrwaKz6NfMKfdrELFElXaxUC4oA/DBJISnVu8=;
-        b=GCx/qplXMOspOSFdj6PLsS8eHEhGPuMDzDsMTwj4C//kohG7HgvUdzmPagU0L8Gdmq
-         aQll/6gkLPtPGS6dot0o+Ciqh+9p4Rs0nypkEQezb8Zq01B1CflCi0SgGh6PPIP+66Gn
-         XQopkwlhZilZPmhCKn4aLfyo0CmHKfdIP1LGVxc3cxC1zAEfuIwhHamQ713K5+8bmc4R
-         /sRTsvJD/8hwxq2GtMCUZbmHnqQHu3k4gmpzrm+4Xcm+ucJ3F6D1HiUGgeGNBgvmWtA7
-         JHEbE8PPB128pfcIV6EfvH4OrLvYPk7DEGYN5mfsiLTOZP09Ok76EWeQZ0qNX5q9NYiv
-         DfTg==
-X-Forwarded-Encrypted: i=1; AJvYcCXBp51Vncexi5ixoKv38MA0UFn9/ry96rR6JbVYl3YPY+GcWd2+Mbfg7e4PoPSmepJjyDAgr9yQXck=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyVaRAgPVJzvbTF1MlBtlRlqaK60i0TkOgcHxMuD7eOExf4kVYY
-	FP7RmhGgX7Q6IxRDoCSP/2CvwS3ncLTGalLheLpWpusyBj5jObh6hamYTQKTA8KarOXBOIo9tf2
-	6dc8zOg2GYbdxDm7e0acn2uj5mJVBcw0=
-X-Gm-Gg: ATEYQzyIGw8ya+KCwQBp9340A2nREPctupQZy9QHaqUil6c2+dGPkkLa4eTqrQy5BoG
-	W4LaGO0qqU/wneptvGK34OYFCk/ib4FSES8BWkdgtcbCE3QQBTtCEC3nowW05fb32i5J7j5CnXN
-	eyXxHsIM/CfL8kyvf4XycN31G126eSE+I92oC9oP4SuW3yf0oI3agQ9DxkmKKDbyR/4MN8Q72WH
-	2UVXm2OVqlRVPzE8imDlr0qR9b9jwpceCxkLN5jFMymW4VxcPtck/HKywWj0vFs4aTOhHPAXuSG
-	zxIh9CFAxZTVdEMtl3Zg/vBYrVXWLLK1iluTNp1TXOqgC73vtEEd5V7WDEJiNbD1a17JaKgEfGO
-	oS+M1v6NPIkEEkIKNkPv9/jD/Uw==
-X-Received: by 2002:a17:907:a807:b0:b90:8016:cfe4 with SMTP id
- a640c23a62f3a-b982f0bd41bmr1118661566b.10.1774368255441; Tue, 24 Mar 2026
- 09:04:15 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DF0C3783AC;
+	Tue, 24 Mar 2026 16:09:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774368576; cv=none; b=BMJO4JS4uSxY5sHykHqbm+rL4NAmGnbMjBDnxBDbeLjG1KnG3hQSQZyKSqFF/mIUgKYC12RZTkkWDB7DsWGLXyDIs5grjJ2Y2mwshc2dVE9Wj1+WYDWVcFj1xcl8FJH3nX+wa7xizg+jYW9GzreG0lZxfEUfNEyhIWONfOrEN2A=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774368576; c=relaxed/simple;
+	bh=3eGZkZF2E5iDvhWmwBI+5vJ898+4uMYJpFVFxUcX0Gw=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=rFT7cx78qWTgs//zcXi8RhasGg+SOO2e0UsFpX1wgyynpq+wwHnFD3NBA51JFldFwxXjpNl85Yngl4Fub6MzxHV6ZLd9wyBHPljLHDzbJHDoCq7m5LiJzJliKhkaUqmiZjDVCf4P7Fi3iwR5feWx7r424X92bC2oLw63EQpblfw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=LwK94CJF; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 684DF411C2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1774368574; bh=vIVfraVpO+qUOmSU4jOLYDL4I15nzsP+Rg3pdC9WrxU=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=LwK94CJFYw973HUIN/gK7ewHjIBAU4kiVj41+kRV5gmDeLXvGV7cx4eAh689iL08D
+	 hXlQadTNkTkRvQJeSG5o0ySV4Ad5rLn+osiKlW7Xt2gsnRcwpUdg7tFPC+jZuVNlDF
+	 4/pZX4Wl4Choqu0rGsQVzC7BObuaDPkkTQIGkHdWUnO3UZSDy9crEotDAWerZD7r55
+	 U7LivXLhVz4+1HWoxrf40UAfB57+wS9FSCWwVUUccK5CQ5xCsdNW9YorZ5waBJnkv4
+	 VitUUf9ChW9KmhYipS0DO2uT0kM6b42z4lzTjPn8ER3CBvpbIQQOu6tmcFGQF446sv
+	 FJkEXKSFYEXoA==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 684DF411C2;
+	Tue, 24 Mar 2026 16:09:34 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: tovicito <tovictakamine@gmail.com>
+Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, tovicito <tovictakamine@gmail.com>
+Subject: Re: [PATCH] docs: driver-api: fix 6 spelling typos in
+ Documentation/driver-api
+In-Reply-To: <20260324160048.4899-1-tovictakamine@gmail.com>
+References: <20260324160048.4899-1-tovictakamine@gmail.com>
+Date: Tue, 24 Mar 2026 10:09:33 -0600
+Message-ID: <87tsu56wg2.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260323164858.1939248-1-sashal@kernel.org> <20260323164858.1939248-2-sashal@kernel.org>
- <CAADnVQJjJwRtUQNZAhLoXF7DYprhU97xJReZg9izV7n3f7=uJQ@mail.gmail.com> <acK1M_CvbYCtq7im@laps>
-In-Reply-To: <acK1M_CvbYCtq7im@laps>
-From: Alexei Starovoitov <alexei.starovoitov@gmail.com>
-Date: Tue, 24 Mar 2026 09:04:03 -0700
-X-Gm-Features: AaiRm50g5sRljE-pOlu1qkME3uHtiXscwZS9bY6E1gCFONCc9DBnMt7wYDgAtI4
-Message-ID: <CAADnVQLr5Sx+vG6D4Jxm8r2vPxu7ygFz60LGwmqfkc=VB0-Miw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] kallsyms: show function parameter info in oops/WARN dumps
-To: Sasha Levin <sashal@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Masahiro Yamada <masahiroy@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@kernel.org>, 
-	Petr Mladek <pmladek@suse.com>, Alexei Starovoitov <ast@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	David Gow <davidgow@google.com>, Kees Cook <kees@kernel.org>, 
-	Greg KH <gregkh@linuxfoundation.org>, Luis Chamberlain <mcgrof@kernel.org>, 
-	Steven Rostedt <rostedt@goodmis.org>, Helge Deller <deller@gmx.de>, 
-	Randy Dunlap <rdunlap@infradead.org>, Geert Uytterhoeven <geert@linux-m68k.org>, 
-	Juergen Gross <jgross@suse.com>, James Bottomley <James.Bottomley@hansenpartnership.com>, 
-	Alexey Dobriyan <adobriyan@gmail.com>, Vlastimil Babka <vbabka@kernel.org>, 
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Petr Pavlu <petr.pavlu@suse.com>, 
-	X86 ML <x86@kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
-	Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>, 
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, linux-modules@vger.kernel.org, 
-	bpf <bpf@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+Content-Type: text/plain
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81026-lists,linux-doc=lfdr.de];
+	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-81035-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,infradead.org,suse.com,lwn.net,google.com,linuxfoundation.org,goodmis.org,gmx.de,linux-m68k.org,hansenpartnership.com,gmail.com,ideasonboard.com,vger.kernel.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[35];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alexeistarovoitov@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7A81B318C88
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,lwn.net:dkim]
+X-Rspamd-Queue-Id: 65DAD318D25
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Mar 24, 2026 at 9:00=E2=80=AFAM Sasha Levin <sashal@kernel.org> wro=
-te:
->
-> On Tue, Mar 24, 2026 at 08:03:30AM -0700, Alexei Starovoitov wrote:
-> >On Mon, Mar 23, 2026 at 9:49=E2=80=AFAM Sasha Levin <sashal@kernel.org> =
-wrote:
-> >>
-> >> Embed DWARF-derived function parameter name and type information in th=
-e
-> >> kernel image so that oops and WARN dumps display the crashing function=
-'s
-> >> register-passed arguments with their names, types, and values.
-> >>
-> >> A new build-time tool (scripts/gen_paraminfo.c) parses DW_TAG_subprogr=
-am
-> >> and DW_TAG_formal_parameter entries from DWARF .debug_info, extracting
-> >> parameter names and human-readable type strings. The resulting tables =
-are
-> >> stored in .rodata using the same two-phase link approach as lineinfo.
-> >>
-> >> At runtime, kallsyms_show_paraminfo() performs a binary search on the
-> >> paraminfo tables, maps parameters to x86-64 calling convention registe=
-rs
-> >> (RDI, RSI, RDX, RCX, R8, R9), and prints each parameter's name, type,
-> >> and value from pt_regs. If a parameter value matches the page fault
-> >> address (CR2), it is highlighted with "<-- fault address".
-> >>
-> >> Integration at show_regs() means this works for both oops and WARN()
-> >> automatically, since both paths provide full pt_regs at the exception
-> >> point.
-> >>
-> >> Example output:
-> >>
-> >>   Function parameters (ext4_readdir):
-> >>     file     (struct file *)         =3D 0xffff888123456000
-> >>     ctx      (struct dir_context *)  =3D 0x0000000000001234  <-- fault=
- address
-> >>
-> >> Gated behind CONFIG_KALLSYMS_PARAMINFO (depends on CONFIG_KALLSYMS_LIN=
-EINFO).
-> >> Adds approximately 1-2 MB to the kernel image for ~58K functions.
-> >>
-> >> Assisted-by: Claude:claude-opus-4-6
-> >> Signed-off-by: Sasha Levin <sashal@kernel.org>
-> >
-> >Nack.
-> >
-> >You asked claude to reinvent pahole and BTF and it did it
-> >completely missing years of fine tuning that pahole does.
->
-> Let's keep this on the technical side please.
->
-> >dwarf cannot be trusted as-is. pahole converts it carefully
-> >by analyzing optimized out arguments and dropping signatures
->
-> Fair point about pahole and optimized-out args. The problem is that BTF d=
-epends
-> on BPF_SYSCALL, and the environments I care about can't enable either.
+tovicito <tovictakamine@gmail.com> writes:
 
-This is trivially fixable without reinventing pahole.
+> Signed-off-by: tovicito <tovictakamine@gmail.com>
+> ---
+>  Documentation/driver-api/acpi/acpi-drivers.rst         | 2 +-
+>  Documentation/driver-api/cxl/platform/acpi/cedt.rst    | 2 +-
+>  Documentation/driver-api/cxl/platform/bios-and-efi.rst | 2 +-
+>  Documentation/driver-api/dmaengine/pxa_dma.rst         | 2 +-
+>  Documentation/driver-api/libata.rst                    | 2 +-
+>  Documentation/driver-api/pci/p2pdma.rst                | 2 +-
+>  6 files changed, 6 insertions(+), 6 deletions(-)
+
+The changes don't look terrible, but please resubmit with a proper
+changelog and a full-name Signed-off-by line.
+
+Thanks,
+
+jon
 
