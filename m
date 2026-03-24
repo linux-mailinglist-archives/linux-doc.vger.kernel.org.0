@@ -1,160 +1,186 @@
-Return-Path: <linux-doc+bounces-80815-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-80833-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0IzDAk/VwWmgXAQAu9opvQ
-	(envelope-from <linux-doc+bounces-80815-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:05:35 +0100
+	id +OCYLrjXwWkaXQQAu9opvQ
+	(envelope-from <linux-doc+bounces-80833-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:15:52 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A65B62FF3DD
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:05:34 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2BA22FF73B
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 01:15:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CC52A3104A07
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2026 23:59:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7117D3074133
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 00:10:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A129538A704;
-	Mon, 23 Mar 2026 23:58:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F82E4A32;
+	Tue, 24 Mar 2026 00:10:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X09WVTvq"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="JvOiEycl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75BA3389DED;
-	Mon, 23 Mar 2026 23:58:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E1B32745C
+	for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 00:10:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774310333; cv=none; b=UvlVG1xKCQAx5X7qSqkOW1+a+z7nFyFSwnZOaWAhLsg301cXu0KOq2K3PTt+zE20/mJ+AgTm/c7pO3WeIUbBSIBNbEPpL3uu8QVqBIHuPVgXWbon9SZ5ghd/seOunP2rujNPa5ZE1w0juI2jb+TbPXZskikBYlkfV22w/1769U0=
+	t=1774311018; cv=none; b=TW4dcxQ5K6rX2xXxpjYN6G9ofr4C/eENRW8t0hN8fXPKHPp/hjbAcHQfbY54+AyvBbKo8PTBMVTI1ErHKpB4404TNjNuAtvW6WOqPdl31y4xL1qFuSPglqbtNzCbzodtk8aqlMJiK4LxeKc2LqcZf9aThYWGysLve9MfA49URmQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774310333; c=relaxed/simple;
-	bh=09tSdPc4KE+Wrg/3IyzHyq6uHIuy+tsDuWBUHfhcgjg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qVvAaeK6PImMCYzCpn70eTuhyy+4LLqYHIFnIXXxz9M676Q1QTChxyGf4wQEHhKX7j5g+q7lM0puPh4iNeZBy1Gxx96jP8pdTtSV9vEL343NhE+7hOu9fjuP2Y6BXz0hrJMeNGoT52U1B6HWLUv1G0v7LJE0u05DjqPiWM5qG8Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X09WVTvq; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F0ABC4AF0D;
-	Mon, 23 Mar 2026 23:58:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774310332;
-	bh=09tSdPc4KE+Wrg/3IyzHyq6uHIuy+tsDuWBUHfhcgjg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=X09WVTvqUzVe6286hdc2QsmRNSrbRb/vw8cWztfvWQ/PsFia8VsgYRjUvi7fytYj+
-	 g77WCldW1KRYfVbqbGvEI953LKcCNiEpqhig+r7z9IXJDtjpbYODlu/5zeqtRPqTGl
-	 WGFYbpUlPhvB4Y75BfaWj+EOwtbx6eoAbzTVsqSmc+la018UkNZJRWX2ZIKWR59p4/
-	 dEHJmDDGskDJimUR5GDykm4AHl27pHnJCuPITXKXDVOD1RFmz/XTClYe9AUIzQX61T
-	 LFm1pUBIv7zc90cEmkak7xQ5+RDcJVj8E2QhFGQqd9DX4R+o5OgtdCSZKMirZgEL8o
-	 3doxRZ3Z7A/XA==
-Date: Mon, 23 Mar 2026 19:58:50 -0400
-From: Sasha Levin <sashal@kernel.org>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	linux-kbuild@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	workflows@vger.kernel.org, tools@kernel.org, x86@kernel.org,
-	Thomas Gleixner <tglx@kernel.org>,
-	"Paul E . McKenney" <paulmck@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Dmitry Vyukov <dvyukov@google.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Cyril Hrubis <chrubis@suse.cz>, Kees Cook <kees@kernel.org>,
-	Jake Edge <jake@lwn.net>,
-	David Laight <david.laight.linux@gmail.com>,
-	Askar Safin <safinaskar@zohomail.com>,
-	Gabriele Paoloni <gpaoloni@redhat.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Masahiro Yamada <masahiroy@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Ingo Molnar <mingo@redhat.com>, Arnd Bergmann <arnd@arndb.de>
-Subject: Re: [PATCH v2 3/9] kernel/api: add debugfs interface for kernel API
- specifications
-Message-ID: <acHTupVGxJR3gmFT@laps>
-References: <20260322121026.869758-1-sashal@kernel.org>
- <20260322121026.869758-4-sashal@kernel.org>
- <2026032309-jargon-stalling-28c2@gregkh>
+	s=arc-20240116; t=1774311018; c=relaxed/simple;
+	bh=SKDiXHePuAyeXNzknJSyiwJw2797eaphjpfFtoS3Lu4=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=STX/fYsV19hxkjbyM3I3wPQ1pfTaLN91lFHfiuSsdpRS2yd5xRYm+DtqjtNwWp5FT9squ1MoFb3zDyQaGAJQWHlLxrseApraA1oYZa5sPU3oeArQxO0mbFFX+7DcJU5bwjJO89ZkGeao9xsPBfAkPLsN/7fLI1WxdDAZwzNVBg8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=JvOiEycl; arc=none smtp.client-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1774311014; x=1805847014;
+  h=date:from:to:cc:subject:message-id;
+  bh=SKDiXHePuAyeXNzknJSyiwJw2797eaphjpfFtoS3Lu4=;
+  b=JvOiEycl/NR4ESoQKIx0k0qVZ7xQnWhyiGhTHWn0TErA4L5flztsJDwd
+   c0uQPA44ofmOSeIDYg9PpMnmUo+fSRXv1DjkB4BWXds6xXR+p9o7/j0cA
+   k1D6ifx3TPMGPFiv5GzHFfpdcuUQxqCX4kkMRe5JA/UQhkDfOKdc0BLNw
+   sMLyOM+X1WJVR1R6r2MS4bP29kKV8MHOP55eC/tms/pAv+hYsHWi/VWeU
+   orWQBwiQusrfVA4onpQP7zcYSF6xWBYkNiB1sgLQHOEF6XKkSHBQHHTHu
+   qlb6EzrCUNOOrrfhtHI14J+zz/H+E+7MxElBvcbA5JU5oFnsiv+68X8E6
+   g==;
+X-CSE-ConnectionGUID: fUahfWW6QkKMdI32/FOzTw==
+X-CSE-MsgGUID: caSNbYMuRii+eM6XGsMY3A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11738"; a="97940759"
+X-IronPort-AV: E=Sophos;i="6.23,138,1770624000"; 
+   d="scan'208";a="97940759"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Mar 2026 17:10:14 -0700
+X-CSE-ConnectionGUID: n1IRWXl0TZ+sXEuta0c07w==
+X-CSE-MsgGUID: VmmvGAwhSRGsPu2qLteYVg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,138,1770624000"; 
+   d="scan'208";a="224403081"
+Received: from igk-lkp-server01.igk.intel.com (HELO 9958d990ccf2) ([10.211.93.152])
+  by orviesa007.jf.intel.com with ESMTP; 23 Mar 2026 17:10:13 -0700
+Received: from kbuild by 9958d990ccf2 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1w4pLW-000000006l3-1l7N;
+	Tue, 24 Mar 2026 00:10:10 +0000
+Date: Tue, 24 Mar 2026 01:09:51 +0100
+From: kernel test robot <lkp@intel.com>
+To: Julian Anastasov <ja@ssi.bg>
+Cc: oe-kbuild-all@lists.linux.dev, Florian Westphal <fw@strlen.de>,
+ linux-doc@vger.kernel.org
+Subject: [netfilter-nf-next:testing 14/14] htmldocs:
+ Documentation/networking/ipvs-sysctl.rst:40: WARNING: Block quote ends
+ without a blank line; unexpected unindent. [docutils]
+Message-ID: <202603240111.Z3ZKbxGg-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <2026032309-jargon-stalling-28c2@gregkh>
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-80815-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[29];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,lwn.net,google.com,infradead.org,suse.cz,gmail.com,zohomail.com,redhat.com,zeniv.linux.org.uk,linux-foundation.org,linuxfoundation.org,arndb.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-80833-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[intel.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A65B62FF3DD
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:dkim,intel.com:email,intel.com:mid]
+X-Rspamd-Queue-Id: E2BA22FF73B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Mar 23, 2026 at 02:52:58PM +0100, Greg Kroah-Hartman wrote:
->On Sun, Mar 22, 2026 at 08:10:17AM -0400, Sasha Levin wrote:
->> Add a debugfs interface to expose kernel API specifications at runtime.
->> This allows tools and users to query the complete API specifications
->> through the debugfs filesystem.
->>
->> The interface provides:
->> - /sys/kernel/debug/kapi/list - lists all available API specifications
->> - /sys/kernel/debug/kapi/specs/<name> - detailed info for each API
->>
->> Each specification file includes:
->> - Function name, version, and descriptions
->> - Execution context requirements and flags
->> - Parameter details with types, flags, and constraints
->> - Return value specifications and success conditions
->> - Error codes with descriptions and conditions
->> - Locking requirements and constraints
->> - Signal handling specifications
->> - Examples, notes, and deprecation status
->>
->> This enables runtime introspection of kernel APIs for documentation
->> tools, static analyzers, and debugging purposes.
->>
->> Signed-off-by: Sasha Levin <sashal@kernel.org>
->
->Debugfs logic looks sane, nice.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf-next.git testing
+head:   93cd433f9f3d3ef04f6c03a201f5d91ca2965dd9
+commit: 93cd433f9f3d3ef04f6c03a201f5d91ca2965dd9 [14/14] ipvs: add conn_lfactor and svc_lfactor sysctl vars
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260324/202603240111.Z3ZKbxGg-lkp@intel.com/reproduce)
 
-Thanks!
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202603240111.Z3ZKbxGg-lkp@intel.com/
 
->But this only works if the kabi stuff is built into the kernel image,
->right?  This doesn't work if any of these abi sections are in a module
->or am I missing that logic here?
+All warnings (new ones prefixed by >>):
 
-That is correct, for now.
+   Non-Preserved Properties
+   ======================== [docutils]
+   Documentation/networking/ipvs-sysctl.rst:39: ERROR: Unexpected indentation. [docutils]
+>> Documentation/networking/ipvs-sysctl.rst:40: WARNING: Block quote ends without a blank line; unexpected unindent. [docutils]
+   Documentation/networking/skbuff:36: ./include/linux/skbuff.h:48: ERROR: Unexpected section title.
 
-I'm only trying to tackle syscalls to begin with, and since no syscalls live in
-modules, we have no need for module support.
+
+vim +40 Documentation/networking/ipvs-sysctl.rst
+
+     9	
+    10	am_droprate - INTEGER
+    11		default 10
+    12	
+    13		It sets the always mode drop rate, which is used in the mode 3
+    14		of the drop_rate defense.
+    15	
+    16	amemthresh - INTEGER
+    17		default 1024
+    18	
+    19		It sets the available memory threshold (in pages), which is
+    20		used in the automatic modes of defense. When there is no
+    21		enough available memory, the respective strategy will be
+    22		enabled and the variable is automatically set to 2, otherwise
+    23		the strategy is disabled and the variable is  set  to 1.
+    24	
+    25	backup_only - BOOLEAN
+    26		- 0 - disabled (default)
+    27		- not 0 - enabled
+    28	
+    29		If set, disable the director function while the server is
+    30		in backup mode to avoid packet loops for DR/TUN methods.
+    31	
+    32	conn_lfactor - INTEGER
+    33		Possible values: -8 (larger table) .. 8 (smaller table)
+    34	
+    35		Default: -4
+    36	
+    37		Controls the sizing of the connection hash table based on the
+    38		load factor (number of connections per table buckets):
+  > 39			2^conn_lfactor = nodes / buckets
+  > 40		As result, the table grows if load increases and shrinks when
+    41		load decreases in the range of 2^8 - 2^conn_tab_bits (module
+    42		parameter).
+    43		The value is a shift count where negative values select
+    44		buckets = (connection hash nodes << -value) while positive
+    45		values select buckets = (connection hash nodes >> value). The
+    46		negative values reduce the collisions and reduce the time for
+    47		lookups but increase the table size. Positive values will
+    48		tolerate load above 100% when using smaller table is
+    49		preferred with the cost of more collisions. If using NAT
+    50		connections consider decreasing the value with one because
+    51		they add two nodes in the hash table.
+    52	
+    53		Example:
+    54		-4: grow if load goes above 6% (buckets = nodes * 16)
+    55		2: grow if load goes above 400% (buckets = nodes / 4)
+    56	
 
 -- 
-Thanks,
-Sasha
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
