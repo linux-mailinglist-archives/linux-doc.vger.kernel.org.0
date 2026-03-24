@@ -1,227 +1,160 @@
-Return-Path: <linux-doc+bounces-81092-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81094-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qEKtJtHrwmkdnQQAu9opvQ
-	(envelope-from <linux-doc+bounces-81092-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 20:53:53 +0100
+	id +KoICfTtwmkdnQQAu9opvQ
+	(envelope-from <linux-doc+bounces-81094-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 21:03:00 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58B4F31BE6E
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 20:53:53 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AE5F31C0BC
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 21:02:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C83D53041A20
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 19:53:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0824030BF07C
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2026 20:01:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 60DBC30DEDD;
-	Tue, 24 Mar 2026 19:53:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B9692C11D9;
+	Tue, 24 Mar 2026 20:01:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="CGBn0ynj"
+	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="AmcOTFso"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F3C830EF7D;
-	Tue, 24 Mar 2026 19:53:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 642E92D0635;
+	Tue, 24 Mar 2026 20:01:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774382030; cv=none; b=PYXhnRPdM5d9HWBqy9/tkHO7pawUL+cW8AXrf2Go/cBQjWQv20mg2P4Xt1neuWc7YZwdV9kk0uSzuLriJ7QCfBZT6mwW+zzmV0VLJBUOuU2XOJ70M5UTtsYRTLBkHKUuZE+JoBq04H3WHY4H1l9Tlpg6b6p9uD7djwo+5iyfzQM=
+	t=1774382478; cv=none; b=rVggVaqFMxaGpL9Vm/GRhZ5QbqulXtYeEG9OfbPpnsGYcUWwMj5c1r/T6OkTV/cReDSZo2IRGOkJ/NGCVqtfP0Q2pCypcAWMP3KOwCiK9cStbNcph3wGnkJ5RLxeLR9qNK0E7lVhv5jKS63ROXDTOljLRcpHOl1donPuWRMVdqA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774382030; c=relaxed/simple;
-	bh=42rT3SIGPmyvbyvEqlNTF5uxxcBXVhvc5i/A4d+Id/U=;
+	s=arc-20240116; t=1774382478; c=relaxed/simple;
+	bh=MPwNHSpoYjyM16ewI+BxbAdvmJMpRdZDXK7CwZ6QIDw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=towvUx351TsST83ZoOnBOa+7pSUh07jneortVvxJSQyjxqiMMteVunuVyOGuJ4347238eJk9X11OJd2NbOPYJTF+9LONK+6tufQ1Sivw9CqM97DoZyttECJymUjIv+hoR9fb1sq7YW04AOgE8vJxKIRn0U2/E+eOT7SGJ9YtgYM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=CGBn0ynj; arc=none smtp.client-ip=198.175.65.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1774382029; x=1805918029;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=42rT3SIGPmyvbyvEqlNTF5uxxcBXVhvc5i/A4d+Id/U=;
-  b=CGBn0ynjmh076HoifniSgFEbPHEZmEq0+vIizcv0L86Kytx1aL0t2U5m
-   6GUFDKh37o+s4ivwORfI3nb7ytU7j5/j+0dC8bTKnKtZf37yi4KyQRzUJ
-   V3U3moDB0ZObKY9wD0ri/6c9ko8hWGMlVuRtJ3khB5yWOpv02Xt2+BpOQ
-   qbz9vYBEUPTFqVE2/c2X08OuAhNcPeLR1DHshwFqVp6l5RIOWhNhbwG4L
-   bSXcJyheNk51hVdV9eEECoy35vGz2DVMwr6dRVBrKaA5nlA6cfNwgCGIx
-   sr1ZpHOgt8PwwwFXXhCvzkkJ3cDrJ3qeFOwb64Y2rQer66SbgLTAlWRnQ
-   g==;
-X-CSE-ConnectionGUID: bMHfCmz1SOqLIhlwWPLWKw==
-X-CSE-MsgGUID: avM5NvP5SbC1Ck1tmrE0/g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11739"; a="79269898"
-X-IronPort-AV: E=Sophos;i="6.23,138,1770624000"; 
-   d="scan'208";a="79269898"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Mar 2026 12:53:48 -0700
-X-CSE-ConnectionGUID: bv/SM0XXQLOd1k3yTDy84Q==
-X-CSE-MsgGUID: hZyr5j3TSKi1jqU5SfUZgw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,138,1770624000"; 
-   d="scan'208";a="228502299"
-Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.220])
-  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Mar 2026 12:53:38 -0700
-Date: Tue, 24 Mar 2026 21:53:35 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Cc: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
-	Rodrigo Siqueira <siqueira@igalia.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Andrzej Hajda <andrzej.hajda@intel.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Robert Foss <rfoss@kernel.org>,
-	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Jonas Karlman <jonas@kwiboo.se>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Sandy Huang <hjc@rock-chips.com>,
-	Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
-	Andy Yan <andy.yan@rock-chips.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Rob Herring <robh@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>, kernel@collabora.com,
-	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org, linux-doc@vger.kernel.org,
-	Werner Sembach <wse@tuxedocomputers.com>,
-	Andri Yngvason <andri@yngvason.is>,
-	Marius Vlad <marius.vlad@collabora.com>
-Subject: Re: [PATCH v11 03/22] drm: Add new general DRM property "color
- format"
-Message-ID: <acLrv5hLyNss-Px5@intel.com>
-References: <20260324-color-format-v11-0-605559af4fb4@collabora.com>
- <20260324-color-format-v11-3-605559af4fb4@collabora.com>
- <acLDPYuaVI2-12JX@intel.com>
- <23910073.EfDdHjke4D@workhorse>
+	 Content-Type:Content-Disposition:In-Reply-To; b=JszMo7icXkoI528blbv37+KOdUPAFRqyG7/9IkaQuVv5x96MSOZMa3gSOnh5qN7mD+2H29wOwcKu/CLBJn3Cl7Czl95kHz5cQGH2wqnmj3AOv0AcLSQ5V0uJvZNjwWVlHxS+/KDpoZbRfWOfO8UU3S5FQwz76E7as0nng1au57g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=AmcOTFso; arc=none smtp.client-ip=65.109.113.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 8045540E0222;
+	Tue, 24 Mar 2026 20:01:13 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id vXkONk_xMsOw; Tue, 24 Mar 2026 20:01:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1774382463; bh=rrltVfsKaUOz3jKzbq8S1z1BNCaZvfoi0wgXPux+LGo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=AmcOTFsokQCadYhgaodHohkOM+Z+rHYntVaJXympYseSn0bmHzpYLQwX3qjT7BO6V
+	 Z6n/zj11uUN3AJXlC8IC9gNJoR2Ukj6qmiI+ysggCuy4t+MrUfJytvpXCwzJSb5PtW
+	 ov8I1VmsRIj/fKyefGm7/GkvSzS/mRAPFAoo0VQJK68LX1SO+otT0BX8MQMCCVO3Of
+	 7IlSJtnEtuG9RAOWrviSHwm5ciQsS4o8S5CFGpZrQmqcav3px84M7InZF3+mph25nG
+	 HPnPlbwaBfj3RNcPuPzBQo/SSzB6C47ArYDzCckZsrU4lY83D3G7bNv8W1RKuMOZsq
+	 Hpfhsv+RV+9+jc90O22I+5ltALhblGl4gEfBNUxBzBVtzh6Dei40gfEBxOgkTcyJix
+	 NyVAb1KE50NWOBJdXfEiMghOacFkk4/fOrQfHaXTCwHHl5zSuh9mDFU+m50dLyvxjt
+	 jngde1ZkfG6vChR3De2mnBZgrFz/3LUgc3HR0i9LLo2dOtrjSkA+/lX4xQRaZ/a7eq
+	 XTcPYn8vIK/HvYwYGfYjzmPk8iTNjc39InYjK7AJ/luScpkVfEy4XsAFaKIbn6MNRv
+	 1quh2qbNUCh+aawylKNXtU6eqxyluGDqHcdRgnjnyCGWD8TbH38IIbOyo1bwWtgAw+
+	 asPjanKnk6HRhk9DezGoMurk=
+Received: from zn.tnic (p5de8e020.dip0.t-ipconnect.de [93.232.224.32])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	(No client certificate requested)
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with UTF8SMTPSA id 5730B40E0031;
+	Tue, 24 Mar 2026 20:00:27 +0000 (UTC)
+Date: Tue, 24 Mar 2026 21:00:26 +0100
+From: Borislav Petkov <bp@alien8.de>
+To: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
+Cc: Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
+	Nikolay Borisov <nik.borisov@suse.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	David Kaplan <david.kaplan@amd.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>, KP Singh <kpsingh@kernel.org>,
+	Jiri Olsa <jolsa@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	David Laight <david.laight.linux@gmail.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	David Ahern <dsahern@kernel.org>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Eduard Zingerman <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	John Fastabend <john.fastabend@gmail.com>,
+	Stanislav Fomichev <sdf@fomichev.me>, Hao Luo <haoluo@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+	kvm@vger.kernel.org, Asit Mallick <asit.k.mallick@intel.com>,
+	Tao Zhang <tao1.zhang@intel.com>, bpf@vger.kernel.org,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v7 07/10] x86/vmscape: Use static_call() for predictor
+ flush
+Message-ID: <20260324200026.GCacLtWmhGVOmz832E@fat_crate.local>
+References: <20260319-vmscape-bhb-v7-0-b76a777a98af@linux.intel.com>
+ <20260319-vmscape-bhb-v7-7-b76a777a98af@linux.intel.com>
+ <20260319205802.GJ3738786@noisy.programming.kicks-ass.net>
+ <20260319213421.br6na4dulrjm6eke@desk>
+ <20260319214409.GL3738786@noisy.programming.kicks-ass.net>
+ <20260320062206.bdrnmnvho6lhmejw@desk>
+ <20260320090340.GN3738786@noisy.programming.kicks-ass.net>
+ <20260320113134.GAab0wFqe-hewZc175@fat_crate.local>
+ <20260320182308.ahynqzuswlv34wf6@desk>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <23910073.EfDdHjke4D@workhorse>
-X-Patchwork-Hint: comment
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
-X-Spamd-Result: default: False [-0.04 / 15.00];
+In-Reply-To: <20260320182308.ahynqzuswlv34wf6@desk>
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MIXED_CHARSET(0.63)[subject];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[alien8.de,none];
+	R_DKIM_ALLOW(-0.20)[alien8.de:s=alien8];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org,collabora.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,tuxedocomputers.com,yngvason.is];
-	TAGGED_FROM(0.00)[bounces-81092-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[41];
+	TAGGED_FROM(0.00)[bounces-81094-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[infradead.org,kernel.org,suse.com,zytor.com,amd.com,google.com,linux.intel.com,iogearbox.net,davemloft.net,gmail.com,redhat.com,linux.dev,fomichev.me,lwn.net,vger.kernel.org,intel.com];
+	RCPT_COUNT_TWELVE(0.00)[36];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_NEQ_ENVFROM(0.00)[ville.syrjala@linux.intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bp@alien8.de,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[alien8.de:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,intel.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 58B4F31BE6E
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,alien8.de:dkim,fat_crate.local:mid]
+X-Rspamd-Queue-Id: 8AE5F31C0BC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Mar 24, 2026 at 08:10:11PM +0100, Nicolas Frattaroli wrote:
-> On Tuesday, 24 March 2026 18:00:45 Central European Standard Time Ville Syrjälä wrote:
-> > On Tue, Mar 24, 2026 at 05:01:07PM +0100, Nicolas Frattaroli wrote:
-> > > +enum drm_connector_color_format {
-> > > +	/**
-> > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_AUTO: The driver or display protocol
-> > > +	 * helpers should pick a suitable color format. All implementations of a
-> > > +	 * specific display protocol must behave the same way with "AUTO", but
-> > > +	 * different display protocols do not necessarily have the same "AUTO"
-> > > +	 * semantics.
-> > > +	 *
-> > > +	 * For HDMI, "AUTO" picks RGB, but falls back to YCbCr 4:2:0 if the
-> > > +	 * bandwidth required for full-scale RGB is not available, or the mode
-> > > +	 * is YCbCr 4:2:0-only, as long as the mode and output both support
-> > > +	 * YCbCr 4:2:0.
-> > > +	 *
-> > > +	 * For display protocols other than HDMI, the recursive bridge chain
-> > > +	 * format selection picks the first chain of bridge formats that works,
-> > > +	 * as has already been the case before the introduction of the "color
-> > > +	 * format" property. Non-HDMI bridges should therefore either sort their
-> > > +	 * bus output formats by preference, or agree on a unified auto format
-> > > +	 * selection logic that's implemented in a common state helper (like
-> > > +	 * how HDMI does it).
-> > > +	 */
-> > > +	DRM_CONNECTOR_COLOR_FORMAT_AUTO = 0,
-> > > +
-> > > +	/**
-> > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_RGB444: RGB output format
-> > > +	 */
-> > > +	DRM_CONNECTOR_COLOR_FORMAT_RGB444,
-> > > +
-> > > +	/**
-> > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR444: YCbCr 4:4:4 output format (ie.
-> > > +	 * not subsampled)
-> > > +	 */
-> > > +	DRM_CONNECTOR_COLOR_FORMAT_YCBCR444,
-> > > +
-> > > +	/**
-> > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR422: YCbCr 4:2:2 output format (ie.
-> > > +	 * with horizontal subsampling)
-> > > +	 */
-> > > +	DRM_CONNECTOR_COLOR_FORMAT_YCBCR422,
-> > > +
-> > > +	/**
-> > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR420: YCbCr 4:2:0 output format (ie.
-> > > +	 * with horizontal and vertical subsampling)
-> > > +	 */
-> > > +	DRM_CONNECTOR_COLOR_FORMAT_YCBCR420,
-> > 
-> > Seems like this should document what the quantization range
-> > should be for each format.
-> > 
-> 
-> I don't think so? If you want per-component bit depth values,
-> DRM_FORMAT_* defines would be the appropriate values to use. This
-> enum is more abstract than that, and is there to communicate
-> YUV vs. RGB and chroma subsampling, with bit depth being handled
-> by other properties.
-> 
-> If you mean the factor used for subsampling, then that'd only be
-> relevant if YCBCR410 was supported where one chroma plane isn't
-> halved but quartered in resolution. I suspect 4:1:0 will never
-> be added; no digital display protocol standard supports it to my
-> knowledge, and hopefully none ever will.
+On Fri, Mar 20, 2026 at 11:23:08AM -0700, Pawan Gupta wrote:
+> I am curious, what problems do you anticipate? There are nearly 50
 
-No, I mean the quantization range (16-235 vs. 0-255 etc).
-
-The i915 behaviour is that YCbCr is always limited range,
-RGB can either be full or limited range depending on the 
-"Broadcast RGB" property and other related factors.
+What's easier when you need to change the underlying implementation: unexport
+the static key and touch a bunch of places in the process or simply change the
+accessor's body and all the callers don't notice a thing?
 
 -- 
-Ville Syrjälä
-Intel
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
 
