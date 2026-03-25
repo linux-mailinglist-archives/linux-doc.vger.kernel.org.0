@@ -1,207 +1,161 @@
-Return-Path: <linux-doc+bounces-81239-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81241-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wMprO7k6xGnkxQQAu9opvQ
-	(envelope-from <linux-doc+bounces-81239-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:42:49 +0100
+	id KOwcFXo8xGmMxgQAu9opvQ
+	(envelope-from <linux-doc+bounces-81241-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:50:18 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D08A932B65B
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:42:48 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F8632B7DE
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:50:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id D784D300C383
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:41:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9D9E5300D14B
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:45:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62BE735F612;
-	Wed, 25 Mar 2026 19:41:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE951407589;
+	Wed, 25 Mar 2026 19:45:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="D8Zm4OEg"
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="u/QDokrR";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="B4Tj18aA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout-y-209.mailbox.org (mout-y-209.mailbox.org [91.198.250.237])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF99135F170
-	for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 19:41:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 729E840B6E1;
+	Wed, 25 Mar 2026 19:44:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.198.250.237
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774467714; cv=none; b=C41I+OTDHm1f/ub+Mg2dMDe34ksaesE7cE7JRiCQmV9KIE+v47JVlHY23Gx76AbOlP8uoJ7rNL1L1vl2KUjv2sDRLmlHHi1xg6fPYUXaSwaTZ0iMq0EGKCjIN9pRiDumB7dPDAJ4KeJHKfR0TSk44cEUtbTai3E2CqWCohL1DzA=
+	t=1774467902; cv=none; b=s90Du+jdmGpGJq/uKH00ltAY6jEUHSV1Fuq4RUXi5+y4ExrQSXwu1XWvB/Jw/FG+Z1f4uEOn7T2V7X2Yj2WacIhTexRkTNMmR7diifwjzqEQ6S1F/Aktv33r8b29zPMEVc6+rDRHEqrDK4OnGtZxA3VC190Z3nNSldNSRLdaDi0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774467714; c=relaxed/simple;
-	bh=d+nfjMfEVHf7jtz1MIQh+squ9QrgehK0qZ/mTLc/EZw=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tueWMPpC660+DuH3/K3tPBgXs/eSJJdT+rjXfHTy36V1usiBDFlVLLH0buqQw09KrawgqxMOMVqfpskBSVxFp9N59kQ/wSziYbicnfBlDDT/XwQeq7BegvBu4TxzzDy8a7FWptMaNvr/srAzT5IapSNzuEANgj5qWgDPeUBXwjQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=D8Zm4OEg; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-48541edecf9so2782965e9.1
-        for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 12:41:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774467711; x=1775072511; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5agou4BHmM67c6SSsDwlj7qtFxZ2/CyU4qlcqH2Z8DI=;
-        b=D8Zm4OEgE7zuhMoO+TLA6zFkoCvrIu6Zulcl82z1eiQnUVxOyFpLzEDJ237N96a63L
-         q+ghLzhGjUVdtJnfPtk7wsAP1ykwBAmNJlRKmggQNUTHhMPdcqaYhrP7YYTLu7QwPU7E
-         GaN3y5XNr27D8BOGXzhOvOU8idIz+YpoSyZfo7jO4SjvekAgsJzLKIjJWXMm0/q4xdtC
-         R6M7fMSu/bc3U1VVmsE0QnTRmki7frlt9B+QlFeLeRPkftJTygbzwIyQ0sCjLn/MWkI9
-         LIcPpOgUvglVrXHmspUF2S0XPWXnf0yu54sjnr0l2jWGbRVq3qgGH7hrpA16cU+ymnpf
-         r9mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774467711; x=1775072511;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=5agou4BHmM67c6SSsDwlj7qtFxZ2/CyU4qlcqH2Z8DI=;
-        b=dw19hQYklAM1PeerO4lsLULV5k7MWNDpq3bkWKjpwGu9HayS2eTOek2j3T+tON4c1L
-         s1IEMdX9WjaIwAQJQKa8KtN4SHJD0Ydl4GjZc4FKfpJyWTxC7pUy44KSVzjbKFr7JnHZ
-         SqNrT1qDsnPx74JCybY3AnXAO8Id7ML3hoZn9QjcMTk8oDuiq1EyZPMg8O5a09W0ETkJ
-         miAGZB82s2nX1VJId9ZZHAUYEERhzW2zh/thpoft+nzpwXH1jvGr+24sxRSYGGK3/gCU
-         2+f8zIjxPpnvVbuX/JnK18N30SJ+IJblRimUJW7o2/txeDfMN4WYGb5S9VFaSwB1+JFP
-         QO5g==
-X-Forwarded-Encrypted: i=1; AJvYcCVzzdiV+C2HLGn061hKYqB5y971HZY2yCI3DDahePkCpCUKYfTFDso/2fpCGiIJPe6ytHET1TlE7f8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwG4FlUYS7Uz7viNv5QNTNaUViWaPlyY5Q6TJi4TWl78aYrftbO
-	UH73p31gCZ/HzgbhkLUGiNj26yM0smHpPPxfWyQ9Kxmt7uztEj0a+tDf
-X-Gm-Gg: ATEYQzxrzAP5BZr4mjWP6SXqu7kzMg0l6EQTsPjE1xDpKo3QCzJf2mI/l9Dvw2v3LaG
-	k3rpMxQe4QMP3XKpVUunHiJ01tKRWnhImAAXlmnwq5P3gIf2HPyJ7VOgGN03WRFudm7Qfvrjm3f
-	LkjRlTqhf7SqNCz/fjcf7dPL6xrqndORUFP6I1Ds8/PFW3lxfp4jnkuC+CqQC7+nVG6nyOv8Byz
-	7M4AHtYPGI5pBOio2lOG+0f1+Zc4Qts7ZYu/A+jbcDAk2T95wBVeJeJCrunwdtVsQ334Ws2hUQX
-	k0MUR5ZONZqjWhes0j7ocTN7Iu3AXAzWh8lKgsogipGhfZalCX88aUszFtg6I3N2Q0b0JGiqWo9
-	G0j66VK5Jt2A5mXgXyKoliYKZ/5W+8Des9h7deRM14UfHRMxv6wA5vJZzDSyMhkgPzlsyZTsTON
-	+lD6s4I0+hf0Zva0voHcwEJ2PxWrPfJanoaWxi/IwJH7XNOuowY9adr4s1h8l8zUBu
-X-Received: by 2002:a05:600c:1c22:b0:480:20f1:7aa6 with SMTP id 5b1f17b1804b1-4871604c8e1mr76733195e9.21.1774467710858;
-        Wed, 25 Mar 2026 12:41:50 -0700 (PDT)
-Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4871fbb58a0sm688705e9.23.2026.03.25.12.41.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Mar 2026 12:41:50 -0700 (PDT)
-Date: Wed, 25 Mar 2026 19:41:46 +0000
-From: David Laight <david.laight.linux@gmail.com>
-To: Jim Mattson <jmattson@google.com>
-Cc: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, x86@kernel.org, Jon
- Kohler <jon@nutanix.com>, Nikolay Borisov <nik.borisov@suse.com>, "H. Peter
- Anvin" <hpa@zytor.com>, Josh Poimboeuf <jpoimboe@kernel.org>, David Kaplan
- <david.kaplan@amd.com>, Sean Christopherson <seanjc@google.com>, Borislav
- Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, Peter
- Zijlstra <peterz@infradead.org>, Alexei Starovoitov <ast@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko
- <andrii@kernel.org>, KP Singh <kpsingh@kernel.org>, Jiri Olsa
- <jolsa@kernel.org>, "David S. Miller" <davem@davemloft.net>, Andy
- Lutomirski <luto@kernel.org>, Thomas Gleixner <tglx@kernel.org>, Ingo
- Molnar <mingo@redhat.com>, David Ahern <dsahern@kernel.org>, Martin KaFai
- Lau <martin.lau@linux.dev>, Eduard Zingerman <eddyz87@gmail.com>, Song Liu
- <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, John Fastabend
- <john.fastabend@gmail.com>, Stanislav Fomichev <sdf@fomichev.me>, Hao Luo
- <haoluo@google.com>, Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet
- <corbet@lwn.net>, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, Asit
- Mallick <asit.k.mallick@intel.com>, Tao Zhang <tao1.zhang@intel.com>,
- bpf@vger.kernel.org, netdev@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v8 02/10] x86/bhi: Make clear_bhb_loop() effective on
- newer CPUs
-Message-ID: <20260325194146.29c91953@pumpkin>
-In-Reply-To: <CALMp9eTZRucL+CUSp1yUPG0aSTpyQ=po1EmurZhX9+R+vxgbPA@mail.gmail.com>
-References: <20260324-vmscape-bhb-v8-0-68bb524b3ab9@linux.intel.com>
-	<20260324-vmscape-bhb-v8-2-68bb524b3ab9@linux.intel.com>
-	<CALMp9eTZRucL+CUSp1yUPG0aSTpyQ=po1EmurZhX9+R+vxgbPA@mail.gmail.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
+	s=arc-20240116; t=1774467902; c=relaxed/simple;
+	bh=2rE3f64IYqeqBrkYB6a6PgA4RQDfGkMbU46Q5oPs/1Q=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rUIhFHuhS423NZO3utwq/BUUBavhRIa+VR0tccYUd7RQFsdJIfaCR8V+epdBDRUiX4tK3tHTFKm20emEhuqX76W4rt0jjrUctHmIRaRdGoVCF6eFwUnZ9OQGPIgYLDx4gRuRs2BLfIkeSyOICr10skeF4TlkYf2HvmM81A9cgtc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=u/QDokrR; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=B4Tj18aA; arc=none smtp.client-ip=91.198.250.237
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:b231:465::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-y-209.mailbox.org (Postfix) with ESMTPS id 4fgy6d0yM6zB115;
+	Wed, 25 Mar 2026 20:44:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1774467897;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=RMY2rXB5sCjSvWbuglMO9Fm8FaHaVajfBVzSz02485A=;
+	b=u/QDokrR9NnCKM9JNZPLeDFtDe68W/50GauqCOPRwcu43gchCd41gcXEIps4l3GMojzAX0
+	qXTfQBnn5rZW4BKdAH6hhasOwcLVCUjKhLfxMcS1l80zXw3D9W+AyFYqMPG4GeqOaMvGC5
+	WVw7iLgQXDSSnSj/Dc3b0GkEgDsnhuBFpu7YFEkf10uJJXNjLWyDvT10WK+YfNnzaBC57d
+	g2sf8ymn8GraNtCv7w2MpVDfCi9gY6y3B3MVOwBU1upKcVKtSkxVn3j7iQGMynGYbZ8YvW
+	k63nGkuRMwMPoe4CFiIS42jgrBHp9gYRlajyZCiJCxH9zR2k6trzKOmWGHTLLQ==
+Authentication-Results: outgoing_mbo_mout;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=B4Tj18aA;
+	spf=pass (outgoing_mbo_mout: domain of manuelebner@mailbox.org designates 2001:67c:2050:b231:465::2 as permitted sender) smtp.mailfrom=manuelebner@mailbox.org
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1774467896;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=RMY2rXB5sCjSvWbuglMO9Fm8FaHaVajfBVzSz02485A=;
+	b=B4Tj18aAQuKo+3ePOAxFhbNnGnW0bxO44jL/n9NORpZa69zsLR+E6SxUNcCOVw1DGxid0X
+	m4nkh4GdzUB6Ji8r3h3jFCwLPf+/Ms1omlOcRyzdpITUiqdATysvBUwPW+UTUS/RPQLceF
+	X9ArxRj3Yb0amySuPEVm2EdK6lYGXJ375CLqAvP5foKhQgj5iAiXVNodpA/1iM9ZYGrcLc
+	4DpWah+hWJgdfGG+SKqrTkaiA1CVslc32He/SWvBukZKQzPvu5Reul+XLlJocFLhdNA0FY
+	svlMeHilLsRa4Ev5PHa7255Z0f7ulJn5agdPDyE5wEj+7jDJYdk96Vvrl60Gug==
+To: Jonathan Corbet <corbet@lwn.net>,
+	Collin Funk <collin.funk1@gmail.com>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Manuel Ebner <manuelebner@mailbox.org>
+Subject: [PATCH v5 0/2] workflow, scripts: sort changes.rst and ver_linux
+Date: Wed, 25 Mar 2026 20:43:27 +0100
+Message-ID: <20260325194326.77923-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-0.16 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: tawir9o19cd4cmrj8kjbmubo3zqikgu6
+X-MBO-RS-ID: b03e91a6e48a91cadb9
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81239-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[lwn.net,gmail.com,linuxfoundation.org];
+	TAGGED_FROM(0.00)[bounces-81241-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,nutanix.com,suse.com,zytor.com,amd.com,google.com,alien8.de,infradead.org,iogearbox.net,davemloft.net,redhat.com,linux.dev,gmail.com,fomichev.me,lwn.net,vger.kernel.org,intel.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[davidlaightlinux@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,suse.com:email]
-X-Rspamd-Queue-Id: D08A932B65B
+	RCPT_COUNT_SEVEN(0.00)[7];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:dkim,mailbox.org:email,mailbox.org:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 81F8632B7DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 25 Mar 2026 10:50:58 -0700
-Jim Mattson <jmattson@google.com> wrote:
+restructured the patch series into logical changes.
+fixed changelogs, but i'm not super content.
 
-> On Tue, Mar 24, 2026 at 11:19=E2=80=AFAM Pawan Gupta
-> <pawan.kumar.gupta@linux.intel.com> wrote:
-> >
-> > As a mitigation for BHI, clear_bhb_loop() executes branches that overwr=
-ites
-> > the Branch History Buffer (BHB). On Alder Lake and newer parts this
-> > sequence is not sufficient because it doesn't clear enough entries. This
-> > was not an issue because these CPUs have a hardware control (BHI_DIS_S)
-> > that mitigates BHI in kernel.
-> >
-> > BHI variant of VMSCAPE requires isolating branch history between guests=
- and
-> > userspace. Note that there is no equivalent hardware control for usersp=
-ace.
-> > To effectively isolate branch history on newer CPUs, clear_bhb_loop()
-> > should execute sufficient number of branches to clear a larger BHB.
-> >
-> > Dynamically set the loop count of clear_bhb_loop() such that it is
-> > effective on newer CPUs too. Use the hardware control enumeration
-> > X86_FEATURE_BHI_CTRL to select the appropriate loop count.
-> >
-> > Suggested-by: Dave Hansen <dave.hansen@linux.intel.com>
-> > Reviewed-by: Nikolay Borisov <nik.borisov@suse.com>
-> > Signed-off-by: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
-> > ---
-> >  arch/x86/entry/entry_64.S   | 21 ++++++++++++++++-----
-> >  arch/x86/net/bpf_jit_comp.c |  7 -------
-> >  2 files changed, 16 insertions(+), 12 deletions(-)
-> >
-> > diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-> > index 3a180a36ca0e..8128e00ca73f 100644
-> > --- a/arch/x86/entry/entry_64.S
-> > +++ b/arch/x86/entry/entry_64.S
-> > @@ -1535,8 +1535,17 @@ SYM_CODE_END(rewind_stack_and_make_dead)
-> >  SYM_FUNC_START(clear_bhb_loop)
-> >         ANNOTATE_NOENDBR
-> >         push    %rbp
-> > +       /* BPF caller may require %rax to be preserved */
+ [v4] -> [v5]:
+undo "remove (optional)" from [v4]
+merged patches with same concepts 
+ [PATCH v4 1/4], [PATCH v4 2/4] -> [PATCH v5 1/2]
+ [PATCH v4 3/4], [PATCH v4 4/4] -> [PATCH v5 2/2]
+fix changelogs for the individual patches
 
-Since you need a new version change that to 'all registers preserved'.
+ [v3] -> [v4]:
+split [PATCH v3 1/2] into
+ [PATCH v4 1/4] and
+ [PATCH v4 3/4]
+split [PATCH v3 2/2] into
+ [PATCH v4 2/4] and
+ [PATCH v4 4/4]
+make toolnames uniform in both files
+make version command uniform in both files
+changes.rst:
+ remove footnote for Sphinx
+ remove "(optional)"
 
-> > +       push    %rax =20
->=20
-> Shouldn't the "push %rax" come after "mov %rsp, %rbp"?
+ [v2] -> [v3]:
+fix changelog
+changes.rst:
+ needn't -> do not need to
+ add gdb 7.2
+ver_linux:
+ /Changes.rst -> /changes.rst
+ add gdb
 
-Or delete the stack frame :-)
-It is only there for the stack trace-back code.
+ [v1] -> [v2]:
+split v1 into a patch series
+changes.rst:
+ add reference to ver_linux
+ver_linux:
+ fix path to changes.rst
 
-	David
-
-
->=20
-> >         mov     %rsp, %rbp
-> > -       movl    $5, %ecx =20
-
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
 
