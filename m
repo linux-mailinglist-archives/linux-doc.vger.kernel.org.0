@@ -1,120 +1,305 @@
-Return-Path: <linux-doc+bounces-81242-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81244-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AFkEKq47xGmMxgQAu9opvQ
-	(envelope-from <linux-doc+bounces-81242-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:46:54 +0100
+	id yGI+Hi88xGmMxgQAu9opvQ
+	(envelope-from <linux-doc+bounces-81244-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:49:03 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D13732B75D
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:46:54 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDD4732B7B0
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 20:49:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C87133027040
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:46:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id CD4B7300C3AF
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:48:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7963241325E;
-	Wed, 25 Mar 2026 19:46:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32F593E3C4B;
+	Wed, 25 Mar 2026 19:48:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="ZPE3UUuC"
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wpwJu42Q";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="X6hd1SRo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from mout-y-209.mailbox.org (mout-y-209.mailbox.org [91.198.250.237])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1965041C2FB;
-	Wed, 25 Mar 2026 19:46:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 807A7346A0D;
+	Wed, 25 Mar 2026 19:48:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.198.250.237
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774467994; cv=none; b=pxHzthyPVSyQocabvda4aYcjuz4BNkyakNTI9zsJcYpZUvDfMPiCNSHYm6yvKApja5YPVKbnTXMIiH8zWyLF/TyEP+NZoSHG1QNRUv0BkiWVNR5FcoMVE4Tv/+AuIfDxeSkDC+PNOBGBREpfh2km7QJxWX5raBa/reoRHzpfUDQ=
+	t=1774468137; cv=none; b=AcEsbVpTPAXDHp8fqRHwgj25JrzQ2coTdeV7t9S5rSxQDkzqmr+qcrZq+MdbLO6CvZ7hrL6TfnRPGCLvreVs3LSlAm1yGAAE9Lk5BTeBWWAhZW1Y81tjZK81ZJJTtN/HulJBB8osiguK5pyRekH2VmDFhQoCdoTkNOuqYtHCSTg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774467994; c=relaxed/simple;
-	bh=me69RyLXPFho3L2zifwuig9Y/wnZ5FYbacfOEGZYo/M=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=aoM8NfryfR5wIO9IV0qbtG7gTAKFaAX13VQwouSjNnw3th1b8+T5kRkiw7E8wRGj0ht9jPj/O0bIrtRcvn1gShXypyJj5RMzVAa24ObfBimfWHK2lY6Jkm5dLmgqazcm0u3rHyGrTmR/wt3js//18uyZGIhA7iXDNmO46jRYMU4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=ZPE3UUuC; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 69C4840C6F
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1774467992; bh=QaYBr5fcHzzY/GG7iXPp/Ub5kSyz74NA0MwGgB0SfIg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=ZPE3UUuC8RA/6MC4gtTPalw5D5R5Y2oZytX5ThmCjC2//r4rh2rRXV6L5qrN4zKlf
-	 GL89fJlFesRy6DSfOpNVYRnxQ0HW7gNS25R41DOzaNXxCEDyMH4efd/1wErI2VGXaa
-	 GAReE3ray7ozTMe8bI0dFFHDlcfpMmbzNDtyEoVJqMKHQF4qVhnbbv1N6VCUHZYpL4
-	 Egf0l0ccRMSR+RpDy8WISJoWHSeQFSijvBwnsHin72OxAHVJyK5YQ+3vzxAmeYJdcM
-	 koGR3mRf9tzE2jBiLx0cDEE8MYPQZylfbMCWbMW4cR75rDMkmn35LoUBLsNuUxP+Nf
-	 mdBqQ0SLVL8Jw==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	s=arc-20240116; t=1774468137; c=relaxed/simple;
+	bh=YiRp5hORkFx58+pTD1Uty4st8OKgPd7AyEupV4UQpz4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=BBmPLjjtlWMn+NTJqhHymg17135Xca7KyRvLmCr3/CR4e0HwD6+yo2P9QWp+p74UE1IDb/lOECti+GIp3mzu1eZCrS21frrhKlODkQCV+SMgIyYONTFcs/PZUQfEeQJ8qoud0j3LyjDHXezNbaskv5VTriNb7laUhrR4oBYpP10=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=wpwJu42Q; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=X6hd1SRo; arc=none smtp.client-ip=91.198.250.237
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [IPv6:2001:67c:2050:b231:465::1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 69C4840C6F;
-	Wed, 25 Mar 2026 19:46:32 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Akiyoshi Kurita <weibu@redadmin.org>, linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org, akiyks@gmail.com, weibu@redadmin.org
-Subject: Re: [PATCH] docs: ja_JP: process: translate second half of
- 'Describe your changes'
-In-Reply-To: <20260309105015.309116-1-weibu@redadmin.org>
-References: <20260309105015.309116-1-weibu@redadmin.org>
-Date: Wed, 25 Mar 2026 13:46:31 -0600
-Message-ID: <87v7ejelpk.fsf@trenco.lwn.net>
+	by mout-y-209.mailbox.org (Postfix) with ESMTPS id 4fgyC95QRBzB115;
+	Wed, 25 Mar 2026 20:48:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1774468133;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=R3ztjrhg6iQ74avdDRyLJhlD8H9QW1fbnKgbJpR86Ls=;
+	b=wpwJu42QnvZ+RmOQ9DYxN2QH2l2D2VevXqo3SuQ7kX1jQZdn3WGq5ycLK/dgHKHG+XhEUo
+	vHjvOfh4rbTOvI3TwlV8G48KrCpmkpz4J8d9XacaZWYDIUAqqW18XgfrYn9xvbqepWKFnC
+	y8D7E12lqd+l0t3rJhC+Lsu7k8fH3jLbaJZTdPshj0MUE3WF54wR5uzHdpBqz64UP89CO5
+	oBsTZ44GmV6EcfGBVJztUZrmizg+BFzXBOvKx99sQNMjCBWwVE7rDFBgxiSZ3nLA8hAdu2
+	2CiSZ/jsou10RJCTmRKSMVrsGvCgHBFVBWdwLDmAVE9lBQdgscNqdOid22fukQ==
+Authentication-Results: outgoing_mbo_mout;
+	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=X6hd1SRo;
+	spf=pass (outgoing_mbo_mout: domain of manuelebner@mailbox.org designates 2001:67c:2050:b231:465::1 as permitted sender) smtp.mailfrom=manuelebner@mailbox.org
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1774468132;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=R3ztjrhg6iQ74avdDRyLJhlD8H9QW1fbnKgbJpR86Ls=;
+	b=X6hd1SRosFFQIs3KDiUAUWzH81wJ4QoZSLRIJLAU7O+7i4xIWI5sG+aI5/B+gpNzVqBQ28
+	VbsT0XU9JMDA+rkId6r9G3n67VJ7d+/RWy9pEnil1uaXiIb5fK2+0zbGoU+U32/zIFREnx
+	S/02WFkH28RqzSkV2cZTJwqy15EcV9WZRWJG/IkgG6GnZWSexg99mOc9Vzrxts9LyXnHka
+	7voTGLn4LrIUSpgoNbUY6QfWmo0F2b4PqoW/yIeIftijxOVTFsYQqK5wR7K57TLL/pW5Zk
+	es6mEBaIJnexYCFnSzeqTrVexBheXC01ADcSUsLiUcHRpaLMQ1YZoTEIPrSeaA==
+To: Jonathan Corbet <corbet@lwn.net>,
+	Collin Funk <collin.funk1@gmail.com>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Cc: workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Manuel Ebner <manuelebner@mailbox.org>
+Subject: [PATCH v5 2/2] workflows, scripts: sort ver_linux and changes.rst
+Date: Wed, 25 Mar 2026 20:48:12 +0100
+Message-ID: <20260325194811.78509-2-manuelebner@mailbox.org>
+In-Reply-To: <20260325194326.77923-2-manuelebner@mailbox.org>
+References: <20260325194326.77923-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: bf910aa68fa9af2a123
+X-MBO-RS-META: fmdmwa9k1ib1r4413bci5sgebjw4w3hz
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,redadmin.org];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81242-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[lwn.net:+];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[lwn.net,gmail.com,linuxfoundation.org];
+	TAGGED_FROM(0.00)[bounces-81244-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,lwn.net:dkim,trenco.lwn.net:mid,redadmin.org:email]
-X-Rspamd-Queue-Id: 5D13732B75D
+	RCPT_COUNT_SEVEN(0.00)[7];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mailbox.org:dkim,mailbox.org:email,mailbox.org:mid]
+X-Rspamd-Queue-Id: BDD4732B7B0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Akiyoshi Kurita <weibu@redadmin.org> writes:
+sort output of scripts/ver_linux alphabetically
+sort list in changes.rst alphabetically
 
-> Translate the remaining part of the "Describe your changes" section in
-> Documentation/translations/ja_JP/process/submitting-patches.rst.
->
-> Follow review comments on wording and line wrapping, and cover guidance
-> on self-contained patch descriptions, imperative mood, commit
-> references, and Link:/Closes:/Fixes: tags.
->
-> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
-> ---
->  .../ja_JP/process/submitting-patches.rst      | 84 +++++++++++++++++++
->  1 file changed, 84 insertions(+)
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+---
+ Documentation/process/changes.rst | 52 ++++++++++++-------------
+ scripts/ver_linux                 | 64 +++++++++++++++----------------
+ 2 files changed, 58 insertions(+), 58 deletions(-)
 
-Applied, thanks.
+diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
+index d94503341254..6ba9ca928e49 100644
+--- a/Documentation/process/changes.rst
++++ b/Documentation/process/changes.rst
+@@ -30,41 +30,41 @@ you probably do not need to concern yourself with pcmciautils.
+ ====================== ===============  ========================================
+         Program        Minimal version       Command to check the version
+ ====================== ===============  ========================================
+-GNU C                  8.1              gcc --version
+-Clang/LLVM (optional)  15.0.0           clang --version
+-Rust (optional)        1.78.0           rustc --version
+-bindgen (optional)     0.65.1           bindgen --version
+-GNU make               4.0              make --version
+ bash                   4.2              bash --version
++bc                     1.06.95          bc --version
++bindgen (optional)     0.65.1           bindgen --version
+ binutils               2.30             ld -v
+-flex                   2.5.35           flex --version
+ bison                  2.0              bison --version
+-pahole                 1.22             pahole --version
+-util-linux             2.10o            mount --version
+-kmod                   13               kmod -V
++btrfs-progs            0.18             btrfs --version
++Clang/LLVM (optional)  15.0.0           clang --version
+ e2fsprogs              1.41.4           e2fsck -V
++flex                   2.5.35           flex --version
++gdb                    7.2              gdb --version
++GNU awk (optional)     5.1.0            gawk --version
++GNU C                  8.1              gcc --version
++GNU make               4.0              make --version
++GNU tar                1.28             tar --version
++GRUB                   0.93             grub --version || grub-install --version
++gtags (optional)       6.6.5            gtags --version
++iptables               1.4.2            iptables -V
+ jfsutils               1.1.3            fsck.jfs -V
+-xfsprogs               2.6.0            xfs_db -V
+-squashfs-tools         4.0              mksquashfs -version
+-btrfs-progs            0.18             btrfs --version
++kmod                   13               kmod -V
++mcelog                 0.6              mcelog --version
++mkimage (optional)     2017.01          mkimage --version
++nfs-utils              1.0.5            showmount --version
++openssl & libcrypto    1.0.0            openssl version
++pahole                 1.22             pahole --version
+ pcmciautils            004              pccardctl -V
+-quota-tools            3.09             quota -V
+ PPP                    2.4.0            pppd --version
+-nfs-utils              1.0.5            showmount --version
+ procps                 3.2.0            ps --version
+-udev                   081              udevadm --version
+-GRUB                   0.93             grub --version || grub-install --version
+-mcelog                 0.6              mcelog --version
+-iptables               1.4.2            iptables -V
+-openssl & libcrypto    1.0.0            openssl version
+-bc                     1.06.95          bc --version
+-Sphinx\ [#f1]_         3.4.3            sphinx-build --version
+-GNU tar                1.28             tar --version
+-gtags (optional)       6.6.5            gtags --version
+-mkimage (optional)     2017.01          mkimage --version
+ Python                 3.9.x            python3 --version
+-GNU awk (optional)     5.1.0            gawk --version
+-gdb                    7.2              gdb --version
++quota-tools            3.09             quota -V
++Rust (optional)        1.78.0           rustc --version
++Sphinx\ [#f1]_         3.4.3            sphinx-build --version
++squashfs-tools         4.0              mksquashfs -version
++udev                   081              udevadm --version
++util-linux             2.10o            mount --version
++xfsprogs               2.6.0            xfs_db -V
+ ====================== ===============  ========================================
+ 
+ .. [#f1] Sphinx is needed only to build the Kernel documentation
+diff --git a/scripts/ver_linux b/scripts/ver_linux
+index fab0c68a6c52..00bdaf30d590 100755
+--- a/scripts/ver_linux
++++ b/scripts/ver_linux
+@@ -17,58 +17,58 @@ BEGIN {
+ 	libc = "libc[.]so[.][0-9]+$"
+ 	libcpp = "(libg|stdc)[+]+[.]so([.][0-9]+)+$"
+ 
+-	printversion("GNU C", version("gcc -dumpversion"))
+-	printversion("GNU make", version("make --version"))
+-	printversion("binutils", version("ld -v"))
+-	printversion("util-linux", version("mount --version"))
+-	printversion("Mount", version("mount --version"))
+-	printversion("Module-init-tools", version("depmod -V"))
+-	printversion("e2fsprogs", version("e2fsck -V"))
+-	printversion("jfsutils", version("fsck.jfs -V"))
+-	printversion("xfsprogs", version("xfs_db -V"))
+-	printversion("pcmciautils", version("pccardctl -V"))
+-	printversion("Pcmcia-cs", version("cardmgr -V"))
+-	printversion("quota-tools", version("quota -V"))
+-	printversion("PPP", version("pppd --version"))
+-	printversion("Isdn4k-utils", version("isdnctrl"))
+-	printversion("nfs-utils", version("showmount --version"))
+-	printversion("bison", version("bison --version"))
+-	printversion("flex", version("flex --version"))
+-
+-	while ("ldconfig -p 2>/dev/null" | getline > 0)
+-		if ($NF ~ libc || $NF ~ libcpp)
+-			if (!seen[ver = version("readlink " $NF)]++)
+-				printversion("Linux C" ($NF ~ libcpp? "++" : "") " Library", ver)
+-
+-	printversion("Dynamic linker (ldd)", version("ldd --version"))
+-	printversion("procps", version("ps --version"))
+-	printversion("Net-tools", version("ifconfig --version"))
+-	printversion("Kbd", version("loadkeys -V"))
+-	printversion("Console-tools", version("loadkeys -V"))
+-	printversion("Sh-utils", version("expr --v"))
+-	printversion("udev", version("udevadm --version"))
+-	printversion("Wireless-tools", version("iwconfig --version"))
+ 	printversion("bash", version("bash --version"))
+ 	printversion("bc", version("bc --version"))
+ 	printversion("bindgen", version("bindgen --version"))
++	printversion("binutils", version("ld -v"))
++	printversion("bison", version("bison --version"))
+ 	printversion("btrfs-progs", version("btrfs --version"))
+ 	printversion("Clang", version("clang --version"))
++	printversion("Console-tools", version("loadkeys -V"))
++	printversion("Dynamic linker (ldd)", version("ldd --version"))
++	printversion("e2fsprogs", version("e2fsck -V"))
++	printversion("flex", version("flex --version"))
+ 	printversion("gdb", version("gdb -version"))
+ 	printversion("GNU awk", version("gawk --version"))
++	printversion("GNU C", version("gcc -dumpversion"))
++	printversion("GNU make", version("make --version"))
+ 	printversion("GNU tar", version("tar --version"))
+-	printversion("GRUB", version("grub-install --version"))
+ 	printversion("GRUB2", version("grub2-install --version"))
++	printversion("GRUB", version("grub-install --version"))
+ 	printversion("gtags", version("gtags --version"))
+ 	printversion("iptables", version("iptables -V"))
++	printversion("Isdn4k-utils", version("isdnctrl"))
++	printversion("jfsutils", version("fsck.jfs -V"))
++	printversion("Kbd", version("loadkeys -V"))
+ 	printversion("kmod", version("kmod -V"))
++
++	while ("ldconfig -p 2>/dev/null" | getline > 0)
++		if ($NF ~ libc || $NF ~ libcpp)
++			if (!seen[ver = version("readlink " $NF)]++)
++				printversion("Linux C" ($NF ~ libcpp? "++" : "") " Library", ver)
++
+ 	printversion("mcelog", version("mcelog --version"))
+ 	printversion("mkimage", version("mkimage --version"))
++	printversion("Module-init-tools", version("depmod -V"))
++	printversion("Mount", version("mount --version"))
++	printversion("Net-tools", version("ifconfig --version"))
++	printversion("nfs-utils", version("showmount --version"))
+ 	printversion("openssl", version("openssl version"))
+ 	printversion("pahole", version("pahole --version"))
++	printversion("Pcmcia-cs", version("cardmgr -V"))
++	printversion("pcmciautils", version("pccardctl -V"))
++	printversion("PPP", version("pppd --version"))
++	printversion("procps", version("ps --version"))
+ 	printversion("Python", version("python3 -V"))
++	printversion("quota-tools", version("quota -V"))
+ 	printversion("Rust", version("rustc --version"))
++	printversion("Sh-utils", version("expr --v"))
+ 	printversion("Sphinx", version("sphinx-build --version"))
+ 	printversion("squashfs-tools", version("mksquashfs -version"))
++	printversion("udev", version("udevadm --version"))
++	printversion("util-linux", version("mount --version"))
++	printversion("Wireless-tools", version("iwconfig --version"))
++	printversion("xfsprogs", version("xfs_db -V"))
+ 
+ 	while ("sort /proc/modules" | getline > 0) {
+ 		mods = mods sep $1
+-- 
+2.53.0
 
-jon
 
