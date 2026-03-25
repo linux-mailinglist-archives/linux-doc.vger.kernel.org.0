@@ -1,205 +1,277 @@
-Return-Path: <linux-doc+bounces-81222-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81224-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +HDONtQrxGmZwgQAu9opvQ
-	(envelope-from <linux-doc+bounces-81222-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:39:16 +0100
+	id mFNABgQuxGmZwgQAu9opvQ
+	(envelope-from <linux-doc+bounces-81224-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:48:36 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AE9832AA9C
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:39:15 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7532132AC94
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:48:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 668023025124
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 18:37:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 499C4305A43E
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 18:43:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7BEB133557D;
-	Wed, 25 Mar 2026 18:36:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BAC2339708;
+	Wed, 25 Mar 2026 18:43:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="NaKE8aSh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lgeamrelo03.lge.com (lgeamrelo03.lge.com [156.147.51.102])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FA41329E6C
-	for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 18:36:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.147.51.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67DE533B6D1;
+	Wed, 25 Mar 2026 18:43:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.20
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774463815; cv=none; b=g4jFX3p46KglrCwxqb+1v/D0AInTeAyPsfIebBWjV9dsox9kTfDk5P6wkvRIkZwBhhNJ1ybi0P2pes6KWGIO7lDzmUjFQSFfCSQgR7iuxIx+P+SOrbhyNnGwPuyzgw4DnvoGNcl5Sxu1EjWyQCSS6Z3ILSZQsPZjyE1g91csiv8=
+	t=1774464211; cv=none; b=nMcO4U8j9u96ft6ho9i97vqlpdtHRVp9BAhlY8z1iJlU8nc4N5jgCcwrwRF4HNFZ2FBE44SkRhY/LOWCovz+PLU0mXJGshFH45EK3P64oQIJzEN8N8+XSFAmgZcF6/D6WI53cnM9loyj7AEG0G0/kAaS5cgQH2coTMM9ui8DmaA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774463815; c=relaxed/simple;
-	bh=caD87+u92zEtkpCjBqLx1b1xohIodhH4i7hTlROlaGc=;
+	s=arc-20240116; t=1774464211; c=relaxed/simple;
+	bh=0uB4cz/kaaU7qp1vt9+ccjoVdLBU34QCUDDWtFm5dH4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lFcVyhXzQ+Wy4McbbHY6eRiQrAKQxK6qdNrpG4L/5qN4REPuu6uUrNd2NPeRya2nm3wktDYDxs/686G2lSNEJWMxiInIIFM8144MMind6RVCBJXSwaMtMDOgrAVfSkIN1krIhMk4Yk2FKesaivTpviFjX8bJgT+B7vnF0GIP7Co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lge.com; spf=pass smtp.mailfrom=lge.com; arc=none smtp.client-ip=156.147.51.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lge.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lge.com
-Received: from unknown (HELO yjaykim-PowerEdge-T330) (10.177.112.156)
-	by 156.147.51.102 with ESMTP; 26 Mar 2026 03:36:49 +0900
-X-Original-SENDERIP: 10.177.112.156
-X-Original-MAILFROM: youngjun.park@lge.com
-Date: Thu, 26 Mar 2026 03:36:49 +0900
-From: YoungJun Park <youngjun.park@lge.com>
-To: Nhat Pham <nphamcs@gmail.com>
-Cc: kasong@tencent.com, Liam.Howlett@oracle.com, akpm@linux-foundation.org,
-	apopple@nvidia.com, axelrasmussen@google.com, baohua@kernel.org,
-	baolin.wang@linux.alibaba.com, bhe@redhat.com, byungchul@sk.com,
-	cgroups@vger.kernel.org, chengming.zhou@linux.dev,
-	chrisl@kernel.org, corbet@lwn.net, david@kernel.org,
-	dev.jain@arm.com, gourry@gourry.net, hannes@cmpxchg.org,
-	hughd@google.com, jannh@google.com, joshua.hahnjy@gmail.com,
-	lance.yang@linux.dev, lenb@kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-	linux-pm@vger.kernel.org, lorenzo.stoakes@oracle.com,
-	matthew.brost@intel.com, mhocko@suse.com, muchun.song@linux.dev,
-	npache@redhat.com, pavel@kernel.org, peterx@redhat.com,
-	peterz@infradead.org, pfalcato@suse.de, rafael@kernel.org,
-	rakie.kim@sk.com, roman.gushchin@linux.dev, rppt@kernel.org,
-	ryan.roberts@arm.com, shakeel.butt@linux.dev,
-	shikemeng@huaweicloud.com, surenb@google.com, tglx@kernel.org,
-	vbabka@suse.cz, weixugc@google.com, ying.huang@linux.alibaba.com,
-	yosry.ahmed@linux.dev, yuanchu@google.com,
-	zhengqi.arch@bytedance.com, ziy@nvidia.com, kernel-team@meta.com,
-	riel@surriel.com
-Subject: Re: [PATCH v5 00/21] Virtual Swap Space
-Message-ID: <acQrQYHJgqof0yx4@yjaykim-PowerEdge-T330>
-References: <20260320192735.748051-1-nphamcs@gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZB1VvkTPWSXbYQh4npXNj9TSV0QPiYXvjN+j/ScAU2NQKVtmN4mK1RBaFGRKfoaaG38a5tzjTGVrYOz86BcVqhwGmFHj2oR6hsgrPC9d1A4R0I1lyLsRQ62SR7OhYTo/oY/SmeqBf0yjF1Ia/JIUVImnqZUOU+Z85s8uV4tyXtQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=NaKE8aSh; arc=none smtp.client-ip=198.175.65.20
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1774464209; x=1806000209;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=0uB4cz/kaaU7qp1vt9+ccjoVdLBU34QCUDDWtFm5dH4=;
+  b=NaKE8aSh5S78hxkSpItvlAh6zs/LP7H2VEht8IDk6rm3jmYO7iGgXKRY
+   Rx9Fe8bw3Y1S1gvAuGJKjwXXbH0PFQfBX11BJ18sv2p7jPBsWTohadkIQ
+   tNDayFi9BnRt4/FNVS1Upe0tHZw+qeB18npBwfOFA6EbZXPdXDO+QgWiu
+   /iXoLqfwxyFOrz/vwhw/XZJl2CVuY2griNe/qaWQNVe0188NLoTVv7tJY
+   YY93JNkjG2dg22+ijQhlHg+WQMXbk7PPCjA8kR1Ye7thlEctv7kOsIFp0
+   9LkUO9aVIKJCfw2mmEYEdKR2ufPBf0YrxfT6IwcwtcbEBWga4Z2ARDaTO
+   Q==;
+X-CSE-ConnectionGUID: JCyG2RB5QSC6boaAmu66KA==
+X-CSE-MsgGUID: zFxDfkndQfiAxpYjY3M8tQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11740"; a="75228914"
+X-IronPort-AV: E=Sophos;i="6.23,140,1770624000"; 
+   d="scan'208";a="75228914"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Mar 2026 11:43:28 -0700
+X-CSE-ConnectionGUID: PIgWhb1sReuCAFXJCMmd4Q==
+X-CSE-MsgGUID: SQkIRvm5QpyELM31Jk3yCw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,140,1770624000"; 
+   d="scan'208";a="229541235"
+Received: from smoticic-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.117])
+  by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Mar 2026 11:43:17 -0700
+Date: Wed, 25 Mar 2026 20:43:15 +0200
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Maxime Ripard <mripard@kernel.org>
+Cc: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
+	Harry Wentland <harry.wentland@amd.com>,
+	Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <siqueira@igalia.com>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Andrzej Hajda <andrzej.hajda@intel.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Robert Foss <rfoss@kernel.org>,
+	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+	Jonas Karlman <jonas@kwiboo.se>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Sandy Huang <hjc@rock-chips.com>,
+	Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Rob Herring <robh@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, kernel@collabora.com,
+	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-rockchip@lists.infradead.org, intel-gfx@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org, linux-doc@vger.kernel.org,
+	Werner Sembach <wse@tuxedocomputers.com>,
+	Andri Yngvason <andri@yngvason.is>,
+	Marius Vlad <marius.vlad@collabora.com>
+Subject: Re: [PATCH v11 03/22] drm: Add new general DRM property "color
+ format"
+Message-ID: <acQsw3Wi_xVlBZ8d@intel.com>
+References: <20260324-color-format-v11-0-605559af4fb4@collabora.com>
+ <20260324-color-format-v11-3-605559af4fb4@collabora.com>
+ <acLDPYuaVI2-12JX@intel.com>
+ <23910073.EfDdHjke4D@workhorse>
+ <acLrv5hLyNss-Px5@intel.com>
+ <20260325-neat-elegant-raven-ebc9ab@houat>
+ <acPA60Ci3n_t__xF@intel.com>
+ <20260325-magnificent-ultraviolet-oarfish-baefbc@houat>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260320192735.748051-1-nphamcs@gmail.com>
-X-Spamd-Result: default: False [0.64 / 15.00];
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260325-magnificent-ultraviolet-oarfish-baefbc@houat>
+X-Patchwork-Hint: comment
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
+X-Spamd-Result: default: False [-0.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_MIXED_CHARSET(0.63)[subject];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[lge.com : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81222-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[tencent.com,oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[54];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[youngjun.park@lge.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	TAGGED_RCPT(0.00)[linux-doc];
-	R_DKIM_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	HAS_ORG_HEADER(0.00)[];
+	FREEMAIL_CC(0.00)[collabora.com,amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,intel.com,linaro.org,kernel.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,tuxedocomputers.com,yngvason.is];
+	TAGGED_FROM(0.00)[bounces-81224-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[intel.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[ville.syrjala@linux.intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 3AE9832AA9C
+X-Rspamd-Queue-Id: 7532132AC94
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Mar 20, 2026 at 12:27:14PM -0700, Nhat Pham wrote:
+On Wed, Mar 25, 2026 at 03:56:58PM +0100, Maxime Ripard wrote:
+> On Wed, Mar 25, 2026 at 01:03:07PM +0200, Ville Syrjälä wrote:
+> > On Wed, Mar 25, 2026 at 09:24:27AM +0100, Maxime Ripard wrote:
+> > > On Tue, Mar 24, 2026 at 09:53:35PM +0200, Ville Syrjälä wrote:
+> > > > On Tue, Mar 24, 2026 at 08:10:11PM +0100, Nicolas Frattaroli wrote:
+> > > > > On Tuesday, 24 March 2026 18:00:45 Central European Standard Time Ville Syrjälä wrote:
+> > > > > > On Tue, Mar 24, 2026 at 05:01:07PM +0100, Nicolas Frattaroli wrote:
+> > > > > > > +enum drm_connector_color_format {
+> > > > > > > +	/**
+> > > > > > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_AUTO: The driver or display protocol
+> > > > > > > +	 * helpers should pick a suitable color format. All implementations of a
+> > > > > > > +	 * specific display protocol must behave the same way with "AUTO", but
+> > > > > > > +	 * different display protocols do not necessarily have the same "AUTO"
+> > > > > > > +	 * semantics.
+> > > > > > > +	 *
+> > > > > > > +	 * For HDMI, "AUTO" picks RGB, but falls back to YCbCr 4:2:0 if the
+> > > > > > > +	 * bandwidth required for full-scale RGB is not available, or the mode
+> > > > > > > +	 * is YCbCr 4:2:0-only, as long as the mode and output both support
+> > > > > > > +	 * YCbCr 4:2:0.
+> > > > > > > +	 *
+> > > > > > > +	 * For display protocols other than HDMI, the recursive bridge chain
+> > > > > > > +	 * format selection picks the first chain of bridge formats that works,
+> > > > > > > +	 * as has already been the case before the introduction of the "color
+> > > > > > > +	 * format" property. Non-HDMI bridges should therefore either sort their
+> > > > > > > +	 * bus output formats by preference, or agree on a unified auto format
+> > > > > > > +	 * selection logic that's implemented in a common state helper (like
+> > > > > > > +	 * how HDMI does it).
+> > > > > > > +	 */
+> > > > > > > +	DRM_CONNECTOR_COLOR_FORMAT_AUTO = 0,
+> > > > > > > +
+> > > > > > > +	/**
+> > > > > > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_RGB444: RGB output format
+> > > > > > > +	 */
+> > > > > > > +	DRM_CONNECTOR_COLOR_FORMAT_RGB444,
+> > > > > > > +
+> > > > > > > +	/**
+> > > > > > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR444: YCbCr 4:4:4 output format (ie.
+> > > > > > > +	 * not subsampled)
+> > > > > > > +	 */
+> > > > > > > +	DRM_CONNECTOR_COLOR_FORMAT_YCBCR444,
+> > > > > > > +
+> > > > > > > +	/**
+> > > > > > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR422: YCbCr 4:2:2 output format (ie.
+> > > > > > > +	 * with horizontal subsampling)
+> > > > > > > +	 */
+> > > > > > > +	DRM_CONNECTOR_COLOR_FORMAT_YCBCR422,
+> > > > > > > +
+> > > > > > > +	/**
+> > > > > > > +	 * @DRM_CONNECTOR_COLOR_FORMAT_YCBCR420: YCbCr 4:2:0 output format (ie.
+> > > > > > > +	 * with horizontal and vertical subsampling)
+> > > > > > > +	 */
+> > > > > > > +	DRM_CONNECTOR_COLOR_FORMAT_YCBCR420,
+> > > > > > 
+> > > > > > Seems like this should document what the quantization range
+> > > > > > should be for each format.
+> > > > > > 
+> > > > > 
+> > > > > I don't think so? If you want per-component bit depth values,
+> > > > > DRM_FORMAT_* defines would be the appropriate values to use. This
+> > > > > enum is more abstract than that, and is there to communicate
+> > > > > YUV vs. RGB and chroma subsampling, with bit depth being handled
+> > > > > by other properties.
+> > > > > 
+> > > > > If you mean the factor used for subsampling, then that'd only be
+> > > > > relevant if YCBCR410 was supported where one chroma plane isn't
+> > > > > halved but quartered in resolution. I suspect 4:1:0 will never
+> > > > > be added; no digital display protocol standard supports it to my
+> > > > > knowledge, and hopefully none ever will.
+> > > > 
+> > > > No, I mean the quantization range (16-235 vs. 0-255 etc).
+> > > > 
+> > > > The i915 behaviour is that YCbCr is always limited range,
+> > > > RGB can either be full or limited range depending on the 
+> > > > "Broadcast RGB" property and other related factors.
+> > > 
+> > > So far the HDMI state has both the format and quantization range as
+> > > different fields. I'm not sure we need to document the range in the
+> > > format field, maybe only mention it's not part of the format but has a
+> > > field of its own?
+> > 
+> > I think we only have it for RGB (on some drivers only?). For YCbCr
+> > I think the assumption is limited range everywhere.
+> > 
+> > But I'm not really concerned about documenting struct members.
+> > What I'm talking about is the *uapi* docs. Surely userspace
+> > will want to know what the new property actually does so the
+> > uapi needs to be documented properly. And down the line some
+> > new driver might also implement the wrong behaviour if there
+> > is no clear specification.
 > 
-> This patch series is based on 6.19. There are a couple more
-> swap-related changes in mainline that I would need to coordinate
-> with, but I still want to send this out as an update for the
-> regressions reported by Kairui Song in [15]. It's probably easier
-> to just build this thing rather than dig through that series of
-> emails to get the fix patch :)
+> Ack
+> 
+> > So I'm thinking (or perhaps hoping) the rule might be something like:
+> > - YCbCr limited range 
+> > - RGB full range if "Broadcast RGB" property is not present
+> 
+> Isn't it much more complicated than that for HDMI though? My
+> recollection was that any VIC but VIC1 would be limited range, and
+> anything else full range?
 
-Hi Nhat,
+Do we have some driver that implements the CTA-861 CE vs. IT mode
+logic but doesn't expose the "Broadcast RGB" property? I was hoping
+those would always go hand in hand now.
 
-I wanted to fully understand the patches before asking questions,
-but reviewing everything takes time, and I didn't want to miss the
-timing. So let me share some thoughts and ask about your direction. 
+> 
+> > - RGB full or limited range based on the "Broadcast RGB" property
+> >   if it's present
+> > 
+> > I think the "Broadcast RGB" property itself might also be lacking
+> > proper uapi docs, so that may need to be remedied as well.
+> 
+> I took care of documenting it when merging the HDMI helpers:
+> https://docs.kernel.org/gpu/drm-kms.html#hdmi-specific-connector-properties
+> 
+> Maxime
 
-These are the perspectives I'm coming from:
 
-Pros:
-- The architecture is very clean.
-- Zero entries currently consume swap space, which can prevent
-  actual swap usage in some cases.
-- It resolves zswap's dependency on swap device size.
-- And so on.
 
-Cons:
-- An additional virtual allocation step is introduced per every swap.
-- not easy to merge (change swap infrastructure totally?)
-
-To address the cons, I think if we can demonstrate that the
-benefits always outweigh the costs, it could fully replace the
-existing mechanism. However, if this can be applied selectively,
-we get only the pros without the cons.
-
-1. Modularization
-
-You removed CONFIG_* and went with a unified approach. I recall
-you were also considering a module-based structure at some point.
-What are your thoughts on that direction?
-
-If we take that approach, we could extend the recent swap ops
-patchset (https://lore.kernel.org/linux-mm/20260302104016.163542-1-bhe@redhat.com/)
-as follows:
-- Make vswap a swap module
-- Have cluster allocation functions reside in swapops
-- Enable vswap through swapon
-
-I think this could result in a similar structure. An additional
-benefit would be that it enables various configurations:
-
-- vswap + regular swap together
-- vswap only
-- And other combinations
-
-And merge is not that hard. it is not the total change of swap infra structure.
-
-But, swapoff fastness might disappear? it is not that critical as I think.
-
-2. Flash-friendly swap integration (for my use case)
-
-I've been thinking about the flash-friendly swap concept that
-I mentioned before and recently proposed:
-(https://lore.kernel.org/linux-mm/aZW0voL4MmnMQlaR@yjaykim-PowerEdge-T330/)
-
-One of its core functions requires buffering RAM-swapped pages
-and writing them sequentially at an appropriate time -- not
-immediately, but in proper block-sized units, sequentially.
-
-This means allocated offsets must essentially be virtual, and
-physical offsets need to be managed separately at the actual
-write time.
-
-If we integrate this into the current vswap, we would either
-need vswap itself to handle the sequential writes (bypassing
-the physical device and receiving pages directly), or swapon
-a swap device and have vswap obtain physical offsets from it.
-But since those offsets cannot be used directly (due to
-buffering and sequential write requirements), they become
-virtual too, resulting in:
-
-  virtual -> virtual -> physical
-
-This triple indirection is not ideal.
-
-However, if the modularization from point 1 is achieved and
-vswap acts as a swap device itself, then we can cleanly
-establish a:
-
-  virtual -> physical
-
-relationship within it.
-
-I noticed you seem to be exploring collaboration with Kairui
-as well. I'm curious whether you have a compromise direction
-in mind, or if you plan to stick with the current approach.
-
-P.S. I definitely want to review the vswap code in detail
-when I get the time. great work and code.
-
-Thanks,
-Youngjun Park
+-- 
+Ville Syrjälä
+Intel
 
