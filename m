@@ -1,166 +1,127 @@
-Return-Path: <linux-doc+bounces-81221-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81223-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2AK9F58nxGmZwgQAu9opvQ
-	(envelope-from <linux-doc+bounces-81221-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:21:19 +0100
+	id 6HpfGt0txGmZwgQAu9opvQ
+	(envelope-from <linux-doc+bounces-81223-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:47:57 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E325A32A7B6
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:21:18 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id B8EC932AC77
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 19:47:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 719903034511
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 18:20:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C0C6F302A061
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 18:42:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 970BE32720D;
-	Wed, 25 Mar 2026 18:20:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CDCDD33372A;
+	Wed, 25 Mar 2026 18:42:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="RnRqlju/"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="NnTORrN6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 314C03242BA;
-	Wed, 25 Mar 2026 18:20:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E08D3242BA;
+	Wed, 25 Mar 2026 18:42:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774462834; cv=none; b=IArQ3jAwmgYDQD+F6b9Mbpu9IdJfxwkzcgs12HPy+iTTHe8Oe57PA8zYnSEVnALYskPzCYSwEjvehGnU92xnmytxztwJMhBnueztqaXPgcobbfhKFomcMuh2Ed5cy8xIrMRBqPLWkcpDXyHmdNuDMXDvm3OK3iZXXDWH9Am/kMg=
+	t=1774464145; cv=none; b=RAbImsiTb9CzxE+YH3+Ph4zW5j7AYWrZdVtY0jLvJRBfrYoumBUvzap+DnGnm+mXt7BhUaKehfGpRTOmPcZnal0r0GCRJpvgORAFC0BLEPpuK2n160STCRR672xxDl//AOu/bC0r+KnWK+EzAFAmrlgHhYPw6VHQRvRlriZ6k0w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774462834; c=relaxed/simple;
-	bh=j2/es1QhPhuq51aj/X0brAWozFW8cVd/nUY1rJQCm28=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Disposition; b=fGKcer38bvaS000qDan0mi8u9FhGaA8jjfdZLDy8FxXMIBkBlJZ8/RHsx4hOFOg/8WyKZaDkTuj/Ms8C8R/W5NI7ScmDabZ7j9wckBaTASY1BBFkFoh54gXGQ5Y5F5/Mv1Xs3N5IarncdNDCNimYJeQS3Ea7foAzbvk3ix89WDw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=RnRqlju/; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A0CC51F02;
-	Wed, 25 Mar 2026 11:20:26 -0700 (PDT)
-Received: from devkitleo.cambridge.arm.com (devkitleo.cambridge.arm.com [10.1.196.90])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 687383F836;
-	Wed, 25 Mar 2026 11:20:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1774462832; bh=j2/es1QhPhuq51aj/X0brAWozFW8cVd/nUY1rJQCm28=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=RnRqlju//v+l8+03/0wteCA6R1iCsC1AxpJi6NyA/fWzpmNollbBo80IOtBxUXBxZ
-	 G5EG2hgtu/qJ5SgLsJ9eud5ObOxoheQ95D/hyREnHIaEvJHzxuqvDMmezCC/dm26sj
-	 AWDLdr/3IUF3rzLY+0m1k9SAPvra5hVsUBx3KeD0=
-From: Leonardo Bras <leo.bras@arm.com>
-To: Tian Zheng <zhengtian10@huawei.com>
-Cc: Leonardo Bras <leo.bras@arm.com>,
-	maz@kernel.org,
-	oupton@kernel.org,
-	catalin.marinas@arm.com,
-	corbet@lwn.net,
-	pbonzini@redhat.com,
-	will@kernel.org,
-	yuzenghui@huawei.com,
-	wangzhou1@hisilicon.com,
-	liuyonglong@huawei.com,
-	Jonathan.Cameron@huawei.com,
-	yezhenyu2@huawei.com,
-	linuxarm@huawei.com,
-	joey.gouly@arm.com,
-	kvmarm@lists.linux.dev,
-	kvm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	skhan@linuxfoundation.org,
-	suzuki.poulose@arm.com
-Subject: [PATCH] arm64/kvm: Enable eager hugepage splitting if HDBSS is available
-Date: Wed, 25 Mar 2026 18:20:27 +0000
-Message-ID: <acQna2hLwdr1juTN@devkitleo>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <acQj5grOdZT8LUGp@devkitleo>
-References: <20260225040421.2683931-1-zhengtian10@huawei.com> <20260225040421.2683931-5-zhengtian10@huawei.com> <acQj5grOdZT8LUGp@devkitleo>
+	s=arc-20240116; t=1774464145; c=relaxed/simple;
+	bh=3yOvbTUZPdhMANcRSuGZozR73RkbjOg7cxJCWSYXS4Y=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=eAmGP5mO6nDnARiOFbEL96mpTOX0S6iaAixhke3JXSF01/VHmWSHn10WjRykIypnTzZd0pUKL2Vbr0pP33jFnqz06Fls2IaaCU8l0aA9pWKaASTuCyV627IoPOSxtuLB0HXWj0cL0erWrIM8EVYBjc7CulCeMh5W+jPUXUZU/Jg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=NnTORrN6; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1080440C79
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1774463772; bh=HW5/gSvc6qkA7mSKJDyPN5d4gL8wnUU4sPhP6SOLjS4=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=NnTORrN6UtYqy0cdbZNVdomIaTT8O/bWTPr/nXoaRLAyAdU3S+yGYyxV8Hpmh3ej+
+	 214C9mwZLf+DPsbSHb265FYbSh2MdnUF9pbpDMMS9yrWolvYCb/+mdyogdaomHBl8N
+	 c9dtFHsnAwGCXkEyMe+0621066rXum7KdXEVFDbRcE9ikKxzDHvBgxF7tCSyBGyC7Q
+	 y3yKHiGA6CPzQUWGYDQc9RjSmFsb+Iwd1YhVEpfV8XgJtpQvb3O43U7J7Dn+ZB1FEZ
+	 Bo5FBY9xJ0pVq1h9tXmmH22uTRKQCrIXBYD8vmAazTkMEoEuUnSgb2zP+CPN64b6TX
+	 8Q1lA5tpwBtLw==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 1080440C79;
+	Wed, 25 Mar 2026 18:36:12 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: =?utf-8?Q?Tom=C3=A1s?= Pando <tovictakamine@gmail.com>
+Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, =?utf-8?Q?Tom=C3=A1s?= Pando
+ <tovictakamine@gmail.com>, Randy
+ Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v3] docs: driver-api: fix 6 spelling typos in
+ Documentation/driver-api
+In-Reply-To: <20260324163604.5710-1-tovictakamine@gmail.com>
+References: <20260324163604.5710-1-tovictakamine@gmail.com>
+Date: Wed, 25 Mar 2026 12:36:11 -0600
+Message-ID: <87pl4rg3j8.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-81223-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81221-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,gmail.com,infradead.org];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	DKIM_TRACE(0.00)[arm.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leo.bras@arm.com,linux-doc@vger.kernel.org];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E325A32A7B6
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_FIVE(0.00)[6]
+X-Rspamd-Queue-Id: B8EC932AC77
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-FEAT_HDBSS speeds up guest memory dirty tracking by avoiding a page fault
-and saving the entry in a tracking structure.
+Tom=C3=A1s Pando <tovictakamine@gmail.com> writes:
 
-That may be a problem when we have guest memory backed by hugepages or
-transparent huge pages, as it's not possible to do on-demand hugepage
-splitting, relying only on eager hugepage splitting.
+> Fix minor spelling mistakes in the driver-api documentation. These
+> changes improve readability in ACPI, CXL, DMA and PCI docs.
+> v3: Added reviewed-by from Randy Dunlap.
+> v2: Added full name as requested by Jon Corbet.
+>
+> Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+> Signed-off-by: Tom=C3=A1s Pando <tovictakamine@gmail.com>
+> ---
+>  Documentation/driver-api/acpi/acpi-drivers.rst         | 2 +-
+>  Documentation/driver-api/cxl/platform/acpi/cedt.rst    | 2 +-
+>  Documentation/driver-api/cxl/platform/bios-and-efi.rst | 2 +-
+>  Documentation/driver-api/dmaengine/pxa_dma.rst         | 2 +-
+>  Documentation/driver-api/libata.rst                    | 2 +-
+>  Documentation/driver-api/pci/p2pdma.rst                | 2 +-
+>  6 files changed, 6 insertions(+), 6 deletions(-)
 
-So, at stage2 initialization, enable eager hugepage splitting with
-chunk = PAGE_SIZE if the system supports HDBSS.
+Applied, thanks.
 
-Signed-off-by: Leonardo Bras <leo.bras@arm.com>
----
- arch/arm64/kvm/mmu.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm64/kvm/mmu.c b/arch/arm64/kvm/mmu.c
-index 070a01e53fcb..bdfa72b7c073 100644
---- a/arch/arm64/kvm/mmu.c
-+++ b/arch/arm64/kvm/mmu.c
-@@ -993,22 +993,26 @@ int kvm_init_stage2_mmu(struct kvm *kvm, struct kvm_s2_mmu *mmu, unsigned long t
- 
- 	mmu->last_vcpu_ran = alloc_percpu(typeof(*mmu->last_vcpu_ran));
- 	if (!mmu->last_vcpu_ran) {
- 		err = -ENOMEM;
- 		goto out_destroy_pgtable;
- 	}
- 
- 	for_each_possible_cpu(cpu)
- 		*per_cpu_ptr(mmu->last_vcpu_ran, cpu) = -1;
- 
--	 /* The eager page splitting is disabled by default */
--	mmu->split_page_chunk_size = KVM_ARM_EAGER_SPLIT_CHUNK_SIZE_DEFAULT;
-+	 /* The eager page splitting is disabled by default if system has no HDBSS */
-+	if (system_supports_hacdbs())
-+		mmu->split_page_chunk_size = PAGE_SIZE;
-+	else
-+		mmu->split_page_chunk_size = KVM_ARM_EAGER_SPLIT_CHUNK_SIZE_DEFAULT;
-+
- 	mmu->split_page_cache.gfp_zero = __GFP_ZERO;
- 
- 	mmu->pgd_phys = __pa(pgt->pgd);
- 
- 	if (kvm_is_nested_s2_mmu(kvm, mmu))
- 		kvm_init_nested_s2_mmu(mmu);
- 
- 	return 0;
- 
- out_destroy_pgtable:
--- 
-2.53.0
-
+jon
 
