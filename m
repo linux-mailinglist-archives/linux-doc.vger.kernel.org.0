@@ -1,180 +1,201 @@
-Return-Path: <linux-doc+bounces-81119-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81121-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GDynE1ZFw2n7pgQAu9opvQ
-	(envelope-from <linux-doc+bounces-81119-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 03:15:50 +0100
+	id QDlDAhRKw2lnpwQAu9opvQ
+	(envelope-from <linux-doc+bounces-81121-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 03:36:04 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C305B31E9D9
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 03:15:49 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DD4F31EBCF
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 03:36:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id ACAFD304AD30
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 02:15:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7F9EE305D6F1
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 02:35:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7A79263C7F;
-	Wed, 25 Mar 2026 02:15:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52BC1286D53;
+	Wed, 25 Mar 2026 02:35:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SXIEB9nN"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EurudgTY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3DE01531E8;
-	Wed, 25 Mar 2026 02:15:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 090582853E0
+	for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 02:35:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774404947; cv=none; b=YZh50BCmoVDtE27WjrXgPnsrifvyqIsLnwHQtlqMXrY9NVPr0JZrnM4U0FYbKbVzdJxmz7qyyyebW9r13GtCNPyz7K87Xvs+zVXv/BIc23tujolF4eKY4QBp4rxRBuvrCOm/XCnwPw45Fk2ei0yBTHGkSxtm+9RKiNncK0hpWpo=
+	t=1774406144; cv=none; b=VHECGbk86cAryJpegjpo+iya614/tBCowU3UPPqUGPWbgGRkciXFnFMJtsCJyg5EJoewVmXiZCUb8JJA5wnOQ7+7kZVK9u14S6XSlfmBeH+eBZxVJbc3xenN6XhX7fUzhf1GUBYyaW4XKJxcHcYNtFg/FW1ddQaTIukySkOAEBQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774404947; c=relaxed/simple;
-	bh=UQ36BHD5AltOWCXoTF1F067alxzo/XmfYIE8jWkukFg=;
-	h=Content-Type:MIME-Version:Message-Id:In-Reply-To:References:
-	 Subject:From:To:Cc:Date; b=utbXcFxEJnAMLwY50zLEkbUxcKiDsDhI71yTplfq8DMOpLSWTIL024qEkHVKCJnIk2dguyDpbM2iGV5e/EZlLXJ7dQUttSYJjVc9udigzOk7d4SnsmRe+0V3lbx4Dqd1xpNbLrbkXjRui0EBd01BaLWcZeqzUUI5yaUOpEvbi8E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SXIEB9nN; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FA8AC19424;
-	Wed, 25 Mar 2026 02:15:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774404947;
-	bh=UQ36BHD5AltOWCXoTF1F067alxzo/XmfYIE8jWkukFg=;
-	h=In-Reply-To:References:Subject:From:To:Cc:Date:From;
-	b=SXIEB9nNxGuVM7+G/zWqCOrk3ScU5D3kc7pMf71uYqS54jCtztJ3t+D04TLw1M3+9
-	 mE+HMEOIhSemtT3fb3I33VAZzmbye7BmjuY0RbnWai5x8v+2r19d2UnmZzoxCNaobX
-	 lDmRWkDamwqaLHrsf2JDHFktCY7tSSDxHyJMflQBbIOpJd/oOpk6D+/VxyUcbzoBEi
-	 Zzhih8EOYlxaTYl/EifYRfbS/Ps5Frot2VNd5AJNVtF31ssKLpr5c8EsGrT9cqc0fF
-	 h4zDDkpYCLfZGSgBAngHj44aq+k8UIY25+Qct7AOMEgeTNNsoSe76bnuQarmVRPZjm
-	 NK8PSxE6hMPLQ==
-Content-Type: multipart/mixed; boundary="===============8578444517970282799=="
+	s=arc-20240116; t=1774406144; c=relaxed/simple;
+	bh=ubJF9m/wLx7bYWwOAm7o0d8tY4ejMPWhdFfkGi74I9s=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=MAQhUrSGGTgV49qqGFTV0KSO5M3t3AfDbPQAVXJat4pxKwZW/nYPeAZw70H8L9NQAP+PRuFdTmz3daA8YWUWlAT0J4Qf50Ml+yRkvqaeQmO7jOIgdW3qV0/ukCxRyfKkFOJoIu3xskwQ5UV8xW8zPSQF5b72vAfM8seh0oiXuCQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EurudgTY; arc=none smtp.client-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-43b40003d13so3824483f8f.2
+        for <linux-doc@vger.kernel.org>; Tue, 24 Mar 2026 19:35:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774406141; x=1775010941; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=e/WqiqBCLyiLY/v28qTyeW3QcaRTjQUhA8ri92uqPms=;
+        b=EurudgTYj3bgYiWZTc/rEzyiUkWBbjOsAiiT89wURxO/FYynIbN13FcNHNxXUEpLH5
+         /Hb3dxM9wI3LWT6fQ5036QJudRU29qe+LzX3WYY+DrnqYjm50GmyAGBog6ncaWRbumnQ
+         j9Hw5HpXl5ug1Ipp+IKmtX/y9qy9vtWQbd286QzAADbonJ2P5qDII+qKVzKMvGwhErgI
+         A4RwRjBShlN9WqEX1FNtyhvyq2k6x3DhqPez5rTFgr+EWTs1wEJ7zzb/xtyZKALiPudX
+         +JX6EGkr84JxVMtmzypATXAPr5qWwTj6xgiW2sFrJCMJ3WkV0VqlYIFSxQ7AyLWkrz6F
+         n9/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774406141; x=1775010941;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=e/WqiqBCLyiLY/v28qTyeW3QcaRTjQUhA8ri92uqPms=;
+        b=qu2dnDgBoGEZk4UPWknQzvYBsJNpvvgWJo+Bl4WqW9vRpp6qWxLFMcZ2Z3H6Vc1eoz
+         U8S863EJ2HyDo5hxZJUShWm4Y4m+JK7JtoZ+mgWvFotqtKD+QFGWOu3LDPVEJKtfAegb
+         5iBQcTHwFQ+WZcK8YR7OWoJ+5HpuL2TjwsBdcdN0ED2K+rybfsBNXE5WvoyIYjVBSVtX
+         PV1IWsowkRVmV8/u0eJ4rz36B0+SHLEbZ8zXy/trElEGiyvhauZ2zZCPtLwsaRx9LIac
+         fsl+sYZo+Yioh7//3NdXj60P+UawNk9FwpAwUqdDJ7+21n33YwUA+fA6h+EIAKmfybtf
+         wYoQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU8/8yEwmJl8y0+BZ1zPzsWZtkOnR9ZfRqRE7xDbHSXB8CKDJkDQowVlq1h+R85xjUz4Sq9w1OmmBY=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw0rBJPYA/teFFmz66Y/8qAo9OBmKF3O/OysWJ5w3Ql8xWiUZm5
+	ewyUsYCB2Js0fiNu34TLhGQ8s/yNCGS97HZ8ugxZtxRq32CTs6IYXq0v
+X-Gm-Gg: ATEYQzwJys6CZQ3myfMUG0F0Lbglmc+AtXtc4FkFhyIKkuTs22Nlraz0QOcui741oHF
+	4R17bTTzG+o6wOloqWpgRLY4NKSkpOEsvERzMl2jEmO7800ddJU3ny06+ROs3ujBfH7A4CDQ7YV
+	44T7ySGR044oXzGTA/+0YGh0+qMqzW4KOJsQa/zmAwNC4LsMFZLtJ25BOSbYIqy5ZhrNY0FtDfp
+	eq8gHtuHIk2dl1192MoJiNyOtSfUZJyvzewY6WPAL95BaYS1QJnMW6lRpzpazk8hmlf0uXr102a
+	qjplAA/f6ov6kif4dCXnqrlmlbRWMA3nNhyS61iyeeICs86Z9ZGuxITwnieIwDD6gVi1ENlG0MZ
+	oO9LFt6Oz2V0g15IOkuMGKg9142thhfMAO6fJ6lEs+7SUBJObQGr8HFTFhACUhF+CJ3MHczgHfQ
+	L6p6GkrAnRn4BOx1dvWEaQ57MAWSZ2YQ==
+X-Received: by 2002:a05:6000:18a8:b0:439:b440:b8a2 with SMTP id ffacd0b85a97d-43b88a0d156mr2181278f8f.28.1774406141184;
+        Tue, 24 Mar 2026 19:35:41 -0700 (PDT)
+Received: from localhost ([212.73.77.104])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-43b6470f902sm45426571f8f.28.2026.03.24.19.35.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 24 Mar 2026 19:35:40 -0700 (PDT)
+From: Askar Safin <safinaskar@gmail.com>
+To: nphamcs@gmail.com
+Cc: Liam.Howlett@oracle.com,
+	akpm@linux-foundation.org,
+	apopple@nvidia.com,
+	axelrasmussen@google.com,
+	baohua@kernel.org,
+	baolin.wang@linux.alibaba.com,
+	bhe@redhat.com,
+	byungchul@sk.com,
+	cgroups@vger.kernel.org,
+	chengming.zhou@linux.dev,
+	chrisl@kernel.org,
+	corbet@lwn.net,
+	david@kernel.org,
+	dev.jain@arm.com,
+	gourry@gourry.net,
+	hannes@cmpxchg.org,
+	hughd@google.com,
+	jannh@google.com,
+	joshua.hahnjy@gmail.com,
+	kasong@tencent.com,
+	kernel-team@meta.com,
+	lance.yang@linux.dev,
+	lenb@kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-pm@vger.kernel.org,
+	lorenzo.stoakes@oracle.com,
+	matthew.brost@intel.com,
+	mhocko@suse.com,
+	muchun.song@linux.dev,
+	npache@redhat.com,
+	pavel@kernel.org,
+	peterx@redhat.com,
+	peterz@infradead.org,
+	pfalcato@suse.de,
+	rafael@kernel.org,
+	rakie.kim@sk.com,
+	riel@surriel.com,
+	roman.gushchin@linux.dev,
+	rppt@kernel.org,
+	ryan.roberts@arm.com,
+	ryncsn@gmail.com,
+	shakeel.butt@linux.dev,
+	shikemeng@huaweicloud.com,
+	surenb@google.com,
+	tglx@kernel.org,
+	vbabka@suse.cz,
+	weixugc@google.com,
+	willy@infradead.org,
+	ying.huang@linux.alibaba.com,
+	yosry.ahmed@linux.dev,
+	yuanchu@google.com,
+	zhengqi.arch@bytedance.com,
+	ziy@nvidia.com
+Subject: Re: [PATCH v5 00/21] Virtual Swap Space
+Date: Wed, 25 Mar 2026 05:35:30 +0300
+Message-ID: <20260325023530.222944-1-safinaskar@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <CAKEwX=MgoPmiFdBQXK_4=XuR-8mVpGr+3Ku2MfjPmHCeuUdGJg@mail.gmail.com>
+References: <CAKEwX=MgoPmiFdBQXK_4=XuR-8mVpGr+3Ku2MfjPmHCeuUdGJg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Message-Id: <64037c46ac65e4e72f45f78a9703a8f938441d7499486ac389262aa406654b8b@mail.kernel.org>
-In-Reply-To: <20260325011853.657295-1-sashal@kernel.org>
-References: <20260325011853.657295-1-sashal@kernel.org>
-Subject: Re: [RFC] btf: split core BTF parsing out of BPF subsystem into kernel/btf/
-From: bot+bpf-ci@kernel.org
-To: sashal@kernel.org,sashal@kernel.org
-Cc: James.Bottomley@hansenpartnership.com,adobriyan@gmail.com,akpm@linux-foundation.org,alexei.starovoitov@gmail.com,ast@kernel.org,bp@alien8.de,bpf@vger.kernel.org,corbet@lwn.net,dave.hansen@linux.intel.com,davidgow@google.com,deller@gmx.de,geert@linux-m68k.org,gregkh@linuxfoundation.org,hpa@zytor.com,jgross@suse.com,jpoimboe@kernel.org,kees@kernel.org,laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org,linux-kbuild@vger.kernel.org,linux-kernel@vger.kernel.org,linux-modules@vger.kernel.org,masahiroy@kernel.org,mcgrof@kernel.org,mingo@redhat.com,nathan@kernel.org,nsc@kernel.org,peterz@infradead.org,petr.pavlu@suse.com,pmladek@suse.com,rdunlap@infradead.org,rostedt@goodmis.org,tglx@kernel.org,vbabka@kernel.org,x86@kernel.org,ast@kernel.org,andrii@kernel.org,daniel@iogearbox.net,martin.lau@kernel.org,eddyz87@gmail.com,yonghong.song@linux.dev,clm@meta.com,ihor.solodrai@linux.dev
-Date: Wed, 25 Mar 2026 02:15:46 +0000 (UTC)
-X-Spamd-Result: default: False [0.34 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	CTYPE_MIXED_BOGUS(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[multipart/mixed,text/plain];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[hansenpartnership.com,gmail.com,linux-foundation.org,kernel.org,alien8.de,vger.kernel.org,lwn.net,linux.intel.com,google.com,gmx.de,linux-m68k.org,linuxfoundation.org,zytor.com,suse.com,ideasonboard.com,redhat.com,infradead.org,goodmis.org,iogearbox.net,linux.dev,meta.com];
-	FROM_NEQ_ENVFROM(0.00)[bot@kernel.org,linux-doc@vger.kernel.org];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_CC(0.00)[oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,tencent.com,meta.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,surriel.com,huaweicloud.com,suse.cz,bytedance.com];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-81119-lists,linux-doc=lfdr.de,bpf-ci];
-	MIME_TRACE(0.00)[0:+,1:+];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_NO_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[45];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[bounces-81121-lists,linux-doc=lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[safinaskar@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCPT_COUNT_GT_50(0.00)[56];
+	TO_DN_NONE(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mail.kernel.org:mid]
-X-Rspamd-Queue-Id: C305B31E9D9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 6DD4F31EBCF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
---===============8578444517970282799==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Nhat Pham <nphamcs@gmail.com>:
+> I'm aware of that work. It's an improvement, but my understanding is:
 
-> diff --git a/kernel/btf/bpf.c b/kernel/btf/bpf.c
-> new file mode 100644
-> index 0000000000000..ef973771bb2ab
-> --- /dev/null
-> +++ b/kernel/btf/bpf.c
+Thank you for answer!
 
-[ ... ]
+Also, is it possible to have checksummed swap?
 
-> +struct btf_struct_ops_tab {
-> +	u32 cnt;
-> +	u32 capacity;
-> +	struct bpf_struct_ops_desc ops[];
-> +};
-> +	u32 id;
-> +	struct rcu_head rcu;
-> +	struct btf_kfunc_set_tab *kfunc_set_tab;
-> +	struct btf_id_dtor_kfunc_tab *dtor_kfunc_tab;
-> +	struct btf_struct_metas *struct_meta_tab;
-> +	struct btf_struct_ops_tab *struct_ops_tab;
-> +s32 bpf_find_btf_id(const char *name, u32 kind, struct btf **btf_p)
+I want to have checksummed swap to be protected from disk bit-rot
+(I already have ECC memory, so RAM is protected).
 
-These six declarations between the closing brace of struct
-btf_struct_ops_tab and bpf_find_btf_id() appear to be orphaned
-fields from the original struct btf definition that were left
-behind during the split.
+And hibernation image should be protected, too.
 
-They are parsed as file-scope global variable definitions. With
--fno-common, the name "id" in particular is likely to collide at
-link time. Were these meant to be removed here, given that they
-already appear correctly inside struct btf in kernel/btf/btf.h
-under the CONFIG_BPF_SYSCALL guard?
+I tried to put swap on top of dm-integrity, but this is
+incompatible with hibernation in mainline kernel.
 
-> diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
-> index 93f356d2b3d95..0009a7ac78462 100644
-> --- a/lib/Kconfig.debug
-> +++ b/lib/Kconfig.debug
-> @@ -395,14 +395,23 @@ config DEBUG_INFO_SPLIT
-
-[ ... ]
-
-> +config BTF
-> +	bool "BTF type information support"
-> +	depends on !DEBUG_INFO_SPLIT && !DEBUG_INFO_REDUCED
-> +	depends on !GCC_PLUGIN_RANDSTRUCT || COMPILE_TEST
-> +	depends on PAHOLE_VERSION >= 122
-> +	# pahole uses elfutils, which does not have support for Hexagon relocations
-> +	depends on !HEXAGON
-
-[ ... ]
-
-> +config DEBUG_INFO_BTF
-> +	bool "Generate BTF type information"
-> +	select BTF
-
-The old DEBUG_INFO_BTF had its own depends on lines:
-
-    depends on !DEBUG_INFO_SPLIT && !DEBUG_INFO_REDUCED
-    depends on !GCC_PLUGIN_RANDSTRUCT || COMPILE_TEST
-    depends on BPF_SYSCALL
-    depends on PAHOLE_VERSION >= 122
-    depends on !HEXAGON
-
-Those constraints now live only on CONFIG_BTF, and DEBUG_INFO_BTF
-uses "select BTF" with no depends of its own. Since select bypasses
-the selected symbol's depends-on checks, DEBUG_INFO_BTF is now
-visible and selectable even when BTF's dependencies are not met
-(e.g. on Hexagon, or with PAHOLE_VERSION < 122).
-
-Should DEBUG_INFO_BTF use "depends on BTF" instead of (or in
-addition to) "select BTF", so that it inherits the same
-constraints?
-
-
----
-AI reviewed your patch. Please fix the bug or email reply why it's not a bug.
-See: https://github.com/kernel-patches/vmtest/blob/master/ci/claude/README.md
-
-CI run summary: https://github.com/kernel-patches/bpf/actions/runs/23520643445
---===============8578444517970282799==--
+-- 
+Askar Safin
 
