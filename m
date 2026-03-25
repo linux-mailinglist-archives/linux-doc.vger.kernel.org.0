@@ -1,163 +1,207 @@
-Return-Path: <linux-doc+bounces-81190-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81192-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4Jy4Affkw2mwugQAu9opvQ
-	(envelope-from <linux-doc+bounces-81190-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 14:36:55 +0100
+	id EIQDMcvnw2lvugQAu9opvQ
+	(envelope-from <linux-doc+bounces-81192-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 14:48:59 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F79E325E7A
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 14:36:54 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 670DD3261A1
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 14:48:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4BAFC318A800
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 12:49:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 83E6F31CFEE4
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 13:05:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE1403D5660;
-	Wed, 25 Mar 2026 12:49:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 071993D6CB7;
+	Wed, 25 Mar 2026 13:05:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="QsQTBQ2R"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qkJ7MeTn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EACEC2EC081
-	for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 12:49:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5E8E3D6CA2;
+	Wed, 25 Mar 2026 13:05:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774442973; cv=none; b=eT9+N57M/PxpBUjiU5nICqRNaqPdwO7HyYnTa+Gfm/hhOG4vv33tXbO+SBr3vkVPDNrDbAdUgzWhh5KmQpyEjiPkbt8Y8C3220ctX3EqlY8c84xaAPJz8TgTNptB+KiuvcDDELu4F/GIYMAjxCigMdX5AtIPoFldgx1DydvBvAo=
+	t=1774443928; cv=none; b=N2ov3frw8Fjh958Q6z7i29mNT5MOv9Re0vS2QQtKKh/68BE/dxTp/KQtddpFc1T+aLF5pycWeZcY5QnzuW2pHkzRkqtz4NAQ91e+lH3wnyT9OO9f3U3k2lhoY7qNR5/EeM9jsaNp1W1amtfCWbBkBnStKmOVZuTI27ZRdlfjK6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774442973; c=relaxed/simple;
-	bh=0jbWB3FjVQp+P8Ybiw1JdATIo1RfpVsEkcvfvEH0fIQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cdi9rQmP6okhycaXqcUbZH5UM6K9DS46djxiqaf120pdKnbaeHnCfj2OO90B+a+Na2UQ1e28fLpwEtsbDgJp/p+eEUvHAva/0MgzQj5SwwOtymEFwcFsLa0chVVQlQKAZi9gq9Sa25/KPL17QSjxymsBnbDiNA7HmNrSR7jSD44=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=QsQTBQ2R; arc=none smtp.client-ip=209.85.221.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-43b3d9d0695so789235f8f.0
-        for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 05:49:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1774442970; x=1775047770; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=BJ4RwDdYC7l5LX4+kxPiqchKwdT0zRAfuYVx8dHTGTI=;
-        b=QsQTBQ2RkrQE7IMnUQFMVZf91MzfH5VhYOdj1f6Kc0qHkUjbpodcFhfNqvP7j00lIL
-         7+0NS3ce2sJFLeV0zP1vFfjxIhzEfBOaUThEj56njyTJBz08hVYC3GsWPreyMX0/s+SI
-         bqiSjb8e/MteSBDYDfZ88BtS+5N4oP3+lCjFDol0aDha2po5mM/macY7Gqc9+Qj7BF1Q
-         Q9kC8G6jUxbYVPT/E3pXanzVD1QenpTOeoh5HahyBpCrlKLC34dPfa3dBGd4ozO0YZsi
-         7nw+Vgi2bbhvnadrOePJ2jhdU86tkN+eJJiNDLdUr890bBTyvTbkDcI5FEOSvJZkri2v
-         oHGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774442970; x=1775047770;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BJ4RwDdYC7l5LX4+kxPiqchKwdT0zRAfuYVx8dHTGTI=;
-        b=bMeQzk4b1jzwxFxafIRpKnuTINJBuB/lqHvldurxepIhhs+nnUst/+xi6HXCEfTeWm
-         x2SstTScyYBshqKuiihnQXDVXh4/zkw1rQS177+IIjYHCQQ2gT5RQqNtjYLRu/Q8LOkp
-         rkwpUZ3rVbN55/GBky1Ylbvv0H4dG4mbib10P6SZHLbYR6jGBm8TRkHQBb8DU8sHalOB
-         SP3hrUv4QwA9QbPJErnqxMtS7ZepN07QzBb0AoBEQzS1M2h9tWDW2uv/kdDLeC3zGQlB
-         UB7EjJMFa+Y3lpwKAcs/w36s/oMnFrvkQHNlv9EYKLjCPyfSCplco5wzGUhH4GxFFZg6
-         Tuhw==
-X-Forwarded-Encrypted: i=1; AJvYcCVDLNTyAIEdnpbGJNntaTXtRRn5YRb5PAA5owPf2aXF+/YxmYnNlf7YfR5tqPSx7FBWgCwWlHZ6Fe0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyoQDa6ZDNIkk3q0TCUTjd0O0gm+BMErCW511GFtWJ9NhzMdyJr
-	+RRjTy6M7w2bYYw7QZqnUYloWNM2TH7v0f9dl+Juhk3moZnOVJX7l0OFfmRf3EpULwU=
-X-Gm-Gg: ATEYQzzyV/ZTmYQOaN4cTZHbdqRhtuIB8qNNcfrZ6iaMswh3rvxq5W1gZplrUNJWIN3
-	prcMwbLwv3Dab2nKj1i9RcJ7nKhZxMouAO4o3F4S94k0jo+A4Lb8QJ0Wpofc0q9dnI7PR49KPMh
-	9S0XfgTRc1CPFX0b7OeFqyF9HyI+iFAWAXSV7MmTi4gOhwwFkWcncH+BfI9tfUjCiKSRNylq6PQ
-	pd/mZn1bWXV9tyvqVMuzuxEy6NLV3NyKCmUn3VYvrM7mFTKf5e/EyZWEK7M8yraS8APIT0tUBL9
-	rHZ2ImagsKodZsMHA+knnYdz64B+RSQT300w6YteW4t1nVdNaeQ0mFTKUycjehd6Eo/Jx2jEGx6
-	6DztjMgHGtwWVt5xLuI4EQiTXBjzZMhSmtGKex/qOcHjq4LwKaqrHwVTGsp+THHgfbB++la+RMu
-	zrs9oV68hYEUYBndSiBI4l2mfV0jXy+xKteFhb7jtEJPeD
-X-Received: by 2002:a05:6000:228a:b0:43b:4909:203c with SMTP id ffacd0b85a97d-43b883c881dmr5791312f8f.21.1774442970332;
-        Wed, 25 Mar 2026 05:49:30 -0700 (PDT)
-Received: from [10.100.51.209] (nat2.prg.suse.com. [195.250.132.146])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b8508285esm13445921f8f.19.2026.03.25.05.49.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Mar 2026 05:49:30 -0700 (PDT)
-Message-ID: <b83c9524-13df-47dd-a597-bebab93288d8@suse.com>
-Date: Wed, 25 Mar 2026 13:49:29 +0100
+	s=arc-20240116; t=1774443928; c=relaxed/simple;
+	bh=aPMGk3jADcln8q+CeQZg3ofpMsUR6G6YPb/JjSH675o=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=NExtRUK9u2iwLoSiBVuJi5a0iYd1nRJzgytPoKy3MrS4KuOROQ/b/k2kzQV6XODmGGKPG7NBilP4wMkYyVUD5F1/yIousVX8kwjkmSt3f+NZjn3yOCfpuB4tnQ9tNnumODWBOD11iQuImogyaK4vJbK85cVPP6e3uBXCrr1bz7E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qkJ7MeTn; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38FABC4CEF7;
+	Wed, 25 Mar 2026 13:05:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774443928;
+	bh=aPMGk3jADcln8q+CeQZg3ofpMsUR6G6YPb/JjSH675o=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=qkJ7MeTntxruIL7nO+EPdKYTYxw8SpxdkjEkM7l1A6XCC4fnHaHbYhYDKyFMNW7Du
+	 Kz/YLyPVsNNbgDditw8AhEQA1mQ4/RZcDzp+/NzHuiNvvSH7CDqP2Kjc7aqjYMDkjG
+	 dVdwu7s6FFBCdXWXg4W9mUlnNhcvEuhfSJEf0tchoCRvUmT+QCHaao2HOxDbF0p2kx
+	 xV5ASeLropsHONR+RMEc+IYr5sLgTeMtVfGf90eGWeF75S+xpO8CUstpYLdXNdnXx8
+	 bXy1d51lz72sLtmWF7I1xOfRU5IkaUDWHBNmFzFPiOlcYxnx1KUynWw89XisiKXg8c
+	 PZoIAg8xb+TUQ==
+Date: Wed, 25 Mar 2026 14:05:25 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Cc: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, 
+	Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
+	Rodrigo Siqueira <siqueira@igalia.com>, Alex Deucher <alexander.deucher@amd.com>, 
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Andrzej Hajda <andrzej.hajda@intel.com>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Sandy Huang <hjc@rock-chips.com>, 
+	Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>, Andy Yan <andy.yan@rock-chips.com>, 
+	Jani Nikula <jani.nikula@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Rob Herring <robh@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, kernel@collabora.com, amd-gfx@lists.freedesktop.org, 
+	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+	Werner Sembach <wse@tuxedocomputers.com>, Andri Yngvason <andri@yngvason.is>, 
+	Marius Vlad <marius.vlad@collabora.com>
+Subject: Re: [PATCH v11 03/22] drm: Add new general DRM property "color
+ format"
+Message-ID: <20260325-quaint-bull-of-fortitude-dc68da@houat>
+References: <20260324-color-format-v11-0-605559af4fb4@collabora.com>
+ <20260324-color-format-v11-3-605559af4fb4@collabora.com>
+ <CAPY8ntB9f_=f5kru=8w9BpTuqQR+93maGpT61EKU28Uay2vq8Q@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/8] scalable symbol flags with __kflagstab
-To: Siddharth Nayyar <sidnayyar@google.com>
-Cc: Luis Chamberlain <mcgrof@kernel.org>, Daniel Gomez <da.gomez@kernel.org>,
- Sami Tolvanen <samitolvanen@google.com>, Aaron Tomlin <atomlin@atomlin.com>,
- Arnd Bergmann <arnd@arndb.de>, Nathan Chancellor <nathan@kernel.org>,
- Nicolas Schier <nsc@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, linux-modules@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
- linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
- maennich@google.com, gprocida@google.com
-References: <20260305-kflagstab-v4-0-6a76bf8b83c7@google.com>
-Content-Language: en-US
-From: Petr Pavlu <petr.pavlu@suse.com>
-In-Reply-To: <20260305-kflagstab-v4-0-6a76bf8b83c7@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: multipart/signed; micalg=pgp-sha384;
+	protocol="application/pgp-signature"; boundary="qhd22dcfmqbzbfkk"
+Content-Disposition: inline
+In-Reply-To: <CAPY8ntB9f_=f5kru=8w9BpTuqQR+93maGpT61EKU28Uay2vq8Q@mail.gmail.com>
+X-Spamd-Result: default: False [-2.26 / 15.00];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	TAGGED_FROM(0.00)[bounces-81190-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-81192-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	FREEMAIL_CC(0.00)[collabora.com,amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,suse.de,intel.com,linaro.org,kernel.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,tuxedocomputers.com,yngvason.is];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 9F79E325E7A
+X-Rspamd-Queue-Id: 670DD3261A1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/5/26 5:55 PM, Siddharth Nayyar wrote:
-> This patch series implements a mechanism for scalable exported symbol
-> flags using a separate section called __kflagstab. The series introduces
-> __kflagstab support, removes *_gpl sections in favor of a GPL flag,
-> simplifies symbol resolution during module loading.
 
-I noticed that the series has a bisecting issue. The module loader
-doesn't see any GPL-only exports after patch #4. I think you'll need to
-squash patches #4 and #5 to fix this. Alternatively, the patches could
-be swapped, with the caveat that GPL-only symbols would lose their GPL
-property for one commit.
+--qhd22dcfmqbzbfkk
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v11 03/22] drm: Add new general DRM property "color
+ format"
+MIME-Version: 1.0
 
-Nit: Please use simply the "module" prefix in commit subjects:
+Hi Dave,
 
-#1: module: define ksym_flags enumeration to represent kernel symbol flags
-#2: module: add kflagstab section to vmlinux and modules
-#4: module: use kflagstab instead of *_gpl sections
-#6: module: deprecate usage of *_gpl sections
-#7: module: remove *_gpl sections from vmlinux and modules
+On Wed, Mar 25, 2026 at 12:49:19PM +0000, Dave Stevenson wrote:
+> > diff --git a/include/drm/drm_connector.h b/include/drm/drm_connector.h
+> > index af8b92d2d5b7..bd549f912b76 100644
+> > --- a/include/drm/drm_connector.h
+> > +++ b/include/drm/drm_connector.h
+> > @@ -571,14 +571,102 @@ enum drm_colorspace {
+> >   *   YCbCr 4:2:2 output format (ie. with horizontal subsampling)
+> >   * @DRM_OUTPUT_COLOR_FORMAT_YCBCR420:
+> >   *   YCbCr 4:2:0 output format (ie. with horizontal and vertical subsa=
+mpling)
+> > + * @DRM_OUTPUT_COLOR_FORMAT_COUNT:
+> > + *   Number of valid output color format values in this enum
+> >   */
+> >  enum drm_output_color_format {
+> >         DRM_OUTPUT_COLOR_FORMAT_RGB444 =3D 0,
+> >         DRM_OUTPUT_COLOR_FORMAT_YCBCR444,
+> >         DRM_OUTPUT_COLOR_FORMAT_YCBCR422,
+> >         DRM_OUTPUT_COLOR_FORMAT_YCBCR420,
+> > +       DRM_OUTPUT_COLOR_FORMAT_COUNT,
+> >  };
+> >
+> > +/**
+> > + * enum drm_connector_color_format - Connector Color Format Request
+> > + *
+> > + * This enum, unlike &enum drm_output_color_format, is used to specify=
+ requests
+> > + * for a specific color format on a connector through the DRM "color f=
+ormat"
+> > + * property. The difference is that it has an "AUTO" value to specify =
+that
+> > + * no specific choice has been made.
+> > + */
+> > +enum drm_connector_color_format {
+> > +       /**
+> > +        * @DRM_CONNECTOR_COLOR_FORMAT_AUTO: The driver or display prot=
+ocol
+> > +        * helpers should pick a suitable color format. All implementat=
+ions of a
+> > +        * specific display protocol must behave the same way with "AUT=
+O", but
+> > +        * different display protocols do not necessarily have the same=
+ "AUTO"
+> > +        * semantics.
+> > +        *
+> > +        * For HDMI, "AUTO" picks RGB, but falls back to YCbCr 4:2:0 if=
+ the
+> > +        * bandwidth required for full-scale RGB is not available, or t=
+he mode
+> > +        * is YCbCr 4:2:0-only, as long as the mode and output both sup=
+port
+> > +        * YCbCr 4:2:0.
+>=20
+> Is there a reason you propose dropping back to YCbCr 4:2:0 without
+> trying YCbCr 4:2:2 first? Minimising the subsampling is surely
+> beneficial, and vc4 for one can do 4:2:2 but not 4:2:0.
 
-The changes look otherwise ok to me. With the above fixed, feel free to
-add:
+The "auto" behaviour is strictly identical to the one we have right now,
+and this one stems from i915. Back when all that logic was added, it was
+decided to align every driver behavior on i915 because that's what most
+compositors would expect.
 
-Reviewed-by: Petr Pavlu <petr.pavlu@suse.com>
+Maxime
 
--- 
-Thanks,
-Petr
+--qhd22dcfmqbzbfkk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCacPdkQAKCRAnX84Zoj2+
+drHtAYC+DuxgXCLhzVadFK3jmqH9FyaN19FHcokHPX07HgOJboZMiAKov3in7JDx
+F2EVeaMBgOWXIimrG0/rhUteUiveBwgDmRTdeGj5T51fN1DLKTsNYPFR1cW+9rGb
+iF4j/QhIQQ==
+=of9f
+-----END PGP SIGNATURE-----
+
+--qhd22dcfmqbzbfkk--
 
