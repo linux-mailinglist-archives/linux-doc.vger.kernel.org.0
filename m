@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-81113-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81112-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4Ac/AYcxw2noowQAu9opvQ
-	(envelope-from <linux-doc+bounces-81113-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 01:51:19 +0100
+	id eLGxH30xw2noowQAu9opvQ
+	(envelope-from <linux-doc+bounces-81112-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 01:51:09 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECE0C31E1D7
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 01:51:17 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ABD631E1C8
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 01:51:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 22CB4301DD1C
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 00:51:08 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 630D8301E4BF
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2026 00:51:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A8D71219A8A;
-	Wed, 25 Mar 2026 00:51:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A5F8120E6E2;
+	Wed, 25 Mar 2026 00:51:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Bh84yj+P"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="1qNtMMeM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F01C41F4168;
-	Wed, 25 Mar 2026 00:50:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6AA81FC7C5;
+	Wed, 25 Mar 2026 00:51:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774399863; cv=none; b=oyGUWKo4lFu8Gfg7/bliMUeoRZnLSQQ7SnBO5Wr4NWbpAgoTCxgs1aarHDZT3SkDfy8SEAlr2KNlqtOioYccojlx7jym4+ONkeE4DHgpuuNCXzYceoguhT4nLx3k8/xncLAEUcV/uaOQNKmgIrid7P23YHZuqgViUUnKt4k0HSU=
+	t=1774399862; cv=none; b=LmwoQxKttLKc7xlsKQ1lc42LMDxKKYJy5h7F8iAjEKyTfwZ2OkOgr7vb98TgegUOKbNZFwoo28FkgGHxCfl3dlrsN6IceeBLr2+xfacj+d8Gp9xDVtl5PipAA+t0voNpgVqIGWfHsf5SsCVnPJcciM1uGD+ixAqgKxuwvQ/p0kQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774399863; c=relaxed/simple;
-	bh=cdJh60EixA6VF9vPiZhuIqhskQHWFHFaay/22zdzY40=;
+	s=arc-20240116; t=1774399862; c=relaxed/simple;
+	bh=Jaid/zGe70u6fJqMsBOyqNfjp1TnESLl65AlY/1aRvQ=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=h5wW5FPkdcnevAkM1O2EmJNpskViL/TGi1TyTNXrLyr8Ky9Z/y5QLirR1UVoLAvsstQ9KQ5TBp4iHChm0EZroLdp6a4TCXzTtXSLEep3f132DCzXoGrq7MPSaPgr6IaaC5i6c9nUKgYUTZanKLjYOn0GJAvII2+Lb19r8VMwUuA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Bh84yj+P; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=ROq0e01iS6dGXk6CQR+5HEe/9dxYnfiHho/HrtpWkrHBxjHgA0KVX4ET5sxoA/BabxY47hhTCI3F9a91dwrSLNx4sL9hhl1kRDJY64i2AEO3Vu2sj+RhMvd0xz/9LKU4TPjHvGjBlS+TLVms2VrkBo29rc/2nnryFFKIPQVgxao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=1qNtMMeM; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=WSWIm5AJ5Vu+8BygKTZB3MYp/PeXyV77sGrrzyLCqcg=; b=Bh84yj+P3DnebUccZNYqDGlQln
-	a3y5s6nxRHGCVHJ/Pd3B+y/ySvp5FU+MZWQkZPir7NxArE+Wzc1/wp0oa9IqTwS6nVR3gcwnjgAR3
-	meYFzdPM0JJ1FenS1yVxPNYLy7z5wsDwG1G+0HYXVHS4Cyfl9fhUheIaPm/gBLVhTIV4bzQ6McGZg
-	THPHDrv/bBZwQcQCYG2HUr3XX3RTFVzuLgLH0pXqariQa1bkYO6KBqvRbhBVsAoyp32QE2p61LbcE
-	Bxm+hWYizwU0/js6AodU1A2UaUvblaSnfm0Nq2Qf1XZnohmarRxqTxVg+aRGUuEKGQXpTXuBYVFAR
-	yt7+ngUg==;
+	bh=CHa+qB77v8wObW1H+FZqLep8MrRtsUKYj+gNTUzFWXw=; b=1qNtMMeM2OUr5ii0FxJw9iV7Ja
+	rujE3As8ucTFuzlmCV9j2NMcY/p2NnXK1eURxl9EUchEY5RsD2FWdoqKuSKiX5D4BFNYrB+MPSH/T
+	Dd3kbgFTAFNPgWYkxiot0KFuPlbDDY3czLiEOKhfWpXjWmVU+VTJTgbkgqTJQFl4p8sxGQarTpF9O
+	eD8/ThwSiNt001Ja509QlHTivNCZL986y1Rc8LwbauhvhUKv6r+ze84VcCJcVkhaNtU6RebWnYB8h
+	ozABQXgl1px7BWyqmJeacbmNEMo/vsXS5CkYlHzlxa6Q+kZNxc81NSLnMXx9EXdJV1hEAZ9akSWYE
+	cpksilig==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1w5CST-00000002QKj-0Or4;
-	Wed, 25 Mar 2026 00:50:53 +0000
-Message-ID: <15756fa8-e9b0-4787-90e6-4a8e3a3039e9@infradead.org>
-Date: Tue, 24 Mar 2026 17:50:51 -0700
+	id 1w5CSU-00000002QKj-0iTD;
+	Wed, 25 Mar 2026 00:50:54 +0000
+Message-ID: <9c6f2530-a8c0-4652-962a-526eca5b0f8a@infradead.org>
+Date: Tue, 24 Mar 2026 17:50:53 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,35 +57,36 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/2] docs: allow long links to wrap per character to
- prevent page overflow
+Subject: Re: [PATCH v3 2/2] docs: allow long table reference links to wrap and
+ prevent overflow
 To: Rito Rhymes <rito@ritovision.com>, Jonathan Corbet <corbet@lwn.net>,
  linux-doc@vger.kernel.org
 Cc: Shuah Khan <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org
 References: <20260321180841.10166-1-rito@ritovision.com>
  <20260323152428.30483-1-rito@ritovision.com>
+ <20260323152428.30483-2-rito@ritovision.com>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260323152428.30483-1-rito@ritovision.com>
+In-Reply-To: <20260323152428.30483-2-rito@ritovision.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81113-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81112-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	RCPT_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
@@ -95,24 +96,25 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: ECE0C31E1D7
+X-Rspamd-Queue-Id: 7ABD631E1C8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 
 
 On 3/23/26 8:24 AM, Rito Rhymes wrote:
-> Some documentation pages contain long link text without natural
-> break points, which can force page-wide horizontal scroll overflow
-> on small screens.
+> Some documentation pages contain docutils tables with reference links
+> that use long unbroken strings. Those strings can expand the table
+> width beyond the content column and cause page-wide horizontal
+> overflow.
 > 
-> Use overflow-wrap: anywhere for anchor text in the docs stylesheet so
-> links can wrap per character as a fallback when normal word boundaries
-> are unavailable.
+> Allow reference links in docutils tables in the main document body to
+> wrap when needed so the table stays within the content column and does
+> not break page layout.
 > 
 > Examples:
->   https://docs.kernel.org/6.15/firmware-guide/acpi/non-d0-probe.html
->   https://docs.kernel.org/6.15/arch/x86/earlyprintk.html
+>   https://docs.kernel.org/6.15/arch/openrisc/openrisc_port.html
+>   https://docs.kernel.org/6.15/filesystems/ext2.html
 > 
 > Signed-off-by: Rito Rhymes <rito@ritovision.com>
 > Assisted-by: Codex:GPT-5.4
@@ -129,15 +131,15 @@ thanks.
 >  1 file changed, 5 insertions(+)
 > 
 > diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
-> index db24f4344..4ec617d40 100644
+> index 4ec617d40..b41c54c71 100644
 > --- a/Documentation/sphinx-static/custom.css
 > +++ b/Documentation/sphinx-static/custom.css
-> @@ -149,6 +149,11 @@ div.language-selection ul li:hover {
->      background: #dddddd;
+> @@ -154,6 +154,11 @@ a {
+>      overflow-wrap: anywhere;
 >  }
 >  
-> +/* Let long link text wrap instead of forcing overflow. */
-> +a {
+> +/* Let rendered reference links in tables wrap when needed. */
+> +div.body table.docutils a.reference {
 > +    overflow-wrap: anywhere;
 > +}
 > +
