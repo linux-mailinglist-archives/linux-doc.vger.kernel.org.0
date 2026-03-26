@@ -1,275 +1,219 @@
-Return-Path: <linux-doc+bounces-81289-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81291-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oPg/MUfOxGnb3wQAu9opvQ
-	(envelope-from <linux-doc+bounces-81289-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 07:12:23 +0100
+	id qF5oDmXQxGli4AQAu9opvQ
+	(envelope-from <linux-doc+bounces-81291-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 07:21:25 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6548F32FA5F
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 07:12:23 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id CBB8832FB61
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 07:21:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5055430DBF2A
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 06:07:32 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 700D33016EE9
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 06:20:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EEE0C3B19DB;
-	Thu, 26 Mar 2026 06:07:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62E81340DB8;
+	Thu, 26 Mar 2026 06:20:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="pVmAL/Sy"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Owp7F8af"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 969403AEF58;
-	Thu, 26 Mar 2026 06:07:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EC4A33ADA9
+	for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 06:20:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774505249; cv=none; b=eoCHcm8rtreIl8WkpCPgvq1g0JIL/Fu8JIz+X1B33EDwWEnRlKO5NsLuMRCosuUOE00ee4tdLCta7GGnAagMYVq900nDOc3vJN4W/FpugtY6RtDQUo/vTiioRBcyoM3lVXHlF+GltGhtJerzhM/25nyGc7vOsyJCwJ34Je2R48w=
+	t=1774506041; cv=none; b=SVb2ILKO6KOToqTWn+6umKESUngFKQQqRSVC7cI70I+/sQMA+ESP9EsK2c5jsLhLS7VdKe3wAMDarwLuF4usms/DmB5FlLaj6Woc7fuPOjDp5t8Xjg9TinrTMb8tXiHT24os4qpxtlYIXWN6tM06KeIWYY3wIznCA/fw8zgmHhs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774505249; c=relaxed/simple;
-	bh=xfSY7ZJOL4ppkbRuoc3Yoq50jp40FMnuIuXExj8hNAw=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ILPWRgHxnRF1OK0OcRniQF94SQ0juNka425FvfES/vfgtT6eLc190J8YMfmB1+MXqOdF88Hk7mekcRF35CIUlkpiqJzu06tzUUF0snNskQ6AhfOCIOQaoi+Z/KGZjtG8JRTo9d0nGP2wXuVUhG07RtDkxwZKnCI4gZJOszYDoSk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=pVmAL/Sy; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from narnia.corp.microsoft.com (unknown [40.78.13.173])
-	by linux.microsoft.com (Postfix) with ESMTPSA id C731B20B7007;
-	Wed, 25 Mar 2026 23:07:26 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C731B20B7007
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1774505248;
-	bh=jSPuY6O45hyz8xhN9OOPqEMSwKWk3+rFpaYAznBd3x0=;
-	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=pVmAL/Syc/v7ff3v+huBrON6WZfFMe6FvdZ1jUFJLEmeolzGXh5Y+hWDeAuWVIipS
-	 WhOkZR4vKtArVia5SsbudPYCeb3BtSJ51bl6unQwwSJL9Ac+BJTF+uQZoQkQme1aP7
-	 UqFKzT8EaL2qN6cCgi36JvJ7TVes9DpPwLpwbOGw=
-From: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
-To: Blaise Boscaccy <bboscaccy@linux.microsoft.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Paul Moore <paul@paul-moore.com>,
-	James Morris <jmorris@namei.org>,
-	"Serge E. Hallyn" <serge@hallyn.com>,
-	=?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-	=?UTF-8?q?G=C3=BCnther=20Noack?= <gnoack@google.com>,
-	"Dr. David Alan Gilbert" <linux@treblig.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	James.Bottomley@HansenPartnership.com,
-	dhowells@redhat.com,
-	Fan Wu <wufan@kernel.org>,
-	Ryan Foster <foster.ryan.r@gmail.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	linux-security-module@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	bpf@vger.kernel.org
-Subject: [PATCH v3 9/9] selftests/hornet: Add a selftest for the Hornet LSM
-Date: Wed, 25 Mar 2026 23:06:38 -0700
-Message-ID: <20260326060655.2550595-10-bboscaccy@linux.microsoft.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260326060655.2550595-1-bboscaccy@linux.microsoft.com>
-References: <20260326060655.2550595-1-bboscaccy@linux.microsoft.com>
+	s=arc-20240116; t=1774506041; c=relaxed/simple;
+	bh=br/jwXyKsOgF8QpG+OEMmn/wjLJg+ymOyi2ueX2+2uA=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=jR+3MkFBNzgTvi2ONSO34cb0rtmFxz6lcG0YJWF4bklyxoA8ATIMsW1SLhlwKTVzFbVYdlmZCXy8+DLxy36KGkv4g2PZetyVp6TJAdrr8Oqgka/Ox7cyeSJa3jjWcPdupwyl4J5syU19Y0DR8zHCw1lTcPtswXT9cPQFq/K5Qrw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Owp7F8af; arc=none smtp.client-ip=74.125.82.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-128b9b7e3edso1653754c88.0
+        for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2026 23:20:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774506039; x=1775110839; darn=vger.kernel.org;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=VofYlHZ2Eo1t9FKVicPQrSRmzPkyfNodwvF5CvNMdtk=;
+        b=Owp7F8afms/+Pn2vqioDtJJxj7hTFuRkb3f37mdZ/ThwYceMufrtLB8U3rtExIs3dF
+         81xzx0iF2NCMXx3ZOyRyA+8BktgwVGUkXdWP67CuN6eHcFvwjP2c1oVra+0tdxJAtg/b
+         +y5Ej1rrJljJN8yHP2fJnKrZTKZma8OVj/GcbgqNKRAoziuqVRIGzdg3lsHzZlb+U+oB
+         +xndyP31pIuUGuZqDij8Nxyzh2eGPwzOskjFIafyn2TnF0bGDLuDFSR+9W3knuMSDfMl
+         KBvrh2BqHfHmM6/bZ1A5NTfnVKNxlzx1jxPmUEPCj4IpHrYUw2JiOHSQjVlSEy2Nmc4G
+         S53w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774506039; x=1775110839;
+        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VofYlHZ2Eo1t9FKVicPQrSRmzPkyfNodwvF5CvNMdtk=;
+        b=o9ArGxZYU5gZ1aYGPs/gmmEWpkVDJbYvIE0fIxaO8w6iq/ju+kXR/b+xUkjnr5D6Aw
+         HBxrmsmDRgen/NNu5ZK61QaJcUltqeltT4PEwkoNUqpG+mU4BmpR7UkryBysaRrb3lav
+         87Jc8zGQP1pSavgX3w6QPzRh1kHNWhaT6Wlfy/4H4S6c0PTwXa2CPhpFARIxJ7uGrHAX
+         sj20SSmE9vz7+BMcYFW+LglDfmZiYjBj1u4waSEzMa4T+poHgI90YuGGSG/niSawiDij
+         dGB18nSgj4d1dx9kD0VJXcTeOCZjrsHGCoz8icuC4s/72yKBY5tTdYn/GqQjm4cthRrZ
+         owQg==
+X-Forwarded-Encrypted: i=1; AJvYcCUYVDHaP+qRDajLQRyiJNTE/shPfw8Lp9/jqWH7hvxuEDMIa1kzJU7/XOUh4nXlgcgwEBMVFbuxqII=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz5qeCn7Kf+m1pXA9bKsO3/1LvT2MVZbmTFUBINDyjLYv3tqGql
+	VJOX8NZbA9zRZucVK2SaGoRAj7Mcp53WMN6poxZVvuYAtSJVfwzXE6Yu
+X-Gm-Gg: ATEYQzx6czbBFcZYX5X//aYv4HZriMAEf2CCSzchhothANwwX0Uvz2kEK+xhtWohQUk
+	4UriskEmG1t78ubT8TAprYfZ0bUfN7/Lo0dUHaPeV08aEjLZmxAYAIWxNp5Nq9xqOt6ab5a17tF
+	SKBAHe+UhqPLaxr96nEhYn5LTmpADuaXyBjB894Qi6OP/wM1mpEgtj666embqXsbDlMaV3R+T5a
+	1J5vB1tb6bJE4rbEGtTpsSZgOSN9MSmRkwbaHEZ2PN43Mx2VH3BDVTkT18uJbOZGZ1PBTYPR5j0
+	AR7lT4JunJmYpJsqp6UPuLDZWwAD7aTBtofowMVXd9FXDxObs+76tfcq+4k+Km+xbAvjq/U2X+0
+	lkO13io/aEnRTRIui+ZL+SSh+ToL1/hwGzH3eDDX0BVvJdmM5Oqae+KsAYDaTVjbBes+6bDz5HE
+	oHszXcRGEEsdXS17R1NbDrvUPuWayJZOyd8P+3F6rf+dGRB6sgJIKvYmfmXX95eFgr
+X-Received: by 2002:a05:7022:670f:b0:11b:88a7:e1b0 with SMTP id a92af1059eb24-12a96ed3ea0mr4115540c88.26.1774506038953;
+        Wed, 25 Mar 2026 23:20:38 -0700 (PDT)
+Received: from google.com ([2a00:79e0:2ebe:8:b7b4:352d:eb23:66e5])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12aa762430bsm3051833c88.10.2026.03.25.23.20.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Mar 2026 23:20:37 -0700 (PDT)
+Date: Wed, 25 Mar 2026 23:20:34 -0700
+From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+To: Dwaipayan Ray <dwaipayanray1@gmail.com>, 
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>, Joe Perches <joe@perches.com>, 
+	Andy Whitcroft <apw@canonical.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] checkpatch: allow correctly handle full files on stdin
+Message-ID: <acTPXMJfkHLeItrK@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.84 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_TO(0.00)[linux.microsoft.com,lwn.net,paul-moore.com,namei.org,hallyn.com,digikod.net,google.com,treblig.org,linux-foundation.org,HansenPartnership.com,redhat.com,kernel.org,gmail.com,infradead.org,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-81289-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bboscaccy@linux.microsoft.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-81291-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.microsoft.com:+];
+	FREEMAIL_TO(0.00)[gmail.com,perches.com,canonical.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dmitrytorokhov@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.microsoft.com:dkim,linux.microsoft.com:mid]
-X-Rspamd-Queue-Id: 6548F32FA5F
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: CBB8832FB61
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This selftest contains a testcase that utilizes light skeleton eBPF
-loaders and exercises hornet's map validation.
+checkpatch does not handle full files well when they are passed on
+stdin, because it does not know how to treat the text, and whether it is
+a C file, or a DTS file, or something else, and so it assumes that when
+it works with stdin it should be a unified diff. For full files it
+expects to have a file name as an argument and read the contents from
+disk. Unfortunately this does not well when trying to use checkpatch as
+an online linter and feed it contents of an editor buffer that have not
+made it to the disk yet.
 
-Signed-off-by: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
+To solve the above introduce a new optional argument --stdin-filename=FILE
+that allows tell checkpatch the kind of file it is dealing with and
+apply appropriate set of checks and rules to it.
+
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 ---
- tools/testing/selftests/Makefile             |  1 +
- tools/testing/selftests/hornet/Makefile      | 63 ++++++++++++++++++++
- tools/testing/selftests/hornet/loader.c      | 21 +++++++
- tools/testing/selftests/hornet/trivial.bpf.c | 33 ++++++++++
- 4 files changed, 118 insertions(+)
- create mode 100644 tools/testing/selftests/hornet/Makefile
- create mode 100644 tools/testing/selftests/hornet/loader.c
- create mode 100644 tools/testing/selftests/hornet/trivial.bpf.c
+ Documentation/dev-tools/checkpatch.rst |  4 ++++
+ scripts/checkpatch.pl                  | 11 +++++++++++
+ 2 files changed, 15 insertions(+)
 
-diff --git a/tools/testing/selftests/Makefile b/tools/testing/selftests/Makefile
-index 450f13ba4cca9..4e2d1cd88c825 100644
---- a/tools/testing/selftests/Makefile
-+++ b/tools/testing/selftests/Makefile
-@@ -44,6 +44,7 @@ TARGETS += ftrace
- TARGETS += futex
- TARGETS += gpio
- TARGETS += hid
-+TARGETS += hornet
- TARGETS += intel_pstate
- TARGETS += iommu
- TARGETS += ipc
-diff --git a/tools/testing/selftests/hornet/Makefile b/tools/testing/selftests/hornet/Makefile
-new file mode 100644
-index 0000000000000..432bce59f54e7
---- /dev/null
-+++ b/tools/testing/selftests/hornet/Makefile
-@@ -0,0 +1,63 @@
-+# SPDX-License-Identifier: GPL-2.0
-+include ../../../build/Build.include
-+include ../../../scripts/Makefile.arch
-+include ../../../scripts/Makefile.include
+diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
+index dccede68698c..b521e3ca6ebf 100644
+--- a/Documentation/dev-tools/checkpatch.rst
++++ b/Documentation/dev-tools/checkpatch.rst
+@@ -68,6 +68,10 @@ Available options:
+ 
+    Show the diffed file position instead of the input file position.
+ 
++ - --stdin-filename
 +
-+CLANG ?= clang
-+CFLAGS := -g -O2 -Wall
-+BPFTOOL ?= $(TOOLSDIR)/bpf/bpftool/bpftool
-+SCRIPTSDIR := $(abspath ../../../../scripts/hornet)
-+TOOLSDIR := $(abspath ../../..)
-+LIBDIR := $(TOOLSDIR)/lib
-+BPFDIR := $(LIBDIR)/bpf
-+TOOLSINCDIR := $(TOOLSDIR)/include
-+APIDIR := $(TOOLSINCDIR)/uapi
-+CERTDIR := $(abspath ../../../../certs)
-+PKG_CONFIG ?= $(CROSS_COMPILE)pkg-config
++   When using stdin, identify the file as FILE.
 +
-+TEST_GEN_PROGS := loader
-+TEST_GEN_FILES := vmlinux.h loader.h trivial.bpf.o map.bin sig.bin insn.bin signed_loader.h
-+$(TEST_GEN_PROGS): LDLIBS += -lbpf
-+$(TEST_GEN_PROGS): $(TEST_GEN_FILES)
+  - -g,  --git
+ 
+    Treat FILE as a single commit or a git revision range.
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index e56374662ff7..e26951ceb36b 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -57,6 +57,7 @@ my %ignore_type = ();
+ my @ignore = ();
+ my $help = 0;
+ my $configuration_file = ".checkpatch.conf";
++my $stdin_filename;
+ my $max_line_length = 100;
+ my $ignore_perl_version = 0;
+ my $minimum_perl_version = 5.10.0;
+@@ -94,6 +95,7 @@ Options:
+   --emacs                    emacs compile window format
+   --terse                    one line per report
+   --showfile                 emit diffed file position, not input file position
++  --stdin-filename=FILE      when using stdin, identify the file as FILE
+   -g, --git                  treat FILE as a single commit or git revision range
+                              single git commit with:
+                                <rev>
+@@ -323,6 +325,7 @@ GetOptions(
+ 	'showfile!'	=> \$showfile,
+ 	'f|file!'	=> \$file,
+ 	'g|git!'	=> \$git,
++	'stdin-filename=s' => \$stdin_filename,
+ 	'subjective!'	=> \$check,
+ 	'strict!'	=> \$check,
+ 	'ignore=s'	=> \@ignore,
+@@ -2652,6 +2655,10 @@ sub is_userspace {
+ sub process {
+ 	my $filename = shift;
+ 
++	if ($filename eq '-' && defined($stdin_filename)) {
++		$filename = $stdin_filename;
++	}
 +
-+include ../lib.mk
+ 	my $linenr=0;
+ 	my $prevline="";
+ 	my $prevrawline="";
+@@ -2891,6 +2898,10 @@ sub process {
+ 			$realfile =~ s@^([^/]*)/@@ if (!$file);
+ 			$in_commit_log = 0;
+ 
++			if ($realfile eq "-" && defined($stdin_filename)) {
++				$realfile = $stdin_filename;
++			}
 +
-+BPF_CFLAGS := -target bpf \
-+	-D__TARGET_ARCH_$(ARCH) \
-+	-I/usr/include/$(shell uname -m)-linux-gnu \
-+	$(KHDR_INCLUDES)
-+
-+vmlinux.h:
-+	$(BPFTOOL) btf dump file /sys/kernel/btf/vmlinux format c > vmlinux.h
-+
-+trivial.bpf.o: trivial.bpf.c vmlinux.h
-+	$(CLANG) $(CFLAGS) $(BPF_CFLAGS) -c $< -o $@
-+
-+loader.h: trivial.bpf.o
-+	$(BPFTOOL) gen skeleton -S -k $(CERTDIR)/signing_key.pem -i $(CERTDIR)/signing_key.x509 \
-+		-L $< name trivial > $@
-+
-+insn.bin: loader.h
-+	$(SCRIPTSDIR)/extract-insn.sh $< > $@
-+
-+map.bin: loader.h
-+	$(SCRIPTSDIR)/extract-map.sh $< > $@
-+
-+$(OUTPUT)/gen_sig: ../../../../scripts/hornet/gen_sig.c
-+	$(call msg,GEN_SIG,,$@)
-+	$(Q)$(CC) $(shell $(PKG_CONFIG) --cflags libcrypto 2> /dev/null) \
-+		  $< -o $@ \
-+		  $(shell $(PKG_CONFIG) --libs libcrypto 2> /dev/null || echo -lcrypto)
-+
-+sig.bin: insn.bin map.bin $(OUTPUT)/gen_sig
-+	$(OUTPUT)/gen_sig --key $(CERTDIR)/signing_key.pem --cert $(CERTDIR)/signing_key.x509 \
-+		--data insn.bin --add map.bin:0 --out sig.bin
-+
-+signed_loader.h: sig.bin
-+	$(SCRIPTSDIR)/write-sig.sh loader.h sig.bin > $@
-+
-+loader: loader.c signed_loader.h
-+	$(CC) $(CFLAGS) -I$(LIBDIR) -I$(APIDIR) $< -o $@ -lbpf
-+
-+
-+EXTRA_CLEAN = $(OUTPUT)/gen_sig
-diff --git a/tools/testing/selftests/hornet/loader.c b/tools/testing/selftests/hornet/loader.c
-new file mode 100644
-index 0000000000000..f27580c7262b3
---- /dev/null
-+++ b/tools/testing/selftests/hornet/loader.c
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
-+
-+#include <stdio.h>
-+#include <unistd.h>
-+#include <stddef.h>
-+#include <sys/resource.h>
-+#include <bpf/libbpf.h>
-+#include <errno.h>
-+#include  "signed_loader.h"
-+
-+int main(int argc, char **argv)
-+{
-+	struct trivial *skel;
-+
-+	skel = trivial__open_and_load();
-+	if (!skel)
-+		return -1;
-+
-+	trivial__destroy(skel);
-+	return 0;
-+}
-diff --git a/tools/testing/selftests/hornet/trivial.bpf.c b/tools/testing/selftests/hornet/trivial.bpf.c
-new file mode 100644
-index 0000000000000..d38c5b53ff932
---- /dev/null
-+++ b/tools/testing/selftests/hornet/trivial.bpf.c
-@@ -0,0 +1,33 @@
-+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
-+
-+#include "vmlinux.h"
-+
-+#include <bpf/bpf_helpers.h>
-+#include <bpf/bpf_tracing.h>
-+#include <bpf/bpf_core_read.h>
-+
-+char LICENSE[] SEC("license") = "Dual BSD/GPL";
-+
-+int monitored_pid = 0;
-+
-+SEC("tracepoint/syscalls/sys_enter_unlinkat")
-+int handle_enter_unlink(struct trace_event_raw_sys_enter *ctx)
-+{
-+	char filename[128] = { 0 };
-+	struct task_struct *task;
-+	unsigned long start_time = 0;
-+	int pid = bpf_get_current_pid_tgid() >> 32;
-+	char *pathname_ptr = (char *) BPF_CORE_READ(ctx, args[1]);
-+
-+	bpf_probe_read_str(filename, sizeof(filename), pathname_ptr);
-+	task = (struct task_struct *)bpf_get_current_task();
-+	start_time = BPF_CORE_READ(task, start_time);
-+
-+	bpf_printk("BPF triggered unlinkat by PID: %d, start_time %ld. pathname = %s",
-+		   pid, start_time, filename);
-+
-+	if (monitored_pid == pid)
-+		bpf_printk("target pid found");
-+
-+	return 0;
-+}
+ 			$p1_prefix = $1;
+ 			if (!$file && $tree && $p1_prefix ne '' &&
+ 			    -e "$root/$p1_prefix") {
 -- 
-2.53.0
+2.53.0.1018.g2bb0e51243-goog
 
+
+-- 
+Dmitry
 
