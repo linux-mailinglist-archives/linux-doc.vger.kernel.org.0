@@ -1,278 +1,294 @@
-Return-Path: <linux-doc+bounces-81338-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81340-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UO/mEKIlxWkU7QQAu9opvQ
-	(envelope-from <linux-doc+bounces-81338-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 13:25:06 +0100
+	id YC47LEIpxWkU7QQAu9opvQ
+	(envelope-from <linux-doc+bounces-81340-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 13:40:34 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAE0333525C
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 13:25:05 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DF7C33558D
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 13:40:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 794F730D42A3
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 12:20:24 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D1E6B31211E5
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 12:33:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32D7C3F7A8A;
-	Thu, 26 Mar 2026 12:20:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63E593FAE08;
+	Thu, 26 Mar 2026 12:32:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="vgmpjcWc"
+	dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b="vIwM11wI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 45B503F7A80;
-	Thu, 26 Mar 2026 12:20:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774527622; cv=none; b=PfN8RRrz/V4gTC1cgd6YL1VwdN3msW/aa7LKpkq0/eDifY6V0tne1JqmTJWTN+UrGxGH+0bVZBnpuMcPovs4ef2EUdV79DF0/XsoRwumv5OoG95An2D8KU1Hnyev6nt6eU0Kdaw0rWDGEgdao8Q6wenlqqbn1H56sBexNvW5eVs=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774527622; c=relaxed/simple;
-	bh=xEQA6SisU3HHwYJZShHvoheaZziZO1w4JiAjm/iCumE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uuDqgVZmPJDSrWA+HtK3KEtiLrAye02t57d9b+Y5boBzm3oagWaZNeHvW8brXZvGNtPzFJjoXBeuHeRVLQ6fL1c/Y4pMBxbRLvg4B9lbYWvEAEZXSIvXrVpEZFDfAobzpcIfne7MHEftuuJvLzhUPKbdmRGqyyRH2xAlCrFmBn4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=vgmpjcWc; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8D0BE175A;
-	Thu, 26 Mar 2026 05:20:13 -0700 (PDT)
-Received: from [10.1.196.96] (eglon.cambridge.arm.com [10.1.196.96])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8F94E3FB90;
-	Thu, 26 Mar 2026 05:20:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1774527619; bh=xEQA6SisU3HHwYJZShHvoheaZziZO1w4JiAjm/iCumE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=vgmpjcWcSSEqdk/78S9qlZnnF6r2EzxX3WkJxlI/thmnwQ8RM3aNgrHrk6vJD/ho4
-	 l4gLK4deUapDK1jVRXUB61+zOla/iZhltoP8aB548mcGkvdStmoTbWAlApQ82gkPRs
-	 Cs+nBiySonZVIUxQyMGNPc0slyefLsqZArJyvp2Q=
-Message-ID: <699ffe60-2c52-49d2-be7a-e348839c25e2@arm.com>
-Date: Thu, 26 Mar 2026 12:20:10 +0000
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A62933FADF1
+	for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 12:32:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.210.53
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774528363; cv=pass; b=iJAwXcn86R+3SlpK+ZZyxJ5RRa+nIhU4Lsh1DdNO3nQV2VlWifxu+Nq+bMl0L09XnrujkxHLRctlHA/ylHTaadPWmOGUmyrTOrD8H4bf8yBu4dj1X917NQIjL8mRGGvw9D8t1WC125Dk8+zKZG1tMlXOVc737cBHW+ersJhO+OY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774528363; c=relaxed/simple;
+	bh=Sj8GsS35CKdLRwTwe6Ms2P35K3pvoQvXEt6/mAcD8p8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=SLhU7to6P2xFkgaXjW2aXVSfOzCaZrPGeoShGBmPNRONWtbZyV6BBJsjGZ8EhvkWcXlsHB0/Tl2/qYoTLn3rZ/gYY/2prroZlUwK5W3sraap+xNHcaq+KcAhtJEfW4eIx3ltGip6qD54Y/059W4D+DWtuMN2vwCA7nhVRdAjzVQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org; spf=none smtp.mailfrom=brainfault.org; dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b=vIwM11wI; arc=pass smtp.client-ip=209.85.210.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=brainfault.org
+Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7d7f09aa39fso1052546a34.0
+        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 05:32:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774528358; cv=none;
+        d=google.com; s=arc-20240605;
+        b=RXXUNPB9/wcKWGOgox7azWKexOy3lZ8jtSAXQ9FPPDxBh+wlq847dOt5n6VyA3OIjZ
+         LK9ZZUjPO5BD16s4SYVCh009VuFmdka8PfoqwEq2KwMTg+PAE3nbXO/tk0rU5qkRXEiO
+         rIk6BEOt7erhrZOTWOYYWQbLtBrqY9p3Fw6TbeNcpmEQO3CxWBpMmnMlbXCQvUGkOSxL
+         gv3K3hssnujk/b/JHc21Vfq8RqUX7CKwm1Ig5lAAmahggwdajMrMJwmeOU9MO5pM0eSJ
+         bLPkFxBAcjUfF0td9rqdbdx8x6AxUOT0bAmDPCdgXVxMt37PWot2CReHGRkEM7/O9jNj
+         teRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=s5A1++5OwfMTff2//26cMDXzML41vSjWdt7IxBVidyI=;
+        fh=6v4LvwHNDlxflwaNN0qwzVHEFoWJQhqbZS+sCZV4f/w=;
+        b=PcTbG9qZ/oKzN6pmPjaihBfqLYaDrcYPSROHZIxMz5+B8iVPjBv4sKlZV0caQZxn42
+         mXht2RmNzmWrh3CeO9wFzIf/4BtTC41qldOdP5+OzWL/yYxag+1cZ+2kiCeOWAtkv/H0
+         EjmFIMTXJeQvL5Of/CNF7i32Hg3C0SmvyASnoUhK1/qjYAN4OznOkQ90gqEZ3XHLjaic
+         BnirHSoZlWusuWEcyny8Ju2KT7afSUoSSLtq3oTBD6NnZ25yTytooVpCDh8Ac+UsxzaU
+         Yl0wwMipnZK+RNX3e/ysufHd4bZ3bPqfJv9SxHoByetcdX7Xk11dN4qbcpbSXWSKILQ5
+         xCpg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=brainfault-org.20230601.gappssmtp.com; s=20230601; t=1774528358; x=1775133158; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=s5A1++5OwfMTff2//26cMDXzML41vSjWdt7IxBVidyI=;
+        b=vIwM11wI26ynQF6uEP7xX9Fqvi1YjHt4A9SP/9NPwXBPPr6SJ4nU+n253uZvvumSFe
+         5gQYRFDtKXuozq+8O/OOr3wzxIMefp012ItWFGhFKt98+weuZGdO67T2OBoVl3p8jvh4
+         UcFBfuIEjJ4iHyv9cbkwRSRoMY3sU2VWwQ/d/YjOgApVrTi6+Cr7z+A4Kc2szF4emS72
+         6kWxtr5qPy7S8E8AC4HiWnWX8+i52na348ZyiA+lCB1zgFc+BxcLhjUTdCWrCNBqr5VG
+         DyPpElqvn1yGWynaNJyLc1h5TRMd1CpA9BliOr8aSDBp7GEEr+S3jyBRQUSnj/UauE40
+         ycAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774528358; x=1775133158;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=s5A1++5OwfMTff2//26cMDXzML41vSjWdt7IxBVidyI=;
+        b=SKcIy9B9yBviZOIE/24v49FJx+3b1CKxa2IzQW6/vmptYaZY/I3pA1h6ch+miFHmB1
+         ANB8716U1Fx/t62VLeUTufcOiO67TqlbvFVNhZPglVnkQfLp7fBD5SEYyGPZaoBiQrlu
+         6/6UeH8seYtkQxpZD/Fd1ZxCtRHbm+WO2FQlUJfg3xbOsUZU562NNgw+tkBVB55572kM
+         tzeNh9aFTCUc1ETgDqrN+K1pqBrFsQBVmgvvIm4R6CLstQS0yREv2Kf0FkrFRjCzNpyf
+         7yIgRVk6BZnUhdNyQllHjdR6+L1EXEY3EAiESR4/viLzlDVp3LB0+EkMPYlpsUl3Okgz
+         ox2g==
+X-Forwarded-Encrypted: i=1; AJvYcCU51HvNVOTrBSG/BsbhOY0wLk42FI3Y8/EHFTNs9pAlZ0iwD4tgNYfZ8h2PQqmX1zU9tOsDh0+kK2E=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzyYhuaRiGcA9uqcB5EiD4MbcNoDKFmJCmiNH8NPSo17BkSf7X4
+	zjH4pPV8gPOQ9OLLnpqs0u7shbhR95Xmt/75DJK/EObXXjAeEaRwxhREAiH+SX07ot/Yuu9L9ty
+	/XKSDCaGHoOzeTEZ0u1PYlKSXPTwETWW0yo84LsruDQ==
+X-Gm-Gg: ATEYQzySizUO/9KpT/SpEeDcvXsWLSB4TRVRWKR33U5N0AfW0wCZRV2MTsgQxijrRdi
+	W6Otu+TGiJw1K8J5V+rXk91benR55ULI24tHM04c07vTU5QDAuT97DuiBWlOq1x4i8yrq9y/9Vd
+	MbSFM5vAH14vNxwSwYWPPiMk1/ZwrKGVjnzoRz9tX7TmQ/0j9mXUy3UpDigtjhMSDB8eRV+5Z4g
+	mQdlOW0Gk305Zpa7g+Aorpklfv92xM8WwFzrPav145svDuDFEnHsaN8zspMP1MqYmPB7Shd14Tx
+	H+DXHhqcHagCvxFClQbr7j34EAeTC0GuXl7C6HF6vnkb5CV9I6LFLokuHdssxQd2cL0WDfiWH3s
+	bGN1SmbaKTQ7UYrfWYblFTJ2smVk=
+X-Received: by 2002:a4a:edcd:0:b0:67d:e836:2e32 with SMTP id
+ 006d021491bc7-67dff511512mr3387545eaf.35.1774528358402; Thu, 26 Mar 2026
+ 05:32:38 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 14/40] arm_mpam: resctrl: Add boilerplate cpuhp and
- domain allocation
-To: Ben Horgan <ben.horgan@arm.com>, Gavin Shan <gshan@redhat.com>
-Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
- baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
- dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
- fenghuay@nvidia.com, jonathan.cameron@huawei.com, kobak@nvidia.com,
- lcherian@marvell.com, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, peternewman@google.com,
- punit.agrawal@oss.qualcomm.com, quic_jiles@quicinc.com,
- reinette.chatre@intel.com, rohit.mathew@arm.com,
- scott@os.amperecomputing.com, sdonthineni@nvidia.com,
- tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
- will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
- joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- zengheng4@huawei.com, linux-doc@vger.kernel.org,
- Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
-References: <20260313144617.3420416-1-ben.horgan@arm.com>
- <20260313144617.3420416-15-ben.horgan@arm.com>
- <98708bfe-7930-49d5-b383-42b7b2d6759d@redhat.com>
- <80915f50-b5c9-4790-81c6-4f08b2af1274@arm.com>
-Content-Language: en-GB
-From: James Morse <james.morse@arm.com>
-In-Reply-To: <80915f50-b5c9-4790-81c6-4f08b2af1274@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+References: <20260204134507.33912-1-fangyu.yu@linux.alibaba.com> <20260204134507.33912-3-fangyu.yu@linux.alibaba.com>
+In-Reply-To: <20260204134507.33912-3-fangyu.yu@linux.alibaba.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 26 Mar 2026 18:02:26 +0530
+X-Gm-Features: AQROBzBjp1ya48QrrJubnKGHIPLce4xzbTMR8-Rif6cPLDOdnUusNCgeyKu5kPs
+Message-ID: <CAAhSdy2uMY+-9W34G3QJ3m9XWg2dq_PeNB_9j9B3viZaRg=SUQ@mail.gmail.com>
+Subject: Re: [PATCH v5 2/3] RISC-V: KVM: Detect and expose supported HGATP
+ G-stage modes
+To: fangyu.yu@linux.alibaba.com
+Cc: pbonzini@redhat.com, corbet@lwn.net, atish.patra@linux.dev, pjw@kernel.org, 
+	palmer@dabbelt.com, aou@eecs.berkeley.edu, alex@ghiti.fr, guoren@kernel.org, 
+	radim.krcmar@oss.qualcomm.com, andrew.jones@oss.qualcomm.com, 
+	linux-doc@vger.kernel.org, kvm@vger.kernel.org, kvm-riscv@lists.infradead.org, 
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_DKIM_ALLOW(-0.20)[brainfault-org.20230601.gappssmtp.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	TAGGED_FROM(0.00)[bounces-81338-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[arm.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	DMARC_NA(0.00)[brainfault.org];
+	TAGGED_FROM(0.00)[bounces-81340-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[brainfault-org.20230601.gappssmtp.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[james.morse@arm.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[anup@brainfault.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:dkim,arm.com:email,arm.com:mid]
-X-Rspamd-Queue-Id: BAE0333525C
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[brainfault-org.20230601.gappssmtp.com:dkim,alibaba.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 0DF7C33558D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Ben, Gavin,
+On Wed, Feb 4, 2026 at 7:15=E2=80=AFPM <fangyu.yu@linux.alibaba.com> wrote:
+>
+> From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+>
+> Extend kvm_riscv_gstage_mode_detect() to probe all HGATP.MODE values
+> supported by the host and record them in a bitmask. Keep tracking the
+> maximum supported G-stage page table level for existing internal users.
+>
+> Also provide lightweight helpers to retrieve the supported-mode bitmask
+> and validate a requested HGATP.MODE against it.
+>
+> Signed-off-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+> ---
+>  arch/riscv/include/asm/kvm_gstage.h | 11 ++++++++
+>  arch/riscv/kvm/gstage.c             | 43 +++++++++++++++--------------
+>  2 files changed, 34 insertions(+), 20 deletions(-)
+>
+> diff --git a/arch/riscv/include/asm/kvm_gstage.h b/arch/riscv/include/asm=
+/kvm_gstage.h
+> index b12605fbca44..76c37b5dc02d 100644
+> --- a/arch/riscv/include/asm/kvm_gstage.h
+> +++ b/arch/riscv/include/asm/kvm_gstage.h
+> @@ -30,6 +30,7 @@ struct kvm_gstage_mapping {
+>  #endif
+>
+>  extern unsigned long kvm_riscv_gstage_max_pgd_levels;
+> +extern u32 kvm_riscv_gstage_mode_mask;
 
-On 23/03/2026 10:13, Ben Horgan wrote:
-> On 3/23/26 06:31, Gavin Shan wrote:
->> On 3/14/26 12:45 AM, Ben Horgan wrote:
->>> From: James Morse <james.morse@arm.com>
->>>
->>> resctrl has its own data structures to describe its resources. We can't use
->>> these directly as we play tricks with the 'MBA' resource, picking the MPAM
->>> controls or monitors that best apply. We may export the same component as
->>> both L3 and MBA.
->>>
->>> Add mpam_resctrl_res[] as the array of class->resctrl mappings we are
->>> exporting, and add the cpuhp hooks that allocated and free the resctrl
->>> domain structures. Only the mpam control feature are considered here and
->>> monitor support will be added later.
->>>
->>> While we're here, plumb in a few other obvious things.
->>>
->>> CONFIG_ARM_CPU_RESCTRL is used to allow this code to be built even though
->>> it can't yet be linked against resctrl.
+s/u32/unsigned long/
+s/kvm_riscv_gstage_mode_mask/kvm_riscv_gstage_supported_mode_mask/
 
+>
+>  #define kvm_riscv_gstage_pgd_xbits     2
+>  #define kvm_riscv_gstage_pgd_size      (1UL << (HGATP_PAGE_SHIFT + kvm_r=
+iscv_gstage_pgd_xbits))
+> @@ -75,4 +76,14 @@ void kvm_riscv_gstage_wp_range(struct kvm_gstage *gsta=
+ge, gpa_t start, gpa_t end
+>
+>  void kvm_riscv_gstage_mode_detect(void);
+>
+> +static inline u32 kvm_riscv_get_hgatp_mode_mask(void)
+> +{
+> +       return kvm_riscv_gstage_mode_mask;
+> +}
+> +
+> +static inline bool kvm_riscv_hgatp_mode_is_valid(unsigned long mode)
+> +{
+> +       return kvm_riscv_gstage_mode_mask & BIT(mode);
+> +}
+> +
+>  #endif
+> diff --git a/arch/riscv/kvm/gstage.c b/arch/riscv/kvm/gstage.c
+> index 2d0045f502d1..328d4138f162 100644
+> --- a/arch/riscv/kvm/gstage.c
+> +++ b/arch/riscv/kvm/gstage.c
+> @@ -16,6 +16,8 @@ unsigned long kvm_riscv_gstage_max_pgd_levels __ro_afte=
+r_init =3D 3;
+>  #else
+>  unsigned long kvm_riscv_gstage_max_pgd_levels __ro_after_init =3D 2;
+>  #endif
+> +/* Bitmask of supported HGATP.MODE encodings (BIT(HGATP_MODE_*)). */
+> +u32 kvm_riscv_gstage_mode_mask __ro_after_init;
+>
+>  #define gstage_pte_leaf(__ptep)        \
+>         (pte_val(*(__ptep)) & (_PAGE_READ | _PAGE_WRITE | _PAGE_EXEC))
+> @@ -315,42 +317,43 @@ void kvm_riscv_gstage_wp_range(struct kvm_gstage *g=
+stage, gpa_t start, gpa_t end
+>         }
+>  }
+>
+> +static bool __init kvm_riscv_hgatp_mode_supported(unsigned long mode)
+> +{
+> +       csr_write(CSR_HGATP, mode << HGATP_MODE_SHIFT);
+> +       return ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) =3D=3D mode);
+> +}
+> +
+>  void __init kvm_riscv_gstage_mode_detect(void)
+>  {
+> +       kvm_riscv_gstage_mode_mask =3D 0;
+> +       kvm_riscv_gstage_max_pgd_levels =3D 0;
+> +
+>  #ifdef CONFIG_64BIT
+> -       /* Try Sv57x4 G-stage mode */
+> -       csr_write(CSR_HGATP, HGATP_MODE_SV57X4 << HGATP_MODE_SHIFT);
+> -       if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) =3D=3D HGATP_MODE_S=
+V57X4) {
+> -               kvm_riscv_gstage_max_pgd_levels =3D 5;
+> -               goto done;
+> +       /* Try Sv39x4 G-stage mode */
+> +       if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV39X4)) {
+> +               kvm_riscv_gstage_mode_mask |=3D BIT(HGATP_MODE_SV39X4);
+> +               kvm_riscv_gstage_max_pgd_levels =3D 3;
+>         }
+>
+>         /* Try Sv48x4 G-stage mode */
+> -       csr_write(CSR_HGATP, HGATP_MODE_SV48X4 << HGATP_MODE_SHIFT);
+> -       if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) =3D=3D HGATP_MODE_S=
+V48X4) {
+> +       if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV48X4)) {
+> +               kvm_riscv_gstage_mode_mask |=3D BIT(HGATP_MODE_SV48X4);
+>                 kvm_riscv_gstage_max_pgd_levels =3D 4;
+> -               goto done;
+>         }
+>
+> -       /* Try Sv39x4 G-stage mode */
+> -       csr_write(CSR_HGATP, HGATP_MODE_SV39X4 << HGATP_MODE_SHIFT);
+> -       if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) =3D=3D HGATP_MODE_S=
+V39X4) {
+> -               kvm_riscv_gstage_max_pgd_levels =3D 3;
+> -               goto done;
+> +       /* Try Sv57x4 G-stage mode */
+> +       if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV57X4)) {
+> +               kvm_riscv_gstage_mode_mask |=3D BIT(HGATP_MODE_SV57X4);
+> +               kvm_riscv_gstage_max_pgd_levels =3D 5;
+>         }
+>  #else /* CONFIG_32BIT */
+>         /* Try Sv32x4 G-stage mode */
+> -       csr_write(CSR_HGATP, HGATP_MODE_SV32X4 << HGATP_MODE_SHIFT);
+> -       if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) =3D=3D HGATP_MODE_S=
+V32X4) {
+> +       if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV32X4)) {
+> +               kvm_riscv_gstage_mode_mask |=3D BIT(HGATP_MODE_SV32X4);
+>                 kvm_riscv_gstage_max_pgd_levels =3D 2;
+> -               goto done;
+>         }
+>  #endif
+>
+> -       /* KVM depends on !HGATP_MODE_OFF */
+> -       kvm_riscv_gstage_max_pgd_levels =3D 0;
+> -
+> -done:
 
->> With the following two comments addressed. I don't think none of them are critical
->> given the fact that this series has been respinned to v6 and may be ready for Linux
->> v7.1. If there is still a chance for another respin, they may be worthy to be addressed.
->>
->> Reviewed-by: Gavin Shan <gshan@redhat.com>
+Here are some statements from RISC-V privilege specification:
+"Implementations that support Sv48 must also support Sv39."
+"Implementations that support Sv57 must also support Sv48."
+"The conversion of an Sv32x4, Sv39x4, Sv48x4, or Sv57x4 guest physical
+address is accomplished with the
+same algorithm used for Sv32, Sv39, Sv48, or Sv57, as presented in
+Section 12.3.2, except that:"
+"hgatp substitutes for the usual satp;"
 
-I've picked up the change from your second comment, I assume you're happy to keep this
-tag. (otherwise shout!)
+Based on above it is a waste to try each and every mode.
+For example: if mode Sv48x4 is supported then Sv39x4 is also supported.
 
-
->>> diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
->>> new file mode 100644
->>> index 000000000000..e698b534e3db
->>> --- /dev/null
->>> +++ b/drivers/resctrl/mpam_resctrl.c
-
->>> +static struct mpam_resctrl_dom *
->>> +mpam_resctrl_alloc_domain(unsigned int cpu, struct mpam_resctrl_res *res)
->>> +{
->>> +    int err;
->>> +    struct mpam_resctrl_dom *dom;
->>> +    struct rdt_ctrl_domain *ctrl_d;
->>> +    struct mpam_class *class = res->class;
->>> +    struct mpam_component *comp_iter, *ctrl_comp;
->>> +    struct rdt_resource *r = &res->resctrl_res;
->>> +
->>> +    lockdep_assert_held(&domain_list_lock);
->>> +
->>> +    ctrl_comp = NULL;
->>> +    guard(srcu)(&mpam_srcu);
->>> +    list_for_each_entry_srcu(comp_iter, &class->components, class_list,
->>> +                 srcu_read_lock_held(&mpam_srcu)) {
->>> +        if (cpumask_test_cpu(cpu, &comp_iter->affinity)) {
->>> +            ctrl_comp = comp_iter;
->>> +            break;
->>> +        }
->>> +    }
->>> +
->>> +    /* class has no component for this CPU */
->>> +    if (WARN_ON_ONCE(!ctrl_comp))
->>> +        return ERR_PTR(-EINVAL);
->>> +
->>> +    dom = kzalloc_node(sizeof(*dom), GFP_KERNEL, cpu_to_node(cpu));
->>> +    if (!dom)
->>> +        return ERR_PTR(-ENOMEM);
->>> +
->>> +    if (r->alloc_capable) {
->>> +        dom->ctrl_comp = ctrl_comp;
->>> +
->>> +        ctrl_d = &dom->resctrl_ctrl_dom;
->>> +        mpam_resctrl_domain_hdr_init(cpu, ctrl_comp, r->rid, &ctrl_d->hdr);
->>> +        ctrl_d->hdr.type = RESCTRL_CTRL_DOMAIN;
->>> +        err = resctrl_online_ctrl_domain(r, ctrl_d);
->>> +        if (err)
->>> +            goto free_domain;
->>> +
->>> +        mpam_resctrl_domain_insert(&r->ctrl_domains, &ctrl_d->hdr);
->>> +    } else {
->>> +        pr_debug("Skipped control domain online - no controls\n");
->>> +    }
->>> +    return dom;
-
->> Even though we will never support "r->alloc_capable == false", it's worthy to maintain
->> the consistence in the code level here, meaning @dom needs to be released with a proper
->> error number returned.
->>
->>     if (r->alloc_capable) {
->>         :
->>     } else {
->>         pr_debug("Skipped control domain online - no controls\n");
->>         err = -EINVAL;
->>         goto free_domain;
->>     }
->>
->> Alternatively, the check can be done before locating the component from its calss.
->>
->>     
->>     lockdep_assert_held(&domain_list_lock);
->>
->>     if (!r->alloc_capable) {
->>         pr_debug("Skipped control domain online - no controls\n");
->>         return ERR_PTR(-EINVAL);
->>     }
->>
->>     ctrl_comp = NULL;
-> 
-> Once monitor support is added later in the series this is no longer an
-> error path as monitor only platforms are valid. In order to avoid adding
-> a change and then reverting it later in the series I would like to keep
-> this as it is.
-
-I've left this as it is - adding the monitoring support builds on top of this.
-
-
->>> +int mpam_resctrl_online_cpu(unsigned int cpu)
->>> +{
->>> +    struct mpam_resctrl_res *res;
->>> +    enum resctrl_res_level rid;
->>> +
->>> +    guard(mutex)(&domain_list_lock);
->>> +    for_each_mpam_resctrl_control(res, rid) {
->>> +        struct mpam_resctrl_dom *dom;
->>> +        struct rdt_resource *r = &res->resctrl_res;
->>> +
->>> +        if (!res->class)
->>> +            continue;    // dummy_resource;
->>> +
->>> +        dom = mpam_resctrl_get_domain_from_cpu(cpu, res);
->>> +        if (!dom) {
->>> +            dom = mpam_resctrl_alloc_domain(cpu, res);
->>> +        } else {
->>> +            if (r->alloc_capable) {
->>> +                struct rdt_ctrl_domain *ctrl_d = &dom->resctrl_ctrl_dom;
->>> +
->>> +                mpam_resctrl_online_domain_hdr(cpu, &ctrl_d->hdr);
->>> +            }
->>> +        }
->>> +        if (IS_ERR(dom))
->>> +            return PTR_ERR(dom);
->>> +    }
->>> +
->>
->> I think the "if (IS_ERR(dom))" check can be moved after "dom = mpam_resctrl_alloc_domain(cpu, res)"
->> because it seems the only path where an erroneous domain can be returned.
->>
->>         dom = mpam_resctrl_get_domain_from_cpu(cpu, res);
->>         if (!dom) {
->>             dom = mpam_resctrl_alloc_domain(cpu, res);
->>             if (IS_ERR(dom))
->>                 return PTR_ERR(dom);
->>         } else {
->>             ...
->>         }
-> 
-> Yes, that would be clearer. I'll make this change if a respin becomes needed.
-
-Applied locally.
-
-
-
-Thanks!
-
-James
+Regards,
+Anup
 
