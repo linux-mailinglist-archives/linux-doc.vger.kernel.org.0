@@ -1,136 +1,155 @@
-Return-Path: <linux-doc+bounces-81491-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81492-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oKvBGifCxWnfBQUAu9opvQ
-	(envelope-from <linux-doc+bounces-81491-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 00:32:55 +0100
+	id aLA6FibDxWlHBgUAu9opvQ
+	(envelope-from <linux-doc+bounces-81492-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 00:37:10 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2229033D16D
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 00:32:51 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1792E33D1A8
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 00:37:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 70F843042DA3
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 23:32:50 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2C40130576A6
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 23:37:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A94DA3BFE3B;
-	Thu, 26 Mar 2026 23:32:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9724C3BED26;
+	Thu, 26 Mar 2026 23:37:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b="A0tKFHkm"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="rFn7hXIK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.smtp-ext.broadcom.com (lpdvsmtp10.broadcom.com [192.19.144.205])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f73.google.com (mail-pj1-f73.google.com [209.85.216.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97829384241;
-	Thu, 26 Mar 2026 23:32:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.19.144.205
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A021F3218DD
+	for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 23:36:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.73
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774567962; cv=none; b=qPZldUFejM/qixYYr3uOUwy3lqtSLzMwlslMHXCvZ4q7m+gHzoTp85Ey58u1wuIvcdbRJ/NzqhbYw9XHF3SgZZwQr6sr5XYyXlGDc4GAMtxlEQIi7Bas+ldJkSZ/56/2VCxM+H7jaBQstVfpExX3Uu2+3/dSRK8aq9X3jphaZPs=
+	t=1774568221; cv=none; b=iyAmHWx34Tz3Yv5Hd+WtEnN0ETjbgBFDSoIomUmQKAVzA9wEl8Li7z1qT+bBWpaxRnXw014NshgrkzomugD0x/F2xJKqdZOBgrXDG0hAKuol0nfiNy/MRLZ9x1i5wc8moNAEJyUZiYWVsxWLbow2ARFt9W4WgbzZFhBmRxnOFYE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774567962; c=relaxed/simple;
-	bh=NfmBRDo8TFkbFoBY8cJHf1r3vXiAbnmMTqkVPnz/Nok=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=H6BStQ4sY7FRY9C+GakoT4NKP3bb3KU00PQGMoVtlV/GMMiMkB6LGjCJcJ5BklIVWbKm3JZ4eMAMucYRDpWgkLh6NceczWTQRr3CsyCc8L7b5VYbTflz7zl/XzUIQzvLSUgTnwwoQO4wBzW1RzbEium/OjgUoYLZLTKP9LYh1aw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=broadcom.com; spf=fail smtp.mailfrom=broadcom.com; dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b=A0tKFHkm; arc=none smtp.client-ip=192.19.144.205
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=broadcom.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=broadcom.com
-Received: from mail-lvn-it-01.broadcom.com (mail-lvn-it-01.lvn.broadcom.net [10.36.132.253])
-	by relay.smtp-ext.broadcom.com (Postfix) with ESMTP id 4636EC00080B;
-	Thu, 26 Mar 2026 16:32:38 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 relay.smtp-ext.broadcom.com 4636EC00080B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=broadcom.com;
-	s=dkimrelay; t=1774567958;
-	bh=NfmBRDo8TFkbFoBY8cJHf1r3vXiAbnmMTqkVPnz/Nok=;
-	h=From:To:Cc:Subject:Date:From;
-	b=A0tKFHkmlWmS7npft1/IcDPUYoYs0nRCmyGwNLiPukj2PvYjLbL3E4fGQ6FG15cHY
-	 Df64dpvG3Kw8v6nS4YhcWIFHb1XLTT/49CADp2j+G+R4UbggYQ1ulgip0OXPS84/z2
-	 9moH+rFQSKFXnU5qTPDEcS7G19aqtNNdU6G85h7E=
-Received: from fainelli-desktop.igp.broadcom.net (fainelli-desktop.dhcp.broadcom.net [10.67.48.245])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mail-lvn-it-01.broadcom.com (Postfix) with ESMTPSA id E7F57B6B;
-	Thu, 26 Mar 2026 16:32:37 -0700 (PDT)
-From: Florian Fainelli <florian.fainelli@broadcom.com>
-To: linux-kernel@vger.kernel.org,
-	akpm@linux-foundation.org
-Cc: tglx@kernel.org,
-	radu@rendec.net,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Illia Ostapyshyn <illia@yshyn.com>,
-	workflows@vger.kernel.org (open list:DOCUMENTATION PROCESS),
-	linux-doc@vger.kernel.org (open list:DOCUMENTATION)
-Subject: [PATCH] Documentation: Provide hints on how to debug Python GDB scripts
-Date: Thu, 26 Mar 2026 16:32:24 -0700
-Message-ID: <20260326233226.2248817-1-florian.fainelli@broadcom.com>
-X-Mailer: git-send-email 2.43.0
+	s=arc-20240116; t=1774568221; c=relaxed/simple;
+	bh=F4F0fC/fb8Buu2CY08Nu1pjRrsmhaG6N9M4V+dSU6GA=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=AobCY2IiLNeig+0ZGBNhrubQaD7zSR2TPvwCvb2aQE1PjbUs8TW7QuNIam+toU7wemc5q3qVpiLrvOxsxo9hcwiyO+h9hs466R7t4tnnjVKH3FwVF/76XMCWZsaEO1lo9sp66KU7myu6/EjgfVjgxgFSdz2we769IuDJuLlUDxg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--ackerleytng.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=rFn7hXIK; arc=none smtp.client-ip=209.85.216.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--ackerleytng.bounces.google.com
+Received: by mail-pj1-f73.google.com with SMTP id 98e67ed59e1d1-35c2dc274bdso363394a91.3
+        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 16:36:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1774568219; x=1775173019; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=HFvOjUtymmKlW6mv6haGIZI39TLsFlaNWWSpopNMudM=;
+        b=rFn7hXIKMqD927d5bElYsxtQfyUKYq+Z22i7UmMa63m1YOq0S4wzI+QNd4FUdsWPr3
+         xwsEfLd0mZaarxZtAVEe+woSG8QoTP+jjoT/S3Wp3LAOkPUpTOPGUM6vwAY2KThrF3lD
+         e5f34YSSEv82o96wV39TF/Ua9LmfNEnHokyShXT/4XrPhuRVseBaU/s0mbvcD0MWeG4g
+         0JAc1C1Vb161dqaGTqDcqGbD3PlniYTzi77RaQZz1MP3sllutztunFq/3XnzKnkL8xXA
+         pCraFTYWRJFQnDu6hvgx2j4I9hjZ29p1Mu9vN4kY4qT0yLnoihSf/I71T3dVfm+eBivp
+         oq5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774568219; x=1775173019;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HFvOjUtymmKlW6mv6haGIZI39TLsFlaNWWSpopNMudM=;
+        b=mVaV3a6acmt0Plp+8Odl1MIKWSJN+dQ20uinB8wOtAIT8PpOWTMCOpXG38d7/+jArP
+         OxG2KDNC3PBmfFNfW8368bPt0CO7l8qoJ5sPd/Ja8l6/AzwfuGv9DCHhZnwIOcHP9mKC
+         sd7DjpH8PPFA0eRmHjbbG96fnJB7fgLLgU3fnEEKO8CGqYbtOxeXcn3vf3vqfi6MymQb
+         lOCIDKHI7oVGxM+ToStYoI/1cS6YtjPpYu9NTdLFhBXbj9Ezie5BazC4pdCrTrvhq1Pu
+         NWiEFgToyYFrtGDzsEEy50RtrfTYFWa/9k+u9LlJ2ug4fw6zdDPuU6gHp7ktIIZ1sHuM
+         ibJQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVBsVlWj3U4tOjZi6lE0P+dV+6Z9J8xkR3wC5uc4rHbJ5uXAZE7wZnsoI5/HkqRxY0KPE3xDDGAm20=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwilYyFegRMGSX/oHLR38zfFqMNKkPOKndwJfODKSutziWN+9hI
+	KLhq1kNzL3HZZUeu2l36CgTlW6roK9PUXXuGjbuM/cJ2rQZqcBR7NqrI80bfZWLDfx8x2QkMpGA
+	gaQyMlQOfACYqA4rKOfUZaWD5+Q==
+X-Received: from pjbcp9.prod.google.com ([2002:a17:90a:fb89:b0:35c:1a37:ace])
+ (user=ackerleytng job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a17:90b:3e8e:b0:35c:d98:d682 with SMTP id 98e67ed59e1d1-35c2ff8b101mr403470a91.9.1774568218647;
+ Thu, 26 Mar 2026 16:36:58 -0700 (PDT)
+Date: Thu, 26 Mar 2026 16:36:38 -0700
+In-Reply-To: <20260326-gmem-inplace-conversion-v4-0-e202fe950ffd@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+References: <20260326-gmem-inplace-conversion-v4-0-e202fe950ffd@google.com>
+X-Mailer: git-send-email 2.53.0.1018.g2bb0e51243-goog
+Message-ID: <cover.1774568083.git.ackerleytng@google.com>
+Subject: [POC PATCH 0/6] guest_memfd in-place conversion selftests for SNP
+From: Ackerley Tng <ackerleytng@google.com>
+To: ackerleytng@google.com
+Cc: aik@amd.com, akpm@linux-foundation.org, andrew.jones@linux.dev, 
+	aneesh.kumar@kernel.org, axelrasmussen@google.com, baohua@kernel.org, 
+	bhe@redhat.com, binbin.wu@linux.intel.com, bp@alien8.de, brauner@kernel.org, 
+	chao.p.peng@linux.intel.com, chrisl@kernel.org, corbet@lwn.net, 
+	dave.hansen@linux.intel.com, david@kernel.org, forkloop@google.com, 
+	hpa@zytor.com, ira.weiny@intel.com, jgg@ziepe.ca, jmattson@google.com, 
+	jroedel@suse.de, jthoughton@google.com, kasong@tencent.com, 
+	kvm@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-trace-kernel@vger.kernel.org, mathieu.desnoyers@efficios.com, 
+	mhiramat@kernel.org, michael.roth@amd.com, mingo@redhat.com, 
+	nphamcs@gmail.com, oupton@kernel.org, pankaj.gupta@amd.com, 
+	pbonzini@redhat.com, pratyush@kernel.org, qperret@google.com, 
+	rick.p.edgecombe@intel.com, rientjes@google.com, rostedt@goodmis.org, 
+	seanjc@google.com, shikemeng@huaweicloud.com, shivankg@amd.com, 
+	shuah@kernel.org, skhan@linuxfoundation.org, steven.price@arm.com, 
+	suzuki.poulose@arm.com, tabba@google.com, tglx@kernel.org, 
+	vannapurve@google.com, vbabka@kernel.org, weixugc@google.com, 
+	willy@infradead.org, wyihan@google.com, x86@kernel.org, yan.y.zhao@intel.com, 
+	yuanchu@google.com
+Content-Type: text/plain; charset="UTF-8"
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[broadcom.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[broadcom.com:s=dkimrelay];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[broadcom.com:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81491-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[florian.fainelli@broadcom.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[amd.com,linux-foundation.org,linux.dev,kernel.org,google.com,redhat.com,linux.intel.com,alien8.de,lwn.net,zytor.com,intel.com,ziepe.ca,suse.de,tencent.com,vger.kernel.org,kvack.org,efficios.com,gmail.com,goodmis.org,huaweicloud.com,linuxfoundation.org,arm.com,infradead.org];
+	TAGGED_FROM(0.00)[bounces-81492-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[google.com:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[60];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[broadcom.com:dkim,broadcom.com:email,broadcom.com:mid]
-X-Rspamd-Queue-Id: 2229033D16D
+	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 1792E33D1A8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-By default GDB does not print a full stack of its integrated Python
-interpreter, thus making the debugging of GDB scripts more painful than
-it has to be.
+With these POC patches, I was able to test the set memory
+attributes/conversion ioctls with SNP. The content policies work :)
 
-Suggested-by: Radu Rendec <radu@rendec.net>
-Signed-off-by: Florian Fainelli <florian.fainelli@broadcom.com>
----
- Documentation/process/debugging/gdb-kernel-debugging.rst | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Ackerley Tng (6):
+  KVM: selftests: Initialize guest_memfd with INIT_SHARED
+  KVM: selftests: Call snp_launch_update_data() providing copy of memory
+  KVM: selftests: Make guest_code_xsave more friendly
+  KVM: selftests: Allow specifying CoCo-privateness while mapping a page
+  KVM: selftests: Test conversions for SNP
+  KVM: selftests: Test content modes ZERO and PRESERVE for SNP
 
-diff --git a/Documentation/process/debugging/gdb-kernel-debugging.rst b/Documentation/process/debugging/gdb-kernel-debugging.rst
-index 9475c759c722..53e225760a4d 100644
---- a/Documentation/process/debugging/gdb-kernel-debugging.rst
-+++ b/Documentation/process/debugging/gdb-kernel-debugging.rst
-@@ -173,3 +173,12 @@ this is just a snapshot of the initial version::
- 
- Detailed help can be obtained via "help <command-name>" for commands and "help
- function <function-name>" for convenience functions.
-+
-+Debugging GDB scripts
-+---------------------
-+
-+GDB does not enable a full Python backtrace which can make debugging GDB
-+scripts more difficult than necessary. The following will allow for printing a
-+full backtrace of the python environment::
-+
-+ (gdb) set python print-stack full
--- 
-2.43.0
+ .../selftests/kvm/include/x86/processor.h     |   2 +
+ tools/testing/selftests/kvm/lib/kvm_util.c    |  12 +-
+ .../testing/selftests/kvm/lib/x86/processor.c |  13 +-
+ tools/testing/selftests/kvm/lib/x86/sev.c     |  35 ++-
+ .../selftests/kvm/x86/sev_smoke_test.c        | 255 +++++++++++++++++-
+ 5 files changed, 295 insertions(+), 22 deletions(-)
 
+--
+2.53.0.1018.g2bb0e51243-goog
 
