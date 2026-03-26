@@ -1,156 +1,127 @@
-Return-Path: <linux-doc+bounces-81277-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81279-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cYuiEHivxGkL2gQAu9opvQ
-	(envelope-from <linux-doc+bounces-81277-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 05:00:56 +0100
+	id qAs8KRq/xGnN3AQAu9opvQ
+	(envelope-from <linux-doc+bounces-81279-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 06:07:38 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88AE832EED0
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 05:00:55 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02ECD32F3E5
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 06:07:37 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1F683302802E
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 04:00:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1872A30607A9
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 05:04:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C20CF21D590;
-	Thu, 26 Mar 2026 04:00:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29E5235A3AF;
+	Thu, 26 Mar 2026 05:04:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="h2qifna9"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="AD0O91W6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88BDA1922FD;
-	Thu, 26 Mar 2026 04:00:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EB2734B1A7;
+	Thu, 26 Mar 2026 05:04:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774497652; cv=none; b=eES1ja173E0gFXyN3d2nFKxpfMvsVPF2uz0fdVWZIcZ9isZ/Cf9B0w8WgJVL0NnHHcRL3tvMUpMZXn30j+fRlfABFAg6LT6qA5CoHvfov2QTbmG6Z8yzi5a1ly51A1ABNwAupa5VK87i1L5stT0QMKiJUunXv6ZAoz9LXD6kIcQ=
+	t=1774501481; cv=none; b=sEjwhSGy4a1mYwnruK1iyXdFMw5M4Q730W1ywwDGcsp1BSJ1RsAfsCh48t+WWKwdt8ZBLjTB30M2I1emaWXSxpJcYUSkRAb6Y057RI6xCWCIQGHY1SKkpXY8+JAIKiXaVP1IKkm726MNTRM5bFFmUJNn1wNnTDbQOxQBO/sxpxk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774497652; c=relaxed/simple;
-	bh=a9nj8mR0F2lI5537jnvwaS2ZWg+dPzAdFfkxncY9zlI=;
-	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=HuouyAMepeHAlyy3YE2KyAQKTZgG0Vmv/9pEyhtTbOohhfQZcrFOBYFZQDCulBghXDh0LYLRPMqSe5DlPFy5DWPp73i+zM8toZS3kuoCv522ow+l/F3mRoFYQioD7ktIUA5U7sTT83/X1Bu9HphGEz0llTsFHEeEos3cBbxKkR4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=h2qifna9; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EADB9C19424;
-	Thu, 26 Mar 2026 04:00:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-	s=korg; t=1774497652;
-	bh=a9nj8mR0F2lI5537jnvwaS2ZWg+dPzAdFfkxncY9zlI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=h2qifna9aaXJnfak9+pSw26tlqsP2LAwzpD3dGgF05NQHoCHdNDKGEZMoI/Wk5xcR
-	 KnLZv/LqxdRIns2Nlqb3FxRXxGoEPhC72JtyPQx0VyGaV3MLE4ojcsuotrtL3JM21n
-	 PkhEdBR8W4hregCpzSCNr/8OKlRFhBrzKXyzsukU=
-Date: Wed, 25 Mar 2026 21:00:49 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Jinjie Ruan <ruanjinjie@huawei.com>
-Cc: <corbet@lwn.net>, <skhan@linuxfoundation.org>,
- <catalin.marinas@arm.com>, <will@kernel.org>, <chenhuacai@kernel.org>,
- <kernel@xen0n.name>, <maddy@linux.ibm.com>, <mpe@ellerman.id.au>,
- <npiggin@gmail.com>, <chleroy@kernel.org>, <pjw@kernel.org>,
- <palmer@dabbelt.com>, <aou@eecs.berkeley.edu>, <alex@ghiti.fr>,
- <tglx@kernel.org>, <mingo@redhat.com>, <bp@alien8.de>,
- <dave.hansen@linux.intel.com>, <hpa@zytor.com>, <robh@kernel.org>,
- <saravanak@kernel.org>, <bhe@redhat.com>, <vgoyal@redhat.com>,
- <dyoung@redhat.com>, <rdunlap@infradead.org>, <peterz@infradead.org>,
- <pawan.kumar.gupta@linux.intel.com>, <feng.tang@linux.alibaba.com>,
- <dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <elver@google.com>,
- <paulmck@kernel.org>, <lirongqing@baidu.com>, <rppt@kernel.org>,
- <ardb@kernel.org>, <leitao@debian.org>, <osandov@fb.com>,
- <cfsworks@gmail.com>, <tangyouling@kylinos.cn>,
- <sourabhjain@linux.ibm.com>, <ritesh.list@gmail.com>,
- <eajames@linux.ibm.com>, <songshuaishuai@tinylab.org>,
- <kevin.brodsky@arm.com>, <samuel.holland@sifive.com>,
- <vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>, <coxu@redhat.com>,
- <liaoyuanhong@vivo.com>, <jbohac@suse.cz>, <fuqiang.wang@easystack.cn>,
- <guoren@kernel.org>, <chenjiahao16@huawei.com>, <hbathini@linux.ibm.com>,
- <james.morse@arm.com>, <takahiro.akashi@linaro.org>,
- <lizhengyu3@huawei.com>, <x86@kernel.org>, <linux-doc@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
- <loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
- <linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
- <kexec@lists.infradead.org>
-Subject: Re: [PATCH v10 0/8] arm64/riscv: Add support for crashkernel CMA
- reservation
-Message-Id: <20260325210049.28cca592a001e745954b3241@linux-foundation.org>
-In-Reply-To: <20260325025904.2811960-1-ruanjinjie@huawei.com>
-References: <20260325025904.2811960-1-ruanjinjie@huawei.com>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1774501481; c=relaxed/simple;
+	bh=iFRNieBwy70eYK4iTBlR3AXf//nBc9stROyMfBHjJT4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=XO//m/zgUJaswxqmYumoVADP6bFJW0mZNl9MSTXH2BBhlR6MDwKLezHD3li82cJicrOEbaHfggluPeIrQSFVHCUR1M+jVjtu7f3uMgOCq1btHlD6upcySSAhylDE5/erXBwmRCEnb9R5mAHFr/o/FKlu0BAfKaPwojvCEWvx578=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=AD0O91W6; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=WOoteiBiG++L2NH8GdlWRlWgdt0rYx+y4dr3RBlQkfg=; b=AD0O91W6SrxNidI7NjgTDmn9Xw
+	XxATB1XFA9JZrqP+eVHxJqNp/lSCksxaq/z3kAuhcJWIFi4F31WH0O3N6VqZmdCGgVuTU/9VD/qvK
+	PtcToSLnsAPXR3OEleRdoaJ4zhfh7BhkAAoM9ODpxmpSLDZQkj8GSCrX6rpbBukdnF/Hw2gc2QzUC
+	7ZcLAbLryobGtyQpxbb9OZuAhiob+B9p5Hx3agjEqtLGTshhc28LRceGbzSe/tyP1uIyRaTReHLfn
+	UO9Yq6YkmXOH+OkFRXi+vdbh2kF01CFIAUTukyuNEW1nXHOLkvEkFHav7zDERbWqhv4PhsH0Yn8YZ
+	5qG0gJ8g==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1w5ctR-00000004hwq-0Y5o;
+	Thu, 26 Mar 2026 05:04:29 +0000
+Message-ID: <1379cd60-2201-4b63-9b4a-069beef23433@infradead.org>
+Date: Wed, 25 Mar 2026 22:04:27 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] docs: clk: include some identifiers to keep
+ documentation up to date
+To: Brian Masney <bmasney@redhat.com>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Maxime Ripard <mripard@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+References: <20260325-clk-docs-v2-0-bcf660e1ceb5@redhat.com>
+ <20260325-clk-docs-v2-3-bcf660e1ceb5@redhat.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260325-clk-docs-v2-3-bcf660e1ceb5@redhat.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-81277-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,kylinos.cn,tinylab.org,sifive.com,pigmoral.tech,vivo.com,suse.cz,easystack.cn,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	DMARC_NA(0.00)[linux-foundation.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-81279-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCPT_COUNT_GT_50(0.00)[67];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-foundation.org:dkim,linux-foundation.org:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 88AE832EED0
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:dkim,infradead.org:email,infradead.org:mid]
+X-Rspamd-Queue-Id: 02ECD32F3E5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 25 Mar 2026 10:58:56 +0800 Jinjie Ruan <ruanjinjie@huawei.com> wrote:
 
-> The crash memory allocation, and the exclude of crashk_res, crashk_low_res
-> and crashk_cma memory are almost identical across different architectures,
-> This patch set handle them in crash core in a general way, which eliminate
-> a lot of duplication code.
+
+On 3/25/26 4:52 PM, Brian Masney wrote:
+> The clk documentation currently has a separate list of some members of
+> struct clk_core and struct clk_ops. Now that all of these structures
+> have proper kernel docs, let's go ahead and just include them here via
+> the identifiers statement in kerneldoc.
 > 
-> And add support for crashkernel CMA reservation for arm64 and riscv.
+> While changes are being made here, let's also include the newly-added
+> enum clk_core_flags.
+> 
+> Signed-off-by: Brian Masney <bmasney@redhat.com>
+> ---
+>  Documentation/driver-api/clk.rst | 58 +++++++---------------------------------
+>  1 file changed, 9 insertions(+), 49 deletions(-)
 
-So who is patchmonkey for this.
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
 
->  .../admin-guide/kernel-parameters.txt         |  16 +--
->  arch/arm64/kernel/machine_kexec_file.c        |  39 ++-----
->  arch/arm64/mm/init.c                          |   5 +-
->  arch/loongarch/kernel/machine_kexec_file.c    |  39 ++-----
->  arch/powerpc/include/asm/kexec_ranges.h       |   1 -
->  arch/powerpc/kexec/crash.c                    |   7 +-
->  arch/powerpc/kexec/ranges.c                   | 101 +----------------
->  arch/riscv/kernel/machine_kexec_file.c        |  38 ++-----
->  arch/riscv/mm/init.c                          |   5 +-
->  arch/x86/kernel/crash.c                       |  89 ++-------------
->  drivers/of/fdt.c                              |   9 +-
->  drivers/of/kexec.c                            |   9 ++
->  include/linux/crash_core.h                    |   9 ++
->  kernel/crash_core.c                           | 105 +++++++++++++++++-
-
-Me, I guess, with as many arch acks as I can gather, please.
-
-I'm seriously trying to slow things down now, but I guess I can make an
-exception for non-MM material.
-
-AI review asks a few questions:
-	https://sashiko.dev/#/patchset/20260325025904.2811960-1-ruanjinjie@huawei.com
-
-Can you please check these?  And I'm interested in learning how many of
-these are valid.  Thanks.
+Thanks.
+-- 
+~Randy
 
