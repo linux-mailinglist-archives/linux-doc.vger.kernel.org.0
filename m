@@ -1,228 +1,212 @@
-Return-Path: <linux-doc+bounces-81393-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81395-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +H9SK3WGxWlc+wQAu9opvQ
-	(envelope-from <linux-doc+bounces-81393-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 20:18:13 +0100
+	id SIZpIkyGxWlc+wQAu9opvQ
+	(envelope-from <linux-doc+bounces-81395-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 20:17:32 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36F8933AD3A
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 20:18:13 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04A3233AD2C
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 20:17:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 117C13032750
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 19:03:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 006DB3089A3A
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 19:09:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 947B133A9FC;
-	Thu, 26 Mar 2026 19:03:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 85D693803CB;
+	Thu, 26 Mar 2026 19:09:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="u97SDTgX"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b4EUHgK3"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 714133290B9
-	for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 19:03:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6347735DA4C;
+	Thu, 26 Mar 2026 19:09:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774551813; cv=none; b=JldkbEVZ6d/awtVLBBVoW7Z3tGd9vMYJHGxyqthSZSAQ/PLxrZI2aC+Ev1QkJViDM5Ii004ZAUTe3vdAU0EhXNWdnaU1412sX5opuchxGV1CWeBFiuIDW28tBPjji9PtuVXgXofnu0jaxSCPbxb+FgNDnUbPytfzzhSQT+eVUlQ=
+	t=1774552188; cv=none; b=sEBJBJAc6hWQE+rDthjpNRd1mEWbu6PKwlB+kGdffGmGYkFIzEnIK66mx4sKh4vOq6N416xrz2HPMEErnO/IrRDQ7ppy+9Jck4dBvAd9VIvslOdoJifKQU2gqx8knak50Ux/MJyu1dwzLkIKmTaswtG6LbSsLxSv7ttZguaw0hM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774551813; c=relaxed/simple;
-	bh=H3ZANKprj/TgNWGd+SUawc9wkwCTzwy1BeR8pADdSwI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=kVbsQd2JAJYLIOonRRHsgXQzmal2L25qmwq4yul3zWFDvG71RDxuxBYCj9gddDzogSt5rXDUNr9vZLHZaJSKVDmHy+TfQlETzDo3IJONv7gdqItvwjbfiFe5P/dfC+6V0yygvXSVIErl6AnFeuS80KfVdqzb+KM1YveSAeawg2k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=u97SDTgX; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F209C2BCB5
-	for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 19:03:33 +0000 (UTC)
+	s=arc-20240116; t=1774552188; c=relaxed/simple;
+	bh=uJ5CEyXguvh9WvbvCmNGbsMdGebDllhPsLvEeHrzC0Q=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=rBmGpBd7NUU0FWPjsHltu2Cx8Riv7f3C0NFDRkQYFA73fHQ+pv8bBODrNjwDUiCv4vOop7WiMTbrCmFLQfcKeyq7wso9j/GBP5ROeJymZGmaynDLfnJ5ZgEpL4iW6rPRL0n1RSpTBRUC6MNyzn7DGhCxeGVK7xBnqHxYAbEoFqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b4EUHgK3; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F21EAC19423;
+	Thu, 26 Mar 2026 19:09:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774551813;
-	bh=H3ZANKprj/TgNWGd+SUawc9wkwCTzwy1BeR8pADdSwI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=u97SDTgXTlzOMF+8m1DUlWk5+B5s05tTe7VXmdb8L06wfedBUbsvunVUdI1pLXAzP
-	 u/5gAQ51s8CvSpqkgsWM+xtJvxJqtCelDJpqQPqlGIVbfigHsQGzSE8DyRKaZdEEic
-	 MqAWh97TXPg85OTGbFuiYiJM4Fg09HdJKyHbj3yiX9OFwyEUX61+oCHbMkPhbWejzn
-	 97Nm3UXaYQweEB92yACV3iJEajEF0rsOrDA6bYKpau5O74ICgPCb78frC1dlO7gWjj
-	 NwbwBn3AzOuDAV/K270aDl+DHRcr32J2redoGF5me47guJvt+kff4HN+ctYAK64HR7
-	 TEvk2bhrf6E1A==
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-66b18af8c88so479353a12.3
-        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 12:03:33 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCWjVWX/5C10xyd7kbmfpCROL5mdUBdvvkIJ8OIxbeb9vPJyZDzDsW+Ge51U5071ikWUOYgy7RY1MOA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzRu+5uMWU9j1cpNpGhKr31S8oIg/SCWMrlQRjD2EJovr2m7pMD
-	Guzg0lCFm56OTdY/O64druh5IAkxpadIJZGuUp9AzsMTI9RF7u/flnwQylZC7MZTymABhi4suYM
-	KuLc5h2p/lI4nyJIkCzi/+BuOmhKDqsA=
-X-Received: by 2002:a17:906:eecd:b0:b98:36cd:7e0e with SMTP id
- a640c23a62f3a-b9a542737camr610146966b.45.1774551811888; Thu, 26 Mar 2026
- 12:03:31 -0700 (PDT)
+	s=k20201202; t=1774552188;
+	bh=uJ5CEyXguvh9WvbvCmNGbsMdGebDllhPsLvEeHrzC0Q=;
+	h=From:To:Cc:Subject:Date:From;
+	b=b4EUHgK3b25PdErAwYGxLiUrByR0HKKqjByqSC6X84vtCbkVOshCpthMfXjF6TfDJ
+	 ADFCe9KKA9Rxsqbt3FyyDbT6CgQFnBby56uAc1JCtyTFfHpqW+zO1iU1M0BsiGWNOr
+	 yiiQnaPA7QwK8N9mQJ5Xif0gB2h/UQAnwGL8mlMaQvZcAPr2cgpVN49ajNV4EDPyQO
+	 O+rWkhNTga/QmjjRCk3eRHRXNKuGabdbQSTHrAbyJLIZ9ZxDT2UZmuycpX/rwmALXZ
+	 jHzy30ebsSDaKBVWwjrPTTo3KvITIKzT3jdtoXM5w3epiKLf8RbEpV5c5bjmpdG8Ix
+	 S8y9b2Ako5XIQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1w5q5R-0000000BH8L-3n8z;
+	Thu, 26 Mar 2026 20:09:45 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v2 0/2] Add a script to check for kernel-doc regressions
+Date: Thu, 26 Mar 2026 20:09:41 +0100
+Message-ID: <cover.1774551940.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260326174944.3820245-1-jmattson@google.com> <20260326174944.3820245-2-jmattson@google.com>
-In-Reply-To: <20260326174944.3820245-2-jmattson@google.com>
-From: Yosry Ahmed <yosry@kernel.org>
-Date: Thu, 26 Mar 2026 12:03:20 -0700
-X-Gmail-Original-Message-ID: <CAO9r8zMYdLjH8BuN_GWsS_BNrdE+Kbz=d6Y-Cxt3GTXMpdEM+w@mail.gmail.com>
-X-Gm-Features: AQROBzDXNpZkaYQ2rFx8prlIgRpDL-u1SWDMIRceFjxW53ZNgIHOU49tyDb09oo
-Message-ID: <CAO9r8zMYdLjH8BuN_GWsS_BNrdE+Kbz=d6Y-Cxt3GTXMpdEM+w@mail.gmail.com>
-Subject: Re: [PATCH v6 01/10] KVM: x86: Define KVM_X86_QUIRK_NESTED_SVM_SHARED_PAT
-To: Jim Mattson <jmattson@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson <seanjc@google.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, kvm@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81393-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81395-lists,linux-doc=lfdr.de,huawei];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 36F8933AD3A
+	RCPT_COUNT_FIVE(0.00)[6]
+X-Rspamd-Queue-Id: 04A3233AD2C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Mar 26, 2026 at 10:50=E2=80=AFAM Jim Mattson <jmattson@google.com> =
-wrote:
->
-> Define a quirk to control whether nested SVM shares L1's PAT with L2
-> (legacy behavior) or gives L2 its own independent gPAT (correct behavior
-> per the APM).
->
-> When the quirk is enabled (default), L2 shares L1's PAT, preserving the
-> legacy KVM behavior. When userspace disables the quirk, KVM correctly
-> virtualizes the PAT for nested SVM guests, giving L2 a separate gPAT as
-> specified in the AMD architecture.
->
-> Signed-off-by: Jim Mattson <jmattson@google.com>
-> ---
->  Documentation/virt/kvm/api.rst  | 14 ++++++++++++++
->  arch/x86/include/asm/kvm_host.h |  3 ++-
->  arch/x86/include/uapi/asm/kvm.h |  1 +
->  arch/x86/kvm/svm/svm.h          |  7 +++++++
->  4 files changed, 24 insertions(+), 1 deletion(-)
->
-> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.=
-rst
-> index 032516783e96..2d56f17e3760 100644
-> --- a/Documentation/virt/kvm/api.rst
-> +++ b/Documentation/virt/kvm/api.rst
-> @@ -8551,6 +8551,20 @@ KVM_X86_QUIRK_VMCS12_ALLOW_FREEZE_IN_SMM   By defa=
-ult, KVM relaxes the consisten
->                                             bit to be cleared.  Note that=
- the vmcs02
->                                             bit is still completely contr=
-olled by the
->                                             host, regardless of the quirk=
- setting.
-> +
-> +KVM_X86_QUIRK_NESTED_SVM_SHARED_PAT        By default, KVM for nested SV=
-M guests
-> +                                           shares the IA32_PAT MSR betwe=
-en L1 and
-> +                                           L2. This is legacy behavior a=
-nd does
-> +                                           not match the AMD architectur=
-e
-> +                                           specification. When this quir=
-k is
-> +                                           disabled and nested paging (N=
-PT) is
-> +                                           enabled for L2, KVM correctly
-> +                                           virtualizes a separate guest =
-PAT
-> +                                           register for L2, using the g_=
-pat
-> +                                           field in the VMCB. When NPT i=
-s
-> +                                           disabled for L2, L1 and L2 co=
-ntinue
-> +                                           to share the IA32_PAT MSR reg=
-ardless
-> +                                           of the quirk setting.
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
->  7.32 KVM_CAP_MAX_VCPU_ID
-> diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_h=
-ost.h
-> index d3bdc9828133..0809d8f28208 100644
-> --- a/arch/x86/include/asm/kvm_host.h
-> +++ b/arch/x86/include/asm/kvm_host.h
-> @@ -2511,7 +2511,8 @@ int memslot_rmap_alloc(struct kvm_memory_slot *slot=
-, unsigned long npages);
->          KVM_X86_QUIRK_SLOT_ZAP_ALL |           \
->          KVM_X86_QUIRK_STUFF_FEATURE_MSRS |     \
->          KVM_X86_QUIRK_IGNORE_GUEST_PAT |       \
-> -        KVM_X86_QUIRK_VMCS12_ALLOW_FREEZE_IN_SMM)
-> +        KVM_X86_QUIRK_VMCS12_ALLOW_FREEZE_IN_SMM       \
+Hi Jon,
 
-There is a missing "|" here, it's fixed in patch 3, but I think it
-should be fixed up here (maybe when applied).
+I've using this script internally to check for regressions and
+changes with kernel-doc, specially those related to the new
+CTokenizer code:
 
-> +        KVM_X86_QUIRK_NESTED_SVM_SHARED_PAT)
->
->  #define KVM_X86_CONDITIONAL_QUIRKS             \
->         (KVM_X86_QUIRK_CD_NW_CLEARED |          \
-> diff --git a/arch/x86/include/uapi/asm/kvm.h b/arch/x86/include/uapi/asm/=
-kvm.h
-> index 5f2b30d0405c..3ada2fa9ca86 100644
-> --- a/arch/x86/include/uapi/asm/kvm.h
-> +++ b/arch/x86/include/uapi/asm/kvm.h
-> @@ -477,6 +477,7 @@ struct kvm_sync_regs {
->  #define KVM_X86_QUIRK_STUFF_FEATURE_MSRS       (1 << 8)
->  #define KVM_X86_QUIRK_IGNORE_GUEST_PAT         (1 << 9)
->  #define KVM_X86_QUIRK_VMCS12_ALLOW_FREEZE_IN_SMM (1 << 10)
-> +#define KVM_X86_QUIRK_NESTED_SVM_SHARED_PAT    (1 << 11)
->
->  #define KVM_STATE_NESTED_FORMAT_VMX    0
->  #define KVM_STATE_NESTED_FORMAT_SVM    1
-> diff --git a/arch/x86/kvm/svm/svm.h b/arch/x86/kvm/svm/svm.h
-> index ff1e4b4dc998..67aa5d34332e 100644
-> --- a/arch/x86/kvm/svm/svm.h
-> +++ b/arch/x86/kvm/svm/svm.h
-> @@ -616,6 +616,13 @@ static inline bool nested_npt_enabled(struct vcpu_sv=
-m *svm)
->         return svm->nested.ctl.misc_ctl & SVM_MISC_ENABLE_NP;
->  }
->
-> +static inline bool l2_has_separate_pat(struct vcpu_svm *svm)
-> +{
-> +       return nested_npt_enabled(svm) &&
-> +               !kvm_check_has_quirk(svm->vcpu.kvm,
-> +                                    KVM_X86_QUIRK_NESTED_SVM_SHARED_PAT)=
-;
-> +}
-> +
->  static inline bool nested_vnmi_enabled(struct vcpu_svm *svm)
->  {
->         return guest_cpu_cap_has(&svm->vcpu, X86_FEATURE_VNMI) &&
-> --
-> 2.53.0.1018.g2bb0e51243-goog
->
+	$ tools/docs/kdoc_diff --help
+	usage: kdoc_diff [-h] [--full] [--regression] [--work-dir WORK_DIR] [--clean] commits [files ...]
+
+	Compare kernel documentation between commits
+
+	positional arguments:
+	  commits               commit range like old..new
+	  files                 files to process – if supplied the --full flag is ignored
+
+	options:
+	  -h, --help            show this help message and exit
+	  --full, -f            Force a full scan of Documentation/*
+	  --regression, -r      Use YAML format to check for regressions
+	  --work-dir, -w WORK_DIR
+	                        work dir (default: /new_devel/docs)
+	  --clean, -c           Clean caches
+
+I did today a cleanup, to be able to submit it, as I think it could
+be helpful to you and others as well, as it automates the diff check
+between two commits.
+
+It has two modes of work:
+
+1. It generates 3 files: err.log, man.log, rst.log and does
+   a diff between old/new commit.
+
+   On this mode, it sorts err.log and remove duplicated messages,
+   so it relaxes a little bit the diff comparision, if a minor
+   change affects its error output.
+
+2. It uses yaml to run regressions test.
+
+   The regressions mode is nice when no regressions are expected. It
+   uses the tools/unittest/test_kdoc_parser, which is somewhat relaxed
+   with regards to trivial changes like whitespaces.
+
+The tested files can either be:
+
+a. Partial: only files explicitly included via  kernel-doc:: markups
+   inside Documentation;
+
+b. Full: includes files with broken kernel-doc markups that are all
+   spread inside Kernel tree;
+
+c. A list of files or directories.
+
+To prevent losing anything, before running, it checks if the tree
+is not dirty. While running, it does git checkout -f, and, at the
+end, it returns to the current branch.
+
+There's a logic there which catches signals to avoid troubles on
+errors/exit/ctrl-c. At least on my tests, it worked fine even
+on python errors inside the script. Yet, in case of troubles,
+one could use git reflog.
+
+On v2, the regression tests now show only the failed tests,
+and provide the command line used to run it:
+
+    $ tools/docs/kdoc_diff -r PR-more-kdoc-unit-tests drivers/media/v4l2-core/
+    Range: PR-more-kdoc-unit-tests to HEAD
+    Processing 0a4f3ef9880e...
+    YAML regression test file will be stored at: .doc_diff_cache/__tmp__/out.yaml
+    Processing 24b3116a7834...
+    Ran 89 tests in 0.107s
+
+    FAILED (failures=8, expected failures=4)
+            test_man_jpeg_stream:                        FAIL
+            test_man_v4l2_create_buffers32:              FAIL
+            test_man_v4l2_m2m_dev:                       FAIL
+            test_man_v4l2_subdev_stream_config:          FAIL
+            test_rst_jpeg_stream:                        FAIL
+            test_rst_v4l2_create_buffers32:              FAIL
+            test_rst_v4l2_m2m_dev:                       FAIL
+            test_rst_v4l2_subdev_stream_config:          FAIL
+
+    Ran 89 tests
+
+    FAILED (failures=8)
+    To check for problems, try to run it again with -v
+
+    Use -k <regex> to filter results
+
+            $/new_devel/docs/tools/unittests/test_kdoc_parser.py -q --yaml .doc_diff_cache/__tmp__/out.yaml
+
+    Restoring original branch: PR_CDataParser-v3
+    Switched to branch 'PR_CDataParser-v3'
+
+---
+
+v2:
+   - Added an extra patch to add quiet mode for unittest reports;
+   - Use quiet mode for error report with --regression;
+   - Fixed the error message when regression tests failed.
+
+Mauro Carvalho Chehab (2):
+  tools: unittest_helper: add a quiet mode
+  docs: kdoc_diff: add a helper tool to help checking kdoc regressions
+
+ tools/docs/kdoc_diff                | 508 ++++++++++++++++++++++++++++
+ tools/lib/python/unittest_helper.py |  22 +-
+ 2 files changed, 524 insertions(+), 6 deletions(-)
+ create mode 100755 tools/docs/kdoc_diff
+
+-- 
+2.53.0
+
 
