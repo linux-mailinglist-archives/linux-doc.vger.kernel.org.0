@@ -1,72 +1,110 @@
-Return-Path: <linux-doc+bounces-81388-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81389-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cK28G2iAxWkk+wQAu9opvQ
-	(envelope-from <linux-doc+bounces-81388-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 19:52:24 +0100
+	id 0BMJE1uCxWlc+wQAu9opvQ
+	(envelope-from <linux-doc+bounces-81389-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 20:00:43 +0100
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFB4A33A6E4
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 19:52:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7951A33AA04
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 20:00:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 34EA730470CB
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 18:43:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9A0A1306816E
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2026 18:55:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B6363A1A50;
-	Thu, 26 Mar 2026 18:43:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B082F3A75AA;
+	Thu, 26 Mar 2026 18:54:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b="Tn3hlS/c"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XD6MAfku"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com [136.143.188.15])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2623639768C;
-	Thu, 26 Mar 2026 18:43:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.15
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774550633; cv=pass; b=gm14BDKpNZA44cx2238L9rpcW3NgM2ca/giDqRNps5eoBnM0uizhXwr5+GPEBsBNW14d/IDeXS2lJbb4n+kZE1U9u9hPTm4SADu8aGBD9PYH5PX1K9negpUID5bPjEOO6i+53cb1MrU9xCMh0OC+4hnivYGG192YC2x+qxEDcJQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774550633; c=relaxed/simple;
-	bh=RR2GcUEN43vuHv1A9sHltOD1iaa1HJNgGv6c1sehDoI=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A2603A7580
+	for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 18:54:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.50
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774551284; cv=none; b=figN5pkMuXU9MAx2TY5tKf0EXMhQoRd9yy0u9j7EuQnE0t+QLewWO0TSFKmV51uWs5QfY9wrkFVtH8R4Xh9SuOrExqlzCsNVOhDNmNer6giWUrW9TgnDXVRDj35Sh07CJT+RkOIxbHfLRucOG4IfBSHAbcyMAsE16j/ZswUpCsY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774551284; c=relaxed/simple;
+	bh=E1VF4T7M7c35q9Qypwa46ANAajyN9sx88/WRdouByGg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=H2sLiNgt8jZnuctZXI/ONXsBARuTWKn+gh1PPDRSNgov8x1qEYozxJJd/u3AtgZTSEW3D/CvBt75TLLqXqBu9r62aux3bnPKs6TpmJfbMM3izbx7QqJhKf1DlyBEkY4h3UECduXtyTzJh8kytrSLP0NwVQQB82c5/XOYvUFGPmY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com; spf=pass smtp.mailfrom=ritovision.com; dkim=pass (1024-bit key) header.d=ritovision.com header.i=rito@ritovision.com header.b=Tn3hlS/c; arc=pass smtp.client-ip=136.143.188.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=ritovision.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ritovision.com
-ARC-Seal: i=1; a=rsa-sha256; t=1774550620; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=DRbOBWL47rW9hRJ6IMHMdyWSw8nr9ZIPuyTnqr68+9UpIhLyoQDxpK7lTC19jAQ7O0ssPMunN8Fnvw3KP1Ea7HfxQgvZoNLnky4HrGaB5IzVO5uR/YWR49z2IrByd3D7CoshvYyI55MYlUD4UzetHHJhCCWsPETIwX2GfxQGrOc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1774550620; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=ZLUqhhGe+YYh1dDguk8VS5XsuZEKxgHu1fHqDH097Q0=; 
-	b=Q23zxpHFRnMhqsvcLZM3/0UJZIPqvl2voDI1PbotfsJwqb5Ex0G9jIHY9xzSJr4aWEDcHmuv6bHGPTPwYJTG5/Nao/GqLz2qV0D7r9v9+Al90JTxwumso+fTAqx5Ok+mTB3t+MPldcfDvQlJfCQe+XILpNNE+foNl2ifYys/LVg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=ritovision.com;
-	spf=pass  smtp.mailfrom=rito@ritovision.com;
-	dmarc=pass header.from=<rito@ritovision.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774550620;
-	s=zmail; d=ritovision.com; i=rito@ritovision.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=ZLUqhhGe+YYh1dDguk8VS5XsuZEKxgHu1fHqDH097Q0=;
-	b=Tn3hlS/ct0C724rSDJ/BKJ95n+l+Cb8aimQbasGfoLFN/tGSUDRqHt6b4DAx+s1c
-	yXHLReLSWTvUIn2ms0iCrGcMcJSW9wx5H7qXyI9SkyUPXZyuwHF8nMQwIyCWyUXa+DJ
-	CSIxlPDWZKYNbWgGipI3u27BMDJXdYe3J4X3xze8=
-Received: by mx.zohomail.com with SMTPS id 177455061867182.15320954174285;
-	Thu, 26 Mar 2026 11:43:38 -0700 (PDT)
-From: Rito Rhymes <rito@ritovision.com>
-To: Jonathan Corbet <corbet@lwn.net>,
+	 MIME-Version; b=WE9uz/xXs4C6map0oc1h7GolmgKf4+Q1isjEtu+qQEJP1NEQ6vH1aAWdudVbHdXTpOwFtKqR/shGu6ZfVI7rJrHTU32pImsTTRAWJmxb5PCPXHgiNNoIpb9PUVG35deRTSmxBpiEfWMyF8hg9jstM4TXag7aiy9gWrMOo8dk86Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XD6MAfku; arc=none smtp.client-ip=209.85.161.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-66f3e7d9eccso778704eaf.1
+        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2026 11:54:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774551282; x=1775156082; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4wIIBK2xLHmy9ZZczWpP2RzFmOx4bELZz7aMw+RGO2w=;
+        b=XD6MAfkuFGX+r6gi9KDzBjorR9+yatBNuBBp8//2Kl758ErMCwSme8Vw97j4m2J1TW
+         VqSCbxkF5V7ejKQjEpmtmBsLsRc4elw1hoLYFI5G7b1WA9l0vtT5fiqqhCB600VifB+c
+         68cBwFzzVBg1dgSLJqq3gsutZR2ogLIMPM0NZURgerBrdZPyLODUbKJM6HR0kX/tFO8c
+         Jmfo99I60AtfhoxZrSCxTNkiFPCnHrsY/98+AWyCv9cimUPuMryG1n1Pi1+qYzzrYVf9
+         N0hI7W67KBaaA2eg9iTSGZEH+334nJagp2Y2A4Gx4+BGMPi6d0xdVwuO3AZHTgq9g44g
+         24Ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774551282; x=1775156082;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=4wIIBK2xLHmy9ZZczWpP2RzFmOx4bELZz7aMw+RGO2w=;
+        b=iCiE20oIChesb0liuRVfk32wjSVIdsomG7Zhzr6yDpjeExSE2gtHoWtgkcwY1VafO1
+         1ZXmPPTrpv07/PjAeEswCFR/nBNEP8dxg2W0v3sUZ98eY7smQvefA/+C/XMo+1G3JgYA
+         duJWTb71h6moCFc4h0z80mFiVOVrr6PD76jKlJE7yyyioOqBMnJR1BXXt4UwCxcg4eCc
+         NzW5IIGsy7hyNd4IC7KzA7KYscpO9WkYed3PiwIv6H2j1aSt4jtzDRM/GzN9OuV8hfXe
+         HoGSkxqa5uQYTAoAP+ip/BhPADfOINOYBXJjEXW4fJDnGRO6LYiYIuK7oMEoby+6kfYE
+         neAw==
+X-Forwarded-Encrypted: i=1; AJvYcCUB3VJ/5qV9dbH5mnqo9sThprwW5v/jJof3B4AnIjH0zF8nWewNjU7YC7ibG8jsRvVnwxNVLtiBdoc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy4lgLZeD/rnn8U1/WRYNSE1pQ6bb16Hn3WyI8UVPEZYmMr3d1y
+	nU/OBNr/NRX6ILaIsEoOWXIvwji2VnQSLQxLmmYtlJ6Nb/8WJSRrbdL2
+X-Gm-Gg: ATEYQzzInX26yfJgfB/0/bVu+0RCm+5GUbOrX8oq8p+rGM50DV+uoyoCA2vo1d4PEzK
+	8CaVSVWrt9HqDkiItQaf00ZeHHFeogCZefB5g43qjhibVMq7iLPTrH0pinckrYiZAjkpnmRWWa+
+	8m3Md+lp/7bGW7W5DNdRW5+aXUbxTNUKALnRv6MDgHe8MtYzrnH4YAmawLvsMHc5Eq26SjMtNQU
+	K78GXmfJRrtUYqCnmZ7xk7/5yhBnhLGEZ1SpmvBaxK7mcHWvc19gYeoDESedxOAGFmqqDKDhRDj
+	bDB8N4wTitnbuBj+Ymfl8oSJB+BYNgPqgE9EjqRJyhDO6uBwgTAzTiGAqe2OVq67pRBkyATi6yx
+	BJo3/HbPR0tn8+EuGeLsDIVSmdWHErwC/tQaoOqp8sd1CXAmB+d/G4q/jpK7f4W5qU4S9nflC49
+	OY67SxTUTA6dqjFp+Om3uiir/y6ANKVRADdHm2Z76IzIfLdY1d
+X-Received: by 2002:a05:6820:174b:b0:67c:2af2:a66a with SMTP id 006d021491bc7-67dff37caf7mr4976746eaf.11.1774551281759;
+        Thu, 26 Mar 2026 11:54:41 -0700 (PDT)
+Received: from frodo (c-98-38-17-99.hsd1.co.comcast.net. [98.38.17.99])
+        by smtp.googlemail.com with ESMTPSA id 586e51a60fabf-41cc7760c08sm3075171fac.4.2026.03.26.11.54.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Mar 2026 11:54:41 -0700 (PDT)
+From: Jim Cromie <jim.cromie@gmail.com>
+To: linux-kernel@vger.kernel.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	jbaron@akamai.com,
+	gregkh@linuxfoundation.org
+Cc: jim.cromie@gmail.com,
+	mripard@kernel.org,
+	tzimmermann@suse.de,
+	maarten.lankhorst@linux.intel.com,
+	jani.nikula@intel.com,
+	ville.syrjala@linux.intel.com,
+	christian.koenig@amd.com,
+	matthew.auld@intel.com,
+	arunpravin.paneerselvam@amd.com,
+	louis.chauvet@bootlin.com,
+	skhan@linuxfoundation.org,
+	pmladek@suse.com,
+	ukaszb@chromium.org,
+	dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	amd-gfx@lists.freedesktop.org,
 	linux-doc@vger.kernel.org
-Cc: Shuah Khan <skhan@linuxfoundation.org>,
-	linux-kernel@vger.kernel.org,
-	rdunlap@infradead.org,
-	Rito Rhymes <rito@ritovision.com>
-Subject: [PATCH v4] docs: wrap long C API signatures to prevent page overflow
-Date: Thu, 26 Mar 2026 14:43:36 -0400
-Message-ID: <20260326184336.39520-1-rito@ritovision.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260321142559.26005-2-rito@ritovision.com>
-References: <20260321142559.26005-2-rito@ritovision.com>
+Subject: [PATCH v12 08/69] docs/dyndbg: explain flags parse 1st
+Date: Thu, 26 Mar 2026 12:53:12 -0600
+Message-ID: <20260326185413.1205870-9-jim.cromie@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260326185413.1205870-1-jim.cromie@gmail.com>
+References: <20260326185413.1205870-1-jim.cromie@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -74,77 +112,83 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[ritovision.com,reject];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[ritovision.com:s=zmail];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81388-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-81389-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_TO(0.00)[vger.kernel.org,gmail.com,ffwll.ch,akamai.com,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,suse.de,linux.intel.com,intel.com,amd.com,bootlin.com,linuxfoundation.org,suse.com,chromium.org,lists.freedesktop.org,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[jimcromie@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rito@ritovision.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[ritovision.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TO_DN_NONE(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: BFB4A33A6E4
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,bootlin.com:email]
+X-Rspamd-Queue-Id: 7951A33AA04
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Some documentation pages contain long C API signatures that exceed
-the content width and cause page-wide horizontal scroll overflow.
+When writing queries to >control, flags are parsed 1st, since they are
+the only required field, and they require specific compositions.  So
+if the flags draw an error (on those specifics), then keyword errors
+aren't reported.  This can be mildly confusing/annoying, so explain it
+instead.
 
-Override white-space on inner spans from nowrap to pre-wrap, which
-preserves existing whitespace but allows line breaks at space
-boundaries. overflow-wrap: anywhere is then applied to the signature
-element so that long strings wider than the container can still
-wrap where needed.
-
-Examples:
-  https://docs.kernel.org/6.15/driver-api/regulator.html
-  https://docs.kernel.org/6.15/userspace-api/fwctl/fwctl-cxl.html
-
-Signed-off-by: Rito Rhymes <rito@ritovision.com>
-Assisted-by: Codex:GPT-5.4
-Assisted-by: Claude:Opus-4.6
+cc: linux-doc@vger.kernel.org
+Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
+Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
 ---
-v4: switch to a whitespace-preserving wrapping approach instead of
-    contained horizontal scrolling
+ .../admin-guide/dynamic-debug-howto.rst         | 17 +++++++++++++----
+ 1 file changed, 13 insertions(+), 4 deletions(-)
 
- Documentation/sphinx-static/custom.css | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/Documentation/sphinx-static/custom.css b/Documentation/sphinx-static/custom.css
-index db24f4344..7226be803 100644
---- a/Documentation/sphinx-static/custom.css
-+++ b/Documentation/sphinx-static/custom.css
-@@ -40,6 +40,12 @@ li { text-indent: 0em; }
- dl.function, dl.struct, dl.enum { margin-top: 2em; background-color: #ecf0f3; }
- /* indent lines 2+ of multi-line function prototypes */
- dl.function dt { margin-left: 10em; text-indent: -10em; }
-+/*
-+ * Wrap long C API signatures the way an overly long source line would
-+ * wrap, keeping the entire signature visible without horizontal scroll.
-+ */
-+dl.c > dt { overflow-wrap: anywhere; }
-+dl.c > dt span.pre { white-space: pre-wrap; }
- dt.sig-object { font-size: larger; }
- div.kernelindent { margin-left: 2em; margin-right: 4em; }
+diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
+index 4b14d9fd0300..9c2f096ed1d8 100644
+--- a/Documentation/admin-guide/dynamic-debug-howto.rst
++++ b/Documentation/admin-guide/dynamic-debug-howto.rst
+@@ -109,10 +109,19 @@ The match-spec's select *prdbgs* from the catalog, upon which to apply
+ the flags-spec, all constraints are ANDed together.  An absent keyword
+ is the same as keyword "*".
  
+-
+-A match specification is a keyword, which selects the attribute of
+-the callsite to be compared, and a value to compare against.  Possible
+-keywords are:::
++Note that since the match-spec can be empty, the flags are checked 1st,
++then the pairs of keyword and value.  Flag errs will hide keyword errs::
++
++  bash-5.2# ddcmd mod bar +foo
++  dyndbg: read 13 bytes from userspace
++  dyndbg: query 0: "mod bar +foo" mod:*
++  dyndbg: unknown flag 'o'
++  dyndbg: flags parse failed
++  dyndbg: processed 1 queries, with 0 matches, 1 errs
++
++So a match-spec is a keyword, which selects the attribute of the
++callsite to be compared, and a value to compare against.  Possible
++keywords are::
+ 
+   match-spec ::= 'func' string |
+ 		 'file' string |
 -- 
-2.51.0
+2.53.0
 
 
