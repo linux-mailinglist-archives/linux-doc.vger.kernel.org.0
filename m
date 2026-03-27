@@ -1,125 +1,167 @@
-Return-Path: <linux-doc+bounces-81565-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81566-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2GihBIasxmmiNgUAu9opvQ
-	(envelope-from <linux-doc+bounces-81565-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:12:54 +0100
+	id eNADDjCwxmmiNgUAu9opvQ
+	(envelope-from <linux-doc+bounces-81566-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:28:32 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AADF63473F5
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:12:53 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 97F693476E6
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:28:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 1242A306E02B
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 16:11:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 454853019917
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 16:21:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E3D34345750;
-	Fri, 27 Mar 2026 16:11:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55B27349B0A;
+	Fri, 27 Mar 2026 16:21:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="ZyreVCYx"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="WTF7+ykA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66C6C345734;
-	Fri, 27 Mar 2026 16:11:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A8461A6832;
+	Fri, 27 Mar 2026 16:21:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774627909; cv=none; b=Pvo1gWQgaPq6J6macA6xVs1YA88+rBzqOtUV//8GA9L3JXuIQ9fqP7CjPnYloO7tI65+upC5NwhAC6WywmGtpUmOihsbt17jborS4d6x0gm75ENGPkHugH/NWWEvfvpX4YkY3T3HxzE3q/KRhT7jdmvs4k5G4+cGtCKtRg2OtFQ=
+	t=1774628515; cv=none; b=MWvFQ/ZyUJ/qS/fHDX049vsbhRn6WxfovcddlWBlYqXDJMvsDzz+O875MSCPMG3r8qXwwsaRJBBsbcy72JBoHZtHkxKxLpUGoGlLqSryGzZrR5dunGTjia06s3JyeZ2CJKfoBE7rFUWGfD1B5Jw0TlR5GPA8WBylvwFFzMJ99/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774627909; c=relaxed/simple;
-	bh=hDiJ8g3inDfyoclJDAbpK0IGB+dGbUR5h9IqZUd3Q9o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Txj569G3rcqSN4+wHBynCBqtRJ2eNuk0VRHLfiPWfqsXarktq4nFvUUDsrvIvqUGE4mQOH9ZwvhK1yb8SQqS39kUP+gjpj1fMj2OXI3HJn56XEW2iPb3nCdPJaihTgcyAN6DoDJww7XEowt2ANh2uEDHzkpgeri8Kl8ZWSPAKfQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=ZyreVCYx; arc=none smtp.client-ip=82.195.75.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=8Dbehm6x9kMyE4jYYRsx/CyDHe4PG7PQiTicaVZ25Q4=; b=ZyreVCYxRCiQ+CBtcJ/NlWwBL2
-	DVEthxlLwTFME1gmxVmzkwqFhfGSsatMrYGVCeYi3QXDMirgQj2nL/0LMrfINN0WTLS4HE/kc6qlV
-	Owa/IZ45KlMUvXAAfK6bYq1e6cG6IkG1yEHXKHcISSpcmtaFhnAFoxKq15Ph5Wybj9LWNH0S+tLZa
-	Id0OTmki4OpSgdA/4fsZtoV0N4C6sadREgCmA59+xQtq4zOfB+HNHB/mD0hCZhuDAYNO4fXk6JTzR
-	hUpcs8AkXE+EpNUdMX+F7qarR0V5WnSyp/h0WCLuQnqJvaxcfC3sGVx7apB0KIliq5NpE/HdtC95Z
-	iPSapv+g==;
-Received: from authenticated user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.94.2)
-	(envelope-from <leitao@debian.org>)
-	id 1w69mf-00AkKt-0D; Fri, 27 Mar 2026 16:11:41 +0000
-Date: Fri, 27 Mar 2026 09:11:35 -0700
-From: Breno Leitao <leitao@debian.org>
-To: Masami Hiramatsu <mhiramat@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, oss@malat.biz, paulmck@kernel.org, rostedt@goodmis.org, 
-	kernel-team@meta.com
-Subject: Re: [PATCH v2] bootconfig: Apply early options from embedded config
-Message-ID: <acarcHiUs7yujH4c@gmail.com>
-References: <20260325-early_bootconfig-v2-1-6b05a36fbfb5@debian.org>
- <20260325232204.05edbb21c7602b6408ca007b@kernel.org>
- <20260326233042.f52cfc127ec934d52713bce1@kernel.org>
- <acZX_IXQiGwMMi5e@gmail.com>
- <20260327231630.2d6f4273b7d615bda4b51053@kernel.org>
+	s=arc-20240116; t=1774628515; c=relaxed/simple;
+	bh=rLD7D9hB1vO0sLYUWoaxiGJUNxnpjdOsHR7xPwiNSSk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Eh+zH8RUQnuKfWMGS3sTAKbep+wjUdfCA+/+kP/US6Xla2N0dRzwLh7eTmwDSJJhKg7w0vF6U/v3CMIFlQW7lcFu7pSZiq+S2RL8KCgFAkaqzp/x3Jjhi2wEcDwAX7BgNFZ+lSPwLX0biuBYlgaQgn2e6RXbeGny/79Bawdyb3o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=WTF7+ykA; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1519935DA;
+	Fri, 27 Mar 2026 09:21:47 -0700 (PDT)
+Received: from [10.1.196.96] (eglon.cambridge.arm.com [10.1.196.96])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 97B473F905;
+	Fri, 27 Mar 2026 09:21:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1774628513; bh=rLD7D9hB1vO0sLYUWoaxiGJUNxnpjdOsHR7xPwiNSSk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=WTF7+ykAX6sFkGCxVe4cCl1XX1yEyhecilKZP9eHWygbi8E6UJul45MEkX5osViHT
+	 W4gwwyJaY1GKdrKh3aZBJQ0Fgm+87LVJR4T4avKhzuuSUykzsGzmia/9+wJVfNDHSs
+	 LSg6891x++zHlA+u6CoJp0XIRcjq/Q1HQP4APU8k=
+Message-ID: <27047c27-9479-4aed-937e-04db108526d7@arm.com>
+Date: Fri, 27 Mar 2026 16:21:17 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260327231630.2d6f4273b7d615bda4b51053@kernel.org>
-X-Debian-User: leitao
-X-Spamd-Result: default: False [-1.66 / 15.00];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 02/40] arm_mpam: Reset when feature configuration bit
+ unset
+To: Ben Horgan <ben.horgan@arm.com>
+Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
+ baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
+ dave.martin@arm.com, david@kernel.org, dfustini@baylibre.com,
+ fenghuay@nvidia.com, gshan@redhat.com, jonathan.cameron@huawei.com,
+ kobak@nvidia.com, lcherian@marvell.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ peternewman@google.com, punit.agrawal@oss.qualcomm.com,
+ quic_jiles@quicinc.com, reinette.chatre@intel.com, rohit.mathew@arm.com,
+ scott@os.amperecomputing.com, sdonthineni@nvidia.com,
+ tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
+ will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
+ joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
+ zengheng4@huawei.com, linux-doc@vger.kernel.org
+References: <20260313144617.3420416-1-ben.horgan@arm.com>
+ <20260313144617.3420416-3-ben.horgan@arm.com>
+Content-Language: en-GB
+From: James Morse <james.morse@arm.com>
+In-Reply-To: <20260313144617.3420416-3-ben.horgan@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[debian.org];
-	TAGGED_FROM(0.00)[bounces-81565-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	TAGGED_FROM(0.00)[bounces-81566-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[debian.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[arm.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[james.morse@arm.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: AADF63473F5
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 97F693476E6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Mar 27, 2026 at 11:16:30PM +0900, Masami Hiramatsu wrote:
-> > Given all the feedback on this series, I see three types of issues to address:
-> >
-> > 1) Minor patch improvements
-> > 2) Architecture-specific super early parameters being parsed before bootconfig
-> >    is available
-> > 3) Unifying kernel cmdline and bootconfig interfaces
->
-> I think we can start with 1) for embedded bootconfig for this series
-> with using bootconfig in parse_early_param().
+Hi Ben,
 
-Thanks for the clear direction.
+On 13/03/2026 14:45, Ben Horgan wrote:
+> To indicate that the configuration, of the controls used by resctrl, in a
+> RIS need resetting to driver defaults the reset flags in mpam_config are
+> set. However, these flags are only ever set temporarily at RIS scope in
+> mpam_reset_ris() and hence mpam_cpu_online() will never reset these
+> controls to default. As the hardware reset is unknown this leads to unknown
+> configuration when the control values haven't been configured away from the
+> defaults.
+> 
+> Use the policy that an unset feature configuration bit means reset. In this
+> way the mpam_config in the component can encode that it should be in reset
+> state and mpam_reprogram_msc() will reset controls as needed.
 
-I'll work on integrating bootconfig into parse_early_param() to see
-what can be achieved and identify any potential blockers.
 
-I should be back soon with more fun.
+> diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
+> index 0fd6590a9b5c..ff861291bd4e 100644
+> --- a/drivers/resctrl/mpam_devices.c
+> +++ b/drivers/resctrl/mpam_devices.c
+> @@ -1364,17 +1364,15 @@ static void mpam_reprogram_ris_partid(struct mpam_msc_ris *ris, u16 partid,
+>  		__mpam_intpart_sel(ris->ris_idx, partid, msc);
+>  	}
+>  
+> -	if (mpam_has_feature(mpam_feat_cpor_part, rprops) &&
+> -	    mpam_has_feature(mpam_feat_cpor_part, cfg)) {
+> -		if (cfg->reset_cpbm)
 
-Thanks so far,
---breno
+After this, nothing reads/writes these explicit reset flags so they can be removed from
+struct mpam_config.
+
+(I'll do this locally)
+
+
+> -			mpam_reset_msc_bitmap(msc, MPAMCFG_CPBM, rprops->cpbm_wd);
+> -		else
+> +	if (mpam_has_feature(mpam_feat_cpor_part, rprops)) {
+> +		if (mpam_has_feature(mpam_feat_cpor_part, cfg))
+>  			mpam_write_partsel_reg(msc, CPBM, cfg->cpbm);
+> +		else
+> +			mpam_reset_msc_bitmap(msc, MPAMCFG_CPBM, rprops->cpbm_wd);
+>  	}
+>  
+> -	if (mpam_has_feature(mpam_feat_mbw_part, rprops) &&
+> -	    mpam_has_feature(mpam_feat_mbw_part, cfg)) {
+> -		if (cfg->reset_mbw_pbm)
+> +	if (mpam_has_feature(mpam_feat_mbw_part, rprops)) {
+> +		if (mpam_has_feature(mpam_feat_mbw_part, cfg))
+>  			mpam_reset_msc_bitmap(msc, MPAMCFG_MBW_PBM, rprops->mbw_pbm_bits);
+>  		else
+>  			mpam_write_partsel_reg(msc, MBW_PBM, cfg->mbw_pbm);
+
+Reviewed-by: James Morse <james.morse@arm.com>
+
+
+Thanks!
+
+James
 
