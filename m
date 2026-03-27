@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-81559-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81560-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qP7hJuKlxmk4NQUAu9opvQ
-	(envelope-from <linux-doc+bounces-81559-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 16:44:34 +0100
+	id IFRuLACnxmk4NQUAu9opvQ
+	(envelope-from <linux-doc+bounces-81560-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 16:49:20 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DACC346F35
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 16:44:34 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1860B346FF5
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 16:49:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BA12C304FCB4
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 15:44:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3B8C4302DA23
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 15:44:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D72CD3164B5;
-	Fri, 27 Mar 2026 15:44:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63AFB32FA18;
+	Fri, 27 Mar 2026 15:44:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="QyKOD02a"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="WHeQx+2o"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A6B62745E;
-	Fri, 27 Mar 2026 15:44:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C91C32C032E;
+	Fri, 27 Mar 2026 15:44:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774626265; cv=none; b=h/CWIlowLduYyXsXjpp9NXpz0KO9GVsktZYjAK/Sg3HkD5MwFG6PlQxQ64PZ/ePeTBuppF32iuTZOYkHdga/yobL/MVWBZMsr4iEhP4MXgS6FNZ7VLcxI/ouuulTSgCfJwK0WF/2hO2ZEST7RaSZIOaAI92SNg+oJYwEqJOqSME=
+	t=1774626289; cv=none; b=KBmFrtJXOdLnUXXRASSu136onY10pNekmi5r2d5i4H1HMo73ELfq3MSxtEyj6piz+T5VvLb+sZrpj+h58iXE+CMXFyglKPJiqLEhTa9N/SVdyW52X/+EbbN8aGjA/iau1Hb6z+t0ZrGcdtoPDid5+3zEK7wyuCx9qdGpMOLrKnU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774626265; c=relaxed/simple;
-	bh=ktCsuITkeBYilevOVUYsMJKfPzlsaPL+Amy1bQke5kQ=;
+	s=arc-20240116; t=1774626289; c=relaxed/simple;
+	bh=gYyaxvQ4I4LDpFFA8rjENTkcbOL6GQqU7RWhk1r/eV0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=giVp4Ns3gS6IWAlSWboiQTPcNS7V7QVg6em4fw0sIT1OyvglpMd1dbphxvIhdG4zHeDGcDErjeEjJ7pZjfgOrcZhcV5elxs4TpHcF9LYrG70lnuuYASSJpHhevqX6J+z/9WC44/YMYJ3nm9sPFK02DpxY36K17U+dr68kq5jppI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=QyKOD02a; arc=none smtp.client-ip=217.140.110.172
+	 In-Reply-To:Content-Type; b=VgKaoU6LpAWkjGvcm1oPK/uhgbKck7Top2ORXMsSESA+Bn48Uoqic0DvMokYi+3URQ+oPG/mMFcXOqIyU/tpHVoIDKAgi7EmrRIwz2t3da1W0xs7SGCblgObJzaiW+tA2jZHO4sKTNX/a7DfSw0y719y/VfjYumvscV+p4GqbI4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=WHeQx+2o; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ABB1535E4;
-	Fri, 27 Mar 2026 08:44:16 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 45FFF35E6;
+	Fri, 27 Mar 2026 08:44:41 -0700 (PDT)
 Received: from [10.1.196.96] (eglon.cambridge.arm.com [10.1.196.96])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3C4633F99C;
-	Fri, 27 Mar 2026 08:44:16 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D4C313F99C;
+	Fri, 27 Mar 2026 08:44:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1774626262; bh=ktCsuITkeBYilevOVUYsMJKfPzlsaPL+Amy1bQke5kQ=;
+	t=1774626287; bh=gYyaxvQ4I4LDpFFA8rjENTkcbOL6GQqU7RWhk1r/eV0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=QyKOD02ap3u6W0HbwKNpGZxnINnj6qVEp2p7uv3a3Fbsc95R3+VymLXigUBrkseEP
-	 66iVYo4HbjOhXgWFZUmxrbCmpWhzgHdUBm7zivEV1qoyHRTqLfG3l+e4yKoJj/eRen
-	 vbE+gNflv7Hy7rdOr8+juVXYGnqeX8keDHaqzW5I=
-Message-ID: <4be15244-f39e-45ba-86c2-a447d98fe1c4@arm.com>
-Date: Fri, 27 Mar 2026 15:44:12 +0000
+	b=WHeQx+2odybSQ9W+vmVFdjHEtHFJQiSxqT+I3tNHIzK45869BfJvc2bVpZBNd+HVf
+	 EomQqhZjbSzRZzb7jU4NR7U8PS+3gLbRvhw6FGUm/VfFygEk2chAa/68+icUChKDgB
+	 V+lEHEdMxfjJAS04EZbv0aM3fhyDhGljAeuM9o50=
+Message-ID: <51b3ac37-0da6-4006-be1b-5fedcf24af0f@arm.com>
+Date: Fri, 27 Mar 2026 15:44:34 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,8 +53,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 11/40] arm64: mpam: Initialise and context switch the
- MPAMSM_EL1 register
+Subject: Re: [PATCH v6 21/40] arm_mpam: resctrl: Hide CDP emulation behind
+ CONFIG_EXPERT
 To: Ben Horgan <ben.horgan@arm.com>
 Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
  baolin.wang@linux.alibaba.com, carl@os.amperecomputing.com,
@@ -68,26 +68,25 @@ Cc: amitsinght@marvell.com, baisheng.gao@unisoc.com,
  tan.shaopeng@fujitsu.com, xhao@linux.alibaba.com, catalin.marinas@arm.com,
  will@kernel.org, corbet@lwn.net, maz@kernel.org, oupton@kernel.org,
  joey.gouly@arm.com, suzuki.poulose@arm.com, kvmarm@lists.linux.dev,
- zengheng4@huawei.com, linux-doc@vger.kernel.org,
- Shaopeng Tan <tan.shaopeng@jp.fujitsu.com>
+ zengheng4@huawei.com, linux-doc@vger.kernel.org
 References: <20260313144617.3420416-1-ben.horgan@arm.com>
- <20260313144617.3420416-12-ben.horgan@arm.com>
+ <20260313144617.3420416-22-ben.horgan@arm.com>
 Content-Language: en-GB
 From: James Morse <james.morse@arm.com>
-In-Reply-To: <20260313144617.3420416-12-ben.horgan@arm.com>
+In-Reply-To: <20260313144617.3420416-22-ben.horgan@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	TAGGED_FROM(0.00)[bounces-81559-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	TAGGED_FROM(0.00)[bounces-81560-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[arm.com:+];
@@ -97,55 +96,81 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[james.morse@arm.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 4DACC346F35
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 1860B346FF5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Hi Ben,
 
 On 13/03/2026 14:45, Ben Horgan wrote:
-> The MPAMSM_EL1 sets the MPAM labels, PMG and PARTID, for loads and stores
-> generated by a shared SMCU. Disable the traps so the kernel can use it and
-> set it to the same configuration as the per-EL cpu MPAM configuration.
+> When CDP is not enabled, the 'rmid_entry's in the limbo list,
+> rmid_busy_llc, map directly to a (PARTID,PMG) pair and when CDP is enabled
+> the mapping is to two different pairs.
+
+> As the limbo list is reused between
+> mounts and CDP disabled on unmount this can lead to stale mapping and the
+> limbo handler will then make monitor reads with potentially out of range
+> PARTID.
+
+Bother - I missed that!
+
+
+> This may then cause an MPAM error interrupt and the driver will
+> disable MPAM.
+
+... and that's why it's not a problem on x86 because the RMID range is unaffected by CDP,
+whereas MPAM works on a combined value.
+
+
+> No problems are expected if you just mount the resctrl file system
+> once with CDP enabled and never unmount it.
+
+(guess how it was tested!)
+
+
+> Hide CDP emulation behind CONFIG_EXPERT to protect the unwary.
 > 
-> If an SMCU is not shared with other cpus then it is implementation
-> defined whether the configuration from MPAMSM_EL1 is used or that from
-> the appropriate MPAMy_ELx. As we set the same, PMG_D and PARTID_D,
-> configuration for MPAM0_EL1, MPAM1_EL1 and MPAMSM_EL1 the resulting
-> configuration is the same regardless.
-> 
-> The range of valid configurations for the PARTID and PMG in MPAMSM_EL1 is
-> not currently specified in Arm Architectural Reference Manual but the
-> architect has confirmed that it is intended to be the same as that for the
-> cpu configuration in the MPAMy_ELx registers.
+> Signed-off-by: Ben Horgan <ben.horgan@arm.com>
+> ---
+> Adding this ugliness in the hope of avoiding patch churn and extra
+> reviewer work. I am looking into the resctrl changes needed to fix this.
+
+Makes sense - people can still use this if they're aware of the limitation, and it sounds
+like you've got a plan to fix it properly. We just don't want it enabled in distros until
+then.
+
+
+> diff --git a/drivers/resctrl/mpam_resctrl.c b/drivers/resctrl/mpam_resctrl.c
+> index 903d1a0f564f..cab3e9ccb5c7 100644
+> --- a/drivers/resctrl/mpam_resctrl.c
+> +++ b/drivers/resctrl/mpam_resctrl.c
+> @@ -82,6 +82,18 @@ int resctrl_arch_set_cdp_enabled(enum resctrl_res_level rid, bool enable)
+>  	u32 partid_i = RESCTRL_RESERVED_CLOSID, partid_d = RESCTRL_RESERVED_CLOSID;
+>  	int cpu;
+>  
+> +	if (!IS_ENABLED(CONFIG_EXPERT) && enable) {
+> +		/*
+> +		 * If the resctrl fs is mounted more than once, sequentially,
+> +		 * then CDP can lead to the use of out of range PARTIDs.
+> +		 */
+> +		pr_warn("CDP not supported\n");
+> +		return -EOPNOTSUPP;
+> +	}
+> +
+> +	if (enable)
+> +		pr_warn("CDP is an expert feature and may cause MPAM to malfunction.\n");
+> +
+>  	/*
+>  	 * resctrl_arch_set_cdp_enabled() is only called with enable set to
+>  	 * false on error and unmount.
 
 Reviewed-by: James Morse <james.morse@arm.com>
-
-
-> diff --git a/arch/arm64/include/asm/mpam.h b/arch/arm64/include/asm/mpam.h
-> index 0747e0526927..6bccbfdccb87 100644
-> --- a/arch/arm64/include/asm/mpam.h
-> +++ b/arch/arm64/include/asm/mpam.h
-> @@ -53,6 +53,8 @@ static inline void mpam_thread_switch(struct task_struct *tsk)
->  		return;
->  
->  	write_sysreg_s(regval | MPAM1_EL1_MPAMEN, SYS_MPAM1_EL1);
-> +	if (system_supports_sme())
-> +		write_sysreg_s(regval & (MPAMSM_EL1_PARTID_D | MPAMSM_EL1_PMG_D), SYS_MPAMSM_EL1);
-
-Doing it here saves a surprise later.
-
-
->  	isb();
->  	/* Synchronising the EL0 write is left until the ERET to EL0 */
-
-(down here would have been the alternative)
 
 
 Thanks,
