@@ -1,139 +1,348 @@
-Return-Path: <linux-doc+bounces-81572-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81577-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qO/PHxG8xmnoNwUAu9opvQ
-	(envelope-from <linux-doc+bounces-81572-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:19:13 +0100
+	id wAyAIQnAxmmKOQUAu9opvQ
+	(envelope-from <linux-doc+bounces-81577-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:36:09 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AD0C34834F
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:19:13 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E038D348746
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:36:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id C0FD8302FB1B
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:19:04 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 09D843012E8E
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:28:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E56DC3D9052;
-	Fri, 27 Mar 2026 17:19:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E49313C6613;
+	Fri, 27 Mar 2026 17:28:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="SlmxtoYL"
+	dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b="iHvuhRbi"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com [136.143.188.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 843893793AA;
-	Fri, 27 Mar 2026 17:18:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774631942; cv=none; b=JnDlc85SCuZY8ttw4EimdGd864GQC90VrU4tsvoFeQxcE03lSQDQRdiEn5feE7Ynr+ycIiYjWuQ8eVdLcLs5h+jsDNA8E1DCV24p984Eztup3mVsC+AGhWZ+c0XLncAr/2qItqxUKVXJ12iWKH5dKEnqKrUzm46FO5jYV/3gtzE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774631942; c=relaxed/simple;
-	bh=jaaS6mlyRX/2Kim2UmuZp+0naniPgUPXpcBaOsGtUe8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=SfV/SQX3+0wAwBuorwK3xvswqqCyFm/Ia4Q08h9OgtwTl9fw3xRzw9R6AELks+/ihZrmeYDH1AeZrGVWYlHgDBM16BSIbeYp8cH7Y6SplC9y+QjY1G2TctGwyMlwlAFYkBScyIS2ojd24nM1oU/ScUERs2PlrWWx2VOZIidAVNE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=SlmxtoYL; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1774631936;
-	bh=jaaS6mlyRX/2Kim2UmuZp+0naniPgUPXpcBaOsGtUe8=;
-	h=From:Date:Subject:To:Cc:From;
-	b=SlmxtoYLOGpVhtDwzaCHv6BqaHniziH8iqwPZ+uvSMSYmPPv9i3QUCpJNSnlvPYUD
-	 bNTgtr9hwW0zxkZMQoFF/Ggo7XCcaFGAz12PQRV152v7KlZ/O6nHGJs4qp0NtZsk2+
-	 2lZjLivByOncqZt+tJe9T1aYZ/wG64q8hVzTbZnf8dXht/oqjgQYdkRZW2SF3m87R0
-	 dkVuodLFuwjt/J3dx4kgIBGB+aNJ+gFXBm7lXhodqzNY5DeYs5Z+TVEDVbT3xoVS7V
-	 4Tmwst3GUlyWQ9lCXZ1jJRuv/H7dHYP5bmRScLTuSd+5AO7RgZk6SEOX98E9RtyKNh
-	 dgqEtfIcxUN9Q==
-Received: from localhost (unknown [86.123.23.225])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: cristicc)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 6AFAC17E4A7F;
-	Fri, 27 Mar 2026 18:18:56 +0100 (CET)
-From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
-Date: Fri, 27 Mar 2026 19:18:32 +0200
-Subject: [PATCH] drm/vkms: Remove completed task from Plane Features
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55BCA2550AF;
+	Fri, 27 Mar 2026 17:28:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.12
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774632528; cv=pass; b=Mnvc7eV7pa5h5waodVfNYcpfxdzGaGP5EkcDV4PyQ46r1RjfKnuJe6d91mWNIpdS9TRPwHI7k1paAS3b5d8HFOvc9Rn9Agl26QH3p/To89WCGt3OQcL9GIL/YAzFDJ81wq1aJO3eXq19JofCRzknXB7fOLQhmSaE5s5U3i2mTuQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774632528; c=relaxed/simple;
+	bh=BMBwIah1fZ+y8KvUtUrFV1aj5ueftmXr6RjnwpWkbCg=;
+	h=Message-ID:Subject:From:To:Cc:In-Reply-To:References:Content-Type:
+	 Date:MIME-Version; b=qC4bcDldPo617Qd+sZ6MKjAYAMPpPIzLOaJ77SnLpWPJ80QFE7hZlOEQCGj8iHl2xsAJhal2ReNxryRU1LC47K8mVpUr9nPisdfDaS1xzeG7gHgrKSiGvgb9FVgOI/tGKRNh2rA1v8d1GFoGkizxoZnp8ddI5ffGvrn/LCCuYkA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe; spf=pass smtp.mailfrom=rong.moe; dkim=pass (2048-bit key) header.d=rong.moe header.i=i@rong.moe header.b=iHvuhRbi; arc=pass smtp.client-ip=136.143.188.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rong.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rong.moe
+ARC-Seal: i=1; a=rsa-sha256; t=1774632509; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=kfbBZk7ROGGx+MlfEd9i+iMV1Q7+HIKB3zVBkqtgXmdWVI3BgalcVDXj5Fvyg+C9Q71pdkxFoU6tvW84rElSdYghqvPY7d8mTjEM0E1C7FDGdD5BeM3SqXVeqsyPUrlnRp/UIR6b74MGDrYV5ExJ7ooaCy90eAYJPBhC8qjyOdE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1774632509; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=WWAaezSCgCRFZsEHwDR15h4rJ/Mue8H1oDbuFAMWAHw=; 
+	b=XPSwXlr2bzD5BxLbShdDOeHZqQpmYLwEt7geRO7L36YQuqu3wEBzcp8oAPk35anD3iLVm3x5Bc1TMXmHd0D6LeN3v0N/bjPn6Ixr1HxHSyWxJV1DJROp9Dx5/zWGIUUN3fNAXnLPUFpKX8CAMvs+gZkHenfXoe07yLt6WwBwZ6s=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=rong.moe;
+	spf=pass  smtp.mailfrom=i@rong.moe;
+	dmarc=pass header.from=<i@rong.moe>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1774632509;
+	s=zmail2048; d=rong.moe; i=i@rong.moe;
+	h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date:Date:MIME-Version:Message-Id:Reply-To;
+	bh=WWAaezSCgCRFZsEHwDR15h4rJ/Mue8H1oDbuFAMWAHw=;
+	b=iHvuhRbiOoXdLsoX+UxZg88bx838IiC1ONy8H1pzZU6/hGoOXD93oJQ3W3imfCn6
+	KEpMWkEiItNTOnykgfO+JsAaEOQT/TE6xbgMg2b2MKppPLXaPQH966MPqWerdHfx8NK
+	eellQC+Sl6K+s5IlUswQ8O5594vf6dDIJv2RuQnjF9b2PLIQEw3tn846+URed9Ej8Z4
+	/QAjr9vN//SzAYWk79bfqg72FP4D0zykcZmsbMQ+ZkXlo3yGLIXjdbf7a1mi3DRyed7
+	iaw1AM7UOoyze7G46o/Iv2VccEPo2OFeqT1H63MaDBCpPAKJr5w1h5MsyKgqA+DD4FL
+	wQHM0ynA7Q==
+Received: by mx.zohomail.com with SMTPS id 17746325077071017.7674197145918;
+	Fri, 27 Mar 2026 10:28:27 -0700 (PDT)
+Message-ID: <2ebd8af957f1f70a93b0ee8f7c9333924c269241.camel@rong.moe>
+Subject: Re: [PATCH 0/4] hwmon: Add WITRN USB tester driver
+From: Rong Zhang <i@rong.moe>
+To: Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-hwmon@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org
+In-Reply-To: <cc67f9e5-9f6d-40cd-bb89-9de0b084d42c@roeck-us.net>
+References: <20260327-b4-hwmon-witrn-v1-0-8d2f1896c045@rong.moe>
+	 <a3a8eb58-b2fa-411b-81be-eb70dac86b4f@roeck-us.net>
+	 <5ee967a8a4dca6f70e50c7fac382d4f91b6620aa.camel@rong.moe>
+	 <cc67f9e5-9f6d-40cd-bb89-9de0b084d42c@roeck-us.net>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 28 Mar 2026 01:23:22 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260327-vkms-todo-upd-v1-1-f78409d9e70b@collabora.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDYyNz3bLs3GLdkvyUfN3SghRdw1QLyxRjSyMLkyRjJaCegqLUtMwKsHn
- RsbW1ANDHde1fAAAA
-X-Change-ID: 20260327-vkms-todo-upd-1e89d39284b3
-To: Louis Chauvet <louis.chauvet@bootlin.com>, 
- Haneen Mohammed <hamohammed.sa@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Melissa Wen <melissa.srw@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: kernel@collabora.com, dri-devel@lists.freedesktop.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-X-Mailer: b4 0.14.3
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+User-Agent: Evolution 3.56.2-9 
+X-ZohoMailClient: External
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[rong.moe,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[rong.moe:s=zmail2048];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81572-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[bootlin.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-81577-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[cristian.ciocaltea@collabora.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[i@rong.moe,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[rong.moe:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,collabora.com:dkim,collabora.com:email,collabora.com:mid]
-X-Rspamd-Queue-Id: 4AD0C34834F
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rong.moe:dkim,rong.moe:email,rong.moe:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,sashiko.dev:url]
+X-Rspamd-Queue-Id: E038D348746
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Since commit 0b9eff726d56 ("drm/vkms: Support setting custom background
-color") the related TODO item in the 'Add Plane Features' section has
-been completed, so remove it.
+Hi Guenter,
 
-Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
----
- Documentation/gpu/vkms.rst | 2 --
- 1 file changed, 2 deletions(-)
+Thanks for your detailed elaboration. It's very helpful.
 
-diff --git a/Documentation/gpu/vkms.rst b/Documentation/gpu/vkms.rst
-index 1e79e62a6bc4..792eaeb43c82 100644
---- a/Documentation/gpu/vkms.rst
-+++ b/Documentation/gpu/vkms.rst
-@@ -217,8 +217,6 @@ Add Plane Features
- 
- There's lots of plane features we could add support for:
- 
--- Add background color KMS property[Good to get started].
--
- - Scaling.
- 
- - Additional buffer formats. Low/high bpp RGB formats would be interesting
+On Fri, 2026-03-27 at 08:42 -0700, Guenter Roeck wrote:
+> On 3/27/26 05:01, Rong Zhang wrote:
+> > Hi Guenter,
+> >=20
+> > Thanks a lot for your review and applying patch 1 :-)
+> >=20
+> > On Thu, 2026-03-26 at 17:05 -0700, Guenter Roeck wrote:
+> > > On 3/26/26 12:19, Rong Zhang wrote:
+> > > > WITRN produces a series of devices to monitor power characteristics=
+ of
+> > > > USB connections and display those on a on-device display. Most of t=
+hem
+> > > > contain an additional port which exposes the measurements via USB H=
+ID.
+> > > >=20
+> > > > These devices report sensor values in IEEE-754 float (binary32) for=
+mat.
+> > > > The driver must perform floating-point number to integer conversion=
+s to
+> > > > provide hwmon channels. Meanwhile, they also report accumulative fl=
+oat
+> > > > values, and simple division or multiplication turns them into usefu=
+l
+> > > > hwmon channels.
+> > > >=20
+> > > > Patch 1 adds label support for 64-bit energy attributes, as the dri=
+ver
+> > > > needs it.
+> > > >=20
+> > > > Patch 2 adds a helper module for floating-point to integer conversi=
+ons,
+> > > > so that the conversion, multification and division methods can be u=
+sed
+> > > > in this driver as well as other drivers (I am also working on anoth=
+er
+> > > > USB tester driver that needs it).
+> > > >=20
+> > > > Patch 3 adds a barebone HID driver for WITRN K2.
+> > > >=20
+> > > > Patch 4 adds hwmon channels and attributes to the driver.
+> > > >=20
+> > > > Signed-off-by: Rong Zhang <i@rong.moe>
+> > > > ---
+> > > > Rong Zhang (4):
+> > > >         hwmon: Add label support for 64-bit energy attributes
+> > > >         hwmon: New helper module for floating-point to integer conv=
+ersions
+> > >=20
+> > > Nack. This is not a hwmon problem and should reside in a driver or in=
+ lib/
+> > > (if it is needed by multiple drivers).
+> >=20
+> > Makes sense. I will try.
+> >=20
+> > >=20
+> > > >         hwmon: Add barebone HID driver for WITRN
+> > >=20
+> > > Nack. This is the wrong place for such a driver. It should reside som=
+ewhere
+> > > in drivers/usb, or maybe in drivers/misc/.
+> >=20
+> > Hmm, I decided to place it here because:
+> >=20
+> > - It's not a hid_ll_driver but a dumb hid_driver, i.e., does no low
+> > level things but just receives hid event from the HID core. It doesn't
+> > even send any HID report to the device.
+> >=20
+> > - There has been numerous hid_driver in drivers/hwmon/.
+> >=20
+> > - There has been a similar USB tester driver in drivers/hwmon/, i.e.,
+> > powerz. That's the major reason of my decision.
+> >=20
+>=20
+> powerz is a pure hwmon driver, nothing else. It does not claim to be a
+> "pure hid driver". If your driver _only_ provides a hwmon ABI, it would
+> be acceptable. But then this and the next patch should be one patch,
+> and it should only provide the hwmon ABI, nothing else (except maybe
+> debugfs entries or sysfs entries attached directly to the HID device
+> to display information such as serial number etc).=C2=A0
+>=20
 
----
-base-commit: e88b5cc6d6e5b1ba257f00e5c186ba137e6e8bc3
-change-id: 20260327-vkms-todo-upd-1e89d39284b3
+Understood. I will squash the two patches into a single patch, as it
+will only provide hwmon ABI.
 
+> Reading ROM/RAM addresses,
+> as mentioned below, would be outside that scope.
+
+Thanks for clarification. I am not going to support this, as dancing
+with undocumented ROM/RAM access is too dangerous.
+
+>=20
+> The entire powerz driver is 269 lines of code. Your driver has well above
+> 1,000 LOC.=C2=A0
+>=20
+
+The witrn driver itself is less than 700 LOC. It's longer because of
+more channels and the need to call floating-point conversion and
+arithmetic methods.
+
+Other LOC mostly locates at the floating-point conversions and
+arithmetic module. Since I will turn it into a generic lib, it won't be
+a part of the witrn driver when I resubmit it. Thanks for the
+suggestion.
+
+> Your code has separate source files plus an include file.
+
+The include file is for the floating-point conversion and arithmetic
+module.
+
+> That suggests that it does more than just reporting hardware monitoring
+> attributes.
+>=20
+> I have not looked further into the code itself. My response is based pure=
+ly
+> on the subjects and code organization, which suggests that this is a HID
+> driver with attached hardware monitoring.
+
+I should have explained the structure of the series more detailedly.
+Sorry for causing the misunderstanding.
+
+>=20
+> I am not sure I understand what all that would have to do with UCSI. UCSI
+> support is implemented in drivers/usb/typec/ucsi. Anything associated
+> with that protocol should be implemented there if it is part of the
+> protocol.
+
+Thanks for clarification. I think the feature has nothing to do with
+UCSI because it's a passive dumb raw packet sniffer.
+
+>=20
+> > Could you kindly explain what kinds of driver can be accepted into
+> > drivers/hwmon/?
+> >=20
+> > >=20
+> > > >         hwmon: (witrn) Add monitoring support
+> > >=20
+> > > This should be implemented as auxiliary driver.
+> >=20
+> > Could you kindly elaborate? Did you mean that if the device supports
+> > multiple functionalities they should be implemented as multiple
+> > auxiliary drivers in different subsystems?
+> >=20
+>=20
+> Correct. Your series suggests that this would be the case.
+
+Sorry for causing the misunderstanding again.
+
+>=20
+> > FYI, the USB tester doesn't provide any other meaningful feature that
+> > fits other subsystems. The tester only provides two features through US=
+B
+> > HID: power measurements (this series), and raw PD packets sniffing.
+> >=20
+>=20
+> Again, support for raw PD packets sniffing would be outside the scope
+> of the hardware monitoring subsystem.
+
+Agreed. I am not going to support it in any other subsystem either.
+Users should use hidraw and parse everything themselves if they need it.
+
+Thanks,
+Rong
+
+>=20
+> Thanks,
+> Guenter
+>=20
+> > As for the latter, the USB tester can sniff raw PD packets between the
+> > source and sink if enabled in the device menu. It doesn't provide the
+> > parsed result for packets, and the PC cannot ask the tester to send PD
+> > packets. This doesn't fit UCSI at all, as a UCSI device operates at a
+> > higher level and must accept commands. AFAIK such a dumb sniffer won't
+> > fit any subsystem in the kernel. Hence, the only thing fits a subsystem
+> > is its power measurements.
+> >=20
+> > All measurements supported by the official utility for Windows can be
+> > found in `struct witrn_sensor'. Other than that, all extra features
+> > provided by the utility are implemented in software and I didn't see an=
+y
+> > extra USB packets other than querying the serial number [1] when I was
+> > randomly messing around with the utility [2].
+> >=20
+> > I separated patch 3 and 4 just for easier review. If you are not in
+> > favor of such a style, I will squash them.
+> >=20
+> > [1]: In fact, the utility directly asks the device to return the conten=
+t
+> > on several specific ROM/RAM addresses, and then the utility calculates
+> > the serial number with an unknown algorithm. Reading a ROM/RAM address
+> > seems to be the only command that the device accepts from the USB host.
+> >=20
+> > [2]: Yeah, their utility does not support PD packet capturing or
+> > parsing. It seems that the manufacturer provides the PD sniffing featur=
+e
+> > as is and expects users to capture it via hidraw or libusb and parse it
+> > themselves.
+> >=20
+> > >=20
+> > > Sashiko has a lot of feedback that you might want to address before
+> > > resubmitting.
+> > >=20
+> > > https://sashiko.dev/#/patchset/20260327-b4-hwmon-witrn-v1-0-8d2f1896c=
+045%40rong.moe
+> >=20
+> > Sashiko's feedback helps a lot. Thanks.
+> >=20
+> > Thanks,
+> > Rong
+> >=20
+> > >=20
+> > > Thanks,
+> > > Guenter
+> > >=20
+> > > >=20
+> > > >    Documentation/hwmon/index.rst |   1 +
+> > > >    Documentation/hwmon/witrn.rst |  53 ++++
+> > > >    MAINTAINERS                   |   7 +
+> > > >    drivers/hwmon/Kconfig         |  14 +
+> > > >    drivers/hwmon/Makefile        |   2 +
+> > > >    drivers/hwmon/hwmon-fp.c      | 262 ++++++++++++++++
+> > > >    drivers/hwmon/hwmon-fp.h      | 212 +++++++++++++
+> > > >    drivers/hwmon/hwmon.c         |   1 +
+> > > >    drivers/hwmon/witrn.c         | 691 ++++++++++++++++++++++++++++=
+++++++++++++++
+> > > >    9 files changed, 1243 insertions(+)
+> > > > ---
+> > > > base-commit: 0138af2472dfdef0d56fc4697416eaa0ff2589bd
+> > > > change-id: 20260327-b4-hwmon-witrn-a629b9040250
+> > > >=20
+> > > > Thanks,
+> > > > Rong
+> > > >=20
 
