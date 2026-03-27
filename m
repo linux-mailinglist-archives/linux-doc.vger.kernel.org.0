@@ -1,417 +1,292 @@
-Return-Path: <linux-doc+bounces-81575-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81578-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yM0MEmG/xmnoNwUAu9opvQ
-	(envelope-from <linux-doc+bounces-81575-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:33:21 +0100
+	id KMDnJZu+xmnoNwUAu9opvQ
+	(envelope-from <linux-doc+bounces-81578-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:30:03 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CE85348685
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:33:20 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1175E3485BE
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 18:30:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D547E30E6C22
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:25:35 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 70776300AB25
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Mar 2026 17:30:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DCC93ED5D3;
-	Fri, 27 Mar 2026 17:25:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D9A363EDAC8;
+	Fri, 27 Mar 2026 17:30:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FX6ciFfL"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="b53+ozIG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 530023C2798;
-	Fri, 27 Mar 2026 17:25:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47AA1363C4D
+	for <linux-doc@vger.kernel.org>; Fri, 27 Mar 2026 17:29:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774632329; cv=none; b=RLGMO0d3xm6cdGjr8hZgRNpFxb9e4S7CSIIgsoKbz1kw5MVBoo0k1kkw9GCXP6c2a8YptD61InDaKXLk343bBezOQF9ay6HfA5Kgi0ra7N7He43W8awXjEzZQmtIsFggijNG7Kvq+9qiwvhER8/RxA52cuHMLSfciFdSi2g6jZw=
+	t=1774632600; cv=none; b=LEqYOUoQfmSNRcxsT6FVcmTJFw0UHkssjqjlyGOXFVIYF7a80RF2kir+hIQ1RUMeTB6By4L/yiDrrm41tjA6uYHHnhaj0GRZE100nQOfj/gE6oosIJ1p6KPUpmv1VqJxR6CBhSzQcfEx9XBrFYjtfLGRsCVirJZ8mY8uLajwVck=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774632329; c=relaxed/simple;
-	bh=2jWvGlbIxPRe3FDKC+xflLFELENaA9lcaK0B+k0LYg4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Cxs3mWBPd1APBGEIQ+ALPZR1hEm4WG1FivcsWkxRQJIPZkwy9SHz23+Ms+hrbpVWwqkiowpkCIXoRCFTyBTPc8Y6AN5wDCfKwCJzxDMjMicp8/ZLe43xQVdD0TNJo+iKlB8rS+rxZxnHPykY1JsVFvX0TWpoWI0+e1WXUtzl+7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FX6ciFfL; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 30642C2BCB6;
-	Fri, 27 Mar 2026 17:25:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774632329;
-	bh=2jWvGlbIxPRe3FDKC+xflLFELENaA9lcaK0B+k0LYg4=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=FX6ciFfLRK8hVwxBnVg/5ToXjSxj2hgtz8pBlc3wOGvhi2eWRdoNyUmyCNDhT6eVO
-	 Zw1uxHpL+uUkuhuEIV/Zg+s26tUB77yMjs7viEpKWYFgIcj+vsTVXoxLItjWXGIy9i
-	 eciIG0V67zySSPLHuzi5LcXWvMBME3aXj8qyvmnZ0UL12NjaYfDux2pw0urgf0g6HK
-	 iBGnzBECngbzT9lfdas6CGAfLnE7xZURVTI2QZ6tdl7j8AvkdZZAtguKE/UljTF09v
-	 5qLgBQrEG0Ic13oHevYE2U/+FDJZaphLirNuugCRMuumNsHL+QG6eYVFO0b223hyjU
-	 fQF433E0T+JdQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2149510F2865;
-	Fri, 27 Mar 2026 17:25:29 +0000 (UTC)
-From: =?utf-8?q?Nuno_S=C3=A1_via_B4_Relay?= <devnull+nuno.sa.analog.com@kernel.org>
-Date: Fri, 27 Mar 2026 17:26:16 +0000
-Subject: [PATCH v8 3/3] gpio: gpio-ltc4283: Add support for the LTC4283
- Swap Controller
+	s=arc-20240116; t=1774632600; c=relaxed/simple;
+	bh=R1VR1id3Nw+h00AdesdzKQTYNyeVNurIY2nfkMPZMAc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ptoOjxTnBZ1AW4Okf+ugbkLo9uwrPl8qNRpWB+fyk3lv1o+DUo11kWk95FhXfl8t/DtNAjgM2e1vBc28rBjD4kqgkmqwpuv9fWravuJcNeXKhSEJrewiSsKrgkOWeE4mXjgGpQvaCYdKsqUX84ZGfoaR1l1eDgFB36BbCmXF6sk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=b53+ozIG; arc=none smtp.client-ip=74.125.82.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-2c179d4e1a9so2741540eec.1
+        for <linux-doc@vger.kernel.org>; Fri, 27 Mar 2026 10:29:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774632598; x=1775237398; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=UDtS8QqlK5zzaFhAZ3n9ypKXp4VLpAw5Q1WzjAwJ3kQ=;
+        b=b53+ozIG/AtoDx1CkwtadKtwXXiNcp1zZKebelSB/ySkzp7IvOEmyTZS/1O5Ws97nA
+         +pm1YzQLmV++iLDyUWl6U+SWkimAitIZzaukdcQm6gVZnztf7q464GWlPJboHWVw5XGM
+         3dUxky7zGydma5lQSphZX8VX7lRPGcAQgRic2vcVUYxPU7qLY/whpzPSHhw1soWIvEOe
+         Cey8QHqSzvcDEPVNiaANNfcvOJRV4D0n+HIBmJxAa6udEPs4Zuesx9gp5bwGE/myT2K0
+         HjPPxM3HFExfUjyDEjoebnd9lfGctuYLJ91/qH41LOqzE3iORAQz3d4AkeOXuplRuMh9
+         3fGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774632598; x=1775237398;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=UDtS8QqlK5zzaFhAZ3n9ypKXp4VLpAw5Q1WzjAwJ3kQ=;
+        b=ZfZp5Z+mY5SNU2j7EKCQXeC78sLEDrpCMVCMEzsKMHwqilOUOhmOcQTsWrgo1fnTag
+         5+ABpNpRcCopua3F3HuqTiHKguzz4LziiGBktcboriTiFR1TpNKUhmg8gQBR5PUIlrzK
+         MUHw6phK3s44dWHrbfTLclD8J1xuBD6KfAzE75kDooCJc0l9oz5bt44Y+aDa3kDddoUf
+         2Z9KAMsJsd5WXRT/SHW45dkhUF6+ZBHsQlvaFY1PrEBy7ZGqLG5KhDyFrl9isIxyGR05
+         LGRy9G9GUeLkQpguy31g/bHtLysKvzTccBdQsDHRV2pKz6J7EXSHlfpmncYBHsIqcLCb
+         +t7Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWK11pvR5PhKLayivkaSJVYwh5KWjYDr+8tSvVT8EI0/y/PhD82b4V1AiLdTgT+SdJXqUk9B4l56fg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzVWWPGWCY85onTFmXVntIvg5ArXTGZSrL32zHPqof/8bHe/i36
+	LSSeQLcrEF/a/gKjqB85pZA38DPQtj0MvepohOewHv3ZHIHUg/XdIcQf
+X-Gm-Gg: ATEYQzxlEVRHbc9uRJViM7HPI2hesDt6zUjnum+8VWEGVsNZZM7tjs43nFpHgjzDuNK
+	w+V+FCG/h3uYoJwLdK/TnGFRjy2VynZ11AcKS/VnOhZHKhF2QKTzWco413VP0ESIfBM4NwLsWG7
+	bk0TumanMHi6qVP4URDCmDVte+xo6yeLdG4LVCb2bjcdDySWbp/yDRh5WGvJb2h/4D/tfjgGzyP
+	eSErVBMSjjvki7uySu5LDzQBnroey34yj1VerK69cno8o7B3A7HcVAM/x5YvyIm7hWYTILURIS5
+	GhjLLnErC/E0fCdVchbvFw5aJUXdfD7tXp/Yo6KnF1FhKdyiC75wM0oVbmxKddV+OnWt5tavy/8
+	sAQc6+9Bl4/lD/Zsj1dJAlPrI5iVBNGErWg+P7fjLoir0oC0UTj8ZaxsFrlSBwp7YA+Z3QWp+xc
+	w4OYL2Aenu0hziqSQKOd5YTwNBJ+2sHj4TOIsj9EOLFuNiUbIvyVeHoWNoKiefSWF+vgr+hr57K
+	sSJtAkjNrA=
+X-Received: by 2002:a05:7300:641d:b0:2be:617:2ddf with SMTP id 5a478bee46e88-2c185e54c23mr1997402eec.16.1774632598247;
+        Fri, 27 Mar 2026 10:29:58 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2c16ec4934asm5609052eec.8.2026.03.27.10.29.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 27 Mar 2026 10:29:57 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <55c96f65-d462-4507-a1ef-c36df6d3b4d9@roeck-us.net>
+Date: Fri, 27 Mar 2026 10:29:55 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 2/2] hwmon: temperature: add support for EMC1812
+To: Marius.Cristea@microchip.com
+Cc: corbet@lwn.net, linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+ robh@kernel.org, linux-kernel@vger.kernel.org, krzk+dt@kernel.org,
+ linux-doc@vger.kernel.org, conor+dt@kernel.org
+References: <20260310-hw_mon-emc1812-v8-0-bc155727e0d2@microchip.com>
+ <20260310-hw_mon-emc1812-v8-2-bc155727e0d2@microchip.com>
+ <f1e55e6e-a374-4b97-b1f3-706d627ebab5@roeck-us.net>
+ <350d1d2bf73c11c2c311c4ae6bf1b8b423151113.camel@microchip.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <350d1d2bf73c11c2c311c4ae6bf1b8b423151113.camel@microchip.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260327-ltc4283-support-v8-3-471de255d728@analog.com>
-References: <20260327-ltc4283-support-v8-0-471de255d728@analog.com>
-In-Reply-To: <20260327-ltc4283-support-v8-0-471de255d728@analog.com>
-To: linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
- Bartosz Golaszewski <brgl@kernel.org>
-X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774632375; l=8619;
- i=nuno.sa@analog.com; s=20231116; h=from:subject:message-id;
- bh=9lFqSnapPoZW8DXJauUUOY3xCTbTNSj97/K8zd45LJ8=;
- b=Z3SYeLyQPObHC4D/nZvqLewJ8rIvzhuEkhX1Ivo3DHMP1UapNKEniFLX4r8YTpZ3THwCUvzgq
- LXT4bDGWPFLC5Epy6wdloAjD3/+uz77MVkgOwWWilB1nIp5BaBWTGx9
-X-Developer-Key: i=nuno.sa@analog.com; a=ed25519;
- pk=3NQwYA013OUYZsmDFBf8rmyyr5iQlxV/9H4/Df83o1E=
-X-Endpoint-Received: by B4 Relay for nuno.sa@analog.com/20231116 with
- auth_id=100
-X-Original-From: =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>
-Reply-To: nuno.sa@analog.com
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81575-lists,linux-doc=lfdr.de,nuno.sa.analog.com];
-	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	TAGGED_FROM(0.00)[bounces-81578-lists,linux-doc=lfdr.de];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DMARC_NA(0.00)[roeck-us.net];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	HAS_REPLYTO(0.00)[nuno.sa@analog.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_NONE(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linaro.org:email,analog.com:email,analog.com:replyto,analog.com:mid]
-X-Rspamd-Queue-Id: 9CE85348685
+	RCPT_COUNT_SEVEN(0.00)[9];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,microchip.com:email]
+X-Rspamd-Queue-Id: 1175E3485BE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Nuno Sá <nuno.sa@analog.com>
+On 3/27/26 09:30, Marius.Cristea@microchip.com wrote:
+> Hi Guenther,
+> 
+>     Thanks for the review, please see my comments below:
+> 
+> ...
+> 
+>>
+>>
+>>
+>>
+>>> +static int emc1812_init(struct emc1812_data *priv)
+>>> +{
+>>> +     int ret;
+>>> +     u8 val;
+>>> +
+>>> +     /*
+>>> +      * Set default values in registers. APDD, RECD12 and RECD34
+>>> are active
+>>> +      * on 0. Set ALERT pin to be in comparator mode.
+>>> +      * Set the device to be in Run (Active) state and converting
+>>> on all
+>>> +      * channels.
+>>> +      * Don't change conversion rate. After reset, default is 4
+>>> conversions/seconds.
+>>> +      * The temperature measurement range is -64°C to +191.875°C.
+>>> +      */
+>>> +     val = FIELD_PREP(EMC1812_CFG_MSKAL, 1) |
+>>> +           FIELD_PREP(EMC1812_CFG_RS, 0) |
+>>> +           FIELD_PREP(EMC1812_CFG_ATTHM, 1) |
+>>> +           FIELD_PREP(EMC1812_CFG_RECD12, !priv->recd12_en) |
+>>> +           FIELD_PREP(EMC1812_CFG_RECD34, !priv->recd34_en) |
+>>> +           FIELD_PREP(EMC1812_CFG_RANGE, 1) |
+>>> +           FIELD_PREP(EMC1812_CFG_DA_ENA, 0) |
+>>> +           FIELD_PREP(EMC1812_CFG_APDD, !priv->apdd_en);
+>>> +
+>>
+>> I assume it is on purpose that the defaults for EMC1812_CFG_RECD12
+>> and
+>> EMC1812_CFG_RECD34 deviate from the chip default (chip: enabled;
+>> driver:
+>> disabled).
+>>
+> 
+> Yes, EMC1812_CFG_ATTHM was set in order for the alerts to be clear
+> automaticaly when the limits goes back to normal.
+> 
+> The EMC1812_CFG_RANGE is set to extended range in order to be able to
+> measure from the -64 to 191,875 degree Celsius.
+> 
+> The EMC1812_CFG_MSKAL could be left at the "reset", so I will change it
+> to 0.
+> 
+> The EMC1812_CFG_RECD12 and EMC1812_CFG_RECD34 will be set based on the
+> device tree setting and is related to the hardware and if the system
+> designer wants to enable or disable the resistance error correction.
+> 
+> 
+>>> +     ret = regmap_write(priv->regmap, EMC1812_CFG_ADDR, val);
+>>> +     if (ret)
+>>> +             return ret;
+>>> +
+>>> +     ret = regmap_write(priv->regmap, EMC1812_THRM_HYS_ADDR,
+>>> 0x0A);
+>>> +     if (ret)
+>>> +             return ret;
+>>> +
+>>> +     ret = regmap_write(priv->regmap, EMC1812_CONSEC_ALERT_ADDR,
+>>> 0x70);
+>>> +     if (ret)
+>>> +             return ret;
+>>> +
+>>> +     ret = regmap_write(priv->regmap, EMC1812_FILTER_SEL_ADDR, 0);
+>>> +     if (ret)
+>>> +             return ret;
+>>> +
+>>> +     ret = regmap_write(priv->regmap, EMC1812_HOTTEST_CFG_ADDR,
+>>> 0);
+>>> +     if (ret)
+>>> +             return ret;
+>>> +
+>>> +     /* Enables the beta compensation factor auto-detection
+>>> function for beta1 and beta2 */
+>>> +     ret = regmap_write(priv->regmap,
+>>> EMC1812_EXT1_BETA_CONFIG_ADDR,
+>>> +                        EMC1812_BETA_LOCK_VAL);
+>>> +     if (ret)
+>>> +             return ret;
+>>> +
+>>> +     ret = regmap_write(priv->regmap,
+>>> EMC1812_EXT2_BETA_CONFIG_ADDR,
+>>
+>> AI review thinks that this register only exists on EMC1812. I don't
+>> find that detail in the datasheet, but it is odd that there are two
+>> registers
+>> with supposedly the same functionality.
+>>
+>>
+> 
+> All devices "have" the EMC1812_EXT2_BETA_CONFIG register (I mean if you
+> are writing something to it, there will be no NAK on the i2c bus, but
+> the value read back will be "0" for the devices that has the register
+> not writable).
+> EMC1812 having only one external channel, will not have the
+> EMC1812_EXT2_BETA_CONFIG writable.
+> 
+Ah, so the second register is for the second external channel. Seems
+obvious, thinking about it ;-). Still, would it make sense to only write
+the register if the second external channel actually exists ?
 
-The LTC4283 device has up to 8 pins that can be configured as GPIOs.
-
-Note that PGIO pins are not set as GPIOs by default so if they are
-configured to be used as GPIOs we need to make sure to initialize them
-to a sane default. They are set as inputs by default.
-
-Acked-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Reviewed-by: Linus Walleij <linusw@kernel.org>
-Signed-off-by: Nuno Sá <nuno.sa@analog.com>
----
- MAINTAINERS                 |   2 +
- drivers/gpio/Kconfig        |  15 +++
- drivers/gpio/Makefile       |   1 +
- drivers/gpio/gpio-ltc4283.c | 218 ++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 236 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 38d22cf622b7..0f4fc6c189f6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15143,9 +15143,11 @@ F:	drivers/hwmon/ltc4282.c
- 
- LTC4283 HARDWARE MONITOR AND GPIO DRIVER
- M:	Nuno Sá <nuno.sa@analog.com>
-+L:	linux-gpio@vger.kernel.org
- L:	linux-hwmon@vger.kernel.org
- S:	Supported
- F:	Documentation/devicetree/bindings/hwmon/adi,ltc4283.yaml
-+F:	drivers/gpio/gpio-ltc4283.c
- F:	drivers/hwmon/ltc4283.c
- 
- LTC4286 HARDWARE MONITOR DRIVER
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index b45fb799e36c..ba2621024598 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -1758,6 +1758,21 @@ config GPIO_WM8994
- 
- endmenu
- 
-+menu "Auxiliary Bus GPIO drivers"
-+	depends on AUXILIARY_BUS
-+
-+config GPIO_LTC4283
-+	tristate "Analog Devices LTC4283 GPIO support"
-+	depends on SENSORS_LTC4283
-+	help
-+	  If you say yes here you want the GPIO function available in Analog
-+	  Devices LTC4283 Negative Voltage Hot Swap Controller.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called gpio-ltc4283.
-+
-+endmenu
-+
- menu "PCI GPIO expanders"
- 	depends on PCI
- 
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index c05f7d795c43..ff37aca5029c 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -102,6 +102,7 @@ obj-$(CONFIG_GPIO_LP873X)		+= gpio-lp873x.o
- obj-$(CONFIG_GPIO_LP87565)		+= gpio-lp87565.o
- obj-$(CONFIG_GPIO_LPC18XX)		+= gpio-lpc18xx.o
- obj-$(CONFIG_GPIO_LPC32XX)		+= gpio-lpc32xx.o
-+obj-$(CONFIG_GPIO_LTC4283)		+= gpio-ltc4283.o
- obj-$(CONFIG_GPIO_MACSMC)		+= gpio-macsmc.o
- obj-$(CONFIG_GPIO_MADERA)		+= gpio-madera.o
- obj-$(CONFIG_GPIO_MAX3191X)		+= gpio-max3191x.o
-diff --git a/drivers/gpio/gpio-ltc4283.c b/drivers/gpio/gpio-ltc4283.c
-new file mode 100644
-index 000000000000..6609443c5d62
---- /dev/null
-+++ b/drivers/gpio/gpio-ltc4283.c
-@@ -0,0 +1,218 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Analog Devices LTC4283 GPIO driver
-+ *
-+ * Copyright 2025 Analog Devices Inc.
-+ */
-+
-+#include <linux/auxiliary_bus.h>
-+#include <linux/bitfield.h>
-+#include <linux/bitmap.h>
-+#include <linux/bits.h>
-+#include <linux/device.h>
-+#include <linux/gpio/driver.h>
-+#include <linux/mod_devicetable.h>
-+#include <linux/module.h>
-+#include <linux/regmap.h>
-+
-+#define LTC4283_PINS_MAX			8
-+#define LTC4283_PGIOX_START_NR			4
-+#define LTC4283_INPUT_STATUS			0x02
-+#define LTC4283_PGIO_CONFIG			0x10
-+#define   LTC4283_PGIO_CFG_MASK(pin) \
-+	GENMASK(((pin) - LTC4283_PGIOX_START_NR) * 2 + 1, (((pin) - LTC4283_PGIOX_START_NR) * 2))
-+#define LTC4283_PGIO_CONFIG_2			0x11
-+
-+#define LTC4283_ADIO_CONFIG			0x12
-+/* starts at bit 4 */
-+#define   LTC4283_ADIOX_CONFIG_MASK(pin)	BIT((pin) + 4)
-+#define LTC4283_PGIO_DIR_IN			3
-+#define LTC4283_PGIO_DIR_OUT			2
-+
-+struct ltc4283_gpio {
-+	struct gpio_chip gpio_chip;
-+	struct regmap *regmap;
-+};
-+
-+static int ltc4283_pgio_get_direction(const struct ltc4283_gpio *st, unsigned int off)
-+{
-+	unsigned int val;
-+	int ret;
-+
-+	ret = regmap_read(st->regmap, LTC4283_PGIO_CONFIG, &val);
-+	if (ret)
-+		return ret;
-+
-+	val = field_get(LTC4283_PGIO_CFG_MASK(off), val);
-+	if (val == LTC4283_PGIO_DIR_IN)
-+		return GPIO_LINE_DIRECTION_IN;
-+
-+	return GPIO_LINE_DIRECTION_OUT;
-+}
-+
-+static int ltc4283_gpio_get_direction(struct gpio_chip *gc, unsigned int off)
-+{
-+	struct ltc4283_gpio *st = gpiochip_get_data(gc);
-+	unsigned int val;
-+	int ret;
-+
-+	if (off >= LTC4283_PGIOX_START_NR)
-+		return ltc4283_pgio_get_direction(st, off);
-+
-+	ret = regmap_read(st->regmap, LTC4283_ADIO_CONFIG, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val & LTC4283_ADIOX_CONFIG_MASK(off))
-+		return GPIO_LINE_DIRECTION_IN;
-+
-+	return GPIO_LINE_DIRECTION_OUT;
-+}
-+
-+static int ltc4283_gpio_direction_set(const struct ltc4283_gpio *st,
-+				      unsigned int off, bool input)
-+{
-+	if (off >= LTC4283_PGIOX_START_NR) {
-+		unsigned int val = LTC4283_PGIO_DIR_OUT;
-+
-+		if (input)
-+			val = LTC4283_PGIO_DIR_IN;
-+
-+		val = field_prep(LTC4283_PGIO_CFG_MASK(off), val);
-+		return regmap_update_bits(st->regmap, LTC4283_PGIO_CONFIG,
-+					  LTC4283_PGIO_CFG_MASK(off), val);
-+	}
-+
-+	return regmap_update_bits(st->regmap, LTC4283_ADIO_CONFIG,
-+				  LTC4283_ADIOX_CONFIG_MASK(off),
-+				  field_prep(LTC4283_ADIOX_CONFIG_MASK(off), input));
-+}
-+
-+static int __ltc4283_gpio_set_value(const struct ltc4283_gpio *st,
-+				    unsigned int off, int val)
-+{
-+	u32 reg = off < LTC4283_PGIOX_START_NR ? LTC4283_ADIO_CONFIG : LTC4283_PGIO_CONFIG_2;
-+
-+	return regmap_update_bits(st->regmap, reg, BIT(off),
-+				  field_prep(BIT(off), !!val));
-+}
-+
-+static int ltc4283_gpio_direction_input(struct gpio_chip *gc, unsigned int off)
-+{
-+	struct ltc4283_gpio *st = gpiochip_get_data(gc);
-+
-+	return ltc4283_gpio_direction_set(st, off, true);
-+}
-+
-+static int ltc4283_gpio_direction_output(struct gpio_chip *gc, unsigned int off, int val)
-+{
-+	struct ltc4283_gpio *st = gpiochip_get_data(gc);
-+	int ret;
-+
-+	ret = ltc4283_gpio_direction_set(st, off, false);
-+	if (ret)
-+		return ret;
-+
-+	return __ltc4283_gpio_set_value(st, off, val);
-+}
-+
-+static int ltc4283_gpio_get_value(struct gpio_chip *gc, unsigned int off)
-+{
-+	struct ltc4283_gpio *st = gpiochip_get_data(gc);
-+	unsigned int val, reg;
-+	int ret, dir;
-+
-+	dir = ltc4283_gpio_get_direction(gc, off);
-+	if (dir < 0)
-+		return dir;
-+
-+	if (dir == GPIO_LINE_DIRECTION_IN) {
-+		ret = regmap_read(st->regmap, LTC4283_INPUT_STATUS, &val);
-+		if (ret)
-+			return ret;
-+
-+		/* ADIO1 is at bit 3. */
-+		if (off < LTC4283_PGIOX_START_NR)
-+			return !!(val & BIT(3 - off));
-+
-+		/* PGIO1 is at bit 7. */
-+		return !!(val & BIT(7 - (off - LTC4283_PGIOX_START_NR)));
-+	}
-+
-+	if (off < LTC4283_PGIOX_START_NR)
-+		reg = LTC4283_ADIO_CONFIG;
-+	else
-+		reg = LTC4283_PGIO_CONFIG_2;
-+
-+	ret = regmap_read(st->regmap, reg, &val);
-+	if (ret)
-+		return ret;
-+
-+	return !!(val & BIT(off));
-+}
-+
-+static int ltc4283_gpio_set_value(struct gpio_chip *gc, unsigned int off, int val)
-+{
-+	struct ltc4283_gpio *st = gpiochip_get_data(gc);
-+
-+	return __ltc4283_gpio_set_value(st, off, val);
-+}
-+
-+static int ltc4283_init_valid_mask(struct gpio_chip *gc, unsigned long *valid_mask,
-+				   unsigned int ngpios)
-+{
-+	unsigned long *mask = dev_get_platdata(gc->parent);
-+
-+	bitmap_copy(valid_mask, mask, ngpios);
-+	return 0;
-+}
-+
-+static int ltc4283_gpio_probe(struct auxiliary_device *adev,
-+			      const struct auxiliary_device_id *id)
-+{
-+	struct device *dev = &adev->dev;
-+	struct ltc4283_gpio *st;
-+	struct gpio_chip *gc;
-+
-+	st = devm_kzalloc(dev, sizeof(*st), GFP_KERNEL);
-+	if (!st)
-+		return -ENOMEM;
-+
-+	st->regmap = dev_get_regmap(dev->parent, NULL);
-+	if (!st->regmap)
-+		return dev_err_probe(dev, -ENODEV,
-+				     "Failed to get regmap\n");
-+
-+	gc = &st->gpio_chip;
-+	gc->parent = dev;
-+	gc->get_direction = ltc4283_gpio_get_direction;
-+	gc->direction_input = ltc4283_gpio_direction_input;
-+	gc->direction_output = ltc4283_gpio_direction_output;
-+	gc->get = ltc4283_gpio_get_value;
-+	gc->set = ltc4283_gpio_set_value;
-+	gc->init_valid_mask = ltc4283_init_valid_mask;
-+	gc->can_sleep = true;
-+
-+	gc->base = -1;
-+	gc->ngpio = LTC4283_PINS_MAX;
-+	gc->label = adev->name;
-+	gc->owner = THIS_MODULE;
-+
-+	return devm_gpiochip_add_data(dev, &st->gpio_chip, st);
-+}
-+
-+static const struct auxiliary_device_id ltc4283_aux_id_table[] = {
-+	{ "ltc4283.gpio" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(auxiliary, ltc4283_aux_id_table);
-+
-+static struct auxiliary_driver ltc4283_gpio_driver = {
-+	.probe = ltc4283_gpio_probe,
-+	.id_table = ltc4283_aux_id_table,
-+};
-+module_auxiliary_driver(ltc4283_gpio_driver);
-+
-+MODULE_AUTHOR("Nuno Sá <nuno.sa@analog.com>");
-+MODULE_DESCRIPTION("GPIO LTC4283 Driver");
-+MODULE_LICENSE("GPL");
-
--- 
-2.53.0
-
+Thanks,
+Guenter
 
 
