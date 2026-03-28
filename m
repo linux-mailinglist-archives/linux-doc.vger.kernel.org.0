@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-81612-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81614-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WAdbIiuGx2mOYgUAu9opvQ
-	(envelope-from <linux-doc+bounces-81612-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 28 Mar 2026 08:41:31 +0100
+	id sJzRBE2Gx2mbYgUAu9opvQ
+	(envelope-from <linux-doc+bounces-81614-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 28 Mar 2026 08:42:05 +0100
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39BAF34D9CD
-	for <lists+linux-doc@lfdr.de>; Sat, 28 Mar 2026 08:41:30 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF85634DA1E
+	for <lists+linux-doc@lfdr.de>; Sat, 28 Mar 2026 08:42:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BDB1A3020A5D
-	for <lists+linux-doc@lfdr.de>; Sat, 28 Mar 2026 07:41:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4AEFE304742E
+	for <lists+linux-doc@lfdr.de>; Sat, 28 Mar 2026 07:41:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16C68351C13;
-	Sat, 28 Mar 2026 07:41:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 465E9374725;
+	Sat, 28 Mar 2026 07:41:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="tFzuTHsT"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="PCikQ7pI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout10.his.huawei.com (canpmsgout10.his.huawei.com [113.46.200.225])
+Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC5CF34F255;
-	Sat, 28 Mar 2026 07:41:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.225
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE980343D80;
+	Sat, 28 Mar 2026 07:41:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.222
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774683688; cv=none; b=MDnlLmavSjTNmuH+/OKkCzAR0tER0tLz3vuqse9NqT624KCpQ5GpIhdoJye5E6+neJx9LxWEeS1EER48DFME7jfRY/ugXUMjiJqwVK9z0OM5/qYHuyRXxpAtw3uTH+WdXfIZLwhMD2ZIplPa573IOcdMfKYlhReMPwvC6zcwKwU=
+	t=1774683690; cv=none; b=rZiUkMVVxhKOTtF/GqB3oO+agKKeLE03nIsmMs74A73GmkBBU/Mt8nPRKtuj2RiAt87+mf7tYiP0GaZqp0YpP+dj5QAOyAwDBpxUoibEGAwwtNkEEgESTDcKHn7BjArbXoXKGY9l/aDX7qpw7C2g3ww3eyy4LKfz797LjHlYe84=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774683688; c=relaxed/simple;
-	bh=CbiSZkQk4FQGBO2l1svCqlrNvX7X1PnFHtKq/TV219g=;
+	s=arc-20240116; t=1774683690; c=relaxed/simple;
+	bh=OA3+t3ouF/KCmvhWfwe6D8gPaFUhyyKtS76vvWewtHI=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FB7RsE8n3ea6sQ1D8ZR8Yr1ja57wOmhXibBPAik6xJZ5HrMMsbnMLb/wz3bfVYqihYus3YKyCKfdN9Gfxm8h7UbAGLICQjPgp3ex1nQBxdjEUdzBhegGl3DtTPKeh7LyUQgClY+31meF8jLSKFrvT9Kz566tENISLTbsMJijHa8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=tFzuTHsT; arc=none smtp.client-ip=113.46.200.225
+	 MIME-Version:Content-Type; b=jQGkHKSusgKgf4dVygZsFHq4olV+H8nMNpZqI0RjdQoE2vapQvrMQZfBZNCBxArPqGAHhuNM1DXNch/tbS9zKGici6C6lt46VByi+YMJq+eiChDESVUKsFZamsA57eToXxudDqiXI65BC/zWeS62cNQbDIS5+Pl+kCty0BAYFu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=PCikQ7pI; arc=none smtp.client-ip=113.46.200.222
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
 	c=relaxed/relaxed; q=dns/txt;
 	h=From;
-	bh=jId8P+ONUCkepbB9G1MdtS+YuPsIL1WMFxljnCguKpc=;
-	b=tFzuTHsTkjp4T9eVg+QMjSR1BwdJKPVGlbxtsiR/GAHmEdxR/pSdAVK0KLuk7PcltF+4loIVu
-	CdZt6dmuUw92EX/5a4EchYTeJiN0hf+WMgxJIDJeJrMc3/wVkKB6Iq0m+GnTt7eqZbUqXZ3vuva
-	oUihRt+/+uUS97kTDqFf1qs=
-Received: from mail.maildlp.com (unknown [172.19.163.163])
-	by canpmsgout10.his.huawei.com (SkyGuard) with ESMTPS id 4fjTnK1dCsz1K970;
-	Sat, 28 Mar 2026 15:35:17 +0800 (CST)
+	bh=7Ej/nGP6D4OZlN2NP0wOiKbhFa+CLfU7f01IuTLoNYc=;
+	b=PCikQ7pIzeaKrzAs1XH/O8ZmZYPB9pV0fBIUYs2VLOstWE8QiBMRuVM3CIvEXipATIGW3TQ8X
+	gcrx6UYl2RFLLYRjDgwBg3lAQFmP1VJZr1v/vi26ia8fHvOPtkTiccABS/ORh8k+igGZUfzsNYX
+	1sRHQpEli+zR1tX+CITCvDo=
+Received: from mail.maildlp.com (unknown [172.19.163.214])
+	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4fjTnL3zHqzLlrZ;
+	Sat, 28 Mar 2026 15:35:18 +0800 (CST)
 Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 4031240565;
-	Sat, 28 Mar 2026 15:41:22 +0800 (CST)
+	by mail.maildlp.com (Postfix) with ESMTPS id 1B7C44056C;
+	Sat, 28 Mar 2026 15:41:25 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by dggpemf500011.china.huawei.com
  (7.185.36.131) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Sat, 28 Mar
- 2026 15:41:19 +0800
+ 2026 15:41:22 +0800
 From: Jinjie Ruan <ruanjinjie@huawei.com>
 To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
@@ -78,9 +78,9 @@ To: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
 	<linuxppc-dev@lists.ozlabs.org>, <linux-riscv@lists.infradead.org>,
 	<devicetree@vger.kernel.org>, <kexec@lists.infradead.org>
 CC: <ruanjinjie@huawei.com>
-Subject: [PATCH v11 02/11] powerpc/crash: Fix possible memory leak in update_crash_elfcorehdr()
-Date: Sat, 28 Mar 2026 15:40:04 +0800
-Message-ID: <20260328074013.3589544-3-ruanjinjie@huawei.com>
+Subject: [PATCH v11 03/11] x86/kexec: Fix potential buffer overflow in prepare_elf_headers()
+Date: Sat, 28 Mar 2026 15:40:05 +0800
+Message-ID: <20260328074013.3589544-4-ruanjinjie@huawei.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260328074013.3589544-1-ruanjinjie@huawei.com>
 References: <20260328074013.3589544-1-ruanjinjie@huawei.com>
@@ -101,14 +101,14 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,suse.cz,kylinos.cn,tinylab.org,pigmoral.tech,easystack.cn,vivo.com,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	TAGGED_FROM(0.00)[bounces-81612-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81614-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
@@ -120,41 +120,51 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	TO_DN_NONE(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:dkim,huawei.com:email,huawei.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 39BAF34D9CD
+X-Rspamd-Queue-Id: AF85634DA1E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In get_crash_memory_ranges(), if crash_exclude_mem_range() failed
-after realloc_mem_ranges() has successfully allocated the cmem
-memory, it just returns an error but leaves cmem pointing to
-the allocated memory, nor is it freed in the caller
-update_crash_elfcorehdr(), which cause a memory leak, goto out
-to free the cmem.
+There is a race condition between the kexec_load() system call
+(crash kernel loading path) and memory hotplug operations that can lead
+to buffer overflow and potential kernel crash.
 
-Cc: Sourabh Jain <sourabhjain@linux.ibm.com>
-Cc: Hari Bathini <hbathini@linux.ibm.com>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Fixes: 849599b702ef ("powerpc/crash: add crash memory hotplug support")
+During prepare_elf_headers(), the following steps occur:
+1. get_nr_ram_ranges_callback() queries current System RAM memory ranges
+2. Allocates buffer based on queried count
+3. prepare_elf64_ram_headers_callback() populates ranges from memblock
+
+If memory hotplug occurs between step 1 and step 3, the number of ranges
+can increase, causing out-of-bounds write when populating cmem->ranges[].
+
+This happens because kexec_load() uses kexec_trylock (atomic_t) while
+memory hotplug uses device_hotplug_lock (mutex), so they don't serialize
+with each other.
+
+Just add bounds checking in prepare_elf64_ram_headers_callback() to
+prevent out-of-bounds (OOB) access,
+
+Fixes: 8d5f894a3108 ("x86: kexec_file: lift CRASH_MAX_RANGES limit on crash_mem buffer")
 Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
 ---
- arch/powerpc/kexec/crash.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kernel/crash.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/powerpc/kexec/crash.c b/arch/powerpc/kexec/crash.c
-index a325c1c02f96..1d12cef8e1e0 100644
---- a/arch/powerpc/kexec/crash.c
-+++ b/arch/powerpc/kexec/crash.c
-@@ -440,7 +440,7 @@ static void update_crash_elfcorehdr(struct kimage *image, struct memory_notify *
- 	ret = get_crash_memory_ranges(&cmem);
- 	if (ret) {
- 		pr_err("Failed to get crash mem range\n");
--		return;
-+		goto out;
- 	}
+diff --git a/arch/x86/kernel/crash.c b/arch/x86/kernel/crash.c
+index 335fd2ee9766..7fa6d45ebe3f 100644
+--- a/arch/x86/kernel/crash.c
++++ b/arch/x86/kernel/crash.c
+@@ -225,6 +225,9 @@ static int prepare_elf64_ram_headers_callback(struct resource *res, void *arg)
+ {
+ 	struct crash_mem *cmem = arg;
  
- 	/*
++	if (cmem->nr_ranges >= cmem->max_nr_ranges)
++		return -ENOMEM;
++
+ 	cmem->ranges[cmem->nr_ranges].start = res->start;
+ 	cmem->ranges[cmem->nr_ranges].end = res->end;
+ 	cmem->nr_ranges++;
 -- 
 2.34.1
 
