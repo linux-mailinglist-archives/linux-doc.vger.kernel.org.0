@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-81658-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81661-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MHbeFpFUyWkdxgUAu9opvQ
-	(envelope-from <linux-doc+bounces-81658-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 29 Mar 2026 18:34:25 +0200
+	id kFRpKsdUyWkdxgUAu9opvQ
+	(envelope-from <linux-doc+bounces-81661-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 29 Mar 2026 18:35:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8BA2352F2B
-	for <lists+linux-doc@lfdr.de>; Sun, 29 Mar 2026 18:34:24 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DD6C352F75
+	for <lists+linux-doc@lfdr.de>; Sun, 29 Mar 2026 18:35:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 46A723005D31
-	for <lists+linux-doc@lfdr.de>; Sun, 29 Mar 2026 16:34:23 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9DD373026A94
+	for <lists+linux-doc@lfdr.de>; Sun, 29 Mar 2026 16:34:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 92FF037F74E;
-	Sun, 29 Mar 2026 16:34:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32B0B381B1A;
+	Sun, 29 Mar 2026 16:34:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="KF6yt0JD"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="NGIRAeL6"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E5C336EA8F;
-	Sun, 29 Mar 2026 16:34:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 868B83815FE;
+	Sun, 29 Mar 2026 16:34:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774802062; cv=none; b=FEEjy4mxjG8PwcXOl18U/47itHMJJc4LyXIJdkKB74NoxbJDqDOfCMRY3qN7DGBOFHn0+W+r/1FrUIStyT4dXL/Q734NMCxUlIOZ6jmaUWtXikudFlND8ehvdxXyqBWyYwgAzmjSiLG/oHdTUpYgELBuxQJpqzi0JNcz/9eK3Lc=
+	t=1774802065; cv=none; b=ZLrJhhW4tXFnbTu+cRizuFeDRp2CCJcRG0/GwvoGbvSeZ2eI/zIFu8Fq1PryDPd6JjOiS17uyzdu8TX5TCXEcAkYbCirU+zMg0C84Zfa+1TVWiLI/Fqi+GIlXEmCDEYXhtqjpwRzc38YwRwoN/XqTOO0c2hmf9iXz3Ej9TU/jsQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774802062; c=relaxed/simple;
-	bh=Ag7HfN/sgVc3bbbOya8yLcKEKW6cVwh7BkFYxrWVnNE=;
+	s=arc-20240116; t=1774802065; c=relaxed/simple;
+	bh=mNZ5aTepB69jUoCO81ItgbhTF3OT8VkdoKhj6YSzCA8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gMVL3AkeZ6fclIPs8gOIcBdb83Yu79S+WwW2FxIgwkEyYmLDBjO6jEgkhxPbG+XTfaG3KgoAtdOvlWdIvA5I/6bwJ6/6S7lxwobuKQwxXx7lP69QQBUkQ+XCM59Pb27BBOsAoOYjoq2i8u7jMlSZT5A6u/b3+U6Dqd7bqHBatvI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=KF6yt0JD; arc=none smtp.client-ip=217.140.110.172
+	 MIME-Version; b=f5jMfqxDgP2d94gQsxp010Pb/lFvjKu62lO36zF+SiO+ua++AD6gsEsCLDQdH0yGNZejPv1SF0lKCMAkHlTyCyvSy6d5pOUOGRZMCGfwk1NF5AiYOLqY8yiodeTIQRH+EbdlTIvsXFVJk+Z/pmEFLhmSXlvGF+dSyIoLTUijaFQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=NGIRAeL6; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E39E64456;
-	Sun, 29 Mar 2026 09:34:13 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3AC322A31;
+	Sun, 29 Mar 2026 09:34:17 -0700 (PDT)
 Received: from pluto.fritz.box (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EB6E03F915;
-	Sun, 29 Mar 2026 09:34:16 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1E7123F915;
+	Sun, 29 Mar 2026 09:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1774802059; bh=Ag7HfN/sgVc3bbbOya8yLcKEKW6cVwh7BkFYxrWVnNE=;
+	t=1774802063; bh=mNZ5aTepB69jUoCO81ItgbhTF3OT8VkdoKhj6YSzCA8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=KF6yt0JDNsyke0Oa1S5cK9K7mw7Eus0AStDWeywFUv5oLK3U/sl+f25ABxnp62S3x
-	 MZtP98hQFT/9yYJqsl5Qwtr4YkoV3cAyusfxesJ7hE6YiIg8uiJTXFT02T3ZmzNcYw
-	 hoITN7LGw7e5uwhbdm1inWsspmAGVxwPsdyJ9aTE=
+	b=NGIRAeL65ahqgJ8jnWmx/DtrrsE6D1rWfDmDk8N8/ziDAbb2iMsRb6abIKJR9vmm5
+	 L3uar7ZCrUqquiBAEWbIeFi4DSfq2/ok84esc8XtvzUhf6slU7/Kl/kN41of3moLVn
+	 JZHKtdrVguJz5dphTd14gWMtpQAwbUI1dhqvPxYE=
 From: Cristian Marussi <cristian.marussi@arm.com>
 To: linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
@@ -66,9 +66,9 @@ Cc: sudeep.holla@kernel.org,
 	brauner@kernel.org,
 	souvik.chakravarty@arm.com,
 	Cristian Marussi <cristian.marussi@arm.com>
-Subject: [PATCH v3 02/24] firmware: arm_scmi: Reduce the scope of protocols mutex
-Date: Sun, 29 Mar 2026 17:33:13 +0100
-Message-ID: <20260329163337.637393-3-cristian.marussi@arm.com>
+Subject: [PATCH v3 03/24] firmware: arm_scmi: Allow registration of unknown-size events/reports
+Date: Sun, 29 Mar 2026 17:33:14 +0100
+Message-ID: <20260329163337.637393-4-cristian.marussi@arm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260329163337.637393-1-cristian.marussi@arm.com>
 References: <20260329163337.637393-1-cristian.marussi@arm.com>
@@ -85,7 +85,7 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -93,10 +93,10 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	FREEMAIL_CC(0.00)[kernel.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,huawei.com,arm.com];
 	RCPT_COUNT_TWELVE(0.00)[21];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-81658-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81661-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[cristian.marussi@arm.com,linux-doc@vger.kernel.org];
@@ -108,127 +108,106 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:dkim,arm.com:email,arm.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: C8BA2352F2B
+X-Rspamd-Queue-Id: 1DD6C352F75
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Currently the mutex dedicated to the protection of the list of registered
-protocols is held during all the protocol initialization phase.
-
-Such a wide locking region is not needed and causes problem when trying to
-initialize notifications from within a protocol initialization routine.
-
-Reduce the scope of the protocol mutex.
+Allow protocols to register events with build-time unknown sizes: such
+events can be declared zero-sized and let the core SCMI stack perform the
+needed safe-net boundary checks based on the configured transport size.
 
 Signed-off-by: Cristian Marussi <cristian.marussi@arm.com>
 ---
-v1-->v2
- - Fixed improper mixed usage of cleanup and goto constructs
+v2 --> v3
+ - split out of previous patch on protocol notifier
+ - use max() instead of max_t()
 ---
- drivers/firmware/arm_scmi/driver.c | 50 ++++++++++++++----------------
- 1 file changed, 24 insertions(+), 26 deletions(-)
+ drivers/firmware/arm_scmi/notify.c | 24 +++++++++++++++++++-----
+ drivers/firmware/arm_scmi/notify.h |  8 ++++++--
+ 2 files changed, 25 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/firmware/arm_scmi/driver.c b/drivers/firmware/arm_scmi/driver.c
-index 3e76a3204ba4..26f192b8d7a9 100644
---- a/drivers/firmware/arm_scmi/driver.c
-+++ b/drivers/firmware/arm_scmi/driver.c
-@@ -17,6 +17,7 @@
- #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+diff --git a/drivers/firmware/arm_scmi/notify.c b/drivers/firmware/arm_scmi/notify.c
+index 40ec184eedae..3e4c97ab7b61 100644
+--- a/drivers/firmware/arm_scmi/notify.c
++++ b/drivers/firmware/arm_scmi/notify.c
+@@ -595,7 +595,13 @@ int scmi_notify(const struct scmi_handle *handle, u8 proto_id, u8 evt_id,
+ 	if (!r_evt)
+ 		return -EINVAL;
  
- #include <linux/bitmap.h>
-+#include <linux/cleanup.h>
- #include <linux/debugfs.h>
- #include <linux/device.h>
- #include <linux/export.h>
-@@ -2190,7 +2191,6 @@ static void scmi_protocol_version_initialize(struct device *dev,
-  * all resources management is handled via a dedicated per-protocol devres
-  * group.
-  *
-- * Context: Assumes to be called with @protocols_mtx already acquired.
-  * Return: A reference to a freshly allocated and initialized protocol instance
-  *	   or ERR_PTR on failure. On failure the @proto reference is at first
-  *	   put using @scmi_protocol_put() before releasing all the devres group.
-@@ -2236,8 +2236,10 @@ scmi_alloc_init_protocol_instance(struct scmi_info *info,
- 	if (ret)
- 		goto clean;
- 
--	ret = idr_alloc(&info->protocols, pi, proto->id, proto->id + 1,
--			GFP_KERNEL);
-+	/* Finally register the initialized protocol */
-+	mutex_lock(&info->protocols_mtx);
-+	ret = idr_alloc(&info->protocols, pi, proto->id, proto->id + 1, GFP_KERNEL);
-+	mutex_unlock(&info->protocols_mtx);
- 	if (ret != proto->id)
- 		goto clean;
- 
-@@ -2284,27 +2286,25 @@ scmi_alloc_init_protocol_instance(struct scmi_info *info,
- static struct scmi_protocol_instance * __must_check
- scmi_get_protocol_instance(const struct scmi_handle *handle, u8 protocol_id)
+-	if (len > r_evt->evt->max_payld_sz) {
++	/*
++	 * Events with a zero max_payld_sz are sized to be of the maximum
++	 * size allowed by the transport: no need to be size-checked here
++	 * since the transport layer would have already dropped such
++	 * over-sized messages.
++	 */
++	if (r_evt->evt->max_payld_sz && len > r_evt->evt->max_payld_sz) {
+ 		dev_err(handle->dev, "discard badly sized message\n");
+ 		return -EINVAL;
+ 	}
+@@ -754,7 +760,7 @@ int scmi_register_protocol_events(const struct scmi_handle *handle, u8 proto_id,
+ 				  const struct scmi_protocol_handle *ph,
+ 				  const struct scmi_protocol_events *ee)
  {
--	struct scmi_protocol_instance *pi;
- 	struct scmi_info *info = handle_to_scmi_info(handle);
-+	const struct scmi_protocol *proto;
+-	int i;
++	int i, max_msg_sz;
+ 	unsigned int num_sources;
+ 	size_t payld_sz = 0;
+ 	struct scmi_registered_events_desc *pd;
+@@ -769,6 +775,8 @@ int scmi_register_protocol_events(const struct scmi_handle *handle, u8 proto_id,
+ 	if (!ni)
+ 		return -ENOMEM;
  
--	mutex_lock(&info->protocols_mtx);
--	pi = idr_find(&info->protocols, protocol_id);
--
--	if (pi) {
--		refcount_inc(&pi->users);
--	} else {
--		const struct scmi_protocol *proto;
-+	scoped_guard(mutex, &info->protocols_mtx) {
-+		struct scmi_protocol_instance *pi;
- 
--		/* Fails if protocol not registered on bus */
--		proto = scmi_protocol_get(protocol_id, &info->version);
--		if (proto)
--			pi = scmi_alloc_init_protocol_instance(info, proto);
--		else
--			pi = ERR_PTR(-EPROBE_DEFER);
-+		pi = idr_find(&info->protocols, protocol_id);
-+		if (pi) {
-+			refcount_inc(&pi->users);
-+			return pi;
-+		}
- 	}
--	mutex_unlock(&info->protocols_mtx);
- 
--	return pi;
-+	/* Fails if protocol not registered on bus */
-+	proto = scmi_protocol_get(protocol_id, &info->version);
-+	if (!proto)
-+		return ERR_PTR(-EPROBE_DEFER);
++	max_msg_sz = ph->hops->get_max_msg_size(ph);
 +
-+	return scmi_alloc_init_protocol_instance(info, proto);
- }
- 
- /**
-@@ -2335,10 +2335,11 @@ void scmi_protocol_release(const struct scmi_handle *handle, u8 protocol_id)
- 	struct scmi_info *info = handle_to_scmi_info(handle);
- 	struct scmi_protocol_instance *pi;
- 
--	mutex_lock(&info->protocols_mtx);
--	pi = idr_find(&info->protocols, protocol_id);
--	if (WARN_ON(!pi))
--		goto out;
-+	scoped_guard(mutex, &info->protocols_mtx) {
-+		pi = idr_find(&info->protocols, protocol_id);
-+		if (WARN_ON(!pi))
-+			return;
-+	}
- 
- 	if (refcount_dec_and_test(&pi->users)) {
- 		void *gid = pi->gid;
-@@ -2357,9 +2358,6 @@ void scmi_protocol_release(const struct scmi_handle *handle, u8 protocol_id)
- 		dev_dbg(handle->dev, "De-Initialized protocol: 0x%X\n",
- 			protocol_id);
+ 	/* num_sources cannot be <= 0 */
+ 	if (ee->num_sources) {
+ 		num_sources = ee->num_sources;
+@@ -781,8 +789,13 @@ int scmi_register_protocol_events(const struct scmi_handle *handle, u8 proto_id,
  	}
--
--out:
--	mutex_unlock(&info->protocols_mtx);
- }
  
- void scmi_setup_protocol_implemented(const struct scmi_protocol_handle *ph,
+ 	evt = ee->evts;
+-	for (i = 0; i < ee->num_events; i++)
+-		payld_sz = max_t(size_t, payld_sz, evt[i].max_payld_sz);
++	for (i = 0; i < ee->num_events; i++) {
++		if (evt[i].max_payld_sz == 0) {
++			payld_sz = max_msg_sz;
++			break;
++		}
++		payld_sz = max(payld_sz, evt[i].max_payld_sz);
++	}
+ 	payld_sz += sizeof(struct scmi_event_header);
+ 
+ 	pd = scmi_allocate_registered_events_desc(ni, proto_id, ee->queue_sz,
+@@ -811,7 +824,8 @@ int scmi_register_protocol_events(const struct scmi_handle *handle, u8 proto_id,
+ 		mutex_init(&r_evt->sources_mtx);
+ 
+ 		r_evt->report = devm_kzalloc(ni->handle->dev,
+-					     evt->max_report_sz, GFP_KERNEL);
++					     evt->max_report_sz ?: max_msg_sz,
++					     GFP_KERNEL);
+ 		if (!r_evt->report)
+ 			return -ENOMEM;
+ 
+diff --git a/drivers/firmware/arm_scmi/notify.h b/drivers/firmware/arm_scmi/notify.h
+index 76758a736cf4..ecfa4b746487 100644
+--- a/drivers/firmware/arm_scmi/notify.h
++++ b/drivers/firmware/arm_scmi/notify.h
+@@ -18,8 +18,12 @@
+ /**
+  * struct scmi_event  - Describes an event to be supported
+  * @id: Event ID
+- * @max_payld_sz: Max possible size for the payload of a notification message
+- * @max_report_sz: Max possible size for the report of a notification message
++ * @max_payld_sz: Max possible size for the payload of a notification message.
++ *		  Set to zero to use the maximum payload size allowed by the
++ *		  transport.
++ * @max_report_sz: Max possible size for the report of a notification message.
++ *		  Set to zero to use the maximum payload size allowed by the
++ *		  transport.
+  *
+  * Each SCMI protocol, during its initialization phase, can describe the events
+  * it wishes to support in a few struct scmi_event and pass them to the core
 -- 
 2.53.0
 
