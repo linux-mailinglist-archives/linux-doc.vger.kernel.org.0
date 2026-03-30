@@ -1,140 +1,125 @@
-Return-Path: <linux-doc+bounces-81795-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81797-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qDqvGIXpymkkBQYAu9opvQ
-	(envelope-from <linux-doc+bounces-81795-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 23:22:13 +0200
+	id mILWBLHwymkkBQYAu9opvQ
+	(envelope-from <linux-doc+bounces-81797-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 23:52:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 615AF36165C
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 23:22:12 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6234F3619FA
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 23:52:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 4BC50300D0D5
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 21:22:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 964CF300F512
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 21:46:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DF7B393DC0;
-	Mon, 30 Mar 2026 21:22:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A72A2382291;
+	Mon, 30 Mar 2026 21:46:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="TlMRVBcn"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="NjpM+ME9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2CAC325704;
-	Mon, 30 Mar 2026 21:22:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35F242C21D0;
+	Mon, 30 Mar 2026 21:46:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774905727; cv=none; b=oUmGZyWuibLH557+JPrQhIXa7d1SSsbbaprGSrl/Mkj0cXlyTPamcoyArlSvMG4M6Pip7LlNPx7h7QslC8ShKlEcPl82Ftie8Z8o4xZ2XH+flqc1bUrV4NRPFUegtHyaRw0mCR4lxU0MrtRUMqwzlu+PK9n9S72jXY3ZW3MSaRM=
+	t=1774907190; cv=none; b=nh1FJjsqvtmGkO8VuDNCtNUDnAEbFGtsWHo0UGxDYqZKxHOI4zUK01Fpc4ohkgHc2ILROZxbVMxHtVbOO0ETwO2NBxXeOOdzQfjXhZL8ntX1PWchV2tyaGWbiexSefJhS9S76NK+gs5VhUekXdrNARVX07YxmTzbkN/KYVaGQ98=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774905727; c=relaxed/simple;
-	bh=MEWRnboV2bNkwQiahJ5k+v6T4kmH5A38Tmwfekx5+Z8=;
-	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=IfzcYS/C7hkPrCH2OdBNyak5QZjx7KVTTLCC7EZVJYyqEud+twHPDQ6TQ1phwz4CEq3qYxhS4134A/U7a6862s/DBaQ//Aa+p3bW6EcSNqpprzCgl1ksAP0u9IYwolDfXLO2FGo3ew8Z4SMU2WfEPk/0W9OyLqd9IIwX2hRDbkU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=TlMRVBcn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA31FC4CEF7;
-	Mon, 30 Mar 2026 21:22:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-	s=korg; t=1774905726;
-	bh=MEWRnboV2bNkwQiahJ5k+v6T4kmH5A38Tmwfekx5+Z8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=TlMRVBcnpychpAEroWbQz7/sAYailQgoeMk8W8f0z1h/YGHYywR6Bt3lOAXDRsq0q
-	 A0jJ/r6ZD23d96zmJTcG5wWHOjnAu4ikN297Kfk3Kc6loPxpro/ziWHHloQMnFbS/P
-	 Y00IMW9Oh84qfrPXQfXH2tjBThYn173ju1hh6ZTo=
-Date: Mon, 30 Mar 2026 14:22:05 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: SeongJae Park <sj@kernel.org>
-Cc: Greg KH <gregkh@linuxfoundation.org>, "Liam R. Howlett"
- <Liam.Howlett@oracle.com>, "# 5 . 19 . x" <stable@vger.kernel.org>, David
- Hildenbrand <david@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Lorenzo
- Stoakes <ljs@kernel.org>, Michal Hocko <mhocko@suse.com>, Mike Rapoport
- <rppt@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, Suren
- Baghdasaryan <surenb@google.com>, Vlastimil Babka <vbabka@kernel.org>,
- damon@lists.linux.dev, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, Roman Gushchin
- <roman.gushchin@linux.dev>
-Subject: Re: (sashiko status) [PATCH 0/2] Docs/admin-guide/mm/damon: warn
- commit_inputs vs other params race
-Message-Id: <20260330142205.e7c7d7b47ec15a634f6eebf4@linux-foundation.org>
-In-Reply-To: <20260329193226.59025-1-sj@kernel.org>
-References: <2026032915-library-embolism-b48c@gregkh>
-	<20260329193226.59025-1-sj@kernel.org>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1774907190; c=relaxed/simple;
+	bh=ghvppbibQLhsu3h07tJ5l96HRuYjCm6y685Oi/Xia20=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=WNbyOYmARuUTdPVZUQNyfAGRtvGcxKox7e/fpnso0PxZFpZAibnr7mIs+wOm0Cr0oYmwnuLzm6+NhcvP8VnEVe7+kOsQ02aq9qYAlJ0RI8kSDrdzj1KJuOCmVvuS34/Yo9wRx4Bn3JQ8Tmdtk44o1OSvfN3YetcnGoXegPzjpu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=NjpM+ME9; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=FA1e0Kn8ZWXspSYjROcLzHkilUuEsXatN+MaWYMDcjA=; b=NjpM+ME9QNKpe36V0Kd/8hoKTA
+	Ik4tGco1emiFtAlWLj9+v2ArLWMhArFw641tXzXpEbboI2057owBnLprbt4MTUvNZp7kRaQPeUg2N
+	rc3F09CK+grtb5m9/iPNkiMM3OMiVVkEIbxwnrXowL+dmjD4025c6YVxaLglybJYYEn646kz3S4t+
+	KB4sKImXB8GOiOyLaGSW+dMfTet1xS/dW3gEKEK01AhsgqInXLd+fStnejQgNOo/FW27vvf22YusP
+	j+U2mDs9/qMb5cQbyQp+NHG6dh3yUdz1t/mLinqZXfbFqTfJefeyttKufoSneKJqJP2mRRyVNTFNN
+	akUbydXQ==;
+Received: from [50.53.43.113] (helo=bombadil.infradead.org)
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1w7KRF-0000000BvS6-3iaX;
+	Mon, 30 Mar 2026 21:46:25 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Cc: Randy Dunlap <rdunlap@infradead.org>,
+	Sergio Melas <sergiomelas@gmail.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH -next] hwmon: (yogafan) fix markup warning
+Date: Mon, 30 Mar 2026 14:46:24 -0700
+Message-ID: <20260330214624.3781789-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MV_CASE(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81795-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[linux-foundation.org];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	FREEMAIL_CC(0.00)[infradead.org,gmail.com,roeck-us.net,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-81797-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sashiko.dev:url]
-X-Rspamd-Queue-Id: 615AF36165C
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:dkim,infradead.org:email,infradead.org:mid,roeck-us.net:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 6234F3619FA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, 29 Mar 2026 12:32:26 -0700 SeongJae Park <sj@kernel.org> wrote:
+Add a blank line between the License and heading lines to prevent a
+documentation build warning:
 
-> On Sun, 29 Mar 2026 20:05:53 +0200 Greg KH <gregkh@linuxfoundation.org> wrote:
-> 
-> > On Sun, Mar 29, 2026 at 08:49:16AM -0700, SeongJae Park wrote:
-> > > Forwarding sashiko.dev review status for this thread.
-> > > 
-> > > # review url: https://sashiko.dev/#/patchset/20260329153052.46657-1-sj@kernel.org
-> > 
-> > Why are you doing this?  If we want to see the review, can't we just go
-> > and look at the tool itself?
-> 
-> We can.  But it is bit cumbersome to opening web browser and moving my focus to
-> there.  Reading everything on the mailing tool is easier for some people like
-> me.  Like some test bots send reports are replying to patches, or we sometimes
-> forwarding bugzilla reports to mailing lists in a form of a plain text mail.
-> 
-> Secondly, I have to share my opinions about the reviews, as many times AI
-> reviews need human's opinions.  There is no good way to do that on the web ui
-> of the tool (sashiko) for now, and I think this mail based flow is the best.
+Documentation/hwmon/yogafan.rst:2: WARNING: Explicit markup ends without
+  a blank line; unexpected unindent. [docutils]
 
-I do agree with Greg that it's all a bit excessive.  Thanks for your
-your diligence, but perhaps dial it back a bit?  It's OK - we're all
-trying to figure out how best to utilize this tool.
+Fixes: b773f2e6b472 ("hwmon: (yogafan) Add support for Lenovo Yoga/Legion fan monitoring")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+---
+Cc: Sergio Melas <sergiomelas@gmail.com>
+Cc: Guenter Roeck <linux@roeck-us.net>
+Cc: linux-hwmon@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
 
-I view Sashiko as primarily an author tool.  Sometimes I call it
-checkpatch++.  In a better world, author would be able to sort out
-Sashiko issues before ever sending out the patchset.  But in this
-world, a public send is needed to obtain that review.
+ Documentation/hwmon/yogafan.rst |    1 +
+ 1 file changed, 1 insertion(+)
 
-So what we're presently seeing is author development activity which is
-unfortunately and inappropriately being conducted on a public list.
-
-Personally, I pay only a little attention to author's Sashiko activity.
-Just enough to see whether I should pay more attention.  If author
-says "oops, let me redo" then fine, I'll await the next spin.  If
-author says "that was all nonsense" then fine, time to take a closer
-look.
+--- linux-next.orig/Documentation/hwmon/yogafan.rst
++++ linux-next/Documentation/hwmon/yogafan.rst
+@@ -1,4 +1,5 @@
+ .. SPDX-License-Identifier: GPL-2.0-only
++
+ ===============================================================================================
+ Kernel driver yogafan
+ ===============================================================================================
 
