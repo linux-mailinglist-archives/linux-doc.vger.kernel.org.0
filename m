@@ -1,276 +1,155 @@
-Return-Path: <linux-doc+bounces-81732-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81734-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4KWlOD1Cymky7AUAu9opvQ
-	(envelope-from <linux-doc+bounces-81732-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 11:28:29 +0200
+	id MDRgGAZHymkQ7QUAu9opvQ
+	(envelope-from <linux-doc+bounces-81734-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 11:48:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AD5B358305
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 11:28:29 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BD91D35886A
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 11:48:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 5B02A300C0CA
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 09:28:23 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 836083055C6D
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 09:40:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F03603B3BE3;
-	Mon, 30 Mar 2026 09:28:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8336F299923;
+	Mon, 30 Mar 2026 09:40:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RqYuHeQ2"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="CMg5soou"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 779B33B2FD5
-	for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2026 09:28:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0861C3815C0
+	for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2026 09:40:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774862897; cv=none; b=LZP33lAyR/eiZYVRVeAXT61b1nuFmwS0QsUYzWg1YoUpiX3gLE0VxDqqgZ61h0v0B7B57soo5fm1fmWT84W5n4mA49MYYG5TxVD9DNUNW/fhpoA7ysf3agt866uKju0mjeDt8emo8ZsayDztxJcyhHJPgkEj7XMs2OvAHoFTtLY=
+	t=1774863608; cv=none; b=b14fQYcahHqkhg9BH8U+Xm4UrWf5GEJVhGpDJT3mhDq8I/bzDHG3EjtxnEZqZSwHupFPxAVYE9Q/48e4oREfctaHU0vqiSQovyTG5KCKIMn/knpYbetkP30EAzhRZUT51ce1kz9k3xoH3FpqbqiwwhRPsAxknCZecr65sLuiFGs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774862897; c=relaxed/simple;
-	bh=A0pfCojUiGgrrf0Ej5R1kBaQcEv947GaCDZ90NppBa8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iooAM7c/v5vfOGqkfCeJQG5NJQsKmm/Goc9PwgdSBfxYazUCQ1NAeLNed+Eb5qC44148f4ma4vO0R19PZCXhMbBCnDyupiVfVf5hI+Xazb/8AADUngmlPjSTe9J24iQC+wUmcz3MjP4/nxjTaRQdfV1HxJWTFd0NEqRz+gmM6Ww=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RqYuHeQ2; arc=none smtp.client-ip=209.85.128.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4852a9c6309so35304165e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2026 02:28:16 -0700 (PDT)
+	s=arc-20240116; t=1774863608; c=relaxed/simple;
+	bh=qql13zPiiqEd2+a2raSu6JfK6cJR0XNhUjqEei7E4jk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=tTR6B5zGDuOJcEfX+jYDvFq1fWc+nQImVZzYKb4ebJjWyaF99oqXDNPH5RfTbJaN8MqDks6y4PGN9RO5cQUxRzEWQEP+c2iPpavqaNCWFrekrWl9rKp3vsmskdeSAnGRm+12r3t4cwJOmPk9EliVGeQELcAWnJBbpFAAYQOUGXM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=CMg5soou; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4836fc075d2so6522185e9.0
+        for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2026 02:40:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774862895; x=1775467695; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=3zDHIQyb3IezUESO9F09MAim9FoAsOYTRYDFkmxzVFg=;
-        b=RqYuHeQ2zIlSNVIp8Y01sDKtexz5NJFxXDwwOWBCgszHinnN4Z6/AMcNkBLcWbigFn
-         OXY8/eVUs/bkVcNDvMJlHzG5ZHfIIux8kCXkFXJv6CNVckuazEgO6KLX2qe3IYUHsX4c
-         t8gjAvpYHbbyt2MWTK7717BHmVI9u8WhTcMDvNtN7gwhCHKEzoSpvPKa5Ra79xGJWsDg
-         sPAaMwlVl6IaItM3tynUcu6m4jdFSTaWDJ9X+VW4N73b6pp2fo6oEOkdY8utKBA0gM+w
-         x9wWINUCYasrsN1eyIyuy/pxjHHeZz6ACik8eHIMcNsVRucUQO1fAoHUWGSjMi5yDzAX
-         BbFg==
+        d=suse.com; s=google; t=1774863605; x=1775468405; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=3Pz5WjDNwODkGCTD7FY1PbGzbLHarF5Y8FutE1r5Is4=;
+        b=CMg5sooukPmqQOLoelhyhwkpI/0NhlOgimSIaOHXBzJJJ3xgdNjWOw76pCzuKh4Oh6
+         zRGM9q1oYd8o8DA7gOqzHRCgx/iXrKvMWMncxy/anLD6DJXdWyHGjGbtaqsXRZoflFG+
+         HtwyhTMXTYNQpq5IyepV9aQ+5/K+456kSrNJIP3GsypDY+86A6QII6MYI6v1NCjWsC//
+         ftcoEi+KZXZwbAgQML0w6EzF8mN2xchI2iwG7hR29Yh3dQuShAutF3IOJQWGMp2hh1r0
+         02UyEvAoinPITYFisl8zH0tfg342F52Dm9ezgHrShIBeflSOcSbs9BdLCSCE/EkXt9d/
+         TV5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774862895; x=1775467695;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3zDHIQyb3IezUESO9F09MAim9FoAsOYTRYDFkmxzVFg=;
-        b=Q1xINOFEbkU2hvj5wNvPNaAzJudtibpQ3FeADGCvKsXwCM/1pVUiMZeEXyte5iF5vi
-         nTKIk3asXvaxv1KEL17ECPGFHuk72KkMKDta2KH5mgDigndvmZI+a3R6xsiMF25VdDXz
-         6cNyJT1BI7p4oobHs3A0aJ8myWIUvyX31fBB2EZ64fPBMGurB0J9Q068QCxvC25zyDhV
-         ydN/0mdOle39Vzy79EqpeDo6pdwuFMQpiT9tqYM1JqrCVvGcR6wZtgUpTeDpDouBVsXq
-         RKvUcZI6usVWmpIQOK3xfyBf1bE+ksosbXLdiQKF40FW9E5gQG12HIBlI1nWACL3hBUb
-         i08w==
-X-Forwarded-Encrypted: i=1; AJvYcCUU6lWtkdPoksfw1UmQW8diUfzjhfAf819WtC8qo9kNU0zKWYEghsg6uqVOHErMn4PD/gf2+dyH+vI=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyyk5pijqqbLhyBiQgjJUEtMcj1baUviy3eFi8R7zOrtt668BFE
-	AkqkHoGVCYLbWAxp8cJVDvd+qYYXnFF9SxO9Oj3zRNDzfOSh7uxFa6Wv
-X-Gm-Gg: ATEYQzwjOg7ueZDAoH5lMudoWJrIQ/ww9CUOFXdK3OGUCKSu99vZL7pgeZTJcxVieI3
-	QPeEC17yMF4uG4ZhG2hyUGSSXOSNhY5pZNg7KwYlgDHIMVL4A25aB6iZt2AaFuiXzl8qexO+PMS
-	n2JK1k+B4FIAzvWWLVd3gH8t0HkdIag6Qhe383fVOCPEhCtjw1Cyx4P9Oz3gARxg7qyP4v/S0h9
-	VK0caNMzpKEgGHReyUFNf5KVcxC/AM0oqewYPEFcFMSeOUTBVuRf3YZykvcEY9njLN9hifMoRBX
-	g4kNYyT4rPghM3unzVf5wA6YnJgTcJqo/d4K9zPx0fi7cpCBCsg2xIvtXIH971C+Lo26HxMMHr7
-	o8a8lQJM34LvQMgDm8sRl+Iv7JK6XkbGKrESKDlCIzbeiBckDA6s2QpjrLpZw1WR9Ygd0/IGUOg
-	f7/WXTedAWyD+Z
-X-Received: by 2002:a05:600c:83c5:b0:477:7af8:c8ad with SMTP id 5b1f17b1804b1-487280a25c4mr210099595e9.31.1774862894489;
-        Mon, 30 Mar 2026 02:28:14 -0700 (PDT)
-Received: from nsa ([45.94.208.97])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4873ab203e9sm74265215e9.0.2026.03.30.02.28.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2026 02:28:14 -0700 (PDT)
-Date: Mon, 30 Mar 2026 10:28:59 +0100
-From: Nuno =?utf-8?B?U8Oh?= <noname.nuno@gmail.com>
-To: Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>
-Cc: linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Guenter Roeck <linux@roeck-us.net>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
-Subject: Re: [PATCH v8 2/3] hwmon: ltc4283: Add support for the LTC4283 Swap
- Controller
-Message-ID: <aco5L_6SZIB2DdpF@nsa>
-References: <20260327-ltc4283-support-v8-0-471de255d728@analog.com>
- <20260327-ltc4283-support-v8-2-471de255d728@analog.com>
+        d=1e100.net; s=20251104; t=1774863605; x=1775468405;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3Pz5WjDNwODkGCTD7FY1PbGzbLHarF5Y8FutE1r5Is4=;
+        b=Lw/NwxTAmEHY4zGxYssdsZ9doUltd+RwqzXW670cP2zQoW1XTnCEftZBjp8QzYacgO
+         OKxSGSmEninFq9KwBhtNlYXU8au4PngZlyNAA8141Jb7f0L10JNbL3Mqh77Tv2FqRhtV
+         m4zrYFGl0eYoKEucG5iqoyT3kSpybAzWXOmI+SbU34Dbb8Zmcq7H24Zu76KyTI/0QcJz
+         dA7SzUS94HM8tHdceHAUAogEqXJAabJHXQ+hceCxU/FLvfhZ9QSE1bvUOpPiyWz+wZY8
+         ilKVl2shlcIHdixVm3nrVPDrK+wwYHrsxttrIDM9JdOOh8bJbKEzkd6b9Gh4PEik6nvp
+         gAyw==
+X-Forwarded-Encrypted: i=1; AJvYcCWLTCbkBVTjGzjHKxQFGF60xeKM0Yi8xzsyuGkFBpXP8WCamTyspwfcL+T58H9NYHju9crnCzlNS2k=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyFy5jf/byLsrWRAWLmcUmlH6OUxIvtLWhlxiZRa2UAfM0a/Rb+
+	SrpwrHsAAtJsa0Ybzv64ycXOesjAVqSSVBMaSXh9VD5h1C2iW7eoa1NIDWwERAE2vgY=
+X-Gm-Gg: ATEYQzy6xuiTlOi0zmzmLZ8X7cfCRA4SBw82Vi+DiL2/Rxk5NxyGRC3NDC5hDb8GKFO
+	SAa9ipZ+If8BgAT1f3/KHHSegspT1WTEm0pLGc+7jiWOecjp8QGUashes2363UX1MhPA73u+MdS
+	3eGSsx8xJ+/1N1g46OM2A5nLGvWwP4IrGamWnoBfOhmtjAitEJrGdvopUH1fwFnzHN1mM0E/BAd
+	8oKVg0UP+vedkuhUr3mxJRGhlaGbxi4E1dYycx1P8hSMSCxpPl7aVsNwaXUOJwtN7YTDY4GkfD3
+	BKpGHbqBX+2jVdEh8hmECyENr/EVGXuIUCW5U8RmYl24AJvDf0gBVpdJdGhlQjcHHZFjfnPYgxB
+	+XjU7K67KVtncs7rwTny1HlprD5ZHeEBkt0A+xC8deczlSnGMrakCIScxFQrOlihaeimRubvJr2
+	cbAewI3SwnLqiqNbOeEIowagjcpVtYa+lTZ2b20mAoQwYm6dRbKgIMN03gMiqyFkA9ybUc
+X-Received: by 2002:a05:600c:3511:b0:487:575:5e3 with SMTP id 5b1f17b1804b1-48727f5a798mr109936905e9.5.1774863605305;
+        Mon, 30 Mar 2026 02:40:05 -0700 (PDT)
+Received: from ?IPV6:2001:1a48:8:903:1ed6:4f73:ce38:f9d4? ([2001:1a48:8:903:1ed6:4f73:ce38:f9d4])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-487270f1943sm96676395e9.7.2026.03.30.02.40.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 30 Mar 2026 02:40:04 -0700 (PDT)
+Message-ID: <942f53b9-d8a9-4730-a88f-464f54d5c868@suse.com>
+Date: Mon, 30 Mar 2026 11:40:03 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260327-ltc4283-support-v8-2-471de255d728@analog.com>
-X-Spamd-Result: default: False [-0.16 / 15.00];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] checkpatch: allow correctly handle full files on stdin
+Content-Language: en-US
+To: Joe Perches <joe@perches.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>,
+ Lukas Bulwahn <lukas.bulwahn@gmail.com>, Andy Whitcroft <apw@canonical.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <acTPXMJfkHLeItrK@google.com>
+ <bb47800754aa3279e88c9d88c380bcfe6263fb2d.camel@perches.com>
+ <acVIBseRrqJI8Uwb@google.com>
+ <117b6a4c164a9f0ce348044152d00ac22b31b81b.camel@perches.com>
+ <acWnbG3nGjfYeYXh@google.com>
+ <34318752a257b0f6b530eacf53d565de1ac84485.camel@perches.com>
+ <acW6Iar6XOzO9IfN@google.com>
+ <f4dcaecb682c4eaa271abfee27c7cc8f6fbf7d1d.camel@perches.com>
+From: Vlastimil Babka <vbabka@suse.com>
+In-Reply-To: <f4dcaecb682c4eaa271abfee27c7cc8f6fbf7d1d.camel@perches.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81732-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[gmail.com,canonical.com,lwn.net,linuxfoundation.org,vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_TO(0.00)[perches.com,gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-81734-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[suse.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nonamenuno@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_NEQ_ENVFROM(0.00)[vbabka@suse.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,analog.com:email]
-X-Rspamd-Queue-Id: 8AD5B358305
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: BD91D35886A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Guenter, Regarding AI review, I think most of the points were
-discussed in previous revisions, but there are two valid.
-
-On Fri, Mar 27, 2026 at 05:26:15PM +0000, Nuno Sá wrote:
-> Support the LTC4283 Hot Swap Controller. The device features programmable
-> current limit with foldback and independently adjustable inrush current to
-> optimize the MOSFET safe operating area (SOA). The SOA timer limits MOSFET
-> temperature rise for reliable protection against overstresses.
+On 3/27/26 00:19, Joe Perches wrote:
+> On Thu, 2026-03-26 at 16:04 -0700, Dmitry Torokhov wrote:
+>> In all seriousness, if you will not make use of this mode it's fine. But
+>> it allows keeping the source cleaner as one makes edits, so why not
+>> enable this?
 > 
-> An I2C interface and onboard ADC allow monitoring of board current,
-> voltage, power, energy, and fault status.
-> 
-> Signed-off-by: Nuno Sá <nuno.sa@analog.com>
-> ---
->  Documentation/hwmon/index.rst   |    1 +
->  Documentation/hwmon/ltc4283.rst |  266 ++++++
->  MAINTAINERS                     |    1 +
->  drivers/hwmon/Kconfig           |   12 +
->  drivers/hwmon/Makefile          |    1 +
->  drivers/hwmon/ltc4283.c         | 1796 +++++++++++++++++++++++++++++++++++++++
->  6 files changed, 2077 insertions(+)
->
+> Unnecessary complication.
 
-...
+Are you maintaining a tool that you want to be useful to others, or to only
+do stricly what you personally think is necessary?
 
-> +static int ltc4283_read_in_alarm(struct ltc4283_hwmon *st, u32 channel,
-> +				 bool max_alm, long *val)
-> +{
-> +	if (channel == LTC4283_VPWR)
-> +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_1,
-> +					  BIT(2 + max_alm), val);
-> +
-> +	if (channel >= LTC4283_CHAN_ADI_1 && channel <= LTC4283_CHAN_ADI_4) {
-> +		u32 bit = (channel - LTC4283_CHAN_ADI_1) * 2;
-> +		/*
-> +		 * Lower channels go to higher bits. We also want to go +1 down
-> +		 * in the min_alarm case.
-> +		 */
-> +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_2,
-> +					  BIT(7 - bit - !max_alm), val);
-> +	}
-> +
-> +	if (channel >= LTC4283_CHAN_ADIO_1 && channel <= LTC4283_CHAN_ADIO_4) {
-> +		u32 bit = (channel - LTC4283_CHAN_ADIO_1) * 2;
-> +
-> +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_3,
-> +					  BIT(7 - bit - !max_alm), val);
-> +	}
-> +
-> +	if (channel >= LTC4283_CHAN_ADIN12 && channel <= LTC4283_CHAN_ADIN34) {
-> +		u32 bit = (channel - LTC4283_CHAN_ADIN12) * 2;
-> +
-> +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_5,
-> +					  BIT(7 - bit - !max_alm), val);
-> +	}
-
-"Will this condition handle the ADIO12 and ADIO34 differential channels?
-It looks like channels 14 and 15 fall through to the default return intended
-for the DRAIN channel. Since reading the alarm implicitly clears the register
-bits, could reading these ADIO alarms unintentionally clear actual DRAIN
-alarms? Should the upper bound be LTC4283_CHAN_ADIO34?"
-
-Good catch and should be:
-
--       if (channel >= LTC4283_CHAN_ADIN12 && channel <= LTC4283_CHAN_ADIN34) {
-+       if (channel >= LTC4283_CHAN_ADIN12 && channel <= LTC4283_CHAN_ADIO34) {
-
-> +
-> +	if (channel == LTC4283_CHAN_DRNS)
-> +		return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_4,
-> +					  BIT(6 + max_alm), val);
-> +
-> +	return ltc4283_read_alarm(st, LTC4283_ADC_ALM_LOG_4, BIT(4 + max_alm),
-> +				  val);
-> +}
-
-...
-
-> +
-> +static int ltc4283_probe(struct i2c_client *client)
-> +{
-> +	struct device *dev = &client->dev, *hwmon;
-> +	struct auxiliary_device *adev;
-> +	struct ltc4283_hwmon *st;
-> +	int ret;
-> +
-> +	st = devm_kzalloc(dev, sizeof(*st), GFP_KERNEL);
-> +	if (!st)
-> +		return -ENOMEM;
-> +
-> +	if (!i2c_check_functionality(client->adapter,
-> +				     I2C_FUNC_SMBUS_BYTE_DATA |
-> +				     I2C_FUNC_SMBUS_WORD_DATA |
-> +				     I2C_FUNC_SMBUS_READ_I2C_BLOCK))
-> +		return -EOPNOTSUPP;
-> +
-> +	st->client = client;
-> +	st->map = devm_regmap_init(dev, &ltc4283_regmap_bus, client,
-> +				   &ltc4283_regmap_config);
-> +	if (IS_ERR(st->map))
-> +		return dev_err_probe(dev, PTR_ERR(st->map),
-> +				     "Failed to create regmap\n");
-> +
-> +	ret = ltc4283_setup(st, dev);
-> +	if (ret)
-> +		return ret;
-> +
-> +	hwmon = devm_hwmon_device_register_with_info(dev, "ltc4283", st,
-> +						     &ltc4283_chip_info, NULL);
-> +
-> +	if (IS_ERR(hwmon))
-> +		return PTR_ERR(hwmon);
-> +
-> +	ltc4283_debugfs_init(st, client);
-> +
-> +	if (!st->gpio_mask)
-> +		return 0;
-> +
-> +	adev = devm_auxiliary_device_create(dev, "gpio", &st->gpio_mask);
-> +	if (!adev)
-> +		return dev_err_probe(dev, -ENODEV, "Failed to add GPIO device\n");
-
-"Does this allow multiple LTC4283 chips to probe successfully?
-Without allocating a unique ID per I2C instance, it seems the first probed
-chip takes the generic name. If a second chip is present, it might attempt
-to register with the exact same name, resulting in a failure in device_add()
-and aborting the probe."
-
-Also looks valid and I suspect is one of those that a quick look will
-find more "offenders". I would purpose:
-
--       adev = devm_auxiliary_device_create(dev, "gpio", &st->gpio_mask);
-+       adev = __devm_auxiliary_device_create(dev, KBUILD_MODNAME, "gpio",
-+                                             &st->gpio_mask, client->addr);
-
-If there's nothing else and you agree with the above, is this something
-you can tweak while applying or should I spin a new version?
-
-Thanks!
-- Nuno Sá
-
+I don't understand your objections to this rather straightforward patch, it
+doesn't look like a maintenance burden to me?
 
