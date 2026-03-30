@@ -1,66 +1,66 @@
-Return-Path: <linux-doc+bounces-81781-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81782-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +LpFLw2nymmx+gUAu9opvQ
-	(envelope-from <linux-doc+bounces-81781-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 18:38:37 +0200
+	id GLWuC/qnymmx+gUAu9opvQ
+	(envelope-from <linux-doc+bounces-81782-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 18:42:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3019F35EE82
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 18:38:37 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 558D035EF3F
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 18:42:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 78195300BDB5
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 16:36:11 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 63C503009E2C
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 16:38:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B0A7E3815EC;
-	Mon, 30 Mar 2026 16:36:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C742F377017;
+	Mon, 30 Mar 2026 16:38:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="QulHzJsM"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="QFg4ZRE0"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EC0B199D8;
-	Mon, 30 Mar 2026 16:36:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EBD9375F67;
+	Mon, 30 Mar 2026 16:38:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774888570; cv=none; b=e0xnNd9IzEMKXt47vOeG4HLrCTaHdTuhwtU+6tEyg9HpPmigBRz6ivXu8XH0+cTTr4Nm6aqMaSObw6Go06vi8XmiQs5IA3l7etBs8oXGxGrVStAYOXVdAhrhDpw+7+C1dNug2sA2aCA8usUS3aycuIWfhOLlPpQI8GBQOjaSf6Y=
+	t=1774888729; cv=none; b=WQMDJCQRNND4tyTNtDcMeQlS5JaTr0Kg1lHy+5lNLiZHJBd9nkv894U5haLttd1ih+utrfQTWPd40JX+V/6HK3fQ6oKyOiTSF2NBybtYwb+/1U7TH/xCQeYJ58SwO/ZXV8gcSJKFIAd/sbQXWdg3JSdQ/6Q18rY5fm7Djyf1jVI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774888570; c=relaxed/simple;
-	bh=3qetewScn/TQCYpBjuo9uD3rRuvaLSTRDn3UEeFHvfs=;
+	s=arc-20240116; t=1774888729; c=relaxed/simple;
+	bh=eqf4wl5nJrzNSuy0eLwpisx96mByCY62+MYEJAfKnYA=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=KdH4c7lc2JSNcVu1NppTDkPIbDs/CwZJEPIFForGE2i3d5rQrVOCn7/2TPIuEK6qFq238l8OKipcu7oL1tob6Gqq3WN5KfaP5yZJsGn805vXMTByUk/rgDDsBE95K07jIORZF+Cp3AJpf+upR/NxUu4UUW9gnrW8GgRQ8l6l9+E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=QulHzJsM; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=Pi6kuR1KE8Ntl2O0HIrVHQsU89maju+8PVQC62g4EEALglS5Cx1QGJ5PfwNiiI52ZRXuyxQAK2Cbq9yV19AAWjPQtr5m1cNu/7jvnifxEdTh4yp549PVw39hpgu5kjdt1aTqoZIePoJOUaOv2TIwGFhMneZ/bL81mXHkkCoimFw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=QFg4ZRE0; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net C151A411C2
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net DE8F44121F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1774888568; bh=NCoj7HdnGdo5RhRTBvbSwlXWfM7DgnKeEjKlMQGRTG8=;
+	t=1774888728; bh=QAODc0DJ1dpKUOTyKqjdOqOkYk0TlP2tdUs2dsYSvU0=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=QulHzJsMT7tWkQwTnS+GDq2iNm+WZqxSw7Vk3AvYsAgrcnYriLzMuLADj9dmoFUPI
-	 QK7TrS5NqDNmzcSUbQ10ANdHdi2boE/y6CgD2SSa1K4YQ06H2gwvmli4uX/x44gdZv
-	 WAOdjoMt4BUVPXNsDsjg4N2QlqOYhNPMz+nzYqzNu0RTK5E7Ad8CF7hp/tubFGCFhG
-	 9c4TYgJkQ3EL7f9PHA46tFSjjpQ7R2iweFBE1hFfTVrxho6gj4rT8jZ9LD7tYZsHaY
-	 eQW7Y4cKPuqyT0nH7loRfkrig1oT/1ZIVwQk97wWiPmzzw3amrqYbhjCalvKhRzFqY
-	 FosZsf67NhNsA==
+	b=QFg4ZRE0c1b57o0Fwvoo0jMqCZ0qlRuYEp/KvdzsrYZ3PF5GJvJ+KggWd3NrFbAd+
+	 MmgXYNFObv0FwLmH89rt+Wb8x5giEjlrcTRa6TtD+G8dxbfTDF6BHz7ho61G2g9Mut
+	 w4L3kNPM+3DtaRYrgziLyNrv5Oy9lOwM6Bhfzt7X5yq8ax9rfNknh9IlAMhYdwnAh6
+	 ZHpLnUSlpaD1ryJaQgmrgogePvtaV7f9TjhW3q6O1wthd55yWxed5CiCHLBBZ25fK7
+	 t2OpQ/7Idd0e3xjLVi63/oNZnsUSIEFqxnse3yuGO8yq3fxnaeEMR0NjeYKDR33qyk
+	 5RUPwc2N875BA==
 Received: from localhost (mdns.lwn.net [45.79.72.68])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id C151A411C2;
-	Mon, 30 Mar 2026 16:36:08 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id DE8F44121F;
+	Mon, 30 Mar 2026 16:38:47 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
 To: Manuel Ebner <manuelebner@mailbox.org>, Collin Funk
  <collin.funk1@gmail.com>, Shuah Khan <skhan@linuxfoundation.org>
 Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, Manuel Ebner <manuelebner@mailbox.org>
-Subject: Re: [PATCH v5 1/2] workflows, scripts: harmonize and cleanup
-In-Reply-To: <20260325194616.78093-2-manuelebner@mailbox.org>
+Subject: Re: [PATCH v5 2/2] workflows, scripts: sort ver_linux and changes.rst
+In-Reply-To: <20260325194811.78509-2-manuelebner@mailbox.org>
 References: <20260325194326.77923-2-manuelebner@mailbox.org>
- <20260325194616.78093-2-manuelebner@mailbox.org>
-Date: Mon, 30 Mar 2026 10:36:07 -0600
-Message-ID: <87bjg5nuko.fsf@trenco.lwn.net>
+ <20260325194811.78509-2-manuelebner@mailbox.org>
+Date: Mon, 30 Mar 2026 10:38:46 -0600
+Message-ID: <877bqtnug9.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -73,12 +73,12 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81781-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81782-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_TO(0.00)[mailbox.org,gmail.com,linuxfoundation.org];
@@ -86,7 +86,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lwn.net:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
@@ -98,48 +98,41 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,trenco.lwn.net:mid,lwn.net:dkim,lwn.net:email]
-X-Rspamd-Queue-Id: 3019F35EE82
+	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,lwn.net:dkim,lwn.net:email,mailbox.org:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 558D035EF3F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 Manuel Ebner <manuelebner@mailbox.org> writes:
 
-> cleanup and harmonize output of scripts/ver_linux and table in changes.rst
->
-> ver_linux:
-> fix path to changes.rst
-> Add missing tools in ver_linux
->  bash, bc, bindgen, btrfs-progs, Clang, gdb,  GNU awk, GNU tar,
->  GRUB, GRUB2, gtags, iptables, kmod, mcelog, mkimage, openssl,
->  pahole, Python, Rust, Sphinx, squashfs-tools
->
-> changes.rst:
-> add reference to ./scripts/ver_linux
-> needn't -> do not need to
-> add gdb version 7.2 as mentioned in:
->  Documentation/process/debugging/gdb-kernel-debugging.rst
->  scripts/gdb/vmlinux-gdb.py
+> sort output of scripts/ver_linux alphabetically
+> sort list in changes.rst alphabetically
 >
 > Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+> ---
+>  Documentation/process/changes.rst | 52 ++++++++++++-------------
+>  scripts/ver_linux                 | 64 +++++++++++++++----------------
+>  2 files changed, 58 insertions(+), 58 deletions(-)
 
-Applied, but the changelog now reads:
+Changelog is now:
 
-docs: changes/ver_linux: fix entries and add several tools
+docs: changes.rst and ver_linux: sort the lists
 
-Some of the entries in both Documentation/process/changes.rst and
-script/ver_linux were obsolete; update them to reflect the current way of
-getting version information.
-
-Many were missing altogether; add the relevant information for:
-
- bash, bc, bindgen, btrfs-progs, Clang, gdb,  GNU awk, GNU tar,
- GRUB, GRUB2, gtags, iptables, kmod, mcelog, mkimage, openssl,
- pahole, Python, Rust, Sphinx, squashfs-tools
+Sort the lists of tools in both scripts/ver_linux and
+Documentation/process/changes.rst into alphabetical order, facilitating
+comparison between the two.
 
 Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
 [jc: rewrote changelog]
 Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+
+As an additional note...what would be Really Nice would be to have a
+single list of tool dependencies that could be automatically used by
+both files.  An additional bonus would be a mode in script/ver_linux to
+only report on tools that are missing or below the required version.  A
+guy can dream...:)
+
+Thanks,
 
 jon
 
