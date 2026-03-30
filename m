@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-81766-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81769-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KNIgHIuWymkR+QUAu9opvQ
-	(envelope-from <linux-doc+bounces-81766-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 17:28:11 +0200
+	id uAiwAp+UymnF+AUAu9opvQ
+	(envelope-from <linux-doc+bounces-81769-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 17:19:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C725535DD1B
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 17:28:10 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F92835DACA
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 17:19:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DCF24303EEAE
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 15:17:24 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id AB8953013467
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 15:17:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE92433F587;
-	Mon, 30 Mar 2026 15:17:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1FC1B340A51;
+	Mon, 30 Mar 2026 15:17:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="DdXZZLaV"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="lZdT4FAX"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C947E2F25F0
-	for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2026 15:17:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1BE933FE09
+	for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2026 15:17:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774883842; cv=none; b=hC1LTpEqSaQirt0nRQy9aHtbkca91PNXyNI0Ih8xGxtpZha4cBUoSCEgo2SEH2obBzMk5Lejw0Z0CnCbILDluGbxuZAxiPpalRzIFjADD3Z/MEoKZeQrn9P2uXRlDn+4wr3ELgQYGiu6CgQOEoUFhQfLEFf0dHoy6lYnFpwk6/M=
+	t=1774883844; cv=none; b=MPGSFMc0TND+Wmk4elzYK0iJoKJhU8DDL94NYl3yammjn/DXxLQXGCvjlKjVRNbp0u6feoUr4yhoPVH4qsmMdaXiOdQfcns1B+bq58qMjqwkdP1arSJyl5GIjNCOMZkZRv9w5ppmrWIXXpkJCmyo8VZ9QeTCZrp9zH50kRaxLk8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774883842; c=relaxed/simple;
-	bh=2wFihfL/44XcAEfBCnwRd1W9aOt0YKtdzb6VECUt7RM=;
+	s=arc-20240116; t=1774883844; c=relaxed/simple;
+	bh=OWlFttQ/yqiN+3z3z+6Q1ubbICbGciUa63y+9JRjPYM=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=uUDM9vKr9LcLrWa557tj5/7W6QTI4XriO8jZTsX8Hkoeo1svIEUDQ5YAum36xhAsjHAr77UMLo995xBEjBPCTnBQcobaHot8jhmN5DJ1zL1sUP/QcvR5VYMmSkMbfepjyirNjiPFhtOsWBniRB0KtTV3pyBAB+I5nh8xHLppSpc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=DdXZZLaV; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 379E6C4CEF7;
-	Mon, 30 Mar 2026 15:17:22 +0000 (UTC)
+	 References:Date:Message-Id; b=P+Jfnee30xkZjkrnMpQsv4pHHRL7xnmBcpAAgN+qcatclM+3ukPmwunIuj7dX9fU+Cvm7Y2lYhkl29a5c62rMMbWYCnQQLDC3qVTNG8bJ/nT3sv73mbxGbSDuTxH8JaSZSf0uCAhVXlOcQHgdK3K30BcbG5ThwwfVBTgOc/nIWI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=lZdT4FAX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AADDC19423;
+	Mon, 30 Mar 2026 15:17:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1774883842;
-	bh=2wFihfL/44XcAEfBCnwRd1W9aOt0YKtdzb6VECUt7RM=;
+	s=korg; t=1774883843;
+	bh=OWlFttQ/yqiN+3z3z+6Q1ubbICbGciUa63y+9JRjPYM=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=DdXZZLaVyhTb2ZQOqaj67hwNeb6j5QOUyxQsBujPKYc08zK+q9iiNBZHLBYn9PLA0
-	 WhKc7N0IBkwRIpn87FSVObAWBbeRSztJv+lvurI5joSozx4bowa5USzaBTTVqfnQ8I
-	 HCDsZlVJ2U1TsMHwTEVZAAXX+nrrnabUjPVPGhvs=
+	b=lZdT4FAXKlkrzLvLhAsT8N9nNo2wP8ZgOnYicyfy6mAmW2J51gzx8LHLhPay3ypu/
+	 tlkYKUoDVtqpgiPDEv7RGzy2dKmlWV206gQzGkC3bzf8EaKPzCeWVwJ5SaN59c6ohb
+	 e2mVUTDdD0yCK9dbg9oavkk67zEQny1JGeT60DlA=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -48,34 +48,34 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 0/5] docs: pt_BR: Complete PGP maintainer guide
- translation
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 3/5] docs: pt_BR: continue PGP guide translation
 From: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
 To: Daniel Pereira <danielmaraboo@gmail.com>
 Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-In-Reply-To: <20260329165041.831369-1-danielmaraboo@gmail.com>
+In-Reply-To: <20260329165041.831369-4-danielmaraboo@gmail.com>
 References: <20260329165041.831369-1-danielmaraboo@gmail.com>
+ <20260329165041.831369-4-danielmaraboo@gmail.com>
 Date: Mon, 30 Mar 2026 11:17:19 -0400
-Message-Id: <177488383987.1817745.16164460917376587462.b4-review@b4>
+Message-Id: <177488383992.1817745.6595454759376079201.b4-review@b4>
 X-Mailer: b4 0.16-dev-5738b
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774883842; l=1837;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774883842; l=3224;
  i=konstantin@linuxfoundation.org; s=20260105; h=from:subject:message-id;
- bh=2wFihfL/44XcAEfBCnwRd1W9aOt0YKtdzb6VECUt7RM=;
- b=iV2DEFdcRsUM04GWhTdmbBmEOaTIfj28cK97GEtNg3FSTG89CqpJUNml7Gs8fpNcJtEtYzj3m
- 996EIZ48mbCCX0iBx4J+eat7r8S5jgXqn9vqdck8EUoNg783ZDqdG3a
+ bh=OWlFttQ/yqiN+3z3z+6Q1ubbICbGciUa63y+9JRjPYM=;
+ b=tO2xBWoNKR5RO8fdvzuVBU3RCI+IkvlFzshxBn8S2pWnFgPcNejOBHVOnaSdujyxC1Es+6V1k
+ vBDiZOb9IekADk9MdmA4gKpEyalU1hBuc7ZAEyR5gudJwii7WfSIvJA
 X-Developer-Key: i=konstantin@linuxfoundation.org; a=ed25519;
  pk=vcENxA6AQz/AmPXVH3DSZUftK7lCXJz/mUonEPEcInI=
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81766-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81769-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
@@ -91,51 +91,79 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: C725535DD1B
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,linuxfoundation.org:dkim,nitrokey.com:url]
+X-Rspamd-Queue-Id: 9F92835DACA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, 29 Mar 2026 13:50:34 -0300, Daniel Pereira <danielmaraboo@gmail.com> wrote:
-> This series provides the complete Brazilian Portuguese translation for
-> the Kernel Maintainer PGP guide. The translation was divided into
-> subsequent patches to facilitate review, covering PGP basics, hardware
-> tokens (smartcards), Git integration, and identity verification.
+On Sun, 29 Mar 2026 13:50:37 -0300, Daniel Pereira <danielmaraboo@gmail.com> wrote:
+> diff --git a/Documentation/translations/pt_BR/process/maintainer-pgp-guide.rst b/Documentation/translations/pt_BR/process/maintainer-pgp-guide.rst
+> index 93f0759e94b2..f7b31201499a 100644
+> --- a/Documentation/translations/pt_BR/process/maintainer-pgp-guide.rst
+> +++ b/Documentation/translations/pt_BR/process/maintainer-pgp-guide.rst
+> @@ -200,3 +200,292 @@ offline; portanto, se você tiver apenas uma chave **[SC]** combinada, você dev
+> [ ... skip 23 lines ... ]
+> +está criptografada com essa frase secreta e, se você algum dia alterá-la, você
+> +não se lembrará de qual era quando criou o backup -- *garantido*.
+> +
+> +Coloque a cópia impressa resultante e a frase secreta escrita à mão em um
+> +envelope e guarde-os em um local seguro e bem protegido, de preferência longe
+> +de sua casa, como o cofre de um banco.
 
-Thank you for providing this translation. My Portuguese is not great -- 
-I mostly nerded out one year after attending the Kernel Summit in Lisbon 
-to get myself to a decent level of reading fluency, but haven't kept it 
-up in a while. This translation was a fun refresher, so thank you for 
-the opportunity. Please take all my comments with a large grain of salt 
-as coming from someone for whom Portuguese is a 5th or 6th foreign 
-language.
+I'm okay if you change it if the recommendation to store the backup in a 
+bank deposit box isn't really useful for non-North-American locations.
 
-> 
-> All internal cross-references were updated to ensure a clean Sphinx
-> build, and terminology aligns with the existing pt_BR documentation.
-> 
-> Changes in v2:
-> - Fixed translation of "Periodic release snapshots" to "Arquivos
->   tarballs por release" as suggested by Mauro Carvalho Chehab.
-> - Corrected a double-hyphen formatting error in the first translation
->   patch.
-> - Added missing Signed-off-by and fixed line wrapping in the
->   KVM index patch (1/5).
-> - Rebased onto the latest docs-next branch.
-> 
-> Daniel Pereira (5):
->   docs: add maintainer-kvm-x86 to maintainer-handbooks index
+> [ ... skip 56 lines ... ]
+> +  de PDF, etc.)
+> +- por meio de coação ao cruzar fronteiras internacionais
+> +
+> +Proteger sua chave com uma boa frase secreta ajuda muito a reduzir o risco
+> +de qualquer um dos itens acima, mas as frases secretas podem ser descobertas
+> +por meio de keyloggers, shoulder-surfing (observação direta) ou qualquer número
 
-I don't think this belongs in this series.
+I think "observação clandestina" would work better than "direta" here.
 
->   docs: pt_BR: start translation of the PGP maintainer guide
->   docs: pt_BR: continue PGP guide translation
->   docs: pt_BR: continue PGP guide: Git and maintenance
->   docs: pt_BR: complete PGP guide translation
+> [ ... skip 63 lines ... ]
+> +
+> +Assim que concluir isso, certifique-se de excluir o arquivo ``secring.gpg``
+> +obsoleto, que ainda contém suas chaves privadas.
+> +
+> +Mova as subchaves para um dispositivo criptográfico dedicado
+> +============================================================
 
-I don't think the translation needs to be split into 4 patches. Just 
-submit it as a single translated document.
+I think this needs a  _smartcards_pt: label before this section. The 
+commit message says this label exists, but it is not present in the 
+patch.
+
+> [ ... skip 30 lines ... ]
+> +
+> +A menos que todos os seus laptops e estações de trabalho tenham leitores de
+> +smartcard, o mais fácil é obter um dispositivo USB especializado que implemente
+> +a funcionalidade de smartcard. Existem várias opções disponíveis:
+> +
+> +- `Nitrokey Start (pt)`_: Hardware aberto e Software Livre, baseado no `Gnuk_pt`_ da FSI
+
+I think (pt) here would be confusing to readers, because this implies 
+that if they follow the link, the site will be in Portuguese. There's 
+also an inconsistency with `Gnuk_pt` here. I think a better strategy is 
+to use inline anonymous hyperlinks like:
+
+- `Nitrokey Start <https://www.nitrokey.com/products/nitrokeys>`__: 
+  Hardware aberto e ...
+
+This should avoid clashing with the English version and not create 
+confusion for readers.
+
+> [ ... skip 22 lines ... ]
+> +.. _`se qualifica para um Nitrokey Start gratuito`: https://www.kernel.org/nitrokey-digital-tokens-for-kernel-developers.html
+> +
+> +Configure seu dispositivo smartcard
+> +-----------------------------------
+> +
+> +Seu dispositivo smartcard deve simplesmente funcionar (Just Work - TM) no
+
+Does the "Just Work TM" joke still make sense in the translation? :)
 
 -- 
 KR
