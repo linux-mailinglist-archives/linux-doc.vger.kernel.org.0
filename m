@@ -1,208 +1,142 @@
-Return-Path: <linux-doc+bounces-81722-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81723-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IOVZKM8jymmu5QUAu9opvQ
-	(envelope-from <linux-doc+bounces-81722-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 09:18:39 +0200
+	id UKt7AeQjymmu5QUAu9opvQ
+	(envelope-from <linux-doc+bounces-81723-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 09:19:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1008C35655C
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 09:18:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C69235656B
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 09:18:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6764E3032F43
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 07:11:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 30C8B303983D
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 07:11:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C705395D99;
-	Mon, 30 Mar 2026 07:11:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EA9B39EF17;
+	Mon, 30 Mar 2026 07:11:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="REz6lrKf"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="biqkW+Mw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout06.his.huawei.com (canpmsgout06.his.huawei.com [113.46.200.221])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48EE724E4B4;
-	Mon, 30 Mar 2026 07:11:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.221
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E456D39E19C;
+	Mon, 30 Mar 2026 07:11:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774854687; cv=none; b=s5j+JjtmCuSS2XBjxYCEFjT50HG0+yMSPkeWpyEKfhbyTLfr+WN/N9wRr8IS67eV8sFFpGMolSmyl2r3G2zieJ8GX7q5Z554iR73cY4GQkJxazOctsBWXkXpi9vNrZR7kenlzdc64CmrMvHrRBP/KmwVUuN7hVcB0IQ4YtRQfqI=
+	t=1774854688; cv=none; b=Cx0xXE/9jwAcpAdeiPDu7R3olTvKYGdkTjxZdcMP8YWksurFJVkrUAcZ2A2HvDTBZ90S3o36WPkjT/l64voZCUHA3FQgRblFzSBWIKJE6sa+El/9aDd83OXXOlahsH62+iaG3MXeZSPtoG8YnnlZ/bofgKKAd9E4zgqrjuiR2CU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774854687; c=relaxed/simple;
-	bh=tH2S5P8dR69sJzEISlKn9G8QgvuVGrtWVb10/3dnr0k=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=S8f+bFP3hNFcS2slxJrO63v1KS5T0mYbkQk40TTgT08Kf+aB4W3fX+UyR045RRtu86Bkx/t5I46CjXaJIOjVzyEMZb1Y1q1h0qSo9jR1cznWnxTe9KtqC5M+X5CzdOWPatACqTHG5oHcHxok5hfMAltdxfnnUdpVg2Bdml/eMSw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=REz6lrKf; arc=none smtp.client-ip=113.46.200.221
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=dtxKLBtxeK7WnTNaRuRN6wjCIkUS/712dvNiyCme+dM=;
-	b=REz6lrKfLnmTbZnTSrloA8Qxl9ytOsPa/OKwvl5w3Tr9CHfmTc48CSuaquXePwoPkmMac2rJ+
-	Ia8doJegFbzncelLLc+WY8AD1bp7J4dS8mfObdEHsZoC3f0vux4WUTdBtkywh/SHtrYyCW4VUbm
-	dhD5rc1J2Q4kAhnpMA6VL/8=
-Received: from mail.maildlp.com (unknown [172.19.163.0])
-	by canpmsgout06.his.huawei.com (SkyGuard) with ESMTPS id 4fkj1k2dVwzRhVq;
-	Mon, 30 Mar 2026 15:05:14 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id E15B240537;
-	Mon, 30 Mar 2026 15:11:22 +0800 (CST)
-Received: from [10.67.109.254] (10.67.109.254) by
- dggpemf500011.china.huawei.com (7.185.36.131) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Mon, 30 Mar 2026 15:11:17 +0800
-Message-ID: <baa90080-9e6e-c1e5-13a1-b17496c690b4@huawei.com>
-Date: Mon, 30 Mar 2026 15:11:13 +0800
+	s=arc-20240116; t=1774854688; c=relaxed/simple;
+	bh=t8c60sheKpZc2laaTB+QyMe7+0vi7yMHUuQWRlKN5xs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=uBOxF8dj7g3sWVAkW+By606wSfX4qESmM/Ln9iTEO57pXvJo4NY263ZejoRC9qKQJ31zCZckt9m+BHXxFywQZyiJkYA/oKqnhwdixQrnABYy9qI/4aZmyUCKQImWVf2GDOhM3meH/vTMVgBUOFd2ke3s49OPL9a7b/7Kj1X1gIc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=biqkW+Mw; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08008C19423;
+	Mon, 30 Mar 2026 07:11:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774854687;
+	bh=t8c60sheKpZc2laaTB+QyMe7+0vi7yMHUuQWRlKN5xs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=biqkW+MwKIFT62FDhSen26uAsy4mAH6nJRbMyYBYijv8WE/0GmNN+27xd2flh33fi
+	 59EMkznou8CzdIUbUbb46Ulb5yypz4q67Y51XX4iraEEAFI4z4p8yEh2aCNoJ0zCGN
+	 z3oW501TZZb6/hdGgK21khjx0V8N5UWIDHglbmJmlIrN++mIH22IgnYp6hRsQ6Tj4N
+	 3pL9uJBkUYi4ordeXB4mdiUSMmVyjxdP8/2AHsZAJHCw0+PzrwZyP4JRvj9gfUgJ1c
+	 9K/UiAzfCZh5Zhveb3hFQJr1t3aMgxHPGR0xmyMFUJhBvjrXl/lgXYPFJ1S3keS/mf
+	 Z1zOEUL8uT9HQ==
+Date: Mon, 30 Mar 2026 09:11:25 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Cristian Marussi <cristian.marussi@arm.com>
+Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	arm-scmi@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	sudeep.holla@kernel.org, james.quinlan@broadcom.com, f.fainelli@gmail.com, 
+	vincent.guittot@linaro.org, etienne.carriere@st.com, peng.fan@oss.nxp.com, 
+	michal.simek@amd.com, dan.carpenter@linaro.org, d-gole@ti.com, 
+	jonathan.cameron@huawei.com, elif.topuz@arm.com, lukasz.luba@arm.com, philip.radford@arm.com, 
+	brauner@kernel.org, souvik.chakravarty@arm.com, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org
+Subject: Re: [PATCH v3 06/24] dt-bindings: firmware: arm,scmi: Add support
+ for telemetry protocol
+Message-ID: <20260330-large-raven-of-order-bf4e4a@quoll>
+References: <20260329163337.637393-1-cristian.marussi@arm.com>
+ <20260329163337.637393-7-cristian.marussi@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.0
-Subject: Re: [PATCH v11 01/11] riscv: kexec_file: Fix crashk_low_res not
- exclude bug
-Content-Language: en-US
-To: Guo Ren <guoren@kernel.org>
-CC: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
-	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
-	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
-	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
-	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
-	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
-	<hpa@zytor.com>, <robh@kernel.org>, <saravanak@kernel.org>,
-	<akpm@linux-foundation.org>, <bhe@redhat.com>, <vgoyal@redhat.com>,
-	<dyoung@redhat.com>, <rdunlap@infradead.org>, <peterz@infradead.org>,
-	<feng.tang@linux.alibaba.com>, <pawan.kumar.gupta@linux.intel.com>,
-	<dapeng1.mi@linux.intel.com>, <kees@kernel.org>, <elver@google.com>,
-	<paulmck@kernel.org>, <lirongqing@baidu.com>, <rppt@kernel.org>,
-	<leitao@debian.org>, <ardb@kernel.org>, <cfsworks@gmail.com>,
-	<osandov@fb.com>, <jbohac@suse.cz>, <tangyouling@kylinos.cn>,
-	<sourabhjain@linux.ibm.com>, <ritesh.list@gmail.com>,
-	<eajames@linux.ibm.com>, <songshuaishuai@tinylab.org>,
-	<kevin.brodsky@arm.com>, <vishal.moola@gmail.com>,
-	<junhui.liu@pigmoral.tech>, <coxu@redhat.com>, <fuqiang.wang@easystack.cn>,
-	<liaoyuanhong@vivo.com>, <chenjiahao16@huawei.com>, <hbathini@linux.ibm.com>,
-	<takahiro.akashi@linaro.org>, <james.morse@arm.com>, <lizhengyu3@huawei.com>,
-	<x86@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
-	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
-	<kexec@lists.infradead.org>
-References: <20260328074013.3589544-1-ruanjinjie@huawei.com>
- <20260328074013.3589544-2-ruanjinjie@huawei.com>
- <CAJF2gTRN=RpgzQsQ7QDbwjDmyQZP9anQZ+CaK2r-Mrz9dQbohQ@mail.gmail.com>
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-In-Reply-To: <CAJF2gTRN=RpgzQsQ7QDbwjDmyQZP9anQZ+CaK2r-Mrz9dQbohQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- dggpemf500011.china.huawei.com (7.185.36.131)
-X-Spamd-Result: default: False [-0.66 / 15.00];
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260329163337.637393-7-cristian.marussi@arm.com>
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-81723-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,infradead.org,linux.alibaba.com,google.com,baidu.com,debian.org,fb.com,suse.cz,kylinos.cn,tinylab.org,pigmoral.tech,easystack.cn,vivo.com,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	TAGGED_FROM(0.00)[bounces-81722-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.infradead.org,kernel.org,broadcom.com,gmail.com,linaro.org,st.com,oss.nxp.com,amd.com,ti.com,huawei.com,arm.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCPT_COUNT_GT_50(0.00)[66];
-	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:dkim,huawei.com:email,huawei.com:mid]
-X-Rspamd-Queue-Id: 1008C35655C
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,1b:email,arm.com:email]
+X-Rspamd-Queue-Id: 5C69235656B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-
-
-On 2026/3/30 11:49, Guo Ren wrote:
-> On Sat, Mar 28, 2026 at 3:41 PM Jinjie Ruan <ruanjinjie@huawei.com> wrote:
->>
->> As done in commit 944a45abfabc ("arm64: kdump: Reimplement crashkernel=X")
->> and commit 4831be702b95 ("arm64/kexec: Fix missing extra range for
->> crashkres_low.") for arm64, while implementing crashkernel=X,[high,low],
->> riscv should have excluded the "crashk_low_res" reserved ranges from
->> the crash kernel memory to prevent them from being exported through
->> /proc/vmcore, and the exclusion would need an extra crash_mem range.
->>
->> Cc: Guo Ren <guoren@kernel.org>
->> Cc: Baoquan He <bhe@redhat.com>
->> Fixes: 5882e5acf18d ("riscv: kdump: Implement crashkernel=X,[high,low]")
->> Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
->> ---
->>  arch/riscv/kernel/machine_kexec_file.c | 14 +++++++++++---
->>  1 file changed, 11 insertions(+), 3 deletions(-)
->>
->> diff --git a/arch/riscv/kernel/machine_kexec_file.c b/arch/riscv/kernel/machine_kexec_file.c
->> index 54e2d9552e93..3f7766057cac 100644
->> --- a/arch/riscv/kernel/machine_kexec_file.c
->> +++ b/arch/riscv/kernel/machine_kexec_file.c
->> @@ -61,7 +61,7 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
->>         unsigned int nr_ranges;
->>         int ret;
->>
->> -       nr_ranges = 1; /* For exclusion of crashkernel region */
->> +       nr_ranges = 2; /* For exclusion of crashkernel region */
->>         walk_system_ram_res(0, -1, &nr_ranges, get_nr_ram_ranges_callback);
->>
->>         cmem = kmalloc_flex(*cmem, ranges, nr_ranges);
->> @@ -76,8 +76,16 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
->>
->>         /* Exclude crashkernel region */
->>         ret = crash_exclude_mem_range(cmem, crashk_res.start, crashk_res.end);
->> -       if (!ret)
->> -               ret = crash_prepare_elf64_headers(cmem, true, addr, sz);
->> +       if (ret)
->> +               goto out;
->> +
->> +       if (crashk_low_res.end) {
->> +               ret = crash_exclude_mem_range(cmem, crashk_low_res.start, crashk_low_res.end);
-> Exclude crashk_low_res is reasonable, but have you tested this?
-
-Just simply tested on qemu with crashkernel=4G with following kexec
-mentioned in
-https://lore.kernel.org/all/20230726175000.2536220-1-chenjiahao16@huawei.com/.
-And the second kernel can be started normally.
-
-https://github.com/chenjh005/kexec-tools/tree/build-test-riscv-v2
-
-# dmesg | grep crash
-[    0.000000] crashkernel low memory reserved: 0xf8000000 - 0x100000000
-(128 MB)
-[    0.000000] crashkernel reserved: 0x000000017fe00000 -
-0x000000027fe00000 (4096 MB)
-
-
-
+On Sun, Mar 29, 2026 at 05:33:17PM +0100, Cristian Marussi wrote:
+> Add new SCMI v4.0 Telemetry protocol bindings definitions.
 > 
->> +               if (ret)
->> +                       goto out;
->> +       }
->> +
->> +       ret = crash_prepare_elf64_headers(cmem, true, addr, sz);
->>
->>  out:
->>         kfree(cmem);
->> --
->> 2.34.1
->>
+> Signed-off-by: Cristian Marussi <cristian.marussi@arm.com>
+> ---
+> Cc: Rob Herring <robh@kernel.org>
+> Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>
+> Cc: Conor Dooley <conor+dt@kernel.org>
+> Cc: devicetree@vger.kernel.org
+> ---
+>  Documentation/devicetree/bindings/firmware/arm,scmi.yaml | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 > 
-> 
+> diff --git a/Documentation/devicetree/bindings/firmware/arm,scmi.yaml b/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
+> index be817fd9cc34..e936ae7c0fb9 100644
+> --- a/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
+> +++ b/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
+> @@ -298,6 +298,14 @@ properties:
+>        reg:
+>          const: 0x19
+>  
+> +  protocol@1B:
+
+It's always lowercase hex in DTS.
+
+> +    $ref: '#/$defs/protocol-node'
+> +    unevaluatedProperties: false
+> +
+> +    properties:
+> +      reg:
+> +        const: 0x1B
+
+Here as well.
+
+Best regards,
+Krzysztof
+
 
