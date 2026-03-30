@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-81749-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81752-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MLM1LTxtymnG8gUAu9opvQ
-	(envelope-from <linux-doc+bounces-81749-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 14:31:56 +0200
+	id OEJSOMBtymnG8gUAu9opvQ
+	(envelope-from <linux-doc+bounces-81752-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 14:34:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 393EB35B123
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 14:31:56 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E21CB35B185
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 14:34:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 27CF6308DD92
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 12:26:52 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 2F8A63047D4B
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2026 12:27:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D14B03CCA03;
-	Mon, 30 Mar 2026 12:26:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 650B53CEB90;
+	Mon, 30 Mar 2026 12:26:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="Jfzrhjxl"
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="gAgl0YHo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-110.freemail.mail.aliyun.com (out30-110.freemail.mail.aliyun.com [115.124.30.110])
+Received: from out30-118.freemail.mail.aliyun.com (out30-118.freemail.mail.aliyun.com [115.124.30.118])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1521F37CD57;
-	Mon, 30 Mar 2026 12:26:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.110
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D83FA3CD8D7;
+	Mon, 30 Mar 2026 12:26:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.118
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774873597; cv=none; b=a6NEoNA8fPL3rmULtJj4TtfQ+9fLjzLlW1gp3daCKG9Gm+NiXtsQbVeq2SjNIznQkrryN8fvUprAR3Ow7MX+5085VCl8hZkujblWCQ1oKsDJmXyX9UGm3/AQw8IYDybn37X7sJ1Evtz/bdwWVrhkvCEiCn/cTa1CE5hmsqVg4q8=
+	t=1774873605; cv=none; b=UByQ/M/2D1hd7z/irJZ6wKoJbXR9+CCUpL1IAtO3eNtLRCBWyQtNXzeuF3cPetYhTZ/2aoRAUAxIzfEk1hMsYTycPy8mbzVXjRZ8sFIzeatG9C0yy9CeY5R8YChtDEM66d0mdgSz6z8eSzEsCjryWJR7wN3HGNfctjuXRnDKZp0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774873597; c=relaxed/simple;
-	bh=Xn/WZtZyMpPye9m8abp212wYw38KSOoY3nIsJV0J4GM=;
+	s=arc-20240116; t=1774873605; c=relaxed/simple;
+	bh=t+nBbtYRRgP5iBScihFqmbDfpM8X25wYYMjt+qeUvm0=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=JojDiDFyvSEUjGM8vaGRz8JghZGX+recLLM2FkCJcLQ22rEUJc5ULtPmUBLoB33ncZPJYNYCo8HqHS4efUyy91vgdvu2ZNgy/UjTJRNiTpa5NOLlCf5ZLqbkzt6AHrmrQnqMm0eAuRxyt55C4iTLw/iRmiKfjiz5z/jkmd8NQhI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=Jfzrhjxl; arc=none smtp.client-ip=115.124.30.110
+	 MIME-Version; b=iV6ID3GE38bLNeFjCujc0arlznsl61D+OV1qmv3dXViX/6cWvoog4k57gSgpn0SLC80oGALeouqLVpejRisLzoIxJeYrvPtQBVxGSCebscFvuXxqKd/TVD8SKSGe4nLjhF2iKALlzShSVdMyiyfafhhsadKD1+PiNjI0PQaLkrE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=gAgl0YHo; arc=none smtp.client-ip=115.124.30.118
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
 DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=linux.alibaba.com; s=default;
-	t=1774873593; h=From:To:Subject:Date:Message-Id:MIME-Version;
-	bh=PT+yx01BbG86omMromavfHwf6ELYE5YcV+gpW/gZMbk=;
-	b=Jfzrhjxl6h90Y2n4R7N8OpzN2M8yrMIIEFmfAby5Ur791EvlDJZelFZZRY5VABVQsr83GXDbFhtWDQ4QyXOpKWWCtwzeGCu9krIVpBVas8Vg/LGzDv7erhOYZHPMW07zUfjdiNCZyFnpxYtiPxfZVXjhgsueBwpG2BtklrFWyc8=
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R121e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam011083073210;MF=fangyu.yu@linux.alibaba.com;NM=1;PH=DS;RN=18;SR=0;TI=SMTPD_---0X.zfcJ9_1774873591;
-Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com fp:SMTPD_---0X.zfcJ9_1774873591 cluster:ay36)
+	t=1774873595; h=From:To:Subject:Date:Message-Id:MIME-Version;
+	bh=hFPV9OZsT6eJowdta/xFZt6DIyl+vW5qGVBuswXMeAQ=;
+	b=gAgl0YHoRXUI4fqRUUraqNR7gl5evH2jb92yTK3Zo72XiGqGp3L7jU5oUdX1wrauvmb75qSXROgnS5d9vsElxXNMTfFFjxBF/AOg2SXRYas1CBYQ0JDwNllD1Kmfu6oOBc/kaHqLNuWdLqLd8Nz2Y4btnAIYFUwvgKiUZ0RCiSE=
+X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R141e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=maildocker-contentspam033037033178;MF=fangyu.yu@linux.alibaba.com;NM=1;PH=DS;RN=18;SR=0;TI=SMTPD_---0X.zfcJd_1774873592;
+Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com fp:SMTPD_---0X.zfcJd_1774873592 cluster:ay36)
           by smtp.aliyun-inc.com;
-          Mon, 30 Mar 2026 20:26:32 +0800
+          Mon, 30 Mar 2026 20:26:33 +0800
 From: fangyu.yu@linux.alibaba.com
 To: pbonzini@redhat.com,
 	corbet@lwn.net,
@@ -62,9 +62,9 @@ Cc: guoren@kernel.org,
 	linux-riscv@lists.infradead.org,
 	linux-kernel@vger.kernel.org,
 	Fangyu Yu <fangyu.yu@linux.alibaba.com>
-Subject: [PATCH v6 3/4] RISC-V: KVM: Detect and expose supported HGATP G-stage modes
-Date: Mon, 30 Mar 2026 20:26:00 +0800
-Message-Id: <20260330122601.22140-4-fangyu.yu@linux.alibaba.com>
+Subject: [PATCH v6 4/4] RISC-V: KVM: add KVM_CAP_RISCV_SET_HGATP_MODE
+Date: Mon, 30 Mar 2026 20:26:01 +0800
+Message-Id: <20260330122601.22140-5-fangyu.yu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 In-Reply-To: <20260330122601.22140-1-fangyu.yu@linux.alibaba.com>
 References: <20260330122601.22140-1-fangyu.yu@linux.alibaba.com>
@@ -82,11 +82,11 @@ X-Spamd-Result: default: False [-7.66 / 15.00];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linux.alibaba.com,none];
 	R_DKIM_ALLOW(-0.20)[linux.alibaba.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81749-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81752-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[18];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -98,134 +98,125 @@ X-Spamd-Result: default: False [-7.66 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[fangyu.yu@linux.alibaba.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[linux.alibaba.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[alibaba.com:email,linux.alibaba.com:dkim,linux.alibaba.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,qualcomm.com:email]
-X-Rspamd-Queue-Id: 393EB35B123
+	DBL_BLOCKED_OPENRESOLVER(0.00)[alibaba.com:email,linux.alibaba.com:dkim,linux.alibaba.com:mid,qualcomm.com:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: E21CB35B185
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
 
-Extend kvm_riscv_gstage_mode_detect() to probe all HGATP.MODE values
-supported by the host and record them in a bitmask. Keep tracking the
-maximum supported G-stage page table level for existing internal users.
+Add a VM capability that allows userspace to select the G-stage page table
+format by setting HGATP.MODE on a per-VM basis.
 
-Also provide lightweight helpers to retrieve the supported-mode bitmask
-and validate a requested HGATP.MODE against it.
+Userspace enables the capability via KVM_ENABLE_CAP, passing the requested
+HGATP.MODE in args[0]. The request is rejected with -EINVAL if the mode is
+not supported by the host, and with -EBUSY if the VM has already been
+committed (e.g. vCPUs have been created or any memslot is populated).
+
+KVM_CHECK_EXTENSION(KVM_CAP_RISCV_SET_HGATP_MODE) returns a bitmask of the
+HGATP.MODE formats supported by the host.
 
 Signed-off-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
 Reviewed-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
 ---
- arch/riscv/include/asm/kvm_gstage.h | 11 ++++++++
- arch/riscv/kvm/gstage.c             | 43 +++++++++++++++--------------
- 2 files changed, 34 insertions(+), 20 deletions(-)
+ Documentation/virt/kvm/api.rst | 27 +++++++++++++++++++++++++++
+ arch/riscv/kvm/vm.c            | 18 ++++++++++++++++--
+ include/uapi/linux/kvm.h       |  1 +
+ 3 files changed, 44 insertions(+), 2 deletions(-)
 
-diff --git a/arch/riscv/include/asm/kvm_gstage.h b/arch/riscv/include/asm/kvm_gstage.h
-index 70d9d483365e..bbf8f45c6563 100644
---- a/arch/riscv/include/asm/kvm_gstage.h
-+++ b/arch/riscv/include/asm/kvm_gstage.h
-@@ -31,6 +31,7 @@ struct kvm_gstage_mapping {
- #endif
+diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+index 032516783e96..9d7f6958fa81 100644
+--- a/Documentation/virt/kvm/api.rst
++++ b/Documentation/virt/kvm/api.rst
+@@ -8902,6 +8902,33 @@ helpful if user space wants to emulate instructions which are not
+ This capability can be enabled dynamically even if VCPUs were already
+ created and are running.
  
- extern unsigned long kvm_riscv_gstage_max_pgd_levels;
-+extern u32 kvm_riscv_gstage_supported_mode_mask;
- 
- #define kvm_riscv_gstage_pgd_xbits	2
- #define kvm_riscv_gstage_pgd_size	(1UL << (HGATP_PAGE_SHIFT + kvm_riscv_gstage_pgd_xbits))
-@@ -102,4 +103,14 @@ static inline void kvm_riscv_gstage_init(struct kvm_gstage *gstage, struct kvm *
- 	gstage->pgd_levels = kvm->arch.pgd_levels;
- }
- 
-+static inline u32 kvm_riscv_get_hgatp_mode_mask(void)
-+{
-+	return kvm_riscv_gstage_supported_mode_mask;
-+}
++7.47 KVM_CAP_RISCV_SET_HGATP_MODE
++---------------------------------
 +
-+static inline bool kvm_riscv_hgatp_mode_is_valid(unsigned long mode)
-+{
-+	return kvm_riscv_gstage_supported_mode_mask & BIT(mode);
-+}
++:Architectures: riscv
++:Type: VM
++:Parameters: args[0] contains the requested HGATP mode
++:Returns:
++  - 0 on success.
++  - -EINVAL if args[0] is outside the range of HGATP modes supported by the
++    hardware.
++  - -EBUSY if vCPUs have already been created for the VM, if the VM has any
++    non-empty memslots.
 +
- #endif
-diff --git a/arch/riscv/kvm/gstage.c b/arch/riscv/kvm/gstage.c
-index 7c4c34bc191b..459041255c14 100644
---- a/arch/riscv/kvm/gstage.c
-+++ b/arch/riscv/kvm/gstage.c
-@@ -16,6 +16,8 @@ unsigned long kvm_riscv_gstage_max_pgd_levels __ro_after_init = 3;
- #else
- unsigned long kvm_riscv_gstage_max_pgd_levels __ro_after_init = 2;
- #endif
-+/* Bitmask of supported HGATP.MODE encodings (BIT(HGATP_MODE_*)). */
-+u32 kvm_riscv_gstage_supported_mode_mask __ro_after_init;
- 
- #define gstage_pte_leaf(__ptep)	\
- 	(pte_val(*(__ptep)) & (_PAGE_READ | _PAGE_WRITE | _PAGE_EXEC))
-@@ -315,42 +317,43 @@ void kvm_riscv_gstage_wp_range(struct kvm_gstage *gstage, gpa_t start, gpa_t end
- 	}
- }
- 
-+static bool __init kvm_riscv_hgatp_mode_supported(unsigned long mode)
-+{
-+	csr_write(CSR_HGATP, mode << HGATP_MODE_SHIFT);
-+	return ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) == mode);
-+}
++This capability allows userspace to explicitly select the HGATP mode for
++the VM. The selected mode must be supported by both KVM and hardware. This
++capability must be enabled before creating any vCPUs or memslots.
 +
- void __init kvm_riscv_gstage_mode_detect(void)
++If this capability is not enabled, KVM will select the default HGATP mode
++automatically. The default is the highest HGATP.MODE value supported by
++hardware.
++
++``KVM_CHECK_EXTENSION(KVM_CAP_RISCV_SET_HGATP_MODE)`` returns a bitmask of
++HGATP.MODE values supported by the host. A return value of 0 indicates that
++the capability is not supported. Supported-mode bitmask use HGATP.MODE
++encodings as defined by the RISC-V privileged specification, such as Sv39x4
++corresponds to HGATP.MODE=8, so userspace should test bitmask & BIT(8).
++
+ 8. Other capabilities.
+ ======================
+ 
+diff --git a/arch/riscv/kvm/vm.c b/arch/riscv/kvm/vm.c
+index 4d82a886102c..5e82a3ad3ad0 100644
+--- a/arch/riscv/kvm/vm.c
++++ b/arch/riscv/kvm/vm.c
+@@ -201,6 +201,9 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
+ 	case KVM_CAP_VM_GPA_BITS:
+ 		r = kvm_riscv_gstage_gpa_bits(kvm->arch.pgd_levels);
+ 		break;
++	case KVM_CAP_RISCV_SET_HGATP_MODE:
++		r = kvm_riscv_get_hgatp_mode_mask();
++		break;
+ 	default:
+ 		r = 0;
+ 		break;
+@@ -211,12 +214,23 @@ int kvm_vm_ioctl_check_extension(struct kvm *kvm, long ext)
+ 
+ int kvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
  {
-+	kvm_riscv_gstage_supported_mode_mask = 0;
-+	kvm_riscv_gstage_max_pgd_levels = 0;
++	if (cap->flags)
++		return -EINVAL;
 +
- #ifdef CONFIG_64BIT
--	/* Try Sv57x4 G-stage mode */
--	csr_write(CSR_HGATP, HGATP_MODE_SV57X4 << HGATP_MODE_SHIFT);
--	if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) == HGATP_MODE_SV57X4) {
--		kvm_riscv_gstage_max_pgd_levels = 5;
--		goto done;
-+	/* Try Sv39x4 G-stage mode */
-+	if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV39X4)) {
-+		kvm_riscv_gstage_supported_mode_mask |= BIT(HGATP_MODE_SV39X4);
-+		kvm_riscv_gstage_max_pgd_levels = 3;
+ 	switch (cap->cap) {
+ 	case KVM_CAP_RISCV_MP_STATE_RESET:
+-		if (cap->flags)
+-			return -EINVAL;
+ 		kvm->arch.mp_state_reset = true;
+ 		return 0;
++	case KVM_CAP_RISCV_SET_HGATP_MODE:
++		if (!kvm_riscv_hgatp_mode_is_valid(cap->args[0]))
++			return -EINVAL;
++
++		if (kvm->created_vcpus || !kvm_are_all_memslots_empty(kvm))
++			return -EBUSY;
++#ifdef CONFIG_64BIT
++		kvm->arch.pgd_levels = 3 + cap->args[0] - HGATP_MODE_SV39X4;
++#endif
++		return 0;
+ 	default:
+ 		return -EINVAL;
  	}
+diff --git a/include/uapi/linux/kvm.h b/include/uapi/linux/kvm.h
+index 80364d4dbebb..a74a80fd4046 100644
+--- a/include/uapi/linux/kvm.h
++++ b/include/uapi/linux/kvm.h
+@@ -989,6 +989,7 @@ struct kvm_enable_cap {
+ #define KVM_CAP_ARM_SEA_TO_USER 245
+ #define KVM_CAP_S390_USER_OPEREXEC 246
+ #define KVM_CAP_S390_KEYOP 247
++#define KVM_CAP_RISCV_SET_HGATP_MODE 248
  
- 	/* Try Sv48x4 G-stage mode */
--	csr_write(CSR_HGATP, HGATP_MODE_SV48X4 << HGATP_MODE_SHIFT);
--	if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) == HGATP_MODE_SV48X4) {
-+	if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV48X4)) {
-+		kvm_riscv_gstage_supported_mode_mask |= BIT(HGATP_MODE_SV48X4);
- 		kvm_riscv_gstage_max_pgd_levels = 4;
--		goto done;
- 	}
- 
--	/* Try Sv39x4 G-stage mode */
--	csr_write(CSR_HGATP, HGATP_MODE_SV39X4 << HGATP_MODE_SHIFT);
--	if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) == HGATP_MODE_SV39X4) {
--		kvm_riscv_gstage_max_pgd_levels = 3;
--		goto done;
-+	/* Try Sv57x4 G-stage mode */
-+	if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV57X4)) {
-+		kvm_riscv_gstage_supported_mode_mask |= BIT(HGATP_MODE_SV57X4);
-+		kvm_riscv_gstage_max_pgd_levels = 5;
- 	}
- #else /* CONFIG_32BIT */
- 	/* Try Sv32x4 G-stage mode */
--	csr_write(CSR_HGATP, HGATP_MODE_SV32X4 << HGATP_MODE_SHIFT);
--	if ((csr_read(CSR_HGATP) >> HGATP_MODE_SHIFT) == HGATP_MODE_SV32X4) {
-+	if (kvm_riscv_hgatp_mode_supported(HGATP_MODE_SV32X4)) {
-+		kvm_riscv_gstage_supported_mode_mask |= BIT(HGATP_MODE_SV32X4);
- 		kvm_riscv_gstage_max_pgd_levels = 2;
--		goto done;
- 	}
- #endif
- 
--	/* KVM depends on !HGATP_MODE_OFF */
--	kvm_riscv_gstage_max_pgd_levels = 0;
--
--done:
- 	csr_write(CSR_HGATP, 0);
- 	kvm_riscv_local_hfence_gvma_all();
- }
+ struct kvm_irq_routing_irqchip {
+ 	__u32 irqchip;
 -- 
 2.50.1
 
