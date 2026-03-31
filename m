@@ -1,74 +1,70 @@
-Return-Path: <linux-doc+bounces-81813-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81815-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +NRlIidTy2lYGQYAu9opvQ
-	(envelope-from <linux-doc+bounces-81813-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 06:52:55 +0200
+	id 6KejA3Z/y2mLIQYAu9opvQ
+	(envelope-from <linux-doc+bounces-81815-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 10:01:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77BF7363F11
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 06:52:54 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E1C14365AFB
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 10:01:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7499F300BE00
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 04:52:50 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B5FC63036C6B
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 07:56:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C43D13624B5;
-	Tue, 31 Mar 2026 04:52:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F4A93D75A0;
+	Tue, 31 Mar 2026 07:56:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TYXXjUYG"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="LYxQ3DT/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A280345CDD;
-	Tue, 31 Mar 2026 04:52:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B73693D6666;
+	Tue, 31 Mar 2026 07:56:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.226
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774932768; cv=none; b=ij3Lm/3LjD6R09PbYBq2bXIMuCp9FKExwHa2QXPBFm1e5OCzyteqfap/Fl7bFENvKuHZzzqdxGQQv79tyTsnJHGhv+LWxeq7VB9C1VtlwYfKTraBk6ekmRZ6BH8x1fg3VykUus8JZ5Bzw7e/LngXu3YOj98r1gYzpKpegFAXdu4=
+	t=1774943807; cv=none; b=bcBEDxQQLCWhcJ5yc05Jot8UOwkgRnyb8ckxLkkFiVLeud5N0qYUE+EMbS60InoiQ+JsoOEudPUdv8Au4pUA7mmn5MrPQaaieVY5ytjTCm0FOT6Ms7m8SgqWCL+5XTxKyIZUZcfQojX02IE2kb9YSe9dnQTj2SqrA1Xfs26rI4Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774932768; c=relaxed/simple;
-	bh=W1sV0gG5y7v5xTcQdkLYhQC8LVNXIot5XhAZDvh9WtE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=elKHdslCQCGOYUmbDgBxj2hH+d3ypXbF1eofzTwZR2+bw2SGVNgUBS7vwlXSBMNQYt5Cvg0kob4uk7xINYM9b5BfmmCexyQ7NjfZwjT9h8m8Up+6wTv5hrRzaNsaN4XkbyNsG/SC+sYNKxmTTX5g3mLewnPalbbbsQWJ071Ac8k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TYXXjUYG; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C421C19423;
-	Tue, 31 Mar 2026 04:52:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774932768;
-	bh=W1sV0gG5y7v5xTcQdkLYhQC8LVNXIot5XhAZDvh9WtE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=TYXXjUYGsygiFeTxc15ZdsIJXlkwr86dYuvCilb0aMIDAh38qnVxfos/7uroLY2PU
-	 iWYOMO4QDA3gMPxE2alA8RkBjKU8Oo5jJffsQ9Y8izDZ/UlHADM8T7YHPRBS4AZnfb
-	 SEEM7AJFtW9Y76p0FPK9IOtBohiB6NkBjXpEbjCJgymtOtS8vlmQjlkC8RjYA4l+IV
-	 Qt0l1kNaXWlfLZrcyVKHs5OrJPe9Dt/ziF+OcBeg8MdY9RRH0U/jj2uOWkpPizFeDM
-	 LzzrM+mpWPjqrT8WlBtVvGgCoJgBACt9VQ/vmYFICTi16MmCkuR9me4asjESYAsxDw
-	 9BCXgjPOU1KYg==
-From: SeongJae Park <sj@kernel.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: SeongJae Park <sj@kernel.org>,
-	Greg KH <gregkh@linuxfoundation.org>,
-	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
-	"# 5 . 19 . x" <stable@vger.kernel.org>,
-	David Hildenbrand <david@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Lorenzo Stoakes <ljs@kernel.org>,
-	Michal Hocko <mhocko@suse.com>,
-	Mike Rapoport <rppt@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Vlastimil Babka <vbabka@kernel.org>,
-	damon@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	Roman Gushchin <roman.gushchin@linux.dev>
-Subject: Re: (sashiko status) [PATCH 0/2] Docs/admin-guide/mm/damon: warn commit_inputs vs other params race
-Date: Mon, 30 Mar 2026 21:52:45 -0700
-Message-ID: <20260331045245.67438-1-sj@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260330142205.e7c7d7b47ec15a634f6eebf4@linux-foundation.org>
-References: 
+	s=arc-20240116; t=1774943807; c=relaxed/simple;
+	bh=fASAJArR/y4QkZiyZg0U2Rb9L8SqjCZ6jcF32RLWFFk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=MKtXdZSj5AsPyOhiI+trGFej5WWvxeeT3xnTuCX2oJLBq+68+jK4Zwz92023uOo2fXzp+6vBNwvhSy/ungH7DCSSVGTCOTpz2C7044Pa91teqCKJLOLRVyQuU5xwQtzCEnQ6JQJbw+N/AXlic9pgAn8uL2o1IvugKDyk6IcPycY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=LYxQ3DT/; arc=none smtp.client-ip=113.46.200.226
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=eVo/An4M/gQLQ281O7gOuOLQWBzM9qkbNV/IQ7yuXx8=;
+	b=LYxQ3DT/isqTlMjvhNVzBpmxE9pjTOJLoTQzcWQaqm8Cm53FaCLXMIGyKJvBdWhY0pSpK6RFN
+	0kzPhYN4bJOhWx26AivuByk/0sEYEvwPMP7E6BRFSoo7V0u0ozUtN0sg+M69MzokCbPRWrWlUx4
+	NFif1SIiI5TL05S98jPCbx8=
+Received: from mail.maildlp.com (unknown [172.19.163.200])
+	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4flKzP3Y5kzKmSv;
+	Tue, 31 Mar 2026 15:50:25 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 7EA8240563;
+	Tue, 31 Mar 2026 15:56:36 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.189.124) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Tue, 31 Mar 2026 15:56:35 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
+	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
+	<andrew+netdev@lunn.ch>, Ioana Ciornei <ioana.ciornei@nxp.com>
+CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
+	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
+	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
+	<shijing34@huawei.com>, Zheng Jiezhen <zhengjiezhen@h-partners.com>, Maxime
+ Chevallier <maxime.chevallier@bootlin.com>
+Subject: [PATCH net-next v03 0/6] net: hinic3: PF initialization
+Date: Tue, 31 Mar 2026 15:56:19 +0800
+Message-ID: <cover.1774940117.git.zhuyikai1@h-partners.com>
+X-Mailer: git-send-email 2.51.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -76,108 +72,102 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81813-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TAGGED_FROM(0.00)[bounces-81815-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[gongfan1@huawei.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:email,sashiko.dev:url]
-X-Rspamd-Queue-Id: 77BF7363F11
+	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:dkim,h-partners.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: E1C14365AFB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 30 Mar 2026 14:22:05 -0700 Andrew Morton <akpm@linux-foundation.org> wrote:
+This is [3/3] part of hinic3 Ethernet driver second submission.
+With this patch hinic3 becomes a complete Ethernet driver with
+pf and vf.
 
-> On Sun, 29 Mar 2026 12:32:26 -0700 SeongJae Park <sj@kernel.org> wrote:
-> 
-> > On Sun, 29 Mar 2026 20:05:53 +0200 Greg KH <gregkh@linuxfoundation.org> wrote:
-> > 
-> > > On Sun, Mar 29, 2026 at 08:49:16AM -0700, SeongJae Park wrote:
-> > > > Forwarding sashiko.dev review status for this thread.
-> > > > 
-> > > > # review url: https://sashiko.dev/#/patchset/20260329153052.46657-1-sj@kernel.org
-> > > 
-> > > Why are you doing this?  If we want to see the review, can't we just go
-> > > and look at the tool itself?
-> > 
-> > We can.  But it is bit cumbersome to opening web browser and moving my focus to
-> > there.  Reading everything on the mailing tool is easier for some people like
-> > me.  Like some test bots send reports are replying to patches, or we sometimes
-> > forwarding bugzilla reports to mailing lists in a form of a plain text mail.
-> > 
-> > Secondly, I have to share my opinions about the reviews, as many times AI
-> > reviews need human's opinions.  There is no good way to do that on the web ui
-> > of the tool (sashiko) for now, and I think this mail based flow is the best.
-> 
-> I do agree with Greg that it's all a bit excessive.  Thanks for your
-> your diligence, but perhaps dial it back a bit?  It's OK - we're all
-> trying to figure out how best to utilize this tool.
+Add 20 ethtool ops for information of queue, rss, coalesce and eth data.
+Add MTU size validation
+Config netdev watchdog timeout.
+Remove unneed coalesce parameters.
 
-Thank you for your kind words, Andrew.  I understand and admit the fact that
-this looks excessive.
+Changes:
 
-> 
-> I view Sashiko as primarily an author tool.  Sometimes I call it
-> checkpatch++.
+PATCH 03 V01: https://lore.kernel.org/netdev/cover.1773387649.git.zhuyikai1@h-partners.com/
+* Add rmon/pause/phy/mac/ctrl stats (Ioana Ciornei)
 
-Thank you for sharing your perspective.  This is helpful at what you want from
-the use of the tool, thank you.
+PATCH 03 V02: https://lore.kernel.org/netdev/cover.1774684571.git.zhuyikai1@h-partners.com/
+* Modify "return -EINVAL" intension problem (AI review)
+* Use le16_to_cpu for rss_indir pair.out->buf (AI review)
+* Use u32 instead of int in coalesce_limits to avoid overflow (AI review)
+* Remove redundant u64_stats_update_begin/end when reading stats without
+  concurrent reader (AI review)
+* Modify nic_dev->stats.syncp logic (AI review)
+* Complete rxq/txq stats stats fileds in hinic3_rx/txq_get_stats (AI review)
+* Remove statistics values in rtnl_link_stats64 from ethtool statistics
+  values (AI review)
+* Add channel_cfg_lock & channel_res_lock to protect resources access (AI review)
+* Remove OutOfRangeLengthField, FrameToolong and InRangeLengthErrors (Ioana Ciornei)
+* Remove redundant mtu commit (Maxime Chevialler)
 
-My view of sashiko was a human reviewer that having very odd characteristic and
-cannot answer to my feedback for a reason, but still being useful in many
-cases.  Hence I wanted to help the special reviewer be able to communicate with
-others on the mailing list.  And I was thinking anyway that's what sashiko will
-do, because I saw sending review as mail as one of TODO items for sashiko, from
-the public announcement, and I onboarded DAMON for that.
+PATCH 03 V03:
+* Change unnedd to unneeded (AI review)
+* Remove packets,bytes,errors and dropped in hinic3_rx/tx_queue_stats (AI review)
+* Remove duplicated entried in hinic3_port_stats[] (AI review)
+* change stats_info.head.status to ps->head.status (AI review)
 
-But apparently not everyone is sharing same view.  My understanding of the TODO
-item in sashiko public announcement may also be biased.  Maybe being a
-subsystem's sole maintainer that looking for a reviewer made such uncautiously
-biased perspectives.
+Fan Gong (6):
+  hinic3: Add ethtool queue ops
+  hinic3: Add ethtool statistic ops
+  hinic3: Add ethtool coalesce ops
+  hinic3: Add ethtool rss ops
+  hinic3: Configure netdev->watchdog_timeo to set nic tx timeout
+  hinic3: Remove unneeded coalesce parameters
 
-> In a better world, author would be able to sort out
-> Sashiko issues before ever sending out the patchset.  But in this
-> world, a public send is needed to obtain that review.
-> 
-> So what we're presently seeing is author development activity which is
-> unfortunately and inappropriately being conducted on a public list.
-
-Makes sense.  Now I understand why you and Roman were discussing having a
-separate mailing list for sharing the reviews via mail as a path forward, and
-I agree that could be a good option.
-
-> 
-> Personally, I pay only a little attention to author's Sashiko activity.
-> Just enough to see whether I should pay more attention.  If author
-> says "oops, let me redo" then fine, I'll await the next spin.  If
-> author says "that was all nonsense" then fine, time to take a closer
-> look.
-
-Makes sense.  I will try to keep sharing necessary information, but for only
-targetted audiences, with less traffic.
+ .../ethernet/huawei/hinic3/hinic3_ethtool.c   | 829 +++++++++++++++++-
+ .../ethernet/huawei/hinic3/hinic3_hw_intf.h   |  13 +-
+ .../net/ethernet/huawei/hinic3/hinic3_irq.c   |  16 +-
+ .../net/ethernet/huawei/hinic3/hinic3_main.c  |  16 +
+ .../huawei/hinic3/hinic3_mgmt_interface.h     |  39 +
+ .../huawei/hinic3/hinic3_netdev_ops.c         | 101 ++-
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.c   |  64 ++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.h   | 109 +++
+ .../ethernet/huawei/hinic3/hinic3_nic_dev.h   |  24 +
+ .../ethernet/huawei/hinic3/hinic3_nic_io.h    |   4 +
+ .../net/ethernet/huawei/hinic3/hinic3_rss.c   | 487 +++++++++-
+ .../net/ethernet/huawei/hinic3/hinic3_rss.h   |  19 +
+ .../net/ethernet/huawei/hinic3/hinic3_rx.c    |  59 +-
+ .../net/ethernet/huawei/hinic3/hinic3_rx.h    |  17 +-
+ .../net/ethernet/huawei/hinic3/hinic3_tx.c    |  80 +-
+ .../net/ethernet/huawei/hinic3/hinic3_tx.h    |   2 +
+ 16 files changed, 1853 insertions(+), 26 deletions(-)
 
 
-Thanks,
-SJ
+base-commit: 8e7adcf81564a3fe886a6270eea7558f063e5538
+-- 
+2.43.0
+
 
