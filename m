@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-81830-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81832-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mGypGmGqy2kpKAYAu9opvQ
-	(envelope-from <linux-doc+bounces-81830-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 13:05:05 +0200
+	id IPpyBGWpy2kpKAYAu9opvQ
+	(envelope-from <linux-doc+bounces-81832-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 13:00:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1B743687C7
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 13:05:04 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8EA53686EC
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 13:00:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A7C3630C6A41
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 11:00:44 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 7C09E300ACB5
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 11:00:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 365EC3A7F54;
-	Tue, 31 Mar 2026 11:00:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FFA03B27DB;
+	Tue, 31 Mar 2026 11:00:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="I6HMSAwt"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="qoNGz+Kk"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9AF32E401;
-	Tue, 31 Mar 2026 11:00:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5DD93A543F;
+	Tue, 31 Mar 2026 11:00:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774954843; cv=none; b=QaBEuuSu+ttDsU66Vobsf0WMGeEpG+lpxpJ4Q2RL7EDzt28DeyWfx1WVVVCEg4sAeiiFboI6tYVKsC07zvDpVUpJHWO9BDiPQQ1RHPJzVddeYre5fKMWPkoLQYkRBppA78CO6b/zruwiqgHtSsnxv8eDwNp1afMIVukTQMVjE/0=
+	t=1774954845; cv=none; b=gFpyluYvZwMnzj3P8uJn87kBc0AAzLIHcHNMpMLYh8zDnzZtzizBWGyb5KkK0J9sBjZPuOD50zyiOU/bdW7C8r4plI6tQnNm4rVE4UkTp3jv+K2FM6KH78M5R8zylJEgIfwYOHvQ4lhk5niiesn1MlEol0b3bHt7gHzvrHtdSY0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774954843; c=relaxed/simple;
-	bh=LQ8JPJu4hVwXA6ZBcwhWKH4JmrXxTSQbw/JmwDUjF4Y=;
+	s=arc-20240116; t=1774954845; c=relaxed/simple;
+	bh=yzGP/Cy1yyj6AMionGm0ecG3Z37VsQOIJST1oCRcuAA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=DfT+GbgrC6En4Tl1f56PaQ4n23kTSnIqaA0gk6+Ruod4RowIlifITr1ll3fIvZ7kHl6yJDA5E0Abkbq3xwDNiC+Y43askY6dfIJ9l0PQQg1FbhCRn7W+SPoMi2ejvxeCpq+Gx3LJiMlOJmoI6EvWoeKp5B1r2+odm3xwzKtYfEE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=I6HMSAwt; arc=none smtp.client-ip=82.195.75.108
+	 In-Reply-To:To:Cc; b=e/cwcMq4XIYlFJ2SqisNVCkCf73LIcUoohwWC2ZLzrhf+THU2SNoZ78Gpm/QkL3ID0hmoion/QCN4G+7jX6GdDxmk/GyGayKmG68wDLx/qi9/OvfluPYzkFzrWTXbLXNTXrNqRc12++kWahZ7JEZsyYvw7y387CI7ZXsIaP4yps=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=qoNGz+Kk; arc=none smtp.client-ip=82.195.75.108
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
 	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:In-Reply-To:References:
 	Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:
 	From:Reply-To:Content-ID:Content-Description;
-	bh=D3oi2WL9aVMRGCDxrM3eE/b0NGQJJRrFO3ofQ0V/e2I=; b=I6HMSAwtXrXIBW/RtXa5KMCct0
-	RFhBLw/Ml8GEnRdD3jC5twXHbmCG9n7R9uen9ldHC8fOfReSvGMHw5JtfyJazu6CzXf3YZrUSC97t
-	p7u0lWe1mycrtaaIPzyEEu792zso3aLoEzUZ4nBSKP48J1tmhaLAaCvapG1sRkcDEPzAeFLixZg2H
-	tYd+POTt26PJwTgmrv3XMa9WAIbTXPJsru0AV+ypvGe8yGBkjJGhSiVAewkTu1xjsINvAqErakkej
-	qvKwgQs1qcOWgsCGQgnl1CSaDY/wyw9eitLI65I73sqy5x4o0GR89OZPkYY/usqQANopiz4q6zDpt
-	ZrH5GjIw==;
+	bh=rVyhTawyidgAJFXlFpU1kNzGw6yToxZt3Y3vvzuWrVQ=; b=qoNGz+KkXkQW3BqbH2rQVP+plM
+	Lpy5EaphkrsicKHvP+14QwCjtVBz1wPZunwR2OX+0/rP2uk8iOcampfze+kP4Mb+/aUGPAnSjoksO
+	MzUDlxkSo9HIie7ra43H8/uYRDQvaR0VtclN+d2KAqiTCPrXEYURGg6ez+pPKtrnEka9o5J6OphI5
+	Iy3vEZhaph0BjibtZ56hp4XQcLcbOy35KCFr2l4BJ69fbXC3y7KI0HHYlQWjzJ8SptDDf1bFi9yfQ
+	43kCbKQM8ZaIFcqIfiwEqDbFcsBhkVUXou4AL+SjFPopnT9fomZAGgo4pJ2AFklTIpvdQ6LZ//e77
+	WRk7DrlQ==;
 Received: from authenticated user
 	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
 	(Exim 4.96)
 	(envelope-from <leitao@debian.org>)
-	id 1w7Wpl-002Aan-26;
-	Tue, 31 Mar 2026 11:00:32 +0000
+	id 1w7Wpp-002Aat-1L;
+	Tue, 31 Mar 2026 11:00:36 +0000
 From: Breno Leitao <leitao@debian.org>
-Date: Tue, 31 Mar 2026 04:00:16 -0700
-Subject: [PATCH v2 1/3] mm/memory-failure: report MF_MSG_KERNEL for
- reserved pages
+Date: Tue, 31 Mar 2026 04:00:17 -0700
+Subject: [PATCH v2 2/3] mm/memory-failure: add
+ panic_on_unrecoverable_memory_failure sysctl
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260331-ecc_panic-v2-1-9e40d0f64f7a@debian.org>
+Message-Id: <20260331-ecc_panic-v2-2-9e40d0f64f7a@debian.org>
 References: <20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org>
 In-Reply-To: <20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org>
 To: Miaohe Lin <linmiaohe@huawei.com>, 
@@ -73,20 +73,20 @@ Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org, Breno Leitao <leitao@debian.org>, 
  kernel-team@meta.com
 X-Mailer: b4 0.16-dev-453a6
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1010; i=leitao@debian.org;
- h=from:subject:message-id; bh=LQ8JPJu4hVwXA6ZBcwhWKH4JmrXxTSQbw/JmwDUjF4Y=;
- b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBpy6lIlRQLIv0IYw8ryV6vm0jHNbCVtjXc3Xeou
- /NgiA8DHsSJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCacupSAAKCRA1o5Of/Hh3
- bYf6D/4o0UQMOnG1ClcQ3eCmn9QhVYwmpu9MYpIjydSGaoNVYxGa307x7T1pueq49fEWNJ/Zusc
- k980fbsdTXIiyklHxWai/4hiFUtmg01JLk2KriPOc2K0Q7JNfu0avc9hQYBBXD2jQTwFIaPNgUt
- 7SUUSAu5uVIUbZstjQH5ocHkK5Gaa0OCLw6N6zxFHDrVecwDugein1NEM66fDdwSBXf/HsSYldJ
- ftIR0ktUz1CYQ54sGy88qX74FGO3EHVOukUtQhAHeTt5nobKW41ZSRBPpNkjRRF5yBEpyx/RspP
- ZQ1g/5FVwH7h86wDMky/6fjO7lRwkOQnqt4LnuU7hrF7m9eMkPJQqCRJHSodFMU0AEVnChPNNpA
- sKo8IhZazArTBvbBhU1weDQccic99JUABt2gdmlaAWQU4NLRl1jm8jvAcilIlpCETZkPmowXHfc
- hSrI3tadNC4ub6cXy/Zxrgf0GEeyJjf55eXGhPm+0bhohkNau5Wrde/X9UllEZUncsQNG80egzT
- kfUXdZ1+eIln4sPROep8qcrAiYzzb+2URoK9gXl7/e4XOCnlbO7erdsUcnWZ0BA+BMbJAeBbf7t
- viXIr8vpg6o0AMMCAHcGm+7IDPuxN9KLNV16eNGys8Xuz26T9/GbAnudITUEXAI5ehn4Ux9br/R
- yioz27gGZ/S+V2Q==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1836; i=leitao@debian.org;
+ h=from:subject:message-id; bh=yzGP/Cy1yyj6AMionGm0ecG3Z37VsQOIJST1oCRcuAA=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBpy6lIqDJQvSdPLFq2MknuEvV7NkwbvksSPwQSQ
+ 7SDWBXqpaeJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCacupSAAKCRA1o5Of/Hh3
+ bWzVD/wMEOFVeqAHE2Bo40HWmg1QMcTSipGvQHqL38jYHHqnOqXtg5Hj7d3c+YppJwEfs0QjFTA
+ EcOibEYB573vJ1emMullT6EaX+vids8do9+A4DuxmM/Tvv6ijRy5LYi35aKp1E8u3Dp3aOQuvoW
+ kJKb12RaZLu3QzrmfvyXWGQSFP+yyjqxpW56GzyAga0q/iWDywpxA8yxCUzfUT7ObsYejpLmdVl
+ Zw7muxBxdc4ig0qzVFu8p4mPOfsjCrqoJrlK57xk84RVll65KvBMJvDR5ndDHQTrwfOarJpzGbx
+ rQPN3ZJ3GS2nSsv66y/w8Gz+pGEPh8Inv9lvMwhcaLfWXSEUwCQ/4DGwUysY/3LRtMCenFpMiU0
+ hTY1DleA0RfkpEfaGyy7Fi1ILFm8Uwk8zMZ1KIAbvEzVA8Ba2QJQjxaTbQn17AC4Y90cZHidbPv
+ 3i7I+kAGBQSP6hXw3gFEEMIvkWfWoKZZZY/47jWOKZuTH9qfu2Tr7iBNeIrlg33KH+hJ5owL6cl
+ u/VjzANF38CSAb2yQdUlyRDJnYgcyQkmaXWO8Yb1uH6K6b7z4b0qebJ6DHqNV83wCMJWxwq5Pyv
+ IijdlEzmEFbyPDxpsR5cOdIiLRELA/8gfu2HSHramLNlpPqUt4hshRqaSdwJNw0IfaaAD0c4vtH
+ Z3/+zy2gRZBkGkw==
 X-Developer-Key: i=leitao@debian.org; a=openpgp;
  fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
 X-Debian-User: leitao
@@ -94,7 +94,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -102,11 +102,11 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_COUNT_THREE(0.00)[4];
 	DMARC_NA(0.00)[debian.org];
 	FREEMAIL_TO(0.00)[huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org];
-	TAGGED_FROM(0.00)[bounces-81830-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81832-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-0.997];
 	PRECEDENCE_BULK(0.00)[];
@@ -116,38 +116,60 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: B1B743687C7
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: A8EA53686EC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-When get_hwpoison_page() returns a negative value, distinguish
-reserved pages from other failure cases by reporting MF_MSG_KERNEL
-instead of MF_MSG_GET_HWPOISON. Reserved pages belong to the kernel
-and should be classified accordingly for proper handling by the
-panic_on_unrecoverable_memory_failure mechanism.
+Add a sysctl that allows the system to panic when an unrecoverable
+memory failure is detected. This covers kernel pages, high-order
+kernel pages, and unknown page types that cannot be recovered.
 
 Signed-off-by: Breno Leitao <leitao@debian.org>
 ---
- mm/memory-failure.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ mm/memory-failure.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
 diff --git a/mm/memory-failure.c b/mm/memory-failure.c
-index ee42d4361309..6ff80e01b91a 100644
+index 6ff80e01b91a..d0d911c54ff1 100644
 --- a/mm/memory-failure.c
 +++ b/mm/memory-failure.c
-@@ -2432,7 +2432,11 @@ int memory_failure(unsigned long pfn, int flags)
- 		}
- 		goto unlock_mutex;
- 	} else if (res < 0) {
--		res = action_result(pfn, MF_MSG_GET_HWPOISON, MF_IGNORED);
-+		if (PageReserved(p))
-+			res = action_result(pfn, MF_MSG_KERNEL, MF_IGNORED);
-+		else
-+			res = action_result(pfn, MF_MSG_GET_HWPOISON,
-+					    MF_IGNORED);
- 		goto unlock_mutex;
+@@ -74,6 +74,8 @@ static int sysctl_memory_failure_recovery __read_mostly = 1;
+ 
+ static int sysctl_enable_soft_offline __read_mostly = 1;
+ 
++static int sysctl_panic_on_unrecoverable_mf __read_mostly;
++
+ atomic_long_t num_poisoned_pages __read_mostly = ATOMIC_LONG_INIT(0);
+ 
+ static bool hw_memory_failure __read_mostly = false;
+@@ -155,6 +157,15 @@ static const struct ctl_table memory_failure_table[] = {
+ 		.proc_handler	= proc_dointvec_minmax,
+ 		.extra1		= SYSCTL_ZERO,
+ 		.extra2		= SYSCTL_ONE,
++	},
++	{
++		.procname	= "panic_on_unrecoverable_memory_failure",
++		.data		= &sysctl_panic_on_unrecoverable_mf,
++		.maxlen		= sizeof(sysctl_panic_on_unrecoverable_mf),
++		.mode		= 0644,
++		.proc_handler	= proc_dointvec_minmax,
++		.extra1		= SYSCTL_ZERO,
++		.extra2		= SYSCTL_ONE,
  	}
+ };
+ 
+@@ -1298,6 +1309,11 @@ static int action_result(unsigned long pfn, enum mf_action_page_type type,
+ 	pr_err("%#lx: recovery action for %s: %s\n",
+ 		pfn, action_page_types[type], action_name[result]);
+ 
++	if (sysctl_panic_on_unrecoverable_mf && result == MF_IGNORED &&
++	    (type == MF_MSG_KERNEL || type == MF_MSG_KERNEL_HIGH_ORDER ||
++	     type == MF_MSG_UNKNOWN))
++		panic("Memory failure: %#lx: unrecoverable page", pfn);
++
+ 	return (result == MF_RECOVERED || result == MF_DELAYED) ? 0 : -EBUSY;
+ }
  
 
 -- 
