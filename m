@@ -1,317 +1,182 @@
-Return-Path: <linux-doc+bounces-81872-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81876-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MJydBDP4y2kXNAYAu9opvQ
-	(envelope-from <linux-doc+bounces-81872-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 18:37:07 +0200
+	id YLDTFiT7y2lsNAYAu9opvQ
+	(envelope-from <linux-doc+bounces-81876-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 18:49:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2264236CD6F
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 18:37:05 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C2FE36D32A
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 18:49:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 66D24307981E
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 16:23:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 86D1C323038B
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 16:38:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8878E3FAE08;
-	Tue, 31 Mar 2026 16:23:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B35F9426EA3;
+	Tue, 31 Mar 2026 16:37:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="cnj2oWuj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FmZnTkWs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8007E3DEFEF
-	for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 16:23:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77374425CE7;
+	Tue, 31 Mar 2026 16:37:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774974207; cv=none; b=ukPiR66tHySHOtYlTFjHq1YXwvj0SItk14C0zmtIuRE2ggpN0ug0i+pMNUMUlDf8UlyK1S089WuoT/xIemqoP4NcEc2JeonwpT8keH393TMDexWwqH4onanW72ROkm8D4GniXpRGSH/++HeoyQw24VrmtLHHkcFeod7zWqJ3G2M=
+	t=1774975046; cv=none; b=rYHAE3MSHgJvhfJINYvHqXxwwwY7WEKqjURr1sK2HVrFqheOUZP2qeCdOastYfUOoE5+Y9SvsMqaRgFFyJnvWfLXzbJy5+XhME9invWLOMmDWtQyD0QqUW9U17fSL73j0079XTbSZFhf9L8tko3YiGOJgJ7BBOk9+3pJHZA+tKY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774974207; c=relaxed/simple;
-	bh=E9q4kly1zyjlK/nXHV+iHGk+ZJrgY6vQu+gb1CC1Krs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nIlU/WudMKQOocHoZ8q2yKb0KqmeasHs1bKvMwXz80wTxdyVVRh5ah/Do7jT+w6sHocq1b/2HQbMc2U6k0kwZMrcJgvbu4c44OASHnvMJL38PppD/bQT7PeXnUXyguqJjNkuSRgeOHKrvHsdGPn76NjpEh8fnX+FZMgS73eipeg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=cnj2oWuj; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4852b81c73aso50654515e9.3
-        for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 09:23:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1774974204; x=1775579004; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=m8VbtpEHRuJbj4APKjXIpLAw6vG+/+ZV8XZtpmo84AQ=;
-        b=cnj2oWujeG+Rd+Hh3BuIEI52IxN+ltrvQbSaXlh63V58EhVnIqrvP4UN98ZQoSaal2
-         FkambSz0nhw5pw6SnVVBP8D9sYn9SLwRgUrJThe+5c+gPaW/lKxmq5gsvK1qegFo4/sl
-         x8eP6i/SH3sjN4bpzSxZVwoZPPKWrslFwafej79CTARoc5/UUHkuiccWoGLtLdzqvN/O
-         s3/+he6+2fdCWHgGZALQ9AlNuTqpagwl+UN1T63uCLNInXvzCLLZSq/Hjt5eA0V9smkq
-         Br3eo1gM8CVYRCgwCDsfAQJn8YdJkx29/h7N4tGJnYAx7zguz5RFjUORmwg+XSMMICoC
-         Isug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774974204; x=1775579004;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=m8VbtpEHRuJbj4APKjXIpLAw6vG+/+ZV8XZtpmo84AQ=;
-        b=UH+8zUXLUzpDCYaoeMWNzB9gTjTK2cG8iGVs319cbYkJSwh5LxEe10XcYqWbIVZAc0
-         eDhLvehoBriRny+DflMxQXmKCElNNYb3k758Z4HMr6/0etjsymx5SzQMett4fdh7x1qJ
-         pI6SJi7kpAzz6E/Ca4oGrWR//iIj559GA7Q5yChX0jH/QMTY7/oh01XMrU/cFVS7Z8EC
-         KC2FeAe6AKRKWpQ7TdooFpBKuM0D6gPUG69P1AgN2h6ME/SSaV7E1ObHPtk8qOumZJhb
-         GRUPn4x/qv2Y1HXUBRgIAWZPI6eM1tN995AwTdQWNJ4kJjPIgt4NYJ61SEUAxnDztIno
-         epfA==
-X-Forwarded-Encrypted: i=1; AJvYcCWU5eEv4K2RlbbGWg478ssydCUzxS5bqEj2YUzSGFbgFX3tsPTZAntd5tVIXp+KBBroNYJ10/P4SBk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyQvDm/lCYg9KzDp5ipINToYCdlgvnYyuzcsoVm4R58SwxXRLs5
-	H3gn7Pp/rDDlhpZuwnRx/MDbSA63nmXp6zewd5WEtC/WUmweBHY8luTuyIHgSitJHq4=
-X-Gm-Gg: ATEYQzwQKI240+3NG3JmwkHNAZ4SbPVydRhhEmvgkLg0MCesWUvPcLs+QEGIcvDP3z8
-	Luhds/zCazV9JiaF6OIWIzlKv982+m+PMpwQztjmgUIVvvln7S5nJN7rDS0t0M6s7atgdfwsEp9
-	ftM9sjSQanTq7/Gc2MeId3/GQ+GaTUvBB+zzf/U9FJwIpXsipUJmWbx6xHWxfy1Mhf/t5YYZzXP
-	WNgIJqNoL7VdtRapTbe6/e7JizMTrcKZ7ZhFk9ktW1ePQv/7xGRxIt7MdY6r2X3ODeGc86dSelE
-	763YV8+//1fz1xW+nzVbjKLJva+Z5r1tItdbl980AhX7qKsk43+DRK+VvDvgjJ4QhLka8jAbNJ3
-	X/t3j40H+w+hfyX52D8hk1t0kyxM6KsHKxS5Q7VlD7KmdU2EyNiRyyWZrRitoHMmNWo9rvDOfaF
-	F5RsbUxuLBGRTGalR5aF0+krsEQKeWxY8/jdJzi8BxZ7XramNw1iDnTOruSmQ9R0xxs4Y+g0pR7
-	vyHB+f7T7gyMDTUC8BldjVDbqT9YCnvSuDTXLJIMq4tUgCOL6ErkhKZ1s0jDyRgNTyz9tetayNo
-	5aRV
-X-Received: by 2002:a05:600c:45d4:b0:488:79a3:f04c with SMTP id 5b1f17b1804b1-48879a3f26cmr64380275e9.27.1774974203573;
-        Tue, 31 Mar 2026 09:23:23 -0700 (PDT)
-Received: from ?IPV6:2a00:1028:838d:271e:8e3b:4aff:fe4c:a100? (dynamic-2a00-1028-838d-271e-8e3b-4aff-fe4c-a100.ipv6.o2.cz. [2a00:1028:838d:271e:8e3b:4aff:fe4c:a100])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4887adc5690sm34644865e9.2.2026.03.31.09.23.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 31 Mar 2026 09:23:23 -0700 (PDT)
-Message-ID: <2fb64da1-caac-4cb0-80a8-a6b6a0f690be@suse.com>
-Date: Tue, 31 Mar 2026 18:23:21 +0200
+	s=arc-20240116; t=1774975046; c=relaxed/simple;
+	bh=mtI7hYxtLGh8UYHmT3w/ULXqZgCHpOOamGGALDedBw8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=gpCXM1Ix/4O0SCvFNT6bpKFT02xjFksghviQR5FQJANDDxcMyqMq72kWr/Uo/bjVnY2cMNLjEPp2gXa94QU5oz4kBcJeEPqtlCS2Sul0C9pFDeQq1OTOIIsb9//BJvS3myIPpAy5wiumJIbiBxHJl+Ui21sKD3bFxcd0+jOpcEE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FmZnTkWs; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2028AC19423;
+	Tue, 31 Mar 2026 16:37:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1774975046;
+	bh=mtI7hYxtLGh8UYHmT3w/ULXqZgCHpOOamGGALDedBw8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=FmZnTkWstD2V+gR2UzIZnHqkagf3anT+Co3aUDxpDncrU/mgjU9GseCg8wynmU5K2
+	 ulKRQ6+7+vRzuDrCNt1QjFCz85Z3PiKMPDIbKvnvRC09zWXwztpuJoLHfHXW9dPRP4
+	 zXc5wDir/E19xBVk7LLLNHoWyoSBneHvueL/SQUhkGtg6M+glmrUXsJyaSUio21ASZ
+	 9hZbeYbdZtLknfxe8II4GUf0PypQbk3s2NuE5fBRhKu4m+31ztDXQRa4B+++3LTBbs
+	 eQbpZKDToSwy0jOfIHlGAdRVpe/TfftrP64Ww4UbeqHtS82SfOQpluBmJHhx1vJZfn
+	 uPzdEP3ZKdc+g==
+From: Kees Cook <kees@kernel.org>
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: Kees Cook <kees@kernel.org>,
+	Justin Stitt <justinstitt@google.com>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Marco Elver <elver@google.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nsc@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	linux-kernel@vger.kernel.org,
+	kasan-dev@googlegroups.com,
+	linux-hardening@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	llvm@lists.linux.dev
+Subject: [PATCH 0/5] Introduce Overflow Behavior Types
+Date: Tue, 31 Mar 2026 09:37:18 -0700
+Message-Id: <20260331163716.work.696-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/4] kallsyms: extend lineinfo to loadable modules
-To: Sasha Levin <sashal@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Masahiro Yamada <masahiroy@kernel.org>, Luis Chamberlain
- <mcgrof@kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>,
- Richard Weinberger <richard@nod.at>, Juergen Gross <jgross@suse.com>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- James Bottomley <James.Bottomley@hansenpartnership.com>,
- Jonathan Corbet <corbet@lwn.net>, Nathan Chancellor <nathan@kernel.org>,
- Nicolas Schier <nsc@kernel.org>, Daniel Gomez <da.gomez@kernel.org>,
- Greg KH <gregkh@linuxfoundation.org>, Petr Mladek <pmladek@suse.com>,
- Steven Rostedt <rostedt@goodmis.org>, Kees Cook <kees@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>,
- Thorsten Leemhuis <linux@leemhuis.info>, Vlastimil Babka
- <vbabka@kernel.org>, Helge Deller <deller@gmx.de>,
- Randy Dunlap <rdunlap@infradead.org>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Vivian Wang <wangruikang@iscas.ac.cn>, linux-kernel@vger.kernel.org,
- linux-kbuild@vger.kernel.org, linux-modules@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20260312030649.674699-1-sashal@kernel.org>
- <20260312030649.674699-3-sashal@kernel.org>
- <79244e56-b3ea-4986-b4a2-91a78b21bf07@suse.com> <abwnvdbu4kjx7esJ@laps>
-Content-Language: en-US
-From: Petr Pavlu <petr.pavlu@suse.com>
-In-Reply-To: <abwnvdbu4kjx7esJ@laps>
 Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3413; i=kees@kernel.org; h=from:subject:message-id; bh=mtI7hYxtLGh8UYHmT3w/ULXqZgCHpOOamGGALDedBw8=; b=owGbwMvMwCVmps19z/KJym7G02pJDJmnfzjcUr9ReWh+xYJi1fjngUz3+2+fc1h6TLTsmKYj9 04uu0qvjlIWBjEuBlkxRZYgO/c4F4+37eHucxVh5rAygQxh4OIUgIkYxzIy3DPkb369yE/4zOsj p+RuXpp69bV03u2pS6pVXgj4nNjYx8XwP4C5pZApbvL1T5PFOTI9GDMOsPK2XSrts13n8ue+6L0 iRgA=
+X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,nod.at,suse.com,linux-m68k.org,hansenpartnership.com,lwn.net,linuxfoundation.org,goodmis.org,infradead.org,leemhuis.info,gmx.de,ideasonboard.com,iscas.ac.cn,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-81872-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-81876-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[suse.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[petr.pavlu@suse.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kees@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 2264236CD6F
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,llvm.org:url]
+X-Rspamd-Queue-Id: 9C2FE36D32A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 3/19/26 5:43 PM, Sasha Levin wrote:
->>> --- /dev/null
->>> +++ b/include/linux/mod_lineinfo.h
->>> @@ -0,0 +1,68 @@
->>> +/* SPDX-License-Identifier: GPL-2.0 */
->>> +/*
->>> + * mod_lineinfo.h - Binary format for per-module source line information
->>> + *
->>> + * This header defines the layout of the .mod_lineinfo section embedded
->>> + * in loadable kernel modules.  It is dual-use: included from both the
->>> + * kernel and the userspace gen_lineinfo tool.
->>> + *
->>> + * Section layout (all values in target-native endianness):
->>> + *
->>> + *   struct mod_lineinfo_header     (16 bytes)
->>> + *   u32 addrs[num_entries]         -- offsets from .text base, sorted
->>
->> Modules are relocatable objects. The typical way to express a reference
->> from one section to data in another section is to use relocations.
->> Choosing to use an implicit base and resolved offsets means that the
->> code has trouble correctly referencing the .text section and can't
->> express line information data for other sections, such as .exit.text.
-> 
-> I agree, which is why I scoped this just to .text :)
-> 
-> My thinking was that using ELF relocations would add significant complexity to
-> both the build tool and the runtime lookup path, which must remain NMI-safe and
-> allocation-free.
+Hi,
 
-I agree that using ELF relocations would be somewhat more complex. I had
-a look at adding a new u32/u64 "target" member to the
-mod_lineinfo_header struct which would point to the .text section in the
-resulting module via an absolute relocation. The idea was to keep the
-current offset and compression schema and only have a relocation that
-identifies the associated text section. I hoped to replace the objcopy
-steps in scripts/gen-mod-lineinfo.sh with an additional partial link to
-combine ${KO} with ${KO}.lineinfo.o.
+This is the spiritual successor to the "Mitigating unexpected arithmetic
+overflow" thread from 2024[1]. After a long discussion there, and
+subsequent discussions with Peter at Linux Plumbers, Justin went off to
+build a type-based solution. After more than a year of RFCs and feedback
+from compiler folks and with an eye toward potentially making this part
+of the C Standard in the future, what has evolved is Overflow Behavior
+Types[2], which are first-class native types that mirror the existing
+native scalar types in C. They are created using a type qualifier
+("__ob_trap" and "__ob_wrap"), but they are their own distinct
+types. e.g. "int" and "int __ob_trap" are different types, though
+they are mostly interchangable (e.g. format strings, implicit casts,
+etc), with some specific instrumentation in cases where wrap-around or
+truncation is possible.
 
-However, the issue with this approach is that the relocation in
-${KO}.lineinfo.o cannot cross-reference the .text symbol in ${KO}. It
-could be worked around by defining a start .text symbol in
-scripts/module.lds.S but this doesn't scale well if more sections need
-to be covered in the future. A separate utility would likely be required
-to join the two objects properly together.
+This series provides support for building with them enabled, adds
+documentation, adds tests, and proposes the new typedefs (see the last
+patch in the series) for the corresponding kernel scalar types. With this,
+we can start converting variables (and types) that are never supposed
+to overflow/underflow to these new types[3]. (Or types that are always
+supposed to overflow/underflow.)
 
-For the runtime part, I don't immediately see any issues. Relocations
-are resolved by the module loader when a module is loaded, so this would
-have no effect on the functionality being NMI-safe or allocation-free.
+Enjoy! :)
 
->>> +
->>> +#endif /* _LINUX_MOD_LINEINFO_H */
->>> diff --git a/include/linux/module.h b/include/linux/module.h
->>> index 14f391b186c6d..d23e0cd9c7210 100644
->>> --- a/include/linux/module.h
->>> +++ b/include/linux/module.h
->>> @@ -508,6 +508,8 @@ struct module {
->>>      void *btf_data;
->>>      void *btf_base_data;
->>>  #endif
->>> +    void *lineinfo_data;        /* .mod_lineinfo section in MOD_RODATA */
->>> +    unsigned int lineinfo_data_size;
->>
->> The lineinfo-specific members should be enclosed within the `#ifdef
->> CONFIG_KALLSYMS_LINEINFO_MODULES`.
->>
->> This will require module_lookup_lineinfo() to be conditionally compiled
->> based on CONFIG_KALLSYMS_LINEINFO_MODULES, with a dummy version provided
->> otherwise. Alternatively, accessors to module::lineinfo_data and
->> module::lineinfo_data_size that handle CONFIG_KALLSYMS_LINEINFO_MODULES
->> could be introduced in include/linux/module.h. For example, see
->> module_buildid() or is_livepatch_module.
-> 
-> The struct members were deliberately left without #ifdef guards following Helge
-> Deller's suggestion in the v1 review[1]. I don't really mind either way, but
-> I'd prefer to have a consensus before flipping it back and forth.
+-Kees
 
-The alternative suggestion I mentioned proposes using accessors to
-module::lineinfo_data and module::lineinfo_data_size that would handle
-CONFIG_KALLSYMS_LINEINFO_MODULES. This approach avoids having unused
-data in the module struct when CONFIG_KALLSYMS_LINEINFO_MODULES=n, while
-also allowing module_lookup_lineinfo() to use the
-IS_ENABLED(CONFIG_KALLSYMS_LINEINFO_MODULES) pattern and be always
-syntax-checked. Only the accessors won't be always syntax-checked but
-their code should be trivial.
+Link: https://lore.kernel.org/lkml/202404291502.612E0A10@keescook/ [1]
+Link: https://clang.llvm.org/docs/OverflowBehaviorTypes.html [2]
 
-The file include/linux/module.h could contain something like this:
 
-struct {
-	[...]
-#ifdef CONFIG_KALLSYMS_LINEINFO_MODULES
-	void *lineinfo_data;		/* .mod_lineinfo section in MOD_RODATA */
-	unsigned int lineinfo_data_size;
-#endif
-	[...]
-}
+Justin Stitt (2):
+  hardening: Introduce Overflow Behavior Types support
+  compiler_attributes: Add overflow_behavior macros __ob_trap and
+    __ob_wrap
 
-[...]
+Kees Cook (3):
+  refcount: Remove unused __signed_wrap function annotations
+  lkdtm/bugs: Add basic Overflow Behavior Types test
+  types: Add standard __ob_trap and __ob_wrap scalar types
 
-static inline void *module_lineinfo_data(struct module *mod, unsigned int *size)
-{
-#ifdef CONFIG_KALLSYMS_LINEINFO_MODULES
-	*size = mod->lineinfo_data_size;
-	return mod->lineinfo_data;
-#else
-	*size = 0;
-	return NULL;
-#endif
-}
+ lib/Kconfig.ubsan                             |  18 -
+ security/Kconfig.hardening                    |  50 ++-
+ Makefile                                      |   1 +
+ scripts/basic/Makefile                        |   2 +-
+ scripts/Makefile.lib                          |   7 +-
+ scripts/Makefile.obt                          |  28 ++
+ scripts/Makefile.ubsan                        |  10 -
+ scripts/Makefile.warn                         |   7 +
+ scripts/integer-wrap-ignore.scl               |   3 +-
+ Documentation/dev-tools/ubsan.rst             |  13 +
+ Documentation/process/arithmetic-overflow.rst | 323 ++++++++++++++++++
+ Documentation/process/deprecated.rst          |  39 +++
+ Documentation/process/index.rst               |   1 +
+ include/linux/compiler-version.h              |   2 +-
+ include/linux/compiler_attributes.h           |  12 +
+ include/linux/compiler_types.h                |   9 +-
+ include/linux/refcount.h                      |  10 +-
+ include/linux/sched.h                         |   3 +-
+ include/linux/types.h                         |  24 ++
+ include/linux/ubsan.h                         |  12 +-
+ drivers/misc/lkdtm/bugs.c                     | 253 ++++++++++++++
+ lib/ubsan.c                                   |  17 +-
+ MAINTAINERS                                   |  10 +
+ kernel/configs/hardening.config               |   1 -
+ tools/testing/selftests/lkdtm/tests.txt       |  10 +
+ 25 files changed, 807 insertions(+), 58 deletions(-)
+ create mode 100644 scripts/Makefile.obt
+ create mode 100644 Documentation/process/arithmetic-overflow.rst
 
->>> @@ -59,6 +62,9 @@ if_changed_except = $(if $(call newer_prereqs_except,$(2))$(cmd-check),      \
->>>      +$(call if_changed_except,ld_ko_o,$(objtree)/vmlinux)
->>>  ifdef CONFIG_DEBUG_INFO_BTF_MODULES
->>>      +$(if $(newer-prereqs),$(call cmd,btf_ko))
->>> +endif
->>> +ifdef CONFIG_KALLSYMS_LINEINFO_MODULES
->>> +    +$(if $(newer-prereqs),$(call cmd,lineinfo_ko))
->>
->> Should this be 'if_changed_except.. vmlinux'?
-> 
-> Lineinfo generation doesn't depend on vmlinux - it reads DWARF directly from
-> the .ko file itself. Unlike BTF (which uses vmlinux as a base for
-> deduplication), there's no vmlinux prerequisite to exclude.
+-- 
+2.34.1
 
-The Makefile rule is:
-
-%.ko: %.o %.mod.o .module-common.o $(objtree)/scripts/module.lds $(and $(CONFIG_DEBUG_INFO_BTF_MODULES),$(KBUILD_BUILTIN),$(objtree)/vmlinux) FORCE
-
-If $(and $(CONFIG_DEBUG_INFO_BTF_MODULES),$(KBUILD_BUILTIN)) then
-$(objtree)/vmlinux is added as a prerequisite for the target. Since the
-new lineinfo_ko call uses $(newer-prereqs), it is invoked even when
-vmlinux changes.
-
-However, the mentioned change to 'if_changed_except.. vmlinux' won't
-quite work either because if_changed_except appears to have a similar
-limitation as if_changed. It can be used only once per target due to
-storing the executed command in a corresponding .cmd file.
-
-Additionally, even the already present if_changed_except call for
-ld_ko_o doesn't seem to work as intended because it excludes "./vmlinux"
-but the same rule prerequisite is canonicalized to only "vmlinux". This
-means modules are always linked even when only vmlinux changes. I'll
-send a fix for this separately.
-
-> 
->>> @@ -194,9 +200,45 @@ static const char *make_relative(const char *path, const char *comp_dir)
->>>          return p ? p + 1 : path;
->>>      }
->>>
->>> -    /* Fall back to basename */
->>> -    p = strrchr(path, '/');
->>> -    return p ? p + 1 : path;
->>> +    /*
->>> +     * Relative path — check for duplicated-path quirk from libdw
->>> +     * on ET_REL files (e.g., "a/b.c/a/b.c" → "a/b.c").
->>> +     */
->>
->> When does this quirk occur? Is it a bug in libdw?
-> 
-> This occurs with elfutils libdw when processing ET_REL .ko files.  libdw
-> constructs source paths by concatenating DW_AT_comp_dir with DW_AT_name from
-> the compilation unit. For modules where both are relative paths with the same
-> prefix, this can produce doubled results like "net/foo/bar.c/net/foo/bar.c". It
-> appears to be a libdw quirk with ET_REL DWARF handling.
-
-Thanks for the explanation.
-
--- Petr
 
