@@ -1,137 +1,131 @@
-Return-Path: <linux-doc+bounces-81837-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81839-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mHOkLMq3y2mCKgYAu9opvQ
-	(envelope-from <linux-doc+bounces-81837-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 14:02:18 +0200
+	id 0E8XD1C8y2kpKAYAu9opvQ
+	(envelope-from <linux-doc+bounces-81839-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 14:21:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 727193693F7
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 14:02:17 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8E5C36967A
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 14:21:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A1C4E30A10A4
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 11:58:41 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id BB33A3014900
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 12:21:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E14DF3DE429;
-	Tue, 31 Mar 2026 11:58:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E2F53A7840;
+	Tue, 31 Mar 2026 12:21:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LredU0K7"
+	dkim=pass (2048-bit key) header.d=mit.edu header.i=@mit.edu header.b="OTalYU3c"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from outgoing.mit.edu (outgoing-auth-1.mit.edu [18.9.28.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDDE942048;
-	Tue, 31 Mar 2026 11:58:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 252CE2C3251
+	for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 12:21:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=18.9.28.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774958319; cv=none; b=QYEeIot2rZluDBe94yM57J21qChsqTMfW94QUS0vq0CuvJlVYv544dVVdI1egn8v7V86oSAJAgOLTRDQ49kDCXzvMNISVP55zKo2V5YM3M1qtFlo2YxYZB6+Qw+4F65lHsPk8FO74XnHqHIxkaIOAX72o2XqWEHgrInp8LL3sg0=
+	t=1774959693; cv=none; b=twYz8tbYSxTZwZEmusop1r9atsliJ5Dp0tJE5mX/0Q7n3pnqRstwKoiM3ngQVfteL05t/lMZZY3CnPnyknvHLVPiYXZ5or978fKzllrsgSXieZSUqa51YZKjkMNiDy/S0TnYhO3z4ho9GWGH+QIjP4DGAV+ZqFHD8djQjKkTjxk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774958319; c=relaxed/simple;
-	bh=xdWvgxD2CoLZZjCxaljNPQR7rHS+ImRdwhpqkAKT3uw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kbVMjEMCy8Jf2V9jZmfu1KEWSG92CO7jxY3XhXFFSVw8uQBmnt6XSwpqnKKNoV2lKmVMPFDnZyhxDwm7PmWFf7h7VE1erhCIEOV32FtZqI8iWQw86ou0EfC99GxjmczrZD6E4x9NUKRBLB4ZEzSlWEydqtqBtLEmwNXGHkdsKbk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LredU0K7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40E0CC19423;
-	Tue, 31 Mar 2026 11:58:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1774958319;
-	bh=xdWvgxD2CoLZZjCxaljNPQR7rHS+ImRdwhpqkAKT3uw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=LredU0K7h0+/PPX44Bxn9931KV/cYWm4TMLInOXzkTXc3ZewY4vKkX0beNFeE3tUR
-	 3XXPxY4hlVordcsQxisj9Ktdsml55oMSelcja22F1swlPC0WlDFOLZsPbHAmxkEsEQ
-	 mlqQ3ksZuz7JBG/P/i0ptiUArm9/1DP+rjOVujNlLD3J30cLnzpC0DIXyqxh0kt7md
-	 68Aa7J1tyOtV1JyvIKwhMtKMpYxpiB1H7KLRszARcQ3uKl2usNOPl0Mw0w80Fgl/2w
-	 071nMMC+HslHQZb/lIZTepUSWK/dkeAH9ui4CHbmOL7WGQQFwxeHMMpAWpx9vWU3MA
-	 THwa7V2LnUaWw==
-Message-ID: <9945098c-d384-461f-9c20-41ea8be42c84@kernel.org>
-Date: Tue, 31 Mar 2026 06:58:37 -0500
+	s=arc-20240116; t=1774959693; c=relaxed/simple;
+	bh=tLKKlkBPHGBCLGEsREkfW9B6Lbeag78/9yaa4ykOKOw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=VaqOJo8h4c8Xq1ad3YqsEG1GZUdscAm2QOJgrnIOdo4YOmHnGJzmFWWDfaMS5/08ZBjFbgCxCQqm+g4zBOBmHM2iwR7bKsVTaIyA6Oym9dREeKMym/k2wlID+FKlQsXU7MMbjh2fCrnk7wNvxzxY07gZQrvXLYvg3lFnyQ97DCg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mit.edu; spf=pass smtp.mailfrom=mit.edu; dkim=pass (2048-bit key) header.d=mit.edu header.i=@mit.edu header.b=OTalYU3c; arc=none smtp.client-ip=18.9.28.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mit.edu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mit.edu
+Received: from macsyma.thunk.org (pool-173-48-112-174.bstnma.fios.verizon.net [173.48.112.174])
+	(authenticated bits=0)
+        (User authenticated as tytso@ATHENA.MIT.EDU)
+	by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 62VCKh5d020429
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 31 Mar 2026 08:20:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mit.edu; s=outgoing;
+	t=1774959647; bh=NgNcg+u1NBRoAeJ0X2EC7mko2ww9hZ9u4YDqZn07NJA=;
+	h=Date:From:Subject:Message-ID:MIME-Version:Content-Type;
+	b=OTalYU3cH/zbxpYh+VufB1Rr+bdCrgFKwM738zGplWvymBF6OUgZu9hWPAzjeHaDM
+	 GeZHgEIvEybyWZGOtv+Aj2qOgDjEcpW4xk60ILOXsKPV6t6YOZRK2Ruyd+JkqnjKG1
+	 SXqRJNxi99vuNRrTlgUSuvgv1l9iWZCPTiAVLx11jTT5RULo2j7D6OL13XUPICc3nC
+	 sgfCVF3MVZY/aXuhKkqvrlneGO/4nOIuz5QboAJzrPh8Z6yH/qn4SVuRTaknr/1id+
+	 n29o5SXu06wFfiEmG1v8oFk44lf+PNZw/X+Eh5H4zMYZW+CIB2KQ1ms2pTM5ngFLOi
+	 bVHabiPWhVKfQ==
+Received: by macsyma.thunk.org (Postfix, from userid 15806)
+	id 5D6D560291BE; Tue, 31 Mar 2026 08:19:43 -0400 (EDT)
+Date: Tue, 31 Mar 2026 08:19:43 -0400
+From: "Theodore Tso" <tytso@mit.edu>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: SeongJae Park <sj@kernel.org>, Greg KH <gregkh@linuxfoundation.org>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        "# 5 . 19 . x" <stable@vger.kernel.org>,
+        David Hildenbrand <david@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Lorenzo Stoakes <ljs@kernel.org>, Michal Hocko <mhocko@suse.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Suren Baghdasaryan <surenb@google.com>,
+        Vlastimil Babka <vbabka@kernel.org>, damon@lists.linux.dev,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, Roman Gushchin <roman.gushchin@linux.dev>
+Subject: Re: (sashiko status) [PATCH 0/2] Docs/admin-guide/mm/damon: warn
+ commit_inputs vs other params race
+Message-ID: <20260331121943.GA74409@macsyma-wired.lan>
+References: <2026032915-library-embolism-b48c@gregkh>
+ <20260329193226.59025-1-sj@kernel.org>
+ <20260330142205.e7c7d7b47ec15a634f6eebf4@linux-foundation.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation: amd-pstate: fix dead links in the
- reference section
-To: Ninad Naik <ninadnaik07@gmail.com>, ray.huang@amd.com,
- gautham.shenoy@amd.com, mario.limonciello@amd.com, perry.yuan@amd.com,
- corbet@lwn.net, skhan@linuxfoundation.org
-Cc: linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, me@brighamcampbell.com
-References: <20260330190855.1115304-1-ninadnaik07@gmail.com>
-Content-Language: en-US
-From: Mario Limonciello <superm1@kernel.org>
-In-Reply-To: <20260330190855.1115304-1-ninadnaik07@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260330142205.e7c7d7b47ec15a634f6eebf4@linux-foundation.org>
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[mit.edu,none];
+	R_DKIM_ALLOW(-0.20)[mit.edu:s=outgoing];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81837-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-81839-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,lwn.net,linuxfoundation.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	DKIM_TRACE(0.00)[mit.edu:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[superm1@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tytso@mit.edu,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 727193693F7
+	NEURAL_HAM(-0.00)[-0.999];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: C8E5C36967A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-
-
-On 3/30/26 2:08 PM, Ninad Naik wrote:
-> The links for AMD64 Architecture Programmer's Manual and PPR for AMD
-> Family 19h Model 51h, Revision A1 Processors redirect to a generic page.
-> Update the links to the working ones.
+On Mon, Mar 30, 2026 at 02:22:05PM -0700, Andrew Morton wrote:
 > 
-> Signed-off-by: Ninad Naik <ninadnaik07@gmail.com>
-Acked-by: Mario Limonciello (AMD) <superm1@kernel.org>
+> I view Sashiko as primarily an author tool.  Sometimes I call it
+> checkpatch++.  In a better world, author would be able to sort out
+> Sashiko issues before ever sending out the patchset.  But in this
+> world, a public send is needed to obtain that review.
 
-Applied.
+Note that Sashiko is fully open source and the prompts are available
+in third_party/prompts in the git repo:
 
-> ---
->   Documentation/admin-guide/pm/amd-pstate.rst | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/pm/amd-pstate.rst b/Documentation/admin-guide/pm/amd-pstate.rst
-> index e1771f2225d5..13d6580894bc 100644
-> --- a/Documentation/admin-guide/pm/amd-pstate.rst
-> +++ b/Documentation/admin-guide/pm/amd-pstate.rst
-> @@ -790,13 +790,13 @@ Reference
->   ===========
->   
->   .. [1] AMD64 Architecture Programmer's Manual Volume 2: System Programming,
-> -       https://www.amd.com/system/files/TechDocs/24593.pdf
-> +       https://docs.amd.com/v/u/en-US/24593_3.44_APM_Vol2
->   
->   .. [2] Advanced Configuration and Power Interface Specification,
->          https://uefi.org/sites/default/files/resources/ACPI_Spec_6_4_Jan22.pdf
->   
->   .. [3] Processor Programming Reference (PPR) for AMD Family 19h Model 51h, Revision A1 Processors
-> -       https://www.amd.com/system/files/TechDocs/56569-A1-PUB.zip
-> +       https://docs.amd.com/v/u/en-US/56569-A1-PUB_3.03
->   
->   .. [4] Linux Kernel Selftests,
->          https://www.kernel.org/doc/html/latest/dev-tools/kselftest.html
+	https://github.com/sashiko-dev/sashiko
 
+So people can run it privately, although they will need to provide
+their own LLM credits.  This also means that you can use some other
+LLM besides Gemini 3.1 Pro.
+
+Cheers,
+
+						- Ted
 
