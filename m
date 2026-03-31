@@ -1,265 +1,227 @@
-Return-Path: <linux-doc+bounces-81949-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81951-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wAsXNvFdzGmDSgYAu9opvQ
-	(envelope-from <linux-doc+bounces-81949-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 01:51:13 +0200
+	id RvKQO/lfzGm6SgYAu9opvQ
+	(envelope-from <linux-doc+bounces-81951-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 01:59:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FA74372EAD
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 01:51:13 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32AD6372F73
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 01:59:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 45D4630179DF
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 23:49:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7D1233001878
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 23:59:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBB5B386C22;
-	Tue, 31 Mar 2026 23:49:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 244CB19D89E;
+	Tue, 31 Mar 2026 23:58:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b="gHZGo6lb"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="DdYuBRtR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A70027456
-	for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 23:49:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64A7832FA2A
+	for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 23:58:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775000971; cv=none; b=dHYOV8z76H/TDAcfV7NR7lQvZbh1rStmLFmeVaKdnyZLauZUqLbZdPcNSzbE5HMy+K3x0xFYHNHBPu5YkS9mME8srbdcU33uShJXItbf1qXRB6KJ6ERWl+RrTeRh5P4E++laGvcb/9OvD1vfNPDmEjnsOW8so1VhJSsz8TNLO94=
+	t=1775001539; cv=none; b=MdCot/BZXkM6SRcTjRg/OUyGV1sY/dc7tL8dyIa4UTjHzHQSI0F52E34Wn8Bv1tcy90GQEDbGGtcAOaONF8l3dv90I0PlXJsDS0R4P9rwTrnC7b8UGjTzEg0lH9BFJ9UXJ373gd7kGrpM9sR2CtfU/3bCLr0i0qEjRJZQzlZFhA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775000971; c=relaxed/simple;
-	bh=b6F5Wol1rmdIAxCBSR/1o0L6e0zkmGyQDRLJXJLm1hU=;
-	h=Date:Message-ID:MIME-Version:Content-Type:From:To:Subject:
-	 References:In-Reply-To; b=bCbL+nKrtCef/7dwHP+yS19BV/DWMP3w3jj4chPJi1x3+FjIH9vgULBK43v+wZ/nMLSiaBa2duBl1PlZ8S/BQZZZtWF0cFdj5Zj1Mm1pzRpJf7uDI5qKjjYWHHU+/ORQ8Hq8hyr6dibbyZp37CRii7x487EjXXI/o5vAJ9uT574=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=gHZGo6lb; arc=none smtp.client-ip=209.85.160.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=paul-moore.com
-Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-506a747448dso48655151cf.0
-        for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 16:49:30 -0700 (PDT)
+	s=arc-20240116; t=1775001539; c=relaxed/simple;
+	bh=hi1MFskNb8DMYSQRnhoouww2qda97qGJwbTEd7MQFUk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=K855hSWtsiCjPqkPLIvjncmHrvbvZQ9FqLKFF6u7PAg13t0VFW7ZFfFZLYP6ZShS9dbHA0doXhrJBfnlaJZITsQg/9ujjyHzWwigC1GlIb9Dk59e3s77crvLxyLZEg+9Yc2cw0WFH0L8a/N/SH8fjUIaMkROeSBKEqDg1If84k0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org; spf=pass smtp.mailfrom=linuxfoundation.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=DdYuBRtR; arc=none smtp.client-ip=209.85.218.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linuxfoundation.org
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b9841aecf72so762609666b.2
+        for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 16:58:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=paul-moore.com; s=google; t=1775000969; x=1775605769; darn=vger.kernel.org;
-        h=in-reply-to:references:subject:to:from:content-transfer-encoding
-         :mime-version:message-id:date:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=FYbvdnLCMnXdYzHfn2HH+3PkoNRX+uMbCDYvoiIgkxg=;
-        b=gHZGo6lbZiKz7X5sTNABvDHfU6h7W3mQT8CQgjlXVIWsi3bGaD6daAjUE4VaSLj6Bb
-         huHSGF5LhKgtDgIP4SiCbHP/4EolqyPQuJDzAUgKjNWpuWbs+hMC+cr88mqkNqtLQhf6
-         Kho3KK1vSTuJzfOEqLobBtGRE7TMEsmxJTEcFFmFLR57iNFPv6Lk4UHcTdkVpeoP6EJ/
-         GHGG3X/2uAEiCGSWYdG+avjDURQql4o/AXzLLAk/DxO676KAvDUaNT0u5ZjkrkMDqqE/
-         m7fn3F6i5pYqOjtfuEXO7eVy3/xgDEjv5RL6XZmjIx3rfKFOrYspKoXzXh386q47C3GK
-         MNLQ==
+        d=linux-foundation.org; s=google; t=1775001536; x=1775606336; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ap740lhReTUh/Tx7odelrkvzzjajL/UYRtgEhV3gotU=;
+        b=DdYuBRtRzyOaZm4gYwCmOUFNNpfenuVDAnWNV2PI7I0gO/jNDqVg9IfyXnnQ34Mv8D
+         LEVbOG1oBeshYRdyJ9LfYDgBeq+znmKUKgYRMeVr863aN6OAvnapw328Mvmk3RuGjWVh
+         Dg+xBx81jX8eEOOnKTgSqhoRtgS4Py2sEALuo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775000969; x=1775605769;
-        h=in-reply-to:references:subject:to:from:content-transfer-encoding
-         :mime-version:message-id:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FYbvdnLCMnXdYzHfn2HH+3PkoNRX+uMbCDYvoiIgkxg=;
-        b=NyzqYOMFw7mA7ojMVIm20M/zdHykq/AXUSbvnk7asy+nVhTtQVlJxyx+RvwrAfBOPO
-         eT34XMY3299+qfWc/OkcayoyXOmEXqm9+OtuQSgW4gucsVbigxHMX/dyNO0+inxqQjXj
-         Xj7P5zscrWnOChwMG86LOAqDs6LLnQ8ZXNWOoUZ9jcWPYMWCiRZ23oUWHfhDStF6OPGA
-         nstjyCwlrbq4glR9G6r0K8scUr1ezHQjfQyImUOW212pochmCBLfvO2nyeRhZEst+1SI
-         wQ/AQRyA2ciGEpxRfcGa1K9xZl+KxVeLQpgJTEgqLMnIgbLs+l2eyv1gVMEe41KQ+mm1
-         jgWQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVKv0nZZsBvkwuQUFkt4Ez1giyrNjWf5LnRgRQwjZIXyspXIm+uXYyZfhvZi28DONQRmrxxA+FJ/F8=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx767YEvQmATITfgRB2pgSe1XYQqzFT5pM3H474OsLOsEwINHDV
-	+xkytuIKVdjcpcT/sKw2a70rnTidrA5Z2YGXkAvERUuU/fzyZnX+xOSUIYkv2Q1RaQ==
-X-Gm-Gg: ATEYQzz/a9pW74VIBDZelSCkteeMu1K9nFDwljoWqA4eAkBim6p/jhxGujPh1Zmpgb8
-	jD13VAdQaG0urOC1qIAt47qBsdVyFBuvLKsPbur5AJkebVoZxk6klpzt3pbyD43jzJKnfLEM9Y1
-	9Tc+zQXCjW7L4XytDLCrDG/7VbEiHLeQeqJ5fWYtdZ6Feq7BA4A+Whv6AHpq59mNIGb9IgcHs/3
-	TUe8vmGnqvliv34aqf4obpT7z8DKFlkEBUE0aScRyeOBCIK8zrepM5AmnbICnoDX53dDsoxIfHN
-	UWGv+eD+J40Jj8y0UFHddocnPQd41/9NCRcUsLiKlsPGzqp4ZvRT3pPZ0MTxFAsqpFRmtgsq7MI
-	6RhTstJgUNBlyUcUA0GiRpxdtLZhhqNI0zoEsGvNax6X4tRAQh1/J0ebYaRBAQFhFDKdPMsu2o5
-	8sbC531JeW8uDc+kJib7grwlzq6Uz0dK1PqrJQYRaXY9dPysHnESZVOUScDom6Lj6SiXxq
-X-Received: by 2002:ac8:5e10:0:b0:501:3ccd:cb3e with SMTP id d75a77b69052e-50d3bd6369emr22793691cf.66.1775000969032;
-        Tue, 31 Mar 2026 16:49:29 -0700 (PDT)
-Received: from localhost (pool-71-126-255-178.bstnma.fios.verizon.net. [71.126.255.178])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-50bb2c96a5asm97285841cf.10.2026.03.31.16.49.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Mar 2026 16:49:27 -0700 (PDT)
-Date: Tue, 31 Mar 2026 19:49:26 -0400
-Message-ID: <667eb53aa7425c115055e354a6df2bdb@paul-moore.com>
+        d=1e100.net; s=20251104; t=1775001536; x=1775606336;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Ap740lhReTUh/Tx7odelrkvzzjajL/UYRtgEhV3gotU=;
+        b=lIXeaCW0osktXCBDsKbQ0oXKzmESs46gwtz29tuSRrsG6ZzTVzzWtB7dSBlHtL8VPW
+         AAMaoEjLjvfTDYi/+OampDumwZ9oQbzzC3RCoJVtncMcRu5oq45IDSzjfIRFnwa9hS9n
+         az+jjx4ByIiWzElMsW0qZ+KwBhGaqmaXjVphOcpnzDZ8iCW6+UBgdG5/lYUeYl42G6YK
+         Jyz0m7ZrB9h4NmWB0WUucvpuELjjtnFdIZvsJjppEn0miiaXfgktmruQWcvWL+Zlgfiz
+         cVgcoUebzBvxFfWoqVhWLy7ZWB9MwtfciC416oti7W/lzEjE+d7ZDh18Zik6yg0nj72G
+         bz0Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWzmNiWBSkFUYBiPu06VFMTMTj2oxSYXPYWTUj3FsJi6WF5/Tr3hWjFJNkUNWZajU3aAGsQmGjk4T0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzXiMVmg8fx/oBq2ueW/8wgIHSA/nIt5Leof49xhSh6mNkImSWf
+	Sa185ia6DjzHrnm6HDlCkquzkesahS7/7W91wzOv6UkZAQnhJgE9fd0VroUaRv9bT/sJaaSYknH
+	Ld6CeF5ACgQ==
+X-Gm-Gg: ATEYQzw2tZLIorDO8ci4JyiTg7tKknHWTro9W5bz1qf1KNo584x48ejkXe+vN/ghTSY
+	5Qd1mz1N9Vhbjvy83Ib6FAAu2pT4ZE61EdFc0ySzXE7RFIhXdSYQCaqN97qYNTb3zwbeBkvgmw5
+	o5Ehj6bhUutnZTy1Cm6mm/TdSRsakQQ6QQpce3eAPOj/cVkK4Un2kICxKURNG8403FX2fC1P4vR
+	YrC9VoJkiDmffc7ku8fJPGcJyae6qZnV7KatY0q6e/yTH6Dy+4E4yk5EigoyBzcuvcsjlowiCZG
+	HbAQt/4xmaIcFXHoTS96qUs7OEuxxzsl+H5KEfqw8XjvTx9Vtl3nv9lO4IPWQdPMpbYuINyzLsq
+	0yt7Nys17JnEe3qXi01JZhC6kln5gthHYleTQeenGj9w/ltzyMWqxGBtKRqLS0pMhDO87O1jVCV
+	EQiQUZQoB0gmXETrpLW2E4sAAfhtgP49zBsqcPt6RQ51m91V8xTmfizr/g/1Q3y37jHKL8/NI9g
+	SRYk6GgI5k=
+X-Received: by 2002:a17:907:a70b:b0:b98:13b6:38a1 with SMTP id a640c23a62f3a-b9c13aead54mr81113066b.28.1775001535614;
+        Tue, 31 Mar 2026 16:58:55 -0700 (PDT)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com. [209.85.218.42])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7b1e3acasm467206066b.46.2026.03.31.16.58.55
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 31 Mar 2026 16:58:55 -0700 (PDT)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b9841aecf72so762608566b.2
+        for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 16:58:55 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCU8NOT9EF1zm4GBIpHFSWK4r8SattWy0Lk43mROhlhn69kMz1lSJaQ0+Wp8pBOpWAJ1Z5tQtEkj8oE=@vger.kernel.org
+X-Received: by 2002:a05:6402:13cd:b0:66b:810f:1c4d with SMTP id
+ 4fb4d7f45d1cf-66db09f03d1mr893296a12.18.1775001037895; Tue, 31 Mar 2026
+ 16:50:37 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 
-Content-Type: text/plain; charset=UTF-8 
-Content-Transfer-Encoding: 8bit 
-X-Mailer: pstg-pwork:20260331_1732/pstg-lib:20260331_1626/pstg-pwork:20260331_1732
-From: Paul Moore <paul@paul-moore.com>
-To: Blaise Boscaccy <bboscaccy@linux.microsoft.com>, Blaise Boscaccy <bboscaccy@linux.microsoft.com>, Jonathan Corbet <corbet@lwn.net>, James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>, =?UTF-8?q?G=C3=BCnther=20Noack?= <gnoack@google.com>, "Dr. David Alan Gilbert" <linux@treblig.org>, Andrew Morton <akpm@linux-foundation.org>, James.Bottomley@HansenPartnership.com, dhowells@redhat.com, Fan Wu <wufan@kernel.org>, Ryan Foster <foster.ryan.r@gmail.com>, Randy Dunlap <rdunlap@infradead.org>, linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, bpf@vger.kernel.org
-Subject: Re: [PATCH v3 6/9] security: Hornet LSM
-References: <20260326060655.2550595-7-bboscaccy@linux.microsoft.com>
-In-Reply-To: <20260326060655.2550595-7-bboscaccy@linux.microsoft.com>
-X-Spamd-Result: default: False [-0.66 / 15.00];
+MIME-Version: 1.0
+References: <20260331163716.work.696-kees@kernel.org> <20260331163725.2765789-5-kees@kernel.org>
+ <CAHk-=wiJ6Q_qMHSe-hs+QvqKVZphvDZjvFP_gQLw1eaWimv8+w@mail.gmail.com>
+ <202603311253.95C54588E@keescook> <CAHk-=wjSOGaausLeTD13yAqso7qM09EnkDFiN7wF15kH0VWmZQ@mail.gmail.com>
+ <202603311321.4EE9FEA@keescook> <CAHk-=wj9pWsgsbrLDOk7ipKnHbz3JvuqsmQ3DhGg-OKgKS9DUA@mail.gmail.com>
+ <CAFhGd8rE+ggYghcwUphSRc2ftQMaX7LbKKPwQZzsw43bg9VVmA@mail.gmail.com>
+In-Reply-To: <CAFhGd8rE+ggYghcwUphSRc2ftQMaX7LbKKPwQZzsw43bg9VVmA@mail.gmail.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Tue, 31 Mar 2026 16:50:21 -0700
+X-Gmail-Original-Message-ID: <CAHk-=wj4j9-=VMdVJZQjn=FEDWpE5JkHtr3CwErQdXVGFfGkXQ@mail.gmail.com>
+X-Gm-Features: AQROBzCocASEQv-3sgFpeT7hRsHg1wWGTjTvooh3XWVShxy7lX1Q_VH65yuwsXg
+Message-ID: <CAHk-=wj4j9-=VMdVJZQjn=FEDWpE5JkHtr3CwErQdXVGFfGkXQ@mail.gmail.com>
+Subject: Re: [PATCH 5/5] types: Add standard __ob_trap and __ob_wrap scalar types
+To: Justin Stitt <justinstitt@google.com>
+Cc: Kees Cook <kees@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Miguel Ojeda <ojeda@kernel.org>, Nathan Chancellor <nathan@kernel.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Arnd Bergmann <arnd@arndb.de>, 
+	Mark Rutland <mark.rutland@arm.com>, "Matthew Wilcox (Oracle)" <willy@infradead.org>, 
+	Suren Baghdasaryan <surenb@google.com>, Thomas Gleixner <tglx@kernel.org>, Finn Thain <fthain@linux-m68k.org>, 
+	Geert Uytterhoeven <geert+renesas@glider.be>, 
+	=?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+	llvm@lists.linux.dev, Marco Elver <elver@google.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Nicolas Schier <nsc@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	linux-kernel@vger.kernel.org, kasan-dev@googlegroups.com, 
+	linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kbuild@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[paul-moore.com,none];
-	R_DKIM_ALLOW(-0.20)[paul-moore.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-81951-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81949-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[linux.microsoft.com,lwn.net,namei.org,hallyn.com,digikod.net,google.com,treblig.org,linux-foundation.org,HansenPartnership.com,redhat.com,kernel.org,gmail.com,infradead.org,vger.kernel.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	DMARC_NA(0.00)[linux-foundation.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[paul@paul-moore.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[paul-moore.com:+];
-	NEURAL_HAM(-0.00)[-0.850];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3FA74372EAD
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-foundation.org:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
+X-Rspamd-Queue-Id: 32AD6372F73
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mar 26, 2026 Blaise Boscaccy <bboscaccy@linux.microsoft.com> wrote:
-> 
-> This adds the Hornet Linux Security Module which provides enhanced
-> signature verification and data validation for eBPF programs. This
-> allows users to continue to maintain an invariant that all code
-> running inside of the kernel has actually been signed and verified, by
-> the kernel.
-> 
-> This effort builds upon the currently excepted upstream solution. It
-> further hardens it by providing deterministic, in-kernel checking of
-> map hashes to solidify auditing along with preventing TOCTOU attacks
-> against lskel map hashes.
-> 
-> Target map hashes are passed in via PKCS#7 signed attributes. Hornet
-> determines the extent which the eBFP program is signed and defers to
-> other LSMs for policy decisions.
-> 
-> Signed-off-by: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
-> Nacked-by: Alexei Starovoitov <alexei.starovoitov@gmail.com>
-> ---
->  Documentation/admin-guide/LSM/Hornet.rst | 321 ++++++++++++++++++++++
->  Documentation/admin-guide/LSM/index.rst  |   1 +
->  MAINTAINERS                              |   9 +
->  include/linux/oid_registry.h             |   3 +
->  include/uapi/linux/lsm.h                 |   1 +
->  security/Kconfig                         |   3 +-
->  security/Makefile                        |   1 +
->  security/hornet/Kconfig                  |  11 +
->  security/hornet/Makefile                 |   7 +
->  security/hornet/hornet.asn1              |  13 +
->  security/hornet/hornet_lsm.c             | 333 +++++++++++++++++++++++
->  11 files changed, 702 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/admin-guide/LSM/Hornet.rst
->  create mode 100644 security/hornet/Kconfig
->  create mode 100644 security/hornet/Makefile
->  create mode 100644 security/hornet/hornet.asn1
->  create mode 100644 security/hornet/hornet_lsm.c
+On Tue, 31 Mar 2026 at 14:50, Justin Stitt <justinstitt@google.com> wrote:
+>
+> How do we feel about type-defined labels? We can specify sane default
+> handlers where we define the types:
+>
+>         typedef int __attribute__((overflow_behavior(trap, __handle_me)));
+>
+> ... and define specialized handlers later on
 
-...
+That sounds like an interesting interface, but I think it ends up
+being kind of odd, because normally the type definition would be in
+some global scope, while the 'handler' would be a local label name.
 
-> +static int hornet_check_program(struct bpf_prog *prog, union bpf_attr *attr,
-> +				struct bpf_token *token, bool is_kernel,
-> +				enum lsm_integrity_verdict *verdict)
-> +{
-> +	struct hornet_maps maps = {0};
-> +	bpfptr_t usig = make_bpfptr(attr->signature, is_kernel);
-> +	struct pkcs7_message *msg;
-> +	struct hornet_parse_context *ctx;
-> +	void *sig;
-> +	int err;
-> +	const void *authattrs;
-> +	size_t authattrs_len;
-> +
-> +	if (!attr->signature) {
-> +		*verdict = LSM_INT_VERDICT_UNSIGNED;
-> +		return 0;
-> +	}
-> +
-> +	ctx = kzalloc(sizeof(struct hornet_parse_context), GFP_KERNEL);
-> +	if (!ctx)
-> +		return -ENOMEM;
-> +
-> +	maps.fd_array = make_bpfptr(attr->fd_array, is_kernel);
-> +	sig = kzalloc(attr->signature_size, GFP_KERNEL);
-> +	if (!sig) {
-> +		err = -ENOMEM;
-> +		goto out;
-> +	}
-> +	err = copy_from_bpfptr(sig, usig, attr->signature_size);
-> +	if (err != 0)
-> +		goto cleanup_sig;
-> +
-> +	msg = pkcs7_parse_message(sig, attr->signature_size);
-> +	if (IS_ERR(msg)) {
-> +		err = LSM_INT_VERDICT_BADSIG;
-> +		goto cleanup_sig;
-> +	}
-> +
-> +	if (verify_pkcs7_message_sig(prog->insnsi, prog->len * sizeof(struct bpf_insn), msg,
-> +				     VERIFY_USE_SECONDARY_KEYRING,
-> +				     VERIFYING_BPF_SIGNATURE,
-> +				     NULL, NULL)) {
-> +		err = LSM_INT_VERDICT_UNKNOWNKEY;
-> +		goto cleanup_msg;
-> +	}
+I think that in some situations - and certainly other projects - it
+would make a lot of sense to have the trap handler be a global
+function in that situation (ie "abort"), but with that being
+explicitly *not* what the kernel would want, it seems a bit odd to
+specify the name of a label that then is used in a totally different
+context.
 
-Given that kernel module signatures are verified with
-VERIFY_USE_SECONDARY_KEYRING it's reasonable to do the same here in
-Hornet.  I suspect most users concerned about code integrity, especially
-code running in the kernel's context, will likely want to verify BPF
-programs with the secondary keyring.
+So in your example:
 
-However, as we've seen from prior discussions, there is a desire among
-some users to support arbitrary keyrings, and we should find a way to
-support that in some configuration.
+> int func()
+> {
+>         ...
+>         u8 __attribute__((overflow_behavior(trap, __BOOOOM))) product = 5;
+>         ...
+>         product = a * b; // if store is truncated, goto __overflow
+>         ...
+>         return product;
+>
+> __BOOOOM:
+>         pr_info("%u\n", product); // shows "5"
+>         return -1;
+> }
 
-If we take a similar approach to bpf_verify_pkcs7_signature() and take
-the keyring from attr->keyring_id, LSMs that provide enforcement via the
-bpf_prog_load_post_integrity callback should be able to check the
-keyring_id as part of their decision making and respond accordingly.  Do
-we need to worry about a malicious userspace modifying attr at this
-point?  I think the answer is "no", but I didn't chase it through the
-code to be sure.
+The above makes total sense, but imagine instead the code being
+something more like this:
 
-I suppose there might be a need for a yama-esque LSM which only provides
-a bpf_prog_load_post_integrity callback and ensures a valid signature
-verified against the VERIFY_USE_SECONDARY_KEYRING without the need for
-any other policy or tunables, but let's see what the v4 revision looks
-like first.  We can always add this later if needed, and it could live
-within the Hornet dir (similar to how the integrity directory hosts
-both the IMA and EVM LSMs).
+Some header file does this:
 
-> +	if (pkcs7_get_authattr(msg, OID_hornet_data,
-> +			       &authattrs, &authattrs_len) == -ENODATA) {
-> +		err = LSM_INT_VERDICT_PARTIALSIG;
-> +		goto cleanup_msg;
-> +	}
-> +
-> +	err = asn1_ber_decoder(&hornet_decoder, ctx, authattrs, authattrs_len);
-> +	if (err < 0 || authattrs == NULL) {
-> +		err = LSM_INT_VERDICT_BADSIG;
-> +		goto cleanup_msg;
-> +	}
-> +
-> +	err = hornet_verify_hashes(&maps, ctx, prog);
-> +
-> +cleanup_msg:
-> +	pkcs7_free_message(msg);
-> +cleanup_sig:
-> +	kfree(sig);
-> +out:
-> +	kfree(ctx);
-> +	return err;
-> +}
+  typedef unsigned int __attribute__((overflow_behavior(trap,
+__BOOOOM))) u32_overflow_t;
 
---
-paul-moore.com
+  struct some_random_struct {
+        u32_overflow_t usage_count;
+        ...
+  };
+
+The implementation for looking up those structs then looks something like this:
+
+  struct some_random_struct *get_entry(int hashval)
+  {
+        struct some_random_struct *n;
+        spin_lock(&hashlock);
+        n = find_entry(hashval);
+        if (n)
+                n->usage_count++;
+        spin_unlock(&hashlock);
+        return n;
+
+  __BOOOOM:
+        WARN_ON_ONCE("Entry 'n' overflowed\n", n->name);
+        spin_unlock(&hashlock);
+        return NULL;
+   }
+
+does that still make sense?
+
+Now, I'm not *opposed* to this kind of interface - we'd presumably
+just use something like "overflow" for the label name anyway - and it
+allows people to use whatever label names make sense for a project so
+it's clearly a nice feature.
+
+It just feels a bit odd. But maybe it makes perfect sense at a
+compiler level as a "it's just declaring the token to be used for the
+exception label".
+
+                Linus
 
