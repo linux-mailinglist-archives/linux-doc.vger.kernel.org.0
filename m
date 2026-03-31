@@ -1,209 +1,190 @@
-Return-Path: <linux-doc+bounces-81829-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81831-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SDR2MAeoy2nJJwYAu9opvQ
-	(envelope-from <linux-doc+bounces-81829-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 12:55:03 +0200
+	id CJhrCGKqy2kpKAYAu9opvQ
+	(envelope-from <linux-doc+bounces-81831-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 13:05:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BC5236861C
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 12:55:03 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FC6C3687CE
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 13:05:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 810F430BD4B6
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 10:46:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C67F230C6DE9
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Mar 2026 11:00:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E79F3A9014;
-	Tue, 31 Mar 2026 10:46:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 439EB3A8749;
+	Tue, 31 Mar 2026 11:00:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="XpLzAZ6X"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="dE8Vf5J/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CY3PR05CU001.outbound.protection.outlook.com (mail-westcentralusazon11013022.outbound.protection.outlook.com [40.93.201.22])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE8983A8734;
-	Tue, 31 Mar 2026 10:46:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.201.22
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1774954011; cv=fail; b=TurVJ0jNzTvI74H0Xz2s1Y6sRhept+09zUovclu5ZiKkZFA+2RfKyb2IyBUSJ37RpVwDkv4iREKAQWC//T4/nX9UqyM46PWA8eUzSaoCH13OukqYhXYeG2qfbFO9nhkXPHBuXTtdZ/xKSxsvyter1Dth8bClAAbFiIEamCO/8jc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1774954011; c=relaxed/simple;
-	bh=bSGK64hlvYGvdXibX2erL/eWAm7P/Zv11V+AEvkJ8Tw=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=SLiunWZbiZfKnT8TW/YNFVj+tCmmQOzi+Rle9T6g48r8vTrxaPEvxpik4koVvYsnT4LXlba/JxbBepWn3+FIqHVDF+RKYbx8AfC90ZF+UBeGZ8zYVoyZcFtmaDADwwzF5W+aJhSKzQttrJ/gVwaMedpvg7wpyMVDFmB+QFs7cEw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=XpLzAZ6X; arc=fail smtp.client-ip=40.93.201.22
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sBcMhPxa2Yz8zJwN/cIFuIS4YZx4WF1HKdBz9x708XRkKMOvK1zSVp5gLMiFPkNjPtD4bR+wHGnDeqj8691qL6k77XpErslc9F9ImNMB2SbNrmiGPy+FHFjNT668ouHAlDBHNyplCjovBK2xUVSrIruiqYvEInLUn3kU4EXmFyrAd3ZlgcBcZf1qbDNtla5zQ9IBByfcTsPGkk5rF6G7awNzD0emHu7TvG0yQs8zxOeHbEW4NbPk4seXCl7XNamsU5xXWCpvLCU+0UddpAbkGj7ucW/sdhokgIdljq9R1nKBcKi2zQOCMK45twKrZoKQeIFNBos+hJFXbaBJsu7qEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gQOAbcqrQ3zb79vNv/xOkd3Vv1RqIoAzY2/u8parrVY=;
- b=v1ScaO9OJWUy7AffMwQdXn6/xcHR2MQJ5xKQB6neb2ZMYUOFnkl0uFPrw5UF73B0mRjK1qZx8z5jKhGyorqdK0jEZk54KJNqwZ51q0aicDanLkrPBt0QS10Jb6ncHOsJvB+ZqbB32razowIyBnjMCbnQghJXR5pebBfXxVJAARZAGiaBzw0D26YAtPYsHy/t7wv3HrIOAspsFDgcU+941PRjNf072qKpCoE4kVgRzANNEwk5L94pgJuV+shfsl6AwXBxe+/4mt2PNRcuigy94V6frBMKPkoplpuC80BDbpGnLDYRZ3JLXOQbJniVwF1Vphsuu5CIV7uBVUX5GsqCHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gQOAbcqrQ3zb79vNv/xOkd3Vv1RqIoAzY2/u8parrVY=;
- b=XpLzAZ6XM7nEmBpZJ2HsDkSbxCTOHco2vzcAHHTMaAdCrxpvT2w9BYWWNNMqpBgjxOsu0fPeYIYAX6p+5t95PY9JBWdLmD2AOo39dE2ltlT1FSdcx0cGFkBpH+DCOOVH7f7xH+FJ6ZhAqUlfgQSTtPkWW74tYhQcuFhynuQnbhc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3023.namprd12.prod.outlook.com (2603:10b6:208:c8::26)
- by SA1PR12MB6919.namprd12.prod.outlook.com (2603:10b6:806:24e::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Tue, 31 Mar
- 2026 10:46:45 +0000
-Received: from MN2PR12MB3023.namprd12.prod.outlook.com
- ([fe80::dc22:f915:3ddd:11fa]) by MN2PR12MB3023.namprd12.prod.outlook.com
- ([fe80::dc22:f915:3ddd:11fa%7]) with mapi id 15.20.9769.014; Tue, 31 Mar 2026
- 10:46:45 +0000
-Message-ID: <8eda258f-1a56-426e-bfd4-22983acae5ab@amd.com>
-Date: Tue, 31 Mar 2026 16:16:37 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 6/6] docs: misc: amd-sbi: Document SBTSI userspace
- interface
-To: Greg KH <gregkh@linuxfoundation.org>
-Cc: linux-kernel@vger.kernel.org, corbet@lwn.net, skhan@linuxfoundation.org,
- linux@roeck-us.net, arnd@arndb.de, Prathima.Lk@amd.com,
- naveenkrishna.chatradhi@amd.com, Anand.Umarji@amd.com,
- linux-doc@vger.kernel.org, linux-hwmon@vger.kernel.org, kunyi@google.com
-References: <20260323110811.2898997-1-Akshay.Gupta@amd.com>
- <20260323110811.2898997-7-Akshay.Gupta@amd.com>
- <2026032753-contently-overfeed-5872@gregkh>
-Content-Language: en-US
-From: "Gupta, Akshay" <Akshay.Gupta@amd.com>
-In-Reply-To: <2026032753-contently-overfeed-5872@gregkh>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MA5PR01CA0085.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1ad::16) To MN2PR12MB3023.namprd12.prod.outlook.com
- (2603:10b6:208:c8::26)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9B8635B63B;
+	Tue, 31 Mar 2026 11:00:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1774954843; cv=none; b=MlQf8455RMUZ64rEz4zLuNNCcsBOXRY5hDEUO3hOI/SSq47xSbpJMX7fnouAcpx6F6R0/GT2XiWXZdVqyIsKivopzOMrVX2y/gqioodxAY4XjVa7yf9BMDU9Ent6px7MziVHdXZZ2AHaqGs+F+rSsJGQ00Z7Mk1o9Fc3o+fU4V8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1774954843; c=relaxed/simple;
+	bh=sn2IERkVdmqkYaK3VQGqabhZXZZLU8A7HNEDL/Sd3Yc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=AcBW5sT+lRlLacPxgvL4XEAjxII2k/jeP6VytDb8sgx+qVITq66D/tnmICHlsGnP/iaPHv/x6+rwvVlEYr6+mRkenwiIE1Zl1bOAVQ28BCsLfLqVULHDzee3vX927RexM9tHw7mk9OzWMpHlg2sdPYw2z5umxrss48nr1doHsNU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=dE8Vf5J/; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=Wu0kJ3LjwGuLqf+bqeED2XteHKyJ+UaquG4MqK1gvVI=; b=dE8Vf5J/jzGvDZXHCRJIyYEgGW
+	1Voqd4jaQzligfgS1kaKrv7d9d83URMonlKf5lxuG6vpRed//ziIZBdpZ0QJo+vRee1j3vIQ6mYnn
+	CVo+pFhBZCKvpB3CSN6DKR6nl/91MuAXDuNBiRZzzqpW97k6OMjNtToIKcvYbCClMsjogS/1un99O
+	GSR66fXod87bQwZyYiswaT0CaxiOrqzoLj5oAUM+bjCTS/6Zdew5Py0j0AcZMmpTuAPKSzmXHKu48
+	4IYT1LkquEPCH3JqaDhJTwUY+Pm/H0+rgL701tap9v9ZrwSieWj+fHU3K++imtoPSFZya/b1jFMqG
+	zkALpU0g==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1w7Wph-002Aak-18;
+	Tue, 31 Mar 2026 11:00:28 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v2 0/3] mm/memory-failure: add panic option for
+ unrecoverable pages
+Date: Tue, 31 Mar 2026 04:00:15 -0700
+Message-Id: <20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3023:EE_|SA1PR12MB6919:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6938a898-6603-4c93-9461-08de8f12cd5c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|1800799024|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	Eq/97iC8Asu22ARbWt8XOT2BrmGRk4PAI+0rDEqgZ+/IG/Aj8g/epg44vrjpit4j72oJD1UhLH9Oaiv2e9Pew6yrqCvXbDvrjIZoBJYc5oxmFh3V5620kA+QJcRC4eJUGh2NwE+3KG5GQgU1DOIqbvwXCJaQGyaO7UqCbkiN2DakjU8+YAVg7VSNDluZTQKL9O41yIz73Jh2Opbf7j2nWzI47Yat7TazN2RmxteDDpl9FWe8vkIs/+Qscxtym8eyDebQwNgwQQ3GldCqCD9b00rGfbclUD032jGddEoa3J9y9I2K+XteB0RiCLAbB5mddDOccxNCVOohJPpBP8EMhukB2zV/znjNJrso5iYn8PZsp2Tl5Ud3l8aZXcbw5v9rB+wGXKKhATPRPmzLdZgKoVo8KsPqkXpQsohQxSKZ62dw6Y2HuELOZ5uAFmDHmQk0+UtVhNNs0DGkh+loV8ghPgwKeRoKCAZ/DgPsc7J0RRW4jsMRJy2TeOFWOSFe3nfhfrTh57gPbXUm0Ne+LSvXAeNRHvOgqU0xK7uyXSaFrveA8N1KxYDbVYEPBEdAPOAkOjqsn94UY1Vpk3wY6ckvx340mbOUdIT5nvcmnwpBKEcEw9qGITkHEEJ/oaR1r9a6maoJwnXOi9QHWn77QMi2Ds0KehBLc5uZYrl8buHm9Gmr0Icgv6vSX5L2Y0qdSYvDZpIfoVz58SmChIsHdUDbEIX1+S+Ft1Rxi5H6s+O/8Rw2zMKgcCm8OZzwuMFwPtdf
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3023.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SVRuRCt5endZVDdSMUFOeGVIS0ZXd1dyVExXU09ZdDlFQmlsVDM4UEFwNHhy?=
- =?utf-8?B?SG0vcHk3VUJUaUlvamlGYmZQVjhwZHI5Ni9iYldZbEFHWGo3WWVrbXRRNkJv?=
- =?utf-8?B?N0o2bFlmdmdweWxlS1hBcmt3a2Vkd0pqcmc4V0ZlVjlNcldzK3dSd1NHamNw?=
- =?utf-8?B?UjR5cHRHSjJnaVdvQitLNDQvYS8wRUFwR1pXUHFOK1ZHV0ZNa05VY2FvWGhv?=
- =?utf-8?B?UW1MMXdMVDNpeWZabmVzMWRIYXdkbGlCNnhmNjdEUXBDSFNBSWFHNm5qSEVT?=
- =?utf-8?B?M1VVd24xd0dVajJhYzdpUnNSVlZvZzUwWHF2VTFtbkhwaEpkTW81WDFoS2Vl?=
- =?utf-8?B?N3NWNmJHMURZOHBiRmY3SzRLUEF2WmthTUZCdGVhTlpBdmdPUi9aUlI4VFRK?=
- =?utf-8?B?S2ozQytBWXJpdkVuUXJRb3hEbHZGanFmVjNSMjhiZ1JmNGkwSWkwVjRqency?=
- =?utf-8?B?WFhINlNBMkU3U3N6K2tMTUdaajhCd1FJdmVyRTY2QTJINGxianQ4M2hzNDJC?=
- =?utf-8?B?L1MvZmtmMldzbFJ5Qjh3aGVhUVk5bFRidHBsMWdzMDh3TTFPNW1lYmY0WUh1?=
- =?utf-8?B?MnY4YmN2Z1VkOExrb2FpclNpc2NEa244Y292dXNhcGw0MStPWWxCWXl0YUVa?=
- =?utf-8?B?QlJNMXkySTBwT0VkSmx4N0tMNlk5eHdMZmM1cE03YWEwQ0NvTGJIUjJYdXBk?=
- =?utf-8?B?MmQvWWFHcWltWDBWeVVDajdrN20yUGdkYVFZQjRreitHWU1ZdWZkaUM3KzhB?=
- =?utf-8?B?OW43b3JOOUZ1R0hPeGdpZ0U3OXlrcDdhTU9JTlc3VzQ3TmVucVlkNVA0MGNK?=
- =?utf-8?B?SU9FTGdhMjRUQjFaTDhVUHFIdkg4cVZGend6V2JkM3pwWXd0R0pySmlLL05O?=
- =?utf-8?B?cmxyNVkrV20wdzJ1TWhpK2s4L1dzV1dxRm5iTm9DZDl1MlJrSGppVUg2eUd5?=
- =?utf-8?B?L3lTSW03SjZlbGtXWUgwNnFsZy9MREg3OWZVbzJGQWdUSW9ZNEVNNnVxRGFa?=
- =?utf-8?B?MlhFQWc3ZzlibnhmLzZoaWF2aHBBS0JzaHRmSG5oV0lGenZhS3ZKam9SblZr?=
- =?utf-8?B?aTY1eEptQXYzcG90YSs1dmI4VzVJUTJkVXhld2NONTlGb3RRREpYT242ZDJK?=
- =?utf-8?B?T0NXYzBFYjJ5Nk02RHlOSFAwUSswQThJWE9GemRZemtzNk5WSXBaUzZVSENz?=
- =?utf-8?B?NUVnV3FTekVrODRTY3B6TXBIMWl6ekMzdmF3NDlQUTkyTlhKQmtBZlUrRDV3?=
- =?utf-8?B?ZnlBUUorR0VmdWpJZ0pQWUhvZDNuQ1dkN3BBY0FrVTlnS2hrNm5DOTF3RWRM?=
- =?utf-8?B?OFZFQTZRdkpOSWgyYjNaYzh3bGxjMGZkWkVBR0kzMzhqdDdtWWVtVjUrQnBy?=
- =?utf-8?B?YkdveUJjMTlHVlBXYmpxeVZyb0pzSHZJYUtGNWRWazhhaGdkdXdmOWJTUmpm?=
- =?utf-8?B?a2VQUUt3WS9uTXVDVGFMdEsrYVEvdWphWmYvWlNsbHo2NGNjL2tydzNLb3lq?=
- =?utf-8?B?TWhLVUE1SzU0dHhlYXBMdERyOCtmazltVTcyZHdqSWdYbkMxUlU5K0VDR1lm?=
- =?utf-8?B?VHZ6S1h3YU9TdVZxNVFvazZXczVlc3dSbUM0R2lkZy9aeWVsV29XdDVEQ0o0?=
- =?utf-8?B?QUp0ejhaTWlsVTBUUWNBWVRQb1dWS3RIRkpjNFhEQW9KZFg0T21CZHFwUklY?=
- =?utf-8?B?UVh4dEt1WStoZWdoOUlOb2tkN0hGa0hSdUZKdG8wOTJmTlZWak11NEpWK1ox?=
- =?utf-8?B?MVdMRmZ1ZzREbHJrb0JsM3lOVUdxVU9hOVlkMHpQNUd6N280a1laM2E1L3VD?=
- =?utf-8?B?elB0NGJ1U09KcUJMYzk0OEJqRWdXV3FCeUZyNW5CU2kwbExNZWRkU0ZaWGl2?=
- =?utf-8?B?QUxwL2JBMzN2aTI3aWtiZmVuMnp3NC9hbUdrMlI4aVE1SEhKWW9nbVFqWWJx?=
- =?utf-8?B?U05GL0ZQb1Zaem0xbGplWkVPWnhCRHZrQ3NNaS8wVXRTdlFyZks2V0RsbmJB?=
- =?utf-8?B?cmUvWFNCU2pSM3FDR0Q4SGZzbmV4WWZlblJKdXJzRmVRdUd6cFFvWFJoeHVj?=
- =?utf-8?B?L1BuZWh2Rm84bHc5Z2ZteXFrbTd6YW9tZDhuZkRJRmxTQWhMeXRwMEJVSXVE?=
- =?utf-8?B?N1YvamQ1WXd4MnZURkQvbzdrdlh5KzBnTTJOc0gvZDgxd2t1ZzlIYTZ2Mm5x?=
- =?utf-8?B?NUQvcUE3MDg4WlhjNDVnbndUeWpTN1VQRjQyN0NKbTRyUS8rR0NXc3Q1clN3?=
- =?utf-8?B?enJmT2VTa0s0dVloZFBhUktsZk9Rbm5RSTBMbmdicjJZMm9TRlM3NE4zalpt?=
- =?utf-8?B?dm5ZOTVrME9rbkw4dUdCOERycmZDZ0RPVDluUzlPajZVMzVRcUlaZz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6938a898-6603-4c93-9461-08de8f12cd5c
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3023.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 10:46:45.4907
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VcHQmKMtE2iRwABNQ22TcuNV8vckAJbvJu3Sn3IEduAi7/te6Bb1XKGpGmmcLo5B9wZ3AbD1B3ZwNywh1VSqKw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6919
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAECpy2kC/23NQQ6CMBCF4as0s6amnSLFrryHIaaUEcZFIS0SD
+ eHuBty6fMmf762QKTFlcGKFRAtnHiM4gYWAMPjYk+QOnABUWCmDRlII98lHDrKk0pq2Nqq2AQo
+ BU6IHvw/r1vx2frVPCvMO7MXAeR7T5zhb9N79cxctlbTo9QW1xSqcrx217ONpTD0027Z9AXmrX
+ TW1AAAA
+X-Change-ID: 20260323-ecc_panic-4e473b83087c
+To: Miaohe Lin <linmiaohe@huawei.com>, 
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Breno Leitao <leitao@debian.org>, 
+ kernel-team@meta.com
+X-Mailer: b4 0.16-dev-453a6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2849; i=leitao@debian.org;
+ h=from:subject:message-id; bh=sn2IERkVdmqkYaK3VQGqabhZXZZLU8A7HNEDL/Sd3Yc=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBpy6lIbUUGVPDcpq5XdqYwDox88VVcHc8/hPMCT
+ lhhFrlCetSJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCacupSAAKCRA1o5Of/Hh3
+ bSV7D/92nypTo8+jqtG7m8Zq75YN1MnkGK6eCTjWfzAPtO2FypfXPExbZSflS5W7RE9p3JbuU6p
+ jCGyUCirvqDlYHzoXdg3nIV5znSULHPcGM+2C66SwwjazNhfg03Uu89FGYiZhQ+XC7F8tIEj4yg
+ fDwxfeEdBeWD4h4AN3pi1rg5/A6Yvv77+Pzi7vBXtap/7grY+k+Cpyg7X6+JuQV9zlfhFSta1VQ
+ McC2Ta6+nbQd60Q6wTkLi3FfJeFVLoFtkPhDBLHd+l8kg13KbOk3CG4RGnWzYQQH6Kf7bR2SDum
+ /6i8EivzRHsDS7DiuainJVIl3ZRg8NpC5ArDH4cnFxbMe8BG/hvEpm3MRe6U+vgoetkHEMIYwHP
+ H1WPJEE0Gb2p2j0D+SVa2GQ9bO7sUOj+SX+/vg46DXKsGNrMYlS+sZ4ETUe/wsHnCv9VEaS43wF
+ xHVbILz3kfADN3INX0P61VFR8aLkWFOa/e0YBw4lDFK94VHrP02WZFjBOc2syt6ROiNy9s+gSvx
+ Ljkq0KF2g6s3z9iO0UxmbKgXtcDKLcnaE8Ln4blXngoStSh/SwaebLK0C1IEQn0KkXjt2nDBDr6
+ 1N4A7OvKjo44k+2E9ObeupZ+MXjTS/tdszmvTKQG/xiYMDS6P0RXjjnZMqcTp48QBEfQUJ8Fd03
+ /99mRw0zKbL0ZpA==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
 X-Spamd-Result: default: False [-0.16 / 15.00];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-81829-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	DMARC_NA(0.00)[debian.org];
+	FREEMAIL_TO(0.00)[huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org];
+	TAGGED_FROM(0.00)[bounces-81831-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	DKIM_TRACE(0.00)[amd.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Akshay.Gupta@amd.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-0.914];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:dkim,amd.com:mid,amd.com:email,amd.com:url,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3BC5236861C
+	RCPT_COUNT_SEVEN(0.00)[10];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,msgid.link:url]
+X-Rspamd-Queue-Id: 9FC6C3687CE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+When the memory failure handler encounters an in-use kernel page that it
+cannot recover (slab, page tables, kernel stacks, vmalloc, etc.), it
+currently logs the error as "Ignored" and continues operation.
 
-On 3/27/2026 12:55 PM, Greg KH wrote:
-> Caution: This message originated from an External Source. Use proper caution when opening attachments, clicking links, or responding.
->
->
-> On Mon, Mar 23, 2026 at 04:38:11PM +0530, Akshay Gupta wrote:
->> From: Prathima <Prathima.Lk@amd.com>
->>
->> - Document AMD sideband IOCTL description defined
->>    for SBTSI and its usage.
->>    User space C-APIs are made available by esmi_oob_library [1],
->>    which is provided by the E-SMS project [2].
->>
->>    Link: https://github.com/amd/esmi_oob_library [1]
->>    Link: https://www.amd.com/en/developer/e-sms.html [2]
-> Ok, nevermind, here's the documentation :)
->
-> But it's very tiny, it's not saying what the api actually is.
->
-> thanks,
->
-> greg k-h
+This leaves corrupted data accessible to the kernel, which will inevitably
+cause either silent data corruption or a delayed crash when the poisoned memory
+is next accessed.
 
-Hi Greg,
+This is a common problem on large fleets. We frequently observe multi-bit ECC
+errors hitting kernel slab pages, where memory_failure() fails to recover them
+and the system crashes later at an unrelated code path, making root cause
+analysis unnecessarily difficult.
 
-Thank you for the feedback, will update the doc in next version with 
-details.
+Here is one specific example from production on an arm64 server: a multi-bit
+ECC error hit a dentry cache slab page, memory_failure() failed to recover it
+(slab pages are not supported by the hwpoison recovery mechanism), and 67
+seconds later d_lookup() accessed the poisoned cache line causing a synchronous
+external abort:
+
+    [88690.479680] [Hardware Error]: error_type: 3, multi-bit ECC
+    [88690.498473] Memory failure: 0x40272d: unhandlable page.
+    [88690.498619] Memory failure: 0x40272d: recovery action for
+                   get hwpoison page: Ignored
+    ...
+    [88757.847126] Internal error: synchronous external abort:
+                   0000000096000410 [#1] SMP
+    [88758.061075] pc : d_lookup+0x5c/0x220
+
+This series adds a new sysctl vm.panic_on_unrecoverable_memory_failure
+(default 0) that, when enabled, panics immediately on unrecoverable
+memory failures. This provides a clean crash dump at the time of the
+error, which is far more useful for diagnosis than a random crash later
+at an unrelated code path.
+
+This also categorizes reserved pages as MF_MSG_KERNEL, and panics on
+unknown page types (MF_MSG_UNKNOWN), so all unrecoverable failure cases
+are covered.
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+Changes in v2:
+- Panic on MF_MSG_KERNEL, MF_MSG_KERNEL_HIGH_ORDER and MF_MSG_UNKNOWN
+  instead of MF_MSG_GET_HWPOISON.
+- Report MF_MSG_KERNEL for reserved pages when get_hwpoison_page() fails
+  instead of MF_MSG_GET_HWPOISON.
+- Link to v1: https://patch.msgid.link/20260323-ecc_panic-v1-0-72a1921726c5@debian.org
+
+---
+Breno Leitao (3):
+      mm/memory-failure: report MF_MSG_KERNEL for reserved pages
+      mm/memory-failure: add panic_on_unrecoverable_memory_failure sysctl
+      Documentation: document panic_on_unrecoverable_memory_failure sysctl
+
+ Documentation/admin-guide/sysctl/vm.rst | 27 +++++++++++++++++++++++++++
+ mm/memory-failure.c                     | 22 +++++++++++++++++++++-
+ 2 files changed, 48 insertions(+), 1 deletion(-)
+---
+base-commit: c369299895a591d96745d6492d4888259b004a9e
+change-id: 20260323-ecc_panic-4e473b83087c
+
+Best regards,
+--  
+Breno Leitao <leitao@debian.org>
 
 
