@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-82182-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82162-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YM7xJYqmzWmvfgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82182-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:13:14 +0200
+	id 2PPMNE+kzWmvfgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82162-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:03:43 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EE373817F6
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:13:14 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EBEF381562
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:03:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B6145318E24C
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:06:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B70E1305BBCB
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:00:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14814480DF7;
-	Wed,  1 Apr 2026 23:01:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EABA3D811A;
+	Wed,  1 Apr 2026 22:59:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OqBr1Jat"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lj4nBT0e"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EB83480DEC;
-	Wed,  1 Apr 2026 23:01:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AA6C43E4B8;
+	Wed,  1 Apr 2026 22:59:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775084492; cv=none; b=K+l0HwoKCk/pEZq/NHqhYLuxPqmFFdxmCGUXNZ7+sUmuGdcgekBAGEuZiplMgBLDZXbqTp3+kbkqYXIuKiP9lLnJv6ee9VQ04hxTwN7fJ8folZeTZgP1XnWiszXheQ7wlu4pW8D71LXESSv0voBWG2cnF6zAKYp+ZH+6tU4zRfI=
+	t=1775084388; cv=none; b=Gl6PUUaydBiI9ntMbZbf7UdssJoG2FOLxAhYZbXCg9MMg3z52pkck87f+QRFtMhUt7ahxkf4JP8QQ24lgvYpIt6B2Bti4KnThysn7bZafOboSZhWK1aSlgeV7nRDCEMzbTXZMS0ouZyz7supJyoQStjc4kr8gptEkwKReSusaoU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775084492; c=relaxed/simple;
-	bh=eMEeyEmMsSEJqm/VBl3vGWpBMChoVMgzinIBBgfTPlE=;
+	s=arc-20240116; t=1775084388; c=relaxed/simple;
+	bh=WZ5qlOiZ6DtdReWxkBeDsr3wuo/Bvi7L1yh3PtqlfGM=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=ChLKVJxnQCaq0l2w/XsFWt/WkvYElMM4ib9p6ZrTwvmJAmR1nw5PQLSg9x0u3ebx+e8iihT98PHmQACvPcpFaAJfwZ3JlLvWuunmeOv2wTW95KAObRBc93JVoQybQ3WkQfHlSGCf36Udkb0oywCjIDA9BktB9WoZPxuDCYhS0MM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OqBr1Jat; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E053C116C6;
-	Wed,  1 Apr 2026 23:01:27 +0000 (UTC)
+	 References:Date:Message-Id; b=Ms9OupBoaMNqYq075bbVYbvwMAkoMlPib5NpHauEBbPHhkl2kGTZdrjnISadv3rfiSCGDwi8GDSBnKFdqlPDauInmy4juNINEmxrPBnE3/dDQqgi7erVHPZdFYA4tK/FRtzPTPMN8TyIraX4142qmxTmUZsAG8rEAZ50g8nw2a8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lj4nBT0e; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A034AC2BCB0;
+	Wed,  1 Apr 2026 22:59:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775084492;
-	bh=eMEeyEmMsSEJqm/VBl3vGWpBMChoVMgzinIBBgfTPlE=;
+	s=k20201202; t=1775084388;
+	bh=WZ5qlOiZ6DtdReWxkBeDsr3wuo/Bvi7L1yh3PtqlfGM=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=OqBr1JatdiUb2SuylVZI06g081Th5A5y+SBKA3HDmkQQ97vI3JEwhrSxvGwmRYfcT
-	 gIgZiBk86U6zFl2xeAM5XAcNIndwN1BmcEoaR5ZvJYM7rqzMFz+1YsE+cz7axIJl2F
-	 X039vepaYXzaeHv3h/+ZjOkTeUE+OJDVFelUi2CljqpO1nCMphf/t+AimoE63wwItA
-	 oicrQfUBsr7nzOMQMl4np1MASYv6HNnj7KFB/AEG/OmevrCXcdXrzdV6/QynJ6W0qp
-	 YB9ROCeUG7CfHzwZ7tLmPMeRsXJJ6hXMQDecGejA+SExP6VmmpiJ41ojKql7BZVzvj
-	 qYYbOof6fOpDg==
+	b=lj4nBT0evc7OrDUu1Sj5pkvDmswJqxEKepIZIBO1UHRNy+tyNRi0vMBV8ZZQo5u9K
+	 zkZwz7JRQC3e7zWKVrxTkRvM6UpJExohp8FMDOwBtRLaCvDN8SeZbiBLsCDevcX8Ul
+	 6NlNNBwShlnIwtwf8Zd866rDCnrkFis4xJGCPjt9mEA0AFxN7KK1edKbNndIrNfJwh
+	 U8aXZsRecZpgmnNQpJeqrLXLyxzsJ6ViMkCj4XCLPZHq8E07HU6hZou56/6D9D3gOS
+	 ghFil1DcIXuZYVoeidWghi82IqoEOW2AFWEHetEpT7AKJJcQJ9H4tPUoE4cXqMxYFk
+	 A6teV82CTXgAg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 26/33] docs: rust: quick-start: remove Gentoo "testing"
- note
+Subject: Re: [PATCH 06/33] rust: kbuild: remove skipping of
+ `-Wrustdoc::unescaped_backticks`
 From: Tamir Duberstein <tamird@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>
 Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -85,18 +85,18 @@ Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
  Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
  llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-In-Reply-To: <20260401114540.30108-27-ojeda@kernel.org>
+In-Reply-To: <20260401114540.30108-7-ojeda@kernel.org>
 References: <20260401114540.30108-1-ojeda@kernel.org>
- <20260401114540.30108-27-ojeda@kernel.org>
+ <20260401114540.30108-7-ojeda@kernel.org>
 Date: Wed, 01 Apr 2026 18:59:04 -0400
-Message-Id: <177508434468.73816.14590171380654521174.b4-review@b4>
+Message-Id: <177508434437.73816.5644451547890468339.b4-review@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=345; i=tamird@kernel.org;
- h=from:subject:message-id; bh=eMEeyEmMsSEJqm/VBl3vGWpBMChoVMgzinIBBgfTPlE=;
- b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7uuLFn5ysG844m+YOzU32yT5q2ddFFGwjjYK7z0s
- IHllYmrOyayMIhxMViKKbIkih7am556e49s5rvjMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oZGOgY4xAxenAEx1cxYjw/WVXWtWXt19ZdneHTnhLd/eMl7yEJ8655tqxfdHppWHvysx/PdbySo
- az7fibtaeiJbGk/N2qotN1tyw6K2c2vSuyp4IYx4A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=408; i=tamird@kernel.org;
+ h=from:subject:message-id; bh=WZ5qlOiZ6DtdReWxkBeDsr3wuo/Bvi7L1yh3PtqlfGM=;
+ b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnFztdX5tp0KRwJ2PVmq5Hcku55gruzdjM0eW5uV1bX
+ FJ05YXGjoksDGJcDJZiiiyJoof2pqfe3iOb+e44zBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjoGPMwMUpAFPtbMPw38l7nuwEDWEbr/48+WV+R59qr/vZJJXZ+pHv3jZh/achkYwMd50PyAR
+ 9fSXtYTpN0bRg+44XD7qnrzt/66mfYkT4lm/MLAA=
 X-Developer-Key: i=tamird@kernel.org; a=openpgp;
  fpr=5A6714204D41EC844C50273C19D6FF6092365380
 X-Spamd-Result: default: False [-0.16 / 15.00];
@@ -104,12 +104,12 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82182-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82162-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -123,19 +123,19 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[tamird@kernel.org,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[kernel.org,arm.com,dabbelt.com,eecs.berkeley.edu,nvidia.com,gmail.com,ffwll.ch,linux.dev,davidgow.net,linuxfoundation.org,android.com,brauner.io,google.com,lwn.net,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,oracle.com,lists.infradead.org,ghiti.fr,lists.freedesktop.org,googlegroups.com,lists.linux.dev];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 2EE373817F6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 3EBEF381562
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 01 Apr 2026 13:45:33 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
-> Gentoo does not need the "testing" note, since its packages are recent
-> enough even in the stable branch [1][2].
+On Wed, 01 Apr 2026 13:45:13 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
+> Back in Rust 1.82.0, I cleaned the `rustdoc::unescaped_backticks` lint in
+> upstream Rust and added tests so that hopefully it would not regress [1].
 > 
-> Thus remove it to simplify the documentation.
+> Thus we can remove it from our side given the Rust minimum version bump.
 
 Reviewed-by: Tamir Duberstein <tamird@kernel.org>
 
