@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-82164-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82180-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SAd7JtmkzWmvfgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82164-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:06:01 +0200
+	id sNoaBWymzWmvfgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82180-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:12:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 133C43815F3
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:06:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 848DD3817DF
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:12:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7A38D302EABA
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:01:02 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 4817F317E013
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:05:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A8B00478871;
-	Wed,  1 Apr 2026 22:59:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C148847DD62;
+	Wed,  1 Apr 2026 23:01:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c3Yd6ysn"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RnZUWOir"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3843247885C;
-	Wed,  1 Apr 2026 22:59:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DB06480978;
+	Wed,  1 Apr 2026 23:01:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775084399; cv=none; b=XPjHypELOKnpRT8kEnVWFJJMwB/9hHKkvSdwPjLbVRyrZzPfPKGE7X3/UUskvH1E9vVJ5O+HFBXbRD4JYZeT334ZH0v4spA5xoTBRc++NfYXUIHfzbrVyDAy1/pUYTc9Q7gNm67pRBWd4zyspbOjTuWp6ThyHDFg2AnxIPeNI8E=
+	t=1775084482; cv=none; b=GVcVfeA+kqiSE0zKc2tfS52uMbh7koOsejM1hr5dSnPCvOF6huKDf1RVwe8Lmd7fKJIn7wRS4FoIksxI7xRwO6qbBj/D02LxF8X2S9AHEFJwLPA9X7LL6jao4m4XdklUmS3XMNr3GOi3OWIFlhJtoYobLHvAY/BX0P7t6A+Zj54=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775084399; c=relaxed/simple;
-	bh=fqu7rrOs0OL/Tb+VSqQKqwQjSGQycaS8iS2//8/RxF0=;
+	s=arc-20240116; t=1775084482; c=relaxed/simple;
+	bh=6656iS8Z953zXAk/bn8KpSt1Oh4C8fXwc0OPqmLk+Wg=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=Dzup9PeBTX2Xth9JBAJQNBID2xFoObgfP50tuwtrvvy2284YmusI+0CN+seVKOYplD/VjtisPldkoxSHXWkoouM41t+IwRF/4vzdj3cOXZMXzt3ZDNQ6LnwV4j2ZX9mKeuX7er1WiUAQaxOWLqUcNklrmhKvDE/04YHx5a5Q7L4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c3Yd6ysn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9D93C116C6;
-	Wed,  1 Apr 2026 22:59:53 +0000 (UTC)
+	 References:Date:Message-Id; b=H6oiCU8dCdKRLq+eEgp2azymStObej3kqEwbctfCpomTiQNxJEbLpXPTCrJq1pO3CdjvaBW58tsTacfPyvGvyYGCYIqLF44ZiLKWk6e5IfVFtRwhUC+26WR+so1HKwe/B8vAsHDRI4OthMKcva5yJ+8i2eP5maIqgd0GSxXWLGs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RnZUWOir; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2E7BC2BCAF;
+	Wed,  1 Apr 2026 23:01:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775084398;
-	bh=fqu7rrOs0OL/Tb+VSqQKqwQjSGQycaS8iS2//8/RxF0=;
+	s=k20201202; t=1775084481;
+	bh=6656iS8Z953zXAk/bn8KpSt1Oh4C8fXwc0OPqmLk+Wg=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=c3Yd6ysnQsGvROMtiSG+i3keeAySaiEerx1F2TBjnnkbqAXThe8bhBC5TmfGTw9Ll
-	 iM81wVmrttBVfy5JGtlkpYWTB5ilbanIlMhp0u4XLelpZ54ZBP9JGO7PEfdS98oppP
-	 y1H/3B42flzzuBQD0t+C6ViMRYVYqRKw6ppF4wNedlfutWkS1yja1IkZ7vaakl9Efo
-	 IKyM2ubpcSiV/tFrD+PTVckV9ziEPjgOBuaWD4QFRsvbkk4PqOy2XpnWUC1wi9waM7
-	 +yybB8tYYyxCkeQF+HluEUtULU29DO+VEutqMf9F51Xq320twioy0N0OMyWPyHHuGK
-	 7JSnJjlMo5Dpw==
+	b=RnZUWOirA715kbUPApG8z/29huJIEsdvuiYpn4e51BGl8Ih9SKFkc8mSpA7VTChiB
+	 x9CVKCriNZkE9qjuaipqjo+nCQVG45LC+x9BJfMr26Ka2UW9mJ3orbH1f+2MVf8rKs
+	 g5Zxd3sc+h9Awoqdt/jrZcCCNplpoC8xYVYMJ5lSdUcmrwD+FiH36uWGgU4rjiWVNO
+	 ugNNPXvHlZzVsQ58hUHNyoop8UyO3R2aa7bYcrnxq//E7woWnwm2eFwJwJ/08jWKAM
+	 uYP7EZaf1nmiAP00xNPx4xm9mZO8bt0go7da8uTuzQNPOnpLq+/734ONfHKrXmysCf
+	 jJVgMm6it7WKw==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 08/33] rust: kbuild: simplify `--remap-path-prefix`
- workaround
+Subject: Re: [PATCH 24/33] docs: rust: quick-start: update minimum Ubuntu
+ version
 From: Tamir Duberstein <tamird@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>
 Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -85,18 +85,18 @@ Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
  Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
  llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-In-Reply-To: <20260401114540.30108-9-ojeda@kernel.org>
+In-Reply-To: <20260401114540.30108-25-ojeda@kernel.org>
 References: <20260401114540.30108-1-ojeda@kernel.org>
- <20260401114540.30108-9-ojeda@kernel.org>
+ <20260401114540.30108-25-ojeda@kernel.org>
 Date: Wed, 01 Apr 2026 18:59:04 -0400
-Message-Id: <177508434440.73816.18221552058190562777.b4-review@b4>
+Message-Id: <177508434466.73816.13717819961434434560.b4-review@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2068; i=tamird@kernel.org;
- h=from:subject:message-id; bh=fqu7rrOs0OL/Tb+VSqQKqwQjSGQycaS8iS2//8/RxF0=;
- b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnFztxvDld6+gaffHc/FPfFslrHQpc18Fd91tnQkf8u
- 4NCctUdHRNZGMS4GCzFFFkSRQ/tTU+9vUc2891xmDmsTCBDpEUaGICAhYEvNzGv1EjHSM9U21DP
- 0EjHQMeYgYtTAKY6aQXDb9Y/z4KOTNn7TGbrdYcmuYmuSobSbdGFPlXr2/x/qzq8V2Nk+HB8ce+
- j1zZzz6+zOelcOtmmT6rvz1aj+a/nK5UETLn5jAUA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=430; i=tamird@kernel.org;
+ h=from:subject:message-id; bh=6656iS8Z953zXAk/bn8KpSt1Oh4C8fXwc0OPqmLk+Wg=;
+ b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7vYT5udIq//NWh3249c6Zw3aa2uE1ildkhcKim49
+ Glpsf7MjoksDGJcDJZiiiyJoof2pqfe3iOb+e44zBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjoGPMwMUpAFMtfoaRYYZs6f3+qpndGzVXCi3h9u8KjP8wX+SNtVZRiJHZvG0PrRn+yr6UuBJ
+ UWq+RY6pw/fwCn9/Xfx5LiJtkZDJlt7jYZ7ZpfAA=
 X-Developer-Key: i=tamird@kernel.org; a=openpgp;
  fpr=5A6714204D41EC844C50273C19D6FF6092365380
 X-Spamd-Result: default: False [-0.16 / 15.00];
@@ -109,7 +109,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82164-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82180-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -118,7 +118,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[tamird@kernel.org,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[kernel.org,arm.com,dabbelt.com,eecs.berkeley.edu,nvidia.com,gmail.com,ffwll.ch,linux.dev,davidgow.net,linuxfoundation.org,android.com,brauner.io,google.com,lwn.net,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,oracle.com,lists.infradead.org,ghiti.fr,lists.freedesktop.org,googlegroups.com,lists.linux.dev];
@@ -127,49 +127,20 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 133C43815F3
+X-Rspamd-Queue-Id: 848DD3817DF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 01 Apr 2026 13:45:15 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
-
-Does this simplify the workaround, or just remove one instance of it?
-
-> [...]
+On Wed, 01 Apr 2026 13:45:31 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
+> Ubuntu 25.04 is out of support [1], and Ubuntu 25.10 is the latest
+> supported one.
 > 
-> Note that commit dda135077ecc ("rust: build: remap path to avoid
-> absolute path") re-landed the `--remap-path-prefix` flag (together with
-> `--remap-path-scope`), so we keep the workaround, i.e. an alternative
-> could have been to simply delete the skip entirely, but since we still
-> have it and it will be needed when this gets merged, let's keep it.
-
-The use of "re-landed" is confusing without a mention of commit
-8cf5b3f83614 ("Revert "kbuild, rust: use -fremap-path-prefix to make
-paths relative""). Though this whole thing might be clearer without a
-mention of that history; the important part is that there's no
-conditional use of `--remap-path-scope` in the base commit but there
-will be when dda135077ecc is merged (the use of "this" in "this gets
-merged" is also ambiguous).
-
->
->
-> diff --git a/rust/Makefile b/rust/Makefile
-> index 193cf06eea64..708530ee3613 100644
-> --- a/rust/Makefile
-> +++ b/rust/Makefile
-> @@ -142,10 +142,9 @@ rustdoc_modifiers_workaround := $(if $(call rustc-min-version,108800),-Cunsafe-a
->  # Similarly, for doctests (https://github.com/rust-lang/rust/issues/146465).
->  doctests_modifiers_workaround := $(rustdoc_modifiers_workaround)$(if $(call rustc-min-version,109100),$(comma)sanitizer)
->  
-> -# `rustc` recognizes `--remap-path-prefix` since 1.26.0, but `rustdoc` only
-> -# since Rust 1.81.0. Moreover, `rustdoc` ICEs on out-of-tree builds since Rust
-> -# 1.82.0 (https://github.com/rust-lang/rust/issues/138520). Thus workaround both
-> -# issues skipping the flag. The former also applies to `RUSTDOC TK`.
-> +# `rustdoc` ICEs on out-of-tree builds in Rust < 1.87.0
-> +# (https://github.com/rust-lang/rust/issues/138520). Thus workaround the
-> +# issue skipping the flag.
-
-_by_ skipping the flag? this is preexisting, though.
+> Moreover, Ubuntu 25.10 is the first that provides a recent enough Rust
+> given the minimum bump -- they provide 1.85.1 [2].
+> 
+> Thus update it.
+> 
+> [...]
 
 Reviewed-by: Tamir Duberstein <tamird@kernel.org>
 
