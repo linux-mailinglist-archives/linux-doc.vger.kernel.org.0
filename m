@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-82185-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82177-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OFNwNrCnzWmvfgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82185-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:18:08 +0200
+	id eNVMGt+lzWmvfgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82177-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:10:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41B9C381977
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:18:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F88C38171B
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:10:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1FE7E3135452
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:06:58 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3796D30FEF0F
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:04:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3ACE47DFB0;
-	Wed,  1 Apr 2026 23:01:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F97F480350;
+	Wed,  1 Apr 2026 23:01:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qd+wRJd3"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nUrzfe8N"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 223FE48125D;
-	Wed,  1 Apr 2026 23:01:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D917D4779B2;
+	Wed,  1 Apr 2026 23:01:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775084508; cv=none; b=ZPc3ZICf+PRMeod4qOAR1AdBWCVYSzMrmqXdzScdXH0jcb/d6Uvr4/gPrwyZWHIjKXbqPluG+U5+ohyaSxssISescn7bm0nA1RoxCU/hMaLeME58XsNDgcVOPYNbyQ1Ohr77UH6ybzKMxN8u1BnVBwGva6PLepLMgR/Y6DdWbjw=
+	t=1775084467; cv=none; b=SanRsjR++UJBkhMAavtyg0aNdITvuv7TyQp0pA1alYRbIvxPE+LvMuqBgLDWUVoOgerIku3qs9j637sry/SahHnLcfEFJthpUbJy1h60pXVL/jToA8eQ2r46uDom6VuzH0fml2cTncjgYoWN4QLmuTtJ/B2X5R4Na3/4hyuqe/g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775084508; c=relaxed/simple;
-	bh=EHz4n5YTSN6LWX8eGfRMr5/Bcb1koBvR3pe++ElzTzY=;
+	s=arc-20240116; t=1775084467; c=relaxed/simple;
+	bh=LzgaJ83Rv9pU4dQmi5pVMrmBrHvBC5e78go2tjHZcUw=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=RR3Si16QLa7LJIoCDkdBaN2Ps7Ty/La/2++5ijXbVkz6fZ8XZxzm4Iu8qdEvZge2pjbc88kHf1MvMlEdjeBa9k6CJ2RWrAuGTlKPHvrTIipeTSg2yF5hmBOBymK0MaQyaX9N93nqugsv6xjRFY7WXTnN9jvL0034TI0Qzi5/0a8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qd+wRJd3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 846E1C116C6;
-	Wed,  1 Apr 2026 23:01:42 +0000 (UTC)
+	 References:Date:Message-Id; b=okz+EwiQNr9WLw1NzrUYlaTsAGqoRAkGYRfMMgj2BHh0vVtSgpn3kw2fCmpKYKViwoQCQ+B5Y3EA2OtVeCeOD29FVSdmbG83jO53g7Z5/9SppgDNNwzwvW7MZiqrc7yWo7QeArmdUxK6R+HLh9/SSQ/L2Kct4NlMYn28C4wkaaA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nUrzfe8N; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75B37C2BC9E;
+	Wed,  1 Apr 2026 23:01:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775084507;
-	bh=EHz4n5YTSN6LWX8eGfRMr5/Bcb1koBvR3pe++ElzTzY=;
+	s=k20201202; t=1775084466;
+	bh=LzgaJ83Rv9pU4dQmi5pVMrmBrHvBC5e78go2tjHZcUw=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=Qd+wRJd3wir6TeK3EAz5gzl2NHC2qbwNimuevll/SRy4V4IoVSdIPJ/4HIkcpVXiG
-	 GtFfzJ0Uj6ddY9J5/w6tj9QSfgXupx/UhHog42BcNvzDhUgr5spzGF1QfWVaUZH+fb
-	 iF5k9s/ftekDdHeJsmoNNIvFYVjAEC4x1SXaEzy3EaO/cC9QWPOuxMq1vA1eNHEtRS
-	 +Y+i6OT6GC5jocuqRICw6v3JGQnV5THSARnBCOWMrYgtgZCxzfaKzcO9IWLOzr+reU
-	 u60yz8JAUjGkHwq1N23g+F4zbOlB149p/HY9HjKqGTpPtUqsCuPwugHxQp0kDHY9I6
-	 FGWcAxJITh2Ug==
+	b=nUrzfe8NhDQtpCvFinZVfgnt+tjQMOtFRIGAge4DLGYxrMoQoEQ86XmqX8MSuc5Ud
+	 txs3xwHIDwocyZXQNb8jfz80mh53Jd3wusB05jFNLe2fZYgGPLD3nUtGFreumspUTm
+	 IAjMDmuiHUSjuwSg00b5B+WSMN62p00RXD9mocBhaqNA3Z+o7B4jWYwGDTUpQeGfbU
+	 PfL9deFZ1hdxZ037QHqHZwJAwprww4p/wwBhY1w9e1tRkHHwxiuYOLMQPqidV4AVLZ
+	 uqzeLbgTQ+ENe3R61hPcesdN9JHCGklBcMT6RDuu6hjy6GsrjpcDvSx2HJMRbK4sqB
+	 EqCJGUn9bUPPg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 29/33] docs: rust: general-information: simplify
- Kconfig example
+Subject: Re: [PATCH 21/33] gpu: nova-core: bindings: remove unneeded
+ `cfg_attr`
 From: Tamir Duberstein <tamird@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>
 Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -85,18 +85,18 @@ Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
  Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
  llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-In-Reply-To: <20260401114540.30108-30-ojeda@kernel.org>
+In-Reply-To: <20260401114540.30108-22-ojeda@kernel.org>
 References: <20260401114540.30108-1-ojeda@kernel.org>
- <20260401114540.30108-30-ojeda@kernel.org>
+ <20260401114540.30108-22-ojeda@kernel.org>
 Date: Wed, 01 Apr 2026 18:59:04 -0400
-Message-Id: <177508434471.73816.15753382261308172951.b4-review@b4>
+Message-Id: <177508434461.73816.5410904852576871478.b4-review@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=412; i=tamird@kernel.org;
- h=from:subject:message-id; bh=EHz4n5YTSN6LWX8eGfRMr5/Bcb1koBvR3pe++ElzTzY=;
- b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7ver/2//ckbsVnLfatPrvglsc9eXG7+eRe/fdsr7
- t1q97Gf3DGRhUGMi8FSTJElUfTQ3vTU23tkM98dh5nDygQyRFqkgQEIWBj4chPzSo10jPRMtQ31
- DI10DHSMGbg4BWCqOfUYGRYmxl4TfflIb2K2ycHjlVO+/Z6+c57fBwNzU4O9vCKKM+8y/LPI/Sc
- h4bDDddL1t1ukjFU25JvonNtgcyE3XqZH4qBrCBMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=497; i=tamird@kernel.org;
+ h=from:subject:message-id; bh=LzgaJ83Rv9pU4dQmi5pVMrmBrHvBC5e78go2tjHZcUw=;
+ b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7tI1RtVf7/3VF2vMEx1i8aDGZv9ug9+b7OYN+Fqj
+ 7LpjPMnOiayMIhxMViKKbIkih7am556e49s5rvjMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
+ oZGOgY4xAxenAEz10/cM/yP3ruBYcveqWSf7c9aSQN+rd7vL/k1+czI4vmvCx2fH6/IYGQ4vurz
+ s3Km+wk3Xq9Kzd2z6cj3qyOaHxU6TS+sf5DBwT2AAAA==
 X-Developer-Key: i=tamird@kernel.org; a=openpgp;
  fpr=5A6714204D41EC844C50273C19D6FF6092365380
 X-Spamd-Result: default: False [-0.16 / 15.00];
@@ -109,7 +109,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82185-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82177-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -127,18 +127,18 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 41B9C381977
+X-Rspamd-Queue-Id: 0F88C38171B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 01 Apr 2026 13:45:36 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
-> There is no need to use `def_bool y if <expr>` -- one can simply write
-> `def_bool <expr>`.
+On Wed, 01 Apr 2026 13:45:28 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
+> These were likely copied from the `bindings` and `uapi` crates, but are
+> unneeded since there are no `cfg(test)`s in the bindings.
 > 
-> In fact, the simpler form is how we actually use them in practice in
-> `init/Kconfig`.
+> In addition, the issue that triggered the addition in those crates
+> originally is also fixed in `bindgen` (please see the previous commit).
 > 
-> Thus simplify the example.
+> Thus remove them.
 > 
 > [...]
 
