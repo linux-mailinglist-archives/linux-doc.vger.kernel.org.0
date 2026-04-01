@@ -1,156 +1,262 @@
-Return-Path: <linux-doc+bounces-81953-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-81958-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mNlRN6d1zGn1SwYAu9opvQ
-	(envelope-from <linux-doc+bounces-81953-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 03:32:23 +0200
+	id SCs1B+OCzGlXTgYAu9opvQ
+	(envelope-from <linux-doc+bounces-81958-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 04:28:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E28423737EC
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 03:32:22 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 70833373DB9
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 04:28:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id ED7A23013C9A
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 01:30:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CCAAB30DB466
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 02:24:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7B632D23A6;
-	Wed,  1 Apr 2026 01:30:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="jKEW9F1G"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 742A431E85A;
+	Wed,  1 Apr 2026 02:23:59 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f201.google.com (mail-dy1-f201.google.com [74.125.82.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out198-14.us.a.mail.aliyun.com (out198-14.us.a.mail.aliyun.com [47.90.198.14])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EBE82D0C84
-	for <linux-doc@vger.kernel.org>; Wed,  1 Apr 2026 01:30:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 786B73271EA;
+	Wed,  1 Apr 2026 02:23:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=47.90.198.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775007023; cv=none; b=nzcUNocIRlEa5B+NC0Bx6PnHFpbchsWnq3Rk4rjnwQugyEcsAvuvPoMEw0NSpiXrPBl7tDBGtv+oqTG6GKY9GUGcx1GVKa31gVnBadGckvd3A1SWcsnMVlcBvR9wNlZglzBJBxRipDGr+FDFlPzfjKBu9Xtk65tBJMedEMkYOPI=
+	t=1775010239; cv=none; b=Xtm+JrZVH7vdMq1Bivo3CNzm043+soas9mK3B0hs6Z/xoayzgW6ABa+G4RuS4pdzxWKYZSuW/kszgUBGye+Nz+OLy58Gmm9qzPKub42+JgJ7OGu9QX72NwquTLcGuYvmaDz3FJ7yZ7krz4RrEiCiqjSeQRLn2ePPcUaaMdgb/SU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775007023; c=relaxed/simple;
-	bh=31TfvCLwbknK8QU0XVOHI6FK0vdxmYqr/snmIVckegg=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=suNWaRIBqJxo9hFpjTTekJBkce0hv/uWY6wN6+attLXZ1TnPqBKLT+vyvZeylSf+HmNfNoF1+z/6MLHvNre4kO6h3tsCfj1GN1ZFrJPMvQLGVX49+FKmbzhZbmkEfH7Uv869xyrP+fnQGSG3b0QWmReDRwZWqzjca67bjHLHtWk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--samitolvanen.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=jKEW9F1G; arc=none smtp.client-ip=74.125.82.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--samitolvanen.bounces.google.com
-Received: by mail-dy1-f201.google.com with SMTP id 5a478bee46e88-2bdf75bc88fso5470658eec.0
-        for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2026 18:30:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1775007022; x=1775611822; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=k1/BQLq9I+ernXavRvxZYNZROQSXYmepGs6Tk+w+QVg=;
-        b=jKEW9F1GtFDJu1oSrVQ4fBmh51vm0ej6HPOhm4jQHGM0AICgFsvYpC5w8JyATLvuKt
-         qgGnGu59RpjSsyH4RR9wt3fFvKp7V+i9dI8RJ6ckYyfCYtrJ/zDydvrhc8O/3kJ/jjSN
-         q0sJ3cCNpafYYrlmhGucxhDyn4CDKIgirsGlyfDsCHT6Rfdom+k/cHN3svkXwjCPfYXj
-         94HrWnd5CHpLT88AGgNxxb0ObQ7k533Y02V3hf/sPB/E8+zey7klT4NJVuva4Pkeqakc
-         cIudRDdfke5m7rVJDhxNjUxZngRaGbjfmYz1S1gdiRdk+uKztHrqcWONAKbMzGO8ZdJx
-         Sjzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775007022; x=1775611822;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=k1/BQLq9I+ernXavRvxZYNZROQSXYmepGs6Tk+w+QVg=;
-        b=etglk7qFJgGON+PTGE792QyKNh8NrZojFRIWLu+wsZZqOODH6AXkXbNztwAq8qYtK8
-         HFwRIXKf1mNjBrkn+7sIbP/qNePXYzzOLZhvhxUIAhKjVIp4M0otnyluWwlMmcGZvL1i
-         bMr3xNgPIGYdfpEXREQDKCKPHf1nMmMB1OksAbXa8qoZ42dHA2RH8AMBULZNRwAy0RRL
-         SvS5Q2k0Lq984cZOga6+afnyKj+FmCSt39Idn4hPko13+zmb6D4KtQZK1T1MPqMJfc2b
-         7aNtcO2gV2EcAXOGc5mFbT72jm6BA/9LsH+F3ZIYJUFLiKj3hPAs7zo5gmxO+2S8sHK2
-         JnxQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVdnGu5StgiT1wKmCKik5R09UP+UCLfFttt2A5ypXHhdetkmnP0wM36sQx76MAO4PtD+IogcyELynw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxR0HFbJ8u6rJ6EUMSwtCOQMQnaxh9PGKjVHVdic9tT1lY5tqq1
-	8wERq7dV3kiT12KxKSpcAI0UP3xl3Dj0wpDXSV3QOOL5CxQkpWiNyXe3pnV26OCa++0nH5UtgJT
-	cZQA5t3aORt/xPqVr3Ia/um0ErcS8zg==
-X-Received: from dybmh41.prod.google.com ([2002:a05:7301:f29:b0:2c3:dfe3:6dbb])
- (user=samitolvanen job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:693c:2c8c:b0:2c6:2bac:8a8 with SMTP id 5a478bee46e88-2c9333b8061mr822830eec.30.1775007021499;
- Tue, 31 Mar 2026 18:30:21 -0700 (PDT)
-Date: Wed, 01 Apr 2026 01:30:19 +0000
-In-Reply-To: <20260326-kflagstab-v5-0-fa0796fe88d9@google.com>
+	s=arc-20240116; t=1775010239; c=relaxed/simple;
+	bh=q1kJkbjxI6gsGdbBJqWCoRVmUbF0xc9jzOBaqVO2qis=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=MGLRu8xXlTBE07n9iycJxgEFLgSF5NJonOPh81HuXkxWq1J3f9nd1Y5iSV8arvdfhI3iVmYVcnD3tdgFa67KDetWr3fqWuhnDlIxK8TuMDpuLblgbkz6yT9XGwhz+vgEzusjBGt/+aVxsdQIBC0Z9BTaAs7Sn/9jjN8WJ/JnbFQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=47.90.198.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nebula-matrix.com
+X-Alimail-AntiSpam:AC=CONTINUE;BC=0.8113364|0.08951069;CH=green;DM=|AD|false|;DS=CONTINUE|ham_alarm|0.114224-0.0105365-0.87524;FP=5076061286350460466|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033032053168;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DS;RN=20;RT=20;SR=0;TI=SMTPD_---.h2VrTGO_1775010200;
+Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.h2VrTGO_1775010200 cluster:ay29)
+          by smtp.aliyun-inc.com;
+          Wed, 01 Apr 2026 10:23:22 +0800
+From: "illusion.wang" <illusion.wang@nebula-matrix.com>
+To: dimon.zhao@nebula-matrix.com,
+	illusion.wang@nebula-matrix.com,
+	alvin.wang@nebula-matrix.com,
+	sam.chen@nebula-matrix.com,
+	netdev@vger.kernel.org
+Cc: andrew+netdev@lunn.ch,
+	corbet@lwn.net,
+	kuba@kernel.org,
+	linux-doc@vger.kernel.org,
+	lorenzo@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	vadim.fedorenko@linux.dev,
+	lukas.bulwahn@redhat.com,
+	edumazet@google.com,
+	enelsonmoore@gmail.com,
+	skhan@linuxfoundation.org,
+	hkallweit1@gmail.com,
+	jani.nikula@intel.com,
+	linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH v10 net-next 00/11] nbl driver for Nebulamatrix NICs
+Date: Wed,  1 Apr 2026 10:23:03 +0800
+Message-ID: <20260401022318.28550-1-illusion.wang@nebula-matrix.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260326-kflagstab-v5-0-fa0796fe88d9@google.com>
-X-Mailer: b4 0.14.3
-Message-ID: <177500701994.1603852.8130352881871388132.b4-ty@google.com>
-Subject: Re: [PATCH v5 0/7] scalable symbol flags with __kflagstab
-From: Sami Tolvanen <samitolvanen@google.com>
-To: Luis Chamberlain <mcgrof@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>, 
-	Daniel Gomez <da.gomez@kernel.org>, Aaron Tomlin <atomlin@atomlin.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Siddharth Nayyar <sidnayyar@google.com>
-Cc: linux-modules@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-kbuild@vger.kernel.org, 
-	linux-doc@vger.kernel.org, maennich@google.com, gprocida@google.com
-Content-Type: text/plain; charset="utf-8"
-X-Spamd-Result: default: False [-1.66 / 15.00];
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [1.04 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-81958-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-81953-lists,linux-doc=lfdr.de];
+	DMARC_NA(0.00)[nebula-matrix.com];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org,intel.com];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[samitolvanen@google.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[google.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E28423737EC
+	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.847];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,nebula-matrix.com:mid,illusion.wang:url,2.ai:url]
+X-Rspamd-Queue-Id: 70833373DB9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, 26 Mar 2026 21:25:01 +0000, Siddharth Nayyar wrote:
-> This patch series implements a mechanism for scalable exported symbol
-> flags using a separate section called __kflagstab. The series introduces
-> __kflagstab support, removes *_gpl sections in favor of a GPL flag,
-> simplifies symbol resolution during module loading.
-> 
-> The __kflagstab contains an 8-bit bitset which can represent up to 8
-> boolean flags per symbol exported in the __ksymtab. The patch series
-> also uses this bitset to store GPL-only flag values for kernel symbols,
-> thereby eliminating the need for *_gpl sections for representing GPL
-> only symbols.
-> 
-> [...]
+This patch series represents the first phase. We plan to integrate it in
+two phases: the first phase covers mailbox and chip configuration,
+while the second phase involves net dev configuration.
+Together, they will provide basic PF-based Ethernet port transmission and
+reception capabilities.
 
-Applied to modules-next, thanks!
+After that, we will consider other features, such as ethtool support,
+flow management, adminq messaging, VF support, debugfs support, etc.
 
-[1/7] module: define ksym_flags enumeration to represent kernel symbol flags
-      commit: 10a4eb5882ba16164ece86d99486084f02f148bb
-[2/7] module: add kflagstab section to vmlinux and modules
-      commit: 9743311b4535dc76ce81f46303da0f69bfaa5fd6
-[3/7] module: populate kflagstab in modpost
-      commit: 16d0e04f546ffba78c74bbfeb57d93147bcaf2c5
-[4/7] module: use kflagstab instead of *_gpl sections
-      commit: 55fcb926b6d8b5cfb40873e4840a69961db1bb69
-[5/7] module: deprecate usage of *_gpl sections in module loader
-      commit: b4760ff2a5e4351c59d185967735f59c0b0bd7f6
-[6/7] module: remove *_gpl sections from vmlinux and modules
-      commit: f18540256b70c9e1f0e26e2c38f3d43a131926d9
-[7/7] documentation: remove references to *_gpl sections
-      commit: 3b1299f25b07ef83e020d049dfc62ced9c09450d
+changes v9->v10
+Link to v9:https://lore.kernel.org/netdev/20260325040048.2313-1-illusion.wang@nebula-matrix.com/
+1.Issues found by Jakub
+2.AI review issue
+changes v8->v9
+Link to v8:https://lore.kernel.org/netdev/20260317034533.5600-1-illusion.wang@nebula-matrix.com/
+1.Issues found by Jakub
+2.AI review issue
+Changes v7→v8
+Link to v7:https://lore.kernel.org/netdev/20260310120959.22015-1-illusion.wang@nebula-matrix.com/
+1.Issues found by Paolo
+Changes v6->v7
+Link to v6:https://lore.kernel.org/netdev/20260306033451.5196-1-illusion.wang@nebula-matrix.com/
+1.Issue found by Jakub
+2.AI review issue
+Changes v5->v6
+Link to V5:https://lore.kernel.org/netdev/20260226073840.3222-1-illusion.wang@nebula-matrix.com/
+1.put all standard linux includes files the .c file which needs it & others
+--Andrew
+2.AI review issue
+Changes v4->v5
+Link to V4:https://lore.kernel.org/netdev/20260206021608.85381-1-illusion.wang@nebula-matrix.com/
+1.change nbl_core to nbl & change ** pointers to *pointers & others
+--Andrew
+2.AI review issue
+Changes v3->v4
+Link to v3: https://lore.kernel.org/netdev/20260123011804.31263-1-illusion.wang@nebula-matrix.com
+1.cut down to part of a mini driver(mailbox and chip init)
+--Jakub Kicinski Simon Horman(some sort of staged approached)
+2.modify issues found by ai.
+3. Reverse Christmas tree/nbl_err/devm_kfree/remove some macros/
+void type to real type/others
+--Andrew Lunn
+4.change deprecated pci_enable_msix_range to pci_alloc_irq_vectors
+5.delete service layer
+6.the style of kconfig---Randy Dunlap
+7.add to Documentation/networking/device_drivers/ethernet/index.rst
+--Simon Horman
+Changes v2 →v3
+Link to v2: https://lore.kernel.org/netdev/20260109100146.63569-1-illusion.wang@nebula-matrix.com/
+1.cut down to a mini driver:
+    delete vf support
+    use promisc mode to cut down flow management
+    drop patch15 in v2
+    delete adminq msg
+    delete abnormal handling
+    delete some unimportant interfaces
+2.modify issues found by ai review
+Changes v1->v2
+Link to v1: https://lore.kernel.org/netdev/20251223035113.31122-1-illusion.wang@nebula-matrix.com/
+1.Format Issues and Compilation Issues
+- Paolo Abeni
+2.add sysfs patch and drop coexisting patch
+- Andrew Lunn
+3.delete some unimportant ndo operations
+4.add machine generated headers patch
+5.Modify the issues found in patch1-2 and apply the same fixes to other
+patches
+6.modify issues found by nipa
 
-Best regards,
+illusion.wang (11):
+  net/nebula-matrix: add minimum nbl build framework
+  net/nebula-matrix: add our driver architecture
+  net/nebula-matrix: add chip related definitions
+  net/nebula-matrix: channel msg value and msg struct
+  net/nebula-matrix: add channel layer
+  net/nebula-matrix: add common resource implementation
+  net/nebula-matrix: add intr resource implementation
+  net/nebula-matrix: add vsi resource implementation
+  net/nebula-matrix: add Dispatch layer implementation
+  net/nebula-matrix: add common/ctrl dev init/reinit operation
+  net/nebula-matrix: add common dev start/stop operation
 
-	Sami
+ .../device_drivers/ethernet/index.rst         |    1 +
+ .../ethernet/nebula-matrix/nbl.rst            |   27 +
+ MAINTAINERS                                   |   10 +
+ drivers/net/ethernet/Kconfig                  |    1 +
+ drivers/net/ethernet/Makefile                 |    1 +
+ drivers/net/ethernet/nebula-matrix/Kconfig    |   34 +
+ drivers/net/ethernet/nebula-matrix/Makefile   |    6 +
+ .../net/ethernet/nebula-matrix/nbl/Makefile   |   16 +
+ .../nbl/nbl_channel/nbl_channel.c             |  848 +++++
+ .../nbl/nbl_channel/nbl_channel.h             |  158 +
+ .../nebula-matrix/nbl/nbl_common/nbl_common.c |  207 ++
+ .../nebula-matrix/nbl/nbl_common/nbl_common.h |   34 +
+ .../net/ethernet/nebula-matrix/nbl/nbl_core.h |   59 +
+ .../nebula-matrix/nbl/nbl_core/nbl_dev.c      |  439 +++
+ .../nebula-matrix/nbl/nbl_core/nbl_dev.h      |   58 +
+ .../nebula-matrix/nbl/nbl_core/nbl_dispatch.c |  485 +++
+ .../nebula-matrix/nbl/nbl_core/nbl_dispatch.h |   56 +
+ .../nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.c  |  815 +++++
+ .../nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.h  |  493 +++
+ .../nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.c | 2901 +++++++++++++++++
+ .../nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.h |   11 +
+ .../nbl_hw_leonis/nbl_resource_leonis.c       |  257 ++
+ .../nbl_hw_leonis/nbl_resource_leonis.h       |   10 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_hw_reg.h     |   68 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_interrupt.c  |  243 ++
+ .../nebula-matrix/nbl/nbl_hw/nbl_interrupt.h  |   12 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_resource.c   |  110 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_resource.h   |  116 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_vsi.c        |   51 +
+ .../nebula-matrix/nbl/nbl_hw/nbl_vsi.h        |   11 +
+ .../nbl/nbl_include/nbl_def_channel.h         |  362 ++
+ .../nbl/nbl_include/nbl_def_common.h          |   80 +
+ .../nbl/nbl_include/nbl_def_dev.h             |   16 +
+ .../nbl/nbl_include/nbl_def_dispatch.h        |   43 +
+ .../nbl/nbl_include/nbl_def_hw.h              |   54 +
+ .../nbl/nbl_include/nbl_def_resource.h        |   36 +
+ .../nbl/nbl_include/nbl_include.h             |   79 +
+ .../nbl/nbl_include/nbl_product_base.h        |   18 +
+ .../net/ethernet/nebula-matrix/nbl/nbl_main.c |  320 ++
+ 39 files changed, 8546 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/nebula-matrix/nbl.rst
+ create mode 100644 drivers/net/ethernet/nebula-matrix/Kconfig
+ create mode 100644 drivers/net/ethernet/nebula-matrix/Makefile
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/Makefile
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_channel/nbl_channel.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_channel/nbl_channel.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_common/nbl_common.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_hw_leonis_regs.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_resource_leonis.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_leonis/nbl_resource_leonis.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_hw_reg.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_interrupt.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_interrupt.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_resource.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_vsi.c
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_hw/nbl_vsi.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_channel.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_common.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_dev.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_dispatch.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_hw.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_def_resource.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_include.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_include/nbl_product_base.h
+ create mode 100644 drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
 
+-- 
+2.47.3
 
 
