@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-82177-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82181-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eNVMGt+lzWmvfgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82177-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:10:23 +0200
+	id sBilD4KnzWmvfgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82181-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:17:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F88C38171B
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:10:23 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC7B938192A
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:17:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3796D30FEF0F
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:04:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8348A308A8D6
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:05:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F97F480350;
-	Wed,  1 Apr 2026 23:01:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4BDE480DE0;
+	Wed,  1 Apr 2026 23:01:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nUrzfe8N"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="T9tdpUNm"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D917D4779B2;
-	Wed,  1 Apr 2026 23:01:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1324747DF87;
+	Wed,  1 Apr 2026 23:01:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775084467; cv=none; b=SanRsjR++UJBkhMAavtyg0aNdITvuv7TyQp0pA1alYRbIvxPE+LvMuqBgLDWUVoOgerIku3qs9j637sry/SahHnLcfEFJthpUbJy1h60pXVL/jToA8eQ2r46uDom6VuzH0fml2cTncjgYoWN4QLmuTtJ/B2X5R4Na3/4hyuqe/g=
+	t=1775084487; cv=none; b=jSH55p08/IM6yUXst35Zs08b1MroUcd/L1hgIw1wLHsU8pfeYiUyf+9ONlob3zodSZeFsFkBNuZNizTLWlpqPstLz0I5uF4e6BlOkdoHDR1U/+quQtjhkclRnGZ1BIMR9uiRQ+Zt7dWOryKOXDd2+fzlbBGqnGSiNbd1gp9dHJ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775084467; c=relaxed/simple;
-	bh=LzgaJ83Rv9pU4dQmi5pVMrmBrHvBC5e78go2tjHZcUw=;
+	s=arc-20240116; t=1775084487; c=relaxed/simple;
+	bh=0QBnjOf/a1gNT5EM5ReEkFxjICqiOXo4W5NTsRTeKQo=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=okz+EwiQNr9WLw1NzrUYlaTsAGqoRAkGYRfMMgj2BHh0vVtSgpn3kw2fCmpKYKViwoQCQ+B5Y3EA2OtVeCeOD29FVSdmbG83jO53g7Z5/9SppgDNNwzwvW7MZiqrc7yWo7QeArmdUxK6R+HLh9/SSQ/L2Kct4NlMYn28C4wkaaA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nUrzfe8N; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75B37C2BC9E;
-	Wed,  1 Apr 2026 23:01:01 +0000 (UTC)
+	 References:Date:Message-Id; b=PnmjGYh3cRCV8ih7Hgnu2UF6D1/dOFsYLkwibr8vL9bUjblsNUS9yo2d0b640+LvFTFVaNWKjhxLALnJ2PesJ9Xw46dX8cqyHu9zzD0NpyK2UriBdmkndXuZ6QPZBbWPQpzpjCoI39WezRlm0eAWFxS7tTiaBw9npu9SwhZPjxo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=T9tdpUNm; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04CC8C4CEF7;
+	Wed,  1 Apr 2026 23:01:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775084466;
-	bh=LzgaJ83Rv9pU4dQmi5pVMrmBrHvBC5e78go2tjHZcUw=;
+	s=k20201202; t=1775084486;
+	bh=0QBnjOf/a1gNT5EM5ReEkFxjICqiOXo4W5NTsRTeKQo=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=nUrzfe8NhDQtpCvFinZVfgnt+tjQMOtFRIGAge4DLGYxrMoQoEQ86XmqX8MSuc5Ud
-	 txs3xwHIDwocyZXQNb8jfz80mh53Jd3wusB05jFNLe2fZYgGPLD3nUtGFreumspUTm
-	 IAjMDmuiHUSjuwSg00b5B+WSMN62p00RXD9mocBhaqNA3Z+o7B4jWYwGDTUpQeGfbU
-	 PfL9deFZ1hdxZ037QHqHZwJAwprww4p/wwBhY1w9e1tRkHHwxiuYOLMQPqidV4AVLZ
-	 uqzeLbgTQ+ENe3R61hPcesdN9JHCGklBcMT6RDuu6hjy6GsrjpcDvSx2HJMRbK4sqB
-	 EqCJGUn9bUPPg==
+	b=T9tdpUNmBlbEPGldW4o1S6Lb7P25G/VI57Nx2JE9Q5s0svWpM92inyF0M8MT0RYGn
+	 N+PeMsBowJab3sCv7iLX7l4hN35w3nDCNNktZYg1Xd6ALCbMslxNiJffCMZC/NRVBq
+	 lQe9l9USpxDufqZqJNSIprajA9Pl6BVYg+GyMTm+nbxJTu9Ao4ExHvdLv/oASjIFyh
+	 KMZGbGkUquUwt874wqpiO9uR8tVSAcIfPriDDE/J44GxjDQAaF5lcadIyNPdzqQVY+
+	 1C0aSEbp72qTPwVzEumrnCaF8t5P49f5YewF/wGtKLell09jTNUCNOjr67/ACQupbL
+	 GNnxVHyDQa2Tg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 21/33] gpu: nova-core: bindings: remove unneeded
- `cfg_attr`
+Subject: Re: [PATCH 25/33] docs: rust: quick-start: add Ubuntu 26.04 LTS
+ and remove subsection title
 From: Tamir Duberstein <tamird@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>
 Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -85,18 +85,18 @@ Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
  Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
  llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-In-Reply-To: <20260401114540.30108-22-ojeda@kernel.org>
+In-Reply-To: <20260401114540.30108-26-ojeda@kernel.org>
 References: <20260401114540.30108-1-ojeda@kernel.org>
- <20260401114540.30108-22-ojeda@kernel.org>
+ <20260401114540.30108-26-ojeda@kernel.org>
 Date: Wed, 01 Apr 2026 18:59:04 -0400
-Message-Id: <177508434461.73816.5410904852576871478.b4-review@b4>
+Message-Id: <177508434467.73816.6022443418822181845.b4-review@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=497; i=tamird@kernel.org;
- h=from:subject:message-id; bh=LzgaJ83Rv9pU4dQmi5pVMrmBrHvBC5e78go2tjHZcUw=;
- b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7tI1RtVf7/3VF2vMEx1i8aDGZv9ug9+b7OYN+Fqj
- 7LpjPMnOiayMIhxMViKKbIkih7am556e49s5rvjMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oZGOgY4xAxenAEz10/cM/yP3ruBYcveqWSf7c9aSQN+rd7vL/k1+czI4vmvCx2fH6/IYGQ4vurz
- s3Km+wk3Xq9Kzd2z6cj3qyOaHxU6TS+sf5DBwT2AAAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=746; i=tamird@kernel.org;
+ h=from:subject:message-id; bh=0QBnjOf/a1gNT5EM5ReEkFxjICqiOXo4W5NTsRTeKQo=;
+ b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7t4ZiUrZk18eGdl7RsWcZ1FEtweXba9+qtcXAW71
+ aqtV0R0TGRhEONisBRTZEkUPbQ3PfX2HtnMd8dh5rAygQyRFmlgAAIWBr7cxLxSIx0jPVNtQz1D
+ Ix0DHWMGLk4BmOpb3xj+ClVkB248oqWpYGZ350GB8Pw/fFJBB2Oc1s1VUv/4aOGjWIa/gttXX7n
+ 0/VJT5cxF/REb12mFLYo22znnYJqx4L1dlTHJHAA=
 X-Developer-Key: i=tamird@kernel.org; a=openpgp;
  fpr=5A6714204D41EC844C50273C19D6FF6092365380
 X-Spamd-Result: default: False [-0.16 / 15.00];
@@ -104,12 +104,12 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82177-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82181-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -123,22 +123,25 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[tamird@kernel.org,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[kernel.org,arm.com,dabbelt.com,eecs.berkeley.edu,nvidia.com,gmail.com,ffwll.ch,linux.dev,davidgow.net,linuxfoundation.org,android.com,brauner.io,google.com,lwn.net,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,oracle.com,lists.infradead.org,ghiti.fr,lists.freedesktop.org,googlegroups.com,lists.linux.dev];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 0F88C38171B
+X-Rspamd-Queue-Id: CC7B938192A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 01 Apr 2026 13:45:28 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
-> These were likely copied from the `bindings` and `uapi` crates, but are
-> unneeded since there are no `cfg(test)`s in the bindings.
+On Wed, 01 Apr 2026 13:45:32 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
+> Ubuntu 26.04 LTS (Resolute Raccoon) is scheduled to be released in a few
+> weeks [1], and it has a recent enough Rust toolchain, just like Ubuntu
+> 25.10 has [2][3].
 > 
-> In addition, the issue that triggered the addition in those crates
-> originally is also fixed in `bindgen` (please see the previous commit).
-> 
-> Thus remove them.
+> We could update the title and the paragraph, but to simplify and to
+> make it more consistent with the other distributions' sections, let's
+> instead just remove that title. It will also reduce the differences
+> later on to keep it updated. Eventually, when we remove the remaining
+> subsection for older LTSs, Ubuntu should be a small section like the
+> other distributions.
 > 
 > [...]
 
