@@ -1,124 +1,248 @@
-Return-Path: <linux-doc+bounces-82113-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82115-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2FvUKWNSzWmnbwYAu9opvQ
-	(envelope-from <linux-doc+bounces-82113-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 19:14:11 +0200
+	id 2Dj1IQNazWkRcQYAu9opvQ
+	(envelope-from <linux-doc+bounces-82115-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 19:46:43 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3160737E798
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 19:14:10 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 87C3E37EC74
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Apr 2026 19:46:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3F3E4300E27E
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 17:08:04 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id EDA6130489CE
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 17:35:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CFC94472765;
-	Wed,  1 Apr 2026 17:08:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED9A147DD65;
+	Wed,  1 Apr 2026 17:35:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="YSIvzG8s"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0017.hostedemail.com [216.40.44.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6428438A73A;
-	Wed,  1 Apr 2026 17:08:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.17
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6836447DD66;
+	Wed,  1 Apr 2026 17:35:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775063282; cv=none; b=rfc0aTW3+JoGjHPMFgtQWTdyh9AXZ9mqjt4YOfxvusNzHrlQmVjeSC0TJOvbuJJGGOi4DHnsDLL39F1RNPWZ+VQTkAW86vkaHeXaUVFp+Vwlt72m1FsWnVFbibLkbWYHeaWZl33jBGfpo3EJ0LFF+yUzbIY4tv8TjMi8GplV3yw=
+	t=1775064929; cv=none; b=QGYPJP5HTdoQOeFDAfFELSHFJ6WGPcsEEpSu3ic2d4q9Mh9DnMyVMdTRJIh/vdNnCQ1BbFBUyrC3cpaV8FFLsR5Vc4naNoOjeBvfPwXJjd4MXN7sClKJDT205zSt96ZU7jyU+50Y0L1HDXKsP2J53rQ8qUrmPksDlF3lRcbk/o8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775063282; c=relaxed/simple;
-	bh=Y+X+HfJ/P9oKt0CdYPVPWVdpeoNGcI1JoS2jXd9mMJw=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=QOSnxCNfkzL2Taq1mAmqsLq4GqmS20DvLb/w1nlBDuFO1bPByULwN0q3jyFH10uxFtDpu3ZJ7PFO1qochccREHlFddC/6dnktWWhkZYp3YRFbBwFCmceyEDzkAJ9f9dZwkxI8/66GxZ43/Nm8swXpx/10LZMqTiSIUvPwTsygDY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
-Received: from omf12.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay09.hostedemail.com (Postfix) with ESMTP id BB7DD86C97;
-	Wed,  1 Apr 2026 17:07:58 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf12.hostedemail.com (Postfix) with ESMTPA id E0D1719;
-	Wed,  1 Apr 2026 17:07:54 +0000 (UTC)
-Date: Wed, 1 Apr 2026 13:08:55 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Frederic Weisbecker <frederic@kernel.org>
-Cc: Randy Dunlap <rdunlap@infradead.org>, LKML
- <linux-kernel@vger.kernel.org>, Anna-Maria Behnsen
- <anna-maria@linutronix.de>, Gabriele Monaco <gmonaco@redhat.com>, Ingo
- Molnar <mingo@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Marcelo
- Tosatti <mtosatti@redhat.com>, Marco Crivellari
- <marco.crivellari@suse.com>, Michal Hocko <mhocko@kernel.org>, "Paul E .
- McKenney" <paulmck@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Phil
- Auld <pauld@redhat.com>, Thomas Gleixner <tglx@linutronix.de>, Valentin
- Schneider <vschneid@redhat.com>, Vlastimil Babka <vbabka@suse.cz>, Waiman
- Long <longman@redhat.com>, linux-doc@vger.kernel.org, Sebastian Andrzej
- Siewior <bigeasy@linutronix.de>, Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: Re: [PATCH v2] doc: Add CPU Isolation documentation
-Message-ID: <20260401130855.02c161d8@gandalf.local.home>
-In-Reply-To: <ac1HV1HLErp8GkZ6@localhost.localdomain>
-References: <20260326140055.41555-1-frederic@kernel.org>
-	<6d113021-6208-4dcc-a209-a2317d680e3f@infradead.org>
-	<ac1HV1HLErp8GkZ6@localhost.localdomain>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1775064929; c=relaxed/simple;
+	bh=eaE0d++8x8d1/1c8Q3kSHHs6PRk9dsU4dLXa7wTKxks=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=DKm05vl7sZdQxMUetwuPvU8f6dKbYIJWMTa4NwVzInW+vURyUJrg4x8dGO+Hbn9ylwoLmy+kgzqYiJBYWtJn1rCGbvV8yoBv9Utx1n+jTrA+v/ZIjQfJT6KHhXweja3ffI0jVR+wiTmHx+P+u/oVfXCEZf6UPT04fMnADrqUPgM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=YSIvzG8s; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from chenste-Virtual-Machine.mshome.net (unknown [131.107.174.223])
+	by linux.microsoft.com (Postfix) with ESMTPSA id A9DC520B710C;
+	Wed,  1 Apr 2026 10:35:26 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A9DC520B710C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1775064926;
+	bh=2IJwL8/O3PkPKN6JWP55pOr/Z6dhg01IhjDRHmeVyjY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=YSIvzG8sMEi5F1O1o5etXJqI/9DUQ09Q5SD+LjQezKXaLTjhKoiNcYuPdla0iNFU0
+	 f/4sUmRxRD8W0OjlR1Ff3IvmYorIcylWOTnzNKSmkTDdu/hYWhZtGbomo5o9JJiE2C
+	 ul+NNVx/7bp1YMKu861dftP2TC/07UuNjT/jerpQ=
+From: steven chen <chenste@linux.microsoft.com>
+To: linux-integrity@vger.kernel.org
+Cc: zohar@linux.ibm.com,
+	roberto.sassu@huawei.com,
+	dmitry.kasatkin@gmail.com,
+	eric.snowberg@oracle.com,
+	corbet@lwn.net,
+	serge@hallyn.com,
+	paul@paul-moore.com,
+	jmorris@namei.org,
+	linux-security-module@vger.kernel.org,
+	anirudhve@linux.microsoft.com,
+	chenste@linux.microsoft.com,
+	gregorylumen@linux.microsoft.com,
+	nramas@linux.microsoft.com,
+	sushring@linux.microsoft.com,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v5 0/3] Trim N entries of IMA event logs
+Date: Wed,  1 Apr 2026 10:29:52 -0700
+Message-ID: <20260401172956.4581-1-chenste@linux.microsoft.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Stat-Signature: w496gfc5zsqy13pt8a3r5goajqt6hh5t
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX1//2KP7EXmElLUnbYyyNOlTVaH2PaJDt74=
-X-HE-Tag: 1775063274-856017
-X-HE-Meta: U2FsdGVkX18QanLKHhM8C86Ix0j4AjMr2DSwnTtv01Tfn/gIeOEv5VLurvzeTpdSdUdihStwX5HXuzl53k9OUM5zJb/JVgZM6czmY5Z1U3qE/Rb7nZ5SggUGXVykcy2eeIUBkm2iQYhsfq8gZ/A6bSISnvKYelAhBFyM5FZ+4ydER9mLXx4LMo08xdqWSG7aSbX+CyFvtPMnfapsTDlf3CcP1f2Xp+z48jJAWEFuGHsAn97hhbHw/90xxxqIE1g/ruh3e0byH2iedCFD34aw11HUJv8esE5jkVz+uItlR1qstIpPArsQKDWqJpVVc0ovexWcfCGTRbh1JoJVMAgPOZ6WPXupRCAy
-X-Spamd-Result: default: False [-1.36 / 15.00];
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
+	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[infradead.org,vger.kernel.org,linutronix.de,redhat.com,kernel.org,lwn.net,suse.com,suse.cz,gmail.com];
-	TAGGED_FROM(0.00)[bounces-82113-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[linux.ibm.com,huawei.com,gmail.com,oracle.com,lwn.net,hallyn.com,paul-moore.com,namei.org,vger.kernel.org,linux.microsoft.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	TAGGED_FROM(0.00)[bounces-82115-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TO_DN_NONE(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[5];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.929];
+	FROM_NEQ_ENVFROM(0.00)[chenste@linux.microsoft.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.microsoft.com:+];
+	NEURAL_HAM(-0.00)[-0.998];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3160737E798
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.microsoft.com:dkim,linux.microsoft.com:mid]
+X-Rspamd-Queue-Id: 87C3E37EC74
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 1 Apr 2026 18:27:03 +0200
-Frederic Weisbecker <frederic@kernel.org> wrote:
+The Integrity Measurement Architecture (IMA) maintains a measurement list
+—a record of system events used for integrity verification. The IMA event
+logs are the entries within this measurement list, each representing a
+specific event or measurement that contributes to the system's integrity
+assessment.
 
-> > > +"CPU Isolation" means leaving a CPU exclusive to a given workload
-> > > +without any undesired code interference from the kernel.
-> > > +
-> > > +Those interferences, commonly pointed out as "noise", can be triggered  
-> > 
-> > nit:                                            "noise,"  
-> 
-> Thanks! I have applied all your suggestions, except this one for now because I don't
-> really understand the typo rule behind. Any hint?
+This update introduces the ability to trim, or remove, N entries from the
+current measurement list. Trimming involves deleting N entries from the
+list. This action atomically truncates the measurement list, ensuring that
+no new measurements can be added until the operation is complete.
+Importantly, only one writer can initiate this trimming process at a time,
+maintaining consistency and preventing race conditions.
 
-So this looks to be an American English thing (placing commas within the
-quote), but from what I read, British English places the comma outside the
-quote.
+A userspace interface, ima_trim_log, has been provided for this purpose.
+When this interface is read, it returns the total number T of entries
+trimmed since system boot up. This value T need to be preserved across
+kexec soft reboots. By writing two number T:N to this interface, userspace
+can request the kernel to trim N entries from the IMA event logs.
 
-Here's one case I much rather go the British English way. This also means
-it's only incorrect to Americans ;-)
+To maintain a complete record, userspace is responsible for concatenating
+and storing the logs before initiating trimming. Userspace can then send
+the collected data to remote verifiers for validation. After receiving
+confirmation from the remote verifiers, userspace may instruct the kernel
+to proceed with trimming the IMA event logs accordingly.
 
--- Steve
+The primary benefit of this solution is the ability to free valuable
+kernel memory by delegating the task of reconstructing the full
+measurement list from log chunks to userspace. Trust is not required in
+userspace for the integrity of the measurement list, as its integrity is
+cryptographically protected by the Trusted Platform Module (TPM).
+
+Multiple readers are allowed to access the ima_trim_log interface
+concurrently, while only one writer can trigger log trimming at any time.
+During trimming, readers do not see the list and cannot access it while
+deletion is in progress, ensuring atomicity.
+
+Introduce the new kernel option ima_flush_htable to decide whether or not
+the digests of measurement entries are flushed from the hash table (from
+reference [2]).
+
+The ima_measure_users counter (protected by the ima_measure_lock mutex) has
+been introduced to protect access to the measurement list part. The open
+method of all the measurement interfaces has been extended to allow only
+one writer at a time or, in alternative, multiple readers. The write
+permission is used to stage/delete the measurements, the read permission
+to read them. Write requires also the CAP_SYS_ADMIN capability (from
+reference [2]). This ima_measure_users needs to be preserved across kexec
+soft reboots
+
+The total trimmed number T and the ima_measure_users both need to be
+preserved across kexec soft reboot and new patch will be added for this
+purpose in next version.
+
+New IMA log trim event is added when trimming finish.
+
+The time required for trimming is minimal, and IMA event logs are briefly
+on hold during this process, preventing read or add operations. This short
+interruption has no impact on the overall functionality of IMA.
+
+A new critical data record "ima_log_trim" is added in this solution. This
+record logs the trim event with number of entries deleted total T since
+system start and time when this happened. User space can get the total
+number T of entries trimmed by checking "ima_log_trim" event in the
+measurement list.
+
+The following are how user space to use the measurement list and
+ima_log_trim interface
+1. get the total numer trimmed T through "ima_log_trim" interface
+2. get the PCR quote
+3. read the measurement list file, close the file, send for verification
+4. wait for response from verifier, until get the good response from
+verifier with number N that matched the PCR quote got in step 2
+5. get the number N from the above message
+6. write the T:N to the ima_log_trim interface when no conflict
+
+when kernel get log trim request T:N
+ Get the T, compare with the total trimmed number
+ if equal, then do trim N and change T to T+N
+ else return error
+
+Using above way to trim the log, the time for user space to hold the list
+will be trimming T:N operation itself at the step 6. User space agent
+race condition is solved too in this way.
+
+References:
+-----------
+[1] [PATCH 0/1] Trim N entries of IMA event logs
+https://lore.kernel.org/linux-integrity/20251202232857.8211-1-chenste@linux.microsoft.com/T/#t
+
+[2] [RFC][PATCH] ima: Add support for staging measurements for deletion
+https://lore.kernel.org/linux-integrity/207fd6d7-53c-57bb-36d8-13a0902052d1@linux.microsoft.com/T/#t
+
+[3] [PATCH v2 0/1] Trim N entries of IMA event logs
+https://lore.kernel.org/linux-integrity/20251210235314.3341-1-chenste@linux.microsoft.com/T/#t
+
+[4] [PATCH v3 0/3] Trim N entries of IMA event logs
+https://lore.kernel.org/linux-integrity/20260106020713.3994-1-chenste@linux.microsoft.com/T/#t
+
+[5] [PATCH v4 0/3] Trim N entries of IMA event logs
+https://lore.kernel.org/linux-integrity/20260205235849.7086-1-chenste@linux.microsoft.com/T/#t
+
+Change Log v5:
+ - lock time performance improvement
+ - Keep hash table unchanged because log already use the hash value
+ - Updated patch descriptions as necessary.
+
+Change Log v4:
+ - Incorporated feedback from Roberto on v3 series.
+ - Update "ima_log_trim" interface definition
+   When read this interface, return total number of records trimmed T
+   need to write T:N to this interface to trim N records
+ - Update user space use case on how to trim IMA event logs
+ - Updated patch descriptions as necessary.
+
+Change Log v3:
+ - Incorporated feedback from Mimi on v2 series.
+ - split patch into multiple patches
+ - lock time performance improvement
+ - Updated patch descriptions as necessary.
+
+Change Log v2:
+ - Incorporated feedback from the Roberto on v1 series.
+ - Adapted code from Roberto's RFC [Reference 2]
+ - Add IMA log trim event log to record trim event
+ - Updated patch descriptions as necessary
+
+steven chen (3):
+  ima: make ima event log trimming configurable
+  ima: trim N IMA event log records
+  ima: add new critical data record to measure log trim
+
+ .../admin-guide/kernel-parameters.txt         |   4 +
+ security/integrity/ima/Kconfig                |  12 +
+ security/integrity/ima/ima.h                  |   4 +-
+ security/integrity/ima/ima_fs.c               | 218 +++++++++++++++++-
+ security/integrity/ima/ima_kexec.c            |   2 +-
+ security/integrity/ima/ima_queue.c            |  96 ++++++++
+ 6 files changed, 328 insertions(+), 8 deletions(-)
+
+-- 
+2.43.0
+
 
