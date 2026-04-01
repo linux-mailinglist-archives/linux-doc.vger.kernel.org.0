@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-82186-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82187-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kFIoJ9WmzWmvfgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82186-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:14:29 +0200
+	id 8E7IDNCnzWmvfgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82187-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:18:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04C79381850
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:14:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D12303819BB
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:18:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 41E6D3138DAE
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:07:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A956A313DE03
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:07:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 137FC48166E;
-	Wed,  1 Apr 2026 23:01:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C84AE481A86;
+	Wed,  1 Apr 2026 23:01:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HRpEXoD2"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UMSgCFmp"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C31CE48166D;
-	Wed,  1 Apr 2026 23:01:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EF5547DD76;
+	Wed,  1 Apr 2026 23:01:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775084512; cv=none; b=A7MP0fgzAsj1yKU0QngvuEjtYyMPVvOMDT4d4KmusVNWbn75AdS/FYO9PG1iYXg0OWSzOdHOK8FDJrS6BLLOIurywk2LcHNiEtHWR7PVruUNVMxl50xXEbiEbuUyTIhA936VI1bd0dcsw0gj0TLzxnU0dKo2dSLTChtre+YyvXk=
+	t=1775084518; cv=none; b=KfOV8MTv4PM9PH+5yfVcaKqW1nk6c7NgXzctVlnTv2in/rnWAOqcMQEtnIWQHt7SGV320PlerHjcLAgmV76j24Uebh+CVarAQOe6eukst7sgStvG4XVgzQPQlTrqsfDCFS42c4N9pDTO4PbaF9XD7vQ4PRLNtkyGq9YZVtbrZwk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775084512; c=relaxed/simple;
-	bh=pT3fRZPxRDVeDTtEQDcA2yLNaqBibDOYIX+RSrWx+6c=;
+	s=arc-20240116; t=1775084518; c=relaxed/simple;
+	bh=U0z1f7WmJb1y4dfJmsmO4rtz8iO1tJNxLkugN/iERrs=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=Qur7q6wPnOJf8TfcM6QwGsImk31C1no7Stu+hEqoC3rW0rPIP99P3LZAtzjTf0HYqSbcUk6xzhp4pda1eDHIklxDCN2b5edQEn2hySN7Lmqh+Iqr0iJj+sppJrYrv+aVmHYv5yAn3csZYKqYjCZpkWSc27n0p4/woCJAsqtrma8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HRpEXoD2; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D958C2BCAF;
-	Wed,  1 Apr 2026 23:01:47 +0000 (UTC)
+	 References:Date:Message-Id; b=Kp9wot/+RsdXiyl33cOT4HS6Pq26unJd9uKAa2XwEOt+2YDIUR8wZJl5SfEcrnIxW5OSL0AWvDgBK0/1HFPqVKRlTht9JA2vblIwyGUU64y7HJ9dRoYq/EB5y3Z4oRkYh46qFawkT2mjzFMydeGgd7BCF3XDxlRAlaxi1l6FNVY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UMSgCFmp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8523C2BC9E;
+	Wed,  1 Apr 2026 23:01:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775084512;
-	bh=pT3fRZPxRDVeDTtEQDcA2yLNaqBibDOYIX+RSrWx+6c=;
+	s=k20201202; t=1775084517;
+	bh=U0z1f7WmJb1y4dfJmsmO4rtz8iO1tJNxLkugN/iERrs=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=HRpEXoD2fr43/O8oOw7BnQpzbgNTTKt13/LphFJTmDRt47lowOmKMqgKZf1EyurLh
-	 Juyq3az4nx5yhXVVvxFSJdSNxsPnvCX1bacVn+R/Jmh2EPFBr4GeyN1ixsPNSuja+V
-	 anihbcyDwxdhN9WIZGh8PaJwUuNCmhyiJwXEU7hWFUTibJAvlIazUJgn843DWK+LGI
-	 O1T6nSiSg4TQs4AxeLN1ZJ3qZgHsYA5GzbVZb3NUx6M0+ruc8u89MqSegxNn9U31Hd
-	 w+NcF1ObZO/RQr5vxdbkjkOVjdZiSZm5f2Jx6x1F9jxOw71VfnqbMNFspMlm1WA+Gp
-	 4iy9cUHXZaM8Q==
+	b=UMSgCFmpPFESaRAbvbhDhQiCJwvV4rRI29EQmB0081nHG47VaoK9DsZ87N20ilTx/
+	 obHtZ+aT5eDe/3CUF+QYMPNqdkzwcsrBaGB1uzVm0pfcDYp1VJCmo1jL/0HIoM5RNj
+	 iTgu7PyZZxOsj1m6IjusGOJ8iwfJNFnzHmJfDNcZtTbfSTgPXc+UHvwPqOeAhJLE9x
+	 9u7MJDThp4/mCBjG1VZ4wucl6sy1ZHstjCSifT+LAuUqrMCVKULTuDsCABCCXg5Pcu
+	 NYCkfoRZxaFdEAWjprgGpGCncCf/8BXJkgVTpuN4aIwNu5Zj1mJbJXZWpJ0DCEQqMU
+	 VoIcuuTDapCwA==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 30/33] docs: rust: general-information: use real
- example
+Subject: Re: [PATCH 32/33] rust: kbuild: support global per-version flags
 From: Tamir Duberstein <tamird@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>
 Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -85,18 +84,18 @@ Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
  Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
  llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-In-Reply-To: <20260401114540.30108-31-ojeda@kernel.org>
+In-Reply-To: <20260401114540.30108-33-ojeda@kernel.org>
 References: <20260401114540.30108-1-ojeda@kernel.org>
- <20260401114540.30108-31-ojeda@kernel.org>
+ <20260401114540.30108-33-ojeda@kernel.org>
 Date: Wed, 01 Apr 2026 18:59:04 -0400
-Message-Id: <177508434472.73816.3192882539134262252.b4-review@b4>
+Message-Id: <177508434474.73816.6769206170563558152.b4-review@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=436; i=tamird@kernel.org;
- h=from:subject:message-id; bh=pT3fRZPxRDVeDTtEQDcA2yLNaqBibDOYIX+RSrWx+6c=;
- b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7suMfh24P7byakrnK9P/3ojrP6ZSp5QrCXjo8CCw
- 9o5twyOdUxkYRDjYrAUU2RJFD20Nz319h7ZzHfHYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- QyMdAx1jBi5OAZjqBw8YGW48vTAjw4H39p+pqxu1q2Tn8sRedspSfinPbplbsohnQh8jQ7u/0YK
- 3AitsZotJrb8kbcq9rPH1sbnSitv0m96lSW2J5QAA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=622; i=tamird@kernel.org;
+ h=from:subject:message-id; bh=U0z1f7WmJb1y4dfJmsmO4rtz8iO1tJNxLkugN/iERrs=;
+ b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7tyXN4UGNjIVv7Oan+7TIj6c2bpm5kOwsVmLFFFf
+ 8NvnHXomMjCIMbFYCmmyJIoemhveurtPbKZ747DzGFlAhkiLdLAAAQsDHy5iXmlRjpGeqbahnqG
+ RjoGOsYMXJwCMNVZoYwMb+bI30yW8DzreTVxsqJRzf+lz5/tNI542cmT8HXZjAvVExn+h3398Mm
+ ieVJUs0Cb2/LGPIbW10HT78y/fv6PU+iXZ/O/MwIA
 X-Developer-Key: i=tamird@kernel.org; a=openpgp;
  fpr=5A6714204D41EC844C50273C19D6FF6092365380
 X-Spamd-Result: default: False [-0.16 / 15.00];
@@ -109,7 +108,7 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82186-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82187-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -127,22 +126,22 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 04C79381850
+X-Rspamd-Queue-Id: D12303819BB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 01 Apr 2026 13:45:37 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
-> Currently the example in the documentation shows a version-based name
-> for the Kconfig example:
-> 
->     RUSTC_VERSION_MIN_107900
-> 
-> The reason behind it was to possibly avoid repetition in case several
-> features used the same minimum.
-> 
+On Wed, 01 Apr 2026 13:45:39 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
 > [...]
+> defined after the `include/config/auto.conf` inclusion (where
+> `CONFIG_RUSTC_VERSION` becomes available), and append it to
+> `rust_common_flags`, `KBUILD_HOSTRUSTFLAGS` and `KBUILD_RUSTFLAGS`.
+> 
+> An alternative is moving all those three down, but that would mean
+> separating them from the other `KBUILD_*` variables.
 
-Reviewed-by: Tamir Duberstein <tamird@kernel.org>
+My prefernece is avoiding duplication over grouping, but either choice
+should be justified by a code comment that acknowledges the
+duplication/inconsisntecy.
 
 -- 
 Tamir Duberstein <tamird@kernel.org>
