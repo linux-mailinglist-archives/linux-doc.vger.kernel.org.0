@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-82173-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82184-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MMMJJq6lzWmvfgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82173-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:09:34 +0200
+	id iHNyFLKmzWmvfgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82184-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:13:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E68D3816D3
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:09:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B036F38182B
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 01:13:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 27DF33035A8D
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:03:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 453E33098095
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2026 23:06:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 894C047F2DB;
-	Wed,  1 Apr 2026 23:00:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F28E3F0744;
+	Wed,  1 Apr 2026 23:01:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZJatFFFk"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jfQkTaxf"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED22A40627B;
-	Wed,  1 Apr 2026 23:00:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C079F47DF93;
+	Wed,  1 Apr 2026 23:01:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775084446; cv=none; b=L0cdH8b6Rg/G08lCzI57loPoTb8ZKcmPxjgqGB7NNNY3hD351K/4M3oJuIxlvXJxRyI+yn7uJtTn0gDK0RzHD+bA48tEejUS53Psio5jtO9Pyod4gq5P7HyLm7urQ0pAWJe1Q+rYslgH3koRdDTYsGtoFL9RSvf5m2pg4kVoccw=
+	t=1775084502; cv=none; b=GLny9dMjTMTTqqpyh5OB1Op+yFbDbBWQKOqrI2rm2O/K4cdC/ghTUYSpHcjKCfgscWCf6pa9Z5EGvKDdZyfycWChdmkEKh4icj0HEVRsgRGIZpqfvkqNqJ8UVB9Nb0rVtJQ2rYGdbUYH97dTsZE+3VzC3TGUJF0P5/rih1e+79M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775084446; c=relaxed/simple;
-	bh=PBFIVlb3y/4+vIcT00tcSiDAg1EkUAKYUzmV5YKhJnM=;
+	s=arc-20240116; t=1775084502; c=relaxed/simple;
+	bh=Gkp7xZZSJnjNLA6k6/JP5dygiZIRCC7PAi3ux8OxhkE=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=ijaV5OndRy0JX0u749jmph9Op9QF9rcQee+S95L7zEnqHhq0Sd/D+ufcJU0v0snRD+iJTZrUoAIRp1bRh2hKxFyRMhrntKZiNy420sJmdT2r/VZ56/9E2On57xXJjSsUbY3+NB8sSWa1PbA1x3oXU1jqqLXN6pezNk503mQvNOg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZJatFFFk; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3D37C2BCB2;
-	Wed,  1 Apr 2026 23:00:40 +0000 (UTC)
+	 References:Date:Message-Id; b=f+afUk77St+pm7/gDyWkcGZfjpGSMSoj02H76k194VWmpjGtFLQfPZMrjUrwYhGjjcBcp1/1dO7kFi5AD8M+JCvxMsW69/KRabs0FNx7zupnKXYbeDib/blWsc7k9klXx9L4SjRSvw2YD2kNexkglxlOpG1UI1lm8MWSldGLlzs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jfQkTaxf; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EE51C2BC9E;
+	Wed,  1 Apr 2026 23:01:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775084445;
-	bh=PBFIVlb3y/4+vIcT00tcSiDAg1EkUAKYUzmV5YKhJnM=;
+	s=k20201202; t=1775084502;
+	bh=Gkp7xZZSJnjNLA6k6/JP5dygiZIRCC7PAi3ux8OxhkE=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
-	b=ZJatFFFkz2ZScBb/S4TpqCqmlU5CEjZqBFSOV2A6WNBXX8frktEMOQxLuaJ2zui7K
-	 TxLAQ++0MI0i/ejdo+T8y3DBO4V58gFNwTbymjm5fDwu6axUpsx0S626SSYNAzrXui
-	 e1eIupdeP7FHJUCMfFMrQDaczv1/dJhrNI7saTL0pBZvrmcWTrW0nafC7OliJNtKOF
-	 AuSpTcBjZLGhiHOQICoxolcyoBXDzybeR0miWUG0/UGrBi/GbuRVRt8SPH6kA2Tus8
-	 oRRSlmlRfvrM80vHQZInm2Y0P7R7TlqrqSzkmPpxE9E4S4Z+eVpQiiDUtv9UUCP830
-	 eMM7ek2JPRPYw==
+	b=jfQkTaxfpKSFrtjDj4wnczInb5geAhQ2NuZC4j8sza8AlCVkY9hHmgdzVVY0yxijN
+	 7EW6reI1bW+030I9qVO1zAZWx+TBGJpZq2WXPsyX988sOHkUOfvE5JFqjeS8LLGJDJ
+	 sMBtfvAC1aWjcgdjQO4wCkz4llResctlvtQSOUTi/MQ4UERmNSZUez0osJLGfMr5EI
+	 g24ohqM/3TlB/6le+jylXy3Co/4SrRTbHn7b+3FMiRVhLd0rshwI3jTt8Lnp+iaIbO
+	 9TnizhTMXYNZRHkHYFSXlyA//fjj8hUx35vtyH7WnPpvnb2KJI9CQVhdR8cuHVfGAZ
+	 Dx6iv3k7KPbJQ==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,8 +52,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 17/33] rust: kbuild: update `bindgen --rust-target`
- version and replace comment
+Subject: Re: [PATCH 28/33] docs: rust: quick-start: remove GDB/Binutils
+ mention
 From: Tamir Duberstein <tamird@kernel.org>
 To: Miguel Ojeda <ojeda@kernel.org>
 Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -85,18 +85,18 @@ Cc: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
  Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
  llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-In-Reply-To: <20260401114540.30108-18-ojeda@kernel.org>
+In-Reply-To: <20260401114540.30108-29-ojeda@kernel.org>
 References: <20260401114540.30108-1-ojeda@kernel.org>
- <20260401114540.30108-18-ojeda@kernel.org>
+ <20260401114540.30108-29-ojeda@kernel.org>
 Date: Wed, 01 Apr 2026 18:59:04 -0400
-Message-Id: <177508434455.73816.15756486388132647025.b4-review@b4>
+Message-Id: <177508434470.73816.10527840819544688551.b4-review@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=637; i=tamird@kernel.org;
- h=from:subject:message-id; bh=PBFIVlb3y/4+vIcT00tcSiDAg1EkUAKYUzmV5YKhJnM=;
- b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnFzs3fD173aT8/5+Ovnr2PRYiG1bqrWPgMY6xttK4q
- /CrtKSxYyILgxgXg6WYIkui6KG96am398hmvjsOM4eVCWSItEgDAxCwMPDlJuaVGukY6ZlqG+oZ
- GukY6BgzcHEKwFQ/LWD4w7kwWW/VxU2zXts438gISVTrqop+9/KT1f6iG8v5bDV9exkZurQMMt7
- 6i16cW2b/YP3LZT9l/vRpFWZm6OW9Dvo5UTiIFQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=721; i=tamird@kernel.org;
+ h=from:subject:message-id; bh=Gkp7xZZSJnjNLA6k6/JP5dygiZIRCC7PAi3ux8OxhkE=;
+ b=owGbwMvMwCV2wYdPVfy60HTG02pJDJlnF7vWLzx8ca7ltK/c1jLRjOeETCKjKi1llmeceLZaM
+ Eeobu+HjoksDGJcDJZiiiyJoof2pqfe3iOb+e44zBxWJpAh0iINDEDAwsCXm5hXaqRjpGeqbahn
+ aKRjoGPMwMUpAFOt8ZDhn3G/2qInK/N5PgTvrNczbGrWTNn6eB5rvFXwgfbkN2m7pjD84fjhu3e
+ 73acXMn2zzllc+jYhUfrXFuEdU8Ny5T+nLj53iwkA
 X-Developer-Key: i=tamird@kernel.org; a=openpgp;
  fpr=5A6714204D41EC844C50273C19D6FF6092365380
 X-Spamd-Result: default: False [-0.16 / 15.00];
@@ -104,12 +104,12 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82173-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82184-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
@@ -123,26 +123,27 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[tamird@kernel.org,linux-doc@vger.kernel.org];
 	FREEMAIL_CC(0.00)[kernel.org,arm.com,dabbelt.com,eecs.berkeley.edu,nvidia.com,gmail.com,ffwll.ch,linux.dev,davidgow.net,linuxfoundation.org,android.com,brauner.io,google.com,lwn.net,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,oracle.com,lists.infradead.org,ghiti.fr,lists.freedesktop.org,googlegroups.com,lists.linux.dev];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3E68D3816D3
+X-Rspamd-Queue-Id: B036F38182B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 01 Apr 2026 13:45:24 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
-> As the comment in the `Makefile` explains, previously, we needed to
-> limit ourselves to the list of Rust versions known by `bindgen` for its
-> `--rust-target` option.
+On Wed, 01 Apr 2026 13:45:35 +0200, Miguel Ojeda <ojeda@kernel.org> wrote:
+> The versions provided nowadays by even a distribution like Debian Stable
+> (and Debian Old Stable) are newer than those mentioned [1].
 > 
-> In other words, we needed to consult the versions known by the minimum
-> version of `bindgen` that we supported.
+> Thus remove the workaround.
 > 
-> Now that we bumped the minimum version of `bindgen`, that limitation
-> does not apply anymore.
-
-Some citations pointing to the upstream changes would be good.
+> Note that the minimum binutils version in the kernel is still 2.30, so
+> one could argue part of the note is still relevant, but it is unlikely
+> a kernel developer using such an old binutils is enabling Rust on a
+> modern kernel, especially when using distribution toolchains, e.g. the
+> Rust minimum version is not satisfied by Debian Old Stable.
+> 
+> [...]
 
 Reviewed-by: Tamir Duberstein <tamird@kernel.org>
 
