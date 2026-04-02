@@ -1,117 +1,152 @@
-Return-Path: <linux-doc+bounces-82304-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82311-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wHnDOQfSzmnKqQYAu9opvQ
-	(envelope-from <linux-doc+bounces-82304-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 22:31:03 +0200
+	id eIL3JpfqzmnXrwYAu9opvQ
+	(envelope-from <linux-doc+bounces-82311-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 00:15:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F6E538DFFA
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 22:31:02 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EDD7C38EAD8
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 00:15:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 470AB30645BC
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Apr 2026 20:26:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6AF343023DD3
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Apr 2026 22:15:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF1C238839D;
-	Thu,  2 Apr 2026 20:26:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C89463C3C0B;
+	Thu,  2 Apr 2026 22:15:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SVnc6NtE"
+	dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b="R42sQtxK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.xn--rombobjrn-67a.se (nestor.xn--rombobjrn-67a.se [188.126.83.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB9512DCF57
-	for <linux-doc@vger.kernel.org>; Thu,  2 Apr 2026 20:26:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 084313BD25E;
+	Thu,  2 Apr 2026 22:15:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.126.83.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775161605; cv=none; b=M6LWN9vbmkYo7FJK9g6Fglj9fcCCfnutz4dLnhD2Dmw0IWdxxJesN2Kdj5Q25SaU+U7gBmYA5hA6LRvq4iTyqA6lvFwA2xJzN7nSlzaHocHSM9bgOd4Qu0lJ3BlWpCTAQsTP7h8ePgVnbovCgHaSx6V5igxWjTIqXM3x/uwmq10=
+	t=1775168119; cv=none; b=q3nPjotpi5Oq89biCAvS8eIHNzo7gFdYjIuoXAMoDKQ5/jmUTLYH1o12fFnbYjSM9yqIGlZGvDvUTZars7E9fe16snehDUK65IuJ8SmhyuBnq7LVEdznLkiCTufR9gxOIvq4mVjR6cklDke7iRvv1f7Q8aZk8swsf5yjiTlboeg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775161605; c=relaxed/simple;
-	bh=4DYw+Ix5GAjX9NcaEm6lX1l6AjvR1uyssa1w9DS4V/A=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PJe1b0wlSZvu03PQlww2nFyANi+t7y31dwrBUPlYD2eoUf91eUKElptj6BoHbdV7PKro9Qti/a5BZzJZvxm9TPwTO+q/dz2TUVpzNs3zDr3fDAevMJ/GHYPeuOTmzgMclHrJEORHzau0jSLjxEyiTcJUFokfwh6bs7Kn2LnS1zs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SVnc6NtE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE981C2BCB9
-	for <linux-doc@vger.kernel.org>; Thu,  2 Apr 2026 20:26:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775161605;
-	bh=4DYw+Ix5GAjX9NcaEm6lX1l6AjvR1uyssa1w9DS4V/A=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=SVnc6NtEwNl1ukkemdgwNbZgcNlnXaqGr0+KHATvqlNk93DxfT2mGg20rfraieQpi
-	 UjjRza9af6spaxsnV2vXFyK6t+WrtopCi5MxTNhgmpptjQtl5fA79949m3CNjpmLGX
-	 axKoS5GQSGplnQsx7BToDTQN5vaWmIA1RlFSXwiwKjCrh9GsaG61OirBAHw2UWidYt
-	 OlH31Pmqs2VWU42+Lx/fiumqMsjzf9/VLLu7bEcvYVFaxCRliiS0RFB8W4VcGqAt4V
-	 AkFD+QmrHkQwyETmMNLxY7J0Bfe2GvY9xc2bxN1fbeVQZYEK18qrrnAQ8E/xZnFQ8F
-	 TJhgsO3OXNTzQ==
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-6618bc129acso1736625a12.2
-        for <linux-doc@vger.kernel.org>; Thu, 02 Apr 2026 13:26:45 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCXu/N8+uFyTZ7ZzXtFUt0pX2HN+4EODFRbxDRBC7nieTeCrne7f5nzjARJA74QhYYs9+MHqAaJe2gY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwG1SZMbkYuO+SbXXCBewHECx0VhmXf67+IMgeHp34inZeuvpAS
-	8NOu4CMKGsa6EliMkoSe6qjNZdCD5OXoCFTETCnpUBvkaqWI/MMeEkKXM9CzAW/0e/LW95CdVSf
-	c+vZQJx8hYwWgbewfG4M2mXWE6VUj6WU=
-X-Received: by 2002:a17:907:3d51:b0:b94:1d92:7eb with SMTP id
- a640c23a62f3a-b9c67802d69mr14905466b.18.1775161604406; Thu, 02 Apr 2026
- 13:26:44 -0700 (PDT)
+	s=arc-20240116; t=1775168119; c=relaxed/simple;
+	bh=yCfQJn7TKmHqJ9epb4QyddRqq1oRxDASserdzmjUDpk=;
+	h=From:To:Cc:Date:Subject:MIME-Version:Content-Type:Message-Id; b=NDzYMUZlVaruDg+rxf67eYTRK+PALTpNGLB8mCCq0QWOMtKrxfmWcGvB7qu9VyyGTmjwsBWDfkQ5qDGqXhInqk8Bl79nh0ldGjMgb4K68wPJM7KRuyjnIyuQIMtUrIw8NF2p+GvMyySSXZY3dYBVJcfGbdZUGHZ6Bg5Hh8vTyu4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se; dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b=R42sQtxK; arc=none smtp.client-ip=188.126.83.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xn--rombobjrn-67a.se;
+	s=a; t=1775167691; bh=yCfQJn7TKmHqJ9epb4QyddRqq1oRxDASserdzmjUDpk=;
+	h=From:To:Cc:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:From:Sender:Reply-To:
+	 Original-From:Organization:To:CC:Subject:Original-Subject:Date:
+	 Message-ID:In-Reply-To:References:Original-Message-ID:
+	 Disposition-Notification-To:Disposition-Notification-Options:
+	 MIME-Version:Content-Transfer-Encoding:Content-Type:
+	 Content-Features:Content-Alternative:Content-Location:
+	 TLS-Report-Domain:TLS-Report-Submitter:MT-Priority;
+	b=R42sQtxKX8fJPbBI8NxWjpMcMepEzy/fRXhi9ribURp5BNoUTY/ZZUk6c7B1rDQ2z
+	 OoxHD5/WQbR1nB8eIe3VB+JdgZ6sjOTENaGjYI0Cj8X+C/Ml60nQKCjDv4yrZP/kjL
+	 Y37ANMjEyds7oGJZ+Hlk41SnIhzPURSBDgaarxfjoLPlPX7Pvf6qqyNfsMidKia3Ax
+	 pTvDdxPTbDj3sk8FJkOiJk5a5d8Dgxp7XPsQ4iO8EkZ6b9nOp4Cjs8o4EdvZGaUbiW
+	 NaLB7UTSboU1F5OP76BPS0nFBFRdddGf3egbEq/o61LuGQyF2Vvl8x5dNcKlgqXkvB
+	 Shpk7SfHL4zcg==
+Received: from tag.xn--rombobjrn-67a.se (tag.xn--rombobjrn-67a.se [192.168.72.9])
+	by smtp.xn--rombobjrn-67a.se (Postfix) with ESMTPS id 66F6C407E8F7;
+	Fri,  3 Apr 2026 00:08:11 +0200 (CEST)
+Received: by tag.xn--rombobjrn-67a.se (Postfix, from userid 1000)
+	id 4804DD8F722; Fri, 03 Apr 2026 00:08:11 +0200 (CEST)
+From: =?UTF-8?q?Bj=C3=B6rn=20Persson?= <Bjorn@xn--rombobjrn-67a.se>
+To: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, linux-leds@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Date: Thu, 2 Apr 2026 22:27:48 +0200
+Subject: [PATCH] docs: leds: uleds: Make the documentation match the code.
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260327234023.2659476-2-jmattson@google.com> <202603301501.N2sdlIQ9-lkp@intel.com>
- <CALMp9eSO6gz4R0f1S=E-sA3YE8KE0uJ30otcGsMV1NS3ujUcNA@mail.gmail.com>
-In-Reply-To: <CALMp9eSO6gz4R0f1S=E-sA3YE8KE0uJ30otcGsMV1NS3ujUcNA@mail.gmail.com>
-From: Yosry Ahmed <yosry@kernel.org>
-Date: Thu, 2 Apr 2026 13:26:32 -0700
-X-Gmail-Original-Message-ID: <CAO9r8zOymT3dV3dDHfhHTM7oawuuzpysWEVgs2-dShZ9BfUo9w@mail.gmail.com>
-X-Gm-Features: AQROBzDeel1_OQ9-UKJ3j7R37ZttRLzLFRNbeAQTW_xCWYguBo3oZA-kZDOKmw0
-Message-ID: <CAO9r8zOymT3dV3dDHfhHTM7oawuuzpysWEVgs2-dShZ9BfUo9w@mail.gmail.com>
-Subject: Re: [PATCH v7 1/9] KVM: x86: Define KVM_X86_QUIRK_NESTED_SVM_SHARED_PAT
-To: Jim Mattson <jmattson@google.com>
-Cc: kernel test robot <lkp@intel.com>, Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson <seanjc@google.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, kvm@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	oe-kbuild-all@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260402220811.4804DD8F722@tag.xn--rombobjrn-67a.se>
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[xn--rombobjrn-67a.se:s=a];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82304-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	DKIM_TRACE(0.00)[xn--rombobjrn-67a.se:+];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-82311-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[xn--rombobjrn-67a.se];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yosry@kernel.org,linux-doc@vger.kernel.org];
 	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7F6E538DFFA
+	RCPT_COUNT_SEVEN(0.00)[7];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,tag.xn--rombobjrn-67a.se:mid,xn--rombobjrn-67a.se:dkim,rombobj=?UTF-8?Q?=C3=B6?=rn.se:email]
+X-Rspamd-Queue-Id: EDD7C38EAD8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-> It looks like svm.h should include x86.h.
->
-> Sean: Do you want me to send a new series?
+From: Björn Persson <Bjorn@Rombobjörn.se>
 
-FWIW, this is the same problem as:
-https://lore.kernel.org/kvm/CAO9r8zPuDcHMObfzTQVY-P0Z3kXZbw6y5KJizxvpFWXdW7uKbQ@mail.gmail.com/.
-So only the first series that gets picked up will need the fixup.
+· max_brightness must be set. Leaving it uninitialized or just omitting it
+  won't work.
+
+· The maximum brightness is not 255 but the value given to max_brightness.
+
+· Brightness values must be read as ints, not bytes.
+
+· The ints are signed, so the word "unsigned" is misleading.
+
+Signed-off-by: Björn Persson <Bjorn@Rombobjörn.se>
+---
+ Documentation/leds/uleds.rst | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/Documentation/leds/uleds.rst b/Documentation/leds/uleds.rst
+index 83221098009c..9875a0fa4185 100644
+--- a/Documentation/leds/uleds.rst
++++ b/Documentation/leds/uleds.rst
+@@ -17,16 +17,20 @@ structure to it (found in kernel public header file linux/uleds.h)::
+ 
+     struct uleds_user_dev {
+ 	char name[LED_MAX_NAME_SIZE];
++	int max_brightness;
+     };
+ 
+-A new LED class device will be created with the name given. The name can be
+-any valid sysfs device node name, but consider using the LED class naming
+-convention of "devicename:color:function".
++A new LED class device will be created with the given name and maximum
++brightness. The name can be any valid sysfs device node name, but consider
++using the LED class naming convention of "devicename:color:function".
+ 
+-The current brightness is found by reading a single byte from the character
+-device. Values are unsigned: 0 to 255. Reading will block until the brightness
+-changes. The device node can also be polled to notify when the brightness value
+-changes.
++Although max_brightness is a signed int, only positive values are valid:
++1 to INT_MAX.
++
++The current brightness is found by reading a whole int from the character
++device. The possible values are 0 to max_brightness. Reading will block until
++the brightness changes. The device node can also be polled to notify when the
++brightness value changes.
+ 
+ The LED class device will be removed when the open file handle to /dev/uleds
+ is closed.
+-- 
+2.53.0
+
 
