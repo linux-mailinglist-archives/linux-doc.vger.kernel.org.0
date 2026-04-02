@@ -1,152 +1,210 @@
-Return-Path: <linux-doc+bounces-82311-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82305-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eIL3JpfqzmnXrwYAu9opvQ
-	(envelope-from <linux-doc+bounces-82311-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 00:15:51 +0200
+	id +IUuHAjTzmnKqQYAu9opvQ
+	(envelope-from <linux-doc+bounces-82305-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 22:35:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDD7C38EAD8
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 00:15:50 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCEAD38E093
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 22:35:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6AF343023DD3
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Apr 2026 22:15:20 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D25D6300D62C
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Apr 2026 20:35:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C89463C3C0B;
-	Thu,  2 Apr 2026 22:15:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 996812F9D98;
+	Thu,  2 Apr 2026 20:35:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b="R42sQtxK"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="ejnshABd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.xn--rombobjrn-67a.se (nestor.xn--rombobjrn-67a.se [188.126.83.49])
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 084313BD25E;
-	Thu,  2 Apr 2026 22:15:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.126.83.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CE1529B224;
+	Thu,  2 Apr 2026 20:35:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775168119; cv=none; b=q3nPjotpi5Oq89biCAvS8eIHNzo7gFdYjIuoXAMoDKQ5/jmUTLYH1o12fFnbYjSM9yqIGlZGvDvUTZars7E9fe16snehDUK65IuJ8SmhyuBnq7LVEdznLkiCTufR9gxOIvq4mVjR6cklDke7iRvv1f7Q8aZk8swsf5yjiTlboeg=
+	t=1775162117; cv=none; b=uweBsZo0evxkeAgvkTw4OSeOE54LY+625PrOwc4XCE8YvoDU4dSiowU0/XIryH2mBqQhs8x1lZaPDDBI7tThu0PfRr5lDFmT5/oUdEtNTYOHt4SU1azzqLicBgI0gaPoQZLG6Lcoap10duzrl9RYNaJpOlh2QNRJhUJZuBgVkE0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775168119; c=relaxed/simple;
-	bh=yCfQJn7TKmHqJ9epb4QyddRqq1oRxDASserdzmjUDpk=;
-	h=From:To:Cc:Date:Subject:MIME-Version:Content-Type:Message-Id; b=NDzYMUZlVaruDg+rxf67eYTRK+PALTpNGLB8mCCq0QWOMtKrxfmWcGvB7qu9VyyGTmjwsBWDfkQ5qDGqXhInqk8Bl79nh0ldGjMgb4K68wPJM7KRuyjnIyuQIMtUrIw8NF2p+GvMyySSXZY3dYBVJcfGbdZUGHZ6Bg5Hh8vTyu4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se; dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b=R42sQtxK; arc=none smtp.client-ip=188.126.83.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xn--rombobjrn-67a.se;
-	s=a; t=1775167691; bh=yCfQJn7TKmHqJ9epb4QyddRqq1oRxDASserdzmjUDpk=;
-	h=From:To:Cc:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:From:Sender:Reply-To:
-	 Original-From:Organization:To:CC:Subject:Original-Subject:Date:
-	 Message-ID:In-Reply-To:References:Original-Message-ID:
-	 Disposition-Notification-To:Disposition-Notification-Options:
-	 MIME-Version:Content-Transfer-Encoding:Content-Type:
-	 Content-Features:Content-Alternative:Content-Location:
-	 TLS-Report-Domain:TLS-Report-Submitter:MT-Priority;
-	b=R42sQtxKX8fJPbBI8NxWjpMcMepEzy/fRXhi9ribURp5BNoUTY/ZZUk6c7B1rDQ2z
-	 OoxHD5/WQbR1nB8eIe3VB+JdgZ6sjOTENaGjYI0Cj8X+C/Ml60nQKCjDv4yrZP/kjL
-	 Y37ANMjEyds7oGJZ+Hlk41SnIhzPURSBDgaarxfjoLPlPX7Pvf6qqyNfsMidKia3Ax
-	 pTvDdxPTbDj3sk8FJkOiJk5a5d8Dgxp7XPsQ4iO8EkZ6b9nOp4Cjs8o4EdvZGaUbiW
-	 NaLB7UTSboU1F5OP76BPS0nFBFRdddGf3egbEq/o61LuGQyF2Vvl8x5dNcKlgqXkvB
-	 Shpk7SfHL4zcg==
-Received: from tag.xn--rombobjrn-67a.se (tag.xn--rombobjrn-67a.se [192.168.72.9])
-	by smtp.xn--rombobjrn-67a.se (Postfix) with ESMTPS id 66F6C407E8F7;
-	Fri,  3 Apr 2026 00:08:11 +0200 (CEST)
-Received: by tag.xn--rombobjrn-67a.se (Postfix, from userid 1000)
-	id 4804DD8F722; Fri, 03 Apr 2026 00:08:11 +0200 (CEST)
-From: =?UTF-8?q?Bj=C3=B6rn=20Persson?= <Bjorn@xn--rombobjrn-67a.se>
-To: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, linux-leds@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Thu, 2 Apr 2026 22:27:48 +0200
-Subject: [PATCH] docs: leds: uleds: Make the documentation match the code.
+	s=arc-20240116; t=1775162117; c=relaxed/simple;
+	bh=uiAFIRr6mHjLIRE3EwNKKCdKUkxBuUHvFc7GADEyjRU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=g81N61OayICb72ND2K05FOZcOrYWs+Kf4jZ0ATJKafG4x3P0IEq5UrSseEi3e3s6Jv9nRIZ58l5wxFjdGM3qfkmGh4a8ADuqgpSGsgmjZ1nXFB0QWoXRhdNVbp3YXRgelXGwe2gDvqoSpk4zxWOfaheDdtrRgfCHCkRhBzeKfLQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=ejnshABd; arc=none smtp.client-ip=148.163.158.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 632Ea2l5354949;
+	Thu, 2 Apr 2026 20:35:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=pp1; bh=9SUCXisxPEPCn/V6ZBbaiW9DjgU2
+	NXGvJX7YbWMfJiI=; b=ejnshABduKvvo77h/mJ5dchtBGDYXQtaHCUpCGrv8DKR
+	bV+fb5dwB4hkgPfj1+BWoeuGnRgLmGjg4WcLOrC1+Yx+II6kSUCmqXEAc/KIdSPy
+	SWSE44nSw2qvb9eH2XYzJ0ug5i8kS6OtmM1+dKXuocD4vsZgOH+1spjRomfT+7DB
+	phukDLQ1Pwr/sqVR1Q2Yz/Hrg6Dspn49k6aMPK+IWV0jIv3Qj7m4wGMEkM7l7bgN
+	aawnbWGQ2na3Ncfpu6RIOiieibYVIOPmnDo9bLAqor2xPKrFNl+d/6xMWcdgdMmB
+	NhCoO0N4FgRQrmxsngMFLwUzlO87Cv5s1ek53Qk3PA==
+Received: from ppma11.dal12v.mail.ibm.com (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4d64dgwraf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 02 Apr 2026 20:35:12 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma11.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 632H3bni008703;
+	Thu, 2 Apr 2026 20:35:11 GMT
+Received: from smtprelay06.wdc07v.mail.ibm.com ([172.16.1.73])
+	by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4d6v11udgc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 02 Apr 2026 20:35:11 +0000
+Received: from smtpav05.dal12v.mail.ibm.com (smtpav05.dal12v.mail.ibm.com [10.241.53.104])
+	by smtprelay06.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 632KZ9cU24576566
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 2 Apr 2026 20:35:10 GMT
+Received: from smtpav05.dal12v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id A4E0A58065;
+	Thu,  2 Apr 2026 20:35:09 +0000 (GMT)
+Received: from smtpav05.dal12v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E2BB358056;
+	Thu,  2 Apr 2026 20:35:06 +0000 (GMT)
+Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.87.85.9])
+	by smtpav05.dal12v.mail.ibm.com (Postfix) with ESMTP;
+	Thu,  2 Apr 2026 20:35:06 +0000 (GMT)
+From: Niklas Schnelle <schnelle@linux.ibm.com>
+Subject: [PATCH v6 0/2] PCI: s390: Expose the UID as an arch specific PCI
+ slot attribute
+Date: Thu, 02 Apr 2026 22:34:57 +0200
+Message-Id: <20260402-uid_slot-v6-0-d5ea0a14ddb9@linux.ibm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260402220811.4804DD8F722@tag.xn--rombobjrn-67a.se>
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPHSzmkC/23Q22oDIRAG4FcJXtegjuOhV32PUooabYRkt6zJk
+ hL23auhB1n2RvjF75/BOylxyrGQ592dTHHOJY9DDeppR8LRDR+R5kPNRDCBzAqg13x4L6fxQiM
+ g2pAwOGCkPv+cYsq3R9XrW83HXC7j9PVonnm73SiZOeUUNIrgdEjGwcspD9fbPvvzPozn1vuD5
+ Aox6yKTSZqAeoXa9Fn8TeSMmQ6LimMSItRDa8m3MHSYY4ehYinBWGMxcO+3sPzHgusOy4rbn0W
+ P1jtltzD+YsUk4x3GtrYGBipo6ZNa42VZvgGkB4vzzQEAAA==
+X-Change-ID: 20250923-uid_slot-e3559cf5ca30
+To: Bjorn Helgaas <bhelgaas@google.com>, Jonathan Corbet <corbet@lwn.net>,
+        Lukas Wunner <lukas@wunner.de>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: Farhan Ali <alifm@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
+        Gerd Bayer <gbayer@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
+        Julian Ruess <julianr@linux.ibm.com>,
+        Matthew Rosato <mjrosato@linux.ibm.com>,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Ramesh Errabolu <ramesh@linux.ibm.com>,
+        Sven Schnelle <svens@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pci@vger.kernel.org, linux-s390@vger.kernel.org,
+        Niklas Schnelle <schnelle@linux.ibm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1434;
+ i=schnelle@linux.ibm.com; h=from:subject:message-id;
+ bh=uiAFIRr6mHjLIRE3EwNKKCdKUkxBuUHvFc7GADEyjRU=;
+ b=owGbwMvMwCX2Wz534YHOJ2GMp9WSGDLPXfqxh+nydpZm1nuFT2bk7TU49KNNX1XqB9Oh/3sMX
+ 8QqiE0R6yhlYRDjYpAVU2RZ1OXst65giumeoP4OmDmsTCBDGLg4BWAiC88xMmyIv/Z6vuUtPp9P
+ /sErp64oyvko0Ts7eNWVo/lnbI7LZvIx/PfYFBp2qfxtT3xFqUPEuxcdN/lnvvspfHSRxnLuD9O
+ 9b7MAAA==
+X-Developer-Key: i=schnelle@linux.ibm.com; a=openpgp;
+ fpr=9DB000B2D2752030A5F72DDCAFE43F15E8C26090
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAyMDE4MSBTYWx0ZWRfX8bxIb/FvA8NI
+ EKWS8oyQvHSdXHtBvg0Ivq6Tnt6rOEqTL51unKzqDwLDTxyITpnMzz5U/hoLo8JXmIQKcV3EQXR
+ yoR/fECN1R0fw341FtrPMiJcOX6OT7a7MmPSWDeNnyR6w4yuSy9CH4Iznlg2APiVwP3VC8NlIKt
+ gWi26XOIfx9RKx9eequUIiKnDW0Brjpk9Inyoy6ac1qNRWp+cT5YWHjk8pfM20EfsgTA4OrKiaz
+ fZT78jUEAtrmDPtAOTJuLPwVrcRkJCjiuT1At153YmE1a/Pw8m/JiswU6kyrVs+kLo10TlJhuCc
+ r8sXlbF7T4gIO6EsfsVSwZjcRl3houAiqF3+CJ6Nnxjj4+zKQXQXBunc8jwXhERX1OakthGhAv6
+ C8dotit7ilaSi6sUeQ6gORmjyyYNxHwsaKSSMM9AffBjk7/b0kmvCCmVlpbC9agQl7Tt/fWN6wm
+ Ar9cFllADCh/46kOBEA==
+X-Authority-Analysis: v=2.4 cv=QKZlhwLL c=1 sm=1 tr=0 ts=69ced300 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=VwQbUJbxAAAA:8
+ a=VnNF1IyMAAAA:8 a=jVLf_0g3wJiVkyeFp14A:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: XXTUWyvnoYydPdW6Q0btKx8sy1L6u-z8
+X-Proofpoint-ORIG-GUID: BJHz1Qp9KoJA_8sHBFxTKpxOIpD17jgX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-02_03,2026-04-02_05,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 phishscore=0 adultscore=0 impostorscore=0 clxscore=1015
+ spamscore=0 bulkscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604020181
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[xn--rombobjrn-67a.se:s=a];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[xn--rombobjrn-67a.se:+];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-82311-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	TAGGED_FROM(0.00)[bounces-82305-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_NA(0.00)[xn--rombobjrn-67a.se];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.ibm.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[schnelle@linux.ibm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,tag.xn--rombobjrn-67a.se:mid,xn--rombobjrn-67a.se:dkim,rombobj=?UTF-8?Q?=C3=B6?=rn.se:email]
-X-Rspamd-Queue-Id: EDD7C38EAD8
+	RCVD_COUNT_SEVEN(0.00)[11]
+X-Rspamd-Queue-Id: DCEAD38E093
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Björn Persson <Bjorn@Rombobjörn.se>
+Hi all,
 
-· max_brightness must be set. Leaving it uninitialized or just omitting it
-  won't work.
+Add a mechanism for architecture specific attributes on
+PCI slots in order to add the user-defined ID (UID) as an s390 specific
+PCI slot attribute. First though improve some issues with the s390 specific
+documentation of PCI sysfs attributes noticed during development. 
 
-· The maximum brightness is not 255 but the value given to max_brightness.
+Also note, I considered adding the UID as a generic slot index attribute
+analogous to the PCI device index attribute (SMBIOS index / s390 UID)
+but decided against it as this seems rather s390 specific and having
+it named UID makes things easier for users and aligns with the existing
+separate uid device attribute.
 
-· Brightness values must be read as ints, not bytes.
+Thanks,
+Niklas
 
-· The ints are signed, so the word "unsigned" is misleading.
+v5->v6:
+- Add documentation cleanup patch before adding new slot attribute
+- Link to v5: https://lore.kernel.org/r/20260401-uid_slot-v5-1-e73036c74bf6@linux.ibm.com
 
-Signed-off-by: Björn Persson <Bjorn@Rombobjörn.se>
+Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
 ---
- Documentation/leds/uleds.rst | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+---
+Niklas Schnelle (2):
+      docs: s390/pci: Improve and update PCI documentation
+      PCI: s390: Expose the UID as an arch specific PCI slot attribute
 
-diff --git a/Documentation/leds/uleds.rst b/Documentation/leds/uleds.rst
-index 83221098009c..9875a0fa4185 100644
---- a/Documentation/leds/uleds.rst
-+++ b/Documentation/leds/uleds.rst
-@@ -17,16 +17,20 @@ structure to it (found in kernel public header file linux/uleds.h)::
- 
-     struct uleds_user_dev {
- 	char name[LED_MAX_NAME_SIZE];
-+	int max_brightness;
-     };
- 
--A new LED class device will be created with the name given. The name can be
--any valid sysfs device node name, but consider using the LED class naming
--convention of "devicename:color:function".
-+A new LED class device will be created with the given name and maximum
-+brightness. The name can be any valid sysfs device node name, but consider
-+using the LED class naming convention of "devicename:color:function".
- 
--The current brightness is found by reading a single byte from the character
--device. Values are unsigned: 0 to 255. Reading will block until the brightness
--changes. The device node can also be polled to notify when the brightness value
--changes.
-+Although max_brightness is a signed int, only positive values are valid:
-+1 to INT_MAX.
-+
-+The current brightness is found by reading a whole int from the character
-+device. The possible values are 0 to max_brightness. Reading will block until
-+the brightness changes. The device node can also be polled to notify when the
-+brightness value changes.
- 
- The LED class device will be removed when the open file handle to /dev/uleds
- is closed.
+ Documentation/arch/s390/pci.rst | 146 +++++++++++++++++++++++++++-------------
+ arch/s390/include/asm/pci.h     |   4 ++
+ arch/s390/pci/pci_sysfs.c       |  20 ++++++
+ drivers/pci/slot.c              |  13 +++-
+ 4 files changed, 137 insertions(+), 46 deletions(-)
+---
+base-commit: 7aaa8047eafd0bd628065b15757d9b48c5f9c07d
+change-id: 20250923-uid_slot-e3559cf5ca30
+
+Best regards,
 -- 
-2.53.0
+Niklas Schnelle
 
 
