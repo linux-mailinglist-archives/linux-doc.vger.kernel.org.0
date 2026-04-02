@@ -1,57 +1,57 @@
-Return-Path: <linux-doc+bounces-82287-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82289-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SF6OFkO1zmlVpgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82287-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 20:28:19 +0200
+	id iLiwJ9W1zmmApgYAu9opvQ
+	(envelope-from <linux-doc+bounces-82289-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 20:30:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C21338D193
-	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 20:28:18 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DFFF38D21B
+	for <lists+linux-doc@lfdr.de>; Thu, 02 Apr 2026 20:30:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 247793053A58
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Apr 2026 18:27:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DEE3F308810A
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Apr 2026 18:27:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6CF412C235E;
-	Thu,  2 Apr 2026 18:27:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 42D283BED46;
+	Thu,  2 Apr 2026 18:27:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="OGGz3fKR"
+	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="rHknsetg"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EEFB3C4569;
-	Thu,  2 Apr 2026 18:27:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA95B3E3DBB;
+	Thu,  2 Apr 2026 18:27:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775154446; cv=none; b=fAeHsWmK58scw6cUPSThzGETgNg0jWAx9nLDP6U12n3yxIrSLsOnfXG7AJOATSHCU3MysYmlGfl8RVlpifkJ/by85q6dDgFyAXHz9xEQHtaXEqglFZYwscqjYPO/8GetikusOtABWjVs5Wl3Eku3j3swMRE9bxHyXihhbPFH8CQ=
+	t=1775154449; cv=none; b=bZSP3gA2ljTDmb8JRhWnxR9UMCr0tgnqKEcMSWhwJsO+1wOVLv+QzmQuBz7Yn4W1TgLcvjCw6wJx/AWzHgNlcUSFawAbbrNt5DsV/38di4pcIsPjXPY8Hi6jcci/7qal3MPVj+9CLfSePcd/PrX+Ai11jbVe2nXJpa/VJSZ/WZU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775154446; c=relaxed/simple;
-	bh=lYbGhSOqqQUEwZE0acX2UVUvqowOH0oH6Xm9dt/EAm8=;
+	s=arc-20240116; t=1775154449; c=relaxed/simple;
+	bh=z4nF/ZrMzrkZ2vv8HaT9xIAvNxUuXi9X3FA4Z38x4zg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=X0d7GyrMUYzLONZw7fFrLzd0mHz2F1MwFCAW2NLIgfDngTowIF+PzX9V+ycNbH2y26uzvBC8HGeHUtffZxVcKNMi25V1BmL2/zPjLWbcEuBIi3G9kofRMtkLyQSD+06+ESOwRLKL+bWyjC7jqQqoVUiEhTsSBs3LZu+JnKwuI1o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=OGGz3fKR; arc=none smtp.client-ip=51.159.59.229
+	 MIME-Version; b=Hy02115URm/j8HYSFzbby8c4vmagg3jtA7th6oO/n6xFNoTFIfHg3B6WYs0jYclSVDlgfhlDxXEE2Yyy3x+EmjfJ3l/86u8WY74avw20DMJ+c9tHjrT3mOC58Bsnm71LG6WnRNX7fwX7PsOXSgUI0tUOdsf0FcDiv+onoowTOBc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=rHknsetg; arc=none smtp.client-ip=51.159.59.229
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
-	t=1775154429; bh=FV+TU1qQ5cdhGH80pRimkZ1mbKexd6nCcdrKQzpzcW0=;
+	t=1775154437; bh=uk6JJCuiWcuFFCpPYl5u+SnwidSD/LspndaW9sDSxrA=;
 	h=From:Message-ID:From;
-	b=OGGz3fKRJhJRrUVJDKq5Ox4F7QIm4Uh0Len6SM8HQyrtMRcq0R5jlE8v7Sj2v4ON7
-	 SxC8F3pp64sKX8CA3D+CWKvFDgkKxjnzpnpOtImi7kZ0jtt2RpWwVWeKQo9DDxzJz3
-	 O932D5peO0AXtT/0TGQ+spaVZB4nUYSDgLAnAnxA=
+	b=rHknsetgiFlxl2vDafNR7O0y0mzcKow30kYk2xh/zDoZt2Jax+BabYX+QKfBSIS9a
+	 ijBAnC/VYdzRl93tINFDNNTq/tnjzsEFlrOaI8g+bQa4Ppj0Ux+LO/qqT6+jJSSGQj
+	 I4Ub/f4GmAepSQwEZTplZQ9zDavDmrBrdpwms7vE=
 Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
-	by mta1.formilux.org (Postfix) with ESMTP id 0D9B8C0A98;
-	Thu, 02 Apr 2026 20:27:09 +0200 (CEST)
+	by mta1.formilux.org (Postfix) with ESMTP id F0EFEC0A9B;
+	Thu, 02 Apr 2026 20:27:16 +0200 (CEST)
 From: Willy Tarreau <w@1wt.eu>
 To: greg@kroah.com
 Cc: edumazet@google.com, Jonathan Corbet <corbet@lwn.net>,
         skhan@linuxfoundation.org, workflows@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         Willy Tarreau <w@1wt.eu>
-Subject: [PATCH 1/3] Documentation: minor updates to the security contacts
-Date: Thu,  2 Apr 2026 20:26:53 +0200
-Message-ID: <20260402182655.8636-2-w@1wt.eu>
+Subject: [PATCH 2/3] Documentation: explain how to find maintainers addresses for security reports
+Date: Thu,  2 Apr 2026 20:26:54 +0200
+Message-ID: <20260402182655.8636-3-w@1wt.eu>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260402182655.8636-1-w@1wt.eu>
 References: <20260402182655.8636-1-w@1wt.eu>
@@ -67,7 +67,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -76,9 +76,9 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82287-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82289-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[1wt.eu:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
@@ -87,53 +87,126 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[8];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,kroah.com:email,1wt.eu:dkim,1wt.eu:email,1wt.eu:mid]
-X-Rspamd-Queue-Id: 8C21338D193
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,kroah.com:email,1wt.eu:dkim,1wt.eu:email,1wt.eu:mid,get_maintainers.pl:url]
+X-Rspamd-Queue-Id: 0DFFF38D21B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This clarifies the fact that the bug reporters must use a valid
-e-mail address to send their report, and that the security team
-assists developers working on a fix but doesn't always produce
-fixes on its own.
+These days, 80% of the work done by the security team consists in
+locating the affected subsystem in a report, running get_maintainers on
+it, forwarding the report to these persons and responding to the reporter
+with them in Cc. This is a huge and unneeded overhead that we must try to
+lower for a better overall efficiency. This patch adds a complete section
+explaining how to figure the list of recipients to send the report to.
 
 Cc: Eric Dumazet <edumazet@google.com>
 Cc: Greg KH <greg@kroah.com>
 Signed-off-by: Willy Tarreau <w@1wt.eu>
 ---
- Documentation/process/security-bugs.rst | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ Documentation/process/security-bugs.rst | 76 ++++++++++++++++++++++++-
+ 1 file changed, 73 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/process/security-bugs.rst b/Documentation/process/security-bugs.rst
-index c0cf93e11565..da7937fd59df 100644
+index da7937fd59df..6937fa9fba5a 100644
 --- a/Documentation/process/security-bugs.rst
 +++ b/Documentation/process/security-bugs.rst
-@@ -8,6 +8,10 @@ like to know when a security bug is found so that it can be fixed and
- disclosed as quickly as possible.  Please report security bugs to the
- Linux kernel security team.
+@@ -5,8 +5,75 @@ Security bugs
  
-+Reports are to be sent over e-mail exclusively.  Please use a working e-mail
-+address, preferably the same that you want to appear in ``Reported-by`` tags
-+if any.  If unsure, send your report to yourself first.
+ Linux kernel developers take security very seriously.  As such, we'd
+ like to know when a security bug is found so that it can be fixed and
+-disclosed as quickly as possible.  Please report security bugs to the
+-Linux kernel security team.
++disclosed as quickly as possible.
 +
- The security team and maintainers almost always require additional
- information beyond what was initially provided in a report and rely on
- active and efficient collaboration with the reporter to perform further
-@@ -27,11 +31,9 @@ made public.
++Identifying contacts
++--------------------
++
++The most effective way to report a security bug is to send it directly to the
++affected subsystem's maintainers and Cc: the Linux kernel security team.  Do
++not send it to a public list at this stage, unless you have good reasons to
++consider the issue as being public or trivial to discover (e.g. result of a
++widely available automated vulnerability scanning tool that can be repeated by
++anyone).
++
++If you're sending a report for issues affecting multiple parts in the kernel,
++even if they're fairly similar issues, please send individual messages (think
++that maintainers will not all work on the issues at the same time). The only
++exception is when an issue concerns closely related parts maintained by the
++exact same subset of maintainers, and these parts are expected to be fixed all
++at once by the same commit, then it may be acceptable to report them at once.
++
++One difficulty for most first-time reporters is to figure the right list of
++recipients to send a report to.  In the Linux kernel, all official maintainers
++are trusted, so the consequences of accidentally including the wrong maintainer
++are essentially a bit more noise for that person, i.e. nothing dramatic.  As
++such, a suitable method to figure the list of maintainers (which kernel
++security officers use) is to rely on the get_maintainers.pl script, tuned to
++only report maintainers.  This script, when passed a file name, will look for
++its path in the MAINTAINERS file to figure a hierarchical list of relevant
++maintainers.  Calling it a first time with the finest level of filtering will
++most of the time return a short list of this specific file's maintainers::
++
++  $ ./scripts/get_maintainer.pl --no-l --no-r --pattern-depth 1 \
++    drivers/example.c
++  Developer One <dev1@example.com> (maintainer:example driver)
++  Developer Two <dev2@example.org> (maintainer:example driver)
++
++These two maintainers should then receive the message.  If the command does not
++return anything, it means the affected file is part of a wider subsystem, so we
++should be less specific::
++
++  $ ./scripts/get_maintainer.pl --no-l --no-r drivers/example.c
++  Developer One <dev1@example.com> (maintainer:example subsystem)
++  Developer Two <dev2@example.org> (maintainer:example subsystem)
++  Developer Three <dev3@example.com> (maintainer:example subsystem [GENERAL])
++  Developer Four <dev4@example.org> (maintainer:example subsystem [GENERAL])
++
++Here, picking the first, most specific ones, is sufficient.  When the list is
++long, it is possible to produce a comma-delimited e-mail address list on a
++single line suitable for use in the To: field of a mailer like this::
++
++  $ ./scripts/get_maintainer.pl --no-tree --no-l --no-r --no-n --m \
++    --no-git-fallback --no-substatus --no-rolestats --no-multiline \
++    --pattern-depth 1 drivers/example.c
++  dev1@example.com, dev2@example.org
++
++or this for the wider list::
++
++  $ ./scripts/get_maintainer.pl --no-tree --no-l --no-r --no-n --m \
++    --no-git-fallback --no-substatus --no-rolestats --no-multiline \
++    drivers/example.c
++  dev1@example.com, dev2@example.org, dev3@example.com, dev4@example.org
++
++If at this point you're still facing difficulties spotting the right
++maintainers, **and only in this case**, it's possible to send your report to
++the Linux kernel security team only.  Your message will be triaged, and you
++will receive instructions about whom to contact, if needed.  Your message may
++equally be forwarded as-is to the relevant maintainers.
++
++Sending the report
++------------------
  
+ Reports are to be sent over e-mail exclusively.  Please use a working e-mail
+ address, preferably the same that you want to appear in ``Reported-by`` tags
+@@ -29,6 +96,7 @@ information is helpful.  Any exploit code is very helpful and will not
+ be released without consent from the reporter unless it has already been
+ made public.
+ 
++The report must be sent to maintainers, with the security team in ``Cc:``.
  The Linux kernel security team can be contacted by email at
  <security@kernel.org>.  This is a private list of security officers
--who will help verify the bug report and develop and release a fix.
--If you already have a fix, please include it with your report, as
--that can speed up the process considerably.  It is possible that the
--security team will bring in extra help from area maintainers to
--understand and fix the security vulnerability.
-+who will help verify the bug report and assist developers working on a fix.
-+It is possible that the security team will bring in extra help from area
-+maintainers to understand and fix the security vulnerability.
+ who will help verify the bug report and assist developers working on a fix.
+@@ -44,7 +112,9 @@ reproduction steps, and follow it with a proposed fix, all in plain text.
+ Markdown, HTML and RST formatted reports are particularly frowned upon since
+ they're quite hard to read for humans and encourage to use dedicated viewers,
+ sometimes online, which by definition is not acceptable for a confidential
+-security report.
++security report. Note that some mailers tend to mangle formatting of plain
++text by default, please consult :doc:`the email client howto
++<../process/email-clients>` for more info.
  
- Please send **plain text** emails without attachments where possible.
- It is much harder to have a context-quoted discussion about a complex
+ Disclosure and embargoed information
+ ------------------------------------
 -- 
 2.52.0
 
