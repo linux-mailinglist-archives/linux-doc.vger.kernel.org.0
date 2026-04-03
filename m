@@ -1,105 +1,60 @@
-Return-Path: <linux-doc+bounces-82352-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82353-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cKGBOoCgz2nDyAYAu9opvQ
-	(envelope-from <linux-doc+bounces-82352-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 13:12:00 +0200
+	id mM8dOe+pz2noywYAu9opvQ
+	(envelope-from <linux-doc+bounces-82353-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 13:52:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6B6C393901
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 13:11:59 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55822393D18
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 13:52:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6ECD43012A8E
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 11:11:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9DC123033D14
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 11:51:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A68573A963B;
-	Fri,  3 Apr 2026 11:11:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6260E3B2FCE;
+	Fri,  3 Apr 2026 11:51:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kroah.com header.i=@kroah.com header.b="Rxqkvt+O";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="eSZiD4yf"
+	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="Kb2HwSre"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fhigh-a3-smtp.messagingengine.com (fhigh-a3-smtp.messagingengine.com [103.168.172.154])
+Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BACD81B6D1A;
-	Fri,  3 Apr 2026 11:11:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.168.172.154
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 509AD377EA9;
+	Fri,  3 Apr 2026 11:51:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775214713; cv=none; b=EqMI2kSI03idvZCSxsWqu7jGu/fY56d7B8o5vzVD6tJRZ0Q2jYuj8xI7dsbZ4Er+6Gtg6BVyPwaJ/mnBrapBvPas+I43ZuQTy8wCX7XZmaqsxmFqq/lES00ST4355IKtOztYbWioLn7kaJ0c/bVPRvn2ue3dqQnzW63aS93vwBk=
+	t=1775217074; cv=none; b=YWexhc3pRkm6VLxfUy2CSQDYlNmnck0EdrQ/LSo72DLtbriMXPmCvDaynvd1bbt41fCxdsAGr/6pbhz2NpwnrER/3rupbZ9nXyA5HopaHw/ho2D08mewkmyFWkKL1EOGE9J3/yU7xue3nRmjzywKf/0rW9qXWPQYPx0wGQYsm0w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775214713; c=relaxed/simple;
-	bh=doXqhd8dr/1LTFZ1jpumVKfG6zz20yN+icBTelXv3YM=;
+	s=arc-20240116; t=1775217074; c=relaxed/simple;
+	bh=m5oYYxfegYrbip1+kwznsffOseaKS1U9+M5gGsEPeh8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cVVZZ7OLK9QW8W8rVg/YZiMqq0Vwt0p3W9u6X8TVDuM5EJPic/rBuTftiGU3RVQ0F2ix4uaa4z2wBnLBAFPDgzW9JCxMxGacHe0OgW4m+yp0pmsk9pqs/Xnqc6qo4aTMqtekfhcmgHS4gh/K56uc5ru7kwBa6W+IGVhiHc1WTuw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kroah.com; spf=pass smtp.mailfrom=kroah.com; dkim=pass (2048-bit key) header.d=kroah.com header.i=@kroah.com header.b=Rxqkvt+O; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=eSZiD4yf; arc=none smtp.client-ip=103.168.172.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kroah.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kroah.com
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
-	by mailfhigh.phl.internal (Postfix) with ESMTP id C730614002DF;
-	Fri,  3 Apr 2026 07:11:50 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
-  by phl-compute-06.internal (MEProxy); Fri, 03 Apr 2026 07:11:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=cc
-	:cc:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1775214710; x=1775301110; bh=cG7tV/2w7j
-	tLpWh0FgPMz/4JYz/46AXMbgusfPJiYpE=; b=Rxqkvt+OXbRvLhxdEhFjuf6i5p
-	L5USS1WDhhImBKyHzHIo/ozFTcAMT+b9IMRql4qgh3ZvRu0jfmq1408dPNZfnxJZ
-	BvuKUX3lWH+gXd5QsE41AImRz0NKiSmymzeA+ulAnLzXLA5G67ixc6c8eBseTCUc
-	AK9/ug2SufnmTa00n0Seh1UUutkp6hSavZp0fYG92zXI/G3o/vMAiQ54uYaGsaU/
-	LKDAQAFw8RisivzAxG+QpLJjZwafKAZ2ymp6OTh82F2643k0u6l2FANh6u8rXCuO
-	saGztGsRRPwZNQYts2Sgu+E6uICd7htY6GajulPmyQcc0wok/QxePpEOrx5Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1775214710; x=1775301110; bh=cG7tV/2w7jtLpWh0FgPMz/4JYz/46AXMbgu
-	sfPJiYpE=; b=eSZiD4yfBMjDgYQ8rpjYY1wwpEtE9Y7r06zYCRV7gEYsGU+WxBy
-	0S4C5GrhNICBotFVWFS+ylIQ3RA5iP9XVzaEfQy/QLPExeRlWTjp+xL+zRbjASm+
-	YNe6lm80V3UphJYi1BF7VtRMDXWvK52qxEefnJoe+6/hZh16v1a+AHKQ34OwACoq
-	t3F8rYOWpZmfKiujKPQzhevIZOhpJXjLy1EUlL1lvXeq7ZCW7dy33uk4lIzoYzkY
-	MbFjvJ/Bv9veR7jkEufVsK7UGDL0pdJOuOC/ldrd6EvMNoOzcPKUE5teIlXoE4X1
-	NZKW5p0oMcZjyk2zB9safY3yfh/UIdxTImg==
-X-ME-Sender: <xms:daDPaTPkjozPMv-FGQYkBvAmA6Z6pkDK0Z3Hxl9SYLlbdGPtL6T_1g>
-    <xme:daDPae55GQ8_USYxJGrMY4lPBj3f8sxjYYj2AGmWGkWkrJd2PEtUPRA0OD9mgByl-
-    3uKpB3tIX5DrVaYlc6q4Q4aMgYJ-tRCeIoblEV7kZkeOK4Z>
-X-ME-Received: <xmr:daDPaSnEefuem65g3xYpBjzOuV24CXWhbPa_91bIhlbRiHOjgj-y6SbqOI6kQiUbx6OT-IEyP__VDqSHE20fbiQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdekjeelucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceurghi
-    lhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurh
-    epfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepifhrvghgucfmjfcu
-    oehgrhgvgheskhhrohgrhhdrtghomheqnecuggftrfgrthhtvghrnhepheegvdevvdelje
-    eugfdtudduhfekledtiefhveejkeejuefhtdeufefhgfehkeetnecuvehluhhsthgvrhfu
-    ihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvghgsehkrhhorghhrdgtoh
-    hmpdhnsggprhgtphhtthhopeduiedpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohep
-    fiesudifthdrvghupdhrtghpthhtohepvgguuhhmrgiivghtsehgohhoghhlvgdrtghomh
-    dprhgtphhtthhopehrughunhhlrghpsehinhhfrhgruggvrggurdhorhhgpdhrtghpthht
-    oheptghorhgsvghtsehlfihnrdhnvghtpdhrtghpthhtohepshhkhhgrnheslhhinhhugi
-    hfohhunhgurghtihhonhdrohhrghdprhgtphhtthhopeifohhrkhhflhhofihssehvghgv
-    rhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrd
-    hkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgvlhesvhhgvghr
-    rdhkvghrnhgvlhdrohhrgh
-X-ME-Proxy: <xmx:daDPaWIlY4osVjfXX5tmIdZrW5Z0KdJjTdxfaTJuDMntNJyh98JvEQ>
-    <xmx:daDPaSSZGiz8lhpuMo30KnpSGltX1PUqBU5o93SBVXucbriEePtV4A>
-    <xmx:daDPaTtLXlskvRoc2u97le8a4-l7Pnd0HQCpljMAqLatbDmdMC4bvg>
-    <xmx:daDPaV-mAubczm1CwqfHkTBfzcoGHUZRvvr501lMY4mJtSXw3aLj4Q>
-    <xmx:dqDPaTCktbz_5UVxlrm7ORTKMqvj0I9DIcdqJB_ur_8Go3GrARlofnLF>
-Feedback-ID: i787e41f1:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 3 Apr 2026 07:11:49 -0400 (EDT)
-Date: Fri, 3 Apr 2026 13:11:47 +0200
-From: Greg KH <greg@kroah.com>
-To: Willy Tarreau <w@1wt.eu>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Kmo86lub3MqbXuQUb/KBL/uxpLKJYXaiVXTHU53vOBqscEX1TPPnym9I5mhL5EoaOlDq2xRFDRo2hLLI6oSFUAfFlSbD/Sbd4I4Q8H0R3NldeQzMxYDNDO749HNNPhkK2viOUuVV3g3tLKXQ5ildSQPHuU67oXOMS34TFpf+C8E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=Kb2HwSre; arc=none smtp.client-ip=51.159.59.229
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
+	t=1775217068; bh=/GMT2pew5uzETaGffA8RC320jiwmkcJaccfuTeMtXWY=;
+	h=From:Message-ID:From;
+	b=Kb2HwSre+1ivwT5H4Em2I379VJJmd6svWAj8f7lhxjkTtJhk1OYaFIqCFSgy48ZD9
+	 n/N3NxTvMLCu5JuxZOBGRkiwvbJICz2cLp8BGBIJlLflugxwxK2wSC4ZIvUu9AYb8/
+	 NE6idnfH4ZtEc/+ySU6WkFvzWQpHfV3uN3giHJ+g=
+Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
+	by mta1.formilux.org (Postfix) with ESMTP id 4AB2DC0AC9;
+	Fri, 03 Apr 2026 13:51:08 +0200 (CEST)
+Date: Fri, 3 Apr 2026 13:51:07 +0200
+From: Willy Tarreau <w@1wt.eu>
+To: Greg KH <greg@kroah.com>
 Cc: edumazet@google.com, rdunlap@infradead.org,
-	Jonathan Corbet <corbet@lwn.net>, skhan@linuxfoundation.org,
-	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
+        Jonathan Corbet <corbet@lwn.net>, skhan@linuxfoundation.org,
+        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
 Subject: Re: [PATCH v2 0/3] Documentation: clarify required info in security
  reports
-Message-ID: <2026040324-coping-vacation-7d64@gregkh>
+Message-ID: <ac-pq44YBI5AIdQ7@1wt.eu>
 References: <20260403062018.31080-1-w@1wt.eu>
+ <2026040324-coping-vacation-7d64@gregkh>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -108,59 +63,60 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260403062018.31080-1-w@1wt.eu>
-X-Spamd-Result: default: False [-1.66 / 15.00];
+In-Reply-To: <2026040324-coping-vacation-7d64@gregkh>
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kroah.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kroah.com:s=fm2,messagingengine.com:s=fm2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
+	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kroah.com:+,messagingengine.com:+];
+	TAGGED_FROM(0.00)[bounces-82353-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82352-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[1wt.eu:+];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[greg@kroah.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
 	RCPT_COUNT_SEVEN(0.00)[8];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[messagingengine.com:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,kroah.com:dkim]
-X-Rspamd-Queue-Id: A6B6C393901
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 55822393D18
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Apr 03, 2026 at 08:20:15AM +0200, Willy Tarreau wrote:
-> Hi Greg,
+On Fri, Apr 03, 2026 at 01:11:47PM +0200, Greg KH wrote:
+> On Fri, Apr 03, 2026 at 08:20:15AM +0200, Willy Tarreau wrote:
+> > Hi Greg,
+> > 
+> > I'm sending you the doc clarifications we discussed for the process of
+> > reporting security issues. It's cut into the 3 patches I shared this
+> > morning on the security list (plus two typos fixed and a paragraph
+> > asking for one single issue per report):
+> > 
+> >   - one patch that reminds our need for a valid e-mail address
+> >   - one that explains to reporters how to proceed to find maintainers
+> >     addresses, hoping we won't have to do it for 90% of reports anymore
+> >   - one that enumerates basic requirements for every report
+> > 
+> > I think it covers the difficulties we've faced this week. As always,
+> > we might possibly find tiny adjustments to add, but my goal would be
+> > for such updates to be merged in time to update the public page ASAP
+> > so that we can redirect incomplete reports in an attempt to lower the
+> > team's current load.
 > 
-> I'm sending you the doc clarifications we discussed for the process of
-> reporting security issues. It's cut into the 3 patches I shared this
-> morning on the security list (plus two typos fixed and a paragraph
-> asking for one single issue per report):
-> 
->   - one patch that reminds our need for a valid e-mail address
->   - one that explains to reporters how to proceed to find maintainers
->     addresses, hoping we won't have to do it for 90% of reports anymore
->   - one that enumerates basic requirements for every report
-> 
-> I think it covers the difficulties we've faced this week. As always,
-> we might possibly find tiny adjustments to add, but my goal would be
-> for such updates to be merged in time to update the public page ASAP
-> so that we can redirect incomplete reports in an attempt to lower the
-> team's current load.
+> Looks great, thanks.  I've applied these to one of my trees and will get
+> them to Linus in time for 7.0-final.
 
-Looks great, thanks.  I've applied these to one of my trees and will get
-them to Linus in time for 7.0-final.
-
-greg k-h
+Thank you!
+Willy
 
