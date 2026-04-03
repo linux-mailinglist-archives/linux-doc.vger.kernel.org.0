@@ -1,146 +1,234 @@
-Return-Path: <linux-doc+bounces-82354-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82357-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8LRSCDytz2m5zAYAu9opvQ
-	(envelope-from <linux-doc+bounces-82354-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 14:06:20 +0200
+	id uEVOIge2z2lQzwYAu9opvQ
+	(envelope-from <linux-doc+bounces-82357-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 14:43:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B49F8393E84
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 14:06:19 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74D5C39429E
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 14:43:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 22A66301A9D7
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 12:06:19 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A91F53056D2C
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 12:40:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9E993254B2;
-	Fri,  3 Apr 2026 12:06:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19899398919;
+	Fri,  3 Apr 2026 12:40:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f/pMGymr"
+	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="Ww0emgJ5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C75122D77F5;
-	Fri,  3 Apr 2026 12:06:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D476389114;
+	Fri,  3 Apr 2026 12:40:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=68.232.154.123
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775217977; cv=none; b=uqKkWSwHI0c0hId/kROrl0dDxzsAinRcBGy0fi17XoeN1r5gthym35ssUV4M+0YhXrJZUvhTFVqlur4DgNklsqxIGfqMAcBcBP4biBPUIUejGbqTfP1ci1GZXAQ4a9RajQxhK0DrozhXxA/yIKx5uBUeyiGfoTkg7ZiVLiHqwPo=
+	t=1775220012; cv=none; b=T0osp5QqnlzptU6ZBcDim0ov4RNAbKqZJpnzT2fOsDRiSnDnpBnaTEqntLdziXA7FutHDbfSa+zY8VtVQTtEixhT/BB2hnTsdRo/CKIXGFMLS6nkbvVU/4L6KuW97kVe86c9jQFZRLW2A+Ia215Uey6PWhh5k1VXh6XxoTCFqpY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775217977; c=relaxed/simple;
-	bh=qxSJnJJLUdWKHQdmjZ36W6yEr8sXivN1DVtEHDmnnVY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WKzjyk6WA6VOmMTaHIu9cdTz5l7LoYM0qlbsZ4jA/PGYEsyug9XpLtB7AaWM2lSmur+BaZ3LRdnOVG8t1pYXqEkVF+VuazlsDWJOpXJcPuIUOKfdMehaRc1fOPqlPkyM+v8hzR/8rGuPW+HemV3niV1qET4jH8Z5KLDOiSnUP0Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f/pMGymr; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16347C4CEF7;
-	Fri,  3 Apr 2026 12:06:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775217977;
-	bh=qxSJnJJLUdWKHQdmjZ36W6yEr8sXivN1DVtEHDmnnVY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=f/pMGymrltb9LffZhsf7CTs17lBt6iBEcl59rJAnLbMMEwxfcOuh6ohSR7QgvFpiw
-	 Du52SEcnqfePt/tdoSKdtJ0nlNdyYjjJH2d6kJ/VB45WYSUZkbFN6mDLj/Y/dLcMmW
-	 VhF7g6qZ13k8NMO1G4IwKVN49WL712x+MGpJ6eD1SCSDkAfHTGOf64/UjKXO+Yu7Ez
-	 MTOARqYM8Pm3xie2EC7mvrGLcWgaB8k6zNIaHBsyTRGJKKrVnJXn5Xo5bIt4WSFHW0
-	 uIKEoEOi+rfyjQm8l4ReM8Ke4/RK9CP/yG/3VPkET66A2GSs4+nzvg4SRe7w3pfZnb
-	 gGXxJNJsxivmQ==
-Date: Fri, 3 Apr 2026 14:06:14 +0200
-From: Frederic Weisbecker <frederic@kernel.org>
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: LKML <linux-kernel@vger.kernel.org>,
-	Anna-Maria Behnsen <anna-maria@linutronix.de>,
-	Gabriele Monaco <gmonaco@redhat.com>,
-	Ingo Molnar <mingo@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Marcelo Tosatti <mtosatti@redhat.com>,
-	Marco Crivellari <marco.crivellari@suse.com>,
-	Michal Hocko <mhocko@kernel.org>,
-	"Paul E . McKenney" <paulmck@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>, Phil Auld <pauld@redhat.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Valentin Schneider <vschneid@redhat.com>,
-	Vlastimil Babka <vbabka@suse.cz>, Waiman Long <longman@redhat.com>,
-	linux-doc@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: Re: [PATCH v3] doc: Add CPU Isolation documentation
-Message-ID: <ac-tNrdNMKQ2uh0k@localhost.localdomain>
-References: <20260402094749.18879-1-frederic@kernel.org>
- <20260402110122.2gkDqQ7Q@linutronix.de>
+	s=arc-20240116; t=1775220012; c=relaxed/simple;
+	bh=PnRnd7lQtN3WxG2Z0pPYrXqxZbFA1u+MSlM8AIZnedU=;
+	h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:CC; b=u3+CwCOmosACcLo2ptBGAWulD+/Jw83v/z0JiPJfYOT/6/6F9N158WXUm5yaHyjWpc2iV9/8ZIb2DB+0Bza5VjmZiXbLP8iCbISmNxcVgkQawkg9ezplc5OJrNEaT8YnA8RFsPotRWYhBLEddS/gWzGmxJ+cWQ+fb/tbIuPs2dI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=Ww0emgJ5; arc=none smtp.client-ip=68.232.154.123
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1775220010; x=1806756010;
+  h=from:subject:date:message-id:mime-version:
+   content-transfer-encoding:to:cc;
+  bh=PnRnd7lQtN3WxG2Z0pPYrXqxZbFA1u+MSlM8AIZnedU=;
+  b=Ww0emgJ5QmVuaqcMlQ2RPwWqHV6+bZdvF0L0PAyQJcY/4mIEHeWlEH6A
+   d8CZhRpTFq3wx+t65k0XokojH+2wp9HgePlGZdkPEliDKQTmWtua4ZZlJ
+   QIylmhVnnjPCsKz1uuTMgzdnxSt15H8hf0zs8R5PA44uem5qIzj0eZIdw
+   d92+GXFgG44x959+iGP92oOLSoCksFsZwEPvgXYm3jt5iJPhtNfoz99Yu
+   T+ERY82J6IIw+vGo96fAy5LCR/ah6qyUdMdpY1oDVhqVxBTKGktQysvRY
+   fRv+T5mD06113FEaiiv7qwqTHA6HxlSlEmarH5e++BVSl15q1ihCSQ8vQ
+   g==;
+X-CSE-ConnectionGUID: CBerw6eeRJyL4pEnwf9CKw==
+X-CSE-MsgGUID: nDCPFf43T2WVOnvKPdKAhA==
+X-IronPort-AV: E=Sophos;i="6.23,157,1770620400"; 
+   d="scan'208";a="54879033"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+  by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Apr 2026 05:40:09 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
+ chn-vm-ex2.mchp-main.com (10.10.87.31) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.2562.35; Fri, 3 Apr 2026 05:39:49 -0700
+Received: from marius-VM.mshome.net (10.10.85.11) by chn-vm-ex03.mchp-main.com
+ (10.10.85.151) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
+ Transport; Fri, 3 Apr 2026 05:39:46 -0700
+From: Marius Cristea <marius.cristea@microchip.com>
+Subject: [PATCH v9 0/2] Add support for Microchip EMC1812
+Date: Fri, 3 Apr 2026 15:39:36 +0300
+Message-ID: <20260403-hw_mon-emc1812-v9-0-1a798f31cf2e@microchip.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260402110122.2gkDqQ7Q@linutronix.de>
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAi1z2kC/23RTU7DQAwF4KtUsybI9vw5XXEPhFAm8ZBZpKkSF
+ EBV786kAqXqZPks+Vu8d1GzTElmdTxc1CRLmtN4yqF+Oqi2b04fUqUuZ0VAFgGo6r/eh/FUydA
+ iI1URA4Mz7DsElZ/Ok8T0fQNf33Lu0/w5Tj83f8H1+kdR/UgtWEEVxMSOmwjompchtdPY9un83
+ I6DWrmFNgIJC4IyYQOBh8jBe94j9EYQckHoTDRIuukaH9jWe4T5Jxwg+YIwmXAhOu2CNWz8HmE
+ 3gsAWhM0EaWJtG4nCcY9wdwQWyywuE6K91EFzx/VuF/6OIF0Qfq0ThZx30QjBHsEboREKgtdRW
+ 7TWkxfo6JG4Xq+/JIjxnoUCAAA=
+X-Change-ID: 20251002-hw_mon-emc1812-f1b806487d10
+To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>
+CC: <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, Marius Cristea
+	<marius.cristea@microchip.com>, Conor Dooley <conor.dooley@microchip.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4456;
+ i=marius.cristea@microchip.com; h=from:subject:message-id;
+ bh=PnRnd7lQtN3WxG2Z0pPYrXqxZbFA1u+MSlM8AIZnedU=;
+ b=owGbwMvMwCW2tbSTZa7u0x2Mp9WSGDLPbxUQ5GnjMYqcmOeyJ7mn6l0TS36NzZovswUDVqruf
+ vpmwm+2jlIWBjEuBlkxRZYVb/3UqtZ+uKwklqkDM4eVCWQIAxenAEykWImR4Y2n/lOtmhmL7ty/
+ wynFOTs9PPtMR54vE0fOKU6HtULpqgz/7Dg9p/21Njlklz0hoeZDys0Ilw0xMpGH3nBHsWmfdL/
+ OBAA=
+X-Developer-Key: i=marius.cristea@microchip.com; a=openpgp;
+ fpr=E32F8D4396E72E463E8CCD91446DE0ABD9140C3E
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[microchip.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[microchip.com:s=mchp];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82354-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,linutronix.de,redhat.com,kernel.org,lwn.net,suse.com,infradead.org,goodmis.org,suse.cz,gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	DKIM_TRACE(0.00)[microchip.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82357-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[frederic@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,localhost.localdomain:mid]
-X-Rspamd-Queue-Id: B49F8393E84
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[marius.cristea@microchip.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[microchip.com:dkim,microchip.com:email,microchip.com:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 74D5C39429E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Le Thu, Apr 02, 2026 at 01:01:22PM +0200, Sebastian Andrzej Siewior a écrit :
-> On 2026-04-02 11:47:49 [+0200], Frederic Weisbecker wrote:
-> > nohz_full was introduced in v3.10 in 2013, which means this
-> > documentation is overdue for 13 years.
-> > 
-> > Fortunately Paul wrote a part of the needed documentation a while ago,
-> > especially concerning nohz_full in Documentation/timers/no_hz.rst and
-> > also about per-CPU kthreads in
-> > Documentation/admin-guide/kernel-per-CPU-kthreads.rst
-> > 
-> > Introduce a new page that gives an overview of CPU isolation in general.
-> > 
-> > Acked-by: Waiman Long <longman@redhat.com>
-> > Reviewed-by: Valentin Schneider <vschneid@redhat.com>
-> > Reviewed-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-> > Signed-off-by: Frederic Weisbecker <frederic@kernel.org>
-> 
-> This documents also isolcpus= boot argument. The only thing that this
-> argument does and runtime can not do is the managed_irq sub argument.
-> This sub argument is a story of its own and it is of quite limited for
-> me taste.
-> 
-> However, isolcpus= is marked as deprecated. I suggest to remove the
-> "Deprecated - use cpusets instead" note as the static configuration is
-> fine if the system is partitioned once never changed within its
-> lifetime.
-> Are there any objections and if so why needs this boot argument be
-> removed (assuming we have a runtime equivalent knob for managed_irq)?
+This is the hwmon driver for EMC1812/13/14/15/33 multichannel Low-Voltage
+Remote Diode Sensor Family. The chips in the family have one internal
+and different numbers of external channels, ranging from 1 (EMC1812) to
+4 channels (EMC1815).
+Reading diodes in anti-parallel connection is supported by EMC1814, EMC1815
+and EMC1833.
 
-No objections! Thanks.
+Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
+---
+Changes in v9:
+- improve the wording in the Documentation/hwmon/emc1812.rst file
+- add const to variables in the driver
+- initialize the EXT2_BETA_CONFIG only for the pats that support it
+- update the writeble regmap table to exclude read-only registers
+- Link to v8: https://lore.kernel.org/r/20260310-hw_mon-emc1812-v8-0-bc155727e0d2@microchip.com
 
-> 
-> Sebastian
+Changes in v8:
+- remove "address scan" from emc1812.rst documentation
+- change the second dimension of emc1812_limit_regs_low[][] to 2
+- clamp input value before doing math on it to avoid overflow
+- use rounding instead of truncation for 8 bits limit registers
+- fix misleading comment when HW ID is not recognized
+- Link to v7: https://lore.kernel.org/r/20260223-hw_mon-emc1812-v7-0-51e2676f4e20@microchip.com
 
+Changes in v7:
+- driver
+  - fix an overflow emc1812_set_hyst
+  - remove unused parameter in emc1812_set_temp
+- devicetree binding:
+  - remove unneeded restrictions not to bloating the binding
+- Link to v6: https://lore.kernel.org/r/20260212-hw_mon-emc1812-v6-0-e37e9b38d898@microchip.com
+
+Changes in v6:
+- driver
+  - fix an overflow when writing more then 191875 to limits stored on 8
+    bits register
+  - remove "i2c_set_clientdata" from probe
+  - fix discrepancy where writing 16ms and reading it back returns 15ms
+    at update interval
+  - skip setting the ideality factor for channels that are not available
+    on the device
+- devicetree binding:
+  - change the way interrupts are described/used
+  - add "microchip,enable-anti-parallel"
+  - rewrite "allOf" section to be more clear
+- Link to v5: https://lore.kernel.org/r/20260205-hw_mon-emc1812-v5-0-232835aefe8f@microchip.com
+
+Changes in v5:
+- fix calculation in emc1812_get_limit_temp 
+- use i2c_get_match_data cover the case when the driver is instantiated
+  via I2C ID table.
+- replace dev_info with dev_warn
+- remove some unnecessary truncation on 8 bits
+- remove clamping when reading the temerature with hyst
+- not change the conversion rate at probe time
+- use a generic define to remove duplicate channel_info entries
+- Link to v4: https://lore.kernel.org/r/20260127-hw_mon-emc1812-v4-0-6bf636b54847@microchip.com
+
+Changes in v4:
+- fix file permissions for read only properties
+- fix calculation when the limits are written
+- remove the temp_min_hyst because the part doesn't support it
+- Link to v3: https://lore.kernel.org/r/20251218-hw_mon-emc1812-v3-0-a123ada7b859@microchip.com
+
+Changes in v3:
+- remove mesages that are not helpfull
+- fix an issue related to NULL labels
+- fix sign/unsign calculation
+- replace E2BIG with EINVAL
+- use BIT() to create mask
+- Link to v2: https://lore.kernel.org/r/20251121-hw_mon-emc1812-v2-0-5b2070f8b778@microchip.com
+
+Changes in v2:
+- update the interrupt section from yaml file
+- update index.rst
+- remove fault condition from internal sensor
+- remove unused members from structures
+- update the driver to work on systems without device tree or
+  firmware nodes
+- add missing include files
+- make NULL labels to be not visible
+- corect sign/unsign calculations
+- corect possible underflow for limits
+- Link to v1: https://lore.kernel.org/r/20251029-hw_mon-emc1812-v1-0-be4fd8af016a@microchip.com
+
+---
+Marius Cristea (2):
+      dt-bindings: hwmon: temperature: add support for EMC1812
+      hwmon: temperature: add support for EMC1812
+
+ .../bindings/hwmon/microchip,emc1812.yaml          | 184 ++++
+ Documentation/hwmon/emc1812.rst                    |  67 ++
+ Documentation/hwmon/index.rst                      |   1 +
+ MAINTAINERS                                        |   8 +
+ drivers/hwmon/Kconfig                              |  11 +
+ drivers/hwmon/Makefile                             |   1 +
+ drivers/hwmon/emc1812.c                            | 965 +++++++++++++++++++++
+ 7 files changed, 1237 insertions(+)
+---
+base-commit: d2b2fea3503e5e12b2e28784152937e48bcca6ff
+change-id: 20251002-hw_mon-emc1812-f1b806487d10
+
+Best regards,
 -- 
-Frederic Weisbecker
-SUSE Labs
+Marius Cristea <marius.cristea@microchip.com>
+
 
