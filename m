@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-82373-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82374-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AEXvNFnoz2kG1wYAu9opvQ
-	(envelope-from <linux-doc+bounces-82373-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:18:33 +0200
+	id KHcmITfoz2kS1gYAu9opvQ
+	(envelope-from <linux-doc+bounces-82374-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:17:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70C313963D9
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:18:33 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4BA73963AD
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:17:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 51BC8310FD26
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 16:10:41 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 26403308FE47
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 16:10:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 65D303CD8CF;
-	Fri,  3 Apr 2026 16:09:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 176D63CD8B5;
+	Fri,  3 Apr 2026 16:09:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Hn4h7qIM"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Ain+qWEc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED1C53CD8B0
-	for <linux-doc@vger.kernel.org>; Fri,  3 Apr 2026 16:09:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E1813CFF60
+	for <linux-doc@vger.kernel.org>; Fri,  3 Apr 2026 16:09:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775232580; cv=none; b=WtozQuS40Og8X8xnuFN6QfhYmsrFz7LcXgi4V/2csnE6U4QQeEL25pzCZxAqR72USJ9J6ZT0pnkSL0qLfVlO8VStGZCKKGgKXh+jDGcXmKZO2MvFDxcUvC8vHCgNPTh19pxBV0ZbOcZM93HSa8NcjJfloeuXf22PK7BEbZ/EgXc=
+	t=1775232583; cv=none; b=VXcJmLWUhW2z3tkCdA1M0jYqqydRulHdaKaHfIOVmoHreIfn7LA7nWz8t+iAZa35tT7EiO+wcBaut0ZvpyXbC9/KWcDsXgHx+thPkk/uhANY82gQJKa7DYMmqZl8YM8LtH1+cy2HwlFI4Brf1IcfYQ2cMK9V809SjGxiXE615rc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775232580; c=relaxed/simple;
-	bh=wTTB6e/8ePxI86D4Nfy1cUgRHfcwns176A2TR63+Vjg=;
+	s=arc-20240116; t=1775232583; c=relaxed/simple;
+	bh=FUqMuwPe/VeYULAiVeahm1trZi1oXESB2z3mCxIRzWc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=PZ4d36iOoAToikK/RTLTSB47ZbebZhAMxloP83oQnDAEQVi543ucEg+YrcXLHgSmZBQnNOkwn4he6p/qOYfLUCOoi0ngqfGjHLOtTsAKzfhSwLapO5LjytGX7NO9Vt84lmI6N5yID/G9D9b+MibVsoeXp18ctxk3FloQPHLAQEU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Hn4h7qIM; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=Lhl3EJcw5YqWjdseg6NPTlt/PBaBfh9Jg8+29tin+RCX45M2FfNU20XhLCTSfnyQbmI9qkjApNfbUHftWdKHcnrn5eCdmB1N3y8ciqphR3jZ0EfVpdrfDibNiB6YrC7kt3m8FXrHKEJgT822ZYbsWjtURmnwcFAToCTxRmeuzyg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Ain+qWEc; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id AE6CB4E428D5;
-	Fri,  3 Apr 2026 16:09:37 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 5DDE3C59F65
+	for <linux-doc@vger.kernel.org>; Fri,  3 Apr 2026 16:10:12 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 7CE46603C1;
-	Fri,  3 Apr 2026 16:09:37 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3EDFF104500FB;
-	Fri,  3 Apr 2026 18:09:34 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 61187603C1;
+	Fri,  3 Apr 2026 16:09:40 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 2290110450102;
+	Fri,  3 Apr 2026 18:09:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1775232576; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1775232579; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=leC2dd2KClzTPcQ+8AI037xoM94Wj2JcMmNh8kB3Pi8=;
-	b=Hn4h7qIM4fJSHsGqMHx5JY8OqoBGLRKnqcJvlZopGP+HUvWSPk+5wKvKSgPr2E/5Uvg4Ax
-	Q8uAUayCOe7YAnuqfmI+o4y0gnSD5fIQwjE/aBOMa2Z9wqFpkPh2gTavoc3kCqYJd6EkPD
-	Su0lLda10KhbJ6wQmZYR/tLoQIWeuh+JVfekdpPK6G1a7cjbRwaVv7vloQ+6xZK+cPaxOE
-	pQN21+xK94Vw9DiJJsA0rXZ9/An1Hy6KNpClW3H0el0SQ5NzDnULNOqttbESydTRAxYdB0
-	5YhDudGOqNJSuXSGhWOjRQxBcOR3Qz0CjwBdgfyyqS9zsC3IPF+Fsu9zHhUq3w==
+	bh=p/VrR2zWyEuP7FnbthxkSprPO27GGH7TRyCzje2SKqM=;
+	b=Ain+qWEcyhuuX+PCskNbms0GFrH6Fa6gXs37+OO6mzb0XsoVcZZYNGydKLDbaaGKkPP/g4
+	ml9KZiGns3hIF3CEpI0jpRV9JIxRA7qvByxPx9Mwy/o5zIGdwNEF2SBM0QrfluQZCt7Ple
+	xE/pivzaNzOiN8Fp2h4zEvg3NsVRbPk/cRxcTXy3i2bfYQv7/m7Vu3ailzz/VeVq6plx4Y
+	MplF8QC7Ol5LHj6N+2jgfWmqwHvwB3rLeNqVdXyvD17oJx6MDaD/MqjHBX2mArmJnYm6gQ
+	i0IxqsIEesk+pyNXnm6kkAo9Rlz4bPscweTG18Wsz0uH6aHIaDZkJQYXIPZlAw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 03 Apr 2026 18:09:19 +0200
-Subject: [PATCH v4 01/27] mtd: spi-nor: Drop duplicate Kconfig dependency
+Date: Fri, 03 Apr 2026 18:09:20 +0200
+Subject: [PATCH v4 02/27] mtd: spi-nor: debugfs: Fix the flags list
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-1-833dab5e7288@bootlin.com>
+Message-Id: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-2-833dab5e7288@bootlin.com>
 References: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-0-833dab5e7288@bootlin.com>
 In-Reply-To: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-0-833dab5e7288@bootlin.com>
 To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
@@ -79,12 +79,12 @@ X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82373-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82374-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -97,39 +97,40 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:dkim,bootlin.com:email,bootlin.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 70C313963D9
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,bootlin.com:dkim,bootlin.com:email,bootlin.com:mid]
+X-Rspamd-Queue-Id: E4BA73963AD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-I do not think the MTD dependency is needed twice. This is likely a
-duplicate coming from a former rebase when the spi-nor core got cleaned
-up a while ago. Remove the extra line.
+As mentioned above the spi_nor_option_flags enumeration in core.h, this
+list should be kept in sync with the one in the core.
 
-Fixes: b35b9a10362d ("mtd: spi-nor: Move m25p80 code in spi-nor.c")
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Add the missing flag.
+
+Fixes: 6a42bc97ccda ("mtd: spi-nor: core: Allow specifying the byte order in Octal DTR mode")
 Reviewed-by: Michael Walle <mwalle@kernel.org>
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/spi-nor/Kconfig | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/mtd/spi-nor/debugfs.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/mtd/spi-nor/Kconfig b/drivers/mtd/spi-nor/Kconfig
-index 24cd25de2b8b..fd05a24d64a9 100644
---- a/drivers/mtd/spi-nor/Kconfig
-+++ b/drivers/mtd/spi-nor/Kconfig
-@@ -1,7 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0-only
- menuconfig MTD_SPI_NOR
- 	tristate "SPI NOR device support"
--	depends on MTD
- 	depends on MTD && SPI_MASTER
- 	select SPI_MEM
- 	help
+diff --git a/drivers/mtd/spi-nor/debugfs.c b/drivers/mtd/spi-nor/debugfs.c
+index fa6956144d2e..d700e0b27182 100644
+--- a/drivers/mtd/spi-nor/debugfs.c
++++ b/drivers/mtd/spi-nor/debugfs.c
+@@ -28,6 +28,7 @@ static const char *const snor_f_names[] = {
+ 	SNOR_F_NAME(RWW),
+ 	SNOR_F_NAME(ECC),
+ 	SNOR_F_NAME(NO_WP),
++	SNOR_F_NAME(SWAP16),
+ };
+ #undef SNOR_F_NAME
+ 
 
 -- 
 2.53.0
