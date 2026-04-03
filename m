@@ -1,60 +1,59 @@
-Return-Path: <linux-doc+bounces-82386-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82387-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SJo7N2Hrz2lF1wYAu9opvQ
-	(envelope-from <linux-doc+bounces-82386-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:31:29 +0200
+	id YK50GPDpz2kG1wYAu9opvQ
+	(envelope-from <linux-doc+bounces-82387-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:25:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id E66893966BE
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:31:28 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5438A396574
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 18:25:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6709A30A5B2F
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 16:12:40 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 99DC030A8594
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 16:12:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 05ED23D0916;
-	Fri,  3 Apr 2026 16:10:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00EBB3D7D6C;
+	Fri,  3 Apr 2026 16:10:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="POaCsvSW"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="eDOTYLgi"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A084E3D75B7
-	for <linux-doc@vger.kernel.org>; Fri,  3 Apr 2026 16:10:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94DBC3D0919
+	for <linux-doc@vger.kernel.org>; Fri,  3 Apr 2026 16:10:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775232613; cv=none; b=QQB8s/n/w1+WEEkWifyjVi8ha0kUzcZEMfbMYkq16qob/snvsCytvI77klnuby20KtQygQhD8zKlhtyOkAUf2UqYgRUO+O0J2XfTTxOzqNAu4Kzv5pYeR9iPmnQSrkjBkZtiL8lTEd5MfY6OnXJDBpSUBYF0jMIv1KHBiNmmyBQ=
+	t=1775232615; cv=none; b=EBqcuczx9Zwg1a5g0c7mrcPYZMpoV2QfpyTobvOMK2OccyumEt8Pe+z4tTpJ4wlDRcGPv0kCFo8px3WDQEwQcEWeCMXvx0rR1C96a2rh22HM5AXK8vvw39UyXWpWV254oH4iMXUwI5lZ1rifKDukG5GP0pDcWRfZU3XEVpWmaFw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775232613; c=relaxed/simple;
-	bh=2EFf5xOFrTZzA3C6TJkuzrE465Ubjd3W8p3pWLusQN4=;
+	s=arc-20240116; t=1775232615; c=relaxed/simple;
+	bh=3W4mxwLiGIBZA6m3fADY2ZRcO48cfQ+97KUwrdQ6Sqs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Pvg4EXqlmsqbvML2yilU3Z3DHdQDfrK41VAEFDKgPQcywkXR/4ymEFZpjf7EuN43dpSxpSMAacKbmxWGSXbcnNyA9gwN6catZdC+gvI2JHB9IKAJ+DHK5uhptPcKs9H2KiaS/OchjFouFexjBj9RaxB7ybhvGCWabFr+ERBP6r4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=POaCsvSW; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=KOsu3/4xESNAPy4KaZmjJhocbWKoydCy4UWwhCqtLB+gXj+CECKcFGAeaaSPQ1uW+774FKII5jUgnWtxIUAcnqY6yY1l3+KdUTsTRgrt6K3d92vLkOF63L5vwM6JPynA/Qh+VHjq2OYRYdXZh6558Kt6AMo4+FHKsshHkEcJ0rQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=eDOTYLgi; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 6B1234E428D5;
-	Fri,  3 Apr 2026 16:10:11 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 7CB7D1A312C;
+	Fri,  3 Apr 2026 16:10:13 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 3FBD3603C1;
-	Fri,  3 Apr 2026 16:10:11 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3F13010450102;
-	Fri,  3 Apr 2026 18:10:08 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 531D2603C1;
+	Fri,  3 Apr 2026 16:10:13 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DF6DF10450103;
+	Fri,  3 Apr 2026 18:10:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1775232610; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1775232612; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=myF1jFvrCgWbnH0NLIBXbT8w17K7kgr7HnwXrOW3SAM=;
-	b=POaCsvSWv8pvL4ZxIPvr/kU4sumw6OyoWfrbwOe2J6TLuAhC7PwCME9zGOGgU4i0L+K5Lk
-	hZGbjToX16mDPh9uU4OC230WtiySEsFuDRMLn/o1jAZSGJI13DL2oszZJkrsU2/VBEkaK5
-	Xp2+He6lV21tLxJlBGh5y4CXDQ7vQ4qdDsrj3e0h22MyxToVnxm2oD2t8rRtFLWFYeXKBo
-	3lSgc5KNJTfsVEl1OL/Z+L07d+ATfu/KayA8SiP3Ez6SY6yR9sPAK/PQbzJCoyPH+3ZBc2
-	IaNnxR3HGT+yg/JilhioanY+yf1/kTtCOM77/hHFhcVfQdSWVJiLxCmXB359Bg==
+	bh=xR38gyrQC5XhhjYq85zVZxA7ePkj9xFcfqojI3JaBuI=;
+	b=eDOTYLgib43BSK2VON0gYT0KXJz2WSOkmHGSSDQ2r/2MGo3XMbch10FjMtO65399sOrHM7
+	z6hPRz67qFQ85k+pkDOBtC1NCUugEtFbRdafrXG7y8IKefi7tsbO639VCKeecvfxQwJJ0Y
+	k2ZkadLgedtepXWbg6YQO3gqvyWbfmZ/k2hVMjmNwcYzorQhxcVIvgQ5bSpxq4knllLkbF
+	9nBQRO1KbIzuG5Jn3kXK1PAnaAVxSf4lDKmr1kUoacBQYFLHtIjsa9fMZwop7PYyNG1PMq
+	GI4f88DJfELXfxthQOOtfH18boC62941FnPXsRwcEp2Y7//ZAR4oJ26vblMSug==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 03 Apr 2026 18:09:32 +0200
-Subject: [PATCH v4 14/27] mtd: spi-nor: swp: Simplify checking the
- locked/unlocked range
+Date: Fri, 03 Apr 2026 18:09:33 +0200
+Subject: [PATCH v4 15/27] mtd: spi-nor: swp: Cosmetic changes
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -63,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-14-833dab5e7288@bootlin.com>
+Message-Id: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-15-833dab5e7288@bootlin.com>
 References: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-0-833dab5e7288@bootlin.com>
 In-Reply-To: <20260403-winbond-v6-18-rc1-spi-nor-swp-v4-0-833dab5e7288@bootlin.com>
 To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
@@ -80,12 +79,12 @@ X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82386-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82387-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -98,97 +97,89 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:dkim,bootlin.com:email,bootlin.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: E66893966BE
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,bootlin.com:dkim,bootlin.com:email,bootlin.com:mid]
+X-Rspamd-Queue-Id: 5438A396574
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-In both the locking/unlocking steps, at the end we verify whether we do
-not lock/unlock more than requested (in which case an error must be
-returned).
-
-While being possible to do that with very simple mask comparisons, it
-does not scale when adding extra locking features such as the CMP
-possibility. In order to make these checks slightly easier to read and
-more future proof, use existing helpers to read the (future) status
-register, extract the covered range, and compare it with very usual
-algebric comparisons.
+As a final preparation step for the introduction of CMP support, make
+a few more cosmetic changes to simplify the reading of the diff when
+adding the CMP feature. In particular, define "min_prot_len" earlier as
+it will be reused and move the definition of the "ret" variable at the
+end of the stack just because it looks better.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/spi-nor/swp.c | 25 +++++++++++++++++--------
- 1 file changed, 17 insertions(+), 8 deletions(-)
+ drivers/mtd/spi-nor/swp.c | 19 +++++++------------
+ 1 file changed, 7 insertions(+), 12 deletions(-)
 
 diff --git a/drivers/mtd/spi-nor/swp.c b/drivers/mtd/spi-nor/swp.c
-index e2e423b20989..c45a9ddd5788 100644
+index c45a9ddd5788..c3dbc8832025 100644
 --- a/drivers/mtd/spi-nor/swp.c
 +++ b/drivers/mtd/spi-nor/swp.c
-@@ -198,7 +198,8 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	u64 min_prot_len;
- 	int ret;
+@@ -195,14 +195,14 @@ static int spi_nor_build_sr(struct spi_nor *nor, const u8 *old_sr, u8 *new_sr,
+  */
+ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
+ {
+-	u64 min_prot_len;
+-	int ret;
++	u64 min_prot_len = spi_nor_get_min_prot_length_sr(nor);
  	u8 status_old[1] = {}, status_new[1] = {};
--	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
-+	loff_t ofs_old, ofs_new;
-+	u64 len_old, len_new;
+ 	loff_t ofs_old, ofs_new;
+ 	u64 len_old, len_new;
  	loff_t lock_len;
  	bool can_be_top = true, can_be_bottom = nor->flags & SNOR_F_HAS_SR_TB;
  	bool use_top;
-@@ -246,10 +247,6 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
++	int ret;
+ 	u8 pow;
+ 
+ 	ret = spi_nor_read_sr(nor, nor->bouncebuf);
+@@ -236,12 +236,10 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
+ 	else
+ 		lock_len = ofs + len;
+ 
+-	if (lock_len == nor->params->size) {
++	if (lock_len == nor->params->size)
+ 		pow = (nor->flags & SNOR_F_HAS_4BIT_BP) ? GENMASK(3, 0) : GENMASK(2, 0);
+-	} else {
+-		min_prot_len = spi_nor_get_min_prot_length_sr(nor);
++	else
+ 		pow = ilog2(lock_len) - ilog2(min_prot_len) + 1;
+-	}
+ 
+ 	ret = spi_nor_build_sr(nor, status_old, status_new, pow, use_top);
  	if (ret)
- 		return ret;
- 
--	/* Don't "lock" with no region! */
--	if (!(status_new[0] & bp_mask))
--		return -EINVAL;
--
- 	/*
- 	 * Disallow further writes if WP# pin is neither left floating nor
- 	 * wrongly tied to GND (that includes internal pull-downs).
-@@ -262,8 +259,16 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	if (status_new[0] == status_old[0])
- 		return 0;
- 
-+	spi_nor_get_locked_range_sr(nor, status_old, &ofs_old, &len_old);
-+	spi_nor_get_locked_range_sr(nor, status_new, &ofs_new, &len_new);
-+
-+	/* Don't "lock" with no region! */
-+	if (!len_new)
-+		return -EINVAL;
-+
- 	/* Only modify protection if it will not unlock other areas */
--	if ((status_new[0] & bp_mask) < (status_old[0] & bp_mask))
-+	if (len_old &&
-+	    (ofs_old < ofs_new || (ofs_new + len_new) < (ofs_old + len_old)))
- 		return -EINVAL;
- 
- 	return spi_nor_write_sr_and_check(nor, status_new[0]);
-@@ -279,7 +284,8 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	u64 min_prot_len;
+@@ -281,7 +279,7 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
+  */
+ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
+ {
+-	u64 min_prot_len;
++	u64 min_prot_len = spi_nor_get_min_prot_length_sr(nor);
  	int ret;
  	u8 status_old[1], status_new[1];
--	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
-+	loff_t ofs_old, ofs_new;
-+	u64 len_old, len_new;
- 	loff_t lock_len;
- 	bool can_be_top = true, can_be_bottom = nor->flags & SNOR_F_HAS_SR_TB;
- 	bool use_top;
-@@ -344,7 +350,10 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
- 		return 0;
+ 	loff_t ofs_old, ofs_new;
+@@ -329,14 +327,11 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
+ 	else
+ 		lock_len = ofs;
  
- 	/* Only modify protection if it will not lock other areas */
--	if ((status_new[0] & bp_mask) > (status_old[0] & bp_mask))
-+	spi_nor_get_locked_range_sr(nor, status_old, &ofs_old, &len_old);
-+	spi_nor_get_locked_range_sr(nor, status_new, &ofs_new, &len_new);
-+	if (len_old && len_new &&
-+	    (ofs_new < ofs_old || (ofs_old + len_old) < (ofs_new + len_new)))
- 		return -EINVAL;
+-	if (lock_len == 0) {
++	if (lock_len == 0)
+ 		pow = 0; /* fully unlocked */
+-	} else {
+-		min_prot_len = spi_nor_get_min_prot_length_sr(nor);
++	else
+ 		pow = ilog2(lock_len) - ilog2(min_prot_len) + 1;
  
- 	return spi_nor_write_sr_and_check(nor, status_new[0]);
+-	}
+-
+ 	ret = spi_nor_build_sr(nor, status_old, status_new, pow, use_top);
+ 	if (ret)
+ 		return ret;
 
 -- 
 2.53.0
