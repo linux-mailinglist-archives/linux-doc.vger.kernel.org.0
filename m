@@ -1,69 +1,102 @@
-Return-Path: <linux-doc+bounces-82356-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82358-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uElDAc62z2l1zgYAu9opvQ
-	(envelope-from <linux-doc+bounces-82356-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 14:47:10 +0200
+	id iM7jEBK7z2kd0AYAu9opvQ
+	(envelope-from <linux-doc+bounces-82358-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 15:05:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 615C9394329
-	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 14:47:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A49983944D3
+	for <lists+linux-doc@lfdr.de>; Fri, 03 Apr 2026 15:05:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 858C5305CE04
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 12:40:17 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E17BC3016008
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Apr 2026 13:05:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 029C7395D84;
-	Fri,  3 Apr 2026 12:40:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B13A37C93C;
+	Fri,  3 Apr 2026 13:05:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b="dNzhIu1s"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="O5ke51P+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fadhgIFl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61FFB38C2B9;
-	Fri,  3 Apr 2026 12:40:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=68.232.154.123
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E70CA37AA81
+	for <linux-doc@vger.kernel.org>; Fri,  3 Apr 2026 13:05:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775220011; cv=none; b=fP2ukUnMXdFy+ctCmvN22opYEgBM9baVecDKXGgrtZhP1oamJdIjkFPy9eQwZn2ks5PEFWstV2/HIHLVmTnLv1cbphM/m5hDzxXvxaFNvLakTd5YaMvhHfzMsEpLi9YmKS2m2cJLocTT2nM4sfH8RPuy83oV+OEXYQ8FFTUQVEc=
+	t=1775221515; cv=none; b=l/hf5R84spmMClzJk3RjwN5jIT/DWWrAcJIWwsJ1kt4vg9GugZXSGIPJjDZue9TUBpo60aCbjN78TNo7Ql6J3/cvuEreXP5VySMjNBVrcXm+1boQ799CWxohrtpcF3GI3AgxyVgZMfcl9pQ3KzCFRqmneZb6sbX2qkC6qlaAUQ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775220011; c=relaxed/simple;
-	bh=Uagp4VvIFiqidMJZWZH6zFb61DYYNEcmAjEPYz4urZ0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=B8qUCwbnwlQn8yyOoFu2R/mywgGFSnsjxkomMjyjpmgbg19i8wkv2TjNGw754H3ZIOAorVP1gYVtHW3Tl3kB2lo6tUNoxwqCbkmRmaHh4h0+2XzutVJdLjAY3xvHqmqt1v9NJmUVtyZ9dN+YpFnVh/sDACppuzDILG82jjyhC/o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com; spf=pass smtp.mailfrom=microchip.com; dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.b=dNzhIu1s; arc=none smtp.client-ip=68.232.154.123
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
-  t=1775220009; x=1806756009;
-  h=from:date:subject:mime-version:content-transfer-encoding:
-   message-id:references:in-reply-to:to:cc;
-  bh=Uagp4VvIFiqidMJZWZH6zFb61DYYNEcmAjEPYz4urZ0=;
-  b=dNzhIu1sMC8Yk5cHGA/7cpdF21wt181dwSuoaDmpAgck4D6/O5AW8w8v
-   kkyDdt4xCC9T9KbH9P2YZix/ukuBNCWE5zgPQ40hBsmgl7PaZa2RxUDW1
-   z7BKcIbe9SHemgZ1eIRjCrPefLfLNAPJyDA5k6xNws9ByfHAPdus4DiZa
-   Pj9QwoUqcScXFj/10EuAi3o2QIh9EXkOJHUCcxP38T9jfH/2kmkfboLhi
-   liOTAvVht8d841jQbITSaHdn9+59Wj4WeKTkOHCayFtEnpg7r+Oqau75D
-   0fraBmA0JoN/RWxwZHbOBs+6a7fHp7OsCTFB4VLknXVxIJgPooOP6I+dR
-   Q==;
-X-CSE-ConnectionGUID: PcdsGl/1S6WJOtT9miKKBg==
-X-CSE-MsgGUID: sAy1WSnsSvurjutCG+NFfQ==
-X-IronPort-AV: E=Sophos;i="6.23,157,1770620400"; 
-   d="scan'208";a="222894441"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
-  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Apr 2026 05:40:06 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
- chn-vm-ex3.mchp-main.com (10.10.87.32) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.35; Fri, 3 Apr 2026 05:39:55 -0700
-Received: from marius-VM.mshome.net (10.10.85.11) by chn-vm-ex03.mchp-main.com
- (10.10.85.151) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
- Transport; Fri, 3 Apr 2026 05:39:53 -0700
-From: Marius Cristea <marius.cristea@microchip.com>
-Date: Fri, 3 Apr 2026 15:39:38 +0300
-Subject: [PATCH v9 2/2] hwmon: temperature: add support for EMC1812
+	s=arc-20240116; t=1775221515; c=relaxed/simple;
+	bh=UI0xjgQJRvAoa59/OcrNBMSxM4PXDer91jntNEu7BgE=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=npbDlQBfISqv0ltE4wCvYK9XtKFLoQyyNSPIoIbUGEQ+mBtStDURq8B3utbI0ZkDsLbSYb+OhaSgyofiUydpQxkhus1Oj75Z/9c9+Via2prmwI5a53LpOsEbSmJDYZVrocJgUqfLHGaeN6VmX5n3Rhi0xKTNvN20imquqafLqY0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=O5ke51P+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fadhgIFl; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 633B2QKp982191
+	for <linux-doc@vger.kernel.org>; Fri, 3 Apr 2026 13:05:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=hzbNjz7s83d1n/RewTAsaz
+	iotGeaKoaGJzKT+pCY3f4=; b=O5ke51P+/Zwt8BcUFQQ/YqyKoQC1cgPsQ+CQtp
+	d0iRvRDz15mKBrwVNczVrfUlFuja2DTWptkUgS5M0Ksr/5qeDNSv5ZY0muRjAgLx
+	fMF8E1DwOgn52N0vQWxurbvMdahRLk18O/PfVYBj+AwPvfsP8yA0ONwUhqU1eeWR
+	PXEYg7efSP9DUbk3c2N1c4rnNuBXXqEcT3qMgUtZojeVT5Svdna6fL/dv2cxH3Sn
+	s8qfv2KM4+HAqucoVaIP9tgxEp3mqwAVcpxcS0Nam83GOMZG7uRE1cbL8+r4ha6u
+	XiaVVljxpX9jXz+8RH07+5jEzEPAnNYDg3SPKU3JgPQg2Fag==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d9tupujvb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Fri, 03 Apr 2026 13:05:10 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-953c062b2bdso3027611241.2
+        for <linux-doc@vger.kernel.org>; Fri, 03 Apr 2026 06:05:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1775221510; x=1775826310; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hzbNjz7s83d1n/RewTAsaziotGeaKoaGJzKT+pCY3f4=;
+        b=fadhgIFllBk3OYVJ2/grB1Bg0z66R7MNrvjgXoAXRw54zH5gA3q9wl34gH9CdXaeZQ
+         Ks92oPkGkRel3Q2leIYSLKvIibWbxFJK7MW6hsz9MKtkp1p3wtOVkQz2KVO68xcjLb/r
+         84PwmiHO54NUlLQ6PpJp1fPsYdJqBaIAFNrTTGsVKbXR0vE+t4fSpioWAm1FJSqn72gi
+         g612P2UOYrBkDajnyyjGTfnI951PC73ZVkb7pf/xaTz/eMF4d1chULIFfYx6XSHmCOw/
+         Y0EsTLOHnaimdzl/IvdmsiLRzungQB7HbzF1X+4qFU56jC4/67LxXoUUwhHdngmq1s0N
+         6rvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775221510; x=1775826310;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hzbNjz7s83d1n/RewTAsaziotGeaKoaGJzKT+pCY3f4=;
+        b=B3nbnGyQPfctR7EMMiwaJ++2IF3zX1YXQj8WpuyWAwQP5JHls9axfUzJFUhlmWFloJ
+         9l6EEZBm1aHWCH/0sO8m6OLZQA1ZnJ6YODgUIaMKG9/Kk/CVl/of2NrJHYZl6hX8NnV7
+         eNh6wmnpnT2LAH1cjCcbEBLp6Wm1jQGX97AtmvPSjPckjg2GTnXSuYtlQcj8eZyHPHxS
+         29ZJC4vthX6cCYEZWt7nDdGh7PBqVMicbcal6tyAY8HzZL3rsA0bfsYi+D3Pz3GgsVom
+         A4d/xdiXWytyDKKJtE5ucXb2iqraVp9Uk0J85b/c9CqGnd7UhS5wHF8Iv9KyCyvuzhNc
+         kn0Q==
+X-Forwarded-Encrypted: i=1; AJvYcCU8SWoQhevTY2bZ33Nsc5+yAimHu8nXLJe5Ds52ecKEwJJ24VBW3idx/vhJawbmdDGph3hfcivvK4M=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxh0nzJ4aiG3uZVfNIcHbMHsxU0JvQEeSMuzmebe2vfA/6s1Cst
+	P33SD81mlG2INWK4Pp8SR3MP6808XmkZJhbzrjhghY/Q6K8pwwxYBhw4yZ6BJJs4KNhhmmhMlQ0
+	WTKuYaAflKDf4bluiJBdvvr0HWKAsNWojqJWgClZSbbEUWqTYJxeRYkkEd80/LFA=
+X-Gm-Gg: AeBDiesmhNDNe3UO0taKLKhKad/0fzPPCo2yIy8rjVfj/tLVRCsdgcckGpsPGEykHT6
+	Bs87fWh+1Uzod/T6G89BynA7wVPfe0oLZuM9u60TeWWr8cFwxS19LQfcmnVfInY6IAAanKyR769
+	6AkcHEEuUUY65o9v49dTDtZ2cbTVYnuNqA+xPsf3s9zQHWsajsosxqzTSZdEmm0f/OdFzPDnLNj
+	C/g3enOs9Jx4kUK1x/vEUf35ANs+6I2Q5+QeDYUPNkHHZTXIZs/zRXWErmhvRn4r3ecAtOoiw01
+	JvzES7cOMf1DWJHwFwL4XqWHcib4UoMGnZfyDDlyUq70w9z7jU5gqIapZWG6Qm/AKJL7KJxoOSu
+	Rbui3Kj+QU9b43tUFGvaddw5Xa2BT58YDS4SW3UI7gDdE7zG6S1k=
+X-Received: by 2002:a05:6102:5cc1:b0:602:813c:1b24 with SMTP id ada2fe7eead31-605a4d35185mr1252611137.7.1775221509685;
+        Fri, 03 Apr 2026 06:05:09 -0700 (PDT)
+X-Received: by 2002:a05:6102:5cc1:b0:602:813c:1b24 with SMTP id ada2fe7eead31-605a4d35185mr1252551137.7.1775221509125;
+        Fri, 03 Apr 2026 06:05:09 -0700 (PDT)
+Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:129d:59e8:f7c9:47ca])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48899e491afsm18712055e9.17.2026.04.03.06.05.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Apr 2026 06:05:08 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Date: Fri, 03 Apr 2026 15:04:55 +0200
+Subject: [PATCH v2] Documentation: gpio: update the preferred method for
+ using software node lookup
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -71,1183 +104,264 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-ID: <20260403-hw_mon-emc1812-v9-2-1a798f31cf2e@microchip.com>
-References: <20260403-hw_mon-emc1812-v9-0-1a798f31cf2e@microchip.com>
-In-Reply-To: <20260403-hw_mon-emc1812-v9-0-1a798f31cf2e@microchip.com>
-To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-CC: <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, Marius Cristea
-	<marius.cristea@microchip.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260403-doc-gpio-swnodes-v2-1-c705f5897b80@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAPa6z2kC/32NTQ6CMBCFr0JmbQltlVBX3sOwgP7AJMJgR1FDe
+ ncrB3Dzku8l73sbsI/oGc7FBtGvyEhzBnUowI7dPHiBLjOoStWV1lI4smJYkAS/ZnKeRbDauXA
+ yfeMs5NkSfcD3rry2mUfkB8XP/rDKX/tHtkohhQ7N0aq6Mcb0F2Iu78/uZmmayhzQppS+f2QYX
+ 7cAAAA=
+X-Change-ID: 20260331-doc-gpio-swnodes-fc3ddf59b8dc
+To: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=36335;
- i=marius.cristea@microchip.com; h=from:subject:message-id;
- bh=Uagp4VvIFiqidMJZWZH6zFb61DYYNEcmAjEPYz4urZ0=;
- b=owGbwMvMwCW2tbSTZa7u0x2Mp9WSGDLPbxVkFSxf6qv3M1E26fGJEr6cP+cKRYOLwlKdtp6/V
- /DbuMCmo5SFQYyLQVZMkWXFWz+1qrUfLiuJZerAzGFlAhnCwMUpABPpPcbwv0hQ9UqhoPPFgo5/
- 06fVMSnsTJqQI9SR9Gn/b+F30TkrvjIy/Ljd9/p/T8a8ZN37t64dPbR6Yslme6UJ/6e6VBldO3R
- GiQ8A
-X-Developer-Key: i=marius.cristea@microchip.com; a=openpgp;
- fpr=E32F8D4396E72E463E8CCD91446DE0ABD9140C3E
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7564;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=UI0xjgQJRvAoa59/OcrNBMSxM4PXDer91jntNEu7BgE=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBpz7r+0nNvSKseR5LPXVC3YVpQBmBpVV5rZuqgI
+ Zo6FkrMuLCJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCac+6/gAKCRAFnS7L/zaE
+ w/y3EACaUFBplHvkdlLuWxQQEuRJPLQQJtYokvcsnLcpPAW9rTd83B1N8zvYAy6Ge0Qmjkr+Bkn
+ 4qE92WreU3dtJvQCBHpk+B+GgHrqCOdqEQtJzh6imbwSnQOkvNGlWmtpmnd5BJOQiXq2dJUdAkK
+ ZcSh8mZ7K/iOvt3oBvhZUhDJlvE5P2eNs/OrBw6ktODR18t1L8b7uG/i4Jge/IJxEuaUZ6MJToF
+ epYE4iOBRsRi29crVT6BLE7H/4Y8+/WCYFisSgQkiZL8Hjo0KqRdHFc0PZrRSOyyuwWJeyOL3xc
+ VQ6N2c06mqN+jFnaZzo/7EEmlbau0szidOjse8wkteszva7hUJSk/wqqh81Es6Zjv3acAc5OJDR
+ w9lMG8/S/dIQorMaFk/yU6jnywKgNDN2qLOI1mvupaZZzgUoRbKOAIXfTHdlkSzWsnDVF5JD0vY
+ fJPyivTbCc5fLD7b+OnpbnV5FwweOhrN/VVioxDeK5dFDsniYUCk875OWmAgqyg0g++dGiXIaml
+ Mfs9b9P8gfbDJXDB8iZXKyfELH2KE5Flbo/5HlUiqQ3Pz/2W06s2xp5N1A8Q1ws5CLTIrZQDFW7
+ f7oFVUnnrg+8jS4UwYygSQLyGTv0xqu8s1Tf7tdJ1gy6GeUGNCisOXaCiAV5U1/+iZ9ZB2TEP1B
+ iq+7MXtTdvp7UVQ==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAzMDExNiBTYWx0ZWRfX81ANNBYIOkIl
+ GLqy/9dUkW/0Loskk7XQScK6liPMiiP3lK9s1DFyfiHDRFFZ72HfAtZMq198zUPmB6CUtRqbKZn
+ vWejNZJk5u08el+3xHCcQKCpvx3i4GED3wzxgW77CX4XLzmueIecEifd7FbVNVdWkZB6bbYG2Di
+ mFUn3a4QJUoouLHe7C2DWmyP1R0t9U4cdztHK9c5kc/VZt8eh5R9zgzdYeGC4Wa4cAXH/jco46E
+ V3tqXcx/+5vjJyVBkfW4Tjv52EgeStGXENxvCN+GfdKzHZheAl5buZ5iHWwL4hHxMZz9jmUjqa+
+ oXdUHr51sBTH/namz5Ilp9HxvtRVfGBdFHJQdMDEquFsOu/7cuMTjYukoin7oW5TCjtibdfGci5
+ qsMEGX+eh+JzBP0QWYZnftf8OR57Zg1iwvz1XSvgWDrcXwFmjJA+BUPLFY91tm0ugUv0ddMP0Y/
+ 0SoI9Uy7tCBW4wU9KGA==
+X-Proofpoint-ORIG-GUID: 6DWpBBFuoi8aNEPEVTUCfX4ov9u6UTFK
+X-Proofpoint-GUID: 6DWpBBFuoi8aNEPEVTUCfX4ov9u6UTFK
+X-Authority-Analysis: v=2.4 cv=DZ0aa/tW c=1 sm=1 tr=0 ts=69cfbb06 cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=VHV1bxSRZQlKidfD:21 a=xqWC_Br6kY4A:10
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=jsnql4ADa7X_hVeABskA:9 a=QEXdDO2ut3YA:10
+ a=o1xkdb1NAhiiM49bd1HK:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-03_04,2026-04-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
+ adultscore=0 malwarescore=0 clxscore=1015 spamscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604030116
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[microchip.com,reject];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[microchip.com:s=mchp];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[microchip.com:+];
+	FREEMAIL_TO(0.00)[kernel.org,lwn.net,linuxfoundation.org,gmail.com];
+	TAGGED_FROM(0.00)[bounces-82358-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82356-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[msgid.link:url,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,oss.qualcomm.com:dkim,oss.qualcomm.com:mid];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[marius.cristea@microchip.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[bartosz.golaszewski@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,microchip.com:dkim,microchip.com:mid,microchip.com:email,microchip.com:url]
-X-Rspamd-Queue-Id: 615C9394329
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: A49983944D3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This is the hwmon driver for Microchip EMC1812/13/14/15/33
-Multichannel Low-Voltage Remote Diode Sensor Family.
+In its current version, the manual for converting of board files from
+using GPIO lookup tables to software nodes recommends leaving the
+software nodes representing GPIO controllers as "free-floating", not
+attached objects and relying on the matching of their names against the
+GPIO controller's name. This is an abuse of the software node API and
+makes it impossible to create fw_devlinks between GPIO suppliers and
+consumers in this case. We want to remove this behavior from GPIOLIB and
+to this end, work on converting all existing drivers to using "attached"
+software nodes.
 
-EMC1812 has one external remote temperature monitoring channel.
-EMC1813 has two external remote temperature monitoring channels.
-EMC1814 has three external remote temperature monitoring channels and
-channels 2 and 3 support anti parallel diode.
-EMC1815 has four external remote temperature monitoring channels and
-channels 1/2  and 3/4 support anti parallel diode.
-EMC1833 has two external remote temperature monitoring channels and
-channels 1 and 2 support anti parallel diode.
+Except for a few corner-cases where board files define consumers
+depending on GPIO controllers described in firmware - where we need to
+reference a real firmware node from a software node - which requires a
+more complex approach, most board files can easily be converted to using
+propert firmware node lookup.
 
-Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
+Update the documentation to recommend attaching the GPIO chip's software
+nodes to the actual platform devices and show how to do it.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
- Documentation/hwmon/emc1812.rst |  67 +++
- Documentation/hwmon/index.rst   |   1 +
- MAINTAINERS                     |   2 +
- drivers/hwmon/Kconfig           |  11 +
- drivers/hwmon/Makefile          |   1 +
- drivers/hwmon/emc1812.c         | 965 ++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 1047 insertions(+)
+Changes in v2:
+- Use the new .swnode field of struct platform_device_info in examples
+- Fix whitespaces
+- Link to v1: https://patch.msgid.link/20260331-doc-gpio-swnodes-v1-1-3f84c268999b@oss.qualcomm.com
+---
+ Documentation/driver-api/gpio/board.rst         | 20 +++++++++++---
+ Documentation/driver-api/gpio/legacy-boards.rst | 36 ++++++++++++++++++-------
+ 2 files changed, 44 insertions(+), 12 deletions(-)
 
-diff --git a/Documentation/hwmon/emc1812.rst b/Documentation/hwmon/emc1812.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..0b4fbcaaea71a42ef4db1be25182ab363a136a5d
---- /dev/null
-+++ b/Documentation/hwmon/emc1812.rst
-@@ -0,0 +1,67 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Kernel driver emc1812
-+=====================
-+
-+Supported chips:
-+
-+  * Microchip EMC1812, EMC1813, EMC1814, EMC1815, EMC1833
-+
-+    Prefix: 'emc1812'
-+
-+    Datasheets:
-+
-+	- https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/EMC1812-3-4-5-33-Data-Sheet-DS20005751.pdf
-+
-+Author:
-+    Marius Cristea <marius.cristea@microchip.com>
-+
-+
-+Description
-+-----------
-+
-+The Microchip EMC181x/33 chips contain up to 4 remote temperature sensors
-+and one internal.
-+- The EMC1812 is a single channel remote temperature sensor.
-+- The EMC1813 and EMC1833 are dual channel remote temperature sensor. The
-+remote channels for this selection of devices can support substrate diodes,
-+discrete diode-connected transistors or CPU/GPU thermal diodes.
-+- The EMC1814 is a three channel remote temperature sensor that supports
-+Anti-Parallel Diode (APD) only on one channel. For the channel that does not
-+support APD functionality, substrate diodes, discrete diode-connected
-+transistors or CPU/GPU thermal diodes are supported. For the channel that
-+supports APD, only discrete diode-connected transistors may be implemented.
-+However, if APD is disabled on the EMC1814, then the channel that supports
-+APD will be functional with substrate diodes, discrete diode-connected
-+transistors and CPU/GPU thermal diodes.
-+- The EMC1815 is a four channel remote temperature sensor.
-+
-+The EMC1815 and EMC1833 support APD on all channels. When APD is enabled,
-+the channels support only diode-connected transistors. If APD is disabled,
-+then the channels will support substrate transistors, discrete diode-connected
-+transistors and CPU/GPU thermal diodes.
-+
-+Note: Disabling APD functionality to implement substrate diodes on devices
-+that support APD eliminates the benefit of APD (two diodes on one channel).
-+
-+The chips implement three limits for each sensor: low (tempX_min), high
-+(tempX_max) and critical (tempX_crit). The chips also implement an
-+hysteresis mechanism which applies to all limits. The relative difference
-+is stored in a single register on the chip, which means that the relative
-+difference between the limit and its hysteresis is always the same for
-+all three limits.
-+
-+This implementation detail implies the following:
-+
-+* When setting a limit, its hysteresis will automatically follow, the
-+  difference staying unchanged. For example, if the old critical limit was
-+  80 degrees C, and the hysteresis was 75 degrees C, and you change the
-+  critical limit to 90 degrees C, then the hysteresis will automatically
-+  change to 85 degrees C.
-+* The hysteresis values can't be set independently. We decided to make
-+  only tempX_crit_hyst writable, while all other hysteresis attributes
-+  are read-only. Setting tempX_crit_hyst writes the difference between
-+  tempX_crit_hyst and tempX_crit into the chip, and the same relative
-+  hysteresis applies automatically to all other limits.
-+* The limits should be set before the hysteresis. At power up the device
-+  starts with 10 degree hysteresis.
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 51a5bdf75b08656ee6499c6b5c50a51fc4d7c210..a03e97f9a97f4d3edf7bcd1e8d1b73a21d5f0ab5 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -69,6 +69,7 @@ Hardware Monitoring Kernel Drivers
-    ds1621
-    ds620
-    emc1403
-+   emc1812
-    emc2103
-    emc2305
-    emc6w201
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 85c236df781e47c78deeb7ef4d80bc94bba604c4..fcb712549ea679d49fde8c97840af9528b52d52b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -16651,6 +16651,8 @@ M:	Marius Cristea <marius.cristea@microchip.com>
- L:	linux-hwmon@vger.kernel.org
- S:	Supported
- F:	Documentation/devicetree/bindings/hwmon/microchip,emc1812.yaml
-+F:	Documentation/hwmon/emc1812.rst
-+F:	drivers/hwmon/emc1812.c
+diff --git a/Documentation/driver-api/gpio/board.rst b/Documentation/driver-api/gpio/board.rst
+index 0993cac891fb5e4887a1aee6deae273197c6aae1..b306c21481d7c191201d81d228a290a908cc82ab 100644
+--- a/Documentation/driver-api/gpio/board.rst
++++ b/Documentation/driver-api/gpio/board.rst
+@@ -108,9 +108,8 @@ macro, which ties a software node representing the GPIO controller with
+ consumer device. It allows consumers to use regular gpiolib APIs, such as
+ gpiod_get(), gpiod_get_optional().
  
- MICROCHIP I2C DRIVER
- M:	Codrin Ciubotariu <codrin.ciubotariu@microchip.com>
-diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index 2760feb9f83b5d3b990b27acff572e587b373e9d..3b53572fd8bfbd752c2235ca429c4f74b1db3095 100644
---- a/drivers/hwmon/Kconfig
-+++ b/drivers/hwmon/Kconfig
-@@ -2042,6 +2042,17 @@ config SENSORS_EMC1403
- 	  Threshold values can be configured using sysfs.
- 	  Data from the different diodes are accessible via sysfs.
+-The software node representing a GPIO controller need not be attached to the
+-GPIO controller device. The only requirement is that the node must be
+-registered and its name must match the GPIO controller's label.
++The software node representing a GPIO controller must be attached to the
++GPIO controller device - either as the primary or the secondary firmware node.
  
-+config SENSORS_EMC1812
-+	tristate "Microchip Technology EMC1812 driver"
-+	depends on I2C
-+	select REGMAP_I2C
-+	help
-+	  If you say yes here to build support for Microchip Technology's
-+	  EMC181X/33  Multichannel Low-Voltage Remote Diode Sensor Family.
-+
-+	  This driver can also be built as a module. If so, the module
-+	  will be called emc1812.
-+
- config SENSORS_EMC2103
- 	tristate "SMSC EMC2103"
- 	depends on I2C
-diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-index 73b2abdcc6dd9cfae4c84b350febc5d8c191e385..e93e4051e99db698dbaae97ac4841e6d810ee8c4 100644
---- a/drivers/hwmon/Makefile
-+++ b/drivers/hwmon/Makefile
-@@ -73,6 +73,7 @@ obj-$(CONFIG_SENSORS_DRIVETEMP)	+= drivetemp.o
- obj-$(CONFIG_SENSORS_DS620)	+= ds620.o
- obj-$(CONFIG_SENSORS_DS1621)	+= ds1621.o
- obj-$(CONFIG_SENSORS_EMC1403)	+= emc1403.o
-+obj-$(CONFIG_SENSORS_EMC1812)	+= emc1812.o
- obj-$(CONFIG_SENSORS_EMC2103)	+= emc2103.o
- obj-$(CONFIG_SENSORS_EMC2305)	+= emc2305.o
- obj-$(CONFIG_SENSORS_EMC6W201)	+= emc6w201.o
-diff --git a/drivers/hwmon/emc1812.c b/drivers/hwmon/emc1812.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..1ba8feac93b5f078d4e544c72711e69f0be06238
---- /dev/null
-+++ b/drivers/hwmon/emc1812.c
-@@ -0,0 +1,965 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * HWMON driver for Microchip EMC1812/13/14/15/33 Multichannel high-accuracy
-+ * 2-wire low-voltage remote diode temperature monitor family.
-+ *
-+ * Copyright (C) 2026 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Marius Cristea <marius.cristea@microchip.com>
-+ *
-+ * Datasheet can be found here:
-+ * https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/EMC1812-3-4-5-33-Data-Sheet-DS20005751.pdf
-+ */
-+
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
-+#include <linux/bits.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/hwmon.h>
-+#include <linux/i2c.h>
-+#include <linux/kernel.h>
-+#include <linux/math64.h>
-+#include <linux/property.h>
-+#include <linux/regmap.h>
-+#include <linux/string.h>
-+#include <linux/units.h>
-+#include <linux/util_macros.h>
-+
-+/* EMC1812 Registers Addresses */
-+#define EMC1812_STATUS_ADDR				0x02
-+#define EMC1812_CONFIG_LO_ADDR				0x03
-+
-+#define EMC1812_CFG_ADDR				0x09
-+#define EMC1812_CONV_ADDR				0x0A
-+#define EMC1812_INT_DIODE_HIGH_LIMIT_ADDR		0x0B
-+#define EMC1812_INT_DIODE_LOW_LIMIT_ADDR		0x0C
-+#define EMC1812_EXT1_HIGH_LIMIT_HIGH_BYTE_ADDR		0x0D
-+#define EMC1812_EXT1_LOW_LIMIT_HIGH_BYTE_ADDR		0x0E
-+#define EMC1812_ONE_SHOT_ADDR				0x0F
-+
-+#define EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR		0x13
-+#define EMC1812_EXT1_LOW_LIMIT_LOW_BYTE_ADDR		0x14
-+#define EMC1812_EXT2_HIGH_LIMIT_HIGH_BYTE_ADDR		0x15
-+#define EMC1812_EXT2_LOW_LIMIT_HIGH_BYTE_ADDR		0x16
-+#define EMC1812_EXT2_HIGH_LIMIT_LOW_BYTE_ADDR		0x17
-+#define EMC1812_EXT2_LOW_LIMIT_LOW_BYTE_ADDR		0x18
-+#define EMC1812_EXT1_THERM_LIMIT_ADDR			0x19
-+#define EMC1812_EXT2_THERM_LIMIT_ADDR			0x1A
-+#define EMC1812_EXT_DIODE_FAULT_STATUS_ADDR		0x1B
-+
-+#define EMC1812_DIODE_FAULT_MASK_ADDR			0x1F
-+#define EMC1812_INT_DIODE_THERM_LIMIT_ADDR		0x20
-+#define EMC1812_THRM_HYS_ADDR				0x21
-+#define EMC1812_CONSEC_ALERT_ADDR			0x22
-+
-+#define EMC1812_EXT1_BETA_CONFIG_ADDR			0x25
-+#define EMC1812_EXT2_BETA_CONFIG_ADDR			0x26
-+#define EMC1812_EXT1_IDEALITY_FACTOR_ADDR		0x27
-+#define EMC1812_EXT2_IDEALITY_FACTOR_ADDR		0x28
-+
-+#define EMC1812_EXT3_HIGH_LIMIT_HIGH_BYTE_ADDR		0x2C
-+#define EMC1812_EXT3_LOW_LIMIT_HIGH_BYTE_ADDR		0x2D
-+#define EMC1812_EXT3_HIGH_LIMIT_LOW_BYTE_ADDR		0x2E
-+#define EMC1812_EXT3_LOW_LIMIT_LOW_BYTE_ADDR		0x2F
-+#define EMC1812_EXT3_THERM_LIMIT_ADDR			0x30
-+#define EMC1812_EXT3_IDEALITY_FACTOR_ADDR		0x31
-+
-+#define EMC1812_EXT4_HIGH_LIMIT_HIGH_BYTE_ADDR		0x34
-+#define EMC1812_EXT4_LOW_LIMIT_HIGH_BYTE_ADDR		0x35
-+#define EMC1812_EXT4_HIGH_LIMIT_LOW_BYTE_ADDR		0x36
-+#define EMC1812_EXT4_LOW_LIMIT_LOW_BYTE_ADDR		0x37
-+#define EMC1812_EXT4_THERM_LIMIT_ADDR			0x38
-+#define EMC1812_EXT4_IDEALITY_FACTOR_ADDR		0x39
-+#define EMC1812_HIGH_LIMIT_STATUS_ADDR			0x3A
-+#define EMC1812_LOW_LIMIT_STATUS_ADDR			0x3B
-+#define EMC1812_THERM_LIMIT_STATUS_ADDR			0x3C
-+#define EMC1812_ROC_GAIN_ADDR				0x3D
-+#define EMC1812_ROC_CONFIG_ADDR				0x3E
-+#define EMC1812_ROC_STATUS_ADDR				0x3F
-+#define EMC1812_R1_RESH_ADDR				0x40
-+#define EMC1812_R1_LIMH_ADDR				0x41
-+#define EMC1812_R1_LIML_ADDR				0x42
-+#define EMC1812_R1_SMPL_ADDR				0x43
-+#define EMC1812_R2_RESH_ADDR				0x44
-+#define EMC1812_R2_3_RESL_ADDR				0x45
-+#define EMC1812_R2_LIMH_ADDR				0x46
-+#define EMC1812_R2_LIML_ADDR				0x47
-+#define EMC1812_R2_SMPL_ADDR				0x48
-+#define EMC1812_PER_MAXTH_1_ADDR			0x49
-+#define EMC1812_PER_MAXT1L_ADDR				0x4A
-+#define EMC1812_PER_MAXTH_2_ADDR			0x4B
-+#define EMC1812_PER_MAXT2_3L_ADDR			0x4C
-+#define EMC1812_GBL_MAXT1H_ADDR				0x4D
-+#define EMC1812_GBL_MAXT1L_ADDR				0x4E
-+#define EMC1812_GBL_MAXT2H_ADDR				0x4F
-+#define EMC1812_GBL_MAXT2L_ADDR				0x50
-+#define EMC1812_FILTER_SEL_ADDR				0x51
-+
-+#define EMC1812_INT_HIGH_BYTE_ADDR		0x60
-+#define EMC1812_INT_LOW_BYTE_ADDR		0x61
-+#define EMC1812_EXT1_HIGH_BYTE_ADDR		0x62
-+#define EMC1812_EXT1_LOW_BYTE_ADDR		0x63
-+#define EMC1812_EXT2_HIGH_BYTE_ADDR		0x64
-+#define EMC1812_EXT2_LOW_BYTE_ADDR		0x65
-+#define EMC1812_EXT3_HIGH_BYTE_ADDR		0x66
-+#define EMC1812_EXT3_LOW_BYTE_ADDR		0x67
-+#define EMC1812_EXT4_HIGH_BYTE_ADDR		0x68
-+#define EMC1812_EXT4_LOW_BYTE_ADDR		0x69
-+#define EMC1812_HOTTEST_DIODE_HIGH_BYTE_ADDR	0x6A
-+#define EMC1812_HOTTEST_DIODE_LOW_BYTE_ADDR	0x6B
-+#define EMC1812_HOTTEST_STATUS_ADDR		0x6C
-+#define EMC1812_HOTTEST_CFG_ADDR		0x6D
-+
-+#define EMC1812_PRODUCT_ID_ADDR		0xFD
-+#define EMC1812_MANUFACTURER_ID_ADDR	0xFE
-+#define EMC1812_REVISION_ADDR		0xFF
-+
-+/* EMC1812 Config Bits */
-+#define EMC1812_CFG_MSKAL		BIT(7)
-+#define EMC1812_CFG_RS			BIT(6)
-+#define EMC1812_CFG_ATTHM		BIT(5)
-+#define EMC1812_CFG_RECD12		BIT(4)
-+#define EMC1812_CFG_RECD34		BIT(3)
-+#define EMC1812_CFG_RANGE		BIT(2)
-+#define EMC1812_CFG_DA_ENA		BIT(1)
-+#define EMC1812_CFG_APDD		BIT(0)
-+
-+/* EMC1812 Status Bits */
-+#define EMC1812_STATUS_ROCF		BIT(7)
-+#define EMC1812_STATUS_HOTCHG		BIT(6)
-+#define EMC1812_STATUS_BUSY		BIT(5)
-+#define EMC1812_STATUS_HIGH		BIT(4)
-+#define EMC1812_STATUS_LOW		BIT(3)
-+#define EMC1812_STATUS_FAULT		BIT(2)
-+#define EMC1812_STATUS_ETHRM		BIT(1)
-+#define EMC1812_STATUS_ITHRM		BIT(0)
-+
-+#define EMC1812_BETA_LOCK_VAL		0x0F
-+
-+#define EMC1812_TEMP_CH_ADDR(index)	(EMC1812_INT_HIGH_BYTE_ADDR + 2 * (index))
-+
-+#define EMC1812_FILTER_MASK_LEN		2
-+
-+#define EMC1812_PID			0x81
-+#define EMC1813_PID			0x87
-+#define EMC1814_PID			0x84
-+#define EMC1815_PID			0x85
-+#define EMC1833_PID			0x83
-+
-+/* The maximum number of channels a member of the family can have */
-+#define EMC1812_MAX_NUM_CHANNELS		5
-+#define EMC1812_TEMP_OFFSET			64
-+
-+#define EMC1812_DEFAULT_IDEALITY_FACTOR		0x12
-+
-+#define EMC1812_TEMP_MASK (HWMON_T_INPUT | HWMON_T_MIN | HWMON_T_MAX | \
-+			   HWMON_T_CRIT | HWMON_T_MAX_HYST | HWMON_T_CRIT_HYST | \
-+			   HWMON_T_MIN_ALARM | HWMON_T_MAX_ALARM | \
-+			   HWMON_T_CRIT_ALARM | HWMON_T_LABEL)
-+
-+static const struct hwmon_channel_info * const emc1812_info[] = {
-+	HWMON_CHANNEL_INFO(chip, HWMON_C_UPDATE_INTERVAL),
-+	HWMON_CHANNEL_INFO(temp,
-+			   EMC1812_TEMP_MASK,
-+			   EMC1812_TEMP_MASK | HWMON_T_FAULT,
-+			   EMC1812_TEMP_MASK | HWMON_T_FAULT,
-+			   EMC1812_TEMP_MASK | HWMON_T_FAULT,
-+			   EMC1812_TEMP_MASK | HWMON_T_FAULT
-+			   ),
-+	NULL
-+};
-+
-+/**
-+ * struct emc1812_features - features of a emc1812 instance
-+ * @name:		chip's name
-+ * @phys_channels:	number of physical channels supported by the chip
-+ * @has_ext2_beta_reg:	the EXT2_BETA register is available on the chip
-+ */
-+struct emc1812_features {
-+	const char	*name;
-+	u8		phys_channels;
-+	bool		has_ext2_beta_reg;
-+};
-+
-+static const struct emc1812_features emc1833_chip_config = {
-+	.name = "emc1833",
-+	.phys_channels = 3,
-+	.has_ext2_beta_reg = true,
-+};
-+
-+static const struct emc1812_features emc1812_chip_config = {
-+	.name = "emc1812",
-+	.phys_channels = 2,
-+	.has_ext2_beta_reg = false,
-+};
-+
-+static const struct emc1812_features emc1813_chip_config = {
-+	.name = "emc1813",
-+	.phys_channels = 3,
-+	.has_ext2_beta_reg = true,
-+};
-+
-+static const struct emc1812_features emc1814_chip_config = {
-+	.name = "emc1814",
-+	.phys_channels = 4,
-+	.has_ext2_beta_reg = false,
-+};
-+
-+static const struct emc1812_features emc1815_chip_config = {
-+	.name = "emc1815",
-+	.phys_channels = 5,
-+	.has_ext2_beta_reg = false,
-+};
-+
-+enum emc1812_limit_type {temp_min, temp_max};
-+
-+static const u8 emc1812_temp_map[] = {
-+	[hwmon_temp_min] = temp_min,
-+	[hwmon_temp_max] = temp_max,
-+};
-+
-+static const u8 emc1812_temp_crit_regs[] = {
-+	[0] = EMC1812_INT_DIODE_THERM_LIMIT_ADDR,
-+	[1] = EMC1812_EXT1_THERM_LIMIT_ADDR,
-+	[2] = EMC1812_EXT2_THERM_LIMIT_ADDR,
-+	[3] = EMC1812_EXT3_THERM_LIMIT_ADDR,
-+	[4] = EMC1812_EXT4_THERM_LIMIT_ADDR,
-+};
-+
-+static const u8 emc1812_limit_regs[][2] = {
-+	[0] = {
-+		[temp_min] = EMC1812_INT_DIODE_LOW_LIMIT_ADDR,
-+		[temp_max] = EMC1812_INT_DIODE_HIGH_LIMIT_ADDR,
-+	},
-+	[1] = {
-+		[temp_min] = EMC1812_EXT1_LOW_LIMIT_HIGH_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT1_HIGH_LIMIT_HIGH_BYTE_ADDR,
-+	},
-+	[2] = {
-+		[temp_min] = EMC1812_EXT2_LOW_LIMIT_HIGH_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT2_HIGH_LIMIT_HIGH_BYTE_ADDR,
-+	},
-+	[3] = {
-+		[temp_min] = EMC1812_EXT3_LOW_LIMIT_HIGH_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT3_HIGH_LIMIT_HIGH_BYTE_ADDR,
-+	},
-+	[4] = {
-+		[temp_min] = EMC1812_EXT4_LOW_LIMIT_HIGH_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT4_HIGH_LIMIT_HIGH_BYTE_ADDR,
-+	},
-+};
-+
-+static const u8 emc1812_limit_regs_low[][2] = {
-+	[0] = {
-+		[temp_min] = 0xff,
-+		[temp_max] = 0xff,
-+	},
-+	[1] = {
-+		[temp_min] = EMC1812_EXT1_LOW_LIMIT_LOW_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR,
-+	},
-+	[2] = {
-+		[temp_min] = EMC1812_EXT2_LOW_LIMIT_LOW_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT2_HIGH_LIMIT_LOW_BYTE_ADDR,
-+	},
-+	[3] = {
-+		[temp_min] = EMC1812_EXT3_LOW_LIMIT_LOW_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT3_HIGH_LIMIT_LOW_BYTE_ADDR,
-+	},
-+	[4] = {
-+		[temp_min] = EMC1812_EXT4_LOW_LIMIT_LOW_BYTE_ADDR,
-+		[temp_max] = EMC1812_EXT4_HIGH_LIMIT_LOW_BYTE_ADDR,
-+	},
-+};
-+
-+/* Lookup table for temperature conversion times in msec */
-+static const u16 emc1812_conv_time[] = {
-+	16000, 8000, 4000, 2000, 1000, 500, 250, 125, 62, 31, 16
-+};
-+
-+/**
-+ * struct emc1812_data - information about chip parameters
-+ * @labels:		labels of the channels
-+ * @active_ch_mask:	active channels
-+ * @chip:		pointer to structure holding chip features
-+ * @regmap:		device register map
-+ * @recd34_en:		state of Resistance Error Correction (REC) on channels 3 and 4
-+ * @recd12_en:		state of Resistance Error Correction (REC) on channels 1 and 2
-+ * @apdd_en:		state of anti-parallel diode mode
-+ */
-+struct emc1812_data {
-+	const char *labels[EMC1812_MAX_NUM_CHANNELS];
-+	unsigned long active_ch_mask;
-+	const struct emc1812_features *chip;
-+	struct regmap *regmap;
-+	bool recd34_en;
-+	bool recd12_en;
-+	bool apdd_en;
-+};
-+
-+/* emc1812 regmap configuration */
-+static const struct regmap_range emc1812_regmap_writable_ranges[] = {
-+	regmap_reg_range(EMC1812_CFG_ADDR, EMC1812_ONE_SHOT_ADDR),
-+	regmap_reg_range(EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR, EMC1812_EXT2_THERM_LIMIT_ADDR),
-+	regmap_reg_range(EMC1812_DIODE_FAULT_MASK_ADDR, EMC1812_CONSEC_ALERT_ADDR),
-+	regmap_reg_range(EMC1812_EXT1_BETA_CONFIG_ADDR, EMC1812_EXT4_IDEALITY_FACTOR_ADDR),
-+	regmap_reg_range(EMC1812_ROC_GAIN_ADDR, EMC1812_ROC_CONFIG_ADDR),
-+	regmap_reg_range(EMC1812_R1_LIMH_ADDR, EMC1812_R1_SMPL_ADDR),
-+	regmap_reg_range(EMC1812_R2_LIMH_ADDR, EMC1812_R2_SMPL_ADDR),
-+	regmap_reg_range(EMC1812_FILTER_SEL_ADDR, EMC1812_FILTER_SEL_ADDR),
-+	regmap_reg_range(EMC1812_HOTTEST_CFG_ADDR, EMC1812_HOTTEST_CFG_ADDR),
-+};
-+
-+static const struct regmap_access_table emc1812_regmap_wr_table = {
-+	.yes_ranges = emc1812_regmap_writable_ranges,
-+	.n_yes_ranges = ARRAY_SIZE(emc1812_regmap_writable_ranges),
-+};
-+
-+static const struct regmap_range emc1812_regmap_rd_ranges[] = {
-+	regmap_reg_range(EMC1812_STATUS_ADDR, EMC1812_CONFIG_LO_ADDR),
-+	regmap_reg_range(EMC1812_CFG_ADDR, EMC1812_ONE_SHOT_ADDR),
-+	regmap_reg_range(EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR,
-+			 EMC1812_EXT_DIODE_FAULT_STATUS_ADDR),
-+	regmap_reg_range(EMC1812_DIODE_FAULT_MASK_ADDR, EMC1812_CONSEC_ALERT_ADDR),
-+	regmap_reg_range(EMC1812_EXT1_BETA_CONFIG_ADDR, EMC1812_FILTER_SEL_ADDR),
-+	regmap_reg_range(EMC1812_INT_HIGH_BYTE_ADDR, EMC1812_HOTTEST_CFG_ADDR),
-+	regmap_reg_range(EMC1812_PRODUCT_ID_ADDR, EMC1812_REVISION_ADDR),
-+};
-+
-+static const struct regmap_access_table emc1812_regmap_rd_table = {
-+	.yes_ranges = emc1812_regmap_rd_ranges,
-+	.n_yes_ranges = ARRAY_SIZE(emc1812_regmap_rd_ranges),
-+};
-+
-+static bool emc1812_is_volatile_reg(struct device *dev, unsigned int reg)
-+{
-+	switch (reg) {
-+	case EMC1812_STATUS_ADDR:
-+	case EMC1812_EXT_DIODE_FAULT_STATUS_ADDR:
-+	case EMC1812_DIODE_FAULT_MASK_ADDR:
-+	case EMC1812_EXT1_BETA_CONFIG_ADDR:
-+	case EMC1812_EXT2_BETA_CONFIG_ADDR:
-+	case EMC1812_HIGH_LIMIT_STATUS_ADDR:
-+	case EMC1812_LOW_LIMIT_STATUS_ADDR:
-+	case EMC1812_THERM_LIMIT_STATUS_ADDR:
-+	case EMC1812_ROC_STATUS_ADDR:
-+	case EMC1812_PER_MAXTH_1_ADDR:
-+	case EMC1812_PER_MAXT1L_ADDR:
-+	case EMC1812_PER_MAXTH_2_ADDR:
-+	case EMC1812_PER_MAXT2_3L_ADDR:
-+	case EMC1812_GBL_MAXT1H_ADDR:
-+	case EMC1812_GBL_MAXT1L_ADDR:
-+	case EMC1812_GBL_MAXT2H_ADDR:
-+	case EMC1812_GBL_MAXT2L_ADDR:
-+	case EMC1812_INT_HIGH_BYTE_ADDR:
-+	case EMC1812_INT_LOW_BYTE_ADDR:
-+	case EMC1812_EXT1_HIGH_BYTE_ADDR:
-+	case EMC1812_EXT1_LOW_BYTE_ADDR:
-+	case EMC1812_EXT2_HIGH_BYTE_ADDR:
-+	case EMC1812_EXT2_LOW_BYTE_ADDR:
-+	case EMC1812_EXT3_HIGH_BYTE_ADDR:
-+	case EMC1812_EXT3_LOW_BYTE_ADDR:
-+	case EMC1812_EXT4_HIGH_BYTE_ADDR:
-+	case EMC1812_EXT4_LOW_BYTE_ADDR:
-+	case EMC1812_HOTTEST_DIODE_HIGH_BYTE_ADDR:
-+	case EMC1812_HOTTEST_DIODE_LOW_BYTE_ADDR:
-+	case EMC1812_HOTTEST_STATUS_ADDR:
-+		return true;
-+	default:
-+		return false;
-+	}
-+}
-+
-+static const struct regmap_config emc1812_regmap_config = {
-+	.reg_bits = 8,
-+	.val_bits = 8,
-+	.rd_table = &emc1812_regmap_rd_table,
-+	.wr_table = &emc1812_regmap_wr_table,
-+	.volatile_reg = emc1812_is_volatile_reg,
-+	.max_register = EMC1812_REVISION_ADDR,
-+	.cache_type = REGCACHE_MAPLE,
-+};
-+
-+static umode_t emc1812_is_visible(const void *_data, enum hwmon_sensor_types type,
-+				  u32 attr, int channel)
-+{
-+	const struct emc1812_data *data = _data;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		/* Don't show channels which are not described into the device tree */
-+		if (!(data->active_ch_mask & BIT(channel)))
-+			return 0;
-+
-+		/* Don't show channels which are not physically connected */
-+		if (channel >= data->chip->phys_channels)
-+			return 0;
-+
-+		switch (attr) {
-+		case hwmon_temp_min:
-+		case hwmon_temp_max:
-+		case hwmon_temp_crit:
-+		case hwmon_temp_crit_hyst:
-+			return 0644;
-+		case hwmon_temp_crit_alarm:
-+		case hwmon_temp_input:
-+		case hwmon_temp_fault:
-+		case hwmon_temp_max_alarm:
-+		case hwmon_temp_max_hyst:
-+		case hwmon_temp_min_alarm:
-+			return 0444;
-+		case hwmon_temp_label:
-+			if (data->labels[channel])
-+				return 0444;
-+			return 0;
-+		default:
-+			return 0;
-+		}
-+	case hwmon_chip:
-+		switch (attr) {
-+		case hwmon_chip_update_interval:
-+			return 0644;
-+		default:
-+			return 0;
-+		}
-+	default:
-+		return 0;
-+	}
-+};
-+
-+static int emc1812_get_temp(struct emc1812_data *data, int channel, long *val)
-+{
-+	__be16 tmp_be16;
-+	int ret;
-+
-+	ret = regmap_bulk_read(data->regmap, EMC1812_TEMP_CH_ADDR(channel),
-+			       &tmp_be16, sizeof(tmp_be16));
-+	if (ret)
-+		return ret;
-+
-+	/* Range is always -64 to 191.875°C */
-+	*val = ((be16_to_cpu(tmp_be16) >> 5) - (EMC1812_TEMP_OFFSET << 3)) * 125;
-+
-+	return 0;
-+}
-+
-+static int emc1812_get_crit_limit_temp(struct emc1812_data *data, int channel, long *val)
-+{
-+	unsigned int tmp;
-+	int ret;
-+
-+	/* Critical register is 8bits long and keeps only integer part of temperature */
-+	ret = regmap_read(data->regmap, emc1812_temp_crit_regs[channel], &tmp);
-+	if (ret)
-+		return ret;
-+
-+	*val = tmp;
-+	/* Range is always -64 to 191°C */
-+	*val = (*val - EMC1812_TEMP_OFFSET) * 1000;
-+
-+	return 0;
-+}
-+
-+static int emc1812_get_limit_temp(struct emc1812_data *data, int ch,
-+				  enum emc1812_limit_type type, long *val)
-+{
-+	unsigned int regvalh;
-+	unsigned int regvall = 0;
-+	int ret;
-+
-+	ret = regmap_read(data->regmap, emc1812_limit_regs[ch][type], &regvalh);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (ch) {
-+		ret = regmap_read(data->regmap, emc1812_limit_regs_low[ch][type], &regvall);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	/* Range is always -64 to 191.875°C */
-+	*val = ((regvalh << 3) | (regvall >> 5));
-+	*val = (*val - (EMC1812_TEMP_OFFSET << 3)) * 125;
-+
-+	return 0;
-+}
-+
-+static int emc1812_read_reg(struct device *dev, struct emc1812_data *data, u32 attr,
-+			    int channel, long *val)
-+{
-+	int hyst, ret;
-+
-+	switch (attr) {
-+	case hwmon_temp_min:
-+	case hwmon_temp_max:
-+		return emc1812_get_limit_temp(data, channel, emc1812_temp_map[attr], val);
-+	case hwmon_temp_crit:
-+		return emc1812_get_crit_limit_temp(data, channel, val);
-+	case hwmon_temp_input:
-+		return emc1812_get_temp(data, channel, val);
-+	case hwmon_temp_max_hyst:
-+		ret = emc1812_get_limit_temp(data, channel, temp_max, val);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = regmap_read(data->regmap, EMC1812_THRM_HYS_ADDR, &hyst);
-+		if (ret < 0)
-+			return ret;
-+
-+		*val -= hyst * 1000;
-+
-+		return 0;
-+	case hwmon_temp_crit_hyst:
-+		ret = emc1812_get_crit_limit_temp(data, channel, val);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = regmap_read(data->regmap, EMC1812_THRM_HYS_ADDR, &hyst);
-+		if (ret < 0)
-+			return ret;
-+
-+		*val -= hyst * 1000;
-+
-+		return 0;
-+	case hwmon_temp_min_alarm:
-+		*val = regmap_test_bits(data->regmap, EMC1812_LOW_LIMIT_STATUS_ADDR,
-+					BIT(channel));
-+		if (*val < 0)
-+			return *val;
-+
-+		return 0;
-+	case hwmon_temp_max_alarm:
-+		*val = regmap_test_bits(data->regmap, EMC1812_HIGH_LIMIT_STATUS_ADDR,
-+					BIT(channel));
-+		if (*val < 0)
-+			return *val;
-+
-+		return 0;
-+	case hwmon_temp_crit_alarm:
-+		*val = regmap_test_bits(data->regmap, EMC1812_THERM_LIMIT_STATUS_ADDR,
-+					BIT(channel));
-+		if (*val < 0)
-+			return *val;
-+
-+		return 0;
-+	case hwmon_temp_fault:
-+		*val = regmap_test_bits(data->regmap, EMC1812_EXT_DIODE_FAULT_STATUS_ADDR,
-+					BIT(channel));
-+		if (*val < 0)
-+			return *val;
-+
-+		return 0;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static int emc1812_read(struct device *dev, enum hwmon_sensor_types type, u32 attr,
-+			int channel, long *val)
-+{
-+	struct emc1812_data *data = dev_get_drvdata(dev);
-+	unsigned int convrate;
-+	int ret;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		return emc1812_read_reg(dev, data, attr, channel, val);
-+	case hwmon_chip:
-+		switch (attr) {
-+		case hwmon_chip_update_interval:
-+			ret = regmap_read(data->regmap, EMC1812_CONV_ADDR, &convrate);
-+			if (ret < 0)
-+				return ret;
-+
-+			if (convrate > 10)
-+				convrate = 4;
-+
-+			*val = DIV_ROUND_CLOSEST(16000, 1 << convrate);
-+			return 0;
-+		default:
-+			return -EOPNOTSUPP;
-+		}
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static int emc1812_read_string(struct device *dev, enum hwmon_sensor_types type,
-+			       u32 attr, int channel, const char **str)
-+{
-+	struct emc1812_data *data = dev_get_drvdata(dev);
-+
-+	if (channel >= data->chip->phys_channels)
-+		return 0;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		switch (attr) {
-+		case hwmon_temp_label:
-+			*str = data->labels[channel];
-+			return 0;
-+		default:
-+			return -EOPNOTSUPP;
-+		}
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static int emc1812_set_hyst(struct emc1812_data *data, int channel, int val)
-+{
-+	int hyst, ret;
-+	int limit;
-+
-+	/* Critical register is 8bits long and keeps only integer part of temperature */
-+	ret = regmap_read(data->regmap, emc1812_temp_crit_regs[channel], &limit);
-+	if (ret)
-+		return ret;
-+
-+	hyst = clamp_val(limit - val, 0, 255);
-+
-+	ret = regmap_write(data->regmap, EMC1812_THRM_HYS_ADDR, hyst);
-+
-+	return ret;
-+}
-+
-+static int emc1812_set_temp(struct emc1812_data *data, int channel,
-+			    enum emc1812_limit_type map, int val)
-+{
-+	long valh, vall;
-+	u8 regh, regl;
-+	int ret;
-+
-+	regh = emc1812_limit_regs[channel][map];
-+	regl = emc1812_limit_regs_low[channel][map];
-+
-+	if (channel) {
-+		val = DIV_ROUND_CLOSEST(val, 125);
-+		valh = (val >> 3) & 0xff;
-+		vall = (val & 0x07) << 5;
-+	} else {
-+		/* Temperature limit for internal channel is stored on 8bits */
-+		valh = DIV_ROUND_CLOSEST(val, 1000);
-+		valh = clamp_val(valh, 0, 255);
-+	}
-+
-+	ret = regmap_write(data->regmap, regh, valh);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (channel)
-+		ret = regmap_write(data->regmap, regl, vall);
-+
-+	return ret;
-+}
-+
-+static int emc1812_write(struct device *dev, enum hwmon_sensor_types type, u32 attr,
-+			 int channel, long val)
-+{
-+	struct emc1812_data *data = dev_get_drvdata(dev);
-+	unsigned int interval;
-+	int convrate;
-+
-+	switch (type) {
-+	case hwmon_temp:
-+		/* Range should be -64000 to 191875°C + (EMC1812_TEMP_OFFSET * 1000) */
-+		val = clamp_val(val, -64000, 191875);
-+		val = val + (EMC1812_TEMP_OFFSET * 1000);
-+
-+		switch (attr) {
-+		case hwmon_temp_min:
-+		case hwmon_temp_max:
-+			return emc1812_set_temp(data, channel, emc1812_temp_map[attr], val);
-+		case hwmon_temp_crit:
-+			/* Critical temperature limit is stored on 8bits */
-+			val = DIV_ROUND_CLOSEST(val, 1000);
-+			val = clamp_val(val, 0, 255);
-+			return regmap_write(data->regmap, emc1812_temp_crit_regs[channel], val);
-+		case hwmon_temp_crit_hyst:
-+			/* Critical temperature hysteresis is stored on 8bits */
-+			val = DIV_ROUND_CLOSEST(val, 1000);
-+			val = clamp_val(val, 0, 255);
-+			return emc1812_set_hyst(data, channel, val);
-+		default:
-+			return -EOPNOTSUPP;
-+		}
-+	case hwmon_chip:
-+		switch (attr) {
-+		case hwmon_chip_update_interval:
-+			interval = clamp_val(val, 0, 16000);
-+			convrate = find_closest_descending(interval, emc1812_conv_time,
-+							   ARRAY_SIZE(emc1812_conv_time));
-+			return regmap_write(data->regmap, EMC1812_CONV_ADDR, convrate);
-+		default:
-+			return -EOPNOTSUPP;
-+		}
-+	default:
-+		return -EOPNOTSUPP;
-+	}
-+}
-+
-+static int emc1812_init(struct emc1812_data *priv)
-+{
-+	int ret;
-+	u8 val;
-+
+ For example, here is how to describe a single GPIO-connected LED. This is an
+ alternative to using platform_data on legacy systems.
+@@ -153,6 +152,21 @@ alternative to using platform_data on legacy systems.
+ 	};
+ 	software_node_register_node_group(swnodes);
+ 
 +	/*
-+	 * Set default values in registers. APDD, RECD12 and RECD34 are active
-+	 * on 0. Set ALERT pin to be in comparator mode.
-+	 * Set the device to be in Run (Active) state and converting on all
-+	 * channels.
-+	 * Don't change conversion rate. After reset, default is 4 conversions/seconds.
-+	 * The temperature measurement range is -64°C to +191.875°C.
++	 * 5. Attach the GPIO controller's software node to the device and
++	 *    register it.
 +	 */
-+	val = FIELD_PREP(EMC1812_CFG_MSKAL, 0) |
-+	      FIELD_PREP(EMC1812_CFG_RS, 0) |
-+	      FIELD_PREP(EMC1812_CFG_ATTHM, 1) |
-+	      FIELD_PREP(EMC1812_CFG_RECD12, !priv->recd12_en) |
-+	      FIELD_PREP(EMC1812_CFG_RECD34, !priv->recd34_en) |
-+	      FIELD_PREP(EMC1812_CFG_RANGE, 1) |
-+	      FIELD_PREP(EMC1812_CFG_DA_ENA, 0) |
-+	      FIELD_PREP(EMC1812_CFG_APDD, !priv->apdd_en);
++	 static void gpio_foo_register(void)
++	 {
++		struct platform_device_info pdev_info = {
++			.name = "gpio-foo",
++			.id = PLATFORM_DEVID_NONE,
++			.swnode = &gpio_controller_node
++		};
 +
-+	ret = regmap_write(priv->regmap, EMC1812_CFG_ADDR, val);
-+	if (ret)
-+		return ret;
++		platform_device_register_full(&pdev_info);
++	 }
 +
-+	ret = regmap_write(priv->regmap, EMC1812_THRM_HYS_ADDR, 0x0A);
-+	if (ret)
-+		return ret;
+ 	// Then register a platform_device for "leds-gpio" and associate
+ 	// it with &led_device_swnode via .fwnode.
+ 
+diff --git a/Documentation/driver-api/gpio/legacy-boards.rst b/Documentation/driver-api/gpio/legacy-boards.rst
+index 46e3a26dba772e5e5117866b5d202e76c8e2adf2..a9d33bcbb176b5df99838bd03e43ec2ebf4d9db6 100644
+--- a/Documentation/driver-api/gpio/legacy-boards.rst
++++ b/Documentation/driver-api/gpio/legacy-boards.rst
+@@ -36,12 +36,10 @@ Requirements for GPIO Properties
+ When using software nodes to describe GPIO connections, the following
+ requirements must be met for the GPIO core to correctly resolve the reference:
+ 
+-1.  **The GPIO controller's software node "name" must match the controller's
+-    "label".** The gpiolib core uses this name to find the corresponding
+-    struct gpio_chip at runtime.
+-    This software node has to be registered, but need not be attached to the
+-    device representing the GPIO controller that is providing the GPIO in
+-    question. It may be left as a "free floating" node.
++1.  **The GPIO controller's software node must be registered and attached to
++    the controller's ``struct device`` either as its primary or secondary
++    firmware node.** The gpiolib core uses the address of the firmware node to
++    find the corresponding ``struct gpio_chip`` at runtime.
+ 
+ 2.  **The GPIO property must be a reference.** The ``PROPERTY_ENTRY_GPIO()``
+     macro handles this as it is an alias for ``PROPERTY_ENTRY_REF()``.
+@@ -121,13 +119,21 @@ A typical legacy board file might look like this:
+   /* Device registration */
+   static int __init myboard_init(void)
+   {
++  	struct platform_device_info pdev_info = {
++  		.name = MYBOARD_GPIO_CONTROLLER,
++  		.id = PLATFORM_DEVID_NONE,
++  		.swnode = &gpio_controller_node
++  	};
 +
-+	ret = regmap_write(priv->regmap, EMC1812_CONSEC_ALERT_ADDR, 0x70);
-+	if (ret)
-+		return ret;
+   	gpiod_add_lookup_table(&myboard_leds_gpios);
+   	gpiod_add_lookup_table(&myboard_buttons_gpios);
+ 
++  	platform_device_register_full(&pdev_info);
+   	platform_device_register_data(NULL, "leds-gpio", -1,
+   				      &myboard_leds_pdata, sizeof(myboard_leds_pdata));
+   	platform_device_register_data(NULL, "gpio-keys", -1,
+-  				      &myboard_buttons_pdata, sizeof(myboard_buttons_pdata));
++  				      &myboard_buttons_pdata,
++  				      sizeof(myboard_buttons_pdata));
+ 
+   	return 0;
+   }
+@@ -141,8 +147,7 @@ Step 1: Define the GPIO Controller Node
+ ***************************************
+ 
+ First, define a software node that represents the GPIO controller that the
+-LEDs and buttons are connected to. The ``name`` of this node must match the
+-name of the driver for the GPIO controller (e.g., "gpio-foo").
++LEDs and buttons are connected to. The ``name`` of this node is optional.
+ 
+ .. code-block:: c
+ 
+@@ -257,6 +262,16 @@ software nodes using the ``fwnode`` field in struct platform_device_info.
+   	if (error)
+   		return error;
+ 
++  	memset(&pdev_info, 0, sizeof(pdev_info));
++  	pdev_info.name = MYBOARD_GPIO_CONTROLLER;
++  	pdev_info.id = PLATFORM_DEVID_NONE;
++  	pdev_info.swnode = &myboard_gpio_controller_node;
++  	gpio_pdev = platform_device_register_full(&pdev_info);
++  	if (IS_ERR(gpio_pdev)) {
++  		error = PTR_ERR(gpio_pdev);
++  		goto err_unregister_nodes;
++  	}
 +
-+	ret = regmap_write(priv->regmap, EMC1812_FILTER_SEL_ADDR, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = regmap_write(priv->regmap, EMC1812_HOTTEST_CFG_ADDR, 0);
-+	if (ret)
-+		return ret;
-+
-+	/* Enables the beta compensation factor auto-detection function for beta1 and beta2 */
-+	ret = regmap_write(priv->regmap, EMC1812_EXT1_BETA_CONFIG_ADDR,
-+			   EMC1812_BETA_LOCK_VAL);
-+	if (ret)
-+		return ret;
-+
-+	if (priv->chip->has_ext2_beta_reg) {
-+		ret = regmap_write(priv->regmap, EMC1812_EXT2_BETA_CONFIG_ADDR,
-+				   EMC1812_BETA_LOCK_VAL);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	/* Set ideality factor for all external channels */
-+	ret = regmap_write(priv->regmap, EMC1812_EXT1_IDEALITY_FACTOR_ADDR,
-+			   EMC1812_DEFAULT_IDEALITY_FACTOR);
-+	if (ret)
-+		return ret;
-+
-+	/* Set the ideality factor only for the channels supported by the chip */
-+	if (priv->chip->phys_channels < 3)
-+		return 0;
-+
-+	ret = regmap_write(priv->regmap, EMC1812_EXT2_IDEALITY_FACTOR_ADDR,
-+			   EMC1812_DEFAULT_IDEALITY_FACTOR);
-+	if (ret)
-+		return ret;
-+
-+	if (priv->chip->phys_channels < 4)
-+		return 0;
-+
-+	ret = regmap_write(priv->regmap, EMC1812_EXT3_IDEALITY_FACTOR_ADDR,
-+			   EMC1812_DEFAULT_IDEALITY_FACTOR);
-+	if (ret)
-+		return ret;
-+
-+	if (priv->chip->phys_channels < 5)
-+		return 0;
-+
-+	return regmap_write(priv->regmap, EMC1812_EXT4_IDEALITY_FACTOR_ADDR,
-+			    EMC1812_DEFAULT_IDEALITY_FACTOR);
-+}
-+
-+static int emc1812_parse_fw_config(struct emc1812_data *data, struct device *dev)
-+{
-+	unsigned int reg_nr = 0;
-+	int num_channels, ret;
-+
-+	/* To be able to load the driver in case we don't have device tree */
-+	if (!dev_fwnode(dev)) {
-+		data->active_ch_mask = BIT(data->chip->phys_channels) - 1;
-+		return 0;
-+	}
-+
-+	data->apdd_en = device_property_read_bool(dev, "microchip,enable-anti-parallel");
-+	data->recd12_en = device_property_read_bool(dev, "microchip,parasitic-res-on-channel1-2");
-+	data->recd34_en = device_property_read_bool(dev, "microchip,parasitic-res-on-channel3-4");
-+
-+	num_channels = device_get_child_node_count(dev) + 1;
-+
-+	if (num_channels > data->chip->phys_channels)
-+		return dev_err_probe(dev, -EINVAL, "More channels than the chip supports\n");
-+
-+	/* Internal temperature channel is always active */
-+	data->labels[reg_nr] = "internal_diode";
-+	set_bit(reg_nr, &data->active_ch_mask);
-+
-+	device_for_each_child_node_scoped(dev, child) {
-+		ret = fwnode_property_read_u32(child, "reg", &reg_nr);
-+		if (ret || reg_nr >= data->chip->phys_channels)
-+			return dev_err_probe(dev, -EINVAL,
-+				     "The index of the channels does not match the chip\n");
-+		/* Mark external channel as active */
-+		set_bit(reg_nr, &data->active_ch_mask);
-+
-+		fwnode_property_read_string(child, "label", &data->labels[reg_nr]);
-+	}
-+
-+	return 0;
-+}
-+
-+static int emc1812_chip_identify(struct emc1812_data *data, struct i2c_client *client)
-+{
-+	const struct emc1812_features *chip;
-+	struct device *dev = &client->dev;
-+	int ret, tmp;
-+
-+	ret = regmap_read(data->regmap, EMC1812_PRODUCT_ID_ADDR, &tmp);
-+	if (ret)
-+		return ret;
-+
-+	switch (tmp) {
-+	case EMC1812_PID:
-+		data->chip = &emc1812_chip_config;
-+		break;
-+	case EMC1813_PID:
-+		data->chip = &emc1813_chip_config;
-+		break;
-+	case EMC1814_PID:
-+		data->chip = &emc1814_chip_config;
-+		break;
-+	case EMC1815_PID:
-+		data->chip = &emc1815_chip_config;
-+		break;
-+	case EMC1833_PID:
-+		data->chip = &emc1833_chip_config;
-+		break;
-+	default:
-+		/*
-+		 * If failed to identify the hardware based on internal registers,
-+		 * try using fallback compatible in device tree to deal with some
-+		 * newer part number.
-+		 */
-+		chip = i2c_get_match_data(client);
-+		if (!chip)
-+			return -ENODEV;
-+
-+		dev_warn(dev, "Unrecognized hardware ID 0x%x, using %s from devicetree data\n",
-+			 tmp, chip->name);
-+
-+		data->chip = chip;
-+
-+		return 0;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct hwmon_ops emc1812_ops = {
-+	.is_visible = emc1812_is_visible,
-+	.read = emc1812_read,
-+	.read_string = emc1812_read_string,
-+	.write = emc1812_write,
-+};
-+
-+static const struct hwmon_chip_info emc1812_chip_info = {
-+	.ops = &emc1812_ops,
-+	.info = emc1812_info,
-+};
-+
-+static int emc1812_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct emc1812_data *data;
-+	struct device *hwmon_dev;
-+	int ret;
-+
-+	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	data->regmap = devm_regmap_init_i2c(client, &emc1812_regmap_config);
-+	if (IS_ERR(data->regmap))
-+		return dev_err_probe(dev, PTR_ERR(data->regmap),
-+				     "Cannot initialize register map\n");
-+
-+	ret = emc1812_chip_identify(data, client);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Chip identification fails\n");
-+
-+	ret = emc1812_parse_fw_config(data, dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = emc1812_init(data);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Cannot initialize device\n");
-+
-+	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name, data,
-+							 &emc1812_chip_info, NULL);
-+
-+	return PTR_ERR_OR_ZERO(hwmon_dev);
-+}
-+
-+static const struct i2c_device_id emc1812_id[] = {
-+	{ .name = "emc1812", .driver_data = (kernel_ulong_t)&emc1812_chip_config },
-+	{ .name = "emc1813", .driver_data = (kernel_ulong_t)&emc1813_chip_config },
-+	{ .name = "emc1814", .driver_data = (kernel_ulong_t)&emc1814_chip_config },
-+	{ .name = "emc1815", .driver_data = (kernel_ulong_t)&emc1815_chip_config },
-+	{ .name = "emc1833", .driver_data = (kernel_ulong_t)&emc1833_chip_config },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(i2c, emc1812_id);
-+
-+static const struct of_device_id emc1812_of_match[] = {
-+	{
-+		.compatible = "microchip,emc1812",
-+		.data = &emc1812_chip_config
-+	},
-+	{
-+		.compatible = "microchip,emc1813",
-+		.data = &emc1813_chip_config
-+	},
-+	{
-+		.compatible = "microchip,emc1814",
-+		.data = &emc1814_chip_config
-+	},
-+	{
-+		.compatible = "microchip,emc1815",
-+		.data = &emc1815_chip_config
-+	},
-+	{
-+		.compatible = "microchip,emc1833",
-+		.data = &emc1833_chip_config
-+	},
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, emc1812_of_match);
-+
-+static struct i2c_driver emc1812_driver = {
-+	.driver	 = {
-+		.name = "emc1812",
-+		.of_match_table = emc1812_of_match,
-+	},
-+	.probe = emc1812_probe,
-+	.id_table = emc1812_id,
-+};
-+module_i2c_driver(emc1812_driver);
-+
-+MODULE_AUTHOR("Marius Cristea <marius.cristea@microchip.com>");
-+MODULE_DESCRIPTION("EMC1812/13/14/15/33 high-accuracy remote diode temperature monitor Driver");
-+MODULE_LICENSE("GPL");
+   	memset(&pdev_info, 0, sizeof(pdev_info));
+   	pdev_info.name = "leds-gpio";
+   	pdev_info.id = PLATFORM_DEVID_NONE;
+@@ -264,6 +279,7 @@ software nodes using the ``fwnode`` field in struct platform_device_info.
+   	leds_pdev = platform_device_register_full(&pdev_info);
+   	if (IS_ERR(leds_pdev)) {
+   		error = PTR_ERR(leds_pdev);
++  		platform_device_unregister(gpio_pdev);
+   		goto err_unregister_nodes;
+   	}
+ 
+@@ -274,6 +290,7 @@ software nodes using the ``fwnode`` field in struct platform_device_info.
+   	keys_pdev = platform_device_register_full(&pdev_info);
+   	if (IS_ERR(keys_pdev)) {
+   		error = PTR_ERR(keys_pdev);
++  		platform_device_unregister(gpio_pdev);
+   		platform_device_unregister(leds_pdev);
+   		goto err_unregister_nodes;
+   	}
+@@ -289,6 +306,7 @@ software nodes using the ``fwnode`` field in struct platform_device_info.
+   {
+   	platform_device_unregister(keys_pdev);
+   	platform_device_unregister(leds_pdev);
++  	platform_device_unregister(gpio_pdev);
+   	software_node_unregister_node_group(myboard_swnodes);
+   }
+ 
 
+---
+base-commit: cc13002a9f984d37906e9476f3e532a8cdd126f5
+change-id: 20260331-doc-gpio-swnodes-fc3ddf59b8dc
+
+Best regards,
 -- 
-2.51.0
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
 
