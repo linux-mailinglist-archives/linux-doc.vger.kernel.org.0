@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-82489-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82488-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wDAPHmyU0mkEZAcAu9opvQ
-	(envelope-from <linux-doc+bounces-82489-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:57:16 +0200
+	id uIGAGF+U0mkEZAcAu9opvQ
+	(envelope-from <linux-doc+bounces-82488-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:57:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D01DE39F145
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:57:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AFBC39F126
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:57:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 12DBF30107CB
-	for <lists+linux-doc@lfdr.de>; Sun,  5 Apr 2026 16:57:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CAB983007C95
+	for <lists+linux-doc@lfdr.de>; Sun,  5 Apr 2026 16:56:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9845531E844;
-	Sun,  5 Apr 2026 16:56:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2E2231985C;
+	Sun,  5 Apr 2026 16:56:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="M7zv8SV4"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="PAIk2eyM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com [95.215.58.174])
+Received: from out-187.mta1.migadu.com (out-187.mta1.migadu.com [95.215.58.187])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADDB9318EE1
-	for <linux-doc@vger.kernel.org>; Sun,  5 Apr 2026 16:56:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1404431815D
+	for <linux-doc@vger.kernel.org>; Sun,  5 Apr 2026 16:56:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.187
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775408219; cv=none; b=Uu3TqQXg/q68QBraJj9IjD1+ThuH9K7b/vMdv6Hf6sAEzSRIAGXNyA212oJQpmPFKjunde2TrG5GiqGvOElOlQ3/b8WAfFWMDD5BtjPiMzDXhOLWNkRQ9PMOwYYAe8vAuJkF9RvA/Fl96UK8/kt5nSqyXQAQrYEMY2FP+PawB0Y=
+	t=1775408218; cv=none; b=ckzH6w3UkH1HTgTEqoqUEdO6c9bF0OX5Iwwz653iCSmWuq6g7yipnvo8l3Jx4qkyUgMavMuhN5FuhLNk8HLnOgIBm0cffnk2diHDHcjlDAyA5iYfhGXYF9T1KadhccuAl/OPZuD4yVaHCN3EQmlzte52lPMcu7vL+UVg+I3XTr8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775408219; c=relaxed/simple;
+	s=arc-20240116; t=1775408218; c=relaxed/simple;
 	bh=RRnbRDbdqY7d/4OONRcDMeGYkXL6lef3FEc5JeZsykQ=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NBYWASbA4CfekeYnY7IeINe1+WOzXl6foSx+X0wHrIqWS6IKEfRj7AbElhSA59ElGDK4L9AuYcOMnyHkjzz3+QnNqiHP9hsLLwc6ApmQaGOj8KmKnX/CH/HlusbVi99w54WEZ3pW1GIXpsd0ZRkPeTD5Jg0naGhDVLGi0qlfdD8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=M7zv8SV4; arc=none smtp.client-ip=95.215.58.174
+	 In-Reply-To:Content-Type; b=Ph0LLWbutA3YyJSVqVwEjjovVKcf1LhhlcQ2X/803JcDrBxSCruO9rZfEN0noQEXdNUZVUsF+R3Ew13a+DJffJM9hdHKyTKdntWb5/1dedajenkxD1Lz5nfv9iediYb7ZbY6jFXyYiXOLPo6PnbGNpcvXv+XqBeW7vYVP1+QMVs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=PAIk2eyM; arc=none smtp.client-ip=95.215.58.187
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Message-ID: <c4138f66-edf2-4689-b5fe-16dc4839e9c3@linux.dev>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1775408205;
+	t=1775408214;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
 	bh=IFvtQF/EQRNqZnPTUPg67LAGyHPrcqrBHQ7jLg4MTF8=;
-	b=M7zv8SV4cjrjb+YyPeE71EssW0qE0pL4fOJ+Nfy2dOQw7qKT75gTxWwXd3t7VJ7pQv+MzR
-	doi0hOcDMnXCCO/t3Cbdhxa59++qaLFBiSpFWSPaIh/M5gWLB9BHkiJSGHEqWF/2+6Ab90
-	Am2CiF8y5Sv3KMSrbLHOexlLh/l+4JY=
+	b=PAIk2eyMCUCV4fU3Q+SwHkNdyFkREbVgRJytHLvOs4PcnFfgF7qKdILVViQqknFRPYfPdU
+	W/6pl4gJWtEXyWjIR3V9I7JKWwfIlIWxaZOnd8ZYYI1cbeXW16sa1RdvqV8ITZPNFpxjb0
+	DgAJmKwf0EsTsx9JJb6XRb4OPHYUlYA=
 Date: Sun, 5 Apr 2026 09:56:37 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -106,7 +106,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FREEMAIL_CC(0.00)[shazbot.org,google.com,nvidia.com,amazon.com,fb.com,linux-foundation.org,arndb.de,gmail.com,alien8.de,kernel.org,linux.intel.com,linux.alibaba.com,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,baidu.com,wunner.de,soleen.com,infradead.org,linuxfoundation.org];
-	TAGGED_FROM(0.00)[bounces-82489-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82488-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
@@ -124,7 +124,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: D01DE39F145
+X-Rspamd-Queue-Id: 0AFBC39F126
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
