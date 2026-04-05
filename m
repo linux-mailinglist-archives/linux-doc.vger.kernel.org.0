@@ -1,267 +1,367 @@
-Return-Path: <linux-doc+bounces-82487-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82489-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wANyLkyQ0mmtYwcAu9opvQ
-	(envelope-from <linux-doc+bounces-82487-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:39:40 +0200
+	id wDAPHmyU0mkEZAcAu9opvQ
+	(envelope-from <linux-doc+bounces-82489-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:57:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17C1439F001
-	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:39:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D01DE39F145
+	for <lists+linux-doc@lfdr.de>; Sun, 05 Apr 2026 18:57:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0C9A9300E3A1
-	for <lists+linux-doc@lfdr.de>; Sun,  5 Apr 2026 16:39:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 12DBF30107CB
+	for <lists+linux-doc@lfdr.de>; Sun,  5 Apr 2026 16:57:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B2DDB31065B;
-	Sun,  5 Apr 2026 16:39:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9845531E844;
+	Sun,  5 Apr 2026 16:56:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="YGzzOYqN";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="K2L4kFsF"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="M7zv8SV4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com [95.215.58.174])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FDB0312831
-	for <linux-doc@vger.kernel.org>; Sun,  5 Apr 2026 16:39:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADDB9318EE1
+	for <linux-doc@vger.kernel.org>; Sun,  5 Apr 2026 16:56:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775407160; cv=none; b=Va4YXtfOXoRTK2quGqcVaSeEUe3EKHqTgge3zBUkImW0WH/7xnlZSWlba1ZUCLcBnIM7D3NVDSwaCjidCx9Q84lBX/1rvKTnvDc/T39fkp958ODdjcxOFJtC/B23KSiSXeHl51RL1WfySXPc2FKOFVuVK0m8ECBHRHXmkAQVRZM=
+	t=1775408219; cv=none; b=Uu3TqQXg/q68QBraJj9IjD1+ThuH9K7b/vMdv6Hf6sAEzSRIAGXNyA212oJQpmPFKjunde2TrG5GiqGvOElOlQ3/b8WAfFWMDD5BtjPiMzDXhOLWNkRQ9PMOwYYAe8vAuJkF9RvA/Fl96UK8/kt5nSqyXQAQrYEMY2FP+PawB0Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775407160; c=relaxed/simple;
-	bh=k0u4N4f0VkVrnvs3LQrlN9FOtkjFp5bVcDpGR9ErXNQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=UdrE5so8BbQf8WqLl/rFEl2NEuDWFmqT2b1enU0CRY9/ubEi1C35S9QpQXLllzrBr8uoUkL1Wct/n3uP4Q15T5hAq7hVhPw7j6+w2rlJh41+Giiswhp8t75m5Ae/ocbKZPuMXoGGTO6zRf6//byzJQtNl9wMGkySMrhWHB55X8M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=YGzzOYqN; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=K2L4kFsF; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1775407158;
+	s=arc-20240116; t=1775408219; c=relaxed/simple;
+	bh=RRnbRDbdqY7d/4OONRcDMeGYkXL6lef3FEc5JeZsykQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=NBYWASbA4CfekeYnY7IeINe1+WOzXl6foSx+X0wHrIqWS6IKEfRj7AbElhSA59ElGDK4L9AuYcOMnyHkjzz3+QnNqiHP9hsLLwc6ApmQaGOj8KmKnX/CH/HlusbVi99w54WEZ3pW1GIXpsd0ZRkPeTD5Jg0naGhDVLGi0qlfdD8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=M7zv8SV4; arc=none smtp.client-ip=95.215.58.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <c4138f66-edf2-4689-b5fe-16dc4839e9c3@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1775408205;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=5LiNsMTv/b4oQHjiG7soW1r21z4Wr3WQGLyz0Cz6HLM=;
-	b=YGzzOYqNokHl0t7YR89Z7zLHxpjI3UQzc7HGcogyAzO+d4mjf58RfQ7hnb4VyV79JuX/q0
-	IYr/ZkCL8sCNVYftB3jo+MBsttrxXQFnqIuquSvoncEAGqfnX2hJHF1RC6FTU09sNgMq/K
-	S6iKaH5MIHUOEa/sEgGDUexMb0pmkls=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-284-5xgS3AzyMpmNC8cXhb070A-1; Sun, 05 Apr 2026 12:39:14 -0400
-X-MC-Unique: 5xgS3AzyMpmNC8cXhb070A-1
-X-Mimecast-MFC-AGG-ID: 5xgS3AzyMpmNC8cXhb070A_1775407153
-Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-48886f1bbd4so27340585e9.1
-        for <linux-doc@vger.kernel.org>; Sun, 05 Apr 2026 09:39:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1775407153; x=1776011953; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5LiNsMTv/b4oQHjiG7soW1r21z4Wr3WQGLyz0Cz6HLM=;
-        b=K2L4kFsF6CqdFXQHBsI8HvQbh5bxybClUSea/hO00OO5YhvELHZR0/eUULgwSPyxwx
-         B9hoCCbJdojOjW2LAFM1KkYE5AwxeL7hO1dZjG8sYHfga7qeTIFZCU4Asch8/vNc5cjv
-         s2I3vIps5eY6QMqLnvYNDnV2gftWAqOoOjUdu7f8nk92Teqc8f7eHZ53Dj1+MlbTBhvd
-         UhYel2gev9xs2XgLHLw3rdWMHBY+nKZH7+NrCPLSxJtrHvmkbP1bd9IvZVLBGSNeljqV
-         oxLhaDcOllkTgoUNFYIhiuH4qVQfaALAF4HjVBzWDikM7eVQGDukGiKdnLSECn1QB9Hu
-         +cmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775407153; x=1776011953;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5LiNsMTv/b4oQHjiG7soW1r21z4Wr3WQGLyz0Cz6HLM=;
-        b=tI/lPuEpIi4jR2crd2EdSuTt+cig1gl++7j+0wli5UL9zcq6vCxUAOUbJd/e8/M1E1
-         3khPN9C1hIMhuN1GVJ8NnEpdNI6LoP35qIv0xrxM6Pch8Jm468ptw+ZChE2vxAVefJoQ
-         L0Qt2QHOOcr46Ugkis2iALKnj/Wp6ufC2rb85hkujbW+0CP3WpxA0nwp+9AmbF88GJmu
-         thUd+EIH4/8bRjEcIw4HGvoGHyQbRO5+TiS7ELUEgNA6Y8sXj3SSmP//sxCTaPMb4AYn
-         IwmwuTGZrJUu89yyrwJkea3XGX7Exk9PtmrAnjUf/P8XWB5awW+BewnJysyojxXZeyWU
-         HWNA==
-X-Forwarded-Encrypted: i=1; AJvYcCVk+hHXrz1szL+AiWMFID+Wp+pQi83tSZCnZKIsy4H4yRofu4u0T+LGyJySxPTNVpZwKKtg8Xw6l+I=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzv82arGGAQHSGUQRJh+uca4zorzjachHZEev+b+H6QoU9BTz65
-	p3pEB2alZhtqtnhUYig6HBKKoRz6Cm1PAfAV3m0XT4y41DnG7W8aXxuahy6GiPrt33LRFhkT7xQ
-	uXGA4FSleL0JH3fWxjVDC1/UhfFnfctZcoK+fku55D4N7Lk08fHgcmdkl1ATK7Q==
-X-Gm-Gg: AeBDietqVaaoYCDmrWyUU4aksFsGbi6HHo6BxVf9ikAYtmeiYR1bnUc6REEa5jvKMuz
-	T1+nZuGhR5pAqdV7H8mVBakY6cusvJ3LBPfppzKweHNWSr8tvz9tgtJZZpSf1joplvRr+dy3bls
-	u3EwALKL9gQnUmK+wM38zg0W7Mk3GESuF67/oGElMUYTvHvaxJNhYn026n77DS+7e4LK8Ko8pPG
-	/KtSuTAYNstyNwiDuIs3KiGgodia62ixoGDNoBeU5kuaRp9ZTp9KQ2EtnETP+6ToOArQjSTvYeU
-	uw5KFU4Y+E4igy0hOwBK27T3aKm2CjREzad1nYrq8u2C4Ufv8yxFxxbKWB9ukA+3OZZmlYQx6GL
-	Bo6tiwti2bx8PJFaRj6IHJU0JsabDr1IEw44=
-X-Received: by 2002:a05:600c:3b23:b0:488:869c:edaf with SMTP id 5b1f17b1804b1-488996df052mr129887895e9.8.1775407153030;
-        Sun, 05 Apr 2026 09:39:13 -0700 (PDT)
-X-Received: by 2002:a05:600c:3b23:b0:488:869c:edaf with SMTP id 5b1f17b1804b1-488996df052mr129887685e9.8.1775407152541;
-        Sun, 05 Apr 2026 09:39:12 -0700 (PDT)
-Received: from costa-tp.bos2.lab ([2a00:a041:e223:1b00:fe51:8bb:7986:c897])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488980e3b55sm72143575e9.8.2026.04.05.09.39.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2026 09:39:12 -0700 (PDT)
-From: Costa Shulyupin <costa.shul@redhat.com>
-To: Steven Rostedt <rostedt@goodmis.org>,
-	Tomas Glozar <tglozar@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-trace-kernel@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: Costa Shulyupin <costa.shul@redhat.com>
-Subject: [PATCH v1] Documentation/rtla: Convert links to RST format
-Date: Sun,  5 Apr 2026 19:38:45 +0300
-Message-ID: <20260405163847.3337981-1-costa.shul@redhat.com>
-X-Mailer: git-send-email 2.53.0
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IFvtQF/EQRNqZnPTUPg67LAGyHPrcqrBHQ7jLg4MTF8=;
+	b=M7zv8SV4cjrjb+YyPeE71EssW0qE0pL4fOJ+Nfy2dOQw7qKT75gTxWwXd3t7VJ7pQv+MzR
+	doi0hOcDMnXCCO/t3Cbdhxa59++qaLFBiSpFWSPaIh/M5gWLB9BHkiJSGHEqWF/2+6Ab90
+	Am2CiF8y5Sv3KMSrbLHOexlLh/l+4JY=
+Date: Sun, 5 Apr 2026 09:56:37 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v3 02/24] PCI: Add API to track PCI devices preserved
+ across Live Update
+To: David Matlack <dmatlack@google.com>,
+ "yanjun.zhu@linux.dev" <yanjun.zhu@linux.dev>
+Cc: Alex Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Adithya Jayachandran <ajayachandra@nvidia.com>,
+ Alexander Graf <graf@amazon.com>, Alex Mastro <amastro@fb.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Ankit Agrawal
+ <ankita@nvidia.com>, Arnd Bergmann <arnd@arndb.de>,
+ Askar Safin <safinaskar@gmail.com>, "Borislav Petkov (AMD)" <bp@alien8.de>,
+ Chris Li <chrisl@kernel.org>, Dapeng Mi <dapeng1.mi@linux.intel.com>,
+ David Rientjes <rientjes@google.com>, Feng Tang
+ <feng.tang@linux.alibaba.com>, Jacob Pan <jacob.pan@linux.microsoft.com>,
+ Jason Gunthorpe <jgg@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>,
+ Kees Cook <kees@kernel.org>, Kevin Tian <kevin.tian@intel.com>,
+ kexec@lists.infradead.org, kvm@vger.kernel.org,
+ Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+ linux-pci@vger.kernel.org, Li RongQing <lirongqing@baidu.com>,
+ Lukas Wunner <lukas@wunner.de>, Marco Elver <elver@google.com>,
+ =?UTF-8?Q?Micha=C5=82_Winiarski?= <michal.winiarski@intel.com>,
+ Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>,
+ "Paul E. McKenney" <paulmck@kernel.org>,
+ Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+ "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+ Pranjal Shrivastava <praan@google.com>, Pratyush Yadav
+ <pratyush@kernel.org>, Raghavendra Rao Ananta <rananta@google.com>,
+ Randy Dunlap <rdunlap@infradead.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>,
+ Shuah Khan <skhan@linuxfoundation.org>, Vipin Sharma <vipinsh@google.com>,
+ Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>,
+ Yi Liu <yi.l.liu@intel.com>
+References: <20260323235817.1960573-1-dmatlack@google.com>
+ <20260323235817.1960573-3-dmatlack@google.com>
+ <e3fe7085-1297-47b8-bb17-a48196e8f37f@linux.dev>
+ <CALzav=eyf4XRTi8MfE_GBNSm+tjmfX7=d0M8Aj5Hh0vJn7huew@mail.gmail.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Zhu Yanjun <yanjun.zhu@linux.dev>
+In-Reply-To: <CALzav=eyf4XRTi8MfE_GBNSm+tjmfX7=d0M8Aj5Hh0vJn7huew@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Migadu-Flow: FLOW_OUT
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
+	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
+	FREEMAIL_CC(0.00)[shazbot.org,google.com,nvidia.com,amazon.com,fb.com,linux-foundation.org,arndb.de,gmail.com,alien8.de,kernel.org,linux.intel.com,linux.alibaba.com,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,baidu.com,wunner.de,soleen.com,infradead.org,linuxfoundation.org];
+	TAGGED_FROM(0.00)[bounces-82489-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82487-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[costa.shul@redhat.com,linux-doc@vger.kernel.org];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DKIM_TRACE(0.00)[linux.dev:+];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	RCVD_COUNT_FIVE(0.00)[6];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[54];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yanjun.zhu@linux.dev,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 17C1439F001
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[]
+X-Rspamd-Queue-Id: D01DE39F145
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Web links in the documentation are not properly displayed.
 
-In the man pages web links look like:
-  Osnoise tracer  documentation:  <  <https://www.kernel.org/doc/html/lat‐
-  est/trace/osnoise-tracer.html> >
+在 2026/4/3 14:58, David Matlack 写道:
+> On Thu, Apr 2, 2026 at 2:29 PM Yanjun.Zhu <yanjun.zhu@linux.dev> wrote:
+>> On 3/23/26 4:57 PM, David Matlack wrote:
+>>> +config PCI_LIVEUPDATE
+>>> +     bool "PCI Live Update Support (EXPERIMENTAL)"
+>>> +     depends on PCI && LIVEUPDATE
+>>> +     help
+>>> +       Support for preserving PCI devices across a Live Update. This option
+>>> +       should only be enabled by developers working on implementing this
+>>> +       support. Once enough support as landed in the kernel, this option
+>>> +       will no longer be marked EXPERIMENTAL.
+>>> +
+>>> +       If unsure, say N.
+>> Currently, it only supports 'n' or 'y'. Is it possible to add 'm'
+>> (modular support)?
+>>
+>> This would allow the feature to be built as a kernel module. For
+>> development
+>>
+>> purposes, modularization means we only need to recompile a single module
+>>
+>> for testing, rather than rebuilding the entire kernel. Compiling a
+>> module should
+>>
+>> be significantly faster than a full kernel build.
+> I don't think it is possible for CONFIG_PCI_LIVEUPDATE to support 'm'.
+> pci_setup_device() (which is under CONFIG_PCI) needs to call
+> pci_liveupdate_setup_device(), and CONFIG_PCI cannot be built as a
+> module. This call is necessary so the PCI core knows whether a device
+> being enumerated was preserved across a previous Live Update.
 
-On web pages the URL caption is the URL itself.
+After the following changes, the liveupdate.ko can be generated 
+successfully.
 
-Convert tracer documentation links to RST anonymous hyperlink format
-for better rendering. Use newer docs.kernel.org instead of
-www.kernel.org/doc/html/latest for brevity.
+"
 
-After the change, the links in the man pages look like:
-  Osnoise tracer <https://docs.kernel.org/trace/osnoise-tracer.html>
+# ls drivers/pci/liveupdate.ko
+drivers/pci/liveupdate.ko
+"
 
-On web pages the captions are the titles of the links.
 
-Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
----
- Documentation/tools/rtla/rtla-hwnoise.rst       | 2 +-
- Documentation/tools/rtla/rtla-osnoise-hist.rst  | 2 +-
- Documentation/tools/rtla/rtla-osnoise-top.rst   | 2 +-
- Documentation/tools/rtla/rtla-osnoise.rst       | 2 +-
- Documentation/tools/rtla/rtla-timerlat-hist.rst | 2 +-
- Documentation/tools/rtla/rtla-timerlat-top.rst  | 2 +-
- Documentation/tools/rtla/rtla-timerlat.rst      | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
 
-diff --git a/Documentation/tools/rtla/rtla-hwnoise.rst b/Documentation/tools/rtla/rtla-hwnoise.rst
-index 26512b15fe7b..5930bbca4522 100644
---- a/Documentation/tools/rtla/rtla-hwnoise.rst
-+++ b/Documentation/tools/rtla/rtla-hwnoise.rst
-@@ -100,7 +100,7 @@ SEE ALSO
- 
- **rtla-osnoise**\(1)
- 
--Osnoise tracer documentation: <https://www.kernel.org/doc/html/latest/trace/osnoise-tracer.html>
-+`Osnoise tracer <https://docs.kernel.org/trace/osnoise-tracer.html>`__
- 
- AUTHOR
- ======
-diff --git a/Documentation/tools/rtla/rtla-osnoise-hist.rst b/Documentation/tools/rtla/rtla-osnoise-hist.rst
-index 007521c865d9..6ddea2c6d490 100644
---- a/Documentation/tools/rtla/rtla-osnoise-hist.rst
-+++ b/Documentation/tools/rtla/rtla-osnoise-hist.rst
-@@ -59,7 +59,7 @@ SEE ALSO
- ========
- **rtla-osnoise**\(1), **rtla-osnoise-top**\(1)
- 
--*osnoise* tracer documentation: <https://www.kernel.org/doc/html/latest/trace/osnoise-tracer.html>
-+`Osnoise tracer <https://docs.kernel.org/trace/osnoise-tracer.html>`__
- 
- AUTHOR
- ======
-diff --git a/Documentation/tools/rtla/rtla-osnoise-top.rst b/Documentation/tools/rtla/rtla-osnoise-top.rst
-index 6ccadae38945..b91c02ac2bbe 100644
---- a/Documentation/tools/rtla/rtla-osnoise-top.rst
-+++ b/Documentation/tools/rtla/rtla-osnoise-top.rst
-@@ -54,7 +54,7 @@ SEE ALSO
- 
- **rtla-osnoise**\(1), **rtla-osnoise-hist**\(1)
- 
--Osnoise tracer documentation: <https://www.kernel.org/doc/html/latest/trace/osnoise-tracer.html>
-+`Osnoise tracer <https://docs.kernel.org/trace/osnoise-tracer.html>`__
- 
- AUTHOR
- ======
-diff --git a/Documentation/tools/rtla/rtla-osnoise.rst b/Documentation/tools/rtla/rtla-osnoise.rst
-index 540d2bf6c152..decd9e11fcf2 100644
---- a/Documentation/tools/rtla/rtla-osnoise.rst
-+++ b/Documentation/tools/rtla/rtla-osnoise.rst
-@@ -50,7 +50,7 @@ SEE ALSO
- ========
- **rtla-osnoise-top**\(1), **rtla-osnoise-hist**\(1)
- 
--Osnoise tracer documentation: <https://www.kernel.org/doc/html/latest/trace/osnoise-tracer.html>
-+`Osnoise tracer <https://docs.kernel.org/trace/osnoise-tracer.html>`__
- 
- AUTHOR
- ======
-diff --git a/Documentation/tools/rtla/rtla-timerlat-hist.rst b/Documentation/tools/rtla/rtla-timerlat-hist.rst
-index f56fe546411b..dab75677b06e 100644
---- a/Documentation/tools/rtla/rtla-timerlat-hist.rst
-+++ b/Documentation/tools/rtla/rtla-timerlat-hist.rst
-@@ -104,7 +104,7 @@ SEE ALSO
- ========
- **rtla-timerlat**\(1), **rtla-timerlat-top**\(1)
- 
--*timerlat* tracer documentation: <https://www.kernel.org/doc/html/latest/trace/timerlat-tracer.html>
-+`Timerlat tracer <https://docs.kernel.org/trace/timerlat-tracer.html>`__
- 
- AUTHOR
- ======
-diff --git a/Documentation/tools/rtla/rtla-timerlat-top.rst b/Documentation/tools/rtla/rtla-timerlat-top.rst
-index 72d85e36c193..05959f1a4661 100644
---- a/Documentation/tools/rtla/rtla-timerlat-top.rst
-+++ b/Documentation/tools/rtla/rtla-timerlat-top.rst
-@@ -127,7 +127,7 @@ SEE ALSO
- --------
- **rtla-timerlat**\(1), **rtla-timerlat-hist**\(1)
- 
--*timerlat* tracer documentation: <https://www.kernel.org/doc/html/latest/trace/timerlat-tracer.html>
-+`Timerlat tracer <https://docs.kernel.org/trace/timerlat-tracer.html>`__
- 
- AUTHOR
- ------
-diff --git a/Documentation/tools/rtla/rtla-timerlat.rst b/Documentation/tools/rtla/rtla-timerlat.rst
-index ce9f57e038c3..63718c52aa3f 100644
---- a/Documentation/tools/rtla/rtla-timerlat.rst
-+++ b/Documentation/tools/rtla/rtla-timerlat.rst
-@@ -45,7 +45,7 @@ SEE ALSO
- ========
- **rtla-timerlat-top**\(1), **rtla-timerlat-hist**\(1)
- 
--*timerlat* tracer documentation: <https://www.kernel.org/doc/html/latest/trace/timerlat-tracer.html>
-+`Timerlat tracer <https://docs.kernel.org/trace/timerlat-tracer.html>`__
- 
- AUTHOR
- ======
+index 05307d89c3f4..e172c31b33fa 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -335,7 +335,7 @@ config VGA_ARB_MAX_GPUS
+           multiple GPUS.  The overhead for each GPU is very small.
+
+  config PCI_LIVEUPDATE
+-       bool "PCI Live Update Support (EXPERIMENTAL)"
++       tristate "PCI Live Update Support (EXPERIMENTAL)"
+         depends on PCI && LIVEUPDATE
+         help
+           Support for preserving PCI devices across a Live Update. This 
+option
+diff --git a/drivers/pci/liveupdate.c b/drivers/pci/liveupdate.c
+index c1251f4f8438..71bab8ecba85 100644
+--- a/drivers/pci/liveupdate.c
++++ b/drivers/pci/liveupdate.c
+@@ -413,3 +413,26 @@ void pci_liveupdate_unregister_flb(struct 
+liveupdate_file_handler *fh)
+         liveupdate_unregister_flb(fh, &pci_liveupdate_flb);
+  }
+  EXPORT_SYMBOL_GPL(pci_liveupdate_unregister_flb);
++
++extern void (*pci_liveupdate_setup_device_hook)(struct pci_dev *dev);
++extern u32 (*pci_liveupdate_incoming_nr_devices_hook)(void);
++static int __init liveupdate_module_init(void)
++{
++       pci_liveupdate_setup_device_hook = pci_liveupdate_setup_device;
++       pci_liveupdate_incoming_nr_devices_hook = 
+pci_liveupdate_incoming_nr_devices;
++       pr_info("loaded\n");
++       return 0;
++}
++
++static void __exit liveupdate_module_exit(void)
++{
++       pci_liveupdate_setup_device_hook = NULL;
++       pci_liveupdate_incoming_nr_devices_hook = NULL;
++       pr_info("unloaded\n");
++}
++
++module_init(liveupdate_module_init);
++module_exit(liveupdate_module_exit);
++
++MODULE_LICENSE("GPL");
++MODULE_DESCRIPTION("PCI Live Update Support");
+diff --git a/drivers/pci/pci.h b/drivers/pci/pci.h
+index 979cb9921340..93f76500cb0d 100644
+--- a/drivers/pci/pci.h
++++ b/drivers/pci/pci.h
+@@ -1434,18 +1434,12 @@ static inline int pci_msix_write_tph_tag(struct 
+pci_dev *pdev, unsigned int inde
+         (PCI_CONF1_ADDRESS(bus, dev, func, reg) | \
+          PCI_CONF1_EXT_REG(reg))
+
+-#ifdef CONFIG_PCI_LIVEUPDATE
++#if IS_ENABLED(CONFIG_PCI_LIVEUPDATE)
+  void pci_liveupdate_setup_device(struct pci_dev *dev);
+-u32 pci_liveupdate_incoming_nr_devices(void);
+  #else
+  static inline void pci_liveupdate_setup_device(struct pci_dev *dev)
+  {
+  }
+-
+-static inline u32 pci_liveupdate_incoming_nr_devices(void)
+-{
+-       return 0;
+-}
+  #endif
+
+  #endif /* DRIVERS_PCI_H */
+diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
+index 165056d71e66..4880302bca43 100644
+--- a/drivers/pci/probe.c
++++ b/drivers/pci/probe.c
+@@ -1369,6 +1369,9 @@ bool pci_ea_fixed_busnrs(struct pci_dev *dev, u8 
+*sec, u8 *sub)
+         return true;
+  }
+
++u32 (*pci_liveupdate_incoming_nr_devices_hook)(void) = NULL;
++EXPORT_SYMBOL_GPL(pci_liveupdate_incoming_nr_devices_hook);
++
+  static bool pci_assign_all_busses(void)
+  {
+         if (!pcibios_assign_all_busses())
+@@ -1389,7 +1392,7 @@ static bool pci_assign_all_busses(void)
+          * numbers during the initial cold boot, and then that topology 
+would
+          * then remain fixed across any subsequent Live Updates.
+          */
+-       if (pci_liveupdate_incoming_nr_devices()) {
++       if (pci_liveupdate_incoming_nr_devices_hook && 
+pci_liveupdate_incoming_nr_devices_hook()) {
+                 pr_info_once("Ignoring pci=assign-busses and inheriting 
+bus numbers during Live Update\n");
+                 return false;
+         }
+@@ -2030,6 +2033,9 @@ static const char *pci_type_str(struct pci_dev *dev)
+         }
+  }
+
++void (*pci_liveupdate_setup_device_hook)(struct pci_dev *dev) = NULL;
++EXPORT_SYMBOL_GPL(pci_liveupdate_setup_device_hook);
++
+  /**
+   * pci_setup_device - Fill in class and map information of a device
+   * @dev: the device structure to fill
+@@ -2091,7 +2097,8 @@ int pci_setup_device(struct pci_dev *dev)
+         if (pci_early_dump)
+                 early_dump_pci_device(dev);
+
+-       pci_liveupdate_setup_device(dev);
++       if (pci_liveupdate_setup_device_hook)
++               pci_liveupdate_setup_device_hook(dev);
+
+         /* Need to have dev->class ready */
+         dev->cfg_size = pci_cfg_space_size(dev);
+diff --git a/include/linux/pci.h b/include/linux/pci.h
+index 27ee9846a2fd..aaab6adb487e 100644
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -592,7 +592,7 @@ struct pci_dev {
+         u8              tph_mode;       /* TPH mode */
+         u8              tph_req_type;   /* TPH requester type */
+  #endif
+-#ifdef CONFIG_PCI_LIVEUPDATE
++#if IS_ENABLED(CONFIG_PCI_LIVEUPDATE)
+         unsigned int    liveupdate_incoming:1;  /* Preserved by 
+previous kernel */
+         unsigned int    liveupdate_outgoing:1;  /* Preserved for next 
+kernel */
+  #endif
+@@ -2876,7 +2876,7 @@ void pci_uevent_ers(struct pci_dev *pdev, enum  
+pci_ers_result err_type);
+         WARN_ONCE(condition, "%s %s: " fmt, \
+                   dev_driver_string(&(pdev)->dev), pci_name(pdev), ##arg)
+
+-#ifdef CONFIG_PCI_LIVEUPDATE
++#if IS_ENABLED(CONFIG_PCI_LIVEUPDATE)
+  int pci_liveupdate_preserve(struct pci_dev *dev);
+  void pci_liveupdate_unpreserve(struct pci_dev *dev);
+  int pci_liveupdate_retrieve(struct pci_dev *dev);
+diff --git a/kernel/liveupdate/luo_flb.c b/kernel/liveupdate/luo_flb.c
+index 874830f8e44d..33fbdc6c417c 100644
+--- a/kernel/liveupdate/luo_flb.c
++++ b/kernel/liveupdate/luo_flb.c
+@@ -461,7 +461,7 @@ int liveupdate_register_flb(struct 
+liveupdate_file_handler *fh,
+
+         return 0;
+  }
+-
++EXPORT_SYMBOL_GPL(liveupdate_register_flb);
+  /**
+   * liveupdate_unregister_flb - Remove an FLB dependency from a file 
+handler.
+   * @fh:   The file handler that is currently depending on the FLB.
+@@ -487,7 +487,7 @@ void liveupdate_unregister_flb(struct 
+liveupdate_file_handler *fh,
+
+         luo_flb_unregister_one(fh, flb);
+  }
+-
++EXPORT_SYMBOL_GPL(liveupdate_unregister_flb);
+  /**
+   * liveupdate_flb_get_incoming - Retrieve the incoming FLB object.
+   * @flb:  The FLB definition.
+@@ -525,7 +525,7 @@ int liveupdate_flb_get_incoming(struct 
+liveupdate_flb *flb, void **objp)
+
+         return 0;
+  }
+-
++EXPORT_SYMBOL_GPL(liveupdate_flb_get_incoming);
+  /**
+   * liveupdate_flb_get_outgoing - Retrieve the outgoing FLB object.
+   * @flb:  The FLB definition.
+@@ -552,6 +552,7 @@ int liveupdate_flb_get_outgoing(struct 
+liveupdate_flb *flb, void **objp)
+
+         return 0;
+  }
++EXPORT_SYMBOL_GPL(liveupdate_flb_get_outgoing);
+
+  int __init luo_flb_setup_outgoing(void *fdt_out)
+  {
+
 -- 
-2.53.0
+Best Regards,
+Yanjun.Zhu
 
 
