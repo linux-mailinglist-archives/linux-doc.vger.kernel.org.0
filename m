@@ -1,143 +1,213 @@
-Return-Path: <linux-doc+bounces-82576-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82577-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YMQjF/bR02nGmgcAu9opvQ
-	(envelope-from <linux-doc+bounces-82576-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 17:32:06 +0200
+	id EBRSICra02nVnQcAu9opvQ
+	(envelope-from <linux-doc+bounces-82577-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 18:07:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D32C43A4C25
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 17:32:05 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DC403A5156
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 18:07:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7A536301AB88
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Apr 2026 15:31:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 563243015E2E
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Apr 2026 16:06:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C72362F12A5;
-	Mon,  6 Apr 2026 15:31:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84C7A386558;
+	Mon,  6 Apr 2026 16:06:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kqD9k+yc"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="IwnwHUVD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A49BB2DF6F4
-	for <linux-doc@vger.kernel.org>; Mon,  6 Apr 2026 15:31:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775489464; cv=none; b=F0+Hp7FZ7wqwMjJ/lHIphgQ0c2WnOA6iI+ianUWhLFrHKLb3ONS3FDsAzCGrZWMXggvH66YkqmJDeeWwts8UBixX6xvsvUh1laK8m143X6u7NXOhyz+1/awCLsmD4xiCqcw1g7Ci3kW89MsJSV2oUEpXXum8TerZ7ktdmU0NDJE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775489464; c=relaxed/simple;
-	bh=upOPgQrKow7ScyuKD1WfCKj6976lQXmqW8HddZVDJoo=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 102A6346A01
+	for <linux-doc@vger.kernel.org>; Mon,  6 Apr 2026 16:06:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.167.41
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1775491608; cv=pass; b=iI/RFn1OzbXp5Uw2HhsnZUV+gW9Wyu+CbjaZx7Tmb1nGkLY8WU7nkONzXNUbAuy/89g3Lk3XYugaukZGioFwqkZMoU6Obu36e/a6EFBL++PrOz8BkBOaR1vEOg2UHxAEscjDTPfBQVpGc4rlmnD8nWEbNpxM3UnjgfnKVTHCLSc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1775491608; c=relaxed/simple;
+	bh=0mfv2q13bWahVT0s2waY/ovs1AueK0bCMf6E6tJ8ke4=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SuTA332HhwXlydruk2ARcwLgp804D1zPTMPgDKRYQObVQIWMlEfs1B4je3mLlEPvUE2Ag7wl9rYJ9wB3UD58e+Ol76Pdhk6uXDo6EDSdLkxeQrdpdFOjF6sVec85lVXBZ3Gb3MXV8thM9pX4sqgMv/eACVyt7Vwlz9QY+omdNEc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kqD9k+yc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 769A1C2BCAF
-	for <linux-doc@vger.kernel.org>; Mon,  6 Apr 2026 15:31:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775489464;
-	bh=upOPgQrKow7ScyuKD1WfCKj6976lQXmqW8HddZVDJoo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=kqD9k+ycQlsiYEuHvSJeSyj6IRexOnfGBKsKJSNIrwAwZTHRSHkstsk1e8qmv714V
-	 FUeHB5NV6WB/0CHoUr1Lz5BcP8qsJXzTG+0JENcCwgi5JPw01njdTBXGZ88ZdKTTKz
-	 5JxnP9jfP9WcAfmbgR3zkTwF4YSGdqaoY6Y1tt9fDxwV+VxZhuFAXjaGFxcfFDAX9I
-	 GG4IfT7hAE/g5gMEUz/ACvTuOyhX6rQEGd8gv6B0QFGdjdmSKpTx8VxOVqSB1+yOiy
-	 cS3ATA0jMkmkM6QhsQ+y8HtZJ6SKahrSm/DoKMfme1blIQ9Trr9b2zy9kl5UEA9o85
-	 v11je9Jgag/Lw==
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-38df27b25e3so12783421fa.0
-        for <linux-doc@vger.kernel.org>; Mon, 06 Apr 2026 08:31:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCXTiIm6zkpU2/2iuqTb86EzsGEWfFHice2GDky3X8TrX8OJ9WcUF976WmzV/tuOSDB1v7lkcCBOXy0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwxUNF9ZpU958f6LtIkYQBe+g3txfTVW+drTJBbnU5NCxgEGo3d
-	qqGk+vhha7aBuejrPrsyeVGhrk675lU2vlK0ES0S8Ffgo96d76/30qcEQSwqAAYCYsHj682McpY
-	0cnbAlO9Z1OhGY3IEg1eqCrQW/T5vUvI=
-X-Received: by 2002:a2e:80d3:0:b0:38a:f5a6:9173 with SMTP id
- 38308e7fff4ca-38d91c092bamr32802941fa.27.1775489462303; Mon, 06 Apr 2026
- 08:31:02 -0700 (PDT)
+	 To:Cc:Content-Type; b=G3UnyPr/uj49TePZBTPemnTUhNjB7a/Q4dXkesofx/wFTG1HvC0TfBx+gdaSkkTGd4JeweDVNEV+AGpO/Ml57rgKcLJ8pwunBePi8datEJ/UO5zAeMUFCAmNAdWAm/Ab0PygiwVvAkElt0AEQ7G2sZRvW9NG2jKknWaI1LITRQI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=IwnwHUVD; arc=pass smtp.client-ip=209.85.167.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5a2b542cbaaso4403764e87.0
+        for <linux-doc@vger.kernel.org>; Mon, 06 Apr 2026 09:06:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775491605; cv=none;
+        d=google.com; s=arc-20240605;
+        b=RbbAY1sHmJOAxPrg/OOsHvWdwGXpUQdV6n4Ya6Wbs9yUNA6uHsxNLukD3zs7jcZ4pe
+         jPwkHN/Z/JfV7cbFvvBTkMUfwHi4+uuyI79gTfTjCiJkk0JpcimWgj3fttQferT65dr/
+         xRrIgG+VQ0kCvNQgQQO1QWhTMtfEKm4KobUGuKr1Qv6N8zfBBZHORMOc6uEM+IEcxHvW
+         q3V8cCE5nZo7QU6Z3O4FtpvYjmmUeMqEWTXjFBGcsKQPE5v6BYobmyNdTvKG5YwF/HQp
+         ld+6rvDdvembE1TN1NimF5LWv2V/FkR2VO0dR2SrEFzUuxxhrYapMUivsS86kiTZQvsT
+         /+Yg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=cOKcd1E+kh/rgDmBatc+5AEkevvJqYiqh34IKuXZ368=;
+        fh=c4PH+jr9XTpe/oECtJeUuh+ObQl9rW5DNvVobZ9Ejag=;
+        b=foSEqAzMq0UHLvrm0wTHljWQ7q2zKnxaWIHvbFvzU+OQCuiZ614eGtkyLaBLawdIDi
+         y1qFNEtnaOafn3l3JSw5Da/Bs86UFEzCf8fCTcEExohz49WSCOy+cMhhMnjUWiHTPkRp
+         bM2kWi2KJgFru5U8g5WccJpFMHgr841FyrrksmTW60q6StYOYVy5zJfARigslThZURCj
+         AjqQwKDLPo1WgQd4k2mN+WHAFDWNm8Y2rECdZUg29YpMZprfOu8ej8fClf55Gb/moYMP
+         IvHcSz3UbyidKP9fwSbMQRecPjImUcfjGheWy2UiaPetTgCOM2nFWDgwmDvIQ2yJ4fd9
+         il1A==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1775491605; x=1776096405; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cOKcd1E+kh/rgDmBatc+5AEkevvJqYiqh34IKuXZ368=;
+        b=IwnwHUVD2T4Xb+Dd46BueA+Str+szIapn/Y+fyFgQSwlj6mjzlptehM1Sg6sFr/dwP
+         3/Y1pkp2MwvbGzpNJKsRRCMnPF4yISFdb1OZv23yZ7I7QZgSWRjtI+UkYbPLzAUNkXhw
+         k7dgJGyqBsf48qQdKVz/KPE7CvG1T4JyZDRV/4/3numJsXFFE8ATg28Ku7sq8l9Ns5wR
+         aMXQgJT++ZZAj6Jq4q53P43tlh1BPBlIupFJOFOkGTTdquFzsj4NJtEubzYunEHrbwr4
+         Pj6Q5vptSf57UeMe8W+fBnqjBlh5WRfD7UwDgIrJ0Szmz1FrYU0sZzEQocx3URM+s4uc
+         RSjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775491605; x=1776096405;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=cOKcd1E+kh/rgDmBatc+5AEkevvJqYiqh34IKuXZ368=;
+        b=QgolbgHZYm84nZItqQl7/t3XPcuE3XtiEbspDsYy2hED3kPf/rTbbFgkZFPKQD/psF
+         Qs8xx31D6XiKc2CPdYFhtxWoJfs5aUuw7RhCGUolFk1DbAVwyQrsyQIbbsvRzPmVTDBM
+         huFUOSgBBsCW2hvP23pTX0gpGMlz1mgq1YP2z/itLRf/mxNLIDIdj8zqVAM/D5HQbEDh
+         2pdZ4Ts/I5uJYHOe7drmbxYNAYl7AIbXXGfZfzqBjC8y4Uv7oiyqiWqFQJwkysQgsRed
+         s+kkFbbqUXrPzpSuz5Z+6bhocqn8dIKV796kFdxc5Q37QmKgO7A2cbj0c8Tv/dSYpqBZ
+         DMHA==
+X-Forwarded-Encrypted: i=1; AJvYcCUg0nBvCjL95CaIjFt4q1y9ncmkwCtz7hbyl30FQm68QaTb7nJ1LeKZOcVKsNzgNGYcPij/U5pa0gk=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz0mGmJKdO8w5o83FTL+3r9AZA7U5EACPzq15VNYUm8GJ4eaZ6d
+	KY3cywyPbMB7gMtOe1DQPb01Ru39h1XmqNEu482S1WkTxeZXMc2lEn3rAwYp+DwUuUAHwpYUl/I
+	EpMjURJ17GNWCSE+0ekwGr1zBS9/kzcPddoNI8JWC
+X-Gm-Gg: AeBDiev9DKHpwrEs3YAMsEhvGghfEvaAh58t3X05aSKBj7mJLre1VFiE+YKZM7oF2g/
+	uNzT1ug3PJwgHYg1Z2oKwnPoILT7IRERcu1kWLlJpBxQUV9wJJ6OljmZ4xMo8XH2COIpSGKTVrc
+	ziw+nY4X+Uc7xXHmyNFWPucSmoNTaSZdk4Jqb0Q9dswBL6fsx2+W9Jx5lbKqJmfoeD2Gnqvo4ZX
+	+5myBwimtU3MlJ+OhDidwQbdW2XNaqJk6R9b9mW6S409uO5OZFX9z8cbVHNwuTNiGt4NqoIe6sD
+	y/dDDMNg
+X-Received: by 2002:a05:6512:33cd:b0:5a3:d2ef:2f93 with SMTP id
+ 2adb3069b0e04-5a3d2ef2ff2mr3364086e87.30.1775491604807; Mon, 06 Apr 2026
+ 09:06:44 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260405235309.418950-1-ojeda@kernel.org> <20260405235309.418950-8-ojeda@kernel.org>
- <177548573697.95472.13544191227699996309.b4-review@b4> <CANiq72ne_JYPodnROckyNto10ZF0PqadRxSrng5-mZyqVovxFg@mail.gmail.com>
-In-Reply-To: <CANiq72ne_JYPodnROckyNto10ZF0PqadRxSrng5-mZyqVovxFg@mail.gmail.com>
-From: Tamir Duberstein <tamird@kernel.org>
-Date: Mon, 6 Apr 2026 11:30:26 -0400
-X-Gmail-Original-Message-ID: <CAJ-ks9kbHz_KYAXx02vgW1dN2pfb5MFoaSoU1HbJbJg2O8EUaw@mail.gmail.com>
-X-Gm-Features: AQROBzB1MuYM_2_U32IZvjJjOPHSscckixukkJGDNua3mGMOgh49W4AabPzp8YM
-Message-ID: <CAJ-ks9kbHz_KYAXx02vgW1dN2pfb5MFoaSoU1HbJbJg2O8EUaw@mail.gmail.com>
-Subject: Re: [PATCH v2 07/33] rust: allow globally `clippy::incompatible_msrv`
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
-	Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
-	Alexandre Courbot <acourbot@nvidia.com>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Brendan Higgins <brendan.higgins@linux.dev>, David Gow <david@davidgow.net>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>, 
-	Todd Kjos <tkjos@android.com>, Christian Brauner <christian@brauner.io>, 
-	Carlos Llamas <cmllamas@google.com>, Alice Ryhl <aliceryhl@google.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>, 
-	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <lossin@kernel.org>, Trevor Gross <tmgross@umich.edu>, rust-for-linux@vger.kernel.org, 
-	linux-kbuild@vger.kernel.org, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
-	Vlastimil Babka <vbabka@kernel.org>, "Liam R . Howlett" <Liam.Howlett@oracle.com>, 
-	Uladzislau Rezki <urezki@gmail.com>, linux-block@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, Alexandre Ghiti <alex@ghiti.fr>, 
-	linux-riscv@lists.infradead.org, nouveau@lists.freedesktop.org, 
-	dri-devel@lists.freedesktop.org, Rae Moar <raemoar63@gmail.com>, 
-	linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Bill Wendling <morbo@google.com>, 
-	Justin Stitt <justinstitt@google.com>, llvm@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
+References: <20260323235817.1960573-1-dmatlack@google.com> <20260323235817.1960573-3-dmatlack@google.com>
+ <e3fe7085-1297-47b8-bb17-a48196e8f37f@linux.dev> <CALzav=eyf4XRTi8MfE_GBNSm+tjmfX7=d0M8Aj5Hh0vJn7huew@mail.gmail.com>
+ <c4138f66-edf2-4689-b5fe-16dc4839e9c3@linux.dev>
+In-Reply-To: <c4138f66-edf2-4689-b5fe-16dc4839e9c3@linux.dev>
+From: David Matlack <dmatlack@google.com>
+Date: Mon, 6 Apr 2026 09:06:15 -0700
+X-Gm-Features: AQROBzBbHlG2eO4NjewlbX-rvy8OZhgqlWaRP6spr5d6_KAEWYAdDGH-j6HkrWs
+Message-ID: <CALzav=ei_xSfM0MTdPFhGDjNwe3EQ0vHPiEk=vszFX-Xi_KjQw@mail.gmail.com>
+Subject: Re: [PATCH v3 02/24] PCI: Add API to track PCI devices preserved
+ across Live Update
+To: Zhu Yanjun <yanjun.zhu@linux.dev>
+Cc: Alex Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, Alex Mastro <amastro@fb.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Ankit Agrawal <ankita@nvidia.com>, 
+	Arnd Bergmann <arnd@arndb.de>, Askar Safin <safinaskar@gmail.com>, 
+	"Borislav Petkov (AMD)" <bp@alien8.de>, Chris Li <chrisl@kernel.org>, Dapeng Mi <dapeng1.mi@linux.intel.com>, 
+	David Rientjes <rientjes@google.com>, Feng Tang <feng.tang@linux.alibaba.com>, 
+	Jacob Pan <jacob.pan@linux.microsoft.com>, Jason Gunthorpe <jgg@nvidia.com>, 
+	Jason Gunthorpe <jgg@ziepe.ca>, Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>, 
+	Kees Cook <kees@kernel.org>, Kevin Tian <kevin.tian@intel.com>, kexec@lists.infradead.org, 
+	kvm@vger.kernel.org, Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
+	linux-pci@vger.kernel.org, Li RongQing <lirongqing@baidu.com>, 
+	Lukas Wunner <lukas@wunner.de>, Marco Elver <elver@google.com>, 
+	=?UTF-8?Q?Micha=C5=82_Winiarski?= <michal.winiarski@intel.com>, 
+	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, 
+	Pasha Tatashin <pasha.tatashin@soleen.com>, "Paul E. McKenney" <paulmck@kernel.org>, 
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, 
+	"Peter Zijlstra (Intel)" <peterz@infradead.org>, Pranjal Shrivastava <praan@google.com>, 
+	Pratyush Yadav <pratyush@kernel.org>, Raghavendra Rao Ananta <rananta@google.com>, 
+	Randy Dunlap <rdunlap@infradead.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Vipin Sharma <vipinsh@google.com>, 
+	Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>, Yi Liu <yi.l.liu@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,arm.com,dabbelt.com,eecs.berkeley.edu,nvidia.com,gmail.com,ffwll.ch,linux.dev,davidgow.net,linuxfoundation.org,android.com,brauner.io,google.com,lwn.net,garyguo.net,protonmail.com,umich.edu,vger.kernel.org,oracle.com,lists.infradead.org,ghiti.fr,lists.freedesktop.org,googlegroups.com,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-82576-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82577-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[shazbot.org,google.com,nvidia.com,amazon.com,fb.com,linux-foundation.org,arndb.de,gmail.com,alien8.de,kernel.org,linux.intel.com,linux.alibaba.com,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,baidu.com,wunner.de,soleen.com,infradead.org,linuxfoundation.org];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DKIM_TRACE(0.00)[google.com:+];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tamird@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[50];
-	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	NEURAL_HAM(-0.00)[-0.996];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: D32C43A4C25
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dmatlack@google.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[53];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid,linux.dev:email]
+X-Rspamd-Queue-Id: 2DC403A5156
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Apr 6, 2026 at 10:38=E2=80=AFAM Miguel Ojeda
-<miguel.ojeda.sandonis@gmail.com> wrote:
+On Sun, Apr 5, 2026 at 9:56=E2=80=AFAM Zhu Yanjun <yanjun.zhu@linux.dev> wr=
+ote:
+> =E5=9C=A8 2026/4/3 14:58, David Matlack =E5=86=99=E9=81=93:
+> > On Thu, Apr 2, 2026 at 2:29=E2=80=AFPM Yanjun.Zhu <yanjun.zhu@linux.dev=
+> wrote:
+> >> On 3/23/26 4:57 PM, David Matlack wrote:
+> >>> +config PCI_LIVEUPDATE
+> >>> +     bool "PCI Live Update Support (EXPERIMENTAL)"
+> >>> +     depends on PCI && LIVEUPDATE
+> >>> +     help
+> >>> +       Support for preserving PCI devices across a Live Update. This=
+ option
+> >>> +       should only be enabled by developers working on implementing =
+this
+> >>> +       support. Once enough support as landed in the kernel, this op=
+tion
+> >>> +       will no longer be marked EXPERIMENTAL.
+> >>> +
+> >>> +       If unsure, say N.
+> >> Currently, it only supports 'n' or 'y'. Is it possible to add 'm'
+> >> (modular support)?
+> >>
+> >> This would allow the feature to be built as a kernel module. For
+> >> development
+> >>
+> >> purposes, modularization means we only need to recompile a single modu=
+le
+> >>
+> >> for testing, rather than rebuilding the entire kernel. Compiling a
+> >> module should
+> >>
+> >> be significantly faster than a full kernel build.
+> > I don't think it is possible for CONFIG_PCI_LIVEUPDATE to support 'm'.
+> > pci_setup_device() (which is under CONFIG_PCI) needs to call
+> > pci_liveupdate_setup_device(), and CONFIG_PCI cannot be built as a
+> > module. This call is necessary so the PCI core knows whether a device
+> > being enumerated was preserved across a previous Live Update.
 >
-> On Mon, Apr 6, 2026 at 4:29=E2=80=AFPM Tamir Duberstein <tamird@kernel.or=
-g> wrote:
-> >
-> > Could you add a reference to the upstream bug report [0] here?
->
-> Of course, thanks for the tags!
+> After the following changes, the liveupdate.ko can be generated
+> successfully.
 
-You're welcome! Actually it seems the lint was already improved
-upstream, starting with 1.90.0.
-
-Link: https://github.com/rust-lang/rust-clippy/commit/c0dc3b61 [0]
+Sure but you've broken the feature. Now devices can be probed before
+liveupdate.ko is loaded and the PCI core will have an incorrect view
+of which devices were preserved by the previous kernel.
 
