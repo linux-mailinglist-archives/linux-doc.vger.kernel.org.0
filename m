@@ -1,176 +1,155 @@
-Return-Path: <linux-doc+bounces-82585-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82586-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oGdKDff202k4ogcAu9opvQ
-	(envelope-from <linux-doc+bounces-82585-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 20:09:59 +0200
+	id yLGZHiT302k4ogcAu9opvQ
+	(envelope-from <linux-doc+bounces-82586-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 20:10:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E4693A6050
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 20:09:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C65A03A608C
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 20:10:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3FB98300FEE3
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Apr 2026 18:09:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D5DA0302927A
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Apr 2026 18:10:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36D4C39183A;
-	Mon,  6 Apr 2026 18:09:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 662502989B5;
+	Mon,  6 Apr 2026 18:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="HrKy4i01"
+	dkim=pass (2048-bit key) header.d=dama-to.20251104.gappssmtp.com header.i=@dama-to.20251104.gappssmtp.com header.b="w2Z4HDhg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com [95.215.58.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 700B72989B5
-	for <linux-doc@vger.kernel.org>; Mon,  6 Apr 2026 18:09:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75FF44A02
+	for <linux-doc@vger.kernel.org>; Mon,  6 Apr 2026 18:09:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775498995; cv=none; b=aAayaFtOAovPtevwVDwxX51WMN/qvHy7IOJXYVmt0cJVj/j82V4+HHIyIAWl5xd55m2gYg9jsmYqgWXMZ1UhewJRnWsbbRViuABFwRgy2UGYwCaTSJIaz3ZF8N/T1eA4lrDc1GUMj++juvIt8vILegztr1csnBarssLj+DkoGUM=
+	t=1775499000; cv=none; b=RU5AOaBuWrEeloebqpX/8UB/gGNhey8hkpIbaxu1lccmYgTZ/XX81+opYNAA13wd0uyKqHTLcLCsDHeIDwResRH9nBC6Wqm540WpC2MXP3DU5g6X9AZNW3YvryDQBE1ZUovhy0A6Yl+uuQ+6Kfh2Cj1v9P4RKy3BR+6JW1aP+T4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775498995; c=relaxed/simple;
-	bh=lACdRiktp8MRpKGUYxGcgD19C0bqmXpZNFtvU5fyNw8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rtOIj7V4SEv2F7NCes0D3RSFsg0xSI05pxV8tXa5j84to0VAv/Yxbl4oRdgjV584AU9UZI+skcSyScVMReUQSsp8A3fOgKBr+1rfgtUYK8xGbHSFIuhiF7OO3rAbG61b4pEdisjgiJFO+iRGVFDhFV7JeYWLQbPA3tO3422xXT4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=HrKy4i01; arc=none smtp.client-ip=95.215.58.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Message-ID: <1c5fd907-f610-48e4-89cc-4040aaef2674@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1775498991;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=85/sv/Jd+nnLebgu7yOJ82/6JMUXxVcSgRKO3WW/KJM=;
-	b=HrKy4i01v27KUFcXt/1w2kf+yZsl5MXCFBmMdpuBla2c4B2kFG8UdHSH93UsEojRTPjWIJ
-	RVbUZS7qtBOUTvf1Fe92L2hJ6/CpkB4KYvevqVhozqjWCBottlm/LzMr5DomESqDJznrrj
-	NsvzlhYZFx9aBwmc2y/0M9aHDJw9o8k=
-Date: Mon, 6 Apr 2026 11:09:37 -0700
+	s=arc-20240116; t=1775499000; c=relaxed/simple;
+	bh=y87UGnEvy+KkqoyI9K6D3ZSqtPHNEV6mFem3Govbx0Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=adbFOYwPUnsSjixfDPTEoGDQ+HP14dyFK7PzeVVM+VEnETZwhqlxzXgqSUKde2Tavi96IErw5O0dK9VfJVjiOeOIuionmLlzAiAE60TrPUk8uu42P0zo+ahoBDBJRJSvltflOQJKCfsf9rgnOx02/OOG2EaWoiWcfIitezH8UW8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dama.to; spf=none smtp.mailfrom=dama.to; dkim=pass (2048-bit key) header.d=dama-to.20251104.gappssmtp.com header.i=@dama-to.20251104.gappssmtp.com header.b=w2Z4HDhg; arc=none smtp.client-ip=209.85.214.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dama.to
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=dama.to
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2b25cf1b5f0so26781835ad.3
+        for <linux-doc@vger.kernel.org>; Mon, 06 Apr 2026 11:09:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=dama-to.20251104.gappssmtp.com; s=20251104; t=1775498998; x=1776103798; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KjRd2j/guPJEuyJ4mogcE8ofw18KOTulc7ao1ZGMUDs=;
+        b=w2Z4HDhg1PJezTM7L4d7GIEQbA8nG1NcyAPPCtZXohOlyTaLw5WjEWbPxALTWJwdDJ
+         dDha5Qxm7e6NSZGTmPLGi80ylGWh8iiBv/k8FpGYJcjMSYVoHE+Qkn6dvmSLpAQzZ/2o
+         nXQ/4qAehKwWvukRxvMS71ksHiSlHVsnskXtKq0ASykSnr2uzc1QxRvhH2uM/Kjp+KaS
+         EPPZt9uoNJrLvyJflz1pa6DDmejP/EFFDqaVPAhpM9dJ9GJWEcejPNtiDrpSxPSNoJgd
+         nQH1769THVuM30r1Jz+p6+lgz6q3BFKg09iglaJcO4Zz3rz0TpE1mWFofryc74LlTYB8
+         hnHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775498998; x=1776103798;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=KjRd2j/guPJEuyJ4mogcE8ofw18KOTulc7ao1ZGMUDs=;
+        b=rsFjq1u8oziJxL/HGSE+fln0GgKWHcZTahDLlwm5tVpKy1Gib7PXPnp1oYIu7BgorJ
+         xKoRP/BAJNX7nm/ZA57tmpTn7I7yuDpQty/lQXFrlT+RqawbAtG4/Fh0sQypbQmd4v/a
+         KW8TQgTa8uclwUFERyFTl/jQHwBup2GV+rJY+Rpmozp/ZZGf7nZUobIxYBcCGf0yAFNI
+         JT6Deip+Ig5RRPDnOooHPn5+LED0gt1S9D3WYseL/wYn11YsxjO3fHDGL+ohEUwwctqC
+         dbVsJonJAa4WjzS8kSGk+nEpYlRLjhqNPSa5QPE3dpSQBQl0YBCC4p29PCaRtvsXiQ+S
+         3Jng==
+X-Forwarded-Encrypted: i=1; AJvYcCWFBcPTcuzwLATu3mT6bU/b+wBIZQAffCJ2XKBoYn+Ix2ITYxfrzOAKAe27My7xCubBF2BVmLSfjy4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwX4NYaE8uCja66MEwVA3x2yDlcHj0EmaCH66VNfblew5SFB6Xq
+	QevvR/VeAgnlOfaXO4OaR7b7t4vELOCCAOLiQYCh4tB6TxL97enKQRag9RwnkPYYgzE=
+X-Gm-Gg: AeBDieumMnoFny7TA7EQOcR1lmMmSro42FbhPq9dI5mczhSMN05Ei7ZQmxZ6eW4sDFY
+	PdndNrH7xQcZDjJ9RCntZOJKYAp3Nnm6Z1gbaeY/dhc2O5pfcT3jzQHSVpL6mqW6JsfqLetk1os
+	Nye0oPAoeJMa72T9NYi6lfOXE3ItmfLYzNtstpq2CqsVEPbqJZtTz+r/TAY6NobYtmJbMhNBJSB
+	fXqFiGEhKgKETuliAagWxoPkgqJYno6PMdl3YJ3InSs4uG+J0sSB+NrqviHqPXttUlEyDD4qz4O
+	zBDJKwwMEGrzE63NVkdT7iYwQXYb9cLWgK+nRPg76QKaAlZ8yuQ/nTBa93owOAW/Z2Xu2zqry2n
+	9lwiXeOtwxefhjeqTlOFf44rguhM0WvFkZHrME2w5y9nYfVD/JQdb6y3sNPna1Eif4bEIg15hX/
+	xgcOg=
+X-Received: by 2002:a17:903:240a:b0:2b0:c90f:449d with SMTP id d9443c01a7336-2b2816e7071mr138195105ad.19.1775498997925;
+        Mon, 06 Apr 2026 11:09:57 -0700 (PDT)
+Received: from localhost ([2a03:2880:2ff:8::])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b274757fa7sm143694175ad.21.2026.04.06.11.09.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Apr 2026 11:09:57 -0700 (PDT)
+Date: Mon, 6 Apr 2026 11:09:56 -0700
+From: Joe Damato <joe@dama.to>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: davem@davemloft.net, netdev@vger.kernel.org, edumazet@google.com,
+	pabeni@redhat.com, andrew+netdev@lunn.ch, horms@kernel.org,
+	corbet@lwn.net, skhan@linuxfoundation.org,
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] docs: netdev: improve wording of reviewer
+ guidance
+Message-ID: <adP29EHk6Rgt2y7W@devvm20253.cco0.facebook.com>
+Mail-Followup-To: Joe Damato <joe@dama.to>,
+	Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net,
+	netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com,
+	andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net,
+	skhan@linuxfoundation.org, workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org
+References: <20260406175334.3153451-1-kuba@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 02/24] PCI: Add API to track PCI devices preserved
- across Live Update
-To: David Matlack <dmatlack@google.com>, Zhu Yanjun <yanjun.zhu@linux.dev>
-Cc: Alex Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Adithya Jayachandran <ajayachandra@nvidia.com>,
- Alexander Graf <graf@amazon.com>, Alex Mastro <amastro@fb.com>,
- Andrew Morton <akpm@linux-foundation.org>, Ankit Agrawal
- <ankita@nvidia.com>, Arnd Bergmann <arnd@arndb.de>,
- Askar Safin <safinaskar@gmail.com>, "Borislav Petkov (AMD)" <bp@alien8.de>,
- Chris Li <chrisl@kernel.org>, Dapeng Mi <dapeng1.mi@linux.intel.com>,
- David Rientjes <rientjes@google.com>, Feng Tang
- <feng.tang@linux.alibaba.com>, Jacob Pan <jacob.pan@linux.microsoft.com>,
- Jason Gunthorpe <jgg@nvidia.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>,
- Kees Cook <kees@kernel.org>, Kevin Tian <kevin.tian@intel.com>,
- kexec@lists.infradead.org, kvm@vger.kernel.org,
- Leon Romanovsky <leon@kernel.org>, Leon Romanovsky <leonro@nvidia.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-pci@vger.kernel.org, Li RongQing <lirongqing@baidu.com>,
- Lukas Wunner <lukas@wunner.de>, Marco Elver <elver@google.com>,
- =?UTF-8?Q?Micha=C5=82_Winiarski?= <michal.winiarski@intel.com>,
- Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- "Paul E. McKenney" <paulmck@kernel.org>,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
- "Peter Zijlstra (Intel)" <peterz@infradead.org>,
- Pranjal Shrivastava <praan@google.com>, Pratyush Yadav
- <pratyush@kernel.org>, Raghavendra Rao Ananta <rananta@google.com>,
- Randy Dunlap <rdunlap@infradead.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>,
- Shuah Khan <skhan@linuxfoundation.org>, Vipin Sharma <vipinsh@google.com>,
- Vivek Kasireddy <vivek.kasireddy@intel.com>, William Tu <witu@nvidia.com>,
- Yi Liu <yi.l.liu@intel.com>
-References: <20260323235817.1960573-1-dmatlack@google.com>
- <20260323235817.1960573-3-dmatlack@google.com>
- <e3fe7085-1297-47b8-bb17-a48196e8f37f@linux.dev>
- <CALzav=eyf4XRTi8MfE_GBNSm+tjmfX7=d0M8Aj5Hh0vJn7huew@mail.gmail.com>
- <c4138f66-edf2-4689-b5fe-16dc4839e9c3@linux.dev>
- <CALzav=ei_xSfM0MTdPFhGDjNwe3EQ0vHPiEk=vszFX-Xi_KjQw@mail.gmail.com>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: "Yanjun.Zhu" <yanjun.zhu@linux.dev>
-In-Reply-To: <CALzav=ei_xSfM0MTdPFhGDjNwe3EQ0vHPiEk=vszFX-Xi_KjQw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260406175334.3153451-1-kuba@kernel.org>
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[dama-to.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[shazbot.org,google.com,nvidia.com,amazon.com,fb.com,linux-foundation.org,arndb.de,gmail.com,alien8.de,kernel.org,linux.intel.com,linux.alibaba.com,linux.microsoft.com,ziepe.ca,lwn.net,intel.com,lists.infradead.org,vger.kernel.org,kvack.org,baidu.com,wunner.de,soleen.com,infradead.org,linuxfoundation.org];
-	TAGGED_FROM(0.00)[bounces-82585-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[bounces-82586-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[dama-to.20251104.gappssmtp.com:+];
 	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[54];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yanjun.zhu@linux.dev,linux-doc@vger.kernel.org];
+	DMARC_NA(0.00)[dama.to];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:dkim,linux.dev:email,linux.dev:mid]
-X-Rspamd-Queue-Id: 8E4693A6050
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[joe@dama.to,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lwn.net:email,linuxfoundation.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,dama.to:email,dama-to.20251104.gappssmtp.com:dkim,devvm20253.cco0.facebook.com:mid]
+X-Rspamd-Queue-Id: C65A03A608C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On Mon, Apr 06, 2026 at 10:53:34AM -0700, Jakub Kicinski wrote:
+> Reword the reviewer guidance based on behavior we see on the list.
+> Steer folks:
+>  - towards sending tags
+>  - away from process issues.
+> 
+> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
+> ---
+> CC: corbet@lwn.net
+> CC: skhan@linuxfoundation.org
+> CC: workflows@vger.kernel.org
+> CC: linux-doc@vger.kernel.org
+> ---
+>  Documentation/process/maintainer-netdev.rst | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+> 
 
-On 4/6/26 9:06 AM, David Matlack wrote:
-> On Sun, Apr 5, 2026 at 9:56 AM Zhu Yanjun <yanjun.zhu@linux.dev> wrote:
->> 在 2026/4/3 14:58, David Matlack 写道:
->>> On Thu, Apr 2, 2026 at 2:29 PM Yanjun.Zhu <yanjun.zhu@linux.dev> wrote:
->>>> On 3/23/26 4:57 PM, David Matlack wrote:
->>>>> +config PCI_LIVEUPDATE
->>>>> +     bool "PCI Live Update Support (EXPERIMENTAL)"
->>>>> +     depends on PCI && LIVEUPDATE
->>>>> +     help
->>>>> +       Support for preserving PCI devices across a Live Update. This option
->>>>> +       should only be enabled by developers working on implementing this
->>>>> +       support. Once enough support as landed in the kernel, this option
->>>>> +       will no longer be marked EXPERIMENTAL.
->>>>> +
->>>>> +       If unsure, say N.
->>>> Currently, it only supports 'n' or 'y'. Is it possible to add 'm'
->>>> (modular support)?
->>>>
->>>> This would allow the feature to be built as a kernel module. For
->>>> development
->>>>
->>>> purposes, modularization means we only need to recompile a single module
->>>>
->>>> for testing, rather than rebuilding the entire kernel. Compiling a
->>>> module should
->>>>
->>>> be significantly faster than a full kernel build.
->>> I don't think it is possible for CONFIG_PCI_LIVEUPDATE to support 'm'.
->>> pci_setup_device() (which is under CONFIG_PCI) needs to call
->>> pci_liveupdate_setup_device(), and CONFIG_PCI cannot be built as a
->>> module. This call is necessary so the PCI core knows whether a device
->>> being enumerated was preserved across a previous Live Update.
->> After the following changes, the liveupdate.ko can be generated
->> successfully.
-> Sure but you've broken the feature. Now devices can be probed before
-> liveupdate.ko is loaded and the PCI core will have an incorrect view
-
- From this perspective, I think it makes sense.
-
-Zhu Yanjun
-
-> of which devices were preserved by the previous kernel.
+Reviewed-by: Joe Damato <joe@dama.to>
 
