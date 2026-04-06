@@ -1,54 +1,53 @@
-Return-Path: <linux-doc+bounces-82600-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82601-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mKdQAfIY1GlorAcAu9opvQ
-	(envelope-from <linux-doc+bounces-82600-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 22:34:58 +0200
+	id 2JULO6ob1GnHrAcAu9opvQ
+	(envelope-from <linux-doc+bounces-82601-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 22:46:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A11C43A73C3
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 22:34:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 752AD3A74D9
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Apr 2026 22:46:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 87B1D301D4C6
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Apr 2026 20:34:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2CE1430A88D0
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Apr 2026 20:42:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 23BB3303C83;
-	Mon,  6 Apr 2026 20:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 062253264C7;
+	Mon,  6 Apr 2026 20:41:59 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0014.hostedemail.com [216.40.44.14])
+Received: from relay.hostedemail.com (smtprelay0012.hostedemail.com [216.40.44.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD8DF3019BA;
-	Mon,  6 Apr 2026 20:34:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 995E631194C;
+	Mon,  6 Apr 2026 20:41:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775507693; cv=none; b=OMNjZaX5fABV5gxXxLVtgOzARqtyKcMn0G6+mHjR5Nf9k13UYxKT1ZIDIyffbnl/cO6TbSaM7tccTSXxo5rZoD3pBkht2YbhryODeRcq8KMFuNmL9PwKKHnjluV/+qCI0Ic4JqVaHqjiCiqwJAEk1dU6hOoSTO/Cxd49hCfo4/0=
+	t=1775508118; cv=none; b=SREd/ETHAQzGM0RAuSRU0DTFOTvIwAcqUs1ufm4Quv8fwDFZXAmEkQfEfiC+oJy/eND4eLCp01n67jVCCDVYWgt4lENfmwx0dio3SPZ/f79OT4lu/W3vSYo0NpR8kPL/HbcOq3QxsCHpA0D1N0OtNlH+HsIzOH7Q8fIgl/6vig8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775507693; c=relaxed/simple;
-	bh=jCApDGrShRfwr3Znnb/yDkcIq8ZoRB0I0fZMlaUyMuA=;
+	s=arc-20240116; t=1775508118; c=relaxed/simple;
+	bh=W0B/UsJh7cDhEz2qfiBn1YmmvZsK7rvyBsJhREkE2uA=;
 	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=nTAPLc3gHGEZOBK17UdIAM5NFKpfPYabJmXMD9OYiqn3dQYlX0wY6XJHrzCixGkGnJUZ4Xyki5QsruoyYM7BX3TVR9phW4DlsDiNHePpnSAJ7kGKUSDanYzeC55jEkpuViIDOt3Smdwvm4mOhHi0IjNRhQEHSi/8GLu47zKDR+E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.14
+	 Content-Type:MIME-Version; b=gdluuYGM4E+5me7HL9i2AA7H6Vm65M5gT3Netxv5eGKaIZ4BoptPgaRhPC+68GKdmbU8Fun7CtQrkdaIRfimF2T2vX7VI7PWzK0Oe8usm4JfpgcDmqlCzHq/Kz09PoB1c/VlU2LfkD5Bwd7ZCIY8ETPe1IwDUwScIhS8YKkzgPc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.12
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
-Received: from omf16.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay01.hostedemail.com (Postfix) with ESMTP id 2E68FE197F;
-	Mon,  6 Apr 2026 20:34:44 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf16.hostedemail.com (Postfix) with ESMTPA id 9616220020;
-	Mon,  6 Apr 2026 20:34:41 +0000 (UTC)
-Message-ID: <18c7f51cebe2c15177564895322d0116c9ed9497.camel@perches.com>
+Received: from omf11.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay05.hostedemail.com (Postfix) with ESMTP id A31DD553DF;
+	Mon,  6 Apr 2026 20:41:55 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf11.hostedemail.com (Postfix) with ESMTPA id 1A87E2002F;
+	Mon,  6 Apr 2026 20:41:52 +0000 (UTC)
+Message-ID: <646163fbd76af208762fce6953b03ec84ffdd19a.camel@perches.com>
 Subject: Re: [PATCH] checkpatch: add --json output mode
 From: Joe Perches <joe@perches.com>
-To: Konstantin Ryabitsev <mricon@kernel.org>, Sasha Levin <sashal@kernel.org>
-Cc: dwaipayanray1@gmail.com, lukas.bulwahn@gmail.com, corbet@lwn.net, 
-	skhan@linuxfoundation.org, apw@canonical.com, workflows@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Date: Mon, 06 Apr 2026 13:34:40 -0700
-In-Reply-To: <20260406-futuristic-lilac-gerbil-6ef4a5@lemur>
+To: Sasha Levin <sashal@kernel.org>, dwaipayanray1@gmail.com, 
+	lukas.bulwahn@gmail.com
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, apw@canonical.com, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Date: Mon, 06 Apr 2026 13:41:52 -0700
+In-Reply-To: <20260406170039.4034716-1-sashal@kernel.org>
 References: <20260406170039.4034716-1-sashal@kernel.org>
-	 <20260406-true-whippet-of-luck-d3c2ba@lemur> <adQF8LoUf4YH7F98@laps>
-	 <20260406-futuristic-lilac-gerbil-6ef4a5@lemur>
 Content-Type: text/plain; charset="ISO-8859-1"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
@@ -58,57 +57,73 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Stat-Signature: epfsbzyx588g465zzmpuhq165ki6a3qx
+X-Stat-Signature: 5ngqw7gmuzy4icgu8ik85ko4zqyqdnrz
 X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Session-ID: U2FsdGVkX1/0JHZvPb0Km2xqo6zWPZSD0nLrqV6vjlM=
-X-HE-Tag: 1775507681-550611
-X-HE-Meta: U2FsdGVkX18fWGNMBKyxh960tpbHZuIJ/LP+AJ/81fixh/Ducb5/jqSPsHFwwm8sNv7pbF0BFaYyCKGtirMef050VlcyeKfy7Gb7/RIpmgqdmvBhWVjOYNClOa2eLpq32EqgCJCrAOJYPoAXdwe/cY9/MLgedZQjmMjArtcpGepKwhm5UVD0cwTmUL3sX9/CU6OTUZ5YZlb2ZSVRNZgTHAFi6vBrgiev6tqAMY8OZifoHPDuhc4I5oxmHMrw2lXDhB9P7yclCbyCR3S/20kA3WJbB91V6jDLzA68f0aIfWypRAJypqPp7sOK1w/WvAJ4zeN07sSPvXxyURCXArhNUdatuwAEawz9
+X-Session-ID: U2FsdGVkX18uRIy8J4/OSa6ZhttYe/dtz6NQ8BvJ+Y4=
+X-HE-Tag: 1775508112-956861
+X-HE-Meta: U2FsdGVkX1+UewXBuZ09Y6wfnjR8r29Z3Y+s+b6BOtJMZ8eaQAg8cQNxsvkTTifM4SqbxWBZAXQzYKtRpoI2tnYD6AcQ/ne3+4zqcMmWpbtmsvIclaoecsJbAV7oIb5DE/x81j6DedaL383r9Xq3ElnWSH4CsTJ31pki1GyJFQ2YHS1YKILQX20+yi2xWKcCuFiWXMQ1QnyCEukLuOPsc+fC+VjDpT3bOqD+GoIkesXywb/Y/n3L8OJxwj2zhp2IVCLqVC/P+yFynPKLGmdU7YNcpTVUzx/VQzn1DEmEOp1ufWpbzwtwcITwAM/wgXAr
 X-Spamd-Result: default: False [0.04 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,lwn.net,linuxfoundation.org,canonical.com,vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82601-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	DMARC_NA(0.00)[perches.com];
-	TAGGED_FROM(0.00)[bounces-82600-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.254];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FREEMAIL_TO(0.00)[kernel.org,gmail.com];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[joe@perches.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-0.773];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	R_DKIM_NA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: A11C43A73C3
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,perches.com:mid,checkpatch.pl:url]
+X-Rspamd-Queue-Id: 752AD3A74D9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, 2026-04-06 at 15:22 -0400, Konstantin Ryabitsev wrote:
-> On Mon, Apr 06, 2026 at 03:13:52PM -0400, Sasha Levin wrote:
-> I see that it's writing json out manually, implementing its own escaping.
-> > > While there are upsides to not requiring a perl json library, I think=
- it's
-> > > fair to expect that people who would want to get json output can prob=
-ably make
-> > > sure that JSON::XS is installed.
-> > >=20
-> > > Not a strong object, but seems cleaner that way.
+On Mon, 2026-04-06 at 13:00 -0400, Sasha Levin wrote:
+> Add a --json flag to checkpatch.pl that emits structured JSON output,
+> making results machine-parseable for CI systems, IDE integrations, and
+> AI-assisted code review tools.
 
-To me too.
+Seems a reasonable idea but perhaps can be improved
 
-JSON:PP is standard since 5.14, and that's 15 years old.
+> @@ -1372,7 +1376,7 @@ for my $filename (@ARGV) {
+>  	$file =3D $oldfile if ($is_git_file);
+>  }
+> =20
+> -if (!$quiet) {
+> +if (!$quiet && !$json) {
+>  	hash_show_words(\%use_type, "Used");
+>  	hash_show_words(\%ignore_type, "Ignored");
 
-I'd rather just require 5.14 as a minimum and remove
-a bunch of other checks too.
+Maybe keep but update?
+
+> @@ -7791,18 +7836,33 @@ sub process {
+>  	# If we have no input at all, then there is nothing to report on
+>  	# so just keep quiet.
+>  	if ($#rawlines =3D=3D -1) {
+> +		if ($json) {
+> +			print '{"filename":"' . json_escape($filename) .
+> +			      '","total_errors":0,"total_warnings":0,' .
+
+poor formatting for that trailing ".  please separate by content blocks.
+
+> +			      '"total_checks":0,"total_lines":0,"issues":[]}' . "\n";
+> +		}
+
+I'd prefer to keep the print() style used elsewhere
+and perhaps the JSON:PP module should be used here.
 
