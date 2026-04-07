@@ -1,52 +1,53 @@
-Return-Path: <linux-doc+bounces-82688-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82689-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KJkxOjwW1Wm30AcAu9opvQ
-	(envelope-from <linux-doc+bounces-82688-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 16:35:40 +0200
+	id AJzBGlYW1Wm30AcAu9opvQ
+	(envelope-from <linux-doc+bounces-82689-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 16:36:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4203B3B01FD
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 16:35:40 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D97413B021B
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 16:36:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9523E30921E9
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Apr 2026 14:30:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5651530F6929
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Apr 2026 14:30:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C22E3B8933;
-	Tue,  7 Apr 2026 14:30:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 400583BC695;
+	Tue,  7 Apr 2026 14:30:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SGGpCilo"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LvCt7trh"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D935025A2B5;
-	Tue,  7 Apr 2026 14:30:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19B3C3BADB2;
+	Tue,  7 Apr 2026 14:30:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775572209; cv=none; b=nW5o5HSASePpB6Xvb/91uJXT9dHryagrKswJ0dQr+8a5AcNLcGUcYF/A0h/k1wcydHDZE30IIiz87NNLJLIQxRwOiBDVdWkPftTy2ExWrHbTHIE9HpM2gS54n9xMS/o2Uncc5PaFHInp6ClYMG4HXCLd8Hu0n5D4IS9E2wh1yx8=
+	t=1775572211; cv=none; b=VAEHLEUX2lUqM+odqUML2WU/wK15iAh2IDIEFXaC5OWEIqnwVyuU4q1NOBjTuwW+SFewjqTq86I1r3VR+9VOV3FQCHroHvc/A9m787m0xQyn5ZBsJFUYZTcWO4V/g3jWv/sDO4Z+bce9k5Vb2+Vvo5kRgmtroY+1yjKn5MyAClQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775572209; c=relaxed/simple;
-	bh=F6zPippwXT9NoAaPuBCmjQXM7i5cwJ55Lk+dK97iVfo=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=QI7yCXjsu3Bfqr82+wqMmKmf9v/qyuJKCfblIhakwwPV4I6glhhMr6qzjlF5zTI96VKyt2mLRxEqgyXKT5tHV6SdUDDvYAD+jreMwQiBcHCD8DcBlT6rWox1m3vxZ7WRFCXV39uk5PZVqJ5/xuSlbtxCB+Kpmfu7QHXE8ABq4g0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SGGpCilo; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B4AFC116C6;
-	Tue,  7 Apr 2026 14:30:09 +0000 (UTC)
+	s=arc-20240116; t=1775572211; c=relaxed/simple;
+	bh=H/ZjhYgrW3VND0oifQK7yUnQ24qHMPGKHi0BUoEY5sc=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=OpCvh10qD7m2IheSAHkO7lYFz3F+WeqJejuHi558CkVi2CVHSYWcHeax4VF/lnZjv8M4u9fEURqXyXch4z8bWOZEhLwQD+YKrvc2Tfhg7HtHjgvJvZjBhjTfzo0j/gDzjvAummGymW/LJF562ldA5v/yNeL3x3KBe0o4jCEyu2g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LvCt7trh; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6D1AC2BCB0;
+	Tue,  7 Apr 2026 14:30:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775572209;
-	bh=F6zPippwXT9NoAaPuBCmjQXM7i5cwJ55Lk+dK97iVfo=;
-	h=From:Subject:Date:To:Cc:From;
-	b=SGGpCiloA16YGCNOBtnjqATKduo9VqxPftvhFTU4wQ99oD6xhZII3QIIPuZ2BteZi
-	 It4oNSzT+9TV6imSaukmNALxBbaSIH04pnHw+M6T4s3hbGTZk66/6p4/JDiCZ1VdLA
-	 sAQn37Sb6xna/XRQ3bokAGI4LKLj7xAfa4HSGVbr+crUhyoVjTFNNgF0zVgexUITaG
-	 3oO0IctM29eF06Ko+4LKEtWm/Y5wll033MXeJp4amWrRhRc8aRdB9Fsi2Ax/RP3KVY
-	 Y8DZqVWkFinHJV507eYo9FG4A3vIba8mdeHmRheb1U4J/C6vnYUKpC5VRqfkbkMLh6
-	 sCi7TVjgfAdYQ==
+	s=k20201202; t=1775572211;
+	bh=H/ZjhYgrW3VND0oifQK7yUnQ24qHMPGKHi0BUoEY5sc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+	b=LvCt7trhYrin7vmw0KGlxThv1JqXPC/SnLO0rfKa8S1mowBnzeXYbGqNm+DGZDIPm
+	 Ve+KHt7WItbaxsfYzUsa6aVYZw8eMMZYEM7p/t86J88d+81PryhHYYUzpz84r3DqKb
+	 6lyviNyMOSHm4QrUDAhsaAqeDpx0R1kfs5RohacPgzLpQ4szxwJX05DuAZIxDQTfbn
+	 KMG0XZhgn9y+5R94Tmw2lrWVdH00wkMbO9Iltfgg+x72Ny6RrYmb2sB11vAzkRdab0
+	 0p9I3pwQ72lkrxInh1wj80M+GVT/mesFaizqDmEJlGlWs8DfR0uf2wHtOYbWa2SBI9
+	 hZXx36JxqEvyA==
 From: "Rob Herring (Arm)" <robh@kernel.org>
-Subject: [PATCH v4 0/6] arm64: Add support for FEAT_Debugv8p9
-Date: Tue, 07 Apr 2026 09:29:42 -0500
-Message-Id: <20260407-arm-debug-8-9-v4-0-a4864e69b0ea@kernel.org>
+Date: Tue, 07 Apr 2026 09:29:43 -0500
+Subject: [PATCH v4 1/6] arm64: hw_breakpoint: Disallow breakpoints in no
+ kprobe code
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,136 +56,78 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIANYU1WkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyTHQUlJIzE
- vPSU3UzU4B8JSMDIzMDEwMz3cSiXN2U1KTSdF0LXUtdE8M0szSDVHNjyyRTJaCegqLUtMwKsHn
- RsbW1ABe/erJfAAAA
-X-Change-ID: 20260406-arm-debug-8-9-41f6f0e739b5
+Message-Id: <20260407-arm-debug-8-9-v4-1-a4864e69b0ea@kernel.org>
+References: <20260407-arm-debug-8-9-v4-0-a4864e69b0ea@kernel.org>
+In-Reply-To: <20260407-arm-debug-8-9-v4-0-a4864e69b0ea@kernel.org>
 To: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
  Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
  Shuah Khan <skhan@linuxfoundation.org>
 Cc: Anshuman Khandual <anshuman.khandual@arm.com>, 
  linux-arm-kernel@lists.infradead.org, linux-perf-users@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- Marc Zyngier <maz@kernel.org>, kvmarm@lists.linux.dev, 
- Oliver Upton <oupton@kernel.org>
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
 X-Mailer: b4 0.15-dev
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82688-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82689-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 4203B3B01FD
+X-Rspamd-Queue-Id: D97413B021B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This series enables FEAT_Debugv8p9 which extends the breakpoint and 
-watchpoint support from 16 up to 64. I've picked up this series from 
-Anshuman.
-
-Changes in V4:
-
-- Limit enabling of FEAT_Debugv8p9 to only when more than 16 breakpoints 
-  or watchpoints are present.
-- Add lockdep_assert_irqs_disabled() to document the constraints. Drop 
-  unnecessary IRQ disabling.
-- Add more kprobe blacklist annotations and disallow breakpoints in the 
-  nokprobe code.
-- Drop previously applied sysreg patches.
-
-Prior versions from Anshuman:
-
-Changes in V3:
-
-https://lore.kernel.org/all/20241216040831.2448257-1-anshuman.khandual@arm.com/
-
-- Marked ID_AA64DFR1_EL1.ABLE as FTR_NONSTRICT in ftr_id_aa64dfr1[]
-- Dropped MDCR_EL3.TDA boot requirement from documentation (separate series)
-- Dropped MDCR_EL2_EBWE definition as MDCR_EL2 is now defined in tools sysreg
-- Used SYS_FIELD_PREP() in read_wb_reg() and write_wb_reg()
-- Added MAX_PER_BANK based BUILD_BUG_ON() tests in arch_hw_breakpoint_init()
-- Dropped local variables i.e mdsel_bank and index
-- Derived bank and index from MAX_PER_BANK as required
-
-Changes in V2:
-
-https://lore.kernel.org/all/20241028053426.2486633-1-anshuman.khandual@arm.com/
-
-Following changes have been made per review comments from Mark Rutland
-
-- Orr MDCR_EL2_EBWE directly without an intermittent register
-- Alphabetically order header files in debug-monitors.c
-- Dropped embwe_ref_count mechanism
-- Dropped preempt_enable() from AARCH64_DBG_READ
-- Dropped preempt_disable() from AARCH64_DBG_WRITE
-- Dropped set_bank_index()
-- Renamed read/write_wb_reg() as __read/__write_wb_reg()
-- Modified read/write_wb_reg() to have MDSELR_E1 based banked read/write
-- Added required sysreg tools patches from KVM FEAT_FGT2 series for build
-
-Changes in V1:
-
-https://lore.kernel.org/all/20241001043602.1116991-1-anshuman.khandual@arm.com/
-
-- Changed FTR_STRICT to FTR_NONSTRICT for the following ID_AA64DFR1_EL1
-  register fields - ABL_CMPs, DPFZS, PMICNTR, CTX_CMPs, WRPs and BRPs
-
-Changes in RFC V2:
-
-https://lore.kernel.org/linux-arm-kernel/20240620092607.267132-1-anshuman.khandual@arm.com/
-
-- This series has been split from RFC V1 dealing only with arm64 breakpoints
-- Restored back DBG_MDSCR_MASK definition (unrelated change)
-- Added preempt_disable()/enable() blocks between selecting banks and registers
-
-Changes in RFC:
-
-https://lore.kernel.org/all/20240405080008.1225223-1-anshuman.khandual@arm.com/
+Taking debug exceptions while manipulating the breakpoints is likely to
+be unsafe. The setting kprobes in the breakpoint code is already
+forbidden, but the setting of h/w breakpoints is not. Copy what x86 does
+and exclude breakpoints that fall within the kprobe section.
 
 Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 ---
-Anshuman Khandual (3):
-      arm64/cpufeature: Add field details for ID_AA64DFR1_EL1 register
-      arm64/boot: Enable EL2 requirements for FEAT_Debugv8p9
-      arm64: hw_breakpoint: Enable FEAT_Debugv8p9
+ arch/arm64/kernel/hw_breakpoint.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Rob Herring (Arm) (3):
-      arm64: hw_breakpoint: Disallow breakpoints in no kprobe code
-      arm64: hw_breakpoint: Add additional kprobe excluded functions
-      arm64: hw_breakpoint: Add lockdep_assert_irqs_disabled() on install/uninstall
+diff --git a/arch/arm64/kernel/hw_breakpoint.c b/arch/arm64/kernel/hw_breakpoint.c
+index ab76b36dce82..38fbd67b2a6e 100644
+--- a/arch/arm64/kernel/hw_breakpoint.c
++++ b/arch/arm64/kernel/hw_breakpoint.c
+@@ -418,6 +418,16 @@ static int arch_build_bp_info(struct perf_event *bp,
+ 	/* Type */
+ 	switch (attr->bp_type) {
+ 	case HW_BREAKPOINT_X:
++		/*
++		 * We don't allow kernel breakpoints in places that are not
++		 * acceptable for kprobes.  On non-kprobes kernels, we don't
++		 * allow kernel breakpoints at all.
++		 */
++		if (attr->bp_addr >= TASK_SIZE_MAX) {
++			if (within_kprobe_blacklist(attr->bp_addr))
++				return -EINVAL;
++		}
++
+ 		hw->ctrl.type = ARM_BREAKPOINT_EXECUTE;
+ 		break;
+ 	case HW_BREAKPOINT_R:
 
- Documentation/arch/arm64/booting.rst   | 13 +++++++
- arch/arm64/include/asm/el2_setup.h     | 14 +++++++
- arch/arm64/include/asm/hw_breakpoint.h | 47 ++++++++++++++++++-----
- arch/arm64/kernel/cpufeature.c         | 21 ++++++++---
- arch/arm64/kernel/debug-monitors.c     | 16 +++++---
- arch/arm64/kernel/hw_breakpoint.c      | 68 +++++++++++++++++++++++++++++-----
- 6 files changed, 150 insertions(+), 29 deletions(-)
----
-base-commit: 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
-change-id: 20260406-arm-debug-8-9-41f6f0e739b5
-
-Best regards,
---  
-Rob Herring (Arm) <robh@kernel.org>
+-- 
+2.53.0
 
 
