@@ -1,307 +1,124 @@
-Return-Path: <linux-doc+bounces-82676-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82679-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iJG0HX4G1WnMzgcAu9opvQ
-	(envelope-from <linux-doc+bounces-82676-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 15:28:30 +0200
+	id YAG3I4EI1WnMzgcAu9opvQ
+	(envelope-from <linux-doc+bounces-82679-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 15:37:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C7EC3AF18C
-	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 15:28:30 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id F33A63AF42D
+	for <lists+linux-doc@lfdr.de>; Tue, 07 Apr 2026 15:37:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 38EAE3030B06
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Apr 2026 13:25:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 371C53028815
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Apr 2026 13:26:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 075F83B7B84;
-	Tue,  7 Apr 2026 13:25:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F2623B7753;
+	Tue,  7 Apr 2026 13:26:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="tSYiyPaj"
+	dkim=pass (2048-bit key) header.d=bes.tel header.i=@bes.tel header.b="K9cFKZ3/";
+	dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b="tXXUXlXz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from sendmail.purelymail.com (sendmail.purelymail.com [34.202.193.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A15A3B7752;
-	Tue,  7 Apr 2026 13:25:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C029C2F60CC
+	for <linux-doc@vger.kernel.org>; Tue,  7 Apr 2026 13:26:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=34.202.193.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775568306; cv=none; b=QvMIiXvz25O9keiMBXgXG5TtI5VV1lR53ReDSa9DUzp4POjCRaOsxUziu4kSFfxol9jwmrL70CExV3JFLos80sdj1aERyAFkrAQEbqI3lmWHS/uHNhjiFwkoT063KsJf/ZMhI04D5CCvKcnv/Y0NHzE3T6Bll8EYf0whI5nExTo=
+	t=1775568405; cv=none; b=d1N7lU1raz6hOkRzaHld0jjSgx7vC5TYoZ1hrv3jNh/+6Bh8hlb38Yy9ae7X5W9XOWzNTZ+cTdhYsfvFGwIs51kTJnsMAOJ1/RjcVrQjbyxuXLNkZXh5boV46ucl53yd2434q7SMaAvaisQIjM9PLRPTry7umAZ2IeEoC3O4sv4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775568306; c=relaxed/simple;
-	bh=eJ+f5VtW06hjPWQhL+mxU1tuQeMXPch8iPmbd9Za310=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rvIIsHwY8xQgeCyK+nOl+j/TYe7M1SNQkNwgc56Iq7LKvtq6NRSLAfwI+MDIhkStro3YV8ThtVPCDFFZ0KnkXaxmN2Mu+UtFobmVxfymxrA+QdX6Mp5PuSKeE3PA/79AET2aV2VgS5F4/3QXHd4qfuWt2sNaJMnjoMKp5FDRpGg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=tSYiyPaj; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 636NQ5tk2401288;
-	Tue, 7 Apr 2026 13:25:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=/lcr96
-	SrwFC1B6RU1s1QLzKzJb5TcyudQnEV0SzV2eQ=; b=tSYiyPaj5CqVOvfG4X1Rt1
-	gVc+TaWQo4DSNcuourGu/NmbSqPbDx05TCV6lIiy3B7gRJyVoKar6kqKKyP9V/6J
-	mBcIpU1UHPlOskv+W0qDJvVm/m7++NUvbRD8IT7QQv+wqYwb0POz9OdyM978FBWb
-	3g23GHyWI1jpn+vgCYpn4OmPncuwi+N+uyyWJ/NvVMuBTlSQ6XtVdOntYQXSGC+O
-	vrEvfwsXgIKVV3vjk85ItjWDvPi7GlW02bPjDFoVMEeZzpQ3FdToecwFs4eL6dUh
-	XwlI4Am7AKx/fE2D3Mo0yfLZLt1pjOp53TmNA1vtMyaUxe6lpRmM5ftSkUKCfGkA
-	==
-Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4dcn2hav1w-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 07 Apr 2026 13:25:02 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 637BNAKM029863;
-	Tue, 7 Apr 2026 13:25:01 GMT
-Received: from smtprelay05.dal12v.mail.ibm.com ([172.16.1.7])
-	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4dcme7bab2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 07 Apr 2026 13:25:01 +0000
-Received: from smtpav03.dal12v.mail.ibm.com (smtpav03.dal12v.mail.ibm.com [10.241.53.102])
-	by smtprelay05.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 637DP0OY21824210
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 7 Apr 2026 13:25:00 GMT
-Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5CC6C58060;
-	Tue,  7 Apr 2026 13:25:00 +0000 (GMT)
-Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9D8E05803F;
-	Tue,  7 Apr 2026 13:24:57 +0000 (GMT)
-Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.87.85.9])
-	by smtpav03.dal12v.mail.ibm.com (Postfix) with ESMTP;
-	Tue,  7 Apr 2026 13:24:57 +0000 (GMT)
-From: Niklas Schnelle <schnelle@linux.ibm.com>
-Date: Tue, 07 Apr 2026 15:24:46 +0200
-Subject: [PATCH v8 2/2] PCI: s390: Expose the UID as an arch specific PCI
- slot attribute
+	s=arc-20240116; t=1775568405; c=relaxed/simple;
+	bh=c22d6V2u61GovLZpfs8FBVr+t/XEZPWaprwWGg07XzI=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=MwWuqoZHnwwqm7991D+Ou9OR1V1hNYRc0Lzti50GHsV1MzjCcjpHu6zUFD08Uo2czuvYeQfa5tAjl6aEPkzx5sMttt9wAhid+iezhS1LLIOMszlY02Ru9m4VFgAJIyk5SQ8/d80sPTiVvaJOEdeq++8QxMoJOnh4vLNjxgH9D48=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bes.tel; spf=pass smtp.mailfrom=bes.tel; dkim=pass (2048-bit key) header.d=bes.tel header.i=@bes.tel header.b=K9cFKZ3/; dkim=pass (2048-bit key) header.d=purelymail.com header.i=@purelymail.com header.b=tXXUXlXz; arc=none smtp.client-ip=34.202.193.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bes.tel
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bes.tel
+DKIM-Signature: a=rsa-sha256; b=K9cFKZ3/O7h5iU+RCg2td0WSFfSi9rxIN4o4HFrtDyhfF34k1z4+wTzZN+mNq6oK67ShmP4ScPK8O2/sKoAoIJhzczf7MeoLmf2+bFz6m7qKomdQAo+RkLjvnhqAhcRlRO9MniFLK305dJmogL8AlgcYQK4U6cY4jBq2r9FPU1tzc3lU+AGlBeFCnNnUekHljiosI7Y8+GYOpTwOOh+tVkii1FkxruyQTKbR8pAViksMzcKgnfwVVXk9y8y7+22zban+9QDTUMCglOYeXZFMMhtGlB6QwBHaCa6s79bDy3v8GzvH+ulHBe3IkJWOK6eOBuzeW5qghzHi/1a/byCBaA==; s=purelymail2; d=bes.tel; v=1; bh=c22d6V2u61GovLZpfs8FBVr+t/XEZPWaprwWGg07XzI=; h=Received:Received:Subject:From:To:Date;
+DKIM-Signature: a=rsa-sha256; b=tXXUXlXzcqzitsSZr9rXJpasJgtrHDRAZQtJRJUS8xIXOFOtC7DbAudIZct6fHo2PQcY98YgfYi3nVSEzi7lhU/M+rYUo3Cxyu5AH3Lo78bZWXODTd2l3b/wz2t2OkOjcXC4tKYcJkakWhiES3iGBXqfc8Xm9RfUFzhlXUxeRlqa+ctzeN7eOpu9ZnrE/fxADuujIt5/gaqeTag83t8PoX0waXfrFbBaSOcA/hmPOOtZ5FK1LaERQBu9ZwRrrBK87As2aJN8iOPkhukyFiaKe/gNoL0H6PjVCHV/+CLmh7heOcHYgDt8FOPJZ8w+USD4qo0HsAeHcVdMGtHqgRR/lA==; s=purelymail2; d=purelymail.com; v=1; bh=c22d6V2u61GovLZpfs8FBVr+t/XEZPWaprwWGg07XzI=; h=Feedback-ID:Received:Received:Subject:From:To:Date;
+Feedback-ID: 19882:3702:null:purelymail
+X-Pm-Original-To: linux-doc@vger.kernel.org
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1629212201;
+          (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+          Tue, 07 Apr 2026 13:26:06 +0000 (UTC)
+Received: from [10.2.161.35] (unknown [10.2.161.35])
+	by awak.mobi (Postfix) with ESMTPSA id 9F2F93600E2;
+	Tue, 07 Apr 2026 15:26:04 +0200 (CEST)
+Message-ID: <0ebbfbc5163806341165be55631c5834a6946aab.camel@bes.tel>
+Subject: Re: [PATCH 0/1] Documentation: leds: leds-class: Document keyboard
+ backlight LED class naming
+From: Xavier Bestel <xav@bes.tel>
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>, Lee Jones
+ <lee@kernel.org>,  Pavel Machek <pavel@kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: Rishit Bansal <rishitbansal0@gmail.com>, Carlos Ferreira	
+ <carlosmiguelferreira.2003@gmail.com>, Edip Hazuri <edip@medip.dev>,
+ Mustafa =?UTF-8?Q?Ek=C5=9Fi?= <mustafa.eskieksi@gmail.com>,
+ linux-leds@vger.kernel.org, linux-doc@vger.kernel.org
+Date: Tue, 07 Apr 2026 15:26:02 +0200
+In-Reply-To: <20260406174638.320135-1-johannes.goede@oss.qualcomm.com>
+References: <20260406174638.320135-1-johannes.goede@oss.qualcomm.com>
+Autocrypt: addr=xav@bes.tel; prefer-encrypt=mutual;
+ keydata=mDMEaBuzUBYJKwYBBAHaRw8BAQdAGHVrbf6OLBOo4PjYPoYLSIOV+u8/rKgFlLM4pk+rj
+ eC0G1hhdmllciBCZXN0ZWwgPHhhdkBiZXMudGVsPoiWBBMWCgA+FiEEPYfp8pYhYROehNkEULR9s/
+ 9K9OgFAmgbs1ACGwMFCQWjmoAFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQULR9s/9K9OgeJAD
+ /aPp0IPj5ahqo7DGo1Xk8/t7afPAHYMBeV03Fte4f57EBAPKvhRUTyR4+CrPtGERWfoYlxNkp5yKr
+ wwkjUbLon1AG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-9 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260407-uid_slot-v8-2-15ae4409d2ce@linux.ibm.com>
-References: <20260407-uid_slot-v8-0-15ae4409d2ce@linux.ibm.com>
-In-Reply-To: <20260407-uid_slot-v8-0-15ae4409d2ce@linux.ibm.com>
-To: Bjorn Helgaas <bhelgaas@google.com>, Jonathan Corbet <corbet@lwn.net>,
-        Lukas Wunner <lukas@wunner.de>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: Farhan Ali <alifm@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
-        Gerd Bayer <gbayer@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
-        Julian Ruess <julianr@linux.ibm.com>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Ramesh Errabolu <ramesh@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pci@vger.kernel.org, linux-s390@vger.kernel.org,
-        Niklas Schnelle <schnelle@linux.ibm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5423;
- i=schnelle@linux.ibm.com; h=from:subject:message-id;
- bh=eJ+f5VtW06hjPWQhL+mxU1tuQeMXPch8iPmbd9Za310=;
- b=owGbwMvMwCX2Wz534YHOJ2GMp9WSGDKvsi5qmLBp3QreRKb5D4/+2vpOZKK9UtusTJYnqdP+X
- jy8069fs6OUhUGMi0FWTJFlUZez37qCKaZ7gvo7YOawMoEMYeDiFICJbGhkZDimZaXasfWD8lvp
- 6pKtv5l7RWw0Pc9+t/sqFud1SPL/xL8Mf3ifnfzhk7fTaUVovJD62WWW5vybDM/8bfB+FDdjlt4
- RNzYA
-X-Developer-Key: i=schnelle@linux.ibm.com; a=openpgp;
- fpr=9DB000B2D2752030A5F72DDCAFE43F15E8C26090
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA3MDEyNSBTYWx0ZWRfX5tYDnBUKYrg2
- ZmfaJjr1ZmknHjEnKi4z6LP6CuwUIiXdDyuX3I6z+n3s8vexTnY3c6Q87wlLbR5aAsG2CFaA6hw
- jlujSWb5ydTuX5opBAW9F9UZa2d4FMVAAx0F+1FFmPvyvKRU6a484NrSrLFMerRuGsKHg+VF88P
- nQHELiMK5OQZe4JwQNUrDXSoIGJ07p5VP4ePgwc16syfqgCzobVMxpmnQ6hY/oBo+mSYQXnOu8V
- BEg7fi+7Rm3K7nZQz13jLYi5P7jLmgt17LBcZvDOahO+oslijInfB9Uu2Xo7oUnGDMmMHs0nNjf
- mopk91/rIdXsak0xWH/XpCg4ZNfeBOad7QV3Dqj1J2nclxyjMQwKyYnf2a3CfY7+JD8JVzYT0HW
- 9CNcDgteC1jxr392nJEUcH7Xmpy3QZ7xaf8pIdmnPEIyw0PwgAXeEAdj3Qtr1dXotcknhBlBMD1
- 86nr2ZAZ1DSQ5Y9ZmYw==
-X-Proofpoint-GUID: VyT9t5m2ehuyfEPkLtPSnDHfdh4nrn6x
-X-Authority-Analysis: v=2.4 cv=a/wAM0SF c=1 sm=1 tr=0 ts=69d505ae cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=V8glGbnc2Ofi9Qvn3v5h:22 a=VnNF1IyMAAAA:8
- a=WU3I-MCEZjdC1qMpAq0A:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: vIs2OYqdjfg5CNNaBCf1RdBJ7NoiH80F
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-07_02,2026-04-07_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 spamscore=0 impostorscore=0 priorityscore=1501
- phishscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604070125
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
+	DMARC_POLICY_ALLOW(-0.50)[bes.tel,reject];
+	R_DKIM_ALLOW(-0.20)[bes.tel:s=purelymail2,purelymail.com:s=purelymail2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	TAGGED_FROM(0.00)[bounces-82676-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,medip.dev,vger.kernel.org];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
+	DKIM_TRACE(0.00)[bes.tel:+,purelymail.com:+];
+	TAGGED_FROM(0.00)[bounces-82679-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[schnelle@linux.ibm.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xav@bes.tel,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCVD_COUNT_SEVEN(0.00)[11]
-X-Rspamd-Queue-Id: 4C7EC3AF18C
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bes.tel:dkim,bes.tel:mid,purelymail.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: F33A63AF42D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On s390, an individual PCI function can generally be identified by two
-identifiers, the FID and the UID. Which identifier is used depends on
-the scope and the platform configuration.
+Le lundi 06 avril 2026 =C3=A0 19:46 +0200, Hans de Goede a =C3=A9crit=C2=A0=
+:
+> Drivers which need this are:
+> [...]
+> 3. Logitech G710/G710+ gaming keyboards HID driver:
+> https://lore.kernel.org/linux-input/20260402075239.3829699-1-xav@bes.tel/
+> Posted a week ago, needs an agreement on the LED class dev naming scheme
+> to continue.
 
-The first identifier, the FID, is always available and identifies a PCI
-device uniquely within a machine. The FID may be virtualized by
-hypervisors, but on the LPAR level, the machine scope makes it
-impossible to create the same configuration based on FIDs on two
-different LPARs of the same machine, and difficult to reuse across
-machines.
+Indeed. I referenced Documentation/leds/leds-class.rst as if your patch
+was already merged. Thank you for tackling this !
 
-Such matching LPAR configurations are useful, though, allowing
-standardized setups and booting a Linux installation on different LPARs.
-To this end the UID, or user-defined identifier, was introduced. While
-it is only guaranteed to be unique within an LPAR and only if indicated
-by firmware, it allows users to replicate PCI device setups.
+Regards,
 
-On s390, which uses a machine hypervisor, a per PCI function hotplug
-model is used. The shortcoming with the UID then is, that it is not
-visible to the user without first attaching the PCI function and
-accessing the "uid" device attribute. The FID, on the other hand, is
-used as the slot name and is thus known even with the PCI function in
-standby.
-
-Remedy this shortcoming by providing the UID as an attribute on the slot
-allowing the user to identify a PCI function based on the UID without
-having to first attach it. Do this via a macro mechanism analogous to
-what was introduced by commit 265baca69a07 ("s390/pci: Stop usurping
-pdev->dev.groups") for the PCI device attributes.
-
-Reviewed-by: Gerd Bayer <gbayer@linux.ibm.com>
-Reviewed-by: Julian Ruess <julianr@linux.ibm.com>
-Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
----
- Documentation/arch/s390/pci.rst |  7 +++++++
- arch/s390/include/asm/pci.h     |  4 ++++
- arch/s390/pci/pci_sysfs.c       | 20 ++++++++++++++++++++
- drivers/pci/slot.c              | 13 ++++++++++++-
- 4 files changed, 43 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/arch/s390/pci.rst b/Documentation/arch/s390/pci.rst
-index c3476de4f03278d07099aa32cbea0f868b6e9c9c..80f4ba19315994da056a10b4d216d61ff22ea5aa 100644
---- a/Documentation/arch/s390/pci.rst
-+++ b/Documentation/arch/s390/pci.rst
-@@ -58,6 +58,13 @@ Entries specific to zPCI functions and entries that hold zPCI information.
- 
-   - /sys/bus/pci/slots/XXXXXXXX/power
- 
-+  In addition to using the FID as the name of the slot, the slot directory
-+  also contains the following s390-specific slot attributes.
-+
-+  - uid:
-+    The User-defined identifier (UID) of the function which may be configured
-+    by this slot. See also the corresponding attribute of the device.
-+
-   A physical function that currently supports a virtual function cannot be
-   powered off until all virtual functions are removed with:
-   echo 0 > /sys/bus/pci/devices/DDDD:BB:dd.f/sriov_numvf
-diff --git a/arch/s390/include/asm/pci.h b/arch/s390/include/asm/pci.h
-index c0ff19dab5807c7e1aabb48a0e9436aac45ec97d..5dcf35f0f325f5f44b28109a1c8d9aef18401035 100644
---- a/arch/s390/include/asm/pci.h
-+++ b/arch/s390/include/asm/pci.h
-@@ -208,6 +208,10 @@ extern const struct attribute_group zpci_ident_attr_group;
- 			    &pfip_attr_group,		 \
- 			    &zpci_ident_attr_group,
- 
-+extern const struct attribute_group zpci_slot_attr_group;
-+
-+#define ARCH_PCI_SLOT_GROUPS (&zpci_slot_attr_group)
-+
- extern unsigned int s390_pci_force_floating __initdata;
- extern unsigned int s390_pci_no_rid;
- 
-diff --git a/arch/s390/pci/pci_sysfs.c b/arch/s390/pci/pci_sysfs.c
-index c2444a23e26c4218832bb91930b5f0ffd498d28f..d98d97df792adb3c7e415a8d374cc2f3a65fbb52 100644
---- a/arch/s390/pci/pci_sysfs.c
-+++ b/arch/s390/pci/pci_sysfs.c
-@@ -187,6 +187,17 @@ static ssize_t index_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(index);
- 
-+static ssize_t zpci_uid_slot_show(struct pci_slot *slot, char *buf)
-+{
-+	struct zpci_dev *zdev = container_of(slot->hotplug, struct zpci_dev,
-+					     hotplug_slot);
-+
-+	return sysfs_emit(buf, "0x%x\n", zdev->uid);
-+}
-+
-+static struct pci_slot_attribute zpci_slot_attr_uid =
-+	__ATTR(uid, 0444, zpci_uid_slot_show, NULL);
-+
- static umode_t zpci_index_is_visible(struct kobject *kobj,
- 				     struct attribute *attr, int n)
- {
-@@ -243,6 +254,15 @@ const struct attribute_group pfip_attr_group = {
- 	.attrs = pfip_attrs,
- };
- 
-+static struct attribute *zpci_slot_attrs[] = {
-+	&zpci_slot_attr_uid.attr,
-+	NULL,
-+};
-+
-+const struct attribute_group zpci_slot_attr_group = {
-+	.attrs = zpci_slot_attrs,
-+};
-+
- static struct attribute *clp_fw_attrs[] = {
- 	&uid_checking_attr.attr,
- 	NULL,
-diff --git a/drivers/pci/slot.c b/drivers/pci/slot.c
-index 787311614e5b6ebb39e7284f9b9f205a0a684d6d..2f8fcfbbec24e73d0bb6e40fd04c05a94f518045 100644
---- a/drivers/pci/slot.c
-+++ b/drivers/pci/slot.c
-@@ -96,7 +96,18 @@ static struct attribute *pci_slot_default_attrs[] = {
- 	&pci_slot_attr_cur_speed.attr,
- 	NULL,
- };
--ATTRIBUTE_GROUPS(pci_slot_default);
-+
-+static const struct attribute_group pci_slot_default_group = {
-+	.attrs = pci_slot_default_attrs,
-+};
-+
-+static const struct attribute_group *pci_slot_default_groups[] = {
-+	&pci_slot_default_group,
-+#ifdef ARCH_PCI_SLOT_GROUPS
-+	ARCH_PCI_SLOT_GROUPS,
-+#endif
-+	NULL,
-+};
- 
- static const struct kobj_type pci_slot_ktype = {
- 	.sysfs_ops = &pci_slot_sysfs_ops,
-
--- 
-2.51.0
-
+	Xavier
 
