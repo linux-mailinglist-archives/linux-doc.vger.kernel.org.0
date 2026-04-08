@@ -1,78 +1,51 @@
-Return-Path: <linux-doc+bounces-82800-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82802-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MPOXDf4j1mklBQgAu9opvQ
-	(envelope-from <linux-doc+bounces-82800-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 11:46:38 +0200
+	id EC6EEL011mlZBwgAu9opvQ
+	(envelope-from <linux-doc+bounces-82802-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 13:02:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F36B3BA165
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 11:46:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55E193BB0CB
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 13:02:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id E5425302FFBA
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 09:41:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7CF76301082A
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 11:02:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F30463ACA58;
-	Wed,  8 Apr 2026 09:41:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1C0BD2E8B8A;
+	Wed,  8 Apr 2026 11:02:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="iQHWKiPv"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="j0m/Wl5D"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B97DA3AE715;
-	Wed,  8 Apr 2026 09:41:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A7CD264A65;
+	Wed,  8 Apr 2026 11:02:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775641293; cv=none; b=HyhhdZqJAOQr4NxXbhLEIOppVFi3yPnFDoU63YQNK/Y5KSH6kFGwzCHlwOIazWXVB8rQYiDECR8TtnRHzOHKPN8EjkhXLjxelAiSIbr7vppf19O70UqEMTejsCfdWXkadufh+BBhAPh1mv95ibOWUzYMCO07EFO90nffiRvgyW0=
+	t=1775646135; cv=none; b=bNm8BSMGBiOWUnvS57UGmfVCWNDFDMy3u+WPTYlL9WmXOhzgWZ544ko1gfBvd0T036ZSgd6uwjy6GyO4tIlh9tpEYlo8B7E1J7HSRZgRUnJcxMzUR2ndoVee/ngVijB7bf6yQFGb7BRV2E9EWqnQZ6IHbKvoa/Kkgb5dvjDRhJc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775641293; c=relaxed/simple;
-	bh=HMM9tblv6Aw+x/QS+sBIN31bUVhMbXeQMDQpCLwhH9w=;
+	s=arc-20240116; t=1775646135; c=relaxed/simple;
+	bh=BcjAsJfFFdxOuFJG+yx8h9dEcchCwv67qshCeNpQzVY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NS2A8kJdwjAgLlUJSuhcz4doiKYrqZwVIqPV4HtZaapSsxgpyUfUlemc5BIQ3GPpzTS6ufz+Mzc9vwVs96vy53U96nxyRYdzVWj3ABDqW4JrD9q/VelfYHGLcT4J+BMZJ7Ndfy5Gk4zehEgbdrOFkfgUCJKIuX/gN/i/fdWsMmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=iQHWKiPv; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6385i50Q2326115;
-	Wed, 8 Apr 2026 09:40:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=ZjUreY
-	ZB4dqBxtPkYBxPNEtzPCAjU+XXM91SH0mST/k=; b=iQHWKiPvIbNpVbvAhws7Ob
-	GwbKaj8PMzrKqS25uQsBVh79qrhsT77swTH8EOKggAH5sLaoAm/P1KJQka7s+J8h
-	qJO/tcTueDu6B3lIWjF6bgWVJvE1L5kU+lltKH3537M456Ibnd2RUVBAk2Yw/TFa
-	RZdl5Dfu03txeM5BTpjovZHBmDWHDOMSJubGoAFuV62CCORPinDWTOt7DuEmDKY8
-	GhV8czlB0SMohyCbxUzj+b69tPZks2JeseNLPIScq3sEcKX7JthzPytwwpBA0K9l
-	cecY8mBf/4VvUYH/Nm7VnUEXt/nhBx6iuhc0B1mjeG8AE+v1F3X0leQQ5qdlkxNA
-	==
-Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4dcn2keqvc-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 08 Apr 2026 09:40:55 +0000 (GMT)
-Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma22.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 6386IDJT007887;
-	Wed, 8 Apr 2026 09:40:55 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
-	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4dcmg2etxq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 08 Apr 2026 09:40:55 +0000
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com [10.20.54.104])
-	by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6389erSF27328768
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 8 Apr 2026 09:40:53 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3338320043;
-	Wed,  8 Apr 2026 09:40:53 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 0435F20040;
-	Wed,  8 Apr 2026 09:40:51 +0000 (GMT)
-Received: from [9.123.14.142] (unknown [9.123.14.142])
-	by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Wed,  8 Apr 2026 09:40:50 +0000 (GMT)
-Message-ID: <b96d9b86-b193-4f0f-87d8-a73b7fe3d550@linux.ibm.com>
-Date: Wed, 8 Apr 2026 15:10:49 +0530
+	 In-Reply-To:Content-Type; b=HcVYniisuoRS9K/E72987FwyQpBA+2pzwMrgQu8ZPejBd+dr/hmbbz0atnle7whcuoAuYaf7nYGA3L8hz+w0lyEtt8SsVTR3cqIaNrJBdvjk1cW/Y6VcGKgITm5iF/AQ3dm7kusxK26Zq1qGePNI/4t2qA7cRzb/1b4KoG0xPH4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=j0m/Wl5D; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0959832E3;
+	Wed,  8 Apr 2026 04:02:07 -0700 (PDT)
+Received: from [10.57.32.88] (unknown [10.57.32.88])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6DE403F632;
+	Wed,  8 Apr 2026 04:02:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1775646132; bh=BcjAsJfFFdxOuFJG+yx8h9dEcchCwv67qshCeNpQzVY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=j0m/Wl5DLNS3bb0LPJygmxr64zm8k47jOHhnUdaH8o4hEg7UUONrE66mssRlJ7NT2
+	 6bzBCKlVrr+w2+XGl2eztRQqDLePKhvx7aHRms/5lUbXVIvqBABzatYJU+Jw6NrJnn
+	 B0h8Vu2G1rPcddUOVHZq+00sZ9LGtr5cxfhIEmOY=
+Message-ID: <9c8ddc37-a236-446b-a85a-261f370d644e@arm.com>
+Date: Wed, 8 Apr 2026 12:01:59 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -80,337 +53,183 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crash: Support high memory reservation for range syntax
-To: Youling Tang <youling.tang@linux.dev>,
-        Andrew Morton <akpm@linux-foundation.org>, Baoquan He <bhe@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc: Vivek Goyal <vgoyal@redhat.com>, Dave Young <dyoung@redhat.com>,
-        kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Youling Tang <tangyouling@kylinos.cn>
-References: <20260404074103.506793-1-youling.tang@linux.dev>
- <d584d383-1862-417d-9251-153d9bcf5626@linux.ibm.com>
- <01e47f44-c22b-42f3-afe1-4a39d9c1fd18@linux.dev>
-Content-Language: en-US
-From: Sourabh Jain <sourabhjain@linux.ibm.com>
-In-Reply-To: <01e47f44-c22b-42f3-afe1-4a39d9c1fd18@linux.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH RFC v4 10/44] KVM: guest_memfd: Add support for
+ KVM_SET_MEMORY_ATTRIBUTES2
+To: Vishal Annapurve <vannapurve@google.com>,
+ Michael Roth <michael.roth@amd.com>
+Cc: Ackerley Tng <ackerleytng@google.com>, aik@amd.com,
+ andrew.jones@linux.dev, binbin.wu@linux.intel.com, brauner@kernel.org,
+ chao.p.peng@linux.intel.com, david@kernel.org, ira.weiny@intel.com,
+ jmattson@google.com, jthoughton@google.com, oupton@kernel.org,
+ pankaj.gupta@amd.com, qperret@google.com, rick.p.edgecombe@intel.com,
+ rientjes@google.com, shivankg@amd.com, tabba@google.com,
+ willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
+ forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
+ aneesh.kumar@kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Shuah Khan <shuah@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+ Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+ Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>,
+ Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>,
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ linux-mm@kvack.org
+References: <20260326-gmem-inplace-conversion-v4-0-e202fe950ffd@google.com>
+ <20260326-gmem-inplace-conversion-v4-10-e202fe950ffd@google.com>
+ <2r4mmfiuisw26qymahnbh2oxqkkrywqev477kc4rlkcyx7tels@c7ple7kdgpo3>
+ <CAEvNRgFkusZeKxGctUpTTbYjdi7nZL1ZZar-gT7XRUOCZ2xtpw@mail.gmail.com>
+ <CAEvNRgGm9icDK8sK5ZfqHEOEqSbvjwtihE4p9d3vpBq-NfVjmw@mail.gmail.com>
+ <CAEvNRgEtigp7+PVDkyu_DH947CUqDt312d+P+hWjjd2fHONiag@mail.gmail.com>
+ <yvfwexsub7nrogh67hzcsupbrkzer6a7kbeao5tlq4elrzc2iz@xrwdjd7p32pp>
+ <CAGtprH-kgRByFvvCYeWMXtsvpb6qpaWAo8k-3PEnioyPg-LEvA@mail.gmail.com>
+Content-Language: en-GB
+From: Steven Price <steven.price@arm.com>
+In-Reply-To: <CAGtprH-kgRByFvvCYeWMXtsvpb6qpaWAo8k-3PEnioyPg-LEvA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDA4NCBTYWx0ZWRfXxT6V9Yqn2wqd
- C5VKsIN2EQvIZAP7bVSQ1VMbTNJxRrujwjoIR/cRF/zgfAq7LIRdLwYM97zd22v2tZ5ywsJy+ka
- VMpzreyuT6216CwSk+5pMCWtJ0GPxtNhwzvOTFK43YW23WLu7r0/dscfQHEI84d+Sfoqh5sNSyf
- 9ad++z08yq8yX3MI2QCtKIKcd4Zb82HFUqNVvK5Aw+/odyiLQKBUKyAo2yF5JnHXJUeVEOaXuTx
- heG8iqWLSX9QwmBfCEM6h3B75+h68TqLsEghWWKyOq1YnOxhM/H0wjiOGwUn+/Ic1ePk//EWFOu
- ju5SP8tDZFN2vPXCcg4pd3wLlbW911jXVHUjVQo1wJS81/P0RzPTgeEhp2ElNm02fhh4koTT7A2
- eLG3KsVkNV9Hnv20IRqD9vU5Ml31PnWDNiBO8FlWrXEvGm1/QKZ2dqJro7111+yQaVxgr3ggxKP
- X6MaZxthOKQ1m0GZRUA==
-X-Proofpoint-ORIG-GUID: 5A2vCfFAnvmBdy9PoQCVmbL3RvEfqORJ
-X-Authority-Analysis: v=2.4 cv=e9k2j6p/ c=1 sm=1 tr=0 ts=69d622a7 cx=c_pps
- a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
- a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=5lQC5WIk0UPCy102QXMA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: 5A2vCfFAnvmBdy9PoQCVmbL3RvEfqORJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-08_03,2026-04-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0 spamscore=0
- bulkscore=0 adultscore=0 priorityscore=1501 phishscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604080084
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[ibm.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82800-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,kylinos.cn:email,linux.ibm.com:mid];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FROM_NEQ_ENVFROM(0.00)[sourabhjain@linux.ibm.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[arm.com:+];
+	FREEMAIL_CC(0.00)[google.com,amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,infradead.org,arm.com,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,ziepe.ca,vger.kernel.org,kvack.org];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82802-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[steven.price@arm.com,linux-doc@vger.kernel.org];
 	PRECEDENCE_BULK(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	RCPT_COUNT_GT_50(0.00)[58];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_COUNT_SEVEN(0.00)[11]
-X-Rspamd-Queue-Id: 3F36B3BA165
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,arm.com:dkim,arm.com:mid,amd.com:email]
+X-Rspamd-Queue-Id: 55E193BB0CB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+On 07/04/2026 22:50, Vishal Annapurve wrote:
+> On Tue, Apr 7, 2026 at 2:09 PM Michael Roth <michael.roth@amd.com> wrote:
+>>
+>>> TLDR:
+>>>
+>>> + Think of populate ioctls not as KVM touching memory, but platform
+>>>   handling population.
+>>> + KVM code (kvm_gmem_populate) still doesn't touch memory contents
+>>> + post_populate is platform-specific code that handles loading into
+>>>   private destination memory just to support legacy non-in-place
+>>>   conversion.
+>>> + Don't complicate populate ioctls by doing conversion just to support
+>>>   legacy use-cases where platform-specific code has to do copying on
+>>>   the host.
+>>
+>> That's a good point: these are only considerations in the context of
+>> actually copying from src->dst, but with in-place conversion the
+>> primary/more-performant approach will be for userspace to initial
+>> directly. I.e. if we enforced that, then gmem could right ascertain that
+>> it isn't even writing to private pages via these hooks and any
+>> manipulation of that memory is purely on the part of the trusted entity
+>> handling initial encryption/etc.
+>>
+>> I understand that we decided to keep the option of allowing separate
+>> src/dst even with in-place conversion, but it doesn't seem worthwhile if
+>> that necessarily means we need to glue population+conversion together in
+>> 1 clumsy interface that needs to handle partial return/error responses to
+>> userspace (or potentially get stuck forever in the conversion path).
+> 
+> I think ARM needs userspace to specify separate source and destination
+> memory ranges for initial population as ARM doesn't support in-place
+> memory encryption. [1]
 
+Indeed - CCA requires KVM to first "delegate" the page (effectively the
+shared->private conversion) which will destroy the contents. Then we can
+populate the data (but that obviously has to come from elsewhere).
 
-On 08/04/26 13:11, Youling Tang wrote:
-> Hi, Sourabh
->
-> On 4/8/26 12:31, Sourabh Jain wrote:
->> Hello Youling,
->>
->> On 04/04/26 13:11, Youling Tang wrote:
->>> From: Youling Tang <tangyouling@kylinos.cn>
->>>
->>> The crashkernel range syntax (range1:size1[,range2:size2,...]) allows
->>> automatic size selection based on system RAM, but it always reserves
->>> from low memory. When a large crashkernel is selected, this can
->>> consume most of the low memory, causing subsequent hardware
->>> hotplug or drivers requiring low memory to fail due to allocation
->>> failures.
->>
->>
->> Support for high crashkernel reservation has been added to
->> address the above problem.
->>
->> However, high crashkernel reservation is not supported with
->> range-based crashkernel kernel command-line arguments.
->> For example: crashkernel=0M-1G:100M,1G-4G:160M,4G-8G:192M
->>
->> Many users, including some distributions, use range-based
->> crashkernel configuration. So, adding support for high crashkernel
->> reservation with range-based configuration would be useful.
->>
->>>
->>> Add a new optional conditional suffix ",>boundary" to the crashkernel
->>> range syntax. When the selected crashkernel size exceeds the specified
->>> boundary, the kernel will automatically apply the same reservation
->>> policy as "crashkernel=size,high" - preferring high memory first
->>> and reserving the default low memory area.
->>
->> I think the approach to enable high crashkernel reservation
->> with range-based configuration makes the crashkernel kernel
->> argument more complex.
->>
->> If the goal is to support high crashkernel reservation with
->> range-based kernel command-line arguments, how about:
->>
->> crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset],high
->>
->> instead of using >boundary?
->
-> This approach defaults all reservations to high memory. For example,
-> 0M-2G:100M on a 1GB machine reserves 100M + 
-> DEFAULT_CRASH_KERNEL_LOW_SIZE,
-> which wastes memory on small systems.
+The closest CCA can do to an in-place conversion is for the kernel to
+copy the data to another temporary buffer and then the firmware can copy
+it back after the delegation. An early version of the CCA Linux patches
+did this (long before guest_memfd). However this is slower than it needs
+to be (two copies) and difficult to size the temporary buffer. Too small
+and you round-trip to the firmware more than you need to, too large and
+you waste memory. And, with increasing support for huge pages in
+guest_memfd and the CCA firmware (aka RMM), it's also challenging to
+preserve huge pages while doing this dance so I want to avoid it if
+possible.
 
-OK, in that case, we need an option like >boundary because
-DEFAULT_CRASH_KERNEL_LOW_SIZE itself is 128 MB by default
-(unless the architecture overrides it).
+> [1] https://lore.kernel.org/kvm/20260318155413.793430-25-steven.price@arm.com/
+> 
+>>
+>> So I agree with Ackerley's proposal (which I guess is the same as what's
+>> in this series).
+>>
+>> However, 1 other alternative would be to do what was suggested on the
+>> call, but require userspace to subsequently handle the shared->private
+>> conversion. I think that would be workable too.
+> 
+> IIUC, Converting memory ranges to private after it essentially is
+> treated as private by the KVM CC backend will expose the
+> implementation to the same risk of userspace being able to access
+> private memory and compromise host safety which guest_memfd was
+> invented to address.
 
-- Sourabh Jain
+At least in the Arm CCA case the "exposure" of the private memory is
+only in terms of allowing population - and only before the guest has
+run. The host isn't able to access the memory in any direct way after
+the memory has been delegated. But the RMM provides this populate method
+to copy data into memory (in a measured/controlled manner).
 
->
-> I prefer small reservations defaulting to low memory, while large
-> reservations start from high memory (with a default-sized segment
-> reserved in low memory). This provides better flexibility for
-> distributions to handle diverse system configurations.
->
-> Thanks,
-> Youling.
+From a CCA perspective the logical flow is to mark the memory as private
+and then call the platform-specific function to populate the memory. But
+obviously we can fit in a KVM API which is different.
+
+Note that CCA has a specific VM property called 'RIPAS' (Realm IPA
+State). This is the guest's view of whether memory exists at a
+particular physical address. My current series takes the view that all
+guest_memfd memory is private RAM and the guest will have to
+specifically request that it is converted to shared. I'm hoping this
+series might provide a way for the VMM to configure this (before the
+guest starts executing).
+
+Thanks,
+Steve
+
+>>
+>> One other benefit to Ackerley's/current approach however is that it allows
+>> us to potentially keep hugepages intact in the populate path, since
+>> prep'ing/encrypting everything while it's in a shared state means gmem will
+>> split the hugepage and all the firmware/RMP/etc. data structures will only
+>> be able to handle individual 4K pages. I still suspect doing things like
+>> encoding the initial 2MB OVMF image as a single hugepage might yield
+>> enough benefit to explore this (at some point). So there's some niceness
+>> in knowing that Ackerley's approach would allow for that eventually and
+>> not require a complete rethink on these same topics.
+>>
+>> Thanks,
+>>
+>> Mike
 >>
 >>>
->>> Syntax:
->>> crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset],>boundary
->>>
->>> Example:
->>>      crashkernel=2G-16G:512M,16G-:1G,>512M
->>>
->>> This means:
->>>    - For 2G-16G RAM: reserve 512M normally
->>>    - For >16G RAM: reserve 1G with high memory preference (since 1G 
->>> > 512M)
->>>
->>> For systems with >16G RAM, 1G is selected which exceeds 512M, so it
->>> will be reserved from high memory instead of consuming 1G of
->>> precious low memory.
->>>
->>> Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
->>> ---
->>>   Documentation/admin-guide/kdump/kdump.rst     | 25 ++++++++-
->>>   .../admin-guide/kernel-parameters.txt         |  2 +-
->>>   kernel/crash_reserve.c                        | 56 
->>> ++++++++++++++++---
->>>   3 files changed, 73 insertions(+), 10 deletions(-)
->>>
->>> diff --git a/Documentation/admin-guide/kdump/kdump.rst 
->>> b/Documentation/admin-guide/kdump/kdump.rst
->>> index 7587caadbae1..b5ae4556e9ca 100644
->>> --- a/Documentation/admin-guide/kdump/kdump.rst
->>> +++ b/Documentation/admin-guide/kdump/kdump.rst
->>> @@ -293,7 +293,28 @@ crashkernel syntax
->>>          2) if the RAM size is between 512M and 2G (exclusive), then 
->>> reserve 64M
->>>          3) if the RAM size is larger than 2G, then reserve 128M
->>>   -3) crashkernel=size,high and crashkernel=size,low
->>> +3) range1:size1[,range2:size2,...][@offset],>boundary
->>> +   Optionally, the range list can be followed by a conditional suffix
->>> +   `,>boundary`. When the selected crashkernel size matches the
->>> +   condition, the kernel will reserve memory using the same policy as
->>> +   `crashkernel=size,high` (i.e. prefer high memory first and 
->>> reserve the
->>> +   default low memory area).
->>> +
->>> +   The syntax is::
->>> +
->>> + crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset],>boundary
->>> +        range=start-[end]
->>> +
->>> +   For example::
->>> +
->>> +        crashkernel=2G-16G:512M,16G-:1G,>512M
->>> +
->>> +   This would mean:
->>> +       1) if the RAM size is between 2G and 16G (exclusive), then 
->>> reserve 512M.
->>> +       2) if the RAM size is larger than 16G, allocation will 
->>> behave like
->>> +          `crashkernel=1G,high`.
->>> +
->>> +4) crashkernel=size,high and crashkernel=size,low
->>>        If memory above 4G is preferred, crashkernel=size,high can be 
->>> used to
->>>      fulfill that. With it, physical memory is allowed to be 
->>> allocated from top,
->>> @@ -311,7 +332,7 @@ crashkernel syntax
->>>                 crashkernel=0,low
->>>   -4) crashkernel=size,cma
->>> +5) crashkernel=size,cma
->>>         Reserve additional crash kernel memory from CMA. This 
->>> reservation is
->>>       usable by the first system's userspace memory and kernel movable
->>> diff --git a/Documentation/admin-guide/kernel-parameters.txt 
->>> b/Documentation/admin-guide/kernel-parameters.txt
->>> index 03a550630644..b2e1892ab4d8 100644
->>> --- a/Documentation/admin-guide/kernel-parameters.txt
->>> +++ b/Documentation/admin-guide/kernel-parameters.txt
->>> @@ -1087,7 +1087,7 @@ Kernel parameters
->>>               4G when '@offset' hasn't been specified.
->>>               See Documentation/admin-guide/kdump/kdump.rst for 
->>> further details.
->>>   -    crashkernel=range1:size1[,range2:size2,...][@offset]
->>> + crashkernel=range1:size1[,range2:size2,...][@offset][,>boundary]
->>>               [KNL] Same as above, but depends on the memory
->>>               in the running system. The syntax of range is
->>>               start-[end] where start and end are both
->>> diff --git a/kernel/crash_reserve.c b/kernel/crash_reserve.c
->>> index 62e60e0223cf..917738412390 100644
->>> --- a/kernel/crash_reserve.c
->>> +++ b/kernel/crash_reserve.c
->>> @@ -254,15 +254,47 @@ static __init char *get_last_crashkernel(char 
->>> *cmdline,
->>>       return ck_cmdline;
->>>   }
->>>   +/*
->>> + * This function parses command lines in the format
->>> + *
->>> + * crashkernel=ramsize-range:size[,...][@offset],>boundary
->>> + */
->>> +static void __init parse_crashkernel_boundary(char *ck_cmdline,
->>> +                    unsigned long long *boundary)
->>> +{
->>> +    char *cur = ck_cmdline, *next;
->>> +    char *first_gt = false;
->>> +
->>> +    first_gt = strchr(cur, '>');
->>> +    if (!first_gt)
->>> +        return;
->>> +
->>> +    cur = first_gt + 1;
->>> +    if (*cur == '\0' || *cur == ' ' || *cur == ',') {
->>> +        pr_warn("crashkernel: '>' specified without boundary size, 
->>> ignoring\n");
->>> +        return;
->>> +    }
->>> +
->>> +    *boundary = memparse(cur, &next);
->>> +    if (cur == next) {
->>> +        pr_warn("crashkernel: invalid boundary size after '>'\n");
->>> +        return;
->>> +    }
->>> +}
->>> +
->>>   static int __init __parse_crashkernel(char *cmdline,
->>>                    unsigned long long system_ram,
->>>                    unsigned long long *crash_size,
->>>                    unsigned long long *crash_base,
->>> -                 const char *suffix)
->>> +                 const char *suffix,
->>> +                 bool *high,
->>> +                 unsigned long long *low_size)
->>>   {
->>>       char *first_colon, *first_space;
->>>       char *ck_cmdline;
->>>       char *name = "crashkernel=";
->>> +    unsigned long long boundary = 0;
->>> +    int ret;
->>>         BUG_ON(!crash_size || !crash_base);
->>>       *crash_size = 0;
->>> @@ -283,10 +315,20 @@ static int __init __parse_crashkernel(char 
->>> *cmdline,
->>>        */
->>>       first_colon = strchr(ck_cmdline, ':');
->>>       first_space = strchr(ck_cmdline, ' ');
->>> -    if (first_colon && (!first_space || first_colon < first_space))
->>> -        return parse_crashkernel_mem(ck_cmdline, system_ram,
->>> +    if (first_colon && (!first_space || first_colon < first_space)) {
->>> +        ret = parse_crashkernel_mem(ck_cmdline, system_ram,
->>>                   crash_size, crash_base);
->>>   +        /* Handle optional ',>boundary' condition for range ':' 
->>> syntax only. */
->>> +        parse_crashkernel_boundary(ck_cmdline, &boundary);
->>> +        if (!ret && *crash_size > boundary) {
->>> +            *high = true;
->>> +            *low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
->>> +        }
->>> +
->>> +        return ret;
->>> +    }
->>> +
->>>       return parse_crashkernel_simple(ck_cmdline, crash_size, 
->>> crash_base);
->>>   }
->>>   @@ -310,7 +352,7 @@ int __init parse_crashkernel(char *cmdline,
->>>         /* crashkernel=X[@offset] */
->>>       ret = __parse_crashkernel(cmdline, system_ram, crash_size,
->>> -                crash_base, NULL);
->>> +                crash_base, NULL, high, low_size);
->>>   #ifdef CONFIG_ARCH_HAS_GENERIC_CRASHKERNEL_RESERVATION
->>>       /*
->>>        * If non-NULL 'high' passed in and no normal crashkernel
->>> @@ -318,7 +360,7 @@ int __init parse_crashkernel(char *cmdline,
->>>        */
->>>       if (high && ret == -ENOENT) {
->>>           ret = __parse_crashkernel(cmdline, 0, crash_size,
->>> -                crash_base, suffix_tbl[SUFFIX_HIGH]);
->>> +                crash_base, suffix_tbl[SUFFIX_HIGH], high, low_size);
->>>           if (ret || !*crash_size)
->>>               return -EINVAL;
->>>   @@ -327,7 +369,7 @@ int __init parse_crashkernel(char *cmdline,
->>>            * is not allowed.
->>>            */
->>>           ret = __parse_crashkernel(cmdline, 0, low_size,
->>> -                crash_base, suffix_tbl[SUFFIX_LOW]);
->>> +                crash_base, suffix_tbl[SUFFIX_LOW], high, low_size);
->>>           if (ret == -ENOENT) {
->>>               *low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
->>>               ret = 0;
->>> @@ -344,7 +386,7 @@ int __init parse_crashkernel(char *cmdline,
->>>        */
->>>       if (cma_size)
->>>           __parse_crashkernel(cmdline, 0, cma_size,
->>> -            &cma_base, suffix_tbl[SUFFIX_CMA]);
->>> +            &cma_base, suffix_tbl[SUFFIX_CMA], high, low_size);
->>>   #endif
->>>       if (!*crash_size)
->>>           ret = -EINVAL;
->>
+>>>>>>
+>>>>>> [...snip...]
+>>>>>>
 
 
