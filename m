@@ -1,273 +1,256 @@
-Return-Path: <linux-doc+bounces-82824-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82826-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CJP8KxGC1mmwFwgAu9opvQ
-	(envelope-from <linux-doc+bounces-82824-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 18:28:01 +0200
+	id OGAxE0WI1mmwFwgAu9opvQ
+	(envelope-from <linux-doc+bounces-82826-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 18:54:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9161D3BED0A
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 18:28:01 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF6BF3BF25E
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 18:54:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BA136300ACB6
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 16:27:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A7F69302F0EC
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 16:51:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B85039EF22;
-	Wed,  8 Apr 2026 16:27:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C0653D171A;
+	Wed,  8 Apr 2026 16:51:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="QvU3I+Un"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QUUz1Utr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF5323AEF5F
-	for <linux-doc@vger.kernel.org>; Wed,  8 Apr 2026 16:27:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC7B83B0AFC
+	for <linux-doc@vger.kernel.org>; Wed,  8 Apr 2026 16:51:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775665679; cv=none; b=GQLh3+wWCN1BoeEgges3mUIPrl2GFqOgppwY9dUo60nonkjg1h4WtWwNQlAYy4L2ydbDLHvAPaC6V4h4l/Ast2hf6UK3kN3Dx2efZdn8rcARXKu0Gj6op5hITGDoOwQKkIzq621IGv5F2EcSYhg8RxENdiWVvUcTz8PW0glMsMM=
+	t=1775667081; cv=none; b=EsmR0BpeGG9gKL95gEnPJq+HdrmnoY9oLTxn4F6BgDMUb8U+f2TJ28CGg6OFLylzlyob41EApo6T3pq82+BeGGats/mvEOeH+CHxzWM0yTCkctR/Le07fsY0XJyTs2AwoKu8lOuK+lKfhndokrOx0Ne1aT9vVB/glJdCkwpwFNk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775665679; c=relaxed/simple;
-	bh=riQCmPz/YRZQFAxixoC856ZnzKOlPUkU6SrpknoncaM=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=PXcI3DEMfwGuGXSwI7qxvgmTk1L7Lh+jLFzeV0z6h4EA8DaMgHhpw00+YOGVWw/Ny+7TVcFbxh9BstZtYAWeIoV2Wwi+DXszKYdPm8Y+cqovEByoIRpFZoI+D0cC/RbJBYheJimMOnfg/TCtf9a/BRkfvJ9DqiklUpFA5UIoCwY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=QvU3I+Un; arc=none smtp.client-ip=185.70.43.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1775665675; x=1775924875;
-	bh=jYWkV8HkUkjj0VDQ4arrnM5cPTT1orgpOAjTYpZWlUw=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=QvU3I+UnnFTRBcQf7sP7Wt4X/8Ed+UKRyv9PK8jkol49D3vOQKOmirph4tk21KrhS
-	 lpPDljc6Rm2NkaS3FaKf/XV2tOMZ+ukluwUtpKUBkMUkW8J6fyrTjpLNkA6peImet9
-	 wJB3N92eZE1bfwBrvfgGaQBZhYfAaX5kt53yYroZvO6a314ZGBoOLt8k8BlxLj3KOv
-	 hUsvdr4f2s+/Y+c0eCD1Ai2o5+Y2ymyP+cjT8nGdLcjL/+RVAGOMKNbUACmKDJd7V8
-	 EK80GYgM8VY+BpITWf/28FF0u14ScBu9PG0NqT+6AC4tvT3tXANUIdQBkGXSGfaPAo
-	 bNxWQsXy3zpRA==
-Date: Wed, 08 Apr 2026 16:27:51 +0000
-To: skhan@linuxfoundation.org, ilpo.jarvinen@linux.intel.com, hansg@kernel.org, corbet@lwn.net, srinivas.pandruvada@linux.intel.com
-From: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
-Cc: linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org, linux-doc@vger.kernel.org, m.wieczorretman@pm.me, Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
-Subject: [PATCH v3 2/2] platform/x86/intel-uncore-freq: Expose instance ID in the sysfs
-Message-ID: <b9ae8d5f1ab86bcdb1a8636fa48865a9e49e2e21.1775665057.git.m.wieczorretman@pm.me>
-In-Reply-To: <cover.1775665057.git.m.wieczorretman@pm.me>
-References: <cover.1775665057.git.m.wieczorretman@pm.me>
-Feedback-ID: 164464600:user:proton
-X-Pm-Message-ID: fcbb3ae2662d1b1562ffa7b408728a4b9a1fcee8
+	s=arc-20240116; t=1775667081; c=relaxed/simple;
+	bh=fpPwOPPuQd3UQjcuy6+UdPx/jd7jjJ8Uh4myuUyhZsk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=mGaEgSPTFyvQ/KKH3dOcEcVPgOAy/8trRkzFCcD5krtaMgaYEe3afshFhGaBCm/885WS7MoNPwoDHxVP1rt9a0DIJvdBhVVQFZw3rWGEWIpm98VqKG3sV2RUGhcwbS8wgMa4W2dZT451fvESWDgWh4Xl70n7FMTuTiljThE37Jw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QUUz1Utr; arc=none smtp.client-ip=209.85.128.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-7a299d84b7dso1095337b3.0
+        for <linux-doc@vger.kernel.org>; Wed, 08 Apr 2026 09:51:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1775667079; x=1776271879; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rrHGwLfLgUQGW2hlMR2HktDjRBw+hKJj17XzuK6WT3o=;
+        b=QUUz1Utr29TtWGZTbiXVnKv1KVpEtxAX48zOS3ufEsgDD/pnNNyUJJ821I4TLsQwcT
+         lRyv0ej+Cptx+GPiY1vi92DYU1jVabvadCKgZ/PyLIToiybjH/jTvvW8BPbh437IDMHt
+         QwiH11oo+XJEb4NITDS092fzR9Up6G+/TKPv9JZGTXUsyW42pdl/pzlpgp1x4z2Kjasv
+         WshFts/9Cdstj/SCk30xXTIVaKAlcsFRq8oRgjiu8jemb0AiQTyJo/fUIIj+Sg2liGk7
+         WGosmpjEt39lzNdWIGKQhxM5uYvikERNU7PDl5mWbAmSOlzfL9RLnCLUxezymIUavuyR
+         q8Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775667079; x=1776271879;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=rrHGwLfLgUQGW2hlMR2HktDjRBw+hKJj17XzuK6WT3o=;
+        b=TCnXT1YUE3hmPkG/yISpCtfRnh8VrbvMPTA6eTPEWDrmaPvap7g/2kaQXgx/AB2sH0
+         pxIqpVPGOu3H7PHYxz+qr7IEropeEH5YqDFadBu7H7jHZh9EHHGA2KpX+vX7syA9OfFc
+         J91oKboGDOKblSKQX8Om/ab6RBaiu1khgcEc5bzpKRhBKliIXZAEnRVOtqQfnhluVGWy
+         yLfaNPfmTEtLwxxin8w62LIerG3vgBb6f67B4wH+ed6HLOgn4JU+LPdsKSHq6JmKQIJa
+         4EBC49t0CnE3UJnnhdrxItfp8ezknIV/XiLeQ9TanSp+ENsfMNmZ2TTTf0qu4c0vTLtd
+         pcKA==
+X-Forwarded-Encrypted: i=1; AJvYcCWpF8M+nJgJWaF90//d3gQyKw15sshk08h7shGci8g/xRt5BTK0eB0RKTees6WGsnuMhNCBx84Mzg0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyIihg9i0D59Js5TQ0bYIaI2cyAYFef9UyFSIZx2/pPNiGLHJpy
+	vPcmdPgswjeaFVL/K41xEzCB0o01d5BdeF9CopcQbwZZQ3DoTwQMwrs6
+X-Gm-Gg: AeBDieuET5o017EMQUUs/tzYJjftg+MDrxoXLihKo8rhN5MYz4PZT+kkYvj12KyiGwC
+	IDZGmPt+/4zoWjywEoVW+WEXjeLa5uK1/hk55527DPbG7wGb9ArbP83AhkBpgEamTDnNiTf/bXO
+	8u87cOKY6QINR6ZYkrWpgYJK3nmUQHzs6spqSZy5kwN35fyzNg3mrPYxsqRYpb/8q6sQy3XDY9z
+	IFNXFNcHgqwNW2BbD+PshPqWE7OtVAGFmFYSHa8xNFqRSERn6xnZH9ABAijKZWF4f52/0x+R9NZ
+	P7tc3kSq84wVyBoSDVYqp56xtjQDM3pcnkQglgl3EVDveXrXOOxnWmSH3rzs3tDLQNWTHtV4u7b
+	xQbTf+goU+sn7Iyws2UqKWWpL9D1C5wrUN9VfSoG3BlH+bQMwgi+2JiJKyN4WG8nJbBFooRQ9Xq
+	j96O0w+ncVInOG7vSmV16soIsfULNt9W0CrBe80iDxtvrdBcWCNJhBr0c=
+X-Received: by 2002:a05:690c:9:b0:79b:ccb6:a837 with SMTP id 00721157ae682-7a4d31e5f49mr215312817b3.5.1775667078580;
+        Wed, 08 Apr 2026 09:51:18 -0700 (PDT)
+Received: from bijan-laptop.attlocal.net ([2600:1700:680e:c000:161a:64d7:b05f:7124])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7a36e42ff31sm86023777b3.6.2026.04.08.09.51.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Apr 2026 09:51:18 -0700 (PDT)
+From: Bijan Tabatabai <bijan311@gmail.com>
+To: SeongJae Park <sj@kernel.org>
+Cc: Bijan Tabatabai <bijan311@gmail.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Brendan Higgins <brendan.higgins@linux.dev>,
+	David Gow <davidgow@davidgow.net>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	kunit-dev@googlegroups.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [RFC PATCH v3 00/10] mm/damon: introduce DAMOS failed region quota charge ratio
+Date: Wed,  8 Apr 2026 11:48:27 -0500
+Message-ID: <20260408165001.8473-1-bijan311@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260407010536.83603-1-sj@kernel.org>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-1.16 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[pm.me,quarantine];
-	R_DKIM_ALLOW(-0.20)[pm.me:s=protonmail3];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82824-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[gmail.com,oracle.com,linux-foundation.org,linux.dev,davidgow.net,kernel.org,lwn.net,suse.com,linuxfoundation.org,google.com,lists.linux.dev,googlegroups.com,vger.kernel.org,kvack.org];
+	TAGGED_FROM(0.00)[bounces-82826-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[pm.me:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[m.wieczorretman@pm.me,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bijan311@gmail.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 9161D3BED0A
+	NEURAL_HAM(-0.00)[-0.999];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: CF6BF3BF25E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
+On Mon,  6 Apr 2026 18:05:22 -0700 SeongJae Park <sj@kernel.org> wrote:
 
-Insufficient data is exported to allow direct access to TPMI registers
-through MMIO. On non-partitioned systems domain_id can be used both for
-mapping CPUs to their compute die IDs and for mapping die indices to
-their MMIO memory blocks presented to userspace via TPMI debugfs.
-However on partitioned systems the debugfs association doesn't work
-anymore. This is due to how TPMI partitioning influences domain_id
-calculation. The previous association is lost on partitioned systems in
-order to keep using domain_id for mapping CPUs to compute dies.
+Hi SJ,
 
-Expose the instance ID in sysfs that's unique in the scope of one TPMI
-partition (and hence one TPMI device). It's a physical index into mapped
-MMIO blocks and can be used by userspace to figure out how to directly
-access TPMI registers.
+> TL; DR: Let users set different DAMOS quota charge ratios for DAMOS
+> action failed regions, for deterministic and consistent DAMOS action
+> progress.
+> 
+> Common Reports: Unexpectedly Slow DAMOS
+> =======================================
+> 
+> One common issue report that we get from DAMON users is that DAMOS
+> action applying progress speed is sometimes much slower than expected.
+> And one common root cause is that the DAMOS quota is exceeded by the
+> action applying failed memory regions.
+> 
+> For example, a group of users tried to run DAMOS-based proactive memory
+> reclamation (DAMON_RECLAIM) with 100 MiB per second DAMOS quota.  They
+> ran it on a system having no active workload which means all memory of
+> the system is cold.  The expectation was that the system will show 100
+> MiB per second reclamation until (nearly) all memory is reclaimed. But
+> what they found is that the speed is quite inconsistent and sometimes it
+> becomes very slower than the expectation, sometimes even no reclamation
+> at all for about tens of seconds.  The upper limit of the speed (100 MiB
+> per second) was being kept as expected, though.
+> 
+> By monitoring the qt_exceeds (number of DAMOS quota exceed events) DAMOS
+> stat, we found DAMOS quota is always exceeded when the speed is slow. By
+> monitoring sz_tried and sz_applied (the total amount of DAMOS action
+> tried memory and succeeded memory) DAMOS stats together, we found the
+> reclamation attempts nearly always failed when the speed is slow.
+> 
+> DAMOS quota charges DAMOS action tried regions regardless of the
+> successfulness of the try.  Hence in the example reported case, there
+> was unreclaimable memory spread around the system memory.  Sometimes
+> nearly 100 MiB of memory that DAMOS tried to reclaim in the given quota
+> interval was reclaimable, and therefore showed nearly 100 MiB per second
+> speed.  Sometimes nearly 99 MiB of memory that DAMOS was trying to
+> reclaim in the given quota interval was unreclaimable, and therefore
+> showing only about 1 MiB per second reclaim speed.
+> 
+> We explained it is an expected behavior of the feature rather than a
+> bug, as DAMOS quota is there for only the upper-limit of the speed.  The
+> users agreed and later reported a huge win from the adoption of
+> DAMON_RECLAIM on their products.
 
-Signed-off-by: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
----
-Changelog v3:
-- Change sprintf -> sysfs_emit in show_instance_id().
-- Change part of patch message 'MMIO memory blocks mapped' -> 'MMIO
-  memory blocks presented to userspace...'
-- Change assigning function to static inline.
+Thanks for this series. This is a problem I have come across and am looking
+forward to seeing this land.
 
-Changelog v2:
-- Redo the patch message.
-- Redo the function comment that assigns instance_id.
-- Modify the documentation.
+> It is Not a Bug but a Feature; But...
+> =====================================
+> 
+> So nothing is broken.  DAMOS quota is working as intended, as the upper
+> limit of the speed.  It also provides its behavior observability via
+> DAMOS stat.  In the real world production environment that runs long
+> term active workloads and matters stability, the speed sometimes being
+> slow is not a real problem.
+> 
+> But, the non-deterministic behavior is sometimes annoying, especially in
+> lab environments.  Even in a realistic production environment, when
+> there is a huge amount of DAMOS action unapplicable memory, the speed
+> could be problematically slow.  Let's suppose a virtual machines
+> provider that setup 99% of the host memory as hugetlb pages that cannot
+> be reclaimed, to give it to virtual machines.  Also, when aim-oriented
+> DAMOS auto-tuning is applied, this could also make the internal feedback
+> loop confused.
+> 
+> The intention of the current behavior was that trying DAMOS action to
+> regions would anyway impose some overhead, and therefore somehow be
+> charged.  But in the real world, the overhead for failed action is much
+> lighter than successful action.  Charging those at the same ratio may be
+> unfair, or at least suboptimum in some environments.
+> 
+> DAMOS Action Failed Region Quota Charge Ratio
+> =============================================
+> 
+> Let users set the charge ratio for the action-failed memory, for more
+> optimal and deterministic use of DAMOS.  It allows users to specify the
+> numerator and the denominator of the ratio for flexible setup.  For
+> example, let's suppose the numerator and the denominator are set to 1
+> and 4,096, respectively.  The ratio is 1 / 4,096.  A DAMOS scheme action
+> is applied to 5 GiB memory.  For 1 GiB of the memory, the action is
+> succeeded.  For the rest (4 GiB), the action is failed.  Then, only 1
+> GiB and 1 MiB quota is charged.
+> 
+> The optimal charge ratio will depend on the use case and
+> system/workload.  I'd recommend starting from setting the nominator as 1
+> and the denominator as PAGE_SIZE and tune based on the results, because
+> many DAMOS actions are applied at page level.
 
- .../pm/intel_uncore_frequency_scaling.rst         |  7 +++++++
- .../uncore-frequency/uncore-frequency-common.c    | 10 ++++++++++
- .../uncore-frequency/uncore-frequency-common.h    |  6 +++++-
- .../uncore-frequency/uncore-frequency-tpmi.c      | 15 ++++++++++++++-
- 4 files changed, 36 insertions(+), 2 deletions(-)
+This makes sense, but the quota is also considered when setting the minimum
+allowable score in damos_adjust_quota(), which, to my understanding, assumes
+that all of the all of a region's data will by applied. If an action fails for
+a significant amount of the memory, a lower score than what was calculated in
+damos_adjust_quota() could be valid. If that's the case, the scheme would be
+applied to fewer regions than strictly necessary.
 
-diff --git a/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rs=
-t b/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst
-index d367ba4d744a..b43ad4d5e333 100644
---- a/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst
-+++ b/Documentation/admin-guide/pm/intel_uncore_frequency_scaling.rst
-@@ -88,8 +88,15 @@ and "fabric_cluster_id" in the directory.
-=20
- Attributes in each directory:
-=20
-+``instance_id``
-+=09This attribute is used to get die indices in userspace mapped MMIO
-+=09blocks. Indices are local to a single TPMI partition. Needed for direct
-+=09TPMI register access.
-+
- ``domain_id``
- =09This attribute is used to get the power domain id of this instance.
-+=09Indices are unique in all TPMI partitions on a given CPU package. Can b=
-e
-+=09used to map compute dies to corresponding CPUs.
-=20
- ``die_id``
- =09This attribute is used to get the Linux die id of this instance.
-diff --git a/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-c=
-ommon.c b/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-comm=
-on.c
-index 25ab511ed8d2..3b554418a7a3 100644
---- a/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-common.c
-+++ b/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-common.c
-@@ -29,6 +29,13 @@ static ssize_t show_domain_id(struct kobject *kobj, stru=
-ct kobj_attribute *attr,
- =09return sysfs_emit(buf, "%u\n", data->domain_id);
- }
-=20
-+static ssize_t show_instance_id(struct kobject *kobj, struct kobj_attribut=
-e *attr, char *buf)
-+{
-+=09struct uncore_data *data =3D container_of(attr, struct uncore_data, ins=
-tance_id_kobj_attr);
-+
-+=09return sysfs_emit(buf, "%u\n", data->instance_id);
-+}
-+
- static ssize_t show_fabric_cluster_id(struct kobject *kobj, struct kobj_at=
-tribute *attr, char *buf)
- {
- =09struct uncore_data *data =3D container_of(attr, struct uncore_data, fab=
-ric_cluster_id_kobj_attr);
-@@ -200,6 +207,9 @@ static int create_attr_group(struct uncore_data *data, =
-char *name)
- =09if (data->domain_id !=3D UNCORE_DOMAIN_ID_INVALID) {
- =09=09init_attribute_root_ro(domain_id);
- =09=09data->uncore_attrs[index++] =3D &data->domain_id_kobj_attr.attr;
-+=09=09init_attribute_root_ro(instance_id);
-+=09=09data->uncore_attrs[index++] =3D &data->instance_id_kobj_attr.attr;
-+
- =09=09init_attribute_root_ro(fabric_cluster_id);
- =09=09data->uncore_attrs[index++] =3D &data->fabric_cluster_id_kobj_attr.a=
-ttr;
- =09=09init_attribute_root_ro(package_id);
-diff --git a/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-c=
-ommon.h b/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-comm=
-on.h
-index 0d5fd91ee0aa..e319448dc1a4 100644
---- a/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-common.h
-+++ b/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-common.h
-@@ -36,6 +36,7 @@
-  * @domain_id:=09=09Power domain id for this instance
-  * @cluster_id:=09=09cluster id in a domain
-  * @seqnum_id:=09=09Unique sequential id to append to directory name
-+ * @instance_id:=09Die indices or feature instances for a single TPMI devi=
-ce
-  * @name:=09=09Sysfs entry name for this instance
-  * @agent_type_mask:=09Bit mask of all hardware agents for this domain
-  * @uncore_attr_group:=09Attribute group storage
-@@ -56,6 +57,7 @@
-  * @elc_floor_freq_khz_kobj_attr: Storage for kobject attribute elc_floor_=
-freq_khz
-  * @agent_types_kobj_attr: Storage for kobject attribute agent_type
-  * @die_id_kobj_attr:=09Attribute storage for die_id information
-+ * @instance_id_kobj_attr: Attribute storage for instance_id value
-  * @uncore_attrs:=09Attribute storage for group creation
-  *
-  * This structure is used to encapsulate all data related to uncore sysfs
-@@ -72,6 +74,7 @@ struct uncore_data {
- =09int domain_id;
- =09int cluster_id;
- =09int seqnum_id;
-+=09int instance_id;
- =09char name[32];
- =09u16  agent_type_mask;
-=20
-@@ -90,7 +93,8 @@ struct uncore_data {
- =09struct kobj_attribute elc_floor_freq_khz_kobj_attr;
- =09struct kobj_attribute agent_types_kobj_attr;
- =09struct kobj_attribute die_id_kobj_attr;
--=09struct attribute *uncore_attrs[15];
-+=09struct kobj_attribute instance_id_kobj_attr;
-+=09struct attribute *uncore_attrs[16];
- };
-=20
- #define UNCORE_DOMAIN_ID_INVALID=09-1
-diff --git a/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-t=
-pmi.c b/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-tpmi.c
-index 1237d9570886..32d03bee09a0 100644
---- a/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-tpmi.c
-+++ b/drivers/platform/x86/intel/uncore-frequency/uncore-frequency-tpmi.c
-@@ -385,7 +385,19 @@ static u8 io_die_index_next;
- /* Lock to protect io_die_start, io_die_index_next */
- static DEFINE_MUTEX(domain_lock);
-=20
--static void set_domain_id(int id,  int num_resources,
-+static inline void set_instance_id(int id, struct tpmi_uncore_cluster_info=
- *cluster_info)
-+{
-+=09/*
-+=09 * On non-partitioned systems domain_id can be used for mapping both
-+=09 * CPUs to compute die IDs and physical die indexes to MMIO mapped
-+=09 * memory. However on partitioned systems domain_id loses the second
-+=09 * association. Therefore instance_id should be used for that instead,
-+=09 * while domain_id should still be used to match CPUs to compute dies.
-+=09 */
-+=09cluster_info->uncore_data.instance_id =3D id;
-+}
-+
-+static void set_domain_id(int id, int num_resources,
- =09=09=09  struct oobmsm_plat_info *plat_info,
- =09=09=09  struct tpmi_uncore_cluster_info *cluster_info)
- {
-@@ -686,6 +698,7 @@ static int uncore_probe(struct auxiliary_device *auxdev=
-, const struct auxiliary_
- =09=09=09set_cdie_id(i, cluster_info, plat_info);
-=20
- =09=09=09set_domain_id(i, num_resources, plat_info, cluster_info);
-+=09=09=09set_instance_id(i, cluster_info);
-=20
- =09=09=09cluster_info->uncore_root =3D tpmi_uncore;
-=20
---=20
-2.53.0
+As you mention above, this is not a correctness issue because the quota only
+guarantees an upper limit on the amount of data the scheme is applied to.
+Additionally, it may very well be true that what I listed above would not be
+very noticeable in practice. I just thought this was worth pointing out as
+something to think about.
 
+Thanks,
+Bijan
 
+<snip>
+
+Sent using hkml (https://github.com/sjp38/hackermail)
 
