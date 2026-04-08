@@ -1,67 +1,67 @@
-Return-Path: <linux-doc+bounces-82833-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82836-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CEnwNpqP1mmEGQgAu9opvQ
-	(envelope-from <linux-doc+bounces-82833-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 19:25:46 +0200
+	id UMsQC6KU1mmiGQgAu9opvQ
+	(envelope-from <linux-doc+bounces-82836-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 19:47:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E24053BF7D4
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 19:25:45 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C2F3D3BFCFB
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 19:47:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6201030046B2
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 17:24:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 91C9F302E784
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 17:45:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 498953D6486;
-	Wed,  8 Apr 2026 17:24:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bdqwYCP1"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 66E2A3D88E1;
+	Wed,  8 Apr 2026 17:45:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24BDC3D413C;
-	Wed,  8 Apr 2026 17:24:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 245312E4257;
+	Wed,  8 Apr 2026 17:44:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775669078; cv=none; b=HIspdDmdoS4gbC0/xF7n+cDF3f8Nn5CUe5FIlie+dBH4YuJKzgycGHkHKLknOk7A5YFd10PCORmEKrglArhjtYaKxRY/h1VYuU5luDr2ATTjBVnza0oovTWHRd5YBLI6bSKCcHjVDFCntA9TPn+2FqfAI3fnEVbwVDbczpba9BY=
+	t=1775670303; cv=none; b=P0TUwG6H5lenaNJhDia011GDLf1isGg7vRFUKqojtQ5UK2D3uqU+SMS9oJHxKrM/BS0hjH+RaCJDXKXDIwpThjeSilkn+jY7KJ/J8bGPWYflHe2HOxzH5PmNOYvUild3WmSu3llazpiFGJIGMs5QCDxXMSlUEuVhr9/9bNPjUK0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775669078; c=relaxed/simple;
-	bh=Rv8EVELx+/zidCVReIS8RYxmzUCqJs5h4jhRfn9SOb4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=prKJNuo4sYft43Mbvh/8brRpecEODnYVzh8wT1V276llGoiszB84cxLzbiwFmZ1OtwpsBRe5rVR9f6h0mBF2Iv9DTAZ7TVjh8ixLTfepGUTQP+zjiYZBHln5JsYnAs16H3Ro51ce+rTNK10lfCNx8TQ7YzkIhun1nfj7hOAuUyo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bdqwYCP1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5A82C19421;
-	Wed,  8 Apr 2026 17:24:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775669077;
-	bh=Rv8EVELx+/zidCVReIS8RYxmzUCqJs5h4jhRfn9SOb4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=bdqwYCP1iEkSg2bTnuIKs13u6lHNjnomimU2YySnagiZkc8+HrbX30imbI46ef/YE
-	 faHmFWBb05om2DBFJ2LraFWfIhM/A49kwjt3KG1KRvZQuxjPOXvlJQUUCsg3ullmT8
-	 OGD6JOUqt9u5clIgQHrZz4SsKsjSuR0Ei4nSp+EvZQhnjXMaMR8AVjh5/wgO2FCPtm
-	 Ni1Obk6tded+XatO1PvtZw5D+OF1AGKwRjeQaX7SjKJxwOnGpWtehRW2Yea1X5T/8p
-	 09zRNztb0BnFQ9d59oZnSIX1S600fwmL9pTxl/435sum6ke3Er11N1BuemjutJgZSi
-	 UTxXa/UQQvRKA==
-From: Sasha Levin <sashal@kernel.org>
-To: dwaipayanray1@gmail.com,
-	lukas.bulwahn@gmail.com
-Cc: joe@perches.com,
-	mricon@kernel.org,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	apw@canonical.com,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sasha Levin <sashal@kernel.org>
-Subject: [PATCH v2] checkpatch: add --json output mode
-Date: Wed,  8 Apr 2026 13:24:35 -0400
-Message-ID: <20260408172435.1268067-1-sashal@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260406170039.4034716-1-sashal@kernel.org>
-References: <20260406170039.4034716-1-sashal@kernel.org>
+	s=arc-20240116; t=1775670303; c=relaxed/simple;
+	bh=QMCfX6qUCZMIMgCMeS6li3cErbaSdA/MMsL4w8aBSHU=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=l6MYLZshQIWGcHGz2vvI868CzKqrCawoXHixm9trwqL0Jy4J8qDokIqEG2MFF1POb4QwZOxHlGkw4ex1U+rBRTZtNXJPmfuQhDqOADdNH0r0obIH/CHB1HVNEZB8Z2DPXYtQBdCGgCnQkuVpqegk0OiQsBcj6p59BluX6iUAAHI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.224.83])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4frVRQ51nDzJ46cW;
+	Thu,  9 Apr 2026 01:29:06 +0800 (CST)
+Received: from dubpeml500008.china.huawei.com (unknown [7.214.146.94])
+	by mail.maildlp.com (Postfix) with ESMTPS id 9D51D40575;
+	Thu,  9 Apr 2026 01:29:38 +0800 (CST)
+Received: from P_UKIT01-A7bmah.china.huawei.com (10.126.175.151) by
+ dubpeml500008.china.huawei.com (7.214.146.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Wed, 8 Apr 2026 18:29:36 +0100
+From: <shiju.jose@huawei.com>
+To: <rafael@kernel.org>, <bp@alien8.de>, <akpm@linux-foundation.org>,
+	<rppt@kernel.org>, <dferguson@amperecomputing.com>,
+	<linux-edac@vger.kernel.org>, <linux-acpi@vger.kernel.org>,
+	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>, <tony.luck@intel.com>,
+	<lenb@kernel.org>, <leo.duran@amd.com>, <Yazen.Ghannam@amd.com>,
+	<mchehab@kernel.org>
+CC: <jonathan.cameron@huawei.com>, <linuxarm@huawei.com>,
+	<rientjes@google.com>, <jiaqiyan@google.com>, <Jon.Grimm@amd.com>,
+	<dave.hansen@linux.intel.com>, <naoya.horiguchi@nec.com>,
+	<james.morse@arm.com>, <jthoughton@google.com>, <somasundaram.a@hpe.com>,
+	<erdemaktas@google.com>, <pgonda@google.com>, <duenwen@google.com>,
+	<gthelen@google.com>, <wschwartz@amperecomputing.com>,
+	<wbs@os.amperecomputing.com>, <nifan.cxl@gmail.com>, <tanxiaofei@huawei.com>,
+	<prime.zeng@hisilicon.com>, <roberto.sassu@huawei.com>,
+	<kangkang.shen@futurewei.com>, <wanghuiqiang@huawei.com>,
+	<shiju.jose@huawei.com>, <shijujose2008@gmail.com>
+Subject: [PATCH v19 0/2] ACPI: Add support for ACPI RAS2 feature table
+Date: Wed, 8 Apr 2026 18:28:47 +0100
+Message-ID: <20260408172850.183-1-shiju.jose@huawei.com>
+X-Mailer: git-send-email 2.43.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,270 +69,278 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.84 / 15.00];
+Content-Type: text/plain
+X-ClientProxiedBy: lhrpeml500010.china.huawei.com (7.191.174.240) To
+ dubpeml500008.china.huawei.com (7.214.146.94)
+X-Spamd-Result: default: False [3.04 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[huawei.com : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82833-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[huawei.com,google.com,amd.com,linux.intel.com,nec.com,arm.com,hpe.com,amperecomputing.com,os.amperecomputing.com,gmail.com,hisilicon.com,futurewei.com];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82836-lists,linux-doc=lfdr.de];
+	NEURAL_SPAM(0.00)[0.436];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[38];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[shiju.jose@huawei.com,linux-doc@vger.kernel.org];
+	FROM_NO_DN(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	R_DKIM_NA(0.00)[];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,checkpatch.pl:url]
-X-Rspamd-Queue-Id: E24053BF7D4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huawei.com:email,huawei.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,sashiko.dev:url]
+X-Rspamd-Queue-Id: C2F3D3BFCFB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add a --json flag to checkpatch.pl that emits structured JSON output,
-making results machine-parseable for CI systems, IDE integrations, and
-AI-assisted code review tools.
+From: Shiju Jose <shiju.jose@huawei.com>
 
-The JSON output includes per-file totals (errors, warnings, checks,
-lines) and an array of individual issues with structured fields for
-level, type, message, file path, and line number.
+Add support for ACPI RAS2 feature table (RAS2) defined in the
+ACPI 6.5 specification, section 5.2.21 and RAS2 HW based memory
+scrubbing feature.
 
-The --json flag is mutually exclusive with --terse and --emacs.
-Normal text output behavior is completely unchanged when --json is
-not specified.
+ACPI RAS2 patches were part of the EDAC series [1].
 
-Assisted-by: Claude:claude-opus-4-6
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
-Changes since v1:
-- Replace hand-rolled json_escape()/json_encode_issue() with JSON::PP
-  module (core since perl 5.14), as suggested by Konstantin and Joe
-- Factor duplicated empty-result JSON blocks into json_print_result()
-  helper
-- Include used_types and ignored_types arrays in JSON output instead of
-  suppressing hash_show_words, per Joe's suggestion
----
- Documentation/dev-tools/checkpatch.rst |  7 +++
- scripts/checkpatch.pl                  | 64 +++++++++++++++++++++++---
- 2 files changed, 65 insertions(+), 6 deletions(-)
+The code is based on linux.git v7.0-rc7 [2].
 
-diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
-index dccede68698ca..17e5744d3dee6 100644
---- a/Documentation/dev-tools/checkpatch.rst
-+++ b/Documentation/dev-tools/checkpatch.rst
-@@ -64,6 +64,13 @@ Available options:
- 
-    Output only one line per report.
- 
-+ - --json
-+
-+   Output results as a JSON object.  The object includes total error, warning,
-+   and check counts, plus an array of individual issues with structured fields
-+   for level, type, message, file, and line number.  Cannot be used with
-+   --terse or --emacs.
-+
-  - --showfile
- 
-    Show the diffed file position instead of the input file position.
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index e56374662ff79..38d1a4a13ee8e 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -14,6 +14,7 @@ use File::Basename;
- use Cwd 'abs_path';
- use Term::ANSIColor qw(:constants);
- use Encode qw(decode encode);
-+use JSON::PP;
- 
- my $P = $0;
- my $D = dirname(abs_path($P));
-@@ -33,6 +34,7 @@ my $chk_patch = 1;
- my $tst_only;
- my $emacs = 0;
- my $terse = 0;
-+my $json = 0;
- my $showfile = 0;
- my $file = 0;
- my $git = 0;
-@@ -93,6 +95,7 @@ Options:
-   --patch                    treat FILE as patchfile (default)
-   --emacs                    emacs compile window format
-   --terse                    one line per report
-+  --json                     output results as JSON
-   --showfile                 emit diffed file position, not input file position
-   -g, --git                  treat FILE as a single commit or git revision range
-                              single git commit with:
-@@ -320,6 +323,7 @@ GetOptions(
- 	'patch!'	=> \$chk_patch,
- 	'emacs!'	=> \$emacs,
- 	'terse!'	=> \$terse,
-+	'json!'		=> \$json,
- 	'showfile!'	=> \$showfile,
- 	'f|file!'	=> \$file,
- 	'g|git!'	=> \$git,
-@@ -379,6 +383,7 @@ help($help - 1) if ($help);
- 
- die "$P: --git cannot be used with --file or --fix\n" if ($git && ($file || $fix));
- die "$P: --verbose cannot be used with --terse\n" if ($verbose && $terse);
-+die "$P: --json cannot be used with --terse or --emacs\n" if ($json && ($terse || $emacs));
- 
- if ($color =~ /^[01]$/) {
- 	$color = !$color;
-@@ -1351,7 +1356,7 @@ for my $filename (@ARGV) {
- 	}
- 	close($FILE);
- 
--	if ($#ARGV > 0 && $quiet == 0) {
-+	if (!$json && $#ARGV > 0 && $quiet == 0) {
- 		print '-' x length($vname) . "\n";
- 		print "$vname\n";
- 		print '-' x length($vname) . "\n";
-@@ -1372,7 +1377,7 @@ for my $filename (@ARGV) {
- 	$file = $oldfile if ($is_git_file);
- }
- 
--if (!$quiet) {
-+if (!$quiet && !$json) {
- 	hash_show_words(\%use_type, "Used");
- 	hash_show_words(\%ignore_type, "Ignored");
- 
-@@ -2395,6 +2400,18 @@ sub report {
- 
- 	push(our @report, $output);
- 
-+	if ($json) {
-+		our ($realfile, $realline);
-+		my %issue = (
-+			level => $level,
-+			type => $type,
-+			message => $msg,
-+		);
-+		$issue{file} = $realfile if (defined $realfile && $realfile ne '');
-+		$issue{line} = $realline + 0 if (defined $realline && $realline);
-+		push(our @json_issues, \%issue);
-+	}
-+
- 	return 1;
- }
- 
-@@ -2402,6 +2419,23 @@ sub report_dump {
- 	our @report;
- }
- 
-+sub json_print_result {
-+	my ($filename, $total_errors, $total_warnings, $total_checks,
-+	    $total_lines, $issues, $used_types, $ignored_types) = @_;
-+	my %result = (
-+		filename       => $filename,
-+		total_errors   => $total_errors + 0,
-+		total_warnings => $total_warnings + 0,
-+		total_checks   => $total_checks + 0,
-+		total_lines    => $total_lines + 0,
-+		issues         => $issues,
-+	);
-+	$result{used_types} = $used_types if (defined $used_types);
-+	$result{ignored_types} = $ignored_types if (defined $ignored_types);
-+	my $json_encoder = JSON::PP->new->canonical->utf8;
-+	print $json_encoder->encode(\%result) . "\n";
-+}
-+
- sub fixup_current_range {
- 	my ($lineRef, $offset, $length) = @_;
- 
-@@ -2690,14 +2724,15 @@ sub process {
- 	my $last_coalesced_string_linenr = -1;
- 
- 	our @report = ();
-+	our @json_issues = ();
- 	our $cnt_lines = 0;
- 	our $cnt_error = 0;
- 	our $cnt_warn = 0;
- 	our $cnt_chk = 0;
- 
- 	# Trace the real file/line as we go.
--	my $realfile = '';
--	my $realline = 0;
-+	our $realfile = '';
-+	our $realline = 0;
- 	my $realcnt = 0;
- 	my $here = '';
- 	my $context_function;		#undef'd unless there's a known function
-@@ -7791,18 +7826,27 @@ sub process {
- 	# If we have no input at all, then there is nothing to report on
- 	# so just keep quiet.
- 	if ($#rawlines == -1) {
-+		if ($json) {
-+			json_print_result($filename, 0, 0, 0, 0, []);
-+		}
- 		exit(0);
- 	}
- 
- 	# In mailback mode only produce a report in the negative, for
- 	# things that appear to be patches.
- 	if ($mailback && ($clean == 1 || !$is_patch)) {
-+		if ($json) {
-+			json_print_result($filename, 0, 0, 0, 0, []);
-+		}
- 		exit(0);
- 	}
- 
- 	# This is not a patch, and we are in 'no-patch' mode so
- 	# just keep quiet.
- 	if (!$chk_patch && !$is_patch) {
-+		if ($json) {
-+			json_print_result($filename, 0, 0, 0, 0, []);
-+		}
- 		exit(0);
- 	}
- 
-@@ -7850,6 +7894,13 @@ sub process {
- 		}
- 	}
- 
-+	if ($json) {
-+		my @used = sort keys %use_type;
-+		my @ignored = sort keys %ignore_type;
-+		json_print_result($filename, $cnt_error, $cnt_warn,
-+				  $cnt_chk, $cnt_lines, \@json_issues,
-+				  \@used, \@ignored);
-+	} else {
- 	print report_dump();
- 	if ($summary && !($clean == 1 && $quiet == 1)) {
- 		print "$filename " if ($summary_file);
-@@ -7878,8 +7929,9 @@ NOTE: Whitespace errors detected.
- EOM
- 		}
- 	}
-+	} # end !$json
- 
--	if ($clean == 0 && $fix &&
-+	if (!$json && $clean == 0 && $fix &&
- 	    ("@rawlines" ne "@fixed" ||
- 	     $#fixed_inserted >= 0 || $#fixed_deleted >= 0)) {
- 		my $newfile = $filename;
-@@ -7918,7 +7970,7 @@ EOM
- 		}
- 	}
- 
--	if ($quiet == 0) {
-+	if (!$json && $quiet == 0) {
- 		print "\n";
- 		if ($clean == 1) {
- 			print "$vname has no obvious style problems and is ready for submission.\n";
+1. https://lore.kernel.org/linux-cxl/20250212143654.1893-1-shiju.jose@huawei.com/
+2. https://github.com/torvalds/linux.git
+
+Changes
+=======
+v18 -> v19:
+1. Fixed gemini tool reported issues sent by Borislav. Thanks.
+https://sashiko.dev/#/patchset/20260325165714.294-1-shiju.jose%40huawei.com
+ - Replace with iowriteX() and ioreadX() for reading fields in RAS2 shared memory
+   tables throughout patches considering big-endian architectures. 
+ - In ras2_send_pcc_cmd(), add extra check for non-zero last_mpar_reset,
+   changed time_delta to s64, add lockdep_assert_held().
+ - In register_pcc_channel(), handled case of pcc_chan->latency is 0
+   and fixed timeout of 0 to readw_relaxed_poll_timeout().
+ - Fixed double free case When auxiliary_device_add() fails, the driver calls
+   auxiliary_device_uninit(&ras2_ctx->adev).
+ - In parse_ras2_table(), add check to verify table length is large enough to contain the
+   num_pcc_descs elements it iterates over.
+ - Add some missing cases to acquire pcc_lock, such as ras2_hw_scrub_read_addr()
+   and ras2_hw_scrub_read_size(). 
+ - Removed clearing base and size in ras2_scrub_monitor_thread() when demand scrubbing
+   has finished, to avoid clearing the user set values, though chances are very little.
+ - Add new field set_scrub_cycle to ras2_ctx to avoid user set value is being cleared when
+   ras2_update_patrol_scrub_params_cache() is being called. 
+ - In ras2_hw_scrub_set_enabled_od(), redesigned to avoid prematurely restart the background scrub
+   due to race condition in ras2_scrub_monitor_thread(). 
+ - rename ras2_probe() to ras2_mem_drv_probe()
+ - add ras2_mem_drv_remove() and call kthread_stop() to stop the ras2_scrub_monitor_thread().
+   However unregistering the EDAC device which registered in the ras2_mem_drv_probe() will
+   automatically happen in the EDAC via the devm_add_action_or_reset() in edac_dev_register(),
+   edac_dev_unreg() and edac_dev_release().
+   
+v17 -> v18:
+1. Fixed few AI tool reported issues shared by Borislav. Thanks.
+https://lore.kernel.org/all/20260312165247.GSabLvX5DjzhDtmyuh@fat_crate.local/
+2. Re-add support for user setting scrub address range for Daniel's 
+   reply in v16, which was removed in v13 because of request to simplify the code and
+   with the expectation that the firmware will do the full node demand scrubbing and
+    may enable these attributes later in the follow-up patches.
+   https://lore.kernel.org/all/df5fe0ed-3483-4ac5-8096-447e4e560816@os.amperecomputing.com/
+
+v16 -> v17:
+1. Merged all changes suggested by Borislav.
+https://lore.kernel.org/all/20260126171552.GJaXehSJp33nFnpvVd@fat_crate.local/
+2. Changes for Borislav's feedback "Add remove_aux_device() which unwinds everything
+   add_aux_device() does for all those devices".
+
+v15 -> v16:
+Attempt to modify throughout the code and logs for the below comments from Borislav.
+Thanks for the comments.
+https://lore.kernel.org/all/20251125073627.GLaSVce7hBqGH1a3ni@fat_crate.local/
+https://lore.kernel.org/all/20251231131512.GBaVUh4NSWqvr2xhbM@fat_crate.local/
+https://lore.kernel.org/all/20260119111701.GBaW4Sres045xnfkpz@fat_crate.local/
+
+v14 -> v15:
+1. Incorporated new changes suggested by Borislav on v13.
+   https://lore.kernel.org/all/20251231131512.GBaVUh4NSWqvr2xhbM@fat_crate.local/
+   
+2. Rebase to v6.19-rc5.
+
+v13 -> v14:
+1. Modifications for changes wanted by Borislav.
+   https://lore.kernel.org/all/20251125073627.GLaSVce7hBqGH1a3ni@fat_crate.local/
+
+2. Changes for the comments from Randy Dunlap 
+   https://lore.kernel.org/all/4807417b-a8f7-47a3-b38a-94ea7bdbf775@infradead.org/
+   https://lore.kernel.org/all/af7b6cdc-c0a7-4896-ba6b-6bb933898d37@infradead.org/
+   https://lore.kernel.org/all/26083ba9-1979-4d14-8465-3f54f2f96d23@infradead.org/
+   
+v12 -> v13:
+1. Fixed some bugs reported and changes wanted by Borislav.
+   https://lore.kernel.org/all/20250910192707.GAaMHRCxWx37XitN3t@fat_crate.local/ 
+
+2. Tried modifying the patch header as commented by Borislav.
+
+3. Fixed a bug reported by Yazen.
+   https://lore.kernel.org/all/20250909162434.GB11602@yaz-khff2.amd.com/
+
+4. Changed setting 'Requested Address Range' for GET_PATROL_PARAMETERS
+   command to meet the requirements from Daniel for Ampere Computing
+   platform. 
+   https://lore.kernel.org/all/7a211c5c-174c-438b-9a98-fd47b057ea4a@os.amperecomputing.com/
+
+5. In RAS2 driver, removed support for scrub control attributes 'addr' and
+   'size' for the time being with the expectation that a firmware will do
+   the full node demand scrubbing and may enable these attributes in the
+   future.
+   
+6. Add 'enable_demand' attribute to the EDAC scrub interface to start/stop
+   the demand scrub, which is used for the RAS2 demand scrub control.
+
+v11 -> v12:
+1. Modified logic for finding the lowest contiguous phy memory addr range for
+NUMA domain using node_start_pfn() and node_spanned_pages() according to the
+feedback from Mike Rapoport in v11.
+https://lore.kernel.org/all/aKsIlFTkBsAF5sqD@kernel.org/
+
+2. Rebase to 6.17-rc4.
+
+v10 -> v11:
+1. Simplified code by removing workarounds previously added to support
+   non-compliant case of single PCC channel shared across all proximity
+   domains (which is no longer required). 
+   https://lore.kernel.org/all/f5b28977-0b80-4c39-929b-cf02ab1efb97@os.amperecomputing.com/
+
+2. Fix for the comments from Borislav (Thanks).
+   https://lore.kernel.org/all/20250811152805.GQaJoMBecC4DSDtTAu@fat_crate.local/
+
+3. Rebase to 6.17-rc1.
+
+v9 -> v10:
+1. Use pcc_chan->shmem instead of 
+   acpi_os_ioremap(pcc_chan->shmem_base_addr,...) as it was
+   acpi_os_ioremap internally by the PCC driver to pcc_chan->shmem.
+   
+2. Changes required for the Ampere Computing system where uses a single
+   PCC channel for RAS2 memory features across all NUMA domains. Based on the
+   requirements from by Daniel on V9
+   https://lore.kernel.org/all/547ed8fb-d6b7-4b6b-a38b-bf13223971b1@os.amperecomputing.com/
+   and discussion with Jonathan.
+2.1 Add node_to_range lookup facility to numa_memblks. This is to retrieve the lowest
+    physical continuous memory range of the memory associated with a NUMA domain.
+2.2. Set requested addr range to the memory region's base addr and size
+   while send RAS2 cmd GET_PATROL_PARAMETER 
+   in functions ras2_update_patrol_scrub_params_cache() &
+   ras2_get_patrol_scrub_running().
+2.3. Split struct ras2_mem_ctx into struct ras2_mem_ctx_hdr and struct ras2_pxm_domain
+   to support cases, uses a single PCC channel for RAS2 scrubbers across all NUMA
+   domains and PCC channel per RAS2 scrub instance. Provided ACPI spec define single
+   memory scrub per NUMA domain.
+2.4. EDAC feature sysfs folder for RAS2 changed from "acpi_ras_memX" to  "acpi_ras_mem_idX"
+   because memory scrub instances across all NUMA domains would present under
+   "acpi_ras_mem_id0" when a system uses a single PCC channel for RAS2 scrubbers across
+   all NUMA domains etc.
+2.5. Removed Acked-by: Rafael from patch [2], because of the several above changes from v9.
+
+v8 -> v9:
+1. Added following changes for feedback from Yazen.
+ 1.1 In ras2_check_pcc_chan(..) function
+    - u32 variables moved to the same line.
+    - Updated error log for readw_relaxed_poll_timeout()
+    - Added error log for if (status & PCC_STATUS_ERROR), error condition.
+    - Removed an impossible condition check.
+  1.2. Added guard for ras2_pc_list_lock in ras2_get_pcc_subspace().
+        
+2. Rebased to linux.git v6.16-rc2 [2].
+
+v7 -> v8:
+1. Rebased to linux.git v6.16-rc1 [2].
+
+v6 -> v7:
+1. Fix for the issue reported by Daniel,
+   In ras2_check_pcc_chan(), add read, clear and check RAS2 set_cap_status outside
+   if (status & PCC_STATUS_ERROR) check. 
+   https://lore.kernel.org/all/51bcb52c-4132-4daf-8903-29b121c485a1@os.amperecomputing.com/
+
+v5 -> v6:
+1. Fix for the issue reported by Daniel, in start scrubbing with correct addr and size
+   after firmware return INVALID DATA error for scrub request with invalid addr or size.
+   https://lore.kernel.org/all/8cdf7885-31b3-4308-8a7c-f4e427486429@os.amperecomputing.com/
+   
+v4 -> v5:
+1. Fix for the build warnings reported by kernel test robot.
+   https://patchwork.kernel.org/project/linux-edac/patch/20250423163511.1412-3-shiju.jose@huawei.com/
+2. Removed patch "ACPI: ACPI 6.5: RAS2: Rename RAS2 table structure and field names"
+   from the series as the patch was merged to linux-pm.git : branch linux-next
+3. Rebased to ras.git: edac-for-next branch merged with linux-pm.git : linux-next branch.
+      
+v3 -> v4:
+1.  Changes for feedbacks from Yazen on v3.
+    https://lore.kernel.org/all/20250415210504.GA854098@yaz-khff2.amd.com/
+
+v2 -> v3:
+1. Rename RAS2 table structure and field names in 
+   include/acpi/actbl2.h limited to only necessary
+   for RAS2 scrub feature.
+2. Changes for feedbacks from Jonathan on v2.
+3. Daniel reported a known behaviour: when readback 'size' attribute after
+   setting in, returns 0 before starting scrubbing via 'addr' attribute.
+   Changes added to fix this.
+4. Daniel reported that firmware cannot update status of demand scrubbing
+   via the 'Actual Address Range (OUTPUT)', thus add workaround in the
+   kernel to update sysfs 'addr' attribute with the status of demand
+   scrubbing.
+5. Optimized logic in ras2_check_pcc_chan() function
+   (patch - ACPI:RAS2: Add ACPI RAS2 driver).
+6. Add PCC channel lock to struct ras2_pcc_subspace and change
+   lock in ras2_mem_ctx as a pointer to pcc channel lock to make sure
+   writing to PCC subspace shared memory is protected from race conditions.
+   
+v1 -> v2:
+1.  Changes for feedbacks from Borislav.
+    - Shorten ACPI RAS2 structures and variables names.
+    - Shorten some of the other variables in the RAS2 drivers.
+    - Fixed few CamelCases.
+
+2.  Changes for feedbacks from Yazen.
+    - Added newline after number of '}' and return statements.
+    - Changed return type for "ras2_add_aux_device() to 'int'.
+    - Deleted a duplication of acpi_get_table("RAS2",...) in the ras2_acpi_parse_table().
+    - Add "FW_WARN" to few error logs in the ras2_acpi_parse_table().
+    - Rename ras2_acpi_init() to acpi_ras2_init() and modified to call acpi_ras2_init()
+      function from the acpi_init().
+    - Moved scrub related variables from the struct ras2_mem_ctx from  patch
+      "ACPI:RAS2: Add ACPI RAS2 driver" to "ras: mem: Add memory ACPI RAS2 driver".
+
+Shiju Jose (2):
+  ACPI:RAS2: Add driver for the ACPI RAS2 feature table
+  ras: mem: Add ACPI RAS2 memory driver
+
+ Documentation/ABI/testing/sysfs-edac-scrub |  13 +-
+ Documentation/edac/scrub.rst               |  70 +++
+ drivers/acpi/Kconfig                       |  11 +
+ drivers/acpi/Makefile                      |   1 +
+ drivers/acpi/bus.c                         |   3 +
+ drivers/acpi/ras2.c                        | 441 +++++++++++++++++
+ drivers/edac/scrub.c                       |  12 +
+ drivers/ras/Kconfig                        |  13 +
+ drivers/ras/Makefile                       |   1 +
+ drivers/ras/acpi_ras2.c                    | 540 +++++++++++++++++++++
+ include/acpi/ras2.h                        |  84 ++++
+ include/linux/edac.h                       |   4 +
+ 12 files changed, 1188 insertions(+), 5 deletions(-)
+ create mode 100644 drivers/acpi/ras2.c
+ create mode 100644 drivers/ras/acpi_ras2.c
+ create mode 100644 include/acpi/ras2.h
+
 -- 
-2.53.0
+2.43.0
 
 
