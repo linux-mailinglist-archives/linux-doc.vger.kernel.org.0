@@ -1,405 +1,416 @@
-Return-Path: <linux-doc+bounces-82796-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82800-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +MjqIbsi1mklBQgAu9opvQ
-	(envelope-from <linux-doc+bounces-82796-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 11:41:15 +0200
+	id MPOXDf4j1mklBQgAu9opvQ
+	(envelope-from <linux-doc+bounces-82800-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 11:46:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C8CA3BA00B
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 11:41:14 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F36B3BA165
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 11:46:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id AEF56300B9FB
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 09:38:55 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E5425302FFBA
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 09:41:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF4BE3B4E9D;
-	Wed,  8 Apr 2026 09:38:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F30463ACA58;
+	Wed,  8 Apr 2026 09:41:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="iQHWKiPv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out28-50.mail.aliyun.com (out28-50.mail.aliyun.com [115.124.28.50])
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C92793B2FD0;
-	Wed,  8 Apr 2026 09:38:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B97DA3AE715;
+	Wed,  8 Apr 2026 09:41:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775641101; cv=none; b=llHrreSAtLqWsRzlWmNuchYNHT/OIykGCcK7CKUkuIIIuC4XjjcLIEB5tjpZXRGGM3p8JDGKbilMLlYcasMFrfwadSMgF/4MlG9RcikQEF6Sadms+SFjnVdt7a8/7esuqm7UMCHcdXyZraKvzPn2JbFUzHQXg+7Au1YE8bLOudY=
+	t=1775641293; cv=none; b=HyhhdZqJAOQr4NxXbhLEIOppVFi3yPnFDoU63YQNK/Y5KSH6kFGwzCHlwOIazWXVB8rQYiDECR8TtnRHzOHKPN8EjkhXLjxelAiSIbr7vppf19O70UqEMTejsCfdWXkadufh+BBhAPh1mv95ibOWUzYMCO07EFO90nffiRvgyW0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775641101; c=relaxed/simple;
-	bh=CqV+OVnqK+CgdlxN+HUyI60wjwxLNPTS4aZuThLXNz0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bIvpVg4NWh9KHYhu8/Ur+vnYIfsA/tKOe8RaSFufn1VZlpuShRdM0zwHwUcThyVRvv99Qt2kvk2I90OUq6zaTxBpeDYS0RxGHbz9vua20vv1XRIg92ALvvuF9Xuy/SgyLbTK0aOo9aUwcafaxU6AcsWf08vTspkVkcAIxU3EHe4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=115.124.28.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nebula-matrix.com
-X-Alimail-AntiSpam:AC=CONTINUE;BC=0.06712908|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_alarm|0.0123586-0.0139125-0.973729;FP=14580364869516283554|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033037022039;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DS;RN=19;RT=19;SR=0;TI=SMTPD_---.h7LII1e_1775641086;
-Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.h7LII1e_1775641086 cluster:ay29)
-          by smtp.aliyun-inc.com;
-          Wed, 08 Apr 2026 17:38:07 +0800
-From: "illusion.wang" <illusion.wang@nebula-matrix.com>
-To: dimon.zhao@nebula-matrix.com,
-	illusion.wang@nebula-matrix.com,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org
-Cc: andrew+netdev@lunn.ch,
-	corbet@lwn.net,
-	kuba@kernel.org,
-	linux-doc@vger.kernel.org,
-	lorenzo@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	vadim.fedorenko@linux.dev,
-	lukas.bulwahn@redhat.com,
-	edumazet@google.com,
-	enelsonmoore@gmail.com,
-	skhan@linuxfoundation.org,
-	hkallweit1@gmail.com,
-	linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v11 net-next 11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Wed,  8 Apr 2026 17:37:35 +0800
-Message-ID: <20260408093739.56001-12-illusion.wang@nebula-matrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260408093739.56001-1-illusion.wang@nebula-matrix.com>
-References: <20260408093739.56001-1-illusion.wang@nebula-matrix.com>
+	s=arc-20240116; t=1775641293; c=relaxed/simple;
+	bh=HMM9tblv6Aw+x/QS+sBIN31bUVhMbXeQMDQpCLwhH9w=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=NS2A8kJdwjAgLlUJSuhcz4doiKYrqZwVIqPV4HtZaapSsxgpyUfUlemc5BIQ3GPpzTS6ufz+Mzc9vwVs96vy53U96nxyRYdzVWj3ABDqW4JrD9q/VelfYHGLcT4J+BMZJ7Ndfy5Gk4zehEgbdrOFkfgUCJKIuX/gN/i/fdWsMmM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=iQHWKiPv; arc=none smtp.client-ip=148.163.158.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6385i50Q2326115;
+	Wed, 8 Apr 2026 09:40:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=ZjUreY
+	ZB4dqBxtPkYBxPNEtzPCAjU+XXM91SH0mST/k=; b=iQHWKiPvIbNpVbvAhws7Ob
+	GwbKaj8PMzrKqS25uQsBVh79qrhsT77swTH8EOKggAH5sLaoAm/P1KJQka7s+J8h
+	qJO/tcTueDu6B3lIWjF6bgWVJvE1L5kU+lltKH3537M456Ibnd2RUVBAk2Yw/TFa
+	RZdl5Dfu03txeM5BTpjovZHBmDWHDOMSJubGoAFuV62CCORPinDWTOt7DuEmDKY8
+	GhV8czlB0SMohyCbxUzj+b69tPZks2JeseNLPIScq3sEcKX7JthzPytwwpBA0K9l
+	cecY8mBf/4VvUYH/Nm7VnUEXt/nhBx6iuhc0B1mjeG8AE+v1F3X0leQQ5qdlkxNA
+	==
+Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4dcn2keqvc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 08 Apr 2026 09:40:55 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma22.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 6386IDJT007887;
+	Wed, 8 Apr 2026 09:40:55 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4dcmg2etxq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 08 Apr 2026 09:40:55 +0000
+Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com [10.20.54.104])
+	by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 6389erSF27328768
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 8 Apr 2026 09:40:53 GMT
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 3338320043;
+	Wed,  8 Apr 2026 09:40:53 +0000 (GMT)
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 0435F20040;
+	Wed,  8 Apr 2026 09:40:51 +0000 (GMT)
+Received: from [9.123.14.142] (unknown [9.123.14.142])
+	by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
+	Wed,  8 Apr 2026 09:40:50 +0000 (GMT)
+Message-ID: <b96d9b86-b193-4f0f-87d8-a73b7fe3d550@linux.ibm.com>
+Date: Wed, 8 Apr 2026 15:10:49 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] crash: Support high memory reservation for range syntax
+To: Youling Tang <youling.tang@linux.dev>,
+        Andrew Morton <akpm@linux-foundation.org>, Baoquan He <bhe@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc: Vivek Goyal <vgoyal@redhat.com>, Dave Young <dyoung@redhat.com>,
+        kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, Youling Tang <tangyouling@kylinos.cn>
+References: <20260404074103.506793-1-youling.tang@linux.dev>
+ <d584d383-1862-417d-9251-153d9bcf5626@linux.ibm.com>
+ <01e47f44-c22b-42f3-afe1-4a39d9c1fd18@linux.dev>
+Content-Language: en-US
+From: Sourabh Jain <sourabhjain@linux.ibm.com>
+In-Reply-To: <01e47f44-c22b-42f3-afe1-4a39d9c1fd18@linux.dev>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [1.54 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDA4NCBTYWx0ZWRfXxT6V9Yqn2wqd
+ C5VKsIN2EQvIZAP7bVSQ1VMbTNJxRrujwjoIR/cRF/zgfAq7LIRdLwYM97zd22v2tZ5ywsJy+ka
+ VMpzreyuT6216CwSk+5pMCWtJ0GPxtNhwzvOTFK43YW23WLu7r0/dscfQHEI84d+Sfoqh5sNSyf
+ 9ad++z08yq8yX3MI2QCtKIKcd4Zb82HFUqNVvK5Aw+/odyiLQKBUKyAo2yF5JnHXJUeVEOaXuTx
+ heG8iqWLSX9QwmBfCEM6h3B75+h68TqLsEghWWKyOq1YnOxhM/H0wjiOGwUn+/Ic1ePk//EWFOu
+ ju5SP8tDZFN2vPXCcg4pd3wLlbW911jXVHUjVQo1wJS81/P0RzPTgeEhp2ElNm02fhh4koTT7A2
+ eLG3KsVkNV9Hnv20IRqD9vU5Ml31PnWDNiBO8FlWrXEvGm1/QKZ2dqJro7111+yQaVxgr3ggxKP
+ X6MaZxthOKQ1m0GZRUA==
+X-Proofpoint-ORIG-GUID: 5A2vCfFAnvmBdy9PoQCVmbL3RvEfqORJ
+X-Authority-Analysis: v=2.4 cv=e9k2j6p/ c=1 sm=1 tr=0 ts=69d622a7 cx=c_pps
+ a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=5lQC5WIk0UPCy102QXMA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: 5A2vCfFAnvmBdy9PoQCVmbL3RvEfqORJ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-08_03,2026-04-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0 spamscore=0
+ bulkscore=0 adultscore=0 priorityscore=1501 phishscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604080084
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[ibm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[ibm.com:s=pp1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82796-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
-	DMARC_NA(0.00)[nebula-matrix.com];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	NEURAL_SPAM(0.00)[0.235];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[ibm.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	R_DKIM_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nebula-matrix.com:email,nebula-matrix.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,illusion.wang:url,pci:email]
-X-Rspamd-Queue-Id: 9C8CA3BA00B
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82800-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,kylinos.cn:email,linux.ibm.com:mid];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[sourabhjain@linux.ibm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_COUNT_SEVEN(0.00)[11]
+X-Rspamd-Queue-Id: 3F36B3BA165
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-start common dev: config msix map table, alloc and enable msix vectors,
-register mailbox ISR and enable mailbox irq
 
-Signed-off-by: illusion.wang <illusion.wang@nebula-matrix.com>
----
- .../nebula-matrix/nbl/nbl_core/nbl_dev.c      | 214 ++++++++++++++++++
- .../net/ethernet/nebula-matrix/nbl/nbl_main.c |  30 ++-
- 2 files changed, 243 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-index 4c97832a25a6..a3aa0fcd1443 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-@@ -6,6 +6,17 @@
- #include <linux/pci.h>
- #include "nbl_dev.h"
- 
-+static int nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt);
-+
-+/* ----------  Interrupt config  ---------- */
-+static irqreturn_t nbl_dev_clean_mailbox(int __always_unused irq, void *data)
-+{
-+	struct nbl_dev_mgt *dev_mgt = (struct nbl_dev_mgt *)data;
-+
-+	nbl_dev_clean_mailbox_schedule(dev_mgt);
-+	return IRQ_HANDLED;
-+}
-+
- static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- {
- 	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-@@ -14,6 +25,170 @@ static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- 	msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num = 1;
- }
- 
-+static int nbl_dev_request_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	u32 irq_num;
-+	int err;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+
-+	snprintf(dev_common->mailbox_name, sizeof(dev_common->mailbox_name),
-+		 "nbl_mailbox@pci:%s", pci_name(common->pdev));
-+	err = request_irq(irq_num, nbl_dev_clean_mailbox, 0,
-+			  dev_common->mailbox_name, dev_mgt);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static void nbl_dev_free_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	u32 irq_num;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+
-+	free_irq(irq_num, dev_mgt);
-+}
-+
-+static int nbl_dev_enable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, true);
-+
-+	return disp_ops->enable_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, true);
-+}
-+
-+static int nbl_dev_disable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	flush_work(&dev_common->clean_mbx_task);
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, false);
-+
-+	return disp_ops->enable_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, false);
-+}
-+
-+static int nbl_dev_configure_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	bool mask_en = msix_info->serv_info[NBL_MSIX_NET_TYPE].hw_self_mask_en;
-+	u16 msix_net_num = msix_info->serv_info[NBL_MSIX_NET_TYPE].num;
-+	u16 msix_not_net_num = 0;
-+	int err, i;
-+
-+	for (i = NBL_MSIX_NET_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_info->serv_info[i].base_vector_id =
-+			msix_info->serv_info[i - 1].base_vector_id +
-+			msix_info->serv_info[i - 1].num;
-+
-+	for (i = NBL_MSIX_MAILBOX_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_not_net_num += msix_info->serv_info[i].num;
-+
-+	err = disp_ops->configure_msix_map(dev_mgt->disp_ops_tbl->priv,
-+					   msix_net_num, msix_not_net_num,
-+					   mask_en);
-+
-+	return err;
-+}
-+
-+static int nbl_dev_destroy_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+
-+	return disp_ops->destroy_msix_map(dev_mgt->disp_ops_tbl->priv);
-+}
-+
-+static int nbl_dev_alloc_msix_intr(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	int needed = 0;
-+	int err;
-+	int i;
-+
-+	for (i = 0; i < NBL_MSIX_TYPE_MAX; i++)
-+		needed += msix_info->serv_info[i].num;
-+
-+	err = pci_alloc_irq_vectors(common->pdev, needed, needed,
-+				    PCI_IRQ_MSIX | PCI_IRQ_AFFINITY);
-+	if (err < 0) {
-+		pr_err("pci_alloc_irq_vectors failed, err = %d.\n", err);
-+		goto enable_msix_failed;
-+	}
-+
-+	return needed;
-+
-+enable_msix_failed:
-+	return err;
-+}
-+
-+static int nbl_dev_init_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	int err;
-+
-+	err = nbl_dev_alloc_msix_intr(dev_mgt);
-+	if (err < 0) {
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to enable MSI-X vectors\n");
-+		return err;
-+	}
-+	return 0;
-+}
-+
-+static void nbl_dev_clear_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_common_info *common = dev_mgt->common;
-+
-+	pci_free_irq_vectors(common->pdev);
-+}
-+
- /* ----------  Channel config  ---------- */
- static int nbl_dev_setup_chan_qinfo(struct nbl_dev_mgt *dev_mgt, u8 chan_type)
- {
-@@ -79,6 +254,14 @@ static void nbl_dev_clean_mailbox_task(struct work_struct *work)
- 				      NBL_CHAN_TYPE_MAILBOX);
- }
- 
-+static int nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+
-+	nbl_common_queue_work(&common_dev->clean_mbx_task);
-+	return 0;
-+}
-+
- /* ----------  Dev init process  ---------- */
- static int nbl_dev_setup_common_dev(struct nbl_adapter *adapter)
- {
-@@ -217,9 +400,40 @@ void nbl_dev_remove(struct nbl_adapter *adapter)
- /* ----------  Dev start process  ---------- */
- int nbl_dev_start(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	int ret;
-+
-+	ret = nbl_dev_configure_msix_map(dev_mgt);
-+	if (ret)
-+		goto config_msix_map_err;
-+
-+	ret = nbl_dev_init_interrupt_scheme(dev_mgt);
-+	if (ret)
-+		goto init_interrupt_scheme_err;
-+	ret = nbl_dev_request_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto mailbox_request_irq_err;
-+	ret = nbl_dev_enable_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto enable_mailbox_irq_err;
- 	return 0;
-+enable_mailbox_irq_err:
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+mailbox_request_irq_err:
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+init_interrupt_scheme_err:
-+	nbl_dev_destroy_msix_map(dev_mgt);
-+config_msix_map_err:
-+	return ret;
- }
- 
- void nbl_dev_stop(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+	nbl_dev_destroy_msix_map(dev_mgt);
- }
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-index db035136e09c..8f07d4fbdf04 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-@@ -286,7 +286,35 @@ static struct pci_driver nbl_driver = {
- 	.remove = nbl_remove,
- };
- 
--module_pci_driver(nbl_driver);
-+static int __init nbl_module_init(void)
-+{
-+	int status;
-+
-+	status = nbl_common_create_wq();
-+	if (status) {
-+		pr_err("Failed to create wq, err = %d\n", status);
-+		goto wq_create_failed;
-+	}
-+	status = pci_register_driver(&nbl_driver);
-+	if (status) {
-+		pr_err("Failed to register PCI driver, err = %d\n", status);
-+		goto pci_register_driver_failed;
-+	}
-+	return 0;
-+
-+pci_register_driver_failed:
-+	nbl_common_destroy_wq();
-+wq_create_failed:
-+	return status;
-+}
-+
-+static void __exit nbl_module_exit(void)
-+{
-+	pci_unregister_driver(&nbl_driver);
-+	nbl_common_destroy_wq();
-+}
- 
-+module_init(nbl_module_init);
-+module_exit(nbl_module_exit);
- MODULE_LICENSE("GPL");
- MODULE_DESCRIPTION("Nebula Matrix Network Driver");
--- 
-2.47.3
+On 08/04/26 13:11, Youling Tang wrote:
+> Hi, Sourabh
+>
+> On 4/8/26 12:31, Sourabh Jain wrote:
+>> Hello Youling,
+>>
+>> On 04/04/26 13:11, Youling Tang wrote:
+>>> From: Youling Tang <tangyouling@kylinos.cn>
+>>>
+>>> The crashkernel range syntax (range1:size1[,range2:size2,...]) allows
+>>> automatic size selection based on system RAM, but it always reserves
+>>> from low memory. When a large crashkernel is selected, this can
+>>> consume most of the low memory, causing subsequent hardware
+>>> hotplug or drivers requiring low memory to fail due to allocation
+>>> failures.
+>>
+>>
+>> Support for high crashkernel reservation has been added to
+>> address the above problem.
+>>
+>> However, high crashkernel reservation is not supported with
+>> range-based crashkernel kernel command-line arguments.
+>> For example: crashkernel=0M-1G:100M,1G-4G:160M,4G-8G:192M
+>>
+>> Many users, including some distributions, use range-based
+>> crashkernel configuration. So, adding support for high crashkernel
+>> reservation with range-based configuration would be useful.
+>>
+>>>
+>>> Add a new optional conditional suffix ",>boundary" to the crashkernel
+>>> range syntax. When the selected crashkernel size exceeds the specified
+>>> boundary, the kernel will automatically apply the same reservation
+>>> policy as "crashkernel=size,high" - preferring high memory first
+>>> and reserving the default low memory area.
+>>
+>> I think the approach to enable high crashkernel reservation
+>> with range-based configuration makes the crashkernel kernel
+>> argument more complex.
+>>
+>> If the goal is to support high crashkernel reservation with
+>> range-based kernel command-line arguments, how about:
+>>
+>> crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset],high
+>>
+>> instead of using >boundary?
+>
+> This approach defaults all reservations to high memory. For example,
+> 0M-2G:100M on a 1GB machine reserves 100M + 
+> DEFAULT_CRASH_KERNEL_LOW_SIZE,
+> which wastes memory on small systems.
+
+OK, in that case, we need an option like >boundary because
+DEFAULT_CRASH_KERNEL_LOW_SIZE itself is 128 MB by default
+(unless the architecture overrides it).
+
+- Sourabh Jain
+
+>
+> I prefer small reservations defaulting to low memory, while large
+> reservations start from high memory (with a default-sized segment
+> reserved in low memory). This provides better flexibility for
+> distributions to handle diverse system configurations.
+>
+> Thanks,
+> Youling.
+>>
+>>>
+>>> Syntax:
+>>> crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset],>boundary
+>>>
+>>> Example:
+>>>      crashkernel=2G-16G:512M,16G-:1G,>512M
+>>>
+>>> This means:
+>>>    - For 2G-16G RAM: reserve 512M normally
+>>>    - For >16G RAM: reserve 1G with high memory preference (since 1G 
+>>> > 512M)
+>>>
+>>> For systems with >16G RAM, 1G is selected which exceeds 512M, so it
+>>> will be reserved from high memory instead of consuming 1G of
+>>> precious low memory.
+>>>
+>>> Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
+>>> ---
+>>>   Documentation/admin-guide/kdump/kdump.rst     | 25 ++++++++-
+>>>   .../admin-guide/kernel-parameters.txt         |  2 +-
+>>>   kernel/crash_reserve.c                        | 56 
+>>> ++++++++++++++++---
+>>>   3 files changed, 73 insertions(+), 10 deletions(-)
+>>>
+>>> diff --git a/Documentation/admin-guide/kdump/kdump.rst 
+>>> b/Documentation/admin-guide/kdump/kdump.rst
+>>> index 7587caadbae1..b5ae4556e9ca 100644
+>>> --- a/Documentation/admin-guide/kdump/kdump.rst
+>>> +++ b/Documentation/admin-guide/kdump/kdump.rst
+>>> @@ -293,7 +293,28 @@ crashkernel syntax
+>>>          2) if the RAM size is between 512M and 2G (exclusive), then 
+>>> reserve 64M
+>>>          3) if the RAM size is larger than 2G, then reserve 128M
+>>>   -3) crashkernel=size,high and crashkernel=size,low
+>>> +3) range1:size1[,range2:size2,...][@offset],>boundary
+>>> +   Optionally, the range list can be followed by a conditional suffix
+>>> +   `,>boundary`. When the selected crashkernel size matches the
+>>> +   condition, the kernel will reserve memory using the same policy as
+>>> +   `crashkernel=size,high` (i.e. prefer high memory first and 
+>>> reserve the
+>>> +   default low memory area).
+>>> +
+>>> +   The syntax is::
+>>> +
+>>> + crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset],>boundary
+>>> +        range=start-[end]
+>>> +
+>>> +   For example::
+>>> +
+>>> +        crashkernel=2G-16G:512M,16G-:1G,>512M
+>>> +
+>>> +   This would mean:
+>>> +       1) if the RAM size is between 2G and 16G (exclusive), then 
+>>> reserve 512M.
+>>> +       2) if the RAM size is larger than 16G, allocation will 
+>>> behave like
+>>> +          `crashkernel=1G,high`.
+>>> +
+>>> +4) crashkernel=size,high and crashkernel=size,low
+>>>        If memory above 4G is preferred, crashkernel=size,high can be 
+>>> used to
+>>>      fulfill that. With it, physical memory is allowed to be 
+>>> allocated from top,
+>>> @@ -311,7 +332,7 @@ crashkernel syntax
+>>>                 crashkernel=0,low
+>>>   -4) crashkernel=size,cma
+>>> +5) crashkernel=size,cma
+>>>         Reserve additional crash kernel memory from CMA. This 
+>>> reservation is
+>>>       usable by the first system's userspace memory and kernel movable
+>>> diff --git a/Documentation/admin-guide/kernel-parameters.txt 
+>>> b/Documentation/admin-guide/kernel-parameters.txt
+>>> index 03a550630644..b2e1892ab4d8 100644
+>>> --- a/Documentation/admin-guide/kernel-parameters.txt
+>>> +++ b/Documentation/admin-guide/kernel-parameters.txt
+>>> @@ -1087,7 +1087,7 @@ Kernel parameters
+>>>               4G when '@offset' hasn't been specified.
+>>>               See Documentation/admin-guide/kdump/kdump.rst for 
+>>> further details.
+>>>   -    crashkernel=range1:size1[,range2:size2,...][@offset]
+>>> + crashkernel=range1:size1[,range2:size2,...][@offset][,>boundary]
+>>>               [KNL] Same as above, but depends on the memory
+>>>               in the running system. The syntax of range is
+>>>               start-[end] where start and end are both
+>>> diff --git a/kernel/crash_reserve.c b/kernel/crash_reserve.c
+>>> index 62e60e0223cf..917738412390 100644
+>>> --- a/kernel/crash_reserve.c
+>>> +++ b/kernel/crash_reserve.c
+>>> @@ -254,15 +254,47 @@ static __init char *get_last_crashkernel(char 
+>>> *cmdline,
+>>>       return ck_cmdline;
+>>>   }
+>>>   +/*
+>>> + * This function parses command lines in the format
+>>> + *
+>>> + * crashkernel=ramsize-range:size[,...][@offset],>boundary
+>>> + */
+>>> +static void __init parse_crashkernel_boundary(char *ck_cmdline,
+>>> +                    unsigned long long *boundary)
+>>> +{
+>>> +    char *cur = ck_cmdline, *next;
+>>> +    char *first_gt = false;
+>>> +
+>>> +    first_gt = strchr(cur, '>');
+>>> +    if (!first_gt)
+>>> +        return;
+>>> +
+>>> +    cur = first_gt + 1;
+>>> +    if (*cur == '\0' || *cur == ' ' || *cur == ',') {
+>>> +        pr_warn("crashkernel: '>' specified without boundary size, 
+>>> ignoring\n");
+>>> +        return;
+>>> +    }
+>>> +
+>>> +    *boundary = memparse(cur, &next);
+>>> +    if (cur == next) {
+>>> +        pr_warn("crashkernel: invalid boundary size after '>'\n");
+>>> +        return;
+>>> +    }
+>>> +}
+>>> +
+>>>   static int __init __parse_crashkernel(char *cmdline,
+>>>                    unsigned long long system_ram,
+>>>                    unsigned long long *crash_size,
+>>>                    unsigned long long *crash_base,
+>>> -                 const char *suffix)
+>>> +                 const char *suffix,
+>>> +                 bool *high,
+>>> +                 unsigned long long *low_size)
+>>>   {
+>>>       char *first_colon, *first_space;
+>>>       char *ck_cmdline;
+>>>       char *name = "crashkernel=";
+>>> +    unsigned long long boundary = 0;
+>>> +    int ret;
+>>>         BUG_ON(!crash_size || !crash_base);
+>>>       *crash_size = 0;
+>>> @@ -283,10 +315,20 @@ static int __init __parse_crashkernel(char 
+>>> *cmdline,
+>>>        */
+>>>       first_colon = strchr(ck_cmdline, ':');
+>>>       first_space = strchr(ck_cmdline, ' ');
+>>> -    if (first_colon && (!first_space || first_colon < first_space))
+>>> -        return parse_crashkernel_mem(ck_cmdline, system_ram,
+>>> +    if (first_colon && (!first_space || first_colon < first_space)) {
+>>> +        ret = parse_crashkernel_mem(ck_cmdline, system_ram,
+>>>                   crash_size, crash_base);
+>>>   +        /* Handle optional ',>boundary' condition for range ':' 
+>>> syntax only. */
+>>> +        parse_crashkernel_boundary(ck_cmdline, &boundary);
+>>> +        if (!ret && *crash_size > boundary) {
+>>> +            *high = true;
+>>> +            *low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
+>>> +        }
+>>> +
+>>> +        return ret;
+>>> +    }
+>>> +
+>>>       return parse_crashkernel_simple(ck_cmdline, crash_size, 
+>>> crash_base);
+>>>   }
+>>>   @@ -310,7 +352,7 @@ int __init parse_crashkernel(char *cmdline,
+>>>         /* crashkernel=X[@offset] */
+>>>       ret = __parse_crashkernel(cmdline, system_ram, crash_size,
+>>> -                crash_base, NULL);
+>>> +                crash_base, NULL, high, low_size);
+>>>   #ifdef CONFIG_ARCH_HAS_GENERIC_CRASHKERNEL_RESERVATION
+>>>       /*
+>>>        * If non-NULL 'high' passed in and no normal crashkernel
+>>> @@ -318,7 +360,7 @@ int __init parse_crashkernel(char *cmdline,
+>>>        */
+>>>       if (high && ret == -ENOENT) {
+>>>           ret = __parse_crashkernel(cmdline, 0, crash_size,
+>>> -                crash_base, suffix_tbl[SUFFIX_HIGH]);
+>>> +                crash_base, suffix_tbl[SUFFIX_HIGH], high, low_size);
+>>>           if (ret || !*crash_size)
+>>>               return -EINVAL;
+>>>   @@ -327,7 +369,7 @@ int __init parse_crashkernel(char *cmdline,
+>>>            * is not allowed.
+>>>            */
+>>>           ret = __parse_crashkernel(cmdline, 0, low_size,
+>>> -                crash_base, suffix_tbl[SUFFIX_LOW]);
+>>> +                crash_base, suffix_tbl[SUFFIX_LOW], high, low_size);
+>>>           if (ret == -ENOENT) {
+>>>               *low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
+>>>               ret = 0;
+>>> @@ -344,7 +386,7 @@ int __init parse_crashkernel(char *cmdline,
+>>>        */
+>>>       if (cma_size)
+>>>           __parse_crashkernel(cmdline, 0, cma_size,
+>>> -            &cma_base, suffix_tbl[SUFFIX_CMA]);
+>>> +            &cma_base, suffix_tbl[SUFFIX_CMA], high, low_size);
+>>>   #endif
+>>>       if (!*crash_size)
+>>>           ret = -EINVAL;
+>>
 
 
