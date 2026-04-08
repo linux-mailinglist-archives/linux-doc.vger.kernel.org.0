@@ -1,86 +1,89 @@
-Return-Path: <linux-doc+bounces-82777-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82773-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KF6IAIrj1Wm2+wcAu9opvQ
-	(envelope-from <linux-doc+bounces-82777-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 07:11:38 +0200
+	id 2FPhLoLi1Wm2+wcAu9opvQ
+	(envelope-from <linux-doc+bounces-82773-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 07:07:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D0E93B7156
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 07:11:33 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48D143B70DB
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Apr 2026 07:07:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E381C3034557
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 05:06:44 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6FA673009FA9
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2026 05:06:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20C1370830;
-	Wed,  8 Apr 2026 05:06:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DDAF2DCF7D;
+	Wed,  8 Apr 2026 05:06:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=openatom-club.20200927.dkim.feishu.cn header.i=@openatom-club.20200927.dkim.feishu.cn header.b="t0c4f9Aa"
+	dkim=pass (2048-bit key) header.d=openatom-club.20200927.dkim.feishu.cn header.i=@openatom-club.20200927.dkim.feishu.cn header.b="TkY0aSEI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sg-3-26.ptr.tlmpb.com (sg-3-26.ptr.tlmpb.com [101.45.255.26])
+Received: from va-2-40.ptr.blmpb.com (va-2-40.ptr.blmpb.com [209.127.231.40])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55733339708
-	for <linux-doc@vger.kernel.org>; Wed,  8 Apr 2026 05:06:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.45.255.26
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F29AC70830
+	for <linux-doc@vger.kernel.org>; Wed,  8 Apr 2026 05:05:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.127.231.40
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775624804; cv=none; b=l2Epz6gzqu8MjMokF7gvkAK7iHHmEawcc2C7RRyxQ2r4IOZpON+oiucXc9u2B3hr8vLUrIuo/8Kga81ksL1MKUuusuRiP2Kd09av3v5hWW33VEhpHu1SG+7lgdgPpmetAvUHt0cHaB4jsm48ha6o0SYBfBUqdFYm+SSu2cOfAKE=
+	t=1775624761; cv=none; b=fCDjqLXTAWcrt9OVyE5fMsE1+vt2vAJKdrMovkub1yhGuKeAPi7dN6jd4hbfw0IP4PhKuVDZ2+MxyJZJkbgGyhKndir7nBmiS4TDg/NUjL6IV9zI89CFvwm5beBC1sm09sfCRwhvAYkcZAP4vWZO3YPU4u0VpoaFozHHyO7Di7w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775624804; c=relaxed/simple;
-	bh=Enb3uvrvthI9bTVEYcux8gwe1zXQ4EUOi08+5cdQcVY=;
-	h=Date:Subject:To:Cc:Message-Id:Mime-Version:From:Content-Type; b=qotjigGOQXV3zhA/01HJ2WIKaX849NJF/xhx/2rKH936jFzCxcuk4y585Ww2xbs2cJnKFzmZUoadynk0YoV7p8UHq8VkCquEfuejMJqx9PUE4PI/G06sqzI6RoBTinjANHan42WCyOUdi8/4m6z4fCGa1KuSoySs6+SWXAuW/7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=openatom.club; spf=pass smtp.mailfrom=openatom.club; dkim=pass (2048-bit key) header.d=openatom-club.20200927.dkim.feishu.cn header.i=@openatom-club.20200927.dkim.feishu.cn header.b=t0c4f9Aa; arc=none smtp.client-ip=101.45.255.26
+	s=arc-20240116; t=1775624761; c=relaxed/simple;
+	bh=g4C6FFS8LYr/x+aDGV/cZYMvYOKUJPL9jr/OjEbqbN8=;
+	h=Mime-Version:In-Reply-To:Subject:To:From:Date:Message-Id:
+	 Content-Type:References:Cc; b=mmRHWVNWqLHlHlTEs6lQbPs4sSLGAej5GeB62+D1CT43sOBZjWDkmgAB3BGiBxBDpRP4fSTHHVXko9A0tG6D/JeCTORbahczhS02GKuFZH9+a8QMshenrJbHJcsPieYYeBf7Mke0knc4nKFM/GmGMNNU6lXJxu1BrHRj0YjdhZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=openatom.club; spf=pass smtp.mailfrom=openatom.club; dkim=pass (2048-bit key) header.d=openatom-club.20200927.dkim.feishu.cn header.i=@openatom-club.20200927.dkim.feishu.cn header.b=TkY0aSEI; arc=none smtp.client-ip=209.127.231.40
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=openatom.club
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=openatom.club
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=openatom-club.20200927.dkim.feishu.cn; t=1775624752;
+ s=s1; d=openatom-club.20200927.dkim.feishu.cn; t=1775624755;
   h=from:subject:mime-version:from:date:message-id:subject:to:cc:
  reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=dD4SF0rLvh3W6/fPySnpXg0/GdT0aVXS9tJATrGGpis=;
- b=t0c4f9AaloB8oLazI5xFtxcfHiX5oVNvB8VcqpBCGfx4eNi02rpEhrEMU88s165bpTj5Jy
- jfQi59p3z2TVTSRf+VbJ9W/ilYact7d9ywrVEJX25yRYoRN+IAdPnomX4t1gfWy5wAtikG
- Gh3dzTQmj73TA92sy4C7Ex8kZimfk5aNGLdlK/aKy1GCWtqOPbUH5mg92UhJbkSMKkoINe
- ATnMEIA+zYGot893fjQkbzuzwNmrMDTVZmwA9c66o2qTLreseiKg+aCZGp39UNFPNSerBv
- 0jnz+aZiwBponYQwICcVAjLqNdtZVtzd2dcied0r4o4NzRtSy7YUr8+RYPNmaw==
-Date: Wed,  8 Apr 2026 13:05:42 +0800
-X-Mailer: git-send-email 2.53.0
-Content-Transfer-Encoding: 7bit
-X-Lms-Return-Path: <lba+269d5e22e+f97568+vger.kernel.org+ben.guo@openatom.club>
-Subject: [PATCH 0/4] docs/zh_CN: update rust/ subsystem translations
-Received: from localhost ([58.35.126.19]) by smtp.feishu.cn with ESMTPS; Wed, 08 Apr 2026 13:05:49 +0800
-To: "Alex Shi" <alexs@kernel.org>, "Yanteng Si" <si.yanteng@linux.dev>, 
-	"Dongliang Mu" <dzm91@hust.edu.cn>, "Jonathan Corbet" <corbet@lwn.net>
-Cc: <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>, 
-	<rust-for-linux@vger.kernel.org>, "Ben Guo" <ben.guo@openatom.club>
-Message-Id: <cover.1775619061.git.ben.guo@openatom.club>
+ bh=p3boRhsQNWfdjnCLQ95YMlxElU1EztUHBdJUM4Vp9K4=;
+ b=TkY0aSEI1KcgCv3mc4LBGRXiwiwMxye0WGVurHXRj2jLRpuwqOB6wOduxJdSROXjkSd6gY
+ LtXUP9YYhyT7jpWoQdvqgZJ/okfB/9d5bzavzqW0rJ3B6yBnnNEvkPv7zvXBvThbk6FvAw
+ vZzVO/U5pfHAUYnacwmhxPh+tbSBzCWQWU7KyHWe7/Ier0O7KbaT43BF5ZUJkW3rgxixQV
+ JNzyZW3nugp0vQH+irUConiJP28dP+3OhDat8pw31r+jx9TVyayale2I8Y/3r4Wo5/lrGc
+ UMmXjKX+AS5r1Xr/WONvvLKPRKJfhj1MDJMZexu1HyAzz/DJgVEJp/1gN91TcQ==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
-From: "Ben Guo" <ben.guo@openatom.club>
 X-Original-From: Ben Guo <ben.guo@openatom.club>
+In-Reply-To: <cover.1775619061.git.ben.guo@openatom.club>
+X-Lms-Return-Path: <lba+269d5e230+4cd28d+vger.kernel.org+ben.guo@openatom.club>
+Subject: [PATCH 1/4] docs/zh_CN: update rust/arch-support.rst translation
+Content-Transfer-Encoding: quoted-printable
+Received: from localhost ([58.35.126.19]) by smtp.feishu.cn with ESMTPS; Wed, 08 Apr 2026 13:05:52 +0800
+X-Mailer: git-send-email 2.53.0
+To: "Alex Shi" <alexs@kernel.org>, "Yanteng Si" <si.yanteng@linux.dev>, 
+	"Dongliang Mu" <dzm91@hust.edu.cn>, "Jonathan Corbet" <corbet@lwn.net>
+From: "Ben Guo" <ben.guo@openatom.club>
+Date: Wed,  8 Apr 2026 13:05:43 +0800
+Message-Id: <0e367d0dc8d74287dee1605a48ea80159fa464cb.1775619061.git.ben.guo@openatom.club>
 Content-Type: text/plain; charset=UTF-8
+References: <cover.1775619061.git.ben.guo@openatom.club>
+Cc: <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>, 
+	<rust-for-linux@vger.kernel.org>, "Ben Guo" <ben.guo@openatom.club>
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MV_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[openatom-club.20200927.dkim.feishu.cn:s=s1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	DMARC_NA(0.00)[openatom.club];
-	TAGGED_FROM(0.00)[bounces-82777-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-82773-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[ben.guo@openatom.club,linux-doc@vger.kernel.org];
@@ -89,33 +92,56 @@ X-Spamd-Result: default: False [-0.16 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[openatom-club.20200927.dkim.feishu.cn:dkim,openatom.club:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 6D0E93B7156
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,openatom-club.20200927.dkim.feishu.cn:dkim,hust.edu.cn:email,openatom.club:email,openatom.club:mid]
+X-Rspamd-Queue-Id: 48D143B70DB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Update Chinese translations for the Rust subsystem documentation,
-syncing with the latest upstream changes.
+Update the translation of .../rust/arch-support.rst into Chinese.
 
-- arch-support.rst: add ARM (ARMv7) support, update RISC-V and UM notes
-- coding-guidelines.rst: add imports formatting, private item docs,
-  C FFI types, and Lints sections
-- quick-start.rst: add distro-specific install instructions, update
-  rustc/bindgen sections, remove cargo section
-- index.rst: remove experimental notice and genindex
+Update the translation through commit ccb8ce526807
+("ARM: 9441/1: rust: Enable Rust support for ARMv7")
 
-Ben Guo (4):
-  docs/zh_CN: update rust/arch-support.rst translation
-  docs/zh_CN: update rust/coding-guidelines.rst translation
-  docs/zh_CN: update rust/quick-start.rst translation
-  docs/zh_CN: update rust/index.rst translation
+Reviewed-by: Dongliang Mu <dzm91@hust.edu.cn>
+Signed-off-by: Ben Guo <ben.guo@openatom.club>
+---
+ Documentation/translations/zh_CN/rust/arch-support.rst | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
- .../translations/zh_CN/rust/arch-support.rst  |   9 +-
- .../zh_CN/rust/coding-guidelines.rst          | 262 +++++++++++++++++-
- .../translations/zh_CN/rust/index.rst         |  17 --
- .../translations/zh_CN/rust/quick-start.rst   | 190 ++++++++++---
- 4 files changed, 401 insertions(+), 77 deletions(-)
-
--- 
+diff --git a/Documentation/translations/zh_CN/rust/arch-support.rst b/Docum=
+entation/translations/zh_CN/rust/arch-support.rst
+index abd708d48f8..f5ae44588a5 100644
+--- a/Documentation/translations/zh_CN/rust/arch-support.rst
++++ b/Documentation/translations/zh_CN/rust/arch-support.rst
+@@ -19,9 +19,10 @@
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+ =E6=9E=B6=E6=9E=84           =E6=94=AF=E6=8C=81=E6=B0=B4=E5=B9=B3         =
+  =E9=99=90=E5=88=B6=E5=9B=A0=E7=B4=A0
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+-``arm64``      Maintained        =E5=8F=AA=E6=9C=89=E5=B0=8F=E7=AB=AF=E5=
+=BA=8F
++``arm``        Maintained        =E4=BB=85 ARMv7 =E5=B0=8F=E7=AB=AF=E5=BA=
+=8F=E3=80=82
++``arm64``      Maintained        =E4=BB=85=E5=B0=8F=E7=AB=AF=E5=BA=8F=E3=
+=80=82
+ ``loongarch``  Maintained        \-
+-``riscv``      Maintained        =E5=8F=AA=E6=9C=89 ``riscv64``
+-``um``         Maintained        =E5=8F=AA=E6=9C=89 ``x86_64``
+-``x86``        Maintained        =E5=8F=AA=E6=9C=89 ``x86_64``
++``riscv``      Maintained        =E4=BB=85 ``riscv64``=EF=BC=8C=E4=B8=94=
+=E4=BB=85=E9=99=90 LLVM/Clang=E3=80=82
++``um``         Maintained        \-
++``x86``        Maintained        =E4=BB=85 ``x86_64``=E3=80=82
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+--=20
 2.53.0
 
