@@ -1,411 +1,335 @@
-Return-Path: <linux-doc+bounces-82984-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82977-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WESuD6E52GmAaAgAu9opvQ
-	(envelope-from <linux-doc+bounces-82984-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 01:43:29 +0200
+	id sDNuDWo52GmAaAgAu9opvQ
+	(envelope-from <linux-doc+bounces-82977-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 01:42:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E0013D08B3
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 01:43:27 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8828E3D0863
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 01:42:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 23BAB301479A
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Apr 2026 23:42:53 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id F2F27300D442
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Apr 2026 23:42:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7852D3A2553;
-	Thu,  9 Apr 2026 23:42:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D3C03A2546;
+	Thu,  9 Apr 2026 23:42:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="PBqSoxgi"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="i3mbGrHu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012012.outbound.protection.outlook.com [40.107.209.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB2623A380B;
-	Thu,  9 Apr 2026 23:42:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.165.32
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775778171; cv=none; b=M13ZUE4cVGRFTXGOyD6/gvlUQRxxPv1V5Me+e1OCtj+K8mnVIMZt07aGxtRgbVnHiHwJE406hLkw6dDcAT69Ug8S3/aEc+O0H5q0Fl+zuXYyVmggdK5D4yp8ODzL3r822CcP7Ub+bJxtOqpgwAcdqdukTK+Me8qv7E9LAidNMG0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775778171; c=relaxed/simple;
-	bh=SQjixXq/TwUmaORkd0HVXkmiKnlqa70s57msMmHhxqo=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Sj6jU1ag53nJV2pBlyRiyRCo1VBN9dZeGH5iuh7jTZJ0r2x/SBIfbbKZWH+WLrMGMmLSvFJ2FePqfl/Gxg2xC/SOPzWMgKHNF8j7wQs498fgDPSxExHbS5Ph6x3Bo0OzKN+h0SifSj3ZtfO9iY2JU5NtWfngzHcX6xjB6aALIZM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=PBqSoxgi; arc=none smtp.client-ip=205.220.165.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 639JtX7I2413207;
-	Thu, 9 Apr 2026 23:42:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=corp-2025-04-25; bh=fYPIQ
-	1U7Ld2xaMJDsHcFPHGnifsy5elZ8+3aWycdz08=; b=PBqSoxgiAv/W4eg8i7GcB
-	TkVGYw2eN3H9Q2lceHz862Qx+1Ldl7K8ZSQD8uD7P68S8l3H++Nf9+2c5/H00iDA
-	nviQoLKLVL4KGxpWXBz4UBLgddtAvPqJTYrwW43176IYGae7ibA2vr7r6X5Oif4X
-	lM8Oe4Y9tohidTZ1BYaQVrLyr83gjbEXnuHgLvjbVG5Rm+oXq4b3KJjINwPbYmUH
-	2mWxeJ0wHFgF78HANUiOeoR8rg6TYMIRMr+e/ste2aqOF87D6NlLvHggMxZ3addD
-	U8DKwWt2nqBa5YCvzACiLy1fmBTMAvhZc8+IxQkedkD+R8qq52e8RDklMFRswy6i
-	A==
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4dcmqa8rv3-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 09 Apr 2026 23:42:20 +0000 (GMT)
-Received: from pps.filterd (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 639NYFlE040148;
-	Thu, 9 Apr 2026 23:42:20 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 4dcmnbj4v1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 09 Apr 2026 23:42:20 +0000
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 639Ng6Yx038323;
-	Thu, 9 Apr 2026 23:42:19 GMT
-Received: from brm-x62-16.us.oracle.com (brm-x62-16.us.oracle.com [10.80.150.37])
-	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id 4dcmnbj4pp-7;
-	Thu, 09 Apr 2026 23:42:19 +0000
-From: Jane Chu <jane.chu@oracle.com>
-To: akpm@linux-foundation.org, david@kernel.org, muchun.song@linux.dev,
-        osalvador@suse.de
-Cc: lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, vbabka@kernel.org,
-        rppt@kernel.org, surenb@google.com, mhocko@suse.com, corbet@lwn.net,
-        skhan@linuxfoundation.org, hughd@google.com,
-        baolin.wang@linux.alibaba.com, peterx@redhat.com, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 6/6] hugetlb: pass hugetlb reservation ranges in base-page indices
-Date: Thu,  9 Apr 2026 17:41:57 -0600
-Message-ID: <20260409234158.837786-7-jane.chu@oracle.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20260409234158.837786-1-jane.chu@oracle.com>
-References: <20260409234158.837786-1-jane.chu@oracle.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0438739A818;
+	Thu,  9 Apr 2026 23:42:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.209.12
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1775778151; cv=fail; b=G4Genbd7N9aYSMddljcpsPizITlhksGLEHMOtC3dCf1VLZoFKtdR+iG4xeEPm7rtb4hmmAd4YywtMHSunJvYw+/oeQh4rP8KvMCQc8L/sLpvuWiD7yCOu2g4QPsChM5b6eLPDcghJLyMsOmh7rRf6wfDHOJUKjcuaGLlfNouDhI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1775778151; c=relaxed/simple;
+	bh=6QRXLL+cSgnVMU+9ZRjXhoSTXWkReO1SBRumpeDHykI=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=GvNomB1AG4U4nbYZfuh2PaYzyX6ey5MiHfVeViV98MdnGignuwFpADFSOHxCuAs5sHarZ8jlMVVVckURgEr1erCxoiXphJ6MJMDkxb1s40xiAancBrkgsKJuAsyLVGxVXjc5UXKZsntjZ5VWozqmxTIltR4zWEyY2CyIHTKSlHY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=i3mbGrHu; arc=fail smtp.client-ip=40.107.209.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X5/BUjEYUwB8/xurznY4HlFnfi+/c+LmQnilpVm6tbnsFWDihb7250d27ueTRMdyUdlPNcKTVT54KTXXCfxp0tZdyLUerChHi2xL7zFx+rA/gBEXsLB+YP1U2+l64O9GWStT8i3xS8lU47o+/e0Wpa/lw1pU4whisNhHQrQOi4WZxetVKcLNXrqEKe3rnj7k11j/xOMygoT7f72ZKb2rRYWkoUUn+uwfq1Uau8fBQtaide/euor+MyKwelhWC7/Y/gJ6IQEHBrMhWUgb/WgIaJPN2e93oRM57AmSh9qIIu9OdTci6VxhRuPtCOnfT8NmjpVn9opvq1digPUNemxoog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ahUDrnilsKteCXdab73s2Ov40xWjuYTt4pA7QN2ixaY=;
+ b=b28IsrkQOj5vJHaFT3JV3vLEU7nLHf9lCFdfj2bKt7H85DejIH6N/mFwT3x7NI474o+zAb8zfoQZJmpWbTWyTXZDVz1Dd6Y6Srf55aaglathr4odjj47LBWif80Ri9gu3eP+ENrwQ4DzVOCcol5x2PguKzTii7bE1LoilRkkZIdLzAwn8EJoB4Blud31FoqCzeET5rGGeszl0CNHVwzeIIYrSPpb3eyxjab+vleork/FJI2RqbkLTvLA3c7tWuFw4zpgNnNdKfSf3CegkE6L19+EnHaAa6qbLWJ+eLCxtvDPeuGPhD2F1QZ2hrue+fppCqEJHyX9M8R68/N5or9QYA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ahUDrnilsKteCXdab73s2Ov40xWjuYTt4pA7QN2ixaY=;
+ b=i3mbGrHu4UzcF8M74J3gV1ZKxziLJraX3tmLb8pBBJ/fISglpsn9z73DUR2sNGnfjbemHwwP/XYRxL8G1vyGpipkw+Vs8gIK1VFKxm0yzNW4jPfa0+dPlWb6pFYBRecsgu5N1Z8sTXehDIZ0fSMiWIgs1pu7AhyxbVBRDrKGp+Y=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ (2603:10b6:20f:fc04::bdc) by DM4PR12MB5988.namprd12.prod.outlook.com
+ (2603:10b6:8:6b::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.19; Thu, 9 Apr
+ 2026 23:42:24 +0000
+Received: from IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ ([fe80::e192:692b:abba:8c88]) by IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ ([fe80::e192:692b:abba:8c88%3]) with mapi id 15.20.9769.016; Thu, 9 Apr 2026
+ 23:42:23 +0000
+Message-ID: <90f4a692-1c27-4967-bf12-ec3cb597681d@amd.com>
+Date: Thu, 9 Apr 2026 18:42:19 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/16] fs,x86/resctrl: Add kernel-mode (e.g., PLZA)
+ support to the resctrl subsystem
+To: Reinette Chatre <reinette.chatre@intel.com>,
+ Babu Moger <babu.moger@amd.com>, "corbet@lwn.net" <corbet@lwn.net>,
+ "tony.luck@intel.com" <tony.luck@intel.com>,
+ "Dave.Martin@arm.com" <Dave.Martin@arm.com>,
+ "james.morse@arm.com" <james.morse@arm.com>,
+ "tglx@kernel.org" <tglx@kernel.org>, "mingo@redhat.com" <mingo@redhat.com>,
+ "bp@alien8.de" <bp@alien8.de>,
+ "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>
+Cc: "skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+ "x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
+ "peterz@infradead.org" <peterz@infradead.org>,
+ "juri.lelli@redhat.com" <juri.lelli@redhat.com>,
+ "vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
+ "dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>,
+ "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "bsegall@google.com" <bsegall@google.com>, "mgorman@suse.de"
+ <mgorman@suse.de>, "vschneid@redhat.com" <vschneid@redhat.com>,
+ "kas@kernel.org" <kas@kernel.org>,
+ "rick.p.edgecombe@intel.com" <rick.p.edgecombe@intel.com>,
+ "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+ "pmladek@suse.com" <pmladek@suse.com>,
+ "rdunlap@infradead.org" <rdunlap@infradead.org>,
+ "dapeng1.mi@linux.intel.com" <dapeng1.mi@linux.intel.com>,
+ "kees@kernel.org" <kees@kernel.org>, "elver@google.com" <elver@google.com>,
+ "paulmck@kernel.org" <paulmck@kernel.org>,
+ "lirongqing@baidu.com" <lirongqing@baidu.com>,
+ "safinaskar@gmail.com" <safinaskar@gmail.com>,
+ "fvdl@google.com" <fvdl@google.com>, "seanjc@google.com"
+ <seanjc@google.com>,
+ "pawan.kumar.gupta@linux.intel.com" <pawan.kumar.gupta@linux.intel.com>,
+ "xin@zytor.com" <xin@zytor.com>, "tiala@microsoft.com"
+ <tiala@microsoft.com>, "chang.seok.bae@intel.com"
+ <chang.seok.bae@intel.com>, "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
+ "elena.reshetova@intel.com" <elena.reshetova@intel.com>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "eranian@google.com" <eranian@google.com>,
+ "peternewman@google.com" <peternewman@google.com>
+References: <cover.1773347820.git.babu.moger@amd.com>
+ <14a8ad0a-e842-4268-871a-0762f1169e03@intel.com>
+ <47c0db32-d0e0-4c53-90bd-b74863d233dc@amd.com>
+ <88eebfac-5286-4788-b244-911c659c0439@intel.com>
+ <30deeb5b-d2ec-4f85-aa4f-c21400df3486@amd.com>
+ <83ae0c18-5c5e-4b52-901d-4126fe7c141b@intel.com>
+ <5a740f47-d3f3-45af-9d8c-ebcf3dd89c0d@amd.com>
+ <3305c18e-9e50-4df0-b9f1-c61028628967@intel.com>
+ <c6f574b7-fe5f-49ae-9865-0e4dbb2f9803@amd.com>
+ <efc269f8-bf98-4f12-8d76-1fee564be84c@intel.com>
+ <0ae2b267-4527-4251-9136-6afdc3fc97a5@amd.com>
+ <72297351-2954-4318-81b6-7de409e5552c@intel.com>
+ <20aaacfb-9601-4343-a5d5-f3df6152155b@amd.com>
+ <43880b7b-b390-4e7f-8c2a-46cde9e3b051@intel.com>
+ <bb9f62f1-0c79-4d29-9866-c39d08c3a774@amd.com>
+ <5a273b0f-8225-4e9e-924e-884183734659@intel.com>
+ <73c46024-4cf2-4f03-9268-d4378825fa87@amd.com>
+ <973067bf-6e6c-446a-a81a-713840d701a9@intel.com>
+Content-Language: en-US
+From: "Moger, Babu" <bmoger@amd.com>
+In-Reply-To: <973067bf-6e6c-446a-a81a-713840d701a9@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: CH0PR03CA0273.namprd03.prod.outlook.com
+ (2603:10b6:610:e6::8) To IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ (2603:10b6:20f:fc04::bdc)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-09_04,2026-04-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 adultscore=0 spamscore=0
- phishscore=0 suspectscore=0 malwarescore=0 bulkscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2604010000
- definitions=main-2604090218
-X-Proofpoint-GUID: gizZC3m12z3s0TgPBjgQGNn9DGqTa4M0
-X-Proofpoint-ORIG-GUID: gizZC3m12z3s0TgPBjgQGNn9DGqTa4M0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA5MDIxOSBTYWx0ZWRfX8zuw29s5+sF+
- nuEpDRQCmz+JStfiqtO4ZM8tvUp+4b8nP7tI++/AJV6Au0mVjTYCmNJy9pZrs0b8/0tPye3poFr
- dpxri/ImgBVE4yw6LSfRqKa3uPvdCytkherMgiJ9bme/RQnTT4MsquSlgH1p3B6PdQDmstn4y8s
- RsUtiUwQof8Xoz9GPaRnX6GXTtqSChZwTPS1H91zV5sNIjWv49JOQiCCwHiouEScrB7dS6iGbd4
- 0bLtgflyjlM3cc2J6yvIx/X6o9b9wBOmFnwE7Bnd9eojQQbL6eqYjUbqmmTeMS2thsB0Mb53WKr
- h9HMU2KKGMQwimMP3GVzu8r2PYQxklpYBm+x3dLDt2azUb3q9CuDNH9/I9ia8urQdCdFRyvhrc+
- iGVFN1w1cwSKrTkEjooJlvwEO0nmpSzTNXJcYJURaDB86jtOjsyMl+FyU3zMzcVMeOOKyGLnSFY
- 54racietM+HAWJFwpfg==
-X-Authority-Analysis: v=2.4 cv=DLS/JSNb c=1 sm=1 tr=0 ts=69d8395c b=1 cx=c_pps
- a=WeWmnZmh0fydH62SvGsd2A==:117 a=WeWmnZmh0fydH62SvGsd2A==:17
- a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jiCTI4zE5U7BLdzWsZGv:22
- a=7Gl3-_t3PgB9XO-mQDs3:22 a=yPCof4ZbAAAA:8 a=T4oJmI3Qyo7CCk0tri4A:9
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[oracle.com,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[oracle.com:s=corp-2025-04-25];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PPF9A76BB3A6:EE_|DM4PR12MB5988:EE_
+X-MS-Office365-Filtering-Correlation-Id: 184db005-ef76-46f9-4b3e-08de9691a63b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|7416014|1800799024|22082099003|18002099003|921020|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	mSGGKU7Z6OWNZ38qBzuHdzAMOKvS6LWI1W4CMnnp6/3MQRySHg/BuJ+JXCbW/4+K/4vaynPGzHdZ4SaisxmrX/4gAYubO5IXToSJbN12JZAvCnMprDjEBZSmHR6q3NSZ73bffpow0DFDEdNrDUvO9gaYLTG/WZz0g8jgLTuahr5jCEC8Gyy0Nbg3UGUzHrW+D8cDxR2BkoroslwCiIhKrC0l6ZwGK4HC2bpUn+HYD29CB0hxb0ORlAEVQ5VKpfId/rzwfZl1C0D0ALEiK1Y+8mEX50Y5Dsl2T4Qp0Sofku300kM7KKlJxOn4ONgYaoKNsbFm4yDkL3kzC/Y0cLGe74Nzd35NDheH2C9AjbX6u+/H3xc3SNg9P0Lsm0NOwInQOcsVN7Yi+asXj9RHlkfsqvbh7GbjhSXGRv16jzMwjV/0l2fUe+9n8KUO/MZhbPstTHemRKBX7uCD42cPT3xsFXM0dethF2yqoLo2HTHUKBMd/CrzwPOJSwaZKEzl5I2VW3LPS438rT+bWlUGlW96b5FBg/4jVhnE+5C5H2fq/rVKREpxZYYOODc/F5AkNu7kL1+0eI4TlYAUhC/5QNcgaJbBoU0am21/EG1SLBMVTybmRdhSoRoFHeUW84GP4s3zU1iqouz0DokgJZvLyVi5G0C4eWwu3sR7b6r41wsooIZLdkNwEOzrAlxwolURXlxjM6A14JA9th0Jw1xa5Sr82EXCVbbOpMssKnVeruHcbJfr/DJ8z63IEbRq+xjuKf0m+xgkIUSAE3tmb8u4fbZm9w==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PPF9A76BB3A6.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(22082099003)(18002099003)(921020)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MjdFRiszMEVqcExLR2l0RytCRWE4ZE12Zm9KL040bEdXOUUraE9rNVR6Tmw3?=
+ =?utf-8?B?ZWlmckpaVHNyb3kxT2RMajNpVnJTQkFyQjNSOWFwNGRPOGJMZmdHckJoa3pq?=
+ =?utf-8?B?cXBhSHdsS0s5MDVSSHR5V29JdVcyRUQvTlZXK210Y3YzT0M0d1VtZEJCNHhF?=
+ =?utf-8?B?aVJVdklzVUVEdUFCeGNtMlZWWHpobjBjVk9CQm9Qa3JGeUU1WlBibGZTSjVy?=
+ =?utf-8?B?SCtQWkdtOW04Q09zdG1TTjQ3KzFlWklxN0J3d0hIZStkWG01bVF6dzlzNUdP?=
+ =?utf-8?B?T1IxZlNwclE4Zng2R0h2WHB1OWNDb1pjbVB2UWxydWZyUWtlSkRWK0s3dVh5?=
+ =?utf-8?B?ZjlhUTJRR0FEeEg3RWhKUEprN1Vuc2FaSnIrWmhocEM1R21MUzRSSWhtWkNJ?=
+ =?utf-8?B?dzUwUURydlM4OERyMzBDUjZYYm0vcnBlS1I1N0c3M0U4SmxIZzBQbnYralRN?=
+ =?utf-8?B?aGoxMmxMWHNoK29Bd0wrc2t0STdBcG9wM3JERzg2UjNyaFI0MkxvQ3lYMGk3?=
+ =?utf-8?B?UHJSdjRzc0VGNm4wcnFlSDBIbVpDN2hLVlp3UEcrdmFNWk84SlNPaUx6U0RO?=
+ =?utf-8?B?c3BESDZOb05WbEdQcEhIOWJyQnl0Mkh2Zk5RbUFocHV6Y0VHcmY0L2J0cWpY?=
+ =?utf-8?B?Y3JKV1Y2UEJUcHRaVEMzRGtYUGhXdE12SXJBUWFjV2tRcytLNjZ2ZW5Ra3Rz?=
+ =?utf-8?B?OXVrdUwyRnZISDFMQlNhWEtMb2djOGhxQklIc1N6NWt6Yk5nV0ZCNnFRbUlG?=
+ =?utf-8?B?QndHRWNWSTdXbm5jeWdqTmlEeU5KV21uczdqSUxTV1d0a3k2SHpoTmM2QmxR?=
+ =?utf-8?B?L1dBaUEvVHd5UkVvbTRIanl0anh5ZUZhaklONnlmUXZtbzA1VzNLWnB5eEo2?=
+ =?utf-8?B?QWgrMzVDWndRM3puTDZQWE9DcHpySXY4NzF0VWVmSkhtakoybWQyeFhVd1pK?=
+ =?utf-8?B?a1JaZWYvVWMwZnY2WGpTMmtkSDNDeUEvaFY2WmxrV3RKdURRWjNqK1cranNT?=
+ =?utf-8?B?NTJPQy9RUVg2S1BzeC9salcvR1hIcTlmTzY1RTlSNDkrY24zNWp5YUh5NmZB?=
+ =?utf-8?B?SkJZY0M4bThhQnBhelNqWEkyRkhrQU1mUUFmUzhibHdWS1VNZFZ6NDJDdlR6?=
+ =?utf-8?B?NmsrWGlkbGtCS2tEdGdtVzRKTitiMDREcnQ1UXAvNElnRm1QTEpkTjgxUTQy?=
+ =?utf-8?B?cW8xM0FrOWdXeDRHSFpDVVdaQmpQWXpBek5CVnRZblA4M2I1bW5jcno4TGpz?=
+ =?utf-8?B?VFZqdW9wS0hmR0Q3c1cwcnp2RkhXZkJEaDlKbHM1c2JLWS9YaS95cjFRZWgy?=
+ =?utf-8?B?MXUzR2NoYWZTdUw2bXVJbXl5YU1vNWNSc2xBUEJ6c2d6eWFIcnBMb3FpQ0ow?=
+ =?utf-8?B?a1JWL2M4QldtRTFTaXFHeDZ4cjN1TWZNZTl3NSs5TjFTczcyNTVoVzhlQnN5?=
+ =?utf-8?B?cnBOMFVkSGw5ZUtsS0o4QmxweHRxbHJwdmkzSWVqOHJmaHNZMUd6R2g2VDIr?=
+ =?utf-8?B?UlVOUGpjczFIOFQ3V0ZxaEhlYy85RXJZTEkrUmNYRWdEMWx4TUVwSTB1LzZ1?=
+ =?utf-8?B?bnI4WTN5aUNNbGRYUlUyMFg2RFB6Y1JmOXhoblRraVppcGJ5dVIzaDZsWHNm?=
+ =?utf-8?B?WFJmVGw3aE1FYUlGc0dxOWlzZkZFai9DQ3ROamlCT0J2N3BURUJCUWdrczZK?=
+ =?utf-8?B?N0p6b1VISFNGdTlPNDNFT0RiN3I1R00wUmlQVHRDRm5yYzhjOEx2NVBYYXQy?=
+ =?utf-8?B?WWh3MWQydm5xMHpKSHFGWlFLNjhSTGZ0U21zdjhpbXlDbFZRdTdrTFZxZVYx?=
+ =?utf-8?B?OURjSERWVmtkNlRMQjBZZHY5RnYzZFkzczJGMk44cnpVd2lTdDFkcXowNVR5?=
+ =?utf-8?B?WHFxMjQzTWtJbzNlMmxFZUdsMWpkcnNIVU9VUEJoRjVLTE51VUhNTmFFQzVS?=
+ =?utf-8?B?N2hNV3o5YnJjbE1CbmZNYjRTSUQ5V1dQelkvVC93eUt6bWZ1bC93L1Vzc1Qy?=
+ =?utf-8?B?cGNBQVQ1aGI5SVdXQ25CMDllK0tvWU5YVG14dU9CVTc5R2ppbE9pamI0Nlgv?=
+ =?utf-8?B?V1VKVnozSE9YWTlXSGQ3YTQ3cE0zdkJabHFhcWRDVFJ3a2doL3ZHRm1Jamhp?=
+ =?utf-8?B?Z3B1RTMxc0Fwc0V2cGV4NTBNUXk3N0szUmVUWVlDMVkrR1RZME1YZEdzZGVP?=
+ =?utf-8?B?b3RkZHRhVHMyZHFGekp4UWxEYkdhTTBNdGxIbEdjMWs5dnZnMEFORFh6RkdI?=
+ =?utf-8?B?SDdibDdXM2lvemZPMlZ5Qk5OVWdJREhHckgwM3ZaL25yZUxtYm44WFY2WW01?=
+ =?utf-8?Q?+cQTfYK5ye3xFDN09y?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 184db005-ef76-46f9-4b3e-08de9691a63b
+X-MS-Exchange-CrossTenant-AuthSource: IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 23:42:23.7898
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /IO8bLeJL7xUX5KiiDqTvSh8tPCwR4fMv5C9sBB4gQZmgN4Jr1sbZdZ7uiXx5Qkp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5988
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-82984-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_NONE(0.00)[];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,kernel.org,zytor.com,infradead.org,redhat.com,linaro.org,arm.com,goodmis.org,google.com,suse.de,intel.com,linux-foundation.org,suse.com,linux.intel.com,baidu.com,gmail.com,microsoft.com,amd.com,vger.kernel.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-82977-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jane.chu@oracle.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[46];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bmoger@amd.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,oracle.com:dkim,oracle.com:email,oracle.com:mid];
-	DKIM_TRACE(0.00)[oracle.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	RCVD_COUNT_SEVEN(0.00)[9]
-X-Rspamd-Queue-Id: 3E0013D08B3
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 8828E3D0863
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-hugetlb_reserve_pages() consume indices in hugepage granularity although
-some callers naturally compute offsets in PAGE_SIZE units.
+Hi Reinette,
 
-Teach the reservation helpers to accept base-page index ranges and
-convert to hugepage indices internally before operating on the
-reservation map. This keeps the internal representation unchanged while
-making the API contract more uniform for callers.
+On 4/9/2026 3:50 PM, Reinette Chatre wrote:
+> Hi Babu,
+> 
+> On 4/9/26 11:05 AM, Moger, Babu wrote:
+>> On 4/9/2026 12:26 PM, Reinette Chatre wrote:
+>>> On 4/9/26 10:19 AM, Moger, Babu wrote:
+>>>> On 4/8/2026 6:41 PM, Reinette Chatre wrote:
+>>>
+>>>>> When the user switches to either "global_assign_ctrl_inherit_mon_per_cpu" or
+>>>>> 'global_assign_ctrl_assign_mon_per_cpu" then "info/kernel_mode_assignment" is created
+>>>>> (or made visible to user space) and is expected to point to default group.
+>>>>> User can change the group using "info/kernel_mode_assignment" at this point.
+>>>>>
+>>>>> If the current scenario is below ...
+>>>>>       # cat info/kernel_mode
+>>>>>       [global_assign_ctrl_inherit_mon_per_cpu]
+>>>>>       inherit_ctrl_and_mon
+>>>>>       global_assign_ctrl_assign_mon_per_cpu
+>>>>>
+>>>>> ... then "info/kernel_mode_assignment" will exist but what it should contain if
+>>>>> user switches mode at this point may be up for discussion.
+>>>>>
+>>>>> option 1)
+>>>>> When user switches mode to "global_assign_ctrl_assign_mon_per_cpu" then
+>>>>> the resource group in "info/kernel_mode_assignment" is reset to the
+>>>>> default group and all CPUs PLZA state reset to match. The kernel_mode_cpus
+>>>>> and kernel_mode_cpuslist files become visible in default resource group
+>>>>> and they contain "all online CPUs".
+>>>>>
+>>>>> option 2)
+>>>>> When user switches mode to "global_assign_ctrl_assign_mon_per_cpu" then
+>>>>> the resource group in "info/kernel_mode_assignment" is kept and all
+>>>>> CPUs PLZA state set to match it while also keeping the current
+>>>>> values of that resource group's kernel_mode_cpus and kernel_mode_cpuslist
+>>>>> files.
+>>>>>
+>>>>> I am leaning towards "option 1" to keep it consistent with a switch from
+>>>>> "inherit_ctrl_and_mon" and being deterministic about how a mode is started with
+>>>>
+>>>> Yes. The "option 1" seems appropriate.
+>>>>
+>>>>> a clean slate. What are your thoughts? What would be use case where a user would
+>>>>> want to switch between "global_assign_ctrl_inherit_mon_per_cpu" and
+>>>>> "global_assign_ctrl_assign_mon_per_cpu" to just switch rmid_en on and off?
+>>>>
+>>>>
+>>>> This is a bit tricky.
+>>>>
+>>>> Currently, our requirement is to have a CTRL_MON group for
+>>>> global_assign_ctrl_inherit_mon_per_cpu. In this scenario, we use the
+>>>> group’s CLOSID for PLZA configuration, and RMID is not used (rmid_en
+>>>> = 0) when setting up PLZA.
+>>>>
+>>>> Our requirement is also to have a CTRL_MON/MON group for
+>>>> global_assign_ctrl_assign_mon_per_cpu. In this case as well, the
+>>>> group’s CLOSID and RMID (rmid_en = 1)  both are used configure PLZA.
+>>>
+>>> ah, right. Good catch.
+>>>
+>>>>
+>>>> Actually, we should not allow these changes from
+>>>> global_assign_ctrl_inherit_mon_per_cpu  to
+>>>> global_assign_ctrl_assign_mon_per_cpu or visa versa.
+>>>
+>>> resctrl could allow it but as part of the switch it resets the "kernel mode group" to
+>>> be the default group every time? This would be the "option 1" above.
+>>
+>> Other options.
+>>
+>> Allow global_assign_ctrl_inherit_mon_per_cpu -> global_assign_ctrl_assign_mon_per_cpu. As part of the switch, reset the "kernel mode group" to the default group.
+>>
+>> Allow global_assign_ctrl_assign_mon_per_cpu -> global_assign_ctrl_inherit_mon_per_cpu. In this case switch
+>> to CTRL_MON/MON -> CTRL_MON.
+>>
+> 
+> ok. Could you please return the courtesy of providing feedback on the
+> suggestion you are responding to and also include the motivation why your
+> suggestion is the better option?
 
-Update hugetlbfs and memfd call sites to pass base-page indices, and
-adjust the documentation to describe the new calling convention. Add
-alignment warnings in hugetlb_reserve_pages() to catch invalid ranges
-early.
+Yea. Sure.
 
-No functional changes.
+We need to allow the switch between the modes. Otherwise only way to 
+reset is to remount the resctrl filesystem. That is not a good option.
 
-Signed-off-by: Jane Chu <jane.chu@oracle.com>
----
- Documentation/mm/hugetlbfs_reserv.rst | 12 +++++------
- fs/hugetlbfs/inode.c                  | 29 ++++++++++++---------------
- mm/hugetlb.c                          | 26 ++++++++++++++++--------
- mm/memfd.c                            |  9 +++++----
- 4 files changed, 42 insertions(+), 34 deletions(-)
+Allow global_assign_ctrl_inherit_mon_per_cpu -> 
+global_assign_ctrl_assign_mon_per_cpu. As part of the switch, reset the 
+"kernel mode group" to the default group.
 
-diff --git a/Documentation/mm/hugetlbfs_reserv.rst b/Documentation/mm/hugetlbfs_reserv.rst
-index a49115db18c7..60a52b28f0b4 100644
---- a/Documentation/mm/hugetlbfs_reserv.rst
-+++ b/Documentation/mm/hugetlbfs_reserv.rst
-@@ -112,8 +112,8 @@ flag was specified in either the shmget() or mmap() call.  If NORESERVE
- was specified, then this routine returns immediately as no reservations
- are desired.
- 
--The arguments 'from' and 'to' are huge page indices into the mapping or
--underlying file.  For shmget(), 'from' is always 0 and 'to' corresponds to
-+The arguments 'from' and 'to' are base page indices into the mapping or
-+underlying file. For shmget(), 'from' is always 0 and 'to' corresponds to
- the length of the segment/mapping.  For mmap(), the offset argument could
- be used to specify the offset into the underlying file.  In such a case,
- the 'from' and 'to' arguments have been adjusted by this offset.
-@@ -136,10 +136,10 @@ to indicate this VMA owns the reservations.
- 
- The reservation map is consulted to determine how many huge page reservations
- are needed for the current mapping/segment.  For private mappings, this is
--always the value (to - from).  However, for shared mappings it is possible that
--some reservations may already exist within the range (to - from).  See the
--section :ref:`Reservation Map Modifications <resv_map_modifications>`
--for details on how this is accomplished.
-+always the number of huge pages covered by the range [from, to).  However,
-+for shared mappings it is possible that some reservations may already exist
-+within the range [from, to).  See the section :ref:`Reservation Map Modifications
-+<resv_map_modifications>` for details on how this is accomplished.
- 
- The mapping may be associated with a subpool.  If so, the subpool is consulted
- to ensure there is sufficient space for the mapping.  It is possible that the
-diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
-index a72d46ff7980..ec05ed30b70f 100644
---- a/fs/hugetlbfs/inode.c
-+++ b/fs/hugetlbfs/inode.c
-@@ -157,10 +157,8 @@ static int hugetlbfs_file_mmap_prepare(struct vm_area_desc *desc)
- 	if (inode->i_flags & S_PRIVATE)
- 		vma_flags_set(&vma_flags, VMA_NORESERVE_BIT);
- 
--	if (hugetlb_reserve_pages(inode,
--			desc->pgoff >> huge_page_order(h),
--			len >> huge_page_shift(h), desc,
--			vma_flags) < 0)
-+	if (hugetlb_reserve_pages(inode, desc->pgoff, len >> PAGE_SHIFT, desc,
-+				  vma_flags) < 0)
- 		goto out;
- 
- 	ret = 0;
-@@ -408,8 +406,8 @@ static void hugetlb_unmap_file_folio(struct hstate *h,
- 	unsigned long v_end;
- 	pgoff_t start, end;
- 
--	start = index * pages_per_huge_page(h);
--	end = (index + 1) * pages_per_huge_page(h);
-+	start = index;
-+	end = start + pages_per_huge_page(h);
- 
- 	i_mmap_lock_write(mapping);
- retry:
-@@ -518,6 +516,8 @@ static void remove_inode_single_folio(struct hstate *h, struct inode *inode,
- 		struct address_space *mapping, struct folio *folio,
- 		pgoff_t index, bool truncate_op)
- {
-+	pgoff_t next_index;
-+
- 	/*
- 	 * If folio is mapped, it was faulted in after being
- 	 * unmapped in caller or hugetlb_vmdelete_list() skips
-@@ -540,8 +540,9 @@ static void remove_inode_single_folio(struct hstate *h, struct inode *inode,
- 	VM_BUG_ON_FOLIO(folio_test_hugetlb_restore_reserve(folio), folio);
- 	hugetlb_delete_from_page_cache(folio);
- 	if (!truncate_op) {
-+		next_index = index + pages_per_huge_page(h);
- 		if (unlikely(hugetlb_unreserve_pages(inode, index,
--							index + 1, 1)))
-+						     next_index, 1)))
- 			hugetlb_fix_reserve_counts(inode);
- 	}
- 
-@@ -575,7 +576,7 @@ static void remove_inode_hugepages(struct inode *inode, loff_t lstart,
- 	struct address_space *mapping = &inode->i_data;
- 	const pgoff_t end = lend >> PAGE_SHIFT;
- 	struct folio_batch fbatch;
--	pgoff_t next, idx;
-+	pgoff_t next;
- 	int i, freed = 0;
- 	bool truncate_op = (lend == LLONG_MAX);
- 
-@@ -592,9 +593,8 @@ static void remove_inode_hugepages(struct inode *inode, loff_t lstart,
- 			/*
- 			 * Remove folio that was part of folio_batch.
- 			 */
--			idx = folio->index >> huge_page_order(h);
- 			remove_inode_single_folio(h, inode, mapping, folio,
--						  idx, truncate_op);
-+						  folio->index, truncate_op);
- 			freed++;
- 
- 			mutex_unlock(&hugetlb_fault_mutex_table[hash]);
-@@ -604,9 +604,8 @@ static void remove_inode_hugepages(struct inode *inode, loff_t lstart,
- 	}
- 
- 	if (truncate_op)
--		(void)hugetlb_unreserve_pages(inode,
--				lstart >> huge_page_shift(h),
--				LONG_MAX, freed);
-+		(void)hugetlb_unreserve_pages(inode, lstart >> PAGE_SHIFT,
-+					      LONG_MAX, freed);
- }
- 
- static void hugetlbfs_evict_inode(struct inode *inode)
-@@ -1561,9 +1560,7 @@ struct file *hugetlb_file_setup(const char *name, size_t size,
- 	inode->i_size = size;
- 	clear_nlink(inode);
- 
--	if (hugetlb_reserve_pages(inode, 0,
--			size >> huge_page_shift(hstate_inode(inode)), NULL,
--			acctflag) < 0)
-+	if (hugetlb_reserve_pages(inode, 0, size >> PAGE_SHIFT, NULL, acctflag) < 0)
- 		file = ERR_PTR(-ENOMEM);
- 	else
- 		file = alloc_file_pseudo(inode, mnt, name, O_RDWR,
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index 47ef41b6fb2e..eb4ab5bd0c9f 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -6532,10 +6532,11 @@ long hugetlb_change_protection(struct vm_area_struct *vma,
- }
- 
- /*
-- * Update the reservation map for the range [from, to].
-+ * Update the reservation map for the range [from, to) where 'from' and 'to'
-+ * are base-page indices that are expected to be huge page aligned.
-  *
-- * Returns the number of entries that would be added to the reservation map
-- * associated with the range [from, to].  This number is greater or equal to
-+ * Returns the number of huge pages that would be added to the reservation map
-+ * associated with the range [from, to).  This number is greater or equal to
-  * zero. -EINVAL or -ENOMEM is returned in case of any errors.
-  */
- 
-@@ -6550,6 +6551,7 @@ long hugetlb_reserve_pages(struct inode *inode,
- 	struct resv_map *resv_map;
- 	struct hugetlb_cgroup *h_cg = NULL;
- 	long gbl_reserve, regions_needed = 0;
-+	long from_idx, to_idx;
- 	int err;
- 
- 	/* This should never happen */
-@@ -6558,6 +6560,12 @@ long hugetlb_reserve_pages(struct inode *inode,
- 		return -EINVAL;
- 	}
- 
-+	VM_WARN_ON(!IS_ALIGNED(from, 1UL << huge_page_order(h)));
-+	VM_WARN_ON(!IS_ALIGNED(to,   1UL << huge_page_order(h)));
-+
-+	from_idx = from >> huge_page_order(h);
-+	to_idx = to >> huge_page_order(h);
-+
- 	/*
- 	 * Only apply hugepage reservation if asked. At fault time, an
- 	 * attempt will be made for VM_NORESERVE to allocate a page
-@@ -6580,7 +6588,7 @@ long hugetlb_reserve_pages(struct inode *inode,
- 		 */
- 		resv_map = inode_resv_map(inode);
- 
--		chg = region_chg(resv_map, from, to, &regions_needed);
-+		chg = region_chg(resv_map, from_idx, to_idx, &regions_needed);
- 	} else {
- 		/* Private mapping. */
- 		resv_map = resv_map_alloc();
-@@ -6589,7 +6597,7 @@ long hugetlb_reserve_pages(struct inode *inode,
- 			goto out_err;
- 		}
- 
--		chg = to - from;
-+		chg = to_idx - from_idx;
- 
- 		set_vma_desc_resv_map(desc, resv_map);
- 		set_vma_desc_resv_flags(desc, HPAGE_RESV_OWNER);
-@@ -6644,7 +6652,7 @@ long hugetlb_reserve_pages(struct inode *inode,
- 	 * else has to be done for private mappings here
- 	 */
- 	if (!desc || vma_desc_test(desc, VMA_MAYSHARE_BIT)) {
--		add = region_add(resv_map, from, to, regions_needed, h, h_cg);
-+		add = region_add(resv_map, from_idx, to_idx, regions_needed, h, h_cg);
- 
- 		if (unlikely(add < 0)) {
- 			hugetlb_acct_memory(h, -gbl_reserve);
-@@ -6712,7 +6720,7 @@ long hugetlb_reserve_pages(struct inode *inode,
- 		 * region_add failed or didn't run.
- 		 */
- 		if (chg >= 0 && add < 0)
--			region_abort(resv_map, from, to, regions_needed);
-+			region_abort(resv_map, from_idx, to_idx, regions_needed);
- 	if (desc && is_vma_desc_resv_set(desc, HPAGE_RESV_OWNER)) {
- 		kref_put(&resv_map->refs, resv_map_release);
- 		set_vma_desc_resv_map(desc, NULL);
-@@ -6728,13 +6736,15 @@ long hugetlb_unreserve_pages(struct inode *inode, long start, long end,
- 	long chg = 0;
- 	struct hugepage_subpool *spool = subpool_inode(inode);
- 	long gbl_reserve;
-+	long start_idx = start >> huge_page_order(h);
-+	long end_idx = end >> huge_page_order(h);
- 
- 	/*
- 	 * Since this routine can be called in the evict inode path for all
- 	 * hugetlbfs inodes, resv_map could be NULL.
- 	 */
- 	if (resv_map) {
--		chg = region_del(resv_map, start, end);
-+		chg = region_del(resv_map, start_idx, end_idx);
- 		/*
- 		 * region_del() can fail in the rare case where a region
- 		 * must be split and another region descriptor can not be
-diff --git a/mm/memfd.c b/mm/memfd.c
-index 56c8833c4195..59c174c7533c 100644
---- a/mm/memfd.c
-+++ b/mm/memfd.c
-@@ -80,14 +80,15 @@ struct folio *memfd_alloc_folio(struct file *memfd, pgoff_t index)
- 		struct inode *inode = file_inode(memfd);
- 		struct hstate *h = hstate_file(memfd);
- 		long nr_resv;
--		pgoff_t idx;
-+		pgoff_t next_index;
- 		int err = -ENOMEM;
- 
- 		gfp_mask = htlb_alloc_mask(h);
- 		gfp_mask &= ~(__GFP_HIGHMEM | __GFP_MOVABLE);
--		idx = index >> huge_page_order(h);
-+		next_index = index + pages_per_huge_page(h); 
- 
--		nr_resv = hugetlb_reserve_pages(inode, idx, idx + 1, NULL, EMPTY_VMA_FLAGS);
-+		nr_resv = hugetlb_reserve_pages(inode, index, next_index, NULL,
-+						EMPTY_VMA_FLAGS);
- 		if (nr_resv < 0)
- 			return ERR_PTR(nr_resv);
- 
-@@ -137,7 +138,7 @@ struct folio *memfd_alloc_folio(struct file *memfd, pgoff_t index)
- 		}
- err_unresv:
- 		if (nr_resv > 0)
--			hugetlb_unreserve_pages(inode, idx, idx + 1, 0);
-+			hugetlb_unreserve_pages(inode, index, next_index, 0);
- 		return ERR_PTR(err);
- 	}
- #endif
--- 
-2.43.5
+This option is same as you suggested.
+
+Allow global_assign_ctrl_assign_mon_per_cpu -> 
+global_assign_ctrl_inherit_mon_per_cpu. In this case switch
+to CTRL_MON/MON -> CTRL_MON. This option basically disables monitor 
+(rmid_en=0). It is less disruptive. Move is between child group to 
+parent group.
+
+Thanks
+Babu
+
+
 
 
