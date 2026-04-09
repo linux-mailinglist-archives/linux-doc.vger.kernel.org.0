@@ -1,55 +1,62 @@
-Return-Path: <linux-doc+bounces-82913-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82922-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yHQ8CfrI12k/TAgAu9opvQ
-	(envelope-from <linux-doc+bounces-82913-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 17:42:50 +0200
+	id qHX2DhbL12k/TAgAu9opvQ
+	(envelope-from <linux-doc+bounces-82922-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 17:51:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEB3D3CCE8A
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 17:42:49 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id D45303CD204
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 17:51:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 59CE9305FDFD
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Apr 2026 15:29:15 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 32957307887D
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Apr 2026 15:48:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C47883E1238;
-	Thu,  9 Apr 2026 15:28:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2DC6E2749D6;
+	Thu,  9 Apr 2026 15:47:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rvjyhgJm"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="QSGdyQ7L"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91D433E1215;
-	Thu,  9 Apr 2026 15:28:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775748509; cv=none; b=nFbqG2Mr/Pz7td0Nc8XQLt2RI9zakruCHDERPyD0QGeo0ZpW37tx5k7jkuB3i3WEIEp55xPYbT24GObN+MVBxlkrWKAG/XV7KlpCJU+tSRrYcdw+roI0gVYdaqpjpaCge730khwIURepCud/RXHzMA9q0XL9JnxRBwRAOf7yX2A=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775748509; c=relaxed/simple;
-	bh=UKUNZNcLrasERkVlHShR61ZM9paPsd4OyfoQALpvaI8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=T1Y37YdhHbJv1DCD+P97vCrEHPwFAv7tHcO/UoMTH/z+NL9P0b3HKEHqifPIdg19jGGjCAZjXeiM6oc1im4erauKZG2DDwNUb4PHVv6Bx5P7wzS+n6w7DvAXVboj20hOc1PsqyrMheiBahkrRzmDZdg109pbLc9s807UNi7y4TE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rvjyhgJm; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 69D7FC2BCFC;
-	Thu,  9 Apr 2026 15:28:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775748509;
-	bh=UKUNZNcLrasERkVlHShR61ZM9paPsd4OyfoQALpvaI8=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=rvjyhgJmYlIzlaWA7zSO1McTmw4D0MdA/jPxe+Zo/B3/4UyOo2f0BAUX1yDKetAuN
-	 IMnJZfs7uzopulWDUvFyjQgRw7CpH1QNpYC9QoIF6xwdsZM65EzhwVo5ffK62BCNY7
-	 kAxasTNJi0BrvRG7PZTq+ScKK0LoBuCxg0W5qzo/M7+kVcOKxHHeT6YS6PJsD+2cfI
-	 uQhjwDoitNT5xfw93o6ex7LhGu2fO7pHzkM1m5f00NxPpONqs3+lKrhcgKN0LW3n+q
-	 7+E2I4lm3WLUvt9wkVz3Q/nLZX1QpV68lZLmsqg8mDamIDesAf5luRDF+07aQEZNPD
-	 jErVuSM6pr8GA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E231F31E29;
-	Thu,  9 Apr 2026 15:28:29 +0000 (UTC)
-From: Radu Sabau via B4 Relay <devnull+radu.sabau.analog.com@kernel.org>
-Date: Thu, 09 Apr 2026 18:28:27 +0300
-Subject: [PATCH v7 6/6] docs: iio: adc: ad4691: add driver documentation
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21B753DD519;
+	Thu,  9 Apr 2026 15:47:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1775749651; cv=pass; b=CYHljrGNz++BZNEkLKGXb4y5bIz1yg2Eh4r2Q4hfic+IxTbpAGEdbJI+U/kWaqWGG72VnepMJCi/2DV3MirGam4XNTWEJsd6ofrbdJObGErmuUqa/hV7M+kVlN8k2AVbviFpe0tVA5kfh/+ZnNuB0KvSE3ARpQcUuo9Kflao9+M=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1775749651; c=relaxed/simple;
+	bh=7MMRW0AW+M59jBTM9S6ijYywZvxB77PTs+TfM305Qec=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Z/HHumdZWbfm7wJlfo51vhm8PfSm554pZ5Saz7ValAj03I5KNS4XkOlgOSeZmpY2aWsJiFCZW5bZjHuyjRzt4oCGJMwCRgscGaAJP/8xJ0e/ARbExS0VCkQRQKMW4A4NsTVyW15ar/5KRS9XYWaCNNxD6qF0JYcDE9AvZRnqVm8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=QSGdyQ7L; arc=pass smtp.client-ip=136.143.188.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1775749521; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=ABI+h+pXw2CwviuEkMiuAvyvDgCz+RqAiCI5T2/R33DQ5UQ4+gdzHVyhJZaUTykl3vs5NEmpZuVIaP/Wvsdw+aPSBQiWWH4cQc0KU53iXJxoxNy3hdCGkufJodLEUDNVq0v1nkAd9zf0cUQk2NvXKiRnG+jAYJ8BZdae0LEox34=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1775749521; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=gd2/TG/dT09zBXztMRpxlNLjgAGR1ndbi+WbM1cfrSY=; 
+	b=PVQX1t0Tvlxbdqe/pehSsDsiUghhpSF2AmhiT3JW2IxptjctDpGYuTfqX8oQ3TSsQjT8zFAzixc/1vM5BOn37v2saeVVsT2mACfkvPowGlCW8iuA/xsjVZCHLoXxWOSAfiP9xuaRy4v/SthdhSx4UM4IiCZippnWsX0rV26vVfI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
+	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1775749521;
+	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
+	h=From:From:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:To:To:Cc:Cc:Reply-To;
+	bh=gd2/TG/dT09zBXztMRpxlNLjgAGR1ndbi+WbM1cfrSY=;
+	b=QSGdyQ7LU37WWaDv+gyfSv2NWJqBatGfSI09U3DLD7pQ1foK0qzlKXYG2f74vW0T
+	E516KhVShyciAwHWveARKZEA9IHIr/A78eB3m28924sCyxtL0ygPKbmnsJKUbAJq5zU
+	29gkCwcjQXMwLrT8iYz/euk6PV1hoF1gijGfR4/Q=
+Received: by mx.zohomail.com with SMTPS id 1775749519503765.6928299607481;
+	Thu, 9 Apr 2026 08:45:19 -0700 (PDT)
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+Subject: [PATCH v12 00/25] Add new general DRM property "color format"
+Date: Thu, 09 Apr 2026 17:44:50 +0200
+Message-Id: <20260409-color-format-v12-0-ce84e1817a27@collabora.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,404 +64,442 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260409-ad4692-multichannel-sar-adc-driver-v7-6-be375d4df2c5@analog.com>
-References: <20260409-ad4692-multichannel-sar-adc-driver-v7-0-be375d4df2c5@analog.com>
-In-Reply-To: <20260409-ad4692-multichannel-sar-adc-driver-v7-0-be375d4df2c5@analog.com>
-To: Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
- Philipp Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-pwm@vger.kernel.org, 
- linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, 
- Radu Sabau <radu.sabau@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1775748505; l=13101;
- i=radu.sabau@analog.com; s=20260220; h=from:subject:message-id;
- bh=IptN2OXLuNKyo/j556/GPrsAWPRNvypfZxc/oV4K/08=;
- b=yxWNyMKAMFayikY2a8aPmPC4cimWIh1kYwt4nLnqEZ9DNF8VoWaaJarr5ZW6UCY0He4TzRChQ
- WrEhManA9QIBRGiv61DldWe7xEDDPeSa9eLlyz8yQ+vSnm6CaUtcPGM
-X-Developer-Key: i=radu.sabau@analog.com; a=ed25519;
- pk=lDPQHgn9jTdt0vo58Na9lLxLaE2mb330if71Cn+EvFU=
-X-Endpoint-Received: by B4 Relay for radu.sabau@analog.com/20260220 with
- auth_id=642
-X-Original-From: Radu Sabau <radu.sabau@analog.com>
-Reply-To: radu.sabau@analog.com
-X-Spamd-Result: default: False [4.84 / 15.00];
-	SEM_URIBL(3.50)[0.0.0.0:email];
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33R3W6cMBAF4FdZcV0Tj8F/qyrKe0S9sPE46wiW1
+ GZRomjfvQNNkw1CvbJs5O+MD+9VwZywVMfDe5VxTiWNZ9qA+HGoupM7PyFLgQ4qwYUELgzrxn7
+ MLI55cBNrbQz0xWswTUVXXjLG9Lp6j79oH/M4sOmU0X0i3AJAw3Vj69Y2igEbXE6XUs+9Cw+k9
+ 86P2dXdOHyIGX9faLDpL1t5V5CmGIY0HQ8hk59e7j7W5caApbh17uPhJyUq3lImB0mJQvBGUOS
+ c+h7r8pafXe8e+nS+vNbpPGG/xN5Xy+inVKYxv63NzO2avHYAoL93MLeMMx4waOEDeM43j1iwW
+ d4A2xJnSYBq0IgIwQPCHqD+AYqDgA2gCNDegNMausD9HqD/B2gCMGrLg0NteLcHmC9AgNoAhgC
+ phegQtAxB7gH2BhDbEu3SgTRd423wGuMeAPxLaLjcCEB/gTkilHEARpldAm4I0W4JWKbgUkrrY
+ ht9uyWu1+sfmnps8TMDAAA=
+X-Change-ID: 20251028-color-format-49fd202b7183
+To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
+ Rodrigo Siqueira <siqueira@igalia.com>, 
+ Alex Deucher <alexander.deucher@amd.com>, 
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Sandy Huang <hjc@rock-chips.com>, 
+ =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+ Andy Yan <andy.yan@rock-chips.com>, 
+ Jani Nikula <jani.nikula@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+ Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-doc@vger.kernel.org, 
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, 
+ Werner Sembach <wse@tuxedocomputers.com>, 
+ Andri Yngvason <andri@yngvason.is>, 
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>, 
+ Marius Vlad <marius.vlad@collabora.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Andy Yan <andyshrk@163.com>
+X-Mailer: b4 0.15.1
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
-	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-82913-lists,linux-doc=lfdr.de,radu.sabau.analog.com];
 	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_ALLOW(0.00)[kernel.org:s=k20201202];
-	GREYLIST(0.00)[pass,body];
+	TAGGED_FROM(0.00)[bounces-82922-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_TO(0.00)[metafoo.de,analog.com,kernel.org,baylibre.com,gmail.com,pengutronix.de,lwn.net,linuxfoundation.org];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[44];
 	MIME_TRACE(0.00)[0:+];
-	DMARC_POLICY_ALLOW(0.00)[kernel.org,quarantine];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	HAS_REPLYTO(0.00)[radu.sabau@analog.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	R_SPF_ALLOW(0.00)[+ip4:172.232.135.74:c];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[collabora.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,tuxedocomputers.com,yngvason.is,oss.qualcomm.com,163.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_SPAM(0.00)[0.604];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,analog.com:mid,analog.com:replyto,analog.com:url,0.0.0.0:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: AEB3D3CCE8A
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nv12:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,gitlab.freedesktop.org:url,collabora.com:dkim,collabora.com:email,collabora.com:mid,intel.com:email]
+X-Rspamd-Queue-Id: D45303CD204
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Radu Sabau <radu.sabau@analog.com>
+Hello,
 
-Add RST documentation for the AD4691 family ADC driver covering
-supported devices, IIO channels, operating modes, oversampling,
-reference voltage, LDO supply, reset, GP pins, SPI offload support,
-and buffer data format.
+this is a follow-up to
+https://lore.kernel.org/all/20250911130739.4936-1-marius.vlad@collabora.com/
+which in of itself is a follow-up to
+https://lore.kernel.org/dri-devel/20240115160554.720247-1-andri@yngvason.is/ where
+a new DRM connector property has been added allowing users to
+force a particular color format.
 
-Signed-off-by: Radu Sabau <radu.sabau@analog.com>
+That in turn was actually also a follow-up from Werner Sembach's posted at
+https://lore.kernel.org/dri-devel/20210630151018.330354-1-wse@tuxedocomputers.com/
+
+As the number of cooks have reached critical mass, I'm hoping I'll be
+the last person to touch this particular series.
+
+We have an implementation in Weston at
+https://gitlab.freedesktop.org/wayland/weston/-/merge_requests/1825 that
+adds support for this property. This patch series has been tested
+against that MR on i915 (HDMI, DP), amdgpu (HDMI, DP) and on rockchip
+(HDMI).
+
+You can also manually test this with modetest like so, but beware that
+this is a non-atomic invocation, so testing YUV420 like this will result
+in weird outcomes if only some of the modes support YUV420:
+
+  $ modetest -s 115:1920x1080-60@NV12 -w 115:'color format':4
+
+where 115 is the connector ID and '4' is the enum value for a particular
+color format.
+
+General notes on the approach taken by me: instead of silently switching
+to a different format than was explicitly requested, or even worse,
+outputting something to the sink the sink doesn't support, bubble up an
+error to userspace instead. "color format" is a "I want this" type
+property, not a "force this" type property, i.e. the kernel will respect
+the limits imposed by the hardware.
+
+Things I've tested:
+- HDMI (YCbCr 4:4:4 + YCbCr 4:2:2 (8-bit) + RGB + Auto) on RK3588
+- HDMI (YCbCr 4:4:4 + YCbCr 4:2:2 (8-bit) + RGB + Auto) on RK3576
+- HDMI + DP (YCbCr 4:4:4, YCbCr 4:2:0, RGB, Auto) on Intel N97 (i915).
+- HDMI (YCbCr 4:4:4, YCbCr 4:2:2, YCbCr 4:2:0, RGB, Auto) + DP (YCbCr
+  4:4:4, RGB, Auto) on an AMD Radeon RX 550 (amdgpu).
+
+Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- Documentation/iio/ad4691.rst | 283 +++++++++++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst  |   1 +
- MAINTAINERS                  |   1 +
- 3 files changed, 285 insertions(+)
+Changes in v12:
+- Rebase on top of Ville's i915 format selection cleanup series
+- i915: Reimplement based on new format selection code. Drop the DP-MST
+  implementation, as sinks with different sets of supported formats
+  complicate the matter.
+- Adjust documentation on drm_connector_color_format enum values to
+  mention quantization ranges.
+- Add documentation to drm-kms page to document the string values for
+  the property. Mostly the same documentation as the enum values, but
+  from a more userspace-centric perspective. This is done in the patch
+  that introduces the property, but I didn't drop the existing R-b as
+  it isn't a functional change.
+- Update documentation of "colorspace" property to mention that "color
+  format" property controls the output format.
+- amdgpu: Remove property from DP-MST, as it's unclear whether it'd work
+  properly with sinks that have different sets of supported formats
+- Link to v11: https://patch.msgid.link/20260324-color-format-v11-0-605559af4fb4@collabora.com
 
-diff --git a/Documentation/iio/ad4691.rst b/Documentation/iio/ad4691.rst
-new file mode 100644
-index 000000000000..a1012c8b78a3
---- /dev/null
-+++ b/Documentation/iio/ad4691.rst
-@@ -0,0 +1,283 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+
-+=============
-+AD4691 driver
-+=============
-+
-+ADC driver for Analog Devices Inc. AD4691 family of multichannel SAR ADCs.
-+The module name is ``ad4691``.
-+
-+
-+Supported devices
-+=================
-+
-+The following chips are supported by this driver:
-+
-+* `AD4691 <https://www.analog.com/en/products/ad4691.html>`_ — 16-channel, 500 kSPS
-+* `AD4692 <https://www.analog.com/en/products/ad4692.html>`_ — 16-channel, 1 MSPS
-+* `AD4693 <https://www.analog.com/en/products/ad4693.html>`_ — 8-channel, 500 kSPS
-+* `AD4694 <https://www.analog.com/en/products/ad4694.html>`_ — 8-channel, 1 MSPS
-+
-+
-+IIO channels
-+============
-+
-+Each physical ADC input maps to one IIO voltage channel. The AD4691 and AD4692
-+expose 16 channels (``voltage0`` through ``voltage15``); the AD4693 and AD4694
-+expose 8 channels (``voltage0`` through ``voltage7``).
-+
-+All channels share a common scale (``in_voltage_scale``), derived from the
-+reference voltage. Each channel independently exposes:
-+
-+* ``in_voltageN_raw`` — single-shot ADC result
-+* ``in_voltageN_sampling_frequency`` — per-channel effective conversion rate.
-+  In CNV Burst Mode this equals the internal oscillator frequency divided by
-+  the channel's oversampling ratio. In Manual Mode (where oversampling is not
-+  supported) it equals the oscillator frequency directly.
-+* ``in_voltageN_sampling_frequency_available`` — list of valid oscillator
-+  frequencies
-+
-+The following attributes are only available in CNV Burst Mode:
-+
-+* ``in_voltageN_oversampling_ratio`` — per-channel hardware accumulation depth
-+* ``in_voltageN_oversampling_ratio_available`` — list of valid ratios: 1, 2, 4,
-+  8, 16, 32
-+
-+
-+Operating modes
-+===============
-+
-+The driver supports two operating modes, auto-detected from the device tree at
-+probe time. Both modes transition to and from an internal Autonomous Mode idle
-+state when the IIO buffer is enabled and disabled.
-+
-+Manual Mode
-+-----------
-+
-+Selected when no ``pwms`` property is present in the device tree. The CNV pin
-+is tied to the SPI chip-select: every CS assertion both triggers a new
-+conversion and returns the result of the previous one (pipelined N+1 scheme).
-+
-+To read N channels the driver issues N+1 SPI transfers in a single optimised
-+message:
-+
-+* Transfers 0 to N-1 each carry ``AD4691_ADC_CHAN(n)`` in the TX byte to
-+  select the next channel; the RX byte of transfer ``k+1`` contains the result
-+  of the channel selected in transfer ``k``.
-+* Transfer N is a NOOP (0x00) to flush the last conversion result out of the
-+  pipeline.
-+
-+A user-defined IIO trigger (e.g. hrtimer trigger) drives the trigger handler,
-+which executes the pre-built SPI message and pushes the scan to the buffer.
-+
-+Oversampling is not supported in Manual Mode.
-+
-+CNV Burst Mode
-+--------------
-+
-+Selected when a ``pwms`` property is present in the device tree. The PWM drives
-+the CNV pin independently of SPI at the configured conversion rate, and a GP
-+pin (identified by ``interrupt-names``) asserts DATA_READY at end-of-burst to
-+signal that the AVG_IN result registers are ready to be read.
-+
-+The IRQ handler fires the IIO trigger without stopping the PWM, then disables
-+itself to prevent a second DATA_READY assertion while the trigger handler is
-+running. The trigger handler reads all active ``AVG_IN(n)`` registers in a
-+single optimised SPI message, pushes the scan to the buffer, and re-enables
-+the IRQ.
-+
-+The buffer sampling frequency (i.e. the PWM rate) is controlled by the
-+``sampling_frequency`` attribute on the IIO buffer. Valid values span from the
-+chip's minimum oscillator rate up to its maximum conversion rate (500 kSPS for
-+AD4691/AD4693, 1 MSPS for AD4692/AD4694). In practice, without SPI offload,
-+the SPI read overhead between DATA_READY and the start of the next PWM period
-+limits the achievable rate; the PWM frequency should be set low enough to
-+accommodate the SPI transfer time.
-+
-+Autonomous Mode (idle / single-shot)
-+-------------------------------------
-+
-+The chip idles in Autonomous Mode whenever the IIO buffer is disabled. In this
-+state, ``read_raw`` requests (``in_voltageN_raw``) use the internal oscillator
-+to perform a single conversion on the requested channel and read back the
-+result from the ``AVG_IN(N)`` register. The oscillator is started and stopped
-+for each read to save power.
-+
-+
-+Oversampling
-+============
-+
-+In CNV Burst Mode each channel has an independent hardware accumulator
-+(ACC_DEPTH_IN) that averages a configurable number of successive conversions
-+before DATA_READY asserts. The result is always returned as a 16-bit mean from
-+the ``AVG_IN`` register, so the IIO ``realbits`` and ``storagebits`` are
-+unaffected by the oversampling ratio.
-+
-+Valid ratios are 1, 2, 4, 8, 16 and 32. The default is 1 (no averaging).
-+Oversampling is not supported in Manual Mode.
-+
-+.. code-block:: bash
-+
-+    # Set oversampling ratio to 16 on channel 0
-+    echo 16 > /sys/bus/iio/devices/iio:device0/in_voltage0_oversampling_ratio
-+
-+When OSR > 1 the effective conversion rate reported by
-+``in_voltageN_sampling_frequency`` and used for ``read_raw`` is reduced
-+accordingly, since each output sample requires OSR successive conversions.
-+
-+
-+Reference voltage
-+=================
-+
-+The driver supports two reference configurations, mutually exclusive:
-+
-+* **External reference** (``ref-supply``): a voltage between 2.4 V and 5.25 V
-+  supplied externally. The internal reference buffer is disabled.
-+* **Buffered internal reference** (``refin-supply``): An internal reference
-+  buffer is used. The driver enables ``REFBUF_EN`` in the REF_CTRL register
-+  when this supply is used.
-+
-+Exactly one of ``ref-supply`` or ``refin-supply`` must be present in the
-+device tree.
-+
-+The reference voltage determines the full-scale range:
-+
-+.. code-block::
-+
-+    full-scale = Vref / 2^16  (per LSB)
-+
-+
-+LDO supply
-+==========
-+
-+The chip contains an internal LDO that powers part of the analog front-end.
-+The LDO input can be driven externally via the ``ldo-in-supply`` regulator. If
-+that supply is absent, the driver enables the internal LDO path (``LDO_EN``
-+bit in DEVICE_SETUP).
-+
-+
-+Reset
-+=====
-+
-+The driver supports two reset mechanisms:
-+
-+* **Hardware reset** (``reset-gpios`` in device tree): the GPIO is already
-+  asserted at driver probe by the reset controller framework. The driver waits
-+  for the required 300 µs reset pulse width and then deasserts.
-+* **Software reset** (fallback when ``reset-gpios`` is absent): the driver
-+  writes the software-reset pattern to the SPI_CONFIG_A register.
-+
-+
-+GP pins and interrupts
-+======================
-+
-+The chip exposes up to four general-purpose (GP) pins that can be configured as
-+interrupt or trigger-source outputs. In CNV Burst Mode (non-offload), one GP
-+pin must be wired to an interrupt-capable SoC input and declared in the device
-+tree using the ``interrupts`` and ``interrupt-names`` properties.
-+
-+The ``interrupt-names`` value identifies which GP pin is used (``"gp0"``
-+through ``"gp3"``). The driver configures that pin as a DATA_READY output in
-+the GPIO_MODE register.
-+
-+Example device tree fragment::
-+
-+    adc@0 {
-+        compatible = "adi,ad4692";
-+        ...
-+        interrupts = <17 IRQ_TYPE_LEVEL_HIGH>;
-+        interrupt-parent = <&gpio0>;
-+        interrupt-names = "gp0";
-+    };
-+
-+
-+SPI offload support
-+===================
-+
-+When a SPI offload engine (e.g. the AXI SPI Engine) is present, the driver
-+uses DMA-backed transfers for CPU-independent, high-throughput data capture.
-+SPI offload is detected automatically at probe via ``devm_spi_offload_get()``;
-+if no offload hardware is available the driver falls back to the software
-+triggered-buffer path.
-+
-+Two SPI offload sub-modes exist, corresponding to the two operating modes:
-+
-+CNV Burst offload
-+-----------------
-+
-+Used when a ``pwms`` property is present and SPI offload is available.
-+
-+The PWM drives CNV at the configured rate. On DATA_READY the SPI offload
-+engine automatically executes a pre-built message that reads all active
-+``AVG_IN`` registers and streams the data directly to an IIO DMA buffer with
-+no CPU involvement. A final state-reset transfer re-arms DATA_READY for the
-+next burst.
-+
-+The GP pin used as DATA_READY trigger is supplied by the trigger-source
-+consumer (via ``#trigger-source-cells``) at buffer enable time; no
-+``interrupt-names`` entry is required in this path.
-+
-+The buffer sampling frequency is controlled by the ``sampling_frequency``
-+attribute on the IIO buffer (same as the non-offload CNV Burst path).
-+
-+Manual offload
-+--------------
-+
-+Used when no ``pwms`` property is present and SPI offload is available.
-+
-+A periodic SPI offload trigger controls the conversion rate. On each trigger
-+period, the SPI engine executes an N+1 transfer message (same pipelined scheme
-+as software Manual Mode) and streams the 16-bit ADC results directly to the
-+IIO DMA buffer. Each transfer sends a 16-bit TX word (channel command byte in
-+the upper byte, zero in the lower byte); the chip returns the 16-bit ADC
-+result on MISO. The first transfer's RX is discarded (pipeline flush); results
-+from transfers 1 through N are streamed to the DMA buffer.
-+
-+The ``sampling_frequency`` attribute on the IIO buffer controls the trigger
-+rate (in Hz). The initial rate is 100 kHz — a conservative default chosen
-+because the N+1 SPI transfer overhead in this mode limits the achievable rate
-+relative to the chip's maximum conversion rate.
-+
-+Oversampling is not supported in Manual Mode.
-+
-+
-+Buffer data format
-+==================
-+
-+The IIO buffer data format (``in_voltageN_type``) is the same across all
-+paths: 16-bit unsigned big-endian samples with no shift.
-+
-++-------------------------+-------------+----------+-------+
-+| Path                    | storagebits | realbits | shift |
-++=========================+=============+==========+=======+
-+| Triggered buffer        | 16          | 16       | 0     |
-++-------------------------+-------------+----------+-------+
-+| CNV Burst offload (DMA) | 16          | 16       | 0     |
-++-------------------------+-------------+----------+-------+
-+| Manual offload (DMA)    | 16          | 16       | 0     |
-++-------------------------+-------------+----------+-------+
-+
-+In the triggered-buffer path the SPI rx_buf for each transfer points directly
-+into the scan buffer, so the 16-bit big-endian result is written in place with
-+no additional copying.
-+
-+In the DMA offload paths the SPI offload engine streams 16-bit words (one per
-+active channel) directly into the IIO DMA buffer:
-+
-+* **CNV Burst offload**: each channel read uses a 16-bit address phase followed
-+  by a 16-bit data phase; only the data phase is flagged for DMA streaming, so
-+  the 16-bit result lands directly in the buffer.
-+* **Manual offload**: each 16-bit SPI transfer carries the channel command on
-+  TX and receives the 16-bit ADC result on RX; results are streamed to the
-+  DMA buffer one 16-bit word per channel.
-+
-+The ``in_voltageN_type`` sysfs attribute reflects the active scan type.
-+
-+
-+Unimplemented features
-+======================
-+
-+* GPIO controller functionality of the GP pins
-+* Clamp status and overrange events
-+* Raw accumulator (ACC_IN) and accumulator status registers
-+* ADC_BUSY and overrun status interrupts
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index ba3e609c6a13..007e0a1fcc5a 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -23,6 +23,7 @@ Industrial I/O Kernel Drivers
-    ad4000
-    ad4030
-    ad4062
-+   ad4691
-    ad4695
-    ad7191
-    ad7380
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 24e4502b8292..819d8b6eb6bb 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1491,6 +1491,7 @@ S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
- F:	Documentation/devicetree/bindings/iio/adc/adi,ad4691.yaml
- F:	drivers/iio/adc/ad4691.c
-+F:	drivers/iio/adc/ad4691.rst
- 
- ANALOG DEVICES INC AD4695 DRIVER
- M:	Michael Hennerich <michael.hennerich@analog.com>
+Changes in v11:
+- amdgpu: fix property registration on DP-MST
+- i915: fix property registration on DP-MST
+- rebase on drm-tip, which includes Maxime's refactor series that was
+  previously declared a dependency of this series
+- Link to v10: https://lore.kernel.org/r/20260305-color-format-v10-0-a58c68a11868@collabora.com
 
--- 
-2.43.0
+Changes in v10:
+- Make DRM_OUTPUT_COLOR_FORMAT_COUNT and
+  DRM_CONNECTOR_COLOR_FORMAT_COUNT part of the enum definition (thanks
+  to Maxime)
+- Preemptively avoid the warning that would be generated by the
+  enumification of DRM_OUTPUT_COLOR_FORMAT_COUNT by modifying the
+  problematic switch statement in drm_hdmi_state_helper's
+  sink_supports_format_bpc.
+- drm/bridge: Change HDMI check from checking for the last bridge having
+  a DRM_BRIDGE_OP_HDMI in ops to checking if last_bridge->type is HDMIA.
+  This is not quite the suggestion Dmitry had, but according to the
+  documentation of the drm_bridge.type member, and the
+  display-connector.c code, it should be correct.
+- Combine drm_mode_create_color_format_property and
+  drm_connector_attach_color_format_property into one function named the
+  latter. (thanks to Dmitry Baryshkov)
+- Change author of 'drm: Add new general DRM property "color format"'
+  to myself as it has by now changed quite a bit, and add Andri and
+  Werner as Co-developed-by, as per Andri's suggestion.
+- hdmi-state-helper: Rework hdmi_compute_config to make code flow more
+  obvious, and drop Dmitry's R-b as a consequence (thanks to Maxime)
+- Move dw-hdmi-qp's atomic_get_output_bus_fmts into
+  drm_bridge_helper.c, along with kernel doc string (thanks to Dmitry)
+- Future-proof the aforementioned get_output_bus_fmts use of hweight8 on
+  the supported_formats bitmask with a BUILD_BUG_ON.
+- Add a KUnit test for the HDMI output bus formats helper
+- Link to v9: https://lore.kernel.org/r/20260227-color-format-v9-0-658c3b9db7ef@collabora.com
 
+Changes in v9:
+- Document what the "AUTO" behaviour is in the color format enum (thanks
+  to Maxime)
+- drm/bridge: dw-hdmi-qp: Fix a rebase oopsie that reintroduced some
+  functions that were dropped. (thanks to Cristian)
+- drm/bridge: Shuffle "1:1" in the bridge fmt selection docs to earlier
+  in the sentence. (thanks to Randy Dunlap)
+- i915: Check chosen output format against requested format for dp-mst
+- All color format driver implementations: rebase and rework on top of
+  Maxime's series
+- As part of this rework, rename drm_color_format_enum to
+  drm_connector_color_format
+- drm kunit tests: rework for the new enums. Changes were trivial, so
+  trailers were kept
+- Link to v8: https://lore.kernel.org/r/20260216-color-format-v8-0-5722ce175dd5@collabora.com
+
+Changes in v8:
+- Drop "drm/rockchip: vop2: Fix YUV444 output", as the original problem
+  could not be reproduced anymore, and the justification did not make
+  sense.
+- Remove the 12-bit format from "drm/rockchip: vop2: Recognise 10/12-bit
+  YUV422 as YUV formats".
+- Refactor to keep the original DRM_COLOR_FORMAT bitshifted defines
+  as-is, but introduce a new drm_color_format_enum enum.
+- Adjust conversion functions for the newly refactored enum, ensuring
+  they only return valid enum values, and only convert in directions
+  that open up no error value cans of worms.
+- Rework the property uapi code for the newly refactored enum, since
+  it no longer needs to do any bitshifting or ffs().
+- Rework all the device drivers for the new enum.
+- Rework all the tests for the refactored enum.
+- Rework the hdmi state helper for the new enum, and also make it more
+  explicit about the auto behaviour by not relying on a conversion
+  function to map AUTO to RGB, but do this in the framework itself.
+- rockchip dw_hdmi_qp: Fix the GRF value to check for color >= 0 instead
+  of color > 0, as the latter broke switching back to RGB.
+- Rebase onto a recent drm-tip. This necessitated blindly reworking some
+  of the i915 dp-mst code.
+- Drop the __maybe_unused edid test patch, as I could no longer
+  reproduce the build warnings I added it for. I blame ghosts.
+- drm_bridge tests: remove "destroyed" member from struct
+  drm_bridge_chain_priv and all associated code, as it was not used in
+  any test.
+- Link to v7: https://lore.kernel.org/r/20260121-color-format-v7-0-ef790dae780c@collabora.com
+
+Changes in v7:
+- Fix drm_bridge kunit test build failure caused by rebasing across an
+  API change.
+- Make compilers shut up about unused EDID definitions in the test
+  suites.
+- Empty line checkpatch fixes that b4 prep --check didn't catch.
+- Link to v6: https://lore.kernel.org/r/20260121-color-format-v6-0-7b81a771cd0b@collabora.com
+
+Changes in v6:
+- Checkpatch fixes
+- Add drm_bridge.c kerneldoc fix patch to b4 deps so the kernel docs
+  required for every contribution to the subsystem can be built
+- dw-hdmi-qp core has gained the atomic_get_output_bus_fmts bridge func,
+  which allows it to participate in the drm_bridge chain recursive format
+  selection code properly.
+- The Rockchip dw-hdmi-qp integration now no longer reimplements the
+  color format logic (improperly), but reads the bus format of the first
+  bridge as set by the recursive bridge format selection. If the input
+  format is FIXED, it'll use the output format. Otherwise, the input
+  format is used.
+- In the synopsys drivers, YUV422 uses the same bus format as the non-qp
+  hdmi encoder driver. Probably correcter this way. The Rockchip vop2
+  is_yuv function has been extended to recognise this format as well.
+- KUnit tests for drm_bridge chains are now included, which exercise the
+  chain's recursive bus format selection.
+- On HDMI connectors, the drm_bridge bus format selection will try to target
+  the color format that the HDMI layer came up with. This means the AUTO
+  logic is not duplicated for HDMI connectors.
+- The enum conversion function commit gained a function for converting
+  from hdmi_colorspace to drm_color_format, and its author changed as no
+  original code remains anyway. Marius is still included as a
+  Co-developer.
+- Some tests for the HDMI state helper's mode_valid have been written.
+  They are incomplete as we lack a test EDID for a 420-also mode that
+  would violate the clock constraints on RGB. I hacked one together with
+  a hex editor, but it reports a too high of a clock rate, and there's
+  no EDID editor I could find which supports these extension blocks.
+- The color_format KUnit tests have been more heavily parameterised, the
+  auto case absorbed into other tests, and the comments around them
+  rewritten.
+- Add a few paragraphs of documentation that explain the bridge format
+  selection, and how to make use of it in a display driver.
+- Link to v5: https://lore.kernel.org/r/20251128-color-format-v5-0-63e82f1db1e1@collabora.com
+
+Changes in v5:
+- Rebase onto drm-tip
+- Drop DRM_MODE_COLOR_FORMAT_* as an enum
+- Unify DRM_COLOR_FORMAT_NONE and DRM_COLOR_FORMAT_AUTO, with AUTO being
+  0. This makes conversion and general logic much easier.
+- Adjust the drm_color_format enum to not needlessly renumber the
+  existing defines, as it doesn't need to correspond to how HDMI numbers
+  them.
+- Make the DRM-to-HDMI conversion function static inline __pure, because
+  the assembly it generates is tiny, and the function is pure.
+- Don't accept nothing as the list of supported color formats for
+  registration of the property.
+- Drop the per-connector variants of the color format registration
+  function, as it's not needed.
+- drm_hdmi_state_helper: Fix mode_valid rejecting 420-only modes.
+- drm_hdmi_state_helper: Only fall back to YUV420 with
+  DRM_COLOR_FORMAT_AUTO.
+- drm_hdmi_state_helper: Remove redundant AUTO->RGB condition, as the
+  conversion already does this.
+- Add KUnit tests for hdmi_compute_config.
+- drm/bridge: Refactor bus_format_is_color_fmt and add a few more YUV422
+  formats.
+- Register the color format property in drmm_connector_hdmi_init based
+  on the supported HDMI formats passed to it. This means rockchip
+  dw_hdmi_qp no longer needs to register it.
+- amdgpu: Simplify YUV420 logic
+- amdgpu: Don't try to pick YUV444 on YUV420-only modes
+- i915: Try to make behaviour more or less the same as that of the drm
+  hdmi state helper.
+- rockchip dw_hdmi_qp: Set supported HDMI formats
+- rockchip dw_hdmi_qp: Set the right VO GRF values depending on color
+  format.
+- rockchip dw_hdmi_qp: Act on the color format property in this driver,
+  rather than in VOP2, by setting the bus_format appropriately.
+- rockchip VOP2: Can the BCSH-based implementation. BCSH isn't available
+  on all video ports of the hardware, and the code was extremely
+  suspect. Instead, plug into the existing YUV-to-RGB/RGB-to-YUV code,
+  which can be done now that the HDMI driver sets the bus format.
+- A whole bunch of Rockchip VOP2 fixes.
+- Link to v4: https://lore.kernel.org/r/20251117-color-format-v4-0-0ded72bd1b00@collabora.com
+
+Changes in v4:
+- Rebase onto next-20251117
+- Get rid of HDMI_COLORSPACE_AUTO
+- Split hdmi_compute_config change into separate patch
+- Add missing symbol export for color_format_to_hdmi_colorspace to fix
+  builds in certain configurations
+- Drop "drm: Pass supported color formats straight onto drm_bridge"
+- Make dw-hdmi-qp set the platform data's supported color formats as
+  the bridge's supported HDMI color formats
+- drm_hdmi_state_helper: pass requested color format to
+  hdmi_compute_format_bpc if set.
+- drm_bridge: limit the bus formats to those explicitly requested with
+  the color format property during the atomic bridge check call,
+  specifically in drm_atomic_bridge_chain_select_bus_fmts.
+- i915: Remove INTEL_OUTPUT_FORMAT_AUTO, as automatic format selection
+  does not need to involve the hardware state
+- i915: Deduplicate ntel_output_format_to_drm_color_format code by
+  moving it as a static inline __pure function into a shared header
+- i915: rework logic in HDMI, DP and DP-MST output config functions to
+  remove redundant locals, simplify execution flow, and return an error
+  to userspace if an explicit color_format request can't be satisfied.
+- i915: assign myself as the author and make the others Co-developers,
+  so that they don't get the blame for any of my bugs.
+- amdgpu: refactor fill_stream_properties_from_drm_display_mode to
+  improve readability and ensure that impossible color format requests
+  get bubbled up to userspace as errors
+- amdgpu: don't pick YUV444 over RGB.
+- amdgpu: assign authorship to myself, with others as Co-developers, as
+  logic was modified and the blame should fall on me
+- dw_hdmi_qp-rockchip: set the supported color formats platform data
+  member
+- rockchip: remove drm property registration for rk3066_hdmi and
+  inno_hdmi. None of the platforms that use these use vop2 as the
+  video output processor.
+- Link to v3: https://lore.kernel.org/all/20250911130739.4936-1-marius.vlad@collabora.com/
+
+Changes in v3 by mvlad compared to Andri's v2 series:
+- renamed the property to just 'color format'
+- the property is added dynamically similar to the Colorspace property
+- a key point from previous comments was that drivers should advertise
+  the color formats they support and userspace would query EDID and
+  perform an intersection from those color formats which users can
+  further use. With this patch set each driver that adds this property
+  has such list of hard-coded color formats, but fundamentally the idea
+  is that driver can query the HW and do that on its own. The
+  infrastructure is now in place to allow to do that
+- by default the 'AUTO' color format is set. With this patch series that
+  has been introduced as a fallback to RGB. Drivers could further
+  customize this behavour and could perform additional checks on the sink
+  to pick another suitable color format they'd like for AUTO
+- drm_bridge bridge code has been improved to allow initialization with
+  the same color formats list as the DRM connector property. Similarly, bpc
+  pick-up now takes the color format into consideration when deciding
+  which bpc to choose from
+- The new DRM color format re-uses HDMI_COLORPSACE enum and provides an
+  enum translations between the two to avoid touching all other drivers that
+  use HDMI_COLORPSACE enum. I believe at this point that this allows the
+  least amount of disruption and avoids a massive bike shedding around
+  that part
+- a rockchip implementation has been by my colleague Derek Foreman
+- YUV444 color format has been added in i915
+- address comment about "Remove unnecessary SIGNAL_TYPE_HDMI_TYPE_A
+  check" where aconnector might be invalid
+- Link to v2: https://lore.kernel.org/dri-devel/20240115160554.720247-1-andri@yngvason.is/
+
+---
+Nicolas Frattaroli (24):
+      drm/display: hdmi-state-helper: Use default case for unsupported formats
+      drm: Add new general DRM property "color format"
+      drm/bridge: Act on the DRM color format property
+      drm/atomic-helper: Add HDMI bridge output bus formats helper
+      drm/display: hdmi-state-helper: Act on color format DRM property
+      drm/display: hdmi-state-helper: Try subsampling in mode_valid
+      drm/amdgpu: Implement "color format" DRM property
+      drm/i915/hdmi: Add YCBCR444 handling for sink formats
+      drm/i915/dp: Add YCBCR444 handling for sink formats
+      drm/i915: Implement the "color format" DRM property
+      drm/rockchip: Add YUV422 output mode constants for VOP2
+      drm/rockchip: vop2: Add RK3576 to the RG swap special case
+      drm/rockchip: vop2: Recognise 10-bit YUV422 as YUV format
+      drm/rockchip: vop2: Set correct output format for RK3576 YUV422
+      drm/bridge: dw-hdmi-qp: Use common HDMI output bus fmts helper
+      drm/rockchip: dw_hdmi_qp: Implement "color format" DRM property
+      drm/rockchip: dw_hdmi_qp: Set supported_formats platdata
+      drm/connector: Register color format property on HDMI connectors
+      drm/tests: hdmi: Add tests for the color_format property
+      drm/tests: hdmi: Add tests for HDMI helper's mode_valid
+      drm/tests: bridge: Add KUnit tests for bridge chain format selection
+      drm/tests: bridge: Add test for HDMI output bus formats helper
+      drm/bridge: Document bridge chain format selection
+      drm/connector: Update docs of "colorspace" for color format prop
+
+Werner Sembach (1):
+      drm/amd/display: Remove unnecessary SIGNAL_TYPE_HDMI_TYPE_A check
+
+ Documentation/gpu/drm-kms-helpers.rst              |   6 +
+ Documentation/gpu/drm-kms.rst                      |   6 +
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c  |  91 +-
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c       |   1 +
+ drivers/gpu/drm/display/drm_hdmi_state_helper.c    |  53 +-
+ drivers/gpu/drm/drm_atomic_helper.c                |  86 ++
+ drivers/gpu/drm/drm_atomic_uapi.c                  |  11 +
+ drivers/gpu/drm/drm_bridge.c                       | 129 ++-
+ drivers/gpu/drm/drm_connector.c                    | 162 +++-
+ drivers/gpu/drm/i915/display/intel_connector.c     |  10 +
+ drivers/gpu/drm/i915/display/intel_connector.h     |   1 +
+ drivers/gpu/drm/i915/display/intel_dp.c            |  43 +-
+ drivers/gpu/drm/i915/display/intel_hdmi.c          |  47 +-
+ drivers/gpu/drm/rockchip/dw_hdmi_qp-rockchip.c     | 111 ++-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.h        |   4 +
+ drivers/gpu/drm/rockchip/rockchip_drm_vop2.c       |  21 +-
+ drivers/gpu/drm/tests/drm_bridge_test.c            | 971 +++++++++++++++++++++
+ drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c | 345 ++++++++
+ include/drm/drm_atomic_helper.h                    |   7 +
+ include/drm/drm_connector.h                        | 108 +++
+ 20 files changed, 2176 insertions(+), 37 deletions(-)
+---
+base-commit: 7fa61e7003dda66c77b7f63a555658d8fb10bacf
+change-id: 20251028-color-format-49fd202b7183
+prerequisite-message-id: <20260409101539.22032-1-ville.syrjala@linux.intel.com>
+prerequisite-patch-id: f382aeb5da5f2b8f6e2cb22b88eb47f490f2c724
+prerequisite-patch-id: 20570aeb28e3c31353e6f697b193b23d8b47c47c
+prerequisite-patch-id: 1b7e24034883b22cd82be025a1cf82ae77170fd0
+prerequisite-patch-id: 6ec2dc2c05a75391b67cb12d93168f5e8da8ec55
+prerequisite-patch-id: 32e84581998ef4eef05e1681c7ec36b90f2a6bb7
+prerequisite-patch-id: 99c2187a846b0c9ac2ea1a892c17483120cb7da1
+prerequisite-patch-id: fb41b4668a3b7c8c375c67ffd6b178fa3273e86a
+prerequisite-patch-id: 4c115a36eea0d5f80643dc34310690894ac80e0e
+prerequisite-patch-id: 6fdec0832cd6062de3cc5c2f363c5d624d8a00f9
+
+Best regards,
+--  
+Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
 
