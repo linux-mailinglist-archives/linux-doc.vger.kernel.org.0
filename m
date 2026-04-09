@@ -1,66 +1,68 @@
-Return-Path: <linux-doc+bounces-82905-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-82906-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8AXtNZK712l0SAgAu9opvQ
-	(envelope-from <linux-doc+bounces-82905-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 16:45:38 +0200
+	id GIXICAa812l0SAgAu9opvQ
+	(envelope-from <linux-doc+bounces-82906-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 16:47:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54A203CC295
-	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 16:45:38 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5DEF3CC2E0
+	for <lists+linux-doc@lfdr.de>; Thu, 09 Apr 2026 16:47:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 12CFD300D156
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Apr 2026 14:45:37 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id AF2123007BA4
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Apr 2026 14:47:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E076C3DE44B;
-	Thu,  9 Apr 2026 14:45:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36B6E3D648F;
+	Thu,  9 Apr 2026 14:47:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="M1oTRvPK"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="ZkfiRUq7"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A1FB3CF699;
-	Thu,  9 Apr 2026 14:45:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E78C33D564A;
+	Thu,  9 Apr 2026 14:47:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775745934; cv=none; b=qMOpLuVGEO3mKU7XiOT69/0VL+8lcFBr91PAuRqHm5QF2wjTAUBiXNJ9UB2g2wgNFJ+MCZWosHhoLo3JjcKRp5btJNbapKtzUYr2OljQpZGr/UQTmOrzZEBfvcDGsRp5V9oWfNpKgp/ogPMVXQCUcLKmRbkoxE9so7L/TW66Z1s=
+	t=1775746047; cv=none; b=ZrLOwkqZ8h16GmQzvAjZI/V+oEvZOV79e/hY7G7WG5FtY/A/Kyy/LZUsyJC6c/G7600YWc5YCsjQT+KXLy5F0UoWEf5qHTnpX0GGFUfj2E2TIHHniikpC2V7Dz7lzzyaTBuF7mGcedpZw6Drs0vPITEvhCvt45/LehWvU3qzNWY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775745934; c=relaxed/simple;
-	bh=CE6zvdkmc512G3Vl7PEmer+DUbD/6qV4msKg5svX4bs=;
+	s=arc-20240116; t=1775746047; c=relaxed/simple;
+	bh=mBqeoolBpaG9fZBjdRJOOEjKnVG8V8l1ocEkfuhV49k=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=PAKUgtpWeicmZF+RLMOhT51UA9nEndhBjZn89DzqCvRhCRJ60VjwBWsb5jzCgcB2auDLCiu/XpcdxOmNkH5QgY+81BhFZQZRMyAR061yWnZljwGFXHRkqd0NzdfrfgIdKxPebNKviy9tgPeRq0Ex57ir/DjGtTIYXV2/AEIi2+A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=M1oTRvPK; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=aPrbnrMsinojNRre+TcBdHOtq4pvXs9+aFv6FU94ElkXmypMK1bZIu6Nl4twWta8HJ3SHuDsMsrRZ7Cm18oKePIyX4SE8xfjcD+T4LMCnnXjvYTp/JHuD6gjeAyO9Dxxj8k1eG48uBgomqUQpyY42yBnedOPrxUyluyU0on34MY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=ZkfiRUq7; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 33E0F40B2D
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 36B2940B2D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1775745920; bh=9UjJsJZfwJanCZGABshmZ68foQfId21dwyXnZXsn0Gw=;
+	t=1775746035; bh=B6bODqCB5VwJoRo0oo8Rrvy49e2SvQavopGmfSNk4kQ=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=M1oTRvPKdFlczPjiNIi/kCOEUebV1SXduyRsOHJpL6K0vbeF7garYUzALbfVlNJ4K
-	 vYb5oD+VFS1redUL+alhViqUA7Azlm07SoiQuXZZlwRqT+qrjdv2/ieKdX7WRLJ2ej
-	 bU5jiQnxytqPyM5rusfbuut+ov9uLPaL3OscGK1qaclZ8FP160BA7mZiw1TtzfSfI0
-	 wuO00U1Oqh/CUoQ0yrke2WSt2Ab0iRWzeuAfEn//CzU9PUcWjIiVWoYJaqWIouQZsj
-	 b+i6lOmTcZVE1487sabU7Vfjgpps3XWTp9w9T3+XQyBQPrCVyMxdsNPjrqVlDN6vSI
-	 BWvIqbZO4KlSQ==
+	b=ZkfiRUq721tb9JF/3T8g+vJ7Okw6FNFS7l6N0Qab9PhNqc9BkIUVg0DgRUXVi5lsf
+	 UIKCpnhSMd52hZcP8sYDD1p4DQrIvNv0UvzSq3QuAcXQ7GxlaX+cO3rkH9EuV6zHOO
+	 z3imVNk0l3jCr36vI/lD7xw8+QFMHeBuKbiilgu+7TaD1dYhYVOarO0xo2Q/8TltHl
+	 xEQvWbY3dSNlUpGnssaNDLCfpIb5kSZIkZIPcMgdPYiLY+CCELCk2OFm3/jcn3V9eR
+	 ZpOpwOaOO2a0Wk7BxKTtBkFqBiQPHtDp/CpZ5YH3sH7Ycf5tLD4VXQqvQqq7J8x2Uq
+	 hUPL7jMBLPcVA==
 Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net [71.229.227.126])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 33E0F40B2D;
-	Thu,  9 Apr 2026 14:45:20 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 36B2940B2D;
+	Thu,  9 Apr 2026 14:47:15 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Shubham Chakraborty <chakrabortyshubham66@gmail.com>, jgross@suse.com
-Cc: sstabellini@kernel.org, boris.ostrovsky@oracle.com,
- linux-doc@vger.kernel.org, xen-devel@lists.xenproject.org,
- linux-kernel@vger.kernel.org, Shubham Chakraborty
- <chakrabortyshubham66@gmail.com>
-Subject: Re: [PATCH v2] docs: sysctl: Add documentation for /proc/sys/xen/
-In-Reply-To: <20260304150419.16738-1-chakrabortyshubham66@gmail.com>
-References: <20260304150419.16738-1-chakrabortyshubham66@gmail.com>
-Date: Thu, 09 Apr 2026 08:45:19 -0600
-Message-ID: <87fr54b3b4.fsf@trenco.lwn.net>
+To: Steven Rostedt <rostedt@goodmis.org>, linux-doc@vger.kernel.org
+Cc: LKML <linux-kernel@vger.kernel.org>, Linux Trace Kernel
+ <linux-trace-kernel@vger.kernel.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Tom Zanussi <zanussi@kernel.org>
+Subject: Re: [PATCH] tracing: Documentation: Update histogram-design.rst for
+ fn() handling
+In-Reply-To: <20260305110347.31d6bae5@gandalf.local.home>
+References: <20260126181742.03e8f0d5@gandalf.local.home>
+ <20260305110347.31d6bae5@gandalf.local.home>
+Date: Thu, 09 Apr 2026 08:47:14 -0600
+Message-ID: <87bjfsb37x.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -70,59 +72,44 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,oracle.com,vger.kernel.org,lists.xenproject.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-82905-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-82906-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com,suse.com];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 54A203CC295
+X-Rspamd-Queue-Id: B5DEF3CC2E0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Shubham Chakraborty <chakrabortyshubham66@gmail.com> writes:
+Steven Rostedt <rostedt@goodmis.org> writes:
 
-> Add documentation for the Xen hypervisor sysctl controls in
-> /proc/sys/xen/balloon/.
+> Hi Jon,
 >
-> Documents the hotplug_unpopulated tunable (available when
-> CONFIG_XEN_BALLOON_MEMORY_HOTPLUG is enabled) which controls
-> whether unpopulated memory regions are automatically hotplugged
-> when the Xen balloon driver needs to reclaim memory.
->
-> The documentation is based on source code analysis of
-> drivers/xen/balloon.c.
->
-> Signed-off-by: Shubham Chakraborty <chakrabortyshubham66@gmail.com>
-> ---
->  Documentation/admin-guide/sysctl/index.rst |  3 ++-
->  Documentation/admin-guide/sysctl/xen.rst   | 31 ++++++++++++++++++++++
->  2 files changed, 33 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/admin-guide/sysctl/xen.rst
+> Can you take this through your tree?
 
-Applied, thanks.
+Somehow it fell through a crack in my inbox, but I have, finally, done
+that.  Sorry for the delay.
 
 jon
 
