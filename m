@@ -1,142 +1,138 @@
-Return-Path: <linux-doc+bounces-83053-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83054-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yIExBxQl2WmnmggAu9opvQ
-	(envelope-from <linux-doc+bounces-83053-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 18:28:04 +0200
+	id YOZ1Obgp2Wm1mwgAu9opvQ
+	(envelope-from <linux-doc+bounces-83054-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 18:47:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BBC43DA646
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 18:28:03 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFF8E3DAA7C
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 18:47:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A27C03084881
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 16:22:27 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id DD7663008D2C
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Apr 2026 16:45:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DFCE3DB65F;
-	Fri, 10 Apr 2026 16:22:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29EFC3DE43F;
+	Fri, 10 Apr 2026 16:45:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KIcQ5zy4"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="X+/HAAKB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B40FA3DA7E9
-	for <linux-doc@vger.kernel.org>; Fri, 10 Apr 2026 16:22:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D24833DE455;
+	Fri, 10 Apr 2026 16:45:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775838144; cv=none; b=DClAtRfVUSPrxbag6++pB+ojAXMBWh4nBQ5DbvT4+evh0Hobr74hRDzM2ELopaRxU0kj45ClJbQX7povfXFHUVuyMfDcBgNpzIMV2C1Iulyd4R30aHgDrmT3FlgXLPerLkp3R9i4/kJpYCS/62mIvMPM5t1m7Z4bOrtRCVrsiSQ=
+	t=1775839504; cv=none; b=Oo5hFQZl2+/XCkDeb1htT0RHocudWCLUxeAodRlnt6RkjsDp+QFEMdBlf2TsALluS5AiygmrDZMMQk+obMa00mVyNOxdE6R1m2MuGLduQHryy+BMuOEjW2tMu3mJnErrGqHCNj3dg2mHwwWbO3eQMCFTUwXpUEOGKLYyoaqWqUY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775838144; c=relaxed/simple;
-	bh=BBIkEk5IWn0dgN8UubTAKBIOMBYqreRBUyJgp0WUWdQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HD9sA8I5rGQFy4ySPmzzRccLkK/0GyKaUQxVBy5BuHgjw7FGhWQlC42nCIOwz/OBp6f48ZvutM0eQyfBhFJmNaMkey1+gZt+W24iTnXZ0i0ElrVdo+NEWuflQ5JNzXcDQwzzqtuYQXAVRggVbyfN2j182dUL1P8QiWYsBWRd+9A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KIcQ5zy4; arc=none smtp.client-ip=74.125.82.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-128b9b7e3edso403287c88.0
-        for <linux-doc@vger.kernel.org>; Fri, 10 Apr 2026 09:22:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775838143; x=1776442943; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Ud2WfQQv0Jjbl2amZn8W+6KYSKXPpeMW+BFIbEVApCI=;
-        b=KIcQ5zy4WnnWRfT+vruB+DhxD+8sbKr00/OiqrrZGReIyT4YTyfsLmVjwLgFWTNVHN
-         dnjIZhfj4MTQB2UsLYUWwhdwWmxaTFduiUdrjw8tXkECHSFJ+dDpSCvxMtNUYYqixcnZ
-         PN2mi9JvYnFFy2NYz3i+ZBnGAsieDtoaQxWh1muDdgGIipaX+i5+mZxcP5ZI0JOlNMSf
-         ABcQpxq7CmdvxAGbabLHqRcp8O8XWIIxkszwI24UX1jJYi1GSJMp1BzVDpdEMNdka5qJ
-         WN37W5cGxZRsCaPm5lU8gnebn17uZ/UzfJknmwvTB0XzA1V9PKn+IG04ApUnYXpMU7Of
-         9f6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775838143; x=1776442943;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Ud2WfQQv0Jjbl2amZn8W+6KYSKXPpeMW+BFIbEVApCI=;
-        b=foQSJVf8mowl4CNAfeQ1apCfju0RbRLiGlvThOZXffkJy6Xb/JK3YDxyYsrBJ3fZ6V
-         6lLoVQVITiwxnBcsN/TNoEbs8yVeCePCduNtHVBvwAFS71v6gLYa+IO20FQohUC1Wnxj
-         0/nZPf09hDt7Q02uMql2d1zxnElPDn0hBYebtBVP+Tx1Jm517kGHwRCKPqloo6igW80C
-         jjYMMI8hE4do7y2SiM5T+Q1pFd0SDqvMJtTYw5wmkKkqqFPiPILZ65e1unQsKphBczQ/
-         kNcIC8QTTQwl6pEVj/mRCBhmJyAlP2RJRgC80CZwlxRdl/7GB9sxiseHyIzpexVswon9
-         Ecxw==
-X-Forwarded-Encrypted: i=1; AJvYcCVVqmkD+VFw1ZjmPnsmVOi/XaVWrSYVWVNnrmV5mlvxp4XbhPHmN896/CFNYEXrRo1zXa8kJe/G1z4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxaO1uSHwbT2ZQNuk2AFiy/tIkW3MuKPD/BVItuus6LUz7SZ+mu
-	F+aLE5KdSuKTYKeq++4QgwnKmZZPM10W1EDQ6ELINXwDI0gilRvfTrIl
-X-Gm-Gg: AeBDietZtP7Tz3y2IrjrKeLAZYrjJ8Ve27X8F9vNwKm3+N2U7B/rxXoNPK1flf6wv7M
-	AxGcDNsYfG9fH1hVeH7oznJjquaVtJpZAEVNw000oCcQmKN/PthJNlG1hEVF32DIChYc6uZ7Bab
-	QzfQ/Qjw1+jXMPulF1jZTRLAYfSTI26DcPFcm01GWB4mo/YwV8daum6MJ/yMoZpJt7mG+83zjox
-	yszoNaY7oEH3JQylSNB6axQeERzgseQHZpIjOocHj0e/I8YOJfEjt9xtm3KG21AhnoHXBtJyxMx
-	FZjOJU4aK6qrz+dUVVH2WQ9gXXYXp9USbBDBFssIsrZrAWXNf9yc1OEGJpNR1OvzMsgNptp0zUM
-	Vw229BwbP9Odr7yA0xmaS0eIkZdYbQxwkzDYMLtY1PoOz8hnhOO+50I3ZaueoC+g+xeaYJYIe76
-	YXupqg4HHbQsRrbQ3i8j6C2rZBeucoqj/u22NjGE0aM32vX+g=
-X-Received: by 2002:a05:7022:60a7:b0:12c:33dd:f9ff with SMTP id a92af1059eb24-12c34ef7bbbmr2055222c88.33.1775838142675;
-        Fri, 10 Apr 2026 09:22:22 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c346eb228sm4445290c88.9.2026.04.10.09.22.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Apr 2026 09:22:22 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Fri, 10 Apr 2026 09:22:21 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Victor Duicu <victor.duicu@microchip.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, marius.cristea@microchip.com
-Subject: Re: [PATCH v12 2/2] hwmon: add support for MCP998X
-Message-ID: <3025e1bc-9801-4483-b03c-f638767c1465@roeck-us.net>
-References: <20260403-add-mcp9982-hwmon-v12-0-b3bfb26ff136@microchip.com>
- <20260403-add-mcp9982-hwmon-v12-2-b3bfb26ff136@microchip.com>
+	s=arc-20240116; t=1775839504; c=relaxed/simple;
+	bh=Al8UDX+St5+hqgrM8EeBh0NKgOL/Jg8MLyaqcX9lsn8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Et42QWRQTdZWWfqkt3TZB5qpP7d/KfTpQ7vwbZdD9Hth1TkJQIap1tlAK4Ai+iZDWBoxgoHO4Jb7WyVfXhXI5eX6S0o7bkFKM//aFU4h36ucPy4aehSlf5gIJ2skxmY8/Qls8cNOQfk6iJYvI/fGOQUzsJePofXZ6v5FT3s8XcE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=X+/HAAKB; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 008EC41089
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1775839502; bh=ryfHyibcOmhifIzQAzx51A3HClOr4issYgV53upqN1s=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=X+/HAAKBGYxVQFyWOLBGsS3VYpCo/43KtllyzdvA9yDYtf16ukw+3ZKhLXwTrZAhf
+	 DmiQbFKW25zD/UfRzVuc7L+idtlwwabj9++iqTO4a27HENcgR6mjwJ2dbfwkqdjE3p
+	 UhLYn/Wfxiuy3ctwd1D0C6F9KsKGAu3t8VDtKTXKIzf8eMXhEZ/FlyidDIyro4gUXk
+	 NFnHpexP4AhoReYcsbn1lGcTwusSG6vEWIrZD+bePkO1cqPqkopGYSNdCXP6yCDMx2
+	 icp1fI0NgURI2NLKw4V1HFqyT4ZEbmk7YaNjROBnl79DEcQO3YZOcgY3VXWYSLxQXx
+	 E8DP35fhAGmPQ==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 008EC41089;
+	Fri, 10 Apr 2026 16:45:01 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Guenter Roeck <linux@roeck-us.net>, Sunny Patel <nueralspacetech@gmail.com>
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Shuah Khan
+ <skhan@linuxfoundation.org>, linux-watchdog@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] Documentation: Refactored watchdog old doc
+In-Reply-To: <fe3de980-e918-47ae-862a-969a5b117ae0@roeck-us.net>
+References: <132f7e64-4fc6-4274-a04e-e53f0b957665@roeck-us.net>
+ <20260410072825.19114-1-nueralspacetech@gmail.com>
+ <fe3de980-e918-47ae-862a-969a5b117ae0@roeck-us.net>
+Date: Fri, 10 Apr 2026 10:45:01 -0600
+Message-ID: <87ik9y229e.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260403-add-mcp9982-hwmon-v12-2-b3bfb26ff136@microchip.com>
+Content-Type: text/plain
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_FROM(0.00)[bounces-83053-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[roeck-us.net];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83054-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[lwn.net:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_TO(0.00)[roeck-us.net,gmail.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[roeck-us.net:mid,microchip.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 7BBC43DA646
+	RCPT_COUNT_SEVEN(0.00)[7];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,lwn.net:dkim,trenco.lwn.net:mid]
+X-Rspamd-Queue-Id: EFF8E3DAA7C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Fri, Apr 03, 2026 at 04:32:17PM +0300, Victor Duicu wrote:
-> Add driver for Microchip MCP998X/33 and MCP998XD/33D
-> Multichannel Automotive Temperature Monitor Family.
-> 
-> Signed-off-by: Victor Duicu <victor.duicu@microchip.com>
+Guenter Roeck <linux@roeck-us.net> writes:
 
-Applied.
+> On Fri, Apr 10, 2026 at 12:58:11PM +0530, Sunny Patel wrote:
+>> Good Point. So again revisited the watchdog core
+>> api and list out the deprecated one and marked
+>> as deprecated in doc and also mentioned it just
+>> for legacy driver and not for newer one.
+>> 
+>> As someof the legacy driver still have reference 
+>> to old api so just marked as deprecated in doc.
+>> 
+>> Also checked with other watchdog related api
+>> which are deprecated in driver but still present 
+>> in doc but didn't find any.
+>> 
+>> ---
+>
+> The above would show up as commit message, there is no change log, and
+> this e-mail was sent as response to v1. And I can see that without even
+> looking at the patch itself.
+>
+> That makes me wonder what Documentation/process/submitting-patches.rst
+> is useful for. No one seems to bother reading it. We might as well
+> just remove it.
 
-Thanks,
-Guenter
+It's good to point people at.
+
+I do think it needs a serious rewrite to, among other things, turn it
+into less of an intimidating tome.  On my list of things to do.  Now if
+I could only buy a larger drive to hold that whole list...
+
+jon
 
