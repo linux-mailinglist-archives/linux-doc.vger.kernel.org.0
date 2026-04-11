@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-83106-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83107-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mMclKi3b2mlr6wgAu9opvQ
-	(envelope-from <linux-doc+bounces-83106-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 01:37:17 +0200
+	id MBDQMB7f2mmj6wgAu9opvQ
+	(envelope-from <linux-doc+bounces-83107-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 01:54:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DD743E1F47
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 01:37:16 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 662D83E1F9C
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 01:54:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7DE183007B0E
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Apr 2026 23:37:13 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A479630087D8
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Apr 2026 23:54:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE00A3376A9;
-	Sat, 11 Apr 2026 23:37:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CEFB2E06EF;
+	Sat, 11 Apr 2026 23:54:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Sg4VpRv1"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="vPrG5ClW"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AD0A286D7D;
-	Sat, 11 Apr 2026 23:37:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07AD1213E7A;
+	Sat, 11 Apr 2026 23:54:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775950631; cv=none; b=i8Dee+iNCZiGkD5wtTpmlxxELZMvPjrIGexhlZwTDBxdFpX1jTX+Waraax0dKP4l+DAloPBbA3SBnpseNa/rWx9cn0azWwbf5yBKjFNr4p0EGdC2E7IAQkV8C/5WEF+nA6P3NlXaoncsfAF74Ove2sc9ux0iZfMiCPaPL24cuPM=
+	t=1775951642; cv=none; b=DmVVmaTog3p1Bpb8ExmF7sTCvhj32cAFbAOytPfsPsQauZwN8yYRrsBi1gzFba6vn4rZjKplpoM2WM7ree1XMK9yefeEkCpKWN+mhACett4xFfNl51vAgW8M3ze1Bpnnys21vKTVawz+vpC81PHTzDhYW6jEoQ41nxsqlg+AvBg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775950631; c=relaxed/simple;
-	bh=nVczTSsN/22a28ZgYVxVpViA5PatvMEOe+CWY5jZnYs=;
+	s=arc-20240116; t=1775951642; c=relaxed/simple;
+	bh=Dg3eabWS5jdPjdJ7DmahxrQkq8UHpRr4d3JdFrBD7gA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BMwUvFA62IhrlkQNKtKpuw7JWWDe2ygiu+Lb+l4A7jj6uDX/zprGVQL8RxVIUJ60TB5pK2nu2eeTjMgjEvcle7eHlQLeIjZWLxKbB9kLRgJBpYOu9S3acE+2Ul3KopmtFWPG8OkuQe79sDlBFHzM6H8vbZMMSaUZE2glvbBWATA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Sg4VpRv1; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=H8MH2QnBBrgrGibSL30SsmZ8Nwbyse3Lz6i3U4d0U+8Obr3kE6BtegmRai3Tsic3ScACvXZzGFwLCAEN8I4qC7Z7G4mjenfCpIAJ9EtkSH9wtBpHe7rUOTxLYCa1zEYP6Y1Ogp0JSnN5MHGEAcTgZ6IMLBERhzi6ikiqNa05p7I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=vPrG5ClW; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=jiJiQQBziS3d2HhMyYgZrgdeGQO+fTDyGzxTqqDYNGU=; b=Sg4VpRv1n72iEneLXUBZ//+ukB
-	ratDaxEZoXyXjWCg2Mm0Pd7ZwSFaUthJrem1ZavrDbH3vOAgLOJ3P3seoYTO4pBVZHf4fSAHMMf69
-	DgZ+nv6MQxHXDHD/oKQyfhn0FMuUsFw6g1HD+OBLtoKZMAvcs1nS/7VJsvdd4ubkq4y1+7swjbsXr
-	DRUU7MTLbKhzu9rczSVJVcrl/fGdO9ekafxOmUX+dHop1oUyXmxjxFYwWYv/r8b5oyNaUTE6oXMcy
-	bKytxXALF1yk9Y5kFSvE1YW40ztifnfd5SP7HMeZQ9AV10PeFDx53AsHEGcbW7dEfri02NoYTnQku
-	+sqX+Apg==;
+	bh=a21D2mEaR49HM+018yMEjZFvKYwCEV59EYaWrU9+pbk=; b=vPrG5ClWyjTBpUrhmgMSrPfIsu
+	zAp5hnvKYAYaxn1mY+UGNrE04gQ6rmV3OwKPx1A8LEhldOkUsy6OqVm/mq0nuZRJMmJJBrxofeSsF
+	SjmR1wy2QNWFAr3UWXMAy4TygHxi/q9gbarrwVl7Sld7+LTjJXdTUA15ah9xS+TnpSkvIX/jyoF4R
+	lXByajyjQT7sytPF8N4r3n+ZCkE3wq+prXXCPFNgkJYrggDGrOReLlLZ9ndlwX+4XzIUbQ300oaCZ
+	BoMDJDIYpcGvZP2F3bI085iuD55bW0P+N3WOu+yAGue3E2Tmq1clWCg3/8xpRzJEUFpJhT+utMtL7
+	urS5yjEw==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wBhsy-0000000Dt2Y-47HU;
-	Sat, 11 Apr 2026 23:37:09 +0000
-Message-ID: <ade1ca53-3137-4441-8389-145ba77ab765@infradead.org>
-Date: Sat, 11 Apr 2026 16:37:08 -0700
+	id 1wBi9I-0000000DtcN-2cjw;
+	Sat, 11 Apr 2026 23:54:00 +0000
+Message-ID: <d8804a85-dd2b-481e-903f-c6fea5d24c97@infradead.org>
+Date: Sat, 11 Apr 2026 16:54:00 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,77 +57,99 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [bvanassche:thread-safety 95/95] htmldocs:
- Documentation/mm/highmem:211: ./include/linux/highmem.h:222: WARNING: Error
- in declarator or parameters
-To: kernel test robot <lkp@intel.com>, Bart Van Assche <bvanassche@acm.org>
-Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org
-References: <202604120025.jtlnpWff-lkp@intel.com>
+Subject: Re: maintainer profiles
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Documentation <linux-doc@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Linux Kernel Workflows <workflows@vger.kernel.org>
+References: <b7775383-da94-4098-8af9-2f672c4f1a71@infradead.org>
+ <20260410101239.04c87f26@foz.lan>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <202604120025.jtlnpWff-lkp@intel.com>
+In-Reply-To: <20260410101239.04c87f26@foz.lan>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-83106-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_ALL(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83107-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCPT_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 9DD743E1F47
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,infradead.org:dkim,infradead.org:email,infradead.org:mid]
+X-Rspamd-Queue-Id: 662D83E1F9C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
+Hi,
 
+On 4/10/26 1:12 AM, Mauro Carvalho Chehab wrote:
+> On Thu, 9 Apr 2026 17:18:39 -0700
+> Randy Dunlap <rdunlap@infradead.org> wrote:
+> 
+>> Hi,
+>>
+>> Is there supposed to be a difference (or distinction) in the contents of
+>>
+>> Documentation/process/maintainer-handbooks.rst
+>> and
+>> Documentation/maintainer/maintainer-entry-profile.rst
+>> ?
+>>
+>> Can they be combined into one location?
+> 
+> Heh, from the 5 entries at maintainer-handbooks.rst:
+> 
+>    maintainer-netdev
+>    maintainer-soc
+>    maintainer-soc-clean-dts
+>    maintainer-tip
+>    maintainer-kvm-x86
+> 
+> we have 3 of them already there at maintainer-entry-profile.rst:
+> 
+>    $ grep process/ Documentation/maintainer/maintainer-entry-profile.rst
+>    ../process/maintainer-soc
+>    ../process/maintainer-soc-clean-dts
+>    ../process/maintainer-netdev
+> 
+> It sounds to me that moving maintainer-tip and maintainer-kvm-x86
+> to maintainer-entry-profile.rst would be enough to drop
+> maintainer-handbooks.rst, keeping them consolidated on a single
+> place.
 
-On 4/11/26 3:24 PM, kernel test robot wrote:
-> tree:   https://github.com/bvanassche/linux thread-safety
-> head:   834588da5a3bc2696586cdc98024dcebec97aeed
-> commit: 834588da5a3bc2696586cdc98024dcebec97aeed [95/95] treewide: Build fixes
-> compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-> docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-> reproduce: (https://download.01.org/0day-ci/archive/20260412/202604120025.jtlnpWff-lkp@intel.com/reproduce)
-> 
-> If you fix the issue in a separate patch/commit (i.e. not just a new version of
-> the same patch/commit), kindly add following tags
-> | Reported-by: kernel test robot <lkp@intel.com>
-> | Closes: https://lore.kernel.org/oe-kbuild-all/202604120025.jtlnpWff-lkp@intel.com/
-> 
-> All warnings (new ones prefixed by >>):
-> 
->    Runtime Survivability
->    ===================== [docutils]
->    WARNING: ./include/linux/highmem.h:235 function parameter '__maybe_unused' not described in 'clear_user_pages'
->    WARNING: ./include/linux/highmem.h:235 function parameter '__maybe_unused' not described in 'clear_user_pages'
->>> Documentation/mm/highmem:211: ./include/linux/highmem.h:222: WARNING: Error in declarator or parameters
->    Invalid C declaration: Expecting "," or ")" in parameters, got "_". [error at 55]
->    void clear_user_pages (void *addr, unsigned long vaddr __maybe_unused, struct page *page, unsigned int npages)
->    -------------------------------------------------------^
->    Documentation/mm/memfd_preservation:7: ./mm/memfd_luo.c:13: ERROR: Unexpected section title.
-> 
+Yes, maybe. How about in the other direction:
+move them all to maintainer-handbooks.rst?
 
-Patch for allowing __maybe_unused is here:
-https://lore.kernel.org/linux-doc/20260411233526.3909303-1-rdunlap@infradead.org/T/#u
+After all, maintainer-entry-profile.rst says:
+  For now, existing maintainer profiles are listed here; we will likely want
+  to do something different in the near future.
 
+Also, does anyone know why some of these profiles are numbered and some
+are not?  See
+  https://docs.kernel.org/maintainer/maintainer-entry-profile.html#existing-profiles
+for odd numbering.
+
+thanks.
 -- 
 ~Randy
 
