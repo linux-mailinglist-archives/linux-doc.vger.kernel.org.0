@@ -1,296 +1,239 @@
-Return-Path: <linux-doc+bounces-83114-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83129-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gKk2NrFr22k/BwkAu9opvQ
-	(envelope-from <linux-doc+bounces-83114-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 11:53:53 +0200
+	id 9R67CoaA22kRCwkAu9opvQ
+	(envelope-from <linux-doc+bounces-83129-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 13:22:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AC273E3566
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 11:53:53 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id D0ACA3E3A1C
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 13:22:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1FF24301B16F
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 09:53:52 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BD53A3016284
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 11:22:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9D98D374197;
-	Sun, 12 Apr 2026 09:53:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B838537757F;
+	Sun, 12 Apr 2026 11:22:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="g5wbfxET"
+	dkim=pass (2048-bit key) header.d=secunet.com header.i=@secunet.com header.b="Pz2d5ngx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx1.secunet.com (mx1.secunet.com [62.96.220.36])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4262E37418C
-	for <linux-doc@vger.kernel.org>; Sun, 12 Apr 2026 09:53:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C320611E;
+	Sun, 12 Apr 2026 11:22:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.96.220.36
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775987628; cv=none; b=CE1NjzJudqrYNMdVjpAy19G90kQ9UXeC+CckMrN9cS1BmJgIaUuuy7mnf873nE8Wn60Dn54Dy0t4ZpWk8LkEBRya5+/Sp2zkDCExHG9FVc7scML9sWgFH3lQhmhug+D/IeVXbBZrx6wnSZVD9mjKWOnzNVl0Vm0HkHqadTXfKSY=
+	t=1775992961; cv=none; b=Dpb42ZRWVo3aC76+kQMv6mgAVCzbvbwVYigYw2ByVRwmJ0mvZOTr5xaop9Ghtf8FRTcw7K0RWJmNrfHFZTPV/9gPC6l20yY/+Di2ManpqhlyLVeR9NnDt0iCUnBoqNHO1ChfiLKZo/ob+NNV6fp/vhr8z3Hkpu4MqluxDQ1/5aA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775987628; c=relaxed/simple;
-	bh=jZnww7sTjKwI8L3j9J7l3AfTgTXSm3kSCXq0cC+3GCY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=oQ5cjHezB1TiNpmxPopFKUJj6tpLRYcsxefu9CdcXQmJLcSztBp52Rri2iGTUtUTTuIpYJmm9nQv2uSBlxuesaX/en1gtlcNtRGHvgm/nhnLEHuM5cD4MSVn0MNdlcbkXbY6/CrOxJK9NHXIZqBXZR3GDOBOlMxsqXPJ3pYGw+I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=g5wbfxET; arc=none smtp.client-ip=209.85.214.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2ab232cc803so16995965ad.3
-        for <linux-doc@vger.kernel.org>; Sun, 12 Apr 2026 02:53:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775987626; x=1776592426; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BbD+flsfonZZoNyS69lUCHnSInbIfPoXujp36zcL6wg=;
-        b=g5wbfxETAjHJCUa2DZTN6+h+qHFV1d6qztpwTl3YQa047aQXh9chTHzfQRooTyWFty
-         7jhrnCeNhMEDTYk1omjaxUv2J3Tx+IIw7sFhCi7WDKIn5uHxnCBdOyAUxLvUxKD6cZWL
-         arpUMiNqXbjeXG4EYozDNjX83/LL1uwXP3+S4NuFOlCL+cANdp8RU+bZcaviLuAoxUc8
-         tur9JYBPtqWOXqN+JYrJSC/ggzy4ATfyQIyCT3APMvGsRBQyXF62g5kr1j4RC67BVnkR
-         E20mCysBNRt6af0xOKp+zAK0NjnoFDXN+Ex5dIpHcm8BEFHgkRQEzAaUARytKuZ0aDH+
-         Qe7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775987626; x=1776592426;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BbD+flsfonZZoNyS69lUCHnSInbIfPoXujp36zcL6wg=;
-        b=QMJyJO0M1QsK2RgI4YVRFJXymXXMDZfHM+lK4vedAWnWLV3p5LaXNfZZF1lJNHU3u+
-         tgpJ8IJrNHNNCy0ueKXIAs9xT8WEGNpgxZHaLEsIMgXwstyaHOXBGFRoU3QrM7QSYb+q
-         Ngk7OhfWrm2+DtAufnsXEkhkRGyo8H7AnTr/0YgnSzpCUncA53EnPyjVsyT3t8tzCHvT
-         FOBFlyhy7EXISZqLug6sTKIM77QEa6kkDgQL/Ov9ciYhN8zZc7W8egsIFWEY+EW2rxuh
-         ehdvdjt3umlPWZ8KKpuGHC9H8BEFUU3R1V7TDbTahmNbELnM6kCQ0U9X/PkRMxQvZAIW
-         KkvA==
-X-Gm-Message-State: AOJu0Yys7S43is0mTh+jqK015Z4VSFGRg+r1ZKAPyyN+nnMYW8b//91U
-	VIgMPz/tKokUGNy48a6qAKatp/WAMpwtHISj6FNHbq5EJwb1iKhVoL6RhSGeomK2dnc=
-X-Gm-Gg: AeBDievYG57bNBUPL7hBUn/VjtPhIlXEFIL+eEq44ylLgVTY2rDok681veOq+EImlz8
-	Z2Dbc4IeuNWFraxPinXS/GUSrPPJeUlkN4pG3iYSSFb1pBVxl7lRBPHODrfjJ5Aetqz137E8pBb
-	hFZTTIVLicBlyQ9gSdAYGnZ/eFlMCz0zdlm3askmPPEMcD0cYHrKFVH9fgUtpoAZ6GR7nMIV/nr
-	yN27XrkHUhl8WtZaMnqE8M5RfoH5Od7uQftobq3ds+oG2apyJLsiEmaf1oBBzg3/UH5eCQKt1fL
-	Dmb6mij5+JlZIvbF7NuMuU6IRsgX5FaXKPJBXxBvxZe19mO1jqH1HNtT/Y73QsQcyAoIlDdLLLT
-	SYMRkVMV0yYF6l73lljzlReplv9Wbqbb9fMXTqKzBSKrDYLXS2Mdv7stXE6dURS/Hot78HYbSUF
-	rtcDg9rU33yvKDr8MymzH5QT646/QAf7FFWQpfTur/y7z3
-X-Received: by 2002:a17:903:acb:b0:2b0:5cb4:d89d with SMTP id d9443c01a7336-2b2d5a698e9mr102220615ad.29.1775987626300;
-        Sun, 12 Apr 2026 02:53:46 -0700 (PDT)
-Received: from tech-Alienware-m15-R6.. ([122.171.18.84])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b2d4f099d6sm100360175ad.50.2026.04.12.02.53.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2026 02:53:45 -0700 (PDT)
-From: Sunny Patel <nueralspacetech@gmail.com>
-To: linux-doc@vger.kernel.org
-Cc: linux-watchdog@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	corbet@lwn.net,
-	wim@linux-watchdog.org,
-	linux@roeck-us.net,
-	rdunlap@infradead.org,
-	Sunny Patel <nueralspacetech@gmail.com>
-Subject: [PATCH v4] Documentation: Refactored watchdog old doc
-Date: Sun, 12 Apr 2026 15:23:20 +0530
-Message-ID: <20260412095338.52271-1-nueralspacetech@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	s=arc-20240116; t=1775992961; c=relaxed/simple;
+	bh=iBNjYsOrio//Ay0V6xwTccoGVXeBWtCDF2/0I6PEsfw=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Fl896e0hTI8LguwxAil3zb0KWNzsaWkVUIJ8cWmu95Nuox+yMHZV1mAyChcv2pDYwzf6d2c/x+enS5Sqf/Mab5DoAmxHK7wtsxWbUrrLPx0NLkYY8hSMXXJmyYExTFuol6N/P57b5Klby4SGcX2cie+ifpahLEOaDCtQSuDzDXw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=secunet.com; spf=pass smtp.mailfrom=secunet.com; dkim=pass (2048-bit key) header.d=secunet.com header.i=@secunet.com header.b=Pz2d5ngx; arc=none smtp.client-ip=62.96.220.36
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=secunet.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=secunet.com
+Received: from localhost (localhost [127.0.0.1])
+	by mx1.secunet.com (Postfix) with ESMTP id E8DC82074B;
+	Sun, 12 Apr 2026 13:13:42 +0200 (CEST)
+X-Virus-Scanned: by secunet
+Received: from mx1.secunet.com ([127.0.0.1])
+ by localhost (mx1.secunet.com [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id gvTCIENBFBg1; Sun, 12 Apr 2026 13:13:41 +0200 (CEST)
+Received: from EXCH-02.secunet.de (rl2.secunet.de [10.32.0.232])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mx1.secunet.com (Postfix) with ESMTPS id BFEA0206D0;
+	Sun, 12 Apr 2026 13:13:41 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.secunet.com BFEA0206D0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=secunet.com;
+	s=202301; t=1775992421;
+	bh=gZJ7GNYkUq6UaGxnX5FoViWKc0OegygDesbAYyGRBqU=;
+	h=From:To:CC:Subject:Date:From;
+	b=Pz2d5ngxjbqS3jln5dUIzy8HRab5BS7dRBrJRilq0/kSvo1YRfYB+aoZE3jswcHuw
+	 w2NEAxZFToODLQHfrgfPI4KEfrMtMro5hyceM4I9SDJkzUGwCID0GEvQSw5eBIiv45
+	 4Y2rqbSQ+XfLdsjpXn8DBJP7+GRwjfhLiHM0F/q/V+vjBPP4wRIrF9g0Xesxg9pSCt
+	 I3uyo21/ZDozsTS3MGJ96kTjo1qxLLlKNXhbOXhQw3fU/fc1WTxLPUcyzlpcQgeW9W
+	 ZstNrS/0/RhsE9XhQ5NxrQuJxMc9jObaxIIpatMklFsw8l8RTUrdhT/0a+uBD6CfFH
+	 ZgzamxLk5970w==
+Received: from moon.secunet.de (172.18.149.1) by EXCH-02.secunet.de
+ (10.32.0.172) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Sun, 12 Apr
+ 2026 13:13:40 +0200
+From: Antony Antony <antony.antony@secunet.com>
+To: Antony Antony <antony.antony@secunet.com>, Steffen Klassert
+	<steffen.klassert@secunet.com>, Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon
+ Horman <horms@kernel.org>, David Ahern <dsahern@kernel.org>, Masahide
+ NAKAMURA <nakam@linux-ipv6.org>, Paul Moore <paul@paul-moore.com>, Stephen
+ Smalley <stephen.smalley.work@gmail.com>, Ondrej Mosnacek
+	<omosnace@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+	<skhan@linuxfoundation.org>
+CC: <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<selinux@vger.kernel.org>, <linux-doc@vger.kernel.org>, Chiachang Wang
+	<chiachangwang@google.com>, Yan Yan <evitayan@google.com>,
+	<devel@linux-ipsec.org>
+Subject: [PATCH ipsec-next v7 00/14] xfrm: XFRM_MSG_MIGRATE_STATE new netlink message
+Date: Sun, 12 Apr 2026 13:13:21 +0200
+Message-ID: <migrate-state-v7-0-44eb2440b91c@secunet.com>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+X-Change-ID: migrate-state-063ee0342680
+X-Mailer: b4 0.15-dev
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-ClientProxiedBy: EXCH-04.secunet.de (10.32.0.184) To EXCH-02.secunet.de
+ (10.32.0.172)
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[secunet.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[secunet.com:s=202301];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,linux-watchdog.org,roeck-us.net,infradead.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-83114-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83129-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[secunet.com,gondor.apana.org.au,davemloft.net,google.com,kernel.org,redhat.com,linux-ipv6.org,paul-moore.com,gmail.com,lwn.net,linuxfoundation.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nueralspacetech@gmail.com,linux-doc@vger.kernel.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,secunet.com:dkim,secunet.com:email,secunet.com:mid];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[antony.antony@secunet.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[secunet.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 5AC273E3566
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: D0ACA3E3A1C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Mark WDIOC_GETTEMP and WDIOS_TEMPPANIC as deprecated since
-neither is implemented by the watchdog core and both are only
-present in a small number of legacy drivers.
+The current XFRM_MSG_MIGRATE interface is tightly coupled to policy and
+SA migration, and it lacks the information required to reliably migrate
+individual SAs. This makes it unsuitable for IKEv2 deployments,
+dual-stack setups (IPv4/IPv6), and scenarios where policies are managed
+externally (e.g., by daemons other than the IKE daemon).
 
-Add documentation for previously undocumented status bits
-WDIOF_MAGICCLOSE and WDIOF_ALARMONLY in the options field.
+Mandatory SA selector list
+The current API requires a non-empty SA selector list, which does not
+reflect the IKEv2 use case.
+A single Child SA may correspond to multiple policies,
+and SA discovery already occurs via address and reqid matching. With
+dual-stack Child SAs this leads to excessive churn: the current method
+would have to be called up to six times (in/out/fwd × v4/v6) on SA,
+while the new method only requires two calls.
 
-Add documentation for WDIOF_PRETIMEOUT and WDIOF_SETTIMEOUT
-status bits describing their respective ioctls.
+Selectors lack SPI (and marks)
+XFRM_MSG_MIGRATE cannot uniquely identify an SA when multiple SAs share
+the same policies (per-CPU SAs, SELinux label-based SAs, etc.). Without
+the SPI, the kernel may update the wrong SA instance.
 
-Fix the following issues in existing documentation:
-  - Remove version-specific reference to Linux 2.4.18 from
-    the GETTIMEOUT ioctl description
-  - Fix duplicate "was is" in printf format strings
-  - Replace [FIXME] placeholder with proper descriptions for
-    WDIOS_DISABLECARD, WDIOS_ENABLECARD and WDIOS_TEMPPANIC
+Reqid cannot be changed
+Some implementations allocate reqids based on traffic selectors. In
+host-to-host or selector-changing scenarios, the reqid must change,
+which the current API cannot express.
 
-Signed-off-by: Sunny Patel <nueralspacetech@gmail.com>
+Because strongSwan and other implementations manage policies
+independently of the kernel, an interface that updates only a specific
+SA - with complete and unambiguous identification - is required.
+
+SA Selector, x->sel, can't be changed, especially Transport mode.
+
+XFRM_MSG_MIGRATE_STATE provides that interface. It supports migration
+of a single SA via xfrm_usersa_id (including SPI) and we fix
+encap removal in this patch set, reqid updates, address changes,
+and other SA-specific parameters. It avoids the structural limitations
+of XFRM_MSG_MIGRATE and provides a simpler, extensible mechanism for
+precise per-SA migration without involving policies.
+This method also allows migtrating SA selectors typically used with
+host-to-host in Transport mode.
+
+New migration steps: first install block policy, remove the old policy,
+call XFRM_MSG_MIGRATE_STATE for each state, then re-install the
+policies and remove the block policy.
+
+If the target SA tuple (daddr, SPI, proto, family) is already
+occupied, the operation returns -EEXIST. In this case the original
+SA is not preserved. Userspace must handle -EEXIST by
+re-establishing the SA at the IKE level and manage policies.
+
 ---
+v6->v7: - add SA selectoor migration
+	- fixes to commit messages
+	- white space removal
 
-Changes in v4:
-  - Fixed WDIOS_DISABLECARD description: corrected inverted logic —
-    the ioctl disables the hardware timer entirely rather than
-    stopping pings. Clarified that userspace, not the kernel driver,
-    is primarily responsible for pinging under normal operation.
+Link to v6: https://lore.kernel.org/r/migrate-state-v6-0-9df9764ddb9e@secunet.com
+v5->v6: - add mark to look up SA.
+	- restrict netlink attributes in new method
+	- address review feedback from Sabrina
+	- add new patch to fix existing inter-family address comparison
+	- add extack xfrm_state_init()
+	- Feedback from Yan : omit-to-inherit add migrating marks
+	- Drop missing __rcu annotation on nlsk, Sabrina has a better patch
 
-Apologies for the broken mail threading on v2 and v3 as well.
+Link to v5: https://lore.kernel.org/all/cover.1769509130.git.antony.antony@secunet.com/
+v4->v5: add synchronize after migrate and delete it inside a lock
+	- split xfrm_state_migrate into create and install functions
+Link to v4: https://lore.kernel.org/all/cover.1768811736.git.antony.antony@secunet.com/
 
- Documentation/watchdog/watchdog-api.rst | 65 +++++++++++++++++++++----
- 1 file changed, 55 insertions(+), 10 deletions(-)
+v3->v4: add patch to fix pre-existing missing __rcu annotation on nlsk
 
-diff --git a/Documentation/watchdog/watchdog-api.rst b/Documentation/watchdog/watchdog-api.rst
-index 78e228c272cf..43ca6b2bbeff 100644
---- a/Documentation/watchdog/watchdog-api.rst
-+++ b/Documentation/watchdog/watchdog-api.rst
-@@ -2,7 +2,7 @@
- The Linux Watchdog driver API
- =============================
- 
--Last reviewed: 10/05/2007
-+Last reviewed: 04/08/2026
- 
- 
- 
-@@ -42,7 +42,7 @@ activates as soon as /dev/watchdog is opened and will reboot unless
- the watchdog is pinged within a certain time, this time is called the
- timeout or margin.  The simplest way to ping the watchdog is to write
- some data to the device.  So a very simple watchdog daemon would look
--like this source file:  see samples/watchdog/watchdog-simple.c
-+like this source file: see samples/watchdog/watchdog-simple.c
- 
- A more advanced driver could for example check that a HTTP server is
- still responding before doing the write call to ping the watchdog.
-@@ -106,11 +106,10 @@ the requested one due to limitation of the hardware::
- This example might actually print "The timeout was set to 60 seconds"
- if the device has a granularity of minutes for its timeout.
- 
--Starting with the Linux 2.4.18 kernel, it is possible to query the
--current timeout using the GETTIMEOUT ioctl::
-+It is also possible to get the current timeout with the GETTIMEOUT ioctl::
- 
-     ioctl(fd, WDIOC_GETTIMEOUT, &timeout);
--    printf("The timeout was is %d seconds\n", timeout);
-+    printf("The timeout is %d seconds\n", timeout);
- 
- Pretimeouts
- ===========
-@@ -133,7 +132,7 @@ seconds.  Setting a pretimeout to zero disables it.
- There is also a get function for getting the pretimeout::
- 
-     ioctl(fd, WDIOC_GETPRETIMEOUT, &timeout);
--    printf("The pretimeout was is %d seconds\n", timeout);
-+    printf("The pretimeout is %d seconds\n", timeout);
- 
- Not all watchdog drivers will support a pretimeout.
- 
-@@ -145,12 +144,12 @@ before the system will reboot. The WDIOC_GETTIMELEFT is the ioctl
- that returns the number of seconds before reboot::
- 
-     ioctl(fd, WDIOC_GETTIMELEFT, &timeleft);
--    printf("The timeout was is %d seconds\n", timeleft);
-+    printf("The timeout is %d seconds\n", timeleft);
- 
- Environmental monitoring
- ========================
- 
--All watchdog drivers are required return more information about the system,
-+All watchdog drivers are required to return more information about the system,
- some do temperature, fan and power level monitoring, some can tell you
- the reason for the last reboot of the system.  The GETSUPPORT ioctl is
- available to ask what the device can do::
-@@ -227,12 +226,33 @@ The watchdog saw a keepalive ping since it was last queried.
- 	WDIOF_SETTIMEOUT	Can set/get the timeout
- 	================	=======================
- 
--The watchdog can do pretimeouts.
-+The watchdog supports timeout set/get via the WDIOC_SETTIMEOUT and
-+WDIOC_GETTIMEOUT ioctls.
- 
- 	================	================================
- 	WDIOF_PRETIMEOUT	Pretimeout (in seconds), get/set
- 	================	================================
- 
-+The watchdog supports a pretimeout, a warning interrupt that fires before
-+the actual reboot timeout. Use WDIOC_SETPRETIMEOUT and WDIOC_GETPRETIMEOUT
-+to set/get the pretimeout.
-+
-+	================	================================
-+	WDIOF_MAGICCLOSE	Supports magic close char
-+	================	================================
-+
-+The driver supports the Magic Close feature. The watchdog is only disabled
-+if the character 'V' is written to /dev/watchdog before the file descriptor
-+is closed. Without writing 'V' before closing, the watchdog remains active
-+and will trigger a reboot after the timeout expires.
-+
-+	================	================================
-+	WDIOF_ALARMONLY		Not a reboot watchdog
-+	================	================================
-+
-+The watchdog will not reboot the system when it expires. Instead it
-+triggers a management or other external alarm. Userspace should not
-+rely on a system reboot occurring.
- 
- For those drivers that return any bits set in the option field, the
- GETSTATUS and GETBOOTSTATUS ioctls can be used to ask for the current
-@@ -254,6 +274,11 @@ returned value is the temperature in degrees Fahrenheit::
-     int temperature;
-     ioctl(fd, WDIOC_GETTEMP, &temperature);
- 
-+.. note::
-+	``WDIOC_GETTEMP`` is not implemented by the watchdog core and is
-+	considered deprecated. It is only supported by a small number of
-+	legacy drivers. New drivers should not implement it.
-+
- Finally the SETOPTIONS ioctl can be used to control some aspects of
- the cards operation::
- 
-@@ -268,4 +293,24 @@ The following options are available:
- 	WDIOS_TEMPPANIC		Kernel panic on temperature trip
- 	=================	================================
- 
--[FIXME -- better explanations]
-+``WDIOS_DISABLECARD`` disables the hardware watchdog timer entirely,
-+allowing a controlled system shutdown without triggering a reboot.
-+Userspace is responsible for pinging the watchdog under normal
-+operation; this ioctl stops the underlying hardware timer so that
-+the absence of pings no longer causes a system reset.
-+
-+``WDIOS_ENABLECARD`` starts the watchdog timer. If the watchdog was
-+previously stopped via ``WDIOS_DISABLECARD``, this will re-enable it. The
-+hardware watchdog will begin counting down from the configured timeout.
-+
-+``WDIOS_TEMPPANIC`` enables temperature-based kernel panic. When set,
-+the driver will call ``panic()`` (or ``kernel_power_off()`` on some
-+drivers) if the hardware temperature sensor exceeds its threshold,
-+rather than only setting the ``WDIOF_OVERHEAT`` status bit. Support
-+for this option is driver-specific; not all watchdog drivers implement
-+temperature monitoring.
-+
-+.. note::
-+	``WDIOS_TEMPPANIC`` is not implemented by the watchdog core and is
-+	considered deprecated. It is only present in a small number of
-+	legacy drivers. New drivers should not implement it.
--- 
-2.43.0
+v2->v3: - fix commit message formatting
+
+v1->v2: dropped 6/6. That check is already there where the func is called
+	- merged patch 4/6 and 5/6, to fix use uninitialized value
+	- fix commit messages
+
+---
+Antony Antony (14):
+      xfrm: remove redundant assignments
+      xfrm: add extack to xfrm_init_state
+      xfrm: allow migration from UDP encapsulated to non-encapsulated ESP
+      xfrm: fix NAT-related field inheritance in SA migration
+      xfrm: rename reqid in xfrm_migrate
+      xfrm: split xfrm_state_migrate into create and install functions
+      xfrm: check family before comparing addresses in migrate
+      xfrm: add state synchronization after migration
+      xfrm: add error messages to state migration
+      xfrm: move encap and xuo into struct xfrm_migrate
+      xfrm: refactor XFRMA_MTIMER_THRESH validation into a helper
+      xfrm: add XFRM_MSG_MIGRATE_STATE for single SA migration
+      xfrm: restrict netlink attributes for XFRM_MSG_MIGRATE_STATE
+      xfrm: add documentation for XFRM_MSG_MIGRATE_STATE
+
+ Documentation/networking/xfrm/index.rst            |   1 +
+ .../networking/xfrm/xfrm_migrate_state.rst         | 230 ++++++++++++++
+ include/net/xfrm.h                                 |  78 ++++-
+ include/uapi/linux/xfrm.h                          |  21 ++
+ net/ipv4/ipcomp.c                                  |   2 +-
+ net/ipv6/ipcomp6.c                                 |   2 +-
+ net/key/af_key.c                                   |  12 +-
+ net/xfrm/xfrm_device.c                             |   2 +-
+ net/xfrm/xfrm_policy.c                             |  27 +-
+ net/xfrm/xfrm_state.c                              | 144 +++++----
+ net/xfrm/xfrm_user.c                               | 344 ++++++++++++++++++++-
+ security/selinux/nlmsgtab.c                        |   3 +-
+ 12 files changed, 769 insertions(+), 97 deletions(-)
+---
+base-commit: be14d13625c9b070c33c423026b598ed65695225
+change-id: migrate-state-063ee0342680
+
+Best regards,
+--  
+Antony Antony <antony.antony@secunet.com>
 
 
