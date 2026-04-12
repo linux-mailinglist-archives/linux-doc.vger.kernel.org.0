@@ -1,295 +1,557 @@
-Return-Path: <linux-doc+bounces-83170-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83172-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mPnWGUsQ3GmhLwkAu9opvQ
-	(envelope-from <linux-doc+bounces-83170-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 23:36:11 +0200
+	id SMQ7ISUU3GnYMAkAu9opvQ
+	(envelope-from <linux-doc+bounces-83172-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 23:52:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C22493E6308
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 23:36:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF19F3E63BC
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 23:52:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3678C3023DFF
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 21:34:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4AE163010149
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 21:51:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B58A8381B13;
-	Sun, 12 Apr 2026 21:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4CFD314A79;
+	Sun, 12 Apr 2026 21:51:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UBW49DbM"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="eQDH0Omd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE47D37C939
-	for <linux-doc@vger.kernel.org>; Sun, 12 Apr 2026 21:34:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBE763126CD;
+	Sun, 12 Apr 2026 21:51:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776029693; cv=none; b=bPirUGCTSNrPLt17vL6x5ZtvJ6Yhbl1EUJcvFod0oZ8+rpRRSo/+fEeQg2uKO7KPRU+Z6fbdve0E1H6qUy5zyHduo5r7tqny/nZ0BeSWglgm1LA2F++y9aSlbTOFexNvraogs10GGY8q4IR5wYqZ9HKlFW3OiHho2KbVX9Kyzek=
+	t=1776030681; cv=none; b=j1AEJeZqZi0skIg4eK6S6keWYE7O1eWPH5qA8/AgJnvYDqnvPa5zfRbu061mdIUVRBPkoaE7ur8jl6dviaKI15/OY7SDsk2o4cvcLA+A6G1HKp6W1wM4ixQtfqZrhioHEyvgnWp1w49ii+tV7EBocOfQATqkNVSjZhjQJ4R+ZTc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776029693; c=relaxed/simple;
-	bh=2AGszRwHKTSDt/GHBeWYWXUzp1RHL73AGLPVW8OTujw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iotr0vlhtZk9qkZWeQoavp9DCrtfltEcIx+HzRPa/t5esLk0dLAJGLg6mjnr7Huj0g7ZBzepvhYwuCh7fQH4WpulFt8WFhYAg7AKBU0XaW16JYMT8qLDvBxQU+RDvhDigmzvvlAVAlt4gW68ji4uDEihP2pYovHhQeV6vnUYIxo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UBW49DbM; arc=none smtp.client-ip=74.125.82.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-12c20010f10so9728256c88.0
-        for <linux-doc@vger.kernel.org>; Sun, 12 Apr 2026 14:34:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776029691; x=1776634491; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TOgAYENScOZ7pTYhzspnmWOqUMT/Bqb4/z+V10phsHU=;
-        b=UBW49DbMmp4eCpyirwFWwAWYbiY5q0w+Q1IW7l5pDp4Am3k1VUahWkEXBlB0LoP+Fm
-         2qRdKVCwr9r22b2Njz5fNNrrA8onDT7Ofj/CL6u+ndBB3jv1MwdIX3jIxOeqypPImiXE
-         6+2DrTs7dmd9qCL5pA/pezoiCQHuwVpiEfs06F8ccmTs/RZKRzlr38afPnvjxAE9DPYl
-         2ywWstPmiqw897hxu0AZMrUq8mwK2jfP4r2qXh1++3gsp0aEPfOXjFLuyC1eV5RBv4/k
-         Q5Xtxka09s4RrFavLettgzwrNpOvgaBW/jvh9Df3LE7ViG+7cJB6khA7678lNMuGdaTI
-         kDlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776029691; x=1776634491;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=TOgAYENScOZ7pTYhzspnmWOqUMT/Bqb4/z+V10phsHU=;
-        b=oe2VVgCStDvDsg3rWGdZcmYIDdEXeIpoLSLTL78BmlTogHpWwsFYS4jtfaRjapjrX+
-         ibnOBtA/Dxr1Rj5oqdZ5f6itS2a10YH4FI9QflZfCQ7scNwLAiHS0H79OecarOcq8AIu
-         A+/Wd7TQ8fVJmbaPE8uDHfAorVejXdhcJUPkk7lr9xDYptKr1J+nFt9Hv5KGK1B2Q8fn
-         lt4qKSbWpo7i7te1aRbDVeySgnOIQ5XQsIVPkOIRdOVz2VU+N+LOqeZZUxEazivlvLkJ
-         WfwIwrKTORs8+1yy2Rv6ESBc19gNNDS4K8FZahMV5EyiCaGtJOTH5Ds6467WoxXCEkwU
-         6xcQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW8oQ4aDPZMz3LCDbu61aDY9R7zMMCIZT58KzIRZDmqYAs4qGpktLeZsJX4s/caK53RnQIYnmALrFE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzkNj13/X57dZVVooEmg9/gVQ/SJoz0sQPUYpV0xwP+iyaZgYZ6
-	p9/K1WnUkICcxaO1dOGQqkJCzvAL12H1a7G3vUchQJ337FjvMPt1Zjp7
-X-Gm-Gg: AeBDievjquiNo9R3UdfvfvW/VvkubK+OLcd16S8WJvoa4nbLxA+BzFqd4pXwN+KWW+p
-	9n5fYfzPWRg1tVLHGVlxnROw+8cKbuAKtfolUOKkS2I8hVh2v82nXZtCnrj3pda/K4IphKdz0xW
-	Y91qIJBtPdI1bth5G1AI92wgF1ZD/Jb8HLDbGAU5IRB4Y3j6+U1dUsOxIQCa+f34j/mOdOMCbvf
-	VfhWDkWm7bN9via2rAaxvmXSRp1a8Ll8YaEr1HpY/fYHfNCVoDZ96gBPH5fbe0arREjA6aDOH/v
-	aNizQqXjEXmuMvBv6mKbf/TvheMBiC9kFpU3npgzNF+g3pm1qsG0OvxiEKceJhI6kRmc113I3G6
-	vyLHGMEWrwuFmHTRYWSUGldWmivox/LWz/0F6cRWY94c1Gyh4XWQMwFAvza0urg4WxfovFJlCNV
-	e31pMapuDbVcHWZiWtJwiMYv3it4LU2p81uJ/6+JpOkF1tZLL0qBq1CHLsf+2E9I6jdm0COVuMG
-	Qc+
-X-Received: by 2002:a05:7022:6085:b0:12b:ee7b:51e9 with SMTP id a92af1059eb24-12c34e3f299mr6814611c88.4.1776029691033;
-        Sun, 12 Apr 2026 14:34:51 -0700 (PDT)
-Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c345b5b9dsm10631736c88.7.2026.04.12.14.34.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Apr 2026 14:34:50 -0700 (PDT)
-From: "Derek J. Clark" <derekjohn.clark@gmail.com>
-To: Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>
-Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
-	Lambert Fan <fanzhaoming@anopc.com>,
-	Zhouwang Huang <honjow311@gmail.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	linux-input@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 5/5] HID: hid-oxp: Add Vibration Intensity Attribute
-Date: Sun, 12 Apr 2026 21:34:44 +0000
-Message-ID: <20260412213444.2231505-6-derekjohn.clark@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260412213444.2231505-1-derekjohn.clark@gmail.com>
-References: <20260412213444.2231505-1-derekjohn.clark@gmail.com>
+	s=arc-20240116; t=1776030681; c=relaxed/simple;
+	bh=Evw1ssSF+o1/IlASNsdW6nI5+Y+t8SQaHNaAqPcPhnA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=DbE3jPuI104LORYEEkEH4wdhiSaipbMQw/bhv7kieygCW4zm/VnPQbNm5ghmajhNnqwBwPghQU+eA0kvvpEDhXVq9YI5AURnQDhXfJxUUtKs2V2dTlj1n0kzKf9K5pLE+WmHWFaiL38f0UM2mcmh5K9jBpp8umTb8+VjaL8UHxc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=eQDH0Omd; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 0E066410AA
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1776030679; bh=s2H8dBht0Wl1frY08R2NC+tk1TF2lzcuqg3AJ0Z1CGo=;
+	h=From:To:Cc:Subject:Date:From;
+	b=eQDH0OmdU1uuftvAEOgTCjiHGD6thwCUQMNVwBmgHGi0ujvuqlPwrtWXuV6WMClzh
+	 7Q7ou0ECktXN+HSmIUoDO3554bpaXfKFBGKrj6IryC20aZhqfJWABWMu6qWnggplmh
+	 PAGpBg/8O20qlMQP1vysv5IeBUaW0xrgsyMhhPPB3CteE71qpAjS4EahSgqHF22nQp
+	 erj93Z/CYNkPgwIwip4pUY/IUzHTMy1ik2OwIa4izF8dnmTb4DvRZASrw5BTsdjXoU
+	 OdLzV0ZRZ0z28g09j8/jaP6NTZFrDPADyBmKjzNtPAEMdhk3jlbDXLndcMq2SydFbt
+	 HsIYG8/Ga4CWg==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 0E066410AA;
+	Sun, 12 Apr 2026 21:51:18 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Linus Torvalds <torvalds@linuxfoundation.org>
+Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Shuah Khan
+ <shuah@kernel.org>
+Subject: [GIT PULL] Documentation for 7.1
+Date: Sun, 12 Apr 2026 15:51:18 -0600
+Message-ID: <87bjfnzw2x.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83170-lists,linux-doc=lfdr.de];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[valvesoftware.com,anopc.com,gmail.com,vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83172-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: C22493E6308
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	RCPT_COUNT_THREE(0.00)[4];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: DF19F3E63BC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Adds attribute for setting the rumble intensity level. This setting must
-be re-applied after the gamepad mode is set as doing so resets this to
-the default value.
+The following changes since commit 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f:
 
-Reviewed-by: Zhouwang Huang <honjow311@gmail.com>
-Tested-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
----
- drivers/hid/hid-oxp.c | 78 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 78 insertions(+)
+  Linux 7.0-rc1 (2026-02-22 13:18:59 -0800)
 
-diff --git a/drivers/hid/hid-oxp.c b/drivers/hid/hid-oxp.c
-index 959ec1a90d22..a4e9d41bd3a7 100644
---- a/drivers/hid/hid-oxp.c
-+++ b/drivers/hid/hid-oxp.c
-@@ -34,6 +34,7 @@ enum oxp_function_index {
- 	OXP_FID_GEN1_RGB_SET =		0x07,
- 	OXP_FID_GEN1_RGB_REPLY =	0x0f,
- 	OXP_FID_GEN2_TOGGLE_MODE =	0xb2,
-+	OXP_FID_GEN2_RUMBLE_SET =	0xb3,
- 	OXP_FID_GEN2_KEY_STATE =	0xb4,
- 	OXP_FID_GEN2_STATUS_EVENT =	0xb8,
- };
-@@ -178,6 +179,7 @@ static struct oxp_hid_cfg {
- 	struct mutex cfg_mutex; /*ensure single synchronous output report*/
- 	u8 rgb_brightness;
- 	u8 gamepad_mode;
-+	u8 rumble_intensity;
- 	u8 rgb_effect;
- 	u8 rgb_speed;
- 	u8 rgb_en;
-@@ -263,6 +265,11 @@ static const char *const oxp_rgb_effect_text[] = {
- 	[OXP_EFFECT_MONO_LIST] = "monocolor",
- };
- 
-+enum oxp_rumble_side_index {
-+	OXP_RUMBLE_LEFT = 0x00,
-+	OXP_RUMBLE_RIGHT,
-+};
-+
- struct oxp_gen_1_rgb_report {
- 	u8 report_id;
- 	u8 message_id;
-@@ -338,6 +345,7 @@ static int oxp_hid_raw_event_gen_1(struct hid_device *hdev,
- 
- static int oxp_gen_2_property_out(enum oxp_function_index fid, u8 *data, u8 data_size);
- static int oxp_set_buttons(void);
-+static int oxp_rumble_intensity_set(u8 intensity);
- 
- static void oxp_mcu_init_fn(struct work_struct *work)
- {
-@@ -365,6 +373,12 @@ static void oxp_mcu_init_fn(struct work_struct *work)
- 	if (ret)
- 		dev_err(&drvdata.hdev->dev,
- 			"Error: Failed to set gamepad mode: %i\n", ret);
-+
-+	/* Set vibration level */
-+	ret = oxp_rumble_intensity_set(drvdata.rumble_intensity);
-+	if (ret)
-+		dev_err(&drvdata.hdev->dev,
-+			"Error: Failed to set rumble intensity: %i\n", ret);
- }
- 
- static DECLARE_DELAYED_WORK(oxp_mcu_init, oxp_mcu_init_fn);
-@@ -513,6 +527,14 @@ static ssize_t gamepad_mode_store(struct device *dev,
- 
- 	drvdata.gamepad_mode = data[0];
- 
-+	if (drvdata.gamepad_mode == OXP_GP_MODE_DEBUG)
-+		return count;
-+
-+	/* Re-apply rumble settings as switching gamepad mode will override */
-+	ret = oxp_rumble_intensity_set(drvdata.rumble_intensity);
-+	if (ret)
-+		return ret;
-+
- 	return count;
- }
- 
-@@ -858,6 +880,59 @@ static ssize_t button_mapping_options_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(button_mapping_options);
- 
-+static int oxp_rumble_intensity_set(u8 intensity)
-+{
-+	u8 header[15] = { 0x02, 0x38, 0x02, 0xe3, 0x39, 0xe3, 0x39, 0xe3,
-+			  0x39, 0x01, intensity, 0x05, 0xe3, 0x39, 0xe3 };
-+	u8 footer[9] = { 0x39, 0xe3, 0x39, 0xe3, 0xe3, 0x02, 0x04, 0x39, 0x39 };
-+	size_t footer_size = ARRAY_SIZE(footer);
-+	size_t header_size = ARRAY_SIZE(header);
-+	u8 data[59] = { 0x0 };
-+	size_t data_size = ARRAY_SIZE(data);
-+
-+	memcpy(data, header, header_size);
-+	memcpy(data + data_size - footer_size, footer, footer_size);
-+
-+	return oxp_gen_2_property_out(OXP_FID_GEN2_RUMBLE_SET, data, data_size);
-+}
-+
-+static ssize_t rumble_intensity_store(struct device *dev,
-+				      struct device_attribute *attr, const char *buf,
-+				      size_t count)
-+{
-+	int ret;
-+	u8 val;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val < 0 || val > 5)
-+		return -EINVAL;
-+
-+	ret = oxp_rumble_intensity_set(val);
-+	if (ret)
-+		return ret;
-+
-+	drvdata.rumble_intensity = val;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_show(struct device *dev,
-+				     struct device_attribute *attr, char *buf)
-+{
-+	return sysfs_emit(buf, "%i\n", drvdata.rumble_intensity);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity);
-+
-+static ssize_t rumble_intensity_range_show(struct device *dev,
-+					   struct device_attribute *attr, char *buf)
-+{
-+	return sysfs_emit(buf, "0-5\n");
-+}
-+static DEVICE_ATTR_RO(rumble_intensity_range);
-+
- #define OXP_DEVICE_ATTR_RW(_name, _group)                                     \
- 	static ssize_t _name##_store(struct device *dev,                      \
- 				     struct device_attribute *attr,           \
-@@ -949,6 +1024,8 @@ static struct attribute *oxp_cfg_attrs[] = {
- 	&dev_attr_gamepad_mode.attr,
- 	&dev_attr_gamepad_mode_index.attr,
- 	&dev_attr_reset_buttons.attr,
-+	&dev_attr_rumble_intensity.attr,
-+	&dev_attr_rumble_intensity_range.attr,
- 	NULL,
- };
- 
-@@ -1422,6 +1499,7 @@ static int oxp_cfg_probe(struct hid_device *hdev, u16 up)
- 	drvdata.bmap_2 = bmap_2;
- 	oxp_reset_buttons();
- 	drvdata.gamepad_mode = OXP_GP_MODE_XINPUT;
-+	drvdata.rumble_intensity = 5;
- 	mod_delayed_work(system_wq, &oxp_mcu_init, msecs_to_jiffies(50));
- 
- 	ret = devm_device_add_group(&hdev->dev, &oxp_cfg_attrs_group);
--- 
-2.53.0
+are available in the Git repository at:
 
+  git://git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git tags/docs-7.1
+
+for you to fetch changes up to 40a3f6c5e2604ff7c007da6628120529569e950c:
+
+  Documentation: core-api: real-time: correct spelling (2026-04-12 13:11:50=
+ -0600)
+
+----------------------------------------------------------------
+A busier cycle than I had expected for docs, including:
+
+- Translations: some overdue updates to the Japanese translations, Chinese
+  translations for some of the Rust documentation, and the beginnings of a
+  Portuguese translation.
+
+- New documents covering CPU isolation, managed interrupts, debugging
+  Python gbb scripts, and more.
+
+- More tooling work from Mauro, reducing docs-build warnings, adding self
+  tests, improving man-page output, bringing in a proper C tokenizer to
+  replace (some of) the mess of kernel-doc regexes, and more.
+
+- Update and synchronize changes.rst and scripts/ver_linux, and put both
+  into alphabetical order.
+
+...and a long list of documentation updates, typo fixes, and general
+improvements.
+
+Expect a simple conflict with the Rust tree due to the sorting of
+Documentation/process/changes.rst.
+
+----------------------------------------------------------------
+Akira Yokosawa (1):
+      docs/ja_JP: submitting-patches: Amend "Describe your changes"
+
+Akiyoshi Kurita (2):
+      docs: ja_JP: process: translate first half of 'Describe your changes'
+      docs: ja_JP: process: translate second half of 'Describe your changes'
+
+Ariful Islam Shoikot (3):
+      Documentation: process: backporting: fix missing subject
+      Documentation/mm: Fix typo in NUMA paragraph
+      Documentation/mm/hwpoison.rst: fix typos and grammar.
+
+Askar Safin (1):
+      doc: early_userspace_support.rst: trivial fix: directory -> file
+
+Ben Guo (4):
+      docs/zh_CN: update rust/arch-support.rst translation
+      docs/zh_CN: update rust/coding-guidelines.rst translation
+      docs/zh_CN: update rust/quick-start.rst translation
+      docs/zh_CN: update rust/index.rst translation
+
+Bhaskar Chowdhury (1):
+      Doc: dev-tools: Added Gentoo in the Operating system list under Getti=
+ng Coccinelle
+
+Costa Shulyupin (2):
+      Documentation/rtla: Add hwnoise to main page
+      Documentation/rtla: Convert links to RST format
+
+Daniel Castro (1):
+      docs: pt_BR: translate process/1.Intro.rst
+
+Daniel Pereira (8):
+      docs: pt_BR: Add initial Portuguese translation
+      docs: pt_BR: translate process/changes.rst
+      docs: pt_BR: Add translation for maintainer-handbooks
+      docs: pt_BR: add netdev and maintainer handbook translations
+      docs/pt_BR: translation of maintainer-soc.rst
+      docs/pt_BR: translation of maintainer-soc-clean-dts.rst
+      docs: pt_BR: Add translation for process/conclave.rst
+      docs: pt_BR: Add translation for KVM x86 maintainer guide
+
+Daniel Tang (1):
+      docs: path-lookup: fix unrenamed WALK_GET
+
+David Hildenbrand (Arm) (1):
+      docs: filesystems: clarify KernelPageSize vs. MMUPageSize in smaps
+
+Florian Fainelli (1):
+      Documentation: Provide hints on how to debug Python GDB scripts
+
+Frederic Weisbecker (1):
+      doc: Add CPU Isolation documentation
+
+Gleb Golovko (1):
+      docs: fix typo in zoran driver documentation
+
+Haowen Hu (1):
+      docs/zh_TW: remove trailing space
+
+Haoyang LIU (2):
+      tools/docs/checktransupdate.py: add support for scanning directory
+      tools/docs/checktransupdate.py: fix all issues reported by pylint
+
+Harry Wentland (1):
+      scripts/checkpatch: add Assisted-by: tag validation
+
+Jonathan Corbet (11):
+      docs: Fix an erroneous reference to sphinx.rst
+      docs: remove unneeded maintainer_handbooks_main label
+      Merge branch 'mauro' into docs-mw
+      Merge branch 'mauro' into docs-mw
+      Merge branch 'mauro' into docs-mw
+      Merge branch 'mauro' into docs-mw
+      Merge branch 'docs-fixes' into docs-mw
+      Revert "scripts: ver_linux: expand and fix list"
+      Revert "scripts/checkpatch: add Assisted-by: tag validation"
+      docs: add an Assisted-by mention to submitting-patches.rst
+      Merge tag 'Chinese-docs-7.1' of git://git.kernel.org/pub/scm/linux/ke=
+rnel/git/alexs/linux into tmp
+
+Julia Lawall (1):
+      coccinelle: update Coccinelle URL
+
+Kuan-Wei Chiu (2):
+      docs: interconnect: Add provider APIs to documentation
+      docs: interconnect: Document consumer APIs and drop outdated text
+
+LIU Haoyang (2):
+      docs/dev-tools: fix a broken URL in dev-tools/coccinelle.rst
+      docs/zh_CN: fix an inconsistent statement in dev-tools/testing-overvi=
+ew
+
+Li RongQing (1):
+      Documentation/kernel-parameters: fix architecture alignment for pt, n=
+opt, and nobypass
+
+Manuel Cortez (1):
+      docs: fix typos and duplicated words across documentation
+
+Manuel Ebner (3):
+      scripts: ver_linux: expand and fix list
+      docs: changes/ver_linux: fix entries and add several tools
+      docs: changes.rst and ver_linux: sort the lists
+
+Matteo Martelli (1):
+      sched_deadline, docs: fix cpuset example for cgroupv2
+
+Mauro Carvalho Chehab (80):
+      docs: kdoc_re: add support for groups()
+      docs: kdoc_re: don't go past the end of a line
+      docs: kdoc_parser: move var transformers to the beginning
+      docs: kdoc_parser: don't mangle with function defines
+      docs: kdoc_parser: fix variable regexes to work with size_t
+      docs: kdoc_parser: fix the default_value logic for variables
+      docs: kdoc_parser: don't exclude defaults from prototype
+      docs: kdoc_parser: fix parser to support multi-word types
+      docs: kdoc_parser: add support for LIST_HEAD
+      docs: kdoc_re: better show KernRe() at documentation
+      docs: kdoc_parser: move transform lists to a separate file
+      docs: kdoc_re: handle strings and escape chars on NextMatch
+      docs: kdoc_re: don't recompile NestedMatch regex every time
+      docs: kdoc_re: Change NestedMath args replacement to \0
+      docs: kdoc_re: make NestedMatch use KernRe
+      docs: kdoc_parser: move nested match transforms to xforms_lists.py
+      docs: kdoc_files: allows the caller to use a different xforms class
+      docs: kdoc_files: document KernelFiles() ABI
+      docs: sphinx-build-wrapper: better handle troff .TH markups
+      docs: sphinx-build-wrapper: don't allow "/" on file names
+      docs: kdoc_output: use a method to emit the .TH header
+      docs: kdoc_output: remove extra attribute on man .TH headers
+      docs: kdoc_output: use a single manual for everything
+      docs: kdoc_output: don't use a different modulename for functions
+      docs: kdoc_output: fix naming for DOC markups
+      docs: kdoc_output: describe the class init parameters
+      docs: kdoc_output: pick a better default for modulename
+      docs: kdoc_output: Change the logic to handle man highlight
+      docs: kdoc_output: add a logic to handle tables inside kernel-doc mar=
+kups
+      docs: kdoc_output: add support to handle code blocks
+      docs: kdoc_output: better handle lists
+      docs: python: add helpers to run unit tests
+      unittests: add a testbench to check public/private kdoc comments
+      docs: kdoc: don't add broken comments inside prototypes
+      docs: kdoc: properly handle empty enum arguments
+      docs: add a C tokenizer to be used by kernel-doc
+      docs: kdoc: use tokenizer to handle comments on structs
+      unittests: test_private: modify it to use CTokenizer directly
+      unittests: test_tokenizer: check if the tokenizer works
+      unittests: add a runner to execute all unittests
+      docs: kdoc: create a CMatch to match nested C blocks
+      tools: unittests: add tests for CMatch
+      docs: c_lex: properly implement a sub() method for CMatch
+      unittests: test_cmatch: add tests for sub()
+      docs: kdoc: replace NestedMatch with CMatch
+      docs: kdoc_re: get rid of NestedMatch class
+      docs: xforms_lists: handle struct_group directly
+      docs: xforms_lists: better evaluate struct_group macros
+      docs: c_lex: setup a logger to report tokenizer issues
+      docs: kernel-doc.rst: document private: scope propagation
+      docs: kdoc: ensure that comments are dropped before calling split_str=
+uct_proto()
+      docs: kdoc_parser: avoid tokenizing structs everytime
+      docs: xforms_lists: use CMatch for all identifiers
+      unittests: test_tokenizer: better handle mismatch error
+      docs: kdoc_re: better represent long regular expressions
+      docs: kdoc: add c_lex to generated documentation
+      docs: kdoc_files: use a class to group config parameters
+      docs: kdoc_files: move output symbols logic to kdoc_output
+      docs: kdoc_item: fix initial value for parameterdesc_start_lines
+      docs: kdoc_item: add support to generate a KdocItem from a dict
+      docs: kdoc_item: fix a typo on sections_start_lines
+      docs: unittests: add a parser to test kernel-doc parser logic
+      docs: add a schema to help creating unittests for kernel-doc
+      docs: add a simple kdoc-test.yaml together with a validation tool
+      docs: test_kdoc_parser: add support for dynamic test creation
+      docs: add a new file to write kernel-doc output to a YAML file
+      docs: kernel-doc: add support to store output on a YAML file
+      MAINTAINERS: update documentation scripts to add unittests
+      unittests: test_kdoc_parser: add command line arg to read a YAML file
+      docs: tools: include kdoc_yaml_file at documentation
+      docs: kdoc_yaml_file: add a representer to make strings look nicer
+      docs: kdoc-test.yaml: add more tests
+      docs: kdoc_output: fix handling of simple tables
+      docs: kdoc: better handle source when producing YAML output
+      docs: kdoc_yaml_file: use a better name for the tests
+      docs: kdoc_output: raise an error if full_proto not available for var
+      docs: c_lex.py: store logger on its data
+      doc tools: better handle KBUILD_VERBOSE
+      tools: unittest_helper: add a quiet mode
+      docs: kdoc_diff: add a helper tool to help checking kdoc regressions
+
+Miquel Sabat=C3=A9 Sol=C3=A0 (1):
+      documentation: update arch features
+
+Pranav Kharche (1):
+      docs: kernel-parameters: Fix repeated word in initramfs_options entry
+
+Praveen Kumar Singh (1):
+      docs: memory-hotplug: fix typo 'fo' -> 'for' in NODE_ADDED_FIRST_MEMO=
+RY description
+
+Randy Dunlap (5):
+      linux-next: update maintainer info.
+      docs: admin-guide: update tiny script for number of taint flags
+      docs: kdoc_parser: handle struct member macro VIRTIO_DECLARE_FEATURES=
+(name)
+      docs: xforms_lists: ignore context analysis and lock attributes
+      Docs: hid: intel-ish-hid: make long URL usable
+
+Ricardo Ungerer (1):
+      jobserver: Fix typo in docstring
+
+Rito Rhymes (5):
+      docs: use logo.svg as favicon
+      docs: allow inline literals in paragraphs to wrap to prevent overflow
+      docs: contain horizontal overflow in C API descriptions
+      docs: allow long table reference links to wrap and prevent overflow
+      docs: allow long links to wrap per character to prevent page overflow
+
+Ryan Cheevers (1):
+      docs: fix typo in housekeeping
+
+Sebastian Andrzej Siewior (1):
+      Documentation: Add managed interrupts
+
+Shubham Chakraborty (2):
+      docs: sysctl: add documentation for crypto and debug
+      docs: sysctl: Add documentation for /proc/sys/xen/
+
+Song Hongyi (1):
+      docs/zh_CN: sync process/2.Process.rst with English version
+
+Steven Rostedt (1):
+      tracing: Documentation: Update histogram-design.rst for fn() handling
+
+Sukrut Heroorkar (1):
+      Documentation: core-api: real-time: correct spelling
+
+Thorsten Blum (1):
+      Documentation/maintainer-tip: Fix grammar
+
+Thorsten Leemhuis (6):
+      docs: handling-regressions: add, trim, and sort quotes from Linus
+      docs: reporting-issues: mention text is best viewed rendered
+      docs: reporting-issues: tweak the reference section intro
+      docs: reporting-issues: add conclusion to the step-by-step guide
+      docs: verify-bugs-=E2=80=A6 and quickly-build-=E2=80=A6: improve feed=
+back section
+      docs: reporting-issues: create a proper appendix explaining specialti=
+es
+
+Tommaso Cucinotta (1):
+      sched/deadline: document new sched_getattr() feature for retrieving c=
+urrent parameters for DEADLINE tasks
+
+Tom=C3=A1s Pando (1):
+      docs: driver-api: fix 6 spelling typos in Documentation/driver-api
+
+Wolfram Sang (1):
+      Documentation: seq_file: drop 2.6 reference
+
+Zenghui Yu (Huawei) (1):
+      docs: proc: remove description of prof_cpu_mask
+
+fangqiurong (1):
+      sched/doc: Update yield_task description in sched-design-CFS
+
+h3288824963 (1):
+      Documentation: printk: Add section about avoiding lockups
+
+ Documentation/admin-guide/bcache.rst               |    2 +-
+ Documentation/admin-guide/cpu-isolation.rst        |  357 ++++
+ Documentation/admin-guide/index.rst                |    1 +
+ Documentation/admin-guide/kernel-parameters.txt    |    8 +-
+ .../admin-guide/pm/intel-speed-select.rst          |    2 +-
+ .../admin-guide/quickly-build-trimmed-linux.rst    |   14 +-
+ Documentation/admin-guide/reporting-issues.rst     |  210 +--
+ Documentation/admin-guide/sysctl/crypto.rst        |   47 +
+ Documentation/admin-guide/sysctl/debug.rst         |   52 +
+ Documentation/admin-guide/sysctl/index.rst         |    9 +-
+ Documentation/admin-guide/sysctl/xen.rst           |   31 +
+ Documentation/admin-guide/tainted-kernels.rst      |    2 +-
+ .../verify-bugs-and-bisect-regressions.rst         |   15 +-
+ Documentation/conf.py                              |    1 +
+ Documentation/core-api/housekeeping.rst            |    2 +-
+ Documentation/core-api/irq/index.rst               |    1 +
+ Documentation/core-api/irq/managed_irq.rst         |  116 ++
+ Documentation/core-api/memory-hotplug.rst          |    2 +-
+ Documentation/core-api/printk-basics.rst           |   36 +
+ .../core-api/real-time/architecture-porting.rst    |    2 +-
+ Documentation/core-api/real-time/differences.rst   |    2 +-
+ Documentation/dev-tools/coccinelle.rst             |    5 +-
+ Documentation/doc-guide/kernel-doc.rst             |    6 +
+ Documentation/driver-api/acpi/acpi-drivers.rst     |    2 +-
+ .../driver-api/cxl/platform/acpi/cedt.rst          |    2 +-
+ .../driver-api/cxl/platform/bios-and-efi.rst       |    2 +-
+ Documentation/driver-api/dmaengine/pxa_dma.rst     |    2 +-
+ .../early-userspace/early_userspace_support.rst    |    2 +-
+ Documentation/driver-api/interconnect.rst          |   16 +-
+ Documentation/driver-api/libata.rst                |    2 +-
+ Documentation/driver-api/media/drivers/zoran.rst   |    2 +-
+ Documentation/driver-api/pci/p2pdma.rst            |    2 +-
+ .../features/perf/perf-regs/arch-support.txt       |    2 +-
+ .../features/perf/perf-stackdump/arch-support.txt  |    2 +-
+ Documentation/filesystems/path-lookup.rst          |    2 +-
+ Documentation/filesystems/proc.rst                 |   52 +-
+ Documentation/filesystems/seq_file.rst             |    2 +-
+ Documentation/hid/intel-ish-hid.rst                |    4 +-
+ Documentation/mm/hwpoison.rst                      |    2 +-
+ Documentation/mm/numa.rst                          |    2 +-
+ Documentation/process/2.Process.rst                |    2 +-
+ Documentation/process/backporting.rst              |    2 +-
+ Documentation/process/changes.rst                  |   58 +-
+ .../process/debugging/gdb-kernel-debugging.rst     |    9 +
+ Documentation/process/handling-regressions.rst     |  695 +++++---
+ Documentation/process/maintainer-handbooks.rst     |    2 -
+ Documentation/process/maintainer-tip.rst           |    2 +-
+ Documentation/process/submitting-patches.rst       |   12 +-
+ Documentation/scheduler/sched-deadline.rst         |   22 +-
+ Documentation/scheduler/sched-design-CFS.rst       |    5 +-
+ Documentation/sphinx-static/custom.css             |   26 +
+ Documentation/sphinx/translations.py               |    1 +
+ Documentation/tools/kdoc_ancillary.rst             |   17 +
+ Documentation/tools/kdoc_parser.rst                |    8 +
+ Documentation/tools/python.rst                     |    2 +
+ Documentation/tools/rtla/rtla-hwnoise.rst          |    2 +-
+ Documentation/tools/rtla/rtla-osnoise-hist.rst     |    2 +-
+ Documentation/tools/rtla/rtla-osnoise-top.rst      |    2 +-
+ Documentation/tools/rtla/rtla-osnoise.rst          |    2 +-
+ Documentation/tools/rtla/rtla-timerlat-hist.rst    |    2 +-
+ Documentation/tools/rtla/rtla-timerlat-top.rst     |    2 +-
+ Documentation/tools/rtla/rtla-timerlat.rst         |    2 +-
+ Documentation/tools/rtla/rtla.rst                  |    6 +-
+ Documentation/tools/unittest.rst                   |   24 +
+ Documentation/trace/histogram-design.rst           |   20 +-
+ Documentation/translations/index.rst               |    4 +-
+ .../translations/it_IT/process/4.Coding.rst        |    3 +-
+ .../ja_JP/process/submitting-patches.rst           |  129 +-
+ .../translations/pt_BR/disclaimer-pt_BR.rst        |   11 +
+ Documentation/translations/pt_BR/index.rst         |   77 +
+ .../translations/pt_BR/process/1.Intro.rst         |  269 ++++
+ .../translations/pt_BR/process/changes.rst         |  576 +++++++
+ .../translations/pt_BR/process/conclave.rst        |   40 +
+ Documentation/translations/pt_BR/process/howto.rst |  637 ++++++++
+ .../pt_BR/process/maintainer-handbooks.rst         |   18 +
+ .../pt_BR/process/maintainer-kvm-x86.rst           |  435 +++++
+ .../pt_BR/process/maintainer-netdev.rst            |  596 +++++++
+ .../pt_BR/process/maintainer-soc-clean-dts.rst     |   28 +
+ .../translations/pt_BR/process/maintainer-soc.rst  |  222 +++
+ .../translations/sp_SP/process/4.Coding.rst        |    3 +-
+ .../sp_SP/process/submitting-patches.rst           |    2 +-
+ .../sp_SP/scheduler/sched-design-CFS.rst           |    6 +-
+ .../zh_CN/dev-tools/testing-overview.rst           |    2 +-
+ .../translations/zh_CN/process/2.Process.rst       |   56 +-
+ .../translations/zh_CN/process/4.Coding.rst        |    2 +-
+ .../translations/zh_CN/rust/arch-support.rst       |    9 +-
+ .../translations/zh_CN/rust/coding-guidelines.rst  |  262 ++-
+ Documentation/translations/zh_CN/rust/index.rst    |   17 -
+ .../translations/zh_CN/rust/quick-start.rst        |  190 ++-
+ .../zh_CN/scheduler/sched-design-CFS.rst           |    4 +-
+ .../translations/zh_TW/admin-guide/README.rst      |    2 +-
+ .../translations/zh_TW/process/4.Coding.rst        |    2 +-
+ MAINTAINERS                                        |   10 +-
+ scripts/ver_linux                                  |   63 +-
+ tools/docs/checktransupdate.py                     |   22 +-
+ tools/docs/kdoc_diff                               |  508 ++++++
+ tools/docs/kernel-doc                              |   49 +-
+ tools/docs/sphinx-build-wrapper                    |   17 +-
+ tools/lib/python/jobserver.py                      |    4 +-
+ tools/lib/python/kdoc/c_lex.py                     |  662 ++++++++
+ tools/lib/python/kdoc/kdoc_files.py                |  151 +-
+ tools/lib/python/kdoc/kdoc_item.py                 |   45 +-
+ tools/lib/python/kdoc/kdoc_output.py               |  324 +++-
+ tools/lib/python/kdoc/kdoc_parser.py               |  292 ++--
+ tools/lib/python/kdoc/kdoc_re.py                   |  205 +--
+ tools/lib/python/kdoc/kdoc_yaml_file.py            |  178 ++
+ tools/lib/python/kdoc/xforms_lists.py              |  153 ++
+ tools/lib/python/unittest_helper.py                |  363 +++++
+ tools/unittests/kdoc-test-schema.yaml              |  156 ++
+ tools/unittests/kdoc-test.yaml                     | 1698 ++++++++++++++++=
+++++
+ tools/unittests/run.py                             |   17 +
+ tools/unittests/test_cmatch.py                     |  821 ++++++++++
+ tools/unittests/test_kdoc_parser.py                |  560 +++++++
+ tools/unittests/test_kdoc_test_schema.py           |   94 ++
+ tools/unittests/test_tokenizer.py                  |  469 ++++++
+ 115 files changed, 11356 insertions(+), 1057 deletions(-)
+ create mode 100644 Documentation/admin-guide/cpu-isolation.rst
+ create mode 100644 Documentation/admin-guide/sysctl/crypto.rst
+ create mode 100644 Documentation/admin-guide/sysctl/debug.rst
+ create mode 100644 Documentation/admin-guide/sysctl/xen.rst
+ create mode 100644 Documentation/core-api/irq/managed_irq.rst
+ create mode 100644 Documentation/tools/unittest.rst
+ create mode 100644 Documentation/translations/pt_BR/disclaimer-pt_BR.rst
+ create mode 100644 Documentation/translations/pt_BR/index.rst
+ create mode 100644 Documentation/translations/pt_BR/process/1.Intro.rst
+ create mode 100644 Documentation/translations/pt_BR/process/changes.rst
+ create mode 100644 Documentation/translations/pt_BR/process/conclave.rst
+ create mode 100644 Documentation/translations/pt_BR/process/howto.rst
+ create mode 100644 Documentation/translations/pt_BR/process/maintainer-han=
+dbooks.rst
+ create mode 100644 Documentation/translations/pt_BR/process/maintainer-kvm=
+-x86.rst
+ create mode 100644 Documentation/translations/pt_BR/process/maintainer-net=
+dev.rst
+ create mode 100644 Documentation/translations/pt_BR/process/maintainer-soc=
+-clean-dts.rst
+ create mode 100644 Documentation/translations/pt_BR/process/maintainer-soc=
+.rst
+ create mode 100755 tools/docs/kdoc_diff
+ create mode 100644 tools/lib/python/kdoc/c_lex.py
+ create mode 100644 tools/lib/python/kdoc/kdoc_yaml_file.py
+ create mode 100644 tools/lib/python/kdoc/xforms_lists.py
+ create mode 100755 tools/lib/python/unittest_helper.py
+ create mode 100644 tools/unittests/kdoc-test-schema.yaml
+ create mode 100644 tools/unittests/kdoc-test.yaml
+ create mode 100755 tools/unittests/run.py
+ create mode 100755 tools/unittests/test_cmatch.py
+ create mode 100755 tools/unittests/test_kdoc_parser.py
+ create mode 100755 tools/unittests/test_kdoc_test_schema.py
+ create mode 100755 tools/unittests/test_tokenizer.py
 
