@@ -1,199 +1,131 @@
-Return-Path: <linux-doc+bounces-83133-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83134-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aP/iHl6X22n1DgkAu9opvQ
-	(envelope-from <linux-doc+bounces-83133-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 15:00:14 +0200
+	id aNKNI9qg22mWEQkAu9opvQ
+	(envelope-from <linux-doc+bounces-83134-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 15:40:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6BBF3E3E7C
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 15:00:13 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA2EC3E408D
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 15:40:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 0ED9F3008889
-	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 13:00:12 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id EDCA53009B3B
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2026 13:40:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6E81737BE8C;
-	Sun, 12 Apr 2026 13:00:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 54711379EEC;
+	Sun, 12 Apr 2026 13:40:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dfJHSvF1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HMgPRB+b"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A4B91D54FA;
-	Sun, 12 Apr 2026 13:00:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30F0122D785;
+	Sun, 12 Apr 2026 13:40:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775998809; cv=none; b=dBrVil/+qyW1TwpQ14VnZKtKUjeNJsPqLdC4iF0OjvOyEGSXyZbKgpess9e7jW7sBvRPuELklQweYsj1EzUW3NTN9FH2FPItdTsui92N7v2GW9rYzexu7LsBYMOEJa8jzuSeOLoWAxlnvdO6T8FvxoHPPbUfwm3wK92u2iYXCRE=
+	t=1776001230; cv=none; b=kt1gLgcdE8BWp0MrzvyGARyGEZehCN0CTVwHCIerbSgwzhVApaJMkqJgrSnlEN4TeCb/EQhHzNMpTZLT5ulqtwnNRyvPKhzjo6iv97f4G1xHEV4C6WHXoaLIje2UDmJJPG6VWMH2LgsToYKhRTvuUT5N/+xnrfaeWQONiSEA5Lw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775998809; c=relaxed/simple;
-	bh=YOyEuLo74ep5TwCKRiq05kVPo3T4viLmFmQcJpmuUK8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=kAcB93tm8goZR5Oea4GAUGMTg77o8O7hHjNnZDuBCdr0hlGkupkzOFfQv7MG8riF7+UTM/8ZlK4MDphwgQaYgP07CFXsWdmJYrYBzkBJfLI4eJFxpVdHMMmO4ZsckpdUXnbZpd5R4m2HsByutGize2PaF9jlbISz9KidjmOgPRk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dfJHSvF1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9432C19424;
-	Sun, 12 Apr 2026 13:00:04 +0000 (UTC)
+	s=arc-20240116; t=1776001230; c=relaxed/simple;
+	bh=oTR9m4IsEdRT37DGUiCRgUO1bMrjc6Xl/DqLoqBprrI=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=I0j73qxbIraCnGboeTbI7n0mBQ+Vnhw7EEI92WKEtPLqnnJHlPOBBchELzvFW581q9dgOUcqASpzEFaPCiJn5bL2asMbZMLrcGaqhyUwyiodRGCTYOWwc4uJnyC23ZguqAQQxfMUmAuZMFSdDRsCavOdjbjAqqkNlDrNF6bpagY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HMgPRB+b; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36E42C19424;
+	Sun, 12 Apr 2026 13:40:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1775998808;
-	bh=YOyEuLo74ep5TwCKRiq05kVPo3T4viLmFmQcJpmuUK8=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dfJHSvF1BLFVJuG7TSuqKNOhmBGm96sP/XDWYHmHbij3LiLkyK+GZ4o8CCa7fxlLK
-	 RhMws3nS0VVqFpL/4jYTova2gp1dVR378JvGrpywLFp/BtaSwpZubnE4IlHTjys1/X
-	 b+HHkXZAP1A3j73QtvPd4P1uNDJnGraRD49tuvGCRVetKqatkgzwyY6A+S9CgKi6Fa
-	 GNS/2hTTDXN7nX6FLRq3+/MBOVL+kAf4X9Y8Txe4sfZ/VUrAdZ/l8KWocLQc0uwK/H
-	 UuyiXPAdjvl9+gzDerHDKNrIELbjf9CKKpHEu/17ko+sd1WfYRA213WkXkm5iJGfpt
-	 FtDwAS/6Ag5/g==
-From: Simon Horman <horms@kernel.org>
-To: illusion.wang@nebula-matrix.com
-Cc: Simon Horman <horms@kernel.org>,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org,
-	skhan@linuxfoundation.org,
-	lorenzo@kernel.org,
-	linux-kernel@vger.kernel.org (open list),
-	edumazet@google.com,
-	linux-doc@vger.kernel.org,
-	enelsonmoore@gmail.com,
-	andrew+netdev@lunn.ch,
-	pabeni@redhat.com,
-	lukas.bulwahn@redhat.com,
-	kuba@kernel.org,
-	hkallweit1@gmail.com,
-	dimon.zhao@nebula-matrix.com,
-	corbet@lwn.net,
-	vadim.fedorenko@linux.dev
-Subject: Re: [PATCH v11 net-next 09/11] net/nebula-matrix: add Dispatch layer implementation
-Date: Sun, 12 Apr 2026 13:59:45 +0100
-Message-ID: <20260412125945.663258-1-horms@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260408093739.56001-10-illusion.wang@nebula-matrix.com>
-References: <20260408093739.56001-10-illusion.wang@nebula-matrix.com>
+	s=k20201202; t=1776001229;
+	bh=oTR9m4IsEdRT37DGUiCRgUO1bMrjc6Xl/DqLoqBprrI=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=HMgPRB+bb79b5Qo/jRH8bx8vI5NHnJNicJMT8lKaUt+kCDfruYcD+1T+wd/Ukiu1Z
+	 oPQNxlObgdNrDoUJ5MwDxb/LdjQBU6X6l15FiqtzKNlc6vHHrEnMla8KnsQna09uPw
+	 5EmnRUd38l9R/FSid37SgKyoGlwkFybDzSMjlyMZbbmsLu41ql9GDivUELS9pximki
+	 rGQfYwLSbfnARvovK/onc8vr45ec+z4oe6kaLSwGr+saauzihJdlqw3SJ6IXi2x9eX
+	 bCUrV/O7z7ESoqC4DSuHRPPrtnVRB3+CG24SKVIj52p9Q5F3HPGWRM6dgBl1BeZlEc
+	 UZ5nUxYraOGMg==
+Date: Sun, 12 Apr 2026 14:40:20 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Andy Shevchenko <andriy.shevchenko@intel.com>, Ammar Mustafa
+ <ammarmustafa34@gmail.com>, Alisa-Dariana Roman <alisa.roman@analog.com>,
+ David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ linux-iio@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] Docs: iio: ad7191 Correct clock configuration
+Message-ID: <20260412144020.502dafd9@jic23-huawei>
+In-Reply-To: <CAMuHMdUcDrDR-1f5eXjdyDR3-HcTFFeGsmYU2whV=fQhzsCNtg@mail.gmail.com>
+References: <aaHrsTS9iG-PEfue@ammar-VM2>
+	<aaLIhgJjrNlp3oTy@ashevche-desk.local>
+	<CAMuHMdUcDrDR-1f5eXjdyDR3-HcTFFeGsmYU2whV=fQhzsCNtg@mail.gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,nebula-matrix.com,vger.kernel.org,linuxfoundation.org,google.com,gmail.com,lunn.ch,redhat.com,lwn.net,linux.dev];
+	TAGGED_FROM(0.00)[bounces-83134-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	TAGGED_FROM(0.00)[bounces-83133-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FREEMAIL_CC(0.00)[intel.com,gmail.com,analog.com,baylibre.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[horms@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux.dev:url]
-X-Rspamd-Queue-Id: E6BBF3E3E7C
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux-m68k.org:email]
+X-Rspamd-Queue-Id: DA2EC3E408D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This is an AI-generated review of your patch. The human sending this
-email has considered the AI review valid, or at least plausible.
+On Mon, 30 Mar 2026 10:09:28 +0200
+Geert Uytterhoeven <geert@linux-m68k.org> wrote:
 
-For local reproduction steps see https://netdev-ai.bots.linux.dev/ai-local.html
----
-net/nebula-matrix: add Dispatch layer implementation
+> On Sat, 28 Feb 2026 at 11:51, Andy Shevchenko
+> <andriy.shevchenko@intel.com> wrote:
+> > On Fri, Feb 27, 2026 at 02:08:33PM -0500, Ammar Mustafa wrote:  
+> > > Correct the ad7191 documentation to match the datasheet:
+> > > - Fix inverted CLKSEL pin logic: device uses external clock when pin is
+> > >   inactive, and internal CMOS/crystal when high.  
+> >
+> > high --> active  
+> 
+> Thanks for your patch, which is now commit d2a4ec19d2a2e54c ("Docs:
+> iio: ad7191 Correct clock configuration") in char-misc-next and
+> iio/togreg.
+> 
+> That commit message still says "inactive" and "high", thus adding to
+> the confustion.
+> 
+> Gr{oetje,eeting}s,
+> 
+>                         Geert
+> 
 
-This patch introduces a control-level routing mechanism for the Dispatch
-layer with two routing paths: a direct path (Dispatch -> Resource -> HW)
-and a channel path (Dispatch -> Channel). The implementation uses
-interface-declared control levels and upper-layer configured control
-levels to determine the routing.
+Ah.  Sorry, I missed that and can't really do anything to fix it up
+now :(  All got a bit rushed as I was off on holiday.
 
-> diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.c
-> index 8b031f6e963f..eee41d10ad63 100644
-> --- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.c
-> +++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dispatch.c
-> @@ -6,6 +6,396 @@
->  #include <linux/pci.h>
->  #include "nbl_dispatch.h"
->
-> +static u16 nbl_disp_chan_get_vsi_id_req(struct nbl_dispatch_mgt *disp_mgt,
-> +					u16 func_id, u16 type)
-> +{
-> +	struct nbl_channel_ops *chan_ops = disp_mgt->chan_ops_tbl->ops;
-> +	struct nbl_common_info *common = disp_mgt->common;
-> +	struct nbl_chan_param_get_vsi_id result = { 0 };
-> +	struct nbl_chan_param_get_vsi_id param = { 0 };
-> +	struct nbl_chan_send_info chan_send;
-> +
-> +	param.type = type;
-> +
-> +	NBL_CHAN_SEND(chan_send, common->mgt_pf, NBL_CHAN_MSG_GET_VSI_ID,
-> +		      &param, sizeof(param), &result, sizeof(result), 1);
-> +	chan_ops->send_msg(disp_mgt->chan_ops_tbl->priv, &chan_send);
-> +
-> +	return result.vsi_id;
-> +}
-
-Does nbl_disp_chan_get_vsi_id_req() ignore the func_id parameter?
-
-The function accepts func_id but only sends param.type in the channel
-message. The nbl_chan_param_get_vsi_id struct appears to have only
-{vsi_id, type} fields, with no func_id field.
-
-On the responder side:
-
-> +static void nbl_disp_chan_get_vsi_id_resp(void *priv, u16 src_id, u16 msg_id,
-> +					  void *data, u32 data_len)
-> +{
-> +	struct nbl_dispatch_mgt *disp_mgt = (struct nbl_dispatch_mgt *)priv;
-> +	struct nbl_channel_ops *chan_ops = disp_mgt->chan_ops_tbl->ops;
-> +	struct nbl_resource_ops *res_ops = disp_mgt->res_ops_tbl->ops;
-> +	struct nbl_resource_mgt *p = disp_mgt->res_ops_tbl->priv;
-> +	struct device *dev = disp_mgt->common->dev;
-> +	struct nbl_chan_param_get_vsi_id *param;
-> +	struct nbl_chan_param_get_vsi_id result = { 0 };
-> +	struct nbl_chan_ack_info chan_ack;
-> +	int err = NBL_CHAN_RESP_OK;
-> +	int ret;
-> +
-> +	param = (struct nbl_chan_param_get_vsi_id *)data;
-> +
-> +	result.vsi_id =
-> +		NBL_OPS_CALL_RET(res_ops->get_vsi_id, (p, src_id, param->type));
-
-nbl_disp_chan_get_vsi_id_resp() uses src_id (the channel source) instead
-of func_id. This creates a behavioral inconsistency with the direct path:
-
-> +static u16 nbl_disp_get_vsi_id(struct nbl_dispatch_mgt *disp_mgt, u16 func_id,
-> +			       u16 type)
-> +{
-> +	struct nbl_resource_ops *res_ops = disp_mgt->res_ops_tbl->ops;
-> +	struct nbl_resource_mgt *p = disp_mgt->res_ops_tbl->priv;
-> +
-> +	return NBL_OPS_CALL_RET(res_ops->get_vsi_id, (p, func_id, type));
-> +}
-
-The direct path correctly passes func_id to res_ops->get_vsi_id(p, func_id,
-type).
-
-When the channel path is active, callers cannot query VSI IDs for
-functions other than the sender. Is the func_id parameter intended to be
-used in nbl_disp_chan_get_vsi_id_req()?
-
-[ ... ]
+Jonathan
 
