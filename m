@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-83260-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83265-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4M6RFP0g3WndaAkAu9opvQ
-	(envelope-from <linux-doc+bounces-83260-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 18:59:41 +0200
+	id KLN1Jywf3WmsaAkAu9opvQ
+	(envelope-from <linux-doc+bounces-83265-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 18:51:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE5973F0707
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 18:59:40 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5699B3F0082
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 18:51:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AE3763011847
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 16:25:10 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 28A62302C4A7
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 16:48:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1230C309F09;
-	Mon, 13 Apr 2026 16:25:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C4A6431619C;
+	Mon, 13 Apr 2026 16:48:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="C6hZgaTs"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="XweZzGSV"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E039A3093B2;
-	Mon, 13 Apr 2026 16:25:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DFB6316197;
+	Mon, 13 Apr 2026 16:48:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776097510; cv=none; b=YKOKaK3+Ti0sNDvEt4IYSjpf7ff7o2A11aHT/Urc6i+ZeQ9vkm70SvLWNM0LfYivQ7qqt6MFfeJxe2a8YsMN9b3lyK1dR/A9I0eehC4M4ynzf8vdO4QTNofxjxNuFxgBbzHTpGi5jhyZHhN04TBrN4zfWIJHl9cKFy8O9WRCF+4=
+	t=1776098926; cv=none; b=pbPlNhU5GDPJ1drZ4xfStEjNI27jHo2/WV5Zt1Mle8cY7UH3JPW652bhL0A9UVlhCfCfqIUEVJrmvr84luLyB4U8rKBVW9meNF1B02uB4x1xfJL/F3bkYi2WXDnCa6VqMRdJ7JpstAMuaTp7bW2FSJMWoNVcB9uBjQ9oWFOoNU4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776097510; c=relaxed/simple;
-	bh=C5cpzGGSXycz7FKft4QGgiPHqeCBEPesluUGSzzf+Co=;
+	s=arc-20240116; t=1776098926; c=relaxed/simple;
+	bh=BJK51bvPPdiQb5Aze5Rcn6y4PaiZdmwXso1lhX6/6q0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=OhKRrzBIWFR8aqPqI86CZM9+pjRgyDKReskwWrLd+nn38Nl7H0OE2RjWUbe57ziR3W/b/Qx1QPFQSYXeKq9zVcN3q+mBgcojDUWtBza3ecSGiHbN0TkWiziMfq0A1HjKenxtoJUlDSDy+FDOghlDAm2Xu1o/dMKdwMPNBVifzhw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=C6hZgaTs; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 781EBC2BCAF;
-	Mon, 13 Apr 2026 16:25:09 +0000 (UTC)
+	 MIME-Version; b=r9NLOlGALO9kYXozFslh8KizbXVAMICjY47wH+tbnYqjJzpd0WA1W9oZpG4RZFgwqtAAmDUHmweNp3l8ISYr0EJZ66Ig71wQR/eJnzDRWTsiUF8CZbTUtKVs2DIvx1QnRY9rQVyUnkq7cjZ9sHlBon3S7HikprtLWspds79zbNw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=XweZzGSV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA415C2BCAF;
+	Mon, 13 Apr 2026 16:48:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1776097509;
-	bh=C5cpzGGSXycz7FKft4QGgiPHqeCBEPesluUGSzzf+Co=;
+	s=korg; t=1776098926;
+	bh=BJK51bvPPdiQb5Aze5Rcn6y4PaiZdmwXso1lhX6/6q0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=C6hZgaTsjf2LLRxradoo7/txAcA4ty99H6lm9q87hiUPlxCVPJEHPsciyklTFxhm1
-	 DlpaAJ+DCpu+A513n5lNH/vZ/DUiXq39InH37OZheWJbO7gS52KUrhMFJMu1cM/DGY
-	 RBTtzZ+ccma8VBiCADME/qMN0QTS8ZLm6FC14m8k=
+	b=XweZzGSVwEcleCXF23ffDaSSLL9XMj+QQukIMmPBSjsPW3ak9WlJ9ZlkY/NXSGcCh
+	 mENlZqdEAs8ynSN7A5G6wTCaAlETPOAyc3c5y9AknZl+Ed4Wm3TC7J4VTd+mR9FGlR
+	 teVD6ykiqfKgOMAcYfe+vvSvKDmNgq3r72cKymiI=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -52,12 +52,12 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org,
 	Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 5.15 157/570] time: add kernel-doc in time.c
-Date: Mon, 13 Apr 2026 17:54:48 +0200
-Message-ID: <20260413155836.332587301@linuxfoundation.org>
+Subject: [PATCH 5.10 110/491] time: add kernel-doc in time.c
+Date: Mon, 13 Apr 2026 17:55:55 +0200
+Message-ID: <20260413155823.160341422@linuxfoundation.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260413155830.386096114@linuxfoundation.org>
-References: <20260413155830.386096114@linuxfoundation.org>
+In-Reply-To: <20260413155819.042779211@linuxfoundation.org>
+References: <20260413155819.042779211@linuxfoundation.org>
 User-Agent: quilt/0.69
 X-stable: review
 X-Patchwork-Hint: ignore
@@ -72,7 +72,7 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -80,7 +80,7 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[linuxfoundation.org:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83260-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-83265-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -89,17 +89,17 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linutronix.de:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linuxfoundation.org:dkim,linuxfoundation.org:mid,infradead.org:email]
-X-Rspamd-Queue-Id: AE5973F0707
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linutronix.de:email,linuxfoundation.org:dkim,linuxfoundation.org:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,infradead.org:email]
+X-Rspamd-Queue-Id: 5699B3F0082
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-5.15-stable review patch.  If anyone has any objections, please let me know.
+5.10-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
@@ -125,7 +125,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 158 insertions(+), 11 deletions(-)
 
 diff --git a/kernel/time/time.c b/kernel/time/time.c
-index a7fce68465a38..50390158e9d97 100644
+index 483f8a3e24d0c..6f81aead1856d 100644
 --- a/kernel/time/time.c
 +++ b/kernel/time/time.c
 @@ -365,11 +365,14 @@ SYSCALL_DEFINE1(adjtimex_time32, struct old_timex32 __user *, utp)
@@ -237,7 +237,7 @@ index a7fce68465a38..50390158e9d97 100644
 + *
   * The TICK_NSEC - 1 rounds up the value to the next resolution.  Note
   * that a remainder subtract here would not do the right thing as the
-  * resolution values don't fall on second boundaries.  I.e. the line:
+  * resolution values don't fall on second boundries.  I.e. the line:
 @@ -582,8 +610,9 @@ EXPORT_SYMBOL(__usecs_to_jiffies);
   *
   * The >> (NSEC_JIFFIE_SC - SEC_JIFFIE_SC) converts the scaled nsec
