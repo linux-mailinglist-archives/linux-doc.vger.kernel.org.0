@@ -1,63 +1,63 @@
-Return-Path: <linux-doc+bounces-83233-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83232-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6LY9HuTD3Gn5VwkAu9opvQ
-	(envelope-from <linux-doc+bounces-83233-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:22:28 +0200
+	id SGRRIM/D3Gn5VwkAu9opvQ
+	(envelope-from <linux-doc+bounces-83232-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:22:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79E263EA8CD
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:22:27 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 916173EA8A9
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:22:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id F12663020ABC
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 10:12:20 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4528F306FE4C
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 10:12:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29CA53603E0;
-	Mon, 13 Apr 2026 10:11:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EECC233722;
+	Mon, 13 Apr 2026 10:11:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="ga58bOK6"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="MLfhWP0y"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 993253093CF;
-	Mon, 13 Apr 2026 10:11:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DFFA3093CF;
+	Mon, 13 Apr 2026 10:11:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776075116; cv=pass; b=WxTLFUM/8V/YuO4RL8V0hp/naCVRl/19f8UFP5WsnggwlHSXOlTfZo56ulfMWtoWArxJ/XNHz+Kooe1wnXTTI0Bu5371yVXTPZlQijqYS9VVVAWA4P40YY3d9KLTvrY89YKKXE0uJAaacVf3+1CdOP+nUfQ2u97XEOEdlSLTrE0=
+	t=1776075110; cv=pass; b=DMsp6gHUTik0SwqZW2G4tDsWQEyoZvLb4JiNY6nOi0Zez/9bqFxNo73IxhyRh3YNNgo/rbIOqdnWsMk7aQB+w6Ka/vwitysS4MQz2GHcEaLZ2gW28GYqEukATv2XXkaOOqhIem7CkjvYiNzoG1x/w3CsO4A36tEsCTXPsUocFs4=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776075116; c=relaxed/simple;
-	bh=7i8f4Csa8L49OxZvBjIK2AYm9iejmy8gZ7fL8wGe4p4=;
+	s=arc-20240116; t=1776075110; c=relaxed/simple;
+	bh=sFwn5ED1nGb2x7YyOKVbkg5A1ouxDS6JzDAW5s1Piyo=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=g9X+xFlj+KazrSJh/pNMqS9RfzJSANLsnkgk1MEKRho81BsunVI0Z7RSf5DlOIkeRsI32QMM6H4UOcgREiPJjlI9l7md8VwgcL2hJffdhMz+AfMldDHWbYfvZIAv7pV2chW+x/MPWabfgvkB4f99YxeHLaE6GpqxWmrdTk/ha9k=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=ga58bOK6; arc=pass smtp.client-ip=136.143.188.112
+	 In-Reply-To:To:Cc; b=rnftysATQZvDbOiWoa0rJiqZa0XFt0kbrCBwJZP78su1hLbzSX4lD8okBBOJSDi168Jn+SLSKURAeq7+mNSV+K9Np9LaEfsFYPepARF3NGj88DT+/Bf5i7p4QBG/p2wM1G3AlTkMesCuxUGHs/6hVwO4dZSTHPlllnSjv2/s6IU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=MLfhWP0y; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1776075057; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1776075066; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=WdEPLAAt2W0iHKRil4y8fq2nVINLSLAKjbGc01XfkZdjL+UlBa0GwhbMhExiVBc9RSWO+hcYxkZkPHGK94bzJN10P/0x8vHa3KG6WZcJXgZDkBK5R5r0DHFo+hiJyE9Yk8iKNjNTy/8cGwqfGp0PJFFTvPvJ6/IlAoTxdCRhMig=
+	b=b7aNtt/J9YSJeMASeA/HJQ+MJF3ZR/jGI7gq6zhM5i+JeoSWFSCaU3DjhbFsGxnjuvdkWe/Q4qydVoNAynvOP8yi6LI4waY/oBPlp/7Jd7MyJ9u3z6DnwaoCymlTdPlxFy3MwNFtqg+eXmcGkIoHJm2zHTHDck6iuwJEk8K+gcc=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1776075057; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=oBUEH9z6fnnMMO3qVEtl/mVjCKKVwrQw2lUD6hVHl4g=; 
-	b=BxUhn4ME8SQWfLFhZFWn7e45MNJ9XtBIW48IQSG1loAMLDeuhjvvD5aVbqA5p7oW2uM+3ykE+i5VARCqT9cDKg36goK5tJQHHzC14D9FMGEhdnAjm81PKkwsVHNqeZCYBQZv8kJmXuEctTZGBf6c/LW022VPOjnFplinBSWbpwc=
+	t=1776075066; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Nt62OO2AP7f+cfOhlF2MV/RbDyVdkbuWQbRENaudCYk=; 
+	b=HXCZmjOIWmxJU17PbPhk9itHotOt2UGyzI7bZKWNuXei5wEkzAJaHuRYo2JXA7m36UnjqOAzedvr5mbwg9OavOKQ5aSjBJDQ0EAtMddFmtV1SHgxZZ9miu5RfL6jSkOz/XkLpq/XPzGOvAfef58S+wLsuo1hX4aybCKcMSZJZIk=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776075057;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776075065;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=oBUEH9z6fnnMMO3qVEtl/mVjCKKVwrQw2lUD6hVHl4g=;
-	b=ga58bOK6UBbmJCpBp99H3bY1b9pO0qPWIWVm5MQeDKBlkSuSNjMJpuODtoLEbCQ7
-	tzkT7selyQ0ZXUUpH6yxM7baW0ZVlWJYSXfF3223CzuZpxA0cui0xGboW4Jt9rH2uJ4
-	PacN/W98Uig/57rqxIr4Ks8Lv8/Wxde5TD4SQPpE=
-Received: by mx.zohomail.com with SMTPS id 1776075056049971.2150324064163;
-	Mon, 13 Apr 2026 03:10:56 -0700 (PDT)
+	bh=Nt62OO2AP7f+cfOhlF2MV/RbDyVdkbuWQbRENaudCYk=;
+	b=MLfhWP0ylcIxJ4LxA3AVgwD/GXDKx9hkqiArNtQPRWUUTGs6l1B05ia5uEePanqK
+	SwndYPSPhmW3a+JV2dtWR6eHahm+yTJgWsZe9SJU1W4YXw9gz8VhrnK1xLzwGjRUbz1
+	Ft8oihFe5lRgqsKaVxWaKKPs2Yu4hvADWU9GHjUc=
+Received: by mx.zohomail.com with SMTPS id 1776075064736295.0356612259119;
+	Mon, 13 Apr 2026 03:11:04 -0700 (PDT)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Mon, 13 Apr 2026 12:07:36 +0200
-Subject: [PATCH v13 22/27] drm/tests: hdmi: Add tests for the color_format
- property
+Date: Mon, 13 Apr 2026 12:07:37 +0200
+Subject: [PATCH v13 23/27] drm/tests: hdmi: Add tests for HDMI helper's
+ mode_valid
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -66,7 +66,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260413-color-format-v13-22-ab37d4dfba48@collabora.com>
+Message-Id: <20260413-color-format-v13-23-ab37d4dfba48@collabora.com>
 References: <20260413-color-format-v13-0-ab37d4dfba48@collabora.com>
 In-Reply-To: <20260413-color-format-v13-0-ab37d4dfba48@collabora.com>
 To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
@@ -101,12 +101,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
 	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83233-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-83232-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
@@ -121,42 +121,38 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:dkim,collabora.com:email,collabora.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 79E263EA8CD
+X-Rspamd-Queue-Id: 916173EA8A9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Add some KUnit tests to check the color_format property is working as
-expected with the HDMI state helper.
-
-Existing tests are extended to also test the
-DRM_CONNECTOR_COLOR_FORMAT_AUTO case, in order to avoid duplicating test
-cases. For the explicitly selected color format cases, parameterized
-tests are added.
+Add some KUnit tests to verify that the HDMI state helper's mode_valid
+implementation does not improperly reject chroma subsampled modes on the
+basis of their clock rate not being satisfiable in RGB.
 
 Reviewed-by: Maxime Ripard <mripard@kernel.org>
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c | 236 +++++++++++++++++++++
- 1 file changed, 236 insertions(+)
+ drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c | 109 +++++++++++++++++++++
+ 1 file changed, 109 insertions(+)
 
 diff --git a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c b/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
-index a4357efaa983..3444c93c615f 100644
+index 3444c93c615f..74c9933eabfc 100644
 --- a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
 +++ b/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
-@@ -60,6 +60,23 @@ static struct drm_display_mode *find_preferred_mode(struct drm_connector *connec
- 	return preferred;
+@@ -77,6 +77,23 @@ static struct drm_display_mode *find_420_only_mode(struct drm_connector *connect
+ 	return NULL;
  }
  
-+static struct drm_display_mode *find_420_only_mode(struct drm_connector *connector)
++static struct drm_display_mode *find_420_also_mode(struct drm_connector *connector)
 +{
 +	struct drm_device *drm = connector->dev;
 +	struct drm_display_mode *mode;
 +
 +	mutex_lock(&drm->mode_config.mutex);
 +	list_for_each_entry(mode, &connector->modes, head) {
-+		if (drm_mode_is_420_only(&connector->display_info, mode)) {
++		if (drm_mode_is_420_also(&connector->display_info, mode)) {
 +			mutex_unlock(&drm->mode_config.mutex);
 +			return mode;
 +		}
@@ -169,267 +165,110 @@ index a4357efaa983..3444c93c615f 100644
  static int set_connector_edid(struct kunit *test, struct drm_connector *connector,
  			      const void *edid, size_t edid_len)
  {
-@@ -1547,6 +1564,7 @@ static void drm_test_check_max_tmds_rate_bpc_fallback_yuv420(struct kunit *test)
-  *   RGB/10bpc
-  * - The chosen mode has a TMDS character rate lower than the display
-  *   supports in YUV422/12bpc.
-+ * - The HDMI connector state's color format property is unset (i.e. AUTO)
-  *
-  * Then we will prefer to keep the RGB format with a lower bpc over
-  * picking YUV422.
-@@ -1609,6 +1627,7 @@ static void drm_test_check_max_tmds_rate_bpc_fallback_ignore_yuv422(struct kunit
- 
- 	conn_state = conn->state;
- 	KUNIT_ASSERT_NOT_NULL(test, conn_state);
-+	KUNIT_ASSERT_EQ(test, conn_state->color_format, DRM_CONNECTOR_COLOR_FORMAT_AUTO);
- 
- 	KUNIT_EXPECT_EQ(test, conn_state->hdmi.output_bpc, 10);
- 	KUNIT_EXPECT_EQ(test, conn_state->hdmi.output_format, DRM_OUTPUT_COLOR_FORMAT_RGB444);
-@@ -1626,6 +1645,7 @@ static void drm_test_check_max_tmds_rate_bpc_fallback_ignore_yuv422(struct kunit
-  *   RGB/8bpc
-  * - The chosen mode has a TMDS character rate lower than the display
-  *   supports in YUV420/12bpc.
-+ * - The HDMI connector state's color format property is unset (i.e. AUTO)
-  *
-  * Then we will prefer to keep the RGB format with a lower bpc over
-  * picking YUV420.
-@@ -1687,6 +1707,7 @@ static void drm_test_check_max_tmds_rate_bpc_fallback_ignore_yuv420(struct kunit
- 
- 	conn_state = conn->state;
- 	KUNIT_ASSERT_NOT_NULL(test, conn_state);
-+	KUNIT_ASSERT_EQ(test, conn_state->color_format, DRM_CONNECTOR_COLOR_FORMAT_AUTO);
- 
- 	KUNIT_EXPECT_EQ(test, conn_state->hdmi.output_bpc, 8);
- 	KUNIT_EXPECT_EQ(test, conn_state->hdmi.output_format, DRM_OUTPUT_COLOR_FORMAT_RGB444);
-@@ -2198,6 +2219,217 @@ static void drm_test_check_disable_connector(struct kunit *test)
- 	drm_modeset_acquire_fini(&ctx);
+@@ -2745,11 +2762,103 @@ static void drm_test_check_mode_valid_reject_max_clock(struct kunit *test)
+ 	KUNIT_EXPECT_EQ(test, preferred->clock, 25200);
  }
  
-+struct color_format_test_param {
-+	enum drm_connector_color_format fmt;
-+	enum drm_output_color_format expected;
-+	int expected_ret;
-+	const char *desc;
-+};
-+
-+/* Test that if:
-+ * - an HDMI connector supports RGB, YUV444, YUV422, and YUV420
-+ * - the display supports RGB, YUV444, YUV422, and YUV420
-+ * - the "color format" property is set
-+ * then, for the preferred mode, for a given "color format" option:
-+ * - DRM_CONNECTOR_COLOR_FORMAT_AUTO results in an output format of RGB
-+ * - DRM_CONNECTOR_COLOR_FORMAT_YCBCR422 results in an output format of YUV422
-+ * - DRM_CONNECTOR_COLOR_FORMAT_YCBCR420 results in an output format of YUV420
-+ * - DRM_CONNECTOR_COLOR_FORMAT_YCBCR444 results in an output format of YUV444
-+ * - DRM_CONNECTOR_COLOR_FORMAT_RGB results in an HDMI output format of RGB
++/*
++ * Test that drm_hdmi_connector_mode_valid() will accept modes that require a
++ * 4:2:0 chroma subsampling, even if said mode would violate maximum clock
++ * constraints if it used RGB 4:4:4.
 + */
-+static void drm_test_check_hdmi_color_format(struct kunit *test)
++static void drm_test_check_mode_valid_yuv420_only_max_clock(struct kunit *test)
 +{
-+	const struct color_format_test_param *param = test->param_value;
 +	struct drm_atomic_helper_connector_hdmi_priv *priv;
-+	struct drm_connector_state *conn_state;
-+	struct drm_modeset_acquire_ctx ctx;
-+	struct drm_crtc_state *crtc_state;
-+	struct drm_atomic_state *state;
-+	struct drm_display_info *info;
-+	struct drm_display_mode *preferred;
-+	int ret;
-+
-+	priv = drm_kunit_helper_connector_hdmi_init_with_edid_funcs(test,
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_RGB444) |
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR422) |
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR420) |
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444),
-+				12,
-+				&dummy_connector_hdmi_funcs,
-+				test_edid_hdmi_4k_rgb_yuv420_dc_max_340mhz);
-+	KUNIT_ASSERT_NOT_NULL(test, priv);
-+
-+	drm_modeset_acquire_init(&ctx, 0);
-+
-+	KUNIT_ASSERT_TRUE(test, priv->connector.ycbcr_420_allowed);
-+
-+	info = &priv->connector.display_info;
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, info);
-+	preferred = find_preferred_mode(&priv->connector);
-+	KUNIT_ASSERT_TRUE(test, drm_mode_is_420(info, preferred));
-+
-+	state = drm_kunit_helper_atomic_state_alloc(test, &priv->drm, &ctx);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, state);
-+
-+	conn_state = drm_atomic_get_connector_state(state, &priv->connector);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, conn_state);
-+
-+	conn_state->color_format = param->fmt;
-+
-+	ret = drm_atomic_set_crtc_for_connector(conn_state, priv->crtc);
-+	KUNIT_ASSERT_EQ(test, ret, 0);
-+
-+	crtc_state = drm_atomic_get_crtc_state(state, priv->crtc);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc_state);
-+
-+	ret = drm_atomic_set_mode_for_crtc(crtc_state, preferred);
-+	KUNIT_ASSERT_EQ(test, ret, 0);
-+
-+	crtc_state->enable = true;
-+	crtc_state->active = true;
-+
-+	ret = drm_atomic_check_only(state);
-+	KUNIT_EXPECT_EQ(test, ret, param->expected_ret);
-+	KUNIT_EXPECT_EQ(test, conn_state->hdmi.output_format, param->expected);
-+
-+	drm_modeset_drop_locks(&ctx);
-+	drm_modeset_acquire_fini(&ctx);
-+}
-+
-+static const struct color_format_test_param hdmi_color_format_params[] = {
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_AUTO,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_RGB444,
-+		.expected_ret = 0,
-+		.desc = "AUTO -> RGB"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_YCBCR422,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_YCBCR422,
-+		.expected_ret = 0,
-+		.desc = "YCBCR422 -> YUV422"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_YCBCR420,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_YCBCR420,
-+		.expected_ret = 0,
-+		.desc = "YCBCR420 -> YUV420"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_YCBCR444,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_YCBCR444,
-+		.expected_ret = 0,
-+		.desc = "YCBCR444 -> YUV444"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_RGB444,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_RGB444,
-+		.expected_ret = 0,
-+		.desc = "RGB -> RGB"
-+	},
-+};
-+
-+KUNIT_ARRAY_PARAM_DESC(check_hdmi_color_format, hdmi_color_format_params, desc);
-+
-+/* Test that if:
-+ * - the HDMI connector supports RGB, YUV422, YUV420, and YUV444
-+ * - the display has a YUV420-only mode
-+ * - the "color format" property is explicitly set (i.e. !AUTO)
-+ * then:
-+ * - color format DRM_CONNECTOR_COLOR_FORMAT_RGB444 will fail
-+ *   drm_atomic_check_only for the YUV420-only mode with -EINVAL
-+ * - color format DRM_CONNECTOR_COLOR_FORMAT_YCBCR444 will fail
-+ *   drm_atomic_check_only for the YUV420-only mode with -EINVAL
-+ * - color format DRM_CONNECTOR_COLOR_FORMAT_YCBCR422 will fail
-+ *   drm_atomic_check_only for the YUV420-only mode with -EINVAL
-+ * - color format DRM_CONNECTOR_COLOR_FORMAT_YCBCR420 passes
-+ *   drm_atomic_check_only for the YUV420-only mode
-+ */
-+static void drm_test_check_hdmi_color_format_420_only(struct kunit *test)
-+{
-+	const struct color_format_test_param *param = test->param_value;
-+	struct drm_atomic_helper_connector_hdmi_priv *priv;
-+	struct drm_connector_state *conn_state;
-+	struct drm_modeset_acquire_ctx ctx;
-+	struct drm_crtc_state *crtc_state;
-+	struct drm_atomic_state *state;
 +	struct drm_display_mode *dank;
-+	int ret;
++	struct drm_connector *conn;
 +
 +	priv = drm_kunit_helper_connector_hdmi_init_with_edid_funcs(test,
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_RGB444) |
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR422) |
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR420) |
-+				BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444),
-+				12,
++				BIT(HDMI_COLORSPACE_RGB) |
++				BIT(HDMI_COLORSPACE_YUV420),
++				8,
 +				&dummy_connector_hdmi_funcs,
 +				test_edid_hdmi_1080p_rgb_yuv_4k_yuv420_dc_max_200mhz);
 +	KUNIT_ASSERT_NOT_NULL(test, priv);
 +
-+	drm_modeset_acquire_init(&ctx, 0);
++	conn = &priv->connector;
++	KUNIT_ASSERT_EQ(test, conn->display_info.max_tmds_clock, 200 * 1000);
 +
-+	dank = find_420_only_mode(&priv->connector);
++	dank = find_420_only_mode(conn);
 +	KUNIT_ASSERT_NOT_NULL(test, dank);
++	KUNIT_EXPECT_EQ(test, dank->hdisplay, 3840);
++	KUNIT_EXPECT_EQ(test, dank->vdisplay, 2160);
 +
-+	state = drm_kunit_helper_atomic_state_alloc(test, &priv->drm, &ctx);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, state);
++	/*
++	 * Note: The mode's "clock" here is not accurate to the actual TMDS
++	 * clock that HDMI will use for a subsampled mode. Hence, why the mode's
++	 * clock is above the .max_tmds_clock of 200MHz.
++	 */
++	KUNIT_EXPECT_EQ(test, dank->clock, 297000);
++}
 +
-+	conn_state = drm_atomic_get_connector_state(state, &priv->connector);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, conn_state);
++/*
++ * Test that drm_hdmi_connector_mode_valid() will reject modes that require
++ * 4:2:0 chroma subsampling, if the connector does not support 4:2:0.
++ */
++static void
++drm_test_check_mode_valid_reject_yuv420_only_connector(struct kunit *test)
++{
++	struct drm_atomic_helper_connector_hdmi_priv *priv;
++	struct drm_display_mode *dank;
++	struct drm_connector *conn;
 +
-+	conn_state->color_format = param->fmt;
++	priv = drm_kunit_helper_connector_hdmi_init_with_edid_funcs(test,
++				BIT(HDMI_COLORSPACE_RGB),
++				8,
++				&dummy_connector_hdmi_funcs,
++				test_edid_hdmi_1080p_rgb_yuv_4k_yuv420_dc_max_200mhz);
++	KUNIT_ASSERT_NOT_NULL(test, priv);
 +
-+	ret = drm_atomic_set_crtc_for_connector(conn_state, priv->crtc);
-+	KUNIT_ASSERT_EQ(test, ret, 0);
++	conn = &priv->connector;
++	KUNIT_ASSERT_EQ(test, conn->display_info.max_tmds_clock, 200 * 1000);
 +
-+	crtc_state = drm_atomic_get_crtc_state(state, priv->crtc);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc_state);
++	dank = find_420_only_mode(conn);
++	KUNIT_EXPECT_NULL(test, dank);
++}
 +
-+	ret = drm_atomic_set_mode_for_crtc(crtc_state, dank);
-+	KUNIT_ASSERT_EQ(test, ret, 0);
++/*
++ * Test that drm_hdmi_connector_mode_valid() will accept modes that allow (among
++ * other color formats) 4:2:0 chroma subsampling, even if the connector does not
++ * support 4:2:0, but the mode's clock works for RGB 4:4:4.
++ */
++static void
++drm_test_check_mode_valid_accept_yuv420_also_connector_rgb(struct kunit *test)
++{
++	struct drm_atomic_helper_connector_hdmi_priv *priv;
++	struct drm_display_mode *mode;
++	struct drm_connector *conn;
 +
-+	crtc_state->enable = true;
-+	crtc_state->active = true;
++	priv = drm_kunit_helper_connector_hdmi_init_with_edid_funcs(test,
++				BIT(HDMI_COLORSPACE_RGB),
++				8,
++				&dummy_connector_hdmi_funcs,
++				test_edid_hdmi_4k_rgb_yuv420_dc_max_340mhz);
++	KUNIT_ASSERT_NOT_NULL(test, priv);
 +
-+	ret = drm_atomic_check_only(state);
-+	KUNIT_EXPECT_EQ(test, ret, param->expected_ret);
-+	if (!param->expected_ret)
-+		KUNIT_EXPECT_EQ(test, conn_state->hdmi.output_format, param->expected);
++	conn = &priv->connector;
++	KUNIT_ASSERT_EQ(test, conn->display_info.max_tmds_clock, 340 * 1000);
 +
-+	drm_modeset_drop_locks(&ctx);
-+	drm_modeset_acquire_fini(&ctx);
-+};
++	mode = find_420_also_mode(conn);
++	KUNIT_ASSERT_NOT_NULL(test, mode);
++	KUNIT_EXPECT_EQ(test, mode->hdisplay, 3840);
++	KUNIT_EXPECT_EQ(test, mode->vdisplay, 2160);
++	KUNIT_EXPECT_EQ(test, mode->clock, 297000);
++}
 +
-+static const struct color_format_test_param hdmi_color_format_420_only_params[] = {
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_RGB444,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_RGB444,
-+		.expected_ret = -EINVAL,
-+		.desc = "RGB should fail"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_YCBCR444,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_YCBCR444,
-+		.expected_ret = -EINVAL,
-+		.desc = "YUV444 should fail"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_YCBCR422,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_YCBCR422,
-+		.expected_ret = -EINVAL,
-+		.desc = "YUV422 should fail"
-+	},
-+	{
-+		.fmt = DRM_CONNECTOR_COLOR_FORMAT_YCBCR420,
-+		.expected = DRM_OUTPUT_COLOR_FORMAT_YCBCR420,
-+		.expected_ret = 0,
-+		.desc = "YUV420 should work"
-+	},
-+};
-+
-+KUNIT_ARRAY_PARAM_DESC(check_hdmi_color_format_420_only,
-+		       hdmi_color_format_420_only_params, desc);
-+
- static struct kunit_case drm_atomic_helper_connector_hdmi_check_tests[] = {
- 	KUNIT_CASE(drm_test_check_broadcast_rgb_auto_cea_mode),
- 	KUNIT_CASE(drm_test_check_broadcast_rgb_auto_cea_mode_vic_1),
-@@ -2227,6 +2459,10 @@ static struct kunit_case drm_atomic_helper_connector_hdmi_check_tests[] = {
- 	KUNIT_CASE(drm_test_check_tmds_char_rate_rgb_8bpc),
- 	KUNIT_CASE(drm_test_check_tmds_char_rate_rgb_10bpc),
- 	KUNIT_CASE(drm_test_check_tmds_char_rate_rgb_12bpc),
-+	KUNIT_CASE_PARAM(drm_test_check_hdmi_color_format,
-+			 check_hdmi_color_format_gen_params),
-+	KUNIT_CASE_PARAM(drm_test_check_hdmi_color_format_420_only,
-+			 check_hdmi_color_format_420_only_gen_params),
- 	/*
- 	 * TODO: We should have tests to check that a change in the
- 	 * format triggers a CRTC mode change just like we do for the
+ static struct kunit_case drm_atomic_helper_connector_hdmi_mode_valid_tests[] = {
+ 	KUNIT_CASE(drm_test_check_mode_valid),
+ 	KUNIT_CASE(drm_test_check_mode_valid_reject),
+ 	KUNIT_CASE(drm_test_check_mode_valid_reject_rate),
+ 	KUNIT_CASE(drm_test_check_mode_valid_reject_max_clock),
++	KUNIT_CASE(drm_test_check_mode_valid_yuv420_only_max_clock),
++	KUNIT_CASE(drm_test_check_mode_valid_reject_yuv420_only_connector),
++	KUNIT_CASE(drm_test_check_mode_valid_accept_yuv420_also_connector_rgb),
+ 	{ }
+ };
+ 
 
 -- 
 2.53.0
