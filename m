@@ -1,163 +1,230 @@
-Return-Path: <linux-doc+bounces-83236-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83238-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SLmTJFvD3Gn5VwkAu9opvQ
-	(envelope-from <linux-doc+bounces-83236-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:20:11 +0200
+	id 8IdiEfzG3GmcWQkAu9opvQ
+	(envelope-from <linux-doc+bounces-83238-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:35:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9E113EA847
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:20:10 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B29B3EAB4A
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:35:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5FB343141B6F
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 10:12:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C84D730057A1
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 10:27:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 45CE73537F9;
-	Mon, 13 Apr 2026 10:12:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D33DD358385;
+	Mon, 13 Apr 2026 10:27:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="QgmkkMtl"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="SClcCwRG"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 098AF35DA4F;
-	Mon, 13 Apr 2026 10:12:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8ACA73563EB;
+	Mon, 13 Apr 2026 10:27:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776075146; cv=pass; b=Gxho4aNO3sGiRlIkcCNwnUeDU84Hct6pAcHHbOmFS3/8fvkYRFk9rhSA86A1qHYek8ilyrJNXqnjLrNAPiJqqry+0XF5Jc/aseTz8jcjLA9wYW6k+zZLTPrwSnUN7m78CF8yE/+14rSFLft6lGbojQ3k3A6iNFG+PsY+jJG0DEg=
+	t=1776076050; cv=pass; b=dV8NntjYfVAIFt0HO4o6bscpX2eb96TfddbIYb95eyeU2te1B7Kwy3RewFvS3uoi9KnnMQ078DD5dzvnTsq0UdQ7yWMMKgh15FgXY/KrrfzoOmsMzAxseZzTobRLAmCVghO6l1zdE85C6SfUmphAqwJuRcJIDmYkqiWZCZp9g4I=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776075146; c=relaxed/simple;
-	bh=tW5BYDzhwglruqTcWdiTYu1h7AOkmUK2r+9aoKE2DtU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=jxB+ShWclYGV2oP0XTSrUciL31945bIeM3NXm3avcyha/V+2iYNzI8NlfJO149lvaMmq+Pdb/XCYR6q1RUqHPaqFRF6/cucVql2Fk5cAY65IsDxGPi0xRfZX38UmRjCMZLz9gvSb9RZArd6urefbHQtssUMc2dKFw9n6shc7Fp4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=QgmkkMtl; arc=pass smtp.client-ip=136.143.188.112
+	s=arc-20240116; t=1776076050; c=relaxed/simple;
+	bh=ChIB/20YXng13C/taphS4eN73+tsp0wJ8kSc9Ppuk1I=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=O5SU3inYWHmYuzdpaK2jJgKaVcbLe7Ue3QIATPcckr2m0ORnIS0JYCXyPqIcU+h6Z6TqWRKc3+fLsRa+geX0cKJ5Bv+s4h9NvPZ+IeR92rqPiw1/ggmKXyCxatbovNKOM8uG44+ZahBj5pq/TTU4FFdrVg/K3U0h/AN8HG4Lfgg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=SClcCwRG; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1776075102; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1776075995; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=IBTsDxLxQSdNoi3ndUXa20r13M4Ela5iEpVM08Oo2RkBEYLAF+Lw/dJzqDGqMyz+i5psseEJCdN5DruAJbExPguHCM75eMzOJdpnFxkP+wZg+/gMI7lE0pJcdv9DkEAtPV4kEdSgWhnuNvZd+EAylDxSJ4pdbF1Cjvz2D1hLgMU=
+	b=h02R6SYWbmcMwoKgTR8LoC3h+o9xXPnlKOZgWDVMAOIfszgmHpI899QpLHBqvwiFWX+RKwwE4nLjDgd2c94afqa1TXauKAQ9elb3Jrzj0iDuxzm3EaLjO/ckhtIDBoYv7kZBBaTJdnOcrVX/5blV/hFS/O6mJLb8Hg1nEXExWIM=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1776075102; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=pAXSZtPd5U/ZCuO8959Lc90gPEZRU63FJ0bQzc9gzHI=; 
-	b=AOkxbjOIdTJDYdW1Ob1kjqvA6a3TpbC77dYOBpKpH4MSQpWVFZmHRnlbH+TrscRrKWcyrEhkmUzfM0Qgp5plOFgjrB1DhBx2Ffd2tCbUTRlCjXTMDaewahyww7Ty/Td11sYdcNqN+W0q853FZ0UjF0OwDnncCxJQfRJzyLt76r8=
+	t=1776075995; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=MBy494F68r0qLKKEsa3LN0mB+quFxcEwe7H5kFBVbr0=; 
+	b=Sw/0B9KI3xsgcXQuQvm+LSh3j6xIKGTH2vfNTHYxLh3t0BZNS2a6Z4FSigmlBak0Q/a/hw0toiKTnNNkUHM0uLQFDzPlAEfAbtZ1tlRgfFtjDMhX5OaUV1CfK/Sw3Z5GzltNIVBRoU/BessP6XT2Ou/K/SwtZ15mP9dh771A9Cw=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776075102;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776075995;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
-	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=pAXSZtPd5U/ZCuO8959Lc90gPEZRU63FJ0bQzc9gzHI=;
-	b=QgmkkMtl/suz2GbB8NnEaOetn8NXNniLv61xv0fk95cPbACV/sIw1UsHl28Dt/N5
-	luI4x10c2eVBU0SoYIKt3VMzDO5Go1sk4iLDXd1ck8OcT43IzcLS7xvCvCMEeqDlrWh
-	HoSdEUnQehxbKyyt7GHgciZ+tLnaeEi2F3cU++VE=
-Received: by mx.zohomail.com with SMTPS id 1776075099753819.2140777372053;
-	Mon, 13 Apr 2026 03:11:39 -0700 (PDT)
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
+	bh=MBy494F68r0qLKKEsa3LN0mB+quFxcEwe7H5kFBVbr0=;
+	b=SClcCwRGC3ptzz2W6dz6wheJPXh9BWTnc8EClbxkbu1yo2vIJT9PGcBejDaK6Nhe
+	rECltZo9KuLaCQbOPkDfPZlGcwqAk5TatoV/zPjCblwvHcZJ8DSzwR1pcUupkpWRkb9
+	0yCeg7taHZbw7dhQ6hUP5rC01qXeRmHCd4WO9fkA=
+Received: by mx.zohomail.com with SMTPS id 1776075993436742.8313316176907;
+	Mon, 13 Apr 2026 03:26:33 -0700 (PDT)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Mon, 13 Apr 2026 12:07:41 +0200
-Subject: [PATCH v13 27/27] drm/connector: Update docs of "colorspace" for
- color format prop
+To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
+ Rodrigo Siqueira <siqueira@igalia.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Sandy Huang <hjc@rock-chips.com>,
+ Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, Werner Sembach <wse@tuxedocomputers.com>,
+ Andri Yngvason <andri@yngvason.is>,
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>,
+ Marius Vlad <marius.vlad@collabora.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Andy Yan <andyshrk@163.com>
+Subject: Re: [PATCH v13 00/27] Add new general DRM property "color format"
+Date: Mon, 13 Apr 2026 12:26:22 +0200
+Message-ID: <6275841.lOV4Wx5bFT@workhorse>
+In-Reply-To: <20260413-color-format-v13-0-ab37d4dfba48@collabora.com>
+References: <20260413-color-format-v13-0-ab37d4dfba48@collabora.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260413-color-format-v13-27-ab37d4dfba48@collabora.com>
-References: <20260413-color-format-v13-0-ab37d4dfba48@collabora.com>
-In-Reply-To: <20260413-color-format-v13-0-ab37d4dfba48@collabora.com>
-To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
- Rodrigo Siqueira <siqueira@igalia.com>, 
- Alex Deucher <alexander.deucher@amd.com>, 
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Andrzej Hajda <andrzej.hajda@intel.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Sandy Huang <hjc@rock-chips.com>, 
- =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
- Andy Yan <andy.yan@rock-chips.com>, 
- Jani Nikula <jani.nikula@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, Dmitry Baryshkov <lumag@kernel.org>, 
- Sascha Hauer <s.hauer@pengutronix.de>, Rob Herring <robh@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
- linux-doc@vger.kernel.org, 
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-X-Mailer: b4 0.15.2
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	CTE_CASE(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83236-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[38];
+	RCPT_COUNT_TWELVE(0.00)[43];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83238-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[collabora.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,tuxedocomputers.com,yngvason.is,oss.qualcomm.com,163.com];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,collabora.com:dkim,collabora.com:email,collabora.com:mid]
-X-Rspamd-Queue-Id: E9E113EA847
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:email,collabora.com:dkim,collabora.com:email]
+X-Rspamd-Queue-Id: 9B29B3EAB4A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The colorspace property's documentation states that BT2020_RGB and
-BT2020_YCC are equivalent, and the output format depends on the driver.
+On Monday, 13 April 2026 12:07:14 Central European Summer Time Nicolas Frattaroli wrote:
+> Hello,
+> 
+> [snip mucho texto]
+> 
+> ---
+> Nicolas Frattaroli (26):
+>       drm/display: hdmi-state-helper: Use default case for unsupported formats
+>       drm: Add new general DRM property "color format"
+>       drm/connector: Let connectors have a say in their color format
+>       drm/display: bridge_connector: Use HDMI color format for HDMI conns
+>       drm/bridge: Act on the DRM color format property
+>       drm/atomic-helper: Add HDMI bridge output bus formats helper
+>       drm/display: hdmi-state-helper: Act on color format DRM property
+>       drm/display: hdmi-state-helper: Try subsampling in mode_valid
+>       drm/amdgpu: Implement "color format" DRM property
+>       drm/i915/hdmi: Add YCBCR444 handling for sink formats
+>       drm/i915/dp: Add YCBCR444 handling for sink formats
+>       drm/i915: Implement the "color format" DRM property
+>       drm/rockchip: Add YUV422 output mode constants for VOP2
+>       drm/rockchip: vop2: Add RK3576 to the RG swap special case
+>       drm/rockchip: vop2: Recognise 10-bit YUV422 as YUV format
+>       drm/rockchip: vop2: Set correct output format for RK3576 YUV422
+>       drm/bridge: dw-hdmi-qp: Use common HDMI output bus fmts helper
+>       drm/rockchip: dw_hdmi_qp: Implement "color format" DRM property
+>       drm/rockchip: dw_hdmi_qp: Set supported_formats platdata
+>       drm/connector: Register color format property on HDMI connectors
+>       drm/tests: hdmi: Add tests for the color_format property
+>       drm/tests: hdmi: Add tests for HDMI helper's mode_valid
+>       drm/tests: bridge: Add KUnit tests for bridge chain format selection
+>       drm/tests: bridge: Add test for HDMI output bus formats helper
+>       drm/bridge: Document bridge chain format selection
+>       drm/connector: Update docs of "colorspace" for color format prop
+> 
+> Werner Sembach (1):
+>       drm/amd/display: Remove unnecessary SIGNAL_TYPE_HDMI_TYPE_A check
+> 
+>  Documentation/gpu/drm-kms-helpers.rst              |   6 +
+>  Documentation/gpu/drm-kms.rst                      |   6 +
+>  drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c  |  91 +-
+>  drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c       |   1 +
+>  drivers/gpu/drm/display/drm_bridge_connector.c     |  24 +
+>  drivers/gpu/drm/display/drm_hdmi_state_helper.c    |  53 +-
+>  drivers/gpu/drm/drm_atomic_helper.c                |  86 ++
+>  drivers/gpu/drm/drm_atomic_uapi.c                  |  11 +
+>  drivers/gpu/drm/drm_bridge.c                       | 104 ++-
+>  drivers/gpu/drm/drm_connector.c                    | 178 +++-
+>  drivers/gpu/drm/i915/display/intel_connector.c     |  10 +
+>  drivers/gpu/drm/i915/display/intel_connector.h     |   1 +
+>  drivers/gpu/drm/i915/display/intel_dp.c            |  43 +-
+>  drivers/gpu/drm/i915/display/intel_hdmi.c          |  47 +-
+>  drivers/gpu/drm/rockchip/dw_hdmi_qp-rockchip.c     | 111 ++-
+>  drivers/gpu/drm/rockchip/rockchip_drm_drv.h        |   4 +
+>  drivers/gpu/drm/rockchip/rockchip_drm_vop2.c       |  21 +-
+>  drivers/gpu/drm/tests/drm_bridge_test.c            | 971 +++++++++++++++++++++
+>  drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c | 345 ++++++++
+>  include/drm/drm_atomic_helper.h                    |   7 +
+>  include/drm/drm_connector.h                        | 120 +++
+>  21 files changed, 2203 insertions(+), 37 deletions(-)
+> ---
+> base-commit: e3dc6072028a594d5e9bfc6476165842602d5307
+> change-id: 20251028-color-format-49fd202b7183
+> prerequisite-message-id: <20260409101539.22032-1-ville.syrjala@linux.intel.com>
+> prerequisite-patch-id: f382aeb5da5f2b8f6e2cb22b88eb47f490f2c724
+> prerequisite-patch-id: 20570aeb28e3c31353e6f697b193b23d8b47c47c
+> prerequisite-patch-id: 1b7e24034883b22cd82be025a1cf82ae77170fd0
+> prerequisite-patch-id: 6ec2dc2c05a75391b67cb12d93168f5e8da8ec55
+> prerequisite-patch-id: 32e84581998ef4eef05e1681c7ec36b90f2a6bb7
+> prerequisite-patch-id: 99c2187a846b0c9ac2ea1a892c17483120cb7da1
+> prerequisite-patch-id: fb41b4668a3b7c8c375c67ffd6b178fa3273e86a
+> prerequisite-patch-id: 4c115a36eea0d5f80643dc34310690894ac80e0e
+> prerequisite-patch-id: 6fdec0832cd6062de3cc5c2f363c5d624d8a00f9
+> 
+> Best regards,
+> --  
+> Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> 
+> 
 
-Now that there is a "color format" property that userspace can use to
-explicitly set a format, update the colorspace docs to mention this.
+Oops, forgot to apply the review trailers from last revision. (I did
+actually remember, but didn't remember to explicitly confirm applying
+them, and it defaults to not doing so.)
 
-The behaviour here is not changed for userspace that doesn't know about
-the color format property yet, as the color format property defaults to
-"AUTO", where the choice of output format is left up to drivers.
+So these two:
+- drm/atomic-helper: Add HDMI bridge output bus formats helper
+- drm/connector: Register color format property on HDMI connectors
 
-Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
----
- drivers/gpu/drm/drm_connector.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Lack Dmitry Baryshkov's R-b, but I assume it'll get picked up
+on the next `b4 trailers -u` anyway. Just mentioning it though
+to ruin the surprise for any reviewer who feels gaslit otherwise.
 
-diff --git a/drivers/gpu/drm/drm_connector.c b/drivers/gpu/drm/drm_connector.c
-index 048789032971..88185a53d940 100644
---- a/drivers/gpu/drm/drm_connector.c
-+++ b/drivers/gpu/drm/drm_connector.c
-@@ -2573,7 +2573,8 @@ EXPORT_SYMBOL(drm_mode_create_aspect_ratio_property);
-  *		conversion matrix and convert to the appropriate quantization
-  *		range.
-  *		The variants BT2020_RGB and BT2020_YCC are equivalent and the
-- *		driver chooses between RGB and YCbCr on its own.
-+ *		driver chooses between RGB and YCbCr based on the color format
-+ *		property.
-  *
-  *	SMPTE_170M_YCC:
-  *	BT709_YCC:
+Kind regards,
+Nicolas Frattaroli
 
--- 
-2.53.0
 
 
