@@ -1,138 +1,212 @@
-Return-Path: <linux-doc+bounces-83247-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83249-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SDf7OTPh3GmKXwkAu9opvQ
-	(envelope-from <linux-doc+bounces-83247-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 14:27:31 +0200
+	id UNDPLSnv3GmvYQkAu9opvQ
+	(envelope-from <linux-doc+bounces-83249-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 15:27:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E5DF3EBF74
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 14:27:31 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE95D3EC845
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 15:27:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AE49C302A532
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 12:19:39 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C537D300B8E3
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2026 13:27:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A96CF3C3BF6;
-	Mon, 13 Apr 2026 12:19:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 706163CB2C5;
+	Mon, 13 Apr 2026 13:27:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="G7BUvZUl";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="8bmKg/nQ"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="hIA2wNhd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43C1E3C3BF3;
-	Mon, 13 Apr 2026 12:19:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60DBD3CCFCC;
+	Mon, 13 Apr 2026 13:26:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776082778; cv=none; b=auiTU7LgsYJlkc+JgDixX4xOAEe/Ivo98PiHvh766vG74FnN9PAPFkw0H0nW4MVlRbPum/umisKyawuiZ2bOfY/4Dm1Y8jVHRDl1qXJfF2zP1VwmJi7m8E2nrG18IQumzgeEeNUcyCwdW7p2QcFtroV6aESiOpwpzmdtvTd8MCo=
+	t=1776086820; cv=none; b=gxms48K9W5pqrcI98OpqcE6xOMHmJI457eic3WQauiswacGbu2KMGMEi56TixWrtqbVljP9vjodPG9A7hFOmYtv1OVC8iK6Cl2se0nqK/A/TeVqGUAOA03jQHRlxdgHiIiPTv3v+CbFze1i4RRPyzMEOyYC3LRmD2Ofqw8QHq3U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776082778; c=relaxed/simple;
-	bh=RjnzTKbG7xEh8absMbCL/hUpeammtXJxN8xPNWchKTw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Y4yzwEzx3H0w6LduwsZHsMhaMus0mdgmRplzTpKx1zJYE8eL3tZ3AA+tSjEJQvywjnqFNLbYzTyq5mfsV3sP2DYiLSROHwJlwu6UCs9xbFOIoLG5OwvK8LR/H/4EyK8Ba7R5GJmnZsNElN/l0K5BickZfuZ//wq7g5kJx5Y84TY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=G7BUvZUl; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=8bmKg/nQ; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-From: John Ogness <john.ogness@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1776082775;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vO4mSf8Hw10ucaiICOgRh2JzFJ2ibaVfHTYyMlOdyQo=;
-	b=G7BUvZUlNmU1Xs/h+7mgdGe8bcREY29GxzPQWn4y3+uRMVSzrRmocMBmYbCb6ogIytXyRF
-	lGCoabI1UhQu7aVs9C9rD7F1ezJWTkdP3BlZLkEEgsfUK5AD+QqP2LRdQlZSnNwMia608Y
-	dFtu72g/H+dgmoTeU0c14ZITfyops37dayf2y/TZxyNO2uU+RJRDiNa0K/H+RSsf06c9f2
-	ahHnWEllg5LXYW79I4gmgjG27jUiszf6E9dW9G1L34X/MhlaP00kJ6KT2pZOP5kqieN11p
-	PoFM5KDg/l2HUvIVZNmNIKwOOFRBaQHjqwEEzTX3vavtweZChPmXDpcaZu6URQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1776082775;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vO4mSf8Hw10ucaiICOgRh2JzFJ2ibaVfHTYyMlOdyQo=;
-	b=8bmKg/nQOm+/7a7BbXsa1SRg1eQntC9nXljzz7FlO7QB+JbrOSYLokz5BfMTtARh6Po6lt
-	BAQgljvmvVthPEAQ==
-To: Valentin Schneider <vschneid@redhat.com>, Sebastian Andrzej Siewior
- <bigeasy@linutronix.de>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: Aaron Tomlin <atomlin@atomlin.com>, Christoph Hellwig <hch@lst.de>,
- Frederic Weisbecker <frederic@kernel.org>, Jens Axboe <axboe@fb.com>,
- Jonathan Corbet <corbet@lwn.net>, Ming Lei <ming.lei@redhat.com>, Thomas
- Gleixner <tglx@kernel.org>, Waiman Long <longman@redhat.com>, Peter
- Zijlstra <peterz@infradead.org>
-Subject: Re: [RFC PATCH] Documentation: Add managed interrupts
-In-Reply-To: <xhsmhlderi1f6.mognet@vschneid-thinkpadt14sgen2i.remote.csb>
-References: <20260401110232.ET5RxZfl@linutronix.de>
- <xhsmhlderi1f6.mognet@vschneid-thinkpadt14sgen2i.remote.csb>
-Date: Mon, 13 Apr 2026 14:25:34 +0206
-Message-ID: <87zf37f3xl.fsf@jogness.linutronix.de>
+	s=arc-20240116; t=1776086820; c=relaxed/simple;
+	bh=6FMMIHFEEVygVWHKafUVcd/YxF9s04Zrb7o6EqrA+v0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=B7NKsaFQjJeXsBEKVrNO4ZdaBTcmNbvHsY/u+w4mOM0YJTilQMzgDA4wc2JyVD4PhaYGOhYtjML/xyNVjNvghVu2U78QD4sXRHUvkjE8n6ZIvpfskHAYTH79xCykg6eAmFywCRRUDJHib82luKVD3Wc90ujv7KJ4x1rfWD5LcEY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=hIA2wNhd; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=F+mjPhtdtTxQus0gs48zKH9AMTVSWSCrzylz5KeYQkk=; b=hIA2wNhd/+4wulxxeljIA7XYwG
+	+2uscT5CxkxKURVdzDvHl2mUF0t8cQU8CpleXfHwJX+J9YysgHXgIHtBvbX4/89YKuFAMBt/w1dmw
+	SA9xGl7W4Z4Ye+iP/DXFTrpBDr2usBZKhDfPyj7UXT4DF+tGV4MjKLAFiIo345N8rd2zXExbPX56K
+	L39axnG7g43ZTBZk6fJfFXQ5A8hwtLgrWfDc8Q3+qbm7gOVlXbm1knObNPI1VTGFxNAGMaCvAq+oQ
+	evjbCuw0r58INU+nVkiOdirG9U7F+VslqpTiI/zsvaI06fwL3JE8pGgTQJdR5U1X8DMoVjMqSOk2i
+	GkJBojdA==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wCHJL-00CKDm-0P;
+	Mon, 13 Apr 2026 13:26:44 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v3 0/3] mm/memory-failure: add panic option for
+ unrecoverable pages
+Date: Mon, 13 Apr 2026 06:26:32 -0700
+Message-Id: <20260413-ecc_panic-v3-0-1dcbb2f12bc4@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAnv3GkC/22NywqDMBQFfyXctSl51air/kcpJcarposoiQ0t4
+ r+X2I2FLg/MzFkhYnAYoSErBEwuuslDQ2RBwI7GD0hdBw0BwUTJpJAUrb3PxjtLFSot20qySls
+ oCMwBe/faW9fbd8dn+0C75EAmRheXKbz3s8Qz96+bOGVUC8NrwbUo7fnSYeuMP01hgBxO4qBKf
+ lQFZbRGxTrWl6rX5kfdtu0DdB254fAAAAA=
+X-Change-ID: 20260323-ecc_panic-4e473b83087c
+To: Miaohe Lin <linmiaohe@huawei.com>, 
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Breno Leitao <leitao@debian.org>, 
+ kernel-team@meta.com
+X-Mailer: b4 0.16-dev-453a6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3765; i=leitao@debian.org;
+ h=from:subject:message-id; bh=6FMMIHFEEVygVWHKafUVcd/YxF9s04Zrb7o6EqrA+v0=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBp3O8Ob6dg1xqMSIH3qXJLaklmJDoaeBTtzRt2X
+ SQWpO9pwg2JAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCadzvDgAKCRA1o5Of/Hh3
+ bSwTD/40PWCYKr3Daelwzpdbb8aF4Ipyr6hkcRy+2mCZwHKIcvV4KtYgwMmJA/AbJOKMDlv0iCZ
+ durRLr++0jUx7UsEnsr3nmGzUYVBS+rT013fje/Q1Lq/CTHo8W4P5pLFesnyP220yqVjurCJN9b
+ LAlgz5zlQip2ZpaVHUlJrG2Fj1XChT5H0d6CICtO3lMQgb8D7kTmIwa6I/gsy78UiDbUGopKfie
+ Nwhksid9GwVXdk7PqQ349Nt8b7qLOMj3/aOA8WTzqlxAC+90iQKJT+0q3LrmJ9Os8CtyOn8ijSs
+ wEBneOW3jtkm2IdaYfs3mkHShhbcmuRi+ND7sq8AG2wpwlmytus6reXRNTLE/JbNjUZMIqSx+ox
+ HXS60Ni3lcQJr3JRfTr49sMXhLymTEjegz/vgxy0/JC02NOFWCkQb3hnZ+uxQhSSE4OTzADWOmP
+ mDPuR1hv0C2pfOGTDwXUVFAKi6fjfcO7q83Lznb3t0+Q0+FFnYWVj97hef2dOOwxcr2ncU2OsG4
+ vrmS+i6I+aslbpj2dqXIn9G8G3WjUJBV3uyFVSdHpur4hk7+swtwTOpFh97Y4TM0qHlD9SVv1nU
+ MGEkkt4YJ9OuAuBxoVDkmoj5dPpIjJ+Z/dh3qJxvzMklVxOt4hAq1v71AMSteRA2yVc6n7adQHM
+ pdBe/56+JcztoeQ==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linutronix.de,none];
-	R_DKIM_ALLOW(-0.20)[linutronix.de:s=2020,linutronix.de:s=2020e];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-83247-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	DKIM_TRACE(0.00)[linutronix.de:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[john.ogness@linutronix.de,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org,kernel.org,oracle.com,google.com,suse.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[debian.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-83249-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linutronix.de:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,jogness.linutronix.de:mid]
-X-Rspamd-Queue-Id: 8E5DF3EBF74
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,msgid.link:url]
+X-Rspamd-Queue-Id: AE95D3EC845
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2026-04-13, Valentin Schneider <vschneid@redhat.com> wrote:
-> On 01/04/26 13:02, Sebastian Andrzej Siewior wrote:
->> One more point: Given that isolcpus= is marked deprecated as of commit
->>    b0d40d2b22fe4 ("sched/isolation: Document isolcpus= boot parameter flags, mark it deprecated")
->>
->> and the 'managed_irq' is evaluated at device's probe time it would
->> require additional callbacks to re-evaluate the situation. Probably for
->> 'io_queue', too. Does is make sense or should we simply drop the
->> "deprecation" notice and allowing using it long term?
->
-> AIUI the deprecation notice is more for isolcpus=domain, i.e. the scheduler
-> part, but it's still relevant for e.g. managed_irq.
+When the memory failure handler encounters an in-use kernel page that it
+cannot recover (slab, page tables, kernel stacks, vmalloc, etc.), it
+currently logs the error as "Ignored" and continues operation.
 
-If that is the case, then the deprecation notice should explicitly
-target the "domain" flag. Also note that "domain" is the default if no
-flag is specified, so it is a bit messy. It is odd to deprecate a
-(default) component of a feature and not have a plan how that component
-will ever be removed.
+This leaves corrupted data accessible to the kernel, which will inevitably
+cause either silent data corruption or a delayed crash when the poisoned memory
+is next accessed.
 
-The documentation of "domain" already strongly advises to use cpusets
-instead. Is that not enough? If so, the deprecation should be dropped.
+This is a common problem on large fleets. We frequently observe multi-bit ECC
+errors hitting kernel slab pages, where memory_failure() fails to recover them
+and the system crashes later at an unrelated code path, making root cause
+analysis unnecessarily difficult.
 
-If there is a strong wish to remove the "domain" boot functionality,
-then there should be a new boot arg that can be used for "managed_irq"
-and "nohz" features, i.e. get users off the deprecated isolcpus so that
-isolcpus can log deprecation notices and be removed someday.
+Here is one specific example from production on an arm64 server: a multi-bit
+ECC error hit a dentry cache slab page, memory_failure() failed to recover it
+(slab pages are not supported by the hwpoison recovery mechanism), and 67
+seconds later d_lookup() accessed the poisoned cache line causing a synchronous
+external abort:
 
-John Ogness
+    [88690.479680] [Hardware Error]: error_type: 3, multi-bit ECC
+    [88690.498473] Memory failure: 0x40272d: unhandlable page.
+    [88690.498619] Memory failure: 0x40272d: recovery action for
+                   get hwpoison page: Ignored
+    ...
+    [88757.847126] Internal error: synchronous external abort:
+                   0000000096000410 [#1] SMP
+    [88758.061075] pc : d_lookup+0x5c/0x220
+
+This series adds a new sysctl vm.panic_on_unrecoverable_memory_failure
+(default 0) that, when enabled, panics immediately on unrecoverable
+memory failures. This provides a clean crash dump at the time of the
+error, which is far more useful for diagnosis than a random crash later
+at an unrelated code path.
+
+This also categorizes reserved pages as MF_MSG_KERNEL, and panics on
+unknown page types (MF_MSG_UNKNOWN), so all unrecoverable failure cases
+are covered.
+
+A CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option is
+also provided, similar to CONFIG_BOOTPARAM_HARDLOCKUP_PANIC, allowing
+the sysctl to be enabled at build time for systems that always want to
+panic on unrecoverable memory failures without requiring runtime
+configuration.
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+Changes in v3:
+- Rename is_unrecoverable_memory_failure() to panic_on_unrecoverable_mf()
+  as suggested by maintainer.
+- Add CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option,
+  similar to CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+- Add documentation for the sysctl and CONFIG option.
+- Add code comments documenting the panic condition design rationale and
+  how the retry mechanism mitigates false positives from buddy allocator
+  races.
+- Link to v2: https://patch.msgid.link/20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org
+
+Changes in v2:
+- Panic on MF_MSG_KERNEL, MF_MSG_KERNEL_HIGH_ORDER and MF_MSG_UNKNOWN
+  instead of MF_MSG_GET_HWPOISON.
+- Report MF_MSG_KERNEL for reserved pages when get_hwpoison_page() fails
+  instead of MF_MSG_GET_HWPOISON.
+- Link to v1: https://patch.msgid.link/20260323-ecc_panic-v1-0-72a1921726c5@debian.org
+
+---
+Breno Leitao (3):
+      mm/memory-failure: report MF_MSG_KERNEL for reserved pages
+      mm/memory-failure: add CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC option
+      Documentation: document panic_on_unrecoverable_memory_failure sysctl
+
+ Documentation/admin-guide/sysctl/vm.rst | 46 ++++++++++++++++++++++++++++++
+ mm/Kconfig                              |  9 ++++++
+ mm/memory-failure.c                     | 50 ++++++++++++++++++++++++++++++++-
+ 3 files changed, 104 insertions(+), 1 deletion(-)
+---
+base-commit: 028ef9c96e96197026887c0f092424679298aae8
+change-id: 20260323-ecc_panic-4e473b83087c
+
+Best regards,
+--  
+Breno Leitao <leitao@debian.org>
+
 
