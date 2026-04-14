@@ -1,127 +1,126 @@
-Return-Path: <linux-doc+bounces-83390-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83391-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SH5IBRR23ml3EgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83390-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 19:15:00 +0200
+	id 0HcbKdd13mkqEgAAu9opvQ
+	(envelope-from <linux-doc+bounces-83391-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 19:13:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C45E3FCED3
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 19:14:59 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 130F83FCE97
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 19:13:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9B4A530C581C
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 17:08:56 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C930B3063A33
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 17:10:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BEAE2EC0B0;
-	Tue, 14 Apr 2026 17:08:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0ECC92F1FE3;
+	Tue, 14 Apr 2026 17:10:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dyo4LnuG"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Vc83Ub+g"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 285502EACF9;
-	Tue, 14 Apr 2026 17:08:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEFD540DFC3;
+	Tue, 14 Apr 2026 17:10:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776186536; cv=none; b=nGLXvRB3tZHA+FvN/3VSfk1D+uzUrZ5a56hn1NZIkUeOMFxzqMvAhoWz5qPnTaHAVbbyAksyi8B2QuSCOjCLpzPEDnYysKXMuEtHZZJ18xax3q8NEO8MWgIzlvEwWkjbtt5UbzQJyu7QWR6HqlOrokoJk58HACdUVewVgWgE16M=
+	t=1776186644; cv=none; b=Lo41BjdEmOten4s2CYJwqg0nll/xkKgijME0pBYASN+yeieiUuJB482VRVHcxwrzgH+MkuX7+/kdWKC1a/UyIoLk8zbPijBOw6Qg7R5TGGFK/K562iVK378yITOg8MyqpicJwdOXFGxS6FmHdFQVsWWcXAQIGRMFCLxfEbIRdRU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776186536; c=relaxed/simple;
-	bh=lY453RX44XTTijXgcD4/68oGGZh9i3h/OJ7n5a/GWCU=;
+	s=arc-20240116; t=1776186644; c=relaxed/simple;
+	bh=s+QTe/HNNToEvnbjZtLRr7wE8J02Yjv4qBKvWU9mj5o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WXQHlil2tHJrq1H6E5J4cCJazfkH40iyeMIj+BhdSODVOouOv2hTNLMtJcV2Qkd69yPk7p/SxqjA5Wn9k4pyqHT/3C3pYBlgAHVI1yeqXKHxfulTWpDsqBL8QEgT0asUHAXmJK9uVqry+ERrOYnTNbNs7m2Uwx4v6Gl+VaCzekQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dyo4LnuG; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F72AC4AF09;
-	Tue, 14 Apr 2026 17:08:55 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=SKVQJh5cl1eypI0aWN6YqzstRLm2mDuJOkbb06C6n5sQzrHiPT46LrukHg1g741MUuen8/zO0cPo3iciAbiJ29MDx0PRd+tnV/76uJQUkW3zHLmjBMCCrKnKqCPinxKGmjXEytnA9cPyzOhYM6CnvS4eUPe6fRGGIZszNi8piA8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Vc83Ub+g; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37938C2BCB4;
+	Tue, 14 Apr 2026 17:10:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776186535;
-	bh=lY453RX44XTTijXgcD4/68oGGZh9i3h/OJ7n5a/GWCU=;
+	s=k20201202; t=1776186644;
+	bh=s+QTe/HNNToEvnbjZtLRr7wE8J02Yjv4qBKvWU9mj5o=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=dyo4LnuG0A+iw6gjbWt5EhBCUbee0zfBYSmQ1efKRjJIdEITrXJWmi1pAfVcRvgab
-	 hKjVvbs66BEabQffeVLoZdXBylQzqHHi17iiT9zWxHlvgeLKmneKL7AEDWfAhLcQwR
-	 I12FevgJGcIBR9Lw/AAFLLIxGD5uZFtX6DDosVRPZJ8dl36btD+JnVuJq8TLivWS2/
-	 qnoe15w0BOtkmCEairZNe/AB9A6uYRiGA2V9nwOE4cKWCXSxPAH9mooV2cksajDsb+
-	 DmEft1FBBs4jiYRt9q5zkIJ13inuPD7HIQhDkzbqxowjEqhypK2TQRD+5pOdaYzsTF
-	 5WccidRju1DYw==
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 8C69FF40068;
-	Tue, 14 Apr 2026 13:08:54 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-02.internal (MEProxy); Tue, 14 Apr 2026 13:08:54 -0400
-X-ME-Sender: <xms:pnTeaQmLG9t6qa3ZW6ayk6yh91cIQtUng0jt-yAAsSd6_36m0eyg8w>
-    <xme:pnTeabT6Ic7G1IyFxqV0XWZymi9S6Ls3MlocSFq2Cy0BCLK1ry_U00QR2puhYK96x
-    KJ4tRoJSLWdna53zDxdOb4tAqNLDQYxBc9Co4xqh6x0ruEOu1dUqhA>
-X-ME-Received: <xmr:pnTeaSMMPlJju5y0M4zMCt3becLX0m3LjXujYuz8JoXyF2AdbuUMPSuYyiYkog>
+	b=Vc83Ub+g+fxbkXM9UT9gsGjGiQ5Ew4laYT/Xisg9xvz9lrO+kquxrkCw/2mxw4RDf
+	 KUnL23Usknw2gscy25a0LBhRrWVEN0fhmbY1PSLDhyaUApW6GbsHdNzRTBMqNvSrPT
+	 Um9tUqXcPVKm9wnwkdWQYqQiwIEwS4nXMQP8iFG/l2F1JYzAWaua92O6jgYj9XaPCD
+	 KFP12+hafmqDwSugEHadJ4D48AumOpXQ7c86Z6tEk20zqUC0+gdW6DJRcYY+7h+9qp
+	 MhMGAdI6Vn5S4UehtI3WChotYnx2gDCjOkKl5zkGhIoeGcaxKVsfpI+U+bPm+dj7DE
+	 7X24HRKoJHVWg==
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+	by mailfauth.phl.internal (Postfix) with ESMTP id 60742F40069;
+	Tue, 14 Apr 2026 13:10:43 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+  by phl-compute-05.internal (MEProxy); Tue, 14 Apr 2026 13:10:43 -0400
+X-ME-Sender: <xms:E3XeaclU1hOUQVScQjcFL_wMZCO0EPk_hn-zmthT-QgwpfIJv5Rsjg>
+    <xme:E3XeabFQt9jPiH84YamCrBopt0yMXjeqIqqK_3We_NbhrwfouzbzixGo-vSVDiTlS
+    RvA7_1-teAZp-78CFnoYvjEjSWLulzJhTg-korgqTTQekkeeX_H_Q>
+X-ME-Received: <xmr:E3XeaW32GBhscU1pZcTOa17a6W4EZrK2zmb4vYpgcTvybuOOtRNwdz1AWtrdhg>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdegudejvdcutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
     ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefmihhrhihlucfu
-    hhhuthhsvghmrghuuceokhgrsheskhgvrhhnvghlrdhorhhgqeenucggtffrrghtthgvrh
-    hnpedvgfdtffejheffleegffetffehkeekteeiheefkeehueejfefhiefhhfdvheeihfen
-    ucffohhmrghinhepkhgvrhhnvghlrdhorhhgpdhgihhthhhusgdrtghomhenucevlhhush
-    htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehkihhrihhllhdomhgv
-    shhmthhprghuthhhphgvrhhsohhnrghlihhthidqudeiudduiedvieehhedqvdekgeegge
-    ejvdekqdhkrghspeepkhgvrhhnvghlrdhorhhgsehshhhuthgvmhhovhdrnhgrmhgvpdhn
-    sggprhgtphhtthhopeegtddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepphgvth
-    gvrhigsehrvgguhhgrthdrtghomhdprhgtphhtthhopegrkhhpmheslhhinhhugidqfhho
-    uhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepuggrvhhiugeskhgvrhhnvghlrdhorh
-    hgpdhrtghpthhtoheplhhjsheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprhhpphht
-    sehkvghrnhgvlhdrohhrghdprhgtphhtthhopehsuhhrvghnsgesghhoohhglhgvrdgtoh
-    hmpdhrtghpthhtohepvhgsrggskhgrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehl
-    ihgrmhdrhhhofihlvghtthesohhrrggtlhgvrdgtohhmpdhrtghpthhtohepiihihiesnh
-    hvihguihgrrdgtohhm
-X-ME-Proxy: <xmx:pnTeaVm8nSBwwzP2sjjkOFZ-FrMo08HgCYElnWaEJjk8kV2OY0TIqQ>
-    <xmx:pnTeab-Q4K6SfrNXkq5MKQxSIFWWCb5pBCYijkoX8UIr3qTVlWUpZQ>
-    <xmx:pnTeaSDiatwTb6x-Kc3OBlZ6soFjgSEAEbsCXqTL_SQRor5WqUOqXQ>
-    <xmx:pnTeaQj4vVipxSChMMzwijHcAIfsmiAZcEbdgniTE5s1L9PtmTO-Tw>
-    <xmx:pnTeaWMAyuBorncANJklQ_LNIMqJTPdr87xxnnUhBDt2n63IiOXQ3v8X>
+    hrpeffhffvvefukfhfgggtugfgjgesthekredttddtjeenucfhrhhomhepmfhirhihlhcu
+    ufhhuhhtshgvmhgruhcuoehkrghssehkvghrnhgvlhdrohhrgheqnecuggftrfgrthhtvg
+    hrnhepiefgvddtkeevjefhhedtudeuueeikeejkedvgffgtdekgeeiveejvdegtedvhefg
+    necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirh
+    hilhhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheeh
+    qddvkeeggeegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrd
+    hnrghmvgdpnhgspghrtghpthhtohepfeeipdhmohguvgepshhmthhpohhuthdprhgtphht
+    thhopegurghvihgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopegrkhhpmheslhhinh
+    hugidqfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepphgvthgvrhigsehrvggu
+    hhgrthdrtghomhdprhgtphhtthhopehljhhssehkvghrnhgvlhdrohhrghdprhgtphhtth
+    hopehrphhptheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepshhurhgvnhgssehgohho
+    ghhlvgdrtghomhdprhgtphhtthhopehvsggrsghkrgeskhgvrhhnvghlrdhorhhgpdhrtg
+    hpthhtoheplhhirghmrdhhohiflhgvthhtsehorhgrtghlvgdrtghomhdprhgtphhtthho
+    peiiihihsehnvhhiughirgdrtghomh
+X-ME-Proxy: <xmx:E3XeaTUTdP55Go8VslarUZuoqPZz4YL8as_sP6mXkhr5yXhya2C90A>
+    <xmx:E3Xead13zkizWwxD7-gYrYiQv3a1rHEFbkshVNwKQ7jOkYUL3zeMyg>
+    <xmx:E3Xeafe1lMPPzmmITOqd1yg1UzrDo56nDeKqrucMispG9u1-o4O3jg>
+    <xmx:E3XeaXRqMgCQWib69_21sotjZiw0kuyhhzwcRcJLx2K31nF6_aSefg>
+    <xmx:E3XeaSnTdo9l6Ht8KS523XOzLkNK992JU69CjdoVw-Ys0-M2RLdkY9dy>
 Feedback-ID: i10464835:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 14 Apr 2026 13:08:52 -0400 (EDT)
-Date: Tue, 14 Apr 2026 18:08:48 +0100
+ 14 Apr 2026 13:10:40 -0400 (EDT)
+Date: Tue, 14 Apr 2026 18:10:35 +0100
 From: Kiryl Shutsemau <kas@kernel.org>
-To: Peter Xu <peterx@redhat.com>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
 Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+	Peter Xu <peterx@redhat.com>, Lorenzo Stoakes <ljs@kernel.org>, 
 	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
 	Vlastimil Babka <vbabka@kernel.org>, "Liam R . Howlett" <Liam.Howlett@oracle.com>, 
 	Zi Yan <ziy@nvidia.com>, Jonathan Corbet <corbet@lwn.net>, 
 	Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson <seanjc@google.com>, 
 	Paolo Bonzini <pbonzini@redhat.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, kvm@vger.kernel.org, 
-	James Houghton <jthoughton@google.com>, Andrea Arcangeli <aarcange@redhat.com>
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, kvm@vger.kernel.org
 Subject: Re: [RFC, PATCH 00/12] userfaultfd: working set tracking for VM
  guest memory
-Message-ID: <ad5hAVuRwa_0VNPf@thinkstation>
+Message-ID: <ad50rPOseVa-SP_s@thinkstation>
 References: <20260414142354.1465950-1-kas@kernel.org>
- <ad5dIUpAMs4MuBvV@x1.local>
+ <55019037-4f1c-4d9c-83ee-3a844d8f3d5e@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <ad5dIUpAMs4MuBvV@x1.local>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <55019037-4f1c-4d9c-83ee-3a844d8f3d5e@kernel.org>
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83390-lists,linux-doc=lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
+	TAGGED_FROM(0.00)[bounces-83391-lists,linux-doc=lfdr.de];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[kas@kernel.org,linux-doc@vger.kernel.org];
@@ -132,97 +131,52 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: 6C45E3FCED3
+X-Rspamd-Queue-Id: 130F83FCE97
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Apr 14, 2026 at 11:28:33AM -0400, Peter Xu wrote:
-> Hi, Kiryl,
-> 
-> On Tue, Apr 14, 2026 at 03:23:34PM +0100, Kiryl Shutsemau (Meta) wrote:
+On Tue, Apr 14, 2026 at 05:37:50PM +0200, David Hildenbrand (Arm) wrote:
+> On 4/14/26 16:23, Kiryl Shutsemau (Meta) wrote:
 > > This series adds userfaultfd support for tracking the working set of
 > > VM guest memory, enabling VMMs to identify cold pages and evict them
 > > to tiered or remote storage.
-> 
-> Thanks for sharing this work, it looks very interesting to me.
-> 
-> Personally I am also looking at some kind of VMM memtiering issues.  I'm
-> not sure if you saw my lsfmm proposal, it mentioned the challenge we're
-> facing, it's slightly different but still a bit relevant:
-> 
-> https://lore.kernel.org/all/aYuad2k75iD9bnBE@x1.local/
-
-Thanks will read up. I didn't follow userfultfd work until recently.
-
-> Unfortunately, that proposal was rejected upstream.
-
-Sorry about that. We can chat about in hall track, if you are there :)
-
-> > == VMM Workflow ==
-> 
-> AFAIU, this workflow provides two functionalities:
-> 
 > > 
-> >     UFFDIO_DEACTIVATE(all)            -- async, no vCPU stalls
-> >     sleep(interval)
-> >     PAGEMAP_SCAN                      -- find cold pages
+> > == Problem ==
+> > 
+> > VMMs managing guest memory need to:
+> > 1. Track which pages are actively used (working set detection)
+> > 2. Safely evict cold pages to slower storage
+> > 3. Fetch pages back on demand when accessed again
+> > 
+> > For shmem-backed guest memory, working set tracking partially works
+> > today: MADV_DONTNEED zaps PTEs while pages stay in page cache, and
+> > re-access auto-resolves from cache. But safe eviction still requires
+> > synchronous fault interception to prevent data loss races.
+> > 
+> > For anonymous guest memory (needed for KSM cross-VM deduplication),
+> > there is no mechanism at all — clearing a PTE loses the page.
+> > 
+> > == Solution ==
+> > 
+> > The series introduces a unified userfaultfd interface that works
+> > across both anonymous and shmem-backed memory:
+> > 
+> > UFFD_FEATURE_MINOR_ANON: extends MODE_MINOR registration to anonymous
+> > private memory. Uses the PROT_NONE hinting mechanism (same as NUMA
+> > balancing) to make pages inaccessible without freeing them.
 > 
-> Until here it's only about page hotness tracking.  I am curious whether you
-> evaluated idle page tracking.  Is it because of perf overheads on rmap?
-
-I didn't gave idle page tracking much thought. I needed uffd faults to
-serialize reclaim against memory accesses. If use it for one thing we
-can as well try to use it for tracking as well. And it seems to be
-fitting together nicely with sync/async mode flipping.
-
-> To
-> me, your solution (until here.. on the hotness sampling) reads more like a
-> more efficient way to do idle page tracking but only per-mm, not per-folio.
+> I would rather tackle this from the other direction: it's another form
+> of protection (like WP), not really a "minor" mode.
 > 
-> That will also be something I would like to benefit if QEMU will decide to
-> do full userspace swap.  I think that's our last resort, I'll likely start
-> with something that makes QEMU work together with Linux on swapping
-> (e.g. we're happy to make MGLRU or any reclaim logic that Linux mm
-> currently uses, as long as efficient) then QEMU only cares about the rest,
-> which is what the migration problem is about.
-> 
-> The other issue about idle page tracking to us is, I believe MGLRU
-> currently doesn't work well with it (due to ignoring IDLE bits) where the
-> old LRU algo works.  I'm not sure how much you evaluated above, so it'll be
-> great to share from that perspective too.  I also mentioned some of these
-> challenges in the lsfmm proposal link above.
-> 
-> >     UFFDIO_SET_MODE(sync)             -- block faults for eviction
-> >     pwrite + MADV_DONTNEED cold pages -- safe, faults block
-> >     UFFDIO_SET_MODE(async)            -- resume tracking
-> 
-> These operations are the 2nd function.  It's, IMHO, a full userspace swap
-> system based on userfaultfd.
+> Could we add a UFFDIO_REGISTER_MODE_RWP (or however we would call it)
+> and support it for anon+shmem, avoiding the zapping for shmem completely?
 
-Right. And we want to decide where to put cold pages from userspace. 
+I like this idea.
 
-> Have you thought about directly relying on userfaultfd-wp to do this work?
-> The relevant question is, why do we need to block guest reads on pages
-> being evicted by the userapp?  Can we still allow that to happen, which
-> seems to be more efficient?  IIUC, only writes / updates matters in such
-> swap system.
+It should be functionally equivalent, but your interface idea fits
+better with the rest.
 
-But we do care about about read accesses. We don't want to swap out
-pages that got read-touched. And we cannot in practice switch to WP mode
-after PAGEMAP_SCAN: it would require a lot of UFFDIO_WRITEPROTECT calls
-with TLB flushing each.
-
-With my approach switching tracking and reclaiming is single bit flip
-under mmap lock.
-
-> Also, I'm not sure if you're aware of LLNL's umap library:
-> 
-> https://github.com/llnl/umap
-> 
-> That implemnted the swap system using userfaultfd wr-protect mode only, so
-> no new kernel API needed.
-
-Will look into it. Thanks.
+Thanks! Will give it a try.
 
 -- 
   Kiryl Shutsemau / Kirill A. Shutemov
