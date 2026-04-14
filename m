@@ -1,773 +1,214 @@
-Return-Path: <linux-doc+bounces-83339-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83341-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wD0EHDAK3mnRmQkAu9opvQ
-	(envelope-from <linux-doc+bounces-83339-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 11:34:40 +0200
+	id EFVoHosN3mnRmQkAu9opvQ
+	(envelope-from <linux-doc+bounces-83341-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 11:48:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E283F7FA8
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 11:34:40 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD84E3F8301
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 11:48:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9253330BDFB7
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 09:30:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0B48030730AD
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 09:45:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC0973C1414;
-	Tue, 14 Apr 2026 09:30:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D67433B7760;
+	Tue, 14 Apr 2026 09:45:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=yeah.net header.i=@yeah.net header.b="fQLkHmps"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Suhm7e8m";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K9F2CfFJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m16.yeah.net (mail-m16.yeah.net [220.197.32.16])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47EF63BD22E;
-	Tue, 14 Apr 2026 09:30:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 545DB3C13F5
+	for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 09:45:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776159020; cv=none; b=XVlwGD8ZPcA93Ag9GxZVeoopyqjOMUEDlKIRFZqVPMcJ0egOmKoMKLbMCCLsBBj3hKVGEJ/2ICSlwDLPvVopuiKvElsKcdq7oqPCRvJQbKKdgNG1ymVMpSWAJb4rZhz57vq9F0/gwl9Yz4UZO+NiOAAaluGjxMm++xPaH0DhfIo=
+	t=1776159935; cv=none; b=FkwyRAvOEcjfXSpohCf7ydNu/Us6Oxwuu7vywgLv/AXYo3DMuOOc1wgk8USRHo22lSY8OXwClUJ0k9LRY8BS75tnyxa0dYhnroWSThadHDtF1yu3r1kFLw2XM+tXy9ygrJDmWy4KRWAorUg2IzocpIWWtHINZFhntzOJUxIwCvc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776159020; c=relaxed/simple;
-	bh=s/uvjP8tZX/nvX3W5bLISTNZ4SdrFlpjYqFx1WVK8k4=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=mx0iksV3S85WDE0MNFeJonoMZ7aVoKuq171N64A+Wr+HKGty6W3zuvJwFxoPCLVMeE40Cw1Cbi1QaeGm4zNoYtezDQPLPZX2c2fcX2QOT3J5vz1kB4MHC6ro48zhOr01I2OQ8Lpbd7Cv7FHZb0zt329817AqZr/MQJHUHANq9ZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yeah.net; spf=pass smtp.mailfrom=yeah.net; dkim=pass (1024-bit key) header.d=yeah.net header.i=@yeah.net header.b=fQLkHmps; arc=none smtp.client-ip=220.197.32.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=yeah.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yeah.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yeah.net;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=OV
-	Vz0OW4h0mQyzp1bb6gUyKY9VHbqfIJub5LR8j/7yM=; b=fQLkHmpslxlNES2aLv
-	hJSIFc2t1s4UOF+AIBdANbCtPUV1ztAyAsL1cbBYp3WeXGaK8seLiIKpwzorDyo2
-	CtgjNsuyYt9vNjwCkR017gQiChe7MFbE5LYFE5F5kE+O15oIRzX+PIjTwdc5/JBr
-	jCDRokUZKwihRKkZBXnUEGVNc=
-Received: from localhost.localdomain (unknown [])
-	by gzsmtp3 (Coremail) with UTF8SMTPA id M88vCgD33wnzCN5p0_VbAQ--.56718S3;
-	Tue, 14 Apr 2026 17:29:27 +0800 (CST)
-From: wenswang@yeah.net
-To: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	linux@roeck-us.net,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org
-Cc: devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Wensheng Wang <wenswang@yeah.net>
-Subject: [PATCH v4 2/2] hwmon: add MP2985 driver
-Date: Tue, 14 Apr 2026 17:29:21 +0800
-Message-Id: <20260414092921.1067735-2-wenswang@yeah.net>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260414092921.1067735-1-wenswang@yeah.net>
-References: <20260414092801.1067470-1-wenswang@yeah.net>
- <20260414092921.1067735-1-wenswang@yeah.net>
+	s=arc-20240116; t=1776159935; c=relaxed/simple;
+	bh=VfZJL/05CrykX+ouf4RhiP1e4++49VnbXustyYGDWMQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=b7Lqs2Ly5xhArLl7A/KlML9AawLP7Mi5/SB2ilqvm/Pz1whnjoD5bi+ZOQNv0+1kfT3e/B1rzfu/C48Q30YKfd8D9KUU2J4ulu/ouO7sTLJ4IDEGw7I6SPuo50j+fopDIHr01/gMsqjztjx2v/sg3fzsPvjWGNP/OgceWEGSHnQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Suhm7e8m; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=K9F2CfFJ; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63E6fDw31479029
+	for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 09:45:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	uoVEP8DtEXDmzrfxPRtDx5EueSkuJ2pFu6DjvKwz08U=; b=Suhm7e8mZGqcGosW
+	9je+YigAKvzd5Q8YTF4XfC0yZ2BfpxQDLqaGpSJaampK3812YalnqDcGBVxYko5U
+	GdFwsqe20bLeA3OPm+cN2L4EUjHsQ8tRdbwkm6M0ZcvHZQ4xrn6Qkf6o2/pfx67l
+	c5yrVPdjEwnkN+vj687HmoRA1WNgQsAPMznaIxgBUuziNpKFurLiOqR/gYRHwGcD
+	FkzKSI8t9EgVsN3DdxNg2Lx68yyoEgN9ZsfaydMw9GJ5e4n+dyJqqLLj6Y4mC6uV
+	bNuqLLyaqwuhQKbXPYFI1YYJm0/F/yI+K26XxOKZuQDUqmaZ+8IgA8SJmWWxl6DK
+	WMonVg==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dh87j25dk-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 09:45:33 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2aad5fec175so76409835ad.2
+        for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 02:45:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1776159933; x=1776764733; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=uoVEP8DtEXDmzrfxPRtDx5EueSkuJ2pFu6DjvKwz08U=;
+        b=K9F2CfFJvcE7zsW61ns5lvvgrXhYZO5rXgbStDJI9RM1k3SVevxOgisX6SAYMheHEB
+         Hg8VCABTVItTgJ/TBIwOKGklzI6MEnk3bI3z/6ygSMXVXrqL1w7ghkTW0biTjv6A14L3
+         z0o74GV0KSVppGrB8wbaDcFOUmMIJl2A4Jxd96ueVRvtsYR1ltGcbROleafR7OD7Ewlo
+         Paf7rkFIT8FF3EdaKh5XRcbSAptgY4xhTItIiVlm/Lx9cIE0eG/C9ORGFwlmAT3W6Ds+
+         Ge9yEsMeCxaIbPAbn9/nGPFrZ/rVN2uyzP9XZegJccwmsC3HDv9c2VpL2nNLsIK8kT2H
+         5R6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776159933; x=1776764733;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uoVEP8DtEXDmzrfxPRtDx5EueSkuJ2pFu6DjvKwz08U=;
+        b=rkmlo/1GyRpzAwbkzhsQxQCUBq02KIHd23kxFFWJLftYZRnx/mPV4svO/LxFQVR8EK
+         50oFBbdUY0995k3yxww/9TNjb4NtTspBVXK9FQ1WZ/ZxuGQM5wuwEjMhiEmR6VRFb4fO
+         rGcIflA0IwAYdFC7b81UFqRzvAbY24LrF1a8Jmn9bcwiUrkXUtxueZtsXU+QiEPyVuo/
+         TBy0s/BSiEP6WHd7VfxlgjoBkPOaRNCGjwaF8utxI0QLLZI5PlK7XJMxxnevblkQXwKx
+         p8FPAHoyFWqki2rRs22ZnHXkgcYl8w6x9mgYm9gorIhZsqEXjvZB8ZE0KWcttOVnif2w
+         /S0w==
+X-Forwarded-Encrypted: i=1; AFNElJ9o7+/wHSksO0lJwcjOMLi8r29HDvBJFlR7MxcHkzFjv/zZhAMoqmgXzwlWdjFZOg9ocKLepIulyNo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxyNtZNLSK5/WzceYZ4Mm2WCSDGiVRL51gJfjDvUAnwSDXqReh3
+	u5icWvEaEUhkFxrS9KexZXSpwAvVRvT/wp0VMAUepM7tUIXDYEP+f/9t8CIwJfzdH0/0XxapNOq
+	+5x2p9Ycf2JhJjyo90xSv7rO6YS4nkqF8Z9MkyHyb0/3pmvYf+3SWWgmtAsKLYVo=
+X-Gm-Gg: AeBDieuVk9b+2iC8uIkwdHHVFROyBPmRizJYRSEeZsuOYR8dhDwlG5qcFVsvwIQE5wN
+	WJzKmCEACfbIu/NFYRwIfecXqx0cB8gZZ94TzAmXDo+xy9EyjlL+Vuw8zCdAc3fJ8wDHDaK0Pdd
+	Ufqaov2vQuwcP/u1jJ+LSpJdNZfRlJC/+ciQWIYCjFRfQXXyfXyoY8cFJTle0Hep1dAjcWXLaQo
+	kXJAK6kmqK98oEL/CjfJW72X6w1/y+iGAx3mWqZpjh5i6GOx8AzLcManyGiR7bEYldNxJItC7JP
+	/Qqmw6sl4U3JTAikyd377sVt/K83hXLnBUPDRUXDi43Gb5zwR8J/glvwu74BA6UhIulPVtVohgq
+	9sZqRPm1E5mkA6xOvVABtOLxPyRbY9Cacz2ir7Lal9QZr7o+REn5CwQ==
+X-Received: by 2002:a17:902:cf0d:b0:2b0:5cb3:e4bc with SMTP id d9443c01a7336-2b2d59ae7cemr166707585ad.16.1776159933036;
+        Tue, 14 Apr 2026 02:45:33 -0700 (PDT)
+X-Received: by 2002:a17:902:cf0d:b0:2b0:5cb3:e4bc with SMTP id d9443c01a7336-2b2d59ae7cemr166707295ad.16.1776159932546;
+        Tue, 14 Apr 2026 02:45:32 -0700 (PDT)
+Received: from [10.217.219.169] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b2d4f2f8e7sm134928975ad.65.2026.04.14.02.45.28
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 14 Apr 2026 02:45:32 -0700 (PDT)
+Message-ID: <5a2fa53c-a895-4c39-9670-c6d383ca17a6@oss.qualcomm.com>
+Date: Tue, 14 Apr 2026 15:15:27 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:M88vCgD33wnzCN5p0_VbAQ--.56718S3
-X-Coremail-Antispam: 1Uf129KBjvAXoW3Zr1xCr48Zry7Xw4ktF4xWFg_yoW8Aryxuo
-	Za9FWrZwn8Jr18ZFZ5KF4I9F97XF1qgrZ5Aa12yrs8WFy3Ar45tFy7A3yaqa4ayF4rZa18
-	u3y8A3s3trW7Z3srn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvj4RGhF4DUUUU
-X-CM-SenderInfo: 5zhq24xdqjq5hhdkh0dhw/1tbiIhdR9WneCPd6bwAA3M
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/9] bus: mhi: Move sahara protocol driver under
+ drivers/bus/mhi
+To: Manivannan Sadhasivam <mani@kernel.org>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>, andersson@kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        mhi@lists.linux.dev
+References: <20260319-sahara_protocol_new_v2-v4-0-47ad79308762@oss.qualcomm.com>
+ <20260319-sahara_protocol_new_v2-v4-2-47ad79308762@oss.qualcomm.com>
+ <0a2af0d1-27da-4f60-952a-409a5abc5647@oss.qualcomm.com>
+ <sab2tgxtiftme5gscknsl7cfifpshtlrnnihbm2g56ppbowcit@bg4bzwuta6a6>
+Content-Language: en-US
+From: Kishore Batta <kishore.batta@oss.qualcomm.com>
+In-Reply-To: <sab2tgxtiftme5gscknsl7cfifpshtlrnnihbm2g56ppbowcit@bg4bzwuta6a6>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: lWyfwvI9ldFlwj9HPTTrPG0O2vFxZY0y
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE0MDA5MSBTYWx0ZWRfX/Hr3zneiUAm9
+ K01Tx/hzu6vP0xbv1Udszr+TWe8r8MlFwutrOaW/X1IYhkZIMo6bWBXb7sQHKU34DAufoyBlKHH
+ QOsW91jK576h9ZT4YfYzpePOI99aKQ7cGtEA7LxtFTMqeexHqMco04s0i+vNXUZ3SGDJpQ6V+Lu
+ M/ng16sBrxyyHzv/v+33yloLN+eq/lvgucFT+8fKyKjMfQs+lY1ZjKhIY35bRLu+adLO8HYLjxg
+ c50cePkvPNAvQXAbT2l+RDvKphu3sUuoy/x0Jb/WeYa6IKaboCst9+wow8LEUaVVOwocaU625hn
+ fnCMP7V9YSe/YuS862bIUtZl/MnCdP+SSJCiWQ5orGDW4MHKDLZPHUy8xK+OgLW+kt5vmLMVBv1
+ 7306YEOA0VsI1dvuO6AqxwY2Oe+3AJDZ1cAg9k5L3kavQUT9T+XeueF+FzduD3B3BIiRFx7JQgI
+ L7NhXeWFC0UJ+rbPrmA==
+X-Proofpoint-ORIG-GUID: lWyfwvI9ldFlwj9HPTTrPG0O2vFxZY0y
+X-Authority-Analysis: v=2.4 cv=DrpmPm/+ c=1 sm=1 tr=0 ts=69de0cbd cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=W_4NKV7oC5Mk2jKmMQsA:9 a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-14_02,2026-04-13_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 lowpriorityscore=0 clxscore=1015
+ phishscore=0 adultscore=0 spamscore=0 bulkscore=0 malwarescore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604140091
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[yeah.net,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[yeah.net:s=s110527];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[qualcomm.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[qualcomm.com:s=qcppdkim1,oss.qualcomm.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,yeah.net];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-83339-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TAGGED_FROM(0.00)[bounces-83341-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[qualcomm.com:+,oss.qualcomm.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[yeah.net];
-	NEURAL_HAM(-0.00)[-0.967];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,oss.qualcomm.com:dkim,oss.qualcomm.com:mid];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[wenswang@yeah.net,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[yeah.net:+];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	FROM_NO_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[yeah.net:dkim,yeah.net:email,yeah.net:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,outlook.com:email]
-X-Rspamd-Queue-Id: 16E283F7FA8
+	FROM_NEQ_ENVFROM(0.00)[kishore.batta@oss.qualcomm.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: CD84E3F8301
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Wensheng Wang <wenswang@yeah.net>
 
-Add support for MPS mp2985 controller. This driver exposes
-telemetry and limit value readings and writtings.
-
-Signed-off-by: Wensheng Wang <wenswang@yeah.net>
----
-V3 -> V4:
-    1. Avoid mantissa data overflow in mp2985_linear_exp_transfer()
-       function.
-
-V2 -> V3:
-    1. The shifted mantissa be clamped to the range [-1024, 1023]
-       before being masked in mp2985_linear_exp_transfer() function.
-    2. The PMBUS_VOUT_OV_FAULT_LIMIT and PMBUS_VOUT_UV_FAULT_LIMIT
-       value are clamped to 0xFFF before being written to the mp2985.
-    3. Fix the vout scale issue for vout linear11 mode.
-
-v1 -> v2:
-    1. remove duplicate entry in mp2985.rst
-    2. clamp vout value to 32767
-    3. simplify the code for obtaining PMBUS_VOUT_MODE bit value
-    4. add comment for explaining MP2985 supported vout mode
-    5. switch back to previous page after obtaining vid scale to avoid
-       confusing the PMBus core
-
- Documentation/hwmon/index.rst  |   1 +
- Documentation/hwmon/mp2985.rst | 147 ++++++++++++
- MAINTAINERS                    |   7 +
- drivers/hwmon/pmbus/Kconfig    |   9 +
- drivers/hwmon/pmbus/Makefile   |   1 +
- drivers/hwmon/pmbus/mp2985.c   | 402 +++++++++++++++++++++++++++++++++
- 6 files changed, 567 insertions(+)
- create mode 100644 Documentation/hwmon/mp2985.rst
- create mode 100644 drivers/hwmon/pmbus/mp2985.c
-
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index b2ca8513cfcd..1b7007f41b39 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -183,6 +183,7 @@ Hardware Monitoring Kernel Drivers
-    mp2925
-    mp29502
-    mp2975
-+   mp2985
-    mp2993
-    mp5023
-    mp5920
-diff --git a/Documentation/hwmon/mp2985.rst b/Documentation/hwmon/mp2985.rst
-new file mode 100644
-index 000000000000..87a39c8a300c
---- /dev/null
-+++ b/Documentation/hwmon/mp2985.rst
-@@ -0,0 +1,147 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver mp2985
-+====================
-+
-+Supported chips:
-+
-+  * MPS mp2985
-+
-+    Prefix: 'mp2985'
-+
-+Author:
-+
-+	Wensheng Wang <wenswang@yeah.net>
-+
-+Description
-+-----------
-+
-+This driver implements support for Monolithic Power Systems, Inc. (MPS)
-+MP2985 Dual Loop Digital Multi-phase Controller.
-+
-+Device compliant with:
-+
-+- PMBus rev 1.3 interface.
-+
-+The driver exports the following attributes via the 'sysfs' files
-+for input voltage:
-+
-+**in1_input**
-+
-+**in1_label**
-+
-+**in1_crit**
-+
-+**in1_crit_alarm**
-+
-+**in1_lcrit**
-+
-+**in1_lcrit_alarm**
-+
-+**in1_max**
-+
-+**in1_max_alarm**
-+
-+**in1_min**
-+
-+**in1_min_alarm**
-+
-+The driver provides the following attributes for output voltage:
-+
-+**in2_input**
-+
-+**in2_label**
-+
-+**in2_crit**
-+
-+**in2_crit_alarm**
-+
-+**in2_lcrit**
-+
-+**in2_lcrit_alarm**
-+
-+**in3_input**
-+
-+**in3_label**
-+
-+**in3_crit**
-+
-+**in3_crit_alarm**
-+
-+**in3_lcrit**
-+
-+**in3_lcrit_alarm**
-+
-+The driver provides the following attributes for input current:
-+
-+**curr1_input**
-+
-+**curr1_label**
-+
-+The driver provides the following attributes for output current:
-+
-+**curr2_input**
-+
-+**curr2_label**
-+
-+**curr2_crit**
-+
-+**curr2_crit_alarm**
-+
-+**curr2_max**
-+
-+**curr2_max_alarm**
-+
-+**curr3_input**
-+
-+**curr3_label**
-+
-+**curr3_crit**
-+
-+**curr3_crit_alarm**
-+
-+**curr3_max**
-+
-+**curr3_max_alarm**
-+
-+The driver provides the following attributes for input power:
-+
-+**power1_input**
-+
-+**power1_label**
-+
-+**power2_input**
-+
-+**power2_label**
-+
-+The driver provides the following attributes for output power:
-+
-+**power3_input**
-+
-+**power3_label**
-+
-+**power4_input**
-+
-+**power4_label**
-+
-+The driver provides the following attributes for temperature:
-+
-+**temp1_input**
-+
-+**temp1_crit**
-+
-+**temp1_crit_alarm**
-+
-+**temp1_max**
-+
-+**temp1_max_alarm**
-+
-+**temp2_input**
-+
-+**temp2_crit**
-+
-+**temp2_crit_alarm**
-+
-+**temp2_max**
-+
-+**temp2_max_alarm**
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3adc870d523b..ead04c2d1665 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17933,6 +17933,13 @@ S:	Maintained
- F:	Documentation/hwmon/mp29502.rst
- F:	drivers/hwmon/pmbus/mp29502.c
- 
-+MPS MP2985 DRIVER
-+M:	Wensheng Wang <wenswang@yeah.net>
-+L:	linux-hwmon@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/hwmon/mp2985.rst
-+F:	drivers/hwmon/pmbus/mp2985.c
-+
- MPS MP2993 DRIVER
- M:	Noah Wang <noahwang.wang@outlook.com>
- L:	linux-hwmon@vger.kernel.org
-diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-index fc1273abe357..83fe5866c083 100644
---- a/drivers/hwmon/pmbus/Kconfig
-+++ b/drivers/hwmon/pmbus/Kconfig
-@@ -447,6 +447,15 @@ config SENSORS_MP2975
- 	  This driver can also be built as a module. If so, the module will
- 	  be called mp2975.
- 
-+config SENSORS_MP2985
-+	tristate "MPS MP2985"
-+	help
-+	  If you say yes here you get hardware monitoring support for MPS
-+	  MP2985 Dual Loop Digital Multi-Phase Controller.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called mp2985.
-+
- config SENSORS_MP2993
- 	tristate "MPS MP2993"
- 	help
-diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
-index d6c86924f887..24505bbee2b0 100644
---- a/drivers/hwmon/pmbus/Makefile
-+++ b/drivers/hwmon/pmbus/Makefile
-@@ -45,6 +45,7 @@ obj-$(CONFIG_SENSORS_MP2891)	+= mp2891.o
- obj-$(CONFIG_SENSORS_MP2925)	+= mp2925.o
- obj-$(CONFIG_SENSORS_MP29502)	+= mp29502.o
- obj-$(CONFIG_SENSORS_MP2975)	+= mp2975.o
-+obj-$(CONFIG_SENSORS_MP2985)	+= mp2985.o
- obj-$(CONFIG_SENSORS_MP2993)	+= mp2993.o
- obj-$(CONFIG_SENSORS_MP5023)	+= mp5023.o
- obj-$(CONFIG_SENSORS_MP5920)	+= mp5920.o
-diff --git a/drivers/hwmon/pmbus/mp2985.c b/drivers/hwmon/pmbus/mp2985.c
-new file mode 100644
-index 000000000000..eb1a25b00c0b
---- /dev/null
-+++ b/drivers/hwmon/pmbus/mp2985.c
-@@ -0,0 +1,402 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Hardware monitoring driver for MPS Multi-phase Digital VR Controllers(MP2985)
-+ *
-+ * Copyright (C) 2026 MPS
-+ */
-+
-+#include <linux/bitfield.h>
-+#include <linux/i2c.h>
-+#include <linux/module.h>
-+#include <linux/of_device.h>
-+#include "pmbus.h"
-+
-+/*
-+ * Vender specific register READ_PIN_EST(0x93), READ_IIN_EST(0x8E),
-+ * MFR_VR_MULTI_CONFIG_R1(0x0D) and MFR_VR_MULTI_CONFIG_R2(0x1D).
-+ * The READ_PIN_EST is used to read pin telemetry, the READ_IIN_EST
-+ * is used to read iin telemetry and the MFR_VR_MULTI_CONFIG_R1,
-+ * MFR_VR_MULTI_CONFIG_R2 are used to obtain vid scale.
-+ */
-+#define READ_PIN_EST	0x93
-+#define READ_IIN_EST	0x8E
-+#define MFR_VR_MULTI_CONFIG_R1	0x0D
-+#define MFR_VR_MULTI_CONFIG_R2	0x1D
-+
-+#define MP2985_VOUT_DIV	64
-+#define MP2985_VOUT_OVUV_UINT	125
-+#define MP2985_VOUT_OVUV_DIV	64
-+
-+#define MP2985_PAGE_NUM	2
-+
-+#define MP2985_RAIL1_FUNC	(PMBUS_HAVE_VIN | PMBUS_HAVE_PIN | \
-+							 PMBUS_HAVE_VOUT | PMBUS_HAVE_IOUT | \
-+							 PMBUS_HAVE_POUT | PMBUS_HAVE_TEMP | \
-+							 PMBUS_HAVE_STATUS_VOUT | \
-+							 PMBUS_HAVE_STATUS_IOUT | \
-+							 PMBUS_HAVE_STATUS_TEMP | \
-+							 PMBUS_HAVE_STATUS_INPUT)
-+
-+#define MP2985_RAIL2_FUNC	(PMBUS_HAVE_PIN | PMBUS_HAVE_VOUT | \
-+							 PMBUS_HAVE_IOUT | PMBUS_HAVE_POUT | \
-+							 PMBUS_HAVE_TEMP | PMBUS_HAVE_IIN | \
-+							 PMBUS_HAVE_STATUS_VOUT | \
-+							 PMBUS_HAVE_STATUS_IOUT | \
-+							 PMBUS_HAVE_STATUS_TEMP | \
-+							 PMBUS_HAVE_STATUS_INPUT)
-+
-+struct mp2985_data {
-+	struct pmbus_driver_info info;
-+	int vout_scale[MP2985_PAGE_NUM];
-+	int vid_offset[MP2985_PAGE_NUM];
-+};
-+
-+#define to_mp2985_data(x) container_of(x, struct mp2985_data, info)
-+
-+static u16 mp2985_linear_exp_transfer(u16 word, u16 expect_exponent)
-+{
-+	s16 exponent, mantissa, target_exponent;
-+
-+	exponent = ((s16)word) >> 11;
-+	mantissa = ((s16)((word & 0x7ff) << 5)) >> 5;
-+	target_exponent = (s16)((expect_exponent & 0x1f) << 11) >> 11;
-+
-+	/*
-+	 * The MP2985 does not support negtive limit value, if a negtive
-+	 * limit value is written, the limit value will become to 0. And
-+	 * the maximum positive limit value is limitted to 0x3FF.
-+	 */
-+	if (mantissa < 0) {
-+		mantissa = 0;
-+	} else {
-+		if (exponent > target_exponent) {
-+			mantissa = (1023 >> (exponent - target_exponent)) >= mantissa ?
-+						mantissa << (exponent - target_exponent) :
-+						0x3FF;
-+		} else {
-+			mantissa = clamp_val(mantissa >> (target_exponent - exponent),
-+					     0, 0x3FF);
-+		}
-+	}
-+
-+	return mantissa | ((expect_exponent << 11) & 0xf800);
-+}
-+
-+static int mp2985_read_byte_data(struct i2c_client *client, int page, int reg)
-+{
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_VOUT_MODE:
-+		/*
-+		 * The MP2985 does not follow standard PMBus protocol completely,
-+		 * and the calculation of vout in this driver is based on direct
-+		 * format. As a result, the format of vout is enforced to direct.
-+		 */
-+		ret = PB_VOUT_MODE_DIRECT;
-+		break;
-+	default:
-+		ret = -ENODATA;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int mp2985_read_word_data(struct i2c_client *client, int page, int phase,
-+				 int reg)
-+{
-+	const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
-+	struct mp2985_data *data = to_mp2985_data(info);
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_READ_VOUT:
-+		ret = pmbus_read_word_data(client, page, phase, reg);
-+		if (ret < 0)
-+			return ret;
-+
-+		/*
-+		 * The MP2985 supports three vout mode, direct, linear11 and vid mode.
-+		 * In vid mode, the MP2985 vout telemetry has 49 vid step offset, but
-+		 * PMBUS_VOUT_OV_FAULT_LIMIT and PMBUS_VOUT_UV_FAULT_LIMIT do not take
-+		 * this into consideration, their resolution are 1.953125mV/LSB, as a
-+		 * result, format[PSC_VOLTAGE_OUT] can not be set to vid mode directly.
-+		 * Adding extra vid_offset variable for vout telemetry.
-+		 */
-+		ret = clamp_val(DIV_ROUND_CLOSEST(((ret & GENMASK(11, 0)) +
-+									data->vid_offset[page]) *
-+							data->vout_scale[page], MP2985_VOUT_DIV),
-+							0, 0x7FFF);
-+		break;
-+	case PMBUS_READ_IIN:
-+		/*
-+		 * The MP2985 has standard PMBUS_READ_IIN register(0x89), but this is
-+		 * not used to read the input current of per rail. The input current
-+		 * is read through the vender redefined register READ_IIN_EST(0x8E).
-+		 */
-+		ret = pmbus_read_word_data(client, page, phase, READ_IIN_EST);
-+		break;
-+	case PMBUS_READ_PIN:
-+		/*
-+		 * The MP2985 has standard PMBUS_READ_PIN register(0x97), but this
-+		 * is not used to read the input power of per rail. The input power
-+		 * of per rail is read through the vender redefined register
-+		 * READ_PIN_EST(0x93).
-+		 */
-+		ret = pmbus_read_word_data(client, page, phase, READ_PIN_EST);
-+		break;
-+	case PMBUS_VOUT_OV_FAULT_LIMIT:
-+	case PMBUS_VOUT_UV_FAULT_LIMIT:
-+		ret = pmbus_read_word_data(client, page, phase, reg);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = DIV_ROUND_CLOSEST((ret & GENMASK(11, 0)) * MP2985_VOUT_OVUV_UINT,
-+					MP2985_VOUT_OVUV_DIV);
-+		break;
-+	case PMBUS_STATUS_WORD:
-+	case PMBUS_READ_VIN:
-+	case PMBUS_READ_IOUT:
-+	case PMBUS_READ_POUT:
-+	case PMBUS_READ_TEMPERATURE_1:
-+	case PMBUS_VIN_OV_FAULT_LIMIT:
-+	case PMBUS_VIN_OV_WARN_LIMIT:
-+	case PMBUS_VIN_UV_WARN_LIMIT:
-+	case PMBUS_VIN_UV_FAULT_LIMIT:
-+	case PMBUS_IOUT_OC_FAULT_LIMIT:
-+	case PMBUS_IOUT_OC_WARN_LIMIT:
-+	case PMBUS_OT_FAULT_LIMIT:
-+	case PMBUS_OT_WARN_LIMIT:
-+		/*
-+		 * These register is not explicitly handled by the driver,
-+		 * as a result, return -ENODATA directly.
-+		 */
-+		ret = -ENODATA;
-+		break;
-+	default:
-+		/*
-+		 * The MP2985 do not support other telemetry and limit value
-+		 * reading, so, return -EINVAL directly.
-+		 */
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int mp2985_write_word_data(struct i2c_client *client, int page, int reg,
-+				  u16 word)
-+{
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_VIN_OV_FAULT_LIMIT:
-+	case PMBUS_VIN_OV_WARN_LIMIT:
-+	case PMBUS_VIN_UV_WARN_LIMIT:
-+	case PMBUS_VIN_UV_FAULT_LIMIT:
-+		/*
-+		 * The PMBUS_VIN_OV_FAULT_LIMIT, PMBUS_VIN_OV_WARN_LIMIT,
-+		 * PMBUS_VIN_UV_WARN_LIMIT and PMBUS_VIN_UV_FAULT_LIMIT
-+		 * of MP2985 is linear11 format, and the exponent is a
-+		 * constant value(5'b11101), so the exponent of word
-+		 * parameter should be converted to 5'b11101(0x1D).
-+		 */
-+		ret = pmbus_write_word_data(client, page, reg,
-+					    mp2985_linear_exp_transfer(word, 0x1D));
-+		break;
-+	case PMBUS_VOUT_OV_FAULT_LIMIT:
-+	case PMBUS_VOUT_UV_FAULT_LIMIT:
-+		/*
-+		 * The bit0-bit11 is the limit value, and bit12-bit15
-+		 * should not be changed.
-+		 */
-+		ret = pmbus_read_word_data(client, page, 0xff, reg);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = pmbus_write_word_data(client, page, reg,
-+					    (ret & ~GENMASK(11, 0)) |
-+				clamp_val(DIV_ROUND_CLOSEST(word * MP2985_VOUT_OVUV_DIV,
-+							    MP2985_VOUT_OVUV_UINT), 0, 0xFFF));
-+		break;
-+	case PMBUS_OT_FAULT_LIMIT:
-+	case PMBUS_OT_WARN_LIMIT:
-+		/*
-+		 * The PMBUS_OT_FAULT_LIMIT and PMBUS_OT_WARN_LIMIT of
-+		 * MP2985 is linear11 format, and the exponent is a
-+		 * constant value(5'b00000), so the exponent of word
-+		 * parameter should be converted to 5'b00000.
-+		 */
-+		ret = pmbus_write_word_data(client, page, reg,
-+					    mp2985_linear_exp_transfer(word, 0x00));
-+		break;
-+	case PMBUS_IOUT_OC_FAULT_LIMIT:
-+	case PMBUS_IOUT_OC_WARN_LIMIT:
-+		/*
-+		 * The PMBUS_IOUT_OC_FAULT_LIMIT and PMBUS_IOUT_OC_WARN_LIMIT
-+		 * of MP2985 is linear11 format, and the exponent can not be
-+		 * changed.
-+		 */
-+		ret = pmbus_read_word_data(client, page, 0xff, reg);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = pmbus_write_word_data(client, page, reg,
-+					    mp2985_linear_exp_transfer(word,
-+								       FIELD_GET(GENMASK(15, 11),
-+										 ret)));
-+		break;
-+	default:
-+		/*
-+		 * The MP2985 do not support other limit value configuration,
-+		 * so, return -EINVAL directly.
-+		 */
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int
-+mp2985_identify_vout_scale(struct i2c_client *client, struct pmbus_driver_info *info,
-+			   int page)
-+{
-+	struct mp2985_data *data = to_mp2985_data(info);
-+	int ret;
-+
-+	ret = i2c_smbus_write_byte_data(client, PMBUS_PAGE, page);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = i2c_smbus_read_byte_data(client, PMBUS_VOUT_MODE);
-+	if (ret < 0)
-+		return ret;
-+
-+	/*
-+	 * The MP2985 supports three vout mode. If PMBUS_VOUT_MODE
-+	 * bit5 is 1, it is vid mode. If PMBUS PMBUS_VOUT_MODE bit4
-+	 * is 1, it is linear11 mode, the vout scale is 1.953125mv/LSB.
-+	 * If PMBUS PMBUS_VOUT_MODE bit6 is 1, it is direct mode, the
-+	 * vout scale is 1mv/LSB. In vid mode, the MP2985 vout telemetry
-+	 * has 49 vid step offset.
-+	 */
-+	if (FIELD_GET(BIT(5), ret)) {
-+		ret = i2c_smbus_write_byte_data(client, PMBUS_PAGE, 2);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = i2c_smbus_read_word_data(client, page == 0 ?
-+						MFR_VR_MULTI_CONFIG_R1 :
-+						MFR_VR_MULTI_CONFIG_R2);
-+		if (ret < 0)
-+			return ret;
-+
-+		if (page == 0) {
-+			if (FIELD_GET(BIT(4), ret))
-+				data->vout_scale[page] = 320;
-+			else
-+				data->vout_scale[page] = 640;
-+		} else {
-+			if (FIELD_GET(BIT(3), ret))
-+				data->vout_scale[page] = 320;
-+			else
-+				data->vout_scale[page] = 640;
-+		}
-+
-+		data->vid_offset[page] = 49;
-+
-+		/*
-+		 * For vid mode, the MP2985 should be changed to page 2
-+		 * to obtain vout scale value, this may confuse the PMBus
-+		 * core. To avoid this, switch back to the previous page
-+		 * again.
-+		 */
-+		ret = i2c_smbus_write_byte_data(client, PMBUS_PAGE, page);
-+		if (ret < 0)
-+			return ret;
-+	} else if (FIELD_GET(BIT(4), ret)) {
-+		data->vout_scale[page] = 125;
-+		data->vid_offset[page] = 0;
-+	} else {
-+		data->vout_scale[page] = 64;
-+		data->vid_offset[page] = 0;
-+	}
-+
-+	return 0;
-+}
-+
-+static int mp2985_identify(struct i2c_client *client, struct pmbus_driver_info *info)
-+{
-+	int ret;
-+
-+	ret = mp2985_identify_vout_scale(client, info, 0);
-+	if (ret < 0)
-+		return ret;
-+
-+	return mp2985_identify_vout_scale(client, info, 1);
-+}
-+
-+static struct pmbus_driver_info mp2985_info = {
-+	.pages = MP2985_PAGE_NUM,
-+	.format[PSC_VOLTAGE_IN] = linear,
-+	.format[PSC_CURRENT_IN] = linear,
-+	.format[PSC_CURRENT_OUT] = linear,
-+	.format[PSC_POWER] = linear,
-+	.format[PSC_TEMPERATURE] = linear,
-+	.format[PSC_VOLTAGE_OUT] = direct,
-+
-+	.m[PSC_VOLTAGE_OUT] = 1,
-+	.R[PSC_VOLTAGE_OUT] = 3,
-+	.b[PSC_VOLTAGE_OUT] = 0,
-+
-+	.func[0] = MP2985_RAIL1_FUNC,
-+	.func[1] = MP2985_RAIL2_FUNC,
-+	.read_word_data = mp2985_read_word_data,
-+	.read_byte_data = mp2985_read_byte_data,
-+	.write_word_data = mp2985_write_word_data,
-+	.identify = mp2985_identify,
-+};
-+
-+static int mp2985_probe(struct i2c_client *client)
-+{
-+	struct mp2985_data *data;
-+
-+	data = devm_kzalloc(&client->dev, sizeof(struct mp2985_data), GFP_KERNEL);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	memcpy(&data->info, &mp2985_info, sizeof(mp2985_info));
-+
-+	return pmbus_do_probe(client, &data->info);
-+}
-+
-+static const struct i2c_device_id mp2985_id[] = {
-+	{"mp2985", 0},
-+	{}
-+};
-+MODULE_DEVICE_TABLE(i2c, mp2985_id);
-+
-+static const struct of_device_id __maybe_unused mp2985_of_match[] = {
-+	{.compatible = "mps,mp2985"},
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, mp2985_of_match);
-+
-+static struct i2c_driver mp2985_driver = {
-+	.driver = {
-+		.name = "mp2985",
-+		.of_match_table = mp2985_of_match,
-+	},
-+	.probe = mp2985_probe,
-+	.id_table = mp2985_id,
-+};
-+
-+module_i2c_driver(mp2985_driver);
-+
-+MODULE_AUTHOR("Wensheng Wang <wenswang@yeah.net>");
-+MODULE_DESCRIPTION("PMBus driver for MPS MP2985 device");
-+MODULE_LICENSE("GPL");
-+MODULE_IMPORT_NS("PMBUS");
--- 
-2.25.1
-
+On 4/13/2026 4:34 PM, Manivannan Sadhasivam wrote:
+> On Thu, Apr 09, 2026 at 02:20:02PM -0600, Jeff Hugo wrote:
+>> On 3/19/2026 12:31 AM, Kishore Batta wrote:
+>>> The Sahara protocol driver is currently located under the QAIC
+>>> accelerator subsystem even though protocol itself is transported over the
+>>> MHI bus and is used by multiple Qualcomm flashless devices.
+>>>
+>>> Relocate the Sahara protocol driver to drivers/bus/mhi and register it as
+>>> an independent MHI protocol driver. This avoids treating Sahara as QAIC
+>>> specific and makes it available for reuse by other MHI based devices.
+>>>
+>>> As part of this move, introduce a dedicated Kconfig and Makefile under the
+>>> MHI subsystem and expose the sahara interface via a common header.
+>> I don't think this belongs under MHI. Mani needs to confirm that he agrees
+>> with the concept of moving this there.
+>>
+>> The Sahara protocol as defined by the spec does not require MHI. We know
+>> that there are Sahara implementations over USB. I don't see a dependency or
+>> relationship to MHI other than the current in-kernel implementation uses
+>> MHI, but there are plenty of things that use MHI (qaic, mhi-net, ath12k,
+>> etc) which are not a part of the MHI bus.
+>>
+> Since Sahara is a MHI client driver, it is OK with me to place it under
+> drivers/bus/mhi/host/. We do tend to host the client/controller drivers if they
+> also bind to separate top level subsystems like Net, WWAN... but for the pure
+> protocol drivers like Sahara, MHI can provide asylum.
+>
+> - Mani
+Thanks for the confirmation Mani. I will keep the Sahara driver under 
+driver/bus/mhi/host/ and also move the Sahara documentation under 
+Documentation/mhi/ directory.
 
