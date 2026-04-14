@@ -1,145 +1,275 @@
-Return-Path: <linux-doc+bounces-83386-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83388-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4NiWBVZj3mlqDgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83386-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 17:55:02 +0200
+	id YB9xGdVt3mncEAAAu9opvQ
+	(envelope-from <linux-doc+bounces-83388-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 18:39:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BC2C3FC323
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 17:55:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B98C33FCAC9
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 18:39:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2C5C83011776
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 15:53:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7F56430107E4
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2026 16:35:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58A223EC2E1;
-	Tue, 14 Apr 2026 15:53:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4458A27FD76;
+	Tue, 14 Apr 2026 16:35:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="SRgw6+T3"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iRQqD7U/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED0333EC2FC
-	for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 15:53:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.20
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776181986; cv=none; b=KV4GrrACQVPiZtHU/vRiuuXPE0U5DZnc0h9NkuVQK4OMiPimbs2+zpFxoKnOlarEthL/ziP4dgqTRmxEajfGhASx746jS978q1+fhF98rcirqlNd0ECE9kGJYZ4ZUeNjyE5zAOZCS37t7u5SwaU/V6RtnHIRm7ahGA9Ev+UToxg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776181986; c=relaxed/simple;
-	bh=kW6vz8CNfrhFX1nrQy3EsZ433Nz5IeVf8h4zujlHDoA=;
-	h=Date:From:To:Cc:Subject:Message-ID; b=JM5fI/bp77QaFJKuQESAjj6Oce2kdFjU97AN6BDrzhrZBcqSaadpw8WsQI/IvpzLZE0umVTTlkXSogM+YknT5am/etpKxQtcOcvs9T/ORkagqfbsOrvrCQu/rOHo8rcylx81QttRA0s+w4COwOVl0QRDX8m17gkPiLny83mRUjM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=SRgw6+T3; arc=none smtp.client-ip=198.175.65.20
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1776181985; x=1807717985;
-  h=date:from:to:cc:subject:message-id;
-  bh=kW6vz8CNfrhFX1nrQy3EsZ433Nz5IeVf8h4zujlHDoA=;
-  b=SRgw6+T3b1AWFUVQMB1W7cJS1v24k58dMFQplUyrjE1RsnT//X8kSvYD
-   JxBUDQIdvVVaFGbFgi8jCOfb9zXKPLaSDu1Wy6mGdYnx52IdflJb2u0Vu
-   b4S3o4YW3JM49QDZ9ZFeKsALRpW/4Xm6GRTYyBtSiZBKMy4QzfQhfI/N/
-   66oDV4lsprItjdHwlMa3HSsazUCcxgOTbfRpfYXSO6OpJuvWssR+82AwU
-   EJQDLC3baCfqYefCK/lEni3CG9OG+D0ybz//4zsIl9g/DJzD35m98YgHd
-   b8xlM45CexuGSBflXpx5OF8M5c3P3MWU2l2cX5plcqCQIIgPXqsrffa7V
-   Q==;
-X-CSE-ConnectionGUID: p7YFDJCzQjafUHBT+fCC3g==
-X-CSE-MsgGUID: X7zFPvKeTRu8d5AS96mmNQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11759"; a="76849421"
-X-IronPort-AV: E=Sophos;i="6.23,179,1770624000"; 
-   d="scan'208";a="76849421"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Apr 2026 08:53:05 -0700
-X-CSE-ConnectionGUID: EKnFJCxPSL+BqyW/JF8H4A==
-X-CSE-MsgGUID: qta4zjYeTMOTnVHddtSq9w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,179,1770624000"; 
-   d="scan'208";a="231884663"
-Received: from igk-lkp-server01.igk.intel.com (HELO bdf09bfdbd5f) ([10.211.93.152])
-  by fmviesa004.fm.intel.com with ESMTP; 14 Apr 2026 08:53:02 -0700
-Received: from kbuild by bdf09bfdbd5f with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wCg4T-000000000RX-0ryK;
-	Tue, 14 Apr 2026 15:53:01 +0000
-Date: Tue, 14 Apr 2026 17:52:48 +0200
-From: kernel test robot <lkp@intel.com>
-To: Dev Jain <dev.jain@arm.com>
-Cc: oe-kbuild-all@lists.linux.dev, 0day robot <lkp@intel.com>,
- linux-doc@vger.kernel.org
-Subject: htmldocs: Documentation/core-api/mm-api:104:
- ./include/linux/mm_inline.h:577: WARNING: Inline emphasis start-string
- without end-string. [docutils]
-Message-ID: <202604141701.JY7pVkau-lkp@intel.com>
-User-Agent: s-nail v14.9.25
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1D7D262808
+	for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 16:35:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.221.48
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776184537; cv=pass; b=mChtwof9YWG3vpsxQFQOf4JhzXiu8fxGyAqw9B9zhrYWlkpbdxn2IcCeKoNHCpCw+srEOjQfTDbo0fnbSfcRKsScbFHsqIw/YPxwdHzSeI0hq0VmFLlNmWdC/2E6CQDaQDyNFprqg9iTqu6uue9AvXoJB2UhbuwFccWTMGAuvFg=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776184537; c=relaxed/simple;
+	bh=xYiD8mPQzgv2ojv2b6lBy802NgdOj9ELcJpY/+bSZFI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=dNmCAk2hkAAgQo4mOnRnurZt0n7A+vEkljyl3VwbrjpysiEot8kgtvsG0g+lPdg3LgZzmWy9oyIMSyGkMSCI9CT6dYIZuUYhBlcVF7hBgduzA87AydUleuwRTeJl6tiQYRVJI8aX8M237v5pDo1t5Ig5h2WpWqUE9Scac0KAMls=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iRQqD7U/; arc=pass smtp.client-ip=209.85.221.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-43d7a5e77b1so1424000f8f.1
+        for <linux-doc@vger.kernel.org>; Tue, 14 Apr 2026 09:35:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776184534; cv=none;
+        d=google.com; s=arc-20240605;
+        b=REo58AcgqpwMNC0ulVwfUHEU0dNc+FR03GpuDxfi1Yl/VnfkJACrIreh93XKomTb1f
+         StBSA0Wfya+tcpwMejyLhPxWq/3llXQq87ymISR/hKdMYQvdgSb3t7ClUXLROTLDKEsI
+         Ei2AKMjDzrcKBLfjJ9Kq38b5Y5dH2+x/u+4AzGtTTbqYr8VgOGpciMO10+chtdFEK0O/
+         yJZn5A6sXMPpWN6HdjyUs2k1d8Nk0RRfZeQms6rYxQTDg+t+ChrdKIX7bhxNtt4fEmpo
+         g+2y38NnzaunIbkrNeYUbGMDOAX+h1PfqVJshRhy/Gxyhq2XDqOMhZB35+o54srl5uXh
+         n0ow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=fQleDbjaYYUSGdpynlKDYhzpuJpOjymZUKR/yJ1TCio=;
+        fh=EJWOAU1z2dWhxwszAtQ6LAq+uffI29VBBQT0p+aAt6A=;
+        b=N0TwU1fJpnNw7IdXKMxoJoOKCxSvZ3Kr2dg3KutsjXDWvQKNDMwucSnVt5cASBbSHH
+         gz6C3X6LeBArfNB1YB8wntQQghQnC8UXzvAOOl4/G2eQ0D18Vr+VrrtNCajF+lJgz4f1
+         4lj4nXyG55SbncXUPRmbkyfpGmvjCYqiS0n0K+94iG4oSm5GBgFFJIEMeTm7x2b4QjuM
+         ZamMfi3jGoKlPJbF3RpSeOxj22F8b4cvme0S8T67Z/waD/nLLXHjch2iRt98Qt/PbFKl
+         o/McDaooF0Jp33OMRp5QMYWqohjbRXA1+3YAcR6EWVFkORnn40po6lUsdVSPe5sMtTFw
+         FTTg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776184534; x=1776789334; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fQleDbjaYYUSGdpynlKDYhzpuJpOjymZUKR/yJ1TCio=;
+        b=iRQqD7U/7sTULcNbGNjYaQDl0Xrs7FNVw60c+DtlpI7ZmQN/fe+64cSQrjShAvZMLl
+         YuRde/SR3rZiRKCgscsVSY/3sLiAdY83B/YPTmopOlr3fnw3jfkz/PKZX/xqImPeuBaT
+         XaBS5QOarKISOJqVhPsxIfn6QvB7WOWX7jqU4qErzTlJ+4yLnKFd9ieFsJnuIqIHtZax
+         p0x26LfT+JWaRSDKsVsyJExbm6zk8UwjZNMoKrlvRIG9fUW25p8jEPoFokZ0Q+CGFns7
+         gqCc+v6I1ow7f0DphGWmExphDW/FABGqqdygM52tdN4yMR736CLcr8BULPlreiCShLdx
+         NQlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776184534; x=1776789334;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=fQleDbjaYYUSGdpynlKDYhzpuJpOjymZUKR/yJ1TCio=;
+        b=snZZ7ixAFHIb0sfsNrkfYL+Mp/e5P0OpNLNYNlZlHMkeIB/XpyhT6iBK+e52BCNKhP
+         ZxzHRR2pSKaFIErwypUJaICPYPfA2b5lYAPFwNZJDq9btPqweyxfNt4UxAio4slal81g
+         snuxltfR9sA6DeXF4cvHm5cmFyqsNqy5/DSh+VeAtU7eIQIVH9iHcNBJPaKYZMgC8D90
+         WZJzYPxp1Wi/2Ansikvf93hRP8sYBX/pDlsWLnFK9FySyz1ctNWcmRfoYVgOfbME2IKj
+         3Q28us0k55UaiH4oVXJonRYVx/wxndl6R8rrf23eNuUWyTw/S3qNnZqWFcytQb21ryHM
+         DTDg==
+X-Forwarded-Encrypted: i=1; AFNElJ+nUhITuTsGKzAfYfczrs9lJVT53K2CM7zfstEE6EuQQ0ZM/3AfefeJe9QKbMDODyel3TGn6c0MxIY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzmAORrz1epMRH9b5hLy9lXJdgc5q2G+0zTE3c7eFIh+zudKvme
+	IeEF76Zmagme8e+CqeR/lMJdx9Dei6zh3BA8FBNSIGpgsEkBsIYMDk6/9oy6GuIYZSoC7fD3d0/
+	KQrADh7bT5BLqkrnwdXR2aglHaZdDHNA=
+X-Gm-Gg: AeBDietFBE3CPQL0EZVWb5TnclsArbRrNXLdwc+AYWhgyovZDXdCdd3E+d/CAZgKzJT
+	pwwfZPH7IYfm3zdW7aKuC2GYieiryCRQAOS9tJKpJuouqJ/tfJ4QfKLvKv01/h5bNyrqUJ2UqaO
+	gzF63quzoIbLJBEH46wcU5EDJ1ZbcddwbnfrwHYHiPUKpYmlH/AX+mOGDO5qn9B97klxG+Xmdmo
+	VEVntxtVMDMwzCxHI4iwLmeLKe3dGsGVoiCBTLdpRszy30/2FYa3XUAgq9H8nnrLzxu5kLx9g8H
+	QvM32adwNx07nqtQxBtbqelEsTycsWwIjjkHzy4=
+X-Received: by 2002:a05:6000:25ed:b0:43c:fac5:d382 with SMTP id
+ ffacd0b85a97d-43d5958e3b8mr30561697f8f.12.1776184533792; Tue, 14 Apr 2026
+ 09:35:33 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+References: <20260320192735.748051-1-nphamcs@gmail.com> <acQrQYHJgqof0yx4@yjaykim-PowerEdge-T330>
+ <CAKEwX=NnHxpQKp9qBg2=r_euyjgxw2nHXjbgof3MymHTgJmRAQ@mail.gmail.com>
+ <ad2rYH9tUPthHFoj@yjaykim-PowerEdge-T330> <CAMgjq7BO6SLZPfNXDh1F-7RAOqDAfqMQ4PM=qjAq1mCsWyD0LQ@mail.gmail.com>
+In-Reply-To: <CAMgjq7BO6SLZPfNXDh1F-7RAOqDAfqMQ4PM=qjAq1mCsWyD0LQ@mail.gmail.com>
+From: Nhat Pham <nphamcs@gmail.com>
+Date: Tue, 14 Apr 2026 09:35:22 -0700
+X-Gm-Features: AQROBzD5xGWfOWAJA-1nI1ObWe4VBmguR2Q9Syvbquy-jm8YJp-HL-l7rnLn-Mc
+Message-ID: <CAKEwX=NtcGBnDpSuePqfK9G4jACC5gU95-69A4z5JzKkYRq1YA@mail.gmail.com>
+Subject: Re: [PATCH v5 00/21] Virtual Swap Space
+To: Kairui Song <ryncsn@gmail.com>
+Cc: YoungJun Park <youngjun.park@lge.com>, Liam.Howlett@oracle.com, 
+	akpm@linux-foundation.org, apopple@nvidia.com, axelrasmussen@google.com, 
+	baohua@kernel.org, baolin.wang@linux.alibaba.com, bhe@redhat.com, 
+	byungchul@sk.com, cgroups@vger.kernel.org, chengming.zhou@linux.dev, 
+	chrisl@kernel.org, corbet@lwn.net, david@kernel.org, dev.jain@arm.com, 
+	gourry@gourry.net, hannes@cmpxchg.org, hughd@google.com, jannh@google.com, 
+	joshua.hahnjy@gmail.com, lance.yang@linux.dev, lenb@kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-pm@vger.kernel.org, lorenzo.stoakes@oracle.com, matthew.brost@intel.com, 
+	mhocko@suse.com, muchun.song@linux.dev, npache@redhat.com, pavel@kernel.org, 
+	peterx@redhat.com, peterz@infradead.org, pfalcato@suse.de, rafael@kernel.org, 
+	rakie.kim@sk.com, roman.gushchin@linux.dev, rppt@kernel.org, 
+	ryan.roberts@arm.com, shakeel.butt@linux.dev, shikemeng@huaweicloud.com, 
+	surenb@google.com, tglx@kernel.org, vbabka@suse.cz, weixugc@google.com, 
+	ying.huang@linux.alibaba.com, yosry.ahmed@linux.dev, yuanchu@google.com, 
+	zhengqi.arch@bytedance.com, ziy@nvidia.com, kernel-team@meta.com, 
+	riel@surriel.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[intel.com:+];
+	TAGGED_FROM(0.00)[bounces-83388-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[lge.com,oracle.com,linux-foundation.org,nvidia.com,google.com,kernel.org,linux.alibaba.com,redhat.com,sk.com,vger.kernel.org,linux.dev,lwn.net,arm.com,gourry.net,cmpxchg.org,gmail.com,kvack.org,intel.com,suse.com,infradead.org,suse.de,huaweicloud.com,suse.cz,bytedance.com,meta.com,surriel.com];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83386-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_GT_50(0.00)[54];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[nphamcs@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:email,intel.com:dkim,intel.com:mid,01.org:url]
-X-Rspamd-Queue-Id: 6BC2C3FC323
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lge.com:email,mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: B98C33FCAC9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Dev,
+On Mon, Apr 13, 2026 at 8:29=E2=80=AFPM Kairui Song <ryncsn@gmail.com> wrot=
+e:
+>
+> On Tue, Apr 14, 2026 at 11:05=E2=80=AFAM YoungJun Park <youngjun.park@lge=
+.com> wrote:
+> >
+>
+> Hi All,
+>
+> > On Sat, Apr 11, 2026 at 06:40:44PM -0700, Nhat Pham wrote:
+> > > > 1. Modularization
+> > > >
+> > > > You removed CONFIG_* and went with a unified approach. I recall
+> > > > you were also considering a module-based structure at some point.
+> > > > What are your thoughts on that direction?
+> > > >
+> > >
+> > > The CONFIG-based approach was a huge mess. It makes me not want to
+> > > look at the code, and I'm the author :)
+> > >
+> > > > If we take that approach, we could extend the recent swap ops
+> > > > patchset (https://lore.kernel.org/linux-mm/20260302104016.163542-1-=
+bhe@redhat.com/)
+> > > > as follows:
+> > > > - Make vswap a swap module
+> > > > - Have cluster allocation functions reside in swapops
+> > > > - Enable vswap through swapon
+> > >
+> > > Hmmmmm.
+> >
+> > I think this would be a happy world, but I wonder what others think.
+> > Anyway, I'm looking forward to the future direction.
+> >
+>
+> Yeah, I agree with this.
+>
+> And I do think swapoff of the virtual space itself is also necessary,
+> we really need a failsafe, e.g. a clean way to drop the swap
+> cache and data, kind of like drop_caches or shrinker fs are
+> commonly used.
+>
+> > > > 2. Flash-friendly swap integration (for my use case)
+> > > >
+> > > > I've been thinking about the flash-friendly swap concept that
+> > > > I mentioned before and recently proposed:
+> > > > (https://lore.kernel.org/linux-mm/aZW0voL4MmnMQlaR@yjaykim-PowerEdg=
+e-T330/)
+> > > >
+> > > > One of its core functions requires buffering RAM-swapped pages
+> > > > and writing them sequentially at an appropriate time -- not
+> > > > immediately, but in proper block-sized units, sequentially.
+> > > >
+> > > > This means allocated offsets must essentially be virtual, and
+> > > > physical offsets need to be managed separately at the actual
+> > > > write time.
+> > > >
+> > > > If we integrate this into the current vswap, we would either
+> > > > need vswap itself to handle the sequential writes (bypassing
+> > > > the physical device and receiving pages directly), or swapon
+> > > > a swap device and have vswap obtain physical offsets from it.
+> > > > But since those offsets cannot be used directly (due to
+> > > > buffering and sequential write requirements), they become
+> > > > virtual too, resulting in:
+> > > >
+> > > >   virtual -> virtual -> physical
+> > > >
+> > > > This triple indirection is not ideal.
+> > > >
+> > > > However, if the modularization from point 1 is achieved and
+> > > > vswap acts as a swap device itself, then we can cleanly
+> > > > establish a:
+> > > >
+> > > >   virtual -> physical
+> > >
+> > > I read that thread sometimes ago. Some remarks:
+> > >
+> > > 1. I think Christoph has a point. Seems like some of your ideas ( are
+> > > broadly applicable to swap in general. Maybe fixing swap infra
+> > > generally would make a lot of sense?
+> >
+> > Broadly speaking, there are two main ideas:
+> > 1. Swap I/O buffering (which is also tied to cluster management issues)
+> > 2. Deduplication
+> >
+> > Are you leaning towards the view that these two should be placed in a
+> > higher layer?
+>
+> IMHO the swap infra should be doing less, not more, so we can have
+> more flexible design, and different backends can implement their own
+> way to manage the data and layer. e.g. Having one backend being
+> flash friendly and it can do this without caring or affecting other devic=
+es
+> or backends.
 
-FYI, the error/warning was bisected to this commit, please ignore it if it's irrelevant.
+I think that's what Youngjun already has, unless I misunderstand his
+descriptions.
 
-tree:   https://github.com/intel-lab-lkp/linux/commits/Dev-Jain/mm-rmap-initialize-nr_pages-to-1-at-loop-start-in-try_to_unmap_one/20260414-033035
-head:   77dacfde3a6afac7fa3c015671d2452b524b37ad
-commit: 1202b576c2e876c8cab1c41f1816a3c15bdf79d3 mm/memory: Batch set uffd-wp markers during zapping
-date:   20 hours ago
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
-reproduce: (https://download.01.org/0day-ci/archive/20260414/202604141701.JY7pVkau-lkp@intel.com/reproduce)
+>
+> > If it goes into ZSWAP, there would definitely be a clear advantage of
+> > seeing dedup benefits across all swap devices. It's a technically
+> > interesting area, and I'd like to discuss it in a separate thread if
+> > I have more ideas or thoughts.
+>
+> Just branstorm... Why don't we just merge these identical pages like
+> KSM? Maybe at least zero folios might benefit a lot if we keep them
+> mapped as RO instead of recording them in swap, seems better in the
+> long term?
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202604141701.JY7pVkau-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   Documentation/core-api/kref:328: ./include/linux/kref.h:94: WARNING: Invalid C declaration: Expected end of definition. [error at 92]
-   int kref_put_lock (struct kref *kref, void (*release)(struct kref *kref), spinlock_t *lock) __cond_acquires(true# lock)
-   --------------------------------------------------------------------------------------------^
-   WARNING: ./include/linux/mm_inline.h:591 function parameter 'pte' not described in 'install_uffd_wp_ptes_if_needed'
-   WARNING: ./include/linux/mm_inline.h:591 function parameter 'pte' not described in 'install_uffd_wp_ptes_if_needed'
->> Documentation/core-api/mm-api:104: ./include/linux/mm_inline.h:577: WARNING: Inline emphasis start-string without end-string. [docutils]
-   WARNING: ./include/crypto/skcipher.h:166 struct member 'SKCIPHER_ALG_COMMON' not described in 'skcipher_alg'
-   Documentation/driver-api/basics:42: ./kernel/time/time.c:370: WARNING: Duplicate C declaration, also defined at driver-api/basics:440.
-   Declaration is '.. c:function:: unsigned int jiffies_to_msecs (const unsigned long j)'. [duplicate_declaration.c]
-   Documentation/driver-api/basics:42: ./kernel/time/time.c:393: WARNING: Duplicate C declaration, also defined at driver-api/basics:457.
-   Declaration is '.. c:function:: unsigned int jiffies_to_usecs (const unsigned long j)'. [duplicate_declaration.c]
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+That's our preferred approach too. We just didn't manage to get that
+to work (yet). :)
 
