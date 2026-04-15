@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-83458-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83463-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OOgyFgBS32nLRgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83458-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:53:20 +0200
+	id cBkvBipS32nLRgAAu9opvQ
+	(envelope-from <linux-doc+bounces-83463-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:54:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFF1D4022C6
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:53:19 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DBD9402303
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:54:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2CD51301E20F
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:52:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9B44330BB434
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:52:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E73163D16F7;
-	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 342EE3D6CDC;
+	Wed, 15 Apr 2026 08:52:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YoxTUEGE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d+m4e0w3"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2C0E391E5C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1D463D524D;
 	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776243149; cv=none; b=IXlFLGh0pZ+yE4K5zrEzt13dxtiZpLbqqRu8O3nr+yy79kNDASWUz1URgpudYAPEAwUmC61XqdC2+94UJqFLwLHJdN57SoLf8iu4lc7Lf2N1w6vC7xf/FUkPvxi6BOyKHTrJdSxPmikHZFIcV0gimdF9ct5+T67gaJpZpkqRIoA=
+	t=1776243150; cv=none; b=mRp8kVE7qzHcRfGYdV++BvRfk8eTNMx+1pKDvHZyQtsKizkpwJ6M3rT3mdtOhhDdIeCweyZhTMJF8GR1C5mWloOaegZjhOVMWAba3hvSpWT9YlswTcvC+Ee7qIZd8ARCmVuqXuuFeRt6ZBaBkPhNxZobPDSXq71CCWVBAlaDFz4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776243149; c=relaxed/simple;
-	bh=PN4FPVYRORp3XTpdvjjtDtB0ZIfuMMKyf0YVAqRdNAs=;
+	s=arc-20240116; t=1776243150; c=relaxed/simple;
+	bh=4mjLTBn9APgLWMeXtSLp7kqR2oEmNfSkkkBNyyYhQPs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HvWA11Ra6VWpP6mAWZyDr99eUh+c33BUTc4B/bbSmFWj27Rm+tPotuHKsEldYJV0olNjaPZybPh6FHfYz1tZ8QJCWGpY5udnVUgW8TPBs5l8Pqs116IL4XLE3WMGl52Lcan0eBHCXwEX0qe3wY3vhe9Af5g80s2N55YrP/D7XSA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YoxTUEGE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85AE6C19424;
+	 MIME-Version:Content-Type; b=UikXkeu+/0NbnnIjfRWRzB1LTEBFdAcwuZ7Y7V+AYOyNe2XryJ6NNfOiCi2enj3iVfRqQ90JFaVyoiezjioe/i4hykpAFIesR58mWocfPIyxQG44AIHvVI/l3NYfI4bjVNPyfImT9aati71j+Ev67IXJ0ZR7PPHOhpysIKZXcmk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d+m4e0w3; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94BACC2BCB7;
 	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1776243149;
-	bh=PN4FPVYRORp3XTpdvjjtDtB0ZIfuMMKyf0YVAqRdNAs=;
+	bh=4mjLTBn9APgLWMeXtSLp7kqR2oEmNfSkkkBNyyYhQPs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YoxTUEGELm85PY7A8FuPbsXwoALNbwTESptxQyN5SWlz9l01EvTj//+4Tc7TJHxMG
-	 gBDXJ/IgWVCBr9YoeR4tpUx+CNyXpdpxQbOUut87qrJ400+yYyKdJ8K+yAeAUPpMeL
-	 8s2R1yyWBiDkIPQPEat6RuSiag/9nrIrPDxCbOZ6VS3BB2UOBCw5MqWwSx54TbgENs
-	 vwooeVTuxkQceftzBjcC/M5QL7aOpMqhyv+XTE5H4wysTKjuSCrX70NP2aF3aOGoNx
-	 kofkOjCgDaHenI8zs2B7CY+q/Pzxhm/gQCetQA6oWbawDxrU0Lk5Gge5ikboFw9Cpd
-	 pWwn0DHN1zQyQ==
+	b=d+m4e0w32ih+Vna4JtiWUIWxmFB2cZgPA+Rifi7+99CYMK7WD9x/l+ceH5ItBh5G+
+	 1yC6RoYRIoMyHU6KcDjKxbiu/fz/bjeD42vIt0BXe1dmZbXu+DEE/h726b05x6KhWt
+	 l5i1uOvGfhukCGFpEvEkiH6m/F1IlRmyqo2r40YZx3sFiX4JGfu3maenO+urQgtj7r
+	 9quHpxvjQ5+xE9VIgwQsmRSvdRrSLI0LjWJ69DIfO6FuXesmLeaL+AhwBrV0jus7eo
+	 jL4/mMeGfKzOUHzc6ZhNsZFhfe+f7kvecCMZyZe5iNnNo/2zzbOLU6mnMVyWpMh/GO
+	 t/uD5nBWV2cOA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wCvz1-0000000ELw9-2rjz;
+	id 1wCvz1-0000000ELwE-2yyT;
 	Wed, 15 Apr 2026 10:52:27 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -59,9 +59,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Dan Williams <djbw@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 6/8] docs: maintainers_include: add external profile URLs
-Date: Wed, 15 Apr 2026 10:52:22 +0200
-Message-ID: <7c8d92cbc0828a926c07690d25be7b669bb83cf6.1776242739.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 7/8] docs: maintainers_include: preserve names for files under process/
+Date: Wed, 15 Apr 2026 10:52:23 +0200
+Message-ID: <61003dbb3c61b0624e6ec165428940eac3faf7f2.1776242739.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1776242739.git.mchehab+huawei@kernel.org>
 References: <cover.1776242739.git.mchehab+huawei@kernel.org>
@@ -78,7 +78,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -86,10 +86,10 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-83458-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-83463-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	PRECEDENCE_BULK(0.00)[];
@@ -100,81 +100,44 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: AFF1D4022C6
+X-Rspamd-Queue-Id: 7DBD9402303
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Some subsystem profiles are maintained elsewhere. Add them to
-the output.
+When a maintainer's profile is stored outside process, they're
+already included on some other book and the name of the filesystem
+may not be there. That's why the logic picks the name from the
+subsystem's name.
+
+However, files directly placed together with maintainers-handbooks.rst
+(e.g. under Documentation/process/) is a different history: those
+aren't placed anywhere, so we can keep using their own names,
+letting Sphinx do his thing.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/maintainers_include.py | 28 +++++++++++++++++++--
- 1 file changed, 26 insertions(+), 2 deletions(-)
+ Documentation/sphinx/maintainers_include.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index cf428db7599c..f1b8d4b00c2a 100755
+index f1b8d4b00c2a..948746b998a3 100755
 --- a/Documentation/sphinx/maintainers_include.py
 +++ b/Documentation/sphinx/maintainers_include.py
-@@ -37,6 +37,7 @@ class MaintainersParser:
- 
-     def __init__(self, base_path, path):
-         self.profiles = {}
-+        self.profile_urls = {}
- 
-         result = list()
-         result.append(".. _maintainers:")
-@@ -81,6 +82,16 @@ class MaintainersParser:
+@@ -76,11 +76,13 @@ class MaintainersParser:
+             match = re.match(r"P:\s*(Documentation/\S+)\.rst", line)
+             if match:
+                 fname = os.path.relpath(match.group(1), base_path)
+-                if fname not in self.profiles:
++                if fname.startswith("../"):
+                     if self.profiles.get(fname) is None:
+                         self.profiles[fname] = subsystem_name
                      else:
                          self.profiles[fname] += f", {subsystem_name}"
++                else:
++                    self.profiles[fname] = None
  
-+            match = re.match(r"P:\s*(https?://.*)", line)
-+            if match:
-+                url = match.group(1).strip()
-+                if url not in self.profile_urls:
-+                    if self.profile_urls.get(url) is None:
-+                        self.profile_urls[url] = subsystem_name
-+                    else:
-+                        self.profile_urls[url] += f", {subsystem_name}"
-+
-+
-             # Linkify all non-wildcard refs to ReST files in Documentation/.
-             pat = r'(Documentation/([^\s\?\*]*)\.rst)'
-             m = re.search(pat, line)
-@@ -219,18 +230,31 @@ class MaintainersProfile(Include):
-     def emit(self, base_path, path):
-         """Parse all the MAINTAINERS lines looking for profile entries"""
- 
--        profiles = MaintainersParser(base_path, path).profiles
-+        maint = MaintainersParser(base_path, path)
- 
-         output  = ".. toctree::\n"
-         output += "   :maxdepth: 2\n\n"
- 
--        items = sorted(profiles.items(), key=lambda kv: (kv[1] or "", kv[0]))
-+        items = sorted(maint.profiles.items(),
-+                       key=lambda kv: (kv[1] or "", kv[0]))
-         for fname, profile in items:
-             if profile:
-                 output += f"   {profile} <{fname}>\n"
-             else:
-                 output += f"   {fname}\n"
- 
-+        output += "\n**External profiles**\n\n"
-+
-+        items = sorted(maint.profile_urls.items(),
-+                       key=lambda kv: (kv[1] or "", kv[0]))
-+        for url, profile in items:
-+            if profile:
-+                output += f"- {profile} <{url}>\n"
-+            else:
-+                output += f"- {url}\n"
-+
-+        output += "\n"
-+
-         self.state_machine.insert_input(statemachine.string2lines(output), path)
- 
-     def run(self):
+             match = re.match(r"P:\s*(https?://.*)", line)
+             if match:
 -- 
 2.53.0
 
