@@ -1,302 +1,164 @@
-Return-Path: <linux-doc+bounces-83457-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83462-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OJRFKgJQ32nLRgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83457-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:44:50 +0200
+	id cD/HOA9S32nLRgAAu9opvQ
+	(envelope-from <linux-doc+bounces-83462-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:53:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 120844021D8
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:44:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05A294022ED
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:53:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1B993301B92E
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:41:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 04A503028B02
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:52:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C1CA3AF667;
-	Wed, 15 Apr 2026 08:41:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 05D0D3D5662;
+	Wed, 15 Apr 2026 08:52:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ec21mLYw"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YloOutj2"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D987838B146;
-	Wed, 15 Apr 2026 08:41:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFA433AE1A0;
+	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776242494; cv=none; b=uiUgNR+J0PPSlY4dbGl36VIVpvMsKEFzn0WLI6DPk7XX7KoblguJjJ2HFei/MgNGua8+QEVMf+wdT9kQnD/zs1s7H2kY97q8T8rj7KhXYSF1MTWnyf+kgqji/CnuX11KWD9NrcXU8AJUrBfqsgt2ELX/Wq6I/wNmQGkM2vIm0Dg=
+	t=1776243149; cv=none; b=uxPltNIirNPQN+P5gdsU0r3+qWwaISTvuEFzNE/RdSICBjsN6KDslCH3t7LSSKVFbOVqm5MktIRiEdDVEnQqVPFrNfDJqMcSsyU/muLtrR30O80mZA0MQ7E88rFCT1VmJl/TT2ZeipKNXmIyBaVsLA+mfSsbqDOChiW1GJNC4Wo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776242494; c=relaxed/simple;
-	bh=eNe90dnGEwFYmwMJ23lPtYLzIduu9ItXjVHRdlA/aWw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=oe7BINMxO7xkauVaq9rfBeDRjPPeCqWS/pFVFh/vnG/lcMe9DHQkYf/6Ucu8gRpD9GiigxKLsXvczkzrxIg0T7me68ipuyVyWz7F6Kq+eQ/4JhqcLIrKYmoo1jzCLIXElEoXHwZ4cd+qjIFI+uOK1ubOP3cbR6aVwv7o9La7nHI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ec21mLYw; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AFF1C19424;
-	Wed, 15 Apr 2026 08:41:30 +0000 (UTC)
+	s=arc-20240116; t=1776243149; c=relaxed/simple;
+	bh=cM6i2dqdYB7bquqYDadO6rTomOEopoC5wEog5eeYeTU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Vj2eICMLPHBbz9S4PRlxeQTlwO8SfIgf1UcYOROVzpV8n9LngheuMbFVX2fsP5pYguuX2F1B8coKXBRCRLlLXr8VCJ1fEOIiu3qN15mdyB0LUFIkxZuw2UW2tJXKKYZOEZA5DvYYj7OiSAkG8mT0HKLRhf2YwJ/bMvqckZB7aLc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YloOutj2; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 900D4C2BCB0;
+	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776242494;
-	bh=eNe90dnGEwFYmwMJ23lPtYLzIduu9ItXjVHRdlA/aWw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Ec21mLYwBJtwXg4pvb0psVyizRk3Rxx8Q6ZlZwMtJd88qQ1zvgiwRtRJdGW6niMr5
-	 ReVMO3HrLyBPRwDT1vhdoEt94SQeIVq5xZYMgCYOpPMvacbjJgKM2zXSkT3Hri5m4v
-	 2BqqYLEuGWGNu9KUeU4ElXuBYNwLGHvCdWFLHxL2CWsRIOmGsgik+MapokezdgBzao
-	 X7t/Obv3uQvm4VGQ9DliPuBqAYHDW4eXCyrWgMVGIy8txaH4fyxtbYpFr8irnadfh8
-	 YT1sRaN/v0bCLXS8HQDxpSVLWQYjeTsOOB7YQMQabPQWeESit7ZHQUmIzVd4vytT9i
-	 3E/CyLxdIxqhQ==
-Date: Wed, 15 Apr 2026 10:41:27 +0200
-From: Benjamin Tissoires <bentiss@kernel.org>
-To: Rob Herring <robh@kernel.org>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Conor Dooley <conor@kernel.org>, 
-	Jingyuan Liang <jingyliang@chromium.org>, Jiri Kosina <jikos@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Mark Brown <broonie@kernel.org>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-input@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-spi@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, devicetree@vger.kernel.org, hbarnor@chromium.org, 
-	tfiga@chromium.org, Dmitry Antipov <dmanti@microsoft.com>, 
-	Jarrett Schultz <jaschultz@microsoft.com>
-Subject: Re: [PATCH v3 09/11] dt-bindings: input: Document hid-over-spi DT
- schema
-Message-ID: <ad9MbUYT12b61Ymo@beelink>
-References: <20260402-send-upstream-v3-0-6091c458d357@chromium.org>
- <20260402-send-upstream-v3-9-6091c458d357@chromium.org>
- <20260409-defuse-thank-4b038128fac5@spud>
- <adfdkwq_bF9dirAq@google.com>
- <20260410-sake-dollop-9f253ddb0749@spud>
- <20260413223439.GA3647847-robh@kernel.org>
+	s=k20201202; t=1776243149;
+	bh=cM6i2dqdYB7bquqYDadO6rTomOEopoC5wEog5eeYeTU=;
+	h=From:To:Cc:Subject:Date:From;
+	b=YloOutj2DFV4uhUrbByc7+kZKdXeSH2DTklHY2SeHSoFDQPLOPlFfZHaOZ6K4/hTT
+	 3FupzResoirzc1lZZor7r97Mh2NheYT7Fu5Sf6TXU5wUY3cMeku50MaRkZvcopgLXZ
+	 dqjzwqA5h5bcT1HXOcPpn3W6LyHxviUZ5mScNnSPS4lj3kiNLVLrAzpFzHy/EgaNnm
+	 +NEKSpCRfYunzsOGWOuU8/5w5Xpn52Z6rd0m7wqJ9DMCvqkJmVZaBI1rvv7Ki6NCbR
+	 7IhM1ec6++zdvsSUzGHy3rfIDY0Rosbhx+qGoiKR7hZiNaq3ac1SshBbKzGI55x9h0
+	 s7Dj1aM3d0rag==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1wCvz1-0000000ELvT-29QE;
+	Wed, 15 Apr 2026 10:52:27 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Albert Ou <aou@eecs.berkeley.edu>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Paul Walmsley <pjw@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	workflows@vger.kernel.org,
+	Alexandre Ghiti <alex@ghiti.fr>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Dan Williams <djbw@kernel.org>
+Subject: [PATCH 0/8] Auto-generate maintainer profile entries
+Date: Wed, 15 Apr 2026 10:52:16 +0200
+Message-ID: <cover.1776242739.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260413223439.GA3647847-robh@kernel.org>
-X-Spamd-Result: default: False [-0.16 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83457-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bentiss@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83462-lists,linux-doc=lfdr.de,huawei];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 120844021D8
+X-Rspamd-Queue-Id: 05A294022ED
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Apr 13 2026, Rob Herring wrote:
-> On Fri, Apr 10, 2026 at 06:35:00PM +0100, Conor Dooley wrote:
-> > On Thu, Apr 09, 2026 at 10:16:46AM -0700, Dmitry Torokhov wrote:
-> > > On Thu, Apr 09, 2026 at 05:02:11PM +0100, Conor Dooley wrote:
-> > > > On Thu, Apr 02, 2026 at 01:59:46AM +0000, Jingyuan Liang wrote:
-> > > > > Documentation describes the required and optional properties for
-> > > > > implementing Device Tree for a Microsoft G6 Touch Digitizer that
-> > > > > supports HID over SPI Protocol 1.0 specification.
-> > > > > 
-> > > > > The properties are common to HID over SPI.
-> > > > > 
-> > > > > Signed-off-by: Dmitry Antipov <dmanti@microsoft.com>
-> > > > > Signed-off-by: Jarrett Schultz <jaschultz@microsoft.com>
-> > > > > Signed-off-by: Jingyuan Liang <jingyliang@chromium.org>
-> > > > > ---
-> > > > >  .../devicetree/bindings/input/hid-over-spi.yaml    | 126 +++++++++++++++++++++
-> > > > >  1 file changed, 126 insertions(+)
-> > > > > 
-> > > > > diff --git a/Documentation/devicetree/bindings/input/hid-over-spi.yaml b/Documentation/devicetree/bindings/input/hid-over-spi.yaml
-> > > > > new file mode 100644
-> > > > > index 000000000000..d1b0a2e26c32
-> > > > > --- /dev/null
-> > > > > +++ b/Documentation/devicetree/bindings/input/hid-over-spi.yaml
-> > > > > @@ -0,0 +1,126 @@
-> > > > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > > > > +%YAML 1.2
-> > > > > +---
-> > > > > +$id: http://devicetree.org/schemas/input/hid-over-spi.yaml#
-> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > > +
-> > > > > +title: HID over SPI Devices
-> > > > > +
-> > > > > +maintainers:
-> > > > > +  - Benjamin Tissoires <benjamin.tissoires@redhat.com>
-> > > > > +  - Jiri Kosina <jkosina@suse.cz>
-> > > > 
-> > > > Why them and not you, the developers of the series?
-> > > > 
-> > > > > +
-> > > > > +description: |+
-> > > > > +  HID over SPI provides support for various Human Interface Devices over the
-> > > > > +  SPI bus. These devices can be for example touchpads, keyboards, touch screens
-> > > > > +  or sensors.
-> > > > > +
-> > > > > +  The specification has been written by Microsoft and is currently available
-> > > > > +  here: https://www.microsoft.com/en-us/download/details.aspx?id=103325
-> > > > > +
-> > > > > +  If this binding is used, the kernel module spi-hid will handle the
-> > > > > +  communication with the device and the generic hid core layer will handle the
-> > > > > +  protocol.
-> > > > 
-> > > > This is not relevant to the binding, please remove it.
-> > > > 
-> > > > > +
-> > > > > +allOf:
-> > > > > +  - $ref: /schemas/input/touchscreen/touchscreen.yaml#
-> > > > > +
-> > > > > +properties:
-> > > > > +  compatible:
-> > > > > +    oneOf:
-> > > > > +      - items:
-> > > > > +          - enum:
-> > > > > +              - microsoft,g6-touch-digitizer
-> > > > > +          - const: hid-over-spi
-> > > > > +      - description: Just "hid-over-spi" alone is allowed, but not recommended.
-> > > > > +        const: hid-over-spi
-> > > > 
-> > > > Why is it allowed but not recommended? Seems to me like we should
-> > > > require device-specific compatibles.
-> > > 
-> > > Why would we want to change the driver code to add a new compatible each
-> > > time a vendor decides to create a chip that is fully hid-spi-protocol
-> > > compliant? Or is the plan to still allow "hid-over-spi" fallback but
-> > > require device-specific compatible that will be ignored unless there is
-> > > device-specific quirk needed?
-> 
-> The plan is the latter case (the 1st entry up above). The comment is 
-> remove the 2nd entry (with 'Just "hid-over-spi" alone is allowed, but 
-> not recommended.').
-> 
-> > This has nothing to do with the driver, just the oddity of having a
-> > comment saying that not having a device specific compatible was
-> > permitted by not recommended in a binding. Requiring device-specific
-> > compatibles is the norm after all and a comment like this makes draws
-> > more attention to the fact that this is abnormal. Regardless of what the
-> > driver does, device-specific compatibles should be required.
-> > 
-> > > > > +
-> > > > > +  reg:
-> > > > > +    maxItems: 1
-> > > > > +
-> > > > > +  interrupts:
-> > > > > +    maxItems: 1
-> > > > > +
-> > > > > +  reset-gpios:
-> > > > > +    maxItems: 1
-> > > > > +    description:
-> > > > > +      GPIO specifier for the digitizer's reset pin (active low). The line must
-> > > > > +      be flagged with GPIO_ACTIVE_LOW.
-> > > > > +
-> > > > > +  vdd-supply:
-> > > > > +    description:
-> > > > > +      Regulator for the VDD supply voltage.
-> > > > > +
-> > > > > +  input-report-header-address:
-> > > > > +    $ref: /schemas/types.yaml#/definitions/uint32
-> > > > > +    minimum: 0
-> > > > > +    maximum: 0xffffff
-> > > > > +    description:
-> > > > > +      A value to be included in the Read Approval packet, listing an address of
-> > > > > +      the input report header to be put on the SPI bus. This address has 24
-> > > > > +      bits.
-> > > > > +
-> > > > > +  input-report-body-address:
-> > > > > +    $ref: /schemas/types.yaml#/definitions/uint32
-> > > > > +    minimum: 0
-> > > > > +    maximum: 0xffffff
-> > > > > +    description:
-> > > > > +      A value to be included in the Read Approval packet, listing an address of
-> > > > > +      the input report body to be put on the SPI bus. This address has 24 bits.
-> > > > > +
-> > > > > +  output-report-address:
-> > > > > +    $ref: /schemas/types.yaml#/definitions/uint32
-> > > > > +    minimum: 0
-> > > > > +    maximum: 0xffffff
-> > > > > +    description:
-> > > > > +      A value to be included in the Output Report sent by the host, listing an
-> > > > > +      address where the output report on the SPI bus is to be written to. This
-> > > > > +      address has 24 bits.
-> > > > > +
-> > > > > +  read-opcode:
-> > > > > +    $ref: /schemas/types.yaml#/definitions/uint8
-> > > > > +    description:
-> > > > > +      Value to be used in Read Approval packets. 1 byte.
-> > > > > +
-> > > > > +  write-opcode:
-> > > > > +    $ref: /schemas/types.yaml#/definitions/uint8
-> > > > > +    description:
-> > > > > +      Value to be used in Write Approval packets. 1 byte.
-> > > > 
-> > > > Why can none of these things be determined from the device's compatible?
-> > > > On the surface, they like the kinds of things that could/should be.
-> > > 
-> > > Why would we want to keep tables of these values in the kernel and again
-> > > have to update the driver for each new chip?
-> > 
-> > That's pretty normal though innit? It's what match data does.
-> > If someone wants to have properties that communicate data that
-> > can be determined from the compatible, they need to provide
-> > justification why it is being done.
-> 
-> IIRC, it was explained in prior versions the spec itself says these 
-> values vary by device. If we expect variation, then I think these 
-> properties are fine. But please capture the reasoning for them in this 
-> patch or we will just keep asking the same questions over and over. 
-> 
+Date: Tue, 14 Apr 2026 16:29:03 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Albert Ou <aou@eecs.berkeley.edu>, Jonathan Corbet <corbet@lwn.net>, Dan Williams <djbw@kernel.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, workflows@vger.kernel.org, Alexandre Ghiti <alex@ghiti.fr>, Shuah Khan <skhan@linuxfoundation.org>
+Message-ID: <cover.1776176108.git.mchehab+huawei@kernel.org>
 
-Dmitry, FWIW, we roughly had the exact same of argument with Rob with
-i2c-hid :)
+Hi Dan/Jon,
 
-It took me a while, but I finally understood the rationale and agreed to
-it (using the i2c-hid examples):
+This patch series change the way maintainer entry profile links
+are added to the documentation. Instead of having an entry for
+each of them at an ReST file, get them from MAINTAINERS content.
 
-Most i2c-hid devices are following the spec and rely purely on ACPI and
-the DT declaration of i2c-hid -> they are working fine and we don't need
-anything else for them. They declare their compatible and the i2c-hid
-compatible, and they work great.
+That should likely make easier to maintain, as there will be a single
+point to place all such profiles.
 
-But some devices need a reset line. But the i2c-hid spec doesn't mention
-a reset line at all. And some other devices need a reset line with a
-different timing. etc... Relying purely on the i2c-hid driver means that
-the driver needs to now the platform the device is on and the exact
-device we have in front of us. i2c-hid provide a VID/PID through the
-protocol, but we are still lacking information: in some cases, the
-timing of the reset line for the same device differs depending on the
-platform they run.
+On this version, I added Dan's text to patch 4.
 
-Having a device specific compatible means that we can make use of it
-before we load i2c-hid. This is why we have i2c-hid-core and module
-specifics on the side. Those extra module can do all the oddities they
-want, like having 2 or 3 reset lines, but in the end they are using the
-core i2c-hid once they are set up.
+I also added a couple of other patches to improve its output. While
+I could have them merged at the first patch, I opted to make them
+separate, as, in case of problems or needed changes, it would be
+easier to revert or modify the corresponding logic. Also, it should
+be better to review, in case one wants some changes there.
 
-Think of it as a way to quirk the device upfront without polluting the
-i2c-hid processing.
+The main changes against RFC are:
 
-That allowed us to clean up the i2c-hid code by removing the non
-standard regulators, reset lines, quirks that are device specific and
-keep it closer to the spec.
+- now, the TOC will be presented with 1 depth identation level,
+  meaning that it would look like a list;
+- for files outside Documentation/process, it will use the name of
+  the subsystem with title capitalization for the name of the
+  profile entry;
+- the logic also parses and produces a list of profiles that are
+  maintained elsewhere, picking its http/https link;
+- entries are now better sorted: first by subsystem name, then
+  by its name.
 
-Cheers,
-Benjamin
+Suggested-by: Dan Williams <djbw@kernel.org>
+Closes: https://lore.kernel.org/linux-doc/69dd6299440be_147c801005b@djbw-dev.notmuch/
+
+Mauro Carvalho Chehab (8):
+  docs: maintainers_include: auto-generate maintainer profile TOC
+  MAINTAINERS: add an entry for media maintainers profile
+  MAINTAINERS: add maintainer-tip.rst to X86
+  docs: auto-generate maintainer entry profile links
+  docs: maintainers_include: use a better title for profiles
+  docs: maintainers_include: add external profile URLs
+  docs: maintainers_include: preserve names for files under process/
+  docs: maintainers_include: Only show main entry for profiles
+
+ .../maintainer/maintainer-entry-profile.rst   |  24 +---
+ .../process/maintainer-handbooks.rst          |  17 ++-
+ Documentation/sphinx/maintainers_include.py   | 131 +++++++++++++++---
+ MAINTAINERS                                   |   2 +
+ 4 files changed, 128 insertions(+), 46 deletions(-)
+
+-- 
+2.53.0
+
 
