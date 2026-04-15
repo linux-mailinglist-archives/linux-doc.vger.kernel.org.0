@@ -1,143 +1,215 @@
-Return-Path: <linux-doc+bounces-83466-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83467-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id COecDzBS32nLRgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83466-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:54:08 +0200
+	id qPtpBjxT32l1RwAAu9opvQ
+	(envelope-from <linux-doc+bounces-83467-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:58:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3B6B40231F
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:54:07 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E5614023C7
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:58:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 26C0830BF41B
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:52:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 440943042D67
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:57:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B3C53D75A6;
-	Wed, 15 Apr 2026 08:52:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D6933D810C;
+	Wed, 15 Apr 2026 08:57:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pD8YoUIE"
+	dkim=pass (1024-bit key) header.d=szeredi.hu header.i=@szeredi.hu header.b="B/Dr3QHk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 042CA3D564D;
-	Wed, 15 Apr 2026 08:52:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776243150; cv=none; b=Fy6f6b0IO97t950DWtJ+i7DSJLND+iEuF57y9/64JVpeFRlkEkF5JwDVTFCj9qhc1gJ2r8kzf6/bhCa636Reon5//f3KaM5qytTWP658b8PYcxltZjzKIwTSiMFMpKdBdFGaBqGDoi0/56VX6BIRaBxbzHHfh9gmNGosvLKi/fU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776243150; c=relaxed/simple;
-	bh=BpJ6sywaSZVQxAguZ1xiEWvvUTov0XqlViROQ62XlmA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ONzAbksbR/j+UNIwUbF9/E69r49fjarL066G0qcpFC2MobEDeo2enU5YBOQro+AorAf91A8HC42QJa1BUvfjWh8c+Hj+6AnDq3dgSKpQEhYwcY23uHQfPEaqKhZog8wrUuyJP2RNoSxC3EoCAeE/PT9RNGlSibeWTRE8P2S+FPo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pD8YoUIE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A0E2C2BCC4;
-	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776243149;
-	bh=BpJ6sywaSZVQxAguZ1xiEWvvUTov0XqlViROQ62XlmA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=pD8YoUIEeZlpv+BUN3U43jU7RwQz/yR1thghUAtOOv1qVRh7hcvU72imI4He9op9/
-	 Un7hmhHF4gtZ29EoDdpm9YZ/Qm7tPyf8rFnnuMwypScYvfWY6ZuoccBwwdonuUwtj7
-	 tBMNxrKGMQtkkNypzlvJNMhxPpGVBKNY23n5Ojayfg1jWNY1L6rOG/CLFploDPBVTJ
-	 d7P46opgJ7/+dCAeF40avHu+Om+Y8wByIblVKhGtDH1FpWoiTeP9RGFf4ea//afUhn
-	 egjLngmgrHMmjF/hZge/eXQfH/gRnVtH0aCypxysarRWBljNcULs4RV5LiLsO4Pc4Q
-	 fmTk5ZSkdfp0A==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wCvz1-0000000ELwI-36Qq;
-	Wed, 15 Apr 2026 10:52:27 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	workflows@vger.kernel.org,
-	Dan Williams <djbw@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH 8/8] docs: maintainers_include: Only show main entry for profiles
-Date: Wed, 15 Apr 2026 10:52:24 +0200
-Message-ID: <95936b751847f695d3d44eebbc996ae26010942c.1776242739.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <cover.1776242739.git.mchehab+huawei@kernel.org>
-References: <cover.1776242739.git.mchehab+huawei@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1690B3D669B
+	for <linux-doc@vger.kernel.org>; Wed, 15 Apr 2026 08:57:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.175
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776243441; cv=pass; b=LnlKgDsZAuuQXcddcrU8p1j77oUOhpZ2ZPRBkCuEbJoUudaHXDMwgSgeYiL1fpXhN+++q9H8KZBFEXXcNPP8kWWjUkVY72Wrv4V0uMNx5YWOCyI5fJOxlNj8ena9FoskB4wBRF8lVFDEKreDg46VU/AWmAUF8rBijjfSlooW+cY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776243441; c=relaxed/simple;
+	bh=zZYtyxzFk/f/aBbXqwafBi1lDEMUVHJlRs1FsBDxTcc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=NHUzuBAL2kf7X2pZpweduiqGBRYVXEx8zHtbdLmlxpUKqzuSO5qohlB/Y2Be+VndtWdeD/LJg+i2R97FZncd6cfEQVi/tM971wYFpCoo2Tz1vPmThG+R8SJyIOZZXBqzI+kgiBLvPl92ABUpdEbj9x1wVlUF5ASe7CdvgmVW4pM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=szeredi.hu; spf=pass smtp.mailfrom=szeredi.hu; dkim=pass (1024-bit key) header.d=szeredi.hu header.i=@szeredi.hu header.b=B/Dr3QHk; arc=pass smtp.client-ip=209.85.160.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=szeredi.hu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=szeredi.hu
+Received: by mail-qt1-f175.google.com with SMTP id d75a77b69052e-506a747448dso51358931cf.0
+        for <linux-doc@vger.kernel.org>; Wed, 15 Apr 2026 01:57:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776243438; cv=none;
+        d=google.com; s=arc-20240605;
+        b=gNyHrR+MH7ye+lrVqafCoWANIAmqqEXxqBtp0tTQvVYPpit2e14mvl64Seo4FnRVp8
+         R70kYlHIqYDPJQnFpxCHNAfZ5YaLV7Ka7Adv9s6tnuJI5INSSnQOvCpX9zCH/8KNPOeM
+         cGC2ea0fEBlzaG8Jg+kf4skKfwG+VgwLrOMM0LF5t26jSSvyNaq5WpbibRRmfbkDakAF
+         I1TL6vWzTzNDxUU/72Ubtm3o0Il99gnS/YcaNJVMU9rAVo8md5SSv0ynTqu/q2KwAYuB
+         JW4cG+vUlTY8L41dVEy1vSEs3oIjaP3gbrn9vCLKFxXcCnNgW7WSM5vtftlvbbwl8Z+Z
+         zlqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=1K50PrXkHzV3G2hBT2az5kpQZDgGSB8kie6wcwLv364=;
+        fh=fJSYObkL0o9XziDK+sEDJyLn4EU6Tve+xMMxaBBMXio=;
+        b=WCPTkBmkG0pws+tXkYYShwzvAJOAn7jGVIKrt0tDGw6z2sH1L4ROgpAkG/jECsnMZE
+         snxmrQLkgu+gTbXkg8XsQT7lZUD46WmMYqJdAwnGc/areZGywygKmWBmBU2cs1iznTla
+         moqVa8bwJrOT1vVwD7TDaIJB3Ss2ImC9FCCdUz6kBxCzbt8p61KRGrtFfDJvHIyKosNa
+         7b0GLd/NnQ+5PJvYLmEJGZkWSZJqMssNLL7YybdnYbsrTuVpkbcCOJniLubALTtit4iq
+         YwB4dpC66JXNp3DaqYwnOhPJDYiSEOdrDcJSWMU6C8XFLDrdsj/0sLq6ZxnZdOIQYPSX
+         QrMA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=szeredi.hu; s=google; t=1776243438; x=1776848238; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=1K50PrXkHzV3G2hBT2az5kpQZDgGSB8kie6wcwLv364=;
+        b=B/Dr3QHkhbP8XyWnEenix2jN4PnO0K/kbuQBlRBlXGdpkelr5iJwbpHxdRnjSLN4h1
+         Pv9ZZYxWSsJclMaKdZLRaJzquEYcgZUTXIbbzcJls1Gyx74A1LrARH5gyeUqZ7MNV5EZ
+         wNqh+J3xsfokVCeS3lTt5G3LH1xXmYPpsbt/8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776243438; x=1776848238;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1K50PrXkHzV3G2hBT2az5kpQZDgGSB8kie6wcwLv364=;
+        b=btnfieT32Xmt284FWp0MSUhYE5CYaJDfT+gj2aeFHSUw3GRXqfYmjkF5NJEOVCIx8x
+         2TLpprEWviAkmS7s3GNCgUOKmn7mEcpRVawb2psKw/gfpEPCIz8MyHQI7MNaOa47x2cm
+         1GGwGPP4PQSs1gcsiTI1A2WlSLFShmJnUlExMXVXX6omLw7df0/gsGt12kxZ3hebOXc0
+         PV4LTs3egxy0K0GWafy39w3B0j5k9QnJQYh3U4Wpdo2bODkluLW3koDqBfoCtkmW2vFA
+         lawtZwSxhFFNGjDAQQkrj6pRXi3CISLRCaTB1xXZ6YqqiF7XxvddSurFxUePj70XPbag
+         M1+A==
+X-Forwarded-Encrypted: i=1; AFNElJ88u2swZMC395DaQb5yQfJG71jzoj7mLaPpjBR4GwcCQ+1c+zF9bDsIlpdBUTVm7OXRenCuRZW3LkI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzeceGcwG678uJR/vf1sC8jl1LekJwfVil1RxOo5ovPKM79n1+4
+	VCpSUNjVdBHJGERsiHuA/BlRk8JZEWgQ9pkhMdCCGfc66+ZzWOr+mQD9zlgkSD1BsAzkLH+eYvt
+	z72PbXIXAfue/MO+O9EQeFTwRLDNheJHdtO/TeqstuA==
+X-Gm-Gg: AeBDiesqpo/1w3l6eVv84rb4U7JkMgx2ifW2GIQwB6C7sijTkduU1iXmbZ8gZC/E/Sm
+	7dJXrSAAmDyWmf2U5nMPFO6ZP2z2fKwJxks3gbynwhT9Ms4N4zl2JGuA2m+abpeE/xqeNv5m5qP
+	lSEF+R+H2yAssTsr1FHrintys6CLXBugZwdl1ETXgkzT/CAaaUhdp5GChTLczYg8B6JjL8bdO9D
+	s6G+qILQ7rxVEF6pNdEzBs6x+cmMr7CjhI98EzzFlWPVbfhyAsfOafYUDTRNjJY+zi/rl6Lwf3U
+	3NtcJGuccgqw4jte0eXp4EOnqeDSjsaSfFdOe7876tia9b8=
+X-Received: by 2002:a05:622a:2485:b0:50b:50bf:5bbe with SMTP id
+ d75a77b69052e-50dd5adbf6fmr287758411cf.22.1776243437803; Wed, 15 Apr 2026
+ 01:57:17 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+References: <0100019d43e5f632-f5862a3e-361c-4b54-a9a6-96c242a8f17a-000000@email.amazonses.com>
+ <CAJnrk1ZRTGWjNzkMxS3UkeZMmrpadJDtWKontMx2=d-smXYq=w@mail.gmail.com>
+ <adkDq0m5Wt9YhJ8A@groves.net> <38744253-efa3-41c5-a491-b177a4a4c835@bsbernd.com>
+ <adlBcwJjLOQDAR65@groves.net> <CAJnrk1a06zkUmXW5EFiUmgAoFauwtzsYvnotaPH0ifVtyh7iDQ@mail.gmail.com>
+ <CAJfpegvVTcV89=q3L326aGQjhduBcv7PVg5QKftGLjNZmCLmaw@mail.gmail.com>
+ <ad4_jFsR951c2Mtn@groves.net> <20260414185740.GA604658@frogsfrogsfrogs>
+ <ad7MC5Em4l72nJ6u@groves.net> <20260415001558.GH604658@frogsfrogsfrogs>
+In-Reply-To: <20260415001558.GH604658@frogsfrogsfrogs>
+From: Miklos Szeredi <miklos@szeredi.hu>
+Date: Wed, 15 Apr 2026 10:57:06 +0200
+X-Gm-Features: AQROBzCRCfD21Ej4HAHDpxm8vYkUzgtnq-yub_KzWJ3NjPcdpwmvfwFukwnxXxw
+Message-ID: <CAJfpegsEMQTwLP04L-EftdqNJrz2saBnK0Li6iZ9=5iiNa2arg@mail.gmail.com>
+Subject: Re: [PATCH V10 00/10] famfs: port into fuse
+To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: John Groves <John@groves.net>, Joanne Koong <joannelkoong@gmail.com>, 
+	Bernd Schubert <bernd@bsbernd.com>, John Groves <john@jagalactic.com>, 
+	Dan Williams <dan.j.williams@intel.com>, Bernd Schubert <bschubert@ddn.com>, 
+	Alison Schofield <alison.schofield@intel.com>, John Groves <jgroves@micron.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Vishal Verma <vishal.l.verma@intel.com>, Dave Jiang <dave.jiang@intel.com>, 
+	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, David Hildenbrand <david@kernel.org>, 
+	Christian Brauner <brauner@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, 
+	Jeff Layton <jlayton@kernel.org>, Amir Goldstein <amir73il@gmail.com>, 
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>, Stefan Hajnoczi <shajnocz@redhat.com>, 
+	Josef Bacik <josef@toxicpanda.com>, Bagas Sanjaya <bagasdotme@gmail.com>, 
+	Chen Linxuan <chenlinxuan@uniontech.com>, James Morse <james.morse@arm.com>, 
+	Fuad Tabba <tabba@google.com>, Sean Christopherson <seanjc@google.com>, Shivank Garg <shivankg@amd.com>, 
+	Ackerley Tng <ackerleytng@google.com>, Gregory Price <gourry@gourry.net>, 
+	Aravind Ramesh <arramesh@micron.com>, Ajay Joshi <ajayjoshi@micron.com>, 
+	"venkataravis@micron.com" <venkataravis@micron.com>, 
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
+	"nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>, 
+	"linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>, 
+	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, djbw@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[szeredi.hu,quarantine];
+	R_DKIM_ALLOW(-0.20)[szeredi.hu:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-83467-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[groves.net,gmail.com,bsbernd.com,jagalactic.com,intel.com,ddn.com,micron.com,lwn.net,linuxfoundation.org,infradead.org,suse.cz,zeniv.linux.org.uk,kernel.org,huawei.com,redhat.com,toxicpanda.com,uniontech.com,arm.com,google.com,amd.com,gourry.net,vger.kernel.org,lists.linux.dev];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DKIM_TRACE(0.00)[szeredi.hu:+];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[41];
+	FROM_NEQ_ENVFROM(0.00)[miklos@szeredi.hu,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-83466-lists,linux-doc=lfdr.de,huawei];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: D3B6B40231F
+X-Rspamd-Queue-Id: 1E5614023C7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Instead of showing as a "Contents:" with 2 identation levels,
-drop its title and show profiles as a list of entries.
+On Wed, 15 Apr 2026 at 02:16, Darrick J. Wong <djwong@kernel.org> wrote:
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/process/maintainer-handbooks.rst | 2 --
- Documentation/sphinx/maintainers_include.py    | 2 +-
- 2 files changed, 1 insertion(+), 3 deletions(-)
+> Oh believe me, I had much angrier things to say elsewhere in 2023-24
+> about grueling slowass reviews.  That is, indirectly, why I'm now
+> working on /this/ project. :(
 
-diff --git a/Documentation/process/maintainer-handbooks.rst b/Documentation/process/maintainer-handbooks.rst
-index 531985a0fae8..3821e78aefc0 100644
---- a/Documentation/process/maintainer-handbooks.rst
-+++ b/Documentation/process/maintainer-handbooks.rst
-@@ -16,6 +16,4 @@ For maintainers, consider documenting additional requirements and
- expectations if submissions routinely overlook specific submission
- criteria. See Documentation/maintainer/maintainer-entry-profile.rst.
- 
--Contents:
--
- .. maintainers-profile-toc::
-diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index 948746b998a3..7ab921820612 100755
---- a/Documentation/sphinx/maintainers_include.py
-+++ b/Documentation/sphinx/maintainers_include.py
-@@ -235,7 +235,7 @@ class MaintainersProfile(Include):
-         maint = MaintainersParser(base_path, path)
- 
-         output  = ".. toctree::\n"
--        output += "   :maxdepth: 2\n\n"
-+        output += "   :maxdepth: 1\n\n"
- 
-         items = sorted(maint.profiles.items(),
-                        key=lambda kv: (kv[1] or "", kv[0]))
--- 
-2.53.0
+I've been there too.  Which is not an excuse to be an unresponsive
+maintainer, but that's unfortunately exactly what seems to have
+happened.
 
+On the positive side, I really appreciate the energy all of you put
+into improving fuse.
+
+Some of the reasons for the lack of progress:
+
+- Fuse has grown, and I don't have a full understanding of it, even
+some of the core.  Getting older doesn't help, I'm sure I would've
+handled this better 20 years ago.  Currently working on some cleanups,
+progress is slow, will post the next batch shortly.  Cleaning it up
+helps in multiple ways: a) I get to know the code better, b) adding
+new stuff becomes easier.
+
+- The fuse-iomap change is HUGE.  By line count it's some 40% of
+current fuse code.  By comparison, when fuse was merged it was
+3.5kloc.  It doesn't mean I wouldn't like to have it.  On the
+contrary, I think it's a very useful feature and would solve the long
+time issue with having a way to mount untrusted fs images with
+reasonable performance.
+
+- There's no such problem with famfs, it's relatively small and self
+contained and I'd consider it ready (barring any roadblocks on the DAX
+side).  But the famfs specific mapping interface is something that I
+never did like.  Joanne offered to fix this, and I totally agree with
+her that we should not hurriedly add interfaces that will need to be
+kept for ever (yes, sometimes even API's are deprecated and removed,
+but it's much much more painful).
+
+How can this situation be improved?
+
+A dedicated co-maintainer would definitely help, not sure how it would
+work out in the fuse case.  With overlayfs I think it works nicely (at
+least that's my impression, not sure what Amir thinks ;)
+
+My experience is that face to face discussions at LSFMM will also help
+move things forward.
+
+Hope this helps.
+
+Thanks,
+Miklos
 
