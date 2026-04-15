@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-83465-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83461-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MBzmLC9S32nLRgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83465-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:54:07 +0200
+	id eGqEJQpS32nLRgAAu9opvQ
+	(envelope-from <linux-doc+bounces-83461-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:53:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BA05402318
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:54:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEAD34022E4
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 10:53:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 134BC30BEA2D
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:52:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BC7EA302529A
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 08:52:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 39C4C3D75A4;
-	Wed, 15 Apr 2026 08:52:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE35B3D47DC;
+	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c9Ta/L36"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i4H3d6VT"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F27013D5255;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2D40395D87;
 	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776243150; cv=none; b=Nta84W5cmpKP5RC9XTgSAHAq3BL9WYrIgpqBNYb/7szc2rnrOJ9f3zKQgr/layufSX73T3Lxdyg7zP/3OBbkgNP6GS80qTnaNwqD5OKraJbcE6yEwxRiG3xtWGt5STo9/uIMlT9pV5bcvsTDh1vNXc8Zl8ClGjhEBXTxhmmZyAc=
+	t=1776243149; cv=none; b=l5PXnA53AmMC6hd9uwOk/JuF+NcM37RG/B2L8ACXPmLREDjr8nGIDrsfD94ncdJzwfgAyhyZhkdqxT5grrIKwd3gKE6tJ1IUvrUMcC49i4fafjdXf9kl7EFXfgf92K84chboigc4j73zMft7ImZFlv5YxJniHX9AVZamhI9CaDw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776243150; c=relaxed/simple;
-	bh=yhHzbQrXLXYtWB/ywVwFbSxzVS5ND+M7WVXUQWu6cT4=;
+	s=arc-20240116; t=1776243149; c=relaxed/simple;
+	bh=cbloFBaSFVqLFASbOdMdsq9XcyspmRgafo7Pco+EW+4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=fOQIpaaBuAWZDGz0p+9QuTTZHBmsOmrS6Gu19KEpz8jHYc35uUTGHeRcLPSOKRAGEhchtn+0GnWmsYbt9ciNc+DSqwd/u+OrLBpHEnfoHvcZtcveAw6jaFxab7k8E2d0WMwwlX1QUWlobC13IKmIofNMkCk3tbBxONGm+CKF4KY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c9Ta/L36; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 925B7C2BCB8;
+	 MIME-Version:Content-Type; b=BMdmOQdSITnORHNK1YHkUP6aCyhwVMecMc79GG4vufWAIJ7erKPNDOeJnw1KX0o2WBix7+fFJimdog5vddQSjS4doSO+xwpesk0/bQUPKrfI8h9TpOtnK5mhqrZPczc5v4F8oN8r7x8ERHQPj2EQ9kJQbSa5Jj51nYcINiSa2eo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i4H3d6VT; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88E1FC2BCB4;
 	Wed, 15 Apr 2026 08:52:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1776243149;
-	bh=yhHzbQrXLXYtWB/ywVwFbSxzVS5ND+M7WVXUQWu6cT4=;
+	bh=cbloFBaSFVqLFASbOdMdsq9XcyspmRgafo7Pco+EW+4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=c9Ta/L36wPR2nkPiihUI7qToFa7fXWKVCcCXv+WT7Gsuf5Cq22Ze3fIOlr/ugLip6
-	 S1Ff8bAV1nysfbf2YBiFUXm3bkkuwb97YOb9xB3vlux0cckGB4XJlgDjLftf0vrcr5
-	 kMW2BGElFq5GsMpbNFnYTpmCAOwMfHdoy2Z2YyphJkeOu4JYph/brtz1JzeBmdD57I
-	 Qugqg5gTX2/5r9LtNwZ6gdDhpyuq+76YuypHBuhxbqdNXn16YgWBI0gV4WlHxfMPnW
-	 Wg8B9dl71vAPM3hXvUMwDfJ4MP6RxB1uEaN5NHoZZZOkwYsohsshn1Un7mAPTE6/tM
-	 4MZeQS6Oz4tAw==
+	b=i4H3d6VTT0QBatItEUbi/IXUeq2MLNYhTKRaPtwmlgVQ3zsu/Jg5XTgNPoWkJ7z1S
+	 T20rvZA1BGK9BAzlRiMRsTngdbZO9VDzxLcl9TN0oron08gjUwGUHttU9c/AJyUEc/
+	 vKc8c9pw1zWxeSw3rLGzgCTJX8/vctO7CbKows654qdZgyWxce7UCqQQkPpq29c3jK
+	 tgfQZTs6/B+KmSbZe0iTOvEd9mzQLjK/cYfDiqPIfZmkETxrDmyXHnRnt/ud1qNCbc
+	 zMl06JMkgOK25cLc5Lr93jUFj07tDfq3V/TWm2NnExFC/104c0koMrbGZYvBtDJ3VI
+	 owP1Wu7hQoxlg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wCvz1-0000000ELva-2O15;
+	id 1wCvz1-0000000ELvf-2VCx;
 	Wed, 15 Apr 2026 10:52:27 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -58,9 +58,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Dan Williams <djbw@kernel.org>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 2/8] MAINTAINERS: add an entry for media maintainers profile
-Date: Wed, 15 Apr 2026 10:52:18 +0200
-Message-ID: <3582b8cbba28e014d27ab6b25a2361e6e2590055.1776242739.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 3/8] MAINTAINERS: add maintainer-tip.rst to X86
+Date: Wed, 15 Apr 2026 10:52:19 +0200
+Message-ID: <17bb9cbae60254adb388406a975f1fd60266afdc.1776242739.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1776242739.git.mchehab+huawei@kernel.org>
 References: <cover.1776242739.git.mchehab+huawei@kernel.org>
@@ -85,7 +85,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-83465-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-83461-lists,linux-doc=lfdr.de,huawei];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
@@ -99,34 +99,35 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 2BA05402318
+X-Rspamd-Queue-Id: DEAD34022E4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The media subsystem has a maintainers entry profile, but its entry
+The X86 subsystem has a maintainers entry profile, but its entry
 is missing at MAINTAINERS.
 
 Add it.
 
 Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Acked-by: Dan Williams <djbw@kernel.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <5af4aa6a716228eea4d59dc26b97d642e1e7d419.1776176108.git.mchehab+huawei@kernel.org>
+Message-ID: <970434c647aa1e1e9a81c87b4d5fed934d4018a7.1776176108.git.mchehab+huawei@kernel.org>
 ---
  MAINTAINERS | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index f0b106a4dd96..620219e48f98 100644
+index 620219e48f98..a85fcae5f56e 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -16115,6 +16115,7 @@ S:	Maintained
- W:	https://linuxtv.org
- Q:	http://patchwork.kernel.org/project/linux-media/list/
- T:	git git://linuxtv.org/media.git
-+P:	Documentation/driver-api/media/maintainer-entry-profile.rst
- F:	Documentation/admin-guide/media/
- F:	Documentation/devicetree/bindings/media/
- F:	Documentation/driver-api/media/
+@@ -28560,6 +28560,7 @@ M:	Ingo Molnar <mingo@redhat.com>
+ M:	Borislav Petkov <bp@alien8.de>
+ M:	Dave Hansen <dave.hansen@linux.intel.com>
+ M:	x86@kernel.org
++P:	Documentation/process/maintainer-tip.rst
+ R:	"H. Peter Anvin" <hpa@zytor.com>
+ L:	linux-kernel@vger.kernel.org
+ S:	Maintained
 -- 
 2.53.0
 
