@@ -1,130 +1,224 @@
-Return-Path: <linux-doc+bounces-83496-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83498-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wNEOMiCK32l5VAAAu9opvQ
-	(envelope-from <linux-doc+bounces-83496-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 14:52:48 +0200
+	id QBKSKtyK32l5VAAAu9opvQ
+	(envelope-from <linux-doc+bounces-83498-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 14:55:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89A51404875
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 14:52:47 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F3F514048EE
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 14:55:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 377FC30398A7
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 12:52:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DE615303A106
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 12:55:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D361286D7D;
-	Wed, 15 Apr 2026 12:52:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC7F02DF3DA;
+	Wed, 15 Apr 2026 12:55:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="iEKJt+UP"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="KcgH6XGU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-181.mta0.migadu.com (out-181.mta0.migadu.com [91.218.175.181])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76170275B15
-	for <linux-doc@vger.kernel.org>; Wed, 15 Apr 2026 12:52:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66BCF257843;
+	Wed, 15 Apr 2026 12:55:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776257565; cv=none; b=Ynng1ybUHgdbH0hBom8amXcQqb4Y9qwRoI/1Rqa8+umRczwarhPVCypRGTsKcP1vZpZ8DnOWSAM7vOQXxyUt9X+MZAdl+ARI3nMboxpxAZJutFCgkKvppFC3Y+NkrFipTg2sKfz9n8leRW1bwKS0egS1Ux3d5uzd2V9AAjXW1+U=
+	t=1776257751; cv=none; b=UmDrFxgfNsJCNnRUQeov/j/DM/rfSyKJDOeMhbpIqpVZvF6OyQssGTsoFrYk4qBDf2NN2DTeJTwj83L1/jyLJvtbgezg+ukBhCk3uCTeUgjN/cLsTAq4wu6Y0LQS3TKspBpLp1wCN90lxxQ45+maZ6FZoOwfslCeD07ZZfcpi+g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776257565; c=relaxed/simple;
-	bh=bH30D+S77L+76WV39EC2xqLQPjfmUJAx50Hb1EuxO/Y=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=F3mfXvKAmF1c6mK9hgsEoRXSkRjdSeQXUKR9Ro99h0l0hHP6qLsBkfDE8sRXC0yG5QBPprtiIUaN8xf089IWqtFaIgm1TwS77qIS/m8VQnrq9ZPLW/aERBmtDXmV0R19l6F1WDyE+BMFam8qyDUgvHrUs51R6inBaicpM0lxgeo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=iEKJt+UP; arc=none smtp.client-ip=91.218.175.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Message-ID: <abbf756620742f7508d4306b5d830bfb59cea607.camel@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1776257550;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=bH30D+S77L+76WV39EC2xqLQPjfmUJAx50Hb1EuxO/Y=;
-	b=iEKJt+UPHhtGDw9Q25fPepjFpg8PAaDIa4DQbc3IFP4bfFh1awzbhgMM1HrnJ0Fg4bDAn+
-	iu0ymFU2fFbJghkwuJIhjmQgwXWwB9sLEDic/V0KJmeObxeSzRzDPFarQJt8gJ8PHL7Hhc
-	yQUmEzzD5PCJtNUWfuilgFA7gDf86F0=
-Subject: Re: [PATCH bpf] bpf,tcp: avoid infinite recursion in
- BPF_SOCK_OPS_HDR_OPT_LEN_CB
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: KaFai Wan <kafai.wan@linux.dev>
-To: Jiayuan Chen <jiayuan.chen@linux.dev>, bpf@vger.kernel.org
-Cc: Quan Sun <2022090917019@std.uestc.edu.cn>, Yinhao Hu
- <dddddd@hust.edu.cn>,  Kaiyan Mei <M202472210@hust.edu.cn>, Dongliang Mu
- <dzm91@hust.edu.cn>, Eric Dumazet <edumazet@google.com>,  Neal Cardwell
- <ncardwell@google.com>, Kuniyuki Iwashima <kuniyu@google.com>, "David S.
- Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>, Paolo
- Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Jonathan Corbet
- <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Alexei
- Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
- Andrii Nakryiko <andrii@kernel.org>, Martin KaFai Lau
- <martin.lau@linux.dev>, Eduard Zingerman <eddyz87@gmail.com>, Song Liu
- <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, John Fastabend
- <john.fastabend@gmail.com>, KP Singh <kpsingh@kernel.org>, Stanislav
- Fomichev <sdf@fomichev.me>, Hao Luo <haoluo@google.com>, Jiri Olsa
- <jolsa@kernel.org>, David Ahern <dsahern@kernel.org>,
- netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-Date: Wed, 15 Apr 2026 20:52:16 +0800
-In-Reply-To: <0b3a3a41-f709-4414-8a5d-d2eb4959db3f@linux.dev>
-References: <20260414105702.248310-1-jiayuan.chen@linux.dev>
-	 <42c1fed84a84519c2432163aa46f587f2d624fef.camel@163.com>
-	 <0b3a3a41-f709-4414-8a5d-d2eb4959db3f@linux.dev>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	s=arc-20240116; t=1776257751; c=relaxed/simple;
+	bh=ooqEvy5RJLVNe8O7dJAeTYBomhd/oOnKcXQmFHXWZ0c=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Bf3ql0RMtLMFdqiLKtDPcG7PkDckmaTf9LVJ4x9P2w7ddmI3o3TbV72LudeNqv1MRSHthhupzDcCSdBMZ0Rnu8x6aD7ynNhiBAuUczuP3hzoq1fzHDCKSfOx95sG5cM41/UHELbR9WOxsKI6Z6JxkMKxmFggkz7PyaQckJ11OnI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=KcgH6XGU; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=PrbNme7HAridR/s19D36B9OKd4ZmL9kBz9U1v21Yc8M=; b=KcgH6XGUZei1cV4hRJDyT4JTTS
+	65XSBZCZYCQlRfI+6uvI0zs8y+T7A86Mj5SrnFzzztVqiDb+uknhrHBe9IEs1UcUNcZ3B4N196TVh
+	DQGzRtnp4ok1tgJUAPu8zJbRYGkYrs8t7fpx6NDZlH5skyYvbOIHEWYbp3HWSQQR6qC6UMeMQcaHg
+	ROlETLhImiz7mEmaiWYBAjeFQaowPG7vVbhwL0wA7bYJ3aPJJPC5CUp7+RlOEDAuRXkb04G+5p0mn
+	1grjByThMO6UCZSN9tydZF8YZIYxI3dN/g6HR/KXyqtxfneSOuUfcoZ4BfMbVy4A29CdcXdq9nz8b
+	lexwavCw==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wCzmN-00Dqow-2G;
+	Wed, 15 Apr 2026 12:55:40 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v4 0/3] mm/memory-failure: add panic option for
+ unrecoverable pages
+Date: Wed, 15 Apr 2026 05:54:59 -0700
+Message-Id: <20260415-ecc_panic-v4-0-2d0277f8f601@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Migadu-Flow: FLOW_OUT
-X-Spamd-Result: default: False [-0.66 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKOK32kC/22NQQrCMBBFrxJm7UgyiY125T1EJJlONS5aSbQo0
+ rtLdaGiyw/vvX+HIjlJgVrdIcuQSuo7qJWbKeBD6PaCqYFaAWmqtCWLwrw7hS4xOnHexqXVS88
+ wU3DK0qbrs7XZvna5xKPweQpMxCGVc59vz7PBTNy/7mBQo6dgVmQ8VbxYNxJT6OZ93sMUHuhDt
+ eZTJdS4Eqcb3Vau9eFHtW/Vma9XixpNwzFSayiy+1LHcXwAhhbu5SsBAAA=
+X-Change-ID: 20260323-ecc_panic-4e473b83087c
+To: Miaohe Lin <linmiaohe@huawei.com>, 
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Breno Leitao <leitao@debian.org>, 
+ kernel-team@meta.com
+X-Mailer: b4 0.16-dev-453a6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4428; i=leitao@debian.org;
+ h=from:subject:message-id; bh=ooqEvy5RJLVNe8O7dJAeTYBomhd/oOnKcXQmFHXWZ0c=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBp34rHlDVyi74jWKjoFIyrfuD1lU9NC94kYqtNa
+ rxjhMVfyxaJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCad+KxwAKCRA1o5Of/Hh3
+ bfaoEACfT0yRyfwkUbkyCtIBIcPgZhyc3UjA5YMPy7cZyHiTsjEK2UEy8QIj60IPwKcUpq0rWgP
+ aNmyhJDfHFcXgs0ec9z/y+mPBjAHuUgg8IIYhPMAkGGcfkoZeA2/PivNoSsx1wE55yu4OP3/Av0
+ un0pRYOKDqSlujYetUjTSyK0nZvY/AAbPynIUBXSZs0zi8X2DWlU+WO2yJX1sNvl2yrznGJb0xY
+ WMX4g8iShGeaXbCkOMJ1NC9+mZkfskHda3+7VXY3MnBqo0IX5agrbm5hVfCswcMGHG8q6nhuTjh
+ yMHhJLsi2lFVfclTZzm1yqOS1+TnWVjj07X8U4W4IWPR4/czteKwmMR/DE02aFyArQ5fksTn7J3
+ 60DHkszYGikQ48mpDWkWrcBm3Nn3yzgY8xKm4v3mFbVrlWi4RyEZ7jV9vdW6NdZ+kQKo2nzE+y4
+ i2OGz+hkJsz3S/jLrt60gl7B5jZTaooQBfz/nwyZmnNeyDu81ndXkBPC6KvnKgH9mq4eVHMqCMf
+ exPMVVlV3xzg53re5bhogd79RpXy9oUfu+C1AKS6D/7phD1vdowneW2WMjugWhPvQ6zgzJQEE7e
+ Boj8mmhb0N8d1lwDTKMJdcEe538llr9KIrbtZIR6r/+xdXPQeZPDu2sxDA4VgtCBEUvTBHRlzVK
+ kemWvKRJNUwOaeA==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83496-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[std.uestc.edu.cn,hust.edu.cn,google.com,davemloft.net,kernel.org,redhat.com,lwn.net,linuxfoundation.org,iogearbox.net,linux.dev,gmail.com,fomichev.me,vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org,kernel.org,oracle.com,google.com,suse.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[debian.org];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-83498-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kafai.wan@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.dev:dkim,linux.dev:mid]
-X-Rspamd-Queue-Id: 89A51404875
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,msgid.link:url]
+X-Rspamd-Queue-Id: F3F514048EE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 2026-04-15 at 09:47 +0800, Jiayuan Chen wrote:
->=20
-> On 4/14/26 11:37 PM, mkf wrote:
-> > On Tue, 2026-04-14 at 18:57 +0800, Jiayuan Chen wrote:
->=20
-> Hi Martin, I saw your patch. Your solution is better, please ignore mine =
-:)
->=20
-I'm not Martin, just same first name :). Ok, I'll continue.
->=20
->=20
+When the memory failure handler encounters an in-use kernel page that it
+cannot recover (slab, page tables, kernel stacks, vmalloc, etc.), it
+currently logs the error as "Ignored" and continues operation.
 
---=20
-Thanks,
-KaFai
+This leaves corrupted data accessible to the kernel, which will inevitably
+cause either silent data corruption or a delayed crash when the poisoned memory
+is next accessed.
+
+This is a common problem on large fleets. We frequently observe multi-bit ECC
+errors hitting kernel slab pages, where memory_failure() fails to recover them
+and the system crashes later at an unrelated code path, making root cause
+analysis unnecessarily difficult.
+
+Here is one specific example from production on an arm64 server: a multi-bit
+ECC error hit a dentry cache slab page, memory_failure() failed to recover it
+(slab pages are not supported by the hwpoison recovery mechanism), and 67
+seconds later d_lookup() accessed the poisoned cache line causing
+a synchronous external abort:
+
+    [88690.479680] [Hardware Error]: error_type: 3, multi-bit ECC
+    [88690.498473] Memory failure: 0x40272d: unhandlable page.
+    [88690.498619] Memory failure: 0x40272d: recovery action for
+                   get hwpoison page: Ignored
+    ...
+    [88757.847126] Internal error: synchronous external abort:
+                   0000000096000410 [#1] SMP
+    [88758.061075] pc : d_lookup+0x5c/0x220
+
+This series adds a new sysctl vm.panic_on_unrecoverable_memory_failure
+(default 0) that, when enabled, panics immediately on unrecoverable
+memory failures. This provides a clean crash dump at the time of the
+error, which is far more useful for diagnosis than a random crash later
+at an unrelated code path.
+
+This also categorizes reserved pages as MF_MSG_KERNEL, and panics on
+unknown page types (MF_MSG_UNKNOWN).
+
+Note that dynamically allocated kernel memory (SLAB/SLUB, vmalloc,
+kernel stacks, page tables) shares the MF_MSG_GET_HWPOISON return path
+with transient refcount races, so it is intentionally excluded from the
+panic conditions to avoid false positives.
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+Changes in v4:
+- Drop CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option.
+- Split the reserved page classification (MF_MSG_KERNEL) into its own
+  patch, separate from the panic mechanism.
+- Document why the buddy allocator TOCTOU race (between
+  get_hwpoison_page() and is_free_buddy_page()) cannot cause false
+  positives: PG_hwpoison is set beforehand and check_new_page() in the
+  page allocator rejects hwpoisoned pages.
+- Document the narrow LRU isolation race window for MF_MSG_UNKNOWN and
+  its mitigation via identify_page_state()'s two-pass design.
+- Explicitly document why MF_MSG_GET_HWPOISON is excluded from the
+  panic conditions (shared path with transient races and non-reserved
+  kernel memory).
+- Link to v3: https://patch.msgid.link/20260413-ecc_panic-v3-0-1dcbb2f12bc4@debian.org
+
+Changes in v3:
+- Rename is_unrecoverable_memory_failure() to panic_on_unrecoverable_mf()
+  as suggested by maintainer.
+- Add CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option,
+  similar to CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+- Add documentation for the sysctl and CONFIG option.
+- Add code comments documenting the panic condition design rationale and
+  how the retry mechanism mitigates false positives from buddy allocator
+  races.
+- Link to v2: https://patch.msgid.link/20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org
+
+Changes in v2:
+- Panic on MF_MSG_KERNEL, MF_MSG_KERNEL_HIGH_ORDER and MF_MSG_UNKNOWN
+  instead of MF_MSG_GET_HWPOISON.
+- Report MF_MSG_KERNEL for reserved pages when get_hwpoison_page() fails
+  instead of MF_MSG_GET_HWPOISON.
+- Link to v1: https://patch.msgid.link/20260323-ecc_panic-v1-0-72a1921726c5@debian.org
+
+---
+Breno Leitao (3):
+      mm/memory-failure: report MF_MSG_KERNEL for reserved pages
+      mm/memory-failure: add panic option for unrecoverable pages
+      Documentation: document panic_on_unrecoverable_memory_failure sysctl
+
+ Documentation/admin-guide/sysctl/vm.rst | 37 +++++++++++++
+ mm/memory-failure.c                     | 92 ++++++++++++++++++++++++++++++++-
+ 2 files changed, 128 insertions(+), 1 deletion(-)
+---
+base-commit: e6efabc0afca02efa263aba533f35d90117ab283
+change-id: 20260323-ecc_panic-4e473b83087c
+
+Best regards,
+--  
+Breno Leitao <leitao@debian.org>
+
 
