@@ -1,181 +1,171 @@
-Return-Path: <linux-doc+bounces-83506-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83507-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OL/1CJGb32kEWwAAu9opvQ
-	(envelope-from <linux-doc+bounces-83506-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 16:07:13 +0200
+	id 2A2aIFif32kEWwAAu9opvQ
+	(envelope-from <linux-doc+bounces-83507-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 16:23:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10FCA405214
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 16:07:11 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 146FA4053A6
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 16:23:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id DEF983019FCB
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 14:05:07 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 6A421300B446
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 14:23:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B33733B389E;
-	Wed, 15 Apr 2026 14:05:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 08BEC3D4100;
+	Wed, 15 Apr 2026 14:23:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=szeredi.hu header.i=@szeredi.hu header.b="ekVbcIdZ"
+	dkim=pass (2048-bit key) header.d=disroot.org header.i=@disroot.org header.b="X3VqBch4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ACA42459CF
-	for <linux-doc@vger.kernel.org>; Wed, 15 Apr 2026 14:05:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.173
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776261906; cv=pass; b=KcxBbfnNJmfE+HcC+LLIh9Nd5H83U4UQqZuTkqCHbKk318negmcOpPp2RG1bTTUMxmvm0BC5RqLwvNq+37h8qUZaC4vTMViY1tAPO/QQRIGo9W6GDcErzdX4bijt9EAcWHK9F6FgXi8EFl2C9Gzzi632vmqUT+5GRRXwPdQK2k0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776261906; c=relaxed/simple;
-	bh=OuxoKfF1eIFYHXEVVTIuTwEbgi2RzLTEr5xC4F2+szE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=RKrOn7Qm+iLSp0bZaTdFZNLbpe64aNuDwyu/277H3q6F7oivufcuq648NIRp9PLMLQUIiMeP7Nwa+wSXmviSIz6nMCdZKe572CNxc87Sv/elDI23PtXyoMOEMpGzCHVjs/ksgwonlD9B+mIW/yISpM2Y3SrvyFcOED+r33tAwdA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=szeredi.hu; spf=pass smtp.mailfrom=szeredi.hu; dkim=pass (1024-bit key) header.d=szeredi.hu header.i=@szeredi.hu header.b=ekVbcIdZ; arc=pass smtp.client-ip=209.85.160.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=szeredi.hu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=szeredi.hu
-Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-50baf2df711so54784981cf.2
-        for <linux-doc@vger.kernel.org>; Wed, 15 Apr 2026 07:05:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776261904; cv=none;
-        d=google.com; s=arc-20240605;
-        b=cnU3wWUpf+tUxLPkK4ZvqZYxgWDbGTqJMoAbyhwKPEQpPH+f0ls9FOTpHQrlAUoJ6q
-         JuSTYdvozu+WYd5zqNkRcMq9HrN6sfiz6x4TCRlBj8dIf0RNmfSRXE+zriwg6m3E65tq
-         +LIJgcaKn+KYN7unpRWaK29YOD+/MPZu8x/7nVyaunyQ339nHoroL/3bIyXF7TEoifhm
-         gaNlYO3ND8JwFoUdC9YKJoBDF6qXZGPdDMUxzulwpQpIkwMAA6/MlzJ2uyTZe2CZ+jJ7
-         3VlvffpiblIL9pnv3Tn7QajqbqAUS3jAUe0n1JhKBvCo/PyM7MvXRDn6wEmvY3UDDGYC
-         K5rw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=Nn6fMxeMg8FDWayAItzG5oIgCrdJaKGk/78HcE957DA=;
-        fh=4eKrNglcTeCffzJg5SKnY6FQ141DgDcqUUz59sCWaxM=;
-        b=MkOyXe1XhzEh/JhRKciW2+97guGVC3Qj6juMY/oipWM5yoU11fM+/aW0daqB6/KF3V
-         JFGc7KMcRJ62YmTeZeMlOk7VQv8KLQav1QBloPGFk/V0gMPCX5eFpnmMx74nk2AyfBOF
-         Hd9Z/i2CAg42t3vOi2uoNu/l/s1lvAdFshnp+A+Dy17d2lEb87JDVOh4gQnL+/8RFzwL
-         srgb/jnQEaY8X79Q4iaXkXsrnj37XSJOBq/RoOyOjRoh+DrXlO4mhODWFsO1dbRk6By/
-         +onwNxhb0SRJorcb/OmtkpWpqwXSIaHTgnbC6L+w3a0X8erFgUsiycvPK76JnLTPZifP
-         yH/Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=szeredi.hu; s=google; t=1776261904; x=1776866704; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Nn6fMxeMg8FDWayAItzG5oIgCrdJaKGk/78HcE957DA=;
-        b=ekVbcIdZQI29b+3fJvGFFAIcMiRWw0JQnGl2jXt0eUF/NbJXxRCA6/0u4ZrPdPzn5C
-         hpopkgk1KEC7PJoE2+NCfBogXftvcBXM3EKMQnna5/JTG6FnQlSDzYB+R9tAyhP6JuBn
-         jEaev1RMbJw9SdD2+nFsnm6cRn2EoDaA3p42c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776261904; x=1776866704;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Nn6fMxeMg8FDWayAItzG5oIgCrdJaKGk/78HcE957DA=;
-        b=Fa60SRM3LNa1n7E6+N2ZeTkOlwXGCgN1hqmAIDtQg7olPhTheXPPOTy9dbhXqeIU1F
-         ODxEEKrTrjaPthcl3xlxFgKBC0Kwx5TFSz1osqUZtglVPFhlT8L3LEl70amVbzLIy4ho
-         PEhRjN8dRjJ00RaxF3gnBB4TtKdShVsA7tUFO5/rNID3q1CJGs87cHLR2xImIr5VI3cd
-         Pci7W4xcYCzDhfCgqNBHSHoqDX4/Qs+SPtzyD1QC9R1prtQHbI44v3/t/yqsggM5z6F6
-         gFbIWGX8JuI8BKcLU6vceR3KxqY/skzOYE7I9gpOoC3Aruk4PwuMaM+klnKW/4AZLa2A
-         rtvA==
-X-Forwarded-Encrypted: i=1; AFNElJ9/3RWy3kXmEc5AuxkQXzNhLGM7GXh5MduLOYLhZUGcNbV8YuP6SbPyTQvII5FAJbr02vd0FXbkKpc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzuuYJxxzJWkWVIs+wK1D3TfFkOecn21okDCKN3VTQB/B05aCB/
-	RhUbnvm3UF4r9/IjfBS3qMPyhqj6W6ugmextY8/RN1ubeB8jxt2ezfwLSDLIvLTCXnVqRLcaziU
-	V0PAEJoiTDgIK0oUn2jlCmR5mlOHtYmsj+AnLce5ibg==
-X-Gm-Gg: AeBDiev0emJUIO06abLRMXZDg2yYrDxMMjzysUft+LMY91TZzaUsDjiYV2Fj3m/CCs1
-	pzhz1cvkbFMCNHe6cxHkXiXuqviho6ZZXFWNK0xpo6Tt5NhzaBeStdwyDPIGJ+y7Zor4/IYIT8I
-	myKDFnD7JA64Pc2MgNJ+tulCegTx0gvc3DTA6Gx2pm/xSf3en7bDWS9b+NeMMKvjjzRUEvNdUPH
-	L4KGsYL12XLdwQusKa/AtNQg0X8zDz6gndGLNW9mtGWu8Xz3XpG6TLxiuVOq8gQV528XY8+Zs4E
-	TxJwtzrXF8mrouSZxGxUvJ46SkZobDSlM9I6
-X-Received: by 2002:ac8:57d4:0:b0:50b:567a:e915 with SMTP id
- d75a77b69052e-50dd5c10ad8mr322793641cf.64.1776261903663; Wed, 15 Apr 2026
- 07:05:03 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45BA63D3D1E;
+	Wed, 15 Apr 2026 14:23:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.21.23.139
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776262998; cv=none; b=fznBQeBbHs/xqS6OpkRtIDKl9P/K7Ay9g+ywQq8iL/b21TJh4jHviV9sJo5YfEA4hh2zbkAh33dZM4p3qHRRLQu7U6YOP7A8kYaj7PzQQ91GpyzlqxHUrbOiLQ3G3HwXRWB71MFjm+A11YBvHw+QHvT/VtSNuXilm17N1S5uAmo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776262998; c=relaxed/simple;
+	bh=6ZLO2AMuAAH+XCdzW7ye5diyybZIn/a4i+Igy0qsURk=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=AFfaABqbJncRjK0m5KcdfwssNidBn3/xN6rtUsv37QEQbgedUFLXpnU+E/81Q+V2B9OYEhZvD4e+tsCZardY+BhJKuNXlbwjaVhOISNxwl/CUqpS3g+/hfGL6KQxqY7hUVp+JPSVyI+A367CJvcxnJtbGj8H8aW4FGVcj5uuEIE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=disroot.org; spf=pass smtp.mailfrom=disroot.org; dkim=pass (2048-bit key) header.d=disroot.org header.i=@disroot.org header.b=X3VqBch4; arc=none smtp.client-ip=178.21.23.139
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=disroot.org
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by disroot.org (Postfix) with ESMTP id E95FA262A0;
+	Wed, 15 Apr 2026 16:23:15 +0200 (CEST)
+X-Virus-Scanned: SPAM Filter at disroot.org
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rnWEuO4oD7w3; Wed, 15 Apr 2026 16:23:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+	t=1776262995; bh=6ZLO2AMuAAH+XCdzW7ye5diyybZIn/a4i+Igy0qsURk=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To;
+	b=X3VqBch4/pUMXNri0BSB8m4YbE1iuvdppa+/dCMCXxxrRD1eh30UQu+kTQktKUX7F
+	 zEDUpfRjTrC7D3/C6leypbhJTWlFLoDCL5IpHJzPvcJtaafZcf6+gRv4Xaa4wqhGd9
+	 sT4JPbPSqOmh2PsZUAYJgmCXBRlluc+MN0lc/OIxjxAUE88QcxiP6dar/ApgNeZD/x
+	 dijJhGqjDZNdgN/+0r3voJjTmPVQXc+5W7b9zbpDbLHzgi8wHSpuDKt7Acxo+BgX6y
+	 GEkTY/Gy2FgznDCZZ557uhkzH8ZZLK1yJn2WCavQ2acXySVKyKbtLXnCqner8bOMpt
+	 4SyQBI3jWAKFA==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <CAJnrk1ZRTGWjNzkMxS3UkeZMmrpadJDtWKontMx2=d-smXYq=w@mail.gmail.com>
- <adkDq0m5Wt9YhJ8A@groves.net> <38744253-efa3-41c5-a491-b177a4a4c835@bsbernd.com>
- <adlBcwJjLOQDAR65@groves.net> <CAJnrk1a06zkUmXW5EFiUmgAoFauwtzsYvnotaPH0ifVtyh7iDQ@mail.gmail.com>
- <CAJfpegvVTcV89=q3L326aGQjhduBcv7PVg5QKftGLjNZmCLmaw@mail.gmail.com>
- <ad4_jFsR951c2Mtn@groves.net> <20260414185740.GA604658@frogsfrogsfrogs>
- <ad69tTnx5YkD4Y9K@gourry-fedora-PF4VCD3F> <f254f6fc-dc06-4612-82d7-35bb10dbd32e@kernel.org>
- <ad-UAMcALRubBcHk@gourry-fedora-PF4VCD3F>
-In-Reply-To: <ad-UAMcALRubBcHk@gourry-fedora-PF4VCD3F>
-From: Miklos Szeredi <miklos@szeredi.hu>
-Date: Wed, 15 Apr 2026 16:04:50 +0200
-X-Gm-Features: AQROBzArU4_0DWulqMJjaZBbvqSvSBgOVsWveoXthohq7f36XvJ72ClRliOsfUQ
-Message-ID: <CAJfpegsUVv0ziMSQiq9pKeXf6G-+LROPTW077hHMSmAirVCLQw@mail.gmail.com>
-Subject: Re: [PATCH V10 00/10] famfs: port into fuse
-To: Gregory Price <gourry@gourry.net>
-Cc: "David Hildenbrand (Arm)" <david@kernel.org>, "Darrick J. Wong" <djwong@kernel.org>, John Groves <John@groves.net>, 
-	Joanne Koong <joannelkoong@gmail.com>, Bernd Schubert <bernd@bsbernd.com>, 
-	John Groves <john@jagalactic.com>, Dan Williams <dan.j.williams@intel.com>, 
-	Bernd Schubert <bschubert@ddn.com>, Alison Schofield <alison.schofield@intel.com>, 
-	John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Vishal Verma <vishal.l.verma@intel.com>, 
-	Dave Jiang <dave.jiang@intel.com>, Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, 
-	Randy Dunlap <rdunlap@infradead.org>, Jeff Layton <jlayton@kernel.org>, 
-	Amir Goldstein <amir73il@gmail.com>, Jonathan Cameron <Jonathan.Cameron@huawei.com>, 
-	Stefan Hajnoczi <shajnocz@redhat.com>, Josef Bacik <josef@toxicpanda.com>, 
-	Bagas Sanjaya <bagasdotme@gmail.com>, Chen Linxuan <chenlinxuan@uniontech.com>, 
-	James Morse <james.morse@arm.com>, Fuad Tabba <tabba@google.com>, 
-	Sean Christopherson <seanjc@google.com>, Shivank Garg <shivankg@amd.com>, 
-	Ackerley Tng <ackerleytng@google.com>, Aravind Ramesh <arramesh@micron.com>, 
-	Ajay Joshi <ajayjoshi@micron.com>, "venkataravis@micron.com" <venkataravis@micron.com>, 
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, 
-	"nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>, 
-	"linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>, 
-	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, djbw@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[szeredi.hu,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[szeredi.hu:s=google];
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 15 Apr 2026 19:52:54 +0530
+Message-Id: <DHTSO9L6YZTQ.WYM9ERXBGNGB@disroot.org>
+Cc: "Lee Jones" <lee@kernel.org>, "Pavel Machek" <pavel@kernel.org>, "Rob
+ Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+ "Conor Dooley" <conor+dt@kernel.org>, "MyungJoo Ham"
+ <myungjoo.ham@samsung.com>, "Chanwoo Choi" <cw00.choi@samsung.com>,
+ "Sebastian Reichel" <sre@kernel.org>, =?utf-8?q?Andr=C3=A9_Draszik?=
+ <andre.draszik@linaro.org>, "Alexandre Belloni"
+ <alexandre.belloni@bootlin.com>, "Jonathan Corbet" <corbet@lwn.net>, "Shuah
+ Khan" <skhan@linuxfoundation.org>, "Nam Tran" <trannamatk@gmail.com>,
+ =?utf-8?q?=C5=81ukasz_Lebiedzi=C5=84ski?= <kernel@lvkasz.us>,
+ <linux-leds@vger.kernel.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+ <linux-samsung-soc@vger.kernel.org>, <linux-rtc@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v4 05/13] dt-bindings: mfd: s2mps11: add documentation
+ for S2MU005 PMIC
+From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
+To: "Krzysztof Kozlowski" <krzk@kernel.org>, "Kaustabh Chakraborty"
+ <kauschluss@disroot.org>
+References: <20260414-s2mu005-pmic-v4-0-7fe7480577e6@disroot.org>
+ <20260414-s2mu005-pmic-v4-5-7fe7480577e6@disroot.org>
+ <20260415-notorious-dainty-starfish-58a13c@quoll>
+In-Reply-To: <20260415-notorious-dainty-starfish-58a13c@quoll>
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MV_CASE(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[disroot.org,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[disroot.org:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-83507-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83506-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,groves.net,gmail.com,bsbernd.com,jagalactic.com,intel.com,ddn.com,micron.com,lwn.net,linuxfoundation.org,infradead.org,suse.cz,zeniv.linux.org.uk,huawei.com,redhat.com,toxicpanda.com,uniontech.com,arm.com,google.com,amd.com,vger.kernel.org,lists.linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[41];
-	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,samsung.com,linaro.org,bootlin.com,lwn.net,linuxfoundation.org,gmail.com,lvkasz.us,vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miklos@szeredi.hu,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[szeredi.hu:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[kauschluss@disroot.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[disroot.org:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	NEURAL_HAM(-0.00)[-0.993];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,gourry.net:email]
-X-Rspamd-Queue-Id: 10FCA405214
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,disroot.org:dkim,disroot.org:mid]
+X-Rspamd-Queue-Id: 146FA4053A6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, 15 Apr 2026 at 15:35, Gregory Price <gourry@gourry.net> wrote:
+On 2026-04-15 09:17 +02:00, Krzysztof Kozlowski wrote:
+> On Tue, Apr 14, 2026 at 12:02:57PM +0530, Kaustabh Chakraborty wrote:
+>> =20
+>>    clocks:
+>>      $ref: /schemas/clock/samsung,s2mps11.yaml
+>>      description:
+>>        Child node describing clock provider.
+>> =20
+>> +  charger:
+>> +    $ref: /schemas/power/supply/samsung,s2mu005-charger.yaml
+>> +    description:
+>> +      Child node describing battery charger device.
+>> +
+>> +  extcon:
+>
+> You got comment to drop extcon naming. If this stays, it's muic for
+> example.
+>
+>> +    $ref: /schemas/extcon/samsung,s2mu005-muic.yaml
+>> +    description:
+>> +      Child node describing extcon device.
+>> +
+>> +  flash:
+>> +    $ref: /schemas/leds/samsung,s2mu005-flash.yaml
+>> +    description:
+>> +      Child node describing flash LEDs.
+>> +
+>
+> Please make it a separate binding file.
 
-> This was my first reaction when I realized the BPF program would be
-> controlling iomap return value in the fault path.  Big ol' (!)  popped
-> up over my head.
+What do you mean by that?
 
-I'm wondering which part of this triggers the big (!).
+>
+>>    interrupts:
+>>      maxItems: 1
+>> =20
+>> @@ -43,6 +59,11 @@ properties:
+>>      description:
+>>        List of child nodes that specify the regulators.
+>> =20
+>> +  rgb:
+>
+> led
 
-BPF program being run in the fault path?
+Well flash ones are also LEDs. Would you rather have `flash { ... }` and
+`rgb { ... }` under `led { ... }` instead?
 
-Or that the return value from the BPF function is used as iomap?
-
-Or something else?
-
-Thanks,
-Miklos
+>
+>> +    $ref: /schemas/leds/samsung,s2mu005-rgb.yaml
+>> +    description:
+>> +      Child node describing RGB LEDs.
+>> +
 
