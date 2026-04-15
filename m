@@ -1,100 +1,210 @@
-Return-Path: <linux-doc+bounces-83433-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83434-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eCHKM0QB32lhNgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83433-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 05:08:52 +0200
+	id mJKcKYoD32nBNgAAu9opvQ
+	(envelope-from <linux-doc+bounces-83434-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 05:18:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27A8C3FFE59
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 05:08:52 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id EB65B3FFED2
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 05:18:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 5C84D301E78D
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 03:08:49 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E1358301A525
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2026 03:18:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D576623C8A0;
-	Wed, 15 Apr 2026 03:08:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 152DA28CF5D;
+	Wed, 15 Apr 2026 03:18:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nrtVWLKp"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="XniyNQmk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B27121A6820
-	for <linux-doc@vger.kernel.org>; Wed, 15 Apr 2026 03:08:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96A6A21D3E4;
+	Wed, 15 Apr 2026 03:18:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776222526; cv=none; b=qPUafKmFmYoqZ2107DhS4CakkRsuOYDf4KYeJYBHZMEE2OV4Lo+pKTjUjmwEkW11h86LnNZ8TG8A+VYGTurcJa0KMUjNM///aK7O22/7nuk1SyE0x8olKH5gc1HEj2AxhhKfstZ9COINbpDDj1NHPr45ovCRhBYh6EXhP5TIdI4=
+	t=1776223111; cv=none; b=fXztHWVVpSaY2ef6G6m+HTkshdxX9h8PNKky42PN58poliLXYc4zH2Ib1cbNPlHIw6FqLigXp3cw2Y9m6fxcHw0Q4rmL5mIqwCCUmtpUlCBNtBCAz2DXvRKnwCNhIN18fThe9Cgxyra+aIx+t8Fi0nG9MlR1YRbUpIbLalZpv8M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776222526; c=relaxed/simple;
-	bh=ylHoBcSvmiQ2xNaQTIkrMnHQ0ImDq+6Wm2sgUIEuXS0=;
-	h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=TiyLYwS5bWquH1RFMZ2PXc6WGoFlUI8cHiLT54IahSDG5TJPug1Zvt9zzKVYICBZnokFgmxoHA4HcXmsUZx+xySNBT6UbS5NyubJYAe2yBmkYiVIxQvLsJyJR3L3Cl9MQnZO7GPL5EdnAAcNRNTydDMe0zq9AStX7SWUebY+0YY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nrtVWLKp; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C243C19425;
-	Wed, 15 Apr 2026 03:08:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776222526;
-	bh=ylHoBcSvmiQ2xNaQTIkrMnHQ0ImDq+6Wm2sgUIEuXS0=;
-	h=Date:From:To:Subject:From;
-	b=nrtVWLKps4xzZtsyeR6SIW2XD7ovhsTX4jRKef5h42hJIDCGTJc0IP0Kgh0FHFqjd
-	 kxLZ15fswVRjHPqjyiMxS08kS1z196AaZMhfoWquYOp+n0/bh/TBxbiJsN+slI6Ujt
-	 /ZdXLoWQxSgSI/hn6dGZ3dNFXutbGWHju/HQkwk0mRTiTJhA3J+wq5F+Iw17u9ZRzw
-	 OxUv1WB1dxyTdSI497WcqBvHrw33+b4s0xwl2P37uvNUPPC/B5o/KpBgGcrnBEH/Hp
-	 GCgwsEhxYF6O6XwVaocFf4MwFySX6Qna24UT07g/DuUDFQ3tWE4rieb128/o1Y58Nf
-	 ubDxODWOjWDkA==
-Date: Tue, 14 Apr 2026 23:08:45 -0400
-From: Konstantin Ryabitsev <mricon@kernel.org>
-To: linux-doc@vger.kernel.org, corbet@lwn.net
-Subject: Volunteering to do more reviews
-Message-ID: <20260414-valiant-sticky-piculet-3b7b3f@lemur>
+	s=arc-20240116; t=1776223111; c=relaxed/simple;
+	bh=pN4vBEp6nfcqXNrQLkmLldYUzKj2XXj7ZHPiuukhJLg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OZUkyv60Quiv0kGc0eB9GQ0WURgqtsoTUSuSYox6/7E/gIhnsHf3rOl2ROGZNsmMZf1hyaeqUjSZ7Qd7ipdg29wncPJAYkRRVL8xztZXVuRkvFibiMOy6F8wFeUCkpa/+U2JpNh2firSjCpOfudB6Fr/kgc7hKlX9jo4f2Iup3s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=XniyNQmk; arc=none smtp.client-ip=192.198.163.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1776223110; x=1807759110;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=pN4vBEp6nfcqXNrQLkmLldYUzKj2XXj7ZHPiuukhJLg=;
+  b=XniyNQmkRxLelxn4iRwXUgRicu8LK9W4k4XLtKMgbzeZ4zsqdtQYZWoS
+   vT6af2WZwXB1tL3MHcwownmYV34bp9S1a4m7wofkz1+KXxu0pJYp3QulO
+   +Ss0Frzhat/SIfKS4FRbKEzqfZR3kdKqqQwQrVXJc7bA5ESFcXs8PQUmD
+   uuZLD+79DwU2pu+SVJRtFwBRGE4RK5bciPYP8mqOggjfTx55nxSZvuOb0
+   7IdKQq5l003rjPCZ5R63UtbzwuZWSPzo701FPVWtUjBQZ5S5Jq+BYQdeh
+   qd2yoMIXVK0ajcVACCth4mbzJM2GDbAAXeoJ66rMJdfx7noj28W5Kcyex
+   A==;
+X-CSE-ConnectionGUID: zjxSkTk5QdSfAUI+vu1BoA==
+X-CSE-MsgGUID: 4BSPHQ+WQpq1M6C9e4Lh8Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11759"; a="76224286"
+X-IronPort-AV: E=Sophos;i="6.23,179,1770624000"; 
+   d="scan'208";a="76224286"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Apr 2026 20:18:29 -0700
+X-CSE-ConnectionGUID: hRHIx42nTce3zJplxlFpbg==
+X-CSE-MsgGUID: 36SwFOnOTKqLOuqoFusQfQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,179,1770624000"; 
+   d="scan'208";a="223780958"
+Received: from lkp-server01.sh.intel.com (HELO 7f3b36e5d6a5) ([10.239.97.150])
+  by fmviesa009.fm.intel.com with ESMTP; 14 Apr 2026 20:18:26 -0700
+Received: from kbuild by 7f3b36e5d6a5 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wCqlj-0000000005h-0rLu;
+	Wed, 15 Apr 2026 03:18:23 +0000
+Date: Wed, 15 Apr 2026 11:17:53 +0800
+From: kernel test robot <lkp@intel.com>
+To: Youling Tang <youling.tang@linux.dev>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Baoquan He <bhe@redhat.com>, Jonathan Corbet <corbet@lwn.net>
+Cc: oe-kbuild-all@lists.linux.dev,
+	Linux Memory Management List <linux-mm@kvack.org>,
+	Vivek Goyal <vgoyal@redhat.com>, Dave Young <dyoung@redhat.com>,
+	kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, youling.tang@linux.dev,
+	Youling Tang <tangyouling@kylinos.cn>
+Subject: Re: [PATCH] crash: Support high memory reservation for range syntax
+Message-ID: <202604151100.7wbci6vo-lkp@intel.com>
+References: <20260404074103.506793-1-youling.tang@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-Spamd-Result: default: False [-1.66 / 15.00];
+In-Reply-To: <20260404074103.506793-1-youling.tang@linux.dev>
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83433-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-83434-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWO(0.00)[2];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mricon@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 27A8C3FFE59
+	DKIM_TRACE(0.00)[intel.com:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,intel.com:dkim,intel.com:mid,git-scm.com:url,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: EB65B3FFED2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Jon and others:
+Hi Youling,
 
-I need more direct hands-on experience doing reviews and using my own tooling,
-so I'd like to offer to do more reviewing of patches sent to linux-doc, if
-that sort of thing is welcome and I won't be stepping on anyone's toes.
+kernel test robot noticed the following build errors:
 
-Best wishes,
+[auto build test ERROR on akpm-mm/mm-everything]
+[also build test ERROR on linus/master v7.0 next-20260414]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Youling-Tang/crash-Support-high-memory-reservation-for-range-syntax/20260414-205035
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-everything
+patch link:    https://lore.kernel.org/r/20260404074103.506793-1-youling.tang%40linux.dev
+patch subject: [PATCH] crash: Support high memory reservation for range syntax
+config: mips-randconfig-r061-20260415 (https://download.01.org/0day-ci/archive/20260415/202604151100.7wbci6vo-lkp@intel.com/config)
+compiler: mips64-linux-gcc (GCC) 12.5.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260415/202604151100.7wbci6vo-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202604151100.7wbci6vo-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   kernel/crash_reserve.c: In function '__parse_crashkernel':
+>> kernel/crash_reserve.c:324:37: error: 'DEFAULT_CRASH_KERNEL_LOW_SIZE' undeclared (first use in this function)
+     324 |                         *low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
+         |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   kernel/crash_reserve.c:324:37: note: each undeclared identifier is reported only once for each function it appears in
+
+
+vim +/DEFAULT_CRASH_KERNEL_LOW_SIZE +324 kernel/crash_reserve.c
+
+   282	
+   283	static int __init __parse_crashkernel(char *cmdline,
+   284				     unsigned long long system_ram,
+   285				     unsigned long long *crash_size,
+   286				     unsigned long long *crash_base,
+   287				     const char *suffix,
+   288				     bool *high,
+   289				     unsigned long long *low_size)
+   290	{
+   291		char *first_colon, *first_space;
+   292		char *ck_cmdline;
+   293		char *name = "crashkernel=";
+   294		unsigned long long boundary = 0;
+   295		int ret;
+   296	
+   297		BUG_ON(!crash_size || !crash_base);
+   298		*crash_size = 0;
+   299		*crash_base = 0;
+   300	
+   301		ck_cmdline = get_last_crashkernel(cmdline, name, suffix);
+   302		if (!ck_cmdline)
+   303			return -ENOENT;
+   304	
+   305		ck_cmdline += strlen(name);
+   306	
+   307		if (suffix)
+   308			return parse_crashkernel_suffix(ck_cmdline, crash_size,
+   309					suffix);
+   310		/*
+   311		 * if the commandline contains a ':', then that's the extended
+   312		 * syntax -- if not, it must be the classic syntax
+   313		 */
+   314		first_colon = strchr(ck_cmdline, ':');
+   315		first_space = strchr(ck_cmdline, ' ');
+   316		if (first_colon && (!first_space || first_colon < first_space)) {
+   317			ret = parse_crashkernel_mem(ck_cmdline, system_ram,
+   318					crash_size, crash_base);
+   319	
+   320			/* Handle optional ',>boundary' condition for range ':' syntax only. */
+   321			parse_crashkernel_boundary(ck_cmdline, &boundary);
+   322			if (!ret && *crash_size > boundary) {
+   323				*high = true;
+ > 324				*low_size = DEFAULT_CRASH_KERNEL_LOW_SIZE;
+   325			}
+   326	
+   327			return ret;
+   328		}
+   329	
+   330		return parse_crashkernel_simple(ck_cmdline, crash_size, crash_base);
+   331	}
+   332	
+
 -- 
-KR
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
