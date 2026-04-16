@@ -1,265 +1,199 @@
-Return-Path: <linux-doc+bounces-83644-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83646-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0MyGOwlF4WlErAAAu9opvQ
-	(envelope-from <linux-doc+bounces-83644-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:22:33 +0200
+	id IOjGNQ9G4WlErAAAu9opvQ
+	(envelope-from <linux-doc+bounces-83646-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:26:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE54D41496C
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:22:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4747C414A0E
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:26:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 16B9E30333A6
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 20:21:20 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 568B43013739
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 20:25:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8F613EF0D2;
-	Thu, 16 Apr 2026 20:20:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C45223537ED;
+	Thu, 16 Apr 2026 20:25:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RnR0l1QD"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AHR6wvMJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7A413EE1D1
-	for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2026 20:20:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96041333426;
+	Thu, 16 Apr 2026 20:25:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776370813; cv=none; b=KAKeVpCMF0Ky2B7nZT6MyQC+wZ5TvfyIEXpnaA3FOGHkJWp5MuQK4pJKqRIE/rRpmxjblPKBfvBqtAFGHzwSmjTlqdQauMGHQ6jCXqTP5ZmggySKS4Cylu9wQzYLkAnjyVM2bo0e+vVgs/uRtE7Kj95kGI052qRx6OvZ/aIH2ro=
+	t=1776371126; cv=none; b=eRdvZCQPiy7lexJ9fCydDcUg7+JMTsIYBXzKQlPkaAIXQWZxfnNGj0XohbkwgquVha3IuTwhs0uyQjW4DrbrU/z3XGRtM+DMJAtlvO/6xy4AJxML2tm0BIAzLjz1WM16iis8CPuSTEY66ZkihzZXm5OQhFHGFn2xbQhoX7ZO3Bc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776370813; c=relaxed/simple;
-	bh=6ya4n1fkm6PPu+J+UXJaoxYlGEf50l80a0QukNljqH8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ZGHPWM51ly5NGRSxmznOiDJ+EDRm3JgCj/8bS/4QgPOIUK4dudpgeAQbiYwpQlLdCeGibwQnO1+ZzbvA8+brGFMf4xYulmow2HYjTqFhmn8A0dfY5Gz0C58D3gZxsr2kH2vKkN51uOc/IpYyWrvxopHr08J7B4Q4jMCoeya0Ls0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RnR0l1QD; arc=none smtp.client-ip=209.85.221.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-43d01d6b50cso8387731f8f.1
-        for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2026 13:20:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776370807; x=1776975607; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=RfPIq++ZptNB9NoSORTQP1Mg8nMLS6cM+zxyxGdj+8o=;
-        b=RnR0l1QDTGOLlxsgzcTf7QHJfghcBK3vkJurKuJMvbhex537PScWSME7K3YZl1YT7t
-         Ahvgn5Va5+FYnRkZjZf6CC+ipaCA5CQh76xasK0nhcDfdIdbjYVm5g/L18iSnlYfw0dO
-         EroxE/W8UYkzkObsldzdPNIJZnSJup3DHMPqNAyM0KTxCqs8A+VTmSgBrdpwZvzMRGA1
-         yY2qV5QOyBRI3DzN5fM4v62GhjbK/sFRoufSFeRgdLIfHm+CAb4O93/HRkOC6tPIc46J
-         gwhbEOgfBWr40/fOaSbADWvHAq/U2MrdsMWcjn+BwzhN8mA+N1Yowsfte+DslOkZzz0r
-         Vl7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776370807; x=1776975607;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=RfPIq++ZptNB9NoSORTQP1Mg8nMLS6cM+zxyxGdj+8o=;
-        b=EJ2uM7dw6Lb1DDi4Xe8JP8gRZEV87eFdVuhnSh0QKs+JgAvd04fovDnLdy462kzNpp
-         ZKSLOZtqc6rmmOp5cKTTMBgGVz70vVg56ZKziyl0/0EtjqstUSyMqEGhTsd3JOfYPDDd
-         6a/FpSW/402nJFuZBr+9B8sO+KW2lxPUzzKhvWeeEWnBr4awcqAgNdtwsbXIexZ4E4H2
-         0zNJRY/jTVIpwSWd5EhjWqyeNQSW5v89i/BNAoH5KbjWefNt5OAGnQZzPI7+OvgxS0FS
-         SRU/nmr3C4XUtTbx2gKdEhGZedsL1RAOADL1rLnfiZPucn8ML1wMdi3D60o26yxvU3gi
-         dvHw==
-X-Gm-Message-State: AOJu0Ywf5v9JT5Mo1Q9Fml9vl64z3K5qeGjJgbZLsEwjNLKbsa7hJ+SN
-	xnzxwYv+OSRB78VW1ZB3K2f2AODB4Kc275yirAZDDMSRijjeXhJ75h45
-X-Gm-Gg: AeBDieuDELb48JS4qm+b4/FYU6QfL4ip3wc2Ftx70IFjaw17kFpsX1ha19dIAFfoMBe
-	yR79F9yhIR125C0egFVHXT7JETAcVtmTEQbrDvKfdcBh8iYrVjmzElRDe09FBe3pMi/C9Y6slyL
-	Or4uxPwErz3qpswyI3s5Jt68dgQlWZr6p7DZO2pX2meMcOy+FpBYEyLQYT+Cn1ixtMCKD3wYbyP
-	vgeEUcZiZkeV2vbwKXoqonobFIqRsR6ImGzclloUvGtgZfMwi6CSUUX4A05LrYJlD3ix99iTqnL
-	hUvwVmJP4kfKcwDAbkmYB1oyg/dW2xeCE0OOZUfnY8qUPrfdsYsai5vaUjQl7V//Oaxu5s72FHh
-	6pbgGPjGSvxfYE5uYfz80pteKMMU5T/Ef/S2oBs0JnfwfXQEVuV5aPrmUomDeOF8IDJxynaQT8F
-	DVfd8vxBVg+Oqxq2LEqE6V/xNxD4IF/FuECKh+Ht1qGIggiQ==
-X-Received: by 2002:a05:6000:2305:b0:43d:1df7:ed24 with SMTP id ffacd0b85a97d-43fe14920ccmr1106467f8f.21.1776370806537;
-        Thu, 16 Apr 2026 13:20:06 -0700 (PDT)
-Received: from [192.168.0.2] ([197.250.227.196])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43ead35c026sm16180624f8f.15.2026.04.16.13.20.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2026 13:20:06 -0700 (PDT)
-From: =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-Date: Thu, 16 Apr 2026 23:19:16 +0300
-Subject: [PATCH v4 8/8] ARM: defconfig: Add a zx29 defconfig file
+	s=arc-20240116; t=1776371126; c=relaxed/simple;
+	bh=YuGyZSQWXwJBjPNCgqxfSOMDACX3rZbbFaPcf0aYw8g=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=KfKq+Qq+IGMaQhTOPVtwlQDc6O9cZExIksDtWcXG+Ab17Q05eTlMa3faugzB/Cyv6jaOtTbrU3jL8Zus9S0P/WdlSOboQdu8Iy5FWG4OTI3BgrYu5gQBy00hGeKrrQmrnyusQphWRGPfSo+laOYwrta37Wiw1AMWI4YJi5hE1Nw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AHR6wvMJ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1628C2BCAF;
+	Thu, 16 Apr 2026 20:25:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1776371126;
+	bh=YuGyZSQWXwJBjPNCgqxfSOMDACX3rZbbFaPcf0aYw8g=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=AHR6wvMJSPQziXvXkRhq2b73yD39kZq7xOmRYPKBBJHyQCyjzW3a58ni5DbmGCU9y
+	 faTQaZRae+k2FeGGwyULIzMYtauY/sqSrHFBP861J94RupvPyd1LsVdnbaCefbHYSu
+	 U9o8DMuscsRo0V81GCEMLqarGAwRvan92kfBulq08DXw/j5lWXmCaA3p3a+BKzIQCs
+	 PPSTsloFBjzQVIXNb0cKaUZ6FXmZN+eXtHtgJ5amp4HpZE92faZzB+5CgDbsHJopWI
+	 Cz0+68dtBVMYDqnmMDfv80gr++e7iXQIzK0mhO2q5ofFMlbf0hCimcFD/Uuf+QwHwM
+	 ehFk3mzRpSlrg==
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfauth.phl.internal (Postfix) with ESMTP id DB387F4006A;
+	Thu, 16 Apr 2026 16:25:24 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-06.internal (MEProxy); Thu, 16 Apr 2026 16:25:24 -0400
+X-ME-Sender: <xms:tEXhaRRjgnic9kXj4-ktDIZ8mxwigb8jHg90P2SdyP_0oHetYLFDkQ>
+    <xme:tEXhaaDI9IHztK1haGXz6MAE6VXMXCUTSV3hvscQ2HtkH0U4eteDT3tDyQYyuCneB
+    9V-EdrskKuQzgjToOGhs7XJlkhfteH9m0OC9bK5kt4Kkc3bY_Kr>
+X-ME-Received: <xmr:tEXhaTDBWTM1AZiHj6lR-OxcHgzF3tZMT50MSVNcEsNu233_tYTr5Hspwb7eWA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdegjeelhecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
+    hrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefmihhrhihlucfu
+    hhhuthhsvghmrghuuceokhgrsheskhgvrhhnvghlrdhorhhgqeenucggtffrrghtthgvrh
+    hnpeffffekgeffjefgkedvjeeggedttdeljeekhffhudeiudfhiefgudeugffhheffuden
+    ucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptdenuc
+    frrghrrghmpehmrghilhhfrhhomhepkhhirhhilhhlodhmvghsmhhtphgruhhthhhpvghr
+    shhonhgrlhhithihqdduieduudeivdeiheehqddvkeeggeegjedvkedqkhgrsheppehkvg
+    hrnhgvlhdrohhrghesshhhuhhtvghmohhvrdhnrghmvgdpnhgspghrtghpthhtohepfeei
+    pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegurghvihgusehkvghrnhgvlhdroh
+    hrghdprhgtphhtthhopegrkhhpmheslhhinhhugidqfhhouhhnuggrthhiohhnrdhorhhg
+    pdhrtghpthhtohepphgvthgvrhigsehrvgguhhgrthdrtghomhdprhgtphhtthhopehljh
+    hssehkvghrnhgvlhdrohhrghdprhgtphhtthhopehrphhptheskhgvrhhnvghlrdhorhhg
+    pdhrtghpthhtohepshhurhgvnhgssehgohhoghhlvgdrtghomhdprhgtphhtthhopehvsg
+    grsghkrgeskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhirghmrdhhohiflhgvthht
+    sehorhgrtghlvgdrtghomhdprhgtphhtthhopeiiihihsehnvhhiughirgdrtghomh
+X-ME-Proxy: <xmx:tEXhaTya-dTGLZO7X9ydBulSk16fEfuIUebJmFUXbpajHv8TChFFlg>
+    <xmx:tEXhadg_bSOFD8qQFOKcr-OI4jIhE-0ucPAuKHqmcr68YCpAyi6eSw>
+    <xmx:tEXhadZdP4aWhcB2xoH8SmkZ0_21LgPTS4AKrj5HVIceDQhXXIOtvw>
+    <xmx:tEXhaWc-QlnTGdPIQKO4bb8vboT9JwNHe7QTK6j2E-jGlj7oiAKAaA>
+    <xmx:tEXhaaBjpNEaOlo31je-7SV9sXxnfs1dPMRsLHSevixVPKJU0nVjbN0j>
+Feedback-ID: i10464835:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 16 Apr 2026 16:25:24 -0400 (EDT)
+Date: Thu, 16 Apr 2026 21:25:23 +0100
+From: Kiryl Shutsemau <kas@kernel.org>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+	Peter Xu <peterx@redhat.com>, Lorenzo Stoakes <ljs@kernel.org>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Vlastimil Babka <vbabka@kernel.org>, "Liam R . Howlett" <Liam.Howlett@oracle.com>, 
+	Zi Yan <ziy@nvidia.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson <seanjc@google.com>, 
+	Paolo Bonzini <pbonzini@redhat.com>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, kvm@vger.kernel.org
+Subject: Re: [RFC, PATCH 00/12] userfaultfd: working set tracking for VM
+ guest memory
+Message-ID: <aeFCuLJXT8VOkzH7@thinkstation>
+References: <20260414142354.1465950-1-kas@kernel.org>
+ <55019037-4f1c-4d9c-83ee-3a844d8f3d5e@kernel.org>
+ <ad50rPOseVa-SP_s@thinkstation>
+ <aeDoqFWPFxkkNB26@thinkstation>
+ <1a499781-1115-44bc-adbf-2ac3769354ca@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260416-send-v4-8-e19d02b944ec@gmail.com>
-References: <20260416-send-v4-0-e19d02b944ec@gmail.com>
-In-Reply-To: <20260416-send-v4-0-e19d02b944ec@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, 
- Russell King <linux@armlinux.org.uk>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Alexandre Belloni <alexandre.belloni@bootlin.com>, 
- Linus Walleij <linusw@kernel.org>, Drew Fustini <fustini@kernel.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Jiri Slaby <jirislaby@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
- soc@lists.linux.dev, linux-serial@vger.kernel.org, 
- =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3027;
- i=stefandoesinger@gmail.com; h=from:subject:message-id;
- bh=6ya4n1fkm6PPu+J+UXJaoxYlGEf50l80a0QukNljqH8=;
- b=owEBiQJ2/ZANAwAIAT0TvMhUTxoiAcsmYgBp4URLRFT9WUgaNwopIp7Mpr1SgGCmmWEuwj7ar
- WVx31IEDDWJAk8EAAEIADkWIQRDFvS2qgVbJ5UyXWw9E7zIVE8aIgUCaeFESxsUgAAAAAAEAA5t
- YW51MiwyLjUrMS4xMiwyLDIACgkQPRO8yFRPGiJCTg//bkjPztbQVJQPtpbuLkcvfvMZhtuQRHY
- l33l22HlA6SP/heWkI6T2qAPFy1M0Ure63fHDxMyVsuv3gxrVpiTaucJEgKv0fiPsZwRkQFmyLi
- /yiO1Unj3iYdV/kzF86tniNudGNMW92JEHVa/sM9Px3laSJVV3JBEj90VPdnWccaC55hY0Je/Rx
- XoJrAexRUkpqczSXjWKKkXEN8Ve1EPCbfujoRvtuW6aZ77E0KiLIx3mpXZikz9vfrx5emrUZ5qR
- jU3NsabY/ogXdbZKOwArmyvGNDAXz16CrSDiRdialp6+wzlaFhn5IL2+CiPy+9vK7sz/7z6G1pT
- E8aCYbXMwoWtf1H09lCO8zhcVUNTIlGY6isvToY+WxjRmFIh6yzp65M3tvJqcywcPy3K6pYhsP0
- 0lesl6GO2X0AjJ0x/h7OTrK1U30R47h2Tfb+H2zitdYZvUD2/MnR4SRY6LqYqg8Wt1TZ7X4+QmF
- 1KHbL2+y95uoO5JBK58zmNi8asUxR/pBWRGguhBEdljObYEralQfrAsp4djUMPWGisNdUSQYrB4
- zj5WgqwMUUVoeX9na9QhiMLZhfpfJn7hjQygPgnQSV/gcij467vFsFilq0DiKH965TjQ1AEygP9
- dWfea67NGOlgz3pscNDsJQ/7GWs5F0DAk65YCoWpG7ZJTw7V0kss=
-X-Developer-Key: i=stefandoesinger@gmail.com; a=openpgp;
- fpr=4F9C2C8728019633893EBBB98CB81F9A72BBA155
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1a499781-1115-44bc-adbf-2ac3769354ca@kernel.org>
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.infradead.org,lists.linux.dev,gmail.com];
-	TAGGED_FROM(0.00)[bounces-83644-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	TAGGED_FROM(0.00)[bounces-83646-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[stefandoesinger@gmail.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[kas@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: AE54D41496C
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: 4747C414A0E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This enables existing drivers that already are (UART) or will be (USB,
-GPIO) necessary to operate this board even if they aren't declared in
-the DTS yet.
+On Thu, Apr 16, 2026 at 08:32:19PM +0200, David Hildenbrand (Arm) wrote:
+> On 4/16/26 15:49, Kiryl Shutsemau wrote:
+> > On Tue, Apr 14, 2026 at 06:10:44PM +0100, Kiryl Shutsemau wrote:
+> >> On Tue, Apr 14, 2026 at 05:37:50PM +0200, David Hildenbrand (Arm) wrote:
+> >>>
+> >>> I would rather tackle this from the other direction: it's another form
+> >>> of protection (like WP), not really a "minor" mode.
+> >>>
+> >>> Could we add a UFFDIO_REGISTER_MODE_RWP (or however we would call it)
+> >>> and support it for anon+shmem, avoiding the zapping for shmem completely?
+> >>
+> >> I like this idea.
+> >>
+> >> It should be functionally equivalent, but your interface idea fits
+> >> better with the rest.
+> >>
+> >> Thanks! Will give it a try.
+> > 
+> > Here is an updated version:
+> > 
+> > https://git.kernel.org/pub/scm/linux/kernel/git/kas/linux.git/log/?h=uffd/rfc-v2
+> > 
+> > will post after -rc1 is tagged.
+> > 
+> > I like it more. It got substantially cleaner.
+> 
+> I don't have time to look into the details just yet, but my thinking was
+> that
+> 
+> a) It would avoid the zap+refault
 
-Signed-off-by: Stefan Dösinger <stefandoesinger@gmail.com>
----
- arch/arm/configs/zx29_defconfig | 90 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 90 insertions(+)
+Yep.
 
-diff --git a/arch/arm/configs/zx29_defconfig b/arch/arm/configs/zx29_defconfig
-new file mode 100644
-index 000000000000..dae2d86c7583
---- /dev/null
-+++ b/arch/arm/configs/zx29_defconfig
-@@ -0,0 +1,90 @@
-+CONFIG_SYSVIPC=y
-+CONFIG_BLK_DEV_INITRD=y
-+# CONFIG_RD_BZIP2 is not set
-+# CONFIG_RD_LZMA is not set
-+# CONFIG_RD_XZ is not set
-+# CONFIG_RD_LZ4 is not set
-+CONFIG_EXPERT=y
-+CONFIG_KALLSYMS_ALL=y
-+CONFIG_MMU=y
-+CONFIG_ARCH_MULTI_V7=y
-+CONFIG_ARCH_ZTE=y
-+CONFIG_SOC_ZX297520V3=y
-+# FIXME: There is no PSCI on this board, but ARM_GIC_V3 depends on it
-+CONFIG_ARM_PSCI=y
-+CONFIG_ARM_APPENDED_DTB=y
-+CONFIG_CMDLINE="console=ttyAMA1 earlyprintk root=/dev/ram rw"
-+# CONFIG_SUSPEND is not set
-+CONFIG_BINFMT_FLAT=y
-+# CONFIG_UEVENT_HELPER is not set
-+# CONFIG_STANDALONE is not set
-+# CONFIG_PREVENT_FIRMWARE_BUILD is not set
-+# CONFIG_ALLOW_DEV_COREDUMP is not set
-+CONFIG_BLK_DEV_RAM=y
-+CONFIG_BLK_DEV_RAM_COUNT=4
-+CONFIG_CPU_FREQ=y
-+CONFIG_CPUFREQ_DT_PLATDEV=y
-+CONFIG_PM=y
-+CONFIG_PM_CLK=y
-+CONFIG_PM_GENERIC_DOMAINS=y
-+CONFIG_NET=y
-+CONFIG_PACKET=y
-+CONFIG_UNIX=y
-+CONFIG_INET=y
-+CONFIG_DEVTMPFS=y       # FIXME: This is specific to my initrd. Remove before upstream
-+CONFIG_DEVTMPFS_MOUNT=y
-+# CONFIG_INPUT_MOUSEDEV is not set
-+CONFIG_KEYBOARD_GPIO_POLLED=y
-+CONFIG_GPIOLIB=y
-+CONFIG_OF_GPIO=y
-+CONFIG_GPIO_GENERIC_PLATFORM=y
-+# CONFIG_INPUT_MOUSE is not set
-+# CONFIG_SERIO is not set
-+CONFIG_VT_HW_CONSOLE_BINDING=y
-+CONFIG_SERIAL_AMBA_PL011=y
-+CONFIG_SERIAL_AMBA_PL011_CONSOLE=y
-+CONFIG_SERIAL_OF_PLATFORM=y
-+CONFIG_SERIAL_DEV_BUS=y
-+CONFIG_SERIAL_DEV_CTRL_TTYPORT=y
-+# CONFIG_HW_RANDOM is not set
-+CONFIG_MFD_SYSCON=y
-+# CONFIG_HID is not set
-+CONFIG_PINCTRL=y
-+CONFIG_GENERIC_PINCTRL_GROUPS=y
-+CONFIG_PINMUX=y
-+CONFIG_GENERIC_PINMUX_FUNCTIONS=y
-+CONFIG_PINCONF=y
-+CONFIG_GENERIC_PINCONF=y
-+CONFIG_RESET_CONTROLLER=y
-+CONFIG_POWER_RESET=y
-+CONFIG_RESET_SIMPLE=y
-+CONFIG_LEDS_GPIO=y
-+CONFIG_USB_DWC2=y
-+CONFIG_USB_GADGET=y
-+CONFIG_MTD=y
-+CONFIG_MTD_OF_PARTS=y
-+CONFIG_MTD_BLKDEVS=y
-+CONFIG_MTD_BLOCK=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_SPI_MASTER=y
-+CONFIG_MMC=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_PLTFM=y
-+CONFIG_STMMAC_ETH=y
-+CONFIG_STMMAC_PLATFORM=y
-+CONFIG_MDIO_BUS=y
-+CONFIG_REGULATOR=y
-+CONFIG_REGULATOR_FIXED_VOLTAGE=y
-+CONFIG_SRAM=y
-+CONFIG_MISC_FILESYSTEMS=y
-+CONFIG_JFFS2_FS=y
-+CONFIG_CONFIG_TMPFS=y
-+# CONFIG_MISC_FILESYSTEMS is not set
-+CONFIG_PRINTK_TIME=y
-+CONFIG_EARLY_PRINTK=y
-+CONFIG_DEBUG_LL=y
-+CONFIG_DEBUG_ZTE_ZX=y
-+CONFIG_DEBUG_LL_INCLUDE="debug/pl01x.S"
-+CONFIG_DEBUG_UART_PL01X=y
-+CONFIG_DEBUG_UART_PHYS=0x01408000
-+CONFIG_DEBUG_UART_VIRT=0xf4708000
+> b) We could reuse the uffd-wp PTE bit + marker to indicate/remember the
+>    protection, making it co-exist with NUMA hinting naturally.
+> 
+> b) obviously means that we cannot use uffd-wp and uffd-rwp at the same
+> time in the same uffd area. I guess that should be acceptable for the
+> use cases we you should have in mind?
+
+I took a different path: I still use PROT_NONE PTEs, so it cannot
+co-exist with NUMA balancing [fully], but WP + RWP should be fine. I
+need to add a test for this.
+
+I didn't give up on NUMA balancing completely. task_numa_fault() is
+called on RWP fault. So it should help scheduler decisions somewhat.
+
+I think an RWP user might want to use WP too.
+
+Do you see this trade-off as reasonable?
+
+> But I also haven't taken a closer look at this patch set, whether you
+> would already be using a PTE bit somehow (I suspect not :) )
+
+No. I didn't want to allocate a new bit or invent some arch-specific
+trick for this. This functionality is available everywhere where
+PAGE_NONE exists.
 
 -- 
-2.52.0
-
+  Kiryl Shutsemau / Kirill A. Shutemov
 
