@@ -1,83 +1,83 @@
-Return-Path: <linux-doc+bounces-83643-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83645-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GN1NIfhE4WlErAAAu9opvQ
-	(envelope-from <linux-doc+bounces-83643-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:22:16 +0200
+	id GGAdKdFE4WlErAAAu9opvQ
+	(envelope-from <linux-doc+bounces-83645-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:21:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 165CF41493E
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:22:16 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D1B1414913
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 22:21:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 2C7F73066A07
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 20:21:06 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A0EB230231EE
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2026 20:21:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5709B370D55;
-	Thu, 16 Apr 2026 20:20:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7730B3EF0BB;
+	Thu, 16 Apr 2026 20:20:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="P0a2Szwp"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ezm15MJh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 699313ED5D4
-	for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2026 20:20:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4525237A496
+	for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2026 20:20:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776370810; cv=none; b=URLeT2Y92PB4eaAIE8LSoe5Le3nnraEb/hkhPYpEJHR4RLpT35oZkI9nOI50SFrxaAWXafG30yABUAAZMcXm1YwzJjzolG50gj+UI2afB0ZK4Id3tko5najsivbz47oWoArb0atouGRVExN3vDt4U7Tiea4WUwfPtbUxAX3amOs=
+	t=1776370815; cv=none; b=lccy6DMtnI/5FX6C0x+ao/hCMEvkf7xr4rkm3MNXn9csi7lP/x6kdmMQqRRQI9xjLnCUvcmxO+sorftAVHqSOfwpBWGF1aYLMH0K2CftXovlUVaQJng0q5lx1k7MgR4y8mTBHczUEKl2Ks78AugIAgrP2CXRo7V6R9wRsGNbgWA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776370810; c=relaxed/simple;
-	bh=zqX6tFIGEUCVaeZF4QkxvcJ5oMEM87X0rHqUfEPpl/g=;
+	s=arc-20240116; t=1776370815; c=relaxed/simple;
+	bh=OkP3mdKoK/wb2ZT5jYJ/ZVN3/jOhvWuJhUE9h0qF2VQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Jd1M52bgfQmk/A1QyjJXqzYiaUrQXj8DmcH0c+VblzWH+zNXoeFuXHR+Kxz0Fmw8Oj2TAqXL4IVZqWel+LgOL/UIudog5ICfONFJLJ0iHobCPI3GeNwlhl1FcuyIQEcS4W4h2CjBj+HCmtQtYAuGaSN78qXTyAfMxKTsVCqqkn0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=P0a2Szwp; arc=none smtp.client-ip=209.85.221.53
+	 In-Reply-To:To:Cc; b=OpFSpWCs8BNbJwJsbyF0SN1v9KsTFYjPRsITMFFlL9vPVQCmfc9RV7y0YCRkqyYfnI7ROzXyfKJ9d/CuJNLCp5eKQlap7TQYEg7rgj1mWum8iyIm0kScCD5GfZlCJI/fyhoWOj4vDrVvL125j/WGwUnKn0w0hXoovr8ADJ/yQVg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ezm15MJh; arc=none smtp.client-ip=209.85.221.54
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-43eb012ac4fso1082428f8f.0
-        for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2026 13:20:02 -0700 (PDT)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-43cfce3a195so5121717f8f.2
+        for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2026 13:20:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776370797; x=1776975597; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1776370801; x=1776975601; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=0T03nzSg8o1Xiwn3g5TYhAqMiuGuUlEI3maXBZPCdug=;
-        b=P0a2Szwpe0CY2ZBY/PbJg9rlM3HNnwwWXuEDn707qh1gjAEjqS4OmbcIKNIUZo0A0S
-         0SWQmqpn0puXhUuqm3IDXlCDSzSOIxitF4CPIE3Ai9eYeQMCDB6bey3+u9sh+0BiaxWl
-         TCLitHHx2HcDZb5juR7rOkXe0n95nbVfzkfu8uVX80lQp6cBIQ0U9GEoU33HID36J/HB
-         yB4DTe2RYfgTdYAgkhmfgX/WkPfraCL+EVkII0Q8KuvbnOC+yPab4MppZUhScBSIiBz9
-         vllyYoLlnP/uDsz/RB3sO0gPNw38Kfk22eHv+Zq9x7zVvUacMIRKgdXmzcutxkv+bMBd
-         C4pQ==
+        bh=Sy9TqEHIxN6NK0fYsnvnEQIWM0euuGHsvcvwSpdM1gA=;
+        b=ezm15MJhGSjXPV1o2EJ/o/NL7xY5wwCbS6HSZMRr318vwDyg3jHvHSZh5TUff242y8
+         PT01dYxAyohICJTA9xpvDFL5g5OW0j656zDkasHsxftRpDUerci1IRxmO3OBcgbHMU6b
+         Ark/e+NJ9JfpKX3CK152P6iVkXLyTcsHAs/AspslTWOtQeapsQrhw7i7rfR5gT0jf3Nm
+         lSLSlUDZ/DXmv1cQ7J++xT7jquYxJs/jIGMbrjoMBd8HwYEKx+ni/isvCCI3PupXyVHx
+         92nAHwIcH4BFpJMzaN7lHWsP4FkVQNb+EqVunR4zMivpauXDRDsuInxQ7i9CwxOt7uhc
+         IV7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776370797; x=1776975597;
+        d=1e100.net; s=20251104; t=1776370801; x=1776975601;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=0T03nzSg8o1Xiwn3g5TYhAqMiuGuUlEI3maXBZPCdug=;
-        b=dN6tCWXDib95URmwpQc0tXJ4FJwXqyuDp1FMXcE9JIBba3+kAB37G8qqOfrgwEGjF+
-         oh2dp/ubkeeRrtFakj34NyqDfFvxEgVXFe7uxaBdEUIMGT42i4MArCaoPjdRdJ8igcfC
-         nHFh1cwuODLhupY6ZXYGx78t0qcE0OlJ1dMIOMPLvyReO1RimIpDIc1tJ4eB3kzlQeRM
-         ySTQHZ+tYq+Aj7s4HTRpeq8aiaGGNHhccomFiNYqCPDiVLcSaO6EfHPOtqTKMHKkzxAs
-         EVRLIGHRGuEvk2CMib2zIg13nhTGvPtwJg0BKVDYLmdvFRryVLOzXixjt2HMzl2RIBA3
-         N2sA==
-X-Gm-Message-State: AOJu0YwSrlsiuTI5GJadlTV+DN969tIWaR4Qq/IjDeoXVM3fE2tMGAei
-	aejSEw2T0HCUJy8wQE+GMOCx8ZCI+A35COLFWv+cjHAyw/Cpi8g58Psq
-X-Gm-Gg: AeBDieu97xfz51mmoSMARlFW6e+m+mzDC04ZwMFJmdzCG6m58Epe/HVVZxqfXoyThGd
-	apSD5n1CDQ5o3jKaRdGVq2+SHj5qMioylv7QG8s4pykiadPgI+pCrdX/pWhiufRN1r0jcHJK6zR
-	VZiwtpcdr7U6uEWy4cFJ9mZXWuPxERgBMx6NhhWtrh6EKRcvzp3ojmC4Dk+Bhgy6m+2Cwm0cm4i
-	Dsd43mDNNmw88PsMl9l1m0udoPTlelbq6wzyoHF152tVwWdC1ecC/1RSEZ7wZo6Ec3fGJFxduOK
-	n7erLSKpM9qJB/FLi3yt2M4KT/NZRXEaHPXl9H9CjE+6sSZPT2B/K7y6bq2cGWeMfqQyN3ZfatZ
-	K00bk87yJGZ5JuBxpv7whi13YfIe1U4/P8m8qvC2jIleh2bNzd0YyEnLdtjQPSF4XHGbPoBKuRT
-	7ISV/Uc+PYcf6MbstLHD5wpYixH58CU44ZlWo6Cd461yaSjQ==
-X-Received: by 2002:a05:6000:18a5:b0:43e:a69b:d810 with SMTP id ffacd0b85a97d-43fe169d563mr1185520f8f.38.1776370796893;
-        Thu, 16 Apr 2026 13:19:56 -0700 (PDT)
+        bh=Sy9TqEHIxN6NK0fYsnvnEQIWM0euuGHsvcvwSpdM1gA=;
+        b=oGvZRhsU0KEkgS/DjQ9G5x+RQelTrERsoq6QOEboa7TJlQLBf7AvZ+YFaRmhF25Es1
+         GO3c7PLJ3i//juSGYngV10QnRWH/KmD0gdsTE+OvQUGbnKimjStaC5DNKXQ8Ycce6wEc
+         MElTcusNzKDHHtMmEKSREKhT3bmp5XzugI4hFkw2BlnbAnB0qWxMr2YK7GEcDNI/DmFY
+         TezinDgFmaz6FLpCczwGam+1VixtzgRtRRqh7y3B5LJIwwEEgg9Zonva6w4c7shs9ydS
+         mCyrEYscLOWeI/ACvJcDxx+Wy882BA+dW79G8Kk4G9rVKI3KGS/jQqds8UbBTBs2VtmT
+         LCoA==
+X-Gm-Message-State: AOJu0YwTCxejc6IJrgsMcXzb2x9VfLPN1qyg7l4TpFof3JdeqbS5006z
+	kvIka96xHTMm+S+3nJbhbmkMyXa/Zh0BQRL52Xw/ofEv6xf7vnXasNXp
+X-Gm-Gg: AeBDiesXpMUEU98lNxz6QZX19bWlaS9YIYfgcv7CRNVFo87K5uWbkQjmgKvC6vTfP8R
+	C6uFMEe/grHv/WxogWi6aj9qH5qYkCEbCh9qM4zjJ8VAhDAu5O5zVpZ8B1ZJ7iyV4gaMd/R1Wfp
+	r+3a18ABDP1+pcnPGO7aJYfyh+/mJO2bpMCG6A+8Jjqp+ka/iUU6GIR3geaD25h0z+ZJQHAjymJ
+	QCiD8s4as/Un/QYC3P3Hao9RJdaFX1BkTs51kuFF+UJkzdxqx3rLitvnPzyO/aJ08vazr7vtiTH
+	d7pLMlQFonoT4QZfhXST0RM5NAbP0dIS+EYmCyyO1OZaDprc8+0uP1gSFqiUC2I7tunDGpYpefV
+	uXenwhHenRMWZOXTvQ0te6mJAr4k2VcoqHqzNIfcXoIlPyJjDnJ/l2Yqgq1ah3WnWKb8pnjJJrP
+	4Tu78K84KAJAIzInog0A1MKeGMIS8XecbkSgEVxrC0GnGqig==
+X-Received: by 2002:a05:6000:26cf:b0:43d:4a43:53db with SMTP id ffacd0b85a97d-43fe1596617mr1025259f8f.26.1776370801383;
+        Thu, 16 Apr 2026 13:20:01 -0700 (PDT)
 Received: from [192.168.0.2] ([197.250.227.196])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43ead35c026sm16180624f8f.15.2026.04.16.13.19.52
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43ead35c026sm16180624f8f.15.2026.04.16.13.19.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2026 13:19:56 -0700 (PDT)
+        Thu, 16 Apr 2026 13:20:00 -0700 (PDT)
 From: =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-Date: Thu, 16 Apr 2026 23:19:14 +0300
-Subject: [PATCH v4 6/8] ARM: zte: Bring back zx29 UART support
+Date: Thu, 16 Apr 2026 23:19:15 +0300
+Subject: [PATCH v4 7/8] ARM: dts: Declare UART1 on zx297520v3 boards
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,7 +86,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260416-send-v4-6-e19d02b944ec@gmail.com>
+Message-Id: <20260416-send-v4-7-e19d02b944ec@gmail.com>
 References: <20260416-send-v4-0-e19d02b944ec@gmail.com>
 In-Reply-To: <20260416-send-v4-0-e19d02b944ec@gmail.com>
 To: Jonathan Corbet <corbet@lwn.net>, 
@@ -104,41 +104,41 @@ Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  soc@lists.linux.dev, linux-serial@vger.kernel.org, 
  =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2641;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1702;
  i=stefandoesinger@gmail.com; h=from:subject:message-id;
- bh=zqX6tFIGEUCVaeZF4QkxvcJ5oMEM87X0rHqUfEPpl/g=;
- b=owEBiQJ2/ZANAwAIAT0TvMhUTxoiAcsmYgBp4URLOAzH1tDsqAQM6YsZ7GEyIYJznmL2L8uIk
- nhr3jf9n4yJAk8EAAEIADkWIQRDFvS2qgVbJ5UyXWw9E7zIVE8aIgUCaeFESxsUgAAAAAAEAA5t
- YW51MiwyLjUrMS4xMiwyLDIACgkQPRO8yFRPGiKx/w/8DjeLetUi3csxyMsp3tA2IS2LYDPYepk
- nusCL8dln6bs70+ADwKi4Y4a31RnjheChLnfNcfosGcDQiO00EXr5uP5c/PRGfl/oOLslI3uOkZ
- 5VY/xxMT5nuqII8In4qpDumJhiEStbYx3EUYZ7+Zwh+4UUtnxVKpqcPnhoHKucrfETgSCykXo2Q
- fUsaAnCy4JQ+S1pkPa2kE52QzqYRhV9wEFf2vsQcpfdlObUuxtjl/xhYeKy8SRNhx57Odec5vuj
- 9sqRIke/0799ZtihtMrHMDSvmpZiR6Ea4u9Hl1/5LOt903k8E1iUF9a2NYnSPmnMmYJLPdQ4UPj
- n6vlHIJpXlkxFYN23/W3YU5+gEGY+hvL1dALjmwmvQclDe5HCyDmkU/ZrSi3rtVbvAr+wQ8Dxgf
- Jkh6iEbGRGRZG549PgjH+uCDgF7+hWCNTE9uJt49lFe0lXkrmgmrZMNmlq06L8vcluLTaAbnK6D
- +5xHw2T2tcuviAmrV6ovuLi4/UaECUyZbSKiMTH/0sqTUFMHATLO9iLwWt3zR5u6Pf75BYOGnjb
- dV1GlpeL86CeIaFTQ93V1GoEQIlS8tM0E9PHNxgC/O3ZarpJIRT5Mf1XyFWVRlWb5DSC51YcHw7
- Xu+XbvZWPNUuqTHq1jDa3p2c2w+UZqjTtBqmK2pyHU42ZwVkbn0c=
+ bh=OkP3mdKoK/wb2ZT5jYJ/ZVN3/jOhvWuJhUE9h0qF2VQ=;
+ b=owEBiQJ2/ZANAwAIAT0TvMhUTxoiAcsmYgBp4URLcuxim/TQS8pbKO5tQensiaHCwPrFRWbsQ
+ gPtxXIEKtaJAk8EAAEIADkWIQRDFvS2qgVbJ5UyXWw9E7zIVE8aIgUCaeFESxsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDIACgkQPRO8yFRPGiI07g/+J3gFaCAibP2Uu0oP9XXc2ViXRxyXuQ6
+ FAr5syZvJc3oJiuQ8lPxaVfhIeRQ/TzRFaWYm4TqFFcoF8CFQku3LTCQ6CC3inaT1TFnlUH7LDB
+ DsBg/9ZCh836vnGTHhbrR4IiqackyVH2zvAqFSqk4mfvSASEuNdyOXELcC3/moctlguw8xpR/qk
+ ienfNlJqmmmy50hafQi8gmr7xx9zwBLOV4aBbQfX+Zp6v1KZ7hxMaSknODVoa4AmVKIpSOzbulH
+ NsGOCLhnJyeYwYU9Uu7CRZqf2cCVeLSJf7fWHvmVxa94/DoAHMl0O4d+EweIqKbH1zPxkQQJ0TF
+ bi3cfdDQI3GNgboNRWpm1kyhyplaw/+CG0r8OaZbt9z7DVw3+bdKEVaKDkCl6Gfw3PcJjfYTjsj
+ rC/vAByXUmH5gMnozEauB6uMQX1ZY/mcqfvfymRnOOu4CokkWbDMLvFnvj9XEmNjYI4Tc1qlhEH
+ KgQKGHrK/pBDTb027GsLc9Gqcb00VrrniSvf3V/AjwlJ/yhMILQzBrgaSg5BJKxcL7EEUTU7vDO
+ pqzhEYa/7l+q14+34gB9Pu9fangdFK4cB/jwYClSMrZNlZFnnmlYXtwGeIWRMrvkq2s3haie5dj
+ uD7zjc/BZ/mFFBqWm9n9JhgrrQl25WEY1fsfP7pI8rXoDDu79KTc=
 X-Developer-Key: i=stefandoesinger@gmail.com; a=openpgp;
  fpr=4F9C2C8728019633893EBBB98CB81F9A72BBA155
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FREEMAIL_CC(0.00)[vger.kernel.org,lists.infradead.org,lists.linux.dev,gmail.com];
-	TAGGED_FROM(0.00)[bounces-83643-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-83645-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
@@ -149,94 +149,66 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[]
-X-Rspamd-Queue-Id: 165CF41493E
+X-Rspamd-Queue-Id: 3D1B1414913
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This is based on code removed in commit 89d4f98ae90d ("ARM: remove zte
-zx platform"). I did not bring back the zx29-uart .compatible as the
-arm,primecell-periphid does the job.
+This is the UART that sends Uboot messages and is accessible via pins on
+the boards I have seen so far. UART0 and UART2 exist as well in the SoC
+and can be used with the right pinmux settings on some boards. They will
+be added later.
 
 Signed-off-by: Stefan Dösinger <stefandoesinger@gmail.com>
----
- drivers/tty/serial/amba-pl011.c | 37 +++++++++++++++++++++++++++++++++++++
- include/linux/amba/bus.h        |  6 ++++++
- 2 files changed, 43 insertions(+)
 
-diff --git a/drivers/tty/serial/amba-pl011.c b/drivers/tty/serial/amba-pl011.c
-index 7f17d288c807..858a0edd3e3b 100644
---- a/drivers/tty/serial/amba-pl011.c
-+++ b/drivers/tty/serial/amba-pl011.c
-@@ -216,6 +216,38 @@ static struct vendor_data vendor_st = {
- 	.get_fifosize		= get_fifosize_st,
+---
+
+The reason why I add the serial1=uart1 alias is to keep console=ttyAMA1
+stable regardless of the other enabled UARTs. UART0, as the name
+implies, has a lower MMIO address, but uart1 is the one that usually has
+the boot output and console.
+---
+ arch/arm/boot/dts/zte/zx297520v3.dtsi | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/arch/arm/boot/dts/zte/zx297520v3.dtsi b/arch/arm/boot/dts/zte/zx297520v3.dtsi
+index ecd07f3fb8b3..09fbb1d052e3 100644
+--- a/arch/arm/boot/dts/zte/zx297520v3.dtsi
++++ b/arch/arm/boot/dts/zte/zx297520v3.dtsi
+@@ -6,6 +6,10 @@ / {
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
+ 
++	aliases {
++		serial1 = &uart1;
++	};
++
+ 	cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+@@ -57,5 +61,23 @@ timer {
+ 			 */
+ 			arm,cpu-registers-not-fw-configured;
+ 		};
++
++		/* The UART clock defaults to 26 mhz. It will be replaced when the zx29 clock
++		 * framework is added.
++		 */
++		uartclk: uartclk: clock-26000000 {
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <26000000>;
++		};
++
++		uart1: serial@1408000 {
++			compatible = "arm,pl011", "arm,primecell";
++			arm,primecell-periphid = <0x001feffe>;
++			reg = <0x01408000 0x1000>;
++			interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&uartclk>;
++			clock-names = "apb_pclk";
++		};
+ 	};
  };
- 
-+static const u16 pl011_zte_offsets[REG_ARRAY_SIZE] = {
-+	[REG_DR] = ZX_UART011_DR,
-+	[REG_FR] = ZX_UART011_FR,
-+	[REG_LCRH_RX] = ZX_UART011_LCRH,
-+	[REG_LCRH_TX] = ZX_UART011_LCRH,
-+	[REG_IBRD] = ZX_UART011_IBRD,
-+	[REG_FBRD] = ZX_UART011_FBRD,
-+	[REG_CR] = ZX_UART011_CR,
-+	[REG_IFLS] = ZX_UART011_IFLS,
-+	[REG_IMSC] = ZX_UART011_IMSC,
-+	[REG_RIS] = ZX_UART011_RIS,
-+	[REG_MIS] = ZX_UART011_MIS,
-+	[REG_ICR] = ZX_UART011_ICR,
-+	[REG_DMACR] = ZX_UART011_DMACR,
-+};
-+
-+static unsigned int get_fifosize_zte(struct amba_device *dev)
-+{
-+	return 16;
-+}
-+
-+static struct vendor_data vendor_zte = {
-+	.reg_offset		= pl011_zte_offsets,
-+	.access_32b		= true,
-+	.ifls			= UART011_IFLS_RX4_8 | UART011_IFLS_TX4_8,
-+	.fr_busy		= ZX_UART01x_FR_BUSY,
-+	.fr_dsr			= ZX_UART01x_FR_DSR,
-+	.fr_cts			= ZX_UART01x_FR_CTS,
-+	.fr_ri			= ZX_UART011_FR_RI,
-+	.get_fifosize		= get_fifosize_zte,
-+};
-+
- /* Deals with DMA transactions */
- 
- struct pl011_dmabuf {
-@@ -3081,6 +3113,11 @@ static const struct amba_id pl011_ids[] = {
- 		.mask	= 0x00ffffff,
- 		.data	= &vendor_st,
- 	},
-+	{
-+		.id	= AMBA_LINUX_ID(0x00, 0x1, 0xffe),
-+		.mask	= 0x00ffffff,
-+		.data	= &vendor_zte,
-+	},
- 	{ 0, 0 },
- };
- 
-diff --git a/include/linux/amba/bus.h b/include/linux/amba/bus.h
-index 9946276aff73..854c962d70f5 100644
---- a/include/linux/amba/bus.h
-+++ b/include/linux/amba/bus.h
-@@ -103,8 +103,14 @@ enum amba_vendor {
- 	AMBA_VENDOR_ST = 0x80,
- 	AMBA_VENDOR_QCOM = 0x51,
- 	AMBA_VENDOR_LSI = 0xb6,
-+	AMBA_VENDOR_LINUX = 0xfe,	/* This value is not official */
- };
- 
-+/* This is used to generate pseudo-ID for AMBA device */
-+#define AMBA_LINUX_ID(conf, rev, part) \
-+	(((conf) & 0xff) << 24 | ((rev) & 0xf) << 20 | \
-+	AMBA_VENDOR_LINUX << 12 | ((part) & 0xfff))
-+
- extern const struct bus_type amba_bustype;
- 
- #define to_amba_device(d)	container_of_const(d, struct amba_device, dev)
 
 -- 
 2.52.0
