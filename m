@@ -1,242 +1,169 @@
-Return-Path: <linux-doc+bounces-83669-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83668-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2HbMNAOR4WmluwAAu9opvQ
-	(envelope-from <linux-doc+bounces-83669-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 03:46:43 +0200
+	id +Lg6I+uQ4WmluwAAu9opvQ
+	(envelope-from <linux-doc+bounces-83668-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 03:46:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47AE3416072
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 03:46:43 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 177B241605B
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 03:46:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 448C030657B4
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 01:46:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 66713303D719
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 01:46:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1007823D283;
-	Fri, 17 Apr 2026 01:46:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61E5A238178;
+	Fri, 17 Apr 2026 01:46:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="b5Ac9iXo";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="zYUyQdXn";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="b5Ac9iXo";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="zYUyQdXn"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jjx79DQo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D66E41C62
-	for <linux-doc@vger.kernel.org>; Fri, 17 Apr 2026 01:46:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D2A441C62;
+	Fri, 17 Apr 2026 01:46:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776390382; cv=none; b=HndFVpcweQqfv9izysZhe14sh0H3Qs8gv6jo3flNYmLs1g3709QZmsDAra2cu9LWo7UohedfbF72k/z5Pgxb+D9VJtLRkLAXw/5jAxi+KKY7aCO5wJJ1cg/E0FyRBQR3t1TiThTia/TiCviwgqBwFtJKsA2FA+5KNMKqabi0KB0=
+	t=1776390376; cv=none; b=Jgayr/u5I/e1xve2J2fDyVGVOVZuCEnZLXo4eLO4KH6NXDWBYMULTwc1DYmTCfQKR7IkgzABRxr2qaIaeVy19SWd7tdLFeI4NNvYLnE5LYmLm/OYmFTqmmZdUjhDrp5VhzJxMwBmFYJLAamShZdXiQBpW3BANvGvc22D3lzmyEw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776390382; c=relaxed/simple;
-	bh=ZRJX8CNoXZvic0Ybm/T5AFU/a2lLFpBHz2IJefsXF04=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=TKwUmJhCwviYmWR70Pw/EDICW1gZG7OAUflIBTsS2jMtsk17CkMUEcg3zLvRpEz1DRTgy2iRIkwqbhxChfMZlS3tgxXwajmFZUydgOTNFIadF3taYxTKVPDqRGaF0q+yqnuLxCMtJiG+FfJitHypnnmHzg5/UAmvFHcaXS4ptPo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=b5Ac9iXo; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=zYUyQdXn; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=b5Ac9iXo; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=zYUyQdXn; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 404956A936;
-	Fri, 17 Apr 2026 01:46:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1776390372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=OGzF7Yi40Gm2TNXJQlgKLjahaFlkUzmMxA1OR2Usmts=;
-	b=b5Ac9iXoatDDGWqAm7pXvB9nFYOJGS0o+FqgPLzqJ6QvzGFzJcnklRwQzGv9tKuCqZfJCb
-	A37RWNE4EqwoxEd6Hpl0Qtj2mscY4J5idMF6q1gbIfNFc57DOQJWX9gUyvNzarTeeybggZ
-	KoTv2HDO6/BhHWypuA0HVbb9fr8xNlc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1776390372;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=OGzF7Yi40Gm2TNXJQlgKLjahaFlkUzmMxA1OR2Usmts=;
-	b=zYUyQdXnR3dypiIvsXxxl0s0c4FdSXBZupbB7WUkWBkL8owOrml7K4GziV+lLNVeRF+33k
-	mdp7PBQ8ofz8oxAw==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=b5Ac9iXo;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=zYUyQdXn
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1776390372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=OGzF7Yi40Gm2TNXJQlgKLjahaFlkUzmMxA1OR2Usmts=;
-	b=b5Ac9iXoatDDGWqAm7pXvB9nFYOJGS0o+FqgPLzqJ6QvzGFzJcnklRwQzGv9tKuCqZfJCb
-	A37RWNE4EqwoxEd6Hpl0Qtj2mscY4J5idMF6q1gbIfNFc57DOQJWX9gUyvNzarTeeybggZ
-	KoTv2HDO6/BhHWypuA0HVbb9fr8xNlc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1776390372;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=OGzF7Yi40Gm2TNXJQlgKLjahaFlkUzmMxA1OR2Usmts=;
-	b=zYUyQdXnR3dypiIvsXxxl0s0c4FdSXBZupbB7WUkWBkL8owOrml7K4GziV+lLNVeRF+33k
-	mdp7PBQ8ofz8oxAw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 03263593AE;
-	Fri, 17 Apr 2026 01:46:11 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id uIW9NeOQ4WmiPQAAD6G6ig
-	(envelope-from <krisman@suse.de>); Fri, 17 Apr 2026 01:46:11 +0000
-From: Gabriel Krisman Bertazi <krisman@suse.de>
-To: viro@zeniv.linux.org.uk,
-	brauner@kernel.org,
-	jack@suse.cz
-Cc: corbet@lwn.net,
-	linux-fsdevel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Gabriel Krisman Bertazi <krisman@suse.de>,
-	Mel Gorman <mgorman@suse.de>
-Subject: [PATCH] eventpoll: Add sysctl quirk to avoid synchronous wakeup
-Date: Thu, 16 Apr 2026 21:46:00 -0400
-Message-ID: <20260417014600.1513306-1-krisman@suse.de>
-X-Mailer: git-send-email 2.52.0
+	s=arc-20240116; t=1776390376; c=relaxed/simple;
+	bh=9GV2cqGSWKW8OhRYCnTtDoSytBNAPLgGcM23mRKlFLI=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=LkLjnsNQPmWECOVy2rbCokXS2w0DnU6bqheiKnFuqIlmdia5Lq6xhBizCF1EBTIYjLjMGS6Uq7/hPNrLf02vO/pTSDbL17FvsH75zdXTVHUjUxrhkt+4V+LpARdbiBVX8vJaEDFrA36kfCQ/feCefxu1OCtW5edE7gus0I0UbUM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jjx79DQo; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 640C3C2BCB6;
+	Fri, 17 Apr 2026 01:46:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1776390375;
+	bh=9GV2cqGSWKW8OhRYCnTtDoSytBNAPLgGcM23mRKlFLI=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=jjx79DQoe9MufrzLSh3Zx3Y2Hn78WNvNjaveh6ypMHnSlqisXrByMOIS2yL/gkAu/
+	 +9IaRDLD2MQdO5xciiZwyL/Cc10vKWd5xtWIgBk2X5XIxj+5Nxnhax0jDG/+/jhvZA
+	 dEWxa5LZcqXhiNseYW0OB204mlXBmmHhZyGUz7fAtysA4yqr9hgKfsjAWuJEI0mLi+
+	 QeWRWqebZ/Tjbd85ZkuVe5aRzL5DMall6oG6mJG2PFsI02czOyc320INLhoL+HtKFU
+	 BxyVReG26WeQJypyvWI9fH0+SdvhCMc8c4QLhY5zpfe3numMu9XBdbNZmd54jZUFjJ
+	 T4DtWALeCCfpQ==
+Date: Fri, 17 Apr 2026 10:46:13 +0900
+From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+To: Breno Leitao <leitao@debian.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan
+ <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ oss@malat.biz, paulmck@kernel.org, rostedt@goodmis.org,
+ kernel-team@meta.com, Kiryl Shutsemau <kirill@shutemov.name>
+Subject: Re: [PATCH v2] bootconfig: Apply early options from embedded config
+Message-Id: <20260417104613.6c7e3211f56a950814e9c9f5@kernel.org>
+In-Reply-To: <ad9wwUJ3lh_536Xy@gmail.com>
+References: <acZPZ4XKy4QynznK@gmail.com>
+	<20260327223744.f246150adc1671f7605a4f0a@kernel.org>
+	<acpzhCBEPh-tKVqg@gmail.com>
+	<acqJk-zbyjIiy6hJ@gmail.com>
+	<20260331125827.157a833882830007ea9b0b31@kernel.org>
+	<acvjcCqIAeHyIiQN@gmail.com>
+	<20260401224853.d8ed517a344c4be51d371a9c@kernel.org>
+	<ac0wz_eW5Zgi4t45@gmail.com>
+	<20260403114519.14e326a4bba019373bf3ff09@kernel.org>
+	<adTX6h4Ej5jOcONP@gmail.com>
+	<ad9wwUJ3lh_536Xy@gmail.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Flag: NO
-X-Spam-Score: -3.01
-X-Spam-Level: 
-X-Spamd-Result: default: False [-0.66 / 15.00];
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MV_CASE(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[krisman@suse.de,linux-doc@vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83669-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-83668-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mhiramat@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 47AE3416072
+	TO_DN_SOME(0.00)[]
+X-Rspamd-Queue-Id: 177B241605B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Upstream commit 900bbaae67e9 ("epoll: Add synchronous wakeup support for
-ep_poll_callback") fixes a bug where epoll did not honor the "sync" part
-of the wake_up_*_sync request by the original waker when waking up the
-epoll waiter. That patch is correct, as I understand it, because it lets
-the caller decide and the most likely general case for a
-producer-consumer application using epoll is "wait on data on the socket
-and then consume it".
+On Wed, 15 Apr 2026 04:15:57 -0700
+Breno Leitao <leitao@debian.org> wrote:
 
-Nevertheless, it caused a regression in a proprietary database benchmark
-that communicates over TCP on localhost. The TCP detail is only relevant
-because it will unconditionally use an WF_SYNC (in sock_def_readable) to
-wake its waiters.  But, in general, for threads that are just signaling
-an operation via epoll, and not necessarily consuming that data, pulling
-the application closer to a cpu-intensive waker task can actually harm
-performance, as there is not much data access to benefit from data
-locality.  This seems to be the case for this workload.
+> On Tue, Apr 07, 2026 at 03:19:09AM -0700, Breno Leitao wrote:
+> > On Fri, Apr 03, 2026 at 11:45:19AM +0900, Masami Hiramatsu wrote:
+> > > > I'm still uncertain about this approach. The goal is to identify and
+> > > > categorize the early parameters that are parsed prior to bootconfig
+> > > > initialization.
+> > >
+> > > Yes, if we support early parameters in bootconfig, we need to clarify
+> > > which parameters are inherently unsupportable, and document it.
+> > > Currently it is easy to say that it does not support the parameter
+> > > defined with "early_param()". Similary, maybe we should introduce
+> > > "arch_param()" or something like it (or support all of them).
+> > >
+> > > >
+> > > > Moreover, this work could become obsolete if bootconfig's initialization
+> > > > point shifts earlier or later in the boot sequence, necessitating
+> > > > another comprehensive analysis.
+> > >
+> > > If we can init it before calling setup_arch(), yes, we don't need to
+> > > check it. So that is another option. Do you think it is feasible to
+> > > support all of them? (Of course, theologically we can do, but the
+> > > question is the use case and requirements.)
+> >
+> > I don't believe all early parameters can be supported by bootconfig.
+> > Some are inherently incompatible as far as I understand, while others
+> > depend on bootconfig's initialization point in the boot sequence.
+> 
+> I've developed a patch series that relocates bootconfig initialization
+> to occur before setup_arch().
+> 
+> Adopting this approach would streamline the categorization considerably,
+> as only a small subset of kernel parameters are parsed before
+> setup_arch() is called.
+> 
+> This enables a clearer distinction: parameters processed *before*
+> setup_arch() versus those handled afterward, rather than classifying
+> based on what occurs before bootconfig initialization.
+> 
+> Just to close the look and link both discussion together, the proposed
+> patch series is available at:
+> 
+> https://lore.kernel.org/all/20260415-bootconfig_earlier-v1-0-cf160175de5e@debian.org/
 
-This is a tricky case for an heuristic, IMO, since it would be hard to
-predict what the epoll user wants.  I considered adding an epoll_ctl
-flag to let the user configure the desired behavior, but it feels too
-much of an specific scheduler detail to be exposed in the syscall API,
-and it would likely cause user confusion.  In addition, it would require
-recompilation of user applications needing this behavior.
 
-Instead, this patch adds a new sysctl for a system-wide quirk that can
-be enabled only when it is known to benefit the workload.  While
-different workloads would benefit from different behaviors, it is
-unclear these exist in parallel and that reverting to the older behavior
-would cause performance regressions.
+Thanks for working on this series!! Let me review the series.
 
-Cc: Mel Gorman <mgorman@suse.de>
-Fixes: 900bbaae67e9 ("epoll: Add synchronous wakeup support for ep_poll_callback")
-Signed-off-by: Gabriel Krisman Bertazi <krisman@suse.de>
+BTW, I found that the current __setup(), early_param(), module_param()
+are a bit complicated, for example, __setup() and early_param() are
+stored in the different array of module_param(), and those can use
+the same parameter (e.g. console).
 
----
-I get the fixes tag is hardly appropriate here, but it serves as a
-reasonable way to link to the original patch.
----
- Documentation/admin-guide/sysctl/fs.rst | 10 ++++++++++
- fs/eventpoll.c                          | 12 +++++++++++-
- 2 files changed, 21 insertions(+), 1 deletion(-)
+And as you found some of early_param() options are only applied via
+command line. Maybe we can introduce another special macro which is
+only for command line.
 
-diff --git a/Documentation/admin-guide/sysctl/fs.rst b/Documentation/admin-guide/sysctl/fs.rst
-index 9b7f65c3efd8..9052ad3f8404 100644
---- a/Documentation/admin-guide/sysctl/fs.rst
-+++ b/Documentation/admin-guide/sysctl/fs.rst
-@@ -338,6 +338,16 @@ on a 64-bit one.
- The current default value for ``max_user_watches`` is 4% of the
- available low memory, divided by the "watch" cost in bytes.
- 
-+force_async_wake
-+----------------
-+
-+When an epoll event occurs, the kernel will attempt to "pull" the epoll
-+waiter task closer to the cpu where the task that initiated the event is
-+and switch to it sooner.  While most workloads benefit from this
-+behavior, this switch allows disabling it, leaving the epoll task where
-+it is.  Setting it to 1 can harm performance for most applications, but
-+might benefit others.
-+
- 5. /proc/sys/fs/fuse - Configuration options for FUSE filesystems
- =====================================================================
- 
-diff --git a/fs/eventpoll.c b/fs/eventpoll.c
-index 23f3c6ac0bad..aed0dcc50530 100644
---- a/fs/eventpoll.c
-+++ b/fs/eventpoll.c
-@@ -257,6 +257,9 @@ struct ep_pqueue {
- /* Maximum number of epoll watched descriptors, per user */
- static long max_user_watches __read_mostly;
- 
-+/* Whether wakee should always be waken up asynchronously */
-+static bool sysctl_force_async_wake __read_mostly = false;
-+
- /* Used for cycles detection */
- static DEFINE_MUTEX(epnested_mutex);
- 
-@@ -332,6 +335,13 @@ static const struct ctl_table epoll_table[] = {
- 		.extra1		= &long_zero,
- 		.extra2		= &long_max,
- 	},
-+	{
-+		.procname	= "force_async_wake",
-+		.data		= &sysctl_force_async_wake,
-+		.maxlen		= sizeof(sysctl_force_async_wake),
-+		.mode		= 0644,
-+		.proc_handler	= proc_dobool,
-+	},
- };
- 
- static void __init epoll_sysctls_init(void)
-@@ -1318,7 +1328,7 @@ static int ep_poll_callback(wait_queue_entry_t *wait, unsigned mode, int sync, v
- 				break;
- 			}
- 		}
--		if (sync)
-+		if (sync && !sysctl_force_async_wake)
- 			wake_up_sync(&ep->wq);
- 		else
- 			wake_up(&ep->wq);
+Thanks,
+
 -- 
-2.52.0
-
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
