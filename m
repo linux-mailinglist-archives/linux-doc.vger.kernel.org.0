@@ -1,180 +1,230 @@
-Return-Path: <linux-doc+bounces-83701-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83703-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eBXGC6bt4WmKzgAAu9opvQ
-	(envelope-from <linux-doc+bounces-83701-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 10:21:58 +0200
+	id 6GxzHvbs4WmKzgAAu9opvQ
+	(envelope-from <linux-doc+bounces-83703-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 10:19:02 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8236741895A
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 10:21:57 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 386E641883D
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 10:19:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 194FD3028014
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:17:29 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id ED0323052EAF
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:17:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 026A03A8750;
-	Fri, 17 Apr 2026 08:17:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCD983A9627;
+	Fri, 17 Apr 2026 08:17:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="oYU8Zvda"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZnST3SMO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA2183612D7;
-	Fri, 17 Apr 2026 08:17:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 951BF3A8756;
+	Fri, 17 Apr 2026 08:17:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776413847; cv=none; b=Qajsg1zX4qaH+P8Xe3X8axK8i/eJ7oiLUkgeszMX4HvnRbB8+fyEByIVw+LVKhFcIIAPYEjwtIwx4yHGhskXci7j+5hkkZeQhOfpVDrOpzZHNbGumK5TI7fNi9ebIyDBkgTG+em3IPVFCWSIXkGtiETX/B0xlSGMPhOWig2mUNg=
+	t=1776413869; cv=none; b=ujCKNcqx5zjmRlR6+MUt3MMIbeSdUvvzIwPJAwA3droUiheTekH5FubwYwEkZAseNuRcRzejE7EhTYIdRd+vIhbzUMCCw0VR2b3Y898n7y6+KGb5zjYo3tN3dR2ttoqeTk4B6kwcTz90Dy9oAH7dIsLCTtWcTjqqogdrL5rLZis=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776413847; c=relaxed/simple;
-	bh=mzb8UU2eqL5wE6R0P13zhu23wKqG0YMMBvEMOIq+0II=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=s5ymNN9Uj0lgU5X9AsS1sn4JGQ644kvGl7KYf3KQgN3ADxvaVj42r3GwPXmIH+QVfPObDAe2cRPviOqq5q85ruXiu09ZmKxJ7gDOImFU/vXYOr1eXSQ3EnYbyTC1jYsQEMDzMa5/3sh9Rtj1cxPNd2c4btpbT1R1yuCDO6T8P28=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=oYU8Zvda; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=M/v3KzlzWpzc+0rVbqdkthI/wwUljAyXLO9ixYYVrak=; b=oYU8Zvda0McizEYpiaxqU4xdv3
-	ZRqaF5nPbAicumLmGdXyvcR80aFPmYZ1wp62kUuM4KZaWiDe+/ZL6fROUPWWZou0syiJcDfIyhqYt
-	nRYl0MpxX0/61spnDfw+3YzrGJObcs8M3E0ay9cKrcZgvjmr8seznX/iK7OIObc8hcVxhf+KHC/eB
-	JL1yGKTAydgH3F7GMmqyvLKuTAIPGHMD4u7+0z0sAgPtMl8i1gAVUWDg3KWxyEfa1opUkr0slmCXH
-	mrLaIsi2Hn+A8q/x9DdKfLk8ZhmBUHzLVYQC/3z8HFA0wO/cz+gNf2+cd8eurX0kAjVo6YVZSA1jA
-	UAuOTCVA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wDeNz-00000003fBo-0aLx;
-	Fri, 17 Apr 2026 08:17:11 +0000
-Date: Fri, 17 Apr 2026 01:17:11 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Cc: Joanne Koong <joannelkoong@gmail.com>, Dan Williams <djbw@kernel.org>,
-	Gregory Price <gourry@gourry.net>, John Groves <John@groves.net>,
-	Miklos Szeredi <miklos@szeredi.hu>,
-	Bernd Schubert <bernd@bsbernd.com>,
-	John Groves <john@jagalactic.com>,
-	Dan J Williams <dan.j.williams@intel.com>,
-	Bernd Schubert <bschubert@ddn.com>,
-	Alison Schofield <alison.schofield@intel.com>,
-	John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Vishal Verma <vishal.l.verma@intel.com>,
-	Dave Jiang <dave.jiang@intel.com>,
-	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	David Hildenbrand <david@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Jeff Layton <jlayton@kernel.org>,
-	Amir Goldstein <amir73il@gmail.com>,
-	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-	Stefan Hajnoczi <shajnocz@redhat.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Chen Linxuan <chenlinxuan@uniontech.com>,
-	James Morse <james.morse@arm.com>, Fuad Tabba <tabba@google.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Shivank Garg <shivankg@amd.com>,
-	Ackerley Tng <ackerleytng@google.com>,
-	Aravind Ramesh <arramesh@micron.com>,
-	Ajay Joshi <ajayjoshi@micron.com>,
-	"venkataravis@micron.com" <venkataravis@micron.com>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>,
-	"linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>,
-	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
-Subject: Re: [PATCH V10 00/10] famfs: port into fuse
-Message-ID: <aeHsh3swBp2IZ4cX@infradead.org>
-References: <ad4_jFsR951c2Mtn@groves.net>
- <20260414185740.GA604658@frogsfrogsfrogs>
- <CAJnrk1ZgcMuwfMpT1fXvUwBBiq9eWFHWVeOFQFFKiamGGe1RJg@mail.gmail.com>
- <ad7Tps4tkNbndd9Z@groves.net>
- <CAJnrk1ZWVsKW2dhAWdBkCQskoTE+hmOhPFDhyz4EtExn=GdXGA@mail.gmail.com>
- <aeFDCeqZDPI3rm3s@gourry-fedora-PF4VCD3F>
- <43d36427-4629-4712-a262-391e64006eb5@app.fastmail.com>
- <20260416224331.GD114184@frogsfrogsfrogs>
- <CAJnrk1Y78UGLyAGVjiQ10PERTz1d2qcimok6bqCquy7jQYaXag@mail.gmail.com>
- <20260417054031.GA7727@frogsfrogsfrogs>
+	s=arc-20240116; t=1776413869; c=relaxed/simple;
+	bh=qDl6b8j+50GWnqXWqLLHZmRGl2hcm+uogC6+5zx4iYk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=T2OBhd3PAOGc8zHAUWrrUr5T8VQGBe++MmZVh3zZqM3x3G1iOaJa8Vz9LSXlp4ur2dU2F8LipAlT11bumHqgGK72L87R5Mf7sh90T2dABdxDOZ4t4a+tvRZejd5qPl5KC6o4qqu0h2dXibS53gisSjDjFxag+yid3ZCTbQPf0gc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZnST3SMO; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 333C1C19425;
+	Fri, 17 Apr 2026 08:17:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1776413869;
+	bh=qDl6b8j+50GWnqXWqLLHZmRGl2hcm+uogC6+5zx4iYk=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=ZnST3SMO3rvWqLl74IdmK5Xwncjhc47N1QGl4U2/wPYQSd/4SOI/mYXZ+nUQvSjJx
+	 deX1WIW1YqSatUDfE2pSjnkKsfUzfGPo0d9ahB/VmJBe8k7TSOzKVKbg6QsVxlfks2
+	 vUr6eP1M+zjTA8TBUNxe7HDqwlvOlrXuH38LTJR+yegxutdppr65qrCacJhbKop5sY
+	 xkAGMOE+Yi4+vW2ZLXOVKL1ZXxzG4f7WcXv8EEjqoWIrxgq6lPK3aMHKBJF2w6YQAc
+	 K3jdoUS5LpGEsi3ficnl8OIZ47w2L/sIhk5MzI/pErEia6iAqVf58DFiPXyTFhY8P+
+	 ZTZ8cTxRo3bEQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 259D0F8E4B2;
+	Fri, 17 Apr 2026 08:17:49 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH RFC v3 0/9] AD9910 Direct Digital Synthesizer
+Date: Fri, 17 Apr 2026 09:17:29 +0100
+Message-Id: <20260417-ad9910-iio-driver-v3-0-29b93712a228@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260417054031.GA7727@frogsfrogsfrogs>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Spamd-Result: default: False [-2.16 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJns4WkC/23OwQrCMAwG4FcZPVtp0jlXT4LgA3gVD13bzYCu0
+ kpRxt7dUg8i7Pgn/F8ysegCuch21cSCSxTJjznIVcXMVY+D42RzZiiwEQgt11YpEJzIcxsoucB
+ VJy1CbXADPcu9R3A9vYp5ZqfjgV3y8Erx6cO73ElQVl8SxQKZgAsuO2xqretWg9jrUd/8sDb+X
+ riEP0IufpUwE26reiU7Z3qAP2Ke5w99Sqal+wAAAA==
+X-Change-ID: 20260218-ad9910-iio-driver-9b3d214c251f
+To: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-hardening@vger.kernel.org
+Cc: Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1776413867; l=5487;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=qDl6b8j+50GWnqXWqLLHZmRGl2hcm+uogC6+5zx4iYk=;
+ b=Voa/RBJsJokhMpm7/iaji4iGD8KYu19TZHf1Sjq7PqLdGtBRZIcHnP36LHj1mtT03rCvsrYoi
+ SsNKPyLl6c7APqMYWGxXgQzUpTyC4EH58PKQhrR/d1Z6jtOfE4Qy4Sr
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,gourry.net,groves.net,szeredi.hu,bsbernd.com,jagalactic.com,intel.com,ddn.com,micron.com,lwn.net,linuxfoundation.org,infradead.org,suse.cz,zeniv.linux.org.uk,huawei.com,redhat.com,toxicpanda.com,uniontech.com,arm.com,google.com,amd.com,vger.kernel.org,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-83701-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[42];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-83703-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:dkim,infradead.org:mid]
-X-Rspamd-Queue-Id: 8236741895A
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,analog.com:replyto,analog.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 386E641883D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Apr 16, 2026 at 10:40:31PM -0700, Darrick J. Wong wrote:
-> > > ...the memory interleaving is a rather interesting quality of famfs.
-> > > There's no good way to express a formulaic meta-mapping in traditional
-> > > iomap parlance, and famfs needs that to interleave across memory
-> > > controllers/dimm boxen/whatever.  Throwing individual iomaps at the
-> > > kernel is a very inefficient way to do that.  So I don't think there's a
-> > > good reason to get rid of GET_FMAP at this time...
-> > 
-> > So could we make the interleaving part generic then? Striped /
-> > interleaved layouts are used elsewhere (eg RAID-0, md-stripe, etc.) -
-> > could we add a generic interleave descriptor to the uapi and use that
-> > for what famfs needs?
-> 
-> I doubt it.  md-raid presents a unified LBA address space, which means
-> that the filesystem doesn't have to know anything about whatever
-> translations might happen underneath it.
+This patch series adds support for the Analog Devices AD9910 DDS.
+This is a RFC so that we can agree/discuss on the design that follows:
 
-Unless that translation happens in the file system.  It does for btrfs
-right now, and it does for pNFS blocklayout.  The former is using iomap
-for direct I/O (and has old code and vague plans for using it for
-buffered I/O maybe eventually), the latter does not currently but would
-benefit a lot, although wiring it through the NFS code will be painful.
+This is a follow-up of the V2 discussion. For V1, we reached into
+this channel composition agreement where physical channels may have
+sub-channels. That adds the flexibility necessary for this design.
+During V2, some feedback indicated that the ABI is too device-specific,
+so DRG/RAM destination and operating modes are configured through
+alternate paths and profile channels are created.
 
-> Most filesystems that implement striping themselves don't restrict
-> themselves to monotonically increasing LBA ranges rotored across each
-> device like md-raid0 does.
+The AD9910 DDS core can be driven through several independent mechanisms:
+single tone profiles, a digital ramp generator, an internal RAM playback
+engine, a parallel data port, and output shift keying. Each of these
+represents a distinct signal path into the DDS accumulator, so the driver
+models them as separate IIO output channels (all IIO_ALTVOLTAGE type).
+This per-channel separation allows userspace to configure each mode
+independently through its own set of sysfs attributes, and to
+enable/disable modes individually via IIO_CHAN_INFO_ENABLE, relying on
+the hardware's own mode selection architecture.
 
-Mappings can be more flexible, but they usually would not in a single
-iomap iteration.
+The AD9910 register map is not suited for the regmap framework: register
+widths vary across the map (16, 32, and 64 bits). The driver instead
+implements direct SPI access helpers with a software register cache, using
+type-specific read/write/update functions (ad9910_reg{16,32,64}_{read,
+write,update}) that handle endianness conversion and cache coherency.
 
-> But for whatever reason, pmem/dax don't have remapping layers like
-> md/dm so filesystems have to do that on their own if the hardware
-> doesn't do it for them.
+Registers are cached for several reasons. The control/function registers
+(CFR1, CFR2) are frequently queried to determine the current operating
+mode (e.g., checking RAM_ENABLE before every profile register access),
+and caching avoids repeated SPI read transactions for what are
+essentially state checks. The cache also enables efficient
+read-modify-write updates on multi-byte registers: the update functions
+merge new field values with the cached register content without issuing
+a SPI read, and skip the write entirely when the value is unchanged.
+Finally, the profile registers serve dual purposes depending on whether
+RAM mode is active -- they hold single tone parameters (FTW, POW, ASF)
+in normal operation but are repurposed for RAM playback configuration
+(start/end address, step rate, operating mode) when RAM is enabled. A
+shadow register array (reg_profile[]) preserves the inactive mode's
+settings across transitions, so no state is lost when switching between
+single tone and RAM operation.
 
-DM actually supports DAX.  I don't think that's a very good way as it
-adds a lot of overhead for little gain for striping.
+RAM data is loaded through firmware upload infrastructure. Userspace
+writes the waveform data as a raw binary buffer (up to 4096 bytes for
+the full 1024x32-bit RAM), and the driver reverses the byte array and
+transfers it to the device in a single SPI transaction. Per-profile
+start/end addresses and playback parameters (operating mode, step rate,
+no-dwell control) are also configured through firmware update, using
+metadata in the header.
+
+Streaming data to the DDS core through the parallel data port at the
+PD_CLK rate is not covered by this series. That functionality would
+be added in a separate patch series, building on top of the IIO backend
+infrastructure to provide a proper buffered data path.
+
+As I am pushing implementation, as lot has been done already without much
+supervision or agreement, still I would be interested on hearing about
+the design choices discussed above.
+
+Kind regards,
+
+Rodrigo Alencar
+
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v3:
+- RAM custom configs (address range, destination, modes) loaded during firmware write.
+- DRG destination defined when attrs are written.
+- DRG modes broken down into enable attrs for ramp up/down channels.
+- Add separate profile channels, switching done through enable attr
+- Link to v2: https://lore.kernel.org/r/20260318-ad9910-iio-driver-v2-0-e79f93becf11@analog.com
+
+Changes in v2:
+- Device-tree bindings changes.
+- RAM loading to use firmware update interface.
+- Rearrange of channels into a hierarchy.
+- Link to v1: https://lore.kernel.org/r/20260220-ad9910-iio-driver-v1-0-3b264aa48a10@analog.com
+
+---
+Rodrigo Alencar (9):
+      dt-bindings: iio: frequency: add ad9910
+      iio: frequency: ad9910: initial driver implementation
+      iio: frequency: ad9910: add simple parallel port mode support
+      iio: frequency: ad9910: add digital ramp generator support
+      iio: frequency: ad9910: add RAM mode support
+      iio: frequency: ad9910: add output shift keying support
+      iio: frequency: ad9910: add channel labels
+      Documentation: ABI: testing: add docs for ad9910 sysfs entries
+      docs: iio: add documentation for ad9910 driver
+
+ .../ABI/testing/sysfs-bus-iio-frequency-ad9910     |   62 +
+ .../bindings/iio/frequency/adi,ad9910.yaml         |  189 ++
+ Documentation/iio/ad9910.rst                       |  586 ++++++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |   10 +
+ drivers/iio/frequency/Kconfig                      |   20 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/ad9910.c                     | 2118 ++++++++++++++++++++
+ 8 files changed, 2987 insertions(+)
+---
+base-commit: ff0843ceb1fb11a6b73e0e77b932ef7967aecd4b
+change-id: 20260218-ad9910-iio-driver-9b3d214c251f
+
+Best regards,
+-- 
+Rodrigo Alencar <rodrigo.alencar@analog.com>
+
 
 
