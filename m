@@ -1,71 +1,69 @@
-Return-Path: <linux-doc+bounces-83683-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83679-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OAaUBSDP4WnQyQAAu9opvQ
-	(envelope-from <linux-doc+bounces-83683-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:11:44 +0200
+	id wmKIIhnP4WnQyQAAu9opvQ
+	(envelope-from <linux-doc+bounces-83679-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:11:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 984E6417458
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:11:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01F1841742C
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:11:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 74AE23033539
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 06:11:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id ACC043024115
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 06:11:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE792370D70;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D443D36C9CA;
 	Fri, 17 Apr 2026 06:11:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lFHzYIVK"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="J206i24x"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE0573644B3;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADEEF3624A6;
 	Fri, 17 Apr 2026 06:11:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776406287; cv=none; b=ExEXVm8GFOv8bGrV/fZi8Nzp4uZQue2kEE+49MXsfF8hbhSkGCMbiJweyxT09WGThA7F8HadCBvfXGOf4AExULT8ETU1OCiqTLqk3uGQNgMnBL5pgXgMAIir3ytRoYWE+nlW4eTxYlCwADjcuL1sdRTwFf7kx5iieQ+U9FdhehI=
+	t=1776406287; cv=none; b=eYmSfMQ4AKYffGqxl5gwiwRazkyI4ohnx5uk5zx9caWAMgrXCcQ57+fEyOc0zet9eKHs1XKyHwm6mgjAbgSH4zIFDqRbXwY/F63K+LIM/Vu0ZX3NBpuPrHfqfOsFyeK+xJ27htb2DcpZRzXL3FeYKz8udZn6vBz40V9DekYNYBY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1776406287; c=relaxed/simple;
-	bh=cVfA52v+sdW2YwccylzuvwEwBs8Iu8EG8i6EHkWsERE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=fzY36V7Ac4rVQGMMq9TjvPbTYO2UJMXhnBoijsYgiphrnRMx8nQIpppt4rHgHdUfN+drTlV5JfiaGjcGaDL26IFn+CGyOqAhmVDl5gxuVgrw8Cnfqok7RpWswGslCPr+ES64SU8QvlI5l5jwC/tL/Leuf6oFm+W+gYbQ4M5dAJw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lFHzYIVK; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52E30C19425;
+	bh=yhHzbQrXLXYtWB/ywVwFbSxzVS5ND+M7WVXUQWu6cT4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=mC/IMG0G4P5m4IWAjOsN126J10OtzU7YHKuo0nLPBKbsijhjLyu4kVyr/9T7QABD6LC2Hzv5AwRB2PKRCF+bpCu/lsVY2FYx75ob0hr0v2HkAf1bCkTkirmtpjuDiMpzAWNo+iU3tbdwgGOc3Tymu8FpyI7dlOXre8kYnqNUC28=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=J206i24x; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C99CC2BCB6;
 	Fri, 17 Apr 2026 06:11:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1776406287;
-	bh=cVfA52v+sdW2YwccylzuvwEwBs8Iu8EG8i6EHkWsERE=;
-	h=From:To:Cc:Subject:Date:From;
-	b=lFHzYIVK7DLZCoTSf1ZbfAcy4kySM3sX0J/CjA/CReQXJC6ANWjDSieNSZCNyIVy9
-	 aTfHnZRgMwl6zTUm1EkLaLjUfBqNkIN6fU+ZtwHWdAFFE/WI2MNWppRcrnEnEUx2KR
-	 qBN39CMruCXQFBsI18ty/K+gaK068jvwNfh7NQ7tnThJBkTVirYQgvx1QZiRSVitmL
-	 xEsbc5PS6jjkW6OcOM6FU8KGe/7IuyJWe3coBQApreSB3FpTCnx4dpFdA3Db9neW9m
-	 BHAmluml7er0c4YXMTwxLbKU9WeBr9Zr2cTTW1ApKHjpXoKYVb/ECFE+7nniPARwla
-	 VfYIpMpO54Ahg==
+	bh=yhHzbQrXLXYtWB/ywVwFbSxzVS5ND+M7WVXUQWu6cT4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=J206i24xfOGbi5OPh0QNWbDumCcoYIm88LEfHbHGMzeiYsnSH/x9x+0B0Zecgf6dX
+	 tEpzdvlb/wX+59/Z0kmhgBvHfYuvnt3fD6E+/WmZ65C4nYC5mKP3GGdL1GXyOYlRuL
+	 EBRKmlijxxsJe5gmPP3zXI42uNBNl1pA/721Nfma1EvibuGwO93SkYnS1fSwlqhNY5
+	 Fq+lWNHlaSDNCIoYifuPAPzuxx+6Rc7qdAy0uSZU0nsbh4kpY1ZUlbBW5UjRZ37EOO
+	 LHSxmy4v0yo9H/VJ+VRKmKi8JiZbY+e2v1rRHENMQkFtjsCLPLXGgKarLqPII0TDLU
+	 ikowZDSHkoDMA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wDcQH-0000000H8sO-1n6C;
+	id 1wDcQH-0000000H8sR-1uL5;
 	Fri, 17 Apr 2026 08:11:25 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Albert Ou <aou@eecs.berkeley.edu>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Paul Walmsley <pjw@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-riscv@lists.infradead.org,
 	workflows@vger.kernel.org,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Dan Williams <djbw@kernel.org>
-Subject: [PATCH v2 00/11] Auto-generate maintainer profile entries
-Date: Fri, 17 Apr 2026 08:11:10 +0200
-Message-ID: <cover.1776405189.git.mchehab+huawei@kernel.org>
+	Dan Williams <djbw@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH v2 01/11] MAINTAINERS: add an entry for media maintainers profile
+Date: Fri, 17 Apr 2026 08:11:11 +0200
+Message-ID: <361c00348573e45b4e06b674b2b45e47dc65c938.1776405189.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1776405189.git.mchehab+huawei@kernel.org>
+References: <cover.1776405189.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -79,104 +77,57 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83683-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83679-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:email]
-X-Rspamd-Queue-Id: 984E6417458
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linuxtv.org:url]
+X-Rspamd-Queue-Id: 01F1841742C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Jon,
+The media subsystem has a maintainers entry profile, but its entry
+is missing at MAINTAINERS.
 
-This patch series change the way maintainer entry profile links
-are added to the documentation. Instead of having an entry for
-each of them at an ReST file, get them from MAINTAINERS content.
+Add it.
 
-That should likely make easier to maintain, as there will be a single
-point to place all such profiles.
-
-The output is a per-subsystem sorted (*) series of links shown as a
-list like this:
-
-    - Arm And Arm64 Soc Sub-Architectures (Common Parts)
-    - Arm/Samsung S3C, S5P And Exynos Arm Architectures
-    - Arm/Tesla Fsd Soc Support
-    ...
-    - Xfs Filesystem
-
-Please notice that the series is doing one logical change per patch.
-I could have merged some changes altogether, but I opted doing it
-in small steps to help reviews. If you prefer, feel free to merge
-maintainers_include changes on merge.
-
-There is one interesting side effect of this series: there is no
-need to add rst files containing profiles inside a TOC tree: Just
-creating the file anywhere inside Documentation and adding a P entry
-is enough. Adding them to a TOC won't hurt.
-
-Reported-by: Randy Dunlap <rdunlap@infradead.org>
-Suggested-by: Dan Williams <djbw@kernel.org>
-Closes: https://lore.kernel.org/linux-doc/69dd6299440be_147c801005b@djbw-dev.notmuch/
-
-(*) At the end, I opted to use sorted(), just to ensure it, even
-    knowing that MAINTAINER entries are supposed to be sorted, as
-    the cost of sorting ~20 already-sorted entries is negligible.
-
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Message-ID: <5af4aa6a716228eea4d59dc26b97d642e1e7d419.1776176108.git.mchehab+huawei@kernel.org>
 ---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-v2:
-  - I placed the to MAINTAINERS changes at the beginning.
-  - fix a bug when O=DOCS is used;
-  - proper handle glob "P" entries (just in case, no profiles use it ATM);
-  - when SPHINXDIRS=process, instead of producing warnings, point to
-    entries at https://docs.kernel.org;
-  - MAINTAINERS parsing now happens just once;
-  - The output won't be numered for entries inside numered TOC trees;
-  - TOC tree is now hidden;
-  - instead of display a TOC tree, it shows a list of profiles,
-    ordered and named after file system name taken from MAINTAINERS file;
-  - At the output list, both https and file profiles are shown the same
-    way.
-
-Mauro Carvalho Chehab (11):
-  MAINTAINERS: add an entry for media maintainers profile
-  MAINTAINERS: add maintainer-tip.rst to X86
-  docs: maintainers_include: auto-generate maintainer profile TOC
-  docs: auto-generate maintainer entry profile links
-  docs: maintainers_include: use a better title for profiles
-  docs: maintainers_include: add external profile URLs
-  docs: maintainers_include: preserve names for files under process/
-  docs: maintainers_include: Only show main entry for profiles
-  docs: maintainers_include: improve its output
-  docs: maintainers_include: fix support for O=dir
-  docs: maintainers_include: parse MAINTAINERS just once
-
- .../maintainer/maintainer-entry-profile.rst   |  24 +--
- .../process/maintainer-handbooks.rst          |  17 +-
- Documentation/sphinx/maintainers_include.py   | 161 +++++++++++++++---
- MAINTAINERS                                   |   2 +
- 4 files changed, 150 insertions(+), 54 deletions(-)
-
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f0b106a4dd96..620219e48f98 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -16115,6 +16115,7 @@ S:	Maintained
+ W:	https://linuxtv.org
+ Q:	http://patchwork.kernel.org/project/linux-media/list/
+ T:	git git://linuxtv.org/media.git
++P:	Documentation/driver-api/media/maintainer-entry-profile.rst
+ F:	Documentation/admin-guide/media/
+ F:	Documentation/devicetree/bindings/media/
+ F:	Documentation/driver-api/media/
 -- 
 2.53.0
 
