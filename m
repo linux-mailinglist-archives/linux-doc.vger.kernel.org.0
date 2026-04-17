@@ -1,304 +1,183 @@
-Return-Path: <linux-doc+bounces-83678-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83683-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uCvsOdvH4WllyAAAu9opvQ
-	(envelope-from <linux-doc+bounces-83678-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 07:40:43 +0200
+	id OAaUBSDP4WnQyQAAu9opvQ
+	(envelope-from <linux-doc+bounces-83683-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:11:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FA54417266
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 07:40:39 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 984E6417458
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 08:11:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 38F983093D80
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 05:40:34 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 74AE23033539
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2026 06:11:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 498F5363C46;
-	Fri, 17 Apr 2026 05:40:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE792370D70;
+	Fri, 17 Apr 2026 06:11:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F26gAPcz"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lFHzYIVK"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C96B286D73;
-	Fri, 17 Apr 2026 05:40:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE0573644B3;
+	Fri, 17 Apr 2026 06:11:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776404433; cv=none; b=Yb1Bw6VU+2UIGHgGLwLDxTdQkjGuVVit9DowcJR8+x/trwvEBPeCE2maV2HSqzZ7PseczJME5PNpR12uFsy/gx4U9WgxmyrnGSIzeomKEMjOBHryLWsm9EI4nD/BAD5wqItoTZdx2OZq713MOvDJPQp7j0BO2H5rNobYOA78hXI=
+	t=1776406287; cv=none; b=ExEXVm8GFOv8bGrV/fZi8Nzp4uZQue2kEE+49MXsfF8hbhSkGCMbiJweyxT09WGThA7F8HadCBvfXGOf4AExULT8ETU1OCiqTLqk3uGQNgMnBL5pgXgMAIir3ytRoYWE+nlW4eTxYlCwADjcuL1sdRTwFf7kx5iieQ+U9FdhehI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776404433; c=relaxed/simple;
-	bh=WBeGqOv2MsAxuiPSo/t1Xo5oPMExHQYWkQbnnaWeeE4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hvbHJtiL8rm3lMiX4b0gis4Q4lfvu0L2vIaiEzE2SoXs8r5KZb+6Y/lPFLt2aS1444H9rmwVOqS4Uel7mL77cwuH5ig4MG1ZbRP/1YFm/nol60a7oPJlZkn+8cF13N4nbkKy7TN/4OKEM9D9zAe9QS/DkYFljQqe2M8eLH5ipmY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F26gAPcz; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9092BC19425;
-	Fri, 17 Apr 2026 05:40:32 +0000 (UTC)
+	s=arc-20240116; t=1776406287; c=relaxed/simple;
+	bh=cVfA52v+sdW2YwccylzuvwEwBs8Iu8EG8i6EHkWsERE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=fzY36V7Ac4rVQGMMq9TjvPbTYO2UJMXhnBoijsYgiphrnRMx8nQIpppt4rHgHdUfN+drTlV5JfiaGjcGaDL26IFn+CGyOqAhmVDl5gxuVgrw8Cnfqok7RpWswGslCPr+ES64SU8QvlI5l5jwC/tL/Leuf6oFm+W+gYbQ4M5dAJw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lFHzYIVK; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52E30C19425;
+	Fri, 17 Apr 2026 06:11:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776404432;
-	bh=WBeGqOv2MsAxuiPSo/t1Xo5oPMExHQYWkQbnnaWeeE4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=F26gAPczEYjmAjmeCbBGVtLvpWTgU28Pp/KBAzVNV6it77V4SEGvCLs4G8UxlUsIl
-	 QVkSkU/ooENlJ72ER1iVm+7DzZ5lifYyS5uD/ax4RsmsnYiaCGJgGR0LBLJkPtNpg+
-	 sMAoB1oxThVFf2TTl2Bz8Q/6KoiuXY3K27TR9HnLl7PymuFZGI8kTI+ao41CgUhNmq
-	 6LXgIVAxzm1KNRlonJsztVSiWxim6To1ypdgDnvaJyg+tP69TYsXWmijM8fk5smZiR
-	 IIQJIbiEBv/j01fQXHHZAgNHh5RoXn8oT8xvKH8S/R/1ZSvAZ7+a6yoQnFnv7hDU9X
-	 BV5HsNlzvBTEA==
-Date: Thu, 16 Apr 2026 22:40:31 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Joanne Koong <joannelkoong@gmail.com>
-Cc: Dan Williams <djbw@kernel.org>, Gregory Price <gourry@gourry.net>,
-	John Groves <John@groves.net>, Miklos Szeredi <miklos@szeredi.hu>,
-	Bernd Schubert <bernd@bsbernd.com>,
-	John Groves <john@jagalactic.com>,
-	Dan J Williams <dan.j.williams@intel.com>,
-	Bernd Schubert <bschubert@ddn.com>,
-	Alison Schofield <alison.schofield@intel.com>,
-	John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>,
+	s=k20201202; t=1776406287;
+	bh=cVfA52v+sdW2YwccylzuvwEwBs8Iu8EG8i6EHkWsERE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=lFHzYIVK7DLZCoTSf1ZbfAcy4kySM3sX0J/CjA/CReQXJC6ANWjDSieNSZCNyIVy9
+	 aTfHnZRgMwl6zTUm1EkLaLjUfBqNkIN6fU+ZtwHWdAFFE/WI2MNWppRcrnEnEUx2KR
+	 qBN39CMruCXQFBsI18ty/K+gaK068jvwNfh7NQ7tnThJBkTVirYQgvx1QZiRSVitmL
+	 xEsbc5PS6jjkW6OcOM6FU8KGe/7IuyJWe3coBQApreSB3FpTCnx4dpFdA3Db9neW9m
+	 BHAmluml7er0c4YXMTwxLbKU9WeBr9Zr2cTTW1ApKHjpXoKYVb/ECFE+7nniPARwla
+	 VfYIpMpO54Ahg==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1wDcQH-0000000H8sO-1n6C;
+	Fri, 17 Apr 2026 08:11:25 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Albert Ou <aou@eecs.berkeley.edu>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Paul Walmsley <pjw@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	workflows@vger.kernel.org,
+	Alexandre Ghiti <alex@ghiti.fr>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Vishal Verma <vishal.l.verma@intel.com>,
-	Dave Jiang <dave.jiang@intel.com>,
-	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	David Hildenbrand <david@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
-	Jeff Layton <jlayton@kernel.org>,
-	Amir Goldstein <amir73il@gmail.com>,
-	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-	Stefan Hajnoczi <shajnocz@redhat.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Chen Linxuan <chenlinxuan@uniontech.com>,
-	James Morse <james.morse@arm.com>, Fuad Tabba <tabba@google.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Shivank Garg <shivankg@amd.com>,
-	Ackerley Tng <ackerleytng@google.com>,
-	Aravind Ramesh <arramesh@micron.com>,
-	Ajay Joshi <ajayjoshi@micron.com>,
-	"venkataravis@micron.com" <venkataravis@micron.com>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>,
-	"linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>,
-	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
-Subject: Re: [PATCH V10 00/10] famfs: port into fuse
-Message-ID: <20260417054031.GA7727@frogsfrogsfrogs>
-References: <CAJfpegvVTcV89=q3L326aGQjhduBcv7PVg5QKftGLjNZmCLmaw@mail.gmail.com>
- <ad4_jFsR951c2Mtn@groves.net>
- <20260414185740.GA604658@frogsfrogsfrogs>
- <CAJnrk1ZgcMuwfMpT1fXvUwBBiq9eWFHWVeOFQFFKiamGGe1RJg@mail.gmail.com>
- <ad7Tps4tkNbndd9Z@groves.net>
- <CAJnrk1ZWVsKW2dhAWdBkCQskoTE+hmOhPFDhyz4EtExn=GdXGA@mail.gmail.com>
- <aeFDCeqZDPI3rm3s@gourry-fedora-PF4VCD3F>
- <43d36427-4629-4712-a262-391e64006eb5@app.fastmail.com>
- <20260416224331.GD114184@frogsfrogsfrogs>
- <CAJnrk1Y78UGLyAGVjiQ10PERTz1d2qcimok6bqCquy7jQYaXag@mail.gmail.com>
+	Dan Williams <djbw@kernel.org>
+Subject: [PATCH v2 00/11] Auto-generate maintainer profile entries
+Date: Fri, 17 Apr 2026 08:11:10 +0200
+Message-ID: <cover.1776405189.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAJnrk1Y78UGLyAGVjiQ10PERTz1d2qcimok6bqCquy7jQYaXag@mail.gmail.com>
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83678-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[41];
-	FREEMAIL_CC(0.00)[kernel.org,gourry.net,groves.net,szeredi.hu,bsbernd.com,jagalactic.com,intel.com,ddn.com,micron.com,lwn.net,linuxfoundation.org,infradead.org,suse.cz,zeniv.linux.org.uk,gmail.com,huawei.com,redhat.com,toxicpanda.com,uniontech.com,arm.com,google.com,amd.com,vger.kernel.org,lists.linux.dev];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[djwong@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83683-lists,linux-doc=lfdr.de,huawei];
 	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[groves.net:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 6FA54417266
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:email]
+X-Rspamd-Queue-Id: 984E6417458
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Apr 16, 2026 at 05:44:28PM -0700, Joanne Koong wrote:
-> On Thu, Apr 16, 2026 at 3:43 PM Darrick J. Wong <djwong@kernel.org> wrote:
-> >
-> > On Thu, Apr 16, 2026 at 01:53:27PM -0700, Dan Williams wrote:
-> > >
-> > >
-> > > On Thu, Apr 16, 2026, at 1:14 PM, Gregory Price wrote:
-> > > > On Thu, Apr 16, 2026 at 08:56:46AM -0700, Joanne Koong wrote:
-> > > >> On Tue, Apr 14, 2026 at 5:10 PM John Groves <John@groves.net> wrote:
-> > > >> >
-> > > >> > There is a FUSE_DAX_FMAP capability that the kernel may advertise or not
-> > > >> > at init time; this capability "is" the famfs GET_FMAP AND GET_DAXDEV
-> > > >> > commands. In the future, if we find a way to use BPF (or some other
-> > > >> > mechanism) to avoid needing those fuse messages, the kernel could be updated
-> > > >> > to NEVER advertise the FUSE_DAX_FMAP capability. All of the famfs-specific
-> > > >> > code could be taken out of kernels that never advertise that capability.
-> > > >>
-> > > >> I’m not sure the capability bit can be used like that (though I am
-> > > >> hoping it can!). As I understand it, once the kernel advertises a
-> > > >> capability, it must continue supporting it in future kernels else
-> > > >> userspace programs that rely on it will break.
-> >
-> > So don't break fuse servers.  If you wanted to (say) get rid of
-> > GET_FMAP in favor of IOMAP_BEGIN, you could alter libfuse to translate a
-> > fuse server's ->get_fmap implementation into the equivalent
-> > ->iomap_begin, and eventually the kernel can stop making GET_FMAP calls
-> > to userspace.
-> 
-> I don't think it's this simple. We can't assume libfuse is the only
-> way servers talk to the kernel. Some servers use the /dev/fuse
-> interface directly. And, as I understand it, this would still break
-> users who are on older versions of libfuse if they upgrade to a newer
-> kernel.
-> 
-> My reason for pushing back isn't because I don't want this to work; I
-> just want to make sure that if we're going to rely on this as a safety
-> hatch, then we can actually do it.
-> 
-> Going back to what Dan said about using the capability bits for
-> deprecation, "In some future kernel the famfs native option disappears
-> after a deprecation period" - what does the deprecation period/process
-> look like? Do you have to wait a certain amount of time before it can
-> be fully removed or is it pretty immediate?
+Hi Jon,
 
-That depends on how much gluecode you can stand up to redirect older
-programs.
+This patch series change the way maintainer entry profile links
+are added to the documentation. Instead of having an entry for
+each of them at an ReST file, get them from MAINTAINERS content.
 
-> > The trouble here is that I've also seen half a dozen projects vendoring
-> > libfuse so that's a nightmare that will have to be dealt with.  But
-> > maybe that doesn't even matter, because...
-> >
-> > > > FUSE_DAX_FMAP is already conditional on CONFIG_FUSE_DAX, the kernel is
-> > > > not required to continue advertising FUSE_DAX_FMAP in perpetuity.
-> > > >
-> > > > Setting CONFIG_FUSE_DAX=n does not mean userland "is broken", this would
-> > > > only be the case if FUSE_DAX_FMAP was advertised but not actually
-> > > > supported.
-> >
-> > ...the memory interleaving is a rather interesting quality of famfs.
-> > There's no good way to express a formulaic meta-mapping in traditional
-> > iomap parlance, and famfs needs that to interleave across memory
-> > controllers/dimm boxen/whatever.  Throwing individual iomaps at the
-> > kernel is a very inefficient way to do that.  So I don't think there's a
-> > good reason to get rid of GET_FMAP at this time...
-> 
-> So could we make the interleaving part generic then? Striped /
-> interleaved layouts are used elsewhere (eg RAID-0, md-stripe, etc.) -
-> could we add a generic interleave descriptor to the uapi and use that
-> for what famfs needs?
+That should likely make easier to maintain, as there will be a single
+point to place all such profiles.
 
-I doubt it.  md-raid presents a unified LBA address space, which means
-that the filesystem doesn't have to know anything about whatever
-translations might happen underneath it.  Even memory controllers
-quietly take care of striping across DIMMs and whatnot.
+The output is a per-subsystem sorted (*) series of links shown as a
+list like this:
 
-Most filesystems that implement striping themselves don't restrict
-themselves to monotonically increasing LBA ranges rotored across each
-device like md-raid0 does.
+    - Arm And Arm64 Soc Sub-Architectures (Common Parts)
+    - Arm/Samsung S3C, S5P And Exynos Arm Architectures
+    - Arm/Tesla Fsd Soc Support
+    ...
+    - Xfs Filesystem
 
-But for whatever reason, pmem/dax don't have remapping layers like
-md/dm so filesystems have to do that on their own if the hardware
-doesn't do it for them.
+Please notice that the series is doing one logical change per patch.
+I could have merged some changes altogether, but I opted doing it
+in small steps to help reviews. If you prefer, feel free to merge
+maintainers_include changes on merge.
 
-> > > > If DAX were removed from the kernel (unlikely, but stick with me) this
-> > > > would be equivalent to permanently changing CONFIG_FUSE_DAX to always
-> > > > off, and there would be no squabbles over whether that particular
-> > > > change broke userland (there would be much strife over removing dax).
-> >
-> > ...however the strongest case (IMO) would be if (having merged famfs) we
-> > then merge fuse-iomap after famfs.  Then we extend the existing
-> > fuse-iomap-bpf prototype to allow per-mount and per-inode iomap bpf ops.
-> > That enables us to analyze thoroughly the performance characteristics of:
-> >
-> > a) Using GET_FMAP as-is
-> >
-> > b) Uploading raw iomaps (HA)
-> >
-> > c) Uploading a single bpf program to make iomaps, exchanging fmap-style
-> > mapping data into a bpf map, and having the single bpf program walk
-> > through the map
-> >
-> > d) Uploading a custom bpf program per famfs file to make iomaps.  No
-> > bpfmap required, but the setup and compilation are now much more complex
-> >
-> > Then we'll finally know which approach is the best, having broken the
-> > Gordian Knot of how to merge famfs and fuse-iomap.
-> >
-> > If we decide that (c) or (d) are actually better, then guess what?  To
-> > get any of the iomap functionality, you have to set an inode flag, and
-> > that (FUSE_CAP_FAMFS && FUSE_CAP_IOMAP && FUSE_ATTR_IOMAP) is the signal
-> > for "don't call GET_FMAP".  FUSE_CAP_FAMFS && (!FUSE_CAP_IOMAP ||
-> > !FUSE_ATTR_IOMAP) means "call GET_FMAP".
-> >
-> > Yes, we burn a couple of fuse command values to find out, but that's all.
-> >
-> > (TBH I still dislike GET_DAXDEV, that really should just be another
-> > application of backing files, and the backing file id gets passed to
-> > GET_FMAP.)
-> >
-> > What do you all think of doing that?
-> 
-> To be completely honest, this is orthogonal to what I was hoping we
-> could discuss on this thread. My main concern is the GET_FMAP part.
-> Can we make it more generic to other interleaved/striped layouts?
+There is one interesting side effect of this series: there is no
+need to add rst files containing profiles inside a TOC tree: Just
+creating the file anywhere inside Documentation and adding a P entry
+is enough. Adding them to a TOC won't hurt.
 
-"Generic"... do we even /have/ a second user?  I don't feel like we do.
+Reported-by: Randy Dunlap <rdunlap@infradead.org>
+Suggested-by: Dan Williams <djbw@kernel.org>
+Closes: https://lore.kernel.org/linux-doc/69dd6299440be_147c801005b@djbw-dev.notmuch/
 
---D
+(*) At the end, I opted to use sorted(), just to ensure it, even
+    knowing that MAINTAINER entries are supposed to be sorted, as
+    the cost of sorting ~20 already-sorted entries is negligible.
 
-> Thanks,
-> Joanne
-> 
-> >
-> > > > While not a deprecation method, this is what capability bits are
-> > > > designed for. Same as cpuid capability bits - just because the bit is
-> > > > there doesn't mean a processor is required to support it in perpetuity.
-> > > >
-> > > > They're only required to support it if the bit is turned on.
-> > > >
-> > >
-> > > Right, if the protocol on day one is "user space must ask which method
-> > > is available", then userspace can not be surprised when one option
-> > > disappears. So to give time for the bpf approach to mature the kernel
-> > > can do something like "famfs and bpf  mapping support are available".
-> > > In some future kernel the famfs native option disappears after a
-> > > deprecation period.
-> > >
-> > > When folks ask 10 years from now why this ever supported optionality
-> > > the explanation is "oh because famfs enjoyed first mover advantage to
-> > > prove out fs semantics layered on dax devices", or "turns out there
-> > > are some cases where bpf is not fast enough but it still stops the
-> > > proliferation of more in kernel mapping implementations".
-> >
-> > Yes.  We're not *capable* of determining the best mechanism unless we
-> > can start shipping these things to users to get their feedback.  Only
-> > then can we iterate and make real improvements.
-> >
-> > > Something like FUSE_DAX_FMAP is always available but the backend to
-> > > that is optionally native vs bpf. ...or some other arrangement to make
-> > > it clear that native might be gone someday.
-> >
-> > --D
-> 
+---
+
+v2:
+  - I placed the to MAINTAINERS changes at the beginning.
+  - fix a bug when O=DOCS is used;
+  - proper handle glob "P" entries (just in case, no profiles use it ATM);
+  - when SPHINXDIRS=process, instead of producing warnings, point to
+    entries at https://docs.kernel.org;
+  - MAINTAINERS parsing now happens just once;
+  - The output won't be numered for entries inside numered TOC trees;
+  - TOC tree is now hidden;
+  - instead of display a TOC tree, it shows a list of profiles,
+    ordered and named after file system name taken from MAINTAINERS file;
+  - At the output list, both https and file profiles are shown the same
+    way.
+
+Mauro Carvalho Chehab (11):
+  MAINTAINERS: add an entry for media maintainers profile
+  MAINTAINERS: add maintainer-tip.rst to X86
+  docs: maintainers_include: auto-generate maintainer profile TOC
+  docs: auto-generate maintainer entry profile links
+  docs: maintainers_include: use a better title for profiles
+  docs: maintainers_include: add external profile URLs
+  docs: maintainers_include: preserve names for files under process/
+  docs: maintainers_include: Only show main entry for profiles
+  docs: maintainers_include: improve its output
+  docs: maintainers_include: fix support for O=dir
+  docs: maintainers_include: parse MAINTAINERS just once
+
+ .../maintainer/maintainer-entry-profile.rst   |  24 +--
+ .../process/maintainer-handbooks.rst          |  17 +-
+ Documentation/sphinx/maintainers_include.py   | 161 +++++++++++++++---
+ MAINTAINERS                                   |   2 +
+ 4 files changed, 150 insertions(+), 54 deletions(-)
+
+-- 
+2.53.0
+
 
