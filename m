@@ -1,391 +1,216 @@
-Return-Path: <linux-doc+bounces-83874-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83872-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eBYoDc8r5mkDswEAu9opvQ
-	(envelope-from <linux-doc+bounces-83874-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 15:36:15 +0200
+	id MFmSIHkm5mmgsgEAu9opvQ
+	(envelope-from <linux-doc+bounces-83872-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 15:13:29 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8016A42C0A3
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 15:36:14 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2221042B54A
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 15:13:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A22E0309A6B5
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 13:28:06 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 53B5B300D0ED
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 13:13:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 21C453CB2F5;
-	Mon, 20 Apr 2026 13:17:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF5663A0B2B;
+	Mon, 20 Apr 2026 13:13:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uiqL3gbW"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="f17wxcHN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from DM1PR04CU001.outbound.protection.outlook.com (mail-centralusazon11010003.outbound.protection.outlook.com [52.101.61.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F190F3CB2D9;
-	Mon, 20 Apr 2026 13:17:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776691064; cv=none; b=p4Mm6i4bI8DP26ewDAyWShHAs67yGd/bUBact1ecsnPXNo0Gouvmov11UPKMBUbevcDuky7vlEeaa66wLdYN4txe+ZOz1p/qK+ZelZvVIa3h8psNf28eGarUzFHdbHrceDZJh+P4nupgGPr65V7wRXmvZfFA83BOPdQqPBxSpmg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776691064; c=relaxed/simple;
-	bh=kgfq54QGG2g58urvUeBUMahf9u493TsnAKZki1DT03Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=lj5sfEJ01occkvimGeuaNuMVEjMV1zdzcG3FyTaQY9j+02o4rYsT+SUxY9FX5N89kz7d6pGQR72dO70jfoIwXq+kF92umNa0rWtFtK4P6zyyLdC1e5Pk1FgVxyp3LAQB15fnh6eejTWG6KFmpGG/JVZpRpYxhhR9K7ki2Zj725A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uiqL3gbW; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C336C2BCB4;
-	Mon, 20 Apr 2026 13:17:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776691063;
-	bh=kgfq54QGG2g58urvUeBUMahf9u493TsnAKZki1DT03Q=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uiqL3gbWk+jJbU+nFLsHg44O6xpCrh75V1QgBnS3AGwB/Xf8GL3waJ60JGIPwnI6C
-	 IpL0X/ChLtZCwgQxNnz+K59M/k/MtqljVmHFEl8vFVlfjca7Iclj6zrfvFzjhs8lwh
-	 4bTBoFMEj0GmYj8WTxpVrut/hdK3vsJV+AnwZfaezpdNBPwKd/iCfUGksk3oQWgksg
-	 j+5PmHNuNQxp9SLzUAjOudPtQ25efXleufy+xPUdw2QoxOJQNSDfMApkQtLdA/0zYK
-	 jNREtu2fxD0QkaikZa+ZVkzWp30c9yfPmFaVpjey2y2X+g2shxSaq4YFp+ah1GdIUL
-	 OcUdC0VAqXrIA==
-From: Sasha Levin <sashal@kernel.org>
-To: patches@lists.linux.dev,
-	stable@vger.kernel.org
-Cc: Dawei Liu <dawei.liu.jy@renesas.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Sasha Levin <sashal@kernel.org>,
-	jdelvare@suse.com,
-	corbet@lwn.net,
-	linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH AUTOSEL 7.0-6.18] hwmon: (pmbus/isl68137) Add support for Renesas RAA228942 and RAA228943
-Date: Mon, 20 Apr 2026 09:08:58 -0400
-Message-ID: <20260420131539.986432-72-sashal@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260420131539.986432-1-sashal@kernel.org>
-References: <20260420131539.986432-1-sashal@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7935639A7EC;
+	Mon, 20 Apr 2026 13:13:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.61.3
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776690805; cv=fail; b=gClcPFRojG/S266Blv6Qosp9UubeYQH/sQk2Xa8A/H1bgWHFbohptWfrec00W0fH34tBc6deUmQQ7KOEoZreR2j2sI5GKc+2/DltzdPOMdXY6HwXZnyraft+Tswulgh+SoB7gNqIxEUjmoJiuz1FGLH5vlQzM/Je8lltPHXjcDQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776690805; c=relaxed/simple;
+	bh=UruMHiDpVKWaJgqwmpAAQEc/isjxNugpaqjd58a53sU=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=dwnnJ6eGl5s49sEavYoqin3ajrklowUYozZUbCFkHMQWCGtaW62qAfEuigKYMDYJqUepSOTl1T3KQgdOrnOy39o7U8OIUKpK/6KTkb/1kiMgxFfw93GnvEZ23HBa0lgH7lmUH0x3wXOma0hSF+LercGhDirV6dOoZVokGNMWrAA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=f17wxcHN; arc=fail smtp.client-ip=52.101.61.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DpcdSo1fxshdrhq9kcHy32E+KvkU2toRawTfsoUZ0LcbV0oACC9cnfbaldj7R7SKE6gMyauxqQklChyBKTctbvp86U09Z5MVGmpyqqwuKJzY+3XomUOE4vbUKQsw3W/J1/L8q2+qS6DifGwBxumVEq72VkPapNjHjRnWw2RHjcRwDQpq+efbEumoIF3DWruIEQboXwMNAm+7zj2CLakzLhk/mvgZxaln7eH+bmQn61Nt1Oy922OErRCF0g/vg7szmK7VgLX0J4YXM4qcx6l6vSXFw4rg8vmIpergT24QVvFN4BX1P7yeh0ObfUV+5XUFGkT/Vm9Tp5agAUcR+cc2aw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UruMHiDpVKWaJgqwmpAAQEc/isjxNugpaqjd58a53sU=;
+ b=He53D9JP5IVePnAgfNYw+5zi4BtcQA+hpY3UPerevUWRwsQo68hB0mwjJfrT5GE7x8tXd53DwlESyme7Wc3/6Imt05Z9g/4GQqWSXK/U4ZWO7WA68H3j2mrZT5lnoRDspmwVcSjvocdf70eDLzzfVbcskBPnhVbIj2YNP+EvoPTdt9AzlVZXKLBF29js69oJj7wHrJ4tszWZkZZkUx6wJ5q9lV4bV4I9xhOuc2sHkp9yhvRIg6d2XaYIp+iDvLVQ1G7G2blHjnNV2gcG6ldI23hRVlnWfbymeeSFrkeLcFy0ZK1j6BEbPAiiI7RWqSZ2D7OfSFS6HREacj6IR7ZrCg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UruMHiDpVKWaJgqwmpAAQEc/isjxNugpaqjd58a53sU=;
+ b=f17wxcHNUDEjKpFpMMekioBzhZ92Yn3J0elEymf8uvS+S9qD65zb7J5NxuxAKagZYTxi0WiYSJQwUqITE5lTFgPUwFwf93bZlEbEgkqXqLguK3XJKulmCmsAg+z5EXMCBSnr9o4EjckehYI+JW24v1zkOdz8zHt/QVtRgm8P/Qrjvl7QinaIBJCunPefl7pqiPTd2MoFpthpOwgUUNQwzxIlAbeJ7h5Lo7qmum/v1a6wkJFTkNiG/WXfYiHPEGhjqFTxjS+ba8SInjR764+9LI/AqEGtm1INq6GmQMzs43CbFRlhNQAF9kOpBBIfREU92xsk4I49lN3gjGDayAjXYw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from BN9PR12MB5179.namprd12.prod.outlook.com (2603:10b6:408:11c::18)
+ by BY5PR12MB4082.namprd12.prod.outlook.com (2603:10b6:a03:212::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.15; Mon, 20 Apr
+ 2026 13:13:20 +0000
+Received: from BN9PR12MB5179.namprd12.prod.outlook.com
+ ([fe80::cf08:f59b:d016:c95f]) by BN9PR12MB5179.namprd12.prod.outlook.com
+ ([fe80::cf08:f59b:d016:c95f%4]) with mapi id 15.20.9846.014; Mon, 20 Apr 2026
+ 13:13:20 +0000
+Message-ID: <2b3d59b4-dc9e-4ef5-8cd1-9095cf5aa0a7@nvidia.com>
+Date: Mon, 20 Apr 2026 18:43:08 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cpufreq: CPPC: add autonomous mode boot parameter support
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+ Pierre Gondois <pierre.gondois@arm.com>
+Cc: linux-tegra@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, zhenglifeng1@huawei.com, treding@nvidia.com,
+ jonathanh@nvidia.com, vsethi@nvidia.com, ionela.voinescu@arm.com,
+ ksitaraman@nvidia.com, sanjayc@nvidia.com, zhanjie9@hisilicon.com,
+ corbet@lwn.net, mochs@nvidia.com, skhan@linuxfoundation.org,
+ bbasu@nvidia.com, rdunlap@infradead.org, linux-pm@vger.kernel.org,
+ mario.limonciello@amd.com, rafael@kernel.org, sumitg@nvidia.com
+References: <20260317151053.2361475-1-sumitg@nvidia.com>
+ <4b1f100b-e699-43c1-a06b-5545056d174c@arm.com>
+ <b8debb30-67a5-4d2b-8c08-8fd287f7258e@nvidia.com>
+ <208360b1-36a5-419d-80f4-431914407f61@arm.com>
+ <zfoorh6tza4taswyr5zhxqn4rhcqzq4rtvz46eigoy25muxfls@tlbuypuwocvm>
+Content-Language: en-US
+From: Sumit Gupta <sumitg@nvidia.com>
+In-Reply-To: <zfoorh6tza4taswyr5zhxqn4rhcqzq4rtvz46eigoy25muxfls@tlbuypuwocvm>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA5PR01CA0215.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1f3::19) To BN9PR12MB5179.namprd12.prod.outlook.com
+ (2603:10b6:408:11c::18)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-stable-base: Linux 7.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR12MB5179:EE_|BY5PR12MB4082:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5f8eac9-dd7d-47c9-144c-08de9ede976f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	UXZxEICYNX5Cw24W7Y0pmvfc/okPqcTycj+i3M/tiX9mcISg5Xlqp3GxWaxHIeGOtt6aTzbU4s21uCVR5oXg6OIloS7zWtt5C5ziZD5cydPujsWBtbcPyFKWHxhIaFSFaCbownH7TEHsAw7AWOMviOet1PeL3fZpyT0svId6YwLkuDMLsWlX9TgvrZP/xhjLkcG6+vq1Vpb2a44raGcAqz2FF/eQtu2AaXLJwql/NL0qQw5NpAlFzaPNVzFDqLXPV36g64/23HQixGX0NIYb2DayPuo7SfRAFTD/spzOnpxX/AyDadaj02pXXSNq70VMUF2jn0A+nR5wHqbKTHotqMz0nhoNP54rFAZC9JdGYP5EAQTQ4gwtPJWYU93AryyWVWJlxx7NxobUIDTohQv/os1t6loWXroNNhBlcTKCFHiw7mYHarvUSBNMQ6aPECG592rldxgGDLWyP54LtsBgosGmzxgNj/KcQRqA1nSgcUqvPp3M1Lhu2Ubzfo78mbD3Jipb7TQAjHXIUsAfY3P+5F5A64dyYWDuNg3nTDlj6hzsGeS41PmEGUrLKe4hbj2uEItZ4yyE29hEKo9oXAz1g0iDOt3qse0cnYim5LRfk3AGd+luz+X+fesUl1SzKzj+L3qAQa77eWuh3Vf9REwQzen9KugHHQR1FqXZffUwLIyF7drYnuYVAs09VvVU1xsfDEuiZiEeAAVODVrQ7SLfC6tZ7X9DqzOZnm4V7XQoHxE=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR12MB5179.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?YmRIaDQ2M2I2aVYrY2lxYWpYNDhwTUZFWU1OMTE1VktYNmpRU0kwemErOGhj?=
+ =?utf-8?B?UW5xZWhpUVJBTUhHQ2xzc296cE5hdGRRbllZZWNya0NOalNpMGpLblZ1USsr?=
+ =?utf-8?B?aDFZWHFWcTZLaWpyNTJERmRUOC9BcDd4eWxYck9TYkM0RmFMb0I3ZVdsMkg3?=
+ =?utf-8?B?cHJzWG8yd09CSlc1ZXJpa1BtcnBjN1hZL2NLYVduNXFMKzlvNExqUnhkUnU0?=
+ =?utf-8?B?QktSald4SGE5VDV0SElmQzhjMm4xa05xeHRBR1R6UVdDeCtwLzMyelRvMzZu?=
+ =?utf-8?B?OEpXL05kTEFZdk1Bc0xEb0FpbnlvUnQrNEpmRW1qbDNrL2hkWk9JOGNjMHZP?=
+ =?utf-8?B?RDB2TEpsbXVCR0VMMVE2ckQ3TWFFYlBxYVRBb2d4REJPM2FvSDJaY1JJa0VM?=
+ =?utf-8?B?VGhlVU55RStwMEYxVzBLajE1cElCbXg4T2tFalpndWtnMWw0VUgyZHNGNDEx?=
+ =?utf-8?B?a0dHK1VjU0JEWExhcUlDL2E3eDJxME1PL3hqOWI3RkxrZTkwdVhHdFY0aHBP?=
+ =?utf-8?B?U1R6WmhLcUx6dzZYV09UVlE1eDQwUGhNVDB0d0JUVDBNTmY4MjdwR3RYdlZu?=
+ =?utf-8?B?MmRhRUp6UVR4VW91Nm84TWhCVVF1K3NlZWtyK0pYcUdVTzdvUmExL01ha1I2?=
+ =?utf-8?B?SUgxT0pxbHRiVm9uZzBMYUc4ZURLSjhxRkkwWUQzL2JVTkVtMWcxV0VVbEcy?=
+ =?utf-8?B?VHpFdlNCZCtUVjlDRFZvUVczMCs5MnViQm1OTm9PWm9mUXdvMkw5V0lSdjQr?=
+ =?utf-8?B?Q1BBamdhVzd5SDlDRjlEb05vUi9JanVoS0l1VmlTNmJiZDFGSHRjOW03aGFE?=
+ =?utf-8?B?MnFXYk16eDQwMmtCZTlCUlZsd1AvSjhkaVhxTG5ZeCtHWmNGcG95VVJtUmRS?=
+ =?utf-8?B?NjJYL2VXM2o3SVVvZzJsMmI2Q3M5ODBVK3VnMk0xbWJLempQM21KOFJsRU5m?=
+ =?utf-8?B?d0s4aDY2WW1PU0FRaFN2M1hDUEN4em1uQ2JjbHFadHptb1I3WnFTcFVRMC9p?=
+ =?utf-8?B?clJoaFUwTldlMlpTWWlwbHpOYjVSWGJSa3F5RzBtcGtqUEtCUHBZMkpVV2xj?=
+ =?utf-8?B?VWhUUWo5WXo3WTQxUDJPY25LV1d3NFRTYkExWjMzdkt2N3pxSXYwNFh3azBm?=
+ =?utf-8?B?cHNPNUZ4MmNzcFIvZXovUVBzZG85Q3hrS2h0MGR0bmFKWHJrUFI5cFRGRk9j?=
+ =?utf-8?B?UXZud1JRalN0VU1HbnNQbll5T25GK21XZWIyV1VxcitlTEZhL05WV1BNb3A2?=
+ =?utf-8?B?TjAvQmV2TkxST0JpY0JoV01HbEo0dGtza1FFSXI0OXVFeVdMWFZxMzE0TXEz?=
+ =?utf-8?B?YVYwWGdNYytIdmZhZ2x6U0xwNkJBaDZ3Zk5Rb3JzSEU4bmRpRnpQK0k1bEdV?=
+ =?utf-8?B?SGJ0c1NjYkFRZUhtSWlrd2IvSkxORS82eW9PU2hPaWNCZnVHbk8xQWQrUStl?=
+ =?utf-8?B?S1QvYnZjZTNWa2ZXTkhINWRsTlI0a05BTnc2azFwOUU0S20yRzJwQ0pjL2Nq?=
+ =?utf-8?B?cjkxaTAyVFFLQm5Fd0NNZjV2UUs0a3JNTzR0cHFuUzE1eFk1c2ZZWWxYVlFi?=
+ =?utf-8?B?M25ZSFFHTHRRZ29oeCtUK0w4d09DR3hVZzJOalBpWm55OENaTXZTSk80dm9G?=
+ =?utf-8?B?blNTdDJZNmtVQzVWRmhBcHJGT1JLMHA0UVUrTERFdGRjNzBxbUk0cTczVmVx?=
+ =?utf-8?B?ZjBwRlNhTzYra3ZHWC8rU2xQVEd6RnU4T1VjNEdrbDRmTjhjM0NPZDN5T0VE?=
+ =?utf-8?B?ZXhYQU53dnRwcThaazNrZlF2K1pkeWNwM1lyeGUwMFFWY2JoT1F1dXVycDFX?=
+ =?utf-8?B?SnBZWS9oRk5LRUs2dnVzQUg0UDNuRWUzNjk5SjV1UklxMGo4VTdzUWR2N0Rq?=
+ =?utf-8?B?WEx2MkQrRjdaL0hwSDExWEdjZ0ZjQS9aQlc0blFBWXQzVTI4ODhrUmJKajh3?=
+ =?utf-8?B?djFUZU5ROTZ6MkJEdkN3QWpDNUl0QVVHNmxtaXZOVUNSdFBWU1BEUnp2Nitn?=
+ =?utf-8?B?TUpYQmNoc2t4SXdLaWQrejRUWlZ6ZzFEN3NjdXE0N0ZBVkJ3NWQ2RnloY2FR?=
+ =?utf-8?B?VTRieHBFWll6aEg1YUhHMUoyVjRxeGRmdGQ3MkdoZUY0WTdjajRvOFFEc2FF?=
+ =?utf-8?B?S2VSQ2N1VUxHaG0xY3hrc1ZZVmRDYVVQYzg4bEMyT1VDT3hlYXZpTWw3STlD?=
+ =?utf-8?B?K3BFTkVlK1hUSzF1VmM3NFRnUStaVlh4bXdrSng4bjI3dkdkdkZRRFEwWTJW?=
+ =?utf-8?B?eE5mTVVKOXlpOHhOMjRNNGJUbmJscHEvVjlsTkNkekl3SVdROGpJQ0ZUSmRU?=
+ =?utf-8?Q?tIuvTqw1qFOEpkkTfq?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5f8eac9-dd7d-47c9-144c-08de9ede976f
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR12MB5179.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 13:13:20.0850
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qkBrD0d92bgRcQoB8SsSHjx0YrSWAOvnuIzhQgU/67FPDLRi/ldVLat/0SmdttXmL5yt30TML/NI+yWNeL8cVw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4082
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-83874-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[renesas.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,roeck-us.net:email]
-X-Rspamd-Queue-Id: 8016A42C0A3
+	RCPT_COUNT_TWELVE(0.00)[22];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[bounces-83872-lists,linux-doc=lfdr.de];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sumitg@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+]
+X-Rspamd-Queue-Id: 2221042B54A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Dawei Liu <dawei.liu.jy@renesas.com>
 
-[ Upstream commit 7c760db74c9f30da7281c7f450d0676ec78ec3e6 ]
+On 13/04/26 11:21, Viresh Kumar wrote:
+> External email: Use caution opening links or attachments
+>
+>
+> On 10-04-26, 15:47, Pierre Gondois wrote:
+>> I need to ping Viresh to check if this is still relevant.
+> I think its okay to clear the min/max state in the kernel once and for all if
+> you think it is not done nicely. As discussed earlier, try that in a fresh
+> series which only does that part.
+>
+> --
+> viresh
 
-Add I2C device IDs for Renesas RAA228942 and RAA228943.
+Thanks Pierre and Viresh.
 
-At the Linux PMBus hwmon interface level currently supported by this
-driver, these devices are compatible with the existing 2-rail non-TC
-controllers, so devicetree will use fallback compatibles and no
-dedicated OF match entries are needed.
+In autonomous mode, the min/max_perf HW registers directly control the
+frequency range the hardware operates in, so the values programmed in
+.init() need to survive through the governor.
+I verified this on a platform where lowest_nonlinear_perf != lowest_perf,
+the min_perf register ends up at lowest_perf instead of the intended
+lowest_nonlinear_perf.
+Pierre's QoS seeding patch would fix this.
+Happy to test once it's sent.
 
-Signed-off-by: Dawei Liu <dawei.liu.jy@renesas.com>
-Link: https://lore.kernel.org/r/20260325090208.857-3-dawei.liu.jy@renesas.com
-Signed-off-by: Guenter Roeck <linux@roeck-us.net>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
 
-LLM Generated explanations, may be completely bogus:
+Thank you,
+Sumit Gupta
 
-Now I have all the information needed for a complete analysis. Let me
-compile the findings.
-
----
-
-## PHASE 1: COMMIT MESSAGE FORENSICS
-
-**Step 1.1: Subject Line**
-- Subsystem: `hwmon: (pmbus/isl68137)`
-- Action verb: "Add support"
-- Summary: Add I2C device IDs for two new Renesas voltage regulators
-  (RAA228942 and RAA228943)
-- Record: This is a device ID addition, not a bug fix.
-
-**Step 1.2: Tags**
-- Signed-off-by: Dawei Liu <dawei.liu.jy@renesas.com> (author, Renesas
-  employee)
-- Link: lore.kernel.org mail link
-- Signed-off-by: Guenter Roeck <linux@roeck-us.net> (hwmon subsystem
-  maintainer - accepted the patch)
-- No Fixes: tag (expected for candidates)
-- No Cc: stable (expected for candidates)
-- No Reported-by, Tested-by, or Reviewed-by
-
-**Step 1.3: Commit Body**
-- States that these devices "are compatible with the existing 2-rail
-  non-TC controllers"
-- Explicitly says "devicetree will use fallback compatibles and no
-  dedicated OF match entries are needed"
-- This is a pure hardware enablement addition
-
-**Step 1.4: Hidden Bug Fix?**
-- No. This is not a hidden bug fix. It is straightforward device ID
-  addition.
-
-## PHASE 2: DIFF ANALYSIS
-
-**Step 2.1: Inventory**
-- `Documentation/hwmon/isl68137.rst`: +20 lines (documentation for two
-  new devices)
-- `drivers/hwmon/pmbus/isl68137.c`: +2 lines (two I2C device ID table
-  entries)
-- Total: +22 lines, 0 removed
-- Scope: Trivially small, single-file code change + docs
-
-**Step 2.2: Code Flow**
-- Two entries added to the `raa_dmpvr_id[]` I2C device ID table:
-  - `{"raa228942", raa_dmpvr2_2rail_nontc}`
-  - `{"raa228943", raa_dmpvr2_2rail_nontc}`
-- These use the existing `raa_dmpvr2_2rail_nontc` variant, which was
-  introduced in commit 51fb91ed5a6fa (v5.10 era). The variant disables
-  `TEMP3` and configures 2-page mode.
-- No new code paths, no new functions, no logic changes
-
-**Step 2.3: Bug Mechanism**
-- Category: Hardware device ID addition (exception category h)
-- Without these IDs, the kernel cannot bind the existing ISL68137 PMBus
-  driver to these Renesas parts
-
-**Step 2.4: Fix Quality**
-- Obviously correct: merely adding two string/enum pairs to an existing
-  table
-- Minimal and surgical
-- Zero regression risk: only affects systems with these specific I2C
-  devices
-- No new code paths, APIs, or behavioral changes
-
-## PHASE 3: GIT HISTORY
-
-**Step 3.1: Blame**
-- The `raa_dmpvr_id[]` table has been present since commit f621d61fd59f4
-  (2020). The `raa_dmpvr2_2rail_nontc` variant was added in commit
-  51fb91ed5a6fa (2020, v5.10 era).
-- Both are present in all active stable trees (5.10+, 5.15+, 6.1+, 6.6+)
-
-**Step 3.2: Fixes Tag**
-- No Fixes: tag (not applicable - this is a device ID addition, not a
-  bug fix)
-
-**Step 3.3: File History**
-- Prior identical-pattern commit: 2190ad55a601d added RAA228244 and
-  RAA228246 in the same manner. This was a v6.18/6.19 timeframe commit.
-- The pattern of adding new Renesas device IDs to this driver is well
-  established.
-
-**Step 3.4: Author**
-- Dawei Liu is a Renesas employee (dawei.liu.jy@renesas.com),
-  appropriate for submitting Renesas device support.
-
-**Step 3.5: Dependencies**
-- No dependencies. The `raa_dmpvr2_2rail_nontc` enum value and its case
-  statement already exist in stable trees back to 5.10.
-
-## PHASE 4: MAILING LIST RESEARCH
-
-**Step 4.1-4.5:** Lore is behind bot protection and cannot be fetched.
-However, the Link: tag confirms the patch was submitted via the standard
-process and accepted by hwmon maintainer Guenter Roeck. The `b4 dig` of
-the prior similar commit (2190ad55a601d) confirmed it was part of a
-normal patch series accepted through the standard hwmon tree.
-
-## PHASE 5: CODE SEMANTIC ANALYSIS
-
-**Step 5.1-5.5:**
-- The only code change is adding entries to a static `struct
-  i2c_device_id` table.
-- When the I2C subsystem finds a device matching `"raa228942"` or
-  `"raa228943"`, it will call `isl68137_probe()` with the
-  `raa_dmpvr2_2rail_nontc` variant.
-- The `raa_dmpvr2_2rail_nontc` case (lines 413-416) simply disables
-  TEMP3, falls through to the 2-rail handler. This is well-tested code
-  used by RAA228228, RAA228244, and RAA228246.
-- No new code paths are created.
-
-## PHASE 6: STABLE TREE ANALYSIS
-
-**Step 6.1:** The driver exists in all active stable trees (5.10+). The
-`raa_dmpvr2_2rail_nontc` variant exists since 5.10.
-
-**Step 6.2:** The patch adds 2 lines to the I2C ID table and
-documentation. It will apply cleanly or with trivial context adjustments
-(the table is in alphabetical order).
-
-**Step 6.3:** No related fixes already in stable for these specific
-devices.
-
-## PHASE 7: SUBSYSTEM CONTEXT
-
-**Step 7.1:** `drivers/hwmon/pmbus` - hardware monitoring for PMBus
-voltage regulators. Criticality: PERIPHERAL (specific hardware).
-However, PMBus voltage regulators are used in servers and embedded
-systems where stable kernels are common.
-
-**Step 7.2:** Actively maintained by Guenter Roeck, with regular device
-ID additions.
-
-## PHASE 8: IMPACT AND RISK
-
-**Step 8.1:** Affects users of Renesas RAA228942/RAA228943 hardware
-specifically.
-
-**Step 8.2:** Without these IDs, the driver cannot bind to the hardware
-at all. Users with this hardware have no workaround on stable kernels.
-
-**Step 8.3:** Failure mode without fix: hardware is completely
-inaccessible. Severity: MEDIUM (functional but not crash/corruption).
-
-**Step 8.4:**
-- Benefit: Enables hardware monitoring for users with these specific
-  Renesas voltage regulators on stable kernels.
-- Risk: Essentially zero. Two table entries using an existing, well-
-  tested variant.
-- Ratio: Very favorable benefit/risk.
-
-## PHASE 9: FINAL SYNTHESIS
-
-**Evidence FOR backporting:**
-- Device ID addition to existing driver - explicitly allowed exception
-  category
-- Trivially small (2 lines of code)
-- Uses existing, well-tested variant (`raa_dmpvr2_2rail_nontc`) present
-  since v5.10
-- Zero regression risk
-- Accepted by subsystem maintainer (Guenter Roeck)
-- Author is from the chip vendor (Renesas)
-- Enables real hardware for real users
-
-**Evidence AGAINST backporting:**
-- Not a bug fix - purely hardware enablement
-- Affects only users with these specific Renesas parts (narrow audience)
-
-**Stable Rules Checklist:**
-1. Obviously correct? **YES** - trivial table addition
-2. Fixes a real bug? **No** - but device ID additions are an explicit
-   exception
-3. Important? Moderately - enables hardware for users who have it
-4. Small and contained? **YES** - 2 lines of code + docs
-5. No new features/APIs? **YES** - no new features, just ID binding
-6. Can apply to stable? **YES** - clean apply expected
-
-**Exception Category:** Device ID addition to existing driver - this is
-one of the explicitly listed categories that ARE allowed in stable
-despite being "additions."
-
-## Verification
-
-- [Phase 1] Parsed tags: Signed-off-by from Renesas author + hwmon
-  maintainer Guenter Roeck; Link to lore
-- [Phase 2] Diff analysis: +2 lines in I2C ID table (raa228942/raa228943
-  as raa_dmpvr2_2rail_nontc), +20 lines docs
-- [Phase 3] git blame: ID table present since f621d61fd59f4 (2020);
-  nontc variant since 51fb91ed5a6fa (2020, v5.10 era)
-- [Phase 3] git tag --contains 51fb91ed5a6fa: present in p-5.10, p-5.15,
-  all active stable trees
-- [Phase 3] git log: prior identical-pattern commit 2190ad55a601d
-  (RAA228244/RAA228246) confirmed
-- [Phase 3] git log --author: author is Renesas employee
-- [Phase 4] b4 dig: lore blocked by bot protection; confirmed standard
-  hwmon maintainer acceptance via prior similar commit
-- [Phase 5] Code reading: raa_dmpvr2_2rail_nontc case at line 413
-  disables TEMP3, falls through to 2-rail; well-tested
-- [Phase 6] Verified existing variant in tree at lines 76, 413, 498-500,
-  549-551
-- [Phase 6] No raa228942/raa228943 references found anywhere in current
-  tree (grep confirmed)
-- [Phase 8] Risk: zero regression potential from static table entry
-  addition
-- UNVERIFIED: Could not read lore discussion due to bot protection
-
-This is a textbook device ID addition - the simplest and safest type of
-stable backport. Two lines adding I2C device IDs to an existing driver
-using an existing, well-tested variant. Zero regression risk, enables
-hardware for real users.
-
-**YES**
-
- Documentation/hwmon/isl68137.rst | 20 ++++++++++++++++++++
- drivers/hwmon/pmbus/isl68137.c   |  2 ++
- 2 files changed, 22 insertions(+)
-
-diff --git a/Documentation/hwmon/isl68137.rst b/Documentation/hwmon/isl68137.rst
-index e77f582c28505..0ce20d09164fc 100644
---- a/Documentation/hwmon/isl68137.rst
-+++ b/Documentation/hwmon/isl68137.rst
-@@ -394,6 +394,26 @@ Supported chips:
- 
-       Provided by Renesas upon request and NDA
- 
-+  * Renesas RAA228942
-+
-+    Prefix: 'raa228942'
-+
-+    Addresses scanned: -
-+
-+    Datasheet:
-+
-+      Provided by Renesas upon request and NDA
-+
-+  * Renesas RAA228943
-+
-+    Prefix: 'raa228943'
-+
-+    Addresses scanned: -
-+
-+    Datasheet:
-+
-+      Provided by Renesas upon request and NDA
-+
-   * Renesas RAA229001
- 
-     Prefix: 'raa229001'
-diff --git a/drivers/hwmon/pmbus/isl68137.c b/drivers/hwmon/pmbus/isl68137.c
-index 3e3a887aad050..c8930f2d54237 100644
---- a/drivers/hwmon/pmbus/isl68137.c
-+++ b/drivers/hwmon/pmbus/isl68137.c
-@@ -498,6 +498,8 @@ static const struct i2c_device_id raa_dmpvr_id[] = {
- 	{"raa228228", raa_dmpvr2_2rail_nontc},
- 	{"raa228244", raa_dmpvr2_2rail_nontc},
- 	{"raa228246", raa_dmpvr2_2rail_nontc},
-+	{"raa228942", raa_dmpvr2_2rail_nontc},
-+	{"raa228943", raa_dmpvr2_2rail_nontc},
- 	{"raa229001", raa_dmpvr2_2rail},
- 	{"raa229004", raa_dmpvr2_2rail},
- 	{"raa229141", raa_dmpvr2_2rail_pmbus},
--- 
-2.53.0
 
 
