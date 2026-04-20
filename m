@@ -1,180 +1,426 @@
-Return-Path: <linux-doc+bounces-83873-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83875-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gC4AOKkq5mkDswEAu9opvQ
-	(envelope-from <linux-doc+bounces-83873-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 15:31:21 +0200
+	id yEA+GLQy5mlqtQEAu9opvQ
+	(envelope-from <linux-doc+bounces-83875-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 16:05:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DA3A42BE58
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 15:31:20 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BB4542C9E1
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 16:05:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 3FBD730CD0A1
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 13:19:47 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DD6CD3074CD4
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2026 13:53:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51B1B3ACA6C;
-	Mon, 20 Apr 2026 13:16:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34AD63F7870;
+	Mon, 20 Apr 2026 13:25:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="T2LV6+Is"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A1kNneet"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-176.mta1.migadu.com (out-176.mta1.migadu.com [95.215.58.176])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B82063A875E
-	for <linux-doc@vger.kernel.org>; Mon, 20 Apr 2026 13:16:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EB963F660B;
+	Mon, 20 Apr 2026 13:25:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776690989; cv=none; b=HLasAlg5YPW+NBoML+vW7kOT/1oFBq8SpI/WeBbyilBGJ3DPzB9cRxiB/6sgbR2zU4HbcDpadEemX4+I5Q9sdh9idR4ialrlujj7hDPCRzkW5UHQOjr4w7R23LftmfEeQDlevWmG2a62nhqQL1A9NVhLj9gsMfcbq77W4PIMduA=
+	t=1776691557; cv=none; b=bQoP0gaKEJdgfai+omNB4znuwKvSNly6Y5/ERmTbrjZ5Ee9kAOJ7tU4NVOwWIzrnvKIS+WQc/F7eGZKw3QA3oF3s6dIhZMtUlS318O4V6H2S5uPWYpddP37Dhy6ZxAEmxsYH9iYMIKjrel2hNeMj/5M7RfAzNo2/S5Pva5ROgkc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776690989; c=relaxed/simple;
-	bh=JIo7dZkT6VZYhrI91hnDATjlBULDOeJvY7ZXahco84I=;
+	s=arc-20240116; t=1776691557; c=relaxed/simple;
+	bh=SZI/oSocyDlcozG/n+ticI/QDtm52F+51SbwuEk3IkE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ZJ8IPqp0xo5/qL8DTKyvI/MDIgrfw2KxAWC3iYvtLMZneZB65a3k72UVFeb/DVlXE6oukBdNr9KEyeNeqc2jxe8IgxVrv4xBohw+NyVApcI4y2LLaFg9WuL/BJ2JFhRLZ9fofqw1PgO1U8d7jG7ExSwR++cJ6Z8zbYzMJThpc1Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=T2LV6+Is; arc=none smtp.client-ip=95.215.58.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1776690974;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BsatqlpFXZFNi8Kl9ZLgdLvl4wOAHcOCp2o0dzIKpJY=;
-	b=T2LV6+IsNzeXUOci7LW3i7gkiXJBoEaQxrMm8jqfQoQgsCiebwzcF3GmF6j5s+nonfNmAl
-	ihVck8om9+Gy2IOQu2HefU5g4FAUS4zaBANZdgWWntieO5VCLJfyqhW7Y5foXCOqj5+976
-	y6CLSWU58gqI2rcnbNAfmn6UjTr3xLA=
-From: Usama Arif <usama.arif@linux.dev>
-To: Nico Pache <npache@redhat.com>
-Cc: Usama Arif <usama.arif@linux.dev>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org,
-	akpm@linux-foundation.org,
-	anshuman.khandual@arm.com,
-	apopple@nvidia.com,
-	baohua@kernel.org,
-	baolin.wang@linux.alibaba.com,
-	byungchul@sk.com,
-	catalin.marinas@arm.com,
-	cl@gentwo.org,
+	 MIME-Version:Content-Type; b=swegGAKpXf5Wy6nlYp4JzMp3ni378tX+5hiZhCN7rs44ObMkvxpD3l63Ih/teIk+fHiM2dni0fgdZxaFapSmRuAm1Csjyrw7n7qukjq+GgCLQ/GKjaYUrmXSHavU9u6dmL0dLq1F5P/btH7d21+bPGnC61HiOKXIFaGdzIkK+c0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A1kNneet; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DB78C2BCB9;
+	Mon, 20 Apr 2026 13:25:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1776691556;
+	bh=SZI/oSocyDlcozG/n+ticI/QDtm52F+51SbwuEk3IkE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=A1kNneetsnBEUqiEKjDPiyG6UoYoFhenvwQZvwNxCdZ5kHmCAF2ecaFOz3Qkh9Oce
+	 xiR8IuYoGZHZ3QvWCK8+AgAZlntbQX39tw+kLmsIbFxck0CR3M38tCkOdPPUn7muMp
+	 hqvBwOyZIPOyRy3H7+4mlPeqVqkcO75l+b5IBfSfzorcMiFE1vEnzm5K9mqzaMg1yl
+	 vFnQCiJNEeCBnorvXOtjitrjWbbrMAAjBFqlt5NqCxxXrbZqni7d8gNd3B3DoO2lvd
+	 QsgmrR/x07lXwX21BxV7iREHn7R9zVvD2c3Mr7NKG8Vk0Pyk4LBX7NoC8zY1bwT4tD
+	 Vp6rIWh/8exxA==
+From: Sasha Levin <sashal@kernel.org>
+To: patches@lists.linux.dev,
+	stable@vger.kernel.org
+Cc: "Timothy C. Sweeney-Fanelli" <tim@zerobytellc.com>,
+	Eugene Shalygin <eugene.shalygin@gmail.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Sasha Levin <sashal@kernel.org>,
 	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	david@kernel.org,
-	dev.jain@arm.com,
-	gourry@gourry.net,
-	hannes@cmpxchg.org,
-	hughd@google.com,
-	jack@suse.cz,
-	jackmanb@google.com,
-	jannh@google.com,
-	jglisse@google.com,
-	joshua.hahnjy@gmail.com,
-	kas@kernel.org,
-	lance.yang@linux.dev,
-	Liam.Howlett@oracle.com,
-	ljs@kernel.org,
-	mathieu.desnoyers@efficios.com,
-	matthew.brost@intel.com,
-	mhiramat@kernel.org,
-	mhocko@suse.com,
-	peterx@redhat.com,
-	pfalcato@suse.de,
-	rakie.kim@sk.com,
-	raquini@redhat.com,
-	rdunlap@infradead.org,
-	richard.weiyang@gmail.com,
-	rientjes@google.com,
-	rostedt@goodmis.org,
-	rppt@kernel.org,
-	ryan.roberts@arm.com,
-	shivankg@amd.com,
-	sunnanyong@huawei.com,
-	surenb@google.com,
-	thomas.hellstrom@linux.intel.com,
-	tiwai@suse.de,
-	usamaarif642@gmail.com,
-	vbabka@suse.cz,
-	vishal.moola@gmail.com,
-	wangkefeng.wang@huawei.com,
-	will@kernel.org,
-	willy@infradead.org,
-	yang@os.amperecomputing.com,
-	ying.huang@linux.alibaba.com,
-	ziy@nvidia.com,
-	zokeefe@google.com
-Subject: Re: [PATCH 7.2 v16 03/13] mm/khugepaged: rework max_ptes_* handling with helper functions
-Date: Mon, 20 Apr 2026 06:15:48 -0700
-Message-ID: <20260420131549.3673619-1-usama.arif@linux.dev>
-In-Reply-To: <20260419185750.260784-4-npache@redhat.com>
-References: 
+	linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH AUTOSEL 7.0-6.18] hwmon: (asus-ec-sensors )add ROG CROSSHAIR X670E EXTREME
+Date: Mon, 20 Apr 2026 09:18:12 -0400
+Message-ID: <20260420132314.1023554-98-sashal@kernel.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260420132314.1023554-1-sashal@kernel.org>
+References: <20260420132314.1023554-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-stable-base: Linux 7.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [0.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[linux.dev,vger.kernel.org,kvack.org,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,oracle.com,efficios.com,intel.com,suse.com,redhat.com,suse.de,infradead.org,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[zerobytellc.com,gmail.com,roeck-us.net,kernel.org,lwn.net,vger.kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	TAGGED_FROM(0.00)[bounces-83873-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-83875-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[59];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[usama.arif@linux.dev,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[]
-X-Rspamd-Queue-Id: 9DA3A42BE58
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[zerobytellc.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,roeck-us.net:email]
+X-Rspamd-Queue-Id: 1BB4542C9E1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, 19 Apr 2026 12:57:40 -0600 Nico Pache <npache@redhat.com> wrote:
+From: "Timothy C. Sweeney-Fanelli" <tim@zerobytellc.com>
 
-> The following cleanup reworks all the max_ptes_* handling into helper
-> functions. This increases the code readability and will later be used to
-> implement the mTHP handling of these variables.
-> 
-> With these changes we abstract all the madvise_collapse() special casing
-> (dont respect the sysctls) away from the functions that utilize them. And
-> will later in this series to cleanly restrict mTHP collapses behaviors.
-> 
-> Suggested-by: David Hildenbrand <david@kernel.org>
-> Signed-off-by: Nico Pache <npache@redhat.com>
-> ---
->  mm/khugepaged.c | 114 +++++++++++++++++++++++++++++++++---------------
->  1 file changed, 78 insertions(+), 36 deletions(-)
-> 
+[ Upstream commit ab4b7071ae0a831e4c2fd45c626c3b1d66cc1201 ]
 
-The old code re-read khugepaged_max_ptes_* on every loop iteration; the new
-code snapshots them once per scan call. If userspace writes the sysctl
-mid-scan, old behavior reacted within the scan, new behavior uses the value
-sampled at entry. This is completely ok IMO, but might be good to call out.
+Add support for ROG CROSSHAIR X670E EXTREME
 
-Also might be good to write no functional change intended apart from
-above in the commit message?
+Signed-off-by: Timothy C. Sweeney-Fanelli <tim@zerobytellc.com>
+Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
+Link: https://lore.kernel.org/r/20260215151743.20138-3-eugene.shalygin@gmail.com
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
 
-Acked-by: Usama Arif <usama.arif@linux.dev>
+LLM Generated explanations, may be completely bogus:
+
+Now I have all the information needed for a complete analysis.
+
+---
+
+## PHASE 1: COMMIT MESSAGE FORENSICS
+
+**Step 1.1: Subject Line**
+- Subsystem: `hwmon: (asus-ec-sensors)`
+- Action verb: `add`
+- Summary: Add board support for ROG CROSSHAIR X670E EXTREME motherboard
+
+Record: [hwmon/asus-ec-sensors] [add] [New motherboard board definition
+for ROG CROSSHAIR X670E EXTREME]
+
+**Step 1.2: Tags**
+- `Signed-off-by: Timothy C. Sweeney-Fanelli <tim@zerobytellc.com>` —
+  original contributor/tester of the board info
+- `Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>` — driver
+  maintainer who curates submissions
+- `Link: https://lore.kernel.org/r/20260215151743.20138-3-
+  eugene.shalygin@gmail.com` — patch 3 of a series
+- `Signed-off-by: Guenter Roeck <linux@roeck-us.net>` — hwmon subsystem
+  maintainer who merged it
+
+Record: No Fixes tag (expected for a board addition). No Reported-by,
+Cc: stable, or syzbot. The patch went through the driver author
+(Shalygin) and hwmon maintainer (Roeck). This is patch 3 of a series.
+
+**Step 1.3: Commit Body**
+The body simply says "Add support for ROG CROSSHAIR X670E EXTREME." No
+bug description, stack traces, or failure modes — this is a hardware
+enablement commit.
+
+Record: No bug is described; this is a hardware support addition for a
+specific ASUS motherboard model.
+
+**Step 1.4: Hidden Bug Fix Detection**
+This is not a hidden bug fix. It's a straightforward board ID / sensor
+configuration addition to enable hwmon sensor monitoring on a new
+motherboard.
+
+Record: Not a hidden bug fix. Pure hardware enablement.
+
+## PHASE 2: DIFF ANALYSIS
+
+**Step 2.1: Inventory**
+- `Documentation/hwmon/asus_ec_sensors.rst`: +1 line (adds board name to
+  supported list)
+- `drivers/hwmon/asus-ec-sensors.c`: +11 lines (9-line board_info struct
+  + 2-line DMI table entry)
+- Total: ~12 lines added, 0 removed
+- Functions modified: None. Only static const data structures added.
+
+Record: 2 files, +12 lines, 0 lines removed. Only adds static const data
+(board_info struct and DMI match entry). Scope: single-file surgical
+addition.
+
+**Step 2.2: Code Flow**
+- Hunk 1 (board_info): Adds `board_info_crosshair_x670e_extreme` struct
+  with temperature sensors (CPU, CPU Package, MB, VRM, T_Sensor,
+  Water_In, Water_Out), mutex path
+  `ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0`, and
+  `family_amd_600_series`.
+- Hunk 2 (DMI table): Adds a `DMI_EXACT_MATCH_ASUS_BOARD_NAME` entry
+  linking the board name to the new struct.
+- Before: The board was not recognized; driver wouldn't probe on this
+  motherboard.
+- After: The board is recognized and the defined sensors are exposed via
+  hwmon.
+
+**Step 2.3: Bug Mechanism**
+Category: Hardware workaround / device ID addition. No bug fix. The new
+struct uses existing sensor macros, an existing mutex path (verified at
+7 other locations), and an existing family (`family_amd_600_series`).
+The sensor table `sensors_family_amd_600[]` (line 275) includes all the
+sensors referenced: `ec_sensor_temp_cpu`, `ec_sensor_temp_cpu_package`,
+`ec_sensor_temp_mb`, `ec_sensor_temp_vrm`, `ec_sensor_temp_t_sensor`,
+`ec_sensor_temp_water_in`, `ec_sensor_temp_water_out`.
+
+Record: This is a hardware enablement (new board ID) addition. All
+referenced sensors, mutex path, and family exist in the codebase.
+
+**Step 2.4: Fix Quality**
+- Obviously correct: Yes — follows the exact same pattern as dozens of
+  other board entries
+- Minimal/surgical: Yes — 12 lines of purely static data
+- Regression risk: Essentially zero — the new DMI match only triggers on
+  the exact board name "ROG CROSSHAIR X670E EXTREME". Cannot affect any
+  other board.
+
+## PHASE 3: GIT HISTORY
+
+**Step 3.1: Blame**
+The code this is inserted adjacent to
+(`board_info_crosshair_viii_impact` and
+`board_info_crosshair_x670e_gene`) has been present since 2022-2023. The
+AMD 600 series family support was introduced in commit 790dec13c0128
+(April 2023), and is present in all stable trees since ~v6.5+.
+
+**Step 3.2: Fixes Tag**
+No Fixes: tag present (expected — this is not a bug fix, it's a new
+board addition).
+
+**Step 3.3: File History**
+The file has 65+ commits since the driver was introduced (d0ddfd241e571,
+Jan 2022). The vast majority are board additions just like this one.
+Eugene Shalygin is the driver author/maintainer and has authored nearly
+all of them.
+
+**Step 3.4: Author**
+Eugene Shalygin is the original author and maintainer of the asus-ec-
+sensors driver (copyright 2021, authored 40+ commits). Timothy Sweeney-
+Fanelli is the board owner who contributed the sensor data.
+
+**Step 3.5: Dependencies**
+No dependencies. All referenced constants (`SENSOR_TEMP_CPU`,
+`SENSOR_TEMP_WATER_IN`, `ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0`,
+`family_amd_600_series`) already exist in the 7.0 stable tree. This is a
+standalone addition.
+
+## PHASE 4: MAILING LIST RESEARCH
+
+**Step 4.1-4.5:**
+The Link: tag indicates this is patch 3 of a series
+(20260215151743.20138-3). Lore.kernel.org is behind Anubis protection
+and cannot be fetched. However, b4 dig confirmed similar patches from
+the same author are findable. The patch was accepted by hwmon maintainer
+Guenter Roeck, the standard pathway for all asus-ec-sensors changes.
+
+Record: Could not access lore due to Anubis bot protection. The patch
+followed the standard hwmon submission path (contributor -> driver
+author -> Guenter Roeck).
+
+## PHASE 5: CODE SEMANTIC ANALYSIS
+
+**Step 5.1-5.5:**
+No functions are modified. The change adds only static const data
+structures. The DMI matching framework (`dmi_table[]`) is used during
+module probe. When the DMI system matches the board name, the driver
+reads sensors from EC registers at the offsets defined in
+`sensors_family_amd_600[]`. This is a purely data-driven mechanism — no
+code path changes.
+
+Record: No code flow changes. Only static data additions. The DMI match
+→ board_info → sensor table pipeline is well-established and works
+identically for all 40+ supported boards.
+
+## PHASE 6: STABLE TREE ANALYSIS
+
+**Step 6.1:**
+The driver exists since v5.18 (d0ddfd241e571, Jan 2022). AMD 600 series
+support exists since v6.5 (790dec13c0128, Apr 2023). The
+`ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0` mutex path and all sensor
+macros exist in 7.0.
+
+**Step 6.2:**
+The patch should apply cleanly. It's a pure addition between existing
+entries in two sorted lists (board_info structs and DMI table). No
+conflicts expected.
+
+**Step 6.3:**
+No related fix needed — this board has never been supported before.
+
+## PHASE 7: SUBSYSTEM CONTEXT
+
+**Step 7.1:**
+Subsystem: hwmon (hardware monitoring). Criticality: PERIPHERAL —
+affects only users of this specific ASUS motherboard. However, hwmon
+sensor monitoring is important for users who rely on temperature/fan
+monitoring for system health.
+
+**Step 7.2:**
+The driver is actively maintained with 65+ commits, mostly board
+additions from the original author.
+
+## PHASE 8: IMPACT AND RISK ASSESSMENT
+
+**Step 8.1:** Affected users: only owners of the ROG CROSSHAIR X670E
+EXTREME motherboard.
+
+**Step 8.2:** Trigger: automatic during driver probe if the DMI board
+name matches.
+
+**Step 8.3:** Failure mode without fix: no hwmon sensor data available
+for this board. Users cannot monitor CPU/VRM temperatures, water cooling
+temps, etc. through the standard hwmon interface.
+
+**Step 8.4:**
+- Benefit: LOW-MEDIUM — enables hardware monitoring for a specific
+  popular enthusiast motherboard
+- Risk: VERY LOW — 12 lines of static const data, cannot affect any
+  other board
+- Ratio: Favorable
+
+## PHASE 9: FINAL SYNTHESIS
+
+**Evidence FOR backporting:**
+- Falls squarely into the "new device ID / board addition" exception
+  category
+- Trivially small (12 lines of static const data)
+- Zero regression risk (only triggers on exact DMI board name match)
+- All infrastructure (AMD 600 series sensors, mutex path) already exists
+  in stable
+- Authored by the driver maintainer, accepted by the hwmon subsystem
+  maintainer
+- Follows identical pattern to dozens of prior board additions
+
+**Evidence AGAINST backporting:**
+- This is not a bug fix — it's hardware enablement
+- Affects only one specific motherboard model
+- No Cc: stable tag (but this is expected for board additions needing
+  manual review)
+
+**Stable rules checklist:**
+1. Obviously correct? YES — identical pattern to 40+ other entries
+2. Fixes a real bug? NO — but falls into the device ID exception
+3. Important issue? NO — but enables real hardware for real users
+4. Small and contained? YES — 12 lines, static data only
+5. No new features/APIs? YES — no new interfaces, just enables existing
+   driver on new hardware
+6. Can apply to stable? YES — clean apply expected
+
+**Verification:**
+- [Phase 1] Parsed tags: SOBs from Timothy Sweeney-Fanelli
+  (contributor), Eugene Shalygin (driver author), Guenter Roeck (hwmon
+  maintainer). Link to lore present.
+- [Phase 2] Diff: +12 lines across 2 files. Only static const board_info
+  struct and DMI table entry added. No code logic changes.
+- [Phase 3] git log: Eugene Shalygin authored 40+ commits to this file,
+  is the original driver author (copyright 2021).
+- [Phase 3] git log: AMD 600 series support introduced in 790dec13c0128
+  (April 2023), present in 7.0 tree.
+- [Phase 3] Verified `ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0` used
+  by 7 other boards (lines 567, 673, 687, 694, 702, 710, 777).
+- [Phase 3] Verified all sensor macros used (`SENSOR_TEMP_CPU`,
+  `SENSOR_TEMP_CPU_PACKAGE`, `SENSOR_TEMP_MB`, `SENSOR_TEMP_VRM`,
+  `SENSOR_TEMP_T_SENSOR`, `SENSOR_TEMP_WATER_IN`,
+  `SENSOR_TEMP_WATER_OUT`) exist in `sensors_family_amd_600[]` (lines
+  275-293).
+- [Phase 4] Lore inaccessible due to Anubis protection; b4 dig could not
+  find the commit directly (likely not yet in tree). The submission path
+  (contributor -> driver author -> Guenter Roeck) is standard.
+- [Phase 5] No functions modified. Only static const data. Zero code
+  path impact.
+- [Phase 6] Driver and AMD 600 series support exist in 7.0 tree. Clean
+  apply expected.
+- [Phase 8] Risk: VERY LOW (static data only, DMI-scoped). Benefit:
+  enables hwmon on a specific board.
+
+This is a textbook new board ID addition to an existing driver — one of
+the explicitly allowed exception categories for stable backporting. It's
+trivially small, uses only existing infrastructure, and cannot regress
+any other system.
+
+**YES**
+
+ Documentation/hwmon/asus_ec_sensors.rst |  1 +
+ drivers/hwmon/asus-ec-sensors.c         | 11 +++++++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
+index 58986546c7233..8a080a786abd2 100644
+--- a/Documentation/hwmon/asus_ec_sensors.rst
++++ b/Documentation/hwmon/asus_ec_sensors.rst
+@@ -22,6 +22,7 @@ Supported boards:
+  * ROG CROSSHAIR VIII FORMULA
+  * ROG CROSSHAIR VIII HERO
+  * ROG CROSSHAIR VIII IMPACT
++ * ROG CROSSHAIR X670E EXTREME
+  * ROG CROSSHAIR X670E HERO
+  * ROG CROSSHAIR X670E GENE
+  * ROG MAXIMUS X HERO
+diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
+index adedaf0db10e6..934e37738a516 100644
+--- a/drivers/hwmon/asus-ec-sensors.c
++++ b/drivers/hwmon/asus-ec-sensors.c
+@@ -456,6 +456,15 @@ static const struct ec_board_info board_info_crosshair_viii_impact = {
+ 	.family = family_amd_500_series,
+ };
+ 
++static const struct ec_board_info board_info_crosshair_x670e_extreme = {
++	.sensors = SENSOR_TEMP_CPU | SENSOR_TEMP_CPU_PACKAGE |
++		SENSOR_TEMP_MB | SENSOR_TEMP_VRM |
++		SENSOR_TEMP_T_SENSOR | SENSOR_TEMP_WATER_IN |
++		SENSOR_TEMP_WATER_OUT,
++	.mutex_path = ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0,
++	.family = family_amd_600_series,
++};
++
+ static const struct ec_board_info board_info_crosshair_x670e_gene = {
+ 	.sensors = SENSOR_TEMP_CPU | SENSOR_TEMP_CPU_PACKAGE |
+ 		SENSOR_TEMP_T_SENSOR |
+@@ -825,6 +834,8 @@ static const struct dmi_system_id dmi_table[] = {
+ 					&board_info_crosshair_viii_hero),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG CROSSHAIR VIII IMPACT",
+ 					&board_info_crosshair_viii_impact),
++	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG CROSSHAIR X670E EXTREME",
++					&board_info_crosshair_x670e_extreme),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG CROSSHAIR X670E GENE",
+ 					&board_info_crosshair_x670e_gene),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG CROSSHAIR X670E HERO",
+-- 
+2.53.0
 
 
