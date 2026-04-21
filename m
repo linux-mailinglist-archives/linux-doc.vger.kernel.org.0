@@ -1,117 +1,117 @@
-Return-Path: <linux-doc+bounces-83967-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83969-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OCw0DWw452no5QEAu9opvQ
-	(envelope-from <linux-doc+bounces-83967-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 10:42:20 +0200
+	id iID7Iw0752no5QEAu9opvQ
+	(envelope-from <linux-doc+bounces-83969-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 10:53:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8DCD4384D3
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 10:42:19 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D576E4386BB
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 10:53:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 00F97301FA95
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 08:41:39 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 466173014F5E
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 08:50:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBC6539D6D9;
-	Tue, 21 Apr 2026 08:41:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 85EB039DBDC;
+	Tue, 21 Apr 2026 08:50:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="AbL8eMy+";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="iAIv2fog"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="At66G5yC";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="DLWPZtud"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73DA735837E
-	for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 08:41:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC21B39DBC8
+	for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 08:50:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=170.10.133.124
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776760894; cv=pass; b=n46pIGqrxHq451RI7qdhVKOxK1f69AM1HUofPyaAnhlwf/6XmrqYLCsOReB6bxOd5ulVevRsl7yqM9l5dkx3ggqz0lkxtVlE1L9eudkTyuA8D02HcRuodN+wKli1RRN6xc2JmkexpKT2vJACKKuZO4cYWPihIpkUcjFiPEUFQk4=
+	t=1776761414; cv=pass; b=FF2hoFQtIRZgiKuerUNiT2/AN/u4qpA23DxvxBrTT6IiSVmt9T83Q5HH8f4J1WQmqPGeY/1prSH6cSlNOY+BuTzaUGmlHyyYvsb3saXKKqXAo6Zp0/60GsTNc26swydSm0P8SP+67hrs1tcA61LR0Y857HS2eaMOiLsLL7cGpuk=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776760894; c=relaxed/simple;
-	bh=5gWD0q/49ZLsDRQhbUstsKZVTNK2YxdD0Bag7lPiTKw=;
+	s=arc-20240116; t=1776761414; c=relaxed/simple;
+	bh=xs2N39HHM6PqtgrRMGSJFnO7luxy+UhyOqy82YwC1R8=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=NFnbubM9jf/D3BgHa5kmI9T35qCPu0Aa29M/SnZOxGJVQDWGEMxd26Z8hoV4r5aewF4wpi/JfuiNRupSBKvpM0SxQp4kX8H2/jnl8QIdvpRSrCqIKypVPfFFbH+NykYqInBVMCAce+3vkd5zAPwbnnMaTW1k6uQ+8iUUjlRpJps=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=AbL8eMy+; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=iAIv2fog; arc=pass smtp.client-ip=170.10.133.124
+	 To:Cc:Content-Type; b=tGF6fYklLnrVrju6HarmokssnQzoA8UIhUjXh7R1we6uUFSLi9oEsOuPwSIaSVnmB3d9q+IcGqzr1aPsCjAapCovkT+TSz2MZu9D+xzoyW2BjL7wTx9rKOx/tn+Cfbd39ozCaHFnazW5pXa3WAzAd9jzI9nbt6gdAdPA5yoyqHc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=At66G5yC; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=DLWPZtud; arc=pass smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1776760891;
+	s=mimecast20190719; t=1776761412;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=mC05YTc5SmuhQF/mCBd5RraHNHqhmq97LDEIrPY8QyQ=;
-	b=AbL8eMy+FJQQ8Vx0AitvijyiKUsKAJqy4Yc2G69FD3lAU1f4hmXO2LHkK7uiV1BqzoVn+f
-	sJ2dR9Yix/+oTLi01P3EiSkQVI5bppQIsEbD0X73yfJ2Rk5HcwiU80LUsDdDgBEXCL02NO
-	kFTn1IrXuAdzl5p785kBLOQJmtvTzPA=
-Received: from mail-yw1-f200.google.com (mail-yw1-f200.google.com
- [209.85.128.200]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=ZLkS/Ta9vRJDH5KioddXAEgwRVTq9xjtMihkgqxZ3KQ=;
+	b=At66G5yCGmPZ23cmiY8ijsT5dvLjGBX12ziouQlmOoEQsEk6hib1sznn9+Lf4yBHUfOUei
+	YkCFyeZHetpBTs1hNYS3xnqxaSNHOo2cLPPoXBViaaWWpe+jABZuXvlfQfIYQvOb0oViwL
+	t00gGFK9rrRoXQ6ehsUS4RxRNgiHcSk=
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
+ [209.85.128.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-678-4qW_cGDvOWyYUnjajYVtsw-1; Tue, 21 Apr 2026 04:41:30 -0400
-X-MC-Unique: 4qW_cGDvOWyYUnjajYVtsw-1
-X-Mimecast-MFC-AGG-ID: 4qW_cGDvOWyYUnjajYVtsw_1776760890
-Received: by mail-yw1-f200.google.com with SMTP id 00721157ae682-7a3715e9e69so145849987b3.0
-        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 01:41:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776760890; cv=none;
+ us-mta-42-2J6roEPVOXSBBqr90BZ1zw-1; Tue, 21 Apr 2026 04:50:10 -0400
+X-MC-Unique: 2J6roEPVOXSBBqr90BZ1zw-1
+X-Mimecast-MFC-AGG-ID: 2J6roEPVOXSBBqr90BZ1zw_1776761410
+Received: by mail-yw1-f197.google.com with SMTP id 00721157ae682-799001d77fcso80034527b3.1
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 01:50:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776761410; cv=none;
         d=google.com; s=arc-20240605;
-        b=R1M5R64egazpwiQzJDC9FexfL4OiaUEiF/+vuaWSgXFCb2VZk+OhfpFAo0Iv+osWtP
-         nXwnAHbGta1K8QFau/gVH8lI9Er+3BNGrARJQ+zJexblQ+1lvmBcOZtLS9GM8d5UqMG8
-         t/LYxB086/8ZlnaNJg4pVJyUG+8kCmTSLyheSYCY9EXZrZxyVEJm3YEU6kSc4jHbl+Tu
-         Bhkqv4AOr6Vym70/uqTn+gXiNdBU5Vmp8ctP0zh+H8O+5SUWKQfMv1UCdqCYbGMJsEHX
-         G3sBJh2oJf6hNu/SUota01Qst7DjK/jzXnl3bY44jqWe6MBK6FsFzJg5RBmClyJbLao/
-         U1mg==
+        b=ZCe0iVQQUBmpHkUonT11xx4Yta4pmAibtXwgKMTEOYV8xCgBN3cAjngJX5AtOnw4fi
+         q+bC/v/Hea+/gepY3fXL+F1BWV8y6tm4dhJJahkOSM1wq6yTINCjaXEA5hSH8oe1zysA
+         s8M0imCasJG+cJy1rU6zkrsonZ1M9FRSjcOl7SK/AZWG/czEKjD+tDVKtugyWic6k3/5
+         YGz+6DJmSviYOS6Ri+2bjhJxc6AJbQXn9+329krpO8HpFU/LhPKDwOwIUO3E/YNrzvxE
+         bhhn4CazRFO3G3/dzhlL0BvpWwNVhQgyewC0PgTqQcMhEgtaPG2c9kGdz0zfQwLU9CtY
+         6R6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=mC05YTc5SmuhQF/mCBd5RraHNHqhmq97LDEIrPY8QyQ=;
-        fh=PgmxfnRI330FHWoX7i2VgW9R5Wc1qwo7tPcw8lutuV0=;
-        b=JDkAzxNS+cTOKPDGG99LnI1tCnCcg6yACq1YTLKGqJ9Fv57u1FJvve8VIc8KF/axsK
-         Sg7QQ9lXhntggwQCLvCJeojELPgBGE8bUWcyFHeJ1mzC8fV6QMmynxnIBFtKdgLLciAD
-         cHDODqemoslok9XYUPbaIekCsv/RYRMV6HsF859QXOJd6y2IjJuxglJNAL4RNcE0GDN+
-         NIOjrdyCrnE04GaJwqm3jOXIhAtyhVZHo7cuZDevdNPhFMNufC3GOcCw6McjHWnwbywQ
-         zXB/LdXKvxMA+vb80bextaS1hh1GmrAd0hjxYcVkIzGZ+aknGpdDU7fv4UelMkChqyyV
-         /u9w==;
+        bh=ZLkS/Ta9vRJDH5KioddXAEgwRVTq9xjtMihkgqxZ3KQ=;
+        fh=cGAMnG+GEpiDQkd0X5IXf87MxbBzM/5C77qeIeObk6c=;
+        b=CUmbtJd1If6Qscev2g96KJAL7iJN2flYC1nZ2Ll8E3AVQUsxjgCJf+Q0hYP1AJ4Lrm
+         7BwFtJDNcnsp7wzSH1/xSHkul4mt9LDzOLLMzCWxiJjQBmDniGKvIseMtM4O0nG80mEp
+         BqWw/CrKyGAAX9tvuVzdjhKUIbHdbgoBLkU46Db2V5X851xuoffW14wclI7XBzsTKZH1
+         2Hh4TAEf80RmoXJoaFw1uJV11M4XhH7KcEiQJBiGlJtJrA57VLE9hwra6JCjXXiNOeBr
+         iE//TiiTxDJYKLF0eLmtaW6M+0OJKBIZnqqiJ/UMnCj2vwLEc2fmKXSsnYKhLQy2umEC
+         gaJQ==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1776760890; x=1777365690; darn=vger.kernel.org;
+        d=redhat.com; s=google; t=1776761410; x=1777366210; darn=vger.kernel.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mC05YTc5SmuhQF/mCBd5RraHNHqhmq97LDEIrPY8QyQ=;
-        b=iAIv2fognnDFBz+mNdugdGnUbXefvJBduQfbB/StpfDAFbrJ+4c29TQ3BW/klObKrl
-         rcNZsCtPNxCh70Oo+KR8DqZw+mFIsISGvHGjBwayoB2aVhqUGfXC3MKEoBM/7D/LNCPf
-         xZXK6hxAmRRixV0RnxWnggCrkwF77r10hXYYOy/NPVxTYFLIeXjaJKchF4Wwy3ZfavcH
-         MZWRVgzDWxJjyFXlsh5S7D7HebXhloBHXGhFOFtWzdctc2RRBYJYpjJ8+0YDArqBzTMH
-         bMpgZHxH21MyNRfniphyeV9OfwxNODNPLmv7poigeGb4xGS6uR5j1cplGx8Z54RoofaL
-         tmOw==
+        bh=ZLkS/Ta9vRJDH5KioddXAEgwRVTq9xjtMihkgqxZ3KQ=;
+        b=DLWPZtud7iL2OqOU4xQvCVQetOMkZ8xXfcTv/ioIwv5L0uhrmTBuaba1JNLfc61PTI
+         6MEFRpkla/7ceyeAVIT9Oh5ymrzC/fQUgKdDzaa/7xSQdotalga+rOKUQy40peUmr+/u
+         b6r9853w0/jMZo2bnmFwBSuAIjUIzVVax3O2NCsDZtoquO7Hq2bZnAIqJVrWpv+NFZgu
+         b5Y6HVVXrYoSRmdxlGP5KRwLwIYcjSE8EEmJB10E1EW3DvzFVmepZhRd/DkS6bN+qyY4
+         P+oJ/mBTU7n2UPC6R4+uG3C1NHEHyqgcajCqbd70VrrexRPSgyUozFiH0ZVQ+mF9v/TC
+         HtwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776760890; x=1777365690;
+        d=1e100.net; s=20251104; t=1776761410; x=1777366210;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=mC05YTc5SmuhQF/mCBd5RraHNHqhmq97LDEIrPY8QyQ=;
-        b=rr64iXxpNue8KP9Uba/uPXP8OM3tKSeRuSv2kfJ4W7+zU4BXTSTuOmkYdopqBCLEHB
-         3h1I1p1I59xOHBtrIrkqDTGk9ZOaFASAacxI8czpzwXn9ASzTtl3odRaLi1rr/wSYUzR
-         50T7x6QYryInTXn4J8pQV6/dxEzQYFPgQThoSHEksaff8wXPaS/HwHh1W3g3RQ2bUSfE
-         W+LXIiDIsHi1kImIpXms883EeIVJDpuHZq+Pc5MVhIIwEYX9Z0ZNvZd0Or2ui+s5HShB
-         EQVbN8e+tDVWzSDArHmO/77Coooyns8g9qUYGs1JhYsZvlnK5PLf7n/GUUJJPTqd2a69
-         RPYg==
-X-Forwarded-Encrypted: i=1; AFNElJ+6ZLS1RCeAbyUJMoCLgkdO68tHpEIrIFPI7cau/9BWnMj9RwzKCA2kqqrLkHC730EGe0LMn+iqv8M=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwT+oSQeKDLILcUhP9ljkXY70x3clme10wDJQvW1J8MAQ4QKzok
-	CG7vFiD+20RByChvp69GE5G53sE1M1DQTerj/2FEf1jqLd3TuRGuk2Pon55WMLF65I54z7MDafZ
-	d8snezGjF1A+3muXHHpGl9uZaEQdOviQB4fs1NYyMbx//UTLy13PequaQFAN9sRyet+wU4faDV+
-	D2B6d6Dg/CKsJ93AZlIIF542uSbEwzP8EZCOU4
-X-Gm-Gg: AeBDiesLVkAVNM2Ss1knNCSYfq0yDQHPoVVLKFJAeEU53RRdpN41wlmpY9y6NASceuX
-	GNucoFVv4LKrR4Gf0aZw3ojUhpREzg9P9mTyStf/6NnoS2suJ7cuzgzH+LTVWbsV6x6LWaNNQWV
-	SkisuazP7iMg+918ziNv6uXYbHkGZCH0RAAgBRQ0/+ufz0Lin//328oiQqXP9z3kC4m3SLpIrud
-	mRvcuOZ6hWOX3g7
-X-Received: by 2002:a05:690c:6e85:b0:7ba:f0ed:c5cd with SMTP id 00721157ae682-7baf0edf46bmr49084277b3.33.1776760889729;
-        Tue, 21 Apr 2026 01:41:29 -0700 (PDT)
-X-Received: by 2002:a05:690c:6e85:b0:7ba:f0ed:c5cd with SMTP id
- 00721157ae682-7baf0edf46bmr49084027b3.33.1776760889332; Tue, 21 Apr 2026
- 01:41:29 -0700 (PDT)
+        bh=ZLkS/Ta9vRJDH5KioddXAEgwRVTq9xjtMihkgqxZ3KQ=;
+        b=fDEh0SkHCa/Zbsne55QPFFR64eBgSDINoueoXeP/Ub+vEAOXxA/TVvz9SRctEubtHp
+         y16N4JDB/UFrcoePEiC3rzuIc3bPFWZnitSDHAiIBK0f/TCpCcPN9yAqDLmHQQ78kurw
+         Fr41Cxmo67C7KvV85IPcrKx46QvJAh3cB6WYrfXbTcefhevsEQfwHDCkdIO1GUG4Q3dq
+         9DcVekPLR0QFvA29T86UaNwYgGfWqMVbkdn0SErJzJaTfATSoreM5lbk6cCapg/sBAjM
+         /kHDzpIHDS6HTHlntlXVFLR8XpavxXw407InAU6L3zkMiFnfBJ1CGZa+Adqx2p5QXk+b
+         uhnw==
+X-Forwarded-Encrypted: i=1; AFNElJ9Oi/ymt9zIupZx6aAjTt5vYN5TZnq26vxR7z9+ptiCw8nmOzQBjuPjpAnRBcaC0mJnBwQy66GZK0M=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwBIPz1r9dk8g/wQ7FfmMEgGY8dlpqx2v5zhGgJPeo3k1G4Wa0v
+	w7rnX9ZNEJEiT74J0syiWDNLYg41p8YsPRg75hf+cH0sV5CETomCOrxEgOpej9HVaiwFRSANOlM
+	ixpWAZpkGaI5PQQ4ljZ8fJwXW0p6ydEaTDAcCKhav3XZOG2TThpC8OOJon24AHG95ziKCer2wGF
+	ivBUHsPhudlZdoI6qthKUQvWpmNCW5ru9sd9PJ
+X-Gm-Gg: AeBDieukLx5DGXoX/gGf3sBynKApPnbgIAU42isQOr2vrvnUL4IIQr3wvclG2FCU52N
+	kfvoPwUc2iQoKP4WSVrox/XupEDHYgy+xo65/64s+JmBlADI6gjK/lwR4O8GWfm3wcf6jpBN3jb
+	SlQe0Qix4a/iyInXtPLE8HYldcOnIXW7uwgoIESt3t+zpV5cI1FFl5YRNoFvui/NM4ch8oUK2Ep
+	cecMYWjr9FjSx3t
+X-Received: by 2002:a05:690c:dd5:b0:7b2:9347:7bdf with SMTP id 00721157ae682-7b9ed000a01mr173415547b3.37.1776761410091;
+        Tue, 21 Apr 2026 01:50:10 -0700 (PDT)
+X-Received: by 2002:a05:690c:dd5:b0:7b2:9347:7bdf with SMTP id
+ 00721157ae682-7b9ed000a01mr173415087b3.37.1776761409658; Tue, 21 Apr 2026
+ 01:50:09 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -119,14 +119,14 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <20260420-kunit_add_support-v7-0-e8bc6e0f70de@redhat.com>
- <20260420-kunit_add_support-v7-2-e8bc6e0f70de@redhat.com> <20260420144453.GK3102624@noisy.programming.kicks-ass.net>
-In-Reply-To: <20260420144453.GK3102624@noisy.programming.kicks-ass.net>
+ <20260420-kunit_add_support-v7-4-e8bc6e0f70de@redhat.com> <20260420144702.GM3102624@noisy.programming.kicks-ass.net>
+In-Reply-To: <20260420144702.GM3102624@noisy.programming.kicks-ass.net>
 From: Albert Esteve <aesteve@redhat.com>
-Date: Tue, 21 Apr 2026 10:41:18 +0200
-X-Gm-Features: AQROBzCV0B5mGT_w3fyNoIOcvbOSxwzeCNrVj_GyXS8H3Qz0Owy2xkfDx8OhQQ8
-Message-ID: <CADSE00LrkRcuWw_uhbRbjvDhoHX4Ogouu038-9kQEQ_3BxPG5g@mail.gmail.com>
-Subject: Re: [PATCH v7 2/5] bug/kunit: Reduce runtime impact of warning
- backtrace suppression
+Date: Tue, 21 Apr 2026 10:49:58 +0200
+X-Gm-Features: AQROBzCldOYbfR8ys3ZZ4dkJqQQZYQ8VWy-mBIRFS67smM8o_e_X6azO-SUJq08
+Message-ID: <CADSE00JJq6fsYbkFN5hBD=-ZWsFG9p4_C55fp3MupMJQj0QCUQ@mail.gmail.com>
+Subject: Re: [PATCH v7 4/5] drm: Suppress intentional warning backtraces in
+ scaling unit tests
 To: Peter Zijlstra <peterz@infradead.org>
 Cc: Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>, 
 	David Gow <david@davidgow.net>, Rae Moar <raemoar63@gmail.com>, 
@@ -137,23 +137,25 @@ Cc: Arnd Bergmann <arnd@arndb.de>, Brendan Higgins <brendan.higgins@linux.dev>,
 	linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, 
 	kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, 
 	workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Alessandro Carminati <acarmina@redhat.com>
+	Guenter Roeck <linux@roeck-us.net>, Linux Kernel Functional Testing <lkft@linaro.org>, 
+	Dan Carpenter <dan.carpenter@linaro.org>, =?UTF-8?B?TWHDrXJhIENhbmFs?= <mcanal@igalia.com>, 
+	Alessandro Carminati <acarmina@redhat.com>, Simona Vetter <simona.vetter@ffwll.ch>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
 	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-83967-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[arndb.de,linux.dev,davidgow.net,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net,linuxfoundation.org,linux-foundation.org,vger.kernel.org,googlegroups.com,lists.freedesktop.org,redhat.com];
+	TAGGED_FROM(0.00)[bounces-83969-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[arndb.de,linux.dev,davidgow.net,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net,linuxfoundation.org,linux-foundation.org,vger.kernel.org,googlegroups.com,lists.freedesktop.org,roeck-us.net,linaro.org,igalia.com,redhat.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCPT_COUNT_TWELVE(0.00)[26];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[redhat.com:+];
 	MISSING_XM_UA(0.00)[];
@@ -164,105 +166,83 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,infradead.org:email]
-X-Rspamd-Queue-Id: E8DCD4384D3
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mail.gmail.com:mid,roeck-us.net:email,intel.com:email,ffwll.ch:email,linaro.org:email,igalia.com:email,infradead.org:email]
+X-Rspamd-Queue-Id: D576E4386BB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Mon, Apr 20, 2026 at 4:45=E2=80=AFPM Peter Zijlstra <peterz@infradead.or=
+On Mon, Apr 20, 2026 at 4:47=E2=80=AFPM Peter Zijlstra <peterz@infradead.or=
 g> wrote:
 >
-> On Mon, Apr 20, 2026 at 02:28:04PM +0200, Albert Esteve wrote:
-> > From: Alessandro Carminati <acarmina@redhat.com>
+> On Mon, Apr 20, 2026 at 02:28:06PM +0200, Albert Esteve wrote:
+> > From: Guenter Roeck <linux@roeck-us.net>
 > >
-> > KUnit support is not consistently present across distributions, some
-> > include it in their stock kernels, while others do not.
-> > While both KUNIT and KUNIT_SUPPRESS_BACKTRACE can be considered debug
-> > features, the fact that some distros ship with KUnit enabled means it's
-> > important to minimize the runtime impact of this patch.
+> > The drm_test_rect_calc_hscale and drm_test_rect_calc_vscale unit tests
+> > intentionally trigger warning backtraces by providing bad parameters to
+> > the tested functions. What is tested is the return value, not the exist=
+ence
+> > of a warning backtrace. Suppress the backtraces to avoid clogging the
+> > kernel log and distraction from real problems.
 > >
-> > To that end, this patch adds an atomic counter that tracks the number
-> > of active suppressions. __kunit_is_suppressed_warning() checks this
-> > counter first and returns immediately when no suppressions are active,
-> > avoiding RCU-protected list traversal in the common case.
-> >
+> > Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
+> > Acked-by: Dan Carpenter <dan.carpenter@linaro.org>
+> > Acked-by: Ma=C3=ADra Canal <mcanal@igalia.com>
+> > Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> > Cc: David Airlie <airlied@gmail.com>
+> > Cc: Daniel Vetter <daniel@ffwll.ch>
+> > Signed-off-by: Guenter Roeck <linux@roeck-us.net>
 > > Signed-off-by: Alessandro Carminati <acarmina@redhat.com>
 > > Signed-off-by: Albert Esteve <aesteve@redhat.com>
 > > ---
-> >  lib/kunit/bug.c | 7 +++++++
-> >  1 file changed, 7 insertions(+)
+> >  drivers/gpu/drm/tests/drm_rect_test.c | 14 ++++++++++++++
+> >  1 file changed, 14 insertions(+)
 > >
-> > diff --git a/lib/kunit/bug.c b/lib/kunit/bug.c
-> > index 356c8a5928828..a7a88f0670d44 100644
-> > --- a/lib/kunit/bug.c
-> > +++ b/lib/kunit/bug.c
-> > @@ -8,6 +8,7 @@
+> > diff --git a/drivers/gpu/drm/tests/drm_rect_test.c b/drivers/gpu/drm/te=
+sts/drm_rect_test.c
+> > index 17e1f34b76101..1dd7d819165e7 100644
+> > --- a/drivers/gpu/drm/tests/drm_rect_test.c
+> > +++ b/drivers/gpu/drm/tests/drm_rect_test.c
+> > @@ -409,8 +409,15 @@ static void drm_test_rect_calc_hscale(struct kunit=
+ *test)
+> >       const struct drm_rect_scale_case *params =3D test->param_value;
+> >       int scaling_factor;
 > >
-> >  #include <kunit/bug.h>
-> >  #include <kunit/resource.h>
-> > +#include <linux/atomic.h>
-> >  #include <linux/export.h>
-> >  #include <linux/rculist.h>
-> >  #include <linux/sched.h>
-> > @@ -15,11 +16,13 @@
-> >  #ifdef CONFIG_KUNIT_SUPPRESS_BACKTRACE
-> >
-> >  static LIST_HEAD(suppressed_warnings);
-> > +static atomic_t suppressed_warnings_cnt =3D ATOMIC_INIT(0);
-> >
-> >  static void __kunit_suppress_warning_remove(struct __suppressed_warnin=
-g *warning)
-> >  {
-> >       list_del_rcu(&warning->node);
-> >       synchronize_rcu(); /* Wait for readers to finish */
-> > +     atomic_dec(&suppressed_warnings_cnt);
-> >  }
-> >
-> >  KUNIT_DEFINE_ACTION_WRAPPER(__kunit_suppress_warning_cleanup,
-> > @@ -37,6 +40,7 @@ __kunit_start_suppress_warning(struct kunit *test)
-> >               return NULL;
-> >
-> >       warning->task =3D current;
-> > +     atomic_inc(&suppressed_warnings_cnt);
-> >       list_add_rcu(&warning->node, &suppressed_warnings);
-> >
-> >       ret =3D kunit_add_action_or_reset(test,
-> > @@ -68,6 +72,9 @@ bool __kunit_is_suppressed_warning(void)
-> >  {
-> >       struct __suppressed_warning *warning;
-> >
-> > +     if (!atomic_read(&suppressed_warnings_cnt))
-> > +             return false;
-> > +
-> >       rcu_read_lock();
-> >       list_for_each_entry_rcu(warning, &suppressed_warnings, node) {
-> >               if (warning->task =3D=3D current) {
-> >
+> > +     /*
+> > +      * drm_rect_calc_hscale() generates a warning backtrace whenever =
+bad
+> > +      * parameters are passed to it. This affects all unit tests with =
+an
+> > +      * error code in expected_scaling_factor.
+> > +      */
+> > +     KUNIT_START_SUPPRESSED_WARNING(test);
+> >       scaling_factor =3D drm_rect_calc_hscale(&params->src, &params->ds=
+t,
+> >                                             params->min_range, params->=
+max_range);
+> > +     KUNIT_END_SUPPRESSED_WARNING(test);
 >
-> So the thing you're skipping is:
+> Would not something like:
 >
->   rcu_read_lock();
->   list_for_each_entry_rcu() {
->   }
->   rcu_read_unlock();
+>         scoped_kunit_suppress() {
+>                 scaling_factor =3D drm_rect_calc_hscale(&params->src, &pa=
+rams->dst,
+>                                                       params->min_range, =
+params->max_range);
+>         }
 >
-> Which is really cheap. Did you actually have performance numbers for
-> this?
+> be better?
 
-No, I do not have performance numbers. I kept the counter and the
-separate patch for consistency with the previous version of the
-series. But you have a good point, the skipped part is really cheap.
+Since KUnit already has a few macros in its API it didn't occur to me.
+Good idea, I like it. And I guess the scope approach matches well with
+your __cleanup comment in the first patch. If no one opposes, I will
+work toward that pattern for the next version.
 
 >
-> A possibly better option is to add a static_branch() that could elide
-> any and all memory access.
+> Also, how can you stand all this screaming in the code?
 >
 
-Previous version had static_branch and I removed it because I
-understood from the discussion that the gains would not be significant
-as performance gains are irrelevant in warn slowpath. But I think it
-would make sense for a disabled feature. I will rework this for the
-next version, remove the counter and use static_branch as suggested.
+Again, KUnit already contains many macros, so this use didn't register
+as such. Now I will not be able to unsee it.
 
 
