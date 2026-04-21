@@ -1,225 +1,163 @@
-Return-Path: <linux-doc+bounces-83976-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-83978-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +C7+G4tk52nx7gEAu9opvQ
-	(envelope-from <linux-doc+bounces-83976-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 13:50:35 +0200
+	id 2NECJi5o52ke8AEAu9opvQ
+	(envelope-from <linux-doc+bounces-83978-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 14:06:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEBEB43A40B
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 13:50:34 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6753743A6B6
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 14:06:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6073C301413E
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 11:50:21 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 442803018B69
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 12:06:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 572E019D89E;
-	Tue, 21 Apr 2026 11:50:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="IBbbt8HT"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECB1B342CA2;
+	Tue, 21 Apr 2026 12:06:01 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC98E38838F;
-	Tue, 21 Apr 2026 11:50:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DC1C286415
+	for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 12:06:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776772220; cv=none; b=PeuO0HSSKFoE9VBko75capp2D1aTPVo+UmzwjdOmorQNVby5prZ41zQV0u3PGufPTlPs4oXT+Dyu93jSy6jotP6vw0x4xWTdThNSWuCSbGVyaQJ1f4KIeHjYIF2Yd+otgM6UXa6OUw2zI0AfDXQGdCf21BoqV3JDeYtdLmEWymY=
+	t=1776773161; cv=none; b=BjOz9PXucjZvprSclnL6k5IjRThUhHB8zsQH2ogd3uGtvJ42hcCpi8x5FTpdWCyF30xnbptejf+JOrLp/196aByMNT58HbemiYsxZohdkZz89wm0Kjxg3nD1uNGHE8wgqz92DXva5UFW8ZwN3WDkpZxmoUCJWwswt/x5/jQBGv8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776772220; c=relaxed/simple;
-	bh=7EgXSX2kbNsQTGNgx4ImlKGpezUOlRUpgOi4icXx1j8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=P1jbg7dJIwfJBLVqbQ6ejb9A8JbTrev/O4g78tTX/8JAeUIxrZUZ3XTMd8JiI/pRSXGAdMFNjiWgIoI+FeyoL17Xvnt7jdjJbahu60x5xESLeUHZ6dEj2uKrhqBn/KNBw9RytRgkoOd2RDrmAmZ4/3UVksauPyauPpm9c2FokMg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=IBbbt8HT; arc=none smtp.client-ip=192.198.163.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1776772217; x=1808308217;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version:content-transfer-encoding;
-  bh=7EgXSX2kbNsQTGNgx4ImlKGpezUOlRUpgOi4icXx1j8=;
-  b=IBbbt8HTY2xEZ3fE7cOPNHqSc/SjlQhkIOIX7RkE1ykOfuL/0tctQpCT
-   aa+0YBGW/Zo3/xhtYemHNl6O4ysHoaBzFyGsVw+03qS9uwhQciaArk30j
-   6wsvtzt6qvq+TC70hd0fiovzGcdQ/dUmoFimgp71loM0HIweWd6Xe87zm
-   4KklEABkNzFCuWg0N/mvxZQaotvPb0KkbA5unb7O6x+bCPUgv71BW+mJ2
-   Qsu8a4aOGHUITwUR31yvv0W8YkMEA8akZcHMxqlmSDQ6gf37ANjtF7dD6
-   yN7Po0Q2t6wPZuZzeQ/aN4dWc19+W1fo9LXE1dj9hfdLZ2qUT3OtpkZg2
-   g==;
-X-CSE-ConnectionGUID: hHpzJggGSWej78kzOIV71g==
-X-CSE-MsgGUID: RG6lFl7BSeKD7RlJdxM0fQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11762"; a="77577797"
-X-IronPort-AV: E=Sophos;i="6.23,191,1770624000"; 
-   d="scan'208";a="77577797"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 04:50:16 -0700
-X-CSE-ConnectionGUID: B3auslJVR6GKADUigwj8Wg==
-X-CSE-MsgGUID: yUjIc98WRBiNmeMG9f/VHQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,191,1770624000"; 
-   d="scan'208";a="231891388"
-Received: from vpanait-mobl.ger.corp.intel.com (HELO localhost) ([10.245.245.38])
-  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 04:50:08 -0700
-From: Jani Nikula <jani.nikula@intel.com>
-To: Albert Esteve <aesteve@redhat.com>, Peter Zijlstra <peterz@infradead.org>
-Cc: Arnd Bergmann <arnd@arndb.de>, Brendan Higgins
- <brendan.higgins@linux.dev>, David Gow <david@davidgow.net>, Rae Moar
- <raemoar63@gmail.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, Shuah
- Khan <skhan@linuxfoundation.org>, Andrew Morton
- <akpm@linux-foundation.org>, linux-kernel@vger.kernel.org,
- linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org, Guenter Roeck
- <linux@roeck-us.net>, Linux Kernel Functional Testing <lkft@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, =?utf-8?Q?Ma=C3=ADra?= Canal
- <mcanal@igalia.com>,
- Alessandro Carminati <acarmina@redhat.com>, Simona Vetter
- <simona.vetter@ffwll.ch>
-Subject: Re: [PATCH v7 4/5] drm: Suppress intentional warning backtraces in
- scaling unit tests
-In-Reply-To: <CADSE00JJq6fsYbkFN5hBD=-ZWsFG9p4_C55fp3MupMJQj0QCUQ@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
- 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
-References: <20260420-kunit_add_support-v7-0-e8bc6e0f70de@redhat.com>
- <20260420-kunit_add_support-v7-4-e8bc6e0f70de@redhat.com>
- <20260420144702.GM3102624@noisy.programming.kicks-ass.net>
- <CADSE00JJq6fsYbkFN5hBD=-ZWsFG9p4_C55fp3MupMJQj0QCUQ@mail.gmail.com>
-Date: Tue, 21 Apr 2026 14:50:05 +0300
-Message-ID: <8a9c125c08206296d698c79c3d3dd6aea36a7e3b@intel.com>
+	s=arc-20240116; t=1776773161; c=relaxed/simple;
+	bh=D2pg4QST6SQsj9Y0AlZ3xwmYOqacTuU/qi+aAUKUt00=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=hyKlzsHsIM46nBMACFYxa6vfBpKb+oo6TZwAQ4xGNz8SKvTAUSNsqDqLHdcANNYqgOKdIOw4IhOrBn+H0TJVmlUgzYQ1guGxEJYNObdDlmLo82gbXzvNDSoYtc0QbGfShvFdRVvOEPILSmDbOQFTJXx15H9m+HqAfDWiXRGyJv8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.160.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-42f24cae679so272114fac.3
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 05:06:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776773159; x=1777377959;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+Ji5jUeRQ9s6IdrcvkqpKzzaDEFKSxwSRUCTUPQc2w4=;
+        b=rQKSHnMedByhtEb+5NNHv0rDnWXUqj+0L+F466lgWHaOrVHtGz9/VTBlnDP55t2pSq
+         Q7YF7QZHMyQtLG+wCGyiO38hklrcDoB7JWH6ym2yVZU85GOO//gJGKOQ5brQNjpJrZ93
+         j0GWkEbectQQidrUm3Axl4lmQBFn0LqV0gPkj4d9taIRRQpTrzqNCynQABtbJwZw8PXj
+         VowuhkpuKFStybczvGExwq/grVjHB8WqzIoIkUu2seieipIDWC9piVRh9QIZ52e5RezJ
+         7KdE+OaBGWHs5MTU4EsJ9gfs040//V8xQ23ZdIXlnLASt859WedpAhZgJH95YEhrcjhr
+         Ougg==
+X-Forwarded-Encrypted: i=1; AFNElJ8FcrdGSaQ7f1bUXM517YbKzetlAK0qaFl7c8hWVV2t1xi1TtBMmbrW/HoDI79uvgQ0vFVdOlEchlI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw8ioLhkvIZgErTTczsG2Piw/GeN7Q67m3Al15TXdcyyTEqsl8B
+	tt8h7YI40XDvAMyUOvIJYuPi0u8yfUs7/RFFMwWCvS2imxdZmgfYXcAfZP4twBwwpKA=
+X-Gm-Gg: AeBDievMhHFn1answ+p1/EbDqejoxU8bF2bqLBn+CMwDS40gwj0kSf4AOkhaN01C30P
+	DClzaJ9lLqnmvSexHyrxzJmJy8oiLBGrPpWU3alC98d6JCU0ko9cU8aGqYUu7roVG77f05j2Gl8
+	Cv/vVix+zfFlFnkMafvlQbtbWIGibUwBGpdMXkeNlpW6S/1U3N18o7ETf3C3kJIiUJa7/eynBPR
+	4LfA6j0UbtukeLekXe+6T1v/xsUYeZzuPAG2rs6ohU6x4o77K3DcYV9Z0qfRx5D9sZzEaj6YI8O
+	S0njmnH5gkGSRAs9rxvLYAUPUi7dEgEQyKUvdFg5J+x755ZDPEf5Yg6eYwj5KlkNp2b4xkCBLPM
+	biaqmCgPs0R122lryFMPBRHXVHthvTv/7c+QvSAuls4Q007HiKNYJyxIGatez6mInU9N512w4iq
+	Xn0chaJtQuAOsq5c02CBVR128SeBh8lk2HW9HJ9gU1jkINqovQufeaseKN5573ve3dWxh1pYjmm
+	QxV/dlQnzouHg==
+X-Received: by 2002:a05:6870:be98:b0:3e7:e420:6229 with SMTP id 586e51a60fabf-42abf26a3c8mr11013958fac.6.1776773159462;
+        Tue, 21 Apr 2026 05:05:59 -0700 (PDT)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com. [209.85.167.182])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-42bebc9cb33sm7192039fac.11.2026.04.21.05.05.59
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 21 Apr 2026 05:05:59 -0700 (PDT)
+Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-479ef2b78f3so399742b6e.2
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 05:05:59 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ/ec2b3uWTH3I16PywaWhJYojbZ9qFiWu7ORztiQczY/wao4I2e2ZYRNYJEZvc6/2HRRes8O4QUuQ0=@vger.kernel.org
+X-Received: by 2002:a05:6102:f8b:b0:601:f386:9ed2 with SMTP id
+ ada2fe7eead31-616f4d67f72mr7641295137.7.1776772665998; Tue, 21 Apr 2026
+ 04:57:45 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Result: default: False [-2.16 / 15.00];
+References: <20260421021943.1295109-1-kuba@kernel.org> <c7506c225ce22a71c03abc2673823cf84bbb5b0d.camel@infradead.org>
+ <aedkZ5bizasuBPI8@gondor.apana.org.au>
+In-Reply-To: <aedkZ5bizasuBPI8@gondor.apana.org.au>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Tue, 21 Apr 2026 13:57:34 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdU96F_42faeqNzDwaXks7mFrLrkPSJB_QTwxEn9HmVWpQ@mail.gmail.com>
+X-Gm-Features: AQROBzAVi0Fh-UpifM1LaPGNEDH0ax6I6xOmcEB0yUP_KKo8UOyxGmDNb2nIMYw
+Message-ID: <CAMuHMdU96F_42faeqNzDwaXks7mFrLrkPSJB_QTwxEn9HmVWpQ@mail.gmail.com>
+Subject: Re: [PATCH net-deletions] net: remove unused ATM protocols and legacy
+ ATM device drivers
+To: Herbert Xu <herbert@gondor.apana.org.au>
+Cc: David Woodhouse <dwmw2@infradead.org>, Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net, 
+	netdev@vger.kernel.org, edumazet@google.com, pabeni@redhat.com, 
+	andrew+netdev@lunn.ch, horms@kernel.org, corbet@lwn.net, 
+	skhan@linuxfoundation.org, linux@armlinux.org.uk, tsbogend@alpha.franken.de, 
+	maddy@linux.ibm.com, mpe@ellerman.id.au, npiggin@gmail.com, 
+	chleroy@kernel.org, 3chas3@gmail.com, razor@blackwall.org, idosch@nvidia.com, 
+	jani.nikula@intel.com, mchehab+huawei@kernel.org, tytso@mit.edu, 
+	ebiggers@kernel.org, johannes.berg@intel.com, jonathan.cameron@huawei.com, 
+	kees@kernel.org, kuniyu@google.com, fourier.thomas@gmail.com, 
+	andriy.shevchenko@intel.com, rdunlap@infradead.org, akpm@linux-foundation.org, 
+	linux-doc@vger.kernel.org, linux-mips@vger.kernel.org, 
+	linuxppc-dev@lists.ozlabs.org, bridge@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+X-Spamd-Result: default: False [0.04 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[arndb.de,linux.dev,davidgow.net,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net,linuxfoundation.org,linux-foundation.org,vger.kernel.org,googlegroups.com,lists.freedesktop.org,roeck-us.net,linaro.org,igalia.com,redhat.com];
-	TAGGED_FROM(0.00)[bounces-83976-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	FREEMAIL_CC(0.00)[infradead.org,kernel.org,davemloft.net,vger.kernel.org,google.com,redhat.com,lunn.ch,lwn.net,linuxfoundation.org,armlinux.org.uk,alpha.franken.de,linux.ibm.com,ellerman.id.au,gmail.com,blackwall.org,nvidia.com,intel.com,mit.edu,huawei.com,linux-foundation.org,lists.ozlabs.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-83978-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
+	DMARC_NA(0.00)[linux-m68k.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jani.nikula@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[36];
+	MIME_TRACE(0.00)[0:+];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[geert@linux-m68k.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,linaro.org:email,intel.com:email,intel.com:dkim,intel.com:mid,ffwll.ch:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: CEBEB43A40B
+	TAGGED_RCPT(0.00)[linux-doc,netdev,huawei];
+	R_DKIM_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux-m68k.org:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,mail.gmail.com:mid,apana.org.au:email]
+X-Rspamd-Queue-Id: 6753743A6B6
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, 21 Apr 2026, Albert Esteve <aesteve@redhat.com> wrote:
-> On Mon, Apr 20, 2026 at 4:47=E2=80=AFPM Peter Zijlstra <peterz@infradead.=
-org> wrote:
->>
->> On Mon, Apr 20, 2026 at 02:28:06PM +0200, Albert Esteve wrote:
->> > From: Guenter Roeck <linux@roeck-us.net>
->> >
->> > The drm_test_rect_calc_hscale and drm_test_rect_calc_vscale unit tests
->> > intentionally trigger warning backtraces by providing bad parameters to
->> > the tested functions. What is tested is the return value, not the exis=
-tence
->> > of a warning backtrace. Suppress the backtraces to avoid clogging the
->> > kernel log and distraction from real problems.
->> >
->> > Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
->> > Acked-by: Dan Carpenter <dan.carpenter@linaro.org>
->> > Acked-by: Ma=C3=ADra Canal <mcanal@igalia.com>
->> > Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
->> > Cc: David Airlie <airlied@gmail.com>
->> > Cc: Daniel Vetter <daniel@ffwll.ch>
->> > Signed-off-by: Guenter Roeck <linux@roeck-us.net>
->> > Signed-off-by: Alessandro Carminati <acarmina@redhat.com>
->> > Signed-off-by: Albert Esteve <aesteve@redhat.com>
->> > ---
->> >  drivers/gpu/drm/tests/drm_rect_test.c | 14 ++++++++++++++
->> >  1 file changed, 14 insertions(+)
->> >
->> > diff --git a/drivers/gpu/drm/tests/drm_rect_test.c b/drivers/gpu/drm/t=
-ests/drm_rect_test.c
->> > index 17e1f34b76101..1dd7d819165e7 100644
->> > --- a/drivers/gpu/drm/tests/drm_rect_test.c
->> > +++ b/drivers/gpu/drm/tests/drm_rect_test.c
->> > @@ -409,8 +409,15 @@ static void drm_test_rect_calc_hscale(struct kuni=
-t *test)
->> >       const struct drm_rect_scale_case *params =3D test->param_value;
->> >       int scaling_factor;
->> >
->> > +     /*
->> > +      * drm_rect_calc_hscale() generates a warning backtrace whenever=
- bad
->> > +      * parameters are passed to it. This affects all unit tests with=
- an
->> > +      * error code in expected_scaling_factor.
->> > +      */
->> > +     KUNIT_START_SUPPRESSED_WARNING(test);
->> >       scaling_factor =3D drm_rect_calc_hscale(&params->src, &params->d=
-st,
->> >                                             params->min_range, params-=
->max_range);
->> > +     KUNIT_END_SUPPRESSED_WARNING(test);
->>
->> Would not something like:
->>
->>         scoped_kunit_suppress() {
->>                 scaling_factor =3D drm_rect_calc_hscale(&params->src, &p=
-arams->dst,
->>                                                       params->min_range,=
- params->max_range);
->>         }
->>
->> be better?
+Hi Herbert,
+
+On Tue, 21 Apr 2026 at 13:51, Herbert Xu <herbert@gondor.apana.org.au> wrote:
+> On Tue, Apr 21, 2026 at 10:26:18AM +0100, David Woodhouse wrote:
+> > I suspect they don't have a huge amount of interest in the Solos any
+> > more, or the Geode-based SBC they sold with two of them on-board. But
+> > OpenWrt does still support them, and I even have one here (although no
+> > ADSL line to test it with). They were briefly popular as fully Linux-
+> > supported ADSL routers.
 >
-> Since KUnit already has a few macros in its API it didn't occur to me.
-> Good idea, I like it. And I guess the scope approach matches well with
-> your __cleanup comment in the first patch. If no one opposes, I will
-> work toward that pattern for the next version.
+> ADSL is history, it only ever made sense in rich countries where
+> physical copper cables were pre-installed in homes.  While rich
+> countries have moved to fibre, the rest of the world won't use
+> ADSL either because there is no copper cable to begin with.  So
+> it's actually cheaper to just lay a fibre cable for a new install.
 
-There's a catch with kunit and __cleanup and thus (scoped) guards. Kunit
-runs in ktreads, asserts lead to kthread_exit() and the __cleanup won't
-be called.
+I am afraid the move to fibre hasn't been completed yet.
+ADSL (VDSL2?) is still being used.
 
-Warning suppression being part of kunit infrastructure, asserts can and
-should end the suppression too. But setting the example (scoped) guards
-are safe in kunit tests in general feels like a trap waiting to happen.
+Gr{oetje,eeting}s,
 
+                        Geert
 
-BR,
-Jani.
+-- 
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-
->
->>
->> Also, how can you stand all this screaming in the code?
->>
->
-> Again, KUnit already contains many macros, so this use didn't register
-> as such. Now I will not be able to unsee it.
->
->
-
---=20
-Jani Nikula, Intel
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
 
