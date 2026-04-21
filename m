@@ -1,114 +1,180 @@
-Return-Path: <linux-doc+bounces-84099-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84100-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aDpTI8vy52mhCwIAu9opvQ
-	(envelope-from <linux-doc+bounces-84099-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 23:57:31 +0200
+	id UIC6EDr052nrDQIAu9opvQ
+	(envelope-from <linux-doc+bounces-84100-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 00:03:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86CA843FE9F
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 23:57:30 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id AA40F43FF3B
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 00:03:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 857B73015521
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 21:57:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3EBEE303DA39
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 22:03:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16F8434F46D;
-	Tue, 21 Apr 2026 21:57:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7BBF30E0D6;
+	Tue, 21 Apr 2026 22:03:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tZM2C2SL"
+	dkim=pass (1024-bit key) header.d=0x0f.com header.i=@0x0f.com header.b="INV99Vzg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E757F29CB24;
-	Tue, 21 Apr 2026 21:57:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776808644; cv=none; b=Lq23Y/WipNiSPymlzCRtzmXWVl0R3b39N19F6lvraac/MJFlJmRRvrDryHaKXKbNRgY7liuOy8vdrMOZyfCbtAlyFwlHWF4GPUrRQHPrL9RW3ibRg6uYTLvosK793DORPEIvaHum6gJxPLfUjDAEgguftosmUZuDDv/puCefDy8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776808644; c=relaxed/simple;
-	bh=ftxDQpj+hYnznm0pw+8lcsK15tVTdGcEZoodAP2sde0=;
-	h=Subject:From:In-Reply-To:References:Message-Id:Date:To:Cc; b=VVC9ptsN88AAC9wB8u8W4qiFnMYVgE8GeppIxCwKMluNP3rXuSf1ST7TjjAE9xlxRG638EQ6yJWv/44C2fH7daDZ5OL5siSLiMjNeBLiCSjsreTPySgi/vvL0EXIHxhFbnMgqtYWyz6Px5maE32tCC8KFYD/2uFfbklV3OJHIzw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tZM2C2SL; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C7286C2BCB0;
-	Tue, 21 Apr 2026 21:57:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776808643;
-	bh=ftxDQpj+hYnznm0pw+8lcsK15tVTdGcEZoodAP2sde0=;
-	h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
-	b=tZM2C2SLoAbxGsmABzjOhEDkvKKUGkSAhHIifOAuWx2cgDrRiXp6XdBtZahtXgIUY
-	 IqW2C4FBbyzsG00jm0gXsrGNX3lwS9pnvhXN6qYnDSbVewerlBX4rPhpDbw56YKOrm
-	 bSSPxbaLJqaX65XxGsCkPYrNSwgFKfLuTbBliF61OMNpQ7y1x13Hl3MslZSos3vjeg
-	 jkXm+WOV5VA/CsxepbxXvezxDPHHZnJs2lK4zgs4sQOdmSmUGutzx6DfwymR4RZPjM
-	 Rq/FQY2AyHbztvc32Gotwy1w+Flpb0oDCfcAhavYECBUgDFI8SYYgEEiIIobiUOj9Y
-	 fwibHNzRiWg0w==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 3FEE6393020A;
-	Tue, 21 Apr 2026 21:56:48 +0000 (UTC)
-Subject: Re: [GIT PULL] DAX for 7.1
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <69e7d1949ebcc_7d12a10098@iweiny-mobl.notmuch>
-References: <69e7d1949ebcc_7d12a10098@iweiny-mobl.notmuch>
-X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
-X-PR-Tracked-Message-Id: <69e7d1949ebcc_7d12a10098@iweiny-mobl.notmuch>
-X-PR-Tracked-Remote: git@gitolite.kernel.org:pub/scm/linux/kernel/git/nvdimm/nvdimm.git tags/libnvdimm-for-7.1
-X-PR-Tracked-Commit-Id: 45df9111692c62d5f09fc4345ae36dae31024797
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: bb0bc49a1cef574646eb25d74709c5ff200903a8
-Message-Id: <177680860680.3017017.17086247882973299190.pr-tracker-bot@kernel.org>
-Date: Tue, 21 Apr 2026 21:56:46 +0000
-To: Ira Weiny <ira.weiny@intel.com>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>, John Groves <John@groves.net>, Dan Williams <djbw@kernel.org>, Alison
- Schofield <alison.schofield@intel.com>, John Groves <jgroves@micron.com>, Dave Jiang <dave.jiang@intel.com>, Jonathan Cameron <jic23@kernel.org>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org, linux-fsdevel@vger.kernel.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F04226B2DA
+	for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 22:03:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.182
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776809013; cv=pass; b=D+/WD3hnXfOP7V7f+SIZ7s08LiIeJ4f/TE03aDqXW+N/XS/rfwATD1/3SY9v55doMlskKtDTo5YR+OUW0yaFwhtgT7RQ1vXIjIz6ar9k0al1ABwVsfC/fejbZUOKvbGIU/f5IqbqIVTuMjkRjYfBR3115anjqxdNbMyJ1D4hMAM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776809013; c=relaxed/simple;
+	bh=S1NvDxDjA0nFgq85sq5CrIpAKp7K74I/oJLFFll9NaE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=B1+UDWxW9y6smNQlLTg+TcWDTWy8HtARmHXttBtWHrVwIIfTE5mxPQGifMD431zc5dFko9kdyv1+7OaDsrDGCCrqaUefMCR0XCiq27Wa6GjvRjOLxYEUOaQqPw4CbN2L9hqEsrcL48XCaELDbL9WXP5nIm4GMTKY8lDa1OZZPsQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=0x0f.com; spf=pass smtp.mailfrom=0x0f.com; dkim=pass (1024-bit key) header.d=0x0f.com header.i=@0x0f.com header.b=INV99Vzg; arc=pass smtp.client-ip=209.85.128.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=0x0f.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=0x0f.com
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-7b186dfc1d0so69725657b3.1
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2026 15:03:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776809011; cv=none;
+        d=google.com; s=arc-20240605;
+        b=VWJchdd56fdc0cq39kv1zPr1GpIDkYEqgzQNuE6xt33vxS/kT+SvwRRBJB0RQHaqHi
+         13XnlGJy6/wp9N4dijMamGmR5w0TO2hg2wiBwn9IKijqEI7+EoQsQWK/mEEksb+4TKUS
+         gHEmvIvovYRW8RJEnvLb91PiehiP099+U/hLj71xe0KeqciiovZECDvNcdhz1HNUnDUL
+         FTkErXgVByJkyefp/ZRcVjL4H4GzS8gQ7TWEpaq5ozr8sI6kkYS91iX/tmQPJMgnKrzx
+         AJtYH9cRjiLTrNaGZH+ta2h/g7Eq3gKiU+8CK+F9qruJ61SxSbabIrujr3zjsF7XYMn1
+         jYEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=S1NvDxDjA0nFgq85sq5CrIpAKp7K74I/oJLFFll9NaE=;
+        fh=IjA+GeEyjYvCW1EW6mq3XpnIGFebkQI8QuSHIgMF/HQ=;
+        b=i6unvYSZpk1iYmfBE3PtDiGoPiiqX9eZL78v8avjgi5qMHRKjlUbOeZp4nMcZdoHqU
+         megTPi/dUfKybeNH816Dfhnd/esCEhA2s9Wd74qDJUS89svRNdDvaxZFf8hD0rsH5dN/
+         7OlzmxwSN/lGsXPS0lB1uO6ATDlP39HScTSxBzZkMQeqV9X5rD6aqulfbzUj+ZjmMA9w
+         3i/NsNSexwevztYEPAlVieFpbHe9vbNP9861OVfqJxgVq2FQgiRUpR+39EBtm88cnked
+         JLfOqT1xVsn7p1/f8YzMwwkvEr4/YiAm/dQse0BqfJicavT+Rauu3PyYAC7NlWBLfvBU
+         36Bg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=0x0f.com; s=google; t=1776809011; x=1777413811; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=S1NvDxDjA0nFgq85sq5CrIpAKp7K74I/oJLFFll9NaE=;
+        b=INV99VzgByAaUC4GU5Vg3Eje1DmWoocL/5KcNXcuQWZuunrAIaJCdGzRqpNWXJj28l
+         tJRkGCvXjycgnEiAr4CZs5SiTA4Pv3nQmgbZP4vqamrvchIp475Ll5VPTFnvHFONZIu4
+         yUOFx9WsgJYgn/P5t929dLgHsNasDmXGHQHYA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776809011; x=1777413811;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=S1NvDxDjA0nFgq85sq5CrIpAKp7K74I/oJLFFll9NaE=;
+        b=oSwAFZJt7NEPAIcTUUOMXSi8vA8cW1wPCnQl6I0AGD7kQ5yj0XrrHbxYDUBndamUv7
+         2uzQMNKZIJq4cgQ+Z/mgc0/7OfBmhxIvojVDNeMhB0rM3ohZlBRo3rxhOFzsfQtXD8uU
+         2o0YiP9qHyfhdwjfE5j5FdF70BTG8ZJ8KrDAWiHEM32VVJ+1axUo59SlUBQbFBJe7kvb
+         yeVNPX0RamQy+bq2DwkoyRrLRq5XqpSbsgtakkt1bgYj+rDUw1ONA28VQkIC2hAmzL+1
+         NZ0xLfqxt3y71LZZTwILa2cUuR7QyC0MsVEAYnm48ImBI8woVraPn1klfA1PB21mAZix
+         gnVg==
+X-Forwarded-Encrypted: i=1; AFNElJ81iPBO7bXKLOUFuUu0DNbZIz1LopWwEckQ8dyIU5Ymr8/EYJlIVTOQ1tJM4pFjTJj1+qjvNrMHBYA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx1DvYt1XpqYkk5VpagHpXtvSW9eLoMGqSYUPSPj7F8ptqoUxdx
+	7IlPdI+f6i4g+323Ou0oX/eytTQxYUQX4SIVboRcgSsas+v7QHk0hqlTg/Zzetv9Sty4qCp8m9J
+	6VxtwFpLYMdER5tbokekEX7JovzEvLjVOio42dqqwtg==
+X-Gm-Gg: AeBDiesEkQsqoouO7A31eZTcylLDQvqLT+TPKMVIUxZhgPZdp7qPFN5ty4VbYiyQ4iK
+	J/XwrkBRoQ0QzuixG8i4ftkFDOn6a41j0zpGBoB62hIXpPZnXNQ4Cw3Rc6qcXX7CUZVXofcNBWU
+	NVz0wtSzsmOyJY3eMxs6wZujQwfyN3Jhi1RSnqqWef2CjlXXJRDYuZ+BQttBWwihRVESzKfKlv/
+	VePGHY33mWR2+WoLLjzv76KFI3+5ti5kkI4PfKB/Lo/BE4AiWfouD4/5kJlLYhKKfeF78FPNTS5
+	MStMsQNDaoTEu/AotQbaqJ33msiAOLVdU4xAMj8ejXcymetc5cI=
+X-Received: by 2002:a05:690c:e3ea:b0:7b3:8a18:ba7a with SMTP id
+ 00721157ae682-7b9ed41801amr154062417b3.17.1776809011367; Tue, 21 Apr 2026
+ 15:03:31 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+MIME-Version: 1.0
+References: <20260421-v7-0-0-net-next-driver-removal-v1-v1-0-69517c689d1f@lunn.ch>
+In-Reply-To: <20260421-v7-0-0-net-next-driver-removal-v1-v1-0-69517c689d1f@lunn.ch>
+From: Daniel Palmer <daniel@0x0f.com>
+Date: Wed, 22 Apr 2026 07:03:19 +0900
+X-Gm-Features: AQROBzDi0D4-VCfdphZ_nYuolvWfMt6mc0SBnOeI3WNiElqSLF1z65Owh0tseBM
+Message-ID: <CAFr9PXn1ixyhD42OswoyGZ=W-O-oZygUGpRNm2dcAuYBNgtmQw@mail.gmail.com>
+Subject: Re: [PATCH net 00/18] Remove a number of ISA and PCMCIA Ethernet drivers
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, linux-kernel@vger.kernel.org, 
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_DKIM_ALLOW(-0.20)[0x0f.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84099-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[0x0f.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84100-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NO_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pr-tracker-bot@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[daniel@0x0f.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[0x0f.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
 	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 86CA843FE9F
+	DBL_BLOCKED_OPENRESOLVER(0.00)[0x0f.com:dkim,mail.gmail.com:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,lunn.ch:email]
+X-Rspamd-Queue-Id: AA40F43FF3B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The pull request you sent on Tue, 21 Apr 2026 14:35:48 -0500:
+Hi Andrew,
 
-> git@gitolite.kernel.org:pub/scm/linux/kernel/git/nvdimm/nvdimm.git tags/libnvdimm-for-7.1
+On Wed, 22 Apr 2026 at 04:32, Andrew Lunn <andrew@lunn.ch> wrote:
+>
+> These old drivers have not been much of a Maintenance burden until
+> recently. Now there are more newbies using AI and fuzzers finding
+> issues, resulting in more work for Maintainers. Fixing these old
+> drivers make little sense, if it is not clear they have users.
+>
+> These are all ISA and PCMCIA Ethernet devices, mostly from the last
+> century, a couple from 2001 or 2002. It seems unlikely they are still
+> used. However, remove them one patch at a time so they can be brought
+> back if somebody still has the hardware, runs modern kernels and wants
+> to take up the roll of driver Maintainer.
+>
+> Signed-off-by: Andrew Lunn <andrew@lunn.ch>
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/bb0bc49a1cef574646eb25d74709c5ff200903a8
+I replied to the single patches for the ones I think I have off the
+top of my head but maybe I have a few other these.
+I think on x86 people running machines that have real ISA slots and a
+modern kernel are going to be fairly rare but I think there is non-x86
+hardware that has some of these and people are still using them.
+I think the pcnet one is used in some PC emulators too?
 
-Thank you!
+This is just my opinion but I think it'd be good to give people a bit
+more time before they get removed. I thought I was the only person
+using the 68000 (a cpu from 1979) code in the m68k tree for years
+until out of the blue a month or so ago someone popped up and asked if
+I could fix a bug in it since I'd fixed a different bug in it
+recently.
 
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+Maybe we could add a special thing in the maintainers for "this is
+code only crazy people use" and have a rule to ignore untested AI
+generated patches for it? :)
+
+Thanks,
+
+Daniel
 
