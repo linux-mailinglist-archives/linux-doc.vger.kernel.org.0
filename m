@@ -1,240 +1,343 @@
-Return-Path: <linux-doc+bounces-84015-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84013-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6Lo7Ok6U52mp+AEAu9opvQ
-	(envelope-from <linux-doc+bounces-84015-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:14:22 +0200
+	id IAd0AJuV52mp+AEAu9opvQ
+	(envelope-from <linux-doc+bounces-84013-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:19:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5104C43C9F0
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:14:22 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id F313343CABB
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:19:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B3F1B30151C0
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 15:10:06 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 9EE5F301ECC2
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 15:08:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE46C3D8906;
-	Tue, 21 Apr 2026 15:10:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6FC43D6CC1;
+	Tue, 21 Apr 2026 15:08:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="nejCsAOZ"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="ELVR5JOU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from jpms-ob01.noc.sony.co.jp (jpms-ob01.noc.sony.co.jp [211.125.140.164])
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (mail-southcentralusazon11011064.outbound.protection.outlook.com [40.93.194.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15C693C3BE0;
-	Tue, 21 Apr 2026 15:10:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.125.140.164
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776784205; cv=none; b=OLfJ0q4dzLvP8wjgX7ZlX9Kx2rsC5RE0GKkiRxSFgiZT+FosZ84SsQQ2gj6Ao99Qn5CY48vDRSidA8R6333M4FFu0WU3enpnd/tRglqAFZ+Fja813W5U3cpnhohNMUeDefDZY3aWGJKO+E4Ng3e8p4lwxMSi5Cr8g1UcdYnlPRY=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776784205; c=relaxed/simple;
-	bh=cmyaupRqmbN/ULerERzNae8aSi2Orqym5ZZqoD7wXoA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ccmAuAnuj9BsOBccu57ycObcRNjBK6qkJGWuWkDq1deXTItjxxXbsY8/cXOrZXDHuHq3Oo+kQiDaCr00uIJgP3+ofdJoSWJsHVLblPpZTIhfn31jSPIdTtc9QOrOvYHZKRdQtBQ9ezSJ0VF1S4gHYw5KAzdMG1NYtCa/WD+W4w0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=pass smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=nejCsAOZ; arc=none smtp.client-ip=211.125.140.164
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sony.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=sony.com; s=s1jp; t=1776784203; x=1808320203;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=x3We8v/cWP2gtcTXE3xZoQ0CkfHEqYxB8F5njBD+WhU=;
-  b=nejCsAOZTzrV0/b8dJyjNDZYr4UtWC86s65LdFy3atmIt5RKUfmiZ+P+
-   TZhdjEQFLPzlX/lQute90/YM6NVMnVhulQyzyzsqVlWTLFuE477V1Y/Hc
-   DQwcrkTMFlR1NmpjDStPTk4gKHwsVz782BsXHd/Qzy9oCXV0iFU1W2bkv
-   9d57x5JD5ZuCC3tChc6mCY/vJfTXvo8iOPx41VcWjXzOg9mCy6/UL0Row
-   9t2W0MbRkQpVcGOwQRm4hqRuFu0eC4L6EgPOzPcBewhX/EspkshNyo80s
-   TFmt0iG+V9ImMwPElc9uEDBvfHSgtbaWwBNenO0N5/BijOu3ya864T4k6
-   A==;
-X-CSE-ConnectionGUID: lzDwW2ygQdid+6fWuPfpJg==
-X-CSE-MsgGUID: Lln1Gd4NSN61cqDw3K4cKA==
-Received: from unknown (HELO jpmta-ob02.noc.sony.co.jp) ([IPv6:2001:cf8:0:6e7::7])
-  by jpms-ob01.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 23:59:52 +0900
-X-CSE-ConnectionGUID: 3RyYrMSERUKfI0QHkYxSQQ==
-X-CSE-MsgGUID: 6ScaAiufTta8VQMfoRcw9g==
-X-IronPort-AV: E=Sophos;i="6.23,191,1770562800"; 
-   d="scan'208";a="603084691"
-Received: from unknown (HELO JPC00244420) ([IPv6:2001:cf8:1:573:0:dddd:eb3e:119e])
-  by jpmta-ob02.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 23:59:53 +0900
-Date: Tue, 21 Apr 2026 23:59:51 +0900
-From: Shashank Balaji <shashank.mahadasyam@sony.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Kay Sievers <kay.sievers@vrfy.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Mike Leach <mike.leach@linaro.org>,
-	James Clark <james.clark@linaro.org>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Rahul Bukte <rahul.bukte@sony.com>,
-	Daniel Palmer <daniel.palmer@sony.com>,
-	Tim Bird <tim.bird@sony.com>, linux-kernel@vger.kernel.org,
-	driver-core@lists.linux.dev, coresight@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org,
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] kernel: param: handle NULL module_kset in
- lookup_or_create_module_kobject()
-Message-ID: <aeeQ5x1uMKT6cyxp@JPC00244420>
-References: <20260421-acpi_mod_name-v2-0-e73f9310dad3@sony.com>
- <20260421-acpi_mod_name-v2-1-e73f9310dad3@sony.com>
- <2026042126-majesty-skyline-b76f@gregkh>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7159C288C08;
+	Tue, 21 Apr 2026 15:08:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.194.64
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776784121; cv=fail; b=dA/LlEZFsB0ZnnoE+jSnrqeqtq+ESdp5cNPI/KmkDYPbRdrlnMB66tef0zo+GA1EVN6Rk8Bz+m/f45PElgsuuRcFhNDYSxrTH/+CtlZWYAvABI0zMExyihVkYCR+DARyk577MKcFrmrC3voA/u6YfM/R3L+V0PjhxMQ6auez+n8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776784121; c=relaxed/simple;
+	bh=wm6tFnPw4syVVc8p5CnxCuCyBCR2mPndoEnzmBx2HJ0=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=Sl5VjBJ9OblppzUsVroJOtRzXOYk0UCz9T4N6sn//X/U/PeT5zFRG/+1Idg9xnTSInDQcCOdn3JOFa5GTYdudCRwyFx4SPFcsOmvJbjp415+sH24RDoAURQhA+sJO6YFfMWDuCCHLdHPGAQeSZlNNl4KRIWrv39kRNbAKYYw8Sg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=ELVR5JOU; arc=fail smtp.client-ip=40.93.194.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SnD2rnq5Qi1leNMSEW7eT4X0yurrw5Ir9fjtvazPQNNEZyRPVgl2X0kmU5lhjLkW3+RTi2wQNfHsj9S5Go+njV9ZUq618RnMiod/mwADrMsw526TZ1snwtRtD7Iz+0oyHG2GnKW+B6nlq8ADJ9rGgPWBWUlb03jxaIzLB1NnnUwNDyZKqioCGUT771SLOsGOcz4gYuekxMDHBZ9hESf+zLnvJwSn5Cxv6fleCOFrguRCkmuNnYIsCTes+WgD6kxb8udrb3ITtdLNDiMJwtwS3tJdCHQwmII+XehvYNKdsJ0RySk4UmOfybG1wcy45ITqI3ORsf4e3kBWe+hcnv4l/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ztSQAXbNEdCO+8IlHWWX2TBBCor695MXMuNXET9Hu2Q=;
+ b=sN9nEfow8Y+Ig3ZAgofYt81iiDjwWkAO+VLxR49LAYK09lUV8fKUtQd2WFfOPN9L3q/g/plSZQqlLFaD4x/hCrSJ+t//Jp5knZwDMeZPKcfuqLZN2HDd0DIjZax9rKGq/Ij0RLBaB1AS4oj1W6dqwV23db0ADkdWlRHW9qOiwuwcBtYERy3zGkCFTw42ByAEgWcrBiDJzMJMcohC4lJb4VrsW2ZfDrsAfyRvisO22FMvaPXmpLYu8uPk5/A6juQydRsbyMvKlwVyD0TxPwtm4VOWo8X4P89dq7q5yYnVaRpT7YgfybDDsIhnOXSDLhfq4wsdPqZJLj7eklH97ofBEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ztSQAXbNEdCO+8IlHWWX2TBBCor695MXMuNXET9Hu2Q=;
+ b=ELVR5JOUcG2Q84Wh7qmiHOfL9unHEdF0P5mymhzFY8daRG6zii2k+/5yTT02JKSlyn1Deb+x6jY6aYzvZwvlSc3l0NcOqraZ5A+oYfV3wm1XK1I/Fb2nXpBUnetuz6eUStK8ZPoVnfA3hjoZL5WqsfFVBzgwW0bvB43TaE+7FsU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ (2603:10b6:20f:fc04::bdc) by SA1PR12MB7038.namprd12.prod.outlook.com
+ (2603:10b6:806:24d::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
+ 2026 15:08:33 +0000
+Received: from IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ ([fe80::ca9:67f1:6872:decc]) by IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ ([fe80::ca9:67f1:6872:decc%6]) with mapi id 15.20.9846.014; Tue, 21 Apr 2026
+ 15:08:33 +0000
+Message-ID: <e624f652-f0a6-4926-a0ab-c4486d41eb6d@amd.com>
+Date: Tue, 21 Apr 2026 10:08:28 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/16] fs,x86/resctrl: Add kernel-mode (e.g., PLZA)
+ support to the resctrl subsystem
+To: Reinette Chatre <reinette.chatre@intel.com>, "Moger, Babu"
+ <bmoger@amd.com>, "corbet@lwn.net" <corbet@lwn.net>,
+ "tony.luck@intel.com" <tony.luck@intel.com>,
+ "Dave.Martin@arm.com" <Dave.Martin@arm.com>,
+ "james.morse@arm.com" <james.morse@arm.com>,
+ "tglx@kernel.org" <tglx@kernel.org>, "mingo@redhat.com" <mingo@redhat.com>,
+ "bp@alien8.de" <bp@alien8.de>,
+ "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>
+Cc: "skhan@linuxfoundation.org" <skhan@linuxfoundation.org>,
+ "x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
+ "peterz@infradead.org" <peterz@infradead.org>,
+ "juri.lelli@redhat.com" <juri.lelli@redhat.com>,
+ "vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
+ "dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>,
+ "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "bsegall@google.com" <bsegall@google.com>, "mgorman@suse.de"
+ <mgorman@suse.de>, "vschneid@redhat.com" <vschneid@redhat.com>,
+ "kas@kernel.org" <kas@kernel.org>,
+ "rick.p.edgecombe@intel.com" <rick.p.edgecombe@intel.com>,
+ "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+ "pmladek@suse.com" <pmladek@suse.com>,
+ "rdunlap@infradead.org" <rdunlap@infradead.org>,
+ "dapeng1.mi@linux.intel.com" <dapeng1.mi@linux.intel.com>,
+ "kees@kernel.org" <kees@kernel.org>, "elver@google.com" <elver@google.com>,
+ "paulmck@kernel.org" <paulmck@kernel.org>,
+ "lirongqing@baidu.com" <lirongqing@baidu.com>,
+ "safinaskar@gmail.com" <safinaskar@gmail.com>,
+ "fvdl@google.com" <fvdl@google.com>, "seanjc@google.com"
+ <seanjc@google.com>,
+ "pawan.kumar.gupta@linux.intel.com" <pawan.kumar.gupta@linux.intel.com>,
+ "xin@zytor.com" <xin@zytor.com>, "tiala@microsoft.com"
+ <tiala@microsoft.com>, "chang.seok.bae@intel.com"
+ <chang.seok.bae@intel.com>, "Lendacky, Thomas" <Thomas.Lendacky@amd.com>,
+ "elena.reshetova@intel.com" <elena.reshetova@intel.com>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "eranian@google.com" <eranian@google.com>,
+ "peternewman@google.com" <peternewman@google.com>
+References: <cover.1773347820.git.babu.moger@amd.com>
+ <3305c18e-9e50-4df0-b9f1-c61028628967@intel.com>
+ <c6f574b7-fe5f-49ae-9865-0e4dbb2f9803@amd.com>
+ <efc269f8-bf98-4f12-8d76-1fee564be84c@intel.com>
+ <0ae2b267-4527-4251-9136-6afdc3fc97a5@amd.com>
+ <72297351-2954-4318-81b6-7de409e5552c@intel.com>
+ <20aaacfb-9601-4343-a5d5-f3df6152155b@amd.com>
+ <43880b7b-b390-4e7f-8c2a-46cde9e3b051@intel.com>
+ <bb9f62f1-0c79-4d29-9866-c39d08c3a774@amd.com>
+ <5a273b0f-8225-4e9e-924e-884183734659@intel.com>
+ <73c46024-4cf2-4f03-9268-d4378825fa87@amd.com>
+ <973067bf-6e6c-446a-a81a-713840d701a9@intel.com>
+ <90f4a692-1c27-4967-bf12-ec3cb597681d@amd.com>
+ <68a551ea-d9f0-436a-9bef-e35fd027bb95@intel.com>
+ <39e0c786-cc35-4555-bfb9-ff7cd758c423@amd.com>
+ <b74cfe34-e23e-49e3-beb4-d5639d42d5cc@intel.com>
+ <99a2da36-6a21-4a99-98e0-3c9a4cf7ecf6@amd.com>
+ <741aa53e-461c-4a1a-a701-6060d42012f8@intel.com>
+ <e8530c71-fde2-4522-8b46-a24efb13b681@amd.com>
+ <71099958-1ddf-40dc-8a3c-aa13d0c56fee@intel.com>
+Content-Language: en-US
+From: Babu Moger <babu.moger@amd.com>
+In-Reply-To: <71099958-1ddf-40dc-8a3c-aa13d0c56fee@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: DS7PR03CA0297.namprd03.prod.outlook.com
+ (2603:10b6:5:3ad::32) To IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+ (2603:10b6:20f:fc04::bdc)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2026042126-majesty-skyline-b76f@gregkh>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PPF9A76BB3A6:EE_|SA1PR12MB7038:EE_
+X-MS-Office365-Filtering-Correlation-Id: e773abcb-48d3-48cc-bc46-08de9fb7da5f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|7416014|376014|1800799024|18002099003|56012099003|22082099003|921020;
+X-Microsoft-Antispam-Message-Info:
+	GApIARQ7nm+YhBAz2rdtAnEcvOYvt1fcBdVtps19kBEtLKjlHjdageDHblO7sWIPhavp0K2B+eSXwAG997EsOY32Xg1IdKmJ7KiZHOTeCM91607otVfwcQRybSj4n/F5tCHdp6w/EzU6vQMd1/nE7YAJgdNMXQx3M7rG3j5uTpHGhkziMWW0VngxUcXgm2fdc6kV6HWb16Ul/9Pp3z18ZtYsvu0iHig7hxf30CXXAOdyAl85NszwT4g4Vdm6OnHtFOb+2UB4f8ncUBJUWJoIT19ebZ9wVUxohUF9PTyE98EM9ufrCbRQn1n+1SD3kN2BH9J4RrjDWpMlBg2Qk1DNZZgx9JrMNtS5Q2Xf0Dnx8mSBvF3tyCLdroByyIdss/cTg6SSL0vJmdfoap4AQECqDG0xgq1SiPmMN6O8WUINu4yeTpl42Uw++Jn9voK+Br8Q/pQexc3FUz18MMUUz4TziwTyofZ0fua0jLWZhT7KPEqePRmWnku13AcJVbkqKX4acDSqmDQ8KtRXoZVf3OJOJhQXIUXJ67GgSmnQa5oKg9GemHDolPVUUADlJxE2e2swX5ABdVctTiKvnMoTT76jT8Kdc7X1OxTs4mPEsNCWKRup5evOzZRuz5+i2k3jDeMhPRU/MNWQirN7WdMU+3HVIsPTrUAGR/Oyu37yvJEcy4Av/dcwA7BBg6NzRNOXdfyXBz9Mnba9Sr3YrMgruGlUs/gziKGzPhynNmbfowLIAjDzEt4BHJJ/hDg/9Iv7eTEs
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PPF9A76BB3A6.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024)(18002099003)(56012099003)(22082099003)(921020);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MVNRbDRtazlraW10WHN3OVVrRU16bXQ1blRPQVJvZ2h1bVdDQmhkVTJXd0Uz?=
+ =?utf-8?B?NjRERnJuTGM0RHNDb09wRVU4R3owVU9Nb2pzdTM0VEZNOUZtaGMvZmQwU1dk?=
+ =?utf-8?B?Nm1Pd05DWXRKNy9nWDV1SnBLc1hyaEJRVmxQVWVnS2FucmZ4RDNJQlkxVTlw?=
+ =?utf-8?B?Q0tGZnJoYzhvRlEwWWRjYWpSSFBsaXh2SjVQN2twVUlNaEM2cForTlk3YXc3?=
+ =?utf-8?B?OVhEK2VDcG8yQWU3YmZTWTQ0NjVJTkZsUmtNTG9vTWVqVnlrYW00SFAwNk1E?=
+ =?utf-8?B?b1JrWHA2bFIwaHRqOVV6dEV1TGpmYU5QdGVoZDhJNUJ3OEdvQ1lhOUZ4Ymt5?=
+ =?utf-8?B?QzlRYmIzVGdUaHNJQThDeERnMk4rTkw3dnBGYW1SNW03MDVvVm9iZE90NGZY?=
+ =?utf-8?B?dSs2RlNNTk5TNkN4R0VIWVU2ZGQ2aGl6RFVyWElReWRGMkdWNkhyMjNYQVF6?=
+ =?utf-8?B?YUpRdzQrNlN0VzM5ZW04UUZPbHNoZjc2ZklGOHhLYWVSbFJQeG9WUmhzd041?=
+ =?utf-8?B?SFg4TEs2ZnNLOW5IZGhudFo3R0h1c2RZamt1b1dva3dLQW9uMkpxRlkxSitX?=
+ =?utf-8?B?WFhnbnhSVjRGRkpyU096WFdNeHNjWEpId3dZaDhXNXR6R2Zrc1BCL2pza2M4?=
+ =?utf-8?B?dXNnaGFoWjVscHFoejE5V3lIbE1Oczg5V1gzcFI5ZGNGZlN6M1BSVm5SRmth?=
+ =?utf-8?B?R1hxblNPa3dXK3luUE5RcTVpNWxETXN1ZnZselUzSU83cTZLcGtteTBRNzFF?=
+ =?utf-8?B?bHVUNCt5dlU1Ky9CcVJCeUdGeS9ya2lxZlUxSVhVcDJKRGROdk5ESXF5ODlr?=
+ =?utf-8?B?WXRQQlJrOXRZSXFYcFFtWnlRWTVISFlNRm0rNlMrZlVvRVlPakZIclk0SlY2?=
+ =?utf-8?B?SjNkbmdKVDNhUUhyeEJlRWQ5bnA4UWFKSnZacDJnNGgweVhwYVRHZHM3S0p1?=
+ =?utf-8?B?UUUxczRBRU1aNnpOaWlwSDd2dkNUdjcxdGxSY3E2cnlWNG01WXRQenBiMWh3?=
+ =?utf-8?B?cUQ3MTBlMjh0V3FaVnczQWYvbHNsOGUzTEZZalNkaFMySnRzSjBqM0ZDaGRS?=
+ =?utf-8?B?bXpZVTJJcG51RGdGajlGTEUyZE11dUZoSngwVFhka2dWUmlmakFOODAxbU4v?=
+ =?utf-8?B?SG5TV01ETDl6WWVlVHY3TUFJQlJLbHhhc1JjNGd1UEVXWnVJUDlFL0ZVWlFn?=
+ =?utf-8?B?UkNQUDNZTFR6NXVkQ3kvQUs0ejBxbmI5bmVLK2piMmMyWS90ajBGNjl2T3BB?=
+ =?utf-8?B?U0NodG9mT2Jjc045UWdIV25sdkxKcVdRVlR5Mmt4Mld2Rmpva1YwaFBDdWl6?=
+ =?utf-8?B?MG5hUkdqRmpBR21OcFVUUnFWbVJibExmZ2RWNVFRVkNFbVdyb1N0TnNXSW5h?=
+ =?utf-8?B?QjBTd21TU1lNejU4djk3aGFveFFqL3l3b1BqVVpQMkNMKytVa2orL1gzclB1?=
+ =?utf-8?B?T1l0OWZIcXArZXZ2YWhPeUlwTWgwSG1ESG9IMWNjUGh4dUxYL3pXYzZneUQy?=
+ =?utf-8?B?cU0zblF3S09Ma3FKT0NVWFpNZGRCVlQ4MWNsNUtEcTFudnNTVkNrR3pXL3l3?=
+ =?utf-8?B?YUJnMTF0L0VVcmhYMENETHNnMnlzS05ad1Brbm1FRllMWlh4VXlnb0k0OWw1?=
+ =?utf-8?B?OUZXTEpxVEx5SDBMNnhCbnlBempLSU03OGswNVJ0dUdWWE5PTXJzODRvQ203?=
+ =?utf-8?B?NDRMYjBCa3Y4SUs1ZnY2NWJQZUgvcEJqeGZjdDl1Z2tUcW85SytuNkRNamor?=
+ =?utf-8?B?akxQMUJxZEgydjYxbGFoYjlMNlQyZVlyWnBaR3N1ODZ4V2RFWlF6QWpLcTc2?=
+ =?utf-8?B?NGVwVDhsNVpMVzB5elJDSzdSOVRQUXljSk43MVZBY2VtY05kbnNUTGRYTFBS?=
+ =?utf-8?B?dEtqM0xsMnE3ZDBkQk0xd1NzRk13THZsVkhwOEM0RTdlQTA4NVVNa0poanVa?=
+ =?utf-8?B?dzh5RzJ0RGJvZmNIVVdwNnV4dnkzeC9xdzVDVlVQSkZ1aHZQaTlHRW5mcUFz?=
+ =?utf-8?B?QmIwejFwdUt0RVIweEVuM3JWMHFJNTg2Si9uZmZLcS9aUXRtdHRxTmdRTWxm?=
+ =?utf-8?B?MkVKdGdSbzJRTFFOMWdWeDJLTXR6VkhDbVZOZzIxSUUxTUhhYUg0NFkyZ21P?=
+ =?utf-8?B?d3FQanRWZlJQVldUZjF5L2NCbzRsdmRodEZSNjZTMVNucjRnUVpmRVB2YmQ4?=
+ =?utf-8?B?WDVGWS90RG56Nkt1Tm11Z051L1ZHdWdBd2VMVFBGUGRCSnAxV2VzelVpUVRr?=
+ =?utf-8?B?RVBIRkxZUzg2aE5POVpuSEtwVTlFOWVsWVNRRW9hZm90cDgyM2RLWnNjRkRM?=
+ =?utf-8?Q?lV18x1AlvuH5JSfJA3?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e773abcb-48d3-48cc-bc46-08de9fb7da5f
+X-MS-Exchange-CrossTenant-AuthSource: IA0PPF9A76BB3A6.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 15:08:33.3776
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MK2ZfgpcMjczIfjm0cdP/35D5FztZ4JNP9Ue/divxX8clg94tkwezXcM5IGLfEly
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7038
 X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[sony.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[sony.com:s=s1jp];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84015-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[30];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vrfy.org,kernel.org,arm.com,linaro.org,linux.intel.com,gmail.com,foss.st.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linuxfoundation.org,sony.com,vger.kernel.org,lists.linux.dev,lists.linaro.org,lists.infradead.org];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,kernel.org,zytor.com,infradead.org,redhat.com,linaro.org,arm.com,goodmis.org,google.com,suse.de,intel.com,linux-foundation.org,suse.com,linux.intel.com,baidu.com,gmail.com,microsoft.com,amd.com,vger.kernel.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-84013-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[46];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[amd.com:+];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[babu.moger@amd.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shashank.mahadasyam@sony.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[sony.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sony.com:dkim,sony.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 5104C43C9F0
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,amd.com:dkim,amd.com:mid]
+X-Rspamd-Queue-Id: F313343CABB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Greg,
+Hi Reinette,
 
-Thanks for the quick feedback!
-
-On Tue, Apr 21, 2026 at 08:27:10AM +0200, Greg Kroah-Hartman wrote:
-> On Tue, Apr 21, 2026 at 03:02:34PM +0900, Shashank Balaji wrote:
-> > module_kset is initialized in a subsys_initcall. If a built-in driver tries to
-> > register before subsys_initcall with its struct device_driver's mod_name set,
-> > then a null module_kset is dereferenced via this call trace:
-> > 
-> >      [    0.095865] Call trace:
-> >      [    0.095999]  _raw_spin_lock+0x4c/0x6c (P)
-> >      [    0.096150]  kset_find_obj+0x24/0x104
-> >      [    0.096209]  lookup_or_create_module_kobject+0x2c/0xd8
-> >      [    0.096274]  module_add_driver+0xd4/0x138
-> >      [    0.096328]  bus_add_driver+0x16c/0x268
-> >      [    0.096380]  driver_register+0x68/0x100
-> >      [    0.096428]  __platform_driver_register+0x24/0x30
-> >      [    0.096486]  tegra194_cbb_init+0x24/0x30
-> >      [    0.096540]  do_one_initcall+0xdc/0x250
-> >      [    0.096608]  do_initcall_level+0x9c/0xd0
-> >      [    0.096660]  do_initcalls+0x54/0x94
-> >      [    0.096706]  do_basic_setup+0x20/0x2c
-> >      [    0.096753]  kernel_init_freeable+0xc8/0x154
-> >      [    0.096807]  kernel_init+0x20/0x1a0
-> >      [    0.096851]  ret_from_fork+0x10/0x20
-> > 
-> > So, return null in lookup_or_create_module_kobject() if module_kset is null.
-> > Existing callers handle null already.
-> > 
-> > Fixes: f30c53a873d0 ("MODULES: add the module name for built in kernel drivers")
+On 4/20/26 22:17, Reinette Chatre wrote:
+> Hi Babu,
 > 
-> This isn't a bugfix.
-
-I'll drop it in the next version.
-
-> > Co-developed-by: Rahul Bukte <rahul.bukte@sony.com>
-> > Signed-off-by: Rahul Bukte <rahul.bukte@sony.com>
-> > Signed-off-by: Shashank Balaji <shashank.mahadasyam@sony.com>
-> > ---
-> > This bug is triggered by the next patch on arm64 defconfig: tegra194-cbb tries
-> > to register from a pure_initcall, and with the next patch adding mod_name, this
-> > null deref is hit.
+> On 4/20/26 5:40 PM, Moger, Babu wrote:
+>>
+>> We already discussed moving back to the default group on every mode
+>> switch. Doing so here would once again cause extra MSR writes on
+>> each mode transition, which is undesirable.
+>>
 > 
-> So this isn't a bug, it's a "don't do that" type of thing :)
+> Needing to avoid extra MSR writes in resctrl is not so absolute. Consider, for
+> example, how resctrl initializes default allocations when a new resource group is
+> created. resctrl aims to initialize with sane defaults and the user is expected to
+> follow with desired allocations.
 > 
-> > ---
-> >  kernel/params.c | 3 +++
-> >  1 file changed, 3 insertions(+)
-> > 
-> > diff --git a/kernel/params.c b/kernel/params.c
-> > index 74d620bc2521..881c7328c059 100644
-> > --- a/kernel/params.c
-> > +++ b/kernel/params.c
-> > @@ -752,6 +752,9 @@ lookup_or_create_module_kobject(const char *name)
-> >  	struct kobject *kobj;
-> >  	int err;
-> >  
-> > +	if (!module_kset)
-> > +		return NULL;
+> I am not against optimizing, I just want to be careful with such general statements.
 > 
-> Are you sure that making this change is going to be ok?
-> mod_sysfs_init() should have been called first as the module has to be
-> created before it can be looked up.
+> Considering your proposal in https://lore.kernel.org/lkml/39e0c786-cc35-4555-bfb9-ff7cd758c423@amd.com/:
 > 
-> As you are wanting "built in" drivers to show up here, you are going to
-> beat the call to param_sysfs_init(), so don't do that.  Make sure that
-> the drivers are NOT called before then.
+> I do not think we should make info/kernel_mode read-only. If I understand correctly
+> doing so would accommodate AMD PLZA but it ignores the discussions on how resctrl could
+> support MPAM ... or do you perhaps have proposal on how MPAM can be supported when considering
+> your proposal? Even if you do not want to consider MPAM - what if the PLZA_PQR register's
+> scope becomes per-CPU in the next version of AMD PLZA?
+> 
+> The idea behind info/kernel_mode is that the active mode it identifies indicates which
+> configuration files exist to configure the active mode. Since the mode may not always
+> depend on global configuration, for which info/kernel_mode_assignment was created, but instead
+> rely on per-resource group files, I do not see how resctrl can build on a read-only
+> info/kernel_mode backed by a mode and group change via info/kernel_mode_assignment.
+> Specifically, MPAM support may not use info/kernel_mode_assignment at all.
+> Instead, MPAM may use something like described in https://lore.kernel.org/lkml/aYyxAPdTFejzsE42@e134344.arm.com/
+> 
+> Could we perhaps consider dropping info/kernel_mode_assignment entirely for
+> AMD PLZA's global allocations? Similar to what you suggest, the mode and
+> group assignment could be done via the info/kernel_mode file instead?
+> 
+> Thinking about this more since the CPUs allocation is global, these could *theoretically*
+> be included also (but see later).
+> This could mean that "kernel_mode_cpus" and "kernel_mode_cpus_list" could be dropped?
+> Although, this may complicate the interface since user space may want a convenient way
+> to modify just CPUs independently from needing to repeat the mode and group every time.
+> 
+> Consider, for example:
+> 
+> # echo "global_assign_ctrl_assign_mon_per_cpu:group=ctrl1/mon1/;cpus_list=5-8" > info/kernel_mode
 
-The reason lookup_or_create_module_kobject() can be reached with module_kset == NULL
-is that some platform drivers register before subsys_initcall: tegra194_cbb and
-tegra234_cbb at pure_initcall, plus roughly 375 others at core_initcall/arch_initcall
-(208 arch, 154 core, plus 2 pure and 13 _sync variants). These are dominated by
-pinctrl, clk, interconnect, gpio, and mailbox drivers across six SoC vendor trees
-(Qualcomm, MediaTek, Freescale, Samsung, Tegra, HiSilicon).
+This looks reasonable.
 
-Given that, three ways forward:
+> 
+> Having named fields (a) makes this extensible, (b) output does not need to be split among files,
+> and (c) "inherit_ctrl_and_mon" can continue to be supported.
+> 
+> The named fields could be made optional, if group is omitted then it will become the
+> default resource group, and if cpus/cpus_list is omitted then it will default to all CPUs.
+> This may not be intuitive since a user may expect that not mentioning a field means
+> that the field is left untouched. Have you considered this scenario in your proposal?
+> 
+> As an alternative the group could be made a required field and "kernel_mode_cpus"/"kernel_mode_cpuslist"
+> can stay? This may be the simplest approach.
 
-  1. Move module_kset creation out of param_sysfs_init() (currently
-     subsys_initcall) and call it directly from do_basic_setup()
-     before do_initcalls(). This is the cleanest fix from a
-     correctness angle: every initcall level sees a live
-     module_kset. But it touches init/main.c and kernel/params.c,
-     crosses two subsystem trees. I haven't fully audited
-     dependencies at do_basic_setup() time.
+How about keeping a single option to update the CPUs using 
+kernel_mode_cpus / kernel_mode_cpuslist within the group?
 
-  2. Demote the ~377 early-initcall platform drivers to
-     subsys_initcall or later. Impractical at scale given coordination
-     across six vendor trees, and many of these levels seem to be
-     architecturally required.
+Should we consider removing the per‑CPU extension altogether? By 
+default, the mode already applies to all online CPUs, and any per‑CPU 
+requirements can be handled within the group using kernel_mode_cpus / 
+kernel_mode_cpuslist.
 
-  3. (This patch) Guard lookup_or_create_module_kobject() against
-     NULL module_kset. Drivers registered before subsys_initcall
-     don't get the /sys/.../module symlink, but they don't get it
-     today either (drv->mod_name is NULL pre-patch, so the
-     else-if (drv->mod_name) branch in module_add_driver() isn't
-     taken). Verified on arm64: /sys/module/tegra194_cbb/ does not
-     exist on a booted defconfig with or without my series. The
-     guard preserves that exact state while letting the
-     device_initcall majority get their symlinks as designed.
 
-I went with option 3 because it preserves observable behaviour
-everywhere and keeps the series scoped to driver-core. If you'd
-rather I do option 1 instead, I'm happy to.
+# echo "global_assign_ctrl_assign_mon_per_cpu:group=ctrl1/mon1/
 
-Thanks,
-Shashank
+Why do we still need to keep the "inherit_ctrl_and_mon"?  By default all 
+the groups in the system falls in this category it is not plza enabled 
+group.
+
+
+System boots up with following options if PLZA is supported.
+
+# cat info/kernel_mode
+       global_assign_ctrl_assign_mon_per_cpu
+       global_assign_ctrl_inherit_mon_per_cpu
+
+No groups are associated with kernel mode at this point.
+
+# echo "global_assign_ctrl_assign_mon_per_cpu:group=ctrl1/mon1/" > 
+info/kernel_mode
+
+# cat info/kernel_mode
+   global_assign_ctrl_assign_mon_per_cpu:group=ctrl1/mon1/
+   global_assign_ctrl_inherit_mon_per_cpu
+
+
+# echo "global_assign_ctrl_inherit_mon_per_cpu:group=//" > info/kernel_mode
+
+
+# cat info/kernel_mode
+   global_assign_ctrl_assign_mon_per_cpu
+   global_assign_ctrl_inherit_mon_per_cpu:group=//
+
+
+How does this look?
+
+Thanks
+Babu
+
 
