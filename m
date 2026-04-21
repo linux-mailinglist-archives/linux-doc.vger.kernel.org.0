@@ -1,241 +1,240 @@
-Return-Path: <linux-doc+bounces-84012-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84015-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aLYOMveQ52n69wEAu9opvQ
-	(envelope-from <linux-doc+bounces-84012-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:00:07 +0200
+	id 6Lo7Ok6U52mp+AEAu9opvQ
+	(envelope-from <linux-doc+bounces-84015-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:14:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 699DF43C745
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:00:07 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5104C43C9F0
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:14:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DE91330674FD
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 14:55:33 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B3F1B30151C0
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 15:10:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57E173D9DAF;
-	Tue, 21 Apr 2026 14:55:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE46C3D8906;
+	Tue, 21 Apr 2026 15:10:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="WXHwi7Hh"
+	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="nejCsAOZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PH0PR06CU001.outbound.protection.outlook.com (mail-westus3azon11011015.outbound.protection.outlook.com [40.107.208.15])
+Received: from jpms-ob01.noc.sony.co.jp (jpms-ob01.noc.sony.co.jp [211.125.140.164])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFA2F3D9046;
-	Tue, 21 Apr 2026 14:55:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.208.15
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776783332; cv=fail; b=GmNyIgRc7BzMQSnzCYP2q+kEaf+S1Gv6zNyYlKneJpYpU4f2fazCTnWFP6Wy9LaQfq2N1gJlJRdC0W/sfZuUdOGykSg0/yxsBxF4032ce5ywmtYTQ6bt+IYkxhClgEn3jjNF9tevXxUAvKmy77PSVeHbLvFcZDPjfJnzl8a3Vpo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776783332; c=relaxed/simple;
-	bh=ckjg56vxBlyPnqLmj5vMoyUwFpnphEXAI9OOK/Nj9f4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=qmKAnFVryE43v2HSYEq27zMmQNC4XQ4EosAuMTfCye8STIxmjCplS1gRaXfbSCkuyhWXofi7VvLBOUsJO1YGJHBnXuD8MaX9Y63O9iA7yXzkRayxApwioYX+0xY4GUSSkmjfafnkmpPO7wcchA/QvEWJi3CXNjbuW2+vWDMJyK8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=WXHwi7Hh; arc=fail smtp.client-ip=40.107.208.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BT/4B1mpaiWr6mO/Yl4YEW5ToymEramNMI87Vy19HQUiSH9f67o3EmrC2QVKHEfWdcUggaYigZe7YNEa97SYQOOkZoopwjq/wsygIo3u80XIBq7JJuJthQqXg+yMhHzGbZYklVBb/hkf5zMGuP29eWZeAHtkM6+M0C9N4ZJNwSJkYrtJPwM+ZSBzI6ymFjl9HS3E6rWh+Hq/i1fWLXnnjS4/Vwq+f+xEyT8A2wi19h7dBfGmwcfkS9lPHqnH8kjKkNTASuz8S1euC8rQSO+VPqUxaXko7saYdOjuj0mBPUIUUVQnPvHmavujwbkTouyQzwQwkexHWk448NnuV5D95A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p183JymaxpjJcX0/clF7DkYJ+v2/MFXGwhWfTHeoMnQ=;
- b=G841LuM26Q1cwhhF5PAvWlZjAqSg20bKFteZ+WpVDrcv07xN09oIf/n5XjFomlr09E96wbNkJAXREJsK8VYlqkc5cDFXMcL2Pyuji67hJuIV8m1X8nwtYieS9Zo/Ws9FOsEiaOhBSadlTBuRhE30H4ayW3rsnWmUXQvevz9nScUpNqLMOfiNdvyOXNTj/kAqmnSjU8/Xl0TlYII3AvvXbE1DhsOUnBCjOy9wOxkMk5k9vc5rgex3QQZXFARJ77Ww5WcrX3nqjo1QFvY3K99nNSJLx/yNIreuPMYTZ2RTRE6i8GzW8q0eae5HOANDeV6TYYQp7EuxCeU7mKtxtpTuzw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p183JymaxpjJcX0/clF7DkYJ+v2/MFXGwhWfTHeoMnQ=;
- b=WXHwi7Hhfp7bIEE2268jhZO5KJn9ipRPYWSHTpnTnhfTWVMUu/g0ymByrWRN28/8lkjnFW9r5sFJ2ONDCyf91dRAksNqFSgA9kdQ5ndteoPyxnVag9vG1MbBg9nqa3066P0tLQWsZXFeZ17omS4r3OLeCtl6heXfM4TM4pbjfBUvPd2E4ujwnatAG8IVoMNZV+w+nlq//p12svgy94VyctQwNPguw20vUnW7j5Ibmjomi2wcRUXwE+CuFNqkuAm+VNWSByEnOsCHxDZFG+kCC1Nwh4rgXfx7YtUEnv65pxvM2NrUFpcHrNCZP52WGHv376O6v87rdr03GukG3lu8hA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
- PH7PR12MB6666.namprd12.prod.outlook.com (2603:10b6:510:1a8::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.16; Tue, 21 Apr 2026 14:55:23 +0000
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33%4]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
- 14:55:23 +0000
-Date: Tue, 21 Apr 2026 10:55:21 -0400
-From: Joel Fernandes <joelagnelf@nvidia.com>
-To: John Hubbard <jhubbard@nvidia.com>
-Cc: linux-kernel@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>,
-	Bjorn Roy Baron <bjorn3_gh@protonmail.com>,
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15C693C3BE0;
+	Tue, 21 Apr 2026 15:10:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.125.140.164
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776784205; cv=none; b=OLfJ0q4dzLvP8wjgX7ZlX9Kx2rsC5RE0GKkiRxSFgiZT+FosZ84SsQQ2gj6Ao99Qn5CY48vDRSidA8R6333M4FFu0WU3enpnd/tRglqAFZ+Fja813W5U3cpnhohNMUeDefDZY3aWGJKO+E4Ng3e8p4lwxMSi5Cr8g1UcdYnlPRY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776784205; c=relaxed/simple;
+	bh=cmyaupRqmbN/ULerERzNae8aSi2Orqym5ZZqoD7wXoA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ccmAuAnuj9BsOBccu57ycObcRNjBK6qkJGWuWkDq1deXTItjxxXbsY8/cXOrZXDHuHq3Oo+kQiDaCr00uIJgP3+ofdJoSWJsHVLblPpZTIhfn31jSPIdTtc9QOrOvYHZKRdQtBQ9ezSJ0VF1S4gHYw5KAzdMG1NYtCa/WD+W4w0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=pass smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=nejCsAOZ; arc=none smtp.client-ip=211.125.140.164
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sony.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=sony.com; s=s1jp; t=1776784203; x=1808320203;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=x3We8v/cWP2gtcTXE3xZoQ0CkfHEqYxB8F5njBD+WhU=;
+  b=nejCsAOZTzrV0/b8dJyjNDZYr4UtWC86s65LdFy3atmIt5RKUfmiZ+P+
+   TZhdjEQFLPzlX/lQute90/YM6NVMnVhulQyzyzsqVlWTLFuE477V1Y/Hc
+   DQwcrkTMFlR1NmpjDStPTk4gKHwsVz782BsXHd/Qzy9oCXV0iFU1W2bkv
+   9d57x5JD5ZuCC3tChc6mCY/vJfTXvo8iOPx41VcWjXzOg9mCy6/UL0Row
+   9t2W0MbRkQpVcGOwQRm4hqRuFu0eC4L6EgPOzPcBewhX/EspkshNyo80s
+   TFmt0iG+V9ImMwPElc9uEDBvfHSgtbaWwBNenO0N5/BijOu3ya864T4k6
+   A==;
+X-CSE-ConnectionGUID: lzDwW2ygQdid+6fWuPfpJg==
+X-CSE-MsgGUID: Lln1Gd4NSN61cqDw3K4cKA==
+Received: from unknown (HELO jpmta-ob02.noc.sony.co.jp) ([IPv6:2001:cf8:0:6e7::7])
+  by jpms-ob01.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 23:59:52 +0900
+X-CSE-ConnectionGUID: 3RyYrMSERUKfI0QHkYxSQQ==
+X-CSE-MsgGUID: 6ScaAiufTta8VQMfoRcw9g==
+X-IronPort-AV: E=Sophos;i="6.23,191,1770562800"; 
+   d="scan'208";a="603084691"
+Received: from unknown (HELO JPC00244420) ([IPv6:2001:cf8:1:573:0:dddd:eb3e:119e])
+  by jpmta-ob02.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 23:59:53 +0900
+Date: Tue, 21 Apr 2026 23:59:51 +0900
+From: Shashank Balaji <shashank.mahadasyam@sony.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Kay Sievers <kay.sievers@vrfy.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@linaro.org>,
+	James Clark <james.clark@linaro.org>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
 	Benno Lossin <lossin@kernel.org>,
 	Andreas Hindborg <a.hindborg@kernel.org>,
 	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Dave Airlie <airlied@redhat.com>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Koen Koning <koen.koning@linux.intel.com>,
-	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
-	Nikola Djukic <ndjukic@nvidia.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Richard Cochran <richardcochran@gmail.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian Koenig <christian.koenig@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Huang Rui <ray.huang@amd.com>,
-	Matthew Auld <matthew.auld@intel.com>,
-	Lucas De Marchi <lucas.demarchi@intel.com>,
-	Thomas Hellstrom <thomas.hellstrom@linux.intel.com>,
-	Helge Deller <deller@gmx.de>, Alex Gaynor <alex.gaynor@gmail.com>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Alistair Popple <apopple@nvidia.com>, Timur Tabi <ttabi@nvidia.com>,
-	Edwin Peer <epeer@nvidia.com>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Andrea Righi <arighi@nvidia.com>, Andy Ritger <aritger@nvidia.com>,
-	Zhi Wang <zhiw@nvidia.com>, Balbir Singh <balbirs@nvidia.com>,
-	Philipp Stanner <phasta@kernel.org>,
-	Elle Rhumsaa <elle@weathered-steel.dev>, alexeyi@nvidia.com,
-	Eliot Courtney <ecourtney@nvidia.com>, joel@joelfernandes.org,
-	linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
-	linux-fbdev@vger.kernel.org
-Subject: Re: [PATCH v11 02/20] gpu: nova-core: gsp: Extract usable FB region
- from GSP
-Message-ID: <20260421145521.GA51176@joelbox2>
-References: <20260415210548.3776595-1-joelagnelf@nvidia.com>
- <20260415210548.3776595-2-joelagnelf@nvidia.com>
- <b0c5267d-ea77-41c5-94d4-39c651761b3c@nvidia.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b0c5267d-ea77-41c5-94d4-39c651761b3c@nvidia.com>
-X-ClientProxiedBy: MN2PR11CA0009.namprd11.prod.outlook.com
- (2603:10b6:208:23b::14) To DS0PR12MB6486.namprd12.prod.outlook.com
- (2603:10b6:8:c5::21)
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Rahul Bukte <rahul.bukte@sony.com>,
+	Daniel Palmer <daniel.palmer@sony.com>,
+	Tim Bird <tim.bird@sony.com>, linux-kernel@vger.kernel.org,
+	driver-core@lists.linux.dev, coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org,
+	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] kernel: param: handle NULL module_kset in
+ lookup_or_create_module_kobject()
+Message-ID: <aeeQ5x1uMKT6cyxp@JPC00244420>
+References: <20260421-acpi_mod_name-v2-0-e73f9310dad3@sony.com>
+ <20260421-acpi_mod_name-v2-1-e73f9310dad3@sony.com>
+ <2026042126-majesty-skyline-b76f@gregkh>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|PH7PR12MB6666:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d561f29-e738-443f-05ff-08de9fb603be
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	YF0ovLmn59BOrQrZUOpHTCqmpyYX79efgMR2lL5oDAfD8n2/mDo9nZeQoEwzvSljzRTeXFGJe11n3vqOjabI2rmVgLoybFE2uvnHCzsrsS429XWOS62hoTqvvG1xKuoHz6aW493ImYi3rd5+W+OQbYxg7H/mRpRiRN9knZEWD4TcM1YwgYqyrX7JoyBiOR9NPQRARvYYL+Y5+eyzLBKgbiDfomVDmP47eJPUwJuIB9tyDxc0KC/uBIX01VURXBGgH5QZM9bxJWOPVEnYUI0VsYRxnCwbtcDvJv6lvCKh7A4gMn6G6eYP1lhQyygQuPjXC4ryJlFEJJlsLDW4o4a0XTIY58Oe4ip9OeesPgAKv4eFW36M3fK6PEt6fgRteoGeQ/0lawo+d58N96owRXpHkTKI4k8vnhXqU2W+CLUXkaJyCFlTmkcKhcd+vh/o3nuM0TVeQ29xpVnzOUMCiORQ9EDxeV5+N3iIhizWe4EaQpMdHeK0ROLeohJV+nQBR9+gIdtg93peX6Yb6a4TZMg/1BDd7xQI5Sv9YSTyYi9K3kYPIAuXDlVMMDQdou3MChyzBkBX19TXjRdmIqc1CeJIdFymT0NIfyeD0v1mVGfAStjQa49mbRxMHz0HNFrE290w6CHaNdmqwt5Ma5tEgf/drReDDQhPni/+YnElFG3Ku3iepubzI2n/74K+SZIdLmsoDuw52lO1syuUwoARL41sAnKyOe4GisBX3rkaJ50hi4s=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?2Fuv9QpYY6oPoyZbXD23coDJ2zrvlwkBK68KPi7Z/45UMLSnlEZKWLZDquKk?=
- =?us-ascii?Q?N+90kbf0EsfWes07rK1izTmSbqNXGVdGDukE3cUQ1GgZmmAsCHp1X3kA0Qkf?=
- =?us-ascii?Q?pMUcQk22HTmfDcVVtpTdpNeMZ7L1i1s90DOOOtLYIdE6eiPHffBTBKmbnA/w?=
- =?us-ascii?Q?T025mPPGPw5almf9+tcQ0lzyIkAcDsUdJVbwoUFbr9oO5zdMD17S9S/AgknO?=
- =?us-ascii?Q?y2O/8kqonNoAIK9XOW4kQ3lasf5L+aJv9Xiep7SbsXTA1Krzyz6LD0UswWeM?=
- =?us-ascii?Q?piJsdvI9pnN+zUf6RxQRCS0dkRt9idiYrCsZ5+v5o6CV6kmpJckkD4XkBbrC?=
- =?us-ascii?Q?Uht8Hg9HxkVu+iSzcGBHnF0owkd46tctBUQxjH0FB4GEtqap65309skeRazj?=
- =?us-ascii?Q?CjTie79ApcpfQ6o0IXNhpE+2WbM7yvYdKgm/2AAAzgio1cD3ztC2jnT6+nAc?=
- =?us-ascii?Q?2pzLnpwzcIdaok5YrZ6YzKSW8TCEhVl5SUVhKDZ1gz3BcVPyE44WMP76lv43?=
- =?us-ascii?Q?vcKZNUN9p6lFVHduwVLLsyD2Pg4LH9DFCxOicq2n51ZCcznnSq/Cp7TSmIWI?=
- =?us-ascii?Q?jc1xeKRB8U3N3EGz/5l6aAQr2Nf1tXPXSyspFbDni87O6oW0lstlAPrDUGBm?=
- =?us-ascii?Q?/BYNVdaL9ux0i0u2FC9DABDuaG4EnEVv4KpXZBvWlaJm9pW6jM6xLb48fydg?=
- =?us-ascii?Q?/ndkKwevMZnUzS044T5ViLhQmBCtmznydNixYUwszhO8Q0fNfHMZCEqjkOi6?=
- =?us-ascii?Q?Gtq25zMBFdkvLD2Dsg6zBOomwrPAVhvhTU91v6hlpagpf1pmjHJ1a3SDnEC6?=
- =?us-ascii?Q?RTXX7JdZu/5PMUSl26hlW20bK18y3GV5+17bdZoUWVbw6eO1kXgY0F7SRN1Z?=
- =?us-ascii?Q?eIr+focKFdP/2ZB0RmCMmyF1heDOnhBQY109+mMH0Q6erMTOV5csx0vMghqG?=
- =?us-ascii?Q?47f6sA5bP51ECdvxYwkkv7EdAeZFzDNAAejKUEdJzOciNJhh38SNF0NEGwFM?=
- =?us-ascii?Q?qoNqQMnC40N5RhKpYYjJhH3W3lWoSQ1LubKTU5ZRbnecnia0utmjY6a6rVvZ?=
- =?us-ascii?Q?VxTZqtiNFX8484MDoJ3ARRY6ajcPM1BKxcbbTrjquJPCnb53AeKPc+5/1x+p?=
- =?us-ascii?Q?vwMf8YZ9gsepM7GcqV96InF5oiX6e+Nslu3YUc6EzqxuoJLpDHmHD/PmvLOD?=
- =?us-ascii?Q?KAyVB1XNsS0znLDiiFfyjs4mmuNM2UVKQnqXQePQgmnheDdA3u7oVNJ/4Gl1?=
- =?us-ascii?Q?42DOq/+qSSVfyktPYX8MOfQUkKDIyhidikDmnv6lMWT89XUVXtkfSqUtyg/8?=
- =?us-ascii?Q?mCYbWSUZp7C0cxNVSUg2hz1UVVdHr8Rop3czZ2MwpTOroNFmPJYrSxbutUOj?=
- =?us-ascii?Q?Q4naeD8SskomrHx551FdVhFXr2ytLuKkQa7DX3yerxmMGIOtVTyGoG5ZTEU7?=
- =?us-ascii?Q?zwtulsTA13rPgTFK0LYT7ksNR2zS96pEurP5QH9RmLsTCcz8pOZn7+RXncDN?=
- =?us-ascii?Q?jd7KcOwyG+qL0IRIVzIBjXqCpfPyVWM5uKVzrIFrU3vtDpkPdtY3l5Gaifuk?=
- =?us-ascii?Q?zUI/Kj/Aj/jcBfIosybLHCqZTS62j+rFevgGC+LMpqefbgj5TJMUwoRobLcg?=
- =?us-ascii?Q?u6drkfVMCSOnE8pEkdyIJvBH1deoxpgo4U5USm2mlTAq4p7gtKfqDZ9+cZYn?=
- =?us-ascii?Q?o1hbCCrItbOWo1roq5XJ4kjn1t7D0fMxAwfczf7csAlzcJZrKdYGWu2+0Frr?=
- =?us-ascii?Q?EH390tyzog=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d561f29-e738-443f-05ff-08de9fb603be
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 14:55:23.0900
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mJR/hGlKXCfhAwlU6r2h6H4ZV0TUEYeQ6T0WFcwlP+aJXHBh36PabnoWAhK5JiCdOXadcoLoxQqFjDUx2PlkyQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6666
-X-Spamd-Result: default: False [1.84 / 15.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2026042126-majesty-skyline-b76f@gregkh>
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[sony.com,none];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[sony.com:s=s1jp];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,redhat.com,collabora.com,linux.intel.com,lists.freedesktop.org,nvidia.com,suse.de,gmail.com,ffwll.ch,lwn.net,amd.com,intel.com,ursulin.net,gmx.de,weathered-steel.dev,joelfernandes.org];
+	TAGGED_FROM(0.00)[bounces-84015-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[30];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84012-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vrfy.org,kernel.org,arm.com,linaro.org,linux.intel.com,gmail.com,foss.st.com,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linuxfoundation.org,sony.com,vger.kernel.org,lists.linux.dev,lists.linaro.org,lists.infradead.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	RCPT_COUNT_GT_50(0.00)[54];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[shashank.mahadasyam@sony.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[sony.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 699DF43C745
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sony.com:dkim,sony.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 5104C43C9F0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Apr 16, 2026 at 04:26:48PM -0700, John Hubbard wrote:
-> On 4/15/26 2:05 PM, Joel Fernandes wrote:
-> ...
+Hi Greg,
+
+Thanks for the quick feedback!
+
+On Tue, Apr 21, 2026 at 08:27:10AM +0200, Greg Kroah-Hartman wrote:
+> On Tue, Apr 21, 2026 at 03:02:34PM +0900, Shashank Balaji wrote:
+> > module_kset is initialized in a subsys_initcall. If a built-in driver tries to
+> > register before subsys_initcall with its struct device_driver's mod_name set,
+> > then a null module_kset is dereferenced via this call trace:
+> > 
+> >      [    0.095865] Call trace:
+> >      [    0.095999]  _raw_spin_lock+0x4c/0x6c (P)
+> >      [    0.096150]  kset_find_obj+0x24/0x104
+> >      [    0.096209]  lookup_or_create_module_kobject+0x2c/0xd8
+> >      [    0.096274]  module_add_driver+0xd4/0x138
+> >      [    0.096328]  bus_add_driver+0x16c/0x268
+> >      [    0.096380]  driver_register+0x68/0x100
+> >      [    0.096428]  __platform_driver_register+0x24/0x30
+> >      [    0.096486]  tegra194_cbb_init+0x24/0x30
+> >      [    0.096540]  do_one_initcall+0xdc/0x250
+> >      [    0.096608]  do_initcall_level+0x9c/0xd0
+> >      [    0.096660]  do_initcalls+0x54/0x94
+> >      [    0.096706]  do_basic_setup+0x20/0x2c
+> >      [    0.096753]  kernel_init_freeable+0xc8/0x154
+> >      [    0.096807]  kernel_init+0x20/0x1a0
+> >      [    0.096851]  ret_from_fork+0x10/0x20
+> > 
+> > So, return null in lookup_or_create_module_kobject() if module_kset is null.
+> > Existing callers handle null already.
+> > 
+> > Fixes: f30c53a873d0 ("MODULES: add the module name for built in kernel drivers")
 > 
-> Apologies, I found one more minor thing, while looking at a
-> subsequent patch in this series:
+> This isn't a bugfix.
+
+I'll drop it in the next version.
+
+> > Co-developed-by: Rahul Bukte <rahul.bukte@sony.com>
+> > Signed-off-by: Rahul Bukte <rahul.bukte@sony.com>
+> > Signed-off-by: Shashank Balaji <shashank.mahadasyam@sony.com>
+> > ---
+> > This bug is triggered by the next patch on arm64 defconfig: tegra194-cbb tries
+> > to register from a pure_initcall, and with the next patch adding mod_name, this
+> > null deref is hit.
 > 
-> >  impl MessageFromGsp for GetGspStaticInfoReply {
-> >      const FUNCTION: MsgFunction = MsgFunction::GetGspStaticInfo;
-> >      type Message = GspStaticConfigInfo;
-> > -    type InitError = Infallible;
-> > +    type InitError = Error;
+> So this isn't a bug, it's a "don't do that" type of thing :)
+> 
+> > ---
+> >  kernel/params.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> > 
+> > diff --git a/kernel/params.c b/kernel/params.c
+> > index 74d620bc2521..881c7328c059 100644
+> > --- a/kernel/params.c
+> > +++ b/kernel/params.c
+> > @@ -752,6 +752,9 @@ lookup_or_create_module_kobject(const char *name)
+> >  	struct kobject *kobj;
+> >  	int err;
 > >  
-> >      fn read(
-> >          msg: &Self::Message,
-> > @@ -205,6 +209,7 @@ fn read(
-> >      ) -> Result<Self, Self::InitError> {
-> >          Ok(GetGspStaticInfoReply {
-> >              gpu_name: msg.gpu_name_str(),
-> > +            usable_fb_region: msg.first_usable_fb_region().ok_or(ENODEV)?,
+> > +	if (!module_kset)
+> > +		return NULL;
 > 
-> OK, failing out is correct here. But in addition, we should also
-> log this at dev_err!() level. This is rare, surprising, and actionable,
-> so perfect for that level of logging.
+> Are you sure that making this change is going to be ok?
+> mod_sysfs_init() should have been called first as the module has to be
+> created before it can be looked up.
+> 
+> As you are wanting "built in" drivers to show up here, you are going to
+> beat the call to param_sysfs_init(), so don't do that.  Make sure that
+> the drivers are NOT called before then.
 
-Sure, that works for me. Will add it in for v12.
+The reason lookup_or_create_module_kobject() can be reached with module_kset == NULL
+is that some platform drivers register before subsys_initcall: tegra194_cbb and
+tegra234_cbb at pure_initcall, plus roughly 375 others at core_initcall/arch_initcall
+(208 arch, 154 core, plus 2 pure and 13 _sync variants). These are dominated by
+pinctrl, clk, interconnect, gpio, and mailbox drivers across six SoC vendor trees
+(Qualcomm, MediaTek, Freescale, Samsung, Tegra, HiSilicon).
 
-thanks,
+Given that, three ways forward:
 
---
-Joel Fernandes
+  1. Move module_kset creation out of param_sysfs_init() (currently
+     subsys_initcall) and call it directly from do_basic_setup()
+     before do_initcalls(). This is the cleanest fix from a
+     correctness angle: every initcall level sees a live
+     module_kset. But it touches init/main.c and kernel/params.c,
+     crosses two subsystem trees. I haven't fully audited
+     dependencies at do_basic_setup() time.
 
+  2. Demote the ~377 early-initcall platform drivers to
+     subsys_initcall or later. Impractical at scale given coordination
+     across six vendor trees, and many of these levels seem to be
+     architecturally required.
+
+  3. (This patch) Guard lookup_or_create_module_kobject() against
+     NULL module_kset. Drivers registered before subsys_initcall
+     don't get the /sys/.../module symlink, but they don't get it
+     today either (drv->mod_name is NULL pre-patch, so the
+     else-if (drv->mod_name) branch in module_add_driver() isn't
+     taken). Verified on arm64: /sys/module/tegra194_cbb/ does not
+     exist on a booted defconfig with or without my series. The
+     guard preserves that exact state while letting the
+     device_initcall majority get their symlinks as designed.
+
+I went with option 3 because it preserves observable behaviour
+everywhere and keeps the series scoped to driver-core. If you'd
+rather I do option 1 instead, I'm happy to.
+
+Thanks,
+Shashank
 
