@@ -1,85 +1,153 @@
-Return-Path: <linux-doc+bounces-84014-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84016-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UBOlGluT52lE+AEAu9opvQ
-	(envelope-from <linux-doc+bounces-84014-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:10:19 +0200
+	id cITFLKiU52mp+AEAu9opvQ
+	(envelope-from <linux-doc+bounces-84016-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:15:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1322D43C907
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:10:19 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 166B443CA2E
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 17:15:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 0F1B430041FE
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 15:09:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 7084A302A6FC
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2026 15:11:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 588C439EF10;
-	Tue, 21 Apr 2026 15:09:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EA933D8906;
+	Tue, 21 Apr 2026 15:11:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="GWPL7p5Q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CWXP265CU008.outbound.protection.outlook.com (mail-ukwestazon11020111.outbound.protection.outlook.com [52.101.195.111])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC9C4223707;
-	Tue, 21 Apr 2026 15:09:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.195.111
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ACC43D75C5;
+	Tue, 21 Apr 2026 15:11:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.19
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776784164; cv=fail; b=dUghETQu1pgiJ115k+ZDTJ8/xH7hyXX32DEPa8tVYW7JpXVKP4eIIv3GAJClM5+yPthyn55mC+HG8knQfmeI4T/e+dT0+gKPQrJJ/Onq5T+xMhH4CXSRbt9J8nTZVFzAy1BEScxu4dCdr0HJW0QFAAmXvYmqiL/FPjITJxOejs4=
+	t=1776784295; cv=fail; b=VIZLYaJX0c+EZhhc9liDk0Ajot8N6kkhLQy6+Vw2h84wmo/kQsdL5uKK/mubLtgek3cG9jzORagrPjozebkHHuMHMmOthWTnCwW8srlfiNlSyU3t2T46/aTcR0s5HEbEBHSu3q3pI5L1AQyqMW8OOO3gleQEbWMSQPidDCekK7s=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776784164; c=relaxed/simple;
-	bh=Ou6XDmGU/+yf6PkVQsY/pgWaSnpk9SM9Or7u9OYcngE=;
-	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=MPfRg5lPHzJRDGKdHVXkvtVF7A9oSD5mguc7q16ROo4NTC+F2hlMMYkOdmqsuwNlLMgF5ktFmr+nCCwFpdlMPc6z8QahfJe++Wvy5Lc2nliiYuNn3cdXbVtphga5KWZH0puXxsOCv1r6YOk6N/9jyG/trj5OLxRj3BdQSa1xIcU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=atomlin.com; spf=pass smtp.mailfrom=atomlin.com; arc=fail smtp.client-ip=52.101.195.111
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=atomlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=atomlin.com
+	s=arc-20240116; t=1776784295; c=relaxed/simple;
+	bh=xc5Y2YY1EGsuzc1Sp8M4kumKUfF8KLM1NxienoTui74=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=KUIRw536s2OhSh90Ht2y6JZIyzdUw39E5YjkTqwN6H+a99dhyVA9iRzk1W/y+NkyYI6c9aUNDI+k1sJe8/0JO7MdRzc5md0GLAiSqK5lY8pMHyLoDZlpNAzRXiLt+1hnoc6jZcGlyrh8Sxkh/wRWqDy3PQZI6gPhmMCA2Ety+U8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=GWPL7p5Q; arc=fail smtp.client-ip=192.198.163.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1776784294; x=1808320294;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=xc5Y2YY1EGsuzc1Sp8M4kumKUfF8KLM1NxienoTui74=;
+  b=GWPL7p5Qzv4CRdZbJn16xrZZuCzw9pG6apVb2oEm9Xqn6ugVy7zpwAtX
+   C6agCVfCOGPFfLP55YxVzevTGloTUYP+gyZgZzelJ852bK+Fkq/KL4Qw9
+   r5LVLCkhX+vYdUJ7xUcNGHjuVrPP3Q7migIzwkUHdyZW7P2X0emR2GU7F
+   EZFIGqJGgBb85Mf+V2UDsB4KHfIdHFKghn/eEPDMRhT9LUIUU7Dnc++mc
+   0a5ScAb7UVRCOETEnBHuEIzmGMzJmlBoNTMp/ONFS9SDn3Rc5y6tbz5ml
+   pH274aPug40ol21IhzWSxUKZGKBCW8qeRTIyEzWciTdYZNZvdsAR99RbK
+   g==;
+X-CSE-ConnectionGUID: 0NnvbSyATPaWyF0fRqrgtA==
+X-CSE-MsgGUID: I7caETs1Q7m5ABaoSviKFw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11763"; a="76753209"
+X-IronPort-AV: E=Sophos;i="6.23,191,1770624000"; 
+   d="scan'208";a="76753209"
+Received: from fmviesa007.fm.intel.com ([10.60.135.147])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 08:11:33 -0700
+X-CSE-ConnectionGUID: vgQU7vgCRZWpndYuZ8+T9w==
+X-CSE-MsgGUID: Pqe1op1XR5KSjy3BDWeoJg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,191,1770624000"; 
+   d="scan'208";a="228896957"
+Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
+  by fmviesa007.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Apr 2026 08:11:31 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Tue, 21 Apr 2026 08:11:31 -0700
+Received: from ORSEDG903.ED.cps.intel.com (10.7.248.13) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37 via Frontend Transport; Tue, 21 Apr 2026 08:11:31 -0700
+Received: from BL2PR02CU003.outbound.protection.outlook.com (52.101.52.34) by
+ edgegateway.intel.com (134.134.137.113) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Tue, 21 Apr 2026 08:11:31 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kF4eHOc+tQtNNBlvDzShuKB2eDUq3er9l9j2sl3sUDRBeJQxiYY88qNMNyGWjGRlNf/DQG1eXQ71OVNQAXGIsn/XOe1rwCIgpTmuHqaAW+fDmUraipBgc3oECBCPlKW/7TYMI1eU9qTRx6cKPz0kUnZEOEZ0VNg3I0IxeToq1MxbXj5UNrW6R8rs0J8DpYmlX1CT2zjmhjEJTr5Vb3aQMgDwZ01lSBsZKhnB/ZRX5f3NYkLBxMBisHtXqBtkkAOQdzWxVymioq8K5734yWpIw8DCBcBJHEE1z5txkR5FPA18ZT0UShe+5HSiUMUptxPOJqkkAmO2piOVtfofpTCndQ==
+ b=RfTyejSH4CjfsDUNdxFIM6lk7dAQHkz98t8HcvtNJsvtV6GHS60Z+PHi8rt5bYDxXObXp5zrDm2xBtXFGx3zkSvv5o+kfdtoeVj88ZSAUQ9d6Fk5Uhhik5TkmT8M9u3eKK49eA5uEqW7VNumJsvj4I9avAOgzcYcHBpgXT5WMX1AxuIj3GUB+3RL8SMbFn6YDyFOrJ4DYzAcCqN7v6NYF6DZ1vafE5aJ/xVUtTKyhMq1TL7QS3FYzsxpzJPIfeg7syndQRtCbxxOtNfbsuRjWoFNLirdUDb7jtKRFNUzQ4zHDHFha6K7xAN4/5KVUTNPDk+rw9CGweZmv9VmWuvxBQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=or5MawNv8W1aR61bNaB6qLQf+0Ki6N0X5rxvjFHA5RM=;
- b=c3g412UXRBSZtVXy12CRQBFdDs9qbKygWMXiqWMrX0uU3jIM0B+ic8RZGiuQbDrsvvyAn+XsFSNJTgYNk21o395yQgHULjVv1gWE1NNnJLpN2rK/SBJbRlFS69TOiwZ3CC1AMM4qZcPrU2VtqVSKNCn6tRYxMrcUABgAxF0t1mfo8/WOSBr1ZKTHyaZclQ4mmfo83tWeSVJC/ZmGZ/zIgWbcbbuTSG11YwIdWGnjf3L88qQosWUsLC+UgKeFjNNOEiOF94/Xi6LnqUylpNwwv6HClW5YkbMBwLp8Vi2F2FO2UJGSSafGckiTL+YOQ4i4thVhHXIGUMRq/MYv5GP77w==
+ bh=uMTQSqLZZP+L7/jkn95vbO03oBRmYVRp6IvAXbIOgHo=;
+ b=JZ6OuCmVWtonRVSzO9cTy5SFnhvs8/bwJ35Wuvq1pfzJyzVFhgdYfAxGJVumV2TDRzKmG38ZPCUEjv+R7RK6tAKjKlNYRiSZhwyeO+/k+JDL1GU4xo2i0QHB5x8SSyT02LgBHveSGx/0MGYA2UYVfkOpYTBbQcWFwKoHk57txZDSjaFPUx5li+qdZ3RTkE9h0vQyujgJucHKPLzJZO5ReHWAI/QM1Lmt6sh+3UWO+kQaejcpkjJZ/+SSZfGQyTKJhn3c32II1tx+/sDDr1EAeoh5SnYif/p2cm+HZ7T62WBaa3Y33vzzFlzjrqb1YoFugDhjsR+WBmAaYdBem2A6ZA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=atomlin.com; dmarc=pass action=none header.from=atomlin.com;
- dkim=pass header.d=atomlin.com; arc=none
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=atomlin.com;
-Received: from CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:70::10)
- by LO8P123MB7795.GBRP123.PROD.OUTLOOK.COM (2603:10a6:600:3dd::9) with
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from SJ1PR11MB6083.namprd11.prod.outlook.com (2603:10b6:a03:48a::9)
+ by DS0PR11MB7409.namprd11.prod.outlook.com (2603:10b6:8:153::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
- 2026 15:09:17 +0000
-Received: from CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
- ([fe80::de8e:2e4f:6c6:f3bf]) by CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
- ([fe80::de8e:2e4f:6c6:f3bf%2]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
- 15:09:17 +0000
-From: Aaron Tomlin <atomlin@atomlin.com>
-To: corbet@lwn.net,
-	skhan@linuxfoundation.org
-Cc: tglx@kernel.org,
-	akpm@linux-foundation.org,
-	bp@alien8.de,
-	rdunlap@infradead.org,
-	dave.hansen@linux.intel.com,
-	feng.tang@linux.alibaba.com,
-	pawan.kumar.gupta@linux.intel.com,
-	dapeng1.mi@linux.intel.com,
-	kees@kernel.org,
-	elver@google.com,
-	paulmck@kernel.org,
-	lirongqing@baidu.com,
-	bhelgaas@google.com,
-	bigeasy@linutronix.de,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2] docs: kernel-parameters: document scope of irqaffinity= parameter
-Date: Tue, 21 Apr 2026 11:09:11 -0400
-Message-ID: <20260421150911.42404-1-atomlin@atomlin.com>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: CH2PR11CA0022.namprd11.prod.outlook.com
- (2603:10b6:610:54::32) To CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:400:70::10)
+ 2026 15:11:27 +0000
+Received: from SJ1PR11MB6083.namprd11.prod.outlook.com
+ ([fe80::3454:2577:75f2:60a6]) by SJ1PR11MB6083.namprd11.prod.outlook.com
+ ([fe80::3454:2577:75f2:60a6%7]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
+ 15:11:27 +0000
+Date: Tue, 21 Apr 2026 08:11:24 -0700
+From: "Luck, Tony" <tony.luck@intel.com>
+To: Reinette Chatre <reinette.chatre@intel.com>
+CC: "Moger, Babu" <bmoger@amd.com>, Babu Moger <babu.moger@amd.com>,
+	"corbet@lwn.net" <corbet@lwn.net>, "Dave.Martin@arm.com"
+	<Dave.Martin@arm.com>, "james.morse@arm.com" <james.morse@arm.com>,
+	"tglx@kernel.org" <tglx@kernel.org>, "mingo@redhat.com" <mingo@redhat.com>,
+	"bp@alien8.de" <bp@alien8.de>, "dave.hansen@linux.intel.com"
+	<dave.hansen@linux.intel.com>, "skhan@linuxfoundation.org"
+	<skhan@linuxfoundation.org>, "x86@kernel.org" <x86@kernel.org>,
+	"hpa@zytor.com" <hpa@zytor.com>, "peterz@infradead.org"
+	<peterz@infradead.org>, "juri.lelli@redhat.com" <juri.lelli@redhat.com>,
+	"vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
+	"dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>, "rostedt@goodmis.org"
+	<rostedt@goodmis.org>, "bsegall@google.com" <bsegall@google.com>,
+	"mgorman@suse.de" <mgorman@suse.de>, "vschneid@redhat.com"
+	<vschneid@redhat.com>, "kas@kernel.org" <kas@kernel.org>,
+	"rick.p.edgecombe@intel.com" <rick.p.edgecombe@intel.com>,
+	"akpm@linux-foundation.org" <akpm@linux-foundation.org>, "pmladek@suse.com"
+	<pmladek@suse.com>, "rdunlap@infradead.org" <rdunlap@infradead.org>,
+	"dapeng1.mi@linux.intel.com" <dapeng1.mi@linux.intel.com>, "kees@kernel.org"
+	<kees@kernel.org>, "elver@google.com" <elver@google.com>,
+	"paulmck@kernel.org" <paulmck@kernel.org>, "lirongqing@baidu.com"
+	<lirongqing@baidu.com>, "safinaskar@gmail.com" <safinaskar@gmail.com>,
+	"fvdl@google.com" <fvdl@google.com>, "seanjc@google.com" <seanjc@google.com>,
+	"pawan.kumar.gupta@linux.intel.com" <pawan.kumar.gupta@linux.intel.com>,
+	"xin@zytor.com" <xin@zytor.com>, "tiala@microsoft.com" <tiala@microsoft.com>,
+	"chang.seok.bae@intel.com" <chang.seok.bae@intel.com>, "Lendacky, Thomas"
+	<Thomas.Lendacky@amd.com>, "elena.reshetova@intel.com"
+	<elena.reshetova@intel.com>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "linux-coco@lists.linux.dev"
+	<linux-coco@lists.linux.dev>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"eranian@google.com" <eranian@google.com>, "peternewman@google.com"
+	<peternewman@google.com>
+Subject: Re: [PATCH v2 00/16] fs,x86/resctrl: Add kernel-mode (e.g., PLZA)
+ support to the resctrl subsystem
+Message-ID: <aeeTnL3aisKgPJG-@agluck-desk3>
+References: <5a273b0f-8225-4e9e-924e-884183734659@intel.com>
+ <73c46024-4cf2-4f03-9268-d4378825fa87@amd.com>
+ <973067bf-6e6c-446a-a81a-713840d701a9@intel.com>
+ <90f4a692-1c27-4967-bf12-ec3cb597681d@amd.com>
+ <68a551ea-d9f0-436a-9bef-e35fd027bb95@intel.com>
+ <39e0c786-cc35-4555-bfb9-ff7cd758c423@amd.com>
+ <b74cfe34-e23e-49e3-beb4-d5639d42d5cc@intel.com>
+ <99a2da36-6a21-4a99-98e0-3c9a4cf7ecf6@amd.com>
+ <aea-wdaZAWl2Al1h@agluck-desk3>
+ <58b8fe0c-80f6-4ba2-abbe-90d0ceee6daa@intel.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <58b8fe0c-80f6-4ba2-abbe-90d0ceee6daa@intel.com>
+X-ClientProxiedBy: BYAPR05CA0007.namprd05.prod.outlook.com
+ (2603:10b6:a03:c0::20) To SJ1PR11MB6083.namprd11.prod.outlook.com
+ (2603:10b6:a03:48a::9)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,199 +155,168 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CWLP123MB3523:EE_|LO8P123MB7795:EE_
-X-MS-Office365-Filtering-Correlation-Id: 149839a2-3017-41d7-ef8d-08de9fb7f4a6
+X-MS-TrafficTypeDiagnostic: SJ1PR11MB6083:EE_|DS0PR11MB7409:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1cf25305-4ab6-4417-1306-08de9fb84268
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	g/Z6BD6JrJ+zDxhZklHOV5tYlhFMZa1gK7yPGLN80mIkMtzZyWlbZ8uT3K6cLrOEpYip7OVmNnQa3Uf6C73Q3Oj29G3hxrCROWZu08JaDy9Romt1JzyqlcJ53qc+U6CD3+82XV2Wxxu/gFdUkUrhmLzwBWsQTqS/I8WZBnSVz2ip9vU9QdcZPj6B3cS7V60eT9/E5x6Adt1KRHTO/OO9gzkhmgf5s0miAqSnp+yiaqdzB6B2w+K9pHbKKFgZ6tmg/GrLKdf14CohZujNl0pxAf5ZnFUJjycht8vtnwdvs1Yknx46jnS4hB9lLZ6GGw485i6dVmpKRhGO9+FoZVD6VJWBAgLPFdLlBo331grMIk1N/dSJnCp+boK1L2JbtgqN+QwsDHPevKZ98xgLULQ9fEdBGH0Pr/pfPDS64tNxMocE4BIkd+l5VUcpKZVwSBg5vzy32BFA+fUMTmnpgfggv+S28G3Au6OpRsuhs/eks5Ew1+6jmu6U73dSJkW2ckM7fiCVQzQqN/GiQIUblnAA43yesKgJt+R0CowS+mji6yZmAbvUhSVYsgw8RwlmU5fqyZAButs9W8KTIxuzl7kWFlrJfiT+SqaJH21XTXdE1GIARyyo0CQmYnZgHvAcdzPTWGbsPkbtudNIvtzTAhs1JNAE7DXwCKxb+bO+4zLQj6uOj6iJjf5PMbearPykIRZLwGAq3HvsiWYCVwesnYGhmNUiGJBbT+ei1giYWzY00j0=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(18002099003)(56012099003);DIR:OUT;SFP:1102;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: BhNjda9vfuh5+qzGXFSQ/kZh+DcBjHVWV8314JgoRvn7Pq3eWVnjuqRvqLGAmS+CsB6qO6jbJBDVwr6V+rg6JDoD3imQiduGDq7reL8fl+Fn8a157AWEWiyp+WsVMfxNs494rzJfcsosrp+enJ1lifooHqxBKW0VhohAfHvL/PxWjLc5zHMz1HLrTKkER/wd4UJKcTd8op33LpyC3ZfaCFqgbh5uyzoevGFqo9/7uFbF3NanKlOAe+aiBjZRcLWlgdtriP62Qiw4jVcr/4k9c7/q8jfnnP8I9lri50SDWkEflYINEr9vA/yijc/pGOGDWdqp6EO1KKQSGoHhosnLy5zaXgseCY3LWcwWsBbbQh6JgY97KB/5crFg1OvqQp5mJBk30pkRXznArwciF2FGyYWWO97P4ny3dU8HzrkzjmHLI95GXnOK2F+zS/+95AEOd9lYbW8jgMWeIREXqG4Xwn+jxOGLURabZG42K8xb26NXxKQ700mKAc4TAdR/Dh3Cp8tI0Rzi//8IDsnrZLns/mRqYaixXGpndgZ20bOHmCzkiZESSLNiOJaJLSdgMWOSnzYyt6QWW14H4TKsU6ViY9aPzmsgfuXA4IgpPeY92/PpjctSGK4pfTG7U63vmkIWohttsknqlCxBsTFlcS+OZfa/kuU37SECOfIlTK1xzmfNyVk3sfxPuVo4O93/eJc01D2OQirij+40TPjllUwSxOo4V1dLYrK8XlRh2GpNz0w=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ1PR11MB6083.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?nHcyRLe+WTfMfiXdRSiBT/2Zm+TsfDgYrkw2fNgAlVo72i/HmJfA30IxV3sO?=
- =?us-ascii?Q?zjpfkTSIFYle9lzz4YtnrsXBLAnyI0Ja8hCxSsk2H2APLVshATQjFbVMVws0?=
- =?us-ascii?Q?jSvKM1artd1l2mwmjIwzwWu6/goJ087x+9e0gy5Z5pYuiahai30ShHuof8Zl?=
- =?us-ascii?Q?cwmqcoRvPD3NxW8lAQEHN8pQct9tD2iykr0+/XM9VIbaL4lQLkdsDUF4d601?=
- =?us-ascii?Q?eawou2e7RfufP5Y2ZvNKtYshSEHQ5aYAhP2grIhshtzgxnXyC3XJF/WP1zMQ?=
- =?us-ascii?Q?1TLTryqbcdnBViM9jjjj25uIOEk9B1dVV0vivdOA0M1fEJ2tF2IwktrhQ/Tk?=
- =?us-ascii?Q?ZFnt9oNLSLZDSSB96bBNC6F29w0M+tYu88BFDAgzXt01VX8oSDSWBWTu2PcV?=
- =?us-ascii?Q?mSR0PjpnOnSCpwCF16vlXQL+c952ok9S24XmxGekXNgoni+NA+xtKaRfbndp?=
- =?us-ascii?Q?XyllRqbp//gR7rgu5SOrNJSIQrrhvSjovzXXwyxEI24A22e/7GXUFyi7RBSj?=
- =?us-ascii?Q?2Ql7Iyc89M0bm7oCXHebiGGRsYMNqvBuQuQKHGzRptwr9cr573v8HsjP9cfQ?=
- =?us-ascii?Q?rvT6Vuqrdmi4OVXYPPcgpcWAHtTr4vC6+vuymldgclgRpU5Z/8fJcmWbsL9T?=
- =?us-ascii?Q?hyo3KLRc9nIjR/khIf6dq83DQcTbgcLmk1xT+MJml/Ze2A39hkgYdL2KqZj/?=
- =?us-ascii?Q?DOdx0svMB3DC1M9zkJTwRqhShnnkVeNulok+amuj1PnN4HfBFtrZYMeqZNfy?=
- =?us-ascii?Q?cBIDjYGKmMRSp8HcSnmO1P446FKovcZqNW4Nxm+WBONuy0RxUlNpBYZ3PmP3?=
- =?us-ascii?Q?2OA8TTooG93s3G1jqFeA4DgVjkBGtVmkzEs0w8C2R9Afg4OO5nYKnHJvpExm?=
- =?us-ascii?Q?rVcOaZPZVgJ3IGRvpoNC9JrcmeFFFJ4lhFwD8SamGGfWmed5WY1/hW+nuJZG?=
- =?us-ascii?Q?bR82QHPTKBlyMrdBMXXe31yAVelxzTE74YEqWky4N/D4t96wTL1GMT8JZawm?=
- =?us-ascii?Q?xOgnXIXTpN6HHpN9usgrUMmuQtzSPGzbx8n4hRMJektl/r/sna/EL403zYGU?=
- =?us-ascii?Q?R+Of4wioLgVASkYIM2WBQ6HIOAU+yzSZowtRq7+5thyrStqoddQ19Nyd2T2G?=
- =?us-ascii?Q?l/RGIh4+jpvJ+l8KuMg8600KjnaZSAFSzF0y7XRUTIXBSMzak6juKUkpFUAU?=
- =?us-ascii?Q?DigZJHpKbyn4Nicf8TW+MfpeOb99cKVcTuVm2CphzJzOv/O8v1g9gDsY+ppV?=
- =?us-ascii?Q?CIjgKxrQK2ddt0GKBY514eRHtI6NrNu0o9OXDOeWlgyGVHWa3vhV2TXfDsO7?=
- =?us-ascii?Q?LEJTy5GUVyw+XCIUa5jezCT8iAapskPzADlVPL4bvRgRT9cstLIw/AqHbr0r?=
- =?us-ascii?Q?yOo3D4ANrP1UctbgtXw8I4tGERJbyBklIKU48GxLy51eAoK+/ejD+hI+4OWv?=
- =?us-ascii?Q?25s/5+09cskV5eNCo+ptDOFHfeaJJyuqNuUUwVt13kKx3milomiO3+KvBqpd?=
- =?us-ascii?Q?wgJrtXPGHqnqWwF0YxEy9rzGOa6GyJAm+W+zs03YGJvS3mRYPU9lX9dSrcW5?=
- =?us-ascii?Q?jPpAgASKUUH/GLuzjk/pt84owgalQLJX+5WCBzoB1tKYknIU2ugSJVkp3CbX?=
- =?us-ascii?Q?xm2YHqpB1JtSyMLOK8u7ACNdSrxbMNGUvy4ogVBPYEsnIKQ9MRbJOC9VtA+s?=
- =?us-ascii?Q?z/YHhXjPmLDnVP0e+jbn+H9v9lEATva4v/sQXsuVP94naFsr1qMVZat41DMo?=
- =?us-ascii?Q?6tike7FBvQ=3D=3D?=
-X-OriginatorOrg: atomlin.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 149839a2-3017-41d7-ef8d-08de9fb7f4a6
-X-MS-Exchange-CrossTenant-AuthSource: CWLP123MB3523.GBRP123.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ybNZcQtk4g6JZh+z26Y59KE8UnxvsawMoQif+pY7tx9ZhrqbBftwRrkrIgoW?=
+ =?us-ascii?Q?FS88XLgcGjshLZxREGdRZa4qqRZWvmh0xSMHvbtSUSLZmosl613mX63RMjtU?=
+ =?us-ascii?Q?hA4BvYWCMNvwUfuLd6O4rnrd14uHYgfHspIgyN7PMl8Z/Kv4v832Z2zo3bMN?=
+ =?us-ascii?Q?BLHHOp2sPzRVYnVq3crSiq9hWxD3x6NnztYpE5x0XTEnt866t1N7HjESZXFp?=
+ =?us-ascii?Q?ylO81mKGjWw+TK3Kz+jMwLEtuEd2u7G8tblixagY81sVQdXuXqp3eQiN/gO2?=
+ =?us-ascii?Q?RY+80tLp2/FnHp0k38KprOXtdoIqNiQUVy3r1aFoAL2l/qJ1PAty9IsIGA4G?=
+ =?us-ascii?Q?Wa+cRPX3f+Hub3EdGyn0rlX3Il9iq7PeNECxiSqdyIfeoY3hWYY2J/5REbI4?=
+ =?us-ascii?Q?OMEKadxvHJxiXNlXikyVvZfe02qc5QlajCgfcS0gpQydjzl/JsplwrVy7pQu?=
+ =?us-ascii?Q?bq/T5o9am9uAEJeB9EAgqhi3caVKXg+g4ThhOeYS7YdfnK/XBPxkT80bYR7M?=
+ =?us-ascii?Q?7ZQN6IhjcuPVWdeA6B4lUvyc4jv/81wFw4clzKhtmI4D39iKDJc4ccBJ7l1R?=
+ =?us-ascii?Q?SlxODQulAnrvp4noFjqVCoh2gmjKzQvSj+9r3DdQpW9E7UXwh/GPzPyBSXDk?=
+ =?us-ascii?Q?UXN+/GAUabrOlsAjBVBC4VdrOdX9vlTAqahhzY5bT9ITaPsQ5v8zkI+Zq7iw?=
+ =?us-ascii?Q?CiZAMfoRaQ9w6z6sjJ3I8AUYYv8cL27bDvI9Taxsl5Asq2zCAf0bFVa+hbZU?=
+ =?us-ascii?Q?3tpqtejfYfZJfjFJyeoGufpLFCh43W9Yo0i+LtECRI0v2gB23ImXSalXtxhZ?=
+ =?us-ascii?Q?dvvldzLvCqsCL/Rng571rrnzBB0hrjowzGxbWcOiX+QfY1qmx+EQlE81ZLLa?=
+ =?us-ascii?Q?WO0+8u26iVGTXjZ5OJTaYvt+xZuBYNUMayBfxUteAfgN4wY1I+Kjjg6FTxYw?=
+ =?us-ascii?Q?B489kJi67djxWChmNUGa02Lp4cL9nl0HB8A3c8yhzpHj2aFYXSyoItET8/km?=
+ =?us-ascii?Q?yu+2Bbwga9MoA+PTm5eoD+6bLshjavRKl4KNkx3H8TWqSF2sgNVt7aCW2meI?=
+ =?us-ascii?Q?YJaKNwgWO81wKv4wlxsqAq9FoZiAf47a8pATVKJHw8JvEgGxbAQbvxAkkduc?=
+ =?us-ascii?Q?2btmv9YEmqjNUyj0U4P7XukkpdB80SBxmGQmP1uVuUjM2f3284M96yVRx1AN?=
+ =?us-ascii?Q?IX1c6n2MDTa/1DXU9uZXhk56/8qvk8vm1KX8dCiJ9k2Rl7z3954qGufdHerN?=
+ =?us-ascii?Q?YG/tHkK7uN6mqhwtY6aNsqWQC4Zsw9JGO7SXc5IiAl0n8fP0f9+SCbRk9BFZ?=
+ =?us-ascii?Q?PIx3RnSSswodrW/2Tzm1S94MEwfEhbBEyjagLBlErrDKjTSJhY0pf6ir79uA?=
+ =?us-ascii?Q?5/jJ03tGvA2sonlnZ7Rpog4jaJwtOvBK7FzXVpb04cri0/ZLovzDY4ifvjy+?=
+ =?us-ascii?Q?4qekeRaw2ag+FYDLb85iuFE7qMY/0H50DlbcaI+UO9KL/SGAkWo2opvV2Ryd?=
+ =?us-ascii?Q?7h5pisYJfFNpAKW9fa8VAAIAd96OcslIc4A7KeYnVEA5ftJkK+cmO62+Sp4D?=
+ =?us-ascii?Q?ce9CLZvece3jX5QqPClNy/iQfvIJSJ+t0J3zwuMrfo0tT/ho9Qd/djBkZ9qW?=
+ =?us-ascii?Q?onzSZgslQtR/6BrHeZAMo4kNglnuqJ8FVxnmugDgoEZ5eOVV77A1OoCZxW3n?=
+ =?us-ascii?Q?a0nGQGo6MIrOMEFwaT+R8HgnCAy9qmRR0pFxTDl2GH+TemCt8im1R44y69i7?=
+ =?us-ascii?Q?PBhPLJdd8w=3D=3D?=
+X-Exchange-RoutingPolicyChecked: DjYTyUo30RX45TDlP0SDCXe3/ioeZYqA3oLfMq/c21WG8hgCNGHr3z9ZxDl3Uj/zHoUDyPzpvr6bxXvoJlZVdKPU7jY+hy33GZ/qPXRlasye3yCOSV8JgsOquI38MJ0V/a+jsBNYttwPKzaJKetv5f6V2VpwITxm36a0irHRUrkAIcL2P3W5+e7h3ebiqL424j1nLokorduY6eRxnCX3LWbye0tPi8/rKzV5jTgZuVe5EE5uQYJqSKouYqClMy2FkBNLssD2vMmcrN5rAK52PC+vsOytr1dCUNZl9XZKuyL7sp8ZLJOo0k5I0IWO5c8l+x5EfOuCtFwRkLtqJ1sgig==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1cf25305-4ab6-4417-1306-08de9fb84268
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PR11MB6083.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 15:09:16.9038
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 15:11:27.3317
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e6a32402-7d7b-4830-9a2b-76945bbbcb57
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LnMNYGDonAUzWigfHI9cOYJVpQmX4RFXxV0VOR68W2g49c2LadL92jJxrOlu2+eHVGaNwi0AxgjCubgwkUoahw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LO8P123MB7795
-X-Spamd-Result: default: False [2.04 / 15.00];
+X-MS-Exchange-CrossTenant-UserPrincipalName: X1K6QvRm1dlQAMI6NciPoMlb3U+r6M5khOdEhIQugTUet1UaKfm79WXiaOhPdc9B9w4DkZeWXq6GSi/rjEDOcg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7409
+X-OriginatorOrg: intel.com
+X-Spamd-Result: default: False [0.34 / 15.00];
 	ARC_REJECT(1.00)[cv is fail on i=2];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84014-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[atomlin.com];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84016-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[46];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	R_DKIM_NA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[atomlin@atomlin.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,lwn.net,arm.com,kernel.org,redhat.com,alien8.de,linux.intel.com,linuxfoundation.org,zytor.com,infradead.org,linaro.org,goodmis.org,google.com,suse.de,intel.com,linux-foundation.org,suse.com,baidu.com,gmail.com,microsoft.com,vger.kernel.org,lists.linux.dev];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.974];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,atomlin.com:mid,atomlin.com:email]
-X-Rspamd-Queue-Id: 1322D43C907
+	FROM_NEQ_ENVFROM(0.00)[tony.luck@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[10]
+X-Rspamd-Queue-Id: 166B443CA2E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-There is a common misconception that the "irqaffinity=" boot parameter
-acts as a global override for all hardware interrupts. In reality, it
-only sets the irq_default_affinity mask, which is explicitly ignored
-by managed interrupts (e.g., modern multiqueue storage controllers).
+On Mon, Apr 20, 2026 at 05:21:50PM -0700, Reinette Chatre wrote:
+> Hi Tony,
+> 
+> On 4/20/26 5:03 PM, Luck, Tony wrote:
+> >> The system boots with these default settings:
+> >>
+> >> # cat info/kernel_mode
+> >> [inherit_ctrl_and_mon]
+> >> global_assign_ctrl_assign_mon_per_cpu
+> >> global_assign_ctrl_inherit_mon_per_cpu
+> >>
+> >>
+> >> At this point, the interface info/kernel_mode_assignment is not visible.
+> >>
+> >> Next, lets create a new control group:
+> >>
+> >> # mkdir ctrl1
+> > 
+> > This allocates a CLOSID and an RMID for this group.
+> > 
+> >> We want to designate this group as the new kernel-mode group.
+> >>
+> >> First operation: Change the mode:
+> >>
+> >> # echo "global_assign_ctrl_inherit_mon_per_cpu" > info/kernel_mode
+> > 
+> > This mode needs a CLOSID for PLZA, but doesn't need an RMID.
+> > 
+> >> At this stage, only the kernel mode is being changed. However, there is no
+> >> way to know which control group the user intends to assign to kernel mode.
+> >> All we know here is the selected mode.
+> >>
+> >> After this operation, the info/kernel_mode_assignment interface should
+> >> become visible. But the question is: what should it contain or point to at
+> >> this moment?
+> >>
+> >> # cat info/kernel_mode_assignment
+> >> ??
+> >>
+> >> Next operation: Assign the group
+> >>
+> >> # echo "ctrl1//" > info/kernel_mode_assignment
+> > 
+> > Now ring0 code is using the CLOSID from the ctrl1 group.
+> 
+> ... and user space tasks also continue to use the CLOSID from the
+> ctrl1 group.
+> It is up to user space to decide if a group is dedicated to kernel
+> mode or not. resctrl does not enforce it.
+> 
+> > 
+> > But the RMID for this group isn't used.
+> 
+> RMID is still used by user mode that maintains existing behavior concerning
+> this group when considering its tasks/cpus/cpus_list files. RMID assigned to this
+> group is just not used for kernel mode.
 
-This patch updates kernel-parameters.txt to document this limitation,
-directs users to "isolcpus=managed_irq" and
-Documentation/core-api/irq/managed_irq.rst for further details.
-Additionally, it updates managed_irq.rst to provide a debugfs example
-demonstrating the IRQD_AFFINITY_MANAGED state flag.
+True, that the RMID is used if the user makes assignments using tasks/cpus/cpus_list
+for the ctrl1 group. But they might not do that.
 
-Signed-off-by: Aaron Tomlin <atomlin@atomlin.com>
----
-Changes in v1 [1]:
- - Provided an example of a managed IRQ using CONFIG_GENERIC_IRQ_DEBUGFS
- - Referenced Documentation/core-api/irq/managed_irq.rst
+> 
+> > 
+> > Are we OK with "wasting" an RMID in this way?
+> 
+> How do you see this RMID as "wasted"?
 
-[1]: https://lore.kernel.org/lkml/20260414200245.1153919-1-atomlin@atomlin.com/
----
- .../admin-guide/kernel-parameters.txt         | 11 ++++
- Documentation/core-api/irq/managed_irq.rst    | 53 ++++++++++++++++++-
- 2 files changed, 62 insertions(+), 2 deletions(-)
+Suppose the user doesn't assign tasks to the ctrl1 group?
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index cf3807641d89..365c4931700a 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2726,6 +2726,17 @@ Kernel parameters
- 	irqaffinity=	[SMP] Set the default irq affinity mask
- 			The argument is a cpu list, as described above.
- 
-+			Note: This parameter only sets the default affinity
-+			for unmanaged interrupts (e.g., legacy single-queue
-+			devices or unmanaged pre/post vectors). It is
-+			explicitly ignored by managed interrupts, such as
-+			those utilised by modern multiqueue storage
-+			controllers. To isolate CPUs from managed
-+			interrupts, see "isolcpus=managed_irq".
-+
-+			For further details see:
-+			Documentation/core-api/irq/managed_irq.rst
-+
- 	irqchip.gicv2_force_probe=
- 			[ARM,ARM64,EARLY]
- 			Format: <bool>
-diff --git a/Documentation/core-api/irq/managed_irq.rst b/Documentation/core-api/irq/managed_irq.rst
-index 05e295f3c289..8e973a7d1bd1 100644
---- a/Documentation/core-api/irq/managed_irq.rst
-+++ b/Documentation/core-api/irq/managed_irq.rst
-@@ -80,9 +80,58 @@ The following examples assume a system with 8 CPUs.
-     /proc/irq/48/effective_affinity_list:0
-     /proc/irq/48/smp_affinity_list:7
- 
--  This can be verified via the debugfs interface
--  (/sys/kernel/debug/irq/irqs/48). The dstate field will include
-+  If the Linux kernel was built with Kconfig CONFIG_GENERIC_IRQ_DEBUGFS
-+  enabled, this can be verified via the debugfs interface (e.g.,
-+  /sys/kernel/debug/irq/irqs/48). The dstate field will include
-   IRQD_IRQ_DISABLED, IRQD_IRQ_MASKED and IRQD_MANAGED_SHUTDOWN.
-+  A managed IRQ will also include IRQD_AFFINITY_MANAGED. For example:
-+
-+    # cat /sys/kernel/debug/irq/irqs/87
-+    handler:  handle_edge_irq
-+    device:   0000:41:00.0
-+    status:   0x00000000
-+    istate:   0x00004000
-+    ddepth:   0
-+    wdepth:   0
-+    dstate:   0x19601200
-+		IRQD_ACTIVATED
-+		IRQD_IRQ_STARTED
-+		IRQD_SINGLE_TARGET
-+		IRQD_AFFINITY_SET
-+		IRQD_AFFINITY_MANAGED
-+		IRQD_AFFINITY_ON_ACTIVATE
-+		IRQD_HANDLE_ENFORCE_IRQCTX
-+    node:     0
-+    affinity: 9
-+    effectiv: 9
-+    pending:
-+    domain:  IR-PCI-MSIX-0000:41:00.0-12
-+     hwirq:   0x8
-+     chip:    IR-PCI-MSIX-0000:41:00.0
-+      flags:   0x430
-+		 IRQCHIP_SKIP_SET_WAKE
-+		 IRQCHIP_ONESHOT_SAFE
-+
-+      address_hi: 0x00000000
-+      address_lo: 0xfee00000
-+      msg_data:   0x00000008
-+     parent:
-+	domain:  AMD-IR-3-14
-+	 hwirq:   0x41000000
-+	 chip:    AMD-IR
-+	  flags:   0x0
-+	 parent:
-+	    domain:  VECTOR
-+	     hwirq:   0x57
-+	     chip:    APIC
-+	      flags:   0x0
-+	     Vector:    33
-+	     Target:     9
-+	     move_in_progress: 0
-+	     is_managed:       1
-+	     can_reserve:      0
-+	     has_reserved:     0
-+	     cleanup_pending:  0
- 
- - A QEMU instance is booted with "-device virtio-scsi-pci,num_queues=2"
-   and the kernel command line includes:
--- 
-2.51.0
+Perhaps the resources they want to make available to the kernel do
+not exactly match with resources that they want to provide to any
+tasks. In this case the RMID is wasted.
 
+> > 
+> > Maybe it doesn't matter too much for AMD as you would just
+> > avoid assigning any counters to this group. But should Intel
+> > get around to doing PLZA-like functionality, that's a real
+> > loss of an RMID that might be useful elsewhere.
+> 
+> Reinette
+
+-Tony
 
