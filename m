@@ -1,58 +1,60 @@
-Return-Path: <linux-doc+bounces-84187-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84188-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cCbWEFv96Gl5SgIAu9opvQ
-	(envelope-from <linux-doc+bounces-84187-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:54:51 +0200
+	id 4NeLNF796Gl5SgIAu9opvQ
+	(envelope-from <linux-doc+bounces-84188-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:54:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B14448FC6
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:54:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32B67448FCD
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:54:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 03E89308A27B
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5FD6B308BD1C
 	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 16:48:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BAA2937FF58;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBF1F377EDC;
 	Wed, 22 Apr 2026 16:48:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Nkv45CPl"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="SeJbKyaf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E30C223707;
-	Wed, 22 Apr 2026 16:48:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78CFB37D11B
+	for <linux-doc@vger.kernel.org>; Wed, 22 Apr 2026 16:48:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776876535; cv=none; b=uBbryHP1ki3826yfChzUtWapNu3rtXVCuw4wMmXY5Tkl2x/VOoDqZG4BjsBM/k5QrATwcVK1MMpxBvWr6PYVRoHCk8b8/zFMvjTDYkAmWdXN527sp7Dst4K6/D0BkJQwpwVcF506Amo19zb5fcUICkta7ydwWyZwHFMPmX+LZjw=
+	t=1776876535; cv=none; b=s4VDlKrNTxaJRicm8KRCX8xO8OiqiuF2Q0ajPCG8b0tFYlvxDdMmcQ5kVGBWA/2AdAwmRAY7Ri2+TKwS9K9B/+0PYM9iGzBj3RYfkZ/5hhFxMLPekBQwazUxhxHECeqOa3XaaueWZ9g7RbXcHlFG4sQmET6HJlrOZ+rsMNrz2xg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1776876535; c=relaxed/simple;
-	bh=Ag5T+7uI+QiVvyBlLMT3Uh/GKEHxbOA5OKp5bkJmTLo=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=BtWnRMuW+OA8RPaG97i9C8r8IUy2vEjGEEtA0HXtvjhslZAM5gqaT58mmaesdIcUbqhIAHKR3N/2ROoFJy+BD3VdW2YKryEJD5Q0G8MiQW5/uJrPBUTBl/V57hG46TnoLIcAHENKC2KJXZYG4t5IE4RFWjTRY4KC3WgqQYEMp6g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Nkv45CPl; arc=none smtp.client-ip=185.246.84.56
+	bh=hrZpRGWu4LNZeNdHRz/ol6Ax5lsWTUrl8gemjwFLDRU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=mHsR2gPEUdfJ+4N3JX/w5IOhuFu40B72BVC/EPmCUqrNn5WcLjmwcelT5FuqQljvsLsnoL2aGuhFU9V0qzw+cPElxm+JGtPFneZSxeu2cdnjVzdR//FyrrwK7IRLhyii8K0uqQNiPcV9acEmu71JESG5JO6dbg+1IizcB8R6+VQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=SeJbKyaf; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id D458B1A33A5;
-	Wed, 22 Apr 2026 16:48:50 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 0C944C5C1A5;
+	Wed, 22 Apr 2026 16:49:34 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id A4DAD5FA8F;
-	Wed, 22 Apr 2026 16:48:50 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C55E3104609C6;
-	Wed, 22 Apr 2026 18:48:43 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 2A46F5FA8F;
+	Wed, 22 Apr 2026 16:48:53 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C804E104608C5;
+	Wed, 22 Apr 2026 18:48:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1776876529; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding; bh=aO3H8MsXoKzfH918q1hawJrbjm/FDIsXu4wp10cCqs0=;
-	b=Nkv45CPl3r7QYNZytxIiCtMAXDTtZjYJ4M/1/zerDCxfSJUd27nNcoxl3gQZGXmw/0rrA4
-	bmdCTq7YNQelt0GNbGtIYjadA2Ml47wiU3yIz8ZR8luCBio55u0wfqinXuy3wcfu7vJd/o
-	w9iFDFWGL2QlzniklQ6xgp+uKFqHwTjQjZ3mmxkmnoZHmDjOF2MdyrDwO1KGSjCyD7N7Tp
-	IQu2feTom/RQvOJYVv7EDSqI1u0hbZDTxjP6QRxvc/wnMB12Qj8QP86u5SYrZehhFBvNiY
-	nfztgust4sKq1WSUClKYNBaopTukSOdhUTs3VvvHSS3qLTTM6kLk9wshIquh6g==
+	t=1776876532; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=gf9mF48VXHnP1N09HZxt9nMhSHMdo9IElWOjBUOr0+Q=;
+	b=SeJbKyaf0hR5oTLzdYmgOiprU/NYV71OXYDkHxq2eEDthGVirfi/G+LyuVuxBwooK8Qb52
+	KTHTWvVfDfm80HlQvtXKDYImoOe2+VrGJ+ahifvnison89qkEtx2XPPgCkxUCxo9gT9eUy
+	wRsvEKZkA/qxJpgJ8h1ssfTCNUYlA0oEjrukwoVFyXOuPP0k+kyfl2LNJyPmnIIiV7LrdK
+	rcr9NIX8rmM/SgmNRGsA69ZH/MplgkvwGpLXRAPEyt09uUsTvY6POBrQvQgTM7BsOpBfuc
+	0Tkdyp6Mv7nn9OnBguHgZEnQToxhjeHotr3GDxrNvbMmjTMleYnc2CtLZVWA8w==
 From: Louis Chauvet <louis.chauvet@bootlin.com>
-Subject: [PATCH v4 00/37] VKMS: Introduce multiple configFS attributes
-Date: Wed, 22 Apr 2026 18:47:57 +0200
-Message-Id: <20260422-vkms-all-config-v4-0-dbb52e9aadc3@bootlin.com>
+Date: Wed, 22 Apr 2026 18:47:58 +0200
+Subject: [PATCH v4 01/37] drm/drm_mode_config: Add helper to get plane type
+ name
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,12 +63,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAL776GkC/2XOzU4DIRQF4FeZsBaFO3+drnyPxgW/7Y0DVKCkp
- pl3l041ambHITnfPTeSTESTyL65kWgKJgy+hu6pIeok/NFQ1DUTYNBzxkda3l2iYp6pCt7ikUr
- NFAjGd91gSW2do7F4XcXD2yNH83GpcH58EimSqW3nMO8bHR11mNTLz4N6c83k3jxhyiF+rtMKX
- 6vfK3abFYVTRsU4Dmzsez2BfpUh5Bn9cz20agX+CDBtBaiCNMDkJC3vBrMV2l8BALZCexdEB1q
- 1Vk7W/heWZfkCDRKSgm4BAAA=
-X-Change-ID: 20251017-vkms-all-config-bd0c2a01846f
+Message-Id: <20260422-vkms-all-config-v4-1-dbb52e9aadc3@bootlin.com>
+References: <20260422-vkms-all-config-v4-0-dbb52e9aadc3@bootlin.com>
+In-Reply-To: <20260422-vkms-all-config-v4-0-dbb52e9aadc3@bootlin.com>
 To: Haneen Mohammed <hamohammed.sa@gmail.com>, 
  Simona Vetter <simona@ffwll.ch>, Melissa Wen <melissa.srw@gmail.com>, 
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -81,24 +80,23 @@ Cc: victoria@system76.com, sebastian.wick@redhat.com, victoria@system76.com,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  linux-doc@vger.kernel.org, Louis Chauvet <louis.chauvet@bootlin.com>, 
  llvm@lists.linux.dev, 
- =?utf-8?q?Jos=C3=A9_Exp=C3=B3sito?= <jose.exposito@redhat.com>, 
- Luca Ceresoli <luca.ceresoli@bootlin.com>
+ =?utf-8?q?Jos=C3=A9_Exp=C3=B3sito?= <jose.exposito@redhat.com>
 X-Mailer: b4 0.16-dev
 X-Last-TLS-Session-Version: TLSv1.3
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84187-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84188-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,google.com];
-	RCPT_COUNT_TWELVE(0.00)[27];
+	RCPT_COUNT_TWELVE(0.00)[26];
 	FREEMAIL_CC(0.00)[system76.com,redhat.com,gmail.com,bootlin.com,lists.freedesktop.org,vger.kernel.org,lists.linux.dev];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -112,191 +110,72 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.freedesktop.org:email,linuxfoundation.org:email,ffwll.ch:email,suse.de:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:email,bootlin.com:email,bootlin.com:dkim,bootlin.com:mid,linux.dev:email,intel.com:email]
-X-Rspamd-Queue-Id: 91B14448FC6
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,bootlin.com:email,bootlin.com:dkim,bootlin.com:mid]
+X-Rspamd-Queue-Id: 32B67448FCD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-VKMS have a wide range of options. The aim of this series is to introduce
-many configfs attribute so VKMS can be used to test a wide range of
-configurations.
+Create and export an helper to display plane type using the
+property string. This could be used to display debug
+information in VKMS.
 
-PATCH 1-5 are to expose human readable strings from drm core
-PATCH 6 is a fix for rotation value
-PATCH 7 is ABI documentation
-PATCH 8 added some error checks in plane configuration
-PATCH 9 cleanup in plane_release
-PATCH 10-12 change the display in configfs to be more readable
-PATCH 13,14 plane name
-PATCH 15,16 plane rotation
-PATCH 17,18 plane color encoding
-PATCH 19,20 plane color range
-PATCH 21,22 plane format
-PATCH 23 properly use zpos
-PATCH 24,25 plane zpos
-PATCH 26,27 connector type
-PATCH 28 preparation in connector initialization
-PATCH 29,30 connector supported colorspace
-PATCH 31,32 connector EDID
-PATCH 33-35 dynamic connectors
-PATCH 36-37 PATH property
-
-PS: Each pair of config/configfs patch are independant. I could
-technically create ≈10 different series, but there will be a lot of
-(trivial) conflicts between them. I will be happy to reordoer, split and
-partially apply this series to help the review process.
-
+Reviewed-by: José Expósito <jose.exposito@redhat.com>
 Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
 ---
-Changes in v4:
-- Introduced a way to change the PATH property
-- Reordered drm-only patches to the front of the series.
-- Fixed a bug when dynamic connector are allocated/freed (drmm instead of
-  kzalloc)
-- Properly handle errors in vkms_connector_init
-- Only parse formats one by one (no more complex algorithm, you will have
-  to write multiple times for multiple formats)
-- Use sysfs_emit instead of sprintf
-- Fix rotate property default value
-- Link to v3: https://lore.kernel.org/r/20251222-vkms-all-config-v3-0-ba42dc3fb9ff@bootlin.com
+ drivers/gpu/drm/drm_mode_config.c | 16 ++++++++++++++++
+ include/drm/drm_mode_config.h     |  3 +++
+ 2 files changed, 19 insertions(+)
 
-Changes in v3:
-- Added Documentation/ABI (Thomas Petazzoni)
-- PATCH 2: Clarify return value
-- PATCH 6,7: Avoid passing null to printf
-- PATCH 7: Restrict plane name to A-Za-z0-9
-- PATCH 12: Fix missing s
-- PATCH 13: Add macro to avoid repetition, fix missing s, make code
-  consistent, remove wrong comment, properly check bit values
-- PATCH 15: Fix missing s
-- PATCH 16: Fix missing s, make code consistent, remove wrong comments,
-  properly check value and fix default_color_range value
-- PATCH 17: Create function to reduce code complexity, fix missing s
-- PATCH 18: Fix parsing, rename data, reject strings > 4 chars
-- PATCH 20: Remove duplicated lines, fix test comments simplify conditions,
-  remove useless documentation, 
-- PATCH 21: {Min,Max}imal -> {Min,Max}imum, simplify commit log
-- PATCH 25: Fix wrong comment
-- PATCH 26: Rename type to colorspaces
-- PATCH 27: Improve comment, avoid useless iterations
-- PATCH 28: Fix typo in commit log
-- PATCH 29: Fix typo in commit log
-- PATCH 30: Remove useless include and move it to proper commit
-- PATCH 32: Clarify documentation
-- PATCH 33: Simplify code and use better variable names
-- PATCH *: Fix EINVAL/EBUSY
-- Link to v2: https://lore.kernel.org/r/20251029-vkms-all-config-v2-0-be20b9bf146e@bootlin.com
+diff --git a/drivers/gpu/drm/drm_mode_config.c b/drivers/gpu/drm/drm_mode_config.c
+index 66f7dc37b597..2855a0262972 100644
+--- a/drivers/gpu/drm/drm_mode_config.c
++++ b/drivers/gpu/drm/drm_mode_config.c
+@@ -231,6 +231,22 @@ static const struct drm_prop_enum_list drm_plane_type_enum_list[] = {
+ 	{ DRM_PLANE_TYPE_CURSOR, "Cursor" },
+ };
+ 
++/**
++ * drm_get_plane_type_name - return a string for plane name
++ * @type: plane type to compute name of
++ *
++ * Returns: The name of the plane type. "(unknown)" if type is not a known
++ * plane type.
++ */
++const char *drm_get_plane_type_name(enum drm_plane_type type)
++{
++	if (type >= 0 && type < ARRAY_SIZE(drm_plane_type_enum_list))
++		return drm_plane_type_enum_list[type].name;
++	else
++		return "(unknown)";
++}
++EXPORT_SYMBOL(drm_get_plane_type_name);
++
+ static int drm_mode_create_standard_properties(struct drm_device *dev)
+ {
+ 	struct drm_property *prop;
+diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+index 687c0ee163d2..2df7c0be17fc 100644
+--- a/include/drm/drm_mode_config.h
++++ b/include/drm/drm_mode_config.h
+@@ -30,6 +30,7 @@
+ #include <linux/llist.h>
+ 
+ #include <drm/drm_modeset_lock.h>
++#include <drm/drm_plane.h>
+ 
+ struct drm_file;
+ struct drm_device;
+@@ -1010,4 +1011,6 @@ static inline int drm_mode_config_init(struct drm_device *dev)
+ void drm_mode_config_reset(struct drm_device *dev);
+ void drm_mode_config_cleanup(struct drm_device *dev);
+ 
++const char *drm_get_plane_type_name(enum drm_plane_type type);
++
+ #endif
 
-Changes in v2:
-- PATCH 1: reorder includes (José)
-- PATCH 2: use name property instead of folder name (José)
-- PATCH 3: Fix default rotations (José)
-- PATCH 3,5,7,12: Add tests and extract validation for planes (José)
-- PATCH 3,5: Do not create color range/encoding properties if not set
-- PATCH 5,6,7,8: Set plural form for vkms_config_plane fields (José)
-- PATCH 4,6,8,13: Remove checking for default in supported (José)
-- PATCH 9: Add break in vkms_config_plane_add_format (José)
-- PATCH 12: fix zpos_enabled typo (José)
-- PATCH 13: fix documentation (José)
-- Add debug display (José)
-- PATCH 20: use drmm_kzalloc instead of kzalloc (José)
-- PATCH 22: simplify the code (José)
-- Link to v1: https://lore.kernel.org/r/20251018-vkms-all-config-v1-0-a7760755d92d@bootlin.com
-
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-To: Maxime Ripard <mripard@kernel.org>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-To: David Airlie <airlied@gmail.com>
-To: Simona Vetter <simona@ffwll.ch>
-To: Louis Chauvet <louis.chauvet@bootlin.com>
-To: Haneen Mohammed <hamohammed.sa@gmail.com>
-To: Melissa Wen <melissa.srw@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>
-To: Shuah Khan <skhan@linuxfoundation.org>
-To: Miguel Ojeda <ojeda@kernel.org>
-To: Nathan Chancellor <nathan@kernel.org>
-To: Nick Desaulniers <nick.desaulniers+lkml@gmail.com>
-To: Bill Wendling <morbo@google.com>
-To: Justin Stitt <justinstitt@google.com>
-Cc: thomas.petazzoni@bootlin.com
-Cc: dri-devel@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org
-Cc: linux-doc@vger.kernel.org
-Cc: llvm@lists.linux.dev
-
----
-Louis Chauvet (37):
-      drm/drm_mode_config: Add helper to get plane type name
-      drm/blend: Get a rotation name from it's bitfield
-      drm/drm_color_mgmt: Expose drm_get_color_encoding_name
-      drm/drm_color_mgmt: Expose drm_get_color_range_name
-      drm/connector: Export drm_get_colorspace_name
-      drm/drm_atomic_state_helper: Properly load default value for rotation
-      Documentation: ABI: vkms: Add current VKMS ABI documentation
-      drm/vkms: Add error handling in plane config creation
-      drm/vkms: Simplify plane_release code
-      drm/vkms: Explicitly display plane type
-      drm/vkms: Use enabled/disabled instead of 1/0 for debug
-      drm/vkms: Explicitly display connector status
-      drm/vkms: Introduce config for plane name
-      drm/vkms: Introduce configfs for plane name
-      drm/vkms: Introduce config for plane rotation
-      drm/vkms: Introduce configfs for plane rotation
-      drm/vkms: Introduce config for plane color encoding
-      drm/vkms: Introduce configfs for plane color encoding
-      drm/vkms: Introduce config for plane color range
-      drm/vkms: Introduce configfs for plane color range
-      drm/vkms: Introduce config for plane format
-      drm/vkms: Introduce configfs for plane format
-      drm/vkms: Properly render plane using their zpos
-      drm/vkms: Introduce config for plane zpos property
-      drm/vkms: Introduce configfs for plane zpos property
-      drm/vkms: Introduce config for connector type
-      drm/vkms: Introduce configfs for connector type
-      drm/vkms: Rename vkms_connector_init to vkms_connector_init_static
-      drm/vkms: Introduce config for connector supported colorspace
-      drm/vkms: Introduce configfs for connector supported colorspace
-      drm/vkms: Introduce config for connector EDID
-      drm/vkms: Introduce configfs for connector EDID
-      drm/vkms: Store the enabled/disabled status for connector
-      drm/vkms: Allow to hot-add connectors
-      drm/vkms: Introduce configfs for dynamic connector creation
-      drm/vkms: Add connector parent configuration in vkms_config
-      drm/vkms: Add ConfigFS interface for connector parent and port_id
-
- .clang-format                                   |    2 +
- Documentation/ABI/testing/configfs-vkms         |  256 ++++
- Documentation/gpu/vkms.rst                      |   45 +-
- drivers/gpu/drm/drm_atomic_state_helper.c       |    6 +
- drivers/gpu/drm/drm_blend.c                     |   35 +-
- drivers/gpu/drm/drm_color_mgmt.c                |    4 +-
- drivers/gpu/drm/drm_connector.c                 |    1 +
- drivers/gpu/drm/drm_crtc_internal.h             |    6 -
- drivers/gpu/drm/drm_mode_config.c               |   16 +
- drivers/gpu/drm/vkms/tests/Makefile             |    3 +-
- drivers/gpu/drm/vkms/tests/vkms_config_test.c   |  513 +++++++-
- drivers/gpu/drm/vkms/tests/vkms_configfs_test.c |  102 ++
- drivers/gpu/drm/vkms/vkms_config.c              |  425 ++++++-
- drivers/gpu/drm/vkms/vkms_config.h              |  640 +++++++++-
- drivers/gpu/drm/vkms/vkms_configfs.c            | 1444 +++++++++++++++++++----
- drivers/gpu/drm/vkms/vkms_configfs.h            |    4 +
- drivers/gpu/drm/vkms/vkms_connector.c           |  266 ++++-
- drivers/gpu/drm/vkms/vkms_connector.h           |   48 +-
- drivers/gpu/drm/vkms/vkms_crtc.c                |   10 +-
- drivers/gpu/drm/vkms/vkms_output.c              |   15 +-
- drivers/gpu/drm/vkms/vkms_plane.c               |   73 +-
- include/drm/drm_blend.h                         |    2 +
- include/drm/drm_color_mgmt.h                    |    3 +
- include/drm/drm_mode_config.h                   |    3 +
- 24 files changed, 3623 insertions(+), 299 deletions(-)
----
-base-commit: 8711eb2dde2ed44c98714b875dcf7329950c71ba
-change-id: 20251017-vkms-all-config-bd0c2a01846f
-
-Best regards,
---  
-Louis Chauvet <louis.chauvet@bootlin.com>
+-- 
+2.54.0
 
 
