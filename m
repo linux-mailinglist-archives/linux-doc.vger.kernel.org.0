@@ -1,60 +1,60 @@
-Return-Path: <linux-doc+bounces-84193-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84194-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qJq2KZv86Gl5SgIAu9opvQ
-	(envelope-from <linux-doc+bounces-84193-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:51:39 +0200
+	id mH1DLrD86Gl5SgIAu9opvQ
+	(envelope-from <linux-doc+bounces-84194-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:52:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D045448EE4
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:51:38 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 27796448EEC
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 18:52:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 490D73022F6E
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 16:49:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7BD9D3037665
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 16:49:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 731F6381B00;
-	Wed, 22 Apr 2026 16:49:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04DBF38D017;
+	Wed, 22 Apr 2026 16:49:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="QDhhzZR8"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="HcDVAzTH"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00C3738BF67
-	for <linux-doc@vger.kernel.org>; Wed, 22 Apr 2026 16:49:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7694D382F20
+	for <linux-doc@vger.kernel.org>; Wed, 22 Apr 2026 16:49:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776876550; cv=none; b=gTupM4ZFdPCCqVB8SsmgjEzN3/7hbgfLOZpjqWYJCt8xvEV2lPNeh+tzqT5543/RyF3I0ZQq3uwxo6vUlsJVxhoa/ty7J/CcTt3aszn94Rg+DotX1dPYEw6GW3uC7JFxsoSy61mNN/su+BOkQQtUyQpx4DmQC+fnP3G6mJjBLDs=
+	t=1776876552; cv=none; b=VpFeYKXyJAm5gzM4B65/vruimnZ6QlAWWYUpkLItygKIAo8Yn1DaX8u7YkzZ7izCDWYEaNdAtK6TSo9TP4oyMVbaUUCwiq3zmtTX3GTewYedpgV4mcywhPeK0GwN8qGV7BYn7m6uMv7sybAsIAFdxBZcXPGItMULptMgV1FONN0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776876550; c=relaxed/simple;
-	bh=T7fGbMxDqwWl/YlJbx6PYupbGjEruCinEDQCQvdpRxY=;
+	s=arc-20240116; t=1776876552; c=relaxed/simple;
+	bh=M4IKg4jtN2coKi4h2W5OHuSx8L+kOjlkuI6yHVh2tSk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=iNNPw0v/hz/BlJ9VC2X2C0ujYZgaeLV47zVlD9BGwovQrGb2ayT150ZQcqIr3kAepIJDNxFxIGANlalXqExwDXl4G3R/MRijldG2DsLYC/aJoVjiZfY18eT+9TtENJdeZ0OfWmqaZkIXlkDukB0d91qIr2LHLrptd1MbNvdR0jU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=QDhhzZR8; arc=none smtp.client-ip=185.171.202.116
+	 In-Reply-To:To:Cc; b=Dr0m9oGJ0w9MqKYh8hUn4Klcv0BKDMADzkmBEXQC0LJvc2CiRt9gAtzqyDZ/G4zA0C6W+LHWhEKD12X0Qj8FtYFKKCudRro21ux7UVAG82+1+otq0TyRcpNPEY40NOyeeHLj6Q/kTDVzQ1F/cDiQMMfPFQ0AOhe4pJW9kgy/3dk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=HcDVAzTH; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 8FE3CC5AA8C;
-	Wed, 22 Apr 2026 16:49:48 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 2072CC59952;
+	Wed, 22 Apr 2026 16:49:51 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id AD2F15FA8F;
-	Wed, 22 Apr 2026 16:49:07 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1D4F910460C0F;
-	Wed, 22 Apr 2026 18:49:04 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 3EBFE5FA8F;
+	Wed, 22 Apr 2026 16:49:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CE2F310460BF3;
+	Wed, 22 Apr 2026 18:49:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1776876546; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1776876549; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=AwmYa1vngn+nSmQNXGb3qaN5w3tDhbVRzcmSdCp8gCU=;
-	b=QDhhzZR8JJ20/5xnZWVgACSeTlk+eSlVualSxdsiwQw0HxLyHakSJOXWi9QyCE9mPG1XVK
-	9yqWFPDX2ctnzLISfSSGuGTo8VzjysqJ0D0fET6GWQzRi2WpStZ7YaLMtwlnaxMxXoa6g/
-	7bp+3/VfYMtJb+kqzaVH0x28dQ8PP/J5qUNItt6ZKxo4Spi4URGA/1nmbj6s/hAy/EWkj4
-	bKyyKvVEzQzp989EnEy5/e77vMCPOB5GK6geC39UjDV+i9HDxECjl1evxbj+GtBrjdZFlr
-	qRjNokVWFxJHGB7BlB60ht7/LsCJy1mZc72GT/SLTovQUfv6XEHsvu8CxWHqLg==
+	bh=OZ8EM81DGMlJ9qEgvUE9Mt5KnFr4O4RtbirwspUTjRM=;
+	b=HcDVAzTHVCirt6CQPqvVisMsLuiOiNG9IUbiBRETLuOVj8WUqocJRx1lyWQbRSi9wAQF8d
+	bszoxzq8RBSAGFtIwmj/f7dBd5XGTeoK01YRpA5XQKjna2jsThDFyAfHF3w7zSjkgfZzOm
+	pag0n5lYdrG2tgfjncUEkL5XUIe8rZsq5Ey+FDxYlO905hZyTgeZqDq4piwnVfK4w7SEnt
+	O5UxtifKtDf2i8/Oux94IqTEl21Wkfr5yqRB0/47ZTVE17eFd2lVLLWYvXVYwOgv0tK/8O
+	EEHzSqAjWmWwMCQ2IpDAk6nfg5BO7hiAkRdor7docN5tA32iDQcn8pqcqAc77Q==
 From: Louis Chauvet <louis.chauvet@bootlin.com>
-Date: Wed, 22 Apr 2026 18:48:03 +0200
-Subject: [PATCH v4 06/37] drm/drm_atomic_state_helper: Properly load
- default value for rotation
+Date: Wed, 22 Apr 2026 18:48:04 +0200
+Subject: [PATCH v4 07/37] Documentation: ABI: vkms: Add current VKMS ABI
+ documentation
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,8 +62,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260422-vkms-all-config-v4-6-dbb52e9aadc3@bootlin.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260422-vkms-all-config-v4-7-dbb52e9aadc3@bootlin.com>
 References: <20260422-vkms-all-config-v4-0-dbb52e9aadc3@bootlin.com>
 In-Reply-To: <20260422-vkms-all-config-v4-0-dbb52e9aadc3@bootlin.com>
 To: Haneen Mohammed <hamohammed.sa@gmail.com>, 
@@ -86,12 +86,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84193-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84194-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FREEMAIL_TO(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,google.com];
@@ -109,50 +109,145 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc,lkml];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,bootlin.com:email,bootlin.com:dkim,bootlin.com:mid]
-X-Rspamd-Queue-Id: 0D045448EE4
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.freedesktop.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,bootlin.com:email,bootlin.com:dkim,bootlin.com:mid]
+X-Rspamd-Queue-Id: 27796448EEC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Currently, the default rotation is always DRM_MODE_ROTATE_0 for all planes.
-Some planes may have a rotation property, and the property may specify a
-different default value and supported values.
-
-This is not an issue for "fixed" configurations, but with the introduction
-of VKMS configuration, some plane may only support 90° and 180°
-rotations, so the reset state of the plane was wrong (forced to 0°).
+VKMS recently introduced a ConfigFS API to configure new devices.
+Add proper ABI documentation.
 
 Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
 ---
- drivers/gpu/drm/drm_atomic_state_helper.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ Documentation/ABI/testing/configfs-vkms | 118 ++++++++++++++++++++++++++++++++
+ 1 file changed, 118 insertions(+)
 
-diff --git a/drivers/gpu/drm/drm_atomic_state_helper.c b/drivers/gpu/drm/drm_atomic_state_helper.c
-index 76746ad4a1bb..d2b325d6fc4b 100644
---- a/drivers/gpu/drm/drm_atomic_state_helper.c
-+++ b/drivers/gpu/drm/drm_atomic_state_helper.c
-@@ -32,6 +32,7 @@
- #include <drm/drm_crtc.h>
- #include <drm/drm_device.h>
- #include <drm/drm_framebuffer.h>
-+#include <drm/drm_mode_object.h>
- #include <drm/drm_plane.h>
- #include <drm/drm_print.h>
- #include <drm/drm_vblank.h>
-@@ -251,6 +252,11 @@ void __drm_atomic_helper_plane_state_reset(struct drm_plane_state *plane_state,
- 
- 	plane_state->plane = plane;
- 	plane_state->rotation = DRM_MODE_ROTATE_0;
-+	if (plane->rotation_property &&
-+	    !drm_object_property_get_default_value(&plane->base,
-+						   plane->rotation_property,
-+						   &val))
-+		plane_state->rotation = val;
- 
- 	plane_state->alpha = DRM_BLEND_ALPHA_OPAQUE;
- 	plane_state->pixel_blend_mode = DRM_MODE_BLEND_PREMULTI;
+diff --git a/Documentation/ABI/testing/configfs-vkms b/Documentation/ABI/testing/configfs-vkms
+new file mode 100644
+index 000000000000..a1a3e186e50a
+--- /dev/null
++++ b/Documentation/ABI/testing/configfs-vkms
+@@ -0,0 +1,118 @@
++What:		/sys/kernel/config/vkms/
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++        This group contains sub-groups corresponding to created
++	VKMS devices.
++
++What:		/sys/kernel/config/vkms/<device>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the VKMS
++	device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/connectors
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	connectors of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/connectors/<connector>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	connector <connector> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/connectors/<connector>/status
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Connection status of the connector. Possible values:
++	1 - connected, 2 - disconnected, 3 - unknown.
++
++What:		/sys/kernel/config/vkms/<device>/connectors/<connector>/possible_encoders
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains symbolic links to possible encoders
++	for this connector.
++
++What:		/sys/kernel/config/vkms/<device>/crtcs
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	CRTCs of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/crtcs/<crtc>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	CRTC <crtc> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/crtcs/<crtc>/writeback
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Enable or disable writeback connector support for this
++	CRTC. Value: 1 - enabled, 0 - disabled.
++
++What:		/sys/kernel/config/vkms/<device>/encoders
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	encoders of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/encoders/<encoder>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	encoder <encoder> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/encoders/<encoder>/possible_crtcs
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains symbolic links to possible CRTCs
++	for this encoder.
++
++What:		/sys/kernel/config/vkms/<device>/planes
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains sub-groups corresponding to the
++	planes of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/planes/<plane>
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains attributes corresponding to the
++	plane <plane> of the VKMS device <device>.
++
++What:		/sys/kernel/config/vkms/<device>/planes/<plane>/type
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Plane type. Possible values: 0 - overlay, 1 - primary,
++	2 - cursor.
++
++What:		/sys/kernel/config/vkms/<device>/planes/<plane>/possible_crtcs
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	This group contains symbolic links to possible CRTCs
++	for this plane.
++
++What:		/sys/kernel/config/vkms/<device>/enabled
++Date:		Nov 2025
++Contact:	dri-devel@lists.freedesktop.org
++Description:
++	Enable or disable the VKMS device. Value: 1 - enabled,
++	0 - disabled.
 
 -- 
 2.54.0
