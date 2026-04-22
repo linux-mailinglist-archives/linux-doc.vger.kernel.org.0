@@ -1,130 +1,171 @@
-Return-Path: <linux-doc+bounces-84151-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84158-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gLfcE0Cx6GmIOwIAu9opvQ
-	(envelope-from <linux-doc+bounces-84151-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 13:30:08 +0200
+	id KGvmK8u56GkHPgIAu9opvQ
+	(envelope-from <linux-doc+bounces-84158-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 14:06:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB03A4455FC
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 13:30:07 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D27E445B1D
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 14:06:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D1F81302880A
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 11:27:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4207E3020D5A
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2026 12:06:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 204243CF67A;
-	Wed, 22 Apr 2026 11:27:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 05AE040DFAC;
+	Wed, 22 Apr 2026 12:06:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="YfLDCdPf"
+	dkim=pass (2048-bit key) header.d=inventec.com header.i=@inventec.com header.b="C8RwsDW5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7ED127FB05;
-	Wed, 22 Apr 2026 11:27:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39B7D1E5724
+	for <linux-doc@vger.kernel.org>; Wed, 22 Apr 2026 12:06:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776857257; cv=none; b=t2aAoIvfDDLyRke+tjh0mUiKN5o1isdomwaNXHHuF77BbReMIZRTUzYSYLcxTzST5rN17pA86gS3zx5P1xGUdyI4eUtUmKDO3zZj0r83hgr/yev7Y7St8O/Qo4Lt+D1+QuyCzm7KbMmuEtqHmSgirnpgwciz23tIfb8MklivDds=
+	t=1776859584; cv=none; b=EdmUtieNynKB+g1FVvPdoSprmug01KzF0f8E145hVeb70Y2ZDijnvW0hzQSMyoYmhmJRA/WRfek7OnS/dLZrJGMQv41nUJNt+4XHT7gaBPkAlIdcB8QvXmhRJCJ6rltga0miqc+6r+/C+8glupKV/Y39v4rF3iPDSqsKO5/wKlU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776857257; c=relaxed/simple;
-	bh=I3A5vzKKmr/BUI6ycsaCFjVHGYLX/XgpV0LIBxr//m8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eSlqB5R9pb+rOkdZcfMXmYvmVzTdBf7zqTVfPrjFN04ldvYmvxjBbvXG+UD6fBvqFhllyDxOS6+rv0sNZny2IAOlivOcaDtDNSjFVfeluHwCIYL5018DUwJDRziMbfqG7NuvL1aAypUkgs6PCJBx8JrtoGH2+I0ZHc656ZLHNqE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=YfLDCdPf; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F691C19425;
-	Wed, 22 Apr 2026 11:27:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1776857256;
-	bh=I3A5vzKKmr/BUI6ycsaCFjVHGYLX/XgpV0LIBxr//m8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=YfLDCdPfbKxE9Xc7LpMa2DM5pnZjmOevyPXZFaZE0gSZTKcZeYWXJXrdiDo8T9uJ6
-	 Ab7ip7yS9aOhyVUAZMxhCMdqkjM18P8PA9zl3FSei8FD5Gc5TMPib7dy46S7SbXU0N
-	 aM2gizjEpmMUr5XS49klkkfNwWulksbEsHVHpbsU=
-Date: Wed, 22 Apr 2026 13:27:34 +0200
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Shashank Balaji <shashank.mahadasyam@sony.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Mike Leach <mike.leach@linaro.org>,
-	James Clark <james.clark@linaro.org>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Rahul Bukte <rahul.bukte@sony.com>, linux-kernel@vger.kernel.org,
-	coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
-	driver-core@lists.linux.dev, rust-for-linux@vger.kernel.org,
-	linux-doc@vger.kernel.org, Daniel Palmer <daniel.palmer@sony.com>,
-	Tim Bird <tim.bird@sony.com>
-Subject: Re: [PATCH v3 4/4] docs: driver-api: add mod_name argument to
- __platform_register_drivers()
-Message-ID: <2026042214-awaken-slouchy-4903@gregkh>
-References: <20260422-acpi_mod_name-v3-0-a184eff9ff6f@sony.com>
- <20260422-acpi_mod_name-v3-4-a184eff9ff6f@sony.com>
+	s=arc-20240116; t=1776859584; c=relaxed/simple;
+	bh=0sGt7tGb/oUppsoQ7+XY3YPpBC8TN2PAJSBkXI7Yb/w=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VTjSoAIdUQApdDMPD9egOFHJbrWQ8K3ToYK6AM3dSEijfZ+yhfB2J6aJ64HpoSEeLbYwF7kx2oGu7ptWtpLTIw49DGnk3+lqdKS27gfrqwNtcA/9QNE3cKn0nl4L5/sqyPcquzjYAR5tHaaOAih8/SBoNmylV5fxtwXzyP55PZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=inventec.com; spf=pass smtp.mailfrom=inventec.com; dkim=pass (2048-bit key) header.d=inventec.com header.i=@inventec.com header.b=C8RwsDW5; arc=none smtp.client-ip=209.85.210.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=inventec.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inventec.com
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-82f0884bcfaso3800523b3a.1
+        for <linux-doc@vger.kernel.org>; Wed, 22 Apr 2026 05:06:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=inventec.com; s=google; t=1776859580; x=1777464380; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=TRukHJ5+Ru4qIAkKpP+16WGIqlF7mx9ZTtZzr3fi67c=;
+        b=C8RwsDW54b7UzhlOmaV+WB+j28pmzbhFFH/KQwbSTK584ENhXxp1XfIz99lY/7WHhA
+         RHa6tqZfqlFJE6ppi2K9uq5Ic/Ui+j+i5QmfaK2vxU3dubpq/9keLPTxsnwLcB5igNuL
+         iUf7/OMLCsHDugl+rQfo568d5iaPUzFrxP9VECTt5dVuShGXxUBUV1EyegBknxpX6Pxl
+         kABJ1TK3K/KwRdqnW4xkpT0GY03dOiYLG5esHWzOqu1siIcjPpfjL5uXvZQLAvcfEySh
+         fyUFyNFISOsps8StIzf/Bz78LaAKBJq2nAuyiroGYgYFMCpE4RNtMML6J4xkvt2qfPu8
+         RmCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776859580; x=1777464380;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TRukHJ5+Ru4qIAkKpP+16WGIqlF7mx9ZTtZzr3fi67c=;
+        b=dkz7JNQ04ZVWieFxxy15libGfGKoEXTSGyKiSV+jTBZIb+FzOktMQw+JxfEcIbU82/
+         ZmRKXDiUp83XOZPLK2zSxiv+MR8eJr2X5uzs897IQn0Odp1avEHlLkepBWrZhD450Ih5
+         n5bMlG8foW7vmb7FMVL4cjYQ4Jogz4HiABcctpwgXZ3+JldxdGNRGCBj94OXduK3VED2
+         iZog3FBT7Mm1bUtgX8PkhFQRyUKDdSPoTE19mtICdqhJnW0pfSs8bc8XGXlqG2GNTUpb
+         Y/uJ41muGkpmsK5sAIBQjHzs78987KQMioPqaFXy9iIxweiODE/hLlW6/c1HgRczsCts
+         k8Dg==
+X-Forwarded-Encrypted: i=1; AFNElJ/JOqPeEJlRZZFlhkRGRZfRKDBIdloeRcYiJS+HJdxDnxAPQTZcklLqTc7e1QjHi66k7J61HP4H/3g=@vger.kernel.org
+X-Gm-Message-State: AOJu0YysvKoRUKQjUU02kA/QVYRIm2L9EJ9y34/ZkcNYnAzu2aK8BgWg
+	29tdnLxMUd8EKoC7UmFelo/QoHgQLd14Iw76UwkFK6pJ9m5wFwAStcu6SPOMwIijeRk=
+X-Gm-Gg: AeBDiesZUwI8cfV3TCm3El6cti5d/Vw8DC1/nUfIxT+MjUQfbWxAgGgBf2UOBfKtPzg
+	ND1XZx7jPIckh5BFlwLNSFczcFs0/b6LtgsMguSvZ9Foxv5KJsow8fwet1MqX/LcwgbmTUjXKpP
+	s0/ts01TgMWjPULd5UpN0ZaMEZETLF8KTrxOedExGOcYLZdEmq60mWx9MMYkx+8AA3fGGrOZdkb
+	GgVR2KkKN+eCHy38dTLCBlGOBGE4Tl8ccDh4k07vyZ1+KDjDW8ECk0VAzxMXe1mrrDropoZVrLP
+	RVRX0blNLJIN9InTkWkRwqvZTs++SvVHUdqPwTv8GX65NcofLy8CmeTT5e24gljXi+tA/iBSHuY
+	/y9PE9S8Zv1kMlP1mNlDH7R3exn6X6b3O9utQl8RDoodoaWApvk3BAHhXtCG4/OPe5b2adLqe8h
+	/B/EAWyLnA3a5ZknZfiBBOylfvMybzUqvDUlS6Vf9vdxiRn435RkZfpgx42Y1pTg1EENC/sJ+he
+	lkW
+X-Received: by 2002:a05:6a00:800d:b0:82c:9223:cc95 with SMTP id d2e1a72fcca58-82f8c7db124mr23037967b3a.1.1776859580609;
+        Wed, 22 Apr 2026 05:06:20 -0700 (PDT)
+Received: from [127.0.1.1] (60-250-242-163.hinet-ip.hinet.net. [60.250.242.163])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82f8ebb3fa2sm17086636b3a.29.2026.04.22.05.06.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Apr 2026 05:06:20 -0700 (PDT)
+From: Brian Chiang <chiang.brian@inventec.com>
+Subject: [PATCH 0/2] Add support for LX1308
+Date: Wed, 22 Apr 2026 12:06:14 +0000
+Message-Id: <20260422-add-support-lx1308-v1-0-9b8322f45aae@inventec.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260422-acpi_mod_name-v3-4-a184eff9ff6f@sony.com>
-X-Spamd-Result: default: False [3.84 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALa56GkC/x3MQQqAIBBA0avIrBtQK6muEi0spxqIFK0IorsnL
+ d/i/wcSRaYEnXgg0sWJ/Z6hCgHTaveFkF02aKmNrFSN1jlMZwg+HrjdqpQNKlPbSktjR9NCDkO
+ kme9/2g/v+wEbj6xAZAAAAA==
+To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Brian Chiang <chiang.brian@inventec.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1776859578; l=1370;
+ i=chiang.brian@inventec.com; s=20260316; h=from:subject:message-id;
+ bh=0sGt7tGb/oUppsoQ7+XY3YPpBC8TN2PAJSBkXI7Yb/w=;
+ b=N9fuTYJgRN5ExWOTg4bq6rBoSG4vqQoFOYuBiPaCc92mrGji5hCouycK95XY1YZ8OKgv4Agu6
+ 15LNYUcB4ysAH6tdCHg3zMLOEO+cTWQm9R2jUxG1WkjXMgEsN0G+T8o
+X-Developer-Key: i=chiang.brian@inventec.com; a=ed25519;
+ pk=q+NqJYuJbGpA9KS9941D7f+8PVVW+k7DvaGgFykBiUc=
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[inventec.com,reject];
+	R_DKIM_ALLOW(-0.20)[inventec.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84151-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[inventec.com:+];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	FREEMAIL_CC(0.00)[arm.com,linaro.org,linux.intel.com,gmail.com,foss.st.com,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linuxfoundation.org,sony.com,vger.kernel.org,lists.linaro.org,lists.infradead.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-84158-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,linuxfoundation.org:dkim,sony.com:email]
-X-Rspamd-Queue-Id: DB03A4455FC
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[chiang.brian@inventec.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 5D27E445B1D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Wed, Apr 22, 2026 at 06:49:06PM +0900, Shashank Balaji wrote:
-> Co-developed-by: Rahul Bukte <rahul.bukte@sony.com>
-> Signed-off-by: Rahul Bukte <rahul.bukte@sony.com>
-> Signed-off-by: Shashank Balaji <shashank.mahadasyam@sony.com>
-> ---
->  Documentation/driver-api/driver-model/platform.rst | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+The LX1308 is a high-efficiency, non-isolated power module. The module
+operates from a 40V to 60V DC primary bus and a 12V regulated output
+voltage. It can deliver up to 860W continuous and 1300W in transient.
+The built-in digital controller can store and restore module
+configurations. The fault status, input voltage, output voltage, output
+current, and temperature are monitored via the PMBus interface.
 
-For obvious reasons we can't take patches without any changelog text at
-all (and neither should you want us to...)
+Add support for this driver.
 
-thanks,
+Signed-off-by: Brian Chiang <chiang.brian@inventec.com>
+---
+Brian Chiang (2):
+      dt-bindings: (pmbus/lx1308) Add LX1308 support
+      hwmon: (pmbus/lx1308) Add support for LX1308
 
-greg k-h
+ .../bindings/hwmon/pmbus/luxshare,lx1308.yaml      |  49 +++++
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ Documentation/hwmon/index.rst                      |   1 +
+ Documentation/hwmon/lx1308.rst                     |  90 +++++++++
+ MAINTAINERS                                        |   8 +
+ drivers/hwmon/pmbus/Kconfig                        |  10 +
+ drivers/hwmon/pmbus/Makefile                       |   1 +
+ drivers/hwmon/pmbus/lx1308.c                       | 204 +++++++++++++++++++++
+ 8 files changed, 365 insertions(+)
+---
+base-commit: 591cd656a1bf5ea94a222af5ef2ee76df029c1d2
+change-id: 20260415-add-support-lx1308-165a4206ab69
+
+Best regards,
+-- 
+Brian Chiang <chiang.brian@inventec.com>
+
 
