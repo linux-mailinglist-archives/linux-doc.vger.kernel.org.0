@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-84409-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84410-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WAwJM8SO6mnK0gIAu9opvQ
-	(envelope-from <linux-doc+bounces-84409-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:32 +0200
+	id 4K/rM/aO6mnK0gIAu9opvQ
+	(envelope-from <linux-doc+bounces-84410-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:28:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90DC7457DAB
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:32 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72671457DE0
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:28:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 81834306A40E
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:25:00 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6E184308C332
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:25:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E07EE3C6606;
-	Thu, 23 Apr 2026 21:23:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93D023C061D;
+	Thu, 23 Apr 2026 21:23:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="S6Yg/35I"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="JKgJaVln"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail-pl1-f201.google.com (mail-pl1-f201.google.com [209.85.214.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3CEE3AEF49
-	for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 21:23:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55D543C455F
+	for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 21:23:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776979425; cv=none; b=haWVr9yU3qeNqptFBKuKvUNZGdCKYYURreO+8moFGACMj6WgenmnKMIMtP8rhJagH8LlfgnbmrML7Xx9mwwhrYCxxnjcZfHytpr00eSuotHtjs0hBazZgOET2rUaqbPH1dXy7JUyvG4TQTyKGXyfwzb5CMFKJWs7hc737j73yAI=
+	t=1776979428; cv=none; b=sWCU/vm6hp9cDCgCd6qDp/FshekDmpiSdoUG+PPcWS5Uz2KGP1tljZyxPkslIOUTzAZiWjfoQxOwI2Utz+l09LgFAXEdFs/l3irQxyhSjsKzCyj21q/j2QA+nOyA4zJyX6sfkDIvvz/8TidwZXD5MfCg20A2sNtlEyUsauMM5ZI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776979425; c=relaxed/simple;
-	bh=Oe8MwOihG5BzjH99EK3y2Iy4j4M/3j0maoUzCe5H9s8=;
+	s=arc-20240116; t=1776979428; c=relaxed/simple;
+	bh=TAk9N0onkf1LhiBL762i+SXrkfm+35fT9FFl7hPmejg=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=hIrcHQI9mQiKcwPZGhGotVhxF91uJhnYnZX9ObBiA+8XPdvlJu0Gz2q2I4RpjtHwgI969idRj9KhoKqHPPyxYbF2V/sO9LNBFgKOUnXT4O96ucmu/yX5Rfv272QDso0ikmi7hiPatSIWG0agaKASLQX140LSY10I2o6lUfLez8U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=S6Yg/35I; arc=none smtp.client-ip=209.85.214.201
+	 To:Cc:Content-Type; b=dd0R3EvzVAtzeu4ZHNjG45PszP+M+cHMQNMhu+UsY666ybxzNXABiiQjE9nvl8QyfrBygXTQ0xmDpKDpynzeSEs914sYT3H/2NvrM7Rug1Mv+M4x2/g8xbgq6vOQ4j+sXomXmPQVPPtZhts1/2lNtFWqnuToUTx1vd3gG6MvgQU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=JKgJaVln; arc=none smtp.client-ip=209.85.214.201
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com
-Received: by mail-pl1-f201.google.com with SMTP id d9443c01a7336-2b249541063so64139095ad.3
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 14:23:39 -0700 (PDT)
+Received: by mail-pl1-f201.google.com with SMTP id d9443c01a7336-2b2e8bba2e6so100401415ad.1
+        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 14:23:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1776979418; x=1777584218; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1776979420; x=1777584220; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=NDSmr3KzvFf45fqXLLacm4Nig+LS/n/kl38OHtIvfGo=;
-        b=S6Yg/35I+BOb4hlpM7fzMitlnY4VsnIm8RupHp0/S0Bs1Bi9GhkNJoPAuow9rzY+vH
-         ustao6je+FQe+CEwUTr/JgUaCeehxRbwLbaVcupthpdSpZ4L7kOgB0UTvQvU5etRR3HD
-         QCsLDtGOo1VZs8zLzhUlPdHdPb1ZnbqF59ZDdaYRnQ8Iaa7TT7t/ZPAkjoVqxbSrPbaH
-         oyCaNehedELWVERJ+buwkQvhjc5g4shwm4F3SHsZ/z/RPjcn778jZ6amThx8037XTcGD
-         wQrcfJUCLw8Ej5pzHTOhkTLs+9H/Rwet4hCqtrsK+HFlyKW24P2T2BzKgGGYE++mGss+
-         uQ2w==
+        bh=4E3v8P9Bgd+PvGMRS8uoO/TIv3RrWRtb2HfczKdNV9k=;
+        b=JKgJaVlnR8hG+u7YpR5pb79KVryCkxD8SKpnMekLWmpAIJRl+oUGY+B5CsJE0YShSo
+         l853HXv0wtILtDRYHOUPMdEs7E79lCAzHNbXLX/TMHc1pH+3EaIPW6N5+A/uGs+Gng13
+         Z8L+KqtKLsgLT2yFRNz7tFFm2OsWkwCGXjNU15uiPMGVNCqK9EDUYlG6UVFKqYf9bS4q
+         8f31+D0vW+zZm8Y/raiL+xPaAjZcN3naU43OgaWKmZM1xtdmaf2UsZT/GQs+Hn4a9/zX
+         wZsDkQeBvaQhM1a3qL94fgzo0aR/Gx+Y7I7iER4cHQ/ulsaYgtmM0OdrnIkuP80LRQNH
+         TEKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776979418; x=1777584218;
+        d=1e100.net; s=20251104; t=1776979420; x=1777584220;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NDSmr3KzvFf45fqXLLacm4Nig+LS/n/kl38OHtIvfGo=;
-        b=K0I9Se3e/wtxEYiAAoN1VGfQJl+RV5z5/iA5HElcNjKwv+f48DYLQYPtkgltL4I0YT
-         jvf8XBIlOKrwzVXPqAPGNsHARHOmuIFW6OrANNkLaI1/JPlQW7NUbi2lrPh35CbeB3Qh
-         S4V8XTX1okHtjy4wIFcJ21yV5p6NNDJPhVbWA+ggJU8c1Eh3Sx+ePoB1hVRgN4b+O5M+
-         zgyDuFmU145Xl1tlULREQzUGn6FqVEKx7E6dXHGxDb6Mce8vVmKdk42sTBNBHESKA9y+
-         zbJovHo3Y2VlEuhgGUBIWSbISXu7UuGmmY5Ke0PDDMyxZ0KlPhyS8Fo6H/ql4Al9P7Ws
-         0DoA==
-X-Forwarded-Encrypted: i=1; AFNElJ9UWgnd1p6sW0kTDlCUSHJVCCqwc3gBYH2XUI5ks34zfqfXPdGg9TZ0VDlHzBQGs8ino+JSprSAHWg=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw5mtFcbNgNMjFUsnopUbcLbsUqxAAEqYimwSCcaLZ1AtQJALCy
-	+DcHn5FzQOqiRcBtJA6dZODJHLpCIbUm7queZSO5C7IdMAxkoY5/lz3xAcj/HwrpEwnfbe6OZmB
-	nxI96ARe6sLk+5w==
-X-Received: from plov1.prod.google.com ([2002:a17:902:8d81:b0:2ae:c54f:d5ad])
+        bh=4E3v8P9Bgd+PvGMRS8uoO/TIv3RrWRtb2HfczKdNV9k=;
+        b=D6M3OXdOJ4rkrfX9Ois5JaEd06GSZwOnfgRmvdcGjq2tdu/e1Infn94Yjlsdld23tv
+         N3wHP9/qKuIuppHXGmxuig6gprjlFFkC6UX03CppLI5EzvCFhYGshJKVu7l+vmB4s0jH
+         cFyqNp4H9EsuTi955fIFPv87LpIbi2VH/uRWOAekqsy/wspLiBQZ3hn+TPHpMe1Je5Ub
+         uvsoktGY/94OEHKyA5fyrZsXM2wYYfDbi7Jgva3gS3+/CZ32i2ljFgCPizmxM64zlnB+
+         3M+3rUH4xMKsWMnviLisnW+UiZ39lA5S3GwnkA/xi/9Ocg9RtKZUwV4UsdIws9HXyItV
+         qeAQ==
+X-Forwarded-Encrypted: i=1; AFNElJ+uHzhnCxyXVXHfwgnDDBrDTHOQcI7HrxDD8p381/HPiWf/SyYbnRyJQk4o+hfL6WLZ2nLgyIzYg28=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx6gMkgLHHDrmO/d/lZeZLkyk4J84igWJTyhS7dFa3sEvrZQM2R
+	Ay/W2IizJRVCIxOnitPL5APgUJ4XpeDDgUdP/RXd/4or+a9JlHLhUAePaPBUpZH6RXWD9O6FAri
+	+EwhQblG0ueaiDA==
+X-Received: from plon6.prod.google.com ([2002:a17:903:1a86:b0:2b2:c9d2:11fd])
  (user=dmatlack job=prod-delivery.src-stubby-dispatcher) by
- 2002:a17:902:ba94:b0:2b4:5c0d:314b with SMTP id d9443c01a7336-2b5f9f83342mr210260195ad.38.1776979417788;
- Thu, 23 Apr 2026 14:23:37 -0700 (PDT)
-Date: Thu, 23 Apr 2026 21:23:14 +0000
+ 2002:a17:903:2984:b0:2b0:4f9a:b794 with SMTP id d9443c01a7336-2b5f9fd146amr301151585ad.37.1776979419527;
+ Thu, 23 Apr 2026 14:23:39 -0700 (PDT)
+Date: Thu, 23 Apr 2026 21:23:15 +0000
 In-Reply-To: <20260423212316.3431746-1-dmatlack@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -76,9 +76,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260423212316.3431746-1-dmatlack@google.com>
 X-Mailer: git-send-email 2.54.0.rc2.544.gc7ae2d5bb8-goog
-Message-ID: <20260423212316.3431746-11-dmatlack@google.com>
-Subject: [PATCH v4 10/11] PCI: liveupdate: Do not disable bus mastering on
- preserved devices during kexec
+Message-ID: <20260423212316.3431746-12-dmatlack@google.com>
+Subject: [PATCH v4 11/11] Documentation: PCI: Add documentation for Live Update
 From: David Matlack <dmatlack@google.com>
 To: iommu@lists.linux.dev, kexec@lists.infradead.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
@@ -101,11 +100,11 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MV_CASE(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84409-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84410-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -118,98 +117,90 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[dmatlack@google.com,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[google.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 90DC7457DAB
+X-Rspamd-Queue-Id: 72671457DE0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Do not disable bus mastering on outgoing preserved devices during
-pci_device_shutdown() for kexec.
+Add documentation files for the PCI subsystem's participation in Live
+Update.
 
-Preserved devices must be allowed to perform memory transactions during
-a Live Update to minimize downtime and ensure continuous operation.
-Clearing the bus mastering bit would prevent these devices from issuing
-any memory requests while the new kernel boots.
-
-Because bridges upstream of preserved endpoint devices are also
-automatically preserved, this change also avoids clearing bus mastering
-on them. This is critical because clearing bus mastering on an upstream
-bridge prevents the bridge from forwarding memory requests upstream (i.e.
-it would prevent the endpoint device from accessing system RAM and doing
-peer-to-peer transactions with devices not downstream of the bridge).
+These documentation files are generated from the kernel-doc comments
+in the PCI Live Update source code. They describe the File-Lifecycle
+Bound (FLB) API, the device tracking API, and the specific policies
+applied to preserved devices (such as bus number inheritance and bus
+mastering preservation).
 
 Signed-off-by: David Matlack <dmatlack@google.com>
 ---
- drivers/pci/liveupdate.c |  4 ++++
- drivers/pci/pci-driver.c | 31 ++++++++++++++++++++++---------
- 2 files changed, 26 insertions(+), 9 deletions(-)
+ Documentation/PCI/index.rst           |  1 +
+ Documentation/PCI/liveupdate.rst      | 23 +++++++++++++++++++++++
+ Documentation/core-api/liveupdate.rst |  1 +
+ MAINTAINERS                           |  1 +
+ 4 files changed, 26 insertions(+)
+ create mode 100644 Documentation/PCI/liveupdate.rst
 
-diff --git a/drivers/pci/liveupdate.c b/drivers/pci/liveupdate.c
-index 25c86cd4c173..2a4a139623a6 100644
---- a/drivers/pci/liveupdate.c
-+++ b/drivers/pci/liveupdate.c
-@@ -132,6 +132,10 @@
-  *  * The PCI core inherits ARI Forwarding Enable on all bridges with downstream
-  *    preserved devices to ensure that all preserved devices on the bridge's
-  *    secondary bus are addressable after the Live Update.
-+ *
-+ *  * The PCI core does not disable bus mastering on outoing preserved devices
-+ *    during kexec. This allows preserved devices to issue memory transactions
-+ *    throughout the Live Update.
-  */
- 
- #define pr_fmt(fmt) "PCI: liveupdate: " fmt
-diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
-index d10ece0889f0..05584bc76332 100644
---- a/drivers/pci/pci-driver.c
-+++ b/drivers/pci/pci-driver.c
-@@ -531,6 +531,27 @@ static void pci_device_remove(struct device *dev)
- 	pci_dev_put(pci_dev);
- }
- 
-+/*
-+ * Disable bus mastering on the device so that it does not perform memory
-+ * transactions during kexec.
-+ *
-+ * Don't touch devices that are being preserved across kexec for Live
-+ * Update or that are in D3cold or unknown states.
-+ */
-+static void pci_clear_master_for_shutdown(struct pci_dev *pci_dev)
-+{
-+	if (!kexec_in_progress)
-+		return;
+diff --git a/Documentation/PCI/index.rst b/Documentation/PCI/index.rst
+index 5d720d2a415e..23fb737ac969 100644
+--- a/Documentation/PCI/index.rst
++++ b/Documentation/PCI/index.rst
+@@ -20,3 +20,4 @@ PCI Bus Subsystem
+    controller/index
+    boot-interrupts
+    tph
++   liveupdate
+diff --git a/Documentation/PCI/liveupdate.rst b/Documentation/PCI/liveupdate.rst
+new file mode 100644
+index 000000000000..04c9b675e8df
+--- /dev/null
++++ b/Documentation/PCI/liveupdate.rst
+@@ -0,0 +1,23 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
 +
-+	if (pci_liveupdate_outgoing(pci_dev))
-+		return;
++===========================
++PCI Support for Live Update
++===========================
 +
-+	if (pci_dev->current_state > PCI_D3hot)
-+		return;
++.. kernel-doc:: drivers/pci/liveupdate.c
++   :doc: PCI Live Update
 +
-+	pci_clear_master(pci_dev);
-+}
++PCI Preservation ABI
++====================
 +
- static void pci_device_shutdown(struct device *dev)
- {
- 	struct pci_dev *pci_dev = to_pci_dev(dev);
-@@ -541,15 +562,7 @@ static void pci_device_shutdown(struct device *dev)
- 	if (drv && drv->shutdown)
- 		drv->shutdown(pci_dev);
++.. kernel-doc:: include/linux/kho/abi/pci.h
++   :doc: PCI File-Lifecycle Bound (FLB) Live Update ABI
++
++.. kernel-doc:: include/linux/kho/abi/pci.h
++   :internal:
++
++See Also
++========
++
++ * :doc:`/core-api/liveupdate`
++ * :doc:`/core-api/kho/index`
+diff --git a/Documentation/core-api/liveupdate.rst b/Documentation/core-api/liveupdate.rst
+index 5a292d0f3706..d56a7760978a 100644
+--- a/Documentation/core-api/liveupdate.rst
++++ b/Documentation/core-api/liveupdate.rst
+@@ -70,3 +70,4 @@ See Also
  
--	/*
--	 * If this is a kexec reboot, turn off Bus Master bit on the
--	 * device to tell it to not continue to do DMA. Don't touch
--	 * devices in D3cold or unknown states.
--	 * If it is not a kexec reboot, firmware will hit the PCI
--	 * devices with big hammer and stop their DMA any way.
--	 */
--	if (kexec_in_progress && (pci_dev->current_state <= PCI_D3hot))
--		pci_clear_master(pci_dev);
-+	pci_clear_master_for_shutdown(pci_dev);
- }
+ - :doc:`Live Update uAPI </userspace-api/liveupdate>`
+ - :doc:`/core-api/kho/index`
++- :doc:`PCI </PCI/liveupdate>`
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 94af31837375..42dbac2c2ed3 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -20564,6 +20564,7 @@ Q:	https://patchwork.kernel.org/project/linux-pci/list/
+ B:	https://bugzilla.kernel.org
+ C:	irc://irc.oftc.net/linux-pci
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git
++F:	Documentation/PCI/liveupdate.rst
+ F:	drivers/pci/liveupdate.c
+ F:	include/linux/kho/abi/pci.h
  
- #ifdef CONFIG_PM_SLEEP
 -- 
 2.54.0.rc2.544.gc7ae2d5bb8-goog
 
