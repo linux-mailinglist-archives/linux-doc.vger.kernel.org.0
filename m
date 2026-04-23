@@ -1,241 +1,424 @@
-Return-Path: <linux-doc+bounces-84413-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84417-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wEdXAN2i6mlF1gIAu9opvQ
-	(envelope-from <linux-doc+bounces-84413-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 00:53:17 +0200
+	id ELscE3Wr6mlc1wIAu9opvQ
+	(envelope-from <linux-doc+bounces-84417-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 01:29:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5063B458410
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 00:53:16 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9C31458572
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 01:29:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D9C9D301BCD9
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 22:53:14 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 17C883004F2D
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:29:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3BD139B944;
-	Thu, 23 Apr 2026 22:53:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0EE3938BF76;
+	Thu, 23 Apr 2026 23:29:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="R1qsp5YU"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="HLDJ4wCo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PH0PR06CU001.outbound.protection.outlook.com (mail-westus3azon11011038.outbound.protection.outlook.com [40.107.208.38])
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19D923976BB;
-	Thu, 23 Apr 2026 22:53:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.208.38
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776984791; cv=fail; b=unp2vaqHaLMVsd3PVP10IajXYFibSOgVBSyE4r9lYlsIsBI5sIP/dDcEOKAgzkC6zZGOuHTfKLl9cWSl4mMqDNgTkh2dAdiXpshyuzxZffBAs2mDBXtdq66DVESXbD/1I0gHvBvSuBntHV8D9YpBMT3L39y3qANln2qzalNNiC8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776984791; c=relaxed/simple;
-	bh=YMZnuZeXx+ni1tAqhSVRI83gzW4mXGmeBMX3HixJTlE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=BCRMAywJYfOsBBBXBw18tbLC9YChLNVJdBRgrDr07IW68p1RG5nvm0/TFt5MAyymVto/eFnz01SdEjkjciCDRs0tUKG8KtDIspKnC1Zg6DOBDFHgS0ou9mCYZQ6nhWEK9WE8SUlYJunASFhlSLbeFsxCPnTBcDbH8vUQ0yaOcI0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=R1qsp5YU; arc=fail smtp.client-ip=40.107.208.38
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nDBpk65ms4Q9Khnx6EqwzhLQdHWRfy94uaAh3R+jxcCz0/SUimYpfll96JdMO20lGJO5c30BF5w/nUq5b5SHwpKbBkPT2iFV1SwdvgJbBGa5wXCNqq8kW4iplY0oGj4y9Xm56ld5W3+4gVwrUKgFbq4OdqA0e8g3TtH1+AAq+iEbZGHeqZuWQ2TzAFNVuI/E4G2GQhzmwFqrkg7L+8sVGAyXSdiKj5P3iZ+HGbGAbR7E40MqMgFhCATDL+ORotBBySNMf3j1cc5kET/OP5CXrEAgO5MGrN9v2TeqrY9RENdKStdvAbvgMzVFuToi7iXbxjSEvYDji+285BIrHDTEnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nGllgZSTj86q79vl+Z0gA8Li+LPlxtnlpDQ+5QFNJI8=;
- b=sIqOiXT/1YjwBRF4VpAN3Ovi0uNIPQzqwzYWRbJUGEBOOtKeNIQ585jVZKhlYkuBEcehTMQtz/2Gwa72iVlL5NaDDJ8jNA2vipDfZyp2ijaIT4+JRB2MPCxIFXXjYTs5VWp/c2rRJf1jwXS7/T9p406/nsNgRhqu/jJEigBL1/piC7Kq4Lt71tF40k1tt/L/U3v2E/JYFyO08phHUJ6Y6QQgyAwbCw8AnTiTIjte1/eRL1CZL0VeOBixQXKwU01AKm+29xiS0hWarZAuzmTt/BtmjEjO383pE5Yha8izNY1w3pCxTrBclmGgI1oAwpVqA2gSv5AEnIYPZ50HFpJbpw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nGllgZSTj86q79vl+Z0gA8Li+LPlxtnlpDQ+5QFNJI8=;
- b=R1qsp5YUH6TuCNEvpATGs3AxFDj5GKYZt4k1ycnu1wlhZReH5r1vcatUQf3hbu1ASrJ0ZTSbmARmeBocPQwodeTRP8vZU8/myo9e0SzEd7JJLI4k1ygWU5KLnLlNEAKyvz5wc3SUzgB9PgQBbsJpVilZWUBlhNdWUvUY0c6Nwnl4i2RyPglQl/LKFRumV79GJz1hiJwstwTnW1ecQPptqFHM+sjf+uetYJH3nmHQ/GIZ2JsAWxy3tOpWxieYJsrn2DspeVqH8LXeQgCquusv5UD8VFiv9PY76jfKkLtdUPjCpVqBQ+sr9qYt7JnK2xGKE+9+OfxYS2J1p0sC2WUcCg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by SJ0PR12MB6757.namprd12.prod.outlook.com (2603:10b6:a03:449::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.21; Thu, 23 Apr
- 2026 22:52:56 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::299d:f5e0:3550:1528%5]) with mapi id 15.20.9846.019; Thu, 23 Apr 2026
- 22:52:56 +0000
-Date: Thu, 23 Apr 2026 19:52:53 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: David Matlack <dmatlack@google.com>
-Cc: iommu@lists.linux.dev, kexec@lists.infradead.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org, linux-pci@vger.kernel.org,
-	Adithya Jayachandran <ajayachandra@nvidia.com>,
-	Alexander Graf <graf@amazon.com>,
-	Alex Williamson <alex@shazbot.org>,
-	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>,
-	David Rientjes <rientjes@google.com>,
-	Jacob Pan <jacob.pan@linux.microsoft.com>,
-	Joerg Roedel <joro@8bytes.org>, Jonathan Corbet <corbet@lwn.net>,
-	Josh Hilke <jrhilke@google.com>,
-	Leon Romanovsky <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>,
-	Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>,
-	Pranjal Shrivastava <praan@google.com>,
-	Pratyush Yadav <pratyush@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Saeed Mahameed <saeedm@nvidia.com>,
-	Samiullah Khawaja <skhawaja@google.com>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Will Deacon <will@kernel.org>, William Tu <witu@nvidia.com>,
-	Yi Liu <yi.l.liu@intel.com>
-Subject: Re: [PATCH v4 08/11] PCI: liveupdate: Require preserved devices are
- in immutable singleton IOMMU groups
-Message-ID: <20260423225253.GA3444440@nvidia.com>
-References: <20260423212316.3431746-1-dmatlack@google.com>
- <20260423212316.3431746-9-dmatlack@google.com>
- <CALzav=dGpHEnEjyp8qc50iZrGeKJ47vjLvwtvkLCyNzOMJhozw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CALzav=dGpHEnEjyp8qc50iZrGeKJ47vjLvwtvkLCyNzOMJhozw@mail.gmail.com>
-X-ClientProxiedBy: YT3PR01CA0037.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:82::14) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 485B319C556;
+	Thu, 23 Apr 2026 23:29:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1776986995; cv=none; b=WxCXfaEND2Orw6rYzDNQJKea2kEiuE0E30Pgvq16V3R7kkSHANN+yqXJliS7PpcSoSm3MRdN3oe/tCEnDYY2c/GYYGzXpeCyTH3DFXkfODlKsuyMIzLTjNz5LpplSaw93P7oNmrq39WCVFkQ08GExHBFRzBz1EQNOz7sofG9l7Q=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1776986995; c=relaxed/simple;
+	bh=gOPidmCRXi4BatggfBlyyOeeTP+Ab0sBqGHBfWVtsKY=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=BmZKkWf3pZ1WTpTN0Z9nQ3mjcJTgIvXElUay1uUNtotnVZ4LdGU6AEL7jQH8ALflsRxZdBXJH9xPr3QU5oa++lmpdm1/A2Xh1sMDq1pY6c4AlBEB52dCmIcOEpQ/qDLPW9gaMA/p8R2hdsjCNx8da7uIbW4jJ+yfEnMHNxEEEM8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=HLDJ4wCo; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from smtpclient.apple (c-24-130-165-117.hsd1.ca.comcast.net [24.130.165.117])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 63NMv41v1817216
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Thu, 23 Apr 2026 15:57:05 -0700
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 63NMv41v1817216
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026032601; t=1776985026;
+	bh=6W9iThonCmQx4dYJQMBQrxRDvx5m6/3f4NOKsNrPQtY=;
+	h=Subject:From:In-Reply-To:Date:Cc:References:To:From;
+	b=HLDJ4wCoo4s9yT6/jY1r0dRzac+I79VDuXWQMZALYLaA1rLx26oQvKzAu8NWhIA4P
+	 mlQ4fToQSQzuWMCZ+8dkGRvAOr8SN1GjfzbF/rUVxpsIIBuHJmvsRJHL233mFDBdOr
+	 trQemUeL+exgKteLWHqs6MsTvazeyI6UaZwWNJ5vSKIPWf5ddd1imZapq4oriYIfiA
+	 BCsJ9YTsLaxho+VifoA0dLybi0Pjao1tHOwkENYRq8ZNuW/zH1+pHgYAWNQmvxs46Q
+	 KgzGwiIELFy7obniVxhSEa51BLiGfQbloWCgZDLYJFL2upZLoM5C5XxRc0xjuWZoSx
+	 +On4CPPn/mVlQ==
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|SJ0PR12MB6757:EE_
-X-MS-Office365-Filtering-Correlation-Id: e777414c-6e64-4055-c1f4-08dea18b0ea6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|7416014|376014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info:
-	9E5nrqZ+WQxtFDiNe88eFWNuzkdZ1mqgMO4ovmVqy+2meNBKuhOKB/Z6bTyJ8w8INXHUtjVPxrQVMbFTfC6OyKl5x1WibZQYqs7SHNLtvEryunURao7rLwYTVnnvXJe3gHIiqF31OwquBta3RpnrbPDV24mSp5wSemT90y+wLZeo0N5ZG3oj7U/3MHWwXbyy7H7rZ9gLS9wah+5Coujfi+ZRj2K2itYjcQkkqRgmmeOZiB54r6bat1h3Vu8FvptY8QDFp7pifZKqNo0nHif5ikXys26HiCZOaRZke0RIikyyRxo+tBBg3avPHZuR82VhsDKTAhI7nudmIIaKM1DooDm9qtSjfnWT1IuhuUhxow8MBvesjGUQZv+9Orurduf3URLbDVlaNMCv/oJczOqygcLrM1krHKTdviPZkNT3o6CQ+oTQCkZfwLKdTtWG11tlNkd/deX9ttdPQhzXqt19P0iPgWG2kkgXupOOyxdoKhnvh7prtc+r0v5BpyVFQYHEj9qILqQX6wR2NDJQgpheS28hyUN03seQ+9id1H5+Hx7Ko1A8l/YCru+WxOBvkOwfi84XUVmekRbFPqcoekg30R7iUCtybzbLJQ2ZrHbzSWdivvxLQl/aH5oOpf2kL239lB/eX87P+w9oowKoxTl2kXKY7ypplhZH4b+pjBufPxjK/KM2vv1KvCrGHUUNP2uuXuzkTlKG+Xye69xbrqd6+FFzNK49kWot3HPlVM0ZFYI=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dFZrL2xESjF0bW1sOVloMHQ3azlnNjZqVkM4WkFNREpWRFlnWnBpeGxTWHYv?=
- =?utf-8?B?MnNNdEhvb0VRdStQcHl5Y2tNV000WXZEOC9yeGprdUdQR2gxb2IyaytSZ2oz?=
- =?utf-8?B?a2dTaFg3UjE5eTNzZWFadUl2eFhxNy9mSFE3ckxoNlY0Tlo0VnNwYndvajAz?=
- =?utf-8?B?QWlHVU9BWHIwcEhxOVJYUE9GMDVVYWhBK2xuc01XT2tnQ3FIcTVOWDdvOEI1?=
- =?utf-8?B?UHp0QWF0Y3VNU2JvYUpQclBVbkF0MDh4YW1LT2FSSGNZeWZ6clozMzBKTmNM?=
- =?utf-8?B?YjBZcjRCMUFBVmU1Smhib2swNGVsaXk2QzF4WUVWbWZsN2IxZGwxZHBxOFpW?=
- =?utf-8?B?d1Iwa2ZOcERaL1I5ZWRpMEFPNVVZVkJScnUvbVh6ekY4SjNIblhNYlpNckJi?=
- =?utf-8?B?RlVLc2hUZmtqSmhoZDc0RzhyTzhXUUpPTWtzSWV5SHlXNk5lYlYxRVhwY2VV?=
- =?utf-8?B?VVFjTExkYXJKdWs4czc2Vnlpb0tTMjVJdXJvUGZkRFM0clZibkllNndQbUZT?=
- =?utf-8?B?MkNXRTR1dUY2SDV6anEwQzN5R0R6U0UrUlN0RDloWVAxaFBQeC9BenhYUEIx?=
- =?utf-8?B?cncyMXRyRHp4Mk90OWpsMU4xZk5vWnVjQjNndHVoakhNWkpaOTZ1Q05XbVMy?=
- =?utf-8?B?bWc2bkM1QjVoZm1DWXIvTktHekRxd0szRHhmZjNJdlpUQW1nQ1dNSlNnWlN5?=
- =?utf-8?B?Q0FUTWorc2xpZktGMG5LM0had2FSbHdwWHdTZXV0Z1lndjM4ZS9XajBzWnhV?=
- =?utf-8?B?Vnp5MHFZRTJZOUxOalZMMWIrQmpKVFo3M2NuME5rNjk4M3drUGRUb2pkUnp2?=
- =?utf-8?B?MjVwNHNDbHo1T0xzTTBwK013SFNzeUtZL3hJSHloM1pMWHY4UkVpM2xQc1lk?=
- =?utf-8?B?TjVzcFZIbzFYR0pvV2gxSDcwQXZKQU9JaGx0QTFqQUtoc0liRWpnN1N0RmZi?=
- =?utf-8?B?S2dtMCtIbnZaUGxhWjJsSXU2d3RsdUNKeXQ0RmJpc1NYMG9BTDZLNW1YdEhB?=
- =?utf-8?B?Q1JRZjhsMVdnNEhkbVJyeUVRT1paT0RtSXZrekNxZmFrWUZvcWV0czFUSlNE?=
- =?utf-8?B?WUNJdmRDWFljbzdiMmkwWkRsTUk4SU1MNGpObkk5UVNwRVpucmhTSzRVd0dR?=
- =?utf-8?B?bUlvT0NtNmEwNEIzRnRTb2FRU0M1RUtMNmtTcEdJUk5lK3FNUi9iMFJoWllT?=
- =?utf-8?B?WXRVdEhHaW1adGQxbW4zZzlpcU9SR2hmNVJtaE1WeW9TelJaYlZqOWtHOXRn?=
- =?utf-8?B?VExmM29FaVRoVHlZVzdQVXBwY0NaRE9QbVFuWnV5ZmFLQ2c1RXZnanlLOWx6?=
- =?utf-8?B?MFhFWDVWOXU5MnVjYUJNS2IvdHc0NkJLOE8rbjVRL2o2b2FtZE4yb1llYTRl?=
- =?utf-8?B?K3B2M1M1WDNzMnNQZlp4MXh6TDJTYnkzaDhQMlFWY2R0OUF4M09Vb3hOcnRw?=
- =?utf-8?B?cDlJdFRJc2RzRFVqT1N5Skw0WFY1Sy9Cem5GQXRRaHFDTkt0OU9GN21wemY4?=
- =?utf-8?B?SDBsTnZ4U0VBcTdGdkV6dDI4YzdQZW5LQUIrc3FjRk10TWFQZVB4bDBjQUlp?=
- =?utf-8?B?Z3piZ3VDbGhMUmJHZ3hkMXpubkNsYU82TzEzWWdqVGlkUHFFN2ltRTQ5Z0xz?=
- =?utf-8?B?Z1M4L0xoLzFXQTRsOTV1N3orcXNsVE01NWRjdXFhRTkvblZQUEw2NjA3NHE0?=
- =?utf-8?B?WW9URFRDTERGdkVqZWt1Q2VKOWJObDRJUjlRK0s0TjZWR0lJREhrb3BqYU1U?=
- =?utf-8?B?NmFJeUUzeFVXZ0tXZ0dHTEhMRVY1NHVwcnZ3bkRaOXJqSVlzZlE1WHh1NGVu?=
- =?utf-8?B?bDZ1OUFhTW4zZmZPdEFXL1NzVnRZb2NFazBQYzZNNi9wVUY2MUV2YUkwNWtm?=
- =?utf-8?B?VDJxTGxVenptNEhyMnFqV0Z2TUd0dEJrN0dXRE1Jb1ZocEZvRXRCVXJLbzVi?=
- =?utf-8?B?MzFDZjlVQUpGUG13TXM3RXNUWmRZdVRVSkV3MGlkUEMzWk0wZ0hIVU5aYjl1?=
- =?utf-8?B?WmNwYS9RQTZuZ24zZFpYMGg2OUNwMk9MdnllRGd4L1FMZmxsTUhtV09MN2dS?=
- =?utf-8?B?eXoyT0xmYUZtR0FCbTMwUEpqY0ViOHJUNG82UTdVL2tkYS82VmY3ZzZ6YS9R?=
- =?utf-8?B?QUZGZkVRbW1Zc1RjZlNqV09QMHlkdGY5OUJndzI3NVdNOGt4WHpyblR2YkdD?=
- =?utf-8?B?TDBrdDYrOVRUNTNCMGFCRkp4VEx5T0IwZlNCNXpBOUE0V2VLUVdtSzNwN2Va?=
- =?utf-8?B?OGhUR3BIVlE1NitGenZtWm8wMVRrcyt4RUhMVWpuZlVwRXlLSWJvUjczdk40?=
- =?utf-8?Q?rXcCq8Sza/RW4unMVV?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e777414c-6e64-4055-c1f4-08dea18b0ea6
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2026 22:52:55.4662
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fKFRlQfbUZ3pXp0uvb6C62YtwriAvp4rKVzDPKSoFpdrCyNfnSQ6ljRrRPtO8iyB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6757
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.500.181\))
+Subject: Re: [PATCH v9 00/22] Enable FRED with KVM VMX
+From: Xin Li <xin@zytor.com>
+In-Reply-To: <7f93eb25874ddd13a1ad6e3c75785f11041c8b7f.camel@infradead.org>
+Date: Thu, 23 Apr 2026 15:56:54 -0700
+Cc: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+        "Saenz Julienne, Nicolas" <nsaenz@amazon.es>, pbonzini@redhat.com,
+        seanjc@google.com, corbet@lwn.net, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
+        x86@kernel.org, hpa@zytor.com, luto@kernel.org, peterz@infradead.org,
+        chao.gao@intel.com, hch@infradead.org, sohil.mehta@intel.com
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <DADE0E58-DD8A-4206-BF54-1DA87864117D@zytor.com>
+References: <20251026201911.505204-1-xin@zytor.com>
+ <7f93eb25874ddd13a1ad6e3c75785f11041c8b7f.camel@infradead.org>
+To: David Woodhouse <dwmw2@infradead.org>
+X-Mailer: Apple Mail (2.3864.500.181)
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[zytor.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[zytor.com:s=2026032601];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84413-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84417-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jgg@nvidia.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[zytor.com:+];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[xin@zytor.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,Nvidia.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 5063B458410
+	APPLE_MAILER_COMMON(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,zytor.com:dkim,zytor.com:mid,amazon.co.uk:email]
+X-Rspamd-Queue-Id: B9C31458572
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Apr 23, 2026 at 03:10:55PM -0700, David Matlack wrote:
-> On Thu, Apr 23, 2026 at 2:23 PM David Matlack <dmatlack@google.com> wrote:
-> >
-> > Restrict support for preserving PCI devices across Live Update to
-> > devices in immutable singleton IOMMU groups. A device's group is
-> > considered immutable if all bridges upstream from the device up to the
-> > root port have the required ACS features enabled.
-> >
-> > Since ACS flags are inherited across a Live Update for preserved devices
-> > and all the way up to the root port, the preserved device should be in a
-> > singleton IOMMU group after kexec in the new kernel.
-> >
-> > This change should still permit all the current use-cases for PCI device
-> > preservation across Live Update, since it is intended to be used in
-> > Cloud enviroments which should have the required ACS features enabled
-> > for virtualization purposes.
-> >
-> > If a device is part of a multi-device IOMMU group, preserving it will
-> > now fail with an error. This restriction may be lifted in the future if
-> > support for preserving multi-device groups is desired.
-> >
-> > Signed-off-by: David Matlack <dmatlack@google.com>
-> 
-> Jason, do you think requiring singleton iommu groups is still
-> necessary/useful now that this series preserves ACS flags on preserved
-> devices and upstream bridges?
 
-I have forgotten why we introduced that? There are alot of funky
-things about iommu groups that might be important upon restoration..
 
-Like if you preserve one group member but not the other what do you ?
+> On Apr 23, 2026, at 7:35=E2=80=AFAM, David Woodhouse =
+<dwmw2@infradead.org> wrote:
+>=20
+> On Sun, 2025-10-26 at 13:18 -0700, Xin Li (Intel) wrote:
+>> This patch set enables the Intel flexible return and event delivery
+>> (FRED) architecture with KVM VMX to allow guests to utilize FRED.
+>=20
+> This could do with having a *lot* of KVM selftests.
 
-Even if you have ACS flags there are cases where groups are still
-aliasing DMA..
+Hi David,
 
-Frankly, multi-device iommu groups don't even work fully last time we
-tried to use them in a VMM. So I think I would not expect them to ever
-intersect with live update. Blocking something tricky you can't test
-does seem like a reasonable thing.
+Thanks, I will integrate your tests into this FRED test:
+https://lore.kernel.org/kvm/20240207172646.3981-26-xin3.li@intel.com/
 
-Jason
+
+>=20
+> Here's one to get you started (untested as I haven't found suitable
+> hardware to test it on).
+
+Same here for me now :(
+
+>=20
+> =46rom bd465aabebcb124e09a26fe9f4c861354febabe4 Mon Sep 17 00:00:00 =
+2001
+> From: David Woodhouse <dwmw@amazon.co.uk>
+> Date: Thu, 23 Apr 2026 15:20:11 +0100
+> Subject: [PATCH] KVM: selftests: Add FRED event type classification =
+test
+>=20
+> Test that software-generated events deliver the correct FRED event
+> type in the FRED stack frame.
+>=20
+> In FRED mode, the CPU pushes event metadata including the event type
+> into the FRED stack frame. Different instruction types should produce
+> different event types:
+>  - ICEBP (INT1): EVENT_TYPE_PRIV_SWEVT (5)
+>  - INT3:         EVENT_TYPE_SWEXC (6)
+>  - INT n:        EVENT_TYPE_SWINT (4)
+>=20
+> The test sets up a guest in FRED mode by enabling CR4.FRED and
+> configuring the FRED MSRs, with a hand-written FRED entry point that
+> extracts the event type from the FRED SS field. It exercises each
+> software event type and verifies the classification is correct.
+>=20
+> Requires KVM guest FRED support (the FRED KVM VMX series) and
+> hardware FRED support. Skips if either is unavailable.
+>=20
+> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+> ---
+> tools/testing/selftests/kvm/Makefile.kvm      |   1 +
+> .../selftests/kvm/x86/int1_fred_test.c        | 225 ++++++++++++++++++
+> 2 files changed, 226 insertions(+)
+> create mode 100644 tools/testing/selftests/kvm/x86/int1_fred_test.c
+>=20
+> diff --git a/tools/testing/selftests/kvm/Makefile.kvm =
+b/tools/testing/selftests/kvm/Makefile.kvm
+> index 148d427ff24b..62e76617f82f 100644
+> --- a/tools/testing/selftests/kvm/Makefile.kvm
+> +++ b/tools/testing/selftests/kvm/Makefile.kvm
+> @@ -74,6 +74,7 @@ TEST_GEN_PROGS_x86 +=3D x86/feature_msrs_test
+> TEST_GEN_PROGS_x86 +=3D x86/exit_on_emulation_failure_test
+> TEST_GEN_PROGS_x86 +=3D x86/fastops_test
+> TEST_GEN_PROGS_x86 +=3D x86/fix_hypercall_test
+> +TEST_GEN_PROGS_x86 +=3D x86/int1_fred_test
+> TEST_GEN_PROGS_x86 +=3D x86/hwcr_msr_test
+> TEST_GEN_PROGS_x86 +=3D x86/hyperv_clock
+> TEST_GEN_PROGS_x86 +=3D x86/hyperv_cpuid
+> diff --git a/tools/testing/selftests/kvm/x86/int1_fred_test.c =
+b/tools/testing/selftests/kvm/x86/int1_fred_test.c
+> new file mode 100644
+> index 000000000000..7ffb54b56047
+> --- /dev/null
+> +++ b/tools/testing/selftests/kvm/x86/int1_fred_test.c
+> @@ -0,0 +1,225 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Test FRED event type classification for software-generated events.
+> + *
+> + * In FRED mode, the CPU pushes event metadata including the event =
+type
+> + * into the FRED stack frame SS field. This test verifies the correct
+> + * event type for:
+> + *   - ICEBP (INT1, opcode 0xF1): EVENT_TYPE_PRIV_SWEXC (5)
+> + *   - INT3 (opcode 0xCC):        EVENT_TYPE_SWEXC (6)
+> + *   - INT n (opcode 0xCD nn):    EVENT_TYPE_SWINT (4)
+> + *
+> + * The FRED stack page is evicted via MADV_DONTNEED before each test
+> + * to also exercise EPT/NPT fault handling during FRED frame push.
+> + *
+> + * This test requires KVM guest FRED support and hardware FRED =
+support.
+> + * It will skip if either is unavailable.
+> + */
+> +#include <stdint.h>
+> +#include <string.h>
+> +#include <sys/mman.h>
+> +
+> +#include "test_util.h"
+> +#include "kvm_util.h"
+> +#include "processor.h"
+> +
+> +/* FRED: CPUID.(EAX=3D7,ECX=3D1):EAX bit 17 */
+> +#define X86_FEATURE_FRED KVM_X86_CPU_FEATURE(7, 1, EAX, 17)
+> +
+> +/* FRED MSRs */
+> +#define MSR_IA32_FRED_RSP0 0x1cc
+> +#define MSR_IA32_FRED_STKLVLS 0x1d0
+> +#define MSR_IA32_FRED_CONFIG 0x1d4
+> +
+> +/* FRED event types (from arch/x86/include/asm/trapnr.h) */
+> +#define EVENT_TYPE_SWINT 4 /* INT n */
+> +#define EVENT_TYPE_PRIV_SWEXC 5 /* INT1 (ICEBP) */
+> +#define EVENT_TYPE_SWEXC 6 /* INTO, INT3 */
+> +
+> +/* FRED SS field layout */
+> +#define FRED_SS_TYPE_SHIFT 48
+> +#define FRED_SS_TYPE_MASK (0xfULL << FRED_SS_TYPE_SHIFT)
+> +#define FRED_SS_VECTOR_SHIFT 32
+> +#define FRED_SS_VECTOR_MASK (0xffULL << FRED_SS_VECTOR_SHIFT)
+> +
+> +/* CR4.FRED (bit 32) */
+> +#define X86_CR4_FRED (1ULL << 32)
+> +
+> +/* Guest memory layout */
+> +#define FRED_STACK_GPA 0xc0000000ULL
+> +#define FRED_STACK_SIZE PAGE_SIZE
+> +
+> +/*
+> + * FRED stack frame as pushed by the CPU on event delivery.
+> + * Layout from low address (RSP) to high address:
+> + *
+> + *   RSP+0x00: error code
+> + *   RSP+0x08: RIP (return address)
+> + *   RSP+0x10: CS (with auxiliary info in upper bits)
+> + *   RSP+0x18: RFLAGS
+> + *   RSP+0x20: RSP (original)
+> + *   RSP+0x28: SS (with event type/vector in upper bits)
+> + */
+> +struct fred_stack_frame {
+> + uint64_t error_code;
+> + uint64_t rip;
+> + uint64_t cs;
+> + uint64_t rflags;
+> + uint64_t rsp;
+> + uint64_t ss;
+> +};
+> +
+> +/* Shared result area */
+> +static volatile uint64_t fred_ss_value;
+> +static volatile uint64_t fred_saved_rip;
+> +static volatile bool fred_handler_called;
+> +
+> +static void __used fred_handler(struct fred_stack_frame *frame)
+> +{
+> + fred_ss_value =3D frame->ss;
+> + fred_saved_rip =3D frame->rip;
+> + fred_handler_called =3D true;
+> +}
+> +
+> +/*
+> + * FRED entry points. MSR_IA32_FRED_CONFIG points to the page-aligned
+> + * base. Ring 3 events enter at base+0, ring 0 events at base+0x100.
+> + * Since ICEBP executes in ring 0, the CPU enters at fred_entrypoint
+> + * + 256 =3D fred_entrypoint_kernel.
+> + */
+> +extern void fred_entrypoint(void);
+> +
+> +asm(
+> + ".pushsection .text\n"
+> + ".global fred_entrypoint\n"
+> + ".balign 4096\n"
+> +"fred_entrypoint:\n"
+> + /* Ring 3 entry =E2=80=94 unused, no userspace in this test */
+> + "ud2\n"
+> + /* Pad to +256 for ring 0 entry */
+> + ".org fred_entrypoint + 256, 0xcc\n"
+> +"fred_entrypoint_kernel:\n"
+> + "movq %rsp, %rdi\n"
+> + "call fred_handler\n"
+> + ".byte 0xf2, 0x0f, 0x01, 0xca\n" /* ERETS */
+> + ".popsection\n"
+> +);
+> +
+> +static void check_fred_event(uint64_t expected_rip, uint8_t =
+expected_vector,
+> +     uint8_t expected_type, const char *name)
+> +{
+> + uint64_t event_type, event_vector;
+> +
+> + GUEST_ASSERT(fred_handler_called);
+> + GUEST_ASSERT_EQ(fred_saved_rip, expected_rip);
+> +
+> + event_type =3D (fred_ss_value & FRED_SS_TYPE_MASK) >> =
+FRED_SS_TYPE_SHIFT;
+> + event_vector =3D (fred_ss_value & FRED_SS_VECTOR_MASK) >> =
+FRED_SS_VECTOR_SHIFT;
+> +
+> + GUEST_ASSERT_EQ(event_vector, expected_vector);
+> + GUEST_ASSERT_EQ(event_type, expected_type);
+> +}
+> +
+> +static void guest_code(void)
+> +{
+> + uint64_t expected_rip;
+> +
+> + /*
+> + * Enable FRED:
+> + *  1. Set MSR_IA32_FRED_CONFIG to our entry point
+> + *  2. Set MSR_IA32_FRED_RSP0 to our FRED stack
+> + *  3. Set MSR_IA32_FRED_STKLVLS (all events use stack level 0)
+> + *  4. Set CR4.FRED
+> + */
+> + wrmsr(MSR_IA32_FRED_CONFIG, (uint64_t)fred_entrypoint);
+> + wrmsr(MSR_IA32_FRED_RSP0, FRED_STACK_GPA + FRED_STACK_SIZE);
+> + wrmsr(MSR_IA32_FRED_STKLVLS, 0);
+> +
+> + {
+> + uint64_t cr4;
+> + asm volatile("mov %%cr4, %0" : "=3Dr"(cr4));
+> + cr4 |=3D X86_CR4_FRED;
+> + asm volatile("mov %0, %%cr4" :: "r"(cr4));
+> + }
+> +
+> + /* Test 1: ICEBP (INT1) =E2=80=94 should be EVENT_TYPE_PRIV_SWEXC =
+(5) */
+> + fred_handler_called =3D false;
+> + asm volatile("lea 1f(%%rip), %0\n\t"
+> +     ".byte 0xf1\n\t"
+> +     "1:" : "=3Dr"(expected_rip) :: "memory");
+> + check_fred_event(expected_rip, DB_VECTOR, EVENT_TYPE_PRIV_SWEXC,
+> + "ICEBP");
+> + GUEST_SYNC(0);
+> +
+> + /* Test 2: INT3 =E2=80=94 should be EVENT_TYPE_SWEXC (6) */
+> + fred_handler_called =3D false;
+> + asm volatile("lea 1f(%%rip), %0\n\t"
+> +     "int3\n\t"
+> +     "1:" : "=3Dr"(expected_rip) :: "memory");
+> + check_fred_event(expected_rip, BP_VECTOR, EVENT_TYPE_SWEXC, "INT3");
+> + GUEST_SYNC(1);
+> +
+> + /* Test 3: INT $0x20 =E2=80=94 should be EVENT_TYPE_SWINT (4) */
+> + fred_handler_called =3D false;
+> + asm volatile("lea 1f(%%rip), %0\n\t"
+> +     "int $0x20\n\t"
+> +     "1:" : "=3Dr"(expected_rip) :: "memory");
+> + check_fred_event(expected_rip, 0x20, EVENT_TYPE_SWINT, "INT $0x20");
+> + GUEST_SYNC(2);
+> +}
+> +
+> +static const char * const test_names[] =3D {
+> + [0] =3D "ICEBP (EVENT_TYPE_PRIV_SWEXC)",
+> + [1] =3D "INT3 (EVENT_TYPE_SWEXC)",
+> + [2] =3D "INT $0x20 (EVENT_TYPE_SWINT)",
+> +};
+> +
+> +int main(int argc, char *argv[])
+> +{
+> + struct kvm_vcpu *vcpu;
+> + struct kvm_vm *vm;
+> + struct ucall uc;
+> + unsigned int nr_pages;
+> + void *fred_stack_hva;
+> + int test;
+> +
+> + TEST_REQUIRE(kvm_cpu_has(X86_FEATURE_FRED));
+> +
+> + pr_info("Testing FRED event types with EPT fault on stack\n");
+> +
+> + vm =3D vm_create_with_one_vcpu(&vcpu, guest_code);
+> +
+> + /* Map the FRED stack page */
+> + nr_pages =3D vm_calc_num_guest_pages(VM_MODE_DEFAULT, =
+FRED_STACK_SIZE);
+> + vm_userspace_mem_region_add(vm, VM_MEM_SRC_ANONYMOUS,
+> +    FRED_STACK_GPA, 1, nr_pages, 0);
+> + virt_map(vm, FRED_STACK_GPA, FRED_STACK_GPA, nr_pages);
+> + fred_stack_hva =3D addr_gpa2hva(vm, FRED_STACK_GPA);
+> +
+> + for (test =3D 0; test < ARRAY_SIZE(test_names); test++) {
+> + /*
+> + * Evict the FRED stack page so the CPU takes an EPT/NPT
+> + * violation when pushing the FRED frame. KVM must handle
+> + * the fault, map the page, and reinject the event.
+> + */
+> + madvise(fred_stack_hva, FRED_STACK_SIZE, MADV_DONTNEED);
+> +
+> + vcpu_run(vcpu);
+> + TEST_ASSERT_KVM_EXIT_REASON(vcpu, KVM_EXIT_IO);
+> +
+> + switch (get_ucall(vcpu, &uc)) {
+> + case UCALL_ABORT:
+> + REPORT_GUEST_ASSERT(uc);
+> + break;
+> + case UCALL_SYNC:
+> + TEST_ASSERT_EQ(uc.args[1], test);
+> + pr_info("  %s: PASSED\n", test_names[test]);
+> + break;
+> + default:
+> + TEST_FAIL("Unexpected ucall");
+> + }
+> + }
+> +
+> + kvm_vm_free(vm);
+> + return 0;
+> +}
+> --=20
+> 2.43.0
+>=20
+>=20
+>=20
+>=20
+
 
