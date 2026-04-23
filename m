@@ -1,114 +1,164 @@
-Return-Path: <linux-doc+bounces-84259-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84260-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2F0RBCSC6WlbbwIAu9opvQ
-	(envelope-from <linux-doc+bounces-84259-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 04:21:24 +0200
+	id IEzoCjKG6WmMcAIAu9opvQ
+	(envelope-from <linux-doc+bounces-84260-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 04:38:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80A3644C418
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 04:21:23 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D83D344C52B
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 04:38:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4F90E30309B1
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 02:21:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BE1A23008A74
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 02:38:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95B9D2C027C;
-	Thu, 23 Apr 2026 02:21:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 105923BADBC;
+	Thu, 23 Apr 2026 02:38:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OdY+Yg54"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="I/pgPLJU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70FAA29E113;
-	Thu, 23 Apr 2026 02:21:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DAC63B9600;
+	Thu, 23 Apr 2026 02:38:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776910879; cv=none; b=Yp3SM2FLP2PGgu2FSF5A1RdAzVIoUcTr9rERwteBmPMgO0GBhrMFYnpdOcsQxAsx58cVTm8PH3wP/d/r7svNiR36qca7grZYsHEAT/haUgvXfehyCT6HQcuwS8/cG2OeuvkD7YThIbN9y1G+r7QZAkRNl50XjRYzvzzX9ANSADo=
+	t=1776911907; cv=none; b=YF58JN1Y0aImrOqlISlA8O5pUP7Ny162dMZOuAhM37wFHr/9MDmtwnWVLsR1Og2hGv6hdUoAJuu10BhwDbPuAAoXmhWEM5meaq99/s7MqJ0k1G8OPDVy+7gFlNEqouIIEtTPuBBH0pmlymxPYxTKFfV6MSeuB/FpCM/UBvyiREM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776910879; c=relaxed/simple;
-	bh=7jFhU3TCx4qkATYUj58D0VI+IAvlmWX5mDxt6ZYhrHE=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=uZm3dT05G9lACvlaJXSGvkdiwb+DjYFmkBOGkgQXcmdCaWOu4l2uHPV3Z1qaqqmexYXx+yX1h2O4SQht+pefjI9ZinkV53n+qJpDY4mkCxKi0yGXWZPJ2LOsQ3fX/loR6DqFdvfWFr8mSXtP0rWT+jplzQBf7PyephbRllN2Jao=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OdY+Yg54; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68EFFC19425;
-	Thu, 23 Apr 2026 02:21:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1776910879;
-	bh=7jFhU3TCx4qkATYUj58D0VI+IAvlmWX5mDxt6ZYhrHE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=OdY+Yg546AUQpX8jmcbtOPDUOpI4l253B0KYwuaiFkh3uAbsXkLn01eRjFEefC+Mx
-	 AEc86SkbTOwd6mPUE4gL1X8tif3REsMjjZ2vm7dB+ivtsg13a/mp1fbb2ej8wOlIbA
-	 0k77CBq6b+wLcmmQHTKpwNprTSecg3qYSMIXLKFTKkT7f+5510M+AA1r/lUfh9aO1L
-	 FPPNAETEDMB6Dkvw94Gi0LX9ydagDVDZVlS9v/yBrD0US1TKkck2oS1TLYV3Q1QOVM
-	 LeJBnS3E2IvXvk8buXddFLsgwSY+vIqGy6Z/rZHD6awWH1WLgIIHQZXZrMoOJNPzV8
-	 OCIl+XKZIXwAA==
-Date: Wed, 22 Apr 2026 19:21:17 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Wei Fang <wei.fang@nxp.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, Andrew Lunn <andrew+netdev@lunn.ch>, Geert
- Uytterhoeven <geert@linux-m68k.org>, Michael Fritscher
- <michael@fritscher.net>, Byron Stanoszek <gandalf@winds.org>, Daniel Palmer
- <daniel@0x0f.com>, "linux-kernel@vger.kernel.org"
- <linux-kernel@vger.kernel.org>, "netdev@vger.kernel.org"
- <netdev@vger.kernel.org>, "linux-doc@vger.kernel.org"
- <linux-doc@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon
- Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
- <skhan@linuxfoundation.org>
-Subject: Re: [PATCH net v2 03/15] drivers: net: 3com: 3c574: Remove this
- driver
-Message-ID: <20260422192117.2d94acb2@kernel.org>
-In-Reply-To: <AM8PR04MB7284CF79628FB99F7A7F20D5882A2@AM8PR04MB7284.eurprd04.prod.outlook.com>
-References: <20260422-v7-0-0-net-next-driver-removal-v1-v2-0-08a5b59784d5@lunn.ch>
-	<20260422-v7-0-0-net-next-driver-removal-v1-v2-3-08a5b59784d5@lunn.ch>
-	<AM8PR04MB7284CF79628FB99F7A7F20D5882A2@AM8PR04MB7284.eurprd04.prod.outlook.com>
+	s=arc-20240116; t=1776911907; c=relaxed/simple;
+	bh=G/6FKypuPdLEisAdFE/26qWKf9kWVVBAu4YLwTDrRCA=;
+	h=Subject:To:CC:References:From:Message-ID:Date:MIME-Version:
+	 In-Reply-To:Content-Type; b=i7JVha/qKsjxEynm2Xf0atSTR3GlvCVprvcm2LrLiy940TT5pjJi7nKcNCVvDthsZShrGcYLK9ZkJxPFVlzI4tvQCgkuorO6qGUNqhPejI5NaOCgLD1TnLefVWqLdl7U6M/6mZ3TEcPwvqYG3+U1MG/SNxb/jp3IJ8QzAeOFiuI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=I/pgPLJU; arc=none smtp.client-ip=113.46.200.217
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=v1ZCldJUqPagrKZUWrG+NboOlQsoZ4g12/Dizpsb8AE=;
+	b=I/pgPLJUVDr8KWasTwuUZU4tGrFXkR6KokcAc5AwsCkwoFdu50RjLhjQUQYd1kbHjwGc2y4Rq
+	dXEgsDz2ZVIhxJ6y/3fjmq7N9im8PCuGXvYsZRJgUqnK2NRymRTCJtvOA9kLIGeR6bbAxvTCkaq
+	gbTZh14/YWX0MOoalvyiWH8=
+Received: from mail.maildlp.com (unknown [172.19.162.197])
+	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4g1Kpx3ZntzcZyN;
+	Thu, 23 Apr 2026 10:31:37 +0800 (CST)
+Received: from dggemv706-chm.china.huawei.com (unknown [10.3.19.33])
+	by mail.maildlp.com (Postfix) with ESMTPS id A9C9540576;
+	Thu, 23 Apr 2026 10:38:21 +0800 (CST)
+Received: from kwepemq500010.china.huawei.com (7.202.194.235) by
+ dggemv706-chm.china.huawei.com (10.3.19.33) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 23 Apr 2026 10:38:21 +0800
+Received: from [10.173.124.160] (10.173.124.160) by
+ kwepemq500010.china.huawei.com (7.202.194.235) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 23 Apr 2026 10:38:20 +0800
+Subject: Re: [PATCH v4 2/3] mm/memory-failure: add panic option for
+ unrecoverable pages
+To: Breno Leitao <leitao@debian.org>
+CC: <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <kernel-team@meta.com>, Naoya Horiguchi
+	<nao.horiguchi@gmail.com>, Andrew Morton <akpm@linux-foundation.org>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, "Liam
+ R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@kernel.org>,
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>
+References: <20260415-ecc_panic-v4-0-2d0277f8f601@debian.org>
+ <20260415-ecc_panic-v4-2-2d0277f8f601@debian.org>
+ <6b505601-747a-0812-7544-63a8ab3cffce@huawei.com>
+ <aejlg62nxcF_5g2v@gmail.com>
+From: Miaohe Lin <linmiaohe@huawei.com>
+Message-ID: <c1517ad3-91d1-2ea1-efa7-0f29415d513d@huawei.com>
+Date: Thu, 23 Apr 2026 10:38:19 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <aejlg62nxcF_5g2v@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
+ kwepemq500010.china.huawei.com (7.202.194.235)
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84259-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kuba@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84260-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[kvack.org,vger.kernel.org,meta.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org,kernel.org,oracle.com,google.com,suse.com];
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,huawei.com:dkim,huawei.com:mid];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linmiaohe@huawei.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[huawei.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 80A3644C418
+	RCVD_COUNT_SEVEN(0.00)[7]
+X-Rspamd-Queue-Id: D83D344C52B
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, 23 Apr 2026 02:14:22 +0000 Wei Fang wrote:
-> > The 3c574 was written by Donald Becker between 19973-1998. It is an  
+On 2026/4/22 23:21, Breno Leitao wrote:
+> Hello Miaohe,
 > 
-> Nit: 19973 --> 1993
+> On Wed, Apr 22, 2026 at 11:36:11AM +0800, Miaohe Lin wrote:
+>> On 2026/4/15 20:55, Breno Leitao wrote:
+>>> Add a sysctl panic_on_unrecoverable_memory_failure that triggers a
+>>> kernel panic when memory_failure() encounters pages that cannot be
+>>> recovered. This provides a clean crash with useful debug information
+>>> rather than allowing silent data corruption.
+>>>
+>>> The panic is triggered for three categories of unrecoverable failures,
+>>> all requiring result == MF_IGNORED:
+>>>
+>>> - MF_MSG_KERNEL: reserved pages identified via PageReserved.
+>>>
+>>> - MF_MSG_KERNEL_HIGH_ORDER: pages with refcount 0 that are not in the
+>>>   buddy allocator (e.g., tail pages of high-order kernel allocations).
+>>>   A TOCTOU race between get_hwpoison_page() and is_free_buddy_page()
+>>>   is possible when CONFIG_DEBUG_VM is disabled, since check_new_pages()
+>>>   is gated by is_check_pages_enabled() and becomes a no-op. Panicking
+>>>   is still correct: the physical memory has a hardware error regardless
+>>>   of who allocated the page.
+>>
+>> What if the page is used by userspace? We can recover from later accessing.
+>> Would panic here be overkill?
+> 
+> A userspace page should not reach the MF_MSG_KERNEL_HIGH_ORDER branch. The
+> branch is gated on get_hwpoison_page() == 0, i.e., folio_try_get() observed
+> _refcount == 0, and that condition rules out a live userspace mapping, no?
 
-Will fix when applying FWIW
+Sorry, I didn't express myself clearly. What I mean is, a buddy page currently
+being allocated could reach the MF_MSG_KERNEL_HIGH_ORDER branch. This page might
+be allocated to a userspace. In this case, we can recover from later accessing.
+But with your patch, panic will be triggered instead.
+
+> 
+> are you suggesting I drop MF_MSG_KERNEL_HIGH_ORDER from here, or, document this
+> will not hit userspace pages?
+
+No, maybe we should rule out or document above rare case if I'm not miss something.
+
+Thanks.
+.
 
