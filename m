@@ -1,164 +1,248 @@
-Return-Path: <linux-doc+bounces-84303-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84307-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EMYXF6cS6mmytQIAu9opvQ
-	(envelope-from <linux-doc+bounces-84303-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 14:37:59 +0200
+	id QAKtH/gW6mlHtwIAu9opvQ
+	(envelope-from <linux-doc+bounces-84307-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 14:56:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB6F0452149
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 14:37:58 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82958452606
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 14:56:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5C06F300D315
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 12:34:55 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6871E301490E
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 12:53:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F131C366561;
-	Thu, 23 Apr 2026 12:34:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F74D3EE1E0;
+	Thu, 23 Apr 2026 12:53:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="XiJzDFU2"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ASlwJzSH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AF303C73D0;
-	Thu, 23 Apr 2026 12:34:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 616193EE1E6
+	for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 12:53:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.49
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776947694; cv=pass; b=u1y1Njgc8x7wNagb0n1GIQ1h6OQIeSszfKfQwJDtCy4JCZ2l8tLzOjsiYSKhvhFc48hvMVlUaLxKx2om6TnAiI8bLipe98gauXEf1A1dNeUe5dGukPETJqSiIpWDSMPF+m4lMOCFbhUYgX1v+SqgR80URpkA7SynPGm5di9q4Ys=
+	t=1776948807; cv=pass; b=ENJi9G9Sh7J2J6RSCtGm9/WSoZu/EusnUmX8uoIx90z1zEgiTV5j2viw6d/tLACr/MxgvIeBLY6Id1VbefFcrX/5bgFrk2a57YlChXAQwGVoqZMSijOgUCNYzzfGYb+fTHRfkKoX3R3UEoL1UQ2IGlqz/RKELjNAd7/iqt254zk=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776947694; c=relaxed/simple;
-	bh=MTL+QawC4jsC04LmSd30l7S8TjV/PgoCQyChN0MHn8k=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=lyF3WuiIoQkhuN3if+G1+MvJzRyaBKa/lhkR8cg0UXF4EY37Ybj5Kv6PSnma4s8flDDTsPnsjxMD8gYnRDYCdBBlNYq5app9k2Cs5eoNWEsMGNmW0PqFNzED1bcK7Jxhn5Wttzo+BHwUCvet/7kVRm+RCESbDv90ICw57RiSEVc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=XiJzDFU2; arc=pass smtp.client-ip=136.143.188.112
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1776947670; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=SdR7wqWELDZ/XAjPdj+1SQYOhM6GdE7WoXfTzhIFSn7e7MPXH4XoYUDqg0HgBIGXC21qsI216ExXFSb4Xnqfmcu4e7b4YP0sJI64I/ktYnQWUxMUwU7j5Jhh5iaq+bA0c87UNuh0VXfW+o6h2MMYBtbhBLxmJiTEKQLPWUiFTk0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1776947670; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=9ApbCGrw4JWVWeOXA1lI9/HhWh8d2pfHg6fH85Z5HVY=; 
-	b=MW0I7gtkmLPTnH86o/YT6IQKSR9pTqxIEJ1MnPW39a8NB8K8bs6NhZPaYOhsE750xPsS3ks57TQWuiZe09uIBp7vjev1PMDIKhtsp6ifovbCIoAhQMTl+p2GyrQ590AvnN9yrbYJZQ54WERgEcvtK/givEJzJmW5qXThE59H02U=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
-	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776947669;
-	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
-	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=9ApbCGrw4JWVWeOXA1lI9/HhWh8d2pfHg6fH85Z5HVY=;
-	b=XiJzDFU2PnMn05AL71D4AyumVmZFR0ugRctbCGsLR0Yb+DYBQlWZxRqXMkyfmYHc
-	7+bts9RvIwLhjsLnl2JXpCaMqUCRhhxUe0Tkx2EsnMubG+XdaRcA7gD4IP+zM6j2Oj7
-	6NTEnEnTzyw5aDWUFQza/BZG+H8eMgR4HDf20dJU=
-Received: by mx.zohomail.com with SMTPS id 1776947667572117.05305883514848;
-	Thu, 23 Apr 2026 05:34:27 -0700 (PDT)
-From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Thu, 23 Apr 2026 14:33:56 +0200
-Subject: [PATCH v3 3/3] drm/panthor: Reduce padding in gems debugfs for
- refcount
+	s=arc-20240116; t=1776948807; c=relaxed/simple;
+	bh=F2lKZ/qSN6SIkBL+rAQMZomA6ldD6Jeu1f52cfpnYWY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=EqzNgN+oE88kgkL4eqti+2d7TXg/eyGk2xvUzKpF2G7zAK1QkdwZnN1ieHt7VinAQTxgjkzQpRKlvAn3I61ItwMav3DkUgDC30Ig/9vkbJdRKnOthZXfv6Cp81kGRcccUbnc+mDVOV0VLF9AwSahUYpR9MbhQXjRvTCfpQMdz6Y=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ASlwJzSH; arc=pass smtp.client-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b8f97c626aaso119697566b.2
+        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 05:53:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776948804; cv=none;
+        d=google.com; s=arc-20240605;
+        b=ku8nUV1xgIjedBTYWmgUfNSCsmxkNR1JnaD2QqyTBbmv+5dOjo2JpUakb5G8Ja3A2M
+         +CjAHUN7Ezv6Ez6/JRwxjmSbMseYtlF84O8pLe9/k9nrzdvfQ/TYBPiRN7R5Hkkdr0Tb
+         WVofoCkjiz/AaDoLphK06NzCvE2PgYWlH+dwISF75jJnXrkzj7lxlHZpMAgnquQoEg/1
+         2XACnvWzID5gCkga1pNRN2PtSqhl89iwpC7Xs09FiRRy2YYfQXU+b8IIxCuhKQCxg+zQ
+         xslu15dR4zY/HKhIprJa7FMpvNRFOv3CrBQaDr9bst6IE1lY5AhRmKGzWAH7qGEkqoX3
+         Q3xQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=PlOMd/0NtPo9HHMlpt/ZRLGSP9SrMcpTUqdlgaR2uVc=;
+        fh=6FY6eoiIFpI057m9CHA5YPMMIiguDSqwVdHE/XxVQuE=;
+        b=Bj3ST0TJ9bb7v1jYR+V9vplNcewCIFR98XTULAfoGHCqSO7SXxCtKh33dIwofm5/b9
+         tO0qCfx+pl4RwWel0Drmw+MMWInY4b3iKJWFuNgpuww9MqtuNCnnqwmJd7O+bwZjtnPn
+         iFYue/RguMN9rOMctNaSMGKYhtjF4h2TVUlTht8+cMXfVKgFaRWvi9X2ojdYGD49NPY7
+         UJHs8AyUXI4Lw9rGW/vTJZiJLSk0D3jSjtBLbnXoIfevu+if3trvdB0XOXlldRLbGSw+
+         /pHyYJo5lF2sV9HVNraiDcE3Wx8HNBQ2Thb2wwDyo6NaTwGdHu/y5GWZhJ/8Bqp6kYB+
+         ktzQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1776948804; x=1777553604; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=PlOMd/0NtPo9HHMlpt/ZRLGSP9SrMcpTUqdlgaR2uVc=;
+        b=ASlwJzSHC/dQrb0JYRidEzn1VtTETAsTnh0iRtLd5k5wb9woApgz46P06CcHDf5Ez+
+         LlO2V5NOvzbQQU9l/rI+J+Uhzu+YVcrLL7sXK6XkrCYxHBwik8lxghOGKWiIcxYumIhj
+         Ham25yjBX3AM/yWsUwy80m+8LmXBITSsLHNo78d4ProoFFuCcpOmLjNPVrgjnoxqkRkT
+         stx5pNZNofbYStKGhey2MCvb/djxYOXkDaB387SvBv/o4W+2N9xy77zb1qb9O3AdPd7a
+         jnqbs9WELZxQOcdzHtnUcmJ9T0opZRDg3a+fX0e6jVspkPHbU8Z1Zz6OMfYzJbEQxRVR
+         k4JQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776948804; x=1777553604;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PlOMd/0NtPo9HHMlpt/ZRLGSP9SrMcpTUqdlgaR2uVc=;
+        b=NqHlx5iI0fmo44uP6FiOT504DCrAonqAglAdwYp9DbOWQfBQ38jpJUV619hmkyTCTr
+         Douht8dH6vBuKNRxYiEkkw+dEv8sAi37hLdjfpSjuFQGoeDcwjzzwHMODrzocD7W1gDO
+         uEWwESmvXwRvHmsSZgUDbN/y19WE6bocMMxZlXfvWk39hwYAxoVW0nwmg6V1CUs6D1fl
+         hm5k7X3sZL+0yz+0N7pkpMJmxUiP2Amh1NYl4oQnUpACjM6FM/3JXoJp5rbq4vJ+aPe3
+         h7uM5I4uBoatCawSwWAFi6LsSaBNIIyCsD20aHtntO3TafS+ZW69pGqQnCkaaHmvHp3a
+         D0Yw==
+X-Forwarded-Encrypted: i=1; AFNElJ+p/9gjQVt7CXp/qbzkqCoLrarQrkU6mw2uI6X1ZFg4B/B5ue/miVXfhRAVrjCmKsmlNQsv9JEywFY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzPLQ+u0h8xqYwNma8Qe10+25F+3QqKFjkjnIk7by6SY4f1CDt+
+	jJNze+Z3j1EiDuUwkTOgcRAfIcnUVUUnwHw3zkIluMT6/2fVs8tkEGBM2WNHX+PelVri0Tg4oZV
+	oeLVIgQEz57iCQkPCDYl/qbg75YmD77jcpL2t5KZGAg==
+X-Gm-Gg: AeBDies6C7LManVChSswumuiozyQpI79kdDvJnAnTM2f8YSQznz8c/TqAM9zvm34wuh
+	VOfAqlo72nWdDi3c8DQQ/+4WXh2nqGpYuxgcMokDQqIdRfcdGzG3ujDzA0mSHQB7r8eDcTt8sy1
+	FO4/1YPncvcMdtGLz1ZsxFk5hBYCvqy0cOk8fe95upyyBoeNsifWI/RwBgE2KD7EDu8kuNYp8+y
+	xchWJ2cFqVFQfJI+kZHkP8FNWrWwRWWVHZMHo6DaYHnIBSgh/5O2MHqeNuSUNPsavaNY6hNOVp5
+	6rxHHfD+9ZQQDC9nFhbknIr4nBmYBnWV83UexUpclen+VJNfrCq7
+X-Received: by 2002:a17:907:72c5:b0:ba5:bef2:2aa9 with SMTP id
+ a640c23a62f3a-ba5bef2333fmr1133294666b.35.1776948803573; Thu, 23 Apr 2026
+ 05:53:23 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260423-panthor-bo-reclaim-observability-v3-3-60af32164a4f@collabora.com>
-References: <20260423-panthor-bo-reclaim-observability-v3-0-60af32164a4f@collabora.com>
-In-Reply-To: <20260423-panthor-bo-reclaim-observability-v3-0-60af32164a4f@collabora.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Boris Brezillon <boris.brezillon@collabora.com>, 
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- kernel@collabora.com, linux-doc@vger.kernel.org, 
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-X-Mailer: b4 0.15.2
-X-Spamd-Result: default: False [-2.16 / 15.00];
+References: <20260422212849.1240591-1-shenwei.wang@nxp.com>
+In-Reply-To: <20260422212849.1240591-1-shenwei.wang@nxp.com>
+From: Mathieu Poirier <mathieu.poirier@linaro.org>
+Date: Thu, 23 Apr 2026 06:53:12 -0600
+X-Gm-Features: AQROBzBDIr-bn4DX0ExOJm0nVY72516bKXS1r-ubIMnAcS6p_qKbuXjU_FLZ6Pw
+Message-ID: <CANLsYkypRaFTTP7MLLLR+=AB5JnRTA4i130qvWzB1qoAuM9FWQ@mail.gmail.com>
+Subject: Re: [PATCH v13 0/4] Enable Remote GPIO over RPMSG on i.MX Platform
+To: Shenwei Wang <shenwei.wang@nxp.com>, Andrew Lunn <andrew@lunn.ch>
+Cc: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Shuah Khan <skhan@linuxfoundation.org>, 
+	linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>, devicetree@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,collabora.com,arm.com,lwn.net,linuxfoundation.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84303-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-84307-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FREEMAIL_CC(0.00)[kernel.org,lwn.net,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[collabora.com:+];
+	FROM_NEQ_ENVFROM(0.00)[mathieu.poirier@linaro.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,collabora.com:email,collabora.com:dkim,collabora.com:mid]
-X-Rspamd-Queue-Id: BB6F0452149
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mail.gmail.com:mid,i.mx:url,linaro.org:dkim,nxp.com:email]
+X-Rspamd-Queue-Id: 82958452606
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The "gems" debugfs file is getting a little too wide for comfort. While
-a lot of this is unavoidable due to the theoretical upper limits of
-numbers here (e.g. size needs to be 16 chars because 2**48-1 in decimal
-is 15 digits, plus one space for separation), the refcount column has a
-decent 5 characters to be saved, as it can only ever contain a 10-digit
-decimal number.
+Once again Andrew Lunn was left out.
 
-Reduce the refcount column's width to 11, which fulfils this requirement
-with an additional space for separation.
-
-Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
----
- drivers/gpu/drm/panthor/panthor_gem.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-index b6fe20b7e6d0..462a9d2ce319 100644
---- a/drivers/gpu/drm/panthor/panthor_gem.c
-+++ b/drivers/gpu/drm/panthor/panthor_gem.c
-@@ -1644,7 +1644,7 @@ static void panthor_gem_debugfs_bo_print(struct panthor_gem_object *bo,
- 
- 	snprintf(creator_info, sizeof(creator_info),
- 		 "%s/%d", bo->debugfs.creator.process_name, bo->debugfs.creator.tgid);
--	seq_printf(m, "%-32s%-16d%-16d%-11d%-16zd%-16zd0x%-16lx",
-+	seq_printf(m, "%-32s%-16d%-11d%-11d%-16zd%-16zd0x%-16lx",
- 		   creator_info,
- 		   bo->base.name,
- 		   refcount,
-@@ -1681,8 +1681,8 @@ static void panthor_gem_debugfs_print_bos(struct panthor_device *ptdev,
- 
- 	panthor_gem_debugfs_print_flag_names(m);
- 
--	seq_puts(m, "created-by                      global-name     refcount        evictions  size            resident-size   file-offset       state      usage       label\n");
--	seq_puts(m, "---------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-+	seq_puts(m, "created-by                      global-name     refcount   evictions  size            resident-size   file-offset       state      usage       label\n");
-+	seq_puts(m, "----------------------------------------------------------------------------------------------------------------------------------------------------\n");
- 
- 	scoped_guard(mutex, &ptdev->gems.lock) {
- 		list_for_each_entry(bo, &ptdev->gems.node, debugfs.node) {
-@@ -1690,7 +1690,7 @@ static void panthor_gem_debugfs_print_bos(struct panthor_device *ptdev,
- 		}
- 	}
- 
--	seq_puts(m, "=========================================================================================================================================================\n");
-+	seq_puts(m, "====================================================================================================================================================\n");
- 	seq_printf(m, "Total size: %zd, Total resident: %zd, Total reclaimable: %zd\n",
- 		   totals.size, totals.resident, totals.reclaimable);
- }
-
--- 
-2.53.0
-
+On Wed, 22 Apr 2026 at 15:29, Shenwei Wang <shenwei.wang@nxp.com> wrote:
+>
+> Support the remote devices on the remote processor via the RPMSG bus on
+> i.MX platform.
+>
+> Changes in v13:
+>  - drop the support for legacy NXP firmware.
+>  - remove the fixed_up hooks from the rpmsg gpio driver.
+>  - code cleanup.
+>
+> Changes in v12:
+>  - Fixed the "underline" warning reported by Randy.
+>
+> Changes in v11:
+>  - Expand RPMSG for the first time per Shuah's review comment.
+>
+> Changes in v10:
+>  - Update gpio-rpmsg.rst according to Daniel Baluta's review comments.
+>  - Add a kernel CONFIG for fixed up handlers and only enable it on
+>    i.MX products.
+>  - Fixed bugs reported by kernel test robot.
+>
+> Changes in v9:
+>  - Reuse the gpio-virtio design for command and IRQ type definitions.
+>  - Remove msg_id, version, and vendor fields from the generic protocol.
+>  - Add fixed-up handlers to support legacy firmware.
+>
+> Changes in v8:
+>  - Add "depends on REMOTEPROC" in Kconfig to fix the build error reported
+>    by the kernel test robot.
+>  - Move the .rst patch before the .yaml patch.
+>  - Handle the "ngpios" DT property based on Andrew's feedback.
+>
+> Changes in v7:
+>  - Reworked the driver to use the rpmsg_driver framework instead of
+>    platform_driver, based on feedback from Bjorn and Arnaud.
+>  - Updated gpio-rpmsg.yaml and imx_rproc.yaml according to comments from
+>    Rob and Arnaud.
+>  - Further refinements to gpio-rpmsg.yaml per Arnaud's feedback.
+>
+> Changes in v6:
+>  - make the driver more generic with the actions below:
+>      rename the driver file to gpio-rpmsg.c
+>      remove the imx related info in the function and variable names
+>      rename the imx_rpmsg.h to rpdev_info.h
+>      create a gpio-rpmsg.yaml and refer it in imx_rproc.yaml
+>  - update the gpio-rpmsg.rst according to the feedback from Andrew and
+>    move the source file to driver-api/gpio
+>  - fix the bug reported by Zhongqiu Han
+>  - remove the I2C related info
+>
+> Changes in v5:
+>  - move the gpio-rpmsg.rst from admin-guide to staging directory after
+>    discussion with Randy Dunlap.
+>  - add include files with some code improvements per Bartosz's comments.
+>
+> Changes in v4:
+>  - add a documentation to describe the transport protocol per Andrew's
+>    comments.
+>  - add a new handler to get the gpio direction.
+>
+> Changes in v3:
+>  - fix various format issue and return value check per Peng 's review
+>    comments.
+>  - add the logic to also populate the subnodes which are not in the
+>    device map per Arnaud's request. (in imx_rproc.c)
+>  - update the yaml per Frank's review comments.
+>
+> Changes in v2:
+>  - re-implemented the gpio driver per Linus Walleij's feedback by using
+>    GPIOLIB_IRQCHIP helper library.
+>  - fix various format issue per Mathieu/Peng 's review comments.
+>  - update the yaml doc per Rob's feedback
+>
+> Shenwei Wang (4):
+>   docs: driver-api: gpio: rpmsg gpio driver over rpmsg bus
+>   dt-bindings: remoteproc: imx_rproc: Add "rpmsg" subnode support
+>   gpio: rpmsg: add generic rpmsg GPIO driver
+>   arm64: dts: imx8ulp: Add rpmsg node under imx_rproc
+>
+>  .../devicetree/bindings/gpio/gpio-rpmsg.yaml  |  55 ++
+>  .../bindings/remoteproc/fsl,imx-rproc.yaml    |  53 ++
+>  Documentation/driver-api/gpio/gpio-rpmsg.rst  | 266 ++++++++
+>  Documentation/driver-api/gpio/index.rst       |   1 +
+>  arch/arm64/boot/dts/freescale/imx8ulp.dtsi    |  25 +
+>  drivers/gpio/Kconfig                          |  17 +
+>  drivers/gpio/Makefile                         |   1 +
+>  drivers/gpio/gpio-rpmsg.c                     | 573 ++++++++++++++++++
+>  8 files changed, 991 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/gpio/gpio-rpmsg.yaml
+>  create mode 100644 Documentation/driver-api/gpio/gpio-rpmsg.rst
+>  create mode 100644 drivers/gpio/gpio-rpmsg.c
+>
+> --
+> 2.43.0
+>
 
