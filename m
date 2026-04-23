@@ -1,62 +1,62 @@
-Return-Path: <linux-doc+bounces-84343-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84339-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uH6WCl9u6mlBzQIAu9opvQ
-	(envelope-from <linux-doc+bounces-84343-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:09:19 +0200
+	id sJ0IItNt6mnrzAIAu9opvQ
+	(envelope-from <linux-doc+bounces-84339-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:06:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25E36456783
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:09:18 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71BA6456693
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:06:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 08D7A301A2C1
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 19:06:43 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 6AE0A3018B51
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 19:06:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33344391844;
-	Thu, 23 Apr 2026 19:06:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3ED103921CD;
+	Thu, 23 Apr 2026 19:06:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="PW5IGQXn"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="R732dx7u"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE6F3391E7A;
-	Thu, 23 Apr 2026 19:06:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC0F139182F;
+	Thu, 23 Apr 2026 19:06:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776971195; cv=pass; b=KkDD9tLfIQz3FB4/zhEPaS1c61KVV3fTfnxQxGBGs34ffHzEHxRhbnnU16wH1UOcslhMpS/0e3STihlM84hEOjGPH85Tc8NpfNffQdFnzi1KB0StUdCZAfznfzueg74aLxvJv35oajVIwQrlqNEFRN9jIYNgOD3J7apktagYSNk=
+	t=1776971171; cv=pass; b=NqJ1n7zNKKTdJt+ahVKuBBZDgZv1tvDXZAHD1nUn8Sr/oEnuphRJHkSCs1PRHEBx5JNmdZ+s9jkPjM3cQu1Lr1PMYHyPXd2B8mQJk9Nd9cyIOFFzXsf6eJ+lGatlyXg/OoDeUWZNgk+4spOKCMaHgH6UFrcxXpJM4S4uqpSwjTU=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776971195; c=relaxed/simple;
-	bh=DVvw+bLCz7960ScWR22BVL2eQ6sf8lw8xm2Yksvy7X0=;
+	s=arc-20240116; t=1776971171; c=relaxed/simple;
+	bh=3x10zUXCouHz5cyW3fvz9/fCcnmxwacS2no/kjxq2bA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=fUZnE3TmVsMcf/nkszdfNmJqGFbYBoq0rVJtkOcLb5qg6Ur2CXNwO+jag+uYcGLrXXXjKGwDzPJM7bb7wyJrrt71z5WxQyEHqkalXIo8eqRbAbk6kZ9WM/N9JjtDEXGSrboCjDrGYQGaKZBKMUNsCIeFsEv8w7h7lpyMh6i2m9w=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=PW5IGQXn; arc=pass smtp.client-ip=136.143.188.112
+	 In-Reply-To:To:Cc; b=LiAWurkpqwPya6YWJg85hPspPifspyNeE25ev9TdCHNtvv3BZMLS4CiM0iZ4stQ1u6ZX12mreOAZE5LlFL7EiP0b1LfDCLJpJVoInvLZ/m/CXG7AY0aJk+O4nGshQoBXzRIIFweEcG7hSs0T5xxnRfyTugSTLln5Vrds5mhtWow=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=R732dx7u; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1776971120; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1776971126; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=D8pBdc3/tnggta8aXWJGkalpzLSoKkl9RI1kRRl8p4xXZ3tYdlAiPmqPEsRqtXhkAvIHZgReAjH7DG7x2D5wqH9COkZDwGlTer0zHP/7tw1XwzMNkWvOWM+e/GvXD9zAjRBmVK0wnBLlccu0yu4T4d5ta5WmZdZPmutMFdhhRAo=
+	b=luxMYwlJapgNpSTWalXuwaUSLXCZE5rLhijiTaLRDgGTAwWuRzVNKufoheglGh0wue2yB5G/Nb/SQiGQscpPWhSelOHwwZL88GKpkrbec+7bRUyIL6RnQs8TpOSqxylsrojzkwKyYDNTLA0gv31OOSlWaInjki4woYIqL4zZRcA=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1776971120; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=tTwgeWxJjTj3zgZ7H2pPIg1FKRse0ow00ezleoUdZMU=; 
-	b=g1SmoujqSrYvBw5rP1xPDBGHr2hCIAE11S0td7aLwyRhSQeSo2gvHsAQYCa32bLMw/qnHS+X6bf1PPju531+hMqyfiazXrIuDxxZTmJSr2U8ePcXdjg6Qne0ajmT/TuqmMiDCn50i/WQkEP1xCCAE0/T6F53+5inr7UD31qzLRs=
+	t=1776971126; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=L2O+6hWqat3vHvvpJQfgGLUYsjv/ArmH9e/e7Vz/G5I=; 
+	b=QU7lTUagdleL1ZOonrTMhNcwC1fsYzE8L7ZENxDEQTqMBP20qiMYaBDAMv3WnrqycmATeyk2ue4OKqCOe8eJEcCvQEe4WuI+1DG/svnJInbhlh4y6g87VxSH6Irax2eVDxRcQBTi9j8LrZI4b0bKHekytLxbs/Gl3W97sJt0XmA=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776971120;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776971126;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=tTwgeWxJjTj3zgZ7H2pPIg1FKRse0ow00ezleoUdZMU=;
-	b=PW5IGQXn5/fqsoVnDzVpFnNW0j4+ag7FRX034TBZNlieh34iw9qrJPcwMZncfRo7
-	Ho2d8PS3SVCSWYO+MryNu8bjHp+2NhW7sTO7HtE+86jiYrANPfnxriA65VX2QNjmNc7
-	LYNMLDaeX42EC1kIVYSln9GBiC4eAXjW/HM9yy+o=
-Received: by mx.zohomail.com with SMTPS id 1776971117666621.558874860145;
-	Thu, 23 Apr 2026 12:05:17 -0700 (PDT)
+	bh=L2O+6hWqat3vHvvpJQfgGLUYsjv/ArmH9e/e7Vz/G5I=;
+	b=R732dx7uxGMhFECtEbtLe0Z3P/zJV7NuZc9r+To3TgEUQAEFt6lVWLdSkcuQ/yQ/
+	2wbUZ3zkrGULHLplaF5krHkdrPMalHMBvqwrVdntiiw88Jr2Ir3u3/K7dm6gmYIzAtU
+	Wb4bm0pswOWUqyxV1MB3RmR2hYBLwcqPy1e0HkvY=
+Received: by mx.zohomail.com with SMTPS id 1776971125012965.5568652865181;
+	Thu, 23 Apr 2026 12:05:25 -0700 (PDT)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Thu, 23 Apr 2026 21:03:34 +0200
-Subject: [PATCH v14 11/28] drm/i915/hdmi: Add YCBCR444 handling for sink
+Date: Thu, 23 Apr 2026 21:03:35 +0200
+Subject: [PATCH v14 12/28] drm/i915/dp: Add YCBCR444 handling for sink
  formats
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -66,7 +66,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260423-color-format-v14-11-449a419ccbd4@collabora.com>
+Message-Id: <20260423-color-format-v14-12-449a419ccbd4@collabora.com>
 References: <20260423-color-format-v14-0-449a419ccbd4@collabora.com>
 In-Reply-To: <20260423-color-format-v14-0-449a419ccbd4@collabora.com>
 To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
@@ -101,12 +101,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
 	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84343-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84339-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
@@ -121,9 +121,9 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,collabora.com:email,collabora.com:dkim,collabora.com:mid]
-X-Rspamd-Queue-Id: 25E36456783
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,collabora.com:email,collabora.com:dkim,collabora.com:mid]
+X-Rspamd-Queue-Id: 71BA6456693
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
@@ -132,73 +132,48 @@ sink formats, add handling of the YCBCR444 sink format. The AUTO path
 does not choose this format, but with explicit format selection added to
 the driver, it becomes a possibility.
 
-Check for YCBCR444 support on the sink in sink_bpc_possible, and on the
-source and sink in sink_format_valid.
+Check for both source and sink support of YCBCR444 in
+intel_dp_sink_format_valid.
 
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- drivers/gpu/drm/i915/display/intel_hdmi.c | 32 +++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ drivers/gpu/drm/i915/display/intel_dp.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/drivers/gpu/drm/i915/display/intel_hdmi.c b/drivers/gpu/drm/i915/display/intel_hdmi.c
-index 874076a29da4..ee7a7655e9b4 100644
---- a/drivers/gpu/drm/i915/display/intel_hdmi.c
-+++ b/drivers/gpu/drm/i915/display/intel_hdmi.c
-@@ -1966,6 +1966,8 @@ static bool intel_hdmi_sink_bpc_possible(struct drm_connector *_connector,
- 
- 		if (sink_format == INTEL_OUTPUT_FORMAT_YCBCR420)
- 			return hdmi->y420_dc_modes & DRM_EDID_YCBCR420_DC_36;
-+		else if (sink_format == INTEL_OUTPUT_FORMAT_YCBCR444)
-+			return info->edid_hdmi_ycbcr444_dc_modes & DRM_EDID_HDMI_DC_36;
- 		else
- 			return info->edid_hdmi_rgb444_dc_modes & DRM_EDID_HDMI_DC_36;
- 	case 10:
-@@ -1974,6 +1976,8 @@ static bool intel_hdmi_sink_bpc_possible(struct drm_connector *_connector,
- 
- 		if (sink_format == INTEL_OUTPUT_FORMAT_YCBCR420)
- 			return hdmi->y420_dc_modes & DRM_EDID_YCBCR420_DC_30;
-+		else if (sink_format == INTEL_OUTPUT_FORMAT_YCBCR444)
-+			return info->edid_hdmi_ycbcr444_dc_modes & DRM_EDID_HDMI_DC_30;
- 		else
- 			return info->edid_hdmi_rgb444_dc_modes & DRM_EDID_HDMI_DC_30;
- 	case 8:
-@@ -2021,6 +2025,27 @@ intel_hdmi_mode_clock_valid(struct drm_connector *_connector, int clock,
- 	return status;
+diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+index 35b8fb5740aa..299b91d262c3 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp.c
++++ b/drivers/gpu/drm/i915/display/intel_dp.c
+@@ -1344,6 +1344,20 @@ intel_dp_mode_valid_downstream(struct intel_connector *connector,
+ 					 8, sink_format, true);
  }
  
-+/**
-+ * intel_hdmi_can_ycbcr444 - Check whether connector can output YCbCr444
-+ * @connector: pointer to &struct intel_connector to check
-+ *
-+ * Checks whether the hardware that backs @connector is capable of outputting
-+ * YCbCr444 video over HDMI. Does not check whether currently connected sink is
-+ * capable of receiving it.
-+ *
-+ * Returns: %true if source supports outputting YCbCr444, %false otherwise.
-+ */
 +static bool
-+intel_hdmi_can_ycbcr444(struct intel_connector *connector)
++intel_dp_can_ycbcr444(struct intel_dp *intel_dp)
 +{
-+	const struct intel_display *display = to_intel_display(connector);
++	if (source_can_output(intel_dp, INTEL_OUTPUT_FORMAT_YCBCR444) &&
++	    !drm_dp_is_branch(intel_dp->dpcd))
++		return true;
 +
-+	if (HAS_GMCH(display))
++	if (source_can_output(intel_dp, INTEL_OUTPUT_FORMAT_RGB) &&
++	    dfp_can_convert_from_rgb(intel_dp, INTEL_OUTPUT_FORMAT_YCBCR444))
 +		return true;
 +
 +	return false;
 +}
 +
  static enum drm_mode_status
- intel_hdmi_sink_format_valid(struct intel_connector *connector,
- 			     const struct drm_display_mode *mode,
-@@ -2038,6 +2063,13 @@ intel_hdmi_sink_format_valid(struct intel_connector *connector,
+ intel_dp_sink_format_valid(struct intel_connector *connector,
+ 			   const struct drm_display_mode *mode,
+@@ -1364,6 +1378,13 @@ intel_dp_sink_format_valid(struct intel_connector *connector,
  
  		return MODE_OK;
  	case INTEL_OUTPUT_FORMAT_RGB:
 +		return MODE_OK;
 +	case INTEL_OUTPUT_FORMAT_YCBCR444:
-+		if (!intel_hdmi_can_ycbcr444(connector))
-+			return MODE_BAD;
 +		if (!(info->color_formats & BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444)))
++			return MODE_BAD;
++		if (!intel_dp_can_ycbcr444(intel_dp))
 +			return MODE_BAD;
 +
  		return MODE_OK;
