@@ -1,63 +1,63 @@
-Return-Path: <linux-doc+bounces-84354-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84357-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QJaxNv5u6mlBzQIAu9opvQ
-	(envelope-from <linux-doc+bounces-84354-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:11:58 +0200
+	id ILa5Aelu6mlBzQIAu9opvQ
+	(envelope-from <linux-doc+bounces-84357-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:11:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3469945681C
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:11:58 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E634567EF
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:11:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 92216301583F
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 19:08:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8ACB6307838D
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 19:08:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 24CBD39182F;
-	Thu, 23 Apr 2026 19:08:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DB743921DC;
+	Thu, 23 Apr 2026 19:08:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="NsSXvARW"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="jAY/CM0b"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 815EE1E885A;
-	Thu, 23 Apr 2026 19:08:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B8732D0C72;
+	Thu, 23 Apr 2026 19:08:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776971287; cv=pass; b=KH+XozxlbAbTltFptovhnPruVOzhkOIqK+ZjIAwp4anwzSSKitKC8oJPR1/n+OPn42lJSltH0LipIL4mk+3xTUconB32lQ9alFfi7TmfEB+cKfb4ukW46+Z81C+rPL+NQjI+VVQSFwybTHBbsQl/fhvi9pZ4SrnP0Z1BPQlq2Cw=
+	t=1776971297; cv=pass; b=Z48ToM4MxuFIbqGFbvm/Ur2hcKpvcxyK4COqyH1fC0Oxxv9QNPKFNI3gsV/6iEnbXfIA29pA0LcVw0wnzQTK/Gkfar34mJ2j9LTNlOQwcPiEdCQijqlqIKeAmToOaKUUf7Ra9t8SMMwqCKqc0BvrJQAz4uFdGEOOcKzT0w9vH4o=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776971287; c=relaxed/simple;
-	bh=t4JruUNsiR+2zbz1zHNZDw9bNHKcK9e6SysxgpPFHMk=;
+	s=arc-20240116; t=1776971297; c=relaxed/simple;
+	bh=Dn/pBfkP85s7Cos81jAtHcW9Y8sCvyQ7UbI3Ss/Q4ds=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=k43pTmFK8kogDI1VfTZf6lOPEO2XHxaNg1BRf5ZaDeBG/0S1YnNI27323Nz8ZJT7BZmy1PABoPbdIwEM8DOxcHMRCOikE+U4PtoGihCyAEJyk4iypfwAS9hICU3aSLXtCbOUjXwhz2u0un9R+BQqYzXOUK0eKXTUwWMxxYs6Cpo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=NsSXvARW; arc=pass smtp.client-ip=136.143.188.112
+	 In-Reply-To:To:Cc; b=OLQxv+g7zqYLvBPpzwkx4rCXDhovN2LO4VyM1Hxg1N/XriBASEjKi3Smxja0bLDjdSCPRbn5PC3g/Iw3y7+phj7O/KIp88UsC398wxxpemtGsyH5O8NXo2ZP1y0Nj6Pl/1ZQ7RCc3y9wQ1/bSOeFBX2mnXkk/qVJt2HqZpAoLZc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=jAY/CM0b; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1776971230; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1776971238; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=MvtUbT0EWkZD5vlvcYR4JTvYMIQglSzZCxW/MdDTB64hT5b2R5TeEB5ANsdfGi3GxPz7G+kNwMfMDEoPPesWd/itSGXzZZoQi36l1t4hZv4zXqfHgoFF21rINW1VlgQThhFsfdwEaIx4VVcxYM1x7w2LwfEjrXHPLWT8AipovD0=
+	b=LZFYuvIpdzTb+OTMQtDpV6yUzQpTtfpJJXBGpekI8S2QjyujH2T4vhk0DF32zYZxaXGdnr95NSgGGjQmx9M9UHQpHOYhB5e4gluk/H5Pmw5SXyCC71tpPFxv69OwPix7KDUnRxJaTR5Qrtht5TGzeiikgjTLvva4smkvv8pSfnU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1776971230; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=mW0Ja2FbkQHM1K+7Np14cKRo9Q3SNA4jFH3nNeqjQjs=; 
-	b=jS/YJIxpO9EccrepS25MVU6nbmxc8KtOjhNXJtzXb0K2ASfxKVTnKI0xrjJhoxwcTKwEHtZA6WGYQcaKESfB4veNm5C2H97nTzRMljOWEMzqAY/L7bUkiq1g+QRm9Plj5ZeFf45L76p1uRSQfNzmnGJFsJ1hYizmBVM8TnfRxcY=
+	t=1776971238; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=hQtceYjF+45uWREVwWUPbe4XSHEMsSoK2/IY04gEcjA=; 
+	b=gGY2f6lforycL37KugN7jAllMAShuEfIasR0A7eh9oV9kzMvclUpj55WlpYg4uEpDRCfIL4UquvuZKjUCj0/ykVaI4aWDmYKP2X3KI3RDyX7qdqpj1YvFPApQqFPe0k+Wmldb1VaafTrao7iYn8b3RyBzDJRSVA9ckKCaPUuKy8=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776971230;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776971238;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=mW0Ja2FbkQHM1K+7Np14cKRo9Q3SNA4jFH3nNeqjQjs=;
-	b=NsSXvARWy2Ow968hPuvcYUSZH+9VzUQkuGLnnW9eXSqrV0+n2kLKSSrWueIS7Sms
-	B4pfjiIIqAxr52xc9Sx5jEI9WniYPSEK2fMqqn+tQX4wIlAIKuA7CD1OUmUhPNpjrZl
-	6uajF5lN79QrjIEJXmLMnem4YMQBo0B1OldFV15Q=
-Received: by mx.zohomail.com with SMTPS id 177697122942670.00416904047358;
-	Thu, 23 Apr 2026 12:07:09 -0700 (PDT)
+	bh=hQtceYjF+45uWREVwWUPbe4XSHEMsSoK2/IY04gEcjA=;
+	b=jAY/CM0bOzs8tiicXxXJPvM7WLp5udfhW+mZIkKRO3A9aP3J2g477iQ3IPMa8mw5
+	Pii6tCLI31eOR4SoB6VM57mthogItFpYAW0VvcdJ4Ax8x/CFKKxuio2ABILpNR5Sw7Z
+	tBZVRzaw6yxH/WHJ+N0QE8wV9Cd/WBv1Kc2Bdc4E=
+Received: by mx.zohomail.com with SMTPS id 177697123670449.67616514671079;
+	Thu, 23 Apr 2026 12:07:16 -0700 (PDT)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Thu, 23 Apr 2026 21:03:49 +0200
-Subject: [PATCH v14 26/28] drm/tests: bridge: Add test for HDMI output bus
- formats helper
+Date: Thu, 23 Apr 2026 21:03:50 +0200
+Subject: [PATCH v14 27/28] drm/bridge: Document bridge chain format
+ selection
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -66,7 +66,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260423-color-format-v14-26-449a419ccbd4@collabora.com>
+Message-Id: <20260423-color-format-v14-27-449a419ccbd4@collabora.com>
 References: <20260423-color-format-v14-0-449a419ccbd4@collabora.com>
 In-Reply-To: <20260423-color-format-v14-0-449a419ccbd4@collabora.com>
 To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
@@ -101,12 +101,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
 	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84354-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84357-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
@@ -121,245 +121,96 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:dkim,collabora.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 3469945681C
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,collabora.com:email,collabora.com:dkim,collabora.com:mid]
+X-Rspamd-Queue-Id: A4E634567EF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The common atomic_get_output_bus_fmts helper for HDMI bridge connectors,
-called drm_atomic_helper_bridge_get_hdmi_output_bus_fmts, should return
-an array of output bus formats depending on the supported formats of the
-connector, and the current output BPC.
+The bridge chain format selection behaviour was, until now,
+undocumented. With the addition of the "color format" DRM property, it's
+not sufficiently complex enough that documentation is warranted,
+especially for driver authors trying to do the right thing.
 
-Add a test to exercise some of this helper.
+Add a high-level overview of how the process is supposed to work, and
+mention what the display driver is supposed to do if it wants to make
+use of this functionality.
 
 Reviewed-by: Maxime Ripard <mripard@kernel.org>
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- drivers/gpu/drm/tests/drm_bridge_test.c | 184 ++++++++++++++++++++++++++++++++
- 1 file changed, 184 insertions(+)
+ Documentation/gpu/drm-kms-helpers.rst |  6 ++++++
+ drivers/gpu/drm/drm_bridge.c          | 40 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 46 insertions(+)
 
-diff --git a/drivers/gpu/drm/tests/drm_bridge_test.c b/drivers/gpu/drm/tests/drm_bridge_test.c
-index cb821c606070..d9bd930b1197 100644
---- a/drivers/gpu/drm/tests/drm_bridge_test.c
-+++ b/drivers/gpu/drm/tests/drm_bridge_test.c
-@@ -5,6 +5,7 @@
- #include <linux/cleanup.h>
- #include <linux/media-bus-format.h>
+diff --git a/Documentation/gpu/drm-kms-helpers.rst b/Documentation/gpu/drm-kms-helpers.rst
+index b4a9e5ae81f6..bf5a9d909cf3 100644
+--- a/Documentation/gpu/drm-kms-helpers.rst
++++ b/Documentation/gpu/drm-kms-helpers.rst
+@@ -169,6 +169,12 @@ Bridge Operations
+ .. kernel-doc:: drivers/gpu/drm/drm_bridge.c
+    :doc: bridge operations
  
-+#include <drm/drm_atomic_helper.h>
- #include <drm/drm_atomic_state_helper.h>
- #include <drm/drm_atomic_uapi.h>
- #include <drm/drm_bridge.h>
-@@ -118,6 +119,28 @@ static const struct drm_bridge_funcs drm_test_bridge_atomic_funcs = {
- 	.atomic_reset		= drm_atomic_helper_bridge_reset,
- };
++Bridge Chain Format Selection
++-----------------------------
++
++.. kernel-doc:: drivers/gpu/drm/drm_bridge.c
++   :doc: bridge chain format selection
++
+ Bridge Connector Helper
+ -----------------------
  
-+static int dummy_clear_infoframe(struct drm_bridge *bridge)
-+{
-+	return 0;
-+}
-+
-+static int dummy_write_infoframe(struct drm_bridge *bridge, const u8 *buffer,
-+				 size_t len)
-+{
-+	return 0;
-+}
-+
-+static const struct drm_bridge_funcs drm_test_bridge_bus_fmts_funcs = {
-+	.atomic_get_output_bus_fmts	= drm_atomic_helper_bridge_get_hdmi_output_bus_fmts,
-+	.atomic_destroy_state		= drm_atomic_helper_bridge_destroy_state,
-+	.atomic_duplicate_state		= drm_atomic_helper_bridge_duplicate_state,
-+	.atomic_reset			= drm_atomic_helper_bridge_reset,
-+	.hdmi_write_avi_infoframe	= dummy_write_infoframe,
-+	.hdmi_write_hdmi_infoframe	= dummy_write_infoframe,
-+	.hdmi_clear_avi_infoframe	= dummy_clear_infoframe,
-+	.hdmi_clear_hdmi_infoframe	= dummy_clear_infoframe,
-+};
-+
- /**
-  * struct fmt_tuple - a tuple of input/output MEDIA_BUS_FMT_*
+diff --git a/drivers/gpu/drm/drm_bridge.c b/drivers/gpu/drm/drm_bridge.c
+index 3843d45a82cb..8ddac8424163 100644
+--- a/drivers/gpu/drm/drm_bridge.c
++++ b/drivers/gpu/drm/drm_bridge.c
+@@ -198,6 +198,46 @@
+  * driver.
   */
-@@ -539,6 +562,83 @@ drm_test_bridge_chain_init(struct kunit *test, unsigned int num_bridges,
- 	return priv;
- }
  
-+static struct drm_bridge_init_priv *
-+drm_test_bridge_hdmi_init(struct kunit *test, const struct drm_bridge_funcs *funcs,
-+			  unsigned int supported_formats, int max_bpc)
-+{
-+	struct drm_bridge_init_priv *priv;
-+	struct drm_encoder *enc;
-+	struct drm_bridge *bridge;
-+	struct drm_device *drm;
-+	struct device *dev;
-+	int ret;
-+
-+	dev = drm_kunit_helper_alloc_device(test);
-+	if (IS_ERR(dev))
-+		return ERR_CAST(dev);
-+
-+	priv = drm_kunit_helper_alloc_drm_device(test, dev,
-+						 struct drm_bridge_init_priv, drm,
-+						 DRIVER_MODESET | DRIVER_ATOMIC);
-+	if (IS_ERR(priv))
-+		return ERR_CAST(priv);
-+
-+	priv->test_bridge = devm_drm_bridge_alloc(dev, struct drm_bridge_priv, bridge, funcs);
-+	if (IS_ERR(priv->test_bridge))
-+		return ERR_CAST(priv->test_bridge);
-+
-+	priv->test_bridge->data = priv;
-+
-+	drm = &priv->drm;
-+	priv->plane = drm_kunit_helper_create_primary_plane(test, drm,
-+							    NULL,
-+							    NULL,
-+							    NULL, 0,
-+							    NULL);
-+	if (IS_ERR(priv->plane))
-+		return ERR_CAST(priv->plane);
-+
-+	priv->crtc = drm_kunit_helper_create_crtc(test, drm,
-+						  priv->plane, NULL,
-+						  NULL,
-+						  NULL);
-+	if (IS_ERR(priv->crtc))
-+		return ERR_CAST(priv->crtc);
-+
-+	enc = &priv->encoder;
-+	ret = drmm_encoder_init(drm, enc, NULL, DRM_MODE_ENCODER_TMDS, NULL);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	enc->possible_crtcs = drm_crtc_mask(priv->crtc);
-+
-+	bridge = &priv->test_bridge->bridge;
-+	bridge->type = DRM_MODE_CONNECTOR_HDMIA;
-+	bridge->supported_formats = supported_formats;
-+	bridge->max_bpc = max_bpc;
-+	bridge->ops |= DRM_BRIDGE_OP_HDMI;
-+	bridge->vendor = "LNX";
-+	bridge->product = "KUnit";
-+
-+	ret = drm_kunit_bridge_add(test, bridge);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	ret = drm_bridge_attach(enc, bridge, NULL, 0);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	priv->connector = drm_bridge_connector_init(drm, enc);
-+	if (IS_ERR(priv->connector))
-+		return ERR_CAST(priv->connector);
-+
-+	drm_connector_attach_encoder(priv->connector, enc);
-+
-+	drm_mode_config_reset(drm);
-+
-+	return priv;
-+}
-+
- /*
-  * Test that drm_bridge_get_current_state() returns the last committed
-  * state for an atomic bridge.
-@@ -786,10 +886,94 @@ static void drm_test_drm_bridge_helper_reset_crtc_legacy(struct kunit *test)
- 	KUNIT_EXPECT_EQ(test, bridge_priv->disable_count, 1);
- }
- 
-+/*
-+ * Test that a bridge using the drm_atomic_helper_bridge_get_hdmi_output_bus_fmts()
-+ * function for &drm_bridge_funcs.atomic_get_output_bus_fmts behaves as expected
-+ * for an HDMI connector bridge. Does so by creating an HDMI bridge connector
-+ * with RGB444, YCBCR444, and YCBCR420 (but not YCBCR422) as supported formats,
-+ * sets the output depth to 8 bits per component, and then validates the returned
-+ * list of bus formats.
++/**
++ * DOC: bridge chain format selection
++ *
++ * A bridge chain, from display output processor to connector, may contain
++ * bridges capable of converting between bus formats on their inputs, and
++ * output formats on their outputs. For example, a bridge may be able to convert
++ * from RGB to YCbCr 4:4:4, and pass through YCbCr 4:2:0 as-is, but not convert
++ * from RGB to YCbCr 4:2:0. This means not all input formats map to all output
++ * formats.
++ *
++ * Further adding to this, a desired output color format, as specified with the
++ * "color format" DRM property, might not correspond 1:1 to what the display
++ * driver should set at its output. The bridge chain it feeds into may only be
++ * able to reach the desired output format, if a conversion from a different
++ * starting format is performed.
++ *
++ * To deal with this complexity, the recursive bridge chain bus format selection
++ * logic starts with the last bridge in the chain, usually the connector, and
++ * then recursively walks the chain of bridges backwards to the first bridge,
++ * trying to find a path.
++ *
++ * For a display driver to work in such a scenario, it should read the first
++ * bridge's bridge state to figure out which bus format the chain resolved to.
++ * If the first bridge's input format resolved to %MEDIA_BUS_FMT_FIXED, then its
++ * output format should be used.
++ *
++ * Special handling is done for HDMI as it relates to format selection. Instead
++ * of directly using the "color format" DRM property for bridge chains that end
++ * in HDMI bridges, the bridge chain format selection logic will trust the logic
++ * that set the HDMI output format. For the common HDMI state helper
++ * functionality, this means that %DRM_CONNECTOR_COLOR_FORMAT_AUTO will allow
++ * fallbacks to YCBCr 4:2:0 if the bandwidth requirements would otherwise be too
++ * high but the mode and connector allow it.
++ *
++ * For bridge chains that do not end in an HDMI bridge,
++ * %DRM_CONNECTOR_COLOR_FORMAT_AUTO will be satisfied with the first output
++ * format on the last bridge for which it can find a path back to the first
++ * bridge.
 + */
-+static void drm_test_drm_bridge_helper_hdmi_output_bus_fmts(struct kunit *test)
-+{
-+	struct drm_connector_state *conn_state;
-+	struct drm_bridge_state *bridge_state;
-+	struct drm_modeset_acquire_ctx ctx;
-+	struct drm_bridge_init_priv *priv;
-+	struct drm_crtc_state *crtc_state;
-+	struct drm_atomic_state *state;
-+	struct drm_display_mode *mode;
-+	unsigned int num_output_fmts;
-+	struct drm_bridge *bridge;
-+	u32 *out_bus_fmts;
-+	int ret;
 +
-+	priv = drm_test_bridge_hdmi_init(test, &drm_test_bridge_bus_fmts_funcs,
-+					 BIT(DRM_OUTPUT_COLOR_FORMAT_RGB444) |
-+					 BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444) |
-+					 BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR420),
-+					 12);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv);
-+
-+	bridge = &priv->test_bridge->bridge;
-+
-+	drm_modeset_acquire_init(&ctx, 0);
-+
-+	state = drm_kunit_helper_atomic_state_alloc(test, &priv->drm, &ctx);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, state);
-+
-+retry_commit:
-+	conn_state = drm_atomic_get_connector_state(state, priv->connector);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, conn_state);
-+
-+	conn_state->hdmi.output_bpc = 8;
-+
-+	mode = drm_kunit_display_mode_from_cea_vic(test, &priv->drm, 16);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, mode);
-+
-+	ret = drm_atomic_set_crtc_for_connector(conn_state, priv->crtc);
-+	if (ret == -EDEADLK) {
-+		drm_modeset_backoff(&ctx);
-+		goto retry_commit;
-+	}
-+	KUNIT_ASSERT_EQ(test, ret, 0);
-+
-+	crtc_state = drm_atomic_get_crtc_state(state, priv->crtc);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, crtc_state);
-+
-+	ret = drm_atomic_set_mode_for_crtc(crtc_state, mode);
-+	if (ret == -EDEADLK) {
-+		drm_modeset_backoff(&ctx);
-+		goto retry_commit;
-+	}
-+	KUNIT_ASSERT_EQ(test, ret, 0);
-+
-+	crtc_state->enable = true;
-+	crtc_state->active = true;
-+
-+	bridge_state = drm_atomic_get_bridge_state(state, bridge);
-+	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, bridge_state);
-+
-+	out_bus_fmts = bridge->funcs->atomic_get_output_bus_fmts(
-+		bridge, bridge_state, crtc_state, conn_state, &num_output_fmts);
-+	KUNIT_EXPECT_NOT_NULL(test, out_bus_fmts);
-+	KUNIT_EXPECT_EQ(test, num_output_fmts, 3);
-+
-+	KUNIT_EXPECT_EQ(test, out_bus_fmts[0], MEDIA_BUS_FMT_RGB888_1X24);
-+	KUNIT_EXPECT_EQ(test, out_bus_fmts[1], MEDIA_BUS_FMT_YUV8_1X24);
-+	KUNIT_EXPECT_EQ(test, out_bus_fmts[2], MEDIA_BUS_FMT_UYYVYY8_0_5X24);
-+
-+	drm_modeset_drop_locks(&ctx);
-+	drm_modeset_acquire_fini(&ctx);
-+
-+	kfree(out_bus_fmts);
-+}
-+
- static struct kunit_case drm_bridge_helper_reset_crtc_tests[] = {
- 	KUNIT_CASE(drm_test_drm_bridge_helper_reset_crtc_atomic),
- 	KUNIT_CASE(drm_test_drm_bridge_helper_reset_crtc_atomic_disabled),
- 	KUNIT_CASE(drm_test_drm_bridge_helper_reset_crtc_legacy),
-+	KUNIT_CASE(drm_test_drm_bridge_helper_hdmi_output_bus_fmts),
- 	{ }
- };
- 
+ /* Protect bridge_list and bridge_lingering_list */
+ static DEFINE_MUTEX(bridge_lock);
+ static LIST_HEAD(bridge_list);
 
 -- 
 2.53.0
