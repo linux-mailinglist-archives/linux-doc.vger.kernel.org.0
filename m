@@ -1,72 +1,72 @@
-Return-Path: <linux-doc+bounces-84408-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84407-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wNbQFcCO6mnK0gIAu9opvQ
-	(envelope-from <linux-doc+bounces-84408-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:28 +0200
+	id uKOZBcyO6mn10gIAu9opvQ
+	(envelope-from <linux-doc+bounces-84407-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB83B457DA4
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6F09457DC2
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AF0B7306781F
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:24:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C8EB9301F142
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:25:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5705E3BFE4A;
-	Thu, 23 Apr 2026 21:23:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52CED3BED75;
+	Thu, 23 Apr 2026 21:23:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="VA1+2JWS"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="WftHepeb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
+Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93B273BED75
-	for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 21:23:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED6623C3430
+	for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 21:23:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776979424; cv=none; b=dTTIwrtZRVnhIGn7dSAukh2S6FRmk/oSjGoP03nmm3wToebbfSvnnyuXMe4MwzSbulY9bSZVmR2qVxAxv+zvyiuISQeEyrxnMzTTlKsMEaJsuV2u9v4H8joa0lccidwK8upcFeDLT6Vo+joM8IWvPdKXeZzQxYxvwEmrk1QgOgE=
+	t=1776979424; cv=none; b=Fn5HDjiBd0rCxslYCXelv+5ZNyxpDsmuSSx6ALFTFigPPVuel+hDD4cBEDc7RxbxiB7Wp41EmEuNnaDlIEKGIGZLDrsI2c3w33z7T3NRrQVEyJbUzeadhmcNBJisFiYOSdmh/ck6WyH2mq60xfcyj/6P1aHuHRNw6pQvZO+j7PI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1776979424; c=relaxed/simple;
-	bh=GLaesJwUwri2XBQC98JUEA4yA/xfrELrLuoXDywngTA=;
+	bh=85D2Ac3hBoG1dFzFVA37bHIGBGx9gipkQcKVvZXkhV0=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=iQR8pxis+CaUyqK/YSfJ+UIhJMoibNkYqi1aotSgHJDCWQAzCnITgk6haNxtOwH3uR/ueEjo6Ph1GfCtRU02zbJdhQzORBR9E7CFAitGIhRDVbnzglPg4Kcy0FlSnknjunJmSsshly6sPaoGfs+FfEg68Yv0/Hp30p15wLOx6cg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=VA1+2JWS; arc=none smtp.client-ip=209.85.215.201
+	 To:Cc:Content-Type; b=YuzrP8vbjIJImjAdYWIaGGa0+jRMg+iq7iRJWQUexukbFJcGsvafK5LqhfkCRydbOOhXHqkh8FuBHdkS7VDXqqKaAqv6nI+Tlfq6wY+bJLs3lkJIO7V7ZRmTwQ5dX409/vbQ5wM3xu7+RVHvhuP+dX/MDLSWxI8tnd3Yqc3lLew=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=WftHepeb; arc=none smtp.client-ip=209.85.214.202
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--dmatlack.bounces.google.com
-Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-c797efdaa9cso3514352a12.3
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 14:23:36 -0700 (PDT)
+Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-2b24af7ca99so96472685ad.1
+        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 14:23:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1776979414; x=1777584214; darn=vger.kernel.org;
+        d=google.com; s=20251104; t=1776979416; x=1777584216; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Xzr76OgKRSVyLlNPZ4BBmoEisHfu3frnnsSEc+2qgNA=;
-        b=VA1+2JWS7IZk/6jE0kqswLqR5jApMuOYqzkzFNJ3x+Q9JgNdA45/321J5I4rX11z+g
-         slDC3Fq8zkBjz1Svs0kAN+Mt1Oho1BMZh6UBZ9SGs/KViObuW7J/7vEUGTUgaoRjXRDt
-         tiQzTejOANkIfN5m+y9o6ARdNe1BqyJXHGz+ObRIV34TbXJUC4f8FFWfXcwGLAz20+7f
-         8ZLtTXFotDyJ+SHn+fC1whXylunliysds+0xQLPSnvqfsZk55z6rjWLlz/3QwUD+ww1H
-         YtjFH2fzBtLFUYixCMMwt6OSRVn0WC1XFFWri5xC6OomH0gAIJbU0CoxQflYDM5NvsnO
-         t/lA==
+        bh=E/PZfm0ILlaeTWExhdrHJ+nS/9VkLe0d8hpRsDexX1A=;
+        b=WftHepebeGrtlnGFv1eTN7gbQTxf65Be0pW2b6TIYxRpTxGkTQ+I0XcccEZXLPTcyz
+         DPxyUxv8OsvX2MyW2vlljWc+Q3/fQFKhHAZqUjHvI0LPoTmYcLvLflgzq1ogKS6aaWf9
+         g8v4Bm29KZf7+IUzwodjsRaNecxSXBmQMf4qJ7GD9n+cqkTn9j0Hw4AkHMdhwXcKK6Iv
+         PmlVxQX3oD+GuMJG26POAs9yNa2X/P8LlaDwNz1B65ZOknndB0rUaG8iUpPWWyGRoJlY
+         47amll8l/Exvo+UHTiy8s7J1NOO0PvD+aY7jz+eJacalsrMkWtE5XeQ5xJwTZp64Hv56
+         XqsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776979414; x=1777584214;
+        d=1e100.net; s=20251104; t=1776979416; x=1777584216;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Xzr76OgKRSVyLlNPZ4BBmoEisHfu3frnnsSEc+2qgNA=;
-        b=bhAy6M3juybBu1Pq0TzjGOhzZJMKDkGyqL9jpjXXtp1eKHr7uymvtmUN5z/KtIk1fF
-         1YYc2BnOW2uoH7GQGdYYbazFVeL6vsXeLjkxx82GdaqM3CmXFor/gKTfPJEJ2HobOSIt
-         UfS2u9czjrfTOUAJKLXHd8TBkSZ74ODsCY1vZCaFRfMm8NIdiLkcZYi7sFEoscE41Tq5
-         43jJgd3Nz11uKlMliMQ1RDmIifHGyfNjlDezCKM/CjPyDsSfNMHYgc6rTTu4lb6u4b8c
-         VAguX6LUTOEhhGZhDflrNNdFvMyfOiVE5Xd23FC7LRGY4vIMaMB4f10/KZKII82TqvGN
-         0doQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+Awkqgy+2BqsO7R0YliAzXOdPxAwX02Qc1zni057TP3NU11aq2fv2Z3i1D8SxnvB/T6+Fa5Jcj7V4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzTL7t9JgH3xhiqhrslep5uIIzn2+2kkkxNxpzA6EsKSQZXMIqv
-	T1M81QxtEEo8MYtTFNNOHIICUovBdnuDu2JDWTKpi7E9fvn8QEQKzcR5fozsJoRMw6p8ivCRAF6
-	fNYH/BNpMzLz9Nw==
-X-Received: from pgbda7.prod.google.com ([2002:a05:6a02:2387:b0:c79:9058:b77e])
+        bh=E/PZfm0ILlaeTWExhdrHJ+nS/9VkLe0d8hpRsDexX1A=;
+        b=CEc+rWF0W32K9zttQguZbjHk2ketlyUoFGfZCEetQUCzpbGO0F0vwO7y+MzB7qwr5m
+         rrFqV3U/sinC0LjgQ8l/jjiilLaF92UpJx4O4JLki+7iaATfu/SeYam6WYS5JcsTvAck
+         WLj4bR5JbDpxvxQpU/9NrjK4t3YRD+ae/EMKKlsJFesczYESZ8SkmLeqswRgt/pqOXEs
+         4Z5/sm/7HiM26XNaK1qyV+FqykazSC0pmofZ856dG1+Xy9TLYVC4yssMnWIGp0cqxxoN
+         n7eIZVDwEbHoA0EvJq2DG3rAuvlFiEF83vIXZhGd+4sLsYtQW1WkQxsZxZUFbWU19lms
+         /tMQ==
+X-Forwarded-Encrypted: i=1; AFNElJ9vZt5SFGsTsyQ/eOV1WI34v587bwyNVGO+ujRzkGwaxc8iFbcOJ66Dsisa3m8Yi1y1VvzguXvbY4s=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx2O3lKjFwXQ49K2LjftjSLDpcypDngh/noXoSRNhPfkzHBW10Z
+	MGkZze5InVSNDTVvDfZblTyjvPEK8hmUqyR+eMIdwPYHZrQq8NauCTcjekjldvn9PPnySmzpF8k
+	l7Do/PGAxSW6T/Q==
+X-Received: from plav22.prod.google.com ([2002:a17:902:f0d6:b0:2b0:5380:49f1])
  (user=dmatlack job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:6a21:6da2:b0:3a0:b781:4c8b with SMTP id adf61e73a8af0-3a0b78155d5mr25116879637.2.1776979414052;
- Thu, 23 Apr 2026 14:23:34 -0700 (PDT)
-Date: Thu, 23 Apr 2026 21:23:12 +0000
+ 2002:a17:903:1a88:b0:2b2:5ec6:dcf6 with SMTP id d9443c01a7336-2b5f9e85f20mr294713095ad.8.1776979415642;
+ Thu, 23 Apr 2026 14:23:35 -0700 (PDT)
+Date: Thu, 23 Apr 2026 21:23:13 +0000
 In-Reply-To: <20260423212316.3431746-1-dmatlack@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -76,9 +76,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20260423212316.3431746-1-dmatlack@google.com>
 X-Mailer: git-send-email 2.54.0.rc2.544.gc7ae2d5bb8-goog
-Message-ID: <20260423212316.3431746-9-dmatlack@google.com>
-Subject: [PATCH v4 08/11] PCI: liveupdate: Require preserved devices are in
- immutable singleton IOMMU groups
+Message-ID: <20260423212316.3431746-10-dmatlack@google.com>
+Subject: [PATCH v4 09/11] PCI: liveupdate: Inherit ARI Forwarding Enable on
+ preserved bridges
 From: David Matlack <dmatlack@google.com>
 To: iommu@lists.linux.dev, kexec@lists.infradead.org, 
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
@@ -105,7 +105,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84408-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84407-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
@@ -121,130 +121,67 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: DB83B457DA4
+X-Rspamd-Queue-Id: A6F09457DC2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Restrict support for preserving PCI devices across Live Update to
-devices in immutable singleton IOMMU groups. A device's group is
-considered immutable if all bridges upstream from the device up to the
-root port have the required ACS features enabled.
-
-Since ACS flags are inherited across a Live Update for preserved devices
-and all the way up to the root port, the preserved device should be in a
-singleton IOMMU group after kexec in the new kernel.
-
-This change should still permit all the current use-cases for PCI device
-preservation across Live Update, since it is intended to be used in
-Cloud enviroments which should have the required ACS features enabled
-for virtualization purposes.
-
-If a device is part of a multi-device IOMMU group, preserving it will
-now fail with an error. This restriction may be lifted in the future if
-support for preserving multi-device groups is desired.
+Inherit the ARI Forwarding Enable on preserved bridges and update
+pci_dev->ari_enabled accordingly during a Live Update. This ensures that
+the preserved devices on the bridge's secondary bus can be identified
+with the same expanded 8-bit function number after a Live Update.
 
 Signed-off-by: David Matlack <dmatlack@google.com>
 ---
- drivers/iommu/iommu.c    | 35 +++++++++++++++++++++++++++++++++++
- drivers/pci/liveupdate.c |  6 ++++++
- include/linux/iommu.h    |  7 +++++++
- 3 files changed, 48 insertions(+)
+ drivers/pci/liveupdate.c |  4 ++++
+ drivers/pci/pci.c        | 12 +++++++++++-
+ 2 files changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index 61c12ba78206..782e73a9d45f 100644
---- a/drivers/iommu/iommu.c
-+++ b/drivers/iommu/iommu.c
-@@ -1664,6 +1664,41 @@ struct iommu_group *pci_device_group(struct device *dev)
- }
- EXPORT_SYMBOL_GPL(pci_device_group);
- 
-+bool pci_device_group_immutable_singleton(struct pci_dev *dev)
-+{
-+	struct iommu_group *group;
-+	struct group_device *d;
-+	struct pci_bus *bus;
-+	int nr_devices = 0;
-+
-+	group = iommu_group_get(&dev->dev);
-+	if (!group)
-+		return false;
-+
-+	mutex_lock(&group->mutex);
-+
-+	for_each_group_device(group, d)
-+		nr_devices++;
-+
-+	mutex_unlock(&group->mutex);
-+	iommu_group_put(group);
-+
-+	if (nr_devices != 1)
-+		return false;
-+
-+	for (bus = dev->bus; !pci_is_root_bus(bus); bus = bus->parent) {
-+		if (!bus->self)
-+			continue;
-+
-+		if (!pci_acs_path_enabled(bus->self, NULL, REQ_ACS_FLAGS))
-+			return false;
-+
-+		break;
-+	}
-+
-+	return true;
-+}
-+
- /* Get the IOMMU group for device on fsl-mc bus */
- struct iommu_group *fsl_mc_device_group(struct device *dev)
- {
 diff --git a/drivers/pci/liveupdate.c b/drivers/pci/liveupdate.c
-index a9a89f7bd3e5..54a90ff02bdd 100644
+index 54a90ff02bdd..25c86cd4c173 100644
 --- a/drivers/pci/liveupdate.c
 +++ b/drivers/pci/liveupdate.c
-@@ -133,6 +133,7 @@
+@@ -128,6 +128,10 @@
+  *  * The PCI core inherits all ACS flags enabled on incoming preserved devices
+  *    rather than assigning new ones. This ensures that TLPs are routed the same
+  *    way after Live Update and ensures that IOMMU groups do not change.
++ *
++ *  * The PCI core inherits ARI Forwarding Enable on all bridges with downstream
++ *    preserved devices to ensure that all preserved devices on the bridge's
++ *    secondary bus are addressable after the Live Update.
+  */
+ 
  #define pr_fmt(fmt) "PCI: liveupdate: " fmt
+diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+index e615b7c3e430..b45539c55c7d 100644
+--- a/drivers/pci/pci.c
++++ b/drivers/pci/pci.c
+@@ -3498,8 +3498,9 @@ void pci_configure_ari(struct pci_dev *dev)
+ {
+ 	u32 cap;
+ 	struct pci_dev *bridge;
++	u16 val = 0;
  
- #include <linux/io.h>
-+#include <linux/iommu.h>
- #include <linux/kexec_handover.h>
- #include <linux/kho/abi/pci.h>
- #include <linux/liveupdate.h>
-@@ -359,6 +360,11 @@ int pci_liveupdate_preserve(struct pci_dev *dev)
- 	if (dev->is_virtfn)
- 		return -EINVAL;
+-	if (pcie_ari_disabled || !pci_is_pcie(dev) || dev->devfn)
++	if (!pci_is_pcie(dev) || dev->devfn)
+ 		return;
  
-+	if (!pci_device_group_immutable_singleton(dev)) {
-+		pci_warn(dev, "Device preservation limited to immutable singleton iommu groups\n");
-+		return -EINVAL;
+ 	bridge = dev->bus->self;
+@@ -3510,6 +3511,15 @@ void pci_configure_ari(struct pci_dev *dev)
+ 	if (!(cap & PCI_EXP_DEVCAP2_ARI))
+ 		return;
+ 
++	if (pci_liveupdate_incoming(bridge)) {
++		pcie_capability_read_word(bridge, PCI_EXP_DEVCTL2, &val);
++		bridge->ari_enabled = !!(val & PCI_EXP_DEVCTL2_ARI);
++		return;
 +	}
 +
- 	if (dev->liveupdate_outgoing)
- 		return -EBUSY;
- 
-diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-index e587d4ac4d33..6f5d1dec3f89 100644
---- a/include/linux/iommu.h
-+++ b/include/linux/iommu.h
-@@ -1096,6 +1096,8 @@ extern struct iommu_group *generic_device_group(struct device *dev);
- struct iommu_group *fsl_mc_device_group(struct device *dev);
- extern struct iommu_group *generic_single_device_group(struct device *dev);
- 
-+bool pci_device_group_immutable_singleton(struct pci_dev *dev);
++	if (pcie_ari_disabled)
++		return;
 +
- /**
-  * struct iommu_fwspec - per-device IOMMU instance data
-  * @iommu_fwnode: firmware handle for this device's IOMMU
-@@ -1528,6 +1530,11 @@ static inline int pci_dev_reset_iommu_prepare(struct pci_dev *pdev)
- static inline void pci_dev_reset_iommu_done(struct pci_dev *pdev)
- {
- }
-+
-+static inline bool pci_device_group_immutable_singleton(struct pci_dev *dev)
-+{
-+	return false;
-+}
- #endif /* CONFIG_IOMMU_API */
- 
- #ifdef CONFIG_IRQ_MSI_IOMMU
+ 	if (pci_find_ext_capability(dev, PCI_EXT_CAP_ID_ARI)) {
+ 		pcie_capability_set_word(bridge, PCI_EXP_DEVCTL2,
+ 					 PCI_EXP_DEVCTL2_ARI);
 -- 
 2.54.0.rc2.544.gc7ae2d5bb8-goog
 
