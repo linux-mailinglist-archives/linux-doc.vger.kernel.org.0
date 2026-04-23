@@ -1,63 +1,63 @@
-Return-Path: <linux-doc+bounces-84341-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84348-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sCjGEMdu6mlBzQIAu9opvQ
-	(envelope-from <linux-doc+bounces-84341-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:11:03 +0200
+	id gCIKDb9u6mlBzQIAu9opvQ
+	(envelope-from <linux-doc+bounces-84348-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:10:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E68E34567C7
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:11:02 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CF084567AC
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 21:10:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 445023058BAD
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 19:06:29 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 82D1F303354B
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 19:07:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DCCC391E51;
-	Thu, 23 Apr 2026 19:06:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F7FC34A783;
+	Thu, 23 Apr 2026 19:07:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="g5YqYQ6d"
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="BPo2Rv7B"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com [136.143.188.112])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B71211E89C;
-	Thu, 23 Apr 2026 19:06:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C221F1B142D;
+	Thu, 23 Apr 2026 19:07:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.112
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776971185; cv=pass; b=nF11W6As2+6FgN1nFmwG17eyIX3Aak6v7cfY6cAv/Hpkb58kUU4URPk0mlTBdjZhren0U/Z4nAY3d0pyYii5Z0Hb6NXcg9cWct6X4CvA+1J30/cannGVlPP4B6Cd9hd+GcaWwHccgbWjIvUnXSCbObk8lQZn8tC5RzPa4pALzlM=
+	t=1776971234; cv=pass; b=It7W+1AdbDVitMGFGaTS7uoixSNihLe8lcxs1qX5Ve0YbSn2HgxVIuVIaBJIwkK9yPrxdia+RE8G+H19ojUUxRn5+KC/VJQyx+A525IfdWAuHvNpsr8JNBhbtn7FVM2tDvPuC5xLSUYOM9Ok9MPCnKr+hx2WLsak2uGwftCtLr4=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776971185; c=relaxed/simple;
-	bh=A57OvQKBvZzdg3LGf4gB9z/pYrtSAlWJSzl8GbeCFYs=;
+	s=arc-20240116; t=1776971234; c=relaxed/simple;
+	bh=33Ww8J2K75Ej72XAJU8c8NggzCA+pSde82fd+km3Om4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=JXAJ5oaYU0RrmKBX7Cqd+RKFAuX0WpBfALciFBPQT4EdrbJvYUuiNjtTFQjYT6D6szrfC1APrE/wGOPlTqrrKUJlEAi8E+a/drdEoLimXl+2T1wGSmk+AivGavXnm/HACiKV0dg6GrnkwFU4e0NoXi9jDUNRWmOQgbqL4rvKdNk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=g5YqYQ6d; arc=pass smtp.client-ip=136.143.188.112
+	 In-Reply-To:To:Cc; b=SDk5dL1KsWAOFPUICg9q3nXS9XQ3Xn+J/luYPskKVHn7rDGG46dE4epy8f1hKzoS5NakUbvH5URFyeX22X6k+VxFemukf8udqidIh+67AhYW495UfJ5ZgvsSEavKuMYmuWLpj3NF28mm9zNHZNPpwGlxLXHYsgJ5HBJEXNDgTKs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b=BPo2Rv7B; arc=pass smtp.client-ip=136.143.188.112
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1776971142; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1776971148; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=iSOv+imv3YijAewOqHkU+tgb9dxo2zSSyeVBPrff3DOo+B+DiB7MBZDtw3jhfohNDAcJ3eMJHYONnNYQO3Q095WOMFOI4QT70I3HNphUIkHBzBZriDt25jjYUwz0ENJBzK9zRhYbcMO5wooIsZMRkMWjMXHTuUD18d/USai5e+4=
+	b=NF6DydrZLyBiCugu8rR4XvNc2q+BMhEF8NBVCt+75ZYDRFnGW1YGrvbRs5F8/MFzoJ7SgliqSWxnhPqelwPs9iTZehK27i7z5qzvrtbCuono1BaN9bUAqUU2lOy626FSGoELpihv1Zv6dzMPw2DnZlfZ+YpUMYS+51vnUaC5C9A=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1776971142; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=F0vXM/B6KFsUDgrZyWACUzMDZAG93Nob0ErRDEc0QU0=; 
-	b=MzeutdWEsNYAWd57sqVpM4E5cTTdyiniSH+tuNSyTuq3ieTO4OTI8j9uPHjfZkaCc+74t1bu6Yq+n0pvoMDO26Xh+UochZK8ADNgcuMVKA8hDS0Bh+wpf++5ZTpAxPaqauKnmyV/HA6b8cHJW5Il+PgW3QEdLUdHAYII2HoDkMo=
+	t=1776971148; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=I6mnIoMwQGSuHjHjLVfRnXnzAB6xS7ZmlkuOJOt+Ckg=; 
+	b=WgA8cRuXdv2tQqj2KoOrzdUk6uBQ7/b52oA75MURllzKEAAkVti+EoUxSe00kue15NauEGhCbh+yYEl3Iz2GFkoLZ1e0tDCf36L0+D5K72tjws0sytRCSXFVxZCocp8/3FqhWBOloGpwvsk6HGYhrMwON+NVVCSxo0EU1h6QPLA=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=collabora.com;
 	spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
 	dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776971142;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1776971148;
 	s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
 	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
-	bh=F0vXM/B6KFsUDgrZyWACUzMDZAG93Nob0ErRDEc0QU0=;
-	b=g5YqYQ6dctBOg4dpGGgFBa9q36tuYdVwuz7xfC0gM76YKGYZcM8OHw95oZNIMoft
-	T7KilTXwksb4WTcVGOUkA2xctRWMLq+JjVBKL36ZzmiSMshPq1TRJnhp1Iu0p61+3+L
-	xKte+rHRUg1s7BZtoUbyO0pBJDYzsKHmoA2Yxnkg=
-Received: by mx.zohomail.com with SMTPS id 1776971139745181.58237546396435;
-	Thu, 23 Apr 2026 12:05:39 -0700 (PDT)
+	bh=I6mnIoMwQGSuHjHjLVfRnXnzAB6xS7ZmlkuOJOt+Ckg=;
+	b=BPo2Rv7B9Q5/oWVAWuMi9stEwQUC7qpl4f5VGvSHeWo8cPQMFAO3LR+p4qRgBvnT
+	zSEZoKEHM11hnrchE6xl9bilFIyWkwXbRhnmEE4j5XvQ17exxT9h+4Lh5C6cO7/gOzh
+	nrasvzbQqGHWVIPUrcD3UhfimUp2GTTy8+EM0b/4=
+Received: by mx.zohomail.com with SMTPS id 1776971147273150.05999320541366;
+	Thu, 23 Apr 2026 12:05:47 -0700 (PDT)
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Date: Thu, 23 Apr 2026 21:03:37 +0200
-Subject: [PATCH v14 14/28] drm/i915/dp: Implement "color format" DRM
- property
+Date: Thu, 23 Apr 2026 21:03:38 +0200
+Subject: [PATCH v14 15/28] drm/rockchip: Add YUV422 output mode constants
+ for VOP2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -66,7 +66,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260423-color-format-v14-14-449a419ccbd4@collabora.com>
+Message-Id: <20260423-color-format-v14-15-449a419ccbd4@collabora.com>
 References: <20260423-color-format-v14-0-449a419ccbd4@collabora.com>
 In-Reply-To: <20260423-color-format-v14-0-449a419ccbd4@collabora.com>
 To: Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>, 
@@ -94,149 +94,72 @@ Cc: kernel@collabora.com, amd-gfx@lists.freedesktop.org,
  linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
  intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
  linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org, 
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, 
+ Andy Yan <andyshrk@163.com>
 X-Mailer: b4 0.15.2
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
 	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
 	R_DKIM_ALLOW(-0.20)[collabora.com:s=zohomail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84341-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84348-lists,linux-doc=lfdr.de];
 	FREEMAIL_TO(0.00)[amd.com,igalia.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,intel.com,linaro.org,ideasonboard.com,kwiboo.se,rock-chips.com,sntech.de,ursulin.net,pengutronix.de,lwn.net,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[39];
+	RCPT_COUNT_TWELVE(0.00)[40];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+];
 	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[nicolas.frattaroli@collabora.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FREEMAIL_CC(0.00)[collabora.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,163.com];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,collabora.com:email,collabora.com:dkim,collabora.com:mid]
-X-Rspamd-Queue-Id: E68E34567C7
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[collabora.com:email,collabora.com:dkim,collabora.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 2CF084567AC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Implement the "color format" DRM property for DP. The values of the
-property include RGB, YCbCr420, YCbCr444 and Auto. Auto will pick RGB,
-with a fallback to YCbCr420.
+The Rockchip display controller has a general YUV422 output mode, and
+some SoC-specific connector-specific output modes for RK3576.
 
-The mask of supported formats by the source exposed by the property is
-an optimistic scenario, as specific DFP-related caveats can't be
-established before an EDID is present.
+Add them, based on the values in downstream and the TRM (dsp_out_mode in
+RK3576 TRM Part 2, register POST*_CTRL_POST_DSP_CTRL).
 
-Should the explicitly requested color format not be supported by the
-sink (or by the source in combination with the sink), then an error is
-returned to userspace, so that it can make a better choice.
-
+Reviewed-by: Andy Yan <andyshrk@163.com>
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 ---
- drivers/gpu/drm/i915/display/intel_dp.c | 61 ++++++++++++++++++++++++++++++---
- 1 file changed, 57 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
-index 299b91d262c3..9334ad9b12e9 100644
---- a/drivers/gpu/drm/i915/display/intel_dp.c
-+++ b/drivers/gpu/drm/i915/display/intel_dp.c
-@@ -3414,10 +3414,10 @@ intel_dp_compute_output_format(struct intel_encoder *encoder,
- }
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.h b/drivers/gpu/drm/rockchip/rockchip_drm_drv.h
+index 2e86ad00979c..4705dc6b8bd7 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.h
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.h
+@@ -30,10 +30,14 @@
+ #define ROCKCHIP_OUT_MODE_P565		2
+ #define ROCKCHIP_OUT_MODE_BT656		5
+ #define ROCKCHIP_OUT_MODE_S888		8
++#define ROCKCHIP_OUT_MODE_YUV422	9
+ #define ROCKCHIP_OUT_MODE_S888_DUMMY	12
+ #define ROCKCHIP_OUT_MODE_YUV420	14
+ /* for use special outface */
+ #define ROCKCHIP_OUT_MODE_AAAA		15
++/* SoC specific output modes */
++#define ROCKCHIP_OUT_MODE_YUV422_RK3576_DP	12
++#define ROCKCHIP_OUT_MODE_YUV422_RK3576_HDMI	13
  
- static int
--intel_dp_compute_formats(struct intel_encoder *encoder,
--			 struct intel_crtc_state *crtc_state,
--			 struct drm_connector_state *conn_state,
--			 bool respect_downstream_limits)
-+intel_dp_compute_formats_auto(struct intel_encoder *encoder,
-+			      struct intel_crtc_state *crtc_state,
-+			      struct drm_connector_state *conn_state,
-+			      bool respect_downstream_limits)
- {
- 	struct intel_display *display = to_intel_display(encoder);
- 	struct intel_dp *intel_dp = enc_to_intel_dp(encoder);
-@@ -3453,6 +3453,34 @@ intel_dp_compute_formats(struct intel_encoder *encoder,
- 	return ret;
- }
- 
-+static int
-+intel_dp_compute_formats(struct intel_encoder *encoder,
-+			 struct intel_crtc_state *crtc_state,
-+			 struct drm_connector_state *conn_state,
-+			 bool respect_downstream_limits)
-+{
-+	switch (conn_state->color_format) {
-+	case DRM_CONNECTOR_COLOR_FORMAT_RGB444:
-+		return intel_dp_compute_output_format(encoder, crtc_state, conn_state,
-+						      respect_downstream_limits,
-+						      INTEL_OUTPUT_FORMAT_RGB);
-+	case DRM_CONNECTOR_COLOR_FORMAT_YCBCR444:
-+		return intel_dp_compute_output_format(encoder, crtc_state, conn_state,
-+						      respect_downstream_limits,
-+						      INTEL_OUTPUT_FORMAT_YCBCR444);
-+	case DRM_CONNECTOR_COLOR_FORMAT_YCBCR420:
-+		return intel_dp_compute_output_format(encoder, crtc_state, conn_state,
-+						      respect_downstream_limits,
-+						      INTEL_OUTPUT_FORMAT_YCBCR420);
-+	case DRM_CONNECTOR_COLOR_FORMAT_AUTO:
-+		return intel_dp_compute_formats_auto(encoder, crtc_state, conn_state,
-+						     respect_downstream_limits);
-+	default:
-+		MISSING_CASE(conn_state->color_format);
-+		return -EINVAL;
-+	}
-+}
-+
- void
- intel_dp_audio_compute_config(struct intel_encoder *encoder,
- 			      struct intel_crtc_state *pipe_config,
-@@ -7009,6 +7037,29 @@ intel_dp_has_gamut_metadata_dip(struct intel_encoder *encoder)
- 	return false;
- }
- 
-+static void
-+intel_dp_attach_color_format_property(struct intel_dp *intel_dp)
-+{
-+	struct intel_connector *connector = intel_dp->attached_connector;
-+	struct intel_digital_port *dig_port = dp_to_dig_port(intel_dp);
-+	unsigned long fmts = BIT(DRM_OUTPUT_COLOR_FORMAT_RGB444);
-+	bool has_pcon = false;
-+
-+	if (!connector)
-+		return;
-+
-+	if (dig_port && intel_bios_encoder_is_lspcon(dig_port->base.devdata))
-+		has_pcon = true;
-+
-+	if (has_pcon || source_can_output(intel_dp, INTEL_OUTPUT_FORMAT_YCBCR420))
-+		fmts |= BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR420);
-+
-+	if (has_pcon || source_can_output(intel_dp, INTEL_OUTPUT_FORMAT_YCBCR444))
-+		fmts |= BIT(DRM_OUTPUT_COLOR_FORMAT_YCBCR444);
-+
-+	drm_connector_attach_color_format_property(&connector->base, fmts);
-+}
-+
- static void
- intel_dp_add_properties(struct intel_dp *intel_dp, struct drm_connector *_connector)
- {
-@@ -7041,6 +7092,8 @@ intel_dp_add_properties(struct intel_dp *intel_dp, struct drm_connector *_connec
- 
- 	if (HAS_VRR(display))
- 		drm_connector_attach_vrr_capable_property(&connector->base);
-+
-+	intel_dp_attach_color_format_property(intel_dp);
- }
- 
- static void
+ /* output flags */
+ #define ROCKCHIP_OUTPUT_DSI_DUAL	BIT(0)
 
 -- 
 2.53.0
