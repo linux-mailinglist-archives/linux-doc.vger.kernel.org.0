@@ -1,262 +1,240 @@
-Return-Path: <linux-doc+bounces-84478-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84480-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oHi0KEZg62kuMAAAu9opvQ
-	(envelope-from <linux-doc+bounces-84478-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 14:21:26 +0200
+	id OENEIgVh62kCMAAAu9opvQ
+	(envelope-from <linux-doc+bounces-84480-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 14:24:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3550D45E55A
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 14:21:26 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C26A45E650
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 14:24:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 28FBF300A137
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 12:21:25 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 95C4E300492D
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 12:24:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 097993C73E1;
-	Fri, 24 Apr 2026 12:21:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB82F3C8736;
+	Fri, 24 Apr 2026 12:24:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lQAqpc02"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="XFtZL76D"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A9DF3BAD85;
-	Fri, 24 Apr 2026 12:21:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AA4B3B19D1;
+	Fri, 24 Apr 2026 12:24:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777033283; cv=none; b=gE0EFuHKO8GjEEOc3suxEkh0iTvDH3G1wp5ImOfGg8InNE5Zsd85QKizI5ulWJsVjElMcWXQQx4v+Aiqh+ej+RtJoHzTRR/tMvSvvws3sTF1NdOLscPK1JqMFWigmnFhEK3tmy5uuJ8PWk3jinLHBXHdZViNDn28v4S1sQMX/x8=
+	t=1777033472; cv=none; b=auI8/Ht+mgZaGcJqQqGy+HoIruCXIK9Aj8C27/NAbg5wYNNl6p8lLFHK9a+rKaYv1sw4qCFQiAZIm2ZneBRB/fEo2HMJL0eD6d2FbxDyXvgfkmUOXrZaCmtxrCXQJJ2hSxB8Kt8AY328ROW6oCsHMbLf0tPYHV+5AW57Hi3EQ7w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777033283; c=relaxed/simple;
-	bh=ae12Dx1GP1nt/ZBN0pu4+BdRD8YdZHY9YSVa9HGmjY4=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=cR1F4qzMazRe9+kwPvjT0CM2VYnJ15KtMkSWznQm+ZFnfiyq+DrNJRHfmp90QH5x1Vh0gLwUDhkJvr36GqZKwu/+PcXkl8a9ySbxr6cIt3si5jF+7j5hFIOGxOEEduVf4ebXec+h6XeQ3YmGJ8pMI8LTBFYhCjknZsyacfyZQCU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lQAqpc02; arc=none smtp.client-ip=192.198.163.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1777033282; x=1808569282;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version:content-transfer-encoding;
-  bh=ae12Dx1GP1nt/ZBN0pu4+BdRD8YdZHY9YSVa9HGmjY4=;
-  b=lQAqpc02441EAQxCACdF4jktlR77FjF6SgDUge3VR++e4htz3zw1lNya
-   7nSsO0nYTCdJ4JgC8A3+teRkeVJ4ywQwUejg85jBMtz33kBumujnLqBtF
-   RLPUh2vcQ0CEmKAeaZIFJZ7hj2YHTaBhtvSWTA/nn7I2ZF0bBf6q3oa/T
-   FwwNSGhujp7JHEhYYOZ7iEFotbFBcEsBMQTjtXsT8gmzrCy8bIJe0Paon
-   jz79vWKA4wIjxlqg0erHsqtVmE/8+14KG70O5RCCriZVQFnAQvEOt9HFh
-   I6AW6uY9DA0G8XNJeocC1CjhZcIz8x/QUoHBw75phhUx5sahvE2hBtvEo
-   g==;
-X-CSE-ConnectionGUID: 8cA+UwSOQ2GmzJ1fq/SsZg==
-X-CSE-MsgGUID: zFVPp0mPQjWfmD6cBjZVXg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11765"; a="88622050"
-X-IronPort-AV: E=Sophos;i="6.23,196,1770624000"; 
-   d="scan'208";a="88622050"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
-  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Apr 2026 05:21:20 -0700
-X-CSE-ConnectionGUID: Ddy2JyWkRiCTb6Lq3VNE8g==
-X-CSE-MsgGUID: yrtNyG9vRgKsTS8VOCKqyw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,196,1770624000"; 
-   d="scan'208";a="226406679"
-Received: from smoticic-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.89])
-  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Apr 2026 05:21:14 -0700
-From: Jani Nikula <jani.nikula@intel.com>
-To: Albert Esteve <aesteve@redhat.com>
-Cc: Peter Zijlstra <peterz@infradead.org>, Arnd Bergmann <arnd@arndb.de>,
- Brendan Higgins <brendan.higgins@linux.dev>, David Gow
- <david@davidgow.net>, Rae Moar <raemoar63@gmail.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, Shuah
- Khan <skhan@linuxfoundation.org>, Andrew Morton
- <akpm@linux-foundation.org>, linux-kernel@vger.kernel.org,
- linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org, Guenter Roeck
- <linux@roeck-us.net>, Linux Kernel Functional Testing <lkft@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, =?utf-8?Q?Ma=C3=ADra?= Canal
- <mcanal@igalia.com>,
- Alessandro Carminati <acarmina@redhat.com>, Simona Vetter
- <simona.vetter@ffwll.ch>
-Subject: Re: [PATCH v7 4/5] drm: Suppress intentional warning backtraces in
- scaling unit tests
-In-Reply-To: <CADSE00+b-8moX5FkLjLs+wzyaW5dtJDMxvTT6Gu-QmDoDxJdVA@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
- 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
-References: <20260420-kunit_add_support-v7-0-e8bc6e0f70de@redhat.com>
- <20260420-kunit_add_support-v7-4-e8bc6e0f70de@redhat.com>
- <20260420144702.GM3102624@noisy.programming.kicks-ass.net>
- <CADSE00JJq6fsYbkFN5hBD=-ZWsFG9p4_C55fp3MupMJQj0QCUQ@mail.gmail.com>
- <8a9c125c08206296d698c79c3d3dd6aea36a7e3b@intel.com>
- <CADSE00+b-8moX5FkLjLs+wzyaW5dtJDMxvTT6Gu-QmDoDxJdVA@mail.gmail.com>
-Date: Fri, 24 Apr 2026 15:21:11 +0300
-Message-ID: <4a64dbd6cff28950a7adbfe7d01ddfe93df34cb7@intel.com>
+	s=arc-20240116; t=1777033472; c=relaxed/simple;
+	bh=1Yg49IhGr2YwCvs+IFVozhTPo6GCwWNF7i0sbY0fmz8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=gUzgoy8gC1F7vfGV5Yq099K6sJbATX4mxjk3+x+tY90570uj8CpXFfDhPT0E4XdlYLtmhAvIYq7pdnVh7y82gIttNl9YTMso2Sx210UWkCyatOBmhR77gEWI37/CEtUUoduG6I8zrUzFPlwP2Um2CE8NIG11hXN0N2++OgssoHQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=XFtZL76D; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Cc:To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-Id:Date:Subject:From:Reply-To:Content-ID:
+	Content-Description:In-Reply-To:References;
+	bh=kCY/q4tclfbP72dbiGmSdv+d95QO4i6rrytMRJvTj44=; b=XFtZL76DHZa40jxuxLT3sHlWll
+	E6EDi2xkfoaXXqnJxddpH0DD667wMv/FVue01VLUpC+GZ8mc1ODLyfNIIdxImazldaY+nDE+Vgjg2
+	dDa6ekBYXL4N+0jo09ycUUE6jA6PYsy79Qj3jQISA1RoqoGYcFxXSUxU1BoKYs+ppLefUGvPQHdQQ
+	9M4eQ71dKGTz9zEAQIrB5latKroPFFzIIBvdlC2IswDedy80T9qHgMmqtcd9vVGznk1vCRDQbfpWV
+	88bxsCrs6JtzgS6N1Hif2YE1+/sWe+9fiNT4DfKyUmyotnJRHFOTdyW0V8ygrs1XELIVw/P4R0/bC
+	3o0RpGGw==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wGFZz-003APX-0o;
+	Fri, 24 Apr 2026 12:24:20 +0000
+From: Breno Leitao <leitao@debian.org>
+Subject: [PATCH v5 0/4] mm/memory-failure: add panic option for
+ unrecoverable pages
+Date: Fri, 24 Apr 2026 05:23:58 -0700
+Message-Id: <20260424-ecc_panic-v5-0-a35f4b50425c@debian.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 3550D45E55A
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAN5g62kC/23NTW7CMBCG4atEs2aq8diJQ1bco0KVf8bgLhJk0
+ 4gK5e5V6KJBdDnS97xzhyolS4WhuUOROdc8jTA07a6BcHbjSTBHGBpg4o40a5QQPi5uzAGNGKt
+ 9r6m3AXYNXIqkfHu03o+/d/3ynxKua2BdnHO9TuX78WxW6+6/7qyQ0LJTe1aWu9Aeovjsxrepn
+ GANz7yhWm0pI+FeDEVKnUnWvVD9R416+qqRUMXgPSfFPpgXara03VKDhByJrU196kg90WVZfgA
+ EjypFZgEAAA==
+X-Change-ID: 20260323-ecc_panic-4e473b83087c
+To: Miaohe Lin <linmiaohe@huawei.com>, 
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, 
+ Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+ Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+ Shuah Khan <shuah@kernel.org>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ Breno Leitao <leitao@debian.org>, kernel-team@meta.com
+X-Mailer: b4 0.16-dev-453a6
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5234; i=leitao@debian.org;
+ h=from:subject:message-id; bh=1Yg49IhGr2YwCvs+IFVozhTPo6GCwWNF7i0sbY0fmz8=;
+ b=owEBbQKS/ZANAwAIATWjk5/8eHdtAcsmYgBp62DtrHhNXOYVDOSXYRniu6HKfays8eZsIassL
+ HqjFi7tWjiJAjMEAAEIAB0WIQSshTmm6PRnAspKQ5s1o5Of/Hh3bQUCaetg7QAKCRA1o5Of/Hh3
+ befJD/9awnGz38LRRnqkMpb8hdarn0kczxmQGG/QdI4fey4T1kHKP7fOwjmSY7tpf4ztvIcexGt
+ Y8l9rip6qMK93gKcJhLxezHZe/yzwfRs1Tpq7+ODzy+nUuskr521fRGgtfG0WFBil4DGqEXuvvm
+ 9otADYxTcEq2yYFoilrFrkrmcM1rrEO4ryPaNI3QRAGwzKn67Elce/an/xgmumCZXDSgKAexT5C
+ UkKXiI7XlLYToIhyCRMPz5ONgmjfgJHFS6lmcneTv+XIB1So8g6esolhnY8e+Yhv/ehuF+nRn0B
+ TtU1evU/d8D9Tno7eLcdLbSFPQwuAqjdvoCyYpKUSpfyKBJjIq8nAjoWxPBWHvHdXSQAOvFaHXo
+ lcs7Xu3Qbw/ct6Px9cwUzM+zd9vlJcb+TZr7wHZ07MX/IqB3CtifeQOR15WN+75Qoewoxv2CbJz
+ 5/RH+DqMdIjPYXyCZfnEl9np6j8zz2wL7+zz8nuLQdtMRLKtax4Kl6ggCS7er/+rwSFUcnqm4gf
+ gp58yI15rY6NLAGBtTyAvBS8nUzCekRnldaqnL+UUfH0UCqpNXWXgHnW1CK+x2t9KKztB2ZEhGd
+ /J8yjsBFulCj2GFCBWf8TuANKejT84rr0WGMDtuksRLTdvOl7qNfdgOIfCWZHShm072OR2FCZvm
+ Py708WIpi6uYUDw==
+X-Developer-Key: i=leitao@debian.org; a=openpgp;
+ fpr=AC8539A6E8F46702CA4A439B35A3939FFC78776D
+X-Debian-User: leitao
+X-Rspamd-Queue-Id: 3C26A45E650
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[infradead.org,arndb.de,linux.dev,davidgow.net,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net,linuxfoundation.org,linux-foundation.org,vger.kernel.org,googlegroups.com,lists.freedesktop.org,roeck-us.net,linaro.org,igalia.com,redhat.com];
-	TAGGED_FROM(0.00)[bounces-84478-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCPT_COUNT_TWELVE(0.00)[27];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84480-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org,kernel.org,oracle.com,google.com,suse.com];
 	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jani.nikula@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,intel.com:dkim,intel.com:mid,roeck-us.net:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	TO_DN_SOME(0.00)[]
 
-On Fri, 24 Apr 2026, Albert Esteve <aesteve@redhat.com> wrote:
-> On Tue, Apr 21, 2026 at 1:51=E2=80=AFPM Jani Nikula <jani.nikula@intel.co=
-m> wrote:
->>
->> On Tue, 21 Apr 2026, Albert Esteve <aesteve@redhat.com> wrote:
->> > On Mon, Apr 20, 2026 at 4:47=E2=80=AFPM Peter Zijlstra <peterz@infrade=
-ad.org> wrote:
->> >>
->> >> On Mon, Apr 20, 2026 at 02:28:06PM +0200, Albert Esteve wrote:
->> >> > From: Guenter Roeck <linux@roeck-us.net>
->> >> >
->> >> > The drm_test_rect_calc_hscale and drm_test_rect_calc_vscale unit te=
-sts
->> >> > intentionally trigger warning backtraces by providing bad parameter=
-s to
->> >> > the tested functions. What is tested is the return value, not the e=
-xistence
->> >> > of a warning backtrace. Suppress the backtraces to avoid clogging t=
-he
->> >> > kernel log and distraction from real problems.
->> >> >
->> >> > Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
->> >> > Acked-by: Dan Carpenter <dan.carpenter@linaro.org>
->> >> > Acked-by: Ma=C3=ADra Canal <mcanal@igalia.com>
->> >> > Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
->> >> > Cc: David Airlie <airlied@gmail.com>
->> >> > Cc: Daniel Vetter <daniel@ffwll.ch>
->> >> > Signed-off-by: Guenter Roeck <linux@roeck-us.net>
->> >> > Signed-off-by: Alessandro Carminati <acarmina@redhat.com>
->> >> > Signed-off-by: Albert Esteve <aesteve@redhat.com>
->> >> > ---
->> >> >  drivers/gpu/drm/tests/drm_rect_test.c | 14 ++++++++++++++
->> >> >  1 file changed, 14 insertions(+)
->> >> >
->> >> > diff --git a/drivers/gpu/drm/tests/drm_rect_test.c b/drivers/gpu/dr=
-m/tests/drm_rect_test.c
->> >> > index 17e1f34b76101..1dd7d819165e7 100644
->> >> > --- a/drivers/gpu/drm/tests/drm_rect_test.c
->> >> > +++ b/drivers/gpu/drm/tests/drm_rect_test.c
->> >> > @@ -409,8 +409,15 @@ static void drm_test_rect_calc_hscale(struct k=
-unit *test)
->> >> >       const struct drm_rect_scale_case *params =3D test->param_valu=
-e;
->> >> >       int scaling_factor;
->> >> >
->> >> > +     /*
->> >> > +      * drm_rect_calc_hscale() generates a warning backtrace whene=
-ver bad
->> >> > +      * parameters are passed to it. This affects all unit tests w=
-ith an
->> >> > +      * error code in expected_scaling_factor.
->> >> > +      */
->> >> > +     KUNIT_START_SUPPRESSED_WARNING(test);
->> >> >       scaling_factor =3D drm_rect_calc_hscale(&params->src, &params=
-->dst,
->> >> >                                             params->min_range, para=
-ms->max_range);
->> >> > +     KUNIT_END_SUPPRESSED_WARNING(test);
->> >>
->> >> Would not something like:
->> >>
->> >>         scoped_kunit_suppress() {
->> >>                 scaling_factor =3D drm_rect_calc_hscale(&params->src,=
- &params->dst,
->> >>                                                       params->min_ran=
-ge, params->max_range);
->> >>         }
->> >>
->> >> be better?
->> >
->> > Since KUnit already has a few macros in its API it didn't occur to me.
->> > Good idea, I like it. And I guess the scope approach matches well with
->> > your __cleanup comment in the first patch. If no one opposes, I will
->> > work toward that pattern for the next version.
->>
->> There's a catch with kunit and __cleanup and thus (scoped) guards. Kunit
->> runs in ktreads, asserts lead to kthread_exit() and the __cleanup won't
->> be called.
->
-> Hi Jani,
->
-> Good point. In this specific case, the actual cleanup is handled by
-> kunit_add_action_or_reset(), so __cleanup not firing on assert is
-> harmless.
+When the memory failure handler encounters an in-use kernel page that it
+cannot recover (slab, page tables, kernel stacks, vmalloc, etc.), it
+currently logs the error as "Ignored" and continues operation.
 
-Right.
+This leaves corrupted data accessible to the kernel, which will inevitably
+cause either silent data corruption or a delayed crash when the poisoned memory
+is next accessed.
 
->
->>
->> Warning suppression being part of kunit infrastructure, asserts can and
->> should end the suppression too. But setting the example (scoped) guards
->> are safe in kunit tests in general feels like a trap waiting to happen.
->>
->
-> ... but I agree it sets a misleading precedent. I'll stick with the
-> explicit start/end API, then? Or maybe we can clearly document why the
-> scoped approach is safe in this case and use it.
+This is a common problem on large fleets. We frequently observe multi-bit ECC
+errors hitting kernel slab pages, where memory_failure() fails to recover them
+and the system crashes later at an unrelated code path, making root cause
+analysis unnecessarily difficult.
 
-I don't know what the right approach is, just wanted to make sure you're
-aware of this particular gotcha with guards and kunit.
+Here is one specific example from production on an arm64 server: a multi-bit
+ECC error hit a dentry cache slab page, memory_failure() failed to recover it
+(slab pages are not supported by the hwpoison recovery mechanism), and 67
+seconds later d_lookup() accessed the poisoned cache line causing
+a synchronous external abort:
 
-BR,
-Jani.
+    [88690.479680] [Hardware Error]: error_type: 3, multi-bit ECC
+    [88690.498473] Memory failure: 0x40272d: unhandlable page.
+    [88690.498619] Memory failure: 0x40272d: recovery action for
+                   get hwpoison page: Ignored
+    ...
+    [88757.847126] Internal error: synchronous external abort:
+                   0000000096000410 [#1] SMP
+    [88758.061075] pc : d_lookup+0x5c/0x220
 
->
->>
->> BR,
->> Jani.
->>
->>
->> >
->> >>
->> >> Also, how can you stand all this screaming in the code?
->> >>
->> >
->> > Again, KUnit already contains many macros, so this use didn't register
->> > as such. Now I will not be able to unsee it.
->> >
->> >
->>
->> --
->> Jani Nikula, Intel
->>
->
+This series adds a new sysctl vm.panic_on_unrecoverable_memory_failure
+(default 0) that, when enabled, panics immediately on unrecoverable
+memory failures. This provides a clean crash dump at the time of the
+error, which is far more useful for diagnosis than a random crash later
+at an unrelated code path.
 
---=20
-Jani Nikula, Intel
+This also categorizes reserved pages as MF_MSG_KERNEL, and panics on
+unknown page types (MF_MSG_UNKNOWN).
+
+Note that dynamically allocated kernel memory (SLAB/SLUB, vmalloc,
+kernel stacks, page tables) shares the MF_MSG_GET_HWPOISON return path
+with transient refcount races, so it is intentionally excluded from the
+panic conditions to avoid false positives.
+
+Signed-off-by: Breno Leitao <leitao@debian.org>
+---
+Changes in v5:
+- Add vm.panic_on_unrecoverable_memory_failure sysctl to panic on
+  unrecoverable kernel page hwpoison events (reserved pages, refcount-0
+  non-buddy pages, unknown state), with a recheck to avoid racing with
+  concurrent buddy allocations. (Miaohe)
+- Distinguish reserved pages as MF_MSG_KERNEL in memory_failure(),
+  document the new sysctl in Documentation/admin-guide/sysctl/vm.rst,
+  and add a selftest verifying SIGBUS recovery on userspace pages still
+  works when the sysctl is enabled. (Miaohe)
+- Added a selftest
+- Link to v4:
+  https://patch.msgid.link/20260415-ecc_panic-v4-0-2d0277f8f601@debian.org
+
+Changes in v4:
+- Drop CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option.
+- Split the reserved page classification (MF_MSG_KERNEL) into its own
+  patch, separate from the panic mechanism.
+- Document why the buddy allocator TOCTOU race (between
+  get_hwpoison_page() and is_free_buddy_page()) cannot cause false
+  positives: PG_hwpoison is set beforehand and check_new_page() in the
+  page allocator rejects hwpoisoned pages.
+- Document the narrow LRU isolation race window for MF_MSG_UNKNOWN and
+  its mitigation via identify_page_state()'s two-pass design.
+- Explicitly document why MF_MSG_GET_HWPOISON is excluded from the
+  panic conditions (shared path with transient races and non-reserved
+  kernel memory).
+- Link to v3: https://patch.msgid.link/20260413-ecc_panic-v3-0-1dcbb2f12bc4@debian.org
+
+Changes in v3:
+- Rename is_unrecoverable_memory_failure() to panic_on_unrecoverable_mf()
+  as suggested by maintainer.
+- Add CONFIG_BOOTPARAM_MEMORY_FAILURE_PANIC kernel configuration option,
+  similar to CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+- Add documentation for the sysctl and CONFIG option.
+- Add code comments documenting the panic condition design rationale and
+  how the retry mechanism mitigates false positives from buddy allocator
+  races.
+- Link to v2: https://patch.msgid.link/20260331-ecc_panic-v2-0-9e40d0f64f7a@debian.org
+
+Changes in v2:
+- Panic on MF_MSG_KERNEL, MF_MSG_KERNEL_HIGH_ORDER and MF_MSG_UNKNOWN
+  instead of MF_MSG_GET_HWPOISON.
+- Report MF_MSG_KERNEL for reserved pages when get_hwpoison_page() fails
+  instead of MF_MSG_GET_HWPOISON.
+- Link to v1: https://patch.msgid.link/20260323-ecc_panic-v1-0-72a1921726c5@debian.org
+
+---
+Breno Leitao (4):
+      mm/memory-failure: report MF_MSG_KERNEL for reserved pages
+      mm/memory-failure: add panic option for unrecoverable pages
+      Documentation: document panic_on_unrecoverable_memory_failure sysctl
+      selftests/mm: regression test for panic_on_unrecoverable_memory_failure
+
+ Documentation/admin-guide/sysctl/vm.rst     |  65 ++++++++++++++++++
+ mm/memory-failure.c                         | 102 +++++++++++++++++++++++++++-
+ tools/testing/selftests/mm/memory-failure.c |  84 +++++++++++++++++++++++
+ 3 files changed, 250 insertions(+), 1 deletion(-)
+---
+base-commit: 4c406406070d57dbefeaad149181785330c23f92
+change-id: 20260323-ecc_panic-4e473b83087c
+
+Best regards,
+--  
+Breno Leitao <leitao@debian.org>
+
 
