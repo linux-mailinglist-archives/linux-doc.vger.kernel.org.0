@@ -1,222 +1,143 @@
-Return-Path: <linux-doc+bounces-84535-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84533-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wP74KV+u62nfQAAAu9opvQ
-	(envelope-from <linux-doc+bounces-84535-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 19:54:39 +0200
+	id IFQgOWit62nfQAAAu9opvQ
+	(envelope-from <linux-doc+bounces-84533-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 19:50:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 245A946227F
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 19:54:39 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 43B654621DE
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 19:50:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DBAC23008081
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 17:54:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B35B0301C5BB
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 17:49:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 977912BD587;
-	Fri, 24 Apr 2026 17:54:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00C903E6DD4;
+	Fri, 24 Apr 2026 17:49:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b="WIxSJJEC"
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sA7gH+Fn";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SK+D8ac0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.xn--rombobjrn-67a.se (nestor.xn--rombobjrn-67a.se [188.126.83.49])
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C21F57083C;
-	Fri, 24 Apr 2026 17:54:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.126.83.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D75932C0F69;
+	Fri, 24 Apr 2026 17:49:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.241.56.161
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777053274; cv=none; b=iZqCtqe4UxqSDiRY4sHOl4pfZvThycNHtGSVO38EGU9KfoXPF1bPsX8SYv313MaT7lieaaPa1tTTIb1t8LFF9/wxcnI8KOvFXjhsnMs5P3b/n/PkqadYTp3ADc6SvI+2k7yxXqFVVDoVnVPCljY0lUQEsFVO0nsU3/+wE3L/p30=
+	t=1777052942; cv=none; b=kr9zieINd+NLsvh/GquAy/Vjhi3gyoWvhYSV87U2qZmidAgw8ZQ1Kj8FWdt3evnFCy4rNVSBIGTIfIMnKB/akUBbYtpswLv4iWipT240Emyqtoz1A4Ccb1fQ8MxuoW/edntqrvlk1Vijj6y8l6SYugJgkomqw0ik6EhQMAL4bQU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777053274; c=relaxed/simple;
-	bh=WgaMls5U0OisShyTrOkS3PZGbJmhUxFf2DHxM/lugSY=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FB1TVbops3lneNrnq4BRE0PQhX1QJBslqgMohbCra6ASLU9j4NeEvtqLci/rzm21MwGU4iseT/9u1KO2aLvaECmPoAHv3hPLII1/SelOEo1dixibTlkpjqEBN0GQREtXVA3MO4t1xOBvQmQIm+qktwNlLB7mAKmA2H9f3+TYo7s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se; dkim=pass (2048-bit key) header.d=xn--rombobjrn-67a.se header.i=@xn--rombobjrn-67a.se header.b=WIxSJJEC; arc=none smtp.client-ip=188.126.83.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xn--rombobjrn-67a.se
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xn--rombobjrn-67a.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xn--rombobjrn-67a.se;
-	s=a; t=1777052848; bh=WgaMls5U0OisShyTrOkS3PZGbJmhUxFf2DHxM/lugSY=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type:From:Sender:Reply-To:Original-From:
-	 Organization:To:CC:Subject:Original-Subject:Date:Message-ID:
-	 In-Reply-To:References:Original-Message-ID:
-	 Disposition-Notification-To:Disposition-Notification-Options:
-	 MIME-Version:Content-Transfer-Encoding:Content-Type:
-	 Content-Features:Content-Alternative:Content-Location:
-	 TLS-Report-Domain:TLS-Report-Submitter:MT-Priority;
-	b=WIxSJJECF4clUw9o2wcK+Ae/BBNemkQwAni0uL3lPekcgQ/y0Efoc2WJwDfJHwi5i
-	 us17B/huKxwsWgly1VNypyXt+7B3XAoUNgNO4B7/BjQdTaNzN+jyY4CFvJ1IbrEYeS
-	 t38cjmM/D1ghDeNHmYfkCP2cRkRi/niuDXFlEhDp94F0c2g0jxO6p+gwjHGKvumP/E
-	 nPk07gOjv4X1gS5x34oXobV5cwKSRoc3E0e4RmqsYE9uOre7VNMDdHIXOQ4GQ274Ek
-	 KJkiIKkc0Vc2/cg2QPB/5xccTQ9f4wpKQ7pYs9C0NPKJ0zPb6wZnlZPhQxU3ryxuzL
-	 O7rU4VYKf1+gQ==
-Received: from tag.xn--rombobjrn-67a.se (tag.xn--rombobjrn-67a.se [192.168.72.9])
-	by smtp.xn--rombobjrn-67a.se (Postfix) with ESMTPSA id 137CD407E8F7;
-	Fri, 24 Apr 2026 19:47:28 +0200 (CEST)
-Date: Fri, 24 Apr 2026 19:47:14 +0200
-From: =?UTF-8?B?QmrDtnJu?= Persson <Bjorn@xn--rombobjrn-67a.se>
-To: Lee Jones <lee@kernel.org>
-Cc: Pavel Machek <pavel@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah
- Khan <skhan@linuxfoundation.org>, linux-leds@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: leds: uleds: Make the documentation match the
- code.
-Message-ID: <20260424194714.71de0ef6@tag.xn--rombobjrn-67a.se>
-In-Reply-To: <20260423152655.GF170138@google.com>
-References: <20260402220811.4804DD8F722@tag.xn--rombobjrn-67a.se>
- <20260423152655.GF170138@google.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1777052942; c=relaxed/simple;
+	bh=kQpXIVgVCV4fISNoHIQtgbvP1EXllhQ2T3mIJ8cRNro=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HSJ9dKqfE7EBozwjIOKaNeHveC5IyTT39T0IH/Jo9Ao5NqgpxFrkjv+hyJJRyPLZ6inY+L62N4o+kaAyUMjQsvSh2mCE9Cba4koP4Z2xOtNxepIuTBYIByoIVd6QikRQdC/BdsRkkyMpKgSa3r6IjC3nCL5NnHZ3HpeHX7H2DlI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=sA7gH+Fn; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=SK+D8ac0; arc=none smtp.client-ip=80.241.56.161
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4g2L6x6Bt3z9spW;
+	Fri, 24 Apr 2026 19:48:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1777052937;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=kQpXIVgVCV4fISNoHIQtgbvP1EXllhQ2T3mIJ8cRNro=;
+	b=sA7gH+FngvczjarD1Tbb6PMFak20PWNxDbkqseniXZs+8QP3xpEuvgwReAG4J+PFdNl5GM
+	b89YykHJSGUcM7lC+lgj6zlTdRk54bZRiaxpMbW7DfWoR7XLIuq9ezyqo70QE4X05H8N4z
+	WK3gK4WK+HuJzJMh4Wsr86QsWnQUjLJr9+Mcic5BtOsW4+6zZbQfElWpmmVd19Rup6BxOF
+	G4826WZgodQbSmk/vi7l8Sg1c1N7JG8djJPql/xtRH8aG84T4s1lkwHWLo/U7Tw1GGzEDi
+	WrEamYqbj+UuOgCSj4UgnRkTId/5WRPnlzuuiHdKcMtwwz15Jpba+rHJbYgsvg==
+From: Manuel Ebner <manuelebner@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1777052935;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=kQpXIVgVCV4fISNoHIQtgbvP1EXllhQ2T3mIJ8cRNro=;
+	b=SK+D8ac0yLSSdvohGV7owNyki6lMVoJQIzG6m1Nt3gyrX9dzmoQMlO2EsYgDh2KvmlR/3G
+	Ky/jgJTC6EvnCq3j41LrqGLzTORmrqq3+msayHySfXLGg4ZAEccf05anBIXzoeEf+uMT/1
+	fTzT7buEyY6zSICe5vhyLmnhOzFcr1WZJeI6x/8o9SiWSuGNcD/x9FmqjOuo1N2h9d2MRg
+	Y7QJHh2AYZ6wOFgZHJ3e5gYExnb6+Z+GH/P6nPvev2FoJvAFxlcpuGJAtAvvj4BetjDjNp
+	SGyH1RzYojU/NuSKy2z12Cm/2dklgBHerrwsnQqQ6kISt9SM9rxgx+2NLNL9cw==
+To: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-doc@vger.kernel.org,
+	Kees Cook <kees@kernel.org>
+Cc: linux-kernel@vger.kernel.org,
+	workflows@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	rcu@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-mm@kvack.org,
+	Manuel Ebner <manuelebner@mailbox.org>
+Subject: [PATCH v3 0/3] Documentation: adopt new coding style of type-aware kmalloc-family
+Date: Fri, 24 Apr 2026 19:47:44 +0200
+Message-ID: <20260424174743.257951-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/9p1HensKdgWEdofuDRm2axt";
- protocol="application/pgp-signature"; micalg=pgp-sha512
-X-Rspamd-Queue-Id: 245A946227F
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: fzthp35po1ukxbt6fwqeub7xbmjx4tas
+X-MBO-RS-ID: ce45d6f12d0da57349b
+X-Rspamd-Queue-Id: 43B654621DE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-3.76 / 15.00];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[xn--rombobjrn-67a.se:s=a];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
 	MAILLIST(-0.15)[generic];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[xn--rombobjrn-67a.se:+];
-	TAGGED_FROM(0.00)[bounces-84535-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[xn--rombobjrn-67a.se];
-	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-84533-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[mailbox.org:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[Bjorn@xn--rombobjrn-67a.se,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	RCPT_COUNT_SEVEN(0.00)[11];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_HAS_DN(0.00)[]
 
---Sig_/9p1HensKdgWEdofuDRm2axt
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Update the documentation to reflect new type-aware kmalloc-family as
+suggested in commit 2932ba8d9c99 ("slab: Introduce kmalloc_obj()
+and family")
 
-Lee Jones wrote:
-> On Thu, 02 Apr 2026, Bj=C3=B6rn Persson wrote:
->=20
-> > From: Bj=C3=B6rn Persson <Bjorn@Rombobj=C3=B6rn.se>
-> >=20
-> > =C2=B7 max_brightness must be set. Leaving it uninitialized or just omi=
-tting it
-> >   won't work. =20
->=20
-> What are these points?  How do you even type one of those?
+On Tue, 2026-04-21 at 19:55 +0200, Manuel Ebner wrote:
+> I have also thought about adding a few cases to checkpatch.pl, but this
+> will take me more time, and i want to get this series finished.
+I can't do it, i don't have the knowledge in Perl and Regex.
 
-The bullet point is the character U+00B7 middle dot. I type it with
-AltGr-period on a Swedish keyboard in Fedora. I don't know what keymap
-your distro uses for your keyboard. I hear some keyboards lack an AltGr
-key.
+ [v2] -> [v3]:
+remove obvious wrong replacements in [1/3]
+add Acked-by: Paul E. McKenney in [2/3]
+change how to mark the optional argument in [3/3]
+add recipants
+ --cc="linux-mm@kvack.org"
+ --to="Kees Cook"
+ --cc="Geert Uytterhoeven"
 
-> Anyway, proper sentences / paragraphs is better.
+ [v1] -> [v2]:
+put RCU/* in a seperate patch [Patch 2/3]
+Omit optional argument (GFP_KERNEL) as suggested by https://lwn.net/Articles/1062856/
+deprecated.rst: change the argument gfp to optional [Patch 3/3]
 
-You mean you dislike bulleted lists?
-
-Or if you mean that the first sentence doesn't begin with a capital M,
-that's because identifiers are case-sensitive in C. There is no
-Max_brightness, and if it were defined, it would be different from
-max_brightness.
-
-Otherwise I don't understand what you mean with "proper sentences", as
-I don't see any grammatical errors.
-
-> > -A new LED class device will be created with the name given. The name c=
-an be
-> > -any valid sysfs device node name, but consider using the LED class nam=
-ing
-> > -convention of "devicename:color:function".
-> > +A new LED class device will be created with the given name and maximum=
- =20
->=20
-> Did you mean to revers "name given"?  A "given name" usually means
-> something else.
-
-I felt that "the name and maximum brightness given" would be
-grammatically awkward.
-
-To prevent misinterpretation, how about replacing "given" with a
-synonym? Perhaps "the specified name and maximum brightness"? Another
-option is "the given maximum brightness and name", but it feels a
-little odd to mention the brightness before the name.
-
-> > +Although max_brightness is a signed int, only positive values are vali=
-d:
-> > +1 to INT_MAX. =20
->=20
-> What about 0?
-
-That will get you an EINVAL from uleds.c =E2=80=93 presumably because a
-brightness interval from 0 to 0 would be pointless. That LED would never
-be lit.
-
-> > +The current brightness is found by reading a whole int from the charac=
-ter =20
->=20
-> Try not to shorten names in documentation "integer".
-
-The type is named "int" in C. There are many integer types, but it would
-be wrong to try to read a uint16_t or a size_t or any other integer
-type. The document needs to use the actual type name to make it clear to
-the reader that they must read sizeof(int) bytes.
-
-> Why do we need to specify "whole"?
-
-Because you can't read it piecemeal. Usually when you read from a disk
-file, a pipe, a TCP socket or some other bytestream, the system call
-will let you read one byte at a time if you want. A reader might assume
-that /dev/uleds works the same way.
-
-=46rom a datagram socket you can read the beginning of a datagram and
-discard the part that doesn't fit in your buffer. To a reader with a
-little-endian system and max_brightness =E2=89=A4 255, it might seem logical
-that they'd be able to read the first byte and discard the bits that
-will always be zero.
-
-I thought "whole" would communicate to the reader that they must read
-sizeof(int) bytes in a single system call.
-
-It seems this wording wasn't enough to get the point across that it's
-necessary to read an int, a whole int, and nothing but an int. Do you
-think the document needs to expound that point more?
-
-Bj=C3=B6rn Persson
-
---Sig_/9p1HensKdgWEdofuDRm2axt
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signatur
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE52SginNFTPmg+iBb4Tha3NZK5j8FAmnrrKIACgkQ4Tha3NZK
-5j8YZA//ZF4R7F0CtoUSf9Oj6W+8/spe9/angJSTShMpi0oAv9xIy2rGhcXh21++
-F1ErxzPhHNj4wtxLvDicugdo0TbrR9aZuk8nTrLz2iXYHKMDbi6Fdb8Zy14I9Twx
-fsYC5yYvYCUoOs3URzvV9oGqt6iIfD0l+819GsCHRxd4kxdynGhbBdaDB4+9kksM
-W3h92eEaSwTYcTr32q89c3fxzig7lZMZ1zRNi838GKjdcQlWDJOeal3kgleG4kVy
-LQlhmzb7oJesriasAbzYh97MQP/GbGF4ArGFncj6AvEOLLMo88xaPiKZbHKgLKz2
-iwMr4AsmW7mnHx9ke2GadbXE1g9TatS8L4R+DWhKiKvrZ10jCQgFdjAkh71YRV6g
-6Yga+Q/qt1AUhwgJ2U8pDMjj3c+pqeJOS/Tbr2Hhz/BIrLSqdPG5Jy0cTfirxtS0
-0UxbHh6lRlwKlTnJxVaB2ogJhgUzTZs8cv2SsJ1lm8Iwj0U3eqQVpas7a7YzCUTZ
-j+j/Cca2KLP7mEpCuQ0+ztZJK0S5IpLV6ECjmIdpnvj6Ey4Ooi/eCbhFZD4Z/4mX
-9JMEVJcJnoCyNLSFit92VDOZUYbrK0nrL1hNUzN5Ho+J67dE2kNydJ7jA76nBBzD
-VaxDL2zearSyyrQw/t63slBxwM7GNpx3exrVnU3AkzX1X7yXY64=
-=+z4K
------END PGP SIGNATURE-----
-
---Sig_/9p1HensKdgWEdofuDRm2axt--
+Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
 
