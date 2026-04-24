@@ -1,103 +1,105 @@
-Return-Path: <linux-doc+bounces-84490-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84491-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wEo5Ocdw62nCMwAAu9opvQ
-	(envelope-from <linux-doc+bounces-84490-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 15:31:51 +0200
+	id OFkAClBy62nmMwAAu9opvQ
+	(envelope-from <linux-doc+bounces-84491-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 15:38:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E66D45F0DF
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 15:31:51 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E77145F45F
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 15:38:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 86DDF303FAAD
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 13:29:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1F9F23052890
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 13:33:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B58DA3D75D0;
-	Fri, 24 Apr 2026 13:29:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32DD333E347;
+	Fri, 24 Apr 2026 13:33:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="RmEhauIs"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="cwaGamCu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF92E3D6CCF
-	for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2026 13:29:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 868283AC00;
+	Fri, 24 Apr 2026 13:33:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777037374; cv=none; b=NTbGsTn57bj+Ge4jLbcec1kixuTy/oFP1umaAGM78CkH21u33/VjdNPOhyKCu+cIv1Pb9FvnB15w/UcfTe7MFgyHx8XgNoqlA+7inDYyBPKRPHkWRnjzK9/M2qfP2+Mriun47pY2R8oLtpvX4hHDEswtVJbcSd3gtmFSuFODT4o=
+	t=1777037604; cv=none; b=Pe2KGhkZtjXboPExxXYDeyT60wm+Dz+um6GXz3inGecNx59jX8SWgUP23vhbTb1fDbIFmxjNGvi5RWN+/C/t2Q4SrTqu6xJXpKCzYgJZqRgORfadDmnURWX2mUU4EUpNrA15wLiFFRl0NQN+wjkcNlHUQwg03JFrw4iPXD8eIxs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777037374; c=relaxed/simple;
-	bh=8N9ZUyumLhZPpREviRbZwKlXS861tjEA3KjPMdkQopg=;
+	s=arc-20240116; t=1777037604; c=relaxed/simple;
+	bh=cAWFcttdHUtF05cSDhr0+rAgw0R83Ifv4hIjIAXjW3w=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DA5iXR+6pQGsFnEE5V49HMmK2coEsKrXoiQzafv+x/qU2FZtHAWxjO2a0Z/iUFuxN+psaqKaSAIkE7NeAza1kuHDQUTGvkoLQzxQm6obMvxVQ0K/tAyPHyRjsSHrZ36Khi3doV4+h5sex3sopp13w8vAVrp7wQPQjWlVvgTxV1Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=RmEhauIs; arc=none smtp.client-ip=209.85.160.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-qt1-f176.google.com with SMTP id d75a77b69052e-506a7bbe9d0so65533431cf.0
-        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2026 06:29:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1777037368; x=1777642168; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=4ezbOz+DNq/Ln5lGWJ2GbxuTePwedL+fzC5CYxvFRhc=;
-        b=RmEhauIsLfxW6jH629GW4pWujwRJ8y91I3dBHvLzdqkILcwvhWgkHV9du5aa6+vVqO
-         4edw6N7ZtxzQcCuFOCPHC6mu8ds1UXTlT8riBOKNnhVJKVZRxHEcgzw6EpNcwdomH/Uf
-         24ytX8IUXD7f788ltV5nBwvwhRhak2QMaRCTWyE8TqUrmXS4AU6gR6Uf1bmH23dAoLGn
-         TXsPDTb7wBIp8bzzTj77X2xDa2nFyGKbWKaeWJ0zGxWr+IRLAUd8kZaa8NepCGwu/ybi
-         Vq9lSWJbbMItZ4arPqMVuEHgdez221JWjzVK0rfarsOswm27SyGOK6TG912QD/SIftpB
-         g9rA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777037368; x=1777642168;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4ezbOz+DNq/Ln5lGWJ2GbxuTePwedL+fzC5CYxvFRhc=;
-        b=aNd5rSKHMXFNyNCuoMPVGZjcA/5yur0ouP7v6nbak80+ks0U8FQQShxjy/2KWDp6gu
-         A90fw4oPDUi+XWQcwzApjVsfTQGV9jYE/gbpkQeOkVixR1aZmL5JeP8GSwBZbQAqTh/w
-         i8bbrdhkUbHiG7OR+TJmfAje+JZyVvZa61rW7GM+KXBcrtHP7un0PUt43O+CE8Q7dk7a
-         k/0M86tqaUg06fNGcEAshXmXtp4ZcN0qqrW7x7w2eK76ANZrgPhgx8PPMbDabF+bgWAi
-         vy3QM8SUDjwFd4GpKcVOfuH07xDoSGjaIMxANFEdryjxE/LuemGUJUewLKSsbLD2OjRf
-         WVtA==
-X-Forwarded-Encrypted: i=1; AFNElJ+fEfdiOC0rvQ6XaafBEoJFuoF26S2XZ6lZs9ap7wpPFeU4Cs9MWdcPYyZ0y68XHYrqEFyt6mb+WTU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwbvXRioGAhkPFRayMxMsORhiAqsLDK97R3e1YxyiRNoWIvl7hM
-	kU8vJOhN2yVogkcFf+jOaQBNbaGhGrXKJl85l2DQYRU7Lcjv3Yx1woIve2VhymWMmhE=
-X-Gm-Gg: AeBDieuuccwNZtKgjLTwU7XCURci0DPBoAeqxRO5ORy+0c0mx2e9j4bu0Z3+X5dZHSe
-	9YDq2JhEY2sjlSf+c4WOtenU2Sjd2tLC8z6/0Sqe4vpJqzgYcbNYNnTLtVvpR3WuL3vCD9o6mba
-	BIDCl8gjnPQOASgeyU0EbPwMaLlSxg7Ar2Xrnwb0e7rkjqAhjZbGsYKHNzCib4JabmNUy7DwfEF
-	UPJ9dzRNomtlpxsttWmOPHPhw5v7YsjzS572FsEahuTligEJDdXHzbZ8Y6vL/0R6Gn/Bu5jV8vS
-	24A/wBxayKRDmcoUgHRQhQwfN0/FgAXe14t7h3WmI5wNnFdS+2I/h/DpCU0rmmELMtOHA7jaKg2
-	4roi7it/cXqC6YgaOyee3G4Wk48B7ZUoj/3RryERn8pijySe3eWsKIekb8+zX+bpJIVuovMY6za
-	X44ZH5UxFouqcmo78+CyNa8XIGrVOdjv4AebfJNR1+6V2gzqiitax3iWcMoF18qA==
-X-Received: by 2002:a05:622a:1f0d:b0:50f:c36a:381a with SMTP id d75a77b69052e-50fc36a3bd2mr157337571cf.55.1777037367645;
-        Fri, 24 Apr 2026 06:29:27 -0700 (PDT)
-Received: from plex ([71.181.43.54])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-50fb5fc8e04sm101886121cf.13.2026.04.24.06.29.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Apr 2026 06:29:26 -0700 (PDT)
-Date: Fri, 24 Apr 2026 13:29:24 +0000
-From: Pasha Tatashin <pasha.tatashin@soleen.com>
-To: Pratyush Yadav <pratyush@kernel.org>
-Cc: David Matlack <dmatlack@google.com>, iommu@lists.linux.dev, 
-	kexec@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-mm@kvack.org, linux-pci@vger.kernel.org, 
-	Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, 
-	Alex Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>, 
-	Chris Li <chrisl@kernel.org>, David Rientjes <rientjes@google.com>, 
-	Jacob Pan <jacob.pan@linux.microsoft.com>, Jason Gunthorpe <jgg@nvidia.com>, Joerg Roedel <joro@8bytes.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>, 
-	Leon Romanovsky <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>, Mike Rapoport <rppt@kernel.org>, 
-	Parav Pandit <parav@nvidia.com>, Pasha Tatashin <pasha.tatashin@soleen.com>, 
-	Pranjal Shrivastava <praan@google.com>, Robin Murphy <robin.murphy@arm.com>, 
-	Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Will Deacon <will@kernel.org>, William Tu <witu@nvidia.com>, 
-	Yi Liu <yi.l.liu@intel.com>
-Subject: Re: [PATCH v4 01/11] PCI: liveupdate: Set up FLB handler for the PCI
- core
-Message-ID: <aetvAkM0y45WAmfV@plex>
-References: <20260423212316.3431746-1-dmatlack@google.com>
- <20260423212316.3431746-2-dmatlack@google.com>
- <2vxzeck45yin.fsf@kernel.org>
+	 Content-Type:Content-Disposition:In-Reply-To; b=i4HNQeAEuC3pEcRTE9zMABh2OEQ2hAWMczAKTOa8ny0XKSf4O3lysHWoiyjYwfsdKFNCx65jdf9tqTz/eUIPxXL89Il7aCYpCHp5Oei5os+X+SwJyPg6ID67Cw5WON9BcygUjVBKbISrvvzwUd1S/rzrHbpgTFYFfnJZo3+Awf8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=cwaGamCu; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=ppCzrpMzgabfrm3Cdr1WSRYHoDC3MiyCqfSbp40kjmg=; b=cwaGamCu5vQZdwnzp9Uf/7/n6y
+	eMpgULtxbBz7rVWsTTeezIRDqTH0I/OvJ5mV4ddpa+ZKhLs+2+vj/i1d88j404pj9A1MzIrfZq6BQ
+	X8f/VK+lx9/9zpEegUwraXLRsBfNHIzaoKzQsMInS/udrbHJyLWuGE1FggG506Ld3rYi6yNBelNLA
+	3JeoQWavYDko/3mtj8ogzX7QRszueCZyzK1PDVYkot3iR8Kbz5bVopP+62aRFcxGC/n9deIEM/ycH
+	qL89auZFEr4h3I2jMf+TRz/OGw7Fm0aO2nngnT/PSuLRVM5P9uAHz2fGyTkuXp8vinBKuntm7Bewy
+	6AoRWvtg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1wGGeV-0000000DFUs-0Aje;
+	Fri, 24 Apr 2026 13:33:03 +0000
+Date: Fri, 24 Apr 2026 06:33:02 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Amir Goldstein <amir73il@gmail.com>
+Cc: Gregory Price <gourry@gourry.net>,
+	Joanne Koong <joannelkoong@gmail.com>,
+	John Groves <John@groves.net>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	Miklos Szeredi <miklos@szeredi.hu>,
+	Bernd Schubert <bernd@bsbernd.com>,
+	John Groves <john@jagalactic.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bernd Schubert <bschubert@ddn.com>,
+	Alison Schofield <alison.schofield@intel.com>,
+	John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	David Hildenbrand <david@kernel.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Jeff Layton <jlayton@kernel.org>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	Stefan Hajnoczi <shajnocz@redhat.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Chen Linxuan <chenlinxuan@uniontech.com>,
+	James Morse <james.morse@arm.com>, Fuad Tabba <tabba@google.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Shivank Garg <shivankg@amd.com>,
+	Ackerley Tng <ackerleytng@google.com>,
+	Aravind Ramesh <arramesh@micron.com>,
+	Ajay Joshi <ajayjoshi@micron.com>,
+	"venkataravis@micron.com" <venkataravis@micron.com>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>,
+	"linux-cxl@vger.kernel.org" <linux-cxl@vger.kernel.org>,
+	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+	djbw@kernel.org, Christoph Hellwig <hch@infradead.org>
+Subject: Re: [PATCH V10 00/10] famfs: port into fuse
+Message-ID: <aetxDlr0e9ILFIcg@infradead.org>
+References: <CAJfpegvVTcV89=q3L326aGQjhduBcv7PVg5QKftGLjNZmCLmaw@mail.gmail.com>
+ <ad4_jFsR951c2Mtn@groves.net>
+ <20260414185740.GA604658@frogsfrogsfrogs>
+ <CAJnrk1ZgcMuwfMpT1fXvUwBBiq9eWFHWVeOFQFFKiamGGe1RJg@mail.gmail.com>
+ <ad7Tps4tkNbndd9Z@groves.net>
+ <CAJnrk1ZWVsKW2dhAWdBkCQskoTE+hmOhPFDhyz4EtExn=GdXGA@mail.gmail.com>
+ <aeFDCeqZDPI3rm3s@gourry-fedora-PF4VCD3F>
+ <CAJnrk1ad6t6CJV+xnXwhoNHrHYA3htuaVdDq47FeT60cPBzj7g@mail.gmail.com>
+ <aeHXQ2EW2ivlLb_N@gourry-fedora-PF4VCD3F>
+ <CAOQ4uxhXTTyySG3tXnqNnP0edbbwUxfeeC7=CypDSyw_Mod48A@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -106,83 +108,59 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2vxzeck45yin.fsf@kernel.org>
-X-Rspamd-Queue-Id: 2E66D45F0DF
+In-Reply-To: <CAOQ4uxhXTTyySG3tXnqNnP0edbbwUxfeeC7=CypDSyw_Mod48A@mail.gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Rspamd-Queue-Id: 7E77145F45F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
-	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84490-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84491-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[gourry.net,gmail.com,groves.net,kernel.org,szeredi.hu,bsbernd.com,jagalactic.com,intel.com,ddn.com,micron.com,lwn.net,linuxfoundation.org,infradead.org,suse.cz,zeniv.linux.org.uk,huawei.com,redhat.com,toxicpanda.com,uniontech.com,arm.com,google.com,amd.com,vger.kernel.org,lists.linux.dev];
+	RCPT_COUNT_TWELVE(0.00)[43];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	DKIM_TRACE(0.00)[soleen.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[soleen.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:dkim,infradead.org:mid]
 
-On 04-24 14:33, Pratyush Yadav wrote:
-> Hi David,
+On Fri, Apr 17, 2026 at 11:06:58AM +0200, Amir Goldstein wrote:
+> If this logic was to be placed in fs/iomap/ as Christoph suggested,
+> I think the rest of the UAPI issues could be sorted out.
+
+For that you don't need it in iomap, it could stay in fuse an be a
+generic striping API.  Although IMHO doing it in iomap would be a
+lot cleaner and more efficient as well.
+
+> In any case, considering the sheer amount of discussion on this thread
+> I have scheduled a cross-track FS+MM+IO for Famfs and DAX iomap.
 > 
-> On Thu, Apr 23 2026, David Matlack wrote:
-> [...]
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index c9b7b6f9828e..94af31837375 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -20555,6 +20555,18 @@ L:	linux-pci@vger.kernel.org
-> >  S:	Supported
-> >  F:	Documentation/PCI/pci-error-recovery.rst
-> >  
-> > +PCI LIVE UPDATE
-> > +M:	Bjorn Helgaas <bhelgaas@google.com>
-> > +M:	David Matlack <dmatlack@google.com>
-> > +L:	linux-pci@vger.kernel.org
-> > +S:	Supported
-> > +Q:	https://patchwork.kernel.org/project/linux-pci/list/
-> > +B:	https://bugzilla.kernel.org
-> > +C:	irc://irc.oftc.net/linux-pci
-> > +T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git
-> > +F:	drivers/pci/liveupdate.c
-> > +F:	include/linux/kho/abi/pci.h
-> > +
-> 
-> Can we please also add these files under the "LIVE UPDATE" entry. The
-> code here concerns both live update and PCI. We can figure out the
-> maintenance details as we go along, but I think the live update
-> maintainers should at least get all the patches for PCI live update.
-> 
-> Perhaps also add the kexec list here? We plan to use it to maintain the
-> LUO patches, and adding it will make sure we get the patches in case
-> someone updates the file list here but forgets to update it in the LIVE
-> UPDATE entry.
+> I wasn't going to include Storage people at first, but since Christoph
+> mentioned that stride/offset iomap could be useful for block iomap,
+> I included them as well.
 
-+1
+There is no overlap with storage.  Any use of this would have to be
+file system level striping, not stackable block driver level striping.
+And keeping the rooms smaller is a win on it's own - anyone interested
+can join anyway.
 
-These files should also be added to the Live Update entry, and the kexec
-mailing list should be included.
-
-Changes specific to Live Update should be routed through the
-liveupdate/linux.git tree, while generic PCI changes should go through
-pci/pci.git. In either case, if liveupdate.c or abi/pci.h are modified,
-acks are required from the Live Update group.
-
-Pasha
 
