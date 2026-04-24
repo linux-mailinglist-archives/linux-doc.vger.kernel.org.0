@@ -1,210 +1,162 @@
-Return-Path: <linux-doc+bounces-84416-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84418-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yCN7IAqr6mlc1wIAu9opvQ
-	(envelope-from <linux-doc+bounces-84416-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 01:28:10 +0200
+	id 4GpzAMy46mmNCwAAu9opvQ
+	(envelope-from <linux-doc+bounces-84418-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 02:26:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 004AA458559
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 01:28:09 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id A9292458947
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 02:26:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A4D563021E9B
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2026 23:27:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DE24D301BEF6
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2026 00:26:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C8C13D88E5;
-	Thu, 23 Apr 2026 23:27:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7AC02222D0;
+	Fri, 24 Apr 2026 00:26:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Y8DjPBHe"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uYLMGkPr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86FAC37755D
-	for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 23:27:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92996221DB6;
+	Fri, 24 Apr 2026 00:26:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1776986873; cv=none; b=lcGE+5KofEWoGhe5sUjRql+2G5ziTLvwW9RuamL3WaKq//sPeO+aTDFORQyaMkPHnyEKtbgSOauQVl4m9fP1FdN2zNmWmP0Oja6mRk7eZXmDnL7AhavOIPnhBhzaIgEfjWch6i/ABygJj8Ccy3OqNmw+Af7vuuyWfj83t4vMnz0=
+	t=1776990394; cv=none; b=lF1fNDKDtSvWrGN0n2p5656X23HUU9f+IuqCbZ6G4RCbGoc4DG5aCuuoF7zNVgUItuiUa+oQ3yJ34C3iZVMX1Wy78PgV71+IYTsoGdWcuc7LVfVqSSejPOGy40EFwxYSCAwbE/uldk4zOHIWCKVtwUfVbthaBIKNxOANo8+lpPg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1776986873; c=relaxed/simple;
-	bh=gCwmX1OtHkLJhZqpnRYlpSdpxrI4jzQ0Eg7EJB7J8GE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aA7aLWvngkUqrplDW62wRaNCgmoV5f/sGgcsOxi7rkNBYYfCqyWCqIYHew6QkZ3DODAMRLKEan3+SHgFG6sMuGWvDqYDjiuVZVtr30SLPTYe8gkD0uBclU5omsEq6yE8UiIbZR8gZrOQx+uzhK4nqhJXZstJEbLjukzXEanzuAM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Y8DjPBHe; arc=none smtp.client-ip=209.85.214.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2b243198058so187565ad.1
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2026 16:27:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1776986870; x=1777591670; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=lt0LRXP7f5oacTu2NcOl/7iPlzf9+apNICsUQAZ1DMY=;
-        b=Y8DjPBHeWa3hHxMbSz88wXYEAoUayTTessiivRl6o617Gm8uDsSALcGpeLvpUoQDeR
-         xCzj4i84K3eQylbZn9c027XRRiswacYDUth72A2Qx78P9e14JNwbPNkfEAjn1o2D7e/J
-         IJF7z4Ez6mYTdgsf10Cem+Pqz+nS23kTGskCOAgC/EKF/ttcdzXkDm0UQiXTfdN24e2L
-         aXV2cUNStVMAJEahW+0uyAZo6klmdfdw46TNN0+DoZJ4HIZBfsj68lW4c9Rd5yaDjo4Y
-         fb0nhO0qUmuQ6m0hPMDxhdSUyYN0SRB4M/+Qc98Lz1ahIJV5eLMScqt0pXJOCRFUOIk2
-         1NyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776986870; x=1777591670;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=lt0LRXP7f5oacTu2NcOl/7iPlzf9+apNICsUQAZ1DMY=;
-        b=VUxQo6cl+yggWkiiVtsdkbvNguaPTilw3SbcFYNjJyChiltlU+/gR3z8zel5CtZuAt
-         lI8Rf68ZJwJ/MV5jPESdCSm3nw7Mc+9KUVyi1qSPXfj40CIOdqzrU3im7Qp65lGTpjy/
-         akQQqin4Grv2an7M212E7fnmqKdedCspMp21tbGe+msVtaHK8kFzQmd+u2l/HE40744g
-         NtXrwbS/yHNuwbr1Pi6t4lpXAge8AwJUPuN73RVosBeQMpv0XxLqCtPQs0VVAckyfMCJ
-         VY1qz+92V8oLPYWN7v6LNZX9ATtWi4L6r3T3VbRt7OQg51saY4q2sGiJkijbclpvt4oC
-         Fc9A==
-X-Forwarded-Encrypted: i=1; AFNElJ/8qpRtmjDIlBzNmZ6+hFr9DTajSJIjql0rF6ZMcN++KvSMVMGTTb4QlI+4Vs+jDLhszFOfwGIBf0w=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyAqqSlz0/yk7rVbwcJaevAMHcIsfZ6OrZ4JEHImT950pa10BCr
-	Z0fyRsOFYXyma51mh68cu0/5Mf5O9SLn72hkiamj7djoOREb+nXhtxvwMXGACQRSkA==
-X-Gm-Gg: AeBDiesGa5MIB0OrswgEOTiKFIr0LxQvWRfRhU+u8hmfUoWo8Nur1gsUPzpMbFomVUC
-	2pyRDPnU45nJmx11TX2F3Tnkj8YW9XgtpRaXEALhHvu9NxBrI+jz7AHT6y59XWvjf5QnkvJGMJh
-	FHC/8VCxPjKp3cVm6WmsV5fZfpnKyWG4wMySD14ktpATq9r3kusLaWk+aYLaoCIGxAQWKZWO6/+
-	wJL+wY3WnP/yonpY1Ch34+rSsEdR5BAri2cYs/D1yEI67VqqcsxuPjdn9u69T+KU0XlpE5mqJ5P
-	C/L3gm+TWHrwn4ls5UWqgwcEYGz6SklPriWz1jd9eeUmqW55Qo82YYEBWqCmevaOb4F/xNwhGWI
-	Nqzi7cidi0NycEGkz1VUQYyjocJwhtwalTMhk9KNQ+AdvSbVltECOOCVjgckfGdNndPVOacbSq0
-	dLtaEYIzjUxJq+gY0p2kIB5Icrn/hIL+jN2O0dS7HMJZWLIk8m2175xHmUcnulKDkLmbXnYlAEG
-	7H2gL+7GOo=
-X-Received: by 2002:a17:902:cf01:b0:2b0:5e19:1862 with SMTP id d9443c01a7336-2b603f4969amr20900125ad.5.1776986869309;
-        Thu, 23 Apr 2026 16:27:49 -0700 (PDT)
-Received: from google.com (195.236.83.34.bc.googleusercontent.com. [34.83.236.195])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c7976f9cabfsm18153636a12.9.2026.04.23.16.27.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 16:27:48 -0700 (PDT)
-Date: Thu, 23 Apr 2026 23:27:46 +0000
-From: Samiullah Khawaja <skhawaja@google.com>
-To: David Matlack <dmatlack@google.com>
-Cc: Jason Gunthorpe <jgg@nvidia.com>, iommu@lists.linux.dev, 
-	kexec@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-mm@kvack.org, linux-pci@vger.kernel.org, 
-	Adithya Jayachandran <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, 
-	Alex Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>, 
-	Chris Li <chrisl@kernel.org>, David Rientjes <rientjes@google.com>, 
-	Jacob Pan <jacob.pan@linux.microsoft.com>, Joerg Roedel <joro@8bytes.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Josh Hilke <jrhilke@google.com>, Leon Romanovsky <leonro@nvidia.com>, 
-	Lukas Wunner <lukas@wunner.de>, Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, 
-	Pasha Tatashin <pasha.tatashin@soleen.com>, Pranjal Shrivastava <praan@google.com>, 
-	Pratyush Yadav <pratyush@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	Saeed Mahameed <saeedm@nvidia.com>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Will Deacon <will@kernel.org>, William Tu <witu@nvidia.com>, Yi Liu <yi.l.liu@intel.com>
-Subject: Re: [PATCH v4 08/11] PCI: liveupdate: Require preserved devices are
- in immutable singleton IOMMU groups
-Message-ID: <aeqpJ7BeBtzoPIx4@google.com>
-References: <20260423212316.3431746-1-dmatlack@google.com>
- <20260423212316.3431746-9-dmatlack@google.com>
- <CALzav=dGpHEnEjyp8qc50iZrGeKJ47vjLvwtvkLCyNzOMJhozw@mail.gmail.com>
- <20260423225253.GA3444440@nvidia.com>
- <CALzav=fraXLgGs-XMc-=whMPhMbS99twFskGtV5Eo=UQ9mU5Fg@mail.gmail.com>
+	s=arc-20240116; t=1776990394; c=relaxed/simple;
+	bh=Wj7MBRLrssfpOdJSw3iPqXTN5nRgvGJm3FItsgv+Vek=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=b1yxQvD55LWvImukYQPV2/bMS3oDHgn0WtZ/TDr5qjWe3SWPwHJ5gQ7y+C+fcFONkGs8XeWtiOJYmJVtbfd9j7t/8r6bTCDO1QrgCV20sSEpPANafEcO+M6VSwiuZfxaMZDNIl3KkigsWnzVataKPo4o1QyukWcYd0iemmzkxn8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uYLMGkPr; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E894C2BCAF;
+	Fri, 24 Apr 2026 00:26:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1776990394;
+	bh=Wj7MBRLrssfpOdJSw3iPqXTN5nRgvGJm3FItsgv+Vek=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=uYLMGkPr0oW877jQr7py4WfT5WNcb+zqX5VW9F0jPSCMZMSt0lCf5ALSrINIqmnVV
+	 QHzk88X1JWZxm+UGrHtWamlGKFJkroxYKtbF/b4Sm9x4qdo1w0N7VcJ0mjzj5jojhe
+	 U8HfOu9LA/tNbClE2Zn7i7SJ2Hy/R7Pz0fIFl8+8Us+yiNYUC19q1lhFxBZ7bUg/Os
+	 RzyLOX9meKjztf+SxOH/spUDLPvmlptEc6ZiyERnVJgRu0RtuABlov0LF1IkeGu/0C
+	 TPyYkmHDEnNcADg/RgN8rhUAU4Z26WaG9QN3I5b975Eg4YL+Pn3OP07NTQFp3huU/1
+	 72uQgg7v+ZBlw==
+From: SeongJae Park <sj@kernel.org>
+To: Peter Xu <peterx@redhat.com>
+Cc: SeongJae Park <sj@kernel.org>,
+	Kiryl Shutsemau <kas@kernel.org>,
+	"David Hildenbrand (Arm)" <david@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	"Liam R . Howlett" <Liam.Howlett@oracle.com>,
+	Zi Yan <ziy@nvidia.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	kvm@vger.kernel.org
+Subject: Re: [RFC, PATCH 00/12] userfaultfd: working set tracking for VM guest memory
+Date: Thu, 23 Apr 2026 17:26:24 -0700
+Message-ID: <20260424002625.89857-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <aeprnnccJeyHB2rt@x1.local>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CALzav=fraXLgGs-XMc-=whMPhMbS99twFskGtV5Eo=UQ9mU5Fg@mail.gmail.com>
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Rspamd-Queue-Id: A9292458947
+X-Rspamd-Action: no action
+X-Rspamd-Server: lfdr
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	RCPT_COUNT_TWELVE(0.00)[31];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-84416-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84418-lists,linux-doc=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[skhawaja@google.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 004AA458559
-X-Rspamd-Action: no action
-X-Rspamd-Server: lfdr
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
-On Thu, Apr 23, 2026 at 04:09:01PM -0700, David Matlack wrote:
->On Thu, Apr 23, 2026 at 3:53 PM Jason Gunthorpe <jgg@nvidia.com> wrote:
->>
->> On Thu, Apr 23, 2026 at 03:10:55PM -0700, David Matlack wrote:
->> > On Thu, Apr 23, 2026 at 2:23 PM David Matlack <dmatlack@google.com> wrote:
->> > >
->> > > Restrict support for preserving PCI devices across Live Update to
->> > > devices in immutable singleton IOMMU groups. A device's group is
->> > > considered immutable if all bridges upstream from the device up to the
->> > > root port have the required ACS features enabled.
->> > >
->> > > Since ACS flags are inherited across a Live Update for preserved devices
->> > > and all the way up to the root port, the preserved device should be in a
->> > > singleton IOMMU group after kexec in the new kernel.
->> > >
->> > > This change should still permit all the current use-cases for PCI device
->> > > preservation across Live Update, since it is intended to be used in
->> > > Cloud enviroments which should have the required ACS features enabled
->> > > for virtualization purposes.
->> > >
->> > > If a device is part of a multi-device IOMMU group, preserving it will
->> > > now fail with an error. This restriction may be lifted in the future if
->> > > support for preserving multi-device groups is desired.
->> > >
->> > > Signed-off-by: David Matlack <dmatlack@google.com>
->> >
->> > Jason, do you think requiring singleton iommu groups is still
->> > necessary/useful now that this series preserves ACS flags on preserved
->> > devices and upstream bridges?
->>
->> I have forgotten why we introduced that? There are alot of funky
->> things about iommu groups that might be important upon restoration..
->
->You had originally suggested it in this thread:
->
->  https://lore.kernel.org/kvm/20260301192236.GQ5933@nvidia.com/
->
->> Like if you preserve one group member but not the other what do you ?
->
->Yeah I imagine there could be some tricky cases there...
->
->I wonder if PCI core is the right layer to enforce this. Maybe this
->fits better into Sami's IOMMU core series since that is where all
->those tricky cases will be (I imagine?).
+On Thu, 23 Apr 2026 14:57:34 -0400 Peter Xu <peterx@redhat.com> wrote:
 
-+1
+> On Thu, Apr 23, 2026 at 07:08:00PM +0100, Kiryl Shutsemau wrote:
+> > On Thu, Apr 23, 2026 at 10:50:06AM -0400, Peter Xu wrote:
+[...] 
+> > > - Whether we have explored other approaches on page hotness tracking
+[...]
+> > DAMON is built around sampling. It is good for working set estimation,
+> > but I don't think it is directly useful for eviction decision. It can
+> > miss hot pages. LRU rotation will also loose info.
+> 
+> Exactly.  If we need to collect ACCESS bit (or anything similar) for
+> eviction accuracy pusrpose, IIUC we need per-page info, we can't estimate
+> by sampling.
 
-Also I think this should probably be checked by iommufd and invoked
-through vfio cdev. Basically when vfio cdev calls into iommufd to
-preserve IOMMU specific aspects of device (PASID table etc), iommufd can
-check this and return error.
->
->> Even if you have ACS flags there are cases where groups are still
->> aliasing DMA..
->
->Hm, if a DMA alias can be created after boot time enumeration even
->with the REQ_ACS_FLAGS check, then
->pci_device_group_immutable_singleton() is not really immutable.
->
->
->
->> Frankly, multi-device iommu groups don't even work fully last time we
->> tried to use them in a VMM. So I think I would not expect them to ever
->> intersect with live update. Blocking something tricky you can't test
->> does seem like a reasonable thing.
+That's a fair argument.
+
+Nonetheless, there are some companies who use DAMON [1] for a similar eviction
+purpose on their products.
+
+Also, page level accuracy issue was indeed concerns from many people.  DAMON
+therefore provides page level DAMOS filter [2].  The idea is finding a large
+region of cold pages in low overhead first, then do page level access recheck
+on page of the region using the filter, just before doing the eviction.
+
+DAMON-based memory tiering also uses it [3], to avoid wrongly
+promoting/demoting cold/hot pages in DAMON-claimed hot/cold regions.  The
+evaluation result was not very bad, and a few more users reported positive test
+results.
+
+Also, DAMON can be used for page level monitoring [5] and open to changes for
+users.  Actually a work [6] for making DAMON-based page level monitoring more
+lightweight is ongoing.
+
+I understand no one fits all and the decision is up to each user :)
+Nevertheless, I will be happy to help if you have any question or request for
+DAMON.
+
+[1] https://cdn.amazon.science/ee/a4/41ff11374f2f865e5e24de11bd17/resource-management-in-aurora-serverless.pdf
+[2] https://origin.kernel.org/doc/html/latest/mm/damon/design.html#filters
+[3] https://github.com/damonitor/damo/blob/next/scripts/mem_tier.sh#L40
+[4] https://www.phoronix.com/news/DAMON-Self-Tuned-Memory-Tiering
+[5] https://origin.kernel.org/doc/html/latest/mm/damon/faq.html#can-i-simply-monitor-page-granularity
+[6] https://lore.kernel.org/20260423004211.7037-1-akinobu.mita@gmail.com
+
+
+Thanks,
+SJ
+
+[...]
 
