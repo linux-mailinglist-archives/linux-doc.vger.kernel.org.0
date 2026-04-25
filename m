@@ -1,48 +1,49 @@
-Return-Path: <linux-doc+bounces-84588-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84589-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mG5CORUl7WlxgAAAu9opvQ
-	(envelope-from <linux-doc+bounces-84588-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 22:33:25 +0200
+	id 8CSHGCQl7Wl1gAAAu9opvQ
+	(envelope-from <linux-doc+bounces-84589-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 22:33:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76A62467A2D
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 22:33:24 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00554467A4D
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 22:33:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 24152300BD86
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 20:33:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B9A943014549
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 20:33:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1592330B501;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B656F312803;
 	Sat, 25 Apr 2026 20:33:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ISMfSf8B"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WHKr7mAR"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0C262EA172;
-	Sat, 25 Apr 2026 20:33:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91D1A311973;
+	Sat, 25 Apr 2026 20:33:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777149199; cv=none; b=lC4MjgCw10yRwOqYRk/SgKVAYefEAmpPcbld+35wu+Cc0j++uC2oeaJmooVu1Xl0vd0/hz2hs+sheGqyN5xnAFU6fKKNJptXRMeh0L6itJZsktDQGhRS70+a2GUFHLssqgOHKnGlI2RCYyxVSEZ61imdODScT+HzMNj6e5P2mWc=
+	t=1777149199; cv=none; b=LmlIVN4yyyJzPJiYoGLJPjPsWKYN1bbpwTQsyzB3gk98jbf+N/WUSAG3dcB6HFtedtTNPuOfVwt4yNJ3n2z37dy1TO66yYPIsaJp1wmzhL7MSakPzk8lFeImkhuMFQeaz9TS/kK1TGLL9coLZTHoI0aOa92MZAVg1MF0t2pf9mo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777149199; c=relaxed/simple;
-	bh=CjM5lHlUhKQqvVPvH7UjU4XdbEsk9yGpjrvSpB7psBw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=JwMQrjqRzwv7t0aOzjviVztEbstIOL/0nMNfGCzXPyjnOUDX0HE0ccywBHxifv/Cuq65Xl+cIXXuuN7hDJ7aOoJq/rhf8ZnwayZbCMUBV7CbZICS3mhGUKVUrKudnvj3H87lYUeD6uI1yOX+r4zyAbm892zesWUnFWtQwww3WxE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ISMfSf8B; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE07CC2BCB0;
-	Sat, 25 Apr 2026 20:33:17 +0000 (UTC)
+	bh=Te4GL7YI2bga7ObPIqHKNdIOFUrcsNxgo3oTxgGUtEY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=YKASRFrTCOvryyb8RowVgFMJyAJf36Yzpd08XJ56ZvsNjmkY28xBLN1KnZBuNwtdy0Os6+Hytafcg4xgDy+Lm6zzJTEuzeaBMSPZdfI8Qs8klWeWPyjm3evgTpch5LZgh5EW7CSrn53uw7/BkMx1KAMw145AM7U7jdhcaSDBU3M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WHKr7mAR; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E747EC2BCB3;
+	Sat, 25 Apr 2026 20:33:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777149198;
-	bh=CjM5lHlUhKQqvVPvH7UjU4XdbEsk9yGpjrvSpB7psBw=;
-	h=From:To:Cc:Subject:Date:From;
-	b=ISMfSf8BKWaQOyhRKMyF1fdfzSjS6trY71nemW+erw60DWG+tyXf1QJGLa36u79WG
-	 XhFSPMfUCdO7cTgp+8EAcJH9gYB1iVv19yJARhMo9rNZ/aKsVOEaUW8cFYn94qvVlA
-	 Bdj/N2gio+kSw4fT4UrP8rsExEgqHZkSX2AfLDyouuop8mS+YE9Zo8LLApj5nj7EZx
-	 5RK3jsK2xCcIwYdXmUPvDe1WrmZRYlt40hhifvJFVvHb5MaJfkJjUV6+G0Q5n8DHJh
-	 QAzhTrz8+YOmLNth0V21SWMysRzYa/Ugi171v9dqdQY+oZddFr6jRJGJVaIgFDeE68
-	 x9oc89H1ZOQuQ==
+	s=k20201202; t=1777149199;
+	bh=Te4GL7YI2bga7ObPIqHKNdIOFUrcsNxgo3oTxgGUtEY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=WHKr7mARiuCYpZMXucBM5HNsb0AisKL+SVs6qyMvTi07bf/1Ls7AO+MSs2jwnVry8
+	 PxvVkBnwGZzLB3BufsHaU12SiWfMZF3UurrTQ70NvpfsaE0K871I9ic8sQTgJAPlSA
+	 gdtnR8N2RBk/5N4Sv6kHerDJ5S0/otzhXyXEd8Ie/p2mzOiccsKp+JONLRlKEa3O3S
+	 cdhVSIW+ai0g+R5kbiD4FHs4MJDoH69DeRLgL6wlVz+YBuMQeM97EcrALzkZM2Pmok
+	 mStAcqhr5Q5n8hoK2lCMrgWxSypH7m+shHwp5MY5wtzRN5nwzUs1R7a/N1IqEe6SJB
+	 0Wbuga3b/TQ2w==
 From: SeongJae Park <sj@kernel.org>
 To: 
 Cc: SeongJae Park <sj@kernel.org>,
@@ -60,10 +61,12 @@ Cc: SeongJae Park <sj@kernel.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [RFC PATCH v2 0/2] mm/damon/stat: add kdamond_pid parameter
-Date: Sat, 25 Apr 2026 13:33:05 -0700
-Message-ID: <20260425203309.108879-1-sj@kernel.org>
+Subject: [RFC PATCH v2 2/2] Docs/admin-guide/mm/damon/stat: document kdamond_pid parameter
+Date: Sat, 25 Apr 2026 13:33:07 -0700
+Message-ID: <20260425203309.108879-3-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260425203309.108879-1-sj@kernel.org>
+References: <20260425203309.108879-1-sj@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -71,7 +74,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 76A62467A2D
+X-Rspamd-Queue-Id: 00554467A4D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -79,18 +82,18 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84588-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84589-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[15];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
@@ -102,31 +105,28 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_SOME(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-DAMON_STAT doesn't provide the pid of its kdamond, unlike DAMON_RECLAIM
-and DAMON_LRU_SORT.  This makes user-space management of DAMON_STAT
-unnecessarily complicated.  Provide the information via a new parameter,
-namely kdamond_pid, and document it.
+Update DAMON_STAT usage document for newly added kdamond_pid parameter.
 
-Changes from RFC v1.2
-- rfc v1.2: https://lore.kernel.org/20260416002149.87090-1-sj@kernel.org
-- Detect and use fresh kdamond pid.
-Changes from RFC v1.1
-- rfc v1.1: https://lore.kernel.org/20260414235912.98174-1-sj@kernel.org
-- Close the parentheses of error handling block.
-Changes from RFC
-- rfc: https://lore.kernel.org/20260414053742.90296-1-sj@kernel.org
-- Fix damon_kdamond_pid() failure handling.
+Signed-off-by: SeongJae Park <sj@kernel.org>
+---
+ Documentation/admin-guide/mm/damon/stat.rst | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-SeongJae Park (2):
-  mm/damon/stat: add a parameter for reading kdamond pid
-  Docs/admin-guide/mm/damon/stat: document kdamond_pid parameter
-
- Documentation/admin-guide/mm/damon/stat.rst |  7 ++++
- mm/damon/stat.c                             | 38 +++++++++++++++++++++
- 2 files changed, 45 insertions(+)
-
-
-base-commit: 4eb752fe1ea250a5339f1e70398c5fa3a18afb87
+diff --git a/Documentation/admin-guide/mm/damon/stat.rst b/Documentation/admin-guide/mm/damon/stat.rst
+index c4b14daeb2dd6..46c5dd96aa2ed 100644
+--- a/Documentation/admin-guide/mm/damon/stat.rst
++++ b/Documentation/admin-guide/mm/damon/stat.rst
+@@ -89,3 +89,10 @@ percentiles of the idle time values via this read-only parameter.  Reading the
+ parameter returns 101 idle time values in milliseconds, separated by comma.
+ Each value represents 0-th, 1st, 2nd, 3rd, ..., 99th and 100th percentile idle
+ times.
++
++kdamond_pid
++-----------
++
++PID of the DAMON thread.
++
++If DAMON_STAT is enabled, this becomes the PID of the worker thread.  Else, -1.
 -- 
 2.47.3
 
