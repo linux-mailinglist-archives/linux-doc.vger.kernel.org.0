@@ -1,142 +1,189 @@
-Return-Path: <linux-doc+bounces-84577-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84578-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 1SevA8Hf7GkZdQAAu9opvQ
-	(envelope-from <linux-doc+bounces-84577-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 17:37:37 +0200
+	id sPjeImjg7GkudQAAu9opvQ
+	(envelope-from <linux-doc+bounces-84578-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 17:40:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51E21466C4B
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 17:37:35 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 16908466C5E
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 17:40:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5F1E6300CBCA
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 15:37:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 36E3B3003D0C
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Apr 2026 15:40:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6968434A78F;
-	Sat, 25 Apr 2026 15:37:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 520F034AB00;
+	Sat, 25 Apr 2026 15:40:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dJJHnpRW"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L851jsn8"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 424B340DFDC;
-	Sat, 25 Apr 2026 15:37:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AA83EEBB;
+	Sat, 25 Apr 2026 15:40:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777131453; cv=none; b=UV8/357S/srOq3d9xQaToB8Rmxz0R08K5pfpVWmTgI6liIM5webcu8/9HlMYtA/9+OQFXR+sxzuNJ11HZrMCvFy2XbPTOw9pIlrrNpIfNYEPyvPyEsxQHpixakvQHFBfSLjvAl9rQN7WUeYVIJgORV3ITfu6FCu2oGl0ZVkVnw8=
+	t=1777131619; cv=none; b=s90I5m8Mn7KIY0UejyqHMWxPLtG9XprffY+UCNbIeiqkrUflyoT/dDVcPOCSLO5cuA++34LewS+YiFgQ+EWlB8Ka279C8eCtTLs3mZj3anCl2wTCoo3G3ty1wg3t9E5zuQU0ksU2KngN5KoDUXLDrfS50lBBYHD94Y0kILu4QOE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777131453; c=relaxed/simple;
-	bh=QvQvNJC7LvyQEmdZeYV/Lpf/XYhQlzkNstKvh8ss6gQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=K8Qq9LZlY7jiHwgoFQRDSmDm+10YBrH5iFGjpD3DsVkAxWij6NfRdhUMOGbipjmOzXUBaU/vfOOQImv4FdjEbNhLgdIFsNsvCVO01vIE9eHrE9SHvI5LuwtdR+XBILsW3j4LF8/DC/39p8f34g/39mC1XuW4MyyOvf78XUetJDA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dJJHnpRW; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2BC1C2BCB0;
-	Sat, 25 Apr 2026 15:37:32 +0000 (UTC)
+	s=arc-20240116; t=1777131619; c=relaxed/simple;
+	bh=VzTg/Xy1t4oLKHrGQj6YqVosIbUPBj9J66CgenmVdEU=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=s0BWv1xPbZhmsFAcwzVx9oY1rP8hmUGqTS6L1z4vB7eCqzmIlw7yfqVCYvebOO8NyTeyJ4XMz6MCjw4onz4MPhr5n7xjXHR3FhGAXxwbXLK1V/GOvk6+DlCjczjSzxCF4o512taMDvexEPAyY0ZNX39aSp6nEZK1T0JzNl1Megs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L851jsn8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 776E4C2BCB0;
+	Sat, 25 Apr 2026 15:40:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777131453;
-	bh=QvQvNJC7LvyQEmdZeYV/Lpf/XYhQlzkNstKvh8ss6gQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dJJHnpRWXOSWFvuGVf93+nyAHul0E9HhqmZai5gxzO+EFGza1Pf97SNMO/q3hHTot
-	 c0u3tQqMxX4x4cuNOJ1VoijsF494IScHpjc9LPkMxs7AihGn6Upc+nOwlvl17QByc9
-	 1HuCmYY3Hr+9mjrQ7WTHVByEob9jgZGws6nZmyy1OX0u6BvZdCk8lkTaMqiP/23DgG
-	 +guf2bI3P/YW4LMnYqWBDNSWSVZ4OcVHGV8iOVNyW9MYz4HocUsP1KMzW5NS8Ay/e0
-	 mjmBDIqqujw5IYM0si+oINPo4NpgoWeAa0tXoInGUxflAJx0y5xEusiLhXjWNiVTlP
-	 RnNsv+6Bo9wng==
-From: SeongJae Park <sj@kernel.org>
-To: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
-Cc: SeongJae Park <sj@kernel.org>,
-	damon@lists.linux.dev,
-	linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	akpm@linux-foundation.org,
-	corbet@lwn.net,
-	bijan311@gmail.com,
-	ajayjoshi@micron.com,
-	honggyu.kim@sk.com,
-	yunjeong.mun@sk.com
-Subject: Re: [PATCH v7] mm/damon: add node_eligible_mem_bp goal metric
-Date: Sat, 25 Apr 2026 08:37:21 -0700
-Message-ID: <20260425153723.89488-1-sj@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <CALa+Y16VuXb2DfeiBiE5avpEsqGVfc6DAKZWacNsu-1hD51hMQ@mail.gmail.com>
-References: 
+	s=k20201202; t=1777131618;
+	bh=VzTg/Xy1t4oLKHrGQj6YqVosIbUPBj9J66CgenmVdEU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=L851jsn8pOZSp/E2hqdDJS0/YrI/bFbBSM4bvvOO8jx5WPYuKqxHjZazAyKgUwljg
+	 NMi9UYlBiOdgJgLDiAceIBo8HX82AxMLsF7V1POsmNSqSdcZmvGw/EcC7kIPGCM8TP
+	 gnxsyyvPkY42v0xeffrEVGmRVF1Fn3J3Aq22iUBvRndHldtEYtk+B0DdyGFxTmfa87
+	 c1mzDIm0vVD26tTV9Wrv4ockpGBXfXOACJ41gMOqv5yxv202ZNKTmkLs4hr+bvPcuR
+	 aymw8rmfPJq4q2SJ+9T6vaAcvlP+qvUD3bsuwNDlFllXwBDHyzte+f5EYvptmj7GC2
+	 rqe8edXzjKHMg==
+Date: Sat, 25 Apr 2026 16:40:06 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
+Cc: Rodrigo Alencar <rodrigo.alencar@analog.com>,
+ linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org, David Lechner
+ <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, Lars-Peter
+ Clausen <lars@metafoo.de>, Michael Hennerich
+ <Michael.Hennerich@analog.com>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Andrew Morton
+ <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, Steven Rostedt
+ <rostedt@goodmis.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky
+ <senozhatsky@chromium.org>, Shuah Khan <skhan@linuxfoundation.org>, David
+ Laight <david.laight.linux@gmail.com>
+Subject: Re: [PATCH v10 02/11] lib: kstrtox: add kstrtoudec64() and
+ kstrtodec64()
+Message-ID: <20260425164006.17b75faf@jic23-huawei>
+In-Reply-To: <mhfgedq2t5lqtu6535ahdmpbvib2xzp2hmyt7ezflnf52r56jh@ze6tee7vpij3>
+References: <20260415-adf41513-iio-driver-v10-0-df61046d5457@analog.com>
+	<20260415-adf41513-iio-driver-v10-2-df61046d5457@analog.com>
+	<mhfgedq2t5lqtu6535ahdmpbvib2xzp2hmyt7ezflnf52r56jh@ze6tee7vpij3>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 51E21466C4B
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 16908466C5E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.34 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-84578-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84577-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,lists.linux.dev,kvack.org,vger.kernel.org,linux-foundation.org,lwn.net,gmail.com,micron.com,sk.com];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[analog.com,vger.kernel.org,baylibre.com,kernel.org,metafoo.de,lwn.net,linux-foundation.org,suse.com,goodmis.org,linux.intel.com,rasmusvillemoes.dk,chromium.org,linuxfoundation.org,gmail.com];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[]
 
-On Fri, 24 Apr 2026 21:18:57 -0700 Ravi Jonnalagadda <ravis.opensrc@gmail.com> wrote:
+On Fri, 17 Apr 2026 09:36:20 +0100
+Rodrigo Alencar <455.rodrigo.alencar@gmail.com> wrote:
 
-> On Fri, Apr 24, 2026 at 5:39 PM SeongJae Park <sj@kernel.org> wrote:
-> >
-> > Hello Ravi,
-> >
-> >
-> > This version looks good, except very trivial nits.
+> On 26/04/15 10:51AM, Rodrigo Alencar wrote:
+> > Add helpers that parses decimal numbers into 64-bit number, i.e., decimal
+> > point numbers with pre-defined scale are parsed into a 64-bit value (fixed
+> > precision). After the decimal point, digits beyond the specified scale
+> > are ignored.  
 > 
->  Hi SJ,
+> ...
 > 
->   Thanks for the super quick review! Very helpful.
-
-My pleasure!
-
-[...]
-> > So this looks good to me, except the trivial things I commented above.  Could
-> > you please revision for the last time?
+> > +static int _kstrtoudec64(const char *s, unsigned int scale, u64 *res)
+> > +{
+> > +	u64 _res = 0, _frac = 0;
+> > +	unsigned int rv;
+> > +
+> > +	if (scale > 19) /* log10(2^64) = 19.26 */
+> > +		return -EINVAL;
+> > +
+> > +	if (*s != '.') {
+> > +		rv = _parse_integer(s, 10, &_res);
+> > +		if (rv & KSTRTOX_OVERFLOW)
+> > +			return -ERANGE;
+> > +		if (rv == 0)
+> > +			return -EINVAL;
+> > +		s += rv;
+> > +	}
+> > +
+> > +	if (*s == '.' && scale) {
+> > +		s++; /* skip decimal point */
+> > +		rv = _parse_integer_limit(s, 10, &_frac, scale);
+> > +		if (rv & KSTRTOX_OVERFLOW)
+> > +			return -ERANGE;
+> > +		if (rv == 0)
+> > +			return -EINVAL;
+> > +		s += rv;
+> > +		if (rv < scale)
+> > +			_frac *= int_pow(10, scale - rv);
+> > +		while (isdigit(*s)) /* truncate */
+> > +			s++;
+> > +	}
+> > +
+> > +	if (*s == '\n')
+> > +		s++;
+> > +	if (*s)
+> > +		return -EINVAL;
+> > +
+> > +	if (check_mul_overflow(_res, int_pow(10, scale), &_res) ||
+> > +	    check_add_overflow(_res, _frac, &_res))
+> > +		return -ERANGE;
+> > +
+> > +	*res = _res;
+> > +	return 0;
+> > +}  
 > 
-> Will do. Summary of changes for v8:
->   1. Mention addr filters for source-node filtering in Two-Scheme
-> Setup
->   2. Move implementation details to commentary area with full
-> changelog
->   3. Wrap the 80-column violation in damon_commit_ctx()
->   4. Use PAGE_ALIGN_DOWN(addr + PAGE_SIZE) for alignment
->   5. Wrap damos_goal_tune_esz_bp_temporal() (81 chars)
->   6. Remove unintended damos_trace_esz() from first charge window
+> I have an alternative (slightly more complex) implementation of this function
+> that handles E notation. I find this particularly handy when writting big
+> values like 25 GHz when the ABI is defined in Hz, so instead of writing
+> 25000000000, one can just use 25e9, or 2.5e10. I found that my python code
+> was printing big floating point values or really small ones using E notation
+> and that was giving me -EINVAL, so I had to adjust formatting when generating
+> the string input to the file. No big deal, and we would not need this here,
+> but if maintainers find this useful I could add it into a v11 of this series.
+> 
 
-Sounds good, looking forward to the v8!
+I'd rather we didn't slow this one down. However I'm waiting on some tags
+on this patch from folk who are more familiar with these parsers than
+I am.  Given discussion, Andy or David Laight perhaps?
++CC David - please make sure to include folk who have been active
+in discussion of earlier versions to decrease chance they miss the new
+one.
+
+Maybe start a discussion about whether adding e notation as a separate
+thread after this has merged?
+
+Jonathan
 
 
-Thanks,
-SJ
-
-[...]
 
