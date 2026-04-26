@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-84644-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84645-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yDaqKaNo7mkltgAAu9opvQ
-	(envelope-from <linux-doc+bounces-84644-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Apr 2026 21:33:55 +0200
+	id EMcCF0pp7mkxtgAAu9opvQ
+	(envelope-from <linux-doc+bounces-84645-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Apr 2026 21:36:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44F7A46AEED
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Apr 2026 21:33:54 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C096D46AF29
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Apr 2026 21:36:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C4704300A13C
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Apr 2026 19:33:52 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 74FB130078A3
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Apr 2026 19:36:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22C4A38F62A;
-	Sun, 26 Apr 2026 19:33:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D8BF38F653;
+	Sun, 26 Apr 2026 19:36:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SHn9/CcB"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="d5F0Q088"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B67F38F620;
-	Sun, 26 Apr 2026 19:33:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AACEA2D1931;
+	Sun, 26 Apr 2026 19:36:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777232032; cv=none; b=LrWXN1nuU0Cd5x8oM4BPz0sI17qOtXO/aMIIG4rbrhpmUlO4gMw48fcaQ08RJrbVBGtF1chc5C90buSeRBTQ5tC1q4cRvxhS/zEMwsn3aF+IgLDP76kOoFhO7iGTrJc47tu7QUrb15BSwh7RXf+NfURSVH79O2fKFhUa8rHe9GQ=
+	t=1777232193; cv=none; b=fJvu5bgnjbcTRITbuDwyCa2A2ZfjDn/r/wVRIt7fwzP7krRRiKwMAKMZco7Irf2E7t/8GteXRqop1PnP+gOjAmA0LjoP82Bk7w+eAwZMvSjCKhdERi83ou0+zZxqyavm5KdlCZ78XgN65IZvxPLMRXkh6Dr4ELbu13e8Maq2Q/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777232032; c=relaxed/simple;
-	bh=rowAobkvjvgRAl9b2Z+s1osOF3rOUoboO3vWjoI8Lls=;
+	s=arc-20240116; t=1777232193; c=relaxed/simple;
+	bh=/27kobtX3hadghmim3rfezsoEKLoHOv/5NAG63nxnl8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bnx0XLAzROr+Wxl4peUYKras0pDI5JL8xWhmzq4X4r3k9R+wjbEJH5fKNK0Pg49vYN2NdQB+6+jFpe0k12UEATKlDMLlt6z+Js1Q/jMPT8dP95Y/LpZzynpkijP6kgAN9GehfskROe/Q1QJCy3zr+UwS+pid3ib5lapfUoXPW8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=SHn9/CcB; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=BHc6zGU4s8SqxDTsfcZN18mz2hNwGUVQvAnhg7PwMfdqUWQ179DclJUnqJQsgonciyCCdz4qvrz5IAaFL/3tgCpgtAp+/zWNeG/+PCOtF+NAyfotUVktTkAXe1jQqFKWE6DO+aVNqpeAbgbU6W0vzm0vELUDQXWOFqYNkseVT5w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=d5F0Q088; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=erN5Eko4E2V4Yz0/dGauB34cs6LKxfw0CRMRc+yw92o=; b=SHn9/CcBBQDF9LsodmANeb+kg1
-	eh3hEkrt9rbWx5x03q0GvpqqxbnLVdeIaa2j2GwpGaXwL1IJWyzpiXh9vrNcS8IPiPI0AobuRsn/n
-	Rz0+tb/IIIMqXkqJYSHD30dMH04Zvor3NJyyJ74i2USBAJF9nV6AlKZJJy6+tt+b4mSdkfm1xN+O8
-	uK7uhr1Bz3hdUTFgVOGv12snWsBYyIut5t4+LbaUdMUlWtRyerXmBOi+7GUmXwrO5n9BtlsafS31Z
-	CDyH8Cfsl/STZ7Ct10ITszqQdFZqFOc5h3clDRf4OjDtPnkdF1zxj/o6YfjVXWJT9cesj3zywX2rn
-	4efqT6bg==;
+	bh=YdCsayYAkNl+ILalq4D+udi6kMR6fgJTij1+DFmbS5M=; b=d5F0Q088WAuWcGLW/tUfyMZglK
+	s/jI+JWYu7ku1x/nMiUbOs07tfsEDLdV7g3PBdZC0Q6Qwx2tOtMOsJWfjEdbjoYTghR1tB/tzpha7
+	xAY10QW8eMrqM757huy7LWtTKJxuyGA8qTSQtWEbP3VBqwcfwbCzrhU52dJeorkvrF23OKsqN9TH8
+	MjyEsFWBkQmbbpc/rhmPlTBl5B/atjhwRjCXbTluwmm5Tier1VPPckyG+C6j9eYVRasks2MS7/ig5
+	sBvxh+HH2v9u2ITZ9cyrNoqq//tQAIKL/0Lv8RV+aZKWc0usLpOBaFOQ2TAtby/dlONRv8ivbiaW2
+	XXg85TZg==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wH5EW-0000000FnFY-2GSN;
-	Sun, 26 Apr 2026 19:33:36 +0000
-Message-ID: <be1548a6-9859-477f-8728-be6b1dac862b@infradead.org>
-Date: Sun, 26 Apr 2026 12:33:34 -0700
+	id 1wH5HJ-0000000FnKg-0NwF;
+	Sun, 26 Apr 2026 19:36:29 +0000
+Message-ID: <133e96b7-251d-4af2-8084-2adca3e547e4@infradead.org>
+Date: Sun, 26 Apr 2026 12:36:28 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,32 +57,32 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] Documentation: security-bugs: explain what is and is
- not a security bug
+Subject: Re: [PATCH 3/3] Documentation: security-bugs: clarify requirements
+ for AI-assisted reports
 To: Willy Tarreau <w@1wt.eu>, greg@kroah.com
 Cc: leon@kernel.org, security@kernel.org, Jonathan Corbet <corbet@lwn.net>,
  skhan@linuxfoundation.org, workflows@vger.kernel.org,
  linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
  Greg KH <gregkh@linuxfoundation.org>
 References: <20260426163914.19449-1-w@1wt.eu>
- <20260426163914.19449-3-w@1wt.eu>
+ <20260426163914.19449-4-w@1wt.eu>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260426163914.19449-3-w@1wt.eu>
+In-Reply-To: <20260426163914.19449-4-w@1wt.eu>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 44F7A46AEED
+X-Rspamd-Queue-Id: C096D46AF29
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84644-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-84645-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -94,63 +94,28 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[1wt.eu:email,linuxfoundation.org:email,infradead.org:dkim,infradead.org:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:dkim,infradead.org:mid]
 
 
 
 On 4/26/26 9:39 AM, Willy Tarreau wrote:
-> The use of automated tools to find bugs in random locations of the kernel
-> induces a raise of security reports even if most of them should just be
-> reported as regular bugs. This patch is an attempt at drawing a line
-> between what qualifies as a security bug and what does not, hoping to
-> improve the situation.
-> 
-> Cc: Greg KH <gregkh@linuxfoundation.org>
-> Cc: Leon Romanovsky <leon@kernel.org>
-> Suggested-by: Leon Romanovsky <leon@kernel.org>
-> Signed-off-by: Willy Tarreau <w@1wt.eu>
-> ---
-> 
-> Leon, while we started this list before our discussion, I reused most of
-> your proposal which was more comprehensive, and merged our initial work
-> into it. I added you in Suggested-by: but I think that Co-developed-by:
-> would be more suitable. If so, for this you'll have to also sign-off the
-> patch. It's as you prefer, I personally don't care.
-> 
-> ---
->  Documentation/process/security-bugs.rst | 50 +++++++++++++++++++++++++
->  1 file changed, 50 insertions(+)
-> 
-> diff --git a/Documentation/process/security-bugs.rst b/Documentation/process/security-bugs.rst
-> index a8a8fc724e8c8..7cc3a1970ca00 100644
-> --- a/Documentation/process/security-bugs.rst
-> +++ b/Documentation/process/security-bugs.rst
-> @@ -66,6 +66,56 @@ In addition, the following information are highly desirable:
->      the issue appear. It is useful to share them, as they can be helpful to
->      keep end users protected during the time it takes them to apply the fix.
->  
-> +What qualifies as a security bug
-> +--------------------------------
-> +
-> +It is important that most bugs are handled publicly so as to involve the widest
-> +possible audience and find the best solution.  By nature, bugs that are handled
-> +in closed discussions between a small set of participants are less likely to
-> +produce the best possible fix (e.g., risk of missing valid use cases, limited
-> +testing abilities).
-> +
-> +It turns out that the majority of the bugs reported to the security team are
-> +just regular bugs that have been improperly qualified as security bugs due to a
-> +misunderstanding of the Linux kernel's threat model, and ought to have been
-> +sent through the normal channels described in
-> +'Documentation/admin-guide/reporting-issues.rst'.
+> +Use common sense when evaluating the report. If the affected file has not been
+> +touched for more than one year and is maintained by a single individual, it is
+> +likely that usage has declined and exposed users are virtually non-existent
+> +(e.g., drivers for very old hardware, obsolte filesystems). In such cases,
 
-Remove the <'> marks and let automarkup handle the filename.
+                                         obsolete
+
+> +there is no need to consume a maintainer's time with an unimportant report. If
+> +the issue is clearly trivial and publicly discoverable, you should report it
+> +directly to the public mailing lists.
 
 -- 
 ~Randy
+
 
