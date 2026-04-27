@@ -1,123 +1,160 @@
-Return-Path: <linux-doc+bounces-84833-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84835-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QLovIRzM72knGAEAu9opvQ
-	(envelope-from <linux-doc+bounces-84833-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	id 2DtuLRzM72knGAEAu9opvQ
+	(envelope-from <linux-doc+bounces-84835-lists+linux-doc=lfdr.de@vger.kernel.org>)
 	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:50:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D755147A432
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:50:35 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46F9947A433
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:50:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CACFE3086662
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 20:49:05 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 96875300D0E6
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 20:50:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C27337E30F;
-	Mon, 27 Apr 2026 20:49:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 832683914E1;
+	Mon, 27 Apr 2026 20:50:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="KurMVD8B"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AR5nK28r"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91D0B37CD52;
-	Mon, 27 Apr 2026 20:49:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E25BF38E12B;
+	Mon, 27 Apr 2026 20:50:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777322941; cv=none; b=cALJLpPMldA9QHmev/qoNmSMhGu1vQ+zKaRdB0/c/lXdQVnEdtSLlYGupwKEhBC5CcuNK2vTjXWhqTAJ2bITG6bzCMUIjJTKN9omOAGLSu1ZYZ7oY91F7yDIrebgbO53bluRU3eDNiMOzWWJ2iFh4+5NNJqkrwFwsyoMDcA9hBc=
+	t=1777323032; cv=none; b=WTl3S0lJPh8rfZQQCuktxv0FtKSptpALTRNBujNjJ/I4Tf1hYy8NcdfVcayvpNXi1KBJcQQT5xM6yGN1SjnmeMnUGj5p/kqKcF3aGxeKKsbjytv0vfYNrJjT9Es9VaRdj8YQcnjPKpGKImw8zf+LaGF5kRh2HGwls0fFJcymViM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777322941; c=relaxed/simple;
-	bh=ojPO/laAlLIwApW27w8hZ2ScAeK8N4PU4Eq2J0ow4xQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YRuEWDYAMGbyLQCG1vjo19Ra/Z+inLQCf6Z6iCDPy3zvnk2HHvD544WoWspsZzK6IANoBEOWinkSG15cPQBFSBbcmxqNBqRD1iinfqn9lg9pdVVic3MFGIVm5nmumJvCHPnnu0fNyWiU0DzDFAoSPQ6joTpyjfjqCOna6wtU1bI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=KurMVD8B; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75CC8C19425;
-	Mon, 27 Apr 2026 20:49:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1777322940;
-	bh=ojPO/laAlLIwApW27w8hZ2ScAeK8N4PU4Eq2J0ow4xQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=KurMVD8BYhGM1Nn2Jm3ENaHQRh471cksDfJRmT+PG+3W1i2jWLwjAqq8WF0FVG6u9
-	 okje7ehZ6c06dlgf6L1gnSG4RwfMvHo5nj0ruxYqGtUGrQ7aAesVjIzImzrwrrNw+k
-	 GgqUzZrmH1lvKyrf/00GVSjmotbSxTSTlVGs9uqQ=
-Date: Mon, 27 Apr 2026 14:48:19 -0600
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Julian Braha <julianbraha@gmail.com>
-Cc: akpm@linux-foundation.org, ljs@kernel.org, arnd@arndb.de,
-	masahiroy@kernel.org, nathan@kernel.org, nsc@kernel.org,
-	ojeda@kernel.org, corbet@lwn.net, linux-kernel@vger.kernel.org,
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kbuild@vger.kernel.org
-Subject: Re: [RFC PATCH 1/2] scripts: add kconfirm
-Message-ID: <2026042727-delicate-genre-21fa@gregkh>
-References: <20260427174429.779474-1-julianbraha@gmail.com>
- <20260427174429.779474-2-julianbraha@gmail.com>
+	s=arc-20240116; t=1777323032; c=relaxed/simple;
+	bh=YcplgUGNh+6uS8l7gywBwx3+pe3RpQeIFHEmlCROLmQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=oN0kOr0VDTqGX8vzzUGXBrjm+uTlo7Kd9w4w5scxSLMqMHWY9Igcu1d2gJyjel6Ta08GR5CcWXoLQvKLjX3o9WmLekN/+AJWxP+/+fgxt1VX1WrD82ZXayy9/3fkcadiy3/Q65jTdl9QgwoBcyyau6PckYME3F3/L1pbPjFCaIs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AR5nK28r; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86F32C2BCB6;
+	Mon, 27 Apr 2026 20:50:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777323030;
+	bh=YcplgUGNh+6uS8l7gywBwx3+pe3RpQeIFHEmlCROLmQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=AR5nK28rneLZfiRZ/H81AA03VfzqOgBmqVslVQY6OlOQ7kr7/i5yfBuOzfvmc/xvH
+	 yDGuir2sbON9pXZ6Mf8w5mpnIGhGmj7515yZTHVEm2WAnbwVz1UKx27J3TT41rI6Hr
+	 j2komLlcXrSu153KET90JatLHBLSj/dQOyg/XiY+oRgmHlnlKSi/zOgDZGpwQ6XEn6
+	 PwgkqE7V6grOkuASdRqArsOnDHZt0Mr+OO2gqrHPr0c2dZfyHmAPpnmC1Y54ZgWBOI
+	 s2I3HQPGYRqNkqEDIuevJJpMoHTiU3hz4joLW7LdbEoyFCkJxLvdVEw3G6EsvL49SJ
+	 ZwSEcVTVCcNMQ==
+From: Tycho Andersen <tycho@kernel.org>
+To: Ashish Kalra <ashish.kalra@amd.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	John Allen <john.allen@amd.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Shuah Khan <shuah@kernel.org>
+Cc: linux-crypto@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Kim Phillips <kim.phillips@amd.com>,
+	Alexey Kardashevskiy <aik@amd.com>,
+	"Tycho Andersen (AMD)" <tycho@kernel.org>,
+	Nikunj A Dadhania <nikunj@amd.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dapeng Mi <dapeng1.mi@linux.intel.com>,
+	Kees Cook <kees@kernel.org>,
+	Marco Elver <elver@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Li RongQing <lirongqing@baidu.com>,
+	Eric Biggers <ebiggers@kernel.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	linux-doc@vger.kernel.org,
+	kvm@vger.kernel.org,
+	linux-kselftest@vger.kernel.org
+Subject: [PATCH v2 0/4] Allow disabling RAPL during SNP initialization
+Date: Mon, 27 Apr 2026 14:48:43 -0600
+Message-ID: <20260427204847.112899-1-tycho@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260427174429.779474-2-julianbraha@gmail.com>
-X-Rspamd-Queue-Id: D755147A432
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 46F9947A433
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.34 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84835-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-84833-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[tycho@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linuxfoundation.org:dkim]
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 
-On Mon, Apr 27, 2026 at 06:44:28PM +0100, Julian Braha wrote:
-> Add kconfirm into scripts/ and modify the root Makefile and
-> scripts/Makefile accordingly so that it can be compiled and run with:
-> `make kconfirm`
-> from the root of the tree.
+From: "Tycho Andersen (AMD)" <tycho@kernel.org>
 
-You don't say what this fancy new tool actually does anywhere that I can
-see :(
+The PLATYPUS (https://platypusattack.com/platypus.pdf) attack paper
+offers method for exfiltration via a low-resolution side channel using
+Running Average Power Limit. Newer versions of the SEV firmware offer a
+way to freeze these counters while initialized, so export this as an
+option.
 
-> 
-> The user is expected to have Rust with Cargo installed, and an internet
-> connection on the first run to download and compile the dependencies.
-> 
-> Signed-off-by: Julian Braha <julianbraha@gmail.com>
-> ---
->  Makefile                                      |   12 +-
->  scripts/Makefile                              |    2 +-
->  scripts/kconfirm/Cargo.lock                   | 1710 +++++++++++++++++
+Changes from v1:
+* add a blurb from the platypus attack paper about the side channel
+* move the kernel parameter from the ccp driver to kvm_amd to make it
+  more obvious
+* split off the SEV-ES feature detection into its own series:
+  https://lore.kernel.org/all/20260416232329.3408497-1-seanjc@google.com/
 
-Did you mean to check this file in?  That's not going to work well...
+v1 is here: https://lore.kernel.org/all/20260223162900.772669-1-tycho@kernel.org/
 
-thanks,
+Tycho Andersen (AMD) (4):
+  crypto/ccp: Pass init_args to __sev_snp_init_locked()
+  crypto/ccp: Support setting RAPL_DIS in SNP_INIT_EX
+  KVM: SEV: Add the kvm-amd.rapl_disable module parameter
+  KVM: selftests: Add a smoke test support for RAPL_DIS
 
-greg k-h
+ .../admin-guide/kernel-parameters.txt         |  5 +++
+ arch/x86/kvm/svm/sev.c                        |  8 +++++
+ drivers/crypto/ccp/sev-dev.c                  | 35 +++++++++++++------
+ include/linux/psp-sev.h                       |  2 ++
+ tools/testing/selftests/kvm/include/x86/sev.h |  1 +
+ .../selftests/kvm/x86/sev_smoke_test.c        | 24 ++++++++++++-
+ 6 files changed, 63 insertions(+), 12 deletions(-)
+
+
+base-commit: 39f1c201b93f4ff71631bac72cff6eb155f976a4
+-- 
+2.53.0
+
 
