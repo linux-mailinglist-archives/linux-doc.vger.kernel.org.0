@@ -1,182 +1,197 @@
-Return-Path: <linux-doc+bounces-84737-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84740-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OGxwHXBd72npAgEAu9opvQ
-	(envelope-from <linux-doc+bounces-84737-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 14:58:24 +0200
+	id mFlnKS1e72njAgEAu9opvQ
+	(envelope-from <linux-doc+bounces-84740-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:01:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77788472FC2
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 14:58:23 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6CC04730E5
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:01:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id CFCE930095F6
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 12:56:55 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6AF58301DED1
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 13:00:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D0C33BC696;
-	Mon, 27 Apr 2026 12:56:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A0913BF684;
+	Mon, 27 Apr 2026 13:00:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="E0UhSOVy";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="WRyl9EVF"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hPrHVwDJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E2DB3BBA1D
-	for <linux-doc@vger.kernel.org>; Mon, 27 Apr 2026 12:56:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D98C83BED30;
+	Mon, 27 Apr 2026 13:00:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777294614; cv=none; b=Caia4CWMXPoixj5tbd5yPpS7hEZLLlpYa7bowcD1OhC5IKFtmvQG6NsDpxM6Rwfk+T09u+2tYLR8v0vIteN7VXmvkpMTQrf0Hn4TQlnAkua/sU1M4YKI/PHJcKML2odQNK/SRBV+IZbtY2lN8q/OQgvuXUR/cElkTim4l4R835s=
+	t=1777294817; cv=none; b=NOsd+ep1zn+UVUlEe6QWPujEta6PqBGeyX9A3M2Cop5DMxkzrCUmVYmD9iAcwtCo9VwerNCOLtuzon5VfLJCiZpZtXiaseIVbmMwMvw6+1fLMMX8WdOF4rBSP+nBnXYOO5TQxiBeGWCxYXNfUfQQ2a0UFlDKpol2BacYpQ1N+Rw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777294614; c=relaxed/simple;
-	bh=KedIuWX1a4sKhpzql75Dew+nPjQpg/hAa4LZaYM7SwE=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ZXSu1IrjoE5xRnsmpvY4eYODKD4kBpAk41A1keo+6LJ4LHhmJbB1P+wqOPSq40y6NMqEWOA1PO+ux5H7uDFxDhgSkLQ9LlobhSAb4KV5XvAUGDkDV8FZTvMtgE34T5By99PTTSLcnSPwnTaDcRLLWTnc84hjne8bHUl8Yotwhpc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=E0UhSOVy; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=WRyl9EVF; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1777294612;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=KedIuWX1a4sKhpzql75Dew+nPjQpg/hAa4LZaYM7SwE=;
-	b=E0UhSOVyDqE47e4eWs/cOa338IG6ro9qjnw88HAPjJcPuGohgew/N53+CdGJ700DmAv7Hh
-	mDIYRPDHAv0Q+q0Ig5+kCMr3+RGpcqWr1z4jYfFV9OczDKvhsHDooJqfEe84mtCFctKvPr
-	Sat/mhUJowaCMbMmLxryqVhMGz2Kek8=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-664-QLV9wMYEOCuultU85NiqYQ-1; Mon, 27 Apr 2026 08:56:50 -0400
-X-MC-Unique: QLV9wMYEOCuultU85NiqYQ-1
-X-Mimecast-MFC-AGG-ID: QLV9wMYEOCuultU85NiqYQ_1777294610
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-50d812c898cso270721621cf.1
-        for <linux-doc@vger.kernel.org>; Mon, 27 Apr 2026 05:56:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1777294610; x=1777899410; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=KedIuWX1a4sKhpzql75Dew+nPjQpg/hAa4LZaYM7SwE=;
-        b=WRyl9EVF62T2xVd5iOqjcvQ30qsAb0X95uxTB42iW1KGNb0v9RR2H0t4nGD2Owjyg6
-         AvsmrVM0QJaVh5jw+0oRTkBINuvDRwQ9xKg0BDNyPhUjm40ZyFn3Y2EpPFaygDV3MpCv
-         sTdKVmsWPITEU9EL5qxqte34aVMY/doPS/8dIsJD3E9jPFoulBni7sVq2Qz/rRyhhylM
-         IazpuZ9t/ssIsIKgg7l41o7ALIXSiEAZ0ITAjoRzOUUbtO3eBcbt1pUWn0eiqqAPlQYs
-         /XCpj4AR+bwfIlOZBI7HEFhSXUL8yxbVNp6ml+W+7bEBlAdO1XLAEzyT+Q+jBOko9cnC
-         Nu8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777294610; x=1777899410;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KedIuWX1a4sKhpzql75Dew+nPjQpg/hAa4LZaYM7SwE=;
-        b=ITo8Yh6o5t7pFjoJ1eLcsJTytEfOEzjDa6EP+HvLzdW8Lrx6dPz+SO0PSB6gaNUbCD
-         9uNSTf+fAi1Cza8hbRn/+EV+baDpn9dF0SDvoXMsAfsOH0dLDxdiBS3Pmdmuj3UlLC7I
-         MVi+vJjs6I13hBT/3sHeWzX1ilnoKlPH3JdIZnSMoQn/zCxvlQu353zgPQP08SufLV65
-         h6oKCgHSUUsjPHYeatGgbqADYMWxsUT29ND7OqgcUBwGFH7muGJhbAI9VKu5OiuC9tNj
-         thUAlsgch8W3QC/MtKDOqY51wHgyHLaIErstDEX+ydM+QaMyiZf84MDm+mLZSOC4yEGW
-         KFqQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+gKSHWGA7oOBEjpc4CDYM8E+rQBBm5wLg8WIkxVvTAK/Q010UKGUvuHnLgAIAXSdvUau8A9zTWwJk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyHCcYNet3YdAEbc9hYLcZIbFPVysqwR5srrz0gqnR/mS4cFWQC
-	+w4J42EQkRPwBg25AQlHHd2Q8ZCeP1ReHtr82WrpmBgc3FYkcmP7szZeuL6xwPJR8YXf9qTj/Gz
-	bR1qU/HrInGQuhFZzP/D75qlGLgghKFI5O5CKqJjqWtKxIixpdiRWIcgciM2rNA==
-X-Gm-Gg: AeBDietynuow1kr7xaXEupYz5N6Hfg6phFQFVc/6uQiA8J3HTSnCV8Ka5qGZjZ46p8b
-	B8xEBWmGFDtpjYe/SNh4OhekQZ59QIcCM2ov2YQnqT5yAEWH44Sh749H2fSc1qu5VUxXnsVA9kg
-	HIrXUNqrUgxbSHvOVySQmO2nxEkY5Lh6FvtFrpUvtve37WRVpdKxahi8l/MZnh4h01fIyk/7uoE
-	CBNLlnT/pM1JVMOJXs6cOercd7Xg/DIEnGyG5s1NxfvK6sUuLmzGcIAVON/mmmd+yayJBqWnhbg
-	H7pLB4SMjHV8J/odG3t9sdzsWkqfhgp5thOUw0KO/vJjzswy7oY3UtBp2EHaprhMJX4OufRvQT5
-	srgvAoMXV/hvyX17D0gAzVUujQfUhrLji46iF
-X-Received: by 2002:a05:6214:e4e:b0:89c:cfb1:b59c with SMTP id 6a1803df08f44-8b0280cc0admr676933626d6.23.1777294610388;
-        Mon, 27 Apr 2026 05:56:50 -0700 (PDT)
-X-Received: by 2002:a05:6214:e4e:b0:89c:cfb1:b59c with SMTP id 6a1803df08f44-8b0280cc0admr676933216d6.23.1777294609829;
-        Mon, 27 Apr 2026 05:56:49 -0700 (PDT)
-Received: from [192.168.1.167] ([185.168.96.228])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8b02ae5ec2dsm266550076d6.29.2026.04.27.05.56.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Apr 2026 05:56:48 -0700 (PDT)
-Message-ID: <93666b516d93f880ed14c3b9309e203014a7deb0.camel@redhat.com>
-Subject: Re: [PATCH] Documentation/rv: Replace stale website link
-From: Gabriele Monaco <gmonaco@redhat.com>
-To: Jonathan Corbet <corbet@lwn.net>, rdunlap@infradead.org, Steven Rostedt
-	 <rostedt@goodmis.org>, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: matteo.martelli@codethink.co.uk, skhan@linuxfoundation.org
-Date: Mon, 27 Apr 2026 14:56:46 +0200
-In-Reply-To: <87340gpvdg.fsf@trenco.lwn.net>
-References: <b845c448-1655-4860-9b6d-93d6f8426740@infradead.org>
-	 <20260427085526.111835-1-gmonaco@redhat.com>
-	 <875x5crb4g.fsf@trenco.lwn.net>
-	 <6d7e529c7cb0ad599669e3f33e5b6168e92a8861.camel@redhat.com>
-	 <87340gpvdg.fsf@trenco.lwn.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
+	s=arc-20240116; t=1777294817; c=relaxed/simple;
+	bh=8uNsWXd48y2d3zF795/5fA+wmbyhrDh/2zHCjgxewvY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Y28NVtM7hGJL2Gn4sUq+gORkIkVbkU/47cwwj30BGIAlC4BsSLduqtuL3AjsCGDGLwAEbHPFtCb704rENTjXqYt7JDIP4JODyaBFGV2PFpjThe6eUKMvdxeLost1VXFwKSmlACMS7YsFmwIxNdQ8YSFSIeHSZOKYjR6wLz98BzI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hPrHVwDJ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A1DBC19425;
+	Mon, 27 Apr 2026 13:00:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777294817;
+	bh=8uNsWXd48y2d3zF795/5fA+wmbyhrDh/2zHCjgxewvY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=hPrHVwDJukihnGevCo0iVj0JaS3sD9EvuDLl1hdSM6qbgE4D56wpvoQvuxJqkxNVc
+	 F1eXyCU19gvUk3NxbtxwUfFATvdVwyy1Pn+dxqUwcFgv3vgd5cfH2CbkgmuiaTDI+Q
+	 6j7U91ZnlRrcAY+gTx3HGcb4T8+r3j6ZIWK7Ry8fIkpjI2deFJZAGzzaeyv7BGfAGb
+	 9cjVwx7IC456XXau2Vi3WCyhoinAMsxENU18UFX38aovgzsgazmkftmN8coEz3sd+p
+	 Zw9f8Bd3JIN+8mHUMysmFcKhv60vLpQzfgIpaudNOYsnpBtz9Owx1QODga3CtGpo1q
+	 oV3GgpB0rQezA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1wHLZP-0000000Bx1A-1wNM;
+	Mon, 27 Apr 2026 15:00:15 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Albert Ou <aou@eecs.berkeley.edu>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Paul Walmsley <pjw@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	workflows@vger.kernel.org,
+	Alexandre Ghiti <alex@ghiti.fr>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dan Williams <djbw@kernel.org>
+Subject: [PATCH v3 00/12] Auto-generate maintainer profile entries
+Date: Mon, 27 Apr 2026 15:00:00 +0200
+Message-ID: <cover.1777294623.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 77788472FC2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-Rspamd-Queue-Id: A6CC04730E5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84737-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gmonaco@redhat.com,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84740-lists,linux-doc=lfdr.de,huawei];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
-On Mon, 2026-04-27 at 04:09 -0600, Jonathan Corbet wrote:
-> Gabriele Monaco <gmonaco@redhat.com> writes:
->=20
-> > On Mon, 2026-04-27 at 03:44 -0600, Jonathan Corbet wrote:
-> > > Since, as you say, it can be found online, is there a reason not
-> > > to include a link here?
-> >=20
-> > Mmh, perhaps being overly cautious for the link not to break again?
-> >=20
-> > The paper is published so I assume it's always going to be
-> > available in some way. It is currently hosted by the university at
-> > [1], which may be unlikely to change, and can be found via DOI at
-> > [2], which should never change (at least that's what I believe a
-> > DOI is for) but brings to the publisher's website rather than the
-> > open-access PDF.
-> >=20
-> > I think the reference to the paper I included is robust yet easy to
-> > use with any scientific or even general purpose search engine. But
-> > if you believe using either of the two links is more appropriate, I
-> > can send a V2 with the change.
->=20
-> I will defer to others in the end, but to me it seems that we should
-> make life easier for our readers whenever we can.=C2=A0 Providing a link
-> seems better than requiring them to search for it themselves.
+Hi Jon,
 
-Alright, makes sense. I'm going to send a V2 with [1] (the open access
-PDF), in the remote case the link stops working, we can update it.
+This is basically the same patch series I sent during the merge
+window, rebased on the top of post 7.1-rc1 docs-next branch.
+It is tested both with and without O=DOCS.
 
-Thanks,
-Gabriele
+It contains just one extra trivial patch adding a missing SPDX
+header.
+
+This patch series change the way maintainer entry profile links
+are added to the documentation. Instead of having an entry for
+each of them at an ReST file, get them from MAINTAINERS content.
+
+That should likely make easier to maintain, as there will be a single
+point to place all such profiles.
+
+The output is a per-subsystem sorted (*) series of links shown as a
+list like this:
+
+    - Arm And Arm64 Soc Sub-Architectures (Common Parts)
+    - Arm/Samsung S3C, S5P And Exynos Arm Architectures
+    - Arm/Tesla Fsd Soc Support
+    ...
+    - Xfs Filesystem
+
+Please notice that the series is doing one logical change per patch.
+I could have merged some changes altogether, but I opted doing it
+in small steps to help reviews. If you prefer, feel free to merge
+maintainers_include changes on merge.
+
+There is one interesting side effect of this series: there is no
+need to add rst files containing profiles inside a TOC tree: Just
+creating the file anywhere inside Documentation and adding a P entry
+is enough. Adding them to a TOC won't hurt.
+
+Reported-by: Randy Dunlap <rdunlap@infradead.org>
+Suggested-by: Dan Williams <djbw@kernel.org>
+Closes: https://lore.kernel.org/linux-doc/69dd6299440be_147c801005b@djbw-dev.notmuch/
+
+(*) At the end, I opted to use sorted(), just to ensure it, even
+    knowing that MAINTAINER entries are supposed to be sorted, as
+    the cost of sorting ~20 already-sorted entries is negligible.
+
+---
+
+v3:
+ - Added SPDX entry to process/maintainers.rst file;
+ - rebased after 7.1-rc1 release.
+
+v2:
+  - I placed the to MAINTAINERS changes at the beginning.
+  - fix a bug when O=DOCS is used;
+  - proper handle glob "P" entries (just in case, no profiles use it ATM);
+  - when SPHINXDIRS=process, instead of producing warnings, point to
+    entries at https://docs.kernel.org;
+  - MAINTAINERS parsing now happens just once;
+  - The output won't be numered for entries inside numered TOC trees;
+  - TOC tree is now hidden;
+  - instead of display a TOC tree, it shows a list of profiles,
+    ordered and named after file system name taken from MAINTAINERS file;
+  - At the output list, both https and file profiles are shown the same
+    way.
+
+
+Mauro Carvalho Chehab (12):
+  MAINTAINERS: add an entry for media maintainers profile
+  MAINTAINERS: add maintainer-tip.rst to X86
+  docs: maintainers: add SPDX license to the file
+  docs: maintainers_include: auto-generate maintainer profile TOC
+  docs: auto-generate maintainer entry profile links
+  docs: maintainers_include: use a better title for profiles
+  docs: maintainers_include: add external profile URLs
+  docs: maintainers_include: preserve names for files under process/
+  docs: maintainers_include: Only show main entry for profiles
+  docs: maintainers_include: improve its output
+  docs: maintainers_include: fix support for O=dir
+  docs: maintainers_include: parse MAINTAINERS just once
+
+ .../maintainer/maintainer-entry-profile.rst   |  24 +--
+ .../process/maintainer-handbooks.rst          |  17 +-
+ Documentation/process/maintainers.rst         |   2 +
+ Documentation/sphinx/maintainers_include.py   | 161 +++++++++++++++---
+ MAINTAINERS                                   |   2 +
+ 5 files changed, 152 insertions(+), 54 deletions(-)
+
+-- 
+2.53.0
 
 
