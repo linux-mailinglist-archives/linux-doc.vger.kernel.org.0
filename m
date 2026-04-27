@@ -1,66 +1,66 @@
-Return-Path: <linux-doc+bounces-84778-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84779-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sJOZGH1x72n6BQEAu9opvQ
-	(envelope-from <linux-doc+bounces-84778-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 16:23:57 +0200
+	id ELGDEIZx72kBBgEAu9opvQ
+	(envelope-from <linux-doc+bounces-84779-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 16:24:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 879714744BD
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 16:23:56 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D1EDB4744CC
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 16:24:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id F3D5D300C35B
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 14:22:53 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 00C6B302A193
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 14:22:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C51563D5225;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E2AA23D5239;
 	Mon, 27 Apr 2026 14:22:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mSTMxd4T"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zdi4fMzY"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1FCB3D47C5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE7C53D47DD;
 	Mon, 27 Apr 2026 14:22:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777299756; cv=none; b=hVy67PkWNXOGpstwtfIsxhDcvB53rMpJ+Y2y8/F/HvyndFwsg1ys5WE2IgPV/8yhY8Okk7uc5qY0k7VPJYXlbiboyVFQq+gMgH/qiAflcvPCy/BVkulGk4hggOXLxTgA6fIHm9x0uJw3Q8szOGxBTLO8yurZ1gzHY89S/IuwVUY=
+	t=1777299756; cv=none; b=Tmyk1Em5J7DptZ7RzL5mvn67afJ7asGT0AaYjwfUDZH8W1UaCTPEx/b/bjKpUTznRXzFVFd8u271tdfnIRhg9WB+TCcG1yCTsGLtKmAVrDMTsT0Ms0T2Xq4RWPwrKFhWb72IHdhSNXk2FnGJ/xHPFY8V4U9CDqIC3cAt8REhOF8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777299756; c=relaxed/simple;
-	bh=TwW+kGBiliF/Ei1obwlR1vu04Y0GBFL6iuNTaetPprg=;
+	bh=I5vPs/IWujzOHVh7PrTDW0lngtg+Gz1odrK4JwsYFaI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=CcQKrWMcB5khK3ZBHYwGhLDqA4aUy1Iaq7ARhbdBGrWoroYoKXZsXri6zdfKqtRO7xrkEP76p9s3hQZ4wzDhristYl5ai8dKQb2mG95q7D3tdUjKBtYligcNQyVUc2rEcw90M8O6F8pP80jTH1bv8vwlDiSGoVhnGCCo7zQ3rjI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mSTMxd4T; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82A19C2BCFA;
+	 MIME-Version:Content-Type; b=dGg2NRUHgM/ESi522WKIkD6hKxM16aTmCtpQf2QVdTC+Lg91ozoCCRjSGFiYn0nnubHHvHxAfYMEdqpLtwDRgaswyZwzCyT4FYRWv2+X9TjdaSMvCzSChXN2LTlAVLVRi9uHopD6SHUFQmcohs2nEKH8RUK05wGhUvfssUn4+3Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zdi4fMzY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D2C3C2BCB9;
 	Mon, 27 Apr 2026 14:22:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777299756;
-	bh=TwW+kGBiliF/Ei1obwlR1vu04Y0GBFL6iuNTaetPprg=;
+	bh=I5vPs/IWujzOHVh7PrTDW0lngtg+Gz1odrK4JwsYFaI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=mSTMxd4ToDGCw3AxRUTma98KSYjRKZe53RGL9TAtSIEZtuWS2RmKM8qWcPvWm/24C
-	 ULgkySwstM1BDHcLs1onK2XyEdh0eNVKSLbQIhzOxKNGwyJsHjKidR8MN4vomVLsLa
-	 xuSft7SpOwXeVyGvpxYinrZ9TKPMmG38Jc0FJ6xviwPo9vi74dgrZ+3lGW780trybI
-	 OxRnioRbLzTkr5CM2xAlSrnoB+w3rQe6mgO5j/36BKx0NQNBWY0If7aFI9U6KxvNkM
-	 11xsXjZ6oLHy22AofaeV4izPXnoort71M92uIa7bhaO8+eFCqEWyHeX26oN2tteAms
-	 0OO6WlKFGKTQQ==
+	b=Zdi4fMzYladiP2JQ9zuFLVErYm0Kl2UnOLXTgxZKuPk4xSkP0LcI3Ih064AWuLEkF
+	 9uxKTzH+hknWIb2bPxZWx8q1ad4KvNpKQROAy4cdhoz4+8UQTtZgQKvxfuYbXmnNYC
+	 4I4iS5nPSbCNoB4w3oGe7ngDOPTA75PoPAsCwJl0rQBEI0iCD6BhOpiRvOqNmKzovW
+	 zc6hr/exBtFhJK1VAk839f5KE0EmZkCM8q/+NzIrc760m5PWivahr7h38tEVXzJfKn
+	 8rtHfkpLpnP7nA4jo9QnFJnmS+L6udzUopaF6FKtmemgr69d6TuuZi7KGPvBQTIkQA
+	 o6U6FifntJ3Xw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wHMr4-0000000C8XO-2lV7;
+	id 1wHMr4-0000000C8Yb-3U8y;
 	Mon, 27 Apr 2026 16:22:34 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	linux-riscv@lists.infradead.org,
 	workflows@vger.kernel.org,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v4 07/10] docs: maintainers_include: Only show main entry for profiles
-Date: Mon, 27 Apr 2026 16:22:25 +0200
-Message-ID: <387b42c523e7b9f33e61cdff6fadb1df265cf71d.1777295258.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v4 08/10] docs: maintainers_include: improve its output
+Date: Mon, 27 Apr 2026 16:22:26 +0200
+Message-ID: <10d06a3f530e07ad981aba93617a9a7f4d63c408.1777295258.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1777295258.git.mchehab+huawei@kernel.org>
 References: <cover.1777295258.git.mchehab+huawei@kernel.org>
@@ -73,7 +73,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 879714744BD
+X-Rspamd-Queue-Id: D1EDB4744CC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -81,7 +81,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -89,7 +89,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84778-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-84779-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -97,48 +97,150 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[9];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,infradead.org:email]
 
-Instead of showing as a "Contents:" with 2 identation levels,
-drop its title and show profiles as a list of entries.
+There are three "types" of profiles:
+1. Profiles already included inside subsystem-specific documentation.
+   This is the most common case;
+2. Profiles that are hosted externally;
+3. Profiles that are at the same location as maintainer-handbooks.rst.
+
+For (3), we need to create a TOC, as they don't exist elsewhere.
+
+Change the logic to create TOC just for (3), prepending the
+content of maintainer-handbooks with a sorted entry of all types,
+before the TOC.
+
+With such change, we can have an unique sorted list of profiles,
+having the subsystem names used there listed.
 
 Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 Tested-by: Randy Dunlap <rdunlap@infradead.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/process/maintainer-handbooks.rst | 2 --
- Documentation/sphinx/maintainers_include.py    | 2 +-
- 2 files changed, 1 insertion(+), 3 deletions(-)
+ Documentation/sphinx/maintainers_include.py | 76 +++++++++++----------
+ 1 file changed, 40 insertions(+), 36 deletions(-)
 
-diff --git a/Documentation/process/maintainer-handbooks.rst b/Documentation/process/maintainer-handbooks.rst
-index 531985a0fae8..3821e78aefc0 100644
---- a/Documentation/process/maintainer-handbooks.rst
-+++ b/Documentation/process/maintainer-handbooks.rst
-@@ -16,6 +16,4 @@ For maintainers, consider documenting additional requirements and
- expectations if submissions routinely overlook specific submission
- criteria. See Documentation/maintainer/maintainer-entry-profile.rst.
- 
--Contents:
--
- .. maintainers-profile-toc::
 diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index 948746b998a3..7ab921820612 100755
+index 7ab921820612..5413c1350bba 100755
 --- a/Documentation/sphinx/maintainers_include.py
 +++ b/Documentation/sphinx/maintainers_include.py
-@@ -235,7 +235,7 @@ class MaintainersProfile(Include):
+@@ -21,7 +21,7 @@ import sys
+ import re
+ import os.path
+ 
+-from textwrap import indent
++from glob import glob
+ 
+ from docutils import statemachine
+ from docutils.parsers.rst import Directive
+@@ -36,8 +36,8 @@ class MaintainersParser:
+     """Parse MAINTAINERS file(s) content"""
+ 
+     def __init__(self, base_path, path):
+-        self.profiles = {}
+-        self.profile_urls = {}
++        self.profile_toc = set()
++        self.profile_entries = {}
+ 
+         result = list()
+         result.append(".. _maintainers:")
+@@ -73,26 +73,24 @@ class MaintainersParser:
+             # Drop needless input whitespace.
+             line = line.rstrip()
+ 
++            #
++            # Handle profile entries - either as files or as https refs
++            #
+             match = re.match(r"P:\s*(Documentation/\S+)\.rst", line)
+             if match:
+-                fname = os.path.relpath(match.group(1), base_path)
+-                if fname.startswith("../"):
+-                    if self.profiles.get(fname) is None:
+-                        self.profiles[fname] = subsystem_name
+-                    else:
+-                        self.profiles[fname] += f", {subsystem_name}"
++                entry = os.path.relpath(match.group(1), base_path)
++                if "*" in entry:
++                    for e in glob(entry):
++                        self.profile_toc.add(e)
++                        self.profile_entries[subsystem_name] = e
+                 else:
+-                    self.profiles[fname] = None
+-
+-            match = re.match(r"P:\s*(https?://.*)", line)
+-            if match:
+-                url = match.group(1).strip()
+-                if url not in self.profile_urls:
+-                    if self.profile_urls.get(url) is None:
+-                        self.profile_urls[url] = subsystem_name
+-                    else:
+-                        self.profile_urls[url] += f", {subsystem_name}"
+-
++                    self.profile_toc.add(entry)
++                    self.profile_entries[subsystem_name] = entry
++            else:
++                match = re.match(r"P:\s*(https?://.*)", line)
++                if match:
++                    entry = match.group(1).strip()
++                    self.profile_entries[subsystem_name] = entry
+ 
+             # Linkify all non-wildcard refs to ReST files in Documentation/.
+             pat = r'(Documentation/([^\s\?\*]*)\.rst)'
+@@ -234,26 +232,32 @@ class MaintainersProfile(Include):
+ 
          maint = MaintainersParser(base_path, path)
  
-         output  = ".. toctree::\n"
--        output += "   :maxdepth: 2\n\n"
-+        output += "   :maxdepth: 1\n\n"
+-        output  = ".. toctree::\n"
+-        output += "   :maxdepth: 1\n\n"
++        #
++        # Produce a list with all maintainer profiles, sorted by subsystem name
++        #
++        output = ""
  
-         items = sorted(maint.profiles.items(),
-                        key=lambda kv: (kv[1] or "", kv[0]))
+-        items = sorted(maint.profiles.items(),
+-                       key=lambda kv: (kv[1] or "", kv[0]))
+-        for fname, profile in items:
+-            if profile:
+-                output += f"   {profile} <{fname}>\n"
++        for profile, entry in maint.profile_entries.items():
++            if entry.startswith("http"):
++                if profile:
++                    output += f"- `{profile} <{entry}>`_\n"
++                else:
++                    output += f"- `<{entry}>_`\n"
+             else:
+-                output += f"   {fname}\n"
++                if profile:
++                    output += f"- :doc:`{profile} <{entry}>`\n"
++                else:
++                    output += f"- :doc:`<{entry}>`\n"
+ 
+-        output += "\n**External profiles**\n\n"
++        #
++        # Create a hidden TOC table with all profiles. That allows adding
++        # profiles without needing to add them on any index.rst file.
++        #
++        output += "\n.. toctree::\n"
++        output += "   :hidden:\n\n"
+ 
+-        items = sorted(maint.profile_urls.items(),
+-                       key=lambda kv: (kv[1] or "", kv[0]))
+-        for url, profile in items:
+-            if profile:
+-                output += f"- {profile} <{url}>\n"
+-            else:
+-                output += f"- {url}\n"
++        for fname in maint.profile_toc:
++            output += f"   {fname}\n"
+ 
+         output += "\n"
+ 
 -- 
 2.53.0
 
