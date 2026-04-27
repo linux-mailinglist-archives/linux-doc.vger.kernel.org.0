@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-84738-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84742-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8DWxFLhe72njAgEAu9opvQ
-	(envelope-from <linux-doc+bounces-84738-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:03:52 +0200
+	id GFPKEMhe72njAgEAu9opvQ
+	(envelope-from <linux-doc+bounces-84742-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:04:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 425EB473161
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:03:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A07E473168
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:04:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DAF37305F7CC
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 13:00:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 06E5D3065006
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 13:00:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 08F773BED6A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 275CC3BFE50;
 	Mon, 27 Apr 2026 13:00:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KAQj93gU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oySn7+FC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D97A43BED27;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE51E3BE65F;
 	Mon, 27 Apr 2026 13:00:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777294817; cv=none; b=Sr7EVSMcQRGUYMyxMiZWHc6gcrln6g5xZmQrzn+dHHuF3LBkUzuyV1ekw6sUGmcAcstnP64vHpdLRASYWUwrY0zA6/T8M7nRzqfw2sMKQB6UfgZyWiZ612vrGnNmUPf8/8MZSMRZWXo6HtNlNujg1VWSG2/3AbDXK6OUeTC44SQ=
+	t=1777294818; cv=none; b=Wi5GfT7E3pi9X1lVA/zrAYKHRHKdZ7BZ1T0MwSwa6cr9pWjNKne5oVNC4yA3pDHLxg2oAR3lWwSlhvuFzQm1yqHEti4d/ruoqoU4ufgRHVmpWx5Y4oxcRmKx+XLCilMI+Ed6jmDOTAOMnCpfrjjPZajbTmMKoDxiBD4BLZAvvKs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777294817; c=relaxed/simple;
-	bh=0/HTY/j+rmONwTz1eYmFn0WIHlokjtE9NUEt4Mkvjgs=;
+	s=arc-20240116; t=1777294818; c=relaxed/simple;
+	bh=oCSFDjePyMaj2tf0ATqd8TtAxNzPuU0qXsi2GNKPtg0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=db6xq4IdXBc4xFXGEiBgZyv/SpwaCLKnxQcKDOZl+Tiq8dSaIgo30VRQuHuQLlPHmz4ThwOqziiMLfPFg+ZYeejVyGKiSTcSpAUKpNBwBLgVkWUgwiyfqQUEuCkaIlq6lzHLPLRFYpRpVJ6U55U1ctvm256mjnrP3PWJLnmABOY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KAQj93gU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A927AC2BCB7;
+	 MIME-Version:Content-Type; b=Y0L3+rgAm09q+A0y8QJ3yw0e2/7rlSePlY2Qws8xiJMUU+Een+LbFbrts5VN+bF2E8guJvv5wCP0PYuyk/SN4EJ663verL6baxvHw5G1JTHvKJOubgcsh0Gt6/4WdASS1bg6p6blj7Jz6AjegI88xW9CT8toJpp/WNUdojYZLCw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oySn7+FC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE8F2C2BCC9;
 	Mon, 27 Apr 2026 13:00:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777294817;
-	bh=0/HTY/j+rmONwTz1eYmFn0WIHlokjtE9NUEt4Mkvjgs=;
+	bh=oCSFDjePyMaj2tf0ATqd8TtAxNzPuU0qXsi2GNKPtg0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=KAQj93gU9gv34gCWYtb+46HC164jS3Pwxjkh3KDzL0QLYF4OHM7CeLKz/24t6pjIP
-	 u+ADvE4XQNKCuFyN2UZ9I4wwdgZpUnO6tM2rLUI/gcUnZD/RR3vzj9j8KnS6PGDGVU
-	 5bpHW2BQpBIfeshvd9r5w77kdPxTNW/JIy4b4xQ9UOlnFi8s/HsUKj6t43tPUC4hYj
-	 0wYlp0IL2fq0Ay9zJF4CArWOEQXoKUanKSaQ271IV+gbDP9gEYBGfnvPukbdv4zrIa
-	 oosOoAn/bmpfiOamjAw7pyg3HInwZ6KhhlAZJlzb/cpf4p/3rnBAnaYJq/FLLxUxu2
-	 nLWCdLEbtWonQ==
+	b=oySn7+FCcN5qOKEJWRR/IPvZYWjwWsoyKy2nv2kxiOkA3EnXYlHHRkq5y7Z0u/TQq
+	 m3CsLFU7hADLzfgawL3/XRmaOW4PYgEkrt19482CxOdZAE7k2pIvoH+uTAQWqK2n+M
+	 JzWNf69uhLBLtGm2kVYAxnjXwbxgLdFPVi8lX/M+CStkkBsSC7W87MRljkmArkiYYj
+	 kBijZJHWh8LeNk297oa/Ox8RztwuVIf9uW7snv1W5bqb27KT19xXiJBAH5mss8JD5+
+	 E++9oZwxXOczfMeb+CQayKNNTcUIobw1wZdEiJDylNOtn3N+LJKZM8i96GXk4lMAWK
+	 OlaT09682coKQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wHLZP-0000000Bx3c-3MzY;
+	id 1wHLZP-0000000Bx4q-45Ck;
 	Mon, 27 Apr 2026 15:00:15 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -55,11 +55,10 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	linux-riscv@lists.infradead.org,
 	workflows@vger.kernel.org,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Dan Williams <djbw@kernel.org>
-Subject: [PATCH v3 02/12] MAINTAINERS: add maintainer-tip.rst to X86
-Date: Mon, 27 Apr 2026 15:00:02 +0200
-Message-ID: <35abbf65385910c4c69d571dbf0d10b2a75b6fa9.1777294623.git.mchehab+huawei@kernel.org>
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v3 03/12] docs: maintainers: add SPDX license to the file
+Date: Mon, 27 Apr 2026 15:00:03 +0200
+Message-ID: <527f6ebe5c0831e92b26a63d3f9b06ed735bb62a.1777294623.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1777294623.git.mchehab+huawei@kernel.org>
 References: <cover.1777294623.git.mchehab+huawei@kernel.org>
@@ -72,7 +71,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 425EB473161
+X-Rspamd-Queue-Id: 4A07E473168
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -80,7 +79,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -88,7 +87,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84738-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-84742-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -96,38 +95,28 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,zytor.com:email,infradead.org:email,alien8.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-The X86 subsystem has a maintainers entry profile, but its entry
-is missing at MAINTAINERS.
+While this file is really trivial, add a SPDX license line on it.
 
-Add it.
-
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
-Acked-by: Dan Williams <djbw@kernel.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <970434c647aa1e1e9a81c87b4d5fed934d4018a7.1776176108.git.mchehab+huawei@kernel.org>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/process/maintainers.rst | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f52ec50f6d10..a00d4ba61c2a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -28808,6 +28808,7 @@ M:	Ingo Molnar <mingo@redhat.com>
- M:	Borislav Petkov <bp@alien8.de>
- M:	Dave Hansen <dave.hansen@linux.intel.com>
- M:	x86@kernel.org
-+P:	Documentation/process/maintainer-tip.rst
- R:	"H. Peter Anvin" <hpa@zytor.com>
- L:	linux-kernel@vger.kernel.org
- S:	Maintained
+diff --git a/Documentation/process/maintainers.rst b/Documentation/process/maintainers.rst
+index 6174cfb4138f..5d1b1464c3ae 100644
+--- a/Documentation/process/maintainers.rst
++++ b/Documentation/process/maintainers.rst
+@@ -1 +1,3 @@
++.. SPDX-License-Identifier: GPL-2.0
++
+ .. maintainers-include::
 -- 
 2.53.0
 
