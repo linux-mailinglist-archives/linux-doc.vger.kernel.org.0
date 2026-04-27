@@ -1,274 +1,126 @@
-Return-Path: <linux-doc+bounces-84750-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84751-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iD1vFjtf72mHAwEAu9opvQ
-	(envelope-from <linux-doc+bounces-84750-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:06:03 +0200
+	id GFoUAUxg72mHAwEAu9opvQ
+	(envelope-from <linux-doc+bounces-84751-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:10:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B09D04731EE
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:06:02 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C09A4732DB
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 15:10:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4D06F308D240
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 13:00:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C7F07305A278
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 13:05:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 243CF3C5DBE;
-	Mon, 27 Apr 2026 13:00:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B1B2318140;
+	Mon, 27 Apr 2026 13:05:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XoHzOXyt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oyQ42UYK"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFFB83C5522;
-	Mon, 27 Apr 2026 13:00:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 079511AA1D2;
+	Mon, 27 Apr 2026 13:05:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777294820; cv=none; b=qaunytOQY7kW9/jZSUz0UNie2CsxeU2jLRHpaPMdQZ5/vCIUVOdD9i1fv8yw5i0TtZer0TlMkjRlgQ6iww21E5Pr267wmgBJ2BIaM7doB75sw6i+eQsk7uo3LkNUz/baj4phm979ikb2Ov3i7kh4lD4JdmnJt+ZFMC5PQoMSPd0=
+	t=1777295119; cv=none; b=d0p2Rti4fXPzYH7QUnhumMK0ajcgnCssu9UyRtUhhFdZrWMNJVHL9//qRpJV0FiVDAq9s3KC7M/lffaQ5rtLocJ6fVXIN57B6lCQzbvU/n4cghDecwtNp8HueFhKkuNpW7v/ILB5ysaQstyrtNHmd5O3ymAwXm2ZznKBH3eRNME=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777294820; c=relaxed/simple;
-	bh=2EHIpNiSQOvDao9ENEGwgn3WieRzrgdPXVweOZ5ti+I=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Rz6aXpwj7E1d9S+xfAYVlo7TSvHAhSMf1ujfDG1UCPUUqdkR/tpOseWehXLnQJ24acFi3D2cgzMiS74b0LRdb+R8KjhT++czGaeSf8u/ZzRQzlj0MrWFpGQmg9GEs8fG1EvYj9aiTIeDLwC1vJxCHrLTgaYRnbcMRQwcm6FXs5A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XoHzOXyt; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3139C2BCB4;
-	Mon, 27 Apr 2026 13:00:19 +0000 (UTC)
+	s=arc-20240116; t=1777295119; c=relaxed/simple;
+	bh=Lza41XMlgAORgTPrOIxx0mVfW7vjfttcam+RAcvjn9Y=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=rYNLSK6B3yLfkadHgIje4a5lKOHDHtS0hhHAVhxScdSEau9dIV7qjbL62zwba6TvRDxt1WnmkIa/akVlPqNa1yunXzG1OYLMdoeNO26rFJ0veNIT5dEjVfPhzTiWNItsuLkL8RULlZVasFW6a3Gmg5c3tqmn7pchqGFAtU8RigA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oyQ42UYK; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3736C2BCB4;
+	Mon, 27 Apr 2026 13:05:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777294819;
-	bh=2EHIpNiSQOvDao9ENEGwgn3WieRzrgdPXVweOZ5ti+I=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XoHzOXytyzqgCwFjACv78UpHahmHq9v2mqJUBZP9+jZKzRWTtm77kC1qU7nmEgmAg
-	 ZeiVxMV3f6oqjYUUDdiWofAPvmDWK+1Zp8c2ZiQcUf709pbwlaM5UXuY0rE7mdoncr
-	 rAzvSu38KQErdiu/bdm0Ns6ZnaM5v9gRSca5KOA+ywzbMev558uOr1bjn1eqxYhadX
-	 yzH0BVOfGnfCP+V3CWMpNK7N/EqPGFFJ7mRKfsEojLzI9xym981qPLJ/Cn5cRffiGd
-	 JHN2er1e9U6aBuDn8lANTLXg6tYrQClE/v70il4uQAqIhi7NEERmqVanHErXQwjO87
-	 GGV8Q0rmj/dwA==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	s=k20201202; t=1777295118;
+	bh=Lza41XMlgAORgTPrOIxx0mVfW7vjfttcam+RAcvjn9Y=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=oyQ42UYK+wc4DTgrP5KucNJkM8LJkCpiocvs6+K2rvScnSoSLgwPDltTjJLy0S47u
+	 Cuju+LoaIUnsNa+otM4IDuE69/NDK6OrTHKkE9InTm66ySgQyTwJbRwIoZ5BeZ3ZQM
+	 8niiFZ7o/WlAjMgMJmCr0oV0KQgHUJ3SmMJkGQ31rSzWD8Vt2sZJ7WnnDtpdktc+Ui
+	 YVG06+iOSQjMW8ViqkoMtoWRJapf7HhAJGOyDmwv5QhLraeMRYDP9pteBWqn8EOJic
+	 UdFrvk7HqcAJFjLLPyshwtSK02PIyy2FA0Q7HB6GcT9Rm7Y3XTw1pmvNQzkO0J8a+W
+	 kwnBpvjNWY10w==
+Received: from localhost ([::1])
+	by mail.kernel.org with esmtp (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wHLZR-0000000BxG6-4Afv;
-	Mon, 27 Apr 2026 15:00:17 +0200
+	id 1wHLeG-0000000Bxxi-44yE;
+	Mon, 27 Apr 2026 15:05:17 +0200
+Date: Mon, 27 Apr 2026 15:05:15 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	workflows@vger.kernel.org,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH v3 12/12] docs: maintainers_include: parse MAINTAINERS just once
-Date: Mon, 27 Apr 2026 15:00:12 +0200
-Message-ID: <3a01afc58defa4eb92df709b517392ef550f81b2.1777294623.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.53.0
+To: Albert Ou <aou@eecs.berkeley.edu>, Jonathan Corbet <corbet@lwn.net>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Paul Walmsley <pjw@kernel.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-riscv@lists.infradead.org, workflows@vger.kernel.org, Alexandre Ghiti
+ <alex@ghiti.fr>, Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
+ <rdunlap@infradead.org>, Dan Williams <djbw@kernel.org>
+Subject: Re: [PATCH v3 00/12] Auto-generate maintainer profile entries
+Message-ID: <20260427150515.3ab3d3c4@localhost>
 In-Reply-To: <cover.1777294623.git.mchehab+huawei@kernel.org>
 References: <cover.1777294623.git.mchehab+huawei@kernel.org>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: B09D04731EE
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 8C09A4732DB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84750-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-84751-lists,linux-doc=lfdr.de,huawei];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,self.name:url]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-Change the logic to parse MAINTAINERS file content just once,
-while still allowing using it multiple times.
+On Mon, 27 Apr 2026 15:00:00 +0200
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/sphinx/maintainers_include.py | 61 +++++++--------------
- 1 file changed, 21 insertions(+), 40 deletions(-)
+> Hi Jon,
+> 
+> This is basically the same patch series I sent during the merge
+> window, rebased on the top of post 7.1-rc1 docs-next branch.
+> It is tested both with and without O=DOCS.
 
-diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index ae52e8198750..436e7ac42ffc 100755
---- a/Documentation/sphinx/maintainers_include.py
-+++ b/Documentation/sphinx/maintainers_include.py
-@@ -37,14 +37,13 @@ def ErrorString(exc):  # Shamelessly stolen from docutils
- 
- __version__  = '1.0'
- 
--app_dir = "."
-+maint_parser = None
- 
- class MaintainersParser:
-     """Parse MAINTAINERS file(s) content"""
- 
--    def __init__(self, path):
--        global app_dir
--
-+    def __init__(self, app_dir, path):
-+        self.path = path
-         self.profile_toc = set()
-         self.profile_entries = {}
- 
-@@ -67,7 +66,6 @@ class MaintainersParser:
-         subsystem_name = None
- 
-         base_dir, doc_dir, sphinx_dir = app_dir.partition("Documentation")
--        print("BASE DIR", base_dir)
- 
-         for line in open(path):
-             # Have we reached the end of the preformatted Descriptions text?
-@@ -105,8 +103,6 @@ class MaintainersParser:
-                 else:
-                     entry = "/" + entry
- 
--                print(f"{name}: entry: {entry} FULL: {full_name} path: {path}")
--
-                 if "*" in entry:
-                     for e in glob(entry):
-                         self.profile_toc.add(e)
-@@ -217,14 +213,17 @@ class MaintainersInclude(Include):
-     """MaintainersInclude (``maintainers-include``) directive"""
-     required_arguments = 0
- 
--    def emit(self, path):
-+    def emit(self):
-         """Parse all the MAINTAINERS lines into ReST for human-readability"""
-+        global maint_parser
- 
--        output = MaintainersParser(path).output
-+        path = maint_parser.path
-+        output = maint_parser.output
- 
-         # For debugging the pre-rendered results...
-         #print(output, file=open("/tmp/MAINTAINERS.rst", "w"))
- 
-+        self.state.document.settings.record_dependencies.add(path)
-         self.state_machine.insert_input(statemachine.string2lines(output), path)
- 
-     def run(self):
-@@ -232,19 +231,8 @@ class MaintainersInclude(Include):
-         if not self.state.document.settings.file_insertion_enabled:
-             raise self.warning('"%s" directive disabled.' % self.name)
- 
--        # Walk up source path directories to find Documentation/../
--        path = self.state_machine.document.attributes['source']
--        path = os.path.realpath(path)
--        tail = path
--        while tail != "Documentation" and tail != "":
--            (path, tail) = os.path.split(path)
--
--        # Append "MAINTAINERS"
--        path = os.path.join(path, "MAINTAINERS")
--
-         try:
--            self.state.document.settings.record_dependencies.add(path)
--            lines = self.emit(path)
-+            lines = self.emit()
-         except IOError as error:
-             raise self.severe('Problems with "%s" directive path:\n%s.' %
-                       (self.name, ErrorString(error)))
-@@ -254,16 +242,17 @@ class MaintainersInclude(Include):
- class MaintainersProfile(Include):
-     required_arguments = 0
- 
--    def emit(self, path):
-+    def emit(self):
-         """Parse all the MAINTAINERS lines looking for profile entries"""
-+        global maint_parser
- 
--        maint = MaintainersParser(path)
-+        path = maint_parser.path
- 
-         #
-         # Produce a list with all maintainer profiles, sorted by subsystem name
-         #
-         output = ""
--        for profile, entry in sorted(maint.profile_entries.items()):
-+        for profile, entry in sorted(maint_parser.profile_entries.items()):
-             if entry.startswith("http"):
-                 output += f"- `{profile} <{entry}>`_\n"
-             else:
-@@ -276,13 +265,12 @@ class MaintainersProfile(Include):
-         output += "\n.. toctree::\n"
-         output += "   :hidden:\n\n"
- 
--        for fname in maint.profile_toc:
-+        for fname in maint_parser.profile_toc:
-             output += f"   {fname}\n"
- 
-         output += "\n"
- 
--        print(output)
--
-+        self.state.document.settings.record_dependencies.add(path)
-         self.state_machine.insert_input(statemachine.string2lines(output), path)
- 
-     def run(self):
-@@ -290,19 +278,8 @@ class MaintainersProfile(Include):
-         if not self.state.document.settings.file_insertion_enabled:
-             raise self.warning('"%s" directive disabled.' % self.name)
- 
--        # Walk up source path directories to find Documentation/../
--        path = self.state_machine.document.attributes['source']
--        path = os.path.realpath(path)
--        tail = path
--        while tail != "Documentation" and tail != "":
--            (path, tail) = os.path.split(path)
--
--        # Append "MAINTAINERS"
--        path = os.path.join(path, "MAINTAINERS")
--
-         try:
--            self.state.document.settings.record_dependencies.add(path)
--            lines = self.emit(path)
-+            lines = self.emit()
-         except IOError as error:
-             raise self.severe('Problems with "%s" directive path:\n%s.' %
-                       (self.name, ErrorString(error)))
-@@ -310,13 +287,17 @@ class MaintainersProfile(Include):
-         return []
- 
- def setup(app):
--    global app_dir
-+    global maint_parser
- 
-     #
-     # NOTE: we're using os.fspath() here because of a Sphinx warning:
-     #   RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
-     #
-     app_dir = os.fspath(app.srcdir)
-+    srctree = os.path.abspath(os.environ["srctree"])
-+    path = os.path.join(srctree, "MAINTAINERS")
-+
-+    maint_parser = MaintainersParser(app_dir, path)
- 
-     app.add_directive("maintainers-include", MaintainersInclude)
-     app.add_directive("maintainers-profile-toc", MaintainersProfile)
+Please ignore it...
+
+> Mauro Carvalho Chehab (12):
+>   MAINTAINERS: add an entry for media maintainers profile
+>   MAINTAINERS: add maintainer-tip.rst to X86
+
+... I forgot to drop those two. They aren't needed anymore.
+Will resend it soon enough.
+
 -- 
-2.53.0
-
+Thanks,
+Mauro
 
