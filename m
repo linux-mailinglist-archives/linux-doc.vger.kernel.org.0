@@ -1,173 +1,119 @@
-Return-Path: <linux-doc+bounces-84805-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84808-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uIhBCn+P72mhCwEAu9opvQ
-	(envelope-from <linux-doc+bounces-84805-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 18:31:59 +0200
+	id EOUsJGWV72ktDAEAu9opvQ
+	(envelope-from <linux-doc+bounces-84808-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 18:57:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABEAC4766BD
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 18:31:58 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D6CBE476B56
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 18:57:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id CFE3230CB9CA
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 16:14:19 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CEEA13011761
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 16:54:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E96B34D382;
-	Mon, 27 Apr 2026 16:14:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="K2Fiagkg"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C32B83D647B;
+	Mon, 27 Apr 2026 16:54:54 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
+Received: from relay.hostedemail.com (smtprelay0016.hostedemail.com [216.40.44.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98CD134D910;
-	Mon, 27 Apr 2026 16:14:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08E293DA5B5;
+	Mon, 27 Apr 2026 16:54:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777306459; cv=none; b=K4coH6DysKzwghMdxhn7ZPcf2DyI8AREpNF88QO15PjcbTsSij/dgPtvQciJIzpUFT7bRy3qRBolOS/AiaEmJKHWRVGRkz+izT9Ag5VhYhudYKuyjMFNq+cE/uUm8hx+fvYpmKInOPnzxa9MJLCIqzjQDTVNGce35d1cNJViMVc=
+	t=1777308894; cv=none; b=ruEEVG3J6slq0EmjGMyqjRFSMbLay9sJUehe1CbfAldIc9pvKqYTnQ4YjojgfWsYEt8OrGwCOjdTRe5LuJzwJwApK1wFJXLE7sRNDc60vH9GlJadTtkFBvY1vh1RQymzj4A6V87UZx77WrA2hw787vA0/52DfYFwhD+zlt+JHtk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777306459; c=relaxed/simple;
-	bh=JXAuhzZDHwLXCqoGeoY65zJQMZVOrnCkofyUbtuMB9E=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nEVOutvG429lXA5Rf8OOaWoxAqnqSyz/ac12HK+2h7lT6Fzm2VPtVZXH0Fa0O49J6+/a1pv/pdfY5baBp2uoJDczTyxo7DbT0Ftale8JCjfwG6kdAFCijA5Q56aSt7+c9mIs5sGFUwiDahaD2j7vd/3c8QwRREWtZXDpWbrIeOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=K2Fiagkg; arc=none smtp.client-ip=51.159.59.229
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
-	t=1777306456; bh=wQy4Ri40T/dYzKZzY2CCm8DmK9slEdzxWIEmjYx5pQo=;
-	h=From:Message-ID:From;
-	b=K2Fiagkg5wkep+hbfFnZuZOVeK5F2svSRasl0BI+o7rHBEZxNlrGpsJzY59cOB8gi
-	 5KbNWQuy17vUTJnjojTSEUDh3yZApgvCu+fxzdyqBHC40aVHQ2osU+ZGxriocM/in/
-	 W2GNd6xDGcTWOJkIKARHFISfA3wT8sMP9p2R4rVc=
-Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
-	by mta1.formilux.org (Postfix) with ESMTP id EF5DEC0B7D;
-	Mon, 27 Apr 2026 18:14:15 +0200 (CEST)
-Date: Mon, 27 Apr 2026 18:14:15 +0200
-From: Willy Tarreau <w@1wt.eu>
-To: Greg KH <greg@kroah.com>
-Cc: leon@kernel.org, security@kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        skhan@linuxfoundation.org, workflows@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/3] Documentation: security-bugs: explain what is and is
- not a security bug
-Message-ID: <ae-LVyDQPVwxesCO@1wt.eu>
-References: <20260426163914.19449-1-w@1wt.eu>
- <20260426163914.19449-3-w@1wt.eu>
- <2026042753-ozone-jigsaw-4ad5@gregkh>
- <ae-Acm2XJ3sR34Il@1wt.eu>
- <2026042724-bullhorn-bobtail-ae6f@gregkh>
+	s=arc-20240116; t=1777308894; c=relaxed/simple;
+	bh=1TBRRPrFLk2bz0suI62lFmFUtQ4JnpN6ZZb7MUXCn3Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=UQIjx2biAwOhSbXGASFJAprrdgMc9vCa6cUXTEzYs4bUWaSNVp2FV2ca2q+eKeGVjjGSChFiuJ8VHKWqtQ9AvoT+pAEqPeSpkl/3jCzYEQ2/Qcs1IM2PKQF2Bfp0ISJThRqiKBx0slZYXZfCgYd2H/CCNK+smPrQX7/II3foj+Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
+Received: from omf05.hostedemail.com (lb01a-stub [10.200.18.249])
+	by unirelay04.hostedemail.com (Postfix) with ESMTP id 6E4711A022D;
+	Mon, 27 Apr 2026 16:45:20 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf05.hostedemail.com (Postfix) with ESMTPA id 51E122001C;
+	Mon, 27 Apr 2026 16:45:18 +0000 (UTC)
+Date: Mon, 27 Apr 2026 12:45:30 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Gabriele Monaco <gmonaco@redhat.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, rdunlap@infradead.org,
+ linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, matteo.martelli@codethink.co.uk,
+ skhan@linuxfoundation.org
+Subject: Re: [PATCH] Documentation/rv: Replace stale website link
+Message-ID: <20260427124530.69cbb711@gandalf.local.home>
+In-Reply-To: <93666b516d93f880ed14c3b9309e203014a7deb0.camel@redhat.com>
+References: <b845c448-1655-4860-9b6d-93d6f8426740@infradead.org>
+	<20260427085526.111835-1-gmonaco@redhat.com>
+	<875x5crb4g.fsf@trenco.lwn.net>
+	<6d7e529c7cb0ad599669e3f33e5b6168e92a8861.camel@redhat.com>
+	<87340gpvdg.fsf@trenco.lwn.net>
+	<93666b516d93f880ed14c3b9309e203014a7deb0.camel@redhat.com>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2026042724-bullhorn-bobtail-ae6f@gregkh>
-X-Rspamd-Queue-Id: ABEAC4766BD
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Stat-Signature: gy1bpu36qat3h9zdf97qwysazhsm1ngm
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX1/oe6Boibh4hGCiF8SyQDlU43dwDND20jo=
+X-HE-Tag: 1777308318-462931
+X-HE-Meta: U2FsdGVkX1+qukr/rxrsDPI+RgpiKfpE2+25PGYf6wG8ZYRYn0+snH0K1UfJ32QLFGOS5bLXE/uM0M4K5JSRECg+1gdScUubPlS30ql8b2pgxWZ7R2tP7XUgEXFcCOMetdMLX6lJLHv990MmfaMrBvdajkebOlSN+7lK82NGnYRPZYFBYkqQ3NlbQZ13lLTq6S4re+wmUTfGqdORJzDchCm+uguBtcZIhxPbV5r3yaenSIK0qe1E8dmjtm7BOl3b2e0Te/a5Ns+EnoCKqGQeTl36/VaLDcfnzBS1PHbaDQsYNYLLrhZBrZ/wlEu34i+o4SLAd0RraDily1Yq7XXEoD/xmLEg46U0cztrdeO269iG50q8gj2SAMDlRSP77W8rWLWN0e6OMQY5j+LviqxHAbaDSdkR91xJJneeBa1Spn47ev7TsAjJ7Q==
+X-Rspamd-Queue-Id: D6CBE476B56
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.36 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[goodmis.org : SPF not aligned (relaxed), No valid DKIM,none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84805-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[1wt.eu:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,1wt.eu:dkim,1wt.eu:mid]
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-0.983];
+	R_DKIM_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	PRECEDENCE_BULK(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84808-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[gandalf.local.home:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,sssup.it:url]
 
-On Mon, Apr 27, 2026 at 09:35:04AM -0600, Greg KH wrote:
-> On Mon, Apr 27, 2026 at 05:27:46PM +0200, Willy Tarreau wrote:
-> > On Mon, Apr 27, 2026 at 07:48:23AM -0600, Greg KH wrote:
-> > > On Sun, Apr 26, 2026 at 06:39:13PM +0200, Willy Tarreau wrote:
-> > > > +In the Linux kernel's threat model, an issue is **not** a security bug, and
-> > > > +should not be reported to the security list, when triggering it requires the
-> > > > +reporter to first undermine the system they are attacking.  This includes, but
-> > > > +is not limited to, behavior that only manifests after the administrator has
-> > > > +explicitly enabled it (loading a module, setting a sysctl, writing to a debugfs
-> > > > +knob, or otherwise using an interface documented as privileged or unsafe); bugs
-> > > > +reachable only through root or CAP_SYS_ADMIN or CAP_NET_ADMIN on a machine the
-> > > > +actor already fully controls, with no further privilege boundary being crossed;
-> > > > +prediction of random numbers that only works in a totally silent environment
-> > > > +(such as IP ID, TCP ports or sequence numbers that can only be guessed in a
-> > > > +lab), issues that appear only in debug, lockdep, KASAN, fault-injection,
-> > > > +CONFIG_NOMMU, or other developer-oriented kernel builds that are not intended
-> > > > +for production use; problems seen only under development simulators, emulators,
-> > > > +or fuzzing harnesses that present hardware or input states which cannot occur
-> > > > +on real systems; bugs that require modified or emulated hardware; missing
-> > > > +hardening or defence-in-depth suggestions with no demonstrable exploit path
-> > > > +(including local ASLR bypass); mounting file systems that would be fixed or
-> > > > +rejected by fsck; and bugs in out-of-tree modules or vendor forks, which should
-> > > > +be reported to the relevant vendor.  Functional and performance regressions,
-> > > > +and disagreements with documented kernel policy (for example, "root can load
-> > > > +modules"), are likewise ordinary bugs or feature requests rather than security
-> > > > +issues, and should be reported via the usual channels.
-> > > 
-> > > This is a great list to start with, but perhaps we should put it in list
-> > > form so that it's easier to read?
-> > 
-> > In fact that's what I tried first and it was super long with many short
-> > lines, making it possibly worse. But maybe aggregating several short
-> > entries on a line by similarities could work, I can give it a try.
-> > 
-> > > Also, I can see this turning into a separate document eventually as
-> > > different subsystems should have a chance to weigh in on what they
-> > > consider the threat model to be
-> > 
-> > My fear if we redirect to other files is that it won't be read again.
-> > However, we could possibly suggest to always look for the subsystem's
-> > specific rules in this subsytem's doc, leaving enough freedom to
-> > maintainers to reject more things.
-> 
-> AI tools are good at following links, so I wouldn't worry about that.
+On Mon, 27 Apr 2026 14:56:46 +0200
+Gabriele Monaco <gmonaco@redhat.com> wrote:
 
-Yes but let's not forget the minority of humble humans still sending
-honest reports ;-)
+> >=20
+> > I will defer to others in the end, but to me it seems that we should
+> > make life easier for our readers whenever we can.=C2=A0 Providing a link
+> > seems better than requiring them to search for it themselves. =20
+>=20
+> Alright, makes sense. I'm going to send a V2 with [1] (the open access
+> PDF), in the remote case the link stops working, we can update it.
 
-> We can point at other files, as this list is going to get long over
-> time, which is a good thing.
+Can you add both?
 
-Sure. I'm just unsure where this could be enumerated, as it's likely
-that there would be just one or two lines max per subsystem for the
-majority of them. Or we could have a totally separate file, "threat
-model", that goes into great lengths detailing all this with sections
-per category or subsystem when they start to grow maybe, and refer only
-to that one from security-bugs ?
+[1] - Daniel Bristot de Oliveira et al.: A thread synchronization model for=
+ the PREEMPT_RT Linux kernel, J. Syst. Archit., 2020.
+      https://www.iris.sssup.it/bitstream/11382/533630/1/Elsevier-JSA-2020.=
+pdf
 
-> > > (like what the IB subsystem does which I
-> > > don't think you listed above, or the USB subsystem.)
-> > 
-> > Indeed I didn't list IB (I'm never sure about it, I seem to remember
-> > we simply trust any peer, is that right?), nor did I make specific
-> > mentions for USB which is implicitly covered by "hardware emulation
-> > or modification".
-> 
-> Ah, but USB does cover "some" modification of devices, so this is going
-> to be something that is good to document over time, if for no other
-> reason to keep these scanning tools in check from hallucinating crazy
-> situations that are obviously not a valid thing we care about.
+ ?
 
-OK but does this mean you still want to get these reports in the end ?
-
-Willy
+-- Steve
 
