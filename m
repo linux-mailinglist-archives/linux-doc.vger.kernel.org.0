@@ -1,138 +1,250 @@
-Return-Path: <linux-doc+bounces-84834-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84840-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wJ6MFFLM72knGAEAu9opvQ
-	(envelope-from <linux-doc+bounces-84834-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:51:30 +0200
+	id mBgVNQ/O72mBGQEAu9opvQ
+	(envelope-from <linux-doc+bounces-84840-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:58:55 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B65A747A4AF
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:51:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FA9147A6CA
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:58:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E3332301FF8C
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 20:49:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BE2B330356EA
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 20:56:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B2E6381AFD;
-	Mon, 27 Apr 2026 20:49:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 245BF3FD145;
+	Mon, 27 Apr 2026 20:56:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="EV7Rwp4G"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="g3klIaNv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 306DF243951;
-	Mon, 27 Apr 2026 20:49:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B62D93A9D8B;
+	Mon, 27 Apr 2026 20:56:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777322965; cv=none; b=sGKjkEEP5Y8KzZ5fxLJZtfbu669rkVhGAA8YPR0xrqCsmGP45fQ55Ddc/iWj1J8NSKYj/vx1HAVdFSsVmv18paMRwpVF1Au1KE55AEYbznGSL9ASrr/Y31x/JaylSilN1HU5sz4yNvXa11+xM4XEVBwvUp04bH7hsvPeFWOfLqs=
+	t=1777323392; cv=none; b=P3g1iFbLwv79Lit6CHDeB8Pv8g0+JHpf1JqWNz1h/zlqA9z/U8z30qGNgDWO1NFzc8xo0xFlRx8yjJRxrXNN+wLzAyv0UZlusSrDcdWPXYDHiw2uCA5YkBsYi+hH/dLVznULANSVZYITri1kK6f+745kamtN9FMvMV3bGIn6LQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777322965; c=relaxed/simple;
-	bh=uQ/YKk4y6AYZo+6AFX+AM0sFp8rKkf1QpU4q+remftM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Eh1dbnWVtO/LvchwBn5wM64lt+4cJZ5QyUtlAWzRTtGB1Vmiv2CSvDbOobnSl1BgHcy52+xGPC77yfkwrOa0RmaNwq7yWDkrV2N1aGj9zJYnn/0E4bsx++3rOEbCZhNC3fH8v6t/cSvKXRSNrmzTL2abnMT/uDHtLaw2DpEBXkA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=EV7Rwp4G; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=MMLMoTlttTEwr271DiSMonjx8J90NXXfd9ve6+eILxM=; b=EV7Rwp4GVIMdKKqXd3daio4dni
-	PYihHigVemQahqAa6RE+MXr56Knz1fOFHIbCByako21GgIrqitw04bALZWRWSpGRqLTcDXxCL0w8B
-	oufkYJAoQF8/enNswTG0WJsiTz7K2M1ZhaYLcJNaVvYvFaIjHLsx8iF2gsW2BGMXi5LA=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wHSt8-000DrS-6z; Mon, 27 Apr 2026 22:49:06 +0200
-Date: Mon, 27 Apr 2026 22:49:06 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Shenwei Wang <shenwei.wang@nxp.com>
-Cc: "Padhi, Beleswar" <b-padhi@ti.com>, Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Frank Li <frank.li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
-	"imx@lists.linux.dev" <imx@lists.linux.dev>,
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
-	dl-linux-imx <linux-imx@nxp.com>,
-	Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: Re: [PATCH v13 3/4] gpio: rpmsg: add generic rpmsg GPIO driver
-Message-ID: <6e01e114-e336-4744-b6b4-563ec42e321b@lunn.ch>
-References: <20260422212849.1240591-1-shenwei.wang@nxp.com>
- <20260422212849.1240591-4-shenwei.wang@nxp.com>
- <22fb5fac-2568-42be-a7e3-7e89d0017eb3@ti.com>
- <PAXPR04MB91850A11C58419C03909145F89362@PAXPR04MB9185.eurprd04.prod.outlook.com>
- <6412a758-4560-4cf1-a0d0-5b24d1a715f1@lunn.ch>
- <PAXPR04MB9185009A17DFDF3D6C8B44E789362@PAXPR04MB9185.eurprd04.prod.outlook.com>
+	s=arc-20240116; t=1777323392; c=relaxed/simple;
+	bh=Sc3eIFNVvhEoZXn/JdBRF/OA3UoVeO6ICBTHeMO+Wk0=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=WMDCGwouYbFd8RLGIrRHpwRZ20LheXxy46GmgnrrcGPH4CDkkYsHeIiNmcQ7nGvgK8CuFP34u0hZCVXljHMr7G4cTOsS+a6vOgWhKaBWe5ckknCrnKOynyod6sKXrA37rAMD2RTLpBfzOBiQ8FfgOIVW0llgxwm6305Cy7D5dwo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=g3klIaNv; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from localhost (unknown [20.29.225.195])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 80A2820B716A;
+	Mon, 27 Apr 2026 13:56:28 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 80A2820B716A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1777323389;
+	bh=w4+T1q5j1gjl12AzNykoZ9kgKNsM0AyLqJTGq2x4mJw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=g3klIaNv0aZDwiuY6aSr9d1ovw1UNaC1yS0v955Li3fu510xl6luT8FxEwoEqgsV9
+	 qO5XgODem35nBKQSBw1Y/oPQwo73ezTIvaKLd6m9LDkmCPmXDtkuNmar6v6P8E4uZZ
+	 NJTPwgA90pNAQX3lXJdDUBe1VtE8QmuErhznSO4I=
+Date: Mon, 27 Apr 2026 13:56:25 -0700
+From: Jacob Pan <jacob.pan@linux.microsoft.com>
+To: David Matlack <dmatlack@google.com>
+Cc: iommu@lists.linux.dev, kexec@lists.infradead.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-mm@kvack.org, linux-pci@vger.kernel.org, Adithya Jayachandran
+ <ajayachandra@nvidia.com>, Alexander Graf <graf@amazon.com>, Alex
+ Williamson <alex@shazbot.org>, Bjorn Helgaas <bhelgaas@google.com>, Chris
+ Li <chrisl@kernel.org>, David Rientjes <rientjes@google.com>, Jason
+ Gunthorpe <jgg@nvidia.com>, Joerg Roedel <joro@8bytes.org>, Jonathan Corbet
+ <corbet@lwn.net>, Josh Hilke <jrhilke@google.com>, Leon Romanovsky
+ <leonro@nvidia.com>, Lukas Wunner <lukas@wunner.de>, Mike Rapoport
+ <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, Pasha Tatashin
+ <pasha.tatashin@soleen.com>, Pranjal Shrivastava <praan@google.com>,
+ Pratyush Yadav <pratyush@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+ Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja
+ <skhawaja@google.com>, Shuah Khan <skhan@linuxfoundation.org>, Will Deacon
+ <will@kernel.org>, William Tu <witu@nvidia.com>, Yi Liu
+ <yi.l.liu@intel.com>, jacob.pan@linux.microsoft.com
+Subject: Re: [PATCH v4 08/11] PCI: liveupdate: Require preserved devices are
+ in immutable singleton IOMMU groups
+Message-ID: <20260427135625.0000413e@linux.microsoft.com>
+In-Reply-To: <20260423212316.3431746-9-dmatlack@google.com>
+References: <20260423212316.3431746-1-dmatlack@google.com>
+	<20260423212316.3431746-9-dmatlack@google.com>
+Organization: LSG
+X-Mailer: Claws Mail 3.21.0 (GTK+ 2.24.33; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <PAXPR04MB9185009A17DFDF3D6C8B44E789362@PAXPR04MB9185.eurprd04.prod.outlook.com>
-X-Rspamd-Queue-Id: B65A747A4AF
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 3FA9147A6CA
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
+	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84834-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FREEMAIL_CC(0.00)[ti.com,kernel.org,lwn.net,linaro.org,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,bgdev.pl];
+	HAS_ORG_HEADER(0.00)[];
+	TAGGED_FROM(0.00)[bounces-84840-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[32];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lunn.ch:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lunn.ch:dkim,lunn.ch:mid]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jacob.pan@linux.microsoft.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[linux.microsoft.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.microsoft.com:dkim,linux.microsoft.com:mid]
 
-> > struct virtio_gpio_response {
-> >         __u8 status;
-> >         __u8 value;
-> > };
+Hi David,
 
-> It is the same message format. Please see the message definition (GET_DIRECTION) below:
+On Thu, 23 Apr 2026 21:23:12 +0000
+David Matlack <dmatlack@google.com> wrote:
 
-> +   +-----+-----+-----+-----+-----+----+
-> +   |0x00 |0x01 |0x02 |0x03 |0x04 |0x05|
-> +   | 1   | 2   |port |line | err | dir|
-> +   +-----+-----+-----+-----+-----+----+
+> Restrict support for preserving PCI devices across Live Update to
+> devices in immutable singleton IOMMU groups. A device's group is
+> considered immutable if all bridges upstream from the device up to the
+> root port have the required ACS features enabled.
+> 
+> Since ACS flags are inherited across a Live Update for preserved
+> devices and all the way up to the root port, the preserved device
+> should be in a singleton IOMMU group after kexec in the new kernel.
+> 
+> This change should still permit all the current use-cases for PCI
+> device preservation across Live Update, since it is intended to be
+> used in Cloud enviroments which should have the required ACS features
+> enabled for virtualization purposes.
+> 
+> If a device is part of a multi-device IOMMU group, preserving it will
+> now fail with an error. This restriction may be lifted in the future
+> if support for preserving multi-device groups is desired.
+> 
+> Signed-off-by: David Matlack <dmatlack@google.com>
+> ---
+>  drivers/iommu/iommu.c    | 35 +++++++++++++++++++++++++++++++++++
+>  drivers/pci/liveupdate.c |  6 ++++++
+>  include/linux/iommu.h    |  7 +++++++
+>  3 files changed, 48 insertions(+)
+> 
+> diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
+> index 61c12ba78206..782e73a9d45f 100644
+> --- a/drivers/iommu/iommu.c
+> +++ b/drivers/iommu/iommu.c
+> @@ -1664,6 +1664,41 @@ struct iommu_group *pci_device_group(struct
+> device *dev) }
+>  EXPORT_SYMBOL_GPL(pci_device_group);
+>  
+> +bool pci_device_group_immutable_singleton(struct pci_dev *dev)
+> +{
+> +	struct iommu_group *group;
+> +	struct group_device *d;
+> +	struct pci_bus *bus;
+> +	int nr_devices = 0;
+> +
+> +	group = iommu_group_get(&dev->dev);
+> +	if (!group)
+> +		return false;
+This may not work for noiommu mode where we could have a null group.
+Maybe I can add special case later?
 
-Sorry, but i don't see how two u8 vs six u8 are the same message
-format.
+> +	mutex_lock(&group->mutex);
+> +
+> +	for_each_group_device(group, d)
+> +		nr_devices++;
+> +
+> +	mutex_unlock(&group->mutex);
+> +	iommu_group_put(group);
+nit:
+	scoped_guard(mutex, &group->mutex) {
+        	for_each_group_device(group, d)
+                	nr_devices++;
+ 	}
+> +
+> +	if (nr_devices != 1)
+> +		return false;
+> +
+> +	for (bus = dev->bus; !pci_is_root_bus(bus); bus =
+> bus->parent) {
+> +		if (!bus->self)
+> +			continue;
+> +
+> +		if (!pci_acs_path_enabled(bus->self, NULL,
+> REQ_ACS_FLAGS))
+> +			return false;
+> +
+> +		break;
+> +	}
+> +
+> +	return true;
+> +}
+> +
+>  /* Get the IOMMU group for device on fsl-mc bus */
+>  struct iommu_group *fsl_mc_device_group(struct device *dev)
+>  {
+> diff --git a/drivers/pci/liveupdate.c b/drivers/pci/liveupdate.c
+> index a9a89f7bd3e5..54a90ff02bdd 100644
+> --- a/drivers/pci/liveupdate.c
+> +++ b/drivers/pci/liveupdate.c
+> @@ -133,6 +133,7 @@
+>  #define pr_fmt(fmt) "PCI: liveupdate: " fmt
+>  
+>  #include <linux/io.h>
+> +#include <linux/iommu.h>
+>  #include <linux/kexec_handover.h>
+>  #include <linux/kho/abi/pci.h>
+>  #include <linux/liveupdate.h>
+> @@ -359,6 +360,11 @@ int pci_liveupdate_preserve(struct pci_dev *dev)
+>  	if (dev->is_virtfn)
+>  		return -EINVAL;
+>  
+> +	if (!pci_device_group_immutable_singleton(dev)) {
+> +		pci_warn(dev, "Device preservation limited to
+> immutable singleton iommu groups\n");
+> +		return -EINVAL;
+> +	}
+> +
+>  	if (dev->liveupdate_outgoing)
+>  		return -EBUSY;
+>  
+> diff --git a/include/linux/iommu.h b/include/linux/iommu.h
+> index e587d4ac4d33..6f5d1dec3f89 100644
+> --- a/include/linux/iommu.h
+> +++ b/include/linux/iommu.h
+> @@ -1096,6 +1096,8 @@ extern struct iommu_group
+> *generic_device_group(struct device *dev); struct iommu_group
+> *fsl_mc_device_group(struct device *dev); extern struct iommu_group
+> *generic_single_device_group(struct device *dev); 
+> +bool pci_device_group_immutable_singleton(struct pci_dev *dev);
+> +
+>  /**
+>   * struct iommu_fwspec - per-device IOMMU instance data
+>   * @iommu_fwnode: firmware handle for this device's IOMMU
+> @@ -1528,6 +1530,11 @@ static inline int
+> pci_dev_reset_iommu_prepare(struct pci_dev *pdev) static inline void
+> pci_dev_reset_iommu_done(struct pci_dev *pdev) {
+>  }
+> +
+> +static inline bool pci_device_group_immutable_singleton(struct
+> pci_dev *dev) +{
+> +	return false;
+> +}
+>  #endif /* CONFIG_IOMMU_API */
+>  
+>  #ifdef CONFIG_IRQ_MSI_IOMMU
 
-       Andrew
 
