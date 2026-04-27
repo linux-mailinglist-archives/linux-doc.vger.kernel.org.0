@@ -1,197 +1,138 @@
-Return-Path: <linux-doc+bounces-84839-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84834-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBe6FP3M72knGAEAu9opvQ
-	(envelope-from <linux-doc+bounces-84839-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:54:21 +0200
+	id wJ6MFFLM72knGAEAu9opvQ
+	(envelope-from <linux-doc+bounces-84834-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:51:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E72FA47A59B
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:54:20 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id B65A747A4AF
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 22:51:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 470293034EF5
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 20:52:25 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E3332301FF8C
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2026 20:49:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCFF039283C;
-	Mon, 27 Apr 2026 20:50:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B2E6381AFD;
+	Mon, 27 Apr 2026 20:49:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zif4KKi0"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="EV7Rwp4G"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 616C038E100;
-	Mon, 27 Apr 2026 20:50:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 306DF243951;
+	Mon, 27 Apr 2026 20:49:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777323051; cv=none; b=sug3wAAvnxLp8hdQfGonAet8u15Faov4TB0Yn6a4tJjWMe/DP/39+V/60cyxf42kVPFGq6gYzIhxVCQty9r2Shso1EjGpaubZS1R4tjgfBImCbhNvvBOp3jvmLhhRuU6kXRpeJnbG1llixuPiIABVMBiLvIbSU4Kh1z0DRGpU7s=
+	t=1777322965; cv=none; b=sGKjkEEP5Y8KzZ5fxLJZtfbu669rkVhGAA8YPR0xrqCsmGP45fQ55Ddc/iWj1J8NSKYj/vx1HAVdFSsVmv18paMRwpVF1Au1KE55AEYbznGSL9ASrr/Y31x/JaylSilN1HU5sz4yNvXa11+xM4XEVBwvUp04bH7hsvPeFWOfLqs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777323051; c=relaxed/simple;
-	bh=esH8GoW/x0f4F3LQ0BiNpL6uFiMcPBcjR+T948qhS/A=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=JMcRfUSLAcWpkYGKc2CFgE/oKnONJ+QcDpT6OYjD4Gsa8wBRhlsm4TLRx2gSmu2ojcYm+kasv2csC2u7LruQYeMXfgC+w90eNP1m7B89xEI0PMxtCqjdrIlZAV0VqWEVfgolNQGjHUxHSZAefgsqt8ZMRHFW6d8RLtgjA6VuafM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zif4KKi0; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A24CC19425;
-	Mon, 27 Apr 2026 20:50:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777323049;
-	bh=esH8GoW/x0f4F3LQ0BiNpL6uFiMcPBcjR+T948qhS/A=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Zif4KKi0l2HAdsKn4T3m4qINJILeE3GEdBTZPHgxd+050ZSlrwrTNVGRC6F0fkCEu
-	 3Sk3kszX5JQbISumyKPCHQjHjAR2CnjAaE+iTyQjAaf7ObJoayDIunEBNVZsDafVcb
-	 vNOjpgPCAxReOOT49cOi0ZHr07WcmTx8YoHsbYczlbAsnX5zjAYuUGnYt4DZvkHAUv
-	 PpWWFCgLnsFTW3yPcHrvMdn2in4t6vaeuwRi6B8Qgo4pu0nTBUjXGe/Q49bL2Tk4uJ
-	 L2l6HKd3yZF53lBTiSaprOJ2/tYITX7BE7UR3PlmOT1eMJZ2ou8vRV8ltEifpobpRd
-	 ONC75s7s2vGLg==
-From: Tycho Andersen <tycho@kernel.org>
-To: Ashish Kalra <ashish.kalra@amd.com>,
-	Tom Lendacky <thomas.lendacky@amd.com>,
-	John Allen <john.allen@amd.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jonathan Corbet <corbet@lwn.net>,
+	s=arc-20240116; t=1777322965; c=relaxed/simple;
+	bh=uQ/YKk4y6AYZo+6AFX+AM0sFp8rKkf1QpU4q+remftM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Eh1dbnWVtO/LvchwBn5wM64lt+4cJZ5QyUtlAWzRTtGB1Vmiv2CSvDbOobnSl1BgHcy52+xGPC77yfkwrOa0RmaNwq7yWDkrV2N1aGj9zJYnn/0E4bsx++3rOEbCZhNC3fH8v6t/cSvKXRSNrmzTL2abnMT/uDHtLaw2DpEBXkA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=EV7Rwp4G; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=MMLMoTlttTEwr271DiSMonjx8J90NXXfd9ve6+eILxM=; b=EV7Rwp4GVIMdKKqXd3daio4dni
+	PYihHigVemQahqAa6RE+MXr56Knz1fOFHIbCByako21GgIrqitw04bALZWRWSpGRqLTcDXxCL0w8B
+	oufkYJAoQF8/enNswTG0WJsiTz7K2M1ZhaYLcJNaVvYvFaIjHLsx8iF2gsW2BGMXi5LA=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wHSt8-000DrS-6z; Mon, 27 Apr 2026 22:49:06 +0200
+Date: Mon, 27 Apr 2026 22:49:06 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Shenwei Wang <shenwei.wang@nxp.com>
+Cc: "Padhi, Beleswar" <b-padhi@ti.com>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Frank Li <frank.li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Shuah Khan <shuah@kernel.org>
-Cc: linux-crypto@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Kim Phillips <kim.phillips@amd.com>,
-	Alexey Kardashevskiy <aik@amd.com>,
-	"Tycho Andersen (AMD)" <tycho@kernel.org>,
-	Nikunj A Dadhania <nikunj@amd.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Dapeng Mi <dapeng1.mi@linux.intel.com>,
-	Kees Cook <kees@kernel.org>,
-	Marco Elver <elver@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Li RongQing <lirongqing@baidu.com>,
-	Eric Biggers <ebiggers@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	linux-doc@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH v2 4/4] KVM: selftests: Add a smoke test support for RAPL_DIS
-Date: Mon, 27 Apr 2026 14:48:47 -0600
-Message-ID: <20260427204847.112899-5-tycho@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260427204847.112899-1-tycho@kernel.org>
-References: <20260427204847.112899-1-tycho@kernel.org>
+	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
+	"imx@lists.linux.dev" <imx@lists.linux.dev>,
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
+	dl-linux-imx <linux-imx@nxp.com>,
+	Bartosz Golaszewski <brgl@bgdev.pl>
+Subject: Re: [PATCH v13 3/4] gpio: rpmsg: add generic rpmsg GPIO driver
+Message-ID: <6e01e114-e336-4744-b6b4-563ec42e321b@lunn.ch>
+References: <20260422212849.1240591-1-shenwei.wang@nxp.com>
+ <20260422212849.1240591-4-shenwei.wang@nxp.com>
+ <22fb5fac-2568-42be-a7e3-7e89d0017eb3@ti.com>
+ <PAXPR04MB91850A11C58419C03909145F89362@PAXPR04MB9185.eurprd04.prod.outlook.com>
+ <6412a758-4560-4cf1-a0d0-5b24d1a715f1@lunn.ch>
+ <PAXPR04MB9185009A17DFDF3D6C8B44E789362@PAXPR04MB9185.eurprd04.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: E72FA47A59B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB9185009A17DFDF3D6C8B44E789362@PAXPR04MB9185.eurprd04.prod.outlook.com>
+X-Rspamd-Queue-Id: B65A747A4AF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84839-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[34];
+	TAGGED_FROM(0.00)[bounces-84834-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	FREEMAIL_CC(0.00)[ti.com,kernel.org,lwn.net,linaro.org,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,bgdev.pl];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tycho@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MID_RHS_MATCH_FROM(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lunn.ch:dkim,lunn.ch:mid]
 
-From: "Tycho Andersen (AMD)" <tycho@kernel.org>
+> > struct virtio_gpio_response {
+> >         __u8 status;
+> >         __u8 value;
+> > };
 
-If the hardware supports the RAPL_DIS policy bit and the ccp has been
-loaded with the RAPL_DIS bit set, make sure a VM can
-actually start using it.
+> It is the same message format. Please see the message definition (GET_DIRECTION) below:
 
-Signed-off-by: Tycho Andersen (AMD) <tycho@kernel.org>
----
- tools/testing/selftests/kvm/include/x86/sev.h |  1 +
- .../selftests/kvm/x86/sev_smoke_test.c        | 24 ++++++++++++++++++-
- 2 files changed, 24 insertions(+), 1 deletion(-)
+> +   +-----+-----+-----+-----+-----+----+
+> +   |0x00 |0x01 |0x02 |0x03 |0x04 |0x05|
+> +   | 1   | 2   |port |line | err | dir|
+> +   +-----+-----+-----+-----+-----+----+
 
-diff --git a/tools/testing/selftests/kvm/include/x86/sev.h b/tools/testing/selftests/kvm/include/x86/sev.h
-index 1af44c151d60..2bbac9cd192a 100644
---- a/tools/testing/selftests/kvm/include/x86/sev.h
-+++ b/tools/testing/selftests/kvm/include/x86/sev.h
-@@ -28,6 +28,7 @@ enum sev_guest_state {
- #define SNP_POLICY_SMT		(1ULL << 16)
- #define SNP_POLICY_RSVD_MBO	(1ULL << 17)
- #define SNP_POLICY_DBG		(1ULL << 19)
-+#define SNP_POLICY_RAPL_DIS	(1ULL << 23)
- 
- #define GHCB_MSR_TERM_REQ	0x100
- 
-diff --git a/tools/testing/selftests/kvm/x86/sev_smoke_test.c b/tools/testing/selftests/kvm/x86/sev_smoke_test.c
-index 1a49ee391586..15c848749de6 100644
---- a/tools/testing/selftests/kvm/x86/sev_smoke_test.c
-+++ b/tools/testing/selftests/kvm/x86/sev_smoke_test.c
-@@ -243,6 +243,18 @@ static void test_sev_smoke(void *guest, u32 type, u64 policy)
- 	}
- }
- 
-+static u64 supported_policy_mask(void)
-+{
-+	int kvm_fd = open_kvm_dev_path_or_exit();
-+	u64 policy_mask = 0;
-+
-+	kvm_device_attr_get(kvm_fd, KVM_X86_GRP_SEV,
-+			    KVM_X86_SNP_POLICY_BITS,
-+			    &policy_mask);
-+	close(kvm_fd);
-+	return policy_mask;
-+}
-+
- int main(int argc, char *argv[])
- {
- 	TEST_REQUIRE(kvm_cpu_has(X86_FEATURE_SEV));
-@@ -252,8 +264,18 @@ int main(int argc, char *argv[])
- 	if (kvm_cpu_has(X86_FEATURE_SEV_ES))
- 		test_sev_smoke(guest_sev_es_code, KVM_X86_SEV_ES_VM, SEV_POLICY_ES);
- 
--	if (kvm_cpu_has(X86_FEATURE_SEV_SNP))
-+	if (kvm_cpu_has(X86_FEATURE_SEV_SNP)) {
-+		u64 supported_policy = supported_policy_mask();
-+
- 		test_sev_smoke(guest_snp_code, KVM_X86_SNP_VM, snp_default_policy());
- 
-+		if (supported_policy & SNP_POLICY_RAPL_DIS &&
-+		    kvm_get_module_param_bool("kvm_amd", "rapl_disable")) {
-+			u64 policy = snp_default_policy() | SNP_POLICY_RAPL_DIS;
-+
-+			test_sev_smoke(guest_snp_code, KVM_X86_SNP_VM, policy);
-+		}
-+	}
-+
- 	return 0;
- }
--- 
-2.53.0
+Sorry, but i don't see how two u8 vs six u8 are the same message
+format.
 
+       Andrew
 
