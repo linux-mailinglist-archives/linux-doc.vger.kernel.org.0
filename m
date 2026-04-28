@@ -1,312 +1,162 @@
-Return-Path: <linux-doc+bounces-84931-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84934-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8BWkHpKA8Gn6UAEAu9opvQ
-	(envelope-from <linux-doc+bounces-84931-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 11:40:34 +0200
+	id 4F7UBfCC8GlwUQEAu9opvQ
+	(envelope-from <linux-doc+bounces-84934-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 11:50:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6CCF481AB1
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 11:40:33 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC7AF481DBB
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 11:50:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id E7389302A9CF
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 09:00:42 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C5BDF301AF2E
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 09:50:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59DFB3D6683;
-	Tue, 28 Apr 2026 09:00:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C2493DA5B6;
+	Tue, 28 Apr 2026 09:50:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="oJOV5/p6"
+	dkim=pass (2048-bit key) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="ZCmOshS5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk [78.40.148.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9440371D13;
-	Tue, 28 Apr 2026 09:00:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.12
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777366840; cv=fail; b=hwdGdkCArOWCIXT14fl3rUZr7ad3ZumQxnOy4cSVF0DYXBoU/jpBX1QO4FgEKD95YhBbSeA/3L8wncywTeRpgx+/Pvp0FVOk0dXMPbfsDr/8zs4UhnnpHhAbsYxhqc5b7vsin7hukn/KmKoRkBjFXxhZ1eMKR6uOEAkp15TDiGw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777366840; c=relaxed/simple;
-	bh=bZJddvxg46huEo/ervGSz2Yh9gc6A1gDHKEMwYybPAU=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=UvKLUbw/JdEEeJ9WnCfeqF127wz8D6FRc6mp2N9C5o8JMt8oAyTTrBGZ7u/vgZdBcmY9Kk2BaEn6/VROn0zOnD+BIJV7omx/I28UTCHiJORTe2l9EeyugGHpYxnSkdLIY5bja9qjmG1Tbc+Hb6Q8PY2tQnHksqhfLweCTyf82jU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=oJOV5/p6; arc=fail smtp.client-ip=198.175.65.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1777366839; x=1808902839;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=bZJddvxg46huEo/ervGSz2Yh9gc6A1gDHKEMwYybPAU=;
-  b=oJOV5/p6vwYjefuieeCHo+MqRLEwPlgc/IqzKKqFA8Tz+bkDVFeM0f2u
-   5IJPIA749kWIJwbNg5Ld4YloJBdlfUEtbUMX/wo5XKkGUv+rt5kOANVbp
-   V6p/5j6aMmJGtehvaVM6ILwg93p2MWj1QlhcqR7Fq/8KTj67umBuJ3vYI
-   TsmqSleX9GuokmYoInoN12jUxTbd+/51E8O37bkI0m0DKUGKZ7eFni7ka
-   0kFVP6PFbsqZchsPwtZfPNEQ/a46kUG6qzQeRu2ZOQZxTXQRLY1hZ0+/K
-   AF5M1Kgz3xjKVcGnSNTJrx76pQ7TeG2x6cHO9qCbkWtm1jA4VtsrreoX8
-   g==;
-X-CSE-ConnectionGUID: nbOQezaKSBK9gorh3l7vKg==
-X-CSE-MsgGUID: vptpgZdyRNGxnhQZDAFMAQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11769"; a="89730561"
-X-IronPort-AV: E=Sophos;i="6.23,203,1770624000"; 
-   d="scan'208";a="89730561"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Apr 2026 02:00:36 -0700
-X-CSE-ConnectionGUID: xpInJJxuQfOzcTGbrO7OOA==
-X-CSE-MsgGUID: fVs8EXbgQpWRiKksyGDcTw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,203,1770624000"; 
-   d="scan'208";a="233032799"
-Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
-  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Apr 2026 02:00:35 -0700
-Received: from FMSMSX902.amr.corp.intel.com (10.18.126.91) by
- fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Tue, 28 Apr 2026 02:00:34 -0700
-Received: from fmsedg901.ED.cps.intel.com (10.1.192.143) by
- FMSMSX902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37 via Frontend Transport; Tue, 28 Apr 2026 02:00:34 -0700
-Received: from CH1PR05CU001.outbound.protection.outlook.com (52.101.193.65) by
- edgegateway.intel.com (192.55.55.81) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Tue, 28 Apr 2026 02:00:33 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LplGLx6ZIYmpEEXxiMxtI7CFOvPBjqhRWxeNsVMH9cy972JrDY23asuJwePxBkC33088nl2a3CU5RVSmKl+tRDjDGXmxX3M22N69C+2r2zrwZ4pdtvm/lW6Wz3yw0Go4dZWUma8V1Tx75XR7Qxo9dhecBZFoVYqAhr3mdfl70XLY0dXKIIuQ8dTbHCYbHpnncTaI9YSKJs9toPSSlM6MvX6GXRxDhumwT7dICKuTpRPDtQDZl59/NR3LiBM/ZF4vncUr+zmphwn+f2i2XsExEGLj4vDL0tyR08jaHg2mb3XCQ71SAuR/AkMqm87D+FIWEIbddGmC4xOWh0MSBWZUpA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YncHHcyu20s0zyjZHUmW5LDWNr0caKlBi5bFg37Vg8c=;
- b=QCTczbGLfnvHTDXrl6GNnphsjm8TJ6FxN+GjGNS00nPNciObDbvxWuUkP7UG2i3sJwiwa7Etebmb49mUH7fQNT+nCkw5faY1heYBHEG9N3RoAnM17GvkW23Y1WEQfADpKLJP2eCURq6Pop2P/Negwdu/Mf7/ZkiG4qe9mcM9YHquxvK2nPZS82idHqsbeJzOtgdJm3mmlo3Bs+CXfRa1S7yIDjM0ZdnoSfXNkf0D7+wbkTy15RUFQLcT/EzRiUCp3gW/iiI8OspC+MrBXpcVOFEm3YPcC9iBqdAjOzIYyoXZSIxaSchL4INiyLVW1VQkQb5/PS0EJtlGU3Thbo7NKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from IA3PR11MB8986.namprd11.prod.outlook.com (2603:10b6:208:577::21)
- by PH8PR11MB8016.namprd11.prod.outlook.com (2603:10b6:510:250::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.16; Tue, 28 Apr
- 2026 09:00:23 +0000
-Received: from IA3PR11MB8986.namprd11.prod.outlook.com
- ([fe80::e6f0:6afb:6ef9:ab5c]) by IA3PR11MB8986.namprd11.prod.outlook.com
- ([fe80::e6f0:6afb:6ef9:ab5c%5]) with mapi id 15.20.9870.013; Tue, 28 Apr 2026
- 09:00:22 +0000
-From: "Loktionov, Aleksandr" <aleksandr.loktionov@intel.com>
-To: "Zaremba, Larysa" <larysa.zaremba@intel.com>,
-	"intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
-	"Nguyen, Anthony L" <anthony.l.nguyen@intel.com>
-CC: "Lobakin, Aleksander" <aleksander.lobakin@intel.com>, "Samudrala, Sridhar"
-	<sridhar.samudrala@intel.com>, Michal Swiatkowski
-	<michal.swiatkowski@linux.intel.com>, "Zaremba, Larysa"
-	<larysa.zaremba@intel.com>, "Fijalkowski, Maciej"
-	<maciej.fijalkowski@intel.com>, "Tantilov, Emil S"
-	<emil.s.tantilov@intel.com>, "Chittim, Madhu" <madhu.chittim@intel.com>,
-	"Hay, Joshua A" <joshua.a.hay@intel.com>, "Keller, Jacob E"
-	<jacob.e.keller@intel.com>, "Shanmugam, Jayaprakash"
-	<jayaprakash.shanmugam@intel.com>, Jiri Pirko <jiri@resnulli.us>, "David S.
- Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, "Jakub
- Kicinski" <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
-	<horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Richard Cochran
-	<richardcochran@gmail.com>, "Kitszel, Przemyslaw"
-	<przemyslaw.kitszel@intel.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "Salin,
- Samuel" <samuel.salin@intel.com>
-Subject: RE: [Intel-wired-lan] [PATCH iwl-next v7 07/14] idpf: refactor idpf
- to use libie_pci APIs
-Thread-Topic: [Intel-wired-lan] [PATCH iwl-next v7 07/14] idpf: refactor idpf
- to use libie_pci APIs
-Thread-Index: AQHc1ujyZSMaxGI7NE+CoLBnF9lmm7X0K2Rw
-Date: Tue, 28 Apr 2026 09:00:22 +0000
-Message-ID: <IA3PR11MB89866811B05E0CF99A6BA98CE5372@IA3PR11MB8986.namprd11.prod.outlook.com>
-References: <20260428082654.44364-1-larysa.zaremba@intel.com>
- <20260428082654.44364-8-larysa.zaremba@intel.com>
-In-Reply-To: <20260428082654.44364-8-larysa.zaremba@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: IA3PR11MB8986:EE_|PH8PR11MB8016:EE_
-x-ms-office365-filtering-correlation-id: ea91255f-1aa1-467c-4cbe-08dea50494a8
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024|18002099003|56012099003|22082099003|38070700021;
-x-microsoft-antispam-message-info: 0EzuEiBMu4nEAj6m2W96+Is2y+IinJ9my4vf4yZSJ9+O/fp3ZlxfzclM5eM1hJcnLLbU+rCImKiyQzYUxhUWbMCpsnC/G4rgO9bcMNTkAgsnk7mI98NG4kTus0j03NrnvA+CX55AoE2/kwU416Mnq8kuqnOV0/7QVBWovhVWi4msmVrS9H55L1AQ4Y4CMJb7wu3fAVCLHg+l5/SJv9+AybLg8fLQauZUgzI+o4pS03jjV0wVr3pwP0YIxmQdSZ0AvAIZ8bNRJ03hNhIfXPNKPY3Scb4fhb0uKcHnowxnLapgP3SygleQFf5eLb0gzcyWwhMKioG2JkoRh3SG6pLOfl8e4pxLYiXlwwwW6qj5MCxYzATCc2IB384YngJHUtUZTiOfDMoF98HZCMRufAXC8wrjL9scSgfTH9Wu1drDNpHCiS2+CUFekyODRwDaTe2Th1vEJr+q8gJa0FhAfYqxQmO1llSo0HYnsDrTjwr/MyEXhdNx5PDsCqOjJr8YT6S82b80aIdFaGtgkBwT7eW8VeVw6L/yhmFwyYqZCOVG38b5yCkgk2119Yt2owz3tzhhP8M9LEinORiaqsnUk4f58z5iftSRztWakJBGEUiTE3NXBM3MZGac7ySkUVog+06ugWAF4DwI6JFSPk1xn9y0O1a4+eTAiFh4BRo1ljbZKLQ/SPl/88cXOofuvLnpe/Mp83PKTiXPbg+Vw0ZgGgF9OX+hoWe2blazYV1saSNuIw8IHiBbFpelrNJFL0iitgrdsDF73kGZKkC5b8yGa63kLXQgpBU2M/4CJ8UluWUwcSk=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA3PR11MB8986.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(18002099003)(56012099003)(22082099003)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?7GIr3kzFb0r6Tx5ojtWUvYOXVVIJMwS/I5Bls9k1rOIVh2vMsQRwIkqXY1GG?=
- =?us-ascii?Q?Ux1zj1DSqB6808UCSQXfJVXcE1AadisWuElthDbn74f1r0yBC2JCH5afzgDg?=
- =?us-ascii?Q?MmofhCIv5oWp6X8cIug4QiWBXF6hhUbkZ8InlqQVDGbuDBbMP7MzVmkst8sS?=
- =?us-ascii?Q?klKIVluDUBff9mpiQ+0oZ9yzRNTFYCstG+LW2/zzC3WysRHd8GcQvDVQ7O4L?=
- =?us-ascii?Q?Aoj4m6NJFimM8qUPVMxloUfT1cA1DJcQziGUNsiDmHAzDbGdi5R+eb+wYmzx?=
- =?us-ascii?Q?w2OIazxjm/nwdNm+fp1v7tQ/9lSbPvl1eDk+Fg8vDSc5B+K2ilUxIDZnx2cB?=
- =?us-ascii?Q?0jDtiWRprrYkAGS9QgnmJzvBFUN9nT6SLKF53hnyJeXmizd8ceBlMDtbnW7e?=
- =?us-ascii?Q?mJ9LTBwRqCbFDrwa1i0kUve6ab2hXQHozivjaqoMAdFNfg4w44Rg1qoze32M?=
- =?us-ascii?Q?m8fjJ/ffBXFPfjjCO1W7aC3tBwm7iXQSXKGldGJLs//bR8JtSIkVT/aiL86a?=
- =?us-ascii?Q?YVIVaRUbxSrUKN7t+ZIqHq6lcvKeUBtX8fOdDE4R6vkCSFGAccZ77+WOu5PQ?=
- =?us-ascii?Q?gJEyNTY1HqxuAocATQZLbCRjUkJjrozGjJQxOOQtl+D3xCGLWvXrR9fODATu?=
- =?us-ascii?Q?71SgmhrHCUl5t7sxJ/802/cQduv918rUPPe6xAOx7VPWIq20mPxuJDVBUUGI?=
- =?us-ascii?Q?vebv15SLsBpl6yCE8HAfe+diPTM8hR88uG1zx/jn+rryUSXrUOMmlhjNG1yh?=
- =?us-ascii?Q?vM1Cit/KCs4ULV3jyW6azZD03XRMu6ZkGl6p+X9gKpH44Q0w14gKlDh1U/O0?=
- =?us-ascii?Q?OiPzssdRWwB60chAEe5jQywINblittPp5dSqTI30IeuF/xKSJbwsqcTPkaaw?=
- =?us-ascii?Q?LsUr5Qh75ySC4x/6QDgCiBqyie8QclXJlfQ+7tBqpfh5Zv4tD3FoE98Hp9eo?=
- =?us-ascii?Q?1s9f1EN5m7oy0UwbJBXzCUI5GH6KMU/NYFMkCL8msmz7PuI8x34qBV/L3yas?=
- =?us-ascii?Q?U4Wq8ac8FhCnpdtCT/hvDvnmbMcwEn6bpVGsyleZgDzzz/czl7uOvufwiYwo?=
- =?us-ascii?Q?D4SjbvzYFOhclvVqkua5NvBbQbz4ukZ7fC+rsEwAZMcix8Q6sAkehgDGzvSY?=
- =?us-ascii?Q?OYB/bIiJ0gbDuus1QHA30vulAMhgNS+J807MGyEr9u8bsuBuLffUILaom0W8?=
- =?us-ascii?Q?K3TyDJPN26Xxn5V7UbQcOgOjvOGFirg0ug1D3uusHGPxDO2YQqn4ud998044?=
- =?us-ascii?Q?HM2vnFig3dq2FUQ/l6E72OYK2+Up33ggwboYg3bp8bFiYybzeQKOg/20RsGP?=
- =?us-ascii?Q?3AskR4SIkFhmMUbvw74uaaA7WRaUd3XHloVNmVviig6b9UOqFng2X89LEo8W?=
- =?us-ascii?Q?lUHeddO4OlfWxJ7sn5hncUtNKPdezbtcKlllOyL+KlzbDBSqjwkjPbBeRX64?=
- =?us-ascii?Q?2evOtWwW/J/wCcHtu68zkyDX0aJ9PDiDBVML4ajBt3arUNY+QRTR6/daVEi+?=
- =?us-ascii?Q?INvmdxxTfNe12oLXdwdZAjrzFd0FKxMRTGCiXOziLj4VaEmOAx3vD69C5ofd?=
- =?us-ascii?Q?/I3B7AXFwfwBofkQK5ko0841Ur7JIwzX6qzOc0TaQ+WJqBKXsiuVLumI5I97?=
- =?us-ascii?Q?GBc0kK+EeK/vPJaDgZLWmYh8c8hGWV5P7RG8/BdktNmIH/UlAnS9ubCM39mZ?=
- =?us-ascii?Q?lNc0YHBsgOD2WUFVZAybX8AYbAid2ijIX07hlazOqWQ2GjQTW9VbuS7HKvit?=
- =?us-ascii?Q?1OeFISGaB9P9TYc8+wLHY/yQD/zJDOE=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D10B3D4123;
+	Tue, 28 Apr 2026 09:50:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=78.40.148.171
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1777369831; cv=none; b=StZmrxTAYDi1cBGjGVtVQZLVgG3/VGGNcHTBRBU/hTRYA25TqsRi/MgJLn0N4Qfr1qUNkZDssY2tWp+aSoWsf4JWhzPeYTkyndGiMKNEOHJ0AlOr/Ai32LFClKGjllYXEj4PuSgUjHc6muJvVKLYUjOyDj0TYjjkrurtDfLE444=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1777369831; c=relaxed/simple;
+	bh=71r5PCoyKE2q6CjGvtlENM/Tn18UAB8o/79zayB5am4=;
+	h=Date:Message-ID:From:To:In-Reply-To:References:Cc:Subject:
+	 MIME-Version:Content-Type; b=a+svyJ23O1+ap40iMwbz76NIgcfxInlMGlIiUtsZbQbGVDG2sRn80x/PrvRPQRhhFqPcsYLKBa1MbjQRGOIu/CrOXiymVaDe0qMPRLQG/p66oUVvBFqgO6kWTGVGvU2+oYBp/8qVdNk1MjdzsSwwYn0jhxXuayjEmNGtSm73YSo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=codethink.co.uk; spf=pass smtp.mailfrom=codethink.co.uk; dkim=pass (2048-bit key) header.d=codethink.co.uk header.i=@codethink.co.uk header.b=ZCmOshS5; arc=none smtp.client-ip=78.40.148.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=codethink.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=codethink.co.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:Subject:Cc:References:In-Reply-To:To:From:Message-ID:Date:
+	Reply-To; bh=puMIIGNSAbNeV6wpOztNjxLzxg4uw3qbrjqOibpKvTg=; b=ZCmOshS57pYBTDVZ
+	HrFvOuMsqstaN9Agfb/IXg+fVolQjH8eyICjuPeOmSwrgQ259oUmQbL3s9IeQLWnf/4jhnwG3lYzL
+	L9T0rmwIodaQW0Bnr+FZBdxWJNcoeLKXcQYAAAZjiWjLc2m3fukbh5aa1oRPlaM+9+8OvfFEuAlyy
+	GwAbt3a0ICQalbwEs5O7siiSP6JXVh2prYl2Dr6JdmJu1wO9yn1t3fauML5m6iGvs+EJ0Qv1t6sBL
+	6U1SB9xbpywglYf1tifwKZykyu6aXtpyJMCzwIEOncnjdbi63AEKwmGpxCgPs4sAj59QJilL7mHzw
+	yl1ASelV0Ww05p9S1g==;
+Received: from host-79-43-52-27.retail.telecomitalia.it ([79.43.52.27] helo=localhost)
+	by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+	id 1wHeTm-000MMJ-Fj; Tue, 28 Apr 2026 10:11:42 +0100
+Date: Tue, 28 Apr 2026 11:11:41 +0200
+Message-ID: <d0a66f985640388ab13fda6f7d66c5ad@codethink.co.uk>
+From: Matteo Martelli <matteo.martelli@codethink.co.uk>
+To: Gabriele Monaco <gmonaco@redhat.com>, rdunlap@infradead.org, Steven Rostedt <rostedt@goodmis.org>, Gabriele Monaco <gmonaco@redhat.com>, Jonathan Corbet <corbet@lwn.net>, linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20260427131709.170505-2-gmonaco@redhat.com>
+References: <20260427131709.170505-2-gmonaco@redhat.com>
+Cc: skhan@linuxfoundation.org
+Subject: Re: [PATCH v2] Documentation/rv: Replace stale website link
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: VsSTY9je1lJ50ezDb5Yk0RPWW+m7sn6idJADffNLWg32VjbLpk5F74EK3aT5RJ/535aGrWkUonE7UdCrmvrABdWu2aHOP2wluxZKfxsR0EhCD6MeCFZIRNNxiw9sQ6eBHEoJ3RhlqxdjpKV9/lIRenUudfBDHAn+zLQQqNDxeN6mWnYB/m2t+0NG/1Frqz59oly3oJwTOyKKqqR3nKBNP94NU2UBe8HkQRhHF395NksQPrmP70nsF3xHvJxlbwxitd9Eon1b0L+pPkBdUNLbmtPnv7W+8AuK5hpY7vahQhq41fNSPCOfut8SktVvL16DgyTl/rkqzyOfrN9Z/7wskg==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: IA3PR11MB8986.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea91255f-1aa1-467c-4cbe-08dea50494a8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Apr 2026 09:00:22.5515
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9g9LhI+DVJotBr0r1eYyz5vVEY+xlQYNy60JEDFFVxOJDDOVG/DhyDUgVe75St8pO7c/sN34hlXjxsC5jOOkvoFHs4RncDEjMCP3yOXVN+o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB8016
-X-OriginatorOrg: intel.com
-X-Rspamd-Queue-Id: A6CCF481AB1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Sender: matteo.martelli@codethink.co.uk
+X-Rspamd-Queue-Id: CC7AF481DBB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[codethink.co.uk,reject];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[codethink.co.uk:s=imap5-20230908];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-84931-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[intel.com,linux.intel.com,resnulli.us,davemloft.net,google.com,kernel.org,redhat.com,lwn.net,gmail.com,lunn.ch,vger.kernel.org];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aleksandr.loktionov@intel.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[codethink.co.uk:+];
+	TAGGED_FROM(0.00)[bounces-84934-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[matteo.martelli@codethink.co.uk,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[codethink.co.uk:email,codethink.co.uk:dkim,codethink.co.uk:mid,sssup.it:url,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 
 
+Hi Gabriele,
 
-> -----Original Message-----
-> From: Intel-wired-lan <intel-wired-lan-bounces@osuosl.org> On Behalf
-> Of Larysa Zaremba
-> Sent: Tuesday, April 28, 2026 10:27 AM
-> To: intel-wired-lan@lists.osuosl.org; Nguyen, Anthony L
-> <anthony.l.nguyen@intel.com>
-> Cc: Lobakin, Aleksander <aleksander.lobakin@intel.com>; Samudrala,
-> Sridhar <sridhar.samudrala@intel.com>; Michal Swiatkowski
-> <michal.swiatkowski@linux.intel.com>; Zaremba, Larysa
-> <larysa.zaremba@intel.com>; Fijalkowski, Maciej
-> <maciej.fijalkowski@intel.com>; Tantilov, Emil S
-> <emil.s.tantilov@intel.com>; Chittim, Madhu <madhu.chittim@intel.com>;
-> Hay, Joshua A <joshua.a.hay@intel.com>; Keller, Jacob E
-> <jacob.e.keller@intel.com>; Shanmugam, Jayaprakash
-> <jayaprakash.shanmugam@intel.com>; Jiri Pirko <jiri@resnulli.us>;
-> David S. Miller <davem@davemloft.net>; Eric Dumazet
-> <edumazet@google.com>; Jakub Kicinski <kuba@kernel.org>; Paolo Abeni
-> <pabeni@redhat.com>; Simon Horman <horms@kernel.org>; Jonathan Corbet
-> <corbet@lwn.net>; Richard Cochran <richardcochran@gmail.com>; Kitszel,
-> Przemyslaw <przemyslaw.kitszel@intel.com>; Andrew Lunn
-> <andrew+netdev@lunn.ch>; netdev@vger.kernel.org; linux-
-> doc@vger.kernel.org; linux-kernel@vger.kernel.org; Salin, Samuel
-> <samuel.salin@intel.com>
-> Subject: [Intel-wired-lan] [PATCH iwl-next v7 07/14] idpf: refactor
-> idpf to use libie_pci APIs
->=20
-> From: Pavan Kumar Linga <pavan.kumar.linga@intel.com>
->=20
-> Use libie_pci init and MMIO APIs where possible, struct idpf_hw cannot
-> be deleted for now as it also houses control queues that will be
-> refactored later. Use libie_cp header for libie_ctlq_ctx that contains
-> mmio info from the start in order to not increase the diff later.
->=20
-> Reviewed-by: Madhu Chittim <madhu.chittim@intel.com>
-> Reviewed-by: Sridhar Samudrala <sridhar.samudrala@intel.com>
-> Signed-off-by: Pavan Kumar Linga <pavan.kumar.linga@intel.com>
-> Co-developed-by: Larysa Zaremba <larysa.zaremba@intel.com>
-> Signed-off-by: Larysa Zaremba <larysa.zaremba@intel.com>
-> Tested-by: Samuel Salin <Samuel.salin@intel.com>
-> Signed-off-by: Tony Nguyen <anthony.l.nguyen@intel.com>
+On Mon, 27 Apr 2026 15:17:09 +0200, Gabriele Monaco <gmonaco@redhat.com> wrote:
+> The sched monitor page was linking to Daniel's website which is now
+> down. The main purpose of the link was to point to a source for the
+> models from the original author and that can be found also in his
+> published paper.
+> 
+> Replace the link with a reference to Daniel's "A thread synchronization
+> model for the PREEMPT_RT Linux kernel" which can be found online and
+> includes the models definitions as well as the work behind them (not the
+> original patches but since they're based on a 5.0 kernel and are mostly
+> included upstream, there's little value in keeping them in the docs).
+> 
+> Fixes: 03abeaa63c08 ("Documentation/rv: Add docs for the sched monitors")
+> Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
 > ---
->  drivers/net/ethernet/intel/idpf/Kconfig       |   1 +
->  drivers/net/ethernet/intel/idpf/idpf.h        |  70 +-------
->  .../net/ethernet/intel/idpf/idpf_controlq.c   |  26 ++-
->  .../net/ethernet/intel/idpf/idpf_controlq.h   |   2 -
->  drivers/net/ethernet/intel/idpf/idpf_dev.c    |  61 ++++---
->  drivers/net/ethernet/intel/idpf/idpf_idc.c    |  38 ++--
->  drivers/net/ethernet/intel/idpf/idpf_lib.c    |   7 +-
->  drivers/net/ethernet/intel/idpf/idpf_main.c   | 114 ++++++------
->  drivers/net/ethernet/intel/idpf/idpf_vf_dev.c |  57 +++---
->  .../net/ethernet/intel/idpf/idpf_virtchnl.c   | 169 +++++++++--------
-> -
->  .../ethernet/intel/idpf/idpf_virtchnl_ptp.c   |  58 +++---
->  11 files changed, 288 insertions(+), 315 deletions(-)
->=20
-> diff --git a/drivers/net/ethernet/intel/idpf/Kconfig
-> b/drivers/net/ethernet/intel/idpf/Kconfig
-> index adab2154125b..586df3a4afe9 100644
-> --- a/drivers/net/ethernet/intel/idpf/Kconfig
-> +++ b/drivers/net/ethernet/intel/idpf/Kconfig
-> @@ -6,6 +6,7 @@ config IDPF
->  	depends on PCI_MSI
->  	depends on PTP_1588_CLOCK_OPTIONAL
->  	select DIMLIB
+> V2: Add link to the PDF and fixed RST references
+> 
+>  Documentation/trace/rv/monitor_sched.rst | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/trace/rv/monitor_sched.rst b/Documentation/trace/rv/monitor_sched.rst
+> index 0b96d6e147c6..d3ba7edc202f 100644
+> --- a/Documentation/trace/rv/monitor_sched.rst
+> +++ b/Documentation/trace/rv/monitor_sched.rst
+> @@ -36,7 +36,7 @@ Specifications
+>  --------------
+>  
+>  The specifications included in sched are currently a work in progress, adapting the ones
+> -defined in by Daniel Bristot in [1].
+> +defined by Daniel Bristot in [1]_.
+>  
+>  Currently we included the following:
+>  
+> @@ -365,4 +365,7 @@ constraints when processing the events::
+>  References
+>  ----------
+>  
+> -[1] - https://bristot.me/linux-task-model
+> +.. [1] Daniel Bristot de Oliveira et al.:
+> +       `A thread synchronization model for the PREEMPT_RT Linux kernel
+> +       <https://www.iris.sssup.it/bitstream/11382/533630/1/Elsevier-JSA-2020.pdf>`_,
+> +       J. Syst. Archit., 2020.
+> 
+> base-commit: 254f49634ee16a731174d2ae34bc50bd5f45e731
+> -- 
+> 2.53.0
+> 
+> 
 
-...
+Thanks for addressing this. FWIW this looks good to me, however I've just
+noticed that the same article is also referenced in rv/runtime-verification.rst
+with a slightly different format and no link. I think that it might be more
+clear if we had a References section in rv/runtime-verification.rst, add links
+to publicly available articles, and then let the other pages point to that
+section when needed instead of duplicating the references like in this case. But
+that could probably be addressed as a further clean-up patch.
 
-> >dev_ops.static_reg_info;
-> +		bool is_static =3D false;
-> +
-> +		for (uint j =3D 0; j < IDPF_MMIO_REG_NUM_STATIC; j++)
-I think you need to use here unsigned int, didn't checkpach.pl complain abo=
-ut it?
+Acked-by: Matteo Martelli <matteo.martelli@codethink.co.uk>
+Tested-by: Matteo Martelli <matteo.martelli@codethink.co.uk>
 
-
-> +			if (mr->offset =3D=3D static_regs[j].start)
-> +				is_static =3D true;
-
-...
-
->=20
->  	return 0;
->  }
-> --
-> 2.47.0
-
+Best regards,
+Matteo Martelli
 
