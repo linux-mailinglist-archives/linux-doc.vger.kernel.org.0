@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-85072-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85078-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8GBUCjtD8WmxfQEAu9opvQ
-	(envelope-from <linux-doc+bounces-85072-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:31:07 +0200
+	id WAlnGW9D8WmxfQEAu9opvQ
+	(envelope-from <linux-doc+bounces-85078-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:31:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A31C48D22C
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:31:06 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id D12CC48D294
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:31:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 524DB30AF108
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 23:26:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D2EF530B80A0
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 23:27:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 587B03E277D;
-	Tue, 28 Apr 2026 23:25:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A1C53F9F23;
+	Tue, 28 Apr 2026 23:25:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="noo4TLAf"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lJ8G/bxG"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B06703DA5C6;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD1073DBD74;
 	Tue, 28 Apr 2026 23:25:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777418721; cv=none; b=kJh6iF0Lwgyp/2Ep4xZLUXUsiNgIQ2OpG+ZNZu87ODGds4lx+Q2rDWdr5QPNvUfvzwc6fzHc5i+wlEJ+nrSmrJMH0BaAWw/2mb5Xhm/ampzYzcGDFqO5UXS6C8ZNxKDD/Xz9ZNPyRCLb/MnlAuHjF3B2uumc7K9hsU/F4AsI6bs=
+	t=1777418721; cv=none; b=JYkMOP6U/T93G1tR1oOLDCpOuYUn/nwulxGah7pOXdLVMPiqP+dLlHG3KyF2VJwyoKY+5XX8Tmv0sUwrszaMCNctqath+nKS1ob7UhbYBBp5J6Rx73bw/ncXBHdgSSKf7L3tcUCwALDm/DnOoyN6hbxSY/D4DvsBGy39lBm2M84=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777418721; c=relaxed/simple;
-	bh=s28QTqIblc5Y6DOdmxWa5Scmu3ZH/aC9hwSZ3ST+PkY=;
+	bh=1pO/RwNh5wQk+ZD1fBh8GeZ3xS7KCNyMnhgrVWmKjmA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=MPQq9kRCnj5eu+19SkgW8OHTxbF2d015hzbEEsjsFfhtuNuUPa6r93I9V8HAqFa9qxb4RjMNoC6vTA2PYS6lhFoWSjMZfJXaj4o5h6sVY1Lyb7LUesou34w6zDyjD26mNsAP+l1G6V3fZidzMbpBvCZoxkUwdEZn3rnoTkqZaeE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=noo4TLAf; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8DFD3C2BCC6;
+	 In-Reply-To:To:Cc; b=hl6BiIOVZJoI0i/41xq1LU2/NNm3z+SliHcwTKGknH0hI2J9yirRYzgP3zOSn1tb30wNPqQvFSgdPqv8hGOpC18FZfraeRd9hiEaoTxMdioxWWHntq2pJpsqDFdd/ZigS5VQ0BvdG4DugxjB6IzFpctacxdP2kCmrx/26P7yPXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lJ8G/bxG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A1828C2BCFA;
 	Tue, 28 Apr 2026 23:25:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777418721;
-	bh=s28QTqIblc5Y6DOdmxWa5Scmu3ZH/aC9hwSZ3ST+PkY=;
+	bh=1pO/RwNh5wQk+ZD1fBh8GeZ3xS7KCNyMnhgrVWmKjmA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=noo4TLAfYGVn2TdZFH+1oxxqJJRgkkIzzYpldDBDPhJknpFUijTpoRaBt8WRiv36D
-	 Rl6W5sjnTivNAZizlQLX4Ff1VBScymcSazRyBrqBov74Exmf9Dnuh+Z4sr7sN+C8sH
-	 JanfejjzlxV+Sxb/QDbSvCC85bQ8spQhZtasMIKK4k54YxUg+I9gPPhB9tCSxk4xGs
-	 3YZC2SQmJkmkRib5xmnUvgBqQMeKJyWHh7nFwijdcRTAXKQJ/JkzhN7n4d8Yz5Qbtd
-	 /rVfRzD8kY3rqPb3gTs2pw5mrzhNsM/pBCaUqYf5rEOoLmxtvAMFLFcsAr4W430CFN
-	 uc+24+5Yece4w==
+	b=lJ8G/bxGMXtsy6qw6slVl66aTE5rar9RS9YRdS+nkDhAJz9lR464fV7FoVhKj7fvV
+	 wva1Domejffnb8zLs+JXEPfyTN8bv+XCF/eYrTtjSjaNXvw4tIlEOCwHhC2E6faDAw
+	 MSR9ETiv/D8nQK8wm000gzKkjFQnMhs5rYdWoiWCDNe79O3WyWs9iR7O+gocpqQkEg
+	 oyQ1WxK0RsU+1+JScpNgw+h1jGtOoodTMG+vDuVHUJPFqT1tBzCqdMAHJ2a8WmFn7m
+	 IGEwGrs82VDZB7KpCicPSxXqeqcbWhLVM4LEr40MHLxEMV+ppsWkRT67glQbP1qhel
+	 iLG6lwTQEyVzg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84BF0FF8875;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97965CCF9E3;
 	Tue, 28 Apr 2026 23:25:21 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Tue, 28 Apr 2026 16:25:46 -0700
-Subject: [PATCH RFC v5 51/53] KVM: selftests: Add script to exercise
- private_mem_conversions_test
+Date: Tue, 28 Apr 2026 16:25:47 -0700
+Subject: [PATCH RFC v5 52/53] KVM: selftests: Update pre-fault test to work
+ with per-guest_memfd attributes
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-gmem-inplace-conversion-v5-51-d8608ccfca22@google.com>
+Message-Id: <20260428-gmem-inplace-conversion-v5-52-d8608ccfca22@google.com>
 References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
 In-Reply-To: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
 To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
@@ -92,30 +92,30 @@ Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
  linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777418714; l=7318;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777418714; l=1278;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=MBmNVOtEFn3UaImA75kYfBAiVir6jH2f8GzDHzl7Zt8=;
- b=0iOJ6VGmoBLqpQ1pPp+dpNPbACMnUFr9SD0B5sUGRZ8aKHFijYWm7jBjFnEDT1q7AJ+9JSfcy
- EvL4LphHVCDCQvMMY+NBgmzT+xok7rkOgdDtFefSxqe7FZaI2rnX9S1
+ bh=KB4IvfKWRwfFkGKiLiHfBqqzvyesxU1uqyWNUwL9kS0=;
+ b=VVjhgfPquk64xczj3ZQLm8Vp5HQ7/Qfqw5eSlPrR4TxDyAPdMjJw7EUrKTN/v8GzsZdZ0LfEq
+ mlypjrBZuRIAFMpNquDNHC/yzj95hd4pTNKOE17WZgH6fbVQ0n2fESs
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
  auth_id=649
 X-Original-From: Ackerley Tng <ackerleytng@google.com>
 Reply-To: ackerleytng@google.com
-X-Rspamd-Queue-Id: 9A31C48D22C
+X-Rspamd-Queue-Id: D12CC48D294
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85072-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-85078-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	FROM_HAS_DN(0.00)[];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	TO_DN_SOME(0.00)[];
@@ -133,220 +133,36 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
-From: Ackerley Tng <ackerleytng@google.com>
+From: Sean Christopherson <seanjc@google.com>
 
-Add a wrapper script to simplify running the private_mem_conversions_test
-with a variety of configurations. Manually invoking the test for all
-supported memory backing source types is tedious.
+Skip setting memory to private in the pre-fault memory test when using
+per-gmem memory attributes, as memory is initialized to private by default
+for guest_memfd, and using vm_mem_set_private() on a guest_memfd instance
+requires creating guest_memfd with GUEST_MEMFD_FLAG_MMAP (which is totally
+doable, but would need to be conditional and is ultimately unnecessary).
 
-The script automatically detects the availability of 2MB and 1GB hugepages
-and builds a list of source types to test. It then iterates through the
-list, running the test for each type with both a single memslot and
-multiple memslots.
-
-This makes it easier to get comprehensive test coverage across different
-memory configurations.
-
-Add and use a helper program in C to be able to read
-KVM_CAP_GUEST_MEMFD_MEMORY_ATTRIBUTES as defined in header files and then
-issue the ioctl to read the KVM CAP.
-
+Signed-off-by: Sean Christopherson <seanjc@google.com>
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- tools/testing/selftests/kvm/Makefile.kvm           |   4 +
- .../selftests/kvm/kvm_has_gmem_attributes.c        |  17 +++
- .../kvm/x86/private_mem_conversions_test.sh        | 128 +++++++++++++++++++++
- 3 files changed, 149 insertions(+)
+ tools/testing/selftests/kvm/pre_fault_memory_test.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
-index 6232881be500a..e5769268936a7 100644
---- a/tools/testing/selftests/kvm/Makefile.kvm
-+++ b/tools/testing/selftests/kvm/Makefile.kvm
-@@ -54,6 +54,7 @@ LIBKVM_loongarch += lib/loongarch/exception.S
+diff --git a/tools/testing/selftests/kvm/pre_fault_memory_test.c b/tools/testing/selftests/kvm/pre_fault_memory_test.c
+index 9d16a277696ce..742bbbca9deea 100644
+--- a/tools/testing/selftests/kvm/pre_fault_memory_test.c
++++ b/tools/testing/selftests/kvm/pre_fault_memory_test.c
+@@ -183,7 +183,7 @@ static void __test_pre_fault_memory(unsigned long vm_type, bool private)
+ 				    TEST_NPAGES, private ? KVM_MEM_GUEST_MEMFD : 0);
+ 	virt_map(vm, gva, gpa, TEST_NPAGES);
  
- # Non-compiled test targets
- TEST_PROGS_x86 += x86/nx_huge_pages_test.sh
-+TEST_PROGS_x86 += x86/private_mem_conversions_test.sh
+-	if (private)
++	if (!kvm_has_gmem_attributes && private)
+ 		vm_mem_set_private(vm, gpa, TEST_SIZE, 0);
  
- # Compiled test targets valid on all architectures with libkvm support
- TEST_GEN_PROGS_COMMON = demand_paging_test
-@@ -67,6 +68,8 @@ TEST_GEN_PROGS_COMMON += set_memory_region_test
- TEST_GEN_PROGS_COMMON += memslot_modification_stress_test
- TEST_GEN_PROGS_COMMON += memslot_perf_test
- 
-+TEST_GEN_PROGS_EXTENDED_COMMON += kvm_has_gmem_attributes
-+
- # Compiled test targets
- TEST_GEN_PROGS_x86 = $(TEST_GEN_PROGS_COMMON)
- TEST_GEN_PROGS_x86 += x86/cpuid_test
-@@ -245,6 +248,7 @@ SPLIT_TESTS += get-reg-list
- 
- TEST_PROGS += $(TEST_PROGS_$(ARCH))
- TEST_GEN_PROGS += $(TEST_GEN_PROGS_$(ARCH))
-+TEST_GEN_PROGS_EXTENDED += $(TEST_GEN_PROGS_EXTENDED_COMMON)
- TEST_GEN_PROGS_EXTENDED += $(TEST_GEN_PROGS_EXTENDED_$(ARCH))
- LIBKVM += $(LIBKVM_$(ARCH))
- 
-diff --git a/tools/testing/selftests/kvm/kvm_has_gmem_attributes.c b/tools/testing/selftests/kvm/kvm_has_gmem_attributes.c
-new file mode 100644
-index 0000000000000..4f361349412fb
---- /dev/null
-+++ b/tools/testing/selftests/kvm/kvm_has_gmem_attributes.c
-@@ -0,0 +1,17 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Utility to check if KVM supports guest_memfd attributes.
-+ *
-+ * Copyright (C) 2025, Google LLC.
-+ */
-+
-+#include <stdio.h>
-+
-+#include "kvm_util.h"
-+
-+int main(void)
-+{
-+	printf("%u\n", kvm_check_cap(KVM_CAP_GUEST_MEMFD_MEMORY_ATTRIBUTES) > 0);
-+
-+	return 0;
-+}
-diff --git a/tools/testing/selftests/kvm/x86/private_mem_conversions_test.sh b/tools/testing/selftests/kvm/x86/private_mem_conversions_test.sh
-new file mode 100755
-index 0000000000000..7179a4fcdd498
---- /dev/null
-+++ b/tools/testing/selftests/kvm/x86/private_mem_conversions_test.sh
-@@ -0,0 +1,128 @@
-+#!/bin/bash
-+# SPDX-License-Identifier: GPL-2.0-only
-+#
-+# Wrapper script which runs different test setups of
-+# private_mem_conversions_test.
-+#
-+# Copyright (C) 2025, Google LLC.
-+
-+NUM_VCPUS_TO_TEST=4
-+NUM_MEMSLOTS_TO_TEST=$NUM_VCPUS_TO_TEST
-+
-+# Required pages are based on the test setup in the C code.
-+REQUIRED_NUM_2M_HUGEPAGES=$((1024 * NUM_VCPUS_TO_TEST))
-+REQUIRED_NUM_1G_HUGEPAGES=$((2 * NUM_VCPUS_TO_TEST))
-+
-+get_hugepage_count() {
-+    local page_size_kb=$1
-+    local path="/sys/kernel/mm/hugepages/hugepages-${page_size_kb}kB/nr_hugepages"
-+    if [ -f "$path" ]; then
-+        cat "$path"
-+    else
-+        echo 0
-+    fi
-+}
-+
-+get_default_hugepage_size_in_kb() {
-+    local size=$(grep "Hugepagesize:" /proc/meminfo | awk '{print $2}')
-+    echo "$size"
-+}
-+
-+run_tests() {
-+    local executable_path=$1
-+    local src_type=$2
-+    local num_memslots=$3
-+    local num_vcpus=$4
-+
-+    echo "$executable_path -s $src_type -m $num_memslots -n $num_vcpus"
-+    "$executable_path" -s "$src_type" -m "$num_memslots" -n "$num_vcpus"
-+}
-+
-+script_dir=$(dirname "$(realpath "$0")")
-+test_executable="${script_dir}/private_mem_conversions_test"
-+kvm_has_gmem_attributes_tool="${script_dir}/../kvm_has_gmem_attributes"
-+
-+if [ ! -f "$test_executable" ]; then
-+    echo "Error: Test executable not found at '$test_executable'" >&2
-+    exit 1
-+fi
-+
-+if [ ! -f "$kvm_has_gmem_attributes_tool" ]; then
-+    echo "Error: kvm_has_gmem_attributes utility not found at '$kvm_has_gmem_attributes_tool'" >&2
-+    exit 1
-+fi
-+
-+kvm_has_gmem_attributes=$("$kvm_has_gmem_attributes_tool" | tail -n1)
-+
-+if [ "$kvm_has_gmem_attributes" -eq 1 ]; then
-+    backing_src_types=("shmem")
-+else
-+    hugepage_2mb_count=$(get_hugepage_count 2048)
-+    hugepage_2mb_enabled=$((hugepage_2mb_count >= REQUIRED_NUM_2M_HUGEPAGES))
-+    hugepage_1gb_count=$(get_hugepage_count 1048576)
-+    hugepage_1gb_enabled=$((hugepage_1gb_count >= REQUIRED_NUM_1G_HUGEPAGES))
-+
-+    default_hugepage_size_kb=$(get_default_hugepage_size_in_kb)
-+    hugepage_default_enabled=0
-+    if [ "$default_hugepage_size_kb" -eq 2048 ]; then
-+        hugepage_default_enabled=$hugepage_2mb_enabled
-+    elif [ "$default_hugepage_size_kb" -eq 1048576 ]; then
-+        hugepage_default_enabled=$hugepage_1gb_enabled
-+    fi
-+
-+    backing_src_types=("anonymous" "anonymous_thp")
-+
-+    if [ "$hugepage_default_enabled" -eq 1 ]; then
-+        backing_src_types+=("anonymous_hugetlb")
-+    else
-+        echo "skipping anonymous_hugetlb backing source type"
-+    fi
-+
-+    if [ "$hugepage_2mb_enabled" -eq 1 ]; then
-+        backing_src_types+=("anonymous_hugetlb_2mb")
-+    else
-+        echo "skipping anonymous_hugetlb_2mb backing source type"
-+    fi
-+
-+    if [ "$hugepage_1gb_enabled" -eq 1 ]; then
-+        backing_src_types+=("anonymous_hugetlb_1gb")
-+    else
-+        echo "skipping anonymous_hugetlb_1gb backing source type"
-+    fi
-+
-+    backing_src_types+=("shmem")
-+
-+    if [ "$hugepage_default_enabled" -eq 1 ]; then
-+        backing_src_types+=("shared_hugetlb")
-+    else
-+        echo "skipping shared_hugetlb backing source type"
-+    fi
-+fi
-+
-+return_code=0
-+for i in "${!backing_src_types[@]}"; do
-+    src_type=${backing_src_types[$i]}
-+    if [ "$i" -gt 0 ]; then
-+        echo
-+    fi
-+
-+    if ! run_tests "$test_executable" "$src_type" 1 1; then
-+        return_code=$?
-+        echo "Test failed for source type '$src_type'. Arguments: -s $src_type -m 1 -n 1" >&2
-+        break
-+    fi
-+
-+    if ! run_tests "$test_executable" "$src_type" 1 "$NUM_VCPUS_TO_TEST"; then
-+        return_code=$?
-+        echo "Test failed for source type '$src_type'. Arguments: -s $src_type -m 1 -n $NUM_VCPUS_TO_TEST" >&2
-+        break
-+    fi
-+
-+    if ! run_tests "$test_executable" "$src_type" "$NUM_MEMSLOTS_TO_TEST" "$NUM_VCPUS_TO_TEST"; then
-+        return_code=$?
-+        echo "Test failed for source type '$src_type'. Arguments: -s $src_type -m $NUM_MEMSLOTS_TO_TEST -n $NUM_VCPUS_TO_TEST" >&2
-+        break
-+    fi
-+done
-+
-+exit "$return_code"
+ 	pre_fault_memory(vcpu, gpa, 0, SZ_2M, 0, private);
 
 -- 
 2.54.0.545.g6539524ca2-goog
