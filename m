@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-85081-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85059-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0NeZO9lD8WmxfQEAu9opvQ
-	(envelope-from <linux-doc+bounces-85081-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:33:46 +0200
+	id cO28Nf9C8WlsfQEAu9opvQ
+	(envelope-from <linux-doc+bounces-85059-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:30:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B122D48D343
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:33:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 862B848D1C2
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:30:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E3E7E30BEAC0
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 23:27:54 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id F14AD305CB9F
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 23:26:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89F4241B369;
-	Tue, 28 Apr 2026 23:25:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E920C3A5452;
+	Tue, 28 Apr 2026 23:25:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iqzkNOfj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kc3gS6JJ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E6323A4523;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8120D3A450E;
 	Tue, 28 Apr 2026 23:25:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777418719; cv=none; b=eMYib1y9F/aahQOFny7vZx1Wc/0CKky30QXasNj9wyx5bRKYGlbunfO8lCN69KDAQOZYKMJUiOnH3+D5U46sfpdTfXjJqhA82K+LojQs5zDSewVnJ4eDLZwec4cJ9XMlSeHwVF6CoCZHbyhg1UknXyds1s2XpTRcM7OMksgWQfI=
+	t=1777418719; cv=none; b=aiBkimQjiHKUPLSkULhjOJyP4jD3p1c060Jc9JQ+Os/hNu0KUNMqzH7evDivxOUlZ1ipHoKUpXDa97aBNGkTNhKw5czrKmr63ARXNe2hMdmABeQIou4yybea6Leu/cDMMWtnzF//+ahuxLHXdUCf7OWMvkZ3VbWAI3FzOxKxCKw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777418719; c=relaxed/simple;
-	bh=yIQ1qb/5thBEPl1WW7+A4KzPierGynmKhGiUR/3Ml6c=;
+	bh=Q2i5UGWinxKGxu+Xi3skJAPhJUuuLkegXOFl75kQp0o=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=XqEaT6JGDXqdgesbmVFh/YZ4cGvMSg4xdJY6F7CjQgcPvGD/2IxN1941YadEYrz8r/lTlmecLFgDxNem8UHXrUXEJQRn/FtRrNlQHy4EKMYMiuw26lj67/9ny5EHuf+0pQRnQiyvjkyri4taodfHRdPwiXOdA868SRac4LkNh+k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iqzkNOfj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 540A2C2BCF7;
+	 In-Reply-To:To:Cc; b=Bjao3R+n8bHE+qBGExctVJbEvMUW9awfE3Gpwoyx566okgY9GbIq+PCPPMluw513VaNF5tBtunSiBMQZNkTyzPzXiVsWj8qwt2R9lhAF8S1C8LJ9VnZXyHZUf0ArS9pRIsS6Y0YMT+AqEK7F8DeH3VSVZKWE9nUESTExyIAVnxI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kc3gS6JJ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 677F4C2BCFD;
 	Tue, 28 Apr 2026 23:25:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777418719;
-	bh=yIQ1qb/5thBEPl1WW7+A4KzPierGynmKhGiUR/3Ml6c=;
+	bh=Q2i5UGWinxKGxu+Xi3skJAPhJUuuLkegXOFl75kQp0o=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=iqzkNOfjetQv0OkOlMI4tZoTh+sRABN+hK+ANmOFw/Y0SQPFWkuEL1h8joP+JXUaw
-	 holJDjTe6B+rq4XlfKj3mAaSD488WXovSxw7VjFVbkk31MlIsZriCcQAUobgbbS5+4
-	 U3vufYnU831eYzE7hnJgsAplr2Sf/lQetR74SIaW6TYCvLC9TnTHOVdX1yhvunNxmR
-	 sAZhmVuNPo8Ha+M+kQdBEXi3e+yI+rAc5yHBoH4kzECyKbbnVWSU33aaWelmlFVaur
-	 YvVc8MESc7z18FYFcuPypzKc/GC7Ywh8zipYDdvDfBE6GhtkEphZ+kVUEtljAgqH/I
-	 bH4JGvvE8VGtw==
+	b=kc3gS6JJ+D/sZEMcllPb90lqPHcTZDeI3P8kvpmGeawfufhE8WNrj3bSF28IB5g9y
+	 TwB4fwAoybf68c/7BuukvCzRzB4s0lORoA7GeDolLk4r6ae0Z8P4PM9/xI/shqDbj0
+	 fWajpIqFy+KMlLvK4vRIQZRe4wmKjv/HxyWqnMePv+ox4nOnWZN3H313xzy96NEv7O
+	 W+k5GkxRnqwDzzhegW+up9Cazf+Jv5E3npUqSRovdAhVD5hOn2rGyBFkb/H3Dx4pcn
+	 u3KCPvTZdzYZcWk6LVEAbFNnEb6SKhEX5VKOXvEY7fmb+Kosk+uLy2Lq9N6O65pNmy
+	 xB4AFUiaKCAWg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B007FF8875;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E801FF887E;
 	Tue, 28 Apr 2026 23:25:19 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Tue, 28 Apr 2026 16:25:20 -0700
-Subject: [PATCH RFC v5 25/53] KVM: TDX: Make source page optional for
- KVM_TDX_INIT_MEM_REGION
+Date: Tue, 28 Apr 2026 16:25:21 -0700
+Subject: [PATCH RFC v5 26/53] KVM: x86: Support SNP and TDX applying
+ content modes
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-gmem-inplace-conversion-v5-25-d8608ccfca22@google.com>
+Message-Id: <20260428-gmem-inplace-conversion-v5-26-d8608ccfca22@google.com>
 References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
 In-Reply-To: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
 To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
@@ -92,18 +92,18 @@ Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
  linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777418714; l=2077;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777418714; l=4286;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=ZUVil0lCIwc17luhnyQSnbr0drwWGJzhuW+VIyBKAEE=;
- b=7+JgXh5IsJ8zEo/B+5TkhpuCJ+LAfF3PUrxanugOqLUqBAxiPXjz3BKUNbVG/YL3JTPBaLNVM
- Arrpar2DOqaCNzQACmKnSm35p43EbE0LBLcBBsBuSJO2Q79UgEO9KPL
+ bh=i6q4uvrNtDgNcr9CUmAU4UKURJOJAI1o/insHn6kLI8=;
+ b=foRZV+tCQRN2/9dqQLMIWhiR8IkHAAal9ueWWCez/CvrtzIdOAsEjakqSz8gPfly9NNY9T4yW
+ o8g90xsHHZlBcopXzRcG+cTT1Wpw3RzkLcw9qlFNF/cbBuXd7+GBfv/
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
  auth_id=649
 X-Original-From: Ackerley Tng <ackerleytng@google.com>
 Reply-To: ackerleytng@google.com
-X-Rspamd-Queue-Id: B122D48D343
+X-Rspamd-Queue-Id: 862B848D1C2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
@@ -115,7 +115,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85081-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-85059-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	FROM_HAS_DN(0.00)[];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	TO_DN_SOME(0.00)[];
@@ -134,58 +134,118 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-Update tdx_gmem_post_populate() to handle cases where a source page is
-not explicitly provided. Instead of returning -EOPNOTSUPP when src_page
-is NULL, default to using the page associated with the destination PFN.
+Define supported content modes for TDX and SNP.
 
-This change allows for in-place memory conversion where the data is
-already present in the target PFN, ensuring the TDX module has a valid
-source page reference for the TDH.MEM.PAGE.ADD operation.
+For now, content preservation is not generally supported for conversions.
 
+Allow conversion only from shared to private before the VM is finalized to
+support this VM set up flow from userspace:
+
+1. Set up guest_memfd as shared.
+2. Write directly to guest_memfd.
+3. Set memory attributes to private with the PRESERVE flag
+4. Call KVM_TDX_INIT_MEM_REGION/KVM_SEV_SNP_LAUNCH_UPDATE to load and
+   encrypt memory
+
+An alternative would be to the work done by the kernel in step 3 into 4,
+but the process of conversion is complicated (needs to check refcounts,
+handle failures, etc) and plumbing the errors out through the
+platform-specific ioctl is complex and pollutes the platform-specific
+ioctl.
+
+Allow conversion with content preservation only to_private since preserving
+content on a to-shared conversion after population cannot be supported.
+
+Suggested-by: Sean Christopherson <seanjc@google.com>
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
+Co-developed-by: Michael Roth <michael.roth@amd.com>
+Signed-off-by: Michael Roth <michael.roth@amd.com>
 ---
- Documentation/virt/kvm/x86/intel-tdx.rst | 4 ++++
- arch/x86/kvm/vmx/tdx.c                   | 8 ++++++--
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ Documentation/virt/kvm/api.rst |  3 +++
+ arch/x86/kvm/x86.c             | 38 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
 
-diff --git a/Documentation/virt/kvm/x86/intel-tdx.rst b/Documentation/virt/kvm/x86/intel-tdx.rst
-index 6a222e9d09541..fbc0f179dc750 100644
---- a/Documentation/virt/kvm/x86/intel-tdx.rst
-+++ b/Documentation/virt/kvm/x86/intel-tdx.rst
-@@ -158,6 +158,10 @@ KVM_TDX_INIT_MEM_REGION
- Initialize @nr_pages TDX guest private memory starting from @gpa with userspace
- provided data from @source_addr. @source_addr must be PAGE_SIZE-aligned.
+diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+index 61b9974ba52e9..aaa4a82f0b75d 100644
+--- a/Documentation/virt/kvm/api.rst
++++ b/Documentation/virt/kvm/api.rst
+@@ -6659,6 +6659,9 @@ The content modes available are as follows:
+   converts the memory to shared, the host (and guest) will read
+   ``0xbeef`` (if the memory is accessible).
  
-+If memory attributes are tracked in guest_memfd, pass NULL for
-+@source_addr to initialize the memory region using memory contents
-+already populated in guest_memfd memory.
++  For TDX and SNP, content preservation is only supported before the
++  VM is finalized, and only on conversion to private.
 +
- Note, before calling this sub command, memory attribute of the range
- [gpa, gpa + nr_pages] needs to be private.  Userspace can use
- KVM_SET_MEMORY_ATTRIBUTES to set the attribute.
-diff --git a/arch/x86/kvm/vmx/tdx.c b/arch/x86/kvm/vmx/tdx.c
-index 04ce321ebdf39..10373e606242a 100644
---- a/arch/x86/kvm/vmx/tdx.c
-+++ b/arch/x86/kvm/vmx/tdx.c
-@@ -3116,8 +3116,12 @@ static int tdx_gmem_post_populate(struct kvm *kvm, gfn_t gfn, kvm_pfn_t pfn,
- 	if (KVM_BUG_ON(kvm_tdx->page_add_src, kvm))
- 		return -EIO;
- 
--	if (!src_page)
--		return -EOPNOTSUPP;
-+	if (!src_page) {
-+		if (vm_memory_attributes)
-+			return -EOPNOTSUPP;
+ Note: These content modes apply to the entire requested range, not
+ just the parts of the range that underwent conversion. For example, if
+ this was the initial state:
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index e8abff71001eb..296ed3b8ace6c 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -14206,6 +14206,32 @@ u64 kvm_arch_gmem_supported_content_modes(struct kvm *kvm, bool to_private)
+ 	case KVM_X86_SW_PROTECTED_VM:
+ 		return KVM_SET_MEMORY_ATTRIBUTES2_ZERO |
+ 		       KVM_SET_MEMORY_ATTRIBUTES2_PRESERVE;
++	case KVM_X86_SNP_VM:
++	case KVM_X86_TDX_VM: {
++		u64 supported = KVM_SET_MEMORY_ATTRIBUTES2_ZERO;
 +
-+		src_page = pfn_to_page(pfn);
++		/*
++		 * Preservation is only supported for VMs with
++		 * protected state up until the guest is launched and
++		 * vCPUs become capable of generating KVM MMU faults,
++		 * since those faults can be destructive to the
++		 * initial memory contents from the guest point of
++		 * view, i.e. plaintext data will become random data,
++		 * or zeroed, after a shared->private conversion.
++		 *
++		 * Use pre_fault_allowed to guard PRESERVE support,
++		 * since that is set to true when VMs are finalized.
++		 *
++		 * Along the same lines, only support PRESERVE for
++		 * to_private conversions, since when converting to
++		 * shared, memory contents for pages that had already
++		 * been faulted could be zeroed.
++		 */
++		if (to_private && !kvm->arch.pre_fault_allowed)
++			supported |= KVM_SET_MEMORY_ATTRIBUTES2_PRESERVE;
++
++		return supported;
 +	}
- 
- 	kvm_tdx->page_add_src = src_page;
- 	ret = kvm_tdp_mmu_map_private_pfn(arg->vcpu, gfn, pfn);
+ 	default:
+ 		return 0;
+ 	}
+@@ -14216,6 +14242,16 @@ int kvm_arch_gmem_apply_content_mode_zero(struct kvm *kvm, struct inode *inode,
+ {
+ 	switch (kvm->arch.vm_type) {
+ 	case KVM_X86_SW_PROTECTED_VM:
++	case KVM_X86_SNP_VM:
++	case KVM_X86_TDX_VM:
++		/*
++		 * TDX firmware will zero on unmapping from the
++		 * Secure-EPTs, but suppose a shared page with
++		 * contents was converted to private, and then
++		 * converted back without ever being mapped into
++		 * Secure-EPTs: guest_memfd can't rely on TDX firmware
++		 * for zeroing then.
++		 */
+ 		return kvm_gmem_apply_content_mode_zero(inode, start, end);
+ 	default:
+ 		return 0;
+@@ -14228,6 +14264,8 @@ int kvm_arch_gmem_apply_content_mode_preserve(struct kvm *kvm,
+ {
+ 	switch (kvm->arch.vm_type) {
+ 	case KVM_X86_SW_PROTECTED_VM:
++	case KVM_X86_SNP_VM:
++	case KVM_X86_TDX_VM:
+ 		/* Do nothing to preserve content. */
+ 		return 0;
+ 	default:
 
 -- 
 2.54.0.545.g6539524ca2-goog
