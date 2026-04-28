@@ -1,178 +1,179 @@
-Return-Path: <linux-doc+bounces-84953-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84960-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IAGcOIaj8GlAWgEAu9opvQ
-	(envelope-from <linux-doc+bounces-84953-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 14:09:42 +0200
+	id KGsEJxK08GlwXgEAu9opvQ
+	(envelope-from <linux-doc+bounces-84960-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 15:20:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91B12484A09
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 14:09:42 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AA59485B6C
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 15:20:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4B05C3011776
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 11:51:25 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7D8D1319E4C0
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 12:23:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0FEA3F076C;
-	Tue, 28 Apr 2026 11:51:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12F99426D39;
+	Tue, 28 Apr 2026 12:19:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MBT1du2V"
+	dkim=pass (2048-bit key) header.d=inventec.com header.i=@inventec.com header.b="P/V9GYMa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F90325F99F
-	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 11:51:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.180
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777377084; cv=pass; b=tsisHWW4gbVM6QHSFQZ3wVsrehVl+YLkWUI8v4LcFeAyQIsN2DX/9QKViOMYFp8/G27uJZZXnvrXQXA/0wrkmm+xjuhEPHKmM6Mdpu04u5rVaXWl/fRYW5bNsMiPaJFDL5rjamcc57qs2IDsz+8vOAFW2oRgAsqFAKq2hy2/Qlo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777377084; c=relaxed/simple;
-	bh=E0Mf6nu/Yyi2mO8vmqCFQQuDl4ubjEv9FtbDx7gQTGM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=CDSqZPPPO5LVqVc8OLdYGP6M1tWBkVGgIqNo+V5u2yKS1IFAEu/QAszT1DcgIx681+MhlP/P5pdNwKfICJ+HcjjUffPy1lyGHrxdbX8cO/vJmIyrCGWZxV29Qxi639Sf/atYXuTjEZ/wp7cdlDbIP510YJeKTRgcm/3NCcU5WO0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MBT1du2V; arc=pass smtp.client-ip=74.125.82.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-2d9b27e4aa3so685685eec.1
-        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 04:51:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777377083; cv=none;
-        d=google.com; s=arc-20240605;
-        b=T2G7YqwUQcOCRaa2kD5bryW7UdxmPR8vYTfM/IUjaKynqZfHlgqHGbnTDxFj9B1hsD
-         5edN7bkmB0q9Eo3/gaOqj+cPE3PNNb/+jgzTlFRdokE+P2c9usaFlXblgOFwSASGAN7H
-         voxUtXnaaQa3g8tFkd4oOhk6f3r8U6h7HEw/Y6eNMBmp/E6t1McBLpuG9uqu73m4DwVi
-         1MMowaw9j5ESe1vVvbn+VKGEMr711/uSZGboC8QJTaN/lFx49vkeYyHwPJ04QuPFnYrB
-         T0LVnZAkhWeSB2CnuvMU5BIrqakexcfZiiWk0vlYZU+VNqF/k5RjPKVGw9zuJU5BCzLI
-         r6zw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=E0Mf6nu/Yyi2mO8vmqCFQQuDl4ubjEv9FtbDx7gQTGM=;
-        fh=O7vg175EBzSnGieH/ztdl2c7Ab0A8LxKQlcZQFm6Mf0=;
-        b=jwGB55SBsqCiBfC9KNkUqYLKI3vcnIeI7LBvAe9Ss/tSRfkuazTqku24U3gSvqImbJ
-         +2X6+wlD1SKclNOG3ROYAYGbWacZi+G7YbaxrYCuTwi1wizXx4H7XjRkvGva8pF6oWwE
-         Ts0l1oDsyjnG+m4JE8Xi9j9gptkeuVzGwsgOKT26wkVpwfSdkTLk2mwhQWPr+BQm4t74
-         T76sbewH820V7sAPK0SElH0Cp7vy0hSbTrAvMdz4k+CZ6LJChm3w5cJeiWN6iSk0OLp5
-         tCU4HJHXXeFGhb9FU7I4hNfilXmK1KchwQgGS9enI4GmRZbY6toaW3zqsTaMQarXqObk
-         BEeg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DD2A413241
+	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 12:19:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.180
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1777378790; cv=none; b=NqRmVHqYa10DpchIR88ItZKRUkF2QmDt5vAhW/0zYatNGra7K3SDKwA8q9gX5RJGvGVDY10OpGVA0UCZ8h7K8k7qOZ4NjEQI9m1iQzcgbCVrRT9Fm25rWvjHLOFGonQFlSqFOHOhIQivj75/VQ0M92a6ujwlAGzi6U6yDraLj9E=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1777378790; c=relaxed/simple;
+	bh=qMPsGKiP1/3BxOxfOQ2894idq7MNjZh2VUDwYbD89Ac=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ckZwNHeXvJXrJcw7IjEQYghd14QriQ6fp7JEoRV1U8DVEcyquxmT+un6WYvOBTwRqfVoYVnbybz7BjtaBnzoorXU5+mkfNhWYZ/lQ+d0dyDdNMmGYmFdoKmBoeSsn9enxg83o+VYEmH7ld095NCqmiCtfu8/1ZKmE89Z0Dg1uLs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=inventec.com; spf=fail smtp.mailfrom=inventec.com; dkim=pass (2048-bit key) header.d=inventec.com header.i=@inventec.com header.b=P/V9GYMa; arc=none smtp.client-ip=209.85.210.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=inventec.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=inventec.com
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-82f8b60e54dso7628194b3a.2
+        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 05:19:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777377082; x=1777981882; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=E0Mf6nu/Yyi2mO8vmqCFQQuDl4ubjEv9FtbDx7gQTGM=;
-        b=MBT1du2VPcosM1uWhj1auYgkyZBDXtcU0q3uRn0UaVRgtYuscxwKeLCoMRLexjMkN6
-         /3XXhiEfld2SOlTQg3zBI7r/78CVn9mYxSQblYhTP38x3LkmCgcjI99T0CnRp2uoo9Gj
-         8oYh09qg3kHmE4MEM5kBsFKWhZFto10Tee1J0SUuc9pC+uklcWm5zIbz6ZWEe6Pq63je
-         f4DCTr/GjO9KLv1ApbTLcMYEsE9D9qdpSgPMMoxVlx5QcWyR7segCXODQ3968dscbVuP
-         GAXVOLLCPhGDhKDVvR/T2eyOkomBRM4uwFqOia2Osal+MdqiNi8jo1S8E81MqAhEhfwL
-         2h0A==
+        d=inventec.com; s=google; t=1777378778; x=1777983578; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=frMIZCIhOVYR65BCOqomQnYfaoTkq4t4Fqtd6/zq0j0=;
+        b=P/V9GYMavQX18tTET6d6FkIXQLcYBlxDOLTIymp27PLBJ/Jc06zyq9Bdm2n7Xo4nCq
+         /ghqlFE6J2RlEcPlrEAiZm81eXoliAQM0Q88sJ7Oj2G2lPmiYuroue5eeLcNHNOnctxW
+         axjJwcspgpfi1XMd15qEuOSAroUF1n2Nv1lxC5NowFik423guUt6u6vsAKWevd+AdrSe
+         CXF2PlpyeUVr+CBaSHGKjcY3ODf6C2AZv7wrU3knd//Uvwcxu9F2qidWc4gvzk8vVYZp
+         8kj6ak9GxWXQhAiaNLdlcuIE8VN3RveCt07qVcZonkyU7TKm5JYDTjlJQH5Q5gZpcb2H
+         dkeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777377082; x=1777981882;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=E0Mf6nu/Yyi2mO8vmqCFQQuDl4ubjEv9FtbDx7gQTGM=;
-        b=kUysNG7bCB6usSy42Y6+xjfC7ydbBiZjauOATd1QZifV9rRFYy/K5PCfhjRHKq+lU1
-         fuBQDWvRFz5vdPYt5Kpu8FOm96EFIAtgqPxqZbG75WBBh2zrMPI17PLi/urUcz+JaRsR
-         JChrjW1Bzc01jBVFRk8aI//dfFAINYtvixEOCgeIS13aEIU6EzRxgnqUl1C35pZIhN8i
-         DNus0cx1jhwqpZ1VpTbu3Qd2sP956dXA2nWwlkno4l0kc/+iOdbUZKC3VgvLHWROoWsg
-         A0IRmQsd5xjxQEVD+wuxVYSvBktC5NgU67Rx1YUqFj7SbU37VaQRAs0cLCvMshHSVpUm
-         ym4Q==
-X-Forwarded-Encrypted: i=1; AFNElJ9rNH0lP+uC8DkdFQ7cyMXT4pBRnRytwZ656YI9blLxIhXPyt38x958mrD/8m6k4Sy9DQ23LfX1VC4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywp0jzjen0/Hke0TBoPriWomwMXFEPZaeXOXUgdeMbDrOiwA3up
-	cCvLKjVxIb/LqfBqEy6BPWv9qTI1kbTHyJyjqdUA5Ujg9xkyINNT7AQg+h4AiwsgK1o+VdOWyGp
-	41fn3oNwDghcjL8tlMeiHgaKL1Qe8CkQ6iAhZ
-X-Gm-Gg: AeBDies9i5/W4cd1fyGJePrCjTMqEQ83Ulo1nAYhgs5xptlrW+Fz7+HSBrE6y0nXbBJ
-	ZZTQkrqmenIU7VVqBkc58gYYaBDDxwwDgKK8GwqPNfSodIM9las/rk6N/Y5KKPcNaa3/YLh0Cav
-	k3p8Nz3kC/JQnQnl6/aPtagB1QkOveqvChUS5e1wt8sh7gh9DkQY61HY7xLXcxXMTGGXFPjl8nX
-	4abptkeoyq72FEDzaGVzZtSUGAlflulTSrCQTQ3SbUPxlRWEoO703J+GWTyMaocVND1c0OC+IvF
-	SoLm68ChCkrSEtDsYxPyxmZNkQXU69op1T5OaBevCfPyJPQxRFHPk4ygRB8o8CvgW2u4ShCsJs8
-	GaCFMC8kRtOrdapBfiop4B2m1k5o0IIGu+A==
-X-Received: by 2002:a05:7301:3d10:b0:2d1:9b35:4f03 with SMTP id
- 5a478bee46e88-2ed09bdc0ccmr579752eec.5.1777377082557; Tue, 28 Apr 2026
- 04:51:22 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1777378778; x=1777983578;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=frMIZCIhOVYR65BCOqomQnYfaoTkq4t4Fqtd6/zq0j0=;
+        b=H+GV2oU5hXy99FqP0GQq9lsrU7CnXJkQwCoW9BuMg0omt2mSJU84MMxSCNCyvpkBOD
+         0u3EcmNyX3V4JArcqxbnMCOBsBY1GGzq0OE8GYiebs5Ymx2JrlzU1rakCOtE/8Bx+DoY
+         02vGFksceeMc0FGcR4cZ2JqN2SIy4I0IyHRzG94GZHOzs3QVlhvcRSC+VVcmECGJv9gZ
+         JeWtFgLkzD6dICqnAVKIVwRhrtQiNlIFzFYGzcnDRRWc5vINhG1cp8xgybkGRB0A/Hta
+         qeRMXJYbCRbQCPLCrNTkeWEd3YC+kv9eD7qARcOjYdbnd4Fv9J52CgnUPkDIOud0G1hz
+         mPNw==
+X-Forwarded-Encrypted: i=1; AFNElJ/QpuX7RaXrReqj/T6Wh3OrwAqZzxrO+Wpr72jlIYSr7MvRd9b+AgHVrIPqJ4XIcy4lzwLPKYYjQDg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyNOUuO6NR2wYCjULs0tYHgPT9ha5tjkGdsxkVO7dmEhjciOR1/
+	9biR+9Wy3yNsD77tC1elX/exkF/Ep2SaWmX4rkqCWlr0qse9JDozBdzoY6AEKThzysI=
+X-Gm-Gg: AeBDietZ9TltHnQFypmaUaCf8u5gL3P0o0rNFgr0AB4Kj30i0Vn8c/Xu+28AAkL6oSq
+	wWsTNM8AWN4frgDpiFPLnA+rZMqd50/yriEmHTWVz3LAriex+igbrkyom40G0IopU3djFRwbgNh
+	LvsfehxU6wNS1sMcWPg7FQOMIVA+PgUlXVEz2KGaJ6MQc3ytgqkAvwEZWCKos1i8xYGDwYw2dDp
+	3b5g5qXruvRtM6A2yCp04qZvl1n4fySmEChWU0SSO86yBLpz22VxYX8otrSvo/8Nt61xOxIJSmv
+	o2vKsruHeWWY1+2bmCUKbrM58mUU11T/OhM64eAJnt/JfrQdRcm/l3Xz9jO1zcvCFuOBFR7HLia
+	ivBzk9VZIX0iH8jMlLLz/TACK3CUUzHnaj79AaGCXFSP2uR7cs6x6g1maf+ugBZALGGspYmf+Eq
+	OARD+fDhOwm6fF71+GDx226lP7jM0uND4cUn+LbRtO
+X-Received: by 2002:a05:6a00:3686:b0:82c:9e00:f958 with SMTP id d2e1a72fcca58-834dd913b2emr2965836b3a.0.1777378777797;
+        Tue, 28 Apr 2026 05:19:37 -0700 (PDT)
+Received: from [127.0.1.1] ([123.51.235.216])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-834daf5705fsm3254587b3a.42.2026.04.28.05.19.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Apr 2026 05:19:37 -0700 (PDT)
+From: Brian Chiang <chiang.brian@inventec.com>
+Subject: [PATCH v2 0/2] Add support for LX1308
+Date: Tue, 28 Apr 2026 12:19:27 +0000
+Message-Id: <20260428-add-support-lx1308-v2-0-90f115954143@inventec.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260427174429.779474-1-julianbraha@gmail.com>
- <20260427174429.779474-3-julianbraha@gmail.com> <CANiq72=nCw+zWYhvPMJiG8oOT3zpaD8eGVUgaK5rnSzAiGGjPw@mail.gmail.com>
- <607be3b2-11bc-4074-a396-39da73089b74@app.fastmail.com>
-In-Reply-To: <607be3b2-11bc-4074-a396-39da73089b74@app.fastmail.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 28 Apr 2026 13:51:09 +0200
-X-Gm-Features: AVHnY4I93jEEHcqLYwjkfMluqxrTct8LvxfIDurB2CADW-KHDEb5dYbjSTfetIM
-Message-ID: <CANiq72mEgpe-UGMQ_YWb8SKsY96Oc0b4sQ_MKvhMDVkNC9WvQA@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/2] Documentation: dev-tools: add kconfirm
-To: Arnd Bergmann <arnd@arndb.de>
-Cc: Julian Braha <julianbraha@gmail.com>, Andrew Morton <akpm@linux-foundation.org>, ljs@kernel.org, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Masahiro Yamada <masahiroy@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org, 
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kbuild@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 91B12484A09
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAM+l8GkC/22NQQ6CMBBFr0Jm7Zh2gAZceQ/DosAgTbRtWmwwh
+ LtbiUuX7yX//Q0iB8MRLsUGgZOJxtkMdCpgmLW9M5oxM5AgJSpZox5HjC/vXVjwscpSNChVrSs
+ SSveqhTz0gSezHtFbl3k2cXHhfXwk+bW/HNG/XJIosO2bkmiqaq35amxiu/BwHtwTun3fP8AxY
+ ci3AAAA
+To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Brian Chiang <chiang.brian@inventec.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777378774; l=1741;
+ i=chiang.brian@inventec.com; s=20260316; h=from:subject:message-id;
+ bh=qMPsGKiP1/3BxOxfOQ2894idq7MNjZh2VUDwYbD89Ac=;
+ b=sHVziZqGCDAKtI4ZWL5Twa/Bb+yAp9az43in8xGZnkYxKfnqkYI2ShDthPW9Wfy+luRnADqL3
+ Lr6+Gq3JMM5DQg6uGPop5/MenIXWUlZDMdxGX8MCQUEa6CD7jBZVAfa
+X-Developer-Key: i=chiang.brian@inventec.com; a=ed25519;
+ pk=q+NqJYuJbGpA9KS9941D7f+8PVVW+k7DvaGgFykBiUc=
+X-Rspamd-Queue-Id: 9AA59485B6C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[inventec.com,reject];
+	R_DKIM_ALLOW(-0.20)[inventec.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84953-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[inventec.com:+];
+	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,linux-foundation.org,kernel.org,linuxfoundation.org,lwn.net,vger.kernel.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	TAGGED_FROM(0.00)[bounces-84960-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
+	FROM_NEQ_ENVFROM(0.00)[chiang.brian@inventec.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 
-On Mon, Apr 27, 2026 at 9:34=E2=80=AFPM Arnd Bergmann <arnd@arndb.de> wrote=
-:
->
-> It would also be helpful to reduce the number of hard dependencies
-> and ideally only rely on packages that are already shipping in common
-> distros.
->
-> From the dependency list, it appears that the majority of dependencies
-> here are only indirectly pulled in by 'reqwest'. I guess is only
-> required for dead-link checking, so maybe that part could be
-> made optional?
+The LX1308 is a high-efficiency, non-isolated power module. The module
+operates from a 40V to 60V DC primary bus and a 12V regulated output
+voltage. It can deliver up to 860W continuous and 1300W in transient.
+The built-in digital controller can store and restore module
+configurations. The fault status, input voltage, output voltage, output
+current, and temperature are monitored via the PMBus interface.
 
-+1, I had the same thoughts -- even if the fetching is done outside
-`make`, it would be still be nice to reduce the dependencies. Even if
-it just means calling into `curl` or similar.
+Add support for this driver.
 
-Then I thought if the same would apply to `clap` etc., but then again,
-we may want to write more tools like this in Rust in the future (we
-already felt the pain in the past the pain of not having a e.g. JSON
-parser), and whether we could have a more general solution for this,
-including perhaps even a kernel.org registry (either as primary or
-not) etc.
+Signed-off-by: Brian Chiang <chiang.brian@inventec.com>
+---
+Changes in v2:
+- Remove the unused compatibles of mechanical variants
+- Drop the existing pmbus binding in v1, and move lx1308 to trivial binding
+- Reorganize the id tables to be placed to each other
+- Reorder lx1308 with alphabetical ordering in Kconfig and Makefile
+- Fix undefined behavior left-shifting of a negative integer
+- Link to v1: https://lore.kernel.org/r/20260422-add-support-lx1308-v1-0-9b8322f45aae@inventec.com
 
-Cheers,
-Miguel
+---
+Brian Chiang (2):
+      dt-bindings: trivial: Add LX1308 support
+      hwmon: (pmbus/lx1308) Add support for LX1308
+
+ .../devicetree/bindings/trivial-devices.yaml       |   2 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ Documentation/hwmon/index.rst                      |   1 +
+ Documentation/hwmon/lx1308.rst                     |  90 +++++++++
+ drivers/hwmon/pmbus/Kconfig                        |  10 +
+ drivers/hwmon/pmbus/Makefile                       |   1 +
+ drivers/hwmon/pmbus/lx1308.c                       | 204 +++++++++++++++++++++
+ 7 files changed, 310 insertions(+)
+---
+base-commit: 591cd656a1bf5ea94a222af5ef2ee76df029c1d2
+change-id: 20260415-add-support-lx1308-165a4206ab69
+
+Best regards,
+-- 
+Brian Chiang <chiang.brian@inventec.com>
+
 
