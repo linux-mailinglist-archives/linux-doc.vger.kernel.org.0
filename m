@@ -1,75 +1,71 @@
-Return-Path: <linux-doc+bounces-84909-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-84910-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iINvGx9t8GmgTQEAu9opvQ
-	(envelope-from <linux-doc+bounces-84909-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 10:17:35 +0200
+	id iODZJsJu8GmgTQEAu9opvQ
+	(envelope-from <linux-doc+bounces-84910-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 10:24:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D04647FD23
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 10:17:34 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02C9547FF74
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 10:24:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 9B8F8301F41C
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 08:16:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 217AB300E3A0
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 08:18:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C39983D3CF0;
-	Tue, 28 Apr 2026 08:16:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B1EE3CD8BD;
+	Tue, 28 Apr 2026 08:18:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qIBWvKmq"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WWhH7r6Z"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A06543CF662
-	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 08:16:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 786B83C5539
+	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 08:18:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777364170; cv=none; b=Aqy0K1AVr+OY5QBSEpmRojSXzXpCCexMel90FuB2gKB6a4AhM9J7PXSkAkfQSIMOFEP0zIv6VCfGcA1IETydPzvyxgy+zSfqd2qzxP6I8OLtgRqzjnyo6G2FONDhDuuiRpE5vNfTxDXSqQdivJ5d454m6B65F8ye/CTUny8IAhE=
+	t=1777364319; cv=none; b=I9u8wR4HtM+LOqIxrmwyipJle+N9yhh1oW7AHmruSd/1H5OTnHPvAvuYZUjVIJvyqHbYx1rpZQbkDCpMBrf5XuYnaSqu8zCxCT6drRmRP2pOklkpwf2h6oLLUIhNFw/50ONTx4U/BiTO014Uz6y1mPLTHYVUOfS/3Jpa34IT5Yk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777364170; c=relaxed/simple;
-	bh=bq8HV6bZ3WcAcFCsC2OjX+q9RAprj5qn+EQSHi6y6+k=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=iC0odRotk3AjN06gewVVmKbsx8VO/nIwjzZW73q00UI1CjlacId5cxS7JHO844pmyRvhMRqybZL1EoKaEOuwpnBWj/SDairbU9z6dPF3/amdRzrDvkg3HSai0DEoC6HAliwl6F3z2gPXH23xOhmrzlh2AJWkG+fVJvBuOJSsNAA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qIBWvKmq; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49C0AC2BCB5
-	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 08:16:10 +0000 (UTC)
+	s=arc-20240116; t=1777364319; c=relaxed/simple;
+	bh=rhTVfU0iqqWoXDOvkBlf/jSklc9+eqr7sxlcBfQT9M8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=qYXLrLSZ9yY60rgnbiLI9xfwAjSQ1OoGyLeYd7j7egVd0s7ESOT9j0zWR6kUAR+Ml44GpayM9kiEx9BbGyWsHfXqodxRFtDClXWbod/Hsw302EryRR3/o5q/dewGnKu+qeiXw5FMZPOrRiOF3iNeWymArARSmZGkrPdWLk6G0MM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WWhH7r6Z; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5CAB6C4AF0B
+	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 08:18:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777364170;
-	bh=bq8HV6bZ3WcAcFCsC2OjX+q9RAprj5qn+EQSHi6y6+k=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc:From;
-	b=qIBWvKmquz27t+Go2V5gNIPUUhN+84xp0X8Niq5t1XbT4ItMvfvOGJAJ66U6cuOhx
-	 48nM5MUbOP/xZ4/VARPnd4M14YZj/fj5PdoKwkfwI+CQnB91OAh4Xgs0NU/zYAQK/O
-	 IHsPsU9BXs79FxUrL2xP/vqQTB2+ErlGF04q7Fnk8aHpvSCmy9F4cwEDZQX+X5QNGz
-	 hc1TGeVUYVl/L04D9x9LRg8wiiGR3A2zDfn/h6vnjFtYn89vPJK6WiiJaQRwuMV/j7
-	 bE2yLJlgXcWthuZ3WMubdJagLxyUcR9JeUGeneDEEyTROyN4DF4JaGAvJIQk84ws1R
-	 lKqg0/tcwHkdQ==
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5a402dea4a5so11185855e87.2
-        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 01:16:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AFNElJ8AnH75GaWlyWvAy6TiBT5pn1FUSLgEMyvSGnetoqqqHFUYmrWPjf43AlIgrICYHkxuiGjUQ2X7CPk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwREiBTDWYCee/kUiPoAgu4hXzdV3mb9VCCni4oY7bySToP89VI
-	Q4SbnuSNK9lHu4r2IzeAeXT4LZgZUOojvRdF20AU6GeIio11R+9eD0y1Kr1WbElo3uBiOq0921E
-	gBhiZjSve8yFdyiYsFsAqXpjrjPsNY3r6FyJVbaha+g==
-X-Received: by 2002:a05:6512:33c9:b0:5a4:19de:eb70 with SMTP id
- 2adb3069b0e04-5a74661dc65mr839483e87.28.1777364168951; Tue, 28 Apr 2026
- 01:16:08 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 28 Apr 2026 01:16:07 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 28 Apr 2026 01:16:07 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260427135841.96266-1-tzungbi@kernel.org>
+	s=k20201202; t=1777364319;
+	bh=rhTVfU0iqqWoXDOvkBlf/jSklc9+eqr7sxlcBfQT9M8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=WWhH7r6ZRUSWECnN00A9lnuE2V4KHXjMyZ4g0wK97LPDRGmHVZQNET24ueovX2+2u
+	 1DaBcX6XdRRCj9+iwml0tczkLdQm3D6yNpoVJp5zanuhEabyfUF4sSag6oPjXhJCns
+	 dch36Ra5BOlX6Y1FecwewOne8gChNUUlH/EK9XYOHXSvz2JD1LMF9X6R85FBOF8VCS
+	 M9oZk0+MPz5DWqdNay6NJNp83WTtTTaZXYmyhI/lkyYP/Nbvo1XF6QyrUQ3ptxOiCx
+	 DJqRtjFVMWCyMLcztcMEQhrA6cfpCLoxsDcquWVMN8QvSD6DChdSvP1b1rIyZlAh3n
+	 rmI/VTSyYQSLg==
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-38e12c67a6fso110696131fa.1
+        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 01:18:39 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AFNElJ9D4B4L7sRPSgOEuXji9UDOY7YkZI5YvPi4Q0FumiSaTEYQVpwkZlxSMNTy26/N82c9xwUmRLPlajk=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywlxl38U3gG6RWmZvZSW8mLHlASJ1OjMW+rX8WoMOVXtx3jvuF6
+	jR2BklmzMm2UQ12S6PeWbch/AV76Ct8aYprH6LAEGlj16LW0yYb0cJq83eGN+UuujD5C/iHkOp8
+	ZvX4mF9Nzg0tuzWDOXWyVp1BR7stDrzU6i8R57KQ+RQ==
+X-Received: by 2002:a05:6512:124f:b0:5a3:ff48:f7db with SMTP id
+ 2adb3069b0e04-5a746615ca1mr877554e87.34.1777364318061; Tue, 28 Apr 2026
+ 01:18:38 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260427135841.96266-1-tzungbi@kernel.org>
-Date: Tue, 28 Apr 2026 01:16:07 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MdnrKaEgFZod7DZC2FkigeQW6DogfODwmsZO=LS0Zie+w@mail.gmail.com>
-X-Gm-Features: AVHnY4LPpc6CD92dyZC7ll_n7sufI8xvpfzAcz25gEttk1XdSLAYMTRwT5j_PwM
-Message-ID: <CAMRc=MdnrKaEgFZod7DZC2FkigeQW6DogfODwmsZO=LS0Zie+w@mail.gmail.com>
+References: <20260427135841.96266-1-tzungbi@kernel.org> <CAMRc=MdnrKaEgFZod7DZC2FkigeQW6DogfODwmsZO=LS0Zie+w@mail.gmail.com>
+In-Reply-To: <CAMRc=MdnrKaEgFZod7DZC2FkigeQW6DogfODwmsZO=LS0Zie+w@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@kernel.org>
+Date: Tue, 28 Apr 2026 10:18:25 +0200
+X-Gmail-Original-Message-ID: <CAMRc=McXwgujqaZw-S-yzU329fRPmjPDZHvc9aMd9=MeU8mvCw@mail.gmail.com>
+X-Gm-Features: AVHnY4JD7aUdC5j3W8xDfoS0kGuriHPxhl3Qt0U8ZbQApFNMnsdkWkk7dojljys
+Message-ID: <CAMRc=McXwgujqaZw-S-yzU329fRPmjPDZHvc9aMd9=MeU8mvCw@mail.gmail.com>
 Subject: Re: [PATCH v9 0/9] drivers/base: Introduce revocable
 To: Tzung-Bi Shih <tzungbi@kernel.org>
 Cc: Benson Leung <bleung@chromium.org>, linux-kernel@vger.kernel.org, 
@@ -80,10 +76,10 @@ Cc: Benson Leung <bleung@chromium.org>, linux-kernel@vger.kernel.org,
 	Wolfram Sang <wsa+renesas@sang-engineering.com>, Jason Gunthorpe <jgg@nvidia.com>, 
 	Johan Hovold <johan@kernel.org>, "Paul E . McKenney" <paulmck@kernel.org>, 
 	Dan Williams <dan.j.williams@intel.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Linus Walleij <linusw@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Rspamd-Queue-Id: 7D04647FD23
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: 02C9547FF74
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -91,64 +87,43 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-84909-lists,linux-doc=lfdr.de];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,lpc.events:url];
+	TAGGED_FROM(0.00)[bounces-84910-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[brgl@kernel.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,renesas];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.gmail.com:mid]
 
-On Mon, 27 Apr 2026 15:58:32 +0200, Tzung-Bi Shih <tzungbi@kernel.org> said:
-> This series introduces the "revocable" mechanism, a synchronization
-> primitive designed to prevent Use-After-Free errors.
+On Tue, Apr 28, 2026 at 10:16=E2=80=AFAM Bartosz Golaszewski <brgl@kernel.o=
+rg> wrote:
 >
-> - Patch 1 introduces the revocable which is an implementation of ideas
->   from the talk [1].
+> > ---
+> > v9:
+> > - Rebase onto v7.1-rc1.
+> > - Remove the selftests patch as it makes less sense to test revocable
+> >   APIs via kselftests.
 >
-> - Patch 2 adds KUnit test cases.
+> May I suggest kunit for that purpose?
 >
-> - Patches 3 to 7 transitions the UAF prevention logic within the GPIO
->   core (gpiolib) to use the "revocable" mechanism.
->
->   The existing code aims to prevent UAF issues when the underlying GPIO
->   chip is removed.  They replace that custom logic with the generic
->   "revocable" API, which is designed to handle such lifecycle
->   dependencies.  There should be no changes in behavior.
->
-> - Patches 8 to 9 uses "revocable" mechanism to fix an UAF in
->   cros_ec_chardev driver.  Alternatively, [2] is a series for fixing the
->   same issue without using "revocable".
->
-> Since v9, there are two ways to manage the resource provider handle.
-> - Embedded allocation: patches 3 to 7 might be the potential user.
-> - Dynamic allocation: patches 8 to 9 might be the potential user.
->
-> [1] https://lpc.events/event/17/contributions/1627/
-> [2] https://lore.kernel.org/all/20260427134659.95181-1-tzungbi@kernel.org
->
-> ---
-> v9:
-> - Rebase onto v7.1-rc1.
-> - Remove the selftests patch as it makes less sense to test revocable
->   APIs via kselftests.
+> Bart
 
-May I suggest kunit for that purpose?
+Nevermind this, you did exactly that.
 
 Bart
 
