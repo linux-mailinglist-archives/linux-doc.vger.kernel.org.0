@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-85089-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85077-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uCTJBElE8WmxfQEAu9opvQ
-	(envelope-from <linux-doc+bounces-85089-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:35:37 +0200
+	id GCW5ImZD8WmxfQEAu9opvQ
+	(envelope-from <linux-doc+bounces-85077-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:31:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AE9048D3FF
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:35:36 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 44FC648D286
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 01:31:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 41C073113CF3
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 23:29:33 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 4EF80306C51D
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 23:27:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06F1444CF5F;
-	Tue, 28 Apr 2026 23:25:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D81A43EFD35;
+	Tue, 28 Apr 2026 23:25:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L4evB6Kh"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HcXbivY7"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E98313D34B1;
-	Tue, 28 Apr 2026 23:25:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0725B3D412D;
+	Tue, 28 Apr 2026 23:25:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777418721; cv=none; b=JtNf9sP3c1aCQDMyAcbL+cPNx5uei+C99uj7nZZdtWgQH+1jj5l8Z29/jgXiVgN9l1VLAT1aF5R97R4SedggX1N1SIgfc2SpoP/vUr8/6hv0dFgrZ4xlm/AmGgTxeijFCJ0d3SPDqCIECua/POawWCsAsetkFFR/LR0BszaciBs=
+	t=1777418721; cv=none; b=cA1r1v44y/GBmrRc63INfDwz1C+t8q3yL4DeyqRl1VcW3lolcAAZKQKjk7HHtFhqWYv02WM0oL1RbnUbLKi1lriw2Qjw1wcRxSGfHRsNSPszYTw/SfGE8K/Udx3HK8YN+Yqt9rDFWPF2B9DcvXJovfpW0KQ7JMjGRHErta/vBr0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777418721; c=relaxed/simple;
-	bh=fi5qoarFijE2lWp5XxDoESzLwDXl1eAEmD22R/fPyIs=;
+	bh=Vgze5D+bN0AcyWszSG1YlA0S2f1gEtod7TQDybNpW/k=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=aneW6fn3P5w8HOpjRjC7S6qtEP/dVNND2vMzgGU63JjPCY7I19iVm3LUzThagOByew3J/PRkx6h+MdghoFHO8pbxFLZNtljAP7JRyqyjjCAQlOzZwYZPrgefEEl9qdVqORyRZpI8ysu1E5nzxZNf79uWDwMy+FXjhiTgOL3dz5I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L4evB6Kh; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CD0C0C2BCB8;
+	 In-Reply-To:To:Cc; b=cP84kN6m/lVkbx8j3ZX4vS64PkAYyEyqJ/B0Q0qRnsfK14hiLoBpa6XZxzPQlFtQfg2S4uIkvdi4lsAAX+Z35vEBRivHpLW5BGq/INuSni6d2Bo/4G1SG5y6m8j3q83c06g5yt82BorCWfXJA6YOt4Uqxz35Ikm23biJZqu95ps=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HcXbivY7; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DD9E0C2BCF4;
 	Tue, 28 Apr 2026 23:25:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777418720;
-	bh=fi5qoarFijE2lWp5XxDoESzLwDXl1eAEmD22R/fPyIs=;
+	bh=Vgze5D+bN0AcyWszSG1YlA0S2f1gEtod7TQDybNpW/k=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=L4evB6Khg1O5ByRuDGL14styXW8AJIiKNKNXoWZY9e310k/C1vn/SFuMfURWGVPFa
-	 gmcf5CnqjWieP74atQhouofZc1jF9je/jvHIb2aj1JJzmii3hehhvgLLnm5sj0brlu
-	 dbs1VTzi6/6YkWGIV7yKlsstePw0fGeyRcvtCTvXNaPoq9KPmTdISzS7P1goc8gLUS
-	 G8OhlMs7Y38okfdUbOYcZt5aQ31hutAwW3ekCzM/0Z+Xak0kDlDBY1XWhlNWJQqq7t
-	 gMFsCtoXPdhd8zTHv/g8h6xFzjf1B4Oex42GzYC+1o16QTkAzhBve/XweR6s1j956U
-	 AuOFKb5gEIM6A==
+	b=HcXbivY7zdv/RmF1UVmwhwUKKrjRdHI4Pitvra7t/6Sr8tS0A7tyunNzyMPwnwdRV
+	 NZJmyGLoA1nSGDuCm6QPXSuHgfTrMv36avF+EcQe/UPPrfralU+t57Ny6qFLfUJXJV
+	 7gq0aZ8pSdlm2k2tvfK34LKR5LzCkgxKmKGzU7LMxOTHJKZiHosi/JRdd8DI+fPpjK
+	 q2zE2/eTZjQMkpg7v+55vBlah5Xqtua7lNusx2XZJ5trpGKEu1yc2bMMha1J0F6wm5
+	 KC3OO4ja5fK8B+J7GV8W8GTjIoN5aRrcgcGLsNdBe8V03ZMpgInh1RPc4GckwbKFnI
+	 lhUfIiTaYjfyw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1014FF8875;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4581FF8877;
 	Tue, 28 Apr 2026 23:25:20 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Tue, 28 Apr 2026 16:25:38 -0700
-Subject: [PATCH RFC v5 43/53] KVM: selftests: Support checking that data
- not equal expected
+Date: Tue, 28 Apr 2026 16:25:39 -0700
+Subject: [PATCH RFC v5 44/53] KVM: selftests: Test that not specifying a
+ conversion flag scrambles memory contents
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260428-gmem-inplace-conversion-v5-43-d8608ccfca22@google.com>
+Message-Id: <20260428-gmem-inplace-conversion-v5-44-d8608ccfca22@google.com>
 References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
 In-Reply-To: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
 To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
@@ -92,30 +92,30 @@ Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
  linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777418714; l=2851;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1777418714; l=2091;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=7gz8kf/n4ixOaF8MVfsAM6UcG2xye98XFNb81uX9/Q0=;
- b=K0nhoHtw+bHDcFt0NTXB9H8IY5KufQrx9yXWXRDB44IJvZWG6vgqoP88UFkyWNZSvMMA4sjKx
- IeEHazMTIeLBYKybYfkuwhPvhexJMT5hxbaymArE73yb7zsZfD59Xn1
+ bh=Avy1yjuj5TLXjW+gFYQvsB+PRbonfW+tVbhN8u3NZik=;
+ b=fb9rZViAfwmrwJD9SGoXVoob6TT9WaSRJ4Wrr/TWhXnHc57g7FFxpcP7viuqXx3r+qwjvVnmr
+ KXKhGbWj4CZCYiavrYR0ULbUfm3YqEoUTcfGzy/jE7G4hkJglBe7CP0
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
  auth_id=649
 X-Original-From: Ackerley Tng <ackerleytng@google.com>
 Reply-To: ackerleytng@google.com
-X-Rspamd-Queue-Id: 8AE9048D3FF
+X-Rspamd-Queue-Id: 44FC648D286
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85089-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-85077-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	FROM_HAS_DN(0.00)[];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
 	TO_DN_SOME(0.00)[];
@@ -133,82 +133,63 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
 	HAS_REPLYTO(0.00)[ackerleytng@google.com];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-Expand run_guest_do_rmw() to support checking that data at given pgoff is
-not equal to expected_val. This will be used in a later patch that tests
-that memory contents are scrambled.
+When using KVM_SET_MEMORY_ATTRIBUTES2, not specifying flags for the ioctl
+implies no guarantees on memory contents.
+
+For KVM_X86_SW_PROTECTED_VM, this mode is implemented by scrambling
+contents of converted memory ranges. Add a test to check that the
+unspecified conversion mode was handled in KVM by checking the expected
+behavior, that existing memory contents are scrambled.
 
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- .../selftests/kvm/x86/guest_memfd_conversions_test.c    | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
+ .../kvm/x86/guest_memfd_conversions_test.c         | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
 diff --git a/tools/testing/selftests/kvm/x86/guest_memfd_conversions_test.c b/tools/testing/selftests/kvm/x86/guest_memfd_conversions_test.c
-index 922261ebaff96..57adb6d84a053 100644
+index 57adb6d84a053..f4705dc700879 100644
 --- a/tools/testing/selftests/kvm/x86/guest_memfd_conversions_test.c
 +++ b/tools/testing/selftests/kvm/x86/guest_memfd_conversions_test.c
-@@ -137,6 +137,7 @@ static void __gmem_conversions_multipage_##test(test_data_t *t, int nr_pages,	\
- struct guest_check_data {
- 	void *mem;
- 	char expected_val;
-+	bool assert_not_equal;
- 	char write_val;
- };
- static struct guest_check_data guest_data;
-@@ -146,7 +147,13 @@ static void guest_do_rmw(void)
- 	for (;;) {
- 		char *mem = READ_ONCE(guest_data.mem);
- 
--		GUEST_ASSERT_EQ(READ_ONCE(*mem), READ_ONCE(guest_data.expected_val));
-+		if (READ_ONCE(guest_data.assert_not_equal)) {
-+			GUEST_ASSERT_NE(READ_ONCE(*mem),
-+					READ_ONCE(guest_data.expected_val));
-+		} else {
-+			GUEST_ASSERT_EQ(READ_ONCE(*mem),
-+					READ_ONCE(guest_data.expected_val));
-+		}
- 		WRITE_ONCE(*mem, READ_ONCE(guest_data.write_val));
- 
- 		GUEST_SYNC(0);
-@@ -154,13 +161,15 @@ static void guest_do_rmw(void)
+@@ -512,6 +512,34 @@ GMEM_CONVERSION_TEST_INIT_SHARED(convert_to_private_does_not_support_zero)
+ 	TEST_ASSERT_EQ(error_offset, start_offset);
  }
  
- static void run_guest_do_rmw(struct kvm_vcpu *vcpu, loff_t pgoff,
--			     char expected_val, char write_val)
-+			     char expected_val, char write_val,
-+			     bool assert_not_equal)
++GMEM_CONVERSION_TEST_INIT_SHARED(convert_mode_unspecified_scrambles)
++{
++	loff_t error_offset = 0;
++	int ret;
++
++	test_shared(t, 0, 0, 'A', 'B');
++	ret = __gmem_set_private(t->gmem_fd, 0, nr_pages * page_size,
++				 &error_offset, 0);
++	TEST_ASSERT_EQ(ret, 0);
++	TEST_ASSERT_EQ(error_offset, 0);
++
++	/*
++	 * Since the content mode 0 scrambles data in memory, there is
++	 * a small chance that this test will falsely fail when the
++	 * scrambled value matches the initial value.
++	 */
++	run_guest_do_rmw(t->vcpu, 0, 'B', 'C', true);
++
++	ret = __gmem_set_shared(t->gmem_fd, 0, nr_pages * page_size,
++				&error_offset, 0);
++	TEST_ASSERT_EQ(ret, 0);
++	TEST_ASSERT_EQ(error_offset, 0);
++
++	/* Same small chance of falsely failing test applies here. */
++	TEST_ASSERT(READ_ONCE(t->mem[0]) != 'C',
++		    "Conversion without specifying mode should scramble memory.");
++}
++
+ int main(int argc, char *argv[])
  {
- 	struct ucall uc;
- 	int r;
- 
- 	guest_data.mem = (void *)GUEST_MEMFD_SHARING_TEST_GVA + pgoff * page_size;
- 	guest_data.expected_val = expected_val;
-+	guest_data.assert_not_equal = assert_not_equal;
- 	guest_data.write_val = write_val;
- 	sync_global_to_guest(vcpu->vm, guest_data);
- 
-@@ -191,7 +200,7 @@ static void test_private(test_data_t *t, loff_t pgoff, char starting_val,
- 			 char write_val)
- {
- 	TEST_EXPECT_SIGBUS(WRITE_ONCE(t->mem[pgoff * page_size], write_val));
--	run_guest_do_rmw(t->vcpu, pgoff, starting_val, write_val);
-+	run_guest_do_rmw(t->vcpu, pgoff, starting_val, write_val, false);
- 	TEST_EXPECT_SIGBUS(READ_ONCE(t->mem[pgoff * page_size]));
- }
- 
-@@ -207,7 +216,7 @@ static void test_shared(test_data_t *t, loff_t pgoff, char starting_val,
- 			char host_write_val, char write_val)
- {
- 	host_do_rmw(t->mem, pgoff, starting_val, host_write_val);
--	run_guest_do_rmw(t->vcpu, pgoff, host_write_val, write_val);
-+	run_guest_do_rmw(t->vcpu, pgoff, host_write_val, write_val, false);
- 	TEST_ASSERT_EQ(READ_ONCE(t->mem[pgoff * page_size]), write_val);
- }
- 
+ 	TEST_REQUIRE(kvm_check_cap(KVM_CAP_VM_TYPES) & BIT(KVM_X86_SW_PROTECTED_VM));
 
 -- 
 2.54.0.545.g6539524ca2-goog
