@@ -1,252 +1,150 @@
-Return-Path: <linux-doc+bounces-85009-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85011-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WFN3N3Tz8GnUbQEAu9opvQ
-	(envelope-from <linux-doc+bounces-85009-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 19:50:44 +0200
+	id +ONtAV338GkpbgEAu9opvQ
+	(envelope-from <linux-doc+bounces-85011-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 20:07:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B86548A2F9
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 19:50:44 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 925D948A6D7
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 20:07:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4654E30138B9
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 17:50:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3CA3D3038F4F
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2026 18:02:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AECF544E05B;
-	Tue, 28 Apr 2026 17:50:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECA4738D007;
+	Tue, 28 Apr 2026 18:02:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="jaT4LlZ1"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SykJJzeY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DF1044D033
-	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 17:50:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFA1F332628
+	for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 18:02:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777398640; cv=none; b=TTuMkdzxod65Wf3/T3GBXWUllKSatyhKaoj1JMb3kXasJbMHSaufDKXo87/jaejWm+4kwc0jcZTdnCdC7YgyHEtd+EW0SjH4PhfGjqbdrmgC8smumn5MzyQMouLrotXYFId5yIMbaPTxVsvwxaOcKyg7fJelaSx94A+nyUAsTG4=
+	t=1777399356; cv=none; b=h04BiVFi/tBHskMceMvvN5AydzQ+trCBYi7HSUta7/buTAVubCi5CQD7h07mvR+D6NB6suppK81D++aVs6/jgupHrEiR9IzMqC19mYwH0kVUecVZH9Q1CkxKUqC6UFx6fMOmZsI6n5Q7xmbvblgsKa+kd13Px/FDe2fcGvu/0gE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777398640; c=relaxed/simple;
-	bh=FgWjBTA/iLlK6ZCp3kZQBVGLSatIbrMyuIlDbArJh+w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bo78eeYTAr/JOh3YKVKVwyiV6nFj0OhIk0yD4feh059igQ+TPc4nneIZrqVW4zPRKfaWrvfxabp6fkuLNHc9Tzw2aYimOvW6rDq8n/lPJqcldv0r4INDw/ILEzwRsxSc/YNAG2eWw0y/5MdaBPN7+PhymoJ5sjLlN3O20ofFfEo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=jaT4LlZ1; arc=none smtp.client-ip=209.85.219.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-qv1-f49.google.com with SMTP id 6a1803df08f44-8aca2726f61so139367566d6.0
-        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 10:50:39 -0700 (PDT)
+	s=arc-20240116; t=1777399356; c=relaxed/simple;
+	bh=6y0rfKOQzLLLSta//SFxdpevB8blPHw3L2h0kmEYxoQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=De61eh/umo5iPZxV4u3b/N7pB/Ao9IW/0Coo+niLtaL22Nx4qNEUB9MrxbSdXFpKRLoD2M34q9R6lDgDU0xxYoW0sCYBn6jDymFb3VuP7Ednt8gSY7lgkm4/Z882weJRqWYrJpRXj6v/cR3dBD86EjGi/gnUOb3FoaQjla5A5CU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SykJJzeY; arc=none smtp.client-ip=209.85.128.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-79ea87af213so1982877b3.0
+        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2026 11:02:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1777398638; x=1778003438; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=nLQfCSN8EWjiFZX7iYk3vg7MUEyfn/VCYlErQ2TNxjE=;
-        b=jaT4LlZ1oETFgnwlwi7ZBhZz5MkAIAJJHjj4PXzkdiL6JVOI9TA/gGkIh0CpKp2kgz
-         WLY/cQtvrC5UZ8svQOj14k+MdAyHQ+EOWHo3t+NDIbFHcWEx57EwFxBsWMwQn1B6g1sq
-         IREspNP5pHiiUCtOlQu0QrL2tjBHgjFKzfHt78V6Wis6QqX2ogVXbUMUGcqPKPeEFhix
-         CCYDVKdqigCKl1qhFY0wUctMCPdApbzMAYTtwtSVfdGZzdKkHOfvoCCZ1CibPK9marqf
-         EC5Vh2Dchb+UDLE9uVmVYETncWFHEpJByhzD47powJj9mGaiRZV7LHnBCzKlWgQRyhMj
-         nnSQ==
+        d=gmail.com; s=20251104; t=1777399355; x=1778004155; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=k8LokUuSrvQDqSZ+jA0Y3e1bbBcOLmwTdXcyw7SRU2Y=;
+        b=SykJJzeYo6nkMc570qnB6lRwaxK8CMpDhXb5QGhrDDCHspZ9GdNSmbouaErHgdkuzI
+         O0Kq4hBpmDsg1Ouxsr7uIznCQXvdQxKv87P4NOoPCfs5daqs6DzaxhKxaSJFUiLZY5Mv
+         bPdY02Q5g20V3iZ8tX8X8mIVcLE84TTEm5okO925ZML0sv/kQ7OB7qGVU6uVrCZbUzN2
+         MFXzmD77d0eS0NfIClRRKFemHXpGibw2eCFRm/fcXs2yxJxMU4Ry3ScB7nt9ScpNy3ea
+         w31wVWJfDwMuyR1V4PlrrmdoFQ3SPq82gWeXJLEiqweMMTxVKz/emF9SchMGckde7ZUg
+         Rb4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777398638; x=1778003438;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nLQfCSN8EWjiFZX7iYk3vg7MUEyfn/VCYlErQ2TNxjE=;
-        b=DwiGXb+BN8DzAOoIVNhIncAcXentEqYyrt8bPLS2A/6xCpQmDyRANtTc8WNvSqqcpG
-         FlFtzWD+md7Ru7AXvocbwxr3VsdVDPC5XHGExWfDbAcIC28ZcYsSYPpbE73zV9gibfz9
-         ALSyNjCVONUwSEMGKkM0IGKJGCaoXK1FFH3M3VRCNjivcBinyn//H0A1dyPfy5LKWQ9r
-         S2u9+LkHO5RlaYwMCdmzXKx0fDu06b+3Ok40p+HPoUs/rIQ3/jfFOCC8AZH+PmbWFbe4
-         op4WmpqsqiCzk0AAoEe+eUrTBpu6JRfOAs+XaabTNg+qWzqpGJFGJjGPdmclKtdxurnE
-         mp2g==
-X-Forwarded-Encrypted: i=1; AFNElJ8MORafhuusadixfyZfdjzFRcQjovNxcypncfir5BwTXH2FgqvZDmjKNlLF/8/srGo+ykTZXsYxxJQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxCY2Ts2LivVz5Yf3qBSbzTejQV/zoROrx69qQ/tCthvJzDStxe
-	6JYksfyTOjHYQDCUTUAluk8gqX1fMv79Awx1IzTqMQ7yt5ZyzQE0qXm+mRDql3QpNM8=
-X-Gm-Gg: AeBDievdQp5pgzBXjbuOdwd6gHFky4fbSRVWvnU6LgSqdzi7A0AHmsplfb44OeijfCd
-	5d3ESNLv5uJWV5SSM5xjpX/EdzkOU5oHH50e71p6TAAepMGl2B9mk54TUFPAkgAm3T9hYjKQjWB
-	pqHXp+BIEuyrRtPbBy/+dfqRMZn/0KCMAp6jLy/CBWAnD014lqMwAFpybk6pJt8TvZ+UridfL5t
-	VyTU+btn0o9ONIHjGwxjypwGcPOgJ87/njdij8IWsc0O5RAmeD7G/MPA7AlT+RQSReeYF8JvZDc
-	AzfZIps198df533FVa9gREH2BkkICvaZbniodUgTTkKD8FF5u3wPDOJJQtWd7oMzGC+1J7kTYVQ
-	8fZU7bQbCskD6ZD0mRLnE7C5JgRAA9/4NTMFRGJujaQi2SFVGBX7Qc0o8O1nHfKZJk5bEvFowpI
-	/lveh4xQg0dIlRRsbYT29t24Pju9vwbDqiBFGnKD+JANqdKOfHJFxw4oitdxEKbw==
-X-Received: by 2002:a0c:f40e:0:b0:8ac:b14d:fbe5 with SMTP id 6a1803df08f44-8b3e306950emr64326106d6.13.1777398637724;
-        Tue, 28 Apr 2026 10:50:37 -0700 (PDT)
-Received: from plex ([71.181.43.54])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8b3e281bd11sm26479316d6.8.2026.04.28.10.50.35
+        d=1e100.net; s=20251104; t=1777399355; x=1778004155;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=k8LokUuSrvQDqSZ+jA0Y3e1bbBcOLmwTdXcyw7SRU2Y=;
+        b=A+iQr7QzjV5yCT9AEXkfYeazLurlpgCsIQg5pDmFQAwQV/kPM/UzTeBofLQm7Qh5k4
+         OVi2tp3kWf108589Vw6D/Tw9Xou1BS5KYXee4sRoCiL6A0IlwiTKL/qWVA7ExtCc73KZ
+         b1PUCxjosLFllezl0HvzQ3QUt9xk/D+KqGwwK0cZhKiHihB93Gvteccog2A4A7a4L2CB
+         LG29XePWcTP5PcUTfmJ77/uBQkOG7zxX8FOS9Pg4l8MSG0zWflY020wGFW5bcxBg97wp
+         MeU8i5JKi+f45+TPTJhKU8/i5jPvHMHWVBoO4zvMgvPTdaLCZME/8MEUU6GOEwe3cPm1
+         ReUw==
+X-Gm-Message-State: AOJu0YwUbLZlCGO4hsyt6zk30MRUh1oeFnMtfnjtCo6aouwoAMk1nJ7a
+	sCd4XGZBorJgzfCdVK6TW9Y8nYCFQ7qZmvjC6DgcDWwOmRnfKktRILYD
+X-Gm-Gg: AeBDieuiElCs6ZHlYQzYt/35hwLwXc0bTHrddI63Z3zmlDOcZVaDJtJWsoSM3tlICB6
+	hsxlphXOPa2eNzXd5xtCraedawKZkZdYswtYK1KD8zV3kTI+jp4JEmcAl09ouw2EmVDCaXWVJRE
+	7sHc9y4VpRtaQOHwLPBoQRM0AZn+1fFgdEI58dAe93jBIncXblCYwe1t/RwaQPprBLuyCGGtB8x
+	CP0n/EmE9loB3lg++xrWm4P0dVFv4HAhqoFJ6dVLPmdFaBdz3Zjjz2zi2H85IqQ/0Q9rN5nS6vf
+	3oDixA+4rJ4+KJURn0MGA5olSxUUYuUJyyS4bHB88LG7CO2w9r0KU0taGsZMhn4GQlkMb0J9r1y
+	6TWw7EC6NOYtsi23Uj4+EBHu9iElBiH0nWL/iGgRaQapJ/8B+KopVKRrzkwzaERBIR5I1iu5mRb
+	MoSd8ux8t+1q1U3jY7Q2fp+XlY3k8hL66aC/51lTS6NjA7mRQyimHmZSW4U0zGtyYPQfTuD3wnP
+	7fnutLkCg==
+X-Received: by 2002:a05:690c:6612:b0:7b8:338d:7d7e with SMTP id 00721157ae682-7bd22c5623bmr320007b3.11.1777399353701;
+        Tue, 28 Apr 2026 11:02:33 -0700 (PDT)
+Received: from localhost.localdomain ([177.36.4.188])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7bd22e72f9fsm69907b3.8.2026.04.28.11.02.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Apr 2026 10:50:37 -0700 (PDT)
-Date: Tue, 28 Apr 2026 17:50:35 +0000
-From: Pasha Tatashin <pasha.tatashin@soleen.com>
-To: David Matlack <dmatlack@google.com>
-Cc: Pasha Tatashin <pasha.tatashin@soleen.com>, 
-	Pratyush Yadav <pratyush@kernel.org>, iommu@lists.linux.dev, kexec@lists.infradead.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-pci@vger.kernel.org, Adithya Jayachandran <ajayachandra@nvidia.com>, 
-	Alexander Graf <graf@amazon.com>, Alex Williamson <alex@shazbot.org>, 
-	Bjorn Helgaas <bhelgaas@google.com>, Chris Li <chrisl@kernel.org>, 
-	David Rientjes <rientjes@google.com>, Jacob Pan <jacob.pan@linux.microsoft.com>, 
-	Jason Gunthorpe <jgg@nvidia.com>, Joerg Roedel <joro@8bytes.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Josh Hilke <jrhilke@google.com>, Leon Romanovsky <leonro@nvidia.com>, 
-	Lukas Wunner <lukas@wunner.de>, Mike Rapoport <rppt@kernel.org>, Parav Pandit <parav@nvidia.com>, 
-	Pranjal Shrivastava <praan@google.com>, Robin Murphy <robin.murphy@arm.com>, 
-	Saeed Mahameed <saeedm@nvidia.com>, Samiullah Khawaja <skhawaja@google.com>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Will Deacon <will@kernel.org>, William Tu <witu@nvidia.com>, 
-	Yi Liu <yi.l.liu@intel.com>
-Subject: Re: [PATCH v4 01/11] PCI: liveupdate: Set up FLB handler for the PCI
- core
-Message-ID: <afDroRNDr9ttY4O9@plex>
-References: <20260423212316.3431746-1-dmatlack@google.com>
- <20260423212316.3431746-2-dmatlack@google.com>
- <2vxzeck45yin.fsf@kernel.org>
- <aetvAkM0y45WAmfV@plex>
- <ae_4fg_18Rli2_Nt@google.com>
+        Tue, 28 Apr 2026 11:02:33 -0700 (PDT)
+From: Daniel Pereira <danielmaraboo@gmail.com>
+To: corbet@lwn.net
+Cc: linux-doc@vger.kernel.org,
+	Daniel Pereira <danielmaraboo@gmail.com>
+Subject: [PATCH] docs/pt_BR: process: link maintainer-kvm-x86 in maintainer-handbooks
+Date: Tue, 28 Apr 2026 15:02:05 -0300
+Message-ID: <20260428180208.175472-1-danielmaraboo@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ae_4fg_18Rli2_Nt@google.com>
-X-Rspamd-Queue-Id: 4B86548A2F9
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 925D948A6D7
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[soleen.com,reject];
-	R_DKIM_ALLOW(-0.20)[soleen.com:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85009-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	DKIM_TRACE(0.00)[soleen.com:+];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85011-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
 	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pasha.tatashin@soleen.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-On 04-27 23:59, David Matlack wrote:
-> On 2026-04-24 01:29 PM, Pasha Tatashin wrote:
-> > On 04-24 14:33, Pratyush Yadav wrote:
-> > > Hi David,
-> > > 
-> > > On Thu, Apr 23 2026, David Matlack wrote:
-> > > [...]
-> > > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > > > index c9b7b6f9828e..94af31837375 100644
-> > > > --- a/MAINTAINERS
-> > > > +++ b/MAINTAINERS
-> > > > @@ -20555,6 +20555,18 @@ L:	linux-pci@vger.kernel.org
-> > > >  S:	Supported
-> > > >  F:	Documentation/PCI/pci-error-recovery.rst
-> > > >  
-> > > > +PCI LIVE UPDATE
-> > > > +M:	Bjorn Helgaas <bhelgaas@google.com>
-> > > > +M:	David Matlack <dmatlack@google.com>
-> > > > +L:	linux-pci@vger.kernel.org
-> > > > +S:	Supported
-> > > > +Q:	https://patchwork.kernel.org/project/linux-pci/list/
-> > > > +B:	https://bugzilla.kernel.org
-> > > > +C:	irc://irc.oftc.net/linux-pci
-> > > > +T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git
-> > > > +F:	drivers/pci/liveupdate.c
-> > > > +F:	include/linux/kho/abi/pci.h
-> > > > +
-> > > 
-> > > Can we please also add these files under the "LIVE UPDATE" entry. The
-> > > code here concerns both live update and PCI.
-> 
-> Covering that intersection of Live Update and PCI was exactly my
-> intention with introducing this new PCI LIVE UPDATE entry. This ensures
-> we have maintenance coverage with knowledge of that intersection.
-> 
-> > > We can figure out the
-> > > maintenance details as we go along, but I think the live update
-> > > maintainers should at least get all the patches for PCI live update.
-> 
-> Would adding kexec@ here be sufficient or do you want to be CC'd
-> directly?
-> 
-> If you want to be CC'd directly do you think makes more sense to add the
-> Live Update maintainers as Reviewers under PCI LIVE UPDATE, or add
-> drivers/pci/liveupdate.c under LIVE UPDATE?
-> 
-> > > 
-> > > Perhaps also add the kexec list here? We plan to use it to maintain the
-> > > LUO patches, and adding it will make sure we get the patches in case
-> > > someone updates the file list here but forgets to update it in the LIVE
-> > > UPDATE entry.
-> > 
-> > +1
-> > 
-> > These files should also be added to the Live Update entry, and the kexec
-> > mailing list should be included.
-> > 
-> > Changes specific to Live Update should be routed through the
-> > liveupdate/linux.git tree, while generic PCI changes should go through
-> > pci/pci.git. In either case, if liveupdate.c or abi/pci.h are modified,
-> > acks are required from the Live Update group.
-> 
-> Do you want to merge changes to drivers/pci/liveupdate.c through the
-> live update tree or PCI tree? We should probably decide now. I was
-> assuming the PCI tree since its part of PCI core.
-> 
-> As we project this out there are going to be users of the Live Update
-> API across different parts of the kernel: PCI core, IOMMU core, IOMMU
-> drivers, VFIO core, VFIO PCI drivers, and KVM. I don't think it will
-> scale to take all that code through the live update tree.
+The Portuguese translation of maintainer-kvm-x86.rst exists in the
+directory, but it was not listed in the toctree of
+maintainer-handbooks.rst.
 
-All Live-Update-specific changes should go through the liveupdate tree. 
-The liveupdate tree is the only Linux tree that will cover full Live 
-Update regression testing, and it contains reviewers and maintainers who 
-know the details of the Live Update process, its lifecycle, and its 
-requirements.
+Add the missing entry to ensure the document is properly indexed and
+reachable through the main maintainer handbook page.
 
-The request we are hearing from other subsystem maintainers is that they 
-want to make sure Live Update is isolated enough not to make their lives 
-harder. This means reducing the number of conflicts, the maintenance 
-burden, and testing responsibilities.
+Signed-off-by: Daniel Pereira <danielmaraboo@gmail.com>
+---
+ .../translations/pt_BR/process/maintainer-handbooks.rst          | 1 +
+ 1 file changed, 1 insertion(+)
 
-Therefore, the "PCI LIVE UPDATE" entry should specify you as a 
-maintainer, "kexec@lists.infradead.org" as the list to which all LU 
-changes should be CC'd, and "liveupdate/linux.git" as the git tree 
-against which changes should be applied.
+diff --git a/Documentation/translations/pt_BR/process/maintainer-handbooks.rst b/Documentation/translations/pt_BR/process/maintainer-handbooks.rst
+index ba36df8ee..bf7a38147 100644
+--- a/Documentation/translations/pt_BR/process/maintainer-handbooks.rst
++++ b/Documentation/translations/pt_BR/process/maintainer-handbooks.rst
+@@ -16,3 +16,4 @@ Conteúdos:
+    maintainer-netdev
+    maintainer-soc
+    maintainer-soc-clean-dts
++   maintainer-kvm-x86
+-- 
+2.47.3
 
-It should also include "linux-pci@vger.kernel.org" so the PCI 
-maintainers are CC'd. In case there are larger changes that touch core 
-PCI and liveupdate.c/abi, we can ACK them, ensuring we are aware of 
-incoming conflicts during the current or next merge cycle.
-
-It should also specify the members of LU group so we can stage the 
-changes.
-
-This is the way we agreed to handle kexec changes: Baoquan He is the 
-maintainer, and without his Reviewed-by tag, we won't take changes to 
-kexec. This is the approach we follow with MM for KHO changes to 
-memblock and memfd preservation, as well as the upcoming 
-hugetlb/guestmemfd preservation. 
-
-This is also the approach we should continue using when adding LUO 
-support to other components like PCI, VFIO, IOMMU, and KVM. It keeps 
-life easier for the core component maintainers and ensures we do not 
-regress LU by staging everything in the same tree and sending LU merge 
-requests from a single tree.
-
-Pasha
 
