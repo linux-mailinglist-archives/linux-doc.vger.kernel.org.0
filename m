@@ -1,143 +1,177 @@
-Return-Path: <linux-doc+bounces-85113-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85115-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KJzcE3B98WkOhQEAu9opvQ
-	(envelope-from <linux-doc+bounces-85113-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 05:39:28 +0200
+	id 8MMdBjqF8WlEhgEAu9opvQ
+	(envelope-from <linux-doc+bounces-85115-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 06:12:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E253648EB1D
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 05:39:23 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 931E248F04E
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 06:12:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 678613040680
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 03:32:09 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id BDFA1300F4F0
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 04:12:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 456A6388E4F;
-	Wed, 29 Apr 2026 03:32:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9DFAD34A3D6;
+	Wed, 29 Apr 2026 04:12:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sjtu.edu.cn header.i=@sjtu.edu.cn header.b="XmwAK8XQ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R4YNR7uD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp186.sjtu.edu.cn (smtp186.sjtu.edu.cn [202.120.2.186])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2129D1C84A6;
-	Wed, 29 Apr 2026 03:32:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.120.2.186
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7935533A702;
+	Wed, 29 Apr 2026 04:12:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777433526; cv=none; b=m7xqRQDf+13zxo+sTInmoXEYajo8RMt+VPe9cy8xJtiV3/r8EoUOlZLc6qtmZL41I/R83imgQN0Jt+bYJd+617JNoe3KvkMR1ImZPvQmsNDY/6aSNvqOaiFqnuCSyy4xcKK0vRCoryOc53zjDmW8UAfKXhe5gIFi7qTAP3cYq40=
+	t=1777435957; cv=none; b=dqm837Nve+C6QuhVRDrSEJz13ae0fxH45Qg++xZ6Ixljljb5L6xnaQEkt1erFSEjJSVxFmDbEeHlcPPcFd90FEqyNiA0lVBdwYoa5YBhAGPDg41NnRYaGBWOOSK9Ey+fuvmjl3T/ut1nvg+6XnNmku3O7gwcvkzHl4CCV096Ihk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777433526; c=relaxed/simple;
-	bh=3jHDHOMfGUaLJeNyd8AGnvQsgJYSoBnA0Hacsg+XNBA=;
-	h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:
-	 MIME-Version:Content-Type; b=ilZt24CLfpcglVeHQTbBbvv1s8O1qd1z8oQjvIpPTusOrufuGmFM018kU+JLXEsPh+2Vo+hNct3IkG6xS91mJVc2ONlIUbDlIk9/Y9bQBj13h9Vsf6ia8n+chNM6KqOb5QUqLg9D+vBCw10rD+5iMTgwu8NkVTPQSMZi0E4hZTw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sjtu.edu.cn; spf=pass smtp.mailfrom=sjtu.edu.cn; dkim=pass (2048-bit key) header.d=sjtu.edu.cn header.i=@sjtu.edu.cn header.b=XmwAK8XQ; arc=none smtp.client-ip=202.120.2.186
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sjtu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sjtu.edu.cn
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=sjtu.edu.cn;
-	s=default; t=1777433515;
-	bh=3jHDHOMfGUaLJeNyd8AGnvQsgJYSoBnA0Hacsg+XNBA=;
-	h=Date:From:To:Cc:In-Reply-To:References:Subject;
-	b=XmwAK8XQSISth0tOijGltJaSz9+ZC9hVRSIMSlRDfRV+D/Jfuzpu3ycfyPx+embyF
-	 X0uyror0u5ADZPc+aoOw/GE0sqR2Ce0eflfNthorf2etLEEqMsgIhbm8jHCgCpikt2
-	 qoL8XQaDAgzHgkijOqREANnzGVI/MeMQzYbmQbON19fwrevd843kmHiIEvVje/KZGn
-	 dh6cFjOQG6I1BUS8mP7QLWFOt18ZJ23PotT0v1wXoboV0eaGc/0B3t4EyWocLlIKeR
-	 mSgTzRy+ql3tiFi9uieT7rDAHKgCaR/CBCZiPVH3BsVLJkPuFmqfE6ECMQFDEt1zOx
-	 o112qzo0hmzlA==
-Received: from mta91.sjtu.edu.cn (unknown [10.118.0.91])
-	by smtp186.sjtu.edu.cn (Postfix) with ESMTPS id 23BE72FF4E5;
-	Wed, 29 Apr 2026 03:31:55 +0000 (UTC)
-Received: from mstore137.sjtu.edu.cn (unknown [10.118.0.137])
-	by mta91.sjtu.edu.cn (Postfix) with ESMTP id A3E4037CA5F;
-	Wed, 29 Apr 2026 11:31:54 +0800 (CST)
-Date: Wed, 29 Apr 2026 11:31:53 +0800 (CST)
-From: SUVONOV BUNYOD <b.suvonov@sjtu.edu.cn>
-To: Steven Rostedt <rostedt@goodmis.org>
-Cc: akpm <akpm@linux-foundation.org>, vbabka <vbabka@kernel.org>, 
-	linux-mm <linux-mm@kvack.org>, mhiramat <mhiramat@kernel.org>, 
-	mathieu desnoyers <mathieu.desnoyers@efficios.com>, 
-	linux-trace-kernel <linux-trace-kernel@vger.kernel.org>, 
-	linux-kernel <linux-kernel@vger.kernel.org>, 
-	surenb <surenb@google.com>, mhocko <mhocko@suse.com>, 
-	jackmanb <jackmanb@google.com>, hannes <hannes@cmpxchg.org>, 
-	ziy <ziy@nvidia.com>, david <david@kernel.org>, 
-	vishal moola <vishal.moola@gmail.com>, corbet <corbet@lwn.net>, 
-	skhan <skhan@linuxfoundation.org>, 
-	linux-doc <linux-doc@vger.kernel.org>
-Message-ID: <1453063691.2584758.1777433513691.JavaMail.zimbra@sjtu.edu.cn>
-In-Reply-To: <20260428142335.3bca0166@gandalf.local.home>
-References: <20260425091335.346504-1-b.suvonov@sjtu.edu.cn> <20260427060142.131055-1-b.suvonov@sjtu.edu.cn> <20260428142335.3bca0166@gandalf.local.home>
-Subject: Re: [PATCH v2] mm/page_alloc: trace PCP refills and PCP zone lock
- usage
+	s=arc-20240116; t=1777435957; c=relaxed/simple;
+	bh=RCIYZP1Msb2RTI2SpfpPltIJeD6RApU3Y40MYAqfhiI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SL+qWfNK4u08kt1PM0xRpwtbkr6f98QBinOt8KYUDGO/0D4uUQiVt9b7EfnrXVEYr7UimzFtc1uJvdQD95mDlPYKIkHzkILesdrwr52DCRCBHTOgXEmMna0hhm//z6aMbjlmyuoxB5cyxEDqk95rmtBwAjYH0DrzayRVQxSfk3c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R4YNR7uD; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80CB0C19425;
+	Wed, 29 Apr 2026 04:12:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777435957;
+	bh=RCIYZP1Msb2RTI2SpfpPltIJeD6RApU3Y40MYAqfhiI=;
+	h=From:To:Cc:Subject:Date:From;
+	b=R4YNR7uDsz9ma88wFhsLog/autlmAYCp9r4i/R/c6j8wSh28uod14qZe7792jWfi8
+	 4IP7GzXzZcORJ0kJhktIv98nrGV6asZpmyuJ6WPF68fyMzKTLjMmYC9SRS8MWB7qZf
+	 9xJuWjKgmlCR49qXkFFIeC7CsUKsUN9HzoJG4x1EvJrnhRVS9qvd4ekDqBc6yAGi6B
+	 0+KzQA3KwSW+dV9nLXG6Ux9Fti4WvBfLVNJHid7+/N5aWmqch92y5rm3gLYVatpN+/
+	 gkVzjyITojlmDehfgwYIDLyXD+7XE5ILvmBWGKorDuyWIvJ8SK5AwJHgoHv2bokLzg
+	 v8e+74YDPAT8A==
+From: SeongJae Park <sj@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: SeongJae Park <sj@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	David Hildenbrand <david@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	damon@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH 0/7] mm/damon/reclaim,lru_sort: monitor all system rams by default
+Date: Tue, 28 Apr 2026 21:12:22 -0700
+Message-ID: <20260429041232.90257-1-sj@kernel.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=GB2312
-Content-Transfer-Encoding: 7bit
-X-Mailer: Zimbra 10.0.18_GA_4835 (ZimbraWebClient - FF149 (Linux)/10.0.18_GA_4828)
-Thread-Topic: mm/page_alloc: trace PCP refills and PCP zone lock usage
-Thread-Index: SvFI4TNgE4VbTb6G/aV24V6dHLhS6w==
-X-Rspamd-Queue-Id: E253648EB1D
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 931E248F04E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [4.84 / 15.00];
-	SEM_URIBL(3.50)[sjtu.edu.cn:dkim];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	BAD_REP_POLICIES(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-85113-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,kvack.org,efficios.com,vger.kernel.org,google.com,suse.com,cmpxchg.org,nvidia.com,gmail.com,lwn.net,linuxfoundation.org];
-	TO_DN_ALL(0.00)[];
-	R_DKIM_ALLOW(0.00)[sjtu.edu.cn:s=default];
-	DMARC_POLICY_ALLOW(0.00)[sjtu.edu.cn,none];
-	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	GREYLIST(0.00)[pass,body];
-	DKIM_TRACE(0.00)[sjtu.edu.cn:+];
-	NEURAL_SPAM(0.00)[0.723];
+	TAGGED_FROM(0.00)[bounces-85115-lists,linux-doc=lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[b.suvonov@sjtu.edu.cn,linux-doc@vger.kernel.org];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_SPF_ALLOW(0.00)[+ip6:2600:3c04:e001:36c::/64:c];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[18]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 
-Thanks for reviewing Steven,
+DAMON_RECLAIM and DAMON_LRU_SORT set the biggest 'System RAM' resource
+of the system as the default monitoring target address range.  The main
+intention behind the design is to minimize the overhead coming from
+monitoring of non-System RAM areas.
 
->Why this change? It makes it much harder to understand.
->
->The above is not a normal macro. Ignore any checkpatch warnings about it.
->The proper way to do the TP_STRUCT__entry() is to make it just like a struct:
->
->struct {
->	unsigned long		pfn;
->	unsigned int		order;
->	int			migratetype;
->};
->
->Thus, the macro should be:
->
->	TP_STRUCT__entry(
->		__field(	unsigned long,	pfn		)
->		__field(	unsigned int,	order		)
->		__field(	int,		migratetype	)
->		),
+This could result in an odd setup when there are multiple discrete
+System RAMs of considerable sizes.  For example, there are System RAMs
+each having 500 GiB size.  In this case, only the first 500 GiB will be
+set as the monitoring region by default.  This is particularly common on
+NUMA systems.  Hence the modules allow users to set the monitoring
+target address range using the module parameters if the default setup
+doesn't work for them.  In other words, the current design trades ease
+of setup for lower overhead.
+
+However, because DAMON utilizes the sampling based access check and the
+adaptive regions adjustment mechanisms, the overhead from the monitoring
+of non-System RAM areas should be negligible in most setups.  Meanwhile,
+the setup complexity is causing real headaches for users who need to run
+those modules on various types of systems.  That is, the current
+tradeoff is not a good deal.
+
+Set the physical address range that can cover all System RAM areas of
+the system as the default monitoring regions for DAMON_RECLAIM and
+DAMON_LRU_SORT.
+
+Technically speaking, this is changing documented behavior.  However, it
+makes no sense to believe there is a real use case that really depends
+on the old weird default behavior.  If the old default behavior was
+working for them in the reasonable way, this change will only add a
+negligible amount of monitoring overhead.  If it didn't work, the users
+may already be using manual monitoring regions setup, and they will not
+be affected by this change.
+
+Patches Sequence
+================
+
+Patch 1 introduces a new core function that will be used for the new
+default monitoring target region setup.  Patch 2 and 3 update
+DAMON_RECLAIM and DAMON_LRU_SORT to use the new function instead of the
+old one, respectively.  Patch 4 removes the old core function that was
+replaced by the new one, as there is no more user of it.  Patch 5
+updates DAMON_STAT to use the new one instead of its in-house
+nearly-duplicate self implementation of the functionality.  Finally
+patches 6 and 7 update the DAMON_RECLAIM and DAMON_LRU_SORT user
+documentation for the new behaviors, respectively.
+
+Changes from RFC
+- rfc: https://lore.kernel.org/20260415012048.76508-1-sj@kernel.org
+- Fix typos: s/phiscal/physical/
+
+SeongJae Park (7):
+  mm/damon: introduce damon_set_region_system_rams_default()
+  mm/damon/reclaim: cover all system rams
+  mm/damon/lru_sort: cover all system rams
+  mm/damon/core: remove damon_set_region_biggest_system_ram_default()
+  mm/damon/stat: use damon_set_region_system_rams_default()
+  Docs/admin-guide/mm/damon/reclaim: update for entire memory monitoring
+  Docs/admin-guide/mm/damon/lru_sort: update for entire memory
+    monitoring
+
+ .../admin-guide/mm/damon/lru_sort.rst         |  6 ++-
+ .../admin-guide/mm/damon/reclaim.rst          |  6 ++-
+ include/linux/damon.h                         |  2 +-
+ mm/damon/core.c                               | 49 +++++++++--------
+ mm/damon/lru_sort.c                           |  8 +--
+ mm/damon/reclaim.c                            | 14 ++---
+ mm/damon/stat.c                               | 53 ++-----------------
+ 7 files changed, 50 insertions(+), 88 deletions(-)
 
 
-Yeah sorry for the formatting issue, will fix in v3. Any other concerns?
-What do you think about the introduction of those tracepoints themselves?
-
--- Bunyod
-
+base-commit: 01b1d4a72970ced030ffe246ba99c961c746527d
+-- 
+2.47.3
 
