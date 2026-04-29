@@ -1,210 +1,291 @@
-Return-Path: <linux-doc+bounces-85178-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85180-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0LjlCVYo8mm/oQEAu9opvQ
-	(envelope-from <linux-doc+bounces-85178-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 17:48:38 +0200
+	id AKw1I/4r8mmmogEAu9opvQ
+	(envelope-from <linux-doc+bounces-85180-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 18:04:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99F5449740A
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 17:48:33 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04C654976B5
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 18:04:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EACFF3095B91
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 15:41:58 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id AB94B300F1B1
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2026 16:03:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95D4D37F728;
-	Wed, 29 Apr 2026 15:41:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="x/27T86g"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C7203859C8;
+	Wed, 29 Apr 2026 16:03:53 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from frasgout12.his.huawei.com (frasgout12.his.huawei.com [14.137.139.154])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 645AB37C909
-	for <linux-doc@vger.kernel.org>; Wed, 29 Apr 2026 15:41:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39F5F40DFD7;
+	Wed, 29 Apr 2026 16:03:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=14.137.139.154
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777477315; cv=none; b=ln/m00cahqWGJPZ6zIP2DfGAieO5pmvNv8Dp1CjhEGkJ2xyBYc2KK8/4e9/QOXX+7FUtoqKdJTgcyHj0NZV9RYbNkOyn5uU8+wa/Ie68yCZroKZyYcdbgBEkQD9hC6EIuNZqbK/zZhRZbQJPutXLv3jjI2vPNm9Wz/d6h6cs3bg=
+	t=1777478632; cv=none; b=cAQTSN9HuZdd+JJUXroqcBaJt3wc8Mvlb6pvjqLBwpRCJF7OFb2rIU879OgvL2Mxj8iXTEfMGWIzroqW1MSeSkPioSymJSo+g/51Bi9mUZItyOlGX/SjOii3odVyUr/BCXZmBnOZmWcD37Um1tgHa5VXqCmbaAREQ9w140YlkmI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777477315; c=relaxed/simple;
-	bh=ptDOA8oXfBcLNX1p/12OZLzqrk1BS6t5onLGu8IEt8M=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BjqSx8Y3BVfxB3NwTCysklSLLkklDHqvatrA92cIZZUbQq55CPTiIY9AMi1xW6C620EcpW8jwqEFsWIRQOWDXDE7y7RPabzvXZmUJlDwB7OV0uzVhDYojAPGi+3UmqV090haIkUYNk6UfcN1tNN/bkZQbeFULzKyueB9FxT9nhk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=x/27T86g; arc=none smtp.client-ip=209.85.215.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-c76c60c7502so448050a12.0
-        for <linux-doc@vger.kernel.org>; Wed, 29 Apr 2026 08:41:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1777477311; x=1778082111; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=h8L+nXE7L85P9lNyL2I2gs9CTUVcJOwgVrd7ZFlSaCE=;
-        b=x/27T86gUyqmFKiprX3Eig42Q7FCCl2TkTqFhm0EveKwg9ZNtlWgGtuOdD71R4J+Ad
-         g78mNZ31VSgKne6xap4Qepafn42S5ilLNua7qxaSqlGILcW3T+z2bQ8Onr+lKHKaqLUz
-         cznRYN1QngzriWUdnBiD6d5nrtXBdky30GuxtsXzD0yTGqYvnmw9pfeFqbqnGUBA1QMZ
-         noNSnrmA4VbtXWXRnOq84eXCnzAzVCCDrq8P1m8cjOrlfTBU+9M1Wrm2LXmz0AleFyYA
-         uFjd5HdDCgfQRMFWCsTRbWjmvinnIJvlHiTzSX46+ofmFs9Rv82jxzsk7zpV8m4ZSYkC
-         jUHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777477311; x=1778082111;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=h8L+nXE7L85P9lNyL2I2gs9CTUVcJOwgVrd7ZFlSaCE=;
-        b=YD7fbggygW9gt6c3TFjhHNFrWn/07snt7kVjN4nZUqaVao6PPV1p551kwpefhbGFct
-         lk2iJzgvXCoFs76yrF1532z/Oh8aUDxy5YHrVcS9TyA+Z1DWS/q5Ki68Cl6EcS6oaSFX
-         6HCDkUDDZ+aZs4KTJBvgh4Bik+tww6AgDc9+0Oxt/hJ4Ng4QKy5eFY+mcndgK9Y/bVfl
-         Tou25N8Y87fsFPGhfEePtvise2WmkbIPh8TkDAxFuv7gxDT7szBU3TAdIpKt9jrTFJZ6
-         ChybKlomvZXobJcZG4/ssZvyXdDHMuUD2iMJuu6k/iY3bBCbKJh0Fz3NoPIPWJyJPCb7
-         6Dmg==
-X-Forwarded-Encrypted: i=1; AFNElJ9unXa1eyOXpVjlmIa7WZeM/0VACTHIg42CJk2nCs3orNeLpShj+HMWUBp5dlcM44RERtj8/26EL0k=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzoB7FtE7BmHG2VZ418N7muhaQWLZijXA8Ju9gD4vEGJ6cNzzhj
-	GPWgRu7bN9e0Mcl2wjjnF7Zw8Iv6nyP6nmhDuRfrPK9GzUoKtJD6vP3a0lAT4KcEJoRVIjOZhPf
-	NxNGh
-X-Gm-Gg: AeBDiettg1J7Tw6hCy6cUQ8rOY4b70U5e3uubTh0/N7kHn6LvAMxOspaRdlaT1Yzvv2
-	zhO2nedsJSUgwIO/117lptrK1CMTs+0xNZuHv1eKOPkXPWcoRtYlr5ZN66XVImR62OBt5UyW6Bu
-	RPPphvGrNcW6Mx9r79jZqz87MJRVKfyo4FFbphX+/oPnbbxoZ43LRcm4dO5Z+N0VfSUbVNlqtPJ
-	tZRrOhTRc8D3gjQqhRNmiO/pmzRENwRzPkPsjfACBd9JqsAcLIw8UB/yQK13NUwrdlXtjp4VEPL
-	aTqcdPEWcah1YQG3qoWvpww+b6OQIs9EqkkTceWHqBrqMxybETf3gxXwqsLG7zRx6t/cyVbs3wC
-	uh6znV+/LGTSFUQ2VfngL7hDPbS8j4xklXuqUduQgLnSCRX2p37SOQu68q9ThUoBsnLouz92YVg
-	phmPZhFq9voojm97ikrqGP/Daw0MDdVVklM4K1zg==
-X-Received: by 2002:a17:903:2410:b0:2b4:68c9:302a with SMTP id d9443c01a7336-2b9882388cdmr33673325ad.17.1777477310614;
-        Wed, 29 Apr 2026 08:41:50 -0700 (PDT)
-Received: from p14s ([2604:3d09:148c:c800:8131:aef0:bb67:5559])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b98899055fsm27045325ad.80.2026.04.29.08.41.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Apr 2026 08:41:50 -0700 (PDT)
-Date: Wed, 29 Apr 2026 09:41:46 -0600
-From: Mathieu Poirier <mathieu.poirier@linaro.org>
-To: Shenwei Wang <shenwei.wang@nxp.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, "Padhi, Beleswar" <b-padhi@ti.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>, Frank Li <frank.li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-	"linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
-	"imx@lists.linux.dev" <imx@lists.linux.dev>,
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
-	dl-linux-imx <linux-imx@nxp.com>,
-	Bartosz Golaszewski <brgl@bgdev.pl>
-Subject: Re: [PATCH v13 3/4] gpio: rpmsg: add generic rpmsg GPIO driver
-Message-ID: <afImuoeHolxGgw3H@p14s>
-References: <20260422212849.1240591-1-shenwei.wang@nxp.com>
- <20260422212849.1240591-4-shenwei.wang@nxp.com>
- <22fb5fac-2568-42be-a7e3-7e89d0017eb3@ti.com>
- <PAXPR04MB91850A11C58419C03909145F89362@PAXPR04MB9185.eurprd04.prod.outlook.com>
- <6412a758-4560-4cf1-a0d0-5b24d1a715f1@lunn.ch>
- <PAXPR04MB9185009A17DFDF3D6C8B44E789362@PAXPR04MB9185.eurprd04.prod.outlook.com>
- <6e01e114-e336-4744-b6b4-563ec42e321b@lunn.ch>
- <PAXPR04MB9185A098D894B6A6EBCC13F889372@PAXPR04MB9185.eurprd04.prod.outlook.com>
+	s=arc-20240116; t=1777478632; c=relaxed/simple;
+	bh=7gyGZbLzyS7YTLYlv+rKDGG1Qob46JD45A2HFA38ztg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=O9VmQmbq3BTvxvnId2tNLzmE5NOju+3b/C8VyUtR1So4ZuThHFaNjlHpZUxQQqgzngaBNqdc3yeDid5PyZXAh5PqCVTmUXkE23F6odobcqhmP3Qcohg//GdImNzW2q6XrjPCCfAVFoQpYepyJU0/5xRj26qFz5uuJbAJbAtFAfM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=14.137.139.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.18.224.235])
+	by frasgout12.his.huawei.com (SkyGuard) with ESMTPS id 4g5MSL6nBtzvQlV;
+	Wed, 29 Apr 2026 23:59:30 +0800 (CST)
+Received: from mail02.huawei.com (unknown [7.182.16.27])
+	by mail.maildlp.com (Postfix) with ESMTP id C891240560;
+	Thu, 30 Apr 2026 00:03:46 +0800 (CST)
+Received: from huaweicloud.com (unknown [10.204.63.22])
+	by APP2 (Coremail) with SMTP id GxC2BwBHPmrYK_JpRQ1BAA--.12298S2;
+	Wed, 29 Apr 2026 17:03:46 +0100 (CET)
+From: Roberto Sassu <roberto.sassu@huaweicloud.com>
+To: corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	zohar@linux.ibm.com,
+	dmitry.kasatkin@gmail.com,
+	eric.snowberg@oracle.com,
+	paul@paul-moore.com,
+	jmorris@namei.org,
+	serge@hallyn.com
+Cc: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-integrity@vger.kernel.org,
+	linux-security-module@vger.kernel.org,
+	gregorylumen@linux.microsoft.com,
+	chenste@linux.microsoft.com,
+	nramas@linux.microsoft.com,
+	Roberto Sassu <roberto.sassu@huawei.com>
+Subject: [PATCH v5 00/13] ima: Introduce staging mechanism
+Date: Wed, 29 Apr 2026 18:03:06 +0200
+Message-ID: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <PAXPR04MB9185A098D894B6A6EBCC13F889372@PAXPR04MB9185.eurprd04.prod.outlook.com>
-X-Rspamd-Queue-Id: 99F5449740A
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:GxC2BwBHPmrYK_JpRQ1BAA--.12298S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3XF1rCryrXw18GFWxAF1kZrb_yoWxKF4xpa
+	9ag34xCwn5Ja4fCwn7Jw1xCr4ru397ta1UCrn7J34xJF15WFyvvr4YkrWa9FsxKr1Fvr1j
+	y3W2qrs8uan0yFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvFb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIEc7CjxV
+	AFwI0_Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40E
+	x7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x
+	0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAa
+	w2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
+	Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a
+	6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6x
+	kF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AK
+	xVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvj
+	xUFku4UUUUU
+X-CM-SenderInfo: purev21wro2thvvxqx5xdzvxpfor3voofrz/1tbiAgASBGnx6jEF2AAEsO
+X-Rspamd-Queue-Id: 04C654976B5
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [1.54 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-85178-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[lunn.ch,ti.com,kernel.org,lwn.net,nxp.com,pengutronix.de,linuxfoundation.org,vger.kernel.org,gmail.com,lists.linux.dev,lists.infradead.org,bgdev.pl];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85180-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[25];
+	DMARC_NA(0.00)[huaweicloud.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[lwn.net,linuxfoundation.org,linux.ibm.com,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	NEURAL_SPAM(0.00)[0.797];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mathieu.poirier@linaro.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[roberto.sassu@huaweicloud.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	R_DKIM_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[huaweicloud.com:mid,huawei.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
-On Tue, Apr 28, 2026 at 03:24:59PM +0000, Shenwei Wang wrote:
-> 
-> 
-> > -----Original Message-----
-> > From: Andrew Lunn <andrew@lunn.ch>
-> > Sent: Monday, April 27, 2026 3:49 PM
-> > To: Shenwei Wang <shenwei.wang@nxp.com>
-> > Cc: Padhi, Beleswar <b-padhi@ti.com>; Linus Walleij <linusw@kernel.org>;
-> > Bartosz Golaszewski <brgl@kernel.org>; Jonathan Corbet <corbet@lwn.net>;
-> > Rob Herring <robh@kernel.org>; Krzysztof Kozlowski <krzk+dt@kernel.org>;
-> > Conor Dooley <conor+dt@kernel.org>; Bjorn Andersson
-> > <andersson@kernel.org>; Mathieu Poirier <mathieu.poirier@linaro.org>; Frank Li
-> > <frank.li@nxp.com>; Sascha Hauer <s.hauer@pengutronix.de>; Shuah Khan
-> > <skhan@linuxfoundation.org>; linux-gpio@vger.kernel.org; linux-
-> > doc@vger.kernel.org; linux-kernel@vger.kernel.org; Pengutronix Kernel Team
-> > <kernel@pengutronix.de>; Fabio Estevam <festevam@gmail.com>; Peng Fan
-> > <peng.fan@nxp.com>; devicetree@vger.kernel.org; linux-
-> > remoteproc@vger.kernel.org; imx@lists.linux.dev; linux-arm-
-> > kernel@lists.infradead.org; dl-linux-imx <linux-imx@nxp.com>; Bartosz
-> > Golaszewski <brgl@bgdev.pl>
-> > Subject: [EXT] Re: [PATCH v13 3/4] gpio: rpmsg: add generic rpmsg GPIO driver
-> > > > struct virtio_gpio_response {
-> > > >         __u8 status;
-> > > >         __u8 value;
-> > > > };
-> > 
-> > > It is the same message format. Please see the message definition
-> > (GET_DIRECTION) below:
-> > 
-> > > +   +-----+-----+-----+-----+-----+----+
-> > > +   |0x00 |0x01 |0x02 |0x03 |0x04 |0x05|
-> > > +   | 1   | 2   |port |line | err | dir|
-> > > +   +-----+-----+-----+-----+-----+----+
-> > 
-> > Sorry, but i don't see how two u8 vs six u8 are the same message format.
-> > 
-> 
-> Some changes to the message format are necessary.
-> 
-> Virtio uses two communication channels (virtqueues): one for requests and replies, and a second one for events. 
-> In contrast, rpmsg provides only a single communication channel, so a type field is required to distinguish between 
-> different kinds of messages.
-> 
-> Since rpmsg replies and events share the same message format, an additional line is introduced to handle both cases.
-> 
-> Finally, rpmsg supports multiple GPIO controllers, so a port field is added to uniquely identify the target controller.
+From: Roberto Sassu <roberto.sassu@huawei.com>
 
-I have commented on this before - RPMSG is already providing multiplexing
-capability by way of endpoints.  There is no need for a port field.  One
-endpoint, one GPIO controller. 
+Introduction
+============
 
-> 
-> Shenwei
-> 
-> >        Andrew
+The IMA measurements list is currently stored in the kernel memory.
+Memory occupation grows linearly with the number of entries, and can
+become a problem especially in environments with reduced resources.
+
+While there is an advantage in keeping the IMA measurements list in
+kernel memory, so that it is always available for reading from the
+securityfs interfaces, storing it elsewhere would make it possible to
+free precious memory for other kernel components.
+
+Storing the IMA measurements list outside the kernel does not introduce
+security issues, since its integrity is anyway protected by the TPM.
+
+Hence, the new IMA staging mechanism is introduced to allow user space
+to remove the desired portion of the measurements list from the kernel.
+
+
+Usage
+=====
+
+The IMA staging mechanism can be enabled from the kernel configuration
+with the CONFIG_IMA_STAGING option.
+
+If it is enabled, IMA duplicates the current measurements interfaces
+(both binary and ASCII), by adding the _staged file suffix. Both the
+original and the staging interfaces gain the write permission for the
+root user and group, but require the process to have CAP_SYS_ADMIN set.
+
+The staging mechanism supports two flavors.
+
+Staging with prompt
+~~~~~~~~~~~~~~~~~~~
+
+The current measurements list is moved to a temporary staging area, and
+staged measurements are deleted upon confirmation.
+
+This staging process is achieved with the following steps.
+
+  1.  echo A > <original interface>: the user requests IMA to stage the
+      entire measurements list;
+  2.  cat <_staged interface>: the user reads the staged measurements;
+  3.  echo D > <_staged interface>: the user requests IMA to delete
+      staged measurements.
+
+Staging and deleting
+~~~~~~~~~~~~~~~~~~~~
+
+N measurements are staged to a temporary staging area, and immediately
+deleted without further confirmation.
+
+This staging process is achieved with the following steps.
+
+  1.  cat <original interface>: the user reads the current measurements
+      list and determines what the value N for staging should be;
+  2.  echo N > <original interface>: the user requests IMA to delete N
+      measurements from the current measurements list.
+
+
+Management of Staged Measurements
+=================================
+
+Since with the staging mechanism measurement entries are removed from
+the kernel, the user needs to save the staged ones in a storage and
+concatenate them together, so that it can present them to remote
+attestation agents as if staging was never done.
+
+
+Patch set content
+=================
+
+Patches 1-8 are preparatory patches to quickly replace the hash table,
+maintain separate counters for the different measurements list types,
+mediate access to the measurements list interface, and simplify the staging
+patches.
+
+Patch 9 introduces the staging with prompt flavor. Patch 10 makes it
+possible to flush the hash table when deleting all the staged measurements.
+Patch 11 introduces the staging and deleting flavor. Patch 12 avoids
+measurements entries to be stored twice if there is contention between the
+measurements interfaces and kexec. Patch 13 adds the documentation of the
+staging mechanism.
+
+
+Changelog
+=========
+
+v4:
+ - Add write permission to the original measurement interface, and move
+   the A and N staging commands to that interface
+ - Explain better the two staging flavors and highlight that the staging
+   and delete only stages measurements internally
+ - Rename ima_queue_staged_delete_partial() to ima_queue_delete_partial()
+ - Replace ima_staged_measurements_prepended with per measurements list
+   flag to avoid copying staged and active list measurements twice
+ - Optimize the staging and deleting flavor by locklessly determining the
+   cut position in the active list, and immediately deleting entries
+   without explicit staging and splicing (suggested by Steven Chen)
+
+v3:
+ - Add Kconfig option to enable the staging mechanism (suggested by Mimi)
+ - Change the meaning of BINARY_STAGED to be just the staged measurements
+ - Separate the two staging flavors in two different functions:
+   ima_queue_staged_delete_all() for staging with prompt,
+   ima_queue_staged_delete_partial() for staging and deleting
+ - Delete N entries without staging first (suggested by Mimi)
+ - Avoid duplicate staged entries if there is contention between the
+   measurements list interfaces and kexec
+
+v2:
+ - New patch to move measurements and violation counters outside the
+   ima_h_table structure
+ - New patch to quickly replace the hash table
+ - Forbid partial deletion when flushing hash table (suggested by Mimi)
+ - Ignore ima_flush_htable if CONFIG_IMA_DISABLE_HTABLE is enabled
+ - BINARY_SIZE_* renamed to BINARY_* for better clarity
+ - Removed ima_measurements_staged_exist and testing list empty instead
+ - ima_queue_stage_trim() and ima_queue_delete_staged_trimmed() renamed to
+   ima_queue_stage() and ima_queue_delete_staged()
+ - New delete interval [1, ULONG_MAX - 1]
+ - Rename ima_measure_lock to ima_measure_mutex
+ - Move seq_open() and seq_release() outside the ima_measure_mutex lock
+ - Drop ima_measurements_staged_read() and use seq_read() instead
+ - Optimize create_securityfs_measurement_lists() changes
+ - New file name format with _staged suffix at the end of the file name
+ - Use _rcu list variant in ima_dump_measurement_list()
+ - Remove support for direct trimming and splice the remaining entries to
+   the active list (suggested by Mimi)
+ - Hot swap the hash table if flushing is requested
+
+v1:
+ - Support for direct trimming without staging
+ - Support unstaging on kexec (requested by Gregory Lumen)
+
+Roberto Sassu (13):
+  ima: Remove ima_h_table structure
+  ima: Replace static htable queue with dynamically allocated array
+  ima: Introduce per binary measurements list type ima_num_entries
+    counter
+  ima: Introduce per binary measurements list type binary_runtime_size
+    value
+  ima: Introduce _ima_measurements_start() and _ima_measurements_next()
+  ima: Mediate open/release method of the measurements list
+  ima: Use snprintf() in create_securityfs_measurement_lists
+  ima: Introduce ima_dump_measurement()
+  ima: Add support for staging measurements with prompt
+  ima: Add support for flushing the hash table when staging measurements
+  ima: Support staging and deleting N measurements entries
+  ima: Return error on deleting measurements already copied during kexec
+  doc: security: Add documentation of the IMA staging mechanism
+
+ .../admin-guide/kernel-parameters.txt         |   4 +
+ Documentation/security/IMA-staging.rst        | 163 +++++++++
+ Documentation/security/index.rst              |   1 +
+ MAINTAINERS                                   |   2 +
+ security/integrity/ima/Kconfig                |  16 +
+ security/integrity/ima/ima.h                  |  32 +-
+ security/integrity/ima/ima_api.c              |   2 +-
+ security/integrity/ima/ima_fs.c               | 315 ++++++++++++++++--
+ security/integrity/ima/ima_init.c             |   5 +
+ security/integrity/ima/ima_kexec.c            |  53 ++-
+ security/integrity/ima/ima_queue.c            | 283 ++++++++++++++--
+ 11 files changed, 803 insertions(+), 73 deletions(-)
+ create mode 100644 Documentation/security/IMA-staging.rst
+
+-- 
+2.43.0
+
 
