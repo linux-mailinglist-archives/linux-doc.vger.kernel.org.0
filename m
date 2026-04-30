@@ -1,150 +1,107 @@
-Return-Path: <linux-doc+bounces-85343-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85344-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2LPkFqaz82kL6QEAu9opvQ
-	(envelope-from <linux-doc+bounces-85343-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 21:55:18 +0200
+	id 85WJBru282mW6QEAu9opvQ
+	(envelope-from <linux-doc+bounces-85344-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 22:08:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B8F64A77E0
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 21:55:18 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 897F54A7925
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 22:08:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BE7BD300E2BA
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 19:55:13 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D448B3024CB5
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 20:08:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0286C38238C;
-	Thu, 30 Apr 2026 19:55:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B050389469;
+	Thu, 30 Apr 2026 20:08:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="W6S39X4h"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fK3MhK9k"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF0AA381AE9
-	for <linux-doc@vger.kernel.org>; Thu, 30 Apr 2026 19:55:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17B50287503;
+	Thu, 30 Apr 2026 20:08:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777578911; cv=none; b=iCo7AD132yjlgjnHmnosztvV/F6YC9g//tjGk/8fBBwr6DhBIUvxTG2NEBn+PE7z6yAV551PzxP/L95DfthhdFbKnxdtVAIvGHM1+j408wunlj9an6j3l4ReKcR4pHzcSh5nTXUaw8uhax4m01J76KBQMTIeQ/276uvgoC9mbfg=
+	t=1777579703; cv=none; b=D/qtkoJIogDLsHgKxDn/MR9NaKWX3L9h/XpXOxpaDtwKZpYAWu0T30boe8k7hAgP9iUGE1JUyGXJ7DNRskqOaWTCC+Rr0Newf50eDsEmjPcGkZDowY9vNxv0CjpWk7B0pONpRt4HHLIN2S+ojMOKQ8tWltqEa0vQw24A0qvThkU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777578911; c=relaxed/simple;
-	bh=82ndRVMvU5Rm3L4xkqPoIhUvLJsOUbOYTeW/5e1ZQhE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Cxy2JO98lV/4tjCOSYQbtAD1COC6f/g8fck3W1yt4LV9SxB1/vpS3UCv3RAn676oWxBZn1z0fB2doHbN/bgTRWZeSZl5qhIx7y/MWrx0mwjCGNPZ2Rv7NYZp3jxRCjC982zfLsoeOW7LoB5esr65p9xfe2lNqS8gcDyLgCFoCHA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=W6S39X4h; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1777578907;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qWmrmHXW52+KOjBUKSQQzZ6oTYKJGrDyN5SgtJWF5RU=;
-	b=W6S39X4hNHHFE6ej5F89Lnlpq0s0dLj4d00trxZ9SGKybSdzsz0aRrjNI2TzqaTU239iEr
-	rcLQ8Y6PQbTjY1dYjO1TRMuFRVl5Zy+f2SgMqN0pFOpzu9g9J3WBo2j+B6NVDcvW+9dOGR
-	G7tWSgw+EmvIzLpJTE9OPsAL0AecQ0w=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-591-9PLioaVwMK2T8J5GbcaGuw-1; Thu,
- 30 Apr 2026 15:55:00 -0400
-X-MC-Unique: 9PLioaVwMK2T8J5GbcaGuw-1
-X-Mimecast-MFC-AGG-ID: 9PLioaVwMK2T8J5GbcaGuw_1777578898
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 84BCE1956059;
-	Thu, 30 Apr 2026 19:54:58 +0000 (UTC)
-Received: from [10.22.65.186] (unknown [10.22.65.186])
-	by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id A5F6030001BE;
-	Thu, 30 Apr 2026 19:54:56 +0000 (UTC)
-Message-ID: <c2e43724-1f40-4643-a506-16ba43ac8b1a@redhat.com>
-Date: Thu, 30 Apr 2026 15:54:55 -0400
+	s=arc-20240116; t=1777579703; c=relaxed/simple;
+	bh=8OtbdMRbfOue839bk+sXktHATPH+3qPIOw6xZKK7DZw=;
+	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=N6CKXt8c179BytcOuUXOiaVyhzcdFe1pRIPB5VGY8bRW+Otrcrqm0Ogr0y2BUMhWgOxtfiwZRc4Mm7gPV6AGgOfohfLqKSOmtbpA15s4B+D7L9VI8JeA1X/WFHZYGFjEzNNKO5qrchZ+I5xUEv3cyIJmET5jADzxo3VswtovPc4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fK3MhK9k; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84913C2BCB3;
+	Thu, 30 Apr 2026 20:08:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777579702;
+	bh=8OtbdMRbfOue839bk+sXktHATPH+3qPIOw6xZKK7DZw=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=fK3MhK9kCdLHmMjtWZe70Ox/VtLcx3NSz+XngQeD8SAHh6U5Xxb+SzIK/UbdLwgzk
+	 Em8ECR2oxPJmPfX3jYNy8Q9qopLte3XZL4Ok/jjrdgEtqYltH3xydo7DS7w2XUnvbu
+	 8ie+f/pErKfXVAgiFcixIqqgN/mjFD1R9VxC2KVQFFP6SbCLnk9kCnnWt8YiBKxXN2
+	 SiW+XLvwM4MVkfKr/weCw6fCVfUDZNLl+6dQvcXvVLA0cMFHPrOZ5jnaRGCFZJ6tKV
+	 vDRiYK+BocU8wh+1TSFNXQAKlafmM1sfwf6j57JAV0pzR+3zlDNeGoKHz4WOoZds2V
+	 fHXoOiQ9y+KIw==
+Date: Thu, 30 Apr 2026 14:08:20 -0600 (MDT)
+From: Paul Walmsley <pjw@kernel.org>
+To: Avi Radinsky <avi.radinsky@tennr.com>
+cc: palmer@dabbelt.com, pjw@kernel.org, aou@eecs.berkeley.edu, alex@ghiti.fr, 
+    corbet@lwn.net, linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org, 
+    linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: riscv: cmodx: fix typos
+In-Reply-To: <391d16fb-5f11-45fa-8f3b-1debe095695e@tennr.com>
+Message-ID: <ec533d17-0d7e-15ec-308e-0198e027ac28@kernel.org>
+References: <391d16fb-5f11-45fa-8f3b-1debe095695e@tennr.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] cgroup/cpuset: Clarify the delegation rules of
- partition
-To: =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>
-Cc: Chen Ridong <chenridong@huawei.com>, Tejun Heo <tj@kernel.org>,
- Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, cgroups@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Xie Maoyi <maoyi.xie@ntu.edu.sg>
-References: <20260428180935.806284-1-longman@redhat.com>
- <h46vz32432zl6xu773hfvnpze5zt7berywvg233esmeiftiruo@aub2kgpwi6zd>
-Content-Language: en-US
-From: Waiman Long <longman@redhat.com>
-In-Reply-To: <h46vz32432zl6xu773hfvnpze5zt7berywvg233esmeiftiruo@aub2kgpwi6zd>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Rspamd-Queue-Id: 3B8F64A77E0
+Content-Type: text/plain; charset=US-ASCII
+X-Rspamd-Queue-Id: 897F54A7925
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85343-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_FROM(0.00)[bounces-85344-lists,linux-doc=lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MISSING_XM_UA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[longman@redhat.com,linux-doc@vger.kernel.org];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[pjw@kernel.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,tennr.com:email]
 
-On 4/30/26 3:46 PM, Michal Koutný wrote:
-> On Tue, Apr 28, 2026 at 02:09:35PM -0400, Waiman Long <longman@redhat.com> wrote:
->> Creation of remote partition is currently not allowed without privilege.
->> On the other hand, creation of local partition is allowed without
->> privilege as long as its parent is also a partition root.
->>
->> The current setup allows a delegator to delegate an exclusive set of
->> CPUs to the delegatee by making the root of a delegated sub-hierarchy
->> a partition root. The delegatee is then allowed to create a local
->> sub-partition underneath it if necessary. Creation of a remote
->> partition is not currently allowed across delegation boundary without
->> privilege. Clarify the partition delegation rules by stating the current
->> behavior in cgroup-v2.rst file.
->>
->> Signed-off-by: Waiman Long <longman@redhat.com>
->> ---
->>   Documentation/admin-guide/cgroup-v2.rst | 12 ++++++++++--
->>   1 file changed, 10 insertions(+), 2 deletions(-)
-> After Tejun pointed out that other generic paragraph:
-> | This means that the controller interface files - anything which
-> | doesn't start with "cgroup." are owned by the parent rather than the
-> | cgroup itself.
->
-> I think the extra words may only increase confusion (and constrain
-> generic changes). So it was a good exercise but nothing needs to be
-> necessarily changed regarding this behaivor or its docs.
+On Wed, 29 Apr 2026, Avi Radinsky wrote:
 
-That is fine. This doc change is optional and I agree that we may want 
-more flexibility in case we change the behavior in the future.
+> Fix typos in the dynamic ftrace section: atmoic -> atomic (twice),
+> pacthable -> patchable, derect -> directed.
+> 
+> Signed-off-by: Avi Radinsky <avi.radinsky@tennr.com>
 
-Cheers,
-Longman
+Thanks, queued for v7.1-rc.
+
+
+- Paul
 
 
