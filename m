@@ -1,107 +1,153 @@
-Return-Path: <linux-doc+bounces-85344-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85345-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 85WJBru282mW6QEAu9opvQ
-	(envelope-from <linux-doc+bounces-85344-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 22:08:27 +0200
+	id cBgBJlO382mW6QEAu9opvQ
+	(envelope-from <linux-doc+bounces-85345-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 22:10:59 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 897F54A7925
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 22:08:26 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9960C4A7979
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 22:10:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D448B3024CB5
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 20:08:23 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 9BB37300406C
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 20:10:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B050389469;
-	Thu, 30 Apr 2026 20:08:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5DBA3750D5;
+	Thu, 30 Apr 2026 20:10:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fK3MhK9k"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JxvOs/Qt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com [209.85.219.65])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17B50287503;
-	Thu, 30 Apr 2026 20:08:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777579703; cv=none; b=D/qtkoJIogDLsHgKxDn/MR9NaKWX3L9h/XpXOxpaDtwKZpYAWu0T30boe8k7hAgP9iUGE1JUyGXJ7DNRskqOaWTCC+Rr0Newf50eDsEmjPcGkZDowY9vNxv0CjpWk7B0pONpRt4HHLIN2S+ojMOKQ8tWltqEa0vQw24A0qvThkU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777579703; c=relaxed/simple;
-	bh=8OtbdMRbfOue839bk+sXktHATPH+3qPIOw6xZKK7DZw=;
-	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=N6CKXt8c179BytcOuUXOiaVyhzcdFe1pRIPB5VGY8bRW+Otrcrqm0Ogr0y2BUMhWgOxtfiwZRc4Mm7gPV6AGgOfohfLqKSOmtbpA15s4B+D7L9VI8JeA1X/WFHZYGFjEzNNKO5qrchZ+I5xUEv3cyIJmET5jADzxo3VswtovPc4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fK3MhK9k; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84913C2BCB3;
-	Thu, 30 Apr 2026 20:08:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777579702;
-	bh=8OtbdMRbfOue839bk+sXktHATPH+3qPIOw6xZKK7DZw=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=fK3MhK9kCdLHmMjtWZe70Ox/VtLcx3NSz+XngQeD8SAHh6U5Xxb+SzIK/UbdLwgzk
-	 Em8ECR2oxPJmPfX3jYNy8Q9qopLte3XZL4Ok/jjrdgEtqYltH3xydo7DS7w2XUnvbu
-	 8ie+f/pErKfXVAgiFcixIqqgN/mjFD1R9VxC2KVQFFP6SbCLnk9kCnnWt8YiBKxXN2
-	 SiW+XLvwM4MVkfKr/weCw6fCVfUDZNLl+6dQvcXvVLA0cMFHPrOZ5jnaRGCFZJ6tKV
-	 vDRiYK+BocU8wh+1TSFNXQAKlafmM1sfwf6j57JAV0pzR+3zlDNeGoKHz4WOoZds2V
-	 fHXoOiQ9y+KIw==
-Date: Thu, 30 Apr 2026 14:08:20 -0600 (MDT)
-From: Paul Walmsley <pjw@kernel.org>
-To: Avi Radinsky <avi.radinsky@tennr.com>
-cc: palmer@dabbelt.com, pjw@kernel.org, aou@eecs.berkeley.edu, alex@ghiti.fr, 
-    corbet@lwn.net, linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org, 
-    linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: riscv: cmodx: fix typos
-In-Reply-To: <391d16fb-5f11-45fa-8f3b-1debe095695e@tennr.com>
-Message-ID: <ec533d17-0d7e-15ec-308e-0198e027ac28@kernel.org>
-References: <391d16fb-5f11-45fa-8f3b-1debe095695e@tennr.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68BB722D792
+	for <linux-doc@vger.kernel.org>; Thu, 30 Apr 2026 20:10:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.219.65
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1777579852; cv=pass; b=PafLqlS9BetimKWVdNfGvY8tcHLuYblVG21Tt2Cqvwd1aoXyrrp8KJtQl2dWIuovyqgMHm8o0X9OaWcKQwnkT187tcHRy06XDB5oqPHBMwKja12orSRW/eznJRRpDT08e98vSRdM6IYpK2R70SUMUoNtEHZj7RlZwo8YM8DPnLs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1777579852; c=relaxed/simple;
+	bh=WOA03rQ5vALbNG/D8xiyTMlNsTPXkNIixn1aoUnOjIM=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Content-Type; b=VCFeHGNS1vEG3qpnm3cQ389tLQO/kX3L004udN+lHA8JcZsiBZWvMrgrg92aKLS7f/LKfXXJawtAhbFf5g5joP0e4T/nJOtgeYxxruXSH0iKLL/zIWP1ULaI27pSeT+lH6p41TyoCT4/qBQcL4V0JfgRO1wuBDo1h3hGA6H7hzk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JxvOs/Qt; arc=pass smtp.client-ip=209.85.219.65
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qv1-f65.google.com with SMTP id 6a1803df08f44-8ac9ef74131so21716496d6.1
+        for <linux-doc@vger.kernel.org>; Thu, 30 Apr 2026 13:10:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777579850; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TJpFVCoB8FwK9OrHISGsSxC0RVUe0ryCM07z4VZe2S1cCcUSmB9/g0QD51ofhlIpjG
+         lj3g7fG0FVwh802VlawKPzcpk2P95QAOZkqKAJvKAJlKDzWfnAFaNLVLPD2FHHnO/3An
+         daJVNpNk1/3l1shJn9Io9z8nbQKtmr/YgWNTOJOkECYyiodUcgXS+nw4zV9pxBldYqP7
+         iQZmUk42qJwrWXjaRdnWLaujUgyJfLKrNgNRiPQmc7yGZYrJGwgMKyZmj8rNHxbttq3D
+         0Q7x5z7fceU1nonoRF3x86/kXja2IwCs39CnvKXxfY26ILJnhYpVLnGuj+wVCaiZoyKL
+         igWw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=WOA03rQ5vALbNG/D8xiyTMlNsTPXkNIixn1aoUnOjIM=;
+        fh=ZbonjbzJJsFV/lWPP+WlMJ1nkxs7eEVT2jwfomzjfAY=;
+        b=WXUjAAnoW112Xt5HYFFcdCzKBPDN7IWCiI29O3cOXZcV1RQP9Aoc2m/dGDMePy8hvF
+         dAd86RI/2RrIwcYq2yeLDydy9zFNugVtmqctNvG2FUmYx6PWgRgTn3Uojc/Z6aoH2u/B
+         wQIzuVHIRN2HDmC9NpS69N6vD0QaD54uBXpYbTphi2Os+L6wtutdzFAnx4913kmSZwts
+         BSY+aERnlmJ0e0GptPgNO85Vwgqvd3bZMtdofcDqOdfMMWMYtOSpbn0jHlIT/suxi/sB
+         vD+Jki10/ryY4pIxAk3+utKG4F/YmNFwN6kuCkuckN3M8k2f08iJ0uzOYyHRGDMmYZ5E
+         4/zQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1777579850; x=1778184650; darn=vger.kernel.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=WOA03rQ5vALbNG/D8xiyTMlNsTPXkNIixn1aoUnOjIM=;
+        b=JxvOs/Qtg5d7Hplwful5t8uO6hGLizvXxSI1vMabGKQKZO3MekOqA4YKsScCw5all0
+         e0Cm85JoYHvt/dxE4jrjVah0XJG0aAoxzl6NYMutX6mQVu291YsvQoumir8Di95/4Dya
+         6NwgGke9Tiey7uaViCBKCg2pP+YA6bJvXu7lJYQwLifWQbslxa/7D6m9ei2lx92ltcK6
+         THDAj5ysoMCppM7Tx8iNbqqmC2SlwWyP57Al7mYWiBNSm3WwcJIiORr+UyCunoF+YKiS
+         Xz5DtVg93XGF8WT2/9/0ht/6SRNucZJO65RVPILmD1juvTLdrCC8ytHIKf5C7jYqj+Ro
+         Z/ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777579850; x=1778184650;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=WOA03rQ5vALbNG/D8xiyTMlNsTPXkNIixn1aoUnOjIM=;
+        b=ZHN6eNWUPwTo73Vn9KCV2nn2WQ+mpYJ6ysG8XBykpBeG6Hy27KUs0FC6nxxSBC5PCQ
+         xoIouU8HM67JZKBnFOROZBHdkYUJcnvQr2nOT4vjouzAOGj8MZHX7Fk60fzEI0KhzxAX
+         542u6UQe5SBBJztHUMfQIgQ2fhclsBN7kSMs3VAnHbbOGeNHes5oLWiRtDQjDMXcoq7W
+         c3GfXJB2EhUYqr93Lg6P9Ae5eKwCUdx9qKQQ4vdC0bhJtVvwuKEFxDoLSsOJi2qJXYW9
+         aQSZM1UrhBOlau0kbSTLtEnjKApQXOpQvGF/NmeMhqEtMTweKIVjFp0ZCPd+NyIJavxs
+         hp8w==
+X-Gm-Message-State: AOJu0YwomJ8DVZMkldMAF/78Us1OvbObI1jsTyzxcNUOs9MGq6q3U7+K
+	WuPIqbyzIqqnb2c762ppuETEZh/cMZH3JEsZhdPOg9fiH95JavF7QZCVt3znDxOswO1b7lfp2ns
+	4P6kjnO0verKRu3n7mIYIj92EDFBm6dOTZOYg
+X-Gm-Gg: AeBDiesi4bsuZBP3iTuUSviZCPELb6NBoapIdASGJml1kJ/aMt5KLxgHoLghqIE4EgX
+	nAV+F7KhghjomICZSyQvtYiiwUKBCrjTaQO0A3Om51Yl9e4wOU4snSzfHnAJYVdIlrgzdJBkL1u
+	3MWon1LVkZJiicdEn0H5k1CEu1Yq9R73H1G1SZRBIhpHNffF+nrR9uhMOOhBFFsOPvRZMh/zKYD
+	pkQwburZEzA+rEmM6pdbkspESUBjvcqG8/WTI2Wvzc3KkmDVBqSziEZjWmNZySdF3MtfPleAO+1
+	m9ZTsCnPG2BdBlu8omlmH9FWCNhDO0bN0oio2UbcAXITRmTgqVLEjHnzT344UCCyvfw6DAVbp3T
+	iekAzi+VRNZaERLpuXerLD+nW/wj69A==
+X-Received: by 2002:a05:6214:2402:b0:89a:14ef:8eab with SMTP id
+ 6a1803df08f44-8b3fef072e4mr65844056d6.41.1777579850336; Thu, 30 Apr 2026
+ 13:10:50 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-Rspamd-Queue-Id: 897F54A7925
+From: Dewey <thawentha4@gmail.com>
+Date: Thu, 30 Apr 2026 22:10:39 +0200
+X-Gm-Features: AVHnY4IuN1R3JeiYzJvFX0OgB061mIoHBlXnbxCoLgwPowoKXyL-suhZnLZrSII
+Message-ID: <CADWiQPK3kC5ymXsdYT6tc7qH47THfY=LpBSW3=dcGNO2Fi_p_A@mail.gmail.com>
+Subject: [RFC] Interest in contributing to Linux Kernel documentation (French translation)
+To: linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+X-Rspamd-Queue-Id: 9960C4A7979
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	INTRODUCTION(2.00)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TAGGED_FROM(0.00)[bounces-85344-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85345-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_ONE(0.00)[1];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pjw@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[thawentha4@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,tennr.com:email]
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mail.gmail.com:mid]
 
-On Wed, 29 Apr 2026, Avi Radinsky wrote:
-
-> Fix typos in the dynamic ftrace section: atmoic -> atomic (twice),
-> pacthable -> patchable, derect -> directed.
-> 
-> Signed-off-by: Avi Radinsky <avi.radinsky@tennr.com>
-
-Thanks, queued for v7.1-rc.
-
-
-- Paul
-
+Hello everyone,
+My name is Dewey, I am a software enthusiast with an interest in the
+Linux kernel. I am reaching out to the list to see if there is any
+interest or an established process for improving the documentation by
+adding or maintaining translations, specifically for French.
+I understand that the official documentation is maintained in English
+and that keeping translations in sync is a significant challenge.
+However, I would like to offer my time to help, whether it involves
+translating specific sections or helping with the automation of
+documentation generation.
+Could you let me know if there are any current initiatives regarding
+translations, or if there is a preferred way to contribute in this
+area?
+Thank you for your time and guidance.
+Best regards,
+Dewey
 
