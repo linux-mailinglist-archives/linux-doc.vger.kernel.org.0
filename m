@@ -1,140 +1,190 @@
-Return-Path: <linux-doc+bounces-85249-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85251-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qIsVJXe68mkptwEAu9opvQ
-	(envelope-from <linux-doc+bounces-85249-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 04:12:07 +0200
+	id 4F0jJpvC8mkjuAEAu9opvQ
+	(envelope-from <linux-doc+bounces-85251-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 04:46:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E39D49C389
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 04:12:05 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3649549C715
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 04:46:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5376E3029773
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 02:12:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2FB5A3015C9C
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2026 02:46:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 964812848AA;
-	Thu, 30 Apr 2026 02:12:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F9A432D42B;
+	Thu, 30 Apr 2026 02:46:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k5kPcn1Q"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="d4MUZKEu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F09927281E;
-	Thu, 30 Apr 2026 02:12:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777515121; cv=none; b=LPCIQeHyAov4mOEdRAh9AiW68G+tBHJNpaFxxcHniPDMejdiYPsxf4i/i+VAbbtQ8udBzdEutQ6uLh8/IumRsQGyk4jlE3/5SDzq22+Ecf7nPpF046Gow68qH81ZfeAguF4sTNdAOQkzNbSoLaQmgflRIh9MNLZtGRdnCku9Y+A=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777515121; c=relaxed/simple;
-	bh=Iynk1THCP/qxdLQKKSMR/8OAJf7uHsox6KYhOKpSMU0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=CinLlP1p6KdqF0nBTrYiloh2E+KZ1q98ZFUWRZgIddFDCz8L2xGip2+rHfyepSVGjzyprYBUFotq1wKPhu+feGujq94O32P5YRdYjrLI5Cf/RNrVGVqwKat0CthrbMIOpG/n67OxRvmmgN7qklgBdJvc44rpJvS9oZ0wTPJ7Lh4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k5kPcn1Q; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73F8FC19425;
-	Thu, 30 Apr 2026 02:12:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777515120;
-	bh=Iynk1THCP/qxdLQKKSMR/8OAJf7uHsox6KYhOKpSMU0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=k5kPcn1Q1fUhwjrw0jUQbfbBGvNFQcLWfY70N66e6NxJsAlJ72hGJFLJdO/PzWgpo
-	 MLxCvYfGQpDkBNr3pnw/MT9mkIJiDXWGypfO85vxMM3hJOreGIN7mRc9e8N4nezFk3
-	 UnF1NLTth1FY0KExLwJkQdwIojJO9kunMAGn/+w7p3neh1GrcKY3asz+9VnOgCajqI
-	 8dyfrmHbUbPnvzcBdriDV3bJR7qoNLLsGLSfZGF6nRQrOwfelo6PUH9PVx8LEH4is4
-	 tHc4jTR5t8aPrg4fvnYgWHkL2YMnM48nyrNzslD6/WfgwL8/AWpdwqREf2/k4JQIJn
-	 3HN/JRZClm+lA==
-Date: Wed, 29 Apr 2026 19:10:42 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	Linus Torvalds <torvalds@linux-foundation.org>,
-	David Howells <dhowells@redhat.com>
-Subject: Re: [PATCH] crypto: af_alg - Document the deprecation of AF_ALG
-Message-ID: <20260430021042.GA51782@sol>
-References: <20260430011544.31823-1-ebiggers@kernel.org>
- <afK4zC-Mgo6LBfUh@gondor.apana.org.au>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BBB830F531
+	for <linux-doc@vger.kernel.org>; Thu, 30 Apr 2026 02:46:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.174
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1777517199; cv=pass; b=OkHm3YNrSReEUnQt6NfAYcTF6m71ncSBO+gxhwo3v/NsSdDVsFh33u3fDnUp60JOx1M5v6BQtKLvlg9Bkdlg4E+StPyLScW/3VClHHGVgVtJVwI1UNnU+02HXB11EFyW0xf88fsD7NHAP+MGXBn24T4ocmECqunUaIs9uvv9CYc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1777517199; c=relaxed/simple;
+	bh=aT11hkKef07wVt5TZXMpjctyPu05lHXAD49tSMD9BFY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=nu6Fq8ZKg18HEp2bTFV3Zfye4tH7AvcBK/O5ZhaTuQphoaeHGuRWPwuFHyjqjBazJFCcHx66Mpj2m92fNbyxrxk304JLUIzTDo3AzO5v9iaeITEFGVMGn+88LNpWnyn1GM/m7zkYrOv0Mhs7MV7KSOy9mrWe0ZXHJCxV2RmDges=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=d4MUZKEu; arc=pass smtp.client-ip=209.85.222.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-8ee7ffd738dso147625385a.1
+        for <linux-doc@vger.kernel.org>; Wed, 29 Apr 2026 19:46:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777517195; cv=none;
+        d=google.com; s=arc-20240605;
+        b=QvP8luajjMPAVtdS/EuaFEwB0TJSEH02RRYM5vLrG4X9BSSk060Bywy2L0zz3NAAol
+         Zh85hn4xxEHfVs0i7fHRDnMdqLO8OSOHSxSjlkvefyPK9WRVpFGUtzJoKN4R7oPj0wJ+
+         BhVK7r9gAGEyIfOExI5wKufbVpxEt50SoBRySpT4RSU1pPqXKME1LKnBDQfqdvpJCdNR
+         zexs+4wIT+UFjFKU67uDcyc266i2sfBbai80eIjIG1G2q5zUxsi3erjkQAYyHT8JxHji
+         EIeRMqlg3PKPYjkHA1EsmtL33BqIICbBn0w0hUIvEeNgucAGoZljwZKOAgjcMqHJi6ej
+         M8Tg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=eSsA+Kw8J1H0AN7uzgMjjhL2cMAl5C4DIDhT6f092dg=;
+        fh=mialB9NNN/eicW1TBdkthPlwk3ab9uABHLZLATeafAQ=;
+        b=S1lcrc4bFPv4kUwLIm9lwvzrwNzsvOtMkyjS7cDl9eduQPH7B3YZWIk4BXeE+pA2l+
+         JMeZgdGCYM88Z01q4BWgIp8ellu+o7hf/a3ybb1Dh2WjNTtWjdhjijj9QKkMYDUO8VYZ
+         Nd0i6qr3JFcIRZOstuqeoMjDZpzlfbof/ToKFcuFZn8bs9EChtE9fqhj5QDgl8x5JP3d
+         QHqnSHSFCh/CA29kzj3GUU1/3V8ETWRDy8t2BgLS8KnvSNG9dr8hjjVKdyGCrYYcnVq9
+         I+FLqiw5DpjKqj8PFbj9qcyymY2LVE2Rd+P9J+2Hv2xRMaMWrEWwtlein9wga0X+1wje
+         He3A==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1777517195; x=1778121995; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eSsA+Kw8J1H0AN7uzgMjjhL2cMAl5C4DIDhT6f092dg=;
+        b=d4MUZKEuWVjYak/nY3toeGapT3AruxjY+iP/uu7qUs1RkzF1bv2Rt27gf9zam/UL1g
+         ayUO85u1QcT6WuMn0QNzLuuJyEhBbJbaxOYdrdnKmyyjVeDl/hiL87N3NKnb/nlcp2H6
+         9b2nGgcOlQGz/UFblbuq28mOZBPWPIwtWfj8t3D5kdZB1I3S7h8seCERZzkOwzyTVptc
+         exkj6A2Neeew4DQ36/UBO+Ore0tYRvpiIhYSgca+Wfwgv/OYXzBZzj8vvJiNxoNYuWf5
+         OmPbl0zO9hh6gHpRyUjtIKJwtYLpbUHcnvl3NdrhhaHns/9dc06BaIADqJ5vvoZSIF2n
+         iaFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777517195; x=1778121995;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=eSsA+Kw8J1H0AN7uzgMjjhL2cMAl5C4DIDhT6f092dg=;
+        b=FykyIR02upuMIXH+oypSBG1fBI1nD/yYZiB3W0BYfoRFU9m1+sYQwXdR/wdKBLvUBQ
+         Od1LfXHxs97wIkyAehcXl9KOTZ4jYs0PQdbJCNEdmpes811t/zwDkt0a8y27Bobr6x+8
+         DiBSTHIyc1vRnOYh7WSGrrbj8ytm1PjYXiLlcrxQ0Lwb3zNdalpX/d+SR3UKt70xEnTk
+         YUEpAn9EMBkHq+fvFsuD8e1Z4cGhDBJlGXs/UPYkJ6rZDPhJByYssYvUGFqN1zayw+IZ
+         zTpX9FULLmU8KZPRF971xgHU9GseOdt4AwphraF3HaX+7jex1TAO54eGp2xk2VnqZdb+
+         ee2w==
+X-Forwarded-Encrypted: i=1; AFNElJ/p5DdIeVp+KxNGKMW4qoOjxLmyj/NQVCVnPYt3H9yopc1BUpyMyCIbeEmo35aYwVDOo50ML+0yGN0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzS78CVSRM2yGkqTQ8n6LHzMKIYe9O5RpHMbACKPmOkwupUTNMH
+	iRVcDoooG1NTXO+6b/Z72KVIAt4sIu5fuBy24Gwd6ag3hJDuJ+fzDGAYVMa7qFPFCGrx49dj+WU
+	zeAhCAfWzVA320Y+r1IJT1nP3IqCdGqVvzb6N72qA
+X-Gm-Gg: AeBDiesdVE8N/Ah65etaIfRRaH6CooDYEx9NceF5GjFd7kesSkwpbOtcEOTNMU10I1P
+	q8byFcKIuzQIKCCkO+AomI851qpsIMHlrXOF4CVRrvyDCFvtE1KZYOEAdtyleYiqqpe9aRgc4RK
+	Nj+Y5xY0EAnBL3d+B37NkAb702cgv72Ukga5zCRzgCFothqRKK+GSzdxxBWZLIDEVi1Fcn1AbRY
+	7JwpxghC8mHweezlJI0pwKvjQG0fzMlrYfJyuvToBK1WwVZcqRrQtDSDTqsRNK0P4hsCoSuv8l3
+	moHVU/nL0Oq/FGZIgqQpSBIIjjIfuzjYqM8mccUDjZs/dXlwpi0BKcHsFrzgL+KoNQP2THAsGp2
+	WmeOtWrU=
+X-Received: by 2002:a05:622a:514:b0:50d:3efd:bd93 with SMTP id
+ d75a77b69052e-5102d0d3e87mr7791921cf.11.1777517195076; Wed, 29 Apr 2026
+ 19:46:35 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <afK4zC-Mgo6LBfUh@gondor.apana.org.au>
-X-Rspamd-Queue-Id: 2E39D49C389
+References: <TY7PR01MB172057C053E8D550485A29A08E0352@TY7PR01MB17205.jpnprd01.prod.outlook.com>
+In-Reply-To: <TY7PR01MB172057C053E8D550485A29A08E0352@TY7PR01MB17205.jpnprd01.prod.outlook.com>
+From: Eric Dumazet <edumazet@google.com>
+Date: Wed, 29 Apr 2026 19:46:23 -0700
+X-Gm-Features: AVHnY4Lwl01Xyj2g07tpoheIVw1AqnWlO4eliacZgKmPEOyIUAmGUIaTS9ZoNBs
+Message-ID: <CANn89iJHUEio=hZPkKuh7MZLxQuU1h4RLyB4c6nkWGNifevexg@mail.gmail.com>
+Subject: Re: [RFC PATCH net-next 0/3] netns: optionally inherit IPv4 TCP
+ sysctls from old net
+To: nmreadelf <kong414@outlook.com>
+Cc: davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net, 
+	dsahern@kernel.org, horms@kernel.org, chia-yu.chang@nokia-bell-labs.com, 
+	idosch@nvidia.com, ij@kernel.org, brauner@kernel.org, jack@suse.cz, 
+	kuniyu@google.com, jlayton@kernel.org, netdev@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, lance.yang@linux.dev, 
+	leon.hwang@linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: 3649549C715
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85249-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[outlook.com];
+	TAGGED_FROM(0.00)[bounces-85251-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ebiggers@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[edumazet@google.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[google.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[copy.fail:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCPT_COUNT_TWELVE(0.00)[19];
+	TO_DN_SOME(0.00)[]
 
-On Thu, Apr 30, 2026 at 10:05:00AM +0800, Herbert Xu wrote:
-> On Wed, Apr 29, 2026 at 06:15:44PM -0700, Eric Biggers wrote:
-> > AF_ALG is almost completely unnecessary, and it exposes a massive attack
-> > surface that hasn't been standing up to modern vulnerability discovery
-> > tools.  The latest one even has its own website, providing a small
-> > Python script that reliably roots most Linux distros: https://copy.fail/
-> > 
-> > This isn't sustainable, especially as LLMs have accelerated the rate the
-> > vulnerabilities are coming in.  The effort that is being put into this
-> > thing is vastly disproportional to the few programs that actually use
-> > it, and those programs would be better served by userspace code anyway.
-> > 
-> > These issues have been noted in many mailing list discussions already.
-> > But until now they haven't been reflected in the documentation or
-> > kconfig menu itself, and the vulnerabilities are still coming in.
-> > 
-> > Let's go ahead and document the deprecation.
-> > 
-> > This isn't intended to change anything overnight.  After all, most Linux
-> > distros won't be able to disable the kconfig options quite yet, mainly
-> > because of iwd.  But this should create a bit more impetus for these
-> > userspace programs to be fixed, and the documentation update should also
-> > help prevent more users from appearing.
-> > 
-> > Signed-off-by: Eric Biggers <ebiggers@kernel.org>
-> 
-> What about the exposure of akcipher through security/keys/keyctl_pkey.c?
-> 
-> There isn't even a Kconfig option to disable that user-space API.
-> If module signatures are enabled then this automatically gets added
-> to the kernel:
-> 
-> MODULE_SIG -> MODULE_SIG_FORMAT -> SYSTEM_DATA_VERIFICATION ->
-> KEYS + ASYMMETRIC_KEY_TYPE
+On Wed, Apr 29, 2026 at 6:30=E2=80=AFPM nmreadelf <kong414@outlook.com> wro=
+te:
+>
+> a new network namespace starts with built-in TCP defaults.
+> In container-heavy setups, operators often tune TCP sysctls in init_net a=
+nd then
+> need to re-apply the same values for each new netns.
+>
 
-Yes, that would be a different patch, but KEYCTL_PKEY_* have a very
-similar issue.  That should have a kconfig option added too.
+There is a mistake here.  init_net is not the same as parent_net (or
+old_net in your patches)
 
-I believe iwd is the main (or even only?) user there, as well.
+unshare -n  # Parent netns might be init_net
+unshare -n  # Parent netns is not init_net
+...
 
-- Eric
+
+> This series adds an opt-in mechanism to initialize per-netns IPv4 TCP sys=
+ctl
+> settings from init_net at netns creation time.
+>
+> Behavior:
+>
+> Default is unchanged.
+> When net.ipv4.netns_inherit_tcp_sysctls=3D1, new netns inherit
+> TCP sysctl from old_net.
+>
+> nmreadelf (3):
+>   ipv4: netns: group copyable TCP sysctls in netns_ipv4
+>   net: ipv4: add netns_inherit_tcp_sysctls sysctl
+>   tcp: netns: optionally inherit IPv4 TCP sysctls from parent netns
+>
+>  .../net_cachelines/netns_ipv4_sysctl.rst      | 25 +++----
+>  include/net/netns/ipv4.h                      | 33 +++++----
+>  net/core/net_namespace.c                      | 72 +++++++++++++++++++
+>  net/ipv4/sysctl_net_ipv4.c                    |  9 +++
+>  4 files changed, 114 insertions(+), 25 deletions(-)
+>
+> --
+> 2.47.3
+>
 
