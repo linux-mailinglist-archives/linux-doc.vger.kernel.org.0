@@ -1,191 +1,129 @@
-Return-Path: <linux-doc+bounces-85461-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85466-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mIuJG5WU9WnUMgIAu9opvQ
-	(envelope-from <linux-doc+bounces-85461-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 08:07:17 +0200
+	id QGDaB/SV9WkaMwIAu9opvQ
+	(envelope-from <linux-doc+bounces-85466-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 08:13:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C76DC4B11CE
-	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 08:07:16 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 952DD4B1235
+	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 08:13:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B184D3025D3B
-	for <lists+linux-doc@lfdr.de>; Sat,  2 May 2026 06:07:14 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 131DF3027365
+	for <lists+linux-doc@lfdr.de>; Sat,  2 May 2026 06:12:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C903C2E889C;
-	Sat,  2 May 2026 06:07:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5A732F1FC7;
+	Sat,  2 May 2026 06:12:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="Gc3f1ZRd"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="jDO/voY1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85FF22F0673;
-	Sat,  2 May 2026 06:07:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AC822C08D0;
+	Sat,  2 May 2026 06:12:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777702033; cv=none; b=seFHTZQ2CcSd3aqCEo9QjfpbKQSVW9TcwRbllOVCGlM+vD+ksg80zU/by9VcoxznqZYOA0sbnw6s80oX6MaIMxlg/rJcwvnwu2X56/L01HPrZtO+j+AxufQP4fTsbVyDQgcfUsd4AQr6Ii981bDzV4oQhtrKEtFa1Qe925NbKlE=
+	t=1777702366; cv=none; b=n9hEBHnz9MISmZGpGm0nDU7vJYIsZtQd3RXUAD1zl5Ig0/7r1+trYqh3+aj7QBdQuzs2cY3atAOg/eVRWS+HH2l2eXsw6Kbp/wqYs7mM3EjBzoT4ojopspgrq2b6PWb4buJojRH7tYxOriW+wUFTrzLzQbn43yeJZ579YqSCbJE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777702033; c=relaxed/simple;
-	bh=mZH1Ywc8JIa1yFFkEYwhLkgEK44DLORqzfpgH+dlfoU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QmGYYAL9rMYpp1XFBniLwvr5NbQzi3SIYPJ8GK3TZX3HL3hwyiKYLe7mj2GxHmPCeL18iypvWhtEk9VFzIEmlWUhEjW1+u2hXrxGhAB4t2Mhn+sNlAnyvWJO7ZqPjJrqkapsGPEAjpSQgiq8MW2RJt0UuFDSrXdLTG2arW3AR2I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=Gc3f1ZRd; arc=none smtp.client-ip=51.159.59.229
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
-	t=1777702029; bh=ZB38LQXr254bYq/wdyTLMI+aWdPO5vNjqpNMweDOsjE=;
-	h=From:Message-ID:From;
-	b=Gc3f1ZRdDRUhL/O/PK695Crvs0G18Qp3AHMvLmcCh5rBxtqpw0gZGARQLN7qZFeb0
-	 +8730sAYzBK84VlgzY63cs3PGl91kEgPMRIx7We5L4Rv/7G/OBxvNz0P0iV9OX17nt
-	 ZopwHW/GfXm+uGd0AzcFI1MLpdFYhhGFeLCm3IJA=
-Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
-	by mta1.formilux.org (Postfix) with ESMTP id 2ED1CC0AA3;
-	Sat, 02 May 2026 08:07:09 +0200 (CEST)
-Date: Sat, 2 May 2026 08:07:08 +0200
-From: Willy Tarreau <w@1wt.eu>
-To: Demi Marie Obenour <demiobenour@gmail.com>
-Cc: Greg KH <greg@kroah.com>, leon@kernel.org, security@kernel.org,
-        Jonathan Corbet <corbet@lwn.net>, skhan@linuxfoundation.org,
-        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Qubes Developer Mailing List <qubes-devel@googlegroups.com>
-Subject: Re: [PATCH 2/3] Documentation: security-bugs: explain what is and is
- not a security bug
-Message-ID: <afWUjN1FbIHIK99Z@1wt.eu>
-References: <20260426163914.19449-1-w@1wt.eu>
- <20260426163914.19449-3-w@1wt.eu>
- <2026042753-ozone-jigsaw-4ad5@gregkh>
- <ae-Acm2XJ3sR34Il@1wt.eu>
- <2026042724-bullhorn-bobtail-ae6f@gregkh>
- <ae-LVyDQPVwxesCO@1wt.eu>
- <2026042804-overbook-ripeness-73dd@gregkh>
- <1d3f8659-8c69-47f6-bb38-4c1d06cf8307@gmail.com>
- <afWNHZoN64fldbUK@1wt.eu>
- <a8e60dfe-2965-4a4b-89fb-ce5991395dc5@gmail.com>
+	s=arc-20240116; t=1777702366; c=relaxed/simple;
+	bh=8/XOX1gTPwrGq6YVVJpWG6VUDM7+Dxa9aiwDHImRW+g=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=iMehYy/Eayn0yn/19o2PijCfSTjeeFMubTUmgNkFHhmhngcazKT1SWU97PP8V7aioeDf8s4PaPP2yTYm/DUejLZgDyav7R29k/TkXDyPZDdiTxAIyRGGCqJD1Goy+/giuvTqyzF9kbWiAUjMDLIs1Uk9kW6+PeduiyBjktfQBRE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=jDO/voY1; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net F13B340C79
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1777702359; bh=uz82z23aJdr7ZdOYRK6lDP3xgOT3nhAod/V/1wIXqyg=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=jDO/voY17Mewi1FOIbpz5XsAHnVPae5VevH7i88hTvVWl2VsmlhuRr0Rt4JyijAL0
+	 VZ8KM9VPD39Jgkxzt2bFcJtk0LoaE2u33rXSnwCCx9VCpzbCSxaXX+siidpvNVSaQJ
+	 8A6IHY6iFf0zdy95B+nV7Y4fQdQjoMO/SUW0J3ag0XnSPtKXQM58Mbz66U+KxDKBmg
+	 ykiUPyFeoIRh1LBL5O+799c58CqLO0bh0Rp3ncFrtdqqBOPBNF0Lqy7via2zPruNJY
+	 T4dUJ9RMPfGIyYOVKPLKA1GZEKSmhq9wNetTihrrNFrUW+FYbMFso+oycg7VrwoYzg
+	 PGGBeX7CvTmag==
+Received: from localhost (mdns.lwn.net [45.79.72.68])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id F13B340C79;
+	Sat,  2 May 2026 06:12:38 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Costa Shulyupin <costa.shul@redhat.com>, Shuah Khan
+ <skhan@linuxfoundation.org>, Andrew Morton <akpm@linux-foundation.org>,
+ "Borislav Petkov (AMD)" <bp@alien8.de>, Randy Dunlap
+ <rdunlap@infradead.org>, Dave Hansen <dave.hansen@linux.intel.com>, Dapeng
+ Mi <dapeng1.mi@linux.intel.com>, Kees Cook <kees@kernel.org>, Marco Elver
+ <elver@google.com>, Li RongQing <lirongqing@baidu.com>, Eric Biggers
+ <ebiggers@kernel.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1] docs: Remove icn= ISDN parameter
+In-Reply-To: <20260501190546.27a6f8fb@kernel.org>
+References: <20260501182634.1110715-1-costa.shul@redhat.com>
+ <20260501190546.27a6f8fb@kernel.org>
+Date: Sat, 02 May 2026 00:12:35 -0600
+Message-ID: <874ikqfigc.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a8e60dfe-2965-4a4b-89fb-ce5991395dc5@gmail.com>
-X-Rspamd-Queue-Id: C76DC4B11CE
+Content-Type: text/plain
+X-Rspamd-Queue-Id: 952DD4B1235
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85461-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-85466-lists,linux-doc=lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[1wt.eu:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[1wt.eu:dkim,1wt.eu:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lwn.net:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
-On Sat, May 02, 2026 at 01:51:08AM -0400, Demi Marie Obenour wrote:
-> On 5/2/26 01:35, Willy Tarreau wrote:
-> > Hi Demi Marie,
-> > 
-> > On Sat, May 02, 2026 at 01:20:10AM -0400, Demi Marie Obenour wrote:
-> >>>>> Ah, but USB does cover "some" modification of devices, so this is going
-> >>>>> to be something that is good to document over time, if for no other
-> >>>>> reason to keep these scanning tools in check from hallucinating crazy
-> >>>>> situations that are obviously not a valid thing we care about.
-> >>>>
-> >>>> OK but does this mean you still want to get these reports in the end ?
-> >>>
-> >>> I want a patch if a user cares about that threat-model (as Android does
-> >>> but no one else) as it's up to the user groups that want to change the
-> >>> default kernel's behavior like this to actually submit patches to do so.
-> >> FYI, I don't think this is limited to Android.  Chrome OS definitely
-> >> cares about malicious USB devices, and the whole purpose of USBGuard is
-> >> to prevent a USB device from being able to compromise the system unless
-> >> authorized.  I believe Qubes OS also cares, as it supports USB device
-> >> assignment to virtual machines.  CCing qubes-devel for confirmation.
-> >>
-> >> What should that patch look like?  Could there be a way for these user
-> >> groups to be informed of vulnerabilities in the USB subsystem, so that
-> >> they can take responsibility for fixing them before they become public?
-> > 
-> > I've posted a proposal elsewhere in the same thread:
-> > 
-> >    https://lore.kernel.org/lkml/afSxSX8RK0Z4kkOI@1wt.eu/
-> 
-> I saw that, but it's still not quite clear what is meant here.
-> My understanding is that those concerned about malicious USB devices
-> are generally concerned about _arbitrary_ malicious USB devices.
-> The one thing a USB device shouldn't be able to spoof is the port
-> it is plugged into, and userspace tools like USBGuard can use that
-> information.  But to do that, they have to trust that the device
-> can't harm the system if it isn't assigned to any drivers.
+Jakub Kicinski <kuba@kernel.org> writes:
 
-The goal sought by that early document precisely is to draw the line
-between what is a regular bug and hwat is a kernel bug. The kernel
-currently doesn't consider problems posed by a crafted USB device as a
-security issue because the kernel trusts the hardware in runs on. Of
-course there can be valid reasons to disagree with this, but it's just
-the current situation and the purpose of the document is to clarify it
-so that bugs are reported to the right place and handled efficiently.
+> On Fri,  1 May 2026 21:26:30 +0300 Costa Shulyupin wrote:
+>> The ICN ISDN driver was removed in commit 02bbd9802da7
+>> ("staging: i4l: delete the whole thing"), but the icn= kernel
+>> parameter documentation was left behind.
+>> 
+>> Assisted-by: Claude:claude-opus-4-6
+>> Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
+>
+> Acked-by: Jakub Kicinski <kuba@kernel.org>
+>
+> Jon, since linux-doc got CCed I suppose it's most expedient for you to
+> take this? LMK if you prefer us to handle it via netdev.
 
-> >> It does make sense for those who care about the security of a subsystem
-> >> to be responsible for vulnerabilities in that system, but right now
-> >> I'm not sure how one would offer to take up that responsibility.
-> > 
-> > I think that at least some subsystems will want to add their own
-> > restrictions based on the bug reports they keep receiving, and I hope
-> > it can help distros figure where there's a gap between is promised to
-> > users and what the kernel promises, that needs to be filled by userland
-> > verification tools for example.
-> > 
-> > Willy
-> 
-> I think there might be another category, which is were there is a
-> third party who is much more interested in the security of a subsystem
-> than its primary maintainers are.  I suspect that Google is said
-> third party in multiple such cases, especially various USB drivers.
-> In particular, exploiting the kernel via USB is a common attack
-> technique used in the wild by tools like Cellebrite.
+I'll pick it up, no worries.
 
-Possibly that such ones might appear there at some point. The best
-way for these might be to have such teams try to step up as
-co-maintainers for the parts they care about though.
+Thanks,
 
-> In these cases, I think it makes sense to funnel vulnerability
-> reports to the people who actually seriously care about fixing them.
-> For instance, problems in USB might be funneled to the Chrome OS and
-> Android security teams.  They will get fixed much more quickly, and
-> upstream maintainers won't be flooded with reports that don't have
-> attached patches.
-
-Trust me, patches written behind closed doors rarely resist publication
-and discovery by the maintainer. And treating bugs as regular ones in
-fact tends to make them move faster than as security ones. No need to
-go back-and-forth asking for data that reporters hesitate to share, nor
-to have to first convince them that their bug needs to be fixed even
-though they were planning on speaking about them at a conference, etc.
-
-Cheers,
-Willy
+jon
 
