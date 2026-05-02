@@ -1,108 +1,129 @@
-Return-Path: <linux-doc+bounces-85489-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85485-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GK6CFtX79WlSRAIAu9opvQ
-	(envelope-from <linux-doc+bounces-85489-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 15:27:49 +0200
+	id +OSHDg309WnwQgIAu9opvQ
+	(envelope-from <linux-doc+bounces-85485-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 14:54:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D123A4B227B
-	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 15:27:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF3E74B20D8
+	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 14:54:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 598BA300C5A0
-	for <lists+linux-doc@lfdr.de>; Sat,  2 May 2026 13:27:47 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CEFF4300CE63
+	for <lists+linux-doc@lfdr.de>; Sat,  2 May 2026 12:54:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C1D224887E;
-	Sat,  2 May 2026 13:27:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A9CC37FF53;
+	Sat,  2 May 2026 12:54:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="pSDPHpI/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from s1.jo-so.de (s1.jo-so.de [37.221.195.157])
+Received: from out203-205-221-221.mail.qq.com (out203-205-221-221.mail.qq.com [203.205.221.221])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10EDC2D7BF
-	for <linux-doc@vger.kernel.org>; Sat,  2 May 2026 13:27:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=37.221.195.157
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D36C128150F;
+	Sat,  2 May 2026 12:53:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.205.221.221
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777728466; cv=none; b=riPaWxOikxXLOGd7lgjR5dY2hZc/fjiL+5hObtCY+qX3JuPkx6Jrw1cAxcjMJxydF8Opp7sbfId9y2sANEG/V+JHKEjZLt/U500b4ExKKJNylkUJI9gaGdhIXmTl252HRdD2p0mkZN0VwLjcOmqgoseqc/2uA0lk7CyPU2OnJZo=
+	t=1777726441; cv=none; b=Qe/sbHODe6rrQq5PH5H8peHph2+iao+lxu2TiGmaa1uSoels08IdfoW0eMR+l07R2C1TRLKj13BMyLfJUzBEFT1/ZZGNFAhwAPZ1DTKp/4DT7TvoPTInrplomRsthFYXPxZt9n3CPbwcyEGIr2Y0jctbFTvLb/vOFXNAWjP7hZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777728466; c=relaxed/simple;
-	bh=A00czMAKcwXXNGopW8KD2RMSwZ4nAWBDs4qIFGTi2Es=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=caR5lAwv06OE6fusyknjxWO42zZjQjNL+V+fLJJmetE4NKePnShkSHl/wy/xEi0Q9BTRrMR7fBCQEAFKiU03x9Q9Bl3gA+zr08T8yjFXJxv+dlfQYJWofOnvy1faQR6mLVfcYOqG6cMN70NxO4WY/8KJrG1iXgnXtQeA+9VaChU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jo-so.de; spf=pass smtp.mailfrom=jo-so.de; arc=none smtp.client-ip=37.221.195.157
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jo-so.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jo-so.de
-Received: from mail-relay (helo=jo-so.de)
-	by s1.jo-so.de with local-bsmtp (Exim 4.98.2)
-	(envelope-from <joerg@jo-so.de>)
-	id 1wJ9pU-0000000ABUE-3OfN;
-	Sat, 02 May 2026 14:52:20 +0200
-Received: from joerg by tux.jo-so.de with local (Exim 4.99.1)
-	(envelope-from <joerg@jo-so.de>)
-	id 1wJ9pU-00000002c8K-0TY7;
-	Sat, 02 May 2026 14:52:20 +0200
-From: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg@jo-so.de>
-To: keescook@chromium.org,
-	corbet@lwn.net
-Cc: linux-doc@vger.kernel.org
-Subject: [PATCH] doc/pstore: Fix parameter names in examples
-Date: Sat,  2 May 2026 14:52:20 +0200
-Message-ID: <9e06a170f08fb5c83f0ca861cb42e0a22850b572.1777726340.git.joerg@jo-so.de>
-X-Mailer: git-send-email 2.53.0
+	s=arc-20240116; t=1777726441; c=relaxed/simple;
+	bh=JlGYREQ3o30oAsvMBPCEdBgpvU91I7Me5WIQkVmDniw=;
+	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version; b=aUxaQ2qRnkfeY3cr32KFhhVN/JMyUrvdLRP9O9QtM482Nb507TRS0bO0sx/o/sNSd8whI+fE66DjEAlC4W89fsY2JtNUpofGpt4Ns5dS3Y2dDtrcspZ8n2dX3trnqa7uqrI9VRWa1gf1qN/Yv850InvhPXeeu92v0SUz5h31Hqs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=pSDPHpI/; arc=none smtp.client-ip=203.205.221.221
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1777726430; bh=JlGYREQ3o30oAsvMBPCEdBgpvU91I7Me5WIQkVmDniw=;
+	h=From:To:Cc:Subject:Date;
+	b=pSDPHpI/FyNe/7QPmM1SnpO9Ltnu8jHZTUg/YwPfzj1eLhsvYpCOrHKyiGRX5Kk7O
+	 kFXbCNgkaVwCCdbCjq09hfZGmm+w3efsaEFqs/buOEjhU7G3skobuEdaG0ZihPrHvw
+	 xrwF6K7BpX4Mb9WqkNrsaeoS43RNXiWwM6Ctv3mY=
+Received: from Lang.smartont.net ([2409:8a44:2312:14e1:56d8:1e1e:3f0b:d0f3])
+	by newxmesmtplogicsvrszc43-0.qq.com (NewEsmtp) with SMTP
+	id D6F16215; Sat, 02 May 2026 20:53:47 +0800
+X-QQ-mid: xmsmtpt1777726427tjpnj8raq
+Message-ID: <tencent_5E6677A3FFCB969503EE5250592E75128807@qq.com>
+X-QQ-XMAILINFO: ONXjbYTFhCz0yW82GnrNThR/ZKHFLt7q2Ck6IYs1QOjSWMcxpTVzuAPVOWQZMN
+	 XUQ/hAxHxvpyHsKwaM7f3aEnURUY/Hh3AqwPsMf4jEUzHaQHBAgrnj/sIGd+oikwHCNjHkDxi1j9
+	 j+p51ostKBmm8pDlhIXPUNBR4KKEbJtYKfyvvSUoD3RMgVY5SFLkZdJiZmJmlEx5nsLecW1wdRn4
+	 n48gCAc29/I+olVJo53NLv5Kg/fpGEbyFGfjOqxqTGCml4juh/MLIuJF2A9e81KYvX6Z/JmVkBmN
+	 MSmwTYFjCNb/x8JtDrelXwVDdIzoOhhx2mSFDXuiyDHcBfI5jokZCs+DW6nbzUWvZ+VWBNYKAoD9
+	 Petpeci0+/f0FrgYmV3UbYxjVkDg5N7a01KZSZ5QcUvpv4TnWQC4KA+02prhQamivwcysIEvIJ71
+	 BVt5cFV+K9VTtM6ZHiSzECqasxvfz8s/OGAu5fSbZianU5tWxvZalrcqo6b1rxL/KP8AvAToVK6q
+	 vRwrL3a+icmUWOHw/UsH/ZfTVi6RYzTDr/dzhsJqznIg0OoWLhG8E3apZHM2SZn/rN3lHOLzE1T5
+	 RqVZZn+W6CvfGpjIKYc/xOZWNRS72HLul6eIxJqyRRqNp/5ZY7cYlotR4E4DzqBcXU1GknUO6sqX
+	 Gbb8QYHO0aJ7Xw/IRCL6kK8mjaS3RcWTZPliW5WTcDcXsSdPxLM8cgqdjJRCx3w/ciXMGTN4LgEc
+	 IyL242M+XgJOGs/K+DdUUqPn33/cyHNPolZdWgcoFtzptpegAIyh0u9JxTphYnBfv61USCcyqz78
+	 5Mt0kJwSQpgVddF0hAd6E2u48BEhcnk4JlvBLrOOM0G7WKoznNBoZfOy8G9chDkOp2pXi8uWmVBE
+	 yyRtX9msPEytfFa/lorBG5y0EMjLX+xcYiPViNk+wl4CTo3zEMuHbPPpm/Vzjc3GpC4cesCzq2Xu
+	 SvFx/ych/G9Xs/vP0QiWjnDly/qRLuxtrt4OOmcwuuwEYVQgjcgM13wzTbwGJMsva73CsRujVV6i
+	 1Fl2qZ1rTgoHxQ61GoBxHAHYOE7rXklShJRrDBkw8u7pVUI0Y36x76HvoRpyM84xRtu4p2nl4RaM
+	 HaBbmZt0c5TJNN7+Mlrje352BA7BS5eMJtRGkoweWILq1oZE60rTCLwwFYZg==
+X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
+From: Wang Zihan <jiyu03@qq.com>
+To: joshua.crofts1@gmail.com
+Cc: jic23@kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Wang Zihan <jiyu03@qq.com>
+Subject: Re: [PATCH v2] iio: adxl313: fix typos in documentation
+Date: Sat,  2 May 2026 20:53:43 +0800
+X-OQ-MSGID: <20260502125343.495997-1-jiyu03@qq.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: D123A4B227B
+X-Rspamd-Queue-Id: BF3E74B20D8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.46 / 15.00];
+X-Spamd-Result: default: False [0.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
+	FAKE_REPLY(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	NEURAL_HAM(-0.00)[-0.995];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[qq.com];
+	TAGGED_FROM(0.00)[bounces-85485-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[qq.com:+];
+	RCPT_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[jiyu03@qq.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,qq.com];
+	NEURAL_HAM(-0.00)[-0.961];
 	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	R_DKIM_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DMARC_NA(0.00)[jo-so.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joerg@jo-so.de,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	PRECEDENCE_BULK(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85489-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qq.com:dkim,qq.com:mid]
 
-Signed-off-by: Jörg Sommer <joerg@jo-so.de>
----
- Documentation/admin-guide/pstore-blk.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Joshua,
 
-diff --git a/Documentation/admin-guide/pstore-blk.rst b/Documentation/admin-guide/pstore-blk.rst
-index 1bb2a1c292aa..5c247c25e13a 100644
---- a/Documentation/admin-guide/pstore-blk.rst
-+++ b/Documentation/admin-guide/pstore-blk.rst
-@@ -35,7 +35,7 @@ module parameters have priority over Kconfig.
- 
- Here is an example for module parameters::
- 
--        pstore_blk.blkdev=/dev/mmcblk0p7 pstore_blk.kmsg_size=64 best_effort=y
-+        pstore_blk.blkdev=/dev/mmcblk0p7 pstore_blk.kmsg_size=64 pstore_blk.best_effort=y
- 
- The detail of each configurations may be of interest to you.
- 
--- 
-2.53.0
+Thank you for the review!
+
+I apologize for the quick v2. The v1 had an incorrect subject format
+([PATCH 1/4] instead of [PATCH]) which could cause confusion. I sent
+v2 to correct this formatting issue.
+
+I will keep the 24-hour rule in mind for future submissions.
+
+Best regards,
+Wang Zihan
 
 
