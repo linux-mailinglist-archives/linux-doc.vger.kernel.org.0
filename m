@@ -1,78 +1,82 @@
-Return-Path: <linux-doc+bounces-85477-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85474-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kJSPFJbe9WljQAIAu9opvQ
-	(envelope-from <linux-doc+bounces-85477-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 13:23:02 +0200
+	id oI4/Lend9WljQAIAu9opvQ
+	(envelope-from <linux-doc+bounces-85474-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 13:20:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD0734B1C2E
-	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 13:23:01 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B3094B1BA8
+	for <lists+linux-doc@lfdr.de>; Sat, 02 May 2026 13:20:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 5457E300492E
-	for <lists+linux-doc@lfdr.de>; Sat,  2 May 2026 11:23:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5FDB83023517
+	for <lists+linux-doc@lfdr.de>; Sat,  2 May 2026 11:19:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EF3A32571D;
-	Sat,  2 May 2026 11:22:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64304336EDE;
+	Sat,  2 May 2026 11:19:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="VC66a0Mj"
+	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="omQmEfnN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out162-62-57-137.mail.qq.com (out162-62-57-137.mail.qq.com [162.62.57.137])
+Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F5B92BE03B;
-	Sat,  2 May 2026 11:22:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.62.57.137
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAF8725F984
+	for <linux-doc@vger.kernel.org>; Sat,  2 May 2026 11:19:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=43.163.128.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777720979; cv=none; b=BxTwYaU/TosqG69YrB2Rhl/4hJ664uEzclNouoTYTmJyXpXSSv2dFllfE1VS9mtGqDEMnanbsoW1wSOiE/Zl1tqwU/MqHGS42HMNIoWEQBzHibiDgrQV/z8XwjwNPNoI05FSdHlQ5BAzO0iLYZ4/QPKXw4KVUO/HIlcTiP9oQUQ=
+	t=1777720766; cv=none; b=r2NqqYiWLrufwBdvGfyyQCuQ/YavbFk/0ghDwts68JxwuMXu7A41qE1P7CkVaaS3KHSW0217jhOHxemfguZciY7UEDYb7TrFANcfhi6gf8cJ5J4TbO31ZM2Wgex9gTsKMoCtyvKT0q3UXDI4qEzK/PJ0o1lgP3YB2+w38QWXU3o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777720979; c=relaxed/simple;
-	bh=Tsit++BdrnrHHKGW2IdaqmhPVDFYdMY17/KgmiH/SxQ=;
-	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version; b=maZc1iXodfeewOkGNFOiUtDK2GaxU6OnRR8Ox8XPrXfIw37nN6tXGdPsu4rCAdkHBljBbnebQ8AgwdGkY7MBYeTc+/HYdLcXUCE+VEkdTtxHWflfsUVUxGIUHJzguD9PtVUxmX8nl1fpGirfRNjph6KAA75x1E7LvpxKcmQSP8g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=VC66a0Mj; arc=none smtp.client-ip=162.62.57.137
+	s=arc-20240116; t=1777720766; c=relaxed/simple;
+	bh=kot9EcZkqya3bNn90ZsGro7iAS4rkv0vasM61bUcOTM=;
+	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version:Content-Type; b=EnA8Obw4gaTNCxFGMh6B3mKpn7tNXIEJuI7ZdUDndJymaEsF/Nj8ifxTBg4lX3QsPfVJn8FZD8CBdcP66aQ22N/7JfyUZBuFXNPGXHFBqW2SwvVqhebhLZ/H/TPnxwWXSY+D1M+86lBGXK22h3wSwVTc3rXvkBj9NgYnMMFWV/M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=omQmEfnN; arc=none smtp.client-ip=43.163.128.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1777720966; bh=PWAy/WeGAvEk2mc7Ph51cIrj3vzzDaiXxmstD2WFWpY=;
+	t=1777720756; bh=vlBpe8xOmP21cCjyDWJLXr5pIey0kkllLTvVSDzxoVY=;
 	h=From:To:Cc:Subject:Date;
-	b=VC66a0MjgNbl5Ed4Ew1/m2XdiE4BkUFScPQA0lFzGK27j4aD+byFmf4SRBPLdIr4P
-	 bQh8Z+Jp6EjmK/VIxpd0VJpS36trJD5BbkTaEC9Zm7pXZ1yeW7spDDwDa1cD+CMBPw
-	 BW2jIJRFW8/bnvNgudkkF+/gzG3uM3wOfRGfixCA=
+	b=omQmEfnNQKSdCa2w4NE4WUaC3tOq+zrGBBm7PWL+D3439wL1jqocMPwtOVWKw5OXR
+	 uEcS9/qgFIxqGraitG+tZrqEQlQOEDuM8Hmc+mwtKFTvnQXSxWEqhvhQy2T5Ep/PTM
+	 QGvAfshQPNZ5zbces+9uExTFyx4oOFpCLNPwPBT8=
 Received: from Lang.smartont.net ([2409:8a44:2312:14e1:56d8:1e1e:3f0b:d0f3])
-	by newxmesmtplogicsvrsza63-0.qq.com (NewEsmtp) with SMTP
-	id 4CA2F82F; Sat, 02 May 2026 19:19:10 +0800
-X-QQ-mid: xmsmtpt1777720750tqrn9sn0h
-Message-ID: <tencent_61E8FB326F4582DB0074952B9FE4A239CE05@qq.com>
-X-QQ-XMAILINFO: MuqDVCpR0KLBIZLEO1nX3cNWVekD2Ur1Xacda0IcNh3nN8+eGr+Jcjrrm2vsGe
-	 c1FZUb5t6XV5h8N0t02Bu4No3jMgXuLYlfxkGdeSEUrSp9ECVXACnWjvipuk/cpOK1BzuaQ6ThGa
-	 m7KzUF8echKOvDRUObSb2xH/Z9+fGkoWFzUAxpJjgUm8IIwISM0dOoPjXHkf7lq75Fx30zM9hmPV
-	 usMRn0KfTVIrefT9MgzEAy5gO69pKHNgmMNM4MIFowZWgc5bLygJt/OmvLbBrzKVfLf5Pw6GbiUy
-	 MT6s9H9izQuJQnhudIGBpXnv3ps/Af+NlezkxGGHjsQpdhWt5jghef5rlheJyIe8VlvCsCKIdhFv
-	 kZ5pw8Bq8eNPbDC3/iInCbtm4814h3cf9Dxme7FRUalIWYlQAa+kqW+LH23puQbtSOQtT3e+8ZKx
-	 NE75Amfh2EZcV0hTTyJl379UrRdlSt9k1LQrYmpGEAmi+t92At+8wLl5k0kh9+nMgqn3juX+q90W
-	 34GajBlM5u3WRYk2C+J4grsfypbCtdt16cKsYKZEKxuo4+GWLZLmnEUHihWxMP9aBJDd6IVRumwn
-	 jrmgzwayFOPtdfNrA6mJ5MrNVrirIg8xHTE5exbeTZQ0zV/HHAIymcbRcF0gAPDE3yiwGRh8MUlb
-	 8ZyI/R/jBotaU4Ga6kkiDb5AyH9SvQQxRs2fgtzb25DzcO8LL96qL3u+PFJccbabJdN8PabtWXBY
-	 S/yLiZh6JnnwQu0VjOtkk/COn5Niz0JBK3sqXF7zh+MI2ellHYcnyNRwcqJ+IgO3H1NgnQ1md/Fd
-	 S1laviDiq/lVyxkSUMikk0y8wMpH70l+73x4ithmuy3dTGprSoQ3+XI2Yv74UiMf4o5hIQvM1qKY
-	 PwB3HMYzSALs+pJg9Gc2pTPkvf/vEStzoBaawSjlGuK6zcG0Nth+A510Ka2F/Cij4WdUp0BwFrkI
-	 y8Fxzs/Q7Zd+VQ1Ci2kHlJlqd57f6vyzR9DH/FWRpKaznhoqq/yo0YJNaJejXMfQjDHSHlalTfgb
-	 qJ9EKNDJWlCEc4cqS2sa4l0t05K9mejQ5nNHtJls/of8BHe3fN6mATr9kSqNmxvZXrhK97/D+vsq
-	 Yf35fM
-X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
+	by newxmesmtplogicsvrszc56-0.qq.com (NewEsmtp) with SMTP
+	id 4CC3A646; Sat, 02 May 2026 19:19:12 +0800
+X-QQ-mid: xmsmtpt1777720752t1ckfyps2
+Message-ID: <tencent_ADC4AD99CFC8EFB26D25889B11D4864B9B05@qq.com>
+X-QQ-XMAILINFO: M1rD3f8svNznjPfiY4MuRVBcJ6etABYNKUM2juKBeQxK3TeEEgi3L8cacZYHZT
+	 aFBqwtUy1ktDlyqLYd3urhIhOraDdeXMUWk5oCHgxCiQ0OleG+PDdwRwfjT64DcHDAGuRC8Qf2Pc
+	 KDADfJHSmeQCDKkav3LMoz8XF0eGGC+rfg6Z2FxOuZC+gd6E0S3eErUXJLzJsolxnAOGjSxQDULM
+	 FNNNXxpBbRGe3bPtXzBw6V5feHnLaUZN7bn9Jxi9eewNSTppcJX6itbF31suiTT8NWp6uAbz+9u4
+	 wZMdpN3ms/tyAf0rH/av6+JJV8bKNCWo53csxT+0G47TntXRfJGv9z0kOca5ZbPrrN0uR3HrEmVe
+	 wVt3QjKL2wTPqXI5RGeKRhsmWIUqDl/gW9Bk/aRk16FeH0PQ3G3DrAuP1xYxecJlvhqk4n9Le14g
+	 RXABeX1FF2Yr3s26ZD1K/Of2xDAW30C62STPkq9TMdfpMurbn2GgJR0HegsLR4Ak7rcb75qYctf6
+	 zvk7LwOhcP+YAzXuIDMWx9obSN0PwJGObR4eBHo/Ww9JFWTuhwuZIHFnCGl+2eP951r+xn9+qVu+
+	 as6/dq6/ZaMplTuatRxj9ZytVzHcGG9juDhtM8BCSLA4Y0AKEEpXtTcsiShDZHcgrMt0o88ctujq
+	 /dD3Gxi80VjQfl4XVhtR+W3F+oYSRC5Dul4O7672KPIom7Pjtwd0ev42STmJ7QCn+LGcRfu/k+VT
+	 WjkAYgjUFFMkCSGszQ05RTHbjCqM+ft9QDWT/0stfyjmsAYjNLve/iezLjuTDo6d5V8SdYg5UiM/
+	 LmenzJJbPIGCZd/CwigiSGpso3Rd0R4pAPwGjhCxm99j8SLn8+NVF4TqKzsaVUOmq0Pgoisu5fgv
+	 F2CIZNNlM1MebDUkXY5XDs+QKrbR5jIPWDmWObYXDbyJERonmSCGxR3ATF7qaaCfOF9SnxiDqhCy
+	 GQwmiSPnnZbKtbgC9DWVm22bBsFN6eeWhHd4v6eo3Cv23msgZal6DoJyFYO6i+TFaGnTWMKENqfd
+	 QyXzk8OR+zvAh1QzaZ2aA3fFnK6g+KgCwafs137WYaLgB02hBk/OqhrlksA6XPiQldvwBaWUiJC2
+	 ij9KYE
+X-QQ-XMRINFO: NS+P29fieYNwqS3WCnRCOn9D1NpZuCnCRA==
 From: Wang Zihan <3772548978@qq.com>
-To: linux-watchdog@vger.kernel.org
-Cc: wim@linux-watchdog.org,
-	linux@roeck-us.net,
+To: loongarch@lists.linux.dev
+Cc: chenhuacai@kernel.org,
+	kernel@xen0n.name,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	skhan@linuxfoundation.org,
+	2023002089@link.tyut.edu.cn,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Wang Zihan <3772548978@qq.com>
-Subject: [PATCH] Documentation: watchdog: Fix typo "oncse" -> "once"
-Date: Sat,  2 May 2026 19:19:10 +0800
-X-OQ-MSGID: <20260502111910.142992-1-3772548978@qq.com>
+Subject: [PATCH] Documentation: loongarch: Fix typo "eXtention" -> "Extension"
+Date: Sat,  2 May 2026 19:19:12 +0800
+X-OQ-MSGID: <20260502111912.143743-1-3772548978@qq.com>
 X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -80,59 +84,78 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: DD0734B1C2E
+X-Rspamd-Queue-Id: 1B3094B1BA8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
 	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[linux-watchdog.org,roeck-us.net,lwn.net,linuxfoundation.org,vger.kernel.org,qq.com];
-	TAGGED_FROM(0.00)[bounces-85477-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85474-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[qq.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	RCVD_COUNT_THREE(0.00)[4];
 	FREEMAIL_FROM(0.00)[qq.com];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FREEMAIL_CC(0.00)[kernel.org,xen0n.name,linux.dev,hust.edu.cn,lwn.net,linuxfoundation.org,link.tyut.edu.cn,vger.kernel.org,qq.com];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[3772548978@qq.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[qq.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,qq.com:email,qq.com:dkim,qq.com:mid]
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qq.com:email,qq.com:dkim,qq.com:mid]
 
-Fix a typo in mlx-wdt.rst documentation.
+Fix the spelling of SIMD Extension in Chinese documentation
+(both Simplified and Traditional).
 
 Signed-off-by: Wang Zihan <3772548978@qq.com>
 ---
- Documentation/watchdog/mlx-wdt.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../translations/zh_CN/arch/loongarch/introduction.rst        | 4 ++--
+ .../translations/zh_TW/arch/loongarch/introduction.rst        | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/watchdog/mlx-wdt.rst b/Documentation/watchdog/mlx-wdt.rst
-index 35e690dea..3778f85d1 100644
---- a/Documentation/watchdog/mlx-wdt.rst
-+++ b/Documentation/watchdog/mlx-wdt.rst
-@@ -48,7 +48,7 @@ which is optional.
- Watchdog can be started during a probe, in this case it will be
- pinged by watchdog core before watchdog device will be opened by
- user space application.
--Watchdog can be initialised in nowayout way, i.e. oncse started
-+Watchdog can be initialised in nowayout way, i.e. once started
- it can't be stopped.
+diff --git a/Documentation/translations/zh_CN/arch/loongarch/introduction.rst b/Documentation/translations/zh_CN/arch/loongarch/introduction.rst
+index bf463c5a4..7cd88dfac 100644
+--- a/Documentation/translations/zh_CN/arch/loongarch/introduction.rst
++++ b/Documentation/translations/zh_CN/arch/loongarch/introduction.rst
+@@ -79,8 +79,8 @@ LA64中每个寄存器为64位宽。 ``$r0`` 的内容总是固定为0，而其
  
- This mlx-wdt driver supports both HW watchdog implementations.
+ LoongArch现有两种向量扩展：
+ 
+-- 128位向量扩展LSX（全称Loongson SIMD eXtention），
+-- 256位向量扩展LASX（全称Loongson Advanced SIMD eXtention）。
++- 128位向量扩展LSX（全称Loongson SIMD Extension），
++- 256位向量扩展LASX（全称Loongson Advanced SIMD Extension）。
+ 
+ LSX使用 ``$v0`` ~ ``$v31`` 向量寄存器，而LASX则使用 ``$x0`` ~ ``$x31`` 。
+ 
+diff --git a/Documentation/translations/zh_TW/arch/loongarch/introduction.rst b/Documentation/translations/zh_TW/arch/loongarch/introduction.rst
+index a5603f9b0..9e4a96f1a 100644
+--- a/Documentation/translations/zh_TW/arch/loongarch/introduction.rst
++++ b/Documentation/translations/zh_TW/arch/loongarch/introduction.rst
+@@ -79,8 +79,8 @@ LA64中每個寄存器爲64位寬。 ``$r0`` 的內容總是固定爲0，而其
+ 
+ LoongArch現有兩種向量擴展：
+ 
+-- 128位向量擴展LSX（全稱Loongson SIMD eXtention），
+-- 256位向量擴展LASX（全稱Loongson Advanced SIMD eXtention）。
++- 128位向量擴展LSX（全稱Loongson SIMD Extension），
++- 256位向量擴展LASX（全稱Loongson Advanced SIMD Extension）。
+ 
+ LSX使用 ``$v0`` ~ ``$v31`` 向量寄存器，而LASX則使用 ``$x0`` ~ ``$x31`` 。
+ 
 -- 
 2.54.0
 
