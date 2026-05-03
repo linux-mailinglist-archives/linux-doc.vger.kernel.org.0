@@ -1,65 +1,69 @@
-Return-Path: <linux-doc+bounces-85558-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85559-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id NX1fBA5h92k2gwIAu9opvQ
-	(envelope-from <linux-doc+bounces-85558-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 16:51:58 +0200
+	id vnzLNBhi92lmgwIAu9opvQ
+	(envelope-from <linux-doc+bounces-85559-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 16:56:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D1914B6205
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 16:51:56 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40B514B6237
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 16:56:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 59BDD300914B
-	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 14:51:54 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 683A23009B00
+	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 14:56:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81C6C23D7E6;
-	Sun,  3 May 2026 14:51:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EFFC029BDBF;
+	Sun,  3 May 2026 14:56:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="fYi/YQB1"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="AZE4All2"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CE1C40DFA7;
-	Sun,  3 May 2026 14:51:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA7D829A31C;
+	Sun,  3 May 2026 14:56:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777819913; cv=none; b=Xlt6IqosjcNzXeNWETAR/NSuOLBAQhqtp9C5+GxIQcqVllsHqR/Px1mU7Nzpo3K2fFKe4SGscQtQR3UFmfKy5FdDewC6cmJzPPQQD8HUtE9PGHmie0k0/JPwlCRQvDhOQs+UnjqZwEpyowlpWhqXo7oSmF8g8FQY2DqLCzj7FLM=
+	t=1777820178; cv=none; b=C142HOtyNjyvyoUVmkja+inCXk3wchTZ61z/qOTIp95La5cFuSGmjGh/JIXOFb6Rmj0/1mxpAhMRvj+c5oe09PD4dRv8PCvAA81IOISrn52d99wW0BTc5vf2pPTbLzMsgIVOZFtI+JMk6AT0vx19v6YFqkfBJaj8tRZizFcuqV8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777819913; c=relaxed/simple;
-	bh=zkswm0PdYii2JiYclJtqGUBQOu1wxQlGGckorjWeq3o=;
+	s=arc-20240116; t=1777820178; c=relaxed/simple;
+	bh=od7THWqtZScmlfcYahIfLPvdd1bPkd9qQGltSz8BsZU=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=eEPd9/OVbGLOjbWCQBu/1OqWf68P0Mb/sg44iLf6D9XqGIVoEiu8KALVZvUT/lenYz/3yjNDal38I8a6YBH4TU+u/21Tro6bHdnyAaEMpUFOOLfgQWMiQsir8DgS+W0MY1mzApPNqHEH4k8H9KMwgoqiR5kBLrReWwc4CFF4Lw4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=fYi/YQB1; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=IpZSGHMp5VhVkVhTM4m8TQbYzdo5S/xFVL8QurKaybL3ND8h4EpFPbqtU9XiJ7GFQQhTWNnVqEAY0omiOvfQmBz7mC7XOSTfPiiEKUdNc9uIKAKFfIzA10+44ph9yzKdaYR9SSsRqxtmK9F1nE5cT3Ge9V1SHRWpTtSh5X0lAp8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=AZE4All2; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 563F441084
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A43DE41084
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1777819911; bh=hYBlaAyU/KdRRt1THXwdY9HnHSro3+v0d0/m04pe7hA=;
+	t=1777820177; bh=1AKPIGhRNxK+F55Mad0JawX+0GWunrA5WkX6nSEFGLc=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=fYi/YQB1viEOhETgxB6dKzOzT1zFxJgnFfanq/32/VL/TWlOmHzU0tbCS+5KrFdUt
-	 0nEspqnUzWedFvszPXqhXAgYRunSkAuQ8DgRbPBDkIMbA1O8MJAIrwCV3PDGZxMn+9
-	 o0NlVlnCJKoFBr+Uj3JZoUnIs7d6JCDCV/+Jbme4R5VEYoaur5tre13jsuPW+xGfr8
-	 jO8OR8E48tMKjhUrVojzE8xicq8hHAXyczKMTzuykHwIPMrehX6a+X21yDTjFqAkA9
-	 O3prGnbfMtwj9Ky61sEPTvNu9o809tMXr2du4gQ2bggpVP3Fpicy7tl2Ye1QcbPo3L
-	 +NvJQXxW4IWMA==
+	b=AZE4All21O1rxm3+Fs4hD9srnEfVhetFdksjrOjV3VD83csa9mPQsIaE0wida9+9J
+	 N+/xzjN768Ltum5SPW5NP76mL8D77ZLeuY3QwLSSpZWPmw7VTqr6LcLxxFsoyryih3
+	 Cw7BRrH81/AYfcwvJ71axSfFI/4S7mM2rQAHBsZnKVA2mA+9rgikt6qRgqBgHa/ToH
+	 SEOUJ3eoxda3ocAZisstFiiLSLe7COi99q7zzLDnR3vl8PISisuLK1ag43oadhDND3
+	 Q6gvfwOjNy5JPuH747ES0aqGA8aejR+WZLmznez7o0Kb03gnnNKwpOq5obvRrNNsCm
+	 1wUuJoEIqo0BQ==
 Received: from localhost (mdns.lwn.net [45.79.72.68])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 563F441084;
-	Sun,  3 May 2026 14:51:51 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id A43DE41084;
+	Sun,  3 May 2026 14:56:16 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Miles Krause <mileskrause5200@gmail.com>
-Cc: Juri Lelli <juri.lelli@redhat.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Miles Krause <mileskrause5200@gmail.com>
-Subject: Re: [PATCH] Documentation/scheduler: Fix duplicated word in
- sched-deadline
-In-Reply-To: <20260429222435.2041-1-mileskrause5200@gmail.com>
-References: <20260429222435.2041-1-mileskrause5200@gmail.com>
-Date: Sun, 03 May 2026 08:51:48 -0600
-Message-ID: <87se88czqz.fsf@trenco.lwn.net>
+To: Manuel Ebner <manuelebner@mailbox.org>, Shuah Khan
+ <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, Kees Cook
+ <kees@kernel.org>
+Cc: linux-kernel@vger.kernel.org, workflows@vger.kernel.org,
+ linux-sound@vger.kernel.org, rcu@vger.kernel.org,
+ linux-media@vger.kernel.org, linux-mm@kvack.org, Manuel Ebner
+ <manuelebner@mailbox.org>
+Subject: Re: [PATCH v4 0/3] Documentation: adopt new coding style of
+ type-aware kmalloc-family
+In-Reply-To: <20260429070759.309110-3-manuelebner@mailbox.org>
+References: <20260429070759.309110-3-manuelebner@mailbox.org>
+Date: Sun, 03 May 2026 08:56:13 -0600
+Message-ID: <87o6iwczjm.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,66 +71,49 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Rspamd-Queue-Id: 5D1914B6205
+X-Rspamd-Queue-Id: 40B514B6237
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85558-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[redhat.com,vger.kernel.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85559-lists,linux-doc=lfdr.de];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lwn.net:+];
+	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[5];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lwn.net:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,trenco.lwn.net:mid]
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,trenco.lwn.net:mid,mailbox.org:email]
 
-Miles Krause <mileskrause5200@gmail.com> writes:
+Manuel Ebner <manuelebner@mailbox.org> writes:
 
-> The SCHED_DEADLINE documentation has a duplicated the in the CPU 
-> affinity section.
->
-> Remove the extra word.
->
-> Signed-off-by: Miles Krause <mileskrause5200@gmail.com>
-> ---
->  Documentation/scheduler/sched-deadline.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Documentation/scheduler/sched-deadline.rst b/Documentation/scheduler/sched-deadline.rst
-> index 3ad93cd7b59a..9019b66f6a5b 100644
-> --- a/Documentation/scheduler/sched-deadline.rst
-> +++ b/Documentation/scheduler/sched-deadline.rst
-> @@ -685,7 +685,7 @@ Deadline Task Scheduling
->  
->   Deadline tasks cannot have a cpu affinity mask smaller than the root domain they
->   are created on. So, using ``sched_setaffinity(2)`` won't work. Instead, the
-> - the deadline task should be created in a restricted root domain. This can be
-> + deadline task should be created in a restricted root domain. This can be
->   done using the cpuset controller of either cgroup v1 (deprecated) or cgroup v2.
+> Update the documentation to reflect new type-aware kmalloc-family as
+> suggested in commit 2932ba8d9c99 ("slab: Introduce kmalloc_obj()
+> and family")
 
-Applied, thanks,
+OK, I have applied this series.  While doing so, I restored the "gfp"
+parameter in the changelog portion where it had been mistakenly removed.
+
+Thanks,
 
 jon
 
