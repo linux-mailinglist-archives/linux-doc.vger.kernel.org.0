@@ -1,177 +1,141 @@
-Return-Path: <linux-doc+bounces-85537-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85538-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KB7mAKrk9mkcZgIAu9opvQ
-	(envelope-from <linux-doc+bounces-85537-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 08:01:14 +0200
+	id EECvMl7m9mlhZgIAu9opvQ
+	(envelope-from <linux-doc+bounces-85538-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 08:08:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6818B4B48C4
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 08:01:13 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 316214B48F9
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 08:08:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E88F9300AB31
-	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 06:01:07 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E8809300953E
+	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 06:08:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 605B73A3E68;
-	Sun,  3 May 2026 06:01:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E587A3A63E7;
+	Sun,  3 May 2026 06:08:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="k/3DsIfx"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="qk7VuwsP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com [209.85.160.194])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E62E53A381D
-	for <linux-doc@vger.kernel.org>; Sun,  3 May 2026 06:01:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.194
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777788066; cv=pass; b=pCzkSqAzGB7/e2Z4C7C9xoZ43afE+mrMc6gZ5eEZfAGE2K4BOJoeMqhFnO/mTdELLBEvvO/708pi1gdCfTb8XMsb70/Ir8MitWyHXH5f0jCtNVEkzagOGB9X/lil7KduhXihu84uZ+GYOoGhtdRba5dlaLYdnpjl+rbbhW6zvv4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777788066; c=relaxed/simple;
-	bh=wCfwMR9ECj9hefOAeQDZqg7OdsjiS2RBtQZxyfoYZM8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Gd15u7ZeaSZvpySVtUDXCrFeBawU9tLBFRpgRcw873PwyZI0jAu3Q2Bef6z+zEtWEg++09ehayzlJ+4pSTBk+LoNx4uXoA6intcq7djw6VRpT9Tr9wl5+LEt4mvIBofh5YNg0BPByi4c2KZUdFmvuxYw2LHvdPE176zykqBHfjw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=k/3DsIfx; arc=pass smtp.client-ip=209.85.160.194
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f194.google.com with SMTP id d75a77b69052e-506362ac5f7so23445931cf.1
-        for <linux-doc@vger.kernel.org>; Sat, 02 May 2026 23:01:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777788064; cv=none;
-        d=google.com; s=arc-20240605;
-        b=EkWjrcNJMeJFjZ3w6N5CRLSMbsCydwubH1WdTDHBCYmYSoYmTfTpxQh+1lg96uOoGC
-         lwvBJRnvtye4ZtjqF5nx3WvkZNrHBa4P3e7sxcuyopQ7FYx++s9ITjVWhicdkt+hfLuY
-         LoJi1vOIc2HTXJ0xJ+1i41tDzJPQbrchU1qsYa8GFQYQ4o0m/kitkxqS5k2BCnaUZBgp
-         OGlxMacTIwPync4ZFF4mkXRYVAE/xf0oMPMsbuwAAmj6d42PU6jdLilF9mmdhDt7rvCK
-         D1BJmenf9dVn/BDB4a8SMdVioEa8chfhXgZefgz/iUlLSi2iPjvDxhkPqgwNSxyTchuW
-         wofQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=X9ULHTRkNyp7KStodIgdtfu2PjfPsaT5zkV+m42qZQw=;
-        fh=BYoN3ls+64DkCoFHZ+OSoBrWkGwoKlQ9jbpzsbm3QQg=;
-        b=Sc6zSDMalP1vmavNhJjfABwsxfNIqkcaCYirTV8yIU1Ccw9XJ6Bmd7/06H8qQV2BOu
-         zgvDD+Phx99rQs0WVgytt4gISPUsn70s0Xst8OuTCKqRYXYE1rAMJChOsrcSeRjWyZB7
-         TuJvaCnrAjp69OuwAvZIB5YDwM8+ya5UbZnGrYjyxXQUGEcOtmQqiGOk3BR7SuUm/LrE
-         lFH6dM4WR40WOpVyIR9FKkJZqsqaLoxY5TBQU6gBA90ht/ewLpTW9jbFxKKj5zY5hMMN
-         V6h3tyHiShr0gWLNGpwPwb66HkMP7pRBU10Mb8D8QUnkTHQV7BrwDqJZNitiqdJUiunV
-         1kcg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777788064; x=1778392864; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=X9ULHTRkNyp7KStodIgdtfu2PjfPsaT5zkV+m42qZQw=;
-        b=k/3DsIfx0DaTYgMKQaSS/5GQ3AU3dIybvTV0+1T0l0wlv6aTQc5tZ9dx6QdzO9g1cU
-         w8SX60PLp28apvhZK06HOEs/H65j73RZ/Z6jG0J0XejDWb4fjK7dJpMkL8UdfdAXHJkn
-         +ArLpjxlRsnHdsRDNCnLb2k4TPhZnyerLAmRuMlb/FSeS0/84vki1xmVu93Avz+kaWXD
-         ArxMuBw0p0I8SafnqDskAqla3GnlHewVWj+axIr0HL/rgJZTgq4aT1cfRRb1OAgHeEXm
-         8izpG1RTNuw7OjBdarP89OUFeBrl7pwd0tyQDgZWgwjuGF5SsewBFxb4L+nvsqsmDDAs
-         NqRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777788064; x=1778392864;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=X9ULHTRkNyp7KStodIgdtfu2PjfPsaT5zkV+m42qZQw=;
-        b=b7L074vrghXjiiudfyhHNRfKAYau/rAKk0maIZM8MAtaw/3uOy4lw8hV0xzAFOz4Tu
-         D6CPkgoFzB86TJqhqMOzGyjMMEDsLWgU+UGE6uwXUScjzp8TAO5t+1I3jqEZV6jR1ivc
-         x30BmsTlh6xLtqI7T6OfDQhuzFuTX8vl44zCca93jz0IsnDfS7vOmL4OZZTREH5By3c2
-         NCwkGDs49aT639HX3UthZDru5VK2PqUM3pvr8Qppm06ZzZTwZzRHdCDlhY0B9FYqr7aY
-         zAqInbFbIR41af4kC3laKni8W1m+/Bt2Flx1twDOj3Ivr7C2JY5vDw1DXIOY/567z3jW
-         vv5Q==
-X-Gm-Message-State: AOJu0YzeDTkrJZHBEjtm6JCCZSeg/Lgxr1mvWOzR8HuixK3nXrnUAWm5
-	ynpHELy2mqxYrl4GIP3fUTcRydwZQLbJfEZ3qmD8zlOxrkJ4/R/YgsfAIl/eYls6dJBuZWII/Q5
-	uc2YZ01PPf036BLwqbediVbPOkLpE1LA=
-X-Gm-Gg: AeBDietuTfIHeJKPyGwDmFiB0erbUHn9NF8oxBV0BmdmnNMQjZKFCr3/a6WVjHWqaBl
-	Aj2qjRo/v6vffdELbQV6greqRrU8G9Im8U9K+tgylCab1WhWNtmK4esxJQ3MIyNS54MU+cdo2/U
-	GTu2kmOce4Fm6yu9Swif9+MXgThXI4sREfy34lHki8fn3qWx8tMMFvBHESNMyPbTghqvslPeYRA
-	M9AV/ChevNQkOlUxO5Q4TdhZRguL53m033S8ff+F7j/jwn8Rqf7DLwEcn6L+EOtoWUaUSDc+qWD
-	V9ZXnYH+kZE+/5tTP4SNzXuVvbcnVduxgwuqBQNs3J0bhHAYPsv7uu1Tee29Cjzq+5WosNE7FC/
-	t/Kp/
-X-Received: by 2002:a05:622a:587:b0:50d:8b23:4948 with SMTP id
- d75a77b69052e-5104bf71ec5mr80525351cf.46.1777788063794; Sat, 02 May 2026
- 23:01:03 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B476A20E023;
+	Sun,  3 May 2026 06:08:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1777788505; cv=none; b=BwNuY/B1AlHJiH3bptvdPWPeKrXG/BsRuAdOPTAZXGX+s+CGhsK9KzdErTaoIUcMu3B4m/N+yNhxbDkwFIOzhjGMG2tGOsI9giMsMayXW1Ey+cckJqAhCtNOYnCGohVd9sWdjHaxmSCX6A/mDPpvWNiwR3X2qHNVAzB/KidF0uY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1777788505; c=relaxed/simple;
+	bh=wVjTwrEj04/03byuBlM0H1sdjlFRqIutG2Iz7Ehjs3Y=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=EGpxjkGrUHBkLANnVavnB8SYlOLBv8oyAZu3u2GoKZDFil0GPzV6xUpmsu9hsPOBWcqkRj3JtxSDaUWQfIhczzwP12dAKA8yBSSRU466kAUjtPSqaAhUSFYTdWnVJAFn0iD+M5xnLJyjmbBF9ZwFJVy9lKZ2RC+ze83VaNsqnSc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=qk7VuwsP; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB33DC2BCB4;
+	Sun,  3 May 2026 06:08:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1777788505;
+	bh=wVjTwrEj04/03byuBlM0H1sdjlFRqIutG2Iz7Ehjs3Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=qk7VuwsPlzs4FONxH6v1uneq3DAWLmsc1aXoxocuGrQTt1xSkryaYzVZaEXe8kcL2
+	 owwUqmsOaPLYnY8zX/DLSOGslkeqkKgFAV1uOCP9ZkUcqz9ukxPKQ8vZ86XHg8dzWE
+	 7p8C3CUkKd2MZYtIm+7vnFrGpPe4n9h2H5Y2DDW0=
+Date: Sun, 3 May 2026 08:08:22 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Ethan Nelson-Moore <enelsonmoore@gmail.com>
+Cc: linux-doc@vger.kernel.org, netdev@vger.kernel.org,
+	linux-serial@vger.kernel.org, rust-for-linux@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Jiri Slaby <jirislaby@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
+	Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Haren Myneni <haren@linux.ibm.com>,
+	Eric Biggers <ebiggers@kernel.org>,
+	Qingfang Deng <qingfang.deng@linux.dev>,
+	Julian Braha <julianbraha@gmail.com>
+Subject: Re: [PATCH v2] tty: synclink_gt: remove broken driver
+Message-ID: <2026050316-plant-spool-14c6@gregkh>
+References: <20260503030801.14080-1-enelsonmoore@gmail.com>
+ <2026050340-kilogram-prissy-a833@gregkh>
+ <CADkSEUgPtjkKC684O3qB=koKDPwJoUj-qU_4Z_18NAU_+bBqkw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260503030801.14080-1-enelsonmoore@gmail.com> <2026050340-kilogram-prissy-a833@gregkh>
-In-Reply-To: <2026050340-kilogram-prissy-a833@gregkh>
-From: Ethan Nelson-Moore <enelsonmoore@gmail.com>
-Date: Sat, 2 May 2026 23:00:53 -0700
-X-Gm-Features: AVHnY4Lgk75zXObx5AKxwFVNfKeHDu-2UsHM6uymzVhpbBAn4tV8BBUVB7TAHRk
-Message-ID: <CADkSEUgPtjkKC684O3qB=koKDPwJoUj-qU_4Z_18NAU_+bBqkw@mail.gmail.com>
-Subject: Re: [PATCH v2] tty: synclink_gt: remove broken driver
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-serial@vger.kernel.org, rust-for-linux@vger.kernel.org, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, 
-	Nicholas Piggin <npiggin@gmail.com>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Jiri Slaby <jirislaby@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>, 
-	Gary Guo <gary@garyguo.net>, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
-	Danilo Krummrich <dakr@kernel.org>, Bagas Sanjaya <bagasdotme@gmail.com>, 
-	Haren Myneni <haren@linux.ibm.com>, Eric Biggers <ebiggers@kernel.org>, 
-	Qingfang Deng <qingfang.deng@linux.dev>, Julian Braha <julianbraha@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 6818B4B48C4
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CADkSEUgPtjkKC684O3qB=koKDPwJoUj-qU_4Z_18NAU_+bBqkw@mail.gmail.com>
+X-Rspamd-Queue-Id: 316214B48F9
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [3.84 / 15.00];
+	MID_END_EQ_FROM_USER_PART(4.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
+	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85537-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-85538-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCPT_COUNT_TWELVE(0.00)[31];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,linuxfoundation.org,linux.ibm.com,ellerman.id.au,gmail.com,kernel.org,lunn.ch,davemloft.net,google.com,redhat.com,garyguo.net,protonmail.com,umich.edu,linux.dev];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[linuxfoundation.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[enelsonmoore@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,linuxfoundation.org,linux.ibm.com,ellerman.id.au,gmail.com,kernel.org,lunn.ch,davemloft.net,google.com,redhat.com,garyguo.net,protonmail.com,umich.edu,linux.dev];
 	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,linuxfoundation.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:dkim,linuxfoundation.org:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-Hi, Greg,
+On Sat, May 02, 2026 at 11:00:53PM -0700, Ethan Nelson-Moore wrote:
+> Hi, Greg,
+> 
+> On Sat, May 2, 2026 at 10:44 PM Greg Kroah-Hartman
+> <gregkh@linuxfoundation.org> wrote:
+> > Then that means someone uses it somewhere.  Don't generate bindings for
+> > something that will break because it is no longer in the tree :(
+> That project generates bindings for every UAPI header automatically,
+> but has a hardcoded lost of them, so its presence there doesn't mean
+> anyone is using it.
+> 
+> > If no one does use it, then please get that project to fix their code so
+> > that we don't break their build.
+> They have had to remove headers from their list that got removed from
+> the kernel before. I will send them a pull request to remove this
+> header and then resend this patch with the UAPI header removal
+> restored. Does that sound good to you?
 
-On Sat, May 2, 2026 at 10:44=E2=80=AFPM Greg Kroah-Hartman
-<gregkh@linuxfoundation.org> wrote:
-> Then that means someone uses it somewhere.  Don't generate bindings for
-> something that will break because it is no longer in the tree :(
-That project generates bindings for every UAPI header automatically,
-but has a hardcoded lost of them, so its presence there doesn't mean
-anyone is using it.
+Yes, thanks.
 
-> If no one does use it, then please get that project to fix their code so
-> that we don't break their build.
-They have had to remove headers from their list that got removed from
-the kernel before. I will send them a pull request to remove this
-header and then resend this patch with the UAPI header removal
-restored. Does that sound good to you?
-
-Ethan
 
