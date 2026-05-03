@@ -1,141 +1,174 @@
-Return-Path: <linux-doc+bounces-85576-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85578-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GEpwAABv92kYhwIAu9opvQ
-	(envelope-from <linux-doc+bounces-85576-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 17:51:28 +0200
+	id GLWnISFy92mihwIAu9opvQ
+	(envelope-from <linux-doc+bounces-85578-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 18:04:49 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8304F4B6546
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 17:51:27 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 23C5F4B658E
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 18:04:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CE3BC3004907
-	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 15:51:26 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 6A4283001FD4
+	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 16:04:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0CEEE39DBC8;
-	Sun,  3 May 2026 15:51:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C51839DBC0;
+	Sun,  3 May 2026 16:04:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Q9oPpzEV"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Fv8gmclu";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="QXxr2Ykx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0859397E64;
-	Sun,  3 May 2026 15:51:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E19533612E9
+	for <linux-doc@vger.kernel.org>; Sun,  3 May 2026 16:04:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777823484; cv=none; b=GE145ZP83rWwEGfgDD1d45SQcT1h/RfhUl+NIvHDUrvqM+B1RbBkYvZlC2JyFmnmUG45tIrTpTT0xgk6mCPmcZhxtb2oTNVFUFA1KRuoEfQEwILlpfY4pqAEwWFJRk+AhPFskV4r0boI7q3n+YYb1UX/bIcX+jip2nP7i7SaEN8=
+	t=1777824287; cv=none; b=IqgMerM+Ob0NvwW16Pyjs3in7a2YW6Er71pLyRtE1gyGUjcEn/l65RZFY5+dxNVcoYolJqMV0Yi2D/8ZinQO8TTc5Jw1PpYhFBPTgJmxtkv0xOcweeSwhl2OmjZvPB18qh/RNZYt1DAMr92S4DmvI0uAH8YycXDBjPVOUOByvec=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777823484; c=relaxed/simple;
-	bh=Bid/fim6QF7BXHxw5C6NNB6CjrRdX7EsliigzYoywHU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=cYwu62SOV2P1iLGBpBH7aPHG2q7tFZFr+nTkDN0XAjiqH8rBY1L29zWcAvVOZqUm3dk8wGg+X/qUIz+PDLZEnRubd/TVsQCgdO/VZ8bHbCusYoeRD0NxyPMqQSraV4OXofiisDGDWjdY37RTJc3vzyAdYAoAVJi+m8s9rfb14xg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Q9oPpzEV; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 759B141084
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1777823483; bh=fyRPsaLeyAmCgD7qP12n2O4WOzwaY15FpNC0oBQOyY4=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Q9oPpzEV0FONZtRS5W4Fi9uvnUEQqPxOWkdpHtCbMXHJnDNo8ZYco68Gv+cdnRJQ0
-	 HiYIRvbkdMQRdD4ggSgJrRNTgjJgFHRNO+M7U6FJy7tfxMkPdPeAS6W4PiTAj9oJb5
-	 t7H6o2TmnslANristxpVyAsBCWVaXW0XkjUb2cDVKRFYJJFuFWHSMy6rJF02Y+1aQT
-	 8peZdxLpkMbPuYLpPiF7PkfNRfkFroy/V8EA7zVNcA2ufyQtJ+85OQw3CLcbccPGI8
-	 fG4mvPHY4NDJZqMstnuiRw1B4h08V4n/d1ZOqHJUHL7PpDiyOUchZ0EMzYzJohxyOS
-	 YK8PRgeWb3v/w==
-Received: from localhost (mdns.lwn.net [45.79.72.68])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 759B141084;
-	Sun,  3 May 2026 15:51:22 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Manuel Ebner <manuelebner@mailbox.org>, Shuah Khan
- <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, Kees Cook
- <kees@kernel.org>
-Cc: linux-kernel@vger.kernel.org, workflows@vger.kernel.org,
- linux-sound@vger.kernel.org, rcu@vger.kernel.org,
- linux-media@vger.kernel.org, linux-mm@kvack.org
-Subject: Re: [PATCH v4 0/3] Documentation: adopt new coding style of
- type-aware kmalloc-family
-In-Reply-To: <df48beafcb0cc9caff40db78285113f0b1bd9b87.camel@mailbox.org>
-References: <20260429070759.309110-3-manuelebner@mailbox.org>
- <87o6iwczjm.fsf@trenco.lwn.net>
- <df48beafcb0cc9caff40db78285113f0b1bd9b87.camel@mailbox.org>
-Date: Sun, 03 May 2026 09:51:19 -0600
-Message-ID: <87h5oobifc.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1777824287; c=relaxed/simple;
+	bh=bZ713PlyI66Y8baNCt5bU/d4ETaGu0rYRrgUFeTdUFg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=U3OQ9ZkhWw3hC5JPm/rabEzH3rQLCkm9Ukfr36Lt4KcZCn+pmtT2qIjwK94guRCAzQ6Bf7SrZyWyUksObVD191FIIJ++SLOsoRs3qScXu0zrngLrL8JNjNeQPRvOi5ZIKTSxillc5nK7gwaOBnNTSIJoj9SZhN+vrf6lmC8/Hkg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Fv8gmclu; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=QXxr2Ykx; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1777824285;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=X+mJ3ULyyTKCXVslNnzkq+GlbrFoX1sf8l7wRqCeWDg=;
+	b=Fv8gmcluCsjNakPc5ZWrOM0ZvgcZyIVX28xWcX5gBkxypO6Z7OFdv+4Jmleztqy2IX4IYa
+	VcmH0QDMkrb2gH9FtM+cvC4pTTwmBDgkZBx8B/fzq5n38kSPk6rXmFXpFj1O9gNrBnxSbf
+	Ay+0Y4AEntuxR2XW6mELCyh+h7la/9E=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-327-hGN1V2qxNd-995w_q6ysSA-1; Sun, 03 May 2026 12:04:43 -0400
+X-MC-Unique: hGN1V2qxNd-995w_q6ysSA-1
+X-Mimecast-MFC-AGG-ID: hGN1V2qxNd-995w_q6ysSA_1777824282
+Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-488d8deb75fso27178465e9.3
+        for <linux-doc@vger.kernel.org>; Sun, 03 May 2026 09:04:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1777824282; x=1778429082; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=X+mJ3ULyyTKCXVslNnzkq+GlbrFoX1sf8l7wRqCeWDg=;
+        b=QXxr2YkxaNoD341tdRmTqSnHShQF+MxBiNDFOCtWefQvK1eUSj9UyW2grGSB4xXkZH
+         3dppFtVVyFVgMEKwkLegIpZc6k8Kk/rd4b4aNcVwritvofwKIXbpI78d3UsUXeBTeqg/
+         PdtMQw4pj+7/+HfhaV2XrYQAmTawcEtYTrh0T5g9jnVQ0xcF2tuvRVVa44GExv/yOWae
+         KcopnmstMLt0nuc6PTRcYyCCx02sPj9YVVRwZQ5me9LSOg0gQc2STVx1maXICc1s0KLt
+         HZeexNB9hlA7yAQ+MKckHi4Ytc2ZqtwjCQUbKix/X3r/QTXf5ruCb6Tu7d5h72ygA4W5
+         /Tpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777824282; x=1778429082;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=X+mJ3ULyyTKCXVslNnzkq+GlbrFoX1sf8l7wRqCeWDg=;
+        b=pKyAnyGVRYcQpuEcc69bK/oJrBez3SbSph9XWVVoF14a2gKqd23WcxjOr8Hoic9gJS
+         62GOcqLzCBetLYsPvYGFY7/dQ5bsQYnY+r8Q6bZQSoBwRHCS2m0EmbI8C0SAKdmIgtD0
+         0JGBl5SP/8IYl5Db07xdo+OlGd0ZgbYuLoTCe+ySCp6hjfZ0dyci7X0R1ZfPagbNbW4Y
+         cMjRNIpulPFQVX+ihq70B2iohQJb/NAbN2/iz8MPKx6U9dTX6udfyj6k6XAE+0eO0/S4
+         XFhnYAwbWUg9RWBpAxGlS9hkzMtd8WcU9meaY+OhwDq0HHxbMxP5MBOt7X2VBAvN+xVd
+         l7qg==
+X-Forwarded-Encrypted: i=1; AFNElJ9ZpQCuBLgmw2MzHNii4SGYPQVczPqFAdkjTUkdOG4NcCK5yMfJbmuYLsfRgM4Pvy47gzePmggKfXI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzdi/vKpf3QTUy+hw7I4Qbl2fWq9W8+Tzxu5vVgO+0/wS6a7F2a
+	MI7xDiMNzqLFe7tUQcwiG8Q4ofUVVK8qgPZ9D3+j/cJ2WjMyLxERQLGwgy/qfcrdg6ky96W29xb
+	QBSkrYoW260AHJfQ8WoJW18A6H2sAP+4z/SZJvLBu2rKkSymE1QJ1i8KhsotgWg==
+X-Gm-Gg: AeBDieuHpMP6Eqhk+Ud6RhXyqH4djM8gMfiFWvM6R6ctQpoTbgQuOB91Rc6v2cDwr/A
+	ng+a8WXTXIag7vPq2wf3e2pRLxfUeg7IzK8w4DVyxCniQRBWJY5KmwjtbsdC6+Ai/gRJUgQLhFF
+	SBcse9c/KIZZ2kUMGqDY7LcLGnKq6uqS0/OdTCNjF6THnyAMqWl0e5LloL6dIuEdYGbnB02z+so
+	DAfxM//W5W/AzppK8xsfsBFWZRz4QunjMLfVlUCUcsOvNdV1zODUKHrMsZ5YP+E+1fqK7PJiemp
+	dEdIbcfNVvHvS31oRkZGTFpopVwVugSPqy4SnMMDPRx6K1sa/QZ2IOhSr1LyZcLnFy81vPny1dx
+	UPezQj+JF/LzHlYfAkKq75ocDj30MEkfcUDA5QowVMsdyf2Pf
+X-Received: by 2002:a05:6000:613:b0:445:ed7f:ce84 with SMTP id ffacd0b85a97d-44bb34e71e3mr11488046f8f.10.1777824282476;
+        Sun, 03 May 2026 09:04:42 -0700 (PDT)
+X-Received: by 2002:a05:6000:613:b0:445:ed7f:ce84 with SMTP id ffacd0b85a97d-44bb34e71e3mr11488010f8f.10.1777824282049;
+        Sun, 03 May 2026 09:04:42 -0700 (PDT)
+Received: from costa-tp.redhat.com ([2a00:a041:e223:1b00:fe51:8bb:7986:c897])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-44a981ded99sm19800555f8f.18.2026.05.03.09.04.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 03 May 2026 09:04:41 -0700 (PDT)
+From: Costa Shulyupin <costa.shul@redhat.com>
+To: "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+	Jan Kara <jack@suse.cz>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Costa Shulyupin <costa.shul@redhat.com>
+Subject: [PATCH v1] docs: locking: Fix stale dquot.c path
+Date: Sun,  3 May 2026 19:02:22 +0300
+Message-ID: <20260503160221.1594319-2-costa.shul@redhat.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 8304F4B6546
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 23C5F4B658E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85576-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85578-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,lwn.net:dkim,mailbox.org:email]
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[costa.shul@redhat.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 
-Manuel Ebner <manuelebner@mailbox.org> writes:
+The quota code was moved from fs/dquot.c to fs/quota/dquot.c
+in commit 884d179dff3a ("quota: Move quota files into separate
+directory"). Update the reference.
 
-> On Sun, 2026-05-03 at 08:56 -0600, Jonathan Corbet wrote:
->> Manuel Ebner <manuelebner@mailbox.org> writes:
->>=20
->> > Update the documentation to reflect new type-aware kmalloc-family as
->> > suggested in commit 2932ba8d9c99 ("slab: Introduce kmalloc_obj()
->> > and family")
->>=20
->> OK, I have applied this series.=C2=A0 While doing so, I restored the "gf=
-p"
->> parameter in the changelog portion where it had been mistakenly removed.
->
-> That's good, thanks.
-> I had two more changes lined up for v5 of this series:
->
-> -	ptr =3D kmalloc(sizeof(struct foo, gfp);
-> +	ptr =3D kmalloc(sizeof(struct foo), gfp);
->
-> and=20
->
-> -The argument gfp is optional, the default value is GFP_KERNEL.
-> +The argument `gfp` is optional, the default value is `GFP_KERNEL`.
->
-> I don't know how to go forward with this.
-> please advice
+Assisted-by: Claude:claude-opus-4-6
+Signed-off-by: Costa Shulyupin <costa.shul@redhat.com>
+---
+ Documentation/filesystems/locking.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Make a new patch on top of docs-next with the additional changes you
-want to do.
+diff --git a/Documentation/filesystems/locking.rst b/Documentation/filesystems/locking.rst
+index 8421ea21bd35..277e49314d32 100644
+--- a/Documentation/filesystems/locking.rst
++++ b/Documentation/filesystems/locking.rst
+@@ -584,7 +584,7 @@ write_info:	yes		dqonoff_sem
+ FS recursion means calling ->quota_read() and ->quota_write() from superblock
+ operations.
+ 
+-More details about quota locking can be found in fs/dquot.c.
++More details about quota locking can be found in fs/quota/dquot.c.
+ 
+ vm_operations_struct
+ ====================
+-- 
+2.53.0
 
-Thanks,
-
-jon
 
