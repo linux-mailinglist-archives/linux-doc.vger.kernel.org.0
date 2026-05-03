@@ -1,649 +1,154 @@
-Return-Path: <linux-doc+bounces-85577-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85579-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id FBEbBRdy92mihwIAu9opvQ
-	(envelope-from <linux-doc+bounces-85577-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 18:04:39 +0200
+	id WBoDAxR092nohwIAu9opvQ
+	(envelope-from <linux-doc+bounces-85579-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 18:13:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FDD44B6586
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 18:04:37 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61FB14B65CB
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 18:13:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 51FA3300821A
-	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 16:04:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A65513009CD6
+	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 16:13:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ABBEF3612E9;
-	Sun,  3 May 2026 16:04:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0284A3AD51F;
+	Sun,  3 May 2026 16:13:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sT0YF+Uy"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hBqI1NJD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 838662F12B3
-	for <linux-doc@vger.kernel.org>; Sun,  3 May 2026 16:04:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D00543612E9;
+	Sun,  3 May 2026 16:13:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777824275; cv=none; b=ARqBGpsiANVgD0m63lEkyomOO+vGjZx40jlyM3xltvSq1inPEcRRxl4N8MV/4sT8ZzoRCtqS8TextilAm3SvZPP5IU66R6LoWi9NFpiatPgLFr2UbkVhsLofidNxQSf59H0+I901CRY75gurmD6jjkN7uW7rdRPgLN8DrhlarNQ=
+	t=1777824784; cv=none; b=j/ALa9eX+tPUFFrytxTiv93ykEGqAgP4TDMQHKRSVhKTCiL9FReuuJkyclcEp4ZjAVKDMWNKKHEG8F1+b8WbXVqcrS4/MTAqHykSVv/5Vq6bxIDLDl/cPd+/puZCAn93qH4Vy3cra3h+btZ373kmG7XaNIflbomhxKn4vfAjJRM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777824275; c=relaxed/simple;
-	bh=WRZmx0kHOAYOybVO0ESNOts3ILRcgieeum80GDm4tJk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=FGD4SRNjp2BPy/9WQC1ksLQypmhf2u5dnPJmMyFhVHPDA6n5e00WBuKKOA7/sD2AQo0jiIUpenbx4/4OsGoygHKc1j2stxJow4to+RJFXOW4orynWWFalacPxrxP7C8lfUPn2xvUYmWDa1zimvFen034TlkMzFq6JUPvJg+OZ/4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sT0YF+Uy; arc=none smtp.client-ip=74.125.82.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-12dbd0f7ecaso7602592c88.0
-        for <linux-doc@vger.kernel.org>; Sun, 03 May 2026 09:04:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777824272; x=1778429072; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NMwCPnBS7KtwJu47xXY0FmBRY4LiJsbsxHFEvz/TWmg=;
-        b=sT0YF+UyBqZRWAw98IayU41qnquyEzkZWonduCp8Keb6zc7QYuHOcwjnFji4/kAfsk
-         fiBwKkCz38qXj38+T2204OO71z4CW9oP1F+krVN1LI9lj68+6uv4qvTa7tVaESV3y7/v
-         WFyyjHGlVd8B9EAfk8o2LptyxHtmM8PW6ObEqaNhI9ibPPMdbjGSfvRoBs6DKyKs2epy
-         y1E0QaB3T0hwXDiJ2tj43qDagMY7CVHh5NQaLlTN/uN0qxBeycxHP3rNOK7cKF5N4mM+
-         R3YO+Q5IBVOUgB4xkjVw2IyCaQUdSYvj8jC0DvTr+2NiBdM8gxIbCWCZfbQy9Ia+yTl4
-         Ak6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777824272; x=1778429072;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NMwCPnBS7KtwJu47xXY0FmBRY4LiJsbsxHFEvz/TWmg=;
-        b=kHc8csXdumoM+EXFyBTEXiU7HiCkYrGKhyuTiXPuIvXVpycBnqKEUKJdn0f4LnIfZB
-         zT3xpn2bF3SbS8pvAE1hrl1/qxnpkLQVwPL03P8aajHsFme/6VDqX+3gmuY4ELDPYKGU
-         nAl1DQ9S8ulQZjJWC++mAzBHg6eNgU9m+4erHJnPKdL398YQuvijmGInoGMR4bwweH/R
-         Sd4SYUHgeCENaHG4ZsmQTO0CijVpVNqiqgNMOP1s8xEk13GanTniXhkcg9tMqTPzQQAz
-         t+P2U7wAEWUgSS+2o0e+dY4VLlTl25CkkX6NHjO+vJhMgb9cE8bM5/xMrOfnfiXUyZX7
-         saZg==
-X-Gm-Message-State: AOJu0YzSpXeDRC/ughwr6sYeQJ79uilgi3r52odIcPu2LcKsarq3pOrY
-	ZHi/MlJjMU1S0ZSAHC0Qdc0VTPFxESG7ClCNqOINd28ryDsve84cZiJd8xTHYw==
-X-Gm-Gg: AeBDieuHVPyNnOBZIFe/b0dA9TGT5gHUmQHUvkcBbHqyoGFQ5bfRfzgwORadAalyVgM
-	zLjdDCE2nRvrWvpY0FTLspQRO7LlkD/AofAJJ2zselZxM33S/Y5B7/M8XdiS7K7tvLonamD0Zev
-	lgVrEQBArR1sZPUL7t0UWBE4h/PcrEO93SJnEC60bfo6eeOdYYsorBAlkkiZnwbHNfbaMQJeXY3
-	zNYgCCZJAMT1ab8ioJv5K8kkhqA3oNAecPHlrsQhv9vv/HVhx5emNi7pLxtzFUuO3k5IlFCe7AO
-	rfol685QDbSGPt2JsXPqcVJDUwu4D9fKH7dwFMwnXPKuid4US/lTKaD3SzuVr7pDSwpJ/TH55Xk
-	ZYTodPi4ziUI0qGsLVDnLWhfFs2o7w4KrgHUkiUj5vWcxwAZ29Ke/RgtMsFxt0weHtGzhjNw8um
-	HcWU4NiNHLHB7BRD9zpkiC8/f8y57rV1KLYVdYN5goVm4FQrqJd3xrPsFV1HgRbfdfOH/5zQJJf
-	dPGz5jgtPY67/lu
-X-Received: by 2002:a05:7022:1288:b0:12d:ea4f:989f with SMTP id a92af1059eb24-12dfd87b4famr3306769c88.41.1777824271643;
-        Sun, 03 May 2026 09:04:31 -0700 (PDT)
-Received: from localhost.localdomain ([2804:29b8:512d:41bd:9c31:9999:f077:a3ad])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12df845e220sm13299700c88.15.2026.05.03.09.04.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 May 2026 09:04:31 -0700 (PDT)
-From: Daniel Pereira <danielmaraboo@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org,
-	Daniel Pereira <danielmaraboo@gmail.com>
-Subject: [PATCH v2] docs: pt_BR: translate process/license-rules.rst
-Date: Sun,  3 May 2026 13:03:50 -0300
-Message-ID: <20260503160352.160135-1-danielmaraboo@gmail.com>
-X-Mailer: git-send-email 2.47.3
+	s=arc-20240116; t=1777824784; c=relaxed/simple;
+	bh=D0VcYAuXT+AOZnk3q71i9amgUZ/twFulvgs67pCg2hI=;
+	h=Content-Type:MIME-Version:Message-Id:In-Reply-To:References:
+	 Subject:From:To:Cc:Date; b=J9kBhvpbREPWkvOc1XppXwcqigAJxPucCROnyfp7CaVeUyj2nxpOEVKgLsxw3kd2dWr0gcVs4DG3MlPJu+LtxCgTsGs3BCzMqlXLBtiDWTYIfuKFsEPGizL4GndpCM5lmEDL6h/gZHiIoryaP7MzuUVFC51BSCNqjBAyL9ZpUAU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hBqI1NJD; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA249C2BCB4;
+	Sun,  3 May 2026 16:13:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777824784;
+	bh=D0VcYAuXT+AOZnk3q71i9amgUZ/twFulvgs67pCg2hI=;
+	h=In-Reply-To:References:Subject:From:To:Cc:Date:From;
+	b=hBqI1NJDwEzZyLzHlfaqe+DmrHGUCM77Sox5Z6PCsVDTvWiOXyjLV+0XIGRglxuph
+	 owIWaQAwcxNPXp91ASwbybVH8Ih/t1j5wfzhOx5y51UPiaPv1olilRseAupV1EhBO/
+	 T+U5zYM3HuS0H+95850UZogL3pZAi0dvXg9DGG/Kd7nKkKCMItP+i8Hi1IbMohk1yn
+	 VouQz7zvXzqanef384ec0BPywRfZdBsmS30mmikJ2UrQDODeVGu9mNLBxD651LK+kQ
+	 KsxPoNDUeM/ZqHpcLad0bSwu1L1KKDDs6zWwJd7rypJWzQCb4RyAgIIFup7DiRzghU
+	 973BHZZRczkRQ==
+Content-Type: multipart/mixed; boundary="===============1075603499589538813=="
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4FDD44B6586
+Message-Id: <43650b10f9e10b3ced4dbd4d99ae3c7e6119faf0edb8dd99b2e99721e52b23dd@mail.kernel.org>
+In-Reply-To: <20260503153730.541685-1-atomlin@atomlin.com>
+References: <20260503153730.541685-1-atomlin@atomlin.com>
+Subject: Re: [RFC PATCH v2] bpf: introduce TAINT_UNSAFE_BPF for mutating helpers
+From: bot+bpf-ci@kernel.org
+To: atomlin@atomlin.com,corbet@lwn.net,song@kernel.org,kpsingh@kernel.org,mattbobrowski@google.com,ast@kernel.org,daniel@iogearbox.net,andrii@kernel.org,eddyz87@gmail.com,memxor@gmail.com,rostedt@goodmis.org,mhiramat@kernel.org
+Cc: skhan@linuxfoundation.org,jolsa@kernel.org,martin.lau@linux.dev,yonghong.song@linux.dev,mathieu.desnoyers@efficios.com,rdunlap@infradead.org,atomlin@atomlin.com,neelx@suse.com,sean@ashe.io,chjohnst@gmail.com,steve@abita.co,mproche@gmail.com,nick.lange@gmail.com,linux-doc@vger.kernel.org,linux-kernel@vger.kernel.org,bpf@vger.kernel.org,linux-trace-kernel@vger.kernel.org,ast@kernel.org,andrii@kernel.org,daniel@iogearbox.net,martin.lau@kernel.org,eddyz87@gmail.com,yonghong.song@linux.dev,clm@meta.com,ihor.solodrai@linux.dev
+Date: Sun,  3 May 2026 16:13:01 +0000 (UTC)
+X-Rspamd-Queue-Id: 61FB14B65CB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [0.34 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	CTYPE_MIXED_BOGUS(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
+	MIME_GOOD(-0.10)[multipart/mixed,text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-85577-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-85579-lists,linux-doc=lfdr.de,bpf-ci];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,kernel.org,linux.dev,efficios.com,infradead.org,atomlin.com,suse.com,ashe.io,gmail.com,abita.co,vger.kernel.org,iogearbox.net,meta.com];
+	FROM_NEQ_ENVFROM(0.00)[bot@kernel.org,linux-doc@vger.kernel.org];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+,1:+];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[danielmaraboo@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	FREEMAIL_TO(0.00)[atomlin.com,lwn.net,kernel.org,google.com,iogearbox.net,gmail.com,goodmis.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NO_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[37];
 	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_NONE(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,checkpatch.pl:url,spdx.org:url]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mail.kernel.org:mid]
 
-Translate the license-rules.rst document into Brazilian Portuguese.
-This document provides guidelines on how licenses should be identified
-and handled within the kernel source code.
+--===============1075603499589538813==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 
-Additionally, update the pt_BR/process/index.rst to include the new
-translation in the documentation tree.
+> diff --git a/Documentation/admin-guide/tainted-kernels.rst b/Documentation/admin-guide/tainted-kernels.rst
 
-Signed-off-by: Daniel Pereira <danielmaraboo@gmail.com>
+[ ... ]
+
+> diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
+> index 11054ad89c14..e2060c6f3e13 100644
+> --- a/kernel/bpf/verifier.c
+> +++ b/kernel/bpf/verifier.c
+> @@ -9906,6 +9906,14 @@ static int check_helper_call(struct bpf_verifier_env *env, struct bpf_insn *insn
+>  		return err;
+>  	}
+>
+> +	/*
+> +	 * Taint the kernel if the program attempts to use mutating
+> +	 * helpers.
+> +	 */
+> +	if (func_id == BPF_FUNC_probe_write_user ||
+> +	    func_id == BPF_FUNC_override_return)
+> +		add_taint(TAINT_UNSAFE_BPF, LOCKDEP_STILL_OK);
+> +
+
+Is it possible for the kernel to be tainted here even if the program is
+ultimately rejected by the verifier? check_helper_call() is executed during
+the verifier's static analysis phase. If the program fails verification later
+(for example, failing the GPL-compatibility check immediately following this
+code, or encountering an invalid memory access), the program is safely
+rejected and never loaded.
+
+Because add_taint() synchronously modifies global state, wouldn't the kernel
+remain permanently tainted in this scenario, falsely indicating a compromised
+state?
+
+Furthermore, if panic_on_taint is enabled, could a user trigger a panic merely
+by attempting to load a malformed program that contains these helpers?
+
+Could this be addressed by recording the intent to taint within the program's
+auxiliary data during verification, and only invoking add_taint() once the
+program has successfully passed all checks and is definitively loaded?
+
+>  	/* eBPF programs must be GPL compatible to use GPL-ed functions */
+>  	if (!env->prog->gpl_compatible && fn->gpl_only) {
+>  		verbose(env, "cannot call GPL-restricted function from non-GPL compatible program\n");
+
+[ ... ]
+
 
 ---
-v2:
-  - Fixed docutils warning: "Line block ends without a blank line" on line 72.
-  - Removed stray '|' character from the translation file to fix the build.
----
- Documentation/translations/pt_BR/index.rst    |   1 +
- .../pt_BR/process/license-rules.rst           | 483 ++++++++++++++++++
- 2 files changed, 484 insertions(+)
- create mode 100644 Documentation/translations/pt_BR/process/license-rules.rst
+AI reviewed your patch. Please fix the bug or email reply why it's not a bug.
+See: https://github.com/kernel-patches/vmtest/blob/master/ci/claude/README.md
 
-diff --git a/Documentation/translations/pt_BR/index.rst b/Documentation/translations/pt_BR/index.rst
-index 4a094d8b7..77c1a1cdc 100644
---- a/Documentation/translations/pt_BR/index.rst
-+++ b/Documentation/translations/pt_BR/index.rst
-@@ -67,6 +67,7 @@ kernel e sobre como ver seu trabalho integrado.
-    :maxdepth: 1
- 
-    Introdução <process/1.Intro>
-+   Regras de licenciamento <process/license-rules>
-    Como começar <process/howto>
-    Requisitos mínimos <process/changes>
-    Conclave (Continuidade do projeto) <process/conclave>
-diff --git a/Documentation/translations/pt_BR/process/license-rules.rst b/Documentation/translations/pt_BR/process/license-rules.rst
-new file mode 100644
-index 000000000..1e395dfea
---- /dev/null
-+++ b/Documentation/translations/pt_BR/process/license-rules.rst
-@@ -0,0 +1,483 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Regras de licenciamento do kernel Linux
-+=======================================
-+
-+O Kernel Linux é fornecido apenas sob os termos da licença GNU General Public
-+License versão 2 (GPL-2.0), conforme estabelecido em LICENSES/preferred/GPL-2.0,
-+com uma exceção explícita para syscalls descrita em
-+LICENSES/exceptions/Linux-syscall-note, conforme descrito no arquivo COPYING.
-+
-+Este arquivo de documentação fornece uma descrição de como cada arquivo-fonte
-+deve ser anotado para tornar sua licença clara e inequívoca. Ele não substitui
-+a licença do Kernel.
-+
-+A licença descrita no arquivo COPYING aplica-se ao código-fonte do kernel como
-+um todo, embora arquivos-fonte individuais possam ter uma licença diferente, a
-+qual deve ser obrigatoriamente compatível com a GPL-2.0::
-+
-+    GPL-1.0+  :  GNU General Public License v1.0 ou posterior
-+    GPL-2.0+  :  GNU General Public License v2.0 ou posterior
-+    LGPL-2.0  :  GNU Library General Public License v2 apenas
-+    LGPL-2.0+ :  GNU Library General Public License v2 ou posterior
-+    LGPL-2.1  :  GNU Lesser General Public License v2.1 apenas
-+    LGPL-2.1+ :  GNU Lesser General Public License v2.1 ou posterior
-+
-+Além disso, arquivos individuais podem ser fornecidos sob uma licença dupla
-+(dual license), por exemplo, uma das variantes GPL compatíveis e,
-+alternativamente, sob uma licença permissiva como BSD, MIT, etc.
-+
-+Os arquivos de cabeçalho da API do espaço do usuário (UAPI), que descrevem a
-+interface dos programas do espaço do usuário com o kernel, são um caso especial.
-+De acordo com a nota no arquivo COPYING do kernel, a interface de syscall é um
-+limite claro, que não estende os requisitos da GPL a qualquer software que a
-+utilize para se comunicar com o kernel. Como os cabeçalhos UAPI devem ser
-+passíveis de inclusão em quaisquer arquivos-fonte que criem um executável
-+executado no kernel Linux, a exceção deve ser documentada por uma expressão de
-+licença especial.
-+
-+A forma comum de expressar a licença de um arquivo-fonte é adicionar o texto
-+padrão (boilerplate) correspondente no comentário inicial do arquivo. Devido a
-+variações de formatação, erros de digitação, etc., esses "textos padrão" são
-+difíceis de validar por ferramentas usadas no contexto de conformidade de
-+licença.
-+
-+Uma alternativa aos textos padrão é o uso de identificadores de licença
-+Software Package Data Exchange (SPDX) em cada arquivo-fonte. Os identificadores
-+de licença SPDX são abreviações precisas e analisáveis por máquina para a
-+licença sob a qual o conteúdo do arquivo é contribuído. Os identificadores de
-+licença SPDX são gerenciados pelo Grupo de Trabalho SPDX na Linux Foundation e
-+foram acordados por parceiros em toda a indústria, fornecedores de ferramentas
-+e equipes jurídicas. Para mais informações, consulte https://spdx.org/
-+
-+O kernel Linux exige o identificador SPDX preciso em todos os arquivos-fonte.
-+Os identificadores válidos usados no kernel são explicados na seção
-+`Identificadores de Licença`_ e foram obtidos da lista de licenças
-+oficial do  SPDX em https://spdx.org/licenses/ junto com os textos das licenças.
-+
-+Sintaxe do identificador de licença
-+-----------------------------------
-+
-+1. Posicionamento:
-+
-+   O identificador de licença SPDX em arquivos do kernel deve ser adicionado na
-+   primeira linha possível do arquivo que possa conter um comentário. Para a
-+   maioria dos arquivos, esta é a primeira linha, exceto para scripts que
-+   requerem o '#!CAMINHO_PARA_INTERPRETADOR' na primeira linha. Para esses
-+   scripts, o identificador de licença SPDX deve ser colocado na segunda linha.
-+
-+   A linha do identificador de licença pode então ser seguida por uma ou
-+   múltiplas linhas de SPDX-FileCopyrightText, se desejado.
-+
-+2. Estilo:
-+
-+   O identificador de licença SPDX é adicionado na forma de um comentário. O
-+   estilo do comentário depende do tipo de arquivo::
-+
-+      Fonte C:    // SPDX-License-Identifier: <Expressão de Licença SPDX>
-+      Cabeçalho C:/* SPDX-License-Identifier: <Expressão de Licença SPDX> */
-+      ASM:        /* SPDX-License-Identifier: <Expressão de Licença SPDX> */
-+      scripts:    # SPDX-License-Identifier: <Expressão de Licença SPDX>
-+      .rst:       .. SPDX-License-Identifier: <Expressão de Licença SPDX>
-+      .dts{i}:    // SPDX-License-Identifier: <Expressão de Licença SPDX>
-+
-+   Se uma ferramenta específica não conseguir lidar com o estilo de comentário
-+   padrão, então deve ser utilizado o mecanismo de comentário apropriado que a
-+   ferramenta aceite. Este é o motivo para ter o comentário no estilo ``/* */``
-+   em arquivos de cabeçalho C. Foi observada uma quebra de build com arquivos
-+   .lds gerados, onde o 'ld' falhou ao analisar o comentário C++. Isso já foi
-+   corrigido, mas ainda existem ferramentas de assembler mais antigas que não
-+   conseguem lidar com comentários no estilo C++.
-+
-+3. Sintaxe:
-+
-+   Uma <Expressão de Licença SPDX> pode ser um identificador SPDX simplificado
-+   encontrado na Lista de Licenças SPDX, ou a combinação de dois desses
-+   identificadores separados por "WITH", caso uma exceção de licença se aplique.
-+   Quando múltiplas licenças são aplicáveis, a expressão utiliza as palavras-chave
-+   "AND" ou "OR" para separar as sub-expressões, que devem ser delimitadas
-+   por parênteses "(", ")".
-+
-+   Para licenças como [L]GPL, utiliza-se o sufixo "+" para indicar a opção
-+   'ou posterior'::
-+
-+      // SPDX-License-Identifier: GPL-2.0+
-+      // SPDX-License-Identifier: LGPL-2.1+
-+
-+   O termo "WITH" deve ser usado sempre que houver um modificador necessário
-+   para a licença. Por exemplo, os arquivos UAPI do kernel Linux utilizam a
-+   expressão::
-+
-+      // SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note
-+      // SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note
-+
-+   Outros exemplos de uso da cláusula "WITH" para exceções no kernel são::
-+
-+      // SPDX-License-Identifier: GPL-2.0 WITH mif-exception
-+      // SPDX-License-Identifier: GPL-2.0+ WITH GCC-exception-2.0
-+
-+   As exceções só podem ser aplicadas a identificadores de licença específicos.
-+   Os identificadores válidos estão listados nas tags do arquivo de texto de
-+   cada exceção. Para detalhes, veja o ponto `Exceções`_ no capítulo
-+   `Identificadores de Licença`_.
-+
-+   O termo "OR" deve ser usado se o arquivo possuir licenciamento duplo (dual
-+   licensed) e apenas uma das licenças puder ser selecionada. Por exemplo,
-+   alguns arquivos dtsi estão disponíveis sob licença dupla::
-+
-+      // SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
-+
-+   Exemplos de expressões para arquivos com licenciamento duplo no kernel::
-+
-+      // SPDX-License-Identifier: GPL-2.0 OR MIT
-+      // SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause
-+      // SPDX-License-Identifier: GPL-2.0 OR Apache-2.0
-+      // SPDX-License-Identifier: GPL-2.0 OR MPL-1.1
-+      // SPDX-License-Identifier: (GPL-2.0 WITH Linux-syscall-note) OR MIT
-+      // SPDX-License-Identifier: GPL-1.0+ OR BSD-3-Clause OR OpenSSL
-+
-+   O termo "AND" deve ser usado se o arquivo possuir múltiplas licenças cujos
-+   termos devem ser aplicados simultaneamente. Por exemplo, se um código herdado
-+   de outro projeto foi incorporado ao kernel, mas os termos da licença original
-+   ainda precisam ser respeitados::
-+
-+      // SPDX-License-Identifier: (GPL-2.0 WITH Linux-syscall-note) AND MIT
-+
-+   Outro exemplo onde ambos os conjuntos de termos devem ser cumpridos é::
-+
-+      // SPDX-License-Identifier: GPL-1.0+ AND LGPL-2.1+
-+
-+Identificadores de Licença
-+--------------------------
-+
-+As licenças atualmente em uso, bem como as licenças para código adicionado ao
-+kernel, podem ser divididas em:
-+
-+4. _`Licenças preferenciais`:
-+
-+   Sempre que possível, estas licenças devem ser utilizadas, pois são conhecidas
-+   por serem totalmente compatíveis e amplamente usadas. Estas licenças estão
-+   disponíveis no diretório::
-+
-+      LICENSES/preferred/
-+
-+   na árvore de diretórios do código-fonte do kernel.
-+
-+   Os arquivos neste diretório contêm o texto completo da licença e as
-+   `Metatags`_. Os nomes dos arquivos são idênticos ao identificador de licença
-+   SPDX que deve ser utilizado para a licença nos arquivos-fonte.
-+
-+   Exemplos::
-+
-+      LICENSES/preferred/GPL-2.0
-+
-+   Contém o texto da licença GPL versão 2 e as metatags obrigatórias::
-+
-+      LICENSES/preferred/MIT
-+
-+   Contém o texto da licença MIT e as metatags obrigatórias.
-+
-+   _`Metatags`:
-+
-+   As seguintes metatags devem estar presentes em um arquivo de licença:
-+
-+   - Valid-License-Identifier:
-+
-+     Uma ou mais linhas que declaram quais Identificadores de Licença são válidos
-+     dentro do projeto para referenciar este texto de licença específico.
-+     Geralmente, trata-se de um único identificador válido, mas, por exemplo,
-+     para licenças com as opções 'ou posterior' (or later), dois identificadores
-+     são válidos.
-+
-+   - SPDX-URL:
-+
-+     A URL da página SPDX que contém informações adicionais relacionadas à licença.
-+
-+   - Usage-Guidance:
-+
-+     Texto livre para conselhos de uso. O texto deve incluir exemplos corretos
-+     para os identificadores de licença SPDX, conforme eles devem ser colocados
-+     nos arquivos-fonte de acordo com as diretrizes de
-+     `Sintaxe do identificador de licença`_.
-+
-+   - License-Text:
-+
-+     Todo o texto após esta tag é tratado como o texto original da licença.
-+
-+   Exemplos de formato de arquivo::
-+
-+      Valid-License-Identifier: GPL-2.0
-+      Valid-License-Identifier: GPL-2.0+
-+      SPDX-URL: https://spdx.org/licenses/GPL-2.0.html
-+      Usage-Guide:
-+        Para usar esta licença no código-fonte, coloque um dos seguintes pares
-+        SPDX tag/valor em um comentário, de acordo com as diretrizes de
-+        posicionamento na documentação das regras de licenciamento.
-+        Para 'GNU General Public License (GPL) version 2 only', use:
-+          SPDX-License-Identifier: GPL-2.0
-+        Para 'GNU General Public License (GPL) version 2 or any later version', use:
-+          SPDX-License-Identifier: GPL-2.0+
-+      License-Text:
-+        Texto completo da licença
-+
-+   ::
-+
-+      Valid-License-Identifier: MIT
-+      SPDX-URL: https://spdx.org/licenses/MIT.html
-+      Usage-Guide:
-+        Para usar esta licença no código-fonte, coloque o seguinte par SPDX
-+        tag/valor em um comentário, de acordo com as diretrizes de
-+        posicionamento na documentação das regras de licenciamento.
-+          SPDX-License-Identifier: MIT
-+      License-Text:
-+        Texto completo da licença
-+
-+5. Licenças obsoletas:
-+
-+   Estas licenças devem ser utilizadas apenas para código já existente ou para
-+   a importação de código de outros projetos. Estas licenças estão disponíveis
-+   no diretório::
-+
-+      LICENSES/deprecated/
-+
-+   na árvore de fontes do kernel.
-+
-+   Os arquivos neste diretório contêm o texto completo da licença e as
-+   `Metatags`_. Os nomes dos arquivos são idênticos ao identificador de
-+   licença SPDX que deve ser utilizado para a licença nos arquivos fonte.
-+
-+   Exemplos::
-+
-+      LICENSES/deprecated/ISC
-+
-+   Contém o texto da licença *Internet Systems Consortium* e as metatags
-+   necessárias::
-+
-+      LICENSES/deprecated/GPL-1.0
-+
-+   Contém o texto da licença GPL versão 1 e as metatags necessárias.
-+
-+   Metatags:
-+
-+   Os requisitos de metatags para "outras" licenças são idênticos aos
-+   requisitos das `Licenças preferenciais`_.
-+
-+   Exemplo de formato de arquivo::
-+
-+      Valid-License-Identifier: ISC
-+      SPDX-URL: https://spdx.org/licenses/ISC.html
-+      Usage-Guide:
-+        O uso desta licença no kernel para novos códigos é desencorajado
-+        e deve ser utilizada exclusivamente para importar código de um
-+        projeto já existente.
-+        Para usar esta licença no código-fonte, coloque o seguinte par
-+        tag/valor SPDX em um comentário, seguindo as diretrizes de
-+        posicionamento na documentação das regras de licenciamento.
-+          SPDX-License-Identifier: ISC
-+      License-Text:
-+        Texto completo da licença
-+
-+6. Apenas Licenciamento Duplo
-+
-+   Estas licenças devem ser usadas apenas para o licenciamento duplo de código
-+   com outra licença, além de uma licença preferencial. Estas licenças estão
-+   disponíveis no diretório::
-+
-+      LICENSES/dual/
-+
-+   No código-fonte do kernel.
-+
-+   Os arquivos neste diretório contêm o texto completo da licença e as
-+   `Metatags`_. Os nomes dos arquivos são idênticos ao identificador de licença
-+   SPDX que deve ser usado para a licença nos arquivos fonte.
-+
-+   Exemplos::
-+
-+      LICENSES/dual/MPL-1.1
-+
-+   Contém o texto da licença Mozilla Public License versão 1.1 e as metatags
-+   necessárias::
-+
-+      LICENSES/dual/Apache-2.0
-+
-+   Contém o texto da licença Apache License versão 2.0 e as metatags
-+   necessárias.
-+
-+   Metatags:
-+
-+   Os requisitos de metatags para 'outras' licenças são idênticos aos
-+   requisitos das `Licenças preferenciais`_.
-+
-+   Exemplo de formato de arquivo::
-+
-+      Valid-License-Identifier: MPL-1.1
-+      SPDX-URL: https://spdx.org/licenses/MPL-1.1.html
-+      Usage-Guide:
-+        NÃO use. A licença MPL-1.1 não é compatível com a GPL2. Ela só pode ser
-+        usada para arquivos com licenciamento duplo onde a outra licença seja
-+        compatível com a GPL2.
-+        Se você acabar utilizando-a, ela DEVE ser usada em conjunto com uma
-+        licença compatível com a GPL2 utilizando "OR".
-+        Para usar a Mozilla Public License versão 1.1, coloque o seguinte par
-+        tag/valor SPDX em um comentário, de acordo com as diretrizes de
-+        posicionamento na documentação das regras de licenciamento:
-+      SPDX-License-Identifier: MPL-1.1
-+      License-Text:
-+        Texto completo da licença
-+
-+|
-+
-+7. _`Exceções`:
-+
-+Algumas licenças podem ser alteradas com exceções que concedem certos direitos
-+   que a licença original não concede. Estas exceções estão disponíveis no
-+   diretório::
-+
-+      LICENSES/exceptions/
-+
-+   no código-fonte do kernel. Os arquivos neste diretório contêm o texto completo
-+   da exceção e as `Metatags de Exceção`_ necessárias.
-+
-+   Exemplos::
-+
-+      LICENSES/exceptions/Linux-syscall-note
-+
-+   Contém a exceção de syscall do Linux, conforme documentado no arquivo COPYING
-+   do kernel Linux, que é usada para arquivos de cabeçalho UAPI.
-+   ex: /\* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note \*/::
-+
-+      LICENSES/exceptions/GCC-exception-2.0
-+
-+   Contém a 'exceção de vinculação' do GCC, que permite
-+   vincular qualquer binário, independente de sua licença, à versão compilada
-+   de um arquivo marcado com esta exceção. Isso é necessário para criar
-+   executáveis funcionais a partir de código-fonte que não seja compatível
-+   com a GPL.
-+
-+   _`Metatags de Exceção`:
-+
-+   As seguintes meta tags devem estar disponíveis em um arquivo de exceção:
-+
-+   - SPDX-Exception-Identifier:
-+
-+     Um identificador de exceção que pode ser usado com identificadores de
-+     licença SPDX.
-+
-+   - SPDX-URL:
-+
-+     A URL da página SPDX que contém informações adicionais relacionadas
-+     à exceção.
-+
-+   - SPDX-Licenses:
-+
-+     Uma lista separada por vírgulas de identificadores de licença SPDX para os
-+     quais a exceção pode ser usada.
-+
-+   - Usage-Guidance:
-+
-+     Texto de formato livre para conselhos de uso. O texto deve ser seguido por
-+     exemplos corretos para os identificadores de licença SPDX, conforme devem
-+     ser colocados nos arquivos fonte de acordo com as diretrizes de
-+     `Sintaxe do identificador de licença`_.
-+
-+   - Exception-Text:
-+
-+     Todo o texto após esta tag é tratado como o texto original da exceção.
-+
-+   Exemplos de formato de arquivo::
-+
-+      SPDX-Exception-Identifier: Linux-syscall-note
-+      SPDX-URL: https://spdx.org/licenses/Linux-syscall-note.html
-+      SPDX-Licenses: GPL-2.0, GPL-2.0+, GPL-1.0+, LGPL-2.0, LGPL-2.0+, LGPL-2.1, LGPL-2.1+
-+      Usage-Guidance:
-+        Esta exceção é usada em conjunto com uma das SPDX-Licenses acima para
-+        marcar arquivos de cabeçalho de API do espaço do usuário (uapi), para que
-+        possam ser incluídos em código de aplicativo de espaço do usuário que não
-+        esteja em conformidade com a GPL.
-+        Para usar esta exceção, adicione-a com a palavra-chave WITH a um dos
-+        identificadores na tag SPDX-Licenses:
-+          SPDX-License-Identifier: <SPDX-License> WITH Linux-syscall-note
-+      Exception-Text:
-+        Texto completo da exceção
-+
-+Exemplos de formato de arquivo::
-+
-+      SPDX-Exception-Identifier: GCC-exception-2.0
-+      SPDX-URL: https://spdx.org/licenses/GCC-exception-2.0.html
-+      SPDX-Licenses: GPL-2.0, GPL-2.0+
-+      Usage-Guidance:
-+        A "GCC Runtime Library exception 2.0" é usada em conjunto com uma das
-+        SPDX-Licenses acima para código importado da biblioteca de tempo de
-+        execução (runtime) do GCC.
-+        Para usar esta exceção, adicione-a com a palavra-chave WITH a um dos
-+        identificadores na tag SPDX-Licenses:
-+          SPDX-License-Identifier: <SPDX-License> WITH GCC-exception-2.0
-+      Exception-Text:
-+        Texto completo da exceção
-+
-+Todos os identificadores de licença e exceções SPDX devem ter um arquivo
-+correspondente nos subdiretórios LICENSES. Isso é necessário para permitir a
-+verificação por ferramentas (ex: checkpatch.pl) e para que as licenças estejam
-+prontas para leitura e extração diretamente da fonte, o que é recomendado por
-+várias organizações de FOSS (Software Livre e de Código Aberto), como a
-+`iniciativa REUSE da FSFE <https://reuse.software/>`_.
-+
-+_`MODULE_LICENSE`
-+-----------------
-+
-+   Módulos carregáveis do kernel também exigem uma tag MODULE_LICENSE(). Esta tag
-+   não substitui as informações adequadas de licença do código-fonte
-+   (SPDX-License-Identifier), nem é de forma alguma relevante para expressar ou
-+   determinar a licença exata sob a qual o código-fonte do módulo é fornecido.
-+
-+   O único propósito desta tag é fornecer informações suficientes ao carregador
-+   de módulos do kernel e às ferramentas de espaço do usuário sobre o módulo ser
-+   software livre ou proprietário.
-+
-+   As strings de licença válidas para MODULE_LICENSE() são::
-+
-+      ============================= =============================================
-+      "GPL"                         O módulo está licenciado sob a GPL versão 2.
-+                                    Isso não expressa nenhuma distinção entre
-+                                    GPL-2.0-only ou GPL-2.0-or-later. A informação
-+                                    exata da licença só pode ser determinada por
-+                                    meio das informações de licença nos arquivos
-+                                    fonte correspondentes.
-+
-+      "GPL v2"                      O mesmo que "GPL". Existe por razões
-+                                    históricas.
-+
-+      "GPL and additional rights"   Variante histórica para expressar que o fonte
-+                                    do módulo possui licenciamento duplo sob uma
-+                                    variante da GPL v2 e a licença MIT. Por favor,
-+                                    não use em códigos novos.
-+
-+      "Dual MIT/GPL"                A maneira correta de expressar que o módulo
-+                                    possui licenciamento duplo sob uma escolha de
-+                                    variante GPL v2 ou licença MIT.
-+
-+      "Dual BSD/GPL"                O módulo possui licenciamento duplo sob uma
-+                                    escolha de variante GPL v2 ou licença BSD. A
-+                                    variante exata da licença BSD só pode ser
-+                                    determinada por meio das informações de
-+                                    licença nos arquivos fonte correspondentes.
-+
-+      "Dual MPL/GPL"                O módulo possui licenciamento duplo sob uma
-+                                    escolha de variante GPL v2 ou Mozilla Public
-+                                    License (MPL). A variante exata da licença
-+                                    MPL só pode ser determinada por meio das
-+                                    informações de licença nos arquivos fonte
-+                                    correspondentes.
-+
-+      "Proprietary"                 O módulo está sob uma licença proprietária.
-+                                    "Proprietary" deve ser entendido apenas como
-+                                    "A licença não é compatível com GPLv2". Esta
-+                                    string é exclusiva para módulos de terceiros
-+                                    não compatíveis com GPL2 e não pode ser usada
-+                                    para módulos que tenham seu código-fonte na
-+                                    árvore do kernel. Módulos marcados dessa forma
-+                                    contaminam (tainting) o kernel com a flag 'P'
-+                                    quando carregados, e o carregador de módulos
-+                                    recusa-se a vincular tais módulos a símbolos
-+                                    exportados com EXPORT_SYMBOL_GPL().
-+      ============================= =============================================
-\ No newline at end of file
--- 
-2.47.3
-
+CI run summary: https://github.com/kernel-patches/bpf/actions/runs/25283723455
+--===============1075603499589538813==--
 
