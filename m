@@ -1,94 +1,57 @@
-Return-Path: <linux-doc+bounces-85544-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85547-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oOJDKqwg92n+cgIAu9opvQ
-	(envelope-from <linux-doc+bounces-85544-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 12:17:16 +0200
+	id iGGHES8z92mWdQIAu9opvQ
+	(envelope-from <linux-doc+bounces-85547-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 13:36:15 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 123434B5208
-	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 12:17:15 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B65914B54D3
+	for <lists+linux-doc@lfdr.de>; Sun, 03 May 2026 13:36:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 373ED301ECE9
-	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 10:16:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 04067301706A
+	for <lists+linux-doc@lfdr.de>; Sun,  3 May 2026 11:35:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C14842C21F6;
-	Sun,  3 May 2026 10:16:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C6B1345CCE;
+	Sun,  3 May 2026 11:35:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TfDzuL+A"
+	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="Vb36txbh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EABD2D6409
-	for <linux-doc@vger.kernel.org>; Sun,  3 May 2026 10:16:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B072317142;
+	Sun,  3 May 2026 11:35:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777803370; cv=none; b=RoYl2Z1pW9tJOkIobGYWsqIANVU79norwzd8Gk+OGc0dlxBleKDQlU9cHhi5tBoXzm48tL3UpbfGUPcubJN1f77NjpsKYsQ8sSf3h9r+7ITVXCTeuLXtX/Ms4A5ruokmPM7BX6zmp26pYobohzRn2O+QujnanfvuEZ/k8fre2Bc=
+	t=1777808138; cv=none; b=SXzY9CjQrtM6YHySbcVn0QzGfYTuItzsYS81Guomwh9BRZC47c7FPA7TEBFLzVlDo9HquDGgIT/cn8ty39aoVQ20HVS1E+D8VcoC2v+4DqH+doloOchwpeNgQWWJyejrcSB1Ge+Hx/XS7ZwYGY8u0mwE8ZtCfTvZQJwH85EERkk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777803370; c=relaxed/simple;
-	bh=1btOSWinIznhILUWPU9SQybPSt0VmE+8i3i6zz1gQ84=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hb/wZTr7nj8yaIQXlXbPEkeDURaoIuKUp9L2Juq0hgEGwE2o9QMYepMOY0ikrFMOlAQVmdqTX1XiwxIuW9nXaeUZuOv5bECz6+PrX6VXDL3PNo0Ea20eNethkdGetRXFMJWgsc/pnY7cswSIfGvDj+AwulXJPz/vnd7aUYTyuB8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TfDzuL+A; arc=none smtp.client-ip=209.85.215.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-b6ce6d1d3dcso986950a12.3
-        for <linux-doc@vger.kernel.org>; Sun, 03 May 2026 03:16:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777803369; x=1778408169; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=svXN+ZlAdU7VDLF9TtRXFpJ6BtWW3ljpT3ve/4UXduA=;
-        b=TfDzuL+AosFUfIlhwGPlPmr0Kvwk9jwbOzPZ3hRyrBkWQefnjq4oavyT+2kbyw3y6H
-         16qgWM1N9Fris9KXcrcNkkBacFa1JH5LFJkRZnvsf3aYsGHuNmrFUMdupxnzg5yVeEGs
-         ie5HUFBZjQXgbx1Z89XRBPRAMT9G5IdI+5Dukyq7PUxWfQXDCc9NCVO+aQdsIZ7jfXML
-         KpWQKIgsXqBvzUrfs8P+Y6TE/G2h0yojt/10XwreShYz5YJoIY0IYZ9jrevVnKgP1XQf
-         nGKKi6AJ6oJqQKvS7VgI8tCPRoPVLSb78f+6Mh2+3BzcQifEhMMbOw/JuAdigUPKo4nE
-         wdAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777803369; x=1778408169;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=svXN+ZlAdU7VDLF9TtRXFpJ6BtWW3ljpT3ve/4UXduA=;
-        b=ZZukDcD3lI0gAeOHb+YjNuyJwNuuLGVuUuvg4ip0WcOxiJbjj/iud1HXbvwaIU55DG
-         PAVl1BfjRGKkL3YO2GA6dN1FW+TpbOOZBQLxUfqCmaMGME4BETH7udQpy58xex/GXMLc
-         YNsoaU2Cl4kGK6O0lq+GUgo0RIlT6bl5Ue4U+AULNME4l9GhwN08rulGbi1R/8Dp/R1j
-         vnJidF9mAvYleGt2ntu2y0euH+Y9F3/BOM00YVhI1vsM62yKYSoo3rsLf+RYd6fi5K51
-         +MMpv+bo+wNDRxlnYNnDx18kVN6m2ivSuIKcuM/H3kONUCGys0czNKNiRRGbvC2CmV99
-         Qx4Q==
-X-Forwarded-Encrypted: i=1; AFNElJ/9vaQ0RXWVtMdq3K7Fz/Mx3TSEabCT+0bITnHXtBwGBfm5GCL9SHderwWCXw67sJchQXJ9UKZnIIQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwuD3YINFOGoH1zOSLnFJIfI47j9V1rO8GLam8kg0mSTfrtZc5G
-	UwjqJl8y0colak6ho1bvEsabNuCCS93v8ZI8gyKamplV1AtNyaVS6PsS
-X-Gm-Gg: AeBDiesiDmIO0Wg9ifhSBeQ8+E5p8+sLdxsLrP0sUiv2YRWzNpEAaCL54JHCvHMAifx
-	q4KATwf3w5+Li1S1BlSDmQcc0JP7s6UAuHJG/fEdFBAlK0nkbfYXhpoT9tgqUHZ/sKoyVpXmvfM
-	Hq8mPDw5DUPvRjru9sc7RaeZCTaLpGXGdT0pdIiadnY216VcYEoAI5vw15+y44mS0U+kQP4Qc+6
-	slW7zFa3ETj5220VLxOPpp7bIpc9VvCZbKvZ+d9MEUngRGcqOCesXLc58ALtrgg3wNuvE3TOnBy
-	oqukD5F5lpvHUgiQkh0BHKOkXCsYL0gxiVqvLh3J3CSyg6y9jh5J+Tf8oa2OuzSG2yGRtTEe6r4
-	OosN5a/9X7GmokzgKLDK2TYxJ5g9+G2uQT0wcWD4MX8EOww5KyNohGxIH+pcSgcciR5OWJfmnk1
-	Kd+HJsa+R5D5zuksZfqpFFf9ZwFg==
-X-Received: by 2002:a17:903:1a86:b0:2b2:4d36:7ba with SMTP id d9443c01a7336-2b9f22144a6mr50304105ad.0.1777803368740;
-        Sun, 03 May 2026 03:16:08 -0700 (PDT)
-Received: from apt ([140.123.97.23])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b9caad2bd7sm81073455ad.36.2026.05.03.03.16.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 May 2026 03:16:08 -0700 (PDT)
-From: Cheng-Han Wu <hank20010209@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Cc: Randy Dunlap <rdunlap@infradead.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Cheng-Han Wu <hank20010209@gmail.com>
-Subject: [PATCH 4/4] docs: admin-guide: add IGNORE_DIRS example for cscope
-Date: Sun,  3 May 2026 18:14:29 +0800
-Message-ID: <20260503101429.254394-5-hank20010209@gmail.com>
+	s=arc-20240116; t=1777808138; c=relaxed/simple;
+	bh=YwcNdtJ5dZGo3c0u2URHnkbVwr2tYfsy9Y/UmIt/bzw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HQz5UFD7Cxzwm5Fd49pkDD++tBwBnOC87uOjJKfRM44Sbfl1fuiCWdThZZMhM7ycTIOWrDj2+HHkFpxwlOiKS5UEFXcyVSvZ1s+JbPjP2k6xJsEqcfIG5zAQZrYaaGZ++9PSb4YSh3VBcuouamY/9z3DskX7j/Uw63muZFy97es=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=Vb36txbh; arc=none smtp.client-ip=51.159.59.229
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
+	t=1777808135; bh=3YQeG63cxUBIcGGm2uCmzofjGBM+wDHMp4UdcZEVSr4=;
+	h=From:Message-ID:From;
+	b=Vb36txbhW2FR8uAIrlHc7ii2eRjRTLJQuoryGi7sCnKMZI4MWt0J/6tJr3OzdmZjy
+	 7YGXgjk4iD4rWy29VCaUvYPCMqEXk3PG3q+2G3QyYKxRnlPIMnKvjKw79XSSejZ00Y
+	 tzGVIlHq5E30c55HPZKGoeifQFOv9Ls/j5qSb/B8=
+Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
+	by mta1.formilux.org (Postfix) with ESMTP id 16B03C0A41;
+	Sun, 03 May 2026 13:35:35 +0200 (CEST)
+From: Willy Tarreau <w@1wt.eu>
+To: greg@kroah.com
+Cc: leon@kernel.org, security@kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        skhan@linuxfoundation.org, workflows@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Willy Tarreau <w@1wt.eu>
+Subject: [PATCH v2 0/3] Documentation: security-bugs: new updates covering triage and AI
+Date: Sun,  3 May 2026 13:35:03 +0200
+Message-ID: <20260503113506.5710-1-w@1wt.eu>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260503101429.254394-1-hank20010209@gmail.com>
-References: <20260503101429.254394-1-hank20010209@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -96,71 +59,73 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 123434B5208
+X-Rspamd-Queue-Id: B65914B54D3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[infradead.org,vger.kernel.org,gmail.com];
-	TAGGED_FROM(0.00)[bounces-85544-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85547-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[1wt.eu:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hank20010209@gmail.com,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_FIVE(0.00)[6];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,1wt.eu:dkim,1wt.eu:mid]
 
-The workload tracing guide shows how to build a cscope database by
-running cscope command directly. The kernel build system also provides
-a cscope target, which supports IGNORE_DIRS for excluding directories
-from the generated database.
+This series tries to translate recent discussions on the security list
+on how to better handle reports. It details:
+  - when not to Cc: the security list
+  - what classes of bugs do not need to be handled privately
+  - minimum requirements for AI-assisted reports
 
-Mention make cscope and show how to exclude Documentation/ as an example.
+As usual, this is probably perfectible but can already help in the short
+term as we can point it to reporters, so barring any strong disagreement,
+better continue to proceed in small incremental improvements and observe
+the effects.
 
-Signed-off-by: Cheng-Han Wu <hank20010209@gmail.com>
+Thanks!
+Willy
+
 ---
- Documentation/admin-guide/workload-tracing.rst | 9 +++++++++
- 1 file changed, 9 insertions(+)
+v2:
+  - fixes for issues reported by Randy
+  - Greg's ack on the AI part
+  - reworded the "when to Cc" part based on Greg's feedback
+    (Greg I didn't take your original ack since the wording changed)
+  - split the threat model into its own document as per Greg's suggestion
 
-diff --git a/Documentation/admin-guide/workload-tracing.rst b/Documentation/admin-guide/workload-tracing.rst
-index c49c2a00a8b8..314e5f03474e 100644
---- a/Documentation/admin-guide/workload-tracing.rst
-+++ b/Documentation/admin-guide/workload-tracing.rst
-@@ -202,6 +202,15 @@ database. To get out of this mode press ctrl+d. -p option is used to
- specify the number of file path components to display. -p10 is optimal
- for browsing kernel sources.
- 
-+Alternatively, the kernel build system can generate the cscope database::
-+
-+  make cscope
-+
-+To exclude directories from the generated database, pass IGNORE_DIRS to
-+the cscope target. For example, to exclude Documentation/, run::
-+
-+  make IGNORE_DIRS="Documentation" cscope
-+
- What is perf and how do we use it?
- ==================================
- 
+---
+Willy Tarreau (3):
+  Documentation: security-bugs: do not systematically Cc the security
+    team
+  Documentation: security-bugs: explain what is and is not a security
+    bug
+  Documentation: security-bugs: clarify requirements for AI-assisted
+    reports
+
+ Documentation/process/index.rst         |   1 +
+ Documentation/process/security-bugs.rst |  93 +++++++++-
+ Documentation/process/threat-model.rst  | 231 ++++++++++++++++++++++++
+ 3 files changed, 324 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/process/threat-model.rst
+
 -- 
 2.52.0
 
