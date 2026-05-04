@@ -1,124 +1,230 @@
-Return-Path: <linux-doc+bounces-85700-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85701-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cE/oOfHL+Gma0wIAu9opvQ
-	(envelope-from <linux-doc+bounces-85700-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:40:17 +0200
+	id mF7nF0vM+Gn60wIAu9opvQ
+	(envelope-from <linux-doc+bounces-85701-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:41:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C6314C185C
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:40:17 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CFE114C1890
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:41:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4CDDE302C6E4
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 16:39:05 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id EF1253003484
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 16:41:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06E653E3C5B;
-	Mon,  4 May 2026 16:39:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA15F3DE44C;
+	Mon,  4 May 2026 16:41:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rYxGvOeU"
+	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="nUNDsNG8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86A433E3C5A;
-	Mon,  4 May 2026 16:39:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58E563A1A3B;
+	Mon,  4 May 2026 16:41:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777912743; cv=none; b=MNSitB1EpItZp1kA523mI/LOrBdHEXMsyJGt1qKgK688tskiHLtssgBGS8XLKhghvDk1HkAkoT7o18lFJ/S8NHhoOvD0OTnEdnAGgknrtrBH/jcpubwaYPpDpCET3SVzYkEzmNVIwhUCOVbnO32u+sxhMWFZg+xo+oiPY5wCx6Y=
+	t=1777912901; cv=none; b=m0unNg9YGAegDNJpxcE9v7snez4JSrOTvIhB+Mr9mRNevLGOxxAIuXpsgyWCN6JVUekSfkQgfTgsca/JQ4Tth6II8HEsLMqwfnck0JX9X3WrXVbRBE1rI1g34QgVbR+uhPTxhmarlSlNPrLr3ESFcIDUDwgqIT6AmdUUWnV8fx4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777912743; c=relaxed/simple;
-	bh=njr0GWE4Oza+aeDGFeb0WZSg+lk1gG64Ezr4eSCWKZc=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=eHhk8rrSW/sMEa69tT8A3iHv1JKtPH4HE/Qw4kdALjSQgjfKA0bDrItSvxIAR2MLSa/cM7Sm/uZ9WVezUHC6p0BJ5Z82AD8Q0NT6W/vfmD2KC9KDr2qhm6RwnsCRl1l+8+H4ayDu/SQd/FfyeKWQ3lP1D/wtYAb8cFdT5jmqjBQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rYxGvOeU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44597C2BCB8;
-	Mon,  4 May 2026 16:39:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777912743;
-	bh=njr0GWE4Oza+aeDGFeb0WZSg+lk1gG64Ezr4eSCWKZc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=rYxGvOeU9CG6ZQ0Nw50knmT9mQvraeVTMTvePSZrWytNkaflIfJ4agF/2CgGrcb5a
-	 TP1scsnN6yDryv15UEkXjX4Ebq1LQcMvhgzf5gaad29OUiG0oUUc4czois8EXbS00D
-	 tz1nIN+cTg2zSwJXmbdteu0hjeEBTFktvLqXlRALQAfcLX/xch+E0weRngTlxnpIoA
-	 Gibvi8BasyHBTHZmFVQL7JPQq0M4IuG2xpRzShnlauoB3mMr7p4gSsRxiNlFFIXpp6
-	 jPO6KNxu5EoxP2QTG9hrGYcRimAbLAPHRdpDIQQmz8HlKcvli5Yj/RSN6Cc13H0PMq
-	 aZKLx7kP4sK6A==
-Date: Mon, 4 May 2026 17:38:55 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Wang Zihan <jiyu03@qq.com>
-Cc: joshua.crofts1@gmail.com, linux-iio@vger.kernel.org,
- linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2] iio: adxl313: fix typos in documentation
-Message-ID: <20260504173855.1407e7d3@jic23-huawei>
-In-Reply-To: <tencent_5E6677A3FFCB969503EE5250592E75128807@qq.com>
-References: <tencent_5E6677A3FFCB969503EE5250592E75128807@qq.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1777912901; c=relaxed/simple;
+	bh=q1gQlpJfoIxy1ibk2v+LbSUU57lpISXKKiV+29GK8TI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=jpCdoZ5hNmRKVYrpBfnLClLpXDW3s2hNJIijmAdWp5qAAmd4RBB32IbhCAizSVyFsQHqqnVH7lqzfsfRYBh1kni7sx6MmmOEdpSmJipmLfHQyNeYm5esdmfiVzRH5gX8umL+9khBikgFdOuQFibethKilw/iZ8BQXbuSuSW8WSQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=nUNDsNG8; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
+Received: from killaraus.ideasonboard.com (2001-14ba-703d-e500--2a1.rev.dnainternet.fi [IPv6:2001:14ba:703d:e500::2a1])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id CC37D9C;
+	Mon,  4 May 2026 18:41:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1777912896;
+	bh=q1gQlpJfoIxy1ibk2v+LbSUU57lpISXKKiV+29GK8TI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=nUNDsNG8tJC/KsgdJGoEI6BDHNyr771dyng6PLE0QJK6PtreNut6ApucUb8PaBo72
+	 pzi2mQln+olh4fy250zaOr0PJjnqRmtiuw3vPH6lCCYctS7yRQ4YGV0ZWBsn1YKVpO
+	 7SR8Ly/gZLzjulftP4R4LxjZfzNjZmkl5mZvuF8A=
+Date: Mon, 4 May 2026 19:41:36 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Maxime Ripard <mripard@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Jyri Sarha <jyri.sarha@iki.fi>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Andrzej Hajda <andrzej.hajda@intel.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Simon Ser <contact@emersion.fr>,
+	Harry Wentland <harry.wentland@amd.com>,
+	Melissa Wen <mwen@igalia.com>,
+	Sebastian Wick <sebastian.wick@redhat.com>,
+	Alex Hung <alex.hung@amd.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Samuel Holland <samuel@sholland.org>,
+	Dave Stevenson <dave.stevenson@raspberrypi.com>,
+	=?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>,
+	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, Daniel Stone <daniels@collabora.com>,
+	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v3 07/20] drm/colorop: Create
+ drm_atomic_helper_colorop_create_state()
+Message-ID: <20260504164136.GK1344263@killaraus.ideasonboard.com>
+References: <20260424-drm-mode-config-init-v3-0-8b68d9db0d8b@kernel.org>
+ <20260424-drm-mode-config-init-v3-7-8b68d9db0d8b@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 7C6314C185C
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260424-drm-mode-config-init-v3-7-8b68d9db0d8b@kernel.org>
+X-Rspamd-Queue-Id: CFE114C1890
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
+	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-85701-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[qq.com];
-	TAGGED_FROM(0.00)[bounces-85700-lists,linux-doc=lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com,lists.freedesktop.org,vger.kernel.org,collabora.com,lists.infradead.org,lists.linux.dev];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DKIM_TRACE(0.00)[ideasonboard.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qq.com:email]
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ideasonboard.com:dkim,ideasonboard.com:email,killaraus.ideasonboard.com:mid,suse.de:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 
-On Sat,  2 May 2026 20:53:43 +0800
-Wang Zihan <jiyu03@qq.com> wrote:
-
-> Hi Joshua,
+On Fri, Apr 24, 2026 at 12:18:47PM +0200, Maxime Ripard wrote:
+> Commit 47b5ac7daa46 ("drm/atomic: Add new atomic_create_state callback
+> to drm_private_obj") introduced a new pattern for allocating drm object
+> states.
 > 
-> Thank you for the review!
+> Instead of relying on the reset() callback, it created a new
+> atomic_create_state hook. This is helpful because reset is a bit
+> overloaded: it's used to create the initial software state, reset it,
+> but also reset the hardware.
 > 
-> I apologize for the quick v2. The v1 had an incorrect subject format
-> ([PATCH 1/4] instead of [PATCH]) which could cause confusion. I sent
-> v2 to correct this formatting issue.
-
-Make sure you include a change log below the ---
-That would have let Joshua and the rest of us know why you resent.
-Particularly important when doing a quick resend.
-
-Thanks,
-
-Jonathan
-
+> It can also be used either at probe time, to create the initial state
+> and possibly reset the hardware to an expected default, but also during
+> suspend/resume.
 > 
-> I will keep the 24-hour rule in mind for future submissions.
+> Both these cases come with different expectations too: during the
+> initialization, we want to initialize all states, but during
+> suspend/resume, drm_private_states for example are expected to be kept
+> around.
 > 
-> Best regards,
-> Wang Zihan
+> reset() also isn't fallible, which makes it harder to handle
+> initialization errors properly. This is only really relevant for some
+> drivers though, since all the helpers for reset only create a new
+> state, and don't touch the hardware at all.
+> 
+> It was thus decided to create a new hook that would allocate and
+> initialize a pristine state without any side effect:
+> atomic_create_state to untangle a bit some of it, and to separate the
+> initialization with the actual reset one might need during a
+> suspend/resume.
+> 
+> Continue the transition to the new pattern with drm_colorop.
+> 
+> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Signed-off-by: Maxime Ripard <mripard@kernel.org>
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+
+> ---
+>  drivers/gpu/drm/drm_colorop.c | 23 +++++++++++++++++++++++
+>  include/drm/drm_colorop.h     |  2 ++
+>  2 files changed, 25 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_colorop.c b/drivers/gpu/drm/drm_colorop.c
+> index 4c4d0a953e35..c0eecde8c176 100644
+> --- a/drivers/gpu/drm/drm_colorop.c
+> +++ b/drivers/gpu/drm/drm_colorop.c
+> @@ -521,10 +521,33 @@ static void __drm_colorop_state_init(struct drm_colorop_state *colorop_state,
+>  							   &val))
+>  			colorop_state->curve_1d_type = val;
+>  	}
+>  }
+>  
+> +/**
+> + * drm_atomic_helper_colorop_create_state - Allocates and initializes colorop atomic state
+> + * @colorop: drm colorop
+> + *
+> + * Initializes a pristine @drm_colorop_state.
+> + *
+> + * RETURNS:
+> + * Pointer to new colorop state, or ERR_PTR on failure.
+> + */
+> +struct drm_colorop_state *
+> +drm_atomic_helper_colorop_create_state(struct drm_colorop *colorop)
+> +{
+> +	struct drm_colorop_state *state;
+> +
+> +	state = kzalloc_obj(*state);
+> +	if (!state)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	__drm_colorop_state_init(state, colorop);
+> +
+> +	return state;
+> +}
+> +
+>  /**
+>   * __drm_colorop_reset - reset state on colorop
+>   * @colorop: drm colorop
+>   * @colorop_state: colorop state to assign
+>   *
+> diff --git a/include/drm/drm_colorop.h b/include/drm/drm_colorop.h
+> index bd082854ca74..874ed693329c 100644
+> --- a/include/drm/drm_colorop.h
+> +++ b/include/drm/drm_colorop.h
+> @@ -423,10 +423,12 @@ int drm_plane_colorop_3dlut_init(struct drm_device *dev, struct drm_colorop *col
+>  				 struct drm_plane *plane, const struct drm_colorop_funcs *funcs,
+>  				 uint32_t lut_size,
+>  				 enum drm_colorop_lut3d_interpolation_type interpolation,
+>  				 uint32_t flags);
+>  
+> +struct drm_colorop_state *
+> +drm_atomic_helper_colorop_create_state(struct drm_colorop *colorop);
+>  struct drm_colorop_state *
+>  drm_atomic_helper_colorop_duplicate_state(struct drm_colorop *colorop);
+>  
+>  void drm_colorop_atomic_destroy_state(struct drm_colorop *colorop,
+>  				      struct drm_colorop_state *state);
 > 
 
+-- 
+Regards,
+
+Laurent Pinchart
 
