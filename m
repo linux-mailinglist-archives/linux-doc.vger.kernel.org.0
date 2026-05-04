@@ -1,164 +1,151 @@
-Return-Path: <linux-doc+bounces-85651-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85654-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wEcyGzeZ+GmcwwIAu9opvQ
-	(envelope-from <linux-doc+bounces-85651-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:03:51 +0200
+	id +NoMB7mk+GmxxQIAu9opvQ
+	(envelope-from <linux-doc+bounces-85654-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:52:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6B5A4BD63E
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:03:50 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A9004BE106
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:52:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6F74A302FA14
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 12:59:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CC865301F315
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 13:52:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 37F2637DE85;
-	Mon,  4 May 2026 12:59:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8AD1E3DDDDA;
+	Mon,  4 May 2026 13:52:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="F4u+K/oK"
+	dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b="r+USpQTx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail.avm.de (mail.avm.de [212.42.244.120])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD09D3D7D8C
-	for <linux-doc@vger.kernel.org>; Mon,  4 May 2026 12:59:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3565D3DA7D7;
+	Mon,  4 May 2026 13:52:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.42.244.120
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777899585; cv=none; b=MHi7eFZ47EzAO6zKDm0bZXl4tSljj3eUVRcpOt6cuTOmrmRarKqOE6N3G/yot5YhnB8xluRCXJtl0gc/Zf2LJXx8TNFY2nDR5KQxlBlSpBOepUtY440VeJwy1qWnxfaYp/B1KEfyLF8+gS0m5fiSGS17W/yXZyGcK/s50zQsqxk=
+	t=1777902754; cv=none; b=TWZ49Vh5Ln+8noP14NKBxST3q8cmcyjtaiDGUuOlQ89F3+kgPArFSzVvK81MEanCsklxCRq5fveSaFizV72+wP2DD07Bf4HJxegD9yrr/JPz+i04OeVRW10cmkfoN5hdPIfTupOT+w4l5O+2svcriwmAZHCTEyRm8/hAO4S8R18=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777899585; c=relaxed/simple;
-	bh=AkaRMWJcfZQngMfBbKjbOZI3+ub0kaJeMvKtlY7x+cw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dVIKmZswiR4ymyn+Vnl8D1tIbwjS6XtNtU1Ow4HA9/UFvdXFOCmohyKUS/XyCw6kCF29ayWe3ReAZ6Og73tLgq/BNTQ31UPaNOYID/rjgZpGbqmzDK8n+r+l5LpLUVX7+61lkvJDgi9nx206a7lGlDZNImL8o4ySDCHeugvKEpY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=F4u+K/oK; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1777899580;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6Z+wfwvn6biVJ4qI194NIBWVjqR1H3eW4BSETGvGmIg=;
-	b=F4u+K/oKwokPHL+jax2uytHm6um3VNIabkdwZ5CDspKETb2l5NUOEjixH2O3WPye3/8Gnv
-	em9s/kC7Tu4tESqZZQOFCqUUpW96vx2hscsAjIKAyjNj2JDpFxbhDX74GuqB/hBTH+ZyFz
-	+ugtZAoqj4JhvXTiysenr+OW/u+v0I4=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-194-LAUXZOfJMQagBvPmZnST8A-1; Mon,
- 04 May 2026 08:59:33 -0400
-X-MC-Unique: LAUXZOfJMQagBvPmZnST8A-1
-X-Mimecast-MFC-AGG-ID: LAUXZOfJMQagBvPmZnST8A_1777899569
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 9BB431800652;
-	Mon,  4 May 2026 12:59:28 +0000 (UTC)
-Received: from [10.44.32.88] (unknown [10.44.32.88])
-	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 9596E1955D84;
-	Mon,  4 May 2026 12:59:22 +0000 (UTC)
-Message-ID: <40bb04ec-87a2-4e5f-9934-4ed46a731e4b@redhat.com>
-Date: Mon, 4 May 2026 14:59:20 +0200
+	s=arc-20240116; t=1777902754; c=relaxed/simple;
+	bh=rTHndH9H6DJkfEgxqt7kbM04qUFjUllOUAOS1X12Cb4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Tz2C55NfBVX38aNuf5qLGi1Cfp5gxB33dp89jKW7PAZgBb6kJn42O1qKeqOdSqdeFLSKs9d6UucSqKApX6EMG4HVo8G7klv+V/vdU381k9lXhvRaQnPanmYsPqC234iUiUOefnQnvKNT09s4bFXsNpBYivNPgZrgeiz93J4MMSA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de; spf=pass smtp.mailfrom=avm.de; dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b=r+USpQTx; arc=none smtp.client-ip=212.42.244.120
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=avm.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=avm.de; s=mail;
+	t=1777902748; bh=rTHndH9H6DJkfEgxqt7kbM04qUFjUllOUAOS1X12Cb4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=r+USpQTxeM+8F1jcCKd7cP+0ENahkrhCh3C56cJtEPgZBIjVKo2K7FjBW/TN1/u6n
+	 ij9/RTDLNOpseSMLMmi0RWhuzHpuVV9beiXIPVb017nDDJZYEWY8vBfV1+GyFfiEjw
+	 oZRjEARb5bClfMk9xa7YLzfrL8CRXU5B1/t9SoyQ=
+Received: from [212.42.244.71] (helo=mail.avm.de)
+	by mail.avm.de with ESMTP (eXpurgate 4.56.1)
+	(envelope-from <p.hahn@avm.de>)
+	id 69f8a49b-839b-7f0000032729-7f000001e41a-1
+	for <multiple-recipients>; Mon, 04 May 2026 15:52:28 +0200
+Received: from mail-auth.avm.de (dovecot-mx-01.avm.de [212.42.244.71])
+	by mail.avm.de (Postfix) with ESMTPS;
+	Mon,  4 May 2026 15:52:27 +0200 (CEST)
+From: Philipp Hahn <p.hahn@avm.de>
+To: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>
+Cc: Philipp Hahn <phahn-oss@avm.de>,
+	linux-watchdog@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/5] Cleanup Linux Watchdog documentation
+Date: Mon,  4 May 2026 15:49:58 +0200
+Message-ID: <cover.1777902230.git.phahn-oss@avm.de>
+In-Reply-To: <cover.1777892508.git.phahn-oss@avm.de>
+References: <cover.1777892508.git.phahn-oss@avm.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v2 1/2] dpll: move
- fractional-frequency-offset-ppt under pin-parent-device
-To: Jiri Pirko <jiri@resnulli.us>
-Cc: netdev@vger.kernel.org, Andrew Lunn <andrew+netdev@lunn.ch>,
- Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
- "David S. Miller" <davem@davemloft.net>,
- Donald Hunter <donald.hunter@gmail.com>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>,
- Michal Schmidt <mschmidt@redhat.com>, Paolo Abeni <pabeni@redhat.com>,
- Pasi Vaananen <pvaanane@redhat.com>, Petr Oros <poros@redhat.com>,
- Prathosh Satish <Prathosh.Satish@microchip.com>,
- Saeed Mahameed <saeedm@nvidia.com>, Shuah Khan <skhan@linuxfoundation.org>,
- Simon Horman <horms@kernel.org>, Tariq Toukan <tariqt@nvidia.com>,
- Vadim Fedorenko <vadim.fedorenko@linux.dev>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org
-References: <20260430173611.3312596-1-ivecera@redhat.com>
- <20260430173611.3312596-2-ivecera@redhat.com> <afhdCnT0ns-PgZD8@FV6GYCPJ69>
- <290673a1-fb5b-4586-b44a-e109cc1a4629@redhat.com>
- <afiQTPaMyAApbLRk@FV6GYCPJ69>
-Content-Language: en-US
-From: Ivan Vecera <ivecera@redhat.com>
-In-Reply-To: <afiQTPaMyAApbLRk@FV6GYCPJ69>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Rspamd-Queue-Id: D6B5A4BD63E
+Organization: FRITZ! Technology GmbH, Berlin, Germany
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: 149429::1777902748-CBE95EA9-428232E3/0/0
+X-purgate-type: clean
+X-purgate-size: 1563
+X-purgate: This mail is considered clean (visit https://www.eleven.de for further information)
+X-purgate: clean
+X-Rspamd-Queue-Id: 5A9004BE106
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	DMARC_POLICY_ALLOW(-0.50)[avm.de,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[avm.de:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85651-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lunn.ch,intel.com,davemloft.net,gmail.com,google.com,kernel.org,lwn.net,nvidia.com,redhat.com,microchip.com,linuxfoundation.org,linux.dev];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ivecera@redhat.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85654-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[avm.de:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[p.hahn@avm.de,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,avm.de:email,avm.de:dkim,avm.de:mid]
 
+From: Philipp Hahn <phahn-oss@avm.de>
 
+Hello,
 
-On 5/4/26 2:26 PM, Jiri Pirko wrote:
-> Mon, May 04, 2026 at 11:36:19AM +0200, ivecera@redhat.com wrote:
->> Hi Jiri,
->>
->> On 5/4/26 10:48 AM, Jiri Pirko wrote:
->>> Thu, Apr 30, 2026 at 07:36:10PM +0200, ivecera@redhat.com wrote:
->>>> Move the fractional-frequency-offset-ppt attribute from the top-level
->>>> pin attributes into the pin-parent-device nested attribute set. This
->>>> makes it consistent with phase-offset which is already per-parent and
->>>> clarifies that FFO PPT represents the frequency difference between
->>>> a pin and its parent DPLL device.
->>>>
->>>> The top-level fractional-frequency-offset attribute (in PPM) remains
->>>> unchanged for backward compatibility.
->>>
->>> That is odd. The ppt one was added just for higher precision but was
->>> semantically the same. Now you change it. Could you still treat both the
->>> same?
->>>
->> WDYM?
->>
->> Keep fractional-frequency-offset-ppt at the top-level and add both
->> fractional-frequency-offset and fractional-frequency-offset-ppt into
->> pin-parent-device nested attribute set?
-> 
-> Since both are the same, only different unit, it would make sense to
-> treat them both the same. That prevents from user confusion, hopefully.
-> 
-Agree... will update in v3.
+while reading the documentation on the Linux kernel watchdog
+subsystem[1] I noticed some strange looking formatting: `struct`s are
+detected automatically by Sphinx and the word **after** it is considered
+the name of the structure, but the watchdog documentation puts the name
+**before** the word `struct`; this leads to the wrong word being
+emphasized.
 
-Thanks,
-Ivan
+Also reorganize the index page to better separate the documentation on
+generic infrastructure from specific drivers – which are mostly obsolete
+and relevant for historic documentation only.
+
+Please apply; thank you for all your work.
+
+Philipp
+
+[1]: https://docs.kernel.org/watchdog/convert_drivers_to_kernel_api.html
+---
+Philipp Hahn (5):
+  watchdog: Change suffix .txt to .rst in references
+  watchdog: Move `struct` before name
+  watchdog: Replace intermixed tab/space indent
+  watchdog: Separate kind of documentation
+  watchdog: Prefix WDT with ICS for clarity
+
+v1 -> 2
+  - Drop invalid SPDX change to Documentation/watchdog/index.rst
+  - Add SPDX to Documentation/watchdog/wdt.rst
+
+ .../convert_drivers_to_kernel_api.rst         | 28 +++++++++----------
+ Documentation/watchdog/index.rst              | 20 +++++++++----
+ Documentation/watchdog/watchdog-api.rst       |  4 +--
+ .../watchdog/watchdog-kernel-api.rst          |  2 +-
+ Documentation/watchdog/wdt.rst                |  8 ++++--
+ drivers/watchdog/Kconfig                      |  6 ++--
+ 6 files changed, 40 insertions(+), 28 deletions(-)
+
+-- 
+2.43.0
 
 
