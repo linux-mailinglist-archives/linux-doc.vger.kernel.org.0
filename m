@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-85680-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85682-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CM56BKXA+Gnh0AIAu9opvQ
-	(envelope-from <linux-doc+bounces-85680-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 17:52:05 +0200
+	id KApODBLB+Gnh0AIAu9opvQ
+	(envelope-from <linux-doc+bounces-85682-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 17:53:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C9D44C0E9D
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 17:52:04 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3CB54C0F4A
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 17:53:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 25F86302517A
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 15:51:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id EC4E03054C34
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 15:51:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 18A823E3145;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C0043E3C62;
 	Mon,  4 May 2026 15:51:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Sg57eCot"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sLz4O8fQ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1D123E2751;
-	Mon,  4 May 2026 15:51:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B2C83E3C48;
+	Mon,  4 May 2026 15:51:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777909889; cv=none; b=gHhIE0EnQN/ToFAzNKHYeIvYfp5tRrSnw8kQH86E0txo3OW3bUCfbSh0NaiS5lzR9xS65rlMtUa4fVXpTkrXa/8MZNBqjlcZsjN73MkMRb5Oxk9P/3EMJgkXjeV7waNWHB+y2av0mRbJ+i8n/PBgFB1m1rCsLx86mTzJif7QOA4=
+	t=1777909890; cv=none; b=W9IiHzIAp0B9ygS/Li8sJgxktA1shylACu84o+pThUlMoass00Guqvs2n9EXt5/nyHwRzfi+xqpIYoI4Fhckd+aqiRtaOyW9bnOinWE3Njc3jd7l3fbbXEywZdudca9SAAwiQtbUn8aybsjGs6E264yUPcItSYPjodJGOAPbcWM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777909889; c=relaxed/simple;
-	bh=OEd0+YSd1pN5VoGvQ/n7JNcZR0hP8+/xnr6xw2USiE8=;
+	s=arc-20240116; t=1777909890; c=relaxed/simple;
+	bh=NgkZooe3CB6Mf13tkY5wF+JWazebe4oFO2B6aSDF0ac=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dD2d6P/9h5jEy/ce2jyrAYuYv0/xU+teiQ5U0eWXk2LiyTzrNYHriaWyVA7o7lMhXi3PNPPW7LHDGUcEUvbapEiO8Xt++4Us2ou8g/PLU2CZWB/hY1ZZkSWmT8Ow1RbKRf9177Mc/Uncwr8nuCiqXXtdOAqiZEwvn1+RBoXDvUw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Sg57eCot; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89D5DC4AF09;
+	 MIME-Version:Content-Type; b=l2mThKqQff8R/gbOWPhZ68fGPo084q8CUAVwfyaMx2sJ5KMXkqGzOgXm72+DCO/TQlZM6EVF7vYtXTqwBEMpn14Vrqs3lSXf2GqRjv2NKS32eaxIrH9MctLg9xXLsAW5B4OD3M6ygyGfZeYr3vZRwb1mFEV740e/xOL4pjZ87Zo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sLz4O8fQ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D86FAC2BCB8;
 	Mon,  4 May 2026 15:51:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777909889;
-	bh=OEd0+YSd1pN5VoGvQ/n7JNcZR0hP8+/xnr6xw2USiE8=;
+	bh=NgkZooe3CB6Mf13tkY5wF+JWazebe4oFO2B6aSDF0ac=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Sg57eCot01ZLChJqbjVpoUAx92w/zRFOxNOcirL1v6iav2txuPjuEcpV16h3gOUkz
-	 FjqlxhcpiB5IrZeoAELx1n/Zv8+b2ZRAV456ezJwH+V1Ylp9xMGY7zlJNF4vCLHkkn
-	 6aOrnkSlj5/NAg2FTTSU9n4OPjrClFp839lIsh6Ji2ezYGqnxRQczop9Gy+mWy4bfc
-	 VEKOFdigFTDuVRyVh4MliXtC127PpzM1ef/mC9BUhz+fhoN3GpdC4/xquSz4Fy7wqd
-	 z+B/bH+ku5FcHZq2WoOMRJmb72cUSO3kessWuBqfmhmbiprpbNQhp9bAerf5zK+j7B
-	 gh0prL4yMCPlA==
+	b=sLz4O8fQkgNLMdM28+PuhOQanBqjVtECLrWGPGhQRU5l5BKcs6MCluTwPoOghXfAf
+	 FpbB7Y1zCBkRaRTfPcoy8zvUO70aZS6lKDfLgMAGAePs76yHaBxMuYmDP2hl9whJR2
+	 CVG08QZGyRbS75i5IEdUlMKsljFw4Gv0XEn7BU5bQw7l7SwHiofr5/ghemoMbbcmY5
+	 vdheRRMq30R1cP50pcDe9jvty5xQTVFVdz2vnLyY8v3+EH1HuS//GmXiBMgOEvSfzA
+	 EdArUZePOZ9Qoyfdp/sj44mAXFl3EkG695Wj7UKX2M3SK+aazGt5lilsIB++GyjbDK
+	 29D+cIx5ejlVg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wJvZv-0000000EyE7-3JAH;
+	id 1wJvZv-0000000EyFI-41NG;
 	Mon, 04 May 2026 17:51:27 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -55,19 +55,10 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	rust-for-linux@vger.kernel.org,
-	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Benno Lossin <lossin@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Trevor Gross <tmgross@umich.edu>
-Subject: [PATCH 8/9] docs: maintainers_include: don't ignore invalid profile entries
-Date: Mon,  4 May 2026 17:51:17 +0200
-Message-ID: <fce06f1b1c620c65ff6ddbc09fb4808ecc1aade3.1777908711.git.mchehab+huawei@kernel.org>
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 9/9] docs: maintainers: add a filtering javascript
+Date: Mon,  4 May 2026 17:51:18 +0200
+Message-ID: <854faf4127053c203cae479f68e6ac12a4e4aabc.1777908711.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1777908711.git.mchehab+huawei@kernel.org>
 References: <cover.1777908711.git.mchehab+huawei@kernel.org>
@@ -80,71 +71,169 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 9C9D44C0E9D
+X-Rspamd-Queue-Id: A3CB54C0F4A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,protonmail.com,google.com,garyguo.net,linuxfoundation.org,umich.edu];
-	TAGGED_FROM(0.00)[bounces-85680-lists,linux-doc=lfdr.de,huawei];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85682-lists,linux-doc=lfdr.de,huawei];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-Currently, there is a "P" entry for Rust pin-point that is
-neither a valid ReST file nor an hyperlink. While the real
-fix there would be to ensure that the documentation can be
-properly seen at documentation, add a logic to handle it as
-a file.
+The maintainers table is big. Add a javascript to allow filtering
+it. Such script is only added at the page which contains the
+maintainers-include tag.
+
+I opted to keep the search case-sensitive, as, this way,
+upper case searches at subsystem.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/maintainers_include.py | 4 ++++
- 1 file changed, 4 insertions(+)
+ Documentation/sphinx/maintainers_include.py | 77 +++++++++++++++++++--
+ 1 file changed, 71 insertions(+), 6 deletions(-)
 
 diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index 50359b125db0..bbdadf2aa4f3 100755
+index bbdadf2aa4f3..f85298627da2 100755
 --- a/Documentation/sphinx/maintainers_include.py
 +++ b/Documentation/sphinx/maintainers_include.py
-@@ -197,6 +197,8 @@ class MaintainersParser:
-                 if match:
-                     entry = match.group(1).strip()
-                     self.profile_entries[self.subsystem_name] = entry
-+                else:
-+                    self.profile_entries[self.subsystem_name] = f"``{details}``"
+@@ -31,6 +31,48 @@ __version__ = "1.0"
  
-         details = self.linkify(details)
+ maint_parser = None  # pylint: disable=C0103
  
-@@ -276,6 +278,8 @@ class MaintainersProfile(Include):
++JS_FILTER = """
++(function() {
++  function filterTable(table) {
++    const filter = document.getElementById("filter-table").value.trim();
++    const rows = table.querySelectorAll("tbody tr");
++    for (let i = 0; i < rows.length; i++) {
++      const tds = rows[i].getElementsByTagName("td");
++      let match = false;
++      for (let j = 0; j < tds.length; j++) {
++        const cellText = (tds[j].textContent || tds[j].innerText);
++        if (cellText.includes(filter)) {
++          match = true;
++          break;
++        }
++      }
++      rows[i].style.display = match ? "table-row" : "none";
++    }
++  }
++  function addInput() {
++    const table = document.getElementById("maintainers-table");
++    if (!table) return;
++    let input = document.getElementById("filter-table");
++    if (!input) {
++      const filt_div = document.createElement('div');
++      filt_div.innerHTML = `
++        <p>Filter:
++          <input type="search" id="filter-table" placeholder="subsystem or property (case-sensitive)" />
++        </p>
++      `;
++      table.parentNode.insertBefore(filt_div, table);
++      const input = document.getElementById("filter-table")
++      input.addEventListener('input', () => filterTable(table));
++    }
++  }
++  if (document.readyState === 'loading') {
++    document.addEventListener('DOMContentLoaded', addInput);
++  } else {
++    addInput();
++  }
++})();
++"""
++
  
-             if entry.startswith("http"):
-                 output += f"- `{profile} <{entry}>`_\n"
-+            elif entry.startswith("`"):
-+                output += f"- {profile}: {entry}\n"
-             else:
-                 output += f"- :doc:`{profile} <{entry}>`\n"
+ # Shamelessly stolen from docutils
+ def ErrorString(exc):  # pylint: disable=C0103, C0116
+@@ -62,7 +104,7 @@ class MaintainersParser:
+         #
+         self.profile_toc = set()
+         self.profile_entries = {}
+-        self.header = ".. _maintainers:\n\n"
++        self.header = ""
+         self.maint_entries = {}
+         self.fields = {}
  
+@@ -230,15 +272,28 @@ class MaintainersInclude(Include):
+     def emit(self):
+         """Parse all the MAINTAINERS lines into ReST for human-readability"""
+         path = maint_parser.path
+-        output = maint_parser.header
++        output = ".. _maintainers:\n\n"
++        output += maint_parser.header
++
++        output += ".. _maintainers_table:\n\n"
++        output += ".. flat-table::\n"
++        output += "  :header-rows: 1\n\n"
++        output += "  * - Subsystem\n"
++        output += "    - Properties\n\n"
++
++        self.state.document['maintainers_included'] = True
+ 
+         for name, fields in maint_parser.maint_entries.items():
+-            output += "\n" + name + "\n"
+-            output += "~" * len(name) + "\n"
+-
++            output += f"  * - {name}\n"
++            tag = "-"
+             for field, lines in fields.items():
+                 field_name = maint_parser.fields.get(field, field)
+-                output += f":{field_name}:\n\t" + ",\n\t".join(lines) + "\n\n"
++
++                output += f"    {tag} :{field_name}:\n        "
++                output += ",\n        ".join(lines) + "\n"
++                tag = " "
++
++            output += "\n"
+ 
+         # For debugging the pre-rendered results...
+         print(output, file=open("/tmp/MAINTAINERS.rst", "w"))
+@@ -315,6 +370,14 @@ class MaintainersProfile(Include):
+         return []
+ 
+ 
++# pylint: disable=W0613
++def add_filter_script(app, pagename, templatename, context, doctree):
++    """Add Filter javascript only to maintainers page"""
++
++    if doctree and doctree.get('maintainers_included'):
++        app.add_js_file(None, body=JS_FILTER)
++
++
+ def setup(app):
+     """Setup Sphinx exension"""
+     global maint_parser  # pylint: disable=W0603
+@@ -332,6 +395,8 @@ def setup(app):
+     app.add_directive("maintainers-include", MaintainersInclude)
+     app.add_directive("maintainers-profile-toc", MaintainersProfile)
+ 
++    app.connect("html-page-context", add_filter_script)
++
+     return {
+         "version": __version__,
+         "parallel_read_safe": True,
 -- 
 2.54.0
 
