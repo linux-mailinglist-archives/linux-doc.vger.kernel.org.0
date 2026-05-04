@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-85653-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85655-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gIToCKak+GnQxQIAu9opvQ
-	(envelope-from <linux-doc+bounces-85653-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:52:38 +0200
+	id mDcBNLmk+GnQxQIAu9opvQ
+	(envelope-from <linux-doc+bounces-85655-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:52:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 990D64BE0CC
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:52:37 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74BB24BE115
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 15:52:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B450A3008C03
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 13:52:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 716D43021E7F
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 13:52:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C3CB3DDDD2;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B0F993DE424;
 	Mon,  4 May 2026 13:52:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b="jmBeQg21"
+	dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b="RitrhTI1"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.avm.de (mail.avm.de [212.42.244.119])
 	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 340CD3DA5C4;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 755CF3DB642;
 	Mon,  4 May 2026 13:52:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.42.244.119
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777902754; cv=none; b=cbGlBRafgaQ8lk7jaujKv5tTe6kDZ81uRUQGw9gfHfOMP5V5Z8VTz+m2jg6vdqdG5Tai8ajhTg3kZuORDk3B0cul9XviaQOBX7zOEhuUeMaKBE5iIw3go2YiD7kI82rEn/KVmnRHAnSnnsGTqPs35CawvS/uozJptNcKWiwoO88=
+	t=1777902754; cv=none; b=lqjW01gUs+jtcE1cWe2xXXqQ/0mZZSHGEHIsiGW8nxsngq1L0addKbcxSmId9DEVvZH1EN38xQZfRFLQB77CDgWz28VJnVx1LPw0CifCRIBHhbPBs2AxELHEynep9OA8n1cE0n1N6LisWIgTGEJe3FqXj6slyaXvmOAPZ3WSdMk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777902754; c=relaxed/simple;
-	bh=X0jhz6d9YsnMWMf1sUvjNb50GBIT36snTSn8/utfE3A=;
+	bh=yfHhvGmjTMJPUcSrWCoGBx/HYBtZ7hrAGcW9br8CDbs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gsnC5gHqyaDyGq38l/txKXGc3r3P9kgfmK945iwVrMiJK9YkKXmPrLG/0FQFd+r7WAr2XBPh7fvuqRg8Tt4G4vbHa+qcCUfmaNQ6XNZ564VKWbxums5Dqi0n3uMDkMVwNj3eknHoer/mmn7y3u4vpqzAtItXhDPb6EkyQRt2ibo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de; spf=pass smtp.mailfrom=avm.de; dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b=jmBeQg21; arc=none smtp.client-ip=212.42.244.119
+	 MIME-Version; b=r+CuAMgJ623SoTTZa84VKT82dYPNAlD6nIVIbjE5I21MJQL4QBj2rD0tsXmTqh7bheyNarHOI5Axevv8ETFCb5+P1vX01yz89bXmlf+bh603TOKH6MMS6gxL9G7nQWbT5VNNhOcS9l/UdfokX0aRVF8HXJKIhnIq1MhGLRG+ReU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de; spf=pass smtp.mailfrom=avm.de; dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b=RitrhTI1; arc=none smtp.client-ip=212.42.244.119
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=avm.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=avm.de; s=mail;
-	t=1777902749; bh=X0jhz6d9YsnMWMf1sUvjNb50GBIT36snTSn8/utfE3A=;
+	t=1777902749; bh=yfHhvGmjTMJPUcSrWCoGBx/HYBtZ7hrAGcW9br8CDbs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jmBeQg21nqh75/+0bc+BnXQm5uJ8AHW6Pfnn2I84EYQUEAmVZ5uqHxt+DLrKc4Lle
-	 lUKb305wjHBnlwgJJHFbyF8G6a2eiqBbram/zOSDqDdqz7XAd3uXhRhz1LDwNH6Z6j
-	 o1HOJ5eA35zCgrQfNRjkDYBcOgUiWmlRVSQJmroA=
+	b=RitrhTI1zgpi5hi758diD1Io3rQ9NBxPgedWS0qhWe+ycg/Fh9RF4eBxumQTrfJDN
+	 hZeu6GQKD+aGG6FB2Dd3X2NgbXAgyGAv6AlKTq3VvT3TOoG9z3JJiBAbrg66uDOg5Y
+	 J77TXTiUwHgZ72W20qVMN9tHcE/M7Et5ZAJBeWPQ=
 Received: from [212.42.244.71] (helo=mail.avm.de)
 	by mail.avm.de with ESMTP (eXpurgate 4.56.1)
 	(envelope-from <p.hahn@avm.de>)
-	id 69f8a49d-88c8-7f0000032729-7f000001e3a8-1
+	id 69f8a49d-88c8-7f0000032729-7f000001e3b2-1
 	for <multiple-recipients>; Mon, 04 May 2026 15:52:29 +0200
 Received: from mail-auth.avm.de (dovecot-mx-01.avm.de [212.42.244.71])
 	by mail.avm.de (Postfix) with ESMTPS;
@@ -55,9 +55,9 @@ Cc: Philipp Hahn <phahn-oss@avm.de>,
 	linux-watchdog@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 4/5] watchdog: Separate kind of documentation
-Date: Mon,  4 May 2026 15:50:02 +0200
-Message-ID: <8a4ccc42186d72cc172889411badc06ed68eacd5.1777902230.git.phahn-oss@avm.de>
+Subject: [PATCH v2 5/5] watchdog: Prefix WDT with ICS for clarity
+Date: Mon,  4 May 2026 15:50:03 +0200
+Message-ID: <25e65a138f70239b6263bdfbed801f1acbb06688.1777902230.git.phahn-oss@avm.de>
 In-Reply-To: <cover.1777902230.git.phahn-oss@avm.de>
 References: <cover.1777902230.git.phahn-oss@avm.de>
 Precedence: bulk
@@ -68,19 +68,19 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Organization: FRITZ! Technology GmbH, Berlin, Germany
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: 149429::1777902749-51610582-609225D5/0/0
+X-purgate-ID: 149429::1777902749-4DE19582-8F7E9DBD/0/0
 X-purgate-type: clean
-X-purgate-size: 1087
+X-purgate-size: 2165
 X-purgate: This mail is considered clean (visit https://www.eleven.de for further information)
 X-purgate: clean
-X-Rspamd-Queue-Id: 990D64BE0CC
+X-Rspamd-Queue-Id: 74BB24BE115
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[avm.de,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[avm.de:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -88,12 +88,12 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85653-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-85655-lists,linux-doc=lfdr.de];
 	HAS_ORG_HEADER(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[avm.de:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[p.hahn@avm.de,linux-doc@vger.kernel.org];
@@ -103,54 +103,64 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[avm.de:email,avm.de:dkim,avm.de:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,avm.de:email,avm.de:dkim,avm.de:mid]
 
 From: Philipp Hahn <phahn-oss@avm.de>
 
-Currently there are several (sub-)documents for "Generic kernel
-infrastructure API" and several "driver specific" documents. Put each
-one into its own sub-section.
+`wdt.rst` is only about the Watchdog timer from "Industrial Computer
+Source" (ICS). Change the title to better express this.
+
+Add missing SPDX license identifier `GPL-2.0-or-later` same as code to
+silence `checkpatch`.
 
 Signed-off-by: Philipp Hahn <phahn-oss@avm.de>
 ---
- Documentation/watchdog/index.rst | 20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
+ Documentation/watchdog/wdt.rst | 8 +++++---
+ drivers/watchdog/Kconfig       | 6 +++---
+ 2 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/Documentation/watchdog/index.rst b/Documentation/watchdog/index.rst
-index 1cea24681e6bd..8886910550344 100644
---- a/Documentation/watchdog/index.rst
-+++ b/Documentation/watchdog/index.rst
-@@ -4,15 +4,25 @@
- Watchdog Support
- ================
+diff --git a/Documentation/watchdog/wdt.rst b/Documentation/watchdog/wdt.rst
+index d97b0361535b0..5be200e08d02c 100644
+--- a/Documentation/watchdog/wdt.rst
++++ b/Documentation/watchdog/wdt.rst
+@@ -1,6 +1,8 @@
+-============================================================
+-WDT Watchdog Timer Interfaces For The Linux Operating System
+-============================================================
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++================================================================
++ICS WDT Watchdog Timer Interfaces For The Linux Operating System
++================================================================
  
-+Kernel infrastructure
-+=====================
-+
- .. toctree::
-     :maxdepth: 1
+ Last Reviewed: 10/05/2007
  
--    hpwdt
--    mlx-wdt
--    pcwd-watchdog
-     watchdog-api
-     watchdog-kernel-api
--    watchdog-parameters
-     watchdog-pm
--    wdt
-     convert_drivers_to_kernel_api
-+
-+Driver specific
-+===============
-+
-+.. toctree::
-+    :maxdepth: 1
-+
-+    watchdog-parameters
-+    wdt
-+    hpwdt
-+    mlx-wdt
-+    pcwd-watchdog
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index dc78729ba2a5d..2cbf0391a065a 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -2270,10 +2270,10 @@ config MIXCOMWD
+ 	  Most people will say N.
+ 
+ config WDT
+-	tristate "WDT Watchdog timer"
++	tristate "ICS WDT Watchdog timer"
+ 	depends on ISA
+ 	help
+-	  If you have a WDT500P or WDT501P watchdog board, say Y here,
++	  If you have an ICS WDT500P or WDT501P watchdog board, say Y here,
+ 	  otherwise N. It is not possible to probe for this board, which means
+ 	  that you have to inform the kernel about the IO port and IRQ that
+ 	  is needed (you can do this via the io and irq parameters)
+@@ -2304,7 +2304,7 @@ config PCIPCWATCHDOG
+ 	  Most people will say N.
+ 
+ config WDTPCI
+-	tristate "PCI-WDT500/501 Watchdog timer"
++	tristate "ICS PCI-WDT500/501 Watchdog timer"
+ 	depends on PCI && HAS_IOPORT
+ 	help
+ 	  If you have a PCI-WDT500/501 watchdog board, say Y here, otherwise N.
 -- 
 2.43.0
 
