@@ -1,313 +1,233 @@
-Return-Path: <linux-doc+bounces-85722-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85724-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sBDoC8Pk+GlM2wIAu9opvQ
-	(envelope-from <linux-doc+bounces-85722-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 20:26:11 +0200
+	id KOrDFYHl+Gl32wIAu9opvQ
+	(envelope-from <linux-doc+bounces-85724-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 20:29:21 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EA2B4C2721
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 20:25:59 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED6444C28D2
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 20:29:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C94F930173A6
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 18:25:10 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A2F45300E14D
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 18:27:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E61F3E5EEC;
-	Mon,  4 May 2026 18:24:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6166F3E5598;
+	Mon,  4 May 2026 18:27:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="yqaUDX2z"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ajFqOG7n";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="X0TACS4X"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D62203E716D;
-	Mon,  4 May 2026 18:24:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=222.228.43.154
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777919087; cv=pass; b=qWkr62sKV9t1r1beV/DuTUCl42zh6l2pdYm2FIdvcLIqlMTm63itlIPMGp61jr/94IJ8qRMlzhjj8l+TA+YuyqcTj7/LROuufIrGwCfEgn0AfzgHznazp2Sx2wLy4ibUIsoRA9/KpUiD98MJui+DH0kioDYAeGGRM1J+NYiJfts=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777919087; c=relaxed/simple;
-	bh=oHj1t/tv6TRuz8AFTOs4y3o6nM+B9gXU9/vi6h4yACY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=jgEg+pAOnHzowi+J/4c2Dq92xCYIpTxcu8ObxLCiUqk6nlbTx110uiL8coUiwQH5U4GU9SBSKzU3YE7VsfvEHH4vRipnGPKj0Q4iABI1lGRGh0zV2q+6PG3azvqNcWbBK+4S5ugfApktKOAaWutQjU99R6vIeiLzkV0g+2Bm+Ro=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=yqaUDX2z; arc=pass smtp.client-ip=222.228.43.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
-Received: from localhost (localhost [127.0.0.1])
-	by www.redadmin.org (Postfix) with ESMTP id BBFB2109F2441;
-	Tue,  5 May 2026 03:24:35 +0900 (JST)
-X-Virus-Scanned: amavis at redadmin.org
-Received: from www.redadmin.org ([127.0.0.1])
- by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6XLirSNwNvKF; Tue,  5 May 2026 03:24:28 +0900 (JST)
-Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
-ARC-Seal: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256; cv=none;
-	t=1777919068;
-	b=i8I1XJ/GkCHDNsN+tM2NhXpTb/w4SV/8i2SBSUWnvCLsMrasheM9cP1sk7KgMpNx4tJP
-	 wjJpQ9zI06s5/BhKDxbeqPa65tMlDiQGDDAmSxw2v67hMVb2JAyv+amFeTpDV77glSqip
-	 c7jhehuj9k5vnZ9TnKcRDmFI8dJJZKpqNs=
-ARC-Message-Signature: i=1; d=redadmin.org; s=20231208space; a=rsa-sha256;
-	c=relaxed/relaxed; t=1777919068;
-	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=e1m4SDJRZAmbNYxvp6Qql2SmhaOCjbMVQEF98MpwHjM=;
-	b=irhk53eAxiFyiHRBuCVptcYZKIaJSAnnQF4pVClkopFnvaqYrJcT8mSBnJRtqMyGz7YV
-	 iVXfZq3OsWM8GyL9WN9hxrzjRnqbd+9rCC03YVB5GJ8MiVRRnOws2DHy1+fYXyBV5EK2P
-	 +bwBDeguFZz++4V00gpV77US7VrZl0XNj8=
-ARC-Authentication-Results: i=1; www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
-Received: by www.redadmin.org (Postfix, from userid 1000)
-	id A5773109F2440; Tue,  5 May 2026 03:24:28 +0900 (JST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org A5773109F2440
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
-	s=20231208space; t=1777919068;
-	bh=e1m4SDJRZAmbNYxvp6Qql2SmhaOCjbMVQEF98MpwHjM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=yqaUDX2zQ4rRhjtSdfVcg7o9pGunOHvkW1ROknrjWmBA406vSvUr8oJXXbts4/czF
-	 4UBdWEFzhi2d6G2zulzOiU9fWcuIoXHma+Fhg1BK+RN5yhyFjmo5G55/xW6s70H2yb
-	 1Z6gd/VuRYrVW7bHkt1NWE4Tf/aCzuOn9iR0/+wM=
-From: Akiyoshi Kurita <weibu@redadmin.org>
-To: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	corbet@lwn.net,
-	akiyks@gmail.com,
-	Akiyoshi Kurita <weibu@redadmin.org>
-Subject: [PATCH v1] docs/ja_JP: translate more of submitting-patches.rst
-Date: Tue,  5 May 2026 03:24:25 +0900
-Message-ID: <20260504182425.1402425-1-weibu@redadmin.org>
-X-Mailer: git-send-email 2.47.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4BCB3ACA65
+	for <linux-doc@vger.kernel.org>; Mon,  4 May 2026 18:27:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1777919243; cv=none; b=F6rHSLF/xPe7P2DJVK4SU0r8d21stR0IWArifnyctF5ZsxvlMv5wkxUTXJ8ETsfAIsnPts4yeYXtw1AASfGCg+Gc9/KVwiYqD7xGxav1H6tveB3Wy2xzNyw7KAtWMSSbJf646xpwQ/xcCLEtI99I4gNXwBub7VydZPzP/s9y4tI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1777919243; c=relaxed/simple;
+	bh=y/kTyLZ+HlrQ86LL8qEx3AHdGjyMN0oqqtY2orbYvNk=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=t7/7MlpFO2sPOar5w3qymA8FZsm845PGTmG8qC7L1iPgq0BDJN4STtZ5MLJfw8mOhzCo7J0mQwaKg1pCfCpc5iGx33BxuQ1pYEknIqmc/CEvcudTsCe6m6wgl/qCfR7lGRuuXL0ZoqEzT4W23tpJEL46rjQ/UbeJ5ZJkXxekvys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=ajFqOG7n; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=X0TACS4X; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1777919241;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=QcIoIPVGpy+t+hQB2IAxs25ATlafdN5syK1oi+kQ6lo=;
+	b=ajFqOG7npDB9cr38r1KHbO6t0tbncY2+MTX6CEOyHqNrMpqCftF7ObSow3Ut8ncyHv12BB
+	gqQfWPUwReD6wAmbyb8TgXUTdwQne+EZ2KeY/ojPRawQFyXNwi8av0Nc2q1xpzfVBfBSHx
+	k6EfqxfFdRJOoTRLxmaDy3l43OEEipQ=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-418-cHUMu3fFN_6g49VKiwz6Zg-1; Mon, 04 May 2026 14:27:19 -0400
+X-MC-Unique: cHUMu3fFN_6g49VKiwz6Zg-1
+X-Mimecast-MFC-AGG-ID: cHUMu3fFN_6g49VKiwz6Zg_1777919239
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-50e136aff17so80245661cf.3
+        for <linux-doc@vger.kernel.org>; Mon, 04 May 2026 11:27:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1777919239; x=1778524039; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:organization
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=QcIoIPVGpy+t+hQB2IAxs25ATlafdN5syK1oi+kQ6lo=;
+        b=X0TACS4XXf3YLMC+ZSqUzPgih6j7BGfb0qvSALIdbFSgXDcnSq2D+/roChPmKAB2i/
+         I9xJTYPXRGwYI9krqrt4HBBkZt1iTt2kuy7+n5nE4y7RW48VgHJC5RRCpBnEFGgGW6Jw
+         qvYJ3XN/yC6htjdvm+27ZEePZy/0sx6u4mZGt8KF9dj72Bjip+70Ps1XFczIH7jQHNdu
+         rXLWE4L6lKh8kKrA5Fm4OQajZjqFBqOU6/iPZLvmzB3Exzjo19dsWjDQtBpGJ4czXSQX
+         uOapTF9697atNxMLgyuiRMPiUj6qJMg5X7WofJaEKn1wx3ZOtGJ5TvtomBXLoUHifK0M
+         8cvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777919239; x=1778524039;
+        h=mime-version:user-agent:content-transfer-encoding:organization
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=QcIoIPVGpy+t+hQB2IAxs25ATlafdN5syK1oi+kQ6lo=;
+        b=DDUe75uP3pau+t9Y4nZeqOPxGVIF0Dap/bxIKhQmKi7D4LUSDXIMIaRrGTy/Ahzdaq
+         ml0K3392qk7pifLyvjNoKqYZAxFF4/mPP+tBSvRMs+dUSSan2AuMrg4A0BKNdMXdDYq0
+         0fPD0L4XFJF2IbCNbrtXOBsuE3JkabfnEnzUj6SAzk8EDbb6qzZm7sFzIhF0eSOxHHVM
+         YqLLbuEgigFD8cpH6xsEyIeRa9aRZOw28Ttiu5iMCWuE3/0iXBeK5JPjBkuxeSRtk6i5
+         ufEV/jNvACQXUptPGf3Y5i35y5qKRL/dVclm7rACmxs13eflUNaNHZrJs3mmuVWAL/RX
+         TJ4g==
+X-Forwarded-Encrypted: i=1; AFNElJ8YBJrgQlVwdH+NTqOr1+se2ghYhGg2xyjbjDPpGmIz0Yq8lLXX7L4D2VwIqdImmE0dolVdpsNdZbI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyj/Cb7GRp9TDbKg5o1UZPKMBgT24FocLxt+gFMqN8b7+V/+cFK
+	uvWfLqkP0i8qj//X+YuwTcOXf5B7+ErRt4DElhBABszBtRl2bipaMCgP98gKpK3sP/gsO/DOlhi
+	emn1BxvJOkc2oSMwFU8heZDX4pwBexoQwd0AKFtqV2XfeybxDzypV3TIqixiQVw==
+X-Gm-Gg: AeBDievtADZQ5x8PJ2PdMI5z+N6Qk4BUz47GrEaCHEdUxuCjsgZKJ7bQi2kxXAunoxy
+	r5I67RViZZciXYY2EvWCJGfu0WxjS8ZAJkJYLp0KSOVvzbGKpeC1mXJU415pQY2uWmkhaTg9gkj
+	K7cYV46U8wZyWJ/p6OEawNjOfqjeO7LOdBLVoQq/7nvT3BNbWkTvEDLWkseNk6WNiRRXpb8FAvf
+	plkva6Y++mAur7Ii6on0iuDk6vyG+iWIC+WF+qb9uOusWWAr6Wkm65FpiG1wnunfGVOTdv6jacO
+	Vwt/LtP5JloKmmSnal2u2fOkHPHT8jw5kY290HzAdBTlyngXAo+SGnGkUihXlmmaaH0zyau66r3
+	rOJpqRyO3g6zosH0zj8TjxJ2BHyE=
+X-Received: by 2002:a05:622a:5c09:b0:509:26f4:64e9 with SMTP id d75a77b69052e-5104bfa3385mr199674361cf.51.1777919239187;
+        Mon, 04 May 2026 11:27:19 -0700 (PDT)
+X-Received: by 2002:a05:622a:5c09:b0:509:26f4:64e9 with SMTP id d75a77b69052e-5104bfa3385mr199673581cf.51.1777919238563;
+        Mon, 04 May 2026 11:27:18 -0700 (PDT)
+Received: from m8.users.ipa.redhat.com ([2603:7000:9400:fe80::fc6])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8b53ca982a1sm142199276d6.38.2026.05.04.11.27.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 04 May 2026 11:27:18 -0700 (PDT)
+Message-ID: <2890ba9558b503c5316f04aed958337455b8f7ad.camel@redhat.com>
+Subject: Re: [PATCH] crypto: af_alg - Document the deprecation of AF_ALG
+From: Simo Sorce <simo@redhat.com>
+To: Jeff Barnes <jeffbarnes@linux.microsoft.com>, Eric Biggers
+	 <ebiggers@kernel.org>
+Cc: Jon Kohler <jon@nutanix.com>, "linux-crypto@vger.kernel.org"
+	 <linux-crypto@vger.kernel.org>, Herbert Xu <herbert@gondor.apana.org.au>, 
+ "linux-doc@vger.kernel.org"
+	 <linux-doc@vger.kernel.org>, "linux-api@vger.kernel.org"
+	 <linux-api@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	 <linux-kernel@vger.kernel.org>, "netdev@vger.kernel.org"
+	 <netdev@vger.kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>
+Date: Mon, 04 May 2026 14:27:16 -0400
+In-Reply-To: <F100C726-F841-461B-BE2F-C2018C122426@getmailspring.com>
+References: <20260504173952.GA2291@sol>
+	 <F100C726-F841-461B-BE2F-C2018C122426@getmailspring.com>
+Organization: Red Hat
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 6EA2B4C2721
+X-Rspamd-Queue-Id: ED6444C28D2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.46 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	MID_CONTAINS_FROM(1.00)[];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lwn.net,gmail.com,redadmin.org];
-	TAGGED_FROM(0.00)[bounces-85722-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85724-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redadmin.org:?];
+	HAS_ORG_HEADER(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[weibu@redadmin.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DMARC_DNSFAIL(0.00)[redadmin.org : query timed out];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-0.024];
-	R_DKIM_TEMPFAIL(0.00)[redadmin.org:s=20231208space];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[simo@redhat.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 
-Translate the "No MIME, no links, no compression, no attachments.
-Just plain text" and "Respond to review comments" sections in
-Documentation/translations/ja_JP/process/submitting-patches.rst.
+On Mon, 2026-05-04 at 14:12 -0400, Jeff Barnes wrote:
+>=20
+> On May 4 2026, at 1:39 pm, Eric Biggers <ebiggers@kernel.org> wrote:
+> > =20
+> > That seems to be an implementation of FIPS 140-3's integrity self-check=
+.
+> > A few observations:
+> > =20
+> > - It could easily use userspace SHA-512 code instead.  If including
+> >  libcrypto.so in the "FIPS cryptographic boundary" would cause
+> >  certification difficulties, then a sha512.c file could simply be added
+> >  to 'libkcapi-hmaccalc' which is already in it.
+>=20
+> Indeed expanding the crypto boundary to include libcrypto.so would cause
+> certification difficulties, it would mean certifying all of libcrypto.so
+> with the kernel. There *may* be a case for saying that it is outside the
+> module boundary but only if:
+>=20
+>     * The integrity mechanism is clearly external
+>     * The cryptographic module refuses to operate unless integrity is con=
+firmed
+>     * The trust relationship is clearly documented
+>=20
+> I don't see how this could be justified cleanly without significant pushb=
+ack.
+>=20
+> > =20
+> > - It's compatible with all of the proposed hardening.  It doesn't
+> >  require zero-copy performance.  It runs as root, so it would be
+> >  compatible with a capability check.  "hmac(sha512)" will need to be on
+> >  the algorithm allowlist anyway for iwd.
+> > =20
+> > - FIPS 140-3 might also allow it to be simplified to use a plain hash
+> >  instead of pointlessly using HMAC with a fixed key.
+>=20
+> FIPS 140=E2=80=913 (via ISO/IEC 19790) draws a hard distinction between:
+>     * Integrity checking (cryptographic protection)
+>     * Integrity measurement (detection only)
+>=20
+> A plain hash provides no protection against an attacker who can modify
+> both the object and its reference hash.
 
-Keep the wording close to the English text and wrap lines to match
-the style used in the surrounding Japanese translation.
+The integrity mechanism is not build to detect adversarial tampering
+(at least at level 1), that is not its purpose.
 
-Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
----
- .../ja_JP/process/submitting-patches.rst      | 58 +++++++++++++++++++
- 1 file changed, 58 insertions(+)
+That said a HMAC is just a hash with a secret key in the mix, it does
+not change the conditions wrt Hash if the key is known.
 
-diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rs=
-t b/Documentation/translations/ja_JP/process/submitting-patches.rst
-index 928e38a8d34d..d7e04c09f951 100644
---- a/Documentation/translations/ja_JP/process/submitting-patches.rst
-+++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
-@@ -292,3 +292,61 @@ MAINTAINERS =E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=81=
-=AB=E8=A8=98=E8=BC=89=E3=81=95=E3=82=8C=E3=81=A6=E3=81=84=E3=82=8B MAN-PAGE=
-S =E3=83=A1=E3=83=B3=E3=83=86=E3=83=8A=E3=81=AB
- man-pages =E3=83=91=E3=83=83=E3=83=81=E3=80=81=E5=B0=91=E3=81=AA=E3=81=8F=
-=E3=81=A8=E3=82=82=E5=A4=89=E6=9B=B4=E3=81=AE=E9=80=9A=E7=9F=A5=E3=82=92=E9=
-=80=81=E3=81=A3=E3=81=A6=E3=80=81=E6=83=85=E5=A0=B1=E3=81=8C
- =E3=83=9E=E3=83=8B=E3=83=A5=E3=82=A2=E3=83=AB=E3=83=9A=E3=83=BC=E3=82=B8=
-=E3=81=AB=E5=8F=8D=E6=98=A0=E3=81=95=E3=82=8C=E3=82=8B=E3=82=88=E3=81=86=E3=
-=81=AB=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=83=
-=A6=E3=83=BC=E3=82=B6=E3=83=BC=E7=A9=BA=E9=96=93 API =E3=81=AE
- =E5=A4=89=E6=9B=B4=E3=81=AF=E3=80=81linux-api@vger.kernel.org =E3=81=AB=E3=
-=82=82 Cc =E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
-+
-+MIME=E3=80=81=E3=83=AA=E3=83=B3=E3=82=AF=E3=80=81=E5=9C=A7=E7=B8=AE=E3=80=
-=81=E6=B7=BB=E4=BB=98=E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=81=AF=E4=BD=BF=
-=E3=82=8F=E3=81=AA=E3=81=84=E3=80=82=E3=83=97=E3=83=AC=E3=83=BC=E3=83=B3=E3=
-=83=86=E3=82=AD=E3=82=B9=E3=83=88=E3=81=A0=E3=81=91
-+----------------------------------------------------------------------
-+
-+Linus =E3=82=84=E4=BB=96=E3=81=AE=E3=82=AB=E3=83=BC=E3=83=8D=E3=83=AB=E9=
-=96=8B=E7=99=BA=E8=80=85=E3=81=AF=E3=80=81=E3=81=82=E3=81=AA=E3=81=9F=E3=81=
-=8C=E6=8A=95=E7=A8=BF=E3=81=99=E3=82=8B=E5=A4=89=E6=9B=B4=E3=82=92=E8=AA=AD=
-=E3=81=BF=E3=80=81
-+=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=81=A7=E3=81=8D=E3=82=8B=E5=BF=85=
-=E8=A6=81=E3=81=8C=E3=81=82=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82=E3=82=AB=E3=
-=83=BC=E3=83=8D=E3=83=AB=E9=96=8B=E7=99=BA=E8=80=85=E3=81=8C=E6=A8=99=E6=BA=
-=96=E7=9A=84=E3=81=AA
-+=E3=83=A1=E3=83=BC=E3=83=AB=E3=83=84=E3=83=BC=E3=83=AB=E3=82=92=E4=BD=BF=
-=E3=81=A3=E3=81=A6=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE=E5=A4=89=E6=9B=B4=E3=
-=82=92=E3=80=8C=E5=BC=95=E7=94=A8=E3=80=8D=E3=81=97=E3=80=81=E3=82=B3=E3=83=
-=BC=E3=83=89=E3=81=AE=E7=89=B9=E5=AE=9A=E3=81=AE
-+=E7=AE=87=E6=89=80=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6=E3=82=B3=E3=83=A1=
-=E3=83=B3=E3=83=88=E3=81=A7=E3=81=8D=E3=82=8B=E3=81=93=E3=81=A8=E3=81=8C=E9=
-=87=8D=E8=A6=81=E3=81=A7=E3=81=99=E3=80=82
-+
-+=E3=81=93=E3=81=AE=E3=81=9F=E3=82=81=E3=80=81=E3=81=99=E3=81=B9=E3=81=A6=
-=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=81=AF=E3=83=A1=E3=83=BC=E3=83=AB=E6=
-=9C=AC=E6=96=87=E4=B8=AD=E3=81=AB ``inline`` =E3=81=A7=E6=8A=95=E7=A8=BF=E3=
-=81=99=E3=81=B9=E3=81=8D=E3=81=A7=E3=81=99=E3=80=82
-+=E3=81=93=E3=82=8C=E3=82=92=E8=A1=8C=E3=81=86=E6=9C=80=E3=82=82=E7=B0=A1=
-=E5=8D=98=E3=81=AA=E6=96=B9=E6=B3=95=E3=81=AF ``git send-email`` =E3=82=92=
-=E4=BD=BF=E3=81=86=E3=81=93=E3=81=A8=E3=81=A7=E3=81=82=E3=82=8A=E3=80=81
-+=E5=BC=B7=E3=81=8F=E6=8E=A8=E5=A5=A8=E3=81=95=E3=82=8C=E3=81=BE=E3=81=99=
-=E3=80=82``git send-email`` =E3=81=AE=E5=AF=BE=E8=A9=B1=E5=9E=8B=E3=83=81=
-=E3=83=A5=E3=83=BC=E3=83=88=E3=83=AA=E3=82=A2=E3=83=AB=E3=81=AF
-+https://git-send-email.io =E3=81=A7=E5=88=A9=E7=94=A8=E3=81=A7=E3=81=8D=E3=
-=81=BE=E3=81=99=E3=80=82
-+
-+``git send-email`` =E3=82=92=E4=BD=BF=E3=82=8F=E3=81=AA=E3=81=84=E3=81=93=
-=E3=81=A8=E3=82=92=E9=81=B8=E3=81=B6=E5=A0=B4=E5=90=88:
-+
-+.. warning::
-+
-+  =E3=83=91=E3=83=83=E3=83=81=E3=82=92=E3=82=B3=E3=83=94=E3=83=BC=EF=BC=86=
-=E3=83=9A=E3=83=BC=E3=82=B9=E3=83=88=E3=81=99=E3=82=8B=E5=A0=B4=E5=90=88=E3=
-=81=AF=E3=80=81=E3=82=A8=E3=83=87=E3=82=A3=E3=82=BF=E3=81=AE word-wrap =E3=
-=81=AB=E3=82=88=E3=81=A3=E3=81=A6
-+  =E3=83=91=E3=83=83=E3=83=81=E3=81=8C=E5=A3=8A=E3=82=8C=E3=81=AA=E3=81=84=
-=E3=82=88=E3=81=86=E6=B3=A8=E6=84=8F=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=
-=81=95=E3=81=84=E3=80=82
-+
-+=E5=9C=A7=E7=B8=AE=E3=81=AE=E6=9C=89=E7=84=A1=E3=81=AB=E3=81=8B=E3=81=8B=
-=E3=82=8F=E3=82=89=E3=81=9A=E3=80=81=E3=83=91=E3=83=83=E3=83=81=E3=82=92 MI=
-ME =E6=B7=BB=E4=BB=98=E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=81=A8=E3=81=97=
-=E3=81=A6=E6=B7=BB=E4=BB=98=E3=81=97=E3=81=A6=E3=81=AF
-+=E3=81=84=E3=81=91=E3=81=BE=E3=81=9B=E3=82=93=E3=80=82=E5=A4=9A=E3=81=8F=
-=E3=81=AE=E4=B8=80=E8=88=AC=E7=9A=84=E3=81=AA=E3=83=A1=E3=83=BC=E3=83=AB=E3=
-=82=A2=E3=83=97=E3=83=AA=E3=82=B1=E3=83=BC=E3=82=B7=E3=83=A7=E3=83=B3=E3=81=
-=AF=E3=80=81MIME =E6=B7=BB=E4=BB=98
-+=E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=82=92=E5=B8=B8=E3=81=AB=E3=83=97=
-=E3=83=AC=E3=83=BC=E3=83=B3=E3=83=86=E3=82=AD=E3=82=B9=E3=83=88=E3=81=A8=E3=
-=81=97=E3=81=A6=E9=80=81=E4=BF=A1=E3=81=99=E3=82=8B=E3=81=A8=E3=81=AF=E9=99=
-=90=E3=82=89=E3=81=9A=E3=80=81=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE
-+=E3=82=B3=E3=83=BC=E3=83=89=E3=81=AB=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=
-=E3=81=A7=E3=81=8D=E3=81=AA=E3=81=8F=E3=81=AA=E3=82=8A=E3=81=BE=E3=81=99=E3=
-=80=82MIME =E6=B7=BB=E4=BB=98=E3=83=95=E3=82=A1=E3=82=A4=E3=83=AB=E3=81=AF =
-Linus =E3=81=8C
-+=E5=87=A6=E7=90=86=E3=81=99=E3=82=8B=E3=81=AE=E3=81=AB=E3=82=82=E5=B0=91=
-=E3=81=97=E4=BD=99=E5=88=86=E3=81=AA=E6=99=82=E9=96=93=E3=81=8C=E3=81=8B=E3=
-=81=8B=E3=82=8B=E3=81=9F=E3=82=81=E3=80=81MIME =E6=B7=BB=E4=BB=98=E3=81=95=
-=E3=82=8C=E3=81=9F=E5=A4=89=E6=9B=B4=E3=81=8C
-+=E5=8F=97=E3=81=91=E5=85=A5=E3=82=8C=E3=82=89=E3=82=8C=E3=82=8B=E5=8F=AF=
-=E8=83=BD=E6=80=A7=E3=82=92=E4=B8=8B=E3=81=92=E3=81=BE=E3=81=99=E3=80=82
-+
-+=E4=BE=8B=E5=A4=96:  =E3=83=A1=E3=83=BC=E3=83=A9=E3=81=8C=E3=83=91=E3=83=
-=83=E3=83=81=E3=82=92=E5=A3=8A=E3=81=97=E3=81=A6=E3=81=97=E3=81=BE=E3=81=86=
-=E5=A0=B4=E5=90=88=E3=81=AF=E3=80=81=E8=AA=B0=E3=81=8B=E3=81=8B=E3=82=89 MI=
-ME =E3=82=92=E4=BD=BF=E3=81=A3=E3=81=A6
-+=E5=86=8D=E9=80=81=E3=81=99=E3=82=8B=E3=82=88=E3=81=86=E6=B1=82=E3=82=81=
-=E3=82=89=E3=82=8C=E3=82=8B=E3=81=93=E3=81=A8=E3=81=8C=E3=81=82=E3=82=8A=E3=
-=81=BE=E3=81=99=E3=80=82
-+
-+=E3=83=91=E3=83=83=E3=83=81=E3=82=92=E5=A4=89=E6=9B=B4=E3=81=9B=E3=81=9A=
-=E3=81=AB=E9=80=81=E4=BF=A1=E3=81=99=E3=82=8B=E3=82=88=E3=81=86=E3=83=A1=E3=
-=83=BC=E3=83=AB=E3=82=AF=E3=83=A9=E3=82=A4=E3=82=A2=E3=83=B3=E3=83=88=E3=82=
-=92=E8=A8=AD=E5=AE=9A=E3=81=99=E3=82=8B=E3=81=9F=E3=82=81=E3=81=AE
-+=E3=83=92=E3=83=B3=E3=83=88=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6=E3=81=AF=
-=E3=80=81Documentation/process/email-clients.rst =E3=82=92=E5=8F=82=E7=85=
-=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
-+
-+
-+=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=
-=E3=81=AB=E8=BF=94=E7=AD=94=E3=81=99=E3=82=8B
-+--------------------------
-+
-+=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE=E3=83=91=E3=83=83=E3=83=81=E3=81=AB=
-=E3=81=AF=E3=80=81=E3=81=BB=E3=81=BC=E7=A2=BA=E5=AE=9F=E3=81=AB=E3=80=81=E3=
-=83=91=E3=83=83=E3=83=81=E3=82=92=E6=94=B9=E5=96=84=E3=81=99=E3=82=8B=E6=96=
-=B9=E6=B3=95=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6
-+=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=8B=E3=82=89=E3=82=B3=
-=E3=83=A1=E3=83=B3=E3=83=88=E3=81=8C=E4=BB=98=E3=81=8D=E3=81=BE=E3=81=99=E3=
-=80=82=E3=81=9D=E3=82=8C=E3=81=AF=E3=80=81=E3=81=82=E3=81=AA=E3=81=9F=E3=81=
-=AE=E3=83=A1=E3=83=BC=E3=83=AB=E3=81=B8=E3=81=AE=E8=BF=94=E4=BF=A1=E3=81=A8=
-=E3=81=84=E3=81=86
-+=E5=BD=A2=E3=81=A7=E5=B1=8A=E3=81=8D=E3=81=BE=E3=81=99=E3=80=82=E3=81=9D=
-=E3=82=8C=E3=82=89=E3=81=AE=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=81=AB=E3=
-=81=AF=E5=BF=85=E3=81=9A=E8=BF=94=E7=AD=94=E3=81=97=E3=81=A6=E3=81=8F=E3=81=
-=A0=E3=81=95=E3=81=84=E3=80=82=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=
-=E3=82=92
-+=E7=84=A1=E8=A6=96=E3=81=99=E3=82=8B=E3=81=93=E3=81=A8=E3=81=AF=E3=80=81=
-=E3=81=93=E3=81=A1=E3=82=89=E3=82=82=E7=84=A1=E8=A6=96=E3=81=95=E3=82=8C=E3=
-=82=8B=E3=81=9F=E3=82=81=E3=81=AE=E3=82=88=E3=81=84=E6=96=B9=E6=B3=95=E3=81=
-=A7=E3=81=99=E3=80=82=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=81=AB
-+=E7=AD=94=E3=81=88=E3=82=8B=E3=81=AB=E3=81=AF=E3=80=81=E5=8D=98=E3=81=AB=
-=E3=81=9D=E3=81=AE=E3=83=A1=E3=83=BC=E3=83=AB=E3=81=B8=E8=BF=94=E4=BF=A1=E3=
-=81=99=E3=82=8C=E3=81=B0=E6=A7=8B=E3=81=84=E3=81=BE=E3=81=9B=E3=82=93=E3=80=
-=82=E3=82=B3=E3=83=BC=E3=83=89=E5=A4=89=E6=9B=B4=E3=81=AB
-+=E3=81=A4=E3=81=AA=E3=81=8C=E3=82=89=E3=81=AA=E3=81=84=E3=83=AC=E3=83=93=
-=E3=83=A5=E3=83=BC=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=82=84=E8=B3=AA=E5=
-=95=8F=E3=81=A7=E3=81=82=E3=81=A3=E3=81=A6=E3=82=82=E3=80=81=E6=AC=A1=E3=81=
-=AE=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=8C=E7=8A=B6=E6=B3=81=
-=E3=82=92
-+=E3=82=88=E3=82=8A=E3=82=88=E3=81=8F=E7=90=86=E8=A7=A3=E3=81=A7=E3=81=8D=
-=E3=82=8B=E3=82=88=E3=81=86=E3=81=AB=E3=80=81=E3=81=BB=E3=81=BC=E7=A2=BA=E5=
-=AE=9F=E3=81=AB=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=81=BE=E3=81=9F=E3=81=
-=AF changelog =E3=82=A8=E3=83=B3=E3=83=88=E3=83=AA=E3=81=AB
-+=E5=8F=8D=E6=98=A0=E3=81=99=E3=81=B9=E3=81=8D=E3=81=A7=E3=81=99=E3=80=82
-+
-+=E3=81=A9=E3=81=AE=E3=82=88=E3=81=86=E3=81=AA=E5=A4=89=E6=9B=B4=E3=82=92=
-=E8=A1=8C=E3=81=86=E3=81=AE=E3=81=8B=E3=82=92=E3=83=AC=E3=83=93=E3=83=A5=E3=
-=83=BC=E3=82=A2=E3=81=AB=E5=BF=85=E3=81=9A=E4=BC=9D=E3=81=88=E3=80=81=E6=99=
-=82=E9=96=93=E3=82=92=E5=89=B2=E3=81=84=E3=81=A6=E3=81=8F=E3=82=8C=E3=81=9F
-+=E3=81=93=E3=81=A8=E3=81=AB=E6=84=9F=E8=AC=9D=E3=81=97=E3=81=A6=E3=81=8F=
-=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E3=82=B3=E3=83=BC=E3=83=89=E3=83=AC=E3=
-=83=93=E3=83=A5=E3=83=BC=E3=81=AF=E7=96=B2=E3=82=8C=E3=82=8B=E3=80=81=E6=99=
-=82=E9=96=93=E3=81=AE=E3=81=8B=E3=81=8B=E3=82=8B=E4=BD=9C=E6=A5=AD=E3=81=A7=
-=E3=81=82=E3=82=8A=E3=80=81
-+=E3=83=AC=E3=83=93=E3=83=A5=E3=83=BC=E3=82=A2=E3=81=8C=E4=B8=8D=E6=A9=9F=
-=E5=AB=8C=E3=81=AB=E3=81=AA=E3=82=8B=E3=81=93=E3=81=A8=E3=82=82=E3=81=82=E3=
-=82=8A=E3=81=BE=E3=81=99=E3=80=82=E3=81=9D=E3=81=AE=E3=82=88=E3=81=86=E3=81=
-=AA=E5=A0=B4=E5=90=88=E3=81=A7=E3=81=82=E3=81=A3=E3=81=A6=E3=82=82=E3=80=81
-+=E4=B8=81=E5=AF=A7=E3=81=AB=E8=BF=94=E7=AD=94=E3=81=97=E3=80=81=E6=8C=87=
-=E6=91=98=E3=81=95=E3=82=8C=E3=81=9F=E5=95=8F=E9=A1=8C=E3=81=AB=E5=AF=BE=E5=
-=BF=9C=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82=E6=AC=
-=A1=E3=81=AE=E7=89=88=E3=82=92=E9=80=81=E3=82=8B=E3=81=A8=E3=81=8D=E3=81=AF=
-=E3=80=81
-+cover letter =E3=81=BE=E3=81=9F=E3=81=AF=E5=80=8B=E3=80=85=E3=81=AE=E3=83=
-=91=E3=83=83=E3=83=81=E3=81=AB ``patch changelog`` =E3=82=92=E8=BF=BD=E5=8A=
-=A0=E3=81=97=E3=80=81=E5=89=8D=E5=9B=9E=E3=81=AE
-+=E6=8A=95=E7=A8=BF=E3=81=A8=E3=81=AE=E5=B7=AE=E5=88=86=E3=82=92=E8=AA=AC=
-=E6=98=8E=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=EF=BC=88:re=
-f:`the_canonical_patch_format` =E3=82=92
-+=E5=8F=82=E7=85=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
-=EF=BC=89=E3=80=82=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE=E3=83=91=E3=83=83=E3=
-=83=81=E3=81=AB=E3=82=B3=E3=83=A1=E3=83=B3=E3=83=88=E3=81=97=E3=81=9F=E4=BA=
-=BA=E3=81=AB=E3=81=AF=E3=80=81=E3=83=91=E3=83=83=E3=83=81=E3=81=AE Cc
-+=E3=83=AA=E3=82=B9=E3=83=88=E3=81=AB=E8=BF=BD=E5=8A=A0=E3=81=97=E3=81=A6=
-=E3=80=81=E6=96=B0=E3=81=97=E3=81=84=E7=89=88=E3=82=92=E7=9F=A5=E3=82=89=E3=
-=81=9B=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
-+
-+=E3=83=A1=E3=83=BC=E3=83=AB=E3=82=AF=E3=83=A9=E3=82=A4=E3=82=A2=E3=83=B3=
-=E3=83=88=E3=81=A8=E3=83=A1=E3=83=BC=E3=83=AA=E3=83=B3=E3=82=B0=E3=83=AA=E3=
-=82=B9=E3=83=88=E3=81=A7=E3=81=AE=E4=BD=9C=E6=B3=95=E3=81=AB=E3=81=A4=E3=81=
-=84=E3=81=A6=E3=81=AE=E6=8E=A8=E5=A5=A8=E4=BA=8B=E9=A0=85=E3=81=AF=E3=80=81
-+Documentation/process/email-clients.rst =E3=82=92=E5=8F=82=E7=85=A7=E3=81=
-=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
+=20
+> > By the way, also on the topic of FIPS 140-3, some people do use AF_ALG
+> > for ACVP (even though it's not all that great for that purpose, either)=
+.
+> > But ACVP is a testing thing, not something that is needed on production
+> > systems.  ACVP can just be run as root on a testing build; there's no
+> > need to enable support for it in the actual production build.
+>=20
+> Agreed it's not a good use case. Unless/until pkcs1 is supported, I
+> don't see how you can use it for all of the test cases. Plus as
+> evidenced by Ubuntu's new cert, it requires validating the library.
+
+Of course it requires validating the library, validating the
+cryptography implementation is what FIPS is for. libcrypto.so can never
+be outside the boundary, unless you turn it off at runtime ...
+
+The problems are rather that libcrypto is not instrumented to enforce
+KAT tests are executed before it allows operation (crypto-API did this
+via test manager) and does not provide an indicator (or blocks)
+unapproved algorithms ...
+
+Simo.
+
 --=20
-2.47.3
+Simo Sorce
+Distinguished Engineer
+RHEL Crypto Team
+Red Hat, Inc
 
 
