@@ -1,221 +1,136 @@
-Return-Path: <linux-doc+bounces-85639-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85640-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6IWWFDF4+GlavgIAu9opvQ
-	(envelope-from <linux-doc+bounces-85639-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 12:42:57 +0200
+	id 8GohLkx++GkowAIAu9opvQ
+	(envelope-from <linux-doc+bounces-85640-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 13:09:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45FB74BBDD1
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 12:42:56 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4C6E4BC2DB
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 13:08:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 04B0830011AA
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 10:42:53 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E0349300443E
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 11:08:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13F843A5E73;
-	Mon,  4 May 2026 10:42:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bBhTaJiB"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBCEB3A6F15;
+	Mon,  4 May 2026 11:08:54 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.avm.de (mail.avm.de [212.42.244.119])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98A683A5E62
-	for <linux-doc@vger.kernel.org>; Mon,  4 May 2026 10:42:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D2773C2E;
+	Mon,  4 May 2026 11:08:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.42.244.119
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777891370; cv=none; b=O4uRvGXwEVI85fz4x1dqvZOU9oXamCEWZnS/zk/qCgx5QtM33EuKu3NtXbtEe6PM8+poGwQZ1eBZIZDNpP63pZiqbYremTsjCQyuu6LrNpv9jNJPE3Kvtiu8F62/f8u985GuFyDlGJ/jsQqXT+YWY+Uu4Wr3AhVmsjPXcapDiUk=
+	t=1777892934; cv=none; b=imkNydIakK4k+X0xbCDWKuCoTfcLOYzjmjAicqknkd5qskDBt+roNQxqJzXmx1fjre/H9lfLi+V98/CSMeTj/1yQp1Jgs9G8y6vMR3MiyO0PO9QImabmPTG+gUkk5FPoahPbvywpylfGfejE/H95K1IFsBmI+oMpZMAIT6EvLcs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777891370; c=relaxed/simple;
-	bh=O+TCmQ94hvpfpTfj1UNiv4DI2N+SEeVnVz0y/FMSn4U=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iUXYNxnq7ZTAV1c4r4NIMy/yDH6t/Ur1+kNFiDRM+/VJwD2s5rW+7LB4PUdVdKJjh0XQ6n0ccyyaM2bvNqFF9rFknTH5POajZasHBXQfg9QnvhyQZU6f9bvsLjMukqnvfm/k5kKCBG/3VbygbauF/jBxk7ewwPk+Zl1Ef9aSAd4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bBhTaJiB; arc=none smtp.client-ip=209.85.221.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-449e96a8a80so2179293f8f.3
-        for <linux-doc@vger.kernel.org>; Mon, 04 May 2026 03:42:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777891367; x=1778496167; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=glBEbPzQqS5RuxVbjECm23lF7bGWaZdBFdJ4PJmnbu0=;
-        b=bBhTaJiBtOF9PvxWRhwEvp+jWWYyQjfRq1ATLJJHVGDrPDbtFk5jcGeGofeN8HuJ7m
-         b2KQpo+NdOQf//jTah/eq/Dgicyvs8/3c4gm5Y6FhaplYgh0HRuXjzz+/sfO9B9CDX7M
-         Kiu3DqUgYu1HLyOHMnCNPwdP78XwVoS3TefJtemt5P46mDqIGI0KwLlKf2XJbIXCBAtB
-         9EYL19u+pVFwZbuX7tKxWm8ns7Pyh/MRkDfZ61q9QxLFx6hoavcuylGn/6BjC3jOfiZl
-         epI4vsZU2p92DlA0tnDyyY/+wdUrNMhwYtjRky2Tf0x616kbVu5jLMYfwBBHBJgVCc5S
-         nK1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777891367; x=1778496167;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=glBEbPzQqS5RuxVbjECm23lF7bGWaZdBFdJ4PJmnbu0=;
-        b=LY537KKC3LLyZ5lS0ngCBbQvvLeaMyZzNscsS/xZ6MAiYAEaQjkmcum4N9RZ0bR2mR
-         ZZH/UhgQNED9bWNzsl3xjXl/HG23o3hrMxFPUtQnYhRv9Cn7WbJ7rBABw2mMONAmZdHV
-         txqsSu7lA/2WyZR3XsCWOC9Mb6UEQ4JcUXsmXIF/KtMpxCH1XX3VhLLhSs6SXNtYxKx0
-         NUcrzBo+dGbzKVsCysPNrklAGguzptABVe0jr0FqgWfnakhGaLyuus043SRqQhW/CcMG
-         aelDdMKcKbPA55jfO14fR3IrR4cWHLDdpc6mMgVNS3Iuk5KA5hkKI1Fj/LwnIP+JDnQR
-         5RGQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9U/uaDZLqJVZhpm0JVz92F5/JF9tKcU6zy3sxtahBX/Sj7TwlC1uJ1Jo+lw3SHT9H/OdWlt/x+4Fk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwVspR/4EyQo0GXQiWW/O8rEZY1TynC4cOtuKhjmjtk8f7Dv+At
-	moPP8BIFj3I1NwYZG7jIHW7ImugLzqP6UWfOZ6Do2EpMJijmi9YhqPrv
-X-Gm-Gg: AeBDievJ5BsIvxBiJIQHGbXHeR1CCgJ7+FSPaeX5q1NTPPaVULLyhkRJeKeItRUQfSB
-	e72fxgdoFrB7KBysl9KT/7gKGtmlALoYIT2fMzk8Py1XEfhvlMDm+MFT67giCZjbQL0Lu0TUyu3
-	XwC7KJUUeG2Ij30ms6WwPLsh8Es1uXH3wdUH/BrFq8Ykk+79uArmSKcd4Q1XspwHRiWPyUOtl4v
-	yyjWawuw/sOype/TAORAoRyK93TgXHZhRKqnPxa79swaQQnZDsEhHMQMXVC/DUrcRY7jN7fy3Xt
-	4PujCn/D+6vX6/h38/sd4BHa41xaSulvDSdkQi+4nQe9H/b8b+HCVMWVaioYoLX5WZxb6tHXZvG
-	w/ERJkVHrxFpXbhxQlTtN9WgwAeXN3n1nnd4DRXUhw4DLmCTY9BWmpWILPVF5v75CuBr7BPNU9b
-	AuKrnpe6rk+aOWMW0bdZ89C9PcnmU+ghu153QpuvgP7V9f3bSDGUVKKGoJxlReOIlfrOmvvwgdS
-	+FwtAHgVBfaZOy81UCR7MZ4TbvzkoT8f7N0IyD8QM+eLJma6ptyGl9SYjvpjQ==
-X-Received: by 2002:a05:6000:25c7:b0:43c:f66e:f24 with SMTP id ffacd0b85a97d-44bb6d96a1emr15514078f8f.35.1777891366752;
-        Mon, 04 May 2026 03:42:46 -0700 (PDT)
-Received: from RDEALENC-L01.ad.analog.com (24.206.116.103.netskope-rdns.com. [24.206.116.103])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-44a9879ef89sm28731094f8f.30.2026.05.04.03.42.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 May 2026 03:42:46 -0700 (PDT)
-From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Mon, 4 May 2026 11:42:38 +0100
-To: Rodrigo Alencar <rodrigo.alencar@analog.com>, 
-	linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
-	David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
-	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky <senozhatsky@chromium.org>, 
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: Re: [PATCH v10 05/11] iio: core: add decimal value formatting into
- 64-bit value
-Message-ID: <keeskqikjulxcgc36zpzzvqw2osvm437hlchgcuovh5gkvmdr3@ishisbiujrrn>
-References: <20260415-adf41513-iio-driver-v10-0-df61046d5457@analog.com>
- <20260415-adf41513-iio-driver-v10-5-df61046d5457@analog.com>
+	s=arc-20240116; t=1777892934; c=relaxed/simple;
+	bh=mdG9spAtI5o5r5xXfv5TTUnmkfy1AKgGU4u+Puqhd5g=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=GZ5WwZw/oWWRCSGaOTamTYDWI13iq3He6BLb0gkGBNGgt7nPO70na14c6SnV1Aoq1WaV+b+y32FIjHJwetWoNe0Pa/2jff2gx3fVyAUTf6jG9u9o1M7V2kCKpCQD5BHGeSxD3RjKigr4O0fJKiTcFb9VNUkDs2fjJbUvDCtPvUs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de; spf=pass smtp.mailfrom=avm.de; arc=none smtp.client-ip=212.42.244.119
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=avm.de
+Received: from [2001:bf0:244:244::71] (helo=mail.avm.de)
+	by mail.avm.de with ESMTP (eXpurgate 4.56.1)
+	(envelope-from <p.hahn@avm.de>)
+	id 69f87ce9-88c8-7f0000032729-7f0000018666-1
+	for <multiple-recipients>; Mon, 04 May 2026 13:03:05 +0200
+Received: from mail-auth.avm.de (dovecot-mx-01.avm.de [IPv6:2001:bf0:244:244::71])
+	by mail.avm.de (Postfix) with ESMTPS;
+	Mon,  4 May 2026 13:03:05 +0200 (CEST)
+From: Philipp Hahn <p.hahn@avm.de>
+To: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>
+Cc: Philipp Hahn <phahn-oss@avm.de>,
+	linux-watchdog@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/6] Cleanup Linux Watchdog documentation
+Date: Mon,  4 May 2026 13:02:35 +0200
+Message-ID: <cover.1777892508.git.phahn-oss@avm.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260415-adf41513-iio-driver-v10-5-df61046d5457@analog.com>
-X-Rspamd-Queue-Id: 45FB74BBDD1
+Organization: FRITZ! Technology GmbH, Berlin, Germany
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: 149429::1777892585-4BE05582-3CB47AEC/0/0
+X-purgate-type: clean
+X-purgate-size: 1482
+X-purgate: This mail is considered clean (visit https://www.eleven.de for further information)
+X-purgate: clean
+X-Rspamd-Queue-Id: B4C6E4BC2DB
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [0.04 / 15.00];
+	DMARC_POLICY_QUARANTINE(1.50)[avm.de : SPF not aligned (relaxed), No valid DKIM,quarantine];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85639-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85640-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[p.hahn@avm.de,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.991];
+	MID_RHS_MATCH_FROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 
-On 26/04/15 10:51AM, Rodrigo Alencar wrote:
-> Create new format types for iio values (IIO_VAL_DECIMAL64_*), which
-> defines the representation of fixed decimal point values into a single
-> 64-bit number. This new format increases the range of represented values,
-> allowing for integer parts greater than 2^32, as bits are not "wasted"
-> in the fractional part, which can be seen in IIO_VAL_INT_PLUS_MICRO and
-> IIO_VAL_INT_PLUS_NANO. Helper macros are created to compose and decompose
-> 64-bit decimals into integer values used in IIO formatting interfaces,
-> which creates consistency and avoid error-prone manual assignments when
-> using wordpart macros. When doing the parsing, kstrtodec64() is used with
-> the scale defined by the specific decimal format type.
-> 
-> Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+From: Philipp Hahn <phahn-oss@avm.de>
 
-...
+Hello,
 
-> --- a/include/linux/iio/types.h
-> +++ b/include/linux/iio/types.h
-> @@ -7,6 +7,7 @@
->  #ifndef _IIO_TYPES_H_
->  #define _IIO_TYPES_H_
->  
-> +#include <linux/wordpart.h>
->  #include <uapi/linux/iio/types.h>
->  
->  enum iio_event_info {
-> @@ -34,6 +35,38 @@ enum iio_event_info {
->  #define IIO_VAL_FRACTIONAL_LOG2 11
->  #define IIO_VAL_CHAR 12
->  
-> +#define IIO_VAL_DECIMAL64_BASE		100
-> +#define IIO_VAL_DECIMAL64_MILLI		(IIO_VAL_DECIMAL64_BASE + 3)
-> +#define IIO_VAL_DECIMAL64_MICRO		(IIO_VAL_DECIMAL64_BASE + 6)
-> +#define IIO_VAL_DECIMAL64_NANO		(IIO_VAL_DECIMAL64_BASE + 9)
-> +#define IIO_VAL_DECIMAL64_PICO		(IIO_VAL_DECIMAL64_BASE + 12)
-> +
-> +#define iio_val_s64_compose(_val0, _val1)				\
-> +	({ (s64)((((u64)(_val1)) << 32) | (u32)(_val0)); })
-> +
-> +#define iio_val_s64_from_array(_vals)					\
-> +	({								\
-> +		const int *_arr = (const int *)(_vals);			\
-> +		s64 _dec64 = iio_val_s64_compose(_arr[0], _arr[1]);	\
-> +									\
-> +		_dec64;							\
-> +	})
-> +
-> +#define iio_val_s64_decompose(_dec64, _val0, _val1)			\
-> +	do {								\
-> +		s64 _tmp64 = (s64)(_dec64);				\
-> +									\
-> +		*(_val0) = lower_32_bits(_tmp64);			\
-> +		*(_val1) = upper_32_bits(_tmp64);			\
-> +	} while (0)
-> +
-> +#define iio_val_s64_array_populate(_dec64, _vals)			\
-> +	do {								\
-> +		int *_arr = (int *)(_vals);				\
-> +									\
-> +		iio_val_s64_decompose((_dec64), &_arr[0], &_arr[1]);	\
-> +	} while (0)
+while reading the documentation on the Linux kernel watchdog
+subsystem[1] I noticed some strange looking formatting: `struct`s are
+detected automatically by Sphinx and the word **after** it is considered
+the name of the structure, but the watchdog documentation puts the name
+**before** the word `struct`; this leads to the wrong word being
+emphasized.
 
-Hi Jonathan,
+Also reorganize the index page to better separate the documentation on
+generic infrastructure from specific drivers – which are mostly obsolete
+and relevant for historic documentation only.
 
-Are those macros ok? in terms of where they are declared or whether they
-should be static inline functions? any preferences?
+Please apply; thank you for all your work.
 
-> +
->  enum iio_available_type {
->  	IIO_AVAIL_LIST,
->  	IIO_AVAIL_RANGE,
-> 
-> -- 
-> 2.43.0
-> 
+Philipp
+
+[1]: https://docs.kernel.org/watchdog/convert_drivers_to_kernel_api.html
+
+Philipp Hahn (6):
+  watchdog: Fix wrong SPDX license identifier
+  watchdog: Change suffix .txt to .rst in references
+  watchdog: Move `struct` before name
+  watchdog: Replace intermixed tab/space indent
+  watchdog: Separate kind of documentation
+  watchdog: Prefix WDT with ICS for clarity
+
+ .../convert_drivers_to_kernel_api.rst         | 28 +++++++++----------
+ Documentation/watchdog/index.rst              | 22 +++++++++++----
+ Documentation/watchdog/watchdog-api.rst       |  4 +--
+ .../watchdog/watchdog-kernel-api.rst          |  2 +-
+ Documentation/watchdog/wdt.rst                |  6 ++--
+ drivers/watchdog/Kconfig                      |  6 ++--
+ 6 files changed, 39 insertions(+), 29 deletions(-)
 
 -- 
-Kind regards,
+2.43.0
 
-Rodrigo Alencar
 
