@@ -1,149 +1,105 @@
-Return-Path: <linux-doc+bounces-85732-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85733-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kLwuKoEI+Wnx4QIAu9opvQ
-	(envelope-from <linux-doc+bounces-85732-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 22:58:41 +0200
+	id OOqQKTAK+Wnt4gIAu9opvQ
+	(envelope-from <linux-doc+bounces-85733-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 23:05:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 621784C3D1F
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 22:58:40 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AF874C3DBD
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 23:05:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id BB5DE301EC63
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 20:58:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E3AD230095DD
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 21:05:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E2F5233507D;
-	Mon,  4 May 2026 20:58:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20E8833F58A;
+	Mon,  4 May 2026 21:05:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="CIfgjEuW"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tCElDrI/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4675C32BF5D
-	for <linux-doc@vger.kernel.org>; Mon,  4 May 2026 20:58:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F020033DEFE;
+	Mon,  4 May 2026 21:05:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777928311; cv=none; b=JSMvTUHM/Zzp9UaKb2ZdrDSc/OgtOQGzgu7kZdc3qmg+5vy9WrcllpoRzYTHUnJiPNSNkfOVBpOPGrEsVWoI9ASdEh2xYN3hrUTRUUMMKqGF02HJUpQ2GSqvLBTvQz3ekkwBmeYw0LvDdSjNnjGp4ffnsrFK71u4RkQlRkt6EE0=
+	t=1777928745; cv=none; b=fJsUuR4n0RfleZxdVjOGZDguiDB5LSFQy7Giajr5iZ71u0vG5RXX0A3qZPhuqvzdSCjF9A1BGqfNbWkz4lonvW7zpvuIYcl/bZw8hPcc5iSOkR8kaL5nqX4yg9FitvZjZ65dUP5aUHJlxtDlofK6tLqEsIMcPkjRvYCCgI318G8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777928311; c=relaxed/simple;
-	bh=AnHqmTk7h+qZbfpUtv/6QvkRxKkNv38kGyl2d1Y1klo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oQmT7CYqRhvnU9CBNS2u4eG7LE4iCeumu1/k1twoSwIpmKZXArrtWu1fJcHzxpZV+IQiIR05J+3+1mf3aTFs35PLbTuuTsayiTx+oSCrV596WdxkTVURp6NhuSXMaDzjZTRNdZhSnqebFCoPWwbAQfVro1jNb4PWgjih3AcVwbk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linuxfoundation.org; spf=pass smtp.mailfrom=linuxfoundation.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=CIfgjEuW; arc=none smtp.client-ip=209.85.160.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linuxfoundation.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linuxfoundation.org
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-40427db1300so3431332fac.0
-        for <linux-doc@vger.kernel.org>; Mon, 04 May 2026 13:58:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1777928308; x=1778533108; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=0amaTMBgDEgs3tF4RCm1e9Dle/WjpaIw0roTFTHbcEU=;
-        b=CIfgjEuWFXT2dSbfPdLSygsJ1jexgKi2KKMddjnqAn9oA6KqvICrx/50cpA6l8Cgbp
-         BvIQKVLfJgKfURSIkO9tlO6DZHBKsJ/iuMQ4cLFsh5bzIfLNRJdzrdA1FVNRyCZBPWYu
-         lzD+ex9/GsrtRnyjrgHIufY42K/K+Gp9ue+gI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777928308; x=1778533108;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0amaTMBgDEgs3tF4RCm1e9Dle/WjpaIw0roTFTHbcEU=;
-        b=nmTkXPgT/XzRXnRLV03+PmCI2SzT6kCIRRKNT/gEMMfAJ2qSZ3B/zFHxqZ1fRacJ8t
-         ySqrMaGVp3Ix0rTafFhPHujkOqJbKLMQw91fsdveRBFpKIOiO+z5jIgQ1iuaJVz3d7JE
-         U+47mT7ViR/Kkpv6vPdWKd3vzfGRrXVBj8w19JDqEsD28zmDOf4IUsKnlYWn5WhTX15F
-         ZyNi5q6Kuq41txxbwaEjmDGUXtm8PV+WCZOFjcrSirZ97glW+8M4a6at35SOWp9upwBS
-         GePn27Af9n2m7l+/D7l+fCp3WfYFDraVJkbZtneNjZ8FO/y7Qc8KM+cIHiwhhvPWUz1S
-         WJ3g==
-X-Forwarded-Encrypted: i=1; AFNElJ+nPg/1yX+M6aCerSXFONzrT6rghcQxapDJW/sUSfb0sAGUS++5r59xrFCJ1OyONdCy5WhfIeY4OKc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzHKnoD4xnTeOIAS/oF2Nih1GeOURfbVUi/mo3JdvOcTzJjpazr
-	uL0odpS0VXC9+R5+pY5BLEoKB0ml//jasaJXOXZHKTYBOoHrLLngItaYN499iMX57Lc=
-X-Gm-Gg: AeBDieszJYzWomfnKwdVCE08iwNzaOBfYcTNnZ81uq1pgTwuOIXAwzHlle4kdtmp/bE
-	fGxDo3TXed5iTt7pYMsUdmZ2zwU30tJJrZeOO7UeGqLae6XXKBNOvhBAqRGKM5wIpZgXaWNL4ye
-	pAl8TI4XBkBUaMMvVVhh3G2Ac4LFHlRDICkiKPG+MPgKQKtJX4/H7EyZVLYSVWBZaAMh9Wg0D1b
-	/VUAiwnpgLE+mUeLLuqLu/zgPPee8jd2iho7hYYGOFGn5YWceTcIM6AvNQAjzv8Cb/ebP+hZox6
-	K0x5UTlEfLT1mKiQy+AwJ9eguIf/UfCR2jYMw8/c4ANiar+ocEvXbP2AHaq2DyagQvuSRJClpiT
-	MxMB+1+XYn7WVibH/IspLC7GFHd00Un4ghAS9T8B2+RL/ajnhsyHSgShQDYSQqvxlC7ai6xnbEL
-	JCX0nB6Wvgg5X3y4fsEsVZeWU78K+7xvKUvI2SsfrhfA==
-X-Received: by 2002:a05:6870:1776:b0:42c:ecc9:58b3 with SMTP id 586e51a60fabf-434760613c0mr6278794fac.10.1777928308251;
-        Mon, 04 May 2026 13:58:28 -0700 (PDT)
-Received: from [192.168.1.14] ([38.15.57.99])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-43454cbbbd7sm10977170fac.10.2026.05.04.13.58.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 04 May 2026 13:58:27 -0700 (PDT)
-Message-ID: <444d823c-40d0-4c14-ac8e-4f810a5a2f04@linuxfoundation.org>
-Date: Mon, 4 May 2026 14:58:27 -0600
+	s=arc-20240116; t=1777928745; c=relaxed/simple;
+	bh=h+uhi/NqA0FdGMn82gWEgw/8zcywPLWzEWQvhat6/88=;
+	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References; b=X/pnK/KAd2JHeZuBBhCPYxNomXHqbFEN2LdpGLn/RmaVce+Myax5xPtiQ9OBkm7ZYAPH55BWltrSI0zqcfSp18I1PJk9IdvCgwx+w70SJfQQeNG9o22pYFvaEMeyxPyFyHwbCOErrS9oRZWo2/ihYUysFM2CumbHolG/Ss0mGL8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tCElDrI/; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B84D7C2BCB8;
+	Mon,  4 May 2026 21:05:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777928744;
+	bh=h+uhi/NqA0FdGMn82gWEgw/8zcywPLWzEWQvhat6/88=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=tCElDrI/MdAu045nEHvrc+UDML/ckzykUrdkNaoejc9Qa4bjaRcZwRO15nC3ojXBr
+	 K5lJVwHFKSJ6BuU5tj0mDodCFp1DCauBMPOx34sZLdnwuE91AEahMYwYgSxOmxrAhk
+	 hUE/LdoeglmrAs9wMzst6g8FuIXiJIx7POmi+NAc/X146pu4uU6j3Frlw6cArR70Vb
+	 ErWkzeIg/BaxI+B1gCUrlpdHoJWvjJF0MBFyP5D8vxx8qNofPFn3Fj0/FVCRKTRHJJ
+	 sgQHkHFdLkHFCsC8ohTn1mC0TnHMQlPe7tBoMoLEwEroGIK66L/pEYxu/uNqDruodL
+	 V4pjGDmJPVWaA==
+Date: Mon, 04 May 2026 11:05:44 -1000
+Message-ID: <27f00387eb2bcb4eb95d2c34f01aa1d3@kernel.org>
+From: Tejun Heo <tj@kernel.org>
+To: "T.J. Mercier" <tjmercier@google.com>
+Cc: Johannes Weiner <hannes@cmpxchg.org>,
+ Michal Koutný <mkoutny@suse.com>,
+ cgroups@vger.kernel.org,
+ Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: cgroup-v1: Update charge-commit section
+In-Reply-To: <20260430201142.240387-1-tjmercier@google.com>
+References: <20260430201142.240387-1-tjmercier@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: kselftest: Document the FORCE_TARGETS build
- variable
-To: =?UTF-8?Q?Ricardo_B=2E_Marli=C3=A8re?= <rbm@suse.com>,
- Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-kselftest@vger.kernel.org, workflows@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- Shuah Khan <skhan@linuxfoundation.org>
-References: <20260417-selftests-docs-v1-1-32e4a78214eb@suse.com>
-Content-Language: en-US
-From: Shuah Khan <skhan@linuxfoundation.org>
-In-Reply-To: <20260417-selftests-docs-v1-1-32e4a78214eb@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 621784C3D1F
+X-Rspamd-Queue-Id: 0AF874C3DBD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
-	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85732-lists,linux-doc=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-85733-lists,linux-doc=lfdr.de];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[skhan@linuxfoundation.org,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[tj@kernel.org,linux-doc@vger.kernel.org];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	MISSING_XM_UA(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[8];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linuxfoundation.org:dkim,linuxfoundation.org:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 
-On 4/17/26 11:36, Ricardo B. Marlière wrote:
-> FORCE_TARGETS has been part of the kselftest build system for
-> some time but is absent from the developer documentation. Without
-> an entry here, users relying on kselftest in CI pipelines would
-> have to read the selftests Makefile directly to discover the
-> option.
-> 
-> A build that exits zero despite some targets failing can mask
-> real breakage and mislead automated systems into reporting
-> success. Add a dedicated section so that CI authors can easily
-> find and adopt FORCE_TARGETS=1 to turn such silent partial
-> failures into hard errors.
-> 
-> Signed-off-by: Ricardo B. Marlière <rbm@suse.com>
-> ---
->
-Thanks Ricardo. I applied it to linux-kselftest next branch.
+Hello,
 
-thanks,
--- Shuah
+Applied to cgroup/for-7.1-fixes.
+
+Thanks.
+
+--
+tejun
 
