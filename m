@@ -1,185 +1,246 @@
-Return-Path: <linux-doc+bounces-85688-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85689-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id FXMQGvLI+Gls0wIAu9opvQ
-	(envelope-from <linux-doc+bounces-85688-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:27:30 +0200
+	id +LJrG7LJ+Gls0wIAu9opvQ
+	(envelope-from <linux-doc+bounces-85689-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:30:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B8664C1571
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:27:29 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF5C54C1605
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:30:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6697230087E3
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 16:27:29 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 443BB3007B24
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 16:30:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 046483E275C;
-	Mon,  4 May 2026 16:27:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 409B73E3D86;
+	Mon,  4 May 2026 16:30:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="TCAf1RYT"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dqp/CT2o"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C889392C32;
-	Mon,  4 May 2026 16:27:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 328ED3E3150
+	for <linux-doc@vger.kernel.org>; Mon,  4 May 2026 16:30:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777912046; cv=none; b=rakVhEeU9o7htExEOWoIUCEtrP/9YdM2wxxUuByKBgQaxvoNeJgesWrB6icsAU4gRoUe2cIiNZIhppu+MYoAupWdCtM3oP7cO99LmzDCqPIZ2DAVv7ungk25TxPxYfyzwxyYbrffZ2+wgPf2UeQ3WGPYLKpuyu78doFFPN09+D8=
+	t=1777912223; cv=none; b=hMMAiUu0tJe3DSeSrYkH+OQR5BIe2hbHgY5K40Rn7tG4cWNTiXaK/7EbnFVdygjUnPP4JhCessC3gsrejvJm6wrEkY/FOANo2Y8ixJoZM5lfcgxB2Ce341cP60EJPlqyRA9AnmG5xYFZ7drVlLbVQPKzV+oMbEAQF+hgu0M/JgU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777912046; c=relaxed/simple;
-	bh=pb/tc+qet8z57KNYIbl6SB0j1yoUbSKvqYUNc/vuBQM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cWf5Cgl8qt9LTmWtCbXbnBAPY/0UU/qB205Qi68gxAuXWQSIZQKbL3x8giEJacjO0s4OM6VIqZs5JzP0e7c5c7bbcqI3NoAaq/tkfKfVtIE4DqeBeLJ0DUTaDWkjhbWdQa/1lZfCTT+s6NJTz1/j0J5phaFG2GOWv8stKmJUZxE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=TCAf1RYT; arc=none smtp.client-ip=213.167.242.64
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
-Received: from killaraus.ideasonboard.com (2001-14ba-703d-e500--2a1.rev.dnainternet.fi [IPv6:2001:14ba:703d:e500::2a1])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 3605B82A;
-	Mon,  4 May 2026 18:27:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1777912042;
-	bh=pb/tc+qet8z57KNYIbl6SB0j1yoUbSKvqYUNc/vuBQM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=TCAf1RYTKs7xAHfxC0MRhizC0ArrveHSDdfoVakroTl6JZ5B+7FW0w1LBbEhyc4aI
-	 CBWrbU/JfNPJsl//uhwdiNCNsAdRseXr60dxZpffaOkeF9oJqEmppzgIfmIaUuf37I
-	 4sQIAaqoS+tGGO5Hw9Bl1jtP85PZqfBNW70G0HWM=
-Date: Mon, 4 May 2026 19:27:22 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Maxime Ripard <mripard@kernel.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Jyri Sarha <jyri.sarha@iki.fi>,
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
-	Andrzej Hajda <andrzej.hajda@intel.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Simon Ser <contact@emersion.fr>,
-	Harry Wentland <harry.wentland@amd.com>,
-	Melissa Wen <mwen@igalia.com>,
-	Sebastian Wick <sebastian.wick@redhat.com>,
-	Alex Hung <alex.hung@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Samuel Holland <samuel@sholland.org>,
-	Dave Stevenson <dave.stevenson@raspberrypi.com>,
-	=?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>,
-	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Daniel Stone <daniels@collabora.com>,
-	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
-	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v3 02/20] drm/colorop: Fix typos in the doc
-Message-ID: <20260504162722.GG1344263@killaraus.ideasonboard.com>
-References: <20260424-drm-mode-config-init-v3-0-8b68d9db0d8b@kernel.org>
- <20260424-drm-mode-config-init-v3-2-8b68d9db0d8b@kernel.org>
+	s=arc-20240116; t=1777912223; c=relaxed/simple;
+	bh=t/WDX834jlVF7DP9Ia8VfOzsGAXwCxpfBKZASbwEbQI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=jsUOQL03G3PPLaReWZSPBC9brU5rAU8qQ5yrVAwlWVsXZ4lQISz/3BUoEwWyJqzpjgUUaOMKAKjW5tb0mZWVCC405yUTign2YBiF+MtiAOZGqJNUO/dUaHArziybOJEE9t7q9uGV9/6kIcqMw9F2fF4QDOdWVMplnQxe1DFi+0k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dqp/CT2o; arc=none smtp.client-ip=209.85.210.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-82418b0178cso2081412b3a.1
+        for <linux-doc@vger.kernel.org>; Mon, 04 May 2026 09:30:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1777912218; x=1778517018; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3qM+FJU1H6+E/i7TldQkDydNXf9wDxrZlqG3KlzPKhQ=;
+        b=dqp/CT2oVY/cprtvk0NRc4TNsmnl6ojCgqBHJxBkXedqee7k5lUTf9I8F4DGHNAYZo
+         vRcJyMGqATpYngx+p6gnjPggxMFlD+ckIAoL5BeXB1z5WQRw1rvOiGNwvXpxO0YLXSh4
+         jqI+8vvJSK2zmgNG0BJT4rCtCYmCtxuvvhbhwxbAXlKfpHoYvsoWY9O1IXhxE8pYzFXJ
+         o7VzgdOu393T+zXVAlNOETDfqlnfARVtIcsGkiWUlex81kLzokZcpW0SlVHOxM4+5dZX
+         MlhTMhic/S8ImWFOjhU4k5VE0CBrtJG9I+dXDcbG/kJ0pZBmCtdVMy/gIe/NvKrLFYKw
+         kc7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1777912218; x=1778517018;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3qM+FJU1H6+E/i7TldQkDydNXf9wDxrZlqG3KlzPKhQ=;
+        b=loVbXCeNTMi89/FGAU536hynm6t3sBwjfxFna5d9Dz4NFliKFws9MAtqOlh8a4yHsL
+         SRdDKo3m9BWf1ngVyWMTsh5Tmw/fojNVLf/RjztB8J2vqFrUSY4fNa/EwFZ8J+F4s+v9
+         wEYS17a7h66jRxUW8WYIQPXaLk0oh+OFSuC04hLebIPDJ80uCFbUKQK/UEeZGqs/C9vf
+         HgmFoI3/uU7KQ9JcS3w54rOh0M1IvVklXUYZFgukZQ8C7q05DWilYJOobrAoWpMkjA+M
+         FN6H+IZJ+rP/h0/N7+pUw2+XSV6kcJWRWpqkyDN++TBcTQgcy08MOSV2ZKAaqau5IYh3
+         G5RA==
+X-Forwarded-Encrypted: i=1; AFNElJ/Q8DWLGzEY4HCTFJRLSSe9qfGScONf9ILZcXjFBhF/fuYPmo+V7bTpPx07Z9SbEQdDuIILC5QtRB0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YygkqIf+vn9cv1MfUCGrgk+FbRTFdG5bQgivQ0el+m4eoXs+rC+
+	O213m9jzY7Ji71FqSelkKP/uxpFg7eW7BQakR/ihW4Up49XYz+yme26C
+X-Gm-Gg: AeBDiesqu02/e81nFsqJteOw25dnxTK2pbnRRjnpy0dLz+OnmUxGmxk6mE+NpiCRViu
+	yuWAMT0jUr/a/XHnKzzRA8KqgZMoJzEoe23f9f4V95AjS+97g3Q9+cPvB1s1tiWeteq+Jpr/Sna
+	7O6vJAne3ocEXEbPuxVc1hRvln2/te09eWnQUe5Af+yV8AXCaihybEVBztAW9SEqPdFC1n3r/kq
+	ZTEsoc/kIipxifkw93g5zWTVVoRIHNKFk/Bd45cvPINPju8jR0rn0GOP+3aRJk/0zBVUGUys44w
+	Ew7FeO/XAw4jYvPuv4BqUeB4JhezJkOKwaj8/g4zV0lpsN6meTaP7I7D5m9x/QgrBZciFHvN5xl
+	3zMSn8gJWEwS1zFDfkTMJZ2UGX1yQFB7+hl8u5IV10AyNDI/cnOZ7kagWqt3bWmwrq/f1EV8ZX9
+	9e5uy4CChhsubV+krCRGlGQOONwgwtmRvpj1kz5bkK+EJU
+X-Received: by 2002:a05:6a00:1826:b0:82c:9f7e:518c with SMTP id d2e1a72fcca58-8352d2029a7mr11070469b3a.25.1777912217603;
+        Mon, 04 May 2026 09:30:17 -0700 (PDT)
+Received: from [163.43.103.131] ([163.43.103.131])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-837081abadfsm4998663b3a.42.2026.05.04.09.30.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 04 May 2026 09:30:16 -0700 (PDT)
+From: Yuya Kusakabe <yuya.kusakabe@gmail.com>
+Subject: [PATCH v2 0/7] seg6: add SRv6 Mobile User Plane (RFC 9433)
+ behaviors
+Date: Tue, 05 May 2026 01:30:10 +0900
+Message-Id: <20260505-seg6-mobile-v2-0-9e8022bdfdb6@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260424-drm-mode-config-init-v3-2-8b68d9db0d8b@kernel.org>
-X-Rspamd-Queue-Id: 0B8664C1571
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJLJ+GkC/02NQQ6CMBREr0L+2pq2sQVdeQ/DotQPfAOUtNBoC
+ He3xY3JbF4y82aDgJ4wwK3YwGOkQG5KIE8F2N5MHTJ6JgbJpeaKX1jATrPRNTQga8sKZSVRC2U
+ hLWaPLb0P26P+cVibF9olK3Kjp7A4/znuosi9P7OPybzOLIoczpAbXV6FKpVt7t1oaDhbN0K97
+ /sXNrrPNLgAAAA=
+X-Change-ID: 20260504-seg6-mobile-f78e282e615c
+To: "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+ Andrea Mayer <andrea.mayer@uniroma2.it>, Shuah Khan <shuah@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Yuya Kusakabe <yuya.kusakabe@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4494;
+ i=yuya.kusakabe@gmail.com; h=from:subject:message-id;
+ bh=t/WDX834jlVF7DP9Ia8VfOzsGAXwCxpfBKZASbwEbQI=;
+ b=owEBbQKS/ZANAwAIASrX0XUqXRtNAcsmYgBp+MmUQ4uOSFqsLABgLmDA8N1QVqzEsjuuzcydr
+ OUus2wHYGSJAjMEAAEIAB0WIQTaB7usAfxNKMeqa6Yq19F1Kl0bTQUCafjJlAAKCRAq19F1Kl0b
+ Td83D/9GDmmQ/cP9O1v5vS9LMuoKdTKQR+f0681wFU1mdnXDZ06hGhkVw1X4bAxCXfNcVN7dtVX
+ H/d3CLCYXEf69WAKByDWhE32nRCiEu+YhfT1J/8DxHQrrIC5UBfG3V3tLSHRhk1Pwu8gfY97/sT
+ J+0hhla376kMaRymSW28ZzV0qEd3euKLipVgYakvf9NPZVgFy54NTdjLRoL+enROqSx1Ge4Xt02
+ frxwNRaPNcvUL2PpZ1eRTRVeaudwRKm0Rv+0WK3P/FvpZnpbUPLidt+3LcjVLaNRTigCqXStCmA
+ vQq5SVYv3+i1OBNvSKUs3CtvEmvD6nndY92/z20OErmG/r10QlYJro5+iOs3b9MeuQKaOoO0dfE
+ wsKUps2XJK/j+SBUKGHCibJ/XkiVQMMBsXe30NPRrmIMo0KNuf4AYcjDWhIeIHvj+OCp1nPhjum
+ vDZLGtqOnE/UtmarlQx9pFzJrlyP3T9NmcPhT8Xm4bp3qsTF4e1Htr5iJaOmHDvuuoVwM75uFSp
+ vUY2fJv6WD09narTNivy8rG7RsGe5douEBRiW/jd0ykyD/bgEBMBFnl0gbO6mlahIy4VUQptPMV
+ 5B9jP4de03ndLKS80KD9kv2HSPbluxsyCDm7WJV22/kWe3F2jpu6WVbaRivkFzeAztPRNH8mkJ+
+ ZJ4APW8Grq+4LWg==
+X-Developer-Key: i=yuya.kusakabe@gmail.com; a=openpgp;
+ fpr=DA07BBAC01FC4D28C7AA6BA62AD7D1752A5D1B4D
+X-Rspamd-Queue-Id: AF5C54C1605
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[ideasonboard.com,none];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-85688-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-85689-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com,lists.freedesktop.org,vger.kernel.org,collabora.com,lists.infradead.org,lists.linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[37];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[laurent.pinchart@ideasonboard.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[yuyakusakabe@gmail.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[killaraus.ideasonboard.com:mid,ideasonboard.com:dkim,ideasonboard.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[end.map:url,rfc-editor.org:url]
 
-On Fri, Apr 24, 2026 at 12:18:42PM +0200, Maxime Ripard wrote:
-> In the documentation of drm_colorop introduced by commit cfc27680ee20
-> ("drm/colorop: Introduce new drm_colorop mode object"), the
-> documentation of __drm_colorop_state_reset() and __drm_colorop_reset()
-> were mentioning CRTC when they really meant colorop, probably due to
-> copy and paste.
-> 
-> Fixes: cfc27680ee20 ("drm/colorop: Introduce new drm_colorop mode object")
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Maxime Ripard <mripard@kernel.org>
+This series adds the in-kernel data path for the SRv6 Mobile User
+Plane (MUP) architecture defined in RFC 9433.  SRv6 MUP integrates
+GTP-U mobile traffic into an SRv6 transport domain by mapping the
+5-tuple (TEID, QFI, R, U, PDU Session ID) into a single SID, allowing
+operators to replace the GTP-U overlay between the gNB and the
+upstream UPF with native SRv6 forwarding while keeping the radio side
+unchanged.
 
-Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+The series implements the six MUP behaviors that an SRv6 MUP gateway
+typically needs:
 
-> ---
->  drivers/gpu/drm/drm_colorop.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_colorop.c b/drivers/gpu/drm/drm_colorop.c
-> index 764d12060666..48d0b7ae3fc9 100644
-> --- a/drivers/gpu/drm/drm_colorop.c
-> +++ b/drivers/gpu/drm/drm_colorop.c
-> @@ -503,11 +503,11 @@ void drm_colorop_atomic_destroy_state(struct drm_colorop *colorop,
->   * __drm_colorop_state_reset - resets colorop state to default values
->   * @colorop_state: atomic colorop state, must not be NULL
->   * @colorop: colorop object, must not be NULL
->   *
->   * Initializes the newly allocated @colorop_state with default
-> - * values. This is useful for drivers that subclass the CRTC state.
-> + * values. This is useful for drivers that subclass the colorop state.
->   */
->  static void __drm_colorop_state_reset(struct drm_colorop_state *colorop_state,
->  				      struct drm_colorop *colorop)
->  {
->  	u64 val;
-> @@ -526,14 +526,14 @@ static void __drm_colorop_state_reset(struct drm_colorop_state *colorop_state,
->  /**
->   * __drm_colorop_reset - reset state on colorop
->   * @colorop: drm colorop
->   * @colorop_state: colorop state to assign
->   *
-> - * Initializes the newly allocated @colorop_state and assigns it to
-> - * the &drm_crtc->state pointer of @colorop, usually required when
-> - * initializing the drivers or when called from the &drm_colorop_funcs.reset
-> - * hook.
-> + * Initializes the newly allocated @colorop_state and assigns it to the
-> + * &drm_colorop->state pointer of @colorop, usually required when
-> + * initializing the drivers or when called from the
-> + * &drm_colorop_funcs.reset hook.
->   *
->   * This is useful for drivers that subclass the colorop state.
->   */
->  static void __drm_colorop_reset(struct drm_colorop *colorop,
->  				struct drm_colorop_state *colorop_state)
-> 
+  End.MAP         (RFC 9433 Section 6.2) -- swap DA with the next SID
+                                            without consuming the SRH
+  End.M.GTP6.D    (Section 6.3) -- IPv6/GTP-U to SRv6 headend encap
+  End.M.GTP6.D.Di (Section 6.4) -- drop-in mode variant of the above
+                                   (preserves the original outer DA at
+                                   SRH[0] and discards TEID/QFI)
+  End.M.GTP6.E    (Section 6.5) -- SRv6 to IPv6/GTP-U egress encap
+  End.M.GTP4.E    (Section 6.6) -- SRv6 to IPv4/GTP-U egress encap
+  H.M.GTP4.D      (Section 6.7) -- IPv4/GTP-U to SRv6 headend encap
 
--- 
-Regards,
+End.Limit (RFC 9433 Section 6.8) is intentionally out of scope.
 
-Laurent Pinchart
+All behaviors plug into the existing seg6_local lwtunnel framework, so
+they are configurable through the standard "ip route ... encap
+seg6local action ..." interface.  No new netlink families are
+introduced -- the new SEG6_LOCAL_MOBILE_* attributes extend
+SEG6_LOCAL_MAX in an add-only way, and the new SEG6_LOCAL_ACTION_*
+values are appended.
+
+The egress behaviors (End.M.GTP4.E and End.M.GTP6.E) accept an
+optional per-route pdu_type attribute that is the sole control
+for inserting the GTP-U PDU Session Container (3GPP TS 38.415 Section
+5.5.2).  When pdu_type is set (dl/ul/0..15), every emitted GTP-U
+packet carries the container with that PDU Type and the QFI extracted
+from Args.Mob.Session.  When pdu_type is unset, the egress emits
+a short GTPv1-U header with no container.  pdu_type must be
+configured on egress routes serving 5G N3 traffic; omitting it is
+intended only for LTE-only / S1-U-style deployments where no PDU
+Session Container is exchanged.
+
+The matching iproute2 patch series has been posted to iproute2-next:
+https://lore.kernel.org/netdev/20260505-seg6-mobile-v2-0-93291b7b0134@gmail.com/
+
+Link: https://www.rfc-editor.org/rfc/rfc9433
+
+Signed-off-by: Yuya Kusakabe <yuya.kusakabe@gmail.com>
+---
+Changes in v2 (all reported by netdev CI, except the End.MAP one
+which was caught while reviewing v1):
+- patch 1 (End.MAP): drop the explicit hop_limit decrement and
+  the hop_limit <= 1 ICMPv6 Time Exceeded check; ip6_forward()
+  on the way out already does both, so the explicit ones caused
+  a double decrement (verified hlim=64 -> 62 instead of 63).
+  Now consistent with End / End.X / End.M.GTP*.
+- patch 3 (End.M.GTP6.E): add missing #include
+  <net/ip6_checksum.h> to fix clang / allmodconfig build.
+- selftests: silence shellcheck false positives (SC2034/SC2154)
+  and sort TEST_PROGS entries alphabetically.
+- Link to v1: https://lore.kernel.org/netdev/20260504-srv6-mup-v1-v1-0-e0a6791575cb@gmail.com
+
+---
+Yuya Kusakabe (7):
+      seg6: add End.MAP behavior
+      seg6: add End.M.GTP4.E behavior
+      seg6: add End.M.GTP6.E behavior
+      seg6: add End.M.GTP6.D behavior
+      seg6: add End.M.GTP6.D.Di behavior
+      seg6: add H.M.GTP4.D behavior
+      Documentation: networking: add seg6_mobile guide
+
+ Documentation/networking/index.rst                 |    1 +
+ Documentation/networking/seg6_mobile.rst           |  236 ++
+ include/net/dropreason-core.h                      |   40 +
+ include/uapi/linux/seg6_local.h                    |   17 +
+ net/ipv6/seg6_local.c                              | 2660 ++++++++++++++++++--
+ tools/testing/selftests/net/Makefile               |    6 +
+ .../selftests/net/srv6_end_m_gtp4_e_test.sh        |  486 ++++
+ .../selftests/net/srv6_end_m_gtp6_d_di_test.sh     |  427 ++++
+ .../selftests/net/srv6_end_m_gtp6_d_test.sh        |  497 ++++
+ .../selftests/net/srv6_end_m_gtp6_e_test.sh        |  402 +++
+ tools/testing/selftests/net/srv6_end_map_test.sh   |  103 +
+ .../testing/selftests/net/srv6_h_m_gtp4_d_test.sh  |  487 ++++
+ 12 files changed, 5155 insertions(+), 207 deletions(-)
+---
+base-commit: 98878ed91b68a3150126fccef125ee7b1bb86ab2
+change-id: 20260504-seg6-mobile-f78e282e615c
+
+Best regards,
+--  
+Yuya Kusakabe <yuya.kusakabe@gmail.com>
+
 
