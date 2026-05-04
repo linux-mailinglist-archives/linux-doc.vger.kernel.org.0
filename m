@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-85707-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85708-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IL7VClPQ+Glr1AIAu9opvQ
-	(envelope-from <linux-doc+bounces-85707-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:58:59 +0200
+	id wLMaHG3Q+Gm41AIAu9opvQ
+	(envelope-from <linux-doc+bounces-85708-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:59:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DB134C1ACA
-	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:58:58 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E8B314C1ADF
+	for <lists+linux-doc@lfdr.de>; Mon, 04 May 2026 18:59:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BB944302ED70
-	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 16:58:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9BA133041793
+	for <lists+linux-doc@lfdr.de>; Mon,  4 May 2026 16:58:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 054853E3DAA;
-	Mon,  4 May 2026 16:58:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3DD923E3C70;
+	Mon,  4 May 2026 16:58:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="dc/401hD"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="fACHE6mZ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 572923E1D10;
-	Mon,  4 May 2026 16:58:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9EC13E3DA0;
+	Mon,  4 May 2026 16:58:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777913898; cv=none; b=p7Rvd5JGXs/Vg0l9Jf9/tF2yH0UgcA4U5ieyXJsKvkFZuW+EtPOGNF5Bvf6J25o9K2SoWarnYZcoXGTImjUJPSjJJzkJJdGuNuidneDqXOWrWAF5aOWmHskJlxbPicGGe573v1wF9YG0x0iDypLty8ctFsmvd89GTpyhRyumzeQ=
+	t=1777913900; cv=none; b=bi1UF3qiXOAa352ywZfiE/9/qtDvIl6MeJjM2HUqnDgEXI5YsKivN9Fmyll1ily8tE5yOwD+ky+tTapJse22E4OvyRMCje9UJC+MTgEpiojS200Qvr4FLlwqlrrcsdQd8JIQovNgoKgd/CsQ0B4z+hrCLilA+Cst2WpAJI53vDo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777913898; c=relaxed/simple;
-	bh=a+4PKjMqx7aQq4f05NlDPBE0NjHeUJlR2h+ir9csRgY=;
+	s=arc-20240116; t=1777913900; c=relaxed/simple;
+	bh=BrNBR/Fa0ySYMqo0xErRxfDh/QEUbYZzwHot466ZjCA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=pbpi1mHzqxgK4zXfa0RK8Z/wF4wPUATV0nCk+eRAimEdA/CZi4r5SyEBoSmgYCt2LJsUDmUbPhhLv5MKuWyZI57JPT+xaZDy5XRo3ET3cbba1PvYd7sj68/PY9HafPK5nnrXqWXbguH7BUGF7RxayyG5OMIt4dlCMZPwXYT0+50=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=dc/401hD; arc=none smtp.client-ip=217.140.110.172
+	 MIME-Version; b=pWwTQ3P25yvhQDszN9kQGfKu8Sme84RcaJq1fNnzaOyDfps4J89ybVHsX0YKRtJ1SxR3UtjOfh3qW+54/pgO/r2jNhIQ4UIMQ2ihSsS5anaRsQ5Iyuxqwu7TKpkzXsFMywIio/bfyvY/IMYmyWjLmcXZOuJ8latNF2IBX8yPrd8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=fACHE6mZ; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4D1181BCB;
-	Mon,  4 May 2026 09:58:11 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CE22425E2;
+	Mon,  4 May 2026 09:58:12 -0700 (PDT)
 Received: from workstation-e142269.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6EF033F763;
-	Mon,  4 May 2026 09:58:15 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EED0F3F763;
+	Mon,  4 May 2026 09:58:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1777913896; bh=a+4PKjMqx7aQq4f05NlDPBE0NjHeUJlR2h+ir9csRgY=;
+	t=1777913898; bh=BrNBR/Fa0ySYMqo0xErRxfDh/QEUbYZzwHot466ZjCA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dc/401hDYBcdgANDQ/B4lM8MSaphxa36b/zEOkitn5yy4Y/BStmrn5wDU8wO6EsDK
-	 2FSsVWLiywkNaplTFbiKFseOslc0COaOfYyOy37aMqfWpIeryS7TmBQsiTWzdlSS3f
-	 dsH9+VfGxbevHprNboLCQX7IkvbJj0xpnU5YFIq0=
+	b=fACHE6mZnpqgjY69/LM+qwQ39TLkVqtrZ0UoUlv7A47vEIW8LTbLDAc57hymp9J6n
+	 wPZsHiTVmvfjD7ZtzW+T1Ugk8FFAcT2b0tItBIwSxTSZ91X/ZSNtvsQ0GY9lzUPP8b
+	 kEcKgoo6xM50fbWoiDX2/XFZtS9VosDNQCrx7WHQ=
 From: Wei-Lin Chang <weilin.chang@arm.com>
 To: maple-tree@lists.infradead.org,
 	linux-mm@kvack.org,
@@ -55,9 +55,9 @@ Cc: "Liam R . Howlett" <Liam.Howlett@oracle.com>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	Wei-Lin Chang <weilin.chang@arm.com>
-Subject: [PATCH 1/2] Documentation: maple_tree: Point out constraint when using xa_{mk, to}_value
-Date: Mon,  4 May 2026 17:57:45 +0100
-Message-ID: <20260504165746.1422057-2-weilin.chang@arm.com>
+Subject: [PATCH 2/2] Documentation: maple_tree: Clarify behavior when using reserved values
+Date: Mon,  4 May 2026 17:57:46 +0100
+Message-ID: <20260504165746.1422057-3-weilin.chang@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260504165746.1422057-1-weilin.chang@arm.com>
 References: <20260504165746.1422057-1-weilin.chang@arm.com>
@@ -68,7 +68,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 8DB134C1ACA
+X-Rspamd-Queue-Id: E8B314C1ADF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -77,12 +77,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85707-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-85708-lists,linux-doc=lfdr.de];
 	FREEMAIL_CC(0.00)[oracle.com,google.com,gmail.com,lwn.net,linuxfoundation.org,arm.com];
 	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -97,33 +97,36 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,arm.com:email,arm.com:dkim,arm.com:mid]
 
-Using xa_{mk, to}_value when storing values loses the information of
-the top bit from the left shift, point that out in the doc.
+It doesn't matter whether the normal or the advanced API is used if the
+user uses xa_{mk, to}_value when storing and retrieving the values. Just
+specify that the normal API blocks usages of reserved values while the
+advanced API does not.
 
 Signed-off-by: Wei-Lin Chang <weilin.chang@arm.com>
 ---
- Documentation/core-api/maple_tree.rst | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ Documentation/core-api/maple_tree.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/core-api/maple_tree.rst b/Documentation/core-api/maple_tree.rst
-index ccdd1615cf97..87020a30ba69 100644
+index 87020a30ba69..e5ccafb84804 100644
 --- a/Documentation/core-api/maple_tree.rst
 +++ b/Documentation/core-api/maple_tree.rst
-@@ -29,8 +29,9 @@ The Maple Tree can store values between ``0`` and ``ULONG_MAX``.  The Maple
- Tree reserves values with the bottom two bits set to '10' which are below 4096
+@@ -30,9 +30,9 @@ Tree reserves values with the bottom two bits set to '10' which are below 4096
  (ie 2, 6, 10 .. 4094) for internal use.  If the entries may use reserved
  entries then the users can convert the entries using xa_mk_value() and convert
--them back by calling xa_to_value().  If the user needs to use a reserved
--value, then the user can convert the value when using the
-+them back by calling xa_to_value().  Note that xa_{mk, to}_value() bit shifts
-+the given data, so the top bit will be lost.  If the user needs to use a
-+reserved value, then the user can convert the value when using the
- :ref:`maple-tree-advanced-api`, but are blocked by the normal API.
+ them back by calling xa_to_value().  Note that xa_{mk, to}_value() bit shifts
+-the given data, so the top bit will be lost.  If the user needs to use a
+-reserved value, then the user can convert the value when using the
+-:ref:`maple-tree-advanced-api`, but are blocked by the normal API.
++the given data, so the top bit will be lost.  Usage of reserved values is
++blocked by the normal API, and will cause undefined behavior if used with the
++:ref:`maple-tree-advanced-api`.
  
  The Maple Tree can also be configured to support searching for a gap of a given
+ size (or larger).
 -- 
 2.43.0
 
