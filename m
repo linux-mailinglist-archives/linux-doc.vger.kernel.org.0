@@ -1,398 +1,154 @@
-Return-Path: <linux-doc+bounces-85839-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85845-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AAGKJAa5+WmNBAMAu9opvQ
-	(envelope-from <linux-doc+bounces-85839-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 11:31:50 +0200
+	id YJ0/Cfe5+WmNBAMAu9opvQ
+	(envelope-from <linux-doc+bounces-85845-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 11:35:51 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30F884C9C16
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 11:31:49 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A4814C9DBE
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 11:35:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8C47630D05AD
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 09:26:19 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 33132309030A
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 09:27:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F0BC032A3C9;
-	Tue,  5 May 2026 09:25:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E694433067C;
+	Tue,  5 May 2026 09:26:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="vF2BMlW/"
+	dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b="jNfpZ6Hc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail.avm.de (mail.avm.de [212.42.244.119])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49EA232938D;
-	Tue,  5 May 2026 09:25:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2209A1A5B90;
+	Tue,  5 May 2026 09:26:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.42.244.119
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777973158; cv=none; b=jgsXllAEPyWDr30FXNx2pOPxWVMSO6g989iq4XT7aUer574FnHamGevwiKlMO2hBHoW86lK9+lXW6hJKBcBgCMOvXovcfP990XBAjwyGErbx2/Hm7oqAHCMHUnPkDZE8uxe7es/qTfZ5kWdctGzMoeJNoQiN3RA5atGKxQ22sgQ=
+	t=1777973208; cv=none; b=Ogi9csMooaFe+50YPVRGzBdIKUH69ANGVezVzH2YXbLirhMLVa9NAecWbVDL25IoFQsmhNxHFnIsGouCG91Dz9A1iuNwSzltENHYryBhUViXP+ZEJNo5jlevh9W242CstItkj8NbYUKvtQ4r4adVRpI9I5wOGDrkyN5fzSiV0lA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777973158; c=relaxed/simple;
-	bh=WBPsHbqW7UdU36gM7pH5yfZ8IMDJDQcfx+lfzFveNzU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=mSgEeVJ7S65V7lRHx7tpDVR8vGfUCZoat/8oFuV5cVOjy6kWmbPVQAuR8G0VPHlPFkeLTkHGgfAzHTXwGqbLqqCsMYv5WswtoDblTsvskos2dBIBk7+aAcUr5xHqtowMheyNTvjfW83I+h6gNKWUE7pDdvOvfneHpuOS25v5K2o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=vF2BMlW/; arc=none smtp.client-ip=148.163.135.77
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
-Received: from pps.filterd (m0516787.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6456Erfe3424258;
-	Tue, 5 May 2026 05:25:39 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=R06Vg
-	F3PxAnsAPMZpNbjmCDk2VKdj0IrHJFsWLXHC8E=; b=vF2BMlW/F8D+LZjPrXxEY
-	2bMZ83gF3EiLdkPgeYKYm/RGqIiTCDUfur+tpDQeT2pRZ7Gsogz1cMs0Ok0WINOy
-	NRFzDNi7DJukw5YcnptKbIonJK8414dRCgGqpv78mS6PzoloXdBZ5A2Nq3KhmEWw
-	tmfv9feQ8wsPXJLC4eFm6k4ANCFhLKHRc7k3KZFUm+Ai8d71SNJetm4K7znjqLMJ
-	CzRQ3e78xJXp3qtZlNbxv4r9/85N9/D0+DFpbLZgtR6W2C6ALkj2giKi6QuaK5Nk
-	mCmKg7bbeY066v95dO0OSBYsD9UXawt2MuZZEXkKc/xnR4h2Xzjx0Ry3zB+W5Wty
-	Q==
-Received: from nwd2mta4.analog.com ([137.71.173.58])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4dx2kfrdns-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 05 May 2026 05:25:39 -0400 (EDT)
-Received: from ASHBMBX9.ad.analog.com (ASHBMBX9.ad.analog.com [10.64.17.10])
-	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 6459PcWb031794
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Tue, 5 May 2026 05:25:38 -0400
-Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by ASHBMBX9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.37; Tue, 5 May
- 2026 05:25:38 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
- (10.64.17.10) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
- Transport; Tue, 5 May 2026 05:25:38 -0400
-Received: from ATORRENO-L02.ad.analog.com ([10.66.6.191])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 6459PELF029445;
-	Tue, 5 May 2026 05:25:30 -0400
-From: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-Date: Tue, 5 May 2026 17:25:06 +0800
-Subject: [PATCH v4 2/2] hwmon: (pmbus/max20830) add driver for max20830
+	s=arc-20240116; t=1777973208; c=relaxed/simple;
+	bh=hGOf3RdeFW/xICBXzOqukBR6wqQ4Lh/uVDIalXsOgIA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=eGscF/xlSEwQUX/hIgaEjK+/ULDLh0cHfPzXo8oy0q9oPWOUe6R5oJY+ZgN3Dch7FOZYVmXI3zOeB0dL6u0b98F/dILJMFuPHiezhKQe0ICbv02+tefjXiPhACjzNonAPvdUPYoR8WYHFJ7IBfYBieTx8idq6B5ZweMDNiM6WWo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de; spf=pass smtp.mailfrom=avm.de; dkim=pass (1024-bit key) header.d=avm.de header.i=@avm.de header.b=jNfpZ6Hc; arc=none smtp.client-ip=212.42.244.119
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=avm.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=avm.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=avm.de; s=mail;
+	t=1777973200; bh=hGOf3RdeFW/xICBXzOqukBR6wqQ4Lh/uVDIalXsOgIA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=jNfpZ6HcZJVGjOPHhBK4glaurjxQMzxb+XwEnY44BfHlNsOn+N8RwhQVl7yk/XaEF
+	 jHmHy+eFBpeyBTePXk6se1/SACZzAJe2KIBz1ztcLvFC48jBSLnkNOvx1XCQE/87/t
+	 ampC0ATwjIT7LfmHNBFrKXEfzdKsW8B18qdQQEhs=
+Received: from [212.42.244.71] (helo=mail.avm.de)
+	by mail.avm.de with ESMTP (eXpurgate 4.56.1)
+	(envelope-from <p.hahn@avm.de>)
+	id 69f9b7d0-88c8-7f0000032729-7f0000019242-1
+	for <multiple-recipients>; Tue, 05 May 2026 11:26:40 +0200
+Received: from mail-auth.avm.de (dovecot-mx-01.avm.de [212.42.244.71])
+	by mail.avm.de (Postfix) with ESMTPS;
+	Tue,  5 May 2026 11:26:40 +0200 (CEST)
+From: Philipp Hahn <p.hahn@avm.de>
+To: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>
+Cc: Philipp Hahn <phahn-oss@avm.de>,
+	linux-watchdog@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/5] Cleanup Linux Watchdog documentation
+Date: Tue,  5 May 2026 11:26:11 +0200
+Message-ID: <cover.1777972790.git.phahn-oss@avm.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260505-dev_max20830-v4-2-4343dcbfd7d7@analog.com>
-References: <20260505-dev_max20830-v4-0-4343dcbfd7d7@analog.com>
-In-Reply-To: <20260505-dev_max20830-v4-0-4343dcbfd7d7@analog.com>
-To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>
-CC: <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        Alexis Czezar
- Torreno <alexisczezar.torreno@analog.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1777973114; l=8494;
- i=alexisczezar.torreno@analog.com; s=20250213; h=from:subject:message-id;
- bh=WBPsHbqW7UdU36gM7pH5yfZ8IMDJDQcfx+lfzFveNzU=;
- b=2S5yGUsJRhtoQQuy6YWhhx6i9ewrgj+d3ukw6ZctfaZCZFsKTFGYbkHTmfg8ctGIKK8K1+9du
- 6J7OX7B+ZiNDreeYmQivqbK8zMAF4fjlDOK2AKfkxDY+N3ihah1i0tf
-X-Developer-Key: i=alexisczezar.torreno@analog.com; a=ed25519;
- pk=XpXmJnRjnsKdDil6YpOlj9+44S+XYXVFnxvkbmaZ+10=
-X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-GUID: JPdJ1kjSsW5pc_xz2b0u8mTJIDRSxlcd
-X-Proofpoint-ORIG-GUID: JPdJ1kjSsW5pc_xz2b0u8mTJIDRSxlcd
-X-Authority-Analysis: v=2.4 cv=ZbMt8MVA c=1 sm=1 tr=0 ts=69f9b793 cx=c_pps
- a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
- a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=0sLvza09kfJOxVLZPwjg:22 a=OmVn7CZJonkx5R5zMQLL:22 a=gAnH3GRIAAAA:8
- a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=7TXwWxp8f6xCumHJxbYA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA1MDA4NyBTYWx0ZWRfX7V6DONwwhjB+
- +zn4b71NGEnfzbGp5F/YPxyq7aDog3FKrZpQ55o8W81CenJxAfEifBOnJVyh12gprWaAPSHifaQ
- Ts3MV2TI7hKYcjfJlO4rirtKoyP983If7MFijIHO+YrKHTVk+WJc5U76Eq7RKd7TFs+Ck68x4uQ
- JZvnU+sInJuzTb6PNGpl0vejd0Gabxclg3yUC0laXSXQzblMOmKmzvo2+Rp6+Jk/8F9goZHIHMo
- PUy8Evvq0oOo5APn+nc8gLMmVrm5/3uDV3v3uH6zQcL7RY8eLYmKP2EjEL874U7gVarljigULeq
- Wr4OIhDan/ijPxxA4dUv17DiBP1hiutxJJpjZKA02I51iUDrRSNDhQIdFetxYLV0pUFOC49aFw6
- XdzhYVMrqxdQS+VCZj96NXuv+VgfN5fWyo0MIeauTtlcQVOtjwoSX8NHVcIFz8Xz86ZdVXHUY1P
- VUT/Jn7sPz2jwugXqSg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-05_02,2026-04-30_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 suspectscore=0 bulkscore=0 impostorscore=0
- adultscore=0 spamscore=0 clxscore=1015 priorityscore=1501 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2605050087
-X-Rspamd-Queue-Id: 30F884C9C16
+Organization: FRITZ! Technology GmbH, Berlin, Germany
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: 149429::1777973200-54616582-A274341B/0/0
+X-purgate-type: clean
+X-purgate-size: 1840
+X-purgate: This mail is considered clean (visit https://www.eleven.de for further information)
+X-purgate: clean
+X-Rspamd-Queue-Id: 2A4814C9DBE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
+	DMARC_POLICY_ALLOW(-0.50)[avm.de,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[avm.de:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[analog.com:+];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85839-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:mid,analog.com:email,analog.com:dkim,analog.com:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[alexisczezar.torreno@analog.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_FROM(0.00)[bounces-85845-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[avm.de:+];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[p.hahn@avm.de,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
-	RCVD_COUNT_SEVEN(0.00)[9]
+	RCPT_COUNT_FIVE(0.00)[6];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,avm.de:email,avm.de:dkim,avm.de:mid]
 
-Add support for MAX20830 step-down DC-DC switching regulator with
-PMBus interface. It allows monitoring of input/output voltage,
-output current and temperature through the PMBus serial interface.
+From: Philipp Hahn <phahn-oss@avm.de>
 
-Signed-off-by: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
+Hello,
+
+while reading the documentation on the Linux kernel watchdog
+subsystem[1] I noticed some strange looking formatting: `struct`s are
+detected automatically by Sphinx and the word **after** it is considered
+the name of the structure, but the watchdog documentation puts the name
+**before** the word `struct`; this leads to the wrong word being
+emphasized.
+
+Also reorganize the index page to better separate the documentation on
+generic infrastructure from specific drivers – which are mostly obsolete
+and relevant for historic documentation only.
+
+Please apply; thank you for all your work.
+
+Philipp
+
+[1]: https://docs.kernel.org/watchdog/convert_drivers_to_kernel_api.html
 ---
- Documentation/hwmon/index.rst    |   1 +
- Documentation/hwmon/max20830.rst |  49 +++++++++++++++++
- MAINTAINERS                      |   2 +
- drivers/hwmon/pmbus/Kconfig      |   9 ++++
- drivers/hwmon/pmbus/Makefile     |   1 +
- drivers/hwmon/pmbus/max20830.c   | 110 +++++++++++++++++++++++++++++++++++++++
- 6 files changed, 172 insertions(+)
+Philipp Hahn (5):
+  watchdog: Change suffix .txt to .rst in references
+  watchdog: Move `struct` before name
+  watchdog: Replace intermixed tab/space indent
+  watchdog: Separate kind of documentation
+  watchdog: Prefix WDT with ICS for clarity
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 8b655e5d6b68b90c697a52c7bf526e81d370caf7..56f7eb761be76dd627a2f34135abad05203b0582 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -158,6 +158,7 @@ Hardware Monitoring Kernel Drivers
-    max197
-    max20730
-    max20751
-+   max20830
-    max31722
-    max31730
-    max31760
-diff --git a/Documentation/hwmon/max20830.rst b/Documentation/hwmon/max20830.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..936e409dcc5c0898dde27d782308d4a7e1357e73
---- /dev/null
-+++ b/Documentation/hwmon/max20830.rst
-@@ -0,0 +1,49 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver max20830
-+======================
-+
-+Supported chips:
-+
-+  * Analog Devices MAX20830
-+
-+    Prefix: 'max20830'
-+
-+    Addresses scanned: -
-+
-+    Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/max20830.pdf
-+
-+Author:
-+
-+  - Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-+
-+
-+Description
-+-----------
-+
-+This driver supports hardware monitoring for Analog Devices MAX20830
-+Step-Down Switching Regulator with PMBus Interface.
-+
-+The MAX20830 is a 2.7V to 16V, 30A fully integrated step-down DC-DC switching
-+regulator. Through the PMBus interface, the device can monitor input/output
-+voltages, output current and temperature.
-+
-+The driver is a client driver to the core PMBus driver. Please see
-+Documentation/hwmon/pmbus.rst for details on PMBus client drivers.
-+
-+Sysfs entries
-+-------------
-+
-+================= ========================================
-+in1_label         "vin"
-+in1_input         Measured input voltage
-+in1_alarm         Input voltage alarm
-+in2_label         "vout1"
-+in2_input         Measured output voltage
-+in2_alarm         Output voltage alarm
-+curr1_label       "iout1"
-+curr1_input       Measured output current
-+curr1_alarm       Output current alarm
-+temp1_input       Measured temperature
-+temp1_alarm       Chip temperature alarm
-+================= ========================================
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 031c743e979521a92ed9ac67915c178ce31727bd..d6a6745e2dae29c3b8f80bbe61c54a2f5ecd9f47 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15585,6 +15585,8 @@ L:	linux-hwmon@vger.kernel.org
- S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
- F:	Documentation/devicetree/bindings/hwmon/pmbus/adi,max20830.yaml
-+F:	Documentation/hwmon/max20830.rst
-+F:	drivers/hwmon/pmbus/max20830.c
- 
- MAX2175 SDR TUNER DRIVER
- M:	Ramesh Shanmugasundaram <rashanmu@gmail.com>
-diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-index 8f4bff375ecbc355f5ed3400855c2852ec2aa5ef..987705bf45b75b7b91ccc469247909f3c3f53d77 100644
---- a/drivers/hwmon/pmbus/Kconfig
-+++ b/drivers/hwmon/pmbus/Kconfig
-@@ -365,6 +365,15 @@ config SENSORS_MAX20751
- 	  This driver can also be built as a module. If so, the module will
- 	  be called max20751.
- 
-+config SENSORS_MAX20830
-+	tristate "Analog Devices MAX20830"
-+	help
-+	  If you say yes here you get hardware monitoring support for Analog
-+	  Devices MAX20830.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called max20830.
-+
- config SENSORS_MAX31785
- 	tristate "Maxim MAX31785 and compatibles"
- 	help
-diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
-index 7129b62bc00f8a2e98de14004997752a856dfda2..bc52f930e0825a902a0dd1c9e2b44f2e8d577c35 100644
---- a/drivers/hwmon/pmbus/Makefile
-+++ b/drivers/hwmon/pmbus/Makefile
-@@ -36,6 +36,7 @@ obj-$(CONFIG_SENSORS_MAX16601)	+= max16601.o
- obj-$(CONFIG_SENSORS_MAX17616)	+= max17616.o
- obj-$(CONFIG_SENSORS_MAX20730)	+= max20730.o
- obj-$(CONFIG_SENSORS_MAX20751)	+= max20751.o
-+obj-$(CONFIG_SENSORS_MAX20830)	+= max20830.o
- obj-$(CONFIG_SENSORS_MAX31785)	+= max31785.o
- obj-$(CONFIG_SENSORS_MAX34440)	+= max34440.o
- obj-$(CONFIG_SENSORS_MAX8688)	+= max8688.o
-diff --git a/drivers/hwmon/pmbus/max20830.c b/drivers/hwmon/pmbus/max20830.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..0f958e5eae1fa97e12ec73de1103cfed3d9228cb
---- /dev/null
-+++ b/drivers/hwmon/pmbus/max20830.c
-@@ -0,0 +1,110 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Hardware monitoring driver for Analog Devices MAX20830
-+ *
-+ * Copyright (C) 2026 Analog Devices, Inc.
-+ */
-+
-+#include <linux/errno.h>
-+#include <linux/i2c.h>
-+#include <linux/mod_devicetable.h>
-+#include <linux/module.h>
-+#include <linux/string.h>
-+#include "pmbus.h"
-+
-+#define MAX20830_IC_DEVICE_ID_LENGTH	9
-+
-+static struct pmbus_driver_info max20830_info = {
-+	.pages = 1,
-+	.format[PSC_VOLTAGE_IN] = linear,
-+	.format[PSC_VOLTAGE_OUT] = linear,
-+	.format[PSC_CURRENT_OUT] = linear,
-+	.format[PSC_TEMPERATURE] = linear,
-+	.func[0] = PMBUS_HAVE_VIN | PMBUS_HAVE_VOUT | PMBUS_HAVE_IOUT |
-+		PMBUS_HAVE_TEMP |
-+		PMBUS_HAVE_STATUS_VOUT | PMBUS_HAVE_STATUS_IOUT |
-+		PMBUS_HAVE_STATUS_INPUT | PMBUS_HAVE_STATUS_TEMP,
-+};
-+
-+static int max20830_probe(struct i2c_client *client)
-+{
-+	u8 buf[I2C_SMBUS_BLOCK_MAX + 1] = {};
-+	int ret;
-+
-+	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_READ_BLOCK_DATA) &&
-+	    !i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_READ_I2C_BLOCK))
-+		return -ENODEV;
-+
-+	/*
-+	 * Use i2c_smbus_read_block_data() if supported, otherwise fall back
-+	 * to i2c_smbus_read_i2c_block_data() to support I2C controllers
-+	 * which do not support SMBus block reads.
-+	 */
-+	if (i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_READ_BLOCK_DATA)) {
-+		/* Reads 9 Data bytes from MAX20830 */
-+		ret = i2c_smbus_read_block_data(client, PMBUS_IC_DEVICE_ID, buf);
-+		if (ret < 0)
-+			return dev_err_probe(&client->dev, ret,
-+					     "Failed to read IC_DEVICE_ID\n");
-+	} else {
-+		/* Reads 1 length byte + 9 Data bytes from MAX20830 */
-+		ret = i2c_smbus_read_i2c_block_data(client, PMBUS_IC_DEVICE_ID,
-+						    MAX20830_IC_DEVICE_ID_LENGTH + 1,
-+						    buf);
-+		if (ret < 0)
-+			return dev_err_probe(&client->dev, ret,
-+					     "Failed to read IC_DEVICE_ID\n");
-+		/*
-+		 * Moves data forward, removing the length byte, this is to
-+		 * match the format of i2c_smbus_read_block_data().
-+		 * Also adjust return value to reflect length byte removal.
-+		 */
-+		memmove(buf, buf + 1, MAX20830_IC_DEVICE_ID_LENGTH);
-+		ret = ret - 1;
-+	}
-+
-+	/*
-+	 * MAX20830 IC_DEVICE_ID sends string data "MAX20830\0".
-+	 * Return value should at least be 9 bytes of data.
-+	 */
-+	if (ret < MAX20830_IC_DEVICE_ID_LENGTH)
-+		return dev_err_probe(&client->dev, -ENODEV,
-+				     "IC_DEVICE_ID too short: expected at least 9 bytes, got %d\n",
-+				     ret);
-+
-+	/* 9 bytes of data, buf[0]-buf[7] = "MAX20830", buf[8] = '\0' */
-+	buf[MAX20830_IC_DEVICE_ID_LENGTH-1] = '\0';
-+	if (strncmp(buf, "MAX20830", MAX20830_IC_DEVICE_ID_LENGTH-1))
-+		return dev_err_probe(&client->dev, -ENODEV,
-+				     "Unsupported device: '%s'\n", buf);
-+
-+	return pmbus_do_probe(client, &max20830_info);
-+}
-+
-+static const struct i2c_device_id max20830_id[] = {
-+	{"max20830"},
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(i2c, max20830_id);
-+
-+static const struct of_device_id max20830_of_match[] = {
-+	{ .compatible = "adi,max20830" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, max20830_of_match);
-+
-+static struct i2c_driver max20830_driver = {
-+	.driver = {
-+		.name = "max20830",
-+		.of_match_table = max20830_of_match,
-+	},
-+	.probe = max20830_probe,
-+	.id_table = max20830_id,
-+};
-+
-+module_i2c_driver(max20830_driver);
-+
-+MODULE_AUTHOR("Alexis Czezar Torreno <alexisczezar.torreno@analog.com>");
-+MODULE_DESCRIPTION("PMBus driver for Analog Devices MAX20830");
-+MODULE_LICENSE("GPL");
-+MODULE_IMPORT_NS("PMBUS");
+v2 -> v1
+  - Rename wdt.rst to ics-wdt.rst
+  - Expand abbreviation "ICS" in more places
+  - Fix wrong reference to samples/watchdog/watchdog-simple.c
+v1 -> v2
+  - Drop invalid SPDX change to Documentation/watchdog/index.rst
+  - Add SPDX to Documentation/watchdog/wdt.rst
+
+ .../convert_drivers_to_kernel_api.rst         | 28 +++++++++----------
+ .../watchdog/{wdt.rst => ics-wdt.rst}         |  8 ++++--
+ Documentation/watchdog/index.rst              | 20 +++++++++----
+ Documentation/watchdog/watchdog-api.rst       |  4 +--
+ .../watchdog/watchdog-kernel-api.rst          |  2 +-
+ drivers/watchdog/Kconfig                      | 10 ++++---
+ drivers/watchdog/smsc37b787_wdt.c             |  2 +-
+ 7 files changed, 44 insertions(+), 30 deletions(-)
+ rename Documentation/watchdog/{wdt.rst => ics-wdt.rst} (91%)
 
 -- 
-2.34.1
+2.43.0
 
 
