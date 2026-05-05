@@ -1,163 +1,152 @@
-Return-Path: <linux-doc+bounces-85786-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85788-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id lFrBKrVM+WkB7wIAu9opvQ
-	(envelope-from <linux-doc+bounces-85786-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 03:49:41 +0200
+	id UMjJEuhh+Wn88AIAu9opvQ
+	(envelope-from <linux-doc+bounces-85788-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 05:20:08 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 098B04C5D4D
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 03:49:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 950314C61F4
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 05:20:07 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9E7133014540
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 01:49:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B00FF301AA7F
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 03:20:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2CC432E692;
-	Tue,  5 May 2026 01:49:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="lBCDcUMQ"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0F6E346FA0;
+	Tue,  5 May 2026 03:20:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.43])
+Received: from relay.hostedemail.com (smtprelay0017.hostedemail.com [216.40.44.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A56E40DFDA;
-	Tue,  5 May 2026 01:49:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=43.163.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50EE41391;
+	Tue,  5 May 2026 03:20:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777945777; cv=none; b=VT2RaNduIt3I9n8goyzBlu4GpHoG7jmbiDX/+TXD6a9wD2AO/1pKrLhI564VIOHYuxy/g5XqDPujEo9sMzv/+c5sjkRlMkj9TVBw8v3m55USk+VXBuBbI1sdZthNRyjK0Ia75GEga1JfO19D34/XuRkybjnFewgOR5zwDbz7kGo=
+	t=1777951204; cv=none; b=I2H1Mh/NTBhj0vOH4B7rSNRgDIfpSFrimWtTT2bo639rl/yDcFz+KgtjNTLKXfk/p6RA7/0rdMHpLGAh8f3+SJnEbbUh6gp76PDfzzSbJxj+4m+PDFLTHt/Xti54uJ3uoZAwlrDQbKI0oGbVFQAoz18lCkNFZUZZ0GYIU3SB+UE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777945777; c=relaxed/simple;
-	bh=jNbH1zk7lf8tGGs927YG8obpAdrvXVvFJJusb6MQ0Tw=;
-	h=Message-ID:From:To:Cc:Subject:Date:MIME-Version:Content-Type; b=OXSUZRVRMbpOz2K5/VkUHfQ/qvR2S9FzO+w4xyX/by+L1q5FNnZ8iHW1hJj0qk/y79wlxjPHhZIMxpWjHr69GUyq67AqXC2JDlpf9IdcJcl6FIfCPSmP9F8LKVh3x7UP7AY00DibHedCvH5hq0PycNbuQilHWQ6XYVtvADgviZs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=lBCDcUMQ; arc=none smtp.client-ip=43.163.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1777945765; bh=H2+8c8RNLIACKXU5ZLjGJU3djtP9IEtkUl+PxwNzfzo=;
-	h=From:To:Cc:Subject:Date;
-	b=lBCDcUMQsz9GDuVO6gKm4mSwmflM1vYSqTtv12uANHXyZp18hGundQBwq6k1dYj05
-	 6t16JzSbeP0CnFv/sirSSHBvdipMr9eudL6cYJOkcT1+MB/c96rz9lDVVHqHL5z12/
-	 IXchrMZUEZOPslsAP7gbeEh3vvKjxcl/jn0zjj7M=
-Received: from qq.com ([223.88.152.183])
-	by newxmesmtplogicsvrsza73-0.qq.com (NewEsmtp) with SMTP
-	id C549F8A3; Tue, 05 May 2026 09:49:20 +0800
-X-QQ-mid: xmsmtpt1777945760tdnrk5i9d
-Message-ID: <tencent_5B3B9283E67523E3CBF9150AEE7AD002AE07@qq.com>
-X-QQ-XMAILINFO: NGZp1yYNf7Y+gFtepeoSBLscsgnfUXhTOn5dElpoUrYJlx/OmpaLywUrVyM5EI
-	 AdDFXXmPHtwBevbWtNiqszDVthrDm6CCADYBE/lNXBCkVMgwJzW2JEndzjOQtSUsdP7kOJMLRUg0
-	 8qLm/G7yiNNwobLLxFeitcMYS/b2TfxKzdw8vU3LOn1taIL1TWtAl717lMoNBK27VBSDurNPcAtj
-	 0RnjGXU0DKrkVFDzDmGzWrF1zQlO1fjNaJ3Cj0mA1gAsnx2l3H5J5WIHwXLTaKbRqiys87wlfktS
-	 ty2QoySPWl/bu/AwH9DIs7drKRmgkYJ7V5ir6D2u2EBnRn/pURaw4OQiTkqIgu72j5E1DbzcHjAp
-	 937//NaenghQrefPBIvJEicQyRgtnAQLCXhwdGr7nbtpfUoMos+xov0FQPRS5uGaWcmaNMnHSLtk
-	 IXTvHyLX2rtpRgNwo53O7/XIr5KJZ4KwBAS9p2CU6W1kitoSMGokb0Cb+UwgGTdzQAaivgvgvvCh
-	 iWbj/FcfKcsmGpG88DzeL7kJBEVopE5udFGIgW1BAXlEjy4F1LG0S5uogNLgfH98jQxrRFM40dqE
-	 N/1b1vAtXGPAY9jmI7lVIZCJ4N73+lxLKZqM0JarWaYuYDFdkqaTeahkP7W1kCF7kKW2FEOP/xxF
-	 kf0kfRSa4ADvpJ0WVflkZ5kkDIe0YsF+WTIY3qJTQk3qzrmWtRd/d+ZAqXwPAbR1s6gsigm0Ox0x
-	 t2LMyTNhh0xH96eoS2IgxNOQjE2vL57Rv6j0XroEZn/GLM5DOXsKGlylmDf6KykVyDQZP5V8kxzR
-	 u4pEi+BXv6pYJvrK0lYE24OKXjVP6Ikjul7eCKbJMqHrLY6JxjpiDYMkaXfbDvqduB6GIOeMYS/P
-	 0t4eXi9Rw40br4H7YSmsTvl9PwOOXrmHRihXSFvvp5ObEkUDbLE9HP2LAklzUJeyGoBOMgo9VLnG
-	 fL61DiXgfKjhd38SXNSE//BC+GHzTTAbgL8dNavT3lFIITY/9d/2Bz7uNTP74MT0cThx0jdA9JK1
-	 5ZLoP97i775qV8vIHkcnDMAN6v46cazPdYB3MqrbYN6MiMXX04CoH1zfEJN0C3PB8zZqjhYg==
-X-QQ-XMRINFO: OD9hHCdaPRBwH5bRRRw8tsiH4UAatJqXfg==
-From: Wang Zihan <jiyu03@qq.com>
-To: jic23@kernel.org,
-	corbet@lwn.net
-Cc: dlechner@baylibre.com,
-	nuno.sa@analog.com,
-	andy@kernel.org,
-	skhan@linuxfoundation.org,
-	linux-iio@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Wang Zihan <jiyu03@qq.com>
-Subject: [PATCH v3] iio: adxl313: fix typos in documentation
-Date: Tue,  5 May 2026 09:49:17 +0800
-X-OQ-MSGID: <20260505014918.50897-1-jiyu03@qq.com>
-X-Mailer: git-send-email 2.54.0
+	s=arc-20240116; t=1777951204; c=relaxed/simple;
+	bh=jmxgOVllhBbd9wXodh3HETSqlS5j5u2VP8XIaex08Vo=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=LhSNuf3uoqfl5METrSjk6rHkrfGEdN7MMdvBVcnj4pv8+FyQ1hbF39F3WjhT9wNruEMyCui7OKrRExwgURCnYZP8FxKoATrq2eDj/oj5NjPMXjmnvE2heKZ/+fd9BckL/SSvjp2TPJSZbv0BOQBIs6S/E6vplaDmvgEVfAsT1hg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
+Received: from omf17.hostedemail.com (lb01a-stub [10.200.18.249])
+	by unirelay10.hostedemail.com (Postfix) with ESMTP id 0F4BEC1A11;
+	Tue,  5 May 2026 03:19:55 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf17.hostedemail.com (Postfix) with ESMTPA id 742501C;
+	Tue,  5 May 2026 03:19:51 +0000 (UTC)
+Message-ID: <0b127006e552de855ba7d33c15d2199436a001cb.camel@perches.com>
+Subject: Re: [PATCH 2/9] docs: escape ** glob pattern in MAINTAINERS
+ descriptions
+From: Joe Perches <joe@perches.com>
+To: Randy Dunlap <rdunlap@infradead.org>, Mauro Carvalho Chehab	
+ <mchehab+huawei@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Linux Doc
+ Mailing List <linux-doc@vger.kernel.org>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>
+Cc: linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org, Andrew
+ Morton	 <akpm@linux-foundation.org>, Matteo Croce <technoboy85@gmail.com>,
+ Shuah Khan	 <skhan@linuxfoundation.org>, Matteo Croce <teknoraver@meta.com>
+Date: Mon, 04 May 2026 20:19:50 -0700
+In-Reply-To: <c2efc1a7-4406-4590-b863-5f258f3cae50@infradead.org>
+References: <cover.1777908711.git.mchehab+huawei@kernel.org>
+	 <31f673089e2a83dc1fee17d47784579874476ca5.1777908711.git.mchehab+huawei@kernel.org>
+	 <c2efc1a7-4406-4590-b863-5f258f3cae50@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 098B04C5D4D
+X-Stat-Signature: 11gcgsis8m83z1ercfiacqiuiabwy93s
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX18JsanZu4qjYVqfZJhpe4jI5xqiKGjBVOw=
+X-HE-Tag: 1777951191-122
+X-HE-Meta: U2FsdGVkX1+v43GpVe2wpFTyNj9MLUUe74T7SINuWikNgvBdDwYZswVa7M2+BHDP+nnCHtBOxciEdyU999aDJ4vtlMYMayRbHfW1Ug7Wte2ur4yPKxA4hSAgvOIE9a7/h1qv9uCDW0T2tAz1/SgFkzkUkSz+2ccmvXQr3UJbEJd2PoEt1azJRKywVbU6so1E+zfSV07zQZXOsG914l4KMWL0guVaaVWND9lEsF1fVO60jjuBXo0sX8DmsBdrrkmJxtG/oWx54y22pR3AiRUcPsgW91YG9nRnziUDSoPPwBOn1a0o+okWi0PJouxZcENpgTCJKVC/Ak/zBNhozmDULjuHbatnWjkQznb9m7or1vaeiIJGCVRCUCEYduyI3rEf
+X-Rspamd-Queue-Id: 950314C61F4
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [0.04 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[qq.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[qq.com:s=s201512];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-85786-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_CC(0.00)[baylibre.com,analog.com,kernel.org,linuxfoundation.org,vger.kernel.org,qq.com];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FREEMAIL_CC(0.00)[vger.kernel.org,linux-foundation.org,gmail.com,linuxfoundation.org,meta.com];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-85788-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DMARC_NA(0.00)[perches.com];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jiyu03@qq.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[qq.com:+];
+	FROM_NEQ_ENVFROM(0.00)[joe@perches.com,linux-doc@vger.kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-0.930];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	R_DKIM_NA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	FREEMAIL_FROM(0.00)[qq.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,qq.com:email,qq.com:dkim,qq.com:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[meta.com:email]
 
-Add missing space in "ADXL313is" and improve grammar for
-"a single types of channels" to "multiple channels of a single type"
-as suggested by Jonathan Cameron.
+On Mon, 2026-05-04 at 14:20 -0700, Randy Dunlap wrote:
+> On 5/4/26 8:51 AM, Mauro Carvalho Chehab wrote:
+> From: Matteo Croce <[teknoraver@meta.com](mailto:teknoraver@meta.com)>
+> >=20
+> > Escape '**' in the MAINTAINERS descriptions section to prevent
+> > reStructuredText from interpreting it as bold/strong inline markup,
+> > which causes a warning when running 'make htmldocs'.
+[]
+> It's nice to eliminate one warning from 'make htmldocs', so this is good
+> in that regard. However, there are still multiple problems (not Warnings)
+> with '*' characters in the MAINTAINERS file:
+>=20
+> 1) 	   F:	*/net/*		all files in "any top level directory"/net
+>=20
+> In the html output, it shows "/net/" italicized (that's what one * does).
+>=20
+> 2)	   F:	fs/**/*foo*.c	all *foo*.c files in any subdirectory of fs
+>=20
+> In the html output, it shows
+>=20
+> 	F: fs/**/foo.c all foo.c files in any subdirectory of fs
+>=20
+> with both occurrences of "foo.c" italicized (dropping the '*' characters)=
+.
+>=20
+> These 2 examples are actively wrong.
+>=20
+> [adding new:]
+> We would be better served by just putting file patterns inside ``fs/**/*f=
+oo*.c``
+> quotation marks IMO.
+>=20
+> Ah, similar to what you do in the table output.
+>=20
+> Oh, with one little glitch:
+> E.g., in the very first entry for 3C59X NETWORK DRIVER,
+>   F:	Documentation/networking/device_drivers/ethernet/3com/vortex.rst
+>   F:	drivers/net/ethernet/3com/3c59x.c
+> it looks like automarkup is applied to the Documentation file so these
+> 2 files are displayed as:
+>=20
+> networking/device_drivers/ethernet/3com/vortex, drivers/net/ethernet/3com=
+/3c59x.c
+>=20
+> with the Doc file underlined and missing both Documentation and .rst.
+> Or maybe that's what you intended since the automarkup link does work.
+> It's just not what I expected. Oh well.
 
-Signed-off-by: Wang Zihan <jiyu03@qq.com>
-
----
-Changes in v3:
-- Reworded "a single type of channels" to "multiple channels of a single type"
-  per Jonathan Cameron's suggestion
-- Split into two sentences for better readability
-- Added this changelog as requested
-
-Changes in v2:
-- Fixed subject line format (was incorrectly [PATCH 1/4])
----
- Documentation/iio/adxl313.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/iio/adxl313.rst b/Documentation/iio/adxl313.rst
-index 966e72c0109a..a28047e6764c 100644
---- a/Documentation/iio/adxl313.rst
-+++ b/Documentation/iio/adxl313.rst
-@@ -11,7 +11,7 @@ This driver supports Analog Device's ADXL313 on SPI/I2C bus.
- 
- * `ADXL313 <https://www.analog.com/ADXL313>`_
- 
--The ADXL313is a low noise density, low power, 3-axis accelerometer with
-+The ADXL313 is a low noise density, low power, 3-axis accelerometer with
- selectable measurement ranges. The ADXL313 supports the ±0.5 g, ±1 g, ±2 g and
- ±4 g ranges.
- 
-@@ -112,8 +112,8 @@ apply the following formula:
- Where _offset and _scale are device attributes. If no _offset attribute is
- present, simply assume its value is 0.
- 
--The ADXL313 driver offers data for a single types of channels, the table below
--shows the measurement units for the processed value, which are defined by the
-+The ADXL313 driver offers data for multiple channels of a single type.
-+The table below shows the measurement units for the processed value, which are defined by the
- IIO framework:
- 
- +-------------------------------------+---------------------------+
--- 
-2.54.0
-
+Please stop trying to format MAINTAINERS into rst.
+It shouldn't be formatted.
+It's simple text.
 
