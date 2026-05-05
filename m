@@ -1,61 +1,61 @@
-Return-Path: <linux-doc+bounces-85898-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85899-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GG9wOvz6+WmNFgMAu9opvQ
-	(envelope-from <linux-doc+bounces-85898-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 16:13:16 +0200
+	id CJx1IsH7+WmNFgMAu9opvQ
+	(envelope-from <linux-doc+bounces-85899-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 16:16:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B1EA4CF290
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 16:13:16 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E5AFF4CF38E
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 16:16:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id EEBC1300C248
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 14:10:14 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C891A30C2507
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 14:10:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69C6D47ECF9;
-	Tue,  5 May 2026 14:10:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2BBC47F2F4;
+	Tue,  5 May 2026 14:10:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Z5AcpnbH"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aaIzbeIx"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45CB317A31E;
-	Tue,  5 May 2026 14:10:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FAF047F2E8;
+	Tue,  5 May 2026 14:10:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777990211; cv=none; b=aBk1ZfljQwAm0ViVIZn8acdFz77kH/a7WEVjyVQ1AV5Meyb5Bx+p0nVMu1awm8bhS8zw2y/RXHiEXnKWTNgkpfccoqNmV06AdAeg7RLgrk2o5+NefFwiOS2Om//KcGm5sdHXIkSntMK2pEn7HN39IwWQ4pm8M5ioXl8EoQV4TmY=
+	t=1777990234; cv=none; b=FnqYPG9AJ+TDVS8F6QBgrRFuO83uavQ+kWc8PWS4fL1A5dYBGOIuAGxKesVTjdP6SiAGVXN/ypfMUseoGZZOzcAYBN6R7T9yZmhB5VI7lNyZjm+faulpS5ey+u2YWZy1rbSQ/QqiIFJfliWZQsM7PbF+fQC+7bbJWiC9QCb01Ks=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777990211; c=relaxed/simple;
-	bh=+iX0UHCItJ/oja7poULSVE4xmgLag7TUnMoCmTMxDQg=;
+	s=arc-20240116; t=1777990234; c=relaxed/simple;
+	bh=PPs+MCdi3kcKTLrOhTGnx9SXIHnkphdqWHSxvNJPass=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YCwFnfikUAfApVN/ugJCX5dTGjBFOJYC5z2xd0huWK+7BXmmtE21Mwmv90kXbZUkBqzH5+oTE7fFc9y0WnVoMwDAH5x6YzbQNzSyPQmo05bkcFMI7gVP4TYjHcK5Q0BfR9sfkcmkewYtZlqTmieutaNB5iqLTEYWGqQ2i4zglKg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z5AcpnbH; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F586C2BCB4;
-	Tue,  5 May 2026 14:10:09 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=LtCDXE4kE3vIRVXXt/fPxxfOIoCtQUABS9k9f0SJNcOH9mSqQ9uHcF//rcQNcdwiOx1mIvI+NI14EogMAFaSuSdE8vj8By4k2I3HGABbTXukYidmMvVPv0gQLoWJQ0ncQ+SLuoszbhg3LwlHxUq/nVbGgnBQiIku5QISPmGcsuI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aaIzbeIx; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69BF9C2BCB4;
+	Tue,  5 May 2026 14:10:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1777990210;
-	bh=+iX0UHCItJ/oja7poULSVE4xmgLag7TUnMoCmTMxDQg=;
+	s=k20201202; t=1777990234;
+	bh=PPs+MCdi3kcKTLrOhTGnx9SXIHnkphdqWHSxvNJPass=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Z5AcpnbHzNUjiBzSoOUOZnlaIpjk7EwrNWydwNIsOuLjkGTRPbWwVXviH3qaOFLWk
-	 94888Az940/QQegLeZOXBRRp0FBGTXxjegxRiGhSthjzrd7Ii76q6EM5o0z+ClNlVG
-	 4OV4gSZfZOxYn3GNhxOsgl0yzjrN2DW/aIJ6FdxH2YFcCZXy3OhMeJAli8rvYVX1Ya
-	 ywEcFcz2oLc0lAh1H65mvwShMbf8fDNo608ZGn2d86U9Fu2bskmvP4f14XdVZf3xrE
-	 9D2+BB8cm9+7IOBOQXeaxtSm1fdJef4U7gc8Ob+/nqMI+RaKWnJxFkM9VIyIr83ffp
-	 xtT9Zz5U6dPWg==
-Date: Tue, 5 May 2026 17:10:04 +0300
+	b=aaIzbeIxVXl52jpmLrC4C5ezJjSF/hJxI59auFCJTxKGZJspGgY2aQTBanaLa8zmO
+	 JAHAhoJmnC2CQPHxDGbSvOwAtMw84Wc0a8KXEt8UjpsVTjTmM2uMJX1ixhH0DnC/jk
+	 O17CUJwJqjLHNenB90pZp9xBeQeuDH7mmLVXWQj+jRQ3l8Qcg8NPG+JynkaCOLHYzQ
+	 bt4yEVSiZBmUUCMSDx4OI8OuBcS5I24aqF35NaqKCyZLv5EGo211NDMHs5e4GIh/ZO
+	 iMTVSDoSzpoQkGh+1hKRu6qP3fSzwkuzfwnT0A4/vMOohCWvqvFyT1XmzuLv0fes1C
+	 xLd4eBL1BS7Rw==
+Date: Tue, 5 May 2026 17:10:28 +0300
 From: Leon Romanovsky <leon@kernel.org>
 To: Willy Tarreau <w@1wt.eu>
 Cc: greg@kroah.com, security@kernel.org, Jonathan Corbet <corbet@lwn.net>,
 	skhan@linuxfoundation.org, workflows@vger.kernel.org,
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
 	Greg KH <gregkh@linuxfoundation.org>
-Subject: Re: [PATCH v2 2/3] Documentation: security-bugs: explain what is and
- is not a security bug
-Message-ID: <20260505141004.GE11063@unreal>
+Subject: Re: [PATCH v2 1/3] Documentation: security-bugs: do not
+ systematically Cc the security team
+Message-ID: <20260505141028.GF11063@unreal>
 References: <20260503113506.5710-1-w@1wt.eu>
- <20260503113506.5710-3-w@1wt.eu>
+ <20260503113506.5710-2-w@1wt.eu>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,8 +64,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260503113506.5710-3-w@1wt.eu>
-X-Rspamd-Queue-Id: 1B1EA4CF290
+In-Reply-To: <20260503113506.5710-2-w@1wt.eu>
+X-Rspamd-Queue-Id: E5AFF4CF38E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.66 / 15.00];
@@ -73,18 +73,18 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85898-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-85899-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
@@ -94,32 +94,24 @@ X-Spamd-Result: default: False [-1.66 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[1wt.eu:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linuxfoundation.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,1wt.eu:email,linuxfoundation.org:email]
 
-On Sun, May 03, 2026 at 01:35:05PM +0200, Willy Tarreau wrote:
-> The use of automated tools to find bugs in random locations of the kernel
-> induces a raise of security reports even if most of them should just be
-> reported as regular bugs. This patch is an attempt at drawing a line
-> between what qualifies as a security bug and what does not, hoping to
-> improve the situation and ease decision on the reporter's side.
+On Sun, May 03, 2026 at 01:35:04PM +0200, Willy Tarreau wrote:
+> With the increase of automated reports, the security team is dealing
+> with way more messages than really needed. The reporting process works
+> well with most teams so there is no need to systematically involve the
+> security team in reports.
 > 
-> It defers the enumeration to a new file, threat-model.rst, that tries
-> to enumerate various classes of issues that are and are not security
-> bugs. This should permit to more easily update this file for various
-> subsystem-specific rules without having to revisit the security bug
-> reporting guide.
+> Let's suggest to keep it for small lists of recipients and new reporters
+> only. This should continue to cover the risk of lost messages while
+> reducing the volume from prolific reporters.
 > 
 > Cc: Greg KH <gregkh@linuxfoundation.org>
 > Cc: Leon Romanovsky <leon@kernel.org>
-> Suggested-by: Leon Romanovsky <leon@kernel.org>
-> Suggested-by: Greg KH <gregkh@linuxfoundation.org>
 > Signed-off-by: Willy Tarreau <w@1wt.eu>
 > ---
->  Documentation/process/index.rst         |   1 +
->  Documentation/process/security-bugs.rst |  28 +++
->  Documentation/process/threat-model.rst  | 231 ++++++++++++++++++++++++
->  3 files changed, 260 insertions(+)
->  create mode 100644 Documentation/process/threat-model.rst
+>  Documentation/process/security-bugs.rst | 10 +++++++++-
+>  1 file changed, 9 insertions(+), 1 deletion(-)
 
 Thanks,
 Reviewed-by: Leon Romanovsky <leon@kernel.org>
