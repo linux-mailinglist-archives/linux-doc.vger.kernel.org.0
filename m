@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-85790-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85791-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oEb9OWhn+Wmt8QIAu9opvQ
-	(envelope-from <linux-doc+bounces-85790-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 05:43:36 +0200
+	id ADUnOoxo+WnA8QIAu9opvQ
+	(envelope-from <linux-doc+bounces-85791-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 05:48:28 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 602604C6337
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 05:43:36 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E8C384C6490
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 05:48:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id A4EAA300898F
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 03:43:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id F1A913008634
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 03:48:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 365B33AB29E;
-	Tue,  5 May 2026 03:43:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEDDE36CE10;
+	Tue,  5 May 2026 03:48:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="UtJqEA0O"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="FhmwLHZd"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF665224AF1
-	for <linux-doc@vger.kernel.org>; Tue,  5 May 2026 03:43:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F025392C28
+	for <linux-doc@vger.kernel.org>; Tue,  5 May 2026 03:48:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777952613; cv=none; b=JgyoB7V2CmL8qUe9gpWHxCehVmWQYooi4soj2kt6XpMEqU33JvPqeh4XqGIoh08baY1Y/RypycXavvbjMhNnJxy2Dth5RTi1Toj/2RKjwwlmVh2NeGMbUFCDSjGMl7u2XdkaM1sh2d9KyxINacNSk62BwxyPRvtytHwieZx3pCI=
+	t=1777952903; cv=none; b=aCrfsFGfdHyngg5YexWQNuninxwE2RMkpQON/sZdKgF2uJpGuJZL7T/qyB4dRUO8ccsfbILB9lLaI52+Drqr9yllaVCwHVleLXIJ5fUj3mBBBZrBlSmQ6qH92MytG1C8k0Q7LZNZ8VZyyAPDNOOSZKE0vVO/Vr0M69LT6M5b/Qk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777952613; c=relaxed/simple;
-	bh=U4fhBXiLkbKfNdNr7++zMbEXFXvXPmNG+n6rkkwy1hU=;
+	s=arc-20240116; t=1777952903; c=relaxed/simple;
+	bh=I/nHOEyFQxADF9HsoHDE2RKF3EfG9t2w7h7CIQdXfgE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NCdkSKfu90FPAsAo0G9BeRZW/hY6KQJOS4KNSUXxZrI1qLhrXHn/zO4Jy3HZQNpUWLR1wqllvy0XJtFwabMgvwFKe8Pn9+H8Uw1LDFOxzeNwN0xyPW6xKdWATMBhsnlIVabERNtXwpmaMTjBwmq5ZoBcQihDEzTfhKEuf5EDxaw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=UtJqEA0O; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=bNSC3zPdL4qPMcLIyHV4BtSYGlQ4eIzQO63OAewNOYS5Cln0ZNTGEEihQhyxRgC+rtmLZmcJogNVOsRW37w2YO71epj74KrAYZY2ELhBHa/ehSZjYTPwzADACcXMkISXmMHiIlwwbXzQRkIlLrczq8ivLpd1SbvblvUrf+t7jAY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=FhmwLHZd; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=2+cPNe5IyWGqRbcAZylIn4/YmQRHyGYaY9ohg/eFPnQ=; b=UtJqEA0OutBQqoQv44gC8oB4mr
-	sHdTmL5dRBwiqIggGmquIlOFuyqQ99IPDvFBgmYoqzvhGjFTF25ne1WK8/9ohMmZ2u5QsFGTHReD7
-	hikgoIvT1pIFP8rjxCdMeq+JKWnb5XIRPqUChX33btZhR6h4QzGr7JKzNCg5IzRzPXQX8mzhIixkr
-	lpzCLMxpvftcCFli5PXRf8cP5TfhxUI3OvdUkG9KtxKEYIrrauEjGGzfFn4cIFvDJFLt7BYk96oif
-	sOr3/CYb2B4CGRcLE7Bjjn0OSXnGLOMGwLnMIIL1sU3snsUF+abUVgpuGhlqyP3rgBNpiKMyRgMH+
-	k7C1zvQQ==;
+	bh=jx8VtcuKGZNZBB2WX7edn12Q9Vxzy9GU53xPOo73zMI=; b=FhmwLHZd2YiB+z6oz/kdV+0q3V
+	8uqy36dVA8r1G7QbLtGQsVgUdbkJjR0uAzW/bjLb065liZWqL8vYAs2qdZ4LgooSgP+0p5qT5K+u6
+	uK4A5yhvZQEjEOocFOPscCx7FR0i+MTvy3dkHMz3l56V8GbXZAcuMiIreyrfB0yB/FjFOI7jLSa0I
+	d1f54/8QMJ2IDJPDMBbpa9P6wlDjvmyOsqs61kYJ/GWbos/BFsxwoJZD6K1aLmNL6AvburKTG25n/
+	7EKrlTsQoan2uxwf7W6LxyYOhiVCf+5CwDUfsCKQB91n5+FqoOFq84YEs8mDfXazT/Ehe5yQtaH5m
+	9m9vyMqA==;
 Received: from [50.53.43.113] (helo=[192.168.254.34])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wK6gy-0000000F1mW-4BmX;
-	Tue, 05 May 2026 03:43:29 +0000
-Message-ID: <1af7ec90-5294-48bd-9f05-a3eb77ae7cf2@infradead.org>
-Date: Mon, 4 May 2026 20:43:28 -0700
+	id 1wK6lh-0000000F378-0mEX;
+	Tue, 05 May 2026 03:48:21 +0000
+Message-ID: <6df94757-0a89-41f2-ac22-18efc28255d8@infradead.org>
+Date: Mon, 4 May 2026 20:48:20 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,45 +67,40 @@ From: Randy Dunlap <rdunlap@infradead.org>
 In-Reply-To: <20260505014839.2670290-1-jer@jer.cx>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 602604C6337
+X-Rspamd-Queue-Id: E8C384C6490
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-85790-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	DKIM_TRACE(0.00)[infradead.org:+];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-85791-lists,linux-doc=lfdr.de];
 	RCPT_COUNT_THREE(0.00)[3];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,jer.cx:email]
+	TO_DN_SOME(0.00)[]
 
 
 
 On 5/4/26 6:48 PM, Jeremy Bobbin wrote:
 > bpf/linux-notes.rst: broken link to ISA standard documentation
 > driver-api/thermal/intel_dptf.rst: two broken links to filesystem quota
-
-Somehow the line above merged changes for ext4/super.rst into the
-comment for intel_dptf.rst.
-
 > 
 > Signed-off-by: Jeremy Bobbin <jer@jer.cx>
 > ---
@@ -167,6 +162,8 @@ comment for intel_dptf.rst.
 >     * - 0x200
 >       - This filesystem supports “bigalloc”, which means that file extents are
 >         tracked in units of clusters (of blocks) instead of blocks
+
+These ext4 link changes don't work for me (file not found).
 
 -- 
 ~Randy
