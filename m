@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-85871-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85874-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0KbyMdrw+WnGFQMAu9opvQ
-	(envelope-from <linux-doc+bounces-85871-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 15:30:02 +0200
+	id MDX2Ourw+WmcFQMAu9opvQ
+	(envelope-from <linux-doc+bounces-85874-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 15:30:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E35234CE826
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 15:30:01 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53F004CE844
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 15:30:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 86F1630A9BD5
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 13:26:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C671430B111B
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 13:26:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DB5F477992;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94B1247AF42;
 	Tue,  5 May 2026 13:26:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DI3ZC2I+"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ninsZURr"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 592A344BC93;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D78B4611F4;
 	Tue,  5 May 2026 13:26:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777987565; cv=none; b=H1gJWUXT0OZ0qZngKN/PDVi5Kgph3NZ/zJ2pYW+rdS1JtaX7NMGrSkPT3+I9AEDYpZ9tNlNQ5v2AOuftFc9d4regeGGygC/JdFJBRE57kwQ4lrxlCGqS0t2x9DWVAlN7OLVbjPCBeDt6MES6Ti94pvK4mMctO2zpFS7ss+snexk=
+	t=1777987565; cv=none; b=tem+4sE/GnAx5Ne+Ws1SGPWvtbQ0Nxg1O6GtlB4sF8fUQrylo6/9G6kvOhUewP1S+OXr7FxpqyUf6QH4nHYOwMXSDtIRNACiXuZTU7qsWSPopHpGV5i7hB8zpOD0tPCDeitaGK2iMkbNJDbdNnd2hD1dgcqOEX/y9Qk++2M9dmk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1777987565; c=relaxed/simple;
-	bh=xX8jdqJe6OyYVBhHmMog5VS+gV1ubfBCDKiP09ArwZE=;
+	bh=YvaRCtftfZK5OkZseWD8Of6dwh1Rug3EykgCU5rGahM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ldC3rMDydAxto4mhLZvJezsrHM6awrEq0z2I2R9ap9ClJ9TPHR4pIkWj30LKAbYgmpUnqqtTJIHl1ZIlbWxAmEAYLFSoyzUshy39OViv6aWhMPvr3s7O4voFN3wOv6MqmBE4cN/SxB4f8JqFR6jnAQs5F1nOiys/nW+jzA2LYqY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DI3ZC2I+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 255D4C2BCF7;
+	 MIME-Version:Content-Type; b=bN9NjSjajvZyoiz/BDNVpnPWLo7qdts46YgbBnYWv3dikhAu7QA6N1B9T4WnfavftBKqbWEobaleWTlhX8ubb3HjZ6zUnAUz3LC45GrsUN1vAsRri1u7Uv/XCshAERjLFQTnRRenqH9Jg0PuDrcM8WcoypPr6G25gvG/re5gFTU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ninsZURr; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29540C2BCFA;
 	Tue,  5 May 2026 13:26:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1777987565;
-	bh=xX8jdqJe6OyYVBhHmMog5VS+gV1ubfBCDKiP09ArwZE=;
+	bh=YvaRCtftfZK5OkZseWD8Of6dwh1Rug3EykgCU5rGahM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=DI3ZC2I+/wkK7PmKhCqwZ/qIcGwtYTu5oyPB8gwPNj2tXDXnX70wH8ScI2HV3ISY3
-	 As1LMteYqI2xTzg9/+6lSWDV95buMZduufUDOA5PNg54jruSVU3nPQrl1aYA7e2xza
-	 Nh+wJtVmViBPM5FetIjGj5pcOVjeKWritFyPc7WtduzuX3wV8NXNcGDrKqpTBZb6Db
-	 +BbNcoHZpsfV7Cu2g1ALKkWD8bh++JbqMZS8heucz332XOzvD/t05pUCnBerePnMFs
-	 bXabPclpCLclcJAYqr0u2Xu8wh9T2l21ibXbo8u94ASPuxqbKqvcK605idaul9K4Wp
-	 0kydC6QDo8Jrw==
+	b=ninsZURrTES27F46d8ksrE+BEEmVi7zaSeLOL7N/kfjFjirtZ+jrU88b6I7vwGDwm
+	 8GlUgjfkQ8TNGqiUte6xoFyXOYEv5gp7HU968gqFbm/eZsrtBvTVeN7bMABVu8hIKK
+	 AmIeUXWJ13Mb6Vt29xnPiyFzobEu4giJS8OGL7rsDEvF+6/WjyHzTDqikFn2GbWhD4
+	 r1haXhgj4/w6BkWk6Ir1Hckk7HnMzIod3H36NDoqudwma+rHSSMhGjFuY+6irytw0w
+	 Zor4Mmtnpzk7J4FiVpE4A1n1Mml68ZqfAhzQ/98XFZklJryy2s/nIjKo8FeNInsX07
+	 xInS8ufw4e8hQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wKFml-00000004ihA-1E0p;
+	id 1wKFml-00000004iiL-1wXA;
 	Tue, 05 May 2026 15:26:03 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	rust-for-linux@vger.kernel.org,
 	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH v2 04/11] docs: maintainers_include: clean most SPHINXDIRS=process warnings
-Date: Tue,  5 May 2026 15:25:51 +0200
-Message-ID: <b57d83081c28aa52683b403f8836d098fcdd8530.1777987027.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 05/11] docs: maintainers_include: do some coding style cleanups
+Date: Tue,  5 May 2026 15:25:52 +0200
+Message-ID: <460aabd0518f080b34e12fdc0beb7ec7685d5866.1777987027.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1777987027.git.mchehab+huawei@kernel.org>
 References: <cover.1777987027.git.mchehab+huawei@kernel.org>
@@ -71,7 +71,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: E35234CE826
+X-Rspamd-Queue-Id: 53F004CE844
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
@@ -79,7 +79,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -87,7 +87,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85871-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-85874-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -95,107 +95,236 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[self.name:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,chromium.org:email]
 
-building docs with SPHINXDIRS=process is too noisy, as it
-generates lots of undefined refs. Fixing it is easy: just let
-linkify generate html URLs for the broken links when SPHINXDIRS
-is used.
+Minor coding style adjustments to use the style most python
+doc scripts are following.
 
+No functional changes.
+
+Assisted-by: pylint, black
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/maintainers_include.py | 44 +++++++++++++++------
- 1 file changed, 32 insertions(+), 12 deletions(-)
+ Documentation/sphinx/maintainers_include.py | 101 ++++++++++----------
+ 1 file changed, 51 insertions(+), 50 deletions(-)
 
 diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index 615af227a8f8..d3ad01e5309e 100755
+index d3ad01e5309e..7edda808ef99 100755
 --- a/Documentation/sphinx/maintainers_include.py
 +++ b/Documentation/sphinx/maintainers_include.py
-@@ -58,8 +58,8 @@ class MaintainersParser:
+@@ -1,30 +1,25 @@
+ #!/usr/bin/env python
+ # SPDX-License-Identifier: GPL-2.0
+ # -*- coding: utf-8; mode: python -*-
+-# pylint: disable=R0903, C0330, R0914, R0912, E0401
++# pylint: disable=C0209, C0301, E0401, R0022, R0902, R0903, R0912, R0914
+ 
+ """
+-    maintainers-include
+-    ~~~~~~~~~~~~~~~~~~~
++Implementation of the ``maintainers-include`` reST-directive.
+ 
+-    Implementation of the ``maintainers-include`` reST-directive.
++:copyright:  Copyright (C) 2019  Kees Cook <keescook@chromium.org>
++:license:    GPL Version 2, June 1991 see linux/COPYING for details.
+ 
+-    :copyright:  Copyright (C) 2019  Kees Cook <keescook@chromium.org>
+-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+-
+-    The ``maintainers-include`` reST-directive performs extensive parsing
+-    specific to the Linux kernel's standard "MAINTAINERS" file, in an
+-    effort to avoid needing to heavily mark up the original plain text.
++The ``maintainers-include`` reST-directive performs extensive parsing
++specific to the Linux kernel's standard "MAINTAINERS" file, in an
++effort to avoid needing to heavily mark up the original plain text.
+ """
+ 
+-import sys
+-import re
+ import os.path
++import re
+ 
+ from glob import glob
+ 
+ from docutils import statemachine
+-from docutils.parsers.rst import Directive
+ from docutils.parsers.rst.directives.misc import Include
+ 
+ #
+@@ -32,12 +27,14 @@ from docutils.parsers.rst.directives.misc import Include
+ #
+ KERNELDOC_URL = "https://docs.kernel.org/"
+ 
+-def ErrorString(exc):  # Shamelessly stolen from docutils
+-    return f'{exc.__class__.__name}: {exc}'
++__version__ = "1.0"
+ 
+-__version__  = '1.0'
++maint_parser = None  # pylint: disable=C0103
+ 
+-maint_parser = None
++
++# Shamelessly stolen from docutils
++def ErrorString(exc):  # pylint: disable=C0103, C0116
++    return f"{exc.__class__.__name}: {exc}"  # pylint: disable=W0212
+ 
+ class MaintainersParser:
+     """Parse MAINTAINERS file(s) content"""
+@@ -52,7 +49,7 @@ class MaintainersParser:
+ 
+         # Field letter to field name mapping.
+         self.field_letter = None
+-        self.fields = dict()
++        self.fields = {}
+ 
+         self.field_prev = ""
          self.field_content = ""
-         self.subsystem_name = None
+@@ -71,29 +68,30 @@ class MaintainersParser:
+         self.output = ".. _maintainers:\n\n"
  
--        self.app_dir = app_dir
--        self.base_dir, self.doc_dir, self.sphinx_dir = app_dir.partition("Documentation")
-+        self.app_dir = os.path.abspath(app_dir)
-+        self.base_dir, _, self.sphinx_dir = self.app_dir.partition("Documentation")
- 
-         self.re_doc = re.compile(r'(Documentation/([^\s\?\*]*)\.rst)')
- 
-@@ -104,10 +104,25 @@ class MaintainersParser:
- 
-     def linkify(self, text):
-         """Linkify all non-wildcard refs to ReST files in Documentation/"""
-+
-         m = self.re_doc.search(text)
-         if m:
--            # maintainers.rst is in a subdirectory, so include "../".
--            text = self.re_doc.sub(':doc:`%s <../%s>`' % (m.group(2), m.group(2)), text)
-+            fname = m.group(1)
-+            ename = m.group(2)
-+
-+            entry = os.path.relpath(self.base_dir + fname, self.app_dir)
-+            entry = entry.removesuffix(".rst")
-+
-+            #
-+            # When SPHINXDIRS is used, it will try to reference files
-+            # outside srctree, causing warnings. To avoid that, point
-+            # to the latest official documentation
-+            #
-+            if entry.startswith("../"):
-+                html = KERNELDOC_URL + ename + ".html"
-+                text = self.re_doc.sub(f'`{ename} <{html}>`_', text)
-+            else:
-+                text = self.re_doc.sub(f':doc:`{ename} </{entry}>`', text)
- 
-         return text
- 
-@@ -176,27 +191,32 @@ class MaintainersParser:
-         if field == "P":
-             match = self.re_doc.match(details)
-             if match:
--                name = "".join(match.groups())
--                entry = os.path.relpath(self.base_dir + name, self.app_dir)
-+                fname = match.group(1)
-+                ename = match.group(2)
- 
--                full_name = os.path.join(self.base_dir, name)
--                path = os.path.relpath(full_name, self.app_dir)
-+                entry = os.path.relpath(self.base_dir + fname, self.app_dir)
-+                entry = entry.removesuffix(".rst")
-                 #
-                 # When SPHINXDIRS is used, it will try to reference files
-                 # outside srctree, causing warnings. To avoid that, point
-                 # to the latest official documentation
-                 #
--                if path.startswith("../"):
--                    entry = KERNELDOC_URL + "/" + match.group(2) + ".html"
-+
-+                if entry.startswith("../"):
-+                    entry = KERNELDOC_URL + ename + ".html"
+         prev = None
+-        for line in open(path):
+-            if self.descriptions:
+-                self.parse_descriptions(line)
+-            elif self.maintainers and not self.subsystems:
+-                if re.search('^[A-Z0-9]', line):
+-                    self.subsystems = True
++        with open(path, "r", encoding="utf-8") as fp:
++            for line in fp:
++                if self.descriptions:
++                    self.parse_descriptions(line)
++                elif self.maintainers and not self.subsystems:
++                    if re.search('^[A-Z0-9]', line):
++                        self.subsystems = True
++                        self.parse_subsystems(line)
++                    else:
++                        self.output += line
++                elif self.subsystems:
+                     self.parse_subsystems(line)
                  else:
-                     entry = "/" + entry
+                     self.output += line
+-            elif self.subsystems:
+-                self.parse_subsystems(line)
+-            else:
+-                self.output += line
  
-                 if "*" in entry:
-                     for e in glob(entry):
--                        self.profile_toc.add(e)
-+                        if "html" not in e:
-+                            self.profile_toc.add(e)
+-            # Update the state machine when we find heading separators.
+-            if line.startswith('----------'):
+-                if prev.startswith('Descriptions'):
+-                    self.descriptions = True
+-                if prev.startswith('Maintainers'):
+-                    self.maintainers = True
++                # Update the state machine when we find heading separators.
++                if line.startswith("----------"):
++                    if prev.startswith("Descriptions"):
++                        self.descriptions = True
++                    if prev.startswith("Maintainers"):
++                        self.maintainers = True
+ 
+-            # Retain previous line for state machine transitions.
+-            prev = line
++                # Retain previous line for state machine transitions.
++                prev = line
+ 
+         # Flush pending field contents.
+         if self.field_content:
+@@ -130,7 +128,7 @@ class MaintainersParser:
+         """Handle contents of the descriptions section."""
+ 
+         # Have we reached the end of the preformatted Descriptions text?
+-        if line.startswith('Maintainers'):
++        if line.startswith("Maintainers"):
+             self.descriptions = False
+             self.output += "\n" + line
+             return
+@@ -182,7 +180,7 @@ class MaintainersParser:
+         # Render a subsystem field as:
+         #   :Field: entry
+         #           entry...
+-        field, details = line.split(':', 1)
++        field, details = line.split(":", 1)
+         details = details.strip()
+ 
+         #
+@@ -248,12 +246,11 @@ class MaintainersParser:
+ 
+ class MaintainersInclude(Include):
+     """MaintainersInclude (``maintainers-include``) directive"""
 +
-                         self.profile_entries[self.subsystem_name] = e
-                 else:
--                    self.profile_toc.add(entry)
-+                    if "html" not in entry:
-+                        self.profile_toc.add(entry)
+     required_arguments = 0
+ 
+     def emit(self):
+         """Parse all the MAINTAINERS lines into ReST for human-readability"""
+-        global maint_parser
+-
+         path = maint_parser.path
+         output = maint_parser.output
+ 
+@@ -269,20 +266,21 @@ class MaintainersInclude(Include):
+             raise self.warning('"%s" directive disabled.' % self.name)
+ 
+         try:
+-            lines = self.emit()
++            self.emit()
+         except IOError as error:
+             raise self.severe('Problems with "%s" directive path:\n%s.' %
+                       (self.name, ErrorString(error)))
+ 
+         return []
+ 
 +
-                     self.profile_entries[self.subsystem_name] = entry
-             else:
-                 match = re.match(r"(https?://.*)", details)
+ class MaintainersProfile(Include):
++    """Generate a list with all maintainer's profiles"""
++
+     required_arguments = 0
+ 
+     def emit(self):
+         """Parse all the MAINTAINERS lines looking for profile entries"""
+-        global maint_parser
+-
+         path = maint_parser.path
+ 
+         #
+@@ -316,15 +314,17 @@ class MaintainersProfile(Include):
+             raise self.warning('"%s" directive disabled.' % self.name)
+ 
+         try:
+-            lines = self.emit()
++            self.emit()
+         except IOError as error:
+             raise self.severe('Problems with "%s" directive path:\n%s.' %
+                       (self.name, ErrorString(error)))
+ 
+         return []
+ 
++
+ def setup(app):
+-    global maint_parser
++    """Setup Sphinx exension"""
++    global maint_parser  # pylint: disable=W0603
+ 
+     #
+     # NOTE: we're using os.fspath() here because of a Sphinx warning:
+@@ -338,8 +338,9 @@ def setup(app):
+ 
+     app.add_directive("maintainers-include", MaintainersInclude)
+     app.add_directive("maintainers-profile-toc", MaintainersProfile)
+-    return dict(
+-        version = __version__,
+-        parallel_read_safe = True,
+-        parallel_write_safe = True
+-    )
++
++    return {
++        "version": __version__,
++        "parallel_read_safe": True,
++        "parallel_write_safe": True,
++    }
 -- 
 2.54.0
 
