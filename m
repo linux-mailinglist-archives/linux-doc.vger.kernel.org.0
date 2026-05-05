@@ -1,268 +1,209 @@
-Return-Path: <linux-doc+bounces-85910-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-85943-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6LUhO4QL+mlsIgMAu9opvQ
-	(envelope-from <linux-doc+bounces-85910-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 17:23:48 +0200
+	id 4CilOJ4W+mlRJAMAu9opvQ
+	(envelope-from <linux-doc+bounces-85943-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 18:11:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D93A4D023F
-	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 17:23:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C61B4D0F3A
+	for <lists+linux-doc@lfdr.de>; Tue, 05 May 2026 18:11:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 74AD3305A5CB
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 15:21:00 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 117C930D618D
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2026 16:05:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C60CD43C06A;
-	Tue,  5 May 2026 15:20:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7FE5B481FD4;
+	Tue,  5 May 2026 16:05:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="HZ4LnhKu"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o4KZhHGr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E0DA156C6A;
-	Tue,  5 May 2026 15:20:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5973534677D;
+	Tue,  5 May 2026 16:05:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1777994458; cv=none; b=qWtPsLil6006q88BHRinZXMkKtNY1z3uNaIk+FevNxckSUWgr6sxL5GTpnDvgMAe0XRys9NTGw4AwDDPPpeWPxR6OD9XKdzrSheVvGVPhfy6p1ZloRfbB7wI9n8zW3+jx5xdbHQ09PmwVr54E5srpNii05DATZipEaTq1/rs6+I=
+	t=1777997136; cv=none; b=eeRUt7CdVWPFaT0r3HDN1gQ/4hItCHLhdIjqada1GDz4J1MZHTAA40UL+zHxVRJlr7ZZWmlZubuYkNfef77drDKWMaL/kx433zpMeupCtoOY5GBWp7xbUz4YTcGf3r8exyblCfVHuFlA9QU8exccE+YbCQeE91nPuGu0vkHUiXM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1777994458; c=relaxed/simple;
-	bh=GB3l17/ekg1P4sEApX6f/ITXv7X2gefB+5c4kZ5bdhQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=UdKDMBmzNF//1YmPp8JXlAXpoO4rLNTcihtoSLJyr959Gt8UeLUwNYhKaAzWX6Pe5ih///YpKtiJ1XsjJPyrJu/5maFTlxIRlFfazr2r1T5wGBL0s/0oetPx86SbFcz1Y0P5POexUDXZUFP359KIbPvNOGEGB2+k2EO2gOSbL7I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=HZ4LnhKu; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1777994455;
-	bh=GB3l17/ekg1P4sEApX6f/ITXv7X2gefB+5c4kZ5bdhQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=HZ4LnhKuimVBHwguEpzHzUmKIga1uo5dFOtEZyWUTnmmq5oSmrqc6vzHcWnZmPR34
-	 ISBs/7vrXXLNNZ4GzSz1AJXYG8mPv7GKqln6yQNsn7XEidgQgN3pkpnmUMh9E0By+E
-	 zjJnyB/DCGYC3Db1gUTZLhyIJZHavG7xhlYHNvBDaTBBeHP54ab0vkUtayjvGW3SXh
-	 U3zsKmmcKDqZX6/TTlXzVZGRMyLzcOvVBrNbm7mZ2626RA7Z4h0vMRsAI54zUqDGO5
-	 G6+irU6LumaJMQzuJp99XhlFz158BBAuV1vb71KFVgPXYymXDUkC3hcxqWANL5gyVo
-	 vIVXPlsHRlI0w==
-Received: from fedora (unknown [100.64.0.11])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 35D1417E13B2;
-	Tue,  5 May 2026 17:20:54 +0200 (CEST)
-Date: Tue, 5 May 2026 17:20:48 +0200
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Ketil Johnsen <ketil.johnsen@arm.com>
-Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard
- <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan
- Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, Sumit
- Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard
- <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>,
- John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>,
- Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Steven Price
- <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Daniel Almeida
- <daniel.almeida@collabora.com>, Alice Ryhl <aliceryhl@google.com>, Matthias
- Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
- <angelogioacchino.delregno@collabora.com>, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
- linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
- Yong Wu <yong.wu@mediatek.com>, Yunfei Dong <yunfei.dong@mediatek.com>,
- Florent Tomasin <florent.tomasin@arm.com>
-Subject: Re: [PATCH 1/8] dma-heap: Add proper kref handling on dma-buf heaps
-Message-ID: <20260505172048.1c48e030@fedora>
-In-Reply-To: <20260505140516.1372388-2-ketil.johnsen@arm.com>
-References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
-	<20260505140516.1372388-2-ketil.johnsen@arm.com>
-Organization: Collabora
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1777997136; c=relaxed/simple;
+	bh=z41/iI4Q5CcjWzRsTGIHP4u/6tewncyqKGLKwc1SwdY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=lCT3x12u69jzf0KJoshHHx30/7GDbTluHXL3bvmaX4fDvYkCZXj4DFmV+wTlfpH3y/hMR4oQJ1eXN9y1rQxHg5YIWb6QS4qFTNy4TgKeOhyuqSf22Q2B+kTJg7t9saVuMKhnbhdzYPpxaC+pdlvYwJ+JpTAPj6cV5/Kp9oTOGYE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o4KZhHGr; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A85B8C2BCB4;
+	Tue,  5 May 2026 16:05:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1777997136;
+	bh=z41/iI4Q5CcjWzRsTGIHP4u/6tewncyqKGLKwc1SwdY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=o4KZhHGrf13LBn00euvrXzClYenIO1S8hxPDnIgCOim8vDH3tN4e339xkLkYWEOP9
+	 PWDNElyotskYJ/OZX2fxddKc1o7YR3D1DhJw2lyLK9AG30ADrXtJjNiQhDf5wn/JqS
+	 Tx2K0rqTO6rYLd4cBEEDqK/Xvw2wBPvXwRIEWCe/lRET2qC904EF5HwfrqOjXeTYI2
+	 jLPKbKdGWDaQCWxhTCR48vnYiaMCcww/2k89d5X910xnxxSv2KB5suMeO5C9Li/PfP
+	 dKZcaoDzIgODyE78IT6RJKNvkoDzcYtBFMJkzhjKy9seRpex7mUYShZ5EQBvy/9NM3
+	 MBDNaNQ7LVM0g==
+Date: Tue, 5 May 2026 17:27:00 +0200
+From: Nicolas Schier <nsc@kernel.org>
+To: Nathan Chancellor <nathan@kernel.org>
+Cc: Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
+	linux-kbuild@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 01/14] kbuild: Bump minimum version of LLVM for building
+ the kernel to 17.0.1
+Message-ID: <afoMRMnSQUwk1eaN@levanger>
+Mail-Followup-To: Nathan Chancellor <nathan@kernel.org>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
+	linux-kbuild@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
+References: <20260428-bump-minimum-supported-llvm-version-to-17-v1-0-81d9b2e8ee75@kernel.org>
+ <20260428-bump-minimum-supported-llvm-version-to-17-v1-1-81d9b2e8ee75@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4D93A4D023F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260428-bump-minimum-supported-llvm-version-to-17-v1-1-81d9b2e8ee75@kernel.org>
+X-Rspamd-Queue-Id: 8C61B4D0F3A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-85910-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[30];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org,mediatek.com];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[boris.brezillon@collabora.com,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-85943-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[google.com,gmail.com,vger.kernel.org,lists.linux.dev,lwn.net,linuxfoundation.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nsc@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
+	TO_DN_SOME(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,bootlin.com:url,arm.com:email,mediatek.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linuxfoundation.org:email,lwn.net:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 
-Hi Ketil,
-
-On Tue,  5 May 2026 16:05:07 +0200
-Ketil Johnsen <ketil.johnsen@arm.com> wrote:
-
-> From: John Stultz <jstultz@google.com>
+On Tue, Apr 28, 2026 at 10:59:07PM -0400, Nathan Chancellor wrote:
+> The current minimum version of LLVM for building the kernel is 15.0.0.
+> However, there are two deficiencies compared to GCC that were fixed in
+> LLVM 17 that are starting to become more noticeable.
 > 
-> Add proper reference counting on the dma_heap structure. While
-> existing heaps are built-in, we may eventually have heaps loaded
-> from modules, and we'll need to be able to properly handle the
-> references to the heaps
-
-It's weird that this "heap as module" thing is mentioned here, but
-actual robustness to make this safe is not added in the commit or any
-of the following ones.
-
+> The first was a bug in LLVM's scope checker [1], where all labels in a
+> function were validated as potential targets of an asm goto statement,
+> even if they were not listed in the asm goto statement as targets. This
+> becomes particularly problematic when the cleanup attribute is used, as
 > 
-> Signed-off-by: John Stultz <jstultz@google.com>
-> Signed-off-by: T.J. Mercier <tjmercier@google.com>
-> Signed-off-by: Yong Wu <yong.wu@mediatek.com>
-> [Yong: Just add comment for "minor" and "refcount"]
-> Signed-off-by: Yunfei Dong <yunfei.dong@mediatek.com>
-> [Yunfei: Change reviewer's comments]
-> Signed-off-by: Florent Tomasin <florent.tomasin@arm.com>
-> [Florent: Rebase]
-> Signed-off-by: Ketil Johnsen <ketil.johnsen@arm.com>
-> [Ketil: Rebase]
+>   asm goto(... : label_a);
+>   ...
+> label_a:
+>   ...
+>   int var __free(foo);
+>   asm goto(... : label_b);
+>   ...
+> label_b:
+>   ...
+> 
+> will trigger an error since the scope checker will complain that the
+> cleanup variable would be skipped when jumping from the first asm goto
+> to label_b (which obviously cannot happen). This issue was the catalyst
+> for commit e2ffa15b9baa ("kbuild: Disable CC_HAS_ASM_GOTO_OUTPUT on
+> clang < 17"). Unfortunately, this issue is reproducible with regular asm
+> goto in addition to asm goto with outputs, so that change was not
+> entirely sufficient to avoid the issue altogether. As asm goto has
+> effectively been required since commit a0a12c3ed057 ("asm goto:
+> eradicate CC_HAS_ASM_GOTO") and the usage of the cleanup attribute
+> continues to grow across the tree, raising the minimum to a version that
+> avoids this issue altogether is a better long term solution than
+> attempting to workaround it at every spot where it happens.
+> 
+> The second issue is an incompatibility with GCC 8.1+ around variables
+> marked with const being valid constant expressions for _Static_assert
+> and other macros [2]. With GCC 8.1 being the minimum supported version
+> since commit 118c40b7b503 ("kbuild: require gcc-8 and binutils-2.30"),
+> this incompatibility becomes more of a maintenance burden since only
+> clang-15 and clang-16 are affected by it.
+> 
+> Looking at the clang version of various major distributions through
+> Docker images, no one should be left behind as a result of this bump, as
+> the old ones cannot clear the current minimum of 15.0.0.
+> 
+>   archlinux:latest              clang version 22.1.3
+>   debian:oldoldstable-slim      Debian clang version 11.0.1-2
+>   debian:oldstable-slim         Debian clang version 14.0.6
+>   debian:stable-slim            Debian clang version 19.1.7 (3+b1)
+>   debian:testing-slim           Debian clang version 21.1.8 (3+b1)
+>   debian:unstable-slim          Debian clang version 21.1.8 (7+b1)
+>   fedora:42                     clang version 20.1.8 (Fedora 20.1.8-4.fc42)
+>   fedora:latest                 clang version 21.1.8 (Fedora 21.1.8-4.fc43)
+>   fedora:44                     clang version 22.1.1 (Fedora 22.1.1-2.fc44)
+>   fedora:rawhide                clang version 22.1.3 (Fedora 22.1.3-1.fc45)
+>   opensuse/leap:latest          clang version 17.0.6
+>   opensuse/tumbleweed:latest    clang version 21.1.8
+>   ubuntu:jammy                  Ubuntu clang version 14.0.0-1ubuntu1.1
+>   ubuntu:noble                  Ubuntu clang version 18.1.3 (1ubuntu1)
+>   ubuntu:questing               Ubuntu clang version 20.1.8 (0ubuntu4)
+>   ubuntu:resolute               Ubuntu clang version 21.1.8 (6ubuntu1)
+> 
+> 17.0.1 is chosen as the minimum instead of 17.0.0 to ensure that the
+> particular version of LLVM 17 has the two aforementioned bugs fixed, as
+> the second was fixed during the 17.0.0 release candidate phase and it
+> was not until LLVM 18 that LLVM adopted the scheme of x.0.0 being a
+> prerelease version and x.1.0 is a release version [3] to help with
+> scenarios such as this.
+> 
+> Link: https://github.com/llvm/llvm-project/commit/f023f5cdb2e6c19026f04a15b5a935c041835d14 [1]
+> Link: https://github.com/llvm/llvm-project/commit/0b2d5b967d98375793897295d651f58f6fbd3034 [2]
+> Link: https://github.com/llvm/llvm-project/commit/4532617ae420056bf32f6403dde07fb99d276a49 [3]
+> Signed-off-by: Nathan Chancellor <nathan@kernel.org>
 > ---
->  drivers/dma-buf/dma-heap.c | 29 +++++++++++++++++++++++++++++
->  include/linux/dma-heap.h   |  2 ++
->  2 files changed, 31 insertions(+)
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Shuah Khan <skhan@linuxfoundation.org>
+> Cc: linux-doc@vger.kernel.org
+> ---
+>  Documentation/process/changes.rst | 2 +-
+>  scripts/min-tool-version.sh       | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-> index ac5f8685a6494..9fd365ddbd517 100644
-> --- a/drivers/dma-buf/dma-heap.c
-> +++ b/drivers/dma-buf/dma-heap.c
-> @@ -12,6 +12,7 @@
->  #include <linux/dma-heap.h>
->  #include <linux/err.h>
->  #include <linux/export.h>
-> +#include <linux/kref.h>
->  #include <linux/list.h>
->  #include <linux/nospec.h>
->  #include <linux/syscalls.h>
-> @@ -31,6 +32,7 @@
->   * @heap_devt:		heap device node
->   * @list:		list head connecting to list of heaps
->   * @heap_cdev:		heap char device
-> + * @refcount:		reference counter for this heap device
->   *
->   * Represents a heap of memory from which buffers can be made.
->   */
-> @@ -41,6 +43,7 @@ struct dma_heap {
->  	dev_t heap_devt;
->  	struct list_head list;
->  	struct cdev heap_cdev;
-> +	struct kref refcount;
->  };
->  
->  static LIST_HEAD(heap_list);
-> @@ -248,6 +251,7 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->  	if (!heap)
->  		return ERR_PTR(-ENOMEM);
->  
-> +	kref_init(&heap->refcount);
->  	heap->name = exp_info->name;
->  	heap->ops = exp_info->ops;
->  	heap->priv = exp_info->priv;
-> @@ -313,6 +317,31 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->  }
->  EXPORT_SYMBOL_NS_GPL(dma_heap_add, "DMA_BUF_HEAP");
->  
-> +static void dma_heap_release(struct kref *ref)
-> +{
-> +	struct dma_heap *heap = container_of(ref, struct dma_heap, refcount);
-> +	unsigned int minor = MINOR(heap->heap_devt);
-> +
-> +	mutex_lock(&heap_list_lock);
-> +	list_del(&heap->list);
-> +	mutex_unlock(&heap_list_lock);
-> +
-> +	device_destroy(dma_heap_class, heap->heap_devt);
-> +	cdev_del(&heap->heap_cdev);
-> +	xa_erase(&dma_heap_minors, minor);
-> +
-> +	kfree(heap);
+> diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
+> index 9a99037270ff..b9afce768446 100644
+> --- a/Documentation/process/changes.rst
+> +++ b/Documentation/process/changes.rst
+> @@ -36,7 +36,7 @@ bindgen (optional)     0.71.1           bindgen --version
+>  binutils               2.30             ld -v
+>  bison                  2.0              bison --version
+>  btrfs-progs            0.18             btrfs --version
+> -Clang/LLVM (optional)  15.0.0           clang --version
+> +Clang/LLVM (optional)  17.0.1           clang --version
+>  e2fsprogs              1.41.4           e2fsck -V
+>  flex                   2.5.35           flex --version
+>  gdb                    7.2              gdb --version
 
-That's actually problematic, because cdev_del() doesn't guarantee that
-all opened FDs have been closed [1], it just guarantees that no new ones
-can materialize. In order to make that safe, we'd need a
+FTR: The translations
+Documentation/translations/{it_IT,pt_BR}/process/changes.rst become now
+even more outdated.
 
-1. kref_get_unless_zero() in dma_heap_open(), with proper locking around
-   the xa_load() to protect against the heap removal that's happening
-   here
-2. a dma_heap_put() in a new dma_heap_close() implementation
-3. a guarantee that heap implementations won't go away until the last
-   ref is dropped, which means ops and all the data needed for this heap
-   to satisfy ioctl()s (and more generally every passed at
-   dma_heap_add() time) have to stay valid until the last ref is
-   dropped. Alternatively, we could restrict this only to in-flight
-   ioctl()s, and have the ops replaced by some dummy ops using RCU or a
-   rwlock. But I guess live dmabufs allocated on this heap have to
-   retain the heap and its implementation anyway.
-
-For record, #3 is already not satisfied by the current tee_heap
-implementation (tee_dma_heap objects can vanish before the dma_heap
-object is gone). The other implementations seem to be fine because they
-are statically linked, and they either have exp_info.priv set to NULL,
-or something that's never released.
-
-TLDR; the whole assumption that adding refcounting to dma_heap is
-enough to guarantee safety around device/module removal is not holding,
-and adding in-kernel users acquiring dma_heap refs on top of this
-design is just going to make it even more painful to fix.
-
-I see two way forward from here, either we get the
-dma_heap/dma_heap-producer lifetime right from the start the way I
-suggested above (I might have missed corner cases there BTW), or we keep
-assuming that heaps can only ever be created, never destroyed/removed
-(which is basically what the current dma_heap.c logic does, except
-tee_heap.c broke that), and just let dma_heap_find() return dma_heap
-pointers whose lifetime is assumed to be static.
-
-> +}
-> +
-> +/**
-> + * dma_heap_put - drops a reference to a dmabuf heap, potentially freeing it
-> + * @heap: DMA-Heap whose reference count to decrement
-> + */
-> +void dma_heap_put(struct dma_heap *heap)
-> +{
-> +	kref_put(&heap->refcount, dma_heap_release);
-
-nit: I'd go
-
-	if (heap)
-		kref_put(&heap->refcount, dma_heap_release);
-
-so users can call dma_heap_put() on NULL heaps, which usually simplify
-error paths and/or destruction of partially initialized objects.
-
-Regards,
-
-Boris
-
-[1]https://elixir.bootlin.com/linux/v7.0.1/source/fs/char_dev.c#L594
+Acked-by: Nicolas Schier <nsc@kernel.org>
 
