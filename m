@@ -1,297 +1,152 @@
-Return-Path: <linux-doc+bounces-86093-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86095-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WPJnFt9p+2miawMAu9opvQ
-	(envelope-from <linux-doc+bounces-86093-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 18:18:39 +0200
+	id iIe9ADx8+2n0bgMAu9opvQ
+	(envelope-from <linux-doc+bounces-86095-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 19:37:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA9E74DDFDC
-	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 18:18:38 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66D9E4DEE9A
+	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 19:36:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id AE3743003D31
-	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2026 16:18:37 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9670830492B0
+	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2026 17:31:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A4EB41C305;
-	Wed,  6 May 2026 16:18:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1ACB4BC039;
+	Wed,  6 May 2026 17:31:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="GMmi/8Va"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="kUiHFHXK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BN8PR05CU002.outbound.protection.outlook.com (mail-eastus2azon11011064.outbound.protection.outlook.com [52.101.57.64])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5FB43ED107;
-	Wed,  6 May 2026 16:18:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.57.64
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778084313; cv=fail; b=rqJ4NJAOLonu0MAL0qODq5IM6avX0SaUY4VQ4TYnNzrxBcRO4mv+bsPg+Mt+ujZTfLY9kn4GOy3WgwMpAnUZS0RapChpvJ/U/SEFeSbFEnZyrXBn5S6Nq9aHjruZ8ML3wlK5DErPkGXtmfXpupLSAI661uKebOncKYTMHWvaflI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778084313; c=relaxed/simple;
-	bh=ljnkMOdRwccGy5bQD3iYTjNPMcNO8N5d4mDtabXjae4=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=CYwajPwPn3dL/rCOwTbMw+P+FigpPgZv9O8G36s0vLq68yduf6nT4df4V6y7eZU19F/ju99QiMfjJ3UMGQf9zrC9b/eutala0ssVaouuSYvGYs7ryLwSjoi4Vm3z/IEkSh7GFNXQ2jWuXKqABC1Vk0mzNHkmnpogSqu5WWyWuIM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=GMmi/8Va; arc=fail smtp.client-ip=52.101.57.64
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LXWRe8rVo2MdH56vDfxHD2I78i5FwwbMlWMsfQvyuteuFFtnT9B3uvvYk4Xs5q1MNb+OrRypyaZAfJbb2Iks9e+S5XWKMg+Msz/ykA2/kiML2i5NPFdXp2qawjaSjTWvJ9aoYY8SiyJcbeHoUDcFXoriLliV8DTkHf/aD1xQRgnV/VX4GstB1BEz1JYe1UxlnvsGq5A/mIvnzlOkG9REILMTefiErZmj9kTErbEc/n9E61GBNTEjs6rOa2/T9BjUcgC2SOUX9HoHVbX6DiMb8UtbGjz4U1pL4Ps1q+vmSOA/i3pBLtu3zfRy0EkXNN5atGPntVawqDF9gJ4QnVcuJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9C1G/YQbDfk3TDGrvXEUFjA5pOIkcxhBBG/lJQVeH6g=;
- b=rA4RGodTy06SAx6s9f2aYma4Metw04SZWSI0wl1TMRQWY67ZTi8R5G8zJHAWhbmWrHEh3WopXY5qtANXGp+AVuHwKsOcU4BP1q2jwu1M0mLTzs7eTLpj10HDJKCc2qmbAS51xMomQBCu9V1Q9Jg+UsX4ec3z3S3yXFwGipLE6mKfviZrjhwXAIzX0JvJwTYAprXd1qbDWdCH+IP7YOWJvnZjNMTvsWOv0w3Bs5VWSpZcSRavOIIi2nzBU4pI1kLE/FKu1WuiVFeT12lxPnEdex0UBVme7rT12LcSpzXQYIlWYJoNA0mXz72Q1LSvifL6M2hVzYWhvnGgfVMav2I9Tg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9C1G/YQbDfk3TDGrvXEUFjA5pOIkcxhBBG/lJQVeH6g=;
- b=GMmi/8Va7DYoR+krEtgKFxjNl39BzL2BsNLZOVND0FhF8EEY2CxIxFZRMHNgeaHwF60Ilaa22M0UXa2yypLdCl5076L9wZ6xG5sMFzcCytrF4tve9KuN/Q5Kn8pO9dVg3g3QbTvLQO9BVBAZhBBv4YjTRAX/ay/lTkWa1BZI+soYgmOeq0RsJ4I+ObIiKgu/vChq+qyx9vpZ2MFt1ZmHttUQ7iz5CIdu2mrSil4ABSS3BxbLcXVkyBi3SPcve2LUMb9S6lzTJMBUJyeN8oiNLrvSP0fmajY7jxZJ9PmAu/kO6HoQDyy7Syd3KoGq7ObzzdEmyBvwznY87eI6LbEtBw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) by
- CH3PR12MB8725.namprd12.prod.outlook.com (2603:10b6:610:170::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9870.27; Wed, 6 May
- 2026 16:18:19 +0000
-Received: from DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33]) by DS0PR12MB6486.namprd12.prod.outlook.com
- ([fe80::88a9:f314:c95f:8b33%6]) with mapi id 15.20.9891.008; Wed, 6 May 2026
- 16:18:19 +0000
-Message-ID: <871a3194-5960-4e94-b177-6173c49167be@nvidia.com>
-Date: Wed, 6 May 2026 12:18:16 -0400
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rust: maple_tree: implement Send and Sync for
- MapleTree
-To: Boqun Feng <boqun@kernel.org>
-Cc: linux-kernel@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>,
- Gary Guo <gary@garyguo.net>, Bjorn Roy Baron <bjorn3_gh@protonmail.com>,
- Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
- Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
- Danilo Krummrich <dakr@kernel.org>, Dave Airlie <airlied@redhat.com>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
- nova-gpu@lists.linux.dev, Nikola Djukic <ndjukic@nvidia.com>,
- David Airlie <airlied@gmail.com>, Boqun Feng <boqun.feng@gmail.com>,
- John Hubbard <jhubbard@nvidia.com>, Alistair Popple <apopple@nvidia.com>,
- Timur Tabi <ttabi@nvidia.com>, Edwin Peer <epeer@nvidia.com>,
- Alexandre Courbot <acourbot@nvidia.com>, Andrea Righi <arighi@nvidia.com>,
- Andy Ritger <aritger@nvidia.com>, Zhi Wang <zhiw@nvidia.com>,
- Balbir Singh <balbirs@nvidia.com>, Philipp Stanner <phasta@kernel.org>,
- alexeyi@nvidia.com, Eliot Courtney <ecourtney@nvidia.com>,
- joel@joelfernandes.org, linux-doc@vger.kernel.org
-References: <20260506135122.GA1432412@joelbox2>
- <aftiZGt3HQe0Bf_x@tardis.local>
-Content-Language: en-US
-From: Joel Fernandes <joelagnelf@nvidia.com>
-In-Reply-To: <aftiZGt3HQe0Bf_x@tardis.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: IA4P221CA0007.NAMP221.PROD.OUTLOOK.COM
- (2603:10b6:208:559::17) To DS0PR12MB6486.namprd12.prod.outlook.com
- (2603:10b6:8:c5::21)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3E4D4B8DE9;
+	Wed,  6 May 2026 17:31:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778088691; cv=none; b=H7c3lil3JM5KXKioSSZNXo3OKT4iJwHr4XkoSSZgZkKejb7toa5xX/vR2w1pwS8BwK6Mq49X6LCws8VcmzyYUbEHRscHwUs0AWcsguikdnMdrT2oaiYwcJGTZpzK6Y2xyeZOBkORhbNxV/C5XhFqJczg1EBYJXhscAG8R+KhMYI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778088691; c=relaxed/simple;
+	bh=09gOH9z89fiGikL7sFb1HYcEIaMz4M52kOWacbyxoZs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=WFekIQvQ0J/dBT177RJVXLExAzfOUGc0lhvbm5yTmZ6dg0Y8XYF0T7rdn2m7RdLovLNtGwuGuX0wnsJIt4sooash0LPx7AmL8GDI977R5Wv0EeVqOMfw1GkWxKng+TKYC1nb9LTZgzeBsyPSEjyEcVpxtD9bz4dj4cUhtVyIpHo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=kUiHFHXK; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=76vttDvg4y9AZKkRp0beXp2t/fQ+E1/znFnFmENOgVc=; b=kUiHFHXKSlqIAsgv3Kb5ciVeD1
+	uElhnQBj1eOeqT/aU71QAiWY9EmDgq+mbod86oP6lPczCz58GBUyHi5CxRPwuefvnvj9PblcAQKqA
+	ccr9wEyghNynBhFKROY+CKkV5fPZa//NwqyV5cv5O+d0kulK7+ZYCqtCiO7KEhtOsa8meGsEEc2Qo
+	9ZG7KRtjl10Oi9AGNP2qCfHrZG8GcaDCYOkKNpEgyvzLPGg5frMNBJMDAi1319Cnf0ziAk2ECyf7K
+	OG00XZc65LhE/prr9EFdsAIViEEiCZBaUEn2cDQPYubpeK6v5rDhgpjYc0spsROtSgsirSG/KApKe
+	7PS0k6UQ==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wKg5h-00000001fK9-2wTI;
+	Wed, 06 May 2026 17:31:21 +0000
+Message-ID: <14dd9b3a-63ad-4749-ac03-e48be5491dc1@infradead.org>
+Date: Wed, 6 May 2026 10:31:21 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB6486:EE_|CH3PR12MB8725:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9cafef02-74c6-4df2-e36a-08deab8b162f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	VlhWOUlnZlduTJDMJTCRHDCZGKX6M3Rqz73JeciSOEcYtoeRczQaXbUCvvhTLU/49NiCvz/ilgbZw1Yntx9RrgbR80E8Pr9YzSyvu3jzORID/yXq71yNleXArFcJlxKuM/YLPvTBtVlg0rPTimEB7Vf9012d2cp1sBkay+oZZqPmFQXrtf0CX8suv/YJ7/p1CMyXIU60rP5K95w3VF+VxAyp/QWRXP9uCulT7LKT6T3k290eq9cwZuzDgwGKjXmCnVb63ZPkxOXK7jq90H8z3RHAjUnbDYqGJ6VgSjbhK24MzGhpOkSX2uX48A/63muNa4eiEqbF01CXeotUa+/YB73cn0F1psaXbRg4IrjDY2wQ4RI0ECe2u1gUj/l4ZyhKkeTersLbduk/9wujHkZMZ+Yko9VHmCBAXfNdOY3YBYhEtAOCDUANqC89Ervf1bd2q+y/t72IlzgZuDc/roYNJ2WdtaDpo3Lb2x+gZZcOIaARVQQ8RPTccQgvCI7ZeGO1CVE454Y7sgKmF+mAuGeL0w3A61ViwEUe714kIv04ebtP5GdZlDAx+X6tIpsCWedRw79lKZ0nYuF0x5P1yGeVHAGV+gxUKLLx7lZAHPxfoFDn12J0XCd6FdBqp5iDjIUK5fgvRO9gIboD5Shup7I43B0iTF9D8iDvNoM1XeXb7sWlW5lrKX/OLYW2CvR63efkBpEDPN4MORai3yc6VarLgw==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR12MB6486.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?UjRDam9hSmFLL05XaU0ySHJtYWRoUGlkTXJNUmJ5ak1pblZxdjdwZzV4UmVj?=
- =?utf-8?B?UHZCMHoyN050bSt0Wmk4WVdER09yM2NydjR0QU8vZm5jWitYZ3FpNmZxeUNy?=
- =?utf-8?B?UUdoLzhpZXVaVkd5elhKU2dUeTRlUzFBZmZQdVdLUFFFNnczdksvR2tieEVi?=
- =?utf-8?B?UTNuaVh6c0g2OXZ2ckpEZXI2VlJPd2ZRakZsZ0pqZS83MXhqTjlFbzFsNEpC?=
- =?utf-8?B?Zk8zMlNHeUwvc2J2NHZkYXp3OTdWS0p2U2ZqQWczall1VWlFR0V4Q3V0cFJU?=
- =?utf-8?B?VVFsUmZEK1ZvNWt1STlxN2VZS0llY1Z2TnEvYXJBSTB2andjeU9xU0dYSlhT?=
- =?utf-8?B?em5oVU9EWUJrUVhzMnFGZDgwVmJXb2s0K2s2ZjZiRjNQSnB4K1lKQWlyR3F2?=
- =?utf-8?B?dmc5TzdNUmxpdVc0eGY3MFg3ZThkZm4rT256aUdwb3YraWx5MEk0RDRZRlV2?=
- =?utf-8?B?WHk2RjNHTjU5Vi8yS0VWOXpsTTJUcG5QcThPb2RmYUtCck9NbHllUVUrSkg4?=
- =?utf-8?B?d2ZHelhaYlVUQmtFck5jREZtZ3hvUktJSlZyNE9DMWZJMnNZWGJObFpVcERs?=
- =?utf-8?B?U1dOcFY5Y1B2MXlTM1UrL3V2dVBKTWNtOURuSmRDQjBJZjIzOVMyTTgyR2RS?=
- =?utf-8?B?VmU5UWNKeEIrc3p2QzB1R2cvbVVTSnk3cnBFUFExS3pCcDhmSm9DaUdUSkZo?=
- =?utf-8?B?bGNESForZG5FVVVYNFE2T2dVQmh4S1VOTVA5Vkczc29PN1dDL04rUUsydnli?=
- =?utf-8?B?eDFSUGJ6c2tTUDBnOURDM21HM3VyK0IrVEljQ0dZSXdCRERORUxEYlh5dHhC?=
- =?utf-8?B?M3ljNzdoZ2NwMkFIZUs3UnU5WTgyOHZLVys5cU1mRUVKTi85TVdpYXIrSEtq?=
- =?utf-8?B?NVdiaUVBZlJFWDF6ZmJleUVSMHVNQnpkNnBOWHJXMUI1d3MvOUFNM1p6amFF?=
- =?utf-8?B?d1REZGg2bnFiU05FdDExbVJTMjlHYXJYWFY5TXBSME5tT2xzMkRUdWIzRXFB?=
- =?utf-8?B?aVdtZDFldmFPczJ3Um8yMnl5YkxHV0NHeE1FMWJHdHNWMEJGQ0NjZk4zOUhq?=
- =?utf-8?B?eDFGMGtxenEvTU5qanhBUjVEWWY4ZThIRjFSZjNRa3F1YjlMcFJHaExLRTNE?=
- =?utf-8?B?RmFYWjM1NGM0bEkzSkhKQWNvb3NVVG9uMVdUdXJIRVBDSlVQQTNMTk9SVzVw?=
- =?utf-8?B?Y2JYTElNNnZZcUY3dDI5bjVtRHpZcU5JRXNSM2FVaHFTOG1sRmJLRzhvdE9m?=
- =?utf-8?B?bUlyY3FRVW5yWHRXTThBWWlrVk9DangzOEphcys0bFlUditFTG8rYVRCVUxq?=
- =?utf-8?B?ZGU0KysxLy93VEZ0WDdiSk55OEVpYityV1kvZEZBejQ2R3Q4RDZvaDA4MUg3?=
- =?utf-8?B?WjZsUUxNMldCRzhQcS91Vm9VSFNldkFKMlJYSlpxUEFld1F0V2NQRlZvU09M?=
- =?utf-8?B?VEVKWkNPSDRSdnpIM21LcDg2aFdUR1JneW9BeUxLaU1BR1hiVHEwc1NCZ1Ba?=
- =?utf-8?B?TFBhc1k3TlJFUnlsUXpIMnhHZmtBZFQva09JblpYNU1Ua01DemtmbGZudDZi?=
- =?utf-8?B?d2oyQllycUE3UUhSQmQxcHFoNHJXclRwMER3MHl6WjB3a2FYZ0s5Y2lFUW9q?=
- =?utf-8?B?dkJ3SFF2UCtUZDRhU0VJNm1tb3hKNi96V1F0TDc3RlRSODJxWXB6Tmwwbm0v?=
- =?utf-8?B?ZmtvWkpzUlBCN3Y2ZXFpRFgvU3J4ZU9TN0hZb1dPQ3BaVDhtTGkrWjNJaE5N?=
- =?utf-8?B?ZlFHUkZueXVxdUtQTnpkRW9ESmpQL2xGS1FJQnl4WVo2S3JDUE0vRDhjcVBv?=
- =?utf-8?B?S1p6YVZWempaaDJrRFpFTEEvdWpTaWNlQVZUU29iTzBqQm9UamZ5a0hFbHQx?=
- =?utf-8?B?VlE2MURuMlg3YllmSlFFb3JNSmFvTFEwKzRsN3BXemd4VXQ4T2NnaDd2ZlFM?=
- =?utf-8?B?R21teUZhdzZZUTIyTHN2T1ZnbVQwa0xNYkdTYVJCQXlTYkdtVVFVTVZ5VHJI?=
- =?utf-8?B?dEdybWo3WGNpYjV1alZ4R2h1QzJaZVVRY1RIdlhVN3ZLS1JrN3lSMFBCaWg3?=
- =?utf-8?B?SXBCTGRGMzZnR3BSMjdLZHdoWDd2ZE9QaEtENGZGdTQ2ZnAyUWxrVlA5ZGwv?=
- =?utf-8?B?RlgyTDhrMmhmc2NxUHA5eDY1b2N5bDZYS3d6dFFiSThLcEJqYXpyZ01FNTVI?=
- =?utf-8?B?TmVxV3VVTHJ1aExYcU14b1l1eExyZHI2WHlkR0dUTWpPMlB6OTFVUWx4Rkgr?=
- =?utf-8?B?Z2d2UTNTU3lFZVJmQXJTM3NmWi90RXNmb3JHTFdCTk9rbFpLcUNyVkNKa3dt?=
- =?utf-8?B?OTV2OUp3SndHb3VuK1Y0YTZibnRJWHMwTlQ0bUUyMy92ZytrNUpiUT09?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9cafef02-74c6-4df2-e36a-08deab8b162f
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB6486.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2026 16:18:19.5894
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cgI/rp1vS/RdqG3Fq75pVy4UyD/SaK6x05hv29K8ARsgTDWZpw0dU1oKyeW/34p3kRINJf/6GgE8GAME3bcApw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8725
-X-Rspamd-Queue-Id: EA9E74DDFDC
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Documentation: fix typo and formattting in
+ security/credentials.rst
+To: Mayank Gite <drapl0n@protonmail.com>, Paul Moore <paul@paul-moore.com>
+Cc: Serge Hallyn <sergeh@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260506054914.162806-1-drapl0n@protonmail.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260506054914.162806-1-drapl0n@protonmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 66D9E4DEE9A
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[cv is fail on i=2];
-	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86093-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,redhat.com,collabora.com,lists.freedesktop.org,lists.linux.dev,nvidia.com,gmail.com,joelfernandes.org];
+	TAGGED_FROM(0.00)[bounces-86095-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_TO(0.00)[protonmail.com,paul-moore.com];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joelagnelf@nvidia.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[Nvidia.com:+];
-	NEURAL_HAM(-0.00)[-0.998];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[Nvidia.com:dkim,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,nvidia.com:mid,nvidia.com:email]
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:dkim,infradead.org:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,protonmail.com:email]
 
+Hi--
 
-
-On 5/6/2026 11:46 AM, Boqun Feng wrote:
-> On Wed, May 06, 2026 at 09:51:22AM -0400, Joel Fernandes wrote:
->> The C maple_tree struct contains a *mut c_void, which prevents Rust from
->> auto-deriving Send/Sync. Following is an example error message when using
->> MapleTree in nova-core's Vmm.
->>
->> This propagates up through MapleTreeAlloc to Vmm, BarUser, Gpu, and NovaCore,
->> causing NovaCore to fail the Send bound required by pci::Driver:
->>
->>   error[E0277]: `*mut c_void` cannot be sent between threads safely
->>       --> drivers/gpu/nova-core/driver.rs:77:22
->>        |
->>   77   | impl pci::Driver for NovaCore {
->>        |                      ^^^^^^^^ `*mut c_void` cannot be sent between threads safely
->>        |
->>        = help: within `MapleTreeAlloc<()>`, the trait `Send` is not implemented for `*mut c_void`
->>   note: required because it appears within the type `kernel::bindings::maple_tree`
->>   note: required because it appears within the type `Opaque<kernel::bindings::maple_tree>`
->>   note: required because it appears within the type `MapleTree<()>`
->>   note: required because it appears within the type `MapleTreeAlloc<()>`
->>        = note: required for `Box<MapleTreeAlloc<()>, Kmalloc>` to implement `Send`
->>   note: required because it appears within the type `core::pin::Pin<Box<MapleTreeAlloc<()>, Kmalloc>>`
->>   note: required because it appears within the type `Vmm`
->>   note: required because it appears within the type `BarUser`
->>   note: required because it appears within the type `Gpu`
->>   note: required because it appears within the type `NovaCore`
->>   note: required by a bound in `kernel::pci::Driver`
->>       --> rust/kernel/pci.rs:294:19
->>
->> Implement Send and Sync for MapleTree. The tree contains no thread-local
->> state, and all shared access goes through the internal ma_lock spinlock.
->>
->> Signed-off-by: Joel Fernandes <joelagnelf@nvidia.com>
->> ---
->> RFC->v2: Just adjusted a few comments as suggested by Gary.
->>
->> Sending this separately as discussed in the nova mm patch series that needs it:
->> https://lore.kernel.org/all/252a4eef-f4f4-4edf-8154-06cae4ad8518@nvidia.com/
->>
->>  rust/kernel/maple_tree.rs | 29 +++++++++++++++++++++++------
->>  1 file changed, 23 insertions(+), 6 deletions(-)
->>
->> diff --git a/rust/kernel/maple_tree.rs b/rust/kernel/maple_tree.rs
->> index 265d6396a78a..2400c905270d 100644
->> --- a/rust/kernel/maple_tree.rs
->> +++ b/rust/kernel/maple_tree.rs
->> @@ -16,7 +16,11 @@
->>      alloc::Flags,
->>      error::to_result,
->>      prelude::*,
->> -    types::{ForeignOwnable, Opaque},
->> +    types::{
->> +        ForeignOwnable,
->> +        NotThreadSafe,
->> +        Opaque, //
->> +    },
->>  };
->>  
->>  /// A maple tree optimized for storing non-overlapping ranges.
->> @@ -240,7 +244,10 @@ pub fn lock(&self) -> MapleGuard<'_, T> {
->>          unsafe { bindings::spin_lock(self.ma_lock()) };
->>  
->>          // INVARIANT: We just took the spinlock.
->> -        MapleGuard(self)
->> +        MapleGuard {
->> +            tree: self,
->> +            _not_send: NotThreadSafe,
->> +        }
->>      }
->>  
->>      #[inline]
->> @@ -302,19 +309,29 @@ fn drop(mut self: Pin<&mut Self>) {
->>      }
->>  }
->>  
->> +// SAFETY: `MapleTree<T>` is `Send` if `T` is `Send` because `MapleTree` owns its elements.
->> +unsafe impl<T: ForeignOwnable + Send> Send for MapleTree<T> {}
->> +// SAFETY: `&MapleTree<T>` never hands out `&T`; all entry access is serialized
->> +// by `ma_lock` or `&mut Guard`, so `T: Send` suffices (`T: Sync` not required).
->> +unsafe impl<T: ForeignOwnable + Send> Sync for MapleTree<T> {}
+On 5/5/26 10:49 PM, Mayank Gite wrote:
+> - Fixes a typo in "Keys and keyrings" section. Replaces "keying" with
+>   "keyring".
+> - Updates formatting of keyring types.
 > 
-> I think you missed this:
-> 
-> 	https://lore.kernel.org/rust-for-linux/aepRx2jgIKmoRp-r@tardis.local/
-> 
-> ;-)
+> Signed-off-by: Mayank Gite <drapl0n@protonmail.com>
 
-Oops, sorry about that.
+Something (protonmail?) split some lines of your patch so that it
+cannot be applied:
 
-> 
-> But on a second thought, should that (we have methods of `&MapleTree<T>`
-> -> `&T`) happen, we could always guard those methods with T: Sync. Maybe
-> it's worth to keep a note on that but, anyway
-> 
-> Reviewed-by: Boqun Feng <boqun@kernel.org>
-Ok, so I will leave as it is then, thanks for the tag!
+patch: **** malformed patch at line 24: tials:
 
---
-Joel Fernandes
+See https://lore.kernel.org/linux-doc/20260506054914.162806-1-drapl0n@protonmail.com/raw
+
+You can see if Documentation/process/email-clients.rst can help you any,
+or just do an web search for using Proton mail to send plain text patches,
+but using Proton might be difficult (IDK).
+
+> ---
+>  Documentation/security/credentials.rst | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/Documentation/security/credentials.rst b/Documentation/security/credentials.rst
+> index d0191c8b8060..4996838491b1 100644
+> --- a/Documentation/security/credentials.rst
+> +++ b/Documentation/security/credentials.rst
+> @@ -189,9 +189,9 @@ The Linux kernel supports the following types of credentials:
+>       be searched for the desired key.  Each process may subscribe to a number
+>       of keyrings:
+>  
+> -	Per-thread keying
+> -	Per-process keyring
+> -	Per-session keyring
+> +	- Per-thread keyring
+> +	- Per-process keyring
+> +	- Per-session keyring
+>  
+>       When a process accesses a key, if not already present, it will normally be
+>       cached on one of these keyrings for future accesses to find.
+
+The change itself looks good - if you can find a good way to email it.
+
+thanks.
+-- 
+~Randy
 
 
