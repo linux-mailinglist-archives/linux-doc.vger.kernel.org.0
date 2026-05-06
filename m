@@ -1,57 +1,64 @@
-Return-Path: <linux-doc+bounces-86011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86012-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OKPIM53W+mkRTQMAu9opvQ
-	(envelope-from <linux-doc+bounces-86011-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 07:50:21 +0200
+	id OI2AD/Ld+mk2TgMAu9opvQ
+	(envelope-from <linux-doc+bounces-86012-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 08:21:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 501164D654F
-	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 07:50:21 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA59E4D6897
+	for <lists+linux-doc@lfdr.de>; Wed, 06 May 2026 08:21:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D9CB230151CC
-	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2026 05:49:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 9EEAB302F6AA
+	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2026 06:21:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83E531E7C18;
-	Wed,  6 May 2026 05:49:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DF09301460;
+	Wed,  6 May 2026 06:21:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="Yp1YYKIk"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Osasct+i"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-07.mail-europe.com (mail-07.mail-europe.com [188.165.51.139])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D86D32E2850
-	for <linux-doc@vger.kernel.org>; Wed,  6 May 2026 05:49:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.165.51.139
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A671219FC;
+	Wed,  6 May 2026 06:21:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778046576; cv=none; b=PK8pTETmLTIfN8fXzAHUGWMuYZ0S6jBiniysPBMEJqPXhPhmZW0oTUWTuA7dhRy52BDQyzoCLpQoPDGCeoDQJfHKWBH6+OBBP6WdQEtVAcizglzCqnFoMgdYWFI0cWOsvNWTPOCcprKXGnBYuqn/vA27i9Z9xRJcfa7SWk7/45c=
+	t=1778048493; cv=none; b=gEb00pBBH9e8qiOuCxhczIWUPpbUCYBCOAtIWxAmmBzaDigqzXH9WW0H8qiEeF0MhaBge+Apma9g7iLj3l/Hq3VOVQP+F9YHYwRMLd4kp9/Phhqh2H620aO74u7p5DWFLuLXXUXWRfnkJm1+yoknhtjsJz0x6icFyOsFxiJ9/V4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778046576; c=relaxed/simple;
-	bh=V63HCRFuyfYgt+cbtqqWh5Ry5LYRNQC5sAiPc4io1AA=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=PB8J9cBsv2ImlT39YB0HXCyHvh/a+M33H4PwrxmcRjCvGrgW8kwwXduc9BDs5t7io7cYmUu9qgud6MgZ77GD/f8IcXGlIjt+9xCcI87ZOPxFbvvgUzVpZ/Ag1sMAT1EB3/Nu99SIAdpyqwW+p6GeoHtChMELA0tOevG73jTp1T4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com; spf=pass smtp.mailfrom=protonmail.com; dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com header.b=Yp1YYKIk; arc=none smtp.client-ip=188.165.51.139
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=protonmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1778046564; x=1778305764;
-	bh=KpcgUtDn3EXTG1BBcztlZzlGN9ycWgoh9qrRkBRq/p4=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=Yp1YYKIkP1entrrA514OkrKPwHtv8aoy/9HiyP7QU+871t63DbSEYnJ0v5bIlFFG6
-	 LRD8M4CWo+DdUxV1hPgxFBX2mFG4YBGF86rKDV2c48Hp+fGoCtLZsQmqe2XfiEQcbe
-	 ETUAXI4Mn1wLr64/0FI8lhLYK38Xv3Uzr6CsiNZaw6En9p+l+j4XdKBm5rfvJ01CQB
-	 YOnBaPB8UuWlEAXn1+nRjqNpEY5osV194W6soJuBSmZXM058679XP+9nIgSog67UaW
-	 jTYWv8Fmgvv8R77j2qFMvRHRlw9suOkc5mBiuEoN7KVE025Fs5Iih8AW8rcQVnZ4as
-	 A3VA9endSPhQw==
-Date: Wed, 06 May 2026 05:49:18 +0000
-To: Paul Moore <paul@paul-moore.com>
-From: Mayank Gite <drapl0n@protonmail.com>
-Cc: Mayank Gite <drapl0n@protonmail.com>, Serge Hallyn <sergeh@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation: fix typo and formattting in security/credentials.rst
-Message-ID: <20260506054914.162806-1-drapl0n@protonmail.com>
-Feedback-ID: 27639855:user:proton
-X-Pm-Message-ID: 7ea98b8c116dfdecef9204ec1d3c723a46d2eb38
+	s=arc-20240116; t=1778048493; c=relaxed/simple;
+	bh=Xs/yI0pSytldTKnrEohsfqL9A5TsFmHPW8Vq16m8ijs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Wnz0IdatCW+wjlRledBmg0NTdm6CYc/tUT5GhCk4Caya4uxBa+Hh2Hgm9djI1LiDl7kq5rbWZghhffGjU6WRHZlQwfN+iC8Y6tPpSkSwWYDpPuVhaxRSHlduXz3+vFVCyeJK0CVGL1AtKGsjyulRWevasqto9uSslrziVyioSVs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Osasct+i; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B35ABC2BCB8;
+	Wed,  6 May 2026 06:21:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778048492;
+	bh=Xs/yI0pSytldTKnrEohsfqL9A5TsFmHPW8Vq16m8ijs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Osasct+iooooZeYc4RDvnTRPBva+qyWo2U8LdstYr3cPlmpySczSlCXp8ItTE/e/T
+	 eGIeS4h50xiz2asWImamwRdSh9nTcmSkvm1dD9ckafdXIPtIntCLRLeSQPIVqSVZjj
+	 g1VgOCmJyNAr00f4HM2n5yf1Nm9sTFE9JqJDTsogzF6TA9Tf6ibB3I1vSBEL958HZw
+	 mJ8Mp/+SKHAQzSRWXRqkM9g9y1EXcmBBBMUrgXIlETnu5J2HaeZYrTPVDDzRcfRQ5w
+	 uLNKJSBolXJ8mwJBQ+zOPiEEHsyu4scgo+8z3p3S+y4BLlG+d0zCHdCDU17e3duLqe
+	 XbS0n+W7tIRKw==
+Date: Wed, 6 May 2026 14:21:28 +0800
+From: Nathan Chancellor <nathan@kernel.org>
+To: Daniel Pereira <danielmaraboo@gmail.com>
+Cc: Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
+	linux-kbuild@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 01/14] kbuild: Bump minimum version of LLVM for building
+ the kernel to 17.0.1
+Message-ID: <20260506062128.GA322298@ax162>
+References: <20260428-bump-minimum-supported-llvm-version-to-17-v1-0-81d9b2e8ee75@kernel.org>
+ <20260428-bump-minimum-supported-llvm-version-to-17-v1-1-81d9b2e8ee75@kernel.org>
+ <afoMRMnSQUwk1eaN@levanger>
+ <CAMAsx6cPfPVDBpL6wwHeqzWLqPwQB15pKgvgVu-Ni3Sjjkdf4w@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,70 +66,65 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 501164D654F
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMAsx6cPfPVDBpL6wwHeqzWLqPwQB15pKgvgVu-Ni3Sjjkdf4w@mail.gmail.com>
+X-Rspamd-Queue-Id: DA59E4D6897
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[protonmail.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[protonmail.com:s=protonmail3];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86011-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[protonmail.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_TO(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-86012-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[google.com,gmail.com,vger.kernel.org,lists.linux.dev,lwn.net,linuxfoundation.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[protonmail.com];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[drapl0n@protonmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[protonmail.com:+];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[nathan@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,lkml];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,protonmail.com:email,protonmail.com:dkim,protonmail.com:mid]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 
-- Fixes a typo in "Keys and keyrings" section. Replaces "keying" with
-  "keyring".
-- Updates formatting of keyring types.
+Hi Daniel,
 
-Signed-off-by: Mayank Gite <drapl0n@protonmail.com>
----
- Documentation/security/credentials.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Tue, May 05, 2026 at 03:26:40PM -0300, Daniel Pereira wrote:
+> On Tue, May 5, 2026 at 1:11 PM Nicolas Schier <nsc@kernel.org> wrote:
+> >
+> >> FTR: The translations
+> >>Documentation/translations/{it\_IT,pt\_BR}/process/changes.rst become now
+> >>even more outdated.
+> >
+> >>Acked-by: Nicolas Schier <nsc@kernel.org>
+> >
+> 
+> Hi Nicolas,
+> 
+> Just confirming that I will make the necessary corrections to the
+> changes.rst Portuguese translation (pt\_BR) in the next few days.
 
-diff --git a/Documentation/security/credentials.rst b/Documentation/securit=
-y/credentials.rst
-index d0191c8b8060..4996838491b1 100644
---- a/Documentation/security/credentials.rst
-+++ b/Documentation/security/credentials.rst
-@@ -189,9 +189,9 @@ The Linux kernel supports the following types of creden=
-tials:
-      be searched for the desired key.  Each process may subscribe to a num=
-ber
-      of keyrings:
-=20
--=09Per-thread keying
--=09Per-process keyring
--=09Per-session keyring
-+=09- Per-thread keyring
-+=09- Per-process keyring
-+=09- Per-session keyring
-=20
-      When a process accesses a key, if not already present, it will normal=
-ly be
-      cached on one of these keyrings for future accesses to find.
---=20
-2.53.0
+Thanks but I think I can just update the version number in this patch
+when I send v2, as the update should happen atomically. If you patch it
+separately, it might not be true depending on when my change is merged.
 
+-- 
+Cheers,
+Nathan
 
