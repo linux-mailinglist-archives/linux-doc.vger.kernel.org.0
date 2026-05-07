@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-86248-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86250-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yE+uOW/D/GnSTAAAu9opvQ
-	(envelope-from <linux-doc+bounces-86248-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:53:03 +0200
+	id 8EFWDr7C/GnSTAAAu9opvQ
+	(envelope-from <linux-doc+bounces-86250-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:50:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 737584EC7DA
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:53:03 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id D0ED54EC71A
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:50:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D13193023A60
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 16:48:44 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id A1E72302948D
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 16:48:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 531AD47DF8E;
-	Thu,  7 May 2026 16:47:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2870247ECC1;
+	Thu,  7 May 2026 16:47:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="UMsCaVDw"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Pc9jQclB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96D8F47DD79
-	for <linux-doc@vger.kernel.org>; Thu,  7 May 2026 16:47:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9394D4657E7;
+	Thu,  7 May 2026 16:47:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778172451; cv=none; b=SJy7MjLhl2/jJk7TDqzy82xNd72d8Xi0iyR9R0NwZ0jfhePUkePfxfzuYqaTpfneCdhKbWJHE1QBSY9/AGh9cUQba9BKNwx7ZGjp6NITEEIvM2bznb0JHUj/jvvhR2TQea3mQ0wCtnq5Rkpb5BZpsURdPsxwwCt7eknfmBlx73c=
+	t=1778172453; cv=none; b=MVAKB6mMBKtaKdUVhB70X1OS+bV5aUTix1XvpLyJdsugwGpMqJv8odvRlqr9QZdhFvb9LoB4NV5MaivaLJS48qJQZP074De8sa3OFN9kQORBuzRgIgeHJoV0+JULwDVinP0/VEvH4sSBTGWZHIgp7nNF4c0KyzXVRyEwZYloeuY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778172451; c=relaxed/simple;
-	bh=aABxMvuk2tviy9bwy8aq/vMdrVg90jKTbnFHsAuK3ek=;
+	s=arc-20240116; t=1778172453; c=relaxed/simple;
+	bh=e2cq/undjZq/vC72DJtcYS3u50cGNet/laObIOtB7LI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SWY3W+blAYXdq6OP88YjF/F7s5IYOezHAvVnvYrSoxGnkKtx4jWgMkAGVV7eX1dmxcSKPWPKidNCvJhXcFR5kzpnfIZCLOXOxmTIrwHlIIZLAQw1DRrlMS7nTD4yWDDA5QoKqfm8fuS91KsdQA0IBqNBW6zE8/urm3VadLtqruQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=UMsCaVDw; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=J6kMVCSuBJnQoW5kvvMpyuPLKCEyEMb2GBoKnRGi0UZZdzZFPH13zWwYoqlFh0DMfCMueUmD70dI8reucm0G1s2QPK+CrOA3BMkYtwzNyQSswqxks9wXNjLi6TEJ4wiM6O+v3dc53G/ysfdvCkX4TlT+k5jJCNzl+Wg2JxWChl0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Pc9jQclB; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 58DCD4E42C13;
-	Thu,  7 May 2026 16:47:28 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 32C6B1A355C;
+	Thu,  7 May 2026 16:47:30 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 2E160605CF;
-	Thu,  7 May 2026 16:47:28 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id F1F5C108194A8;
-	Thu,  7 May 2026 18:47:25 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 0804E605CF;
+	Thu,  7 May 2026 16:47:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A91E9108194E2;
+	Thu,  7 May 2026 18:47:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1778172447; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1778172449; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=kNbglLjC+bOzY9rOWqf4+Q3lE3O2aed0iVJ3L4VP1Nw=;
-	b=UMsCaVDwMQtN/DaDZ2MFaW+tI2Cy2g/Cb8FDlSTFu133pu3b81u+6tV17yLWqlv4Iiqbxe
-	appmFwE1NtCZXHQnSAtZ9BTKIHg/BHLvCmLVhnHV67whqK3lCzha+KnuZ1kFZauSdcBjE8
-	vDtaWbT/PBqreK/81cS1OcsiVBVySSeKHp+CKnbtuzQHCGph/nSy9Wa3LYAWogVTk41NBN
-	nKkh9GXgwpEKAnW8nGF40A8fv8Q9wDkmzrFIEmfCi9IxYJ820vQoS0/HlGJ2M1WuevDVBx
-	Bqy3aAca89WHdKZov7yD/zb83XfD9OYqVPUx14wEIOY4TuJP+cZkEJI+KrHf9g==
+	bh=iwGbTupe2Sv2/8khMKd3KFO4mUilPJw1cS8ysgUxELs=;
+	b=Pc9jQclBEMOBF8wSMbUXqJ55l5XJxfEockbAPu9x8qZTshD1DUeIZtJzNjzr/lxyJEQ2dg
+	R0otcm5rS4+K0GGS6HKBmnOWgM52V07kzidzySRu5FuzHYecVXZPZ3hu5iQQhkRhTf1ULx
+	A3lnBXzEuQp4qU2KswjeBUXmYyS1kZ+00vUjkGuhV71qUltsEIAFp2pivENlHq49fHsi0u
+	acrN75MUOrzVhp62hwMZZRUInFdVeMx9H8DO1J9/oZn7aQQt0PvuzHffsl34BwSztuVokF
+	qXBIBecSIwVyjQEPdjxoD2LSEziyTnpikMja/EA3YbP5fvHSDn3pXVd5XG3aiA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 07 May 2026 18:46:59 +0200
-Subject: [PATCH v5 18/28] mtd: spi-nor: debugfs: Add locking support
+Date: Thu, 07 May 2026 18:47:00 +0200
+Subject: [PATCH v5 19/28] mtd: spi-nor: debugfs: Add a locked sectors map
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,7 +62,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-18-93453e1a9597@bootlin.com>
+Message-Id: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-19-93453e1a9597@bootlin.com>
 References: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
 In-Reply-To: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
 To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
@@ -77,19 +77,19 @@ Cc: Sean Anderson <sean.anderson@linux.dev>,
  Miquel Raynal <miquel.raynal@bootlin.com>
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
-X-Rspamd-Queue-Id: 737584EC7DA
+X-Rspamd-Queue-Id: D0ED54EC71A
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-86248-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86250-lists,linux-doc=lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[bootlin.com:+];
@@ -99,7 +99,7 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
@@ -107,239 +107,98 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-The ioctl output may be counter intuitive in some cases. Asking for a
-"locked status" over a region that is only partially locked will return
-"unlocked" whereas in practice maybe the biggest part is actually
-locked.
+In order to get a very clear view of the sectors being locked, besides
+the `params` output giving the ranges, we may want to see a proper map
+of the sectors and for each of them, their status. Depending on the use
+case, this map may be easier to parse by humans and gives a more acurate
+feeling of the situation. At least myself, for the few locking-related
+developments I recently went through, I found it very useful to get a
+clearer mental model of what was locked/unlocked.
 
-Knowing what is the real software locking state through debugfs would be
-very convenient for development/debugging purposes, hence this proposal
-for adding an extra block at the end of the file: a "locked sectors"
-array which lists every section, if it is locked or not, showing both
-the address ranges and the sizes in numbers of "lock sectors" (which on
-small density devices is typically different than erase blocks).
+Here is an example of output:
 
-Here is an example of output, what is after the "sector map" is new.
+$ cat /sys/kernel/debug/spi-nor/spi0.0/locked-sectors-map
+Locked sectors map (x: locked, .: unlocked, unit: 64kiB)
+ 0x00000000 (#    0): ................ ................ ................ ................
+ 0x00400000 (#   64): ................ ................ ................ ................
+ 0x00800000 (#  128): ................ ................ ................ ................
+ 0x00c00000 (#  192): ................ ................ ................ ................
+ 0x01000000 (#  256): ................ ................ ................ ................
+ 0x01400000 (#  320): ................ ................ ................ ................
+ 0x01800000 (#  384): ................ ................ ................ ................
+ 0x01c00000 (#  448): ................ ................ ................ ................
+ 0x02000000 (#  512): ................ ................ ................ ................
+ 0x02400000 (#  576): ................ ................ ................ ................
+ 0x02800000 (#  640): ................ ................ ................ ................
+ 0x02c00000 (#  704): ................ ................ ................ ................
+ 0x03000000 (#  768): ................ ................ ................ ................
+ 0x03400000 (#  832): ................ ................ ................ ................
+ 0x03800000 (#  896): ................ ................ ................ ................
+ 0x03c00000 (#  960): ................ ................ ................ ..............xx
 
-$ cat /sys/kernel/debug/spi-nor/spi0.0/params
-name		(null)
-id		ef a0 20 00 00 00
-size		64.0 MiB
-write size	1
-page size	256
-address nbytes	4
-flags		HAS_SR_TB | 4B_OPCODES | HAS_4BAIT | HAS_LOCK | HAS_16BIT_SR | HAS_SR_TB_BIT6 | HAS_4BIT_BP | SOFT_RESET | NO_WP
-
-opcodes
- read		0xec
-  dummy cycles	6
- erase		0xdc
- program	0x34
- 8D extension	none
-
-protocols
- read		1S-4S-4S
- write		1S-1S-4S
- register	1S-1S-1S
-
-erase commands
- 21 (4.00 KiB) [1]
- dc (64.0 KiB) [3]
- c7 (64.0 MiB)
-
-sector map
- region (in hex)   | erase mask | overlaid
- ------------------+------------+---------
- 00000000-03ffffff |     [   3] | no
-
-locked sectors
- region (in hex)   | status   | #sectors
- ------------------+----------+---------
- 00000000-03ffffff | unlocked | 1024
+The output is wrapped at 64 sectors, spaces every 16 sectors are
+improving the readability, every line starts by the first sector
+offset (hex) and number (decimal).
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
-Here are below more examples of output with various situations. The full
-output of the "params" content has been manually removed to only show
-what has been added and how it behaves.
+ drivers/mtd/spi-nor/debugfs.c | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-$ flash_lock -l /dev/mtd0 0x3f00000 16
-$ cat /sys/kernel/debug/spi-nor/spi0.0/params
-locked sectors
- region (in hex)   | status   | #sectors
- ------------------+----------+---------
- 00000000-03efffff | unlocked | 1008
- 03f00000-03ffffff |   locked | 16
-$
-$ flash_lock -u /dev/mtd0 0x3f00000 8
-$ cat /sys/kernel/debug/spi-nor/spi0.0/params
-locked sectors
- region (in hex)   | status   | #sectors
- ------------------+----------+---------
- 00000000-03f7ffff | unlocked | 1016
- 03f80000-03ffffff |   locked | 8
-$
-$ flash_lock -u /dev/mtd0
-$ cat /sys/kernel/debug/spi-nor/spi0.0/params
-locked sectors
- region (in hex)   | status   | #sectors
- ------------------+----------+---------
- 00000000-03ffffff | unlocked | 1024
-$
-$ flash_lock -l /dev/mtd0
-$ cat /sys/kernel/debug/spi-nor/spi0.0/params
-locked sectors
- region (in hex)   | status   | #sectors
- ------------------+----------+---------
- 00000000-03ffffff |   locked | 1024
-$
-$ flash_lock -u /dev/mtd0 0x20000 1022
-$ cat /sys/kernel/debug/spi-nor/spi0.0/params
-locked sectors
- region (in hex)   | status   | #sectors
- ------------------+----------+---------
- 00000000-0001ffff |   locked | 2
- 00020000-03ffffff | unlocked | 1022
----
- drivers/mtd/spi-nor/core.h    |  8 ++++++++
- drivers/mtd/spi-nor/debugfs.c | 27 +++++++++++++++++++++++++++
- drivers/mtd/spi-nor/swp.c     | 13 +++++++++----
- 3 files changed, 44 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/mtd/spi-nor/core.h b/drivers/mtd/spi-nor/core.h
-index 16bf6190e55a..552e734c7107 100644
---- a/drivers/mtd/spi-nor/core.h
-+++ b/drivers/mtd/spi-nor/core.h
-@@ -287,6 +287,9 @@ struct spi_nor_erase_map {
-  *		false otherwise. This feeback may be misleading because users
-  *		may get an "unlocked" status even though a subpart of the region
-  *		is effectively locked.
-+ *
-+ * If in doubt during development, check-out the debugfs output which tries to
-+ * be more user friendly.
-  */
- struct spi_nor_locking_ops {
- 	int (*lock)(struct spi_nor *nor, loff_t ofs, u64 len);
-@@ -678,6 +681,7 @@ int spi_nor_post_bfpt_fixups(struct spi_nor *nor,
- 			     const struct sfdp_bfpt *bfpt);
- 
- void spi_nor_init_default_locking_ops(struct spi_nor *nor);
-+bool spi_nor_has_default_locking_ops(struct spi_nor *nor);
- void spi_nor_try_unlock_all(struct spi_nor *nor);
- void spi_nor_cache_sr_lock_bits(struct spi_nor *nor, u8 *sr);
- void spi_nor_set_mtd_locking_ops(struct spi_nor *nor);
-@@ -712,6 +716,10 @@ static inline bool spi_nor_needs_sfdp(const struct spi_nor *nor)
- 	return !nor->info->size;
- }
- 
-+u64 spi_nor_get_min_prot_length_sr(struct spi_nor *nor);
-+void spi_nor_get_locked_range_sr(struct spi_nor *nor, const u8 *sr, loff_t *ofs, u64 *len);
-+bool spi_nor_is_locked_sr(struct spi_nor *nor, loff_t ofs, u64 len, const u8 *sr);
-+
- #ifdef CONFIG_DEBUG_FS
- void spi_nor_debugfs_register(struct spi_nor *nor);
- void spi_nor_debugfs_shutdown(void);
 diff --git a/drivers/mtd/spi-nor/debugfs.c b/drivers/mtd/spi-nor/debugfs.c
-index d0191eb9f879..36ec35d6b2dc 100644
+index 36ec35d6b2dc..a07e879bfa25 100644
 --- a/drivers/mtd/spi-nor/debugfs.c
 +++ b/drivers/mtd/spi-nor/debugfs.c
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
- 
- #include <linux/debugfs.h>
-+#include <linux/math64.h>
- #include <linux/mtd/spi-nor.h>
- #include <linux/spi/spi.h>
- #include <linux/spi/spi-mem.h>
-@@ -77,10 +78,12 @@ static void spi_nor_print_flags(struct seq_file *s, unsigned long flags,
- static int spi_nor_params_show(struct seq_file *s, void *data)
- {
- 	struct spi_nor *nor = s->private;
-+	unsigned int min_prot_len = spi_nor_get_min_prot_length_sr(nor);
- 	struct spi_nor_flash_parameter *params = nor->params;
- 	struct spi_nor_erase_map *erase_map = &params->erase_map;
- 	struct spi_nor_erase_region *region = erase_map->regions;
- 	const struct flash_info *info = nor->info;
-+	loff_t lock_start, lock_length;
- 	char buf[16], *str;
- 	unsigned int i;
- 
-@@ -159,6 +162,30 @@ static int spi_nor_params_show(struct seq_file *s, void *data)
- 			   region[i].overlaid ? "yes" : "no");
- 	}
- 
-+	if (!spi_nor_has_default_locking_ops(nor))
-+		return 0;
-+
-+	seq_puts(s, "\nlocked sectors\n");
-+	seq_puts(s, " region (in hex)   | status   | #sectors\n");
-+	seq_puts(s, " ------------------+----------+---------\n");
-+
-+	spi_nor_get_locked_range_sr(nor, nor->dfs_sr_cache, &lock_start, &lock_length);
-+	if (!lock_length || lock_length == params->size) {
-+		seq_printf(s, " %08llx-%08llx | %s | %llu\n", 0ULL, params->size - 1,
-+			   lock_length ? "  locked" : "unlocked",
-+			   div_u64(params->size, min_prot_len));
-+	} else if (!lock_start) {
-+		seq_printf(s, " %08llx-%08llx | %s | %llu\n", 0ULL, lock_length - 1,
-+			   "  locked", div_u64(lock_length, min_prot_len));
-+		seq_printf(s, " %08llx-%08llx | %s | %llu\n", lock_length, params->size - 1,
-+			   "unlocked", div_u64(params->size - lock_length, min_prot_len));
-+	} else {
-+		seq_printf(s, " %08llx-%08llx | %s | %llu\n", 0ULL, lock_start - 1,
-+			   "unlocked", div_u64(lock_start, min_prot_len));
-+		seq_printf(s, " %08llx-%08llx | %s | %llu\n", lock_start, params->size - 1,
-+			   "  locked", div_u64(lock_length, min_prot_len));
-+	}
-+
- 	return 0;
+@@ -190,6 +190,40 @@ static int spi_nor_params_show(struct seq_file *s, void *data)
  }
  DEFINE_SHOW_ATTRIBUTE(spi_nor_params);
-diff --git a/drivers/mtd/spi-nor/swp.c b/drivers/mtd/spi-nor/swp.c
-index 2455f1f6fdf1..5d6c3afa36e3 100644
---- a/drivers/mtd/spi-nor/swp.c
-+++ b/drivers/mtd/spi-nor/swp.c
-@@ -34,7 +34,7 @@ static u8 spi_nor_get_sr_tb_mask(struct spi_nor *nor)
- 		return 0;
- }
  
--static u64 spi_nor_get_min_prot_length_sr(struct spi_nor *nor)
-+u64 spi_nor_get_min_prot_length_sr(struct spi_nor *nor)
- {
- 	unsigned int bp_slots, bp_slots_needed;
- 	/*
-@@ -55,8 +55,8 @@ static u64 spi_nor_get_min_prot_length_sr(struct spi_nor *nor)
- 		return sector_size;
- }
- 
--static void spi_nor_get_locked_range_sr(struct spi_nor *nor, const u8 *sr, loff_t *ofs,
--					u64 *len)
-+void spi_nor_get_locked_range_sr(struct spi_nor *nor, const u8 *sr, loff_t *ofs,
-+				 u64 *len)
- {
- 	u64 min_prot_len;
- 	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
-@@ -114,7 +114,7 @@ static bool spi_nor_check_lock_status_sr(struct spi_nor *nor, loff_t ofs,
- 		return (ofs >= lock_offs_max) || (offs_max <= lock_offs);
- }
- 
--static bool spi_nor_is_locked_sr(struct spi_nor *nor, loff_t ofs, u64 len, const u8 *sr)
-+bool spi_nor_is_locked_sr(struct spi_nor *nor, loff_t ofs, u64 len, const u8 *sr)
- {
- 	return spi_nor_check_lock_status_sr(nor, ofs, len, sr, true);
- }
-@@ -416,6 +416,11 @@ void spi_nor_init_default_locking_ops(struct spi_nor *nor)
- 	nor->params->locking_ops = &spi_nor_sr_locking_ops;
- }
- 
-+bool spi_nor_has_default_locking_ops(struct spi_nor *nor)
++static int spi_nor_locked_sectors_map_show(struct seq_file *s, void *data)
 +{
-+	return nor->params->locking_ops == &spi_nor_sr_locking_ops;
-+}
++	struct spi_nor *nor = s->private;
++	struct spi_nor_flash_parameter *params = nor->params;
++	unsigned int min_prot_len = spi_nor_get_min_prot_length_sr(nor);
++	unsigned int offset = 0, sector = 0;
++	bool locked;
++	int i;
 +
- static int spi_nor_lock(struct mtd_info *mtd, loff_t ofs, u64 len)
++	seq_printf(s, "Locked sectors map (x: locked, .: unlocked, unit: %dkiB)\n",
++		   min_prot_len / 1024);
++	while (offset < params->size) {
++		seq_printf(s, " 0x%08x (#%5d): ", offset, sector);
++		for (i = 0; i < 64 && offset < params->size; i++) {
++			locked = spi_nor_is_locked_sr(nor, offset, min_prot_len,
++						      nor->dfs_sr_cache);
++			if (locked)
++				seq_puts(s, "x");
++			else
++				seq_puts(s, ".");
++
++			if (((i + 1) % 16) == 0)
++				seq_puts(s, " ");
++
++			offset += min_prot_len;
++			sector++;
++		}
++		seq_puts(s, "\n");
++	}
++
++	return 0;
++}
++DEFINE_SHOW_ATTRIBUTE(spi_nor_locked_sectors_map);
++
+ static void spi_nor_print_read_cmd(struct seq_file *s, u32 cap,
+ 				   struct spi_nor_read_command *cmd)
  {
- 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+@@ -275,6 +309,8 @@ void spi_nor_debugfs_register(struct spi_nor *nor)
+ 	debugfs_create_file("params", 0444, d, nor, &spi_nor_params_fops);
+ 	debugfs_create_file("capabilities", 0444, d, nor,
+ 			    &spi_nor_capabilities_fops);
++	if (spi_nor_has_default_locking_ops(nor))
++		debugfs_create_file("locked-sectors-map", 0444, d, nor, &spi_nor_locked_sectors_map_fops);
+ }
+ 
+ void spi_nor_debugfs_shutdown(void)
 
 -- 
 2.53.0
