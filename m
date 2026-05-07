@@ -1,180 +1,309 @@
-Return-Path: <linux-doc+bounces-86259-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86249-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wMxgIXHE/GnSTAAAu9opvQ
-	(envelope-from <linux-doc+bounces-86259-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:57:21 +0200
+	id sBBwH7TC/GnSTAAAu9opvQ
+	(envelope-from <linux-doc+bounces-86249-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:49:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 924534EC8B9
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:57:20 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EA3B4EC713
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:49:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 1BE0F306AF26
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 16:49:56 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id CA74C302861C
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 16:48:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CF7304534B3;
-	Thu,  7 May 2026 16:47:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5C6647DF98;
+	Thu,  7 May 2026 16:47:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="mYvXZdy8"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="RATPRuJO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AB79481FB0;
-	Thu,  7 May 2026 16:47:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F1574657DA;
+	Thu,  7 May 2026 16:47:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778172468; cv=none; b=q4C3i0wro1M9eLE26P2rIyY9ELKOMLKzotgGG0MdlrdNomhEEEBoKQySQXEme/9mA7JT6OfMCNTKZRKU7N1QkzD+wVW64QXMvbJ/rY+oHoqJ1molz80UAmEUTowa1iLrXsJXcChEPKHIVzQtofsJIrc68OTBmQBUx9yv3adygQ8=
+	t=1778172451; cv=none; b=NY5LxDe3N3VCvOSBCHkQpR5F6y+KVoJUNUTWQKKjk3sDqxkZccaT1b6+9maMOJMnpCz2OVOuploS/Q0xbAWHL0O2bslfGZiUfrfb+3cPfT0DRjGcEjN9zczCUj4IjN52tTrSpXxUGbHiugnUci8CbXKQX4xS4/Epzpw4TDRdY2g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778172468; c=relaxed/simple;
-	bh=0wpgmlXHBRw9lGQfHW5FB6pxXYO70vjFrF4HUpKUNdQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=j2X43JgiEvGwUG0Ve5mDPYiS+FP+PbVsJJY2aQ7z8lSUX76BnKfBnN6SgobN6abDQ55PDuF7pIwx6avAIjJTfwF98q3kLLL8LuUfE7nWYUw0yJq4lhLRdTGxlXMCLwHmj8hfVkGuaeUNTxlVLODMiKVrc3ofPRsx8dKTwtaPgSM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=mYvXZdy8; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id F1C39C5DC63;
-	Thu,  7 May 2026 16:48:33 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 31FC7605CF;
-	Thu,  7 May 2026 16:47:46 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 2856A108194ED;
-	Thu,  7 May 2026 18:47:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1778172465; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=tZrjKlrSTIx0EpT8S91i2zZxREgNAGIUjyhXtv54w/g=;
-	b=mYvXZdy8urt7OjdZ5yUP+KbpFc+fDEFrhM0yjtEhBT19fVKAnPtcI2Ni6A2QaIN1+GXEhn
-	wy9gzxJ1MqCzQQtqERtht7A/B6yBofBfP8BDn1cohGMkQqcq1LCPF+gsWmVRO4RlbtMrXn
-	80JuZZBSncYuwUpmJykMVxiaC6/U6WrNxevVZfEfoE4y/SLi9wdUQpG+oWJeoFdS57xEZH
-	IP4IOGM2xEuURMMEG/nRKWgsLC9OY4uxxVnOBu1BpA2Zte/4gSTUMe2A2eO0LxB6eUE288
-	bJCFUf8uTUZz0eydFl9s+37noV7rmMeaVJLEah6t0QcCsW2R8bY0j1D4lN68yw==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 07 May 2026 18:47:09 +0200
-Subject: [PATCH v5 28/28] mtd: spi-nor: winbond: Add W25Q02NWxxIM CMP
- locking support
+	s=arc-20240116; t=1778172451; c=relaxed/simple;
+	bh=4PndgpJ2S9R3n3mKvoH1XhN0SDxuc8jiUDDhxf8Ph6s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=L2IZGWUx9/ECXmJXKFgReb2gJvG7BC+F0Hqbdr7JgYexjrWrR52/uajn9udkHEh1/lXn86jvjDp2IrVWjyCiJfyuT/jk7I2IyY517V605rFZ50E1HTqAl/naPTJI00McG2bY6+RQYAulds2Wqih1/9lTDE9btQQREwlow0QYjxk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=RATPRuJO; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from [100.64.64.200] (unknown [20.29.225.195])
+	by linux.microsoft.com (Postfix) with ESMTPSA id C1D1C20B7165;
+	Thu,  7 May 2026 09:47:25 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C1D1C20B7165
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1778172446;
+	bh=jt3dbhGdRRRtniH63ZDchc9RWsmE7a43+MifyDob+X4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=RATPRuJO4MJ+2wJn+PcCTvyHsuYYEUKyBiSW0o6/U8Bf4lqr9vPKQJANTiyOyblZw
+	 zk0PPCb+MLGqKiI9l6UxxvsQuvW8w4B2ProbAm5Ce4VOExLYqrawUpBNR9UypmBeo+
+	 gjXPFeBR88KfLZfAsChGB4AyZeGqq02liDygqOBI=
+Message-ID: <99c30be6-8b0f-486a-890c-cf74c5930726@linux.microsoft.com>
+Date: Thu, 7 May 2026 09:47:27 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-28-93453e1a9597@bootlin.com>
-References: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
-In-Reply-To: <20260507-winbond-v6-18-rc1-spi-nor-swp-v5-0-93453e1a9597@bootlin.com>
-To: Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
- Takahiro Kuwano <takahiro.kuwano@infineon.com>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Jonathan Corbet <corbet@lwn.net>, Tudor Ambarus <tudor.ambarus@linaro.org>, 
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: Sean Anderson <sean.anderson@linux.dev>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Steam Lin <STLin2@winbond.com>, linux-mtd@lists.infradead.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- Miquel Raynal <miquel.raynal@bootlin.com>
-X-Mailer: b4 0.14.3
-X-Last-TLS-Session-Version: TLSv1.3
-X-Rspamd-Queue-Id: 924534EC8B9
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] ima: Introduce staging mechanism
+To: Roberto Sassu <roberto.sassu@huaweicloud.com>, corbet@lwn.net,
+ skhan@linuxfoundation.org, zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
+ eric.snowberg@oracle.com, paul@paul-moore.com, jmorris@namei.org,
+ serge@hallyn.com
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org,
+ gregorylumen@linux.microsoft.com, nramas@linux.microsoft.com,
+ Roberto Sassu <roberto.sassu@huawei.com>,
+ steven chen <chenste@linux.microsoft.com>
+References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
+Content-Language: en-US
+From: steven chen <chenste@linux.microsoft.com>
+In-Reply-To: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 1EA3B4EC713
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[bootlin.com:s=dkim];
+	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
+	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-86259-lists,linux-doc=lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[bootlin.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86249-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[huaweicloud.com,lwn.net,linuxfoundation.org,linux.ibm.com,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miquel.raynal@bootlin.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[chenste@linux.microsoft.com,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[linux.microsoft.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-This chip has support for the locking complement (CMP) feature. Add
-the relevant bit to enable it.
+On 4/29/2026 9:03 AM, Roberto Sassu wrote:
+> From: Roberto Sassu <roberto.sassu@huawei.com>
+>
+> Introduction
+> ============
+>
+> The IMA measurements list is currently stored in the kernel memory.
+> Memory occupation grows linearly with the number of entries, and can
+> become a problem especially in environments with reduced resources.
+>
+> While there is an advantage in keeping the IMA measurements list in
+> kernel memory, so that it is always available for reading from the
+> securityfs interfaces, storing it elsewhere would make it possible to
+> free precious memory for other kernel components.
+>
+> Storing the IMA measurements list outside the kernel does not introduce
+> security issues, since its integrity is anyway protected by the TPM.
+>
+> Hence, the new IMA staging mechanism is introduced to allow user space
+> to remove the desired portion of the measurements list from the kernel.
+>
+>
+> Usage
+> =====
+>
+> The IMA staging mechanism can be enabled from the kernel configuration
+> with the CONFIG_IMA_STAGING option.
+>
+> If it is enabled, IMA duplicates the current measurements interfaces
+> (both binary and ASCII), by adding the _staged file suffix. Both the
+> original and the staging interfaces gain the write permission for the
+> root user and group, but require the process to have CAP_SYS_ADMIN set.
+>
+> The staging mechanism supports two flavors.
+>
+> Staging with prompt
+> ~~~~~~~~~~~~~~~~~~~
+>
+> The current measurements list is moved to a temporary staging area, and
+> staged measurements are deleted upon confirmation.
+>
+> This staging process is achieved with the following steps.
+>
+>    1.  echo A > <original interface>: the user requests IMA to stage the
+>        entire measurements list;
+>    2.  cat <_staged interface>: the user reads the staged measurements;
+>    3.  echo D > <_staged interface>: the user requests IMA to delete
+>        staged measurements.
+>
+> Staging and deleting
+> ~~~~~~~~~~~~~~~~~~~~
+>
+> N measurements are staged to a temporary staging area, and immediately
+> deleted without further confirmation.
+>
+> This staging process is achieved with the following steps.
+>
+>    1.  cat <original interface>: the user reads the current measurements
+>        list and determines what the value N for staging should be;
+>    2.  echo N > <original interface>: the user requests IMA to delete N
+>        measurements from the current measurements list.
 
-Unfortunately, this chip also comes with an incorrect BFPT table,
-indicating the Control Register cannot be read back. This is wrong,
-reading back the register works and has no (observed) side effect. The
-datasheet clearly indicates supporting the 35h command and all bits from
-the CR are marked readable. QE and CMP bits are inside, and can be
-properly read back.
+This submission proposes two ways for log trimming:
 
-Add a fixup for this, otherwise it would defeat the use of the CMP
-feature.
+*Favour 1:* Staging with prompt
+*Favour 2:* stage and delete N
 
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
-Test run with W25Q02NWxxIM:
-$ flash_lock -u /dev/mtd0
-$ flash_lock -l /dev/mtd0 $bs $all_but_one # all but the first
-$ show_sectors
-locked sectors
- region (in hex)   | status   | #blocks
- ------------------+----------+--------
- 00000000-0000ffff | unlocked | 1
- 00010000-0fffffff |   locked | 4095
-$ flash_lock -u /dev/mtd0 $bs 1 # all but the two first
-$ show_sectors
-locked sectors
- region (in hex)   | status   | #blocks
- ------------------+----------+--------
- 00000000-0001ffff | unlocked | 2
- 00020000-0fffffff |   locked | 4094
-$ flash_lock -u /dev/mtd0
-$ flash_lock -l /dev/mtd0 0 $all_but_one # same from the other side
-$ show_sectors
-locked sectors
- region (in hex)   | status   | #blocks
- ------------------+----------+--------
- 00000000-0ffeffff |   locked | 4095
- 0fff0000-0fffffff | unlocked | 1
-$ flash_lock -u /dev/mtd0 $(($size - (2 * $bs))) 1 # all but two
-$ show_sectors
-locked sectors
- region (in hex)   | status   | #blocks
- ------------------+----------+--------
- 00000000-0ffdffff |   locked | 4094
- 0ffe0000-0fffffff | unlocked | 2
----
- drivers/mtd/spi-nor/winbond.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Functionally, both approaches address the same problem, but *Favour 2 
+*is the
+stronger design and should be preferred. There is no good reason to keep 
+*Favour 1.*
 
-diff --git a/drivers/mtd/spi-nor/winbond.c b/drivers/mtd/spi-nor/winbond.c
-index 3a3b7f2f1659..8ebdbcec0b3f 100644
---- a/drivers/mtd/spi-nor/winbond.c
-+++ b/drivers/mtd/spi-nor/winbond.c
-@@ -379,7 +379,9 @@ static const struct flash_info winbond_nor_parts[] = {
- 	}, {
- 		/* W25Q02NWxxIM */
- 		.id = SNOR_ID(0xef, 0x80, 0x22),
--		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
-+		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
-+			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
-+		.fixups = &winbond_rdcr_fixup,
- 	}, {
- 		/* W25H512NWxxAM */
- 		.id = SNOR_ID(0xef, 0xa0, 0x20),
+ From a kernel implementation perspective, *Favour 2 *is more efficient 
+because it
+minimizes the time spent holding the list lock (can’t be shorter). It 
+also substantially
+reduces the amount of kernel-side logic, removing nearly half of the 
+code required
+by the alternative approach.
 
--- 
-2.53.0
+ From a user-space perspective, *Favour 2 *results in a much cleaner 
+model. It avoids
+the need to track and reconcile both old and staged lists in user space 
+as well as
+two lists (cur and staged) in the kernel space, which simplifies log 
+trimming logic
+and reduces maintenance overhead. In addition, it preserves the existing 
+external
+behavior by not exposing any staged list to user space.
+
+Overall, *Favour 2 *provides the same functional result with lower 
+kernel complexity,
+shorter kernel list lock hold time, and a simpler user-space interface. 
+For those
+reasons, it is the preferable approach and *Favour 1* does not appear to 
+offer sufficient
+justification to keep both implementations.
+
+Steven
+>
+> Management of Staged Measurements
+> =================================
+>
+> Since with the staging mechanism measurement entries are removed from
+> the kernel, the user needs to save the staged ones in a storage and
+> concatenate them together, so that it can present them to remote
+> attestation agents as if staging was never done.
+>
+>
+> Patch set content
+> =================
+>
+> Patches 1-8 are preparatory patches to quickly replace the hash table,
+> maintain separate counters for the different measurements list types,
+> mediate access to the measurements list interface, and simplify the staging
+> patches.
+>
+> Patch 9 introduces the staging with prompt flavor. Patch 10 makes it
+> possible to flush the hash table when deleting all the staged measurements.
+> Patch 11 introduces the staging and deleting flavor. Patch 12 avoids
+> measurements entries to be stored twice if there is contention between the
+> measurements interfaces and kexec. Patch 13 adds the documentation of the
+> staging mechanism.
+>
+>
+> Changelog
+> =========
+>
+> v4:
+>   - Add write permission to the original measurement interface, and move
+>     the A and N staging commands to that interface
+>   - Explain better the two staging flavors and highlight that the staging
+>     and delete only stages measurements internally
+>   - Rename ima_queue_staged_delete_partial() to ima_queue_delete_partial()
+>   - Replace ima_staged_measurements_prepended with per measurements list
+>     flag to avoid copying staged and active list measurements twice
+>   - Optimize the staging and deleting flavor by locklessly determining the
+>     cut position in the active list, and immediately deleting entries
+>     without explicit staging and splicing (suggested by Steven Chen)
+>
+> v3:
+>   - Add Kconfig option to enable the staging mechanism (suggested by Mimi)
+>   - Change the meaning of BINARY_STAGED to be just the staged measurements
+>   - Separate the two staging flavors in two different functions:
+>     ima_queue_staged_delete_all() for staging with prompt,
+>     ima_queue_staged_delete_partial() for staging and deleting
+>   - Delete N entries without staging first (suggested by Mimi)
+>   - Avoid duplicate staged entries if there is contention between the
+>     measurements list interfaces and kexec
+>
+> v2:
+>   - New patch to move measurements and violation counters outside the
+>     ima_h_table structure
+>   - New patch to quickly replace the hash table
+>   - Forbid partial deletion when flushing hash table (suggested by Mimi)
+>   - Ignore ima_flush_htable if CONFIG_IMA_DISABLE_HTABLE is enabled
+>   - BINARY_SIZE_* renamed to BINARY_* for better clarity
+>   - Removed ima_measurements_staged_exist and testing list empty instead
+>   - ima_queue_stage_trim() and ima_queue_delete_staged_trimmed() renamed to
+>     ima_queue_stage() and ima_queue_delete_staged()
+>   - New delete interval [1, ULONG_MAX - 1]
+>   - Rename ima_measure_lock to ima_measure_mutex
+>   - Move seq_open() and seq_release() outside the ima_measure_mutex lock
+>   - Drop ima_measurements_staged_read() and use seq_read() instead
+>   - Optimize create_securityfs_measurement_lists() changes
+>   - New file name format with _staged suffix at the end of the file name
+>   - Use _rcu list variant in ima_dump_measurement_list()
+>   - Remove support for direct trimming and splice the remaining entries to
+>     the active list (suggested by Mimi)
+>   - Hot swap the hash table if flushing is requested
+>
+> v1:
+>   - Support for direct trimming without staging
+>   - Support unstaging on kexec (requested by Gregory Lumen)
+>
+> Roberto Sassu (13):
+>    ima: Remove ima_h_table structure
+>    ima: Replace static htable queue with dynamically allocated array
+>    ima: Introduce per binary measurements list type ima_num_entries
+>      counter
+>    ima: Introduce per binary measurements list type binary_runtime_size
+>      value
+>    ima: Introduce _ima_measurements_start() and _ima_measurements_next()
+>    ima: Mediate open/release method of the measurements list
+>    ima: Use snprintf() in create_securityfs_measurement_lists
+>    ima: Introduce ima_dump_measurement()
+>    ima: Add support for staging measurements with prompt
+>    ima: Add support for flushing the hash table when staging measurements
+>    ima: Support staging and deleting N measurements entries
+>    ima: Return error on deleting measurements already copied during kexec
+>    doc: security: Add documentation of the IMA staging mechanism
+>
+>   .../admin-guide/kernel-parameters.txt         |   4 +
+>   Documentation/security/IMA-staging.rst        | 163 +++++++++
+>   Documentation/security/index.rst              |   1 +
+>   MAINTAINERS                                   |   2 +
+>   security/integrity/ima/Kconfig                |  16 +
+>   security/integrity/ima/ima.h                  |  32 +-
+>   security/integrity/ima/ima_api.c              |   2 +-
+>   security/integrity/ima/ima_fs.c               | 315 ++++++++++++++++--
+>   security/integrity/ima/ima_init.c             |   5 +
+>   security/integrity/ima/ima_kexec.c            |  53 ++-
+>   security/integrity/ima/ima_queue.c            | 283 ++++++++++++++--
+>   11 files changed, 803 insertions(+), 73 deletions(-)
+>   create mode 100644 Documentation/security/IMA-staging.rst
+>
 
 
