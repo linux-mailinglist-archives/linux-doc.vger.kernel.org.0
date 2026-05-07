@@ -1,215 +1,631 @@
-Return-Path: <linux-doc+bounces-86273-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86276-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MHtLOKTa/GmdUgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86273-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:32:04 +0200
+	id cFlaBCLb/Gl9UgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86276-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:34:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CBA04ED734
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:32:04 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BC4B4ED780
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:34:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A19D43023DD3
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 18:31:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E2D483034EDC
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 18:34:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D307B44D6BB;
-	Thu,  7 May 2026 18:31:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90EC84611CC;
+	Thu,  7 May 2026 18:34:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Y9cxe9a7"
+	dkim=pass (2048-bit key) header.d=disroot.org header.i=@disroot.org header.b="HsTxio2y"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ua1-f54.google.com (mail-ua1-f54.google.com [209.85.222.54])
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 380812F49FD
-	for <linux-doc@vger.kernel.org>; Thu,  7 May 2026 18:31:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778178718; cv=pass; b=JM8QwtkHKFVGRi4/PTn5ctgwkh/uSqtlNDsz4iLlb1c1SQItCm8qpzdK6TMuOZIqvIB52KIuBfUhkLDcnQal6/R7kOfpYxu1x1z8sg4UWjP3mCWln/79jlovvlHTR+or9FOBFDm3yTp2WqyTdAsFlbRI35+oa8/g3QG3WmzxX7M=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778178718; c=relaxed/simple;
-	bh=9Gtd+5W8SMTR25ZmPIeA+8FPrVOqTlN7XkJgDdQpNlk=;
-	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=tIqW1t6ZaQme5wOUnaBm8XMglKb1JQSxQ1fA34Zx8PAC514V3PD/abk1sdBPYRuokoeCgfiZtcXK67XDR4pgdj8V101zklYGIhz3uWeiqvu2Tmtu/eG4JYuP9gSWKcOYC5ap3Emie1aaaufLOoxW2NPHm3E1a8crSAcWNllmaxw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Y9cxe9a7; arc=pass smtp.client-ip=209.85.222.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-ua1-f54.google.com with SMTP id a1e0cc1a2514c-95d18b33f93so658205241.1
-        for <linux-doc@vger.kernel.org>; Thu, 07 May 2026 11:31:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778178716; cv=none;
-        d=google.com; s=arc-20240605;
-        b=c2w6Y1+DAWpi04OzwGFx5x24UfJM+OyGw+UwUfz+IkeE7pjKqW1RNo2c74JUIMQkcd
-         5gi5FjDJu7ElYgHDzsGxV+NDgVr3GCr3DuzpQoiH0RaHyzJ2+PQfsDjvcqbQoutaL95K
-         YcZqtdknUs7f1HCbsH5xGsVANZoa/0LM0QWGR9t+msqmsEg8cqMq4Pp7q5TMalZbxydK
-         NqEEabXfr6BTAc6IMGckaovP435fSh6ItLK6A75c+EoSx24F8fQb9HqYhpYiXJVtTsci
-         +r9dpLm1SOw6HWYiyEDsVeF+1EdF8PiUXN41/3D2Y8paNlmEXMgT2/6wriPhQd0RT2uj
-         mUpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:dkim-signature;
-        bh=goCC1MXS8+Hmwnd2WWRAT4Rp01B0ycJCM1C1lBpTnIs=;
-        fh=9y1n3nzW9yIYnU2KFby9ptx+pB76ZIE83bqBmjUnNBQ=;
-        b=AHIdy/LFWElpn/KBHc9uo/Na1St1vGyik5xfpYBEdXmtj6So8JD0T7Jqh/PuGj2Gor
-         m96IHktquLFmrFWBqlv53vuhVDKL9MD+zOyw1vmLmVT9VYyIaDJ34ZX6dM5cdFpUa/Io
-         PrjjbbGjz1b+Ke2vN12+CuFD/F2l/iMLEW2c6nobBbPYKMW3FVBAIbKF7aihgo9mcNpX
-         JHYgp6DVmw/GHtP13YDVD4YWD8hCSRWf+Wz4WZsnwX5bmgHhQ8x66Y7dG/ZGREOQVVQp
-         D7ueV8KExmSTBo0o602HJmGtqaQveV7rUxuO1HGg2GBlrT5cIFj2cm56DbU2bLfA5OGY
-         z4Ow==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1778178716; x=1778783516; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=goCC1MXS8+Hmwnd2WWRAT4Rp01B0ycJCM1C1lBpTnIs=;
-        b=Y9cxe9a7HFizfWlIgAijSTg+sNOKPTCIfD5vBOU8y8Mz/QzE/FeerqQ/A2UvBuNAw2
-         SBJCjy2e9x+XrkotisFuXDN1fRpLDdslnUKMz7KTp+mWIp5ZjnvluGkicFwv0WLNLI5k
-         W521Q4uM1HXHMZDeGy4rTjT3wadbifQg1CiGsO9Sg+r07nzPaM9y1jf99mIjsHCP/qlx
-         eAQwh3MNgEfls42ChDhMIMwg1OxbbKaY/0UCXoxdsH1YSSv+/YKUdiT/XB1WlHklBfW2
-         gwgP37FB3EkaYPkfJ/o0nlF6PrzisFdCh5IOg1DrZctdmHN1lrUn6ml/EJIZzIjwRbAG
-         6MGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778178716; x=1778783516;
-        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=goCC1MXS8+Hmwnd2WWRAT4Rp01B0ycJCM1C1lBpTnIs=;
-        b=Mw9ULzCW5zdfXjmhUeRxQ9XdCilAzliaOcIKj+SeQIvLUWdIlpr6iy9NVCseLDkeRJ
-         yqdeReAsillpWNQkWRatSrIVLKrKsptprxmqFjCSLoHtc+ShNXYutvCrnkYLnGaOticZ
-         6PFEL/i4ghnNSJe7xE5qXL85kg5oP/5WK5qw9qcwGLezhrkmZorsOl0JTeuUJq3GSqtV
-         Ln22gHuwRNcAtJr2itOsZYzE2wH5Y2VdtDgFrh1FNqDejkyENs7DanXBI5f2X1kzpH5f
-         Jm5PBgyYJp87p5j+LuWQ/V5Kqb6O7OiVZgrV6ZAF0BRPm7EnQwpGwtSRnJJprJ63XJIo
-         t3bQ==
-X-Forwarded-Encrypted: i=1; AFNElJ9Zn8Q05NDZgr6zxuHRyOMZwD+HsSaDAuIH3snoWSijipMSFtgFBIBx/luCFYn/7WsLuXGHw82BXGE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxSjW0oQNecdmxYwDMqE8DZK+ErVzQ4GdpyjzhukRYZ5nT6N1Fq
-	y/tPmRJ+BgwzP+/TnCcuStrl8jnak3LrGoaUEFQ4nWt1KEUXcnozMnuTXkGTCUIAMMV/tg3BMzf
-	SFSe2uK58mF352KuqpX3GAoIKAZ/K49N/j/jZFR6m
-X-Gm-Gg: AeBDietbyN8ke66qaWSDEBZ++h0xPbuCnxLYHvpstQIeys5KbA1iOiO9toEBa+acUek
-	cJWTZ+iwsXE6qi+U4gc3gfE6fNAaHlADrV+vMvPtFBhvjKsV7rYjEH2mC9szU1ANQivPN6IySDV
-	MocH35QqJrclD44CQvnyfvnMUm0/xRWpZGcwXNhHiqTYyT87DqXY9UAJijRLk8aVJC24rTMl+hx
-	Nt32TwtXljQvcZ6vF4KtJMYh0hnJ2rHMvngJEF3JKQJpYY02mqNuym0eNxB07BxvWkqpf7pJLTr
-	8/zIfDM/Y9qV5zdczMgsTmJCVQKcwQqJVeGl5LBgcxXbWjYGB2ztnfqY+zAZeyjsc4aLOQ45fjg
-	L2fkN
-X-Received: by 2002:a05:6122:6304:b0:56b:a7de:7129 with SMTP id
- 71dfb90a1353d-575702cc825mr1528185e0c.7.1778178715530; Thu, 07 May 2026
- 11:31:55 -0700 (PDT)
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 7 May 2026 11:31:54 -0700
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 7 May 2026 11:31:54 -0700
-From: Ackerley Tng <ackerleytng@google.com>
-In-Reply-To: <byywwfin2aenobdwuesqihm6nzxyx6ecedwgbt7f5tvaaul6fi@u7bmexpavwdn>
-References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
- <20260428-gmem-inplace-conversion-v5-1-d8608ccfca22@google.com> <byywwfin2aenobdwuesqihm6nzxyx6ecedwgbt7f5tvaaul6fi@u7bmexpavwdn>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36ED4466B63;
+	Thu,  7 May 2026 18:33:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.21.23.139
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778178841; cv=none; b=BP1q05JL1RNvfvkp9GXG3x3UsryytAeaZe7NBc5g4LCWml/syYkvSwBGdXpUrtb/jzTNoGl+pTmtBWST2yZMP+kB13hNWbPvRwTnvXvh/KpCOBGf+dqFQYDz3ndJHDsq9r03Z/3ffWqLLtx9hToOlVkCYYavTGn9oqbB2XAacpI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778178841; c=relaxed/simple;
+	bh=D4dt37yXLL0edwzLumYtDYUeQFmnkqCrsicPXx941mY=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=DurnlrZh860NqiYyWmzD0G6rHGYaGYPBjs3Ixy6t1Qto0vctUpTKQnvT0+JoK9g1ys5mRJmqL/7sql1Q2RvZtZ5+VmR2UyMoOw9VeKphLEgxzHtG3sPxSEKkGoj9hy+w4t3L/dJJPfcAr7hLa4vlg9vOl9ydxcwrrK2S+RhnDmc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=disroot.org; spf=pass smtp.mailfrom=disroot.org; dkim=pass (2048-bit key) header.d=disroot.org header.i=@disroot.org header.b=HsTxio2y; arc=none smtp.client-ip=178.21.23.139
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+	by disroot.org (Postfix) with ESMTP id 41BD227174;
+	Thu,  7 May 2026 20:33:49 +0200 (CEST)
+X-Virus-Scanned: SPAM Filter at disroot.org
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l9KnIYgvsfA0; Thu,  7 May 2026 20:33:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+	t=1778178828; bh=D4dt37yXLL0edwzLumYtDYUeQFmnkqCrsicPXx941mY=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To;
+	b=HsTxio2yNSFoGBeCluUZJmtcziNk9S1ev2SrHHXqrPzH/OSubIlC+/9zwXvK5PHsM
+	 4wfgBuGwq9PGZEdcdMm52V70NZ1AlUjHvN/YaYA7ymwwHYsk2aRv+d198RoBWQ22G2
+	 C2NbhOQkmPMmnRkxS8okC8pU5JJy0DQUK4ncKID5QUkryLIoZflpMDnabJpNnzB1ZV
+	 tb54UFQa8RlU71nEnZ6+6NynJP+/kp19ot6ZJCG5RqD7tEScRdbw9k3UOb7VbC+jZ3
+	 NPE/NBI2CfkVh1l6r57+ULdm0CaPLYY1gAit4Md90r/nimCCa2Gj59VaxanwJo5kv3
+	 bvdzMPrcsxHvg==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Date: Thu, 7 May 2026 11:31:54 -0700
-X-Gm-Features: AVHnY4IrLeBlt83AneVyVg35mAkmDcan1kch_gmoyAe0Nsgg7IVb__9uDe3mtms
-Message-ID: <CAEvNRgFGc7SRy_hkfSH3X=Cu00CP6wMHBJO0+55uebKTezWVnw@mail.gmail.com>
-Subject: Re: [PATCH RFC v5 01/53] KVM: guest_memfd: Introduce per-gmem
- attributes, use to guard user mappings
-To: "Liam R. Howlett" <liam@infradead.org>
-Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
-	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
-	ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
-	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
-	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
-	shivankg@amd.com, steven.price@arm.com, tabba@google.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-mm@kvack.org, linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-X-Rspamd-Queue-Id: 3CBA04ED734
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 08 May 2026 00:03:31 +0530
+Message-Id: <DICNS4WYM1BY.C1WROHZ5D687@disroot.org>
+Cc: "Pavel Machek" <pavel@kernel.org>, "Rob Herring" <robh@kernel.org>,
+ "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
+ <conor+dt@kernel.org>, "MyungJoo Ham" <myungjoo.ham@samsung.com>, "Chanwoo
+ Choi" <cw00.choi@samsung.com>, "Sebastian Reichel" <sre@kernel.org>,
+ "Krzysztof Kozlowski" <krzk@kernel.org>, =?utf-8?q?Andr=C3=A9_Draszik?=
+ <andre.draszik@linaro.org>, "Alexandre Belloni"
+ <alexandre.belloni@bootlin.com>, "Jonathan Corbet" <corbet@lwn.net>, "Shuah
+ Khan" <skhan@linuxfoundation.org>, "Nam Tran" <trannamatk@gmail.com>,
+ =?utf-8?q?=C5=81ukasz_Lebiedzi=C5=84ski?= <kernel@lvkasz.us>,
+ <linux-leds@vger.kernel.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+ <linux-samsung-soc@vger.kernel.org>, <linux-rtc@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v5 07/11] leds: flash: add support for Samsung S2M
+ series PMIC flash LED device
+From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
+To: "Lee Jones" <lee@kernel.org>, "Kaustabh Chakraborty"
+ <kauschluss@disroot.org>
+References: <20260424-s2mu005-pmic-v5-0-fcbc9da5a004@disroot.org>
+ <20260424-s2mu005-pmic-v5-7-fcbc9da5a004@disroot.org>
+ <20260507164654.GS305027@google.com>
+In-Reply-To: <20260507164654.GS305027@google.com>
+X-Rspamd-Queue-Id: 7BC4B4ED780
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[disroot.org,reject];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[disroot.org:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-86273-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[kernel.org,samsung.com,linaro.org,bootlin.com,lwn.net,linuxfoundation.org,gmail.com,lvkasz.us,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-86276-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[disroot.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kauschluss@disroot.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_GT_50(0.00)[64];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,mail.gmail.com:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,disroot.org:email,disroot.org:mid,disroot.org:dkim]
 X-Rspamd-Action: no action
 
-"Liam R. Howlett" <liam@infradead.org> writes:
+On 2026-05-07 17:46 +01:00, Lee Jones wrote:
+> On Fri, 24 Apr 2026, Kaustabh Chakraborty wrote:
+>
+>> Add support for flash LEDs in certain Samsung S2M series PMICs.
+>> The device has two channels for LEDs, typically for the back and front
+>> cameras in mobile devices. Both channels can be independently
+>> controlled, and can be operated in torch or flash modes.
+>>=20
+>> The driver includes initial support for the S2MU005 PMIC flash LEDs.
+>>=20
+>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+>> ---
+>>  drivers/leds/flash/Kconfig          |  12 ++
+>>  drivers/leds/flash/Makefile         |   1 +
+>>  drivers/leds/flash/leds-s2m-flash.c | 358 +++++++++++++++++++++++++++++=
++++++++
+>>  3 files changed, 371 insertions(+)
+>>=20
+>> diff --git a/drivers/leds/flash/Kconfig b/drivers/leds/flash/Kconfig
+>> index 5e08102a67841..be62e05277429 100644
+>> --- a/drivers/leds/flash/Kconfig
+>> +++ b/drivers/leds/flash/Kconfig
+>> @@ -114,6 +114,18 @@ config LEDS_RT8515
+>>  	  To compile this driver as a module, choose M here: the module
+>>  	  will be called leds-rt8515.
+>> =20
+>> +config LEDS_S2M_FLASH
+>> +	tristate "Samsung S2M series PMICs flash/torch LED support"
+>> +	depends on LEDS_CLASS
+>> +	depends on MFD_SEC_CORE
+>> +	depends on V4L2_FLASH_LED_CLASS || !V4L2_FLASH_LED_CLASS
+>
+> The `|| !V4L2_FLASH_LED_CLASS` part of this dependency makes it
+> unconditionally true. Was this intended? Perhaps this dependency can be
+> removed entirely.
 
->
-> [...snip...]
->
->> +static u64 kvm_gmem_get_attributes(struct inode *inode, pgoff_t index)
->> +{
->> +	struct maple_tree *mt = &GMEM_I(inode)->attributes;
->> +	void *entry = mtree_load(mt, index);
+Right? Similar lines are also present in entries of other drivers too.
+It is indeed weird, but I disregarded my doubts and added it anyway.
+
+>> +	select REGMAP_IRQ
+>> +	help
+>> +	  This option enables support for the flash/torch LEDs found in
+>> +	  certain Samsung S2M series PMICs, such as the S2MU005. It has
+>> +	  a LED channel dedicated for every physical LED. The LEDs can
+>> +	  be controlled in flash and torch modes.
 >> +
+>>  config LEDS_SGM3140
+>>  	tristate "LED support for the SGM3140"
+>>  	depends on V4L2_FLASH_LED_CLASS || !V4L2_FLASH_LED_CLASS
+>> diff --git a/drivers/leds/flash/Makefile b/drivers/leds/flash/Makefile
+>> index 712fb737a428e..44e6c1b4beb37 100644
+>> --- a/drivers/leds/flash/Makefile
+>> +++ b/drivers/leds/flash/Makefile
+>> @@ -10,6 +10,7 @@ obj-$(CONFIG_LEDS_MAX77693)	+=3D leds-max77693.o
+>>  obj-$(CONFIG_LEDS_QCOM_FLASH)	+=3D leds-qcom-flash.o
+>>  obj-$(CONFIG_LEDS_RT4505)	+=3D leds-rt4505.o
+>>  obj-$(CONFIG_LEDS_RT8515)	+=3D leds-rt8515.o
+>> +obj-$(CONFIG_LEDS_S2M_FLASH)	+=3D leds-s2m-flash.o
+>>  obj-$(CONFIG_LEDS_SGM3140)	+=3D leds-sgm3140.o
+>>  obj-$(CONFIG_LEDS_SY7802)	+=3D leds-sy7802.o
+>>  obj-$(CONFIG_LEDS_TPS6131X)	+=3D leds-tps6131x.o
+>> diff --git a/drivers/leds/flash/leds-s2m-flash.c b/drivers/leds/flash/le=
+ds-s2m-flash.c
+>> new file mode 100644
+>> index 0000000000000..177d23b432ce6
+>> --- /dev/null
+>> +++ b/drivers/leds/flash/leds-s2m-flash.c
+>> @@ -0,0 +1,358 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * Flash and Torch LED Driver for Samsung S2M series PMICs.
+>> + *
+>> + * Copyright (c) 2015 Samsung Electronics Co., Ltd
+>> + * Copyright (c) 2026 Kaustabh Chakraborty <kauschluss@disroot.org>
+>> + */
+>> +
+>> +#include <linux/container_of.h>
+>> +#include <linux/led-class-flash.h>
+>> +#include <linux/mfd/samsung/core.h>
+>> +#include <linux/mfd/samsung/s2mu005.h>
+>> +#include <linux/module.h>
+>> +#include <linux/of.h>
+>> +#include <linux/platform_device.h>
+>> +#include <linux/regmap.h>
+>> +#include <media/v4l2-flash-led-class.h>
+>> +
+>> +#define MAX_CHANNELS	2
+>> +
+>> +struct s2m_led {
+>> +	struct regmap *regmap;
+>> +	struct led_classdev_flash fled;
+>> +	struct v4l2_flash *v4l2_flash;
 >> +	/*
->> +	 * The lock _must_ be held for lookups, as some maple tree operations,
->> +	 * e.g. append, are unsafe (return inaccurate information) with respect
->> +	 * to concurrent RCU-protected lookups.
+>> +	 * The mutex object prevents the concurrent access of flash control
+>> +	 * registers by the LED and V4L2 subsystems.
 >> +	 */
->
-> Can you please elaborate how you see inaccurate information and which
-> information is inaccurate?
->
-> Your comment is incorrect and misleading as append will not be used in
-> rcu mode.  Note that you have not set this tree up in rcu mode.
->
-
-My bad. Thanks for clarifying about usage of rcu mode.
-
->> +	lockdep_assert(mt_lock_is_held(mt));
+>> +	struct mutex lock;
+>> +	unsigned int reg_enable;
+>> +	u8 channel;
+>> +	u8 flash_brightness;
+>> +	u8 flash_timeout;
+>> +};
 >> +
-
-In the next revision I'll remove this lockdep and use RCU mode, and
-kvm_gmem_get_memory_attributes() should get a stable result.
-
-The other lookups using mt_for_each() in kvm_gmem_range_has_attributes()
-and kvm_gmem_get_invalidate_filter() retain the lockdep since those
-operate over multiple ranges. Those are called from paths that require
-holding the lock to exclude other operations anyway, so the lockdep
-requirement does not cost anything more.
-
->> +	return WARN_ON_ONCE(!entry) ? 0 : xa_to_value(entry);
+>> +static struct s2m_led *to_s2m_led(struct led_classdev_flash *fled)
+>> +{
+>> +	return container_of(fled, struct s2m_led, fled);
 >> +}
 >> +
->>
->> [...snip...]
->>
+>> +static struct led_classdev_flash *to_s2m_fled(struct led_classdev *cdev=
+)
+>> +{
+>> +	return container_of(cdev, struct led_classdev_flash, led_cdev);
+>> +}
+>> +
+>> +static int s2m_fled_flash_brightness_set(struct led_classdev_flash *fle=
+d, u32 brightness)
+>> +{
+>> +	struct s2m_led *led =3D to_s2m_led(fled);
+>> +	struct led_flash_setting *setting =3D &fled->brightness;
+>> +
+>> +	led->flash_brightness =3D (brightness - setting->min) / setting->step;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int s2m_fled_flash_timeout_set(struct led_classdev_flash *fled, =
+u32 timeout)
+>> +{
+>> +	struct s2m_led *led =3D to_s2m_led(fled);
+>> +	struct led_flash_setting *setting =3D &fled->timeout;
+>> +
+>> +	led->flash_timeout =3D (timeout - setting->min) / setting->step;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +#if IS_ENABLED(CONFIG_V4L2_FLASH_LED_CLASS)
+>> +static int s2m_fled_flash_external_strobe_set(struct v4l2_flash *v4l2_f=
+lash, bool enable)
+>> +{
+>> +	struct s2m_led *led =3D to_led(v4l2_flash->fled_cdev);
+>
+> What is to_led()?
+>
+> Was this tested?
+
+I honestly don't know what happened here, and yes this (well, not this
+precisely) was tested. I had changed something later? Don't know, its
+odd. Will fix.
+
+>> +	mutex_lock(&led->lock);
+>> +
+>> +	led->fled.ops->strobe_set(&led->fled, enable);
+>> +
+>> +	mutex_unlock(&led->lock);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const struct v4l2_flash_ops s2m_fled_v4l2_flash_ops =3D {
+>> +	.external_strobe_set =3D s2m_fled_flash_external_strobe_set,
+>> +};
+>> +#else
+>> +static const struct v4l2_flash_ops s2m_fled_v4l2_flash_ops;
+>> +#endif
+>> +
+>> +static void s2m_fled_v4l2_flash_release(void *v4l2_flash)
+>> +{
+>> +	v4l2_flash_release(v4l2_flash);
+>> +}
+>> +
+>> +static int s2mu005_fled_torch_brightness_set(struct led_classdev *cdev,=
+ enum led_brightness value)
+>> +{
+>> +	struct s2m_led *led =3D to_s2m_led(to_s2m_fled(cdev));
+>> +	int ret;
+>> +
+>> +	mutex_lock(&led->lock);
+>> +
+>> +	if (!value) {
+>> +		ret =3D regmap_clear_bits(led->regmap, led->reg_enable,
+>> +					S2MU005_FLED_TORCH_EN(led->channel));
+>> +		if (ret < 0)
+>> +			dev_err(cdev->dev, "failed to disable torch LED\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +	ret =3D regmap_update_bits(led->regmap, S2MU005_REG_FLED_CH_CTRL1(led-=
+>channel),
+>> +				 S2MU005_FLED_TORCH_IOUT,
+>> +				 FIELD_PREP(S2MU005_FLED_TORCH_IOUT, value - 1));
+>> +	if (ret < 0) {
+>
+> Is a positive number even possible?
+
+As per the docs, no. Will fix here and in other instances as well.
+
+>> +		dev_err(cdev->dev, "failed to set torch current\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +	ret =3D regmap_set_bits(led->regmap, led->reg_enable, S2MU005_FLED_TOR=
+CH_EN(led->channel));
+>> +	if (ret < 0) {
+>> +		dev_err(cdev->dev, "failed to enable torch LED\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +unlock:
+>> +	mutex_unlock(&led->lock);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static int s2mu005_fled_flash_strobe_set(struct led_classdev_flash *fle=
+d, bool state)
+>> +{
+>> +	struct s2m_led *led =3D to_s2m_led(fled);
+>> +	int ret;
+>> +
+>> +	mutex_lock(&led->lock);
+>> +
+>> +	ret =3D regmap_clear_bits(led->regmap, led->reg_enable, S2MU005_FLED_F=
+LASH_EN(led->channel));
+>> +	if (ret < 0) {
+>> +		dev_err(fled->led_cdev.dev, "failed to disable flash LED\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +	if (!state)
+>> +		goto unlock;
+>> +
+>> +	ret =3D regmap_update_bits(led->regmap, S2MU005_REG_FLED_CH_CTRL0(led-=
+>channel),
+>> +				 S2MU005_FLED_FLASH_IOUT,
+>> +				 FIELD_PREP(S2MU005_FLED_FLASH_IOUT, led->flash_brightness));
+>> +	if (ret < 0) {
+>> +		dev_err(fled->led_cdev.dev, "failed to set flash brightness\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +	ret =3D regmap_update_bits(led->regmap, S2MU005_REG_FLED_CH_CTRL3(led-=
+>channel),
+>> +				 S2MU005_FLED_FLASH_TIMEOUT,
+>> +				 FIELD_PREP(S2MU005_FLED_FLASH_TIMEOUT, led->flash_timeout));
+>> +	if (ret < 0) {
+>> +		dev_err(fled->led_cdev.dev, "failed to set flash timeout\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +	ret =3D regmap_set_bits(led->regmap, led->reg_enable, S2MU005_FLED_FLA=
+SH_EN(led->channel));
+>> +	if (ret < 0) {
+>> +		dev_err(fled->led_cdev.dev, "failed to enable flash LED\n");
+>> +		goto unlock;
+>> +	}
+>> +
+>> +unlock:
+>> +	mutex_unlock(&led->lock);
+>> +
+>> +	return 0;
+>
+> It seems like this function swallows error codes.
+>
+> Better if they're propagated properly.
+>
+>> +}
+>> +
+>> +static int s2mu005_fled_flash_strobe_get(struct led_classdev_flash *fle=
+d, bool *state)
+>> +{
+>> +	struct s2m_led *led =3D to_s2m_led(fled);
+>> +	u32 val;
+>> +	int ret;
+>> +
+>> +	mutex_lock(&led->lock);
+>> +
+>> +	ret =3D regmap_read(led->regmap, S2MU005_REG_FLED_STATUS, &val);
+>> +	if (ret < 0) {
+>> +		dev_err(fled->led_cdev.dev, "failed to fetch LED status");
+>
+> Missed '/n'.
+>
+>> +		goto unlock;
+>> +	}
+>> +
+>> +	*state =3D !!(val & S2MU005_FLED_FLASH_STATUS(led->channel));
+>> +
+>> +unlock:
+>> +	mutex_unlock(&led->lock);
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static const struct led_flash_ops s2mu005_fled_flash_ops =3D {
+>> +	.flash_brightness_set =3D s2m_fled_flash_brightness_set,
+>> +	.timeout_set =3D s2m_fled_flash_timeout_set,
+>> +	.strobe_set =3D s2mu005_fled_flash_strobe_set,
+>> +	.strobe_get =3D s2mu005_fled_flash_strobe_get,
+>> +};
+>> +
+>> +static int s2mu005_fled_init(struct s2m_led *led, struct device *dev, s=
+truct regmap *regmap,
+>> +			     unsigned int nr_channels)
+>> +{
+>> +	unsigned int val;
+>> +	int i, ret;
+>> +
+>> +	/* Enable the LED channels. */
+>> +	ret =3D regmap_set_bits(regmap, S2MU005_REG_FLED_CTRL1, S2MU005_FLED_C=
+H_EN);
+>> +	if (ret < 0)
+>> +		return dev_err_probe(dev, ret, "failed to enable LED channels\n");
+>> +
+>> +	ret =3D regmap_read(regmap, S2MU005_REG_ID, &val);
+>> +	if (ret < 0)
+>> +		return dev_err_probe(dev, ret, "failed to read revision\n");
+>> +
+>> +	for (i =3D 0; i < nr_channels; i++) {
+>
+> for (int i =3D 0; i < nr_channels; i++)
+
+Is that allowed in the kernel source? I have never seen variable
+declaration in a for loop.
+
+>> +		/*
+>> +		 * Read the revision register. Revision EVT0 has the register
+>> +		 * at CTRL4, while EVT1 and higher have it at CTRL6.
+>> +		 */
+>> +		if (FIELD_GET(S2MU005_ID_MASK, val) =3D=3D 0)
+>
+> Why not remove the " =3D=3D 0" and reverse the branches?
+
+My intention was to make it explicit that the value used is an integer
+value, as opposed to a boolean.
+
+>> +			led[i].reg_enable =3D S2MU005_REG_FLED_CTRL4;
+>> +		else
+>> +			led[i].reg_enable =3D S2MU005_REG_FLED_CTRL6;
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int s2mu005_fled_init_channel(struct s2m_led *led, struct device=
+ *dev,
+>> +				     struct fwnode_handle *fwnp)
+>> +{
+>> +	struct led_classdev *cdev =3D &led->fled.led_cdev;
+>> +	struct led_init_data init_data =3D {};
+>> +	struct v4l2_flash_config v4l2_cfg =3D {};
+>> +	int ret;
+>> +
+>> +	cdev->max_brightness =3D 16;
+>> +	cdev->brightness_set_blocking =3D s2mu005_fled_torch_brightness_set;
+>> +	cdev->flags |=3D LED_DEV_CAP_FLASH;
+>> +
+>> +	led->fled.timeout.min =3D 62000;
+>> +	led->fled.timeout.step =3D 62000;
+>> +	led->fled.timeout.max =3D 992000;
+>> +	led->fled.timeout.val =3D 992000;
+>> +
+>> +	led->fled.brightness.min =3D 25000;
+>> +	led->fled.brightness.step =3D 25000;
+>> +	led->fled.brightness.max =3D 375000; /* 400000 causes flickering */
+>> +	led->fled.brightness.val =3D 375000;
+>> +
+>> +	s2m_fled_flash_timeout_set(&led->fled, led->fled.timeout.val);
+>> +	s2m_fled_flash_brightness_set(&led->fled, led->fled.brightness.val);
+>> +
+>> +	led->fled.ops =3D &s2mu005_fled_flash_ops;
+>> +
+>> +	init_data.fwnode =3D fwnp;
+>> +	ret =3D devm_led_classdev_flash_register_ext(dev, &led->fled, &init_da=
+ta);
+>> +	if (ret < 0)
+>> +		return dev_err_probe(dev, ret, "failed to create LED flash device\n")=
+;
+>> +
+>> +	v4l2_cfg.intensity.min =3D led->fled.timeout.min;
+>> +	v4l2_cfg.intensity.step =3D led->fled.timeout.step;
+>> +	v4l2_cfg.intensity.max =3D led->fled.timeout.max;
+>> +	v4l2_cfg.intensity.val =3D led->fled.timeout.val;
+>
+> Is it correct to configure the V4L2 intensity settings from the timeout
+> values?  I would expect these to be based on the brightness settings.
+
+Stupid me. Admittedly, I am unable to test the v4l2 functionality
+properly for now. I will remove all related code in the next revision.
+Will add them back when they're needed and I'm able to test.
+
+>> +
+>> +	v4l2_cfg.has_external_strobe =3D true;
+>> +
+>> +	led->v4l2_flash =3D v4l2_flash_init(dev, fwnp, &led->fled, &s2m_fled_v=
+4l2_flash_ops,
+>> +					  &v4l2_cfg);
+>> +	if (IS_ERR(led->v4l2_flash)) {
+>> +		v4l2_flash_release(led->v4l2_flash);
+>
+> So you're going to try and release an error?
+>
+>> +		return dev_err_probe(dev, PTR_ERR(led->v4l2_flash),
+>> +				     "failed to create V4L2 flash device\n");
+>> +	}
+>> +
+>> +	ret =3D devm_add_action_or_reset(dev, (void *)s2m_fled_v4l2_flash_rele=
+ase, led->v4l2_flash);
+>> +	if (ret < 0)
+>> +		return dev_err_probe(dev, ret, "failed to add cleanup action\n");
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int s2m_fled_probe(struct platform_device *pdev)
+>> +{
+>> +	struct device *dev =3D &pdev->dev;
+>> +	struct sec_pmic_dev *ddata =3D dev_get_drvdata(dev->parent);
+>> +	struct s2m_led *led;
+>> +	int ret;
+>> +
+>> +	led =3D devm_kzalloc(dev, sizeof(*led) * MAX_CHANNELS, GFP_KERNEL);
+>> +	if (!led)
+>> +		return -ENOMEM;
+>> +
+>> +	switch (platform_get_device_id(pdev)->driver_data) {
+>> +	case S2MU005:
+>> +		ret =3D s2mu005_fled_init(led, dev, ddata->regmap_pmic, MAX_CHANNELS)=
+;
+>> +		if (ret)
+>> +			return ret;
+>> +		break;
+>> +	default:
+>> +		return dev_err_probe(dev, -ENODEV, "device type %d is not supported b=
+y driver\n",
+>> +				     ddata->device_type);
+>> +	}
+>
+> Will this be expanded in the very near future?
+>
+> If not, having a switch () with only one entry seems odd.
+
+I have plans to introduce support for S2MU004 at one point. I'll change
+it now, and re-introduce the switch block later.
+
+> if (platform_get_device_id(pdev)->driver_data !=3D S2MU005)
+> 	dev_err_probe()
+>
+>> +	device_for_each_child_node_scoped(dev, child) {
+>> +		u32 reg;
+>> +
+>> +		if (fwnode_property_read_u32(child, "reg", &reg))
+>> +			continue;
+>> +
+>> +		if (led[reg].regmap) {
+>> +			dev_warn(dev, "duplicate node for channel %d\n", reg);
+>> +			continue;
+>> +		}
+>
+> If reg > MAX_CHANNELS, you just created an OOB condition.
+>
+>> +
+>> +		led[reg].regmap =3D ddata->regmap_pmic;
+>> +		led[reg].channel =3D (u8)reg;
+>> +
+>> +		ret =3D devm_mutex_init(dev, &led[reg].lock);
+>> +		if (ret)
+>> +			return dev_err_probe(dev, ret, "failed to create mutex\n");
+>> +
+>> +		switch (platform_get_device_id(pdev)->driver_data) {
+>> +		case S2MU005:
+>> +			ret =3D s2mu005_fled_init_channel(led + reg, dev, child);
+>> +			if (ret < 0)
+>> +				return ret;
+>> +			break;
+>> +		}
+>
+> This is even more odd!
+
+What's exactly odd about it?
+
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const struct platform_device_id s2m_fled_id_table[] =3D {
+>> +	{ "s2mu005-flash", S2MU005 },
+>> +	{ /* sentinel */ },
+>> +};
+>> +MODULE_DEVICE_TABLE(platform, s2m_fled_id_table);
+>> +
+>> +static const struct of_device_id s2m_fled_of_match_table[] =3D {
+>> +	{ .compatible =3D "samsung,s2mu005-flash", .data =3D (void *)S2MU005 }=
+,
+>> +	{ /* sentinel */ },
+>> +};
+>> +MODULE_DEVICE_TABLE(of, s2m_fled_of_match_table);
+>> +
+>> +static struct platform_driver s2m_fled_driver =3D {
+>> +	.driver =3D {
+>> +		.name =3D "s2m-flash",
+>> +	},
+>> +	.probe =3D s2m_fled_probe,
+>> +	.id_table =3D s2m_fled_id_table,
+>> +};
+>> +module_platform_driver(s2m_fled_driver);
+>> +
+>> +MODULE_DESCRIPTION("Flash/Torch LED Driver For Samsung S2M Series PMICs=
+");
+>> +MODULE_AUTHOR("Kaustabh Chakraborty <kauschluss@disroot.org>");
+>> +MODULE_LICENSE("GPL");
+
 
