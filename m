@@ -1,309 +1,245 @@
-Return-Path: <linux-doc+bounces-86249-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86260-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sBBwH7TC/GnSTAAAu9opvQ
-	(envelope-from <linux-doc+bounces-86249-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:49:56 +0200
+	id GH4MKwLF/Gk8TgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86260-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:59:46 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EA3B4EC713
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:49:56 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64A334EC92A
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 18:59:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CA74C302861C
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 16:48:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C8FFB305C4C0
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 16:56:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5C6647DF98;
-	Thu,  7 May 2026 16:47:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E9DC43E481;
+	Thu,  7 May 2026 16:56:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="RATPRuJO"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="X+qM3eJX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F1574657DA;
-	Thu,  7 May 2026 16:47:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778172451; cv=none; b=NY5LxDe3N3VCvOSBCHkQpR5F6y+KVoJUNUTWQKKjk3sDqxkZccaT1b6+9maMOJMnpCz2OVOuploS/Q0xbAWHL0O2bslfGZiUfrfb+3cPfT0DRjGcEjN9zczCUj4IjN52tTrSpXxUGbHiugnUci8CbXKQX4xS4/Epzpw4TDRdY2g=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778172451; c=relaxed/simple;
-	bh=4PndgpJ2S9R3n3mKvoH1XhN0SDxuc8jiUDDhxf8Ph6s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=L2IZGWUx9/ECXmJXKFgReb2gJvG7BC+F0Hqbdr7JgYexjrWrR52/uajn9udkHEh1/lXn86jvjDp2IrVWjyCiJfyuT/jk7I2IyY517V605rFZ50E1HTqAl/naPTJI00McG2bY6+RQYAulds2Wqih1/9lTDE9btQQREwlow0QYjxk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=RATPRuJO; arc=none smtp.client-ip=13.77.154.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
-Received: from [100.64.64.200] (unknown [20.29.225.195])
-	by linux.microsoft.com (Postfix) with ESMTPSA id C1D1C20B7165;
-	Thu,  7 May 2026 09:47:25 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C1D1C20B7165
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1778172446;
-	bh=jt3dbhGdRRRtniH63ZDchc9RWsmE7a43+MifyDob+X4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=RATPRuJO4MJ+2wJn+PcCTvyHsuYYEUKyBiSW0o6/U8Bf4lqr9vPKQJANTiyOyblZw
-	 zk0PPCb+MLGqKiI9l6UxxvsQuvW8w4B2ProbAm5Ce4VOExLYqrawUpBNR9UypmBeo+
-	 gjXPFeBR88KfLZfAsChGB4AyZeGqq02liDygqOBI=
-Message-ID: <99c30be6-8b0f-486a-890c-cf74c5930726@linux.microsoft.com>
-Date: Thu, 7 May 2026 09:47:27 -0700
+Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com [209.85.222.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 520CC3FAE18
+	for <linux-doc@vger.kernel.org>; Thu,  7 May 2026 16:56:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.50
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778172976; cv=pass; b=LpJgt3S6/8ExYLwoezsMpcuRG0IVA+fTIDb+tIycJheuB5j3tk31SHPptVQWYym+/q/7pEba8qHJQ0cu8DedhMyEojXUVqhui6/M5dSL/lv7Efc8cQDartu3w+wi2Ehj5QSMR9mWnD3OI+1noF6s1fTSEAs2pZ0wgGyLIcHjzGQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778172976; c=relaxed/simple;
+	bh=yU58Xq2jlsKwRvWVzMF/35DqD9SuerVG6YnTfgrQsdg=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=UMYkESBYgFBafI1ivfFRiYWEI9356qfoWS61LXUXkEuBoIRAy4YOKFqD4cOMhi+/Db1hJ2dbS0JteRXvQVJgM3LfGrDliny43kQz9dKl54ALMLmGHkMnKIhD2g2Db9/bFBxfAlzrUCRSxUOd4i1PbstD1TRdwoffKSEWLOWQy/8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=X+qM3eJX; arc=pass smtp.client-ip=209.85.222.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-ua1-f50.google.com with SMTP id a1e0cc1a2514c-95cc3522c40so683162241.2
+        for <linux-doc@vger.kernel.org>; Thu, 07 May 2026 09:56:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778172973; cv=none;
+        d=google.com; s=arc-20240605;
+        b=D8kAIm7URjk+EfyCYaI/gqpvbfMjulCMFZ3vdzsutD0aLLSliO+E0HqEKiJ8bR5Jc0
+         MXXXmM3ltpLFqm3Py1egwDgh9a42z+i8On45se+twUzwFI1Ab0oKfJjEywPRzJATuxr/
+         5THble0O0eXodq7TdZdTP2YaB8ph3ARuZhKBhruWLl2sTKoQpW2QbNYvZ2IQm2u4CWnZ
+         DUFiOUuk9nedD6oijqutgcAaumNllomQOmhZqTSj+B3efJCmZ9WfWzKYxgixCgjufSu9
+         4CgLhOfTKTZE4fttM3zJzVlXqMfWC2zsD0CLdoqiDXzVVSodxZ7G6dO7Fyuv7ZZ5gkim
+         Azow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=fxKJNK3JYOXtq/6RpdHSxauIPnnYNnrQjQPiGKEVycA=;
+        fh=yiJGO347ZTV31R/XNxc1Hm/juB9VysjuiqwBPKxx4Wo=;
+        b=MPoj0PbPK8ZX8Omoo/HXZusI6G2S7yd5yWNXOOEgw1/Jcg5Vt04k83YmlZa5NJSL2t
+         Vm6qct+PMn/PTGJYARVXcIpdpgc8LeTnftgWpahJLuxcjzBDuSqthaHqCxqTIee7OwPc
+         NbCQdK0ta18BpHPCFtkZvBpP0xOeZ7rjxDRPa3gSsRg+QwKI9r7+S7YcrTUBvWLZ2YJv
+         8QvBiqN5KvaAQEJSIcawk63BL3PCyTOvzl5pfsU3F3w4Rw+P5XmmHBSGbtQmxE6qMYA8
+         jkOqobaAK4FSIOOEjQjzKfzx4cb+uepD6lGq07o+htUa0lt3g9GyDuZDuR+EZLA+WYQv
+         UKdQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1778172973; x=1778777773; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fxKJNK3JYOXtq/6RpdHSxauIPnnYNnrQjQPiGKEVycA=;
+        b=X+qM3eJXNBkXxwX1JTjGOqY+SYIjD7OSQTTVvvH/d7Nt/MhXpv/9WeJL03HkywvFpu
+         lDNyX+dclfgyAnhD+8YhHeNs5NOIBeliQTxtb8XsPAmy168xewtjrqpiDUODMgKv8j4G
+         S4MFtygN/7tarwoktBPjP2v4hmJwm/cQhkSRO6F3xWWFtwvysExswW6eESe7LkSwF6ZA
+         zTDl6THueBMTmPSkjEHcp50WYWxQefW/LSpbIvVkvqecKpIvnbleFhnWRg4wFwJnVCem
+         rwB+sfNX0dtugfmtyQV7/a7IBs7+GPxCDbM5fVrClxK3C8X2tJ9hpm4tNg5S8jMzzLdC
+         lIRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778172973; x=1778777773;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fxKJNK3JYOXtq/6RpdHSxauIPnnYNnrQjQPiGKEVycA=;
+        b=sNroWAazk0VKELXAFcpPJM33vuH0haGei7uJuXOJvXwhn037L8ZXgHAOd5Sd6ZBZsQ
+         U2ja779LYKmQBwS1Qul4cC0VvuZuY3ry4dIqwyxNBYs4XV5HvEN4VUg8tPRKMqwOVTFb
+         zxleP5c/g1P6rGfYtk0IlAZuAHk+f37ropqNtGzTiqiEf6ceguoEDEAoVbIrT5QzAim6
+         0h40WUQ9QZtraz3+VOxYkI2PhKkYrj2Teqk+GAj6PHZ/pClpc4ktevnrJ232TR39P4Jg
+         +5kGNmuDWnM5smaPFWuApvWAWPS6t1s6SPwFdJ5paMds9SaO4Slw9L9S06DPSz2myfC6
+         P9uw==
+X-Forwarded-Encrypted: i=1; AFNElJ+EJ1j8kLBu9hZCa7Jq+fBU0AJ3Msyzre4tW9tZZoGYF6UPht0fUAn0u8B00+7hPPrxSz6ENayJx/g=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzlBH0fSsp067UR9an94EEITlMVNmLJxDK/4Mblra+E6xmsvO+G
+	svGnhfFm9wbyLW7qcsxJErH3OxTmVK1OYWaPeM2pqAjQPpUTuRm7S8O08ZvzZXq1x8M35shHf5z
+	4UaPWwx/bfXah3UmW79k+i2q3BuikPH3nGdwCMgjV
+X-Gm-Gg: AeBDiesaHoPjztoVOZWXToC13wjGQoZPi7MR6xBsPAoZ0/085wp0rrFu+DMy0t7zyHN
+	HfK4Rmy0WU/kgL5SPjIdps6RmZqoFjAqepGvZAyXWEZ+40rfpQDBaAZeAAqMfEE8DbEPyN9owGk
+	54+nfHQbTHeu62PeDaDqOl2wuIAsbRtYidA5USgWdQYbNOo2hxtmC+GCvwGxIpGIxZFezkcFX3g
+	Z5S2CCT9I4WNkw90TMCd0NaSJw+kQ5fLKMrV6ZCsewhI+XnDB/tu9ZI56CApIAJ0CCMzZTHhsw1
+	szww1Vi1kDEBmHBWn1iP2PZwO1UplU2bQPVIeE5k6VTPJvoIh78RgDZgcz9U97gZh2TxLJc3Aku
+	/0kMn
+X-Received: by 2002:a05:6102:3f52:b0:604:f29d:84be with SMTP id
+ ada2fe7eead31-630f8e78530mr5085650137.3.1778172972306; Thu, 07 May 2026
+ 09:56:12 -0700 (PDT)
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 7 May 2026 09:56:11 -0700
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 7 May 2026 09:56:11 -0700
+From: Ackerley Tng <ackerleytng@google.com>
+In-Reply-To: <n5ce32wumzeiqqyqutom4apy2kqfetbvusc6j4k2xarsska5mw@klp5bmy7qhfm>
+References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
+ <20260428-gmem-inplace-conversion-v5-10-d8608ccfca22@google.com> <n5ce32wumzeiqqyqutom4apy2kqfetbvusc6j4k2xarsska5mw@klp5bmy7qhfm>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/13] ima: Introduce staging mechanism
-To: Roberto Sassu <roberto.sassu@huaweicloud.com>, corbet@lwn.net,
- skhan@linuxfoundation.org, zohar@linux.ibm.com, dmitry.kasatkin@gmail.com,
- eric.snowberg@oracle.com, paul@paul-moore.com, jmorris@namei.org,
- serge@hallyn.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-integrity@vger.kernel.org, linux-security-module@vger.kernel.org,
- gregorylumen@linux.microsoft.com, nramas@linux.microsoft.com,
- Roberto Sassu <roberto.sassu@huawei.com>,
- steven chen <chenste@linux.microsoft.com>
-References: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
-Content-Language: en-US
-From: steven chen <chenste@linux.microsoft.com>
-In-Reply-To: <20260429160319.4162918-1-roberto.sassu@huaweicloud.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 1EA3B4EC713
+Date: Thu, 7 May 2026 09:56:11 -0700
+X-Gm-Features: AVHnY4IiEmQejwyUzKbSGtsBzFH7WMpl699YC0dogi8imsP9-pFhPzVdvXeVDZc
+Message-ID: <CAEvNRgF9+Gr7UVEq-E2SQEb_XOQQMOXy9F_A2tA=DbNV_fJ0EQ@mail.gmail.com>
+Subject: Re: [PATCH RFC v5 10/53] KVM: guest_memfd: Add basic support for KVM_SET_MEMORY_ATTRIBUTES2
+To: "Liam R. Howlett" <liam@infradead.org>
+Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
+	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
+	ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
+	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
+	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
+	shivankg@amd.com, steven.price@arm.com, tabba@google.com, willy@infradead.org, 
+	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
+	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
+	Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, 
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
+	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
+	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-mm@kvack.org, linux-coco@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+X-Rspamd-Queue-Id: 64A334EC92A
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
-	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86249-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[huaweicloud.com,lwn.net,linuxfoundation.org,linux.ibm.com,gmail.com,oracle.com,paul-moore.com,namei.org,hallyn.com];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DKIM_TRACE(0.00)[google.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
+	TAGGED_FROM(0.00)[bounces-86260-lists,linux-doc=lfdr.de];
+	MISSING_XM_UA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[chenste@linux.microsoft.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[linux.microsoft.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCVD_COUNT_FIVE(0.00)[6];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_GT_50(0.00)[64];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_TWELVE(0.00)[17];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-On 4/29/2026 9:03 AM, Roberto Sassu wrote:
-> From: Roberto Sassu <roberto.sassu@huawei.com>
->
-> Introduction
-> ============
->
-> The IMA measurements list is currently stored in the kernel memory.
-> Memory occupation grows linearly with the number of entries, and can
-> become a problem especially in environments with reduced resources.
->
-> While there is an advantage in keeping the IMA measurements list in
-> kernel memory, so that it is always available for reading from the
-> securityfs interfaces, storing it elsewhere would make it possible to
-> free precious memory for other kernel components.
->
-> Storing the IMA measurements list outside the kernel does not introduce
-> security issues, since its integrity is anyway protected by the TPM.
->
-> Hence, the new IMA staging mechanism is introduced to allow user space
-> to remove the desired portion of the measurements list from the kernel.
->
->
-> Usage
-> =====
->
-> The IMA staging mechanism can be enabled from the kernel configuration
-> with the CONFIG_IMA_STAGING option.
->
-> If it is enabled, IMA duplicates the current measurements interfaces
-> (both binary and ASCII), by adding the _staged file suffix. Both the
-> original and the staging interfaces gain the write permission for the
-> root user and group, but require the process to have CAP_SYS_ADMIN set.
->
-> The staging mechanism supports two flavors.
->
-> Staging with prompt
-> ~~~~~~~~~~~~~~~~~~~
->
-> The current measurements list is moved to a temporary staging area, and
-> staged measurements are deleted upon confirmation.
->
-> This staging process is achieved with the following steps.
->
->    1.  echo A > <original interface>: the user requests IMA to stage the
->        entire measurements list;
->    2.  cat <_staged interface>: the user reads the staged measurements;
->    3.  echo D > <_staged interface>: the user requests IMA to delete
->        staged measurements.
->
-> Staging and deleting
-> ~~~~~~~~~~~~~~~~~~~~
->
-> N measurements are staged to a temporary staging area, and immediately
-> deleted without further confirmation.
->
-> This staging process is achieved with the following steps.
->
->    1.  cat <original interface>: the user reads the current measurements
->        list and determines what the value N for staging should be;
->    2.  echo N > <original interface>: the user requests IMA to delete N
->        measurements from the current measurements list.
+"Liam R. Howlett" <liam@infradead.org> writes:
 
-This submission proposes two ways for log trimming:
+> On 26/04/28 04:25PM, Ackerley Tng via B4 Relay wrote:
+>>
+>> [...snip...]
+>>
+>> +/*
+>> + * Preallocate memory for attributes to be stored on a maple tree, pointed to
+>> + * by mas.  Adjacent ranges with attributes identical to the new attributes
+>> + * will be merged.  Also sets mas's bounds up for storing attributes.
+>> + *
+>> + * This maintains the invariant that ranges with the same attributes will
+>> + * always be merged.
+>> + */
+>> +static int kvm_gmem_mas_preallocate(struct ma_state *mas, u64 attributes,
+>> +				    pgoff_t start, size_t nr_pages)
+>> +{
+>> +	pgoff_t end = start + nr_pages;
+>> +	pgoff_t last = end - 1;
+>> +	void *entry;
+>> +
+>> +	/* Try extending range. entry is NULL on overflow/wrap-around. */
+>> +	mas_set_range(mas, end, end);
+>> +	entry = mas_find(mas, end);
 
-*Favour 1:* Staging with prompt
-*Favour 2:* stage and delete N
+Thank you for your reviews!
 
-Functionally, both approaches address the same problem, but *Favour 2 
-*is the
-stronger design and should be preferred. There is no good reason to keep 
-*Favour 1.*
-
- From a kernel implementation perspective, *Favour 2 *is more efficient 
-because it
-minimizes the time spent holding the list lock (can’t be shorter). It 
-also substantially
-reduces the amount of kernel-side logic, removing nearly half of the 
-code required
-by the alternative approach.
-
- From a user-space perspective, *Favour 2 *results in a much cleaner 
-model. It avoids
-the need to track and reconcile both old and staged lists in user space 
-as well as
-two lists (cur and staged) in the kernel space, which simplifies log 
-trimming logic
-and reduces maintenance overhead. In addition, it preserves the existing 
-external
-behavior by not exposing any staged list to user space.
-
-Overall, *Favour 2 *provides the same functional result with lower 
-kernel complexity,
-shorter kernel list lock hold time, and a simpler user-space interface. 
-For those
-reasons, it is the preferable approach and *Favour 1* does not appear to 
-offer sufficient
-justification to keep both implementations.
-
-Steven
 >
-> Management of Staged Measurements
-> =================================
->
-> Since with the staging mechanism measurement entries are removed from
-> the kernel, the user needs to save the staged ones in a storage and
-> concatenate them together, so that it can present them to remote
-> attestation agents as if staging was never done.
->
->
-> Patch set content
-> =================
->
-> Patches 1-8 are preparatory patches to quickly replace the hash table,
-> maintain separate counters for the different measurements list types,
-> mediate access to the measurements list interface, and simplify the staging
-> patches.
->
-> Patch 9 introduces the staging with prompt flavor. Patch 10 makes it
-> possible to flush the hash table when deleting all the staged measurements.
-> Patch 11 introduces the staging and deleting flavor. Patch 12 avoids
-> measurements entries to be stored twice if there is contention between the
-> measurements interfaces and kexec. Patch 13 adds the documentation of the
-> staging mechanism.
->
->
-> Changelog
-> =========
->
-> v4:
->   - Add write permission to the original measurement interface, and move
->     the A and N staging commands to that interface
->   - Explain better the two staging flavors and highlight that the staging
->     and delete only stages measurements internally
->   - Rename ima_queue_staged_delete_partial() to ima_queue_delete_partial()
->   - Replace ima_staged_measurements_prepended with per measurements list
->     flag to avoid copying staged and active list measurements twice
->   - Optimize the staging and deleting flavor by locklessly determining the
->     cut position in the active list, and immediately deleting entries
->     without explicit staging and splicing (suggested by Steven Chen)
->
-> v3:
->   - Add Kconfig option to enable the staging mechanism (suggested by Mimi)
->   - Change the meaning of BINARY_STAGED to be just the staged measurements
->   - Separate the two staging flavors in two different functions:
->     ima_queue_staged_delete_all() for staging with prompt,
->     ima_queue_staged_delete_partial() for staging and deleting
->   - Delete N entries without staging first (suggested by Mimi)
->   - Avoid duplicate staged entries if there is contention between the
->     measurements list interfaces and kexec
->
-> v2:
->   - New patch to move measurements and violation counters outside the
->     ima_h_table structure
->   - New patch to quickly replace the hash table
->   - Forbid partial deletion when flushing hash table (suggested by Mimi)
->   - Ignore ima_flush_htable if CONFIG_IMA_DISABLE_HTABLE is enabled
->   - BINARY_SIZE_* renamed to BINARY_* for better clarity
->   - Removed ima_measurements_staged_exist and testing list empty instead
->   - ima_queue_stage_trim() and ima_queue_delete_staged_trimmed() renamed to
->     ima_queue_stage() and ima_queue_delete_staged()
->   - New delete interval [1, ULONG_MAX - 1]
->   - Rename ima_measure_lock to ima_measure_mutex
->   - Move seq_open() and seq_release() outside the ima_measure_mutex lock
->   - Drop ima_measurements_staged_read() and use seq_read() instead
->   - Optimize create_securityfs_measurement_lists() changes
->   - New file name format with _staged suffix at the end of the file name
->   - Use _rcu list variant in ima_dump_measurement_list()
->   - Remove support for direct trimming and splice the remaining entries to
->     the active list (suggested by Mimi)
->   - Hot swap the hash table if flushing is requested
->
-> v1:
->   - Support for direct trimming without staging
->   - Support unstaging on kexec (requested by Gregory Lumen)
->
-> Roberto Sassu (13):
->    ima: Remove ima_h_table structure
->    ima: Replace static htable queue with dynamically allocated array
->    ima: Introduce per binary measurements list type ima_num_entries
->      counter
->    ima: Introduce per binary measurements list type binary_runtime_size
->      value
->    ima: Introduce _ima_measurements_start() and _ima_measurements_next()
->    ima: Mediate open/release method of the measurements list
->    ima: Use snprintf() in create_securityfs_measurement_lists
->    ima: Introduce ima_dump_measurement()
->    ima: Add support for staging measurements with prompt
->    ima: Add support for flushing the hash table when staging measurements
->    ima: Support staging and deleting N measurements entries
->    ima: Return error on deleting measurements already copied during kexec
->    doc: security: Add documentation of the IMA staging mechanism
->
->   .../admin-guide/kernel-parameters.txt         |   4 +
->   Documentation/security/IMA-staging.rst        | 163 +++++++++
->   Documentation/security/index.rst              |   1 +
->   MAINTAINERS                                   |   2 +
->   security/integrity/ima/Kconfig                |  16 +
->   security/integrity/ima/ima.h                  |  32 +-
->   security/integrity/ima/ima_api.c              |   2 +-
->   security/integrity/ima/ima_fs.c               | 315 ++++++++++++++++--
->   security/integrity/ima/ima_init.c             |   5 +
->   security/integrity/ima/ima_kexec.c            |  53 ++-
->   security/integrity/ima/ima_queue.c            | 283 ++++++++++++++--
->   11 files changed, 803 insertions(+), 73 deletions(-)
->   create mode 100644 Documentation/security/IMA-staging.rst
+> Please read the documentation as I believe you have a bug here.  What
+> happens if there is another range stored higher than end + 1?
 >
 
+The invariant in this maple tree is that contiguous ranges with the same
+attribute are stored as a single range.
+
+The goal of this first part is to get the entry at the index just after
+the requested range, and see what the attribute there is. If that
+attribute is what we're about to set, extend the requested range for
+storing to the end of that range.
+
+If there is another range higher than end + 1, with the invariant
+maintained, that attribute has to be different than the attribute stored
+at end. Hence, we only want to extend this requested range up till end.
+
+> Do you have testing of these functions somewhere?
+>
+
+GMEM_CONVERSION_MULTIPAGE_TEST_INIT_SHARED(indexing, 4) tests setting
+attributes in ranges. If test_page is 2,
+
+1. [0, 4) starts off shared (4 is the number of pages in the guest_memfd)
+2. [2, 3) is converted to private
+    => so the ranges should now be [0, 2), [2, 3), [3, 4)
+3. [2, 3) is converted back to shared
+    => so the ranges should now be [0, 4)
+
+I verified this by inserting some trace_printk()s and inspecting manually.
+
+>> +	if (entry && xa_to_value(entry) == attributes)
+>> +		last = mas->last;
+>> +
+>> +	if (start > 0) {
+>> +		mas_set_range(mas, start - 1, start - 1);
+>> +		entry = mas_find(mas, start - 1);
+>> +		if (entry && xa_to_value(entry) == attributes)
+>> +			start = mas->index;
+>> +	}
+>> +
+>> +	mas_set_range(mas, start, last);
+>> +	return mas_preallocate(mas, xa_mk_value(attributes), GFP_KERNEL);
+>> +}
+>> +
+>>
+>> [...snip...]
+>>
 
