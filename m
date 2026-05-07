@@ -1,142 +1,123 @@
-Return-Path: <linux-doc+bounces-86272-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86274-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +NS/Ezra/Gl9UgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86272-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:30:18 +0200
+	id ULxpB8na/GmdUgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86274-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:32:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2E524ED6F3
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:30:17 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 607CF4ED753
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 20:32:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4A36930238CC
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 18:29:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 64EC130262EE
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 18:32:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2ACB94657F8;
-	Thu,  7 May 2026 18:29:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67E51302140;
+	Thu,  7 May 2026 18:32:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WK6EcH4B"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="pAW7xBhQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 058B53B7B7F;
-	Thu,  7 May 2026 18:29:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14ADA7081F;
+	Thu,  7 May 2026 18:32:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778178571; cv=none; b=ZdTVb+jrvuaV8aht3MfiGTVXPVFSFUaE7PbIRAZg2mVmVxOrAhUhENmHcxCJBJajdZeZglezIO+RvAsgNvknZV0dq17nodQ36zCngv+PA7JGdTeUT6/+NH4Dr/z92u//+D9X2V2uqDmH+kKSTJHEt/QzwC98TO8NEfD3uiZ8LjE=
+	t=1778178725; cv=none; b=t4svwefvoYlkUdmJXKfIJYYhD1GtrmVp/q5iR/0TKo8yKpx6gykqGZSoNRFtEGlIT1HWqrZAIVKnFkRcaCCxquR2AdXnz/Hkw0fEuY6RQbnrc2dzC/SsfB0g92S2lOEyUx1dHfHKA6rXsiNK0XJ/RfwRVTMznhbXoY7ewVzGmqc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778178571; c=relaxed/simple;
-	bh=Li5t44X8CLBTyXHBrX5yYHLu5aIsEaNbJr/x5ikzBlY=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Bh8D/Iak3H7n2CEkyn+uHoQPa8+SEcfUdP1vMotxTZF9I1OTUZenlYyB6Y3zZFhJsAoaOhh7xY5l2M6M7vNWqK9hbDEoDXpix8vMwXYth95YmRnU4yPQAhLbaKvg6GVOxb/llVbqfKJhc0JzdcQ/MJE8vBrTQRTiXHk0fNnJRGQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WK6EcH4B; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C50CC2BCB2;
-	Thu,  7 May 2026 18:29:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778178570;
-	bh=Li5t44X8CLBTyXHBrX5yYHLu5aIsEaNbJr/x5ikzBlY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=WK6EcH4BJ9IPRxezKa+gmItkU5zufMLjv57rFPQ5Z+jKdchzc+wIS7mO4fmT0C3F4
-	 77/Skfz6S3hXj3Vwkzj3R7xjriRdOGGsFZeZb7meuSTEs/QpebcWS4fyFBbQlpuKwQ
-	 ZnTf4AW6RWoP90vWGxd4z1+mtakKzw5sM3fmxk8IdNTE7/+h4XEJxPKmMO54rnJTb/
-	 g70yV6j2YlWK/lfTQAFtiTwpd2gM4EW230PKLD9kEHPy5oGow6y/H4K2r4+wR01tDj
-	 /V3l4TY8qJ/hhitcx0ZQf7rholkxoED+Gv+ZNsHM9xflbYRwc6HKgqAdWvgkIf7adY
-	 RF2uC03fTOP+w==
-Date: Thu, 7 May 2026 19:29:22 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Terry Bowman <terry.bowman@amd.com>
-Cc: <dave@stgolabs.net>, <dave.jiang@intel.com>,
- <alison.schofield@intel.com>, <djbw@kernel.org>, <bhelgaas@google.com>,
- <shiju.jose@huawei.com>, <ming.li@zohomail.com>,
- <Smita.KoralahalliChannabasappa@amd.com>, <rrichter@amd.com>,
- <dan.carpenter@linaro.org>, <PradeepVineshReddy.Kodamati@amd.com>,
- <lukas@wunner.de>, <Benjamin.Cheatham@amd.com>,
- <sathyanarayanan.kuppuswamy@linux.intel.com>, <vishal.l.verma@intel.com>,
- <alucerop@amd.com>, <ira.weiny@intel.com>, <corbet@lwn.net>,
- <rafael@kernel.org>, <xueshuai@linux.alibaba.com>,
- <linux-cxl@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <linux-pci@vger.kernel.org>, <linux-acpi@vger.kernel.org>,
- <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH v17 10/11] PCI/CXL: Mask/Unmask CXL protocol errors
-Message-ID: <20260507192922.451244f1@jic23-huawei>
-In-Reply-To: <20260505173029.2718246-11-terry.bowman@amd.com>
-References: <20260505173029.2718246-1-terry.bowman@amd.com>
-	<20260505173029.2718246-11-terry.bowman@amd.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1778178725; c=relaxed/simple;
+	bh=b5J+KPKHs2hOnCWi5Pn8JB7sH/di9nBZVHYpk2c7g5Y=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=ivDAQsY3nCHqP1rJYUDeRzeMjmjKnFH84xE+6J22NC1O9IukOT4EIYAAsAlTBMR+0gPjOSjTW6N9TB9wjckPfX9hAcApGvseylT7ztrsLsdPGWfmWFLyS+PkXI2CbBItMtUIFMM900vh50C1VWGqsLE3GlQKDoTCDjVv5tAYq9w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=pAW7xBhQ; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 98F774108F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1778178723; bh=RTMt6BKs/kz2IfrGRlqqQV3gsT6J5jkpN08BrmidNI4=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=pAW7xBhQpMXqkAFPsv6VK/3BQVxo+qWLlIz00LPsw8Tz70jOcJvQqnS50uvA/GzpL
+	 K3cJrBMx32G/RALouQnjrRABTpu3cyFoVPnkFeuYmXyFy1LG4xdOSs8YDBcnxOUNGv
+	 ljKCK6yXErWpzwNmVu3yew1CsO4AGnEo80Qa+bJ5ZTVcKJTyrhrquZzAPma5RO1tU5
+	 D+dK9LEj5nxaLfFdBY680/8D/KL7A23cgpUNfT+z0Ce+D+qCMSSZgywFas/JqYLfEU
+	 Zb6297f6LOWiKL8m59Glr8IEYmfgsWS/PEJQcmXXYvIUiV6dYcERrRyEv9qc9DuW3z
+	 s5ki6aDxu2woA==
+Received: from localhost (unknown [205.220.129.21])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 98F774108F;
+	Thu,  7 May 2026 18:32:01 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: John Doe <drapl0n.kernel@gmail.com>, Randy Dunlap <rdunlap@infradead.org>
+Cc: Paul Moore <paul@paul-moore.com>, Serge Hallyn <sergeh@kernel.org>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: fix typo and formattting in
+ security/credentials.rst
+In-Reply-To: <afzQVIv4-Up24VNM@gmail.com>
+References: <20260506225925.271163-1-drapl0n.kernel@gmail.com>
+ <cbe6e145-9d2f-47bb-8d22-1599cfd1a9d4@infradead.org>
+ <afzQVIv4-Up24VNM@gmail.com>
+Date: Thu, 07 May 2026 12:31:48 -0600
+Message-ID: <87pl378417.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: D2E524ED6F3
+Content-Type: text/plain
+X-Rspamd-Queue-Id: 607CF4ED753
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-86274-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86272-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[26];
+	FREEMAIL_TO(0.00)[gmail.com,infradead.org];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jic23@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCPT_COUNT_SEVEN(0.00)[8];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Tue, 5 May 2026 12:30:28 -0500
-Terry Bowman <terry.bowman@amd.com> wrote:
+John Doe <drapl0n.kernel@gmail.com> writes:
 
-> CXL protocol errors are not enabled for all CXL devices after boot. They
-> must be enabled in order to process CXL protocol errors. Provide matching
-> teardown helpers so the masks are restored when a CXL Port or Downstream
-> Port goes away.
-> 
-> Add pci_aer_mask_internal_errors() as the symmetric counterpart to
-> pci_aer_unmask_internal_errors() and export both for the cxl_core module.
-> 
-> Introduce cxl_unmask_proto_interrupts() and cxl_mask_proto_interrupts()
-> in cxl_core to wrap the PCI helpers with the dev_is_pci() and
-> pcie_aer_is_native() gating CXL needs. Both helpers tolerate a NULL
-> @dev so teardown callers do not have to special-case it.
-> 
-> Wire cxl_unmask_proto_interrupts() into the success path of
-> cxl_dport_map_ras() and devm_cxl_port_ras_setup() so the unmask only
-> runs when the RAS register block was actually mapped. Pair each unmask
-> with a devm_add_action_or_reset() registration of
-> cxl_mask_proto_interrupts() scoped to the cxl_port device. The mask is
-> then restored when the cxl_port device releases its devres. This
-> applies to Endpoints, Upstream Switch Ports, Downstream Switch Ports,
-> and Root Ports.
-> 
-> Co-developed-by: Dan Williams <djbw@kernel.org>
-> Signed-off-by: Dan Williams <djbw@kernel.org>
-> Signed-off-by: Terry Bowman <terry.bowman@amd.com>
+> Thank you for the feedback and acknowledgment. I thought that since my
+> earlier patch was invalid/corrupted, I should submit a new one rather than
+> version 2.
+>
+> I understand the procedure now and will ensure that future revisions follow
+> the guidelines.
 
-I'd have definitely preferred if the ras code generally reported
-errors on setup and then we decided whether to taken any notice
-at the top of the stack, but that's existing code so not your problem.
+Along those lines, seeing multiple names associated with the same email
+account is a bit disconcerting.  We are not generally interested in
+taking patches submitted under pseudonyms...
 
-Reviewed-by: Jonathan Cameron <jic23@kernel.org>
-
-Subject to Dave's interesting suggestion...
+jon
 
