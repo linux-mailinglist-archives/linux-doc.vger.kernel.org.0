@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-86280-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86283-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kNTFJXnn/GkMVQAAu9opvQ
-	(envelope-from <linux-doc+bounces-86280-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 21:26:49 +0200
+	id oPTmOE3l/GmGVAAAu9opvQ
+	(envelope-from <linux-doc+bounces-86283-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 21:17:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6CB54EE068
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 21:26:48 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 813034EDDA5
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 21:17:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1A06430E481B
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 19:16:24 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 03B50301B53A
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 19:16:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F4091492501;
-	Thu,  7 May 2026 19:14:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A21F14534A7;
+	Thu,  7 May 2026 19:14:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="GfgmBchx"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="QA5wnLHq"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD19B47ECCC;
-	Thu,  7 May 2026 19:14:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9F8347F2F7;
+	Thu,  7 May 2026 19:14:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778181280; cv=none; b=mMKsSk+n+PwjnRd4ePB1biuv+h2YNVbsLrGvIHuRVZ1oIKOrKxEVQVAbGmtqNR4zbvWNf1sSxANHYVsfZvyBNrqJ/rkGBr7/MzdnrT59V+KM+ThIdFFGBAhhMX4VB87BkKKqAyWHTJo15a/VZaXlCP8zFPnUB6SmSUpWE5mzYyA=
+	t=1778181292; cv=none; b=uZZZ885Uj39guO9Gr47euuxTho6006nP0OIhDaFhUX+y+S6qOwgI7jQ+GcjzRsm/XjelhIGzfkzkaRHBU/CBO1mVYBb+hkoeB+g5yFR6hyuFvU3hHuZfmF9uRLzG+AGaYSrrWD7bZtNlP0wsEfI3KuC0FudUY/9A7VbLK3avmUI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778181280; c=relaxed/simple;
-	bh=fYARcDBmPPcHO7t07Sr6HPEeL+UytBm9Oitq4eLFb94=;
+	s=arc-20240116; t=1778181292; c=relaxed/simple;
+	bh=0MRGeeENNRP6Ty9uEQ87dqLptUAo0z7GhmFU/5h4Cbw=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=l0OpfATVbKt7ZQGnRVtLPwPuzi2UlKI98b3440vE3wPxLVWuPnDWsaGi9HI04j3L6Ryn5VK+L7w/hsnXd31Jc4IeTtK6s8Cwecrty+OsNKgf7pSyf8iMgUeFpX5k+jrDkDHNspL8uea0R80u+geDJXr0WgifFF8B4/rjRZoJvII=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=GfgmBchx; arc=none smtp.client-ip=13.77.154.182
+	 MIME-Version; b=UTw/3sNx6QRIPSLXSL8pR9s/4TuW8dZoLqbPhGi+WfL/rYRsHxXR71TmjrFAEQ+LmGXL5anMZjhg6qULhh2vEB5rQdMWcOq6uSn5jNXadw/hu/lalXs7yeZtFWmL/TzK6ZbyFoOrodigYBWbaU172YXMF/o2vTftnqbaZ2NxOVM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=QA5wnLHq; arc=none smtp.client-ip=13.77.154.182
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
 Received: from narnia.corp.microsoft.com (unknown [40.78.12.246])
-	by linux.microsoft.com (Postfix) with ESMTPSA id AC4A720B7167;
-	Thu,  7 May 2026 12:14:22 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com AC4A720B7167
+	by linux.microsoft.com (Postfix) with ESMTPSA id DEE0720B7168;
+	Thu,  7 May 2026 12:14:24 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com DEE0720B7168
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
-	s=default; t=1778181264;
-	bh=TdoGL/WFRJu1LL991oi0llbx4SxP9bDplmkY7d0i3/c=;
+	s=default; t=1778181266;
+	bh=anUjjxS2B78q1/i+/XG1eL0BcU5FMzXVCBKwLC9yTQk=;
 	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=GfgmBchxOZyuNw97yxdf+nROJ82h4Py2+McDKOeR7INQIQaKKeM46ojjCx8l9vWvR
-	 HBjgzL5MMKi6at6XxRCFRcjI4ufFx5bLi8wWoBAtVUpQ4Zn8L8ghljcI6gMlH9nkbs
-	 SEvu256ixMeTWl8Dw7Q6gWUfuiiGS48eTdaMNxWo=
+	b=QA5wnLHq70zR2i9k3ET1c7ddXXVeyoz1xaQyOzmIbu8J42uMwby+BwXxDH33iTnZx
+	 iSg4w4qG8RnbhN1p8OIdo9Mf04wGQyEWi6PmFlN3Z8/ZkAMypgNC914etBhRXfcp2D
+	 YvIN75msxCPMeInxvPDFZ/YOWmiW0nY8cj09kSIs=
 From: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
 To: "Blaise Boscaccy" <bboscaccy@linux.microsoft.com>,
 	"Jonathan Corbet" <corbet@lwn.net>,
@@ -63,9 +63,9 @@ To: "Blaise Boscaccy" <bboscaccy@linux.microsoft.com>,
 	linux-kernel@vger.kernel.org,
 	bpf@vger.kernel.org,
 	"Song Liu" <song@kernel.org>
-Subject: [PATCH v7 01/10] crypto: pkcs7: add flag for validated trust on a signed info block
-Date: Thu,  7 May 2026 12:13:55 -0700
-Message-ID: <20260507191416.2984054-2-bboscaccy@linux.microsoft.com>
+Subject: [PATCH v7 02/10] crypto: pkcs7: add ability to extract signed attributes by OID
+Date: Thu,  7 May 2026 12:13:56 -0700
+Message-ID: <20260507191416.2984054-3-bboscaccy@linux.microsoft.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260507191416.2984054-1-bboscaccy@linux.microsoft.com>
 References: <20260507191416.2984054-1-bboscaccy@linux.microsoft.com>
@@ -76,7 +76,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: D6CB54EE068
+X-Rspamd-Queue-Id: 813034EDDA5
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.84 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -85,13 +85,13 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[linux.microsoft.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[linux.microsoft.com:s=default];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCPT_COUNT_TWELVE(0.00)[19];
 	FREEMAIL_TO(0.00)[linux.microsoft.com,lwn.net,paul-moore.com,namei.org,hallyn.com,digikod.net,google.com,treblig.org,linux-foundation.org,HansenPartnership.com,redhat.com,kernel.org,gmail.com,infradead.org,vger.kernel.org];
-	TAGGED_FROM(0.00)[bounces-86280-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86283-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -102,66 +102,190 @@ X-Spamd-Result: default: False [0.84 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[bboscaccy@linux.microsoft.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[linux.microsoft.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.microsoft.com:mid,linux.microsoft.com:dkim,hansenpartnership.com:email]
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.microsoft.com:mid,linux.microsoft.com:dkim,hansenpartnership.com:email,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,rfc-editor.org:url]
 X-Rspamd-Action: no action
 
 From: James Bottomley <James.Bottomley@HansenPartnership.com>
 
-Allow consumers of struct pkcs7_message to tell if any of the sinfo
-fields has passed a trust validation.  Note that this does not happen
-in parsing, pkcs7_validate_trust() must be explicitly called or called
-via validate_pkcs7_trust().  Since the way to get this trusted pkcs7
-object is via verify_pkcs7_message_sig, export that so modules can use
-it.
+Signers may add any information they like in signed attributes and
+sometimes this information turns out to be relevant to specific
+signing cases, so add an api pkcs7_get_authattr() to extract the value
+of an authenticated attribute by specific OID.  The current
+implementation is designed for the single signer use case and simply
+terminates the search when it finds the relevant OID.
 
 Signed-off-by: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
 ---
- certs/system_keyring.c                | 1 +
- crypto/asymmetric_keys/pkcs7_parser.h | 1 +
- crypto/asymmetric_keys/pkcs7_trust.c  | 1 +
- 3 files changed, 3 insertions(+)
+ crypto/asymmetric_keys/Makefile       |  4 +-
+ crypto/asymmetric_keys/pkcs7_aa.asn1  | 18 ++++++
+ crypto/asymmetric_keys/pkcs7_parser.c | 81 +++++++++++++++++++++++++++
+ include/crypto/pkcs7.h                |  4 ++
+ 4 files changed, 106 insertions(+), 1 deletion(-)
+ create mode 100644 crypto/asymmetric_keys/pkcs7_aa.asn1
 
-diff --git a/certs/system_keyring.c b/certs/system_keyring.c
-index e0761436ec7f4..9bda49295bd02 100644
---- a/certs/system_keyring.c
-+++ b/certs/system_keyring.c
-@@ -380,6 +380,7 @@ int verify_pkcs7_message_sig(const void *data, size_t len,
- 	pr_devel("<==%s() = %d\n", __func__, ret);
- 	return ret;
- }
-+EXPORT_SYMBOL(verify_pkcs7_message_sig);
+diff --git a/crypto/asymmetric_keys/Makefile b/crypto/asymmetric_keys/Makefile
+index bc65d3b98dcbf..f99b7169ae7cd 100644
+--- a/crypto/asymmetric_keys/Makefile
++++ b/crypto/asymmetric_keys/Makefile
+@@ -53,12 +53,14 @@ clean-files	+= pkcs8.asn1.c pkcs8.asn1.h
+ obj-$(CONFIG_PKCS7_MESSAGE_PARSER) += pkcs7_message.o
+ pkcs7_message-y := \
+ 	pkcs7.asn1.o \
++	pkcs7_aa.asn1.o \
+ 	pkcs7_parser.o \
+ 	pkcs7_trust.o \
+ 	pkcs7_verify.o
  
- /**
-  * verify_pkcs7_signature - Verify a PKCS#7-based signature on system data.
-diff --git a/crypto/asymmetric_keys/pkcs7_parser.h b/crypto/asymmetric_keys/pkcs7_parser.h
-index 6ef9f335bb17f..203062a33def6 100644
---- a/crypto/asymmetric_keys/pkcs7_parser.h
-+++ b/crypto/asymmetric_keys/pkcs7_parser.h
-@@ -20,6 +20,7 @@ struct pkcs7_signed_info {
- 	unsigned	index;
- 	bool		unsupported_crypto;	/* T if not usable due to missing crypto */
- 	bool		blacklisted;
-+	bool		verified; /* T if this signer has validated trust */
+-$(obj)/pkcs7_parser.o: $(obj)/pkcs7.asn1.h
++$(obj)/pkcs7_parser.o: $(obj)/pkcs7.asn1.h $(obj)/pkcs7_aa.asn1.h
+ $(obj)/pkcs7.asn1.o: $(obj)/pkcs7.asn1.c $(obj)/pkcs7.asn1.h
++$(obj)/pkcs7_aa.asn1.o: $(obj)/pkcs7_aa.asn1.c $(obj)/pkcs7_aa.asn1.h
  
- 	/* Message digest - the digest of the Content Data (or NULL) */
- 	const void	*msgdigest;
-diff --git a/crypto/asymmetric_keys/pkcs7_trust.c b/crypto/asymmetric_keys/pkcs7_trust.c
-index 9a87c34ed1733..78ebfb6373b61 100644
---- a/crypto/asymmetric_keys/pkcs7_trust.c
-+++ b/crypto/asymmetric_keys/pkcs7_trust.c
-@@ -127,6 +127,7 @@ static int pkcs7_validate_trust_one(struct pkcs7_message *pkcs7,
- 		for (p = sinfo->signer; p != x509; p = p->signer)
- 			p->verified = true;
- 	}
-+	sinfo->verified = true;
- 	kleave(" = 0");
- 	return 0;
+ #
+ # PKCS#7 parser testing key
+diff --git a/crypto/asymmetric_keys/pkcs7_aa.asn1 b/crypto/asymmetric_keys/pkcs7_aa.asn1
+new file mode 100644
+index 0000000000000..7a8857bdf56e1
+--- /dev/null
++++ b/crypto/asymmetric_keys/pkcs7_aa.asn1
+@@ -0,0 +1,18 @@
++-- SPDX-License-Identifier: BSD-3-Clause
++--
++-- Copyright (C) 2009 IETF Trust and the persons identified as authors
++-- of the code
++--
++-- https://www.rfc-editor.org/rfc/rfc5652#section-3
++
++AA ::= 	CHOICE {
++	aaSet		[0] IMPLICIT AASet,
++	aaSequence	[2] EXPLICIT SEQUENCE OF AuthenticatedAttribute
++}
++
++AASet ::= SET OF AuthenticatedAttribute
++
++AuthenticatedAttribute ::= SEQUENCE {
++	type	OBJECT IDENTIFIER ({ pkcs7_aa_note_OID }),
++	values	SET OF ANY ({ pkcs7_aa_note_attr })
++}
+diff --git a/crypto/asymmetric_keys/pkcs7_parser.c b/crypto/asymmetric_keys/pkcs7_parser.c
+index 6e3ffdac83ace..d467866f7d930 100644
+--- a/crypto/asymmetric_keys/pkcs7_parser.c
++++ b/crypto/asymmetric_keys/pkcs7_parser.c
+@@ -15,6 +15,7 @@
+ #include <crypto/public_key.h>
+ #include "pkcs7_parser.h"
+ #include "pkcs7.asn1.h"
++#include "pkcs7_aa.asn1.h"
+ 
+ MODULE_DESCRIPTION("PKCS#7 parser");
+ MODULE_AUTHOR("Red Hat, Inc.");
+@@ -211,6 +212,86 @@ int pkcs7_get_content_data(const struct pkcs7_message *pkcs7,
  }
+ EXPORT_SYMBOL_GPL(pkcs7_get_content_data);
+ 
++struct pkcs7_aa_context {
++	bool found;
++	enum OID oid_to_find;
++	const void *data;
++	size_t len;
++};
++
++int pkcs7_aa_note_OID(void *context, size_t hdrlen,
++		      unsigned char tag,
++		      const void *value, size_t vlen)
++{
++	struct pkcs7_aa_context *ctx = context;
++	enum OID oid = look_up_OID(value, vlen);
++
++	ctx->found = (oid == ctx->oid_to_find);
++
++	return 0;
++}
++
++int pkcs7_aa_note_attr(void *context, size_t hdrlen,
++		       unsigned char tag,
++		       const void *value, size_t vlen)
++{
++	struct pkcs7_aa_context *ctx = context;
++
++	if (ctx->found) {
++		ctx->data = value;
++		ctx->len = vlen;
++	}
++
++	return 0;
++}
++
++/**
++ * pkcs7_get_authattr - get authenticated attribute by OID
++ * @pkcs7: The preparsed PKCS#7 message
++ * @oid: the enum value of the OID to find
++ * @_data: Place to return a pointer to the attribute value
++ * @_len: length of the attribute value
++ *
++ * Searches the authenticated attributes until one is found with a
++ * matching OID.  Note that because the attributes are per signer
++ * there could be multiple signers with different values, but this
++ * routine will simply return the first one in parse order.
++ *
++ * Returns -ENODATA if the attribute can't be found
++ */
++int pkcs7_get_authattr(const struct pkcs7_message *pkcs7,
++		       enum OID oid,
++		       const void **_data, size_t *_len)
++{
++	struct pkcs7_signed_info *sinfo = pkcs7->signed_infos;
++	struct pkcs7_aa_context ctx;
++
++	ctx.data = NULL;
++	ctx.oid_to_find = oid;
++
++	for (; sinfo; sinfo = sinfo->next) {
++		int ret;
++
++		/* only extract OIDs from validated signers */
++		if (!sinfo->verified)
++			continue;
++
++		ret = asn1_ber_decoder(&pkcs7_aa_decoder, &ctx,
++				       sinfo->authattrs, sinfo->authattrs_len);
++		if (ret < 0 || ctx.data != NULL)
++			break;
++	}
++
++	if (!ctx.data)
++		return -ENODATA;
++
++	*_data = ctx.data;
++	*_len = ctx.len;
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(pkcs7_get_authattr);
++
+ /*
+  * Note an OID when we find one for later processing when we know how
+  * to interpret it.
+diff --git a/include/crypto/pkcs7.h b/include/crypto/pkcs7.h
+index 38ec7f5f90411..bd83202cd805c 100644
+--- a/include/crypto/pkcs7.h
++++ b/include/crypto/pkcs7.h
+@@ -25,6 +25,10 @@ extern void pkcs7_free_message(struct pkcs7_message *pkcs7);
+ extern int pkcs7_get_content_data(const struct pkcs7_message *pkcs7,
+ 				  const void **_data, size_t *_datalen,
+ 				  size_t *_headerlen);
++extern int pkcs7_get_authattr(const struct pkcs7_message *pkcs7,
++			      enum OID oid,
++			      const void **_data, size_t *_len);
++
+ 
+ /*
+  * pkcs7_trust.c
 -- 
 2.53.0
 
