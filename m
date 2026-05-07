@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-86311-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86312-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CPd2B8H0/GlmVgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86311-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 22:23:29 +0200
+	id UGpSG8f0/GlmVgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86312-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 22:23:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6B6F4EE660
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 22:23:28 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD9B64EE66F
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 22:23:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 225E6303F268
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 20:23:16 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C973A304368E
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 20:23:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF693494A19;
-	Thu,  7 May 2026 20:22:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14EDC495521;
+	Thu,  7 May 2026 20:22:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mvaP+oVt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Rb5QTB/8"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F9F948C8C5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE02949250F;
 	Thu,  7 May 2026 20:22:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778185370; cv=none; b=Ibit52LNaI9GLHEvLkhF4NCI7/yDGyKqrpOeTE/YNqW1pnMq7FJAvuDfBnUcqL2O7ofVDoVk9q/90dpcwalT6mzPLsYspme4NvKJDF/AT4XZIaOW4yGl8nM3tFTq3xp46NPmFmI0Y+tQ0wXG4+62ljdLVDHTy+tEbyiR91RCNxo=
+	t=1778185370; cv=none; b=Zwvyx/AxBrADHYl7PUtJZMtaE9nnGVbC3JSDoMbAZYxVPGquhlivJ09iCHLZvVpGKEXbl41LEu04EmHHq9clbQCB2MzPEYUOAwLLBXBx+n5kwtH90TUqNFtoReRK3RoPoESrM0FSrBQgOhAF1WE5GCAnxRSBCP0SnB29zC5IgvY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1778185370; c=relaxed/simple;
-	bh=fFtmWEB2rVwOQInVf+/O+AAAmMZe98X9Uk/1RyXVqxs=;
+	bh=ECkc//Rm5aBd8ErFl7GQTiHwXQZQd+G0cJcSZ2SUQ4M=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=XBfAMX6Vzy6OxKpXIUaHjEIThoJvldHYYVHCR9WsNwHB6G/xXHMln4bZSiQX83dKs7FMq5eyxtIlAa6RcOKwUIokKToZXdPDcTHZLkZdFchDh2G0EDCQ/TsDfgIduCep/D8SlhHU/EEaUTSSqXqG9WxhfIOwyXcraAC38krK+sk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mvaP+oVt; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 81C1BC2BCB8;
+	 In-Reply-To:To:Cc; b=ljI/nRkCkXnFkqIEq0et/sDLTK6OI79/rZrIJwmjVhVwBodjLXQWhrBmT2CvAWnR+VJbTab5y+86Jh0r6UFqrXOKa3igR8yqbrYxkLPpv9oxENzrR4pHFCKcLsV3vuKl1nc8ZnagXakrACepPK7bFyVemqxA+FSZSQeIbEMxnlM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Rb5QTB/8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A198DC2BCF6;
 	Thu,  7 May 2026 20:22:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1778185370;
-	bh=fFtmWEB2rVwOQInVf+/O+AAAmMZe98X9Uk/1RyXVqxs=;
+	bh=ECkc//Rm5aBd8ErFl7GQTiHwXQZQd+G0cJcSZ2SUQ4M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=mvaP+oVtXNE1T3F7BFnHbkR0Do5+V2YtbUZCI/B0LSJ2RoHZfunSBYn/JQRQSA276
-	 u7KLzCm9oYvABACug7hPzVufNH+iIOPLpjsYxO7ytwcfU/u4L3H1KXwGZ6JTPA5UiE
-	 v/NkmacUD+HyBiyP+/neQWt5EO5fm91bxwPYWFm404KVJwyolzAIgsv07DJS3J5Pkm
-	 DAndgl+NjPQ6GclpKe9HAvyP9pnRJ+AAaDm3j5YC+FNyUj/yvDQDtv3zknIVkWefn+
-	 pLqC8Iu1mqXAsOizt5TA2nHfpLr51doOQrkf2tiKqZuPo7yAZOkWYSj3X8slp/QdiA
-	 BV7v8RDD8Z1gg==
+	b=Rb5QTB/8Z4E5BQXSKy5CyYL0tGV2JZkL2sjl0qZ5/OuZCZgFXpAET0+ud+L49uM3Y
+	 JxRg/0NV+T9O5XDWkHLudhpzGq20NsRLwne2IInhUrUxWw4QoTlDNFfOPvWCDmn169
+	 wux10//mxWKqb5IRC+ufFmbsIs6BlZ2D1HTO3xdbSG8/LbWfohurRw9wxqGVWzlKxK
+	 1N/zXGTDJTIZ/uoRAfU59GPERK2p+bvG+twQUPTYEPGukSfVBuS/pnqAEih2hjvIm+
+	 o5NRrcHY58wM9xdb4H/52wGYuuPMKZGYHZAjaAD/3HFIkPLcXQmg1U/sD4m4QXckEm
+	 sW8HsN6CrzpvA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7347FCD343F;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9266ACD379F;
 	Thu,  7 May 2026 20:22:50 +0000 (UTC)
 From: Ackerley Tng via B4 Relay <devnull+ackerleytng.google.com@kernel.org>
-Date: Thu, 07 May 2026 13:22:35 -0700
-Subject: [PATCH v6 16/43] KVM: guest_memfd: Use actual size for
- invalidation in kvm_gmem_release()
+Date: Thu, 07 May 2026 13:22:36 -0700
+Subject: [PATCH v6 17/43] KVM: guest_memfd: Determine invalidation filter
+ from memory attributes
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260507-gmem-inplace-conversion-v6-16-91ab5a8b19a4@google.com>
+Message-Id: <20260507-gmem-inplace-conversion-v6-17-91ab5a8b19a4@google.com>
 References: <20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com>
 In-Reply-To: <20260507-gmem-inplace-conversion-v6-0-91ab5a8b19a4@google.com>
 To: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
@@ -93,29 +93,29 @@ Cc: kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-kselftest@vger.kernel.org, linux-mm@kvack.org, 
  linux-coco@lists.linux.dev, Ackerley Tng <ackerleytng@google.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778185365; l=1535;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778185365; l=3498;
  i=ackerleytng@google.com; s=20260225; h=from:subject:message-id;
- bh=LSFEUZnHaOopcxqUEi0sDjR1Doime7tSJ4O6yqxwRt0=;
- b=/vOP4AdpdOPvG0vm/pWq6fbnDjc3tTn7sEYOQboWhIq67Ao5ApttT2OLD+kQoR9LNtnsKf+tf
- 6p0lDRmkhG6BqVgy195ik79HDXsZwZRhvx0PXefOX24yR8AcenlQKt0
+ bh=cb6GU/Czugc5dCGBR8Xkq0dGJY95214cakpcZ5+aX1E=;
+ b=BctN5RnJgW2m9CJ/sfOPv5rohicoHUSrVanK/+sqiEOSDoTS1c64rUYu0WQ4DBVrjaEC+5C4P
+ hL9SGm1sCo2Bqf5LRAMBA9DXaXIgvAopQd7IkiaewR9TKlld4fV+BDJ
 X-Developer-Key: i=ackerleytng@google.com; a=ed25519;
  pk=sAZDYXdm6Iz8FHitpHeFlCMXwabodTm7p8/3/8xUxuU=
 X-Endpoint-Received: by B4 Relay for ackerleytng@google.com/20260225 with
  auth_id=649
 X-Original-From: Ackerley Tng <ackerleytng@google.com>
 Reply-To: ackerleytng@google.com
-X-Rspamd-Queue-Id: C6B6F4EE660
+X-Rspamd-Queue-Id: DD9B64EE66F
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86311-lists,linux-doc=lfdr.de,ackerleytng.google.com];
+	TAGGED_FROM(0.00)[bounces-86312-lists,linux-doc=lfdr.de,ackerleytng.google.com];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_TO(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca];
 	TO_DN_SOME(0.00)[];
@@ -132,50 +132,98 @@ X-Spamd-Result: default: False [-2.16 / 15.00];
 	RCPT_COUNT_GT_50(0.00)[65];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
 From: Ackerley Tng <ackerleytng@google.com>
 
-__kvm_gmem_invalidate_begin() and __kvm_gmem_invalidate_end() actually do
-not specially handle -1ul. -1ul is used as a huge number, which legal
-indices do not exceed, and hence the invalidation works as expected.
+Before conversion, the range filter doesn't really matter:
 
-Since a later patch is going to make use of the exact range, calculate the
-size of the guest_memfd inode and use it as the end range for invalidating
-SPTEs.
++ For non-CoCo VMs that use guest_memfd, they have no mirrored tdp, so
+  KVM_DIRECT_ROOTS would have been invalidated anyway.
++ CoCo VMs could not use INIT_SHARED, and there's no conversion support, so
+  always using KVM_FILTER_PRIVATE would have worked.
+
+Now with conversion support, update kvm_gmem_get_invalidate_filter to
+inspect the memory attributes maple tree for a given range.
+
+Instead of determining the invalidation filter based on static inode
+flags, iterate through the attributes maple tree for the specific range
+being invalidated. This allows KVM to identify if the range contains
+private pages, shared pages, or both, and set the filter bits
+accordingly.
+
+Update kvm_gmem_invalidate_begin and kvm_gmem_release to pass the range
+parameters to the filter helper to ensure invalidation accurately
+targets the memory types present in the affected range.
 
 Signed-off-by: Ackerley Tng <ackerleytng@google.com>
 ---
- virt/kvm/guest_memfd.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ virt/kvm/guest_memfd.c | 27 ++++++++++++++++++++-------
+ 1 file changed, 20 insertions(+), 7 deletions(-)
 
 diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-index 050a8c092b1a3..9f6eebfb68f6b 100644
+index 9f6eebfb68f6b..c9f155c2dc5c5 100644
 --- a/virt/kvm/guest_memfd.c
 +++ b/virt/kvm/guest_memfd.c
-@@ -370,6 +370,7 @@ static int kvm_gmem_release(struct inode *inode, struct file *file)
+@@ -193,12 +193,24 @@ static struct folio *kvm_gmem_get_folio(struct inode *inode, pgoff_t index)
+ 	return folio;
+ }
+ 
+-static enum kvm_gfn_range_filter kvm_gmem_get_invalidate_filter(struct inode *inode)
++static enum kvm_gfn_range_filter kvm_gmem_get_invalidate_filter(
++		struct inode *inode, pgoff_t start, pgoff_t end)
+ {
+-	if (GMEM_I(inode)->flags & GUEST_MEMFD_FLAG_INIT_SHARED)
+-		return KVM_FILTER_SHARED;
++	struct gmem_inode *gi = GMEM_I(inode);
++	enum kvm_gfn_range_filter filter = 0;
++	void *entry;
++
++	lockdep_assert(mt_lock_is_held(&gi->attributes));
++
++	mt_for_each(&gi->attributes, entry, start, end - 1) {
++		filter |= (xa_to_value(entry) & KVM_MEMORY_ATTRIBUTE_PRIVATE) ?
++			  KVM_FILTER_PRIVATE : KVM_FILTER_SHARED;
++
++		if (filter == (KVM_FILTER_PRIVATE | KVM_FILTER_SHARED))
++			break;
++	}
+ 
+-	return KVM_FILTER_PRIVATE;
++	return filter;
+ }
+ 
+ static void __kvm_gmem_invalidate_begin(struct gmem_file *f, pgoff_t start,
+@@ -244,7 +256,7 @@ static void kvm_gmem_invalidate_begin(struct inode *inode, pgoff_t start,
+ 	enum kvm_gfn_range_filter attr_filter;
+ 	struct gmem_file *f;
+ 
+-	attr_filter = kvm_gmem_get_invalidate_filter(inode);
++	attr_filter = kvm_gmem_get_invalidate_filter(inode, start, end);
+ 
+ 	kvm_gmem_for_each_file(f, inode)
+ 		__kvm_gmem_invalidate_begin(f, start, end, attr_filter);
+@@ -367,6 +379,7 @@ static long kvm_gmem_fallocate(struct file *file, int mode, loff_t offset,
+ static int kvm_gmem_release(struct inode *inode, struct file *file)
+ {
+ 	struct gmem_file *f = file->private_data;
++	enum kvm_gfn_range_filter filter;
  	struct kvm_memory_slot *slot;
  	struct kvm *kvm = f->kvm;
  	unsigned long index;
-+	pgoff_t end;
- 
- 	/*
- 	 * Prevent concurrent attempts to *unbind* a memslot.  This is the last
-@@ -396,9 +397,10 @@ static int kvm_gmem_release(struct inode *inode, struct file *file)
- 	 * Zap all SPTEs pointed at by this file.  Do not free the backing
+@@ -398,8 +411,8 @@ static int kvm_gmem_release(struct inode *inode, struct file *file)
  	 * memory, as its lifetime is associated with the inode, not the file.
  	 */
--	__kvm_gmem_invalidate_begin(f, 0, -1ul,
-+	end = i_size_read(inode) >> PAGE_SHIFT;
-+	__kvm_gmem_invalidate_begin(f, 0, end,
- 				    kvm_gmem_get_invalidate_filter(inode));
--	__kvm_gmem_invalidate_end(f, 0, -1ul);
-+	__kvm_gmem_invalidate_end(f, 0, end);
+ 	end = i_size_read(inode) >> PAGE_SHIFT;
+-	__kvm_gmem_invalidate_begin(f, 0, end,
+-				    kvm_gmem_get_invalidate_filter(inode));
++	filter = kvm_gmem_get_invalidate_filter(inode, 0, end);
++	__kvm_gmem_invalidate_begin(f, 0, end, filter);
+ 	__kvm_gmem_invalidate_end(f, 0, end);
  
  	list_del(&f->entry);
- 
 
 -- 
 2.54.0.563.g4f69b47b94-goog
