@@ -1,159 +1,152 @@
-Return-Path: <linux-doc+bounces-86126-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86127-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wDRpAebH+2m5EgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86126-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 00:59:50 +0200
+	id MKILMbPe+2l4GAAAu9opvQ
+	(envelope-from <linux-doc+bounces-86127-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 02:37:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE0444E1709
-	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 00:59:49 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDE724E1B95
+	for <lists+linux-doc@lfdr.de>; Thu, 07 May 2026 02:37:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D304A30185A0
-	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2026 22:59:47 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id DB9FB3009E11
+	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2026 00:37:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E375B3D1CA8;
-	Wed,  6 May 2026 22:59:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0438D17A309;
+	Thu,  7 May 2026 00:37:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XRMGlpy4"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Fy8Z5Gf5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com [209.85.222.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C69035AC17
-	for <linux-doc@vger.kernel.org>; Wed,  6 May 2026 22:59:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6F0613E02A;
+	Thu,  7 May 2026 00:36:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778108386; cv=none; b=qDIetJlRZ4T2234gD0MmvORvcNWzFtobJg5vzs9rE0C65uH9p4nEgS20JijpBHH4uZYoEde1ZUDfuOyC6mwRh7vrsmqaNZuA/h6t58ehJX/tFe5AyM8SZuprbJ24QGwizFLZXFfNPc6IHuYBUg1SZXrQH5zCpa3rzKp/R1IL0Tw=
+	t=1778114219; cv=none; b=Y7mkeBZqFtL2XsgKcG2pWHpLc9xDQt6OSYAi9H2IebCsLTZEF3JVGT7X+XboQeMM7lDieQztM6AxAKaDYg03MMoVRomIdhQgGqUIYc29aBse5QAqhPWfUx735ID2BSQu1+dym+MbiX4NtKMOkWKpf3dDoXWDXbbskRqLBPM1by4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778108386; c=relaxed/simple;
-	bh=P3AZvMdepfiMXPrEFWxcpKko0mxqF7SpSZHSwvRiPho=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=VqgbojYKF+CUz1X+pKI9pwjVVfYLWNnczwzLZEL/q8w9VkU+YgORXCyw9+YC81mrRMlqco7qwTiKoBTBXVJn8DU9Qb+t56lhTmPpHYe7RgXHtoDk42q006nrYSeB34Qqyr8gvUKw+AUoddblZsQYHHTAxgvu/3q57jAhfcBC/4U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XRMGlpy4; arc=none smtp.client-ip=209.85.222.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qk1-f195.google.com with SMTP id af79cd13be357-8d6d5e45c43so26095385a.3
-        for <linux-doc@vger.kernel.org>; Wed, 06 May 2026 15:59:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778108384; x=1778713184; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NNSbb1DA2Nd54arYFzCTAu05b8qEnVGy5kklrdtYQDo=;
-        b=XRMGlpy46C2pjrIzikGYzwjgJBPJotY+hLw2udHdU2WQwQislJuL/YZ3x10GwepdGy
-         MdiMxJp129dV6Kdqa5Eib/61DZgGI5HdA1j2RCBJKnuRHp9r5M72XV+ST7BOFLWbgl49
-         mnZ7wE59ry3I4QAoKZ1Yw2hiwfxjQPBCQ3/SkYfyQ17ooIZ5CioYNlJDggsP9AdilS5q
-         iC54pQZjHiSp5IVgaBvZrqrP1Bv7PRJ6E3e2dp5CPciiwTBFzRZq/17h9iWVoAEScBUF
-         sCrABgWQL7NczHlxw4oSv7D29wjDWgBtKwlSmlGlgnEaMOfOdOTgWj88Yiokxyegq3e+
-         pYOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778108384; x=1778713184;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NNSbb1DA2Nd54arYFzCTAu05b8qEnVGy5kklrdtYQDo=;
-        b=CxusouKK9MJwLio9Eh77tc/CyQhB91Rh2s8/G0xv4ZDakj4zglEpIR4BquFGGwz+bS
-         qdVgi4pl1eBJ+ln3GrWAenWDYz07C7i6S4XHyDKQONetUE8kXj0x6nLHgIegNNBz5w43
-         FELtPWSe9AQ+jp6yAAHOl7xn+/DasRzkMdmC1LuEEOkivpc6ncbxFCC7+HYSnsGT+ORG
-         TIWPPcg2fTE2Fi8KhvGTlkzkcJOtmSM7JE6GRfUs/k8EjSxNNC/HM9RkB+HO2oJsx5F3
-         i9grYnqpk5jBnVDi1+fmYNJTMpHUeymEZHsgSTOJ5LkRtW42UsYpvIi1C4zhZfLgbe9b
-         4uww==
-X-Forwarded-Encrypted: i=1; AFNElJ/8cnFHBA2uFO0bBKK7YPJGI8fgApZOAWn7RKOwKsqXdw/frCiW/XQ33/JUHh5EgdrTAKjC3+4IGs4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyAbTpjL914veZzKdPVRtUX+66MibF3Nl6Pqmc00WQOHMfvOBWm
-	auYzloEhv3IMV+uQHfp7swVwTnxO/gezHJl/kfyWIqPlXGPHI9phlrCS
-X-Gm-Gg: AeBDietByFWKZWmxiSMFPEavgudIj/355kXLOmiDWnXlDJ6CxpzU4B3knm3hJK1dKXZ
-	LewuI7EC3HVeGu/UF/jYIZlIxYGoIa+xYHXsEJl2SjukyKr2JbF0HKxNoFjrONBqPd6TTfV7MYw
-	a1ImTT6stqhXpEEUwLCZj+ODYj1KkaPFCEJtiEi8/bYkjvNh+jIkxv1huWa3s+7VTWJbIKvfpf6
-	pM0y81bXRrD9N/Dd2rZ7kgNYcBXhbNQICVBm1rfRbLtaHYCoq5uQkSKgYoILX55bc/jF/4TbKK0
-	zCKyUkRjTAfPXo5xEpaPFWBcJhOVW6msT5vG6bScjo4XkiurRrNfN2ZYXvF45x1GXsBCFpY5ySg
-	o7x7kHOIZpL8jhbuVrthG0+gWN3vcCJSFw6ged3ODGJO9rDRA/z8hKqv3AON0JcZH2s4zUg28qT
-	diujjqRQ/Y/w180GNwFH2GUqnMPvBmNGgwFXjMQDi5iYdkeym2wCw9DbiULg==
-X-Received: by 2002:a05:620a:4624:b0:8cd:92c5:b3e7 with SMTP id af79cd13be357-904d4a61a19mr831781185a.18.1778108384066;
-        Wed, 06 May 2026 15:59:44 -0700 (PDT)
-Received: from fedora.lab-gw-1.osiris.cyber.nyu.edu ([216.165.113.4])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-904f810e354sm327668685a.45.2026.05.06.15.59.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 May 2026 15:59:42 -0700 (PDT)
-From: Mayank Gite <drapl0n.kernel@gmail.com>
-To: Paul Moore <paul@paul-moore.com>
-Cc: Mayank Gite <drapl0n.kernel@gmail.com>,
-	Serge Hallyn <sergeh@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-security-module@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation: fix typo and formattting in security/credentials.rst
-Date: Wed,  6 May 2026 18:59:24 -0400
-Message-ID: <20260506225925.271163-1-drapl0n.kernel@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	s=arc-20240116; t=1778114219; c=relaxed/simple;
+	bh=2mf3CcnBl18LTaPH8e70yP+/ny9Qrcdmfd8nqvoT8dQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=lOuUj3l0f+iFDdG68urzf0kyfJWzX3r5Gg0MT9Z+B05HAmq5HyOLNbfnfvF4B0wDAgIobQPM1lpmEaaBAkrJshxFi5D/f5kNaxSYFLG1+Lmq+CWjM5NnVcPwPHECXB0bpgdKfxqACBd17+0Dd2org87QAxApsT/GRsGy4ieCrxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Fy8Z5Gf5; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=+HLDzwqgSW3GcJGGHTImbu5kzAPpLvoPFv1J1HDRrKA=; b=Fy8Z5Gf5iLUiwx3k4zsjGO/2zL
+	DmjdJdeEv+JTUY7HAHDM/1TOaWRcy+hVqk/3N1RTWdP3SVBYiZwQxkBWhw7wYX5Dwlll7HwZCWxAs
+	mSRF03J6nDsGUZ1YhKK/ghcGD8GXCHNUL0FdtdnysDhhVpfTtrxP1g/3OwMErIbhAavXkFmLFAZwc
+	o+5pwsBsi+E9puhzuK3gW+d+vD2joPxa3iooZhUWe6hIanA8/tnFb/oRacRI5GTocVV/ozbZcmGy1
+	6ZmdudgKe91eFek1/AuK+4cprjPOLRwRA4Hpwbp0PVxPuuUKD9YViGPMFkZDqdQHpQV2jWZByxvsp
+	d6Dx4GQg==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wKmjW-00000002MXy-0XLd;
+	Thu, 07 May 2026 00:36:54 +0000
+Message-ID: <cbe6e145-9d2f-47bb-8d22-1599cfd1a9d4@infradead.org>
+Date: Wed, 6 May 2026 17:36:53 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: AE0444E1709
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Documentation: fix typo and formattting in
+ security/credentials.rst
+To: Mayank Gite <drapl0n.kernel@gmail.com>, Paul Moore <paul@paul-moore.com>
+Cc: Serge Hallyn <sergeh@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260506225925.271163-1-drapl0n.kernel@gmail.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260506225925.271163-1-drapl0n.kernel@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: BDE724E1B95
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86126-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86127-lists,linux-doc=lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,paul-moore.com];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[drapl0nkernel@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,infradead.org:mid,infradead.org:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-- Fixes a typo in "Keys and keyrings" section. Replaces "keying" with
-  "keyring".
-- Updates formatting of keyring types.
+Hi,
 
-Signed-off-by: Mayank Gite <drapl0n.kernel@gmail.com>
----
- Documentation/security/credentials.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On 5/6/26 3:59 PM, Mayank Gite wrote:
+> - Fixes a typo in "Keys and keyrings" section. Replaces "keying" with
+>   "keyring".
+> - Updates formatting of keyring types.
+> 
+> Signed-off-by: Mayank Gite <drapl0n.kernel@gmail.com>
 
-diff --git a/Documentation/security/credentials.rst b/Documentation/security/credentials.rst
-index d0191c8b8060..4996838491b1 100644
---- a/Documentation/security/credentials.rst
-+++ b/Documentation/security/credentials.rst
-@@ -189,9 +189,9 @@ The Linux kernel supports the following types of credentials:
-      be searched for the desired key.  Each process may subscribe to a number
-      of keyrings:
- 
--	Per-thread keying
--	Per-process keyring
--	Per-session keyring
-+	- Per-thread keyring
-+	- Per-process keyring
-+	- Per-session keyring
- 
-      When a process accesses a key, if not already present, it will normally be
-      cached on one of these keyrings for future accesses to find.
+Acked-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
+
+> ---
+In the future, right here, after that "---" line, it should say
+something like
+
+v2: use 'git send-email' so that that patch isn't corrupted
+
+and in the Subject: it should say
+[PATCH v2] ...
+
+Thanks.
+
+>  Documentation/security/credentials.rst | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/Documentation/security/credentials.rst b/Documentation/security/credentials.rst
+> index d0191c8b8060..4996838491b1 100644
+> --- a/Documentation/security/credentials.rst
+> +++ b/Documentation/security/credentials.rst
+> @@ -189,9 +189,9 @@ The Linux kernel supports the following types of credentials:
+>       be searched for the desired key.  Each process may subscribe to a number
+>       of keyrings:
+>  
+> -	Per-thread keying
+> -	Per-process keyring
+> -	Per-session keyring
+> +	- Per-thread keyring
+> +	- Per-process keyring
+> +	- Per-session keyring
+>  
+>       When a process accesses a key, if not already present, it will normally be
+>       cached on one of these keyrings for future accesses to find.
+
 -- 
-2.53.0
+~Randy
 
