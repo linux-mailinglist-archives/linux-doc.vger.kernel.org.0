@@ -1,68 +1,68 @@
-Return-Path: <linux-doc+bounces-86391-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86387-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ODzdIaaz/WkrhwAAu9opvQ
-	(envelope-from <linux-doc+bounces-86391-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:58 +0200
+	id qAzPDX+z/WkrhwAAu9opvQ
+	(envelope-from <linux-doc+bounces-86387-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:19 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0396B4F49AB
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 833844F493A
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 2E1CF30037FC
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 09:53:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D044F309FCBD
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 09:53:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E426E382396;
-	Fri,  8 May 2026 09:52:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50FB53BFE31;
+	Fri,  8 May 2026 09:52:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gfxXGNfC"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Nv+nzy/j"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 504A438423A;
-	Fri,  8 May 2026 09:52:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FA5D37BE8A;
+	Fri,  8 May 2026 09:52:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778233961; cv=none; b=Vf4+ROKMjBi2rIJ0/dLvdsxJblUw124Qo6if/DEsEVUB6Hj8JcoowmTM/jkszU4WqTh3HBFSOnbK2GHqPict82HGlbvSuNO9sTciVIIi6eNH5lzGZx0oLZn+3dfEe7/eJx3xjyRMxGuMBc+r6WYvNeeYHGP6FbQWkafipHpB/uk=
+	t=1778233956; cv=none; b=NFe93rmAfeJQTrPU/7UsQw4OUMlk9olvSayxSo3EG327Wg6n+jteFjF06dRLvAJploWuz2swUCFrg3NwGvORcEY9uWwPKSET1gNzSrdOZ7nD1n6z0JX6qJsFa82xhUkD5JpZTEKA0enohtRi+KND3BMMrOT6NgqiYGDR5heUgx4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778233961; c=relaxed/simple;
-	bh=zi2Eq5Nx9ILrXnLAdjuej3Tr3Z7lDXPzlUP/KHyHTOU=;
+	s=arc-20240116; t=1778233956; c=relaxed/simple;
+	bh=hQjsX+NTjlVcp96hVIMi/EdhSFR0dTjbMqwFNvIXsIE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gdGcau5oDW6TrSidK8fmCIG0OQl0d5OV/QByLCpS/wYoLnBCqf5ThHXyU/5Zi8CFb+I40JXQMo9cum18pw1TSCeTBRwBw0FJhZagGwLdVeQCltn+/MpQY6XJEdp8MR4K6dRCGd2pKWIAHbUo6bkgJsqyBM1Tz5HGDBe99Hu0p4g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gfxXGNfC; arc=none smtp.client-ip=198.175.65.10
+	 MIME-Version; b=cRgdMUzBn3NLEGwjDv5QCKS4E/o/f3AIc5SPekLWPk1NjznOq1hQ4bCGoK5dgvnFrQexDdTjjPlZB9joZkMJey3U50Np4YiK0tC/zlsZfzPnByOLm1hJ7xxzim8MNSaVrGI+dlbTZFd/IWHkeNymngeYy1+wJQuIw+xXeAOcrFc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Nv+nzy/j; arc=none smtp.client-ip=198.175.65.10
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1778233958; x=1809769958;
+  t=1778233954; x=1809769954;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=zi2Eq5Nx9ILrXnLAdjuej3Tr3Z7lDXPzlUP/KHyHTOU=;
-  b=gfxXGNfC2ePMRUDeKMI5pzDv03dkZyy/IUosNOcj2j37E4+lOdktUlGm
-   rt8jJdUypcN9q3x1f9m96r/7USML5K8ZKpbiwwLLZl5/9NGuuRXSrUC3M
-   PNg4D6+QRyzFmKXShHvFeqjxtwFMfOlDxK32bmc0K7yUigWsN4DIm+FOc
-   gdiJF+VEL/HLiveu/hj7mVBC2DlsbnSXZ5MXlfLffvz9qsfU7xe6EUZks
-   90tpsYxkyDxnChgKJmqt/JKHy8mYXBEWWxUGlSdA3Pq/ADpLMCzMofexH
-   0Ozu1qLTKJAAYe+Q3EytScKMuzJSYk6d1z65r8LhWaDhRoH9idGCZKrvc
-   g==;
-X-CSE-ConnectionGUID: Op959p38QaqgPpJd7ufsQg==
-X-CSE-MsgGUID: wKYFKm5AQpSqIZIBkV4m7g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="96623827"
+  bh=hQjsX+NTjlVcp96hVIMi/EdhSFR0dTjbMqwFNvIXsIE=;
+  b=Nv+nzy/j8/V+9zGqbHv5G87zhc9V6aXVL8q4gBiuyS8Rj4zQ4LiLnhw5
+   AECB9neAuIPxCpT43UPBdbDkl+S6OdONO4bySv9luKNuZuqBIjR23uR/s
+   ll/01jyQ9Ey//3CpyuR+uUysg/AUVb96WEw9EdkmWlVVaIzz7oB08HhCU
+   2VXOLGwnyVSgBAfXr9x1+KzEhQW2UA8EZFylmgUdf7OXkjMJ+5XQLRZwY
+   RTRIGTyW1dr1/cSupbnIHyjBwEPq7adaQNEok/otPl85l5vdqLyC6Z7wQ
+   n0ebXa51tXZfNNLWvf7pfJW1ZCV5SGLz1Kout/+w9y7k3+fbJvpV0Y0mA
+   Q==;
+X-CSE-ConnectionGUID: FJVY7h0rQrG8hmnvfClIeQ==
+X-CSE-MsgGUID: KZtPO3ChSzOY1V7rGEEN7Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="96623819"
 X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
-   d="scan'208";a="96623827"
+   d="scan'208";a="96623819"
 Received: from orviesa005.jf.intel.com ([10.64.159.145])
   by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 02:52:33 -0700
-X-CSE-ConnectionGUID: HpMymi5ESJOEvOzUxWozMA==
-X-CSE-MsgGUID: QCGJySUfQVWeYOq0/TZofw==
+X-CSE-ConnectionGUID: 5Vv0NwryQn+2myJaRXnEEg==
+X-CSE-MsgGUID: zp01J5f3QEexHiPlQl9W1A==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
-   d="scan'208";a="241728648"
+   d="scan'208";a="241728649"
 Received: from black.igk.intel.com ([10.91.253.5])
   by orviesa005.jf.intel.com with ESMTP; 08 May 2026 02:52:30 -0700
 Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 573E49D; Fri, 08 May 2026 11:52:28 +0200 (CEST)
+	id 5BA2E9E; Fri, 08 May 2026 11:52:28 +0200 (CEST)
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Danilo Krummrich <dakr@kernel.org>,
 	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
@@ -81,9 +81,9 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	David Lechner <dlechner@baylibre.com>,
 	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
 	Andy Shevchenko <andy@kernel.org>
-Subject: [PATCH v1 3/4] iio: imu: inv_mpu6050: Suppress driver_override sysfs attribute
-Date: Fri,  8 May 2026 11:42:41 +0200
-Message-ID: <20260508095224.1275645-4-andriy.shevchenko@linux.intel.com>
+Subject: [PATCH v1 4/4] iio: imu: inv_icm42600: Suppress driver_override sysfs attribute
+Date: Fri,  8 May 2026 11:42:42 +0200
+Message-ID: <20260508095224.1275645-5-andriy.shevchenko@linux.intel.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20260508095224.1275645-1-andriy.shevchenko@linux.intel.com>
 References: <20260508095224.1275645-1-andriy.shevchenko@linux.intel.com>
@@ -94,7 +94,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 0396B4F49AB
+X-Rspamd-Queue-Id: 833844F493A
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
@@ -102,7 +102,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -110,9 +110,9 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86391-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86387-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
@@ -130,30 +130,43 @@ and drop the no more required check.
 
 Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 ---
- drivers/iio/imu/inv_mpu6050/inv_mpu_spi.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/iio/imu/inv_mpu6050/inv_mpu_spi.c b/drivers/iio/imu/inv_mpu6050/inv_mpu_spi.c
-index 1f4c62142b60..bdd4ba4e117e 100644
---- a/drivers/iio/imu/inv_mpu6050/inv_mpu_spi.c
-+++ b/drivers/iio/imu/inv_mpu6050/inv_mpu_spi.c
-@@ -46,8 +46,6 @@ static int inv_mpu_probe(struct spi_device *spi)
- 	} else if ((match = device_get_match_data(&spi->dev))) {
- 		chip_type = (uintptr_t)match;
- 		name = dev_name(&spi->dev);
--	} else {
--		return -ENODEV;
- 	}
+diff --git a/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c b/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c
+index 13e2e7d38638..cb8c501d86c3 100644
+--- a/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c
++++ b/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c
+@@ -50,20 +50,15 @@ static int inv_icm42600_spi_bus_setup(struct inv_icm42600_state *st)
  
- 	regmap = devm_regmap_init_spi(spi, &inv_mpu_regmap_config);
-@@ -175,6 +173,7 @@ static struct spi_driver inv_mpu_driver = {
- 		.acpi_match_table = inv_acpi_match,
- 		.name	=	"inv-mpu6000-spi",
- 		.pm     =       pm_ptr(&inv_mpu_pmops),
+ static int inv_icm42600_probe(struct spi_device *spi)
+ {
+-	const void *match;
+ 	enum inv_icm42600_chip chip;
+ 	struct regmap *regmap;
+ 
+-	match = device_get_match_data(&spi->dev);
+-	if (!match)
+-		return -EINVAL;
+-	chip = (uintptr_t)match;
+-
+ 	/* use SPI specific regmap */
+ 	regmap = devm_regmap_init_spi(spi, &inv_icm42600_spi_regmap_config);
+ 	if (IS_ERR(regmap))
+ 		return PTR_ERR(regmap);
+ 
++	chip = (uintptr_t)device_get_match_data(&spi->dev);
+ 	return inv_icm42600_core_probe(regmap, chip, inv_icm42600_spi_bus_setup);
+ }
+ 
+@@ -115,6 +110,7 @@ static struct spi_driver inv_icm42600_driver = {
+ 		.name = "inv-icm42600-spi",
+ 		.of_match_table = inv_icm42600_of_matches,
+ 		.pm = pm_ptr(&inv_icm42600_pm_ops),
 +		.suppress_override_attrs = true,
  	},
- };
- 
+ 	.id_table = inv_icm42600_id,
+ 	.probe = inv_icm42600_probe,
 -- 
 2.50.1
 
