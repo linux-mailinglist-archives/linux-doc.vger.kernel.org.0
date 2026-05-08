@@ -1,77 +1,73 @@
-Return-Path: <linux-doc+bounces-86421-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86419-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2GHDAtfP/WkLjgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86421-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:58:15 +0200
+	id sKNDGILP/WkLjgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86419-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:56:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59ECB4F607A
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:58:14 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04FCB4F603A
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:56:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id ED02B3064642
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 11:56:50 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 05AE3300BC5E
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 11:56:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8C713DCDB2;
-	Fri,  8 May 2026 11:56:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 227463DA5DC;
+	Fri,  8 May 2026 11:56:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="evRE/5Yc"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="F/Lm9aTn"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 608143DBD54;
-	Fri,  8 May 2026 11:56:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7771E3876B9;
+	Fri,  8 May 2026 11:56:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778241406; cv=none; b=qCxTa8laqne1rtaJBCj7ADewZtVU2ENlbD60maxMcO2r10z6QASE8qBR9lH6/KOQh2OvLQANZhrPawheNV6NUSsCA73vidWWFriRbzHqVn9f1C3TqB/CfZmPpy+lAZ+emGpjAjGbDd/LAJ8bfh9/UbLncmRaCZB17R3Xnuzx4Ek=
+	t=1778241404; cv=none; b=sjPEMosOAZEeQAW8u5MXxwHx/NOaOM3PnOvmxM32Di2Na6IcI6gAMA85oMoJyJEJPO6MFmKJNOjVm1kq3SBPIBmK/bPK5so4Bk0TMuFz82VXCJ8SHrll93yHHGfLxmFVI3Fi6blQeQrNQqQhKY3BvnlAUw/HDp1YWWjUHlzAHsA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778241406; c=relaxed/simple;
-	bh=HSzUIJROzQ5gO8RKovQ5ZkfNf83EOf2L7N/ee2jVgfc=;
+	s=arc-20240116; t=1778241404; c=relaxed/simple;
+	bh=A4EvjdopgY7BdwJgIdAwC/H6osQr/asc66H7sL+dL8A=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=ipS91eicIx+voZ/UXwCZ/DdvqX0fYIEQpr/xhuPXKRgRMv123ho8cNwp66iFygURVWTe0iyDZdhhfqekjzV7xkfXrloIdD9lVIhIaNrFB77/6pF+deAdKAiu4958Y5CMut6heCTtZTF7NUXBj0cXN7PtuL9WIbil0gdUa/4IO+4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=evRE/5Yc; arc=none smtp.client-ip=148.163.135.77
+	 In-Reply-To:To:CC; b=FXX3gWQURcC5e2ln+5u+vIZuk82s/f01Du4vzC5fRMhQOG6Mnzi2j9wB9byjk5WpQWFEqA1O1ydO2d2Bar3vGrn+PeMXKQk6y+716DX3hBhFxVGf0cXRg6/GJjuQqXAk083grCbnSUN2GKCOlgSzJhTDq8WZpyeQJ7jnUzKLrX4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=F/Lm9aTn; arc=none smtp.client-ip=148.163.135.77
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=analog.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
-Received: from pps.filterd (m0516787.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6488oOua400366;
-	Fri, 8 May 2026 07:56:11 -0400
+Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
+	by mx0a-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6488wMTa3611574;
+	Fri, 8 May 2026 07:56:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=WCVDy
-	cOfTMccj+Qc1HiEJL/yvh36Pq82QxV8ra1LNxA=; b=evRE/5YcPnVE0iR5SNy7N
-	JYmKXpV3spnGUxvUrvN2nFjUhacLRZMiFeuMoV92/X9cMjeUYrGkogYFxghCZMiy
-	orD9aMHhBNwHB0M531YX9GPZGq4dpGulG7gSJYKlnkNTXUQiDQIfVLd0I6nllfUH
-	Gf2WwYVSW/gusVjPeeDyHvzBVGxlZDyzrmW7iVqnkmyhBOWPShMFw5q8qXaUFDal
-	68k6P9W6sEzxxTSK9TXYSosBzMBC1OIeVpmeEPe/8llhvBFxDxhkwV/IDkWn4KqK
-	GEjiNsDVQLvTrmaB4aTe3nWw1ENHuaXNAyLyGg/kMczichOfmWpbhGXogmyJ14au
+	:message-id:mime-version:references:subject:to; s=DKIM; bh=r24Jp
+	jwg36ksCTw9IK2Av40LXZMa5iXNUGtUidaMnnQ=; b=F/Lm9aTn5wtYNbMidsJpJ
+	xxi58F+SkeC/aCFSbubH3t0Ov5XkA4t5iJ7xCLRWiDEWjJoTZmPgyERoeYQQmc5N
+	nZQTm9hLBEwuUYGkOoZ6UQgGBbyogQBT5b/sn9SwOKi0XcafvQNXB77+R1guZYoY
+	q94XBb3dSoiGT1/3f1HwONXfeCyINNJuwfhoL0wWMAhzpAEi2Y6crC/TJpHxOLuU
+	YVLCkZ91t/LogRJqnUInOf1A4qTym24I7vtidwIrF8DVqba+JI8s+pXUB32lP9wM
+	ylrKxgMYu/LfOoC4PebE9jbM0BjKRmPwB9MFfvBd6HL0xHeBERT8IhSkUkEMJYGB
 	Q==
 Received: from nwd2mta4.analog.com ([137.71.173.58])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4dyu7ac9j5-1
+	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 4e04pjj6nu-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 08 May 2026 07:56:11 -0400 (EDT)
+	Fri, 08 May 2026 07:56:14 -0400 (EDT)
 Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
-	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 648Bu95Z041473
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 648BuDdQ041484
 	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 8 May 2026 07:56:10 -0400
-Received: from ASHBCASHYB5.ad.analog.com (10.64.17.133) by
- ASHBMBX8.ad.analog.com (10.64.17.5) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Fri, 8 May 2026 07:56:09 -0400
-Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
- ASHBCASHYB5.ad.analog.com (10.64.17.133) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.37; Fri, 8 May 2026 07:56:09 -0400
+	Fri, 8 May 2026 07:56:13 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.37; Fri, 8 May
+ 2026 07:56:13 -0400
 Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
  (10.64.17.5) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
- Transport; Fri, 8 May 2026 07:56:09 -0400
+ Transport; Fri, 8 May 2026 07:56:13 -0400
 Received: from HYB-e1y2fvUQ3cx.ad.analog.com (HYB-e1y2fvUQ3cx.ad.analog.com [10.44.3.80])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 648BtmnA001846;
-	Fri, 8 May 2026 07:56:05 -0400
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 648BtmnB001846;
+	Fri, 8 May 2026 07:56:07 -0400
 From: Janani Sunil <janani.sunil@analog.com>
-Date: Fri, 8 May 2026 13:55:48 +0200
-Subject: [PATCH v2 2/3] iio: dac: Add AD5529R DAC driver support
+Date: Fri, 8 May 2026 13:55:49 +0200
+Subject: [PATCH v2 3/3] Documentation: iio: Add AD5529R Documentation
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -80,15 +76,15 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-ID: <20260508-ad5529r-driver-v2-2-e315441685d7@analog.com>
+Message-ID: <20260508-ad5529r-driver-v2-3-e315441685d7@analog.com>
 References: <20260508-ad5529r-driver-v2-0-e315441685d7@analog.com>
 In-Reply-To: <20260508-ad5529r-driver-v2-0-e315441685d7@analog.com>
 To: Lars-Peter Clausen <lars@metafoo.de>,
         Michael Hennerich
 	<Michael.Hennerich@analog.com>,
         Jonathan Cameron <jic23@kernel.org>,
-        "David
- Lechner" <dlechner@baylibre.com>,
+        David
+ Lechner <dlechner@baylibre.com>,
         =?utf-8?q?Nuno_S=C3=A1?=
 	<nuno.sa@analog.com>,
         Andy Shevchenko <andy@kernel.org>, Rob Herring
@@ -97,8 +93,8 @@ To: Lars-Peter Clausen <lars@metafoo.de>,
         Conor Dooley
 	<conor+dt@kernel.org>,
         Philipp Zabel <p.zabel@pengutronix.de>,
-        "Jonathan
- Corbet" <corbet@lwn.net>,
+        Jonathan
+ Corbet <corbet@lwn.net>,
         Shuah Khan <skhan@linuxfoundation.org>
 CC: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
         <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
@@ -106,700 +102,328 @@ CC: <linux-iio@vger.kernel.org>, <devicetree@vger.kernel.org>,
 	<jan.sun97@gmail.com>,
         Janani Sunil <janani.sunil@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778241348; l=22198;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778241348; l=8455;
  i=janani.sunil@analog.com; s=20260507; h=from:subject:message-id;
- bh=HSzUIJROzQ5gO8RKovQ5ZkfNf83EOf2L7N/ee2jVgfc=;
- b=XruP/L0xbzZBPqMA8lOOAljF1zNaHw4Tjwp3DJ918BpcFUp5nmpy43k/cBzmNiw6abmkKTbsc
- rUriQcl5ug2BSf4RmIoVG3Rel9qu3vO84lWTMGBpu27p5kVskiREjPw
+ bh=A4EvjdopgY7BdwJgIdAwC/H6osQr/asc66H7sL+dL8A=;
+ b=cRW8ZP+omiXR0KUdCBLMbZMJUEUDhjcx/2m4846+tS+qLFwWSp8MJsU9d6c3RxdiRMDz5AAgB
+ cdQWQYfbW3JABiTiComfnTqwfJFKPf0+R2SIgbaDlsqGI21DJXwxTF7
 X-Developer-Key: i=janani.sunil@analog.com; a=ed25519;
  pk=e25MyjRLPY3RWrYm/LrJ+/+t1MZJUbkgIW5CZg+g+hA=
 X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-ORIG-GUID: GkOD-8io1l6eA52FpVhJYZ-6o3TDoP49
-X-Proofpoint-GUID: GkOD-8io1l6eA52FpVhJYZ-6o3TDoP49
-X-Authority-Analysis: v=2.4 cv=caXiaHDM c=1 sm=1 tr=0 ts=69fdcf5b cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA4MDEyMyBTYWx0ZWRfX0e/LEMbGsWcD
+ QMXNEO+xL8Lzz88EK0Pwlrt8CgKfRCTT9LTYtgN4OHSUfxF25Iep4xx0JLRuG8MSL8in/i09U5b
+ xdHHZlPAC2ttygipD4KYkTHdnYp4mETrd1dhvHfuzL85Hx1VBdoF1cGpLClMJoRI6p6pl6EYdme
+ qU46vZ9JaKBByfmtopRvEMti02paxnD1cO6CoycO7ySEzTwCdEiBq3mCGaf8k6HBMKcljRlZ/j9
+ M2UwolqSt+ohmJST751bKc2qfLrX+A/T2ueHsyqeEXYfCA6kkwZaiED6U2G0Yzhq9oXw9Vxo86w
+ wZCvE0fZWT5F/XC+YrDYCOIQFbq5DSMI9UU5mC8EDbsn20wkm3yATLMk1Ni6GhM3waEuxwBgEx4
+ D72qOYBPnjq7o9pC4FXBo+fd3TpXkEsEF1XSDNwLFPbyzLOR1aSEMEf8lS+P1sHEL6S0YBPuXyh
+ LDQDiT00A9eKVmE4eIw==
+X-Proofpoint-ORIG-GUID: JkXRA8UhsGynLTouoaNhYJQ2EeFm6iGY
+X-Proofpoint-GUID: JkXRA8UhsGynLTouoaNhYJQ2EeFm6iGY
+X-Authority-Analysis: v=2.4 cv=Fss1OWrq c=1 sm=1 tr=0 ts=69fdcf5f cx=c_pps
  a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
  a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=0sLvza09kfJOxVLZPwjg:22 a=OmVn7CZJonkx5R5zMQLL:22 a=gAnH3GRIAAAA:8
- a=VwQbUJbxAAAA:8 a=0dfnzzNOiJOi25fQjAYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA4MDEyMyBTYWx0ZWRfXyls/xomwVePh
- kUk71/FdkazM0yHbY+FWQBkSjTlmT24/3XHQNuMYp1j3XYWw2MTuK5pFyKHUKdGoiBtxPXe2RmZ
- cORdLnJqG7Y7q2Mv12yDYO/CHUgUyAkEL6fubXkoMfjr6225WF0LhAxkN3Y5UysACEgInaAPFqX
- ebU/P8L35M38k500bQB8X1Ce5AAnybR9lEN4unMswXo+fFF4DKmrsYtODDxOhBLJaEjPnzDQcDx
- a9WU5glEtf8nRWmfdrg2cxFEgsjy3jGiYKsL/2p/ktybrLGC0Dc5E0sKlnEFSkcdwsMODHA9m4K
- +zZduGJ7y0c/mmof1ADEx0nmhhPoXs7IhEKlKSjl+bydckKiBXZJK6H7JS1FP3hDnDBOL6WBQBg
- x+rLlcDl4p/zXd/uvakkq9dC+Z5gmuLMthpHwTq+IrVlCZzWztxvypXw6/glmTKPUeVtCDkf+1Z
- UH43QR4+K7JM3vsibNg==
+ a=0sLvza09kfJOxVLZPwjg:22 a=Z0pTeXoby7EwIRygza74:22 a=gAnH3GRIAAAA:8
+ a=VwQbUJbxAAAA:8 a=zj84cDznfa0kqzTLJ-AA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-05-07_02,2026-05-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 malwarescore=0 spamscore=0 bulkscore=0
- suspectscore=0 clxscore=1015 phishscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2605080123
-X-Rspamd-Queue-Id: 59ECB4F607A
+ suspectscore=0 malwarescore=0 spamscore=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 phishscore=0 impostorscore=0 adultscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
+ definitions=main-2605080123
+X-Rspamd-Queue-Id: 04FCB4F603A
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [4.84 / 15.00];
+	SEM_URIBL(3.50)[0.0.0.0:email];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[analog.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[analog.com:s=DKIM];
 	MAILLIST(-0.15)[generic];
+	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86421-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,analog.com];
 	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[analog.com:email,analog.com:mid,analog.com:url,analog.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86419-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,analog.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,analog.com:email,analog.com:mid,analog.com:url,analog.com:dkim];
+	R_DKIM_ALLOW(0.00)[analog.com:s=DKIM];
+	GREYLIST(0.00)[pass,meta];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	DMARC_POLICY_ALLOW(0.00)[analog.com,quarantine];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[analog.com:+];
+	NEURAL_SPAM(0.00)[0.947];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
+	DBL_PROHIBIT(0.00)[0.0.0.0:email];
 	FROM_NEQ_ENVFROM(0.00)[janani.sunil@analog.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[analog.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[10]
+	R_SPF_ALLOW(0.00)[+ip6:2600:3c15:e001:75::/64:c];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Action: no action
 
-Add support for AD5529R 16-channel, 12/16 bit Digital to Analog Converter
+Add documentation for AD5529R high voltage, 16-channel 12/16 bit DAC
 
 Signed-off-by: Janani Sunil <janani.sunil@analog.com>
 ---
- MAINTAINERS               |   1 +
- drivers/iio/dac/Kconfig   |  17 ++
- drivers/iio/dac/Makefile  |   1 +
- drivers/iio/dac/ad5529r.c | 564 ++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 583 insertions(+)
+ Documentation/iio/ad5529r.rst | 216 ++++++++++++++++++++++++++++++++++++++++++
+ Documentation/iio/index.rst   |   1 +
+ MAINTAINERS                   |   1 +
+ 3 files changed, 218 insertions(+)
 
+diff --git a/Documentation/iio/ad5529r.rst b/Documentation/iio/ad5529r.rst
+new file mode 100644
+index 000000000000..41fea1521790
+--- /dev/null
++++ b/Documentation/iio/ad5529r.rst
+@@ -0,0 +1,216 @@
++.. SPDX-License-Identifier: GPL-2.0-only
++
++==============
++AD5529R driver
++==============
++
++Device driver for Analog Devices Inc. AD5529R 16-Channel 12/16-bit High Voltage DAC.
++The module name is ``ad5529r``.
++
++Supported devices
++=================
++
++* `AD5529R <https://www.analog.com/en/products/ad5529r.html>`_
++
++Description
++===========
++
++The AD5529R is a 16-channel, 12-bit or 16-bit, high voltage, buffered voltage output
++digital-to-analog converter (DAC) with an integrated precision reference.
++The device operates from unipolar and bipolar supplies and is guaranteed
++monotonic. It has built-in rail-to-rail output buffers that can source or
++sink up to 25mA.
++
++Hardware Features
++=================
++
++* 16 independent 12-bit or 16-bit DAC channels
++* Independently programmable output ranges:
++
++  - 0V to 5V (current driver default)
++  - 0V to 10V
++  - 0V to 20V
++  - 0V to 40V
++  - ±5V
++  - ±10V
++  - ±15V
++  - ±20V
++
++* 4.096V precision reference (12ppm/°C maximum)
++* Built-in function generation capabilities (hardware support)
++* Output voltage and current monitoring (hardware support)
++* Temperature monitoring with 8 on-chip sensors (hardware support)
++* Over-temperature protection
++* SPI interface with CRC error detection support
++
++Current Driver Implementation
++=============================
++
++The current driver provides basic DAC functionality with the following features:
++
++* Basic DAC output control for all 16 channels
++* Scale attributes for voltage conversion (0-5V default range)
++* SPI communication with regmap support
++* Reset control framework support
++* Automatic hardware variant detection (16-bit vs 12-bit) based on product ID
++* Debugfs register access for development
++
++SPI Configuration:
++
++* **Mode**: Supports SPI mode 0 and mode 3 (default: mode 0)
++* **Frequency**: Up to 50 MHz (typically tested at lower frequencies)
++* **Word Size**: 16-bit transactions
++
++.. note::
++   The device default configuration uses address decrement mode (ADDR_ASCENSION=0)
++   for multi-byte SPI transactions. Therefore, all 16-bit register addresses are
++   incremented by 1 in the driver to access the last byte first, allowing the
++   hardware to decrement and access the complete multi-byte register correctly.
++
++IIO Attributes (Currently Implemented)
++======================================
++
++Basic DAC Control
++-----------------
++
++For each of the 16 channels (0-15):
++
++**out_voltageY_raw**
++  Raw DAC code (12-bit: 0-4095, 16-bit: 0-65535)
++
++  * Read: Returns the current DAC register value
++  * Write: Sets the DAC output code
++
++**out_voltageY_scale**
++  Scale factor for voltage conversion (millivolts per LSB)
++
++  Based on the formula: VOUTn = A × D/2^N + B, where A=5V, B=0V, N=resolution
++
++  * 16-bit: 0.076294 mV/LSB (5V ÷ 2^16 = 5V ÷ 65536 = 0.076294mV)
++  * 12-bit: 1.220703 mV/LSB (5V ÷ 2^12 = 5V ÷ 4096 = 1.220703mV)
++  * Read-only attribute
++
++Debug Interface
++===============
++
++**Register Access**
++
++The driver provides debugfs register access for debugging and development:
++
++``/sys/kernel/debug/iio/iio:deviceX/direct_reg_access``
++  Direct register read/write access. Format:
++
++  * Read: ``echo <register_address> > direct_reg_access; cat direct_reg_access``
++  * Write: ``echo <register_address> <value> > direct_reg_access``
++
++Usage examples
++==============
++
++Basic DAC Output Control
++------------------------
++
++.. code-block:: bash
++
++    # Set channel 0 to mid-scale (approximately 2.5V with 0V to 5V range)
++    echo "32768" > /sys/bus/iio/devices/iio:device0/out_voltage0_raw
++
++    # Set channel 15 to full scale
++    echo "65535" > /sys/bus/iio/devices/iio:device0/out_voltage15_raw
++
++    # Read current value from channel 5
++    cat /sys/bus/iio/devices/iio:device0/out_voltage5_raw
++
++Scale Attributes
++----------------
++
++.. code-block:: bash
++
++    # Read scale factor (millivolts per LSB)
++    cat /sys/bus/iio/devices/iio:device0/out_voltage0_scale
++    # Output: 0.076294 (for 16-bit) or 1.220703 (for 12-bit)
++
++    # Convert raw to voltage: voltage_mv = raw * scale
++    # Formula: VOUTn = A × D/2^N + B where A=5V, B=0V
++
++Register Access for Development
++-------------------------------
++
++.. code-block:: bash
++
++    # Navigate to debugfs directory
++    cd /sys/kernel/debug/iio/iio:device0/
++
++    # Read device product ID (register 0x04)
++    echo 4 > direct_reg_access
++    cat direct_reg_access
++
++    # Write to a 16-bit configuration register (example: LDAC_HW_SW register 0x19)
++    echo "0x019 0xAA11" > direct_reg_access
++    cat direct_reg_access
++    # Output: 0xAA11
++
++    # Write to DAC channel registers (16-bit values)
++    echo "0x149 32768" > direct_reg_access   # DAC channel 0 mid-scale
++    echo "0x14B 65535" > direct_reg_access   # DAC channel 1 full-scale
++
++    # Read back DAC register values
++    echo 0x149 > direct_reg_access && cat direct_reg_access  # Read channel 0
++    echo 0x14B > direct_reg_access && cat direct_reg_access  # Read channel 1
++
++.. note::
++   For 16-bit registers, use hexadecimal format for addresses (0x019, 0x149, etc.).
++   Values can be decimal (32768) or hexadecimal (0xAA11). Register addresses shown
++   include the +1 offset required for decrement mode operation.
++
++Device Tree Configuration
++=========================
++
++Basic configuration example:
++
++.. code-block:: devicetree
++
++    &spi0 {
++        status = "okay";
++
++        ad5529r@0 {
++            compatible = "adi,ad5529r";
++            reg = <0>;
++            spi-max-frequency = <25000000>;
++
++            vdd-supply = <&vdd_regulator>;
++            avdd-supply = <&avdd_regulator>;
++            hvdd-supply = <&hvdd_regulator>;
++            hvss-supply = <&hvss_regulator>;
++
++            reset-gpios = <&gpio0 87 GPIO_ACTIVE_LOW>;
++        };
++    };
++
++For complete device tree binding documentation, see:
++``Documentation/devicetree/bindings/iio/dac/adi,ad5529r.yaml``
++
++Driver Architecture
++===================
++
++The driver is structured as follows:
++
++* **Core**: Basic SPI communication and device initialization
++* **IIO Interface**: Standard IIO DAC channel interface with scale attributes
++* **Dual Regmap**: Uses standard regmap-spi for both 8-bit and 16-bit register access
++* **Reset Framework**: Reset control support
++
++Development Notes
++=================
++
++* The driver uses standard regmap-spi for both 8-bit and 16-bit register access
++* SPI mode 0 (CPOL=0, CPHA=0) is typically used
++* Reset control framework support for device initialization
++* Register addresses are incremented by 1 for 16-bit registers due to decrement mode addressing
++* Scale attributes provide voltage conversion for 0-5V range
++* Automatic regmap selection based on register address (≤0x13: 8-bit, >0x13: 16-bit)
++
++References
++==========
++
++* AD5529R Datasheet: https://www.analog.com/media/en/technical-documentation/data-sheets/ad5529r.pdf
++* Linux IIO Subsystem: https://www.kernel.org/doc/html/latest/driver-api/iio/index.html
+diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
+index 007e0a1fcc5a..27f2ab41f05e 100644
+--- a/Documentation/iio/index.rst
++++ b/Documentation/iio/index.rst
+@@ -25,6 +25,7 @@ Industrial I/O Kernel Drivers
+    ad4062
+    ad4691
+    ad4695
++   ad5529r
+    ad7191
+    ad7380
+    ad7606
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 320e84765ce6..143714e27d51 100644
+index 143714e27d51..41f42eb1adf2 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -1513,6 +1513,7 @@ L:	linux-iio@vger.kernel.org
  S:	Supported
  W:	https://ez.analog.com/linux-software-drivers
  F:	Documentation/devicetree/bindings/iio/dac/adi,ad5529r.yaml
-+F:	drivers/iio/dac/ad5529r.c
++F:	Documentation/iio/ad5529r.rst
+ F:	drivers/iio/dac/ad5529r.c
  
  ANALOG DEVICES INC AD5706R DRIVER
- M:	Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-diff --git a/drivers/iio/dac/Kconfig b/drivers/iio/dac/Kconfig
-index 657c68e75542..bb1d59889a2a 100644
---- a/drivers/iio/dac/Kconfig
-+++ b/drivers/iio/dac/Kconfig
-@@ -134,6 +134,23 @@ config AD5449
- 	  To compile this driver as a module, choose M here: the
- 	  module will be called ad5449.
- 
-+config AD5529R
-+	tristate "Analog Devices AD5529R High Voltage DAC driver"
-+	depends on SPI_MASTER
-+	select REGMAP_SPI
-+	help
-+	  Say yes here to build support for Analog Devices AD5529R
-+	  16-Channel, 12-Bit/16-Bit, 40V High Voltage Precision Digital to Analog
-+	  Converter.
-+
-+	  The device features multiple output voltage ranges from -20V to +20V,
-+	  built-in 4.096V voltage reference, and digital functions including
-+	  toggle, dither, and ramp modes. Supports both 12-bit and 16-bit
-+	  resolution variants.
-+
-+	  To compile this driver as a module, choose M here: the
-+	  module will be called ad5529r.
-+
- config AD5592R_BASE
- 	tristate
- 
-diff --git a/drivers/iio/dac/Makefile b/drivers/iio/dac/Makefile
-index 003431798498..f35e060b3643 100644
---- a/drivers/iio/dac/Makefile
-+++ b/drivers/iio/dac/Makefile
-@@ -18,6 +18,7 @@ obj-$(CONFIG_AD5446) += ad5446.o
- obj-$(CONFIG_AD5446_SPI) += ad5446-spi.o
- obj-$(CONFIG_AD5446_I2C) += ad5446-i2c.o
- obj-$(CONFIG_AD5449) += ad5449.o
-+obj-$(CONFIG_AD5529R) += ad5529r.o
- obj-$(CONFIG_AD5592R_BASE) += ad5592r-base.o
- obj-$(CONFIG_AD5592R) += ad5592r.o
- obj-$(CONFIG_AD5593R) += ad5593r.o
-diff --git a/drivers/iio/dac/ad5529r.c b/drivers/iio/dac/ad5529r.c
-new file mode 100644
-index 000000000000..3676956f6eff
---- /dev/null
-+++ b/drivers/iio/dac/ad5529r.c
-@@ -0,0 +1,564 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * AD5529R Digital-to-Analog Converter Driver
-+ * 16-Channel, 12/16-Bit, 40V High Voltage Precision DAC
-+ *
-+ * Copyright 2026 Analog Devices Inc.
-+ * Author: Janani Sunil <janani.sunil@analog.com>
-+ */
-+
-+#include <linux/array_size.h>
-+#include <linux/bits.h>
-+#include <linux/device.h>
-+#include <linux/err.h>
-+#include <linux/module.h>
-+#include <linux/mod_devicetable.h>
-+#include <linux/spi/spi.h>
-+#include <linux/errno.h>
-+#include <linux/iio/iio.h>
-+#include <linux/regmap.h>
-+#include <linux/reset.h>
-+#include <linux/delay.h>
-+#include <linux/regulator/consumer.h>
-+
-+/* Register Map */
-+#define AD5529R_REG_INTERFACE_CONFIG_A		0x00
-+#define AD5529R_REG_INTERFACE_CONFIG_B		0x01
-+#define AD5529R_REG_DEVICE_CONFIG		0x02
-+#define AD5529R_REG_CHIP_TYPE			0x03
-+#define AD5529R_REG_PRODUCT_ID_L		0x04
-+#define AD5529R_REG_PRODUCT_ID_H		0x05
-+#define AD5529R_REG_CHIP_GRADE			0x06
-+#define AD5529R_REG_SCRATCH_PAD			0x0A
-+#define AD5529R_REG_SPI_REVISION		0x0B
-+#define AD5529R_REG_VENDOR_L			0x0C
-+#define AD5529R_REG_VENDOR_H			0x0D
-+#define AD5529R_REG_STREAM_MODE			0x0E
-+#define AD5529R_REG_TRANSFER_CONFIG		0x0F
-+#define AD5529R_REG_INTERFACE_CONFIG_C		0x10
-+#define AD5529R_REG_INTERFACE_STATUS_A		0x11
-+
-+/* Configuration registers */
-+#define AD5529R_REG_MULTI_DAC_CH_SEL		(0x14 + 1)
-+#define AD5529R_REG_LDAC_SYNC_ASYNC		(0x16 + 1)
-+#define AD5529R_REG_LDAC_HW_SW			(0x18 + 1)
-+
-+/* Hardware LDAC source and edge select registers (per channel, 16-bit) */
-+#define AD5529R_REG_LDAC_HW_SRC_EDGE_SEL_BASE	(0x1A + 1)
-+#define AD5529R_REG_LDAC_HW_SRC_EDGE_SEL(ch)	\
-+	(AD5529R_REG_LDAC_HW_SRC_EDGE_SEL_BASE + (ch) * 2)
-+
-+/* Output configuration */
-+#define AD5529R_REG_OUT_OPERATING_MODE		(0x3A + 1)
-+#define AD5529R_REG_OUT_RANGE_BASE		(0x3C + 1)
-+#define AD5529R_REG_OUT_RANGE(ch)		(AD5529R_REG_OUT_RANGE_BASE + (ch) * 2)
-+
-+/* Calibration registers */
-+#define AD5529R_REG_CAL_GAIN_BASE		(0x5C + 1)
-+#define AD5529R_REG_CAL_GAIN(ch)		(AD5529R_REG_CAL_GAIN_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_CAL_OFFSET_BASE		(0x7C + 1)
-+#define AD5529R_REG_CAL_OFFSET(ch)		(AD5529R_REG_CAL_OFFSET_BASE + (ch) * 2)
-+
-+/* Function generator registers */
-+#define AD5529R_REG_FUNC_EN			(0x9C + 1)
-+#define AD5529R_REG_FUNC_MODE_SEL_BASE		(0x9E + 1)
-+#define AD5529R_REG_FUNC_MODE_SEL(ch)		\
-+	(AD5529R_REG_FUNC_MODE_SEL_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_FUNC_DAC_INPUT_B_BASE	(0xBE + 1)
-+#define AD5529R_REG_FUNC_DAC_INPUT_B(ch)	\
-+	(AD5529R_REG_FUNC_DAC_INPUT_B_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_FUNC_DITHER_PERIOD_BASE	(0xDE + 1)
-+#define AD5529R_REG_FUNC_DITHER_PERIOD(ch)	\
-+	(AD5529R_REG_FUNC_DITHER_PERIOD_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_FUNC_DITHER_PHASE_BASE	(0xFE + 1)
-+#define AD5529R_REG_FUNC_DITHER_PHASE(ch)	\
-+	(AD5529R_REG_FUNC_DITHER_PHASE_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_FUNC_RAMP_STEP_BASE		(0x11E + 1)
-+#define AD5529R_REG_FUNC_RAMP_STEP(ch)		\
-+	(AD5529R_REG_FUNC_RAMP_STEP_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_FUNC_INT_EN			(0x13E + 1)
-+
-+/* Multiplexer and main DAC registers */
-+#define AD5529R_REG_MUX_OUT_SEL			(0x140 + 1)
-+#define AD5529R_REG_MULTI_DAC_SW_LDAC		(0x142 + 1)
-+#define AD5529R_REG_MULTI_DAC_INPUT_A		(0x144 + 1)
-+#define AD5529R_REG_DAC_SW_LDAC			(0x146 + 1)
-+
-+#define AD5529R_REG_DAC_INPUT_A_BASE		(0x148 + 1)
-+#define AD5529R_REG_DAC_INPUT_A(ch)		(AD5529R_REG_DAC_INPUT_A_BASE + (ch) * 2)
-+
-+/* Status and readback registers */
-+#define AD5529R_REG_FUNC_INT_STAT		(0x168 + 1)
-+#define AD5529R_REG_DAC_DATA_READBACK_BASE	(0x16A + 1)
-+#define AD5529R_REG_DAC_DATA_READBACK(ch)	\
-+	(AD5529R_REG_DAC_DATA_READBACK_BASE + (ch) * 2)
-+
-+/* Temperature sensor registers */
-+#define AD5529R_REG_TSENS_EN			(0x18A + 1)
-+#define AD5529R_REG_TSENS_ALERT_FLAG		(0x18C + 1)
-+#define AD5529R_REG_TSENS_SHTD_FLAG		(0x18E + 1)
-+#define AD5529R_REG_TSENS_ALERT_STAT		(0x190 + 1)
-+#define AD5529R_REG_TSENS_SHTD_STAT		(0x192 + 1)
-+#define AD5529R_REG_ALARMB_TSENS_EN		(0x194 + 1)
-+#define AD5529R_REG_ALARMB_TSENS_SEL		(0x196 + 1)
-+#define AD5529R_REG_TSENS_SHTD_EN_CH		(0x198 + 1)
-+#define AD5529R_REG_DAC_DIS_DEGLITCH_CH		(0x19A + 1)
-+#define AD5529R_REG_DAC_INT_EN			(0x19C + 1)
-+#define AD5529R_REG_ALL_FUNC_INT_STAT		(0x19E + 1)
-+#define AD5529R_REG_FUNC_BUSY			(0x1A0 + 1)
-+#define AD5529R_REG_REF_SRC_SEL			(0x1A2 + 1)
-+#define AD5529R_REG_INIT_CRC_ERR_STAT		(0x1A4 + 1)
-+
-+/* Hotpath registers for multi-device support */
-+#define AD5529R_REG_MULTI_DAC_HOTPATH_SW_LDAC		(0x1A8 + 1)
-+#define AD5529R_REG_MULTI_DAC_HOTPATH_INPUT_A_DIE_0	(0x1AA + 1)
-+#define AD5529R_REG_MULTI_DAC_HOTPATH_INPUT_A_DIE_1	(0x1AC + 1)
-+#define AD5529R_REG_MULTI_DAC_HOTPATH_INPUT_A_DIE_2	(0x1AE + 1)
-+#define AD5529R_REG_MULTI_DAC_HOTPATH_INPUT_A_DIE_3	(0x1B0 + 1)
-+#define AD5529R_REG_DAC_HOTPATH_SW_LDAC			(0x1B2 + 1)
-+
-+/* Hotpath per-channel DAC input registers for each die */
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_0_BASE	(0x1B4 + 1)
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_0(ch)	\
-+	(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_0_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_1_BASE	(0x1D4 + 1)
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_1(ch)	\
-+	(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_1_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_2_BASE	(0x1F4 + 1)
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_2(ch)	\
-+	(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_2_BASE + (ch) * 2)
-+
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_3_BASE	(0x214 + 1)
-+#define AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_3(ch)	\
-+	(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_3_BASE + (ch) * 2)
-+
-+#define   AD5529R_INTERFACE_CONFIG_A_SW_RESET	(BIT(7) | BIT(0))
-+#define   AD5529R_INTERFACE_CONFIG_A_ADDR_ASCENSION	BIT(5)
-+#define   AD5529R_INTERFACE_CONFIG_A_SDO_ENABLE	BIT(4)
-+#define   AD5529R_INTERFACE_CONFIG_A_DEFAULT	0x10
-+#define   AD5529R_NUM_CHANNELS			16
-+#define   AD5529R_MAX_CHANNEL_INDEX		(AD5529R_NUM_CHANNELS - 1)
-+#define   AD5529R_MAX_REGISTER			(0x232 + 1)
-+#define   AD5529R_8BIT_REG_MAX			0x13
-+#define   AD5529R_ADDR(reg_addr)		((reg_addr) & 0xFFF)
-+#define   AD5529R_RESET_PULSE_US		1000
-+#define   AD5529R_RESET_DELAY_US		10000
-+#define   AD5529R_SPI_BUF_SIZE			4
-+#define   AD5529R_NUM_SUPPLIES			4
-+#define   AD5529R_SPI_READ_FLAG			0x80
-+
-+/* Device identification values */
-+#define   AD5529R_PRODUCT_ID_16BIT		0x4A
-+#define   AD5529R_PRODUCT_ID_12BIT		0x49
-+
-+struct ad5529r_model_data {
-+	const char *model_name;
-+	unsigned int resolution;
-+	const struct iio_chan_spec *channels;
-+};
-+
-+#define AD5529R_DAC_CHANNEL(chan, bits) {			\
-+	.type = IIO_VOLTAGE,					\
-+	.indexed = 1,						\
-+	.output = 1,						\
-+	.channel = (chan),					\
-+	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |		\
-+			      BIT(IIO_CHAN_INFO_SCALE),		\
-+	.scan_type = {						\
-+		.sign = 'u',					\
-+		.realbits = (bits),				\
-+		.storagebits = 16,				\
-+	},							\
-+}
-+
-+static const char * const ad5529r_supply_names[AD5529R_NUM_SUPPLIES] = {
-+	"vdd",
-+	"avdd",
-+	"hvdd",
-+	"hvss",
-+};
-+
-+static const struct iio_chan_spec ad5529r_channels_16bit[] = {
-+	AD5529R_DAC_CHANNEL(0, 16),
-+	AD5529R_DAC_CHANNEL(1, 16),
-+	AD5529R_DAC_CHANNEL(2, 16),
-+	AD5529R_DAC_CHANNEL(3, 16),
-+	AD5529R_DAC_CHANNEL(4, 16),
-+	AD5529R_DAC_CHANNEL(5, 16),
-+	AD5529R_DAC_CHANNEL(6, 16),
-+	AD5529R_DAC_CHANNEL(7, 16),
-+	AD5529R_DAC_CHANNEL(8, 16),
-+	AD5529R_DAC_CHANNEL(9, 16),
-+	AD5529R_DAC_CHANNEL(10, 16),
-+	AD5529R_DAC_CHANNEL(11, 16),
-+	AD5529R_DAC_CHANNEL(12, 16),
-+	AD5529R_DAC_CHANNEL(13, 16),
-+	AD5529R_DAC_CHANNEL(14, 16),
-+	AD5529R_DAC_CHANNEL(15, 16),
-+};
-+
-+static const struct iio_chan_spec ad5529r_channels_12bit[] = {
-+	AD5529R_DAC_CHANNEL(0, 12),
-+	AD5529R_DAC_CHANNEL(1, 12),
-+	AD5529R_DAC_CHANNEL(2, 12),
-+	AD5529R_DAC_CHANNEL(3, 12),
-+	AD5529R_DAC_CHANNEL(4, 12),
-+	AD5529R_DAC_CHANNEL(5, 12),
-+	AD5529R_DAC_CHANNEL(6, 12),
-+	AD5529R_DAC_CHANNEL(7, 12),
-+	AD5529R_DAC_CHANNEL(8, 12),
-+	AD5529R_DAC_CHANNEL(9, 12),
-+	AD5529R_DAC_CHANNEL(10, 12),
-+	AD5529R_DAC_CHANNEL(11, 12),
-+	AD5529R_DAC_CHANNEL(12, 12),
-+	AD5529R_DAC_CHANNEL(13, 12),
-+	AD5529R_DAC_CHANNEL(14, 12),
-+	AD5529R_DAC_CHANNEL(15, 12),
-+};
-+
-+static const struct ad5529r_model_data ad5529r_16bit_model_data = {
-+	.model_name = "ad5529r-16",
-+	.resolution = 16,
-+	.channels = ad5529r_channels_16bit,
-+};
-+
-+static const struct ad5529r_model_data ad5529r_12bit_model_data = {
-+	.model_name = "ad5529r-12",
-+	.resolution = 12,
-+	.channels = ad5529r_channels_12bit,
-+};
-+
-+struct ad5529r_state {
-+	struct spi_device *spi;
-+	const struct ad5529r_model_data *model_data;
-+	struct regmap *regmap_8bit;
-+	struct regmap *regmap_16bit;
-+};
-+
-+static const struct regmap_range ad5529r_8bit_readable_ranges[] = {
-+	regmap_reg_range(AD5529R_REG_INTERFACE_CONFIG_A, AD5529R_REG_CHIP_GRADE),
-+	regmap_reg_range(AD5529R_REG_SCRATCH_PAD, AD5529R_REG_VENDOR_H),
-+	regmap_reg_range(AD5529R_REG_STREAM_MODE, AD5529R_REG_INTERFACE_STATUS_A),
-+};
-+
-+static const struct regmap_range ad5529r_16bit_readable_ranges[] = {
-+	regmap_reg_range(AD5529R_REG_MULTI_DAC_CH_SEL, AD5529R_REG_LDAC_HW_SW),
-+	regmap_reg_range(AD5529R_REG_LDAC_HW_SRC_EDGE_SEL_BASE,
-+			 AD5529R_REG_LDAC_HW_SRC_EDGE_SEL_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_OUT_OPERATING_MODE, AD5529R_REG_OUT_OPERATING_MODE),
-+	regmap_reg_range(AD5529R_REG_OUT_RANGE_BASE,
-+			 AD5529R_REG_OUT_RANGE_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_CAL_GAIN_BASE,
-+			 AD5529R_REG_CAL_GAIN_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_CAL_OFFSET_BASE,
-+			 AD5529R_REG_CAL_OFFSET_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_EN, AD5529R_REG_FUNC_EN),
-+	regmap_reg_range(AD5529R_REG_FUNC_MODE_SEL_BASE,
-+			 AD5529R_REG_FUNC_MODE_SEL_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_DAC_INPUT_B_BASE,
-+			 AD5529R_REG_FUNC_DAC_INPUT_B_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_DITHER_PERIOD_BASE,
-+			 AD5529R_REG_FUNC_DITHER_PERIOD_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_DITHER_PHASE_BASE,
-+			 AD5529R_REG_FUNC_DITHER_PHASE_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_RAMP_STEP_BASE,
-+			 AD5529R_REG_FUNC_RAMP_STEP_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_INT_EN, AD5529R_REG_DAC_SW_LDAC),
-+	regmap_reg_range(AD5529R_REG_DAC_INPUT_A_BASE,
-+			 AD5529R_REG_DAC_INPUT_A_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_FUNC_INT_STAT, AD5529R_REG_FUNC_INT_STAT),
-+	regmap_reg_range(AD5529R_REG_DAC_DATA_READBACK_BASE,
-+			 AD5529R_REG_DAC_DATA_READBACK_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_TSENS_EN, AD5529R_REG_INIT_CRC_ERR_STAT),
-+	regmap_reg_range(AD5529R_REG_MULTI_DAC_HOTPATH_SW_LDAC, AD5529R_REG_DAC_HOTPATH_SW_LDAC),
-+	regmap_reg_range(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_0_BASE,
-+			 AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_0_BASE +
-+			 AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_1_BASE,
-+			 AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_1_BASE +
-+			 AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_2_BASE,
-+			 AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_2_BASE +
-+			 AD5529R_MAX_CHANNEL_INDEX * 2),
-+	regmap_reg_range(AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_3_BASE,
-+			 AD5529R_REG_DAC_HOTPATH_INPUT_A_DIE_3_BASE +
-+			 AD5529R_MAX_CHANNEL_INDEX * 2),
-+};
-+
-+static const struct regmap_access_table ad5529r_8bit_readable_table = {
-+	.yes_ranges = ad5529r_8bit_readable_ranges,
-+	.n_yes_ranges = ARRAY_SIZE(ad5529r_8bit_readable_ranges),
-+};
-+
-+static const struct regmap_access_table ad5529r_16bit_readable_table = {
-+	.yes_ranges = ad5529r_16bit_readable_ranges,
-+	.n_yes_ranges = ARRAY_SIZE(ad5529r_16bit_readable_ranges),
-+};
-+
-+static const struct regmap_range ad5529r_8bit_read_only_ranges[] = {
-+	regmap_reg_range(AD5529R_REG_CHIP_TYPE, AD5529R_REG_CHIP_GRADE),
-+	regmap_reg_range(AD5529R_REG_SPI_REVISION, AD5529R_REG_VENDOR_H),
-+	regmap_reg_range(AD5529R_REG_DEVICE_CONFIG, AD5529R_REG_DEVICE_CONFIG),
-+};
-+
-+static const struct regmap_range ad5529r_16bit_read_only_ranges[] = {
-+	regmap_reg_range(AD5529R_REG_TSENS_ALERT_FLAG, AD5529R_REG_TSENS_SHTD_STAT),
-+	regmap_reg_range(AD5529R_REG_ALL_FUNC_INT_STAT, AD5529R_REG_FUNC_BUSY),
-+	regmap_reg_range(AD5529R_REG_INIT_CRC_ERR_STAT, AD5529R_REG_INIT_CRC_ERR_STAT),
-+	regmap_reg_range(AD5529R_REG_DAC_DATA_READBACK_BASE,
-+			 AD5529R_REG_DAC_DATA_READBACK_BASE + AD5529R_MAX_CHANNEL_INDEX * 2),
-+};
-+
-+static const struct regmap_access_table ad5529r_8bit_writeable_table = {
-+	.no_ranges = ad5529r_8bit_read_only_ranges,
-+	.n_no_ranges = ARRAY_SIZE(ad5529r_8bit_read_only_ranges),
-+};
-+
-+static const struct regmap_access_table ad5529r_16bit_writeable_table = {
-+	.no_ranges = ad5529r_16bit_read_only_ranges,
-+	.n_no_ranges = ARRAY_SIZE(ad5529r_16bit_read_only_ranges),
-+};
-+
-+static const struct regmap_config ad5529r_regmap_8bit_config = {
-+	.name = "ad5529r-8bit",
-+	.reg_bits = 16,
-+	.val_bits = 8,
-+	.max_register = AD5529R_8BIT_REG_MAX,
-+	.read_flag_mask = AD5529R_SPI_READ_FLAG,
-+	.rd_table = &ad5529r_8bit_readable_table,
-+	.wr_table = &ad5529r_8bit_writeable_table,
-+};
-+
-+static const struct regmap_config ad5529r_regmap_16bit_config = {
-+	.name = "ad5529r-16bit",
-+	.reg_bits = 16,
-+	.val_bits = 16,
-+	.max_register = AD5529R_MAX_REGISTER,
-+	.read_flag_mask = AD5529R_SPI_READ_FLAG,
-+	.rd_table = &ad5529r_16bit_readable_table,
-+	.wr_table = &ad5529r_16bit_writeable_table,
-+};
-+
-+static struct regmap *ad5529r_get_regmap(struct ad5529r_state *st, unsigned int reg)
-+{
-+	if (reg <= AD5529R_8BIT_REG_MAX)
-+		return st->regmap_8bit;
-+
-+	return st->regmap_16bit;
-+}
-+
-+static int ad5529r_debugfs_reg_read(struct ad5529r_state *st, unsigned int reg,
-+				    unsigned int *val)
-+{
-+	return regmap_read(ad5529r_get_regmap(st, reg), reg, val);
-+}
-+
-+static int ad5529r_debugfs_reg_write(struct ad5529r_state *st, unsigned int reg,
-+				     unsigned int val)
-+{
-+	return regmap_write(ad5529r_get_regmap(st, reg), reg, val);
-+}
-+
-+static int ad5529r_detect_device(struct ad5529r_state *st)
-+{
-+	unsigned int product_id;
-+	int ret;
-+
-+	ret = regmap_read(st->regmap_8bit, AD5529R_REG_PRODUCT_ID_L, &product_id);
-+	if (ret)
-+		return ret;
-+
-+	switch (product_id) {
-+	case AD5529R_PRODUCT_ID_16BIT:
-+		st->model_data = &ad5529r_16bit_model_data;
-+		break;
-+	case AD5529R_PRODUCT_ID_12BIT:
-+		st->model_data = &ad5529r_12bit_model_data;
-+		break;
-+	default:
-+		dev_err(&st->spi->dev, "Unknown product ID: 0x%02X\n", product_id);
-+		return -ENODEV;
-+	}
-+
-+	dev_dbg(&st->spi->dev, "Detected %s variant (Product ID: 0x%02X)\n",
-+		st->model_data->model_name, product_id);
-+
-+	return 0;
-+}
-+
-+static int ad5529r_reset(struct ad5529r_state *st)
-+{
-+	struct reset_control *rst;
-+	int ret;
-+
-+	rst = devm_reset_control_get_optional_exclusive(&st->spi->dev, NULL);
-+	if (IS_ERR(rst))
-+		return PTR_ERR(rst);
-+
-+	if (rst) {
-+		ret = reset_control_deassert(rst);
-+		if (ret)
-+			return ret;
-+	} else {
-+		ret = regmap_write(st->regmap_8bit, AD5529R_REG_INTERFACE_CONFIG_A,
-+				   AD5529R_INTERFACE_CONFIG_A_SW_RESET);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	fsleep(AD5529R_RESET_DELAY_US);
-+
-+	return regmap_write(st->regmap_8bit, AD5529R_REG_INTERFACE_CONFIG_A,
-+			   AD5529R_INTERFACE_CONFIG_A_DEFAULT);
-+}
-+
-+static int ad5529r_read_raw(struct iio_dev *indio_dev,
-+			    struct iio_chan_spec const *chan,
-+			    int *val, int *val2, long mask)
-+{
-+	struct ad5529r_state *st = iio_priv(indio_dev);
-+	unsigned int reg_addr;
-+	unsigned int reg_val_h;
-+	int ret;
-+
-+	switch (mask) {
-+	case IIO_CHAN_INFO_RAW:
-+		reg_addr = AD5529R_REG_DAC_INPUT_A(chan->channel);
-+		ret = regmap_read(st->regmap_16bit, reg_addr, &reg_val_h);
-+		if (ret)
-+			return ret;
-+
-+		*val = reg_val_h;
-+
-+		return IIO_VAL_INT;
-+	case IIO_CHAN_INFO_SCALE:
-+		/*
-+		 * Using default 0-5V range: VOUTn = A × D/2^N + B
-+		 * where A = 5V, B = 0V, D = digital code, N = resolution
-+		 * Scale = 5000mV / 2^resolution
-+		 */
-+		*val = 5000;
-+		*val2 = st->model_data->resolution;
-+
-+		return IIO_VAL_FRACTIONAL_LOG2;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static int ad5529r_write_raw(struct iio_dev *indio_dev,
-+			     struct iio_chan_spec const *chan,
-+			     int val, int val2, long mask)
-+{
-+	struct ad5529r_state *st = iio_priv(indio_dev);
-+
-+	switch (mask) {
-+	case IIO_CHAN_INFO_RAW:
-+		if (val < 0 || val > GENMASK(st->model_data->resolution - 1, 0))
-+			return -EINVAL;
-+
-+		return regmap_write(st->regmap_16bit, AD5529R_REG_DAC_INPUT_A(chan->channel), val);
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static int ad5529r_reg_access(struct iio_dev *indio_dev,
-+			      unsigned int reg,
-+			      unsigned int writeval,
-+			      unsigned int *readval)
-+{
-+	struct ad5529r_state *st = iio_priv(indio_dev);
-+
-+	if (!readval)
-+		return ad5529r_debugfs_reg_write(st, reg, writeval);
-+
-+	return ad5529r_debugfs_reg_read(st, reg, readval);
-+}
-+
-+static const struct iio_info ad5529r_info = {
-+	.read_raw = ad5529r_read_raw,
-+	.write_raw = ad5529r_write_raw,
-+	.debugfs_reg_access = ad5529r_reg_access,
-+};
-+
-+static int ad5529r_probe(struct spi_device *spi)
-+{
-+	struct device *dev = &spi->dev;
-+	struct iio_dev *indio_dev;
-+	struct ad5529r_state *st;
-+	int ret;
-+
-+	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
-+	if (!indio_dev)
-+		return -ENOMEM;
-+
-+	st = iio_priv(indio_dev);
-+
-+	st->spi = spi;
-+
-+	ret = devm_regulator_bulk_get_enable(dev, AD5529R_NUM_SUPPLIES,
-+					     ad5529r_supply_names);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to get and enable regulators\n");
-+
-+	st->regmap_8bit = devm_regmap_init_spi(spi, &ad5529r_regmap_8bit_config);
-+	if (IS_ERR(st->regmap_8bit))
-+		return dev_err_probe(dev, PTR_ERR(st->regmap_8bit),
-+				     "Failed to initialize 8-bit regmap\n");
-+
-+	st->regmap_16bit = devm_regmap_init_spi(spi, &ad5529r_regmap_16bit_config);
-+	if (IS_ERR(st->regmap_16bit))
-+		return dev_err_probe(dev, PTR_ERR(st->regmap_16bit),
-+				     "Failed to initialize 16-bit regmap\n");
-+
-+	ret = ad5529r_reset(st);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to reset device\n");
-+
-+	ret = ad5529r_detect_device(st);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to detect device variant\n");
-+
-+	indio_dev->name = st->model_data->model_name;
-+	indio_dev->info = &ad5529r_info;
-+	indio_dev->modes = INDIO_DIRECT_MODE;
-+	indio_dev->channels = st->model_data->channels;
-+	indio_dev->num_channels = AD5529R_NUM_CHANNELS;
-+
-+	return devm_iio_device_register(dev, indio_dev);
-+}
-+
-+static const struct of_device_id ad5529r_of_match[] = {
-+	{ .compatible = "adi,ad5529r" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, ad5529r_of_match);
-+
-+static const struct spi_device_id ad5529r_id[] = {
-+	{ "ad5529r" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(spi, ad5529r_id);
-+
-+static struct spi_driver ad5529r_driver = {
-+	.driver = {
-+		.name = "ad5529r",
-+		.of_match_table = ad5529r_of_match,
-+	},
-+	.probe = ad5529r_probe,
-+	.id_table = ad5529r_id,
-+};
-+module_spi_driver(ad5529r_driver);
-+
-+MODULE_AUTHOR("Janani Sunil <janani.sunil@analog.com>");
-+MODULE_DESCRIPTION("Analog Devices AD5529R 12/16-bit DAC driver");
-+MODULE_LICENSE("GPL");
 
 -- 
 2.43.0
