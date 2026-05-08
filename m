@@ -1,158 +1,242 @@
-Return-Path: <linux-doc+bounces-86502-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86505-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qG/ALPwV/mkTmwAAu9opvQ
-	(envelope-from <linux-doc+bounces-86502-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 18:57:32 +0200
+	id qHmuDOAW/mlXmwAAu9opvQ
+	(envelope-from <linux-doc+bounces-86505-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 19:01:20 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A05A4F9A3A
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 18:57:31 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 857594F9B13
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 19:01:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7BFEA3077DD9
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 16:56:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C2D0C303FA8F
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 17:00:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8223940DFC4;
-	Fri,  8 May 2026 16:56:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00DA640F8CC;
+	Fri,  8 May 2026 17:00:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b="mLSdWLvZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kDHZiJLy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from outbound.ci.icloud.com (ci-2004k-snip4-4.eps.apple.com [57.103.89.107])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0991E40F8E9
-	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 16:56:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.89.107
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2B413101A7;
+	Fri,  8 May 2026 17:00:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778259387; cv=none; b=QKCnL1fx8NQwjYvS2wUKkLdD6UlgVXz+f3CqF0J+1l+QSqWtaKEXho7vsP23dMCVddP4LfBIklNBd+0uD0PtI+j0LcgZFjwQcWtv8gEWHmgpTK8M2D7PHuvOKWGxf/65OxHeRFUP4xaq8JVz28GPKJuv5yV+5BHN8bXulktiM+g=
+	t=1778259634; cv=none; b=cLD/L5rQrWps2suq+c/c7Vmd5p0oQs9On/jtSJrD6Ckp2wGTgYLn1EjFnPyqcnq7wK7pWGjqyGtLrvJeXBDu4gVB0/lNPCPkfhSYLeqDnW2WEzoHaul1zhNAOu+Rhx+z0KJsa4LSVUUWPC1YezCtOMD4AqRH2q7GV9AjxZ0E54s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778259387; c=relaxed/simple;
-	bh=O+Z+iiQS6mOHEHFMXl2jZzyLVpVMQFSe6c0A8tPA/Y0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=iYd9I9xhE1wgCDUFBKkFPPvlocDszJ2Cki9M7fMDau4KynqPcLwaVp7W0JHK1m5MEE+rNBY2Rszw2D3fXSLhV/NUZNPxvQbfHSrX/QX4jTLgQb5qEKfJBCSKHpwIAt6TViuQioxlKkoVpYt4ProqpG2eCJi2otEqyLkNWXNmpmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com; spf=pass smtp.mailfrom=icloud.com; dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b=mLSdWLvZ; arc=none smtp.client-ip=57.103.89.107
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icloud.com
-Received: from outbound.ci.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-central-1k-100-percent-8 (Postfix) with ESMTPS id 1A45418003AE;
-	Fri, 08 May 2026 16:56:22 +0000 (UTC)
-X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQhJBkMDRQVJF0wBTVIPDxhMCkEUWgpcQgtJAS1eCF4fTBwdDlgGEhZdRVsYRRlLHVgWAV8GWXIZWhRcGFNFUR9UWEEOCloBUFEdXwIKBEcEWxdGA1NFURkXEVABWB5WXloXXk1HH0BNYkkBWhlbHEAXSm5NUw8PGVoUXBhTRVEfVFheBFNWDkAMSwZYUQlWXQ1LAFQaXwcRDVUKCFUNH0RfTwFcA14DQwFAAS1eCF4fTBwdDlgGDFBNAUMICgJRHFYNVw==
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai; t=1778259385; x=1780851385; bh=+QLZLsNYf7h9Ce79kOQN7zRPNN2q7F1QoiGbgvgNk78=; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:x-icloud-hme; b=mLSdWLvZwqNRhNXhUmkJmhVTY7rlx831BK9MA47Ujn6al8NsCzs2vAVcWeuMFjznM2mfiqMfa4WcmoBtLWqWQ1cIVC469vVg4XC8VyCxOwi4HgZQ4JkCml5gB4hnu7FuTuYjEFJHNPi5jFuHZFJtQWNmMAnH9oHV3ZIr9OvyDCgDmz7MRTePhkULARMyFcyCH6OFkzcz2aVfuAWyOQrbIQOWrR7VKaljt3q1UHzG2W1hdajhVA8Up4tJMK2rteIUXOtmpYsHxRRbER1UKg+kfKy08ZGxTCoBCv8t8rWSp2rqP9XK9Ug6y0DrTGZPEa3ul8K4cLTxlGrSYhpJ1JbLUg==
-Received: from [192.168.89.2] (unknown [17.57.156.36])
-	by p00-icloudmta-asmtp-us-central-1k-100-percent-8 (Postfix) with ESMTPSA id BB7C11802090;
-	Fri, 08 May 2026 16:56:19 +0000 (UTC)
-Message-ID: <05355fbd-4339-45a4-9ebf-4f7214513882@icloud.com>
-Date: Sat, 9 May 2026 01:56:17 +0900
+	s=arc-20240116; t=1778259634; c=relaxed/simple;
+	bh=fufvz3D3Ed+0Vx3B7r+7ZrpCMU/irXf5wqRVZ6Rm4uk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=icMLIT+Ox+bFbiyPk1Tftab1UWJRA6q/F9Njoqc6OQ45YYL4ji6nuXah3bXaqGfhDofxY67tW70K3mYILCj/L7orKsycp0x5K805Z1e0ySSjf7hi7XeaV2kQ/BUbvZq84MRCSPUWPhjb3Km1VJo6jtqvT8DneH5jWgNWuWoOLWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kDHZiJLy; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 62ECDC2BCB0;
+	Fri,  8 May 2026 17:00:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778259634;
+	bh=fufvz3D3Ed+0Vx3B7r+7ZrpCMU/irXf5wqRVZ6Rm4uk=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=kDHZiJLyjuzNsKRpE2m4nGNcFcnVhPj8rNegYNbjcviGKTHnnks93NMrpTE7ns2Lk
+	 pZsudzjSnpXn3qktbs6O3ydR8RHIwZvyzcG6w/f3fvxKTRVRw4ZCOopDVmtJGnA1Ys
+	 bs3WwGfuyKxVOK9XFMmEKhP/YNw/pLjjs3MmRdSkrJC6tbPHeKrQjkyU2nj8AiDuyz
+	 yGygllBJ2tEvstRZ7ti5sHPm4gDekFhhtxPG7xhrmMYBSKyvG+4KHhishvvNxUtzKQ
+	 Ukg54dp83fVjKQIUXHIGpjjO+SOXT96Ly+1QvLMB4wwdAaXyutXSZc1Cz80+B/T1s7
+	 vL3ujsgNMP7rQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CEA4CD3445;
+	Fri,  8 May 2026 17:00:34 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH RFC v4 00/10] AD9910 Direct Digital Synthesizer
+Date: Fri, 08 May 2026 18:00:16 +0100
+Message-Id: <20260508-ad9910-iio-driver-v4-0-d26bfd20ee3d@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] hwmon: add AMD Promontory 21 xHCI temperature
- sensor support
-To: Mario Limonciello <mario.limonciello@amd.com>,
- Guenter Roeck <linux@roeck-us.net>, Jihong Min <hurryman2212@gmail.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Mathias Nyman <mathias.nyman@intel.com>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Basavaraj Natikar <Basavaraj.Natikar@amd.com>, linux-usb@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <cover.1778123510.git.hurryman2212@gmail.com>
- <0c35058bb088213397b42fca8d51e9ad0bba5169.1778123510.git.hurryman2212@gmail.com>
- <35c2436b-d172-4172-a684-a96c4a0dcabe@roeck-us.net>
- <16c4f7e5-e33d-4271-a7af-5d6c7fca0570@icloud.com>
- <6745fd21-2001-4e06-af41-96ae63154c02@roeck-us.net>
- <198ae20f-49c9-4f81-87e2-e16e81053f08@icloud.com>
- <70035490-eafb-4610-8889-9e04931c8b32@amd.com>
-Content-Language: en-US
-From: Jihong Min <hurryman2212@icloud.com>
-In-Reply-To: <70035490-eafb-4610-8889-9e04931c8b32@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Info-Out: v=2.4 cv=NfzrFmD4 c=1 sm=1 tr=0 ts=69fe15b7
- cx=c_apl:c_pps:t_out a=2G65uMN5HjSv0sBfM2Yj2w==:117
- a=2G65uMN5HjSv0sBfM2Yj2w==:17 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=x7bEGLp0ZPQA:10 a=5jDBv52wX64A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=c92rfblmAAAA:8 a=pGLkceISAAAA:8 a=NEAV23lmAAAA:8 a=jm6BaUM5yunLdwCpO_4A:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=GvGzcOZaWPEFPQC_NcjD:22
- a=PgRulw5oR9JgysbTFEid:22 a=MienORt8HT0FiJ1vGQZ6:22
-X-Proofpoint-GUID: zLnn0M4GnOupoLmgccVWtpqh383ISKTu
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA4MDE2OSBTYWx0ZWRfX0oLtkKpTDFo8
- Q1C3S/9OJHt0gK558mbjbUH+xyYetB1TWRJq3wYHUstKW9SGieVCx64c1+yxTgUzCwao8ZQ7cM3
- WBLs05D7DOPnYPOyh63Lzf3G4CVkhHLN7OFA1rj5nh0zjLGft3IHygrOOMR8VEiIfGPU8s5SXYG
- Mc4yCWAhsQFsCE5wHu6bTzrBYSK/Dx5mJrDKarAwAreLC3uNH7DvvdZ0YBMkAe8Wp4C3FOcMpcS
- kfetB5gt5pLSjWgZFxjXJh9iQFgnVUxnQ2yjI8xqVCOyCoOEd/+jzs6eLyk0+ZuiIsTFVRNi1o4
- bmp7pUK5BZDHsvIEdSswUJ9sKxnrwm9fwHQHZV5sJqVB5cgWLSeTFJeB16zV1w=
-X-Proofpoint-ORIG-GUID: zLnn0M4GnOupoLmgccVWtpqh383ISKTu
-X-Rspamd-Queue-Id: 1A05A4F9A3A
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKAW/mkC/23OwQrCMAwG4FcZPVtp0rqtngTBB/AqHrqt2wK6S
+ itFGXt3yzwMccc/4f+SkQXryQa2z0bmbaRAbkhBbTJW92boLKcmZYYCc4FQctNoDYITOd54itZ
+ zXckGQdW4g5al3sPbll6zeWHn05Fd07Cn8HT+Pd+JMK++JIoVMgIXXFaYK2NUaUAczGBurtvW7
+ j5zERdCrn4VMRG20K2Wla1bgD9CLoSCYo2QiUBdaVkAGsTyh5im6QMKQJetPgEAAA==
+X-Change-ID: 20260218-ad9910-iio-driver-9b3d214c251f
+To: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-hardening@vger.kernel.org
+Cc: Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778259632; l=6178;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=fufvz3D3Ed+0Vx3B7r+7ZrpCMU/irXf5wqRVZ6Rm4uk=;
+ b=wIkMQtQcYZN0KDHnFvW3yjOLjt5CiSp9nvYy0Zw5lJrN0JaQPtSqeE2l+m9AyqHun3ynRWsoV
+ CL3HlcpOP07Ckn2TrGazpsBlHnqxX5gQlimyzCxfi+h6f94OlE+H+Em
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
+X-Rspamd-Queue-Id: 857594F9B13
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[icloud.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[icloud.com:s=1a1hai];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86502-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86505-lists,linux-doc=lfdr.de,rodrigo.alencar.analog.com];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[amd.com,roeck-us.net,gmail.com];
-	FREEMAIL_FROM(0.00)[icloud.com];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	DKIM_TRACE(0.00)[icloud.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	HAS_REPLYTO(0.00)[rodrigo.alencar@analog.com];
 	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hurryman2212@icloud.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[icloud.com:mid,icloud.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,sashiko.dev:url]
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,analog.com:email,analog.com:mid,analog.com:replyto]
 X-Rspamd-Action: no action
 
->
-> Another thing to mention is that you are going too fast between patch 
-> versions.  All your patches show up in a ton of people's inboxes.
->
-> It's great you've gotten feedback on them but I suggest you give it a 
-> few days or a week between versions to gather more feedback.
-Thanks for the guidance. I understand, and I agree that I have been sending
-new revisions too quickly.
+This patch series adds support for the Analog Devices AD9910 DDS.
+This is a RFC so that we can agree/discuss on the design that follows:
 
-I will slow down the revision cadence from now on and wait a few days, or
-until the review discussion settles, before sending the next version.
->
-> If you haven't already; you should take a look at what Sahiko finds on 
-> your patches too.  Be sure to look at the feedback critically and take 
-> it with a grain of salt; but it often finds a few nuggets that are 
-> worthwhile to consider.
->
-> Here is the Sahiko link for v4 you can review if you weren't already 
-> looking at it.
->
-> https://sashiko.dev/#/patchset/20260508143910.14673-1-hurryman2212%40gmail.com 
->
->
-I have been checking the Sashiko feedback and have been incorporating the
-actionable issues it found where they made sense. I will continue to review
-it critically before sending future revisions.
+This is a follow-up of the V3 discussion. For V1, we reached into
+this channel composition agreement where physical channels may have
+sub-channels. That adds the flexibility necessary for this design.
+During V2, some feedback indicated that the ABI is too device-specific,
+so DRG/RAM destination and operating modes are configured through
+alternate paths and profile channels are created. In V3, there was
+further discussion on the ABI and on mode priority debug.
 
-For reference only, and not as a substitute for the mailing-list 
-patches, I am
-keeping my current work-in-progress branch here:
+The AD9910 DDS core can be driven through several independent mechanisms:
+single tone profiles, a digital ramp generator, an internal RAM playback
+engine, a parallel data port, and output shift keying. Each of these
+represents a distinct signal path into the DDS accumulator, so the driver
+models them as separate IIO output channels (all IIO_ALTVOLTAGE type).
+This per-channel separation allows userspace to configure each mode
+independently through its own set of sysfs attributes, and to
+enable/disable modes individually via IIO_CHAN_INFO_ENABLE, relying on
+the hardware's own mode selection architecture.
 
-   https://github.com/hurryman2212/linux/tree/prom21_hwmon
+The AD9910 register map is not suited for the regmap framework: register
+widths vary across the map (16, 32, and 64 bits). The driver instead
+implements direct SPI access helpers with a software register cache, using
+type-specific read/write/update functions (ad9910_reg{16,32,64}_{read,
+write,update}) that handle endianness conversion and cache coherency.
 
-Sincerely,
-Jihong Min
+Registers are cached for several reasons. The control/function registers
+(CFR1, CFR2) are frequently queried to determine the current operating
+mode (e.g., checking RAM_ENABLE before every profile register access),
+and caching avoids repeated SPI read transactions for what are
+essentially state checks. The cache also enables efficient
+read-modify-write updates on multi-byte registers: the update functions
+merge new field values with the cached register content without issuing
+a SPI read, and skip the write entirely when the value is unchanged.
+Finally, the profile registers serve dual purposes depending on whether
+RAM mode is active -- they hold single tone parameters (FTW, POW, ASF)
+in normal operation but are repurposed for RAM playback configuration
+(start/end address, step rate, operating mode) when RAM is enabled. A
+shadow register array (reg_profile[]) preserves the inactive mode's
+settings across transitions, so no state is lost when switching between
+single tone and RAM operation.
+
+RAM data is loaded through firmware upload infrastructure. Userspace
+writes the waveform data as a raw binary buffer (up to 4096 bytes for
+the full 1024x32-bit RAM), and the driver reverses the byte array and
+transfers it to the device in a single SPI transaction. Per-profile
+start/end addresses and playback parameters (operating mode, step rate,
+no-dwell control) are also configured through firmware update, using
+metadata in the header.
+
+Streaming data to the DDS core through the parallel data port at the
+PD_CLK rate is not covered by this series. That functionality would
+be added in a separate patch series, building on top of the IIO backend
+infrastructure to provide a proper buffered data path.
+
+As I am pushing implementation, as lot has been done already without much
+supervision or agreement, still I would be interested on hearing about
+the design choices discussed above.
+
+Kind regards,
+
+Rodrigo Alencar
+
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v4:
+- Digital Ramp step exposed as a rate of change.
+- Dwell modes of Digital Ramp are controlled with dwell_en attribute. 
+- Disable of active profile behaves as a software powerdown.
+- Expose debugfs attributes to show mode priority.
+- Add 64-bit debugfs reg access support into iio core.
+- Link to v3: https://lore.kernel.org/r/20260417-ad9910-iio-driver-v3-0-29b93712a228@analog.com
+
+Changes in v3:
+- RAM custom configs (address range, destination, modes) loaded during firmware write.
+- DRG destination defined when attrs are written.
+- DRG modes broken down into enable attrs for ramp up/down channels.
+- Add separate profile channels, switching done through enable attr
+- Link to v2: https://lore.kernel.org/r/20260318-ad9910-iio-driver-v2-0-e79f93becf11@analog.com
+
+Changes in v2:
+- Device-tree bindings changes.
+- RAM loading to use firmware update interface.
+- Rearrange of channels into a hierarchy.
+- Link to v1: https://lore.kernel.org/r/20260220-ad9910-iio-driver-v1-0-3b264aa48a10@analog.com
+
+---
+Rodrigo Alencar (10):
+      dt-bindings: iio: frequency: add ad9910
+      iio: core: support 64-bit register through debugfs
+      iio: frequency: ad9910: initial driver implementation
+      iio: frequency: ad9910: add basic parallel port support
+      iio: frequency: ad9910: add digital ramp generator support
+      iio: frequency: ad9910: add RAM mode support
+      iio: frequency: ad9910: add output shift keying support
+      iio: frequency: ad9910: show channel priority in debugfs
+      Documentation: ABI: testing: add docs for ad9910 sysfs entries
+      docs: iio: add documentation for ad9910 driver
+
+ .../ABI/testing/sysfs-bus-iio-frequency-ad9910     |   73 +
+ .../bindings/iio/frequency/adi,ad9910.yaml         |  198 ++
+ Documentation/iio/ad9910.rst                       |  607 +++++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |   10 +
+ drivers/iio/frequency/Kconfig                      |   20 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/ad9910.c                     | 2398 ++++++++++++++++++++
+ drivers/iio/industrialio-core.c                    |   33 +-
+ include/linux/iio/iio.h                            |    4 +
+ 10 files changed, 3336 insertions(+), 9 deletions(-)
+---
+base-commit: 9e62a5d329f8f0f07c4d5f80a691e3f16dcb957c
+change-id: 20260218-ad9910-iio-driver-9b3d214c251f
+
+Best regards,
+-- 
+Rodrigo Alencar <rodrigo.alencar@analog.com>
+
+
 
