@@ -1,239 +1,170 @@
-Return-Path: <linux-doc+bounces-86365-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86366-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iI7PI7Vk/WksdAAAu9opvQ
-	(envelope-from <linux-doc+bounces-86365-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 06:21:09 +0200
+	id aLQ/HEVq/WkndwAAu9opvQ
+	(envelope-from <linux-doc+bounces-86366-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 06:44:53 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AAF24F16AF
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 06:21:07 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 529C44F1B54
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 06:44:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 6597C300BD67
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 04:21:04 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id BCB1A3008D6C
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 04:44:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56B8932D0FC;
-	Fri,  8 May 2026 04:21:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B1A892FFFA5;
+	Fri,  8 May 2026 04:44:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="i605/4qi"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="K02TKGZt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 527622FFDD6
-	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 04:20:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6FA624503B;
+	Fri,  8 May 2026 04:44:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778214062; cv=none; b=P/Bhg6hk1g1Ys4T6aJqRR3q69xGEoAmoXE/NSGiA0nnvhsqXqAud9ybH1TmhzaruXi+q7NNhjzethgtDU1IuZWoe/erz4291xr35zQgpOltlXTdqzZk5YP71P4XlZyOOfWYZ4mNavs/+ek/rTW7fCOEQgAc51XqcilVcWfo0r/k=
+	t=1778215489; cv=none; b=cFR49XOkYvx0QieiKn28i2vnxd+nLz3f/lQIHmq9r/opIaXuQ7GZzZ+jefXQtA9bKLxdOWOfd6oPHHA+uRyiktbfyfeChkBM9v38QNftYyQgayLhgK5ukQwoScx65KOq8ofUZYdA6KPlOeYT3RwvU4pJ7ikn1tc18FkK3c+fy/Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778214062; c=relaxed/simple;
-	bh=dqJkYv/yCgsVfNT+/DbfGwhL+eLTj0E+2M/petsk2JQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=SaVkX0OosX+MtPP0BvAGB9I0FdZ4w7ZJxdnUc+IL7U7zaRat08We7e7s8f3GfHwN58RW3rtuPnEO6/opEKccLNonjRuNU21oVZBPMiQTTmKUtIvLbeZEJ+NFEZXXrGg+9YBeIgdqrFMa1vwdPJsZxMfq9HSFbxwTrDP9T/Aeae4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=i605/4qi; arc=none smtp.client-ip=74.125.82.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-2f0ad52830cso2400784eec.1
-        for <linux-doc@vger.kernel.org>; Thu, 07 May 2026 21:20:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778214058; x=1778818858; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
-         :date:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FyTs3raz5d5xhnuAreVROw1KNyyIcIXqGuqG5VovwW4=;
-        b=i605/4qisVeeijqvzEUJ72e0rZQgiu4tIoFS072/IS4F4O8lHVN5AOb6/1lUedQWb6
-         QsPs4QyFrXbfeMzM2sVlu9sI+Hvk8YQZNyGIqbUpLAGHQBNdFhZUokDrasbTbsdR2RWP
-         eB0vz+SVYpFbANeD+oztOp6Dmc1PhT/2zl56SwLGXOduyia5gpn9ovsO7sTPFA4rW+xB
-         25iNagTPe3b0wTotLSQRooxKbjYe9hu87nvy1eWa11D3h/3b4+oneKg0ZR6VM5eUSR6o
-         TdgEEaUS51/QnMcClv96voHeVPmL16SraS+XrHzykwwl8kGPVatcGmKyXmQBVUYl4etD
-         bHgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778214058; x=1778818858;
-        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
-         :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FyTs3raz5d5xhnuAreVROw1KNyyIcIXqGuqG5VovwW4=;
-        b=noDOk73z1VvOuXPgV3xb5mShhYqEJVRnd3cdDsqTxJXvE4t04x9cTCh5JfwU4s9LxZ
-         6i+mPXq/Kyp6aCygdfspHMdKF4WMbkuSgFJ+pjyYf+SqC0USFFZPL9Op9t8ndtAy9kEk
-         h2Wq0AcvGxU5XXZ6JGFDWh5eEf7pTjFDzBqKsZ41nqK3EqNL5XWMtdxiuUkZKmaleYw/
-         xJFQWg07DkdCEJlh7VlRfOTP92e+TGPI0E36b3YBHz3jqZkVEftU8LBx7mJDZNiQjA35
-         QTNs6uQYkd37zOg+76JZmh4wtwB6VT+HHuVF5kid+40nBDm9QS0CaY+PL06X6XGHp4WS
-         CV/g==
-X-Forwarded-Encrypted: i=1; AFNElJ+VCUemMgLV0npNza6sjYjMQT51PfjEyeCkfDgGGpwWrsHURzRkGwwdWiKddL6L/S+9k2jQYlRfhoE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YySwbNDdQLpBBoS9vnqBko6xRgu9++/dyPKI2SmAhz+os+F5xcj
-	5CJQVCw73zjwYUlGnqOOhCy4RcUUbzi5ia+2lPRmw/8QdWYaujiQ+sG+
-X-Gm-Gg: Acq92OFmVLQuU9RIl/ddcrnUxpOnGhWBuslC2zJrxMN5xbCzXGMh8z99DuQjvg6RQCt
-	+Fp0Oh1dIOrJNPJVPZJpc1itpD8lzIGPGmgdqA2TIfdOa84/9Wlg6jDtOHtyDtvWhsElrmy/nbO
-	7SnW+1lhINSEqsqOnL2vo5aQcpaoU32c56dUbMPUVX8pmVSyzxMb0xBHRkC1jL8XPCqqYJxQVe+
-	JBH2dhx6H8TZt8u8aZsOIp+kPCOt9+ZxmaHMdSbg7P+gkVXWaKz5udT76E8GZfWpxMJxEayGdp/
-	JnM5wz2qP819bbTzyXxx0LgoQhajoA4wXXMTwv0Oc83t80iNZaM1wsK1izfMAgB+k/2TelqLC1w
-	gYTQv9OEugFj/q6xafW8tva1dyYAdojV3rjPBj/zCZ+kjLk/N0g6r5S7nmT8yl5fLWWr2tG/mG9
-	IE/0bEcVtW27fwhosa4CwckHV86FhlePJ3UiAjh03WWGKsMvVU9X6dG/PcrV2X76d1mM/6NVBFp
-	Q==
-X-Received: by 2002:a05:7300:a199:b0:2ed:a64:a457 with SMTP id 5a478bee46e88-2f54a77f54fmr5269441eec.20.1778214058042;
-        Thu, 07 May 2026 21:20:58 -0700 (PDT)
-Received: from [192.168.1.18] (177-4-161-87.user3p.v-tal.net.br. [177.4.161.87])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2f88847504dsm676455eec.15.2026.05.07.21.20.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 May 2026 21:20:57 -0700 (PDT)
-From: =?utf-8?q?C=C3=A1ssio_Gabriel?= <cassiogabrielcontato@gmail.com>
-Date: Fri, 08 May 2026 01:20:50 -0300
-Subject: [PATCH] ASoC: docs: Fix stale and misspelled references
+	s=arc-20240116; t=1778215489; c=relaxed/simple;
+	bh=WVcZmcrMUcQSLgmbj20gn3L9v+Hk/LfU1kizlZqcX4s=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=dLbMP5Yv5B5mDTT8+7NMHc1LsR5wynhjKP6+q7flc8dLn/7LCzdwY9od9+lGpD6RFxlBxkhoK0zvv1r7GFg1RZu4hFB950GoMen8ECocB8P3J8Sxg1CDi6IU6MLa8Z5i3q/G3I/3rMOP69qCkuX9UrZqTrJt+HwAPe8gElDpFKA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=K02TKGZt; arc=none smtp.client-ip=192.198.163.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778215488; x=1809751488;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=WVcZmcrMUcQSLgmbj20gn3L9v+Hk/LfU1kizlZqcX4s=;
+  b=K02TKGZth7UhOWWBc3o0arQ6/ncnd4HYIHMM5AZ2nVhs2jUATXJ+M2zw
+   znDcM0o3Nq+iE7JJMjyUrfs07frt8BlD4lqB4qHq4VOF7Th+Kevs7Rqux
+   yhQZVoZDkXPxeeUu9zsudMknMq+7+oXPRkxeRaqPGxPVrasRQlciu6ztZ
+   6IiM2PI8MSXzdrOZ10C9zokdjDnPbxGeB8ZRwpEIVUECt6gdegR/VFVac
+   Ryk+UM+qsg40jGudXvklcOdWlTjkC5SokjoMyFvETKFifOuTx1XPACT3z
+   wSrBaO3azuNUZh9BUnNNd80gtBw2xjSDBKYUQ3/FWbuOuAeUh6LSun5nm
+   Q==;
+X-CSE-ConnectionGUID: VPTQXlkGT9yIvieho3H3gg==
+X-CSE-MsgGUID: eJG3IhviQt6y5UoV8Dmjvw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="90558477"
+X-IronPort-AV: E=Sophos;i="6.23,222,1770624000"; 
+   d="scan'208";a="90558477"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 May 2026 21:44:47 -0700
+X-CSE-ConnectionGUID: qEVbJLo2RyKB63FiqhsKMw==
+X-CSE-MsgGUID: ua4RiqMJQ1O91HqbJZ0jlw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,222,1770624000"; 
+   d="scan'208";a="232309852"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.237])
+  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 May 2026 21:44:42 -0700
+Date: Fri, 8 May 2026 07:44:39 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Jonathan Cameron <jic23@kernel.org>
+Cc: "Sabau, Radu bogdan" <Radu.Sabau@analog.com>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	"Hennerich, Michael" <Michael.Hennerich@analog.com>,
+	David Lechner <dlechner@baylibre.com>,
+	"Sa, Nuno" <Nuno.Sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <ukleinek@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
+	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v9 2/6] iio: adc: ad4691: add initial driver for AD4691
+ family
+Message-ID: <af1qN1Bvio1v6TKG@ashevche-desk.local>
+References: <20260430-ad4692-multichannel-sar-adc-driver-v9-0-33e439e4fb87@analog.com>
+ <20260430-ad4692-multichannel-sar-adc-driver-v9-2-33e439e4fb87@analog.com>
+ <LV9PR03MB841460307B0CF4C6F267A631F73C2@LV9PR03MB8414.namprd03.prod.outlook.com>
+ <20260507151549.61e4e8fb@jic23-huawei>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260508-asoc-doc-fixes-v1-1-b53eec42e340@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMQQ5AQAxFryJdm2QQgquIRWcUtUCmiETcXbH4i
- 5ef9y4QCkwCdXRBoIOFl1khiSPwI84DGe6UIbVpYXNbGpTFm07X80liKupdhmWOmDlQaQ30Heo
- 07c+yu4n89lbgvh8tFD4BcgAAAA==
-X-Change-ID: 20260508-asoc-doc-fixes-9efb3a85aa3b
-To: Takashi Iwai <tiwai@suse.com>, Mark Brown <broonie@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>
-Cc: linux-sound@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- =?utf-8?q?C=C3=A1ssio_Gabriel?= <cassiogabrielcontato@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4086;
- i=cassiogabrielcontato@gmail.com; h=from:subject:message-id;
- bh=dqJkYv/yCgsVfNT+/DbfGwhL+eLTj0E+2M/petsk2JQ=;
- b=owGbwMvMwCV2IdZeKur/u2bG02pJDJl/U5a5nuEIELruuftI1qey1jcSzNwN0fxMWkwBx64sL
- UtUrNnfUcrCIMbFICumyLI6aZHlnq4HV+vjVnjAzGFlAhnCwMUpABPRqWL4H5c/2/LC30iN07NW
- R2lXbM5Yfu7t4X1i1tHMX4OMvI+XiDL8U5rq+0t7rQmjU1iw5sOkvqUPljgv1RFkymP2iDH5u12
- dCwA=
-X-Developer-Key: i=cassiogabrielcontato@gmail.com; a=openpgp;
- fpr=AB62A239BC8AE0D57F5EA848D05D3F1A5AFFEE83
-X-Rspamd-Queue-Id: 7AAF24F16AF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260507151549.61e4e8fb@jic23-huawei>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
+X-Rspamd-Queue-Id: 529C44F1B54
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86365-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[suse.com,kernel.org,lwn.net,linuxfoundation.org,gmail.com,perex.cz];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	TAGGED_FROM(0.00)[bounces-86366-lists,linux-doc=lfdr.de];
+	HAS_ORG_HEADER(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[analog.com,metafoo.de,baylibre.com,kernel.org,gmail.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[cassiogabrielcontato@gmail.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ashevche-desk.local:mid,intel.com:dkim,analog.com:email]
 X-Rspamd-Action: no action
 
-While reading some docs, I have found some minor
-misspelled words and some parts that could be improved.
+On Thu, May 07, 2026 at 03:15:49PM +0100, Jonathan Cameron wrote:
+> On Thu, 7 May 2026 09:26:00 +0000
+> "Sabau, Radu bogdan" <Radu.Sabau@analog.com> wrote:
 
-The ASoC USB documentation refers to the USB DPCM backend link as DCPM
-in two places. The ASoC platform documentation still points readers to
-the old DPCM.txt name. The ALSA configuration guide also has two
-references that omit their current subdirectory.
+...
 
-Fix a few stale and misspelled references in the ALSA and ASoC
-documentation and update the references and fix a typo in the ASoC index.
+> > > +	st->info = spi_get_device_match_data(spi);  
+> > 
+> > "Is it possible for st->info to be NULL here?
+> > If the driver is manually bound to a device with a non-matching name using
+> > the sysfs bind interface in combination with driver_override,
+> > spi_get_device_match_data() could return NULL, which would cause a NULL
+> > pointer dereference later in the probe sequence."
+> > 
+> > Agreed, will add the NULL check with -ENODEV immediately after
+> > spi_get_device_match_data().
+> 
+> Andy, you seeing this one?  Looks like we are putting these checks back in again.
+> Whilst anyone forcing a bind like this is onto a looser anyway we shouldn't
+> crash due to a null dereference.
 
-Assisted-by: Codex:GPT-5.5
-Signed-off-by: Cássio Gabriel <cassiogabrielcontato@gmail.com>
----
- Documentation/sound/alsa-configuration.rst | 4 ++--
- Documentation/sound/soc/index.rst          | 2 +-
- Documentation/sound/soc/platform.rst       | 2 +-
- Documentation/sound/soc/usb.rst            | 4 ++--
- 4 files changed, 6 insertions(+), 6 deletions(-)
+We should find a way how to disable that combination from the start. The driver
+makes no sense to be instantiated from user space. Actually most of the drivers
+nowadays should not be bound to the devices without driver data.
 
-diff --git a/Documentation/sound/alsa-configuration.rst b/Documentation/sound/alsa-configuration.rst
-index f75f08763941..394cf87f340b 100644
---- a/Documentation/sound/alsa-configuration.rst
-+++ b/Documentation/sound/alsa-configuration.rst
-@@ -1097,7 +1097,7 @@ output (with ``--no-upload`` option) to kernel bugzilla or alsa-devel
- ML (see the section `Links and Addresses`_).
- 
- ``power_save`` and ``power_save_controller`` options are for power-saving
--mode.  See powersave.rst for details.
-+mode.  See Documentation/sound/designs/powersave.rst for details.
- 
- Note 2: If you get click noises on output, try the module option
- ``position_fix=1`` or ``2``.  ``position_fix=1`` will use the SD_LPIB
-@@ -1168,7 +1168,7 @@ line_outs_monitor
- enable_monitor
-     Enable Analog Out on Channel 63/64 by default.
- 
--See hdspm.rst for details.
-+See Documentation/sound/cards/hdspm.rst for details.
- 
- Module snd-ice1712
- ------------------
-diff --git a/Documentation/sound/soc/index.rst b/Documentation/sound/soc/index.rst
-index 8bed8f8f48da..22878d73f7a5 100644
---- a/Documentation/sound/soc/index.rst
-+++ b/Documentation/sound/soc/index.rst
-@@ -2,7 +2,7 @@
- ALSA SoC Layer
- ==============
- 
--The documentation is spilt into the following sections:-
-+The documentation is split into the following sections:-
- 
- .. toctree::
-    :maxdepth: 2
-diff --git a/Documentation/sound/soc/platform.rst b/Documentation/sound/soc/platform.rst
-index bd21d0a4dd9b..53caba6ce4ce 100644
---- a/Documentation/sound/soc/platform.rst
-+++ b/Documentation/sound/soc/platform.rst
-@@ -75,4 +75,4 @@ Each SoC DSP driver usually supplies the following features :-
- 3. DMA IO to/from DSP buffers (if applicable)
- 4. Definition of DSP front end (FE) PCM devices.
- 
--Please see DPCM.txt for a description of item 4.
-+Please see dpcm.rst for a description of item 4.
-diff --git a/Documentation/sound/soc/usb.rst b/Documentation/sound/soc/usb.rst
-index 94c12f9d9dd1..9cb860547f22 100644
---- a/Documentation/sound/soc/usb.rst
-+++ b/Documentation/sound/soc/usb.rst
-@@ -103,7 +103,7 @@ Returns 0 on success, and -EOPNOTSUPP on failure.
-   - ``usbdev``: the usb device that was discovered
-   - ``sdev``: capabilities of the device
- 
--**snd_soc_usb_connect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+**snd_soc_usb_connect()** notifies the ASoC USB DPCM BE DAI link of a USB
- audio device detection.  This can be utilized in the BE DAI
- driver to keep track of available USB audio devices.  This is intended
- to be called by the USB offload driver residing in USB SND.
-@@ -118,7 +118,7 @@ Returns 0 on success, negative error code on failure.
-   - ``usbdev``: the usb device that was removed
-   - ``sdev``: capabilities to free
- 
--**snd_soc_usb_disconnect()** notifies the ASoC USB DCPM BE DAI link of a USB
-+**snd_soc_usb_disconnect()** notifies the ASoC USB DPCM BE DAI link of a USB
- audio device removal.  This is intended to be called by the USB offload
- driver that resides in USB SND.
- 
 
----
-base-commit: b8dc547edf9e41474d8ce2dcf344e8e75b17781a
-change-id: 20260508-asoc-doc-fixes-9efb3a85aa3b
+-- 
+With Best Regards,
+Andy Shevchenko
 
-Best regards,
---  
-Cássio Gabriel <cassiogabrielcontato@gmail.com>
 
 
