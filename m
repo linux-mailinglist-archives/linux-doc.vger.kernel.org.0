@@ -1,123 +1,123 @@
-Return-Path: <linux-doc+bounces-86433-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86434-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gJNvOwnq/WnvkgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86433-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 15:50:01 +0200
+	id 4DwmHL/q/WkPkwAAu9opvQ
+	(envelope-from <linux-doc+bounces-86434-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 15:53:03 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78CBD4F7592
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 15:50:01 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3169B4F7678
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 15:53:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 87B1B301F79C
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 13:41:06 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C66AA30A6D1F
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 13:44:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 10C163E4C80;
-	Fri,  8 May 2026 13:41:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1720A3E4C80;
+	Fri,  8 May 2026 13:44:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="bGPlDiGH"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WsZbcVWI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADA2937419B;
-	Fri,  8 May 2026 13:41:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E89E73382DA;
+	Fri,  8 May 2026 13:44:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778247664; cv=none; b=mkUfTUOP8Jneb2pWwlRHDEBc3it61OpmYkfhpEhauKrBAMVsjHMC9UZu0ySXNsFPbXKbrlM614y9mi51Km9K7chbjBYxqG16QsCkoDRLFvMVUtvlY8IVC/y2sSy2m99vx5KhRVboD6LGyUgaAlkjJTb3KLu7OPtZYveS1PZkbVY=
+	t=1778247877; cv=none; b=oVD9xTLtNRt1BIruLoG4g7gro92YY65JF+XZyqIvcUudopgftO7tQXheGTR9QE7azrTIynzAms7JjgLnREc+3nQYN5pDdPQEBjFm0G37qIDERuv1RbgyJLCQqFhDA3UTTwH9QNYweCTK8VvB4YQCt+ew1c0iCMTELVy+GDVTtYw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778247664; c=relaxed/simple;
-	bh=mfMIFp8OlSOd98T1kC1LhYj4A4fV7dYb1x+gh2ih10w=;
+	s=arc-20240116; t=1778247877; c=relaxed/simple;
+	bh=fBCKnbhZJd3Qy81N8GyGFtkeKSrBQWNwLKfuipn9Wog=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Skb5yC2xIl2S+PILz06t3aWLqgO8Lp4gP4uCZ62AQkl5l8SpzEDvdMhak7W99CuaOIZWYdHSzhZb6Z4NDag6zwqUh7E5MsNKIg9k2uPSGzmKrdx0oFPRo+UCRvrhcnsvfoCmtPbQBWmG31l8HBuncECbanuI51IpbDsGzJec/+g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=bGPlDiGH; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=8jYBlJurA7H2/29k8CP0C4HEnBKLf57PI9B4HQDRtrE=; b=bGPlDiGHM3F2v3OpskK2kBiVlb
-	8PFc09cGeG9JhWve6wwBXxvT0IDveI/l79yjqqnYsib5rMgLcv1L3+WG5CbdkdAhLZzXt1QMLeYw8
-	GmVLty8v03ZCSsh+BAKv5xapE26rgXIFQYe+JzMb8lbbI2gs81pY7ZkY4uYTsh8s6EFQ=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wLLRS-001yeh-Vl; Fri, 08 May 2026 15:40:34 +0200
-Date: Fri, 8 May 2026 15:40:34 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Illusion Wang <Illusion.Wang@nebula-matrix.com>
-Cc: Paolo Abeni <pabeni@redhat.com>, Dimon <dimon.zhao@nebula-matrix.com>,
-	Alvin <alvin.wang@nebula-matrix.com>,
-	Sam <sam.chen@nebula-matrix.com>, netdev <netdev@vger.kernel.org>,
-	andrew+netdev <andrew+netdev@lunn.ch>, corbet <corbet@lwn.net>,
-	kuba <kuba@kernel.org>, linux-doc <linux-doc@vger.kernel.org>,
-	lorenzo <lorenzo@kernel.org>, horms <horms@kernel.org>,
-	"vadim.fedorenko" <vadim.fedorenko@linux.dev>,
-	"lukas.bulwahn" <lukas.bulwahn@redhat.com>,
-	edumazet <edumazet@google.com>,
-	enelsonmoore <enelsonmoore@gmail.com>,
-	skhan <skhan@linuxfoundation.org>,
-	hkallweit1 <hkallweit1@gmail.com>,
-	open list <linux-kernel@vger.kernel.org>
-Subject: Re: =?utf-8?B?5Zue5aSN77yaW1BBVENIIHYxMyBu?= =?utf-8?Q?et-next?=
- 03/11] net/nebula-matrix: add chip related definitions
-Message-ID: <bdaf51a9-66d1-4469-960f-d5ec74f870de@lunn.ch>
-References: <20260428114910.2616-1-illusion.wang@nebula-matrix.com>
- <20260428114910.2616-4-illusion.wang@nebula-matrix.com>
- <e41adaad-8937-4b5d-bdbf-d57d3efe2855@redhat.com>
- <b240b971-81b8-4325-80b6-5352e1515f07.Illusion.Wang@nebula-matrix.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=U+vtV4a2ae4T3dSn2Omu4U1JL6reoQ+nEBgf6849cZCRm8Hk2p/RmKc78DPo86zEWrQjSgUJrOC7AYz0cGzv6gLoEf7YONodUCWe6krg/Snv7RFyPA6CLCLUVoiQDeGaNR6vkO/OECX0If8ClTz6308ippH2+13FgD04KwLq5jc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WsZbcVWI; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0D31C2BCB0;
+	Fri,  8 May 2026 13:44:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778247876;
+	bh=fBCKnbhZJd3Qy81N8GyGFtkeKSrBQWNwLKfuipn9Wog=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=WsZbcVWIW9LZErf4j+vVx6/ehJAQ13cisxcAp3iEZlOYXV06R8bgxz3ZymTn5OSP2
+	 lmJFOL/zFpW7x5GYTCHVlfJzH8bAZiFTJ2KYiuQreqiOsVJyk+H2M0ET6B+IsFXkzG
+	 JZKfD5OqHO+PNnZKrqU92ckcQwU9lvV6KrliI4gqFvefqx4FN6Aot4UxxcoXhHsiJe
+	 f2Jfzuhwu/S8oHI85H6hCOJr4TB8KPPFRb/mgPsJ7t/Xb9k7qb87hUwiPdoyZbbiT7
+	 65L3Dpv2qCDlB0QVT98KqPdUf7PPhh/k5N/jfeLmtMmaBXKHsSdLTKpMn1Cer/ei4r
+	 k+ywfQuSntJVw==
+Date: Fri, 8 May 2026 09:44:35 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: akpm@linux-foundation.org, skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, gregkh@linuxfoundation.org
+Subject: Re: [PATCH] killswitch: add per-function short-circuit mitigation
+ primitive
+Message-ID: <af3owxs1qOsSp1WN@laps>
+References: <20260507070547.2268452-1-sashal@kernel.org>
+ <87v7cz8cus.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <b240b971-81b8-4325-80b6-5352e1515f07.Illusion.Wang@nebula-matrix.com>
-X-Rspamd-Queue-Id: 78CBD4F7592
+In-Reply-To: <87v7cz8cus.fsf@trenco.lwn.net>
+X-Rspamd-Queue-Id: 3169B4F7678
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
-	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86433-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86434-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[redhat.com,nebula-matrix.com,vger.kernel.org,lunn.ch,lwn.net,kernel.org,linux.dev,google.com,gmail.com,linuxfoundation.org];
-	TO_DN_ALL(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[lunn.ch:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[19]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-> But I printed out the results: 
-> ARRAY_SIZE(nbl_sec009_data) equals NBL_SEC009_SIZE,
-> ARRAY_SIZE(nbl_sec025_data) equals NBL_SEC025_SIZE,
-> and ARRAY_SIZE(nbl_sec022_data) equals NBL_SEC022_SIZE.
-> 
-> Is the AI making a mistake here?
+On Thu, May 07, 2026 at 09:21:15AM -0600, Jonathan Corbet wrote:
+>Sasha Levin <sashal@kernel.org> writes:
+>
+>> When a (security) issue goes public, fleets stay exposed until a patched kernel
+>> is built, distributed, and rebooted into.
+>>
+>> For many such issues the simplest mitigation is to stop calling the buggy
+>> function. Killswitch provides that. An admin writes:
+>>
+>>     echo "engage af_alg_sendmsg -1" \
+>>         > /sys/kernel/security/killswitch/control
+>>
+>> After this, af_alg_sendmsg() returns -EPERM on every call without
+>> running its body. The mitigation takes effect immediately, and is dropped on
+>> the next reboot.
+>
+>A quick look suggests that you're not checking lockdown status.  I don't
+>doubt for a second that this thing could be used to bypass lockdown - by
+>shorting out security_locked_down() if nothing else.  I'm guessing that
+>might not prove entirely popular.
 
-Just a guess, i've not looked at this patch at all.
+Hmm... Good point. I'll respin a v2 adressing this and Greg's comments.
 
-Are you doing this on a 32 bit build? Maybe the AI is?
-
-    Andrew
+-- 
+Thanks,
+Sasha
 
