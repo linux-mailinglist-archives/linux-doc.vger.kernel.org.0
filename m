@@ -1,173 +1,174 @@
-Return-Path: <linux-doc+bounces-86387-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86383-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qAzPDX+z/WkrhwAAu9opvQ
-	(envelope-from <linux-doc+bounces-86387-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:19 +0200
+	id EH6rKqWw/Wn4hgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86383-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:45:09 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 833844F493A
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:18 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61C634F4647
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:45:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D044F309FCBD
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 09:53:14 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1C2D4304DA2A
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 09:45:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50FB53BFE31;
-	Fri,  8 May 2026 09:52:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77D0E3C555C;
+	Fri,  8 May 2026 09:44:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Nv+nzy/j"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l6iU8h8t"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FA5D37BE8A;
-	Fri,  8 May 2026 09:52:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB6C73C345D;
+	Fri,  8 May 2026 09:44:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778233956; cv=none; b=NFe93rmAfeJQTrPU/7UsQw4OUMlk9olvSayxSo3EG327Wg6n+jteFjF06dRLvAJploWuz2swUCFrg3NwGvORcEY9uWwPKSET1gNzSrdOZ7nD1n6z0JX6qJsFa82xhUkD5JpZTEKA0enohtRi+KND3BMMrOT6NgqiYGDR5heUgx4=
+	t=1778233496; cv=none; b=sFE7Un/RtTST3cHg8tHeWC4P1zuvO/4PTWkHnjwLWu4NLgauFam4fKhuPns+MwjnP6a6BwmR3+OIM7ttwfyXqD8SqudEGHwS3QKNeRH6J9Uv7vB78wDL1tgCENsjKiR2UaMzDVXUb8U6e0n2bQ4+Wdl6ZCdXK/pobd+TFzuEc2k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778233956; c=relaxed/simple;
-	bh=hQjsX+NTjlVcp96hVIMi/EdhSFR0dTjbMqwFNvIXsIE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=cRgdMUzBn3NLEGwjDv5QCKS4E/o/f3AIc5SPekLWPk1NjznOq1hQ4bCGoK5dgvnFrQexDdTjjPlZB9joZkMJey3U50Np4YiK0tC/zlsZfzPnByOLm1hJ7xxzim8MNSaVrGI+dlbTZFd/IWHkeNymngeYy1+wJQuIw+xXeAOcrFc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Nv+nzy/j; arc=none smtp.client-ip=198.175.65.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1778233954; x=1809769954;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=hQjsX+NTjlVcp96hVIMi/EdhSFR0dTjbMqwFNvIXsIE=;
-  b=Nv+nzy/j8/V+9zGqbHv5G87zhc9V6aXVL8q4gBiuyS8Rj4zQ4LiLnhw5
-   AECB9neAuIPxCpT43UPBdbDkl+S6OdONO4bySv9luKNuZuqBIjR23uR/s
-   ll/01jyQ9Ey//3CpyuR+uUysg/AUVb96WEw9EdkmWlVVaIzz7oB08HhCU
-   2VXOLGwnyVSgBAfXr9x1+KzEhQW2UA8EZFylmgUdf7OXkjMJ+5XQLRZwY
-   RTRIGTyW1dr1/cSupbnIHyjBwEPq7adaQNEok/otPl85l5vdqLyC6Z7wQ
-   n0ebXa51tXZfNNLWvf7pfJW1ZCV5SGLz1Kout/+w9y7k3+fbJvpV0Y0mA
-   Q==;
-X-CSE-ConnectionGUID: FJVY7h0rQrG8hmnvfClIeQ==
-X-CSE-MsgGUID: KZtPO3ChSzOY1V7rGEEN7Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="96623819"
-X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
-   d="scan'208";a="96623819"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 02:52:33 -0700
-X-CSE-ConnectionGUID: 5Vv0NwryQn+2myJaRXnEEg==
-X-CSE-MsgGUID: zp01J5f3QEexHiPlQl9W1A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
-   d="scan'208";a="241728649"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by orviesa005.jf.intel.com with ESMTP; 08 May 2026 02:52:30 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1003)
-	id 5BA2E9E; Fri, 08 May 2026 11:52:28 +0200 (CEST)
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Danilo Krummrich <dakr@kernel.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Mark Brown <broonie@kernel.org>,
-	driver-core@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-iio@vger.kernel.org,
-	linux-spi@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Jean-Baptiste Maneyrol <jean-baptiste.maneyrol@tdk.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>
-Subject: [PATCH v1 4/4] iio: imu: inv_icm42600: Suppress driver_override sysfs attribute
-Date: Fri,  8 May 2026 11:42:42 +0200
-Message-ID: <20260508095224.1275645-5-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260508095224.1275645-1-andriy.shevchenko@linux.intel.com>
-References: <20260508095224.1275645-1-andriy.shevchenko@linux.intel.com>
+	s=arc-20240116; t=1778233496; c=relaxed/simple;
+	bh=2gZnkUN+GiPZz6P/qkTlV07W9pEYNv9gia//FyrXV7E=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=MR4SZbUQwg9WFzvt1jtHezFeXzraLR7uWNqEFezzIhaTNHwxIkHJeWBv/I7/kyGxSqsVpdbBn3akON9bag/prUDwGWpUSVNlAGjRdghPk0IA/1R29Co+KSvam940pSwbAnu4GF7gqz8+OM2Qy85kgiv/PfSFsIvP21NrHk5uT4M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l6iU8h8t; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5FEF1C2BCB0;
+	Fri,  8 May 2026 09:44:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778233495;
+	bh=2gZnkUN+GiPZz6P/qkTlV07W9pEYNv9gia//FyrXV7E=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=l6iU8h8tH3+s7OGkIFHAIGiARoMwnlVFA074wiTh4Qba3y1BicokKHTWQAPYLnYZ4
+	 s0PODxkzFroc8PH7OqNNXq3pYBMnvFswMAf9BPdaLPo9cB4kYk+gDYKQLMECGMF0u1
+	 ke0OUsQVbdGRYqVNPK8kUJRA0UdCNE8aTXummDJ09841FrSnmljVup9P/KplrS8kuj
+	 8Q7uCy3ShdQtcfiVjA3gcA4InqQluI5l3rdRGVdfZJuNUQRRZxbZe4m0eluz1GpBzF
+	 2+hfklU74+40gJCL3UvgFVzVppn/+chs2h52ruIaQx5helPgtkPtJDVZH8FhZoi82j
+	 jwuIFwbvnZH6A==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AFB5CD3447;
+	Fri,  8 May 2026 09:44:55 +0000 (UTC)
+From: Colin Huang via B4 Relay <devnull+u8813345.gmail.com@kernel.org>
+Subject: [PATCH v5 0/3] add support for Delta E50SN12051
+Date: Fri, 08 May 2026 17:44:27 +0800
+Message-Id: <20260508-add-e50sn12051-v5-0-abebdcc29665@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 833844F493A
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHuw/WkC/33MQQ6CMBCF4auQrq2ZTktbXXkP46K0gzYRMNQQj
+ eHuFl1IIHH5ZvL9L5aoj5TYvnixnoaYYtfmUW4K5i+uPROPIW+GgBqk0NyFwKmE1AqEUuRp0bq
+ gjTGOZXTrqY6PT/B4yvsS073rn5/+IKbrN6Vwt0wNggP3AgRpb6GqqsO5cfG69V3DptSAMy5hx
+ THzYHRNCpVFt+LyP5eZ1zooyl/yxi+5+vESzIqriddYSaOt84bmfBzHNx5svYVpAQAA
+X-Change-ID: 20260316-add-e50sn12051-ad828ad6777a
+To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Kevin Chang <kevin.chang2@amd.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Colin Huang <colin.huang2@amd.com>, Colin Huang <u8813345@gmail.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778233493; l=2189;
+ i=u8813345@gmail.com; s=20260202; h=from:subject:message-id;
+ bh=2gZnkUN+GiPZz6P/qkTlV07W9pEYNv9gia//FyrXV7E=;
+ b=HBPyY70bvaEbqL9sdaIdTpeoB0FmWDHtQ7F0akVOE/cFlfJhZN4vV0/OsM0QisQqs2iLaz1kM
+ 60paIIXieTlCfp31xR/vmqW0yJLntQ8YylhEuoXvb1eX2vD4K4scl0P
+X-Developer-Key: i=u8813345@gmail.com; a=ed25519;
+ pk=Zlg0WqpCw4qbswOqamTBTXIchwR/3SnYZpy7rjaGMdQ=
+X-Endpoint-Received: by B4 Relay for u8813345@gmail.com/20260202 with
+ auth_id=761
+X-Original-From: Colin Huang <u8813345@gmail.com>
+Reply-To: u8813345@gmail.com
+X-Rspamd-Queue-Id: 61C634F4647
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [1.34 / 15.00];
+	FREEMAIL_REPLYTO_NEQ_FROM(2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86383-lists,linux-doc=lfdr.de,u8813345.gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86387-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
+	FREEMAIL_REPLYTO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-0.999];
 	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[6];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linux.intel.com:mid,intel.com:email,intel.com:dkim]
+	FROM_NEQ_ENVFROM(0.00)[devnull@kernel.org,linux-doc@vger.kernel.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,amd.com,gmail.com];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	HAS_REPLYTO(0.00)[u8813345@gmail.com];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,0.0.0.40:email]
 X-Rspamd-Action: no action
 
-The driver makes no sense for the devices without associated driver data.
-Instead of checking for absence of it, disable driver_override feature
-and drop the no more required check.
+Delta E50SN12051 is a 600W non-isolated 1/8th brick DC-DC power module.
+With this series applied, voltage, current and temperature sensors can 
+be exposed through the standard hwmon interface.
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Changes in this series:
+- Add Delta E50SN12051 to trivial-devices.yaml
+- Add hwmon documentation describing the supported sensors
+- Add PMBus driver support for Delta E50SN12051
+
+Signed-off-by: Colin Huang <u8813345@gmail.com>
 ---
- drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+Changes in v5:
+- Add Delta E50SN12051 to trivial-devices.yaml instead of introducing a new binding
+- Link to v4: https://lore.kernel.org/r/20260507-add-e50sn12051-v4-0-ff2b3768ac7e@gmail.com
 
-diff --git a/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c b/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c
-index 13e2e7d38638..cb8c501d86c3 100644
---- a/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c
-+++ b/drivers/iio/imu/inv_icm42600/inv_icm42600_spi.c
-@@ -50,20 +50,15 @@ static int inv_icm42600_spi_bus_setup(struct inv_icm42600_state *st)
- 
- static int inv_icm42600_probe(struct spi_device *spi)
- {
--	const void *match;
- 	enum inv_icm42600_chip chip;
- 	struct regmap *regmap;
- 
--	match = device_get_match_data(&spi->dev);
--	if (!match)
--		return -EINVAL;
--	chip = (uintptr_t)match;
--
- 	/* use SPI specific regmap */
- 	regmap = devm_regmap_init_spi(spi, &inv_icm42600_spi_regmap_config);
- 	if (IS_ERR(regmap))
- 		return PTR_ERR(regmap);
- 
-+	chip = (uintptr_t)device_get_match_data(&spi->dev);
- 	return inv_icm42600_core_probe(regmap, chip, inv_icm42600_spi_bus_setup);
- }
- 
-@@ -115,6 +110,7 @@ static struct spi_driver inv_icm42600_driver = {
- 		.name = "inv-icm42600-spi",
- 		.of_match_table = inv_icm42600_of_matches,
- 		.pm = pm_ptr(&inv_icm42600_pm_ops),
-+		.suppress_override_attrs = true,
- 	},
- 	.id_table = inv_icm42600_id,
- 	.probe = inv_icm42600_probe,
+Changes in v4:
+- Rewrite binding description to be hardware-centric and OS-agnostic.
+- Rename example node from hwmon@40 to a generic power-module@40.
+- Link to v3: https://lore.kernel.org/r/20260430-add-e50sn12051-v3-0-f6d4e043ec7c@gmail.com
+
+Changes in v3:
+- Simplify to pass &e50sn12051_info directly to pmbus_do_probe() 
+  to avoid the extra memory allocation
+- Link to v2: https://lore.kernel.org/r/20260430-add-e50sn12051-v2-0-d76fe42482ab@gmail.com
+
+Changes in v2:
+- Add %YAML 1.2 declaration in binding document.
+- Use a generic node name in examples in binding document.
+- Add MODULE_IMPORT_NS("PMBUS")
+- Remove unused / incorrect headers
+- Link to v1: https://lore.kernel.org/r/20260429-add-e50sn12051-v1-0-c101e6c80bbb@gmail.com
+
+---
+Colin Huang (3):
+      dt-bindings: trivial-devices: Add Delta E50SN12051
+      Documentation/hwmon: add Delta E50SN12051 documentation
+      hwmon: (pmbus) add support for Delta E50SN12051
+
+ .../devicetree/bindings/trivial-devices.yaml       |  2 +
+ Documentation/hwmon/e50sn12051.rst                 | 81 ++++++++++++++++++++++
+ Documentation/hwmon/index.rst                      |  1 +
+ drivers/hwmon/pmbus/Kconfig                        |  9 +++
+ drivers/hwmon/pmbus/Makefile                       |  1 +
+ drivers/hwmon/pmbus/e50sn12051.c                   | 52 ++++++++++++++
+ 6 files changed, 146 insertions(+)
+---
+base-commit: b584e7d50af502462349910bf4ed30057620b69f
+change-id: 20260316-add-e50sn12051-ad828ad6777a
+
+Best regards,
 -- 
-2.50.1
+Colin Huang <u8813345@gmail.com>
+
 
 
