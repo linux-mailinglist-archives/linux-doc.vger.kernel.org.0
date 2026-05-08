@@ -1,73 +1,73 @@
-Return-Path: <linux-doc+bounces-86411-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86413-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AF54LxfF/WmwiwAAu9opvQ
-	(envelope-from <linux-doc+bounces-86411-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:12:23 +0200
+	id GORPHVLF/WmwiwAAu9opvQ
+	(envelope-from <linux-doc+bounces-86413-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:13:22 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5AA44F5864
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:12:23 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E115E4F58C0
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 13:13:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CCCEA301AEF6
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 11:12:22 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1CF64302DB6D
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 11:12:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D047835F5F8;
-	Fri,  8 May 2026 11:12:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA81E363084;
+	Fri,  8 May 2026 11:12:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ljI+SRTg"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EzMekmZN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 593053264D2
-	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 11:12:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E616362153
+	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 11:12:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778238741; cv=none; b=oeep5B3JywrM6lv0AuMdKR5LcJhDRjAGhYaws9mT35ViWyxyEK0gVxYc7LwKkQR0cRiX3KeUmiT+1HDr6oOtd24eu1WZ5CHTMKXKltGF/ABm1xfbv1WtS6guepqZ064eWngpTp9ySy8XSS+QUbml7tyOIsrfI6tuT+t6CG5UxHQ=
+	t=1778238745; cv=none; b=Q0eowGCyr8QAgxSLOIkMvtiF3qNFVAdf5cs7J0brCgq3QmF7yrxz6Erp3yMVdRqqvF7OU2+C5jBjKtBBn8IP7ojsteN/olhoKbyhlw6ik28kRHZj2o4omEsnFg6AcBOJJdk3CE5KLOaOEgvajwkITSmCmg56DR2Kj1+apn4U5y4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778238741; c=relaxed/simple;
-	bh=oRo1t6H5phFSson0CEzoZnbQp92RHRKh3Yz4chDwGdw=;
+	s=arc-20240116; t=1778238745; c=relaxed/simple;
+	bh=cuQhzJlt8L3pcG2aKMOAoVwP+8QXeYf/pjasdWUjSiQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=o2VrcbqZHKIULaaJy8sTjqJehe//bseXszhY1V2dfwoUmaYPjnjrfl81SDTmFzowfCMdX4dQyjtMEAFc/SN0wtkiBLJyjgRofx93sHIUtrm8sun//pulFLbwCY64Pdy1tlhSJGPZM+LIzKdacBGlrafJTBLe2Zpq/oXyEEx4lXE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ljI+SRTg; arc=none smtp.client-ip=192.198.163.15
+	 MIME-Version; b=ciXYKYn8MGpwMItU+wOPGWA3l8MJ5kuCBmsWdW9ySYIkCyoE3gqj1h9imv3SuSbYxRM94ZCegU1AfBAvFhBepJb0MEHRHJP2gsmjQYzTtt/3USNzHwbXwhoJg09RNA9TXo9FxNYkAruBKNe4Ii7uy1NDjWwAe3oJ1G/UikKLlmA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EzMekmZN; arc=none smtp.client-ip=192.198.163.15
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1778238740; x=1809774740;
+  t=1778238744; x=1809774744;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=oRo1t6H5phFSson0CEzoZnbQp92RHRKh3Yz4chDwGdw=;
-  b=ljI+SRTgZ5Zd9NON+BfbMrZUQwc1dBh+N0s5eY5Potinw1pPhkSivpXl
-   D3inZpbaDlUzVtysMw2kamMUiVLBp9A2mPL2NU8MnUi2M4PzeJw7qXwER
-   mX+FdKcwZkkyX4DChoSM7vzXoLz4OLdMwN1CdJY9fy/2mfGPQp/LXmJm5
-   1v3E7ANseSOrHXG996g1zUj7hAjH5H2P41St50H9m80+bfWvR65c5C0PH
-   rSAs5KNsVjNXu5gSgxkJc7r1OU/tSWMiYgwafGyzwv8TABfykh6qBor7c
-   +OU80CKiXOPiFblLBQeYzWt97F1yNPGX/T1dcJ4agY5BByyqtcfCzdbVW
+  bh=cuQhzJlt8L3pcG2aKMOAoVwP+8QXeYf/pjasdWUjSiQ=;
+  b=EzMekmZNtkummuR3SCKk3GE7ryqgjhIbSem5fn8O0oKUDLv4P7fxCMPK
+   q2zK+FpiY295CEnbMQyF1DgYnYu++1g226Df5UUoxQ0kj76tr0ObJAMdO
+   a3HjfR7+SWCtgf1RnYT3SUku2b8g1kDzyTwypO9dzN8O8DZ6++zIlp3O3
+   XFQ6en7c58E/Mx5r92AngIFu5DZAMnG0t5I8x7zR/qEJskUCaWnmSd0XC
+   4mSJtotbO6CYiJ8B1valgN1UrBIsG+BP2G1cODnwlt27siTOAg9YdwTDI
+   EMRBI8bMiwWumkmYPFOVZCrWXhNJAoHfrlD6uSmVtttNf1zlhXrPekkow
    A==;
-X-CSE-ConnectionGUID: 9BMwRQFFQ+GrO+qp7qGh5w==
-X-CSE-MsgGUID: ZER/KHstTHyQb2y7+bwnkA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="79311803"
+X-CSE-ConnectionGUID: 4CCJfLJPTzCGltDsdpD7bg==
+X-CSE-MsgGUID: L8xhOFQoQwuUJpFdiNvpSg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="79311810"
 X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
-   d="scan'208";a="79311803"
+   d="scan'208";a="79311810"
 Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 04:12:19 -0700
-X-CSE-ConnectionGUID: RTBn6kNURuKcmCJPIOcl2w==
-X-CSE-MsgGUID: IkKln8MsQ5+60NkdDnH0sg==
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 04:12:24 -0700
+X-CSE-ConnectionGUID: 3PJBrEJNQreCfRBcfNv4oQ==
+X-CSE-MsgGUID: pECfKQltRJiMYezjfp1law==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
-   d="scan'208";a="236867126"
+   d="scan'208";a="236867147"
 Received: from pgcooper-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.244.40])
-  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 04:12:18 -0700
+  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 04:12:23 -0700
 From: Jani Nikula <jani.nikula@intel.com>
 To: dri-devel@lists.freedesktop.org,
 	linux-doc@vger.kernel.org
 Cc: jani.nikula@intel.com
-Subject: [PATCH 1/3] Documentation/gpu: limit main toctree depth to 2
-Date: Fri,  8 May 2026 14:12:07 +0300
-Message-ID: <cddd2d11c104132801510e3ab4e4b9ef3ea9cb6d.1778238671.git.jani.nikula@intel.com>
+Subject: [PATCH 2/3] Documentation/gpu: add some tables of contents to large documents
+Date: Fri,  8 May 2026 14:12:08 +0300
+Message-ID: <e3f9357c0e8198cc48e69e2a3b8ca072c7ab92ca.1778238671.git.jani.nikula@intel.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <cover.1778238671.git.jani.nikula@intel.com>
 References: <cover.1778238671.git.jani.nikula@intel.com>
@@ -79,7 +79,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: A5AA44F5864
+X-Rspamd-Queue-Id: E115E4F58C0
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
@@ -87,12 +87,12 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86411-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86413-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	HAS_ORG_HEADER(0.00)[];
@@ -105,37 +105,159 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	TO_DN_NONE(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,intel.com:email,intel.com:mid,intel.com:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:email,intel.com:mid,intel.com:dkim]
 X-Rspamd-Action: no action
 
-The main GPU documentation toctree has no limit to the toctree depth,
-which means the main GPU index page recursively includes all the
-headings in all of GPU documentation in the single table of
-contents. This makes getting any kind of overview of the documentation
-really difficult.
+Some of the GPU documentation pages are quite long, with various levels
+of details. Add document internal tables of contents to the larger
+documents to make them easier to navigate.
 
-Limit the main toctree depth to 2 i.e. show at most two levels of
-headings.
+The index.rst in the sub-directories have toctrees, which provide
+similar overviews.
+
+Fix one missing newline at the end of drm-uapi.rst while at it,
+primarily because rst should have it, and secondarily because my editor
+rst mode refuses to save the file without it.
 
 Signed-off-by: Jani Nikula <jani.nikula@intel.com>
 ---
- Documentation/gpu/index.rst | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/gpu/driver-uapi.rst     | 2 ++
+ Documentation/gpu/drm-internals.rst   | 2 ++
+ Documentation/gpu/drm-kms-helpers.rst | 2 ++
+ Documentation/gpu/drm-kms.rst         | 2 ++
+ Documentation/gpu/drm-mm.rst          | 2 ++
+ Documentation/gpu/drm-ras.rst         | 2 ++
+ Documentation/gpu/drm-uapi.rst        | 4 +++-
+ Documentation/gpu/drm-usage-stats.rst | 2 ++
+ Documentation/gpu/introduction.rst    | 2 ++
+ 9 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/gpu/index.rst b/Documentation/gpu/index.rst
-index 5d708a106b3f..65bf3b26e4f4 100644
---- a/Documentation/gpu/index.rst
-+++ b/Documentation/gpu/index.rst
-@@ -3,6 +3,7 @@ GPU Driver Developer's Guide
- ============================
+diff --git a/Documentation/gpu/driver-uapi.rst b/Documentation/gpu/driver-uapi.rst
+index 1f15a8ca1265..627fc68c7a21 100644
+--- a/Documentation/gpu/driver-uapi.rst
++++ b/Documentation/gpu/driver-uapi.rst
+@@ -2,6 +2,8 @@
+ DRM Driver uAPI
+ ===============
  
- .. toctree::
-+   :maxdepth: 2
++.. contents::
++
+ drm/i915 uAPI
+ =============
  
-    introduction
-    drm-internals
+diff --git a/Documentation/gpu/drm-internals.rst b/Documentation/gpu/drm-internals.rst
+index 94f93fd3b8a0..a3ce25a36f1d 100644
+--- a/Documentation/gpu/drm-internals.rst
++++ b/Documentation/gpu/drm-internals.rst
+@@ -18,6 +18,8 @@ event handling, memory management, output management, framebuffer
+ management, command submission & fencing, suspend/resume support, and
+ DMA services.
+ 
++.. contents::
++
+ Driver Initialization
+ =====================
+ 
+diff --git a/Documentation/gpu/drm-kms-helpers.rst b/Documentation/gpu/drm-kms-helpers.rst
+index b4a9e5ae81f6..80453dda33b8 100644
+--- a/Documentation/gpu/drm-kms-helpers.rst
++++ b/Documentation/gpu/drm-kms-helpers.rst
+@@ -33,6 +33,8 @@ There are a few areas these helpers can grouped into:
+   pipeline: Planes, handling rectangles for visibility checking and scissoring,
+   flip queues and assorted bits.
+ 
++.. contents::
++
+ Modeset Helper Reference for Common Vtables
+ ===========================================
+ 
+diff --git a/Documentation/gpu/drm-kms.rst b/Documentation/gpu/drm-kms.rst
+index fbe0583eb84c..d22817fdf9aa 100644
+--- a/Documentation/gpu/drm-kms.rst
++++ b/Documentation/gpu/drm-kms.rst
+@@ -15,6 +15,8 @@ be setup by initializing the following fields.
+ -  struct drm_mode_config_funcs \*funcs;
+    Mode setting functions.
+ 
++.. contents::
++
+ Overview
+ ========
+ 
+diff --git a/Documentation/gpu/drm-mm.rst b/Documentation/gpu/drm-mm.rst
+index 32fb506db05b..2dea94f77d52 100644
+--- a/Documentation/gpu/drm-mm.rst
++++ b/Documentation/gpu/drm-mm.rst
+@@ -25,6 +25,8 @@ share it. GEM has simpler initialization and execution requirements than
+ TTM, but has no video RAM management capabilities and is thus limited to
+ UMA devices.
+ 
++.. contents::
++
+ The Translation Table Manager (TTM)
+ ===================================
+ 
+diff --git a/Documentation/gpu/drm-ras.rst b/Documentation/gpu/drm-ras.rst
+index 4636e68f5678..83c21853b74b 100644
+--- a/Documentation/gpu/drm-ras.rst
++++ b/Documentation/gpu/drm-ras.rst
+@@ -24,6 +24,8 @@ Key Goals:
+   nodes for different IP blocks, sub-blocks, or other logical subdivisions
+   as applicable.
+ 
++.. contents::
++
+ Nodes
+ =====
+ 
+diff --git a/Documentation/gpu/drm-uapi.rst b/Documentation/gpu/drm-uapi.rst
+index 32206ce62931..2c2f939322fb 100644
+--- a/Documentation/gpu/drm-uapi.rst
++++ b/Documentation/gpu/drm-uapi.rst
+@@ -16,6 +16,8 @@ management, and output management.
+ Cover generic ioctls and sysfs layout here. We only need high-level
+ info, since man pages should cover the rest.
+ 
++.. contents::
++
+ libdrm Device Lookup
+ ====================
+ 
+@@ -765,4 +767,4 @@ Stable uAPI events
+ From ``drivers/gpu/drm/scheduler/gpu_scheduler_trace.h``
+ 
+ .. kernel-doc::  drivers/gpu/drm/scheduler/gpu_scheduler_trace.h
+-   :doc: uAPI trace events
+\ No newline at end of file
++   :doc: uAPI trace events
+diff --git a/Documentation/gpu/drm-usage-stats.rst b/Documentation/gpu/drm-usage-stats.rst
+index 24d3012ca7a6..70b7cfcc194f 100644
+--- a/Documentation/gpu/drm-usage-stats.rst
++++ b/Documentation/gpu/drm-usage-stats.rst
+@@ -16,6 +16,8 @@ output is split between common and driver specific parts. Having said that,
+ wherever possible effort should still be made to standardise as much as
+ possible.
+ 
++.. contents::
++
+ File format specification
+ =========================
+ 
+diff --git a/Documentation/gpu/introduction.rst b/Documentation/gpu/introduction.rst
+index d8f519693fc2..64074ac22d9b 100644
+--- a/Documentation/gpu/introduction.rst
++++ b/Documentation/gpu/introduction.rst
+@@ -16,6 +16,8 @@ found in current kernels.
+ 
+ [Insert diagram of typical DRM stack here]
+ 
++.. contents::
++
+ Style Guidelines
+ ================
+ 
 -- 
 2.47.3
 
