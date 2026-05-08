@@ -1,49 +1,55 @@
-Return-Path: <linux-doc+bounces-86524-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86526-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QEW4AzEh/mkRnAAAu9opvQ
-	(envelope-from <linux-doc+bounces-86524-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 19:45:21 +0200
+	id mFqlMBYh/mkRnAAAu9opvQ
+	(envelope-from <linux-doc+bounces-86526-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 19:44:54 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 639634FA242
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 19:45:20 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60D3A4FA21E
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 19:44:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0E53230C6CFE
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 17:40:37 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A4C06309F3D5
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 17:41:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0E7941C312;
-	Fri,  8 May 2026 17:40:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D665C421A1E;
+	Fri,  8 May 2026 17:41:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b="cUPNlmbY"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="FtLX8Ee2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from outbound.st.icloud.com (p-east2-cluster6-host2-snip4-10.eps.apple.com [57.103.76.191])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3525B413220
-	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 17:40:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.76.191
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D328421EE4;
+	Fri,  8 May 2026 17:41:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778262034; cv=none; b=QR6oX7HzGwdDT7PqtD7QKxBvKk8/WFH1ZXZKDOTmqDAEpfDqqsqo1Ixy9XTn9U7DMY4R0e05h5/JmPF3r1WttFXIdNF0wHYdeQzjM+ezPaAW7uRUi7GVsxqMD0t7xEmxSFtWqQKwUzfbmNFt8FFoyMb4XqZm6ss+Jg1nO95uS0o=
+	t=1778262065; cv=none; b=g5MaVOmbdS96/Uw9bf23iHm8M2FWK20wF39JotoYfcIW7hERCasRvCuCiW744JR0UP7a8Pgajh0rO944GChw2ZrUW7a22viQkb8CZ+Vmm3p49ctosEDrRI0DWeuGtZJ9UF9occeRsn532QTmZLRNNvb7Jt1rmybFAZpesc0VQjI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778262034; c=relaxed/simple;
-	bh=sSo0MgVGHg6sujfoidXV1jooMx78c4nS2ln4QJ43EFY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dUCmyuPnsZwjcUC3S8c6vTogMgQbbJt9zJbpq+AbaMba9mbmm6weE405YMw0V3bKt4Pp7hhv1FSwhRrZ4iNGQkI0pPSC997vJv0S6E1btCIJqPrRznJf9CQIY8zf5/V0t1FjOJ7S9kXT1BQJYwRAPbjJTIOTuCfsWvg5ObMVXXo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com; spf=pass smtp.mailfrom=icloud.com; dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b=cUPNlmbY; arc=none smtp.client-ip=57.103.76.191
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icloud.com
-Received: from outbound.st.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-east-1a-100-percent-0 (Postfix) with ESMTPS id EC04B18000A4;
-	Fri, 08 May 2026 17:40:29 +0000 (UTC)
-X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQhJBkMDRQVJF0wBTVIPDxhMCkEUWgpcQgtJAS1eCF4fTBwdDlgGEhZdRVsYRRlLHVgWAV8GWXIZWhRcGFNFUR9UWEEOCloBUFEdXwIKBEcEWxdGA1NFQQQXEVABWB5WXloXXk1HH0BNYkkBWhlbHEAXSm5NUw8PGVoUXBhTRVEfVFheBFNWDkALSVZUVV0DXQ1OVVQaXwZCAFULWFUOH0INSlEPBllXRwkZBy1eCF4fTBwdDlgGDFBNAUMICgJRHFYNVw==
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai; t=1778262032; x=1780854032; bh=rvYX763umxFx0VQGORIEx96cyb4wpDHfqn79Q5PBAww=; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:x-icloud-hme; b=cUPNlmbYeZBDFc/K5kAjYI4Wv0ESfEheN/XfFsb2XNAZfLMmpiB4WoDxuqt4hB/X/DJ+Ehc8zu5yW32xA8H0YkPsj8wvGJUofRGWbMLP8RDpz+I/Vq6ZJ2Uf4AsHO+Kt1TvwQ4gwCK/FBI1DlMX0vg8l1tL9wep/tktqMoDXTXBqQh8stULJ/uslWqmtwhek5GrvcBtmlLSxJXJLtqY9+YQ7kwtwnUD/BwJr0VGLM5RRWf6YMix4CAchIZlcggjlPtIb/KIses1vvUkNWVkmbQlIyAE1k7leL0mxyezgUziSQgKv0Spd/2JSjAtap+aeLrSa5cHwUCaXH2jf6uB3BQ==
-Received: from [192.168.89.2] (unknown [17.42.251.67])
-	by p00-icloudmta-asmtp-us-east-1a-100-percent-0 (Postfix) with ESMTPSA id 85F7C1800160;
-	Fri, 08 May 2026 17:40:26 +0000 (UTC)
-Message-ID: <021e9b61-46f9-4429-85be-242bb12e70a4@icloud.com>
-Date: Sat, 9 May 2026 02:40:24 +0900
+	s=arc-20240116; t=1778262065; c=relaxed/simple;
+	bh=m6d49qXRXl06RFwK6IQO1C2DpYFBSBX8sil9W1AqFoA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=EIQugZKlrrDmJGWIdaB1NBC+nYb6zGwcxnBE0XFAEgkXmQeC4mHowHrjfEQgjGBknKuu4RUZL8jWhBeVskA5v8ZngSOenTY4ey0p/owWorPKTFBo/jJK8ggfvb23FcidTeSM+ZFmaKRvIoVKGtyDu8Jexe/6IY+c7XjTRutehGU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=FtLX8Ee2; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description;
+	bh=c4XzaOg7HOldvBJBPqmFDK1R7qTAK0U4wLJ/ZbVHYp0=; b=FtLX8Ee2NkKGkKFmjwucrwClCT
+	7PHN/9RqycqXI34+VLb2gfLWjzsnVGPL6PRKWVCluK583upFPQojR8KB270++IPwvGcLnc8weqdfF
+	OiM7oADRA7qgJifHJFM1j509Ixv/BdVMZTEqbcQa+mRZEHt4QpK/r+sldD/V86w/nvOpqs0fBTVJj
+	yoerdZKyoZHZDii3uQdydJprd+EDFAhxRO5thYRw625+DMUNCB8z+AQikQEcsGZzIt3rKdufx01s7
+	lRU4qwmGtq+E6wzpoFnL2J2WoXcOHD41/2wuiom2J4kJm8/1Wnl0AweRHjZvvvhn8c8Tko9/rbEVV
+	fsXdWZGQ==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wLPC1-00000007Aci-0wQz;
+	Fri, 08 May 2026 17:40:53 +0000
+Message-ID: <5f68ac30-21ac-494b-a140-2307e236f0a2@infradead.org>
+Date: Fri, 8 May 2026 10:40:49 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -51,123 +57,112 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/2] hwmon: add AMD Promontory 21 xHCI temperature
- sensor support
-To: Mario Limonciello <mario.limonciello@amd.com>,
- Jihong Min <hurryman2212@gmail.com>,
+Subject: Re: [PATCH 2/5] docs: fix repeated word 'that' across documentation
+To: Shuah Khan <skhan@linuxfoundation.org>,
+ Adrien Reynard <reynard.adrien.08@gmail.com>,
+ "Paul E. McKenney" <paulmck@kernel.org>,
+ Frederic Weisbecker <frederic@kernel.org>,
+ Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+ Joel Fernandes <joelagnelf@nvidia.com>, Josh Triplett
+ <josh@joshtriplett.org>, Boqun Feng <boqun@kernel.org>,
+ Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>,
+ Jonathan Corbet <corbet@lwn.net>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Mathias Nyman <mathias.nyman@intel.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Basavaraj Natikar <Basavaraj.Natikar@amd.com>, linux-usb@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260508143910.14673-1-hurryman2212@gmail.com>
- <20260508143910.14673-3-hurryman2212@gmail.com>
- <f682afbb-e816-44e6-9b18-fc7e2335706e@amd.com>
+ "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ David Howells <dhowells@redhat.com>, Paulo Alcantara <pc@manguebit.org>,
+ Masami Hiramatsu <mhiramat@kernel.org>,
+ "open list:READ-COPY UPDATE (RCU)" <rcu@vger.kernel.org>,
+ "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRIVER CORE, KOBJECTS, DEBUGFS AND SYSFS"
+ <driver-core@lists.linux.dev>,
+ "open list:FILESYSTEMS [NETFS LIBRARY]" <netfs@lists.linux.dev>,
+ "open list:FILESYSTEMS [NETFS LIBRARY]" <linux-fsdevel@vger.kernel.org>,
+ "open list:TRACING" <linux-trace-kernel@vger.kernel.org>
+References: <20260508163759.16231-1-reynard.adrien.08@gmail.com>
+ <1501caea-8cff-4968-aca6-e8d4b20e0e80@linuxfoundation.org>
 Content-Language: en-US
-From: Jihong Min <hurryman2212@icloud.com>
-In-Reply-To: <f682afbb-e816-44e6-9b18-fc7e2335706e@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: V8RT7b5aKlJS5F51g1NUi2RoLo6NL3GJ
-X-Proofpoint-ORIG-GUID: V8RT7b5aKlJS5F51g1NUi2RoLo6NL3GJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA4MDE3NiBTYWx0ZWRfX/0IR7APOao5Z
- 03VK+LlSf2TKM9ABzANrbGECkxe+B6bNyviWRL6z/vTv0grPRvI2dEGsZ35QUdxvB9MaBefEpaI
- WQL9otpbJ5zlA045T7MoOmzG9/KuFPs1yrllv21WDUOYFVSxyBY0euek4+kKRknNVti+InTVCnt
- GiE2dVjnWiUovKTyUdukdPjHS/f+5AR4knPpKCoulnVU9HTzvgmd7+swKFemdNQ52IUdKDTEvsy
- Rg97E7Y24Ftpi3Z+oHsD/zmoieki67N3VgMvoSDmBWv5q7jw8+R6noiPzP2HqkzMjLPHFip8pST
- p8WhPQbW+2hswYcgvzNGNwBfT6xcicpJr4NUMYH4rGZjTVtaNCf5Xk4EnUU/0c=
-X-Authority-Info-Out: v=2.4 cv=OZeVzxTY c=1 sm=1 tr=0 ts=69fe200f
- cx=c_apl:c_pps:t_out a=YrL12D//S6tul8v/L+6tKg==:117
- a=YrL12D//S6tul8v/L+6tKg==:17 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=x7bEGLp0ZPQA:10 a=5jDBv52wX64A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=-FalU_6Lp0SrYWVKIWsA:9 a=QEXdDO2ut3YA:10 a=PgRulw5oR9JgysbTFEid:22
- a=MienORt8HT0FiJ1vGQZ6:22
-X-Rspamd-Queue-Id: 639634FA242
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <1501caea-8cff-4968-aca6-e8d4b20e0e80@linuxfoundation.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 60D3A4FA21E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[icloud.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[icloud.com:s=1a1hai];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86524-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86526-lists,linux-doc=lfdr.de];
+	TO_DN_ALL(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_TO(0.00)[linuxfoundation.org,gmail.com,kernel.org,nvidia.com,joshtriplett.org,goodmis.org,efficios.com,linux.dev,lwn.net,redhat.com,manguebit.org,vger.kernel.org,lists.linux.dev];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[amd.com,gmail.com,linuxfoundation.org,intel.com];
-	FREEMAIL_FROM(0.00)[icloud.com];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	DKIM_TRACE(0.00)[icloud.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hurryman2212@icloud.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[icloud.com:mid,icloud.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
- > Rather than using pm_ref as an output variable to indicate whether you
- > took a ref - how about you instead always take a ref on success and
- > return an error on fail? This would feel more logical to me.
 
-Agreed. I changed the PM helper so success always means that a usage 
-reference
-is held, and the caller now unconditionally drops it with 
-pm_runtime_put_noidle()
-after the register access.
 
-For the runtime PM disabled case, pm_runtime_get_if_active() returns 
--EINVAL.
-In that case the helper now allows the read if the device is not marked
-suspended, and uses pm_runtime_get_noresume() so the same success/put 
-contract
-is preserved without changing the runtime PM state.
+On 5/8/26 10:15 AM, Shuah Khan wrote:
+> On 5/8/26 10:37, Adrien Reynard wrote:
+> 
+> Missing commit log in all your patches - I don't patch 1/5 in
+> my Inbox.
+> 
+>> Signed-off-by: Adrien Reynard <reynard.adrien.08@gmail.com>
+>> ---
+>>   Documentation/RCU/rcu.rst                          | 2 +-
+>>   Documentation/driver-api/driver-model/overview.rst | 2 +-
+>>   Documentation/filesystems/netfs_library.rst        | 2 +-
+>>   Documentation/trace/histogram-design.rst           | 2 +-
+>>   Documentation/trace/histogram.rst                  | 2 +-
+>>   5 files changed, 5 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/Documentation/RCU/rcu.rst b/Documentation/RCU/rcu.rst
+>> index bf6617b330a7..320ad3292b75 100644
+>> --- a/Documentation/RCU/rcu.rst
+>> +++ b/Documentation/RCU/rcu.rst
+>> @@ -32,7 +32,7 @@ Frequently Asked Questions
+>>     Just as with spinlocks, RCU readers are not permitted to
+>>     block, switch to user-mode execution, or enter the idle loop.
+>>     Therefore, as soon as a CPU is seen passing through any of these
+>> -  three states, we know that that CPU has exited any previous RCU
+>> +  three states, we know that CPU has exited any previous RCU
+> 
+> The original intent might have been to say, "that cpu", so adding
+> the missing comma after the first "that" or change "that" to "the"
+> would make sense.
 
- > guard(mutex) perhaps?
+Not a comma, please.
+I don't see a problem with "that that," but "that the" could also be OK.
 
-The private mutex is gone. Guenter pointed out that the hwmon core already
-serializes the callbacks, so I removed the extra lock instead of 
-converting it.
+> 
+> 
+>>     read-side critical sections.  So, if we remove an item from a
+>>     linked list, and then wait until all CPUs have switched context,
+>>     executed in user mode, or executed in the idle loop, we can
 
- > You only care about the first byte, right? Just use readb() and make
- > data a u8.
 
-Done. The data register read now uses readb(), and the local data 
-variable is
-u8.
-
- > I personally don't really like changing the pointer when there is
- > potentially an error case with it for -ENODATA.
-
-Done. The raw output pointer is only written after validating the read 
-value.
-
- > Does 0xff actually happen with your runtime PM handling? Between my
- > suggestion above to use readb() this can turn into:
- >
- > if (!data)
- > return -ENODDATA;
- > *raw = data;
- >
- > return 0;
-
-Done. I removed the 0xff invalid check. Suspended devices are rejected 
-before
-the MMIO access, so the read path now only treats zero as invalid and 
-assigns
-*raw after that check.
-
-Sincerely,
-Jihong Min
+-- 
+~Randy
 
 
