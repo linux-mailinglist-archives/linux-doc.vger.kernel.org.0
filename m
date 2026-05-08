@@ -1,155 +1,206 @@
-Return-Path: <linux-doc+bounces-86483-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86467-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QjTZAzMK/mm1mQAAu9opvQ
-	(envelope-from <linux-doc+bounces-86483-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 18:07:15 +0200
+	id 8DzQIEML/mm2mQAAu9opvQ
+	(envelope-from <linux-doc+bounces-86467-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 18:11:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 567BE4F9317
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 18:07:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D22E34F9406
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 18:11:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8FADB30C17AD
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 16:00:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E8F2030302AB
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 15:54:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B540A376BD9;
-	Fri,  8 May 2026 15:58:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 870D630C354;
+	Fri,  8 May 2026 15:54:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=efficios.com header.i=@efficios.com header.b="R1Dwp/mG"
+	dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b="GxsT2clh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout.efficios.com (smtpout.efficios.com [158.69.130.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 564A13D3D16;
-	Fri,  8 May 2026 15:58:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=158.69.130.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C5F7232367
+	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 15:54:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=121.127.44.73
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778255906; cv=none; b=LaFUOR66UQjfmRfKW9Z3G81pTfpicWBDMa2LSeGuclVFyyJketKlfT6dorNVpzQCVDD6/MOIlb0Dt53cdGVGsmasFAlj3TSXnvcC9PX8MfoxbiDYOHE7MKcau6Y5sZC6VP4zTQ3mXp9LC0vXxQtbDnS4fALptdn/qucSxqQzj3k=
+	t=1778255677; cv=none; b=Y69XN+qtuI72atALSP7o7ewef8Jtmw0vEYlFdJfGaffnoKI2Ny74fzBEqLQzXzj3diBoCAo+BBxPYWtGjvGAgRLlasPJRo4nYCwZSmBnBMXF2PVug8k6aF5A8KbBNYn3HVpVvTx7EHYtGB2IJKoaVe6LJ9BkA+t5OwGTsjzhmYA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778255906; c=relaxed/simple;
-	bh=nyCUjOYqPTh9KITmYgP05IsbiD6gk6fZn8WAO9Rfr/k=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=G8qkmapsXrkh2RaaWvRLac2ZGR8InUEBrgp1GViqQBcEJSEkDDOr+S6y0L41+HVjey+ouxt5vnxOjRbrsq3W8d1KOwXWCf2sRXI1vts+g/F53bP+nFvau+RwL0EsA/JOIb9LeD+7B2OemsWQ5adBIO6B5JKbO9QFBZYpcIBo7l8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=efficios.com; spf=pass smtp.mailfrom=efficios.com; dkim=pass (2048-bit key) header.d=efficios.com header.i=@efficios.com header.b=R1Dwp/mG; arc=none smtp.client-ip=158.69.130.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=efficios.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=efficios.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=efficios.com;
-	s=smtpout1; t=1778255300;
-	bh=W678Qa/H8vJfMe39MVrcLpV6doreu41bREVmv4one20=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=R1Dwp/mGNrf59CjxoooJ2ZKh3ijYDeEG2dmoumfQ544up8p9IZEbSwx1JtnKUNUVh
-	 xAV7Deo+fyENZ0vb+QXDrmGQfrTv4lUrBCogqnwZ1oD6rH5wsAMQ1U50OVG7+zhpYA
-	 o/fmUMcEu8LhpNyVOQNyAj9h2Ysk44/1oTP07XA3snjmPhsD2QFQnE8hwPwo9drZFZ
-	 GZzcgp9YjkXS32j4zDzprFI/9HPAW5U4ShBzkQCKiX4ziyjLyVjYQkmypEe8hdeNRL
-	 FIyDDmszuCUZAGEeseVZjvbPg8YZqLMYRPBR+ji3e/Z5y78zYM48828CnFUmWtWDao
-	 JtP47zfJi2muw==
-Received: from localhost.localdomain (mtl.efficios.com [216.120.195.104])
-	by smtpout.efficios.com (Postfix) with ESMTPSA id 4gBtnJ5T0qz1T4;
-	Fri, 08 May 2026 11:48:20 -0400 (EDT)
-Date: Fri, 8 May 2026 11:48:19 -0400
-From: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
-To: Joshua Peisach <jpeisach@ubuntu.com>
-Cc: Sasha Levin <sashal@kernel.org>, corbet@lwn.net,
-	akpm@linux-foundation.org, skhan@linuxfoundation.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, gregkh@linuxfoundation.org
-Subject: Re: [PATCH] killswitch: add per-function short-circuit mitigation
- primitive
-Message-ID: <af4Fwxndqv2knLov@localhost.localdomain>
-References: <20260507070547.2268452-1-sashal@kernel.org>
- <DIDEQIFQF1EW.11CESAK4JL4PR@ubuntu.com>
+	s=arc-20240116; t=1778255677; c=relaxed/simple;
+	bh=xqjFCKxo9GlwV4Nlbf7hysJme63ceqasB1C1cXyhfjs=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=OEuL2x3mQlLTcMhBknpubF1o2TxetOHuFCsODIJX+nhpdMM2wCoyk6XdkOMlLhelm2qCgProQap0yGpcg7ckUVC8Xgw9RUN1wA/YW2hsuHhyuU94jc0kaaWYzaMd/exf36/VG2tR/lVtlzIJ9DYEemJ9ua4Do3PQmg1EneVit+I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com; dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b=GxsT2clh; arc=none smtp.client-ip=121.127.44.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ubuntu.com;
+ h=In-Reply-To: References: To: From: Subject: Cc: Message-Id: Date:
+ Content-Type: Content-Transfer-Encoding: Mime-Version; q=dns/txt;
+ s=fe-953a8a3ca9; t=1778255674;
+ bh=qTW5ZtXyLK7XVVOGNmC+9qmwi2VRMSn954QZkVeKzG8=;
+ b=GxsT2clhFKKIVdiuwKm9CID5JiBkPa08Sxy/d8djjFpWODOUG2shfBhsqaDUshkyC7//cSWLP
+ LiV1BL1KMMEu0JW0683PmxUVmiQ4jipYKVSRZwEQeeNs/DJTS8pMz2tqamxHrg3StBjIt2cTGNy
+ 9CLgAe3+XnP3y9OdJ46BXLGUBs/EhTarZPYOtf3ejdWTlVqpXFR4L4ofB5uVpW1W0SiyIowhvRe
+ kaTFOTLQN+Jd9f2zz+w+l8pgl+C22qkGj8qmZ+Zkq8n0xw5V8yh9E2ggnQyCpUnIUS67HcExi/a
+ uAn6B05UsiFlOqnFVRjNf1qMO8wjiHCyBW21+hFjT6lQ==
+X-Forward-Email-ID: 69fe07398bef7135f4b4757a
+X-Forward-Email-Sender: rfc822; jpeisach@ubuntu.com, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.7.7
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DIDEQIFQF1EW.11CESAK4JL4PR@ubuntu.com>
-X-Rspamd-Queue-Id: 567BE4F9317
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8; format=Flowed
+Date: Fri, 08 May 2026 11:54:32 -0400
+Message-Id: <DIDF0Y3YTGL4.31WQZEPS1JOQW@ubuntu.com>
+Cc: "Willy Tarreau" <w@1wt.eu>, <leon@kernel.org>, <security@kernel.org>,
+ "Jonathan Corbet" <corbet@lwn.net>, <skhan@linuxfoundation.org>,
+ <workflows@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v2 2/3] Documentation: security-bugs: explain what is
+ and is not a security bug
+From: "Joshua Peisach" <jpeisach@ubuntu.com>
+To: "Greg KH" <greg@kroah.com>, "Linus Torvalds"
+ <torvalds@linuxfoundation.org>
+X-Mailer: aerc 0.21.0
+References: <20260503113506.5710-1-w@1wt.eu>
+ <20260503113506.5710-3-w@1wt.eu>
+ <CAHk-=wi6z5BGUUT2p+=qrJg+obom8VnCo3MqB=7xp3Gw+UMMkg@mail.gmail.com>
+ <2026050801-semifinal-expulsion-9af6@gregkh>
+In-Reply-To: <2026050801-semifinal-expulsion-9af6@gregkh>
+X-Rspamd-Queue-Id: D22E34F9406
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[efficios.com,none];
-	R_DKIM_ALLOW(-0.20)[efficios.com:s=smtpout1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [7.84 / 15.00];
+	URIBL_BLACK(7.50)[dirtyfrag.io:url];
+	MV_CASE(0.50)[];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	BAD_REP_POLICIES(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86483-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[efficios.com:+];
+	TAGGED_FROM(0.00)[bounces-86467-lists,linux-doc=lfdr.de];
+	R_DKIM_ALLOW(0.00)[ubuntu.com:s=fe-953a8a3ca9];
+	GREYLIST(0.00)[pass,body];
+	DMARC_POLICY_ALLOW(0.00)[ubuntu.com,none];
+	RCVD_COUNT_THREE(0.00)[3];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[ubuntu.com:+];
 	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mathieu.desnoyers@efficios.com,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[jpeisach@ubuntu.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	R_SPF_ALLOW(0.00)[+ip6:2600:3c0a:e001:db::/64:c];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,efficios.com:url,efficios.com:dkim,localhost.localdomain:mid]
-X-Rspamd-Action: no action
+	ARC_ALLOW(0.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	NEURAL_HAM(-0.00)[-0.677];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[1wt.eu:email,dirtyfrag.io:url,ubuntu.com:mid,ubuntu.com:dkim]
+X-Rspamd-Action: add header
+X-Spam: Yes
 
-On 08-May-2026 11:40:54 AM, Joshua Peisach wrote:
-> On Thu May 7, 2026 at 3:05 AM EDT, Sasha Levin wrote:
-> > 
-> > For many such issues the simplest mitigation is to stop calling the buggy
-> > function. Killswitch provides that. An admin writes:
-> > 
-> >     echo "engage af_alg_sendmsg -1" \
-> >         > /sys/kernel/security/killswitch/control
-> > 
-> > After this, af_alg_sendmsg() returns -EPERM on every call without
-> > running its body. The mitigation takes effect immediately, and is dropped on
-> > the next reboot.
-> > 
-> > A lot of recent kernel issues sit in code paths most installs only have enabled
-> > to support a relative minority of users: AF_ALG, ksmbd, nf_tables, vsock, ax25,
-> > and friends.
-> > 
-> > For most users, the cost of "this socket family stops working for the day" is
-> > much smaller than the cost of running a known vulnerable kernel until the fix
-> > land.
-> 
-> I like the concept - but is there any way to ensure that important functions
-> like malloc aren't being patched? Or some way to make sure that what is being
-> patched will not kill the entire kernel?
-> 
-> I know this probably boils down to "operator has to use it correctly", but just
-> wondering if this was considered.
+On Fri May 8, 2026 at 11:35 AM EDT, Greg KH wrote:
+> On Wed, May 06, 2026 at 08:46:07AM -0700, Linus Torvalds wrote:
+>> [ Coming back to this after a week of trying to clean up the disaster
+>> that is my inbox after the merge window ]
+>>=20
+>> On Sun, 3 May 2026 at 04:35, Willy Tarreau <w@1wt.eu> wrote:
+>> >
+>> > The use of automated tools to find bugs in random locations of the ker=
+nel
+>> > induces a raise of security reports even if most of them should just b=
+e
+>> > reported as regular bugs. This patch is an attempt at drawing a line
+>> > between what qualifies as a security bug and what does not, hoping to
+>> > improve the situation and ease decision on the reporter's side.
+>>=20
+>> I actually think we may want to go further than this.
+>>=20
+>> I think we should simply make it a rule that "a 'security' bug that is
+>> found by AI is public".
 
-I like the idea too, it should help prevent a few devops burnouts in the
-coming weeks.
+Whether my opinion is cared about or not, I feel it should be put in here:
 
-One possible approach to prevent "footgun" type of killswitch use would
-be to first apply a statistics collection killswitch handler that does
-not change the behavior: it checks whether the target function is
-invoked at all on the system for a given period of time. Then it applies
-the killswitch if it was not invoked during that period. Overall
-sequence:
+Yes, *in theory* the bug is public. Anyone can find it. But just like bugs
+sitting in open source code repositories, anyone can look for if it they tr=
+y.
 
-- pre-soak killswitch for e.g. 30s, checking whether the function is
-  invoked at all. (period would be user-configurable)
-- if no calls were detected, engage killswitch, else report failure to
-  the user.
+The only difference is that a LLM is making it more apparent and noticable
+to people, if you ask it to.
 
-This should prevent footguns such as trying to killswitch fork, malloc
-or other core functions which are inherently required.
+The choice to then decide "therefore we can disclose it immediately", in my
+opinion, is not great. Because then you are bringing attention to a bug tha=
+t
+nobody, or at most, relatively few people knew about (even in small circles=
+)
+to a broader audience.
 
-Thanks,
+Take Dirty Frag - even though the embargo is said to have been broken, and
+all parties agreed to release the disclosure, it was put on GitHub. Of cour=
+se,
+information that is public, is public. But putting it on GitHub and then
+buying the domain dirtyfrag.io makes it easy to bring attention to the bug
+that was disclosed **with no patch or CVE.**
 
-Mathieu
+Even if the mitigation is "just disable the module", I still think that by
+giving up the embargo entirely, we are creating more attention, and more
+opportunity for exploitation. Even if it's a PoC and not an exploit for
+malicious purposes.
 
--- 
-Mathieu Desnoyers
-EfficiOS Inc.
-http://www.efficios.com
+
+>>=20
+>> Now, I may be influenced by that "my inbox is a disaster during the
+>> merge window" thing, but I do think this is pretty fundamental: if
+>> somebody finds a bug with more or less standard AI tools (ie we're not
+>> talking magical special hardware and nation-state level efforts), then
+>> that bug pretty much by definition IS NOT SECRET.
+>
+
+Yes. I agree. But in theory that person did not need to use AI to find the
+bug, so by that logic, the bug was already known about.
+
+> After the past 2 weeks, and the past 2 months, I am going to violently
+> agree with you here.  We've seen so many "duplicate" bug reports it's
+> not funny.  All of the modern LLMs are feeding the output back into the
+> model for future runs, which makes the data totally public.  Even if
+> not, the output is being monitored by external companies at the very
+> least.
+>
+
+I think that's more "unresponsible disclosure" - maybe there is some way
+that LLM emails can be filtered?
+
+And again, yes, the data is being trained. But **you have to look for it.**=
+.
+It is still a needle in a haystack, but it's not a black hole absorbing
+said haystack.
+
+>> So why should be consider it special and have it be on the security list=
+?
+>
+> I don't think we should anymore.
+>
+> Yes, having a full reproducer in public is not good, but the general
+> "this is a bug" comments we should start redirecting to public lists
+> more.  That's the only way we are going to handle this influx as our
+> "normal" bug workflow works very well, especially when it comes with a
+> fix, as these LLM tools can provide very easily.
+>
+
+Could this at least be temporary? There are only a finite number of bugs
+that can exist in a codebase.
+
+-Josh
 
