@@ -1,176 +1,173 @@
-Return-Path: <linux-doc+bounces-86386-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86392-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IBUENRmx/WmlhgAAu9opvQ
-	(envelope-from <linux-doc+bounces-86386-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:47:05 +0200
+	id SIASB5Gz/WkXhwAAu9opvQ
+	(envelope-from <linux-doc+bounces-86392-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:37 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 757A84F46D5
-	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:47:05 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F8234F4988
+	for <lists+linux-doc@lfdr.de>; Fri, 08 May 2026 11:57:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6633230413AA
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 09:46:06 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 83ABE309E161
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 09:53:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DEB85333730;
-	Fri,  8 May 2026 09:46:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BFBD3D1704;
+	Fri,  8 May 2026 09:53:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Y+eMUg4W"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="L8o0cLcR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E30AA3C1996
-	for <linux-doc@vger.kernel.org>; Fri,  8 May 2026 09:46:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778233564; cv=pass; b=CdPRygMd5qstqtLQmDS/DPkctLRbc3G/ShVcchsBrTe7jhINvx60rRgHGwXsaSQGDvuT1ML8MjhalsEfenmpYGWbiWO299tZ+JEBnqwxm0jJUeFZ9zS/V2hrg7F1HWahpVbpKs/yge0i4WhJN9rPpe8n6ZdQmnx3JPThO39mNs8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778233564; c=relaxed/simple;
-	bh=Do+CokqU7oVirDwvR3ktQHdmO25HJGaXZRspoXy+32Y=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=K/8zAm9u+fHD6nRiFfh+kUb9uA/wbdSLuVJN/AJd324uy2QP80c/8qFIk6wMVJDOjqyZJ5RYLVWTH1dmBoBI8jywTZaMVdt9biflfdTbelCjzOUWK71N2i/oBTMwpFzIjZS2p574U/Nv2y9xB63EPqXi1QB32PmpHIo3Keo7PwI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Y+eMUg4W; arc=pass smtp.client-ip=74.125.82.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-12dc1c0b724so172878c88.1
-        for <linux-doc@vger.kernel.org>; Fri, 08 May 2026 02:46:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778233562; cv=none;
-        d=google.com; s=arc-20240605;
-        b=dF+jbORaW9hzvUxmLlFmfoOdGUDYR1s85G1S3S6SHQHoaO4NDaN57iFZ7LAE2nQC00
-         8POdoURklqulyKbrioUhihv/NLwkr2QYOsafuvxDthxHxPUiLpN/+9SI6GoFUn/+75E/
-         0ff9jTMkSBdxiyAAn118GwUaIbHzVH2xvalETn94rfl1oyaa391PG04fizgDMdI0NnO/
-         P6orOGMEaPHh/q7n5kYDXkD0K2vunQJQIooSbspA2yDEaIYaIS7PhuaTDz701GWLmcFy
-         1KJ+hlbIvKTLHO/XgXu40+7BFmAhhm8k5CsWnN71IFgD5qErlU+FAwAicP5GMYXw7A2O
-         ucEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Iqeb3B6vsv0M4PL/Tp8/XaVQQLocfXwNH2ocP2BNO3M=;
-        fh=PdjSQXO0621XWUVjpj87iCMlsG3R/fSeayi84rAYAa0=;
-        b=j8UJi4KXI77QSdGFF3IdvOuOz6KxhG9qb6NolQrrpnCgw8mBu4EDpj7C6marFtUle0
-         KtNdPPBqxbsvssek6FPQxKwelJ5cABi2m3GK34NhjBURzWZyxf9C8zRWykj9hrSo+l4q
-         /btbzehnR/wwxHsuJLCVUtr5wtiHl0PKVih/oUGB3NbOulGv1QkMu4MXqZFtDE3Bcmv0
-         TJ89XmcJKX3sr6kwxlxjcjuMWhNDZ9VfaHmm5gYOAIxmfo0uBSHX/IpkvN74QiY56hwy
-         NslV7axsORebTcUeC8UuPlBQ1bqkJDDzs2/sDg6kcvjfBNbJW0LI06vt2FN0ypwC0stY
-         BCCQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778233562; x=1778838362; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Iqeb3B6vsv0M4PL/Tp8/XaVQQLocfXwNH2ocP2BNO3M=;
-        b=Y+eMUg4WvFddo4yZ6B0C9bdD3GZe0l31BmMtYZTrwUT0U0ZwUZyDiajPcInDuk0r9D
-         yV+owDx0qrp84WJpEteus/z0aTr2870Es3DYPR6OfXQCec3cU7e4uKr1Koaj93WX7D1D
-         jOJPBsvkM5Z8zi6pXhFweFRb8/FOPX1OEdwRP4XSlwx1M9DLTh1+1ZvjAzRKsXKJ5oiR
-         qt1hNLvUwFSAf4LZCSEtTclGqefX6iPiv4GIrT48zhhKGszvNHzd1tCod561w6khEbcr
-         m3xZU83wf3xfhnjL3IsONBACBeIG3kRRmfxVZ5j7pIdVO2c8WmC6URfNz05gYkQRTQml
-         ipEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778233562; x=1778838362;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Iqeb3B6vsv0M4PL/Tp8/XaVQQLocfXwNH2ocP2BNO3M=;
-        b=nvQNBeIBiysuCeKkoaI3UK2sWQMcgmUPd8RQEyMSrsa068NjXaeD1xq+owN3HDv6mo
-         5jUvbhzVEHQlxb1t9/7jroD9OLaQcEbw+HcnLmnVtLirT8E5TGN4jGddSIu8nW1/U1Lk
-         L9o/GpKeYh4SGuKYgMRW4SKXLhGGMNqLlmI2qe9tYEwv6wTP7bAqVx1YWnNMdjvriqKA
-         E59ZefpFiKS2tbscQ9AoNhYGANgzqK1cG8BljKDT5JIOMpY6ZQC98DZ24zqol8J8JiTm
-         ZlGQolUcCfWdKvHYeiLJ9kWoijP3UIZCyGkLOPYXvHl7PLFg3KXLqskxPYu7phnp9V3T
-         h0sQ==
-X-Forwarded-Encrypted: i=1; AFNElJ8j/AYbbCga8itmeA0vCkfy7/WWQZlQ2F7iwXj7VFYZvGx2yHydRATAYiwIpBwEDYbfRXvTvOjpsZQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzKjbHTx5PF5il0T2JBpDI/8dqrk72atMduFWaPqMV5dP/2D74N
-	tJESS5cUf38B04R6SEHoVH2WDuZURDTAO1fyETWPw790O17ahG7gsGhvORCTHJAnwZobaPbMG6E
-	+dgoHwoszkzFYsTFX+Ylo5zcGUqYmmlA=
-X-Gm-Gg: Acq92OFBPQDkDD2QNGuOlBU8wB3atBRfV0GPDL06asF5YJ/49/HOf5bJDrtMzZVX2rk
-	laC07rzMtSMYn8q44N3dVF1NJbtvsYEyH/4mi1NBfTZkoxQT8uhfSAxNLL+vT3TgGzVn9T3ZHI5
-	9jbwpU1e9S64pGp6n+2aLmr5xaxbdNUGNVn7fkSjtMe0NC9s0jPKq0bAtNEGprF6C9rk2mqXT+4
-	Ko8CtUwYBYV05LsfxpR/JLqRKP694z1O670ncC6h3WwkfpawL9LzppWYLUdLWdyrfvVewTnrAjy
-	cDABgAcAWmDX9Vvug21di/3C0SGnYgBNJjDyvOiGZlKQsSbTQQj1oxHYMJu9ZtaC44/1fVy0t/p
-	CHiYxFlq6v86EZLP5TmOBe+0=
-X-Received: by 2002:a05:7300:3b08:b0:2f3:3835:2010 with SMTP id
- 5a478bee46e88-2f54c37e2eamr2604840eec.6.1778233561754; Fri, 08 May 2026
- 02:46:01 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B5903D090C;
+	Fri,  8 May 2026 09:53:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778233993; cv=none; b=KJ6tp54y8/k6fRW3soKTItoHPfmxtyQvEC9VBKWgW0bL46RcfEBW908jthG7VqvSfCrWqZmh+sdn3fC+doU+U4DvyDvHlnBR7IZDipGOR5IHW50gVwGTIZCOlxIBqy8awbztX5tuDRSA3EQNaHj4EtH5FQnp7ZVisfZ5XdxgETU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778233993; c=relaxed/simple;
+	bh=+tVHEo+/Nt03Cy9uyxf775msOIXb0KrcIitMV3PtYbM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=plgR6YovXSX0LCaQnploslSMziJP7G6mD+4ug89cbZz4LU3jy6lGkQX6PztczaZPWmf6ed7CXj+Nk1O8Evk+toDY8ECsyziNVManGzNDHIcGOIp5TUqSqJws3nf0mZ7Bv5+E4eDbX0OndqRseI8MUvVPvTSGjPqA8+rf8lwnUpQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=L8o0cLcR; arc=none smtp.client-ip=198.175.65.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778233991; x=1809769991;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=+tVHEo+/Nt03Cy9uyxf775msOIXb0KrcIitMV3PtYbM=;
+  b=L8o0cLcR8/+Ji9dEyyusWw8JE9VO9IYnOvie8VBCre69VtYcY+XaNNri
+   9+sYjWieNgacBfY0uwkOug5RFdaUY47aL0SUpLNDX/pdpkEp7Tdiq8y1U
+   03qwo1GZUyQGbLRN07qJbARteozW4GlqClAxIKVNp467xZNxa2gDDjnqv
+   wMQ4BwP8B+QiPUcLTHOr5F0sF3nRhYM4AtkhUz4Gic+YYsiKWmgj0mydk
+   K3FJO4kTOO8ilEtNK4EEdDp082Zb9UjWwAbqsAHidJU4lvJTrCEW4TycD
+   f041Kfug6ZvmeuJ5wsjo6VKHWk92taOOboxDP/Ckp3q0FWNkP5uZzaTtR
+   A==;
+X-CSE-ConnectionGUID: cW21zshzSJ6CEe4k/Y8IHw==
+X-CSE-MsgGUID: B1y05kuOQ2+qI+SNmd3lcw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11779"; a="79219248"
+X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
+   d="scan'208";a="79219248"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 02:53:10 -0700
+X-CSE-ConnectionGUID: XvaFWmBrSKWiKFgv0ISKSg==
+X-CSE-MsgGUID: yzycu+dbS7avcCqVAVipGA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,223,1770624000"; 
+   d="scan'208";a="267101041"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.237])
+  by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 May 2026 02:53:04 -0700
+Date: Fri, 8 May 2026 12:53:02 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Jonathan Cameron <jic23@kernel.org>
+Cc: "Sabau, Radu bogdan" <Radu.Sabau@analog.com>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	"Hennerich, Michael" <Michael.Hennerich@analog.com>,
+	David Lechner <dlechner@baylibre.com>,
+	"Sa, Nuno" <Nuno.Sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <ukleinek@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	"linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-pwm@vger.kernel.org" <linux-pwm@vger.kernel.org>,
+	"linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v9 2/6] iio: adc: ad4691: add initial driver for AD4691
+ family
+Message-ID: <af2yfhe3vYOAOOKZ@ashevche-desk.local>
+References: <20260430-ad4692-multichannel-sar-adc-driver-v9-0-33e439e4fb87@analog.com>
+ <20260430-ad4692-multichannel-sar-adc-driver-v9-2-33e439e4fb87@analog.com>
+ <LV9PR03MB841460307B0CF4C6F267A631F73C2@LV9PR03MB8414.namprd03.prod.outlook.com>
+ <20260507151549.61e4e8fb@jic23-huawei>
+ <af1qN1Bvio1v6TKG@ashevche-desk.local>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <cover.1777987027.git.mchehab+huawei@kernel.org>
- <1bceee886b9027d66bbb48d9d6c8d1250ce8dbcb.1777987028.git.mchehab+huawei@kernel.org>
- <DIASHBBEIHQW.3EQSDUML6G3SB@garyguo.net> <20260506084935.1cd4b794@foz.lan>
- <CANiq72kN=2RsE0Wm_489Sc-VKO40A0uYinCj1McT=YMu=cM4aQ@mail.gmail.com> <20260508091644.420bd440@foz.lan>
-In-Reply-To: <20260508091644.420bd440@foz.lan>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Fri, 8 May 2026 11:45:48 +0200
-X-Gm-Features: AVHnY4KKhh7Pt3-mdebtWjweKJ1bQNmrwJr8n8fkbKGyuacXpWR9XWERelNi_jc
-Message-ID: <CANiq72=8nuD_OL5d8JF3zP-jRgnBORgHMNrGhQtxy6Jg8JVNRw@mail.gmail.com>
-Subject: Re: [PATCH v2 11/11] MAINTAINERS: use a URL for pin-init maintainer's
- profile entry
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Gary Guo <gary@garyguo.net>, Benno Lossin <lossin@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Linux Doc Mailing List <linux-doc@vger.kernel.org>, linux-kernel@vger.kernel.org, 
-	rust-for-linux@vger.kernel.org, =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Alice Ryhl <aliceryhl@google.com>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Boqun Feng <boqun@kernel.org>, Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
-	Trevor Gross <tmgross@umich.edu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 757A84F46D5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <af1qN1Bvio1v6TKG@ashevche-desk.local>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
+X-Rspamd-Queue-Id: 8F8234F4988
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86386-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	TAGGED_FROM(0.00)[bounces-86392-lists,linux-doc=lfdr.de];
+	HAS_ORG_HEADER(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[analog.com,metafoo.de,baylibre.com,kernel.org,gmail.com,pengutronix.de,lwn.net,linuxfoundation.org,vger.kernel.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FREEMAIL_CC(0.00)[garyguo.net,kernel.org,lwn.net,vger.kernel.org,protonmail.com,google.com,umich.edu];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ashevche-desk.local:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:email,intel.com:dkim]
 X-Rspamd-Action: no action
 
-On Fri, May 8, 2026 at 9:16=E2=80=AFAM Mauro Carvalho Chehab
-<mchehab+huawei@kernel.org> wrote:
->
-> Just my two cents, but all license files that are applies to the Kernel
-> are already under LICENSES/ directory, and there is a document defining
-> how SPDX and LICENSES should be used:
->
->         Documentation/process/license-rules.rst.
+On Fri, May 08, 2026 at 07:44:39AM +0300, Andy Shevchenko wrote:
+> On Thu, May 07, 2026 at 03:15:49PM +0100, Jonathan Cameron wrote:
+> > On Thu, 7 May 2026 09:26:00 +0000
+> > "Sabau, Radu bogdan" <Radu.Sabau@analog.com> wrote:
 
-Yeah, we are aware, thank you; the files were annotated back then with
-SPDX identifiers for that reason, and the links were intended to point
-to the original files to show that they were indeed licensed that way.
+...
 
-> With regards to patch 11/11, I'll send a new version just changing
-> the "P" tag without dropping the .md file.
+> > > > +	st->info = spi_get_device_match_data(spi);  
+> > > 
+> > > "Is it possible for st->info to be NULL here?
+> > > If the driver is manually bound to a device with a non-matching name using
+> > > the sysfs bind interface in combination with driver_override,
+> > > spi_get_device_match_data() could return NULL, which would cause a NULL
+> > > pointer dereference later in the probe sequence."
+> > > 
+> > > Agreed, will add the NULL check with -ENODEV immediately after
+> > > spi_get_device_match_data().
+> > 
+> > Andy, you seeing this one?  Looks like we are putting these checks back in again.
+> > Whilst anyone forcing a bind like this is onto a looser anyway we shouldn't
+> > crash due to a null dereference.
+> 
+> We should find a way how to disable that combination from the start. The driver
+> makes no sense to be instantiated from user space. Actually most of the drivers
+> nowadays should not be bound to the devices without driver data.
 
-Thanks!
+The 20260508095224.1275645-1-andriy.shevchenko@linux.intel.com has been just sent.
 
-Cheers,
-Miguel
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
 
