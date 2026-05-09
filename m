@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-86637-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86661-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cIQSNQS6/2m29wAAu9opvQ
-	(envelope-from <linux-doc+bounces-86637-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:49:40 +0200
+	id WC6aDN67/2k9+AAAu9opvQ
+	(envelope-from <linux-doc+bounces-86661-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:57:34 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6451A501BB5
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:49:40 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DF64501F04
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:57:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DCDB4300CE52
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:48:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4A2B430B627E
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:51:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E6523D75C5;
-	Sat,  9 May 2026 22:48:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 767D2401494;
+	Sat,  9 May 2026 22:49:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="WH1+Pf0s"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="f1v81ARM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1867938A72B;
-	Sat,  9 May 2026 22:48:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4BF83D8901;
+	Sat,  9 May 2026 22:49:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778366930; cv=none; b=r3uv6CbH5HcMZcGWOBWIVGwoDaqvMK5rLpwRd9n/H5CGs2DFxh6gE2qE+5sQB1L84sRkZrXN9lm5WuoxDNePpllYcutOQ2KNNWIChwEWn70uaQ2kE5b6sb2i0GYkdkxObZGbieY3x7knYMrwC+qf9o8ibh/Hw+07Ke74CLQgFHQ=
+	t=1778366949; cv=none; b=dpK/ADjPqhXJN+yE3Gq/y8nb+oWo2UZM6/wrgghl9hUjm23q4/w5tBdilpsQw1j5/Pe7nzl6uOOOJRcB6fKcW4amDsEpWUQM0mizTe+1s9Z7/rpd2640PMQrE2ZC/UhaJ8FhKjJmReVyXdTp1tf2JliLM4+DQO8WeKTLb/c7ts0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778366930; c=relaxed/simple;
-	bh=6eRgO9a0TdMyl3kDNezPfvarIKiMvJQm1IFVVZsAcA0=;
+	s=arc-20240116; t=1778366949; c=relaxed/simple;
+	bh=2SCE0Ir5cjrBSFAUMO3FostCpEsglu4FTeHYT/wm/O8=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ZdBj7sVc7zsNsjC5I/IO3dP/7AoX29gyqFphPzO+NdpdacmaQj1FTWWMlfPtDTv0m71PUVUrMh3C5N2Wvwuv4CkobxXYlBz8pKTCDlsq9pxE2gqWHRX8p7NbAvvl9uGiZKQ60f6qGgNUUSz6ziRGMK4gCcDzn5FufBAFzqZfRBQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=WH1+Pf0s; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version; b=fr1qjCKKEv2aW2scSAkBbjsJOxC38yQ8GkdEQkEvu7GpVEvhd+DfpiY84PwKHsQdv2toOMwYPI4vEmKTFYDiio5dlJ58GczVCwmhIx/oVKrzy4FhMK+zlYW0oYA6mfDIx8D3rYdJB3qWR2u99HE58A3sAp9PffmVta3AKZ6KKUA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=f1v81ARM; arc=none smtp.client-ip=90.155.92.199
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=wfrMtj5ZnQw5qzm4tVj9nJs76L69YTBE+psOfwhJUqs=; b=WH1+Pf0sgeUE/1kLOZi2zQe61+
-	clX/XjFXxTT+HlO735BJ+oBKA2xFoMIwzCRYs9uPFc+tsR2LTvxBT9YU2rhNSq4xECjvRfuLc5zvP
-	uUPr2hiZ/luP/qeJhQYWXATigOx1W799RsiWGCpFIGVbB6n1zkpYPwFnjZDgbFJLCzS+5x7nuIzvk
-	aISbB4j22HT0p5iIcmczYYifqI4UCo1f4iaIVWGou3HmdziKDWtow1GUkQEwb1vSxtNUPcvB1WESA
-	20D4xRu8stcXhQ493WDRq1vz29jJfNmBc2S8KOifh8+DNtKnbo0Js6r6FJVLPKtAmF3LKaTEaWwmV
-	SJuOPcbw==;
+	bh=cy4WX+pEhq0ONnRd44jsWeJgn8jdEFwX+WNyOailsXI=; b=f1v81ARMTELtkK8Uo8Dot8XJtu
+	ZPciDZdzdNb1UHVK8ThK5p7adwR8E97R+9zIyV0sMXwSSyxjd4IvQlFS1KguGP5C+dFNoPz2650YT
+	vZPBfyVoT3pRwi4VvjZVlaifWMSpT8PK8VePe/zBIi4e47aMk1d9kmUFgZknxrqOXL2hEvnpa6Snd
+	y4uvxo7khgiNAVT2itX+II+hxxOa7kgC788aR89gNlujoCfM6pkUPukM1rscIT6j4W8yH9v0XoPYA
+	LkcLMKnb6NvFlwXfeMKBZDHIP502+a0Hxb+TlAS4PXWuTHMYVmQlYlBXe0VjTlPt4/nVgJdkX0n4H
+	2lt+5C2w==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
 	by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wLqTD-00000008wz6-0Xpp;
-	Sat, 09 May 2026 22:48:30 +0000
+	id 1wLqTD-00000008wz7-0Xnk;
+	Sat, 09 May 2026 22:48:34 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wLqTB-0000000DhHM-4BHL;
+	id 1wLqTC-0000000DhHP-0ITl;
 	Sat, 09 May 2026 23:48:26 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 02/30] KVM: x86: Improve accuracy of KVM clock when TSC scaling is in force
-Date: Sat,  9 May 2026 23:46:28 +0100
-Message-ID: <20260509224824.3264567-3-dwmw2@infradead.org>
+Subject: [PATCH v4 03/30] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+Date: Sat,  9 May 2026 23:46:29 +0100
+Message-ID: <20260509224824.3264567-4-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
@@ -94,20 +94,20 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: 6451A501BB5
+X-Rspamd-Queue-Id: 8DF64501F04
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86637-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86661-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
@@ -120,116 +120,103 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	DKIM_TRACE(0.00)[infradead.org:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amazon.co.uk:email,infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,xen.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:mid,infradead.org:dkim,xen.org:email,oracle.com:email,xenproject.org:email,amazon.co.uk:email]
 X-Rspamd-Action: no action
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Jack Allister <jalliste@amazon.com>
 
-The kvm_guest_time_update() function scales the host TSC frequency to
-the guest's using kvm_scale_tsc() and the v->arch.l1_tsc_scaling_ratio
-scaling ratio previously calculated for that vCPU. Then calculates the
-scaling factors for the KVM clock itself based on that guest TSC
-frequency.
+A subsequent commit will provide a new KVM interface for performing a
+fixup/correction of the KVM clock against the reference TSC. The
+KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
+the caller must know about this definition.
 
-However, it uses kHz as the unit when scaling, and then multiplies by
-1000 only at the end.
+Move the definition to the UAPI folder so that it is exported to
+usermode and also change the type definitions to use the standard for
+UAPI exports.
 
-With a host TSC frequency of 3000MHz and a guest set to 2500MHz, the
-result of kvm_scale_tsc() will actually come out at 2,499,999kHz. So
-the KVM clock advertised to the guest is based on a frequency of
-2,499,999,000 Hz.
-
-By using Hz as the unit from the beginning, the KVM clock would be based
-on a more accurate frequency of 2,499,999,999 Hz in this example.
-
-Use u64 for the hw_tsc_hz field since an unsigned int would overflow for
-TSC frequencies above 4GHz. Use div_u64() for the Xen CPUID leaf to
-play nice with 32-bit kernels.
-
-Fixes: 78db6a503796 ("KVM: x86: rewrite handling of scaled TSC for kvmclock")
-Reviewed-by: Paul Durrant <paul@xen.org>
+Signed-off-by: Jack Allister <jalliste@amazon.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- arch/x86/include/asm/kvm_host.h |  2 +-
- arch/x86/kvm/cpuid.c            |  2 +-
- arch/x86/kvm/x86.c              | 17 +++++++++--------
- 3 files changed, 11 insertions(+), 10 deletions(-)
+ MAINTAINERS                                   |  4 +--
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
+ 2 files changed, 17 insertions(+), 14 deletions(-)
+ rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index c470e40a00aa..37264212c7df 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -950,7 +950,7 @@ struct kvm_vcpu_arch {
- 	gpa_t time;
- 	s8  pvclock_tsc_shift;
- 	u32 pvclock_tsc_mul;
--	unsigned int hw_tsc_khz;
-+	u64 hw_tsc_hz;
- 	struct gfn_to_pfn_cache pv_time;
- 	/* set guest stopped flag in pvclock flags field */
- 	bool pvclock_set_guest_stopped_request;
-diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
-index e69156b54cff..621d950ec692 100644
---- a/arch/x86/kvm/cpuid.c
-+++ b/arch/x86/kvm/cpuid.c
-@@ -2131,7 +2131,7 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
- 				*ecx = vcpu->arch.pvclock_tsc_mul;
- 				*edx = vcpu->arch.pvclock_tsc_shift;
- 			} else if (index == 2) {
--				*eax = vcpu->arch.hw_tsc_khz;
-+				*eax = div_u64(vcpu->arch.hw_tsc_hz, 1000);
- 			}
- 		}
- 	} else {
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 0a1b63c63d1a..d9ef165df6a1 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -3314,7 +3314,8 @@ static void kvm_setup_guest_pvclock(struct pvclock_vcpu_time_info *ref_hv_clock,
- int kvm_guest_time_update(struct kvm_vcpu *v)
- {
- 	struct pvclock_vcpu_time_info hv_clock = {};
--	unsigned long flags, tgt_tsc_khz;
-+	unsigned long flags;
-+	u64 tgt_tsc_hz;
- 	unsigned seq;
- 	struct kvm_vcpu_arch *vcpu = &v->arch;
- 	struct kvm_arch *ka = &v->kvm->arch;
-@@ -3340,8 +3341,8 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+diff --git a/MAINTAINERS b/MAINTAINERS
+index e0b307b2108c..e49676955c0c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14406,7 +14406,7 @@ S:	Supported
+ T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
+ F:	arch/um/include/asm/kvm_para.h
+ F:	arch/x86/include/asm/kvm_para.h
+-F:	arch/x86/include/asm/pvclock-abi.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/include/uapi/asm/kvm_para.h
+ F:	arch/x86/kernel/kvm.c
+ F:	arch/x86/kernel/kvmclock.c
+@@ -29087,7 +29087,7 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
+ S:	Supported
+ F:	arch/x86/configs/xen.config
+-F:	arch/x86/include/asm/pvclock-abi.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/include/asm/xen/
+ F:	arch/x86/platform/pvh/
+ F:	arch/x86/xen/
+diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
+similarity index 82%
+rename from arch/x86/include/asm/pvclock-abi.h
+rename to arch/x86/include/uapi/asm/pvclock-abi.h
+index b9fece5fc96d..6d70cf640362 100644
+--- a/arch/x86/include/asm/pvclock-abi.h
++++ b/arch/x86/include/uapi/asm/pvclock-abi.h
+@@ -1,6 +1,9 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+ #ifndef _ASM_X86_PVCLOCK_ABI_H
+ #define _ASM_X86_PVCLOCK_ABI_H
++
++#include <linux/types.h>
++
+ #ifndef __ASSEMBLER__
  
- 	/* Keep irq disabled to prevent changes to the clock */
- 	local_irq_save(flags);
--	tgt_tsc_khz = get_cpu_tsc_khz();
--	if (unlikely(tgt_tsc_khz == 0)) {
-+	tgt_tsc_hz = (u64)get_cpu_tsc_khz() * 1000;
-+	if (unlikely(tgt_tsc_hz == 0)) {
- 		local_irq_restore(flags);
- 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, v);
- 		return 1;
-@@ -3376,16 +3377,16 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
- 	/* With all the info we got, fill in the values */
+ /*
+@@ -24,20 +27,20 @@
+  */
  
- 	if (kvm_caps.has_tsc_control) {
--		tgt_tsc_khz = kvm_scale_tsc(tgt_tsc_khz,
-+		tgt_tsc_hz = kvm_scale_tsc(tgt_tsc_hz,
- 					    v->arch.l1_tsc_scaling_ratio);
--		tgt_tsc_khz = tgt_tsc_khz ? : 1;
-+		tgt_tsc_hz = tgt_tsc_hz ? : 1;
- 	}
+ struct pvclock_vcpu_time_info {
+-	u32   version;
+-	u32   pad0;
+-	u64   tsc_timestamp;
+-	u64   system_time;
+-	u32   tsc_to_system_mul;
+-	s8    tsc_shift;
+-	u8    flags;
+-	u8    pad[2];
++	__u32   version;
++	__u32   pad0;
++	__u64   tsc_timestamp;
++	__u64   system_time;
++	__u32   tsc_to_system_mul;
++	__s8    tsc_shift;
++	__u8    flags;
++	__u8    pad[2];
+ } __attribute__((__packed__)); /* 32 bytes */
  
--	if (unlikely(vcpu->hw_tsc_khz != tgt_tsc_khz)) {
--		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_khz * 1000LL,
-+	if (unlikely(vcpu->hw_tsc_hz != tgt_tsc_hz)) {
-+		kvm_get_time_scale(NSEC_PER_SEC, tgt_tsc_hz,
- 				   &vcpu->pvclock_tsc_shift,
- 				   &vcpu->pvclock_tsc_mul);
--		vcpu->hw_tsc_khz = tgt_tsc_khz;
-+		vcpu->hw_tsc_hz = tgt_tsc_hz;
- 	}
+ struct pvclock_wall_clock {
+-	u32   version;
+-	u32   sec;
+-	u32   nsec;
++	__u32   version;
++	__u32   sec;
++	__u32   nsec;
+ } __attribute__((__packed__));
  
- 	hv_clock.tsc_shift = vcpu->pvclock_tsc_shift;
+ #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
 -- 
 2.51.0
 
