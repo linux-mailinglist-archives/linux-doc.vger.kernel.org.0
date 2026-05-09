@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-86596-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86586-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eD6GGMba/mnfxQAAu9opvQ
-	(envelope-from <linux-doc+bounces-86596-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:10 +0200
+	id XWdRMrra/mnfxQAAu9opvQ
+	(envelope-from <linux-doc+bounces-86586-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:56:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 495F64FE563
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:10 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5005B4FE532
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:56:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 160A5300D1DC
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 06:57:05 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BE07430138A6
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 06:56:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5332E382F01;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0167037996C;
 	Sat,  9 May 2026 06:56:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GLu5qk7G"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f27OjLSX"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 195C237C93E;
-	Sat,  9 May 2026 06:56:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D07E82D739B;
+	Sat,  9 May 2026 06:56:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778309813; cv=none; b=EiMzRxG8Ko32DM/C5uSRV258N0wkdYbNBqpxMSKwei+sA4nTlUABUs9LrpnzIFtUwRi8a0rs8eL6anxsCgMH0LCIwoD+hHcMS/2YM+V9jwedSPvLVLCNtC9e4aC6m68vwhjTh/ZYIYfinw8EnjqCBBxTXJ2EDRRRxqLjR21L0z4=
+	t=1778309812; cv=none; b=m8OFKcsY4/hIx65PLeI5XeViDO5l+xG/HxOse/x1kGTV1pSk7z+q878KGP3eVcZssVC7VtbY7y+QhKq+yf/Pewbk0hhOXKadjVbsddoYq19L9ONS5DCYqo3i3Hyn+A322a7mZA/QBtw5DYm7b08zi5CB+/Bwu/4fr4qyXoo5nsA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778309813; c=relaxed/simple;
-	bh=58D6TREjKdd2Wm2oWjAknodr8BsKAXN/7isMMM/lcGI=;
+	s=arc-20240116; t=1778309812; c=relaxed/simple;
+	bh=vvbVKXiMZTQ7JhI4IceyRauJ2Kf7XejKUUzqts3ZkGA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=CmMNzq2xWHngeHwCadPuARAkhlxVDaf1Z00xySnTZOwQrOA/UflvqWCbP3LG7Z6CuW8iWRMq9fJ6G6EH0xKvj8TJLmtMzVXR3mwYRpXWMzOP1BxOVao1ujuG6U3Fzm8ZtU1tPbLM4IGiwzEh7f3rZuA8mtySUici3oJWKFuaEPU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GLu5qk7G; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98479C2BCFF;
+	 MIME-Version:Content-Type; b=slikEW87SLYQqsk604J5VgqiQ6K7CyMTx/fgmthXZLT42KbEn8r0D9i3i6K3cczTb3ohEItAvQ6+ibLrjwtV5yy99GE5QBqMqcDvlXkFqhm76X8UPy+FgMww4xgRUMRB+kwDVLbuKd20FHqu49+EORIvCd5liUtzJ7izgE6+yjQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f27OjLSX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 89AC7C2BCF6;
 	Sat,  9 May 2026 06:56:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1778309812;
-	bh=58D6TREjKdd2Wm2oWjAknodr8BsKAXN/7isMMM/lcGI=;
+	bh=vvbVKXiMZTQ7JhI4IceyRauJ2Kf7XejKUUzqts3ZkGA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=GLu5qk7GhIrT6JTMOnJQS/lbwBpaNqBA/bM6C3Amutwc27QLp99D5D5ntx6CTGHnN
-	 36bCkZG21B706nInN17WJYKHFCoF91sKJzP68V5ZkCOyq5BbH0nOKcFnFtfUtBMAWU
-	 GmWXKWwgDGAxpZ1c8ekBhIxt6CzjroWtBYLQBn4j7BAUVaSn4HeT9h/kBi/NQeY/pB
-	 85c2JzoezOuknVxasVOKkAXtq78v/bbWCvYYn1ZTIEtyOdab+c+qCJLJsWnUGjSvo4
-	 uiBrcWGaWqc+xrrzCLDhM/6UX5ljtZvvNtf3FC1Ta5s9WatOq5AY82H5ZL6AuVeyJw
-	 Qqe4gvv2cpLaw==
+	b=f27OjLSXF10mDRzIxJRJi2kMEbu7v5FrW83uIzrOrsTHwKumnDL1ZCgksuGRtJVrw
+	 tzg8xxRMe/HpcdA/wJ7feWniqrGcArSEpLuKCp4Ec5/SRQ/+anBLcYLQix+K93mJSD
+	 tI59ixx5AYPSId2RKFaVfhJhBlWM33nmBracqbwODidNB+jdqG/mrFTCUND2HoX6SD
+	 PTzELDDkAI64fltlzu2vNM+6sZabfOHteGkrotpsiupO0nth4LoS03GMMH5y7aGwSG
+	 isB5ZRaK1/JjKmGKcNTEnDLEkqz/U603EoK2ogmJqcomvX52B1Y3D0mvMZrT4I38FP
+	 ll+hQcESUa75Q==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wLbcI-00000000GIj-2O8m;
+	id 1wLbcI-00000000GIn-2VLm;
 	Sat, 09 May 2026 08:56:50 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -56,9 +56,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	rust-for-linux@vger.kernel.org,
 	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH v3 03/13] docs: maintainers_include: cleanup the code
-Date: Sat,  9 May 2026 08:56:36 +0200
-Message-ID: <5f48bf411925e923d206239a4de0a3e34592de88.1778309595.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v3 04/13] docs: maintainers_include: clean most SPHINXDIRS=process warnings
+Date: Sat,  9 May 2026 08:56:37 +0200
+Message-ID: <567200712771590d08e4da096b4def92bf729ffe.1778309595.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1778309595.git.mchehab+huawei@kernel.org>
 References: <cover.1778309595.git.mchehab+huawei@kernel.org>
@@ -71,14 +71,14 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 495F64FE563
+X-Rspamd-Queue-Id: 5005B4FE532
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -86,7 +86,7 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86596-lists,linux-doc=lfdr.de,huawei];
+	TAGGED_FROM(0.00)[bounces-86586-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -94,263 +94,109 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,domain:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Simplify the logic without affecting the output result.
+building docs with SPHINXDIRS=process is too noisy, as it
+generates lots of undefined refs. Fixing it is easy: just let
+linkify generate html URLs for the broken links when SPHINXDIRS
+is used.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <24a83995778de8710cac40a3089c2f2fe5c38dbd.1777987027.git.mchehab+huawei@kernel.org>
+Message-ID: <b57d83081c28aa52683b403f8836d098fcdd8530.1777987027.git.mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/maintainers_include.py | 184 ++++++++++----------
- 1 file changed, 91 insertions(+), 93 deletions(-)
+ Documentation/sphinx/maintainers_include.py | 44 +++++++++++++++------
+ 1 file changed, 32 insertions(+), 12 deletions(-)
 
 diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index 6d47d55f5b73..615af227a8f8 100755
+index 615af227a8f8..d3ad01e5309e 100755
 --- a/Documentation/sphinx/maintainers_include.py
 +++ b/Documentation/sphinx/maintainers_include.py
-@@ -44,10 +44,6 @@ class MaintainersParser:
+@@ -58,8 +58,8 @@ class MaintainersParser:
+         self.field_content = ""
+         self.subsystem_name = None
  
-     def __init__(self, app_dir, path):
-         self.path = path
--        self.profile_toc = set()
--        self.profile_entries = {}
--
--        self.output = ".. _maintainers:\n\n"
- 
-         # Poor man's state machine.
-         self.descriptions = False
-@@ -67,6 +63,13 @@ class MaintainersParser:
+-        self.app_dir = app_dir
+-        self.base_dir, self.doc_dir, self.sphinx_dir = app_dir.partition("Documentation")
++        self.app_dir = os.path.abspath(app_dir)
++        self.base_dir, _, self.sphinx_dir = self.app_dir.partition("Documentation")
  
          self.re_doc = re.compile(r'(Documentation/([^\s\?\*]*)\.rst)')
  
-+        #
-+        # Output variables with maintainers content to be stored
-+        #
-+        self.profile_toc = set()
-+        self.profile_entries = {}
-+        self.output = ".. _maintainers:\n\n"
-+
-         prev = None
-         for line in open(path):
-             if self.descriptions:
-@@ -98,6 +101,16 @@ class MaintainersParser:
+@@ -104,10 +104,25 @@ class MaintainersParser:
  
-         self.output = self.output.rstrip()
- 
+     def linkify(self, text):
+         """Linkify all non-wildcard refs to ReST files in Documentation/"""
 +
-+    def linkify(self, text):
-+        """Linkify all non-wildcard refs to ReST files in Documentation/"""
-+        m = self.re_doc.search(text)
-+        if m:
-+            # maintainers.rst is in a subdirectory, so include "../".
-+            text = self.re_doc.sub(':doc:`%s <../%s>`' % (m.group(2), m.group(2)), text)
-+
-+        return text
-+
-     def parse_descriptions(self, line):
-         """Handle contents of the descriptions section."""
- 
-@@ -107,14 +120,8 @@ class MaintainersParser:
-             self.output += "\n" + line
-             return
- 
--        # Linkify all non-wildcard refs to ReST files in Documentation/.
--        m = self.re_doc.search(line)
--        if m:
+         m = self.re_doc.search(text)
+         if m:
 -            # maintainers.rst is in a subdirectory, so include "../".
--            line = self.re_doc.sub(':doc:`%s <../%s>`' % (m.group(2), m.group(2)), line)
--
-         # Escape the escapes in preformatted text.
--        output = "| %s" % (line.replace("\\", "\\\\"))
-+        self.output += "| " + self.linkify(line).replace("\\", "\\\\")
+-            text = self.re_doc.sub(':doc:`%s <../%s>`' % (m.group(2), m.group(2)), text)
++            fname = m.group(1)
++            ename = m.group(2)
++
++            entry = os.path.relpath(self.base_dir + fname, self.app_dir)
++            entry = entry.removesuffix(".rst")
++
++            #
++            # When SPHINXDIRS is used, it will try to reference files
++            # outside srctree, causing warnings. To avoid that, point
++            # to the latest official documentation
++            #
++            if entry.startswith("../"):
++                html = KERNELDOC_URL + ename + ".html"
++                text = self.re_doc.sub(f'`{ename} <{html}>`_', text)
++            else:
++                text = self.re_doc.sub(f':doc:`{ename} </{entry}>`', text)
  
-         # Look for and record field letter to field name mappings:
-         #   R: Designated *reviewer*: FullName <address@domain>
-@@ -127,105 +134,96 @@ class MaintainersParser:
-             if m:
-                 self.fields[self.field_letter] = m.group(1)
+         return text
  
--        # Append parsed content to self.output
--        self.output += output
--
-     def parse_subsystems(self, line):
-         """Handle contents of the per-subsystem sections."""
- 
-         # Drop needless input whitespace.
-         line = line.rstrip()
- 
-+        # Skip empty lines: subsystem parser adds them as needed.
-+        if not line:
-+            return
-+
-+        # Subsystem fields are batched into "field_content"
-+        if line[1] != ':':
-+            line = self.linkify(line)
-+
-+            # Render a subsystem entry as:
-+            #   SUBSYSTEM NAME
-+            #   ~~~~~~~~~~~~~~
-+            # Flush pending field content.
-+            self.output += self.field_content + "\n\n"
-+            self.field_content = ""
-+
-+            self.subsystem_name = line.title()
-+
-+            # Collapse whitespace in subsystem name.
-+            heading = re.sub(r"\s+", " ", line)
-+            self.output += "%s\n%s" % (heading, "~" * len(heading)) + "\n"
-+            self.field_prev = ""
-+
-+            return
-+
-+        # Render a subsystem field as:
-+        #   :Field: entry
-+        #           entry...
-+        field, details = line.split(':', 1)
-+        details = details.strip()
-+
-         #
-         # Handle profile entries - either as files or as https refs
-         #
--        match = re.match(rf"P:\s*({self.doc_dir})(/\S+)\.rst", line)
--        if match:
--            name = "".join(match.groups())
--            entry = os.path.relpath(self.base_dir + name, self.app_dir)
--
--            full_name = os.path.join(self.base_dir, name)
--            path = os.path.relpath(full_name, self.app_dir)
--            #
--            # When SPHINXDIRS is used, it will try to reference files
--            # outside srctree, causing warnings. To avoid that, point
--            # to the latest official documentation
--            #
--            if path.startswith("../"):
--                entry = KERNELDOC_URL + match.group(2) + ".html"
--            else:
--                entry = "/" + entry
--
--            if "*" in entry:
--                for e in glob(entry):
--                    self.profile_toc.add(e)
--                    self.profile_entries[self.subsystem_name] = e
--            else:
--                self.profile_toc.add(entry)
--                self.profile_entries[self.subsystem_name] = entry
--        else:
--            match = re.match(r"P:\s*(https?://.*)", line)
-+        if field == "P":
-+            match = self.re_doc.match(details)
+@@ -176,27 +191,32 @@ class MaintainersParser:
+         if field == "P":
+             match = self.re_doc.match(details)
              if match:
--                entry = match.group(1).strip()
--                self.profile_entries[self.subsystem_name] = entry
-+                name = "".join(match.groups())
-+                entry = os.path.relpath(self.base_dir + name, self.app_dir)
+-                name = "".join(match.groups())
+-                entry = os.path.relpath(self.base_dir + name, self.app_dir)
++                fname = match.group(1)
++                ename = match.group(2)
  
--        # Linkify all non-wildcard refs to ReST files in Documentation/.
--        m = self.re_doc.search(line)
--        if m:
--            # maintainers.rst is in a subdirectory, so include "../".
--            line = self.re_doc.sub(':doc:`%s <../%s>`' % (m.group(2), m.group(2)), line)
-+                full_name = os.path.join(self.base_dir, name)
-+                path = os.path.relpath(full_name, self.app_dir)
-+                #
-+                # When SPHINXDIRS is used, it will try to reference files
-+                # outside srctree, causing warnings. To avoid that, point
-+                # to the latest official documentation
-+                #
-+                if path.startswith("../"):
-+                    entry = KERNELDOC_URL + "/" + match.group(2) + ".html"
-+                else:
-+                    entry = "/" + entry
+-                full_name = os.path.join(self.base_dir, name)
+-                path = os.path.relpath(full_name, self.app_dir)
++                entry = os.path.relpath(self.base_dir + fname, self.app_dir)
++                entry = entry.removesuffix(".rst")
+                 #
+                 # When SPHINXDIRS is used, it will try to reference files
+                 # outside srctree, causing warnings. To avoid that, point
+                 # to the latest official documentation
+                 #
+-                if path.startswith("../"):
+-                    entry = KERNELDOC_URL + "/" + match.group(2) + ".html"
++
++                if entry.startswith("../"):
++                    entry = KERNELDOC_URL + ename + ".html"
+                 else:
+                     entry = "/" + entry
  
--        # Check state machine for output rendering behavior.
--        output = None
--        if self.subsystems:
--            # Skip empty lines: subsystem parser adds them as needed.
--            if len(line) == 0:
--                return
--            # Subsystem fields are batched into "field_content"
--            if line[1] != ':':
--                # Render a subsystem entry as:
--                #   SUBSYSTEM NAME
--                #   ~~~~~~~~~~~~~~
--                # Flush pending field content.
--                output = self.field_content + "\n\n"
--                self.field_content = ""
--
--                self.subsystem_name = line.title()
--
--                # Collapse whitespace in subsystem name.
--                heading = re.sub(r"\s+", " ", line)
--                output = output + "%s\n%s" % (heading, "~" * len(heading))
--                self.field_prev = ""
-+                if "*" in entry:
-+                    for e in glob(entry):
-+                        self.profile_toc.add(e)
-+                        self.profile_entries[self.subsystem_name] = e
-+                else:
-+                    self.profile_toc.add(entry)
-+                    self.profile_entries[self.subsystem_name] = entry
+                 if "*" in entry:
+                     for e in glob(entry):
+-                        self.profile_toc.add(e)
++                        if "html" not in e:
++                            self.profile_toc.add(e)
++
+                         self.profile_entries[self.subsystem_name] = e
+                 else:
+-                    self.profile_toc.add(entry)
++                    if "html" not in entry:
++                        self.profile_toc.add(entry)
++
+                     self.profile_entries[self.subsystem_name] = entry
              else:
--                # Render a subsystem field as:
--                #   :Field: entry
--                #           entry...
--                field, details = line.split(':', 1)
--                details = details.strip()
-+                match = re.match(r"(https?://.*)", details)
-+                if match:
-+                    entry = match.group(1).strip()
-+                    self.profile_entries[self.subsystem_name] = entry
- 
--                # Mark paths (and regexes) as literal text for improved
--                # readability and to escape any escapes.
--                if field in ['F', 'N', 'X', 'K']:
--                    # But only if not already marked :)
--                    if not ':doc:' in details:
--                        details = '``%s``' % (details)
-+        details = self.linkify(details)
- 
--                # Comma separate email field continuations.
--                if field == self.field_prev and self.field_prev in ['M', 'R', 'L']:
--                    self.field_content = self.field_content + ","
-+        # Mark paths (and regexes) as literal text for improved
-+        # readability and to escape any escapes.
-+        if field in ['F', 'N', 'X', 'K']:
-+            # But only if not already marked :)
-+            if not ':doc:' in details:
-+                details = '``%s``' % (details)
- 
--                # Do not repeat field names, so that field entries
--                # will be collapsed together.
--                if field != self.field_prev:
--                    output = self.field_content + "\n"
--                    self.field_content = ":%s:" % (self.fields.get(field, field))
--                self.field_content = self.field_content + "\n\t%s" % (details)
--                self.field_prev = field
--        elif not self.descriptions:
--            output = line
-+        # Comma separate email field continuations.
-+        if field == self.field_prev and self.field_prev in ['M', 'R', 'L']:
-+            self.field_content = self.field_content + ","
- 
--        if output is not None:
--            self.output += output + "\n"
-+        # Do not repeat field names, so that field entries
-+        # will be collapsed together.
-+        if field != self.field_prev:
-+            self.output += self.field_content + "\n\n"
-+            self.field_content = ":%s:" % (self.fields.get(field, field))
-+        self.field_content = self.field_content + "\n\t%s" % (details)
-+        self.field_prev = field
- 
- 
- class MaintainersInclude(Include):
+                 match = re.match(r"(https?://.*)", details)
 -- 
 2.54.0
 
