@@ -1,156 +1,133 @@
-Return-Path: <linux-doc+bounces-86617-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86618-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cDrAIe9a/2k35QAAu9opvQ
-	(envelope-from <linux-doc+bounces-86617-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 18:03:59 +0200
+	id fgaPI9Re/2nn5gAAu9opvQ
+	(envelope-from <linux-doc+bounces-86618-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 18:20:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89E505006BE
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 18:03:58 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D576350071E
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 18:20:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 995783004047
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 16:03:55 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 642F5300D962
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 16:20:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 231002C3252;
-	Sat,  9 May 2026 16:03:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 439DC2D2397;
+	Sat,  9 May 2026 16:20:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="3LyPo0Qs"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gxXVVdDt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C7002D2397;
-	Sat,  9 May 2026 16:03:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB61A246782
+	for <linux-doc@vger.kernel.org>; Sat,  9 May 2026 16:20:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778342634; cv=none; b=uBlti05dKaE66jIoTkfQJckXZJtBSd7KjoE0Vpt2oPft9HeQPtuEnLIeM83Qe1boXSOndECDJ1d1nho8VOBSnuz62PRPdXgRF7pnG+gmJBRJjp7giLSMrYypZoed8/F/mfB2u2qtmWaklgp2+2LVjnXyX5xxTdPKBK4nLc5odSU=
+	t=1778343633; cv=none; b=jhVUz6smDE+LOvMAMMXZ4Hpax0COwhnz95oBH03VZDqCn3ztIti7Z+iSruhhROj1ntF2KFj28eeCz/dD5rIt/KcplrEmlk5ZkQM3YI8A1VsSeGJj9r9dYft7nioRt835L+BK8/xvEWwL4bmdcUnbmYU0/s2NUeie0mv105X10fM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778342634; c=relaxed/simple;
-	bh=b4vOSOAM6k1R+mmqDr64fp7WvpxpnHLwWScwTogsU7U=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PPEsldEpaHFRqX7F93cpDPufhWrNncWCkK6hvP71V2EUPDcG878fL5853JU/SEiP0ezIt1oxkfNPFh28PQkbmsxYLBTRBj75Ra9Gx8cGkuUNB7FC/7pesMP+2su/WILkqdcaEwpw4+lg691vyj0LkUbAwt2u9Hl7DDurHEldmYk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=3LyPo0Qs; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=E2QqY8rEv99HO8x6ZfVSogZGJ8bRXrfDH+UbtzCydcc=; b=3LyPo0Qs1vWfHZOI35NXyNEQdg
-	uY7CBeCUP2P+sIF4SDOiU6SQSeKc1uF8U17gJcQlwf9MBrZqUwwAOc5BGf/Hg/HdIur4v+7wOfo03
-	dwOzIpkZeqLFTOfxvMUYdonBKYUNuCtEcN9y/HK2Cy68Wv00QoqY1LURSA9bDog0ocxP8UrGl5zU7
-	bMvXqMLkr5i4+L8BGSaiSep4KaX5JqFCi40gjFXMbjhPlrGtfsfZhOZ5G7anHdbgBf9OhxjHf7fXn
-	w2tFL5aKJge56F7iVnXFW4JEgKTzTnvRRzEPm3feTGM8TfBCif/twL+1FRV9syW7K+kP7BhlKcO62
-	vWIMhgPw==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wLk9d-00000009EVs-0UGw;
-	Sat, 09 May 2026 16:03:49 +0000
-Message-ID: <ef973305-3998-4154-a249-45469c174832@infradead.org>
-Date: Sat, 9 May 2026 09:03:46 -0700
+	s=arc-20240116; t=1778343633; c=relaxed/simple;
+	bh=K17rgOODrv3C35ZecA1Dtc68zqvl72LgIOSAsDQgPlI=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=o7v+nhf+DGtA2j6S7WAn0VfPP3SOLi0NCf5hnq0e1UUcx52rlCx1nk+1vExu5OFVGCS3r0su/5JLVtUmsHDGu10oLbyBNbUD8Aa40nFlXLUKNv6clM/uHIDINa2+KLDfFYPYamNZ8WsNrBMpKPK6sT9ObLsgxnYOsEClAw3C6t4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gxXVVdDt; arc=none smtp.client-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778343632; x=1809879632;
+  h=date:from:to:cc:subject:message-id;
+  bh=K17rgOODrv3C35ZecA1Dtc68zqvl72LgIOSAsDQgPlI=;
+  b=gxXVVdDtT48HGsaWE2+wNXoJ2prJKaqbV+3gHmRyoZzPZSMHRSTgCl0R
+   lkxozV+hA9onimfY00pDnF2tsIcynvkL5AYfMfha0zePmhzP1Bjwj6obS
+   7Hlhf1c0Q7w7tza9Lrh94PiNJ6GMNsx1vgBf7foaUccQujLEcal6PRnM4
+   /IXfujybguKKXvh9yLV1uEbxLCsqUJ9UImEdykViXLOc8dgySDRYh4bnj
+   dKE0BXr3+AFZSSFECM9wRkbeEI20hDJQucNNSSGcCL/QvsZ/piE5o+GmN
+   Y7dsj+BBvucDW9Mh6C9aZly06+T6AnMHUhDDH68H9UuCDpBm5tmRjPnox
+   A==;
+X-CSE-ConnectionGUID: +kTVN6nORmKjtj18WG4VtQ==
+X-CSE-MsgGUID: zZPTwicCSZi1rfnc1lauhw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11781"; a="101965639"
+X-IronPort-AV: E=Sophos;i="6.23,225,1770624000"; 
+   d="scan'208";a="101965639"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 May 2026 09:20:31 -0700
+X-CSE-ConnectionGUID: K2LkTUeNS2inAYQH22SY0A==
+X-CSE-MsgGUID: M4j2kuMUSu+3pwbC3hLMww==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,225,1770624000"; 
+   d="scan'208";a="237268630"
+Received: from igk-lkp-server01.igk.intel.com (HELO bdf09bfdbd5f) ([10.211.93.152])
+  by orviesa007.jf.intel.com with ESMTP; 09 May 2026 09:20:31 -0700
+Received: from kbuild by bdf09bfdbd5f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wLkPj-000000007Vp-2772;
+	Sat, 09 May 2026 16:20:27 +0000
+Date: Sat, 09 May 2026 18:20:22 +0200
+From: kernel test robot <lkp@intel.com>
+To: Hector Martin <marcan@marcan.st>
+Cc: oe-kbuild-all@lists.linux.dev, Janne Grunau <j@jannau.net>,
+ linux-doc@vger.kernel.org
+Subject: [asahilinux:bits/090-spi-hid 12/19] Warning:
+ drivers/hid/hid-magicmouse.c:589 This comment starts with '/**', but isn't a
+ kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
+Message-ID: <202605091838.pJQhskey-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] docs: fix repeated word 'as' in dax-hv-api
- documentation
-To: Adrien Reynard <reynard.adrien.08@gmail.com>, corbet@lwn.net
-Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260508163802.16249-1-reynard.adrien.08@gmail.com>
- <20260509143057.16512-1-reynard.adrien.08@gmail.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20260509143057.16512-1-reynard.adrien.08@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 89E505006BE
+X-Rspamd-Queue-Id: D576350071E
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86617-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,lwn.net];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86618-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[intel.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.998];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rdunlap@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,infradead.org:mid,infradead.org:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:email,intel.com:mid,intel.com:dkim]
 X-Rspamd-Action: no action
 
+tree:   https://github.com/AsahiLinux/linux bits/090-spi-hid
+head:   7b3c6e8461f3035d025ece758919facbc1c6d854
+commit: 2a467e61d288146e8b5e748c8cef4979c399cedc [12/19] HID: magicmouse: Add MTP multi-touch device support
+config: x86_64-rhel-9.4-ltp (https://download.01.org/0day-ci/archive/20260509/202605091838.pJQhskey-lkp@intel.com/config)
+compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260509/202605091838.pJQhskey-lkp@intel.com/reproduce)
 
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202605091838.pJQhskey-lkp@intel.com/
 
-On 5/9/26 7:30 AM, Adrien Reynard wrote:
-> Remove duplicated word 'as' found in three places in
-> arch/sparc/oradax/dax-hv-api.txt.
-> 
-> Signed-off-by: Adrien Reynard <reynard.adrien.08@gmail.com>
+All warnings (new ones prefixed by >>):
 
-Hi Adrien,
-Please report what software you used to find these repeated words.
-Thanks.
+>> Warning: drivers/hid/hid-magicmouse.c:589 This comment starts with '/**', but isn't a kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
+    * vendor trackpad report
+   Warning: drivers/hid/hid-magicmouse.c:603 This comment starts with '/**', but isn't a kernel-doc comment. Refer to Documentation/doc-guide/kernel-doc.rst
+    * standard HID mouse report
 
-
-> ---
->  Documentation/arch/sparc/oradax/dax-hv-api.txt | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Documentation/arch/sparc/oradax/dax-hv-api.txt b/Documentation/arch/sparc/oradax/dax-hv-api.txt
-> index ef1a4c2bf08b..6dac2a778ccd 100644
-> --- a/Documentation/arch/sparc/oradax/dax-hv-api.txt
-> +++ b/Documentation/arch/sparc/oradax/dax-hv-api.txt
-> @@ -485,7 +485,7 @@ Offset   Size   Field Description
->                               the virtual machine to use when accessing this data stream
->                               (checking is only guaranteed to be performed when using API
->                               version 1.1 and later). If using a virtual address, this field will
-> -                             be used as as primary input address bits [59:56].
-> +                             be used as the primary input address bits [59:56].
->                  [55:0]       Primary input address bits [55:0]. Address type is determined
->                               by CCB header.
->  24       8      Data Access Control
-> @@ -576,7 +576,7 @@ Offset   Size   Field Description
->                                                       the virtual machine to use when accessing this data stream
->                                                       (checking is only guaranteed to be performed when using API
->                                                       version 1.1 and later). If using a virtual address, this field will
-> -                                                     be used as as symbol table address bits [59:56].
-> +                                                     be used as symbol table address bits [59:56].
->                                          [55:4]       Symbol table address bits [55:4]. Address type is determined
->                                                       by CCB header.
->                                          [3:0]        Symbol table version
-> @@ -815,7 +815,7 @@ Offset   Size   Field Description
->                               the virtual machine to use when accessing this data stream
->                               (checking is only guaranteed to be performed when using API
->                               version 1.1 and later). If using a virtual address, this field will
-> -                             be used as as bit table address bits [59:56]
-> +                             be used as bit table address bits [59:56]
->                  [55:4]       Bit table address bits [55:4]. Address type is determined by
->                               CCB header. Address must be 64-byte aligned (CCB version
->                               0) or 16-byte aligned (CCB version 1).
-
--- 
-~Randy
-
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
