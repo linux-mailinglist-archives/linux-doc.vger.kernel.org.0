@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-86636-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86659-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aLmZOtq5/2mm9wAAu9opvQ
-	(envelope-from <linux-doc+bounces-86636-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:48:58 +0200
+	id cKKcMnC8/2nm9wAAu9opvQ
+	(envelope-from <linux-doc+bounces-86659-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 01:00:00 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B022D501B21
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:48:58 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AD0B501F48
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:59:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 56F12300F15A
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:48:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 644D730AB2C2
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:51:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 422863D75B8;
-	Sat,  9 May 2026 22:48:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 678E53FFAAA;
+	Sat,  9 May 2026 22:49:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="F8o2huYC"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SE6rkQzN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97559382F0C;
-	Sat,  9 May 2026 22:48:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 034263D9043;
+	Sat,  9 May 2026 22:49:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778366930; cv=none; b=jgo/vbRdHdB2NgeTPs0Hgr4DW+a0a6K4ZSKlMYIqajNgjuNEDBGpx9n+nMthXEKsxh7/06LC9/gecQYouCKo26/32dd13HK67an59+/E3U+ogs8qr+wxTI4ZpokUAN+Ggle83txjFxv8ax71oYMZ1A4Qk6W/+ceMJ+G0wNrTDGc=
+	t=1778366947; cv=none; b=fVII01GHof/3GvTofCDKdfrhWx4JCvXlvMsRRZTFpcRr7drWgkyG41hAUDCqe5FZ4EceqGBHx+P+NAHCG4H+jLwKo8zmpnSsNTvNCCk+Itgyy1iMjpdzd8c75gji7z5sc4NP+xD7x5Ee98t0JqEcb6UobhdBOX6q6tLU/v19M80=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778366930; c=relaxed/simple;
-	bh=AmxgKuqJyMj7L9wIW65zlG8LlX5uDfHPdEtL1NKBN18=;
+	s=arc-20240116; t=1778366947; c=relaxed/simple;
+	bh=5qfZyt+F6ZQV7QdFVXv286fFETr1VWlC2gByXVFEq+s=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=sIlCi+opCrgv+CacRF7KzBqn0q4C9Tl2JTTGIfpJ/0+et3LedCAxjEyOBLmjilObP1aBIdJIKzwC+8NIh5rMbZLhub3sygWyzri9xL/imYam9O18RRTavTX1RJ5gKHiCNCLTGI9JTWs0sO0usTdLYsbqVADRBxJycSeXCQTki20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=F8o2huYC; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version; b=qM1tQhK/mdNPkxsrayRCgvpIr44UC5e98IBHkFNHI702izjOVZ2Xpehf7L5WQP+RUIDH718kQsVQWo4/1xCV38LtkSxjYS84yjoYRMA+k11ERZcd7ExICDeW6jun3Nx+6AeXJ6UAF5ze4i2rFfu89nXOknXhoVv5Wtk1aO8wXJA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=SE6rkQzN; arc=none smtp.client-ip=90.155.92.199
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=VZW3BYOsJBjCxrX0Ak3Y7mLfSYoVJvjVzeACh4h0wdA=; b=F8o2huYCyGm1b+IKEhxif0OKZe
-	1/VjHOyqiLIQDr1VUqRvk7k4ZwOHLp8x2xUQoPmNubIdn/Y9PGOOKLUCPS0Bd6huZraf2VXT69Tcy
-	PrYoG0wU7gMusTyFns2Sk+299Y82Z4fHtRYuTFtZd8fvUT/6x9Lu9Uqy/UPrHonTZFD7kEszHE5Es
-	s0CbR3wEQ7PbLtr3p6fRXS1cxQxf/q+QIwcW3ESwiOvm2ZnZymrCuIOOmVlJ0ZsoEgLs3M07cKcok
-	GwmW2q+R9tkBkUh3woXo6m/KggKAhiNjMtxICUNY9cdd96vI/ocFJGk0T4R8oFSPGI1cygwDPHqGH
-	zDppAOQA==;
+	bh=dFbbY5OtZVYUw6Qy5tHS1aKoaYMuSOyj4x77iW34VYE=; b=SE6rkQzNLq7L4CqMdEC8BZZ0P6
+	EjpyYbZKK7v43rP/AeQVjSCbX4CyqL7SJgHZ4T2fJwadBOsjBMNWV4O9xztFhbc8UcA+mg4CVAeM/
+	pF/f/hHOOeWQWkfR1yJ2MttlyGrwYzwM8Us9usfEsF/GJA5jH2cvu8IwGenT2kPZ0o39/N1dT+CvY
+	nxohuJurpY0cff1GFCz0rJ1gt7T7yFG3MUVg02Quc5oH80soyrmI4lVS78+lhGlGprjcpiGEuprPs
+	JbtHdqIH9/IguEaANVzJe00VtBFhZaDJfm4NidetUasrra5NgYbGP82uPUI+FCBzQ8t4ujGxOn5Cs
+	38tbJYDw==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
 	by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wLqTD-00000008wz9-0U27;
-	Sat, 09 May 2026 22:48:28 +0000
+	id 1wLqTD-00000008wzA-0Oe2;
+	Sat, 09 May 2026 22:48:32 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wLqTC-0000000DhHd-1ExZ;
+	id 1wLqTC-0000000DhHh-1YLk;
 	Sat, 09 May 2026 23:48:26 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 06/30] KVM: x86: Explicitly disable TSC scaling without CONSTANT_TSC
-Date: Sat,  9 May 2026 23:46:32 +0100
-Message-ID: <20260509224824.3264567-7-dwmw2@infradead.org>
+Subject: [PATCH v4 07/30] KVM: x86: Add KVM_VCPU_TSC_SCALE and fix the documentation on TSC migration
+Date: Sat,  9 May 2026 23:46:33 +0100
+Message-ID: <20260509224824.3264567-8-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
@@ -94,20 +94,20 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: B022D501B21
+X-Rspamd-Queue-Id: 2AD0B501F48
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86636-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86659-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
@@ -120,60 +120,150 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	DKIM_TRACE(0.00)[infradead.org:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amazon.co.uk:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:mid,infradead.org:dkim,amazon.co.uk:email,xen.org:email]
 X-Rspamd-Action: no action
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-KVM does make an attempt to cope with non-constant TSC, and has
-notifiers to handle host TSC frequency changes. However, it *only*
-adjusts the KVM clock, and doesn't adjust TSC frequency scaling when
-the host changes.
+The documentation on TSC migration using KVM_VCPU_TSC_OFFSET is woefully
+inadequate. It ignores TSC scaling, and ignores the fact that the host
+TSC may differ from one host to the next (and in fact because of the way
+the kernel calibrates it, it generally differs from one boot to the next
+even on the same hardware).
 
-This is presumably because non-constant TSCs were fixed in hardware
-long before TSC scaling was implemented, so there should never be real
-CPUs which have TSC scaling but *not* CONSTANT_TSC.
+Add KVM_VCPU_TSC_SCALE to extract the actual scale ratio and frac_bits,
+and attempt to document the process that userspace needs to follow to
+preserve the TSC across migration.
 
-Such a combination could potentially happen in some odd L1 nesting
-environment, but it isn't worth trying to support it. Just make the
-dependency explicit.
+Only enumerate KVM_VCPU_TSC_SCALE when kvm_caps.has_tsc_control is true,
+since the scaling ratio is only meaningful when hardware TSC scaling is
+supported.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- arch/x86/kvm/svm/svm.c | 3 ++-
- arch/x86/kvm/vmx/vmx.c | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ Documentation/virt/kvm/devices/vcpu.rst | 36 ++++++++++++++++++++++++-
+ arch/x86/include/uapi/asm/kvm.h         |  6 +++++
+ arch/x86/kvm/x86.c                      | 22 +++++++++++++++
+ 3 files changed, 63 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
-index e7fdd7a9c280..7817752533fe 100644
---- a/arch/x86/kvm/svm/svm.c
-+++ b/arch/x86/kvm/svm/svm.c
-@@ -5546,7 +5546,8 @@ static __init int svm_hardware_setup(void)
- 				     XFEATURE_MASK_BNDCSR);
+diff --git a/Documentation/virt/kvm/devices/vcpu.rst b/Documentation/virt/kvm/devices/vcpu.rst
+index 5e3805820010..56562b932280 100644
+--- a/Documentation/virt/kvm/devices/vcpu.rst
++++ b/Documentation/virt/kvm/devices/vcpu.rst
+@@ -243,7 +243,10 @@ Returns:
+ Specifies the guest's TSC offset relative to the host's TSC. The guest's
+ TSC is then derived by the following equation:
  
- 	if (tsc_scaling) {
--		if (!boot_cpu_has(X86_FEATURE_TSCRATEMSR)) {
-+		if (!boot_cpu_has(X86_FEATURE_TSCRATEMSR) ||
-+		    !boot_cpu_has(X86_FEATURE_CONSTANT_TSC)) {
- 			tsc_scaling = false;
- 		} else {
- 			pr_info("TSC scaling supported\n");
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index 5c2c33a5f7dc..4f6035d72bbe 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -8696,7 +8696,7 @@ __init int vmx_hardware_setup(void)
- 	if (!enable_apicv || !cpu_has_vmx_ipiv())
- 		enable_ipiv = false;
+-  guest_tsc = host_tsc + KVM_VCPU_TSC_OFFSET
++  guest_tsc = ((host_tsc * tsc_scale_ratio) >> tsc_scale_bits) + KVM_VCPU_TSC_OFFSET
++
++The values of tsc_scale_ratio and tsc_scale_bits can be obtained using
++the KVM_VCPU_TSC_SCALE attribute.
  
--	if (cpu_has_vmx_tsc_scaling())
-+	if (cpu_has_vmx_tsc_scaling() && boot_cpu_has(X86_FEATURE_CONSTANT_TSC))
- 		kvm_caps.has_tsc_control = true;
+ This attribute is useful to adjust the guest's TSC on live migration,
+ so that the TSC counts the time during which the VM was paused. The
+@@ -292,3 +295,34 @@ From the destination VMM process:
  
- 	kvm_caps.max_tsc_scaling_ratio = KVM_VMX_TSC_MULTIPLIER_MAX;
+ 7. Write the KVM_VCPU_TSC_OFFSET attribute for every vCPU with the
+    respective value derived in the previous step.
++
++4.2 ATTRIBUTE: KVM_VCPU_TSC_SCALE
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++:Parameters: struct kvm_vcpu_tsc_scale
++
++Returns:
++
++	 ======= ======================================
++	 -EFAULT Error reading the provided parameter
++		 address.
++	 -ENXIO  Attribute not supported (no TSC scaling)
++	 -EINVAL Invalid request to write the attribute
++	 ======= ======================================
++
++This read-only attribute reports the guest's TSC scaling factor, in the form
++of a fixed-point number represented by the following structure::
++
++  struct kvm_vcpu_tsc_scale {
++	__u64 tsc_ratio;
++	__u64 tsc_frac_bits;
++  };
++
++The tsc_frac_bits field indicates the location of the fixed point, such that
++host TSC values are converted to guest TSC using the formula:
++
++  guest_tsc = ((host_tsc * tsc_ratio) >> tsc_frac_bits) + offset
++
++Userspace can use this to precisely calculate the guest TSC from the host
++TSC at any given moment. This is needed for accurate migration of guests,
++as described in the documentation for the KVM_VCPU_TSC_OFFSET attribute.
+diff --git a/arch/x86/include/uapi/asm/kvm.h b/arch/x86/include/uapi/asm/kvm.h
+index 5f2b30d0405c..384be9a53395 100644
+--- a/arch/x86/include/uapi/asm/kvm.h
++++ b/arch/x86/include/uapi/asm/kvm.h
+@@ -961,6 +961,12 @@ struct kvm_hyperv_eventfd {
+ /* for KVM_{GET,SET,HAS}_DEVICE_ATTR */
+ #define KVM_VCPU_TSC_CTRL 0 /* control group for the timestamp counter (TSC) */
+ #define   KVM_VCPU_TSC_OFFSET 0 /* attribute for the TSC offset */
++#define   KVM_VCPU_TSC_SCALE  1 /* attribute for TSC scaling factor */
++
++struct kvm_vcpu_tsc_scale {
++	__u64 tsc_ratio;
++	__u64 tsc_frac_bits;
++};
+ 
+ /* x86-specific KVM_EXIT_HYPERCALL flags. */
+ #define KVM_EXIT_HYPERCALL_LONG_MODE	_BITULL(0)
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index d1327d5fba3f..2179ea2da8e0 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -5930,6 +5930,9 @@ static int kvm_arch_tsc_has_attr(struct kvm_vcpu *vcpu,
+ 	case KVM_VCPU_TSC_OFFSET:
+ 		r = 0;
+ 		break;
++	case KVM_VCPU_TSC_SCALE:
++		r = kvm_caps.has_tsc_control ? 0 : -ENXIO;
++		break;
+ 	default:
+ 		r = -ENXIO;
+ 	}
+@@ -5950,6 +5953,22 @@ static int kvm_arch_tsc_get_attr(struct kvm_vcpu *vcpu,
+ 			break;
+ 		r = 0;
+ 		break;
++	case KVM_VCPU_TSC_SCALE: {
++		struct kvm_vcpu_tsc_scale scale;
++
++		if (!kvm_caps.has_tsc_control) {
++			r = -ENXIO;
++			break;
++		}
++
++		scale.tsc_ratio = vcpu->arch.l1_tsc_scaling_ratio;
++		scale.tsc_frac_bits = kvm_caps.tsc_scaling_ratio_frac_bits;
++		r = -EFAULT;
++		if (copy_to_user(uaddr, &scale, sizeof(scale)))
++			break;
++		r = 0;
++		break;
++	}
+ 	default:
+ 		r = -ENXIO;
+ 	}
+@@ -5989,6 +6008,9 @@ static int kvm_arch_tsc_set_attr(struct kvm_vcpu *vcpu,
+ 		r = 0;
+ 		break;
+ 	}
++	case KVM_VCPU_TSC_SCALE:
++		r = -EINVAL; /* Read only */
++		break;
+ 	default:
+ 		r = -ENXIO;
+ 	}
 -- 
 2.51.0
 
