@@ -1,114 +1,145 @@
-Return-Path: <linux-doc+bounces-86620-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86621-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8JurJ8V0/2nE6gAAu9opvQ
-	(envelope-from <linux-doc+bounces-86620-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 19:54:13 +0200
+	id CPIBLKCN/2nV7gAAu9opvQ
+	(envelope-from <linux-doc+bounces-86621-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 21:40:16 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 309C2500D3F
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 19:54:13 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 28BE7501407
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 21:40:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 7A3773003803
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 17:54:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1CFD5300DA5F
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 19:40:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6280937BE8C;
-	Sat,  9 May 2026 17:54:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D77433BE155;
+	Sat,  9 May 2026 19:40:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="FvLj6KOM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0011.hostedemail.com [216.40.44.11])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B55C175A95;
-	Sat,  9 May 2026 17:54:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A93C439DBE4;
+	Sat,  9 May 2026 19:40:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778349249; cv=none; b=PEsiGqhvNb740owsoTD8iAx2WOXykdnoL6J8c4prBI+df+ebLhiin2Xa0xQyeJLeiJLU3JrpnrXFSstKXhzqPw+UrXwvuWoSqWRI2n4dVzH7GXWJZviHfgJSAsMexd2F2tIbW1ha5lVqUmujRtrtHZloClsGV/yWhzutXkEBog4=
+	t=1778355613; cv=none; b=eGMUel8CC7kPxbtcNk4d+dbo+A0HYA6OJATqWCh3pa4qhZOnE9qaS305JfaPZuaebI12IcDyaUGGlCCm4D3xhZ1+hcm0TFbEM2oWUqf6sxqu5kUFT3Cjs9U9PtLcCpocS0Sp8WVUVzJlnAfWRcWwsFmASkAxIyO8vW1UM6peP6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778349249; c=relaxed/simple;
-	bh=Jg4Vzdh3WC0PBHRv+xPu1VBKqkNn3CBcsVX9iz0++R0=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=Jmc6DJoWd+UHCkEPW9QDYDZj8zSlDApaQF9SIAf8TzVN1IXuSVvQf1dpavXO3oYkn35COXiwoEGnkRk/m/W29b+uLRA8tjO9r+kv4btkAw/vezIb7AvtnHGuS837C68aw1CXekyskQXVJrrm+NyghbDXQ33i9if2GM/5XzOKuQc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
-Received: from omf10.hostedemail.com (lb01a-stub [10.200.18.249])
-	by unirelay06.hostedemail.com (Postfix) with ESMTP id 5A8F11C00F9;
-	Sat,  9 May 2026 17:54:00 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf10.hostedemail.com (Postfix) with ESMTPA id 7461630;
-	Sat,  9 May 2026 17:53:55 +0000 (UTC)
-Message-ID: <863d3c57dd748bbad25e9c5b7a4fa710e16c6df1.camel@perches.com>
-Subject: Re: [PATCH v3 00/13] Improve process/maintainers output
-From: Joe Perches <joe@perches.com>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Jonathan Corbet
-	 <corbet@lwn.net>, Mauro Carvalho Chehab <mchehab@kernel.org>, Miguel Ojeda
-	 <ojeda@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	rust-for-linux@vger.kernel.org, =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron	
- <bjorn3_gh@protonmail.com>, Alice Ryhl <aliceryhl@google.com>, Andreas
- Hindborg	 <a.hindborg@kernel.org>, Andrew Morton
- <akpm@linux-foundation.org>, Benno Lossin <lossin@kernel.org>, Boqun Feng
- <boqun@kernel.org>, Danilo Krummrich <dakr@kernel.org>,  Gary Guo
- <gary@garyguo.net>, Matteo Croce <technoboy85@gmail.com>, Shuah Khan	
- <skhan@linuxfoundation.org>, Trevor Gross <tmgross@umich.edu>
-Date: Sat, 09 May 2026 10:53:54 -0700
-In-Reply-To: <cover.1778309595.git.mchehab+huawei@kernel.org>
-References: <cover.1778309595.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
+	s=arc-20240116; t=1778355613; c=relaxed/simple;
+	bh=C2S0N5RnhH/2vct1Y/2IEjCnbP2zJTdvkWAdLDK1SP4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=dgbFDDJ+Wz14rJS60MNOkf1I8b1e+aNxQWcXguG54lez50+HfbjmVuYNpOR7OoUmNgIVQYSBSdF/i2mTnGZ3hbw0knxWI+jNaR+wVjIH2edtvlqzn7QOb3onyVtjV5eUQGRehrj39sc3LG5eLMBP17Zco47tumJ+U8D4w2H2Hiw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=FvLj6KOM; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=apx2itl6ido/GDl3BMcfRXwcHiMC7anhmX6nWBT36b4=; b=FvLj6KOMbWMxDi06MfXhf1T4Db
+	gOGH3pxNNBEqVPUNxs+pZzjJdIqkGaamay5kH9Bu3yRxyIHMTOW9/T1sHDUn8uZURXPvaH9WElPm8
+	rmxQam/srjIgPv1mISpW8wJ7NA2Ld/bmhZERgs2DwA8rT7TmcJGBuOwyYBTckIrB3pLw=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wLnWa-00287z-6L; Sat, 09 May 2026 21:39:44 +0200
+Date: Sat, 9 May 2026 21:39:44 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: Shuah Khan <skhan@linuxfoundation.org>,
+	Adrien Reynard <reynard.adrien.08@gmail.com>,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Vincenzo Frascino <vincenzo.frascino@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Richard Weinberger <richard@nod.at>,
+	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	"open list:KASAN" <kasan-dev@googlegroups.com>,
+	"open list:DOCUMENTATION PROCESS" <workflows@vger.kernel.org>,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	"open list:NETWORKING [GENERAL]" <netdev@vger.kernel.org>,
+	"open list:USER-MODE LINUX (UML)" <linux-um@lists.infradead.org>
+Subject: Re: [PATCH 4/5] docs: fix repeated prepositions across documentation
+Message-ID: <3b4357a7-f70d-41b0-a75d-c30f9fb7dd98@lunn.ch>
+References: <20260508163804.16267-1-reynard.adrien.08@gmail.com>
+ <2b771350-0562-4cb1-b9b3-cc3ce59b1a63@linuxfoundation.org>
+ <3c6cde1a-9ce0-4d63-ba89-820c596cff3e@lunn.ch>
+ <27c61395-f04f-420c-9a84-7e27773f2027@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Stat-Signature: hrc1q7gjow5xrie88r4c98wywqccijw6
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Session-ID: U2FsdGVkX18Wc5FBJ2qw2F56aPUrkhd44M4hxzgJ6mU=
-X-HE-Tag: 1778349235-666253
-X-HE-Meta: U2FsdGVkX1+T+JkWvcDKIbZh2OBWR3H80StHcKEDyCLoSOwJpAZ/a1w0B8Xv4piA/QsD+aWUTkIkW/+L+YCWL1ozXD7RuO9albFGxlA4n2qPijW+OEDAWAw2gk2e7G3hYXL8nsqHjbIp0wAMBzMizN6uzS9B5duo+LvarMm60CFE3Q3T05XYJxDQ3a4N3USfbVb+t4V0qpjgGaFyzNPLpkt4tsnqnV53KfSxZqCkMQBigQUaafOhm/r7mn+bKfAqNHgZPWnKx1M0Ehp5H3mRvuG2kdbZPcpGsOrXfSVGKyrXmxhyXvJNO4VptM2Nv8XM
-X-Rspamd-Queue-Id: 309C2500D3F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <27c61395-f04f-420c-9a84-7e27773f2027@infradead.org>
+X-Rspamd-Queue-Id: 28BE7501407
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.04 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,protonmail.com,google.com,kernel.org,linux-foundation.org,garyguo.net,gmail.com,linuxfoundation.org,umich.edu];
-	TAGGED_FROM(0.00)[bounces-86620-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[perches.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
 	MIME_TRACE(0.00)[0:+];
+	TO_DN_ALL(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86621-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,gmail.com,google.com,arm.com,lwn.net,davemloft.net,kernel.org,redhat.com,nod.at,cambridgegreys.com,sipsolutions.net,googlegroups.com,vger.kernel.org,lists.infradead.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[joe@perches.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-0.948];
+	FROM_NEQ_ENVFROM(0.00)[andrew@lunn.ch,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[lunn.ch:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Sat, 2026-05-09 at 08:56 +0200, Mauro Carvalho Chehab wrote:
-> This series improve the output at process/maintainers: instead of a
-> pure enriched text, the maintainer's file content is now converted
-> to a table, and has gained a javascript to allow filtering entries.
-[]
-> (*) Currently, MAINTAINERS file has several entries not sorted.
->     One has to run:
->=20
-> 	 scripts/parse-maintainers.pl --input MAINTAINERS --output MAINTAINERS.n=
-ew
+> > Can we get the tool changed to add a warning, something like:
+> > 
+> >   WARNING: This tool uses very simple pattern matching to look for
+> >   repeated words. It does not understand the complexity of English,
+> >   and will often result in false positive reports. Please assume it is
+> >   wrong until proven otherwise.
+> 
+> There was no commit log and no cover letter AFAIK.
+> Do we know what tool was used?
+> 
+> Adrien, how did you discover these repeated words?
+> 
+> (If it's my script from 2021, I'll gladly update it.)
 
-Maybe add --order
+Thinking about it some more, i think the warning might actually need
+to be different.
+
+If this tool has been around since 2021, all the real problems have
+been solved, leaving only the false positives. So the warning probably
+needs to be much stronger, saying that it probably only reports false
+positives, unless the code is new.
+
+Maybe we also want to extend the tool to have a list all the known
+false positives?
+
+      Andrew
 
