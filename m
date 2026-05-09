@@ -1,60 +1,59 @@
-Return-Path: <linux-doc+bounces-86602-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86606-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0GCwNwED/2nf1AAAu9opvQ
-	(envelope-from <linux-doc+bounces-86602-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:48:49 +0200
+	id CM6KK/ER/2lU1wAAu9opvQ
+	(envelope-from <linux-doc+bounces-86606-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 12:52:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A7744FF096
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:48:49 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D46014FF649
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 12:52:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5E1C83016492
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 09:48:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 805CD300DE1D
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 10:52:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9A603612CF;
-	Sat,  9 May 2026 09:48:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B05A132AAB5;
+	Sat,  9 May 2026 10:52:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="Pj0nyRL7"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WOCOg8mK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 029D133AD9A;
-	Sat,  9 May 2026 09:48:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C49D2F8EB0;
+	Sat,  9 May 2026 10:52:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778320127; cv=none; b=A2ewTkbuondVN661UJEzAh5hcNGxPU9VmAAXdXdz1oAiDp+Ve3cXag6RQ05vtiAeT8RJ6236QkKckhG0wjykk/IZkF5abH67XybYA5HJ7O+M6gNt4QET70bQDqyt4K7ornisZaNVqq4mQmPZHw7i7wZD5Xbr5fRbZOV/ueSslDs=
+	t=1778323949; cv=none; b=cgfq9JJZsX7TdZ4e+GyJ4cstMpI4ljumcecPd58HW1rN1afgEZIvj5K53aswbziMHCG4gaxEU1LUW1Q+WTFDeYU2IWxzA6xii3Z6lh3rtBqICpGOyz98KsOKG5+ODtFiC8q2mvu2HZZMsXUMJqSkHmN32Cl+/A/H5WGXVA8lcK8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778320127; c=relaxed/simple;
-	bh=IuHy3SDaSF/O1aCJXj/7DDXbuuZ10k44yWHhL1/NIOI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iDHbsAsvRbZV13+8Eo0cg6ICNmdZ2SFD/TqPWReV/CNvrekpu+hgPDNFaeeMTiZRr37WEZGlC041nB+BLgVngXgVjI+m5Qpybquh8VRNCaHxZfddP89zRVpgO9fC+xQ9jnmLA571A4ssVr4bK06/x2e/stORKocp8Q9Dgw9LyZk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=Pj0nyRL7; arc=none smtp.client-ip=51.159.59.229
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
-	t=1778320121; bh=1351AWjvGF+aSU041y3R7KzOz/KESsLI96cOBC0CfK0=;
-	h=From:Message-ID:From;
-	b=Pj0nyRL78Mqu/8FR5ilGNVDNqAgfGcfzVnjljW23lVsOMW7nvKATzUT97VocHhp3y
-	 nf9JTDQnUfhtFFZi/YBidsMSgtTIt4sLs82dOdntmdc7ZtpZ5vvZLKm25UJkapMJtx
-	 zFa7dFLUR9Tr6zeJ2TNhFl9v+eCVqg3Q6Wc3b748=
-Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
-	by mta1.formilux.org (Postfix) with ESMTP id 8D6D9C0A83;
-	Sat, 09 May 2026 11:48:41 +0200 (CEST)
-From: Willy Tarreau <w@1wt.eu>
-To: greg@kroah.com
-Cc: Leon Romanovsky <leon@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        skhan@linuxfoundation.org, security@kernel.org,
-        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Willy Tarreau <w@1wt.eu>,
-        Greg KH <gregkh@linuxfoundation.org>
-Subject: [PATCH v3 3/3] Documentation: security-bugs: clarify requirements for AI-assisted reports
-Date: Sat,  9 May 2026 11:47:55 +0200
-Message-ID: <20260509094755.2838-4-w@1wt.eu>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260509094755.2838-1-w@1wt.eu>
+	s=arc-20240116; t=1778323949; c=relaxed/simple;
+	bh=3i7Cw3EoeN0KEWZOioivxGUrtt5OUv4yp2WpCaWB9zI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PHlj19z1LF9qPaEs/m84l5q7cqHu0qrIVajjngEPfwurFHrK2a8aFoejenCPSiYDErTlhJgwK8OVSc8bFkjuQSuvOxaeb34gYQBpZa4RMfjcuMnzsYJUD6FeeKn1Im3kb/z13aox9MecfycbpsQRW7qOO08Hv2SKlUMpWX6/4Qo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WOCOg8mK; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28682C2BCF6;
+	Sat,  9 May 2026 10:52:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778323949;
+	bh=3i7Cw3EoeN0KEWZOioivxGUrtt5OUv4yp2WpCaWB9zI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=WOCOg8mKP2NnjbV6BfTqVNsCTSwc5cH2Hmqc/PmjYE4OUahUETxOAV+G9qXCjSsgm
+	 yS4WVMfkIimFKyEbR9TmA2ZSSpfWv5/CwyoiWhvJpKfnrsC1to5FaMo1wjKJEK+SF8
+	 DhIyHEY/gEjInNBPyr++/ejHRJcDOb9miN+fpulRTWTo3A592kM07aff1s+Ddzxgi3
+	 +MgiFzOA3mIJSWC8YeZ7VRCs5dTYjlen36osbTNsC0SOHS+Q4OvmNtZXVZHvZGRhZC
+	 uZzEPxXtxy7a98AjhXRdkmTJRJtOC2FQ+h83rNm5DEl1k/1msUP/N1TjCUmEC1OEAJ
+	 srQVP/wK2YpaA==
+Date: Sat, 9 May 2026 13:52:22 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: Willy Tarreau <w@1wt.eu>
+Cc: greg@kroah.com, Jonathan Corbet <corbet@lwn.net>,
+	skhan@linuxfoundation.org, security@kernel.org,
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 0/3] Documentation: security-bugs: new updates
+ covering triage and AI
+Message-ID: <20260509105222.GA15586@unreal>
 References: <20260509094755.2838-1-w@1wt.eu>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -62,125 +61,60 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 6A7744FF096
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260509094755.2838-1-w@1wt.eu>
+X-Rspamd-Queue-Id: D46014FF649
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86602-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[1wt.eu:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-86606-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-0.999];
+	FROM_NEQ_ENVFROM(0.00)[leon@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linuxfoundation.org:email]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-AI tools are increasingly used to assist in bug discovery. While these
-tools can identify valid issues, reports that are submitted without
-manual verification often lack context, contain speculative impact
-assessments, or include unnecessary formatting. Such reports increase
-triage effort, waste maintainers' time and may be ignored.
+On Sat, May 09, 2026 at 11:47:52AM +0200, Willy Tarreau wrote:
+> This series tries to translate recent discussions on the security list
+> on how to better handle reports. It details:
+>   - when not to Cc: the security list
+>   - what classes of bugs do not need to be handled privately
+>   - minimum requirements for AI-assisted reports
+> 
+> As usual, this is probably perfectible but can already help in the short
+> term as we can point it to reporters, so barring any strong disagreement,
+> better continue to proceed in small incremental improvements and observe
+> the effects.
+> 
+> Thanks!
+> Willy
 
-Reports where the reporter has verified the issue and the proposed fix
-typically meet quality standards. This documentation outlines specific
-requirements for length, formatting, and impact evaluation to reduce
-the effort needed to deal with these reports.
+<...>
 
-Cc: Greg KH <gregkh@linuxfoundation.org>
-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Leon Romanovsky <leon@kernel.org>
-Signed-off-by: Willy Tarreau <w@1wt.eu>
----
- Documentation/process/security-bugs.rst | 57 +++++++++++++++++++++++++
- 1 file changed, 57 insertions(+)
+>   - Leon, I kept your reviewed-by since changes are very minimal and
+>     didn't change the initial spirit.
 
-diff --git a/Documentation/process/security-bugs.rst b/Documentation/process/security-bugs.rst
-index 54260dbfc64d5..f85c65f31f12f 100644
---- a/Documentation/process/security-bugs.rst
-+++ b/Documentation/process/security-bugs.rst
-@@ -167,6 +167,63 @@ the Linux kernel security team only.  Your message will be triaged, and you
- will receive instructions about whom to contact, if needed.  Your message may
- equally be forwarded as-is to the relevant maintainers.
- 
-+Responsible use of AI to find bugs
-+----------------------------------
-+
-+A significant fraction of bug reports submitted to the security team are
-+actually the result of code reviews assisted by AI tools. While this can be an
-+efficient means to find bugs in rarely explored areas, it causes an overload on
-+maintainers, who are sometimes forced to ignore such reports due to their poor
-+quality or accuracy. As such, reporters must be particularly cautious about a
-+number of points which tend to make these reports needlessly difficult to
-+handle:
-+
-+  * **Length**: AI-generated reports tend to be excessively long, containing
-+    multiple sections and excessive detail. This makes it difficult to spot
-+    important information such as affected files, versions, and impact. Please
-+    ensure that a clear summary of the problem and all critical details are
-+    presented first. Do not require triage engineers to scan multiple pages of
-+    text. Configure your tools to produce concise, human-style reports.
-+
-+  * **Formatting**: Most AI-generated reports are littered with Markdown tags.
-+    These decorations complicate the search for important information and do
-+    not survive the quoting processes involved in forwarding or replying.
-+    Please **always convert your report to plain text** without any formatting
-+    decorations before sending it.
-+
-+  * **Impact Evaluation**: Many AI-generated reports lack an understanding of
-+    the kernel's threat model and go to great lengths inventing theoretical
-+    consequences. This adds noise and complicates triage. Please stick to
-+    verifiable facts (e.g., "this bug permits any user to gain CAP_NET_ADMIN")
-+    without enumerating speculative implications. Have your tool read this
-+    documentation as part of the evaluation process.
-+
-+  * **Reproducer**: AI-based tools are often capable of generating reproducers.
-+    Please always ensure your tool provides one and **test it thoroughly**. If
-+    the reproducer does not work, or if the tool cannot produce one, the
-+    validity of the report should be seriously questioned. Note that since the
-+    report will be posted to a public list, the reproducer should only be
-+    shared upon maintainers' request.
-+
-+  * **Propose a Fix**: Many AI tools are actually better at writing code than
-+    evaluating it. Please ask your tool to propose a fix and **test it** before
-+    reporting the problem. If the fix cannot be tested because it relies on
-+    rare hardware or almost extinct network protocols, the issue is likely not
-+    a security bug. In any case, if a fix is proposed, it must adhere to
-+    Documentation/process/submitting-patches.rst and include a 'Fixes:' tag
-+    designating the commit that introduced the bug.
-+
-+Failure to consider these points exposes your report to the risk of being
-+ignored.
-+
-+Use common sense when evaluating the report. If the affected file has not been
-+touched for more than one year and is maintained by a single individual, it is
-+likely that usage has declined and exposed users are virtually non-existent
-+(e.g., drivers for very old hardware, obsolete filesystems). In such cases,
-+there is no need to consume a maintainer's time with an unimportant report. If
-+the issue is clearly trivial and publicly discoverable, you should report it
-+directly to the public mailing lists.
-+
- Sending the report
- ------------------
- 
--- 
-2.52.0
-
+Thanks. The intent is the same, and I'm not the right person to argue over
+the precise wording anyway.
 
