@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-86638-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86647-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yBYINwy6/2mm9wAAu9opvQ
-	(envelope-from <linux-doc+bounces-86638-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:49:48 +0200
+	id MIIpH7S6/2nm9wAAu9opvQ
+	(envelope-from <linux-doc+bounces-86647-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:52:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 522A3501BD2
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:49:47 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCB66501D09
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:52:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7A8113021B0D
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:48:57 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D7CBA3048DDD
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:49:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 833F63D7D61;
-	Sat,  9 May 2026 22:48:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D8BD3DB652;
+	Sat,  9 May 2026 22:48:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="XdZwbo1A"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Zf77LfPt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D86EA31AF3B;
-	Sat,  9 May 2026 22:48:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CA6B3D3D06;
+	Sat,  9 May 2026 22:48:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778366930; cv=none; b=s6wsUsVP5wZ1U+FwiBOYtSBtZ896nOoxny/N5dkCTSX55vzjZJDgwm/LrglI1X3T6GXYaTikIAOaXg0BVA5++XwX2NCZ66VZJxpY5pdrIpzOHjBeMKddj5xJ4VLUYK2VFcT8MOIv6zFAbZuKirfUnMPNoGddbOJmzh8dS1qcI0I=
+	t=1778366932; cv=none; b=irBF2PJTNe/ymsly8O4GrL2GH7nSf2cpoODOjv+hkKy5vdDVkVUZkbxTDaqVaHYfVrMtrozDDfzMUUa7PkaFNcbck7IO9wIiD/FuK76h1LyCIPX4E542TEmKJp05JgHFDI4J+BJKH41a3pVqq//EEtLbwEeIjsa971+uMJv/OEI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778366930; c=relaxed/simple;
-	bh=RFCADm3ZcxDNByR14128b6hc8iugQrF0zppiu1uXGG0=;
+	s=arc-20240116; t=1778366932; c=relaxed/simple;
+	bh=nD8NLvLQQAy3Q5Zob38SOomS4XrhxLrSOfIB14pPA60=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=d8EN4DMJjinT1rTdqG5/ozoT117SDwDmVKtsJ+JevHpSp8vBo1fEkkUFhmbsKsExl3seICOoFPC6DEwMcHpmGOj3UQ7ZzRlDBWH+Xt7E95jsTXBG5z/wKqcOpP+Pv4ZlSacOdxYoohsgc8AGjbw5SmLcC0MgCK7RW0h6l2HxaLU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=XdZwbo1A; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version; b=C3kZkw1cmJOZ3+s6o+wbqHeFGN4jyNfktsyy/zTbaDqygl730YSmHFCVLy0h6DwKdQ4VQfq3N9Ot4DNzquME97PDcn3a+X3qgXdoR+fq9yl4em2ZAoUPUM464xVEbgTINkVJYF92o/PAklb9FSiZkVdItdGMoy0wrsIhPcYBxkY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Zf77LfPt; arc=none smtp.client-ip=90.155.50.34
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=casper.srs.infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=6tRK559BiNuC9vPX6A/P9bB+NgbxmEIjWbF4mmHiKwg=; b=XdZwbo1A+QS0GQ4rSXUX4N1mON
-	+BlsbG3jDpcSWQhV5QxKCntdc8Vov11hWedcSRVSsOFPwppBqsZ6Nis+O8bwl2CCSQ5hYR8W++geD
-	vukV7rjaZBOrvt6I9xowd93yPY0C0Lzh/iojh9p1uQWpLnPfReYKg8eWZhCQMUPCsNXSqu/Y7toLg
-	E6Frch+y/WEDPUhLCG957OQIe+Z+QGM3b4WJ3AXNaeyT5E4hHAIpCsvm122/2Vp2ysz/lvM+nk7kL
-	WDy8f4TtKpFr0JcieI8f8+0F+JBj1RNoxvcmBf9YzAQnVG0oBiA+L4x/Lzr26MdYoNPIdFM9YVMzi
-	3sLkfLjQ==;
+	bh=HcPos2+xuZTjBV7pxq7NSClTpw+Fu99QdQJ5Jy1Ls+M=; b=Zf77LfPtfI70hL1gqLbAhPtLtX
+	ibkr66p3p6/yNwf1wG6qqc/ms/D0cd+mf/gL9RKluGUlABJWL954X+hC7rfWjImiJ7CROZMthVqh7
+	OTkMC4vADFkwf63SWHGMNbF2qJVf9rruhAcDBmTZgzvOH0jHPndB5bEQv9StPED9R1rJWRdq5KqsA
+	idLIC0tiDnsbUYQlxQkaFsJ1rxU7HJqRe1UHoilCGBY2oTbY3Qok9mr4jH7I9F9puYYvsCXOgoRSg
+	aGZgxEUEluS1lC7dL54o1eq6sM/iCEMUEUte4b9q7W4oNzFdeq8Z9C54Hgb9kHKHIxTuTapNwFb2v
+	46Z9XONA==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wLqTE-00000008wzN-1WDo;
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wLqTD-000000060LP-2pj4;
 	Sat, 09 May 2026 22:48:30 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wLqTD-0000000DhJ3-1Fbj;
+	id 1wLqTD-0000000DhJ7-1V2k;
 	Sat, 09 May 2026 23:48:27 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 28/30] KVM: x86: Remove runtime Xen TSC frequency CPUID update
-Date: Sat,  9 May 2026 23:46:54 +0100
-Message-ID: <20260509224824.3264567-29-dwmw2@infradead.org>
+Subject: [PATCH v4 29/30] x86/kvm: Obtain TSC frequency from CPUID if present
+Date: Sat,  9 May 2026 23:46:55 +0100
+Message-ID: <20260509224824.3264567-30-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
@@ -93,21 +93,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: 522A3501BD2
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Rspamd-Queue-Id: DCB66501D09
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86638-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86647-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
@@ -117,98 +117,108 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.998];
 	DKIM_TRACE(0.00)[infradead.org:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,amazon.co.uk:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:mid,infradead.org:dkim,amazon.co.uk:email]
 X-Rspamd-Action: no action
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Remove the code in kvm_cpuid() that dynamically updates the Xen TSC
-info CPUID leaf at runtime. This code was updating the wrong sub-leaf
-anyway (0x40000x03/2 EAX is the *host* TSC frequency per the Xen ABI,
-not the guest frequency which belongs in 0x40000x03/0 ECX).
+In https://lore.kernel.org/all/1222881242.9381.17.camel@alok-dev1/
+a proposal was made for generic CPUID conventions across hypervisors.
+It was mostly shot down in flames, but the leaf at 0x40000010
+containing timing information didn't die.
 
-Userspace now has all the information it needs to populate the Xen TSC
-info leaves (and the generic 0x40000010 timing leaf) at vCPU setup time:
-
-  - KVM_GET_CLOCK_GUEST returns the pvclock_vcpu_time_info structure
-    containing tsc_to_system_mul and tsc_shift (Xen leaf index 1)
-  - KVM_VCPU_TSC_EFFECTIVE_FREQ returns the effective TSC and bus
-    frequencies in kHz (Xen leaf index 2, and 0x40000010)
-  - KVM_VCPU_TSC_SCALE returns the raw hardware scaling ratio for
-    precise arithmetic (VMClock)
-
-This eliminates the last instance of KVM modifying guest CPUID entries
-at runtime for timing information.
+It's used by XNU and FreeBSD guests under all hypervisors to determine
+the TSC frequency, and also exposed by the EC2 Nitro hypervisor and
+VMware. Use it under KVM to obtain the TSC frequency more accurately,
+instead of reverse-calculating the frequency from the mul/shift values
+in the KVM clock.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/kvm/cpuid.c | 16 ----------------
- arch/x86/kvm/xen.h   | 13 -------------
- 2 files changed, 29 deletions(-)
+ arch/x86/include/asm/kvm_para.h      |  1 +
+ arch/x86/include/uapi/asm/kvm_para.h | 11 +++++++++++
+ arch/x86/kernel/kvm.c                | 10 ++++++++++
+ arch/x86/kernel/kvmclock.c           |  7 ++++++-
+ 4 files changed, 28 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
-index 621d950ec692..826637a0b72d 100644
---- a/arch/x86/kvm/cpuid.c
-+++ b/arch/x86/kvm/cpuid.c
-@@ -2117,22 +2117,6 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
- 		} else if (function == 0x80000007) {
- 			if (kvm_hv_invtsc_suppressed(vcpu))
- 				*edx &= ~feature_bit(CONSTANT_TSC);
--		} else if (IS_ENABLED(CONFIG_KVM_XEN) &&
--			   kvm_xen_is_tsc_leaf(vcpu, function)) {
--			/*
--			 * Update guest TSC frequency information if necessary.
--			 * Ignore failures, there is no sane value that can be
--			 * provided if KVM can't get the TSC frequency.
--			 */
--			if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, vcpu))
--				kvm_guest_time_update(vcpu);
--
--			if (index == 1) {
--				*ecx = vcpu->arch.pvclock_tsc_mul;
--				*edx = vcpu->arch.pvclock_tsc_shift;
--			} else if (index == 2) {
--				*eax = div_u64(vcpu->arch.hw_tsc_hz, 1000);
--			}
- 		}
- 	} else {
- 		*eax = *ebx = *ecx = *edx = 0;
-diff --git a/arch/x86/kvm/xen.h b/arch/x86/kvm/xen.h
-index 59e6128a7bd3..f372855857a8 100644
---- a/arch/x86/kvm/xen.h
-+++ b/arch/x86/kvm/xen.h
-@@ -50,14 +50,6 @@ static inline void kvm_xen_sw_enable_lapic(struct kvm_vcpu *vcpu)
- 		kvm_xen_inject_vcpu_vector(vcpu);
+diff --git a/arch/x86/include/asm/kvm_para.h b/arch/x86/include/asm/kvm_para.h
+index 4a47c16e2df8..03fa1228fcf2 100644
+--- a/arch/x86/include/asm/kvm_para.h
++++ b/arch/x86/include/asm/kvm_para.h
+@@ -121,6 +121,7 @@ static inline long kvm_sev_hypercall3(unsigned int nr, unsigned long p1,
+ void kvmclock_init(void);
+ void kvmclock_disable(void);
+ bool kvm_para_available(void);
++unsigned int kvm_para_tsc_khz(void);
+ unsigned int kvm_arch_para_features(void);
+ unsigned int kvm_arch_para_hints(void);
+ void kvm_async_pf_task_wait_schedule(u32 token);
+diff --git a/arch/x86/include/uapi/asm/kvm_para.h b/arch/x86/include/uapi/asm/kvm_para.h
+index a1efa7907a0b..dc0d036fe678 100644
+--- a/arch/x86/include/uapi/asm/kvm_para.h
++++ b/arch/x86/include/uapi/asm/kvm_para.h
+@@ -44,6 +44,17 @@
+  */
+ #define KVM_FEATURE_CLOCKSOURCE_STABLE_BIT	24
+ 
++/*
++ * In https://lore.kernel.org/all/1222881242.9381.17.camel@alok-dev1/
++ * VMware proposed a timing information leaf providing the TSC and
++ * local APIC timer frequencies:
++ *
++ *  # EAX: (Virtual) TSC frequency in kHz.
++ *  # EBX: (Virtual) Bus (local apic timer) frequency in kHz.
++ *  # ECX, EDX: RESERVED (reserved fields are set to zero).
++ */
++#define KVM_CPUID_TIMING_INFO	0x40000010
++
+ #define MSR_KVM_WALL_CLOCK  0x11
+ #define MSR_KVM_SYSTEM_TIME 0x12
+ 
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 29226d112029..60375165b66c 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -910,6 +910,16 @@ bool kvm_para_available(void)
+ }
+ EXPORT_SYMBOL_GPL(kvm_para_available);
+ 
++unsigned int kvm_para_tsc_khz(void)
++{
++	u32 base = kvm_cpuid_base();
++
++	if (base && cpuid_eax(base) >= (base | KVM_CPUID_TIMING_INFO))
++		return cpuid_eax(base | KVM_CPUID_TIMING_INFO);
++
++	return 0;
++}
++
+ unsigned int kvm_arch_para_features(void)
+ {
+ 	return cpuid_eax(kvm_cpuid_base() | KVM_CPUID_FEATURES);
+diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
+index b5991d53fc0e..74aca22dc726 100644
+--- a/arch/x86/kernel/kvmclock.c
++++ b/arch/x86/kernel/kvmclock.c
+@@ -118,7 +118,12 @@ static inline void kvm_sched_clock_init(bool stable)
+ static unsigned long kvm_get_tsc_khz(void)
+ {
+ 	setup_force_cpu_cap(X86_FEATURE_TSC_KNOWN_FREQ);
+-	return pvclock_tsc_khz(this_cpu_pvti());
++
++	/*
++	 * If KVM advertises the frequency directly in CPUID, use that
++	 * instead of reverse-calculating it from the KVM clock data.
++	 */
++	return kvm_para_tsc_khz() ? : pvclock_tsc_khz(this_cpu_pvti());
  }
  
--static inline bool kvm_xen_is_tsc_leaf(struct kvm_vcpu *vcpu, u32 function)
--{
--	return static_branch_unlikely(&kvm_xen_enabled.key) &&
--	       vcpu->arch.xen.cpuid.base &&
--	       function <= vcpu->arch.xen.cpuid.limit &&
--	       function == (vcpu->arch.xen.cpuid.base | XEN_CPUID_LEAF(3));
--}
--
- static inline bool kvm_xen_msr_enabled(struct kvm *kvm)
- {
- 	return static_branch_unlikely(&kvm_xen_enabled.key) &&
-@@ -177,11 +169,6 @@ static inline bool kvm_xen_timer_enabled(struct kvm_vcpu *vcpu)
- {
- 	return false;
- }
--
--static inline bool kvm_xen_is_tsc_leaf(struct kvm_vcpu *vcpu, u32 function)
--{
--	return false;
--}
- #endif
- 
- int kvm_xen_hypercall(struct kvm_vcpu *vcpu);
+ static void __init kvm_get_preset_lpj(void)
 -- 
 2.51.0
 
