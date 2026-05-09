@@ -1,137 +1,177 @@
-Return-Path: <linux-doc+bounces-86584-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86590-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ODgkOTva/mmCxQAAu9opvQ
-	(envelope-from <linux-doc+bounces-86584-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:54:51 +0200
+	id YOTFCc7a/mnfxQAAu9opvQ
+	(envelope-from <linux-doc+bounces-86590-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52F4C4FE51B
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:54:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95B754FE577
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 0A39830138AE
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 06:54:45 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 4B0F2302978C
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 06:57:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5967C37996C;
-	Sat,  9 May 2026 06:54:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4263C3815F8;
+	Sat,  9 May 2026 06:56:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b="OsJDSYoq"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ClUXLCQD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from outbound.st.icloud.com (p-east2-cluster4-host6-snip4-5.eps.apple.com [57.103.78.206])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8E0E372EFF
-	for <linux-doc@vger.kernel.org>; Sat,  9 May 2026 06:54:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=57.103.78.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D6D337B409;
+	Sat,  9 May 2026 06:56:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778309680; cv=none; b=UC/ljFg/kwZyWPAGhdfvjuqGuzYpGExnSSbvDIWI5hTwc2a2XEItKPi8XbPLlvjNW0jLlRuBYFH9dKvx5EeX6iOEnKSj0FtIUoA/STtPOR+GMzzo9YzNQeB6N+zc4+seTe9sVBEA1mcX2QTVKXLfBxSfQi7NabpCcs+ChESovsw=
+	t=1778309813; cv=none; b=GSkFraWDHOJRCym3Ul7CxB4/VfFbaNi6oHJrm635cNTS7W5qI5cXIcXvvk+YPiuJfPofqUzIrYFhoUt9Ogaah+8KR6m1bp+d2NP9+5mop/lEhEiV4AyU2qfU6G3c/hzFSVkFzvzudrDl7CaIBoq+4rJCQ/SRGNJYTjlq3sIX37c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778309680; c=relaxed/simple;
-	bh=7SCitI/IKRgV/RD7FHgYtxomBF96XBJ+ngw6fZeM7l4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=S+Ko1fHbfgQaDFz8z5tp+uMBTMKPcx3Uvzbx2lQXz5oCMtan5NRzauYgNQ2dKWBXL1+PVcFs6y5F1DphU5NPfJFchdYyTye+FIArK4btAvbZexvYQNndUbVw2WoIPvbblK7C9G7fFBFmqk+sm/Qq1kb7DdJbMe8prWFfnwSZ170=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com; spf=pass smtp.mailfrom=icloud.com; dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b=OsJDSYoq; arc=none smtp.client-ip=57.103.78.206
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icloud.com
-Received: from outbound.st.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-east-1a-100-percent-7 (Postfix) with ESMTPS id 22E521800184;
-	Sat, 09 May 2026 06:54:37 +0000 (UTC)
-X-ICL-Out-Info: HUtFAUMEWwJACUgBTUQeDx5WFlZNRAJCTQhJBkMDRQVJF0wBTVIPDxhMCkEUWgpcQgtJAS1eCF4fTBwdDlgGEhZdRVsYRRlLHVgWAV8GWXIZWhRcGFNFUR9UWEEOCloBUFEdXwIKBEcEWxdGA1NFQQQXEVABWB5WXloXXk1HH0BNYkkBWhlbHEAXSm5NUw8PGVoUXBhTRVEfVFheBFNWDkEOGQNYAVlWXVxLVw8aXwtDWlVRDA5YHxYBQQpaUVoERlpAUC1eCF4fTBwdDlgGDFBNAUMICgJRHFYNVw==
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com; s=1a1hai; t=1778309677; x=1780901677; bh=7SCitI/IKRgV/RD7FHgYtxomBF96XBJ+ngw6fZeM7l4=; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:x-icloud-hme; b=OsJDSYoqykkNO89rAiJ5GTztmHrKOzdzmZPn+1L7U1IbhB6ucPwGIJsYLxYthr8FV0Lp1KiHpglrSgO8lDtbpb/SXd9xIXRDI7FXcq+x41SSS1aC9s6snHtIqXjTPjaH530P+uJ0jbYOazWtkuWYSfxmAhfNoFKYlqR9KXPlecedCnZGuYiiH+vkUo61aeAah9Dwn01hQC/KtsXkYZFQL0rsAqxYoAYOHUZtA1cQ8vsZmsqlzIajafF+o7coqoq17k/tOWPfV5nPIXNxDmj2fIgsrxTIFvr6BNY4tAJVuqfzfY263hhqaGCV2aVCNa1JZOgvGaR7XT5nOBZ6pWFt7g==
-Received: from [192.168.89.2] (unknown [17.42.251.67])
-	by p00-icloudmta-asmtp-us-east-1a-100-percent-7 (Postfix) with ESMTPSA id 1C1391800188;
-	Sat, 09 May 2026 06:54:33 +0000 (UTC)
-Message-ID: <17a0562d-e3db-493c-ba93-f8997f166c8c@icloud.com>
-Date: Sat, 9 May 2026 15:54:31 +0900
+	s=arc-20240116; t=1778309813; c=relaxed/simple;
+	bh=xzBTelskQ422LIU+Nxl34a49fgjI/8vjJLK7P1doRVk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=FnKI8awDqeymv3ygiSSpOFsvDfYzzgx4MjH2sNC8wnV0ugShRLqr1tTG0lbk8QiaD0aJFyTh9/tqxM63vF2JSuyXEWtasGBlRvZ4z+zqpQ/0VM8tQ478sa8eYJy1S2TSsl8YCqqRFrjjPzdtt+D/WyaaENK6wD8fUd74MH9SdMQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ClUXLCQD; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 876C4C2BCC4;
+	Sat,  9 May 2026 06:56:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778309812;
+	bh=xzBTelskQ422LIU+Nxl34a49fgjI/8vjJLK7P1doRVk=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ClUXLCQDiscJFQdTA8+bV+hIT2He1fCIYews9gmHZo91UzYUJ0lZu/UZou42Ark1K
+	 /Ky0CvkP5wQ5rk7AcedxnMdgQmp+JDVMenFIyCSGzInR25i6CgYW+eLSWACKpmH4Ej
+	 2gdn5TzRRRQcJUA6DNZCamgqZ5lvMf43CsZzO14O10ISeWpTuQUiU9Ia24lwA1+blr
+	 DafjS+rIdpC5hYxPU0QhIEjqWaQRIWfEUz6XAWbPMEN4uVbf8Sb7wozNnb5x+AI7Um
+	 QCu253+50ltDtlT3U3HxMTDGxsYyWBV9KzqMceFcMQcinbDH3AA/Iw+wI1q9SCdePA
+	 74NWnUZVCemgw==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1wLbcI-00000000GIY-22Zu;
+	Sat, 09 May 2026 08:56:50 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Miguel Ojeda <ojeda@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	rust-for-linux@vger.kernel.org,
+	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Benno Lossin <lossin@kernel.org>,
+	Boqun Feng <boqun@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	Joe Perches <joe@perches.com>,
+	Matteo Croce <technoboy85@gmail.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Trevor Gross <tmgross@umich.edu>
+Subject: [PATCH v3 00/13] Improve process/maintainers output
+Date: Sat,  9 May 2026 08:56:33 +0200
+Message-ID: <cover.1778309595.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/2] usb: xhci-pci: add AMD Promontory 21 PCI glue
-To: Mario Limonciello <mario.limonciello@amd.com>,
- Jihong Min <hurryman2212@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Mathias Nyman <mathias.nyman@intel.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Basavaraj Natikar <Basavaraj.Natikar@amd.com>, linux-usb@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260508143910.14673-1-hurryman2212@gmail.com>
- <20260508143910.14673-2-hurryman2212@gmail.com>
- <ad41d70b-e9c0-446e-8bd0-4528de75b592@amd.com>
- <0d518d40-e239-4d93-8e71-0d2e140f00ca@icloud.com>
- <966c9e07-10e6-4abe-9cb5-77b974f31302@amd.com>
- <e8c5f5e0-e0d7-4231-8c46-be7a175941f5@icloud.com>
- <93c43962-6aee-45c8-97c0-a4fbf5124ce8@amd.com>
-Content-Language: en-US
-From: Jihong Min <hurryman2212@icloud.com>
-In-Reply-To: <93c43962-6aee-45c8-97c0-a4fbf5124ce8@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA5MDA3MCBTYWx0ZWRfXznzN/avUrUFG
- TBXqyQwcFpJLaybcCXXnJcANONt+o173+h/ivafcP7ulPkrpbqoLyk7lqwWV8Y9VH5z4LauOe0U
- QHKE9QweoV/bFYaGB3FbdZx+Sc5FLNKE6b7kBP89UMyJhNXyh0SQCG9ZBwSiG/KXAX8HStDY3cQ
- qKiLUvCv1bo4WR4Nrva5e2OziqnSHuTA2/FqORvsuExpqkRt4J9CFl0VmtqQSm0iFS/C2fe2sD/
- kon7vxOx6uzuaI//bKCLvVuk2vdT90EsFX9+aoMDR/vmyual6mzEwFu9cqq56cDQclKZV9x5SEG
- 6yGJDNpqy0e1/TE1DGB2xQTqa1cXR9eZiUSNHyuilJdKKE1IOk3V/xjAsb2VNI=
-X-Authority-Info-Out: v=2.4 cv=Sbb6t/Ru c=1 sm=1 tr=0 ts=69feda2d
- cx=c_apl:c_pps:t_out a=YrL12D//S6tul8v/L+6tKg==:117
- a=YrL12D//S6tul8v/L+6tKg==:17 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=x7bEGLp0ZPQA:10 a=5jDBv52wX64A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=AGBWbnDlIYaA8OOaHYkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=PgRulw5oR9JgysbTFEid:22 a=oa2-kN79Xhin27rcel9q:22
-X-Proofpoint-GUID: ApNzMT8qMeyRJFiA37BvS_DBDxNsMqLZ
-X-Proofpoint-ORIG-GUID: ApNzMT8qMeyRJFiA37BvS_DBDxNsMqLZ
-X-Rspamd-Queue-Id: 52F4C4FE51B
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-Rspamd-Queue-Id: 95B754FE577
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[icloud.com,quarantine];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[icloud.com:s=1a1hai];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86584-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,protonmail.com,google.com,linux-foundation.org,garyguo.net,perches.com,gmail.com,linuxfoundation.org,umich.edu];
+	TAGGED_FROM(0.00)[bounces-86590-lists,linux-doc=lfdr.de,huawei];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[amd.com,gmail.com,linuxfoundation.org,intel.com];
-	FREEMAIL_FROM(0.00)[icloud.com];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	DKIM_TRACE(0.00)[icloud.com:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hurryman2212@icloud.com,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_RCPT(0.00)[linux-doc,huawei];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[icloud.com:mid,icloud.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,maintainers.new:url]
 X-Rspamd-Action: no action
 
+Hi Jon,
 
-On 5/9/26 14:52, Mario Limonciello wrote:
->
-> Fine by me either way.
->
-Thanks. I changed the current branch to:
+This series improve the output at process/maintainers: instead of a
+pure enriched text, the maintainer's file content is now converted
+to a table, and has gained a javascript to allow filtering entries.
 
-   depends on X86
-   default USB_XHCI_PCI
+The initial patches change the logic to split parsing from
+output generation. Then, everything is stored into a dict at
+the parsing phase, and ona header description variable.
 
-and removed the CPU_SUP_AMD-specific help text.
+This way, it is easier to adjust the output handler to produce
+a more structured document. Right now, the entries are sorted
+alphabetically, per subsystem's name(*).
 
-Sincerely,
-Jihong Min
+(*) Currently, MAINTAINERS file has several entries not sorted.
+    One has to run:
+
+	 scripts/parse-maintainers.pl --input MAINTAINERS --output MAINTAINERS.new
+
+    to sort it.
+
+-
+
+v3:
+  - don't remove rust/pin-init/CONTRIBUTING.md;
+  - added two extra patches due to sashiko-bot feedback, to better
+    handle wildcards and paths;
+  - fixed some issues related with O=DIRS;
+
+v2:
+  - now, entries are sorted internally, instead of trusting that
+    MAINTAINERS is already sorted;
+  - file fields inside the description are now showing as literals;
+  - Added a change in MAINTAINERS for rust-init profile;
+  - Make it clearer at MAINTAINERS description that "P" expects
+    a rst file;
+  - fixed several bugs related to using or not O=DOCS.
+
+
+
+Mauro Carvalho Chehab (13):
+  docs: maintainers_include: keep hidden TOC sorted
+  docs: maintainers_include: split state machine on multiple funcs
+  docs: maintainers_include: cleanup the code
+  docs: maintainers_include: clean most SPHINXDIRS=process warnings
+  docs: maintainers_include: do some coding style cleanups
+  docs: maintainers_include: store maintainers entries on a dict
+  docs: maintainers_include: properly handle file patterns
+  docs: maintainers_include: add a filtering javascript
+  docs: maintainers_include: don't ignore invalid profile entries
+  docs: maintainers_include: better handle directories
+  docs: maintainers_include: better handle doc wildcards
+  MAINTAINERS: make clearer about what's expected for "P" field
+  MAINTAINERS: use a URL for pin-init maintainer's profile entry
+
+ Documentation/sphinx/maintainers_include.py | 478 ++++++++++++--------
+ MAINTAINERS                                 |   8 +-
+ 2 files changed, 294 insertions(+), 192 deletions(-)
+
+-- 
+2.54.0
 
 
