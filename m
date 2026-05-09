@@ -1,57 +1,61 @@
-Return-Path: <linux-doc+bounces-86603-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86605-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QNR9NgkD/2nf1AAAu9opvQ
-	(envelope-from <linux-doc+bounces-86603-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:48:57 +0200
+	id kCdpDGMD/2nf1AAAu9opvQ
+	(envelope-from <linux-doc+bounces-86605-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:50:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 581B64FF09D
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:48:57 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 768E84FF0C9
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:50:25 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C8E15301A14A
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 09:48:53 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 762C6301BA53
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 09:49:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B6E63612CF;
-	Sat,  9 May 2026 09:48:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DCA2379989;
+	Sat,  9 May 2026 09:49:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="OdBTPDsE"
+	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="RrSQimND"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ACE733C1B7;
-	Sat,  9 May 2026 09:48:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AACD391828;
+	Sat,  9 May 2026 09:49:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778320133; cv=none; b=JILKsOd4h/TJITiPVa9gqUaO+oEars9h36tj1fI4EkP4jpgUc3taQc0Xy9N0YvwCeHms8VPkuI2ENB0tsD1Fa/wgyB5XPEbFXN8ix4ez5IaEFX74tiLiFHZ3s8BdKTE+yxaf/kpCtuCUgND8K1T1s5sYMZpKqP7QImQcV+HDG4E=
+	t=1778320149; cv=none; b=JZFKC704yiGsQni+c5tvG20i4I0BPh8o7CDWiR8RAuvxwsIReV81GhwkQHr3fjhcumvT/J7YTtkn2dzQDiMT8X1PK5wuJiLuMM/wGvJGJzAo7KJU9sq4Ene92R3haXfPybavSGX9UF7SWe+jpn3DpYpOwKLxCSyKaRXuESFEEdU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778320133; c=relaxed/simple;
-	bh=HxByqh5ErlGGwQirqI9mi2EGOSPvSDB1l73Om5QC6+s=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qqxBR0jaNJUsakOmVN2qHcIj0UQSnahzAJia1eHb5on/NWZ6xzOk3MXQB+LvquQcZPxvXwpKfjAaxRUlrhICwjvhrLF0IHhTPkpd9pHbp80lOvzeViKbmV9aKPVqGw6mR00IaG5sQSITzUq2N5jh5gxV1Lbx2Xx6NBPcQHpzT4s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=OdBTPDsE; arc=none smtp.client-ip=51.159.59.229
+	s=arc-20240116; t=1778320149; c=relaxed/simple;
+	bh=PFqviou23ZkO+5tB6xk3/IoTfoOnSRa95kphea5f/2s=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=HiIDg3SH7aF6weIUJ/m6YDBbXIxK+gb27iIGJDklYhKCNKXeVwaMBNqkBCTjaTWk8tytPD41DYcEHqMo5ctVRxKbgZ04/1wtVuZ2icGHzLyqvK/ptjKjb7ZPPPiK1GewEhEHauIQvWBAhbgYS88jmVrXy1ymmC4gFPFXC06n/F8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=RrSQimND; arc=none smtp.client-ip=51.159.59.229
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
-	t=1778320129; bh=j/xpPVe6GbXNcjKt1Ebyt6y8xLm8OyxR1yVviZFWXgE=;
+	t=1778320145; bh=dwMvzj1FWb66GfXWp+Kd9aDgGR46N2xKPDAHX4zwdtU=;
 	h=From:Message-ID:From;
-	b=OdBTPDsEObe79NpRH+g3kLf1CrLu6mCZsq3BM0iqIo13FKb/+JKtarEhQgb9MSoqk
-	 X6Evg00IPvLnccNLlscxv67DWcyEYCWwaowS6JdxLdL3TSlsOLxRIZ8e/0claisnDS
-	 zSFmcQVXeOwLu+4NazTFDgLcDqBoVPqX3YKJOviA=
+	b=RrSQimNDsy8UIyqLazDaot8tqmqpd4FL0yXMSegft360x5fksPt4ssKzosUro1kkv
+	 lnfEvK1Uz8g1cwYiZWmHBK1wsEwM9eqT7fBUphd7oxhCVSS0SXakOXcTT7d3MmEbyD
+	 VpgI7ib0qQ2v3TMVApIGlPK/1lH2g96bTdvusdKA=
 Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
-	by mta1.formilux.org (Postfix) with ESMTP id 8697EC0A83;
-	Sat, 09 May 2026 11:48:49 +0200 (CEST)
+	by mta1.formilux.org (Postfix) with ESMTP id 77C67C0A83;
+	Sat, 09 May 2026 11:49:05 +0200 (CEST)
 From: Willy Tarreau <w@1wt.eu>
 To: greg@kroah.com
 Cc: Leon Romanovsky <leon@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
         skhan@linuxfoundation.org, security@kernel.org,
         workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Willy Tarreau <w@1wt.eu>
-Subject: [PATCH v3 0/3] Documentation: security-bugs: new updates covering triage and AI
-Date: Sat,  9 May 2026 11:47:52 +0200
-Message-ID: <20260509094755.2838-1-w@1wt.eu>
+        linux-kernel@vger.kernel.org, Willy Tarreau <w@1wt.eu>,
+        Greg KH <gregkh@linuxfoundation.org>
+Subject: [PATCH v3 1/3] Documentation: security-bugs: do not systematically Cc the security team
+Date: Sat,  9 May 2026 11:47:53 +0200
+Message-ID: <20260509094755.2838-2-w@1wt.eu>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260509094755.2838-1-w@1wt.eu>
+References: <20260509094755.2838-1-w@1wt.eu>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,14 +63,14 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 581B64FF09D
+X-Rspamd-Queue-Id: 768E84FF0C9
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
@@ -75,64 +79,59 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86603-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86605-lists,linux-doc=lfdr.de];
 	DKIM_TRACE(0.00)[1wt.eu:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	TO_DN_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,1wt.eu:mid,1wt.eu:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,linuxfoundation.org:email,1wt.eu:email,1wt.eu:mid,1wt.eu:dkim]
 X-Rspamd-Action: no action
 
-This series tries to translate recent discussions on the security list
-on how to better handle reports. It details:
-  - when not to Cc: the security list
-  - what classes of bugs do not need to be handled privately
-  - minimum requirements for AI-assisted reports
+With the increase of automated reports, the security team is dealing
+with way more messages than really needed. The reporting process works
+well with most teams so there is no need to systematically involve the
+security team in reports.
 
-As usual, this is probably perfectible but can already help in the short
-term as we can point it to reporters, so barring any strong disagreement,
-better continue to proceed in small incremental improvements and observe
-the effects.
+Let's suggest to keep it for small lists of recipients and new reporters
+only. This should continue to cover the risk of lost messages while
+reducing the volume from prolific reporters.
 
-Thanks!
-Willy
-
+Cc: Greg KH <gregkh@linuxfoundation.org>
+Cc: Leon Romanovsky <leon@kernel.org>
+Reviewed-by: Leon Romanovsky <leon@kernel.org>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Signed-off-by: Willy Tarreau <w@1wt.eu>
 ---
-v3:
-  - comments about choice of words and option enumeration from Shuah
-  - AI is public, from Linus and Greg
-  - added extra reviewed-by (Greg, Shuah).
-  - Leon, I kept your reviewed-by since changes are very minimal and
-    didn't change the initial spirit.
-  
-v2:
-  - fixes for issues reported by Randy
-  - Greg's ack on the AI part
-  - reworded the "when to Cc" part based on Greg's feedback
-    (Greg I didn't take your original ack since the wording changed)
-  - split the threat model into its own document as per Greg's suggestion
+ Documentation/process/security-bugs.rst | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
----
-Willy Tarreau (3):
-  Documentation: security-bugs: do not systematically Cc the security
-    team
-  Documentation: security-bugs: explain what is and is not a security
-    bug
-  Documentation: security-bugs: clarify requirements for AI-assisted
-    reports
-
- Documentation/process/index.rst         |   1 +
- Documentation/process/security-bugs.rst | 105 ++++++++++-
- Documentation/process/threat-model.rst  | 236 ++++++++++++++++++++++++
- 3 files changed, 340 insertions(+), 2 deletions(-)
- create mode 100644 Documentation/process/threat-model.rst
-
+diff --git a/Documentation/process/security-bugs.rst b/Documentation/process/security-bugs.rst
+index 27b028e858610..6dc525858125e 100644
+--- a/Documentation/process/security-bugs.rst
++++ b/Documentation/process/security-bugs.rst
+@@ -148,7 +148,15 @@ run additional tests.  Reports where the reporter does not respond promptly
+ or cannot effectively discuss their findings may be abandoned if the
+ communication does not quickly improve.
+ 
+-The report must be sent to maintainers, with the security team in ``Cc:``.
++The report must be sent to maintainers.  If there are two or fewer
++recipients in your message, you must also always Cc: the Linux kernel
++security team who will ensure the message is delivered to the proper
++people, and will be able to assist small maintainer teams with processes
++they may not be familiar with.  For larger teams, Cc: the Linux kernel
++security team for your first few reports or when seeking specific help,
++such as when resending a message which got no response within a week.
++Once you have become comfortable with the process for a few reports, it is
++no longer necessary to Cc: the security list when sending to large teams.
+ The Linux kernel security team can be contacted by email at
+ <security@kernel.org>.  This is a private list of security officers
+ who will help verify the bug report and assist developers working on a fix.
 -- 
 2.52.0
 
