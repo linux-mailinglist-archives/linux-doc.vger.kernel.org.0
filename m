@@ -1,145 +1,133 @@
-Return-Path: <linux-doc+bounces-86571-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86572-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gN/0ADF3/mktrQAAu9opvQ
-	(envelope-from <linux-doc+bounces-86571-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 01:52:17 +0200
+	id oHaBIYp8/mmTrgAAu9opvQ
+	(envelope-from <linux-doc+bounces-86572-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 02:15:06 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id C350B4FCE98
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 01:52:16 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E8ECD4FCFBD
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 02:15:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 278FE30074A2
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2026 23:52:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2C775301CA44
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 00:15:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CDF61368294;
-	Fri,  8 May 2026 23:52:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 10D2712F585;
+	Sat,  9 May 2026 00:15:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wzlh+gEP"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ae+lJqaL"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9D9833B6D5;
-	Fri,  8 May 2026 23:52:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E19BF56472;
+	Sat,  9 May 2026 00:15:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778284334; cv=none; b=NeFGzJT+1U247Dm5m6fnbs+01nKRxSfokQ5x8strwebWhOmij5qeW5I5xZaWlmV9G5W3IE0dE2yD+09CoYwp8nR40ua0FcgKs1BimfIWxWVFRkmEfrfD383GBXh0p+M+HnPVow7fsKTWZBPYs8AGeLPaVexWoY4BWIFmhul2r7E=
+	t=1778285703; cv=none; b=H/3Isz+KcmUSUsJqsvsLuEZ0XvgIGDptSs798sBC8Wq5x2IFVg+ZI1qjEfrVzhbgbIyBuGFD2VQfPnrSpXWnGuP1WWD7kIMWdpK/vsKxBpC3o3zgWa+2eYoAuc9YFGFqWGl08Qi1c2wAv8rowhyr1e6jlYKJDIcsn6LrFnoisXU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778284334; c=relaxed/simple;
-	bh=2A7cLXV+8i/TgBjrSYIiWz4AFId2IjKQBmgGj/uotSs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=mATXEtUfHPF7tU061QeAueyUV0Iv1QDCag6xWnYOmUkeJllFnq0puLyILC1Kwck2UvmIOYb0zJ9mGKeKeWu6hReSN2+z3HAs3Zy15bWrf1PhSRFj/BgztIHqU9Cqvwmenb5CdkTGaFzcdOB/GqwAhHXT1UDvQaG0PejsKI7/JGk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wzlh+gEP; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A102BC2BCB0;
-	Fri,  8 May 2026 23:52:13 +0000 (UTC)
+	s=arc-20240116; t=1778285703; c=relaxed/simple;
+	bh=XhWSoAMtKtTDk59A9/s2NXTizBixeFigOhjcCgD6wUU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Uu4KWbpsAmUvxaLs5OWEcoP0H1jfPc66TYCRC0oGfzAgupLZ/qqkyKYDsamZ5hKHxuPghkOy8zFW/+XCVB0Rs9b0zPkAtuTx3sx2Dr0MfI2ITAwW5s9K5zAan6lt5hKXHh0negl/oT1o60A+Kcp8QLCQ9hFaDXwYt+gwe9GVvSk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ae+lJqaL; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 651B7C2BCB0;
+	Sat,  9 May 2026 00:15:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778284334;
-	bh=2A7cLXV+8i/TgBjrSYIiWz4AFId2IjKQBmgGj/uotSs=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Wzlh+gEPH02pq0GYd3kbFX5f87tKrnkHWpp98MiqGJXFfMQfV/FVfxGStq2n1Icxh
-	 at3XXnt4W0X5Z3BEVyZ+zNybdHl56jsrlVGD7IISRFDxSOnOK9tylItg4LH/Dwj+JN
-	 zM8zb1dNuY8edXE0P73MWuuL4CLFssFVFp1U4Sg8OXxbrCtiB/PrKmvvzNLjDYkYw4
-	 5zbeCegoitDyNyLbDmk3XOZkd/N+64K6CRKjLX6xsQPRTQq6n7Z4X4PogvYYrswWtq
-	 73U0PUOs0+g4mN0Bd/S/Qg9eEYGHWSjQbpbYkwx8aZUufBfSBBbnWnnukD3AisI5Nl
-	 so3vCz59vsOgQ==
-From: SeongJae Park <sj@kernel.org>
-To: "Kiryl Shutsemau (Meta)" <kas@kernel.org>
-Cc: SeongJae Park <sj@kernel.org>,
-	akpm@linux-foundation.org,
-	rppt@kernel.org,
-	peterx@redhat.com,
-	david@kernel.org,
-	ljs@kernel.org,
-	surenb@google.com,
-	vbabka@kernel.org,
-	Liam.Howlett@oracle.com,
-	ziy@nvidia.com,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	seanjc@google.com,
-	pbonzini@redhat.com,
-	jthoughton@google.com,
-	aarcange@redhat.com,
-	usama.arif@linux.dev,
-	linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	kvm@vger.kernel.org,
-	kernel-team@meta.com
-Subject: Re: [PATCH v2 02/14] mm: rename uffd-wp PTE bit macros to uffd
-Date: Fri,  8 May 2026 16:52:05 -0700
-Message-ID: <20260508235206.83633-1-sj@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <4ff3508b951ec4879177dd079003c3fa3af0a444.1778254670.git.kas@kernel.org>
-References: 
+	s=k20201202; t=1778285702;
+	bh=XhWSoAMtKtTDk59A9/s2NXTizBixeFigOhjcCgD6wUU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Ae+lJqaLkGfnle+5Ncds9k+4zySkO7FMtPIs6bVYPEkgq22NDiHioa62loP0xPXoa
+	 /TxtvYKdH6bx5tfIKiiaKtnPrjM3NVWDFE5bBtugal43K9vUBgf7rINh/awbfxvInE
+	 cc3NMwlckCm2mOa22/HyvcqH9yiWn26x18/B4RzsI/UDJWDZpnEXK9BKyTSoil9crs
+	 3Sk8dcJZz16saK+82XzBREMZUL4yUwElnhiv5ENPYSJ7Xmm2D2d9hSwipKMMITYEyz
+	 Yt/Uu/gliWflqdaI3gbGvvZmdBkraCtl6jX2XQXVYB8e0km9jBcLW/PgqPM6bsvADc
+	 ctNPgWy7RmYCA==
+Date: Fri, 8 May 2026 20:15:00 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	gregkh@linuxfoundation.org
+Subject: Re: [PATCH] killswitch: add per-function short-circuit mitigation
+ primitive
+Message-ID: <af58hCeOU15570Yq@laps>
+References: <20260507070547.2268452-1-sashal@kernel.org>
+ <20260508135630.a380e3c187b59e4c04e6f358@linux-foundation.org>
+ <af5Z2IvtS5pVorSl@laps>
+ <20260508164925.20e09fba0277f0bc8ffc9a3d@linux-foundation.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: C350B4FCE98
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20260508164925.20e09fba0277f0bc8ffc9a3d@linux-foundation.org>
+X-Rspamd-Queue-Id: E8ECD4FCFBD
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86571-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-86572-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sj@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	FROM_HAS_DN(0.00)[]
+	RCPT_COUNT_SEVEN(0.00)[7];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-On Fri,  8 May 2026 16:55:14 +0100 "Kiryl Shutsemau (Meta)" <kas@kernel.org> wrote:
+On Fri, May 08, 2026 at 04:49:25PM -0700, Andrew Morton wrote:
+>On Fri, 8 May 2026 17:47:04 -0400 Sasha Levin <sashal@kernel.org> wrote:
+>
+>> >> 19 files changed, 1451 insertions(+), 1 deletion(-)
+>> >
+>> >wowzers.  I'm looking at samples/livepatch/livepatch-sample.c wondering
+>> >"why"?
+>>
+>> Yup, a bit chunky, but over half of it is documentation and testing, and the
+>> actual functional code is largely the securityfs interface.
+>
+>So we can't use livepatch here?
 
-> The uffd-wp PTE bit is about to gain a second consumer: userfaultfd
-> RWP will use the same bit to mark access-tracking PTEs, distinct
-> from mprotect(PROT_NONE) or NUMA-hinting PTEs. WP vs RWP semantics
-> come from the VMA flag; the bit is just "uffd has claimed this
-> entry." Drop the "_wp" suffix from the arch-private bit macros so
-> they reflect that.
-> 
->   x86:   _PAGE_BIT_UFFD_WP  -> _PAGE_BIT_UFFD
->          _PAGE_UFFD_WP      -> _PAGE_UFFD
->          _PAGE_SWP_UFFD_WP  -> _PAGE_SWP_UFFD
->   arm64: PTE_UFFD_WP        -> PTE_UFFD
->          PTE_SWP_UFFD_WP    -> PTE_SWP_UFFD
->   riscv: _PAGE_UFFD_WP      -> _PAGE_UFFD
->          _PAGE_SWP_UFFD_WP  -> _PAGE_SWP_UFFD
-> 
-> Pure mechanical rename -- no behavior change.
-> 
-> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-> Assisted-by: Claude:claude-opus-4-6
-> Reviewed-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+I might have misunderstood your original question.
 
-Reviewed-by: SeongJae Park <sj@kernel.org>
+Livepatch is great when you have one. The problem is getting one...
 
+To get a livepatch, somebody has to write the fix, build it against the exact
+kernel you're running (for distros, thats hundreds of different
+kernel/arch/flavor combinations), sign it, and get it onto every machine.
 
+Most regular users won't be able to do it on their own because of secure boot
+limitations, so they depend on their vendor to provide them with one.
+
+Yes, you could write a livepatch that just stubs the function out, same end
+state as killswitch, but you still have to build, sign, and ship a module per
+kernel to do it
+
+Killswitch would be just a single write to /sys which an ordinary user can do
+to mitigate a critical issue immediately.
+
+-- 
 Thanks,
-SJ
-
-[...]
+Sasha
 
