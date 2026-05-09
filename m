@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-86585-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86594-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2D2MIbza/mnfxQAAu9opvQ
-	(envelope-from <linux-doc+bounces-86585-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:00 +0200
+	id cC5cMs7a/mnfxQAAu9opvQ
+	(envelope-from <linux-doc+bounces-86594-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:18 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EF014FE541
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:56:59 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA01D4FE578
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 08:57:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 72EBB30091E7
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 06:56:56 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 7BA50300B529
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 06:57:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 01377376BD3;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CD6D382395;
 	Sat,  9 May 2026 06:56:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="t2Q1mdZB"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="diFwpkYd"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0780288530;
-	Sat,  9 May 2026 06:56:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F12237BE9A;
+	Sat,  9 May 2026 06:56:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778309812; cv=none; b=debaYKcrpajngqBWHndRD5cBwK2xvFVR/Gyxwzu6eXMUHHvVGtoUGJ3a85SluVMhCZmBAC+J/EELHXAt4gInCqvVqfGU7tmCk4VE54AUPtToUvx81Zl75yzljZ2Uk2HXBdQ2Skvi8QVnyQiuXJA9DRRMHl07RG9rcc/X8VEj/gU=
+	t=1778309813; cv=none; b=lFHnSONYyv3JYT7Hq1P9HN+1i82ZFowFYOHcJuZ4CsJtPzPlmuX3hOEPNrW7493gh4HQDKWaOari6xcvcJ29xkFm93Tu3w16d//LAhF72LrfW6HhmIdsVs23+AlV2hYg95VVZQQSwkkBxpjb2w0/R2hSb1HLziuOuLT11kH78JI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778309812; c=relaxed/simple;
-	bh=xKx76+aLteSfJDFOU+fNmwoI11MnqmCUXFoZhfsqPIQ=;
+	s=arc-20240116; t=1778309813; c=relaxed/simple;
+	bh=mOVVsCv5LtyhTiEhZWzDwCJGXjoTo0YDPqDCnaKHxhQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=cIhWr/rLq3OfZGF2cSFHzOAnCVvGmEHqFRCYx4hzIiZvguMQXHskCBz/MRcH4MYiYranAW5XI+JDwYXumhlQDxVc8gI8h6eo1defS2J1MjVFnd8venk6a3kTGVoXHCb0p73jeElUtOCWX5lY32EBypVatTLzUSIPjMiVluYopSE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=t2Q1mdZB; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80886C2BCC9;
+	 MIME-Version:Content-Type; b=nMen0skVLap25AqX1Fc/LsuS9TsQ7qH3UVCSbOXCRP1Bq4HL2eg00w7Q4T6MrrblaIs51zNi6BvTcUxeuPf4m5HXK5auGEhiZAQMD5Oboi1m+3FYeqZEPgJsUkT+i1AI2Uy1lLZ6rEreFdtTdo4R2QFqPDURKVwjYbuIp1TQ4gY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=diFwpkYd; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E97CC2BCF7;
 	Sat,  9 May 2026 06:56:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1778309812;
-	bh=xKx76+aLteSfJDFOU+fNmwoI11MnqmCUXFoZhfsqPIQ=;
+	bh=mOVVsCv5LtyhTiEhZWzDwCJGXjoTo0YDPqDCnaKHxhQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=t2Q1mdZB38fDnMx/U+tjw0cFqbJ/YXYSG2nOpBMHXCWFCODXdZRw2k0vT6Ge+bIgC
-	 D+xb5vQou6In2hvGV9QfyCy6Cu4fcsuzOhapboQYsrI4XeG/k+zHpIFiNhdI2rAnrH
-	 U2fwt7Awp6idP7deKPk4U+yv5d2ldu01aE2e6OK9BYTgNfiUbUuZsCQfrGUcviqhFy
-	 6xBjmPx2Se5RA4LrsgWTLrZCWEoyxxE2pnLQj9iIg2U/YJMfjsdXgjAwZExXPlFY/0
-	 xjredj208ZZCmVGMVXyRnTJjdFpStZNjjTy1UrXokiGHLHdTkCcZE52BwFvauwCbIN
-	 x3OWU0imr2GyQ==
+	b=diFwpkYdkmfGTqeg1I5ddLz5SCgCpDvr/J7YozBM8HVsr1FCpx1yg0mwNbiLDMsut
+	 io8A/NLc2UBPpcIzRgjXO3k2Z1RucV9fa6dVHsVdMakdg6fbf4Prx1s0xXoOJIk9Mq
+	 lDVLrQ0Zp+UFxurUEbYXXGUvoceyD6fIn65cWMn3oKgVV47rsYRW19wPMi5gDsl/Gl
+	 aUDUOuldGsyWmFosH6+fi9hBaRUy0ver1ynh2aHaO1wzGKok0Ds4z28pshfIBqr3ZK
+	 nxNdFc8kJB1U7wadnp7h2xOBC7kXa7J4OIMzl01eiNsl9y+kCOK+9qAEJVmYyf14WG
+	 xqUhL1yaBRLmQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99.1)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1wLbcI-00000000GIv-2jgS;
+	id 1wLbcI-00000000GIz-2qs0;
 	Sat, 09 May 2026 08:56:50 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -55,10 +55,14 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	rust-for-linux@vger.kernel.org,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: [PATCH v3 06/13] docs: maintainers_include: store maintainers entries on a dict
-Date: Sat,  9 May 2026 08:56:39 +0200
-Message-ID: <f7d1a206475ee54f757b2642882013097cb5453a.1778309595.git.mchehab+huawei@kernel.org>
+	Andrew Morton <akpm@linux-foundation.org>,
+	Joe Perches <joe@perches.com>,
+	Matteo Croce <technoboy85@gmail.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Matteo Croce <teknoraver@meta.com>
+Subject: [PATCH v3 07/13] docs: maintainers_include: properly handle file patterns
+Date: Sat,  9 May 2026 08:56:40 +0200
+Message-ID: <abd5112fea4dd480f5e72ba46fe60c2463862829.1778309595.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <cover.1778309595.git.mchehab+huawei@kernel.org>
 References: <cover.1778309595.git.mchehab+huawei@kernel.org>
@@ -71,200 +75,105 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-X-Rspamd-Queue-Id: 7EF014FE541
+X-Rspamd-Queue-Id: DA01D4FE578
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,vger.kernel.org,linux-foundation.org,perches.com,gmail.com,linuxfoundation.org,meta.com];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86585-lists,linux-doc=lfdr.de,huawei];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TAGGED_FROM(0.00)[bounces-86594-lists,linux-doc=lfdr.de,huawei];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mchehab@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc,huawei];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,domain:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,domain:email,meta.com:email]
 X-Rspamd-Action: no action
 
-Instead of creating just a big output data, store entries inside
-a dictionary. Doing that simplifies the parser a little bit
-and make the code clearer.
+handling asterisks inside file patterns atdescription part is
+problematic, as ReST has special meaning for them. Due to
+that, convert such patterns to literal strings.
 
+Reported-by: Matteo Croce <teknoraver@meta.com>
+Fixes: 420849332f9f ("get_maintainer: add ** glob pattern support")
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Message-ID: <4ad88179e03436984f29780ae380d50591f86c67.1777987027.git.mchehab+huawei@kernel.org>
+Message-ID: <89127706fb3493d00ecb21e528c8a27081e5ed40.1777987027.git.mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/maintainers_include.py | 70 +++++++++------------
- 1 file changed, 28 insertions(+), 42 deletions(-)
+ Documentation/sphinx/maintainers_include.py | 26 ++++++++++-----------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/Documentation/sphinx/maintainers_include.py b/Documentation/sphinx/maintainers_include.py
-index 345eb28804ff..ed9cd7b3dc66 100755
+index ed9cd7b3dc66..5361774b61bc 100755
 --- a/Documentation/sphinx/maintainers_include.py
 +++ b/Documentation/sphinx/maintainers_include.py
-@@ -49,10 +49,7 @@ class MaintainersParser:
+@@ -47,9 +47,6 @@ class MaintainersParser:
+         self.maintainers = False
+         self.subsystems = False
  
-         # Field letter to field name mapping.
-         self.field_letter = None
--        self.fields = {}
- 
--        self.field_prev = ""
--        self.field_content = ""
+-        # Field letter to field name mapping.
+-        self.field_letter = None
+-
          self.subsystem_name = None
  
          self.app_dir = os.path.abspath(app_dir)
-@@ -65,7 +62,9 @@ class MaintainersParser:
-         #
-         self.profile_toc = set()
-         self.profile_entries = {}
--        self.output = ".. _maintainers:\n\n"
-+        self.header = ".. _maintainers:\n\n"
-+        self.maint_entries = {}
-+        self.fields = {}
- 
-         prev = None
-         with open(path, "r", encoding="utf-8") as fp:
-@@ -77,11 +76,11 @@ class MaintainersParser:
-                         self.subsystems = True
-                         self.parse_subsystems(line)
-                     else:
--                        self.output += line
-+                        self.header += line
-                 elif self.subsystems:
-                     self.parse_subsystems(line)
-                 else:
--                    self.output += line
-+                    self.header += line
- 
-                 # Update the state machine when we find heading separators.
-                 if line.startswith("----------"):
-@@ -93,13 +92,6 @@ class MaintainersParser:
-                 # Retain previous line for state machine transitions.
-                 prev = line
- 
--        # Flush pending field contents.
--        if self.field_content:
--            self.output += self.field_content + "\n\n"
--
--        self.output = self.output.rstrip()
--
--
-     def linkify(self, text):
-         """Linkify all non-wildcard refs to ReST files in Documentation/"""
- 
-@@ -130,11 +122,11 @@ class MaintainersParser:
-         # Have we reached the end of the preformatted Descriptions text?
-         if line.startswith("Maintainers"):
-             self.descriptions = False
--            self.output += "\n" + line
-+            self.header += "\n" + line
+@@ -125,19 +122,22 @@ class MaintainersParser:
+             self.header += "\n" + line
              return
  
-         # Escape the escapes in preformatted text.
--        self.output += "| " + self.linkify(line).replace("\\", "\\\\")
-+        self.header += "| " + self.linkify(line).replace("\\", "\\\\")
- 
+-        # Escape the escapes in preformatted text.
+-        self.header += "| " + self.linkify(line).replace("\\", "\\\\")
+-
          # Look for and record field letter to field name mappings:
          #   R: Designated *reviewer*: FullName <address@domain>
-@@ -157,24 +149,8 @@ class MaintainersParser:
-         if not line:
-             return
+-        m = re.search(r"\s(\S):\s", line)
++        m = re.match(r"\s+(\S):\s+(\S+)", line)
+         if m:
+-            self.field_letter = m.group(1)
++            field = m.group(1)
++            details = m.group(2)
++
++            if field not in self.fields:
++                m = re.search(r"\*([^\*]+)\*", line)
++                if m:
++                    self.fields[field] = m.group(1)
++            elif field in ['F', 'N', 'X', 'K']:
++                line = line.replace(details, f'``{details}``')
++
++        self.header += "| " + self.linkify(line)
  
--        # Subsystem fields are batched into "field_content"
-         if line[1] != ':':
--            line = self.linkify(line)
--
--            # Render a subsystem entry as:
--            #   SUBSYSTEM NAME
--            #   ~~~~~~~~~~~~~~
--            # Flush pending field content.
--            self.output += self.field_content + "\n\n"
--            self.field_content = ""
--
--            self.subsystem_name = line.title()
--
--            # Collapse whitespace in subsystem name.
--            heading = re.sub(r"\s+", " ", line)
--            self.output += "%s\n%s" % (heading, "~" * len(heading)) + "\n"
--            self.field_prev = ""
--
-+            self.subsystem_name = re.sub(r"\s+", " ", self.linkify(line))
-             return
+-        if self.field_letter and self.field_letter not in self.fields:
+-            m = re.search(r"\*([^\*]+)\*", line)
+-            if m:
+-                self.fields[self.field_letter] = m.group(1)
  
-         # Render a subsystem field as:
-@@ -224,23 +200,23 @@ class MaintainersParser:
- 
-         details = self.linkify(details)
- 
-+        #
-         # Mark paths (and regexes) as literal text for improved
-         # readability and to escape any escapes.
-+        #
+     def parse_subsystems(self, line):
+         """Handle contents of the per-subsystem sections."""
+@@ -206,7 +206,7 @@ class MaintainersParser:
+         #
          if field in ['F', 'N', 'X', 'K']:
              # But only if not already marked :)
-             if not ':doc:' in details:
+-            if not ':doc:' in details:
++            if ':doc:' not in details and "http" not in details:
                  details = '``%s``' % (details)
  
--        # Comma separate email field continuations.
--        if field == self.field_prev and self.field_prev in ['M', 'R', 'L']:
--            self.field_content = self.field_content + ","
-+        if self.subsystem_name not in self.maint_entries:
-+            self.maint_entries[self.subsystem_name] = {}
-+
-+        if field not in self.maint_entries[self.subsystem_name]:
-+            self.maint_entries[self.subsystem_name][field] = []
-+
-+        self.maint_entries[self.subsystem_name][field].append(details)
- 
--        # Do not repeat field names, so that field entries
--        # will be collapsed together.
--        if field != self.field_prev:
--            self.output += self.field_content + "\n\n"
--            self.field_content = ":%s:" % (self.fields.get(field, field))
--        self.field_content = self.field_content + "\n\t%s" % (details)
-         self.field_prev = field
- 
- 
-@@ -252,7 +228,15 @@ class MaintainersInclude(Include):
-     def emit(self):
-         """Parse all the MAINTAINERS lines into ReST for human-readability"""
-         path = maint_parser.path
--        output = maint_parser.output
-+        output = maint_parser.header
-+
-+        for name, fields in sorted(maint_parser.maint_entries.items()):
-+            output += "\n" + name + "\n"
-+            output += "~" * len(name) + "\n"
-+
-+            for field, lines in fields.items():
-+                field_name = maint_parser.fields.get(field, field)
-+                output += f":{field_name}:\n\t" + ",\n\t".join(lines) + "\n\n"
- 
-         # For debugging the pre-rendered results...
-         #print(output, file=open("/tmp/MAINTAINERS.rst", "w"))
-@@ -288,6 +272,8 @@ class MaintainersProfile(Include):
-         #
-         output = ""
-         for profile, entry in sorted(maint_parser.profile_entries.items()):
-+            profile = profile.title()
-+
-             if entry.startswith("http"):
-                 output += f"- `{profile} <{entry}>`_\n"
-             else:
+         if self.subsystem_name not in self.maint_entries:
 -- 
 2.54.0
 
