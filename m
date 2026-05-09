@@ -1,59 +1,57 @@
-Return-Path: <linux-doc+bounces-86601-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86603-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AOT3D676/mkN0wAAu9opvQ
-	(envelope-from <linux-doc+bounces-86601-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:13:18 +0200
+	id QNR9NgkD/2nf1AAAu9opvQ
+	(envelope-from <linux-doc+bounces-86603-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:48:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D0FB4FEF3A
-	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:13:17 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 581B64FF09D
+	for <lists+linux-doc@lfdr.de>; Sat, 09 May 2026 11:48:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id EE0A63004607
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 09:13:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C8E15301A14A
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 09:48:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E07E739B481;
-	Sat,  9 May 2026 09:13:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B6E63612CF;
+	Sat,  9 May 2026 09:48:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="w6+zZKLE"
+	dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b="OdBTPDsE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com [91.218.175.178])
+Received: from mta1.formilux.org (mta1.formilux.org [51.159.59.229])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 311951D54FA
-	for <linux-doc@vger.kernel.org>; Sat,  9 May 2026 09:13:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ACE733C1B7;
+	Sat,  9 May 2026 09:48:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.159.59.229
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778317992; cv=none; b=NBZq+ZoB8SqmScuzsawwybZDlO6Qc7FpgLO5jqsiU3jSKYAJhBLvYaOfMkJlB/p91Na/lHt/C41n7K7MyEKJ1gm4wBnO2RYNiyaqdcxT9ErJ7x9OGayVgMdXP/DfOV5wug/hIsetBrbyTrJgJcjLvRu0BcWgevb7/9Q+vj6K3Xk=
+	t=1778320133; cv=none; b=JILKsOd4h/TJITiPVa9gqUaO+oEars9h36tj1fI4EkP4jpgUc3taQc0Xy9N0YvwCeHms8VPkuI2ENB0tsD1Fa/wgyB5XPEbFXN8ix4ez5IaEFX74tiLiFHZ3s8BdKTE+yxaf/kpCtuCUgND8K1T1s5sYMZpKqP7QImQcV+HDG4E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778317992; c=relaxed/simple;
-	bh=sCg7nnsXGy69X87f/oAcPOYywNmjFFbbTNDYBHqeCXA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=o+O0KAUdlD+0VZUpFjG/X4BFUeiXXz1ME2Bk4xX1oMk64un4m/EsXgehqx3DoAIiDsx/6YRVEkj5g0MOsM5LlLvMKEu8UzRh86nOyXsbtnRP43VC+7eYYpREM9TsuxkgkpOF0wcQq+EaInrhY4ExebyGcTQFR4XbN/KT+yVBhV0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=w6+zZKLE; arc=none smtp.client-ip=91.218.175.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1778317979;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Sm+Ivnv6uC1+wrWYZcZJzFI5gnWxCHEe1mPmLbZSffw=;
-	b=w6+zZKLEid3pNgKj9iyr6JjrFxs0KEO1MFXzHSxVs2oCyK0O8EQJkaNJtWeudtsQzX52M2
-	61L2L7IQvRj4bMrEoD/ZEAYJQWVPzAsaF9JKnWkxrcItSNY0WSea1gU0pZcnQ4AipwZtPy
-	0faIZgFH2GA7FELP0Gpe3TUQFLYwy5c=
-From: Kunwu Chan <kunwu.chan@linux.dev>
-To: corbet@lwn.net,
-	skhan@linuxfoundation.org
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	paulmck@kernel.org,
-	gustavold@gmail.com,
-	Kunwu Chan <kunwu.chan@gmail.com>
-Subject: [PATCH] docs: Document panic_on_rcu_stall default behavior
-Date: Sat,  9 May 2026 17:12:14 +0800
-Message-ID: <20260509091214.1679194-1-kunwu.chan@linux.dev>
+	s=arc-20240116; t=1778320133; c=relaxed/simple;
+	bh=HxByqh5ErlGGwQirqI9mi2EGOSPvSDB1l73Om5QC6+s=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qqxBR0jaNJUsakOmVN2qHcIj0UQSnahzAJia1eHb5on/NWZ6xzOk3MXQB+LvquQcZPxvXwpKfjAaxRUlrhICwjvhrLF0IHhTPkpd9pHbp80lOvzeViKbmV9aKPVqGw6mR00IaG5sQSITzUq2N5jh5gxV1Lbx2Xx6NBPcQHpzT4s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; dkim=pass (1024-bit key) header.d=1wt.eu header.i=@1wt.eu header.b=OdBTPDsE; arc=none smtp.client-ip=51.159.59.229
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=1wt.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=1wt.eu; s=mail;
+	t=1778320129; bh=j/xpPVe6GbXNcjKt1Ebyt6y8xLm8OyxR1yVviZFWXgE=;
+	h=From:Message-ID:From;
+	b=OdBTPDsEObe79NpRH+g3kLf1CrLu6mCZsq3BM0iqIo13FKb/+JKtarEhQgb9MSoqk
+	 X6Evg00IPvLnccNLlscxv67DWcyEYCWwaowS6JdxLdL3TSlsOLxRIZ8e/0claisnDS
+	 zSFmcQVXeOwLu+4NazTFDgLcDqBoVPqX3YKJOviA=
+Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
+	by mta1.formilux.org (Postfix) with ESMTP id 8697EC0A83;
+	Sat, 09 May 2026 11:48:49 +0200 (CEST)
+From: Willy Tarreau <w@1wt.eu>
+To: greg@kroah.com
+Cc: Leon Romanovsky <leon@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        skhan@linuxfoundation.org, security@kernel.org,
+        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Willy Tarreau <w@1wt.eu>
+Subject: [PATCH v3 0/3] Documentation: security-bugs: new updates covering triage and AI
+Date: Sat,  9 May 2026 11:47:52 +0200
+Message-ID: <20260509094755.2838-1-w@1wt.eu>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -61,70 +59,81 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Rspamd-Queue-Id: 0D0FB4FEF3A
+X-Rspamd-Queue-Id: 581B64FF09D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[1wt.eu,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[1wt.eu:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86601-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[3];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86603-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[1wt.eu:+];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[w@1wt.eu,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kunwu.chan@linux.dev,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	NEURAL_HAM(-0.00)[-0.995];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,linux.dev:mid,linux.dev:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,1wt.eu:mid,1wt.eu:dkim]
 X-Rspamd-Action: no action
 
-From: Kunwu Chan <kunwu.chan@gmail.com>
+This series tries to translate recent discussions on the security list
+on how to better handle reports. It details:
+  - when not to Cc: the security list
+  - what classes of bugs do not need to be handled privately
+  - minimum requirements for AI-assisted reports
 
-Commit ab875b3e179f ("rcu: Add BOOTPARAM_RCU_STALL_PANIC
-Kconfig option") made the default value of
-kernel.panic_on_rcu_stall depend on
-CONFIG_BOOTPARAM_RCU_STALL_PANIC.
+As usual, this is probably perfectible but can already help in the short
+term as we can point it to reporters, so barring any strong disagreement,
+better continue to proceed in small incremental improvements and observe
+the effects.
 
-Document this in kernel.rst
+Thanks!
+Willy
 
-Signed-off-by: Kunwu Chan <kunwu.chan@gmail.com>
 ---
- Documentation/admin-guide/sysctl/kernel.rst | 4 ++++
- 1 file changed, 4 insertions(+)
+v3:
+  - comments about choice of words and option enumeration from Shuah
+  - AI is public, from Linus and Greg
+  - added extra reviewed-by (Greg, Shuah).
+  - Leon, I kept your reviewed-by since changes are very minimal and
+    didn't change the initial spirit.
+  
+v2:
+  - fixes for issues reported by Randy
+  - Greg's ack on the AI part
+  - reworded the "when to Cc" part based on Greg's feedback
+    (Greg I didn't take your original ack since the wording changed)
+  - split the threat model into its own document as per Greg's suggestion
 
-diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index c6994e55d141..99598a83f830 100644
---- a/Documentation/admin-guide/sysctl/kernel.rst
-+++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -948,6 +948,10 @@ panic_on_rcu_stall
- When set to 1, calls panic() after RCU stall detection messages. This
- is useful to define the root cause of RCU stalls using a vmcore.
- 
-+The default value can be configured at build time via
-+``CONFIG_BOOTPARAM_RCU_STALL_PANIC``. Runtime updates to this sysctl
-+always override the built-in default.
-+
- = ============================================================
- 0 Do not panic() when RCU stall takes place, default behavior.
- 1 panic() after printing RCU stall messages.
+---
+Willy Tarreau (3):
+  Documentation: security-bugs: do not systematically Cc the security
+    team
+  Documentation: security-bugs: explain what is and is not a security
+    bug
+  Documentation: security-bugs: clarify requirements for AI-assisted
+    reports
+
+ Documentation/process/index.rst         |   1 +
+ Documentation/process/security-bugs.rst | 105 ++++++++++-
+ Documentation/process/threat-model.rst  | 236 ++++++++++++++++++++++++
+ 3 files changed, 340 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/process/threat-model.rst
+
 -- 
-2.43.0
+2.52.0
 
 
