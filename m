@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-86659-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86652-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cKKcMnC8/2nm9wAAu9opvQ
-	(envelope-from <linux-doc+bounces-86659-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 01:00:00 +0200
+	id eFtxM0q6/2mm9wAAu9opvQ
+	(envelope-from <linux-doc+bounces-86652-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:50:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AD0B501F48
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:59:59 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 92FB9501C5B
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 00:50:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 644D730AB2C2
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:51:34 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3A225302A7E3
+	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2026 22:49:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 678E53FFAAA;
-	Sat,  9 May 2026 22:49:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A4153E6DFA;
+	Sat,  9 May 2026 22:48:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SE6rkQzN"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="EKu/r3as"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 034263D9043;
-	Sat,  9 May 2026 22:49:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E1F03DA7D4;
+	Sat,  9 May 2026 22:48:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778366947; cv=none; b=fVII01GHof/3GvTofCDKdfrhWx4JCvXlvMsRRZTFpcRr7drWgkyG41hAUDCqe5FZ4EceqGBHx+P+NAHCG4H+jLwKo8zmpnSsNTvNCCk+Itgyy1iMjpdzd8c75gji7z5sc4NP+xD7x5Ee98t0JqEcb6UobhdBOX6q6tLU/v19M80=
+	t=1778366934; cv=none; b=ZGwCZ8vWfCofKGNpRxIEYOidDGhCFbigeplO0oK+TcS0rOTyT7tkRVpU6DTZ4qhsYWenEBTPBdsOoW2Iq29CuW5ivEZZRH0KNCx4SG7+E+q2EC/yK0xlZBjwfAlOFt/pYjcUimSN09z5pelf8O3jpPYg0CKYvniaDaYgJ3gwL4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778366947; c=relaxed/simple;
-	bh=5qfZyt+F6ZQV7QdFVXv286fFETr1VWlC2gByXVFEq+s=;
+	s=arc-20240116; t=1778366934; c=relaxed/simple;
+	bh=b4TPGMG/c9Xusr8xx1qIlNDn4iJHlyU88lbMFTQRtRI=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=qM1tQhK/mdNPkxsrayRCgvpIr44UC5e98IBHkFNHI702izjOVZ2Xpehf7L5WQP+RUIDH718kQsVQWo4/1xCV38LtkSxjYS84yjoYRMA+k11ERZcd7ExICDeW6jun3Nx+6AeXJ6UAF5ze4i2rFfu89nXOknXhoVv5Wtk1aO8wXJA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=SE6rkQzN; arc=none smtp.client-ip=90.155.92.199
+	 MIME-Version; b=Dw6zJXAfHMncOjEiw/SwrAM0q09ZVqZgfiLsOAmopnLqIGLeFbFRbcMQedeEGiQVCSSaqjHpA/NtGSXt5YeuGQGUTjepqDVpLq6cnWsPkCgRpf9PwHDGPefB1xFWtidM5cJ/4y8nMnfdR3W+PXf/7WHyKFkZbpCzmNKcO0sNlAw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=EKu/r3as; arc=none smtp.client-ip=90.155.50.34
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=casper.srs.infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Reply-To:
 	Cc:Content-Type:Content-ID:Content-Description;
-	bh=dFbbY5OtZVYUw6Qy5tHS1aKoaYMuSOyj4x77iW34VYE=; b=SE6rkQzNLq7L4CqMdEC8BZZ0P6
-	EjpyYbZKK7v43rP/AeQVjSCbX4CyqL7SJgHZ4T2fJwadBOsjBMNWV4O9xztFhbc8UcA+mg4CVAeM/
-	pF/f/hHOOeWQWkfR1yJ2MttlyGrwYzwM8Us9usfEsF/GJA5jH2cvu8IwGenT2kPZ0o39/N1dT+CvY
-	nxohuJurpY0cff1GFCz0rJ1gt7T7yFG3MUVg02Quc5oH80soyrmI4lVS78+lhGlGprjcpiGEuprPs
-	JbtHdqIH9/IguEaANVzJe00VtBFhZaDJfm4NidetUasrra5NgYbGP82uPUI+FCBzQ8t4ujGxOn5Cs
-	38tbJYDw==;
+	bh=XMpTG0soXwBy/thkGcHgDsOpdH9egi4Ry9N+LywUSzQ=; b=EKu/r3asoX2SfZ406BfO/egThQ
+	F7iNeLfLoiU4BsuJsLO9wR8exCZfZ16VgO9TgglaLHmvaRE6F70VHCnwl5QPDB/JwnS10nhgau/yJ
+	J7wo3Gx/Lb6KtqMv+CitqIMVfrl98+1mN1P9qTui4wUaHmhIF2QPv9yvu5B+ImTV0eMefXLrJykZI
+	RZJN17BBtlrWPeX5MOsjcAWOEZY+jE7pmxG6iDAaJ3T+mJBuYORNrVKRUOhpuPNI4KwilZw/E9oC2
+	RqxHvK8aRbu2faUJNYRKNfBxBr/ZIi3kMgj6xBoxv/3p4ZSilEZi4CxBzlFx3KoZ7DRnwk1LjYxuB
+	p3RWaigw==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wLqTD-00000008wzA-0Oe2;
-	Sat, 09 May 2026 22:48:32 +0000
+	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wLqTC-000000060LA-3IS1;
+	Sat, 09 May 2026 22:48:27 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wLqTC-0000000DhHh-1YLk;
+	id 1wLqTC-0000000DhHl-1rbg;
 	Sat, 09 May 2026 23:48:26 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
@@ -79,9 +79,9 @@ To: Paolo Bonzini <pbonzini@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 07/30] KVM: x86: Add KVM_VCPU_TSC_SCALE and fix the documentation on TSC migration
-Date: Sat,  9 May 2026 23:46:33 +0100
-Message-ID: <20260509224824.3264567-8-dwmw2@infradead.org>
+Subject: [PATCH v4 08/30] KVM: x86: Avoid NTP frequency skew for KVM clock on 32-bit host
+Date: Sat,  9 May 2026 23:46:34 +0100
+Message-ID: <20260509224824.3264567-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
 References: <20260509224824.3264567-1-dwmw2@infradead.org>
@@ -93,21 +93,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: 2AD0B501F48
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-Rspamd-Queue-Id: 92FB9501C5B
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86659-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86652-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
@@ -120,150 +120,117 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	DKIM_TRACE(0.00)[infradead.org:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:mid,infradead.org:dkim,amazon.co.uk:email,xen.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xen.org:email,infradead.org:mid,infradead.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,amazon.co.uk:email]
 X-Rspamd-Action: no action
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The documentation on TSC migration using KVM_VCPU_TSC_OFFSET is woefully
-inadequate. It ignores TSC scaling, and ignores the fact that the host
-TSC may differ from one host to the next (and in fact because of the way
-the kernel calibrates it, it generally differs from one boot to the next
-even on the same hardware).
+Commit 53fafdbb8b21 ("KVM: x86: switch KVMCLOCK base to monotonic raw
+clock") did so only for 64-bit hosts, by capturing the boot offset from
+within the existing clocksource notifier update_pvclock_gtod().
 
-Add KVM_VCPU_TSC_SCALE to extract the actual scale ratio and frac_bits,
-and attempt to document the process that userspace needs to follow to
-preserve the TSC across migration.
+That notifier was added in commit 16e8d74d2da9 ("KVM: x86: notifier for
+clocksource changes") but only on x86_64, because its original purpose
+was just to disable the "master clock" mode which is only supported on
+x86_64.
 
-Only enumerate KVM_VCPU_TSC_SCALE when kvm_caps.has_tsc_control is true,
-since the scaling ratio is only meaningful when hardware TSC scaling is
-supported.
+Now that the notifier is used for more than disabling master clock mode,
+enable it for the 32-bit build too so that get_kvmclock_base_ns() can be
+unaffected by NTP sync on 32-bit too.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- Documentation/virt/kvm/devices/vcpu.rst | 36 ++++++++++++++++++++++++-
- arch/x86/include/uapi/asm/kvm.h         |  6 +++++
- arch/x86/kvm/x86.c                      | 22 +++++++++++++++
- 3 files changed, 63 insertions(+), 1 deletion(-)
+ arch/x86/kvm/x86.c | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/Documentation/virt/kvm/devices/vcpu.rst b/Documentation/virt/kvm/devices/vcpu.rst
-index 5e3805820010..56562b932280 100644
---- a/Documentation/virt/kvm/devices/vcpu.rst
-+++ b/Documentation/virt/kvm/devices/vcpu.rst
-@@ -243,7 +243,10 @@ Returns:
- Specifies the guest's TSC offset relative to the host's TSC. The guest's
- TSC is then derived by the following equation:
- 
--  guest_tsc = host_tsc + KVM_VCPU_TSC_OFFSET
-+  guest_tsc = ((host_tsc * tsc_scale_ratio) >> tsc_scale_bits) + KVM_VCPU_TSC_OFFSET
-+
-+The values of tsc_scale_ratio and tsc_scale_bits can be obtained using
-+the KVM_VCPU_TSC_SCALE attribute.
- 
- This attribute is useful to adjust the guest's TSC on live migration,
- so that the TSC counts the time during which the VM was paused. The
-@@ -292,3 +295,34 @@ From the destination VMM process:
- 
- 7. Write the KVM_VCPU_TSC_OFFSET attribute for every vCPU with the
-    respective value derived in the previous step.
-+
-+4.2 ATTRIBUTE: KVM_VCPU_TSC_SCALE
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+:Parameters: struct kvm_vcpu_tsc_scale
-+
-+Returns:
-+
-+	 ======= ======================================
-+	 -EFAULT Error reading the provided parameter
-+		 address.
-+	 -ENXIO  Attribute not supported (no TSC scaling)
-+	 -EINVAL Invalid request to write the attribute
-+	 ======= ======================================
-+
-+This read-only attribute reports the guest's TSC scaling factor, in the form
-+of a fixed-point number represented by the following structure::
-+
-+  struct kvm_vcpu_tsc_scale {
-+	__u64 tsc_ratio;
-+	__u64 tsc_frac_bits;
-+  };
-+
-+The tsc_frac_bits field indicates the location of the fixed point, such that
-+host TSC values are converted to guest TSC using the formula:
-+
-+  guest_tsc = ((host_tsc * tsc_ratio) >> tsc_frac_bits) + offset
-+
-+Userspace can use this to precisely calculate the guest TSC from the host
-+TSC at any given moment. This is needed for accurate migration of guests,
-+as described in the documentation for the KVM_VCPU_TSC_OFFSET attribute.
-diff --git a/arch/x86/include/uapi/asm/kvm.h b/arch/x86/include/uapi/asm/kvm.h
-index 5f2b30d0405c..384be9a53395 100644
---- a/arch/x86/include/uapi/asm/kvm.h
-+++ b/arch/x86/include/uapi/asm/kvm.h
-@@ -961,6 +961,12 @@ struct kvm_hyperv_eventfd {
- /* for KVM_{GET,SET,HAS}_DEVICE_ATTR */
- #define KVM_VCPU_TSC_CTRL 0 /* control group for the timestamp counter (TSC) */
- #define   KVM_VCPU_TSC_OFFSET 0 /* attribute for the TSC offset */
-+#define   KVM_VCPU_TSC_SCALE  1 /* attribute for TSC scaling factor */
-+
-+struct kvm_vcpu_tsc_scale {
-+	__u64 tsc_ratio;
-+	__u64 tsc_frac_bits;
-+};
- 
- /* x86-specific KVM_EXIT_HYPERCALL flags. */
- #define KVM_EXIT_HYPERCALL_LONG_MODE	_BITULL(0)
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index d1327d5fba3f..2179ea2da8e0 100644
+index 2179ea2da8e0..1e1834533e98 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -5930,6 +5930,9 @@ static int kvm_arch_tsc_has_attr(struct kvm_vcpu *vcpu,
- 	case KVM_VCPU_TSC_OFFSET:
- 		r = 0;
- 		break;
-+	case KVM_VCPU_TSC_SCALE:
-+		r = kvm_caps.has_tsc_control ? 0 : -ENXIO;
-+		break;
- 	default:
- 		r = -ENXIO;
+@@ -2342,7 +2342,6 @@ static int do_set_msr(struct kvm_vcpu *vcpu, unsigned index, u64 *data)
+ 	return kvm_set_msr_ignored_check(vcpu, index, *data, true);
+ }
+ 
+-#ifdef CONFIG_X86_64
+ struct pvclock_clock {
+ 	int vclock_mode;
+ 	u64 cycle_last;
+@@ -2400,13 +2399,6 @@ static s64 get_kvmclock_base_ns(void)
+ 	/* Count up from boot time, but with the frequency of the raw clock.  */
+ 	return ktime_to_ns(ktime_add(ktime_get_raw(), pvclock_gtod_data.offs_boot));
+ }
+-#else
+-static s64 get_kvmclock_base_ns(void)
+-{
+-	/* Master clock not used, so we can just use CLOCK_BOOTTIME.  */
+-	return ktime_get_boottime_ns();
+-}
+-#endif
+ 
+ static void kvm_write_wall_clock(struct kvm *kvm, gpa_t wall_clock, int sec_hi_ofs)
+ {
+@@ -10160,6 +10152,7 @@ static void pvclock_irq_work_fn(struct irq_work *w)
+ }
+ 
+ static DEFINE_IRQ_WORK(pvclock_irq_work, pvclock_irq_work_fn);
++#endif
+ 
+ /*
+  * Notification about pvclock gtod data update.
+@@ -10167,26 +10160,26 @@ static DEFINE_IRQ_WORK(pvclock_irq_work, pvclock_irq_work_fn);
+ static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
+ 			       void *priv)
+ {
+-	struct pvclock_gtod_data *gtod = &pvclock_gtod_data;
+ 	struct timekeeper *tk = priv;
+ 
+ 	update_pvclock_gtod(tk);
+ 
++#ifdef CONFIG_X86_64
+ 	/*
+ 	 * Disable master clock if host does not trust, or does not use,
+ 	 * TSC based clocksource. Delegate queue_work() to irq_work as
+ 	 * this is invoked with tk_core.seq write held.
+ 	 */
+-	if (!gtod_is_based_on_tsc(gtod->clock.vclock_mode) &&
++	if (!gtod_is_based_on_tsc(pvclock_gtod_data.clock.vclock_mode) &&
+ 	    atomic_read(&kvm_guest_has_master_clock) != 0)
+ 		irq_work_queue(&pvclock_irq_work);
++#endif
+ 	return 0;
+ }
+ 
+ static struct notifier_block pvclock_gtod_notifier = {
+ 	.notifier_call = pvclock_gtod_notify,
+ };
+-#endif
+ 
+ void kvm_setup_xss_caps(void)
+ {
+@@ -10375,9 +10368,9 @@ int kvm_x86_vendor_init(struct kvm_x86_init_ops *ops)
+ 
+ 	if (pi_inject_timer == -1)
+ 		pi_inject_timer = housekeeping_enabled(HK_TYPE_TIMER);
+-#ifdef CONFIG_X86_64
+ 	pvclock_gtod_register_notifier(&pvclock_gtod_notifier);
+ 
++#ifdef CONFIG_X86_64
+ 	if (hypervisor_is_type(X86_HYPER_MS_HYPERV))
+ 		set_hv_tscchange_cb(kvm_hyperv_tsc_notifier);
+ #endif
+@@ -10434,8 +10427,8 @@ void kvm_x86_vendor_exit(void)
+ 					    CPUFREQ_TRANSITION_NOTIFIER);
+ 		cpuhp_remove_state_nocalls(CPUHP_AP_X86_KVM_CLK_ONLINE);
  	}
-@@ -5950,6 +5953,22 @@ static int kvm_arch_tsc_get_attr(struct kvm_vcpu *vcpu,
- 			break;
- 		r = 0;
- 		break;
-+	case KVM_VCPU_TSC_SCALE: {
-+		struct kvm_vcpu_tsc_scale scale;
-+
-+		if (!kvm_caps.has_tsc_control) {
-+			r = -ENXIO;
-+			break;
-+		}
-+
-+		scale.tsc_ratio = vcpu->arch.l1_tsc_scaling_ratio;
-+		scale.tsc_frac_bits = kvm_caps.tsc_scaling_ratio_frac_bits;
-+		r = -EFAULT;
-+		if (copy_to_user(uaddr, &scale, sizeof(scale)))
-+			break;
-+		r = 0;
-+		break;
-+	}
- 	default:
- 		r = -ENXIO;
- 	}
-@@ -5989,6 +6008,9 @@ static int kvm_arch_tsc_set_attr(struct kvm_vcpu *vcpu,
- 		r = 0;
- 		break;
- 	}
-+	case KVM_VCPU_TSC_SCALE:
-+		r = -EINVAL; /* Read only */
-+		break;
- 	default:
- 		r = -ENXIO;
- 	}
+-#ifdef CONFIG_X86_64
+ 	pvclock_gtod_unregister_notifier(&pvclock_gtod_notifier);
++#ifdef CONFIG_X86_64
+ 	irq_work_sync(&pvclock_irq_work);
+ 	cancel_work_sync(&pvclock_gtod_work);
+ #endif
 -- 
 2.51.0
 
