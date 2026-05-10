@@ -1,140 +1,177 @@
-Return-Path: <linux-doc+bounces-86732-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86695-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KO1UHXgiAWqXRAEAu9opvQ
-	(envelope-from <linux-doc+bounces-86732-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 02:27:36 +0200
+	id wAVDGpSRAGq+KQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86695-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 16:09:24 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF40A506E8E
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 02:27:35 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC8285048AF
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 16:09:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id ADAE430048DE
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 00:27:34 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2F1F1300A60C
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 14:09:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D9AC31BD9D0;
-	Mon, 11 May 2026 00:27:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E96DD39A802;
+	Sun, 10 May 2026 14:09:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MnWRzb4A"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="Lpr8NCIq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail-m49217.qiye.163.com (mail-m49217.qiye.163.com [45.254.49.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B30161AE877;
-	Mon, 11 May 2026 00:27:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 902E439A7EA;
+	Sun, 10 May 2026 14:09:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.217
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778459253; cv=none; b=arpKRubGGxssSvJtJU4XAniRsTL7WzyHw6RKJi97Z3kZ1sTFyOoWebLQInblSYUG4tGFXPx6hQDBcQhRAfliPO6OFIrCD98Ipv0Xa3qX/w9jSni+KsyB8D8i5gUJRKTMHU8yi0GlLUWcgmZIgqLBJtTHKpvbbWxXk020+GU25Fc=
+	t=1778422156; cv=none; b=YuJDWlWUU3B/rTtS3peSWOAP31eaaDFGwy27rlZdlEdsloBusnM/7hlFnabXB2rgqYMHCwigDTMLuJOICIZdipcgDbwvvqS6vQbg59l88puyXLCRLDzQa9WhAGCTxKRdwkVQ0tklSEFttExL/r6dx8KCu5zQeu3lNfx7SR9JOPo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778459253; c=relaxed/simple;
-	bh=zrRNcPe3NrqnKm+RIe9w0AUIgWf4yvMCAW2OWp0lSFI=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=pfo9nig1wjo2sTqswmm54Bt0mW3J5I9P93tiY2gmVflCmxvHym3VnU9NpqKm+Fy785Etl23qR+dRrw6s9yR0MlCFah4yxbpzd4AT4wNTLcOrD7tUXBiK/UidkHNhnLSG/OfJHppSeFRBL6LBbsuXXes+GMoG0m+F/NnOk1xjhK8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MnWRzb4A; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 773F3C2BCB8;
-	Mon, 11 May 2026 00:27:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778459253;
-	bh=zrRNcPe3NrqnKm+RIe9w0AUIgWf4yvMCAW2OWp0lSFI=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=MnWRzb4AhYpkbuRemJUhrs+cCUY8xls9vG8Ii57JqCXWmKpTAQyjKsWjvLcg7mj2A
-	 dUrZJ12aD3nl9TVnfLE88iUlPKGp4C/cqVKkQifz8ICOlO9t7TIf2aDlvmg6eV0uq1
-	 WeRkgyQvJVGxFFI24/B2zrF34xHRFxh9cuhsj6E079zgXQxs+EaowoyEQhB263Ztyu
-	 1edXlSFLhNv7/SCb5Rb9kUnev/UFJfpgVS3+mAtO4CBhsSA96t1ZrQcHbYFDdj08lt
-	 UC4pY9khDklUNOoSkOSlqy+UKfOEwGxrMU+C6jExjtYJFl1a/n/PaAFnloJJujLByo
-	 EMzHLjPCYN4iQ==
-From: Mark Brown <broonie@kernel.org>
-To: Takashi Iwai <tiwai@suse.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Liam Girdwood <lgirdwood@gmail.com>, 
- Jaroslav Kysela <perex@perex.cz>, 
- =?utf-8?q?C=C3=A1ssio_Gabriel?= <cassiogabrielcontato@gmail.com>
-Cc: linux-sound@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20260508-asoc-doc-fixes-v1-1-b53eec42e340@gmail.com>
-References: <20260508-asoc-doc-fixes-v1-1-b53eec42e340@gmail.com>
-Subject: Re: [PATCH] ASoC: docs: Fix stale and misspelled references
-Message-Id: <177842076763.951539.4788022638179714248.b4-ty@b4>
-Date: Sun, 10 May 2026 22:46:07 +0900
+	s=arc-20240116; t=1778422156; c=relaxed/simple;
+	bh=qNuRmWjOvodj7BP8pJ2VufzZygVsCAcwy3il7jg+T0w=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=pCri7aoJSKm8RlwRUpGwrc8tl4gc2moYGLSy4nnJL9R1Pm0Z1kEVLaKR4xFcTLOqiowkfZDDwnje95MGn09RSPoCsRPXVSynIwd6rb5vjAOtEOOjneIE+zZMW2JXcFOW4vcD9gcd8AGDICxlYHO2tnApKb0/9t5haMatWN30YfU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=Lpr8NCIq; arc=none smtp.client-ip=45.254.49.217
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
+Received: from server001 (unknown [222.130.22.242])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 3dd2c6ffb;
+	Sun, 10 May 2026 21:53:44 +0800 (GMT+08:00)
+From: Kefan Bai <baikefan@leap-io-kernel.com>
+To: linux-usb@vger.kernel.org,
+	si.yanteng@linux.dev
+Cc: gregkh@linuxfoundation.org,
+	seakeel@gmail.com,
+	alexs@kernel.org,
+	dzm91@hust.edu.cn,
+	corbet@lwn.net,
+	skhan@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	doubled@leap-io-kernel.com
+Subject: [PATCH v6 0/8] Add Chinese translation for USB subsystem
+Date: Sun, 10 May 2026 21:53:31 +0800
+Message-ID: <cover.1778415392.git.baikefan@leap-io-kernel.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1115; i=broonie@kernel.org;
- h=from:subject:message-id; bh=zrRNcPe3NrqnKm+RIe9w0AUIgWf4yvMCAW2OWp0lSFI=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqASJyYaNvonnpEVCMM0E6BSym1XOS2VPXm33Cs
- rF3gMhX3p6JATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCagEicgAKCRAk1otyXVSH
- 0ACfB/0WRD1RYevSFLHAYH3ILTj2MKPyVdu3VKfhB4G30SX+4h3fnV//txbQQjUDEN/xRjsxmtR
- 0adqOUbalzErmPHHYZoUk7wlR/P38MruJGGa7nnefGuJiSJhiJ8jgPT3WCYg21uWLWCwmyvQ3jH
- ffUS4KbxCB8Lav3YyPUwsFmQBUCsUwZwfinm8e6uhPwaK22LhjqmgpstBFuQdCTC5ZI43VXcoY8
- ouxOkdtxKDriHzDVFoEFFj36ZcaZGfgOL8zcGm7ThKxhfTPFwWWCGtOVMndJX2cI517bvCLtOlZ
- pwuAL7QtUKn6ikOK1EzP5C/ecLnRAIfcEuEMt7jfm8cZsFts
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
-X-Rspamd-Queue-Id: CF40A506E8E
+X-HM-Tid: 0a9e122a52be09d5kunm9f76e21d35e08a
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaSEpDVklMH0IeSRhJSUpCQ1YVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlJSUlVSkhLVUlJVUlPSVlXWRYaDxIVHRRZQVlLVUtVS1
+	VLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=Lpr8NCIq0LwUbv68WDoGjUIdKETwhWG2A++fnBmc1lRFLabDEYf4QKnyChnIQOfOicy7HgF5XXhwyLP6URx1ZD7Dblmn5g+IIBcCnLnE3utAfgTjZkk8eVytU3EFm2iXTd2xRkaI6KvOQRbllbohsITZ3mPZ0j6U1+7Ku1FsRgxlDlcT8wXUtlklFMtFru2Xue9nq5cmtOTKEzAR61FUBrZm9M6zCx7bMhpXRaIsi1PUMzCDWfSSdmvQgqaSSMxI7YYSYQHkrItlrWTLKf+HoakoqDDlDQshGjLjwC5izgDkbkY3bD4BTAFKwAVDH8QUUNS1o+jpjEjd1915VkM44w==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
+	bh=QrUkLz8puRF2l1LILFAIK2/bc5QOQhGC50RIGswL+7o=;
+	h=date:mime-version:subject:message-id:from;
+X-Rspamd-Queue-Id: EC8285048AF
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[leap-io-kernel.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[leap-io-kernel.com:s=default];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86732-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[suse.com,lwn.net,linuxfoundation.org,gmail.com,perex.cz];
+	TAGGED_FROM(0.00)[bounces-86695-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,gmail.com,kernel.org,hust.edu.cn,lwn.net,vger.kernel.org,leap-io-kernel.com];
+	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	MIME_TRACE(0.00)[0:+];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[broonie@kernel.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[baikefan@leap-io-kernel.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	NEURAL_HAM(-0.00)[-0.999];
+	DKIM_TRACE(0.00)[leap-io-kernel.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[leap-io-kernel.com:mid,leap-io-kernel.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Fri, 08 May 2026 01:20:50 -0300, Cássio Gabriel wrote:
-> ASoC: docs: Fix stale and misspelled references
+This patch set adds Chinese translations for the USB documentation.
 
-Applied to
+Apologies for the long delay in revisiting this series. I have now
+  rebased it onto the latest docs-next tree, rechecked and polished the
+  translations, retested it, and resent it.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.2
+Changes in v6:
+  - Rebased the series onto the latest docs-next branch in Jon's tree
+    (git://git.lwn.net/linux.git), as suggested by Alex Shi.
+  - Added the USB maintainers to the Cc list.
+  - Rechecked and polished the Chinese translations throughout the series.
 
-Thanks!
+Changes in v5:
+  - Moved the index.rst entries for acm, authorization, chipidea, dwc3,
+    ehci, and usbmon into the corresponding patches so the series builds
+    cleanly when applied patch by patch.
+  - Removed extra spaces in chipidea.rst.
+  - Sent the series to linux-usb@vger.kernel.org for review by
+    Chinese-speaking developers, as suggested by Alex Shi and Yanteng Si.
+  - Link to v5: https://lore.kernel.org/linux-usb/cover.1765180570.git.baikefan@leap-io-kernel.com/
 
-[1/1] ASoC: docs: Fix stale and misspelled references
-      https://git.kernel.org/broonie/sound/c/b2d1eaa9b660
+Changes in v4:
+  - Shortened overlong title underline and overline markers.
+  - Removed the CREDITS entry from index.rst.
+  - Link to v4: https://lore.kernel.org/all/cover.1764674650.git.baikefan@leap-io-kernel.com/
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+Changes in v3:
+  - Updated my sign-off to use my full legal name, as requested by
+    Jonathan Corbet.
+  - Reviewed and fixed the RST syntax issues noted by Alex Shi.
+  - Kept the number of translated files to eight to make submission and
+    review more manageable.
+  - Link to v3: https://lore.kernel.org/all/cover.1763984424.git.baikefan@leap-io-kernel.com/
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+Changes in v2:
+  - Updated [PATCH 01/25] docs/zh_CN: Add index.rst translation to include
+    the corresponding changes to
+    Documentation/translations/zh_CN/subsystem-apis.rst.
+  - Link to v2: https://lore.kernel.org/all/cover.1763897036.git.baikefan@leap-io-kernel.com/
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+v1:
+  - Link: https://lore.kernel.org/all/20251123074540.34161-1-baikefan@leap-io-kernel.com/
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
+Kefan Bai (8):
+  docs/zh_CN: Add index.rst translation
+  docs/zh_CN: Add acm.rst translation
+  docs/zh_CN: Add authorization.rst translation
+  docs/zh_CN: Add chipidea.rst translation
+  docs/zh_CN: Add dwc3.rst translation
+  docs/zh_CN: Add ehci.rst translation
+  docs/zh_CN: Add usbmon.rst translation
+  docs/zh_CN: Add CREDITS translation
 
-Thanks,
-Mark
+ .../translations/zh_CN/subsystem-apis.rst     |   2 +-
+ Documentation/translations/zh_CN/usb/CREDITS  | 162 ++++++++
+ Documentation/translations/zh_CN/usb/acm.rst  | 136 +++++++
+ .../translations/zh_CN/usb/authorization.rst  | 132 ++++++
+ .../translations/zh_CN/usb/chipidea.rst       | 142 +++++++
+ Documentation/translations/zh_CN/usb/dwc3.rst |  60 +++
+ Documentation/translations/zh_CN/usb/ehci.rst | 230 +++++++++++
+ .../translations/zh_CN/usb/index.rst          |  54 +++
+ .../translations/zh_CN/usb/usbmon.rst         | 384 ++++++++++++++++++
+ 9 files changed, 1301 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/usb/CREDITS
+ create mode 100644 Documentation/translations/zh_CN/usb/acm.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/authorization.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/chipidea.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/dwc3.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/ehci.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/index.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/usbmon.rst
+
+--
+2.54.0
 
 
