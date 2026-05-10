@@ -1,245 +1,140 @@
-Return-Path: <linux-doc+bounces-86691-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86732-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aJj2IamLAGodKAEAu9opvQ
-	(envelope-from <linux-doc+bounces-86691-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 15:44:09 +0200
+	id KO1UHXgiAWqXRAEAu9opvQ
+	(envelope-from <linux-doc+bounces-86732-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 02:27:36 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFDFA50456F
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 15:44:08 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF40A506E8E
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 02:27:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id BFCD63003D12
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 13:44:07 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id ADAE430048DE
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 00:27:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAD24390218;
-	Sun, 10 May 2026 13:44:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D9AC31BD9D0;
+	Mon, 11 May 2026 00:27:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="DbqDM/Y2"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MnWRzb4A"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10DB038F654;
-	Sun, 10 May 2026 13:44:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B30161AE877;
+	Mon, 11 May 2026 00:27:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778420646; cv=none; b=WzAa1rwAeBimWeJftEizSZ7XordVrtkYZfwoQTKa9uQpXzENcwF32m7nmVvqoANnI07b7NUiM0EjmBqi7Y3+JZVT9KXZnjVKqXkyFwew/W+ZMuE1hkhov4GBKT+U3aDqlk/y/4Zur+4X3e5lvn5gxPkc39NE7sP2S51XXh2MNMg=
+	t=1778459253; cv=none; b=arpKRubGGxssSvJtJU4XAniRsTL7WzyHw6RKJi97Z3kZ1sTFyOoWebLQInblSYUG4tGFXPx6hQDBcQhRAfliPO6OFIrCD98Ipv0Xa3qX/w9jSni+KsyB8D8i5gUJRKTMHU8yi0GlLUWcgmZIgqLBJtTHKpvbbWxXk020+GU25Fc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778420646; c=relaxed/simple;
-	bh=63nl2SFh9sKVLKwnXXfbkQrugbw3c6qi+SZ9W3m1Dag=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=FlFh5ph0U19knCUqRFGTkAEM44a/ypj8qsd+BewHC0o+MWU9M24UyQvFFNd0sJj3HXWU0+8WvLcV9w63jLT1w+DhA4VIm5NUT6MB/tE6mca/rG0w5V1PAu77Ys6sLnowi7Tg3RzPfBkPoOukk15/RZMvNgQNzzkl9ZI4BWGg1so=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=DbqDM/Y2; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:MIME-Version:Message-ID:References:In-Reply-To:Subject:CC:To:
-	From:Date:Sender:Reply-To:Content-ID:Content-Description;
-	bh=qOD7QxDKk3RTKnTDgKCKX5Mj4tjif9QPuV1x23Y+qME=; b=DbqDM/Y2NO6hs4kz0Y3MeDoyBa
-	RSWqPDNFSCwDZPKmBnCM0Sk0LtTSOYvtX1pGE7pAqKTzP/+bhJ1ZbzOORXjS5TN1tEZQIISZ/G/uv
-	VTpiTcl4OvDMUgSnKV892USVGtpTpoLUuURW82/UyphNjFe7lMvTDRDZnj7h9WgD7knqnFC+Zyz4+
-	rF4k/UaGF9Uc2rQ4oYFGcBNsUpOZkl9egs5sj/UMoiy2SiMJ2afO1t2v+mc9V4mj4bO6I47trVbES
-	R9hzfaaYRipyM9f09YTVGrLCMy/2oVBxbjmupoL49saso54NbueZks0urkiVkkSBw3xZAGJZcVCcH
-	1uryzAGA==;
-Received: from [38.23.173.23] (helo=ehlo.thunderbird.net)
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wM4RG-0000000AryI-1hB3;
-	Sun, 10 May 2026 13:43:22 +0000
-Date: Sun, 10 May 2026 09:43:49 -0400
-From: "Liam R. Howlett" <liam@infradead.org>
-To: Ackerley Tng <ackerleytng@google.com>
-CC: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com,
- brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org,
- ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com,
- michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com,
- qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com,
- shivankg@amd.com, steven.price@arm.com, tabba@google.com,
- willy@infradead.org, wyihan@google.com, yan.y.zhao@intel.com,
- forkloop@google.com, pratyush@kernel.org, suzuki.poulose@arm.com,
- aneesh.kumar@kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
- Sean Christopherson <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>,
- Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>,
- Barry Song <baohua@kernel.org>, Axel Rasmussen <axelrasmussen@google.com>,
- Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
- Youngjun Park <youngjun.park@lge.com>, Qi Zheng <qi.zheng@linux.dev>,
- Shakeel Butt <shakeel.butt@linux.dev>, Kiryl Shutsemau <kas@kernel.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>,
- kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
- linux-coco@lists.linux.dev
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_RFC_v5_10/53=5D_KVM=3A_guest=5Fmemfd=3A_Ad?=
- =?US-ASCII?Q?d_basic_support_for_KVM=5FSET=5FMEMORY=5FATTRIBUTES2?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAEvNRgF9+Gr7UVEq-E2SQEb_XOQQMOXy9F_A2tA=DbNV_fJ0EQ@mail.gmail.com>
-References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com> <20260428-gmem-inplace-conversion-v5-10-d8608ccfca22@google.com> <n5ce32wumzeiqqyqutom4apy2kqfetbvusc6j4k2xarsska5mw@klp5bmy7qhfm> <CAEvNRgF9+Gr7UVEq-E2SQEb_XOQQMOXy9F_A2tA=DbNV_fJ0EQ@mail.gmail.com>
-Message-ID: <1DAB05E2-7F30-45D7-B155-B66C59D31AFF@infradead.org>
+	s=arc-20240116; t=1778459253; c=relaxed/simple;
+	bh=zrRNcPe3NrqnKm+RIe9w0AUIgWf4yvMCAW2OWp0lSFI=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=pfo9nig1wjo2sTqswmm54Bt0mW3J5I9P93tiY2gmVflCmxvHym3VnU9NpqKm+Fy785Etl23qR+dRrw6s9yR0MlCFah4yxbpzd4AT4wNTLcOrD7tUXBiK/UidkHNhnLSG/OfJHppSeFRBL6LBbsuXXes+GMoG0m+F/NnOk1xjhK8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MnWRzb4A; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 773F3C2BCB8;
+	Mon, 11 May 2026 00:27:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778459253;
+	bh=zrRNcPe3NrqnKm+RIe9w0AUIgWf4yvMCAW2OWp0lSFI=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+	b=MnWRzb4AhYpkbuRemJUhrs+cCUY8xls9vG8Ii57JqCXWmKpTAQyjKsWjvLcg7mj2A
+	 dUrZJ12aD3nl9TVnfLE88iUlPKGp4C/cqVKkQifz8ICOlO9t7TIf2aDlvmg6eV0uq1
+	 WeRkgyQvJVGxFFI24/B2zrF34xHRFxh9cuhsj6E079zgXQxs+EaowoyEQhB263Ztyu
+	 1edXlSFLhNv7/SCb5Rb9kUnev/UFJfpgVS3+mAtO4CBhsSA96t1ZrQcHbYFDdj08lt
+	 UC4pY9khDklUNOoSkOSlqy+UKfOEwGxrMU+C6jExjtYJFl1a/n/PaAFnloJJujLByo
+	 EMzHLjPCYN4iQ==
+From: Mark Brown <broonie@kernel.org>
+To: Takashi Iwai <tiwai@suse.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Jaroslav Kysela <perex@perex.cz>, 
+ =?utf-8?q?C=C3=A1ssio_Gabriel?= <cassiogabrielcontato@gmail.com>
+Cc: linux-sound@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260508-asoc-doc-fixes-v1-1-b53eec42e340@gmail.com>
+References: <20260508-asoc-doc-fixes-v1-1-b53eec42e340@gmail.com>
+Subject: Re: [PATCH] ASoC: docs: Fix stale and misspelled references
+Message-Id: <177842076763.951539.4788022638179714248.b4-ty@b4>
+Date: Sun, 10 May 2026 22:46:07 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: EFDFA50456F
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1115; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=zrRNcPe3NrqnKm+RIe9w0AUIgWf4yvMCAW2OWp0lSFI=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqASJyYaNvonnpEVCMM0E6BSym1XOS2VPXm33Cs
+ rF3gMhX3p6JATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCagEicgAKCRAk1otyXVSH
+ 0ACfB/0WRD1RYevSFLHAYH3ILTj2MKPyVdu3VKfhB4G30SX+4h3fnV//txbQQjUDEN/xRjsxmtR
+ 0adqOUbalzErmPHHYZoUk7wlR/P38MruJGGa7nnefGuJiSJhiJ8jgPT3WCYg21uWLWCwmyvQ3jH
+ ffUS4KbxCB8Lav3YyPUwsFmQBUCsUwZwfinm8e6uhPwaK22LhjqmgpstBFuQdCTC5ZI43VXcoY8
+ ouxOkdtxKDriHzDVFoEFFj36ZcaZGfgOL8zcGm7ThKxhfTPFwWWCGtOVMndJX2cI517bvCLtOlZ
+ pwuAL7QtUKn6ikOK1EzP5C/ecLnRAIfcEuEMt7jfm8cZsFts
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+X-Rspamd-Queue-Id: CF40A506E8E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.96 / 15.00];
-	SUBJ_EXCESS_QP(1.20)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-86691-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-86732-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[suse.com,lwn.net,linuxfoundation.org,gmail.com,perex.cz];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[64];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MIME_TRACE(0.00)[0:+];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[liam@infradead.org,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[broonie@kernel.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,infradead.org:email,infradead.org:mid,infradead.org:dkim]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-On 7 May 2026 12:56:11 GMT-04:00, Ackerley Tng <ackerleytng@google=2Ecom> w=
-rote:
->"Liam R=2E Howlett" <liam@infradead=2Eorg> writes:
->
->> On 26/04/28 04:25PM, Ackerley Tng via B4 Relay wrote:
->>>
->>> [=2E=2E=2Esnip=2E=2E=2E]
->>>
->>> +/*
->>> + * Preallocate memory for attributes to be stored on a maple tree, po=
-inted to
->>> + * by mas=2E  Adjacent ranges with attributes identical to the new at=
-tributes
->>> + * will be merged=2E  Also sets mas's bounds up for storing attribute=
-s=2E
->>> + *
->>> + * This maintains the invariant that ranges with the same attributes =
-will
->>> + * always be merged=2E
->>> + */
->>> +static int kvm_gmem_mas_preallocate(struct ma_state *mas, u64 attribu=
-tes,
->>> +				    pgoff_t start, size_t nr_pages)
->>> +{
->>> +	pgoff_t end =3D start + nr_pages;
->>> +	pgoff_t last =3D end - 1;
->>> +	void *entry;
->>> +
->>> +	/* Try extending range=2E entry is NULL on overflow/wrap-around=2E *=
-/
->>> +	mas_set_range(mas, end, end);
->>> +	entry =3D mas_find(mas, end);
->
->Thank you for your reviews!
->
->>
->> Please read the documentation as I believe you have a bug here=2E  What
->> happens if there is another range stored higher than end + 1?
->>
->
->The invariant in this maple tree is that contiguous ranges with the same
->attribute are stored as a single range=2E
->
->The goal of this first part is to get the entry at the index just after
->the requested range, and see what the attribute there is=2E If that
->attribute is what we're about to set, extend the requested range for
->storing to the end of that range=2E
->
->If there is another range higher than end + 1, with the invariant
->maintained, that attribute has to be different than the attribute stored
->at end=2E Hence, we only want to extend this requested range up till end=
-=2E
->
+On Fri, 08 May 2026 01:20:50 -0300, Cássio Gabriel wrote:
+> ASoC: docs: Fix stale and misspelled references
 
-mas_find() will look for an entry at the given address for the first searc=
-h, and if it is not found it will continue to search upwards=2E  Since you =
-limit the search to end, it will work as you want and there isn't a bug as =
-I was thinking in my sleep deprived state=2E
+Applied to
 
-Since you are searching for exactly one address (end), it might serve you =
-better to walk there=2E  Maybe walking is a better API for what you are doi=
-ng here?
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.2
 
+Thanks!
 
->> Do you have testing of these functions somewhere?
->>
->
->GMEM_CONVERSION_MULTIPAGE_TEST_INIT_SHARED(indexing, 4) tests setting
->attributes in ranges=2E If test_page is 2,
->
->1=2E [0, 4) starts off shared (4 is the number of pages in the guest_memf=
-d)
->2=2E [2, 3) is converted to private
->    =3D> so the ranges should now be [0, 2), [2, 3), [3, 4)
->3=2E [2, 3) is converted back to shared
->    =3D> so the ranges should now be [0, 4)
->
->I verified this by inserting some trace_printk()s and inspecting manually=
-=2E
->
+[1/1] ASoC: docs: Fix stale and misspelled references
+      https://git.kernel.org/broonie/sound/c/b2d1eaa9b660
 
-Thanks=2E  I find the exclusive ranges a bit odd to think about in the map=
-le tree context, but this test case makes sense=2E  This is especially odd =
-to look at a single index entry, at least for me=2E
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
-I generally have a set of test cases and append any bug reproduces to that=
- list so they are unlikely to reoccur=2E  My testing is certainly different=
- from what you'll be doing, but this method has done well with the quality =
-of code improving over time, and limited (if any) regressions=2E
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
-I actually insist that any fix has a test before I accept them=2E  There a=
-re two reasons for this: 1=2E Avoiding the regression=2E 2=2E People really=
- understand the bug if they can create a reproducer=2E
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-I hope this helps=2E
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
-
->>> +	if (entry && xa_to_value(entry) =3D=3D attributes)
->>> +		last =3D mas->last;
->>> +
->>> +	if (start > 0) {
->>> +		mas_set_range(mas, start - 1, start - 1);
->>> +		entry =3D mas_find(mas, start - 1);
->>> +		if (entry && xa_to_value(entry) =3D=3D attributes)
->>> +			start =3D mas->index;
->>> +	}
->>> +
->>> +	mas_set_range(mas, start, last);
->>> +	return mas_preallocate(mas, xa_mk_value(attributes), GFP_KERNEL);
->>> +}
->>> +
->>>
->>> [=2E=2E=2Esnip=2E=2E=2E]
->>>
+Thanks,
+Mark
 
 
