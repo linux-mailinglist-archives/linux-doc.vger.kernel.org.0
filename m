@@ -1,402 +1,155 @@
-Return-Path: <linux-doc+bounces-86700-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86702-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0BROBH2ZAGpWKwEAu9opvQ
-	(envelope-from <linux-doc+bounces-86700-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 16:43:09 +0200
+	id uIbhIDWoAGqTLQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86702-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 17:45:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 650AC504A2D
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 16:43:07 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A07A9504E8C
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 17:45:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id F3D1A3009CFE
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 14:42:50 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id F3E8E300B8F3
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 15:44:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16B1B39C645;
-	Sun, 10 May 2026 14:42:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED8D839E6C6;
+	Sun, 10 May 2026 15:44:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="AKU9sa3m"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="bitRkuo8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-186.mta1.migadu.com (out-186.mta1.migadu.com [95.215.58.186])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F5E839E17C
-	for <linux-doc@vger.kernel.org>; Sun, 10 May 2026 14:42:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.186
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 632083A1CE6
+	for <linux-doc@vger.kernel.org>; Sun, 10 May 2026 15:44:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778424170; cv=none; b=gM2pxluwsO+EvTj+u4oxWo1QP+OuyKblx8+vHzagVC/AgxnBN5fd/emLw9RLdyBHJHN9/t2KSkWMaoSU3VAHcyda+WVeLBJdQvc3oJ6Yx9bgwKAh5hUE39mmnhg3JVfkAH3qTGGDjeDcS3vv58RgecRnJDR3BWNXKlsxfbxnDcM=
+	t=1778427889; cv=none; b=CsWQR2lXBcvf6dBsqDchkEGsg5djiFoZNGbRaJKcbHNK//jDc6OliFMjybwmUWUpoqnwEHYDqfUf863Dnb/5s5jnwGhtVv8CAO8byaqGT5b5N1Pj3uQugyfrwf3+/kQrVuHbsg4R/V0QpT9mO9P2gul+mi5r2k44EuvEOVIn+VQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778424170; c=relaxed/simple;
-	bh=v5moWlDgWXyXpIDKc1xx5LnE/3kJjtazvHv6Bs6IHNE=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=eh3Qi4XKmJEKoP3w9BUR2EjKfMWS16Rkr8tExZ/SpXC72MF/QqggscKQSDeYyKasQfb3tlklXru0LHA9qeZ8piouzKBJhCruHUuOevgTtpNdfMywpezWj+2DDJuj2GUrxDCeSz3ZZz+lYgiLnVZDPvq4Sf0AwyirLmxuRC4/2Zw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=AKU9sa3m; arc=none smtp.client-ip=95.215.58.186
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1778424164;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=XtLBmOnLto9xVpl00Lw1ozKRruIqiqHPeh0/9Zkfe0o=;
-	b=AKU9sa3mbc8Lf4eG+ZJ3/JPyUGJKV03Jh8cLX0X/7ND+D857JbKPc+nHzAbJNq0NxICQyJ
-	tuEnnY1xfi9aVuvTaoiMm5MIUYsDprNgZrpLHckKiL3NObxIgrQVHxDsVrEh+R13x24gjk
-	QCV7SLdc3MrI8Exwa9n0n1qX4E+Koq4=
-From: Lance Yang <lance.yang@linux.dev>
-To: leitao@debian.org
-Cc: david@kernel.org,
-	linmiaohe@huawei.com,
-	nao.horiguchi@gmail.com,
-	akpm@linux-foundation.org,
-	corbet@lwn.net,
-	skhan@linuxfoundation.org,
-	ljs@kernel.org,
-	Liam.Howlett@oracle.com,
-	vbabka@kernel.org,
-	rppt@kernel.org,
-	surenb@google.com,
-	mhocko@suse.com,
-	shuah@kernel.org,
-	linux-mm@kvack.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	kernel-team@meta.com,
-	Lance Yang <lance.yang@linux.dev>
-Subject: Re: [PATCH v5 2/4] mm/memory-failure: add panic option for unrecoverable pages
-Date: Sun, 10 May 2026 22:42:20 +0800
-Message-Id: <20260510144220.92522-1-lance.yang@linux.dev>
-In-Reply-To: <aftnSfb15G92JON5@gmail.com>
-References: <aftnSfb15G92JON5@gmail.com>
+	s=arc-20240116; t=1778427889; c=relaxed/simple;
+	bh=sNdX5YmNUgXWUhPlvLxQZqUPETvy8FJif2OTnlpTY6s=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=pKi91+c4xhmMP2662HEjaY+31t9/IMfu/DJ7hFonxbPoJ+wOwuiQuqR09F9JfAJuxPBZ0w++UxxVkDvGm00rTdhb1TBdRdJ4XeuSvkwWvJq7rQfRFaRMKejjzT8qa9q1STsA3Ah4t8ME40Bohn1DzqgvuY5xz+DmBrqGgA6DD5o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=bitRkuo8; arc=none smtp.client-ip=192.198.163.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778427888; x=1809963888;
+  h=date:from:to:cc:subject:message-id;
+  bh=sNdX5YmNUgXWUhPlvLxQZqUPETvy8FJif2OTnlpTY6s=;
+  b=bitRkuo8PJItPx1c0y0PzaAwDDzV80JGkdX7eXFodmxYu/imjBbwjPIx
+   0JdZUchrE4829dHwzXinYLNVWG59jkMRGQ1Vqk7IY66lgdsvJfbixoGVw
+   6yjj/6WlOtsUaSnPRDdLojnT6dD5bsL1az6SGZasEGFIViJRmAL/SkmC/
+   kMiHCOA5U8QmLyvx6RSNrW2crjqTpQ8iO6a2sX11vakJ9YuL2KY6I54WN
+   JlwupPDipIVqSnw/GFoYAve57vriOcV3M/DUtuU+kdOY61Jep9FMH4Gll
+   AL55rOqWolHhUSgkWxX4UutssiEgbSthqrhyTq1+WtO+aE2cerNkvTf2n
+   A==;
+X-CSE-ConnectionGUID: F9+suC2dTcaP7Wpder2y0w==
+X-CSE-MsgGUID: 97T9mOSgQ424YI7o0o+AJA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11782"; a="79367109"
+X-IronPort-AV: E=Sophos;i="6.23,227,1770624000"; 
+   d="scan'208";a="79367109"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 May 2026 08:44:48 -0700
+X-CSE-ConnectionGUID: oGO/S5D1QiiNcHh4Sh0m7A==
+X-CSE-MsgGUID: l9MDDW8mSfKeVpEALdNpvQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,227,1770624000"; 
+   d="scan'208";a="275370121"
+Received: from igk-lkp-server01.igk.intel.com (HELO bdf09bfdbd5f) ([10.211.93.152])
+  by orviesa001.jf.intel.com with ESMTP; 10 May 2026 08:44:46 -0700
+Received: from kbuild by bdf09bfdbd5f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wM6Kh-000000007kH-3wip;
+	Sun, 10 May 2026 15:44:43 +0000
+Date: Sun, 10 May 2026 17:44:41 +0200
+From: kernel test robot <lkp@intel.com>
+To: Asier Gutierrez <gutierrez.asier@huawei-partners.com>
+Cc: oe-kbuild-all@lists.linux.dev, 0day robot <lkp@intel.com>,
+ linux-doc@vger.kernel.org
+Subject: htmldocs: Documentation/admin-guide/mm/damon/hugepage.rst:3:
+ WARNING: Title overline too short.
+Message-ID: <202605101727.glKBkFJv-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Rspamd-Queue-Id: 650AC504A2D
+X-Rspamd-Queue-Id: A07A9504E8C
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.34 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86700-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_TWELVE(0.00)[20];
+	DKIM_TRACE(0.00)[intel.com:+];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org,oracle.com,google.com,suse.com,kvack.org,vger.kernel.org,meta.com,linux.dev];
-	DKIM_TRACE(0.00)[linux.dev:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86702-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-0.999];
+	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:mid,linux.dev:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,intel.com:email,intel.com:mid,intel.com:dkim]
 X-Rspamd-Action: no action
 
+tree:   https://github.com/intel-lab-lkp/linux/commits/gutierrez-asier-huawei-partners-com/mm-damon-Generalize-ctx_target-creation-for-damon_ops_id-and-add-vaddr-support/20260510-155505
+head:   022dc7c281135daee8dd8ad5c6ff6593bcfd2787
+commit: 022dc7c281135daee8dd8ad5c6ff6593bcfd2787 Documentation/admin-guide/mm/damon: add DAMON-based Hugepage Management documentation
+date:   8 hours ago
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260510/202605101727.glKBkFJv-lkp@intel.com/reproduce)
 
-On Wed, May 06, 2026 at 09:18:12AM -0700, Breno Leitao wrote:
->On Tue, Apr 28, 2026 at 11:07:21AM +0800, Lance Yang wrote:
->> 
->> On Mon, Apr 27, 2026 at 05:49:28PM +0200, David Hildenbrand (Arm) wrote:
->> >> +	switch (type) {
->> >> +	case MF_MSG_KERNEL:
->> >> +	case MF_MSG_UNKNOWN:
->> >> +		return true;
->> >> +	case MF_MSG_KERNEL_HIGH_ORDER:
->> >> +		/*
->> >> +		 * Rule out a concurrent buddy allocation: give the
->> >> +		 * allocator a moment to finish prep_new_page() and
->> >> +		 * re-check. A genuine high-order kernel tail page stays
->> >> +		 * unowned; an in-flight allocation will have bumped the
->> >> +		 * refcount, attached a mapping, or placed the page on
->> >> +		 * an LRU by now.
->> >> +		 */
->> >> +		p = pfn_to_online_page(pfn);
->> >> +		if (!p)
->> >> +			return true;
->> >> +		/*
->> >> +		 * Yield so a concurrent allocator on another CPU can
->> >> +		 * finish prep_new_page() and have its writes become
->> >> +		 * visible before we resample the page state.
->> >> +		 */
->> >> +		cpu_relax();
->> >> +		return page_count(p) == 0 &&
->> >> +		       !PageLRU(p) &&
->> >> +		       !page_mapped(p) &&
->> >> +		       !page_folio(p)->mapping &&
->> >> +		       !is_free_buddy_page(p);
->> >
->> >I don't get what you are doing here. The right way to check for a tail page is
->> >not by checking the refcount.
->> >
->> >Further, you are not holding a folio reference? If so, calling
->> >page_mapped/folio_mapped is shaky. On concurrent folio split you can trigger a
->> >VM_WARN_ON_FOLIO().
->> >
->> >
->> >Maybe folio_snapshot() is what you are looking for, if you are in fact not
->> >holding a reference?
->> 
->> Right! Maybe we should not try to make this decision in
->> panic_on_unrecoverable_mf().
->> 
->> By the time we get here, we only know the final MF_MSG_* type. The
->> real reason why get_hwpoison_page() failed is already lost.
->> 
->> Wonder if it would be better to split that earlier, around
->> __get_unpoison_page()/get_any_page(). That code still knows why
->> grabbing the page failed, either an unsupported kernel page or
->> just a temporary race we cannot really trust :)
->> 
->> Then the later panic logic can be simple: panic for the stable
->> unsupported kernel page case, and not for the temporary race case.
->> 
->> That would also avoid trying to guess MF_MSG_KERNEL_HIGH_ORDER here:)
->
->This is a very good feedback, and definitely what I wanted to do, but,
->failed. Once we have the reason, we don't need this dance to guess the
->reason.
->
->I've hacked a patch based on this approach. How does it sound?
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202605101727.glKBkFJv-lkp@intel.com/
 
-Yes. This direction makes sense to me, not an expert though :D
+All warnings (new ones prefixed by >>):
 
-I played with something similar (untested) on top of patch #01:
+   WARNING: Documentation/ABI/testing/sysfs-class-reboot-mode-reboot_modes:36: abi_sys_class_reboot_mode_driver_reboot_modes doesn't have a description
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/os_mode is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:364; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:234
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/os_mode_index is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:373; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:243
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/touchpad/enabled is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:636; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:252
+   WARNING: /sys/bus/usb/devices/<busnum>-<devnum>:<config num>.<interface num>/<hid-bus>:<vendor-id>:<product-id>.<num>/touchpad/enabled_index is defined 2 times: Documentation/ABI/testing/sysfs-driver-hid-lenovo-go:645; Documentation/ABI/testing/sysfs-driver-hid-lenovo-go-s:261
+>> Documentation/admin-guide/mm/damon/hugepage.rst:3: WARNING: Title overline too short.
+--
+   =======================
+   DAMON-based huge page collapsing
+   ======================= [docutils]
+>> Documentation/admin-guide/mm/damon/hugepage.rst:11: WARNING: Title underline too short.
 
----8<---
-diff --git a/mm/memory-failure.c b/mm/memory-failure.c
-index 432d5f996c64..a2799f063913 100644
---- a/mm/memory-failure.c
-+++ b/mm/memory-failure.c
-@@ -74,6 +74,8 @@ static int sysctl_memory_failure_recovery __read_mostly = 1;
 
- static int sysctl_enable_soft_offline __read_mostly = 1;
+vim +3 Documentation/admin-guide/mm/damon/hugepage.rst
 
-+static int sysctl_panic_on_unrecoverable_mf __read_mostly;
-+
- atomic_long_t num_poisoned_pages __read_mostly = ATOMIC_LONG_INIT(0);
+     2	
+   > 3	=======================
+     4	DAMON-based huge page collapsing
+     5	=======================
+     6	
+     7	DAMON-based huge page collapsing (DAMON_HUGEPAGE) is a static kernel module
+     8	that aimed to collapse hot regions into huge pages.
+     9	
+    10	Where Proactive huge page collapsing is Required?
+  > 11	========================================
+    12	
 
- static bool hw_memory_failure __read_mostly = false;
-@@ -155,6 +157,15 @@ static const struct ctl_table memory_failure_table[] = {
- 		.proc_handler	= proc_dointvec_minmax,
- 		.extra1		= SYSCTL_ZERO,
- 		.extra2		= SYSCTL_ONE,
-+	},
-+	{
-+		.procname	= "panic_on_unrecoverable_memory_failure",
-+		.data		= &sysctl_panic_on_unrecoverable_mf,
-+		.maxlen		= sizeof(sysctl_panic_on_unrecoverable_mf),
-+		.mode		= 0644,
-+		.proc_handler	= proc_dointvec_minmax,
-+		.extra1		= SYSCTL_ZERO,
-+		.extra2		= SYSCTL_ONE,
- 	}
- };
-
-@@ -1281,6 +1292,18 @@ static void update_per_node_mf_stats(unsigned long pfn,
- 	++mf_stats->total;
- }
-
-+static bool panic_on_unrecoverable_mf(enum mf_action_page_type type,
-+				      enum mf_result result)
-+{
-+	if (!sysctl_panic_on_unrecoverable_mf || result != MF_IGNORED)
-+		return false;
-+
-+	if (type == MF_MSG_KERNEL)
-+		return true;
-+
-+	return false;
-+}
-+
- /*
-  * "Dirty/Clean" indication is not 100% accurate due to the possibility of
-  * setting PG_dirty outside page lock. See also comment above set_page_dirty().
-@@ -1298,6 +1321,9 @@ static int action_result(unsigned long pfn, enum mf_action_page_type type,
- 	pr_err("%#lx: recovery action for %s: %s\n",
- 		pfn, action_page_types[type], action_name[result]);
-
-+	if (panic_on_unrecoverable_mf(type, result))
-+		panic("Memory failure: %#lx: unrecoverable page", pfn);
-+
- 	return (result == MF_RECOVERED || result == MF_DELAYED) ? 0 : -EBUSY;
- }
-
-@@ -1389,11 +1415,27 @@ static int __get_hwpoison_page(struct page *page, unsigned long flags)
-
- #define GET_PAGE_MAX_RETRY_NUM 3
-
--static int get_any_page(struct page *p, unsigned long flags)
-+enum mf_get_page_status {
-+	MF_GET_PAGE_OK = 0,
-+	MF_GET_PAGE_RACE,
-+	MF_GET_PAGE_UNHANDLABLE,
-+};
-+
-+static void set_mf_get_page_status(enum mf_get_page_status *gp_status,
-+				   enum mf_get_page_status value)
-+{
-+	if (gp_status)
-+		*gp_status = value;
-+}
-+
-+static int get_any_page(struct page *p, unsigned long flags,
-+			enum mf_get_page_status *gp_status)
- {
- 	int ret = 0, pass = 0;
- 	bool count_increased = false;
-
-+	set_mf_get_page_status(gp_status, MF_GET_PAGE_OK);
-+
- 	if (flags & MF_COUNT_INCREASED)
- 		count_increased = true;
-
-@@ -1406,11 +1448,13 @@ static int get_any_page(struct page *p, unsigned long flags)
- 				if (pass++ < GET_PAGE_MAX_RETRY_NUM)
- 					goto try_again;
- 				ret = -EBUSY;
-+				set_mf_get_page_status(gp_status, MF_GET_PAGE_RACE);
- 			} else if (!PageHuge(p) && !is_free_buddy_page(p)) {
- 				/* We raced with put_page, retry. */
- 				if (pass++ < GET_PAGE_MAX_RETRY_NUM)
- 					goto try_again;
- 				ret = -EIO;
-+				set_mf_get_page_status(gp_status, MF_GET_PAGE_RACE);
- 			}
- 			goto out;
- 		} else if (ret == -EBUSY) {
-@@ -1423,6 +1467,7 @@ static int get_any_page(struct page *p, unsigned long flags)
- 				goto try_again;
- 			}
- 			ret = -EIO;
-+			set_mf_get_page_status(gp_status, MF_GET_PAGE_UNHANDLABLE);
- 			goto out;
- 		}
- 	}
-@@ -1442,6 +1487,7 @@ static int get_any_page(struct page *p, unsigned long flags)
- 		}
- 		put_page(p);
- 		ret = -EIO;
-+		set_mf_get_page_status(gp_status, MF_GET_PAGE_UNHANDLABLE);
- 	}
- out:
- 	if (ret == -EIO)
-@@ -1480,6 +1526,7 @@ static int __get_unpoison_page(struct page *page)
-  * get_hwpoison_page() - Get refcount for memory error handling
-  * @p:		Raw error page (hit by memory error)
-  * @flags:	Flags controlling behavior of error handling
-+ * @gp_status:	Optional output for the reason get_any_page() failed
-  *
-  * get_hwpoison_page() takes a page refcount of an error page to handle memory
-  * error on it, after checking that the error page is in a well-defined state
-@@ -1503,7 +1550,8 @@ static int __get_unpoison_page(struct page *page)
-  *         operations like allocation and free,
-  *         -EHWPOISON when the page is hwpoisoned and taken off from buddy.
-  */
--static int get_hwpoison_page(struct page *p, unsigned long flags)
-+static int get_hwpoison_page(struct page *p, unsigned long flags,
-+			     enum mf_get_page_status *gp_status)
- {
- 	int ret;
-
-@@ -1511,7 +1559,7 @@ static int get_hwpoison_page(struct page *p, unsigned long flags)
- 	if (flags & MF_UNPOISON)
- 		ret = __get_unpoison_page(p);
- 	else
--		ret = get_any_page(p, flags);
-+		ret = get_any_page(p, flags, gp_status);
- 	zone_pcp_enable(page_zone(p));
-
- 	return ret;
-@@ -2341,6 +2389,7 @@ static int memory_failure_pfn(unsigned long pfn, int flags)
-  */
- int memory_failure(unsigned long pfn, int flags)
- {
-+	enum mf_get_page_status gp_status = MF_GET_PAGE_OK;
- 	struct page *p;
- 	struct folio *folio;
- 	struct dev_pagemap *pgmap;
-@@ -2413,7 +2462,7 @@ int memory_failure(unsigned long pfn, int flags)
- 	 * that may make page_ref_freeze()/page_ref_unfreeze() mismatch.
- 	 */
- 	is_reserved = PageReserved(p);
--	res = get_hwpoison_page(p, flags);
-+	res = get_hwpoison_page(p, flags, &gp_status);
- 	if (!res) {
- 		if (is_free_buddy_page(p)) {
- 			if (take_page_off_buddy(p)) {
-@@ -2437,9 +2486,13 @@ int memory_failure(unsigned long pfn, int flags)
- 		/*
- 		 * Pages with PG_reserved set are not currently managed by the
- 		 * page allocator (memblock-reserved memory, driver reservations,
--		 * etc.), so classify them as kernel-owned for reporting.
-+		 * etc.), so classify them as kernel-owned for reporting. Do the
-+		 * same for pages that get_any_page() still cannot handle after
-+		 * retries: likely non-LRU/non-buddy pages such as slab, kernel
-+		 * stack, page table or vmalloc-backed pages. Transient lifecycle
-+		 * races stay as MF_MSG_GET_HWPOISON.
- 		 */
--		if (is_reserved)
-+		if (is_reserved || gp_status == MF_GET_PAGE_UNHANDLABLE)
- 			res = action_result(pfn, MF_MSG_KERNEL, MF_IGNORED);
- 		else
- 			res = action_result(pfn, MF_MSG_GET_HWPOISON,
-@@ -2744,7 +2797,7 @@ int unpoison_memory(unsigned long pfn)
- 		goto unlock_mutex;
- 	}
-
--	ghp = get_hwpoison_page(p, MF_UNPOISON);
-+	ghp = get_hwpoison_page(p, MF_UNPOISON, NULL);
- 	if (!ghp) {
- 		if (folio_test_hugetlb(folio)) {
- 			huge = true;
-@@ -2951,7 +3004,7 @@ int soft_offline_page(unsigned long pfn, int flags)
-
- retry:
- 	get_online_mems();
--	ret = get_hwpoison_page(page, flags | MF_SOFT_OFFLINE);
-+	ret = get_hwpoison_page(page, flags | MF_SOFT_OFFLINE, NULL);
- 	put_online_mems();
-
- 	if (hwpoison_filter(page)) {
----
-
-I would leave MF_MSG_KERNEL_HIGH_ORDER out for now. That path still
-has the allocator race David pointed out, unless there is easy way to
-rule that out ...
-
-Also would leave MF_MSG_UNKNOWN out. We don't really know what it is no?
-So it's not good basis for a panic decision :)
-
-Maybe better to keep panic_on_unrecoverable_mf simple: classify the
-get_any_page() failure reason earlier, but only panic on MF_MSG_KERNEL.
-
-IMHO, making the knob too complicated for memory failures that should be
-rare does not seem worth it. Just covering MF_MSG_KERNEL should already
-help crash analysis a lot :)
-
-Feel free to pick up any bits that look useful :)
-
-Cheers, Lance
-
-[...]
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
