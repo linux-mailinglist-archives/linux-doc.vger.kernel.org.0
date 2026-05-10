@@ -1,276 +1,259 @@
-Return-Path: <linux-doc+bounces-86725-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86729-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6AoTDjzzAGpYOwEAu9opvQ
-	(envelope-from <linux-doc+bounces-86725-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 23:06:04 +0200
+	id GIznFJEIAWroPwEAu9opvQ
+	(envelope-from <linux-doc+bounces-86729-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 00:37:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31C4C506662
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 23:06:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F443506B6C
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 00:37:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2CE213001CED
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 21:06:00 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4B4593001CD9
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 22:37:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FE78320A24;
-	Sun, 10 May 2026 21:05:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6694635CB6F;
+	Sun, 10 May 2026 22:36:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="k3gDaT7v"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="TEhIw92b";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="ZPLL9TB+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71856128395;
-	Sun, 10 May 2026 21:05:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778447158; cv=none; b=BtGNkgZQl/20qrTKm6g7tGPlpDDBL4xoRy6K4CkTPrB/PrjvpaSeZUxbWKX+t9R51Zev1dYoszvIxRdAudxFKI+K/pmuUEM8NIlvACgXeHv/DdsAOF40Hny2riVYdUUcHRu2SIUnBkbIENurQOv8WBbHvICxEPI2PtBzjGFuIiE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778447158; c=relaxed/simple;
-	bh=fcCIydfNLNpAW8zQ9QSDkJT61um6BZZ49a8aN0wyqq4=;
-	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=ESVgXGHMAjuwbrIOEaVzsVxO07SAPXk4ZnBKvaxLkt+uoZWOH3n+zQ03XK14Lm+r9GeY5Nor4vwK900geM439dLEdUnigxaM5lbqNan6eh+yRMrDcx1dcxpuAcPSXdk+JbyLV64JbhzWvOdE47ryBb+4LVS6I+ryAjMCsFzRbGg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=k3gDaT7v; arc=none smtp.client-ip=90.155.50.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=casper.srs.infradead.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDE431A08A3;
+	Sun, 10 May 2026 22:36:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.11
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778452616; cv=pass; b=iSunCuAY0vf/52o5U90JpnBWKTLzi8geLb5eJLLd7/WCkuTmiGGYOFaFn9cK+chrf9CocsA99yLFXHW6cB10DZpYTgBn2Kc6d//ZDaQjFBTxB68jkG+HbYoZlJsb9wpVnmk0T6YoEJU8zW0hg6kuTp+PnfQZMoJXeTpvU5BRCY8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778452616; c=relaxed/simple;
+	bh=tIxfZpWNGOuzJwgTKm5cW5kf4HZX6TEm5aiLFJMofUc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=khpYpSvSlUoox+jnHRhvJuZYX870xzUMGoqnzGdNkLZf9xvVnSbnEXkk8Hvf4qKTXZwUU3Chbfq3Wg5pnycIBSC5Kb5/H56vWaHfY60ZuybRDQRuC2vcLzi3/b1eW/cUWdJibT2kS+U3HzvOpZt9HQrJKnc5Z20onhWbbfNkqSg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=TEhIw92b; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=ZPLL9TB+; arc=pass smtp.client-ip=185.56.87.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-kz0n.prod.antispam.mailspamprotection.com; s=arckey; t=1778452614;
+	 b=YNkQKjd9FfUy40rUxbhS0OremDSquO1aS+lCuifgIfdjwMFZ8RaPDa2QDtUN8Grb9mFO2ZQ09b
+	  YyRFbWBDB/0bHVZ9QACUOwRUi+8fwiAp9foJYZWQGiFN2YFK+q9vuT/B4XXjo9KPgaOs1miCl2
+	  g1sXGeY5xrUhgj41R50/z+HNRddco+vsUGiyS+27DXlrJceZKDvUo3QbBhfAw2L8y99WiKYYnw
+	  pWM6U3koYAsEWrL5g3E6+9dEtiJL3RBCBwLjnZ0SkppGGISmBEDnMhYNGGlUQk5kAJUqf4GNim
+	  EARBUQNsp9Dw/nTIj9uWieRoiXl50hl4MDXM4LJZuuzG4g==;
+ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-kz0n.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
+	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
+	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+	arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-kz0n.prod.antispam.mailspamprotection.com; s=arckey; t=1778452614;
+	bh=tIxfZpWNGOuzJwgTKm5cW5kf4HZX6TEm5aiLFJMofUc=;
+	h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+	  Subject:From:DKIM-Signature:DKIM-Signature;
+	b=CagjRuYYU+ptydlpNZCNsn0g8ESn6bZZrsHihR8Rmnah/jAt2MomnQMMY34HnoQ4FcDb7AkPMT
+	  x21m9dcqn6kkDsiDq2jWvdXl8kmVqxHSq6KKH70GwX4ILVSPMDUHHOrdHOEFlK2CI+RB6NZ9ic
+	  QTNZzg5FIycZ5iBD7zfB5P+LN44TX78EgijF68pqZfkr1pNVHd2RPSKi2PNK7HuJ8ZA6xBdrga
+	  MBWY2ITOtx55t5cFT1bSJsDGQij3zOF7s4321lroVyuSbZMbZCUks0yi5S1splEFE65z7zl3xq
+	  iQnZPAjSu1ttNkLZ8Ln7Ficzpktr860n5YQGVV4+S1fPyQ==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=bhNOFvkH719t7i9pQvqgD9PQhJFs6ir/zUj3G3rKD18=; b=k3gDaT7vBcXRudpVf2JczbIT1q
-	5afuzuA0DX9RyNuKWPIbcFfMzM95N5bcyy38ZIevIkLL9zY4zLoghfyqt5mCgw8RfARtFladk4DRS
-	mhEmCZR0wnj1sMkVgMRew2bzKtPMcrFIMBGzMRto5CiJui/yonAWitgBo7DXOG5JF9RIu1i377M2A
-	pgfSLhdq3rJcC+kwSrgxUxqx9iVfay9FgtA+vIZz0+eZTBiF3uABfmOlRptJ3ez23N83pSvwwqWSb
-	icd8XPttOeADBiZBrMnnQzrvU7QGpB/zx9+imXaF4rhTGXJghLDrx3sI7cbaAI/Qvr8bngLVEixRy
-	87Plb/WQ==;
-Received: from 54-240-197-234.amazon.com ([54.240.197.234] helo=u09cd745991455d.ant.amazon.com)
-	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wMBLA-00000007GmD-1vIF;
-	Sun, 10 May 2026 21:05:36 +0000
-Message-ID: <66458bbc44f98b7f9742007348a9f70ee8086429.camel@infradead.org>
-Subject: [PATCH v4 32/30] KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Sean Christopherson
- <seanjc@google.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
- <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,  Dave Hansen
- <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
- <hpa@zytor.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, Juergen Gross
- <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, David
- Woodhouse <dwmw2@infradead.org>, Paul Durrant <paul@xen.org>, Jonathan
- Cameron <jic23@kernel.org>, Sascha Bischoff <Sascha.Bischoff@arm.com>, Marc
- Zyngier <maz@kernel.org>, Dongli Zhang <dongli.zhang@oracle.com>, Jack
- Allister <jalliste@amazon.com>, Joe Jin <joe.jin@oracle.com>, Joey Gouly
- <joey.gouly@arm.com>, kvm@vger.kernel.org,  linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org,  xen-devel@lists.xenproject.org,
- linux-kselftest@vger.kernel.org
-Date: Sun, 10 May 2026 22:05:31 +0100
-In-Reply-To: <20260509224824.3264567-1-dwmw2@infradead.org>
-References: <20260509224824.3264567-1-dwmw2@infradead.org>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-n1rYoFphXBZk9zIVxw0J"
-User-Agent: Evolution 3.52.3-0ubuntu1.1 
+	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
+	:Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
+	Subject:From:Reply-To:List-Unsubscribe;
+	bh=/vPpY1OpToTP1NIiMD/OIBw5dqDYUYDnHC/WuuJj9D8=; b=TEhIw92bIJN2zLUsGnPBxxb9xQ
+	+QLDLVzOLuGwOOkD4lSO02wKL0zWfsuyt2tY77X3PUgIbnROwas8wUK7pVNHTrk8MsgucbglexoU/
+	+4LAfjdVyOk0SVNY5kUbaBb3bvAwLW0ArmZUUb9i5OScYa5s/JGBop92O+m8T67HLDTA=;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
+	by instance-europe-west4-kz0n.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.99.1)
+	(envelope-from <francesco@valla.it>)
+	id 1wMCbA-0000000412Z-0nSR;
+	Sun, 10 May 2026 22:26:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+	s=default; h=Cc:To:Date:Subject:From:list-help:list-unsubscribe:
+	list-subscribe:list-post:list-owner:list-archive;
+	bh=/vPpY1OpToTP1NIiMD/OIBw5dqDYUYDnHC/WuuJj9D8=; b=ZPLL9TB+ImLeDPJDFqZW0WZGSE
+	N1i7ZJ6BVmqldLIH/MBOngGWHGufg5m+lvcOOXtXf/cTBjThiiThXGrZvNKRqEcjqOWuW4VFCKI1n
+	Z2Y46Q1O1wpWiEky3UMViiHrKppzarIkfuy1ktjgVKfmWHLhzYXUQHMuLBG0S0OZm+Bg=;
+Received: from [95.232.18.244] (port=61481 helo=[192.168.178.43])
+	by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.99.1)
+	(envelope-from <francesco@valla.it>)
+	id 1wMBil-00000000PdN-1rms;
+	Sun, 10 May 2026 21:29:55 +0000
+From: Francesco Valla <francesco@valla.it>
+Subject: [PATCH RFC v3 0/3] Add splash DRM client
+Date: Sun, 10 May 2026 23:29:37 +0200
+Message-Id: <20260510-drm_client_splash-v3-0-a9aee9f0b2fc@valla.it>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: 31C4C506662
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23OTQrCMBAF4KtI1kby0yatK0HwAG5FStpM7UBsS
+ 1KCUnp3Q1Fw0eWb4X0zMwngEQI57mbiIWLAoU9B7nek6Uz/AIo2ZSKYyDkTilr/rBqH0E9VGJ0
+ JHQXOrLZKSdAtSb3RQ4uv1byR6+VM7mnYYZgG/17vRL6uvqTeICOnjDKmyqKUspaZOUXjnDngt
+ GJR/ADFONv6KYoEKCiU0ZnM6rz8A5Zl+QCScqg+9wAAAA==
+X-Change-ID: 20251026-drm_client_splash-e10d7d663e7f
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>, 
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: Sam Ravnborg <sam@ravnborg.org>, 
+ Mario Limonciello <mario.limonciello@amd.com>, linux-kernel@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+ linux-embedded@vger.kernel.org, Francesco Valla <francesco@valla.it>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3256; i=francesco@valla.it;
+ h=from:subject:message-id; bh=tIxfZpWNGOuzJwgTKm5cW5kf4HZX6TEm5aiLFJMofUc=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDFkMP874rGqcvvmCTGKDerZSfJLsnPQP4ot10ufnrGA8s
+ 7Q778TzjlIWBjEuBlkxRZaQdTfu7Zlr/i1tA+MjmDmsTCBDGLg4BWAiOmcZ/nu9Xv76ac+1a5ty
+ 2pQKwx9b3pv2cMf9X1sulTsu/HPX9kAzI8NGi6edNtNqhHfPct9qZbuy7UTPO/tz9QJ6sqnLPxe
+ oTGcEAA==
+X-Developer-Key: i=francesco@valla.it; a=openpgp;
+ fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: 55ca6dff58b104b23fb4846ca6c2adfd
+X-AntiAbuse: ID - 55ca6dff58b104b23fb4846ca6c2adfd
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
+CFBL-Feedback-ID: 1wMCbA-0000000412Z-0nSR-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-kz0n.prod.antispam.mailspamprotection.com;
+	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
+	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+	arc=none
+X-Rspamd-Queue-Id: 4F443506B6C
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-4.26 / 15.00];
-	SIGNED_SMIME(-2.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+X-Spamd-Result: default: False [-0.36 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_DKIM_REJECT(1.00)[antispam.mailspamprotection.com:s=default,valla.it:s=default];
 	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
+	DMARC_POLICY_SOFTFAIL(0.10)[valla.it : SPF not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86725-lists,linux-doc=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-86729-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,lwn.net,redhat.com,linuxfoundation.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	MIME_TRACE(0.00)[0:+];
+	HAS_X_SOURCE(0.00)[];
 	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,amazon.co.uk:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	HAS_X_ANTIABUSE(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[francesco@valla.it,linux-doc@vger.kernel.org];
+	PRECEDENCE_BULK(0.00)[];
+	DKIM_TRACE(0.00)[antispam.mailspamprotection.com:-,valla.it:-];
+	NEURAL_HAM(-0.00)[-0.983];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.freedesktop.org:email,intel.com:email,linuxfoundation.org:email,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
+Hello,
 
---=-n1rYoFphXBZk9zIVxw0J
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+this is the third (and hopefully last) RFC version for the DRM-based
+splash screen.
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+Motivation behind the work can be found in v1 [0]; in a nutshell, the
+splash DRM client can draw a splashscreen using:
 
-KVM_SET_TSC_KHZ changes the vCPU's TSC scaling ratio but does not
-update the VM-wide cur_tsc_scaling_ratio used by get_kvmclock().
-This causes get_kvmclock() to use a stale (default 1:1) ratio when
-computing the KVM clock, leading to drift between the host-side
-kvmclock and what the guest observes.
+  - the BMP image supplied by the EFI BGRT;
+  - a BMP image loaded as firmware (either built-in or loaded from the
+    filesystem);
+  - a colored background.
 
-Fix this by calling kvm_synchronize_tsc() after changing the TSC
-frequency. This:
- - Updates cur_tsc_scaling_ratio (consumed by pvclock_update_vm_gtod_copy)
- - Ensures the TSC value is continuous across the frequency change
- - Triggers kvm_track_tsc_matching() for proper masterclock handling
- - Allows subsequent vCPUs to synchronize via the 1-second slop hack
+This revision greatly simplifies the image seletion logic; now the EFI
+BGRT is always used as first source if enabled, with a fallback to BMP
+image loaded as firmware and then to a plain color.
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Sanity checks on the EFI BGRT image have been borrowed from the efifb
+driver. More complete splash providers (e.g.: Plymouth) have an
+extensive management of platform-specific quirks, but I don't think it
+would be reasonable to introduce such complexity here.
+
+Additional notes:
+  - Rotation is still not managed (and probably won't?).
+  - Support for tiled screens is untested.
+  - Plain color and BMP sources were tested on QEMU, Beagleplay and
+    i.MX93 FRDM.
+  - EFI BGRT support was tested using QEMU+OVMF.
+
+Thank you in advance for any feedback.
+
+Best regards,
+Francesco
+
+[0] https://lore.kernel.org/all/20251027-drm_client_splash-v1-0-00698933b34a@valla.it
+
+Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- arch/x86/kvm/x86.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+Changes in v3:
+  - Simplified the image selection and management logic, with direct
+    fallback from EFI BGRT to MP as firmware
+  - Used new drm_draw_can_convert_from_xrgb8888() API
+  - Added proper get_unaligned_ calls for EFI BGRT access
+  - Fixed Kconfig dependencies
+  - Link to v2: https://lore.kernel.org/r/20260106-drm_client_splash-v2-0-6e86a7434b59@valla.it
 
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index ac982652e5e0..833a4f119e22 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -206,6 +206,7 @@ module_param(mitigate_smt_rsb, bool, 0444);
- #ifdef CONFIG_X86_64
- static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp)=
-;
- #endif
-+static void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value);
- #define KVM_MAX_NR_USER_RETURN_MSRS 16
-=20
- struct kvm_user_return_msrs {
-@@ -2611,7 +2612,20 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u3=
-2 user_tsc_khz)
- 			 user_tsc_khz, thresh_lo, thresh_hi);
- 		use_scaling =3D 1;
- 	}
--	return set_tsc_khz(vcpu, user_tsc_khz, use_scaling);
-+	if (set_tsc_khz(vcpu, user_tsc_khz, use_scaling))
-+		return -1;
-+
-+	/*
-+	 * Re-synchronize the TSC after changing frequency. This ensures
-+	 * cur_tsc_scaling_ratio is updated (used by get_kvmclock) and
-+	 * the TSC value is continuous across the frequency change.
-+	 */
-+	{
-+		u64 tsc =3D kvm_read_l1_tsc(vcpu, rdtsc());
-+
-+		kvm_synchronize_tsc(vcpu, &tsc);
-+	}
-+	return 0;
- }
-=20
- static s64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
---=20
-2.43.0
+Changes in v2:
+  - Moved from raw dump to BMP format for static image source
+  - Removed support for configurable message
+  - Removed support for progress bar
+  - Added EFI BGRT as image source
+Link to v1: https://lore.kernel.org/r/20251027-drm_client_splash-v1-0-00698933b34a@valla.it
 
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+To: Maxime Ripard <mripard@kernel.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+To: David Airlie <airlied@gmail.com>
+To: Simona Vetter <simona@ffwll.ch>
+To: Francesco Valla <francesco@valla.it>
+To: Jonathan Corbet <corbet@lwn.net>
+To: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-kernel@vger.kernel.org
+Cc: dri-devel@lists.freedesktop.org
+Cc: linux-doc@vger.kernel.org
 
+---
+Francesco Valla (3):
+      drm: client: add splash client
+      MAINTAINERS: add entry for DRM splash client
+      drm: docs: remove bootsplash from TODO
 
---=-n1rYoFphXBZk9zIVxw0J
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
+ Documentation/gpu/todo.rst                    |  17 -
+ MAINTAINERS                                   |   7 +
+ drivers/gpu/drm/clients/Kconfig               |  63 +-
+ drivers/gpu/drm/clients/Makefile              |   1 +
+ drivers/gpu/drm/clients/drm_client_internal.h |   9 +
+ drivers/gpu/drm/clients/drm_client_setup.c    |   8 +
+ drivers/gpu/drm/clients/drm_splash.c          | 932 ++++++++++++++++++++++++++
+ 7 files changed, 1019 insertions(+), 18 deletions(-)
+---
+base-commit: afaa0a477099cb7256e26fe11289c753a225ac97
+change-id: 20251026-drm_client_splash-e10d7d663e7f
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCD9Aw
-ggSOMIIDdqADAgECAhAOmiw0ECVD4cWj5DqVrT9PMA0GCSqGSIb3DQEBCwUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yNDAxMzAwMDAwMDBaFw0zMTEx
-MDkyMzU5NTlaMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYDVQQDExdWZXJv
-a2V5IFNlY3VyZSBFbWFpbCBHMjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMjvgLKj
-jfhCFqxYyRiW8g3cNFAvltDbK5AzcOaR7yVzVGadr4YcCVxjKrEJOgi7WEOH8rUgCNB5cTD8N/Et
-GfZI+LGqSv0YtNa54T9D1AWJy08ZKkWvfGGIXN9UFAPMJ6OLLH/UUEgFa+7KlrEvMUupDFGnnR06
-aDJAwtycb8yXtILj+TvfhLFhafxroXrflspavejQkEiHjNjtHnwbZ+o43g0/yxjwnarGI3kgcak7
-nnI9/8Lqpq79tLHYwLajotwLiGTB71AGN5xK+tzB+D4eN9lXayrjcszgbOv2ZCgzExQUAIt98mre
-8EggKs9mwtEuKAhYBIP/0K6WsoMnQCcCAwEAAaOCAVwwggFYMBIGA1UdEwEB/wQIMAYBAf8CAQAw
-HQYDVR0OBBYEFIlICOogTndrhuWByNfhjWSEf/xwMB8GA1UdIwQYMBaAFEXroq/0ksuCMS1Ri6en
-IZ3zbcgPMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIweQYI
-KwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQwYIKwYB
-BQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RD
-QS5jcnQwRQYDVR0fBD4wPDA6oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0
-QXNzdXJlZElEUm9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQELBQADggEB
-ACiagCqvNVxOfSd0uYfJMiZsOEBXAKIR/kpqRp2YCfrP4Tz7fJogYN4fxNAw7iy/bPZcvpVCfe/H
-/CCcp3alXL0I8M/rnEnRlv8ItY4MEF+2T/MkdXI3u1vHy3ua8SxBM8eT9LBQokHZxGUX51cE0kwa
-uEOZ+PonVIOnMjuLp29kcNOVnzf8DGKiek+cT51FvGRjV6LbaxXOm2P47/aiaXrDD5O0RF5SiPo6
-xD1/ClkCETyyEAE5LRJlXtx288R598koyFcwCSXijeVcRvBB1cNOLEbg7RMSw1AGq14fNe2cH1HG
-W7xyduY/ydQt6gv5r21mDOQ5SaZSWC/ZRfLDuEYwggWbMIIEg6ADAgECAhAH5JEPagNRXYDiRPdl
-c1vgMA0GCSqGSIb3DQEBCwUAMEExCzAJBgNVBAYTAkFVMRAwDgYDVQQKEwdWZXJva2V5MSAwHgYD
-VQQDExdWZXJva2V5IFNlY3VyZSBFbWFpbCBHMjAeFw0yNDEyMzAwMDAwMDBaFw0yODAxMDQyMzU5
-NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqGSIb3DQEBAQUAA4IC
-DwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZeYAS/SRV6zmfXlXaZ
-sNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2zkC9S7/yHDYnqegqt
-w4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qGpgFdZEk2/c//ZvUN
-i12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41vav1RhZJzYan4a1gU0
-kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0cvnO8FM6PTqsnSbcc
-0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PWPU6zfQTOMZ9uLQRR
-ci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXtREF5lLXxp+CJ6KKS
-blPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQrlR0gO3lBzuyPPArV
-hvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7IqaAovAX0d+f1YjbmC
-VsAwjhLmveFjNwIDAQABo4IBsDCCAawwHwYDVR0jBBgwFoAUiUgI6iBOd2uG5YHI1+GNZIR//HAw
-HQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3bXcyQGluZnJhZGVh
-ZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEBMA4GA1UdDwEB/wQE
-AwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwewYDVR0fBHQwcjA3oDWgM4YxaHR0
-cDovL2NybDMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDA3oDWgM4YxaHR0
-cDovL2NybDQuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNybDB2BggrBgEFBQcB
-AQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBABggrBgEFBQcwAoY0
-aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL1Zlcm9rZXlTZWN1cmVFbWFpbEcyLmNydDANBgkq
-hkiG9w0BAQsFAAOCAQEAQXc4FPiPLRnTDvmOABEzkIumojfZAe5SlnuQoeFUfi+LsWCKiB8Uextv
-iBAvboKhLuN6eG/NC6WOzOCppn4mkQxRkOdLNThwMHW0d19jrZFEKtEG/epZ/hw/DdScTuZ2m7im
-8ppItAT6GXD3aPhXkXnJpC/zTs85uNSQR64cEcBFjjoQDuSsTeJ5DAWf8EMyhMuD8pcbqx5kRvyt
-JPsWBQzv1Dsdv2LDPLNd/JUKhHSgr7nbUr4+aAP2PHTXGcEBh8lTeYea9p4d5k969pe0OHYMV5aL
-xERqTagmSetuIwolkAuBCzA9vulg8Y49Nz2zrpUGfKGOD0FMqenYxdJHgDCCBZswggSDoAMCAQIC
-EAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQELBQAwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoT
-B1Zlcm9rZXkxIDAeBgNVBAMTF1Zlcm9rZXkgU2VjdXJlIEVtYWlsIEcyMB4XDTI0MTIzMDAwMDAw
-MFoXDTI4MDEwNDIzNTk1OVowHjEcMBoGA1UEAwwTZHdtdzJAaW5mcmFkZWFkLm9yZzCCAiIwDQYJ
-KoZIhvcNAQEBBQADggIPADCCAgoCggIBANqWLse95HW2F7FhfH9bugyT/danKmmXrbMnz5GZNAfj
-Jl5gBL9JFXrOZ9eVdpmw04Tp6aDxZctFLoEDvSWKi367Q7Sg+ci+fH4KwwfQ8Pi0IpIKx2n5emEg
-nbOQL1Lv/IcNiep6Cq3DiyaSpSp/RZf+CAfUNySHS8eWmhLU6jGpSD6hxTpYKye7PmrmvMWwfGEP
-WoamAV1kSTb9z/9m9Q2LXa89aKmTxNwnAfD3Ohn9mtU3JukwILRMewn9QRXK7KzM+01h5hkCE4nj
-W9q/VGFknNhqfhrWBTSQoE9CSVylASGrjzCgS7XmKy/BaH3/7mOOHQv5g1o3Qj/+cdKnpT0I5Qb1
-nRy+c7wUzo9OqydJtxzSP4ZyHA4dELto/a3m/ay1XHcpum1pgTOLgxAfGb/T4dCkwRUstSKLMmpL
-g9Y9TrN9BM4xn24tBFFyL5znGG0wQGzOVAM68RBzIQb6Fz758fjsr4yZnPbVsU1+gHEs/puNHrG0
-9e1EQXmUtfGn4InoopJuU8p5VGD9S3Ikd4UoBlc7xl5yjtNlQxUeYrRlnUSmdlucCEoTX1n4UmtA
-9CuVHSA7eUHO7I88CtWG9bGOU7tLgOZoSEvNqtaL/N7sQbBZK4jZ4Rr/zNTQg1SwYjjLB7u96lDP
-sipoCi8BfR35/ViNuYJWwDCOEua94WM3AgMBAAGjggGwMIIBrDAfBgNVHSMEGDAWgBSJSAjqIE53
-a4blgcjX4Y1khH/8cDAdBgNVHQ4EFgQUXGIam3Bs59Y60yTmWgfDu6pZQ6cwMAYDVR0RBCkwJ4ET
-ZHdtdzJAaW5mcmFkZWFkLm9yZ4EQZGF2aWRAd29vZGhvdS5zZTAUBgNVHSAEDTALMAkGB2eBDAEF
-AQEwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDB7BgNVHR8E
-dDByMDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
-Y3JsMDegNaAzhjFodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVtYWlsRzIu
-Y3JsMHYGCCsGAQUFBwEBBGowaDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
-MEAGCCsGAQUFBzAChjRodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vVmVyb2tleVNlY3VyZUVt
-YWlsRzIuY3J0MA0GCSqGSIb3DQEBCwUAA4IBAQBBdzgU+I8tGdMO+Y4AETOQi6aiN9kB7lKWe5Ch
-4VR+L4uxYIqIHxR7G2+IEC9ugqEu43p4b80LpY7M4KmmfiaRDFGQ50s1OHAwdbR3X2OtkUQq0Qb9
-6ln+HD8N1JxO5nabuKbymki0BPoZcPdo+FeRecmkL/NOzzm41JBHrhwRwEWOOhAO5KxN4nkMBZ/w
-QzKEy4PylxurHmRG/K0k+xYFDO/UOx2/YsM8s138lQqEdKCvudtSvj5oA/Y8dNcZwQGHyVN5h5r2
-nh3mT3r2l7Q4dgxXlovERGpNqCZJ624jCiWQC4ELMD2+6WDxjj03PbOulQZ8oY4PQUyp6djF0keA
-MYIDuzCCA7cCAQEwVTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMX
-VmVyb2tleSBTZWN1cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJYIZIAWUDBAIBBQCg
-ggE3MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI2MDUxMDIxMDUz
-MVowLwYJKoZIhvcNAQkEMSIEIFWN6n8X9WBM9wKga4UBdzpcqylFM6KbtxwIBVCVc0wEMGQGCSsG
-AQQBgjcQBDFXMFUwQTELMAkGA1UEBhMCQVUxEDAOBgNVBAoTB1Zlcm9rZXkxIDAeBgNVBAMTF1Zl
-cm9rZXkgU2VjdXJlIEVtYWlsIEcyAhAH5JEPagNRXYDiRPdlc1vgMGYGCyqGSIb3DQEJEAILMVeg
-VTBBMQswCQYDVQQGEwJBVTEQMA4GA1UEChMHVmVyb2tleTEgMB4GA1UEAxMXVmVyb2tleSBTZWN1
-cmUgRW1haWwgRzICEAfkkQ9qA1FdgOJE92VzW+AwDQYJKoZIhvcNAQEBBQAEggIAmys03PU6Q2QV
-trMeAzFqK3sy+3xeEJw/kWnC4KHJ+jbql833Q5hVWPwKe/aTz7TNHq+fsHtEVF0hB9BKclbiUKXR
-JQxiF0cH8SHw6DGbQBGhAvsMiuVWdzA9IMNgFCSd+pkY1mQrHytDMS4pT+G3hGAsJm7ziN38yh0h
-LnQDqs48uGvaoj8UP1FGNT0qYwhf7ld5m/4y0RO0+0QCJ6WKEcKFHxLCDneYe1suD4N65qe8pBlj
-iNt50hI1HvCeCInnB0rwP0CiThVsotoeygra5pEkP3eTOwtyjdea8vudQ+dSxb3LZWt9rYZInUaO
-AZHPrwjrYKebJ4ondGYI8cwMVyA/O0gzA2mvEfMPpX+oA4v/y8PMp6B0MLyL2Pod7IcX9AOYVfRS
-djaQVPPbfSQwVOfc7DHirLiF7of6zyld0F5GIL1cCVa2ucrDFixP6IwZLah0+Fdh3/8gxoZdGUOL
-+9E0ScuW/eaPlkwuIW9dl/RK8SAA9HF5oWAk//xjSoDnS8jzbJHkHvsN8HU7QD5eR9ObKiJI2nYV
-QLH06FqbyGD3fP1frToGbRvXOMoyUapvUmhrFJoRixR6qokFcPRHspAvaeT9BglwP4E9w0Avgdlu
-n6NcrZekVmLoVpKdlpeVDJptISLEmzq4A2w/h7yV0WNB6EWdPbfdLBPsZzVgBEgAAAAAAAA=
+Best regards,
+--  
+Francesco Valla <francesco@valla.it>
 
-
---=-n1rYoFphXBZk9zIVxw0J--
 
