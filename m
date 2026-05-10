@@ -1,288 +1,153 @@
-Return-Path: <linux-doc+bounces-86699-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86701-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WCm1GW6WAGrUKgEAu9opvQ
-	(envelope-from <linux-doc+bounces-86699-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 16:30:06 +0200
+	id UMsJIZKeAGpRLAEAu9opvQ
+	(envelope-from <linux-doc+bounces-86701-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 17:04:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0FE550498C
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 16:30:05 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02BB0504B00
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 17:04:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D94EB30136B3
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 14:29:41 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8444630078AE
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2026 15:04:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 003DF39DBD9;
-	Sun, 10 May 2026 14:29:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EA9A3806DB;
+	Sun, 10 May 2026 15:04:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="A1TdsSiW"
+	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b="sF9P+sMz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m127213.xmail.ntesmail.com (mail-m127213.xmail.ntesmail.com [115.236.127.213])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from sonic306-20.consmr.mail.ir2.yahoo.com (sonic306-20.consmr.mail.ir2.yahoo.com [77.238.176.206])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DB6F39A808;
-	Sun, 10 May 2026 14:29:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.236.127.213
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6CF0378D7D
+	for <linux-doc@vger.kernel.org>; Sun, 10 May 2026 15:04:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=77.238.176.206
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778423379; cv=none; b=D3eUHJVljGUGbNwxLvnawpYW1V+Mh6pm7W6TCewCzuGf4OQlsEa2cXTZMfnO8Bd0v9Vc6rvo28lL+AmTa17/BRKR/1EAxODMnGmxfN8E2Ck23fiY6uvvmoJH96WRdVqneqBDRA1Xata8QoXoVrSNTUeggjnM9635InEA8Pg08Z0=
+	t=1778425486; cv=none; b=fHdnooZuDXxtU0DDHa3vXYacvqBXmzPoQl1EJDEHAnCvupHt7CQA7/+LPUKPeRCmP1+233fJSzQjMpYcxJTt2JbMpoylPPu7w5Ta++ugBlIoCAG6Qp4wcr6Nnh8LUchjHfixvCHfPa/R+67p4t+Uxz1hVUCA+22ETk5ym/82CyQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778423379; c=relaxed/simple;
-	bh=rAQy8hEHIWy8AlGh81p3m/bBThI9ya9vk0fC0w27gjo=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qnGL0c7dcTJVGc12fjzALo4qDW71/bv2/h5Mxb7I9E4IqtBoF1YlKMf66m0oSqTirQ6lBtGL4gdtD0iUuDTG+C5qv7+Ace+mVzs0pYTYP2Us4Qu8/9QOGj0xgK+/dA3bnV7M7+kqkn1vR/pZpz+x3qmaQ8goFF1mTgXewcWhCHo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=A1TdsSiW; arc=none smtp.client-ip=115.236.127.213
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
-Received: from server001 (unknown [222.130.22.242])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 3dd2c700c;
-	Sun, 10 May 2026 21:53:56 +0800 (GMT+08:00)
-From: Kefan Bai <baikefan@leap-io-kernel.com>
-To: linux-usb@vger.kernel.org,
-	si.yanteng@linux.dev
-Cc: gregkh@linuxfoundation.org,
-	seakeel@gmail.com,
-	alexs@kernel.org,
-	dzm91@hust.edu.cn,
+	s=arc-20240116; t=1778425486; c=relaxed/simple;
+	bh=k4vrdSdqTYKtlpA2IBcDPZn6DPODy3ZPA/tWBDDOKsE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:References; b=GttSwREWwU1IPonwq3Fpvt7IssZU+E/ZiE4nupPmm88DwDlfPWaTyFAjgHMjhTVfMvtGb0MIXB3iR2oziPzPF6JkFyz7YK3wngQs46sg6fdS7E5cvIHOmFIyufYK46JPAtf99K7DOuZIv1dmBWj2qU5EaoUs7tDiSj2DKPd13uQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com; spf=pass smtp.mailfrom=yahoo.com; dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b=sF9P+sMz; arc=none smtp.client-ip=77.238.176.206
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1778425482; bh=yhzNK1MxXhWyKER6B16J+oTKxIWa+vvZ+vg1sOhzKfc=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=sF9P+sMzDYI+gHCb6fD85kdHOLsAv0EVmLPfdFJowALy0B1FCjmzP3lG95Md0gm32H43ZooQ4+syK1paNRhznC6VQtgDKkGy0s58jAY1LAt3A1Lawftcs9NpsdSl2XDHgRVeEE0CvLpI2SkJk0T8RxoBiDiqgOLOPm2OW93vupbjfWxLjREFCJPWCcof+Y9r6BqBGH/+dQA9uqeJ78lDQw/298hniz0aEhAPRZwyRHmdhPxtYh7F1cCM7aX0ky1zAfIhUYxXebg+QJ3+T7N7BFGg9q9SaQb+Yzrh+xYtVM+iEv87amBd3LA+O8v/5hEk7qYpmfSkY5/jedR7CCLHfA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1778425482; bh=3mopf3wkLalCyx7ODJTrv+ZbqtoVSK8FrldMU7dInuf=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=gtBFWYvMcLxwZh9kiEsEHl7SinAHRNwUdUs0jyDUcrTJRkYcgn6xwUAxoPU8LNBEv64B1O0DFvZ8u3Fry0UyBwVchyvV+4SJAaZxqeF2zgl/etRfZPUslK4afaXvn9cQns2sGSVRXg1kf3iyyUvNZFxIVhPkaIGH0QMWJNsro82gY6lnjHQf8CUNf/k82/2ZeeEB/AgKTaB6OlCjZpNZr2JgGWsqCx7wtLN7zTc2LpDN5bO1pvEWXdDg3f/ol+S03VUl18watV06n3+mg3g8Tc47YPqAxWfqCR2Kq/WtbV0n6PkUiFeBjYP9e79DMPFO08tLWYBVgq601JbaJ61new==
+X-YMail-OSG: LlHhvqEVM1lNCZ.JIjqOcpjJTUU04M6yKmfO34BA7SBoIjFfDrNQB65qDBeum70
+ BbD.NcuEZi0xCHWZt9bkYFwfrYPfJRTiCWnXx78rL.nMskrfaDY7ri3lT560GB5CV8FDmzLIele9
+ ta_yB2GN3Enwy7YPvDVQWqCGESoJHaA4diwL305SJ.GOqV1XGCoi7quZvI6UD0PNWlrPd.U4JG8c
+ 1lxdM35gd3Vfdi_nABvrqZh3OdSJRHQbe_FPXDZejzYfIB0gCN5Hfaahy7deY_RcvX3uc8O6btm9
+ k0mx65QZW7cZUouqCplU11zx_rM79MXF3jGFmarmKsrhtH5RqcW9xEtdaxnjObLRiWInBYlFVuHF
+ d6LbzqhBfKYzz9uwr.wiBIUq2c.lPcXLB59uv08eNe4cJp55aLu0rzQbhvsacdtBIb7OGVxlkM1D
+ Rwz0KlTFV.FoixyN2KnphB1giN444rteBvm4oFZLy164r0XrC3OJttfi_XhxNzPucANPOtudzZEQ
+ HdYXQTu0pClmjxkH2OJBUwLlSRzrq1KmrZQJldu8Z2CzovMGJyDSWcj4e9Tuag_KeFyrHKaEHH5V
+ XHKey71F1rq6.dWy1gbp7Wsksd1NE.4cprkz7inlM8B6Ge1xuxgxEd62wjvULmvi2eKmGOPTrH0.
+ KT5MrH1pcjRB7NGTzseOFuA6Gma86C.U2ALDiffFeZCBqf6hbGDJQyro8MrvgCCBaTsiR.uUl80n
+ 8H6zRNwtTYLbsbiERnWMcJ5MWlypMC6duSx5LadLmp53kiaX5CnZjJnPd_s_c5fMWnd6_hrSP39x
+ rVR.9zTAqIa4PnrjPNcx_FQUaw.38goJsBMU9n.pVvp0XxFD4kRW9fG0nPpMDk9zvveow0rnuu6L
+ 9IyM045Rmsa_6G9MYhc8ayy9I8l8JbZw3bb3yVjhUbGLIk3S72yFcYsjzaBjk51awote69HpBOQT
+ CwmxFf2AZFSFPVHW3wXkjs7WaA1Yho3E5ooOc6dNeZSICpMd9iOdc2Ev8QHHwE7Odqoh9dU4RH7q
+ Q51NblRVzTIq.qcHOCywrUFWnOG6hezFouJ2PhI7U6SVksOPP9fhvCrUrjxRpB9qdgZ4AK39XohV
+ vV99mLI5Ywx5NgouiqQVZ.yB_S7i8oaa1ir1CiL8Qx8U7S3_t_rabDJCYZR3On2CTY6vM8.Iqn2P
+ 88bRtAtXGWU3ouIURMBvdW2KSuwXJ_w_OP2x8sXZaUaBdgm.lmxq_TsJExRJzVEdrFfig6PV20I1
+ m3klIAJkPhKckzJ1QrGyuNRjKWluB4aE9voqoa0OOYvM0tXVkF1DhJBk_p9ftKtLePayfqw1SwD3
+ B8_PGZVZ8Kw2WviwjR1vbu5xK3aEr.RvDe1NVbzeco5TA4q8HiDxYMik3XUiyn_H7H1xUIYrdqmJ
+ RqV_KNKwsuaBuxqTgKxgqmkqjoLUGS7mnAJkgfzCtqg0IfDMAVX6RjpbTbEDSOREF1hQ.eZEd8lz
+ HvUawYTg7wrFVCNtMrfPR7OwUu74Twm.IFAPG9FvG7TFHx4XpleDJ4OGkBb42rqrm9Y_HNvntWhR
+ LcTKPChEB.tphGVoeUQQkOTvnqDP7VOR7DR5CC._h13zUUNXKqkgMIt6ovftmRaaaekEXh1zHNdl
+ Ez44Eu.teK9JLGUtYvtsFWuzcNg14TICXNux0tJdJq3uTzNbmjvlNZNUlexUCD.aAQ61_d33nXNV
+ _NMuofGj5XdZq3UJwNsyEzEz.bnqL_R.d3bF0Ga0IlPb0NkGutoKIdxbieEoPxjdaB5og7RU4rGw
+ x2tSMRYTmfOGYam_tYZLQZY0PaIx8nSrtkcvyfzvHyKoW3RzpHOQqyno5VgMJu3TOjXtTOvuVnrE
+ 3PugZl0ACuJ2yA1FjlhWJio9uA5N9fedSEbpnVJTTEdQU2tcWJO5bImu7R2uO9amyNAJzs_pncb0
+ 6rQBFg2A_yO1M_EZi5lt.eqKjGn2Vx8f0Jy.dSbkCJ1vyW1uu.ZPhmUaer2yBOmPw59twdtli3Sc
+ IB4zCe_g9PRFcoduIiqaXGLEBnt2yJzGkeXMNxNtAOD_tlY0ZLjJaHCJan6aql6VvY4w_t3e.rPu
+ XuGqrLWSMMpmD7QRomEmQRbBIjIjGOPBl_aASNzvvrxJGCGH9ZS9XH_zmtnL_QAdFsVn10fE4oLo
+ TKAH1yPuVgp9Ed6676Sh4I4l6bPtTpvgfX525RarQT9liorj43Ar_3GNGVkJVath0.rqWDIJ_GFQ
+ fjZSo55fPaL7YEluV4Q4HIVlP1aTXZcIoaKw3VO4YCr2D8N5PPfdSU1dQXxk-
+X-Sonic-MF: <nicobsc4@yahoo.com>
+X-Sonic-ID: 8edaed84-9363-45fc-8b94-d1167729b603
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic306.consmr.mail.ir2.yahoo.com with HTTP; Sun, 10 May 2026 15:04:42 +0000
+Received: by hermes--production-ir2-89844b765-82cnf (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID ce718115184f3a1163bd756cced3f7a1;
+          Sun, 10 May 2026 14:33:20 +0000 (UTC)
+From: NicoErdmann <nicobsc4@yahoo.com>
+To: linux-pm@vger.kernel.org
+Cc: linux-doc@vger.kernel.org,
+	rafael@kernel.org,
+	viresh.kumar@linaro.org,
 	corbet@lwn.net,
 	skhan@linuxfoundation.org,
-	linux-doc@vger.kernel.org,
-	doubled@leap-io-kernel.com
-Subject: [PATCH v6 8/8] docs/zh_CN: Add CREDITS translation
-Date: Sun, 10 May 2026 21:53:39 +0800
-Message-ID: <c1f15d06708eaf8d7237024239844511c2391223.1778415392.git.baikefan@leap-io-kernel.com>
+	NicoErdmann <nicobsc4@yahoo.com>
+Subject: [PATCH] cpufreq-stats: document limitations on modern cpufreq drivers
+Date: Sun, 10 May 2026 16:33:03 +0200
+Message-ID: <20260510143303.120863-1-nicobsc4@yahoo.com>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <cover.1778415392.git.baikefan@leap-io-kernel.com>
-References: <cover.1778415392.git.baikefan@leap-io-kernel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9e122a81d509d5kunm9f76e21d35e0a8
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUhXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZGRoZVh9OHkxNT0kZTktNSlYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlJSUlVSkhLVUlJVUlPSVlXWRYaDxIVHRRZQVlPS0hVSU
-	pCTkhIQ1VPVUpPS0JZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=A1TdsSiWr9yFvVbyR2NrDvClfKruNY1ZXKoL5+KGQBQdTpIr6SCf6BUUNzYLDilujraK02u1ziecw2ZEA3wJazuT+Rk1LxBcQk3Z4SelBwGINuwJvWnA/RUxnCeehoX2Noq6RmDp2tqF8DGmV7Xp/V/+erVjd9mFXrSfERofoqwgaC60RMiw9v+/jSVHz8EIRgf0PPL/5jOVxCWdfhcSAgp/eoX2o4uCYIXeJV1Bdw+Kx06lC4KGwXBPBVXMh6jIRy9udW1MDmY1MDwTRSNnS8UsffcMUFRhCb1bRHnBB1h9XD/mEWzWeY5UW6++5xRqvXyiUW5BGyz6SzneKzZyMA==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
-	bh=aJmqUMY4Y6qfogtdf5N/6AfRAQ6frcuRNFAHdpKc+eI=;
-	h=date:mime-version:subject:message-id:from;
-X-Rspamd-Queue-Id: C0FE550498C
+References: <20260510143303.120863-1-nicobsc4.ref@yahoo.com>
+X-Rspamd-Queue-Id: 02BB0504B00
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[leap-io-kernel.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[leap-io-kernel.com:s=default];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[yahoo.com,reject];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[yahoo.com:s=s2048];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linuxfoundation.org,gmail.com,kernel.org,hust.edu.cn,lwn.net,vger.kernel.org,leap-io-kernel.com];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[bounces-86699-lists,linux-doc=lfdr.de];
+	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,linaro.org,lwn.net,linuxfoundation.org,yahoo.com];
+	TAGGED_FROM(0.00)[bounces-86701-lists,linux-doc=lfdr.de];
+	RCVD_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[leap-io-kernel.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	MIME_TRACE(0.00)[0:+];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[baikefan@leap-io-kernel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[nicobsc4@yahoo.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[7];
+	NEURAL_HAM(-0.00)[-0.999];
+	DKIM_TRACE(0.00)[yahoo.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	FREEMAIL_FROM(0.00)[yahoo.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Translate .../usb/CREDITS into Chinese
-
-Update the translation through commit 7b2328c5a009
-("docs: Fix typo in usb/CREDITS")
-
-Reviewed-by: Yanteng Si <siyanteng@cqsoftware.com.cn>
-Signed-off-by: Kefan Bai <baikefan@leap-io-kernel.com>
+Signed-off-by: NicoErdmann <nicobsc4@yahoo.com>
 ---
- Documentation/translations/zh_CN/usb/CREDITS | 162 +++++++++++++++++++
- 1 file changed, 162 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/CREDITS
+ Documentation/cpu-freq/cpufreq-stats.rst | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/Documentation/translations/zh_CN/usb/CREDITS b/Documentation/translations/zh_CN/usb/CREDITS
-new file mode 100644
-index 000000000000..9df5e311d211
---- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/CREDITS
-@@ -0,0 +1,162 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
+diff --git a/Documentation/cpu-freq/cpufreq-stats.rst b/Documentation/cpu-freq/cpufreq-stats.rst
+index 9ad695b1c7db..e8a8b3a85ad8 100644
+--- a/Documentation/cpu-freq/cpufreq-stats.rst
++++ b/Documentation/cpu-freq/cpufreq-stats.rst
+@@ -28,6 +28,13 @@ Various statistics will form read_only files under this directory.
+ This driver is designed to be independent of any particular cpufreq_driver
+ that may be running on your CPU. So, it will work with any cpufreq_driver.
+ 
++.. note::
++	
++   On some modern systems, this interface may not be available or may not
++   expose meaningful statistics depending on the active CPU frequency scaling driver.
 +
-+:Original: Documentation/usb/CREDITS
-+:翻译:
-+
-+ 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
-+
-+:校译:
-+
-+
-+
-+简易 Linux USB 驱动的致谢名单：
-+
-+以下人员都为 Linux USB 驱动代码作出了贡献（按姓氏字母顺序排列）。
-+我相信这份名单本应更长一些，但确实不容易维护。
-+如需将自己加入名单，请提交补丁。
-+
-+  Georg Acher <acher@informatik.tu-muenchen.de>
-+  David Brownell <dbrownell@users.sourceforge.net>
-+  Alan Cox <alan@lxorguk.ukuu.org.uk>
-+  Randy Dunlap <randy.dunlap@intel.com>
-+  Johannes Erdfelt <johannes@erdfelt.com>
-+  Deti Fliegl <deti@fliegl.de>
-+  ham <ham@unsuave.com>
-+  Bradley M Keryan <keryan@andrew.cmu.edu>
-+  Greg Kroah-Hartman <greg@kroah.com>
-+  Pavel Machek <pavel@suse.cz>
-+  Paul Mackerras <paulus@cs.anu.edu.au>
-+  Petko Manlolov <petkan@dce.bg>
-+  David E. Nelson <dnelson@jump.net>
-+  Vojtech Pavlik <vojtech@suse.cz>
-+  Bill Ryder <bryder@sgi.com>
-+  Thomas Sailer <sailer@ife.ee.ethz.ch>
-+  Gregory P. Smith <greg@electricrain.com>
-+  Linus Torvalds <torvalds@linux-foundation.org>
-+  Roman Weissgaerber <weissg@vienna.at>
-+  <Kazuki.Yasumatsu@fujixerox.co.jp>
-+
-+特别感谢：
-+
-+  Inaky Perez Gonzalez <inaky@peloncho.fis.ucm.es>
-+  感谢他发起了 Linux USB 驱动开发工作，并编写了体量较大的 uusbd
-+  驱动中的大部分代码。我们从那项工作中学到了很多。
-+
-+  NetBSD 和 FreeBSD 的 USB 开发者们
-+  感谢他们加入 Linux USB 邮件列表，提供建议并分享实现经验。
-+
-+附加感谢：
-+  还要感谢以下公司与个人在硬件、支持、时间投入和开发方面提供的捐赠与帮助
-+  （摘自 Inaky 驱动原始的 THANKS 文件）：
-+
-+    以下公司曾帮助我们开发 Linux USB / UUSBD：
-+
-+        - 3Com GmbH 捐赠了一台 ISDN Pro TA，并在技术问题和测试设备方面为我
-+          提供支持。没想到能得到这么大的帮助。
-+
-+        - USAR Systems 向我们提供了他们出色的 USB 评估套件，
-+          使我们能够测试 Linux USB 驱动对最新 USB 规范的符合性。
-+          USAR Systems 认识到保持开放操作系统与时俱进的重要性，
-+          并以硬件支持这个项目。感谢！
-+
-+        - 感谢英特尔提供的宝贵帮助。
-+
-+        - 我们与 Cherry 合作，使 Linux 成为首个内置 USB 支持的操作系统。
-+          Cherry 是全球最大的键盘制造商之一。
-+
-+        - CMD Technology, Inc. 慷慨捐赠了一块 CSA-6700 PCI-to-USB
-+          控制卡，用于测试 OHCI 实现。
-+
-+        - 由于他们对我们的支持，Keytronic 可以放心，
-+          他们的键盘能卖给至少 300 万 Linux 用户中的一部分。
-+
-+        - ing büro h doran [http://www.ibhdoran.com]!
-+          在欧洲，想给主板买一个 PC 背板 USB 连接器几乎是不可能的
-+          （我自己做的那个相当糟糕 :)）。现在我知道该去哪里买漂亮的 USB
-+          配件了！
-+
-+        - Genius Germany 捐赠了一只 USB 鼠标，用于测试鼠标启动协议；
-+          他们还捐赠了 F-23 数字摇杆和 NetMouse Pro。感谢！
-+
-+        - AVM GmbH Berlin 支持我们开发 Linux 下的 AVM ISDN Controller B1 USB 驱动。
-+          AVM 是领先的 ISDN 控制器制造商，其主动式设计对包括 Linux 在内的
-+          所有操作系统平台开放。
-+
-+        - 非常感谢 Y-E Data, Inc 捐赠的 FlashBuster-U USB 软驱，
-+          使我们能够测试批量传输代码。
-+
-+        - 感谢 Logitech 捐赠了一只三轴 USB 鼠标。
-+
-+          Logitech 负责设计、制造并销售各种人机接口设备，
-+          在键盘、鼠标、轨迹球、摄像头、扬声器，以及面向游戏和专业用途的
-+          控制设备方面拥有悠久历史和丰富经验。
-+
-+          作为这些设备广为人知的供应商和销售商，他们捐赠了 USB 鼠标、
-+          摇杆和扫描仪，以表明 Linux 的重要性，也让 Logitech 的客户
-+          能在自己喜欢的操作系统上获得支持，并让所有 Linux 用户都能使用
-+          Logitech 以及其他 USB 硬件。
-+
-+          Logitech 也是 1999 年 2 月 11 日维也纳 Linux 大会的官方赞助商，
-+          我们将在会上展示 Linux USB 工作的最新进展。
-+
-+        - 感谢 CATC 提供 USB Inspector，帮助我们揭开 UHCI 内部实现中
-+          那些不为人知的角落。
-+
-+        - 感谢 Entrega 为开发工作提供 PCI 转 USB 卡、集线器和转换器产品。
-+
-+        - 感谢 ConnectTech 提供 WhiteHEAT USB 转串口转换器以及相关文档，
-+          让这个驱动得以写成。
-+
-+        - 感谢 ADMtek 提供 Pegasus 和 Pegasus II 评估板、规格说明，
-+          以及驱动开发过程中的宝贵建议。
-+
-+    另外还要感谢以下个人（嘿，顺序不分先后 :)）
-+
-+        - Oren Tirosh <orenti@hishome.net>,
-+          他非常耐心地听我唠叨各种 USB 疑问，还给了很多很酷的想法。
-+
-+        - Jochen Karrer <karrer@wpfd25.physik.uni-wuerzburg.de>,
-+          指出了致命 bug，并给出了宝贵建议。
-+
-+        - Edmund Humemberger <ed@atnet.at>，他在公共关系与项目管理方面
-+          为 Linux-USB 项目付出了巨大的努力。
-+
-+        - Alberto Menegazzi <flash@flash.iol.it> 正在着手编写 UUSBD 文档，加油！
-+
-+        - Ric Klaren <ia_ric@cs.utwente.nl> 编写了很好的入门文档，
-+          与 Alberto 的作品形成良性竞争：）。
-+
-+        - Christian Groessler <cpg@aladdin.de>，感谢他在那些棘手细节上的帮助。
-+
-+        - Paul MacKerras 改进了 OHCI 实现，推动了对 iMac 的支持，
-+          并提供了大量的改进意见。
-+
-+        - Fernando Herrera <fherrera@eurielec.etsit.upm.es>
-+          负责撰写、维护并不断补充那份期待已久、独一无二又精彩的
-+          UUSBD FAQ！太棒了！
-+
-+        - Rasca Gmelch <thron@gmx.de> 重新启用了 raw 驱动，
-+          指出了一些错误，并启动了 uusbd-utils 软件包。
-+
-+        - Peter Dettori <dettori@ozy.dec.com>，像疯了一样挖掘 bug，
-+          还提出了很多很酷的建议，太棒了！
-+
-+        - 自由软件与 Linux 社区的所有成员，包括 FSF、GNU 项目、
-+          MIT X 联盟、TeX 社区等等，谢谢你们！
-+
-+        - 特别感谢 Richard Stallman 创造了 Emacs！
-+
-+        - 感谢 linux-usb 邮件列表的所有成员，读了那么多邮件——不开玩笑了，
-+          感谢你们提出的所有建议！
-+
-+        - 感谢 USB Implementers Forum 成员们的帮助与支持。
-+
-+        - Nathan Myers <ncm@cantrip.org>，感谢他的建议！
-+          （希望你喜欢 Cibeles 的派对。）
-+
-+        - 感谢 Linus Torvalds 创建、开发并管理 Linux。
-+
-+        - Mike Smith、Craig Keithley、Thierry Giron 和 Janet Schank
-+          感谢他们让我认识到标准 USB 集线器其实也没那么“标准”，
-+          这有助于我们在标准集线器驱动中加入厂商特定的特殊处理。
---
++   In particular, drivers such as intel_pstate or amd_pstate may use alternative
++   mechanisms for frequency scaling and accounting
+ 
+ 2. Statistics Provided (with example)
+ =====================================
+-- 
 2.54.0
 
 
