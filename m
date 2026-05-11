@@ -1,166 +1,206 @@
-Return-Path: <linux-doc+bounces-86785-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86787-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OEQAFZywAWoeigEAu9opvQ
-	(envelope-from <linux-doc+bounces-86785-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 12:34:04 +0200
+	id 6MnTAR6yAWppigEAu9opvQ
+	(envelope-from <linux-doc+bounces-86787-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 12:40:30 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEB2D50BF27
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 12:34:03 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0735C50C061
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 12:40:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 8A2DC301D4FF
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 10:33:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3AFE33004DB3
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 10:40:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15C2E3D811E;
-	Mon, 11 May 2026 10:33:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D89AF3D891C;
+	Mon, 11 May 2026 10:40:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="vN8lnB2V";
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="vN8lnB2V"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="kkLhiGmD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012004.outbound.protection.outlook.com [40.93.195.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 795253D47AC
-	for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 10:33:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778495613; cv=none; b=G+hJYpbl0v25pzjIiaHMVo/y/Iv9AWREwb0jaFn5XF8cSyy5eyIHzLTOeHiTuowvzRfcrR3H5tAAr9i70beLqDQsvmCfrSsG72D/wafYwC534i4mpNJuSlvvMNgQ7iXtqiYTKLkoqsUucw6SXNT/kIDRX7iQ+psvtC3fuoZQwBQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778495613; c=relaxed/simple;
-	bh=paKqw+AxbYX8Ac7JYkYZuyWmkzfQCaRJN4HHMNZ2eOE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=S2ncDUeiaL+XQjkLXYMFbIlZtgCD5on1gpmZlwVqkrGK61y6S+cGMJc+EhQSFcvVQ8p3Tb4SGmRcIQNCz7i6orxnsCzJUCLA5pc+WicZwHFDSoSSi+JDexzHUvHAqR+Eg+dQITKGUegSQBbvqWZhex02cP+bB8tRVOlazvI60iA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b=vN8lnB2V; dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b=vN8lnB2V; arc=none smtp.client-ip=195.135.223.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: from foo (unknown [IPv6:2a07:de40:b306:2000::2])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 85AFD68611;
-	Mon, 11 May 2026 10:33:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1778495609; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=dJ2zZxs/5ZIKE08XTANU853dRSSk0fWTqi6tGbGlOE0=;
-	b=vN8lnB2Vh3PR0Tmw4DG4IBoa/8im3GOXpjghq/UJDqT1HEXyNaHCb6NLDr74D6qMv4fz1m
-	q1CWYByw5Ui8+rLi/GUd8ogSEijBOakmdnvyUifBpqsa9yWBWXeA93fRJZjlrkGEUpip22
-	NUnDZXdaBaEQWANHXY8Uw6nAsK90cCw=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=vN8lnB2V
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1778495609; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=dJ2zZxs/5ZIKE08XTANU853dRSSk0fWTqi6tGbGlOE0=;
-	b=vN8lnB2Vh3PR0Tmw4DG4IBoa/8im3GOXpjghq/UJDqT1HEXyNaHCb6NLDr74D6qMv4fz1m
-	q1CWYByw5Ui8+rLi/GUd8ogSEijBOakmdnvyUifBpqsa9yWBWXeA93fRJZjlrkGEUpip22
-	NUnDZXdaBaEQWANHXY8Uw6nAsK90cCw=
-Date: Mon, 11 May 2026 12:33:28 +0200
-From: Anthony Iliopoulos <ailiop@suse.com>
-To: Sasha Levin <sashal@kernel.org>
-Cc: Florian Weimer <fw@deneb.enyo.de>, corbet@lwn.net,
-	akpm@linux-foundation.org, skhan@linuxfoundation.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, gregkh@linuxfoundation.org
-Subject: Re: [PATCH v2] killswitch: add per-function short-circuit mitigation
- primitive
-Message-ID: <agGweC12aloH8DBq@foo>
-References: <20260508195749.1885522-1-sashal@kernel.org>
- <87ecjku6y7.fsf@mid.deneb.enyo.de>
- <af8pw54Y-Q18kSR0@laps>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EC753D47DC;
+	Mon, 11 May 2026 10:40:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.195.4
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778496021; cv=fail; b=Y+QX5mhL7KLHqdmaGEIjNrMLq5eclLUqZfyOORfNOvY29P7ufRSrp7B9KzxT40YgpCu99KR//87cwmpptT3ApL0HzhcPmaIeJl9y2TGQfslI3K60JqFPNQM8jIPDFYrZDiYMacUOVwiiwhI17Q2FVpGRGdjsu3KB1VIzfpJqjS4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778496021; c=relaxed/simple;
+	bh=ifmlf5KXy7HAs9a8+r7gIN58tGCndQQggvUkturq6Tc=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=BXn2bJmmPlxpc4d0sBmVQvs2buAdT/LCaKGGFZEEo8vzVARGpqi+HGRt3nQhADLUJ1PJrQbXu+V+Nk5NN2CfsTBkafeLjrKilTgX/ySSSfutklZUQP8M8YQqLUJHLALnnPwKUGA3RD1tXyJZ1pDu6VTAIRbn0kWlQwuLWZhjAEs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=kkLhiGmD; arc=fail smtp.client-ip=40.93.195.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oNg1XIsItlOR5igJ6nesNRRx5Y4XXmgK9hQ6IxBjejLslR3Um0ctq4HB+TgkMCTZXmuCeqD8uZdGtoGoIlXPEE9cVNQf+HhBSGifQBVKzXaRHJsSadlsI0jhBWjPCXLY9v0QVJKIgICfh9nfIs5boNoQeDT4UQINV7h0e23iHdxdFv35Hgim5mcFRw+FOer7Rn09c+5Pfw1uzagVDXyN/8iNnl8G0SCo/ucRKgE+TaAd8Yx5H6T5QU3uHCYPMLlI51fGe3Nb07tniXtFfU71t5SUBAI8r8DsyGfEZ98opXsgFzOvM1SspWv55QeqMdlJNiBoiHFkLa7020SsTHzs3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cG9/rauUu5gKOBAvQJNB9KdLvKVr9eXlMKlaAHgbJzY=;
+ b=ZTvSyiYZuAmjjTA4p9kqL4BSCfSSUpkMTZ7TD6jWHGRGonEUNif6X2/sEN2I48vGKP7nox4B/nfKmkPFTp9epClExM9s6rBTJZx+yhxsNxSHc8hfzhAedXNj86rcf+qjqCBJCHABmEJHS4Ru3/dldNduMK226Y6QPmNUoZ5ALRtDDdHXeFGQILfzKVQIEETXgz5u3AuZeVC3Ui99u+YhaKrRSbz1K27eK/z6A36K8xsQ6x5LdIwViPmNcYubuYNeUlYevSNomdzJDAUbY4m3G07qVnsdxeUtR1+jw+YZ7RPSny173Zi4ROaFtRX7FGDKrJ7zd2+GEz9PRUdcFTcNwQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cG9/rauUu5gKOBAvQJNB9KdLvKVr9eXlMKlaAHgbJzY=;
+ b=kkLhiGmDnwey2seM8gsuo5UMR9aK+ON1U7pNcfXMRezyYwLG9L4pr/Wnp88ypivLS24KSv1By49K80jHqntY/iSsDzvPk3QBi0DEOt+JYoHzW3npFypxeN635SdMH0oUVhfSxgd8DWwAPxkpckZ3GvvbrCnc5xOMQDUhrnWQykR2ToVXE+jQUKvBP2cjp6KjPLn9dmcfVk6kwNRwHPU4tAIWHhgn/TjtChWq0L5NclzpLYgArJAWtklupqFzg6DRAJkxDFmo9I+908eFu9OZeHx8e3V4+khPiw2DFwpFJlyEzzwdLmFL+YNY9t/FgSCV9pmvtMWm1llQ2CpmnGbw8w==
+Received: from BY5PR03CA0024.namprd03.prod.outlook.com (2603:10b6:a03:1e0::34)
+ by CH2PR12MB4133.namprd12.prod.outlook.com (2603:10b6:610:7a::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Mon, 11 May
+ 2026 10:40:16 +0000
+Received: from SJ1PEPF000023CE.namprd02.prod.outlook.com
+ (2603:10b6:a03:1e0:cafe::a4) by BY5PR03CA0024.outlook.office365.com
+ (2603:10b6:a03:1e0::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.21 via Frontend Transport; Mon,
+ 11 May 2026 10:40:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ SJ1PEPF000023CE.mail.protection.outlook.com (10.167.244.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Mon, 11 May 2026 10:40:14 +0000
+Received: from rnnvmail205.nvidia.com (10.129.68.10) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 11 May
+ 2026 03:40:04 -0700
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by rnnvmail205.nvidia.com
+ (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 11 May
+ 2026 03:40:03 -0700
+Received: from build-va-bionic-20251031.nvidia.com (10.127.8.14) by
+ mail.nvidia.com (10.129.68.8) with Microsoft SMTP Server id 15.2.2562.20 via
+ Frontend Transport; Mon, 11 May 2026 03:40:03 -0700
+From: Vishwaroop A <va@nvidia.com>
+To: <broonie@kernel.org>, <linux-spi@vger.kernel.org>
+CC: <smangipudi@nvidia.com>, <jonathanh@nvidia.com>,
+	<thierry.reding@gmail.com>, <corbet@lwn.net>, <linux-doc@vger.kernel.org>,
+	<va@nvidia.com>
+Subject: [PATCH v4 0/2] spi: add new_device/delete_device sysfs interface
+Date: Mon, 11 May 2026 10:40:00 +0000
+Message-ID: <20260511104002.976269-1-va@nvidia.com>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <af8pw54Y-Q18kSR0@laps>
-X-Spamd-Bar: +++++++++++++++++
-X-Spam-Score: 17.36
-X-Spam-Level: *****************
-X-Spam-Flag: YES
-X-Rspamd-Queue-Id: CEB2D50BF27
+Content-Type: text/plain
+X-NV-OnPremToCloud: ExternallySecured
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CE:EE_|CH2PR12MB4133:EE_
+X-MS-Office365-Filtering-Correlation-Id: 23177a80-1db9-4b2a-8775-08deaf49afcd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|30052699003|1800799024|36860700016|376014|82310400026|56012099003|13003099007|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	MtMabcQuedrnfQrol9uwrcSW/P5c2sQl3GGSOPLOMYVURsI5dlaw9CNudvuPWPGfFxbH0573MKBUuWMQnNmGSZL8WGwbwy4a7pfQWFxnSazdDLej9EA+cQof/7V3btXGnWAB2NoGHZRhICo8itrbUdvUgPmgRyLyxZERhsIpz3kOdhdbxPePmy81bFHyXjefWl5yA+V1Dj2z+asWAZusUpmY4UvrQ33UKXjFaeRA8i5eOf8F4fKHPPs0tOtTChhaIIw03SUuVw388bAOS4dDp9KF9eMK77Z0KhReDXVnONpXVStgp2ks7ubstEEykdjfeo8Vfr1MpwxEvtgJlTXdjj7JFxUkJ5ES4eiuOq13gmh92PrfBhFPHcrYyeZCS2IMyuS7GvthApLyxls8NCsQbyDvh3bbqvsrmXrIzEyR2lZnen1YbbCRY8hS9oVcI9GkO2UwKge2ZlbVRuNtE5FQNG5gRhp0nkJueWFmD2xLOfHBSlfPD+ZjHWnSK67U7lQRV3BbmhG3PVJ+vQQNIbRN2+UxMxi+pLj6URgGwOYqxN64r7VRQabMj9AOFlUtKtOh7lgrdl+6LVj7oM3SPlMf7861vJhZ+2jFShLrq5izAJopxh0TWHwLCmq1ixLAUGEx9ikR5gRtia16H6UjPPfZ1Bhk2UsREWF2icYh5GQDwBb1XrkWi/PdPuMAD0qA38XXl9+cAMCQ90Ag0xC1Kw3ffv7yvwgwvrOlSDFAOhPENYs=
+X-Forefront-Antispam-Report:
+	CIP:216.228.117.161;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge2.nvidia.com;CAT:NONE;SFS:(13230040)(30052699003)(1800799024)(36860700016)(376014)(82310400026)(56012099003)(13003099007)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	XmyJiLrEufQB8+gIltfllSVj1W5KgaR6evSpRPK6H7852nrXUHM0CP5J6ex2I4/K+MSPsiWrR01nL4MaTVsoTrxMPENsTx5Q3SkaqoYQKWx5SeEWLMnvoIqL4Jtn4QemjYxL47IFGZ7Z0aE1LkuUP7bl/eV7qkEc95N+lDfYRK+FNWMSm/pGv238BjEJjVQMEFN2CM1DXy863mlRUdVq9p89pf41Yya4w7if4a9ZNH94kGxtM+9hCKZy8Ldpdm8rABpcgdarlgbp9jhI5zs1z8y00KRJkq8KmurfwtKV7F1s2IIEjb98uGabqagk7XFtH2Thhr1Z3pcHPPqTgaXHOctNV5Qg35WOdp2bqbiG7Gq+IgtEWKK/EbDeRMxaoYZ/tXmTnhf0T2AXu1SRcYgQuWnl/bJ2JVzeeRW+U0toXsmfgVWok8/yC03t2rlmU97v
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2026 10:40:14.9822
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23177a80-1db9-4b2a-8775-08deaf49afcd
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.161];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF000023CE.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4133
+X-Rspamd-Queue-Id: 0735C50C061
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [3.34 / 15.00];
-	SPAM_FLAG(5.00)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.com,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+X-Spamd-Result: default: False [2.84 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[nvidia.com,reject];
+	R_DKIM_ALLOW(-0.20)[Nvidia.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86785-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86787-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[nvidia.com,gmail.com,lwn.net,vger.kernel.org];
+	DKIM_TRACE(0.00)[Nvidia.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ailiop@suse.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[suse.com:+];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FROM_NEQ_ENVFROM(0.00)[va@nvidia.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
+	NEURAL_HAM(-0.00)[-0.988];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:mid,Nvidia.com:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns];
 	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Action: no action
 
-On Sat, May 09, 2026 at 08:34:11AM -0400, Sasha Levin wrote:
-> On Sat, May 09, 2026 at 02:02:24PM +0200, Florian Weimer wrote:
-> > * Sasha Levin:
-> > 
-> > > When a kernel (security) issue goes public, fleets stay exposed until a patched
-> > > kernel is built, distributed, and rebooted into.
-> > > 
-> > > For many such issues the simplest mitigation is to stop calling the buggy
-> > > function. Killswitch provides that. An admin writes:
-> > > 
-> > >     echo "engage af_alg_sendmsg -1" \
-> > >         > /sys/kernel/security/killswitch/control
-> > > 
-> > > After this, af_alg_sendmsg() returns -EPERM on every call without
-> > > running its body. The mitigation takes effect immediately, and is dropped on
-> > > the next reboot -- by which point a patched kernel is hopefully in place.
-> > 
-> > Do you expect this to be safe to enable in kernel lockdown mode (i.e.,
-> > with typical Secure Boot configurations in distributions)?
-> 
-> Yes: under lockdown, killswitch has to be configured on the cmdline. Runtime
-> engage is gated on the new LOCKDOWN_KILLSWITCH reason.
+Add I2C-style new_device/delete_device sysfs attributes to SPI host
+controllers, allowing userspace to instantiate and remove SPI devices
+at runtime without device-tree changes.
 
-Basically this proposal allows for any function to be overridden on a
-production kernel as long as no lockdown level is enabled, which is quite
-dangerous.
+Changes since v3:
+  - Replaced holding add_lock across __spi_add_device() + list
+    insertion (which caused an ABBA deadlock between add_lock and the
+    kernfs active reference during concurrent unbind) with:
+    * A 'dead' flag on spi_controller, set in
+      spi_unregister_controller() under both add_lock and
+      userspace_clients_lock.
+    * __spi_add_device() checks ctlr->dead under add_lock to reject
+      new devices after teardown begins.
+    * new_device_store() checks ctlr->dead under userspace_clients_lock
+      before list insertion, falling back to cleanup + ENODEV.
+    * add_lock is released before device_del() so in-flight sysfs
+      stores can drain without deadlocking.
+    * get_device() taken before spi_add_device() prevents
+      use-after-free if __unregister runs concurrently.
+  - Used #if IS_ENABLED() preprocessor guard (not runtime IS_ENABLED())
+    for the ctlr->dead check in __spi_add_device(), since the dead
+    field is conditionally compiled.
 
-Assuming this is acceptable (which I am not sure it should be), then this
-is equivalent to the existing error injection code that we already have in
-the kernel (CONFIG_FAIL_FUNCTION) minus the explicit whitelisting on a per
-function basis required to permit injection.
+Changes since v2:
+  - Gated sysfs attributes and locking on CONFIG_SPI_DYNAMIC.
 
-Given that this achieves the exact same result, then why don't we consider
-simply removing the whitelisting restriction from fail_function altogether
-and use that instead? The only thing missing then would be the boot param
-parsing and setup.
+Changes since v1:
+  - Added locking to prevent races between new_device_store() and
+    concurrent spi_unregister_controller().
 
-This way we'll be removing a few hundred lines of code instead of adding
-more duplication, while enabling the same functionality.
+Link: https://lore.kernel.org/linux-tegra/909f0c92-d110-4253-903e-5c81e21e12c9@nvidia.com/
 
-[As a bonus, this would also make the existing framework more practical to
- use for testing arbitrary function failures. I have been carrying a debug
- only patch to that effect for a while, which basically just shorts the
- whitelisting check when CONFIG_FUNCTION_ERROR_INJECTION_ALLOW_ALL=y.]
+Vishwaroop A (2):
+  spi: add new_device/delete_device sysfs interface
+  docs: spi: add documentation for userspace device instantiation
 
-Regards,
-Anthony
+ .../ABI/testing/sysfs-class-spi-master        |  34 +++
+ Documentation/spi/index.rst                   |   1 +
+ Documentation/spi/instantiating-devices.rst   |  88 +++++++
+ drivers/spi/spi.c                             | 216 +++++++++++++++++-
+ include/linux/spi/spi.h                       |  13 +
+ 5 files changed, 346 insertions(+), 6 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-class-spi-master
+ create mode 100644 Documentation/spi/instantiating-devices.rst
+
+-- 
+2.17.1
+
 
