@@ -1,291 +1,218 @@
-Return-Path: <linux-doc+bounces-86799-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86796-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iI96BB3AAWrKjQEAu9opvQ
-	(envelope-from <linux-doc+bounces-86799-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:40:13 +0200
+	id UNMCG7a+AWqdjQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86796-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:34:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F1EE50CF18
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:40:12 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B7B750CCFD
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:34:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6073E308D759
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:36:26 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id D9E6330791DA
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:31:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA06B37757F;
-	Mon, 11 May 2026 11:36:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 882DE372EC6;
+	Mon, 11 May 2026 11:30:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="We+TJptw"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="A7gfGf9I"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B8002F90E0;
-	Mon, 11 May 2026 11:36:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B1B5374E66;
+	Mon, 11 May 2026 11:30:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.222
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778499373; cv=none; b=K+NZmw6/VctZpoQ3CYYWTSonwQ8/q/mSeamcQC2C2lM9KlpUEcTMcJVNVzmO1ra+MhHPwAgNKfIh+Eycugc0sUeLuvymY7K1lx2s234+JhdRkRqqIEqbKhrjHuTxSqg50t4xbn8gaVKZ3PZDLMQ7tUOiMCATOt0QcP0nNL3P0LA=
+	t=1778499056; cv=none; b=BmS3sD45xvYYZRGyuMMc+ybznwnGRU/E4UuFaTJnfcHSLU5G2q7ZgUpIDnFgd8JrtQpYHky9mHa/QfiOQ7ifNbfzZnDhGaxZ/C3S2xLFuic9TWN6GIvkpKXe7SqQodtOwac5YviUuF4p4smuOS6CsuME5xXEk1KnNJH4a5xG1Ro=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778499373; c=relaxed/simple;
-	bh=0yoTTqAYyvgMHKqoam3vap8Y37fL5KgIBY9SqqUZezM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CHxJ/CtkzRnCaLHkcgZeWl4cBpmkHlj99aAhY9InvB14r7PblwkXx+m5iXiX2pvyXL9FKvGMC9M5FEtOtqVO943CzIgO5usOgy4W4Ong6VGp79TJ9D8KwjYkI+QX5+1LFPejsaDwb0T0ecSWgCtqMe/T7hAzblG5S2Hn8UH5FHU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=We+TJptw; arc=none smtp.client-ip=90.155.50.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=casper.srs.infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=P+mHaivvSxVuGabpkI+AAIbqLWFGcKnD2EZbza8et9I=; b=We+TJptwrQUIPCdTFHKp0f5kLX
-	t7MXPvamC6HFxmmEj04JOZ2jXPDlKcqkOd9XHz98+3ypRnIuxqcQMVSYyEGjDkVUxhxbs2zbHuHNX
-	LRVfoDZyNL1C1GcxN1mmjFa1Ys8NndS2TkJFIFww5DQRl3irpJsfki8wPxOBgRR4KLbUJ+XQg/cqY
-	A3BmfqE5j45y1er14F3rJIsTd4XvEinETF5wQUJNWDexLVskzVQmgOR3G3yRFHkDv+qkh97f7Tz40
-	90bSHVzJyh+MJeVIheMHPqSY9x2jocRW2Ua3sYZdBhyJQU+7k5FiFDrVRaJSkCKSGHVW1YbTilp4p
-	IM4LKCgg==;
-Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
-	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wMOvY-000000084dL-1sNR;
-	Mon, 11 May 2026 11:36:00 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wMOvY-0000000Dx0Y-0umI;
-	Mon, 11 May 2026 12:36:00 +0100
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Marc Zyngier <maz@kernel.org>,
-	Oliver Upton <oupton@kernel.org>,
-	Joey Gouly <joey.gouly@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Zenghui Yu <yuzenghui@huawei.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Sascha Bischoff <Sascha.Bischoff@arm.com>,
-	Eric Auger <eric.auger@redhat.com>,
-	Raghavendra Rao Ananta <rananta@google.com>,
-	Maxim Levitsky <mlevitsk@redhat.com>,
-	David Woodhouse <dwmw@amazon.co.uk>,
-	Kees Cook <kees@kernel.org>,
-	Timothy Hayes <timothy.hayes@arm.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	kvmarm@lists.linux.dev,
-	linux-kselftest@vger.kernel.org,
-	Peter Maydell <peter.maydell@linaro.org>,
-	qemu-arm@nongnu.org,
-	qemu-devel@nongnu.org
-Subject: [PATCH v3 2/4] KVM: arm64: selftests: Add vgic IIDR revision test
-Date: Mon, 11 May 2026 12:30:44 +0100
-Message-ID: <20260511113558.3325004-3-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260511113558.3325004-1-dwmw2@infradead.org>
-References: <20260511113558.3325004-1-dwmw2@infradead.org>
+	s=arc-20240116; t=1778499056; c=relaxed/simple;
+	bh=+yjkn4HBuA/UyhKfR+d394Bjxs+3MnkK17zGluVy8hs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=kYCGnVkNY0zBq/1PD5D94qcPDcjFBXgHCb79pi4cA1oKA4b9GQKIQZ3m29MViGFn/YoWsyRw725GWBNSwU4JFhILArRSuj26k+cYt/KfDR9gRt1dghF9jI/3WHsNqwwzZ8zTmRjkKQzwXcEvCDnTloQBVX7K+GI/ZuGkWryzx8A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=A7gfGf9I; arc=none smtp.client-ip=113.46.200.222
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=hZY77WY1R4lZKqkiJYVx90NM7cypXm7b/K/Dl6ostWU=;
+	b=A7gfGf9I2mWtoGk1twpeKdsTWxHRCoqkxK6h8sqAufJacFPxPk7J5UV8oj4BBjTyooxVD2Cki
+	IZBX0lyWqVPhijn1Ra4jjJgWV2oQvMFsHXLFq2R6ycKWvoUQXNa+lNIZBbmfXSzS+9wfOLM4NXI
+	bc1oxF4bSdMbsjNUg+iYH3U=
+Received: from mail.maildlp.com (unknown [172.19.163.163])
+	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4gDcm153LszLlSL;
+	Mon, 11 May 2026 19:23:13 +0800 (CST)
+Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
+	by mail.maildlp.com (Postfix) with ESMTPS id 2B9494048B;
+	Mon, 11 May 2026 19:30:49 +0800 (CST)
+Received: from [10.67.109.254] (10.67.109.254) by
+ dggpemf500011.china.huawei.com (7.185.36.131) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Mon, 11 May 2026 19:30:44 +0800
+Message-ID: <79c14bee-b1f5-4d70-8345-6582d6cf0128@huawei.com>
+Date: Mon, 11 May 2026 19:30:44 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: 7F1EE50CF18
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v13 04/15] arm64: kexec_file: Fix potential buffer
+ overflow in prepare_elf_headers()
+To: Breno Leitao <leitao@debian.org>
+CC: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
+	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
+	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
+	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
+	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
+	<hpa@zytor.com>, <robh@kernel.org>, <saravanak@kernel.org>,
+	<akpm@linux-foundation.org>, <bhe@redhat.com>, <rppt@kernel.org>,
+	<pasha.tatashin@soleen.com>, <pratyush@kernel.org>, <ruirui.yang@linux.dev>,
+	<rdunlap@infradead.org>, <pmladek@suse.com>, <dapeng1.mi@linux.intel.com>,
+	<kees@kernel.org>, <elver@google.com>, <kuba@kernel.org>,
+	<ebiggers@kernel.org>, <lirongqing@baidu.com>, <paulmck@kernel.org>,
+	<sourabhjain@linux.ibm.com>, <coxu@redhat.com>, <jbohac@suse.cz>,
+	<ryan.roberts@arm.com>, <osandov@fb.com>, <cfsworks@gmail.com>,
+	<tangyouling@kylinos.cn>, <ritesh.list@gmail.com>, <adityag@linux.ibm.com>,
+	<guoren@kernel.org>, <songshuaishuai@tinylab.org>, <kevin.brodsky@arm.com>,
+	<vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>,
+	<wangruikang@iscas.ac.cn>, <namcao@linutronix.de>, <chao.gao@intel.com>,
+	<seanjc@google.com>, <fuqiang.wang@easystack.cn>, <ardb@kernel.org>,
+	<chenjiahao16@huawei.com>, <hbathini@linux.ibm.com>,
+	<takahiro.akashi@linaro.org>, <james.morse@arm.com>, <lizhengyu3@huawei.com>,
+	<x86@kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
+	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
+	<kexec@lists.infradead.org>
+References: <20260511030454.1730881-1-ruanjinjie@huawei.com>
+ <20260511030454.1730881-5-ruanjinjie@huawei.com> <agGkvrg06KNDNfDi@gmail.com>
+From: Jinjie Ruan <ruanjinjie@huawei.com>
+In-Reply-To: <agGkvrg06KNDNfDi@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
+ dggpemf500011.china.huawei.com (7.185.36.131)
+X-Rspamd-Queue-Id: 1B7B750CCFD
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86799-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,suse.com,google.com,baidu.com,suse.cz,fb.com,kylinos.cn,tinylab.org,pigmoral.tech,iscas.ac.cn,linutronix.de,intel.com,easystack.cn,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
+	DKIM_TRACE(0.00)[huawei.com:+];
+	TAGGED_FROM(0.00)[bounces-86796-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,amazon.co.uk:email]
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	RCPT_COUNT_GT_50(0.00)[71];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux-foundation.org:email,sashiko.dev:url,huawei.com:email,huawei.com:mid,huawei.com:dkim]
 X-Rspamd-Action: no action
 
-From: David Woodhouse <dwmw@amazon.co.uk>
 
-Test that the GICD_IIDR implementation revision correctly controls
-guest-visible behaviour for GICv3:
 
-  Revision 1: IGROUPR reads as all-ones (group 1), writes are ignored.
-              GICR_CTLR.{IR,CES} not advertised.
-  Revision 2: IGROUPR is guest-configurable (read/write).
-              GICR_CTLR.{IR,CES} not advertised.
-  Revision 3: IGROUPR is guest-configurable (read/write).
-              GICR_CTLR.{IR,CES} advertised.
+On 5/11/2026 5:46 PM, Breno Leitao wrote:
+> On Mon, May 11, 2026 at 11:04:43AM +0800, Jinjie Ruan wrote:
+>> There is a race condition between the kexec_load() system call
+>> (crash kernel loading path) and memory hotplug operations that can
+>> lead to buffer overflow and potential kernel crash.
+>>
+>> During prepare_elf_headers(), the following steps occur:
+>> 1. The first for_each_mem_range() queries current System RAM memory ranges
+>> 2. Allocates buffer based on queried count
+>> 3. The 2st for_each_mem_range() populates ranges from memblock
+>>
+>> If memory hotplug occurs between step 1 and step 3, the number of ranges
+>> can increase, causing out-of-bounds write when populating cmem->ranges[].
+>>
+>> This happens because kexec_load() uses kexec_trylock (atomic_t) while
+>> memory hotplug uses device_hotplug_lock (mutex), so they don't serialize
+>> with each other.
+>>
+>> Add the explicit bounds checking to prevent out-of-bounds access.
+> 
+> It seems you have a TOCTOU type of issue, and this seems to be shrinking
+> the window, but not fully solving it?
 
-For each revision, the test sets the IIDR via KVM_DEV_ARM_VGIC_GRP_DIST_REGS
-before initializing the vGIC, then runs a guest that verifies the
-expected IGROUPR and GICR_CTLR behaviour.
+Hi Breno,
 
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- tools/testing/selftests/kvm/Makefile.kvm      |   1 +
- .../selftests/kvm/arm64/vgic_group_iidr.c     | 118 ++++++++++++++++++
- 2 files changed, 119 insertions(+)
- create mode 100644 tools/testing/selftests/kvm/arm64/vgic_group_iidr.c
+Thanks for your comments regarding the TOCTOU issue.
 
-diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
-index 9118a5a51b89..8cadfed4d79a 100644
---- a/tools/testing/selftests/kvm/Makefile.kvm
-+++ b/tools/testing/selftests/kvm/Makefile.kvm
-@@ -177,6 +177,7 @@ TEST_GEN_PROGS_arm64 += arm64/sea_to_user
- TEST_GEN_PROGS_arm64 += arm64/set_id_regs
- TEST_GEN_PROGS_arm64 += arm64/smccc_filter
- TEST_GEN_PROGS_arm64 += arm64/vcpu_width_config
-+TEST_GEN_PROGS_arm64 += arm64/vgic_group_iidr
- TEST_GEN_PROGS_arm64 += arm64/vgic_init
- TEST_GEN_PROGS_arm64 += arm64/vgic_irq
- TEST_GEN_PROGS_arm64 += arm64/vgic_lpi_stress
-diff --git a/tools/testing/selftests/kvm/arm64/vgic_group_iidr.c b/tools/testing/selftests/kvm/arm64/vgic_group_iidr.c
-new file mode 100644
-index 000000000000..0073ccc19e92
---- /dev/null
-+++ b/tools/testing/selftests/kvm/arm64/vgic_group_iidr.c
-@@ -0,0 +1,118 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * vgic_group_iidr.c - Test IGROUPR behaviour across IIDR revisions
-+ *
-+ * Validate that the GICD_IIDR implementation revision controls
-+ * IGROUPR semantics for GICv3:
-+ *   Rev 1: IGROUPR reads as all-ones (group 1), writes ignored
-+ *   Rev 2+: IGROUPR is guest-configurable (read/write)
-+ */
-+#include <linux/sizes.h>
-+
-+#include "test_util.h"
-+#include "kvm_util.h"
-+#include "processor.h"
-+#include "gic.h"
-+#include "gic_v3.h"
-+#include "vgic.h"
-+
-+#define NR_IRQS		128
-+#define SPI_IGROUPR	(GICD_IGROUPR + (32 / 32) * 4) /* intids 32-63 */
-+
-+static uint64_t shared_rev;
-+
-+static void guest_code(void)
-+{
-+	uint32_t val;
-+
-+	val = readl(GICD_BASE_GVA + SPI_IGROUPR);
-+
-+	if (shared_rev == 1) {
-+		/* Rev 1: all group 1, guest writes must be ignored */
-+		GUEST_ASSERT_EQ(val, 0xffffffff);
-+		writel(0x0, GICD_BASE_GVA + SPI_IGROUPR);
-+		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
-+		GUEST_ASSERT_EQ(val, 0xffffffff);
-+		writel(0x55aa55aa, GICD_BASE_GVA + SPI_IGROUPR);
-+		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
-+		GUEST_ASSERT_EQ(val, 0xffffffff);
-+	} else {
-+		/* Rev 2/3: guest-configurable */
-+		writel(0xa5a5a5a5, GICD_BASE_GVA + SPI_IGROUPR);
-+		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
-+		GUEST_ASSERT_EQ(val, 0xa5a5a5a5);
-+		writel(0x0, GICD_BASE_GVA + SPI_IGROUPR);
-+		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
-+		GUEST_ASSERT_EQ(val, 0x0);
-+	}
-+
-+	/* Rev 3: GICR_CTLR advertises IR and CES. Rev 1/2: it does not. */
-+	val = readl(GICR_BASE_GVA + GICR_CTLR);
-+	if (shared_rev >= 3)
-+		GUEST_ASSERT(val & (GICR_CTLR_IR | GICR_CTLR_CES));
-+	else
-+		GUEST_ASSERT(!(val & (GICR_CTLR_IR | GICR_CTLR_CES)));
-+
-+	GUEST_DONE();
-+}
-+
-+static void run_test(int rev)
-+{
-+	struct kvm_vcpu *vcpus[1];
-+	struct kvm_vm *vm;
-+	struct ucall uc;
-+	uint32_t iidr;
-+	int gic_fd;
-+
-+	pr_info("Testing IIDR revision %d\n", rev);
-+
-+	test_disable_default_vgic();
-+	vm = vm_create_with_vcpus(1, guest_code, vcpus);
-+
-+	gic_fd = __vgic_v3_setup(vm, 1, NR_IRQS);
-+	TEST_ASSERT(gic_fd >= 0, "Failed to create vGICv3");
-+
-+	/* Set the requested IIDR revision before init. */
-+	kvm_device_attr_get(gic_fd, KVM_DEV_ARM_VGIC_GRP_DIST_REGS,
-+			    GICD_IIDR, &iidr);
-+	iidr &= ~GICD_IIDR_REVISION_MASK;
-+	iidr |= rev << GICD_IIDR_REVISION_SHIFT;
-+	kvm_device_attr_set(gic_fd, KVM_DEV_ARM_VGIC_GRP_DIST_REGS,
-+			    GICD_IIDR, &iidr);
-+
-+	__vgic_v3_init(gic_fd);
-+
-+	/* Verify the revision was applied. */
-+	kvm_device_attr_get(gic_fd, KVM_DEV_ARM_VGIC_GRP_DIST_REGS,
-+			    GICD_IIDR, &iidr);
-+	TEST_ASSERT(((iidr & GICD_IIDR_REVISION_MASK) >> GICD_IIDR_REVISION_SHIFT) == rev,
-+		    "IIDR revision readback: expected %d, got %d",
-+		    rev, (iidr & GICD_IIDR_REVISION_MASK) >> GICD_IIDR_REVISION_SHIFT);
-+
-+	/* Tell the guest which revision we set. */
-+	sync_global_to_guest(vm, shared_rev);
-+	shared_rev = rev;
-+	sync_global_to_guest(vm, shared_rev);
-+
-+	vcpu_run(vcpus[0]);
-+	switch (get_ucall(vcpus[0], &uc)) {
-+	case UCALL_ABORT:
-+		REPORT_GUEST_ASSERT(uc);
-+		break;
-+	case UCALL_DONE:
-+		break;
-+	default:
-+		TEST_FAIL("Unexpected ucall %lu", uc.cmd);
-+	}
-+
-+	close(gic_fd);
-+	kvm_vm_free(vm);
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+	run_test(1);
-+	run_test(2);
-+	run_test(3);
-+	return 0;
-+}
--- 
-2.51.0
+You are correct that the current bounds checking only "shrinks the
+window" and prevents a kernel crash, but doesn't fully guarantee header
+consistency if a race occurs.
+
+In my local environment, this race is extremely difficult to reproduce,
+but it is theoretically possible.
+
+To address this properly for arm64, I am considering two steps:
+
+- For this patch: I will change the return value to -EAGAIN and keep the
+bounds check. This ensures that even if a race happens, the kernel
+remains safe (no OOB access), and user-space is notified to retry.
+
+- Long-term solution: A better way to solve this is to implement ARM64
+CRASH_HOTPLUG support (similar to x86). With crash hotplug, the kernel
+will automatically re-generate the crash headers whenever a memory
+hotplug event occurs. This makes the TOCTOU during the initial
+kexec_load less critical, as any transient inconsistency will be
+immediately corrected by the subsequent hotplug handler.
+
+Does it make sense to you to use this patch as a safety guard first, and
+then I (or someone else) follow up with the full CRASH_HOTPLUG support
+for arm64 as [1]?
+
+[1]:
+https://lore.kernel.org/all/20260402081459.635022-1-ruanjinjie@huawei.com/
+
+Best regards,
+Jinjie
+
+> 
+>> Cc: Catalin Marinas <catalin.marinas@arm.com>
+>> Cc: Will Deacon <will.deacon@arm.com>
+>> Cc: Andrew Morton <akpm@linux-foundation.org>
+>> Cc: Baoquan He <bhe@redhat.com>
+>> Cc: Breno Leitao <leitao@debian.org>
+>> Cc: stable@vger.kernel.org
+>> Fixes: 3751e728cef2 ("arm64: kexec_file: add crash dump support")
+>> Closes: https://sashiko.dev/#/patchset/20260323072745.2481719-1-ruanjinjie%40huawei.com
+>> Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
+>> ---
+>>  arch/arm64/kernel/machine_kexec_file.c | 5 +++++
+>>  1 file changed, 5 insertions(+)
+>>
+>> diff --git a/arch/arm64/kernel/machine_kexec_file.c b/arch/arm64/kernel/machine_kexec_file.c
+>> index e31fabed378a..a67e7b1abbab 100644
+>> --- a/arch/arm64/kernel/machine_kexec_file.c
+>> +++ b/arch/arm64/kernel/machine_kexec_file.c
+>> @@ -59,6 +59,11 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
+>>  	cmem->max_nr_ranges = nr_ranges;
+>>  	cmem->nr_ranges = 0;
+>>  	for_each_mem_range(i, &start, &end) {
+>> +		if (cmem->nr_ranges >= cmem->max_nr_ranges) {
+>> +			ret = -ENOMEM;
+> 
+> -ENOMEM seems to be the the wrong errno. This isn't an allocation
+> failure; it's a transient race. -EBUSY or -EAGAIN would be more honest
 
 
