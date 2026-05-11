@@ -1,175 +1,135 @@
-Return-Path: <linux-doc+bounces-86812-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86813-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qDPLF0fIAWoRjwEAu9opvQ
-	(envelope-from <linux-doc+bounces-86812-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 14:15:03 +0200
+	id mJ/YMKrJAWpsjwEAu9opvQ
+	(envelope-from <linux-doc+bounces-86813-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 14:20:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id D777750D716
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 14:15:02 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2880A50D8BC
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 14:20:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 517E430556DD
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 12:08:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A5ED63034DDB
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 12:12:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4EEA939E6F0;
-	Mon, 11 May 2026 12:07:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06E7437B027;
+	Mon, 11 May 2026 12:12:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ibjbkZwF"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="RhVjdrcZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A52C39BFF4;
-	Mon, 11 May 2026 12:07:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 853173242B8;
+	Mon, 11 May 2026 12:12:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778501270; cv=none; b=nLI9DoyuRD3nsEsbilMraOk6kLJfkvh8F841aBIk1k3qfT3cihS4vBY/bBuoADSLb6Puy7gtrAc81U9HHQs1QtbV4QT0p5pHif+bIVbZLet1pBEuVyGn+fzw/PLjy4mECJD7huTMm6G4k7Z7tIVBob0OTihfdglPhWd01CKi3WI=
+	t=1778501564; cv=none; b=M4Q4A8J//LPS033eDJAYTFUtwqSi6Z3v2wQ6td8hzFuQve4Fm9nZbF4VWsyYbMlm/gitJVNNtTHjTJ5IN3TaOtRGsrcbY7QkhK2aCmoM+rPwVnHWC/5v5Em0blqWON1OI3DfXC+wA9X/nvnIvEYwnz+VJ9Wu6QU9PWKdabHzyYE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778501270; c=relaxed/simple;
-	bh=XJZrn11TDzQfh5nANwCT6M8kUFD6U0DGy379pNKKf8Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Mg9fcS6WvDVxynPWNywnM5y/7+ZsNVVbDT3TYtfP07C28LYx7qr2XZ4cJwEGI2m99vNkQnmM53HCpKaXdY6CtEE4QxjPI/qU4WVD2S2KTfEmtJI5SuNflPPK0/YJE5ws3DOmTkYoSMCmpEphxmzNXZkLcOLLir/TkdLKVSanRN0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ibjbkZwF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74A12C2BCB0;
-	Mon, 11 May 2026 12:07:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778501269;
-	bh=XJZrn11TDzQfh5nANwCT6M8kUFD6U0DGy379pNKKf8Y=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=ibjbkZwF2wXnJAldnE6kmyyqGGSID2Bc9jjAZ7CmPnbHIpPK9V5MhJnkkssrsla5M
-	 TCEnI1WgfWvVs/1fjjPQ7XcqEoTa/hK5QEXzZpxjHsrfJdUtL80tdnk9GPBLcaNNUh
-	 Dz1VrECQFTWep3M2pb7EfDNqTCG/s4CaVghUsLmw3JrSmqNDgUIPL5j7Lpyfp7m8YW
-	 q6DoQtrE/id+udKogPXf4b1Yyf3etERPPuZRYII2z4tRvKYkHMhIVv2JaD3xRIUH9X
-	 LytFu1InWXDWc50X86CajW1gTwTUSZ2HboiZXGVlEjmld61KcI4RsqaNjC9EwSIS/6
-	 KIIoWzhQRPkuA==
-Message-ID: <8354c3ee-85c0-4765-a114-20f350ae6e65@kernel.org>
-Date: Mon, 11 May 2026 14:07:41 +0200
+	s=arc-20240116; t=1778501564; c=relaxed/simple;
+	bh=yiiSlm1k5WcFZ+Tupe9rszk6yFj+8Y2Pd8mz6aYqdTY=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=n7FjibSuqSK+uBtEy6ERsueZ4RGS7YBNHQ9cCKST1aF+XusH6aGNZx8jtTLjkLc4Lvv0NqoZ/Z7ntjNn8AkdSSH+dqXeWuNNh9tKyObwjmjk4IKhvdo/nN7FHcBOeEkFeXxLdJt+pSuns20L0+MGz7Qrr4I8TzKYBRJqWQLT/io=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=RhVjdrcZ; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 10D9C410B5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1778501557; bh=VokAdgTG2y9lkz0FfnFTStioOu0fskx04WRkOrwfjH8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=RhVjdrcZ0xwgo9eRdIOQhmXnRSAEdqyNVYQplV4TqUrkGkmkfZSbcrWiTzQriQuBB
+	 5p1NpXuRPwP3qkFCGQ/NdqNf08kST1Lvupc8q5to0iLecioVyQKwvSVqglOEw6yQfB
+	 kqvYfmc+2dpLfVOQd4Jcfyw6/BJierMo0VJxoiIclMmaOVEepcpQpASoiiLHdDkFh6
+	 Rtd/VG7HjujKcp2Rv8/FrYrxiyEm4mQ4+fdRi3U3SgcNYIJgyvDuBMbmZXe7SmdMEZ
+	 OC8hvO0l6aRUjRD7AE6rByeJwGfPhHOMCKrDkxa8L59bOAiIpmiTfl6YGN0Yx/27B+
+	 5MhcY11Z6YqVg==
+Received: from localhost (unknown [IPv6:2601:280:4600:27b:67c:16ff:fe81:5f9b])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 10D9C410B5;
+	Mon, 11 May 2026 12:12:37 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Manuel Ebner <manuelebner@mailbox.org>, manuelebner@mailbox.org
+Cc: andy.shevchenko@gmail.com, apw@canonical.com, dwaipayanray1@gmail.com,
+ joe@perches.com, kees@kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, lukas.bulwahn@gmail.com,
+ skhan@linuxfoundation.org, workflows@vger.kernel.org
+Subject: Re: [PATCH 2/2] scripts: checkpatch.pl: add warning for strlcat()
+In-Reply-To: <20260510165649.57880-2-manuelebner@mailbox.org>
+References: <20260510164907.57176-2-manuelebner@mailbox.org>
+ <20260510165649.57880-2-manuelebner@mailbox.org>
+Date: Mon, 11 May 2026 06:12:36 -0600
+Message-ID: <87a4u6w3ez.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] slab: fix kernel-docs for mm-api
-To: Marco Elver <elver@google.com>, Jonathan Corbet <corbet@lwn.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>,
- Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
- Christoph Lameter <cl@gentwo.org>, Harry Yoo <harry@kernel.org>,
- Hao Li <hao.li@linux.dev>, David Rientjes <rientjes@google.com>,
- Roman Gushchin <roman.gushchin@linux.dev>, Kees Cook <kees@kernel.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Mike Rapoport
- <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Alexander Potapenko <glider@google.com>,
- Dmitry Vyukov <dvyukov@google.com>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- Miguel Ojeda <ojeda@kernel.org>, linux-kbuild@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-hardening@vger.kernel.org, kasan-dev@googlegroups.com,
- llvm@lists.linux.dev, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-References: <20260424132427.2703076-1-elver@google.com>
- <20260424132427.2703076-2-elver@google.com>
- <9c321184-9080-4d5c-bd1a-a16cd0bbaed3@kernel.org>
- <CANpmjNN_=g31Eoa+w1NrFALfp1dDBi5oHEZdr_bA_48-tS2M=Q@mail.gmail.com>
- <afi0nQ84k1oz5RyH@elver.google.com>
-From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Content-Language: en-US
-In-Reply-To: <afi0nQ84k1oz5RyH@elver.google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: D777750D716
+Content-Type: text/plain
+X-Rspamd-Queue-Id: 2880A50D8BC
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86812-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linux-foundation.org,kernel.org,gentwo.org,linux.dev,google.com,oracle.com,suse.com,gmail.com,vger.kernel.org,kvack.org,googlegroups.com,lists.linux.dev];
-	RCPT_COUNT_TWELVE(0.00)[33];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86813-lists,linux-doc=lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FREEMAIL_CC(0.00)[gmail.com,canonical.com,perches.com,kernel.org,vger.kernel.org,linuxfoundation.org];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[vbabka@kernel.org,linux-doc@vger.kernel.org];
+	NEURAL_HAM(-0.00)[-0.998];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc,lkml];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mailbox.org:email,lwn.net:dkim]
 X-Rspamd-Action: no action
 
-On 5/4/26 17:00, Marco Elver wrote:
-> On Thu, Apr 30, 2026 at 03:59PM +0200, Marco Elver wrote:
->> On Thu, 30 Apr 2026 at 15:40, Vlastimil Babka (SUSE) <vbabka@kernel.org> wrote:
->> >
->> > On 4/24/26 15:24, Marco Elver wrote:
->> > > The mm-api kernel-doc comments have been broken for a while, as many
->> > > documented symbols shifted from being direct function definitions to
->> > > macros wrapping _noprof implementations during the introduction of
->> > > allocation tagging (starting with commit 7bd230a26648 "mm/slab: enable
->> > > slab allocation tagging for kmalloc and friends").
->> > >
->> > > When the kernel-doc block remains above the internal implementation
->> > > function but uses the public API name, the documentation generator fails
->> > > to associate the documented symbol and generates warnings and fails to
->> > > emit the documentation.
->> > >
->> > > Fix this by:
->> > >
->> > > 1. Moving the kernel-doc comment blocks from slub.c to slab.h, placing
->> > >    them directly above the user-facing macros.
->> > >
->> > > 2. Converting the variadic macros for the documented APIs to use
->> > >    explicit arguments.
->> > >
->> > > No functional change intended.
->> > >
->> > > Signed-off-by: Marco Elver <elver@google.com>
->> >
->> > +Cc Jon
->> >
->> > I thought it was supposed to work because the kernel-doc scripts were at the
->> > time taught by commit 51a7bf0238c2 ("scripts/kernel-doc: drop "_noprof" on
->> > function prototypes") to handle _noprof. In the current form git grep finds:
->> >
->> > tools/lib/python/kdoc/kdoc_parser.py:        suffixes = [ '_noprof' ]
->> > tools/lib/python/kdoc/xforms_lists.py:        (KernRe("_noprof"), ""),
->> >
->> > Doesn't it work for you then?
->> 
->> Ah, I see. So it doesn't work anymore because we add the '_' prefix, too.
->> 
->> I guess the question is if we want to proliferate more kdoc parser
->> special cases, or just move the docs to the macros. The downside of
->> macros is that they lose the types in the displayed function
->> signature.
->> 
->> Preferences?
-> 
-> How about the below, i.e. adding type decls that only the kernel-doc
-> parser sees? One complication is also DECL_KMALLOC_PARAMS, and adding
-> kernel-doc parser hacks for that looks pretty awful, so this is a lot
-> cleaner.
+Manuel Ebner <manuelebner@mailbox.org> writes:
 
-Looks like a good workaround to me, unless something gets confused by seeing
-both the declaration and the define.
+> add a warning for strlcat()
+>
+> Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+> ---
+>  scripts/checkpatch.pl | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> index 0492d6afc9a1..ca1a8e67d529 100755
+> --- a/scripts/checkpatch.pl
+> +++ b/scripts/checkpatch.pl
+> @@ -7085,6 +7085,12 @@ sub process {
+>  			     "Prefer strscpy over strlcpy - see: https://github.com/KSPP/linux/issues/89\n" . $herecurr);
+>  		}
+>  
+> +# strlcat uses that should likely be
+> +		if ($line =~ /\bstrlcat\s*\(/ && !is_userspace($realfile)) {
+> +			WARN("STRLCAT",
+> +			     "Prefer seq_buf_printf() over strlcat - see: https://github.com/KSPP/linux/issues/370\n" . $herecurr);
+> +		}
 
+Using seq_buf_printf() requires switching over to the seq_buf API in
+general, it is not just a simple substitution, so this advice may prove
+unhelpful to many.
+
+jon
 
