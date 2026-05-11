@@ -1,55 +1,55 @@
-Return-Path: <linux-doc+bounces-86797-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86799-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0OAGNAPAAWrIjQEAu9opvQ
-	(envelope-from <linux-doc+bounces-86797-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:39:47 +0200
+	id iI96BB3AAWrKjQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86799-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:40:13 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 930DC50CEF1
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:39:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F1EE50CF18
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:40:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 017BD3036F9E
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:36:18 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6073E308D759
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:36:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EDAF0375F63;
-	Mon, 11 May 2026 11:36:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EA06B37757F;
+	Mon, 11 May 2026 11:36:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="hbQtBPhs"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="We+TJptw"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B885371049;
-	Mon, 11 May 2026 11:36:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B8002F90E0;
+	Mon, 11 May 2026 11:36:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778499372; cv=none; b=UqXoemlRIcWqEh5qB/PGb/x8ILNXh+2Eo83/P0supaXi13JaEo2NfYHcsOaRWf3m5BcCvNph+Rf4sjNgUMI6NSdmLr6WreQ1/7C8jWEX/5mH6k41IezNcB1R1sgSD+ZAqCl8ZxiJ/ThaRX2TUfIEwowe+z4HfRkv4bhExHKHd8s=
+	t=1778499373; cv=none; b=K+NZmw6/VctZpoQ3CYYWTSonwQ8/q/mSeamcQC2C2lM9KlpUEcTMcJVNVzmO1ra+MhHPwAgNKfIh+Eycugc0sUeLuvymY7K1lx2s234+JhdRkRqqIEqbKhrjHuTxSqg50t4xbn8gaVKZ3PZDLMQ7tUOiMCATOt0QcP0nNL3P0LA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778499372; c=relaxed/simple;
-	bh=hGENPvvDT4+p9bZ6Shwbk2ymjYMAcQmI4kduKlzqRMU=;
+	s=arc-20240116; t=1778499373; c=relaxed/simple;
+	bh=0yoTTqAYyvgMHKqoam3vap8Y37fL5KgIBY9SqqUZezM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=apK6oaYrfaAu/TwCXCGQ4IuOeQCVCF70xhrTkGjGDnnFtzW5uQsSV+HlfpexplduCxTC0cdDty286C0u03z5HpfwgRHfXj83I6Ac7d2owS3aUAcaQM2LZARyg6zpgPM3kpl/vFRFIWzSvU4Als5izGSQQWBP7K8w2b/hkty0P/4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=hbQtBPhs; arc=none smtp.client-ip=90.155.50.34
+	 MIME-Version; b=CHxJ/CtkzRnCaLHkcgZeWl4cBpmkHlj99aAhY9InvB14r7PblwkXx+m5iXiX2pvyXL9FKvGMC9M5FEtOtqVO943CzIgO5usOgy4W4Ong6VGp79TJ9D8KwjYkI+QX5+1LFPejsaDwb0T0ecSWgCtqMe/T7hAzblG5S2Hn8UH5FHU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=casper.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=We+TJptw; arc=none smtp.client-ip=90.155.50.34
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=casper.srs.infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=cNnAeMZ88hnaK7C3Z3PFUiVty5ocHdzHNWe9HEpa28s=; b=hbQtBPhsZntnThgsYYdL0xrLen
-	vju5LUmavfaplo0j/zEoZ+SGkX/bUsBLlUuGUqCXGkBuLLPtmkQEzIhNo7+bQbFEl/ZbyAb1Q7pCP
-	w+qVXFun5OOTEWY4FXsoWe7MkCPZ/Pw52VJi3plUv34lcyxc9dX0UVgOdFPhYQiJxZlqLl7hJsvGT
-	xHXmYHm34qKsy6YCYeC99qikD76dcGxiZ4XS5ndbSmRJ8vwYJ6vyia2S/7BalXLxf1/hnKY07Yg6g
-	ybX2+qohIDUm4pcl92ANKpSABUjNqabVtXsn3/ywNGSyTH+IlWzP3Nin5SuVadnHiJiMcFNJ1rN00
-	ISBzYh7Q==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=P+mHaivvSxVuGabpkI+AAIbqLWFGcKnD2EZbza8et9I=; b=We+TJptwrQUIPCdTFHKp0f5kLX
+	t7MXPvamC6HFxmmEj04JOZ2jXPDlKcqkOd9XHz98+3ypRnIuxqcQMVSYyEGjDkVUxhxbs2zbHuHNX
+	LRVfoDZyNL1C1GcxN1mmjFa1Ys8NndS2TkJFIFww5DQRl3irpJsfki8wPxOBgRR4KLbUJ+XQg/cqY
+	A3BmfqE5j45y1er14F3rJIsTd4XvEinETF5wQUJNWDexLVskzVQmgOR3G3yRFHkDv+qkh97f7Tz40
+	90bSHVzJyh+MJeVIheMHPqSY9x2jocRW2Ua3sYZdBhyJQU+7k5FiFDrVRaJSkCKSGHVW1YbTilp4p
+	IM4LKCgg==;
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
 	by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wMOvY-000000084dK-1iwz;
+	id 1wMOvY-000000084dL-1sNR;
 	Mon, 11 May 2026 11:36:00 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1wMOvY-0000000Dx0U-0ZVa;
+	id 1wMOvY-0000000Dx0Y-0umI;
 	Mon, 11 May 2026 12:36:00 +0100
 From: David Woodhouse <dwmw2@infradead.org>
 To: Paolo Bonzini <pbonzini@redhat.com>
@@ -80,9 +80,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Peter Maydell <peter.maydell@linaro.org>,
 	qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org
-Subject: [PATCH v3 1/4] KVM: arm64: vgic: Allow userspace to set IIDR revision 1
-Date: Mon, 11 May 2026 12:30:43 +0100
-Message-ID: <20260511113558.3325004-2-dwmw2@infradead.org>
+Subject: [PATCH v3 2/4] KVM: arm64: selftests: Add vgic IIDR revision test
+Date: Mon, 11 May 2026 12:30:44 +0100
+Message-ID: <20260511113558.3325004-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260511113558.3325004-1-dwmw2@infradead.org>
 References: <20260511113558.3325004-1-dwmw2@infradead.org>
@@ -92,150 +92,199 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-Rspamd-Queue-Id: 930DC50CEF1
+X-Rspamd-Queue-Id: 7F1EE50CF18
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.16 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=casper.20170209];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86797-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
+	TAGGED_FROM(0.00)[bounces-86799-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
 	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,amazon.co.uk:email]
 X-Rspamd-Action: no action
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-In order to preserve guest compatibility across kernel upgrades, allow
-userspace to select GICD_IIDR revision 1. This allows compatibility with
-the original behaviour from before commit d53c2c29ae0d ("KVM: arm/arm64:
-vgic: Allow configuration of interrupt groups") where interrupt groups
-are not guest-configurable.
+Test that the GICD_IIDR implementation revision correctly controls
+guest-visible behaviour for GICv3:
 
-When revision 1 is selected:
- - GICv2: IGROUPR reads as zero (group 0), writes are ignored
- - GICv3: IGROUPR reads as all-ones (group 1), writes are ignored
- - v2_groups_user_writable is not set
+  Revision 1: IGROUPR reads as all-ones (group 1), writes are ignored.
+              GICR_CTLR.{IR,CES} not advertised.
+  Revision 2: IGROUPR is guest-configurable (read/write).
+              GICR_CTLR.{IR,CES} not advertised.
+  Revision 3: IGROUPR is guest-configurable (read/write).
+              GICR_CTLR.{IR,CES} advertised.
 
-This is implemented by checking the implementation revision in
-vgic_mmio_write_group() and suppressing writes when the revision is
-below 2. The read side needs no change since the per-IRQ group reset
-values already match the expected behaviour.
+For each revision, the test sets the IIDR via KVM_DEV_ARM_VGIC_GRP_DIST_REGS
+before initializing the vGIC, then runs a guest that verifies the
+expected IGROUPR and GICR_CTLR behaviour.
 
-For GICv2, commit 32f8777ed92d7 ("KVM: arm/arm64: vgic: Let userspace
-opt-in to writable v2 IGROUPR") introduced a confusing model where
-IGROUPR registers were not writable from userspace by default until the
-IIDR was written — even if it was written to the *same* as its default
-value (which, in fact, was the only thing that userspace *could* set it
-to before commit a0e6ae45af17 fixed the IIDR write path). Furthermore,
-even when the v2_groups_user_writable flag wasn't set, the *guest*
-could still actually write to the registers... but userspace couldn't
-save/restore them. That default behaviour for GICv2 remains unchanged;
-it can be fixed in a future commit.
-
-Fixes: d53c2c29ae0d ("KVM: arm/arm64: vgic: Allow configuration of interrupt groups")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/arm64/kvm/vgic/vgic-mmio-v2.c | 3 +++
- arch/arm64/kvm/vgic/vgic-mmio-v3.c | 4 ++++
- arch/arm64/kvm/vgic/vgic-mmio.c    | 4 ++++
- include/kvm/arm_vgic.h             | 1 +
- 4 files changed, 12 insertions(+)
+ tools/testing/selftests/kvm/Makefile.kvm      |   1 +
+ .../selftests/kvm/arm64/vgic_group_iidr.c     | 118 ++++++++++++++++++
+ 2 files changed, 119 insertions(+)
+ create mode 100644 tools/testing/selftests/kvm/arm64/vgic_group_iidr.c
 
-diff --git a/arch/arm64/kvm/vgic/vgic-mmio-v2.c b/arch/arm64/kvm/vgic/vgic-mmio-v2.c
-index 0643e333db35..e5714f7fd2ec 100644
---- a/arch/arm64/kvm/vgic/vgic-mmio-v2.c
-+++ b/arch/arm64/kvm/vgic/vgic-mmio-v2.c
-@@ -20,6 +20,7 @@
-  * Revision 1: Report GICv2 interrupts as group 0 instead of group 1
-  * Revision 2: Interrupt groups are guest-configurable and signaled using
-  * 	       their configured groups.
-+ * Revision 3: GICv2 behaviour is unchanged from revision 2.
-  */
- 
- static unsigned long vgic_mmio_read_v2_misc(struct kvm_vcpu *vcpu,
-@@ -96,6 +97,8 @@ static int vgic_mmio_uaccess_write_v2_misc(struct kvm_vcpu *vcpu,
- 		case KVM_VGIC_IMP_REV_2:
- 		case KVM_VGIC_IMP_REV_3:
- 			vcpu->kvm->arch.vgic.v2_groups_user_writable = true;
-+			fallthrough;
-+		case KVM_VGIC_IMP_REV_1:
- 			dist->implementation_rev = reg;
- 			return 0;
- 		default:
-diff --git a/arch/arm64/kvm/vgic/vgic-mmio-v3.c b/arch/arm64/kvm/vgic/vgic-mmio-v3.c
-index 5913a20d8301..0130db71cfc9 100644
---- a/arch/arm64/kvm/vgic/vgic-mmio-v3.c
-+++ b/arch/arm64/kvm/vgic/vgic-mmio-v3.c
-@@ -74,8 +74,11 @@ bool vgic_supports_direct_sgis(struct kvm *kvm)
- /*
-  * The Revision field in the IIDR have the following meanings:
-  *
-+ * Revision 1: Interrupt groups are not guest-configurable.
-+ * 	       IGROUPR reads as all-ones (group 1), writes ignored.
-  * Revision 2: Interrupt groups are guest-configurable and signaled using
-  * 	       their configured groups.
-+ * Revision 3: GICR_CTLR.{IR,CES} are advertised.
-  */
- 
- static unsigned long vgic_mmio_read_v3_misc(struct kvm_vcpu *vcpu,
-@@ -196,6 +199,7 @@ static int vgic_mmio_uaccess_write_v3_misc(struct kvm_vcpu *vcpu,
- 
- 		reg = FIELD_GET(GICD_IIDR_REVISION_MASK, val);
- 		switch (reg) {
-+		case KVM_VGIC_IMP_REV_1:
- 		case KVM_VGIC_IMP_REV_2:
- 		case KVM_VGIC_IMP_REV_3:
- 			dist->implementation_rev = reg;
-diff --git a/arch/arm64/kvm/vgic/vgic-mmio.c b/arch/arm64/kvm/vgic/vgic-mmio.c
-index 74d76dec9730..1b662744ec5b 100644
---- a/arch/arm64/kvm/vgic/vgic-mmio.c
-+++ b/arch/arm64/kvm/vgic/vgic-mmio.c
-@@ -73,6 +73,10 @@ void vgic_mmio_write_group(struct kvm_vcpu *vcpu, gpa_t addr,
- 	int i;
- 	unsigned long flags;
- 
-+	/* Revision 1 and below: groups are not guest-configurable. */
-+	if (vgic_get_implementation_rev(vcpu) < KVM_VGIC_IMP_REV_2)
-+		return;
+diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
+index 9118a5a51b89..8cadfed4d79a 100644
+--- a/tools/testing/selftests/kvm/Makefile.kvm
++++ b/tools/testing/selftests/kvm/Makefile.kvm
+@@ -177,6 +177,7 @@ TEST_GEN_PROGS_arm64 += arm64/sea_to_user
+ TEST_GEN_PROGS_arm64 += arm64/set_id_regs
+ TEST_GEN_PROGS_arm64 += arm64/smccc_filter
+ TEST_GEN_PROGS_arm64 += arm64/vcpu_width_config
++TEST_GEN_PROGS_arm64 += arm64/vgic_group_iidr
+ TEST_GEN_PROGS_arm64 += arm64/vgic_init
+ TEST_GEN_PROGS_arm64 += arm64/vgic_irq
+ TEST_GEN_PROGS_arm64 += arm64/vgic_lpi_stress
+diff --git a/tools/testing/selftests/kvm/arm64/vgic_group_iidr.c b/tools/testing/selftests/kvm/arm64/vgic_group_iidr.c
+new file mode 100644
+index 000000000000..0073ccc19e92
+--- /dev/null
++++ b/tools/testing/selftests/kvm/arm64/vgic_group_iidr.c
+@@ -0,0 +1,118 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * vgic_group_iidr.c - Test IGROUPR behaviour across IIDR revisions
++ *
++ * Validate that the GICD_IIDR implementation revision controls
++ * IGROUPR semantics for GICv3:
++ *   Rev 1: IGROUPR reads as all-ones (group 1), writes ignored
++ *   Rev 2+: IGROUPR is guest-configurable (read/write)
++ */
++#include <linux/sizes.h>
 +
- 	for (i = 0; i < len * 8; i++) {
- 		struct vgic_irq *irq = vgic_get_vcpu_irq(vcpu, intid + i);
- 
-diff --git a/include/kvm/arm_vgic.h b/include/kvm/arm_vgic.h
-index 1388dc6028a9..16811ec03d54 100644
---- a/include/kvm/arm_vgic.h
-+++ b/include/kvm/arm_vgic.h
-@@ -372,6 +372,7 @@ struct vgic_dist {
- 
- 	/* Implementation revision as reported in the GICD_IIDR */
- 	u32			implementation_rev;
-+#define KVM_VGIC_IMP_REV_1	1 /* GICv2 interrupts as group 0 */
- #define KVM_VGIC_IMP_REV_2	2 /* GICv2 restorable groups */
- #define KVM_VGIC_IMP_REV_3	3 /* GICv3 GICR_CTLR.{IW,CES,RWP} */
- #define KVM_VGIC_IMP_REV_LATEST	KVM_VGIC_IMP_REV_3
++#include "test_util.h"
++#include "kvm_util.h"
++#include "processor.h"
++#include "gic.h"
++#include "gic_v3.h"
++#include "vgic.h"
++
++#define NR_IRQS		128
++#define SPI_IGROUPR	(GICD_IGROUPR + (32 / 32) * 4) /* intids 32-63 */
++
++static uint64_t shared_rev;
++
++static void guest_code(void)
++{
++	uint32_t val;
++
++	val = readl(GICD_BASE_GVA + SPI_IGROUPR);
++
++	if (shared_rev == 1) {
++		/* Rev 1: all group 1, guest writes must be ignored */
++		GUEST_ASSERT_EQ(val, 0xffffffff);
++		writel(0x0, GICD_BASE_GVA + SPI_IGROUPR);
++		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
++		GUEST_ASSERT_EQ(val, 0xffffffff);
++		writel(0x55aa55aa, GICD_BASE_GVA + SPI_IGROUPR);
++		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
++		GUEST_ASSERT_EQ(val, 0xffffffff);
++	} else {
++		/* Rev 2/3: guest-configurable */
++		writel(0xa5a5a5a5, GICD_BASE_GVA + SPI_IGROUPR);
++		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
++		GUEST_ASSERT_EQ(val, 0xa5a5a5a5);
++		writel(0x0, GICD_BASE_GVA + SPI_IGROUPR);
++		val = readl(GICD_BASE_GVA + SPI_IGROUPR);
++		GUEST_ASSERT_EQ(val, 0x0);
++	}
++
++	/* Rev 3: GICR_CTLR advertises IR and CES. Rev 1/2: it does not. */
++	val = readl(GICR_BASE_GVA + GICR_CTLR);
++	if (shared_rev >= 3)
++		GUEST_ASSERT(val & (GICR_CTLR_IR | GICR_CTLR_CES));
++	else
++		GUEST_ASSERT(!(val & (GICR_CTLR_IR | GICR_CTLR_CES)));
++
++	GUEST_DONE();
++}
++
++static void run_test(int rev)
++{
++	struct kvm_vcpu *vcpus[1];
++	struct kvm_vm *vm;
++	struct ucall uc;
++	uint32_t iidr;
++	int gic_fd;
++
++	pr_info("Testing IIDR revision %d\n", rev);
++
++	test_disable_default_vgic();
++	vm = vm_create_with_vcpus(1, guest_code, vcpus);
++
++	gic_fd = __vgic_v3_setup(vm, 1, NR_IRQS);
++	TEST_ASSERT(gic_fd >= 0, "Failed to create vGICv3");
++
++	/* Set the requested IIDR revision before init. */
++	kvm_device_attr_get(gic_fd, KVM_DEV_ARM_VGIC_GRP_DIST_REGS,
++			    GICD_IIDR, &iidr);
++	iidr &= ~GICD_IIDR_REVISION_MASK;
++	iidr |= rev << GICD_IIDR_REVISION_SHIFT;
++	kvm_device_attr_set(gic_fd, KVM_DEV_ARM_VGIC_GRP_DIST_REGS,
++			    GICD_IIDR, &iidr);
++
++	__vgic_v3_init(gic_fd);
++
++	/* Verify the revision was applied. */
++	kvm_device_attr_get(gic_fd, KVM_DEV_ARM_VGIC_GRP_DIST_REGS,
++			    GICD_IIDR, &iidr);
++	TEST_ASSERT(((iidr & GICD_IIDR_REVISION_MASK) >> GICD_IIDR_REVISION_SHIFT) == rev,
++		    "IIDR revision readback: expected %d, got %d",
++		    rev, (iidr & GICD_IIDR_REVISION_MASK) >> GICD_IIDR_REVISION_SHIFT);
++
++	/* Tell the guest which revision we set. */
++	sync_global_to_guest(vm, shared_rev);
++	shared_rev = rev;
++	sync_global_to_guest(vm, shared_rev);
++
++	vcpu_run(vcpus[0]);
++	switch (get_ucall(vcpus[0], &uc)) {
++	case UCALL_ABORT:
++		REPORT_GUEST_ASSERT(uc);
++		break;
++	case UCALL_DONE:
++		break;
++	default:
++		TEST_FAIL("Unexpected ucall %lu", uc.cmd);
++	}
++
++	close(gic_fd);
++	kvm_vm_free(vm);
++}
++
++int main(int argc, char *argv[])
++{
++	run_test(1);
++	run_test(2);
++	run_test(3);
++	return 0;
++}
 -- 
 2.51.0
 
