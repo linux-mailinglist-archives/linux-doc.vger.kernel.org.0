@@ -1,171 +1,174 @@
-Return-Path: <linux-doc+bounces-86795-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86800-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GA5DBnu7AWrdjAEAu9opvQ
-	(envelope-from <linux-doc+bounces-86795-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:20:27 +0200
+	id 8CVzAxzAAWrKjQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86800-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:40:12 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5F5450C9FE
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:20:26 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F362450CF08
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:40:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1066F30293C3
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:15:13 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 9874F301D80B
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:36:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51D8036D9FE;
-	Mon, 11 May 2026 11:15:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A5F43806D3;
+	Mon, 11 May 2026 11:36:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nTO30HO7"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="CSmbvxed"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27AB836D9EB;
-	Mon, 11 May 2026 11:15:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A923C379ED6;
+	Mon, 11 May 2026 11:36:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778498112; cv=none; b=DhtYdEm2eKicuWYICW0z8CTFhz40MGHEZ2S82VHNccoP6v0SW84n6LCS2RXQ99YlJhBdC2HLvASeqizlZsE9fXw81AESOmIV06aWCuAttzJ2YH1Hf0l3s3vtDRldnn8fWCfJHHZ4syO5ZqOn+amsh+q4gJkXpdnPOT2UlVqdSfs=
+	t=1778499377; cv=none; b=KOZAdr6gmIHImLnUDjo+1IJXZLoftxkrAe+mlplIPMgr8R+dCx3BNJ2+BjcCE+MBaFruf51/vpdd+W71l+RZ7WUaMBPQ1CsKu0lVG7pRl6YTylGbcQeoo8hM0j0Uw2gADrVO8xA0yZ/QkKAAmROUEhiJQlrXwbjR/gjY4mwtXPc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778498112; c=relaxed/simple;
-	bh=ElrPpKBp3fd+ZhRibKu8+r6dTTJfyvDO6LAP9uGzQkA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=geiNLmNDR2XDthVkkVK4gPiIJPVnlAMMp97Y+fyXPCcjFI1sn0QbScsQTI46p0LCGTmQb8xjSYS+k25Omk2+7kHr3JhOOnwDBkCnoBNixu8pZl95PQ1IaD/ZhNYto8ZGpXzMej9KR4zLTBplkn8EBVcxhPOF8eVjvhckvXhPHUg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nTO30HO7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D256C2BCB0;
-	Mon, 11 May 2026 11:15:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778498111;
-	bh=ElrPpKBp3fd+ZhRibKu8+r6dTTJfyvDO6LAP9uGzQkA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=nTO30HO7dDn0MRGf2rxg9Diwwu+bS4xstiDZip7mvqVI8t0ip8fh8HQu4McpeHEnB
-	 cCQ0rRWgLTwAC56C33HFbLMPCkxmbX4XrlEFnVQUJ12iEsEeiwSSueIOyG0x0nZKac
-	 +I2EPVbMsfnijvkHQzd8zVNDz4N9GxU5KA3HIgHPYHOKy8TDVFgYFqwrUc4IaLgmgq
-	 DlZ5YRVs/ZI/H4P2D0HZRJkj0i9ChaC1cOVWrpSr/WmL+hpwLPU/VQfGNlPtuF6ykb
-	 F7lLI7JO1f6iIOC3e+cf9X141xeS0IL4HGYGQWgMgrlObqvFrU8NVR5cbyIv2iZqpO
-	 dJSfpatJZKz6w==
-Date: Mon, 11 May 2026 07:15:10 -0400
-From: Sasha Levin <sashal@kernel.org>
-To: Anthony Iliopoulos <ailiop@suse.com>
-Cc: Florian Weimer <fw@deneb.enyo.de>, corbet@lwn.net,
-	akpm@linux-foundation.org, skhan@linuxfoundation.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, gregkh@linuxfoundation.org
-Subject: Re: [PATCH v2] killswitch: add per-function short-circuit mitigation
- primitive
-Message-ID: <agG6PnVAFMsb3iiz@laps>
-References: <20260508195749.1885522-1-sashal@kernel.org>
- <87ecjku6y7.fsf@mid.deneb.enyo.de>
- <af8pw54Y-Q18kSR0@laps>
- <agGweC12aloH8DBq@foo>
+	s=arc-20240116; t=1778499377; c=relaxed/simple;
+	bh=dIiCCz/ZCX/MMcsDvaZtZlxxTNF3va0+GYcjmw0JbaE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=dEpWpQ+Y3DZWFuX3gqAJhuPZKEGmBn5lq6tazElt4UNiOfL1JrtfY15nVjnW2ePIJ+rApzIGQfcLR/OSCy29PfvlCnpiOqnzk1fL4zrCOIonlSnHC6jk3kkTy+TbKSg2pSX98Q9j8McVRLwd3EmyjfqlFNN+S5wjOwwc9+S0f8E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=CSmbvxed; arc=none smtp.client-ip=90.155.92.199
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=//uIbg50YuW84UwhRnJ8lducMYqmOge+fitLLKxnYqs=; b=CSmbvxedeenxBEGyhxliFxBYuc
+	jMuL4/lkyddFHdhxQZjKiUnPV+MbpI5TuAw+xdwEgxDBUcL3rlkoDjcLRPxZBYE9z0xVwHiwqWlLL
+	8t1O9C8fZD7pqt54iD8J4a3CroA+YwKtQa5aexSBG2kO/W46xwaLoQWdza12YfgPK2fgQ5We5KpAA
+	s+m2Qyhxj6ZQRYQE13Yoa4VxyYcpuztFKMPXKSHZf5dlf55O+zuSxu6rIdHKIOmUVZfMuv3cqC0v4
+	xkJLg8XjVHknxRABoP7VQYi1mhhQmzXdD1IIeora/Q28zGNCzvNkj58DOw8pkGcqpUrRPp7v4m27z
+	DnJ0Jhog==;
+Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
+	by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wMOvZ-0000000BUT8-2872;
+	Mon, 11 May 2026 11:36:02 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1wMOvY-0000000Dx0R-0E3o;
+	Mon, 11 May 2026 12:36:00 +0100
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Marc Zyngier <maz@kernel.org>,
+	Oliver Upton <oupton@kernel.org>,
+	Joey Gouly <joey.gouly@arm.com>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Zenghui Yu <yuzenghui@huawei.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Eric Auger <eric.auger@redhat.com>,
+	Raghavendra Rao Ananta <rananta@google.com>,
+	Maxim Levitsky <mlevitsk@redhat.com>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Kees Cook <kees@kernel.org>,
+	Timothy Hayes <timothy.hayes@arm.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	kvmarm@lists.linux.dev,
+	linux-kselftest@vger.kernel.org,
+	Peter Maydell <peter.maydell@linaro.org>,
+	qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org
+Subject: [PATCH v3 0/4] KVM: arm64: vgic: Fix IGROUPR writability and IIDR revision control
+Date: Mon, 11 May 2026 12:30:42 +0100
+Message-ID: <20260511113558.3325004-1-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <agGweC12aloH8DBq@foo>
-X-Rspamd-Queue-Id: A5F5450C9FE
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-Rspamd-Queue-Id: F362450CF08
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86795-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86800-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Mon, May 11, 2026 at 12:33:28PM +0200, Anthony Iliopoulos wrote:
->On Sat, May 09, 2026 at 08:34:11AM -0400, Sasha Levin wrote:
->> On Sat, May 09, 2026 at 02:02:24PM +0200, Florian Weimer wrote:
->> > * Sasha Levin:
->> >
->> > > When a kernel (security) issue goes public, fleets stay exposed until a patched
->> > > kernel is built, distributed, and rebooted into.
->> > >
->> > > For many such issues the simplest mitigation is to stop calling the buggy
->> > > function. Killswitch provides that. An admin writes:
->> > >
->> > >     echo "engage af_alg_sendmsg -1" \
->> > >         > /sys/kernel/security/killswitch/control
->> > >
->> > > After this, af_alg_sendmsg() returns -EPERM on every call without
->> > > running its body. The mitigation takes effect immediately, and is dropped on
->> > > the next reboot -- by which point a patched kernel is hopefully in place.
->> >
->> > Do you expect this to be safe to enable in kernel lockdown mode (i.e.,
->> > with typical Secure Boot configurations in distributions)?
->>
->> Yes: under lockdown, killswitch has to be configured on the cmdline. Runtime
->> engage is gated on the new LOCKDOWN_KILLSWITCH reason.
->
->Basically this proposal allows for any function to be overridden on a
->production kernel as long as no lockdown level is enabled, which is quite
->dangerous.
->
->Assuming this is acceptable (which I am not sure it should be), then this
->is equivalent to the existing error injection code that we already have in
->the kernel (CONFIG_FAIL_FUNCTION) minus the explicit whitelisting on a per
->function basis required to permit injection.
+Maintaining precise guest compatibility across host kernel upgrades — 
+and even downgrades, since rollback is sometimes necessary — is not 
+optional. That *shouldn't* need saying, but maybe it does:
+https://lore.kernel.org/all/6856b269d2af706eae397e0cf9c1231f89d9a932.camel@infradead.org/
 
-The mechanism is the same, but I don't think reusing fail_function works for
-what killswitch is trying to do.
+This series fixes the GICv2/v3 IGROUPR writability model to be
+consistently controlled by the GICD_IIDR implementation revision,
+replacing the ad-hoc v2_groups_user_writable flag.
+  
+Before commit d53c2c29ae0d ("KVM: arm/arm64: vgic: Allow configuration
+of interrupt groups"), IGROUPR was read-only on both GICv2 and GICv3.
+That commit made it unconditionally guest-writable, but provided no
+mechanism for userspace to restore the previous behaviour for guests
+that were launched on older kernels (which which might need to be
+migrated back to older kernels).
 
->Given that this achieves the exact same result, then why don't we consider
->simply removing the whitelisting restriction from fail_function altogether
->and use that instead? The only thing missing then would be the boot param
->parsing and setup.
+The v2_groups_user_writable flag (added by 32f8777ed92d) attempted to
+gate GICv2 userspace IGROUPR writes until userspace wrote the IIDR,
+but the guest write path was never gated, creating an inconsistency
+where the guest could modify groups that userspace couldn't save or
+restore.  QEMU never writes GICD_IIDR, so its GICv2 IGROUPR
+save/restore (QEMU commit eb8b9530b0c) appears to be silently broken.
+  
+This series:
+ - Allows userspace to set IIDR revision 1, to restore the original
+   read-only IGROUPR behaviour for both GICv2 and GICv3 (patch 1)
+ - Removes v2_groups_user_writable and makes both guest and userspace
+   writability follow the IIDR revision directly (patch 3)
+ - Adds selftests covering IIDR revision semantics and a QEMU-style
+   save/restore scenario (patches 2, 4)
+  
+Tested on EC2 c7g.metal (GICv3 native) and under QEMU-TCG (GICv2).
 
-fail_function lives in debugfs, and on a typical Secure Boot distro debugfs is
-itself blocked by LOCKDOWN_DEBUGFS at integrity level. Dropping the whitelist
-doesn't help when the operator can't write to the file in the first place.
-Killswitch is in securityfs so that engaging it can be its own lockdown
-decision rather than being lumped in with everything debugfs exposes.
+David Woodhouse (4):
+      KVM: arm64: vgic: Allow userspace to set IIDR revision 1
+      KVM: arm64: selftests: Add vgic IIDR revision test
+      KVM: arm64: vgic: Remove v2_groups_user_writable and use IIDR revision directly
+      KVM: arm64: selftests: Add GICv2 IGROUPR writability test
 
-Fault injection in general isn't enabled on production kernels - having to
-enable CONFIG_FUNCTION_ERROR_INJECTION will drag in that entire infra into
-kernels that don't need it.
+ arch/arm64/kvm/vgic/vgic-mmio-v2.c                 |  15 +-
+ arch/arm64/kvm/vgic/vgic-mmio-v3.c                 |   4 +
+ arch/arm64/kvm/vgic/vgic-mmio.c                    |   4 +
+ include/kvm/arm_vgic.h                             |   4 +-
+ tools/testing/selftests/kvm/Makefile.kvm           |   2 +
+ .../testing/selftests/kvm/arm64/vgic_group_iidr.c  | 118 +++++++++++
+ tools/testing/selftests/kvm/arm64/vgic_group_v2.c  | 226 +++++++++++++++++++++
+ 7 files changed, 361 insertions(+), 12 deletions(-)
 
->This way we'll be removing a few hundred lines of code instead of adding
->more duplication, while enabling the same functionality.
-
-I'm not even sure there would be hundreds of lines saved here...
-
-The pieces that make killswitch what it is (cmdline parser,
-LOCKDOWN_KILLSWITCH, TAINT_KILLSWITCH, audit on engage and disengage, the
-module-unload notifier, etc) add up to roughly 200 lines that would move into
-fail_function unchanged. I really don't think we'd end up with much of a line
-delta.
-
-That said, the kprobe and override machinery underneath both of these is fair
-game for a shared helper that fail_function and killswitch both build on. We can
-look at extracting that as a follow-up once killswitch lands, but it's a
-separate piece of work from the policy questions in this thread.
-
--- 
-Thanks,
-Sasha
 
