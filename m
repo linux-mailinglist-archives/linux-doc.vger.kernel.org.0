@@ -1,171 +1,176 @@
-Return-Path: <linux-doc+bounces-86831-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86843-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oLbhA1baAWoDlgEAu9opvQ
-	(envelope-from <linux-doc+bounces-86831-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:32:06 +0200
+	id ACKCGqbcAWptlgEAu9opvQ
+	(envelope-from <linux-doc+bounces-86843-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:41:58 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99B1C50EFAE
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:32:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BD1D50F26D
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:41:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5C85630910F8
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:28:17 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 6F082301D949
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:39:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50AA83E9585;
-	Mon, 11 May 2026 13:27:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46D363E8C45;
+	Mon, 11 May 2026 13:39:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MflJn9us"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LOR2xEr4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B58D734E744
-	for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 13:27:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22FD82F0C45;
+	Mon, 11 May 2026 13:39:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778506070; cv=none; b=qgBsoQp2GMsR3WCTFEwkNhdsCHlIWkeidGgxUg5Vrndn4c3vjc75al65pyGiHkler/FQTzTazEODd6JukNXdWQV5OArO+uIjYDZ3g/c4qz3WKHGnDu0q6zJoXOAZZvHqr4g/WM40uoVqy1FpyNOVLI9CE5zZiw6ZQn4akUXFX0Y=
+	t=1778506775; cv=none; b=QDtMeCjxALdqa47cnuU9draF+fieRPNF7iIUuDvqDsez8XOzj9rrWMQ+OGH4/3xjliU55xPtIVDVTnb6nF2lBwmVK+Gpl/hlvYO/f20Cn4xOd3PO1TLueveHoHOzOdU4FcInp02jdgV3viLpzRF6X2C6gpeUFFBZOQduRdHaI00=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778506070; c=relaxed/simple;
-	bh=lJECCfxqTC84+TRfNfK1WjSKb5OBfQHZ4y7RrlS2S04=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=AXiP5V/MjfZuUs/IOKb5WC9cAr4fERL6vNb3qj9ZwOH9MSFpBtnUWelLpTMnffyN8FcCErYfEfWM1cnW8w4x84DlzSZgD8OlycgEOpHXnQ7wiUajCWw/WfOFp0FUwfoj1sqs6OUi8En2XLF1rrZ6AljQ7ykbaBoVYp+cklcgxpU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MflJn9us; arc=none smtp.client-ip=209.85.128.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-488af9fdaa7so24809945e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 06:27:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778506067; x=1779110867; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iIqj3PJ8IFkl3jV3tX7I8ABRXAJUOvr2KgrwJ/yHDUM=;
-        b=MflJn9us+kizAim1TVv7ZqnuDf4OEjp13+NZvSHomJTLL/hYWZLJKn9khobOSLPKxZ
-         ya/uy2fWwtue4LDEk9jtQCIsvpl713Z5A3zdE0jBmUSjD2JxMf6E4UubKj87ApWL8p0C
-         qjNIgdzZ2TISGb/cIehD3afKcf5cGbhP+efi5SRImgwPovGbjUCnkTImBFKjUVzOTmEm
-         8Uk/anzY34+GQFl10Z8Wi/gre5LBxYm3BkCowpSMOIwAYzkVn/MecnUnNVAlk3wpgv1p
-         mac8ZaAzjG+/ItMFDVuSX4kdLu7WPVrLiqtaAjuwXHyHxMlnf+DoY5PFhg84GJvYITJ2
-         Facw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778506067; x=1779110867;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=iIqj3PJ8IFkl3jV3tX7I8ABRXAJUOvr2KgrwJ/yHDUM=;
-        b=F1w8D4uUk/uBVbzvpxj+3U9oEJLJEoCKFVklUXJgcWdr0e0AtOfsCRKlJHELo0Bbp+
-         9Hjd3KQzQQcCmY6XRmGAyrSn7GQHzO87lydLq9jpeVh7oOFvFEyZ39V0HZCYFFGy92pQ
-         nkeVrFQUzR+GBxe+AXH1X5mS5qWlprUugxGRVKhzlgbfCThT1IQz/i0SVOpjnP427uVw
-         XoPYe9/swGg4GAnRPq+6GmyeBbJTguMoGYb6YYYG893QYM/vzMLepkDCP8DwkO5YFLh6
-         kwFT5hNxbxW8vFpcrTYuW2Hd5//KcotQBjurLuuoPB2kHy8LiWNMrVD+nDwA5XduOsqy
-         T48w==
-X-Forwarded-Encrypted: i=1; AFNElJ97uExpwk/ZXTHA0tr2xfTZkor4g6DKhsye+zUJw3R2PQ1Uj+RxvIctvNHGUASa4OZbRFC9hQgtkEI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwMqZX7bQS8feSIBoKJ1u5sb7EzTSDrYNXTWb5RHLnnZBaZ+Xc7
-	2w2nKgma629SivvbeChbafyHnlcnMKinPfE+oeaB49MGEKtf8cjjPJSf
-X-Gm-Gg: Acq92OHHbi/VVY1KdP5qfjMvIISq3yaAHiGLpeTJT9DRlQ7k3DOBaWSUZWS4IZ+XWTL
-	OVDxlGF9H+IKMZTBQKu0U8zsrnWrPNiejsdn8MRNz6gOrjy6+BqMMrPlYXGEtn9n09dLtHCF8BQ
-	1TkoZafRXt+DDHtn1f8M+I6waWCaCPnEzcbSTjsN/gjaHG3faZNWzxL+KW5b4u0xnXLJFi4ljq9
-	RZ4GFl6WWSlKkg3O/jC9QX6JWfR+HlVc1HcBMBBmwMIiB9TBovpbu07CGjJcCIVS4AQjtGx7ATv
-	FFphyhtVLRo7BdnhjaOOt52ket+mf7U5JzU6uMPeT/3HwSN0JR3p7xoOGucuAuSb1iqcnTQ+413
-	JL2w3w13mxlFlHNMw6P6O+ZFSiMnjB7ztMEA0EgCx3GBNU2pLGLQCf0ZASPuWW8rui+24gNgb92
-	TrxUQeN0mCt+YNQ54WgSt+cd576wLebI/P+zF3t1a3mVkB6m/phbdQJOrQCj/k
-X-Received: by 2002:a05:600c:17d8:b0:488:a797:f0ac with SMTP id 5b1f17b1804b1-48e51f46abemr229099115e9.28.1778506066819;
-        Mon, 11 May 2026 06:27:46 -0700 (PDT)
-Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4548e6a6470sm22087839f8f.7.2026.05.11.06.27.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 May 2026 06:27:46 -0700 (PDT)
-Date: Mon, 11 May 2026 14:27:45 +0100
-From: David Laight <david.laight.linux@gmail.com>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Manuel Ebner <manuelebner@mailbox.org>, andy.shevchenko@gmail.com,
- apw@canonical.com, dwaipayanray1@gmail.com, joe@perches.com,
- kees@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- lukas.bulwahn@gmail.com, skhan@linuxfoundation.org,
- workflows@vger.kernel.org
-Subject: Re: [PATCH 2/2] scripts: checkpatch.pl: add warning for strlcat()
-Message-ID: <20260511142745.7757b1b2@pumpkin>
-In-Reply-To: <87a4u6w3ez.fsf@trenco.lwn.net>
-References: <20260510164907.57176-2-manuelebner@mailbox.org>
-	<20260510165649.57880-2-manuelebner@mailbox.org>
-	<87a4u6w3ez.fsf@trenco.lwn.net>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
+	s=arc-20240116; t=1778506775; c=relaxed/simple;
+	bh=0YDoda5xBJ99O7ber1zwH7VzziHTUhV7z6JtjcjZ4ZY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=irvDgV5qT807VKG2Y7cXZSmXEJoFTtoA5YMYBNrQY62Nn3NWQxtnbdLTrBJSxVyy0Wde52Nh0BbYTLhWdSqt5qQ/zCXiK6rroT9BdCa849ntRFn7/w1KqFCmj3jwZo/KsuP5QbouZ1TW1Mtr8dIfTuKzbCqOEh9faOkE29XaMvE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LOR2xEr4; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 805CFC2BCB0;
+	Mon, 11 May 2026 13:39:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778506774;
+	bh=0YDoda5xBJ99O7ber1zwH7VzziHTUhV7z6JtjcjZ4ZY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=LOR2xEr4xLIIIdBMqP0Nm7ImHunIMTowtUqxVkgZYReNzNXns70gavsHE/jG9MkO+
+	 2TZJKd1N7Sd9GEBXrhyXcWbpq4dMNaKfx+6Nqr+yq6vZt2sVMXYnl4NB4NzHvf4mS+
+	 l3QSMzQ5GikjSLTAOT4hSixS+yWuVfyBSYk7JTQlRQ/RArS/lgKpBe7Tv8nJa9/NIR
+	 Rvndg7tPx8USRc+8QBI6hNIYm3ozMvcfHL6zWcs0+9cj0hT4Bh2ttp4nYrQJRQ0R4h
+	 t6rWZ+JrCBtHmk1dwK9P0kB/J0ZaXUL9AtjXz1WbBZjAqUWDmrgj+NzBaMb09LfJuo
+	 oOCdnvuUZsO/g==
+Date: Mon, 11 May 2026 09:39:32 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Michal Hocko <mhocko@suse.com>
+Cc: Breno Leitao <leitao@debian.org>,
+	Andrew Morton <akpm@linux-foundation.org>, corbet@lwn.net,
+	skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	gregkh@linuxfoundation.org
+Subject: Re: [PATCH] killswitch: add per-function short-circuit mitigation
+ primitive
+Message-ID: <agHcFCRVSn5ra5Kc@laps>
+References: <20260507070547.2268452-1-sashal@kernel.org>
+ <20260508135630.a380e3c187b59e4c04e6f358@linux-foundation.org>
+ <af5Z2IvtS5pVorSl@laps>
+ <agG_PZ3qcl6TwLnL@gmail.com>
+ <agHUp8ulaWJ75WU5@tiehlicka>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 99B1C50EFAE
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <agHUp8ulaWJ75WU5@tiehlicka>
+X-Rspamd-Queue-Id: 1BD1D50F26D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86831-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86843-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FREEMAIL_CC(0.00)[mailbox.org,gmail.com,canonical.com,perches.com,kernel.org,vger.kernel.org,linuxfoundation.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[davidlaightlinux@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sashal@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,lwn.net:email]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Mon, 11 May 2026 06:12:36 -0600
-Jonathan Corbet <corbet@lwn.net> wrote:
+On Mon, May 11, 2026 at 03:07:51PM +0200, Michal Hocko wrote:
+>On Mon 11-05-26 04:41:38, Breno Leitao wrote:
+>> On Fri, May 08, 2026 at 05:47:04PM -0400, Sasha Levin wrote:
+>> > On Fri, May 08, 2026 at 01:56:30PM -0700, Andrew Morton wrote:
+>> > > On Thu,  7 May 2026 03:05:45 -0400 Sasha Levin <sashal@kernel.org> wrote:
+>> > >
+>> > > > When a (security) issue goes public, fleets stay exposed until a patched kernel
+>> > > > is built, distributed, and rebooted into.
+>> > > >
+>> > > > For many such issues the simplest mitigation is to stop calling the buggy
+>> > > > function. Killswitch provides that. An admin writes:
+>> > > >
+>> > > >     echo "engage af_alg_sendmsg -1" \
+>> > > >         > /sys/kernel/security/killswitch/control
+>> > >
+>> > > It certainly sounds useful, but what would I know.  How do we hunt down
+>> > > suitable operations people (aka "target audience") to find out how
+>> > > useful this is to them?
+>> >
+>> > I'm not entierly sure here... If folks have suggestions on folks to loop in,
+>> > that'll be great!
+>>
+>> I work with these issues at Meta, and this approach would address a real
+>> need we have.
 
-> Manuel Ebner <manuelebner@mailbox.org> writes:
-> 
-> > add a warning for strlcat()
-> >
-> > Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
-> > ---
-> >  scripts/checkpatch.pl | 6 ++++++
-> >  1 file changed, 6 insertions(+)
-> >
-> > diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-> > index 0492d6afc9a1..ca1a8e67d529 100755
-> > --- a/scripts/checkpatch.pl
-> > +++ b/scripts/checkpatch.pl
-> > @@ -7085,6 +7085,12 @@ sub process {
-> >  			     "Prefer strscpy over strlcpy - see: https://github.com/KSPP/linux/issues/89\n" . $herecurr);
-> >  		}
-> >  
-> > +# strlcat uses that should likely be
-> > +		if ($line =~ /\bstrlcat\s*\(/ && !is_userspace($realfile)) {
-> > +			WARN("STRLCAT",
-> > +			     "Prefer seq_buf_printf() over strlcat - see: https://github.com/KSPP/linux/issues/370\n" . $herecurr);
-> > +		}  
-> 
-> Using seq_buf_printf() requires switching over to the seq_buf API in
-> general, it is not just a simple substitution, so this advice may prove
-> unhelpful to many.
+Thanks for the feedback!
 
-And I'm not sure the external url is a good idea.
+>> While livepatch could theoretically solve this problem, it's less suited
+>> for rapid mitigation for a couple of reasons:
+>>
+>> 1) Livepatch rollout is inherently slower due to the blast radius if a
+>>    bug exists in the livepatch mechanism itself.
+>>
+>> 2) It's common to run hundreds of different kernel versions across a
+>>    fleet. Since livepatch is kernel-specific, a single CVE suddenly
+>>    requires building and deploying hundreds of individual livepatches—
+>>    far less practical than a simple sysfs write.
+>
+>LP is certainly a more laborous solution. I guess this is quite clear.
+>It is also much safer option as it deals with all implementation details
+>like consistency. All that is not done for fun. I am really wondering
+>how admins are expected to a) know which kernel functions are ok/safe to
+>disable and b) when it is safe to do so without introducing unsafe
+>kernel state or introduce an outright bug that way.
 
-> 
-> jon
-> 
+In a similar way to how they would know if a given livepatch is safe to apply -
+ideally it would be communicated by the vendor/distro/kernel team.
 
+"On Debian XX.YY, use the following command to mitigate CVE-AAAA-BBBB:
+
+  echo "engage woops -1" > /sys/kernel/security/killswitch/control"
+
+>Thiking about this I can see how waiting for an official LP can be time
+>consuming and sometimes creating those is far from trivial. But would it
+>make sense to have automated LP creation tooling available that would
+>allow to return early from a function and relly on the existing
+>infrastructure to do the right thing?
+
+This would definitely help (and in light of how the last couple of weeks played
+out, the case for livepatches definitely increased), but not all
+vendors/distros provide livepatches.
+
+My personal usecase is simple: I use debian, with their kernel. I'm not going
+to get livepatches from debian, and it would take a few days/weeks for a kernel
+update to land. I want a simple solution that'll let me disable functionality I
+don't care about.
+
+So I can't use livepatching/fault injection/etc easily.
+
+-- 
+Thanks,
+Sasha
 
