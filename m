@@ -1,218 +1,217 @@
-Return-Path: <linux-doc+bounces-86796-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86801-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UNMCG7a+AWqdjQEAu9opvQ
-	(envelope-from <linux-doc+bounces-86796-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:34:14 +0200
+	id KA2pHHnAAWrKjQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86801-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:41:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B7B750CCFD
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:34:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6CC450CF64
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:41:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D9E6330791DA
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:31:02 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id F0C3A30A70C0
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 11:36:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 882DE372EC6;
-	Mon, 11 May 2026 11:30:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87E2E3815E3;
+	Mon, 11 May 2026 11:36:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="A7gfGf9I"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="BLRc22X8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B1B5374E66;
-	Mon, 11 May 2026 11:30:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.222
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A92C6379EDF;
+	Mon, 11 May 2026 11:36:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778499056; cv=none; b=BmS3sD45xvYYZRGyuMMc+ybznwnGRU/E4UuFaTJnfcHSLU5G2q7ZgUpIDnFgd8JrtQpYHky9mHa/QfiOQ7ifNbfzZnDhGaxZ/C3S2xLFuic9TWN6GIvkpKXe7SqQodtOwac5YviUuF4p4smuOS6CsuME5xXEk1KnNJH4a5xG1Ro=
+	t=1778499377; cv=none; b=ZmA6uhqnbfLK/3aLbuKpqTVeBZOMNkC8+a/9wp4YHZ2dqmtHoCqw5kHHxR/yeJ/skHFvhe5zcxySTsRvIbiWCczpREjVFV3KMKcXnD5/5jRf0ckfM+v3cME/76znNjlt1CJ5lDKQjNvDB55v0166cZlF2aIG4ttqjQVgj3gUzhk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778499056; c=relaxed/simple;
-	bh=+yjkn4HBuA/UyhKfR+d394Bjxs+3MnkK17zGluVy8hs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=kYCGnVkNY0zBq/1PD5D94qcPDcjFBXgHCb79pi4cA1oKA4b9GQKIQZ3m29MViGFn/YoWsyRw725GWBNSwU4JFhILArRSuj26k+cYt/KfDR9gRt1dghF9jI/3WHsNqwwzZ8zTmRjkKQzwXcEvCDnTloQBVX7K+GI/ZuGkWryzx8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=A7gfGf9I; arc=none smtp.client-ip=113.46.200.222
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=hZY77WY1R4lZKqkiJYVx90NM7cypXm7b/K/Dl6ostWU=;
-	b=A7gfGf9I2mWtoGk1twpeKdsTWxHRCoqkxK6h8sqAufJacFPxPk7J5UV8oj4BBjTyooxVD2Cki
-	IZBX0lyWqVPhijn1Ra4jjJgWV2oQvMFsHXLFq2R6ycKWvoUQXNa+lNIZBbmfXSzS+9wfOLM4NXI
-	bc1oxF4bSdMbsjNUg+iYH3U=
-Received: from mail.maildlp.com (unknown [172.19.163.163])
-	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4gDcm153LszLlSL;
-	Mon, 11 May 2026 19:23:13 +0800 (CST)
-Received: from dggpemf500011.china.huawei.com (unknown [7.185.36.131])
-	by mail.maildlp.com (Postfix) with ESMTPS id 2B9494048B;
-	Mon, 11 May 2026 19:30:49 +0800 (CST)
-Received: from [10.67.109.254] (10.67.109.254) by
- dggpemf500011.china.huawei.com (7.185.36.131) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Mon, 11 May 2026 19:30:44 +0800
-Message-ID: <79c14bee-b1f5-4d70-8345-6582d6cf0128@huawei.com>
-Date: Mon, 11 May 2026 19:30:44 +0800
+	s=arc-20240116; t=1778499377; c=relaxed/simple;
+	bh=DegH9MkiFeBJE4SexquMCZk24MzaVK8LsfzEy+mui64=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ulCHJkODvcFJ9IEw9rHNTay1L+9YxpUt2UDwbTGmYPdpxK4AGIeHzY9cRbdGj5bOPfWOuWNQyAAinhwTcluxJwNE3tXeDQjG9QRsUfE9s0pAElWnzJSmDaApWzimxZSnbwc69x0mL+KdKNHC8S8ZVNJE36lV7tCfMqo+OGvocw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=desiato.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=BLRc22X8; arc=none smtp.client-ip=90.155.92.199
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=desiato.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=wvcz1NQ1762dWyW3ikY0T2Hu3cBKQuR9OWUU0jS07tQ=; b=BLRc22X8JobnVWQx1+w28cGjTs
+	P1+3b1A6VDdwLivNi/8y4wi33PZq9BlyUH+hxqjqPGRkD5bEskzLCIUva597dRmJJf5ENwTtNMGhM
+	e48FcpfH11lIXmG1/+gDixtEVjCkZDP8c3db+s67jZA07VRzP4Ahdbo3oqnhMCLajZnmFDfz1hHB2
+	Ufw3J1fc/Quz5MlvlRJ2niZ4vCb8MOmiv+268PXylNSqQQ6IfTJsWcqJdXY7O1RIZ3wBfiyL3I6eK
+	+73Go0bqEsS5w3Uewv1iSXLdk+aoicmZywLC6nqN9jVAs3EnKUyjyBjEV+pCNm+AutV0hTkrFZI8Y
+	ktN2IYBQ==;
+Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
+	by desiato.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wMOvZ-0000000BUT9-285J;
+	Mon, 11 May 2026 11:36:02 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1wMOvY-0000000Dx0c-14Kk;
+	Mon, 11 May 2026 12:36:00 +0100
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Marc Zyngier <maz@kernel.org>,
+	Oliver Upton <oupton@kernel.org>,
+	Joey Gouly <joey.gouly@arm.com>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Zenghui Yu <yuzenghui@huawei.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Eric Auger <eric.auger@redhat.com>,
+	Raghavendra Rao Ananta <rananta@google.com>,
+	Maxim Levitsky <mlevitsk@redhat.com>,
+	David Woodhouse <dwmw@amazon.co.uk>,
+	Kees Cook <kees@kernel.org>,
+	Timothy Hayes <timothy.hayes@arm.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	kvmarm@lists.linux.dev,
+	linux-kselftest@vger.kernel.org,
+	Peter Maydell <peter.maydell@linaro.org>,
+	qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org
+Subject: [PATCH v3 3/4] KVM: arm64: vgic: Remove v2_groups_user_writable and use IIDR revision directly
+Date: Mon, 11 May 2026 12:30:45 +0100
+Message-ID: <20260511113558.3325004-4-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260511113558.3325004-1-dwmw2@infradead.org>
+References: <20260511113558.3325004-1-dwmw2@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 04/15] arm64: kexec_file: Fix potential buffer
- overflow in prepare_elf_headers()
-To: Breno Leitao <leitao@debian.org>
-CC: <corbet@lwn.net>, <skhan@linuxfoundation.org>, <catalin.marinas@arm.com>,
-	<will@kernel.org>, <chenhuacai@kernel.org>, <kernel@xen0n.name>,
-	<maddy@linux.ibm.com>, <mpe@ellerman.id.au>, <npiggin@gmail.com>,
-	<chleroy@kernel.org>, <pjw@kernel.org>, <palmer@dabbelt.com>,
-	<aou@eecs.berkeley.edu>, <alex@ghiti.fr>, <tglx@kernel.org>,
-	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>,
-	<hpa@zytor.com>, <robh@kernel.org>, <saravanak@kernel.org>,
-	<akpm@linux-foundation.org>, <bhe@redhat.com>, <rppt@kernel.org>,
-	<pasha.tatashin@soleen.com>, <pratyush@kernel.org>, <ruirui.yang@linux.dev>,
-	<rdunlap@infradead.org>, <pmladek@suse.com>, <dapeng1.mi@linux.intel.com>,
-	<kees@kernel.org>, <elver@google.com>, <kuba@kernel.org>,
-	<ebiggers@kernel.org>, <lirongqing@baidu.com>, <paulmck@kernel.org>,
-	<sourabhjain@linux.ibm.com>, <coxu@redhat.com>, <jbohac@suse.cz>,
-	<ryan.roberts@arm.com>, <osandov@fb.com>, <cfsworks@gmail.com>,
-	<tangyouling@kylinos.cn>, <ritesh.list@gmail.com>, <adityag@linux.ibm.com>,
-	<guoren@kernel.org>, <songshuaishuai@tinylab.org>, <kevin.brodsky@arm.com>,
-	<vishal.moola@gmail.com>, <junhui.liu@pigmoral.tech>,
-	<wangruikang@iscas.ac.cn>, <namcao@linutronix.de>, <chao.gao@intel.com>,
-	<seanjc@google.com>, <fuqiang.wang@easystack.cn>, <ardb@kernel.org>,
-	<chenjiahao16@huawei.com>, <hbathini@linux.ibm.com>,
-	<takahiro.akashi@linaro.org>, <james.morse@arm.com>, <lizhengyu3@huawei.com>,
-	<x86@kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<loongarch@lists.linux.dev>, <linuxppc-dev@lists.ozlabs.org>,
-	<linux-riscv@lists.infradead.org>, <devicetree@vger.kernel.org>,
-	<kexec@lists.infradead.org>
-References: <20260511030454.1730881-1-ruanjinjie@huawei.com>
- <20260511030454.1730881-5-ruanjinjie@huawei.com> <agGkvrg06KNDNfDi@gmail.com>
-From: Jinjie Ruan <ruanjinjie@huawei.com>
-In-Reply-To: <agGkvrg06KNDNfDi@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- dggpemf500011.china.huawei.com (7.185.36.131)
-X-Rspamd-Queue-Id: 1B7B750CCFD
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-Rspamd-Queue-Id: D6CC450CF64
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[infradead.org,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=desiato.20200630];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[lwn.net,linuxfoundation.org,arm.com,kernel.org,xen0n.name,linux.ibm.com,ellerman.id.au,gmail.com,dabbelt.com,eecs.berkeley.edu,ghiti.fr,redhat.com,alien8.de,linux.intel.com,zytor.com,linux-foundation.org,soleen.com,linux.dev,infradead.org,suse.com,google.com,baidu.com,suse.cz,fb.com,kylinos.cn,tinylab.org,pigmoral.tech,iscas.ac.cn,linutronix.de,intel.com,easystack.cn,huawei.com,linaro.org,vger.kernel.org,lists.infradead.org,lists.linux.dev,lists.ozlabs.org];
-	DKIM_TRACE(0.00)[huawei.com:+];
-	TAGGED_FROM(0.00)[bounces-86796-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86801-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	FROM_NEQ_ENVFROM(0.00)[dwmw2@infradead.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ruanjinjie@huawei.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	RCPT_COUNT_GT_50(0.00)[71];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,linux-foundation.org:email,sashiko.dev:url,huawei.com:email,huawei.com:mid,huawei.com:dkim]
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,infradead.org:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,amazon.co.uk:email]
 X-Rspamd-Action: no action
 
+From: David Woodhouse <dwmw@amazon.co.uk>
 
+The v2_groups_user_writable flag was introduced to gate GICv2 userspace
+IGROUPR writes until userspace explicitly wrote the IIDR, signalling
+awareness of the group semantics. However, the guest write path through
+vgic_mmio_write_group() was never gated by this flag, allowing a GICv2
+guest to modify interrupt groups regardless of whether userspace had
+opted in.
 
-On 5/11/2026 5:46 PM, Breno Leitao wrote:
-> On Mon, May 11, 2026 at 11:04:43AM +0800, Jinjie Ruan wrote:
->> There is a race condition between the kexec_load() system call
->> (crash kernel loading path) and memory hotplug operations that can
->> lead to buffer overflow and potential kernel crash.
->>
->> During prepare_elf_headers(), the following steps occur:
->> 1. The first for_each_mem_range() queries current System RAM memory ranges
->> 2. Allocates buffer based on queried count
->> 3. The 2st for_each_mem_range() populates ranges from memblock
->>
->> If memory hotplug occurs between step 1 and step 3, the number of ranges
->> can increase, causing out-of-bounds write when populating cmem->ranges[].
->>
->> This happens because kexec_load() uses kexec_trylock (atomic_t) while
->> memory hotplug uses device_hotplug_lock (mutex), so they don't serialize
->> with each other.
->>
->> Add the explicit bounds checking to prevent out-of-bounds access.
-> 
-> It seems you have a TOCTOU type of issue, and this seems to be shrinking
-> the window, but not fully solving it?
+Rather than adding the same flag check to the guest path, remove the
+flag entirely and make both guest and userspace IGROUPR writability
+follow the IIDR implementation revision directly. Groups are writable
+when the revision is >= 2, which is the case when userspace explicitly
+sets the IIDR to revision 2 or 3. When userspace does not write the
+IIDR, vgic_init() defaults to KVM_VGIC_IMP_REV_LATEST (currently 3),
+so the behaviour is unchanged for userspace that doesn't set the IIDR.
 
-Hi Breno,
+This also fixes the inconsistency where GICv2 userspace could not write
+IGROUPR at the default revision, even though the guest could.
 
-Thanks for your comments regarding the TOCTOU issue.
+As far as I can tell, QEMU commit eb8b9530b0c ("hw/intc/arm_gic_kvm.c:
+Save and restore GICD_IGROUPRn state") made QEMU attempt to save/restore
+the GICD_IGROUPR registers (which, again, are guest-writable but not
+userspace-writable by default) without ever actually setting GICD_IIDR.
 
-You are correct that the current bounds checking only "shrinks the
-window" and prevents a kernel crash, but doesn't fully guarantee header
-consistency if a race occurs.
+Fixes: 32f8777ed92d ("KVM: arm/arm64: vgic: Let userspace opt-in to writable v2 IGROUPR")
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ arch/arm64/kvm/vgic/vgic-mmio-v2.c | 16 +++++-----------
+ include/kvm/arm_vgic.h             |  3 ---
+ 2 files changed, 5 insertions(+), 14 deletions(-)
 
-In my local environment, this race is extremely difficult to reproduce,
-but it is theoretically possible.
-
-To address this properly for arm64, I am considering two steps:
-
-- For this patch: I will change the return value to -EAGAIN and keep the
-bounds check. This ensures that even if a race happens, the kernel
-remains safe (no OOB access), and user-space is notified to retry.
-
-- Long-term solution: A better way to solve this is to implement ARM64
-CRASH_HOTPLUG support (similar to x86). With crash hotplug, the kernel
-will automatically re-generate the crash headers whenever a memory
-hotplug event occurs. This makes the TOCTOU during the initial
-kexec_load less critical, as any transient inconsistency will be
-immediately corrected by the subsequent hotplug handler.
-
-Does it make sense to you to use this patch as a safety guard first, and
-then I (or someone else) follow up with the full CRASH_HOTPLUG support
-for arm64 as [1]?
-
-[1]:
-https://lore.kernel.org/all/20260402081459.635022-1-ruanjinjie@huawei.com/
-
-Best regards,
-Jinjie
-
-> 
->> Cc: Catalin Marinas <catalin.marinas@arm.com>
->> Cc: Will Deacon <will.deacon@arm.com>
->> Cc: Andrew Morton <akpm@linux-foundation.org>
->> Cc: Baoquan He <bhe@redhat.com>
->> Cc: Breno Leitao <leitao@debian.org>
->> Cc: stable@vger.kernel.org
->> Fixes: 3751e728cef2 ("arm64: kexec_file: add crash dump support")
->> Closes: https://sashiko.dev/#/patchset/20260323072745.2481719-1-ruanjinjie%40huawei.com
->> Signed-off-by: Jinjie Ruan <ruanjinjie@huawei.com>
->> ---
->>  arch/arm64/kernel/machine_kexec_file.c | 5 +++++
->>  1 file changed, 5 insertions(+)
->>
->> diff --git a/arch/arm64/kernel/machine_kexec_file.c b/arch/arm64/kernel/machine_kexec_file.c
->> index e31fabed378a..a67e7b1abbab 100644
->> --- a/arch/arm64/kernel/machine_kexec_file.c
->> +++ b/arch/arm64/kernel/machine_kexec_file.c
->> @@ -59,6 +59,11 @@ static int prepare_elf_headers(void **addr, unsigned long *sz)
->>  	cmem->max_nr_ranges = nr_ranges;
->>  	cmem->nr_ranges = 0;
->>  	for_each_mem_range(i, &start, &end) {
->> +		if (cmem->nr_ranges >= cmem->max_nr_ranges) {
->> +			ret = -ENOMEM;
-> 
-> -ENOMEM seems to be the the wrong errno. This isn't an allocation
-> failure; it's a transient race. -EBUSY or -EAGAIN would be more honest
+diff --git a/arch/arm64/kvm/vgic/vgic-mmio-v2.c b/arch/arm64/kvm/vgic/vgic-mmio-v2.c
+index e5714f7fd2ec..e5fc673a1ea9 100644
+--- a/arch/arm64/kvm/vgic/vgic-mmio-v2.c
++++ b/arch/arm64/kvm/vgic/vgic-mmio-v2.c
+@@ -84,21 +84,15 @@ static int vgic_mmio_uaccess_write_v2_misc(struct kvm_vcpu *vcpu,
+ 			return -EINVAL;
+ 
+ 		/*
+-		 * If we observe a write to GICD_IIDR we know that userspace
+-		 * has been updated and has had a chance to cope with older
+-		 * kernels (VGICv2 IIDR.Revision == 0) incorrectly reporting
+-		 * interrupts as group 1, and therefore we now allow groups to
+-		 * be user writable.  Doing this by default would break
+-		 * migration from old kernels to new kernels with legacy
+-		 * userspace.
++		 * Allow userspace to select the GICv2 IIDR revision.
++		 * Group writability follows the revision directly:
++		 * groups are guest/user writable for revision >= 2.
+ 		 */
+ 		reg = FIELD_GET(GICD_IIDR_REVISION_MASK, val);
+ 		switch (reg) {
++		case KVM_VGIC_IMP_REV_1:
+ 		case KVM_VGIC_IMP_REV_2:
+ 		case KVM_VGIC_IMP_REV_3:
+-			vcpu->kvm->arch.vgic.v2_groups_user_writable = true;
+-			fallthrough;
+-		case KVM_VGIC_IMP_REV_1:
+ 			dist->implementation_rev = reg;
+ 			return 0;
+ 		default:
+@@ -114,7 +108,7 @@ static int vgic_mmio_uaccess_write_v2_group(struct kvm_vcpu *vcpu,
+ 					    gpa_t addr, unsigned int len,
+ 					    unsigned long val)
+ {
+-	if (vcpu->kvm->arch.vgic.v2_groups_user_writable)
++	if (vgic_get_implementation_rev(vcpu) >= KVM_VGIC_IMP_REV_2)
+ 		vgic_mmio_write_group(vcpu, addr, len, val);
+ 
+ 	return 0;
+diff --git a/include/kvm/arm_vgic.h b/include/kvm/arm_vgic.h
+index 16811ec03d54..a9490e43d98d 100644
+--- a/include/kvm/arm_vgic.h
++++ b/include/kvm/arm_vgic.h
+@@ -377,9 +377,6 @@ struct vgic_dist {
+ #define KVM_VGIC_IMP_REV_3	3 /* GICv3 GICR_CTLR.{IW,CES,RWP} */
+ #define KVM_VGIC_IMP_REV_LATEST	KVM_VGIC_IMP_REV_3
+ 
+-	/* Userspace can write to GICv2 IGROUPR */
+-	bool			v2_groups_user_writable;
+-
+ 	/* Do injected MSIs require an additional device ID? */
+ 	bool			msis_require_devid;
+ 
+-- 
+2.51.0
 
 
