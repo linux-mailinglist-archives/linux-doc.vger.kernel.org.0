@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-86849-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86850-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2DNkIXzgAWptlgEAu9opvQ
-	(envelope-from <linux-doc+bounces-86849-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:58:20 +0200
+	id sL3qM+/iAWoEmAEAu9opvQ
+	(envelope-from <linux-doc+bounces-86850-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 16:08:47 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3C3050F790
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:58:19 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF44550FBDC
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 16:08:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5D264306E2F3
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:56:20 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id CDB4B303B76F
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:56:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EE543FA5E5;
-	Mon, 11 May 2026 13:56:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 956213F9F3A;
+	Mon, 11 May 2026 13:56:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="VXA/+WDO"
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Ycf2EGJz"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97CD13FA5D5;
-	Mon, 11 May 2026 13:56:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D569A3FB05B;
+	Mon, 11 May 2026 13:56:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778507764; cv=none; b=QFnZLLzI6pw6tri0Oh5GGyAfDbcbE/vzk3+KNS4+XJ7Z4jko1j7EtihUWJ2rIz6jrk7pc4w4epKADrTZ6JKhZO5jIV7NWvtAO4mwad2WexEBhq8uRMgjlISYaJ6+6QH7F9BmzoNtamZN5wGxctdMZ9EezDT/K3DHMHy4rrgvlgA=
+	t=1778507771; cv=none; b=cQRcvviT85OSLZ0PxUUxAnUeA7zgYFzVpGDraTj1B+RraFvTwufMKM0p1NxaQazqiPt9FqZEfKnPr+nLDdetOmjs1iFSt5qE+kdjljE9SXm4I3dMV63uveK8GxA0ZqXfx5Dkxe7I1JiCaK4c1u7U4QsWfGgUDLvVnCSrWSjPq1M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778507764; c=relaxed/simple;
-	bh=pfMG+6nrdRg/qQu3NYZ8eC9hb/yMgPsNH2EdyMELK4o=;
+	s=arc-20240116; t=1778507771; c=relaxed/simple;
+	bh=XGFkxW/H5ch6O1XPqwAMdvG9y0NkBvRdmTzXlnKHEPs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=T2ElKnMCxk6Feg38THdic5UhbGU+CYolq3aBbHUNMPqmfl1X+IjKSrh3+CZvY0zpSBNfR2MCCb6Bk2wLALSy4pJIb9DotsTIfWueVYmTSHcOvEUYfzdOUXQ5r+F/mS89VWSKnk/zOI0dKKUErd/P2buDzgLYc3W7sBo0qzQVUTA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=VXA/+WDO; arc=none smtp.client-ip=217.140.110.172
+	 MIME-Version; b=cfS1rHEs7IU/xY7t5YxTVPqfrQklEFYCrQs9ei1gwD2iMkoNCf8/ufCWqJgqtGxS6JPYNFyVVws8sTjrolOYVGsLfxHB0r8gdw6A2f/bnaImOVVXzhIfa5N/axUpFpvHwyO4Dgy1WeFfB6A+EuT4gg8EG6ShLJ5+tUJ6ybbd3hs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Ycf2EGJz; arc=none smtp.client-ip=217.140.110.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8609E263D;
-	Mon, 11 May 2026 06:55:55 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1585916F3;
+	Mon, 11 May 2026 06:56:01 -0700 (PDT)
 Received: from e135073.arm.com (unknown [10.57.34.159])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C460B3F85F;
-	Mon, 11 May 2026 06:55:56 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6A87C3F85F;
+	Mon, 11 May 2026 06:56:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1778507760; bh=pfMG+6nrdRg/qQu3NYZ8eC9hb/yMgPsNH2EdyMELK4o=;
+	t=1778507766; bh=XGFkxW/H5ch6O1XPqwAMdvG9y0NkBvRdmTzXlnKHEPs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=VXA/+WDOxZM8WKWL4QVGZv18LGLGarfok8IAC+CmczyR895qpC/5G4KjHOsnLM3rn
-	 MVsHD6CSbNL4zvIFIw2y7i66m1w2etykd2pl0DTiDkXQp0zVCntptdgsK3odub7Enk
-	 H6UIEp267OBk1ZY+hu3cOvpgc6mVI4ZxEaQcgMO0=
+	b=Ycf2EGJzfvN105nE/egXgsx1NHIW5wBVuKaSh2P2WVFq6vnhEBMW1mDi+eIolDL8Z
+	 W5hVJi6G75Qg1yC7Mz/Oyl/NnFMIxeZHE04Dn8uVBy4dvNqSE8dNcToa7t2i++pXiB
+	 BUKAMDk3/jqgmzrkqH/TXgRnyHzg9ORgncsTo4Dk=
 From: Pierre Gondois <pierre.gondois@arm.com>
 To: linux-kernel@vger.kernel.org
 Cc: Jie Zhan <zhanjie9@hisilicon.com>,
@@ -65,9 +65,9 @@ Cc: Jie Zhan <zhanjie9@hisilicon.com>,
 	Saravana Kannan <saravanak@kernel.org>,
 	linux-pm@vger.kernel.org,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 1/4] cpufreq: Extract cpufreq_policy_init_qos() function
-Date: Mon, 11 May 2026 15:55:28 +0200
-Message-ID: <20260511135538.522653-2-pierre.gondois@arm.com>
+Subject: [PATCH v2 2/4] cpufreq: Set default policy->min/max values for all drivers
+Date: Mon, 11 May 2026 15:55:29 +0200
+Message-ID: <20260511135538.522653-3-pierre.gondois@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260511135538.522653-1-pierre.gondois@arm.com>
 References: <20260511135538.522653-1-pierre.gondois@arm.com>
@@ -78,20 +78,20 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: F3C3050F790
+X-Rspamd-Queue-Id: CF44550FBDC
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86849-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-86850-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MIME_TRACE(0.00)[0:+];
@@ -104,109 +104,52 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	DKIM_TRACE(0.00)[arm.com:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:email,arm.com:mid,arm.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,arm.com:email,arm.com:mid,arm.com:dkim]
 X-Rspamd-Action: no action
 
-Extract the QoS related logic from cpufreq_policy_online()
-to make the function shorter/simpler.
+Some drivers set policy->min/max in their .init() callback.
+cpufreq_set_policy() will ultimately override them through:
+cpufreq_policy_online()
+\-cpufreq_init_policy()
+  \-cpufreq_set_policy()
+    \-/* Set policy->min/max */
+Thus the policy min/max values provided are only temporary.
 
-The logic is placed in cpufreq_policy_init_qos() and is
-now executed right after the following calls:
-- cpufreq_driver->init()
-- cpufreq_table_validate_and_sort()
+There is an exception if CPUFREQ_NEED_INITIAL_FREQ_CHECK is set and:
+cpufreq_policy_online()
+\-__cpufreq_driver_target()
+  \-cpufreq_driver->target()
 
-This helps preparing following patches that will,
-in cpufreq_policy_init_qos():
-- treat the policy->min/max values set by drivers as QoS requests.
-- set a default policy->min/max value to all policies.
-
-No functional change.
+To prepare for a following patch that will remove all
+policy->min/max initialization in the driver .init() callback
+if the min/max value is equal to the cpuinfo.min/max_freq,
+set a default policy->min/max value for all drivers.
 
 Signed-off-by: Pierre Gondois <pierre.gondois@arm.com>
 ---
- drivers/cpufreq/cpufreq.c | 53 +++++++++++++++++++++++----------------
- 1 file changed, 32 insertions(+), 21 deletions(-)
+ drivers/cpufreq/cpufreq.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
 diff --git a/drivers/cpufreq/cpufreq.c b/drivers/cpufreq/cpufreq.c
-index 44eb1b7e7fc1b..034603c2af325 100644
+index 034603c2af325..9e2d9d3fc5351 100644
 --- a/drivers/cpufreq/cpufreq.c
 +++ b/drivers/cpufreq/cpufreq.c
-@@ -1397,6 +1397,32 @@ static void cpufreq_policy_free(struct cpufreq_policy *policy)
- 	kfree(policy);
- }
- 
-+static int cpufreq_policy_init_qos(struct cpufreq_policy *policy)
-+{
-+	int ret;
-+
-+	if (policy->boost_supported) {
-+		ret = freq_qos_add_request(&policy->constraints,
-+						&policy->boost_freq_req,
-+						FREQ_QOS_MAX,
-+						policy->cpuinfo.max_freq);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	ret = freq_qos_add_request(&policy->constraints, &policy->min_freq_req,
-+				   FREQ_QOS_MIN, FREQ_QOS_MIN_DEFAULT_VALUE);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = freq_qos_add_request(&policy->constraints, &policy->max_freq_req,
-+				   FREQ_QOS_MAX, FREQ_QOS_MAX_DEFAULT_VALUE);
-+	if (ret < 0)
-+		return ret;
-+
-+	return ret;
-+}
-+
- static int cpufreq_policy_online(struct cpufreq_policy *policy,
- 				 unsigned int cpu, bool new_policy)
+@@ -1401,6 +1401,13 @@ static int cpufreq_policy_init_qos(struct cpufreq_policy *policy)
  {
-@@ -1442,6 +1468,12 @@ static int cpufreq_policy_online(struct cpufreq_policy *policy,
- 		if (ret)
- 			goto out_offline_policy;
+ 	int ret;
  
-+		if (new_policy) {
-+			ret = cpufreq_policy_init_qos(policy);
-+			if (ret < 0)
-+				goto out_offline_policy;
-+		}
++	/*
++	 * If the driver didn't set policy->min/max, set them as
++	 * they are used to clamp frequency requests.
++	 */
++	policy->min = policy->min ? policy->min : policy->cpuinfo.min_freq;
++	policy->max = policy->max ? policy->max : policy->cpuinfo.max_freq;
 +
- 		/* related_cpus should at least include policy->cpus. */
- 		cpumask_copy(policy->related_cpus, policy->cpus);
- 	}
-@@ -1458,27 +1490,6 @@ static int cpufreq_policy_online(struct cpufreq_policy *policy,
- 			add_cpu_dev_symlink(policy, j, get_cpu_device(j));
- 		}
- 
--		if (policy->boost_supported) {
--			ret = freq_qos_add_request(&policy->constraints,
--						   &policy->boost_freq_req,
--						   FREQ_QOS_MAX,
--						   policy->cpuinfo.max_freq);
--			if (ret < 0)
--				goto out_destroy_policy;
--		}
--
--		ret = freq_qos_add_request(&policy->constraints,
--					   &policy->min_freq_req, FREQ_QOS_MIN,
--					   FREQ_QOS_MIN_DEFAULT_VALUE);
--		if (ret < 0)
--			goto out_destroy_policy;
--
--		ret = freq_qos_add_request(&policy->constraints,
--					   &policy->max_freq_req, FREQ_QOS_MAX,
--					   FREQ_QOS_MAX_DEFAULT_VALUE);
--		if (ret < 0)
--			goto out_destroy_policy;
--
- 		blocking_notifier_call_chain(&cpufreq_policy_notifier_list,
- 				CPUFREQ_CREATE_POLICY, policy);
- 	}
+ 	if (policy->boost_supported) {
+ 		ret = freq_qos_add_request(&policy->constraints,
+ 						&policy->boost_freq_req,
 -- 
 2.43.0
 
