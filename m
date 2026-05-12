@@ -1,84 +1,101 @@
-Return-Path: <linux-doc+bounces-86842-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86967-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oLkqFy/eAWptlgEAu9opvQ
-	(envelope-from <linux-doc+bounces-86842-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:48:31 +0200
+	id QPvUHPCDAmrVtwEAu9opvQ
+	(envelope-from <linux-doc+bounces-86967-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 03:35:44 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DBB450F495
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:48:30 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id D6DAB518474
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 03:35:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id E807D30136C7
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:38:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A53233027977
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 01:35:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EAA73F7AAF;
-	Mon, 11 May 2026 13:37:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6BDFF282F0B;
+	Tue, 12 May 2026 01:35:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="OmGl3omJ"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="PK7Vk9Nc";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="bua3LGJ/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7F1F3F7A88
-	for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 13:37:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB1B3258EDA
+	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 01:35:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778506657; cv=none; b=FYzWpEFTfH3UwBT/7miGKSKwaa79jPJY9xpfJJCvKXOfvhFwHpsgDx5usRdox/WAqkv9RCjQcd4spPcEAQGAxbyLwhWBm9b7Pq1n7eCLGScI2j0SkYr56V1IvsqjI4x5qUOg/ihqSdG3TxT1zo9vRGmi2K+ywdFGM3KwW1e+3z0=
+	t=1778549741; cv=none; b=tPGm4haP5VvItMyxdYbr/xswqxapP3vf3v/v3/hzhDxj9Kx50/a4d+4ou2Y35PpWv9XlUBXwTKwyIDHPw8TBv6r53y6eH+gASbeopzBqun+nabYCe7c5BbJ42NXO/hGAhLs0CFXiBsb5vDo/BQzsjsL2JPcRDUWsPeXQMNhGcBY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778506657; c=relaxed/simple;
-	bh=2enA/Fr+DaOcG1nw1ufU1X/14nLTiNajnKnEzGSKanE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=t4Q+dJKxgLTBbJJTQrPilGseOpbWC9C4Vzz2gk9hGGIXospvkq7qXrL3KddqwREq7aG9RbRxDTejAULYIylWVlNRTOUvCcBDkqLyZRZnbBq42pYg0vOB3io8PPKir1O2Aq57PnySlHf6KPKXM40kQCPW0L04puxx+OQnKKrNCa4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=OmGl3omJ; arc=none smtp.client-ip=209.85.216.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3660b84347dso2641946a91.1
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 06:37:35 -0700 (PDT)
+	s=arc-20240116; t=1778549741; c=relaxed/simple;
+	bh=OXLbc8oa7LK5j+UoK7PYojQxNt6tMdSaWmLDVwmy6fY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Wf7+V/3B4m8LtW9bj9OMRA0Ji5IQ+aqXuJjSWR+zUTKB95pWRW5mbJR1IFXA29t6VX9aIIgSRInsxIeVjSFWuHlWA09Tmcm4ZjTdUwkCl+gUQkdoxc9IkPC7eOl1oh9loeNPSF3x9iJGDaYGkPGPsWJ1W1kAT7xmCl66O3evG4A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=PK7Vk9Nc; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=bua3LGJ/; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1778549739;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=hDM81GL78FREZS+LEcr682BVOat2yXDAdlE/kgG+9Ak=;
+	b=PK7Vk9NcWSMhOUP9X3AD7zupfg92pvC83rxAimQiQzL3BxaEDtiI0hA3PX2ORO/UVdAvp/
+	KCxQgWhBmjy0hHnd/6tvj6W5C4iEQZaald6hQe4rx4I8i2fuEpcj1NxGVdKNk/+V1kvjZl
+	edrzVK8LURV2yxEqhkPyWjjfjTMDKZA=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-198-tLxbhP-nPUutmkAElookmQ-1; Mon, 11 May 2026 21:35:37 -0400
+X-MC-Unique: tLxbhP-nPUutmkAElookmQ-1
+X-Mimecast-MFC-AGG-ID: tLxbhP-nPUutmkAElookmQ_1778549737
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-514ae0edeb6so55448611cf.1
+        for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 18:35:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778506655; x=1779111455; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9bIv5E7CDUy/32Snb6v5lvrwzzQuIONo/kTKOPolOf4=;
-        b=OmGl3omJ6aXNAyl3EC3SoMdrsc9eJqrCTZ90JlPQf1o0rGAGml/+RITZ4/QtuAIpz0
-         XodmyuwHzU1ULf8I8Z7mtCsNAqgMvZyUiTG/TnUZ56APoTaOUpHGTmMQnGwrhzndTKrv
-         m5qg/J03pJfjZjW617UrjhoK3v5C6iulBvN8GFiN1eWgzO2FvVoi+hfyAcK05/YB6LFE
-         j+7GU0dc60JFq3s6/vfh13pGOdhhn/HwteGPLZgMsW1UPHS21n8GKrH8Jpj8ZLzVH+tY
-         dfvllhh/ZcHjzK/Yhw3ejMRcxGl0xpfHnT9eZpcoEvprjNEdlcdw2ZyiUhaA1197Yazv
-         c4Hg==
+        d=redhat.com; s=google; t=1778549737; x=1779154537; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hDM81GL78FREZS+LEcr682BVOat2yXDAdlE/kgG+9Ak=;
+        b=bua3LGJ/G0JvzPn44dIDD1bltMl6WOGtAzek+ypdj19WcKhhE9qVdYJKh8G9NU7ZTU
+         2wpL/cQubpcRCvMPNadHttQ+TkmMg7kv9MTLeE+4IpfAIbtof1BxacX6BgAXhkE/pg1y
+         Bli+BVrl/T3wrO/yBO80Z1nijkSP9wq/rJD94j9B1m5hDnEQCFfWW2m6QJUMEhU7oFfQ
+         uEZQpz/HvMIEVDSBAtjGO9mDrrHQye5xZZ7pLKp1KcqD3UADxQ1bnralIK1HqBrtQLY3
+         GwXvsGG6HJ3MgkF9KWwEMguK/aOJEtOHRY1gd0bCYP4cV8u6VizqFbDN3bltmFJBZwk/
+         UPSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778506655; x=1779111455;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=9bIv5E7CDUy/32Snb6v5lvrwzzQuIONo/kTKOPolOf4=;
-        b=AW2c8Fl09npnP6aVswXxFtpTjMV7Xd66sf+vCpl5+OBgDWVRq13bXaCNzfl2mlfTKk
-         1VvofgkePj4TLvY+fIQOgV6+bYUZdHSRKZDzj94zY7+ezj+9+XtrUek04ZwogkN3bHLj
-         Ach4ozQQ9QYwqoltpWJjzqxWyPMed6xlTrh5vq81b3MoR8y/ESskMyyBAURtGRmyyhCs
-         37na05qTwu5sfV5Tatv7/Ib3jqe3zIzPkjfC1v/vpHr6da1hTU1QLEQDLu1/EB7EJNXu
-         UXg7K5xkoQllZgl/fKQ513c7DpAXsokaZv9dFRlPMt1dEG5Vbu2D6S5hbHn2Zto9wYOz
-         EBow==
-X-Forwarded-Encrypted: i=1; AFNElJ+nz0H0jO+LFrVMoX9dR0Dsqw48Uzaak0qDFkGW8ksRbnw6MeG3uLzgFXy8Jp5XBFjtXsWQtpUnT5g=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzxKZgRHWy1yA4xey1wKvcG3t9NHHENtmede9ARFvdrZca3+b9w
-	nKBB3bum7TsJgKgZ5iV3uJbdCn5arI/8HKc0n7AXp/7J5rrbD1Cyn+2H1dgwGvOGlmY=
-X-Gm-Gg: Acq92OELFryta+lqJ0gRoDf8FOpP88ghfIFeHuAXHj7ZuIrtEmPbgmCWnff0bpRK0ZH
-	Al/XrSSI6gkoF+DQQpeYrnr95+AOisFDShm0VoO1SLc220CxI2Zpcwk+U6M7Okszlz+9gEcZ/bW
-	GmZWYuCYTxUu8iZmLvfYj+Z6z1/aZnMNaZztQmmnLQIW+6kvdu1X8I/ynuSchQMUM7wwUqG9EN7
-	2WLaK0iGJzl4Y46o1ktk+zXxBA6r5T9mAtaGELr9eCjBXtL6EpIlW3UXd+Ui9Xp5psUME8j1Oki
-	CCIxzulrfcNAGJ8Yb/LDFk3w/qh7+OZR0451qxLPU54Osb8JZRdxJEqyE2li6E8FB6KZ1LOGJ3z
-	NG2kT8noNzf63aXCae65sSeu6oBrOqgTUtI7np4tb9/Xz4YjtbIx2d2jJ1i2Bo7+QnTEX2blp4g
-	df8JIYormhW3dXi06bsuqSmPUUmO/ho44glZs7YbM7cT99xBnLkswJnw==
-X-Received: by 2002:a17:90b:2750:b0:364:a173:2d61 with SMTP id 98e67ed59e1d1-365abcf240fmr23278068a91.11.1778506655158;
-        Mon, 11 May 2026 06:37:35 -0700 (PDT)
-Received: from [127.0.1.1] ([2a12:a305:4::30f3])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-367be3daafesm3034326a91.8.2026.05.11.06.37.27
+        d=1e100.net; s=20251104; t=1778549737; x=1779154537;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hDM81GL78FREZS+LEcr682BVOat2yXDAdlE/kgG+9Ak=;
+        b=XZQi5UmoNoSCqAmAHG/ljRysPUE75pTTOLttyo/4PNhQSwYObWC34bpfBui3B4Fu+7
+         eqGFZVBqmQRPedfvrHZejN90ow7aNrsBuE/0hYKDJ1v2Q+J+NVDPeKM8odYhphmbKEbB
+         93QGVIWBGWjm8NZOwXjvTKvuJnzQtdT59qbzbhXU/uRBzaWseauld8HR9z49qjgOXwv/
+         DYnpYgxEls3XZaFhbluM6iXnSwhos68qSFoC0/ir/qEhDWvSnf34ML8tJEG2NGu7NSA2
+         XQTzEbILIm8N+WI/EiZTZnre9HQDaKoBvxiXyJPc1t/D3Z2P8dxYbpq9LpGoV1h1dAjP
+         zDDw==
+X-Forwarded-Encrypted: i=1; AFNElJ8bYSh19W9Y38EmsLph/1jgaMt/LvVZULnCpbOBLgjvfmQF+jIN2MyqrDwLw1vxTkEHHHiX2tcugPI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy8SBJmjDsaYJ9EYPgWEzTMvAYIPa1Ryh9M+tMNXH3KkR2XA+m9
+	jcReERuAerKReU/bj2CY3J1f9j9A663QkeViw6mL8aiGHQkOlC3PqhIdnbLlOFj8WmYdGi4UoUJ
+	T5JDhKbXkDHgDnrGoNVVUNhNjVb8vozY8F7uHNy4QB5BfQuMXumXhGf/dvb6K4Q==
+X-Gm-Gg: Acq92OGOlK4xjYN5Tg+E4NRYBhDCy1rIseSiR7BJD4doGRj3KEwArgHi/Z18PMcjd3e
+	EBSQykChmxAGfpw5LFwaWjqV+p0ExlsGp97Cm7dIdlgyU+ilEj/eR7CGm8cmaK10P/zzCON9eaC
+	Y4SrA91Zwup/pozvdJ0f2zn1VLLBHM6wkG1qI+DHKFqPD7prPvJknWBYthcKML/YlBcuNa5a+WO
+	wwLiLxWcuA/MAiRe9mjLMhXNR5CuGHQ/1W1zshh8YXInBqDF1qqcIWU1nHLQiKxxa6DGfSOAbFf
+	WALvrqkFZ/3a93bydSUWg9jeYT/Og0cQ6/hJwX6O/VBHo400CFE5hYX0j7pWG7knHKMr8G68Dmu
+	4Y7nJ3bhVfJwMroppzZlYkoXFb0+/+b/CRdtCQK0+KS8U7+Ly/y3j15dj2ZFDmg==
+X-Received: by 2002:a05:622a:1a85:b0:50d:af03:c9ca with SMTP id d75a77b69052e-514cf02bcabmr26355901cf.38.1778549736889;
+        Mon, 11 May 2026 18:35:36 -0700 (PDT)
+X-Received: by 2002:a05:622a:1a85:b0:50d:af03:c9ca with SMTP id d75a77b69052e-514cf02bcabmr26355501cf.38.1778549736403;
+        Mon, 11 May 2026 18:35:36 -0700 (PDT)
+Received: from [192.168.1.15] (c-73-183-52-120.hsd1.pa.comcast.net. [73.183.52.120])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8bf39c7e2e5sm109704006d6.34.2026.05.11.18.35.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 May 2026 06:37:34 -0700 (PDT)
-From: Guodong Xu <guodong@riscstar.com>
-Date: Mon, 11 May 2026 21:34:55 -0400
-Subject: [PATCH v2 10/10] riscv: hwprobe: Introduce rva23u64 base behavior
+        Mon, 11 May 2026 18:35:35 -0700 (PDT)
+From: Brian Masney <bmasney@redhat.com>
+Subject: [PATCH v3 0/4] clk: update kernel docs
+Date: Mon, 11 May 2026 21:35:03 -0400
+Message-Id: <20260511-clk-docs-v3-0-ed67e1065809@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,165 +104,104 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260511-rva23u64-hwprobe-v2-v2-10-21c5a544f1dc@riscstar.com>
-References: <20260511-rva23u64-hwprobe-v2-v2-0-21c5a544f1dc@riscstar.com>
-In-Reply-To: <20260511-rva23u64-hwprobe-v2-v2-0-21c5a544f1dc@riscstar.com>
-To: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <pjw@kernel.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Conor Dooley <conor.dooley@microchip.com>, 
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, 
- Shuah Khan <shuah@kernel.org>, Anup Patel <anup@brainfault.org>, 
- Atish Patra <atish.patra@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>, 
- Deepak Gupta <debug@rivosinc.com>, Zong Li <zong.li@sifive.com>, 
- Christian Brauner <brauner@kernel.org>
-Cc: Andrew Jones <andrew.jones@oss.qualcomm.com>, 
- Charlie Jenkins <charlie@rivosinc.com>, 
- Samuel Holland <samuel.holland@sifive.com>, linux-doc@vger.kernel.org, 
- linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kvm@vger.kernel.org, 
- kvm-riscv@lists.infradead.org, Guodong Xu <guodong@riscstar.com>
-X-Mailer: b4 0.15.1
-X-Rspamd-Queue-Id: 5DBB450F495
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22MwQ6CMBAFf4Xs2ZptgQqc/A/jgbZbaVRqWtJoC
+ P9u4YSJx3l5MzNECo4idMUMgZKLzo8ZykMBeujHGzFnMoNAIbHEiunHnRmvI0NVnxpbCS4RId9
+ fgax7b6nLNfPg4uTDZysnvq5/IokzZJaoko1RbWv5OZAZ+umo/RPWShI7U9Q7U2RTaSslEtek6
+ h9zWZYv+RLjKdsAAAA=
+X-Change-ID: 20260304-clk-docs-0b578f421600
+To: Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Maxime Ripard <mripard@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Brian Masney <bmasney@redhat.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2106; i=bmasney@redhat.com;
+ s=20250903; h=from:subject:message-id;
+ bh=OXLbc8oa7LK5j+UoK7PYojQxNt6tMdSaWmLDVwmy6fY=;
+ b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLKYmu+WFLxrO7vqtcvkBi2RG01afCGq38pVMv6ZCszgk
+ 97y6ceWjlIWBjEuBlkxRZYluUYFEamrbO/d0WSBmcPKBDKEgYtTACayIo2R4fXh5W+V6nnDlwr/
+ c2W2Dszku5le0Hc+7Ivnw/reosAzoQz/TPUiAnZ8EmSMjnn0fG/W3rK80LfOHHsO9Liz6rzOvtf
+ JBgA=
+X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
+ fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
+X-Rspamd-Queue-Id: D6DAB518474
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [2.44 / 15.00];
-	DATE_IN_FUTURE(4.00)[11];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[riscstar-com.20251104.gappssmtp.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719,redhat.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[riscstar.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-86842-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	DKIM_TRACE(0.00)[riscstar-com.20251104.gappssmtp.com:+];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86967-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[guodong@riscstar.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bmasney@redhat.com,linux-doc@vger.kernel.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[riscstar.com:email,riscstar.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,qualcomm.com:email,riscstar-com.20251104.gappssmtp.com:dkim]
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-Provide a hwprobe base-behavior bit so userspace can check RVA23U64
-support in one call.  Without it, a consumer needs five hwprobe
-calls and four prctl calls, which is error-prone to require of every
-caller.  Most software treats RVA23U64 as a new base anyway, so
-expose it directly.
+Here's a small series that updates the kernel documentation for struct
+clk_core, adds a doc block for the clk flags, and updates the clk kunit
+test to use HZ_PER_MHZ.
 
-Signed-off-by: Andrew Jones <andrew.jones@oss.qualcomm.com>
-Signed-off-by: Guodong Xu <guodong@riscstar.com>
+Since I've been doing a lot of work in the clk subsystem lately, I would
+like to add some more documentation about this subsystem in the future
+as I have time. There's a lot of other things that I know can be done
+now, and I'd like to just start with these small changes merged.
+
+I tested this by running 'make htmldocs' and opened
+Documentation/output/driver-api/clk.html in my browser to ensure that
+it was rendered as expected.
+
+Changes in v3:
+- Remove clk flags enum and replaced with a doc block.
+- Add separate header for the flags in the rst file.
+- Rebased onto next-20260508.
+- Link to v2: https://lore.kernel.org/r/20260325-clk-docs-v2-0-bcf660e1ceb5@redhat.com
+
+Changes in v2:
+- Add clk_core_flags enum, and kernel doc for this.
+- Update descriptions in clk_core based on feedback from Stephen.
+- Update clk kernel docs to show some of the new API documentation.
+- Link to v1: https://lore.kernel.org/r/20260304-clk-docs-v1-0-fee468db99f1@redhat.com
+
+Merge Strategy
+--------------
+Given the new doc block, and cross tree dependency, it would be easiest
+of all of this was merged together in Stephen's tree.
+
+Signed-off-by: Brian Masney <bmasney@redhat.com>
 ---
-v2:
-- Detect RVA23U64 by reading from the cached hart_isa[].isa_bases
-  bitmap populated by riscv_init_isa_bases() at init time, sharing
-  one source of truth with /proc/cpuinfo.
+Brian Masney (4):
+      clk: add kernel docs for the core flags
+      clk: add kernel docs for struct clk_core
+      docs: clk: include some identifiers to keep documentation up to date
+      clk: test: convert constants to use HZ_PER_MHZ
+
+ Documentation/driver-api/clk.rst | 58 +++++++++-------------------------------
+ drivers/clk/clk.c                | 51 +++++++++++++++++++++++++++++++++++
+ drivers/clk/clk_test.c           |  7 ++---
+ include/linux/clk-provider.h     | 46 +++++++++++++++++++------------
+ 4 files changed, 96 insertions(+), 66 deletions(-)
 ---
- Documentation/arch/riscv/hwprobe.rst               |  8 ++++++++
- arch/riscv/include/uapi/asm/hwprobe.h              |  3 ++-
- arch/riscv/kernel/sys_hwprobe.c                    | 23 +++++++++++++++-------
- tools/testing/selftests/riscv/hwprobe/which-cpus.c |  2 +-
- 4 files changed, 27 insertions(+), 9 deletions(-)
+base-commit: e98d21c170b01ddef366f023bbfcf6b31509fa83
+change-id: 20260304-clk-docs-0b578f421600
 
-diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
-index cb31fd3b12017..9b901bf8bab9a 100644
---- a/Documentation/arch/riscv/hwprobe.rst
-+++ b/Documentation/arch/riscv/hwprobe.rst
-@@ -67,6 +67,14 @@ The following keys are defined:
-       programs (it may still be executed in userspace via a
-       kernel-controlled mechanism such as the vDSO).
- 
-+  * :c:macro:`RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64`: Support for all mandatory
-+    extensions of RVA23U64, as defined in the RISC-V Profiles specification
-+    starting from commit 0273f3c921b6 ("rva23/rvb23 ratified").
-+
-+    The RVA23U64 base is based upon the IMA base and therefore IMA extension
-+    keys (e.g. :c:macro:`RISCV_HWPROBE_KEY_IMA_EXT_0`:) may be used to probe
-+    optional extensions.
-+
- * :c:macro:`RISCV_HWPROBE_KEY_IMA_EXT_0`: A bitmask containing extensions
-   that are compatible with the :c:macro:`RISCV_HWPROBE_BASE_BEHAVIOR_IMA`:
-   base system behavior.
-diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
-index 430dc49a82863..d940ba4f6a1e8 100644
---- a/arch/riscv/include/uapi/asm/hwprobe.h
-+++ b/arch/riscv/include/uapi/asm/hwprobe.h
-@@ -21,7 +21,8 @@ struct riscv_hwprobe {
- #define RISCV_HWPROBE_KEY_MARCHID	1
- #define RISCV_HWPROBE_KEY_MIMPID	2
- #define RISCV_HWPROBE_KEY_BASE_BEHAVIOR	3
--#define		RISCV_HWPROBE_BASE_BEHAVIOR_IMA	(1 << 0)
-+#define		RISCV_HWPROBE_BASE_BEHAVIOR_IMA		(1 << 0)
-+#define		RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64	(1 << 1)
- #define RISCV_HWPROBE_KEY_IMA_EXT_0	4
- #define		RISCV_HWPROBE_IMA_FD		(1 << 0)
- #define		RISCV_HWPROBE_IMA_C		(1 << 1)
-diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
-index dcc102bf8f183..c43fcad737b73 100644
---- a/arch/riscv/kernel/sys_hwprobe.c
-+++ b/arch/riscv/kernel/sys_hwprobe.c
-@@ -225,6 +225,17 @@ static bool hwprobe_ext0_has(const struct cpumask *cpus, u64 ext)
- 	return (pair.value & ext);
- }
- 
-+static bool hwprobe_has_isa_base(const struct cpumask *cpus, unsigned int base)
-+{
-+	int cpu;
-+
-+	for_each_cpu(cpu, cpus) {
-+		if (!test_bit(base, hart_isa[cpu].isa_bases))
-+			return false;
-+	}
-+	return true;
-+}
-+
- #if defined(CONFIG_RISCV_PROBE_UNALIGNED_ACCESS)
- static u64 hwprobe_misaligned(const struct cpumask *cpus)
- {
-@@ -307,14 +318,12 @@ static void hwprobe_one_pair(struct riscv_hwprobe *pair,
- 	case RISCV_HWPROBE_KEY_MIMPID:
- 		hwprobe_arch_id(pair, cpus);
- 		break;
--	/*
--	 * The kernel already assumes that the base single-letter ISA
--	 * extensions are supported on all harts, and only supports the
--	 * IMA base, so just cheat a bit here and tell that to
--	 * userspace.
--	 */
- 	case RISCV_HWPROBE_KEY_BASE_BEHAVIOR:
--		pair->value = RISCV_HWPROBE_BASE_BEHAVIOR_IMA;
-+		pair->value = 0;
-+		if (hwprobe_has_isa_base(cpus, RISCV_ISA_BASE_IMA))
-+			pair->value |= RISCV_HWPROBE_BASE_BEHAVIOR_IMA;
-+		if (hwprobe_has_isa_base(cpus, RISCV_ISA_BASE_RVA23U64))
-+			pair->value |= RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64;
- 		break;
- 
- 	case RISCV_HWPROBE_KEY_IMA_EXT_0:
-diff --git a/tools/testing/selftests/riscv/hwprobe/which-cpus.c b/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-index 587feb198c049..f8c797b1d0fd9 100644
---- a/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-+++ b/tools/testing/selftests/riscv/hwprobe/which-cpus.c
-@@ -105,7 +105,7 @@ int main(int argc, char **argv)
- 	pairs[0] = (struct riscv_hwprobe){ .key = RISCV_HWPROBE_KEY_BASE_BEHAVIOR, };
- 	rc = riscv_hwprobe(pairs, 1, 0, NULL, 0);
- 	assert(rc == 0 && pairs[0].key == RISCV_HWPROBE_KEY_BASE_BEHAVIOR &&
--	       pairs[0].value == RISCV_HWPROBE_BASE_BEHAVIOR_IMA);
-+	       (pairs[0].value & RISCV_HWPROBE_BASE_BEHAVIOR_IMA));
- 
- 	pairs[0] = (struct riscv_hwprobe){ .key = RISCV_HWPROBE_KEY_IMA_EXT_0, };
- 	rc = riscv_hwprobe(pairs, 1, 0, NULL, 0);
-
+Best regards,
 -- 
-2.43.0
+Brian Masney <bmasney@redhat.com>
 
 
