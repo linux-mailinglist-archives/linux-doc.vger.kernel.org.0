@@ -1,278 +1,126 @@
-Return-Path: <linux-doc+bounces-87187-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87188-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qPmZBQ9hA2r65QEAu9opvQ
-	(envelope-from <linux-doc+bounces-87187-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:19:11 +0200
+	id MLk0Lb1hA2o55gEAu9opvQ
+	(envelope-from <linux-doc+bounces-87188-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:22:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8344E525AC7
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:19:10 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 295C7525BE8
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:22:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1E42D309D59C
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 17:13:28 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 695E1304C8BB
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 17:14:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F165532BF52;
-	Tue, 12 May 2026 17:13:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C160F17557E;
+	Tue, 12 May 2026 17:14:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="J0a+xZeB"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="TmnR212Q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDDA22F8BF0;
-	Tue, 12 May 2026 17:13:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59FD7385D95;
+	Tue, 12 May 2026 17:14:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778606004; cv=none; b=UO9/B5v0BKAn4z3LMZTQssIlUYy9KyprgxEWhYwfO9+k2ZxSdbXWJzn4JU2syBMD9riCIH8SALX88iX/H4CZRuy1M3UPJIdRrLJ2/H5vUDuE78x0LB7FNuILlApwz3FKQMZKgG4N1zFkXAVoqdH+lKBRJStlUu4+pZy0QxBgUEc=
+	t=1778606080; cv=none; b=NPGDFDyUfl5d9yufk9Oq4HdNPR5XbuK4GuhDBSHNW3v0FlVdZkAh4LczRBGJYr+EyD+9rE2KF51G5mAY8lsW27r7Ud+6RbU7e5WeB6T6MeXw/6VGoMJ2+ANXSdIK8KmPmUddmvzj8B7gMFJDn8AoK0i9yeSRojZ8llAda0l/syM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778606004; c=relaxed/simple;
-	bh=upy5irLRMfq5OvYLOHwa14JMBYnvWCDdOHZ+IXGw6Vo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lX/EDsSfqJm1uyE+wNjtoKfARvHEPhjZ00C6g9hd1Tzr6JrmRvbPk99B0yy+p75b1g6hSc+PxQ+9zFJKETQzS37XZDbbqLUX/a2A3pVZ/UL7xE4Vg0TmLPiaQPUuTpToBGqmf6w5oPlAdEHSbXQZlOE8KxVNh0o8XHvHLDch4sw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=J0a+xZeB; arc=none smtp.client-ip=198.175.65.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1778606003; x=1810142003;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=upy5irLRMfq5OvYLOHwa14JMBYnvWCDdOHZ+IXGw6Vo=;
-  b=J0a+xZeBbSHG6vYMnGTbw1SffMibgFC1jtOTvDrkLwdFXEz4dR2lIfVu
-   p4idV01qHnmgl3gDEvIuACZyQFsenGWXMo9uRFTfF3o+7p1lt5F16deF/
-   uGn8tFWewYVdBfWENCVg1UL0vwFI+iCh+P0NhGskiyZ/BdtO2ykZVcYBT
-   gWyg0Cr3ShTx4K0/UqdYIrFCipLSwPmTSUI9/ccu2CBGtEONmrT/4o0ut
-   rT4vj7r6XdYUrenJUroID0GZYXSlfITmCXKGL1iuFOQMZNAi9QHpJGt1p
-   u8jWxbg0cDwkXpH3wPFeWCVsD/73DKbmZzRww0e1K2YdXAHaJpSGj8S0V
-   w==;
-X-CSE-ConnectionGUID: l8vpUaBrR9WDMuLcg7y/tg==
-X-CSE-MsgGUID: 59TlNU4mQYqrA7kWkDZAew==
-X-IronPort-AV: E=McAfee;i="6800,10657,11784"; a="102186412"
-X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
-   d="scan'208";a="102186412"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 10:13:22 -0700
-X-CSE-ConnectionGUID: aFbXCRH3QOqlfQVB6TlZSg==
-X-CSE-MsgGUID: 7GUSE0AvRuaPXHqvMdzocw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
-   d="scan'208";a="236849296"
-Received: from pgcooper-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.244])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 10:13:16 -0700
-Date: Tue, 12 May 2026 20:13:14 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-Cc: Andy Shevchenko <andy.shevchenko@gmail.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>,
-	rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org,
-	linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Petr Mladek <pmladek@suse.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	David Laight <david.laight.linux@gmail.com>
-Subject: Re: [PATCH v12 02/11] lib: kstrtox: add kstrtoudec64() and
- kstrtodec64()
-Message-ID: <agNfqiZpGZAM-x_H@ashevche-desk.local>
-References: <20260510-adf41513-iio-driver-v12-2-34af2ed2779f@analog.com>
- <20260512123953.40d80bc9@jic23-huawei>
- <agMnWzMjW1LwCSyT@ashevche-desk.local>
- <sj6cpjhakyfvv6rgox6cnhl2u2tgaecugcok6fw2l7zgku5wtc@aqx3ul72vgca>
- <agMvlS3-0wvGmBwh@ashevche-desk.local>
- <dxjg2sdyxb7ieb4abmeyyye7qok6cczrxabpsjyjhcbehwoec3@sbbqoo4wmzre>
- <agM8pWrM6j_XksvN@ashevche-desk.local>
- <ur6brs3yjzyb4mtelabmcglxjltddqvjxtgl3lkdkmbjlkmnsq@bwd6rz7gided>
- <CAHp75VeoH3yVfp8NWjKfc_df0VRLkyf_SK4e==-wJOEodVjW_A@mail.gmail.com>
- <q4rmlkgecvztnvjg7b7wtqyvhdy7uxgaouvhae2mlsxaasasbf@dfakp4m5l5sl>
+	s=arc-20240116; t=1778606080; c=relaxed/simple;
+	bh=CxCtrBKKTRwjYyddIT3xIXWPrK5Mkl6rteQ00CDBDJE=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=cc1s/CdkNzPUBTb4sc1qCmenJEVXOUB3aJwC+JnW36dghMQSUuyLt4pmjJBFZay34C2YHGty/XvaRMBSwNwCeE4M2jt4Co8aMEnDySpMhSa8uBNXM98+17Q6NOer99v28GhTOKVzvfO8MITEWIrxgJYc1n4zm9kOonq6aca1/HI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=TmnR212Q; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9C2E3410B5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1778606078; bh=zZT2Gr7FzYWJ/OMZRRAd/nVaMuoIgfl6eufwoozZjto=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=TmnR212QKyjDOYBZ+yeMp6JXJJpBrRPQMSIG4KAqvNw0O/XJTsv3V1vDhOtv7jVsi
+	 8QbAMztabL13YKX6dw/swu7cP9LGvQAhkg5AKeCD5zHmxykHo5ELuva2LbZbz+6BVt
+	 RKtnDAdK0vnMIP7iA18Yucw7rK6E94HtjmnwGc5KkciCh0ptEc+NCmDCYhmWfU/Yxd
+	 0aDmW3evHL7EtOjUWP4RscINTaB589dhw9vtQN8X7R0lrHe8emn7srj2hXfY5y/WU0
+	 X6FfxfMtvfH88/gO4tUyZ95VMy6XShHOzJvxxZ+DMVhXlDfRZGsjAha1XFjnAJzsNj
+	 t+kzmBZCCkQPA==
+Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net [71.229.227.126])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 9C2E3410B5;
+	Tue, 12 May 2026 17:14:38 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Willy Tarreau <w@1wt.eu>, greg@kroah.com
+Cc: Leon Romanovsky <leon@kernel.org>, skhan@linuxfoundation.org,
+ security@kernel.org, workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Willy Tarreau <w@1wt.eu>
+Subject: Re: [PATCH v3 0/3] Documentation: security-bugs: new updates
+ covering triage and AI
+In-Reply-To: <20260509094755.2838-1-w@1wt.eu>
+References: <20260509094755.2838-1-w@1wt.eu>
+Date: Tue, 12 May 2026 11:14:37 -0600
+Message-ID: <871pfgpn2a.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <q4rmlkgecvztnvjg7b7wtqyvhdy7uxgaouvhae2mlsxaasasbf@dfakp4m5l5sl>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
-X-Rspamd-Queue-Id: 8344E525AC7
+Content-Type: text/plain
+X-Rspamd-Queue-Id: 295C7525BE8
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	TAGGED_FROM(0.00)[bounces-87187-lists,linux-doc=lfdr.de];
-	HAS_ORG_HEADER(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,analog.com,vger.kernel.org,baylibre.com,metafoo.de,lwn.net,linux-foundation.org,suse.com,goodmis.org,rasmusvillemoes.dk,chromium.org,linuxfoundation.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87188-lists,linux-doc=lfdr.de];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ashevche-desk.local:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,intel.com:dkim]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,1wt.eu:email,lwn.net:dkim,trenco.lwn.net:mid]
 X-Rspamd-Action: no action
 
-On Tue, May 12, 2026 at 05:35:59PM +0100, Rodrigo Alencar wrote:
-> On 26/05/12 06:21PM, Andy Shevchenko wrote:
-> > On Tue, May 12, 2026 at 6:11 PM Rodrigo Alencar
-> > <455.rodrigo.alencar@gmail.com> wrote:
-> > > On 26/05/12 05:43PM, Andy Shevchenko wrote:
-> > > > On Tue, May 12, 2026 at 03:12:24PM +0100, Rodrigo Alencar wrote:
-> > > > > On 26/05/12 04:48PM, Andy Shevchenko wrote:
-> > > > > > On Tue, May 12, 2026 at 02:21:14PM +0100, Rodrigo Alencar wrote:
-> > > > > > > On 26/05/12 04:12PM, Andy Shevchenko wrote:
-> > > > > > > > On Tue, May 12, 2026 at 12:39:53PM +0100, Jonathan Cameron wrote:
-> > > > > > > > > On Sun, 10 May 2026 13:42:20 +0100
-> > > > > > > > > Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org> wrote:
-> > > > > > > > >
-> > > > > > > > > > Add helpers that parses decimal numbers into 64-bit number, i.e., decimal
-> > > > > > > > > > point numbers with pre-defined scale are parsed into a 64-bit value (fixed
-> > > > > > > > > > precision). After the decimal point, digits beyond the specified scale
-> > > > > > > > > > are ignored.
-> > > > > > > > >
-> > > > > > > > > Whilst Rodrigo has already replied to say there will be another version
-> > > > > > > > > I'd like to request final feedback from those who were involved in the parser
-> > > > > > > > > discussions.
-> > > > > > > > >
-> > > > > > > > > They got very involved and I'm far from an expert in the right way to do
-> > > > > > > > > this stuff.
-> > > > > > > > >
-> > > > > > > > > I don't think David Laight was +CC so I've added that.
-> > > > > > > > > David, Andy - I think you two were most involved in that discussion:
-> > > > > > > > > Any objections to the end result?
-> > > > > > > >
-> > > > > > > > I already said a few times about the naming. I do not like the kstrto*()
-> > > > > > > > be semantically different on how they treat the input. Second point is
-> > > > > > > > to avoid code duplication, but this one is less of a concern since the
-> > > > > > > > new code is in the library close to the other potentially duplicate code
-> > > > > > > > piece and hence can be addressed later.
-> > > > > > >
-> > > > > > > I suppose I reached into kstrtodec64() and kstrtoudec64() because it aligns
-> > > > > > > with your expectations for kstrto*() semantics, no? Those include:
-> > > > > > >  - overflow check;
-> > > > > > >  - extensive input validation;
-> > > > > > >  - optional '\n' in the end;
-> > > > > > >  - mandatory nul-termination.
-> > > > > > >
-> > > > > > > am I missing anything?
-> > > > > >
-> > > > > > When we add scale we basically make that not true. Moreover the code in this
-> > > > > > patch makes scale == number_of_characters which I think a bit fragile, however
-> > > > > > it's about the fractional part when the amount of digits is equal to scale.
-> > > > >
-> > > > > That is not really the case. It is being set as a limit, so it does check for
-> > > > > truncation and zero-padding.
-> > > >
-> > > > I do not see it happens in _parse_integer_limit(). It doesn't try to parse more
-> > > > characters than it's requested in max_chars. It doesn't check if there are more
-> > > > character nor their converted values.
-> > > >
-> > > > > > To make this work as expected we need to add an additional call like
-> > > > > > kstrtoull() (and perhaps drop that \n and NUL-terminator checks) and see
-> > > > > > if that overflows or not. Since it's a fractional part it must have less
-> > > > > > than 20 (decimal) digits there, so we check the rv (or how many digits
-> > > > > > were parsed successfully) and compare to 20. If it's more, we got too many
-> > > > > > decimal digits.
-> > > > >
-> > > > > For overflow it checks the KSTRTOX_OVERFLOW flag and leverages check_mul_overflow()
-> > > > > and check_add_overflow() when combining fractional and integer parts. The amount
-> > > > > of characters is not really important there. The scale cannot be bigger than 19 and
-> > > > > that makes sure that int_pow() does not overflow. The code uses _parse_integer_limit()
-> > > > > due to the nature of input and to avoid 64-bit division, kstrtoull() at any point
-> > > > > (parsing integer or fractional parts) does not make much sense.
-> > > >
-> > > > Under 'like kstrotoull()' I meant something that repeats needed functionality.
-> > > > I believe it's parse_integer() (without limit).
-> > >
-> > > I think we are going in circles here and we could look at the code instead:
-> > > - integer parsing with _parse_integer()
-> > >         - overflow check and validation of the return value
-> > > - fractional parsing with _parse_integer_limit()
-> > >         - overflow check and validation of the return value
-> > 
-> > No, this is not fully true. That's what my whole point is about. The
-> > max_chars parameter limits the input check, then it skips an arbitrary
-> > number of digits and only *then* it checks for \n and \0. What will be
-> > the result of the
-> > 0.00000000000000000000000000000000423 in your case? Whatever scale you
-> > gave it will return 0 without checking on how many digits were
-> > supplied.
-> 
-> I suppose that is a valid input and 0 is the expected result there.
-> 
-> > All the same for 0.9999999999999999999999999999999000423. My
-> > point is that we should limit this by 19 digits.
-> 
-> why we need to limit by 19? Digits beyond the scale carry no value...
+Willy Tarreau <w@1wt.eu> writes:
 
-...only if they are all 0:s.
+> This series tries to translate recent discussions on the security list
+> on how to better handle reports. It details:
+>   - when not to Cc: the security list
+>   - what classes of bugs do not need to be handled privately
+>   - minimum requirements for AI-assisted reports
+>
+> As usual, this is probably perfectible but can already help in the short
+> term as we can point it to reporters, so barring any strong disagreement,
+> better continue to proceed in small incremental improvements and observe
+> the effects.
 
-> just like leading zeros to the integer part (which is also accepted by
-> kstrtoull() when parsing with base 10). Not sure why this is invalid input.
+OK, I've applied the series to docs-fixes; after a short exposure in
+linux-next I'll ship it Linusward.
 
-See above. I agree on truncating trailing 0:s as it's done for leading ones
-in integer part, but if any of the digit behind 19th is not 0, it's an overflow
-condition (or bad input, depending how strict the rules are).
+I have a couple of comments on the individual changes that might merit
+an eventual add-on patch.
 
-> > On top of that, what about -0.9(19 times) ? the fraction should be u64
-> > in this case and it's fine. The sign applies to the combined value.
-> 
-> yes, range for signed values are verified later.
+Thanks,
 
-> > >         - extra scaling and truncation happening outside if needed.
-> > 
-> > Right, but the given input may be way too long and still needs more validation.
-> 
-> What is the problem with a long input of digits?
-> C compiler does not complain about this when parsing a float value,
-> python does not
-> complain about this when parsing floats or decimals either.
-
-Because there is an exponent limit and for double it's something like 1e307
-IIRC, meaning, try 1024 digits to be sure.
-
-Python most likely uses the library for big numbers, you can't compare it at all with this.
-
-> > > - check for input termination
-> > > - combination of integer and fractional parts with check_mul_overflow() and check_add_overflow()
-> > >
-> > > > > > Maybe I'm missing these checks already performed?
-> > > > > >
-> > > > > > > > Having the test cases is a big benefit, and that part I like the most.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+jon
 
