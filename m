@@ -1,73 +1,74 @@
-Return-Path: <linux-doc+bounces-87138-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87141-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YBl9LJ5FA2ri2QEAu9opvQ
-	(envelope-from <linux-doc+bounces-87138-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 17:22:06 +0200
+	id cI6CKWU/A2qr2AEAu9opvQ
+	(envelope-from <linux-doc+bounces-87141-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:55:33 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AA8F52389C
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 17:22:05 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 487465230BD
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:55:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3ED853493AF5
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 14:39:27 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 90C8031DE694
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 14:45:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29B3D3CAA31;
-	Tue, 12 May 2026 14:37:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 28B003B813F;
+	Tue, 12 May 2026 14:43:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Ozd/4d/g"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="oAsvFXSa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80DF83C76AD;
-	Tue, 12 May 2026 14:37:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC5DB32143D;
+	Tue, 12 May 2026 14:43:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778596627; cv=none; b=iVwinDBUxzjcrgYCkgBVGMtceZaHO9xPxAhNsM44r9Q98/HhlM4sEF488tIV5o3o+zT7zmVWMe2pUAtgXijXRWQUFoeKfUXs9dMEBfSCWynF5w6I2eGe6WNs1Zl28F7F2j7QsW9bCao6cFMdNCr+gDBGP2zhbfYK9kub5Ky8iDk=
+	t=1778597039; cv=none; b=ATcqm/3RlYhmcQP6UHxkkiQbk7u4ifXrOMWHwr/WIR6grV9+76T5Wm0YGRmRFuY615k4SHXTSp8UyeoFvB7LoZT6M/aAW8KJZBdF0xa8Xy/cXbdWSy0WWe3s2WwMJO9TA1RaG3AKRCuZkcZprIrpje3d+rTRxnGp0yd7UCrOXtA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778596627; c=relaxed/simple;
-	bh=n9tRuu3N7iLd1tEB24+w5l1tK78xIPXc0jV0xZqyd7g=;
+	s=arc-20240116; t=1778597039; c=relaxed/simple;
+	bh=R/jhBIChVXR9kgDOd+WISzPt857TrAdWxKQz2nBrnrs=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sHrjXF0p52fXQIJ9JLoej/p9TRzBnSafKTBvedNQZ4KgfCNol7mLeL3NEBxfoJGZkWOjZzjkQCSYvXBh5U0L1zy42EsjVSxC/R6vCztpJpM20KRJxfUlg4tewLLXHNXWLxwM7LKLH2CBik7KdsscGLB2Cu2cJi3gyBJvzs3tT0U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Ozd/4d/g; arc=none smtp.client-ip=198.175.65.12
+	 Content-Type:Content-Disposition:In-Reply-To; b=F+BYDqsIOdKc84apWOostO5KqlYC8K1HrrO6kpro+/p/Yyh71iFP25B8W1cxX8qrLJBWYHLIMgmpmfThuOBgdJEXTz6WkfS/TtB9aNH+iGQ592Nx6I0JL8bjPsvhBT6pNe1u+fOTBwH2Kwv96hPGXAiWzCJYuadfb7uCg2vwvgQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=oAsvFXSa; arc=none smtp.client-ip=198.175.65.19
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1778596626; x=1810132626;
+  t=1778597037; x=1810133037;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=n9tRuu3N7iLd1tEB24+w5l1tK78xIPXc0jV0xZqyd7g=;
-  b=Ozd/4d/ggG+By9y7tgFWLYRjSwClcwGzjLfWTun8NL5zUZxKio8hw6Mf
-   EKC8Dnx+BCV9PPEwRl7UY6bvWZVCFJK5GxTS7yjmsE1SXWTZ6VC4jBh64
-   TyOIryCUxqNHCph04S3xHeyJvgyZ8CUXyAQ/GhAZNapcxcFnpEU9pNc1U
-   FQg/uxQAMYN2y44pIzFGem/46/mgLHRTe2EPpbnsmNjeW21dN8eF3O57v
-   Os+Ks6d1VY38FiQ3qBM4umUu93FdsNQZsnvoY5LSHZVb2Eo11Tk3J+RqV
-   UakELYqpDRvCAM5nGDUNMIuJ1SkL2O+076Yn8VIP7T0RVWqS8VlWzYJLt
-   Q==;
-X-CSE-ConnectionGUID: OUqZiRu+SWWQ9oZvetL0sA==
-X-CSE-MsgGUID: 3P4vNBn3QUSV69+yUnjBGw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11784"; a="90969764"
+  bh=R/jhBIChVXR9kgDOd+WISzPt857TrAdWxKQz2nBrnrs=;
+  b=oAsvFXSabNAc63pNQq5q0A723wie7n5EVd0/Y59qMB0vREq18G4bSIpi
+   Y+Od07+nATZS/sShNft8aSRyGb3z7bJlCXtWuq5gGNUXgrKDuhT2cgSZX
+   uIAzidKU5Vi2Eh/yh7ZRnh0DRJjRlbJaq/f/D34P/nV4Jh0Dw6quLiD52
+   ESPmpRmeacrYjJG7kr6L5fW3d5GYJurjhM8UN94whF8Uv8ImAw8QxeQb1
+   WiF6AfnZ6PgN7Nl7dpcJ8mhrjnul0tFUm5qGfMNyKCqAejk9bJOlyfX/9
+   0RoPd3O3oAUMCxA6tBsiGxnP56cAsynnn7HelpsGwkgG9eyRC/aOgEtEb
+   g==;
+X-CSE-ConnectionGUID: tkEaFxxDR72D+owv0RYPFA==
+X-CSE-MsgGUID: PeSqdWSQTp6OfWu5WKsWQw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11784"; a="79455322"
 X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
-   d="scan'208";a="90969764"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 07:37:05 -0700
-X-CSE-ConnectionGUID: hutQM0+SSL2Qlydyc02OIA==
-X-CSE-MsgGUID: Dgl4yHWjQQiYdbf5vLYcVw==
+   d="scan'208";a="79455322"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 07:43:57 -0700
+X-CSE-ConnectionGUID: 10bEOBdlTOGu130+WC0xcw==
+X-CSE-MsgGUID: pPYNsW0wRmOrhbpoh4wDbA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
-   d="scan'208";a="241784544"
+   d="scan'208";a="268130406"
 Received: from kniemiec-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.112])
-  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 07:37:01 -0700
-Date: Tue, 12 May 2026 17:36:57 +0300
+  by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 07:43:51 -0700
+Date: Tue, 12 May 2026 17:43:49 +0300
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: rodrigo.alencar@analog.com
-Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
+To: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
+Cc: Jonathan Cameron <jic23@kernel.org>,
+	Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>,
+	rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org,
+	linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org, David Lechner <dlechner@baylibre.com>,
 	Andy Shevchenko <andy@kernel.org>,
 	Lars-Peter Clausen <lars@metafoo.de>,
 	Michael Hennerich <Michael.Hennerich@analog.com>,
@@ -80,12 +81,18 @@ Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
 	Steven Rostedt <rostedt@goodmis.org>,
 	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
 	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: Re: [PATCH v12 06/11] iio: test: iio-test-format: add test case for
- decimal format
-Message-ID: <agM7CT4RjzwliKmb@ashevche-desk.local>
+	Shuah Khan <skhan@linuxfoundation.org>,
+	David Laight <david.laight.linux@gmail.com>
+Subject: Re: [PATCH v12 02/11] lib: kstrtox: add kstrtoudec64() and
+ kstrtodec64()
+Message-ID: <agM8pWrM6j_XksvN@ashevche-desk.local>
 References: <20260510-adf41513-iio-driver-v12-0-34af2ed2779f@analog.com>
- <20260510-adf41513-iio-driver-v12-6-34af2ed2779f@analog.com>
+ <20260510-adf41513-iio-driver-v12-2-34af2ed2779f@analog.com>
+ <20260512123953.40d80bc9@jic23-huawei>
+ <agMnWzMjW1LwCSyT@ashevche-desk.local>
+ <sj6cpjhakyfvv6rgox6cnhl2u2tgaecugcok6fw2l7zgku5wtc@aqx3ul72vgca>
+ <agMvlS3-0wvGmBwh@ashevche-desk.local>
+ <dxjg2sdyxb7ieb4abmeyyye7qok6cczrxabpsjyjhcbehwoec3@sbbqoo4wmzre>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -94,53 +101,112 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260510-adf41513-iio-driver-v12-6-34af2ed2779f@analog.com>
+In-Reply-To: <dxjg2sdyxb7ieb4abmeyyye7qok6cczrxabpsjyjhcbehwoec3@sbbqoo4wmzre>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
-X-Rspamd-Queue-Id: 0AA8F52389C
+X-Rspamd-Queue-Id: 487465230BD
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87138-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	TAGGED_FROM(0.00)[bounces-87141-lists,linux-doc=lfdr.de];
+	HAS_ORG_HEADER(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,analog.com,vger.kernel.org,baylibre.com,metafoo.de,lwn.net,linux-foundation.org,suse.com,goodmis.org,rasmusvillemoes.dk,chromium.org,linuxfoundation.org,gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TAGGED_RCPT(0.00)[linux-doc,dt];
+	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,ashevche-desk.local:mid,intel.com:dkim]
 X-Rspamd-Action: no action
 
-On Sun, May 10, 2026 at 01:42:24PM +0100, Rodrigo Alencar via B4 Relay wrote:
+On Tue, May 12, 2026 at 03:12:24PM +0100, Rodrigo Alencar wrote:
+> On 26/05/12 04:48PM, Andy Shevchenko wrote:
+> > On Tue, May 12, 2026 at 02:21:14PM +0100, Rodrigo Alencar wrote:
+> > > On 26/05/12 04:12PM, Andy Shevchenko wrote:
+> > > > On Tue, May 12, 2026 at 12:39:53PM +0100, Jonathan Cameron wrote:
+> > > > > On Sun, 10 May 2026 13:42:20 +0100
+> > > > > Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org> wrote:
+> > > > > 
+> > > > > > Add helpers that parses decimal numbers into 64-bit number, i.e., decimal
+> > > > > > point numbers with pre-defined scale are parsed into a 64-bit value (fixed
+> > > > > > precision). After the decimal point, digits beyond the specified scale
+> > > > > > are ignored.
+> > > > > 
+> > > > > Whilst Rodrigo has already replied to say there will be another version
+> > > > > I'd like to request final feedback from those who were involved in the parser
+> > > > > discussions.  
+> > > > > 
+> > > > > They got very involved and I'm far from an expert in the right way to do
+> > > > > this stuff.  
+> > > > > 
+> > > > > I don't think David Laight was +CC so I've added that.
+> > > > > David, Andy - I think you two were most involved in that discussion:
+> > > > > Any objections to the end result? 
+> > > > 
+> > > > I already said a few times about the naming. I do not like the kstrto*()
+> > > > be semantically different on how they treat the input. Second point is
+> > > > to avoid code duplication, but this one is less of a concern since the
+> > > > new code is in the library close to the other potentially duplicate code
+> > > > piece and hence can be addressed later.
+> > > 
+> > > I suppose I reached into kstrtodec64() and kstrtoudec64() because it aligns
+> > > with your expectations for kstrto*() semantics, no? Those include:
+> > >  - overflow check;
+> > >  - extensive input validation;
+> > >  - optional '\n' in the end;
+> > >  - mandatory nul-termination.
+> > > 
+> > > am I missing anything?
+> > 
+> > When we add scale we basically make that not true. Moreover the code in this
+> > patch makes scale == number_of_characters which I think a bit fragile, however
+> > it's about the fractional part when the amount of digits is equal to scale.
+> 
+> That is not really the case. It is being set as a limit, so it does check for
+> truncation and zero-padding.
 
-> Add iio_test_iio_format_value_decimal_64() kunit test case for decimal
-> value formatting, exploring different scales types. Also, the same
-> iio_val_s64_array_populate() macro used to populate local array is used in
-> iio_test_iio_format_value_integer_64().
+I do not see it happens in _parse_integer_limit(). It doesn't try to parse more
+characters than it's requested in max_chars. It doesn't check if there are more
+character nor their converted values.
 
-...
+> > To make this work as expected we need to add an additional call like
+> > kstrtoull() (and perhaps drop that \n and NUL-terminator checks) and see
+> > if that overflows or not. Since it's a fractional part it must have less
+> > than 20 (decimal) digits there, so we check the rv (or how many digits
+> > were parsed successfully) and compare to 20. If it's more, we got too many
+> > decimal digits.
+> 
+> For overflow it checks the KSTRTOX_OVERFLOW flag and leverages check_mul_overflow()
+> and check_add_overflow() when combining fractional and integer parts. The amount
+> of characters is not really important there. The scale cannot be bigger than 19 and
+> that makes sure that int_pow() does not overflow. The code uses _parse_integer_limit()
+> due to the nature of input and to avoid 64-bit division, kstrtoull() at any point
+> (parsing integer or fractional parts) does not make much sense.
 
-> +	iio_val_s64_array_populate(24, values);
+Under 'like kstrotoull()' I meant something that repeats needed functionality.
+I believe it's parse_integer() (without limit).
 
-You want to test this first...
-I think the previous patch needs new test cases.
+> > Maybe I'm missing these checks already performed?
+> > 
+> > > > Having the test cases is a big benefit, and that part I like the most.
 
 -- 
 With Best Regards,
