@@ -1,183 +1,253 @@
-Return-Path: <linux-doc+bounces-87133-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87134-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gA9RGuc4A2q11wEAu9opvQ
-	(envelope-from <linux-doc+bounces-87133-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:27:51 +0200
+	id KjIOE4E7A2oq2AEAu9opvQ
+	(envelope-from <linux-doc+bounces-87134-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:38:57 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F07522727
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:27:51 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 134BC522B50
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:38:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3A0F53162F3D
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 14:21:20 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 1612930476C4
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 14:35:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5701B3B1EE5;
-	Tue, 12 May 2026 14:20:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 919B53B5F6F;
+	Tue, 12 May 2026 14:35:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="t81N7W/N";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="1ZnWSPCT";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="MetrSyzq";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="sOo4epfI"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="jF6bMc+a"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB1F03B102B
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 14:20:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 029B83B5F67;
+	Tue, 12 May 2026 14:35:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778595607; cv=none; b=gsdXgw7JcoixuL6k6W4VTjnD/O5jVjqPHkjwAsmWMe24bthPXxW/0+2xDpDsUktPQFGutoewCVvgHzbfVj9N8T0lArshR8bksokzyJ4DbkKFExiBJQK+c8TK9Hhfw5iRuLko4NxutIjjIHMbu0p4+dMI3UVBmVqa6u/xM1crR8U=
+	t=1778596548; cv=none; b=ZvxOXJ5wbZ8FCEt7iJLS8vtxova6BLG1muweicDbmFCRcSp0B3fURWZR+LpHxI3z2kx4FKgBFxSqzhc8ucXuXzMNtU+fRrQ9fErvzzcu0WTCBChe+gjzHv9K3MTWykGR0EKpkPIGN0UPcj6pt431CZEanHcjeRxyLPKcph3qhdk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778595607; c=relaxed/simple;
-	bh=vqr1rgjf6u/HCJT7JLU1CD3nThlktkS40ND0tlqkrMM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bkEN0DruN1TEbhhhHHtdHrzpgK2niC4U6feX1bhBz6MKwqPntvkvlpxtREeHKUp6PM0FFTsLjOWDPUZX6sbV9aaeKQV8rcQ/XD1cdwrka5AE1yi7Hd+ww09cayToTD0/2X4wAvDlqmHZEQkyoYC9H8pumNh4lzFKMSZCA0l9hic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=t81N7W/N; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=1ZnWSPCT; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=MetrSyzq; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=sOo4epfI; arc=none smtp.client-ip=195.135.223.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id B75F775BB5;
-	Tue, 12 May 2026 14:20:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1778595603; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3EP1faBGLN+no503thLo6n9CBiSdMnrRO0eLXY2Tv7I=;
-	b=t81N7W/Nv8v0rvD1jUc+ze0GLTAUr0+ebiCY8NRvyVD072ReKjkvloxx4U7OkdRoEQ0zGK
-	Uc1ZQoWjOazikndFHR4w84zAYGpdIYqD2+eV4s+n1TqFD38nflnVI+RTZcChEX0At55gfC
-	drLcL8V43UizQAqY91hs8iAHs+42vQE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1778595603;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3EP1faBGLN+no503thLo6n9CBiSdMnrRO0eLXY2Tv7I=;
-	b=1ZnWSPCTE0ulbttJ5D5p1MT6QIrRfxF+4EzTeliV+7nqcWGcE93xfXPHMDBdnKLG6O+ysa
-	OgeIRotsLjQzS7Dg==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=MetrSyzq;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=sOo4epfI
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1778595602; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3EP1faBGLN+no503thLo6n9CBiSdMnrRO0eLXY2Tv7I=;
-	b=MetrSyzqzRmF15ALI99x0FOfYG+LVv5NSyeKSsp1fmVsUQXBlW9EZpI6M5rWr2BlMe4NqM
-	XV3Ubxo8H+0dPDEzfCCeuasu2JDdIi1kXn46oumn1eRCuL0kaUEk9mAwHLd+iD0XHpWU4m
-	91I+1jdBGn8ji5W9GYx7LHTsH8Lt3Jg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1778595602;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3EP1faBGLN+no503thLo6n9CBiSdMnrRO0eLXY2Tv7I=;
-	b=sOo4epfI7bN0V03WcMMc0+0wvwYdvLRapy8n5DXXujoyRA6nGGMcyk1otyobCC0j3AD1f2
-	gYwqBRX7+8vmctCQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A3313593A9;
-	Tue, 12 May 2026 14:20:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id cFX6JBE3A2rMCgAAD6G6ig
-	(envelope-from <hare@suse.de>); Tue, 12 May 2026 14:20:01 +0000
-Message-ID: <816ac704-4f46-4f00-8e84-aed892d93187@suse.de>
-Date: Tue, 12 May 2026 16:19:56 +0200
+	s=arc-20240116; t=1778596548; c=relaxed/simple;
+	bh=hvdPz87c7qZdxSSSB7hzjsR9y4UsH//SdDzMvwF4jfU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=cNHvrV7uxD3Kin0Rs8RR/ZuNuOSunHknD2jfxcv0pa0YiQPxep+IQR8bEzS53D/FGir8tMK0n31VMPpT7qqY27sLbol+Xs+1qtbMGGBtOgzGnAJuiRv4dvcq7zm/zVMTwY2jyNWKTUhZqRbu3f3RYZ5Z/vMpTpQN82RsQmIonTM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=jF6bMc+a; arc=none smtp.client-ip=198.175.65.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778596547; x=1810132547;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=hvdPz87c7qZdxSSSB7hzjsR9y4UsH//SdDzMvwF4jfU=;
+  b=jF6bMc+aVwcfoHa33xoV7jX8K9/qEyuH+2q/MStT827nxjq3bsa3RGDO
+   +Y3YGALp7LpM45kPSBsq4Zy6IpxkkpksWeqfLgwtIKdIOzMxiORkpkHen
+   SdvDzOMBRYHb2F2rbQ68fY9kJI2/Riud3jNcTlKQQ553I4dQ/c04CWXUm
+   Tj4uDOvkfWHUHZvugObCbKDa1jL99BdFnvZ9/YZeanqW9FM+YNeThoQNe
+   Jp6A7Pg2t/H4AtRmiNGrNahkKKtUaXBY+s2XX6yRuqR4h7Nrb38JjwyNn
+   Q6XAmJYjJitw4LM6LfAlwKMggFjP7lYJtmPdoq4CKYPJxAJv8b5dEfo2d
+   Q==;
+X-CSE-ConnectionGUID: J/a35NSITu2vWO8IaMPhrg==
+X-CSE-MsgGUID: +1qvTorISRGRkqS/Hv81Zg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11784"; a="79526492"
+X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
+   d="scan'208";a="79526492"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 07:35:46 -0700
+X-CSE-ConnectionGUID: 2PVtN+CoTQSucEDvtijdtw==
+X-CSE-MsgGUID: BmHGMPevQn2s7NEwtqpRdQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
+   d="scan'208";a="231380705"
+Received: from kniemiec-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.112])
+  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 07:35:41 -0700
+Date: Tue, 12 May 2026 17:35:39 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: rodrigo.alencar@analog.com
+Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Petr Mladek <pmladek@suse.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: Re: [PATCH v12 05/11] iio: core: add decimal value formatting into
+ 64-bit value
+Message-ID: <agM6uzhdn7o8g9v5@ashevche-desk.local>
+References: <20260510-adf41513-iio-driver-v12-0-34af2ed2779f@analog.com>
+ <20260510-adf41513-iio-driver-v12-5-34af2ed2779f@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/12] swap: remove the maxpages variable in sys_swapon
-To: Christoph Hellwig <hch@lst.de>, Andrew Morton
- <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
- Kairui Song <kasong@tencent.com>
-Cc: Christian Brauner <brauner@kernel.org>,
- "Darrick J . Wong" <djwong@kernel.org>, Jens Axboe <axboe@kernel.dk>,
- David Sterba <dsterba@suse.com>, Theodore Ts'o <tytso@mit.edu>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
- Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
- Namjae Jeon <linkinjeon@kernel.org>, Hyunchul Lee <hyc.lee@gmail.com>,
- Steve French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.org>,
- Carlos Maiolino <cem@kernel.org>, Damien Le Moal <dlemoal@kernel.org>,
- Naohiro Aota <naohiro.aota@wdc.com>, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-mm@kvack.org, linux-block@vger.kernel.org,
- linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org,
- linux-cifs@vger.kernel.org
-References: <20260512053625.2950900-1-hch@lst.de>
- <20260512053625.2950900-2-hch@lst.de>
-Content-Language: en-US
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20260512053625.2950900-2-hch@lst.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Spam-Score: -3.01
-X-Rspamd-Queue-Id: 20F07522727
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260510-adf41513-iio-driver-v12-5-34af2ed2779f@analog.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
+X-Rspamd-Queue-Id: 134BC522B50
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,kernel.dk,suse.com,mit.edu,gmail.com,samba.org,manguebit.org,wdc.com,vger.kernel.org,kvack.org,lists.sourceforge.net];
-	TAGGED_FROM(0.00)[bounces-87133-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87134-lists,linux-doc=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[30];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[suse.de:+];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	DKIM_TRACE(0.00)[intel.com:+];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hare@suse.de,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[andriy.shevchenko@linux.intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ashevche-desk.local:mid,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,intel.com:dkim]
 X-Rspamd-Action: no action
 
-On 5/12/26 07:35, Christoph Hellwig wrote:
-> Always use si->max which is updated setup_swap_extents instead of copying
-> into and out of maxpages.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   mm/swapfile.c | 27 +++++++++++----------------
->   1 file changed, 11 insertions(+), 16 deletions(-)
-> 
-Reviewed-by: Hannes Reinecke <hare@kernel.org>
+On Sun, May 10, 2026 at 01:42:23PM +0100, Rodrigo Alencar via B4 Relay wrote:
 
-Cheers,
+> Create new format types for iio values (IIO_VAL_DECIMAL64_*), which
+> defines the representation of fixed decimal point values into a single
+> 64-bit number. This new format increases the range of represented values,
+> allowing for integer parts greater than 2^32, as bits are not "wasted"
+> in the fractional part, which can be seen in IIO_VAL_INT_PLUS_MICRO and
+> IIO_VAL_INT_PLUS_NANO. Helpers are created to compose and decompose 64-bit
+> decimals into integer values used in IIO formatting interfaces, which
+> creates consistency and avoid error-prone manual assignments when using
+> wordpart macros. When doing the parsing, kstrtodec64() is used with the
+> scale defined by the specific decimal format type.
 
-Hannes
+...
+
+> +	case IIO_VAL_DECIMAL64_MILLI:
+> +	case IIO_VAL_DECIMAL64_MICRO:
+> +	case IIO_VAL_DECIMAL64_NANO:
+> +	case IIO_VAL_DECIMAL64_PICO:
+> +	{
+> +		s64 frac;
+> +		unsigned int scale = type - IIO_VAL_DECIMAL64_BASE;
+
+Can we stick with reversed xmas tree order?
+
+> +		tmp2 = div64_s64_rem(iio_val_s64_from_array(vals),
+> +				     int_pow(10, scale), &frac);
+> +		if (tmp2 == 0 && frac < 0)
+> +			return sysfs_emit_at(buf, offset, "-0.%0*lld", scale,
+> +					     abs(frac));
+> +		else
+> +			return sysfs_emit_at(buf, offset, "%lld.%0*lld", tmp2,
+> +					     scale, abs(frac));
+> +	}
+
+What about
+
+		/* Print a leading '-' for negative fractions */
+		if (tmp2 == 0 && frac < 0)
+			offset += sysfs_emit_at(buf, offset, "-");
+
+		return sysfs_emit_at(buf, offset, "%lld.%0*lld", tmp2, scale, abs(frac));
+
+Also note this won't work with the frac that are == S64_MIN. It's UB (undefined
+behaviour), see the comment at abs() implementation. Maybe a time to add abs()
+corner case tests...
+
+...
+
+>  	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+>  	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
+> -	int ret, fract_mult = 100000;
+> +	int type, ret, fract_mult = 100000, dec_scale = 0;
+
+I wouldn't mix ret here and put it...
+
+>  	int integer, fract = 0;
+>  	long long integer64;
+>  	bool is_char = false;
+
+...as standalone here
+
+	int ret;
+
+
+...
+
+> +#include <linux/wordpart.h>
+
++ blank line.
+
+>  #include <uapi/linux/iio/types.h>
+
+...
+
+>  #define IIO_VAL_FRACTIONAL_LOG2 11
+>  #define IIO_VAL_CHAR 12
+>  
+> +#define IIO_VAL_DECIMAL64_BASE		100
+
+Okay, but I would rather see something smaller like 32 or 64.
+
+...
+
+> +static inline s64 iio_val_s64_compose(int val0, int val1)
+
+Hmm... s64 composed form two int:s...
+
+> +{
+> +	return (s64)(((u64)val1 << 32) | (u32)val0);
+> +}
+> +
+> +static inline s64 iio_val_s64_from_array(const int *vals)
+
+When I see 'array' in the name, I think of real array and some index. Here is
+no index available. Perhaps
+
+static inline s64 iio_val_s64_from_s32s(const s32 *vals)
+
+> +{
+> +	return iio_val_s64_compose(vals[0], vals[1]);
+> +}
+> +
+> +static inline void iio_val_s64_decompose(s64 dec64, int *val0, int *val1)
+> +{
+> +	*val0 = lower_32_bits(dec64);
+> +	*val1 = upper_32_bits(dec64);
+> +}
+> +
+> +static inline void iio_val_s64_array_populate(s64 dec64, int *vals)
+
+_to_array() or _to_s32s()
+
+> +{
+> +	iio_val_s64_decompose(dec64, &vals[0], &vals[1]);
+> +}
+
 -- 
-Dr. Hannes Reinecke                  Kernel Storage Architect
-hare@suse.de                                +49 911 74053 688
-SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
-HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
+With Best Regards,
+Andy Shevchenko
+
+
 
