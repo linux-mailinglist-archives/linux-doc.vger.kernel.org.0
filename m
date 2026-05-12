@@ -1,217 +1,137 @@
-Return-Path: <linux-doc+bounces-87120-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87122-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mLkiHTkwA2qN1QEAu9opvQ
-	(envelope-from <linux-doc+bounces-87120-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 15:50:49 +0200
+	id oAB7IPI1A2of1wEAu9opvQ
+	(envelope-from <linux-doc+bounces-87122-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:15:14 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26D5E521A93
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 15:50:49 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93B5E5221ED
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 16:15:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 0BE6A30219B3
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:37:48 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 11ECB306B324
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:45:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FC9A39060C;
-	Tue, 12 May 2026 13:37:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81933397B09;
+	Tue, 12 May 2026 13:45:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="SmkbhXTV"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Vw1RxebF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E8593876DB
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 13:37:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EA1F397B08;
+	Tue, 12 May 2026 13:45:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778593067; cv=none; b=VYOMk9L7a3hqVnbj7u7Df3yqdMQ8iNHGPUVaYS2xe2WDRQisgUgpjHUiZYOAlnDrIJxiLSneqeTGipEK0kN6ulOaI93tKzuM2w7eRa4nLajqxKUN/Wr8SX0pWjh6EFFrr/i7PogLVvCn9oBjixfMEJ3fPSNLMSk7h0fbPeShV+Q=
+	t=1778593545; cv=none; b=hI6DGAX0R7Z+4EjgFG+v3iRTz+1uAtX4PVDqGamuBP0Yc2R02DZD34Rgyoih+VuKXOjESxtpxFz/oU1VRW1R+V8YY7hwoLixtse2EKdCyZbyr/JDLKBlGckgbe5X++fkI4gzTypEnD8ectD9nONXgQjOciaWCzNfGIhnpq9hBmk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778593067; c=relaxed/simple;
-	bh=Gvl4cEd1ZiXBIpJHrKLmqu+T8vzwYIr7JhCY27iDUns=;
+	s=arc-20240116; t=1778593545; c=relaxed/simple;
+	bh=HfpR7Lg+TxySR9F/nG8/aNLHRsyiPEjAeogvOILEcVs=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VH7AiMN248/g+8oEN26sxyiygnGVI3F7eypV1+xpEmEBe0jjXMi4htaKGk4F3a9bvZvVCa/yiQ0dVt1bPMZte7uK2QMPC0sEKi7p4JYX4MzykTQFT47WNG7VStSrbO9nDL0j0z9kZLJdWkbw2fZ8G3TIlHmiRWSCkfNsUehgGq8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=SmkbhXTV; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 35BE71655
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 06:37:38 -0700 (PDT)
-Received: from [192.168.0.1] (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 3D7933F85F
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 06:37:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1778593063; bh=Gvl4cEd1ZiXBIpJHrKLmqu+T8vzwYIr7JhCY27iDUns=;
+	 Content-Type:Content-Disposition:In-Reply-To; b=ibU8iIe4eJ6b7izBqsMMlq1si8zD8yVrD5YXoUMvZrkFsUg2oyFUMRT+f7YEHBsNLwW8DhoCaH58YT9GwuVKcatGZvI8yNJdRjNqC6WtM5u9qH5L0wfKit7aTi5oUnV3hJriIY9o/hwQo4tSuDUREFZVK0MEMNG1kA54B9aUqig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Vw1RxebF; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 948CBC2BCF5;
+	Tue, 12 May 2026 13:45:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778593544;
+	bh=HfpR7Lg+TxySR9F/nG8/aNLHRsyiPEjAeogvOILEcVs=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=SmkbhXTVQ4Am3n6qsiNkScVF6SaqJvIyY/lnu9sOOiYVtn9FXqBTDnQiSylgs6ust
-	 k17HRPg9kd42vpezpCCWNRpjSPS3GX1FkAgpCaQkvKx+Oa1h1az7Bu40C/p70HdYhP
-	 YtYlzd35p6+AUF/76LYYfydcVUulfxWlE21vjwuo=
-Date: Tue, 12 May 2026 14:37:21 +0100
-From: Liviu Dudau <liviu.dudau@arm.com>
-To: Ketil Johnsen <ketil.johnsen@arm.com>
-Cc: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Jonathan Corbet <corbet@lwn.net>,
+	b=Vw1RxebFKUBHRY3SX7b0fato7ilJgCagkpY07ahGDxfNAgH7vBOKWxyKV8Y1yi5xH
+	 FYmuye8YvIKJ2cD7oTH28LBkictnO28FIkRMWM81TruLj/y1xLYJze4vJ4DcnXGP7e
+	 7IgLRWXgpiOt3o4Hjdd8CYbrN9FbGhtr8tH84AozusvCdYahLJuTbkbwGb3DOrFKgN
+	 g0jyMUaIjGlAdpWdELjjTHhY00s9Hk+0ORKHcYd6xOXZOKHNAZT1dmZYlqnKr8FRDN
+	 Pjm5VX0hDlxzxorRJG+PNA8NxExqOfE0SqximNaNhN4QcHGy1sFd2oqjaDvGfR4JG5
+	 tv9l/J/CDAsDA==
+Date: Tue, 12 May 2026 15:45:42 +0200
+From: Frederic Weisbecker <frederic@kernel.org>
+To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Cc: LKML <linux-kernel@vger.kernel.org>,
+	Gabriele Monaco <gmonaco@redhat.com>,
+	Ingo Molnar <mingo@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Marco Crivellari <marco.crivellari@suse.com>,
+	Michal Hocko <mhocko@kernel.org>,
+	"Paul E . McKenney" <paulmck@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>, Phil Auld <pauld@redhat.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Valentin Schneider <vschneid@redhat.com>,
+	Vlastimil Babka <vbabka@suse.cz>, Waiman Long <longman@redhat.com>,
+	linux-doc@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
-	Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <jstultz@google.com>,
-	"T.J. Mercier" <tjmercier@google.com>,
-	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Steven Price <steven.price@arm.com>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Alice Ryhl <aliceryhl@google.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	linaro-mm-sig@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org
-Subject: Re: [PATCH 3/8] drm/panthor: De-duplicate FW memory section sync
-Message-ID: <agMtEXOqPGEwKuwt@e142607>
-References: <20260505140516.1372388-1-ketil.johnsen@arm.com>
- <20260505140516.1372388-4-ketil.johnsen@arm.com>
+	John Ogness <john.ogness@linutronix.de>
+Subject: Re: [PATCH] Documentation/kernel-parameters: Remove "Deprecated"
+ from isolcpus=
+Message-ID: <agMvBj4V-XLVaa0_@localhost.localdomain>
+References: <20260427150739.bwVmmkj2@linutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260505140516.1372388-4-ketil.johnsen@arm.com>
-X-Rspamd-Queue-Id: 26D5E521A93
+In-Reply-To: <20260427150739.bwVmmkj2@linutronix.de>
+X-Rspamd-Queue-Id: 93B5E5221ED
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[arm.com:s=foss];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87120-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[27];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-87122-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,lwn.net,linuxfoundation.org,linaro.org,collabora.com,arm.com,google.com,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.infradead.org];
+	RCVD_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,redhat.com,kernel.org,lwn.net,suse.com,infradead.org,goodmis.org,linutronix.de,suse.cz,gmail.com,linuxfoundation.org];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[liviu.dudau@arm.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[arm.com:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[frederic@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,arm.com:email,arm.com:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,localhost.localdomain:mid]
 X-Rspamd-Action: no action
 
-On Tue, May 05, 2026 at 04:05:09PM +0200, Ketil Johnsen wrote:
-> Handle the sync to device of FW memory sections inside
-> panthor_fw_init_section_mem() so that the callers do not have to.
+Le Mon, Apr 27, 2026 at 05:07:39PM +0200, Sebastian Andrzej Siewior a �crit :
+> The isolcpus= option has been marked as deprecated in 2017. Back then it
+> was desired for the domain sub option to be configured dynamically at
+> runtime instead using this boot command line which provides a static
+> configuration. In the meantime this option was extended by other sub
+> options which don't have runtime counterpart or it does not make sense
+> to provide one.
 > 
-> This small improvement is also critical for protected FW sections,
-> so we avoid issuing memory transactions to protected memory from
-> CPU running in normal mode.
+> The deprecated part always referred to the default `domain' sub option
+> but it was not obvious. Also the reasoning behind the deprecation is
+> sort of dubious: There is nothing wrong with a static configuration if
+> there is no desired to reconfigure. This is useful on systems which
+> have one purpose and the CPU partition configuration is not changed for
+> the entire lifetime.
 > 
-> Signed-off-by: Ketil Johnsen <ketil.johnsen@arm.com>
+> Remove the "Deprecated" note. Remove the part of the description which
+> suggest to use cpuset.sched_load_balance and instead point to the
+> documentation file which explains how to use cpusets to configure this
+> at runtime.
+> 
+> Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
 
-Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
-
-Best regards,
-Liviu
-
-> ---
->  drivers/gpu/drm/panthor/panthor_fw.c | 22 ++++++----------------
->  1 file changed, 6 insertions(+), 16 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/panthor/panthor_fw.c b/drivers/gpu/drm/panthor/panthor_fw.c
-> index be0da5b1f3abf..0d07a133dc3af 100644
-> --- a/drivers/gpu/drm/panthor/panthor_fw.c
-> +++ b/drivers/gpu/drm/panthor/panthor_fw.c
-> @@ -446,6 +446,7 @@ static void panthor_fw_init_section_mem(struct panthor_device *ptdev,
->  					struct panthor_fw_section *section)
->  {
->  	bool was_mapped = !!section->mem->kmap;
-> +	struct sg_table *sgt;
->  	int ret;
->  
->  	if (!section->data.size &&
-> @@ -464,6 +465,11 @@ static void panthor_fw_init_section_mem(struct panthor_device *ptdev,
->  
->  	if (!was_mapped)
->  		panthor_kernel_bo_vunmap(section->mem);
-> +
-> +	/* An sgt should have been requested when the kernel BO was GPU-mapped. */
-> +	sgt = to_panthor_bo(section->mem->obj)->dmap.sgt;
-> +	if (!drm_WARN_ON_ONCE(&ptdev->base, !sgt))
-> +		dma_sync_sgtable_for_device(ptdev->base.dev, sgt, DMA_TO_DEVICE);
->  }
->  
->  /**
-> @@ -626,7 +632,6 @@ static int panthor_fw_load_section_entry(struct panthor_device *ptdev,
->  	section_size = hdr.va.end - hdr.va.start;
->  	if (section_size) {
->  		u32 cache_mode = hdr.flags & CSF_FW_BINARY_IFACE_ENTRY_CACHE_MODE_MASK;
-> -		struct panthor_gem_object *bo;
->  		u32 vm_map_flags = 0;
->  		u64 va = hdr.va.start;
->  
-> @@ -663,14 +668,6 @@ static int panthor_fw_load_section_entry(struct panthor_device *ptdev,
->  		}
->  
->  		panthor_fw_init_section_mem(ptdev, section);
-> -
-> -		bo = to_panthor_bo(section->mem->obj);
-> -
-> -		/* An sgt should have been requested when the kernel BO was GPU-mapped. */
-> -		if (drm_WARN_ON_ONCE(&ptdev->base, !bo->dmap.sgt))
-> -			return -EINVAL;
-> -
-> -		dma_sync_sgtable_for_device(ptdev->base.dev, bo->dmap.sgt, DMA_TO_DEVICE);
->  	}
->  
->  	if (hdr.va.start == CSF_MCU_SHARED_REGION_START)
-> @@ -724,17 +721,10 @@ panthor_reload_fw_sections(struct panthor_device *ptdev, bool full_reload)
->  	struct panthor_fw_section *section;
->  
->  	list_for_each_entry(section, &ptdev->fw->sections, node) {
-> -		struct sg_table *sgt;
-> -
->  		if (!full_reload && !(section->flags & CSF_FW_BINARY_IFACE_ENTRY_WR))
->  			continue;
->  
->  		panthor_fw_init_section_mem(ptdev, section);
-> -
-> -		/* An sgt should have been requested when the kernel BO was GPU-mapped. */
-> -		sgt = to_panthor_bo(section->mem->obj)->dmap.sgt;
-> -		if (!drm_WARN_ON_ONCE(&ptdev->base, !sgt))
-> -			dma_sync_sgtable_for_device(ptdev->base.dev, sgt, DMA_TO_DEVICE);
->  	}
->  }
->  
-> -- 
-> 2.43.0
-> 
+Acked-by: Frederic Weisbecker <frederic@kernel.org>
 
 -- 
-====================
-| I would like to |
-| fix the world,  |
-| but they're not |
-| giving me the   |
- \ source code!  /
-  ---------------
-    ¯\_(ツ)_/¯
+Frederic Weisbecker
+SUSE Labs
 
