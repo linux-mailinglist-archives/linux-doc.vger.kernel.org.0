@@ -1,251 +1,207 @@
-Return-Path: <linux-doc+bounces-87121-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87118-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sN29CagwA2oA1gEAu9opvQ
-	(envelope-from <linux-doc+bounces-87121-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 15:52:40 +0200
+	id ULX7HHsuA2qN1QEAu9opvQ
+	(envelope-from <linux-doc+bounces-87118-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 15:43:23 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93B5B521B58
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 15:52:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6B4F5217C7
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 15:43:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D62F7308BCB9
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:42:52 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E764231F0711
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:34:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0323B394EA5;
-	Tue, 12 May 2026 13:42:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A65F390601;
+	Tue, 12 May 2026 13:34:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="U8T/a2CV"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="DOX6gKst"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from jpms-ob01.noc.sony.co.jp (jpms-ob01.noc.sony.co.jp [211.125.140.164])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 697663911A6;
-	Tue, 12 May 2026 13:42:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.125.140.164
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 523ED3812C8;
+	Tue, 12 May 2026 13:34:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778593371; cv=none; b=qRRZRw7Ii7MoHVN8B/O/+Fl7h90KVwluJ5KPDlIHEcEp6dr7Dyo/ci4J00xWaOuKhKpqdz172jLJFssnqsFmo4/C1GcUdjM9ISdt0lcGJ1cKceQqmixvyqifqUv1i6yamaxVVbL4rsA1MDNrAnLl5leUtZmepCp+jNcY1JQZFkA=
+	t=1778592855; cv=none; b=TTWugu5SNW9YwtnkxfYPZp4HyWd4FlhrO3lyGgwcyUphEGyuknw8w2T89/aEzBegp5B01MEkKO3MByRaz6kvrKys3uEEZFXIvOXWvPfqU12c/c13tjtvWTxQL6he6FsrEncL7diunBNbV51P+FvxertS9kBP2KaeFj//jHB1MkA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778593371; c=relaxed/simple;
-	bh=aCbLkkEb8CmTjTx67o+7g0qb4DJL+BCzbnRWwd1nKi4=;
+	s=arc-20240116; t=1778592855; c=relaxed/simple;
+	bh=n1r1R/3grt+L5tmK8Q8JI5N6N+PYMNzn5ZWqv6i29BM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XlLUUvZ3B/NPyFsSVjnlaFRJ10ng+lEDGTSNKkrbudZB/38ic1eq5ZG31hgd2bJ8Q2v2vdgAglhS4UHR2MCk101Og/oV2V5QyEbJblDFX7AjuoFUiFuisEFcnPOBA8ZPkbbbfUXf9uQOg6N2YO/d7dMHD6KyUbJf0V48HS1/j14=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=pass smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=U8T/a2CV; arc=none smtp.client-ip=211.125.140.164
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sony.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=sony.com; s=s1jp; t=1778593369; x=1810129369;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=zCAAJwp1uN+g2GJ/FoC38hHQLXrzoMaWan6fUELQijA=;
-  b=U8T/a2CVZiCrhcyMhK/U+szmfw0aWKJGuC23SaMVX/ZPbk6QJP0P4NqX
-   3/wq51nbXmeLEodFMDmoHBicxJoj884xvlxX4btVRP3Y+JmsPajm76KHn
-   MdlS+OJCDldR98YRkoOujd46/PDFVFK58bhl5mK+Sbg6QSBgBciLEN3tT
-   CYUsprqofpQIPkal/QF493cJIlpkznyJ/np4Qnc0gRLcw7tqbGLnaht8b
-   G+CgdVYbnUBslj3cL2a5yL9A4gbpdro7j8xqj+AuBR1n89bxmvknKS+7t
-   XcwXYzM8U1Fgh/w0eUUEJd7TKSATztO76W/mkLlqSr+ebMnj8D6hxMoav
-   g==;
-X-CSE-ConnectionGUID: etA6HqxzTd2ZEdx1jYcwtg==
-X-CSE-MsgGUID: ok2476mJQkmi+p1sDAMcjg==
-Received: from unknown (HELO jpmta-ob1.noc.sony.co.jp) ([IPv6:2001:cf8:0:6e7::6])
-  by jpms-ob01.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 22:32:39 +0900
-X-CSE-ConnectionGUID: mNNKHimMRcquTd1VVSnX2g==
-X-CSE-MsgGUID: Xv8Ksh8fRDO0yoXAS/EB/g==
-X-IronPort-AV: E=Sophos;i="6.23,231,1770562800"; 
-   d="scan'208";a="637606608"
-Received: from unknown (HELO JPC00244420) ([IPv6:2001:cf8:1:573:0:dddd:6b3e:119e])
-  by jpmta-ob1.noc.sony.co.jp with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 22:32:37 +0900
-Date: Tue, 12 May 2026 22:32:37 +0900
-From: Shashank Balaji <shashank.mahadasyam@sony.com>
-To: Sumit Gupta <sumitg@nvidia.com>
-Cc: Jon Hunter <jonathanh@nvidia.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	James Clark <james.clark@linaro.org>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
-	Boqun Feng <boqun@kernel.org>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Petr Pavlu <petr.pavlu@suse.com>,
-	Daniel Gomez <da.gomez@kernel.org>,
-	Sami Tolvanen <samitolvanen@google.com>,
-	Aaron Tomlin <atomlin@atomlin.com>, Mike Leach <mike.leach@arm.com>,
-	Leo Yan <leo.yan@arm.com>, Rahul Bukte <rahul.bukte@sony.com>,
-	linux-kernel@vger.kernel.org, coresight@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org, driver-core@lists.linux.dev,
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org,
-	Daniel Palmer <daniel.palmer@sony.com>,
-	Tim Bird <tim.bird@sony.com>, linux-modules@vger.kernel.org,
-	linux-tegra@vger.kernel.org
-Subject: Re: [PATCH v4 1/4] kernel: param: initialize module_kset before
- do_initcalls()
-Message-ID: <agMr9Vo3nYu623Y-@JPC00244420>
-References: <20260427-acpi_mod_name-v4-0-22b42240c9bf@sony.com>
- <20260427-acpi_mod_name-v4-1-22b42240c9bf@sony.com>
- <DI3Z28IZZOT9.349TTWNN9VDMB@garyguo.net>
- <afABOMT_s9DvF6NY@JPC00244420>
- <DI4QQA6EGIA1.N8WRFWVKG91S@garyguo.net>
- <afCxHUrjr3Z22U6V@JPC00244420>
- <agKMcA7a_UqMua5V@JPC00244420>
- <40c3aab2-b5cf-4297-9b14-3ccfea377c83@nvidia.com>
- <0d9e5a78-948e-42da-9d37-78cc2a700cd6@nvidia.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=OElY6faQfi4kwK6kZ3kyXLY8Z7mQmj2ynGrc7sxthpahZo1i6Af6C6S7Y5ej2FfeNhyTuil/bmJlm/Hb/QFrc/ly545U7RA0xHBBkKvPXUM2+Q+jJ4HJ6D7FYekinF1V6f0rdl0lDfAYY7QrkaGKgtr6o2Wk26vBAYxptKyMWV4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=DOX6gKst; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=7WkcVadBrY1XKpqeX0xMjVFVAlCVexI4mnyeEkffHUE=; b=DOX6gKstXwYkD/1QVtjEgDYhjg
+	xMQ/0N8TErdX0WA4LFweELRgU+9lEIJbdD5IJkkFgbNULe7AGsD1U+vCIP+QXYJqeh8sZ0KuqZilG
+	0xt82S9d0KoknAVHlrKCDRnHgiWf3I+qy08pIXKogB1L3P64bAtXSoQX33nPD0Y8+PXNcLGsS6s12
+	2vlSK+O5cFSCjPFYUiKYQXaFMW05cG5TldGW3RPlF9DJbXe/UnxiijRdkKOHeR+q9xoJAsJ++awON
+	OEc856Y6OErMCUcydm8uArBRUaxKx4FKJ4TSnSHzZ6STcEzROb12BnNonw4bnjMCpM/syN9MJLQ18
+	E5i00zbQ==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wMnF6-002PSz-1Y;
+	Tue, 12 May 2026 13:33:48 +0000
+Date: Tue, 12 May 2026 06:33:41 -0700
+From: Breno Leitao <leitao@debian.org>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Miaohe Lin <linmiaohe@huawei.com>, 
+	Naoya Horiguchi <nao.horiguchi@gmail.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Lorenzo Stoakes <ljs@kernel.org>, Vlastimil Babka <vbabka@kernel.org>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>, 
+	Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, 
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, "Liam R. Howlett" <liam@infradead.org>, linux-mm@kvack.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, kernel-team@meta.com, Lance Yang <lance.yang@linux.dev>
+Subject: Re: [PATCH v6 2/4] mm/memory-failure: classify get_any_page()
+ failures by reason
+Message-ID: <agMpqhpgmezqnaA_@gmail.com>
+References: <20260511-ecc_panic-v6-0-183012ba7d4b@debian.org>
+ <20260511-ecc_panic-v6-2-183012ba7d4b@debian.org>
+ <28b01c14-3d87-4cab-b695-5b9015578785@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0d9e5a78-948e-42da-9d37-78cc2a700cd6@nvidia.com>
-X-Rspamd-Queue-Id: 93B5B521B58
+In-Reply-To: <28b01c14-3d87-4cab-b695-5b9015578785@kernel.org>
+X-Debian-User: leitao
+X-Rspamd-Queue-Id: E6B4F5217C7
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[sony.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[sony.com:s=s1jp];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87121-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[40];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[nvidia.com,kernel.org,garyguo.net,arm.com,linaro.org,linux.intel.com,gmail.com,foss.st.com,linuxfoundation.org,protonmail.com,google.com,umich.edu,lwn.net,suse.com,atomlin.com,sony.com,vger.kernel.org,lists.linaro.org,lists.infradead.org,lists.linux.dev];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87118-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FREEMAIL_CC(0.00)[huawei.com,gmail.com,linux-foundation.org,lwn.net,linuxfoundation.org,kernel.org,google.com,suse.com,goodmis.org,efficios.com,infradead.org,kvack.org,vger.kernel.org,meta.com,linux.dev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[shashank.mahadasyam@sony.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[sony.com:+];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nvidia.com:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Tue, May 12, 2026 at 05:44:40PM +0530, Sumit Gupta wrote:
+On Tue, May 12, 2026 at 10:21:50AM +0200, David Hildenbrand (Arm) wrote:
 > 
-> On 12/05/26 14:25, Jon Hunter wrote:
-> > Hi Shashank,
-> > 
-> > On 12/05/2026 03:12, Shashank Balaji wrote:
-> > 
-> > ...
-> > 
-> > > > Hi Thierry and Jonathan,
-> > > > 
-> > > > You can find the context for this email in this patch:
-> > > > https://lore.kernel.org/all/20260427-acpi_mod_name-v4-1-22b42240c9bf@sony.com/
-> > > > 
-> > > > 
-> > > > TL;DR: tegra194_cbb_driver and tegra234_cbb_driver are the only drivers
-> > > > registering themselves as early as in a pure_initcall. This is a
-> > > > problem
-> > > > on two fronts:
-> > > > 1. Philosophical: As Gary pointed out, pure_initcalls are
-> > > > intended to purely
-> > > > initialize variables that couldn't be statically initialized. But these
-> > > > are doing driver registrations.
-> > > > 2. module_kset not initialized at pure_initcall stage: This is
-> > > > needed to
-> > > > set the module sysfs symlink. Since module_kset is not alive yet during
-> > > > pure_initcalls, registering these drivers panics the kernel.
-> > 
-> > Where exactly is this panic seen? Ie. why are we not seeing this?
-
-The panic happens as a result of this patch series. This series aims to
-set .mod_name of struct device_driver for platform drivers. So that, for
-built-in drivers, their module sysfs symlink can be created on the basis
-of .modname. We essentially want to link a platform driver to its
-module. This happens naturally if the driver is built as a loadable
-module, but for this to happen for built-in modules, .mod_name needs to be set.
-
-To go from .mod_name to the module sysfs symlink, the module_kset kset
-needs to be initialized. This currently happens in a subsys_initcall.
-These tegra cbb drivers register themselves in a pure_initcall, i.e.
-before subsys_initcall, leading to a null dereference of module_kset.
-
-To fix this, we want to move the module_kset creation to pure_initcall,
-and tegra cbb driver registration to core_initcall, so after
-pure_initcall.
-
-> > > > We would like to do the tegra cbb driver registration in a
-> > > > core_initcall
-> > > > (or some later initcall works too), and move module_kset initialization
-> > > > to a pure_initcall. Like this:
-> > > > 
-> > > > diff --git a/drivers/soc/tegra/cbb/tegra194-cbb.c
-> > > > b/drivers/soc/tegra/cbb/tegra194-cbb.c
-> > > > index ab75d50cc85c..2f69e104c838 100644
-> > > > --- a/drivers/soc/tegra/cbb/tegra194-cbb.c
-> > > > +++ b/drivers/soc/tegra/cbb/tegra194-cbb.c
-> > > > @@ -2342,7 +2342,7 @@ static int __init tegra194_cbb_init(void)
-> > > >   {
-> > > >          return platform_driver_register(&tegra194_cbb_driver);
-> > > >   }
-> > > > -pure_initcall(tegra194_cbb_init);
-> > > > +core_initcall(tegra194_cbb_init);
-> > > > 
-> > > >   static void __exit tegra194_cbb_exit(void)
-> > > >   {
-> > > > diff --git a/drivers/soc/tegra/cbb/tegra234-cbb.c
-> > > > b/drivers/soc/tegra/cbb/tegra234-cbb.c
-> > > > index fb26f085f691..785072fa4e85 100644
-> > > > --- a/drivers/soc/tegra/cbb/tegra234-cbb.c
-> > > > +++ b/drivers/soc/tegra/cbb/tegra234-cbb.c
-> > > > @@ -1774,7 +1774,7 @@ static int __init tegra234_cbb_init(void)
-> > > >   {
-> > > >          return platform_driver_register(&tegra234_cbb_driver);
-> > > >   }
-> > > > -pure_initcall(tegra234_cbb_init);
-> > > > +core_initcall(tegra234_cbb_init);
-> > > > 
-> > > >   static void __exit tegra234_cbb_exit(void)
-> > > >   {
-> > > > 
-> > > > Would this work?
-> > 
-> > 
-> > I am adding Sumit who has been doing a lot of the Tegra CBB driver work.
-> > 
-> > Sumit, any concerns here? We could run this change through our internal
-> > testing to confirm.
-> > 
-> > Jon
-> > 
+> >  		}
+> >  		goto unlock_mutex;
+> >  	} else if (res < 0) {
+> > -		if (is_reserved)
+> > +		/*
+> > +		 * Promote a stable unhandlable kernel page diagnosed by
+> > +		 * get_hwpoison_page() to MF_MSG_KERNEL alongside reserved
+> > +		 * pages; transient lifecycle races stay as MF_MSG_GET_HWPOISON.
+> > +		 */
+> > +		if (is_reserved || gp_status == MF_GET_PAGE_UNHANDLABLE)
+> >  			res = action_result(pfn, MF_MSG_KERNEL, MF_IGNORED);
 > 
-> CBB driver can be switched to core_initcall.
-> pure_initcall was originally added so its IRQ handler is registered
-> before other Tegra drivers to catch and print any bad MMIO error
-> during their probe.
-> Looked at the current state of Tegra drivers:
->  - The other early Tegra drivers (PMC, fuse, flowctrl, ARI) all run at
->    early_initcall, before either pure_ or core_initcall.
->  - The only other Tegra core_initcall is tegra-hsp, and link order keeps
->    CBB ahead of it (drivers/soc/ links before drivers/mailbox/).
 > 
-> Acked-by: Sumit Gupta <sumitg@nvidia.com>
+> It's all a bit of a mess. get_hwpoison_page() should just indicate that a page
+> is unhandable if it is PG_reserved?
 
-Thanks, Sumit and Jon!
+Are you saying that we should identify if the page is PG_reserved in
+get_hwpoison_page() instead of in memory_failure(), as done in the
+previous patch ("mm/memory-failure: report MF_MSG_KERNEL for reserved
+pages") ?
+
+> Why can't we just return a special error code from  get_hwpoison_page()? We ahve
+> plenty of errno values to chose from.
+
+Something like:
+
+
+diff --git a/mm/memory-failure.c b/mm/memory-failure.c
+index 866c4428ac7ef..0a6d83575833e 100644
+--- a/mm/memory-failure.c
++++ b/mm/memory-failure.c
+@@ -878,7 +878,7 @@ static const char *action_name[] = {
+ };
+ 
+ static const char * const action_page_types[] = {
+-	[MF_MSG_KERNEL]			= "reserved kernel page",
++	[MF_MSG_KERNEL]			= "unrecoverable kernel page",
+ 	[MF_MSG_KERNEL_HIGH_ORDER]	= "high-order kernel page",
+ 	[MF_MSG_HUGE]			= "huge page",
+ 	[MF_MSG_FREE_HUGE]		= "free huge page",
+@@ -1394,6 +1394,21 @@ static int get_any_page(struct page *p, unsigned long flags)
+ 	int ret = 0, pass = 0;
+ 	bool count_increased = false;
+
++	if (PageReserved(p)) {
++		ret = -ENOTRECOVERABLE;
++		goto out;
++	}
++
+ 	if (flags & MF_COUNT_INCREASED)
+ 		count_increased = true;
+ 
+@@ -1422,7 +1437,7 @@ static int get_any_page(struct page *p, unsigned long flags)
+ 				shake_page(p);
+ 				goto try_again;
+ 			}
+-			ret = -EIO;
++			ret = -ENOTRECOVERABLE;
+ 			goto out;
+ 		}
+ 	}
+@@ -1441,10 +1456,10 @@ static int get_any_page(struct page *p, unsigned long flags)
+ 			goto try_again;
+ 		}
+ 		put_page(p);
+-		ret = -EIO;
++		ret = -ENOTRECOVERABLE;
+ 	}
+ out:
+-	if (ret == -EIO)
++	if (ret == -EIO || ret == -ENOTRECOVERABLE)
+ 		pr_err("%#lx: unhandlable page.\n", page_to_pfn(p));
+ 
+ 	return ret;
+@@ -2431,6 +2448,9 @@ int memory_failure(unsigned long pfn, int flags)
+ 			res = action_result(pfn, MF_MSG_KERNEL_HIGH_ORDER, MF_IGNORED);
+ 		}
+ 		goto unlock_mutex;
++	} else if (res == -ENOTRECOVERABLE) {
++		res = action_result(pfn, MF_MSG_KERNEL, MF_IGNORED);
++		goto unlock_mutex;
+ 	} else if (res < 0) {
+ 		res = action_result(pfn, MF_MSG_GET_HWPOISON, MF_IGNORED);
+ 		goto unlock_mutex;
+
+
+If that is what you are suggestion, maybe we can create another
+MF_MSG_RESERVED? and another return value for get_any_page() to track
+the reserve pages ?
+
+Thanks for the review and suggestions,
+--breno
 
