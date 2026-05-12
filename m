@@ -1,85 +1,83 @@
-Return-Path: <linux-doc+bounces-86966-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86832-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AOjMHY2AAmpDtwEAu9opvQ
-	(envelope-from <linux-doc+bounces-86966-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 03:21:17 +0200
+	id CFnMBMrdAWptlgEAu9opvQ
+	(envelope-from <linux-doc+bounces-86832-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:46:50 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC08651828B
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 03:21:16 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05E2350F422
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 15:46:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3C0EE3072990
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 01:19:00 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 8E949300F295
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2026 13:36:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2601427466A;
-	Tue, 12 May 2026 01:18:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 93CF13E8C74;
+	Mon, 11 May 2026 13:36:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="tGD1xBAm"
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="HrC2uyz6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1980E2D0C7E
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 01:18:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C0023ECBD5
+	for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 13:36:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778548714; cv=none; b=SJeoX94vmlQKRTor0nNCaWPiIzSCIwkdgXJcX6fwUGkIAh0bfiJr0IDek+Y/LukbFb/2dc9q+o9AXaJThmIf9D95Tw6XYvt3FRh0G5QJ5NMjINS0afBA1rptd+FB4+yLGCgnkYzJx2Azg3pnY6SoTYnVT0AlI2dwUeYFl2btaDo=
+	t=1778506588; cv=none; b=FWWggNWqYBqxtiHtYUufaUyc0QPi1Fihi9TNpAjuGWrBw9ZGphUJHNQk+S0UBJCIqt9fW3EXCXfhlfaFXP+dG8KU94xBxAVQt5LNpnUh/3HTehjjB6IOTwsxtCfQ0s1DoE9EnE6klSx7KhL5zybrQQWJ0rgMg4pomWjxkYCOuQM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778548714; c=relaxed/simple;
-	bh=w3CtU+hYwk0vuDDvZWpVkcnsbUsLWI9bRzUE1HZQ2bs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=QETKbgJjf9UKvwyOo7fYf1f0CFopIOLBbl1+eORrj23KgAa9yzcP5kc479X0kKG3a6E8qfwVGTr1hMmKg0i0XOxSxVvsRlXhihRBQabqqfSkuDlOBAO9gc9grErecPrbQO0DGMA4j4NNLeKwEnr9CY/BZh0mMdjaZka8pCxwOx4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=tGD1xBAm; arc=none smtp.client-ip=209.85.160.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-50d876329bbso47261151cf.2
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 18:18:25 -0700 (PDT)
+	s=arc-20240116; t=1778506588; c=relaxed/simple;
+	bh=AI7+PC+wO6PLDRtpdw2bXlws667UYCRwcBeEHIMSovA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=YsZoBJChYvqyeEptlQtBp3aN3Q3GxvYP1a0cC64jWXTw8EbosRn2xnm/j90jD9qccWH8Eb44WR34LqUh6fYP8ZrADkf1G1bc9AmvzarwVwbGm790IaZ1JFyTQ2GV1WAoNSEmtLF3xLv8Y6ff0cqp827OfKn1hyet4UAapXHa8IU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=HrC2uyz6; arc=none smtp.client-ip=209.85.216.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-365eecc5885so4205603a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 11 May 2026 06:36:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778548705; x=1779153505; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=T4O7WaEUgH7uVF1t7R5QzWbPYxx8khqSIJzO/Wkups0=;
-        b=tGD1xBAmuKbAf60hHbmrhLIh/GOC3eDjfW/1xR61lPL6YWmQkkF/rfbm/xJoxHjuZ+
-         Qag2O9wajlRkgDpLU+V0ABhLAn4ILDcFiOp3tIy7mtnzBK0rqeF2qXptBJhbaNqR1jWI
-         cMf648R7YQgT2p8Xg0+PakWlV6Czvj+ArGkxJVlNEY7mphYoQIGTP6C8LZykq0wRaxI/
-         Y8Vzx+p8im7VdbfdHt6h7jb6TeGW7rJqOEtqWUw6Ia8+tJO/4omkHerzrzXsI2wzcoy1
-         iBIPYRezCFtASQz5aN6YKXQjrFmzSc7HoUG2NfEzeHWBfKE4eESo2cMWmxhIR/LdjtwJ
-         QM2Q==
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1778506583; x=1779111383; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+Z29fhkBQbknShosTsnNNQxT5IXOqOhrJTIx7eoQ358=;
+        b=HrC2uyz6M4ftAjkf3RaKqtm7xosMoYcaRoNSA2Ho/WQidy9vLT3CPQw2it2gjR2uc2
+         LqLrJvSkFR9CsDOGytE0aufchCTsU84CnR/jC7xJhDyfMD1i0JIdxpnvhNWm+B6TjzD/
+         39do8w+h6ovm6IbH9noFsTZeW2da6+T6xFZETmcFioOV7TYb0PtkBIv8KBD0T7uTuKgA
+         SVJ/eFWbDUB/q3lLS/FbafH2yU+b0F+bhRCJao8aMaLmPT3sniMYVD/SLDso/dRh39rR
+         IZndLAbNyysk9zecUv+PQg1XDld21I5ebLhXyDQJ0V+UimRdnLTxna/i0OCQVxTSU6cY
+         T2BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778548705; x=1779153505;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=T4O7WaEUgH7uVF1t7R5QzWbPYxx8khqSIJzO/Wkups0=;
-        b=YQt6D6RsgbH5xJ7rgfL1jRBOk3MzO/PU9IZPSVtt0chI/vA04TAoJJ10SaHFRYgoae
-         YzUPSaqeYxQw/1gIy4bM4MjF5Sh+rE/SSH0fY7eChXzGSvZ0XV8c9pDZflAtbqnfQdo1
-         xDLhFl2fZAx5l5qVVghQXEpPSMndv/QbEAk34LzGsYsKL13BACtdvxckxYeQNtsVZeEK
-         kn5xOWkWSTBX7Cfar8RhyRa5S+nRAGu7zq4KeLdwPMsRXDn7LRzHoRA07xg2PFzbvtfZ
-         vtZ7AmJR3vR/OpYaPTgmqaiaT6p2iXgk4FXvl/c44fmJKifoCsHLyex/sS86UhO2WUUe
-         CdYA==
-X-Forwarded-Encrypted: i=1; AFNElJ+MOjh0I4OOnhz2ikbEaqbu0GbQKdXNLR1YqejbScXlfsfovIWYN+V0ew90xBYS/y7oGvS3Ehi/E2g=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzmiSOF17wHFmtO5p87xwizMPbMg/+c4FRqQ3z9OcNMjrNxlY9j
-	BbJZsOymw+vlkdbMYVnTd/jmZPn0AsdvosWRDDJxJ6xombonPK/BgVFR
-X-Gm-Gg: Acq92OFIbY1FLc9M4HcLYBsrW0KsvNkCQO5+VEhXoDaRhVmmlw89EFV8kSgbRPvqNL9
-	ONjl3IUmCbHx5kDRU5Yt+GOcXotB5vSOJiA2WOf2dqNLJe2De4C6NacZRevjOvDw94NCtyOAMlI
-	+vwGcxxUH6iL9oC0UYzRlSsmZAu9uMVc60IBLljJ8GL4CFZpflP4pXS5x5eknBjeFa2bZjeLmrN
-	kHiHFmxXOa/NvIqiiWS8I4E6jLLIiGozkxmhxfPehrwEh+Gdz6HIEeSBswVjDyCEgd/dWNsh51N
-	O+kvYJsBZ4SRuivjZYtVT6Yi6nCsUcYB7uKo4qL1QJMd+fBePNBEwaupC2vc1EiG7tb9CfcXtij
-	9Uwh8rr0T5d8sd++K3DQ8Wpu0nVgijh3zeZQKD/uMjyKw5NO2Y2DTW4RDEOyo/H/Zzte1Mm73+p
-	Y2eqD8Qno67l2Wf0nnbUM=
-X-Received: by 2002:a05:622a:92:b0:50d:770f:ad23 with SMTP id d75a77b69052e-514d1c943c9mr15635691cf.26.1778548704810;
-        Mon, 11 May 2026 18:18:24 -0700 (PDT)
-Received: from localhost ([2a03:2880:ff:72::])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-514a956cad9sm71871261cf.9.2026.05.11.18.18.24
+        d=1e100.net; s=20251104; t=1778506583; x=1779111383;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+Z29fhkBQbknShosTsnNNQxT5IXOqOhrJTIx7eoQ358=;
+        b=ScS80h9dg8Ep6YUearjNGDkBWIjHuJYsB1IqvLF/WGZ5W/7Cu5jmP+p1EOo4VpyPEv
+         TCB38x36VtQkUmrzyNiNmtAU56CXfeRuQsHOlKByXrW3TSTzU+2FIBcZVaYNIdpKFEr2
+         lGG6HATxxdcNxuYLI/YMq0eCxQ0+nEWBhBqCSAfeqBC3epTWYvZksze0QEfxvsLHk+MY
+         AhgbMPiYeDdW2s6U/RSvML6ITBDWu1fp6MrxvmTuExtk3prXUwS4cuV0xAZndmfaE09I
+         Swm6b1gljn8B08k+1D2f4TKL2DffPtMkj+OX6abE5xkNses9xqznEUpv8lHlARYkf+O4
+         nQZg==
+X-Forwarded-Encrypted: i=1; AFNElJ8zeOFILuDvXZmt8I/BxECmMHDg8AU0EO6PUOubSR3dKx8x8Mgmw9KWm4rANEVpy4QZX8CeGOygKQ8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw2KX8L7B7y2SEovBASct62sGF2Ju991ub6OAyLgipJ443KbBb7
+	e856lr9TCpOAsY3+VUimYbzob8+vrBOpbfTuun9+QjzLh3ApDygc9HwznXZiZKyAeP8=
+X-Gm-Gg: Acq92OHbqSCSLc35HdexjoXsbIhVpuAgwHOhd0v1fphBHc8tnpenQKnixHKZE7FGT5Q
+	YicQtJElFrMxx7tpFd7nFlp2qHFuygSs0dRGHP907pTc4hjMHXrCINH+4TvhfrHnhrZt23Nv1d9
+	cPpzSYjZ94OjFe8V1+2Y+uI7GVOgj/W+oNig4p1+oFbHl/0II2ayMArRVJ24Qvodg7CnykZBCti
+	mx3KOYttZdPpCPaJqHXWSfdwEAzomvIpD/tExgzN6HKDbLXhQwD7xyPj9S7P/ed7dLnVYHdhHvY
+	L5osixR1bu7D3CnF+QhvFmJmakpATKAKyHlzOFmx2H1TyWKI/UMSr1CRnnxLX4lKh1UjcyMsUA6
+	l6T899Zsas4fp8j7pDiVVtO38ZCtplvk+0OXiHdUrmVsGhv/9D5896OHBOewCT22B4SIcTF4QT4
+	jFkyV27QgEWtqg3BLxGXTb5xbkRnLRKnqHUYZqz7shoBA=
+X-Received: by 2002:a17:90b:2648:b0:366:479c:59e8 with SMTP id 98e67ed59e1d1-367d46b8be5mr9758495a91.8.1778506583435;
+        Mon, 11 May 2026 06:36:23 -0700 (PDT)
+Received: from [127.0.1.1] ([2a12:a305:4::30f3])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-367be3daafesm3034326a91.8.2026.05.11.06.36.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 May 2026 18:18:24 -0700 (PDT)
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-Date: Mon, 11 May 2026 18:18:02 -0700
-Subject: [PATCH net-next v4 8/8] selftests: drv-net: add netkit devmem
- tests
+        Mon, 11 May 2026 06:36:23 -0700 (PDT)
+From: Guodong Xu <guodong@riscstar.com>
+Subject: [PATCH v2 00/10] riscv: hwprobe: Expose RVA23U64 base behavior
+Date: Mon, 11 May 2026 21:34:45 -0400
+Message-Id: <20260511-rva23u64-hwprobe-v2-v2-0-21c5a544f1dc@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -88,193 +86,157 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260511-tcp-dm-netkit-v4-8-841b78b99d74@meta.com>
-References: <20260511-tcp-dm-netkit-v4-0-841b78b99d74@meta.com>
-In-Reply-To: <20260511-tcp-dm-netkit-v4-0-841b78b99d74@meta.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Alex Shi <alexs@kernel.org>, 
- Yanteng Si <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>, 
- Michael Chan <michael.chan@broadcom.com>, 
- Pavan Chebbi <pavan.chebbi@broadcom.com>, 
- Joshua Washington <joshwash@google.com>, 
- Harshitha Ramamurthy <hramamurthy@google.com>, 
- Saeed Mahameed <saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>, 
- Mark Bloch <mbloch@nvidia.com>, Leon Romanovsky <leon@kernel.org>, 
- Alexander Duyck <alexanderduyck@fb.com>, kernel-team@meta.com, 
- Daniel Borkmann <daniel@iogearbox.net>, 
- Nikolay Aleksandrov <razor@blackwall.org>, Shuah Khan <shuah@kernel.org>, 
- Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Shuah Khan <skhan@linuxfoundation.org>, Alex Shi <alexs@kernel.org>, 
- Yanteng Si <si.yanteng@linux.dev>, Dongliang Mu <dzm91@hust.edu.cn>, 
- Michael Chan <michael.chan@broadcom.com>, 
- Pavan Chebbi <pavan.chebbi@broadcom.com>, 
- Joshua Washington <joshwash@google.com>, 
- Harshitha Ramamurthy <hramamurthy@google.com>, 
- Saeed Mahameed <saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>, 
- Mark Bloch <mbloch@nvidia.com>, Leon Romanovsky <leon@kernel.org>, 
- Alexander Duyck <alexanderduyck@fb.com>, kernel-team@meta.com, 
- Daniel Borkmann <daniel@iogearbox.net>, 
- Nikolay Aleksandrov <razor@blackwall.org>, Shuah Khan <shuah@kernel.org>
-Cc: dw@davidwei.uk, sdf.kernel@gmail.com, mohsin.bashr@gmail.com, 
- willemb@google.com, jiang.kun2@zte.com.cn, xu.xin16@zte.com.cn, 
- wang.yaxin@zte.com.cn, netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org, 
- bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- Stanislav Fomichev <sdf@fomichev.me>, Mina Almasry <almasrymina@google.com>, 
- netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org, 
- bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- Bobby Eshleman <bobbyeshleman@meta.com>
-X-Mailer: b4 0.14.3
-X-Rspamd-Queue-Id: EC08651828B
+X-B4-Tracking: v=1; b=H4sIALaDAmoC/yXMPQ6DMAxA4asgz1hKzW+5StWBBAPuAMiBtBLi7
+ qQwfsN7O3hWYQ9NsoNyEC/zFEFpAm5sp4FRumggQ6UpTI0aWsq2Msfxu+hsGQPhoyNTZU9nbc0
+ Qy0W5l991fb1v+81+2K3/FRzHCXxjjPl3AAAA
+X-Change-ID: 20260508-rva23u64-hwprobe-v2-1d20739cbb8e
+To: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <pjw@kernel.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, 
+ Shuah Khan <shuah@kernel.org>, Anup Patel <anup@brainfault.org>, 
+ Atish Patra <atish.patra@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>, 
+ Deepak Gupta <debug@rivosinc.com>, Zong Li <zong.li@sifive.com>, 
+ Christian Brauner <brauner@kernel.org>
+Cc: Andrew Jones <andrew.jones@oss.qualcomm.com>, 
+ Charlie Jenkins <charlie@rivosinc.com>, 
+ Samuel Holland <samuel.holland@sifive.com>, linux-doc@vger.kernel.org, 
+ linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
+ linux-kselftest@vger.kernel.org, kvm@vger.kernel.org, 
+ kvm-riscv@lists.infradead.org, Guodong Xu <guodong@riscstar.com>, 
+ Charlie Jenkins <thecharlesjenkins@gmail.com>, 
+ Jesse Taube <jesse@rivosinc.com>, Andy Chiu <andybnac@gmail.com>
+X-Mailer: b4 0.15.1
+X-Rspamd-Queue-Id: 05E2350F422
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [2.44 / 15.00];
+	DATE_IN_FUTURE(4.00)[11];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[riscstar-com.20251104.gappssmtp.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[riscstar.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86966-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86832-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[davidwei.uk,gmail.com,google.com,zte.com.cn,vger.kernel.org,fomichev.me,meta.com];
 	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[oss.qualcomm.com,rivosinc.com,sifive.com,vger.kernel.org,lists.infradead.org,riscstar.com,gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[riscstar-com.20251104.gappssmtp.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bobbyeshleman@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCPT_COUNT_GT_50(0.00)[70];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	FROM_NEQ_ENVFROM(0.00)[guodong@riscstar.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,devmem.py:url,nk_devmem.py:url,lib.py:url,meta.com:email,meta.com:mid,nk_qlease.py:url,fomichev.me:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[riscstar.com:email,riscstar.com:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,riscstar-com.20251104.gappssmtp.com:dkim]
 X-Rspamd-Action: no action
 
-From: Bobby Eshleman <bobbyeshleman@meta.com>
+This series builds on Andrew Jones's earlier RFC [1]. It lets
+userspace check for RVA23U64 conformance in one call, instead of
+walking hwprobe + prctl across every mandatory extension.
 
-Add nk_devmem.py with four tests for TCP devmem through a netkit device:
+The series adds a small framework that resolves profile-class
+bases (IMA and RVA23U64) from the kernel's ISA extension bitmap at
+init time, and surfaces the result through both /proc/cpuinfo and
+hwprobe. Later patches can add RVA23S64, and backward RVA22 / RVA20
+detection, to riscv_set_isa_bases() without changes to the
+surrounding code.
 
-These tests are just duplicates of the original devmem tests, with some
-adjusted parameters such as telling ncdevmem to avoid device setup
-(since it only has access to netkit, not a phys device).
+To detect RVA23U64 the kernel first has to recognise every extension
+it mandates, so patches 4-6 bring Zicclsm; Ziccamoa, Ziccif,
+Ziccrse, Za64rs; and B into the cpufeature parser. The framework
+then reads the resulting bitmap, and the final patch exposes the
+RVA23U64 bit through RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64.
 
-Each test uses NetDrvContEnv with primary_rx_redirect=True to set up the
-BPF redirect program on the primary netkit interface.
+Series outline:
 
-The NIC (HDS, RSS, queue lease) is configured once in main() before
-ksft_run() and torn down in a finally block via cleanup_nic(), mirroring
-the nk_qlease.py pattern. This avoids re-toggling NIC settings around
-every test case.
+  1-3. hwprobe.rst clean-ups: document EXT_ZICFISS, normalize
+       indentation, and standardize extension capitalization.
 
-Acked-by: Stanislav Fomichev <sdf@fomichev.me>
-Signed-off-by: Bobby Eshleman <bobbyeshleman@meta.com>
+   4.  Zicclsm: cpufeature parsing + hwprobe export.
+   5.  Ziccamoa, Ziccif, Ziccrse, Za64rs: cpufeature parsing + hwprobe
+       export, with cpufeature dependency validation for
+       Ziccamoa->Zaamo and Za64rs->Zalrsc.
+   6.  B (hwcap + hwprobe), as the Zba/Zbb/Zbs set.
+
+   7.  riscv_have_user_pmlen(): arch-level accessor for user
+       pointer-masking PMLEN support, used by RVA23U64 detection.
+
+   8.  cpufeature: per-hart and host-wide isa_bases bitmaps,
+       populated at init time. IMA and RVA23U64 detection lives
+       here; /proc/cpuinfo and hwprobe both read from these bitmaps.
+
+   9.  /proc/cpuinfo: print "isa bases" / "hart isa bases" lines
+       sourced from the cached bitmaps.
+
+  10.  hwprobe: expose RVA23U64 via
+       RISCV_HWPROBE_BASE_BEHAVIOR_RVA23U64.
+
+Tested on qemu booted with -cpu rva23s64,sv39=on,pmp=on:
+  - /proc/cpuinfo reports "isa bases : rv64ima rva23u64" on both the
+    aggregated and per-hart lines.
+  - hwprobe RISCV_HWPROBE_KEY_BASE_BEHAVIOR returns
+    BASE_BEHAVIOR_IMA | BASE_BEHAVIOR_RVA23U64.
+
+Based on v7.2-rc2; happy to rebase onto another tree if needed.
+
+Link: https://lore.kernel.org/linux-riscv/20260206002349.96740-1-andrew.jones@oss.qualcomm.com/ [1]
+
+BR,
+Guodong Xu
+
+Signed-off-by: Guodong Xu <guodong@riscstar.com>
 ---
-Changes in v4:
-- Call configure_nic()/cleanup_nic() once around ksft_run() rather than
-  relying on per-test configuration inside the run_* helpers.
+Andrew Jones (4):
+      riscv: hwprobe.rst: Replace tabs with spaces
+      riscv: Add Ziccamoa, Ziccif, Ziccrse, and Za64rs to cpufeature and hwprobe
+      riscv: Add B to hwcap and hwprobe
+      riscv: Add a getter for user PMLEN support
 
-Changes in v3:
-- Reorder os.path expressions
-- Drop @ksft_disruptive from check_nk_rx_hds to mirror the original
-  check_rx_hds in devmem.py
+Charlie Jenkins (1):
+      riscv: Standardize extension capitalization
 
-Changes in v2:
-- Add nk_devmem.py to TEST_PROGS in Makefile (Sashiko)
+Guodong Xu (4):
+      riscv: hwprobe.rst: Document EXT_ZICFISS
+      riscv: cpufeature: Introduce ISA bases bitmap and rva23u64 detection
+      riscv: cpu: Output isa bases lines in cpuinfo
+      riscv: hwprobe: Introduce rva23u64 base behavior
+
+Jesse Taube (1):
+      riscv: Add Zicclsm to cpufeature and hwprobe
+
+ Documentation/arch/riscv/hwprobe.rst               |  46 +++++-
+ arch/riscv/include/asm/cpufeature.h                |  14 ++
+ arch/riscv/include/asm/hwcap.h                     |  23 +--
+ arch/riscv/include/asm/processor.h                 |   4 +
+ arch/riscv/include/asm/switch_to.h                 |   4 +-
+ arch/riscv/include/uapi/asm/hwcap.h                |   1 +
+ arch/riscv/include/uapi/asm/hwprobe.h              |   9 +-
+ arch/riscv/kernel/cpu.c                            |  26 ++++
+ arch/riscv/kernel/cpufeature.c                     | 154 ++++++++++++++++++---
+ arch/riscv/kernel/process.c                        |  12 ++
+ arch/riscv/kernel/sys_hwprobe.c                    |  33 +++--
+ arch/riscv/kvm/isa.c                               |  16 +--
+ arch/riscv/kvm/main.c                              |   2 +-
+ arch/riscv/kvm/vcpu_fp.c                           |  20 +--
+ arch/riscv/kvm/vcpu_onereg.c                       |   6 +-
+ arch/riscv/kvm/vcpu_vector.c                       |  10 +-
+ tools/testing/selftests/riscv/hwprobe/which-cpus.c |   2 +-
+ 17 files changed, 312 insertions(+), 70 deletions(-)
 ---
- tools/testing/selftests/drivers/net/hw/Makefile    |  1 +
- .../testing/selftests/drivers/net/hw/nk_devmem.py  | 55 ++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
+base-commit: 7fd2df204f342fc17d1a0bfcd474b24232fb0f32
+change-id: 20260508-rva23u64-hwprobe-v2-1d20739cbb8e
 
-diff --git a/tools/testing/selftests/drivers/net/hw/Makefile b/tools/testing/selftests/drivers/net/hw/Makefile
-index 85ca4d1ecf9e..2f78c6aec397 100644
---- a/tools/testing/selftests/drivers/net/hw/Makefile
-+++ b/tools/testing/selftests/drivers/net/hw/Makefile
-@@ -34,6 +34,7 @@ TEST_PROGS = \
- 	irq.py \
- 	loopback.sh \
- 	nic_timestamp.py \
-+	nk_devmem.py \
- 	nk_netns.py \
- 	nk_qlease.py \
- 	ntuple.py \
-diff --git a/tools/testing/selftests/drivers/net/hw/nk_devmem.py b/tools/testing/selftests/drivers/net/hw/nk_devmem.py
-new file mode 100755
-index 000000000000..0e36a0fa9688
---- /dev/null
-+++ b/tools/testing/selftests/drivers/net/hw/nk_devmem.py
-@@ -0,0 +1,55 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+"""Test devmem TCP with netkit."""
-+
-+import os
-+from lib.py import ksft_run, ksft_exit, ksft_disruptive
-+from lib.py import NetDrvContEnv
-+from lib.py.devmem import (setup_test, require_devmem, configure_nic,
-+                           cleanup_nic, run_rx, run_tx, run_tx_chunks,
-+                           run_rx_hds)
-+
-+
-+@ksft_disruptive
-+def check_nk_rx(cfg) -> None:
-+    """Run the devmem RX test through netkit."""
-+    run_rx(cfg)
-+
-+
-+@ksft_disruptive
-+def check_nk_tx(cfg) -> None:
-+    """Run the devmem TX test through netkit."""
-+    run_tx(cfg)
-+
-+
-+@ksft_disruptive
-+def check_nk_tx_chunks(cfg) -> None:
-+    """Run the devmem TX chunking test through netkit."""
-+    run_tx_chunks(cfg)
-+
-+
-+def check_nk_rx_hds(cfg) -> None:
-+    """Run the HDS test through netkit."""
-+    run_rx_hds(cfg)
-+
-+
-+def main() -> None:
-+    """Configure the NIC once, then run the netkit devmem test cases."""
-+    with NetDrvContEnv(__file__, rxqueues=2, primary_rx_redirect=True) as cfg:
-+        setup_test(cfg,
-+                   os.path.join(os.path.dirname(os.path.abspath(__file__)),
-+                                "ncdevmem"))
-+
-+        require_devmem(cfg)
-+        configure_nic(cfg)
-+        try:
-+            ksft_run([check_nk_rx, check_nk_tx, check_nk_tx_chunks,
-+                      check_nk_rx_hds], args=(cfg,))
-+        finally:
-+            cleanup_nic(cfg)
-+
-+    ksft_exit()
-+
-+
-+if __name__ == "__main__":
-+    main()
-
--- 
-2.53.0-Meta
+Best regards,
+--  
+Guodong Xu <guodong@riscstar.com>
 
 
