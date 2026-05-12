@@ -1,273 +1,172 @@
-Return-Path: <linux-doc+bounces-86981-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-86982-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uCLTM1OwAmoXvwEAu9opvQ
-	(envelope-from <linux-doc+bounces-86981-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 06:45:07 +0200
+	id cJqeJMTCAmp7wQEAu9opvQ
+	(envelope-from <linux-doc+bounces-86982-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 08:03:48 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5475519A43
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 06:45:06 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E386951AA0E
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 08:03:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id CB675300691D
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 04:45:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2AB93318698D
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 05:41:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 903193264F2;
-	Tue, 12 May 2026 04:45:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48A363D7D69;
+	Tue, 12 May 2026 05:36:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="rPymqSEB"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="KIK+jQvS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-170.mta0.migadu.com (out-170.mta0.migadu.com [91.218.175.170])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DF86282F2A
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 04:44:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEDA53B7744;
+	Tue, 12 May 2026 05:36:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778561102; cv=none; b=phiNIRs4E8danmDuKOzvIkJEGqQwf444LtWSkWmnMfKZUbopLBV1jZ15Sn007qc4ZhLgeZG85XP2o333aAenkS7BHihQPXP23uUEmFbMVUlx8/+gFA0ydvZRk7cfpiDKQQN9AGauCdKqOSuhnj47z46qocofgwLOuBIfzRpEahg=
+	t=1778564208; cv=none; b=T7dHhhPt/U6aIJa6HWkdyj/VQXrESpZ0RNvnjIyPAvm7cnU8gx/1Z5dXW0ybbmND14xbN0bsR44MgHIGNQu9gIbtxGq11yUTm5MqVBuljRcUAgHAHjmXxrUKncva7Z1QvG4vWcYFJWwVocSb+rVjjwi7xfJpFY73AsS4yAyP6dk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778561102; c=relaxed/simple;
-	bh=nTjBBouXxbsK5tE23oLCYyGFMpN52UWYf/GWtqGZ2mY=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ZNIR4FfckamIcE/Kt4X8EV02q7PeQyov0+1jC44YPtd3sHOw0pz3jJ4cEohBvm9Vhzm1IqdVRS/HNL2MaNex16tSwuPVgC4BosVTK05KdRDVbbeL0ZrJUmnE14ph246L5xeXGCWH02H6bguPkvE/wBCX4NGczYkPski+6YZy2Dg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=rPymqSEB; arc=none smtp.client-ip=91.218.175.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1778561096;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=VLBqEVqOtA0L9B/FBEFQZHxIvKYLTaOc7iFirBA8GiM=;
-	b=rPymqSEB7ksQeLp2kXClF6xGrRcrtPRC6k7yv726vYMSQEmkKfG8uwEcPDk5G6OqXp5d53
-	0h73lztm/ioh6KuUgtZJh4V8ofHz9eJyrpXqZAKKLiX66KAeLK7i0ZIGOjp7gBm/Mh8c/r
-	/29FxCR53BgaL0mjYeUHQiJntl+h1wo=
-From: Lance Yang <lance.yang@linux.dev>
-To: npache@redhat.com
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
+	s=arc-20240116; t=1778564208; c=relaxed/simple;
+	bh=XFV7RR6J0X5n+Nu9/rm5rxtB2SpA+lJioNk9zcWWi6A=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AjCbxmtOUPouerY+7M3/W4D8PgmAEb/nnKmBQR3Q34qRquXNWu2cWv+gBihqgwR42QJMYEPjotlxua1V9luRn6eEtDr/LVd6oLEg1PqN8HlJI5sslZF1GM1Nyw4NoLt5m9T2nX8bk5HK79ElCx1DaGmzabD77py8pkp82nNBM9s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=lst.de; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=KIK+jQvS; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=lst.de
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=L6G3lv4jbdMbQ4QsNCiCXE8kA9OQYRVEnsOclxNjvlk=; b=KIK+jQvSnKRXIFRrePcKSt8tSC
+	gTDIoVa3ilaBJgAv2JyiBq1oBQNEEVuR8cAKQZACHFbXeQgzOq5bCCS43yMoo3rZpQpygSiDzL+5p
+	k8ewxMk5abPknkbI0BLQkk18U//bp1Se74dgd8ytTOIwgIqIRD8+j0upZnmtm9RP/nG0Iay4iv5BI
+	0R0Ux2iGn5C8GSW0QkgvHRpchKQA0HU/3surCqZ+w6g1XBcpaQIEofBGAUjsWIOw9fW5TdRUHOoZH
+	pIElcotsE4NXj4I4GC6C78nmVfU4K8GqhWK2VIAj1M/0+2fkttDIMP1Vqdy9WFOxCQtHvlSJJWz7z
+	NqzmFnXw==;
+Received: from 2a02-8389-2341-5b80-decc-1a96-daaa-a2cc.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:decc:1a96:daaa:a2cc] helo=localhost)
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wMfnF-0000000FfDa-0NfM;
+	Tue, 12 May 2026 05:36:33 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Chris Li <chrisl@kernel.org>,
+	Kairui Song <kasong@tencent.com>
+Cc: Christian Brauner <brauner@kernel.org>,
+	"Darrick J . Wong " <djwong@kernel.org>,
+	Jens Axboe <axboe@kernel.dk>,
+	David Sterba <dsterba@suse.com>,
+	"Theodore Ts'o" <tytso@mit.edu>,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>,
+	Trond Myklebust <trondmy@kernel.org>,
+	Anna Schumaker <anna@kernel.org>,
+	Namjae Jeon <linkinjeon@kernel.org>,
+	Hyunchul Lee <hyc.lee@gmail.com>,
+	Steve French <sfrench@samba.org>,
+	Paulo Alcantara <pc@manguebit.org>,
+	Carlos Maiolino <cem@kernel.org>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Naohiro Aota <naohiro.aota@wdc.com>,
+	linux-xfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
 	linux-mm@kvack.org,
-	linux-trace-kernel@vger.kernel.org,
-	aarcange@redhat.com,
-	akpm@linux-foundation.org,
-	anshuman.khandual@arm.com,
-	apopple@nvidia.com,
-	baohua@kernel.org,
-	baolin.wang@linux.alibaba.com,
-	byungchul@sk.com,
-	catalin.marinas@arm.com,
-	cl@gentwo.org,
-	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	david@kernel.org,
-	dev.jain@arm.com,
-	gourry@gourry.net,
-	hannes@cmpxchg.org,
-	hughd@google.com,
-	jack@suse.cz,
-	jackmanb@google.com,
-	jannh@google.com,
-	jglisse@google.com,
-	joshua.hahnjy@gmail.com,
-	kas@kernel.org,
-	lance.yang@linux.dev,
-	liam@infradead.org,
-	ljs@kernel.org,
-	mathieu.desnoyers@efficios.com,
-	matthew.brost@intel.com,
-	mhiramat@kernel.org,
-	mhocko@suse.com,
-	peterx@redhat.com,
-	pfalcato@suse.de,
-	rakie.kim@sk.com,
-	raquini@redhat.com,
-	rdunlap@infradead.org,
-	richard.weiyang@gmail.com,
-	rientjes@google.com,
-	rostedt@goodmis.org,
-	rppt@kernel.org,
-	ryan.roberts@arm.com,
-	shivankg@amd.com,
-	sunnanyong@huawei.com,
-	surenb@google.com,
-	thomas.hellstrom@linux.intel.com,
-	tiwai@suse.de,
-	usamaarif642@gmail.com,
-	vbabka@suse.cz,
-	vishal.moola@gmail.com,
-	wangkefeng.wang@huawei.com,
-	will@kernel.org,
-	willy@infradead.org,
-	yang@os.amperecomputing.com,
-	ying.huang@linux.alibaba.com,
-	ziy@nvidia.com,
-	zokeefe@google.com,
-	usama.arif@linux.dev
-Subject: Re: [PATCH mm-unstable v17 03/14] mm/khugepaged: rework max_ptes_* handling with helper functions
-Date: Tue, 12 May 2026 12:44:44 +0800
-Message-Id: <20260512044444.71798-1-lance.yang@linux.dev>
-In-Reply-To: <20260511185817.686831-4-npache@redhat.com>
-References: <20260511185817.686831-4-npache@redhat.com>
+	linux-block@vger.kernel.org,
+	linux-btrfs@vger.kernel.org,
+	linux-ext4@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net,
+	linux-nfs@vger.kernel.org,
+	linux-cifs@vger.kernel.org
+Subject: improve the swap_activate interface
+Date: Tue, 12 May 2026 07:35:16 +0200
+Message-ID: <20260512053625.2950900-1-hch@lst.de>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Rspamd-Queue-Id: D5475519A43
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Rspamd-Queue-Id: E386951AA0E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.34 / 15.00];
+X-Spamd-Result: default: False [1.44 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kvack.org,redhat.com,linux-foundation.org,arm.com,nvidia.com,kernel.org,linux.alibaba.com,sk.com,gentwo.org,lwn.net,linux.intel.com,gourry.net,cmpxchg.org,google.com,suse.cz,gmail.com,linux.dev,infradead.org,efficios.com,intel.com,suse.com,suse.de,goodmis.org,amd.com,huawei.com,os.amperecomputing.com];
-	FROM_HAS_DN(0.00)[];
+	TAGGED_FROM(0.00)[bounces-86982-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-86981-lists,linux-doc=lfdr.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[lance.yang@linux.dev,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	FREEMAIL_CC(0.00)[kernel.org,kernel.dk,suse.com,mit.edu,gmail.com,samba.org,manguebit.org,wdc.com,vger.kernel.org,kvack.org,lists.sourceforge.net];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[60];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
+	NEURAL_HAM(-0.00)[-0.986];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,infradead.org:dkim]
 X-Rspamd-Action: no action
 
+Hi all,
 
-On Mon, May 11, 2026 at 12:58:03PM -0600, Nico Pache wrote:
->The following cleanup reworks all the max_ptes_* handling into helper
->functions. This increases the code readability and will later be used to
->implement the mTHP handling of these variables.
->
->With these changes we abstract all the madvise_collapse() special casing
->(dont respect the sysctls) away from the functions that utilize them. And
+Darrick recently posted iomap support for fuse-iomap, which was trivial
+but a bit ugly, which triggered me into looking how this could be done
+in a cleaner way.  The result of that is this fairly big series that
+reworks how the MM code calls into the file system to activate swap
+files to make it much cleaner and easier to use.
 
-Nit: s/dont/do not/
+I've tested this with swap devices manually, and using the swap tests
+in xfstests on btrfs, ext3, ext4, f2fs and xfs to exercise the different
+implementation.  Out of those all passed, but f2fs actually notruns all
+tests even in the baseline as it requires special preparation for
+swapfiles which never got wired up in xfstests.
 
->will be used later in this series to cleanly restrict the mTHP collapse
->behavior.
->
->No functional change is intended; however, we are now only reading the
->sysfs variables once per scan, whereas before these variables were being
->read on each loop iteration.
->
->Suggested-by: David Hildenbrand <david@kernel.org>
->Acked-by: David Hildenbrand (Arm) <david@kernel.org>
->Acked-by: Usama Arif <usama.arif@linux.dev>
->Signed-off-by: Nico Pache <npache@redhat.com>
->---
-> mm/khugepaged.c | 118 +++++++++++++++++++++++++++++++++---------------
-> 1 file changed, 82 insertions(+), 36 deletions(-)
->
->diff --git a/mm/khugepaged.c b/mm/khugepaged.c
->index f0e29d5c7b1f..f68853b3caa7 100644
->--- a/mm/khugepaged.c
->+++ b/mm/khugepaged.c
->@@ -348,6 +348,62 @@ static bool pte_none_or_zero(pte_t pte)
-> 	return pte_present(pte) && is_zero_pfn(pte_pfn(pte));
-> }
-> 
->+/**
->+ * collapse_max_ptes_none - Calculate maximum allowed none-page or zero-page
->+ * PTEs for the given collapse operation.
->+ * @cc: The collapse control struct
->+ * @vma: The vma to check for userfaultfd
->+ *
->+ * Return: Maximum number of none-page or zero-page PTEs allowed for the
->+ * collapse operation.
->+ */
->+static unsigned int collapse_max_ptes_none(struct collapse_control *cc,
->+		struct vm_area_struct *vma)
->+{
->+	// If the vma is userfaultfd-armed, allow no none-page or zero-page PTEs.
->+	if (vma && userfaultfd_armed(vma))
->+		return 0;
->+	// for MADV_COLLAPSE, allow any none-page or zero-page PTEs.
->+	if (!cc->is_khugepaged)
->+		return HPAGE_PMD_NR;
->+	// For all other cases repect the user defined maximum.
->+	return khugepaged_max_ptes_none;
-
-Nit: kernel code usually uses C-style comments. This could be:
-
-/* For all other cases, respect the user-defined maximum. */
-
-Also, s/repect/respect/.
-
->+}
->+
->+/**
->+ * collapse_max_ptes_shared - Calculate maximum allowed PTEs that map shared
->+ * anonymous pages for the given collapse operation.
->+ * @cc: The collapse control struct
->+ *
->+ * Return: Maximum number of PTEs that map shared anonymous pages for the
->+ * collapse operation
->+ */
->+static unsigned int collapse_max_ptes_shared(struct collapse_control *cc)
->+{
->+	// for MADV_COLLAPSE, do not restrict the number of PTEs that map shared
->+	// anonymous pages.
-
-Ditto.
-
->+	if (!cc->is_khugepaged)
->+		return HPAGE_PMD_NR;
->+	return khugepaged_max_ptes_shared;
->+}
->+
->+/**
->+ * collapse_max_ptes_swap - Calculate the maximum allowed non-present PTEs or the
->+ * maximum allowed non-present pagecache entries for the given collapse operation.
->+ * @cc: The collapse control struct
->+ *
->+ * Return: Maximum number of non-present PTEs or the maximum allowed non-present
->+ * pagecache entries for the collapse operation.
->+ */
->+static unsigned int collapse_max_ptes_swap(struct collapse_control *cc)
->+{
->+	// for MADV_COLLAPSE, do not restrict the number PTEs entries or
->+	// pagecache entries that are non-present.
-
-Same here.
-
->+	if (!cc->is_khugepaged)
->+		return HPAGE_PMD_NR;
->+	return khugepaged_max_ptes_swap;
->+}
->+
-> int hugepage_madvise(struct vm_area_struct *vma,
-> 		     vm_flags_t *vm_flags, int advice)
-> {
->@@ -546,21 +602,19 @@ static enum scan_result __collapse_huge_page_isolate(struct vm_area_struct *vma,
-> 	pte_t *_pte;
-> 	int none_or_zero = 0, shared = 0, referenced = 0;
-> 	enum scan_result result = SCAN_FAIL;
->+	unsigned int max_ptes_none = collapse_max_ptes_none(cc, vma);
->+	unsigned int max_ptes_shared = collapse_max_ptes_shared(cc);
-
-Nit: could these be const, as David suggested earlier?
-
-Nothing else jumped out at me. LGTM!
-
-Reviewed-by: Lance Yang <lance.yang@linux.dev>
+Diffstat:
+ Documentation/filesystems/iomap/operations.rst |    3 
+ Documentation/filesystems/locking.rst          |   35 +--
+ Documentation/filesystems/vfs.rst              |   40 ++--
+ block/fops.c                                   |   15 +
+ fs/btrfs/btrfs_inode.h                         |    3 
+ fs/btrfs/file.c                                |    4 
+ fs/btrfs/inode.c                               |   72 -------
+ fs/ext4/file.c                                 |    6 
+ fs/ext4/inode.c                                |   11 -
+ fs/f2fs/data.c                                 |   50 -----
+ fs/f2fs/f2fs.h                                 |    2 
+ fs/f2fs/file.c                                 |    4 
+ fs/iomap/swapfile.c                            |  165 +++---------------
+ fs/nfs/direct.c                                |    1 
+ fs/nfs/file.c                                  |   21 --
+ fs/nfs/nfs4file.c                              |    3 
+ fs/ntfs/aops.c                                 |    8 
+ fs/ntfs/file.c                                 |    6 
+ fs/smb/client/cifsfs.c                         |   18 +
+ fs/smb/client/cifsfs.h                         |    3 
+ fs/smb/client/file.c                           |   16 -
+ fs/xfs/xfs_aops.c                              |   48 -----
+ fs/xfs/xfs_file.c                              |   39 ++++
+ fs/zonefs/file.c                               |   30 +--
+ include/linux/fs.h                             |   11 -
+ include/linux/iomap.h                          |    5 
+ include/linux/nfs_fs.h                         |    3 
+ include/linux/swap.h                           |  129 +-------------
+ mm/page_io.c                                   |   45 ----
+ mm/swap.h                                      |   92 ++++++++++
+ mm/swapfile.c                                  |  227 ++++++++++++++-----------
+ 31 files changed, 471 insertions(+), 644 deletions(-)
 
