@@ -1,50 +1,50 @@
-Return-Path: <linux-doc+bounces-87079-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87080-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EDUyGgIMA2pmzwEAu9opvQ
-	(envelope-from <linux-doc+bounces-87079-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:16:18 +0200
+	id KEXnHoEMA2pK0AEAu9opvQ
+	(envelope-from <linux-doc+bounces-87080-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:18:25 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDAB151F2F0
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:16:17 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AC5251F3AB
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 13:18:25 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6F58A3007C9A
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 11:12:13 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BA54A304FB88
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 11:18:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E7B93ACF07;
-	Tue, 12 May 2026 11:12:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A49654ADDBC;
+	Tue, 12 May 2026 11:18:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YrT55/kJ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MI/cMLhr"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FC733A8756;
-	Tue, 12 May 2026 11:12:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 818CE38E8BD;
+	Tue, 12 May 2026 11:18:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778584332; cv=none; b=GyFnmDt1nA1qGC8sH72Kbal+cg2Igq9v+bMV4xYsVqJoALAGJvkQTpeNNMS+DoeFna07O0m7WkkQlRNGXbd3cFw667IIr+J3D0OKcs9/NCwowC2LI9x/EvIebQNIr8Wit3I/9sVraPV9h0NUyj7fiscMGvK+kTOx0WV5FqMA3vg=
+	t=1778584683; cv=none; b=Qpu9toI4ahIedepOFinaANmD0uI43jjFekszeSDvF2CiTw0xc+HpXOQZ8busNeGcDiUsBNViiptSBiejt2xhVBEcTGQU9dudJqtzH69Qm4T4I0tLI+AGwVPHQ2N6zYe9hu1cjlZfXTPcnflghtiuDD6UKi0hWPNmpLnNqxcyWF0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778584332; c=relaxed/simple;
-	bh=O7iu6+OHQt+UcCqoDQCwDlQvXcpD6wcdi/7smEjbNtk=;
+	s=arc-20240116; t=1778584683; c=relaxed/simple;
+	bh=izVpPklsgFhgBJ6UDkzs+YdvB1EtAk+r3l+WycQYVK0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AOAV30BdQJL1L/D07jwYTTAr1O8DM7T9dHiZ4vWxx37z9Z4viLs6der26DLV7H5xGLaNQ2oGoPSvLgZ9bImrUp6Yr0jZhQwx99AHpJ0CwBZeM4laDSyuc2l/Tb/6UV1Q6hdXt0eW6hVXB6nWHgLvSUWT0uBjJ0Wk/bJHwJthhcg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YrT55/kJ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3210FC2BCB0;
-	Tue, 12 May 2026 11:12:11 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=X0keYz3GZ1FLsab0pCBqKxMpF4u+RMYTxmMybRtb/70W3i8hk5GF6cybbA6j3pnJN2nvivG5jMbcCUDjx6soQDGFhODLEf4WR+gSg8jhvG/gWO/jL8e50OhjxH/744OmwLF07OfzOVKHO/EDOm2QSndrVlDehgIH0xT0im/DLyU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MI/cMLhr; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 968C9C2BCB0;
+	Tue, 12 May 2026 11:18:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778584331;
-	bh=O7iu6+OHQt+UcCqoDQCwDlQvXcpD6wcdi/7smEjbNtk=;
+	s=k20201202; t=1778584683;
+	bh=izVpPklsgFhgBJ6UDkzs+YdvB1EtAk+r3l+WycQYVK0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=YrT55/kJDMGUXJeFkWGNBK9FzoIl4HS2K6NQ40lshLexigxa5igujPnwY12XGUrdu
-	 3oOa+gU1cmvJzjolELAzIxd1yfyzBMid+STDPGTAVRXPms6RXDWIpzMXF38HeWtyme
-	 Ka4fvM+RMH0KUQI8fV+iGOT4B8dK8A4buH5UB0r4sTDQf1kgCzyFayooBEM7pzO/PJ
-	 GoGMSrEhq+0uNzqLXoY1e31sUQOX3HcKOGlCi98r4NmTLZpXDf20q4FjJlcrWrtAdj
-	 3zudKRjf0pgTQ9Q85TuX+CuSQUL1OfuEfr/+Uo0tklnbaK2GOoVSx1wYq74kryTblm
-	 kMgb/SVWhPzKw==
-Date: Tue, 12 May 2026 13:12:08 +0200
+	b=MI/cMLhrJ0d6BbO5le9N/pjNBvowsmBJX5p2aGRXKCvkEru0ZhZYb0gC7XQnEZJ3S
+	 LbRF3MViww/nf4lziH+Eyn5CqRWN1xAAY+NODlFsE2tYoYO0ItSuFKmC+uxkBX8a8X
+	 NczYDhnIJP3RPyMpEKx9+amQX5rXMHSWJL9zlYhhoLDuh9Y5EZMAhQYR4KpTBLjfaP
+	 bafp/z9rmbrAtMGhR93r+nb1a+uJhZuZS2KU9Ooj/7LEIrVi65TnLMqZamjMXLNi8V
+	 uTmLFAldAGbTgqHThC1qQJAzZY0sC1GqT3r7UNYFHkVHUQOiuOoBNVbBVnXJ61NZn/
+	 OvCU2yP1S1Awg==
+Date: Tue, 12 May 2026 13:18:00 +0200
 From: Maxime Ripard <mripard@kernel.org>
 To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -65,12 +65,12 @@ Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
 	linux-kernel@vger.kernel.org, Daniel Stone <daniels@collabora.com>, 
 	intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
 	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v3 16/20] drm/mode-config: Create
+Subject: Re: [PATCH v3 18/20] drm/tidss: Switch to
  drm_mode_config_create_initial_state()
-Message-ID: <20260512-thundering-premium-cassowary-8bfdb6@houat>
+Message-ID: <20260512-partridge-of-unexpected-contentment-ccceef@houat>
 References: <20260424-drm-mode-config-init-v3-0-8b68d9db0d8b@kernel.org>
- <20260424-drm-mode-config-init-v3-16-8b68d9db0d8b@kernel.org>
- <20260504174148.GS1344263@killaraus.ideasonboard.com>
+ <20260424-drm-mode-config-init-v3-18-8b68d9db0d8b@kernel.org>
+ <20260504174907.GT1344263@killaraus.ideasonboard.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,10 +78,10 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="4wqckenerejplylm"
+	protocol="application/pgp-signature"; boundary="y4bfkipmhdhmpwea"
 Content-Disposition: inline
-In-Reply-To: <20260504174148.GS1344263@killaraus.ideasonboard.com>
-X-Rspamd-Queue-Id: BDAB151F2F0
+In-Reply-To: <20260504174907.GT1344263@killaraus.ideasonboard.com>
+X-Rspamd-Queue-Id: 3AC5251F3AB
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-2.26 / 15.00];
 	SIGNED_PGP(-2.00)[];
@@ -91,11 +91,11 @@ X-Spamd-Result: default: False [-2.26 / 15.00];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87079-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-87080-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+,1:+,2:~];
@@ -104,62 +104,78 @@ X-Spamd-Result: default: False [-2.26 / 15.00];
 	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,lwn.net,linuxfoundation.org,oss.qualcomm.com,iki.fi,ideasonboard.com,intel.com,linaro.org,kernel.org,kwiboo.se,emersion.fr,amd.com,igalia.com,redhat.com,ursulin.net,sholland.org,raspberrypi.com,lists.freedesktop.org,vger.kernel.org,collabora.com,lists.infradead.org,lists.linux.dev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[mripard@kernel.org,linux-doc@vger.kernel.org];
 	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:url,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
 
---4wqckenerejplylm
+--y4bfkipmhdhmpwea
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v3 16/20] drm/mode-config: Create
+Subject: Re: [PATCH v3 18/20] drm/tidss: Switch to
  drm_mode_config_create_initial_state()
 MIME-Version: 1.0
 
-On Mon, May 04, 2026 at 08:41:48PM +0300, Laurent Pinchart wrote:
-> > Historically, this was one
-> > + *   of drm_mode_config_reset() job, so one might still encounter it in
-> > + *   a driver.
-> > + *
-> > + * - at reset time, for example during suspend/resume,
-> > + *   drm_mode_config_reset() will reset the software and hardware state
-> > + *   to a known default and will store it in the object's state pointe=
-r.
-> > + *   Not all objects are affected by drm_mode_config_reset() though.
+On Mon, May 04, 2026 at 08:49:07PM +0300, Laurent Pinchart wrote:
+> Hi Maxime,
 >=20
-> Does the reset implementation store a new state in the object's state
-> pointer, or does it reset the contents of the already allocated state ?
-> I read the documentation here as meaning the former, if it's actually
-> the latter it should be reworded.
+> Thank you for the patch.
+>=20
+> On Fri, Apr 24, 2026 at 12:18:58PM +0200, Maxime Ripard wrote:
+> > Now that drm_mode_config_create_initial_state() exists to create the
+> > initial state, use it instead of drm_mode_config_reset() during
+> > driver probe.
+> >=20
+> > Signed-off-by: Maxime Ripard <mripard@kernel.org>
+> > ---
+> >  drivers/gpu/drm/tidss/tidss_drv.c | 6 +++++-
+> >  1 file changed, 5 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/gpu/drm/tidss/tidss_drv.c b/drivers/gpu/drm/tidss/=
+tidss_drv.c
+> > index 1c8cc18bc53c..f5099d5d6e32 100644
+> > --- a/drivers/gpu/drm/tidss/tidss_drv.c
+> > +++ b/drivers/gpu/drm/tidss/tidss_drv.c
+> > @@ -169,11 +169,15 @@ static int tidss_probe(struct platform_device *pd=
+ev)
+> >  		goto err_runtime_suspend;
+> >  	}
+> > =20
+> >  	drm_kms_helper_poll_init(ddev);
+> > =20
+> > -	drm_mode_config_reset(ddev);
+> > +	ret =3D drm_mode_config_create_initial_state(ddev);
+> > +	if (ret) {
+> > +		dev_err(dev, "failed to create initial state: %d\n", ret);
+> > +		goto err_irq_uninstall;
+> > +	}
+>=20
+> There's also a call to drm_mode_config_reset() in tidss_modeset_init(),
+> shouldn't it be dropped ?
 
-It's undefined. Both approach works, most drivers will destroy the old
-one and allocate a new one, but mediatek will just clear and
-re-initialize the old one:
-
-https://elixir.bootlin.com/linux/v7.1-rc3/source/drivers/gpu/drm/mediatek/m=
-tk_plane.c#L28
+This has been fixed by f468fef38716 which is in drm-misc-next
 
 Maxime
 
---4wqckenerejplylm
+--y4bfkipmhdhmpwea
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCagMK/gAKCRAnX84Zoj2+
-dkDYAXsF9DsH6J/5fuYI/okfNgVOZH2InlN8hfiL7W1ViQhomunSdZTAPqO4sg2a
-qYX3ht8BgPEsGsJ4a24dNbTDI8IuNZgDQ5B+kNfoyQNlBIPqgsydcK5kBH91+hEB
-93znUn0Yeg==
-=9Kyz
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCagMMaAAKCRAnX84Zoj2+
+duMkAX9Rlb2ZlLxkiSYUwHnQLHcT3AspaIvuP3QQ2XkS9gd4+lhw1TxXVQYzOpx/
+xIszD98Bf2NlJxIM0uLxiH3sjS3jGpTbz+Ge+VMI9xSNO/XbIt4c4tka1DCPybKM
+tJoOYMCdnA==
+=YKv1
 -----END PGP SIGNATURE-----
 
---4wqckenerejplylm--
+--y4bfkipmhdhmpwea--
 
