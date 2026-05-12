@@ -1,268 +1,206 @@
-Return-Path: <linux-doc+bounces-87247-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87249-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EKrfLkaqA2oO8wEAu9opvQ
-	(envelope-from <linux-doc+bounces-87247-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 00:31:34 +0200
+	id cI1hMq+tA2rj8wEAu9opvQ
+	(envelope-from <linux-doc+bounces-87249-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 00:46:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B6B752ADE7
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 00:31:34 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C85E952B0B6
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 00:46:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 562AC30F1E66
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 22:30:30 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B74733025660
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 22:46:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88B323A3E7E;
-	Tue, 12 May 2026 22:30:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAB4D3A544E;
+	Tue, 12 May 2026 22:45:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Z3P+1mkz"
+	dkim=pass (2048-bit key) header.d=nexthop.ai header.i=@nexthop.ai header.b="LgAQAhqY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com [209.85.222.49])
+Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CA173A3E99
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 22:30:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.49
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778625029; cv=pass; b=ikdZu137tbwvQBuyWCQfEWjK54cfg+UPK4Z8w58BRRtbkvhzxlYNkoDb7RJhzqLVyIG6etL+hQyH55+OC2Zpy99BNi+Ph/gK9myLIBCGxtwjLv/5teWQ/WxurXtrnbA0hJdVTW73HFcQDywvzBHaN0vmhEKkso2M5zMid2xbTUQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778625029; c=relaxed/simple;
-	bh=ctAmtD5i9O0zXAJdPtZK0rAgm3gUJsIsE1gDEZWd5XA=;
-	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hBwS2Q3LMGW3hZuFWt+K4X2ms5b+3Wx52oXWc6Oi8bNnsfUf8FGXSu2v5tjfsQRkB/dY7B2JVRwB4vqQxgQHwRO2lng3A/tyoIXln8EhjLpbJWnCIsk6ehCRmzy8E5cYQJhE8VDz9ePrG7rAr3/gnci+WMw5D1uRZS5LSS7zHpk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Z3P+1mkz; arc=pass smtp.client-ip=209.85.222.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-ua1-f49.google.com with SMTP id a1e0cc1a2514c-95ce0cf2d4bso3542930241.0
-        for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 15:30:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778625026; cv=none;
-        d=google.com; s=arc-20240605;
-        b=OKQ8QgDl1sNBgv0RSVnJ/26L7Y2cJwZSSEG2/enxxaXjjuBCKr4DGYRYc0jeTcJ5aF
-         IBtJopftK0D9pvRO2nJyEXlUswTO8fhrcXYyfYKvVBNjEE2uWtsV9PxiYNoGiQj3enZe
-         Ea+XLmh6s+LOUt5d4PyFJ/J4/++Ep1irgmQaZcgMSNO07uj2rKRFBGeTIPn8qAvfI/DV
-         J10pPlMBSTQX8Xpjdb84wX4OWUxj2C8DRh6Qk8yzpSwDcsl0QByhWQLB52JeqdD647Tf
-         zq9HmMih0hI56uVg5cdwoGEhMX2QPmZvfapfHXFXIOKCY03wwbb+prC0dbaXfBYtG/0P
-         TjZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date
-         :mime-version:references:in-reply-to:from:dkim-signature;
-        bh=7TPT8725vjJaWzYD56fEvXZ06oMkvP85Hz1/t121+lc=;
-        fh=rDtIYkJ5EH/iBOtSStqQ+jCuhwr1OyICyRz7ZCx4DUI=;
-        b=GiX27RqFkQ+5fjVUFS5s5lrLdEIYJTSCJdcvnPru9oKUclzUBu/d+tJCH7y9bqnbWa
-         sE+HUUKYOwtBvZbIe7zcHNSi+aDEsfm1liX+zQAcDtWAQx8o+LDk4qYM0owJO0wbBGvX
-         nZpFy5/2lcHNewoY3F+tIWrzquRp3RcG2do1Ih//OCJNGSrcMS52v9FV5LcOXaEyrdpd
-         MgmtMCWRuW/IgPRRSMhmdAsuGavYNRDh+S6nSL+cOhuhqG4wNRSlYvvL1KTsrvL3Oitl
-         BCufNbPNStWHcpdAe5e3e8Pr4M78ONDMCtbvzebznM9vVhuXVychfTC1CHT62AgIu4f3
-         grGw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3E77396D1A
+	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 22:45:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.52
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778625958; cv=none; b=BuuRTWzdheiPSbvO02hrNY8e/ZotiEndHwIX87MCzi7MYyKFDBEe5p9o6cOUZdpiHUfSEr64GJ1RfnELN4MZphT0qQoYprX4oI5kZpW6AHwglf567nBFvqjs/SSNCfEfUdADL721nBrTD0xJOuRJbxrYx0YA/KTQZ+i2If2TjuA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778625958; c=relaxed/simple;
+	bh=07huJZfdVDsVDdyzp6gIWeNC9PLalNwQMidkkW1mhKg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=URwXhBnW0ZgR7PypjbafbLwE7fL9EA4DjpXVycwvQJ5iNUmJ9vVoWMlN5GwUbWD9KL256OnwTHN9Atki8cXqlWESt9tl7WD8n/7CwciW6LIkU+LrSeC2+E/84Ggg86SjiRUsgeGToeV7DMZtfMWcCwD/UrIAqbE4zYX0EytPSVw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nexthop.ai; spf=pass smtp.mailfrom=nexthop.ai; dkim=pass (2048-bit key) header.d=nexthop.ai header.i=@nexthop.ai header.b=LgAQAhqY; arc=none smtp.client-ip=74.125.82.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nexthop.ai
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nexthop.ai
+Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-13246950f3cso8008493c88.1
+        for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 15:45:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1778625026; x=1779229826; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date
-         :mime-version:references:in-reply-to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7TPT8725vjJaWzYD56fEvXZ06oMkvP85Hz1/t121+lc=;
-        b=Z3P+1mkzpj8h4Ny2fRAwAu8+rBE8RmY/hqTESjapBAiEuZat4VHSRDf/jOos2uaYkS
-         VieRx0q/g0gGq2sQW4x4U/jX3graJAZbntlqD1wSsROXwdHc70mRKKtYEOrOfGw4zssZ
-         zfatOl88ZcEA+Bw+ZJR1JaW4a3CQR8E1uCy1Gv5nd+MD4fJLj54BN9xxXLD67vhRIOlV
-         r7T+Lf0eC/M3qQrsBJQsJR1KeTBc5TsP5AzTGh/QLkC+KIo4rn8BYvrUlGprsuaf+54N
-         +5rdI9/+eSyZCXoP7wCwcOvjjjR8b+C6rbemjMgDYsFjoTrTStrU0XaTwOv63HW47jJc
-         pSpA==
+        d=nexthop.ai; s=google; t=1778625956; x=1779230756; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0dud5LLCGSTK8F+2vzRewAKWi1MtN7/zLbCDo25xb8E=;
+        b=LgAQAhqYOo64joSIh0Uh6OwA8IVx+lopDrocPu4pJXlb/sbem8FLCOQCE9V/ciCgpJ
+         qGnya/KCQUeRDHmQSl9GiSWqZFwFes5HPnn3xfxiVjO+KoVhftCGl4+WYfTyRNtfkCM3
+         1no3h+SvfyeGK2tGbA0YpB3vRNGijIChHyOvc4+yv1TfgZzJhStk5exw0Pc8Zwj5nHJv
+         XubEz3AYb5tEtrUHXYh2xWMFMqL0JcCU2w0vGCaMKi5Df1CFCm9fztUgFE+gd8L6YAxQ
+         qSEFxhNl3Zvw7klrauqb3LyPnntDTIwLLiHaf1AKl8F5Uypp2quUZkbkix1ZmLcVgwVn
+         Cojg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778625026; x=1779229826;
-        h=content-transfer-encoding:cc:to:subject:message-id:date
-         :mime-version:references:in-reply-to:from:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=7TPT8725vjJaWzYD56fEvXZ06oMkvP85Hz1/t121+lc=;
-        b=eyuc1vC6DmEPPLAMSy6GKcgDvUlaGJAgVlVIG9GIprTCCPrjQowjM2PgikiCsVoHbr
-         QIlBRENNidNGh/HEBVVEjhJqcKnRPwGilRmV9iLkX7gqJB+zpy4GDmaAEO9MTIRfV1yK
-         RvpYKrvxIGtq8OEAMEyb3ba/p2GhUlhlrOlCfB1hxW2PBHQc7DuZTqzTgJ2KNWXvNXXv
-         wCByOjfqoCqAUiqXvtjHUgy2bx0/Mie7R9WnHxR+D9pxrX8GKsplnSMkU1qLDd4bCtgc
-         77M6PxVtLIjRyNJacpwhPI3z9Dbn7fYafPA28KTtH6prqd6RLL3Ld2CeoerIpvzFGYN9
-         rD5w==
-X-Forwarded-Encrypted: i=1; AFNElJ8EzQTrXHFE5ZNuycmt409i1JpEVnV+iEboO4uxOPnND7bDWhToMkJdv7r+BvJH7Mrt2dAJzpsuNXQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yztes+ntVU08LIedcWQyX0udypA9iprkApdjInPivW/qRteRGE0
-	xpCv8YPuwOJXMaNAfs+AokAYZ3c8tGHwsulaUTJK/lehLcXETMq0jXtY7kGoHqclpilYidZ4Whp
-	Hu+UFNO26qViUouCb+YwujAlQam9o2k8JLI1uPhGp
-X-Gm-Gg: Acq92OHavh13vWnYC/aK9JXnASjATp6hPqVmo5PM3Y/xOURJspR8LtP1DTf2+LPeyBK
-	uN1mrpc6q6x50DDwQMH0ieJuf+NL7Hq120iImeXVoc+N7vp0CIozEBK7+kQUW3c+8D3iHaMVxiH
-	uuUH8dpltu90pHl00Kkx37q8/k/aVPZ3+nF11jIVLetjYicGyetPaeiU9cdP2XkwujiGZASPw2J
-	gdXEr5OwALo73ESb9whcG389ul9ZsDoh3HAYc2QCK1kXHuf6ZQjTiFitwQMCHmPFARtMZlo1JSt
-	YqrFVgD1iXohRsiHQ3sjIU3q06IzqJIr2uyt4pAQU9OtbDLyfmmFkCTId5gnY30FcRJiV5ApVov
-	fRYNs
-X-Received: by 2002:a05:6102:442a:b0:632:3bd5:d57c with SMTP id
- ada2fe7eead31-635ced54981mr2555380137.3.1778625025472; Tue, 12 May 2026
- 15:30:25 -0700 (PDT)
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 12 May 2026 15:30:24 -0700
-Received: from 176938342045 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 12 May 2026 15:30:24 -0700
-From: Ackerley Tng <ackerleytng@google.com>
-In-Reply-To: <1DAB05E2-7F30-45D7-B155-B66C59D31AFF@infradead.org>
-References: <20260428-gmem-inplace-conversion-v5-0-d8608ccfca22@google.com>
- <20260428-gmem-inplace-conversion-v5-10-d8608ccfca22@google.com>
- <n5ce32wumzeiqqyqutom4apy2kqfetbvusc6j4k2xarsska5mw@klp5bmy7qhfm>
- <CAEvNRgF9+Gr7UVEq-E2SQEb_XOQQMOXy9F_A2tA=DbNV_fJ0EQ@mail.gmail.com> <1DAB05E2-7F30-45D7-B155-B66C59D31AFF@infradead.org>
+        d=1e100.net; s=20251104; t=1778625956; x=1779230756;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0dud5LLCGSTK8F+2vzRewAKWi1MtN7/zLbCDo25xb8E=;
+        b=osNI5ZKEemfvxvSy8FwiQI7u4wvgsYNLZUaKy86JjzUJjjbUM4z1qNAc+MDWmYwFE7
+         FWDO96p5HJROxRpjoVMXE+cm49k3EppjyiClH03CFoqYuTG5ZnhEbXHKoWUn1VeXdbVN
+         JUts9tInBOLkorKKBVq4z0P7KrQwCgmuABt2gdn3dBg8A65LPZdvt7udtrzAxKIAw6mY
+         CEz4tRsXyrAX6U4EpOAgV0jRQGw4SngrIl9gjf2QAtDSz90wOpZQcIKZwwsMPnODZtat
+         evf4fdNaUihPqroApZpgA5EZfjgwyqodGBOa/hNhChOl82Z5nzS661geqzwUdbHnih7J
+         SZ6g==
+X-Forwarded-Encrypted: i=1; AFNElJ8odFkCvim3mjUq4KJxQUSD+XJxir+q82qTsMZfyu449MTh124d962r9L12tlQqDcXZopmzAr2db/o=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyrAzKLYKgTqPhrSdz80Aiyu8O9zkCaXLNA2/rCb6VgcIeT4c+9
+	ZEsgJEa5t+jMJrdm3uh97+c4f+AQSYAnWXl8rDBJjKVtYdOtkL51bEtPM1SqBI6Mgvo=
+X-Gm-Gg: Acq92OF49aGskrXi32tW0xgWdwCrkBLw/FSTnpCFW5tEPf1yM5eThlSmAs3nhdmR1hO
+	3HIwip718QGlNobWqvAY9kdd5D68vxsR9WBleXVg8N9cNTtM1wZAv0ZI+1vRZdrCYSSt2OMATt9
+	2C/Z+Stx/1WU6qQUKnZ5x/3TehVetnhwsTF1GAxlJ0hYf1TNM8IP4hXkVlIJJSLOT2N/917Bryj
+	8lmuCdLv8y0p+V93V/02MJub7WtKYATebZYrr6CvSnxEm/9mMMrvM5EgEQRVcK+00XyuyDhvAYm
+	K570m2ZBhUCsKIXrWM0kPrSUe3v1j7/VMQt3J+uW9sKC64k/gR7WYb6VKC+m2cleayYu4JY301/
+	3yVsqGf5ElKY+S77opY5TBzQ2sTAds6xnE5EuA6xkjunSJLuRIiinaVZMKhez+cpMVmM48RcK8x
+	jMOxTJW1cfiI6OLnvdMtP714BRuw==
+X-Received: by 2002:a05:7023:b0b:b0:12d:c039:6599 with SMTP id a92af1059eb24-1343699b63emr519999c88.22.1778625955810;
+        Tue, 12 May 2026 15:45:55 -0700 (PDT)
+Received: from [127.0.0.2] ([50.145.100.174])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1327821fd00sm25351543c88.8.2026.05.12.15.45.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 May 2026 15:45:55 -0700 (PDT)
+From: Abdurrahman Hussain <abdurrahman@nexthop.ai>
+Subject: [PATCH v2 0/2] hwmon: Add Murata D1U74T-W PSU driver
+Date: Tue, 12 May 2026 15:45:51 -0700
+Message-Id: <20260512-d1u74t-v2-0-431d00fbb1c4@nexthop.ai>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Tue, 12 May 2026 15:30:24 -0700
-X-Gm-Features: AVHnY4Lh8UobS4TfgaX3AzC6MvTUmkcUL18qAWSQRch3a7T6C4hmHCpmi3zo20A
-Message-ID: <CAEvNRgGgggCPKRzd0=r5jV7stxFJVGzj3as_awGytonx9qdfLw@mail.gmail.com>
-Subject: Re: [PATCH RFC v5 10/53] KVM: guest_memfd: Add basic support for KVM_SET_MEMORY_ATTRIBUTES2
-To: "Liam R. Howlett" <liam@infradead.org>
-Cc: aik@amd.com, andrew.jones@linux.dev, binbin.wu@linux.intel.com, 
-	brauner@kernel.org, chao.p.peng@linux.intel.com, david@kernel.org, 
-	ira.weiny@intel.com, jmattson@google.com, jthoughton@google.com, 
-	michael.roth@amd.com, oupton@kernel.org, pankaj.gupta@amd.com, 
-	qperret@google.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
-	shivankg@amd.com, steven.price@arm.com, tabba@google.com, willy@infradead.org, 
-	wyihan@google.com, yan.y.zhao@intel.com, forkloop@google.com, 
-	pratyush@kernel.org, suzuki.poulose@arm.com, aneesh.kumar@kernel.org, 
-	Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Shuah Khan <shuah@kernel.org>, Vishal Annapurve <vannapurve@google.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>, 
-	Kairui Song <kasong@tencent.com>, Kemeng Shi <shikemeng@huaweicloud.com>, 
-	Nhat Pham <nphamcs@gmail.com>, Baoquan He <bhe@redhat.com>, Barry Song <baohua@kernel.org>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
-	Wei Xu <weixugc@google.com>, Youngjun Park <youngjun.park@lge.com>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Kiryl Shutsemau <kas@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>, Vlastimil Babka <vbabka@kernel.org>, kvm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-mm@kvack.org, linux-coco@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 1B6B752ADE7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJ+tA2oC/2WNQQ6CMBBFr0JmbU2nLWhccQ/DogyDjAsgbSEYw
+ t0FXLp8yfvvrxA5CEd4ZCsEniXK0O9gLhlQ5/sXK2l2BqNNoXNE1eB0c0mRptrfWyTrHOzyGLi
+ V5Qw9qx/HqX4zpWN9GJ3ENITP+TTj4f1FZ1RaFcaSqQlza3zZ85K6Ybx6gWrbti+Abc84rwAAA
+ A==
+X-Change-ID: 20260511-d1u74t-c0cba8f1c344
+To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Abdurrahman Hussain <abdurrahman@nexthop.ai>, 
+ kernel test robot <lkp@intel.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778625955; l=2625;
+ i=abdurrahman@nexthop.ai; s=20260510; h=from:subject:message-id;
+ bh=07huJZfdVDsVDdyzp6gIWeNC9PLalNwQMidkkW1mhKg=;
+ b=N1fpvSwaSXM2bYj2h/Cp7iEyB5yRVXj4TFN3Mk5qbmea2/1zdOfxg2ofP+VdhbU7FOELd6FQL
+ lIz2Gg9DmysB5Ukq/XreAGxunZhzuCyPdf+cAqvlA0hI0mQHaw0peoL
+X-Developer-Key: i=abdurrahman@nexthop.ai; a=ed25519;
+ pk=omTm9cCAbO0ZhS32aKfJDKue0W3sQGpG9ub5eYHif8I=
+X-Rspamd-Queue-Id: C85E952B0B6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[nexthop.ai,none];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[nexthop.ai:s=google];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,linux.dev,linux.intel.com,kernel.org,intel.com,google.com,arm.com,infradead.org,redhat.com,alien8.de,zytor.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,linux-foundation.org,tencent.com,huaweicloud.com,gmail.com,lge.com,ziepe.ca,vger.kernel.org,kvack.org,lists.linux.dev];
-	TAGGED_FROM(0.00)[bounces-87247-lists,linux-doc=lfdr.de];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87249-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[nexthop.ai:+];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ackerleytng@google.com,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[abdurrahman@nexthop.ai,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_GT_50(0.00)[64];
-	TAGGED_RCPT(0.00)[linux-doc];
-	TO_DN_SOME(0.00)[]
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,nexthop.ai:email,nexthop.ai:mid,nexthop.ai:dkim]
 X-Rspamd-Action: no action
 
-"Liam R. Howlett" <liam@infradead.org> writes:
+This series adds a PMBus driver for the Murata D1U74T-W AC/DC power
+supply unit, used in some Open Compute Project platforms.
 
->
-> [...snip...]
->
->>
->>The invariant in this maple tree is that contiguous ranges with the same
->>attribute are stored as a single range.
->>
->>The goal of this first part is to get the entry at the index just after
->>the requested range, and see what the attribute there is. If that
->>attribute is what we're about to set, extend the requested range for
->>storing to the end of that range.
->>
->>If there is another range higher than end + 1, with the invariant
->>maintained, that attribute has to be different than the attribute stored
->>at end. Hence, we only want to extend this requested range up till end.
->>
->
-> mas_find() will look for an entry at the given address for the first sear=
-ch, and if it is not found it will continue to search upwards.  Since you l=
-imit the search to end, it will work as you want and there isn't a bug as I=
- was thinking in my sleep deprived state.
->
-> Since you are searching for exactly one address (end), it might serve you=
- better to walk there.  Maybe walking is a better API for what you are doin=
-g here?
->
+The PSU is PMBus-compliant and uses the linear data format. The driver
+exposes:
 
-Thanks again for this tip! I'll try the walk API in the next revision
-after v6 [1]
+  - input/output voltage, current and power telemetry,
+  - three temperature sensors,
+  - dual fan tachometer monitoring,
 
-[1] https://lore.kernel.org/all/20260507-gmem-inplace-conversion-v6-0-91ab5=
-a8b19a4@google.com/T/
+through the standard hwmon/pmbus sysfs interface. Probe verifies the
+PMBUS_MFR_ID and PMBUS_MFR_MODEL fields before binding so the driver
+only attaches to actual D1U74T-W hardware.
 
->
->>> Do you have testing of these functions somewhere?
->>>
->>
->>GMEM_CONVERSION_MULTIPAGE_TEST_INIT_SHARED(indexing, 4) tests setting
->>attributes in ranges. If test_page is 2,
->>
->>1. [0, 4) starts off shared (4 is the number of pages in the guest_memfd)
->>2. [2, 3) is converted to private
->>    =3D> so the ranges should now be [0, 2), [2, 3), [3, 4)
->>3. [2, 3) is converted back to shared
->>    =3D> so the ranges should now be [0, 4)
->>
->>I verified this by inserting some trace_printk()s and inspecting manually=
-.
->>
->
-> Thanks.  I find the exclusive ranges a bit odd to think about in the mapl=
-e tree context, but this test case makes sense.  This is especially odd to =
-look at a single index entry, at least for me.
->
-> I generally have a set of test cases and append any bug reproduces to tha=
-t list so they are unlikely to reoccur.  My testing is certainly different =
-from what you'll be doing, but this method has done well with the quality o=
-f code improving over time, and limited (if any) regressions.
->
+Patch 1 adds the compatible string to trivial-devices.yaml. The
+binding declares only compatible and reg (no regulators, no supplies),
+so a standalone binding file is not warranted.
 
-I've not worked directly with the maple tree tests but the xarray tests
-(similarly set up, I believe) are a joy to work with.
+Patch 2 adds the driver, hwmon documentation, Kconfig/Makefile entries
+and MAINTAINERS section.
 
-> I actually insist that any fix has a test before I accept them.  There ar=
-e two reasons for this: 1. Avoiding the regression. 2. People really unders=
-tand the bug if they can create a reproducer.
->
-> I hope this helps.
->
->
+Signed-off-by: Abdurrahman Hussain <abdurrahman@nexthop.ai>
+---
+Changes in v2:
+- Patch 1: move the binding into trivial-devices.yaml rather than
+  carrying a standalone murata,d1u74t.yaml. The device only declares
+  compatible and reg, with no regulators or supplies, so the
+  standalone binding was not warranted (Conor Dooley review).
+- Patch 2: fix the d1u74t.rst title underline (was 18 '=' chars under
+  a 20-char title, docutils warning from the kernel test robot).
+- Link to v1: https://patch.msgid.link/20260511-d1u74t-v1-0-623c2bc1532a@nexthop.ai
 
-The maple tree tests are set up to directly test maple tree code, but
-KVM selftests test from the userspace interface, and it's hard to test
-this invariant from userspace.
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Abdurrahman Hussain <abdurrahman@nexthop.ai>
+To: Guenter Roeck <linux@roeck-us.net>
+To: Jonathan Corbet <corbet@lwn.net>
+To: Shuah Khan <skhan@linuxfoundation.org>
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-hwmon@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
 
->>>> +	if (entry && xa_to_value(entry) =3D=3D attributes)
->>>> +		last =3D mas->last;
->>>> +
->>>> +	if (start > 0) {
->>>> +		mas_set_range(mas, start - 1, start - 1);
->>>> +		entry =3D mas_find(mas, start - 1);
->>>> +		if (entry && xa_to_value(entry) =3D=3D attributes)
->>>> +			start =3D mas->index;
->>>> +	}
->>>> +
->>>> +	mas_set_range(mas, start, last);
->>>> +	return mas_preallocate(mas, xa_mk_value(attributes), GFP_KERNEL);
->>>> +}
->>>> +
->>>>
->>>> [...snip...]
->>>>
+---
+Abdurrahman Hussain (2):
+      dt-bindings: trivial-devices: Add Murata D1U74T PSU
+      hwmon: (pmbus/d1u74t) Add Murata D1U74T PSU driver
+
+ .../devicetree/bindings/trivial-devices.yaml       |  2 +
+ Documentation/hwmon/d1u74t.rst                     | 97 ++++++++++++++++++++++
+ Documentation/hwmon/index.rst                      |  1 +
+ MAINTAINERS                                        |  7 ++
+ drivers/hwmon/pmbus/Kconfig                        |  9 ++
+ drivers/hwmon/pmbus/Makefile                       |  1 +
+ drivers/hwmon/pmbus/d1u74t.c                       | 85 +++++++++++++++++++
+ 7 files changed, 202 insertions(+)
+---
+base-commit: 5d6919055dec134de3c40167a490f33c74c12581
+change-id: 20260511-d1u74t-c0cba8f1c344
+
+Best regards,
+--  
+Abdurrahman Hussain <abdurrahman@nexthop.ai>
+
 
