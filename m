@@ -1,309 +1,137 @@
-Return-Path: <linux-doc+bounces-87194-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87196-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QA69HLJjA2oq5gEAu9opvQ
-	(envelope-from <linux-doc+bounces-87194-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:30:26 +0200
+	id aBfyBv1jA2oq5gEAu9opvQ
+	(envelope-from <linux-doc+bounces-87196-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:31:41 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E234525D6A
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:30:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50F93525DA3
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 19:31:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B8DAD30131D7
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 17:26:23 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8F2B93050F6B
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 17:29:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26D3F3DB97E;
-	Tue, 12 May 2026 17:26:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EAA13DB96B;
+	Tue, 12 May 2026 17:29:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="l5wlrUP3"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="jqTIloJP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AB773D969F
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 17:26:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E9CC3DC843
+	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 17:29:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778606783; cv=none; b=VsG8st1YzwV54zzVdtmlD62tQU0RVyI5hFNGrxcCwL2sgtk7lxUdo3qv9W8Xnkbork6jtDvkxT5tgtpI2PiTbsprMTDFuwlvg1Jai6l+yVcQViNNmr3JxMPly/CTQomKo4vu54PbmSstJv1+KCt/PW2fYPKtbrRtST7Zuq8SqWo=
+	t=1778606972; cv=none; b=Ni+BqXv4sM//2GASFiyNpV/zKuJbQ2VZ3eTKqxGRiNbFcCIarKxzhvKKLQ3mZD4WTExNOjzJ4+qe3nqSPqePR31IDzyGEeWDZU10YD+eWLpqM256rtMzOXQ9XsGaI18WeUrpYVP3znWu+Z4oP+00QyyzVsCUSAlrvxtTH0+UJ8E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778606783; c=relaxed/simple;
-	bh=GH4ZvXtK3C8jRIe/KpqWaX2kA5XQXR1LOJFoNrOPCZ0=;
-	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=reA+lJQj+9W25/PcQmSF9k1qT8B2j3jM9yEPXkce84r3MYHFFi6uJnthqxFC83viQsuFg227ezZMCti/ShpgMISVqTbnBie22B8qrT1jzwmQX+AaBHvfRcs4c1smtTNx1YzyFss3zBPATMLFXo5EvErOPpZS89sD034ExofLgGM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=l5wlrUP3; arc=none smtp.client-ip=209.85.208.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-67c9616b4feso8537954a12.1
-        for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 10:26:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778606780; x=1779211580; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:date:from:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=es0fhfjsZJa+c9pGkN+xW7Ugn5fzPzkcUIdpFAi88WM=;
-        b=l5wlrUP3gLlOeTCY105b3pu05JHAoTfN2uPsPj/PCrLj+7wFnkZ4tg6oeEQsgsOU1d
-         Q4MaXtFuVnudW7qQVWdUEH5XQz7lb9VgWR2JKPl5FRu0RuxyvgcADbQOVKKxOzLqd6wi
-         kXEgauDJLSmOEigfwB//m7GJpFeIjw6H7YiZnCxqpkqRP6cPz2iSocpstUPKsYWwUVoF
-         IWb2jq/UvSo8KJ4LIK0UlVbpy7exlY1j8OMB1FZpgLYFaOjl0D9yElrGN9aeM4ilwt4f
-         vOIpBgEmW6jfdD2+yX/O0HDi3OwUohp3afPSJG5XJkQbSEzcr1q2RtyLE0JSCu8gl302
-         Wiqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778606780; x=1779211580;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=es0fhfjsZJa+c9pGkN+xW7Ugn5fzPzkcUIdpFAi88WM=;
-        b=Zl5qW+VSG+xhYSDm39vpjnipB+9xNiAF1eW94v2oXJw8o1ufZ55DMaiTLL7keSuwM0
-         BZSzOZGB3UCoe7jYfC4vuduYTFwkXh8zh3gh2jqJS+kD6f5oKAeSmdBCkdUXZLsM68K+
-         990xaoH+zhdGhIecLzNwPqQnfAl6GtlA9GnYmL8YEM/vNhjpqqjuAwUGP3+/R8GOaG/B
-         k/iwaLCyYLTxNKqPqmaqKNXZ1GOLKJ3c7IC8xaSApoo5Kyel23crPsxw9NGtfzuhuwub
-         XPAgPMgxHqtVFIHM7XJphSlcKzLrZU/be6Xj/p4nNA0OgCOXCiAFK8TqTxRZZKrKxjZ4
-         eDiA==
-X-Forwarded-Encrypted: i=1; AFNElJ+yZ+lbmZJDS/XOQVvXP4qm5aRNxREtJXLV8IsZ359hZkw9EcUkscnbZiz7HfTa0D/rHp1B5s4oZ1o=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxd5oYI8DTgmq7RESsJs0vBTW3g4hiRD1EsX7oCQNw3uoLpqcHW
-	rZ3GkKWxl/hLOskXLdVxB9yOZo3pF1WutaTw6pdZvbMIObsl/CYT1wxx
-X-Gm-Gg: Acq92OGWSnbTojaR1QHYyyeuWeXIXS/5VSukBb1U/JX93f13RrSSZKJ/8aWvR0QlG6i
-	hp/KFBlOY6bY52JdpdmQEHH6bO2zkkBoAgTb5suPsRK3VUYJ1cWtQs3jJ89or6N9Eo/AKuHvU18
-	/QmlvCHIqy4L/UqZ+hHrQw4BMPZa7Zl+jfrZpXx8/f30TlU6XH3oGqbhy196M7SNN3wnRbg/vtI
-	eXXGsSzyRwQp8bYSMWLdF3wRA7LhTSbKCq6kssAbe8pM7jP9YRf6vaZ3l15vD+D5RF8SqD5Ngcw
-	tEkA/qGmcHMZWEFnBddGYFjyb0er1Q5lxH0COSagiGfnTrnVAFxth9PKyb+on0QCotZhoPRBOvg
-	dY+bumUjqa0qJMbmQzJidGHGpL/WSL8bqvWeqgS/ha04EL8IraU8nu/4E7U3GSQV69Kblr61Lhp
-	iA/rwPJWrS+h7w8wCxPIZj9KklwpnrUcJIXIyT4Adi9ceVmCNrKIlGKl/LZQ3I2dvLj8S1KSjBO
-	iubQKd1I6oDPGxaXaCc5cA73nHIMO8seIg2/twQ53XqKOOOnw==
-X-Received: by 2002:a05:6402:1f86:b0:670:ef2a:217e with SMTP id 4fb4d7f45d1cf-67f6f91cd8emr8443896a12.0.1778606779530;
-        Tue, 12 May 2026 10:26:19 -0700 (PDT)
-Received: from RDEALENC-L01.ad.analog.com (24.206.116.131.netskope-rdns.com. [24.206.116.131])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-67ef0e0d132sm5340609a12.20.2026.05.12.10.26.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 May 2026 10:26:18 -0700 (PDT)
-From: Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-X-Google-Original-From: Rodrigo Alencar <rdealenc@rdealenc-l01.ad.analog.com>
-Date: Tue, 12 May 2026 18:26:12 +0100
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	Rodrigo Alencar <455.rodrigo.alencar@gmail.com>
-Cc: Andy Shevchenko <andy.shevchenko@gmail.com>, 
-	Jonathan Cameron <jic23@kernel.org>, 
-	Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>, rodrigo.alencar@analog.com, linux-kernel@vger.kernel.org, 
-	linux-iio@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org, 
-	David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
-	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Andrew Morton <akpm@linux-foundation.org>, Petr Mladek <pmladek@suse.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
-	Sergey Senozhatsky <senozhatsky@chromium.org>, Shuah Khan <skhan@linuxfoundation.org>, 
-	David Laight <david.laight.linux@gmail.com>
-Subject: Re: [PATCH v12 02/11] lib: kstrtox: add kstrtoudec64() and
- kstrtodec64()
-Message-ID: <ru2h3ip7qf6j54dlrij54nwp45uyq6m2e6zspt6v6eynpsagqq@eo5v3yparuhh>
-References: <20260512123953.40d80bc9@jic23-huawei>
- <agMnWzMjW1LwCSyT@ashevche-desk.local>
- <sj6cpjhakyfvv6rgox6cnhl2u2tgaecugcok6fw2l7zgku5wtc@aqx3ul72vgca>
- <agMvlS3-0wvGmBwh@ashevche-desk.local>
- <dxjg2sdyxb7ieb4abmeyyye7qok6cczrxabpsjyjhcbehwoec3@sbbqoo4wmzre>
- <agM8pWrM6j_XksvN@ashevche-desk.local>
- <ur6brs3yjzyb4mtelabmcglxjltddqvjxtgl3lkdkmbjlkmnsq@bwd6rz7gided>
- <CAHp75VeoH3yVfp8NWjKfc_df0VRLkyf_SK4e==-wJOEodVjW_A@mail.gmail.com>
- <q4rmlkgecvztnvjg7b7wtqyvhdy7uxgaouvhae2mlsxaasasbf@dfakp4m5l5sl>
- <agNfqiZpGZAM-x_H@ashevche-desk.local>
+	s=arc-20240116; t=1778606972; c=relaxed/simple;
+	bh=9Bbac65Fe1mZYGiV9lddtfmQKTqfMsu+2ocmTxb0MUk=;
+	h=Date:From:To:Cc:Subject:Message-ID; b=ZUNPT5wujxUsY1W5BJ7rmsojKrWR17b0x5C0WZ+w4Tgk3HEOitmiJp/rlQvP5vMtIPDr+nE2qKdAoik/q6ElpbD07smtvt/CuKUy+UMqm1286isxcUNGkO0o9OJmLVBWjkZIZaQx1pvO27SreOZfp+d+xJC+nX+8A5bGhTZGcOg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=jqTIloJP; arc=none smtp.client-ip=198.175.65.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778606970; x=1810142970;
+  h=date:from:to:cc:subject:message-id;
+  bh=9Bbac65Fe1mZYGiV9lddtfmQKTqfMsu+2ocmTxb0MUk=;
+  b=jqTIloJPLP5nnc2U99kBlKZfqJc6YyLwZgCe0NlD9OngNMNp5zf+T8xo
+   PXvGU3wdO6SASy9GUmyYeOwEqg9iiO7oFP5PQE2bM/VDts9k0d7C74xPp
+   BjqrqHQdKntzhNlSHp4tLhLR6CEj3epV+TSgv/AbB2pASwOIK6W9dmNZw
+   eStQWascRarawI+at2vJPFjVG6C9X4IR/MT9ml6LYchZtVcskCuTWisFH
+   45S/KCZiEAMG9oZGBKqQ00zg0rL+S2Ka1Le1bq5GLb7LFUcW+4Ow4YAVl
+   YToVPdDw55lzVL2BMgUo2dgQPw2hGttCT8Xnw7xmPB2nOtskoFCa5TV/g
+   g==;
+X-CSE-ConnectionGUID: V/DraVIhTNOBjZj48ngNHQ==
+X-CSE-MsgGUID: Tlp4eM4zTk69q5szGNc2vg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11784"; a="89825941"
+X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
+   d="scan'208";a="89825941"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2026 10:29:30 -0700
+X-CSE-ConnectionGUID: k35GLjY8T0aVoM86YOXqCA==
+X-CSE-MsgGUID: c/DKlNqvSUqGSvL1lLI6Wg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,231,1770624000"; 
+   d="scan'208";a="236977499"
+Received: from igk-lkp-server01.igk.intel.com (HELO bdf09bfdbd5f) ([10.211.93.152])
+  by orviesa010.jf.intel.com with ESMTP; 12 May 2026 10:29:29 -0700
+Received: from kbuild by bdf09bfdbd5f with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wMqv8-000000008JB-18WE;
+	Tue, 12 May 2026 17:29:26 +0000
+Date: Tue, 12 May 2026 19:28:44 +0200
+From: kernel test robot <lkp@intel.com>
+To: David Matlack <dmatlack@google.com>
+Cc: oe-kbuild-all@lists.linux.dev, 0day robot <lkp@intel.com>,
+ Vipin Sharma <vipinsh@google.com>, linux-doc@vger.kernel.org
+Subject: htmldocs: Documentation/driver-api/vfio_pci_liveupdate:7:
+ ./drivers/vfio/pci/vfio_pci_liveupdate.c:78: WARNING: unknown document:
+ '/PCI/liveupdate' [ref.doc]
+Message-ID: <202605121946.GDFPWf9X-lkp@intel.com>
+User-Agent: s-nail v14.9.25
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <agNfqiZpGZAM-x_H@ashevche-desk.local>
-X-Rspamd-Queue-Id: 1E234525D6A
+X-Rspamd-Queue-Id: 50F93525DA3
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87194-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[linux.intel.com,gmail.com];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,analog.com,vger.kernel.org,baylibre.com,metafoo.de,lwn.net,linux-foundation.org,suse.com,goodmis.org,rasmusvillemoes.dk,chromium.org,linuxfoundation.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[455rodrigoalencar@gmail.com,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc,rodrigo.alencar.analog.com,dt];
-	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87196-lists,linux-doc=lfdr.de];
+	DKIM_TRACE(0.00)[intel.com:+];
 	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCPT_COUNT_FIVE(0.00)[5];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-doc];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,intel.com:email,intel.com:mid,intel.com:dkim,01.org:url]
 X-Rspamd-Action: no action
 
-On 26/05/12 08:13PM, Andy Shevchenko wrote:
-> On Tue, May 12, 2026 at 05:35:59PM +0100, Rodrigo Alencar wrote:
-> > On 26/05/12 06:21PM, Andy Shevchenko wrote:
-> > > On Tue, May 12, 2026 at 6:11 PM Rodrigo Alencar
-> > > <455.rodrigo.alencar@gmail.com> wrote:
-> > > > On 26/05/12 05:43PM, Andy Shevchenko wrote:
-> > > > > On Tue, May 12, 2026 at 03:12:24PM +0100, Rodrigo Alencar wrote:
-> > > > > > On 26/05/12 04:48PM, Andy Shevchenko wrote:
-> > > > > > > On Tue, May 12, 2026 at 02:21:14PM +0100, Rodrigo Alencar wrote:
-> > > > > > > > On 26/05/12 04:12PM, Andy Shevchenko wrote:
-> > > > > > > > > On Tue, May 12, 2026 at 12:39:53PM +0100, Jonathan Cameron wrote:
-> > > > > > > > > > On Sun, 10 May 2026 13:42:20 +0100
-> > > > > > > > > > Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > > Add helpers that parses decimal numbers into 64-bit number, i.e., decimal
-> > > > > > > > > > > point numbers with pre-defined scale are parsed into a 64-bit value (fixed
-> > > > > > > > > > > precision). After the decimal point, digits beyond the specified scale
-> > > > > > > > > > > are ignored.
-> > > > > > > > > >
-> > > > > > > > > > Whilst Rodrigo has already replied to say there will be another version
-> > > > > > > > > > I'd like to request final feedback from those who were involved in the parser
-> > > > > > > > > > discussions.
-> > > > > > > > > >
-> > > > > > > > > > They got very involved and I'm far from an expert in the right way to do
-> > > > > > > > > > this stuff.
-> > > > > > > > > >
-> > > > > > > > > > I don't think David Laight was +CC so I've added that.
-> > > > > > > > > > David, Andy - I think you two were most involved in that discussion:
-> > > > > > > > > > Any objections to the end result?
-> > > > > > > > >
-> > > > > > > > > I already said a few times about the naming. I do not like the kstrto*()
-> > > > > > > > > be semantically different on how they treat the input. Second point is
-> > > > > > > > > to avoid code duplication, but this one is less of a concern since the
-> > > > > > > > > new code is in the library close to the other potentially duplicate code
-> > > > > > > > > piece and hence can be addressed later.
-> > > > > > > >
-> > > > > > > > I suppose I reached into kstrtodec64() and kstrtoudec64() because it aligns
-> > > > > > > > with your expectations for kstrto*() semantics, no? Those include:
-> > > > > > > >  - overflow check;
-> > > > > > > >  - extensive input validation;
-> > > > > > > >  - optional '\n' in the end;
-> > > > > > > >  - mandatory nul-termination.
-> > > > > > > >
-> > > > > > > > am I missing anything?
-> > > > > > >
-> > > > > > > When we add scale we basically make that not true. Moreover the code in this
-> > > > > > > patch makes scale == number_of_characters which I think a bit fragile, however
-> > > > > > > it's about the fractional part when the amount of digits is equal to scale.
-> > > > > >
-> > > > > > That is not really the case. It is being set as a limit, so it does check for
-> > > > > > truncation and zero-padding.
-> > > > >
-> > > > > I do not see it happens in _parse_integer_limit(). It doesn't try to parse more
-> > > > > characters than it's requested in max_chars. It doesn't check if there are more
-> > > > > character nor their converted values.
-> > > > >
-> > > > > > > To make this work as expected we need to add an additional call like
-> > > > > > > kstrtoull() (and perhaps drop that \n and NUL-terminator checks) and see
-> > > > > > > if that overflows or not. Since it's a fractional part it must have less
-> > > > > > > than 20 (decimal) digits there, so we check the rv (or how many digits
-> > > > > > > were parsed successfully) and compare to 20. If it's more, we got too many
-> > > > > > > decimal digits.
-> > > > > >
-> > > > > > For overflow it checks the KSTRTOX_OVERFLOW flag and leverages check_mul_overflow()
-> > > > > > and check_add_overflow() when combining fractional and integer parts. The amount
-> > > > > > of characters is not really important there. The scale cannot be bigger than 19 and
-> > > > > > that makes sure that int_pow() does not overflow. The code uses _parse_integer_limit()
-> > > > > > due to the nature of input and to avoid 64-bit division, kstrtoull() at any point
-> > > > > > (parsing integer or fractional parts) does not make much sense.
-> > > > >
-> > > > > Under 'like kstrotoull()' I meant something that repeats needed functionality.
-> > > > > I believe it's parse_integer() (without limit).
-> > > >
-> > > > I think we are going in circles here and we could look at the code instead:
-> > > > - integer parsing with _parse_integer()
-> > > >         - overflow check and validation of the return value
-> > > > - fractional parsing with _parse_integer_limit()
-> > > >         - overflow check and validation of the return value
-> > > 
-> > > No, this is not fully true. That's what my whole point is about. The
-> > > max_chars parameter limits the input check, then it skips an arbitrary
-> > > number of digits and only *then* it checks for \n and \0. What will be
-> > > the result of the
-> > > 0.00000000000000000000000000000000423 in your case? Whatever scale you
-> > > gave it will return 0 without checking on how many digits were
-> > > supplied.
-> > 
-> > I suppose that is a valid input and 0 is the expected result there.
-> > 
-> > > All the same for 0.9999999999999999999999999999999000423. My
-> > > point is that we should limit this by 19 digits.
-> > 
-> > why we need to limit by 19? Digits beyond the scale carry no value...
-> 
-> ...only if they are all 0:s.
+tree:   https://github.com/intel-lab-lkp/linux/commits/Vipin-Sharma/vfio-pci-Register-a-file-handler-with-Live-Update-Orchestrator/20260512-152829
+head:   ebd50d810440364055692a3ed1d967cd7149d0dc
+commit: 4ab988bdf43079ff3eb58904f591ec464f289db5 docs: liveupdate: Add documentation for VFIO PCI
+date:   10 hours ago
+compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
+docutils: docutils (Docutils 0.21.2, Python 3.13.5, on linux)
+reproduce: (https://download.01.org/0day-ci/archive/20260512/202605121946.GDFPWf9X-lkp@intel.com/reproduce)
 
-I thought your concern was on input length.
- 
-> > just like leading zeros to the integer part (which is also accepted by
-> > kstrtoull() when parsing with base 10). Not sure why this is invalid input.
-> 
-> See above. I agree on truncating trailing 0:s as it's done for leading ones
-> in integer part, but if any of the digit behind 19th is not 0, it's an overflow
-> condition (or bad input, depending how strict the rules are).
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202605121946.GDFPWf9X-lkp@intel.com/
 
-stating in the documentation that digits beyond the scale are ignored is not
-enough?
+All warnings (new ones prefixed by >>):
 
-> > > On top of that, what about -0.9(19 times) ? the fraction should be u64
-> > > in this case and it's fine. The sign applies to the combined value.
-> > 
-> > yes, range for signed values are verified later.
-> 
-> > > >         - extra scaling and truncation happening outside if needed.
-> > > 
-> > > Right, but the given input may be way too long and still needs more validation.
-> > 
-> > What is the problem with a long input of digits?
-> > C compiler does not complain about this when parsing a float value,
-> > python does not
-> > complain about this when parsing floats or decimals either.
-> 
-> Because there is an exponent limit and for double it's something like 1e307
-> IIRC, meaning, try 1024 digits to be sure.
-> 
-> Python most likely uses the library for big numbers, you can't compare it at all with this.
+   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:45: ERROR: Unknown target name: "network flags". [docutils]
+   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:50: ERROR: Unknown target name: "scope flags". [docutils]
+   Documentation/userspace-api/landlock:550: ./include/uapi/linux/landlock.h:24: ERROR: Unknown target name: "filesystem flags". [docutils]
+   Documentation/userspace-api/landlock:559: ./include/uapi/linux/landlock.h:168: ERROR: Unknown target name: "filesystem flags". [docutils]
+   Documentation/userspace-api/landlock:559: ./include/uapi/linux/landlock.h:191: ERROR: Unknown target name: "network flags". [docutils]
+>> Documentation/driver-api/vfio_pci_liveupdate:7: ./drivers/vfio/pci/vfio_pci_liveupdate.c:78: WARNING: unknown document: '/PCI/liveupdate' [ref.doc]
+   Documentation/networking/skbuff:36: ./include/linux/skbuff.h:181: WARNING: Failed to create a cross reference. A title or caption not found: 'crc' [ref.ref]
 
-You would be fine if the truncation loop:
-
-while (isdigit(*s)) /* truncate */
-	s++;
-
-is bounded by (19-scale) iteration count? or it should keep iterating if those are zero?
-
-is that the only concern? Again, the usage of _parse_integer_limit(s, 10, &_frac, scale)
-avoids a 64-bit division when checking the rv.
-
-> > > > - check for input termination
-> > > > - combination of integer and fractional parts with check_mul_overflow() and check_add_overflow()
-> > > >
-> > > > > > > Maybe I'm missing these checks already performed?
-> > > > > > >
-> > > > > > > > > Having the test cases is a big benefit, and that part I like the most.
-> 
-> -- 
-> With Best Regards,
-> Andy Shevchenko
-> 
-> 
-
--- 
-Kind regards,
-
-Rodrigo Alencar
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
