@@ -1,78 +1,107 @@
-Return-Path: <linux-doc+bounces-87005-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87007-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iM10JuDCAmp7wQEAu9opvQ
-	(envelope-from <linux-doc+bounces-87005-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 08:04:16 +0200
+	id UOE0Nb3HAmqWwgEAu9opvQ
+	(envelope-from <linux-doc+bounces-87007-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 08:25:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC28051AA2A
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 08:04:15 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5392F51AF25
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 08:25:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 873FB30476F0
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 06:01:36 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8EDAA3030B1A
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2026 06:07:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD81841B374;
-	Tue, 12 May 2026 06:00:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1961843636F;
+	Tue, 12 May 2026 06:06:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="e69zZ4NY"
+	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="luX6EUsI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-182.mta0.migadu.com (out-182.mta0.migadu.com [91.218.175.182])
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012046.outbound.protection.outlook.com [40.107.209.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C49F40F8C9
-	for <linux-doc@vger.kernel.org>; Tue, 12 May 2026 06:00:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.182
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778565639; cv=none; b=gSyguvE0o8tRQOs10/oqJv3Ocsthe+3zdbx9qNN07deDQKz02DmmwfOrg/VU+J3u/NooMmKZoKY7vWXXL+KixrGIz5QoXepDPk5llHhqBXjAnRJ1/MvTKSuNDHcxxh+hPoS3hgWPMbAmuAjsLmM3pfD8O4R+ArHhBEl5RoiXlmY=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778565639; c=relaxed/simple;
-	bh=kRF9RHp407Fxt7W9NCJuN2XXVOJ+iJ65bCFZX7kuqVQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Pk2BqRevtHkOYytuQqICs05X6mACZ+mf4rzpAX1VggA5qd+Dzuwso/xnw8yrW4UMcsYigGR0IzzAoqBG0b5a1qtqZj4C0VrfBg9ZWRvQxQA73DMDOMhJIyQt+0pvLx+8O2nIN7Xg8+HhyPtTk6fIujH7hjKEkDzfspl8n62z1fo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=e69zZ4NY; arc=none smtp.client-ip=91.218.175.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1778565615;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=MkHpM1vn80llxrmN+R6WT0i6FCnOAAEKA+jHxtvWc3A=;
-	b=e69zZ4NYpLqH1ixrjBCxt8xdNV3c8uTl91/qk5fjjo+D2jJ4gUpRgJJY1But4SRJmzLy1P
-	bSrvUG5275oZU4ddcoe/Gii/nxI2KEzvTYTT5EcTEXaVEtWET8IUruoLixpZopTLx8AHd+
-	52RgL1m5AsLWoF0Nv1qLIA4Ae9w1op4=
-From: Kaitao cheng <kaitao.cheng@linux.dev>
-To: ast@kernel.org,
-	corbet@lwn.net,
-	martin.lau@linux.dev,
-	daniel@iogearbox.net,
-	andrii@kernel.org,
-	eddyz87@gmail.com,
-	song@kernel.org,
-	yonghong.song@linux.dev,
-	john.fastabend@gmail.com,
-	kpsingh@kernel.org,
-	sdf@fomichev.me,
-	haoluo@google.com,
-	jolsa@kernel.org,
-	shuah@kernel.org,
-	chengkaitao@kylinos.cn,
-	skhan@linuxfoundation.org,
-	memxor@gmail.com
-Cc: bpf@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	vmalik@redhat.com,
-	linux-kselftest@vger.kernel.org
-Subject: [PATCH RESEND bpf-next v10 8/8] selftests/bpf: Add test cases for bpf_list_del/add/is_first/is_last/empty
-Date: Tue, 12 May 2026 13:59:19 +0800
-Message-ID: <20260512055919.95716-9-kaitao.cheng@linux.dev>
-In-Reply-To: <20260512055919.95716-1-kaitao.cheng@linux.dev>
-References: <20260512055919.95716-1-kaitao.cheng@linux.dev>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF6AA2FFF8D;
+	Tue, 12 May 2026 06:06:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.209.46
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778566016; cv=fail; b=AT27Jr+uH85Px0R2UnulMHSXMB5aHkZ5cta0MZmgRsRxOFsWgZsE8KUOYyDzJsiVhpXy49lIQctDECM4xlE4Te7yhrC4w4tNuKOcCCuS08fXK8jXrSQNjTfNe6nd21jTIrui+OsXWDrXblfFClht4C2l7fl3ZhUHBLNHnu5YCsA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778566016; c=relaxed/simple;
+	bh=0DO/Dxp7JizR/b2L5K7WDmV4rIOYZsWwpWHS/OIHRFo=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=fXcBws//IE4GjFF0URAFz2qI3qLf4Igu+klxbUJXvade1S/jdhY2VaPpU3M+Cm424lVbsTRXKmRT9u53f+yb9qZUtKcdX9oorouaN8VaUgqd3k6uydfd+5v1uaUtxCwAI57GXKrRiKByhQgxn+10hl5hIoV7ll30tuqNWw1QcYI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=luX6EUsI; arc=fail smtp.client-ip=40.107.209.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vYrpiSAp4Ofuy0mpg1Gtxy1CoIZ4P74q/9UvGXq+IRJR0MuLeHQwGB2yf7S0/b9tYxxC93wAI11NPoN9KsH+XHs2lSa0brToW4gLvCg5VAzM/4kJdJdSKy8kOHXeE2VjyhDs1Pv/lxF+UOnSe/msr+KilaR9HyOKjQINePcG2U/2Bi9JAU1fngETzZj13qeeOAPZzzdppiDTAGk5Cz7WL4Jwg8aWwoomo29uEc0z3DOGLFlhiqphmBCa8DaXWUl7HXcb0HiJaUhYk8r0ynn/X7ZP8BR8pbul42JTDONT/ceGGBxWHqk3HNWIea0sw2+KzjdKDmdb8L2WsMRMZ4gcPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IFrnVx2vClI03GqvL0LNJR40dpFSDsq4E2xv5pSAFaM=;
+ b=S3ak8oL7WOiHKo2+0FM+S2WbX/8r5XYZt7MwsBh1bL7RmqigQgvBXcjTLWhTzhbGqOizcarfnCLoXqNerDmtYHt2//r1Mv84WN5uhBkXzdPFtGaYaSfNM6MJdRXuqNTVkACpFmnUmy5p1EO+nT0TZ5sVgXoUrXWgdyGwZfNom9OAorkyziKO2NkZlp7IKbm/aR8Jt0s5pKUMQUTSUfXXJIsm8ddbvRJ2PlEOKyUDaS8H5xwBJLSVM/ZFtxHWS4t2yreY3sIVWD2FEA4RU43eqz7QwAfl6yu92HgFvsOarl9U7er/uC6HyPpEiwJO9eCyjFNR4A9sWyoqrO8RusdTSA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=davemloft.net smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IFrnVx2vClI03GqvL0LNJR40dpFSDsq4E2xv5pSAFaM=;
+ b=luX6EUsIkG4+LYFhersOWU8xJGYKVElu1aG8dJ6N3OVCA31KAZJacvl9oIbGzt/vqCsiqDiq0gL6tVE3uEFmEbSK9wdtCeHKZTZUiQHOr6hh5jD22ChzmLM5U0sUqcDd4r1HTfWKUxJVmxGDZP3V6cBdOgEfouMusbHQtSEClQk=
+Received: from MW4PR04CA0188.namprd04.prod.outlook.com (2603:10b6:303:86::13)
+ by LV3PR10MB7915.namprd10.prod.outlook.com (2603:10b6:408:21a::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Tue, 12 May
+ 2026 06:06:36 +0000
+Received: from CO1PEPF000075ED.namprd03.prod.outlook.com
+ (2603:10b6:303:86:cafe::9) by MW4PR04CA0188.outlook.office365.com
+ (2603:10b6:303:86::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9891.23 via Frontend Transport; Tue,
+ 12 May 2026 06:06:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CO1PEPF000075ED.mail.protection.outlook.com (10.167.249.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Tue, 12 May 2026 06:06:34 +0000
+Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 12 May
+ 2026 01:06:31 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 12 May
+ 2026 01:06:31 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 12 May 2026 01:06:31 -0500
+Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64C66VmN1179435;
+	Tue, 12 May 2026 01:06:31 -0500
+Received: from localhost (danish-tpc.dhcp.ti.com [172.24.231.152])
+	by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 64C66TPO031898;
+	Tue, 12 May 2026 01:06:30 -0500
+From: MD Danish Anwar <danishanwar@ti.com>
+To: "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Jonathan Corbet
+	<corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, MD Danish Anwar
+	<danishanwar@ti.com>, Roger Quadros <rogerq@kernel.org>, Andrew Lunn
+	<andrew+netdev@lunn.ch>, Jacob Keller <jacob.e.keller@intel.com>, "Meghana
+ Malladi" <m-malladi@ti.com>, David Carlier <devnexen@gmail.com>, Kevin Hao
+	<haokexin@gmail.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>
+CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+	Vignesh Raghavendra <vigneshr@ti.com>
+Subject: [PATCH net-next 0/2] Add ICSSG firmware stats related to HSR 
+Date: Tue, 12 May 2026 11:36:25 +0530
+Message-ID: <20260512060627.3781329-1-danishanwar@ti.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -80,489 +109,86 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Rspamd-Queue-Id: CC28051AA2A
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075ED:EE_|LV3PR10MB7915:EE_
+X-MS-Office365-Filtering-Correlation-Id: ce920ca5-4fe9-44f8-da89-08deafec9ed6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|36860700016|1800799024|82310400026|18002099003|921020|56012099003;
+X-Microsoft-Antispam-Message-Info:
+	n0A5p7bnDy2zmZGUlF+wpiIzTknbmhPpXcmQoxxPvDLwfushtetwKnsVXFYBpMsR8BzhPwqg1TIoycjzP151V/7Dq+YXVJuENV9aqif79I1cybWOXxa8YytYpCkszZV4b6RyJnv+uwV82YqYVt6Lrcau6uP+dnlL8IX2EwF3gpzp3+dY2V/iGn0m1ar1e3+Jovmn9h0EVJD31dPv5tngiLcrNIyYUvhgJ/ZlfkGCb71bDS0oIXRevWFuqOhQD1xc8yzMErFGQqsw38HRC/ZR37orNftiNgHlEwOZjyXJ0kaniLnFhT1m+otFhwI+MxMj1jdmLIdqUp855UUxkoJ5v46ZKvtEjTtVtrwhNw1oqL3dTtitBksIF5ELSJVSh8Ufje3c94YEZFH5ckAn21AwGKlZgQaifmvPCaUSzvl/Uz6v7LpRY0P58AhL6JkYqVm1oOLdB2QSGvggzDwZfTnvdW9MsR6LyeCANblA39j1kzyCPFPbGmnBl/mcJvJ5qhby5J1Lun3G/qbx4wOx7XAsXpXAyjOBDFDK7e3NPk0U90t8m5arNu2/2AdSx6OwYEEX1ZuNe8ryYlD/PkkMrefbTZkHVpou+rWwqgTwPtP9yb5++4PDwh5YhJt0SitBiZvB4a3N4SdW2tFl+BadpFBJ1NxI2RjA7OyWfwu8N1JPESyrIC2v0Tft9pDWJ89am6NUzTK3BuAx4TU61o3+YD+vqYcnUDoqHs5KjbyfgsNH21RgtdiCVhLnhzlZwH32/WXmpCQQaRI7IPCDYpL6GhFHiQ==
+X-Forefront-Antispam-Report:
+	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(376014)(7416014)(36860700016)(1800799024)(82310400026)(18002099003)(921020)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	CblPtD5brRD/WUK1xZZt6v5sDvUDVsey5bJaDNhDan59eMPXVOJ2qwcNhBy1fZzncGJoL04Q+hsGjnl6Y7BLa4svduD0I7pMLCFYzv7xLAFlDOQieUqi7t1KryGljwZTTjDn/sNg9TBwwG6kLcoNDhIv61khr3B/uN+JPNLNzheTK/badYpVOV3jUu6JukqNOlx1UHsCXXVSmMgwumQecTA3K+DP8W/lUL5KTE6CJGtnr0DhwMYhRq0u8OAKRdYal5ySV3kvOpnj6OGcfiHEROYGi0j1wB4XFDynZ2W0maYj7KdjKIJshomcPkzQJywqZaEESzMtdoJy/RJeGkxAYN87wYJJjsfJYtIPg/gjcQHj81lEN7VYmHpfU/1jGJ4E5sjqKKtetS0TZlcpihbfsQ4CokmEcZ9CP+GWYBpRUgtbEG/Qed0a7RH19z6MbcKV
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 06:06:34.3828
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce920ca5-4fe9-44f8-da89-08deafec9ed6
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CO1PEPF000075ED.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7915
+X-Rspamd-Queue-Id: 5392F51AF25
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [3.34 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[cv is fail on i=2];
+	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
+	SUBJECT_ENDS_SPACES(0.50)[];
 	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linux.dev,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[linux.dev:s=key1];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[ti.com:s=selector1];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[bounces-87007-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87005-lists,linux-doc=lfdr.de];
-	FREEMAIL_TO(0.00)[kernel.org,lwn.net,linux.dev,iogearbox.net,gmail.com,fomichev.me,google.com,kylinos.cn,linuxfoundation.org];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_TO(0.00)[davemloft.net,google.com,kernel.org,redhat.com,lwn.net,linuxfoundation.org,ti.com,lunn.ch,intel.com,gmail.com,linux.dev];
+	DKIM_TRACE(0.00)[ti.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kaitao.cheng@linux.dev,linux-doc@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[danishanwar@ti.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[linux.dev:+];
-	TO_DN_NONE(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	NEURAL_HAM(-0.00)[-0.988];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[kylinos.cn:email,linux.dev:mid,linux.dev:dkim,sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ti.com:mid,ti.com:dkim,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns];
+	TAGGED_RCPT(0.00)[linux-doc,netdev];
+	NEURAL_HAM(-0.00)[-0.996];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	RCVD_COUNT_SEVEN(0.00)[11]
 X-Rspamd-Action: no action
 
-From: Kaitao Cheng <chengkaitao@kylinos.cn>
+This series has two pacthes,
+Patch 1/2 Updates Stats counter to use ARRAY_SIZE instead of hardcoded length.
+Patch 2/2 Adds new stats related to HSR / PRP maintained by ICSSG firmware.
 
-Extend refcounted_kptr with tests for bpf_list_add (including prev from
-bpf_list_front and bpf_refcount_acquire), bpf_list_del (including node
-from bpf_list_front, bpf_rbtree_remove and bpf_refcount_acquire),
-bpf_list_empty, bpf_list_is_first/last, and push_back on uninit head.
+MD Danish Anwar (2):
+  net: ti: icssg: Derive stats array lengths from ARRAY_SIZE
+  net: ti: icssg: Add HSR and LRE PA statistics
 
-To verify the validity of bpf_list_del/add, the test also expects the
-verifier to reject calls to bpf_list_del/add made without holding the
-spin_lock.
+ .../device_drivers/ethernet/ti/icssg_prueth.rst | 10 ++++++++++
+ drivers/net/ethernet/ti/icssg/icssg_common.c    |  7 +++++--
+ drivers/net/ethernet/ti/icssg/icssg_prueth.h    |  3 +--
+ drivers/net/ethernet/ti/icssg/icssg_stats.h     | 17 ++++++++++++++++-
+ .../net/ethernet/ti/icssg/icssg_switch_map.h    | 10 ++++++++++
+ 5 files changed, 42 insertions(+), 5 deletions(-)
 
-Signed-off-by: Kaitao Cheng <chengkaitao@kylinos.cn>
----
- .../selftests/bpf/progs/refcounted_kptr.c     | 421 ++++++++++++++++++
- 1 file changed, 421 insertions(+)
 
-diff --git a/tools/testing/selftests/bpf/progs/refcounted_kptr.c b/tools/testing/selftests/bpf/progs/refcounted_kptr.c
-index c847398837cc..21ae06797b18 100644
---- a/tools/testing/selftests/bpf/progs/refcounted_kptr.c
-+++ b/tools/testing/selftests/bpf/progs/refcounted_kptr.c
-@@ -367,6 +367,427 @@ long insert_rbtree_and_stash__del_tree_##rem_tree(void *ctx)		\
- INSERT_STASH_READ(true, "insert_stash_read: remove from tree");
- INSERT_STASH_READ(false, "insert_stash_read: don't remove from tree");
- 
-+SEC("tc")
-+__description("list_empty_test: list empty before add, non-empty after add")
-+__success __retval(0)
-+int list_empty_test(void *ctx)
-+{
-+	struct node_data *node_new;
-+
-+	bpf_spin_lock(&lock);
-+	if (!bpf_list_empty(&head)) {
-+		bpf_spin_unlock(&lock);
-+		return -1;
-+	}
-+	bpf_spin_unlock(&lock);
-+
-+	node_new = bpf_obj_new(typeof(*node_new));
-+	if (!node_new)
-+		return -2;
-+
-+	bpf_spin_lock(&lock);
-+	bpf_list_push_front(&head, &node_new->l);
-+
-+	if (bpf_list_empty(&head)) {
-+		bpf_spin_unlock(&lock);
-+		return -3;
-+	}
-+	bpf_spin_unlock(&lock);
-+	return 0;
-+}
-+
-+static struct node_data *__add_in_list(struct bpf_list_head *head,
-+				       struct bpf_spin_lock *lock)
-+{
-+	struct node_data *node_new, *node_ref;
-+
-+	node_new = bpf_obj_new(typeof(*node_new));
-+	if (!node_new)
-+		return NULL;
-+
-+	node_ref = bpf_refcount_acquire(node_new);
-+
-+	bpf_spin_lock(lock);
-+	bpf_list_push_front(head, &node_new->l);
-+	bpf_spin_unlock(lock);
-+	return node_ref;
-+}
-+
-+SEC("tc")
-+__description("list_is_edge_test1: is_first on first node, is_last on last node")
-+__success __retval(0)
-+int list_is_edge_test1(void *ctx)
-+{
-+	struct node_data *node_first, *node_last;
-+	int err = 0;
-+
-+	node_last = __add_in_list(&head, &lock);
-+	if (!node_last)
-+		return -1;
-+
-+	node_first = __add_in_list(&head, &lock);
-+	if (!node_first) {
-+		bpf_obj_drop(node_last);
-+		return -2;
-+	}
-+
-+	bpf_spin_lock(&lock);
-+	if (!bpf_list_is_first(&head, &node_first->l)) {
-+		err = -3;
-+		goto fail;
-+	}
-+	if (!bpf_list_is_last(&head, &node_last->l))
-+		err = -4;
-+
-+fail:
-+	bpf_spin_unlock(&lock);
-+	bpf_obj_drop(node_first);
-+	bpf_obj_drop(node_last);
-+	return err;
-+}
-+
-+SEC("tc")
-+__description("list_is_edge_test2: accept list_front/list_back return value")
-+__success __retval(0)
-+int list_is_edge_test2(void *ctx)
-+{
-+	struct bpf_list_node *front, *back;
-+	struct node_data *a, *b;
-+	long err = 0;
-+
-+	a = __add_in_list(&head, &lock);
-+	if (!a)
-+		return -1;
-+
-+	b = __add_in_list(&head, &lock);
-+	if (!b) {
-+		bpf_obj_drop(a);
-+		return -2;
-+	}
-+
-+	bpf_spin_lock(&lock);
-+	front = bpf_list_front(&head);
-+	back = bpf_list_back(&head);
-+	if (!front || !back) {
-+		err = -3;
-+		goto out_unlock;
-+	}
-+
-+	if (!bpf_list_is_first(&head, front) || bpf_list_is_last(&head, front)) {
-+		err = -4;
-+		goto out_unlock;
-+	}
-+
-+	if (!bpf_list_is_last(&head, back) || bpf_list_is_first(&head, back)) {
-+		err = -5;
-+		goto out_unlock;
-+	}
-+
-+out_unlock:
-+	bpf_spin_unlock(&lock);
-+	bpf_obj_drop(a);
-+	bpf_obj_drop(b);
-+	return err;
-+}
-+
-+SEC("tc")
-+__description("list_is_edge_test3: single node is both first and last")
-+__success __retval(0)
-+int list_is_edge_test3(void *ctx)
-+{
-+	struct node_data *tmp;
-+	struct bpf_list_node *node;
-+	long err = 0;
-+
-+	tmp = __add_in_list(&head, &lock);
-+	if (!tmp)
-+		return -1;
-+
-+	bpf_spin_lock(&lock);
-+	node = bpf_list_front(&head);
-+	if (!node) {
-+		bpf_spin_unlock(&lock);
-+		bpf_obj_drop(tmp);
-+		return -2;
-+	}
-+
-+	if (!bpf_list_is_first(&head, node) || !bpf_list_is_last(&head, node))
-+		err = -3;
-+	bpf_spin_unlock(&lock);
-+
-+	bpf_obj_drop(tmp);
-+	return err;
-+}
-+
-+SEC("tc")
-+__description("list_del_test1: del returns removed nodes")
-+__success __retval(0)
-+int list_del_test1(void *ctx)
-+{
-+	struct node_data *node_first, *node_last;
-+	struct bpf_list_node *bpf_node_first, *bpf_node_last;
-+	int err = 0;
-+
-+	node_last = __add_in_list(&head, &lock);
-+	if (!node_last)
-+		return -1;
-+
-+	node_first = __add_in_list(&head, &lock);
-+	if (!node_first) {
-+		bpf_obj_drop(node_last);
-+		return -2;
-+	}
-+
-+	bpf_spin_lock(&lock);
-+	bpf_node_last = bpf_list_del(&head, &node_last->l);
-+	bpf_node_first = bpf_list_del(&head, &node_first->l);
-+	bpf_spin_unlock(&lock);
-+
-+	if (bpf_node_first)
-+		bpf_obj_drop(container_of(bpf_node_first, struct node_data, l));
-+	else
-+		err = -3;
-+
-+	if (bpf_node_last)
-+		bpf_obj_drop(container_of(bpf_node_last, struct node_data, l));
-+	else
-+		err = -4;
-+
-+	bpf_obj_drop(node_first);
-+	bpf_obj_drop(node_last);
-+	return err;
-+}
-+
-+SEC("tc")
-+__description("list_del_test2: remove an arbitrary node from the list")
-+__success __retval(0)
-+int list_del_test2(void *ctx)
-+{
-+	struct bpf_rb_node *rb;
-+	struct bpf_list_node *l;
-+	struct node_data *n;
-+	long err;
-+
-+	err = __insert_in_tree_and_list(&head, &root, &lock);
-+	if (err)
-+		return err;
-+
-+	bpf_spin_lock(&lock);
-+	rb = bpf_rbtree_first(&root);
-+	if (!rb) {
-+		bpf_spin_unlock(&lock);
-+		return -4;
-+	}
-+
-+	rb = bpf_rbtree_remove(&root, rb);
-+	if (!rb) {
-+		bpf_spin_unlock(&lock);
-+		return -5;
-+	}
-+
-+	n = container_of(rb, struct node_data, r);
-+	l = bpf_list_del(&head, &n->l);
-+	bpf_spin_unlock(&lock);
-+	bpf_obj_drop(n);
-+	if (!l)
-+		return -6;
-+
-+	bpf_obj_drop(container_of(l, struct node_data, l));
-+	return 0;
-+}
-+
-+SEC("tc")
-+__description("list_del_test3: list_del accepts list_front return value as node")
-+__success __retval(0)
-+int list_del_test3(void *ctx)
-+{
-+	struct node_data *tmp;
-+	struct bpf_list_node *bpf_node, *l;
-+	long err = 0;
-+
-+	tmp = __add_in_list(&head, &lock);
-+	if (!tmp)
-+		return -1;
-+
-+	bpf_spin_lock(&lock);
-+	bpf_node = bpf_list_front(&head);
-+	if (!bpf_node) {
-+		bpf_spin_unlock(&lock);
-+		err = -2;
-+		goto fail;
-+	}
-+
-+	l = bpf_list_del(&head, bpf_node);
-+	bpf_spin_unlock(&lock);
-+	if (!l) {
-+		err = -3;
-+		goto fail;
-+	}
-+
-+	bpf_obj_drop(container_of(l, struct node_data, l));
-+	bpf_obj_drop(tmp);
-+	return 0;
-+
-+fail:
-+	bpf_obj_drop(tmp);
-+	return err;
-+}
-+
-+SEC("tc")
-+__description("list_add_test1: insert new node after prev")
-+__success __retval(0)
-+int list_add_test1(void *ctx)
-+{
-+	struct node_data *node_first;
-+	struct node_data *new_node;
-+	long err = 0;
-+
-+	node_first = __add_in_list(&head, &lock);
-+	if (!node_first)
-+		return -1;
-+
-+	new_node = bpf_obj_new(typeof(*new_node));
-+	if (!new_node) {
-+		err = -2;
-+		goto fail;
-+	}
-+
-+	bpf_spin_lock(&lock);
-+	err = bpf_list_add(&head, &new_node->l, &node_first->l);
-+	bpf_spin_unlock(&lock);
-+	if (err) {
-+		err = -3;
-+		goto fail;
-+	}
-+
-+fail:
-+	bpf_obj_drop(node_first);
-+	return err;
-+}
-+
-+SEC("tc")
-+__description("list_add_test2: list_add accepts list_front return value as prev")
-+__success __retval(0)
-+int list_add_test2(void *ctx)
-+{
-+	struct node_data *new_node, *tmp;
-+	struct bpf_list_node *bpf_node;
-+	long err = 0;
-+
-+	tmp = __add_in_list(&head, &lock);
-+	if (!tmp)
-+		return -1;
-+
-+	new_node = bpf_obj_new(typeof(*new_node));
-+	if (!new_node) {
-+		err = -2;
-+		goto fail;
-+	}
-+
-+	bpf_spin_lock(&lock);
-+	bpf_node = bpf_list_front(&head);
-+	if (!bpf_node) {
-+		bpf_spin_unlock(&lock);
-+		bpf_obj_drop(new_node);
-+		err = -3;
-+		goto fail;
-+	}
-+
-+	err = bpf_list_add(&head, &new_node->l, bpf_node);
-+	bpf_spin_unlock(&lock);
-+	if (err) {
-+		err = -4;
-+		goto fail;
-+	}
-+
-+fail:
-+	bpf_obj_drop(tmp);
-+	return err;
-+}
-+
-+struct uninit_head_val {
-+	struct bpf_spin_lock lock;
-+	struct bpf_list_head head __contains(node_data, l);
-+};
-+
-+struct {
-+	__uint(type, BPF_MAP_TYPE_ARRAY);
-+	__type(key, int);
-+	__type(value, struct uninit_head_val);
-+	__uint(max_entries, 1);
-+} uninit_head_map SEC(".maps");
-+
-+SEC("tc")
-+__description("list_push_back_uninit_head: push_back on 0-initialized list head")
-+__success __retval(0)
-+int list_push_back_uninit_head(void *ctx)
-+{
-+	struct uninit_head_val *st;
-+	struct node_data *node;
-+	int ret = -1, key = 0;
-+
-+	st = bpf_map_lookup_elem(&uninit_head_map, &key);
-+	if (!st)
-+		return -1;
-+
-+	node = bpf_obj_new(typeof(*node));
-+	if (!node)
-+		return -1;
-+
-+	bpf_spin_lock(&st->lock);
-+	ret = bpf_list_push_back(&st->head, &node->l);
-+	bpf_spin_unlock(&st->lock);
-+
-+	return ret;
-+}
-+
-+SEC("?tc")
-+__failure __msg("bpf_spin_lock at off=32 must be held for bpf_list_head")
-+long list_del_without_lock_fail(void *ctx)
-+{
-+	struct node_data *n;
-+	struct bpf_list_node *l;
-+
-+	n = bpf_obj_new(typeof(*n));
-+	if (!n)
-+		return -1;
-+
-+	/* Error case: delete list node without holding lock */
-+	l = bpf_list_del(&head, &n->l);
-+	bpf_obj_drop(n);
-+	if (!l)
-+		return -2;
-+	bpf_obj_drop(container_of(l, struct node_data, l));
-+
-+	return 0;
-+}
-+
-+SEC("?tc")
-+__failure __msg("bpf_spin_lock at off=32 must be held for bpf_list_head")
-+long list_add_without_lock_fail(void *ctx)
-+{
-+	struct node_data *n, *prev;
-+
-+	n = bpf_obj_new(typeof(*n));
-+	if (!n)
-+		return -1;
-+
-+	prev = bpf_obj_new(typeof(*prev));
-+	if (!prev) {
-+		bpf_obj_drop(n);
-+		return -1;
-+	}
-+
-+	/* Error case: add list node without holding lock */
-+	if (bpf_list_add(&head, &n->l, &prev->l)) {
-+		bpf_obj_drop(prev);
-+		bpf_obj_drop(n);
-+		return -2;
-+	}
-+
-+	return 0;
-+}
-+
- SEC("tc")
- __success
- long rbtree_refcounted_node_ref_escapes(void *ctx)
+base-commit: 63751099502d10f0aa6bb35273e56c5800cc4e3a
 -- 
-2.50.1 (Apple Git-155)
+2.34.1
 
 
