@@ -1,177 +1,141 @@
-Return-Path: <linux-doc+bounces-87413-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87414-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id RTBSG0nVBGoMPwIAu9opvQ
-	(envelope-from <linux-doc+bounces-87413-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 21:47:21 +0200
+	id QEZOJhDWBGovPwIAu9opvQ
+	(envelope-from <linux-doc+bounces-87414-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 21:50:40 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A900D53A2C0
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 21:47:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F116E53A2FE
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 21:50:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 87BBF300D942
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 19:41:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 50060304997C
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 19:43:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B24D3B0AFB;
-	Wed, 13 May 2026 19:41:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A10213AFB19;
+	Wed, 13 May 2026 19:43:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="B/nHl+XU"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="DW5y82hA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7854321D596
-	for <linux-doc@vger.kernel.org>; Wed, 13 May 2026 19:41:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4322423909C;
+	Wed, 13 May 2026 19:43:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778701290; cv=none; b=c1OwzvCAopYFujJXFZvhsggc9zx3LFgWG4Vp9dUolAC6k3lt6o/EATAhTkzJcGepSIW1C3C+zeV+twKK1rTlaGBh25WBWFCZYo1EvboIKCFySX3zjCTzKVBmaKPEovPy32QB3T/m3FieS7CmKB8wrgE9G28SoU1YCH26pPko/AM=
+	t=1778701421; cv=none; b=HjLqzusxJLYAvrHW2wlp4Z/wn7zKMh/z7UCp5Bm/uIBb4o/vNgZTQj4fPV1VpYldzt8sa4Gqd1OxnaGqZrJHj0ROrrs77KepUuAQzOwmhkpAuaexCyC1qX5aIK9csyKgqFYwx8wm1xpQYcz7Q6Bdo6XIQr7DQHGsZOQUoHeOwt8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778701290; c=relaxed/simple;
-	bh=kLqt3YFgWMrNPw4WOcer0FJUQOS2lGXlmObFsHTUpDM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=F0rLBlC7+Eof691cZ59fnSsuTMFHMvT0AaQYS9iqcRr1pRMJffgBq3tIuawuhyfDrnOp73MKT9j4aL4mGjD9+s8waadBse8+L4+wVdSIEITnuMKyAzh1zT0NAamWMwESohAWb0z8baEnQKMMb8GBxtHAlpzok0pNTUAvVPWE1Jo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B/nHl+XU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41DEEC2BCC6
-	for <linux-doc@vger.kernel.org>; Wed, 13 May 2026 19:41:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778701290;
-	bh=kLqt3YFgWMrNPw4WOcer0FJUQOS2lGXlmObFsHTUpDM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=B/nHl+XUX/TkkfplsjY3cpWPjI/NMczHpaS6xIOzpKQC6tKH6cD2IdQ8mby0alK3p
-	 B3nd/rTlwb8Tqp75RyYP0hKJlCTc0r0Kt7hRX1f9bCJTQjb9sGJU0oJii51KBLITzp
-	 +kuE0o3m4OthupTZ2LogUi3VOZBaHsZcJZgTbYHhbP3vntJpMnqgDW/Cue0xvKHIW8
-	 FD+XJC/Cy9ihogCmBgJD37j5sdGeSTDs9loN8VooK2hzJChlQVH9bvVpZE0BfNZUOY
-	 YheZq9N2nq2Flpz1/vBeFcioEJZnzVnUGItK74wYg4m77CvjVhxDqS4Q7a6EILvuZ1
-	 GBo4py8C79uAg==
-Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5a40502e63bso6502734e87.0
-        for <linux-doc@vger.kernel.org>; Wed, 13 May 2026 12:41:30 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AFNElJ++VMSk5b+m88XKnGFAegJhbEJ3TtZzZR0zaTUoUGvH1N+EVFk8QhGqwWRh7eWEUClCSZrYqCtJYiA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyrBvkqqiRES44D2phS7E9VlfEev303nx0Wmy+6y5uJex+N5r/J
-	MfB62dj2m6BomN43j3JF+iGdt7XqLFHxdK10A5APW6BYgbZy93h9JAzMEy+GJB0qVrxOOYRoA1q
-	Hfjw3JZ1BTtV1WxLEjx8rppx7hWzdzvo=
-X-Received: by 2002:a05:6512:108a:b0:5a8:a754:4b57 with SMTP id
- 2adb3069b0e04-5a8f3cb2183mr1275131e87.41.1778701288582; Wed, 13 May 2026
- 12:41:28 -0700 (PDT)
+	s=arc-20240116; t=1778701421; c=relaxed/simple;
+	bh=NmcmlAz9U99SmeJGek26lRzqtG/8MaZ8Qixq914OrI0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=nRxlDduccqZLH7lCz9nLeDNyg2TRzkhJXCXYWetioFQse34713eGqiX3jLG0SNxD/lJmhAHob5T5MOpqdvb3eWNefFdfFherOrlzODJOO1KJz7lqiPtxyQTBiZHyobxugN1CSxPUnksyDk2X43jfS/XC3YCfPi9DLvvjyz6PG+E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=DW5y82hA; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 6FD34410B5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1778701419; bh=gEfUr97x/O1UEkZyQ6LIL2eickoPNyB2l54Fbizh9uo=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=DW5y82hACNaDKsYL9js07prApG2+w5TKcZVmBodgFH8chjBZUMvo9rWFD8TNPvsVT
+	 Ow1sYTFPB5NoibSNv/Ku/LhxANe3nNXAeI94hLeDFhrM/+YxNEg4GDaE1TEq69cM3R
+	 05ePKZ0AtSd6SG6WwuqEFK43AwK77Wz8TTPSPrgoA1KO3HZkwJrRlZEikgb0sEhU3d
+	 +2sEkOBW1bmG+TxVwhBYVeEyOwvuyfhndvf2uXY5k2KaTyt49VHLgsdZMmNPe8TM1f
+	 Q8E2xEubWZC8ONqC1x0OpXCeSupdj5hEj2y0AmzkxJtEwVQybIXQKc8ug8ilj+qCgq
+	 3p/AwQFypeIBg==
+Received: from localhost (c-71-229-227-126.hsd1.co.comcast.net [71.229.227.126])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 6FD34410B5;
+	Wed, 13 May 2026 19:43:39 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Chen-Shi-Hong <eric039eric@gmail.com>, linux@leemhuis.info
+Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Chen-Shi-Hong <eric039eric@gmail.com>
+Subject: Re: [PATCH v3] docs: reporting-issues: replace "these advices" with
+ "all of this advice"
+In-Reply-To: <20260513174009.1260-1-eric039eric@gmail.com>
+References: <20260512150431.894-1-eric039eric@gmail.com>
+ <20260513174009.1260-1-eric039eric@gmail.com>
+Date: Wed, 13 May 2026 13:43:38 -0600
+Message-ID: <874ikbksd1.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260424-rneri-fix-intel-pstate-doc-smt-asym-packing-v1-1-317bf7d5c362@linux.intel.com>
-In-Reply-To: <20260424-rneri-fix-intel-pstate-doc-smt-asym-packing-v1-1-317bf7d5c362@linux.intel.com>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Wed, 13 May 2026 21:41:17 +0200
-X-Gmail-Original-Message-ID: <CAJZ5v0iTBH4x3JdtOGszakd=a_z8vV+JhhzkYpZwioJwDhZR_w@mail.gmail.com>
-X-Gm-Features: AVHnY4KtvsOf3ObHao5Lzll9_1SBfIx8WwD66IAIbQHpWoP7jJhyYGFo5_dKuYI
-Message-ID: <CAJZ5v0iTBH4x3JdtOGszakd=a_z8vV+JhhzkYpZwioJwDhZR_w@mail.gmail.com>
-Subject: Re: [PATCH] Documentation: intel_pstate: Fix description of
- asymmetric packing with SMT
-To: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>, Ricardo Neri <ricardo.neri@intel.com>, 
-	linux-pm@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: A900D53A2C0
+Content-Type: text/plain
+X-Rspamd-Queue-Id: F116E53A2FE
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
+	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87413-lists,linux-doc=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_FROM(0.00)[bounces-87414-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,leemhuis.info];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[rafael@kernel.org,linux-doc@vger.kernel.org];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,intel.com:email,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_FIVE(0.00)[6];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:dkim]
 X-Rspamd-Action: no action
 
-On Fri, Apr 24, 2026 at 11:42=E2=80=AFPM Ricardo Neri
-<ricardo.neri-calderon@linux.intel.com> wrote:
->
-> The patchset [1], of which commits 046a5a95c3b0 ("x86/sched/itmt: Give al=
-l
-> SMT siblings of a core the same priority") and 995998ebdebd ("x86/sched:
-> Remove SD_ASYM_PACKING from the SMT domain flags") are part, overhauled h=
-ow
-> the scheduler handles asym_packing on x86 hybrid processors with SMT. It
-> removed SD_ASYM_PACKING from the x86 SMT scheduling domain and made all S=
-MT
-> siblings of a core share the same priority. As a result, asym_packing
-> operates only across physical cores, spreading tasks among them and only
-> using idle SMT siblings once all physical cores are busy.
->
-> Fix the documentation to reflect this behavior.
->
-> Fixes: f20af84c29b2 ("cpufreq: intel_pstate: Document hybrid processor su=
-pport")
-> Link: https://lore.kernel.org/r/20230406203148.19182-1-ricardo.neri-calde=
-ron@linux.intel.com [1]
-> Signed-off-by: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>
-> ---
->  Documentation/admin-guide/pm/intel_pstate.rst | 11 ++++++-----
->  1 file changed, 6 insertions(+), 5 deletions(-)
->
-> diff --git a/Documentation/admin-guide/pm/intel_pstate.rst b/Documentatio=
-n/admin-guide/pm/intel_pstate.rst
-> index fde967b0c2e0..25fe5d88fea6 100644
-> --- a/Documentation/admin-guide/pm/intel_pstate.rst
-> +++ b/Documentation/admin-guide/pm/intel_pstate.rst
-> @@ -355,11 +355,12 @@ HyperThreading (HT) in the context of Intel process=
-ors, is enabled on at least
->  one core, ``intel_pstate`` assigns performance-based priorities to CPUs.=
-  Namely,
->  the priority of a given CPU reflects its highest HWP performance level w=
-hich
->  causes the CPU scheduler to generally prefer more performant CPUs, so th=
-e less
-> -performant CPUs are used when the other ones are fully loaded.  However,=
- SMT
-> -siblings (that is, logical CPUs sharing one physical core) are treated i=
-n a
-> -special way such that if one of them is in use, the effective priority o=
-f the
-> -other ones is lowered below the priorities of the CPUs located in the ot=
-her
-> -physical cores.
-> +performant CPUs are used when the other ones are fully loaded.  SMT sibl=
-ings
-> +(that is, logical CPUs sharing one physical core) are given the same pri=
-ority.
-> +The scheduler can pull tasks from lower-priority cores and place them on=
- any
-> +sibling.  Since the scheduler spreads tasks among physical cores, tasks =
-will be
-> +placed on the SMT siblings of physical cores only after all physical cor=
-es are
-> +busy.
->
->  This approach maximizes performance in the majority of cases, but unfort=
-unately
->  it also leads to excessive energy usage in some important scenarios, lik=
-e video
->
-> ---
+Chen-Shi-Hong <eric039eric@gmail.com> writes:
 
-Applied (with some edits in the changelog) as 7.1-rc material, thanks!
+You are getting closer, a couple of other details...
+
+> "Advice" is an uncountable noun, so "these advices" is grammatically
+> incorrect.
+>
+> Replace it with "all of this advice" instead, which keeps the sentence
+> grammatical while also making it clear that it refers to the full set of
+> recommendations in the paragraph.
+>
+> Signed-off-by: Chen-Shi-Hong <eric039eric@gmail.com>
+>
+> v3:
+> - resend against the original base as requested
+> - replace "these advices" directly with "all of this advice"
+>
+> v2:
+> - use "all of this advice" based on review feedback
+
+It is good to include the changes with each version, but it should go
+below the "---" line so that the maintainer doesn't have to edit it out
+at apply time.
+
+> ---
+>  Documentation/admin-guide/reporting-issues.rst | 4 ++--
+>
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+
+Also, please send new versions as a separate thread rather than as a
+response to a previous posting.
+
+Thanks,
+
+jon
 
