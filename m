@@ -1,66 +1,57 @@
-Return-Path: <linux-doc+bounces-87263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87266-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uBS5FZLRA2ol/AEAu9opvQ
-	(envelope-from <linux-doc+bounces-87263-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 03:19:14 +0200
+	id MHK8AFXUA2ol/AEAu9opvQ
+	(envelope-from <linux-doc+bounces-87266-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 03:31:01 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA4A552BCCC
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 03:19:13 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 968CA52BE3E
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 03:31:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 70AD7304F7B8
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 01:19:03 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2A7C530E26F1
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 01:29:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D2FC35B63F;
-	Wed, 13 May 2026 01:17:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D17DB1427A;
+	Wed, 13 May 2026 01:29:10 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out198-27.us.a.mail.aliyun.com (out198-27.us.a.mail.aliyun.com [47.90.198.27])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FD5235DA7B;
-	Wed, 13 May 2026 01:17:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=47.90.198.27
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 960E7375AB1;
+	Wed, 13 May 2026 01:29:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778635047; cv=none; b=rkKTsTGnvJcyYB2HlhOb375Ng2N49y0aPgwEAhWY/IKUTgG+f9AUQwMjz8bzUIQEOMjykcwHrVeJocqxzbbDIYT5a5f/l8kzlfqKGu7wIyiQh69bBfYrrHPJSoehRvxze30fypk4xdkUydkZGhi/pWqIYLuSeP/p82NpXW0CLIQ=
+	t=1778635748; cv=none; b=fCVX38x7Ii2vvSFav8MeqCFa2aoYUQDWOQdU1zJcFx6mDTjxmBqF/wXJj9Ubh5QduJRiL9EKnZtHcpRPCRJEmXHZ540BRwV7Bcwft1r4x/dViEHiU13guTWQypXPDzGsfCo1xF5Xj5Kt3EQwiu3CmIps5icIkcueaoqFkOW/FVg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778635047; c=relaxed/simple;
-	bh=K50KZ0tPDtNoQlc/bgjBLw5wMrqx+Wo3UCjXod47DS0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=pdOqpmlQ15nm7gg79Un/WiW0awr1fK/L++JC0YUW4f6PDM2B3dlkxbO8iXCjrX3gnl3pLfYQbvxCw7iphzTJvzX6DRx7FqUQ2Pqy10ml+k5ARlZgC7DtGixJoV10/qebfWqpOWnepMRjthVagQHnI8vGCOD1p/VzSkjRYgDazQA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com; spf=pass smtp.mailfrom=nebula-matrix.com; arc=none smtp.client-ip=47.90.198.27
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=nebula-matrix.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nebula-matrix.com
-X-Alimail-AntiSpam:AC=CONTINUE;BC=0.06712908|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_alarm|0.012989-0.0118651-0.975146;FP=14562350471006801570|1|1|1|0|-1|-1|-1;HT=maildocker-contentspam033045018182;MF=illusion.wang@nebula-matrix.com;NM=1;PH=DS;RN=18;RT=18;SR=0;TI=SMTPD_---.hVp4DUK_1778635025;
-Received: from localhost.localdomain(mailfrom:illusion.wang@nebula-matrix.com fp:SMTPD_---.hVp4DUK_1778635025 cluster:ay29)
-          by smtp.aliyun-inc.com;
-          Wed, 13 May 2026 09:17:06 +0800
-From: "illusion.wang" <illusion.wang@nebula-matrix.com>
-To: dimon.zhao@nebula-matrix.com,
-	illusion.wang@nebula-matrix.com,
-	alvin.wang@nebula-matrix.com,
-	sam.chen@nebula-matrix.com,
-	netdev@vger.kernel.org
-Cc: andrew+netdev@lunn.ch,
+	s=arc-20240116; t=1778635748; c=relaxed/simple;
+	bh=wcuf5XCjO52k7218qnhjeM7SODIQTgO5jRaAv1Qv+zc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=jDg6xTW1MhMOCdKCgJxWEQxua69EWA1KzqUbWG4nhQ3iVzFzoTMkr6x1FfYjJrvZn6QAkSLKAdCQe+9NCLk1DYXvDZ2VghzTjEKeWWkAK560A+3hhRdpD9fcSbkFZus0jTT2m0ryGHbxIr1nX8tWvhTIktyBANRehlnCNMS+YNE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.40.57.136])
+	by gateway (Coremail) with SMTP id _____8CxhnjZ0wNq9lcJAA--.3851S3;
+	Wed, 13 May 2026 09:28:57 +0800 (CST)
+Received: from localhost.cn (unknown [10.40.57.136])
+	by front1 (Coremail) with SMTP id qMiowJCxOMHJ0wNqr7eAAA--.34539S2;
+	Wed, 13 May 2026 09:28:41 +0800 (CST)
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+To: chenhuacai@kernel.org,
+	kernel@xen0n.name,
 	corbet@lwn.net,
-	kuba@kernel.org,
-	horms@kernel.org,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	tglx@linutronix.de,
+	jiaxun.yang@flygoat.com,
+	maobibo@loongson.cn
+Cc: loongarch@lists.linux.dev,
 	linux-doc@vger.kernel.org,
-	pabeni@redhat.com,
-	vadim.fedorenko@linux.dev,
-	lukas.bulwahn@redhat.com,
-	edumazet@google.com,
-	enelsonmoore@gmail.com,
-	skhan@linuxfoundation.org,
-	hkallweit1@gmail.com,
-	linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v14 net-next 11/11] net/nebula-matrix: add common dev start/stop operation
-Date: Wed, 13 May 2026 09:16:44 +0800
-Message-ID: <20260513011649.4404-12-illusion.wang@nebula-matrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260513011649.4404-1-illusion.wang@nebula-matrix.com>
-References: <20260513011649.4404-1-illusion.wang@nebula-matrix.com>
+	linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>
+Subject: [PATCH v12 0/4] Loongarch irq-redirect support
+Date: Wed, 13 May 2026 09:28:31 +0800
+Message-ID: <20260513012839.2856463-1-zhangtianyang@loongson.cn>
+X-Mailer: git-send-email 2.41.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,344 +59,193 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: EA4A552BCCC
+X-CM-TRANSID:qMiowJCxOMHJ0wNqr7eAAA--.34539S2
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBj93XoW3Gr4xZryrZw1kWr17AF13Awc_yoW7urWUpF
+	WUCas8trs5CrW7G3Z7ua18ZFy3ury8GrW7Xa1Skw12k3s8ur1v9FyxKFy5XFy8Grs5K3Wj
+	qr4qq34Uu3WDAagCm3ZEXasCq-sJn29KB7ZKAUJUUUU3529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUB0b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	Gr0_Gr1UM2kKe7AKxVWUAVWUtwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYI
+	kI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWU
+	twAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI4
+	8JMxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j
+	6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwV
+	AFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv2
+	0xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4
+	v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AK
+	xVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUcbAwUUUUU
+X-Rspamd-Queue-Id: 968CA52BE3E
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.54 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [0.04 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87263-lists,linux-doc=lfdr.de];
-	DMARC_NA(0.00)[nebula-matrix.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DMARC_NA(0.00)[loongson.cn];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lunn.ch,lwn.net,kernel.org,vger.kernel.org,redhat.com,linux.dev,google.com,gmail.com,linuxfoundation.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TAGGED_FROM(0.00)[bounces-87266-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
 	PRECEDENCE_BULK(0.00)[];
 	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.976];
-	FROM_NEQ_ENVFROM(0.00)[illusion.wang@nebula-matrix.com,linux-doc@vger.kernel.org];
-	TAGGED_RCPT(0.00)[linux-doc,netdev];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,nebula-matrix.com:email,nebula-matrix.com:mid,illusion.wang:url,pci:email]
+	NEURAL_HAM(-0.00)[-0.932];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc];
+	FROM_NEQ_ENVFROM(0.00)[zhangtianyang@loongson.cn,linux-doc@vger.kernel.org];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[loongson.cn:mid,sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-start common dev: config msix map table, alloc and enable msix vectors,
-register mailbox ISR and enable mailbox irq
+This series of patches introduces support for interrupt-redirect
+controllers, and this hardware feature will be supported on 3C6000
+for the first time
 
-Signed-off-by: illusion.wang <illusion.wang@nebula-matrix.com>
----
- .../nebula-matrix/nbl/nbl_core/nbl_dev.c      | 220 ++++++++++++++++++
- .../net/ethernet/nebula-matrix/nbl/nbl_main.c |  31 ++-
- 2 files changed, 250 insertions(+), 1 deletion(-)
+change log:
+        v0->v1:
+        1.Rename the model names in the document.
+        2.Adjust the code format.
+        3.Remove architecture - specific prefixes.
+        4.Refactor the initialization logic, and IR driver no longer set 
+	  AVEC_ENABLE.
+        5.Enhance compatibility under certain configurations.
 
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-index 9b7f4598fccc..c7e632a16b40 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_core/nbl_dev.c
-@@ -6,6 +6,17 @@
- #include <linux/pci.h>
- #include "nbl_dev.h"
- 
-+static int nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt);
-+
-+/* ----------  Interrupt config  ---------- */
-+static irqreturn_t nbl_dev_clean_mailbox(int __always_unused irq, void *data)
-+{
-+	struct nbl_dev_mgt *dev_mgt = (struct nbl_dev_mgt *)data;
-+
-+	nbl_dev_clean_mailbox_schedule(dev_mgt);
-+	return IRQ_HANDLED;
-+}
-+
- static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- {
- 	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-@@ -14,6 +25,175 @@ static void nbl_dev_init_msix_cnt(struct nbl_dev_mgt *dev_mgt)
- 	msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num = 1;
- }
- 
-+static int nbl_dev_request_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+	int err;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num < 0) {
-+		dev_err(common->dev, "Failed to get mailbox IRQ vector: %d\n",
-+			irq_num);
-+		return irq_num;
-+	}
-+
-+	snprintf(dev_common->mailbox_name, sizeof(dev_common->mailbox_name),
-+		 "nbl_mailbox@pci:%s", pci_name(common->pdev));
-+	err = request_irq(irq_num, nbl_dev_clean_mailbox, 0,
-+			  dev_common->mailbox_name, dev_mgt);
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static void nbl_dev_free_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	u16 local_vec_id;
-+	int irq_num;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	irq_num = pci_irq_vector(common->pdev, local_vec_id);
-+	if (irq_num >= 0)
-+		free_irq(irq_num, dev_mgt);
-+}
-+
-+static int nbl_dev_enable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, true);
-+
-+	return disp_ops->enable_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, true);
-+}
-+
-+static int nbl_dev_disable_mailbox_irq(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_channel_ops *chan_ops = dev_mgt->chan_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	u16 local_vec_id;
-+
-+	if (!msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].num)
-+		return 0;
-+
-+	local_vec_id =
-+		msix_info->serv_info[NBL_MSIX_MAILBOX_TYPE].base_vector_id;
-+	chan_ops->set_queue_state(dev_mgt->chan_ops_tbl->priv,
-+				  NBL_CHAN_INTERRUPT_READY,
-+				  NBL_CHAN_TYPE_MAILBOX, false);
-+
-+	return disp_ops->enable_mailbox_irq(dev_mgt->disp_ops_tbl->priv,
-+					    local_vec_id, false);
-+}
-+
-+static int nbl_dev_configure_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	bool mask_en = msix_info->serv_info[NBL_MSIX_NET_TYPE].hw_self_mask_en;
-+	u16 msix_net_num = msix_info->serv_info[NBL_MSIX_NET_TYPE].num;
-+	u16 msix_not_net_num = 0;
-+	int err, i;
-+
-+	msix_info->serv_info[0].base_vector_id = 0;
-+	for (i = NBL_MSIX_NET_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_info->serv_info[i].base_vector_id =
-+			msix_info->serv_info[i - 1].base_vector_id +
-+			msix_info->serv_info[i - 1].num;
-+
-+	for (i = NBL_MSIX_MAILBOX_TYPE; i < NBL_MSIX_TYPE_MAX; i++)
-+		msix_not_net_num += msix_info->serv_info[i].num;
-+
-+	err = disp_ops->configure_msix_map(dev_mgt->disp_ops_tbl->priv,
-+					   msix_net_num, msix_not_net_num,
-+					   mask_en);
-+
-+	return err;
-+}
-+
-+static int nbl_dev_destroy_msix_map(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dispatch_ops *disp_ops = dev_mgt->disp_ops_tbl->ops;
-+
-+	return disp_ops->destroy_msix_map(dev_mgt->disp_ops_tbl->priv);
-+}
-+
-+static int nbl_dev_alloc_msix_intr(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *dev_common = dev_mgt->common_dev;
-+	struct nbl_msix_info *msix_info = &dev_common->msix_info;
-+	struct nbl_common_info *common = dev_mgt->common;
-+	int needed = 0;
-+	int err;
-+	int i;
-+
-+	for (i = 0; i < NBL_MSIX_TYPE_MAX; i++)
-+		needed += msix_info->serv_info[i].num;
-+
-+	err = pci_alloc_irq_vectors(common->pdev, needed, needed,
-+				    PCI_IRQ_MSIX | PCI_IRQ_AFFINITY);
-+	if (err < 0) {
-+		pr_err("pci_alloc_irq_vectors failed, err = %d.\n", err);
-+		goto enable_msix_failed;
-+	}
-+
-+	return needed;
-+
-+enable_msix_failed:
-+	return err;
-+}
-+
-+static int nbl_dev_init_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	int err;
-+
-+	err = nbl_dev_alloc_msix_intr(dev_mgt);
-+	if (err < 0) {
-+		dev_err(dev_mgt->common->dev,
-+			"Failed to enable MSI-X vectors\n");
-+		return err;
-+	}
-+	return 0;
-+}
-+
-+static void nbl_dev_clear_interrupt_scheme(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_common_info *common = dev_mgt->common;
-+
-+	pci_free_irq_vectors(common->pdev);
-+}
-+
- /* ----------  Channel config  ---------- */
- static int nbl_dev_setup_chan_qinfo(struct nbl_dev_mgt *dev_mgt, u8 chan_type)
- {
-@@ -79,6 +259,14 @@ static void nbl_dev_clean_mailbox_task(struct work_struct *work)
- 				      NBL_CHAN_TYPE_MAILBOX);
- }
- 
-+static int nbl_dev_clean_mailbox_schedule(struct nbl_dev_mgt *dev_mgt)
-+{
-+	struct nbl_dev_common *common_dev = dev_mgt->common_dev;
-+
-+	nbl_common_queue_work(&common_dev->clean_mbx_task);
-+	return 0;
-+}
-+
- /* ----------  Dev init process  ---------- */
- static int nbl_dev_setup_common_dev(struct nbl_adapter *adapter)
- {
-@@ -220,9 +408,41 @@ void nbl_dev_remove(struct nbl_adapter *adapter)
- /* ----------  Dev start process  ---------- */
- int nbl_dev_start(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+	int ret;
-+
-+	ret = nbl_dev_configure_msix_map(dev_mgt);
-+	if (ret)
-+		goto config_msix_map_err;
-+
-+	ret = nbl_dev_init_interrupt_scheme(dev_mgt);
-+	if (ret)
-+		goto init_interrupt_scheme_err;
-+	ret = nbl_dev_request_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto mailbox_request_irq_err;
-+	ret = nbl_dev_enable_mailbox_irq(dev_mgt);
-+	if (ret)
-+		goto enable_mailbox_irq_err;
-+
- 	return 0;
-+enable_mailbox_irq_err:
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+mailbox_request_irq_err:
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+init_interrupt_scheme_err:
-+	nbl_dev_destroy_msix_map(dev_mgt);
-+config_msix_map_err:
-+	return ret;
- }
- 
- void nbl_dev_stop(struct nbl_adapter *adapter)
- {
-+	struct nbl_dev_mgt *dev_mgt = adapter->core.dev_mgt;
-+
-+	nbl_dev_disable_mailbox_irq(dev_mgt);
-+	nbl_dev_free_mailbox_irq(dev_mgt);
-+	nbl_dev_clear_interrupt_scheme(dev_mgt);
-+	nbl_dev_destroy_msix_map(dev_mgt);
- }
-diff --git a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-index 56131a50d59b..b19ce9ed02a0 100644
---- a/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-+++ b/drivers/net/ethernet/nebula-matrix/nbl/nbl_main.c
-@@ -295,7 +295,36 @@ static struct pci_driver nbl_driver = {
- 	.remove = nbl_remove,
- };
- 
--module_pci_driver(nbl_driver);
-+static int __init nbl_module_init(void)
-+{
-+	int status;
-+
-+	status = nbl_common_create_wq();
-+	if (status) {
-+		pr_err("Failed to create wq, err = %d\n", status);
-+		goto wq_create_failed;
-+	}
-+	status = pci_register_driver(&nbl_driver);
-+	if (status) {
-+		pr_err("Failed to register PCI driver, err = %d\n", status);
-+		goto pci_register_driver_failed;
-+	}
-+
-+	return 0;
-+
-+pci_register_driver_failed:
-+	nbl_common_destroy_wq();
-+wq_create_failed:
-+	return status;
-+}
-+
-+static void __exit nbl_module_exit(void)
-+{
-+	pci_unregister_driver(&nbl_driver);
-+	nbl_common_destroy_wq();
-+}
- 
-+module_init(nbl_module_init);
-+module_exit(nbl_module_exit);
- MODULE_LICENSE("GPL");
- MODULE_DESCRIPTION("Nebula Matrix Network Driver");
+        v1->v2:
+        1.Fixed an erroneous enabling issue.
+
+        v2->v3
+        1.Replace smp_call with address mapping to access registers
+        2.Fix some code style issues
+
+        v3->v4
+        1.Provide reasonable comments on the modifications made to
+	  IRQ_SET_MASK_OK_DONE
+        2.Replace meaningless empty functions with parent_mask/unmask/ack
+        3.Added and indeed released resources
+        4.Added judgment for data structure initialization completion to 
+          avoid duplicate creation during cpuhotplug
+        5.Fixed the code style and some unnecessary troubles
+
+        v4->v5
+	1.when it is detected in avecintc_set_affinity that the current affinity
+	remains valid, the return value is modified to IRQ_SET_MASK_OK_DONE.
+	  After the introduction of redirect-domain, for each interrupt source, 
+	avecintc-domain only provides the CPU/interrupt vector, while redirect-domain 
+	provides other operations to synchronize interrupt affinity information 
+	among multiple cores. 	  The original intention is to notify the cascaded
+	redirect_set_affinity that multi-core synchronization is not required. 
+	  However, this introduces some compatibility issues, such as the new return
+	value causing msi_domain_set_affinity to no longer perform irq_chip_write_msi_msg.
+	  1) When redirect exist in the system, the msi msg_address and msg_data no 
+	longer changes after the allocation phase, so it does not actually require updating
+	the MSI message info.
+	  2) When only avecintc exists in the system, the irq_domain_activate_irq
+	interface will be responsible for the initial configuration of the MSI message,
+	which is unconditional. After that, if unnecessary, no modification to the MSI
+	message is alse correctly.
+
+	2.Restructured the macro definitions to make them appear more logical.
+
+	3.Adjusted the layout of members struct redirect_queue\struct redirect_table and 
+	struct redirect_item, making redirect_item the primary interface for accessing
+	other members.
+
+	4.The method of accessing registers has been standardized to MMIO.
+
+	5.Initialize variables at declaration whenever possible.
+
+	6.Replaced the the "struct page" in redirect_table and redirect_queue with "struct folio".
+
+	7.Adjusted the initialization process so that all irq_desc configurations are completed
+	during driver initialization, no longer relying on specific CPUs being online.
+
+	8.Refactored portions of the code to make them more concise and logical.
+
+	v5->v6
+	Fix the warning messages reported by the test bot.
+
+	v6->v7:
+	1 Split patch:
+ 	 1) Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+	 2) LoongArch: Architectural preparation for Redirect irqchip
+	 3) irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
+	 4) irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep affinity
+	 5) irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+	2 Use sizeof() to replace fixed-size macro definitions.
+
+	3 Unify the data types of the parameters for redirect_write/read_reg*.
+
+	4 rename irde_invalid_entry_node to irde_invalid_entry and add comments 
+	  explaining the 'raddr'.
+
+	5 Fix the critical condition check bug in redirect_table_alloc.
+
+	6 Use clear_bit to replace bitmap_release_region
+
+	7 Delete some goto and handle the failure when it occurs.
+
+	8 Removed the check for the `CONFIG_ACPI` macro, as CONFIG_ACPI 
+          is selected by the arch/loongarch/Kconfig.
+
+	9 Fixed the incorrect error flow in redirect_acpi_init.
+
+	v7->v8:
+	1 Apologies for the chaotic email delivery due to some network issues earlier.
+
+	2 redirect_table_alloc now allocates nr_irqs consecutive redirect table entries to 
+	  support multiple MSI devices.
+
+	v8->v9:
+	1 Rebased and reorganized the patches on the latest irq/core branch.
+
+	v9->v10
+	1 Rewrite the changelog in the order of background, problem and solution.
+	2 Fix the potential undefined issue with 'order' in the redirect_table_alloc.
+	3 Use GPL-2.0-only as SPDX-License-Identifier.
+	4 Update the code creation time.
+	5 Rearrange the order of the header files alphabetically.
+	6 Refactor portions of the code and remove unnecessary line breaks.
+	7 Rename __redirect_irde_fini() to redirect_free_irde() and label it with __init.
+
+	v10->v11
+	1 Adjust the name of patch 0002.
+	2 Simplify some code.
+	3 Fix the incorrect data type.
+
+	v11->v12
+	1 Adjust the description of the interrupt model in the documentation
+	  to better reflect the actual situation.
+	2 Modified some inappropriate commit messages.  
+	3 Adjusted part of the code to better conform to specifications. 
+
+Tianyang Zhang (4):
+  Docs/LoongArch: Add advanced extended IRQ model (redirection)
+    description
+  irqchip/loongarch-avec: Prepare for interrupt redirection support
+  irqchip/loongarch-avec: Return IRQ_SET_MASK_OK_DONE when keep affinity
+  irqchip/loongarch-ir: Add IR (interrupt redirection) irqchip support
+
+ .../arch/loongarch/irq-chip-model.rst         |  35 ++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   |  34 ++
+ drivers/irqchip/Makefile                      |   2 +-
+ drivers/irqchip/irq-loongarch-avec.c          |  20 +-
+ drivers/irqchip/irq-loongarch-ir.c            | 537 ++++++++++++++++++
+ drivers/irqchip/irq-loongson.h                |  15 +
+ 6 files changed, 629 insertions(+), 14 deletions(-)
+ create mode 100644 drivers/irqchip/irq-loongarch-ir.c
+
 -- 
-2.47.3
+2.20.1
 
 
