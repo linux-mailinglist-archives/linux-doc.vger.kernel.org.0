@@ -1,182 +1,198 @@
-Return-Path: <linux-doc+bounces-87330-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87335-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8OHaOZVSBGo6HAIAu9opvQ
-	(envelope-from <linux-doc+bounces-87330-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 12:29:41 +0200
+	id uDQIAXZUBGqMHAIAu9opvQ
+	(envelope-from <linux-doc+bounces-87335-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 12:37:42 +0200
 X-Original-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F90753151B
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 12:29:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E08B5316C6
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 12:37:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D9A7830166C8
-	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 10:29:39 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B001630E5123
+	for <lists+linux-doc@lfdr.de>; Wed, 13 May 2026 10:35:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 677473E5A15;
-	Wed, 13 May 2026 10:29:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4AAB33EF679;
+	Wed, 13 May 2026 10:35:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UDHIIwhL"
+	dkim=pass (2048-bit key) header.d=kroah.com header.i=@kroah.com header.b="xy2t8P3f";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="qi+Yd5yN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from fout-a7-smtp.messagingengine.com (fout-a7-smtp.messagingengine.com [103.168.172.150])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2865E39DBE0
-	for <linux-doc@vger.kernel.org>; Wed, 13 May 2026 10:29:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.182
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778668177; cv=pass; b=Nh9VHga6HJe/2SQ7e4UfypYKqcBXQcfCIrF4Iy1wmg1joEpv4s2WOsgX9QtqH6ONolC6MNgpOv+GorJ/+dQQ6VJqpyLf085p93JCePEzkXaQ7wS4ywkf7RLJ5ALOhPDBFhbuZQnGUlheWalPzNQVoTsMgwIcHGAaTsqfrNx3GZI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778668177; c=relaxed/simple;
-	bh=D2TFnJmKvvtQlbeDc8mrtDEMlzuK3isyxrxCu0xrBKs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=G+8B4HScR2qaU0ZdpiU6UWy9Gte9oq/7PCXw+V9o62Mo0S2LsAAmetLwBiCZyiRIcaDClSVlbluq1AMaC5wHLSjpmjUiaXNywnVNvk+b30B5nwOEFMaG3M/sjJuz/swNBoZ49IcUrUWxhTP8+UK5rTHcGG0Qdb3CTS/NyFVrsk4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UDHIIwhL; arc=pass smtp.client-ip=74.125.82.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-2f1b00a75ffso468712eec.3
-        for <linux-doc@vger.kernel.org>; Wed, 13 May 2026 03:29:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778668175; cv=none;
-        d=google.com; s=arc-20240605;
-        b=gcZZ+EvLSLZQrRGiJhNJGXHTd3kMt48lt/FVURlos/eXeds17EHUbkPK6VGXDRnxPz
-         anVIXgpGO8Ev++pc7c2Zl9SQbM6muBe2XNRPJcbI6hoNMPBCuThp7n2kDLJLYVx+OzNG
-         YlGjjUtB+dLXWN2WFt05iTTP3vw+sMRi7sTn4nCfMOZtANpswmOVBzGLJ8BdhiR4iOy4
-         2F/WcS8mY5nCEEy+9NgSyTAXwi2gR9KNw36irTPZAuhOxikP+7bWC9zOFPMterZ5iaCR
-         MKdkW3s5DgQYsbk7RyDZXtjaIwFK0UO6wBK54gjkYvjVTR6JSiQp/pt8Oi2aDg07+VbG
-         kPOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=pfRguAexMO15Y7WK5/7K6aHCr8ttDBgEp8v4v0BLc8g=;
-        fh=4IQyTqG4UnBJ2vMAz/1FVhrcBdSKOXgcnHZf4It8REo=;
-        b=OIscAw4HcWC23s0P1WnUobsCQP8syuqNvT7m5+Aukf8lOPlsLZZ/v/HtoCWPnLA8E0
-         0Yuy1fp3h1j3Qdud6euF+px/J20qLtR+O9lVHLGE7VZD41LLGNGxksYIb5OZbJJtXMa+
-         Zre6kfZ6pxkWjuQG0BMhG88shIqw5hc2t0yV37exJTFHlPmvxIue007ZO8YPvIVoqmcf
-         OgXJ8rQgnq4NMk96XVcIGppHN1stwtHeBXwAYPiZo3O7razQNrCpGWMAIsC//s6GQljG
-         aXwRSokyfVp/ROCcDsJMizh8eXkpGKYL7uT9fWEmMuoX4OGX7E2trXNhn7lYqvsf5ior
-         vaDg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778668175; x=1779272975; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pfRguAexMO15Y7WK5/7K6aHCr8ttDBgEp8v4v0BLc8g=;
-        b=UDHIIwhLsnRsbSmF+G4ioL3rYwyLMp54rS9TcDTIgQxlz1zNaotrsM3Mt7DfjSWUnh
-         kocTTZGITCIauO4DSp+tllNb/RIUpnHV272gXUwwcjLle3KXOOy2jF7rcJQSGSjyg/mN
-         h3hzHEGK5XXivRNPbYMyIM5d/Ly47IGK3P3Zmc2T1Wnf5q6oce2VxyBvc+Ezo8w6KeV4
-         +GwIF81Qy/q/VltYwepqHFYdXKPBcCIrgpHfmS4oQ9DkWjErV+5990aRTbvvTGqeVojt
-         UkrSVXICCKB921QGnx2DVWHR0rqhfYqYKivjVhZTJ5UJLFZ5LeOgyi0M5Zsoh8ONFheC
-         iZ2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778668175; x=1779272975;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=pfRguAexMO15Y7WK5/7K6aHCr8ttDBgEp8v4v0BLc8g=;
-        b=X+dBDsLet8YHt8E971SD4Zvqzp4m6Hc2oguRnKLy6oJfIM9M11JbiaaXrFqqnO7MSp
-         RknKHFMVZswxzVF5GYPZO7m8FoIS4EGyQWEvsgEZCedHrR165lmDki+lm8vVulXunEbn
-         iJ80FjkYJZ1bwlo2c08d8PNK99dcvs/fWJFqVVwMTtMFwD8mgirX4wbuYVwuKOM+wBxK
-         kBKoxwob2jtqH5YGzsnob9+XFh2VxiHco+1IHdjGr+y8Vnm3z0UL1402ppahVzQDzmJB
-         egtPinO+F10awSYxdG/TWZZEascsjo2K1ybMfp2JMI6Kgsggx/xmVOVK4S9dWlzybsIz
-         iSUg==
-X-Forwarded-Encrypted: i=1; AFNElJ+ye9fxZ5iscSLzvnblBWm1EaBukNfrqZZLCZtgoWzeeIRMcK4oNYwn0P4InO/KZpq4lbEJ8NnoWVk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyipBa+XDmLWte3uQ2F/i5XfAxN6iouzucqqAmkTL8iIHhCd5/E
-	GPfnM2ZhIQgJ1Wf55mOxQALsQy07P3PrqrC7I2JZQgTT8AYZ4Fcx4Qym9Bh0KDSICZuZygOq+A2
-	ic2+tjzNhDf7njGUT0BeTL1PxXZ7oggI=
-X-Gm-Gg: Acq92OFJNb1I36sjiai8vN8a6/A4L7A4DtvxynZnudTWSla868eMPYVqHoPXpJup8Fj
-	LE9xs13mXvlunWeebv6Tcm2q9T4H4QS3Dpo71IbFWSn4cLcOzgYry0lk+iF/zM5WJdOrQl6HsdN
-	Y4FhfzA0rO93tTAxEp6SzwKLrwGI51hg5DfF4SrxU5x1pLFRJ/wTyFI87E/Wf0Z2LgSLpj3+zzb
-	nJy2E23FCM+M/Ab0/jVjrL2fh1PArcnLghR10l+qxkveVfWelU09Q6W7MT6tlPLHvrhnwRKXXK1
-	z5ylXQUZnsIiz+wB/WH2qlWkgVgY9HVYuYVz4lNCfCUfWiHk/iM21soVh5hw3A2+szwZPtQX5+F
-	ngxuDkgVdcOt/YyYmtze5qUs=
-X-Received: by 2002:a05:7300:1351:b0:2ea:de28:f389 with SMTP id
- 5a478bee46e88-3011a16acbbmr740963eec.8.1778668175217; Wed, 13 May 2026
- 03:29:35 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19A333E715F;
+	Wed, 13 May 2026 10:35:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.168.172.150
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778668529; cv=none; b=D/jkrm2pQsWtAtNuAHrEYaw42Ll7Xuq25AsV3+MSyFEqGDLw55Z51fZqzy0em5BjS2xvhqiHKpCdKkEtX1r9+TZChfJniSbM+727YAPmOvvdCOetl6h3Pgtp/ekxDYVGJ4fjyFLFXocmTQr9BgEsw895lAycJoiKdx7WARldZdc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778668529; c=relaxed/simple;
+	bh=uvIaEeGdRdNZZ5XLsCCdLcnfYp1OhrITljnlyckqV/M=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=H3xMGlk5Xezp+gvJ+OSfnzBaVaoZ4aDW3BHZ8qjN0hDhx1s9mx6RkqWuPWDidhZSCcuBQmVsTzvm6OLe3rIABp8PEtZWT8gybxPfUOESV7vpkxpBZnEx6ppSNcGMuiQdUTZznQlL232ORfqolYDk4n57Etb0aYOTAVO0moTHy2Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kroah.com; spf=pass smtp.mailfrom=kroah.com; dkim=pass (2048-bit key) header.d=kroah.com header.i=@kroah.com header.b=xy2t8P3f; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=qi+Yd5yN; arc=none smtp.client-ip=103.168.172.150
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kroah.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kroah.com
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+	by mailfout.phl.internal (Postfix) with ESMTP id 092F1EC00C3;
+	Wed, 13 May 2026 06:35:26 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+  by phl-compute-03.internal (MEProxy); Wed, 13 May 2026 06:35:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=cc
+	:cc:content-type:content-type:date:date:from:from:in-reply-to
+	:in-reply-to:message-id:mime-version:references:reply-to:subject
+	:subject:to:to; s=fm3; t=1778668526; x=1778754926; bh=jUWHX9q4Mu
+	S0OptvpTvpGkg1pPI8mQYwY3VqKdqzxHI=; b=xy2t8P3f31Y/anTQP8L9ISbpDn
+	0lax1QvksSjT3PA10lgyoM031O08n4y6kkftNdzUzfCYBuKtKAPRzqgpWkMkSZO1
+	12p3sRGNvLqy0f4A3c6jW4FuuYsxiPtewMfnPgL9ffNVCIA48y1VFPwdy4CydCwp
+	AW4DuFQH2mXJhFa3PIW6lyF5dcriK4lV7jT7zClSP+Ckct9rMGq62XIxk1ZpTEpg
+	ZSknx63URX79JnWxvg6DSb/c6HTZz3zqPpaXYEPsEBMYaq+V3jDCS6OJFnkVVMv4
+	BGjaf3Y0aRc4KvRW1UJ3RYeRlRZ17GChfiipR+mW3rgrrdApw1dXdcpXPv3A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+	1778668526; x=1778754926; bh=jUWHX9q4MuS0OptvpTvpGkg1pPI8mQYwY3V
+	qKdqzxHI=; b=qi+Yd5yNx1lteZQW+xEcPgjN9O1ZS0bEbgNvRHFt7Oz5q3Ol8tU
+	F206NNN2d8gkP3aZLA9mvsK7zi4ruCq6ydTv2Kxr+mDfzZdNnr+ymQP5fd7HUaDY
+	x6GQ/I81CE1tZJv2bgRQOwoirq2CH1ovJGeEOx9Jv0dmZvx9Qm3SPkjn+mHp8BIB
+	wvg55YxT5ky+StRF06D6fUSG7CA+cnU8AOrCf7XfrjZHgEbGHZC+XW01DcSiegtu
+	ar1JDk8uoiWTBHSbXQ1/i57iA3jXvbirno3wY/VrZKO49zY3qB8cw6ZXNJ/f+Pqx
+	1Zn7o7ciEruN+dAuF26tXOVbCfTEeioQ/pA==
+X-ME-Sender: <xms:7VMEauHX16FNPiNeSyKiPdTQ30VqMLLBGWyGfqUaSFuXf7XjLnbP8g>
+    <xme:7VMEagSPfzJAxfWAuwc4A-X-M8BE64bkT09qdWLZJgsOekQ2DnXXO1IwU6yvbG2ha
+    zHRBTdVJY0Wc7OwW1cTQnLzu1cLByE17Dkm1h7riUuojBlQMQ>
+X-ME-Received: <xmr:7VMEaoeCKknae1ZYapqwqSxDaLOKUC9tisPkZX1b6uetxKXc9VQL-iw5lyiyPK9p1V6VoFi96iGwUtfuhRtTFWn8Ag>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgdduvdeggeegucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepifhrvghgucfm
+    jfcuoehgrhgvgheskhhrohgrhhdrtghomheqnecuggftrfgrthhtvghrnhepheegvdevvd
+    eljeeugfdtudduhfekledtiefhveejkeejuefhtdeufefhgfehkeetnecuvehluhhsthgv
+    rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvghgsehkrhhorghhrd
+    gtohhmpdhnsggprhgtphhtthhopeduiedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
+    oheptghorhgsvghtsehlfihnrdhnvghtpdhrtghpthhtohepfiesudifthdrvghupdhrtg
+    hpthhtoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehskhhhrghnsehl
+    ihhnuhigfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepshgvtghurhhithihse
+    hkvghrnhgvlhdrohhrghdprhgtphhtthhopeifohhrkhhflhhofihssehvghgvrhdrkhgv
+    rhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnh
+    gvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgvlhesvhhgvghrrdhkvghr
+    nhgvlhdrohhrgh
+X-ME-Proxy: <xmx:7VMEaminVGyN2FMdbf66uLd373xZ2b2DyYcSMXBkopdqczKVLDgrhA>
+    <xmx:7VMEarJZSGwnx8dXLcTaukIdqdJTfBnQX8HiiZCOHKlbX8_BiqAzCw>
+    <xmx:7VMEarHbwHAfn47drsBG0fR9rVauAB4ADL6epfU6vhBl8bYBj__ZxA>
+    <xmx:7VMEap0sjA_MApgFPuDBgUgE2uMaR0WIrkd9t62xnRKz5j9FQsl0gQ>
+    <xmx:7lMEam6Y0kgH30FM1YHnQIsZq7EMWfBVdwQcfvzo-CCrAy5q5-fVZ4q4>
+Feedback-ID: i787e41f1:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 13 May 2026 06:35:25 -0400 (EDT)
+Date: Wed, 13 May 2026 12:29:34 +0200
+From: Greg KH <greg@kroah.com>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: Willy Tarreau <w@1wt.eu>, Leon Romanovsky <leon@kernel.org>,
+	skhan@linuxfoundation.org, security@kernel.org,
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 2/3] Documentation: security-bugs: explain what is and
+ is not a security bug
+Message-ID: <2026051333-puzzle-smokiness-8096@gregkh>
+References: <20260509094755.2838-1-w@1wt.eu>
+ <20260509094755.2838-3-w@1wt.eu>
+ <87wlx8o87g.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260513092017.265269-1-work@onurozkan.dev>
-In-Reply-To: <20260513092017.265269-1-work@onurozkan.dev>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 13 May 2026 12:29:22 +0200
-X-Gm-Features: AVHnY4JRfZeS5M4PkB0i1HHGCnrslk-pdRETB9bqF9W78tWIU-eAfHuzIz68pYk
-Message-ID: <CANiq72ni8VwqEnBNWFivsHR-P-wmfjMBVfh4XTDBTAURB8zo=w@mail.gmail.com>
-Subject: Re: [PATCH] docs: update rust-analyzer command
-To: =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>, 
-	Tamir Duberstein <tamird@kernel.org>, Jesung Yang <y.j3ms.n@gmail.com>
-Cc: rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, ojeda@kernel.org, boqun@kernel.org, 
-	gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org, 
-	a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu, 
-	dakr@kernel.org, corbet@lwn.net, skhan@linuxfoundation.org, alexs@kernel.org, 
-	si.yanteng@linux.dev, dzm91@hust.edu.cn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 5F90753151B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87wlx8o87g.fsf@trenco.lwn.net>
+X-Rspamd-Queue-Id: 6E08B5316C6
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+X-Spamd-Result: default: False [-1.66 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[kroah.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[kroah.com:s=fm3,messagingengine.com:s=fm3];
 	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87330-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[onurozkan.dev,kernel.org,gmail.com];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kroah.com:+,messagingengine.com:+];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[miguelojedasandonis@gmail.com,linux-doc@vger.kernel.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,kernel.org,garyguo.net,protonmail.com,google.com,umich.edu,lwn.net,linuxfoundation.org,linux.dev,hust.edu.cn];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	TAGGED_FROM(0.00)[bounces-87335-lists,linux-doc=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid]
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[greg@kroah.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,1wt.eu:email]
 X-Rspamd-Action: no action
 
-On Wed, May 13, 2026 at 11:20=E2=80=AFAM Onur =C3=96zkan <work@onurozkan.de=
-v> wrote:
->
-> diff --git a/Documentation/rust/quick-start.rst b/Documentation/rust/quic=
-k-start.rst
-> index a6ec3fa94d33..df5b54b51deb 100644
-> --- a/Documentation/rust/quick-start.rst
-> +++ b/Documentation/rust/quick-start.rst
-> @@ -314,7 +314,7 @@ definition, and other features.
->  ``rust-analyzer`` needs a configuration file, ``rust-project.json``, whi=
-ch
->  can be generated by the ``rust-analyzer`` Make target::
->
-> -       make LLVM=3D1 rust-analyzer
-> +       make LLVM=3D1 prepare rust-analyzer
+On Tue, May 12, 2026 at 11:20:51AM -0600, Jonathan Corbet wrote:
+> Willy Tarreau <w@1wt.eu> writes:
+> 
+> > The use of automated tools to find bugs in random locations of the kernel
+> > induces a raise of security reports even if most of them should just be
+> > reported as regular bugs. This patch is an attempt at drawing a line
+> > between what qualifies as a security bug and what does not, hoping to
+> > improve the situation and ease decision on the reporter's side.
+> >
+> > It defers the enumeration to a new file, threat-model.rst, that tries
+> > to enumerate various classes of issues that are and are not security
+> > bugs. This should permit to more easily update this file for various
+> > subsystem-specific rules without having to revisit the security bug
+> > reporting guide.
+> 
+> One thing here:
+> 
+> [...]
+> 
+> > +* **Capability-based protection**:
+> > +
+> > +  * users not having the ``CAP_SYS_ADMIN`` capability may not alter the
+> > +    kernel's configuration, memory nor state, change other users' view of the
+> > +    file system layout, grant any user capabilities they do not have, nor
+> > +    affect the system's availability (shutdown, reboot, panic, hang, or making
+> > +    the system unresponsive via unbounded resource exhaustion).
+> 
+> That is pretty demonstrably not true, and will likely elicit challenges
+> at some point.  There are a lot of "make me root" capabilities that
+> enable users to do all of those things; consider CAP_DAC_OVERRIDE as an
+> obvious example.  I think that just about all of the capabilities will
+> enable at least one of those things - that's why the capabilities exist
+> in the first place.  So I think this needs to be written far more
+> generally.
 
-Perhaps we should add a brief sentence after this code block
-explaining why the `prepare` is there, e.g. adapted from the commit
-message:
+You are right, there are more capabilities, but we get bug reports all
+the time that basically come down to "a user with CAP_SYS_ADMIN can go
+and do..." which are pointless for us to be handling.  Just got one a
+few minutes ago, so LLMs are churning this crap out quite frequently.
 
-    For the best experience, it is recommended to make ``prepare``
-    together with the ``rust-analyzer`` target so that all generated
-    files (e.g. proc macros) are available.
+So any rewording of this to prevent us from getting these pointless
+reports would be great.
 
-Cc'ing Tamir and Jesung.
+> As a lower-priority thing, lockdown mode is meant to at least try to
+> provide some stronger guarantees, and lockdown circumvention seems to be
+> normally be viewed as a security bug.  Worth a mention?
 
-Cheers,
-Miguel
+lockdown issues are best discussed on the list where the lockdown people
+are as most of us feel that really isn't a "security" thing at all :)
+
+thanks,
+
+greg k-h
 
