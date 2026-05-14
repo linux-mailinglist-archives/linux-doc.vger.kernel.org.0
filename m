@@ -1,164 +1,266 @@
-Return-Path: <linux-doc+bounces-87477-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87479-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4yggLZuNBWpNYgIAu9opvQ
-	(envelope-from <linux-doc+bounces-87477-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 10:53:47 +0200
+	id ipEKNKePBWrLYgIAu9opvQ
+	(envelope-from <linux-doc+bounces-87479-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 11:02:31 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56ABF53F7F7
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 10:53:47 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C33053F8EE
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 11:02:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id AADB93017E75
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 08:53:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 407F8300D146
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 09:02:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EED913DD513;
-	Thu, 14 May 2026 08:53:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1769F3CFF60;
+	Thu, 14 May 2026 09:02:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ByTl8RvL"
+	dkim=pass (1024-bit key) header.d=mailbaby.net header.i=@mailbaby.net header.b="e5Duhywj";
+	dkim=pass (1024-bit key) header.d=aosc.io header.i=@aosc.io header.b="OzyV6/GH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+Received: from relay1-l.mailbaby.net (relay1-l.mailbaby.net [206.72.200.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FE543A5457
-	for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 08:53:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778748823; cv=none; b=tmCfMU/7rxiuFWabEw6bTG6IcWtswpPzhEbxb3ns2oVKuiCusayy+abFsYO+9uTzYiPRqhh+CFS1B9TRqN3NrlCIIb5au7f5mZz+y8dlsGMMrQ9nFP6cgqhvlFVL2AFZmIsaZdR418aDBc2xe8iLF79balxdAe6mEj+F12mB9yo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778748823; c=relaxed/simple;
-	bh=mdcOcRFdk+kFxge8RF1JHjCRLxgOkic/0vjen1/AoRs=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=nvoLX9uq5PKkeC+3fiEM1nvnj52GCVmEU5T0u/KLSYk1Cwjc900dSZsX081y95PWRbZmEKK5v1EvCv1YZ7qZM0L4yr0h7OK4wKIPlCXDFL0bTj1xdjOo4FZ8erlTlbKgGJOgBPVW5xaD+QOnG9+dwcsPGZv7hNjmGRJ6S97EO10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ByTl8RvL; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-488ac04e13dso6103465e9.1
-        for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 01:53:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778748821; x=1779353621; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=H02A+VbK9Aj1S680nY/rdW6eTeDyQxWPgrNJtVSjlqQ=;
-        b=ByTl8RvLFh2+HKL4oGqOqjKY0x9jo29ZPMKCr3r2UR3+wEIGa0yFCCSBFpXk3iSzL5
-         yUB8k3XyIXMUUcj4iSLqjhB+eJrWAxJDutpckzEK/r2Y2YHQ7lLnkj/r+yqHOz9rOKTt
-         jldQQfAaEbGvjsLzCrIJOcVYWVA24kBPhZpIl1aGl8U8J9x7QjN7O7aBYbhHm1cbaly5
-         6537hupxkp9UEE9/HHvzyXj2Pjl/Nhb/H2NMyshlusQdt/1p7DTDTy9uwi+yPuN0HsUt
-         aWGDc62KaVuEczpNx22+lBx6j5XA5HxYLWJR6WZqvL46TGqXdvSfr3UbyoN/rIDW0Pnx
-         JPCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778748821; x=1779353621;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=H02A+VbK9Aj1S680nY/rdW6eTeDyQxWPgrNJtVSjlqQ=;
-        b=OFtp6kUkv1uMc94Pv1Ujsxc4vw5a71h/7VSTtBGPYyZwe6WEZoBcNY8xODFJYuGBUp
-         YboD/8xFl7EQAWApeVYM2BjaJdH54XCzZiVIZeHg7A1C0vDGdG0tpvdxdXeRPap2MWxV
-         p34EJzGGPlnxgkBCqSmpLv9V+a6k5XJVNTsPHMqhMaW8URRTBAoi+dLGfwOUfJm+XBcd
-         O4UXxrlDB+dqbzeJ0bd2Bu2peIHT+7MG5QbCKeHlNuwRi5JkTWEPQJAxPGr4VNaQ/Ntg
-         3nwMlZstIDQUHM6oxeHZRixbUqyZMybeXCkvJ1IK/X+huXEZ49T+NZ9SdTPgigPduomZ
-         /wqg==
-X-Forwarded-Encrypted: i=1; AFNElJ8EHn8Oh7EWaTRx+Y4qj288aUOXSWoyZ4K3DbDXxHMo1C3wiN7fEwaUbIl8LdhqXo6E+aMjEvsh9Sk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzC/m7O2Zhac6OUQx9A9lMEXXQJ97myt+/ddIHG2Rr+tbwYUE1y
-	aMru+61TxRflyU5hXK9fxtAgYLk4z92Qf5tWZ0d+SmHHj0jzDTwNT4UJ
-X-Gm-Gg: Acq92OGKrFfWNnr0LPZ42OR45rom8W03eNwqcddL3G+RUEmz30h8HHwtSQLw7QBLHOs
-	uyIJpTTR/dYnu57c6c8cqG19XkKgeA6p0nRhIb8ZDN0GuOVoI9HujKZvJzYEiT/0ZrW5/PyHf4D
-	qhZm3Ym5UzNM8aOJyi+irHgWiGe4ykAKVbOWhWOXhsWisA/khAkk8hr3JmJk4L5o0D1eTcqrhZK
-	DuZnKxu2hjOuvlm1nOHFgv0TxXQP1dqmunFZBo48ALdYf28so+4IrY0eEf8RodUn8vM/izBcMm2
-	Rl4f9dNcs2ouKHB1GB6c5QFJ4RQbDv8uM3IvPAKpgwkF8Owu9NpFhPgoj1QcdDx1LCB+TZrpvAq
-	fdOqg8ZyeVJcJvzmDj07JFhSScfQNtPMH4wRAyeDvnywSNqka8dMAdrRJqT1CZ6+WRpp9TBll+6
-	VkEWu3D6zUFZ6G3V//HGPNJBDEyjnPsyYdNbttBVyzAiI=
-X-Received: by 2002:a05:600c:a08:b0:489:1c1f:35e5 with SMTP id 5b1f17b1804b1-48fc9a44496mr50115175e9.6.1778748820886;
-        Thu, 14 May 2026 01:53:40 -0700 (PDT)
-Received: from localhost.localdomain ([82.215.118.79])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fd649a21asm53831875e9.6.2026.05.14.01.53.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 May 2026 01:53:40 -0700 (PDT)
-From: Stepan Ionichev <sozdayvek@gmail.com>
-To: corbet@lwn.net
-Cc: jic23@kernel.org,
-	dlechner@baylibre.com,
-	nuno.sa@analog.com,
-	andy@kernel.org,
-	skhan@linuxfoundation.org,
-	gregkh@linuxfoundation.org,
-	hcazarim@yahoo.com,
-	linux-doc@vger.kernel.org,
-	linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	sozdayvek@gmail.com
-Subject: [PATCH v2] Documentation: iio: fix typo in triggered-buffers example
-Date: Thu, 14 May 2026 13:51:57 +0500
-Message-Id: <20260514085157.20327-1-sozdayvek@gmail.com>
-X-Mailer: git-send-email 2.33.0.windows.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 702E73793BF
+	for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 09:02:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=206.72.200.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778749348; cv=pass; b=h6ESQC3MhCFNG/UybwMNeNiKtBoYcXHO0a8VLhD0heww8EJk2vXX+6mJi5grofCF2vXDzAV7bC12TGPU00bs9uTczcymV64QlOVKK3gcjcL19LZUkxKR0ZuP1Gqj1OWsj8rbynCm3E6N8w66FkzP7QbIkn41VhfXcMXy0vlfvTs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778749348; c=relaxed/simple;
+	bh=OM331luqtzgzD0Pa/1i7KFTOJiaVKtWAYKURZzb4dds=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FcwqL08MgcUP8iblukRRUVfE58Lpctjcg++yaTMUUPliTgbo6AWNXXTk1TJzsKEaw+Cmgv3Yg9nijfRs7foe4ZWMFqmwCwKvvgHhLgAXJ1xLVTKwblT4ZAHq1rGVOT7JAz4/PriweUGZ/DO1qHF2jv9OyyUQp3YX/pxtk1gZTfI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aosc.io; spf=pass smtp.mailfrom=aosc.io; dkim=pass (1024-bit key) header.d=mailbaby.net header.i=@mailbaby.net header.b=e5Duhywj; dkim=pass (1024-bit key) header.d=aosc.io header.i=@aosc.io header.b=OzyV6/GH; arc=pass smtp.client-ip=206.72.200.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aosc.io
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aosc.io
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbaby.net;
+ q=dns/txt; s=bambino; bh=InLGDIT8AG1PYX/0ChWYqK4BET1HU2I+aXVqffTU8pA=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=e5Duhywjy3a1GDinyg3Va1YqJdD+8ZGpsJGV7gqSi7jgkS1fF1tSILC5QlNtJVl3azaLndC9E
+ uef9iP/WdYZGDRRXBMkux+E4KMzybhOm7SNa5zuImh0K/V2rTRc+mt487+URGQQtPb48+fRf5pM
+ JW40C5QIEaNqNUZ3qe/auM8=
+Received: from mb-nj-kvm1.internal (mb-nj-kvm1.internal [10.10.2.10])
+ (Authenticated sender: mb86144)
+ by relay1-l.mailbaby.net (MailBabyMTA) with ESMTPSA id 19e25b4070a000e4a6.001
+ for <linux-doc@vger.kernel.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 14 May 2026 08:56:55 +0000
+X-Zone-Loop: fa1844efbf7f81ef2c8dc4dcb1708f0253c800150d68
+ARC-Authentication-Results: i=1;	rspamd6.mailbaby.net;	auth=pass
+ smtp.auth=mb86144 smtp.mailfrom=wangyuli@aosc.io
+ARC-Seal: i=1; a=rsa-sha256; d=mailbaby.net; s=detka; cv=none;
+ t=1778749016;
+	b=K6hJpeIzwTNl9HOotvuNW05qsTsA9uoF3LRu9/xcywVhcVkJWJiMQ0cJw958lojdi8W3JU
+	fDImRIUIqWlvCYC8KAkbOuCXnDA6PkmDJH2r/ywpGwmN2hdsGEi4D08r6wAvLktrEZol6J
+	tvM7ZUeX19ZoK+ZTZnnh03zLSXvtVlR061wDdK/BXrlOnJpC51ydUqUjXh6e5XSHDiKwkr
+	gtGlTQRFnDd4DhxsGL7Cph9Iw+waKs9v0glL4U3e1fLISJYQnvAV2gLSlMKc73I1TIJuS5
+	AKgn17NRadFzy8ZkVm/AYnvjsucXHAHRq921v0BQbKTz/h0MiGKGgEAeoVDjGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailbaby.net;	s=detka; t=1778749016;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=InLGDIT8AG1PYX/0ChWYqK4BET1HU2I+aXVqffTU8pA=;
+	b=l8DU+yiwf2EkFC2Qi2rfEP86qXGRawACJg7zVSkgxdtYz89n8li0xxpbvJPzuTWI8ipiz9
+	wK2VBliPximvDRvHVi9A/dcVfbZydNdLEJkrUY9E1aQXU6DCmrhhoBxrqxeIVhwzWxQeZ9
+	3jPZFDaL2vSDaUl/o9QN+jCy3njp9pXQcXLL4GduWRvntFONgPzrV03+cB9Db3LSOx/n/k
+	OJ9tcpg2GRjX8hU7WESv7sXy2ewGGsC0h3gMwmSY/maCOAmTChGOVhmUvUyJq6iuENZwUv
+	2JC5Eu/Vm+Jiy2ZBaDvHsPmM6GQFhhu3da+J56rdjwnT5LvOVEC4ruLzHSPwqg==
+X-MB-ID: mb86144
+X-SPF: pass
+Feedback-ID: mb86144:19e25b:587f4d465843594778405947455d:mbaby
+X-MAILBABY-ORIGIN: PASS
+Received: from relay2.mymailcheap.com (relay2.mymailcheap.com [217.182.113.132])
+	by relay5.mymailcheap.com (Postfix) with ESMTPS id 0BF90207A2;
+	Thu, 14 May 2026 08:56:46 +0000 (UTC)
+Received: from nf1.mymailcheap.com (nf1.mymailcheap.com [51.75.14.91])
+	by relay2.mymailcheap.com (Postfix) with ESMTPS id 901183EB97;
+	Thu, 14 May 2026 08:56:37 +0000 (UTC)
+Received: from mail20.mymailcheap.com (mail20.mymailcheap.com [51.83.111.147])
+	by nf1.mymailcheap.com (Postfix) with ESMTPSA id 51632400D5;
+	Thu, 14 May 2026 08:56:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=aosc.io; s=default;
+	t=1778748997; bh=OM331luqtzgzD0Pa/1i7KFTOJiaVKtWAYKURZzb4dds=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=OzyV6/GH4HZdjIxOtXKvg6XyP3ftPRpjtoCEPUhHPRt3R1r8OkxtQTyTTLrqeKTn/
+	 16vodbbgb9uLE3Q1bO+/Gql77TTl0lehKCnguI5/aEDCAKoICvXu02tr0lewfsckKK
+	 MhdLVlJ3WN37nIGtkunY+pdC1v0lqgL6Swr3RKkc=
+Received: from [10.148.84.248] (unknown [223.160.130.158])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail20.mymailcheap.com (Postfix) with ESMTPSA id 03226410A6;
+	Thu, 14 May 2026 08:56:33 +0000 (UTC)
+Message-ID: <e2cced37-58ea-4678-a586-97f9a6db7e9d@aosc.io>
+Date: Thu, 14 May 2026 16:56:30 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] docs: reporting-issues: replace "these advices" with
+ "all of this advice"
+To: Chen-Shi-Hong <eric039eric@gmail.com>, linux@leemhuis.info
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260514082808.655-1-eric039eric@gmail.com>
+Content-Language: en-US
+From: WangYuli <wangyuli@aosc.io>
+In-Reply-To: <20260514082808.655-1-eric039eric@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 56ABF53F7F7
+X-Rspamd-Queue-Id: 3C33053F8EE
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[aosc.io,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[mailbaby.net:s=bambino,aosc.io:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-87479-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87477-lists,linux-doc=lfdr.de];
-	FREEMAIL_CC(0.00)[kernel.org,baylibre.com,analog.com,linuxfoundation.org,yahoo.com,vger.kernel.org,gmail.com];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_TO(0.00)[gmail.com,leemhuis.info];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[mailbaby.net:+,aosc.io:+];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FROM_NEQ_ENVFROM(0.00)[sozdayvek@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,mailbaby.net:dkim,chinaunicom.cn:email,waycheckpatch.pl:url,aosc.io:mid,aosc.io:dkim];
+	RCPT_COUNT_FIVE(0.00)[6];
 	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[wangyuli@aosc.io,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	RCVD_COUNT_SEVEN(0.00)[8]
 X-Rspamd-Action: no action
 
-In the "IIO triggered buffer setup" example, iio_triggered_buffer_setup()
-is called with "sensor_iio_polfunc" (single 'l') while the function is
-defined and later referenced as "sensor_iio_pollfunc" (double 'l'). Fix
-the misspelling so the example is consistent.
+Hi Chen-Shi-Hong,
 
-Signed-off-by: Stepan Ionichev <sozdayvek@gmail.com>
+On 2026/5/14 16:27, Chen-Shi-Hong wrote:
+> "Advice" is an uncountable noun, so "these advices" is grammatically
+> incorrect.
+>
+> Replace it with "all of this advice" instead, which keeps the sentence
+> grammatical while also making it clear that it refers to the full set of
+> recommendations in the paragraph.
+>
+> Signed-off-by: Chen-Shi-Hong <eric039eric@gmail.com>
+> ---
+> v4:
+> - move version changelog below the "---"
+> - send as a separate thread
+>
+> v3:
+> - resend against the original base as requested
+> - replace "these advices" directly with "all of this advice"
+>
+> v2:
+> - use "all of this advice" based on review feedback
+>   Documentation/admin-guide/reporting-issues.rst | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
+> index 16a66a1f1975..87dd874fffcf 100644
+> --- a/Documentation/admin-guide/reporting-issues.rst
+> +++ b/Documentation/admin-guide/reporting-issues.rst
+> @@ -129,7 +129,7 @@ After these preparations you'll now enter the main part:
+>      situations; during the merge window that actually might be even the best
+>      approach, but in that development phase it can be an even better idea to
+>      suspend your efforts for a few days anyway. Whatever version you choose,
+> -   ideally use a 'vanilla' build. Ignoring these advices will dramatically
+> +   ideally use a 'vanilla' build. Ignoring all of this advice will dramatically
+>      increase the risk your report will be rejected or ignored.
+>   
+>    * Ensure the kernel you just installed does not 'taint' itself when
+> @@ -795,7 +795,7 @@ Install a fresh kernel for testing
+>       situations; during the merge window that actually might be even the best
+>       approach, but in that development phase it can be an even better idea to
+>       suspend your efforts for a few days anyway. Whatever version you choose,
+> -    ideally use a 'vanilla' built. Ignoring these advices will dramatically
+> +    ideally use a 'vanilla' built. Ignoring all of this advice will dramatically
+>       increase the risk your report will be rejected or ignored.*
+>   
+>   As mentioned in the detailed explanation for the first step already: Like most
+
+Reviewed-by: WangYuli <wangyl5933@chinaunicom.cn>
+
+I searched the kernel tree for the misspelling "advices" (the word
+"advice" is uncountable) and found the following occurrences:
+
+"
+
+   >rg-i "advices"
+
+tools/perf/trace/beauty/mmap.c
+   68:       static DEFINE_STRARRAY(madvise_advices, "MADV_");
+   70:       if (behavior < strarray__madvise_advices.nr_entries && 
+strarray__madvise_advices.entries[behavior] != NULL)
+   71:               return scnprintf(bf, size, "MADV_%s", 
+strarray__madvise_advices.entries[behavior]);
+
+tools/perf/trace/beauty/madvise_behavior.sh
+   6:printf "static const char *madvise_advices[] = {\n"
+
+tools/perf/trace/beauty/fadvise.sh
+   6:printf "static const char *fadvise_advices[] = {\n"
+
+tools/include/uapi/README
+   26:  static const char *fadvise_advices[] = {
+
+tools/testing/selftests/mm/process_madv.c
+   125: * on a remote process, other advicesare difficult to verify 
+reliably.
+
+tools/testing/selftests/mm/pfnmap.c
+   175:int advices[] = {
+   187:/* All these advicesmust be rejected. */
+   188:for (i = 0; i < ARRAY_SIZE(advices); i++) {
+   189:EXPECT_LT(madvise(self->addr1, self->pagesize, advices[i]), 0);
+
+drivers/ata/pata_sis.c
+   13: * Daniela Engert: for initial ATA100 advicesand numerous others.
+
+drivers/md/dm-vdo/message-stats.c
+   234:write_u64("dedupeAdviceStale : ", stats->dedupe_advice_stale, ", 
+", buf, maxlen);
+
+Documentation/admin-guide/reporting-issues.rst
+   132:   ideally use a 'vanilla' build. Ignoring these adviceswill 
+dramatically
+   798:    ideally use a 'vanilla' built. Ignoring these adviceswill 
+dramatically
+
+Documentation/usb/CREDITS
+   118:  evaluation boards, specs and valuable advicesduring
+
+Documentation/scsi/ChangeLog.sym53c8xx
+   415:  my questions and for his interesting advicesand comments about
+"
+
+If you intend to fix this misspelling, please consider sending a
+single patchset that corrects all of these instances across the tree
+and adds "advices" to scripts/spelling.txt.
+
+That waycheckpatch.pl <https://checkpatch.pl/> can catch it in the future.
+
+Thanks,
+
 ---
-v2:
-- Drop the file name and line numbers from the commit body, refer
-  to the example by its section name instead (per Andy)
 
- Documentation/driver-api/iio/triggered-buffers.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+WangYuli
 
-diff --git a/Documentation/driver-api/iio/triggered-buffers.rst b/Documentation/driver-api/iio/triggered-buffers.rst
-index 417555dbb..23b82357e 100644
---- a/Documentation/driver-api/iio/triggered-buffers.rst
-+++ b/Documentation/driver-api/iio/triggered-buffers.rst
-@@ -43,7 +43,7 @@ A typical triggered buffer setup looks like this::
-     }
- 
-     /* setup triggered buffer, usually in probe function */
--    iio_triggered_buffer_setup(indio_dev, sensor_iio_polfunc,
-+    iio_triggered_buffer_setup(indio_dev, sensor_iio_pollfunc,
-                                sensor_trigger_handler,
-                                sensor_buffer_setup_ops);
- 
--- 
-2.43.0
+
+
 
 
