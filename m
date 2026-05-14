@@ -1,218 +1,155 @@
-Return-Path: <linux-doc+bounces-87492-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87489-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cHDoBEytBWrkZgIAu9opvQ
-	(envelope-from <linux-doc+bounces-87492-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:09:00 +0200
+	id 6JZaIQGtBWrkZgIAu9opvQ
+	(envelope-from <linux-doc+bounces-87489-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:07:45 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C5D4540CF6
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:08:59 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 709F3540C88
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:07:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AEBD93058981
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 11:08:31 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B34363016786
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 11:07:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A9383C1F4B;
-	Thu, 14 May 2026 11:07:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84BF23BFAEE;
+	Thu, 14 May 2026 11:07:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="f95p6boN"
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="FSkv2BFN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB5B63C0A10
-	for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 11:07:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E7A13909B5;
+	Thu, 14 May 2026 11:07:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778756873; cv=none; b=P0HD7BSQzOlOaXya/IVqPVGLzn2ve5rqC0Ox7USdTwd9YqGzmN10a9dICaoUh8tes7/Cx8N+o9VTX9jqWi1v973j2T9jjwx4DZYwHQNtNyNUs6LHlz7QwLcL1/In4fk7we1kpt+9ixifYcxv8HQrLkbk2qH6s//CYYG7rC88tKA=
+	t=1778756852; cv=none; b=GO3Olek3xGdFMPDXSEzP/LI16Xynf39JFo9IfXzFzw4WZW2MuvfdS8CXH8v/qq0ge0c+pmYixGwGCFYBa00QSggXNLY2Etd//6yyeJq/tVuyFotrs3TisEJKBPBAfOq15Wip4SmA9j4Ps67HMkkp7jttm6RHuuxRnx+wmROcV1I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778756873; c=relaxed/simple;
-	bh=95rnVbuPoEqYoOgOEmXgRRLmt/DgdbJJ5HiCjeQHGDU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=raWt2G0sihvB4lXkPr9WNtv1isngpS0e8bfVyxFMI9gdx+WVuWGlYbboxtzp2D+uEvtF+Tquc9tCi0mJx5p2aduv9YlDkb4LKEIHZPOpjHiC1yTSdy+/lNEeFr6tNDq3MNZtT7lnzERFHhC3CpfVevV7OvJZEgFXgHn2QM3kowY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=f95p6boN; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1778756866;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=mmxOVGUrnxS/H09zubyapT22aA5Jy+w6JF95xU/Ftgg=;
-	b=f95p6boNQvMtjkUE2lnEr/IiOHV27/IsYTFJo6UlJikUHmiM/OFy4BgiQMKGX/TeJaKMYI
-	HwiL/N9YHnzLcBLm87W0R1p3EBOQ/2HbNGZOHm77ZOlfO9nZ86OsEfxWl3g7NU4YQXj4lE
-	3Pj3/F+r9/l7jlehsJHkshLMhiLv+Cg=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-240-vZArWm47OuSkAV24NUg0SA-1; Thu,
- 14 May 2026 07:07:45 -0400
-X-MC-Unique: vZArWm47OuSkAV24NUg0SA-1
-X-Mimecast-MFC-AGG-ID: vZArWm47OuSkAV24NUg0SA_1778756861
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 588591800611;
-	Thu, 14 May 2026 11:07:41 +0000 (UTC)
-Received: from [192.168.1.153] (headnet01.pony-001.prod.iad2.dc.redhat.com [10.2.32.101])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 41EBE19560A2;
-	Thu, 14 May 2026 11:07:34 +0000 (UTC)
-From: Albert Esteve <aesteve@redhat.com>
-Date: Thu, 14 May 2026 13:06:40 +0200
-Subject: [PATCH v11 4/4] kunit: Add documentation for warning backtrace
- suppression API
+	s=arc-20240116; t=1778756852; c=relaxed/simple;
+	bh=64h78kYhiuhfHSxMUMUDpTwZLBrLQDm2GThKRcUhPbA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=a43M4BWuqCPPxza+r4DPDTLC3W0IeEceTIN4FOb6j+YVDwKAISkpWVlc4I36NFgEEKV2abgheu/sOaQuiY6KpfIUCCYks51lvXJ7WlB/uXeQxJKfzdRPrroDucuU/h2bXaczqDD197iTTY+UV37X2l2cwlPaLNckjKLaKB8Sdeg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=FSkv2BFN; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debian.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=8ajRUalzhgnnfvlPn0WFR2fLEgViH6plKkchspfix3c=; b=FSkv2BFN8Uucm7POm/m+FRQU/f
+	OKnEJNeRs5TovgCDj71pFKXBJ1ywjwTYpsPkhqP9CZJSYJ2pJwTrRoWL15Kaz7/MMYxMntaic2dBR
+	YWzDWy8dFIHIw5lFZC/dpG4I+/ayRH3T7wofabgAeBm2v8IZqoGuF3ep2U5WdJxuGiIevSKY5ovUV
+	PD3MK0HHzJHnjLAcT2nyMQDmdsvV/0brczMU5K6/j0LxqEhDkA6JWF034qbFbC82lluwRPT0hgXgz
+	QVNwSPf7c6MuOxJy4ycOlhxtvmO22G61aJu46aH+Dhl//jaXkvhovISFZBaHZaZKCfruOsjKVAYPn
+	+t0uCj8A==;
+Received: from authenticated user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <leitao@debian.org>)
+	id 1wNTu6-003tUh-22;
+	Thu, 14 May 2026 11:06:59 +0000
+Date: Thu, 14 May 2026 04:06:51 -0700
+From: Breno Leitao <leitao@debian.org>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Miaohe Lin <linmiaohe@huawei.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>, 
+	Naoya Horiguchi <nao.horiguchi@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	"Liam R. Howlett" <liam@infradead.org>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, kernel-team@meta.com, Lance Yang <lance.yang@linux.dev>
+Subject: Re: [PATCH v7 4/6] mm/memory-failure: short-circuit PG_reserved
+ before get_hwpoison_page()
+Message-ID: <agWrHSXGQzZPEg0L@gmail.com>
+References: <20260513-ecc_panic-v7-0-be2e578e61da@debian.org>
+ <20260513-ecc_panic-v7-4-be2e578e61da@debian.org>
+ <511dc52e-f2af-43c8-a9cf-19321b091dbe@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260514-kunit_add_support-v11-4-b36a530a6d8f@redhat.com>
-References: <20260514-kunit_add_support-v11-0-b36a530a6d8f@redhat.com>
-In-Reply-To: <20260514-kunit_add_support-v11-0-b36a530a6d8f@redhat.com>
-To: Arnd Bergmann <arnd@arndb.de>, 
- Brendan Higgins <brendan.higgins@linux.dev>, David Gow <david@davidgow.net>, 
- Rae Moar <raemoar63@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
- Andrew Morton <akpm@linux-foundation.org>, Paul Walmsley <pjw@kernel.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Alexandre Ghiti <alex@ghiti.fr>
-Cc: linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
- dri-devel@lists.freedesktop.org, workflows@vger.kernel.org, 
- linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org, 
- peterz@infradead.org, Guenter Roeck <linux@roeck-us.net>, 
- Linux Kernel Functional Testing <lkft@linaro.org>, 
- Alessandro Carminati <acarmina@redhat.com>, 
- Albert Esteve <aesteve@redhat.com>, Dan Carpenter <error27@gmail.com>, 
- Kees Cook <kees@kernel.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778756819; l=2728;
- i=aesteve@redhat.com; s=20260303; h=from:subject:message-id;
- bh=YX7AMC4Z3qCvd9o2GGoQ6LMsoUJS/dulVvDsXv5Qzg4=;
- b=UCVRctm1Cbo6eZtFp+7OFgg3RKq19as80DJZzBTZLnrct+Fr9AO008Ob+YqtH/4TgueyVolOH
- JxVmzFZHMagDclzSc852PEcOuL7d5KEuMDrtZY+XHoufMeROYCCbMYv
-X-Developer-Key: i=aesteve@redhat.com; a=ed25519;
- pk=YSFz6sOHd2L45+Fr8DIvHTi6lSIjhLZ5T+rkxspJt1s=
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Rspamd-Queue-Id: 7C5D4540CF6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <511dc52e-f2af-43c8-a9cf-19321b091dbe@kernel.org>
+X-Debian-User: leitao
+X-Rspamd-Queue-Id: 709F3540C88
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-2.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,googlegroups.com,lists.freedesktop.org,lists.infradead.org,infradead.org,roeck-us.net,linaro.org,redhat.com,gmail.com,kernel.org];
-	TAGGED_FROM(0.00)[bounces-87492-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[arndb.de,linux.dev,davidgow.net,gmail.com,linux.intel.com,kernel.org,suse.de,ffwll.ch,lwn.net,linuxfoundation.org,linux-foundation.org,dabbelt.com,eecs.berkeley.edu,ghiti.fr];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[31];
+	TAGGED_FROM(0.00)[bounces-87489-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[aesteve@redhat.com,linux-doc@vger.kernel.org];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FREEMAIL_CC(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,infradead.org,kvack.org,vger.kernel.org,meta.com,linux.dev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
 	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
 	TAGGED_RCPT(0.00)[linux-doc];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,davidgow.net:email,chromium.org:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-From: Guenter Roeck <linux@roeck-us.net>
+On Wed, May 13, 2026 at 09:49:28PM +0200, David Hildenbrand (Arm) wrote:
+> On 5/13/26 17:39, Breno Leitao wrote:
+> > The previous patch already classifies PG_reserved pages as
+> > MF_MSG_KERNEL through the long path: get_hwpoison_page() calls
+> > __get_hwpoison_page() which fails HWPoisonHandlable(), get_any_page()
+> > exhausts its shake_page() retry budget, and the resulting
+> > -ENOTRECOVERABLE is mapped to MF_MSG_KERNEL by the switch.  The
+> > outcome is correct but the work in between is wasted: shake_page()
+> > cannot turn a reserved page into a handlable one.
+> 
+> If really required, can we just move the check right there, into get_any_page() etc?
 
-Document API functions for suppressing warning backtraces.
+Sure, we might move it to get_any_page(). I took this current approach
+based on the following facts:
 
-Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
-Acked-by: Dan Carpenter <dan.carpenter@linaro.org>
-Reviewed-by: Kees Cook <keescook@chromium.org>
-Signed-off-by: Guenter Roeck <linux@roeck-us.net>
-Signed-off-by: Alessandro Carminati <acarmina@redhat.com>
-Reviewed-by: David Gow <david@davidgow.net>
-Signed-off-by: Albert Esteve <aesteve@redhat.com>
----
- Documentation/dev-tools/kunit/usage.rst | 46 ++++++++++++++++++++++++++++++++-
- 1 file changed, 45 insertions(+), 1 deletion(-)
+1) Lance suggested it, and it sounded a good idea.
+	https://lore.kernel.org/all/20260512124837.38883-1-lance.yang@linux.dev/
 
-diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-tools/kunit/usage.rst
-index ebd06f5ea4550..1c78dfff94e8a 100644
---- a/Documentation/dev-tools/kunit/usage.rst
-+++ b/Documentation/dev-tools/kunit/usage.rst
-@@ -157,6 +157,50 @@ Alternatively, one can take full control over the error message by using
- 	if (some_setup_function())
- 		KUNIT_FAIL(test, "Failed to setup thing for testing");
- 
-+Suppressing warning backtraces
-+------------------------------
-+
-+Some unit tests trigger warning backtraces either intentionally or as a side
-+effect. Such backtraces are normally undesirable since they distract from
-+the actual test and may result in the impression that there is a problem.
-+
-+Backtraces can be suppressed with **task-scoped suppression**: while
-+suppression is active on the current task, the backtrace and stack dump from
-+``WARN*()``, ``WARN_ON*()``, and related macros on that task are suppressed.
-+Two API forms are available.
-+
-+- Scoped suppression is the simplest form. Wrap the code that triggers
-+  warnings in a ``kunit_warning_suppress()`` block:
-+
-+.. code-block:: c
-+
-+	static void some_test(struct kunit *test)
-+	{
-+		kunit_warning_suppress(test) {
-+			trigger_backtrace();
-+			KUNIT_EXPECT_SUPPRESSED_WARNING_COUNT(test, 1);
-+		}
-+	}
-+
-+.. note::
-+   The warning count must be checked inside the block; the suppression handle
-+   is not accessible after the block exits.
-+
-+- Direct functions return an explicit handle pointer. Use them when the handle
-+  needs to be retained or passed across helper functions:
-+
-+.. code-block:: c
-+
-+	static void some_test(struct kunit *test)
-+	{
-+		struct kunit_suppressed_warning *w;
-+
-+		w = kunit_start_suppress_warning(test);
-+		trigger_backtrace();
-+		kunit_end_suppress_warning(test, w);
-+
-+		KUNIT_EXPECT_EQ(test, kunit_suppressed_warning_count(w), 1);
-+	}
- 
- Test Suites
- ~~~~~~~~~~~
-@@ -1211,4 +1255,4 @@ For example:
- 		dev_managed_string = devm_kstrdup(fake_device, "Hello, World!");
- 
- 		// Everything is cleaned up automatically when the test ends.
--	}
-\ No newline at end of file
-+	}
+2) There is a _similar_ check close to this one in memory_failure(),
+   just before this one:
 
--- 
-2.53.0
+  if (TestSetPageHWPoison(p)) {
+  	....
+	action_result()
+	goto unlock_mutex;
+  }
 
+  and now
+
+  if (PageReserved(p)) {
+	...
+  	action_result()
+	goto unlock_mutes;
+  }
+
+3) I wanted to give get it as  real layering point, not handwaving.
+
+That said, I will short-circuit reserved pages inside get_any_page(), in
+an updated version.
+
+Again, thanks for the review and direction!
+--breno
 
