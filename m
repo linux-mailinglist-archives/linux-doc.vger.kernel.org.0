@@ -1,189 +1,152 @@
-Return-Path: <linux-doc+bounces-87454-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87452-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EALSIKRHBWpDUAIAu9opvQ
-	(envelope-from <linux-doc+bounces-87454-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 05:55:16 +0200
+	id EJtnOK1CBWqATwIAu9opvQ
+	(envelope-from <linux-doc+bounces-87452-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 05:34:05 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0631453D6CA
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 05:55:15 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CDCA53D553
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 05:34:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 71AAF304547E
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 03:55:00 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id A0127301C95B
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 03:34:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 371BE3A8750;
-	Thu, 14 May 2026 03:54:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C36253A3E6D;
+	Thu, 14 May 2026 03:34:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JACkQY5x"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XnFu+ZVX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E57BA306749
-	for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 03:54:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B617313523;
+	Thu, 14 May 2026 03:34:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778730899; cv=none; b=IbsxevhtC6mnv9op9OZNBPMC6qoq2IZF4APwphlwXfaWvTJ17nbnEbjCNMw+mV0PwCCx+jWjUBynoyXTDpqTGfxYgyG4Z7x+Xts+bMQKdBV/nlmnWh+4TXIEmkaEsub/sdsrlYFca0uJB8RFJE2IxFl8aTqcg3QA6hFiy13nzkQ=
+	t=1778729640; cv=none; b=hIE+9YDuMLoI6+VpvEf9ASegDOQ26KF9mNOH2FTworprVhV19zdMjz0gdks2AUMyYs7u/umUTdeOT3f5kVJsE64GXgzlW6mtQULvhLoaY4H9jSv0O2wG/R+OYSYBXbi2+ZQvFQX/zoP6r0wsy4g2bPsbkY+d+FOL8REUvhJmH78=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778730899; c=relaxed/simple;
-	bh=fsjYLSWcc71c+iOmkcD/Wk13v5fBkksJ8/Ir0dWeEvU=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References; b=WvZR6+TNZPQLNdK8Jxci/STXRutOW8/JR6LplhM6WZEOazZWV1VyxS3NbBiurNOiPFJEXtG0lljzmn2SYelS7JCTlZVt2tIFHX9O+7NIdmpAAMmc8oWQUpdbTZEn8ikoNodrlD2rdhsm2WXh5beqxunr1lFJCFlCbduJWUMOeuc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JACkQY5x; arc=none smtp.client-ip=209.85.216.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-367dd53815fso3144679a91.0
-        for <linux-doc@vger.kernel.org>; Wed, 13 May 2026 20:54:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778730896; x=1779335696; darn=vger.kernel.org;
-        h=references:message-id:date:in-reply-to:subject:cc:to:from:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=PKqV86kcIyK48A4gK3vO7m3hgwBILm7DPz49r+DJUUE=;
-        b=JACkQY5xKJCZGQs26Zykmd9Lg1tJcQ4rVuepEZPfSDc4IJarKYmg8sBekobEEsBY4A
-         yt2wdD7rVKFHhm00Ew77pL89nD/neAkT54oCT5Ey+ssxK3wSiN7gsgeXEecG4XLpMuf2
-         4AK4Lvzt2TKRLWkUNqv1t/A8+JY7YC97NfDsx8PxuUneJowAHOHMC5lWOToOKVpjgkZJ
-         IFCs/FLWexHIgSCIyXaRivY48dYSff1D2B8xv/acA+KoMNCKq5o02B3yF7psOgmP1DBO
-         /94hkgxFEfWAfX8+rGk8wBrqkDgx704r+C7okeAD5de22NkfdrsOSCQHiElfURs12dD4
-         qEBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778730896; x=1779335696;
-        h=references:message-id:date:in-reply-to:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=PKqV86kcIyK48A4gK3vO7m3hgwBILm7DPz49r+DJUUE=;
-        b=pu4IdsHK+A3OtXw6BzKvnjgZ4ALtA5opTu15n1++rCPxuX0X//vZVTHV8kBdDeBBfR
-         jklxq8t3ZnCzAYtx/7H1KFhoyGzyo3LcIb1xWYZE1UYZ+EWfVCJyJ5KwiqQdzcse39PW
-         6s5DW8EBGT+JrlAUcMWZ6JMguK/BMjqVjcjlK+lAZBMUU/WIaY4UHcpeck86+6cWjYVj
-         pm+WEDhfSsy3lM9q3QVOXuZEp4xufxrQSVcaXxsv5QIg8onyZJuP38kfHaLHDCBaGTYn
-         lkqxvBySmg482gvMK5aoIOJzNwHnj5gpt9WHAzW18UoggOqxlCwlybJHHdeU1941g4Le
-         9s2w==
-X-Forwarded-Encrypted: i=1; AFNElJ8kpetEuqVxf1ZCxdZ8jrIQHzg8xeU3Gb01clyJNAFkE0VqkJ6QWiHNpD9kENXnTJt3QaapOnCMH5U=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx84r17rjlyLUnbHD3gGAT4NZ0ZYCAby/jud8AdOu3QwxW+/9mF
-	Q+KA28ARD2DwTEo/Zdzq+9s38sRBqI/+d6n38VjMNp9GbKXD444YehRu+3sPQw==
-X-Gm-Gg: Acq92OEEHM4XfJ63ktCxVPW29hqJll7Ic61LiC2cKL/GZ/ycTv+kxRiG/uzwxtvRxZH
-	lBLmbTND6m+VtfR39Gdt6fMGCcNlRVbqfVti5HnYgqnp5G4c4iOsAiQTOEJ2QLASKkt/+iFMecn
-	lcOLtKMSs7uyUnwZJeBWaZnBOny4Z3orfxM8RGe6ehu5ZA9yRzBLFgOEsFRg/MG7tuWM5epy8US
-	hDPpOc6vmIVcQSaaNtL0fglFjZDzqVCTkeu0XYdt37bTdhm+MgWiVr+yohqiUvPALKG1MM2yf+N
-	QkZcruM9KRiv4+A0t2wFy3RHCNyHcvwRlTlQc97O2JXSmYhL9icklkJW60lkMdyBTpaPfzfD/3f
-	z2zvVpm0tAw/iiAq/UDsYiz9YuOs/iFz11gdnWiMLbsTePX1hzDgHyc3/9SgbdyLasLbf5hbqZm
-	GQs86Hr8IypnF3mEXpDs2MHQ==
-X-Received: by 2002:a17:90b:56c4:b0:366:44a4:ab0f with SMTP id 98e67ed59e1d1-3692346f997mr1680017a91.4.1778730896205;
-        Wed, 13 May 2026 20:54:56 -0700 (PDT)
-Received: from pve-server ([49.205.216.49])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-368ede20a50sm4803643a91.3.2026.05.13.20.54.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 May 2026 20:54:55 -0700 (PDT)
-From: Ritesh Harjani (IBM) <ritesh.list@gmail.com>
-To: Amit Machhiwal <amachhiw@linux.ibm.com>, linuxppc-dev@lists.ozlabs.org, Madhavan Srinivasan <maddy@linux.ibm.com>
-Cc: Amit Machhiwal <amachhiw@linux.ibm.com>, Vaibhav Jain <vaibhav@linux.ibm.com>, Paolo Bonzini <pbonzini@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 0/5] KVM: PPC: Handle CPU compatibility mode for nested guests
-In-Reply-To: <20260513100755.83215-1-amachhiw@linux.ibm.com>
-Date: Thu, 14 May 2026 08:49:59 +0530
-Message-ID: <o6iir82o.ritesh.list@gmail.com>
-References: <20260513100755.83215-1-amachhiw@linux.ibm.com>
+	s=arc-20240116; t=1778729640; c=relaxed/simple;
+	bh=P8pTGq4h0SFxO4ZEAjZ7egC90TpJmRCY6YKSnyU+xF0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Z6diIHgSwGS73NEdLn8Z4b2TfIE/UE0Gx+gc7t7Ndgq/2IRVzcuYj0whDxgSoCrxYoaKoBrg5OeYvSOeWwy4ldH88L0MzOvzvLXRCwKfS+D3Zq951YVY0m0YLDT0svFjjVTTbYWpL325YmPA/tLaHn7lyqLlvv0v9AHh7drRiV0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XnFu+ZVX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3AD06C19425;
+	Thu, 14 May 2026 03:33:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778729640;
+	bh=P8pTGq4h0SFxO4ZEAjZ7egC90TpJmRCY6YKSnyU+xF0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=XnFu+ZVX/L8UdpJlYLGwc+pOhPzmPFIIwy7Spl5QSbQEcQRSjaCQ8jG9XFWT5o6OH
+	 3UWru6Dkf1wTinXRFcdJV8OSC0LCg7JCqbytnwI5kevAdviDdytPMqxIRPMJ1hJLfu
+	 4vS+DyL2S9c/YLY1mF+aFLseY+2EtZpsuiGBEnvpk+TiL6kSJyLsCtERjrvzKvGiA3
+	 pit9m0dnNWZ6zGHI1VK4hlIYb44PMnsVh48tz9G5XY4Ri5+s++X8vtLuiz+A8QVn+B
+	 v7gSiAVn6c3otgisYoCaT4bxGoc4hKsLpfNh8gePW0sLxTjY8cTazvg1CuDuiRdH06
+	 VZJd7a/f0VP5Q==
+Date: Thu, 14 May 2026 03:33:55 +0000
+From: Tzung-Bi Shih <tzungbi@kernel.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Benson Leung <bleung@chromium.org>, linux-kernel@vger.kernel.org,
+	chrome-platform@lists.linux.dev, driver-core@lists.linux.dev,
+	linux-doc@vger.kernel.org, linux-gpio@vger.kernel.org,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Johan Hovold <johan@kernel.org>,
+	"Paul E . McKenney" <paulmck@kernel.org>
+Subject: Re: [PATCH v10 8/9] platform/chrome: Protect cros_ec_device
+ lifecycle with revocable
+Message-ID: <agVCoxuTu7l60TH-@google.com>
+References: <20260508105448.31799-1-tzungbi@kernel.org>
+ <20260508105448.31799-9-tzungbi@kernel.org>
+ <20260508115309.GA9254@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-X-Rspamd-Queue-Id: 0631453D6CA
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260508115309.GA9254@nvidia.com>
+X-Rspamd-Queue-Id: 5CDCA53D553
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[linux.ibm.com,redhat.com,gmail.com,ellerman.id.au,kernel.org,lwn.net,linuxfoundation.org,vger.kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-87454-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-87452-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[riteshlist@gmail.com,linux-doc@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tzungbi@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	TAGGED_RCPT(0.00)[linux-doc,renesas];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
+On Fri, May 08, 2026 at 08:53:09AM -0300, Jason Gunthorpe wrote:
+> On Fri, May 08, 2026 at 06:54:47PM +0800, Tzung-Bi Shih wrote:
+> >  struct cros_ec_device *cros_ec_device_alloc(struct device *dev)
+> > @@ -47,6 +49,15 @@ struct cros_ec_device *cros_ec_device_alloc(struct device *dev)
+> >  	if (!ec_dev)
+> >  		return NULL;
+> >  
+> > +	ec_dev->its_rev = revocable_alloc(ec_dev);
+> > +	if (!ec_dev->its_rev)
+> > +		return NULL;
+> > +	/*
+> > +	 * Drop the extra reference for the caller as the caller is the
+> > +	 * resource provider.
+> > +	 */
+> > +	revocable_put(ec_dev->its_rev);
+> > +
+> >  	ec_dev->din_size = sizeof(struct ec_host_response) +
+> >  			   sizeof(struct ec_response_get_protocol_info) +
+> >  			   EC_MAX_RESPONSE_OVERHEAD;
+> 
+> FWIW I am still very much against seeing any revokable concept used
+> *between two drivers*. That will turn the kernel's lifetime model into
+> spaghetti code.
+> 
+> Your other series where you only have to change
+> drivers/platform/chrome/cros_ec_chardev.c just confirms how wrong this
+> approach is.
+> 
+> Given you say this is such a bug I think you really should be sending
+> a series that is patches 5 through 7 from the other series and a
+> simple rwsem instead of misc_deregister_sync() to deal with this bug
+> ASAP. No need to complicate a simple bug fix in a driver with all
+> these core changes.
 
-Hi Amit,
+Apologies for missing this suggestion.
 
-Amit Machhiwal <amachhiw@linux.ibm.com> writes:
+For "patches 5 through 7 from the other series" I guess you're referring:
+- https://lore.kernel.org/all/20260427134659.95181-6-tzungbi@kernel.org
+- https://lore.kernel.org/all/20260427134659.95181-7-tzungbi@kernel.org
+- https://lore.kernel.org/all/20260427134659.95181-8-tzungbi@kernel.org
 
-> On POWER systems, newer processor generations can operate in compatibility
-> modes corresponding to earlier generations (e.g., a Power11 system running
-> in Power10 compatibility mode). In such cases, the effective CPU level
-> exposed to guests differs from the physical processor generation.
->
-> This creates a problem for nested virtualization. When booting a nested KVM
-> guest (L2) inside a host KVM guest (L1) running in a compatibility mode,
-> userspace (e.g., QEMU) may derive the CPU model from the raw hardware PVR
-> and attempt to configure the nested guest accordingly. However, the L1
-> partition is constrained by the compatibility level negotiated with the
-> hypervisor (L0), and requests exceeding that level are rejected, leading to
-> guest boot failures such as:
->
->   KVM-NESTEDv2: couldn't set guest wide elements
->
-> This series addresses the issue in two steps:
->
-> 1. Detect and reject invalid compatibility requests early in KVM to avoid
->    late failures.
->
-> 2. Provide a mechanism for userspace to query the effective CPU
->    compatibility modes supported by the host, so it can select an
->    appropriate CPU model for nested guests.
->
-
-Do we really need to add a uapi change for this? Tools like Qemu can
-read the device tree info of the host, isn't it?
-
-> To achieve this, the series introduces a new KVM capability and ioctl
-> (KVM_CAP_PPC_COMPAT_CAPS / KVM_PPC_GET_COMPAT_CAPS) that expose the
-> compatibility modes supported by the host.
->
-> The implementation supports both:
->
->   - PowerVM (nested API v2), where compatibility information is obtained
->     via the H_GUEST_GET_CAPABILITIES hypercall.
->   - PowerNV (nested API v1), where compatibility is derived from the device
->     tree ("cpu-version") representing the effective processor compatibility
->     level.
-
-See there you go, for PowerNV if this info is provided in the device
-tree, then Qemu could as well just read that info, no?
-
-... yup, kvmppc_read_int_dt() can do that I guess.
-
-So, my request is, can we look into this to see, if there is a possible
-alternative to this? maybe we already have a mechanism which Qemu could
-use to get this info already?
-
-btw - I haven't given a full read of the patch series, but reading the
-cover letter, I felt  we should atleast add this info to the cover
-letter on, why a uapi change is really needed here, why can't the
-existing alternatives work for us. 
-
--ritesh
-
->
-> This allows userspace (e.g., QEMU) to select a CPU model consistent with
-> the host compatibility mode, avoiding mismatches and enabling successful
-> nested guest boot.
->
+Could you provide a bit more detail on the rwsem approach?  I'm not
+entirely clear on what data or operations the rwsem would be protecting.
 
