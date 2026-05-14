@@ -1,155 +1,115 @@
-Return-Path: <linux-doc+bounces-87489-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87493-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6JZaIQGtBWrkZgIAu9opvQ
-	(envelope-from <linux-doc+bounces-87489-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:07:45 +0200
+	id kNPsIhu2BWqeZwIAu9opvQ
+	(envelope-from <linux-doc+bounces-87493-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:46:35 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 709F3540C88
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:07:45 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7A245412F9
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 13:46:34 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B34363016786
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 11:07:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BBC26306E650
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 11:43:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84BF23BFAEE;
-	Thu, 14 May 2026 11:07:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 110203C1F50;
+	Thu, 14 May 2026 11:43:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="FSkv2BFN"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="faHWajg1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E7A13909B5;
-	Thu, 14 May 2026 11:07:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E20C53AFAFF;
+	Thu, 14 May 2026 11:43:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778756852; cv=none; b=GO3Olek3xGdFMPDXSEzP/LI16Xynf39JFo9IfXzFzw4WZW2MuvfdS8CXH8v/qq0ge0c+pmYixGwGCFYBa00QSggXNLY2Etd//6yyeJq/tVuyFotrs3TisEJKBPBAfOq15Wip4SmA9j4Ps67HMkkp7jttm6RHuuxRnx+wmROcV1I=
+	t=1778759004; cv=none; b=CltZaqrLRZlmjXV4IKaLb20MiHPIiEDbCXZAevjhUOlhA2CBMRc7LU0oaBoSZR/OUzu59M4M6Csj1ACkiz9PZtlakb7rfbmVbzHJzEgHsprRR2AzVhxXF94afiRBOfvuXejxZxPo/XsVXv2FHGPWqA5ePR+t5jlN+rUHRyU7lf8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778756852; c=relaxed/simple;
-	bh=64h78kYhiuhfHSxMUMUDpTwZLBrLQDm2GThKRcUhPbA=;
+	s=arc-20240116; t=1778759004; c=relaxed/simple;
+	bh=8uvHL9zd/W4MzaGePykxvJrwfNXRylh/wVLnkJKzd7E=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=a43M4BWuqCPPxza+r4DPDTLC3W0IeEceTIN4FOb6j+YVDwKAISkpWVlc4I36NFgEEKV2abgheu/sOaQuiY6KpfIUCCYks51lvXJ7WlB/uXeQxJKfzdRPrroDucuU/h2bXaczqDD197iTTY+UV37X2l2cwlPaLNckjKLaKB8Sdeg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=FSkv2BFN; arc=none smtp.client-ip=82.195.75.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debian.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=8ajRUalzhgnnfvlPn0WFR2fLEgViH6plKkchspfix3c=; b=FSkv2BFN8Uucm7POm/m+FRQU/f
-	OKnEJNeRs5TovgCDj71pFKXBJ1ywjwTYpsPkhqP9CZJSYJ2pJwTrRoWL15Kaz7/MMYxMntaic2dBR
-	YWzDWy8dFIHIw5lFZC/dpG4I+/ayRH3T7wofabgAeBm2v8IZqoGuF3ep2U5WdJxuGiIevSKY5ovUV
-	PD3MK0HHzJHnjLAcT2nyMQDmdsvV/0brczMU5K6/j0LxqEhDkA6JWF034qbFbC82lluwRPT0hgXgz
-	QVNwSPf7c6MuOxJy4ycOlhxtvmO22G61aJu46aH+Dhl//jaXkvhovISFZBaHZaZKCfruOsjKVAYPn
-	+t0uCj8A==;
-Received: from authenticated user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.96)
-	(envelope-from <leitao@debian.org>)
-	id 1wNTu6-003tUh-22;
-	Thu, 14 May 2026 11:06:59 +0000
-Date: Thu, 14 May 2026 04:06:51 -0700
-From: Breno Leitao <leitao@debian.org>
-To: "David Hildenbrand (Arm)" <david@kernel.org>
-Cc: Miaohe Lin <linmiaohe@huawei.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>, 
-	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
-	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Shuah Khan <shuah@kernel.org>, 
-	Naoya Horiguchi <nao.horiguchi@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	 Content-Type:Content-Disposition:In-Reply-To; b=EfNy9CgZyEFHP+gCABmVkmJtfx/+H/8f5kyLtbcOYL7QkMeh8FrMBggy6WzlFhW/gyph3pnjSIu64XmCxeSlEvmVA2vGWsR2IrFtDtbBdlsoryuz464/fzPdlGn+9U64aY4gBziGEmXNz3tCzX3ereGskoA7CXhSJpK84N7nis0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=faHWajg1; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2B4FC2BCB3;
+	Thu, 14 May 2026 11:43:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778759003;
+	bh=8uvHL9zd/W4MzaGePykxvJrwfNXRylh/wVLnkJKzd7E=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=faHWajg1RinoZINo2zzw/9LYhaBpCAO/WjniBeVywbskviXc90WOjIgzqclFC/aI+
+	 99AeFcPs33YWa+cGZgNI3dtza9vSrNN6mMPk8F60CeYfXMXbel+24P77oWLOGHCzX3
+	 5afJRDMXWTLXEQOl2iuzExQ1HaAlj9/f87CAAAoANqoU260Tb/TBlmi/1gtLGQHAIs
+	 YGn5u5Qot9sFHOCXYBtSiQBCXyrzOt3sUi2Q4jnioPE2ztJWRkvlR+Sa2nTVtHwVA3
+	 Z7B7iwQTQr/BQYijqwo04L95gaThQ05dOGIbr0/vTEshL02soTccdt4y336+ODOgJA
+	 nUYG05ef2ywGg==
+Date: Thu, 14 May 2026 13:43:21 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Abdurrahman Hussain <abdurrahman@nexthop.ai>
+Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
 	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	"Liam R. Howlett" <liam@infradead.org>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, kernel-team@meta.com, Lance Yang <lance.yang@linux.dev>
-Subject: Re: [PATCH v7 4/6] mm/memory-failure: short-circuit PG_reserved
- before get_hwpoison_page()
-Message-ID: <agWrHSXGQzZPEg0L@gmail.com>
-References: <20260513-ecc_panic-v7-0-be2e578e61da@debian.org>
- <20260513-ecc_panic-v7-4-be2e578e61da@debian.org>
- <511dc52e-f2af-43c8-a9cf-19321b091dbe@kernel.org>
+	linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 1/2] dt-bindings: trivial-devices: Add Murata D1U74T
+ PSU
+Message-ID: <20260514-dazzling-ethereal-bumblebee-d9b69e@quoll>
+References: <20260513-d1u74t-v3-0-27bcd6852c45@nexthop.ai>
+ <20260513-d1u74t-v3-1-27bcd6852c45@nexthop.ai>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <511dc52e-f2af-43c8-a9cf-19321b091dbe@kernel.org>
-X-Debian-User: leitao
-X-Rspamd-Queue-Id: 709F3540C88
+In-Reply-To: <20260513-d1u74t-v3-1-27bcd6852c45@nexthop.ai>
+X-Rspamd-Queue-Id: E7A245412F9
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-87493-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87489-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	FREEMAIL_CC(0.00)[huawei.com,linux-foundation.org,kernel.org,google.com,suse.com,gmail.com,goodmis.org,efficios.com,lwn.net,linuxfoundation.org,infradead.org,kvack.org,vger.kernel.org,meta.com,linux.dev];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[leitao@debian.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[debian.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-On Wed, May 13, 2026 at 09:49:28PM +0200, David Hildenbrand (Arm) wrote:
-> On 5/13/26 17:39, Breno Leitao wrote:
-> > The previous patch already classifies PG_reserved pages as
-> > MF_MSG_KERNEL through the long path: get_hwpoison_page() calls
-> > __get_hwpoison_page() which fails HWPoisonHandlable(), get_any_page()
-> > exhausts its shake_page() retry budget, and the resulting
-> > -ENOTRECOVERABLE is mapped to MF_MSG_KERNEL by the switch.  The
-> > outcome is correct but the work in between is wasted: shake_page()
-> > cannot turn a reserved page into a handlable one.
-> 
-> If really required, can we just move the check right there, into get_any_page() etc?
+On Wed, May 13, 2026 at 03:33:02AM -0700, Abdurrahman Hussain wrote:
+> The Murata D1U74T-W is a PMBus-compliant AC/DC power supply unit. The
+> binding only declares the compatible string and i2c reg, with no
 
-Sure, we might move it to get_any_page(). I took this current approach
-based on the following facts:
+Describe the hardware, not binding. What does the hardware have?
+Supplies? Pins? Clocks? Interrupts?
 
-1) Lance suggested it, and it sounded a good idea.
-	https://lore.kernel.org/all/20260512124837.38883-1-lance.yang@linux.dev/
 
-2) There is a _similar_ check close to this one in memory_failure(),
-   just before this one:
+> additional properties (no regulators, no supplies), so add it to
+> trivial-devices.yaml rather than carrying a standalone binding file.
 
-  if (TestSetPageHWPoison(p)) {
-  	....
-	action_result()
-	goto unlock_mutex;
-  }
+Best regards,
+Krzysztof
 
-  and now
-
-  if (PageReserved(p)) {
-	...
-  	action_result()
-	goto unlock_mutes;
-  }
-
-3) I wanted to give get it as  real layering point, not handwaving.
-
-That said, I will short-circuit reserved pages inside get_any_page(), in
-an updated version.
-
-Again, thanks for the review and direction!
---breno
 
