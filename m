@@ -1,138 +1,268 @@
-Return-Path: <linux-doc+bounces-87511-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87513-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MK2JNIDgBWpJdAIAu9opvQ
-	(envelope-from <linux-doc+bounces-87511-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 16:47:28 +0200
+	id UKoTAYznBWp0dQIAu9opvQ
+	(envelope-from <linux-doc+bounces-87513-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 17:17:32 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35CA35436E9
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 16:47:28 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 09355543E33
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 17:17:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5436530CECAA
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 14:38:14 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 04370300B2AB
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 15:09:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F62B425CF7;
-	Thu, 14 May 2026 14:37:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBA393FF8B7;
+	Thu, 14 May 2026 15:09:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WSzgITkm"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VLDXNifw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70189425CDD;
-	Thu, 14 May 2026 14:37:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778769463; cv=none; b=Kq22/IhIdrhgTmzJu/3O1ZPMOGhKDCZqhUQw9bO3YPwAz8vSiWYFl48yKOzGWwd1ISMn5CIUfIQ7Oe45x+34jmfmRzf6T5Az3RHla+KmE4pJfQas2kHnZNjX4v1LlEep9TvWRwZmvKgk7byM9K52dOE3Zy5jPQJIDKFJ8WjDArM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778769463; c=relaxed/simple;
-	bh=rZgHzTbgnHHmJN6qZy+N8eVodksxfqXSK4VW1S+0K7I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=vFkiBDDYbEp00R78eB9VgEmswgpkjN0qZMeB57XVM4El9vAXW8NMJYLkt813QCViQomfAnrdFLMTmguF4oIQN9NGy0afP+Jkbr0HTWv3eIiSsYNCnsR4aUEmggxtljGiUnvY6W3kf7HFwOhIgIjkZFkXO+DnY1TRNvXXTUmPmao=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WSzgITkm; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 451D6C2BCB3;
-	Thu, 14 May 2026 14:37:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778769463;
-	bh=rZgHzTbgnHHmJN6qZy+N8eVodksxfqXSK4VW1S+0K7I=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=WSzgITkmGehUccFbXTWsPk0QgXndYmpZfV7daj62F/XhP97o2McXRouYZH6CLLFwV
-	 gqggLlEnZ1PXfTjjROCChaOh3grRD106tHztsRAi1luciA9n5+Z6uR56rq/zS3XA3J
-	 YnLMKpNKptZSqQ+7fG/Q9tObtVhW9ctnptKEFbI0pchM2CLBhnLGtH34yqCKRQvOGW
-	 7tLS0IrpYKXpaGZv8TAHtOKGVHyfly3YPOjDQLKY9xULeUNIZ2PiNzkPf4rTYC4WT+
-	 mEMhTAGHxkOSdsjXj9RG0qveXJ811sNv6MaeF7a5Pg1xBtEyPItjOhZC5D9DOj0U/p
-	 Zv4alA42osiJw==
-Date: Thu, 14 May 2026 07:37:42 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Damien Le Moal <dlemoal@kernel.org>
-Cc: Christoph Hellwig <hch@lst.de>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-	Christian Brauner <brauner@kernel.org>,
-	Jens Axboe <axboe@kernel.dk>, David Sterba <dsterba@suse.com>,
-	Theodore Ts'o <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>, Trond Myklebust <trondmy@kernel.org>,
-	Anna Schumaker <anna@kernel.org>,
-	Namjae Jeon <linkinjeon@kernel.org>,
-	Hyunchul Lee <hyc.lee@gmail.com>, Steve French <sfrench@samba.org>,
-	Paulo Alcantara <pc@manguebit.org>,
-	Carlos Maiolino <cem@kernel.org>,
-	Naohiro Aota <naohiro.aota@wdc.com>, linux-xfs@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-mm@kvack.org, linux-block@vger.kernel.org,
-	linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
-	linux-f2fs-devel@lists.sourceforge.net, linux-nfs@vger.kernel.org,
-	linux-cifs@vger.kernel.org
-Subject: Re: [PATCH 09/12] swap: push down setting sis->bdev into
- ->swap_activate
-Message-ID: <20260514143742.GB9531@frogsfrogsfrogs>
-References: <20260512053625.2950900-1-hch@lst.de>
- <20260512053625.2950900-10-hch@lst.de>
- <20260512170846.GJ9555@frogsfrogsfrogs>
- <20260513055806.GC1236@lst.de>
- <acd6428b-a352-4f7b-a349-b2c9e341fd87@kernel.org>
- <20260513074608.GA3693@lst.de>
- <b37ca8a7-289e-45a0-8cbd-eb14d7453b97@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 905993FD13D
+	for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 15:09:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.161.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778771361; cv=pass; b=NouVymgpbGS6/t6Hx2KLJL/D5L+gWCx39pI3e2HD9YXqBosCnOKfeSN8lVrxdWRQgp3UaKcsDD0F3vzL5Vhj7dRVMXmjcDWJhSWpTFk4emgmfrc9BWjDuiMUKgopqw7o7UCOrnSn1LxtFfWE3s7n9dqDzoSJ1i1uR6ycWhcqUuo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778771361; c=relaxed/simple;
+	bh=9VWkUyUAPDFo9IHMN2LN9rQ2SLm6OqvalmrrIvc1kBU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Au+Rm3xS/PlcDZWLsXeQ72DN3MCKF1uWNfHJngZ873YH84BAYavctUKah7uI/vn+8+3ns3alADu7ylpGBnhjLQfWTdacZvZaIwCCBPk7otQbnGJCK1+GGavpo4IH9k4HPaQjO3+ZYw8y5eDqF6IU5tH/Ktkg1ZfWKRG4+KZj0tU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VLDXNifw; arc=pass smtp.client-ip=209.85.161.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-6949e5171acso392869eaf.2
+        for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 08:09:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778771356; cv=none;
+        d=google.com; s=arc-20240605;
+        b=UcdbPiykY6hauMe+j43/Go+bQd509mz2gdzjG3AUVrxjIzm4SynsPJGvnikPrUKyK+
+         bRt1+SqplRl5UhytD8EpfON76rHZnrruTH3tUtJwl2Nb4h5aYyOvKlGI8hvocwdGQWX+
+         is3n6ubzqIHhZrzq3hKsUaCDECZrDSrUYBuqzH6sepUKu2f7m5MuEULFoISvp1kBEK6n
+         tdj7gw44hNiA561FDfjyZmIkvP/NBX5fTfpTCLhQ4E5AVjdKaIhWyCOJY82CDyY3M5cL
+         eG9GncKb+n2dx8MKMkH4z3hR1TnOw8fpcBWLSdNAnBg4U3eG6+0MmpNp2SO43mJNz+xy
+         uZXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=ESax1I69XZe2pTasflsIowumfd1TUPTULL6KM+u28lk=;
+        fh=j50IIaQNXs5U3Aa9IdmSsGMAP4BZ+AZKBD9kiekIO2g=;
+        b=UfMl6vXWeEtN1tUPVFW0hCNjf49RWKNDw1GUR7nQHyhrmofxIGBO9v6yvRMLvcyrCi
+         l6/eWO0u2LgphQ6heHjh+3+pOJM/p0BwapKJ+W5nxbGw+v4V86Wr9l+VjlESy+i6PVua
+         kwkRhjsbu0g2hP2LX+qltpL31qxey8+6/wFO0JVit/It2MOpG5UIBK9wzUWx1PwLNBse
+         NSi0ifq1DU0pjeVh3dcVrrr3YzHik9/I50qmCnvFk2BLne1FTvLKh8BjE5Sr/fDu0+UO
+         Ei1HilaPqHtrCNjhGVkisvOU9kuUcICUjyB+7Gj7u3iVz3MOCYJ3UGc68oiO5j5Wy5Zu
+         DPlg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778771356; x=1779376156; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ESax1I69XZe2pTasflsIowumfd1TUPTULL6KM+u28lk=;
+        b=VLDXNifwsMc5/mMekoJ//T+3WJCaZdjKoCkJx5NmxWmIBBmNllyQuJL4EhocCbj5dR
+         1nWKA/W/eMhGB0zPN+urRi3E4jkomT8b29gr/FRPEbOvpd584AV3m5pNOoDVTtr9nvce
+         K7ikz5zD5g8evV55F3jLFdwCXUu2GSsq7e6xS5XJcXAUtA+bkhKFexoS20esMq6TCZfe
+         C6fbxfmYr4+UBSEl59nzZpc6bKrMiD/W9+OK8jGLfN1p4lFBu/rh+pxfzoglpzQbOkAH
+         AShoPm9ZXNahDbfSEEoC+7cwWjl2WRlsHNwzzJk+heg804RU0FyqAhHDqyiMHQV/jXxV
+         a0MA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778771356; x=1779376156;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ESax1I69XZe2pTasflsIowumfd1TUPTULL6KM+u28lk=;
+        b=Tq29xv1AEMOnaSO+yQYG8FMK2jQJrw7k+FeyPjJ/bIIRrVL+kZlMSlhGwffSpLoNhI
+         KRBXCRvdhdPZclQIZfMinTTBxK/SSRR/YE6gr+kfJlyjtuo4LktXn6+tvr5aJU3Aoomn
+         izZEF3hk5OyFDiXL19+SaEZWaHh5cy9pfDYa5OCQnyKEeuLxvWX5SDdmna9aR2QWrb65
+         w1UieE6RNelC7yVuSgZKW5ts8Km2jIlPpw4IQfcZRKGUfKzsi6qXi9tDb6pJdeGdJmop
+         sUvKN009AEniymY9eZtB952URZKlmB8R4GlXINj3hDusaRyHZIgSygB027sx92E2texw
+         pqzg==
+X-Forwarded-Encrypted: i=1; AFNElJ8DVAAg5h3ATUsp6Oci0z11fJe1DIIJ/8GUfLPyymXUad9/jBZROlXsZxvPESJzrMWCMN5pEO85ZjI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyEp5YU5zJIg2IZhVeDrp1zBskAdmDDiS68Ajg++cp4m9AEo0KL
+	wyOZJw/zyAiGvetyb/jufou24h/74NfUEKcD1b3RgSg7XHyZLmTcdaR+CVXJvE+cVq4Wr2cf6O1
+	016i1ul9iWwKeHT8jw4B+gYh9QNvboAs=
+X-Gm-Gg: Acq92OEc7dYshVm2YO+UI/fIThXdYdyS0p41ilCSvVnLk8QsqNEAqTOjApO0OexNzf/
+	TbXGUskN3433RBvcCOOwnf6WqbqpdeiWmsokBFl48HfXb/9OTBprbt8Ljc7/16GeViPtLxIuJYW
+	AbBvb00FOVQJYE8535CbZP5+UaKGLcbdT1r/9OdRgDZLgHD0MLCfT1272cRgmp6YQPjhHJwbr+P
+	lP+maAaML53uo3zGPq/x2tdv8a3GTVsUiZ4PjZkal696J5bvxWCYa5aZATtrA9etzmwde7198Y7
+	rFSC9XbCo69HekiGBU0=
+X-Received: by 2002:a05:6808:1641:b0:467:53b0:b44d with SMTP id
+ 5614622812f47-482b2d31b1bmr3042378b6e.5.1778771356079; Thu, 14 May 2026
+ 08:09:16 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b37ca8a7-289e-45a0-8cbd-eb14d7453b97@kernel.org>
-X-Rspamd-Queue-Id: 35CA35436E9
+References: <20260514094955.76305-1-jianlv@ebay.com> <2026051443-exuberant-important-534f@gregkh>
+ <CAFA-uR93Wf2ALpYnnU79kruv7XO=uFePqioaEXNNEfrUtRw2xQ@mail.gmail.com> <2026051406-corridor-equation-c50e@gregkh>
+In-Reply-To: <2026051406-corridor-equation-c50e@gregkh>
+From: Jianlin Lv <iecedge@gmail.com>
+Date: Thu, 14 May 2026 23:09:03 +0800
+X-Gm-Features: AVHnY4J2dkhFy6eGlghPANY01Lmp0sHVjJRnqMskvc_iSu6OzpshOwPJLL8rs3c
+Message-ID: <CAFA-uR9=rHPbiVFYgDBAdRHCoujKjqtTxsMVupEwGhGmXoLw8w@mail.gmail.com>
+Subject: Re: [PATCH] driver core: Add cmdline option to force probe type
+To: Greg KH <gregkh@linuxfoundation.org>
+Cc: corbet@lwn.net, skhan@linuxfoundation.org, rafael@kernel.org, 
+	dakr@kernel.org, jianlv@ebay.com, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, driver-core@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: 09355543E33
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87511-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87513-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCPT_COUNT_TWELVE(0.00)[29];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lst.de,linux-foundation.org,kernel.org,tencent.com,kernel.dk,suse.com,mit.edu,gmail.com,samba.org,manguebit.org,wdc.com,vger.kernel.org,kvack.org,lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	MISSING_XM_UA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[djwong@kernel.org,linux-doc@vger.kernel.org];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_NEQ_ENVFROM(0.00)[iecedge@gmail.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,mail.gmail.com:mid,linuxfoundation.org:email]
 X-Rspamd-Action: no action
 
-On Wed, May 13, 2026 at 04:58:37PM +0900, Damien Le Moal wrote:
-> On 5/13/26 16:46, Christoph Hellwig wrote:
-> > On Wed, May 13, 2026 at 04:44:53PM +0900, Damien Le Moal wrote:
-> >> Hmmm... With zonefs, swap files can be created on top of conventional zone
-> >> files. So enforcing "no swap on zoned device" here would break that.
-> > 
-> > We can check that none of the extents fall onto sequential zones instead
-> > of just devices.
-> > 
-> > I still wonder why you bother with swap to zonefs at all, though.
-> 
-> Yeah. I do not think anyone actually use that... But since it is there from the
-> start, kind of stuck with it now.
+On Thu, May 14, 2026 at 9:49=E2=80=AFPM Greg KH <gregkh@linuxfoundation.org=
+> wrote:
+>
+> On Thu, May 14, 2026 at 09:35:08PM +0800, Jianlin Lv wrote:
+> > On Thu, May 14, 2026 at 6:16=E2=80=AFPM Greg KH <gregkh@linuxfoundation=
+.org> wrote:
+> > >
+> > > On Thu, May 14, 2026 at 05:49:55PM +0800, Jianlin Lv wrote:
+> > > > From: Jianlin Lv <iecedge@gmail.com>
+> > > >
+> > > > Device drivers that use asynchronous probing can cause non-determin=
+istic
+> > > > device ordering and naming across reboots. A typical example is sto=
+rage
+> > > > drivers (like sd/nvme): asynchronous probing can lead to inconsiste=
+nt disk
+> > > > logical names after reboot. In scenarios where disk naming consiste=
+ncy is
+> > > > critical, the probe type should be set to synchronous.
+> > > >
+> > > > This patch introduces a driver_probe kernel parameter that override=
+s any
+> > > > driver's hard-coded probe type settings and allows runtime control =
+without
+> > > > requiring kernel recompilation:
+> > > >
+> > > >   driver_probe=3DPROBE_TYPE_SYNC,nvme,sd      # Force specific driv=
+ers sync
+> > > >   driver_probe=3DPROBE_TYPE_ASYNC,*,usb       # Force all async exc=
+ept usb
+> > > >   driver_probe=3DPROBE_TYPE_SYNC,*            # Force all drivers s=
+ynchronous
+> > > >
+> > > > The implementation replaces the limited driver_async_probe paramete=
+r with
+> > > > a more flexible interface that can force either synchronous or asyn=
+chronous
+> > > > probing as needed.
+> > > >
+> > > > Signed-off-by: Jianlin Lv <iecedge@gmail.com>
+> > > > ---
+> > > >  .../admin-guide/kernel-parameters.txt         | 27 +++++--
+> > > >  drivers/base/dd.c                             | 71 ++++++++++++++-=
+----
+> > > >  2 files changed, 74 insertions(+), 24 deletions(-)
+> > > >
+> > > > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Docu=
+mentation/admin-guide/kernel-parameters.txt
+> > > > index 4d0f545fb3ec..b43a8bd20356 100644
+> > > > --- a/Documentation/admin-guide/kernel-parameters.txt
+> > > > +++ b/Documentation/admin-guide/kernel-parameters.txt
+> > > > @@ -1377,12 +1377,27 @@ Kernel parameters
+> > > >                       it becomes active and is searched during sign=
+ature
+> > > >                       verification.
+> > > >
+> > > > -     driver_async_probe=3D  [KNL]
+> > > > -                     List of driver names to be probed asynchronou=
+sly. *
+> > > > -                     matches with all driver names. If * is specif=
+ied, the
+> > > > -                     rest of the listed driver names are those tha=
+t will NOT
+> > > > -                     match the *.
+> > > > -                     Format: <driver_name1>,<driver_name2>...
+> > >
+> > > You can not remove an existing user/kernel api, sorry, that is not
+> > > allowed as you just broke all systems that were relying on this :(
+> > >
+> > Could you provide more suggestions on how to improve this patch?
+>
+> Not really, sorry, I don't think this is a change that should be done at
+> all.  disk naming is a long-solved issue, to think that you can fix that
+> by doing sync/async device probing is not understanding both the issues
+> involved, and how we solved it already :)
 
-Ahh, right, I forgot that zoned devices can have conventional zones
-where swap would actually work.  Question withdrawn.
+Do you mean referencing disks via by-path/by-id? In our production env
+they can also be unstable; this is an example I encountered before:
+https://lore.kernel.org/all/CAFA-uR_jk6jCmf9DTebSVBRwtoLuXuyvf1Biq+OObqRVAO=
+ZbBw@mail.gmail.com/
 
---D
+I understand that device naming in the kernel can change at any time. Howev=
+er,
+Is it necessary to provide an interface that allows users to choose
+the probe mode themselves?
+Currently, driver_async_probe has lower priority than the drivers=E2=80=99
+hard-coded probe_type settings.
+Could we adjust the code as follows so that driver_async_probe has the
+highest priority?
+
+ static bool driver_allows_async_probing(const struct device_driver *drv)
+ {
++       if (cmdline_requested_async_probing(drv->name))
++                        return true;
++
+        switch (drv->probe_type) {
+        case PROBE_PREFER_ASYNCHRONOUS:
+                return true;
+@@ -876,9 +879,6 @@ static bool driver_allows_async_probing(const
+struct device_driver *drv)
+                return false;
+
+        default:
+-               if (cmdline_requested_async_probing(drv->name))
+-                       return true;
+-
+                if (module_requested_async_probing(drv->owner))
+
+Jianlin
+
+>
+> Hint, never count on block device, or any device, names to be the same
+> across reboots.  That has NEVER been guaranteed on systems built in the
+> past 20+ years.
+>
+> Please, just use the existing solutions, no new command line option
+> should ever be needed here.
+>
+> thanks,
+>
+> greg k-h
 
