@@ -1,80 +1,56 @@
-Return-Path: <linux-doc+bounces-87524-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87522-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cMhzHIP5BWqcdwIAu9opvQ
-	(envelope-from <linux-doc+bounces-87524-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 18:34:11 +0200
+	id cMXPLPj4BWqcdwIAu9opvQ
+	(envelope-from <linux-doc+bounces-87522-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 18:31:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7C25544BF7
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 18:34:10 +0200 (CEST)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 57E76544B88
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 18:31:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1A2803024C89
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 16:32:24 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 3E8F03006825
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 16:31:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E69132142B;
-	Thu, 14 May 2026 16:32:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E61F3290B1;
+	Thu, 14 May 2026 16:31:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VMWQCvYK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tTbnCPqi"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="etAgPwba"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F00D316189;
-	Thu, 14 May 2026 16:32:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.241.56.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F8AC315793;
+	Thu, 14 May 2026 16:31:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778776343; cv=none; b=ZkTgWgWxCm2Sm2liUK6BOsNkjCN975xHAlyZRkLdOdRKHJK84vWgMIO0ZjGeKDK9qnnyK1JibhUZr0tx06w6JxgmsdLWu315pIygRK9Fk6I5fih7fUXzuXsPIa1SH32Ms26V2z1Z9NbHxAPGcl/1QFQ2vAdr3O54vKpAkqVZzzA=
+	t=1778776307; cv=none; b=MMEyIhk4MVJAH23Oz4cOjqE/x3bNSolq//XPyXk/Hvwu5E8xfjCZRuNSVGi8Wx1jM7giquCryhYzAg5ob1fHal9UsxSzxBf2ylxrpvnXbqMJZ+TPbpkXhW3x9Lac8CmCidfITOa5bK6gWL/e6q5VzrOTtaPAS6xjQ54lCIktyXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778776343; c=relaxed/simple;
-	bh=szoEGNrlBJ1LmQeDYolT3AAJQsNm38AgeFz4jvHb5/4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=A/EEcPMcxTOXqrKBv358pQytTNayLdyF16Qh5aUHRdWw1qqaXlljK40O6k1SDIUA73MEGuzJAxGl9It80pACOs9u5IZF/xNtkbidnR2e9BSIKLK9K8KVelyAebgV5oUHDpFWpxZNpYWQGMjL/gzWjA6Ndpaev+wZGqcDyUIqCUw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=VMWQCvYK; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=tTbnCPqi; arc=none smtp.client-ip=80.241.56.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [IPv6:2001:67c:2050:b231:465::202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gGbTJ1N4gz9vDd;
-	Thu, 14 May 2026 18:32:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1778776340;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oSTZX/Nl4yJO2d5YuuigYg8EBLAOIxbQfoWFH41gpEE=;
-	b=VMWQCvYKG3Wv51ppxm8fHLU3KZD/hjsQB2k9xTbHHITAU+J2p28gg9Q1/vgTyZwZxSjwLr
-	GKs9MiStYjYkmileJx0X0CNO9/2+X5kjV+ItiA5TWB7onfxsuPwps41g1PZQJgAF4TiBgp
-	Bl87maHptHSuyQFFR99sEMVmmLwvxDyVbtlO8Q1V29pp5360xyNHd/cvmVOL/JaChIHYiX
-	FBWXA8wKb+Yq0xmuYpkiDaTo900XyTsZEZqmsdFQQ1kkxlUOc1dGzynx32vppVOvXk/4Tv
-	6FUwf/4Y2Bakqe8GSC0PU3iyEco5Xk8KJhmM9AnIC0tzLeDmFUiOtGpOGkMi/A==
-Authentication-Results: outgoing_mbo_mout;
-	dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=tTbnCPqi;
-	spf=pass (outgoing_mbo_mout: domain of manuelebner@mailbox.org designates 2001:67c:2050:b231:465::202 as permitted sender) smtp.mailfrom=manuelebner@mailbox.org
-From: Manuel Ebner <manuelebner@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
-	t=1778776338;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oSTZX/Nl4yJO2d5YuuigYg8EBLAOIxbQfoWFH41gpEE=;
-	b=tTbnCPqirFTqHrrBjR0Zt1etM9peSjaDGnDfNoKHS6TF8ySRa9ETc/7bN5cuB9goNNKviC
-	4Kr27n6Y8tFAJChaLfwagLd0gjnK+hEy1H4c/jMip8LysK92VAm8SIdwLA7wmkwnrAOKps
-	rQwtH3XflfgKstoXEY83SCSYNYSMHYAmTVG0/NogM/pLbtaKNSYnxsTKHNQYvEx9u0z8QP
-	4RRQYx91y4vgoIkV3E8PpY7Ija0m5STgtvpRFCpf8gnqn+Qdbifa4dezdem/7XJqmgErpF
-	iH4NTNaHiYN3U2T51gpzirqc2q/egInJGWkbCAzEJn+pBlRcmSX2zWtwR0v/xA==
-To: Andy Shevchenko <andy.shevchenko@gmail.com>,
-	Kees Cook <kees@kernel.org>,
+	s=arc-20240116; t=1778776307; c=relaxed/simple;
+	bh=Uf2qbL9yqSqQ+XzxVsI/hBvglaLl10AOtP7afIb1D9A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=V0n2TcIGvjrA+KZW6gFqs6J+PdJuLRYIWCVOEe5PbY4XHdT+DvUYneE2dyYD3pDSZXqA7K5bQO/OYs/12SnPRwlWvRrQxh3N7ZbXolV+dSfRkcMCYLimmkoAQzPI66/KMYZljzIFZVf5/4vs9zHFZQeC6hnPuHHE9e7J0ltFA7I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=etAgPwba; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B05DDC2BCB7;
+	Thu, 14 May 2026 16:31:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1778776306;
+	bh=Uf2qbL9yqSqQ+XzxVsI/hBvglaLl10AOtP7afIb1D9A=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=etAgPwbaHfQHR6gq6jG/oDFMxffhTFSUpHcjXWKN+Rakw/ksifC+HnxOyeFEoJoP2
+	 HKcG6Y/9lbbDyE24TWfifOSshy57LF/vb8gr7AKwOJC9G8j9i3TasF/RAvxCiqcRYS
+	 Ofjaslj+yiJGfBTGgd8fu3LAtwUSrkQMqv5KHhDmRviUAuumZxCnQPYhjkHRmOh5yf
+	 uUtp2AelwQSimH+kn26rb+GjiAxldaNy/bJs7WjI5dwChBm8stifkOOMMwTqJaUPgx
+	 +DhEDf64tzzrwwECU8vupoKjcqqNFabLDZEG7qW3or+UoEqjmatRjZ+N6sWLB7tBiE
+	 NbkrdAFrM0Q0w==
+Date: Thu, 14 May 2026 09:31:46 -0700
+From: Kees Cook <kees@kernel.org>
+To: Manuel Ebner <manuelebner@mailbox.org>
+Cc: Andy Shevchenko <andy.shevchenko@gmail.com>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Shuah Khan <skhan@linuxfoundation.org>,
-	Andy Whitcroft <apw@canonical.com>,
-	Joe Perches <joe@perches.com>,
+	Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>,
 	Dwaipayan Ray <dwaipayanray1@gmail.com>,
 	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
 	Geert Uytterhoeven <geert@linux-m68k.org>,
@@ -82,110 +58,92 @@ To: Andy Shevchenko <andy.shevchenko@gmail.com>,
 	Randy Dunlap <rdunlap@infradead.org>,
 	Jani Nikula <jani.nikula@intel.com>,
 	Heiko Carstens <hca@linux.ibm.com>,
-	workflows@vger.kernel.org (open list:DOCUMENTATION PROCESS),
-	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
-	linux-kernel@vger.kernel.org (open list)
-Cc: Manuel Ebner <manuelebner@mailbox.org>
-Subject: [PATCH v2 3/3] drivers: add deprecated remarks to strlcat()
-Date: Thu, 14 May 2026 18:30:34 +0200
-Message-ID: <20260514163033.108009-2-manuelebner@mailbox.org>
-In-Reply-To: <20260514160719.105084-3-manuelebner@mailbox.org>
+	"open list:DOCUMENTATION PROCESS" <workflows@vger.kernel.org>,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v2 1/3] Doc: deprecated.rst: add strlcat()
+Message-ID: <202605140931.913048A68B@keescook>
 References: <20260514160719.105084-3-manuelebner@mailbox.org>
+ <20260514162652.107714-2-manuelebner@mailbox.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 69646e659f84f55dfa2
-X-MBO-RS-META: 8zocm5d1yzxojme1h5f5m63crjw9u7m1
-X-Rspamd-Queue-Id: B7C25544BF7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260514162652.107714-2-manuelebner@mailbox.org>
+X-Rspamd-Queue-Id: 57E76544B88
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.84 / 15.00];
+X-Spamd-Result: default: False [-0.16 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[mailbox.org,reject];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
-	R_DKIM_ALLOW(-0.20)[mailbox.org:s=mail20150812];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87524-lists,linux-doc=lfdr.de];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	TO_DN_ALL(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87522-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org,lwn.net,linuxfoundation.org,canonical.com,perches.com,linux-m68k.org,infradead.org,intel.com,linux.ibm.com,vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[gmail.com,lwn.net,linuxfoundation.org,canonical.com,perches.com,linux-m68k.org,infradead.org,intel.com,linux.ibm.com,vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[manuelebner@mailbox.org,linux-doc@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[mailbox.org:+];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kees@kernel.org,linux-doc@vger.kernel.org];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TAGGED_RCPT(0.00)[linux-doc];
+	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,mailbox.org:email,mailbox.org:mid,mailbox.org:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mailbox.org:email]
 X-Rspamd-Action: no action
 
-add kernel-doc comment to strlcat() function definitions
+On Thu, May 14, 2026 at 06:26:53PM +0200, Manuel Ebner wrote:
+> add strlcat and alternatives
+> 
+> Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
+> ---
+>  Documentation/process/deprecated.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
+> index fed56864d036..06e802f4bbfd 100644
+> --- a/Documentation/process/deprecated.rst
+> +++ b/Documentation/process/deprecated.rst
+> @@ -153,6 +153,13 @@ used, and the destinations should be marked with the `__nonstring
+>  attribute to avoid future compiler warnings. For cases still needing
+>  NUL-padding, strtomem_pad() can be used.
+>  
+> +strlcat()
+> +---------
+> +strlcat() must re-scan the destination string from the beginning on each
+> +call (O(n^2) behavior). Alternatives are seq_buf_puts() and seq_buf_printf().
+> +snprintf(), scnprintf() and sysfs_emit() are possible aswell, but the adoption
+> +of the arguments needs to be taken care off.
+> +
 
-Signed-off-by: Manuel Ebner <manuelebner@mailbox.org>
----
- lib/string.c                  | 11 +++++++++++
- tools/include/nolibc/string.h | 11 +++++++++++
- 2 files changed, 22 insertions(+)
+How about just:
 
-diff --git a/lib/string.c b/lib/string.c
-index b632c71df1a5..0a44ca5ca7e6 100644
---- a/lib/string.c
-+++ b/lib/string.c
-@@ -249,6 +249,17 @@ EXPORT_SYMBOL(strncat);
- #endif
- 
- #ifndef __HAVE_ARCH_STRLCAT
-+/**
-+ * strlcat - Append a string to an existing string
-+ *
-+ * @dest: pointer to %NUL-terminated string to append to
-+ * @src: pointer to %NUL-terminated string to append from
-+ * @count: Maximum bytes available in @dest
-+ *
-+ * Do not use this function. Prefer building the string with
-+ * formatting, via scnprintf(), seq_buf, or similar.
-+ *
-+ */
- size_t strlcat(char *dest, const char *src, size_t count)
- {
- 	size_t dsize = strlen(dest);
-diff --git a/tools/include/nolibc/string.h b/tools/include/nolibc/string.h
-index 4000926f44ac..1a4b51135705 100644
---- a/tools/include/nolibc/string.h
-+++ b/tools/include/nolibc/string.h
-@@ -208,6 +208,17 @@ char *strndup(const char *str, size_t maxlen)
- }
- 
- static __attribute__((unused))
-+/**
-+ * strlcat - Append a string to an existing string
-+ *
-+ * @dst: pointer to %NUL-terminated string to append to
-+ * @src: pointer to %NUL-terminated string to append from
-+ * @size: Maximum bytes available in @dst
-+ *
-+ * Do not use this function. Prefer building the string with
-+ * formatting, via scnprintf(), seq_buf, or similar.
-+ *
-+ */
- size_t strlcat(char *dst, const char *src, size_t size)
- {
- 	size_t len = strnlen(dst, size);
+strlcat() must re-scan the destination string from the beginning on each
+call (O(n^2) behavior). Use the seq_buf API or similar instead.
+
+
+>  strlcpy()
+>  ---------
+>  strlcpy() reads the entire source buffer first (since the return value
+> -- 
+> 2.54.0
+> 
+
 -- 
-2.54.0
-
+Kees Cook
 
