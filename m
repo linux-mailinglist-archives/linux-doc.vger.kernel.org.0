@@ -1,137 +1,168 @@
-Return-Path: <linux-doc+bounces-87497-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87499-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wJWFC32+BWpLawIAu9opvQ
-	(envelope-from <linux-doc+bounces-87497-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 14:22:21 +0200
+	id IGQNGX/CBWpMbAIAu9opvQ
+	(envelope-from <linux-doc+bounces-87499-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 14:39:27 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34470541897
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 14:22:19 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD9BD541C3B
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 14:39:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id E4F8230125A4
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 12:22:16 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id BDDB33065C1D
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2026 12:36:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C32D53D967D;
-	Thu, 14 May 2026 12:22:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86F703806B6;
+	Thu, 14 May 2026 12:36:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="eIL+huTD"
+	dkim=pass (1024-bit key) header.d=mailbaby.net header.i=@mailbaby.net header.b="BiNqCp8/";
+	dkim=pass (1024-bit key) header.d=aosc.io header.i=@aosc.io header.b="YETQ9mPm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from relay0-f.mailbaby.net (relay0-f.mailbaby.net [64.20.38.26])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F43F3AFAE7;
-	Thu, 14 May 2026 12:22:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778761335; cv=none; b=kG0WAYiXyjmHU3oy7oie2Zbvi/Fr1lhQWmAwhMyrdo3iyvU6LCSkw/GFtub1NZjDA4O9VeC8aLZePoJAc4pNPARtUTwz8rHB4QhImnOuCca9jcraBGopwzHBgw4abc/sBCDa4xdBWCHFHXlqzLuIM+Vu/W0r/L0QaOc4OCUj1Cw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778761335; c=relaxed/simple;
-	bh=u9b4TrEtyf0bBABP+TvIW5QlccJBlkbQCO3Zk3EbfU8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=ENaHNZw/KCEEtABaCFwc0EHtHfiBsJHXbIAXtsoEZ7ZTcvvHSPwru4l3UetRFYcI9Aysaz6zKctt8T1uvs9skyDNtlKWOyjbKFdVKKxYjVvuSOne8Nthjbq2dXYf4XcqTqwLncIC3jDgD1KrD5AFxwalfFLn2dbVTONV5Z4qkGo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=eIL+huTD; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 57B83410B5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1778761333; bh=u9b4TrEtyf0bBABP+TvIW5QlccJBlkbQCO3Zk3EbfU8=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=eIL+huTDbCuY5c8276HBWk/26UAx5YxWil51TmBg7+DpdOoaYhA9kxP8UpZoShX/f
-	 63gXVBmKrznklxPTjJreyK06deu57Kf0GcxFEBgWP9fRWCRZN7umFAfcQvKanp7p2O
-	 GEIR255K+8cp8WRbkpcSzM3iwB/Zwr7X8txwkugfMG5b5Wod2WcU3ViA5hC06JSQbB
-	 lRUX67N3HLMW7Rc5reLLXk0noIgDHo0HuFZTiktg/xIzYD6arTeT5k79DQcX74xri0
-	 0hZszAspcHXkSzuZbEHvTJ+z7BZ4gvvP6yIsXMY5G4s0QOfEAnDJEJE6R5Fsd9dTMH
-	 Uvzeoar8xza7g==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b:67c:16ff:fe81:5f9b])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1DA13C13E3
+	for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 12:36:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=64.20.38.26
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778762190; cv=pass; b=u3WO/EWI696jNY9bibwcDSCzo8B1nIU/9lw5ew+Y4duWTYULISUR973eUMOUUK3CmWcd1bzKCG8pKgR1w8+U5zsBa+VlcvCJJa8cgoJ7O7qA3OYQRoGNQGoCbBgttAt3Cu95M09k7Ek5YkJLd6clu20K06cxayVNgxGapb8v/w0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778762190; c=relaxed/simple;
+	bh=hoMaBbcd7mH9fG9OW5HELnHuwSZ+gy26Cm1BxdW9sr4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=fqFiTA8shvYkV46S+29Ex7mbw/enhRoPXPA4HK/QW1VzEa5LSON/l74M1OVGjvstUN1ZdQc/uo7Syz96tBEw1jLCS18Gsi7C/V47YV6bcz3luh4pHADbb8vIUoBEifo2OYoJAAEFDaeQCT8nI0zOLQztEb27PoDgVkgXxLgejhw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aosc.io; spf=pass smtp.mailfrom=aosc.io; dkim=pass (1024-bit key) header.d=mailbaby.net header.i=@mailbaby.net header.b=BiNqCp8/; dkim=pass (1024-bit key) header.d=aosc.io header.i=@aosc.io header.b=YETQ9mPm; arc=pass smtp.client-ip=64.20.38.26
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aosc.io
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aosc.io
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbaby.net;
+ q=dns/txt; s=bambino; bh=6PfMMpJsfSzY39e+2GkEg8LDIxduImJGPWlmqC7MfV0=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=BiNqCp8/20/TMEkFdeBSdKkNT8W62Wr4CltqOXyclYlqN3VlORO4avHM8DUcUac9IqOv5ytF4
+ 4IID5TGp27jzidmhnlmxEebnuIQbA7StSe5W+qQflfiS95fdScJHWftrr+MGThYNAdjCRPzxOSd
+ QXzh7XldkYPz/8o08oPHn3Y=
+Received: from mb-nj-kvm1.internal (mb-nj-kvm1.internal [10.10.2.10])
+ (Authenticated sender: mb86144)
+ by relay0-f.mailbaby.net (MailBabyMTA) with ESMTPSA id 19e2677f562000bf5c.001
+ for <linux-doc@vger.kernel.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 14 May 2026 12:30:56 +0000
+X-Zone-Loop: 87148afb9e87adb64f796cca5647ba2e4a7608653622
+ARC-Authentication-Results: i=1;	rspamdcluster19.mailbaby.net;	auth=pass
+ smtp.auth=mb86144 smtp.mailfrom=wangyuli@aosc.io
+ARC-Seal: i=1; a=rsa-sha256; d=mailbaby.net; s=detka; cv=none;
+ t=1778761856;
+	b=rL3BBfHC65fKmcZuwmcY+z74Xx9QTuyulR01bKCktWJspvLub1JLFWb2DDUi/7+dbiMgbw
+	XcqPQbyyxepUQh6T98/wUEroySm+cGN6Yj72iWnjGkj8B7ZPng36XFKoChAyb3QqG6D7t7
+	h3tA9BnHlUUX6RCesCpDwsYPenYh+izOOgKftOmOwfi8Pli2cRIhxhqzSz3saOU2Hy/WcC
+	7lK7Sm9mjh6LY77TR6rMftVsC/TZSoDrF6Dn0w2om8nQyp0IhAICaiwyzb4L8vpbvdqfzc
+	oN5Yhx15ShvR6S3xHUp/XJV1gOB7bBTb+Gf6+UJpWxwztBHW/5Ffc+LaRHdjHw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailbaby.net;	s=detka; t=1778761856;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=6PfMMpJsfSzY39e+2GkEg8LDIxduImJGPWlmqC7MfV0=;
+	b=qL726/HPYQeB6E7t0MDhBGVdvdeS5t2Tq+6nQp/4GQZ6Oz+KGheH6cYgsMCkgm2zPyBTvD
+	J9d7lvgT+o7IYKegxB5wLIwBhETaR8f26deGuFQgienxwbT70TH1NT+1AuQG6wK0jnbh9H
+	f1UWQJ0rOc1eBPR06qSm/5rBb3nQIq2m+jUGEHEJG79v5PjRt1Rj6aDjGHjEoAWgGNaPG5
+	FnbRsZnBUdJM5ltLufx630h/fTC/TfCvAFHZm5eZA1UJ/czltu787FMLHwRX/70Kfo97+c
+	WJ21iR92Sh7BM8f92/WXASF897G6yFxGAY+Z60ttkos0eVwM53bZHh0kPbTBjA==
+X-MB-ID: mb86144
+X-SPF: pass
+Feedback-ID: mb86144:19e267:587f4d46584359477840504741595e:mbaby
+X-NS-SCAN: PASS
+X-MAILBABY-ORIGIN: PASS
+Received: from relay1.mymailcheap.com (relay1.mymailcheap.com [144.217.248.100])
+	by relay5.mymailcheap.com (Postfix) with ESMTPS id 05ECA2621F;
+	Thu, 14 May 2026 12:30:47 +0000 (UTC)
+Received: from nf2.mymailcheap.com (nf2.mymailcheap.com [54.39.180.165])
+	by relay1.mymailcheap.com (Postfix) with ESMTPS id 0799A3E9AE;
+	Thu, 14 May 2026 12:30:39 +0000 (UTC)
+Received: from mail20.mymailcheap.com (mail20.mymailcheap.com [51.83.111.147])
+	by nf2.mymailcheap.com (Postfix) with ESMTPSA id B1AD640071;
+	Thu, 14 May 2026 12:30:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=aosc.io; s=default;
+	t=1778761837; bh=hoMaBbcd7mH9fG9OW5HELnHuwSZ+gy26Cm1BxdW9sr4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=YETQ9mPmGMnM+ACwcEBvqNSSfrPqSNEVfqnBZhOW7DokElLTpVNLBR9KXVJWEeZAH
+	 NI+cSu279gIBreVnfYz3P1QOEG0pWLhrkE1pQuvSGphB0sQZl53raNpn6W5iaiPk0F
+	 DqmD65QKfEhTMO32pQ2NbgOX/XZ2zF8cR5TNeP6g=
+Received: from [10.148.84.248] (unknown [124.64.22.153])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 57B83410B5;
-	Thu, 14 May 2026 12:22:13 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Willy Tarreau <w@1wt.eu>
-Cc: Greg KH <greg@kroah.com>, Leon Romanovsky <leon@kernel.org>,
- skhan@linuxfoundation.org, security@kernel.org, workflows@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 2/3] Documentation: security-bugs: explain what is
- and is not a security bug
-In-Reply-To: <agVQWKR63Nqs8rp-@1wt.eu>
-References: <20260509094755.2838-1-w@1wt.eu>
- <20260509094755.2838-3-w@1wt.eu> <87wlx8o87g.fsf@trenco.lwn.net>
- <2026051333-puzzle-smokiness-8096@gregkh> <agRfFoMC2Gcu0Esz@1wt.eu>
- <87ecjfmpzj.fsf@trenco.lwn.net> <agR1-2Sj1KO9oM2k@1wt.eu>
- <87fr3v6my2.fsf@trenco.lwn.net> <agVQWKR63Nqs8rp-@1wt.eu>
-Date: Thu, 14 May 2026 06:22:12 -0600
-Message-ID: <87wlx6uqob.fsf@trenco.lwn.net>
+	by mail20.mymailcheap.com (Postfix) with ESMTPSA id CF2CE410A6;
+	Thu, 14 May 2026 12:30:33 +0000 (UTC)
+Message-ID: <99f5a198-48d3-4282-beb0-5d384b9d9c61@aosc.io>
+Date: Thu, 14 May 2026 20:30:25 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Rspamd-Queue-Id: 34470541897
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] docs: reporting-issues: replace "these advices" with
+ "all of this advice"
+To: Jonathan Corbet <corbet@lwn.net>, Chen-Shi-Hong <eric039eric@gmail.com>,
+ linux@leemhuis.info
+Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260514082808.655-1-eric039eric@gmail.com>
+ <e2cced37-58ea-4678-a586-97f9a6db7e9d@aosc.io>
+ <87zf22uquc.fsf@trenco.lwn.net>
+Content-Language: en-US
+From: WangYuli <wangyuli@aosc.io>
+In-Reply-To: <87zf22uquc.fsf@trenco.lwn.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: AD9BD541C3B
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[aosc.io,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_DKIM_ALLOW(-0.20)[mailbaby.net:s=bambino,aosc.io:s=default];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	TAGGED_FROM(0.00)[bounces-87499-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87497-lists,linux-doc=lfdr.de];
-	PRECEDENCE_BULK(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[lwn.net,gmail.com,leemhuis.info];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MISSING_XM_UA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
+	DKIM_TRACE(0.00)[mailbaby.net:+,aosc.io:+];
 	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,aosc.io:mid,aosc.io:dkim];
+	RCPT_COUNT_FIVE(0.00)[6];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[wangyuli@aosc.io,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-doc];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[1wt.eu:email,lwn.net:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns,trenco.lwn.net:mid]
+	RCVD_COUNT_SEVEN(0.00)[8]
 X-Rspamd-Action: no action
 
-Willy Tarreau <w@1wt.eu> writes:
+Hi jon,
 
->> (While I was there, I noticed that threat-model.rst has no SPDX line;
->> what's your preference there?)
->
-> I didn't notice any was needed, I tried to get inspiration from other
-> files for the format (I'm still not familiar with the rst format
-> though this time I could successfully install the tools).
+On 2026/5/14 20:18, Jonathan Corbet wrote:
+> Please, no.  If you start churning the code in that way you will
+> certainly get pushback.  Typo fixes are a fine way to learn the process,
+> but I really hope that contributors will move on quickly to more
+> substantial work.
 
-In theory every file in the kernel tree is supposed to have one; many
-documentation files lag a bit behind on that front, but we try...
-
-> Same for
-> the label at the top BTW, I just did what I found somewhere else,
-> probably security-bugs.rst which is similar (no SPDX line and has a
-> label). So regarding SPDX, I do not have any preference. If one is
-> needed, let's pick what's used by default, I do not care, as long
-> as it allows the doc to be published.
-
-The top-of-file label got started somewhere and has been cargo-culted
-extensively since then; it has proved hard to eradicate.
-
-As for SPDX, the most common is the basic:
-
-.. SPDX-License-Identifier: GPL-2.0
+You're right. I take back my suggestion.
 
 Thanks,
 
-jon
+---
+
+WangYuli
+
 
