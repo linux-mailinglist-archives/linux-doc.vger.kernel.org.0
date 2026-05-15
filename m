@@ -1,131 +1,167 @@
-Return-Path: <linux-doc+bounces-87607-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87608-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uMbpD4v0Bmo4pgIAu9opvQ
-	(envelope-from <linux-doc+bounces-87607-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 12:25:15 +0200
+	id aEkZDVL5BmpoqAIAu9opvQ
+	(envelope-from <linux-doc+bounces-87608-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 12:45:38 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B5C454D49A
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 12:25:12 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E94A454D9E7
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 12:45:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 8C2673003BC9
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 09:49:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id EDFF631ADAE7
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 10:26:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A187743D50C;
-	Fri, 15 May 2026 09:49:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1C133D301A;
+	Fri, 15 May 2026 10:26:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="HTNL3PEs"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bL/Ss4/f"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com [113.46.200.224])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FA7F43D4EC;
-	Fri, 15 May 2026 09:49:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.224
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECA2F3E5A15
+	for <linux-doc@vger.kernel.org>; Fri, 15 May 2026 10:26:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778838576; cv=none; b=d7l+dMPESmS1Jnn5FvGc40+Mie/O0fiATTL8hOvKmPeAYBWTKhZFuAJg78o3RBPReocfO3siw6SYF38gFj7s7dWrkP75jnYK/+SmqWVcIFElNNEmfbj6zY1avzG5xc+1tlUNsGRkOShFRBnL6SUR/NZsDKLbIC31it+dbGJBCd8=
+	t=1778840787; cv=none; b=M6tSoB5Tjr8BWd4F5apZf/WKPPsUIFwkLr0liPiphX4CrVQfWn//ITiavTbEZgkSX34b9RrepZk5Hcq7DOqgydS5wXimCOTh1kpGTup+BcLChffaQen2Xj0kS1/h0SkRd4hV7jSnwqHbS5HXajDvv4fDcu4us30TbcFpgAcRSK0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778838576; c=relaxed/simple;
-	bh=rWTAaOAOYDmQ6UBxvzKThMN94E4arVA1Gebhj55YfcE=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=X12EJvK/8ZrrrZH9jCBymLkXoDQG49gLdKnDRr8IddEVU+AHYppmKMpL9gKN3qMhdUBu8nwatHdC0SUEhUPMG+9qQyOJ4mAfVf3aDpOOfZZ2JqbsIrp49hT+wj+g0fPgaWreS0QD6Ct29YPAhNYYh9jdVfWFIrwG6W/GCT/oErc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=HTNL3PEs; arc=none smtp.client-ip=113.46.200.224
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=Ddf5rnkcewWB3VTTcGX1fHHmNywN/T2k0aDW7rLyNVA=;
-	b=HTNL3PEsw+EhyCcCe/PTiMxfjc/ZA4bYXbJXjsaPSiV7KqUFp0s6fqAOKsidZOcJ8RQYizoXx
-	ias266hbyn1eM215+JSc5LTrr6TMbPvkZi9wg6ZjlDMCnBXPiJlPL5riYDI7pnFzI3rZnGvJBCu
-	oRWVVL1EW0V9nxXJEF8LWtk=
-Received: from mail.maildlp.com (unknown [172.19.163.15])
-	by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4gH2KG3QJkz1cyPB;
-	Fri, 15 May 2026 17:41:54 +0800 (CST)
-Received: from kwepemr200004.china.huawei.com (unknown [7.202.195.241])
-	by mail.maildlp.com (Postfix) with ESMTPS id 861F940539;
-	Fri, 15 May 2026 17:49:31 +0800 (CST)
-Received: from huawei.com (10.50.163.32) by kwepemr200004.china.huawei.com
- (7.202.195.241) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 15 May
- 2026 17:49:30 +0800
-From: Pengjie Zhang <zhangpengjie2@huawei.com>
-To: <rafael@kernel.org>, <viresh.kumar@linaro.org>, <corbet@lwn.net>
-CC: <skhan@linuxfoundation.org>, <linux-pm@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, <zhanjie9@hisilicon.com>,
-	<zhenglifeng1@huawei.com>, <lihuisong@huawei.com>, <yubowen8@huawei.com>,
-	<linhongye@h-partners.com>, <linuxarm@huawei.com>,
-	<zhangpengjie2@huawei.com>, <wangzhi12@huawei.com>
-Subject: [PATCH] cpufreq: Documentation: fix sampling_down_factor documentation range
-Date: Fri, 15 May 2026 17:49:30 +0800
-Message-ID: <20260515094930.273599-1-zhangpengjie2@huawei.com>
-X-Mailer: git-send-email 2.33.0
+	s=arc-20240116; t=1778840787; c=relaxed/simple;
+	bh=n6/8XoyOcyWPTIe28ELVeszjm9hAAv6mm4s2tszqSTE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Mu4a/mEmCRo8OuYRdSWjoJq0DvPVKGDhOi2Wts7xePkCW0hEq04fFltwSYiNPTrkhVf4Rrkcvx8EBz/8RyW3PVjT9nsnhWZ6bG8ut5jGvzREYBEpgNfowIGQpONdlCMEcs7NFU+RtJvEwXwiVhs5e0GOPTQhC/yrf1JhI8hPAA0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bL/Ss4/f; arc=none smtp.client-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-48d102471a4so88166355e9.2
+        for <linux-doc@vger.kernel.org>; Fri, 15 May 2026 03:26:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778840784; x=1779445584; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=m8javZePBSomMzDxRk4JOXFkifBGHMbX/5UYzJMP8uo=;
+        b=bL/Ss4/fi2wuAEq6gu8KB/BY6SkHIqMeOlOpNGxCJywHG4CY04waiCNaePT+VfEAbf
+         syeVpHDuy4pRy/UvU3OLclME0o0jkab8irQLYXWcIWcPguieJhmIpCFdzuzAMz2kxnoe
+         6HOVNSdHcK8PluZorhVtshQZC0HB0J9XWKb/8+YVbfI5+pJ4pFH1DAc6E4ouxbdSg8Nc
+         HvEJbMBivEOhkf3NNiIq0BxHVHG7ksdIyfbkiw3MNptlldqgEe7robZ+kdo4W7pwGI5b
+         4apCGRBY74bhYAUsBtLV0c77pYjCDOeCUj7Bn8SJOqzlut/qAbHkRpWXPlxdmIeArN9C
+         KWOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778840784; x=1779445584;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=m8javZePBSomMzDxRk4JOXFkifBGHMbX/5UYzJMP8uo=;
+        b=n5nW9ewXPQE1edMnPx//JOmyy5yRE9mBMHfZbKtct7jad5v2aAMjBex0XtRAgsScs8
+         5LzT61s03bfYJwXVC/Waq7GBDpJ69Mh1MYEnEN6tUIECpwZgaXx3nvH0vVhOw+LLfElo
+         jfkUGJ447XICYg2Z1XfCN21UdMIMD366+Zgr3F6n/8b0JvV5DcZIL6qUk5IMsPgXpZIv
+         tBMO2iQsm2PjpYfcAXA6qCtiICs+CQZBqEXGVnTz5PPvNyFDj0qoB5bENA/nw9Ttm1Ob
+         Pd3KnTWiKveL5V1fgCTvWEqV+QbeqyD8GCZSO8ZodIUTwDzXdZaf0Zd2v7H4zLNRTqa3
+         ZmMQ==
+X-Gm-Message-State: AOJu0YxHWuDvicS6kYJZZ10uqRcTj9S1qFj5YtqEXTRsADpLyarDoQ1u
+	xN2v0Kcmfk7ZrPkMSXpJ0Wskss5NroIS08gnGLrPKU+OH/0Fa7OFavj1
+X-Gm-Gg: Acq92OFKCADfBglOrJhSaZ3DcPSa3mMPQPDM4BEAi/jEG2UiQz5ZzYu+miqvoyk9UQ8
+	AgHa/hn+Kv+OL7LQuJdM7v7d0j8NBmb28HuHGaCo1mDujUzH1oJC6rUgBnHlW0EeQOMrYok0trT
+	zy2cpstGduz31OFRF8zeHo+5c/OvMipHE3NPs55dP0T4YB9JVFPxOpKYhmtNslOTTcxHla266rl
+	8BNlmRFawbt+wG7Vm9XrzBn7T9C9TT1aw/QNOL1n5oizgqHVv/E+QZVSd+ZvS1yHoUx3/GIEdij
+	1stWv6uppo2oqb4FLsek4yLFrDhxmzE3i2PT9HJU42zsjfSG4wouPLVjE/nCG1TJeRrzUcqGqm3
+	gK4gZ4/EUipMjuYy65VT+cbTYXVZv+H/6IIug1FKja9YZsliAjxcHFBX9MQk/TO5XYR4PIl7ox/
+	GXhcEE/fVsP1KgG6xQ4FBEfoW1K/u0zFwWFkrmhC1B9IS0spS4ROlUBqO+5WmX1V6bKtNq7iWLp
+	J2rO/KUxEPiKSyg+B6qYzbVAcHfPAEjaYqjRXPXYjlPRP2hajTQ07ONARM=
+X-Received: by 2002:a05:600c:2d09:b0:48f:e1ac:c96d with SMTP id 5b1f17b1804b1-48fe61f2bcemr24840585e9.20.1778840784159;
+        Fri, 15 May 2026 03:26:24 -0700 (PDT)
+Received: from ?IPV6:2620:10d:c096:325:77fd:1068:74c8:af87? ([2620:10d:c092:600::1:5f66])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48febe6b60csm14137405e9.6.2026.05.15.03.26.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 15 May 2026 03:26:23 -0700 (PDT)
+Message-ID: <9732fdae-5e0d-4373-90a6-251d270eae16@gmail.com>
+Date: Fri, 15 May 2026 11:26:05 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] io_uring/zcrx: notify user when out of buffers
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@meta.com>,
+ io-uring@vger.kernel.org, Jens Axboe <axboe@kernel.dk>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, netdev@vger.kernel.org,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Vishwanath Seshagiri <vishs@fb.com>,
+ Vishwanath Seshagiri <vishs@meta.com>
+References: <20260422112522.3316660-1-cleger@meta.com>
+ <20260422112522.3316660-2-cleger@meta.com>
+Content-Language: en-US
+From: Pavel Begunkov <asml.silence@gmail.com>
+In-Reply-To: <20260422112522.3316660-2-cleger@meta.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
- kwepemr200004.china.huawei.com (7.202.195.241)
-X-Rspamd-Queue-Id: 7B5C454D49A
+X-Rspamd-Queue-Id: E94A454D9E7
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[huawei.com:s=dkim];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87607-lists,linux-doc=lfdr.de];
-	TO_DN_NONE(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[zhangpengjie2@huawei.com,linux-doc@vger.kernel.org];
-	PRECEDENCE_BULK(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_FROM(0.00)[bounces-87608-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[asmlsilence@gmail.com,linux-doc@vger.kernel.org];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[huawei.com:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FROM_HAS_DN(0.00)[]
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 
-The ondemand governor implementation accepts sampling_down_factor values
-from 1 to 100000 via MAX_SAMPLING_DOWN_FACTOR, but the documentation in
-admin-guide/pm/cpufreq.rst still says the valid range is 1 to 100.
+On 4/22/26 12:25, Clément Léger wrote:
+> From: Pavel Begunkov <asml.silence@gmail.com>
+...>   static inline struct page *io_zcrx_iov_page(const struct net_iov *niov)
+>   {
+>   	struct io_zcrx_area *area = io_zcrx_iov_to_area(niov);
+> @@ -531,6 +541,7 @@ static struct io_zcrx_ifq *io_zcrx_ifq_alloc(struct io_ring_ctx *ctx)
+>   
+>   	ifq->if_rxq = -1;
+>   	spin_lock_init(&ifq->rq.lock);
+> +	spin_lock_init(&ifq->ctx_lock);
+>   	mutex_init(&ifq->pp_lock);
+>   	refcount_set(&ifq->refs, 1);
+>   	refcount_set(&ifq->user_refs, 1);
+> @@ -585,6 +596,11 @@ static void io_zcrx_ifq_free(struct io_zcrx_ifq *ifq)
+>   	if (ifq->dev)
+>   		put_device(ifq->dev);
+>   
+> +	scoped_guard(spinlock_bh, &ifq->ctx_lock) {
+> +		if (ifq->master_ctx)
+> +			percpu_ref_put(&ifq->master_ctx->refs);
+> +	}
+> +
 
-Update the documentation to match the actual code.
+Something very odd happened here. It's not my patch but rather an edited
+squash of two other patches. This particular hunk creates a circular
+dependency, i.e. io_uring waits for this reference to be put down before
+destroying the zcrx instance that triggers io_zcrx_ifq_free.
 
-Fixes: 2a0e49279850 ("cpufreq: User/admin documentation update and consolidation")
-Signed-off-by: Pengjie Zhang <zhangpengjie2@huawei.com>
----
- Documentation/admin-guide/pm/cpufreq.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Documentation/admin-guide/pm/cpufreq.rst b/Documentation/admin-guide/pm/cpufreq.rst
-index dbe6d23a5d67..fdca59c955dc 100644
---- a/Documentation/admin-guide/pm/cpufreq.rst
-+++ b/Documentation/admin-guide/pm/cpufreq.rst
-@@ -516,7 +516,7 @@ This governor exposes the following tunables:
- 	of those tasks above 0 and set this attribute to 1.
- 
- ``sampling_down_factor``
--	Temporary multiplier, between 1 (default) and 100 inclusive, to apply to
-+	Temporary multiplier, between 1 (default) and 100000 inclusive, to apply to
- 	the ``sampling_rate`` value if the CPU load goes above ``up_threshold``.
- 
- 	This causes the next execution of the governor's worker routine (after
 -- 
-2.33.0
+Pavel Begunkov
 
 
