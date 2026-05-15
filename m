@@ -1,375 +1,215 @@
-Return-Path: <linux-doc+bounces-87579-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87581-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mACMDWaVBmo7lAIAu9opvQ
-	(envelope-from <linux-doc+bounces-87579-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 05:39:18 +0200
+	id ePaMBKiXBmqKlAIAu9opvQ
+	(envelope-from <linux-doc+bounces-87581-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 05:48:56 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id B00B8549050
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 05:39:17 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01B9654909D
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 05:48:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4F203308BD5E
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 03:36:41 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E87FC30171E0
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 03:48:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80F4A3D1ABC;
-	Fri, 15 May 2026 03:36:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A39D83D1A8A;
+	Fri, 15 May 2026 03:48:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fgOxoeeD"
+	dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b="eCuJcjog"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F2433CC334
-	for <linux-doc@vger.kernel.org>; Fri, 15 May 2026 03:36:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.175
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778816196; cv=none; b=etprTac51uTjpD3DvpLBIhJdK5m1yUtI127mS4E1gQgZgL1Kk6MKe+wnKHVzFbCRIyXC9SCHQcW9crzguKG9rgE9dgC/41PTm68S7Tnzrc6ANhsiQgTvhrhoxPPMnHANyLjFt/TiJTduZQdHzaA8km0akOyGierGSwWVs8qNASw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778816196; c=relaxed/simple;
-	bh=BV/YwiqpLKavQjibMyICw4VFw6EPGnwK70eyfo9+oKA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=lCN2jWVwzsGRlP4EsJuxJh5eTUjvT/eEE7dptqHjI/aRFINpEOjtS/Va+B2rTgbbUXieo+1AOVFk/CJ/iPYVNnXG4fPWO+RZKRJcr1jrFNSFB8clnZDXxSprAu690jXCCFmZpqjmDRinG103IMmCZbTL9qGwHOK6jsF/1Fss59g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fgOxoeeD; arc=none smtp.client-ip=74.125.82.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-2f0d3e07e30so20654357eec.0
-        for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 20:36:30 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B503F3CF674
+	for <linux-doc@vger.kernel.org>; Fri, 15 May 2026 03:48:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.215.171
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1778816929; cv=pass; b=RQs41XlyKgSALxOrakO3I7cIxa6nEv4+7Qarq2BbHYaGPsD70KrT2MQW6iehGmts518EEpOTk+J45Ktk7tbguIn8IDKq5AgEsqbGEfwUhyV3O0u8Eh3wZAysPryaD7Wcq3Rgm8+VIbpJKsM8xKxyHVFEWD3shB+HTyg/Um9ZmqQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1778816929; c=relaxed/simple;
+	bh=axJimQpTH54Vk+wcEK9CMzTx0gjIcv6uLIP6tuXgnsw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=o2xNbUSZ5OQvddcMu8z5h9cyVZDV7hWTfSK8TFDL1mKEUGhbhinuVgdgvSE5v0jkIkKJxnX58Q4b/8Xvz4YhUgWFXQadn5ZOi/bualaymzu+vVVstMW2zpmRCh0ZwNk1rjVxgLUWvfHKgldpJWIcKp85JP9ClL/RhuLYl9QCayY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=eCuJcjog; arc=pass smtp.client-ip=209.85.215.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=paul-moore.com
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-c80227b1f6cso3831037a12.1
+        for <linux-doc@vger.kernel.org>; Thu, 14 May 2026 20:48:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778816924; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TTnMsm42cK8uFI0Qq2QwxcH4efaaRztzZAseM8LL+n9+ioVNnzow7/Jg1bBJuucMI3
+         aDtywO5lZOQrpNyoadFPvgSgUlWiY8GLT1rNywjJqclmj3OA9ccaPSd3gkloDetjooDx
+         wcqSAjKH1VC93doAYGOze/SbmtYCm1AaJjI51f8sk4i4psT8rON+Ub8WqTScPpcV+Pt6
+         3SHqvTq/Ph5o9BlndhFfZPitw97yYYXWW+9vI3jabE6U2EjoMhpMzcc/Q2SlSachRwG/
+         GaA2Bt6E7AhUqU4HYajai2vAfr4+1Aevg9nrOitP0OeXUgVWh6H+CQoL0i0L7EMDtRtk
+         uAVw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=kbAj3QkbSA9sXO8i6EDoM3LNbpdhiqhg3HK+8g7Mcbs=;
+        fh=zuXVmt8aTGp699WPF+XyJ32BmNREnrf1HB2SGMkpubU=;
+        b=UJqdBmyU9Mu5/nK44Q6RM3JrF4zD6dsHCo4jj5RFfw/9xsmHNh++jBfnGI0CBZHLmr
+         PI19OHPJH3lUeWC+X9VH5oUbfMHsEgaRD1+84ZYrsYZPkU8vMDRjDPoz29zceYxsq108
+         oKTnhhI7tNNBUXGjUL12iRZavtp39d11h+SKVxBa6FLpjfvdjcDki8/SJcr2aB4rkbXP
+         8jM9sMjv58gwPTr63IUkfDyVTciCiC/ymQZwtRVmQJMA+4hPHYer16CQrLxpRrk9Pbzd
+         K611oqYLbgNYfuJHMu9cVRavEyDssj4CO8Vb2U8AnXwfNOq78OwisJ0KjKoq2tjZeFow
+         cDaA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778816188; x=1779420988; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=paul-moore.com; s=google; t=1778816924; x=1779421724; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2A1UKrsams39Mvt+MiQQfASyG6w6rP8GDuPPtbEUsDI=;
-        b=fgOxoeeD0zzEXrC3FTadIozKskHVgM+CTSpJ1Dc930SHIQUh+Pwc9F44TBMQIaJYeT
-         Pqxa/fa8sVwITjE3wnXjnwarbnvD7Pa+xEzTJJeic5zQlCe0V73wZGN2GG7AgVGAAyd3
-         IFxfywbdQfANcLhpTeDzsv5X1pbmWNA51yFcZuaKhNyHaud9cgMWylEkjgE/h/8WVcGB
-         MaQRRvGqs0EWTucUwHBmzFsHyjPk6DyY48zMGw9X2NswZJ9pnITWQKbufL1KrqzxplSo
-         ETEuiWNmyPM2+IKa+hOTNKhaELjpF3gqVp0CLut7k1frwoaBeRM+p8cRhgDkNy1zs3Vn
-         JnWA==
+        bh=kbAj3QkbSA9sXO8i6EDoM3LNbpdhiqhg3HK+8g7Mcbs=;
+        b=eCuJcjogazgHx1HmwNxl9a51S3GLjs5pS4nDxe37/8LXdA5Fu20goCgJtAKS42+Cor
+         mHvNYms0FnDGEwfsiM7okmTbroOVgHRULZWDAUGjSqqm2uW6r4QYOeNXDTf+xkXkOAiq
+         65BxlH+Eo/WolkI1yV/IpGAP6AWP52cMtBLNwXtI5vfDmltmGae2mNMOLAlQvtbXUeLC
+         j9kZnmJfUEN+Q481D79Rsui32+CMPNJhP+4XqD9nBglVufmX1xONPMSyZVa7oS0mviop
+         Ic83TUblVdcReOEiWKWyt0tqysvXvQ4IJfXhQmN++N89i0is1gU0xe9EJNz/lSyzdYEK
+         e1yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778816188; x=1779420988;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20251104; t=1778816924; x=1779421724;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=2A1UKrsams39Mvt+MiQQfASyG6w6rP8GDuPPtbEUsDI=;
-        b=K9SZTJdD8bplGAzX45XMwPff5WcepnCbgfoikmYm/t/zxzI/hLd/K7xsX4wH6f7aBy
-         7KseEgkh+yYvpfTP09hKqG5+Ze4rNxt+U0ajETSSXgrLyMdaCSJkx2oidZ0RfLvZXurv
-         mb7D/ibk6jNH/JS4UKrpR0lvIV0zAWxsAjIQRs2YOaFRl5t8vyRFCaf9vmAUDXtdaCuh
-         uc8Ytdq1UEveZsq790rj3YEw+9Sb5n2Uj0X4fUyyeY0AfN51kSqLp5EMp1Uf1g2ewKX6
-         sIOenjYxCAEYVbtJNqYyZmoRsu/5FgA/deS/6eL8iphcs7a428g/1B4WBHRuVscDxnf/
-         z2ww==
-X-Forwarded-Encrypted: i=1; AFNElJ/dbbdRn5US1pLokWPsyLPyK4q8iIsQlSTweCXHiQ6IfFIA1/bqt59JNwYIFLl3muC/shLTHNDLBnc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwLUDaip6GHqGlFAvOM6aYKFUUzpSsy+VmZljAd5R86UBggUZ+a
-	cVpVGqAa6ozvyls5aVmf37tbM74c9NcO2D58YWvEYdmKl20f/MSqlMei
-X-Gm-Gg: Acq92OE9ujFsAwYsytTyfnfIw8JCcoUU5k+yWf+9vymDy4zFrXdBX3RoRiqR3unGNEK
-	qgHT4aRe1HV9IKeg1wVMA3jALmRyX/jh3iv9l6H8CeSbrZr3KhdUEB4k8ycIDFtjUL9ACpqJavs
-	MWTDGelJ66TLGPMdrhq1MeMsVnxthfM5uE9dI/cMcmtgQI4sSCpERqB0pznCMIcHirRBAhLSIGA
-	vO8BU+Y/MHdhv1TX4MygvBgAtRXAI9JnJoGox05vp6O4IUa6ya9xPf6ja/XbvW8XU4y/lDHW3GP
-	GZu0kKqnfmuiz+1mx5AWFoPkKhZO4XEhxwnHpUD3pzCAatQRy/nF0SASphjo3u+OiXQxJRn4W1L
-	qmxZ8kmFy1u3MkBDsJg8Xh/Q1U4psDE9pu1pamm9qmjTPZGKe8IWzNlersRo4vVObtMswKBtrc6
-	QeyHGYrOYAA+4/nEtNhGW+zN/AqPe4qkLfJ7RBcGonyqfY5aaw2VbXolR/2nMoEQNXxMQsNknuc
-	uQB
-X-Received: by 2002:a05:7300:510:b0:2c1:7b61:8731 with SMTP id 5a478bee46e88-303982be4d0mr1335250eec.10.1778816188483;
-        Thu, 14 May 2026 20:36:28 -0700 (PDT)
-Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-302973bcc5asm5430789eec.22.2026.05.14.20.36.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 May 2026 20:36:28 -0700 (PDT)
-From: "Derek J. Clark" <derekjohn.clark@gmail.com>
-To: Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>
-Cc: "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
-	Denis Benato <denis.benato@linux.dev>,
-	Zhouwang Huang <honjow311@gmail.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	linux-input@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 4/4] HID: hid-msi: Add Rumble Intensity Attributes
-Date: Fri, 15 May 2026 03:36:22 +0000
-Message-ID: <20260515033622.2095277-5-derekjohn.clark@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260515033622.2095277-1-derekjohn.clark@gmail.com>
-References: <20260515033622.2095277-1-derekjohn.clark@gmail.com>
+        bh=kbAj3QkbSA9sXO8i6EDoM3LNbpdhiqhg3HK+8g7Mcbs=;
+        b=ajf3MRsjaZWdRb4UiYbaM5mALQ8+zgHDMINkHu+9qqexs2POUT0GCLy/QBwTf7X3CF
+         slmU4cu4XCRY2Vt6HBAhvUgYtqb23XJvgwH7lCdqo5i3IyTkXfqDanOAgXGH+j0/c/Mx
+         3CXZ6o7xaNDpKbCwMr0BecJHkZLagiFQaJaIt+A7KiRiI65nOAJsFdl/4WEjUQOBHEbs
+         ZaadfmFv/tkdfXl2ofZ06khANU8Jku8IyKLZxHE/IArkISbl7gp/QFuJGmubtpVqp3eT
+         nWZ+cmmuIkhB7imlOzsN/L0xWh45Vk8M5TUhWYW1cZoCi7AN1hQxaojooFy5UmrKTWUs
+         BVgQ==
+X-Forwarded-Encrypted: i=1; AFNElJ/GW9/saA6oNWJ+3bmFlXXLFwsR3qLfp+pq6cXagacSiOsW2iIK2fyltQPW5ww6r2DufArNUb3KSXo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwWxmw71pJze3Shg0Y9yPXH/nTHBLn9BFgmpyKK292amgJts09J
+	FD8sFOZEQYYQi4c/GZTxKnqYZrLwAzZ34Xpx55rCLhHm4S/ITUh3EcFjz20tccZi+7bNWs8PYV2
+	33j7mhiZSQXPBBYWaD9AbfQubZYGJ6ywQckm0xg75
+X-Gm-Gg: Acq92OGlX1j9TTF0zr7wUdNf9tpNWx8uMrOm3Wi5x36ONol+DFtlOWZWK/qXDR5QP4i
+	p8QYH6q+VVqMh1OqGOqOPnKKs6nVo4CJ6eiE/Z6sQgPbwiR/nwRH4H1kx1iZMz88iwErAuyayTD
+	PAFaGRR5ft651w3mrm18wLzGHvNvOPiBxunCAkGO5SCqB3eLajsRcB4PymHHJZOL7sUxO1Sz8Is
+	fffQuFbpyDPNE454e6pMlxOdjAQBKignsbIe6U5HwnhQecyFgbWUuwhB/CosJwMQsZgFu2gKB05
+	Mln4904=
+X-Received: by 2002:a17:903:1b4c:b0:2ba:7610:3f21 with SMTP id
+ d9443c01a7336-2bd7e802964mr23892325ad.5.1778816924539; Thu, 14 May 2026
+ 20:48:44 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: B00B8549050
+References: <20260507070547.2268452-1-sashal@kernel.org>
+In-Reply-To: <20260507070547.2268452-1-sashal@kernel.org>
+From: Paul Moore <paul@paul-moore.com>
+Date: Thu, 14 May 2026 23:48:32 -0400
+X-Gm-Features: AVHnY4IFjeygqhvOWHf7nnff2hcSoElhRffZjECjs-fQ1g-cwaO4KY2xNXWLrHM
+Message-ID: <CAHC9VhTwDt2Bx8n0io9Qge_fUEnrHsxrFAQY+KaemKWqJqBQxw@mail.gmail.com>
+Subject: Re: [PATCH] killswitch: add per-function short-circuit mitigation primitive
+To: Sasha Levin <sashal@kernel.org>
+Cc: corbet@lwn.net, akpm@linux-foundation.org, skhan@linuxfoundation.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, gregkh@linuxfoundation.org, 
+	linux-security-module@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: 01B9654909D
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+X-Spamd-Result: default: False [-2.16 / 15.00];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	DMARC_POLICY_ALLOW(-0.50)[paul-moore.com,none];
+	R_DKIM_ALLOW(-0.20)[paul-moore.com:s=google];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87579-lists,linux-doc=lfdr.de];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[valvesoftware.com,linux.dev,gmail.com,vger.kernel.org];
-	TO_DN_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[derekjohnclark@gmail.com,linux-doc@vger.kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[paul@paul-moore.com,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	PRECEDENCE_BULK(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87581-lists,linux-doc=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[paul-moore.com:+]
 X-Rspamd-Action: no action
 
-Adds intensity adjustment for the left and right rumble motors.
+On Thu, May 7, 2026 at 3:05=E2=80=AFAM Sasha Levin <sashal@kernel.org> wrot=
+e:
+>
+> When a (security) issue goes public, fleets stay exposed until a patched =
+kernel
+> is built, distributed, and rebooted into.
+>
+> For many such issues the simplest mitigation is to stop calling the buggy
+> function. Killswitch provides that. An admin writes:
+>
+>     echo "engage af_alg_sendmsg -1" \
+>         > /sys/kernel/security/killswitch/control
+>
+> After this, af_alg_sendmsg() returns -EPERM on every call without
+> running its body. The mitigation takes effect immediately, and is dropped=
+ on
+> the next reboot.
+>
+> A lot of recent kernel issues sit in code paths most installs only have e=
+nabled
+> to support a relative minority of users: AF_ALG, ksmbd, nf_tables, vsock,=
+ ax25,
+> and friends.
+>
+> For most users, the cost of "this socket family stops working for the day=
+" is
+> much smaller than the cost of running a known vulnerable kernel until the=
+ fix
+> land.
+>
+> Assisted-by: Claude:claude-opus-4-7
+> Signed-off-by: Sasha Levin <sashal@kernel.org>
+> ---
+>  Documentation/admin-guide/index.rst           |   1 +
+>  Documentation/admin-guide/killswitch.rst      | 159 ++++
+>  Documentation/admin-guide/tainted-kernels.rst |   8 +
+>  MAINTAINERS                                   |  11 +
+>  include/linux/killswitch.h                    |  19 +
+>  include/linux/panic.h                         |   3 +-
+>  init/Kconfig                                  |   2 +
+>  kernel/Kconfig.killswitch                     |  31 +
+>  kernel/Makefile                               |   1 +
+>  kernel/killswitch.c                           | 798 ++++++++++++++++++
+>  kernel/panic.c                                |   1 +
+>  lib/Kconfig.debug                             |  13 +
+>  lib/Makefile                                  |   1 +
+>  lib/test_killswitch.c                         |  85 ++
+>  tools/testing/selftests/Makefile              |   1 +
+>  tools/testing/selftests/killswitch/.gitignore |   1 +
+>  tools/testing/selftests/killswitch/Makefile   |   8 +
+>  .../selftests/killswitch/cve_31431_test.c     | 162 ++++
+>  .../selftests/killswitch/killswitch_test.sh   | 147 ++++
+>  19 files changed, 1451 insertions(+), 1 deletion(-)
+>  create mode 100644 Documentation/admin-guide/killswitch.rst
+>  create mode 100644 include/linux/killswitch.h
+>  create mode 100644 kernel/Kconfig.killswitch
+>  create mode 100644 kernel/killswitch.c
+>  create mode 100644 lib/test_killswitch.c
+>  create mode 100644 tools/testing/selftests/killswitch/.gitignore
+>  create mode 100644 tools/testing/selftests/killswitch/Makefile
+>  create mode 100644 tools/testing/selftests/killswitch/cve_31431_test.c
+>  create mode 100755 tools/testing/selftests/killswitch/killswitch_test.sh
 
-Claude was used during the reverse-engineering data gathering for this
-feature done by Zhouwang Huang. As the code had already been affected,
-I used Claude to create the initial framing for the feature, then did
-manual cleanup of the _show and _store functions afterwards to fix bugs
-and keep the coding style consistent. Claude was also used as an initial
-reviewer of this patch.
+If we made Lockdown an LSM, we should probably also make killswitch an LSM.
 
-Assisted-by: Claude:claude-sonnet-4-6
-Co-developed-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Zhouwang Huang <honjow311@gmail.com>
-Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
----
-v2:
-  - Use pending_profile and sync to rom mutexes.
----
- drivers/hid/hid-msi.c | 147 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 147 insertions(+)
+For the LSM crowd who might be seeing this for the first time, the
+original thread can be found on lore via the link below:
+https://lore.kernel.org/all/20260507070547.2268452-1-sashal@kernel.org
 
-diff --git a/drivers/hid/hid-msi.c b/drivers/hid/hid-msi.c
-index 06dc4290d2bb5..349a59f75e471 100644
---- a/drivers/hid/hid-msi.c
-+++ b/drivers/hid/hid-msi.c
-@@ -76,6 +76,8 @@ enum claw_profile_ack_pending {
- 	CLAW_M1_PENDING,
- 	CLAW_M2_PENDING,
- 	CLAW_RGB_PENDING,
-+	CLAW_RUMBLE_LEFT_PENDING,
-+	CLAW_RUMBLE_RIGHT_PENDING,
- };
- 
- enum claw_key_index {
-@@ -262,6 +264,11 @@ static const u16 button_mapping_addr_new[] = {
- static const u16 rgb_addr_old = 0x01fa;
- static const u16 rgb_addr_new = 0x024a;
- 
-+static const u16 rumble_addr[] = {
-+	0x0022,  /* left  */
-+	0x0023,  /* right */
-+};
-+
- struct claw_command_report {
- 	u8 report_id;
- 	u8 padding[2];
-@@ -311,7 +318,10 @@ struct claw_drvdata {
- 	enum claw_gamepad_mode_index gamepad_mode;
- 	u8 m1_codes[CLAW_KEYS_MAX];
- 	u8 m2_codes[CLAW_KEYS_MAX];
-+	u8 rumble_intensity_right;
-+	u8 rumble_intensity_left;
- 	const u16 *bmap_addr;
-+	bool rumble_support;
- 	bool bmap_support;
- 
- 	/* RGB Variables */
-@@ -397,6 +407,12 @@ static int claw_profile_event(struct claw_drvdata *drvdata, struct claw_command_
- 			drvdata->led_mc.subled_info[2].intensity = frame->zone_data.zone[0].blue;
- 		}
- 
-+		break;
-+	case CLAW_RUMBLE_LEFT_PENDING:
-+		drvdata->rumble_intensity_left = cmd_rep->data[4];
-+		break;
-+	case CLAW_RUMBLE_RIGHT_PENDING:
-+		drvdata->rumble_intensity_right = cmd_rep->data[4];
- 		break;
- 	default:
- 		dev_warn(&drvdata->hdev->dev,
-@@ -810,6 +826,126 @@ static ssize_t button_mapping_options_show(struct device *dev,
- }
- static DEVICE_ATTR_RO(button_mapping_options);
- 
-+static ssize_t rumble_intensity_left_store(struct device *dev,
-+					   struct device_attribute *attr,
-+					   const char *buf, size_t count)
-+{
-+	u8 data[] = { 0x01, (rumble_addr[0] >> 8) & 0xff, rumble_addr[0] & 0xff, 0x01, 0x00 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	data[4] = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    data, ARRAY_SIZE(data), 8);
-+	if (ret)
-+		return ret;
-+
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 8);
-+	if (ret)
-+		return ret;
-+
-+	drvdata->rumble_intensity_left = val;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_left_show(struct device *dev,
-+					  struct device_attribute *attr,
-+					  char *buf)
-+{
-+	u8 data[4] = { 0x01, (rumble_addr[0] >> 8) & 0xff, rumble_addr[0] & 0xff, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	drvdata->profile_pending = CLAW_RUMBLE_LEFT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE, data,
-+				    ARRAY_SIZE(data), 8);
-+	if (ret) {
-+		drvdata->profile_pending = CLAW_NO_PENDING;
-+		return ret;
-+	}
-+
-+	return sysfs_emit(buf, "%u\n", drvdata->rumble_intensity_left);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_left);
-+
-+static ssize_t rumble_intensity_right_store(struct device *dev,
-+					    struct device_attribute *attr,
-+					    const char *buf, size_t count)
-+{
-+	u8 data[] = { 0x01, (rumble_addr[1] >> 8) & 0xff, rumble_addr[1] & 0xff, 0x01, 0x00 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	u8 val;
-+	int ret;
-+
-+	ret = kstrtou8(buf, 10, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val > 100)
-+		return -EINVAL;
-+
-+	data[4] = val;
-+
-+	guard(mutex)(&drvdata->rom_mutex);
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_WRITE_PROFILE_DATA,
-+				    data, ARRAY_SIZE(data), 8);
-+	if (ret)
-+		return ret;
-+
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_SYNC_TO_ROM, NULL, 0, 8);
-+	if (ret)
-+		return ret;
-+
-+	drvdata->rumble_intensity_right = val;
-+
-+	return count;
-+}
-+
-+static ssize_t rumble_intensity_right_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	u8 data[4] = { 0x01, (rumble_addr[1] >> 8) & 0xff, rumble_addr[1] & 0xff, 0x01 };
-+	struct hid_device *hdev = to_hid_device(dev);
-+	struct claw_drvdata *drvdata = hid_get_drvdata(hdev);
-+	int ret;
-+
-+	guard(mutex)(&drvdata->profile_mutex);
-+	drvdata->profile_pending = CLAW_RUMBLE_RIGHT_PENDING;
-+	ret = claw_hw_output_report(hdev, CLAW_COMMAND_TYPE_READ_PROFILE, data,
-+				    ARRAY_SIZE(data), 8);
-+	if (ret) {
-+		drvdata->profile_pending = CLAW_NO_PENDING;
-+		return ret;
-+	}
-+
-+	return sysfs_emit(buf, "%u\n", drvdata->rumble_intensity_right);
-+}
-+static DEVICE_ATTR_RW(rumble_intensity_right);
-+
-+static ssize_t rumble_intensity_range_show(struct device *dev,
-+					   struct device_attribute *attr,
-+					   char *buf)
-+{
-+	return sysfs_emit(buf, "0-100\n");
-+}
-+static DEVICE_ATTR_RO(rumble_intensity_range);
-+
- static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribute *attr,
- 					    int n)
- {
-@@ -830,6 +966,12 @@ static umode_t claw_gamepad_attr_is_visible(struct kobject *kobj, struct attribu
- 	    attr == &dev_attr_reset.attr)
- 		return attr->mode;
- 
-+	/* Hide rumble attrs if not supported */
-+	if (attr == &dev_attr_rumble_intensity_left.attr ||
-+	    attr == &dev_attr_rumble_intensity_right.attr ||
-+	    attr == &dev_attr_rumble_intensity_range.attr)
-+		return drvdata->rumble_support ? attr->mode : 0;
-+
- 	/* Hide button mapping attrs if it isn't supported */
- 	return drvdata->bmap_support ? attr->mode : 0;
- }
-@@ -843,6 +985,9 @@ static struct attribute *claw_gamepad_attrs[] = {
- 	&dev_attr_mkeys_function.attr,
- 	&dev_attr_mkeys_function_index.attr,
- 	&dev_attr_reset.attr,
-+	&dev_attr_rumble_intensity_left.attr,
-+	&dev_attr_rumble_intensity_right.attr,
-+	&dev_attr_rumble_intensity_range.attr,
- 	NULL,
- };
- 
-@@ -1314,6 +1459,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 		drvdata->bmap_support = true;
- 		if (minor >= 0x66) {
- 			drvdata->bmap_addr = button_mapping_addr_new;
-+			drvdata->rumble_support = true;
- 			drvdata->rgb_addr = rgb_addr_new;
- 		} else {
- 			drvdata->bmap_addr = button_mapping_addr_old;
-@@ -1325,6 +1471,7 @@ static void claw_features_supported(struct claw_drvdata *drvdata)
- 	if ((major == 0x02 && minor >= 0x17) || major >= 0x03) {
- 		drvdata->bmap_support = true;
- 		drvdata->bmap_addr = button_mapping_addr_new;
-+		drvdata->rumble_support = true;
- 		drvdata->rgb_addr = rgb_addr_new;
- 		return;
- 	}
--- 
-2.53.0
-
+--=20
+paul-moore.com
 
