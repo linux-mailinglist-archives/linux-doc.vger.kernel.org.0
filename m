@@ -1,131 +1,199 @@
-Return-Path: <linux-doc+bounces-87678-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87679-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wIihHxszB2qQswIAu9opvQ
-	(envelope-from <linux-doc+bounces-87678-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 16:52:11 +0200
+	id 8JwTKBI7B2ottwIAu9opvQ
+	(envelope-from <linux-doc+bounces-87679-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 17:26:10 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3A17551B4F
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 16:52:10 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2588F5521BE
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 17:26:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 03301304D5E6
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 14:49:15 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id EDD0B30578C7
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 15:17:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4567B3B994A;
-	Fri, 15 May 2026 14:49:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 652643C9EE9;
+	Fri, 15 May 2026 15:17:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="k7k1TMaN"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Bi0gzgcR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28CEF3B5F59;
-	Fri, 15 May 2026 14:49:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 169BF31F9BA;
+	Fri, 15 May 2026 15:17:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778856553; cv=none; b=g4xbRU7CFH55K13gHi/ATbBy2c3kGmllxszVVRZ66SzOtSSa3jDX1+QYvi/e4ffX+wfcHdw0yhh543vZR2PACvenKSnhx486Sq12R0/99tsenP0KYaRuRSy/z5mzeKbAQzJLxDWFJINmXiRm/+hzgsuCzfaXVfjacgi7o+5WYB4=
+	t=1778858232; cv=none; b=jBLdTl6WdMBpelEer5m9PuJjsBoVOOUjlip336bGBvYr4VhTnTxvzoP0gcYVPrp49Q/wySnCA++0KBzNyJ28D50t9IdKlpzrBYalzpM4TKbi2ecA988ntOeXOy0R9jJ4mLUx0oDptkYoPxOMFfkGEp5cysfhCiv4v7i+SIFkc8o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778856553; c=relaxed/simple;
-	bh=1Sjq22aJEbsG6MdLOFr2gVyF8MqklxJkNoGRS9bWaqQ=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=sY7HR8ZG/nUb/+cF5XPiDn4TC3FQEMdTf7qQUyG9LO3X9wWTUl2fM1IV7SeK6hySls3jNgv8V0efLX6D79DrHQ1UkZY7KHRkkZslMDcIWaOfNi3eCX9DbDV3zj4BHyMrWDRE9YydrmPzPi2fGLKaVkXYwSvIWUJvprJD1ehEmY4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=k7k1TMaN; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 6B190410B5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1778856550; bh=8uqzxYu6gYjdnvZfD+hsZY+He0WXDi38JOLKnIGC1fM=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=k7k1TMaNVzwMtJaG/jupAfP5NVRFe8lmVV+ACvu8dnwzmn2/2swtUH3gVnLlXckOH
-	 gZ/aH/qO1qVNx1dFKntEcewxGUALxPJ0v0TyRRxZJSgIMeFvOj1LKzi1gQCvRCF/hO
-	 uOKdhmITa3zGyq8taqgDl8gYWhWXp7KNxi3HOYYJNlbqC4plulx4uFRS2zfyvbvUvW
-	 MWJU8xIcjXJL13QwR5g00NTSPjJpu4tkPR+29gpwj76L97fwCLXceTu8XpPGCJsT2E
-	 P77hK5uyUq10GsQLeZVIrCKFm8C90J84Q55pXGEtv6XF1PRlnUQZn9bmFfMeMOSOV6
-	 ZcvpCtwtIIEhw==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b:67c:16ff:fe81:5f9b])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 6B190410B5;
-	Fri, 15 May 2026 14:49:10 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Cheng-Han Wu <hank20010209@gmail.com>, Shuah Khan
- <skhan@linuxfoundation.org>
-Cc: Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Cheng-Han Wu <hank20010209@gmail.com>
-Subject: Re: [PATCH 0/4] docs: admin-guide: improve workload tracing guide
-In-Reply-To: <20260503101429.254394-1-hank20010209@gmail.com>
-References: <20260503101429.254394-1-hank20010209@gmail.com>
-Date: Fri, 15 May 2026 08:49:09 -0600
-Message-ID: <87fr3spw2i.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1778858232; c=relaxed/simple;
+	bh=iuxKX4yA9jS3SnBKGNBWdP4pCJkdgodXaHYVrnn7UFs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=HfH/yEqLXvJ/q2RbdmQN5DKhhWJ4dgdiyR6oA+Y6YtU5oltCRUQT5PyTC3ZwDN66cl0dgVvJGmKUtWwazwBVe0M92JA0cFDgj8zr430K8a4DaiZ2uE+tfKz13UPo/R5sMxVzmwptgkSUXvHfGlrPJuVRZOJSQ/OvzVdz9A58p68=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Bi0gzgcR; arc=none smtp.client-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1778858230; x=1810394230;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=iuxKX4yA9jS3SnBKGNBWdP4pCJkdgodXaHYVrnn7UFs=;
+  b=Bi0gzgcR2gxzgc8lgy67Ci2gQlXZ5ohcSeQfXLQFuHiK1vCygKGQ6d5Q
+   Kvy2PJMHca8g6omdSV9G7b8gJYCHA2hbUQquoXlAE5IYYR0vOJrZcsyGL
+   96jRHcRIOtSDxozVZNEnqW91OKTpGtYFapXNQrRiXmg1whomJ2IoF2qVj
+   0CF0KmuwmoFhoynmyDTU16/SPYeSEl187eAFd273kQe/8uMiiEl7wuZR5
+   KMvVMiTCoPweUV/zoogYHGE7HWQaowgY+hrstYkMnuKMPRnE6DfEo2LyH
+   lH98xraL1mG8qzbvjFiwT7KM2GPxJYjRBIBsZWaIUz/A6UVp3d3GZfNpu
+   g==;
+X-CSE-ConnectionGUID: dpLvY3CfT26vi7sfMnx+lg==
+X-CSE-MsgGUID: nOwmWk/tRyKEuwPvxJ2Wfw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11787"; a="67344657"
+X-IronPort-AV: E=Sophos;i="6.23,236,1770624000"; 
+   d="scan'208";a="67344657"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 May 2026 08:17:09 -0700
+X-CSE-ConnectionGUID: i7VeuLdCS+uEhRKizRAgow==
+X-CSE-MsgGUID: mVgcKwmQS3WwjRt2+bvHbw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.23,236,1770624000"; 
+   d="scan'208";a="242712643"
+Received: from lkp-server02.sh.intel.com (HELO 7a33ad3e7d27) ([10.239.97.151])
+  by orviesa003.jf.intel.com with ESMTP; 15 May 2026 08:17:06 -0700
+Received: from kbuild by 7a33ad3e7d27 with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1wNuGj-0000000023F-2RlS;
+	Fri, 15 May 2026 15:16:23 +0000
+Date: Fri, 15 May 2026 23:09:54 +0800
+From: kernel test robot <lkp@intel.com>
+To: Horst Birthelmer <horst@birthelmer.com>,
+	Miklos Szeredi <miklos@szeredi.hu>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
+Cc: oe-kbuild-all@lists.linux.dev, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	Horst Birthelmer <hbirthelmer@ddn.com>
+Subject: Re: [PATCH] dcache: add fs.dentry-limit sysctl with negative-first
+ reaper
+Message-ID: <202605152333.0pOd2zJR-lkp@intel.com>
+References: <20260514-limit-dentries-cache-v1-1-431b9eb0c530@ddn.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Rspamd-Queue-Id: D3A17551B4F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260514-limit-dentries-cache-v1-1-431b9eb0c530@ddn.com>
+X-Rspamd-Queue-Id: 2588F5521BE
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-1.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
-	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87678-lists,linux-doc=lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FREEMAIL_CC(0.00)[infradead.org,vger.kernel.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com,linuxfoundation.org];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-87679-lists,linux-doc=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[intel.com:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[lkp@intel.com,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[linux-doc];
-	RCPT_COUNT_FIVE(0.00)[6];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,lwn.net:dkim,trenco.lwn.net:mid]
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,intel.com:email,intel.com:mid,intel.com:dkim,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Cheng-Han Wu <hank20010209@gmail.com> writes:
+Hi Horst,
 
-> This series updates Documentation/admin-guide/workload-tracing.rst
->
->   - Patch 1 fixes several typos.
->   - Patch 2 fixes stress-ng and perf record command examples.
->   - Patch 3 replaces a stale fixed "perf bench all" benchmark list with a
-> description of the command behavior and how to query available benchmarks.
->   - Patch 4 mentions the kernel build system's cscope target and shows how 
-> to exclude directories with IGNORE_DIRS.
->
-> Built test with:
->   make SPHINXDIRS=admin-guide htmldocs
->
-> Cheng-Han Wu (4):
->   docs: admin-guide: fix typos in workload tracing guide
->   docs: admin-guide: fix stress-ng command examples
->   docs: admin-guide: clarify perf bench all behavior
->   docs: admin-guide: add IGNORE_DIRS example for cscope
->
->  .../admin-guide/workload-tracing.rst          | 41 +++++++++++++------
->  1 file changed, 29 insertions(+), 12 deletions(-)
+kernel test robot noticed the following build errors:
 
-Series applied, thanks.
+[auto build test ERROR on 5d6919055dec134de3c40167a490f33c74c12581]
 
-jon
+url:    https://github.com/intel-lab-lkp/linux/commits/Horst-Birthelmer/dcache-add-fs-dentry-limit-sysctl-with-negative-first-reaper/20260515-154600
+base:   5d6919055dec134de3c40167a490f33c74c12581
+patch link:    https://lore.kernel.org/r/20260514-limit-dentries-cache-v1-1-431b9eb0c530%40ddn.com
+patch subject: [PATCH] dcache: add fs.dentry-limit sysctl with negative-first reaper
+config: openrisc-randconfig-r073-20260515 (https://download.01.org/0day-ci/archive/20260515/202605152333.0pOd2zJR-lkp@intel.com/config)
+compiler: or1k-linux-gcc (GCC) 10.5.0
+smatch: v0.5.0-9185-gbcc58b9c
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260515/202605152333.0pOd2zJR-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202605152333.0pOd2zJR-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   fs/dcache.c: In function 'dentry_limit_worker_fn':
+>> fs/dcache.c:1474:7: error: implicit declaration of function 'get_nr_dentry'; did you mean 'retain_dentry'? [-Werror=implicit-function-declaration]
+    1474 |  nr = get_nr_dentry();
+         |       ^~~~~~~~~~~~~
+         |       retain_dentry
+   cc1: some warnings being treated as errors
+
+
+vim +1474 fs/dcache.c
+
+  1463	
+  1464	static void dentry_limit_worker_fn(struct work_struct *work)
+  1465	{
+  1466		struct dentry_limit_ctx ctx;
+  1467		unsigned long limit = READ_ONCE(sysctl_dentry_limit);
+  1468		unsigned int ms;
+  1469		long nr;
+  1470	
+  1471		if (!limit)
+  1472			return;
+  1473	
+> 1474		nr = get_nr_dentry();
+  1475		if (nr <= (long)limit)
+  1476			return;
+  1477	
+  1478		ctx.over = nr - (long)limit;
+  1479	
+  1480		/* Phase 1: drain negative dentries across every superblock. */
+  1481		ctx.isolate = dentry_lru_isolate_negative;
+  1482		iterate_supers(dentry_limit_prune_sb, &ctx);
+  1483	
+  1484		/* Phase 2: still over? Apply the ordinary LRU policy. */
+  1485		if (ctx.over > 0) {
+  1486			ctx.isolate = dentry_lru_isolate;
+  1487			iterate_supers(dentry_limit_prune_sb, &ctx);
+  1488		}
+  1489	
+  1490		/*
+  1491		 * Re-arm while still above the limit. Re-read the sysctls in
+  1492		 * case the admin raised the cap or disabled the feature during
+  1493		 * the walk.
+  1494		 */
+  1495		limit = READ_ONCE(sysctl_dentry_limit);
+  1496		if (!limit || get_nr_dentry() <= (long)limit)
+  1497			return;
+  1498	
+  1499		ms = READ_ONCE(sysctl_dentry_limit_interval_ms);
+  1500		queue_delayed_work(system_unbound_wq, &dentry_limit_work,
+  1501				   msecs_to_jiffies(ms));
+  1502	}
+  1503	
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
