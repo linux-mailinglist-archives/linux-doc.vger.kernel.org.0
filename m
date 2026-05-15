@@ -1,113 +1,133 @@
-Return-Path: <linux-doc+bounces-87703-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87704-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YIvEHZF9B2qO5gIAu9opvQ
-	(envelope-from <linux-doc+bounces-87703-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 22:09:53 +0200
+	id OGZODmSLB2oI8AIAu9opvQ
+	(envelope-from <linux-doc+bounces-87704-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 23:08:52 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 295C35574C0
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 22:09:53 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCB11557A43
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 23:08:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B7D10300750C
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 20:09:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0BFFC302ED77
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 21:07:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9CD13921D1;
-	Fri, 15 May 2026 20:09:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E199F3E9C10;
+	Fri, 15 May 2026 21:07:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ME0RQCB2"
+	dkim=pass (2048-bit key) header.d=disroot.org header.i=@disroot.org header.b="KZxDj9jU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56215391E58;
-	Fri, 15 May 2026 20:09:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B38D346AD5;
+	Fri, 15 May 2026 21:07:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.21.23.139
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778875789; cv=none; b=S1cR98M2DUTFD+HjTxXy+cIVVnWmqRkzIm4VDZ4I7hMUj9FnYdAEnK0NesxfUkHY5ne44s/zng3klMD4ja4T5fOFfzha2VIKJ6dM1tTlX5Eb1qmZCCGkebY4Q+TgpXHoRGYHd9+yYJOKlziHLSkPoFMlqg9H0v6cXlxPghjaKuc=
+	t=1778879274; cv=none; b=Pzh37pc7/+8hbVXfG2rd6UYaRCzsVPESW66i2BWyPnJQ7IUgbAb7XtEo+LmQW7HnXQ9Pu76s6QnfxjT4iX64Xg8DfXCO38JwvSAsQMI1u9O8KeSdStPBC14VOXP1wEAqLjwu7Cltbot4Y5G8vZifujTof2veLDxeiEzEYsb4sFM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778875789; c=relaxed/simple;
-	bh=AIHp51/WX8prO4WDm+DYsIqEJskRG2iJKQlJPsooRYk=;
-	h=Subject:From:In-Reply-To:References:Message-Id:Date:To:Cc; b=UhSPm6+Mv4pFSfxIoAo9yUNXlF//hnq75Dc1p0UDqCSvbqlRtEuy2bgcBOt6WlFjghI+5pYgqAMcFgQlj/CWfgpYixOprGIO4pOwNYfVgoNuYuKFeLl3ksMzXExQ2QGDgY4ULmf4ibAOHh3+aeW5H4ddq1VDqXOpO+bUYNPLjoI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ME0RQCB2; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFC1FC2BCC9;
-	Fri, 15 May 2026 20:09:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1778875788;
-	bh=AIHp51/WX8prO4WDm+DYsIqEJskRG2iJKQlJPsooRYk=;
-	h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
-	b=ME0RQCB2Cs8rXT8HeGuo/kSxUSWbppIO7yI/MQ7Vh/J9vVIaUbqZD0C6zKxVtnhr0
-	 lUr/V8LbA0ckvvFYJBifWoLAauD4vt/0CSzrDllWbzG7w2DUwQE3peDfbRFxO14SML
-	 cU14BL2FIP/w6j/peH5vSKV3T4d9IETAcmk1Ie6fb7HuTbFsT/RJz1ORKBy2kYJFAw
-	 +fQq239rIB9fRRVBZWyeGdK00N2lfZjXIDHDb5GRNgZhgEBor60C9XhzYURrupelY/
-	 r7NTINrzKuv+2+HarHNdvS8p4x0XhmTqjgHCcPo2gVfU/76MIkYCSKV7Vlp9RRLy+N
-	 1zk5lo9z10Fsg==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 56A6E3930A08;
-	Fri, 15 May 2026 20:10:03 +0000 (UTC)
-Subject: Re: [GIT PULL] Updating the security-bugs document
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <87lddksslx.fsf@trenco.lwn.net>
-References: <87lddksslx.fsf@trenco.lwn.net>
-X-PR-Tracked-List-Id: <linux-doc.vger.kernel.org>
-X-PR-Tracked-Message-Id: <87lddksslx.fsf@trenco.lwn.net>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git tags/docs-7.1-fixes
-X-PR-Tracked-Commit-Id: f2e65e4e5b4b4b9ecf43f03c3fdbe8c9a8a43a9e
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 36d49bba19f2c19c933d13b25dcf4eb607a030b3
-Message-Id: <177887580197.138467.7719545001552267679.pr-tracker-bot@kernel.org>
-Date: Fri, 15 May 2026 20:10:01 +0000
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Linus Torvalds <torvalds@linuxfoundation.org>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Willy Tarreau <w@1wt.eu>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+	s=arc-20240116; t=1778879274; c=relaxed/simple;
+	bh=UZQiu0VH2xAOXUxnfPEgUIj3JzYw5nHJpb6xLgSjZxw=;
+	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Cc:Subject:
+	 References:In-Reply-To; b=vDP3SsEgmQ903+JuKrTR3cdIESH9hq2HyoL0l1RZ3Dq3p3GKYSAAzZuiNmxKctyw1qTMNgWK7B70Z7c3S/8PbyrOUt+2fxHKwic5rYjmEjBRPCScYDRWWPmeA4qJJFcaMtoLyPhCJuQ/uofXMjiiu9sgG4TAf067aJeMlLfJ9VM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=disroot.org; spf=pass smtp.mailfrom=disroot.org; dkim=pass (2048-bit key) header.d=disroot.org header.i=@disroot.org header.b=KZxDj9jU; arc=none smtp.client-ip=178.21.23.139
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+	by disroot.org (Postfix) with ESMTP id 4FCC9271BA;
+	Fri, 15 May 2026 23:07:52 +0200 (CEST)
+X-Virus-Scanned: SPAM Filter at disroot.org
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0_mgalvMmZ-c; Fri, 15 May 2026 23:07:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+	t=1778879271; bh=UZQiu0VH2xAOXUxnfPEgUIj3JzYw5nHJpb6xLgSjZxw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=KZxDj9jUR9eWY6FtpDOfeAiHdPJhQRayv8CRJF0SCw/5/WwSUZmevrgvw/Fq4mYEC
+	 FvgYwNdWeUmcs6Rl+P9VBFdaAhnFR57l18isQVtNY/lx0nzvShZfuxXwg6YrjAO5oO
+	 4H7dHFV7DdVdr5ILFO/KJWDmXcVaFjqnI19H8hS9viNfoysLdTYusaC8oprMu1pn3R
+	 iYes4MaI9wvWM3s8arTr5vFrjfCa/h0C7z1WxAUKgX2DuphoS+9Fj2zPG619erC0w4
+	 E+PsYVzARBAHhJorueok+DNwSS83ke16/sMNQwTSnt1cYWXinUahBOMaT/e+eMrjnK
+	 UA41x/RhAlNzA==
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-X-Rspamd-Queue-Id: 295C35574C0
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 16 May 2026 02:37:34 +0530
+Message-Id: <DIJK2FWQOGCK.2WJ9FED9HKGHG@disroot.org>
+From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
+To: "Conor Dooley" <conor@kernel.org>, "Kaustabh Chakraborty"
+ <kauschluss@disroot.org>
+Cc: "Lee Jones" <lee@kernel.org>, "Pavel Machek" <pavel@kernel.org>, "Rob
+ Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+ "Conor Dooley" <conor+dt@kernel.org>, "MyungJoo Ham"
+ <myungjoo.ham@samsung.com>, "Chanwoo Choi" <cw00.choi@samsung.com>,
+ "Sebastian Reichel" <sre@kernel.org>, "Krzysztof Kozlowski"
+ <krzk@kernel.org>, =?utf-8?q?Andr=C3=A9_Draszik?=
+ <andre.draszik@linaro.org>, "Alexandre Belloni"
+ <alexandre.belloni@bootlin.com>, "Jonathan Corbet" <corbet@lwn.net>, "Shuah
+ Khan" <skhan@linuxfoundation.org>, "Nam Tran" <trannamatk@gmail.com>,
+ =?utf-8?q?=C5=81ukasz_Lebiedzi=C5=84ski?= <kernel@lvkasz.us>,
+ <linux-leds@vger.kernel.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+ <linux-samsung-soc@vger.kernel.org>, <linux-rtc@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v6 02/11] dt-bindings: extcon: document Samsung S2M
+ series PMIC extcon device
+References: <20260515-s2mu005-pmic-v6-0-1979106992d4@disroot.org>
+ <20260515-s2mu005-pmic-v6-2-1979106992d4@disroot.org>
+ <20260515-mutable-urgency-305fecf3ffc4@spud>
+In-Reply-To: <20260515-mutable-urgency-305fecf3ffc4@spud>
+X-Rspamd-Queue-Id: CCB11557A43
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-0.16 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.232.135.74:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[disroot.org,reject];
+	MV_CASE(0.50)[];
+	R_DKIM_ALLOW(-0.20)[disroot.org:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,samsung.com,linaro.org,bootlin.com,lwn.net,linuxfoundation.org,gmail.com,lvkasz.us,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-87704-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87703-lists,linux-doc=lfdr.de];
-	DKIM_TRACE(0.00)[kernel.org:+];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NO_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[disroot.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	MISSING_XM_UA(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[pr-tracker-bot@kernel.org,linux-doc@vger.kernel.org];
-	MISSING_XM_UA(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kauschluss@disroot.org,linux-doc@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-doc,dt];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
-	ASN(0.00)[asn:63949, ipnet:172.232.128.0/19, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns]
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,microchip.com:email,disroot.org:email,disroot.org:mid,disroot.org:dkim]
 X-Rspamd-Action: no action
 
-The pull request you sent on Fri, 15 May 2026 07:35:38 -0600:
+On 2026-05-15 18:15 +01:00, Conor Dooley wrote:
+> On Fri, May 15, 2026 at 04:08:58PM +0530, Kaustabh Chakraborty wrote:
+>> Certain Samsung S2M series PMICs have a MUIC device which reports
+>> various cable states by measuring the ID-GND resistance with an internal
+>> ADC. Document the devicetree schema for this device.
+>>=20
+>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+>
+> Acked-by: Conor Dooley <conor.dooley@microchip.com>
+> pw-bot: not-applicable
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git tags/docs-7.1-fixes
-
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/36d49bba19f2c19c933d13b25dcf4eb607a030b3
-
-Thank you!
-
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+Thanks, but this patch has already been reviewed by Krzysztof in v5. I
+missed the Reviewed-by tags, sorry! I'd been preparing v7 after the
+reviews by Sashiko.
 
