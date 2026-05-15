@@ -1,67 +1,65 @@
-Return-Path: <linux-doc+bounces-87657-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87658-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MKcaHTEoB2ppsQIAu9opvQ
-	(envelope-from <linux-doc+bounces-87657-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 16:05:37 +0200
+	id sMkrFKcqB2ppsQIAu9opvQ
+	(envelope-from <linux-doc+bounces-87658-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 16:16:07 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA64A550F9F
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 16:05:36 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53D7B5512E5
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 16:16:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E72B930DB273
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 13:55:14 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 2A7423061365
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2026 13:56:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E616F481FBD;
-	Fri, 15 May 2026 13:55:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB511481AA7;
+	Fri, 15 May 2026 13:56:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="IKQlV14T"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="bMU6ngph"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78458449EB6;
-	Fri, 15 May 2026 13:55:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9662844A701;
+	Fri, 15 May 2026 13:56:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778853307; cv=none; b=gWZNXgnZGbwxOy2WlMEXR01IOaV5DG9yF9Z1wOOPyH2e+oIA9xWVXIQwxGeNFiuzg6KARzs8pWpH2WDaCxIuORyf/Q12lO7KbQ+i6/GkPgEZaKVu9HYkdN9DU5Fq8VSruWBvj4dM7YqYRK+qu4n+QkGsIdrT1M8BNQmqddgQk7g=
+	t=1778853410; cv=none; b=H6Ai/j1Jt/go2up3bcYvIqcz2QZnS5SgW0u3wBZaSb+H5MUDX76oNeswtcNKwFHHJCAaDIsErt3/XG4utm5C9Rkm5JPPrIcnsTpJ9GLdyy29nNUfo7JYi4athfWc9b8aAJqwfQPtvkBxlD0m3vrW3x2PBu+UXd3g1RJgWCWBXNI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778853307; c=relaxed/simple;
-	bh=evXWKftjuLJQ4mRjWE5B2AiBxfbS1BL93pLn0xAnNR8=;
+	s=arc-20240116; t=1778853410; c=relaxed/simple;
+	bh=yPL09EUVdhNMglzCNhqFjmlhS6R6u3y1ZDaHT4NK6ms=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=eqJGagVUs64aEjUrP/5QWn++guHlKWOegnqCU4aNA6zgWOwMM3/zkd95FqLsufb/ymMChY9XsMG5/PQXurrMJpkFjvdwnK+L0N1rF7fl5Di/h+ATEjmqv7HBny9Y+LzDXqxhGHZEtezwGuOl674f9po2h1CRWTzZCN3L608qoLw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=IKQlV14T; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=WMe2Hvi2s2YiQPd/n34BOVYn5WLaTw7ZvnVWsO3ktiXerkBZH2Cs8ZKxqANiNs7b89S8tlS9aBd+gH4Yz0mSlTsdu49d/lAmRn6cMlero+8dIqsAhylgelbJLBJobk3lLHbHakS04mJh/UDwEj+5zT6e8SrGvq5wESGiGwlZw1I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=bMU6ngph; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net CB76A410B5
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net EA980410BF
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1778853305; bh=A9nDFv3vagy3+1F49CmVRh5+xa3gfle1V5vbvV6JaGE=;
+	t=1778853409; bh=+f8TCT67vyuvsz+YiQGqtt7wzEU9fUk3tYBacKzPZEw=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=IKQlV14Tq6bBIDndNUTmOqE3N/cj8mjMEbhzn2t5RYhMoumSdoRAaOZQA5JvJV0lh
-	 119XI4z++YKndyQvwrHv6UQscJZDn4qF3uGSnCT1il0subk3E01AL8xs+e7FxO5Ip1
-	 viz9+8uamfr002g9f3m4Qx5W8asunN6proGzY05Lc/8mns3YzVfjGHSLpHYqKwEBrE
-	 4RK4NdLoN1AnanOIKwzGQRsxHzAcHbxtmqCIooLiQyE6ge6fOJ5k7JbXmXdRhvhG9H
-	 DklKp0Do/hUu27Ie4RBEDilSfvmF2hrbprnuh/7Mpchumrv7GFxd1n8onCUFwSqIVq
-	 7SWMESMAQdc9A==
+	b=bMU6ngph5PHb+MTJsuyAnK0e5GxOplGW3eVjGSWEEORqbiP4uk007yOtfuPA1rENr
+	 r7BkvVZhRhEC9jOdwkLOeVGv0s5QOeC7m1nOuc/8FLO0OfNX6AK4CDdTNmU5CujT2b
+	 XiUUtwLmAsvSuCgZReT4Gx4fGVvHGIl49syjnKyButJWbw3biADR4Qrdq+8/uzJdFS
+	 acaUpKuAepyDqiZ5IEd/umc0F08do5gYaQaf3UVXlWrVauOlG/KZ5i+sHakjLLK2+7
+	 wBKig+YK9PhiHq5AGPzy/MmlJVcFdX45ymSkyxqBd7qJuBaG78kjaIpTIVOtpYamE9
+	 Xoh/QwhsgmnZw==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b:67c:16ff:fe81:5f9b])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id CB76A410B5;
-	Fri, 15 May 2026 13:55:05 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id EA980410BF;
+	Fri, 15 May 2026 13:56:48 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>, Linlin Zhang
- <linlin.zhang@oss.qualcomm.com>, Alasdair Kergon <agk@redhat.com>, Mike
- Snitzer <snitzer@kernel.org>, Mikulas Patocka <mpatocka@redhat.com>,
- Benjamin Marzinski <bmarzins@redhat.com>, dm-devel@lists.linux.dev, Shuah
- Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] dm: fix dm-inlinecrypt docs warnings
-In-Reply-To: <20260512180409.1193504-1-rdunlap@infradead.org>
-References: <20260512180409.1193504-1-rdunlap@infradead.org>
-Date: Fri, 15 May 2026 07:55:05 -0600
-Message-ID: <878q9ksrpi.fsf@trenco.lwn.net>
+To: Chen-Shi-Hong <eric039eric@gmail.com>, linux@leemhuis.info
+Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Chen-Shi-Hong <eric039eric@gmail.com>
+Subject: Re: [PATCH v4] docs: reporting-issues: replace "these advices" with
+ "all of this advice"
+In-Reply-To: <20260514082808.655-1-eric039eric@gmail.com>
+References: <20260514082808.655-1-eric039eric@gmail.com>
+Date: Fri, 15 May 2026 07:56:48 -0600
+Message-ID: <874ik8srmn.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,71 +67,66 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Rspamd-Queue-Id: EA64A550F9F
+X-Rspamd-Queue-Id: 53D7B5512E5
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
+	DMARC_POLICY_ALLOW(-0.50)[lwn.net,none];
 	R_DKIM_ALLOW(-0.20)[lwn.net:s=20201203];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87657-lists,linux-doc=lfdr.de];
-	PRECEDENCE_BULK(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lwn.net:+];
-	MISSING_XM_UA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-doc];
 	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[bounces-87658-lists,linux-doc=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FREEMAIL_CC(0.00)[linuxfoundation.org,vger.kernel.org,gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,leemhuis.info];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[corbet@lwn.net,linux-doc@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[lwn.net:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,linuxfoundation.org:email,infradead.org:email,linux.dev:email,trenco.lwn.net:mid,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,lwn.net:email,lwn.net:dkim]
+	TAGGED_RCPT(0.00)[linux-doc];
+	RCPT_COUNT_FIVE(0.00)[6];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[trenco.lwn.net:mid,lwn.net:dkim,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Randy Dunlap <rdunlap@infradead.org> writes:
+Chen-Shi-Hong <eric039eric@gmail.com> writes:
 
-> Add this file to the index and use a longer heading overline string
-> to eliminate warnings:
+> "Advice" is an uncountable noun, so "these advices" is grammatically
+> incorrect.
 >
-> Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst:1: WARNING: Title overline too short.
-> ========
-> dm-inlinecrypt
-> ========
-> Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst: WARNING: document isn't included in any toctree [toc.not_included]
+> Replace it with "all of this advice" instead, which keeps the sentence
+> grammatical while also making it clear that it refers to the full set of
+> recommendations in the paragraph.
 >
-> Fixes: b4a0774bd7fd ("dm: add documentation for dm-inlinecrypt target")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Signed-off-by: Chen-Shi-Hong <eric039eric@gmail.com>
 > ---
-> Cc: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
-> Cc: Alasdair Kergon <agk@redhat.com>
-> Cc: Mike Snitzer <snitzer@kernel.org>
-> Cc: Mikulas Patocka <mpatocka@redhat.com>
-> Cc: Benjamin Marzinski <bmarzins@redhat.com>
-> Cc: dm-devel@lists.linux.dev
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: linux-doc@vger.kernel.org
+> v4:
+> - move version changelog below the "---"
+> - send as a separate thread
 >
->  Documentation/admin-guide/device-mapper/dm-inlinecrypt.rst |    4 ++--
->  Documentation/admin-guide/device-mapper/index.rst          |    1 +
->  2 files changed, 3 insertions(+), 2 deletions(-)
+> v3:
+> - resend against the original base as requested
+> - replace "these advices" directly with "all of this advice"
+>
+> v2:
+> - use "all of this advice" based on review feedback
+>  Documentation/admin-guide/reporting-issues.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-This doesn't apply to docs-next, so I'm guessing it's intended for some
-other tree?
-
-Thanks,
+Applied, thanks.
 
 jon
 
