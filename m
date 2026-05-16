@@ -1,82 +1,82 @@
-Return-Path: <linux-doc+bounces-87919-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87921-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MHB+O0nxCGoEBAQAu9opvQ
-	(envelope-from <linux-doc+bounces-87919-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 00:35:53 +0200
+	id ONx0NVvxCGq1AgQAu9opvQ
+	(envelope-from <linux-doc+bounces-87921-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 00:36:11 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 684FC55E231
-	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 00:35:52 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 803BC55E247
+	for <lists+linux-doc@lfdr.de>; Sun, 17 May 2026 00:36:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 44650302B395
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 22:34:53 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6FF003030B25
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 22:34:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BE1835E957;
-	Sat, 16 May 2026 22:34:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 278D838C2D1;
+	Sat, 16 May 2026 22:34:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="H7+H8xfX"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lPpifN/T"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f193.google.com (mail-yw1-f193.google.com [209.85.128.193])
+Received: from mail-yw1-f195.google.com (mail-yw1-f195.google.com [209.85.128.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00A8438F62F
-	for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 22:34:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.193
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDCF038D3E0
+	for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 22:34:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778970892; cv=none; b=Q1d2zAXUIWMvY5aO6P36DEVQ5dp89qTKaiDqNpN08Jt9ZZU9sX4b1tbWRWYhiq2BUsKuJnVqr+Y47FXOpwvHO2JFVoFC9UlkEc3J355Wn86pgnXbgygyRUpS04bpd+gpeA7Q1NNBRsrWOmYzNZBVycOBzQKa3GprU2G4YcmulUI=
+	t=1778970896; cv=none; b=go9Ah8AsCE+8BOBk+g6x/joX+2rGE3x+MXejM2JagLu6j1g4l8UsGRB9kVsoG2w9C+1Ll97BQdwXtEtQtZMhJd2KOzoXWn5n4M2c3CQFyQu0NoJjNiSI6MbQUvZg5dDWfCaT8zRZ6wssvsZJ8fkgG0fSX+tCJf07UqzVK8dOx4A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778970892; c=relaxed/simple;
-	bh=9qCyQuXla6OX/PfPv/Mgm7xBHK14vZ4tbPQnAPQWEbk=;
+	s=arc-20240116; t=1778970896; c=relaxed/simple;
+	bh=U7geW279ChrFXLde61M58WBHBu8SgrbFDoM4Qrvb2q8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CBObaqwPgi+Gplc57JLLKzWoHktqE2hifY8ewPOrQa9JkJ2LYt8heHz6TGRdAugA4Rfb53mNFjI4dQjl1mhivUo0Stqv8DwGJU4ugxI3hXveZFybSeyAKWhudkNL3AY8AS8Klo1cuTCE3BeSglHWCG2jx+rjYx0MYVEyxuaUZ1g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=H7+H8xfX; arc=none smtp.client-ip=209.85.128.193
+	 MIME-Version:Content-Type; b=TxoTfKWGId8QqAwYacxpCvCr3lpU04wG2gF2sHPqFOYaa1HXhcswB0OwHvC0Gza3gUw/SOCNq0/8Al7ALC1xVYi8HyPWsv8Jmox7D73rGFFMjsv2NUTHwGY+ycv9QUa/SmzR1r4K6NbgpfFnvgBFrDs1hC1BkuRoPs6SdNEQoC8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lPpifN/T; arc=none smtp.client-ip=209.85.128.195
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yw1-f193.google.com with SMTP id 00721157ae682-7bde9d73678so5542077b3.0
-        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 15:34:49 -0700 (PDT)
+Received: by mail-yw1-f195.google.com with SMTP id 00721157ae682-7bdf83185bbso5223187b3.2
+        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 15:34:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778970889; x=1779575689; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1778970891; x=1779575691; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wV43Lg6ZeBSxT2gi43CrNOJZdZ5c40FejoI6Xqvs4d0=;
-        b=H7+H8xfX3gngHHYpwOlzZEuLXIJJ7rPG9QArrHHWqmjpIvlgKvT1Tx1bn2OkYck6is
-         Hg2yrLyFey9YH9fQKM2nz1+Sqf5IiK3A1hk8Fld1ikUjlyyPmpx/XeAwymhOPtMBOMYR
-         XG//ArTfL6RVQtUIF1S0jLB+Mv0gEOjUGfomC/QWEMUyHhY2V7YzOqvfFZI2nB2ryVrE
-         Q6OO8033tBONtf8OW/1ExFCUnosh6Ck6HBgNzp5V0FJ2PZArGFAwqu3Xtkm2zAbKRgT3
-         4141ltHo58mhgoYKrgdJxu1+SP9ducX/lJpiEeKzj543Dflhrd+eHiXciuOoKFk1Nw6w
-         d7QQ==
+        bh=V8+0GSDgF6eaqM7aU4GbWIS0I2DgBkn1ubqIjVsKT2c=;
+        b=lPpifN/Tkjcp2aNLTwX73temMbpxnWT9XLa4qrnPaVGusB3H2cUwWr/nHFykruhaFz
+         5NGx77LgoZJfETZKg1I0WCblxSSzTXtu2wDYijFQ/1PVTrJSbLjscGpHHtPqvWTKtSyT
+         rWYW0dr0qu+x25ZhUuhJe0wgiBPHrpRW2W6sP6p5xdYK24Wpjy0EkUnv/03Kbh5avvvZ
+         X95F0LvRIW6OJIwUFdg3PkZAU1tyBFvtqaojUvgo7LAvwAkolT3Mjqtsu/JZXb/ZBPvd
+         vcR3z+fAtT4ZHWGvwhIoQyoLpvmren32NNvr3EcxuD6a9Ry+EDGfudLDn7szEzcrf4d+
+         PEMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778970889; x=1779575689;
+        d=1e100.net; s=20251104; t=1778970891; x=1779575691;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=wV43Lg6ZeBSxT2gi43CrNOJZdZ5c40FejoI6Xqvs4d0=;
-        b=lFSkO/BgmPwqQnppqjmUn6nllxegJ1uaWj0sjWhKMsuPyujEtnrqQUNVaIUVTeU5gK
-         l+MUvLc8PwlUDM55+VVpbX5MVUAiRajoKSszUQFfYHlNPErnLO/yI1eNID4SuqibBYvH
-         mRkPWiCv2Z4YXn/yMlLPvQEqDAS04NWQV8nqXFKrdLU/a8/ghAFD+IbllTyPGei2lPg2
-         JLwYJ8sGBax7cl0zm94OMyjQ0a5o9cNGLHBVBi29BRTqeZzf3Bw7tQwNaolVc5GvJaQq
-         s11xJrewpd3vc4P1sNgDKP/0k2VX3uwCMMg0PWlyclWWnNxX64GUb4rGIU2a/VHCwHSJ
-         OqWw==
-X-Forwarded-Encrypted: i=1; AFNElJ+E8I3nVeCGwyTG5ZoH+xI2XP4PYp4v3WeVRFQYbT05MWTHmDZQr0kjsGrRMHNn6hLBIM9JcRftais=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxhCrYi0ypiOrUfaBQrpqBObvFVxUzfZOPFTXQPVfGS8OVeAJZp
-	jC7UwIvcA44UdL/7pPN8IR9jXCD/u1vNjwSCbcY21fugnQkQcWR4HhQ=
-X-Gm-Gg: Acq92OH9W7hL2SXVTUcx5RF3tP/aDjNrV7uMH7/WkfsTZBZlctZrsPHnzeolNE9W58T
-	jry9AI80qjaGql7103Ck88pqR5cc0di77z17qMc7LKt08ZsKWoI5HVfnS9C4cNfW8wPLO5Y1YM8
-	YWqiTFbxuknarV+8tR8/dLbviBRnxNxb9GmnjSkvt9HKz58maVw5zU5jWq5ShyRByi2UZpIheku
-	kPqlzPFjVKs+YyPtSLR0j3ZyqcPANgZvlnW4bJQONXnn4jt+KP8iqxN010a5h+KRNC0sKqJ50m/
-	cemnpue4aICaKz5EMr9Ad4GlNRJgadgaLDlGpd2a3sFn+mqZk0tyXc4taYvgqBZPfVgcLeJYjnp
-	eHWreFe9OtiSH8BN/wVQXQQ3gJc1MpsIM+2vRh8qOv9XEj+XLglTnziV8eLpqzK46gU29hmKFsH
-	TdJVK/imA06RvShqFda1Pu5uAh8ZbLAlgqtC97ANi1qTctJtoU2mvL0Szz1pZRtTSA5W57sMBWz
-	C0oDZDW7yT7
-X-Received: by 2002:a05:690c:e04e:b0:7c2:fa53:6d7f with SMTP id 00721157ae682-7c9463a2449mr68267967b3.3.1778970888966;
-        Sat, 16 May 2026 15:34:48 -0700 (PDT)
+        bh=V8+0GSDgF6eaqM7aU4GbWIS0I2DgBkn1ubqIjVsKT2c=;
+        b=LQ26YV0xcNZ6CkU5EjDpvKRzCVLMeUF9pL10GEcxQijCZO8MDKtqMZ7bLYQFJCu3f/
+         xSQsJUbKNYQpE8x6k2nlgKw60nxezJv6fRmo9xXYddLJVSOO7XPkAdNYqZwESml6XZnI
+         JRpuEZ6c9tcEbC5Z+TzkbufYH0EQldGld7/HpXZjxl2EU8Rt7cCNVwoLVul1QxtY+MkN
+         zii2AHuAzwKWBAtc/lIvXFNhkgxGruKKzJ6z42mBWq7QWu1yepQ5UTt14P/nilQiU73p
+         xkuWkSpgwxfB+G8LvfMuL55bXTpBWkqn2K2IVQ6Owb9MMYjU8jXbO+GLz6MhSWyLM2oG
+         cUog==
+X-Forwarded-Encrypted: i=1; AFNElJ9pzkQuNR2dr1UId2COhb7lBljTQGg8HHOzYUg9z9eisAhqozFxwHEu83BM/6ynPvC4CudzbQQ1vmY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwfqS3arJA5O4POCn29QpSDLIMvc1/rdsGD2FaRBpIUSYdH9A62
+	PWvUb2zf8dKWBVuxOYNkdsnq6AKA14yIPGtduBASAUPxBzMU/xdc7uU=
+X-Gm-Gg: Acq92OFERT7N4vrNUiWchyIb/BhkVdCJkvm66tyoZCt1lAIPSkBnWkErNM0CJdZCsch
+	4vbXtoo/fUQvmgmqxClgfaORMFA8gp/N9OdllMoFtGRVT6fLCoH+TmfoWFiofeXafAWV3zBdTVc
+	bmqJEqCEAVGhNYAJpRDWf7IPO89dih5ySe1DcKdpKJCFB+5WhOmuMrlW+XWdIAZiXh2SHHt7Jgb
+	IwE85PY+xxG+8cGzraU7ecV9b15pfefiY8SA3FcB1fQrcYDeD1BOiCFcXcrjTwrlNDcb9U7HYNH
+	xHbSa9XUEZ1UYBF0yq/7Ofgj6DPxSk5+yy2OjVA8NkA+D71e3PTPDRDhEY+AtXfzSvdRxktWv4v
+	oRaflzu/mRKNmo79pf32bTx3gH4lwRxYnqjm/ybiL45zPJ1smZQeeyaKlaueUsS7W8T7fsWadD7
+	jmNVrroWQHcMkpO8fhNgi3I0M5gXXU89aqD0i072kURGDRnWX81MzsDFbFLjJCseSCU7tLmAxBo
+	Q==
+X-Received: by 2002:a05:690c:4a01:b0:79a:b440:5c77 with SMTP id 00721157ae682-7c959e890bfmr110956107b3.17.1778970890889;
+        Sat, 16 May 2026 15:34:50 -0700 (PDT)
 Received: from localhost (23-116-43-216.lightspeed.sntcca.sbcglobal.net. [23.116.43.216])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7cc9c6cd4f5sm666137b3.35.2026.05.16.15.34.47
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7cc9d18c769sm641257b3.47.2026.05.16.15.34.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 May 2026 15:34:48 -0700 (PDT)
+        Sat, 16 May 2026 15:34:50 -0700 (PDT)
 From: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
 To: sj@kernel.org,
 	damon@lists.linux.dev,
@@ -91,9 +91,9 @@ Cc: akpm@linux-foundation.org,
 	yunjeong.mun@sk.com,
 	ravis.opensrc@gmail.com,
 	bharata@amd.com
-Subject: [RFC PATCH 3/7] mm/damon/core: replace mutex-protected report buffer with per-CPU lockless ring
-Date: Sat, 16 May 2026 15:34:28 -0700
-Message-ID: <20260516223439.4033-4-ravis.opensrc@gmail.com>
+Subject: [RFC PATCH 4/7] mm/damon/core: flat-array snapshot + bsearch in ring-drain loop
+Date: Sat, 16 May 2026 15:34:29 -0700
+Message-ID: <20260516223439.4033-5-ravis.opensrc@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260516223439.4033-1-ravis.opensrc@gmail.com>
 References: <20260516223439.4033-1-ravis.opensrc@gmail.com>
@@ -103,273 +103,284 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 684FC55E231
+X-Rspamd-Queue-Id: 803BC55E247
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
+X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-87919-lists,linux-doc=lfdr.de];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_CC(0.00)[linux-foundation.org,lwn.net,gmail.com,micron.com,sk.com,amd.com];
+	TAGGED_FROM(0.00)[bounces-87921-lists,linux-doc=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[ravisopensrc@gmail.com,linux-doc@vger.kernel.org];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
+	TO_DN_NONE(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TAGGED_RCPT(0.00)[linux-doc];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	TAGGED_RCPT(0.00)[linux-doc];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Replace the mutex-protected fixed-size array (DAMON_ACCESS_REPORTS_CAP=1000)
-with a per-CPU lockless ring buffer.  This enables damon_report_access()
-to be called from NMI context.
+The drain loop is O(reports x regions) when matching each ring entry
+back to a region.  At sufficiently large CPU x region products the
+linear scan exceeds the sample interval, producing unbounded backlog.
 
-Ring design:
-- Producer is serialized per CPU: only one in-flight producer per CPU
-  is allowed.  A per-CPU damon_report_ring_busy counter detects
-  NMI-on-process nesting and drops the nested attempt, preserving the
-  single-writer invariant on the slot.
-- head is advanced by the producer with smp_wmb() before publish.
-- tail is advanced by the consumer (kdamond) after the entries[] reads.
-- Overflow: sample silently dropped.  NMI context is allocation-free
-  and access reports are best-effort.
+At drain start, snapshot each target's regions into a flat array
+(struct damon_target_lookup), already sorted by ascending r->ar.start.
+Replace the linear lookup with binary search over the snapshot,
+reducing the drain to O(reports x log2(regions)).
 
-To keep the producer/consumer pattern scalable on systems with many
-CPUs and a high NMI rate, the ring layout follows three rules:
+Reject reports that straddle a region boundary
+(addr + report->size > r->ar.end) so partial-region accesses are
+not credited to the lower region.
 
-- head, tail and entries[] live on separate cache lines via
-  ____cacheline_aligned_in_smp, so producer and consumer do not
-  invalidate each other's working set on every advance.
-- DAMON_REPORT_RING_SIZE is bounded so the per-CPU footprint stays
-  small (256 entries x sizeof(struct damon_access_report) plus head
-  and tail cache lines), keeping draining all rings during one
-  kdamond tick from evicting unrelated data on contemporary server
-  parts.
-- A cpumask, damon_rings_pending, is set by the producer after
-  publishing and cleared by the consumer per ring drained, so the
-  consumer iterates only CPUs with pending entries instead of
-  walking every online CPU.  An smp_mb__before_atomic() between the
-  head publish and the cpumask_set_cpu() ensures observers of the
-  pending bit also observe the published head; without it, weakly-
-  ordered architectures could let the consumer drain stale head and
-  delay the report.  The consumer pairs this with an
-  smp_mb__after_atomic() between cpumask_clear_cpu() and reading
-  head, so a producer that publishes between the consumer's clear
-  and head-read is observed via the bit it re-sets rather than
-  silently stranded.
+If the snapshot allocation fails under memory pressure, log
+ratelimited and fall through to zero-access reporting; the next
+tick retries.
 
-Consumer (kdamond_check_reported_accesses) drains the rings of CPUs
-in damon_rings_pending, applying reports to targets.
+Hoist the per-report damon_sample_filter_out() check out of the
+per-target loop so it runs once per ring entry rather than N times.
 
 Signed-off-by: Ravi Jonnalagadda <ravis.opensrc@gmail.com>
 ---
- mm/damon/core.c | 143 ++++++++++++++++++++++++++++++++++--------------
- 1 file changed, 101 insertions(+), 42 deletions(-)
+ include/linux/damon.h |   7 +++
+ mm/damon/core.c       | 137 ++++++++++++++++++++++++++++++++++++------
+ 2 files changed, 126 insertions(+), 18 deletions(-)
 
+diff --git a/include/linux/damon.h b/include/linux/damon.h
+index 8e6e1cd89e551..35cc3d42fcba8 100644
+--- a/include/linux/damon.h
++++ b/include/linux/damon.h
+@@ -1045,6 +1045,13 @@ struct damon_ctx {
+ 
+ 	/* Per-ctx PRNG state for damon_rand(); kdamond is the sole consumer. */
+ 	struct rnd_state rnd_state;
++	/* Reusable drain-loop snapshot buffer (avoids per-tick kmalloc) */
++	struct {
++		struct damon_target_lookup *lookups;
++		unsigned int nr_lookups;
++		struct damon_region **region_buf;
++		unsigned int region_buf_cap;
++	} drain_snapshot;
+ };
+ 
+ /* Get a random number in [@l, @r) using @ctx's lockless PRNG. */
 diff --git a/mm/damon/core.c b/mm/damon/core.c
-index b605d36b29b1a..9ed789e932ebd 100644
+index 9ed789e932ebd..03f9c671e8bc9 100644
 --- a/mm/damon/core.c
 +++ b/mm/damon/core.c
-@@ -25,7 +25,26 @@
- #define CREATE_TRACE_POINTS
- #include <trace/events/damon.h>
+@@ -29,6 +29,13 @@
+ #define DAMON_REPORT_RING_SIZE	256
+ #define DAMON_REPORT_RING_MASK	(DAMON_REPORT_RING_SIZE - 1)
  
--#define DAMON_ACCESS_REPORTS_CAP 1000
-+/* Sized so the per-CPU ring set fits in L3 on typical multi-socket boxes. */
-+#define DAMON_REPORT_RING_SIZE	256
-+#define DAMON_REPORT_RING_MASK	(DAMON_REPORT_RING_SIZE - 1)
-+
-+struct damon_report_ring {
-+	unsigned int head;	/* written by producer (NMI) */
-+	unsigned int tail	/* written by consumer (kdamond) */
-+		____cacheline_aligned_in_smp;
-+	struct damon_access_report entries[DAMON_REPORT_RING_SIZE]
-+		____cacheline_aligned_in_smp;
++/* Per-target region lookup for drain loop */
++struct damon_target_lookup {
++	struct damon_region **regions;
++	unsigned int nr_regions;
 +};
 +
-+static DEFINE_PER_CPU(struct damon_report_ring, damon_report_rings);
-+static DEFINE_PER_CPU(int, damon_report_ring_busy);
-+/*
-+ * Per-CPU bitmap: producer (NMI) sets after publishing a report;
-+ * consumer (kdamond) clears before draining the corresponding ring.
-+ * Hot-write under sampling load - do NOT mark __read_mostly.
-+ */
-+static cpumask_t damon_rings_pending;
++
+ struct damon_report_ring {
+ 	unsigned int head;	/* written by producer (NMI) */
+ 	unsigned int tail	/* written by consumer (kdamond) */
+@@ -855,6 +862,7 @@ struct damon_ctx *damon_new_ctx(void)
+ 	INIT_LIST_HEAD(&ctx->schemes);
  
- static DEFINE_MUTEX(damon_lock);
- static int nr_running_ctxs;
-@@ -36,10 +55,6 @@ static struct damon_operations damon_registered_ops[NR_DAMON_OPS];
+ 	prandom_seed_state(&ctx->rnd_state, get_random_u64());
++	/* drain_snapshot zero-initialized by kzalloc — no explicit init */
  
- static struct kmem_cache *damon_region_cache __ro_after_init;
+ 	return ctx;
+ }
+@@ -884,6 +892,8 @@ void damon_destroy_ctx(struct damon_ctx *ctx)
+ 	damon_for_each_sample_filter_safe(f, next_f, &ctx->sample_control)
+ 		damon_destroy_sample_filter(f, &ctx->sample_control);
  
--static DEFINE_MUTEX(damon_access_reports_lock);
--static struct damon_access_report damon_access_reports[
--	DAMON_ACCESS_REPORTS_CAP];
--static int damon_access_reports_len;
- 
- /* Should be called under damon_ops_lock with id smaller than NR_DAMON_OPS */
- static bool __damon_is_registered_ops(enum damon_ops_id id)
-@@ -2127,33 +2142,56 @@ int damos_walk(struct damon_ctx *ctx, struct damos_walk_control *control)
++	kfree(ctx->drain_snapshot.lookups);
++	kfree(ctx->drain_snapshot.region_buf);
+ 	module_put(ctx->ops.owner);
+ 	kfree(ctx);
+ }
+@@ -3806,27 +3816,44 @@ static bool damon_sample_filter_out(struct damon_access_report *report,
+ 	return !filter->allow;
  }
  
- /**
-- * damon_report_access() - Report identified access events to DAMON.
-- * @report:	The reporting access information.
-+ * damon_report_access() - Report a hardware-observed memory access.
-+ * @report:	pointer to a filled damon_access_report struct.
-  *
-- * Report access events to DAMON.
-- *
-- * Context: May sleep.
-- *
-- * NOTE: we may be able to implement this as a lockless queue, and allow any
-- * context.  As the overhead is unknown, and region-based DAMON logics would
-- * guarantee the reports would be not made that frequently, let's start with
-- * this simple implementation.
-+ * Context: NMI-safe.  No sleeping, no allocation, no locks.
-  */
- void damon_report_access(struct damon_access_report *report)
++
+ static void kdamond_apply_access_report(struct damon_access_report *report,
+-		struct damon_target *t, struct damon_ctx *ctx)
++		struct damon_region **regions, unsigned int nr_regions,
++		struct damon_ctx *ctx)
  {
--	struct damon_access_report *dst;
-+	struct damon_report_ring *ring;
-+	unsigned int head, next;
+ 	struct damon_region *r;
+ 	unsigned long addr;
++	int left, right, mid;
  
--	/* silently fail for races */
--	if (!mutex_trylock(&damon_access_reports_lock))
+-	if (damon_sample_filter_out(report, &ctx->sample_control))
 -		return;
--	dst = &damon_access_reports[damon_access_reports_len++];
--	/* just drop all existing reports in favor of simplicity. */
--	if (damon_access_reports_len == DAMON_ACCESS_REPORTS_CAP)
--		damon_access_reports_len = 0;
--	*dst = *report;
--	dst->report_jiffies = jiffies;
--	mutex_unlock(&damon_access_reports_lock);
-+	/* Pin to a CPU so the SPSC invariant holds for preemptible callers. */
-+	preempt_disable();
-+	/*
-+	 * NMI nesting on the same CPU as a process-context producer would
-+	 * stomp the same entries[head] slot.  Detect and drop instead.
-+	 */
-+	if (this_cpu_inc_return(damon_report_ring_busy) != 1) {
-+		/* NMI nested on a process-context producer; drop. */
-+		goto out;
+ 	if (damon_target_has_pid(ctx))
+ 		addr = report->vaddr;
+ 	else
+ 		addr = report->paddr;
+ 
+-	/* todo: make search faster, e.g., binary search? */
+-	damon_for_each_region(r, t) {
+-		if (addr < r->ar.start)
+-			continue;
+-		if (r->ar.end < addr + report->size)
+-			continue;
+-		if (!r->access_reported)
+-			damon_update_region_access_rate(r, true, &ctx->attrs);
++	/* Binary search the snapshot for the region containing addr. */
++	left = 0;
++	right = nr_regions - 1;
++	r = NULL;
++	while (left <= right) {
++		/* Avoid (left + right) overflow at large nr_regions. */
++		mid = left + (right - left) / 2;
++		if (addr < regions[mid]->ar.start)
++			right = mid - 1;
++		else if (addr >= regions[mid]->ar.end)
++			left = mid + 1;
++		else {
++			r = regions[mid];
++			break;
++		}
 +	}
 +
-+	ring = this_cpu_ptr(&damon_report_rings);
-+	head = ring->head;
-+	next = (head + 1) & DAMON_REPORT_RING_MASK;
-+
-+	if (next == READ_ONCE(ring->tail)) {
-+		/* Ring full; consumer is behind, drop the report. */
-+		goto out;
-+	}
-+
-+	ring->entries[head] = *report;
-+	ring->entries[head].report_jiffies = jiffies;
-+	smp_wmb(); /* ensure entry visible before head advance */
-+	WRITE_ONCE(ring->head, next);
-+	/*
-+	 * Order the head advance before publishing the pending bit
-+	 * so that the consumer, on observing the bit, is also
-+	 * guaranteed to observe the new head.  set_bit/cpumask_set_cpu
-+	 * are documented as unordered RMW (atomic_bitops.txt), hence
-+	 * the explicit barrier; without it, a weakly-ordered arch
-+	 * could let the consumer drain stale head, clear the bit, and
-+	 * delay the report until the next producer sets the bit again.
-+	 */
-+	smp_mb__before_atomic();
-+	cpumask_set_cpu(smp_processor_id(), &damon_rings_pending);
-+out:
-+	this_cpu_dec(damon_report_ring_busy);
-+	preempt_enable();
++	if (!r)
++		return;
++	/* Reject reports straddling a region boundary. */
++	if (addr + report->size > r->ar.end)
++		return;
++	if (!r->access_reported) {
++		damon_update_region_access_rate(r, true, &ctx->attrs);
+ 		r->access_reported = true;
+ 	}
  }
-+EXPORT_SYMBOL_GPL(damon_report_access);
+@@ -3850,10 +3877,79 @@ static unsigned int kdamond_apply_zero_access_report(struct damon_ctx *ctx)
+ 	return max_nr_accesses;
+ }
  
- #ifdef CONFIG_MMU
- void damon_report_page_fault(struct vm_fault *vmf, bool huge_pmd)
-@@ -3814,26 +3852,47 @@ static unsigned int kdamond_apply_zero_access_report(struct damon_ctx *ctx)
- 
++/*
++ * Build a snapshot of the ctx's targets and their region arrays for
++ * use by the ring drain loop.
++ *
++ * The two-pass walk over adaptive_targets is safe even though
++ * krealloc_array() may sleep: target list mutation is funneled
++ * through damon_call onto the kdamond itself, so no other thread
++ * can mutate the list while kdamond is running this function.
++ */
++static struct damon_target_lookup *damon_build_target_lookup(
++		struct damon_ctx *ctx, unsigned int *nr_targets_out)
++{
++	struct damon_target *t;
++	struct damon_target_lookup *tbl;
++	unsigned int nr_targets = 0, total_regions = 0, ti = 0, ri = 0;
++
++	damon_for_each_target(t, ctx) {
++		nr_targets++;
++		total_regions += damon_nr_regions(t);
++	}
++
++	/* Realloc lookups array if needed */
++	if (nr_targets > ctx->drain_snapshot.nr_lookups) {
++		tbl = krealloc_array(ctx->drain_snapshot.lookups,
++				nr_targets, sizeof(*tbl), GFP_KERNEL);
++		if (!tbl)
++			return NULL;
++		ctx->drain_snapshot.lookups = tbl;
++		ctx->drain_snapshot.nr_lookups = nr_targets;
++	}
++	tbl = ctx->drain_snapshot.lookups;
++
++	/* Realloc contiguous region_buf if needed */
++	if (total_regions > ctx->drain_snapshot.region_buf_cap) {
++		struct damon_region **buf;
++
++		buf = krealloc_array(ctx->drain_snapshot.region_buf,
++				total_regions, sizeof(*buf), GFP_KERNEL);
++		if (!buf)
++			return NULL;
++		ctx->drain_snapshot.region_buf = buf;
++		ctx->drain_snapshot.region_buf_cap = total_regions;
++	}
++
++	/* Fill lookup table, slicing region_buf across targets */
++	ri = 0;
++	damon_for_each_target(t, ctx) {
++		struct damon_region *r;
++
++		tbl[ti].regions = &ctx->drain_snapshot.region_buf[ri];
++		tbl[ti].nr_regions = damon_nr_regions(t);
++		damon_for_each_region(r, t)
++			ctx->drain_snapshot.region_buf[ri++] = r;
++		ti++;
++	}
++
++	*nr_targets_out = nr_targets;
++	return tbl;
++}
++
  static unsigned int kdamond_check_reported_accesses(struct damon_ctx *ctx)
  {
--	int i;
--	struct damon_access_report *report;
-+	int cpu;
- 	struct damon_target *t;
- 
--	/* currently damon_access_report supports only physical address */
--	if (damon_target_has_pid(ctx))
--		return 0;
-+	for_each_cpu(cpu, &damon_rings_pending) {
-+		struct damon_report_ring *ring =
-+			per_cpu_ptr(&damon_report_rings, cpu);
-+		unsigned int head, tail;
- 
--	mutex_lock(&damon_access_reports_lock);
--	for (i = 0; i < damon_access_reports_len; i++) {
--		report = &damon_access_reports[i];
--		if (time_before(report->report_jiffies,
--					jiffies -
--					usecs_to_jiffies(
--						ctx->attrs.sample_interval)))
--			continue;
--		damon_for_each_target(t, ctx)
--			kdamond_apply_access_report(report, t, ctx);
-+		cpumask_clear_cpu(cpu, &damon_rings_pending);
-+		/*
-+		 * Pair with the producer's smp_mb__before_atomic() between
-+		 * the head publish and cpumask_set_cpu(): order the bit
-+		 * clear before the head read so that a producer publishing
-+		 * between our clear and our READ_ONCE(head) is observed via
-+		 * the bit it re-sets, not lost as a stale-head drain.
-+		 */
-+		smp_mb__after_atomic();
-+		head = READ_ONCE(ring->head);
-+		/*
-+		 * Pair with smp_wmb in damon_report_access(): the entry
-+		 * data published before the producer advanced head must be
-+		 * visible to the entries[] reads inside the loop below.
-+		 */
-+		smp_rmb();
-+		tail = ring->tail;
+ 	int cpu;
+-	struct damon_target *t;
++	struct damon_target_lookup *tbl;
++	unsigned int nr_targets = 0;
++	unsigned int i;
 +
-+		while (tail != head) {
-+			struct damon_access_report *report =
-+				&ring->entries[tail];
-+
-+			if (!time_before(report->report_jiffies,
-+					jiffies - usecs_to_jiffies(
-+						ctx->attrs.sample_interval))) {
-+				damon_for_each_target(t, ctx)
-+					kdamond_apply_access_report(
-+							report, t, ctx);
-+			}
-+			tail = (tail + 1) & DAMON_REPORT_RING_MASK;
-+		}
-+		WRITE_ONCE(ring->tail, tail);
- 	}
--	mutex_unlock(&damon_access_reports_lock);
- 	/* For nr_accesses_bp, absence of access should also be reported. */
- 	return kdamond_apply_zero_access_report(ctx);
- }
++	tbl = damon_build_target_lookup(ctx, &nr_targets);
++	if (!tbl) {
++		pr_warn_ratelimited(
++			"damon: target-lookup alloc failed; ring drain skipped this tick\n");
++		return kdamond_apply_zero_access_report(ctx);
++	}
+ 
+ 	for_each_cpu(cpu, &damon_rings_pending) {
+ 		struct damon_report_ring *ring =
+@@ -3881,14 +3977,19 @@ static unsigned int kdamond_check_reported_accesses(struct damon_ctx *ctx)
+ 		while (tail != head) {
+ 			struct damon_access_report *report =
+ 				&ring->entries[tail];
+-
+-			if (!time_before(report->report_jiffies,
++			if (time_before(report->report_jiffies,
+ 					jiffies - usecs_to_jiffies(
+-						ctx->attrs.sample_interval))) {
+-				damon_for_each_target(t, ctx)
+-					kdamond_apply_access_report(
+-							report, t, ctx);
++						ctx->attrs.sample_interval)))
++				goto next;
++			if (damon_sample_filter_out(report,
++					&ctx->sample_control))
++				goto next;
++			for (i = 0; i < nr_targets; i++) {
++				kdamond_apply_access_report(report,
++						tbl[i].regions,
++						tbl[i].nr_regions, ctx);
+ 			}
++next:
+ 			tail = (tail + 1) & DAMON_REPORT_RING_MASK;
+ 		}
+ 		WRITE_ONCE(ring->tail, tail);
 -- 
 2.43.0
 
