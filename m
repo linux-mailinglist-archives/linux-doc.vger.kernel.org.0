@@ -1,86 +1,85 @@
-Return-Path: <linux-doc+bounces-87844-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-87846-lists+linux-doc=lfdr.de@vger.kernel.org>
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QCBtFGlQCGoMjAMAu9opvQ
-	(envelope-from <linux-doc+bounces-87844-lists+linux-doc=lfdr.de@vger.kernel.org>)
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 13:09:29 +0200
+	id MEECD69QCGoMjAMAu9opvQ
+	(envelope-from <linux-doc+bounces-87846-lists+linux-doc=lfdr.de@vger.kernel.org>)
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 13:10:39 +0200
 X-Original-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C484255B5B0
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 13:09:28 +0200 (CEST)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCED855B5ED
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 13:10:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 469DE302F0C9
-	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 11:07:23 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E12F3301588E
+	for <lists+linux-doc@lfdr.de>; Sat, 16 May 2026 11:07:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3769B3D565C;
-	Sat, 16 May 2026 11:07:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 108103D9DB8;
+	Sat, 16 May 2026 11:07:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AoL64YiQ"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GZEVIFNy"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A7313D646A
-	for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 11:07:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87B753D75A5
+	for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 11:07:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778929623; cv=none; b=fla/Bg5Z0LqM21RmYsX4E7TEZY+PsKBXDiT6bqe6OEVeMTViqtiYNKE3RT6OeBB2eleVFRE3LVFtfM3/IDZhDrpM/ypcLhz88DTTmgKUnrZNS5/Kox2Ek73IeEEptMT5F9MW6nvAY7WfQXZAJ5VjPTJIlE881NMLR9oFRupK+AY=
+	t=1778929625; cv=none; b=qTo+bsVqj0f6YQGuhyv+RKlVrFiD752rHDyaSKeCxIFUgI0Hzr+I54zvue5V2LVUU9SafIcWpUsGffu/GdVFwn90LXkgMCzpodh+fzlEM9riqC9KIf3pGsfYHNDS6dAtrU487iGHX1qHL1YwXbp3ulxAoeNIRfOv2fB9H9O/bjk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778929623; c=relaxed/simple;
-	bh=5APNMtl2NCstrrwoxtWKTvFVItf0IqBmltZkdCTjBxU=;
+	s=arc-20240116; t=1778929625; c=relaxed/simple;
+	bh=gccEkxb9Fgxq3kICRGFzS2yuH2T+EBoB3hEcASoUfk4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=PzWHJgWnRGEHXsBKv/s12eQ6NFadIu40gbUhRyLtSch7LHEeeO96E7b/Cb+rt5k6l//98PWtxT3Y9493eP4jRJeLCs1j+dtF9+HQHg/pxgGMsiergARDfJc71mpipnuh597Zvy17rQLX6qdphYM4uAkXNxHA7OyNkBLpstSPtQo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AoL64YiQ; arc=none smtp.client-ip=209.85.128.47
+	 In-Reply-To:To:Cc; b=Zv6gFIrf7TELSiDB57zvkwkEGAwShHx7F1ilLsLYarjjg8yfYLf2u/U9c0BuVizjZplSC4BS/AAm57D5RIXV6Y3By0DuZmql0BKDtdUq+6L/tyGJPAgES2sFTmuJbBqXM2L6E1qrsHr9couit32Nrb4FHBXJjSq9wRCOhFrCVdQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GZEVIFNy; arc=none smtp.client-ip=209.85.128.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-48ff4f8ef0dso6846075e9.3
-        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 04:06:59 -0700 (PDT)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-48d102471a4so4671375e9.2
+        for <linux-doc@vger.kernel.org>; Sat, 16 May 2026 04:07:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778929616; x=1779534416; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1778929618; x=1779534418; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GUzK0JUispp8nMHz/jfrYyUsKO3YYZqffLIW7XXNsp8=;
-        b=AoL64YiQVahJ8Xq7A3slMhWKv+Qt4lDYANxRnhdwcXqknCwjXGt5dxsJZZCgllYP+Q
-         NfDZB5Z6sldo6/fwJQNwbAwXcwq8/1xHqW5TPUCsXyxlDMS5mmRmvLvntNlm/THnxcrC
-         ehd1TwMWi+HbF+f41BQ0oRe0zxs0IwTr3iKTd3//HdSzgmjz4RplkbbqanE+SFEVjejo
-         EgHvqDuuw2Ro0vp342ClO0d0wiAUw16ZRf4xwvCLu1nfNbXdXWSRyyON60SnZhNRyZL/
-         B8Gn2kfuJT37z1YsgQJW8xFA/1X/8UKF2WPj77bXf25Kqdi52dX9tV83/rYZNjp5HeDv
-         wePA==
+        bh=mZxaw3u6g9gSQgxhivb/aQTd6ZH6WM8J0IbrlUd06os=;
+        b=GZEVIFNyXzBrJZH8agXuIgpikeppwWAlOjbWAop6q2/OCcKQ2pInJjZb5VyghaXLFw
+         8at78ujSh/yhjy8e/2kBfbJ8/9p5sMbnVKitoVsjBKkj2VtjSVSolS5QzR11CL+ttgfI
+         xxcMmJ6hxkQSnQxUJQDDKvl08c8tzKrDBV5sqVuL2VbVgRYcOTKig6HJigQXMbNwGppz
+         MeiCETWq9exFIn0sCv3TiQDtuCeNStwHST0vREwJo6rPyTnKSJpmkCiffZi5VRfPZR7r
+         vMAtyKPoRLylB7JOfZGXLV7TlJveAd/EDW4AbweEcN4TZnR9fBM4CXUmHCeNNXon8ReW
+         UNJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778929616; x=1779534416;
+        d=1e100.net; s=20251104; t=1778929618; x=1779534418;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=GUzK0JUispp8nMHz/jfrYyUsKO3YYZqffLIW7XXNsp8=;
-        b=MywKeoc4ahSkEVzonHq9Vc5EOlEZgLvyoQgPF7CiAxM84k2TI2+CysmYEgkOt8eaRA
-         /NjJMnsRfugehOKTlcVxTEU08H2aeoy0l9GlqO3vGUOh139Lb0XO6tvX5jQZkwqDp4ld
-         ZvFapGxqZ4hZHn5+hfYsyV+5bNBxEdWUtyz+Ptc5tqudfwRtnUSAXWbIPa/nwE2khQzb
-         Z7VOBy6B3U8OybDp2HM8ZoRy5yHmZFA0LyHna2uSC0CndShwaEhnvO5pxljsLFh/khxZ
-         82AI0ufW9TuSqhyyZ8ZLqTRG1EuoX0Al+RzqykeMSFITxBNB9AWJhjeev3TUYSHITZCJ
-         CaDA==
-X-Forwarded-Encrypted: i=1; AFNElJ/3o/JDHfj8JEOANe2XquGxcErd8LnBB9e0FdC2J5ImKt+DXVolsmWKaxur0bQ+r7ufXiMzsUrpzcQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxS2UVQYCmNXvAp7p9+yAFyXrGVOffPTZn5r/VCdulTCy5cX3tT
-	50ov2P5NogoP+34cpuDHa9uABQxk832O3ZYuB3l+9O23cOiKQpRVsNp/
-X-Gm-Gg: Acq92OE1L3giHytst6zMgNapHV/TIL7LNUJz/QRjT7Zw9DoUQVJSSOCi8QYFx+7PiCn
-	EIS7gBgI5oX9syfD9aPd2ASRzIWSr5BrxDageo9jp/Du6/tfwiHD/kupC2JdMo6yRUTmw5BeHHI
-	CPteT0B/bhj8/VkF9+wM+IhkYFodzUTuuPE/C/wj3oiLPArVIX25kfjnBmnnE8E7WrNEtdXttfX
-	R5B8x/ZER7og8Us4gv+x4T087D/3k25ySzwAbMaBFHAd41+li01rpPucIlfsGnU6kk3H6LHq3+P
-	NnGUwTj1N2eQMwKJr+87nj8AbsXcuR6IV9FfaSmSjtiX/ErK/E1P+y0up58uOZn21BbIzPJR5Ym
-	SmqaWiPH0PsagSTvAgT1FmFoLZKxZKN9hRIbhJx1OJJPDUMcMxUmbUw1+zl+mZQS+9muMFe1SA6
-	EkfLaCeHQwe1p2Vo2myc5iSb8sy3QmUTdeaFTqmSBOS8VkJshwLEuK9Ynyr9vgVJW1xTQSxMEZB
-	bzpXSg=
-X-Received: by 2002:a05:600c:c087:b0:48a:7b55:12a6 with SMTP id 5b1f17b1804b1-48fe5cb36aamr88176225e9.0.1778929616265;
-        Sat, 16 May 2026 04:06:56 -0700 (PDT)
+        bh=mZxaw3u6g9gSQgxhivb/aQTd6ZH6WM8J0IbrlUd06os=;
+        b=SOOyOHwtKOj0Mjah1OgfKL8OE1W0Mjq0UmDWFL6CYvADplrFfJ9avXjjDN+R4o270f
+         HAAU+irTcsDz+2oT7A8JAqkV3Y18TfpGYMhmCmFX2mgNXnV23nTM9ZdV+k0cM0BnxQ3i
+         9DLUJy6EjApsaFt4FbxiNCmxJbk85TycqlX+QIeZvcrKN896oMgzvlF3TFsOH/AAygPW
+         5EE2LffJ0c6szFCmaiwE5MHmDvPCzt933uV/hsQj4+qnkxfM3Wg2T1WJY8eYtKZfzAL2
+         w5GgZbM+wLnv6aBH0f1hPWnR3OWKGiWiALS/O+lGbBxS6Q7VbMa0A3RxURIwTgYsvolc
+         Z7wA==
+X-Forwarded-Encrypted: i=1; AFNElJ/I4zMmS7a2+p5vsrdEsGXLRwQ046z6UCYrhFoiD4yseNfCS33E7NXMzqTHd1etNOvMli6PnUyX1YA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzNH69TtVWawb1STvnew5sujZowUC/mPBidhMFH/v8DgtzjxEyN
+	QyQFVUGLUEDFpLnVhMQ9EehJed4/UkOWn2Q/GgkO7NTM42U7sivaA8z3
+X-Gm-Gg: Acq92OHny4ynPwtw4/VzcMzSkaQXVWwHeP8SnaMetmxTwL373PqCZZsNx8jTqotj4fv
+	LGJ6h/Ufg9EOspera/zds5rTN5USO3I6vUi/iq5kHCLa1P2ZqbNOv3wSrRWXddUpAO5lzKSFYbM
+	p10WzigtVUrw+J3pL/Tg+PHNke4IS67mlxyegrOTA8Vm1zW1LT/syCzskC5VE7sVIWUlScgM4eG
+	x1yqhRRvRgAm1NyncoKSxbwmqWrAuzR90Y9TjJ0oaXC8jrfGXA4Nze19d59RKm7Mv6qh8QA1OVV
+	CFEyIxcf5IzQiKuUP6dXQOPwXmmcR1b0u+wvIV9JxRhqVd/xcmac1H1QmtM/MBJjgZLgER9qon8
+	fZeRaapJFbag46NViVc1dzd3XWqQpg/LQx7qSY5OsNfXfDBEdqisk7GIYHfMWH1ad9oErdlXoRI
+	qPZWCD0+5FkanuUEZOEQ0A7wvzBwG2zLrF3XOAsuhEwy8lWaV6GB/l9iWV2AgYuUuxxOOGNp9ke
+	RDVjP4l6k9i5QHF4Q==
+X-Received: by 2002:a05:600c:2d09:b0:48f:e1ac:c96d with SMTP id 5b1f17b1804b1-48fe61f2bcemr60030905e9.20.1778929617614;
+        Sat, 16 May 2026 04:06:57 -0700 (PDT)
 Received: from [10.13.0.20] (ip87-106-117-14.pbiaas.com. [87.106.117.14])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48feb00e5easm36399545e9.13.2026.05.16.04.06.55
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48feb00e5easm36399545e9.13.2026.05.16.04.06.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 16 May 2026 04:06:55 -0700 (PDT)
+        Sat, 16 May 2026 04:06:57 -0700 (PDT)
 From: Julian Orth <ju.orth@gmail.com>
-Date: Sat, 16 May 2026 13:06:12 +0200
-Subject: [PATCH 09/12] drm/syncobj: fix resource leak in
- drm_syncobj_import_sync_file_fence
+Date: Sat, 16 May 2026 13:06:13 +0200
+Subject: [PATCH 10/12] drm/syncobj: add drm_syncobj_import_sync_file
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -89,7 +88,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260516-jorth-syncobj-v1-9-88ede9d98a81@gmail.com>
+Message-Id: <20260516-jorth-syncobj-v1-10-88ede9d98a81@gmail.com>
 References: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
 In-Reply-To: <20260516-jorth-syncobj-v1-0-88ede9d98a81@gmail.com>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -105,25 +104,25 @@ Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  linux-doc@vger.kernel.org, wayland-devel@lists.freedesktop.org, 
  ju.orth@gmail.com
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1778929602; l=1383;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1778929602; l=2792;
  i=ju.orth@gmail.com; s=20251120; h=from:subject:message-id;
- bh=5APNMtl2NCstrrwoxtWKTvFVItf0IqBmltZkdCTjBxU=;
- b=uBiahrAmREDZy7Fj07y8SVauSH9GmZFa2clMwUB1MLOYdGIifgpx+NgONorTf5/6Z4hk84rCI
- KXcKOq9bDW9D2GMf5/UEmHT+/8WQoDxsc8BjwHF2qniEf5cY8txk1A8
+ bh=gccEkxb9Fgxq3kICRGFzS2yuH2T+EBoB3hEcASoUfk4=;
+ b=LfciDdq+01NiK3gXOUbCymlEM3K+nuuGo3VhuhjLND4T9QDwYUXe2UHMMsjDrtokyTzc+edKE
+ S+PE8qGatMuDQ8hyiPBhAhZK6ObHL0ljbFX8Do8xYlPgTokSZvXJnCB
 X-Developer-Key: i=ju.orth@gmail.com; a=ed25519;
  pk=uM2SS4lelkuIoYHc7v9N9bgBZ3hS632zJS2xjRJLPLI=
-X-Rspamd-Queue-Id: C484255B5B0
+X-Rspamd-Queue-Id: CCED855B5ED
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.66 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20251104];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-87844-lists,linux-doc=lfdr.de];
+	TAGGED_FROM(0.00)[bounces-87846-lists,linux-doc=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lwn.net,linuxfoundation.org,arndb.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -141,65 +140,95 @@ X-Spamd-Result: default: False [-0.66 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-doc];
 	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
 X-Rspamd-Action: no action
 
-Previously, if dma_fence_chain_alloc() failed, the syncobj and fence
-would be leaked.
+This makes the logic from drm_syncobj_import_sync_file_fence available
+to callers that have a drm_syncobj instead of a drm_file/handle pair.
 
 Signed-off-by: Julian Orth <ju.orth@gmail.com>
 ---
- drivers/gpu/drm/drm_syncobj.c | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/drm_syncobj.c | 35 ++++++++++++++++++++++++++---------
+ include/drm/drm_syncobj.h     |  2 ++
+ 2 files changed, 28 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/gpu/drm/drm_syncobj.c b/drivers/gpu/drm/drm_syncobj.c
-index 9b7ecc2978f5..1da96e23dfc0 100644
+index 1da96e23dfc0..4c1667c67cb7 100644
 --- a/drivers/gpu/drm/drm_syncobj.c
 +++ b/drivers/gpu/drm/drm_syncobj.c
-@@ -767,30 +767,35 @@ static int drm_syncobj_import_sync_file_fence(struct drm_file *file_private,
+@@ -765,19 +765,37 @@ static int drm_syncobj_fd_to_handle(struct drm_file *file_private,
+ static int drm_syncobj_import_sync_file_fence(struct drm_file *file_private,
+ 					      int fd, int handle, u64 point)
  {
- 	struct dma_fence *fence = sync_file_get_fence(fd);
+-	struct dma_fence *fence = sync_file_get_fence(fd);
  	struct drm_syncobj *syncobj;
-+	int ret = 0;
+ 	int ret = 0;
  
++	syncobj = drm_syncobj_find(file_private, handle);
++	if (!syncobj)
++		return -ENOENT;
++
++	ret = drm_syncobj_import_sync_file(syncobj, fd, point);
++
++	drm_syncobj_put(syncobj);
++
++	return ret;
++}
++
++/**
++ * drm_syncobj_import_sync_file - import a sync_file fd into a syncobj
++ * @syncobj: syncobj to import into
++ * @fd: sync_file file descriptor
++ * @point: timeline point or 0
++ *
++ * Returns 0 on success or a negative error value on failure.
++ */
++int drm_syncobj_import_sync_file(struct drm_syncobj *syncobj,
++				 int fd, u64 point)
++{
++	struct dma_fence *fence = sync_file_get_fence(fd);
++	int ret = 0;
++
  	if (!fence)
  		return -EINVAL;
  
- 	syncobj = drm_syncobj_find(file_private, handle);
- 	if (!syncobj) {
--		dma_fence_put(fence);
--		return -ENOENT;
-+		ret = -ENOENT;
-+		goto err_syncobj;
- 	}
- 
+-	syncobj = drm_syncobj_find(file_private, handle);
+-	if (!syncobj) {
+-		ret = -ENOENT;
+-		goto err_syncobj;
+-	}
+-
  	if (point) {
  		struct dma_fence_chain *chain = dma_fence_chain_alloc();
  
--		if (!chain)
--			return -ENOMEM;
-+		if (!chain) {
-+			ret = -ENOMEM;
-+			goto err;
-+		}
- 
- 		drm_syncobj_add_point(syncobj, chain, fence, point);
- 	} else {
- 		drm_syncobj_replace_fence(syncobj, fence);
+@@ -792,11 +810,10 @@ static int drm_syncobj_import_sync_file_fence(struct drm_file *file_private,
  	}
  
--	dma_fence_put(fence);
-+err:
- 	drm_syncobj_put(syncobj);
--	return 0;
-+err_syncobj:
-+	dma_fence_put(fence);
-+	return ret;
+ err:
+-	drm_syncobj_put(syncobj);
+-err_syncobj:
+ 	dma_fence_put(fence);
+ 	return ret;
  }
++EXPORT_SYMBOL(drm_syncobj_import_sync_file);
  
  static int drm_syncobj_export_sync_file(struct drm_file *file_private,
+ 					int handle, u64 point, int *p_fd)
+diff --git a/include/drm/drm_syncobj.h b/include/drm/drm_syncobj.h
+index da237ca3e61f..1571ffa12a5c 100644
+--- a/include/drm/drm_syncobj.h
++++ b/include/drm/drm_syncobj.h
+@@ -143,6 +143,8 @@ int drm_syncobj_timeline_signal(struct drm_syncobj **syncobjs,
+ 				u64 user_points, u32 count);
+ int drm_syncobj_query(struct drm_syncobj **syncobjs, u64 user_points,
+ 		      u32 count, u32 flags);
++int drm_syncobj_import_sync_file(struct drm_syncobj *syncobj,
++				 int sync_file_fd, u64 point);
+ void drm_syncobj_free(struct kref *kref);
+ int drm_syncobj_create(struct drm_syncobj **out_syncobj, uint32_t flags,
+ 		       struct dma_fence *fence);
 
 -- 
 2.54.0
